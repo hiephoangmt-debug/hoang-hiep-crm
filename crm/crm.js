@@ -293,6 +293,26 @@
         <td>${fmtInt(t.lead)}</td><td>${t.lead ? fmtInt(t.cpl) : "–"}</td><td>${Math.round((t.chiPhiPhi / total) * 100)}%</td></tr>`).join("")}
       </tbody></table></div></section>`;
   }
+  /**
+   * Bảng tổng hợp chi phí theo dự án (giống tab "Tổng hợp chi phí" trong Google Sheet):
+   * mỗi dự án một bảng nhân sự × kênh, rồi bảng tổng theo dự án.
+   */
+  function costMatrix(title, rows, keyName, keyHead, chans, label) {
+    const keys = Array.from(new Set(rows.map((r) => r[keyName] || "(chưa gán)")));
+    const lines = keys.map((k) => {
+      const rs = rows.filter((r) => (r[keyName] || "(chưa gán)") === k);
+      return [k, chans.map((c) => sumOf(rs.filter((r) => (r.nenTang || "Facebook") === c)).chiPhiPhi), sumOf(rs)];
+    }).sort((a, b) => b[2].chiPhiPhi - a[2].chiPhiPhi);
+    const t = sumOf(rows);
+    const cell = (v) => (v ? fmtInt(v) : "–");
+    const tr = (k, by, x, cls) => `<tr${cls ? ` class="${cls}"` : ""}><td>${esc(label && !cls ? label(k) : k)}</td>${by.map((v) => `<td>${cell(v)}</td>`).join("")}
+      <td><b>${cell(x.chiPhiPhi)}</b></td><td>${cell(x.chiPhi)}</td><td>${cell(x.lead)}</td><td>${x.lead ? fmtInt(x.cpl) : "–"}</td></tr>`;
+    return `<section class="card"><h3>${esc(title)}</h3><div class="wrap"><table class="data mx">
+      <thead><tr><th>${esc(keyHead)}</th>${chans.map((c) => `<th>${esc(PLATFORM_LABEL[c] || c)}</th>`).join("")}
+        <th>Tổng (gồm VAT/phí)</th><th>Chi phí thực chạy</th><th>Lead</th><th>Chi phí / lead</th></tr></thead>
+      <tbody>${lines.map(([k, by, x]) => tr(k, by, x)).join("")}
+      ${tr("Tổng", chans.map((c) => sumOf(rows.filter((r) => (r.nenTang || "Facebook") === c)).chiPhiPhi), t, "total")}</tbody></table></div></section>`;
+  }
   function renderDashboard() {
     const pj = $("dbProject").value, from = $("dbFrom").value, to = $("dbTo").value;
     const rows = effective(S.SoLieu.filter((r) => (pj ? r.duAn === pj : inBrand(r.duAn)) && r.tuan >= from && r.tuan <= to));
@@ -322,7 +342,17 @@
         ${barTable("Theo nhân sự", group(rows, "nhanSu").sort((a, b) => b[1].chiPhiPhi - a[1].chiPhiPhi), "Nhân sự")}
         ${barTable("Theo dự án", group(rows, "duAn"), "Dự án")}
       </div>
-      ${barTable("Theo kênh", group(rows, "nenTang"), "Kênh")}`;
+      ${barTable("Theo kênh", group(rows, "nenTang"), "Kênh")}
+      <h2 class="sec">Tổng hợp chi phí theo dự án · ${esc(weekLabel(from).split(" - ")[0])} – ${esc(weekLabel(to).split(" - ")[1] || weekLabel(to))}</h2>
+      ${(() => {
+        const chans = PLATFORMS.filter((c) => rows.some((r) => (r.nenTang || "Facebook") === c));
+        if (!rows.length) return `<p class="muted">Chưa có số liệu trong khoảng này.</p>`;
+        const pjs = Array.from(new Set(rows.map((r) => r.duAn))).sort((a, b) => sumOf(rows.filter((r) => r.duAn === b)).chiPhiPhi - sumOf(rows.filter((r) => r.duAn === a)).chiPhiPhi);
+        return pjs.map((p) => costMatrix("Dự án " + p, rows.filter((r) => r.duAn === p), "nhanSu", "Nhân sự", chans)).join("") +
+          (pjs.length > 1 ? costMatrix("Tổng các dự án", rows, "duAn", "Dự án", chans) +
+            costMatrix("Tổng theo nhân sự (các dự án)", rows, "nhanSu", "Nhân sự", chans) : "") +
+          costMatrix("Tổng theo tuần", rows, "tuan", "Tuần", chans, (w) => weekLabel(w, true));
+      })()}`;
   }
 
   // ------------------------------------------------------------ NHẬP SỐ LIỆU (bảng theo mẫu báo cáo)
