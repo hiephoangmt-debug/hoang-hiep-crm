@@ -1779,5 +1779,14 @@ const watch = setInterval(() => {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
 })();
 </script>
+<script>
+/* Thanh menu dính sát mép trên: ngay dưới thanh ưu đãi, hoặc lên trên cùng khi thanh ưu đãi ẩn */
+(function () {
+  var n = document.querySelector('nav.nav'), t = document.querySelector('.topbar'); if (!n) return;
+  function fit() { var h = (t && !t.hidden && getComputedStyle(t).display !== 'none') ? t.offsetHeight : 0; n.style.top = h + 'px'; }
+  fit(); addEventListener('resize', fit); addEventListener('load', fit); setTimeout(fit, 800); setTimeout(fit, 2500);
+  try { if (t) new MutationObserver(fit).observe(t, {attributes: true, childList: true, subtree: true, characterData: true}); } catch (e) {}
+})();
+</script>
 </body>
 </html>
