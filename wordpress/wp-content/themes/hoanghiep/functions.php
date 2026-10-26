@@ -114,6 +114,7 @@ function hoanghiep_fallback_menu( $args = array() ) {
 				array( 'Đất nền', $type_link( 'dat-nen', $projects ) ),
 				array( 'Nhà phố – Shophouse', $type_link( 'shophouse', $projects ) ),
 			) ),
+			hoanghiep_menu_cdt_item(),
 		) ),
 		array( 'Mua bán', hh_deal_url( 'ban' ) ),
 		array( 'Cho thuê', hh_deal_url( 'thue' ) ),
@@ -331,6 +332,89 @@ function hoanghiep_market_submenu( $items, $args ) {
 	}
 	return $items;
 }
+
+/** Mục menu "Chủ đầu tư" (dạng mảng của menu dự phòng): vài chủ đầu tư nhiều dự án nhất + "Tất cả chủ đầu tư". */
+function hoanghiep_menu_cdt_item() {
+	if ( ! function_exists( 'hh_cdt_all' ) || ! hh_cdt_all() ) {
+		return array( 'Chủ đầu tư', home_url( '/chu-dau-tu/' ) );
+	}
+	$rank = array();
+	foreach ( hh_cdt_all() as $slug => $d ) {
+		$rank[ $slug ] = array( count( hh_cdt_projects( $slug ) ), count( (array) ( $d['projects'] ?? array() ) ) );
+	}
+	arsort( $rank );
+	$kids = array();
+	foreach ( array_slice( array_keys( $rank ), 0, 8 ) as $slug ) {
+		$kids[] = array( trim( preg_replace( '/\s*\([^)]*\)\s*$/u', '', hh_cdt_all()[ $slug ]['name'] ) ), hh_cdt_url( $slug ) );
+	}
+	$kids[] = array( 'Tất cả chủ đầu tư (' . count( hh_cdt_all() ) . ')', hh_cdt_url() );
+	return array( 'Chủ đầu tư', hh_cdt_url(), $kids );
+}
+
+/** Menu chính (menu tạo trong Giao diện → Menu): thêm "Chủ đầu tư" vào cuối nhánh "Dự án" nếu menu chưa có link /chu-dau-tu/. */
+add_filter(
+	'wp_nav_menu_objects',
+	static function ( $items, $args ) {
+		if ( 'primary' !== ( $args->theme_location ?? '' ) || ! function_exists( 'hh_cdt_all' ) || ! hh_cdt_all() ) {
+			return $items;
+		}
+		$parent = null;
+		foreach ( $items as $it ) {
+			if ( false !== strpos( (string) $it->url, '/chu-dau-tu/' ) ) {
+				return $items; // Đã thêm tay trong menu.
+			}
+			if ( ! $parent && ! (int) $it->menu_item_parent && ( 'Dự án' === trim( wp_strip_all_tags( $it->title ) ) || untrailingslashit( (string) $it->url ) === untrailingslashit( (string) get_post_type_archive_link( 'du-an' ) ) ) ) {
+				$parent = $it;
+			}
+		}
+		if ( ! $parent ) {
+			return $items;
+		}
+		// Vị trí chèn: sau mục con cuối cùng của "Dự án".
+		$ids = array( (int) $parent->db_id );
+		$pos = 0;
+		foreach ( array_values( $items ) as $i => $it ) {
+			if ( (int) $it->db_id === (int) $parent->db_id || in_array( (int) $it->menu_item_parent, $ids, true ) ) {
+				$ids[] = (int) $it->db_id;
+				$pos   = $i + 1;
+			}
+		}
+		$make = static function ( $id, $parent_id, $title, $url, $has_kids = false ) {
+			$current = untrailingslashit( home_url( add_query_arg( array() ) ) ) === untrailingslashit( $url );
+			return (object) array(
+				'ID'               => $id,
+				'db_id'            => $id,
+				'menu_item_parent' => $parent_id,
+				'object_id'        => $id,
+				'object'           => 'custom',
+				'type'             => 'custom',
+				'type_label'       => 'Liên kết tự tạo',
+				'title'            => $title,
+				'url'              => $url,
+				'target'           => '',
+				'attr_title'       => '',
+				'description'      => '',
+				'xfn'              => '',
+				'status'           => 'publish',
+				'classes'          => array_filter( array( 'menu-item', 'menu-item-type-custom', $has_kids ? 'menu-item-has-children' : '', $current ? 'current-menu-item' : '' ) ),
+				'current'          => $current,
+			);
+		};
+		$tree = hoanghiep_menu_cdt_item();
+		$add  = array( $make( 990000, (int) $parent->db_id, $tree[0], $tree[1], ! empty( $tree[2] ) ) );
+		foreach ( (array) ( $tree[2] ?? array() ) as $i => $kid ) {
+			$add[] = $make( 990001 + $i, 990000, $kid[0], $kid[1] );
+		}
+		$items = array_values( $items );
+		array_splice( $items, $pos, 0, $add );
+		if ( ! in_array( 'menu-item-has-children', (array) $parent->classes, true ) ) {
+			$parent->classes[] = 'menu-item-has-children';
+		}
+		return $items;
+	},
+	10,
+	2
+);
 
 /** Chân trang: thêm link "Chủ đầu tư" (/chu-dau-tu/) vào menu Danh mục khi đã có hồ sơ chủ đầu tư. */
 add_filter(

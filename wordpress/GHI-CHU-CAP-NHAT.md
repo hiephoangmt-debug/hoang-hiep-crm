@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.36** + plugin Hoàng Hiệp CRM **2.20.83**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.37** + plugin Hoàng Hiệp CRM **2.20.83**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.37: menu "Chủ đầu tư"
+
+- Menu chính → Dự án có thêm mục **Chủ đầu tư**: 8 chủ đầu tư nhiều dự án nhất (Sun Group, BRG, Vingroup, FPT City, New Town, Đạt Phương, VinaCapital, Hoiana) và "Tất cả chủ đầu tư (31)".
+- Tự thêm vào menu đang dùng, không cần sửa trong Giao diện → Menu; nếu anh tự thêm link /chu-dau-tu/ vào menu thì web không thêm nữa.
 
 ## Có gì mới – plugin 2.20.83, giao diện 2.15.36: trang chủ đầu tư tại Đà Nẵng
 
