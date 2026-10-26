@@ -29,6 +29,7 @@ require HH_CRM_DIR . 'rankmath.php';
 require HH_CRM_DIR . 'seo-tu-khoa.php';
 require HH_CRM_DIR . 'hub-pages.php';
 require HH_CRM_DIR . 'chu-dau-tu.php';
+require HH_CRM_DIR . 'data-du-an-tong-hop.php';
 require HH_CRM_DIR . 'data-chu-dau-tu-sua.php';
 require HH_CRM_DIR . 'leads.php';
 require HH_CRM_DIR . 'nguon-khach.php';
