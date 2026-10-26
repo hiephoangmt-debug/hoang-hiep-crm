@@ -574,7 +574,15 @@ function svg30(fx,fy,k,ia,sc){
   CORR30.forEach(function(c){ o.push('<rect x="'+fx(c[0])+'" y="'+fy(c[1])+'" width="'+(c[2]-c[0])*k+'" height="'+(c[3]-c[1])*k+'" fill="#f4f6f8"/>'); });
   o.push(svgCores(fx,fy,k));
   U30.forEach(function(r,j){ var t=r[1], parts=G30[r[0]], A=[fx(0)-0*k,fy(0)]; var g='<g'+(ia?' class="u" data-j="'+j+'"':'')+'>', box=[1e9,1e9,-1e9,-1e9];
-    parts.forEach(function(q){ if(q[5]==='RECT'){ g+='<rect class="b" x="'+fx(q[0])+'" y="'+fy(q[2])+'" width="'+(q[1]-q[0])*k+'" height="'+(q[3]-q[2])*k+'" fill="'+TINT[t]+'" stroke="'+COL[t]+'" stroke-width="'+(ia?1:k*.05)+'"/>'; box=[Math.min(box[0],q[0]),Math.min(box[1],q[2]),Math.max(box[2],q[1]),Math.max(box[3],q[3])]; return; }
+    parts.forEach(function(q){ if(q[5]==='RECT'){ g+='<rect class="b" x="'+fx(q[0])+'" y="'+fy(q[2])+'" width="'+(q[1]-q[0])*k+'" height="'+(q[3]-q[2])*k+'" fill="'+TINT[t]+'" stroke="'+COL[t]+'" stroke-width="'+(ia?1:k*.05)+'"/>'; box=[Math.min(box[0],q[0]),Math.min(box[1],q[2]),Math.max(box[2],q[1]),Math.max(box[3],q[3])];
+        // sảnh vào + bếp phụ của căn 3012 (theo CĐT): cửa vào từ cuối hành lang, tủ giày, quầy bếp sát tường Đông
+        var lw2=Math.max(1,k*.08); g+='<rect x="'+fx(q[0]+2.8)+'" y="'+fy(q[2]+.12)+'" width="'+2.2*k+'" height="'+.6*k+'" fill="#e9e4dc" stroke="#0A2540" stroke-width="'+lw2+'"/>';   // quầy bếp sát tường Bắc
+        [3.3,3.9].forEach(function(du){ g+='<circle cx="'+fx(q[0]+du)+'" cy="'+fy(q[2]+.42)+'" r="'+.17*k+'" fill="none" stroke="#41505f" stroke-width="'+lw2*.8+'"/>'; });
+        g+='<rect x="'+fx(q[0]+4.55)+'" y="'+fy(q[2]+.22)+'" width="'+.35*k+'" height="'+.4*k+'" rx="'+.05*k+'" fill="#cfd6dc" stroke="#41505f" stroke-width="'+lw2*.6+'"/>';
+        g+='<rect x="'+fx(q[0]+2.05)+'" y="'+fy(q[2]+.1)+'" width="'+.7*k+'" height="'+.65*k+'" fill="#d7dde3" stroke="#0A2540" stroke-width="'+lw2+'"/>';   // tủ lạnh
+        g+='<rect x="'+fx(q[0]+.95)+'" y="'+fy(q[2]+.1)+'" width="'+1.6*k+'" height="'+.4*k+'" fill="#d8c3a5" stroke="#0A2540" stroke-width="'+lw2+'"/>';   // tủ giày
+        g+='<path d="M'+fx(q[0])+' '+fy(q[2]+.3)+' L'+fx(q[0]+.9)+' '+fy(q[2]+.3)+' A'+.9*k+' '+.9*k+' 0 0 1 '+fx(q[0])+' '+fy(q[2]+1.2)+'" fill="none" stroke="#41505f" stroke-width="'+lw2*.8+'" stroke-dasharray="'+k*.12+' '+k*.08+'"/>';   // cửa vào
+        return; }
       var M=mmul([k,0,0,k,fx(0),fy(0)],partM(q)), sk=q[5];
       var fp='M'+SPEC[sk].floor.map(function(p){ var z=mapP(M,p); return z[0].toFixed(1)+' '+z[1].toFixed(1); }).join(' L')+'Z';
       g+='<path class="b" d="'+fp+'" fill="'+COL[t]+'" stroke="#fff" stroke-width="'+(ia?2:k*.05)+'"/>';
@@ -1075,7 +1083,12 @@ function f3Build(root,walls,units){
   function addUnit(r,mtx,sk,idx){ var hg=new THREE.Group(); hg.userData.u=idx; root.add(hg); buildRoom(r,{grp:hg,M:mtx,sk:sk,walls:walls,tint:TINT3[r[1]]}); units.push(hg); return hg; }
   if(LL==='T30'){
     U30.forEach(function(r,j){ var hg=new THREE.Group(); hg.userData.u=j; root.add(hg); units.push(hg);
-      G30[r[0]].forEach(function(q){ if(q[5]==='RECT'){ var fm=new THREE.Mesh(new THREE.BoxGeometry(q[1]-q[0],.02,q[3]-q[2]),M(0xd8c3a5)); fm.position.set((q[0]+q[1])/2,.01,(q[2]+q[3])/2); hg.add(fm); return; }
+      G30[r[0]].forEach(function(q){ if(q[5]==='RECT'){ var fm=new THREE.Mesh(new THREE.BoxGeometry(q[1]-q[0],.02,q[3]-q[2]),M(0xffffff,{map:rep(texWood(),1/2.4,1/2.4),color:TINT3[r[1]]})); fm.position.set((q[0]+q[1])/2,.01,(q[2]+q[3])/2); hg.add(fm);
+          function kb(u0,v0,u1,v1,h,c){ var b2=new THREE.Mesh(new THREE.BoxGeometry(u1-u0,h,v1-v0),M(c,{roughness:.5})); b2.position.set((u0+u1)/2,h/2,(v0+v1)/2); b2.castShadow=true; b2.receiveShadow=true; hg.add(b2); }
+          kb(q[0]+2.8,q[2]+.12,q[0]+5,q[2]+.72,.9,0xe9e4dc); kb(q[0]+2.78,q[2]+.1,q[0]+5.02,q[2]+.74,.04,0xf3f1ee);   // quầy bếp + mặt đá sát tường Bắc
+          kb(q[0]+2.05,q[2]+.1,q[0]+2.75,q[2]+.75,1.8,0xc9ccd0); kb(q[0]+.95,q[2]+.1,q[0]+2.55,q[2]+.5,1.0,0xb88a5c);   // tủ lạnh, tủ giày
+          [[q[0],q[2]+.05,q[1],q[2]+.15],[q[1]-.1,q[2],q[1],q[3]]].forEach(function(w){ var wm=new THREE.Mesh(new THREE.BoxGeometry(w[2]-w[0],1.2,w[3]-w[1]),M(0xf4f1eb,{roughness:.95})); wm.position.set((w[0]+w[2])/2,.6,(w[1]+w[3])/2); wm.castShadow=true; hg.add(wm); });
+          return; }
         var pr=partRow(r[0],q); buildRoom(pr,{grp:hg,M:partM(q),sk:q[5],walls:walls,tint:TINT3[r[1]]}); }); });
   } else U.forEach(function(r,i){ if(onFloor(r)) addUnit(r,unitM(r),SK(r),i); });
   // sân vườn riêng các căn (tầng 2, 3)
