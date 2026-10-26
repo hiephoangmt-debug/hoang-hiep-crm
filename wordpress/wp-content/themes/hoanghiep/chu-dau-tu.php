@@ -48,6 +48,9 @@ $dom  = static fn( $u ) => preg_replace( '/^www\./', '', (string) wp_parse_url( 
 									break;
 								}
 							}
+							if ( '' === $field ) {
+								$field = (string) ( $d['seo_desc'] ?? '' );
+							}
 							$top = array_slice( array_column( (array) ( $d['projects'] ?? array() ), 'name' ), 0, 3 );
 							?>
 							<tr>

@@ -331,3 +331,16 @@ function hoanghiep_market_submenu( $items, $args ) {
 	}
 	return $items;
 }
+
+/** Chân trang: thêm link "Chủ đầu tư" (/chu-dau-tu/) vào menu Danh mục khi đã có hồ sơ chủ đầu tư. */
+add_filter(
+	'wp_nav_menu_items',
+	static function ( $items, $args ) {
+		if ( 'footer' !== ( $args->theme_location ?? '' ) || ! function_exists( 'hh_cdt_all' ) || ! hh_cdt_all() || false !== strpos( $items, '/chu-dau-tu/' ) ) {
+			return $items;
+		}
+		return $items . '<li class="menu-item"><a href="' . esc_url( hh_cdt_url() ) . '">Chủ đầu tư</a></li>';
+	},
+	10,
+	2
+);

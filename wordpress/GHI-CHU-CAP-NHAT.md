@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.35** + plugin Hoàng Hiệp CRM **2.20.82**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.36** + plugin Hoàng Hiệp CRM **2.20.83**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,17 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.83, giao diện 2.15.36: trang chủ đầu tư tại Đà Nẵng
+
+- Trang mới /chu-dau-tu/: danh sách 31 chủ đầu tư có dự án tại Đà Nẵng (kể cả Hội An, Điện Bàn – Quảng Nam cũ), mỗi chủ đầu tư một trang /chu-dau-tu/<tên>/:
+  thông tin doanh nghiệp, họ là ai, các dự án đã và đang triển khai tại Đà Nẵng, các mốc, lưu ý khi mua, hỏi đáp, nguồn tham khảo (báo chí, cổng thông tin).
+- Dự án có trang trên web tự hiện trong hồ sơ chủ đầu tư (theo ô "Chủ đầu tư"); tên chủ đầu tư trên trang dự án thành link sang hồ sơ.
+- Đơn vị phân phối không tính là chủ đầu tư: bỏ khỏi ô "Chủ đầu tư" (Sentosa Riverside, Tropical Palm, Lakeside Palace, Dragon Smart City, One World Regency, The Camellia…),
+  hồ sơ Regal Group chỉ còn dự án Regal đứng tên chủ đầu tư.
+- Cập nhật tên chủ đầu tư theo nguồn mới (Đất Quảng → Vincent Land Group, Hiyori → Sun Frontier Đà Nẵng, Hoiana, Naman, Landmark, Times Square) và bổ sung chủ đầu tư các khu resort
+  (Premier Village, Furama Villas, Hyatt, Fusion, Four Seasons Nam Hải, Montgomerie Links, Shilla Monogram). Chỉ đổi khi ô chưa sửa tay.
+- Trang chủ đầu tư có trong sitemap; chân trang thêm link "Chủ đầu tư".
 
 ## Có gì mới – giao diện 2.15.35: trang con Sun Saphia trên hiephoangmt.com
 
