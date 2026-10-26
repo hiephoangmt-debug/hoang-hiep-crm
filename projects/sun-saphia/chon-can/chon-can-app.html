@@ -259,7 +259,7 @@ window.__bldF=function(k,FF){ var f0=state.floor; state.floor=FF; var LF=LAY(FF)
   o.push('<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" font-family="Be Vietnam Pro,Arial,sans-serif"><defs><clipPath id="c"><path d="'+bp+'"/></clipPath></defs>');
   if(LF!=='T2') o.push(svgGardens(fx,fy,k,LF,false));
   o.push('<path d="'+bp+'" fill="'+(LF==='T2'?'#d7e8c6':'#f1f3f5')+'"/><g clip-path="url(#c)">');
-  if(LF==='T2') o.push(svgFloor2(fx,fy,k));
+  if(LF==='T2'){ o.push(svgFloor2(fx,fy,k)); o.push(svgGardens(fx,fy,k,LF,false)); }
   (LF==='T2'?[CORR[1]]:CORR).forEach(function(c){ o.push('<rect x="'+fx(c[0])+'" y="'+fy(c[1])+'" width="'+(c[2]-c[0])*k+'" height="'+(c[3]-c[1])*k+'" fill="#f7f8fa"/>'); });
   o.push(svgCores(fx,fy,k));
   U.forEach(function(r){ if(!onFloor(r)) return; var t=r[1], x=fx(r[2]), y=fy(r[4]), w=(r[3]-r[2])*k, h=(r[5]-r[4])*k, M=mmul([k,0,0,k,0,-v0*k],unitM(r));
@@ -268,7 +268,6 @@ window.__bldF=function(k,FF){ var f0=state.floor; state.floor=FF; var LF=LAY(FF)
     var cx=x+w/2, cy=y+h/2, LC=SPEC[SK(r)].lc; if(LC){ var lp=mapP(M,LC); cx=lp[0]; cy=lp[1]; }
     o.push('<rect x="'+(cx-k*1.25)+'" y="'+(cy-k*.85)+'" width="'+k*2.5+'" height="'+k*1.7+'" rx="'+k*.3+'" fill="#fff" fill-opacity=".92" stroke="'+COL[t]+'" stroke-width="'+k*.1+'"/><text x="'+cx+'" y="'+(cy+k*.05)+'" font-size="'+k*.8+'" font-weight="800" fill="#0A2540" text-anchor="middle">'+r[0]+'</text><text x="'+cx+'" y="'+(cy+k*.68)+'" font-size="'+k*.48+'" font-weight="700" fill="#0A2540" text-anchor="middle">'+NAME[t]+'</text>'); });
   o.push('</g><path d="'+bp+'" fill="none" stroke="#0A2540" stroke-width="'+k*.35+'"/>');
-  if(LF==='T2') o.push(svgGardens(fx,fy,k,LF,false));
   var CN={STU:0,'1PN+1':0,'2PN':0}; U.forEach(function(r){ if(onFloor(r)) CN[r[1]]++; });
   var lx=fx(36.5), ly=fy(34.6), lw=17.5*k, lh=8.6*k, fs=k*.9;
   o.push('<rect x="'+lx+'" y="'+ly+'" width="'+lw+'" height="'+lh+'" rx="'+k*.6+'" fill="#fff" fill-opacity=".94" stroke="#0A2540" stroke-width="'+k*.12+'"/><text x="'+(lx+k*.9)+'" y="'+(ly+k*1.6)+'" font-size="'+fs+'" font-weight="800" fill="#E8460F">CHÚ THÍCH · TẦNG '+FF+' · '+(CN.STU+CN['1PN+1']+CN['2PN'])+' CĂN</text>');
@@ -510,7 +509,7 @@ function plan(){
   if(LL!=='T2') o.push(svgGardens(X,Y,S,LL,true));
   o.push('<path d="'+bp+'" fill="'+(LL==='T2'?'#d7e8c6':'#e9edf1')+'" stroke="#0A2540" stroke-width="5" stroke-linejoin="round"/>');
   o.push('<g clip-path="url(#bld)">');
-  if(LL==='T2') o.push(svgFloor2(X,Y,S));
+  if(LL==='T2'){ o.push(svgFloor2(X,Y,S)); o.push(svgGardens(X,Y,S,LL,true)); }   // sân vườn nằm dưới căn: góc bo căn 03A/03 không bị che
   (LL==='T2'?[CORR[1]]:CORR).forEach(function(c){ o.push('<rect x="'+X(c[0])+'" y="'+Y(c[1])+'" width="'+(c[2]-c[0])*S+'" height="'+(c[3]-c[1])*S+'" fill="#f4f6f8"/>'); });
   o.push(svgCores(X,Y,S));
   if(LL==='T29'){ o.push('<rect x="'+X(39.9)+'" y="'+Y(-9.9)+'" width="'+14.5*S+'" height="'+9.9*S+'" fill="#9cc98a"/><text x="'+X(47.15)+'" y="'+Y(-4.6)+'" font-size="14" font-weight="800" fill="#24451a" text-anchor="middle">VƯỜN MÁI</text>'); }
@@ -528,7 +527,6 @@ function plan(){
   });
   o.push('</g>');
   o.push('<path d="'+bp+'" fill="none" stroke="#0A2540" stroke-width="5" stroke-linejoin="round" style="pointer-events:none"/>');
-  if(LL==='T2') o.push(svgGardens(X,Y,S,LL,true));
   var CN={STU:0,'1PN+1':0,'2PN':0}; U.forEach(function(r){ if(onFloor(r)) CN[r[1]]++; });
   // la bàn + thước tỷ lệ
   var cx=LL==='T2'?X(29.4):X(28), cy=LL==='T2'?Y(37):Y(-5);
@@ -649,16 +647,33 @@ function select(i){
 
 
 /* ---------- mặt bằng căn 2D theo tỷ lệ (cùng số liệu với phòng 3D) ---------- */
+function minv(m){ var d=m[0]*m[3]-m[1]*m[2]; return [m[3]/d,-m[1]/d,-m[2]/d,m[0]/d,(m[2]*m[5]-m[3]*m[4])/d,(m[1]*m[4]-m[0]*m[5])/d]; }
+// sân vườn / ban công lớn của căn ở tầng đang xem (tầng 2, 3), đổi sang hệ toạ độ của mặt bằng căn
+function unitGarden(r){ var LL=LAY(state.floor), B=BAL[LL]; if(!B||!B[r[0]]) return null; var G=(LL==='T2'?GARD2:GARD)[r[0]]; if(!G) return null;
+  var o=orient(r), u0=r[2],u1=r[3],v0=r[4],v1=r[5], P={E:[1,0,0,1,u0,v0],W:[-1,0,0,-1,u1,v1],N:[0,-1,1,0,u0,v1],S:[0,1,-1,0,u1,v0]}[o.face], IP=minv(P);
+  return {p:G.p.map(function(q){ return mapP(IP,q); }), r:G.r, a:B[r[0]]}; }
 function unitPlan(r,cd){
-  var t=SK(r), sp=SPEC[t], O=orient(r), W=O.W2, D=O.D2;
-  var k=46, L=58, T=58, VW=Math.round(W*k+L+40), VH=Math.round(D*k+T+52), o=[];
+  var t=SK(r), sp=SPEC[t], O=orient(r), W=O.W2, D=O.D2, GD=unitGarden(r);
+  var gx0=0,gy0=0,gx1=W,gy1=D; if(GD) GD.p.forEach(function(q){ gx0=Math.min(gx0,q[0]); gy0=Math.min(gy0,q[1]); gx1=Math.max(gx1,q[0]); gy1=Math.max(gy1,q[1]); });
+  var k=46, L=58-gx0*k, T=58-gy0*k, VW=Math.round((gx1-gx0)*k+98), VH=Math.round((gy1-gy0)*k+110), o=[];
   var M=mmul([k,0,0,k,L,T],O.m);
   function txt(x,y,s,sz,col,w,anc,rot){ o.push('<text x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" font-size="'+(sz||11)+'" font-weight="'+(w||700)+'" fill="'+(col||'#0A2540')+'" text-anchor="'+(anc||'middle')+'" dominant-baseline="middle"'+(rot?' transform="rotate('+rot+' '+x.toFixed(1)+' '+y.toFixed(1)+')"':'')+'>'+s+'</text>'); }
   o.push('<svg viewBox="0 0 '+VW+' '+VH+'" xmlns="http://www.w3.org/2000/svg" font-family="Be Vietnam Pro,Arial,sans-serif">');
-  o.push('<rect x="0" y="0" width="'+VW+'" height="'+(T-8)+'" fill="'+(O.face==='E'?'#cfe8f5':'#e8eef3')+'"/>');
+  o.push('<rect x="0" y="0" width="'+VW+'" height="'+(GD?28:T-8)+'" fill="'+(O.face==='E'?'#cfe8f5':'#e8eef3')+'"/>');
   txt(L+W*k/2,14,'↑ '+VIEW[O.face][0],11,'#12355c',800);
   if(O.side){ var sx=O.side[0]==='l'?14:VW-12; o.push('<rect x="'+(O.side[0]==='l'?0:VW-26)+'" y="'+(T-8)+'" width="26" height="'+(D*k+8)+'" fill="'+(O.side[1]==='E'?'#cfe8f5':'#e8eef3')+'"/>');
     txt(sx,T+D*k/2,'↑ '+VIEW[O.side[1]][0],10,'#12355c',800,'middle',O.side[0]==='l'?-90:90); }
+  if(GD){ // sân vườn riêng của căn (theo bản vẽ CĐT): nền cỏ, cây, tường rào bao quanh
+    var gfx=function(x){ return +(L+x*k).toFixed(1); }, gfy=function(y){ return +(T+y*k).toFixed(1); }, S0=S; S=k; var gd=roundPath(GD.p,GD.r,gfx,gfy); S=S0;
+    var bx0=1e9,by0=1e9,bx1=-1e9,by1=-1e9; GD.p.forEach(function(q){ bx0=Math.min(bx0,q[0]); by0=Math.min(by0,q[1]); bx1=Math.max(bx1,q[0]); by1=Math.max(by1,q[1]); });
+    o.push('<path d="'+gd+'" fill="#bfe0a6"/><clipPath id="ugc"><path d="'+gd+'"/></clipPath><g clip-path="url(#ugc)">');
+    for(var tx2=bx0+.8;tx2<bx1-.4;tx2+=1.6) for(var ty2=by0+.8;ty2<by1-.4;ty2+=1.8) if(!(tx2>0&&tx2<W&&ty2>0&&ty2<D)) o.push('<circle cx="'+gfx(tx2)+'" cy="'+gfy(ty2)+'" r="'+k*.3+'" fill="#6fa857" fill-opacity=".7"/>');
+    o.push('</g><path d="'+gd+'" fill="none" stroke="#4d5c46" stroke-width="2.4"/>');
+    // nhãn đặt giữa phần sân lớn nhất nằm ngoài căn (trên / dưới / trái / phải)
+    var Z={t:[],b:[],l:[],r:[]}; for(var qx=bx0+.25;qx<bx1;qx+=.5) for(var qy=by0+.25;qy<by1;qy+=.5) if(pip([qx,qy],GD.p)&&!(qx>0&&qx<W&&qy>0&&qy<D)) (qy<0?Z.t:qy>D?Z.b:qx<0?Z.l:Z.r).push([qx,qy]);
+    var zk=Object.keys(Z).sort(function(a,b){ return Z[b].length-Z[a].length; })[0], zp=Z[zk], gc=[(bx0+bx1)/2,(by0+by1)/2], gv=false;
+    if(zp.length){ var a0=1e9,a1=-1e9,c0=1e9,c1=-1e9; zp.forEach(function(q){ a0=Math.min(a0,q[0]); a1=Math.max(a1,q[0]); c0=Math.min(c0,q[1]); c1=Math.max(c1,q[1]); }); gc=[(a0+a1)/2,(c0+c1)/2]; gv=(c1-c0)>(a1-a0)*1.3; }
+    txt(gfx(gc[0]),gfy(gc[1]),'Sân vườn · '+m2(GD.a)+' m²',11,'#1f4415',800,'middle',gv?-90:0); }
   o.push('<g transform="'+mstr(M)+'">'+svgSpec(t,1).replace('fill="#f3e6d4"','fill="'+LIGHT[r[1]]+'"')+'</g>');
   o.push('<rect x="'+(VW-96)+'" y="'+(VH-22)+'" width="12" height="12" rx="2" fill="'+COL[r[1]]+'"/><text x="'+(VW-80)+'" y="'+(VH-12)+'" font-size="10" font-weight="800" fill="#0A2540">'+NAME[r[1]]+'</text>');
   sp.labels.forEach(function(l){ var p=mapP(M,[l[1],l[2]]); txt(p[0],p[1],l[0],10,'#0A2540',800); });

@@ -700,7 +700,7 @@ function clipTower(on){
   clipped=true;
 }
 var planTx=[null,null,null,null];   // [tầng 3A–29, tầng 30 (layout riêng), tầng 3 (có sân vườn từng căn)]
-var PLAN_IMG='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@383c4d98efb88b13fc998e667889cbafb5b3d484/projects/sun-saphia/images/';
+var PLAN_IMG='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@7a29e8b47d1eee7b39c78ffbf078cc5906cea125/projects/sun-saphia/images/';
 var PLAN_F=[null,PLAN_IMG+'mat-bang-tang-30-4d.webp',PLAN_IMG+'mat-bang-tang-3-4d.webp',PLAN_IMG+'mat-bang-tang-2-4d.webp'], PLAN_H=[49.6,49.6,53.4,53.4];   // tầng 2: mái đế + bể bơi, Gym   // ảnh tầng 3 dài thêm phía sau (sân vườn)
 function planTex(f){ if(!planMesh) return; var k=f>=30?1:f===3?2:f===2?3:0;
   if(!planTx[k]){ var ld=new THREE.TextureLoader(); ld.setCrossOrigin('anonymous'); var t=ld.load(PLAN_F[k]); t.encoding=THREE.sRGBEncoding; t.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy()); t.generateMipmaps=true; t.minFilter=THREE.LinearMipmapLinearFilter; planTx[k]=t; }
