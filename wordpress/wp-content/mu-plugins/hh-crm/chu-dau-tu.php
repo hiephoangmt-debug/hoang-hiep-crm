@@ -91,7 +91,10 @@ function hh_cdt_match( $text ) {
 		}
 		uksort( $aliases, static fn( $a, $b ) => mb_strlen( $b ) - mb_strlen( $a ) );
 	}
-	$out = array();
+	// Đơn vị phân phối / hợp tác bán hàng không phải chủ đầu tư: bỏ phần "; phân phối …", "; phát triển: …", "; hợp tác: …".
+	$text = preg_replace( '/\s*[;–]\s*(?:phân phối|phát triển\s*(?:,\s*phân phối)?\s*:|hợp tác\s*:)[^;]*/iu', '', $text );
+	$text = preg_replace( '/\s*phân phối\s*:?\s*[^;()]*/iu', '', $text );
+	$out  = array();
 	foreach ( $aliases as $a => $slug ) {
 		// Tên ngắn (SDN, FPT, BRG…) phải đứng riêng một từ.
 		$hit = mb_strlen( $a ) <= 4 ? preg_match( '/(?<![\p{L}\p{N}])' . preg_quote( $a, '/' ) . '(?![\p{L}\p{N}])/u', $text ) : false !== mb_stripos( $text, $a );

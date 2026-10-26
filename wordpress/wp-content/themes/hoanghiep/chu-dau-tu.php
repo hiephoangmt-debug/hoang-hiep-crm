@@ -75,7 +75,9 @@ $dom  = static fn( $u ) => preg_replace( '/^www\./', '', (string) wp_parse_url( 
 	<?php
 	$d        = $all[ $key ];
 	$projects = hh_cdt_projects( $key );
-	$on_site  = array_map( static fn( $id ) => get_post_field( 'post_name', $id ), $projects );
+	// Dự án trên web đã có trong bảng dự án của hồ sơ → không lặp ở bảng "trên hiephoangmt.com".
+	$named = array_filter( array_column( (array) ( $d['projects'] ?? array() ), 'site_slug' ) );
+	$extra = array_values( array_filter( $projects, static fn( $id ) => ! in_array( get_post_field( 'post_name', $id ), $named, true ) ) );
 	?>
 	<div class="page-head">
 		<div class="container">
@@ -116,28 +118,6 @@ $dom  = static fn( $u ) => preg_replace( '/^www\./', '', (string) wp_parse_url( 
 			</div>
 		</section>
 
-		<?php if ( $projects ) : ?>
-			<section class="block price-board">
-				<h2 class="block__title">Dự án của <?php echo esc_html( $d['name'] ); ?> trên hiephoangmt.com (<?php echo count( $projects ); ?>)</h2>
-				<div class="table-wrap">
-					<table class="data-table">
-						<thead><tr><th>Dự án</th><th>Khu vực</th><th>Tình trạng</th><th>Giá tham khảo</th></tr></thead>
-						<tbody>
-							<?php foreach ( $projects as $id ) : ?>
-								<?php $area = hh_project_area( $id ); ?>
-								<tr>
-									<td><a href="<?php echo esc_url( get_permalink( $id ) ); ?>"><?php echo esc_html( get_the_title( $id ) ); ?></a></td>
-									<td data-label="Khu vực"><?php echo esc_html( $area ? $area->name : '' ); ?></td>
-									<td data-label="Tình trạng"><?php echo esc_html( hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_status', $id ) ) ); ?></td>
-									<td data-label="Giá tham khảo"><?php echo esc_html( preg_replace( '/^Giá:\s*/u', '', hh_project_price( $id ) ) ); ?></td>
-								</tr>
-							<?php endforeach; ?>
-						</tbody>
-					</table>
-				</div>
-			</section>
-		<?php endif; ?>
-
 		<?php if ( ! empty( $d['projects'] ) ) : ?>
 			<section class="block">
 				<h2 class="block__title">Các dự án <?php echo esc_html( $d['name'] ); ?> đã và đang triển khai tại Đà Nẵng</h2>
@@ -154,7 +134,29 @@ $dom  = static fn( $u ) => preg_replace( '/^www\./', '', (string) wp_parse_url( 
 									<td><?php echo $pid && 'publish' === $pid->post_status ? '<a href="' . esc_url( get_permalink( $pid ) ) . '">' . $name . '</a>' : $name; ?><?php echo ! empty( $p['note'] ) ? '<br><small>' . esc_html( $p['note'] ) . '</small>' : ''; ?></td>
 									<td data-label="Vị trí"><?php echo esc_html( $p['where'] ?? '' ); ?></td>
 									<td data-label="Loại hình"><?php echo esc_html( trim( ( $p['type'] ?? '' ) . ( ! empty( $p['scale'] ) ? ' · ' . $p['scale'] : '' ), ' ·' ) ); ?></td>
-									<td data-label="Tình trạng"><?php echo esc_html( $p['status'] ?? '' ); ?></td>
+									<td data-label="Tình trạng"><?php echo esc_html( $p['status'] ?? '' ); ?><?php echo $pid && 'publish' === $pid->post_status && '' !== hh_meta( 'hh_p_price_from', $pid->ID ) ? '<br><small>Giá tham khảo: ' . esc_html( preg_replace( '/^Giá:\s*/u', '', hh_project_price( $pid->ID ) ) ) . '</small>' : ''; ?></td>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+			</section>
+		<?php endif; ?>
+
+		<?php if ( $extra ) : ?>
+			<section class="block price-board">
+				<h2 class="block__title"><?php echo $d['projects'] ? 'Thêm dự án' : 'Dự án'; ?> của <?php echo esc_html( $d['name'] ); ?> có bảng giá trên hiephoangmt.com</h2>
+				<div class="table-wrap">
+					<table class="data-table">
+						<thead><tr><th>Dự án</th><th>Khu vực</th><th>Tình trạng</th><th>Giá tham khảo</th></tr></thead>
+						<tbody>
+							<?php foreach ( $extra as $id ) : ?>
+								<?php $area = hh_project_area( $id ); ?>
+								<tr>
+									<td><a href="<?php echo esc_url( get_permalink( $id ) ); ?>"><?php echo esc_html( get_the_title( $id ) ); ?></a></td>
+									<td data-label="Khu vực"><?php echo esc_html( $area ? $area->name : '' ); ?></td>
+									<td data-label="Tình trạng"><?php echo esc_html( hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_status', $id ) ) ); ?></td>
+									<td data-label="Giá tham khảo"><?php echo esc_html( preg_replace( '/^Giá:\s*/u', '', hh_project_price( $id ) ) ); ?></td>
 								</tr>
 							<?php endforeach; ?>
 						</tbody>
