@@ -885,8 +885,19 @@ function buildRoom(r){
         if(n%3===0){ var tr=new THREE.Mesh(new THREE.CylinderGeometry(.08,.11,1.6,8),woodD); tr.position.set(tu,.8,tv); tr.castShadow=true; pg.add(tr);
           var cr=new THREE.Mesh(new THREE.SphereGeometry(.75,12,10),n%2?leaf:leaf2); cr.position.set(tu,2.05,tv); cr.castShadow=true; pg.add(cr); }
         else { var bs=new THREE.Mesh(new THREE.SphereGeometry(.42,10,8),n%2?leaf2:leaf); bs.scale.set(1,.7,1); bs.position.set(tu,.3,tv); bs.castShadow=true; pg.add(bs); } }
-      // lối đi lát đá từ lô gia ra sân
-      var lu=Math.max(u0,Math.min(u1,(r[2]+r[3])/2)), lv=Math.max(v0,Math.min(v1,(r[4]+r[5])/2));
+      // lối đi lát đá: từ mép căn giáp sân (cửa lô gia / ban công) chạy ra giữa phần sân lớn nhất
+      var Z={t:[],b:[],l:[],r:[]}; for(var qu=u0+.25;qu<u1;qu+=.5) for(var qv=v0+.25;qv<v1;qv+=.5) if(pip([qu,qv],P)&&!(qu>r[2]&&qu<r[3]&&qv>r[4]&&qv<r[5])) (qv<r[4]?Z.t:qv>r[5]?Z.b:qu<r[2]?Z.l:Z.r).push([qu,qv]);
+      var zk=Object.keys(Z).sort(function(a2,b2){ return Z[b2].length-Z[a2].length; })[0], zp=Z[zk];
+      if(zp.length>4){ var su=0,sv=0; zp.forEach(function(q){ su+=q[0]; sv+=q[1]; }); su/=zp.length; sv/=zp.length;
+        var st=zk==='t'?[Math.max(r[2]+.5,Math.min(r[3]-.5,su)),r[4]]:zk==='b'?[Math.max(r[2]+.5,Math.min(r[3]-.5,su)),r[5]]:zk==='l'?[r[2],Math.max(r[4]+.5,Math.min(r[5]-.5,sv))]:[r[3],Math.max(r[4]+.5,Math.min(r[5]-.5,sv))];
+        var en=[su,sv], L2=Math.hypot(en[0]-st[0],en[1]-st[1]), ang2=Math.atan2(en[1]-st[1],en[0]-st[0]), stone=M(0xd8d0c2,{roughness:.85}), stone2=M(0xc9c0b0,{roughness:.9});
+        for(var d2=.45,i2=0;d2<L2;d2+=.7,i2++){ var sx=st[0]+(en[0]-st[0])*d2/L2, sz=st[1]+(en[1]-st[1])*d2/L2;
+          var pv=new THREE.Mesh(new THREE.BoxGeometry(.42,.05,.62),i2%2?stone:stone2); pv.position.set(sx,.045,sz); pv.rotation.y=-ang2+(rnd(i2)-.5)*.15; pv.receiveShadow=true; pv.castShadow=true; pg.add(pv); }
+        // sân lát đá nhỏ cuối lối đi, đặt bộ bàn ghế ngoài trời
+        var pad=new THREE.Mesh(new THREE.CylinderGeometry(1.1,1.1,.05,24),stone); pad.position.set(en[0],.045,en[1]); pad.receiveShadow=true; pg.add(pad);
+        var tb=new THREE.Mesh(new THREE.CylinderGeometry(.35,.35,.05,16),woodD); tb.position.set(en[0],.72,en[1]); tb.castShadow=true; pg.add(tb);
+        var lg=new THREE.Mesh(new THREE.CylinderGeometry(.04,.06,.68,8),woodD); lg.position.set(en[0],.37,en[1]); pg.add(lg);
+        for(var c2=0;c2<2;c2++){ var ch=new THREE.Mesh(new THREE.BoxGeometry(.42,.45,.42),fab); ch.position.set(en[0]+(c2?.7:-.7)*Math.cos(ang2+Math.PI/2),.27,en[1]+(c2?.7:-.7)*Math.sin(ang2+Math.PI/2)); ch.castShadow=true; pg.add(ch); } }
     }
   })();
   // tầm mắt "đứng trong căn" (toạ độ đã xoay)
