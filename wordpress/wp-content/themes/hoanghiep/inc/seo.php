@@ -881,6 +881,9 @@ function hh_seo_landing_entries() {
 		foreach ( array_keys( hh_cdt_all() ) as $slug ) {
 			$out[ hh_cdt_url( $slug ) ] = hh_cdt_lastmod( $slug );
 		}
+		foreach ( array_keys( function_exists( 'hh_cdt_groups' ) ? hh_cdt_groups() : array() ) as $gk ) {
+			$out[ hh_cdt_url( $gk ) ] = hh_cdt_lastmod( 'tat-ca' );
+		}
 	}
 	// Trang con của landing dự án (VD /du-an/fours-tower/gio-hang/, /du-an/sun-saphia-residence/quy-hoach/).
 	if ( function_exists( 'hoanghiep_landing_subpages' ) ) {
@@ -926,6 +929,16 @@ function hh_seo_cdt() {
 			$list[] = array( $d['name'], hh_cdt_url( $slug ) );
 		}
 		return $out = array( 'title' => $m['title'], 'desc' => $m['desc'], 'url' => hh_cdt_url(), 'h1' => 'Chủ đầu tư bất động sản tại Đà Nẵng', 'crumbs' => array( $index ), 'faq' => $m['faq'], 'list' => $list, 'org' => null ); // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments
+	}
+	if ( function_exists( 'hh_cdt_groups' ) && isset( hh_cdt_groups()[ $key ] ) ) {
+		$g    = hh_cdt_groups()[ $key ];
+		$list = array();
+		foreach ( hh_cdt_group_rows( $key ) as $r ) {
+			if ( $r[0] ) {
+				$list[] = array( $r[1], hh_cdt_url( $r[0] ) );
+			}
+		}
+		return $out = array( 'title' => $g['title'], 'desc' => $g['desc'], 'url' => hh_cdt_url( $key ), 'h1' => $g['h1'], 'crumbs' => array( $index, array( $g['menu'], hh_cdt_url( $key ) ) ), 'faq' => $g['faq'], 'list' => $list, 'org' => null ); // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments
 	}
 	$d    = hh_cdt_all()[ $key ];
 	$list = array_map( static fn( $id ) => array( get_the_title( $id ), get_permalink( $id ) ), hh_cdt_projects( $key ) );

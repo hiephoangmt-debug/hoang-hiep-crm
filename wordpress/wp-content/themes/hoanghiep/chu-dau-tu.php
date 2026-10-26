@@ -64,6 +64,14 @@ $dom  = static fn( $u ) => preg_replace( '/^www\./', '', (string) wp_parse_url( 
 				</table>
 			</div>
 		</section>
+		<section class="block">
+			<h2 class="block__title">Chủ đầu tư theo khu vực</h2>
+			<p class="deal-tabs">
+				<?php foreach ( hh_cdt_groups() as $gk => $gg ) : ?>
+					<a href="<?php echo esc_url( hh_cdt_url( $gk ) ); ?>"><?php echo esc_html( $gg['h1'] ); ?> (<?php echo count( hh_cdt_group_rows( $gk ) ); ?>)</a>
+				<?php endforeach; ?>
+			</p>
+		</section>
 		<section class="block faq-block">
 			<h2 class="block__title">Hỏi đáp về chủ đầu tư tại Đà Nẵng</h2>
 			<div class="faq">
@@ -72,6 +80,55 @@ $dom  = static fn( $u ) => preg_replace( '/^www\./', '', (string) wp_parse_url( 
 				<?php endforeach; ?>
 			</div>
 		</section>
+	</div>
+
+<?php elseif ( isset( hh_cdt_groups()[ $key ] ) ) : ?>
+	<?php
+	$g    = hh_cdt_groups()[ $key ];
+	$grow = hh_cdt_group_rows( $key );
+	?>
+	<div class="page-head">
+		<div class="container">
+			<p class="breadcrumb"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a> / <a href="<?php echo esc_url( hh_cdt_url() ); ?>">Chủ đầu tư</a> / <?php echo esc_html( $g['menu'] ); ?></p>
+			<h1 class="page-head__title"><?php echo esc_html( $g['h1'] ); ?></h1>
+			<p class="page-head__lead"><?php echo esc_html( $g['desc'] ); ?></p>
+		</div>
+	</div>
+	<div class="container section">
+		<section class="block">
+			<div class="prose entry-content">
+				<?php foreach ( $g['intro'] as $para ) : ?>
+					<p><?php echo wp_kses( $para, $tags ); ?></p>
+				<?php endforeach; ?>
+			</div>
+		</section>
+		<section class="block price-board">
+			<h2 class="block__title">Chủ đầu tư và dự án (<?php echo count( $grow ); ?> chủ đầu tư)</h2>
+			<div class="table-wrap">
+				<table class="data-table cdt-table">
+					<thead><tr><th>Chủ đầu tư</th><th>Dự án · tình trạng</th></tr></thead>
+					<tbody>
+						<?php foreach ( $grow as list( $slug, $name, $plist ) ) : ?>
+							<tr>
+								<td><?php echo $slug ? '<a href="' . esc_url( hh_cdt_url( $slug ) ) . '"><strong>' . esc_html( $name ) . '</strong></a><br><small>Xem hồ sơ chủ đầu tư →</small>' : '<strong>' . esc_html( $name ) . '</strong>'; ?></td>
+								<td data-label="Dự án"><ul class="cdt-plist"><?php foreach ( $plist as $x ) : ?><li><?php echo $x[1] ? '<a href="' . esc_url( $x[1] ) . '">' . esc_html( $x[0] ) . '</a>' : esc_html( $x[0] ); ?><?php echo '' !== $x[2] ? ' <small>' . esc_html( $x[2] ) . '</small>' : ''; ?></li><?php endforeach; ?></ul></td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+		</section>
+		<section class="block faq-block">
+			<h2 class="block__title">Hỏi đáp</h2>
+			<div class="faq">
+				<?php foreach ( $g['faq'] as list( $q, $a ) ) : ?>
+					<details><summary><?php echo esc_html( $q ); ?></summary><p><?php echo esc_html( $a ); ?></p></details>
+				<?php endforeach; ?>
+			</div>
+		</section>
+		<nav class="block cdt-others" aria-label="Chủ đầu tư">
+			<p><a href="<?php echo esc_url( hh_cdt_url() ); ?>">← Danh sách tất cả chủ đầu tư tại Đà Nẵng</a></p>
+		</nav>
 	</div>
 
 <?php else : ?>

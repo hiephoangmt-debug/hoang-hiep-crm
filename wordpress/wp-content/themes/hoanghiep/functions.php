@@ -347,6 +347,9 @@ function hoanghiep_menu_cdt_item() {
 	foreach ( array_slice( array_keys( $rank ), 0, 8 ) as $slug ) {
 		$kids[] = array( trim( preg_replace( '/\s*\([^)]*\)\s*$/u', '', hh_cdt_all()[ $slug ]['name'] ) ), hh_cdt_url( $slug ) );
 	}
+	foreach ( function_exists( 'hh_cdt_groups' ) ? hh_cdt_groups() : array() as $gk => $g ) {
+		$kids[] = array( $g['menu'], hh_cdt_url( $gk ) );
+	}
 	$kids[] = array( 'Tất cả chủ đầu tư (' . count( hh_cdt_all() ) . ')', hh_cdt_url() );
 	return array( 'Chủ đầu tư', hh_cdt_url(), $kids );
 }

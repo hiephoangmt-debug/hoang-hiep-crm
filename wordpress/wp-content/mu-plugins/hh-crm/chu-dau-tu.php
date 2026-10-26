@@ -39,7 +39,7 @@ add_filter( 'query_vars', static fn( $vars ) => array_merge( $vars, array( 'hh_c
 /** 'tat-ca' (trang danh sách), slug chủ đầu tư, hoặc '' (không phải trang chủ đầu tư / slug không có). */
 function hh_cdt_key() {
 	$key = sanitize_title( (string) get_query_var( 'hh_cdt' ) );
-	if ( 'tat-ca' === $key ) {
+	if ( 'tat-ca' === $key || isset( hh_cdt_groups()[ $key ] ) ) {
 		return $key;
 	}
 	return isset( hh_cdt_all()[ $key ] ) ? $key : '';
@@ -184,4 +184,108 @@ function hh_cdt_index_meta() {
 			array( 'Hội An, Điện Bàn có được tính là Đà Nẵng không?', 'Có. Từ ngày 1/7/2025, tỉnh Quảng Nam hợp nhất vào thành phố Đà Nẵng, nên các dự án ở Hội An, Điện Bàn, Duy Xuyên… nay thuộc Đà Nẵng; trên trang này ghi kèm "(Quảng Nam cũ)" để dễ nhận biết.' ),
 		),
 	);
+}
+
+/* -------------------------------------------------------------------------
+ * Nhóm chủ đầu tư theo khu vực / loại hình: /chu-dau-tu/<nhóm>/ (VD đất nền Điện Bàn – Quảng Nam cũ).
+ * ---------------------------------------------------------------------- */
+
+/** Khóa nhóm => cấu hình. */
+function hh_cdt_groups() {
+	return array(
+		'phia-bac-da-nang' => array(
+			'menu'    => 'Phía Bắc Đà Nẵng (Liên Chiểu – Hải Vân)',
+			'h1'      => 'Chủ đầu tư dự án phía Bắc Đà Nẵng (Liên Chiểu – Hải Vân)',
+			'title'   => 'Chủ đầu tư phía Bắc Đà Nẵng: Liên Chiểu, Hải Vân, Làng Vân',
+			'desc'    => 'Ai đang làm dự án ở phía Bắc Đà Nẵng – Liên Chiểu, Hải Vân, Làng Vân: Vinhomes Hải Vân Bay (Vingroup), các khu đô thị của SDN… dự án, tình trạng, lưu ý pháp lý.',
+			'area'    => 'lien-chieu',
+			'types'   => array(),
+			'where'   => '/Liên Chiểu|Hải Vân|Làng Vân|Hòa Hiệp|Hòa Khánh|Hòa Minh|Nam Ô|Hòa Bắc|Hòa Liên|Bàu Tràm/u',
+			'kind'    => '/./u',
+			'exclude' => '/khu công nghiệp|\bKCN\b/iu',
+			'intro'   => array(
+				'Phía Bắc Đà Nẵng – khu Liên Chiểu, chân đèo Hải Vân, vịnh Làng Vân – là hướng phát triển mới của thành phố: cảng Liên Chiểu, tuyến đường ven biển Nguyễn Tất Thành nối dài và các khu đô thị quanh hồ Bàu Tràm. Nổi bật nhất là khu phức hợp du lịch và đô thị nghỉ dưỡng Làng Vân, ra mắt dưới tên <strong>Vinhomes Hải Vân Bay</strong>, do Công ty CP Vinpearl (Tập đoàn Vingroup) làm chủ đầu tư.',
+				'Ngoài Làng Vân, khu Tây Bắc có các khu đô thị, đất nền đã hình thành từ nhiều năm, phần lớn do Công ty CP Đầu tư Sài Gòn – Đà Nẵng (SDN) làm chủ đầu tư. Mức độ hoàn thiện pháp lý khác nhau giữa các khu – có khu đã cấp sổ, có khu từng chậm sổ nhiều năm – nên người mua cần xem hồ sơ của đúng dự án và đúng lô.',
+				'Bảng dưới đây gom các chủ đầu tư có dự án ở phía Bắc thành phố, kèm link hồ sơ từng chủ đầu tư. Trang chỉ ghi chủ đầu tư được giao dự án, không ghi đơn vị phân phối.',
+			),
+			'faq'     => array(
+				array( 'Vinhomes Hải Vân Bay (Làng Vân) do ai làm chủ đầu tư?', 'Chủ đầu tư là Công ty CP Vinpearl, thuộc Tập đoàn Vingroup; Vinhomes – công ty cùng tập đoàn – phát triển và ra mắt dự án dưới tên Vinhomes Hải Vân Bay.' ),
+				array( 'Phía Bắc Đà Nẵng gồm những khu nào?', 'Chủ yếu là Liên Chiểu cũ (nay gồm các phường Hải Vân, Liên Chiểu, Hòa Khánh) cùng khu vực chân đèo Hải Vân, vịnh Làng Vân và quanh hồ Bàu Tràm.' ),
+				array( 'Mua đất nền Liên Chiểu cần lưu ý gì?', 'Kiểm tra sổ của đúng lô, chủ đầu tư được giao dự án, văn bản cho phép chuyển nhượng và tình trạng hạ tầng xung quanh; một số khu từng chậm cấp sổ nên cần xác nhận tiến độ trước khi đặt cọc.' ),
+			),
+		),
+		'dat-nen-dien-ban' => array(
+			'menu'   => 'Đất nền Điện Bàn (Quảng Nam cũ)',
+			'h1'     => 'Chủ đầu tư đất nền Điện Bàn (Quảng Nam cũ)',
+			'title'  => 'Chủ đầu tư đất nền Điện Bàn, Điện Ngọc (Quảng Nam cũ)',
+			'desc'   => 'Ai làm chủ đầu tư các khu đất nền Điện Bàn – Điện Ngọc, Điện Dương, Điện Nam (Quảng Nam cũ, nay thuộc Đà Nẵng): dự án, tình trạng, lưu ý pháp lý. Hoàng Hiệp tổng hợp.',
+			'area'   => 'dien-ban',
+			'types'  => array( 'dat-nen' ),
+			'where'  => '/Điện\s*(Bàn|Ngọc|Dương|Nam|Thắng|Phong|Minh|Phương|Hồng|Tiến|Hòa|Hoà|An|Thọ|Quang|Trung|Phước)/u',
+			'kind'   => '/đất|khu đô thị|khu dân cư|lô|shophouse|nhà phố/iu',
+			'intro'  => array(
+				'Điện Bàn – nhất là dải Điện Ngọc, Điện Dương, Điện Nam giáp ranh Ngũ Hành Sơn – là nơi tập trung nhiều khu đất nền nhất của vùng Quảng Nam cũ. Từ ngày 1/7/2025, khu vực này thuộc thành phố Đà Nẵng, nên các khu đô thị ven biển, ven sông Cổ Cò ở đây được nhiều người mua Đà Nẵng quan tâm vì giá mềm hơn nội thành và gần biển.',
+				'Điểm cần lưu ý ở Điện Bàn là pháp lý không đồng đều giữa các dự án: có khu đã cấp sổ từng lô, có khu còn vướng giải phóng mặt bằng, chậm giao sổ hoặc đang được rà soát. Vì vậy, trước khi xuống tiền, nên biết rõ <strong>ai là chủ đầu tư</strong> được giao dự án, dự án đã đủ điều kiện chuyển nhượng quyền sử dụng đất chưa và lô định mua đã có sổ hay chưa. Trang này gom các chủ đầu tư có đất nền ở Điện Bàn, kèm dự án của từng bên và link hồ sơ chi tiết.',
+				'Trang chỉ ghi chủ đầu tư – pháp nhân được giao dự án – không ghi đơn vị phân phối hay sàn môi giới. Hoàng Hiệp hỗ trợ kiểm tra sổ, quy hoạch và tình trạng từng lô trước khi anh chị đặt cọc.',
+			),
+			'faq'    => array(
+				array( 'Đất nền Điện Bàn nay thuộc Đà Nẵng phải không?', 'Đúng. Từ 1/7/2025, tỉnh Quảng Nam hợp nhất vào thành phố Đà Nẵng; các phường Điện Ngọc, Điện Dương, Điện Nam… nay thuộc Đà Nẵng. Giấy tờ cũ vẫn có giá trị, địa chỉ hành chính được cập nhật khi làm thủ tục.' ),
+				array( 'Mua đất nền Điện Bàn cần kiểm tra gì?', 'Tên chủ đầu tư và quyết định giao dự án, văn bản cho phép chuyển nhượng quyền sử dụng đất đã có hạ tầng, sổ của đúng lô (hoặc tiến độ cấp sổ), quy hoạch chi tiết và tình trạng giải phóng mặt bằng xung quanh lô.' ),
+				array( 'Vì sao có khu đất nền Điện Bàn chậm cấp sổ?', 'Thường do chưa xong giải phóng mặt bằng, chủ đầu tư chưa hoàn thành nghĩa vụ tài chính hoặc dự án đang bị rà soát. Hồ sơ từng chủ đầu tư trên trang này có ghi các lưu ý pháp lý đã được báo chí đưa tin.' ),
+			),
+		),
+	);
+}
+
+/**
+ * Nội dung nhóm: [ [slug hồ sơ|'' , tên chủ đầu tư, [ [tên dự án, url|'' , tình trạng], … ] ], … ] – dự án trên web (theo loại + khu vực)
+ * và dự án trong hồ sơ chủ đầu tư có vị trí, loại hình khớp nhóm. Chủ đầu tư nhiều dự án đứng trước.
+ */
+function hh_cdt_group_rows( $key ) {
+	static $cache = array();
+	if ( isset( $cache[ $key ] ) ) {
+		return $cache[ $key ];
+	}
+	$g    = hh_cdt_groups()[ $key ];
+	$rows = array();
+	$seen = array();
+	$ids  = get_posts( array( 'post_type' => 'du-an', 'posts_per_page' => 400, 'fields' => 'ids', 'orderby' => 'title', 'order' => 'ASC' ) );
+	foreach ( $ids as $id ) {
+		$types = wp_list_pluck( get_the_terms( $id, 'loai-du-an' ) ?: array(), 'slug' );
+		$areas = wp_list_pluck( get_the_terms( $id, 'khu-vuc' ) ?: array(), 'slug' );
+		if ( ( $g['types'] && ! array_intersect( $types, $g['types'] ) ) || ! in_array( $g['area'], $areas, true ) ) {
+			continue;
+		}
+		$parent = (int) get_post_meta( $id, 'hh_p_parent', true ) ?: wp_get_post_parent_id( $id );
+		if ( $parent && in_array( $parent, $ids, true ) && in_array( $g['area'], wp_list_pluck( get_the_terms( $parent, 'khu-vuc' ) ?: array(), 'slug' ), true ) ) {
+			$seen[ get_post_field( 'post_name', $id ) ] = true; // Phân khu: đã có dự án chính.
+			continue;
+		}
+		$dev   = (string) hh_meta( 'hh_p_developer', $id );
+		$slugs = hh_cdt_match( $dev );
+		$k     = $slugs ? $slugs[0] : 'x:' . $dev;
+		if ( ! isset( $rows[ $k ] ) ) {
+			$rows[ $k ] = array( $slugs ? $slugs[0] : '', $slugs ? hh_cdt_all()[ $slugs[0] ]['name'] : ( '' !== $dev ? $dev : 'Đang cập nhật' ), array() );
+		}
+		$rows[ $k ][2][]                         = array( get_the_title( $id ), get_permalink( $id ), hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_status', $id ) ) );
+		$seen[ get_post_field( 'post_name', $id ) ] = true;
+	}
+	foreach ( hh_cdt_all() as $slug => $d ) {
+		foreach ( (array) ( $d['projects'] ?? array() ) as $p ) {
+			if ( ! empty( $p['site_slug'] ) && isset( $seen[ $p['site_slug'] ] ) ) {
+				continue;
+			}
+			if ( ! preg_match( $g['where'], (string) ( $p['where'] ?? '' ) ) || ! preg_match( $g['kind'], ( $p['type'] ?? '' ) . ' ' . $p['name'] ) || ( ! empty( $g['exclude'] ) && preg_match( $g['exclude'], ( $p['type'] ?? '' ) . ' ' . $p['name'] ) ) ) {
+				continue;
+			}
+			if ( ! isset( $rows[ $slug ] ) ) {
+				$rows[ $slug ] = array( $slug, $d['name'], array() );
+			}
+			$post            = ! empty( $p['site_slug'] ) ? get_page_by_path( $p['site_slug'], OBJECT, 'du-an' ) : null;
+			$rows[ $slug ][2][] = array( $p['name'], $post && 'publish' === $post->post_status ? get_permalink( $post ) : '', (string) ( $p['status'] ?? '' ) );
+		}
+	}
+	$rows = array_values( $rows );
+	usort( $rows, static fn( $a, $b ) => count( $b[2] ) <=> count( $a[2] ) );
+	return $cache[ $key ] = $rows; // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments
 }

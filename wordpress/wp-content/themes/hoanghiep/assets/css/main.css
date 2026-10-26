@@ -1541,3 +1541,8 @@ html.tour-view .contact-dock, html.tour-view .hhc__fab, html.tour-view .hhc__bub
 	.cdt-table td:nth-child(3), .cdt-projects td:nth-child(3) { font-weight: 400; }
 	.cdt-sources ul { columns: 1; }
 }
+.cdt-plist { margin: 0; padding: 0; list-style: none; }
+.cdt-plist li { padding: 4px 0; line-height: 1.45; }
+.cdt-plist li + li { border-top: 1px dashed var(--line); }
+.cdt-plist small { display: block; color: var(--muted, #5b6b80); font-size: .84rem; }
+.site-main .cdt-plist li, .cdt-plist li { text-align: left !important; text-align-last: left; }
