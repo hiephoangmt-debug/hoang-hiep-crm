@@ -322,7 +322,7 @@ def bang_gia():
                 b, [article_ld(title, desc, MAIN + '/bang-gia'), cld, fld], '/bang-gia')
 
 def tang_viewer():
-    I = RAW + '3ba51fce23bab72069a579209e574768f96047f6/landing/sun-saphia/v4/img/mat-bang-tang-'
+    I = RAW + '82607488b0132bb3c6b51585b33a71fd19edd0fc/landing/sun-saphia/v4/img/mat-bang-tang-'
     F = [('2', 'Tầng 2', 'Tầng tiện ích + 12 căn', [('Studio', 7), ('1BR+', 1), ('2BR', 4)],
           ['Cùng tầng với <b>hồ bơi</b> và khu <b>Gym + Yoga 478 m²</b>', '2BR SP0203 có ban công <b>84,29 m²</b>, SP0203A ban công 29,59 m²', 'Studio SP0201, SP0202 có ban công ~19 m²']),
          ('3', 'Tầng 3', '28 căn · ban công sân vườn', [('Studio', 19), ('1BR+', 4), ('2BR', 5)],
@@ -337,16 +337,16 @@ def tang_viewer():
     pans = ''
     for i, (k, n, sub, mix, pts) in enumerate(F):
         tot = sum(c for _, c in mix)
-        pans += ('<div class="tgp%s" data-tp="%s" role="tabpanel"><figure class="fg wm" style="margin:0"><a href="%s%s.webp" target="_blank" rel="noopener"><img src="%s%s-900.webp" srcset="%s%s-900.webp 900w, %s%s.webp 1500w" sizes="(max-width: 760px) 100vw, 760px" width="1500" height="1200" alt="Mặt bằng %s tòa Saphia, Sun Saphia Residence: %d căn" loading="lazy" decoding="async"></a><figcaption>Mặt bằng %s · bấm ảnh để xem cỡ lớn · thông số chính thức theo hợp đồng</figcaption></figure>'
+        pans += ('<div class="tgp%s" data-tp="%s" role="tabpanel"><figure class="fg wm" style="margin:0"><a href="%s%s.webp" target="_blank" rel="noopener"><img src="%s%s-900.webp" srcset="%s%s-900.webp 900w, %s%s.webp 1500w" sizes="(max-width: 760px) 100vw, 760px" width="1500" height="1105" alt="Mặt bằng %s tòa Saphia, Sun Saphia Residence: %d căn" loading="lazy" decoding="async"></a><figcaption>Mặt bằng %s · bấm ảnh để xem cỡ lớn · thông số chính thức theo hợp đồng</figcaption></figure>'
                  '<div class="tgi"><span class="ey">%s</span><h3>%s</h3><div class="tgm">%s</div><ul class="ck">%s</ul>'
                  '<button type="button" class="btn sm" data-pop data-interest="Mặt bằng – căn %s còn trống">Nhận căn còn trống %s</button></div></div>') % (
             '' if i == 0 else ' off', k, I, k, I, k, I, k, I, k, n, tot, n, n, sub,
-            ''.join('<div><b>%d</b><span>%s</span></div>' % (c, t) for t, c in mix), ''.join('<li>%s</li>' % x for x in pts), n.lower(), n.lower())
+            ''.join('<div><b>%d</b><span>%s</span></div>' % (c, t) for t, c in mix), ''.join('<li>%s</li>' % x for x in pts), n.replace('Tầng', 'tầng'), n.replace('Tầng', 'tầng'))
     return ('<div class="tgv"><div class="tgt" role="tablist">' + tabs + '</div>' + pans + '</div>'
             '<script>(function(){var r=document.currentScript.previousElementSibling;r.addEventListener("click",function(e){var b=e.target.closest("[data-tg]");if(!b)return;'
             'r.querySelectorAll("[data-tg]").forEach(function(x){var on=x===b;x.classList.toggle("on",on);x.setAttribute("aria-selected",on)});'
             'r.querySelectorAll("[data-tp]").forEach(function(p){p.classList.toggle("off",p.getAttribute("data-tp")!==b.getAttribute("data-tg"))})})})();</script>'
-            '<p class="src" style="margin-top:10px">Tổng 5 loại tầng: 12 + 28 + 25 × 28 + 26 + 16 = <b>782 căn</b>. Mặt bằng do đại lý TATILAND phát hành theo tài liệu chủ đầu tư; diện tích thông thủy/tim tường từng căn ghi trên bản vẽ.</p>')
+            '<p class="src" style="margin-top:10px">Tổng 5 loại tầng: 12 + 28 + 25 × 28 + 26 + 16 = <b>782 căn</b>. Mặt bằng theo tài liệu bán hàng của dự án; diện tích thông thủy/tim tường từng căn ghi trên bản vẽ.</p>')
 
 def mat_bang():
     hero, cld = sub_hero('/mat-bang', 'Mặt bằng', 'Mặt bằng Sun Saphia Residence – <b>chọn căn</b> tầng 3A–28',
