@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.37** + plugin Hoàng Hiệp CRM **2.20.83**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.38** + plugin Hoàng Hiệp CRM **2.20.84**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,14 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.84, giao diện 2.15.38: chủ đầu tư theo khu vực
+
+- Trang mới /chu-dau-tu/dat-nen-dien-ban/: chủ đầu tư đất nền Điện Bàn (Quảng Nam cũ) – Đất Quảng, Bách Đạt An, GAIA, Regal Group, Vinaconex 25, Cấp thoát nước Quảng Nam, 501 – 545 – kèm dự án và tình trạng.
+- Trang mới /chu-dau-tu/phia-bac-da-nang/: chủ đầu tư phía Bắc (Liên Chiểu – Hải Vân) – Vingroup (Vinhomes Hải Vân Bay, Làng Vân), SDN.
+- Thêm 3 hồ sơ: Vinaconex 25, Cấp thoát nước Quảng Nam, Công ty 501 – 545 (tổng 34 chủ đầu tư).
+- Menu Dự án → Chủ đầu tư có thêm 2 mục khu vực trên.
+- Khu đô thị 1A – 1B Điện Ngọc: sửa tên chủ đầu tư khu 1B thành Công ty CP Xây dựng công trình 545.
 
 ## Có gì mới – giao diện 2.15.37: menu "Chủ đầu tư"
 

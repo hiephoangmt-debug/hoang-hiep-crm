@@ -31,6 +31,7 @@ function hh_cdt_developer_fixes() {
 		'fusion-resort-villas-da-nang'    => 'Công ty TNHH Khách sạn và Biệt thự Nam Phát (Lodgis Hospitality – Warburg Pincus, VinaCapital)',
 		'hyatt-regency-danang-residences' => 'Indochina Land (Indochina Capital); Hyatt quản lý vận hành',
 		'furama-villas-da-nang'           => 'Công ty CP Ariyana (Sovico Holdings)',
+		'khu-do-thi-1a-1b-dien-ngoc'      => 'CTCP ĐT&XD 501 (khu 1A), Công ty CP Xây dựng công trình 545 (khu 1B)',
 	);
 }
 
