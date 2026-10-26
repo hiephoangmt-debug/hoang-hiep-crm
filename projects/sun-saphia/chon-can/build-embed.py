@@ -24,7 +24,7 @@ js = r'''/* Sun Saphia – Chọn căn theo view (mặt bằng tầng theo tỷ 
     wrap.innerHTML = '<div style="max-width:1180px;margin:0 auto;padding:0 12px;font-family:inherit">'
       + '<div style="color:#E8460F;font-size:12px;letter-spacing:.14em;font-weight:800;text-transform:uppercase">Chọn căn theo view</div>'
       + '<h2 style="color:#0A2540;font-size:24px;line-height:1.25;margin:6px 0 6px;font-weight:800">Bấm vào từng căn trên mặt bằng tầng: xem 3D, nắng theo giờ và view thật</h2>'
-      + '<p style="color:#41505f;font-size:14px;line-height:1.5;margin:0 0 12px">Mặt bằng tầng điển hình 3A–28 vẽ theo tỷ lệ, có hệ cửa kính và ban công. Lọc căn hướng biển, sông Hàn, Sơn Trà hoặc đô thị.</p>'
+      + '<p style="color:#41505f;font-size:14px;line-height:1.5;margin:0 0 12px">Mặt bằng từng tầng 2 → 30 theo bản vẽ chủ đầu tư, có hệ cửa kính và ban công. Lọc căn hướng biển, sông Hàn, Sơn Trà hoặc đô thị.</p>'
       + '<div id="sscc-box" style="position:relative;width:100%;height:1080px;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 8px 24px rgba(10,37,64,.10)">'
       + '<button type="button" id="sscc-go" style="position:absolute;inset:0;margin:auto;width:230px;height:52px;border:0;border-radius:26px;background:#FF6A2B;color:#fff;font-weight:800;font-size:16px;cursor:pointer">▶ Mở công cụ chọn căn</button>'
       + '</div></div>';
