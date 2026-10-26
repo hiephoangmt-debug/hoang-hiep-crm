@@ -573,7 +573,7 @@ function partM(g){
   return mmul(P,mmul([wid/o.W2,0,0,dep/o.D2,0,0],o.m));
 }
 // vẽ tầng 30 ở tỷ lệ k (px/m); fx, fy: đổi toạ độ (u,v) → px; ia: có nhóm bấm được
-function svg30(fx,fy,k,ia,sc){
+function svg30(fx,fy,k,ia,sc,noLbl){
   var o=[], bp=roundPathK(OUT30,ROUND30,fx,fy,k);
   o.push('<defs><clipPath id="b30"><path d="'+bp+'"/></clipPath></defs><path d="'+bp+'" fill="#e9edf1"/><g clip-path="url(#b30)">');
   CORR30.forEach(function(c){ o.push('<rect x="'+fx(c[0])+'" y="'+fy(c[1])+'" width="'+(c[2]-c[0])*k+'" height="'+(c[3]-c[1])*k+'" fill="#f4f6f8"/>'); });
@@ -596,9 +596,10 @@ function svg30(fx,fy,k,ia,sc){
     // căn 3012 (theo CĐT): tường giữa sảnh vào và phòng khách chỉ chạy tới hết WC, phía Đông thông ra phòng khách, không có cửa ở đây
     if(r[0]==='12') g+='<rect x="'+fx(50.6)+'" y="'+fy(10.45)+'" width="'+2.9*k+'" height="'+1.15*k+'" fill="'+TINT[t]+'"/><rect x="'+fx(53.4)+'" y="'+fy(10.45)+'" width="'+.95*k+'" height="'+.5*k+'" fill="'+TINT[t]+'"/>';
     var cx=fx((box[0]+box[2])/2), cy=fy((box[1]+box[3])/2), bw=k*2.9, bh=k*1.75;
+    if(!noLbl){
     g+='<rect x="'+(cx-bw/2)+'" y="'+(cy-bh/2)+'" width="'+bw+'" height="'+bh+'" rx="'+k*.3+'" fill="#fff" fill-opacity=".9" stroke="'+COL[t]+'" stroke-width="'+k*.1+'"/>';
-    g+='<text x="'+cx+'" y="'+(cy+k*.02)+'" font-size="'+k*.78+'" font-weight="800" fill="#0A2540" text-anchor="middle">30'+r[0]+'</text><text x="'+cx+'" y="'+(cy+k*.66)+'" font-size="'+k*.46+'" font-weight="700" fill="#0A2540" text-anchor="middle">'+NAME[t]+' · '+m2(A30[r[0]][0])+'m²</text></g>';
-    o.push(g); });
+    g+='<text x="'+cx+'" y="'+(cy+k*.02)+'" font-size="'+k*.78+'" font-weight="800" fill="#0A2540" text-anchor="middle">30'+r[0]+'</text><text x="'+cx+'" y="'+(cy+k*.66)+'" font-size="'+k*.46+'" font-weight="700" fill="#0A2540" text-anchor="middle">'+NAME[t]+' · '+m2(A30[r[0]][0])+'m²</text>'; }
+    g+='</g>'; o.push(g); });
   o.push('</g><path d="'+bp+'" fill="none" stroke="#0A2540" stroke-width="'+Math.max(3,k*.35)+'" stroke-linejoin="round" style="pointer-events:none"/>');
   return o.join('');
 }
@@ -646,8 +647,8 @@ function unitPlan30(r){ var b=box30(r), k=44, pad=1.2, W=(b[1]-b[0]+2*pad)*k, H=
   var o=['<svg viewBox="0 0 '+Math.round(W)+' '+Math.round(H+60)+'" xmlns="http://www.w3.org/2000/svg" font-family="Be Vietnam Pro,Arial,sans-serif">'];
   o.push('<rect width="'+W+'" height="22" fill="#cfe8f5"/><text x="'+W/2+'" y="15" font-size="11" font-weight="800" fill="#12355c" text-anchor="middle">↑ Biển Đông · Trường Sa</text>');
   o.push('<defs><clipPath id="uc30"><rect x="'+fx(b[0]-.25)+'" y="'+fy(b[2]-.25)+'" width="'+(b[1]-b[0]+.5)*k+'" height="'+(b[3]-b[2]+.5)*k+'"/></clipPath></defs>');
-  o.push('<g opacity=".22">'+svg30(fx,fy,k,false,1).replace(/id="b30"/g,'id="b30u"').replace(/url\(#b30\)/g,'url(#b30u)')+'</g>');
-  o.push('<g clip-path="url(#uc30)">'+svg30(fx,fy,k,false,1).replace(/id="b30"/g,'id="b30v"').replace(/url\(#b30\)/g,'url(#b30v)')+'</g>');
+  o.push('<g opacity=".22">'+svg30(fx,fy,k,false,1,1).replace(/id="b30"/g,'id="b30u"').replace(/url\(#b30\)/g,'url(#b30u)')+'</g>');
+  o.push('<g clip-path="url(#uc30)">'+svg30(fx,fy,k,false,1,1).replace(/id="b30"/g,'id="b30v"').replace(/url\(#b30\)/g,'url(#b30v)')+'</g>');
   var dc='#E8460F', y0=fy(b[3])+16, x0=fx(b[0])-14;
   o.push('<g stroke="'+dc+'"><line x1="'+fx(b[0])+'" y1="'+y0+'" x2="'+fx(b[1])+'" y2="'+y0+'"/><line x1="'+x0+'" y1="'+fy(b[2])+'" x2="'+x0+'" y2="'+fy(b[3])+'"/></g>');
   o.push('<text x="'+(fx(b[0])+fx(b[1]))/2+'" y="'+(y0+14)+'" font-size="11" font-weight="800" fill="'+dc+'" text-anchor="middle">'+m2(+(b[1]-b[0]).toFixed(1))+' m</text>');
