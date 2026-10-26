@@ -21,7 +21,7 @@ OVERVIEW = [
     ('Cơ cấu sản phẩm', 'Studio 513 căn (30–31 m²) · 1BR+ 108 căn (50–51 m²) · 2BR 133 căn (60–70 m²)'),
     ('Chiều cao căn hộ', '3,5 m'),
     ('Tiêu chuẩn bàn giao', 'Hoàn thiện cơ bản'),
-    ('Pháp lý', 'GCN đăng ký đầu tư mã dự án 2572746483, chứng nhận lần đầu 17/09/2026 · thời hạn dự án 50 năm · công trình cấp I, niên hạn 100 năm'),
+    ('Pháp lý', 'GCN đăng ký đầu tư mã dự án 2572746483, chứng nhận lần đầu 17/09/2026 · công trình cấp I, niên hạn 100 năm'),
     ('Ngân hàng hỗ trợ', 'Vietcombank · BIDV · NCB'),
     ('Dự kiến mở bán', 'Cuối tháng 11/2026'),
     ('Dự kiến bàn giao', 'Tháng 11/2028'),
@@ -151,19 +151,19 @@ def banks():
 def legal_box():
     return ('<div class="g2 eq"><div class="txt">'
             '<h3>Giấy chứng nhận đăng ký đầu tư</h3><p>Mã dự án <b>2572746483</b>, do Sở Tài chính TP Đà Nẵng cấp, chứng nhận lần đầu ngày <b>17/09/2026</b>.</p>'
-            '<h3>Thời hạn dự án 50 năm</h3><p>Thời hạn hoạt động dự án 50 năm kể từ ngày 17/09/2026. Công trình cấp I, niên hạn sử dụng 100 năm.</p>'
+            '<h3>Thời hạn &amp; quyền sở hữu</h3><p>Ghi trong GCN đăng ký đầu tư cấp 17/09/2026; công trình cấp I, niên hạn sử dụng 100 năm. Đại lý giải thích chi tiết quyền lợi khi ký hợp đồng.</p>'
             '<h3>Ngân hàng hỗ trợ</h3>' + banks() + ''
             '<p class="note" style="margin-top:10px">Tỷ lệ vay, thời gian hỗ trợ lãi suất theo chính sách bán hàng công bố khi mở bán.</p></div>'
             '<div class="g2 gcn" style="gap:12px">%s%s</div></div>') % (
         fig('gcn-dau-tu-2', 'Giấy chứng nhận đăng ký đầu tư dự án Sun Saphia Residence, mã dự án 2572746483 (đã làm mờ)', 'Trang 1 GCN đăng ký đầu tư (làm mờ)'),
-        fig('gcn-dau-tu-1', 'Trích GCN đăng ký đầu tư: thời hạn hoạt động dự án 50 năm kể từ ngày cấp (đã làm mờ)', 'Mục thời hạn hoạt động 50 năm'))
+        fig('gcn-dau-tu-1', 'Trích GCN đăng ký đầu tư Sun Saphia Residence (đã làm mờ)', 'Trích GCN đăng ký đầu tư'))
 
 def nq278():
     return ('<div class="card"><span class="n">CHÍNH SÁCH MỚI</span><h3 class="oc">Nghị quyết 278/NQ-CP (18/9/2026)</h3>'
             '<ul class="ck"><li>Xác định thời hạn sử dụng chung cư căn cứ theo niên hạn công trình và hồ sơ thiết kế</li>'
             '<li>Làm rõ quyền và nghĩa vụ khi nhà chung cư hết thời hạn sử dụng</li>'
             '<li>Giao cơ quan chức năng bảo đảm quyền lợi người dân, tách bạch quyền sở hữu căn hộ và quyền sử dụng đất</li></ul>'
-            '<p><b>Ý nghĩa:</b> giá trị căn hộ 50 năm đang được định hình lại, thu hẹp khoảng cách giữa sản phẩm thương mại dịch vụ 50 năm và căn hộ sở hữu lâu dài.</p></div>')
+            '<p><b>Ý nghĩa:</b> giá trị căn hộ có thời hạn đang được định hình lại, thu hẹp khoảng cách với căn hộ sở hữu lâu dài.</p></div>')
 
 def why_cards():
     it = [('01', 'Chính sách giá và bán hàng tốt nhất', 'Chính sách bán hàng và chính sách giá tốt nhất từ chủ đầu tư dành cho giai đoạn đầu.'),
@@ -224,7 +224,7 @@ def related(cur):
           ('/vi-sao-sun-group', 'Vì sao căn hộ mặt biển', 'Vì sao Sun Group chọn mặt biển Đà Nẵng'),
           ('/bang-gia', 'Giá Sun Saphia Residence', 'So sánh giá căn hộ mặt biển, vay ngân hàng'),
           ('/mat-bang', 'Mặt bằng & chọn căn', 'Layout tầng 3A–28, Studio, 1BR+, 2BR'),
-          ('/phap-ly', 'Pháp lý & tiến độ', 'GCN đầu tư, thời hạn 50 năm, mốc mở bán'),
+          ('/phap-ly', 'Pháp lý & tiến độ', 'GCN đầu tư, quyền sở hữu, mốc mở bán'),
           ('/cho-thue', 'Cho thuê & dòng tiền', 'Giá thuê, lấp đầy, nhóm khách thuê'),
           ('/tinh-dong-tien', 'Bảng tính dòng tiền', 'Kéo thanh tính tiền về túi theo căn'),
           ('/', 'Tổng quan dự án', 'Vị trí, tầm nhìn, tiện ích, chân dung khách hàng')]
@@ -242,7 +242,7 @@ def cta_block(label, title='Có bảng giá là anh/chị <b>nhận ngay</b>', s
 
 def hero_stats():
     return ('<div class="stats"><div><b>30 tầng</b><span>114 m · 2 hầm</span></div><div><b>782 căn</b><span>Studio · 1BR+ · 2BR</span></div>'
-            '<div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>50 năm</b><span>thời hạn dự án</span></div></div>')
+            '<div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>3,5 m</b><span>trần cao mỗi căn</span></div></div>')
 
 def hero_perks():
     return hero_stats() + ('<div class="perk"><b>Đăng ký sớm – nhận trước:</b><span>Bảng giá gốc</span><span>Mặt bằng căn trống</span>'

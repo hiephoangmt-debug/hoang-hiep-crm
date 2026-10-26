@@ -12,8 +12,8 @@ TEL = '0904567009'
 TEL_S = '0904 567 009'
 ZALO = 'https://zalo.me/0904567009'
 UPDATED = '24/10/2026'
-CC_SHA = 'c361b624026a585531075b74aefde75ca4cfc756'
-D4_SHA = 'e6e0970dcea56a7da0ceeddfd7fbedcc5f870a1c'
+CC_SHA = '79e9fad50d4250d512aa23783767a3b30669b846'
+D4_SHA = 'db77ab0f3df33e3f284972356c99e6ff658ca5d7'
 SLOGAN = '<p class="slogan">Trước mặt là <b>Biển</b> · Sau lưng là <b>Sông</b> · Bên cạnh là <b>Núi</b></p>'
 
 def esc(s):

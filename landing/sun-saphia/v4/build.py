@@ -65,11 +65,11 @@ def hero_home():
             '<h1 class="dp">Sun Saphia Residence – căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng</h1>'
             + SLOGAN
             + author() +
-            '<p class="lead just">Tòa tháp 30 tầng (114 m) trên cung đường tỷ đô Võ Nguyên Giáp – Trường Sa, 782 căn Studio, 1BR+, 2BR, trần cao 3,5 m, pháp lý 50 năm, '
+            '<p class="lead just">Tòa tháp 30 tầng (114 m) trên cung đường tỷ đô Võ Nguyên Giáp – Trường Sa, 782 căn Studio, 1BR+, 2BR, trần cao 3,5 m, pháp lý minh bạch, '
             'Vietcombank – BIDV – NCB hỗ trợ vay. Bài viết tổng hợp toàn bộ thông tin chủ đầu tư công bố tại sự kiện Kick-off '
             '"Đón ánh dương – Giao hòa nhịp sống" ngày 23/10/2026.</p>'
             '<div class="stats"><div><b>30 tầng</b><span>114 m · 2 hầm</span></div><div><b>782 căn</b><span>Studio · 1BR+ · 2BR</span></div>'
-            '<div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>50 năm</b><span>thời hạn dự án</span></div></div>'
+            '<div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>3,5 m</b><span>trần cao mỗi căn</span></div></div>'
             '</div>'
             '<div class="hr">%s<div class="pic pic-home">%s<span>Phối cảnh minh họa</span></div></div></div></div></section>') % (
         SK, SK, form('dau', 'Web – trang chủ đầu trang', h='h2'),
@@ -89,7 +89,7 @@ def qh4(num='↗', alt=True):
     return (('<section class="sec%s"><div class="wrap">' % (' alt' if alt else '')) + sh(num, 'Động lực tăng giá', '4 quy hoạch <b>bao quanh dự án</b>', 'o') +
           '<div class="g2 qh4" style="align-items:stretch;grid-template-columns:1.15fr 1fr"><style>.qh4 .card p{text-align:left}.qh4>div{display:flex;flex-direction:column}.qh4>div:first-of-type>p:last-child{margin-top:auto!important;padding-top:14px}.qh4 .qhcta{margin-top:auto;padding-top:14px}.qh4 .qhcta .btn{display:block;text-align:center}@media(max-width:760px){.qh4{grid-template-columns:1fr!important}}</style><div><figure class="fg" style="margin:0"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 600px" width="1600" height="1180" '
           'alt="Sơ đồ 4 quy hoạch quanh Sun Saphia: công viên 2,45 ha, trục biển mở rộng, ga đường sắt đô thị, công viên Ngũ Hành Sơn" loading="lazy" decoding="async"><figcaption>Sơ đồ quy hoạch quanh Sun Saphia (minh họa)</figcaption></figure>'
-          '<div class="card" style="margin-top:14px;padding:18px 20px;background:#FFF6E5;border:2px solid #f5d79a"><b>⏳ Đồng hồ 50 năm vừa bắt đầu</b><p style="margin:6px 0 0">Thời hạn tính từ 17/09/2026 – nhận nhà 2028 vẫn còn ~48 năm, dài hơn nhiều dự án 50 năm khác. <a class="lk" href="{M}/phap-ly#thoi-han-moi">Xem vì sao →</a></p></div>'
+          ''
           '<div class="card" style="padding:16px 18px;margin-top:14px;background:#EEF4FB"><b>💡 Mua trước khi hạ tầng hoàn thiện</b><p style="margin:6px 0 0">Giá thường tăng theo từng mốc: công viên xong, đường mở rộng, ga tàu khởi công. Người vào sớm hưởng trọn phần tăng này.</p></div>'
           '<p style="margin-top:14px"><a class="lk" href="{M}/quy-hoach">Xem bản vẽ, hồ sơ và link nguồn từng dự án →</a></p>'
           '</div><div><div class="g2" style="gap:12px">'
@@ -135,7 +135,7 @@ def home():
     b += su_kien('HOME')
     b += tldr('Sun Saphia Residence', [('Là gì', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, do Sun Property phát triển'), ('Vị trí', 'Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, phường Ngũ Hành Sơn; ra biển Sơn Thủy ~400 m'),
         ('Quy mô', '1 tòa 30 tầng (114 m), 2 hầm, 782 căn trên 3.720,1 m²'), ('Loại căn', 'Studio 30–31 m² (513) · 1BR+ 50–51 m² (108) · 2BR 60–70 m² (133), trần 3,5 m'),
-        ('Pháp lý', 'GCN đầu tư 2572746483 (17/09/2026), thời hạn 50 năm, công trình cấp I niên hạn 100 năm'), ('Ngân hàng', 'Vietcombank, BIDV, NCB hỗ trợ vay'),
+        ('Pháp lý', 'GCN đầu tư 2572746483 (17/09/2026), công trình cấp I niên hạn 100 năm'), ('Ngân hàng', 'Vietcombank, BIDV, NCB hỗ trợ vay'),
         ('Mở bán · bàn giao', 'Ra mắt 01/11/2026 (Hilton Đà Nẵng) · bàn giao 11/2028'), ('Giá bán', 'Chưa công bố; đăng ký để nhận bảng giá gốc qua Zalo 0904 567 009')])
     b += '<section class="sec" style="padding-top:0"><div class="wrap">' + daily() + '<div class="toc" style="margin-top:26px">' + ''.join('<a href="#%s">%s</a>' % t for t in toc) + '</div></div></section>'
     # Thời điểm
@@ -244,7 +244,7 @@ def home():
     b = ins(b, '<section class="sec alt"><div class="wrap">' + sh('♥', 'Giá trị', 'Bốn giá trị <b>cộng hưởng</b> trong một sản phẩm', 'n'), band('Nhận bảng tính dòng tiền theo căn', 'Tính theo giá thật khi có bảng giá: giá thuê, lấp đầy, lợi nhuận từng căn.', 'Nhận bảng tính', 'Trang chủ – bảng tính dòng tiền', ('/tinh-dong-tien', 'Mở bảng tính dòng tiền')))
     b += cta_block('Web – trang chủ cuối trang')
     title = 'Sun Saphia Residence Đà Nẵng: Giá, Mặt bằng, Pháp lý 2026'
-    desc = 'Sun Saphia Residence – căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: 30 tầng, 782 căn, pháp lý 50 năm, Vietcombank, BIDV, NCB hỗ trợ vay. Ra mắt, nhận booking 01/11/2026.'
+    desc = 'Sun Saphia Residence – căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: 30 tầng, 782 căn, pháp lý minh bạch, Vietcombank, BIDV, NCB hỗ trợ vay. Ra mắt, nhận booking 01/11/2026.'
     lds = [article_ld(title, desc, MAIN + '/'), fld]
     kw = 'sun saphia residence, sun saphia đà nẵng, căn hộ sun saphia, giá sun saphia residence, mặt bằng sun saphia, pháp lý sun saphia, căn hộ mặt biển đà nẵng, căn hộ sun group đà nẵng'
     return page('/', title, desc, kw, b, lds, '/', tools=True)
@@ -378,8 +378,8 @@ def mat_bang():
                 b, [article_ld(title, desc, MAIN + '/mat-bang'), cld, fld], '/mat-bang', tools=True)
 
 def phap_ly():
-    hero, cld = sub_hero('/phap-ly', 'Pháp lý', 'Pháp lý Sun Saphia Residence – <b>thời hạn 50 năm</b>, tiến độ',
-                         'Sun Saphia Residence có Giấy chứng nhận đăng ký đầu tư mã dự án 2572746483, chứng nhận lần đầu ngày 17/09/2026; thời hạn dự án 50 năm, công trình cấp I niên hạn 100 năm. Trang này giải thích các mốc pháp lý, ý nghĩa của Nghị quyết 278/NQ-CP và tiến độ mở bán – bàn giao.',
+    hero, cld = sub_hero('/phap-ly', 'Pháp lý', 'Pháp lý Sun Saphia Residence – <b>giấy tờ</b>, tiến độ',
+                         'Sun Saphia Residence có Giấy chứng nhận đăng ký đầu tư mã dự án 2572746483, chứng nhận lần đầu ngày 17/09/2026; công trình cấp I niên hạn 100 năm. Trang này giải thích các mốc pháp lý, ý nghĩa của Nghị quyết 278/NQ-CP và tiến độ mở bán – bàn giao.',
                          'thap-dem-resort', 'Sun Saphia Residence về đêm trên trục biển Võ Nguyên Giáp – Trường Sa', 'Web – pháp lý đầu trang')
     fq, fld = faq([
         ('Sun Saphia Residence sở hữu bao lâu?', 'Thời hạn dự án 50 năm kể từ ngày 17/09/2026 theo GCN đăng ký đầu tư. Công trình cấp I, niên hạn sử dụng 100 năm. Quyền lợi cụ thể của người mua ghi trong Hợp đồng mua bán.'),
@@ -391,39 +391,21 @@ def phap_ly():
         ('Khi nào được ký hợp đồng mua bán?', 'Theo quy trình và chính sách chủ đầu tư công bố khi mở bán (nhận booking từ sự kiện ra mắt 01/11/2026). Đại lý chính thức sẽ hướng dẫn từng bước giữ chỗ – đặt cọc – ký hợp đồng.'),
         ('Mua qua TATILAND có an toàn không?', 'TATILAND được Sun Property chứng nhận là đại lý phân phối chính thức ngày 23/10/2026; giao dịch theo đúng quy trình, hợp đồng của chủ đầu tư.')])
     b = hero
-    b += tldr('pháp lý Sun Saphia Residence', [('GCN đăng ký đầu tư', 'Mã dự án 2572746483, Sở Tài chính TP Đà Nẵng cấp, lần đầu 17/09/2026'), ('Thời hạn', '50 năm kể từ 17/09/2026 – vừa bắt đầu, còn ~48 năm khi nhận nhà 11/2028'),
+    b += tldr('pháp lý Sun Saphia Residence', [('GCN đăng ký đầu tư', 'Mã dự án 2572746483, Sở Tài chính TP Đà Nẵng cấp, lần đầu 17/09/2026'), ('Thời hạn sở hữu', 'Theo GCN đầu tư và Hợp đồng mua bán – đại lý giải thích chi tiết kèm văn bản'),
         ('Công trình', 'Cấp I, niên hạn sử dụng 100 năm'), ('Chính sách mới', 'Nghị quyết 278/NQ-CP (18/9/2026) xác định thời hạn chung cư theo niên hạn công trình'),
         ('Tiến độ', 'Ra mắt, nhận booking 01/11/2026 · bàn giao 11/2028'), ('Mua ở đâu', 'Đại lý phân phối chính thức TATILAND (Sun Property chứng nhận 23/10/2026)')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Giấy tờ dự án', 'Pháp lý <b>đã có</b>', 'o') + legal_box() + '</div></section>')
-    b += ('<section class="sec"><div class="wrap">' + sh('2', 'Căn hộ 50 năm', 'Giá trị căn hộ 50 năm <b>đang được định hình lại</b>', 'n') +
-          '<div class="g2" style="align-items:start"><div class="txt"><p>Căn hộ trong dự án có thời hạn 50 năm thường bị so sánh thiệt thòi với căn hộ sở hữu lâu dài. Nghị quyết 278/NQ-CP ngày 18/9/2026 của Chính phủ đang thay đổi cách nhìn này, '
+    b += ('<section class="sec"><div class="wrap">' + sh('2', 'Quyền sở hữu', 'Quyền lợi người mua <b>đang được làm rõ hơn</b>', 'n') +
+          '<div class="g2" style="align-items:start"><div class="txt"><p>Căn hộ trong dự án có thời hạn thường bị so sánh thiệt thòi với căn hộ sở hữu lâu dài. Nghị quyết 278/NQ-CP ngày 18/9/2026 của Chính phủ đang thay đổi cách nhìn này, '
           'khi thời hạn sử dụng chung cư được xác định theo niên hạn công trình và hồ sơ thiết kế.</p>'
           '<p>Với Sun Saphia Residence, công trình được xếp <b>cấp I, niên hạn sử dụng 100 năm</b>. Quyền lợi cụ thể của người mua khi hết thời hạn dự án sẽ theo quy định pháp luật và Hợp đồng mua bán; anh/chị nên đọc kỹ điều khoản này khi ký.</p>'
           '<h3>Khi ký Hợp đồng mua bán nên xem kỹ</h3><ul class="ck"><li>Điều khoản thời hạn sở hữu và quyền lợi khi hết hạn</li><li>Tiến độ thanh toán, bàn giao, phạt chậm bàn giao</li><li>Phí quản lý, quy định cho thuê căn hộ</li></ul>'
           '<p class="note">Nội dung mang tính giải thích chung, không thay thế tư vấn pháp lý.</p></div>' + nq278() + '</div></div></section>')
-    b += ('<section class="sec alt" id="thoi-han-moi"><div class="wrap">' + sh('3', 'Lợi thế thời hạn', 'Đồng hồ 50 năm <b>vừa mới bắt đầu</b>', 'y') +
-          '<div class="g2" style="align-items:stretch"><div class="txt just">'
-          '<p>Cùng là căn hộ 50 năm, nhưng <b>còn lại bao nhiêu năm</b> mới là điều quyết định giá trị. Thời hạn 50 năm của Sun Saphia Residence được tính từ <b>17/09/2026</b> theo Giấy chứng nhận đăng ký đầu tư – tức là vừa mới bắt đầu, kéo dài tới <b>09/2076</b>.</p>'
-          '<p>Nhiều dự án căn hộ 50 năm khác ven biển Đà Nẵng có thời hạn tính từ năm được giao đất, thường từ nhiều năm trước. Đồng hồ đã chạy 10–15 năm trước khi khách nhận nhà, nên người mua hôm nay chỉ còn khoảng 35–40 năm.</p>'
-          '<h3>Thời gian còn lại dài hơn nghĩa là gì?</h3><ul class="ck">'
-          '<li><b>Giữ giá tốt hơn</b>: căn hộ còn nhiều năm sử dụng thì giá bán lại cao hơn.</li>'
-          '<li><b>Vay ngân hàng dễ hơn</b>: thời hạn còn lại dài, ngân hàng dễ duyệt khoản vay dài hạn.</li>'
-          '<li><b>Thêm nhiều năm cho thuê</b>: mỗi năm còn lại là thêm một năm dòng tiền.</li>'
-          '<li><b>Bán lại dễ hơn</b>: người mua sau vẫn còn trên 40 năm nếu anh/chị bán sau 5–7 năm.</li></ul>'
-          '<div style="background:#fff;border:2px dashed #275286;border-radius:16px;padding:16px 20px;margin:18px 0 12px"><b style="color:#E96118">🔑 Khách hỏi “50 năm dự án nào cũng vậy?”</b>'
-          '<p style="margin:8px 0 0;font-style:italic">“Dạ khác ở chỗ tính từ khi nào ạ. Saphia tính từ 17/09/2026, hết hạn 09/2076 – nhận nhà vẫn còn khoảng 48 năm. Nhiều dự án khác tính từ năm giao đất cách đây 10–15 năm, mua bây giờ chỉ còn khoảng 34–38 năm.”</p></div>'
-          '<p class="note">Các dự án so sánh là ví dụ minh họa theo năm giao đất, không chỉ đích danh dự án nào. Thời hạn chính thức của từng căn theo Hợp đồng mua bán.</p></div>'
-          '<div class="hhr" style="position:static;height:100%"><div class="card" style="padding:22px"><span class="n">THỜI GIAN CÒN LẠI KHI NHẬN NHÀ</span><h3 class="oc" style="margin-bottom:14px">Cùng 50 năm – còn lại khác nhau</h3>'
-          + ''.join('<div style="margin:12px 0"><div style="display:flex;justify-content:space-between;font-size:14px;font-weight:600"><span>%s</span><span style="color:%s">%s</span></div>'
-                    '<div style="height:14px;border-radius:99px;background:#e6ecf4;overflow:hidden;margin-top:6px"><div style="height:100%%;width:%d%%;border-radius:99px;background:%s"></div></div></div>'
-                    % (t, c, v, w, c) for t, v, w, c in [
-                        ('Sun Saphia · từ 09/2026, nhận nhà 11/2028', '~48 năm', 96, '#E96118'),
-                        ('Dự án giao đất 2016 (minh họa)', '~38 năm', 76, '#7a8aa6'),
-                        ('Dự án giao đất 2012 (minh họa)', '~34 năm', 68, '#9aa7bd')]) +
-          '<p style="font-size:13px;color:#5b6b85;margin-top:10px">Tính tới thời điểm nhận nhà 11/2028 · thời hạn 50 năm theo GCN đầu tư/giao đất.</p>'
-          '<button type="button" class="btn sm" data-pop data-interest="Pháp lý – lợi thế thời hạn 50 năm" style="margin-top:8px">Nhận bản sao GCN đầu tư</button></div>'
-          '<div class="card" style="padding:22px;flex:1;display:flex;flex-direction:column;justify-content:space-between"><span class="n" style="display:block;margin-bottom:12px">MỐC THỜI GIAN 50 NĂM CỦA SAPHIA</span><div style="display:flex;gap:14px;position:relative;padding-bottom:10px"><span style="position:absolute;left:6px;top:20px;bottom:0;width:2px;background:#dbe3ee"></span><div style="flex:none;width:14px;height:14px;border-radius:50%;background:#E96118;margin-top:5px;box-shadow:0 0 0 4px #E9611822;position:relative"></div><div><b style="color:#E96118">17/09/2026</b> · <b>Bắt đầu tính 50 năm</b><div style="font-size:13.5px;color:#5b6b85;line-height:1.35">Theo GCN đăng ký đầu tư</div></div></div><div style="display:flex;gap:14px;position:relative;padding-bottom:10px"><span style="position:absolute;left:6px;top:20px;bottom:0;width:2px;background:#dbe3ee"></span><div style="flex:none;width:14px;height:14px;border-radius:50%;background:#275286;margin-top:5px;box-shadow:0 0 0 4px #27528622;position:relative"></div><div><b style="color:#275286">Cuối 11/2026</b> · <b>Dự kiến mở bán</b><div style="font-size:13.5px;color:#5b6b85;line-height:1.35">Còn ~50 năm</div></div></div><div style="display:flex;gap:14px;position:relative;padding-bottom:10px"><span style="position:absolute;left:6px;top:20px;bottom:0;width:2px;background:#dbe3ee"></span><div style="flex:none;width:14px;height:14px;border-radius:50%;background:#275286;margin-top:5px;box-shadow:0 0 0 4px #27528622;position:relative"></div><div><b style="color:#275286">11/2028</b> · <b>Nhận nhà</b><div style="font-size:13.5px;color:#5b6b85;line-height:1.35">Còn ~48 năm để ở, cho thuê</div></div></div><div style="display:flex;gap:14px;position:relative;padding-bottom:10px"><span style="position:absolute;left:6px;top:20px;bottom:0;width:2px;background:#dbe3ee"></span><div style="flex:none;width:14px;height:14px;border-radius:50%;background:#275286;margin-top:5px;box-shadow:0 0 0 4px #27528622;position:relative"></div><div><b style="color:#275286">2033–2035</b> · <b>Nếu bán lại sau 5–7 năm</b><div style="font-size:13.5px;color:#5b6b85;line-height:1.35">Người mua sau vẫn còn ~41–43 năm</div></div></div><div style="display:flex;gap:14px;position:relative;padding-bottom:0"><div style="flex:none;width:14px;height:14px;border-radius:50%;background:#2f9e6a;margin-top:5px;box-shadow:0 0 0 4px #2f9e6a22;position:relative"></div><div><b style="color:#2f9e6a">09/2076</b> · <b>Hết thời hạn dự án</b><div style="font-size:13.5px;color:#5b6b85;line-height:1.35">Được xem xét gia hạn theo Luật Đất đai 2024</div></div></div></div></div></div></div></section>')
-    b += ('<section class="sec" id="het-han"><div class="wrap">' + sh('4', 'Hết hạn thì sao?', 'Hết 50 năm, hết niên hạn – <b>quyền lợi người mua</b>', 'o') +
+    b += ('<section class="sec alt" id="thoi-han-moi"><div class="wrap"><div class="card" style="padding:20px 22px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:space-between">'
+          '<div style="flex:1;min-width:240px"><b style="color:var(--nv);font-size:18px">🔑 Thời hạn sở hữu &amp; lợi thế riêng của Saphia</b>'
+          '<p style="margin:6px 0 0">Saphia có một lợi thế về thời hạn mà nhiều khách chưa biết. Anh Hiệp giải thích trực tiếp, kèm bản chụp GCN đầu tư để anh/chị tự đối chiếu.</p></div>'
+          '<button type="button" class="btn sm" data-pop data-interest="Pháp lý – nghe giải thích thời hạn">Nghe giải thích 5 phút</button></div></div></section>')
+    b += ('<section class="sec" id="het-han"><div class="wrap">' + sh('4', 'Hết hạn thì sao?', 'Hết thời hạn, hết niên hạn – <b>quyền lợi người mua</b>', 'o') +
           '<div class="g2" style="align-items:start"><div class="txt just">'
           '<p>Nhiều người nhầm hai mốc thời gian. Với Sun Saphia Residence:</p>'
           + tbl(['Mốc', 'Sun Saphia', 'Nghĩa là gì'], [['Thời hạn dự án', '50 năm từ 17/09/2026', 'Thời hạn sử dụng đất của dự án theo GCN đầu tư'], ['Niên hạn công trình', '100 năm (công trình cấp I)', 'Tuổi thọ thiết kế của toà nhà']]) +
@@ -432,14 +414,14 @@ def phap_ly():
           '<ul class="ck"><li><b>Còn an toàn</b>: tiếp tục sử dụng theo thời hạn ghi trong kết luận kiểm định.</li>'
           '<li><b>Không còn an toàn</b> (các trường hợp tại Điều 59): phá dỡ để cải tạo, xây dựng lại; chủ sở hữu được bồi thường, tái định cư hoặc nhận căn hộ mới, giá trị tương ứng theo phương án được duyệt.</li>'
           '<li>Luật hiện hành <b>không quy định tự động mất quyền sở hữu</b> khi hết niên hạn.</li></ul>'
-          '<h3>Khi hết thời hạn dự án 50 năm</h3>'
+          '<h3>Khi hết thời hạn dự án</h3>'
           '<p>Luật Đất đai 2024 (Luật số 31/2024/QH15) cho phép người sử dụng đất có thời hạn <b>được xem xét gia hạn</b> khi có nhu cầu, sử dụng đúng mục đích và chấp hành pháp luật. Cách gia hạn và nghĩa vụ tài chính đối với từng căn hộ theo quy định tại thời điểm đó và điều khoản trong Hợp đồng mua bán.</p>'
           '<p class="note">Nội dung mang tính giải thích chung, không thay thế tư vấn pháp lý. Đọc thêm: '
           '<a href="https://thuvienphapluat.vn/chinh-sach-phap-luat-moi/vn/ho-tro-phap-luat/tu-van-phap-luat/57443/thoi-han-su-dung-nha-chung-cu-theo-luat-nha-o-2023" target="_blank" rel="noopener">Thời hạn sử dụng nhà chung cư theo Luật Nhà ở 2023 (Thư viện Pháp luật)</a> · '
           '<a href="https://dantri.com.vn/bat-dong-san/luat-su-chung-cu-co-nien-han-khong-dong-nghia-het-quyen-khi-het-han-20260805121957957.htm" target="_blank" rel="noopener">Chung cư có niên hạn không đồng nghĩa “hết quyền” khi hết hạn (Dân trí)</a></p>'
           '</div><div class="hhr"><div class="card" style="padding:22px"><span class="n">KHI KÝ HỢP ĐỒNG</span><h3 class="oc">3 điều khoản cần đọc kỹ</h3>'
-          '<ul class="ck" style="margin-top:10px"><li>Thời hạn sở hữu căn hộ và quyền gia hạn khi hết 50 năm</li><li>Trách nhiệm của chủ đầu tư, ban quản trị khi kiểm định, cải tạo toà nhà</li><li>Nghĩa vụ tài chính phát sinh (nếu có) khi gia hạn</li></ul>'
-          '<button type="button" class="btn sm" data-pop data-interest="Pháp lý – hỏi về hết hạn 50 năm" style="margin-top:12px">Nhận giải thích từ đại lý</button></div><div class="hfl"><span class="n">QUY TRÌNH KHI HẾT NIÊN HẠN</span><div class="fs">🏢 Hết niên hạn theo hồ sơ thiết kế<small>Điều 58 Luật Nhà ở 2023</small></div><div class="fa">▼</div><div class="fs">🔍 Kiểm định chất lượng toà nhà<small>Cơ quan có thẩm quyền tổ chức</small></div><div class="fa">▼</div><div class="fb"><div class="fs ok"><b>✅ Còn an toàn</b>Tiếp tục sử dụng</div><div class="fs no"><b>⚠️ Không an toàn</b>Cải tạo, xây lại – bồi thường, tái định cư hoặc căn mới<small>Điều 59</small></div></div><div class="fs gr"><b>50 năm thời hạn đất</b>Hết hạn được xem xét gia hạn<small>Luật Đất đai 2024</small></div></div></div></div></div></section>')
+          '<ul class="ck" style="margin-top:10px"><li>Thời hạn sở hữu căn hộ và quyền gia hạn khi hết hạn</li><li>Trách nhiệm của chủ đầu tư, ban quản trị khi kiểm định, cải tạo toà nhà</li><li>Nghĩa vụ tài chính phát sinh (nếu có) khi gia hạn</li></ul>'
+          '<button type="button" class="btn sm" data-pop data-interest="Pháp lý – hỏi về hết hạn" style="margin-top:12px">Nhận giải thích từ đại lý</button></div><div class="hfl"><span class="n">QUY TRÌNH KHI HẾT NIÊN HẠN</span><div class="fs">🏢 Hết niên hạn theo hồ sơ thiết kế<small>Điều 58 Luật Nhà ở 2023</small></div><div class="fa">▼</div><div class="fs">🔍 Kiểm định chất lượng toà nhà<small>Cơ quan có thẩm quyền tổ chức</small></div><div class="fa">▼</div><div class="fb"><div class="fs ok"><b>✅ Còn an toàn</b>Tiếp tục sử dụng</div><div class="fs no"><b>⚠️ Không an toàn</b>Cải tạo, xây lại – bồi thường, tái định cư hoặc căn mới<small>Điều 59</small></div></div><div class="fs gr"><b>50 năm thời hạn đất</b>Hết hạn được xem xét gia hạn<small>Luật Đất đai 2024</small></div></div></div></div></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('5', 'Tiến độ', 'Mốc thời gian <b>dự án</b>', 'y') + timeline() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('6', 'Mua ở đâu', 'Mua qua <b>đại lý phân phối chính thức</b>', 'o') + daily() +
           '<div class="g4" style="margin-top:24px"><div class="card"><span class="n">BƯỚC 1</span><h3 class="oc">Đăng ký</h3><p>Để lại số Zalo, nhận tài liệu, mặt bằng. Không thu tiền.</p></div>'
@@ -450,8 +432,8 @@ def phap_ly():
     b = bands_at(b, [(1, band('Nhận bản sao pháp lý dự án', 'GCN đăng ký đầu tư, Nghị quyết 278, tiến độ – gửi qua Zalo.', 'Nhận hồ sơ pháp lý', 'Pháp lý – nhận hồ sơ', ('/bang-gia', 'Xem bảng giá & vay'))),
                      (3, band('Đăng ký sớm để được giữ chỗ đầu tiên', 'Đại lý chính thức – bảng giá gốc, giữ chỗ đúng quy trình chủ đầu tư.', 'Đăng ký giữ chỗ', 'Pháp lý – đăng ký giữ chỗ', ('/mat-bang', 'Chọn căn trên mặt bằng')))])
     b += cta_block('Web – pháp lý cuối trang', title='Nhận <b>hồ sơ pháp lý</b> và chính sách')
-    title = 'Pháp lý Sun Saphia Residence – GCN đầu tư, thời hạn 50 năm, tiến độ'
-    desc = 'Pháp lý Sun Saphia Residence: GCN đầu tư 2572746483 (17/09/2026), thời hạn 50 năm, công trình cấp I niên hạn 100 năm, Nghị quyết 278/NQ-CP, tiến độ mở bán – bàn giao.'
+    title = 'Pháp lý Sun Saphia Residence – GCN đầu tư, quyền sở hữu, tiến độ'
+    desc = 'Pháp lý Sun Saphia Residence: GCN đầu tư 2572746483 (17/09/2026), công trình cấp I niên hạn 100 năm, Nghị quyết 278/NQ-CP, tiến độ mở bán – bàn giao.'
     return page('/phap-ly', title, desc, 'pháp lý sun saphia residence, sun saphia sở hữu bao lâu, căn hộ 50 năm đà nẵng, nghị quyết 278, tiến độ sun saphia',
                 b, [article_ld(title, desc, MAIN + '/phap-ly'), cld, fld], '/phap-ly')
 
@@ -597,7 +579,7 @@ def ads(domain):
          '<div class="hcvt"><div class="wrap"><span class="tag">🔥 Ra mắt &amp; nhận booking <b>01/11/2026</b></span>'
          '<h1 class="dp">Sun Saphia Residence</h1><p class="msg">Căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng – mở cửa là biển</p>'
          '<div class="cdn" data-cd="2026-11-01T09:00:00+07:00"><span class="cdl">⏳ Đếm ngược sự kiện ra mắt · 9:00 CN 01/11/2026 · Hilton Đà Nẵng</span><div class="cdb"><div><b data-u="d">--</b><small>ngày</small></div><div><b data-u="h">--</b><small>giờ</small></div><div><b data-u="m">--</b><small>phút</small></div><div><b data-u="s">--</b><small>giây</small></div></div></div><script>(function(){var T=+new Date("2026-11-01T09:00:00+07:00");function z(n){return(n<10?"0":"")+n}function t(){var d=Math.max(0,T-Date.now())/1000;document.querySelectorAll(".cdn").forEach(function(e){var u={d:Math.floor(d/86400),h:Math.floor(d%%86400/3600),m:Math.floor(d%%3600/60),s:Math.floor(d%%60)};for(var k in u){var b=e.querySelector("[data-u="+k+"]");if(b)b.textContent=k=="d"?u[k]:z(u[k])}var l=e.querySelector(".cdl");if(d<=0&&l)l.textContent="🎉 Sự kiện ra mắt 01/11/2026 đã diễn ra – đang nhận booking"})}t();setInterval(t,1000)})();</script><div class="hnum"><div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>30 tầng</b><span>114 m · 782 căn</span></div>'
-         '<div><b>2,45 ha</b><span>công viên ngay trước mặt</span></div><div><b>~48 năm</b><span>còn lại khi nhận nhà</span></div></div>'
+         '<div><b>2,45 ha</b><span>công viên ngay trước mặt</span></div><div><b>3,5 m</b><span>trần cao mỗi căn</span></div></div>'
          '<div class="hcta"><a class="btn" href="#dang-ky-dau">Nhận bảng giá gốc qua Zalo</a><button type="button" class="btn ghost" data-film>▶ Xem phim dự án 3 phút</button></div></div></div></section>'
          '<section class="hero cine2"><div class="hbody" id="dang-ky-dau"><div class="wrap"><div class="g2"><div class="hl">'
          '<span class="tag">🔥 Ra mắt &amp; nhận booking <b>01/11/2026</b></span>'
@@ -606,7 +588,7 @@ def ads(domain):
          '<ul class="ck"><li><b>Đại lý chính thức TATILAND</b> – bảng giá gốc từ đại lý, gửi qua Zalo khi công bố</li>'
          '<li><b>Studio 30 m², 1BR+ 50 m², 2BR 60–70 m²</b> · trần cao 3,5 m, view biển</li>'
          '<li><b>400 m ra bãi tắm Sơn Thủy</b> · giao lộ Võ Nguyên Giáp – Trường Sa</li>'
-         '<li><b>Pháp lý 50 năm</b> · Vietcombank, BIDV, NCB hỗ trợ vay</li></ul>'
+         '<li><b>Pháp lý minh bạch</b> · Vietcombank, BIDV, NCB hỗ trợ vay</li></ul>'
          '<a class="play" href="#ss4d" data-4d><i aria-hidden="true">▶</i><span><b>Xem dự án 3D · 4D</b><small>Xoay tòa tháp · nắng theo giờ · view biển từ căn</small></span></a>'
          '</div><div class="hr">%s</div></div></div></div></section>'
          '<section class="hstrip"><div class="wrap">%s'
@@ -619,7 +601,7 @@ def ads(domain):
         hero_perks())
     b += su_kien('ADS')
     b += tldr('Sun Saphia Residence', [('Dự án', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, 30 tầng, 782 căn'), ('Loại căn', 'Studio 30 m² · 1BR+ 50 m² · 2BR 60–70 m²'),
-        ('Pháp lý', '50 năm · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Mở bán', 'Ra mắt 01/11/2026'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
+        ('Pháp lý', 'GCN đầu tư · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Mở bán', 'Ra mắt 01/11/2026'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('★', 'Thời điểm vàng', 'Vì sao <b>đăng ký sớm</b>?', 'o') + why_now() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('☀', 'Một ngày ở Saphia', 'Mở cửa ra là <b>biển</b>', 'y') +
           day4()
@@ -643,7 +625,7 @@ def ads(domain):
     b += ('<section class="sec alt"><div class="wrap"><h2 class="dp" style="font-size:30px;margin-bottom:16px">Tìm hiểu <b>thêm</b></h2>' + related('/ads') + '</div></section>')
     b += cta_block('ADS – form cuối trang')
     title = 'Sun Saphia Residence – Căn hộ mặt biển Đà Nẵng | Đại lý chính thức TATILAND'
-    desc = 'Căn hộ mặt biển Đà Nẵng: Studio 30m², 1BR+ 50m², 2BR 60–70m², ra biển 400m, pháp lý 50 năm, Vietcombank, BIDV, NCB hỗ trợ vay. Bảng giá gốc từ đại lý chính thức TATILAND.'
+    desc = 'Căn hộ mặt biển Đà Nẵng: Studio 30m², 1BR+ 50m², 2BR 60–70m², ra biển 400m, pháp lý minh bạch, Vietcombank, BIDV, NCB hỗ trợ vay. Bảng giá gốc từ đại lý chính thức TATILAND.'
     html = head(title, desc, url, OG, 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES], FAV)
     b = b.replace('{M}', MAIN)
     html += '<body>\n' + header('/ads', MAIN, LOGO) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(True) + '</body>\n</html>\n'
@@ -690,7 +672,7 @@ def vi_sao():
         ('2. Du lịch', '15,86 triệu lượt khách 9 tháng 2026 (+29,6%); Đà Nẵng là 1 trong 3 cực tăng trưởng du lịch cả nước'),
         ('3. Hạ tầng', 'Mở rộng trục biển 2.633 tỷ; ga LRT 09 cách ~500 m; Khu thương mại tự do Đà Nẵng'),
         ('4. Dân số', '~3 triệu dân sau sáp nhập Quảng Nam; di cư ròng 15–16 nghìn người/năm'),
-        ('5. Thời điểm', 'Lãi suất cho vay đồng loạt giảm 10/2026; Nghị quyết 278/NQ-CP định hình lại giá trị căn hộ 50 năm'),
+        ('5. Thời điểm', 'Lãi suất cho vay đồng loạt giảm 10/2026; Nghị quyết 278/NQ-CP định hình lại giá trị căn hộ có thời hạn'),
         ('6. Sản phẩm', 'Studio, 1BR+ diện tích gọn, vốn vừa sức, hợp để ở và cho thuê – 513/782 căn là Studio')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Quỹ đất', 'Đất mặt biển Đà Nẵng – <b>gần như không còn</b>', 'o') +
           '<div class="g2"><div class="txt just"><p>Biển là tài nguyên hữu hạn. Dải đất ven biển Đà Nẵng từ Sơn Trà về Hội An phần lớn đã thuộc về resort, khách sạn và không gian công cộng; '
@@ -739,7 +721,7 @@ def vi_sao():
     b += ('<section class="sec"><div class="wrap">' + sh('6', 'Thời điểm', 'Lãi suất giảm, <b>chính sách mở</b>', 'y') +
           '<div class="g2"><div class="txt just"><p>Tháng 10/2026, Ngân hàng Nhà nước yêu cầu giảm lãi suất; Agribank, Vietcombank, BIDV, MB, ACB, Sacombank… đồng loạt giảm lãi suất cho vay. '
           'Tín dụng khách sạn, khu nghỉ dưỡng được tách khỏi dư nợ bất động sản để thúc đẩy du lịch nghỉ dưỡng.</p>'
-          '<p>Nghị quyết 278/NQ-CP (18/9/2026) xác định thời hạn sử dụng chung cư theo niên hạn công trình – Sun Saphia Residence là công trình cấp I, niên hạn 100 năm, thời hạn dự án 50 năm.</p>'
+          '<p>Nghị quyết 278/NQ-CP (18/9/2026) xác định thời hạn sử dụng chung cư theo niên hạn công trình – Sun Saphia Residence là công trình cấp I, niên hạn 100 năm.</p>'
           '<a class="lk" href="{M}/phap-ly">Xem pháp lý chi tiết →</a></div>' + nq278() + '</div></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('7', 'Sản phẩm', 'Căn nhỏ – <b>vừa túi tiền, dễ cho thuê</b>', 'o') +
           '<div class="txt just"><p>Thay vì căn lớn giá chục tỷ như phần lớn căn hộ ven biển đang chào bán, Sun Saphia Residence tập trung căn gọn: <b>513 Studio 30–31 m²</b>, 108 căn 1BR+ 50–51 m², 133 căn 2BR 60–70 m², trần cao 3,5 m. '
