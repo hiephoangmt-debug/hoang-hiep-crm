@@ -610,3 +610,14 @@ main .hcvt p,main .hnum *,main .stats *,main .tag,main .btn,main .ey,main .cta p
 .btn.ghost2{background:#fff;color:var(--nv);box-shadow:var(--sh)}
 @media(max-width:760px){.ski{grid-template-columns:1fr}.ska time{flex-basis:104px;font-size:14px}.ska span{font-size:14.5px}}
 .sk .hcta{justify-content:flex-start;margin:0;padding:0;gap:12px;display:flex;flex-wrap:wrap}@media(max-width:760px){.sk .hcta{justify-content:center}}
+/* Bộ xem mặt bằng từng tầng */
+.tgt{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 18px}
+.tgt button{border:1px solid var(--ln);background:#fff;color:var(--nv);font:700 15px/1 'Be Vietnam Pro',sans-serif;padding:11px 18px;border-radius:999px;cursor:pointer}
+.tgt button.on{background:var(--nv);border-color:var(--nv);color:#fff;box-shadow:var(--sh)}
+.tgp{display:grid;grid-template-columns:1.75fr 1fr;gap:26px;align-items:start}.tgp.off{display:none}
+.tgp figure img{width:100%;height:auto!important;flex:none!important;border-radius:14px;border:1px solid var(--ln);background:#fff}
+.tgi h3{font-size:22px;color:var(--nv);margin:4px 0 12px}
+.tgm{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.tgm div{background:var(--pp);border-radius:12px;padding:10px;text-align:center}.tgm b{display:block;font-size:26px;color:var(--or);line-height:1.1}.tgm span{font-size:13px;color:var(--mut);font-weight:600}
+.tgi .ck{margin-bottom:16px}
+@media(max-width:760px){.tgp{grid-template-columns:1fr}.tgt button{padding:9px 13px;font-size:14px}.tgt{gap:6px}}

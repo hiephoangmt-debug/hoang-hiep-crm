@@ -321,6 +321,33 @@ def bang_gia():
     return page('/bang-gia', title, desc, 'giá sun saphia residence, bảng giá sun saphia, giá căn hộ sun saphia đà nẵng, giá căn hộ mặt biển đà nẵng, vay mua sun saphia',
                 b, [article_ld(title, desc, MAIN + '/bang-gia'), cld, fld], '/bang-gia')
 
+def tang_viewer():
+    I = RAW + '3ba51fce23bab72069a579209e574768f96047f6/landing/sun-saphia/v4/img/mat-bang-tang-'
+    F = [('2', 'Tầng 2', 'Tầng tiện ích + 12 căn', [('Studio', 7), ('1BR+', 1), ('2BR', 4)],
+          ['Cùng tầng với <b>hồ bơi</b> và khu <b>Gym + Yoga 478 m²</b>', '2BR SP0203 có ban công <b>84,29 m²</b>, SP0203A ban công 29,59 m²', 'Studio SP0201, SP0202 có ban công ~19 m²']),
+         ('3', 'Tầng 3', '28 căn · ban công sân vườn', [('Studio', 19), ('1BR+', 4), ('2BR', 5)],
+          ['Nhiều căn có <b>ban công lớn</b> nhìn xuống mái xanh khối đế', 'Studio SP0321–SP0324 ban công <b>53,71 m²</b>, SP0320 ban công 55,32 m²', '2BR SP0303 ban công 84,29 m² – hiếm trong tòa']),
+         ('3a-28', 'Tầng 3A–28', '25 tầng điển hình · 28 căn/tầng', [('Studio', 19), ('1BR+', 4), ('2BR', 5)],
+          ['Studio 30–31 m² thông thủy, căn Studio góc rộng 40,03 m²', '1BR+ 48,98–51,11 m² · 2BR 60,30–70,21 m², căn góc bo tròn', 'Dãy căn hướng biển chạy dọc mặt trước tòa']),
+         ('29', 'Tầng 29', '26 căn · vườn trên mái', [('Studio', 19), ('1BR+', 4), ('2BR', 3)],
+          ['Cùng layout tầng điển hình, góc tòa là <b>vườn trên mái</b>', 'Tầng cao, tầm nhìn biển và thành phố thoáng', '2BR còn 3 căn: hai căn góc và căn đầu hồi']),
+         ('30', 'Tầng 30', 'Tầng cao nhất · 16 căn lớn', [('1BR', 9), ('1BR+', 6), ('2BR', 1)],
+          ['Dòng <b>1BR 62,97–73,71 m²</b> chỉ có ở tầng 30', '1BR+ 49,99–71,29 m² · 2BR SP3006 rộng <b>83,97 m²</b>', 'Số lượng ít nhất tòa – phù hợp khách muốn căn rộng, tầng cao']),]
+    tabs = ''.join('<button type="button" role="tab" data-tg="%s"%s>%s</button>' % (k, ' class="on" aria-selected="true"' if i == 0 else '', n) for i, (k, n, _, _, _) in enumerate(F))
+    pans = ''
+    for i, (k, n, sub, mix, pts) in enumerate(F):
+        tot = sum(c for _, c in mix)
+        pans += ('<div class="tgp%s" data-tp="%s" role="tabpanel"><figure class="fg wm" style="margin:0"><a href="%s%s.webp" target="_blank" rel="noopener"><img src="%s%s-900.webp" srcset="%s%s-900.webp 900w, %s%s.webp 1500w" sizes="(max-width: 760px) 100vw, 760px" width="1500" height="1200" alt="Mặt bằng %s tòa Saphia, Sun Saphia Residence: %d căn" loading="lazy" decoding="async"></a><figcaption>Mặt bằng %s · bấm ảnh để xem cỡ lớn · thông số chính thức theo hợp đồng</figcaption></figure>'
+                 '<div class="tgi"><span class="ey">%s</span><h3>%s</h3><div class="tgm">%s</div><ul class="ck">%s</ul>'
+                 '<button type="button" class="btn sm" data-pop data-interest="Mặt bằng – căn %s còn trống">Nhận căn còn trống %s</button></div></div>') % (
+            '' if i == 0 else ' off', k, I, k, I, k, I, k, I, k, n, tot, n, n, sub,
+            ''.join('<div><b>%d</b><span>%s</span></div>' % (c, t) for t, c in mix), ''.join('<li>%s</li>' % x for x in pts), n.lower(), n.lower())
+    return ('<div class="tgv"><div class="tgt" role="tablist">' + tabs + '</div>' + pans + '</div>'
+            '<script>(function(){var r=document.currentScript.previousElementSibling;r.addEventListener("click",function(e){var b=e.target.closest("[data-tg]");if(!b)return;'
+            'r.querySelectorAll("[data-tg]").forEach(function(x){var on=x===b;x.classList.toggle("on",on);x.setAttribute("aria-selected",on)});'
+            'r.querySelectorAll("[data-tp]").forEach(function(p){p.classList.toggle("off",p.getAttribute("data-tp")!==b.getAttribute("data-tg"))})})})();</script>'
+            '<p class="src" style="margin-top:10px">Tổng 5 loại tầng: 12 + 28 + 25 × 28 + 26 + 16 = <b>782 căn</b>. Mặt bằng do đại lý TATILAND phát hành theo tài liệu chủ đầu tư; diện tích thông thủy/tim tường từng căn ghi trên bản vẽ.</p>')
+
 def mat_bang():
     hero, cld = sub_hero('/mat-bang', 'Mặt bằng', 'Mặt bằng Sun Saphia Residence – <b>chọn căn</b> tầng 3A–28',
                          'Tòa tháp 30 tầng, căn hộ bố trí từ tầng 3A đến tầng 28. Mặt bằng tầng thiết kế tối ưu tầm view biển Mỹ Khê, gồm Studio 30–31 m², 1BR+ 50–51 m², 2BR 60–70 m² và các căn góc bo tròn. Bấm từng căn trên mặt bằng bên dưới để xem bản vẽ nội thất, hướng view.',
@@ -337,13 +364,8 @@ def mat_bang():
         ('2BR', '60–70 m², 7,25 × 9,9 m, 133 căn, có căn góc bo tròn'), ('Chiều cao căn hộ', '3,5 m, bàn giao hoàn thiện cơ bản'), ('Hướng view', 'Biển Mỹ Khê – Sơn Thủy, Ngũ Hành Sơn, sông Hàn, đô thị')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Cơ cấu', '782 căn – <b>3 loại căn</b>', 'o') + units_table() +
           '<div style="margin-top:24px">' + units_drawings() + '</div></div></section>')
-    b += ('<section class="sec"><div class="wrap">' + sh('2', 'Layout tầng', 'Mặt bằng tầng điển hình <b>3A–28</b>', 'n') +
-          '<div class="g2"><div class="txt"><p>Mặt bằng tầng điển hình 3A–28 tòa Saphia có 28 căn: dãy Studio chạy dọc hành lang giữa, hai đầu tòa bố trí 1BR+ và 2BR, các căn góc bo tròn có hai mặt thoáng. '
-          'Lõi thang máy, thang bộ đặt giữa tòa, giúp quãng đi từ thang tới căn ngắn.</p>'
-          '<p>Hướng chính: <b>trước mặt là biển</b> Mỹ Khê – Sơn Thủy; một bên về thành phố, biển Mỹ Khê phía Sơn Trà; một bên về Ngũ Hành Sơn – Hội An; phía sau là sông Hàn, sân bay, Hòa Xuân.</p>'
-          '<ul class="ck"><li><b>Studio</b> – 19 căn/tầng, dãy giữa, hai mặt hướng biển và hướng thành phố</li><li><b>1BR+1</b> – 4 căn/tầng ở hai đầu hành lang</li><li><b>2BR</b> – 5 căn/tầng, có căn góc bo tròn hai mặt thoáng</li><li>Trần 3,5 m, logia kính lớn đón gió biển</li></ul>'
-          '<button type="button" class="btn sm" data-pop data-interest="Mặt bằng – nhận layout từng tầng">Nhận mặt bằng từng tầng qua Zalo</button></div>'
-          + fig('layout-tang-3a-28', 'Layout tầng điển hình 3A–28 Sun Saphia Residence, 28 căn mỗi tầng', 'Layout tầng 3A–28 (tài liệu chủ đầu tư)', wm=True) + '</div>'
+    b += ('<section class="sec"><div class="wrap">' + sh('2', 'Layout tầng', 'Mặt bằng <b>từng tầng</b> tòa Saphia', 'n')
+          + tang_viewer() +
           '<div id="chon-can"></div></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('3', 'Hướng view', 'Mỗi hướng <b>một khung tranh</b>', 'y') + views() + '</div></section>')
     b += ('<section class="sec" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>mặt bằng</b>', 'o') + fq + '<h3 style="margin-top:26px">Xem thêm</h3>' + related('/mat-bang') + '</div></section>')
