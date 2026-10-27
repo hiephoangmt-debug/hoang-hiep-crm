@@ -286,12 +286,12 @@ hill(-14000,-2000,6000,1300,0x8a98a6,1.3); hill(-9000,-14000,6000,1100,0x8a98a6,
 // sân bay quốc tế Đà Nẵng: 2 đường băng hướng ~Bắc – Nam
 (function(){ var p=LL(16.054092,108.200513), g=new THREE.Group(); g.position.set(p[0],0,p[1]); g.rotation.y=-.05; scene.add(g);
   [-100,100].forEach(function(o){ var m=new THREE.Mesh(new THREE.PlaneGeometry(55,3050),M(0x55595e)); m.rotation.x=-Math.PI/2; m.position.set(o,.25,0); g.add(m); }); })();
-// sân vận động Hòa Xuân (vòng khán đài)
-var SVD=LL(16.0068,108.2215); (function(){ var m=new THREE.Mesh(new THREE.TorusGeometry(95,18,6,40),M(0xeceae4)); m.rotation.x=-Math.PI/2; m.scale.set(1,.7,.9); m.position.set(SVD[0],10,SVD[1]); scene.add(m); sFlat(120,80,0x5fa24a,SVD[0],SVD[1],.5); })();
+// sân vận động Chi Lăng (vòng khán đài)
+var SVD=LL(15.999020,108.223335); (function(){ var m=new THREE.Mesh(new THREE.TorusGeometry(95,18,6,40),M(0xeceae4)); m.rotation.x=-Math.PI/2; m.scale.set(1,.7,.9); m.position.set(SVD[0],10,SVD[1]); scene.add(m); sFlat(120,80,0x5fa24a,SVD[0],SVD[1],.5); })();
 // AEON Mall Hòa Xuân (khối thương mại lớn, thấp tầng)
-var AEON=LL(16.0028,108.2290); (function(){ var m=new THREE.Mesh(new THREE.BoxGeometry(240,22,150),M(0xf1efe9,{roughness:.6})); m.position.set(AEON[0],11,AEON[1]); m.castShadow=true; scene.add(m); })();
+var AEON=LL(15.995380,108.216964); (function(){ var m=new THREE.Mesh(new THREE.BoxGeometry(240,22,150),M(0xf1efe9,{roughness:.6})); m.position.set(AEON[0],11,AEON[1]); m.castShadow=true; scene.add(m); })();
 // Làng đại học Đà Nẵng, FPT City, sân golf (ước lượng)
-var LDH=LL(15.9720,108.2420), FPT=LL(15.982294,108.260892), GOLF=LL(15.9440,108.2830), DRG=LL(16.061040,108.227019), DT=LL(16.0700,108.2190), MK=LL(16.048543,108.250789), STB=LL(16.017044,108.263774), DIFF=LL(16.039470,108.233302), HA=LLnear(15.877520,108.332702,9000);   // làng đại học, sân golf, downtown: ước lượng
+var LDH=LL(15.977213,108.248975), FPT=LL(15.982294,108.260892), GOLF=LL(15.9440,108.2830), DRG=LL(16.061040,108.227019), DT=LL(16.0700,108.2190), MK=LL(16.048543,108.250789), STB=LL(16.017044,108.263774), DIFF=LL(16.039470,108.233302), HA=LLnear(15.877520,108.332702,9000);   // sân golf, downtown: ước lượng
 sFlat(700,520,0x8db86a,GOLF[0],GOLF[1],.08); sFlat(900,700,0x8db86a,GOLF[0]+600,GOLF[1]+500,.08);
 (function(){ var dm=new THREE.Object3D(), im=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),M(0xe6e2d8,{roughness:.7}),90), q=0;
   [[LDH,40],[FPT,50]].forEach(function(c){ for(var i=0;i<c[1];i++){ var h=rnd(10,32); dm.position.set(c[0][0]+rnd(-450,450),h/2,c[0][1]+rnd(-350,350)); dm.scale.set(rnd(20,60),h,rnd(16,36)); dm.updateMatrix(); im.setMatrixAt(q++,dm.matrix); } });
@@ -326,7 +326,7 @@ label('Công viên (ước lượng)','',world,[100,6,-210]);
   L('Cù Lao Chàm (~'+Math.round(CLC[3]/1000)+' km)',CLC,300,'far');
   L('Trung tâm Đà Nẵng (Downtown)',DT,190,'far'); L('Cầu Rồng',DRG,40,'far'); L('Điểm bắn pháo hoa DIFF',DIFF,40,'far');
   L('Sân bay quốc tế Đà Nẵng',LL(16.054092,108.200513),30,'far');
-  L('Sân vận động Hòa Xuân',SVD,30); L('AEON Mall Hòa Xuân',AEON,30);
+  L('Sân vận động Chi Lăng',SVD,30); L('AEON Mall Hòa Xuân',AEON,30);
   L('Làng Đại học Đà Nẵng',LDH,40); L('FPT City',FPT,40); L('Sân golf',GOLF,20,'far'); })();
 
 /* ---------- Thời gian trong ngày (chiều thứ 4) ---------- */
