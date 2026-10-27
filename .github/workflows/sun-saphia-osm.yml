@@ -32,6 +32,10 @@ jobs:
           get ss-osm-buildings.json '[out:json][timeout:240];(way["building"](16.009,108.245,16.033,108.270);relation["building"](16.009,108.245,16.033,108.270););(._;>;);out;' || echo "không tải được nhà"
           # nhà cao tầng xa hơn (có số tầng / chiều cao) để vẽ đúng đường chân trời
           get ss-osm-tall.json '[out:json][timeout:240];(way["building"]["building:levels"](15.985,108.200,16.085,108.300);way["building"]["height"](15.985,108.200,16.085,108.300););(._;>;);out;' || echo "không tải được nhà cao tầng"
+          # công trình có tên (khách sạn, resort, siêu thị, chợ, bệnh viện…) trong ~4 km để ghi nhãn đúng chỗ
+          get ss-osm-poi.json '[out:json][timeout:240];(nwr["tourism"~"hotel|resort|apartment|attraction|viewpoint"](15.985,108.215,16.060,108.300);nwr["shop"~"mall|supermarket|department_store"](15.985,108.215,16.060,108.300);nwr["amenity"~"hospital|university|marketplace|place_of_worship"](15.990,108.225,16.050,108.290);nwr["aeroway"="aerodrome"](16.000,108.170,16.080,108.230);nwr["natural"="peak"](15.950,108.200,16.150,108.350););out center tags;' || echo "không tải được công trình"
+          # nhà trong ~2,5 km (vẽ đúng khối nhà xung quanh thay cho khối ngẫu nhiên)
+          get ss-osm-buildings2.json '[out:json][timeout:240];(way["building"](15.998,108.232,16.045,108.285););(._;>;);out;' || echo "không tải được nhà 2,5 km"
           ls -la $D
       - name: Lưu vào kho
         run: |
