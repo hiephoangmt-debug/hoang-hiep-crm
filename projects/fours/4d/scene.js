@@ -53,9 +53,9 @@ scene.add(sun); scene.add(sun.target);
    Theo la bàn trên mặt bằng tầng của CĐT, phía trên bản vẽ là hướng Đông Bắc → xoay -45°.
    Đường Nguyễn Phước Lan chạy dọc trục x (z=0), đường Minh Mạng dọc trục z (x=0). */
 var world=new THREE.Group(); world.rotation.y=-Math.PI/4; scene.add(world);
-var SITE_LAT=16.0080, SITE_LON=108.2460;   // giao lộ Nguyễn Phước Lan – Minh Mạng (ước lượng)
+var SITE_LAT=16.009588, SITE_LON=108.242570;   // vị trí dự án (anh Hiệp cung cấp, Google Maps)
 function LL(lat,lon){ return [(lon-SITE_LON)*Math.cos(SITE_LAT*Math.PI/180)*111320, -(lat-SITE_LAT)*110574]; }
-var CC_LL=[[16.040,108.236],[16.028,108.241],[16.016,108.249],[16.004,108.2525],[15.992,108.2535],[15.978,108.256],[15.960,108.262],[15.930,108.272]];
+var CC_LL=[[16.040,108.236],[16.028,108.2400],[16.018,108.2455],[16.009,108.2495],[15.998,108.2505],[15.985,108.2530],[15.970,108.2570],[15.940,108.2680]];   // sông Cổ Cò chảy giữa dự án và Ngũ Hành Sơn (ước lượng theo toạ độ 2 bên)
 function nearRiver(xs,zs,m){ var P=CC_LL.map(function(q){ return LL(q[0],q[1]); }); for(var i=0;i<P.length-1;i++){ var a=P[i],b=P[i+1],dx=b[0]-a[0],dz=b[1]-a[1],t=Math.max(0,Math.min(1,((xs-a[0])*dx+(zs-a[1])*dz)/(dx*dx+dz*dz))); if(Math.hypot(xs-a[0]-t*dx,zs-a[1]-t*dz)<m) return true; } return false; }
 function flat(w,d,col,x,z,y,rot,grp){var m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),M(col));m.rotation.x=-Math.PI/2;if(rot)m.rotation.z=rot;m.position.set(x,y||0.05,z);m.receiveShadow=true;(grp||world).add(m);return m;}
 var ground=new THREE.Mesh(new THREE.PlaneGeometry(40000,40000),M(0xb9b48f)); ground.rotation.x=-Math.PI/2; ground.receiveShadow=true; scene.add(ground);
@@ -238,7 +238,7 @@ for(var hx=-790;hx<=790;hx+=13) for(var hz=-790;hz<=790;hz+=22){ var xx=hx+((Mat
   pc.castShadow=true; world.add(pt); world.add(pc); })();
 
 /* ---------- Cảnh xa theo toạ độ thật (vĩ độ, kinh độ) – +x Đông, +z Nam ----------
-   SITE: giao lộ Nguyễn Phước Lan – Minh Mạng (ước lượng; chỉnh 2 số này là cả cảnh dời theo).
+   Toạ độ dự án, biển Sơn Thủy, biển Mỹ Khê, Ngũ Hành Sơn, FPT, Hội An, Cù Lao Chàm, điểm bắn pháo hoa DIFF, sân bay, cầu Rồng, Sơn Trà: anh Hiệp lấy trên Google Maps.
    Kiểm tra theo hướng view CĐT ghi trên mặt bằng: mặt Đông Nam thấy Ngũ Hành Sơn, biển; mặt Bắc thấy sông Hàn (pháo hoa DIFF). */
 // vật ở rất xa: giữ đúng hướng, kéo lại gần (k) để nằm trong tầm nhìn, thu nhỏ tương ứng
 function LLnear(lat,lon,maxD){ var p=LL(lat,lon), d=Math.hypot(p[0],p[1]), k=d>maxD?maxD/d:1; return [p[0]*k,p[1]*k,k,d]; }
@@ -251,9 +251,9 @@ function riverLL(pts,w,y){ var P=pts.map(function(q){ return LL(q[0],q[1]); }), 
 // sông Cổ Cò: từ sông Hàn chảy xuống phía Nam, giữa dự án và Ngũ Hành Sơn
 var CC=riverLL(CC_LL,70);
 // sông Hàn: qua cầu Tiên Sơn, cầu Trần Thị Lý, cầu Rồng, ra cửa biển
-riverLL([[15.995,108.212],[16.012,108.222],[16.030,108.229],[16.048,108.231],[16.061,108.2275],[16.075,108.226],[16.090,108.222],[16.105,108.218]],300,.18);
+riverLL([[15.995,108.212],[16.015,108.224],[16.030,108.231],[16.03947,108.233302],[16.050,108.2315],[16.06104,108.227019],[16.075,108.2255],[16.090,108.222],[16.105,108.218]],300,.18);   // qua điểm bắn pháo hoa DIFF và cầu Rồng
 // biển: đường bờ từ Sơn Trà xuống Mỹ Khê, Non Nước (ước lượng)
-var COAST=[[16.120,108.300],[16.095,108.262],[16.080,108.250],[16.060,108.2475],[16.040,108.254],[16.020,108.262],[16.000,108.270],[15.975,108.279],[15.945,108.292],[15.900,108.315]];
+var COAST=[[16.120,108.300],[16.095,108.262],[16.075,108.2440],[16.048543,108.250789],[16.017044,108.263774],[16.000,108.2708],[15.970,108.2830],[15.940,108.2960],[15.900,108.3140],[15.860,108.3360]];   // qua 2 điểm biển Mỹ Khê, Sơn Thủy
 var seaMat=M(0x1b8fa8,{roughness:.32,metalness:.2,envMapIntensity:.9});
 (function(){ var P=COAST.map(function(q){ return LL(q[0],q[1]); }), sh=new THREE.Shape();
   P.forEach(function(p,i){ if(i) sh.lineTo(p[0],-p[1]); else sh.moveTo(p[0],-p[1]); }); sh.lineTo(40000,-P[P.length-1][1]); sh.lineTo(40000,-P[0][1]);
@@ -264,12 +264,12 @@ var seaMat=M(0x1b8fa8,{roughness:.32,metalness:.2,envMapIntensity:.9});
 var sea={position:{y:0}}, seaGeo=null, seaPos={array:[]}, seaBase=[];
 function hill(x,z,r,h,c,sx){ var m=new THREE.Mesh(new THREE.SphereGeometry(1,24,14),M(c,{roughness:1})); m.scale.set(r*(sx||1),h,r); m.position.set(x,0,z); m.castShadow=true; m.receiveShadow=true; scene.add(m); return m; }
 // Ngũ Hành Sơn: 5 ngọn núi đá vôi (Thủy Sơn cao nhất ~106 m)
-var NHS=LL(16.0035,108.2635);
-[[16.0035,108.2635,150,106],[16.0060,108.2600,70,60],[16.0005,108.2665,70,55],[15.9990,108.2610,60,48],[16.0075,108.2660,55,42]].forEach(function(k){ var p=LL(k[0],k[1]); hill(p[0],p[1],k[2],k[3],0x6f8a5a); });
+var NHS=LL(16.004724,108.255554);
+[[0,0,150,106],[.0025,-.0035,70,60],[-.003,.003,70,55],[-.0045,-.0025,60,48],[.004,.0025,55,42]].forEach(function(k){ var p=LL(16.004724+k[0],108.255554+k[1]); hill(p[0],p[1],k[2],k[3],0x6f8a5a); });
 // bán đảo Sơn Trà (~13 km, đỉnh ~690 m)
-var ST=LL(16.118,108.272); hill(ST[0],ST[1],3200,690,0x6f8676,1.5); hill(ST[0]+2600,ST[1]+900,1600,420,0x6f8676);
+var ST=LL(16.118584,108.268184); hill(ST[0],ST[1],3200,690,0x6f8676,1.5); hill(ST[0]+2600,ST[1]+900,1600,420,0x6f8676);
 // Cù Lao Chàm (~28 km Đông Đông Nam): đặt gần lại theo đúng hướng, thu nhỏ tương ứng
-var CLC=LLnear(15.955,108.510,11000); hill(CLC[0],CLC[1],2300*CLC[2]*1.2,520*CLC[2]*1.4,0x7d93a0,1.6); hill(CLC[0]+900*CLC[2],CLC[1]-500*CLC[2],900*CLC[2],260*CLC[2],0x7d93a0);
+var CLC=LLnear(15.960865,108.499926,11000); hill(CLC[0],CLC[1],2300*CLC[2]*1.2,520*CLC[2]*1.4,0x7d93a0,1.6); hill(CLC[0]+900*CLC[2],CLC[1]-500*CLC[2],900*CLC[2],260*CLC[2],0x7d93a0);
 // núi phía Tây: Bà Nà – Hải Vân
 hill(-14000,-2000,6000,1300,0x8a98a6,1.3); hill(-9000,-14000,6000,1100,0x8a98a6,1.5);
 // trung tâm TP (Hải Châu) và Sơn Trà – An Hải: khối cao tầng xa
@@ -284,14 +284,14 @@ hill(-14000,-2000,6000,1300,0x8a98a6,1.3); hill(-9000,-14000,6000,1100,0x8a98a6,
     var h=srnd()<.07?rnd(25,70):rnd(8,16); dm.position.set(p[0],h/2,p[1]); dm.scale.set(rnd(10,24),h,rnd(10,24)); dm.updateMatrix(); im.setMatrixAt(q++,dm.matrix); }
   im.count=q; im.castShadow=true; scene.add(im); })();
 // sân bay quốc tế Đà Nẵng: 2 đường băng hướng ~Bắc – Nam
-(function(){ var p=LL(16.0439,108.1994), g=new THREE.Group(); g.position.set(p[0],0,p[1]); g.rotation.y=-.05; scene.add(g);
+(function(){ var p=LL(16.054092,108.200513), g=new THREE.Group(); g.position.set(p[0],0,p[1]); g.rotation.y=-.05; scene.add(g);
   [-100,100].forEach(function(o){ var m=new THREE.Mesh(new THREE.PlaneGeometry(55,3050),M(0x55595e)); m.rotation.x=-Math.PI/2; m.position.set(o,.25,0); g.add(m); }); })();
 // sân vận động Hòa Xuân (vòng khán đài)
 var SVD=LL(16.0068,108.2215); (function(){ var m=new THREE.Mesh(new THREE.TorusGeometry(95,18,6,40),M(0xeceae4)); m.rotation.x=-Math.PI/2; m.scale.set(1,.7,.9); m.position.set(SVD[0],10,SVD[1]); scene.add(m); sFlat(120,80,0x5fa24a,SVD[0],SVD[1],.5); })();
 // AEON Mall Hòa Xuân (khối thương mại lớn, thấp tầng)
 var AEON=LL(16.0028,108.2290); (function(){ var m=new THREE.Mesh(new THREE.BoxGeometry(240,22,150),M(0xf1efe9,{roughness:.6})); m.position.set(AEON[0],11,AEON[1]); m.castShadow=true; scene.add(m); })();
 // Làng đại học Đà Nẵng, FPT City, sân golf (ước lượng)
-var LDH=LL(15.9720,108.2420), FPT=LL(15.9760,108.2620), GOLF=LL(15.9440,108.2830), DRG=LL(16.0613,108.2275), DT=LL(16.0700,108.2190), MK=LL(16.0620,108.2510);
+var LDH=LL(15.9720,108.2420), FPT=LL(15.982294,108.260892), GOLF=LL(15.9440,108.2830), DRG=LL(16.061040,108.227019), DT=LL(16.0700,108.2190), MK=LL(16.048543,108.250789), STB=LL(16.017044,108.263774), DIFF=LL(16.039470,108.233302), HA=LLnear(15.877520,108.332702,9000);   // làng đại học, sân golf, downtown: ước lượng
 sFlat(700,520,0x8db86a,GOLF[0],GOLF[1],.08); sFlat(900,700,0x8db86a,GOLF[0]+600,GOLF[1]+500,.08);
 (function(){ var dm=new THREE.Object3D(), im=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),M(0xe6e2d8,{roughness:.7}),90), q=0;
   [[LDH,40],[FPT,50]].forEach(function(c){ for(var i=0;i<c[1];i++){ var h=rnd(10,32); dm.position.set(c[0][0]+rnd(-450,450),h/2,c[0][1]+rnd(-350,350)); dm.scale.set(rnd(20,60),h,rnd(16,36)); dm.updateMatrix(); im.setMatrixAt(q++,dm.matrix); } });
@@ -321,11 +321,11 @@ label('Công viên (ước lượng)','',world,[100,6,-210]);
 (function(){ function L(t,p,h,cls){ label(t,cls||'',scene,[p[0],h||12,p[1]]); }
   var cc=CC[3]; L('Sông Cổ Cò',[cc[0],cc[1]],8);
   L('Ngũ Hành Sơn',NHS,130,'far');
-  L('Biển Mỹ Khê',MK,8); var nn=window.__coast[6]; L('Biển Non Nước',[nn[0]+120,nn[1]],8); L('Biển Đông',[window.__coast[5][0]+3000,window.__coast[5][1]],8,'far');
+  L('Biển Mỹ Khê',MK,8); L('Biển Sơn Thủy',STB,8); L('Biển Đông',[STB[0]+3500,STB[1]],8,'far'); L('Hội An (~'+Math.round(HA[3]/1000)+' km)',HA,60,'far');
   L('Bán đảo Sơn Trà',ST,720,'far');
   L('Cù Lao Chàm (~'+Math.round(CLC[3]/1000)+' km)',CLC,300,'far');
-  L('Trung tâm Đà Nẵng (Downtown)',DT,190,'far'); L('Cầu Rồng · sông Hàn (pháo hoa DIFF)',DRG,40,'far');
-  L('Sân bay quốc tế Đà Nẵng',LL(16.0439,108.1994),30,'far');
+  L('Trung tâm Đà Nẵng (Downtown)',DT,190,'far'); L('Cầu Rồng',DRG,40,'far'); L('Điểm bắn pháo hoa DIFF',DIFF,40,'far');
+  L('Sân bay quốc tế Đà Nẵng',LL(16.054092,108.200513),30,'far');
   L('Sân vận động Hòa Xuân',SVD,30); L('AEON Mall Hòa Xuân',AEON,30);
   L('Làng Đại học Đà Nẵng',LDH,40); L('FPT City',FPT,40); L('Sân golf',GOLF,20,'far'); })();
 
