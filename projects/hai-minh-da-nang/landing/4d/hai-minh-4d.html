@@ -865,7 +865,8 @@ function openUnitTool(r){
 }
 /* ---------- căn hộ thật để đứng bên trong khi xem view (5D): sàn, tường, cửa kính, rèm, nội thất theo đúng khung và hướng căn ---------- */
 var inRoom=null, inUnit=null, inFloor=null;
-function clearRoom(){ if(inRoom){ T.remove(inRoom); inRoom.traverse(function(o){ if(o.geometry) o.geometry.dispose(); }); inRoom=null; } }
+var inHidden=[];
+function clearRoom(){ inHidden.forEach(function(m){ m.visible=true; }); inHidden=[]; if(inRoom){ T.remove(inRoom); inRoom.traverse(function(o){ if(o.geometry) o.geometry.dispose(); }); inRoom=null; } }
 function buildRoom4(r,f){
   clearRoom(); var g=new THREE.Group(); T.add(g); inRoom=g;
   var fc=r[6], u0=r[2],u1=r[3],v0=r[4],v1=r[5], EW=(fc==='E'||fc==='W'), D=EW?v1-v0:u1-u0, Wd=EW?u1-u0:v1-v0, y0=FL[f]+.3;   // sàn căn nằm trên sàn bê tông của tháp
@@ -904,6 +905,12 @@ function buildRoom4(r,f){
   var fm=bx(.3,D-.3,.3,Wd-.3,0,.01,new THREE.MeshBasicMaterial({visible:false}),true); fm.name='inFloor';
   function Q(x,z){ var v=X1-x, u=z-Z0; return fc==='E'?[v-v0,u-u0]:fc==='W'?[v1-v,u-u0]:fc==='N'?[u-u0,v-v0]:[u1-u,v-v0]; }
   inUnit=r; inFloor=f; g.userData={P:P,Q:Q,D:D,Wd:Wd,y0:y0};
+  // ẩn mảng mặt ngoài (dải đất nung, lam…) che ngay trước cửa kính của căn đang đứng: thực tế có cửa sổ, không che view
+  T.updateMatrixWorld(true); var inv=new THREE.Matrix4().copy(T.matrixWorld).invert(), m4=new THREE.Matrix4(), eL=P(Math.min(D-.9,2),Wd/2);
+  var z0=P(-4,0), z1=P(.05,Wd), zb=new THREE.Box3(new THREE.Vector3(Math.min(z0[0],z1[0]),y0+.1,Math.min(z0[1],z1[1])),new THREE.Vector3(Math.max(z0[0],z1[0]),y0+2.45,Math.max(z0[1],z1[1])));
+  A.traverse(function(o){ if(!o.isMesh||o.isInstancedMesh||!o.visible) return; if(!o.geometry.boundingBox) o.geometry.computeBoundingBox();
+    var bb=o.geometry.boundingBox.clone().applyMatrix4(m4.multiplyMatrices(inv,o.matrixWorld));
+    if(bb.intersectsBox(zb)&&!bb.containsPoint(new THREE.Vector3(eL[0],y0+1.5,eL[1]))){ o.visible=false; inHidden.push(o); } });
   return {eye:P(Math.max(1.6,Math.min(D-.9,sa+1.6)),cb), y:y0+1.55};
 }
 function viewFromUnit(r){
