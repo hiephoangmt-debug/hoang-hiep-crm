@@ -5,12 +5,13 @@ import json, math, pathlib
 H = pathlib.Path(__file__).parent
 LAT0, LON0 = 16.0213, 108.257659          # ghim vị trí dự án
 OX, OZ = 26.888, -33.847                  # ngã ba NĐT – đại lộ so với ghim (m)
-TH = 0.40                                 # world.rotation.y của mô hình
+TH = 0.427                                # world.rotation.y của mô hình (= góc đại lộ ven biển đo trên bản đồ)
+DX = -9                                   # dời để tim đại lộ thật trùng tim đại lộ vẽ sẵn (x = 0)
 KX = 111320 * math.cos(math.radians(LAT0)); KZ = 110574
 def W(lat, lon):
     sx = (lon - LON0) * KX - OX; sz = -(lat - LAT0) * KZ - OZ
     c, s = math.cos(TH), math.sin(TH)
-    return (sx * c - sz * s, sx * s + sz * c)
+    return (sx * c - sz * s + DX, sx * s + sz * c)
 def load(n):
     p = H / n
     if not p.exists(): return [], {}
@@ -43,9 +44,16 @@ for w in ways.values():
     if len(P) < 2: continue
     hw = t.get('highway', '').replace('_link', '')
     if hw in WID:
-        if all(abs(p[0]) < 22 for p in P) and all(abs(p[1]) < 1300 for p in P): continue   # đại lộ ven biển đã vẽ riêng
         if min(math.hypot(*p) for p in P) > (4200 if WID[hw] >= 13 else 2600): continue
-        out['roads'].append([WID[hw], flat(simp(P, .8))])
+        # bỏ các đoạn trùng dải đại lộ ven biển đã vẽ sẵn (|x| < 26 m, |z| < 1300 m) – tránh thấy 2 con đường
+        inb = lambda q: abs(q[0]) < 26 and abs(q[1]) < 1300
+        run = [P[0]]
+        for a2, b2 in zip(P, P[1:]):
+            if inb(a2) and inb(b2):
+                if len(run) > 1: out['roads'].append([WID[hw], flat(simp(run, .8))])
+                run = [b2]
+            else: run.append(b2)
+        if len(run) > 1: out['roads'].append([WID[hw], flat(simp(run, .8))])
     elif t.get('natural') == 'coastline':
         out['coast'].append(flat(simp(P, 1.5)))
     elif t.get('natural') == 'water' or t.get('waterway') in ('riverbank',) or t.get('leisure') == 'swimming_pool':
