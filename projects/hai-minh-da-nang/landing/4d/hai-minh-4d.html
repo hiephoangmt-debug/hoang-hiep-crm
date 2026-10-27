@@ -150,8 +150,8 @@ input[type=range]{accent-color:var(--orange)}
    +'#ssGate .m{min-height:18px;margin-top:8px;font-size:13px;color:#d63b2f;font-weight:700}#ssGate .ok{color:#1b8a4a}#ssGate a{color:#0A2540;font-weight:800;text-decoration:none}';
   var st=document.createElement('style'); st.textContent=css; (document.head||document.documentElement).appendChild(st);
   var ov=document.createElement('div'); ov.id='ssGate';
-  ov.innerHTML='<div class="bx"><div class="lg">SR</div><h3>Link riêng Sun Saphia Residence</h3><p id="ssGateTx">Nhập email đã được Hoàng Hiệp cấp quyền. Mã xác nhận sẽ gửi vào hộp thư của email đó.</p>'
-   +'<input id="ssGateIn" type="email" autocomplete="email" autocapitalize="off" placeholder="Email của bạn"><button type="button" id="ssGateBt">Gửi mã vào email</button>'
+  ov.innerHTML='<div class="bx"><div class="lg">SR</div><h3>Link riêng Sun Saphia Residence</h3><p id="ssGateTx">Nhập email đã được Hoàng Hiệp cấp quyền. Link đăng nhập sẽ gửi vào Gmail đó, bấm là vào.</p>'
+   +'<input id="ssGateIn" type="email" autocomplete="email" autocapitalize="off" placeholder="Email của bạn"><button type="button" id="ssGateBt">Gửi link đăng nhập vào Gmail</button>'
    +'<button type="button" class="lnk" id="ssGateBk" style="display:none">← Nhập email khác</button><div class="m" id="ssGateMsg"></div>'
    +'<p style="margin:10px 0 0">Chưa được cấp quyền? Liên hệ <a href="tel:0904567009">0904 567 009</a> · <a href="https://zalo.me/0904567009">Zalo</a></p></div>';
   function mount(){ if(!document.getElementById('ssGate')) (document.body||document.documentElement).appendChild(ov); }
@@ -169,13 +169,13 @@ input[type=range]{accent-color:var(--orange)}
   var page=(location.pathname.split('/').pop()||'')+(/[?&]crm/.test(Q)?' (crm)':'');
   function grant(r,store){ if(store){ try{localStorage.setItem('ssKey',store);}catch(e){} } window.SS_KEY=store||window.SS_KEY; window.SS_USER=r.name||''; ov.remove(); }
   function reason(r){ return r.error?'Không kết nối được, thử lại sau.':r.reason==='expired'?'Quyền xem đã hết hạn.':r.reason==='locked'?'Quyền xem đã bị khóa.':r.reason==='otp'?'Mã xác nhận không đúng hoặc đã hết hạn.':r.reason==='email'?'Email không hợp lệ.':'Email / mã này chưa được cấp quyền.'; }
-  function toOtp(){ step='otp'; $('#ssGateTx').textContent='Đã gửi mã 6 số tới '+email+'. Mở hộp thư (kể cả mục Spam/Quảng cáo) và nhập mã:'; var i=$('#ssGateIn'); i.value=''; i.type='text'; i.inputMode='numeric'; i.placeholder='Mã 6 số'; $('#ssGateBt').textContent='Xác nhận'; $('#ssGateBk').style.display='block'; i.focus&&i.focus(); }
-  function toEmail(){ step='email'; $('#ssGateTx').textContent='Nhập email đã được Hoàng Hiệp cấp quyền. Mã xác nhận sẽ gửi vào hộp thư của email đó.'; var i=$('#ssGateIn'); i.value=email; i.type='email'; i.placeholder='Email của bạn'; $('#ssGateBt').textContent='Gửi mã vào email'; $('#ssGateBk').style.display='none'; msg(''); }
+  function toOtp(){ step='otp'; $('#ssGateTx').textContent='Đã gửi link đăng nhập tới '+email+'. Mở Gmail (kể cả mục Spam/Quảng cáo), bấm nút "Bấm để vào xem dự án" là vào. Hoặc nhập mã 6 số trong thư:'; var i=$('#ssGateIn'); i.value=''; i.type='text'; i.inputMode='numeric'; i.placeholder='Mã 6 số'; $('#ssGateBt').textContent='Xác nhận'; $('#ssGateBk').style.display='block'; i.focus&&i.focus(); }
+  function toEmail(){ step='email'; $('#ssGateTx').textContent='Nhập email đã được Hoàng Hiệp cấp quyền. Link đăng nhập sẽ gửi vào Gmail đó, bấm là vào.'; var i=$('#ssGateIn'); i.value=email; i.type='email'; i.placeholder='Email của bạn'; $('#ssGateBt').textContent='Gửi link đăng nhập vào Gmail'; $('#ssGateBk').style.display='none'; msg(''); }
   function go(){
     var v=String($('#ssGateIn').value||'').trim(); if(!v) return;
     if(step==='email'){
       if(v.indexOf('@')<0){ msg('Đang kiểm tra…',1); own(v,function(n){ grant({name:n},v); },function(){ call({action:'access',code:v,page:page},function(r){ if(r.access===true) grant(r,v); else msg(reason(r)); }); }); return; }  // mã truy cập nội bộ
-      email=v.toLowerCase(); msg('Đang gửi mã…',1);
+      email=v.toLowerCase(); msg('Đang gửi link…',1);
       call({action:'access_req',email:email},function(r){ if(r.sent){ toOtp(); msg(r.wait?'Mã vừa được gửi, vui lòng kiểm tra hộp thư.':'',1); } else msg(reason(r)); });
     } else {
       msg('Đang xác nhận…',1);
@@ -788,7 +788,7 @@ document.getElementById('mTop').onclick=flyTop;
 var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false); bView0(); };
 
 /* ---------- bấm vào căn trên mặt bằng tầng: hiện thẻ căn, mở mặt bằng & 3D căn, view từ đúng căn ---------- */
-var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/f4e3e32e86a1b2b9b26fc71fb3623697ac3cdc55/projects/sun-saphia/chon-can/chon-can-app.html';
+var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/a063d736819ece308ac318a249c3c514211b884a/projects/sun-saphia/chon-can/chon-can-app.html';
 var unitEye=null;
 // [mã, loại, u0,u1, v0,v1, hướng mặt kính chính] – cùng số liệu với công cụ chọn căn
 var UNITS=[['11','2PN',0,9.9,0,7.25,'E'],['12','STU',10,13.8,0,9,'E'],['12A','STU',13.8,17.6,0,9,'E'],['12B','1PN',17.6,23.8,0,9,'E'],['15','STU',23.8,27.6,0,9,'E'],['16','STU',27.6,31.4,0,9,'E'],['17','1PN',31.4,37.6,0,9,'E'],
