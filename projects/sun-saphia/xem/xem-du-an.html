@@ -33,10 +33,10 @@
 
 <div id="gate"><div class="bx"><div class="lg">SR</div><h3>Xem dự án Sun Saphia Residence</h3>
   <p>Dành riêng cho người được Hoàng Hiệp cấp quyền.</p>
-  <div id="gWrap"><div id="gBtn"></div><div class="or">hoặc nhận mã qua email</div></div>
-  <p id="tx" style="margin-bottom:8px">Nhập email đã được cấp quyền, mã 6 số sẽ gửi vào hộp thư:</p>
+  <div id="gWrap"><div id="gBtn"></div><div class="or">hoặc nhận link đăng nhập qua Gmail</div></div>
+  <p id="tx" style="margin-bottom:8px">Nhập email đã được cấp quyền, hệ thống gửi link đăng nhập vào Gmail:</p>
   <input id="in" type="email" autocomplete="email" autocapitalize="off" placeholder="Email của bạn">
-  <button type="button" class="bt" id="bt">Gửi mã vào email</button>
+  <button type="button" class="bt" id="bt">Gửi link đăng nhập vào Gmail</button>
   <button type="button" class="lnk" id="bk" style="display:none">← Nhập email khác</button>
   <div class="m" id="msg"></div>
   <p style="margin:10px 0 0">Chưa được cấp quyền? Liên hệ <a href="tel:0904567009">0904 567 009</a> · <a href="https://zalo.me/0904567009">Zalo</a></p></div></div>
@@ -45,8 +45,8 @@
 (function(){
 var API='https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec', SITE='kGYgRtNhbHZr';
 var GCID='';   // Google OAuth Client ID (Web) – để trống thì ẩn nút Google
-var U4D='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/593c347a57a364a524dad678ee491adccbd9ba47/projects/sun-saphia/4d/sun-saphia-4d.html';
-var UCC='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/0d308c638b60f465e6cb6d4111659ccb42a277b0/projects/sun-saphia/chon-can/chon-can-app.html';
+var U4D='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/eaa79262d3687b008ab6cffc0470afe24680dda2/projects/sun-saphia/4d/sun-saphia-4d.html';
+var UCC='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/052a397da022820c04a4cc0227039aefa84e7988/projects/sun-saphia/chon-can/chon-can-app.html';
 var $=function(i){ return document.getElementById(i); }, step='email', email='', KEY=null;
 function msg(t,ok){ $('msg').textContent=t; $('msg').className='m'+(ok?' ok':''); }
 function call(params,cb){ var name='xg'+Date.now()+Math.floor(Math.random()*1e4), s=document.createElement('script'), done=false, q=['cb='+name,'key='+SITE];
@@ -65,15 +65,15 @@ function grant(name,key){ KEY=key; try{ localStorage.setItem('ssKey',key); local
 [].forEach.call(document.querySelectorAll('.tabs button'),function(b){ b.onclick=function(){ if(KEY) tab(b.dataset.t); }; });
 $('out').onclick=function(){ try{ localStorage.removeItem('ssKey'); }catch(e){} location.reload(); };
 // ---- đăng nhập bằng email + mã 6 số ----
-function toOtp(){ step='otp'; $('tx').textContent='Đã gửi mã 6 số tới '+email+'. Mở hộp thư (kể cả mục Spam/Quảng cáo) và nhập mã:'; var i=$('in'); i.value=''; i.type='text'; i.inputMode='numeric'; i.placeholder='Mã 6 số'; $('bt').textContent='Xác nhận'; $('bk').style.display='inline-block'; }
-function toEmail(){ step='email'; $('tx').textContent='Nhập email đã được cấp quyền, mã 6 số sẽ gửi vào hộp thư:'; var i=$('in'); i.value=email; i.type='email'; i.placeholder='Email của bạn'; $('bt').textContent='Gửi mã vào email'; $('bk').style.display='none'; msg(''); }
+function toOtp(){ step='otp'; $('tx').textContent='Đã gửi link đăng nhập tới '+email+'. Mở Gmail (kể cả mục Spam/Quảng cáo), bấm nút "Bấm để vào xem dự án" là vào. Hoặc nhập mã 6 số trong thư:'; var i=$('in'); i.value=''; i.type='text'; i.inputMode='numeric'; i.placeholder='Mã 6 số'; $('bt').textContent='Xác nhận'; $('bk').style.display='inline-block'; }
+function toEmail(){ step='email'; $('tx').textContent='Nhập email đã được cấp quyền, hệ thống gửi link đăng nhập vào Gmail:'; var i=$('in'); i.value=email; i.type='email'; i.placeholder='Email của bạn'; $('bt').textContent='Gửi link đăng nhập vào Gmail'; $('bk').style.display='none'; msg(''); }
 // mã link riêng được cấp (lưu dạng băm SHA-256, kiểm tra ngay trên máy, không cần CRM): băm → tên người xem
   var QX_OK={'029a64f4f8d4479b70daca4fcb4fb719cf27ea51878aea2339f4616e3e455146':'Hoàng Hiệp','8bbf4e45c6ef0452f1a6d6140e0eb6ce4def05757e13fc5c6c68697f083bc0f7':'Thủy'};
   function own(c,yes,no){ try{ crypto.subtle.digest('SHA-256',new TextEncoder().encode(c)).then(function(d){ var h=[].map.call(new Uint8Array(d),function(x){return ('0'+x.toString(16)).slice(-2)}).join(''); var nm=QX_OK[h]; nm?yes(nm):no(); },no); }catch(e){ no(); } }
 function go(){ var v=String($('in').value||'').trim(); if(!v) return;
   if(step==='email'){
     if(v.indexOf('@')<0){ msg('Đang kiểm tra…',1); own(v,function(n){ grant(n,v); },function(){ call({action:'access',code:v,page:page},function(r){ if(r.access===true) grant(r.name,v); else msg(reason(r)); }); }); return; }
-    email=v.toLowerCase(); msg('Đang gửi mã…',1);
+    email=v.toLowerCase(); msg('Đang gửi link…',1);
     call({action:'access_req',email:email},function(r){ if(r.sent){ toOtp(); msg(r.wait?'Mã vừa được gửi, vui lòng kiểm tra hộp thư.':'',1); } else msg(reason(r)); });
   } else { msg('Đang xác nhận…',1); call({action:'access_otp',email:email,otp:v,page:page},function(r){ if(r.access===true&&r.token) grant(r.name,r.token); else msg(reason(r)); }); } }
 $('bt').onclick=go; $('in').onkeydown=function(e){ if(e.key==='Enter') go(); }; $('bk').onclick=toEmail;
