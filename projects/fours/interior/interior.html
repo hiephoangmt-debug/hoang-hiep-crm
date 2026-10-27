@@ -28,20 +28,28 @@ body.video .note{bottom:16px;left:0;right:0;text-align:center;font-size:18px}
 <div class="wm">MINH HỌA · 0904 567 009</div>
 <div id="cap"></div>
 <div class="note">Phối cảnh dựng hình minh họa · thông số theo CĐT</div>
-<div class="cams" id="cams"></div>
+<div class="cams" id="cams"><select id="pick" aria-label="Chọn căn" style="font:700 13px inherit;font-family:inherit;border:1.5px solid #0A2540;border-radius:18px;padding:6px 10px;color:#0A2540;background:#fff"></select><button id="vplan">Mặt bằng 2D</button></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script src="units.js"></script>
+<script src="units-F1.js"></script>
+<script src="units-F5.js"></script>
 <script>
 (function(){ var Q=new URLSearchParams(location.search), U=FS_UNITS[Q.get('u')||'F2-03-03'];
   if(Q.get('view')==='plan') document.body.classList.add('plan'); if(Q.has('video')) document.body.classList.add('video'); if(Q.has('export')) document.body.classList.add('export');
-  document.getElementById('bar').innerHTML='Căn <b>'+U.code+'</b> · '+U.type+' · Tim '+String(U.tim).replace('.',',')+' m² · TT '+String(U.tt).replace('.',',')+' m² · Sân '+String(U.gardenTT).replace('.',',')+' m² · Nội thất Hiện đại · gói Tiêu chuẩn';
+  document.getElementById('bar').innerHTML='Căn <b>'+(U.auto?U.tower+' · căn số '+U.unitNo+' (tầng '+U.floor+')':U.code)+'</b> · '+U.type+(U.tim?' · Tim '+String(U.tim).replace('.',',')+' m²':'')+' · TT '+String(U.tt).replace('.',',')+' m²'+(U.gardenTT?' · Sân '+String(U.gardenTT).replace('.',',')+' m²':'')+' · Nội thất Hiện đại · gói Tiêu chuẩn';
 })();
 </script>
 <script src="interior.js"></script>
 <script>
+(function(){ var Q=new URLSearchParams(location.search), cur=Q.get('u')||'F2-03-03', sel=document.getElementById('pick');
+  if(sel){ Object.keys(FS_UNITS).sort().forEach(function(k){ var u=FS_UNITS[k], o=document.createElement('option'); o.value=k; o.textContent=(u.auto?u.tower+' · căn '+u.unitNo:u.code)+' · '+u.type; if(k===cur) o.selected=true; sel.appendChild(o); });
+    sel.onchange=function(){ Q.set('u',sel.value); Q.delete('cam'); location.search=Q.toString(); };
+    document.getElementById('vplan').onclick=function(){ Q.set('view','plan'); location.search=Q.toString(); }; }
+  if(Q.get('view')==='plan'){ var b=document.createElement('a'); b.textContent='← Xem 3D'; b.href='?u='+encodeURIComponent(cur); b.style.cssText='position:fixed;left:12px;bottom:12px;z-index:5;background:#FF6A2B;color:#fff;font-weight:800;padding:10px 16px;border-radius:20px;text-decoration:none'; document.body.appendChild(b); }
+})();
 (function(){ if(!window.__cams) return; var names={overview:'Tổng thể',top:'Nhìn từ trên',living:'Phòng khách',dining:'Bàn ăn',kitchen:'Bếp',master:'Ngủ master',br2:'Ngủ 2',wc:'WC',garden:'Sân vườn',gardenTop:'Sân vườn (cao)'};
-  var el=document.getElementById('cams'); window.__cams.forEach(function(k){ var b=document.createElement('button'); b.textContent=names[k]||k; b.onclick=function(){ el.querySelectorAll('button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); __setCam(k); }; el.appendChild(b); });
+  if(window.__camNames) names=window.__camNames; var el=document.getElementById('cams'); window.__cams.forEach(function(k){ var b=document.createElement('button'); b.textContent=names[k]||k; b.onclick=function(){ el.querySelectorAll('button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); __setCam(k); }; el.appendChild(b); });
 })();
 </script>
 </body></html>

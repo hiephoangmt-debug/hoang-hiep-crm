@@ -15,6 +15,7 @@ function bbox(P){ var b = [1e9, 1e9, -1e9, -1e9]; P.forEach(function(p){ b[0] = 
 function vn(n, d){ return n.toFixed(d == null ? 2 : d).replace('.', ','); }
 
 /* ---------- tường: lưới 2,5 cm → khối chữ nhật (vỏ ngoài trừ phòng, trừ cửa đi; cửa sổ/cửa kính xử lý riêng) ---------- */
+if (!U.env){ var RB = bbox([].concat.apply([], U.rooms.map(function(r){ return r.poly; })).concat([].concat.apply([], U.wallRects.map(function(w){ return [[w[0], w[1]], [w[2], w[3]]]; })))); U.env = [[RB[0], RB[1]], [RB[2], RB[1]], [RB[2], RB[3]], [RB[0], RB[3]]]; U.doors = U.doors || []; U.windows = U.windows || []; }
 var G = 0.025, EB = bbox(U.env), NX = Math.round((EB[2] - EB[0]) / G), NY = Math.round((EB[3] - EB[1]) / G);
 function cellKind(i, j){
   var x = EB[0] + (i + .5) * G, y = EB[1] + (j + .5) * G;
@@ -25,7 +26,7 @@ function cellKind(i, j){
   return 1;
 }
 var grid = [], i, j;
-for (j = 0; j < NY; j++){ grid.push([]); for (i = 0; i < NX; i++) grid[j].push(cellKind(i, j)); }
+if (!U.wallRects){ for (j = 0; j < NY; j++){ grid.push([]); for (i = 0; i < NX; i++) grid[j].push(cellKind(i, j)); } }
 // gộp ô cùng loại thành hình chữ nhật (quét hàng rồi nối dọc)
 function rects(kind){
   var used = grid.map(function(r){ return r.map(function(){ return false; }); }), out = [];
@@ -39,7 +40,14 @@ function rects(kind){
   }
   return out;
 }
-var WALLS = rects(1), DOORS = rects(3), GLASSD = rects(4), WINS = rects(5);
+var WALLS, DOORS, GLASSD, WINS;
+if (U.wallRects){ WALLS = U.wallRects; DOORS = []; WINS = [];
+  // kính: cạnh phòng giáp ngoài nhà, phần không có tường
+  GLASSD = []; U.rooms.forEach(function(r){ (r.ext || []).forEach(function(sd){ var b = r.bb, hz = sd === 'T' || sd === 'B', a0 = hz ? b[0] : b[1], a1 = hz ? b[2] : b[3], c = sd === 'T' ? b[1] - .1 : sd === 'B' ? b[3] + .1 : sd === 'L' ? b[0] - .1 : b[2] + .1, run = null;
+    for (var a = a0 + .05; a <= a1 - .05 + 1e-6; a += .05){ var x = hz ? a : c, y = hz ? c : a, inW = WALLS.some(function(w){ return x >= w[0] - .02 && x <= w[2] + .02 && y >= w[1] - .02 && y <= w[3] + .02; });
+      if (!inW){ if (!run) run = [a, a]; else run[1] = a; } else if (run){ if (run[1] - run[0] > .5) GLASSD.push(hz ? [run[0], c - .06, run[1], c + .06] : [c - .06, run[0], c + .06, run[1]]); run = null; } }
+    if (run && run[1] - run[0] > .5) GLASSD.push(hz ? [run[0], c - .06, run[1], c + .06] : [c - .06, run[0], c + .06, run[1]]); }); }); }
+else { WALLS = rects(1); DOORS = rects(3); GLASSD = rects(4); WINS = rects(5); }
 
 /* ================= MẶT BẰNG 2D (SVG) ================= */
 var COLORS = { wood: '#ecdcc2', tile: '#e4e9ec', grass: '#cfe6a8', wall: '#1d2733', furn: '#ffffff', line: '#46505c', soft: '#d9dee4', accent: '#FF6A2B', navy: '#0A2540' };
@@ -90,7 +98,7 @@ function plan2d(){
         txt(x + w / 2, y + d / 2 + .12, 'Giường ' + (it.size || ''), .2, { attr: { fill: '#4b5662' } }); break; }
       case 'headboard': R(x, y, w, d, '#8a8f96'); break;
       case 'nightstand': R(x, y, w, d, '#b48a62'); el('circle', { cx: x + w / 2, cy: y + d / 2, r: .1, fill: '#fff2c6', stroke: COLORS.line, 'stroke-width': .015 }); break;
-      case 'wardrobe': R(x, y, w, d, '#4a4f55'); for (var k2 = 1; k2 < Math.round(w / .5); k2++){ var lx = x + k2 * w / Math.round(w / .5); el('line', { x1: lx, x2: lx, y1: y, y2: y + d, stroke: '#9aa3ab', 'stroke-width': .015 }); } txt(x + w / 2, y + d / 2 + .07, 'Tủ áo kịch trần · kính khói', .17, { attr: { fill: '#ffffff' } }); break;
+      case 'wardrobe': R(x, y, w, d, '#4a4f55'); for (var k2 = 1; k2 < Math.round(w / .5); k2++){ var lx = x + k2 * w / Math.round(w / .5); el('line', { x1: lx, x2: lx, y1: y, y2: y + d, stroke: '#9aa3ab', 'stroke-width': .015 }); } var vt = d > w, L0 = vt ? d : w, fs0 = Math.min(.17, L0 / 15); txt(x + w / 2, y + d / 2 + .06, L0 > 1.6 ? 'Tủ áo kịch trần · kính khói' : 'Tủ áo', L0 > 1.6 ? fs0 : .15, { attr: { fill: '#ffffff', transform: vt ? 'rotate(90 ' + (x + w / 2) + ' ' + (y + d / 2) + ')' : '' } }); break;
       case 'tvconsole': R(x, y, w, d, '#b48a62'); if (it.tv) txt(x + w / 2 + .02, y + d / 2, 'TV', .18, { attr: { fill: '#4b5662', transform: 'rotate(90 ' + (x + w / 2 + .02) + ' ' + (y + d / 2) + ')' } }); break;
       case 'tvwall': R(x, y, w, d, '#9b7653'); break;
       case 'dresser': R(x, y, w, d, '#b48a62'); el('circle', { cx: x - .22, cy: y + d / 2, r: .16, fill: '#ffffff', stroke: COLORS.line, 'stroke-width': .015 }); break;
@@ -118,11 +126,13 @@ function plan2d(){
     }
   });
   // nhãn phòng: tên + diện tích + kích thước
+  function labelPt(r){ var b = bbox(r.poly), best = null, bd = -1e9; for (var i2 = 1; i2 < 10; i2++) for (var j2 = 1; j2 < 10; j2++){ var x = b[0] + (b[2] - b[0]) * i2 / 10, y = b[1] + (b[3] - b[1]) * j2 / 10; if (!inPoly(x, y, r.poly)) continue;
+      var hit = U.items.some(function(it){ return it.w && x > it.x - .35 && x < it.x + it.w + .35 && y > it.y - .25 && y < it.y + it.d + .25; }); var sc = (hit ? 0 : 10) - Math.hypot(x - (b[0] + b[2]) / 2, y - (b[1] + b[3]) / 2) * .3; if (sc > bd){ bd = sc; best = [x, y]; } } return best || [(b[0] + b[2]) / 2, (b[1] + b[3]) / 2]; }
   function tag(tx, ty, l1, l2, l3, big){ el('rect', { x: tx - (big ? .98 : .66), y: ty - .27, width: big ? 1.96 : 1.32, height: l3 ? .68 : .52, rx: .1, fill: 'rgba(255,255,255,.9)', stroke: 'rgba(10,37,64,.15)', 'stroke-width': .01 });
     txt(tx, ty, l1, big ? .19 : .14, { attr: { 'font-weight': 800 } }); if (l2) txt(tx, ty + .2, l2, big ? .17 : .13, { attr: { fill: COLORS.accent, 'font-weight': 800 } }); if (l3) txt(tx, ty + .36, l3, big ? .14 : .11, { attr: { fill: '#4b5662' } }); }
   U.rooms.forEach(function(r){ if (r.hide) return; var bb = bbox(r.poly), a = area(r.poly), big = Math.min(bb[2] - bb[0], bb[3] - bb[1]) > 2;
     if (r.sub){ r.sub.forEach(function(sb, k){ tag(sb.at[0], sb.at[1], sb.name.toUpperCase(), k === 0 ? 'Khách + ăn + bếp ' + vn(a, 1) + ' m²' : '', k === 0 ? 'ngang ' + vn(bb[2] - bb[0]) + ' m · dài ' + vn(bb[3] - bb[1]) + ' m' : '', k === 0); }); return; }
-    var L = r.label || [(bb[0] + bb[2]) / 2, (bb[1] + bb[3]) / 2];
+    var L = r.label || labelPt(r);
     tag(L[0], L[1], r.name.toUpperCase(), vn(a, 1) + ' m²', vn(bb[2] - bb[0]) + ' × ' + vn(bb[3] - bb[1]) + ' m', big); });
   // sân vườn nhãn
   if (U.garden){ txt(-1.55, 7.6, 'SÂN VƯỜN', .2, { attr: { 'font-weight': 800, transform: 'rotate(-90 -1.55 7.6)' } }); txt(-1.25, 7.6, 'TT ' + vn(U.gardenTT, 1) + ' m² (theo CĐT)', .14, { attr: { fill: COLORS.accent, 'font-weight': 800, transform: 'rotate(-90 -1.25 7.6)' } });
@@ -132,11 +142,12 @@ function plan2d(){
     if (hz){ var yy = y1 + off; el('line', Object.assign({ x1: x1, x2: x2, y1: yy, y2: yy }, s)); [x1, x2].forEach(function(xx){ el('line', Object.assign({ x1: xx, x2: xx, y1: yy - .12, y2: yy + .12 }, s)); }); txt((x1 + x2) / 2, yy - .08, label, .18, { attr: { 'font-weight': 700 } }); }
     else { var xx2 = x1 + off; el('line', Object.assign({ x1: xx2, x2: xx2, y1: y1, y2: y2 }, s)); [y1, y2].forEach(function(yv){ el('line', Object.assign({ x1: xx2 - .12, x2: xx2 + .12, y1: yv, y2: yv }, s)); }); txt(xx2 + .08, (y1 + y2) / 2, label, .18, { attr: { 'font-weight': 700, transform: 'rotate(90 ' + (xx2 + .08) + ' ' + ((y1 + y2) / 2) + ')' } }); }
   }
-  dim(0, 10.2, 6.08, 10.2, .55, vn(6.08) + ' m'); dim(6.28, 0, 6.28, 8.27, 2.15, vn(8.27) + ' m'); dim(7.97, 8.47, 7.97, 10, .4, vn(1.53) + ' m'); dim(0, 10.2, 7.77, 10.2, 1.05, vn(7.77) + ' m'); dim(-0.2, 0, -0.2, 10, -3.35, vn(10) + ' m');
+  if (U.auto){ var AB = bbox([].concat.apply([], U.rooms.map(function(r){ return r.poly; }))); dim(AB[0], AB[3] + .15, AB[2], AB[3] + .15, .55, vn(AB[2] - AB[0]) + ' m'); dim(AB[2] + .15, AB[1], AB[2] + .15, AB[3], .55, vn(AB[3] - AB[1]) + ' m'); }
+  else { dim(0, 10.2, 6.08, 10.2, .55, vn(6.08) + ' m'); dim(6.28, 0, 6.28, 8.27, 2.15, vn(8.27) + ' m'); dim(7.97, 8.47, 7.97, 10, .4, vn(1.53) + ' m'); dim(0, 10.2, 7.77, 10.2, 1.05, vn(7.77) + ' m'); dim(-0.2, 0, -0.2, 10, -3.35, vn(10) + ' m'); }
   // tiêu đề, la bàn, chú thích
   var tX = vb[0] + .4, tY = vb[1] + .55;
-  txt(tX, tY, 'CĂN ' + U.code + ' · ' + U.type + ' · TẦNG ' + U.floor + ' · TÒA ' + U.tower, .36, { attr: { 'text-anchor': 'start', 'font-weight': 800 } });
-  txt(tX, tY + .42, 'Tim ' + vn(U.tim, 1) + ' m² · Thông thủy ' + vn(U.tt, 1) + ' m² · Sân vườn TT ' + vn(U.gardenTT, 1) + ' m² · Nội thất Hiện đại – gói Tiêu chuẩn', .2, { attr: { 'text-anchor': 'start', fill: '#4b5662' } });
+  txt(tX, tY, (U.auto ? 'CĂN SỐ ' + U.unitNo + ' · ' + U.type + ' · TẦNG ' + U.floor + ' · TÒA ' + U.tower : 'CĂN ' + U.code + ' · ' + U.type + ' · TẦNG ' + U.floor + ' · TÒA ' + U.tower), .36, { attr: { 'text-anchor': 'start', 'font-weight': 800 } });
+  txt(tX, tY + .42, (U.tim ? 'Tim ' + vn(U.tim, 1) + ' m² · ' : '') + 'Thông thủy ' + vn(U.tt, 1) + ' m²' + (U.gardenTT ? ' · Sân vườn TT ' + vn(U.gardenTT, 1) + ' m²' : '') + ' · Nội thất Hiện đại – gói Tiêu chuẩn', .2, { attr: { 'text-anchor': 'start', fill: '#4b5662' } });
   var cX = vb[0] + vb[2] - .9, cY = vb[1] + .9, ng = el('g', { transform: 'translate(' + cX + ' ' + cY + ') rotate(' + (-U.upBrg) + ')' });
   el('circle', { r: .55, fill: '#fff', stroke: COLORS.navy, 'stroke-width': .03 }, ng); el('path', { d: 'M0 -.45L.17 .05L-.17 .05Z', fill: COLORS.accent }, ng); el('path', { d: 'M0 .45L.17 .05L-.17 .05Z', fill: '#9fb0c2' }, ng);
   txt(cX, cY + .85, 'Bắc', .18, { attr: { 'font-weight': 800 } });
@@ -275,7 +286,7 @@ function scene3d(){
     if (!door('L')) box(.01, hh, b[3] - b[1], tileW, b[0] + .006, hh / 2, (b[1] + b[3]) / 2).castShadow = false;
     if (!door('R')) box(.01, hh, b[3] - b[1], tileW, b[2] - .006, hh / 2, (b[1] + b[3]) / 2).castShadow = false; });
   // tranh treo tường phòng khách, rèm cửa kính
-  box(.03, .7, 1.0, M(0x2f4f6b, { roughness: .6 }), 6.06, 1.65, 4.95); box(.035, .62, .92, M(0xd9b98c, { roughness: .8 }), 6.045, 1.65, 4.95);
+  if (!U.auto){ box(.03, .7, 1.0, M(0x2f4f6b, { roughness: .6 }), 6.06, 1.65, 4.95); box(.035, .62, .92, M(0xd9b98c, { roughness: .8 }), 6.045, 1.65, 4.95); }
   GLASSD.concat(WINS).forEach(function(w){ var ww = w[2] - w[0], dd = w[3] - w[1], hz = ww > dd, n = 2; for (var k = 0; k < n; k++){ var off = (k ? 1 : -1) * ((hz ? ww : dd) / 2 + .12);
       var c = box(hz ? .3 : .06, WH - .15, hz ? .06 : .3, M(0xe9e3d8, { roughness: 1 }), hz ? (w[0] + w[2]) / 2 + off : (w[0] < 0 ? w[2] + .1 : w[0] - .1), (WH - .15) / 2, hz ? (w[1] < 0 ? w[3] + .1 : w[1] - .1) : (w[1] + w[3]) / 2 + off); c.castShadow = false; } });
   // trần nhà (chỉ hiện khi đứng trong phòng)
@@ -297,19 +308,31 @@ function scene3d(){
     garden: { p: [4.4, 1.65, -2.2], t: [-1.6, .6, 3.5], ceil: false, fov: 60 },
     gardenTop: { p: [-6.5, 7.5, -5.5], t: [1.0, 0, 3.0], ceil: false, fov: 45 }
   };
+  var CAPS = { overview: 'Tổng thể căn 2PN · sân vườn', gardenTop: 'Sân vườn riêng ~47,8 m²', garden: 'Sân vườn: cỏ, cau, đá bước, bàn ngoài trời', living: 'Phòng khách', dining: 'Bàn ăn 4 ghế', kitchen: 'Bếp chữ L · tủ lạnh 2 cánh', master: 'Phòng ngủ master · giường 1m8', wc: 'WC master', br2: 'Phòng ngủ 2 · bàn học', top: 'Toàn căn nhìn từ trên' }, NAMES = null;
+  if (U.auto){ // điểm nhìn tự sinh theo phòng: đứng ở góc phòng phía trong, nhìn chéo về phía cửa kính
+    var AB = bbox([].concat.apply([], U.rooms.map(function(r){ return r.poly; }))), cx = (AB[0] + AB[2]) / 2, cz = (AB[1] + AB[3]) / 2, R0 = Math.max(AB[2] - AB[0], AB[3] - AB[1]);
+    CAMS = { overview: { p: [cx - R0 * .75, R0 * 1.45, cz + R0 * 1.15], t: [cx, 0, cz], ceil: false, fov: 42 }, top: { p: [cx, R0 * 2.1, cz + .01], t: [cx, 0, cz], ceil: false, fov: 40 } };
+    CAPS = { overview: 'Tổng thể căn ' + U.type, top: 'Toàn căn nhìn từ trên' }; NAMES = { overview: 'Tổng thể', top: 'Nhìn từ trên' };
+    U.rooms.forEach(function(r){ if (r.id === 'kho') return; var b = r.bb, ext = (r.ext || [])[0], w = b[2] - b[0], d = b[3] - b[1];
+      var dir = ext === 'T' ? [0, -1] : ext === 'B' ? [0, 1] : ext === 'L' ? [-1, 0] : ext === 'R' ? [1, 0] : (w > d ? [1, 0] : [0, 1]);
+      // đứng giữa phòng lùi về phía trong 30%, nhìn ra cạnh có cửa kính
+      var e = [(b[0] + b[2]) / 2 - dir[0] * w * .3, (b[1] + b[3]) / 2 - dir[1] * d * .3], t = [(b[0] + b[2]) / 2 + dir[0] * w / 2, (b[1] + b[3]) / 2 + dir[1] * d / 2];
+      if (!inPoly(e[0], e[1], r.poly)) e = [(b[0] + b[2]) / 2, (b[1] + b[3]) / 2];
+      var small = r.id.indexOf('wc') === 0 || r.id === 'log';
+      CAMS[r.id] = { p: [e[0], small ? 1.75 : 1.6, e[1]], t: [t[0], .9, t[1]], ceil: !r.outdoor, fov: small ? 80 : 70 }; CAPS[r.id] = r.name; NAMES[r.id] = r.name.replace('Khách + ăn + bếp', 'Khách · bếp').replace('Phòng ngủ', 'Ngủ'); }); }
   function setCam(k){ var c = CAMS[k] || CAMS.overview; camera.position.set(c.p[0], c.p[1], c.p[2]); controls.target.set(c.t[0], c.t[1], c.t[2]); camera.fov = c.fov; camera.updateProjectionMatrix(); ceil.visible = !!c.ceil; controls.update(); }
   setCam(Q.get('cam') || 'overview');
   addEventListener('resize', function(){ W = innerWidth; H = innerHeight; renderer.setSize(W, H); camera.aspect = W / H; camera.updateProjectionMatrix(); });
   // hành trình video 9:16 (t: 0 → 1)
-  var PATH = ['overview', 'gardenTop', 'garden', 'living', 'dining', 'kitchen', 'master', 'wc', 'br2', 'top'];
+  var PATH = U.auto ? Object.keys(CAMS).filter(function(k){ return k !== 'top'; }).concat(['top']) : ['overview', 'gardenTop', 'garden', 'living', 'dining', 'kitchen', 'master', 'wc', 'br2', 'top'];
   function lerp(a, b, t){ return a + (b - a) * t; }
   window.__frame = function(t){ var n = PATH.length - 1, f = Math.min(n - 1e-6, t * n), k = Math.floor(f), u = f - k; u = u * u * (3 - 2 * u);
     var A = CAMS[PATH[k]], Bc = CAMS[PATH[k + 1]], inside = (u < .5 ? A : Bc).ceil;
     camera.position.set(lerp(A.p[0], Bc.p[0], u), lerp(A.p[1], Bc.p[1], u), lerp(A.p[2], Bc.p[2], u)); controls.target.set(lerp(A.t[0], Bc.t[0], u), lerp(A.t[1], Bc.t[1], u), lerp(A.t[2], Bc.t[2], u));
-    camera.fov = lerp(A.fov, Bc.fov, u); camera.updateProjectionMatrix(); ceil.visible = !!(A.ceil && Bc.ceil) || (inside && camera.position.y < 2.6 && camera.position.z > 0); camera.lookAt(controls.target);
-    var lbl = document.getElementById('cap'); if (lbl) lbl.textContent = ({ overview: 'Tổng thể căn 2PN · sân vườn', gardenTop: 'Sân vườn riêng ~47,8 m²', garden: 'Sân vườn: cỏ, cau, đá bước, bàn ngoài trời', living: 'Phòng khách', dining: 'Bàn ăn 4 ghế', kitchen: 'Bếp chữ L · tủ lạnh 2 cánh', master: 'Phòng ngủ master · giường 1m8', wc: 'WC master', br2: 'Phòng ngủ 2 · bàn học', top: 'Toàn căn nhìn từ trên' })[PATH[u < .5 ? k : k + 1]];
+    camera.fov = lerp(A.fov, Bc.fov, u); camera.updateProjectionMatrix(); ceil.visible = !!(A.ceil && Bc.ceil) || (inside && camera.position.y < 2.6 && (U.auto || camera.position.z > 0)); camera.lookAt(controls.target);
+    var lbl = document.getElementById('cap'); if (lbl) lbl.textContent = CAPS[PATH[u < .5 ? k : k + 1]] || '';
     renderer.render(scene, camera); };
-  window.__cams = Object.keys(CAMS); window.__setCam = function(k){ setCam(k); renderer.render(scene, camera); };
+  window.__camNames = NAMES; window.__cams = Object.keys(CAMS); window.__setCam = function(k){ setCam(k); renderer.render(scene, camera); };
   var still = Q.has('still');
   (function loop(){ if (!still){ requestAnimationFrame(loop); controls.update(); } renderer.render(scene, camera); })();
   document.body.classList.add('ready');

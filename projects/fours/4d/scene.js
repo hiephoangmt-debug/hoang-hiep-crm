@@ -595,6 +595,7 @@ if(/[?&]close/.test(location.search)) setMode('close');
     card.querySelector('.c-rows').innerHTML=rows.map(function(r){ return '<div><span>'+r[0]+'</span><b>'+r[1]+'</b></div>'; }).join('');
     var z=card.querySelector('.c-zalo'); z.href='https://zalo.me/0904567009';
     card.querySelector('.c-view').onclick=function(){ viewFrom(u,fs); };
+    var ni=card.querySelector('.c-int'); if(ni){ ni.href='https://raw.githack.com/hiephoangmt-debug/hoang-hiep-crm/telegram-notify/projects/fours/interior/interior.html?u='+encodeURIComponent(cur.t+'-'+u.code)+'&view=plan'; }
     card.querySelector('.c-view').disabled=!fs.length;
     card.hidden=false;
   }
