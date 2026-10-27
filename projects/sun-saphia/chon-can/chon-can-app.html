@@ -21,6 +21,7 @@ body{margin:0;background:var(--bg);font-family:var(--font);color:var(--navy);-we
 .u{cursor:pointer;transition:opacity .2s}.u.dim{opacity:.16}
 .u:hover .b{stroke:var(--or);stroke-width:3}
 .u.sel .b{stroke:var(--or);stroke-width:5}
+#plan.pick svg .u{opacity:.22;transition:opacity .25s}#plan.pick svg .u.sel{opacity:1;filter:drop-shadow(0 0 6px rgba(255,106,43,.75))}#plan.pick svg .u:hover{opacity:.6}#plan.pick svg .u.sel:hover{opacity:1}
 #info{padding:14px 16px 8px}
 #info h3{margin:0;font-size:21px}
 #info .sub{color:#E8460F;font-weight:800;font-size:14px;margin:2px 0 8px}
@@ -664,7 +665,8 @@ function buildRoom30(r){ init3(); if(!R3) return; if(R3.piv) R3.sc.remove(R3.piv
   var face=r[2][0], dv={E:[0,-1],W:[0,1],N:[-1,0],S:[1,0]}[face]; R3.eye=[0,0]; R3.look=[dv[0]*4,dv[1]*4];
   R3.W=b[1]-b[0]; R3.D=b[3]-b[2]; setMode(R3.mode||'plan'); showHour(); if(R3.size) R3.size(); }
 function match(r){ return (state.v==='all'||r[6].indexOf(state.v)>=0)&&(state.t==='all'||r[1]===state.t); }
-function filter(){ if(LAY(state.floor)==='T30'){ [].forEach.call(document.querySelectorAll('#plan [data-j]'),function(el){ var j=+el.getAttribute('data-j'); el.classList.toggle('dim',!m30(U30[j])); el.classList.toggle('sel',j===state.s30); }); return; }
+function filter(){ var pl=document.getElementById('plan'); if(pl) pl.classList.toggle('pick',LAY(state.floor)==='T30'?state.s30!=null:state.sel!=null);
+  if(LAY(state.floor)==='T30'){ [].forEach.call(document.querySelectorAll('#plan [data-j]'),function(el){ var j=+el.getAttribute('data-j'); el.classList.toggle('dim',!m30(U30[j])); el.classList.toggle('sel',j===state.s30); }); return; }
   [].forEach.call(document.querySelectorAll('#plan .u'),function(el){ var r=U[+el.getAttribute('data-i')]; el.classList.toggle('dim',!match(r)); el.classList.toggle('sel',+el.getAttribute('data-i')===state.sel); }); }
 
 /* ---------- thông tin căn ---------- */
