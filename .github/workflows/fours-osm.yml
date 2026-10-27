@@ -1,0 +1,31 @@
+# Tải dữ liệu OpenStreetMap (đường, mặt nước, nhà) quanh dự án Sun FourS Tower cho mô hình 4D.
+# Anh Hiệp cho phép dùng GitHub tải hộ (máy làm việc của Claude bị chặn trang Overpass). Chỉ chạy trên nhánh này; dùng xong sẽ xóa.
+name: FourS OSM data
+on:
+  push:
+    branches: [claude/fours-osm-data]
+    paths: [.github/workflows/fours-osm.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tải Overpass
+        run: |
+          mkdir -p projects/fours/osm
+          Q='[out:json][timeout:180];(way["highway"](15.990,108.222,16.030,108.268);way["natural"="water"](15.990,108.222,16.030,108.268);way["waterway"](15.990,108.222,16.030,108.268);relation["natural"="water"](15.990,108.222,16.030,108.268);way["landuse"](15.996,108.232,16.022,108.258);way["leisure"](15.996,108.232,16.022,108.258);way["building"](16.000,108.236,16.018,108.252););(._;>;);out;'
+          for h in https://overpass-api.de/api/interpreter https://overpass.kumi.systems/api/interpreter https://maps.mail.ru/osm/tools/overpass/api/interpreter; do
+            if curl -sS --fail --max-time 240 --data-urlencode "data=$Q" "$h" -o projects/fours/osm/fours-osm.json && python3 -c "import json;d=json.load(open('projects/fours/osm/fours-osm.json'));print('elements',len(d['elements']))"; then break; fi
+            sleep 10
+          done
+          ls -la projects/fours/osm
+      - name: Lưu vào kho
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add projects/fours/osm/fours-osm.json
+          git commit -m "Dữ liệu OpenStreetMap quanh dự án FourS (tải bằng GitHub Actions)" || echo "không có thay đổi"
+          git push
