@@ -3,6 +3,7 @@
 <style>
 :root{--navy:#0A2540;--navy2:#12355c;--or:#FF6A2B;--bg:#f7f4ee;--font:'Be Vietnam Pro',Arial,sans-serif}
 *{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
 body{margin:0;background:var(--bg);font-family:var(--font);color:var(--navy);-webkit-font-smoothing:antialiased}
 .hd{background:linear-gradient(90deg,var(--navy),var(--navy2));color:#fff;padding:12px 16px;border-bottom:3px solid var(--or);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .hd .t{font-size:18px;font-weight:800}.hd .t span{color:var(--or)}
@@ -31,7 +32,7 @@ body{margin:0;background:var(--bg);font-family:var(--font);color:var(--navy);-we
 .pair{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);border-top:1px solid #eee7da}
 #unit{padding:8px 10px 6px;background:#fffdf9;border-right:1px solid #eee7da;min-width:0}
 #unit .ut{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#E8460F;margin:0 0 4px}
-#unit svg{display:block;width:100%;height:auto;max-height:430px}
+#unit svg{display:block;width:100%;max-width:100%;height:auto;max-height:430px}
 #room{height:auto;min-height:360px;position:relative;background:#dfe9f2}
 .pair.wide{grid-template-columns:1fr}.pair.wide #unit{border-right:0;border-bottom:1px solid #eee7da}.pair.wide #unit svg{max-height:none}.pair.wide #room{height:380px}
 #vmode{position:absolute;left:8px;right:8px;bottom:8px;display:flex;gap:5px;flex-wrap:wrap;z-index:2}
@@ -786,9 +787,13 @@ function init3(){
   var sun=new THREE.DirectionalLight(0xfff0d0,1.7); sun.castShadow=true; sun.shadow.mapSize.set(2048,2048); sun.shadow.radius=3;
   var c=sun.shadow.camera; c.left=-9;c.right=9;c.top=9;c.bottom=-9;c.near=1;c.far=90; sun.shadow.bias=-.0006; sc.add(sun); sc.add(sun.target);
   R3={r:r,sc:sc,cam:cam,ctl:ctl,sun:sun,warm:warm,el:el,piv:null};
+  // điện thoại hết bộ nhớ 3D: hiện nút tải lại thay cho khung trống
+  r.domElement.addEventListener('webglcontextlost',function(e){ e.preventDefault(); var me=R3; R3=null; try{ r.domElement.remove(); }catch(x){}
+    var bt=document.createElement('button'); bt.type='button'; bt.textContent='↻ Tải lại phối cảnh 3D'; bt.style.cssText='position:absolute;inset:0;margin:auto;width:220px;height:46px;border:0;border-radius:23px;background:#FF6A2B;color:#fff;font:800 15px inherit;z-index:3;cursor:pointer';
+    bt.onclick=function(){ bt.remove(); if(state.sel!=null) select(state.sel); else if(state.s30!=null) select30(state.s30); }; el.appendChild(bt); },false);
   function size(){ var w=el.clientWidth,h=el.clientHeight; r.setSize(w,h); cam.aspect=w/h; cam.updateProjectionMatrix(); }
   size(); window.addEventListener('resize',size); R3.size=size;
-  (function loop(){ requestAnimationFrame(loop); ctl.update(); r.render(sc,cam); })();
+  (function loop(){ if(!R3||R3.r!==r) return; requestAnimationFrame(loop); ctl.update(); r.render(sc,cam); })();
 }
 var FLOOR_IMG='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@7a29e8b47d1eee7b39c78ffbf078cc5906cea125/projects/sun-saphia/images/';
 // đỉnh đa giác có góc bo (cung tròn) → dãy điểm
