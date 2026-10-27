@@ -1,0 +1,47 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nội thất căn hộ Sun FourS Tower</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap">
+<style>
+:root{--navy:#0A2540;--orange:#FF6A2B}
+html,body{margin:0;height:100%;background:#fff;font-family:'Be Vietnam Pro',Arial,sans-serif;overflow:hidden}
+#app{position:fixed;inset:0}
+#app canvas{display:block;width:100%;height:100%;touch-action:none}
+.bar{position:fixed;left:0;right:0;top:0;z-index:3;background:var(--navy);color:#fff;border-bottom:3px solid var(--orange);padding:10px 14px;font-size:13px}
+.bar b{color:var(--orange)}
+.cams{position:fixed;left:0;right:0;bottom:0;z-index:3;display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:rgba(255,255,255,.95);border-top:3px solid var(--orange)}
+.cams button{font:700 13px inherit;font-family:inherit;white-space:nowrap;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:18px;padding:7px 12px;cursor:pointer}
+.cams button.on{background:var(--orange);border-color:var(--orange);color:#fff}
+.wm{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-20deg);z-index:2;pointer-events:none;color:rgba(255,255,255,.28);font-weight:800;font-size:clamp(18px,4vw,34px);text-shadow:0 1px 3px rgba(0,0,0,.25);text-align:center;white-space:nowrap}
+#cap{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);z-index:3;background:rgba(10,37,64,.85);color:#fff;font-weight:800;padding:8px 16px;border-radius:20px;font-size:15px;white-space:nowrap}
+#cap:empty{display:none}
+body.plan .cams,body.plan .wm,body.plan #cap,body.plan .bar,body.plan .note{display:none}
+body.video .cams,body.export .cams{display:none}
+body.export .note{bottom:12px}
+body.video #cap{bottom:60px;font-size:28px;padding:12px 22px;border-radius:30px}
+body.video .bar{font-size:22px;padding:22px 24px}
+body.video .wm{font-size:44px}
+.note{position:fixed;right:10px;bottom:62px;z-index:3;font-size:10.5px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+body.video .note{bottom:16px;left:0;right:0;text-align:center;font-size:18px}
+</style></head><body>
+<div id="app"></div>
+<div class="bar" id="bar"></div>
+<div class="wm">MINH HỌA · 0904 567 009</div>
+<div id="cap"></div>
+<div class="note">Phối cảnh dựng hình minh họa · thông số theo CĐT</div>
+<div class="cams" id="cams"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="units.js"></script>
+<script>
+(function(){ var Q=new URLSearchParams(location.search), U=FS_UNITS[Q.get('u')||'F2-03-03'];
+  if(Q.get('view')==='plan') document.body.classList.add('plan'); if(Q.has('video')) document.body.classList.add('video'); if(Q.has('export')) document.body.classList.add('export');
+  document.getElementById('bar').innerHTML='Căn <b>'+U.code+'</b> · '+U.type+' · Tim '+String(U.tim).replace('.',',')+' m² · TT '+String(U.tt).replace('.',',')+' m² · Sân '+String(U.gardenTT).replace('.',',')+' m² · Nội thất Hiện đại · gói Tiêu chuẩn';
+})();
+</script>
+<script src="interior.js"></script>
+<script>
+(function(){ if(!window.__cams) return; var names={overview:'Tổng thể',top:'Nhìn từ trên',living:'Phòng khách',dining:'Bàn ăn',kitchen:'Bếp',master:'Ngủ master',br2:'Ngủ 2',wc:'WC',garden:'Sân vườn',gardenTop:'Sân vườn (cao)'};
+  var el=document.getElementById('cams'); window.__cams.forEach(function(k){ var b=document.createElement('button'); b.textContent=names[k]||k; b.onclick=function(){ el.querySelectorAll('button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); __setCam(k); }; el.appendChild(b); });
+})();
+</script>
+</body></html>
