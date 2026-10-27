@@ -50,39 +50,58 @@ scene.add(sun); scene.add(sun.target);
 /* ---------- Khung toạ độ ----------
    Cảnh: +x = Đông, +z = Nam, -z = Bắc (đúng hướng thật).
    "world" = khung theo mặt bằng CĐT: +x = bên phải bản vẽ, -z = phía trên bản vẽ.
-   Theo la bàn trên mặt bằng tầng của CĐT, phía trên bản vẽ là hướng Đông Bắc → xoay -45°.
+   Phía trên bản vẽ CĐT hướng về Đông Bắc. Góc xoay chính xác lấy theo bản đồ OpenStreetMap:
+   đoạn Minh Mạng qua dự án chạy theo hướng 37,7° (lệch Bắc sang Đông), trục Nguyễn Phước Lan vuông góc (127,7°).
    Đường Nguyễn Phước Lan chạy dọc trục x (z=0), đường Minh Mạng dọc trục z (x=0). */
-var world=new THREE.Group(); world.rotation.y=-Math.PI/4; scene.add(world);
+var OSM=window.FS_OSM||{roads:[],water:[],waterMP:[],rivers:[],parks:[],buildings:[]};
+var BRG=37.7;   // hướng đường Minh Mạng tại ngã tư (độ), đo từ dữ liệu OSM
+var world=new THREE.Group(); world.rotation.y=-BRG*Math.PI/180; scene.add(world);
 var SITE_LAT=16.009588, SITE_LON=108.242570;   // vị trí dự án (anh Hiệp cung cấp, Google Maps)
 function LL(lat,lon){ return [(lon-SITE_LON)*Math.cos(SITE_LAT*Math.PI/180)*111320, -(lat-SITE_LAT)*110574]; }
-// Mặt nước quanh đảo Sunneva Island – vẽ theo ảnh vệ tinh anh Hiệp gửi (hướng Bắc lên trên),
-// căn tỷ lệ bằng 2 mốc: cầu Bờ Quan (16.012547, 108.247079) ở điểm ảnh (1420,1112) và Sunneva Island (16.016665, 108.244697) ở (1072,548): ~0,77 m/điểm ảnh
-var BQ=LL(16.012547,108.247079);
-function PXS(px,py){ return [BQ[0]+(px-1420)*.77, BQ[1]+(py-1112)*.77]; }
-var LAKE=[[-450,-250],[450,-250],[650,60],[950,150],[1100,200],[1200,250],[1220,300],[1350,420],[1500,520],[1600,700],[1640,900],[1560,1060],[1420,1112],[1380,1100],[1150,1040],[900,960],[700,880],[520,760],[330,640],[140,620],[-120,720],[-300,800],[-450,700]].map(function(p){ return PXS(p[0],p[1]); });
-var ISLAND=[[420,350],[520,330],[700,370],[1000,420],[1150,470],[1350,600],[1460,700],[1480,830],[1420,900],[1300,920],[1100,870],[800,700],[600,620],[470,560],[410,450]].map(function(p){ return PXS(p[0],p[1]); });
 // nhánh sông: phía Tây nối sông Hàn qua cầu Trung Lương; phía Nam qua cầu Bờ Quan chảy dọc phía Tây Ngũ Hành Sơn
 var CC_W=[[16.0255,108.2245],[16.0200,108.2300],[16.015086,108.235155],[16.0160,108.2385]];
 var CC_S=[[16.012547,108.247079],[16.0085,108.2500],[16.0030,108.2510],[15.9950,108.2512],[15.9850,108.2530],[15.9700,108.2570],[15.9400,108.2680]];
 function inP(x,z,P){ var c=false; for(var i=0,j=P.length-1;i<P.length;j=i++){ if(((P[i][1]>z)!==(P[j][1]>z))&&(x<(P[j][0]-P[i][0])*(z-P[i][1])/(P[j][1]-P[i][1])+P[i][0])) c=!c; } return c; }
 function nearLine(xs,zs,L,m){ var P=L.map(function(q){ return LL(q[0],q[1]); }); for(var i=0;i<P.length-1;i++){ var a=P[i],b=P[i+1],dx=b[0]-a[0],dz=b[1]-a[1],t=Math.max(0,Math.min(1,((xs-a[0])*dx+(zs-a[1])*dz)/(dx*dx+dz*dz))); if(Math.hypot(xs-a[0]-t*dx,zs-a[1]-t*dz)<m) return true; } return false; }
-function nearRiver(xs,zs,m){ if(inP(xs,zs,LAKE)&&!inP(xs,zs,ISLAND)) return true; return nearLine(xs,zs,CC_W,m)||nearLine(xs,zs,CC_S,m); }
 function flat(w,d,col,x,z,y,rot,grp){var m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),M(col));m.rotation.x=-Math.PI/2;if(rot)m.rotation.z=rot;m.position.set(x,y||0.05,z);m.receiveShadow=true;(grp||world).add(m);return m;}
 var ground=new THREE.Mesh(new THREE.PlaneGeometry(40000,40000),M(0xb9b48f)); ground.rotation.x=-Math.PI/2; ground.receiveShadow=true; scene.add(ground);
 flat(1700,1700,0xa9b388,0,0,0.02);   // nền khu đô thị (cỏ / đất)
 
-/* ---------- Đường ---------- */
-var RW=30;   // lộ giới 2 trục chính (ước lượng): 2 làn xe mỗi chiều + dải phân cách + vỉa hè
+/* ---------- Đường thật theo OpenStreetMap (© OpenStreetMap contributors) ---------- */
+var RW=30;   // lộ giới 2 trục chính qua dự án (ước lượng): 2 làn xe mỗi chiều + dải phân cách + vỉa hè
 var asph=0x5c6066, walk=0xd9d2c3;
-function road(len,w,x,z,alongX){ var g=new THREE.Group(); world.add(g);
-  flat(alongX?len:w,alongX?w:len,walk,x,z,.07,0,g);
-  flat(alongX?len:w-7,alongX?w-7:len,asph,x,z,.09,0,g);
-  flat(alongX?len:1.6,alongX?1.6:len,0x7da35a,x,z,.11,0,g);   // dải phân cách trồng cỏ
-  return g; }
-road(1700,RW,0,0,true); road(1700,RW,0,0,false);
-// đường nội khu (ước lượng theo lưới ô phố biệt thự)
-var GRID=[-640,-470,-300,-150,150,300,470,640];
-GRID.forEach(function(p){ var a=road(1700,13,0,p,true); var b=road(1700,13,p,0,false); });
+function isMain(r){ return r.n==='Đường Minh Mạng'||r.n==='Đường Quảng Nam'; }
+var ROADS=OSM.roads.filter(function(r){ return r.c!=='service'||r.p.some(function(q){ return Math.hypot(q[0],q[1])<700; }); }).map(function(r){ return {n:r.n,c:r.c,b:r.b,p:r.p,w:isMain(r)?RW:r.w}; });
+// lưới tra cứu nhanh khoảng cách tới đường (ô 40 m)
+var RH={}; function rkey(x,z){ return Math.floor(x/40)+','+Math.floor(z/40); }
+ROADS.forEach(function(r){ for(var i=0;i<r.p.length-1;i++){ var a=r.p[i],b=r.p[i+1],seg=[a,b,r.w/2],n=Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])/20)+1;
+  var seen={}; for(var k=0;k<=n;k++){ var x=a[0]+(b[0]-a[0])*k/n, z=a[1]+(b[1]-a[1])*k/n; for(var dx=-1;dx<=1;dx++) for(var dz=-1;dz<=1;dz++){ var kk=(Math.floor(x/40)+dx)+','+(Math.floor(z/40)+dz); if(seen[kk]) continue; seen[kk]=1; (RH[kk]=RH[kk]||[]).push(seg); } } } });
+function segDist(x,z,a,b){ var dx=b[0]-a[0],dz=b[1]-a[1],t=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/((dx*dx+dz*dz)||1))); return Math.hypot(x-a[0]-t*dx,z-a[1]-t*dz); }
+function roadGap(x,z){ var L=RH[rkey(x,z)]; if(!L) return 99; var m=99; for(var i=0;i<L.length;i++){ var d=segDist(x,z,L[i][0],L[i][1])-L[i][2]; if(d<m) m=d; } return m; }
+// mặt nước thật: hồ, sông, kênh
+var WPOLY=OSM.water.slice(); OSM.waterMP.forEach(function(m){ m.o.forEach(function(o){ if(o.length>3) WPOLY.push(o); }); });
+var WHOLE=[]; OSM.waterMP.forEach(function(m){ m.i.forEach(function(o){ if(o.length>3) WHOLE.push(o); }); });
+function bbox(P){ var b=[1e9,1e9,-1e9,-1e9]; P.forEach(function(q){ b[0]=Math.min(b[0],q[0]); b[1]=Math.min(b[1],q[1]); b[2]=Math.max(b[2],q[0]); b[3]=Math.max(b[3],q[1]); }); return b; }
+var WB=WPOLY.map(bbox), HB=WHOLE.map(bbox);
+function inBoxP(x,z,P,b){ return x>=b[0]&&x<=b[2]&&z>=b[1]&&z<=b[3]&&inP(x,z,P); }
+var RIV=OSM.rivers.map(function(r){ return {p:r.p,w:r.w===60?45:8}; });
+function inWater(x,z,m){ m=m||0;
+  for(var i=0;i<WPOLY.length;i++) if(inBoxP(x,z,WPOLY[i],WB[i])){ var hole=false; for(var j=0;j<WHOLE.length;j++) if(inBoxP(x,z,WHOLE[j],HB[j])){ hole=true; break; } if(!hole) return true; }
+  for(var i=0;i<RIV.length;i++){ var P=RIV[i].p; for(var k=0;k<P.length-1;k++) if(segDist(x,z,P[k],P[k+1])<RIV[i].w/2+m) return true; }
+  return false; }
+// dải mặt đường gộp thành một khối hình để nhẹ máy
+function ribbon(list,col,y){ var pos=[],idx=[],v=0;
+  list.forEach(function(s){ var P=s.p, yy=s.y||y; for(var i=0;i<P.length-1;i++){ var a=P[i],b=P[i+1],dx=b[0]-a[0],dz=b[1]-a[1],l=Math.hypot(dx,dz); if(l<.2) continue;
+    var ux=dx/l,uz=dz/l,nx=-uz*s.w/2,nz=ux*s.w/2,e=Math.min(s.w/2,l)*.5, ax=a[0]-ux*e,az=a[1]-uz*e,bx=b[0]+ux*e,bz=b[1]+uz*e;
+    pos.push(ax+nx,yy,az+nz, ax-nx,yy,az-nz, bx-nx,yy,bz-nz, bx+nx,yy,bz+nz); idx.push(v,v+1,v+2,v,v+2,v+3); v+=4; } });
+  var g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); g.setIndex(idx); g.computeVertexNormals();
+  var m=new THREE.Mesh(g,M(col,{side:THREE.DoubleSide})); m.receiveShadow=true; scene.add(m); return m; }
+(function(){ var side=[],top=[],mid=[],deck=[];
+  ROADS.forEach(function(r){ var y=r.b?3.2:0; var big=r.w>=13;
+    if(big) side.push({p:r.p,w:r.w,y:y?y-.02:.07}); top.push({p:r.p,w:big?r.w-7:r.w,y:y||.09});
+    if(r.w>=RW) mid.push({p:r.p,w:1.6,y:(y||.09)+.02});
+    if(r.b) deck.push({p:r.p,w:r.w+1.5,y:y-.6}); });
+  ribbon(side,walk,.07); ribbon(top,asph,.09); ribbon(mid,0x7da35a,.11); if(deck.length) ribbon(deck,0xd9d5cc,2.6); })();
 // vạch qua đường tại giao lộ
 (function(){ for(var i=-6;i<=6;i++){ flat(1.2,6,0xffffff,i*2.2,RW/2+4,.13); flat(1.2,6,0xffffff,i*2.2,-RW/2-4,.13); flat(6,1.2,0xffffff,RW/2+4,i*2.2,.13); flat(6,1.2,0xffffff,-RW/2-4,i*2.2,.13); } })();
 
@@ -217,35 +236,44 @@ var T=F2.grp;
 /* ---------- Cây xanh: dọc đường, công viên, vườn biệt thự ---------- */
 var trees=[], palms=[];
 function addTree(x,z,s){ trees.push([x,z,s||rnd(.8,1.4)]); }
-for(var p=-820;p<=820;p+=14){ if(Math.abs(p)<RW/2+4) continue; [RW/2-1.5,-RW/2+1.5].forEach(function(o){ palms.push([p,o]); palms.push([o,p]); }); }
-GRID.forEach(function(g){ for(var p=-820;p<=820;p+=18){ if(Math.abs(p-g)<10) continue; addTree(p,g+5.5,rnd(.6,.9)); addTree(g+5.5,p,rnd(.6,.9)); } });
-// công viên (ước lượng theo sơ đồ CĐT: mảng xanh phía Đông và Đông Bắc 4 tòa)
-var PARKS=[[100,-210,150,140],[240,40,120,200],[-230,250,140,120]];
-PARKS.forEach(function(k){ flat(k[2],k[3],0x7fae58,k[0],k[1],.12); for(var i=0;i<Math.round(k[2]*k[3]/420);i++) addTree(k[0]+rnd(-k[2]/2+4,k[2]/2-4),k[1]+rnd(-k[3]/2+4,k[3]/2-4)); });
-// hồ nhỏ trong công viên phía Đông
-flat(60,34,0x3f9fb5,250,70,.15);
-
-/* ---------- Khu biệt thự / nhà phố thấp tầng xung quanh (Sun Riverpolis, ước lượng) ---------- */
-var houses=[];
-function freeAt(x,z){ if(Math.abs(x)<RW/2+3||Math.abs(z)<RW/2+3) return false; if(Math.abs(x)<100&&Math.abs(z)<100) return false;
-  for(var i=0;i<GRID.length;i++){ if(Math.abs(x-GRID[i])<11||Math.abs(z-GRID[i])<11) return false; }
-  for(var k=0;k<PARKS.length;k++){ var P=PARKS[k]; if(Math.abs(x-P[0])<P[2]/2+6&&Math.abs(z-P[1])<P[3]/2+6) return false; }
-  if(nearRiver((x-z)/Math.SQRT2,(x+z)/Math.SQRT2,70)) return false;
-  return Math.abs(x)<800&&Math.abs(z)<800; }
-for(var hx=-790;hx<=790;hx+=13) for(var hz=-790;hz<=790;hz+=22){ var xx=hx+((Math.floor(hz/22)%2)*4), zz=hz; if(!freeAt(xx,zz)||srnd()<.12) continue; houses.push([xx,zz,rnd(9,13)]); if(srnd()<.25) addTree(xx+rnd(-5,5),zz+9); }
+// hàng cây dọc đường thật: cau/dừa trên trục chính, cây bóng mát trên đường nội khu
+function alongRoad(r,step,off,fn){ var P=r.p, acc=step/2; for(var i=0;i<P.length-1;i++){ var a=P[i],b=P[i+1],dx=b[0]-a[0],dz=b[1]-a[1],l=Math.hypot(dx,dz); if(l<1) continue; var ux=dx/l,uz=dz/l;
+  for(var t=acc;t<l;t+=step){ var x=a[0]+ux*t, z=a[1]+uz*t; [off,-off].forEach(function(o){ fn(x-uz*o,z+ux*o,ux,uz,o); }); } acc=(acc-l)%step; if(acc<0) acc+=step; } }
+function nearSite(x,z){ var c=Math.cos(BRG*Math.PI/180), s=Math.sin(BRG*Math.PI/180), lx=x*c-z*s, lz=x*s+z*c; return Math.abs(lx)<100&&Math.abs(lz)<100; }
+ROADS.forEach(function(r){ if(r.b||!r.p.some(function(q){ return Math.hypot(q[0],q[1])<1300; })) return;
+  if(r.w>=13) alongRoad(r,20,r.w/2-1.5,function(x,z){ if(Math.hypot(x,z)<1300&&!inWater(x,z,2)) palms.push([x,z]); });
+  else if(r.c!=='service') alongRoad(r,18,r.w/2+1.8,function(x,z){ if(Math.hypot(x,z)<1300&&!inWater(x,z,2)&&roadGap(x,z)>.8) addTree(x,z,rnd(.6,.9)); }); });
+// công viên, thảm cỏ thật (OSM)
+var PARKS=OSM.parks.filter(function(P){ return P.some(function(q){ return Math.hypot(q[0],q[1])<2600; }); }), PB=PARKS.map(bbox);
+(function(){ var sh=[]; PARKS.forEach(function(P){ var s2=new THREE.Shape(); P.forEach(function(q,i){ if(i) s2.lineTo(q[0],-q[1]); else s2.moveTo(q[0],-q[1]); }); sh.push(s2); });
+  if(!sh.length) return; var g=new THREE.ShapeGeometry(sh); g.rotateX(-Math.PI/2); var m=new THREE.Mesh(g,M(0x7fae58)); m.position.y=.12; m.receiveShadow=true; scene.add(m);
+  PARKS.forEach(function(P,k){ var b=PB[k], A=(b[2]-b[0])*(b[3]-b[1]); if(Math.hypot((b[0]+b[2])/2,(b[1]+b[3])/2)>1500) return;
+    for(var i=0,n=Math.min(160,Math.round(A/650));i<n;i++){ var x=rnd(b[0],b[2]), z=rnd(b[1],b[3]); if(inP(x,z,P)&&roadGap(x,z)>2&&!inWater(x,z)) addTree(x,z); } }); })();
+function inPark(x,z,m){ for(var k=0;k<PARKS.length;k++){ var b=PB[k]; if(x>b[0]-m&&x<b[2]+m&&z>b[1]-m&&z<b[3]+m&&inP(x,z,PARKS[k])) return true; } return false; }
+// nhà OSM có sẵn (ít) – dựng khối theo đúng chu vi
+(function(){ var sh=[]; OSM.buildings.forEach(function(B){ var s2=new THREE.Shape(); B.p.forEach(function(q,i){ if(i) s2.lineTo(q[0],-q[1]); else s2.moveTo(q[0],-q[1]); });
+    var g=new THREE.ExtrudeGeometry(s2,{depth:B.h||10,bevelEnabled:false}); g.rotateX(-Math.PI/2); var m=new THREE.Mesh(g,M(0xefe7d8,{roughness:.8})); m.castShadow=m.receiveShadow=true; scene.add(m); }); })();
+/* ---------- Biệt thự / nhà phố thấp tầng (Sun Riverpolis): xếp mặt tiền theo từng tuyến đường nội khu thật ---------- */
+var houses=[], HH={};
+function houseFree(x,z){ var k=Math.round(x/9)+','+Math.round(z/9); if(HH[k]) return false;
+  if(Math.hypot(x,z)>1250||nearSite(x,z)||roadGap(x,z)<3||inWater(x,z,8)||inPark(x,z,4)) return false;
+  for(var dx=-1;dx<=1;dx++) for(var dz=-1;dz<=1;dz++) if(HH[(Math.round(x/9)+dx)+','+(Math.round(z/9)+dz)]) return false;
+  HH[k]=1; return true; }
+ROADS.forEach(function(r){ if(r.b||r.w>=RW||r.c==='service'||r.c==='pedestrian') return; if(!r.p.some(function(q){ return Math.hypot(q[0],q[1])<1250; })) return;
+  alongRoad(r,11,r.w/2+10,function(x,z,ux,uz){ if(srnd()<.1||!houseFree(x,z)) return; houses.push([x,z,rnd(9,13),Math.atan2(uz,ux)]); if(srnd()<.2) addTree(x+rnd(-4,4),z+rnd(-4,4),rnd(.6,1)); }); });
 (function(){ var n=houses.length, dm=new THREE.Object3D();
   var bodyM=new THREE.InstancedMesh(new THREE.BoxGeometry(9,1,15),M(0xf1e9da,{roughness:.8}),n);
   var rg=new THREE.ConeGeometry(1,1,4); rg.rotateY(Math.PI/4); var roofM=new THREE.InstancedMesh(rg,M(0xc0623a,{roughness:.7}),n);
-  houses.forEach(function(h,i){ dm.position.set(h[0],h[2]/2,h[1]); dm.scale.set(1,h[2],1); dm.rotation.set(0,0,0); dm.updateMatrix(); bodyM.setMatrixAt(i,dm.matrix);
+  houses.forEach(function(h,i){ dm.position.set(h[0],h[2]/2,h[1]); dm.scale.set(1,h[2],1); dm.rotation.set(0,-h[3],0); dm.updateMatrix(); bodyM.setMatrixAt(i,dm.matrix);
     dm.position.set(h[0],h[2]+1.6,h[1]); dm.scale.set(7.2,3.2,11); dm.updateMatrix(); roofM.setMatrixAt(i,dm.matrix); });
-  bodyM.castShadow=roofM.castShadow=true; bodyM.receiveShadow=true; world.add(bodyM); world.add(roofM); })();
+  bodyM.castShadow=roofM.castShadow=true; bodyM.receiveShadow=true; scene.add(bodyM); scene.add(roofM); })();
 (function(){ var dm=new THREE.Object3D(), n=trees.length;
   var crown=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(3.2,0),M(0x4d8a3c,{roughness:.95}),n), trunk=new THREE.InstancedMesh(new THREE.CylinderGeometry(.25,.35,4,5),M(0x6b5139),n);
   trees.forEach(function(t,i){ var s=t[2]; dm.position.set(t[0],4*s+2.4*s,t[1]); dm.scale.set(s,s*1.15,s); dm.updateMatrix(); crown.setMatrixAt(i,dm.matrix); dm.position.set(t[0],2*s,t[1]); dm.scale.set(s,s,s); dm.updateMatrix(); trunk.setMatrixAt(i,dm.matrix); });
-  crown.castShadow=true; world.add(crown); world.add(trunk);
+  crown.castShadow=true; scene.add(crown); scene.add(trunk);
   var pn=palms.length, pt=new THREE.InstancedMesh(new THREE.CylinderGeometry(.18,.3,9,5),M(0x8a7457),pn), pc=new THREE.InstancedMesh(new THREE.ConeGeometry(3,1.6,7),M(0x3d7d36),pn);
   palms.forEach(function(p,i){ dm.position.set(p[0],4.5,p[1]); dm.scale.set(1,1,1); dm.updateMatrix(); pt.setMatrixAt(i,dm.matrix); dm.position.set(p[0],9.4,p[1]); dm.rotation.set(Math.PI,0,0); dm.updateMatrix(); pc.setMatrixAt(i,dm.matrix); dm.rotation.set(0,0,0); });
-  pc.castShadow=true; world.add(pt); world.add(pc); })();
+  pc.castShadow=true; scene.add(pt); scene.add(pc); })();
 
 /* ---------- Cảnh xa theo toạ độ thật (vĩ độ, kinh độ) – +x Đông, +z Nam ----------
    Toạ độ dự án, biển Sơn Thủy, biển Mỹ Khê, Ngũ Hành Sơn, FPT, Hội An, Cù Lao Chàm, điểm bắn pháo hoa DIFF, sân bay, cầu Rồng, Sơn Trà: anh Hiệp lấy trên Google Maps.
@@ -259,10 +287,13 @@ function riverLL(pts,w,y){ var P=pts.map(function(q){ return LL(q[0],q[1]); }), 
   var sh=new THREE.Shape(); L.forEach(function(p,i){ if(i) sh.lineTo(p[0],-p[1]); else sh.moveTo(p[0],-p[1]); }); for(var i=R.length-1;i>=0;i--) sh.lineTo(R[i][0],-R[i][1]);
   var g=new THREE.ShapeGeometry(sh); g.rotateX(-Math.PI/2); var m=new THREE.Mesh(g,waterMat); m.position.y=y||.2; m.receiveShadow=true; scene.add(m); return P; }
 // sông Cổ Cò: từ sông Hàn chảy xuống phía Nam, giữa dự án và Ngũ Hành Sơn
-var CC=riverLL(CC_S,80); riverLL(CC_W,120);
-(function(){ var sh=new THREE.Shape(); LAKE.forEach(function(p,i){ if(i) sh.lineTo(p[0],-p[1]); else sh.moveTo(p[0],-p[1]); });
-  var h=new THREE.Path(); ISLAND.forEach(function(p,i){ if(i) h.lineTo(p[0],-p[1]); else h.moveTo(p[0],-p[1]); }); sh.holes.push(h);
-  var g=new THREE.ShapeGeometry(sh); g.rotateX(-Math.PI/2); var m=new THREE.Mesh(g,waterMat); m.position.y=.22; m.receiveShadow=true; scene.add(m); })();
+// sông Cổ Cò, hồ quanh Sunneva Island, kênh: vẽ đúng chu vi theo OpenStreetMap
+var CC=CC_S.map(function(q){ return LL(q[0],q[1]); });
+(function(){ var sh=[]; WPOLY.forEach(function(P){ var s2=new THREE.Shape(); P.forEach(function(q,i){ if(i) s2.lineTo(q[0],-q[1]); else s2.moveTo(q[0],-q[1]); });
+    WHOLE.forEach(function(H,j){ var hb=HB[j], b=bbox(P); if(hb[0]>=b[0]&&hb[2]<=b[2]&&hb[1]>=b[1]&&hb[3]<=b[3]){ var h=new THREE.Path(); H.forEach(function(q,i){ if(i) h.lineTo(q[0],-q[1]); else h.moveTo(q[0],-q[1]); }); s2.holes.push(h); } });
+    sh.push(s2); });
+  if(sh.length){ var g=new THREE.ShapeGeometry(sh); g.rotateX(-Math.PI/2); var m=new THREE.Mesh(g,waterMat); m.position.y=.22; m.receiveShadow=true; scene.add(m); }
+  ribbon(RIV.map(function(r){ return {p:r.p,w:r.w,y:.21}; }),0x3a8fa6,.21).material=waterMat; })();
 // sông Hàn: qua cầu Tiên Sơn, cầu Trần Thị Lý, cầu Rồng, ra cửa biển
 var HAN=riverLL([[15.995,108.212],[16.012,108.219],[16.024314,108.223033],[16.032,108.229],[16.03947,108.233302],[16.050,108.2315],[16.06104,108.227019],[16.075,108.2255],[16.090,108.222],[16.105,108.218]],300,.18);   // qua điểm bắn pháo hoa DIFF và cầu Rồng
 // biển: đường bờ từ Sơn Trà xuống Mỹ Khê, Non Nước (ước lượng)
@@ -314,26 +345,28 @@ var MEGA=LL(16.024962,108.220191), CHX=LL(16.024314,108.223033), CTL=LL(16.01508
 (function(){ var m=new THREE.Mesh(new THREE.BoxGeometry(170,16,120),M(0xeef0f2,{roughness:.6})); m.position.set(MEGA[0],8,MEGA[1]); m.castShadow=true; scene.add(m); })();
 function bridgeAt(p,river,len,w){ var best=1e18, dir=[1,0]; for(var i=0;i<river.length-1;i++){ var a=river[i], b=river[i+1], d=Math.hypot(p[0]-(a[0]+b[0])/2,p[1]-(a[1]+b[1])/2); if(d<best){ best=d; var dx=b[0]-a[0], dz=b[1]-a[1], l=Math.hypot(dx,dz)||1; dir=[dx/l,dz/l]; } }
   var m=new THREE.Mesh(new THREE.BoxGeometry(len,1.6,w),M(0xd9d5cc,{roughness:.7})); m.position.set(p[0],4,p[1]); m.rotation.y=-Math.atan2(-dir[0],dir[1]); m.castShadow=true; scene.add(m); }
-bridgeAt(CHX,HAN,420,22); bridgeAt(CTL,CC,130,18); bridgeAt(CBQ,CC,120,18);
+// cầu Hòa Xuân, Trung Lương, Bờ Quan: vẽ theo OSM cùng mạng đường (mặt cầu nâng cao)
 // Sun Saphia Residence (toạ độ anh Hiệp): tháp 30 tầng ~114 m
 var SAP=LL(16.021190,108.257780); (function(){ var m=new THREE.Mesh(new THREE.BoxGeometry(50,114,40),M(0xdfe9ee,{roughness:.35,metalness:.1,envMapIntensity:.7})); m.position.set(SAP[0],57,SAP[1]); m.castShadow=true; scene.add(m); })();
 var NNB=LL(16.0018,108.2624);   // bãi biển Non Nước (đo trên ảnh bản đồ)
 // công viên Đầm Sen (toạ độ anh Hiệp): mặt cỏ, hồ, cây
-var DS=LL(16.002240,108.250477); (function(){ sFlat(360,300,0x7fae58,DS[0],DS[1],.4); sFlat(150,90,0x3f9fb5,DS[0]+20,DS[1]+10,.45);
+var DS=LL(16.002240,108.250477); (function(){ if(inWater(DS[0],DS[1])||inPark(DS[0],DS[1],0)) return; sFlat(360,300,0x7fae58,DS[0],DS[1],.4); sFlat(150,90,0x3f9fb5,DS[0]+20,DS[1]+10,.45);
   var dm=new THREE.Object3D(), im=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(3.2,0),M(0x4d8a3c,{roughness:.95}),90);
   for(var i=0;i<90;i++){ var x=rnd(-170,170), z=rnd(-140,140); if(Math.abs(x-20)<85&&Math.abs(z-10)<55){ i--; continue; } dm.position.set(DS[0]+x,6,DS[1]+z); dm.scale.setScalar(rnd(.8,1.4)); dm.updateMatrix(); im.setMatrixAt(i,dm.matrix); }
   im.castShadow=true; scene.add(im); })();
 // cầu Rồng
 (function(){ var m=new THREE.Mesh(new THREE.BoxGeometry(37,8,666),M(0xd8b14a,{roughness:.5,metalness:.3})); m.position.set(DRG[0],8,DRG[1]); m.rotation.y=Math.PI/2; scene.add(m); })();
 
-/* ---------- Xe trên 2 trục đường ---------- */
+/* ---------- Xe chạy trên các tuyến đường chính thật ---------- */
 var cars=[], carMesh, dmC=new THREE.Object3D(), cc=new THREE.Color();
+var CPATH=ROADS.filter(function(r){ return r.w>=13&&r.p.some(function(q){ return Math.hypot(q[0],q[1])<900; }); }).map(function(r){ var L=[0]; for(var i=1;i<r.p.length;i++) L.push(L[i-1]+Math.hypot(r.p[i][0]-r.p[i-1][0],r.p[i][1]-r.p[i-1][1])); return {p:r.p,L:L,len:L[L.length-1],w:r.w,main:r.w>=RW}; }).filter(function(c){ return c.len>60; });
 (function(){ var n=LOW?34:60; carMesh=new THREE.InstancedMesh(new THREE.BoxGeometry(2,1.5,4.6),M(0xffffff,{roughness:.35,metalness:.4,envMapIntensity:.8}),n);
-  var cols=[0xf2f2f2,0xd9d9d9,0x2b2f36,0x9aa3ad,0xb23a2e,0x2f5c8a];
-  for(var i=0;i<n;i++){ var rd=i%2, lane=srnd()<.5?-1:1; cars.push({road:rd,lane:lane,s:rnd(-820,820),v:rnd(9,15)*lane}); carMesh.setColorAt(i,cc.set(cols[i%cols.length])); }
-  carMesh.castShadow=true; world.add(carMesh); })();
-function updateCars(dt){ cars.forEach(function(c,i){ c.s+=c.v*dt; if(c.s>830)c.s=-830; if(c.s<-830)c.s=830;
-  if(c.road===0){ dmC.position.set(c.s,.85,c.lane>0?4.2:-4.2); dmC.rotation.set(0,Math.PI/2,0); } else { dmC.position.set(c.lane>0?-4.2:4.2,.85,c.s); dmC.rotation.set(0,0,0); }
+  var cols=[0xf2f2f2,0xd9d9d9,0x2b2f36,0x9aa3ad,0xb23a2e,0x2f5c8a], W=[]; CPATH.forEach(function(c){ W.push(c.len*(c.main?3:1)); }); var tot=W.reduce(function(a,b){ return a+b; },0);
+  for(var i=0;i<n;i++){ var r=srnd()*tot, k=0; while(k<W.length-1&&r>W[k]){ r-=W[k]; k++; } var lane=srnd()<.5?-1:1; cars.push({k:k,lane:lane,s:rnd(0,CPATH.length?CPATH[k].len:1),v:rnd(9,15)*lane}); carMesh.setColorAt(i,cc.set(cols[i%cols.length])); }
+  carMesh.castShadow=true; scene.add(carMesh); })();
+function updateCars(dt){ if(!CPATH.length) return; cars.forEach(function(c,i){ var P=CPATH[c.k]; c.s+=c.v*dt; if(c.s>P.len) c.s-=P.len; if(c.s<0) c.s+=P.len;
+  var j=1; while(j<P.L.length-1&&P.L[j]<c.s) j++; var a=P.p[j-1], b=P.p[j], l=(P.L[j]-P.L[j-1])||1, t=(c.s-P.L[j-1])/l, ux=(b[0]-a[0])/l, uz=(b[1]-a[1])/l, o=c.lane*(P.main?4.2:P.w/4);
+  dmC.position.set(a[0]+(b[0]-a[0])*t-uz*o,.85,a[1]+(b[1]-a[1])*t+ux*o); dmC.rotation.set(0,Math.atan2(ux,uz),0);
   dmC.updateMatrix(); carMesh.setMatrixAt(i,dmC.matrix); }); carMesh.instanceMatrix.needsUpdate=true; }
 updateCars(0);
 
@@ -344,9 +377,9 @@ var mainLbl=label('TÒA F2 · đang mở bán','main',T,[0,TOP+16,0]);
 label('Tòa F1','',F1.grp,[0,TOP+10,0]); label('Tòa F5','',F5.grp,[0,TOP+10,0]); label('Tòa F3','',F3.grp,[0,TOP+10,0]);
 label('Nguyễn Phước Lan','road',world,[-260,2,0]); label('Nguyễn Phước Lan','road',world,[300,2,0]);
 label('Minh Mạng','road',world,[0,2,-300]); label('Minh Mạng','road',world,[0,2,280]);
-label('Công viên (ước lượng)','',world,[100,6,-210]);
+
 (function(){ function L(t,p,h,cls){ label(t,cls||'',scene,[p[0],h||12,p[1]]); }
-  var cc=CC[2]; L('Sông Cổ Cò',[cc[0],cc[1]],8); L('Sunneva Island',SNV,10);
+  var ccr=OSM.rivers.filter(function(r){ return r.n==='Sông Cổ Cò'; }).map(function(r){ return r.p; }).reduce(function(a,b){ return a.concat(b); },[]).sort(function(a,b){ return Math.hypot(a[0],a[1])-Math.hypot(b[0],b[1]); })[0]; L('Sông Cổ Cò',ccr||LL(16.0085,108.2500),8); L('Công viên Hói Kiểng',[241,468],8); L('Công viên cầu Bờ Quan',[399,-224],8); L('Sunneva Island',SNV,10);
   L('Ngũ Hành Sơn',NHS,130,'far');
   L('Biển Mỹ Khê',MK,8); L('Biển Sơn Thủy',STB,8); L('Biển Đông',[STB[0]+3500,STB[1]],8,'far'); L('Hội An (~'+Math.round(HA[3]/1000)+' km)',HA,60,'far');
   L('Bán đảo Sơn Trà',ST,720,'far');
