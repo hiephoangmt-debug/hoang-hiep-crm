@@ -569,7 +569,7 @@ def vitri_dark(sid='vi-tri', ctx='ADS'):
             '<a class="gml" href="https://www.google.com/maps/search/?api=1&amp;query=16.021300,108.257659" target="_blank" rel="noopener">📍 Mở trong Google Maps</a></div></div>'
             '</div></div></section>') % (sid, ctx)
 
-ADS_TOC = [('su-kien', 'Sự kiện 01/11'), ('tai-chinh', 'Giá &amp; thanh toán'), ('quy-hoach', 'Quy hoạch'), ('vi-tri', 'Vị trí'), ('mat-bang', 'Mặt bằng'), ('dong-tien', 'Cho thuê'), ('phap-ly', 'Pháp lý')]
+ADS_TOC = [('su-kien', 'Sự kiện 01/11'), ('tai-chinh', 'Giá &amp; thanh toán'), ('quy-hoach', 'Quy hoạch'), ('vi-tri', 'Vị trí'), ('mat-bang', 'Mặt bằng'), ('dong-tien', 'Cho thuê')]
 
 def tai_chinh(ctx='ADS'):
     return ('<section class="sec nv tcx" id="tai-chinh"><div class="wrap">'
@@ -617,11 +617,11 @@ def ads(domain):
          '<ul class="ck"><li><b>Đại lý chính thức TATILAND</b> – bảng giá gốc từ đại lý, gửi qua Zalo khi công bố</li>'
          '<li><b>Studio 30 m², 1BR+ 50 m², 2BR 60–70 m²</b> · trần cao 3,5 m, view biển</li>'
          '<li><b>400 m ra bãi tắm Sơn Thủy</b> · giao lộ Võ Nguyên Giáp – Trường Sa</li>'
-         '<li><b>Pháp lý minh bạch</b> · Vietcombank, BIDV, NCB hỗ trợ vay</li></ul>'
+         '<li><b>Công trình cấp I</b>, niên hạn 100 năm · Vietcombank, BIDV, NCB hỗ trợ vay</li></ul>'
          '<a class="play" href="#ss4d" data-4d><i aria-hidden="true">▶</i><span><b>Xem dự án 3D · 4D</b><small>Xoay tòa tháp · nắng theo giờ · view biển từ căn</small></span></a>'
          '</div><div class="hr">%s</div></div></div></div></section>'
          '<section class="hstrip"><div class="wrap">%s'
-         '<div class="qlinks"><a href="{M}/bang-gia">Bảng giá</a><a href="#mat-bang">Mặt bằng &amp; chọn căn</a><a href="{M}/tinh-dong-tien">Tính dòng tiền</a><a href="{M}/phap-ly">Pháp lý &amp; tiến độ</a></div></div></section>'
+         '<div class="qlinks"><a href="{M}/bang-gia">Bảng giá</a><a href="#mat-bang">Mặt bằng &amp; chọn căn</a><a href="{M}/tinh-dong-tien">Tính dòng tiền</a><a href="#tai-chinh">Giá &amp; thanh toán</a></div></div></section>'
          '<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-4d]");if(!a)return;var b=document.getElementById("ss4d-box");if(!b)return;e.preventDefault();if(innerWidth<=760&&window.ss4dFull){ss4dFull();return}'
          'try{b.scrollIntoView({behavior:"smooth",block:"center"})}catch(x){b.scrollIntoView()}var g=document.getElementById("ss4d-go");if(g)g.click();'
          'try{if(window.gtag)gtag("event","xem_4d",{event_label:"hero"})}catch(x){}});</script>') % (
@@ -631,7 +631,7 @@ def ads(domain):
     b += su_kien('ADS')
     b += tai_chinh('ADS')
     b += tldr('Sun Saphia Residence', [('Dự án', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, 30 tầng, 782 căn'), ('Loại căn', 'Studio 30 m² · 1BR+ 50 m² · 2BR 60–70 m²'),
-        ('Pháp lý', 'GCN đầu tư · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Mở bán', 'Ra mắt 01/11/2026'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
+        ('Công trình', 'Cấp I, niên hạn 100 năm · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Mở bán', 'Ra mắt 01/11/2026'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('★', 'Thời điểm vàng', 'Vì sao <b>đăng ký sớm</b>?', 'o') + why_now() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('☀', 'Một ngày ở Saphia', 'Mở cửa ra là <b>biển</b>', 'y') +
           day4()
@@ -648,15 +648,15 @@ def ads(domain):
           '<article class="card">' + img('tien-ich-gym', 'Gym, pilates (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Gym · Yoga · Pilates</h3></article>'
           '<article class="card">' + img('the-thao-bien', 'Thể thao biển (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Kayak · SUP · Jetski</h3></article></div>' + khoi_de() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('09', 'Cho thuê', 'Tiềm năng <b>dòng tiền</b>', 'o') + rent_night() + '<div style="margin-top:20px">' + rent_case() + '</div></div></section>')
-    b += ('<section class="sec alt"><div class="wrap">' + sh('05', 'Pháp lý', 'Pháp lý <b>rõ ràng</b>', 'n') + legal_box() + '<div style="margin-top:26px">' + daily() + '</div></div></section>')
+    b += ('<section class="sec alt"><div class="wrap">' + sh('05', 'Pháp lý', 'Công trình <b>cấp I</b> – pháp lý rõ ràng', 'n') + legal_box_ads() + '<div style="margin-top:26px">' + daily() + '</div></div></section>')
     b = bands_at(b, [(1, band('Thời điểm vàng – đừng để lỡ đợt đầu', 'Nhận bảng giá gốc và chính sách sớm nhất qua Zalo.', 'Nhận bảng giá sớm', 'ADS – sau lý do mua sớm')),
                      (3, band('Mỗi tầng chỉ vài căn nhìn thẳng ra biển', 'Người đăng ký sớm được gửi mặt bằng trước và ưu tiên chọn căn ngay khi mở bán.', 'Ưu tiên chọn căn', 'ADS – ưu tiên chọn căn')),
                      (6, band('Nhận bảng tính dòng tiền theo căn', 'Giá thuê, lấp đầy, lợi nhuận từng căn – gửi qua Zalo.', 'Nhận bảng tính', 'ADS – bảng tính dòng tiền'))])
     b += ('<section class="sec alt"><div class="wrap"><h2 class="dp" style="font-size:30px;margin-bottom:16px">Tìm hiểu <b>thêm</b></h2>' + related('/ads') + '</div></section>')
     b += cta_block('ADS – form cuối trang')
     title = 'Sun Saphia Residence – Căn hộ mặt biển Đà Nẵng | Đại lý chính thức TATILAND'
-    desc = 'Căn hộ mặt biển Đà Nẵng: Studio 30m², 1BR+ 50m², 2BR 60–70m², ra biển 400m, pháp lý minh bạch, Vietcombank, BIDV, NCB hỗ trợ vay. Bảng giá gốc từ đại lý chính thức TATILAND.'
-    for frag, sid in [('4 quy hoạch <b>bao quanh dự án</b>', 'quy-hoach'), ('Tiềm năng <b>dòng tiền</b>', 'dong-tien'), ('Pháp lý <b>rõ ràng</b>', 'phap-ly')]:
+    desc = 'Căn hộ mặt biển Đà Nẵng: Studio 30m², 1BR+ 50m², 2BR 60–70m², ra biển 400m, công trình cấp I, Vietcombank, BIDV, NCB hỗ trợ vay. Bảng giá gốc từ đại lý chính thức TATILAND.'
+    for frag, sid in [('4 quy hoạch <b>bao quanh dự án</b>', 'quy-hoach'), ('Tiềm năng <b>dòng tiền</b>', 'dong-tien'), ('Công trình <b>cấp I</b>', 'phap-ly')]:
         i = b.find(frag)
         if i > 0:
             j = b.rfind('<section', 0, i); t = b.index('>', j)

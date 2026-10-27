@@ -148,6 +148,15 @@ def banks():
         _BANKS = '<div class="banks"><span>NGÂN HÀNG HỖ TRỢ</span><div class="bl">' + out + '</div></div>'
     return _BANKS
 
+def legal_box_ads():
+    return ('<div class="g2 eq"><div class="txt">'
+            '<div class="cap1"><b>Công trình cấp I</b><span>niên hạn sử dụng 100 năm – chuẩn xây dựng cao nhất cho tòa căn hộ 30 tầng</span></div>'
+            '<h3>Đã có Giấy chứng nhận đăng ký đầu tư</h3><p>Mã dự án <b>2572746483</b>, do Sở Tài chính TP Đà Nẵng cấp ngày <b>17/09/2026</b>. Chủ đầu tư Sun Property – thành viên Sun Group.</p>'
+            '<h3>Ngân hàng hỗ trợ</h3>' + banks() + ''
+            '<p class="note" style="margin-top:10px">Chi tiết quyền lợi và hồ sơ pháp lý, đại lý gửi bản đầy đủ và giải thích trực tiếp khi anh/chị cần.</p>'
+            '<button type="button" class="btn sm" data-pop data-interest="ADS – nhận hồ sơ pháp lý">Nhận hồ sơ pháp lý</button></div>'
+            '<div>%s</div></div>') % fig('gcn-dau-tu-2', 'Giấy chứng nhận đăng ký đầu tư dự án Sun Saphia Residence, mã dự án 2572746483 (đã làm mờ)', 'Trang 1 GCN đăng ký đầu tư (làm mờ)')
+
 def legal_box():
     return ('<div class="g2 eq"><div class="txt">'
             '<h3>Giấy chứng nhận đăng ký đầu tư</h3><p>Mã dự án <b>2572746483</b>, do Sở Tài chính TP Đà Nẵng cấp, chứng nhận lần đầu ngày <b>17/09/2026</b>.</p>'
