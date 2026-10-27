@@ -8,7 +8,10 @@
  * Gọi qua jsonp_ (ChatAI.gs): action = access | access_req | access_otp
  */
 var QX_SHEET = 'Quyền xem';
+// Google OAuth Client ID (loại Web) dùng cho nút "Đăng nhập bằng Google" – dán vào đây hoặc đặt Script property GOOGLE_CLIENT_ID
+var QX_GOOGLE_CLIENT_ID = '';
 var QX_LINKS = {
+  'Xem dự án (4D + chọn căn + 3D cả tầng, đăng nhập 1 lần)': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/e3f3f7fa724b0fd3d2ea5cab481f153e533023d7/projects/sun-saphia/xem/xem-du-an.html',
   '4D nội bộ': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/f0bd28439cff3f54f969e08282cf4afd7d3fb29f/projects/sun-saphia/4d/sun-saphia-4d.html?crm',
   '4D – mặt bằng tầng': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/f0bd28439cff3f54f969e08282cf4afd7d3fb29f/projects/sun-saphia/4d/sun-saphia-4d.html?crm&plan&f=18',
   'Chọn căn (mặt bằng & 3D từng căn)': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/ea12fd6aa6ee67472173d42ec35a8d5d813dbad7/projects/sun-saphia/chon-can/chon-can-app.html'
@@ -62,6 +65,19 @@ function accessRoute_(p) {
         + '<p style="font-size:28px;font-weight:800;letter-spacing:4px;color:#E8460F">' + otp + '</p><p>Mã có hiệu lực 10 phút, chỉ dùng cho email này. Không chuyển mã cho người khác.</p>'
         + '<p>Hoàng Hiệp · 0904 567 009</p>', name: 'Hoàng Hiệp · Sun Saphia' });
     return { sent: true };
+  }
+  if (p.action === 'access_google') {                    // đăng nhập bằng Google: kiểm tra chữ ký Google rồi đối chiếu email với tab "Quyền xem"
+    var cid = PropertiesService.getScriptProperties().getProperty('GOOGLE_CLIENT_ID') || QX_GOOGLE_CLIENT_ID;
+    var res = UrlFetchApp.fetch('https://oauth2.googleapis.com/tokeninfo?id_token=' + encodeURIComponent(String(p.cred || '')), { muteHttpExceptions: true });
+    if (res.getResponseCode() !== 200) return { access: false, reason: 'google' };
+    var info = JSON.parse(res.getContentText());
+    if (!cid || info.aud !== cid || String(info.email_verified) !== 'true') return { access: false, reason: 'google' };
+    var ge = String(info.email || '').toLowerCase(), fg = qxFind_(ge);
+    if (!fg.row) return { access: false, reason: fg.reason, email: ge };
+    var gt = Utilities.getUuid().replace(/-/g, '');
+    props.setProperty('qx_t_' + gt, JSON.stringify({ e: ge, x: Date.now() + 30 * 864e5 }));
+    qxTouch_(fg, (p.page || '') + ' · Google');
+    return { access: true, name: String(fg.row[0] || info.name || ''), token: 't:' + gt };
   }
   if (p.action === 'access_otp') {                       // bước 2: nhập mã 6 số → cấp phiên 30 ngày
     var em = String(p.email || '').trim().toLowerCase(), code = String(p.otp || '').trim();
