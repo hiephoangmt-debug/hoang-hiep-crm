@@ -592,14 +592,14 @@ def tai_chinh(ctx='ADS'):
 
 def dau_tu_san(ctx='ADS'):
     no = ['Xin phép xây dựng, PCCC, kinh doanh lưu trú – thủ tục kéo dài nhiều năm', 'Ở xa, đi lại giám sát công trình khó khăn', 'Giá vật liệu, nhân công leo thang, dễ đội vốn', 'Vốn lớn bỏ ra một lần, đọng vốn trong lúc xây', 'Tự lo thương hiệu, tiện ích, tìm khách từ đầu']
-    yes = ['<b>Mua 1 sàn</b> (tầng điển hình 28 căn) hoặc <b>nhiều căn</b>, vận hành như khách sạn', 'Pháp lý dự án đã có, <b>công trình cấp I</b>, Sun Group xây và bàn giao 11/2028', 'Tận dụng <b>thương hiệu Sun Group</b>, hồ bơi, gym, khối đế thương mại có sẵn', 'Vị trí <b>mặt biển Mỹ Khê – Sơn Thủy</b>, ~400 m ra biển, khách du lịch quanh năm', 'Vốn nhẹ: <b>~25% đến khi nhận nhà</b>, ngân hàng hỗ trợ vay, chính sách chiết khấu theo công bố của chủ đầu tư']
+    yes = ['Chủ đầu tư <b>bán nguyên sàn</b> (tầng điển hình 28 căn) hoặc <b>nhiều căn</b> – vận hành như khách sạn', 'Pháp lý dự án đã có, <b>công trình cấp I</b>, Sun Group xây và bàn giao 11/2028', 'Tận dụng <b>thương hiệu Sun Group</b>, hồ bơi, gym, khối đế thương mại có sẵn', 'Vị trí <b>mặt biển Mỹ Khê – Sơn Thủy</b>, ~400 m ra biển, khách du lịch quanh năm', '<b>Có chiết khấu khi mua nhiều căn</b>; vốn nhẹ ~25% đến khi nhận nhà, ngân hàng hỗ trợ vay']
     return ('<section class="sec dts" id="dau-tu"><div class="wrap">'
             '<div class="sh"><span class="ey">Dành cho nhà đầu tư</span><h2 class="dp">Muốn xây khách sạn? <b>Mua 1 sàn Sun Saphia</b> có thể nhanh hơn</h2></div>'
             '<p class="lead just" style="max-width:860px;margin:0 auto 18px;text-align:center">Thuê dài hạn có dòng tiền ổn định, thuê ngắn hạn cho doanh thu cao hơn theo mùa. Nếu anh/chị đang tính xây tòa căn hộ hay khách sạn để cho thuê, đây có thể là một lựa chọn gọn hơn.</p>'
             '<div class="dtg"><div class="dtc no"><h3>Tự xây tòa căn hộ / khách sạn</h3><ul>' + ''.join('<li>%s</li>' % x for x in no) + '</ul></div>'
             '<div class="dtc yes"><h3>Đầu tư 1 sàn hoặc nhiều căn Sun Saphia</h3><ul>' + ''.join('<li>%s</li>' % x for x in yes) + '</ul></div></div>'
             '<div class="hcta" style="justify-content:center;margin-top:18px"><button type="button" class="btn" data-pop data-interest="' + ctx + ' – phương án đầu tư 1 sàn / nhiều căn">Nhận phương án đầu tư 1 sàn / nhiều căn</button></div>'
-            '<p class="src" style="text-align:center;margin-top:8px">Chính sách mua nhiều căn, chiết khấu và vận hành cho thuê theo công bố của chủ đầu tư; đại lý tư vấn phương án riêng theo ngân sách.</p>'
+            '<p class="src" style="text-align:center;margin-top:8px">Mức chiết khấu mua sàn / nhiều căn theo chính sách chủ đầu tư từng đợt – đại lý gửi phương án riêng theo ngân sách của anh/chị.</p>'
             '</div></section>')
 
 def ads(domain):
