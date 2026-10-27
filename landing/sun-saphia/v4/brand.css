@@ -642,3 +642,8 @@ background:linear-gradient(90deg,transparent,rgba(255,196,80,.0) 20%,#FFC24F 45%
 .skg figure img.sknote{position:absolute!important;top:32.4%!important;margin:0!important;padding:0!important}
 .skg figure img.sknote.l{left:2.62%!important;width:3.32%!important}
 .skg figure img.sknote.r{left:94.2%!important;width:3.75%!important}
+/* Tòa tháp trên thư mời: vệt nắng quét từ chân lên đỉnh */
+.skthap{position:absolute;left:57.99%;top:61%;width:31.12%;height:39%;pointer-events:none;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;mix-blend-mode:screen;
+background:linear-gradient(165deg,transparent 0%,transparent 40%,rgba(255,214,140,.25) 45%,rgba(255,250,235,.85) 50%,rgba(255,200,120,.3) 55%,transparent 60%,transparent 100%);background-size:100% 300%;background-position:0 0%;animation:skthap 4.2s ease-in-out infinite;animation-delay:.6s}
+@keyframes skthap{0%{background-position:0 0%}60%,100%{background-position:0 100%}}
+@media (prefers-reduced-motion:reduce){.skthap{animation:none;display:none}}
