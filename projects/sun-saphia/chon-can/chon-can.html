@@ -938,11 +938,7 @@ function buildRoom(r,host){
       var e=new THREE.Mesh(new THREE.BoxGeometry(L+.16,.08,.16),oM); e.position.set((a[0]+b[0])/2,.04,(a[1]+b[1])/2); e.rotation.y=-Math.atan2(b[1]-a[1],b[0]-a[0]); g.add(e); }
     var gsh=new THREE.Shape(); P.forEach(function(q,i){ if(i) gsh.lineTo(q[0],-q[1]); else gsh.moveTo(q[0],-q[1]); });
     var halo=new THREE.Mesh(new THREE.ShapeGeometry(gsh),new THREE.MeshBasicMaterial({color:0xff6a2b,transparent:true,opacity:.18,depthWrite:false,toneMapped:false})); halo.rotation.x=-Math.PI/2; halo.position.y=-.02; g.add(halo);
-    // nhãn mã căn nổi phía trên
-    var c=document.createElement('canvas'); c.width=320; c.height=120; var x=c.getContext('2d'); x.fillStyle='#FF6A2B'; if(x.roundRect){ x.beginPath(); x.roundRect(6,6,308,88,20); x.fill(); } else x.fillRect(6,6,308,88);
-    x.beginPath(); x.moveTo(140,92); x.lineTo(160,116); x.lineTo(180,92); x.fill(); x.fillStyle='#fff'; x.textAlign='center'; x.font='800 54px Be Vietnam Pro,Arial'; x.fillText(r[0]&&code(r[0])||'',160,68);
-    var tx=new THREE.CanvasTexture(c); tx.encoding=THREE.sRGBEncoding; var sp2=new THREE.Sprite(new THREE.SpriteMaterial({map:tx,depthTest:false,toneMapped:false}));
-    sp2.scale.set(2.6,.98,1); sp2.position.set(sp.W/2,HT+1.2,sp.D/2); sp2.renderOrder=10; g.add(sp2); })();
+  })();
   // đặt căn vào mặt bằng tầng: các căn xung quanh, hành lang, lõi thang nằm đúng vị trí dưới chân căn đang xem
   (function(){
     var P=unitM(r), det=P[0]*P[3]-P[1]*P[2]; if(!det) return;
@@ -953,7 +949,7 @@ function buildRoom(r,host){
     var LL=LAY(state.floor), FK=LL==='T2'?'fp2':LL==='T3'?'fp3':'fpT', FH=FK==='fpT'?49.6:53.4;
     if(!TX[FK]){ var ld=new THREE.TextureLoader(); ld.setCrossOrigin('anonymous'); TX[FK]=ld.load(FK==='fpT'?FLOOR_TEX:FLOOR_IMG+(FK==='fp2'?'mat-bang-tang-2-4d.webp':'mat-bang-tang-3-4d.webp')); TX[FK].encoding=THREE.sRGBEncoding; TX[FK].anisotropy=8; }
     var geo=new THREE.PlaneGeometry(54.4,FH); geo.rotateX(-Math.PI/2);
-    var pm=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0x5e6369,map:TX[FK],transparent:true,alphaTest:.05,roughness:1,envMapIntensity:.3}));
+    var pm=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0xffffff,map:TX[FK],transparent:true,opacity:.3,depthWrite:false,roughness:1,envMapIntensity:.3}));
     pm.position.set(27.2,-.035,-9.9+FH/2); pm.receiveShadow=true; pg.add(pm);
     var osh=new THREE.Shape(); (LL==='T2'?OUT2:OUT).forEach(function(q,i){ if(i) osh.lineTo(q[0],-q[1]); else osh.moveTo(q[0],-q[1]); });
     var sg=new THREE.ExtrudeGeometry(osh,{depth:.3,bevelEnabled:false}); sg.rotateX(-Math.PI/2);
