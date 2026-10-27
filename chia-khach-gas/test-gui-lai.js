@@ -96,4 +96,14 @@ ok(all().some(k=>k.sdt==='0905000777'&&k.trang_thai==='cho_nhan'),'khách Saphia
   const n=to(900).filter(s=>/Đã huỷ khách thử/.test(s.text)).length; adv(1); run();
   ok(to(900).filter(s=>/Đã huỷ khách thử/.test(s.text)).length===n,'chỉ trả lượt 1 lần');
 }
+
+// ===== Báo cáo không tính khách thử =====
+{ const bc=vm.runInContext('baoCao_(Date.now())',ctx), tuan=vm.runInContext('baoCaoTuan_(Date.now())',ctx);
+  const ids=all().filter(k=>/^Khách thử/.test(k.ly_do_dong)).map(k=>k.id);
+  const giaoThu=vm.runInContext("rows_('NhatKy',T_NK).filter(function(r){return r.hanh_dong==='được giao'})",ctx).filter(r=>ids.includes(r.khach)).length;
+  const giaoAll=vm.runInContext("rows_('NhatKy',T_NK).filter(function(r){return r.hanh_dong==='được giao'})",ctx).length;
+  const tong=s=>[...s.matchAll(/\((\d+)\/(\d+)\)/g)].reduce((a,m)=>a+Number(m[2]),0);
+  ok(ids.length>=2&&giaoThu>0&&tong(tuan)===giaoAll-giaoThu,'xếp hạng tuần không đếm lượt giao khách thử ('+tong(tuan)+' = '+giaoAll+' − '+giaoThu+')');
+  ok(!/Thử/.test(bc),'báo cáo ngày không tính khách thử');
+}
 console.log('\nTỔNG LỖI: '+fails);process.exit(fails?1:0);

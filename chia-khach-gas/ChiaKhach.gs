@@ -656,8 +656,8 @@ function thuHoi_(k, lyDo) {
   sua_(k.nguoi_giu, k.msg_id, '⛔ <b>Khách ' + esc(k.id) + ' đã được thu hồi</b> (' + esc(lyDo) + ').\nSố điện thoại đã ẩn.');
   log_(k.ten_sale, 'thu hồi', k.id, lyDo);
   if (/^không bấm nhận/.test(lyDo)) {
-    var hom = vnDay(Date.now()), ten = k.ten_sale;
-    var lan = rows_('NhatKy', T_NK).filter(function (r) { return r.nguoi === ten && r.hanh_dong === 'thu hồi' && /^không bấm nhận/.test(r.chi_tiet) && vnDay(ms(r.thoi_gian)) === hom; }).length;
+    var hom = vnDay(Date.now()), ten = k.ten_sale, thu = maKhachThu_();
+    var lan = rows_('NhatKy', T_NK).filter(function (r) { return r.nguoi === ten && r.hanh_dong === 'thu hồi' && /^không bấm nhận/.test(r.chi_tiet) && vnDay(ms(r.thoi_gian)) === hom && !thu[r.khach]; }).length;
     var sl = timSale_(k.nguoi_giu);
     if (sl && sl.trang_thai === 'lam' && lan >= num('THU_HOI_TU_DUNG')) {
       sl.trang_thai = 'nghi'; save_('Sale', T_SALE, sl); log_('hệ thống', 'tự tạm dừng', '', sl.ten + ' bị thu hồi ' + lan + ' lần hôm nay');
@@ -878,9 +878,12 @@ function danhSachSale_() {
   var vg = layVong_('VONG_MOI', salesDangLam_());
   return '<b>Đội chia khách</b> · khách mới đang ở <b>vòng ' + vg.so + '</b>\n' + l.map(function (s) { return (s.trang_thai === 'lam' ? '▶️ ' : s.trang_thai === 'nghi' ? '⏸ ' : '⏳ ') + esc(s.ten) + (s.trang_thai === 'lam' ? (vg.da.indexOf(String(s.chat_id)) > -1 ? ' ✔ đã nhận vòng này' : ' · chưa nhận vòng này') : '') + ' – đang giữ ' + dangGiu_(s.chat_id, null, '') + (dangGiu_(s.chat_id, null, 'khac') ? ' (+' + dangGiu_(s.chat_id, null, 'khac') + ' dự án khác)' : ''); }).join('\n');
 }
+/* Khách thử (số trong SO_THU hoặc đã huỷ là khách thử): không tính vào báo cáo, xếp hạng, luật tự tạm dừng */
+function laKhachThu_(k) { return /^Khách thử/.test(String(k.ly_do_dong || '')) || laSoThu_(k.sdt); }
+function maKhachThu_() { var m = {}; rows_('Khach', T_KHACH).forEach(function (k) { if (laKhachThu_(k)) m[k.id] = 1; }); return m; }
 function baoCao_(t) {
-  var hom = vnDay(t), nk = rows_('NhatKy', T_NK).filter(function (r) { return vnDay(ms(r.thoi_gian)) === hom; });
-  var kh = rows_('Khach', T_KHACH), moi = kh.filter(function (k) { return vnDay(ms(k.luc_vao)) === hom; }).length;
+  var thu = maKhachThu_(), hom = vnDay(t), nk = rows_('NhatKy', T_NK).filter(function (r) { return vnDay(ms(r.thoi_gian)) === hom && !thu[r.khach]; });
+  var kh = rows_('Khach', T_KHACH).filter(function (k) { return !thu[k.id]; }), moi = kh.filter(function (k) { return vnDay(ms(k.luc_vao)) === hom; }).length;
   var by = {};
   nk.forEach(function (r) { var n = r.nguoi; if (!n || n === 'hệ thống' || n === 'quản lý') return; by[n] = by[n] || {giao: 0, nhan: 0, thu: 0, bc: 0}; if (r.hanh_dong === 'được giao') by[n].giao++; if (r.hanh_dong === 'nhận khách') by[n].nhan++; if (r.hanh_dong === 'thu hồi') by[n].thu++; if (r.hanh_dong === 'báo cáo') by[n].bc++; });
   var chot = {}, cd = {};
@@ -894,8 +897,8 @@ function baoCao_(t) {
 function baoCaoToi() { baoQL_(baoCao_(Date.now())); }
 /* Xếp hạng 7 ngày gần nhất: tỷ lệ nhận đúng hạn, báo cáo đúng hạn, chuyển đổi, chốt */
 function baoCaoTuan_(t) {
-  var tu = t - 7 * 86400000, by = {};
-  var nk = rows_('NhatKy', T_NK).filter(function (r) { return ms(r.thoi_gian) >= tu && ms(r.thoi_gian) <= t; });
+  var tu = t - 7 * 86400000, by = {}, thu = maKhachThu_();
+  var nk = rows_('NhatKy', T_NK).filter(function (r) { return ms(r.thoi_gian) >= tu && ms(r.thoi_gian) <= t && !thu[r.khach]; });
   nk.forEach(function (r) {
     var n = r.nguoi; if (!n || n === 'hệ thống' || n === 'quản lý') return;
     var b = by[n] = by[n] || {giao: 0, nhan: 0, khongNhan: 0, khongBc: 0, cd: 0, chot: 0};
