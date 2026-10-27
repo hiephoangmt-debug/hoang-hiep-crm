@@ -1202,6 +1202,11 @@ var fe=document.getElementById('floor'); fe.addEventListener('input',function(){
   var keep=+document.getElementById('hour').value, cur=(was30&&state.s30!=null)?U30[state.s30][0]:state.sel!==null?U[state.sel][0]:(lastSel!==null?U[lastSel][0]:'05'); select(pickOn(cur)); document.getElementById('hour').value=keep; showHour(); });
 document.getElementById('hour').addEventListener('input',showHour);
 [].forEach.call(document.querySelectorAll('#vmode button'),function(b){ b.addEventListener('click',function(){ setMode(b.getAttribute('data-m')); }); });
+// xuất dữ liệu layout căn (dùng cho mô hình 4D: đứng trong căn, nội thất đúng mặt bằng)
+window.__ccExport=function(){ var sp={}; Object.keys(SPEC).forEach(function(k){ var s=SPEC[k]; sp[k]={W:s.W,D:s.D,floor:s.floor,segs:s.segs,blocks:s.blocks||[],zones:s.zones||[],shw:s.shw||[],items:s.items,eye:s.eye,look:s.look}; });
+  var u={}; U.forEach(function(r){ u[r[0]]=[[SK(r),unitM(r)]]; });
+  var u30={}; U30.forEach(function(r){ u30[r[0]]=G30[r[0]].filter(function(q){ return q[5]!=='RECT'; }).map(function(q){ return [q[5],partM(q)]; }); });
+  return {spec:sp,u:u,u30:u30}; };
 (function(){ // mở thẳng 1 căn: ?u=<mã căn>&f=<tầng> (dùng khi bấm căn trên mô hình 4D)
   var q=location.search||'', mu=/[?&]u=([0-9A-Za-z]+)/.exec(q), mf=/[?&]f=(\d+)/.exec(q), idx=5;
   if(mf){ var fv=Math.max(2,Math.min(30,+mf[1])); state.floor=fv; fe.value=fv; document.getElementById('flo').textContent=fname(fv); }
