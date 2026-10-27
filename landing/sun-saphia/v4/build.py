@@ -569,7 +569,7 @@ def vitri_dark(sid='vi-tri', ctx='ADS'):
             '<a class="gml" href="https://www.google.com/maps/search/?api=1&amp;query=16.021300,108.257659" target="_blank" rel="noopener">📍 Mở trong Google Maps</a></div></div>'
             '</div></div></section>') % (sid, ctx)
 
-ADS_TOC = [('su-kien', 'Sự kiện 01/11'), ('tai-chinh', 'Giá &amp; thanh toán'), ('quy-hoach', 'Quy hoạch'), ('vi-tri', 'Vị trí'), ('mat-bang', 'Mặt bằng'), ('dong-tien', 'Cho thuê')]
+ADS_TOC = [('su-kien', 'Sự kiện 01/11'), ('tai-chinh', 'Giá &amp; thanh toán'), ('dau-tu', 'Đầu tư 1 sàn'), ('quy-hoach', 'Quy hoạch'), ('vi-tri', 'Vị trí'), ('mat-bang', 'Mặt bằng'), ('dong-tien', 'Cho thuê')]
 
 def tai_chinh(ctx='ADS'):
     return ('<section class="sec nv tcx" id="tai-chinh"><div class="wrap">'
@@ -581,13 +581,25 @@ def tai_chinh(ctx='ADS'):
             '<input type="range" id="tcv" min="2" max="6" step="0.1" value="2.1" aria-label="Giá căn (tỷ đồng)"></div>'
             '<div class="tcr"><div><small>25% đến khi nhận nhà</small><b id="tc25">525 triệu</b><em class="dk">dự kiến</em></div></div></div>'
             '<p class="src" style="margin-top:10px">Ước tính để anh/chị hình dung dòng tiền; giá, tiến độ và chính sách chính thức theo công bố của chủ đầu tư tại sự kiện ra mắt 01/11/2026.</p>'
-            '<div class="rtw"><h3>Cho thuê <b>từ bao nhiêu?</b></h3><div class="rtg"><div class="rtc"><span>Studio · 30–31 m²</span><b>~18 triệu<small>/tháng</small></b><em class="dk">dự kiến</em><p>≈ <strong>216 triệu/năm</strong></p></div><div class="rtc"><span>1BR+ · 50–51 m²</span><b>~24 triệu<small>/tháng</small></b><em class="dk">dự kiến</em><p>≈ <strong>288 triệu/năm</strong></p></div><div class="rtc"><span>2BR · 60–70 m²</span><b>~35 triệu<small>/tháng</small></b><em class="dk">dự kiến</em><p>≈ <strong>420 triệu/năm</strong></p></div></div>'
-            '<p class="src" style="margin-top:8px">Thuê theo tháng, tham chiếu căn hộ Sun Group bên sông Hàn (The Panoma: Studio 18–20 tr, 1PN 24 tr, 2PN 35 tr/tháng – tài liệu Kick-off). Căn mặt biển cho thuê theo đêm: Studio 2,2–2,9 tr, 1BR+ 3,4–3,7 tr/đêm. <a href="#dong-tien">Xem phần dòng tiền →</a></p></div>'
+            '<div class="rtw"><h3>Cho thuê <b>từ bao nhiêu?</b></h3><div class="rtg"><div class="rtc"><span class="rtt">Studio · 30–31 m²</span><div class="rtr"><small>Dài hạn (theo tháng)</small><b>~18 triệu<i>/tháng</i></b><span>≈ 216 triệu/năm</span></div><div class="rtr"><small>Ngắn hạn (theo đêm)</small><b>~30 triệu<i>/tháng</i></b><span>≈ 356 triệu/năm</span></div><em class="dk">dự kiến</em></div><div class="rtc"><span class="rtt">1BR+ · 50–51 m²</span><div class="rtr"><small>Dài hạn (theo tháng)</small><b>~24 triệu<i>/tháng</i></b><span>≈ 288 triệu/năm</span></div><div class="rtr"><small>Ngắn hạn (theo đêm)</small><b>~42 triệu<i>/tháng</i></b><span>≈ 505 triệu/năm</span></div><em class="dk">dự kiến</em></div><div class="rtc"><span class="rtt">2BR · 60–70 m²</span><div class="rtr"><small>Dài hạn (theo tháng)</small><b>~35 triệu<i>/tháng</i></b><span>≈ 420 triệu/năm</span></div><div class="rtr"><small>Ngắn hạn (theo đêm)</small><b class="ask">Theo mùa</b><span>nhận bảng tính riêng</span></div><em class="dk">dự kiến</em></div></div>'
+            '<p class="src" style="margin-top:8px">Dài hạn: tham chiếu căn hộ Sun Group bên sông Hàn (The Panoma: Studio 18–20 tr, 1PN 24 tr, 2PN 35 tr/tháng). Ngắn hạn: giá đêm căn view biển Studio 2,2–2,9 tr, 1BR+ 3,4–3,7 tr (tài liệu Kick-off), giả định lấp đầy 60%, đã trừ ~35% chi phí vận hành. <a href="#dong-tien">Xem phần dòng tiền →</a></p></div>'
 
             '<div class="hcta" style="justify-content:center"><button type="button" class="btn" data-pop data-interest="' + ctx + ' – nhận bảng giá &amp; lịch thanh toán 25%">Nhận bảng giá &amp; lịch thanh toán chi tiết</button></div>'
             '<script>(function(){var r=document.getElementById("tcv");if(!r)return;function f(x){return x>=1000?(x/1000).toFixed(2).replace(".",",").replace(/,?0+$/,"")+" tỷ":Math.round(x)+" triệu"}'
             'function u(){var v=parseFloat(r.value),q=v*1000*0.25;document.getElementById("tcvv").textContent=v.toFixed(1).replace(".",",")+" tỷ";document.getElementById("tc25").textContent=f(q);document.getElementById("tcbig").textContent=f(q)}'
             'r.addEventListener("input",u);u()})();</script>'
+            '</div></section>')
+
+def dau_tu_san(ctx='ADS'):
+    no = ['Xin phép xây dựng, PCCC, kinh doanh lưu trú – thủ tục kéo dài nhiều năm', 'Ở xa, đi lại giám sát công trình khó khăn', 'Giá vật liệu, nhân công leo thang, dễ đội vốn', 'Vốn lớn bỏ ra một lần, đọng vốn trong lúc xây', 'Tự lo thương hiệu, tiện ích, tìm khách từ đầu']
+    yes = ['<b>Mua 1 sàn</b> (tầng điển hình 28 căn) hoặc <b>nhiều căn</b>, vận hành như khách sạn', 'Pháp lý dự án đã có, <b>công trình cấp I</b>, Sun Group xây và bàn giao 11/2028', 'Tận dụng <b>thương hiệu Sun Group</b>, hồ bơi, gym, khối đế thương mại có sẵn', 'Vị trí <b>mặt biển Mỹ Khê – Sơn Thủy</b>, ~400 m ra biển, khách du lịch quanh năm', 'Vốn nhẹ: <b>~25% đến khi nhận nhà</b>, ngân hàng hỗ trợ vay, chính sách chiết khấu theo công bố của chủ đầu tư']
+    return ('<section class="sec dts" id="dau-tu"><div class="wrap">'
+            '<div class="sh"><span class="ey">Dành cho nhà đầu tư</span><h2 class="dp">Muốn xây khách sạn? <b>Mua 1 sàn Sun Saphia</b> có thể nhanh hơn</h2></div>'
+            '<p class="lead just" style="max-width:860px;margin:0 auto 18px;text-align:center">Thuê dài hạn có dòng tiền ổn định, thuê ngắn hạn cho doanh thu cao hơn theo mùa. Nếu anh/chị đang tính xây tòa căn hộ hay khách sạn để cho thuê, đây có thể là một lựa chọn gọn hơn.</p>'
+            '<div class="dtg"><div class="dtc no"><h3>Tự xây tòa căn hộ / khách sạn</h3><ul>' + ''.join('<li>%s</li>' % x for x in no) + '</ul></div>'
+            '<div class="dtc yes"><h3>Đầu tư 1 sàn hoặc nhiều căn Sun Saphia</h3><ul>' + ''.join('<li>%s</li>' % x for x in yes) + '</ul></div></div>'
+            '<div class="hcta" style="justify-content:center;margin-top:18px"><button type="button" class="btn" data-pop data-interest="' + ctx + ' – phương án đầu tư 1 sàn / nhiều căn">Nhận phương án đầu tư 1 sàn / nhiều căn</button></div>'
+            '<p class="src" style="text-align:center;margin-top:8px">Chính sách mua nhiều căn, chiết khấu và vận hành cho thuê theo công bố của chủ đầu tư; đại lý tư vấn phương án riêng theo ngân sách.</p>'
             '</div></section>')
 
 def ads(domain):
@@ -630,6 +642,7 @@ def ads(domain):
         hero_perks())
     b += su_kien('ADS')
     b += tai_chinh('ADS')
+    b += dau_tu_san('ADS')
     b += tldr('Sun Saphia Residence', [('Dự án', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, 30 tầng, 782 căn'), ('Loại căn', 'Studio 30 m² · 1BR+ 50 m² · 2BR 60–70 m²'),
         ('Công trình', 'Cấp I, niên hạn 100 năm · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Mở bán', 'Ra mắt 01/11/2026'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('★', 'Thời điểm vàng', 'Vì sao <b>đăng ký sớm</b>?', 'o') + why_now() + '</div></section>')
