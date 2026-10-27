@@ -10,12 +10,12 @@
 var QX_SHEET = 'Quyền xem';
 // Google OAuth Client ID (loại Web) dùng cho nút "Đăng nhập bằng Google" – dán vào đây hoặc đặt Script property GOOGLE_CLIENT_ID
 var QX_GOOGLE_CLIENT_ID = '';
-var QX_XEM_URL = 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/23b77a19d2c6273040c86af9220a6117beafc6cf/projects/sun-saphia/xem/xem-du-an.html';
+var QX_XEM_URL = 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/861ae71d75c199431644485226b7f78b499a491d/projects/sun-saphia/xem/xem-du-an.html';
 var QX_LINKS = {
-  'Xem dự án (4D + chọn căn + 3D cả tầng, đăng nhập 1 lần)': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/23b77a19d2c6273040c86af9220a6117beafc6cf/projects/sun-saphia/xem/xem-du-an.html',
-  '4D nội bộ': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/eaa79262d3687b008ab6cffc0470afe24680dda2/projects/sun-saphia/4d/sun-saphia-4d.html?crm',
-  '4D – mặt bằng tầng': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/eaa79262d3687b008ab6cffc0470afe24680dda2/projects/sun-saphia/4d/sun-saphia-4d.html?crm&plan&f=18',
-  'Chọn căn (mặt bằng & 3D từng căn)': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/052a397da022820c04a4cc0227039aefa84e7988/projects/sun-saphia/chon-can/chon-can-app.html'
+  'Xem dự án (4D + chọn căn + 3D cả tầng, đăng nhập 1 lần)': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/861ae71d75c199431644485226b7f78b499a491d/projects/sun-saphia/xem/xem-du-an.html',
+  '4D nội bộ': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/e20c378e4f6cf8ca01fb4a241221b2dd1e03c4f9/projects/sun-saphia/4d/sun-saphia-4d.html?crm',
+  '4D – mặt bằng tầng': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/e20c378e4f6cf8ca01fb4a241221b2dd1e03c4f9/projects/sun-saphia/4d/sun-saphia-4d.html?crm&plan&f=18',
+  'Chọn căn (mặt bằng & 3D từng căn)': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/d5852c19ad9d77df2b10cfe36ecf80fd4b2a1612/projects/sun-saphia/chon-can/chon-can-app.html'
 };
 function qxSheet_() {
   var ss = SpreadsheetApp.getActive(), sh = ss.getSheetByName(QX_SHEET);
@@ -62,7 +62,7 @@ function qxMailLink_(email, name, otp) {
   MailApp.sendEmail({ to: email, subject: 'Link đăng nhập xem dự án Sun Saphia Residence',
     htmlBody: '<p>Chào ' + (name || 'anh/chị') + ',</p><p>Hoàng Hiệp đã cấp quyền cho <b>' + email + '</b> xem mô hình 4D, mặt bằng từng tầng, chọn căn và 3D cả tầng Sun Saphia Residence.</p>'
       + '<p style="margin:22px 0"><a href="' + url + '" style="background:#FF6A2B;color:#fff;font-weight:800;font-size:17px;padding:14px 26px;border-radius:12px;text-decoration:none;display:inline-block">Bấm để vào xem dự án</a></p>'
-      + '<p>Bấm nút là vào thẳng, không cần mật khẩu. Máy đã mở sẽ được nhớ 30 ngày. Link đăng nhập dành riêng cho email này, vui lòng không chuyển cho người khác.</p>'
+      + '<p>Bấm nút là vào thẳng, hoặc mở trang và nhập email này là vào. Máy đã mở sẽ được nhớ. Link đăng nhập dành riêng cho email này, vui lòng không chuyển cho người khác.</p>'
       + (otp ? '<p>Hoặc nhập mã <b style="font-size:20px;letter-spacing:3px;color:#E8460F">' + otp + '</b> trên trang (hiệu lực 10 phút).</p>' : '')
       + '<p>Mọi thông tin là minh họa; thông số chính thức theo công bố và văn bản ký kết của chủ đầu tư.</p><p>Hoàng Hiệp · 0904 567 009 · Zalo 0904 567 009</p>',
     name: 'Hoàng Hiệp · Sun Saphia' });
@@ -79,6 +79,15 @@ function accessRoute_(p) {
     cache.put('qx_otp_' + email, otp, 600); cache.put('qx_wait_' + email, '1', 45);
     qxMailLink_(email, f.row[0], otp);
     return { sent: true };
+  }
+  if (p.action === 'access_login') {                     // nhập email đã được cấp (tab "Quyền xem", trạng thái Hoạt động) là vào, nhớ 1 năm trên máy đó
+    var le = String(p.email || '').trim().toLowerCase();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(le)) return { access: false, reason: 'email' };
+    var fl = qxFind_(le); if (!fl.row) return { access: false, reason: fl.reason };
+    var lt = Utilities.getUuid().replace(/-/g, '');
+    props.setProperty('qx_t_' + lt, JSON.stringify({ e: le, x: Date.now() + 365 * 864e5 }));
+    qxTouch_(fl, (p.page || '') + ' · email');
+    return { access: true, name: String(fl.row[0] || ''), token: 't:' + lt };
   }
   if (p.action === 'access_google') {                    // đăng nhập bằng Google: kiểm tra chữ ký Google rồi đối chiếu email với tab "Quyền xem"
     var cid = PropertiesService.getScriptProperties().getProperty('GOOGLE_CLIENT_ID') || QX_GOOGLE_CLIENT_ID;
