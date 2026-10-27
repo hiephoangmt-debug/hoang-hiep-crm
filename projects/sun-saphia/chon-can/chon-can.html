@@ -123,8 +123,8 @@ body{margin:0;background:var(--bg);font-family:var(--font);color:var(--navy);-we
    +'#ssGate .m{min-height:18px;margin-top:8px;font-size:13px;color:#d63b2f;font-weight:700}#ssGate .ok{color:#1b8a4a}#ssGate a{color:#0A2540;font-weight:800;text-decoration:none}';
   var st=document.createElement('style'); st.textContent=css; (document.head||document.documentElement).appendChild(st);
   var ov=document.createElement('div'); ov.id='ssGate';
-  ov.innerHTML='<div class="bx"><div class="lg">SR</div><h3>Link riêng Sun Saphia Residence</h3><p id="ssGateTx">Nhập email đã được Hoàng Hiệp cấp quyền. Link đăng nhập sẽ gửi vào Gmail đó, bấm là vào.</p>'
-   +'<input id="ssGateIn" type="email" autocomplete="email" autocapitalize="off" placeholder="Email của bạn"><button type="button" id="ssGateBt">Gửi link đăng nhập vào Gmail</button>'
+  ov.innerHTML='<div class="bx"><div class="lg">SR</div><h3>Link riêng Sun Saphia Residence</h3><p id="ssGateTx">Nhập email đã được Hoàng Hiệp cấp quyền để vào xem (chỉ cần 1 lần trên mỗi máy).</p>'
+   +'<input id="ssGateIn" type="email" autocomplete="email" autocapitalize="off" placeholder="Email của bạn"><button type="button" id="ssGateBt">Vào xem</button>'
    +'<button type="button" class="lnk" id="ssGateBk" style="display:none">← Nhập email khác</button><div class="m" id="ssGateMsg"></div>'
    +'<p style="margin:10px 0 0">Chưa được cấp quyền? Liên hệ <a href="tel:0904567009">0904 567 009</a> · <a href="https://zalo.me/0904567009">Zalo</a></p></div>';
   function mount(){ if(!document.getElementById('ssGate')) (document.body||document.documentElement).appendChild(ov); }
@@ -143,13 +143,13 @@ body{margin:0;background:var(--bg);font-family:var(--font);color:var(--navy);-we
   function grant(r,store){ if(store){ try{localStorage.setItem('ssKey',store);}catch(e){} } window.SS_KEY=store||window.SS_KEY; window.SS_USER=r.name||''; ov.remove(); }
   function reason(r){ return r.error?'Không kết nối được, thử lại sau.':r.reason==='expired'?'Quyền xem đã hết hạn.':r.reason==='locked'?'Quyền xem đã bị khóa.':r.reason==='otp'?'Mã xác nhận không đúng hoặc đã hết hạn.':r.reason==='email'?'Email không hợp lệ.':'Email / mã này chưa được cấp quyền.'; }
   function toOtp(){ step='otp'; $('#ssGateTx').textContent='Đã gửi link đăng nhập tới '+email+'. Mở Gmail (kể cả mục Spam/Quảng cáo), bấm nút "Bấm để vào xem dự án" là vào. Hoặc nhập mã 6 số trong thư:'; var i=$('#ssGateIn'); i.value=''; i.type='text'; i.inputMode='numeric'; i.placeholder='Mã 6 số'; $('#ssGateBt').textContent='Xác nhận'; $('#ssGateBk').style.display='block'; i.focus&&i.focus(); }
-  function toEmail(){ step='email'; $('#ssGateTx').textContent='Nhập email đã được Hoàng Hiệp cấp quyền. Link đăng nhập sẽ gửi vào Gmail đó, bấm là vào.'; var i=$('#ssGateIn'); i.value=email; i.type='email'; i.placeholder='Email của bạn'; $('#ssGateBt').textContent='Gửi link đăng nhập vào Gmail'; $('#ssGateBk').style.display='none'; msg(''); }
+  function toEmail(){ step='email'; $('#ssGateTx').textContent='Nhập email đã được Hoàng Hiệp cấp quyền để vào xem (chỉ cần 1 lần trên mỗi máy).'; var i=$('#ssGateIn'); i.value=email; i.type='email'; i.placeholder='Email của bạn'; $('#ssGateBt').textContent='Vào xem'; $('#ssGateBk').style.display='none'; msg(''); }
   function go(){
     var v=String($('#ssGateIn').value||'').trim(); if(!v) return;
     if(step==='email'){
       if(v.indexOf('@')<0){ msg('Đang kiểm tra…',1); own(v,function(n){ grant({name:n},v); },function(){ call({action:'access',code:v,page:page},function(r){ if(r.access===true) grant(r,v); else msg(reason(r)); }); }); return; }  // mã truy cập nội bộ
-      email=v.toLowerCase(); msg('Đang gửi link…',1);
-      call({action:'access_req',email:email},function(r){ if(r.sent){ toOtp(); msg(r.wait?'Mã vừa được gửi, vui lòng kiểm tra hộp thư.':'',1); } else msg(reason(r)); });
+      email=v.toLowerCase(); msg('Đang kiểm tra…',1);
+      own(email,function(n){ grant({name:n},email); },function(){ call({action:'access_login',email:email,page:page},function(r){ if(r.access===true&&r.token) grant(r,r.token); else msg(reason(r)); }); });
     } else {
       msg('Đang xác nhận…',1);
       call({action:'access_otp',email:email,otp:v,page:page},function(r){ if(r.access===true&&r.token) grant(r,r.token); else msg(reason(r)); });
@@ -160,9 +160,9 @@ body{margin:0;background:var(--bg);font-family:var(--font);color:var(--navy);-we
   var k=(/[?&]k=([^&#]+)/.exec(Q)||[])[1]; if(k) k=decodeURIComponent(k); else { try{ k=localStorage.getItem('ssKey'); }catch(e){} }
   // mã chủ: kiểm tra ngay trên máy (băm SHA-256), không cần CRM
   // mã link riêng được cấp (lưu dạng băm SHA-256, kiểm tra ngay trên máy, không cần CRM): băm → tên người xem
-  var QX_OK={'029a64f4f8d4479b70daca4fcb4fb719cf27ea51878aea2339f4616e3e455146':'Hoàng Hiệp','8bbf4e45c6ef0452f1a6d6140e0eb6ce4def05757e13fc5c6c68697f083bc0f7':'Thủy'};
+  var QX_OK={'029a64f4f8d4479b70daca4fcb4fb719cf27ea51878aea2339f4616e3e455146':'Hoàng Hiệp','8bbf4e45c6ef0452f1a6d6140e0eb6ce4def05757e13fc5c6c68697f083bc0f7':'Thủy','055f008f50be035a40ba6c3f0ec18ac6d1dab1f4e40cab541bef12cafc49dba6':'Thủy','6fc9c81b7b8b7d82c5f4cb5a0eb949a549fab5dfb2b024211e9812b221ca451a':'Hoàng Hiệp'};   // gồm cả email được cấp: nhập email là vào
   function own(c,yes,no){ try{ crypto.subtle.digest('SHA-256',new TextEncoder().encode(c)).then(function(d){ var h=[].map.call(new Uint8Array(d),function(x){return ('0'+x.toString(16)).slice(-2)}).join(''); var nm=QX_OK[h]; nm?yes(nm):no(); },no); }catch(e){ no(); } }
-  if(k&&k.indexOf('@')<0) own(k,function(n){ grant({name:n},k); },function(){ msg('Đang kiểm tra…',1); call({action:'access',code:k,page:page},function(r){ if(r.access===true) grant(r,k); else { try{localStorage.removeItem('ssKey');}catch(e){} msg(r.error?reason(r):''); } }); }); 
+  if(k) own(k.toLowerCase(),function(n){ grant({name:n},k); },function(){ msg('Đang kiểm tra…',1); call({action:'access',code:k,page:page},function(r){ if(r.access===true) grant(r,k); else { try{localStorage.removeItem('ssKey');}catch(e){} msg(r.error?reason(r):''); } }); }); 
 })();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
