@@ -949,11 +949,11 @@ function buildRoom(r,host){
     var LL=LAY(state.floor), FK=LL==='T2'?'fp2':LL==='T3'?'fp3':'fpT', FH=FK==='fpT'?49.6:53.4;
     if(!TX[FK]){ var ld=new THREE.TextureLoader(); ld.setCrossOrigin('anonymous'); TX[FK]=ld.load(FK==='fpT'?FLOOR_TEX:FLOOR_IMG+(FK==='fp2'?'mat-bang-tang-2-4d.webp':'mat-bang-tang-3-4d.webp')); TX[FK].encoding=THREE.sRGBEncoding; TX[FK].anisotropy=8; }
     var geo=new THREE.PlaneGeometry(54.4,FH); geo.rotateX(-Math.PI/2);
-    var pm=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0xffffff,map:TX[FK],transparent:true,opacity:.3,depthWrite:false,roughness:1,envMapIntensity:.3}));
+    var pm=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0x3b4047,map:TX[FK],transparent:true,opacity:.85,depthWrite:false,roughness:1,envMapIntensity:.3}));
     pm.position.set(27.2,-.035,-9.9+FH/2); pm.receiveShadow=true; pg.add(pm);
     var osh=new THREE.Shape(); (LL==='T2'?OUT2:OUT).forEach(function(q,i){ if(i) osh.lineTo(q[0],-q[1]); else osh.moveTo(q[0],-q[1]); });
     var sg=new THREE.ExtrudeGeometry(osh,{depth:.3,bevelEnabled:false}); sg.rotateX(-Math.PI/2);
-    var slab=new THREE.Mesh(sg,M(0xe9e6df,{roughness:.9})); slab.position.y=-.36; slab.receiveShadow=true; pg.add(slab);
+    var slab=new THREE.Mesh(sg,M(0x2e3338,{roughness:.9})); slab.position.y=-.36; slab.receiveShadow=true; pg.add(slab);   // sàn tầng tối để căn chọn nổi
     // sân vườn riêng của căn (tầng 2, 3 theo bản vẽ CĐT): cỏ, cây, tường rào bao quanh
     var B=BAL[LL], GD=B&&B[r[0]]&&(LL==='T2'?GARD2:GARD)[r[0]];
     if(GD) R3.grass=addGarden(pg,r,GD,{woodD:woodD,leaf:leaf,leaf2:leaf2,fab:fab});
