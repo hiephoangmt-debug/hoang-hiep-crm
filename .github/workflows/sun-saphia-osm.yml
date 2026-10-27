@@ -17,10 +17,11 @@ jobs:
         run: |
           D=projects/sun-saphia/osm; mkdir -p $D
           UA="hoang-hiep-crm-sun-saphia-4d/1.0 (github.com/hiephoangmt-debug/hoang-hiep-crm)"
-          get() { # $1 = tên file, $2 = truy vấn
+          get() { # $1 = tên file, $2 = truy vấn (bỏ qua nếu đã có)
+            [ -s "$D/$1" ] && { echo "đã có $1"; return 0; }
             for try in 1 2 3; do
               for h in https://overpass-api.de/api/interpreter https://overpass.kumi.systems/api/interpreter https://overpass.private.coffee/api/interpreter https://maps.mail.ru/osm/tools/overpass/api/interpreter; do
-                if curl -sS --fail --max-time 300 -A "$UA" -H "Accept: application/json" --data-urlencode "data=$2" "$h" -o "$D/$1" && python3 -c "import json;d=json.load(open('$D/$1'));print('$1',len(d['elements']))"; then return 0; fi
+                if curl -sS --fail --max-time 180 -A "$UA" -H "Accept: application/json" --data-urlencode "data=$2" "$h" -o "$D/$1" && python3 -c "import json;d=json.load(open('$D/$1'));print('$1',len(d['elements']))"; then return 0; fi
                 rm -f "$D/$1"; sleep 15
               done
             done
@@ -43,4 +44,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add projects/sun-saphia/osm/
           git commit -m "Dữ liệu OpenStreetMap quanh Sun Saphia (tải bằng GitHub Actions)" || echo "không có thay đổi"
-          git push
+          git pull --rebase origin ${GITHUB_REF_NAME} && git push
