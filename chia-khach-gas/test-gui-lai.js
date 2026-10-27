@@ -2,7 +2,7 @@ const vm=require('vm'),fs=require('fs');
 const code=fs.readFileSync(__dirname+'/ChiaKhach.gs','utf8').replace("var BOT_TOKEN_DAN_VAO_DAY = 'DÁN_MÃ_BOT_CHIA_KHÁCH_VÀO_ĐÂY';","var BOT_TOKEN_DAN_VAO_DAY = 'TEST123';").replace("var LINK_SHEET_CRM_DAN_VAO_DAY = 'DÁN_LINK_SHEET_CRM_HOÀNG_HIỆP_VÀO_ĐÂY';","var LINK_SHEET_CRM_DAN_VAO_DAY = 'https://docs.google.com/spreadsheets/d/crm-id/edit#gid=0';");
 let NOW=Date.UTC(2026,9,20,2,0); // 9:00 VN
 const RD=Date; class FD extends RD{constructor(...a){a.length?super(...a):super(NOW)} static now(){return NOW}}
-const gs=x=>typeof x==='string'&&x[0]==="'"?x.slice(1):(typeof x==='string'&&/^0\d{8,}$/.test(x)?Number(x):x); // giống Google Sheet
+const gs=x=>typeof x==='string'&&x[0]==="'"?x.slice(1):(typeof x==='string'&&/^0\d{8,}$/.test(x)?Number(x):(typeof x==='string'&&/^\d+,\d+$/.test(x)?Number(x.replace(',','.')):x)); // giống Sheet tiếng Việt: "1,2" thành số // giống Google Sheet
 function Sheet(name){this.name=name;this.d=[];}
 Sheet.prototype={getLastRow(){return this.d.length},getLastColumn(){return Math.max(0,...this.d.map(r=>r.length))},
  setFrozenRows(){},hideSheet(){},deleteRow(r){this.d.splice(r-1,1)},
@@ -72,9 +72,9 @@ ok(all().some(k=>k.sdt==='0905000777'&&k.trang_thai==='cho_nhan'),'khách Saphia
   adv(31); run(); kt=all().find(k=>k.sdt==='0967273982'); const g2=kt.nguoi_giu;
   ok(g1!==g2&&vg().da.includes(g2),'trước khi khai báo: số thử bị giao 2 người, cả 2 mất lượt');
   // quản lý thêm số vào SO_THU (tab CauHinh) → bot tự huỷ, trả lượt
-  active.s['CauHinh'].appendRow(['SO_THU','0904567009,0967273982','']); adv(1); run();
+  active.s['CauHinh'].appendRow(['SO_THU',"'0904567009; 0967273982",'']); adv(1); run();
   kt=all().find(k=>k.sdt==='0967273982');
-  ok(kt.trang_thai==='dong'&&!vg().da.includes(g1)&&!vg().da.includes(g2),'thêm vào SO_THU: tự huỷ khách thử, trả lại lượt cho cả 2 người');
+  ok(kt.trang_thai==='dong'&&!vg().da.includes(g1)&&!vg().da.includes(g2)&&/trả lượt: .+, .+/.test(vm.runInContext("rows_('NhatKy',T_NK).filter(function(r){return r.hanh_dong==='huỷ khách thử'})[0].chi_tiet",ctx)),'thêm vào SO_THU: tự huỷ khách thử, trả lại lượt cho cả 2 người');
   ok(edits.some(e=>String(e.chat_id)===g2&&/số thử/.test(e.text))&&to(900).some(s=>/Đã huỷ khách thử/.test(s.text)),'báo sale đang giữ và báo quản lý');
   // số thử gửi lại: không chia
   const n0=all().length; const r=kh.d.find(x=>String(x[3]).endsWith('967273982')); r[9]=2; adv(1); run();
