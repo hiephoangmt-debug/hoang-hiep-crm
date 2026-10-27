@@ -59,8 +59,29 @@ guiLai(rZ,'FourS Tower','form đầu trang'); adv(1); run();
 ok(!all().some(k=>k.sdt==='0912345111'),'khách gửi lại trên web FourS: không chia (đúng như hiện nay)');
 // Anh Hiệp thử lại lần nữa bằng số của mình → lúc này được chia (để kiểm tra đường đi)
 guiLai(rHiep,'Saphia Residence','Form ADS'); adv(1); run();
-ok(all().some(k=>k.sdt==='0904567009'&&k.trang_thai==='cho_nhan'),'thử lại lần 2 sau khi dán bản mới: khách vào bot và được giao');
+ok(!all().some(k=>k.sdt==='0904567009'),'số anh Hiệp mặc định là số thử (SO_THU): gửi lại cũng không chia');
 // Khách Saphia mới hoàn toàn vẫn chia như cũ
 crmRow('0905000777','Mới tinh'); adv(1); run();
 ok(all().some(k=>k.sdt==='0905000777'&&k.trang_thai==='cho_nhan'),'khách Saphia mới (Website) vẫn chia bình thường');
+
+// ===== Số thử =====
+{ const vg=()=>JSON.parse(props.VONG_MOI);
+  const truoc=vg().da.slice();
+  crmRow('0967273982','Thử'); adv(1); run();
+  let kt=all().find(k=>k.sdt==='0967273982'); const g1=kt.nguoi_giu;
+  adv(31); run(); kt=all().find(k=>k.sdt==='0967273982'); const g2=kt.nguoi_giu;
+  ok(g1!==g2&&vg().da.includes(g2),'trước khi khai báo: số thử bị giao 2 người, cả 2 mất lượt');
+  // quản lý thêm số vào SO_THU (tab CauHinh) → bot tự huỷ, trả lượt
+  active.s['CauHinh'].appendRow(['SO_THU','0904567009,0967273982','']); adv(1); run();
+  kt=all().find(k=>k.sdt==='0967273982');
+  ok(kt.trang_thai==='dong'&&!vg().da.includes(g1)&&!vg().da.includes(g2),'thêm vào SO_THU: tự huỷ khách thử, trả lại lượt cho cả 2 người');
+  ok(edits.some(e=>String(e.chat_id)===g2&&/số thử/.test(e.text))&&to(900).some(s=>/Đã huỷ khách thử/.test(s.text)),'báo sale đang giữ và báo quản lý');
+  // số thử gửi lại: không chia
+  const n0=all().length; const r=kh.d.find(x=>String(x[3]).endsWith('967273982')); r[9]=2; adv(1); run();
+  ok(all().length===n0&&!all().some(k=>k.sdt==='0967273982'&&k.trang_thai!=='dong'),'số thử gửi lại: bot bỏ qua, không chia');
+  // /huy bằng tay
+  crmRow('0977888999','Thử tay'); adv(1); run(); const kh2=all().find(k=>k.sdt==='0977888999'); const g3=kh2.nguoi_giu;
+  msg(900,'/huy '+kh2.id); run();
+  ok(all().find(k=>k.sdt==='0977888999').trang_thai==='dong'&&!vg().da.includes(g3),'/huy Mã: đóng khách thử, trả lượt');
+}
 console.log('\nTỔNG LỖI: '+fails);process.exit(fails?1:0);
