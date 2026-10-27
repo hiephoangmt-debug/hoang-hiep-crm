@@ -793,10 +793,13 @@ function flyTop(){ var m=innerWidth<600, c=new THREE.Vector3(X1-16,TOP-22,Z0+24)
   hi.visible=false; mainLbl.textContent='ĐỈNH THÁP · tầng 29–30 · mái khối 18–19 là vườn';
   flyTo(T.localToWorld(new THREE.Vector3(c.x+(m?150:105),TOP+(m?175:118),c.z+(m?-20:-14))),T.localToWorld(c)); }
 document.getElementById('mTop').onclick=flyTop;
-var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false); bView0(); };
+var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false);
+  // 5D: vào thẳng 1 căn hướng biển ở tầng đang chọn (đứng trong căn thật, nội thất đúng mặt bằng)
+  var f=+floorEl.value, id=f>=30?'09':f<=2?'18':'12B', L=f>=30?UNITS30:UNITS, r=null; L.forEach(function(x){ if(x[0]===id) r=x; });
+  if(r) viewFromUnit(r); else bView0(); };
 
 /* ---------- bấm vào căn trên mặt bằng tầng: hiện thẻ căn, mở mặt bằng & 3D căn, view từ đúng căn ---------- */
-var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/85033adc0f5c85f63e126f64035041e290f5bb4d/projects/sun-saphia/chon-can/chon-can-app.html';
+var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/76620083f88f85b5007f408d60a5505728c3234e/projects/sun-saphia/chon-can/chon-can-app.html';
 var unitEye=null;
 // [mã, loại, u0,u1, v0,v1, hướng mặt kính chính] – cùng số liệu với công cụ chọn căn
 var UNITS=[['11','2PN',0,9.9,0,7.25,'E'],['12','STU',10,13.8,0,9,'E'],['12A','STU',13.8,17.6,0,9,'E'],['12B','1PN',17.6,23.8,0,9,'E'],['15','STU',23.8,27.6,0,9,'E'],['16','STU',27.6,31.4,0,9,'E'],['17','1PN',31.4,37.6,0,9,'E'],
@@ -865,6 +868,60 @@ function openUnitTool(r){
 }
 /* ---------- căn hộ thật để đứng bên trong khi xem view (5D): sàn, tường, cửa kính, rèm, nội thất theo đúng khung và hướng căn ---------- */
 var inRoom=null, inUnit=null, inFloor=null;
+var CCL={"spec":{"STU":{"W":3.8,"D":9,"floor":[[0,0],[3.8,0],[3.8,9],[0,9]],"segs":[[0,0,3.8,0,"x",[[2.45,3.05,1]]],[0,0,0,9,"x"],[3.8,0,3.8,9,"x"],[0,9,3.8,9,"r"],[2.3,0,2.3,3.1,"w",[[1.5,2.2,1]]],[0,3.1,2.3,3.1,"w"],[0,7.8,2.3,7.8,"g"],[2.3,7.8,3.8,7.8,"n"],[2.3,7.8,2.3,9,"w"]],"blocks":[[2,0,2.3,1.1]],"zones":[["wc",0,0,2.3,3.1],["bal",0,7.8,3.8,9]],"shw":[[0.08,2.15,2.22,3.02,"u"]],"items":[["van",1.5,0.3,0.75,0.45,"d"],["wc",0.4,0.95,0.4,0.7,"r"],["wash",0.38,1.75,0.6,0.6,"r"],["kit",3.48,1.7,2.3,0.6,"l",{"hob":0.22,"sink":0.62}],["fridge",3.47,3.2,0.65,0.65,"l"],["tv",3.58,4.9,1.8,0.4,"l"],["cab",3.6,6.7,1.3,0.4,"l"],["stool",3.05,6.75,0.35,0.35],["bed",1.15,4.75,1.6,2.05,"r"],["ns",0.3,3.72,0.4,0.35,"r"],["ns",0.3,5.78,0.4,0.35,"r"],["sofa",0.5,6.95,1.45,0.8,"r"],["rtab",1.32,6.42,0.5,0.5,{"h":0.5}],["plant",0.38,8.55,0.55],["chair",1.6,8.5,0.45,0.45,"d"],["ac",3.05,8.8,0.8,0.3,"u"],["plant",2.6,8.7,0.35]],"eye":[2.95,2.6],"look":[1.1,11]},"STUL":{"W":6.8,"D":10.9,"floor":[[0,0],[5.3,0],[5.688,0.051],[6.05,0.201],[6.361,0.439],[6.599,0.75],[6.749,1.112],[6.8,1.5],[6.8,9.4],[6.749,9.788],[6.599,10.15],[6.361,10.461],[6.05,10.699],[5.688,10.849],[5.3,10.9],[2.8,10.9],[2.8,1.9],[0,1.9]],"segs":[[5.3,0,5.688,0.051,"g"],[5.688,0.051,6.05,0.201,"g"],[6.05,0.201,6.361,0.439,"g"],[6.361,0.439,6.599,0.75,"g"],[6.599,0.75,6.749,1.112,"g"],[6.749,1.112,6.8,1.5,"g"],[6.8,9.4,6.749,9.788,"r"],[6.749,9.788,6.599,10.15,"r"],[6.599,10.15,6.361,10.461,"r"],[6.361,10.461,6.05,10.699,"r"],[6.05,10.699,5.688,10.849,"r"],[5.688,10.849,5.3,10.9,"r"],[0,0,3.4,0,"x"],[3.4,0,5.3,0,"n"],[6.8,1.5,6.8,5,"x"],[6.8,5,6.8,9.4,"g"],[5.3,10.9,2.8,10.9,"r"],[2.8,10.9,2.8,1.9,"x"],[2.8,1.9,0,1.9,"x"],[0,0,0,1.9,"x",[[0.5,1.4,-1]]],[2.8,1.9,4.9,1.9,"w",[[0.3,1,1]]],[4.9,1.9,4.9,4.4,"w"],[2.8,4.4,4.9,4.4,"w"],[2.8,9.7,6.8,9.7,"g"]],"blocks":[],"zones":[["wc",2.8,1.9,4.9,4.4],["bal",2.8,9.7,6.8,10.9]],"shw":[[3.75,3.3,4.85,4.36,"u"]],"items":[["wash",2.4,0.4,0.6,0.6,"d"],["kit",4.3,0.32,2.1,0.6,"d",{"hob":0.3,"sink":0.75}],["fridge",5.75,0.35,0.65,0.65,"d"],["wc",3.2,4.02,0.4,0.7,"u"],["van",4.45,2.55,0.7,0.45,"l"],["dtab",5.85,3,1.1,0.7,"r"],["ward",3.85,4.72,2,0.6,"d"],["bed",3.85,6.5,1.6,2.05,"r"],["ns",3.05,5.25,0.4,0.35,"r"],["ns",3.05,7.75,0.4,0.35,"r"],["sofa",6.33,6.55,2,0.85,"l"],["rtab",5.55,6.55,0.6,0.6],["plant",6.3,9.1,0.5],["cab",3.6,9.45,1.4,0.4,"u"],["plant",3.2,10.4,0.45],["chair",4.4,10.25,0.45,0.45,"d"],["rtab",4.95,10.25,0.42,0.42,{"h":0.55}],["chair",5.5,10.25,0.45,0.45,"d"]],"eye":[5.9,1.6],"look":[4.2,15]},"1PN+1":{"W":6.2,"D":9,"floor":[[0,0],[6.2,0],[6.2,9],[0,9]],"segs":[[0,0,6.2,0,"x",[[4,4.85,1]]],[0,0,0,9,"x"],[6.2,0,6.2,9,"x"],[0,9,3.15,9,"g"],[3.15,9,6.2,9,"r"],[0,1.65,3.15,1.65,"w"],[3.15,0,3.15,1.65,"w",[[0.95,1.6,1]]],[3.15,1.65,3.15,2.95,"w"],[0,4.55,3.15,4.55,"w",[[2.25,3.05,1]]],[3.15,4.55,3.15,9,"w"],[3.15,7.8,5.35,7.8,"g"],[5.35,7.8,6.2,7.8,"w"]],"blocks":[],"zones":[["wc",0,0,3.15,1.65],["bal",3.15,7.8,6.2,9]],"shw":[[0.08,0.08,1.1,1.57,"r"]],"items":[["wc",1.7,0.4,0.4,0.7,"d"],["van",2.5,0.28,0.7,0.45,"d"],["daybed",1.35,2.13,2.4,0.85,"d"],["cab",2.95,2.3,1,0.35,"l"],["desk",0.33,3.45,1.1,0.55,"r"],["chair",0.85,3.45,0.45,0.45,"l"],["arm",2.35,3.5,0.8,0.8,"l"],["cab",1,4.33,1.7,0.35,"u"],["ward",1.05,4.9,1.9,0.6,"d"],["bed",1.15,7.1,1.8,2.1,"r"],["ns",0.3,5.95,0.45,0.4,"r"],["ns",0.3,8.25,0.45,0.4,"r"],["tv",2.92,7.1,1.4,0.4,"l"],["kit",5.88,1.5,1.9,0.6,"l",{"hob":0.25,"sink":0.7}],["fridge",5.87,2.8,0.65,0.65,"l"],["dtab",5.45,4.15,1.2,0.75,"d"],["sofa",3.62,6.55,2,0.85,"r"],["rtab",4.8,6.6,0.8,0.8],["tv",5.98,6.45,1.8,0.4,"l"],["plant",5.85,7.45,0.45],["plant",3.5,8.55,0.5],["chair",4.55,8.45,0.45,0.45,"d"],["rtab",5.05,8.45,0.42,0.42,{"h":0.55}],["chair",5.55,8.45,0.45,0.45,"d"]],"eye":[4.5,3],"look":[4.4,11]},"2PN":{"W":7.25,"D":9.9,"floor":[[0,1.8],[0.035,1.449],[0.137,1.111],[0.303,0.8],[0.527,0.527],[0.8,0.303],[1.111,0.137],[1.449,0.035],[1.8,0],[7.25,0],[7.25,9.15],[6.2,9.15],[6.2,9.9],[0,9.9]],"segs":[[0,1.8,0.035,1.449,"g"],[0.035,1.449,0.137,1.111,"g"],[0.137,1.111,0.303,0.8,"g"],[0.303,0.8,0.527,0.527,"g"],[0.527,0.527,0.8,0.303,"g"],[0.8,0.303,1.111,0.137,"g"],[1.111,0.137,1.449,0.035,"g"],[1.449,0.035,1.8,0,"g"],[1.8,0,3.9,0,"g"],[3.9,0,7.25,0,"x"],[7.25,0,7.25,9.15,"x",[[8.1,9,1]]],[7.25,9.15,6.2,9.15,"x"],[6.2,9.15,6.2,9.9,"x"],[6.2,9.9,0,9.9,"x"],[0,9.9,0,6.15,"r"],[0,6.15,0,1.8,"g"],[0,3.05,3.9,3.05,"w"],[3.9,1.65,3.9,3.05,"w",[[0.45,1.25,1]]],[3.9,3.05,3.9,6.15,"w",[[1.95,2.75,1]]],[0,6.15,3.9,6.15,"w"],[3.9,1.65,5,1.65,"w"],[5,0,5,1.65,"w"],[4.75,1.65,4.75,5.5,"w",[[0.2,0.9,-1],[3,3.7,-1]]],[5,1.65,7.25,1.65,"w",[[0.25,0.95,-1]]],[4.75,3.85,7.25,3.85,"w"],[4.75,5.5,7.25,5.5,"w"],[1.5,6.15,1.5,9.9,"g"]],"blocks":[],"zones":[["wc",5,0,7.25,1.65],["wc",4.75,1.65,7.25,5.5],["bal",0,6.15,1.5,9.9]],"shw":[[5.65,2.75,7.2,3.8,"l"],[6.3,3.9,7.2,5.45,"l"]],"items":[["wash",6.4,0.45,0.6,0.6,"d"],["van",6.35,1.92,0.7,0.45,"d"],["wc",5.1,3.47,0.4,0.7,"u"],["van",5.2,4.12,0.7,0.45,"d"],["wc",5.95,4.2,0.4,0.7,"d"],["kit",6.1,5.82,2.2,0.6,"d",{"sink":0.42}],["kit",6.93,6.57,0.9,0.6,"l",{"hob":0.5,"noup":1}],["fridge",6.92,7.35,0.65,0.65,"l"],["dtab",5.1,9.05,1.2,0.8,"r"],["tv",2.75,6.38,2.2,0.4,"d"],["sofa",2.95,9.42,2.1,0.9,"u"],["rtab",2.95,7.75,0.8,0.8],["plant",0.75,6.6,0.5],["chair",0.75,7.55,0.45,0.45,"l"],["rtab",0.75,8.1,0.42,0.42,{"h":0.55}],["chair",0.75,8.65,0.45,0.45,"l"],["bed",2.1,1.98,1.8,2.05,"u"],["ns",0.95,2.78,0.45,0.4,"u"],["ns",3.3,2.78,0.45,0.4,"u"],["ward",4.68,0.9,1.3,0.6,"l"],["plant",0.6,1.75,0.4],["bed",1.9,4.15,1.6,2,"d"],["ns",0.8,3.32,0.45,0.4,"d"],["ns",3,3.32,0.45,0.4,"d"],["ward",3.6,4.25,1.5,0.55,"l"]],"eye":[4.4,8.3],"look":[-4,6.6]},"2PN1":{"W":7.25,"D":9.9,"floor":[[0,1.8],[0.035,1.449],[0.137,1.111],[0.303,0.8],[0.527,0.527],[0.8,0.303],[1.111,0.137],[1.449,0.035],[1.8,0],[7.25,0],[7.25,9.15],[6.2,9.15],[6.2,9.9],[0,9.9]],"segs":[[0,1.8,0.035,1.449,"g"],[0.035,1.449,0.137,1.111,"g"],[0.137,1.111,0.303,0.8,"g"],[0.303,0.8,0.527,0.527,"g"],[0.527,0.527,0.8,0.303,"g"],[0.8,0.303,1.111,0.137,"g"],[1.111,0.137,1.449,0.035,"g"],[1.449,0.035,1.8,0,"g"],[1.8,0,3.9,0,"g"],[3.9,0,7.25,0,"x"],[7.25,0,7.25,9.15,"x",[[8.1,9,1]]],[7.25,9.15,6.2,9.15,"x"],[6.2,9.15,6.2,9.9,"x"],[6.2,9.9,0,9.9,"x"],[0,9.9,0,6.15,"r"],[0,6.15,0,1.8,"g"],[0,3.05,3.9,3.05,"w"],[3.9,1.65,3.9,3.05,"w",[[0.45,1.25,1]]],[3.9,3.05,3.9,6.15,"w",[[1.95,2.75,1]]],[0,6.15,3.9,6.15,"w"],[3.9,1.65,5,1.65,"w"],[5,0,5,1.65,"w"],[4.75,1.65,4.75,5.5,"w",[[0.2,0.9,-1],[3,3.7,-1]]],[5,1.65,7.25,1.65,"w",[[0.25,0.95,-1]]],[4.75,3.85,7.25,3.85,"w"],[4.75,5.5,7.25,5.5,"w"],[1.5,6.15,1.5,9.9,"g"]],"blocks":[],"zones":[["wc",5,0,7.25,1.65],["wc",4.75,1.65,7.25,5.5],["bal",0,6.15,1.5,9.9]],"shw":[[5.65,2.75,7.2,3.8,"l"],[6.3,3.9,7.2,5.45,"l"]],"items":[["wash",6.4,0.45,0.6,0.6,"d"],["van",6.35,1.92,0.7,0.45,"d"],["wc",5.1,3.47,0.4,0.7,"u"],["van",5.2,4.12,0.7,0.45,"d"],["wc",5.95,4.2,0.4,0.7,"d"],["kit",6.1,5.82,2.2,0.6,"d",{"sink":0.42}],["kit",6.93,6.57,0.9,0.6,"l",{"hob":0.5,"noup":1}],["fridge",6.92,7.35,0.65,0.65,"l"],["dtab",5.1,9.05,1.2,0.8,"r"],["tv",2.75,6.38,2.2,0.4,"d"],["sofa",2.95,9.42,2.1,0.9,"u"],["rtab",2.95,7.75,0.8,0.8],["plant",0.75,6.6,0.5],["chair",0.75,7.55,0.45,0.45,"l"],["rtab",0.75,8.1,0.42,0.42,{"h":0.55}],["chair",0.75,8.65,0.45,0.45,"l"],["bed",2.1,1.98,1.8,2.05,"u"],["ns",0.95,2.78,0.45,0.4,"u"],["ns",3.3,2.78,0.45,0.4,"u"],["ward",4.68,0.9,1.3,0.6,"l"],["plant",0.6,1.75,0.4],["ward",3.6,4.25,1.5,0.55,"l"],["desk",0.42,4.6,1.5,0.55,"r"],["chair",1,4.6,0.45,0.45,"l"],["sofa",2.3,5.72,1.9,0.75,"u"],["plant",3.3,3.45,0.4]],"eye":[4.4,8.3],"look":[-4,6.6]}},"u":{"10":[["1PN+1",[0,1,-1,0,9,7.25]]],"11":[["2PN",[0,1,1,0,0,0]]],"12":[["STU",[-1,0,0,-1,13.8,9]]],"15":[["STU",[-1,0,0,-1,27.6,9]]],"16":[["STU",[1,0,0,-1,27.6,9]]],"17":[["1PN+1",[-1,0,0,-1,37.6,9]]],"18":[["2PN",[1,0,0,1,39.9,-9.9]]],"19":[["2PN",[-1,0,0,1,54.4,-9.9]]],"20":[["STUL",[1,0,0,1,47.6,8.8]]],"21":[["STU",[1,0,0,1,46.6,10.7]]],"22":[["STU",[-1,0,0,1,46.6,10.7]]],"23":[["STU",[1,0,0,1,39,10.7]]],"24":[["STU",[-1,0,0,1,39,10.7]]],"25":[["STU",[1,0,0,1,31.4,10.7]]],"26":[["STU",[-1,0,0,1,31.4,10.7]]],"27":[["STU",[1,0,0,1,23.8,10.7]]],"28":[["1PN+1",[1,0,0,1,17.6,10.7]]],"12A":[["STU",[1,0,0,-1,13.8,9]]],"12B":[["1PN+1",[-1,0,0,-1,23.8,9]]],"09":[["STU",[0,-1,-1,0,9,17.25]]],"08":[["STU",[0,1,-1,0,9,17.25]]],"07":[["STU",[0,-1,-1,0,9,24.85]]],"06":[["STU",[0,1,-1,0,9,24.85]]],"05":[["STU",[0,-1,-1,0,9,32.45]]],"03A":[["2PN",[0,-1,1,0,0,39.7]]],"03":[["2PN",[0,-1,-1,0,19.8,39.7]]],"01":[["STU",[0,-1,1,0,10.8,28.65]]],"02":[["STU",[0,1,1,0,10.8,28.65]]]},"u30":{"10":[["1PN+1",[1.21,0,0,-1,24.2,9]]],"11":[["1PN+1",[-0.952,0,0,-1,37.6,9]]],"12":[["1PN+1",[1.226,0,0,1,46.8,10.7]]],"15":[["1PN+1",[-1.226,0,0,1,31.8,10.7]]],"16":[["1PN+1",[1.065,0,0,1,17.6,10.7]]],"07":[["2PN1",[0,1,1.081,0,0,0]]],"08":[["1PN+1",[1.194,0,0,-1,10.7,9]]],"09":[["1PN+1",[-0.984,0,0,-1,24.2,9]]],"06":[["STU",[0,1,-1,0,9,7.25]],["1PN+1",[0,-0.976,-1,0,9,17.1]]],"05":[["1PN+1",[0,-1.274,-1,0,9,25]]],"03A":[["1PN+1",[0,1.202,-1,0,9,25]]],"03":[["2PN1",[0,-1,1,0,0,39.7]]],"02":[["2PN1",[0,-1,-1,0,19.8,39.7]]],"01":[["1PN+1",[0,1.266,1.044,0,10.4,24.6]]],"12B":[["1PN+1",[-1.21,0,0,1,39.3,10.7]]],"12A":[["1PN+1",[-1.21,0,0,1,46.8,10.7]]]}};   // layout từng căn (tường, cửa, kính, nội thất) xuất từ công cụ chọn căn – cùng số liệu với mặt bằng căn
+// dựng nội thất đúng mặt bằng: parts = [[loại layout, ma trận 6 số (toạ độ bản vẽ căn → u,v tầng)]]
+function layoutRoom(g,parts,y0,H){
+  var DIRV={u:[0,-1],d:[0,1],l:[-1,0],r:[1,0]}, DS=THREE.DoubleSide;
+  function mt(c,o){ return new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.8,side:DS,envMapIntensity:.3},o||{})); }
+  var C={wood:mt(0xa0704a,{roughness:.7}),wall:mt(0xf3efe8,{roughness:.95}),ext:mt(0xece7df,{roughness:.95}),alu:mt(0x3a4048,{roughness:.35,metalness:.7}),
+    glass:new THREE.MeshStandardMaterial({color:0xcfe6f2,transparent:true,opacity:.1,roughness:0,metalness:.6,depthWrite:false,side:DS}),tile:mt(0xe6e3de,{roughness:.4}),deck:mt(0xc7bfae),
+    white:mt(0xfafafa,{roughness:.25}),cer:mt(0xffffff,{roughness:.1}),linen:mt(0xfbf9f5,{roughness:1}),duvet:mt(0xe8e3da,{roughness:1}),fab:mt(0xcfc8bd,{roughness:1}),fab2:mt(0x6f8796,{roughness:1}),
+    oak:mt(0xb88a5c,{roughness:.5}),woodD:mt(0x7a5434,{roughness:.55}),cab:mt(0xe9e4dc,{roughness:.45}),stone:mt(0xf3f1ee,{roughness:.2}),steel:mt(0xc9ccd0,{roughness:.25,metalness:.8}),
+    blk:mt(0x1c1d20,{roughness:.2}),leaf:mt(0x4f8a3e),pot:mt(0xd9cfc0),cur:new THREE.MeshStandardMaterial({color:0xfffaf0,transparent:true,opacity:.8,roughness:1,side:DS}),ceil:mt(0xfbfaf7,{roughness:1})};
+  var first=null;
+  parts.forEach(function(pt){ var sp=CCL.spec[pt[0]], m=pt[1]; if(!sp) return;
+    var q=new THREE.Group(); q.matrixAutoUpdate=false; q.matrix.set(-m[1],0,-m[3],X1-m[5], 0,1,0,y0, m[0],0,m[2],Z0+m[4], 0,0,0,1); g.add(q);
+    function box(w,h,d,x,y,z,mat,par){ var me=new THREE.Mesh(new THREE.BoxGeometry(Math.max(.005,w),h,Math.max(.005,d)),mat); me.position.set(x,y+h/2,z); me.castShadow=mat!==C.glass; me.receiveShadow=true; (par||q).add(me); return me; }
+    function sub(x,z,ry){ var o=new THREE.Group(); o.position.set(x,0,z); o.rotation.y=ry||0; q.add(o); return o; }
+    // sàn, trần
+    var sh=new THREE.Shape(); sp.floor.forEach(function(p2,i){ if(i) sh.lineTo(p2[0],-p2[1]); else sh.moveTo(p2[0],-p2[1]); });
+    var fg=new THREE.ShapeGeometry(sh); fg.rotateX(-Math.PI/2); var fl=new THREE.Mesh(fg,C.wood); fl.receiveShadow=true; q.add(fl);
+    var cg=new THREE.ShapeGeometry(sh); cg.rotateX(-Math.PI/2); var ce=new THREE.Mesh(cg,C.ceil); ce.position.y=H; ce.castShadow=true; q.add(ce);
+    (sp.zones||[]).forEach(function(z){ box(z[3]-z[1],.012,z[4]-z[2],(z[1]+z[3])/2,.002,(z[2]+z[4])/2,z[0]==='wc'?C.tile:C.deck); });
+    // tường, kính, cửa
+    function seg(s2,a,b,yb,h,th,mat){ var dx=s2[2]-s2[0], dz=s2[3]-s2[1], L=Math.hypot(dx,dz); if(b-a<.01) return; var ux=dx/L, uz=dz/L;
+      var me=box(b-a,h,th,0,yb,0,mat); me.position.set(s2[0]+ux*(a+b)/2, yb+h/2, s2[1]+uz*(a+b)/2); me.rotation.y=Math.atan2(-uz,ux); }
+    sp.segs.forEach(function(s2){ var k=s2[4], L=Math.hypot(s2[2]-s2[0],s2[3]-s2[1]), cuts=[0], gaps=s2[5]||[]; gaps.forEach(function(q2){ cuts.push(q2[0],q2[1]); }); cuts.push(L);
+      for(var c=0;c<cuts.length;c+=2){ var a=cuts[c], b=cuts[c+1];
+        if(k==='x') seg(s2,a,b,0,H,.2,C.ext); else if(k==='w') seg(s2,a,b,0,H,.12,C.wall);
+        else if(k==='g'){ seg(s2,a,b,0,H-.05,.03,C.glass); seg(s2,a,b,H-.1,.1,.08,C.alu); seg(s2,a,b,0,.04,.08,C.alu); var n=Math.max(1,Math.round((b-a)/1.25)); for(var j=0;j<=n;j++){ var t=a+(b-a)*j/n; seg(s2,t-.025,t+.025,0,H,.07,C.alu); } }
+        else if(k==='n'){ seg(s2,a,b,0,.9,.2,C.ext); seg(s2,a,b,.9,1.5,.03,C.glass); seg(s2,a,b,2.4,H-2.4,.2,C.ext); }
+        else if(k==='r'){ seg(s2,a,b,0,1.1,.02,C.glass); seg(s2,a,b,1.1,.05,.07,C.alu); } }
+      gaps.forEach(function(q2){ seg(s2,q2[0],q2[1],2.2,H-2.2,k==='x'?.2:.12,k==='x'?C.ext:C.wall); });
+      if(k==='g'&&L>=1.2){ [[0,.6],[L-.6,L]].forEach(function(rg){ for(var c2=0;c2<5;c2++){ var t=rg[0]+(c2+.5)*(rg[1]-rg[0])/5; seg(s2,t-.05,t+.05,.05,H-.25,.02,C.cur); } }); } });
+    (sp.blocks||[]).forEach(function(b){ box(b[2]-b[0],H,b[3]-b[1],(b[0]+b[2])/2,0,(b[1]+b[3])/2,C.wall); });
+    (sp.shw||[]).forEach(function(s3){ box(s3[2]-s3[0],.02,s3[3]-s3[1],(s3[0]+s3[2])/2,.012,(s3[1]+s3[3])/2,C.tile); });
+    // nội thất theo bản vẽ
+    sp.items.forEach(function(it){ var k=it[0], w=it[3], d=it[4], dn=typeof it[5]==='string'?it[5]:'d', v=DIRV[dn]||DIRV.d, o=sub(it[1],it[2],Math.atan2(v[0],v[1])), hw=w/2, hd=d/2;
+      if(k==='bed'){ box(w,.3,d,0,0,0,C.woodD,o); box(w-.04,.22,d-.1,0,.3,.04,C.linen,o); box(w,.06,d*.6,0,.5,d*.2,C.duvet,o); box(w,.9,.08,0,0,-hd+.04,C.oak,o); box(w*.4,.12,.35,-w*.22,.52,-hd+.3,C.linen,o); box(w*.4,.12,.35,w*.22,.52,-hd+.3,C.linen,o); }
+      else if(k==='sofa'||k==='arm'){ box(w,.42,d,0,0,0,C.fab,o); box(w,.42,.18,0,.42,-hd+.09,C.fab,o); box(.16,.22,d,-hw+.08,.42,0,C.fab,o); box(.16,.22,d,hw-.08,.42,0,C.fab,o); box(.38,.3,.12,-hw+.45,.45,-hd+.25,C.fab2,o); }
+      else if(k==='tv'){ box(w,.42,d,0,.08,0,C.oak,o); box(w*.8,.5,.04,0,1.0,-hd+.05,C.blk,o); }
+      else if(k==='kit'){ box(w,.88,d,0,0,0,C.cab,o); box(w+.02,.04,d+.02,0,.88,0,C.stone,o); if(!(it[6]&&it[6].noup)) box(w,.7,.35,0,1.55,-hd+.175,C.cab,o); if(it[6]&&it[6].hob!=null) box(.56,.02,.5,-hw+it[6].hob*w,.92,0,C.blk,o); }
+      else if(k==='fridge'){ box(w-.02,1.85,d-.02,0,0,0,C.steel,o); }
+      else if(k==='wc'){ box(.36,.4,.5,0,0,.08,C.cer,o); box(.38,.4,.17,0,.35,-hd+.1,C.cer,o); }
+      else if(k==='van'||k==='wash'){ box(w,.85,d,0,0,0,k==='van'?C.oak:C.white,o); box(w,.04,d+.02,0,.85,0,C.stone,o); }
+      else if(k==='ward'){ box(w,2.2,d,0,0,0,C.oak,o); }
+      else if(k==='dtab'){ box(w,.04,d,0,.72,0,C.oak,o); box(.06,.72,.06,0,0,0,C.blk,o); [-1,1].forEach(function(sd){ box(.42,.45,.42,0,0,sd*(hd+.25),C.fab2,o); }); if(w>=1.1){ [-1,1].forEach(function(sd){ box(.42,.45,.42,-w/4,0,sd*(hd+.25),C.fab2,o); box(.42,.45,.42,w/4,0,sd*(hd+.25),C.fab2,o); }); } }
+      else if(k==='desk'){ box(w,.04,d,0,.72,0,C.oak,o); box(.04,.72,d-.05,-hw+.03,0,0,C.blk,o); box(.04,.72,d-.05,hw-.03,0,0,C.blk,o); }
+      else if(k==='chair'||k==='stool'){ box(w,.45,d,0,0,0,C.fab2,o); if(k==='chair') box(w,.45,.05,0,.45,-hd+.03,C.fab2,o); }
+      else if(k==='ns'){ box(w,.5,d,0,0,0,C.oak,o); }
+      else if(k==='rtab'){ var ct=new THREE.Mesh(new THREE.CylinderGeometry(hw,hw,.04,24),C.oak); ct.position.set(0,(it[6]&&it[6].h)||.42,0); o.add(ct); }
+      else if(k==='ac'){ box(w,.6,d,0,0,0,C.white,o); }
+      else if(k==='plant'){ box(.3,.35,.3,0,0,0,C.pot,o); var lf=new THREE.Mesh(new THREE.SphereGeometry(w*.7,12,10),C.leaf); lf.scale.set(1,1.4,1); lf.position.y=.35+w*.7; lf.castShadow=true; o.add(lf); }
+      else box(w,.5,d,0,0,0,C.cab,o); });
+    if(!first&&sp.eye){ var e3=new THREE.Vector3(sp.eye[0],0,sp.eye[1]).applyMatrix4(q.matrix), l3=new THREE.Vector3(sp.look[0],0,sp.look[1]).applyMatrix4(q.matrix); first={eye:[e3.x,e3.z],look:[l3.x,l3.z]}; } });
+  return first;
+}
 var inHidden=[];
 function clearRoom(){ inHidden.forEach(function(m){ m.visible=true; }); inHidden=[]; if(inRoom){ T.remove(inRoom); inRoom.traverse(function(o){ if(o.geometry) o.geometry.dispose(); }); inRoom=null; } }
 function buildRoom4(r,f){
@@ -874,35 +931,10 @@ function buildRoom4(r,f){
   function P(a,b){ var u,v; if(fc==='E'){ v=v0+a; u=u0+b; } else if(fc==='W'){ v=v1-a; u=u0+b; } else if(fc==='N'){ u=u0+a; v=v0+b; } else { u=u1-a; v=v0+b; } return [X1-v, Z0+u]; }
   function bx(a0,a1,b0,b1,y,h,m,noCast){ var p0=P(a0,b0), p1=P(a1,b1), x0=Math.min(p0[0],p1[0]), x1=Math.max(p0[0],p1[0]), z0=Math.min(p0[1],p1[1]), z1=Math.max(p0[1],p1[1]);
     var me=new THREE.Mesh(new THREE.BoxGeometry(Math.max(.01,x1-x0),h,Math.max(.01,z1-z0)),m); me.position.set((x0+x1)/2,y0+y+h/2,(z0+z1)/2); me.castShadow=!noCast; me.receiveShadow=true; g.add(me); return me; }
-  var wd=M(0x9c6b42,{roughness:.85,envMapIntensity:.2}), wall=M(0xf3efe8,{roughness:.95}), ceil=M(0xfbfaf7,{roughness:1}), alu=M(0x3a4048,{roughness:.35,metalness:.7}),
-      gl=new THREE.MeshStandardMaterial({color:0xcfe6f2,transparent:true,opacity:.1,roughness:0,metalness:.6,depthWrite:false}), sofa=M(0xcfc8bd,{roughness:1}), sofa2=M(0x6f8796,{roughness:1}),
-      oak=M(0x8a6240,{roughness:.5}), rug=M(0xe2d8c8,{roughness:1}), cur=new THREE.MeshStandardMaterial({color:0xfffaf0,transparent:true,opacity:.85,roughness:1,side:THREE.DoubleSide}),
-      blk=M(0x1b1d21,{roughness:.2}), leaf=M(0x4f8a3e,{roughness:.8}), pot=M(0xd9cfc0,{roughness:.9}), lampM=new THREE.MeshStandardMaterial({color:0xfff1d6,emissive:0xffc77a,emissiveIntensity:1});
-  var H=2.95;
-  bx(0,D,0,Wd,-.04,.04,wd,true);                       // sàn gỗ
-  bx(0,D,0,Wd,H,.06,ceil);                             // trần (đổ bóng nắng vào phòng)
-  bx(0,D,-.12,0,0,H,wall); bx(0,D,Wd,Wd+.12,0,H,wall); bx(D,D+.12,0,Wd,0,H,wall);   // 2 tường bên + tường sau
-  bx(0,.08,0,Wd,0,.06,alu); bx(0,.1,0,Wd,2.7,.25,wall); bx(0,.04,0,Wd,0,2.7,gl,true);   // mặt kính sát trần
-  for(var b=0;b<=Wd+.01;b+=Math.max(1.1,Wd/Math.round(Wd/1.3))) bx(-.02,.06,b-.03,b+.03,0,2.7,alu,true);
-  [[.05,.55],[Wd-.55,Wd-.05]].forEach(function(q){ for(var i=0;i<4;i++) bx(.12+(i%2)*.06,.16+(i%2)*.06,q[0]+i*.125,q[0]+i*.125+.1,.05,2.6,cur,true); });   // rèm 2 bên
-  var cb=Wd/2, sa=Math.min(D-1.2,3.6);
-  bx(1.2,sa+.2,cb-1.3,cb+1.3,0,.012,rug,true);                                            // thảm
-  bx(sa,sa+.85,cb-1.05,cb+1.05,.1,.32,sofa); bx(sa+.65,sa+.85,cb-1.05,cb+1.05,.42,.45,sofa); bx(sa,sa+.85,cb-1.05,cb-.88,.42,.22,sofa); bx(sa,sa+.85,cb+.88,cb+1.05,.42,.22,sofa);   // sofa quay ra cửa kính
-  bx(sa+.1,sa+.3,cb-.6,cb-.2,.45,.35,sofa2); bx(sa+.1,sa+.3,cb+.2,cb+.6,.45,.35,sofa2);   // gối
-  var ct=new THREE.Mesh(new THREE.CylinderGeometry(.45,.45,.04,28),oak); var cp=P(sa-.9,cb); ct.position.set(cp[0],y0+.42,cp[1]); ct.castShadow=true; g.add(ct);
-  var cl=new THREE.Mesh(new THREE.CylinderGeometry(.05,.08,.4,10),blk); cl.position.set(cp[0],y0+.2,cp[1]); g.add(cl);
-  if(Wd>3.2){ bx(sa-1.2,sa-.4,.25,.75,.05,.42,sofa2); }                                   // ghế đơn
-  bx(sa-1.4,sa-.2,Wd-.45,Wd-.05,0,.5,oak); bx(sa-1.3,sa-.3,Wd-.14,Wd-.1,.9,.65,blk);      // kệ + TV trên tường
-  function plant(a,b2,s2){ var pp=P(a,b2), c1=new THREE.Mesh(new THREE.CylinderGeometry(.2*s2,.15*s2,.4*s2,14),pot); c1.position.set(pp[0],y0+.2*s2,pp[1]); g.add(c1);
-    for(var k=0;k<6;k++){ var lf=new THREE.Mesh(new THREE.SphereGeometry(.2*s2,10,8),leaf); lf.scale.set(1,1.5,1); lf.position.set(pp[0]+Math.cos(k)*.12*s2,y0+(.6+(k%3)*.18)*s2,pp[1]+Math.sin(k)*.12*s2); lf.castShadow=true; g.add(lf); } }
-  plant(.45,.4,1.3); plant(.45,Wd-.4,1);
-  bx(D-.06,D,Wd/2-.5,Wd/2+.5,0,2.15,M(0x8a6240,{roughness:.5}));                           // cửa ra vào ở tường sau
-  if(D>5){ bx(D-2.6,D-.4,.0,.6,0,.88,M(0xe9e4dc,{roughness:.45})); bx(D-2.6,D-.4,0,.62,.88,.04,M(0xf3f1ee,{roughness:.2})); bx(D-2.6,D-.4,0,.35,1.5,.7,M(0xe9e4dc,{roughness:.45})); }   // tủ bếp dọc tường bên
-  if(D>5.5){ var da=Math.min(D-1,sa+2.1); bx(da-.45,da+.45,cb-.75,cb+.75,.72,.04,oak); bx(da-.4,da+.4,cb-.7,cb+.7,0,.72,M(0x2a2a2a)).scale.set(.06,1,.06);   // bàn ăn
-    [[-.6,-.4],[-.6,.4],[.6,-.4],[.6,.4]].forEach(function(c){ bx(da+c[0]-.2,da+c[0]+.2,cb+c[1]-.2,cb+c[1]+.2,0,.45,sofa2); });
-    var pl=new THREE.Mesh(new THREE.SphereGeometry(.18,16,12),lampM); var pq=P(da,cb); pl.position.set(pq[0],y0+2.1,pq[1]); g.add(pl); }
-  var lt=new THREE.PointLight(0xffd8a8,.55,9,2); var lq=P(D*.6,cb); lt.position.set(lq[0],y0+2.6,lq[1]); g.add(lt);       // đèn trần ấm
-  var fm=bx(.3,D-.3,.3,Wd-.3,0,.01,new THREE.MeshBasicMaterial({visible:false}),true); fm.name='inFloor';
+  var H=2.95, hasL=(typeof CCL!=='undefined')&&(f>=30?CCL.u30[r[0]]:CCL.u[r[0]]);
+  if(hasL&&hasL.length){ var eyeLook=layoutRoom(g,hasL,y0,H); }
+  var fm=bx(0,D,0,Wd,0,.01,new THREE.MeshBasicMaterial({visible:false}),true); fm.name='inFloor';
+  var lt=new THREE.PointLight(0xffd8a8,.5,10,2); var lq=P(D*.55,Wd/2); lt.position.set(lq[0],y0+2.6,lq[1]); g.add(lt);
   function Q(x,z){ var v=X1-x, u=z-Z0; return fc==='E'?[v-v0,u-u0]:fc==='W'?[v1-v,u-u0]:fc==='N'?[u-u0,v-v0]:[u1-u,v-v0]; }
   inUnit=r; inFloor=f; g.userData={P:P,Q:Q,D:D,Wd:Wd,y0:y0};
   // ẩn mảng mặt ngoài (dải đất nung, lam…) che ngay trước cửa kính của căn đang đứng: thực tế có cửa sổ, không che view
@@ -911,7 +943,8 @@ function buildRoom4(r,f){
   A.traverse(function(o){ if(!o.isMesh||o.isInstancedMesh||!o.visible) return; if(!o.geometry.boundingBox) o.geometry.computeBoundingBox();
     var bb=o.geometry.boundingBox.clone().applyMatrix4(m4.multiplyMatrices(inv,o.matrixWorld));
     if(bb.intersectsBox(zb)&&!bb.containsPoint(new THREE.Vector3(eL[0],y0+1.5,eL[1]))){ o.visible=false; inHidden.push(o); } });
-  return {eye:P(Math.max(1.6,Math.min(D-.9,sa+1.6)),cb), y:y0+1.55};
+  if(eyeLook) return {eye:eyeLook.eye, look:eyeLook.look, y:y0+1.55};
+  return {eye:P(Math.min(D-.9,D*.6),Wd/2), y:y0+1.55};
 }
 function viewFromUnit(r){
   var f=uFloor(), y=FL[f]+1.6, uc=(r[2]+r[3])/2, vc=(r[4]+r[5])/2, p;
@@ -923,7 +956,7 @@ function viewFromUnit(r){
   if(planOn) setPlan(false);
   floorEl.value=f; setFloor(f);
   setMode('view'); yaw=UVIEW[r[6]][1]; pitch=-.08;
-  var rm=buildRoom4(r,f); p=new THREE.Vector3(rm.eye[0],rm.y,rm.eye[1]);     // đứng bên trong căn, nhìn ra cửa kính
+  var rm=buildRoom4(r,f); p=new THREE.Vector3(rm.eye[0],rm.y,rm.eye[1]); if(rm.look) yaw=Math.atan2(rm.look[1]-rm.eye[1],rm.look[0]-rm.eye[0]);     // đứng bên trong căn, nhìn ra cửa kính
   unitEye=T.localToWorld(p); placeViewCam();
   mainLbl.textContent='Trong căn '+uCode(r)+' · '+UVIEW[r[6]][0];
   hint.textContent='Kéo để nhìn quanh căn · chạm vào sàn để đi tới chỗ đó'; hint.hidden=false; setTimeout(function(){ hint.hidden=true; },5000);
