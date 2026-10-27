@@ -55,7 +55,7 @@ scene.add(sun); scene.add(sun.target);
 var world=new THREE.Group(); world.rotation.y=-Math.PI/4; scene.add(world);
 var SITE_LAT=16.009588, SITE_LON=108.242570;   // vị trí dự án (anh Hiệp cung cấp, Google Maps)
 function LL(lat,lon){ return [(lon-SITE_LON)*Math.cos(SITE_LAT*Math.PI/180)*111320, -(lat-SITE_LAT)*110574]; }
-var CC_LL=[[16.040,108.236],[16.028,108.2400],[16.018,108.2455],[16.009,108.2495],[15.998,108.2505],[15.985,108.2530],[15.970,108.2570],[15.940,108.2680]];   // sông Cổ Cò chảy giữa dự án và Ngũ Hành Sơn (ước lượng theo toạ độ 2 bên)
+var CC_LL=[[16.0255,108.2245],[16.0200,108.2300],[16.015086,108.235155],[16.0128,108.2405],[16.0085,108.2470],[16.0030,108.2500],[15.9950,108.2510],[15.9850,108.2530],[15.9700,108.2570],[15.9400,108.2680]];   // sông Cổ Cò: tách từ sông Hàn gần cầu Hòa Xuân, qua cầu Trung Lương (toạ độ anh Hiệp), vòng phía Bắc – Đông dự án, chảy dọc phía Tây Ngũ Hành Sơn (đoạn giữa ước lượng)
 function nearRiver(xs,zs,m){ var P=CC_LL.map(function(q){ return LL(q[0],q[1]); }); for(var i=0;i<P.length-1;i++){ var a=P[i],b=P[i+1],dx=b[0]-a[0],dz=b[1]-a[1],t=Math.max(0,Math.min(1,((xs-a[0])*dx+(zs-a[1])*dz)/(dx*dx+dz*dz))); if(Math.hypot(xs-a[0]-t*dx,zs-a[1]-t*dz)<m) return true; } return false; }
 function flat(w,d,col,x,z,y,rot,grp){var m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),M(col));m.rotation.x=-Math.PI/2;if(rot)m.rotation.z=rot;m.position.set(x,y||0.05,z);m.receiveShadow=true;(grp||world).add(m);return m;}
 var ground=new THREE.Mesh(new THREE.PlaneGeometry(40000,40000),M(0xb9b48f)); ground.rotation.x=-Math.PI/2; ground.receiveShadow=true; scene.add(ground);
@@ -251,9 +251,9 @@ function riverLL(pts,w,y){ var P=pts.map(function(q){ return LL(q[0],q[1]); }), 
 // sông Cổ Cò: từ sông Hàn chảy xuống phía Nam, giữa dự án và Ngũ Hành Sơn
 var CC=riverLL(CC_LL,70);
 // sông Hàn: qua cầu Tiên Sơn, cầu Trần Thị Lý, cầu Rồng, ra cửa biển
-riverLL([[15.995,108.212],[16.015,108.224],[16.030,108.231],[16.03947,108.233302],[16.050,108.2315],[16.06104,108.227019],[16.075,108.2255],[16.090,108.222],[16.105,108.218]],300,.18);   // qua điểm bắn pháo hoa DIFF và cầu Rồng
+var HAN=riverLL([[15.995,108.212],[16.012,108.219],[16.024314,108.223033],[16.032,108.229],[16.03947,108.233302],[16.050,108.2315],[16.06104,108.227019],[16.075,108.2255],[16.090,108.222],[16.105,108.218]],300,.18);   // qua điểm bắn pháo hoa DIFF và cầu Rồng
 // biển: đường bờ từ Sơn Trà xuống Mỹ Khê, Non Nước (ước lượng)
-var COAST=[[16.120,108.300],[16.095,108.262],[16.075,108.2440],[16.048543,108.250789],[16.017044,108.263774],[16.000,108.2708],[15.970,108.2830],[15.940,108.2960],[15.900,108.3140],[15.860,108.3360]];   // qua 2 điểm biển Mỹ Khê, Sơn Thủy
+var COAST=[[16.120,108.300],[16.095,108.262],[16.075,108.2440],[16.048543,108.250789],[16.017091,108.263561],[16.000,108.2708],[15.970,108.2830],[15.940,108.2960],[15.900,108.3140],[15.860,108.3360]];   // qua 2 điểm biển Mỹ Khê, Sơn Thủy
 var seaMat=M(0x1b8fa8,{roughness:.32,metalness:.2,envMapIntensity:.9});
 (function(){ var P=COAST.map(function(q){ return LL(q[0],q[1]); }), sh=new THREE.Shape();
   P.forEach(function(p,i){ if(i) sh.lineTo(p[0],-p[1]); else sh.moveTo(p[0],-p[1]); }); sh.lineTo(40000,-P[P.length-1][1]); sh.lineTo(40000,-P[0][1]);
@@ -291,11 +291,17 @@ var SVD=LL(15.999020,108.223335); (function(){ var m=new THREE.Mesh(new THREE.To
 // AEON Mall Hòa Xuân (khối thương mại lớn, thấp tầng)
 var AEON=LL(15.995380,108.216964); (function(){ var m=new THREE.Mesh(new THREE.BoxGeometry(240,22,150),M(0xf1efe9,{roughness:.6})); m.position.set(AEON[0],11,AEON[1]); m.castShadow=true; scene.add(m); })();
 // Làng đại học Đà Nẵng, FPT City, sân golf (ước lượng)
-var LDH=LL(15.977213,108.248975), FPT=LL(15.982294,108.260892), GOLF=LL(15.9440,108.2830), DRG=LL(16.061040,108.227019), DT=LL(16.0700,108.2190), MK=LL(16.048543,108.250789), STB=LL(16.017044,108.263774), DIFF=LL(16.039470,108.233302), HA=LLnear(15.877520,108.332702,9000);   // sân golf, downtown: ước lượng
+var LDH=LL(15.977213,108.248975), FPT=LL(15.982294,108.260892), GOLF=LL(15.9440,108.2830), DRG=LL(16.061040,108.227019), DT=LL(16.0700,108.2190), MK=LL(16.048543,108.250789), STB=LL(16.017091,108.263561), DIFF=LL(16.039470,108.233302), HA=LLnear(15.877520,108.332702,9000);   // sân golf, downtown: ước lượng
 sFlat(700,520,0x8db86a,GOLF[0],GOLF[1],.08); sFlat(900,700,0x8db86a,GOLF[0]+600,GOLF[1]+500,.08);
 (function(){ var dm=new THREE.Object3D(), im=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),M(0xe6e2d8,{roughness:.7}),90), q=0;
   [[LDH,40],[FPT,50]].forEach(function(c){ for(var i=0;i<c[1];i++){ var h=rnd(10,32); dm.position.set(c[0][0]+rnd(-450,450),h/2,c[0][1]+rnd(-350,350)); dm.scale.set(rnd(20,60),h,rnd(16,36)); dm.updateMatrix(); im.setMatrixAt(q++,dm.matrix); } });
   im.count=q; im.castShadow=true; scene.add(im); })();
+// MM Mega Market, cầu Hòa Xuân, cầu Trung Lương (toạ độ anh Hiệp)
+var MEGA=LL(16.024962,108.220191), CHX=LL(16.024314,108.223033), CTL=LL(16.015086,108.235155);
+(function(){ var m=new THREE.Mesh(new THREE.BoxGeometry(170,16,120),M(0xeef0f2,{roughness:.6})); m.position.set(MEGA[0],8,MEGA[1]); m.castShadow=true; scene.add(m); })();
+function bridgeAt(p,river,len,w){ var best=1e18, dir=[1,0]; for(var i=0;i<river.length-1;i++){ var a=river[i], b=river[i+1], d=Math.hypot(p[0]-(a[0]+b[0])/2,p[1]-(a[1]+b[1])/2); if(d<best){ best=d; var dx=b[0]-a[0], dz=b[1]-a[1], l=Math.hypot(dx,dz)||1; dir=[dx/l,dz/l]; } }
+  var m=new THREE.Mesh(new THREE.BoxGeometry(len,1.6,w),M(0xd9d5cc,{roughness:.7})); m.position.set(p[0],4,p[1]); m.rotation.y=-Math.atan2(-dir[0],dir[1]); m.castShadow=true; scene.add(m); }
+bridgeAt(CHX,HAN,420,22); bridgeAt(CTL,CC,130,18);
 // cầu Rồng
 (function(){ var m=new THREE.Mesh(new THREE.BoxGeometry(37,8,666),M(0xd8b14a,{roughness:.5,metalness:.3})); m.position.set(DRG[0],8,DRG[1]); m.rotation.y=Math.PI/2; scene.add(m); })();
 
@@ -326,7 +332,7 @@ label('Công viên (ước lượng)','',world,[100,6,-210]);
   L('Cù Lao Chàm (~'+Math.round(CLC[3]/1000)+' km)',CLC,300,'far');
   L('Trung tâm Đà Nẵng (Downtown)',DT,190,'far'); L('Cầu Rồng',DRG,40,'far'); L('Điểm bắn pháo hoa DIFF',DIFF,40,'far');
   L('Sân bay quốc tế Đà Nẵng',LL(16.054092,108.200513),30,'far');
-  L('Sân vận động Chi Lăng',SVD,30); L('AEON Mall Hòa Xuân',AEON,30);
+  L('Sân vận động Chi Lăng',SVD,30); L('MM Mega Market',MEGA,25); L('Cầu Hòa Xuân',CHX,12); L('Cầu Trung Lương',CTL,12); L('AEON Mall Hòa Xuân',AEON,30);
   L('Làng Đại học Đà Nẵng',LDH,40); L('FPT City',FPT,40); L('Sân golf',GOLF,20,'far'); })();
 
 /* ---------- Thời gian trong ngày (chiều thứ 4) ---------- */
