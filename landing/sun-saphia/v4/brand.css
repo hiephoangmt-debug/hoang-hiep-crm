@@ -670,3 +670,4 @@ background:linear-gradient(165deg,transparent 0%,transparent 40%,rgba(255,214,14
 .skcdb div{background:linear-gradient(160deg,#F2802F,#E96118);border-radius:12px;padding:8px 4px}
 .skcdb b{display:block;font-size:28px;line-height:1.1;font-variant-numeric:tabular-nums}.skcdb small{font-size:12px;opacity:.9}
 .skcd p{margin:0;font-size:14px;color:#D6E0EF}.skcd .btn{align-self:center}
+.skcd{background-color:#0B2447;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(140deg,#0B2447,#275286);background-size:28px 28px,28px 28px,auto}
