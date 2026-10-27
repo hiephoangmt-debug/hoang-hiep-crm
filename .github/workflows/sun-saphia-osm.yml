@@ -1,0 +1,42 @@
+# Tải dữ liệu OpenStreetMap (đường, sông/biển, công viên, nhà) quanh Sun Saphia Residence (16.0213, 108.2577) cho mô hình 4D/5D.
+# Anh Hiệp cho phép dùng GitHub tải hộ (máy làm việc của Claude bị chặn trang Overpass). Chỉ chạy trên nhánh này; dùng xong sẽ xóa.
+name: Sun Saphia OSM data
+on:
+  push:
+    branches: [claude/sweet-knuth-g4n4j5]
+    paths: [.github/workflows/sun-saphia-osm.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tải Overpass
+        run: |
+          D=projects/sun-saphia/osm; mkdir -p $D
+          UA="hoang-hiep-crm-sun-saphia-4d/1.0 (github.com/hiephoangmt-debug/hoang-hiep-crm)"
+          get() { # $1 = tên file, $2 = truy vấn
+            for try in 1 2 3; do
+              for h in https://overpass-api.de/api/interpreter https://overpass.kumi.systems/api/interpreter https://overpass.private.coffee/api/interpreter https://maps.mail.ru/osm/tools/overpass/api/interpreter; do
+                if curl -sS --fail --max-time 300 -A "$UA" -H "Accept: application/json" --data-urlencode "data=$2" "$h" -o "$D/$1" && python3 -c "import json;d=json.load(open('$D/$1'));print('$1',len(d['elements']))"; then return 0; fi
+                rm -f "$D/$1"; sleep 15
+              done
+            done
+            return 1
+          }
+          # đường, sông Hàn, bờ biển, công viên trong ~4 km
+          get ss-osm-roads.json '[out:json][timeout:240];(way["highway"~"motorway|trunk|primary|secondary|tertiary|residential|unclassified|living_street|pedestrian"](15.990,108.215,16.060,108.300);way["natural"~"water|beach|coastline"](15.990,108.200,16.070,108.320);relation["natural"="water"](15.990,108.200,16.070,108.320);way["waterway"](15.990,108.200,16.070,108.300);way["landuse"](16.005,108.240,16.040,108.275);way["leisure"](16.005,108.240,16.040,108.275);way["bridge"](16.040,108.215,16.080,108.240););(._;>;);out;'
+          # nhà quanh dự án ~1,3 km
+          get ss-osm-buildings.json '[out:json][timeout:240];(way["building"](16.009,108.245,16.033,108.270);relation["building"](16.009,108.245,16.033,108.270););(._;>;);out;' || echo "không tải được nhà"
+          # nhà cao tầng xa hơn (có số tầng / chiều cao) để vẽ đúng đường chân trời
+          get ss-osm-tall.json '[out:json][timeout:240];(way["building"]["building:levels"](15.985,108.200,16.085,108.300);way["building"]["height"](15.985,108.200,16.085,108.300););(._;>;);out;' || echo "không tải được nhà cao tầng"
+          ls -la $D
+      - name: Lưu vào kho
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add projects/sun-saphia/osm/
+          git commit -m "Dữ liệu OpenStreetMap quanh Sun Saphia (tải bằng GitHub Actions)" || echo "không có thay đổi"
+          git push
