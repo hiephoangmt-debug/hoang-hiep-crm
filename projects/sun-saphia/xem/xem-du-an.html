@@ -45,8 +45,8 @@
 (function(){
 var API='https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec', SITE='kGYgRtNhbHZr';
 var GCID='';   // Google OAuth Client ID (Web) – để trống thì ẩn nút Google
-var U4D='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/f0bd28439cff3f54f969e08282cf4afd7d3fb29f/projects/sun-saphia/4d/sun-saphia-4d.html';
-var UCC='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/ea12fd6aa6ee67472173d42ec35a8d5d813dbad7/projects/sun-saphia/chon-can/chon-can-app.html';
+var U4D='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/593c347a57a364a524dad678ee491adccbd9ba47/projects/sun-saphia/4d/sun-saphia-4d.html';
+var UCC='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/0d308c638b60f465e6cb6d4111659ccb42a277b0/projects/sun-saphia/chon-can/chon-can-app.html';
 var $=function(i){ return document.getElementById(i); }, step='email', email='', KEY=null;
 function msg(t,ok){ $('msg').textContent=t; $('msg').className='m'+(ok?' ok':''); }
 function call(params,cb){ var name='xg'+Date.now()+Math.floor(Math.random()*1e4), s=document.createElement('script'), done=false, q=['cb='+name,'key='+SITE];
@@ -67,10 +67,12 @@ $('out').onclick=function(){ try{ localStorage.removeItem('ssKey'); }catch(e){} 
 // ---- đăng nhập bằng email + mã 6 số ----
 function toOtp(){ step='otp'; $('tx').textContent='Đã gửi mã 6 số tới '+email+'. Mở hộp thư (kể cả mục Spam/Quảng cáo) và nhập mã:'; var i=$('in'); i.value=''; i.type='text'; i.inputMode='numeric'; i.placeholder='Mã 6 số'; $('bt').textContent='Xác nhận'; $('bk').style.display='inline-block'; }
 function toEmail(){ step='email'; $('tx').textContent='Nhập email đã được cấp quyền, mã 6 số sẽ gửi vào hộp thư:'; var i=$('in'); i.value=email; i.type='email'; i.placeholder='Email của bạn'; $('bt').textContent='Gửi mã vào email'; $('bk').style.display='none'; msg(''); }
-function own(c,yes,no){ try{ crypto.subtle.digest('SHA-256',new TextEncoder().encode(c)).then(function(d){ var h=[].map.call(new Uint8Array(d),function(x){return ('0'+x.toString(16)).slice(-2)}).join(''); h==='029a64f4f8d4479b70daca4fcb4fb719cf27ea51878aea2339f4616e3e455146'?yes():no(); },no); }catch(e){ no(); } }
+// mã link riêng được cấp (lưu dạng băm SHA-256, kiểm tra ngay trên máy, không cần CRM): băm → tên người xem
+  var QX_OK={'029a64f4f8d4479b70daca4fcb4fb719cf27ea51878aea2339f4616e3e455146':'Hoàng Hiệp','8bbf4e45c6ef0452f1a6d6140e0eb6ce4def05757e13fc5c6c68697f083bc0f7':'Thủy'};
+  function own(c,yes,no){ try{ crypto.subtle.digest('SHA-256',new TextEncoder().encode(c)).then(function(d){ var h=[].map.call(new Uint8Array(d),function(x){return ('0'+x.toString(16)).slice(-2)}).join(''); var nm=QX_OK[h]; nm?yes(nm):no(); },no); }catch(e){ no(); } }
 function go(){ var v=String($('in').value||'').trim(); if(!v) return;
   if(step==='email'){
-    if(v.indexOf('@')<0){ msg('Đang kiểm tra…',1); own(v,function(){ grant('Hoàng Hiệp',v); },function(){ call({action:'access',code:v,page:page},function(r){ if(r.access===true) grant(r.name,v); else msg(reason(r)); }); }); return; }
+    if(v.indexOf('@')<0){ msg('Đang kiểm tra…',1); own(v,function(n){ grant(n,v); },function(){ call({action:'access',code:v,page:page},function(r){ if(r.access===true) grant(r.name,v); else msg(reason(r)); }); }); return; }
     email=v.toLowerCase(); msg('Đang gửi mã…',1);
     call({action:'access_req',email:email},function(r){ if(r.sent){ toOtp(); msg(r.wait?'Mã vừa được gửi, vui lòng kiểm tra hộp thư.':'',1); } else msg(reason(r)); });
   } else { msg('Đang xác nhận…',1); call({action:'access_otp',email:email,otp:v,page:page},function(r){ if(r.access===true&&r.token) grant(r.name,r.token); else msg(reason(r)); }); } }
@@ -86,7 +88,7 @@ if(/^[0-9]+-[0-9a-z]+\.apps\.googleusercontent\.com$/.test(GCID)){
 // ---- đã đăng nhập trước đó (nhớ 30 ngày) ----
 var Q=location.search, k=(/[?&]k=([^&#]+)/.exec(Q)||[])[1]; if(k) k=decodeURIComponent(k); else { try{ k=localStorage.getItem('ssKey'); }catch(e){} }
 var pe=(/[?&]e=([^&#]+)/.exec(Q)||[])[1]; if(pe) $('in').value=decodeURIComponent(pe);
-if(k&&k.indexOf('@')<0) own(k,function(){ grant('Hoàng Hiệp',k); },function(){ msg('Đang kiểm tra…',1); call({action:'access',code:k,page:page},function(r){ if(r.access===true){ var n=''; try{ n=localStorage.getItem('ssName')||r.name; }catch(e){} grant(n,k); } else { try{ localStorage.removeItem('ssKey'); }catch(e){} msg(''); } }); });
+if(k&&k.indexOf('@')<0) own(k,function(n){ grant(n,k); },function(){ msg('Đang kiểm tra…',1); call({action:'access',code:k,page:page},function(r){ if(r.access===true){ var n=''; try{ n=localStorage.getItem('ssName')||r.name; }catch(e){} grant(n,k); } else { try{ localStorage.removeItem('ssKey'); }catch(e){} msg(''); } }); });
 })();
 </script>
 </body></html>
