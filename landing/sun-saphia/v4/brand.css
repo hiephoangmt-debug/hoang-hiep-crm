@@ -627,3 +627,18 @@ main .hcvt p,main .hnum *,main .stats *,main .tag,main .btn,main .ey,main .cta p
 background:linear-gradient(105deg,transparent 0%,transparent 42%,rgba(255,247,214,.2) 46%,rgba(255,255,255,.9) 50%,rgba(255,236,170,.3) 54%,transparent 58%,transparent 100%);background-size:300% 100%;background-position:100% 0;animation:skshine 3.6s ease-in-out infinite}
 @keyframes skshine{0%{background-position:100% 0}55%,100%{background-position:0% 0}}
 @media (prefers-reduced-motion:reduce){.skshine{animation:none;display:none}}
+/* Nốt nhạc nhún nhảy + dòng Trân trọng kính mời chạy sáng */
+.sknote{position:absolute;top:32.4%;height:auto;pointer-events:none;transform-origin:50% 85%;animation:sknote 1.8s ease-in-out infinite}
+.sknote.l{left:2.62%;width:3.32%}.sknote.r{left:94.2%;width:3.75%;animation-delay:-.9s}
+@keyframes sknote{0%,100%{transform:translate(0,0) rotate(-10deg)}25%{transform:translate(35%,-45%) rotate(8deg)}50%{transform:translate(0,-15%) rotate(12deg)}75%{transform:translate(-35%,-50%) rotate(-8deg)}}
+.skshine.skkm{left:35.29%;right:auto;top:58.4%;width:29.56%;height:2.9%;animation:skkm 2.8s ease-in-out infinite;animation-delay:1.2s;
+background:linear-gradient(105deg,transparent 0%,transparent 40%,rgba(255,236,170,.4) 45%,rgba(255,255,255,1) 50%,rgba(255,214,120,.5) 55%,transparent 60%,transparent 100%);background-size:300% 100%;background-position:100% 0}
+@keyframes skkm{0%{background-position:100% 0}60%,100%{background-position:0% 0}}
+.skline{position:absolute;left:33%;width:34%;top:61.6%;height:3px;border-radius:3px;pointer-events:none;
+background:linear-gradient(90deg,transparent,rgba(255,196,80,.0) 20%,#FFC24F 45%,#fff 50%,#FFC24F 55%,transparent 80%) no-repeat;background-size:45% 100%;animation:skline 2.8s ease-in-out infinite;animation-delay:1.2s;filter:drop-shadow(0 0 4px rgba(255,190,70,.9))}
+@keyframes skline{0%{background-position:-60% 0;opacity:0}10%{opacity:1}60%{background-position:160% 0;opacity:1}70%,100%{background-position:160% 0;opacity:0}}
+@media (prefers-reduced-motion:reduce){.sknote,.skline{animation:none}.skline{display:none}}
+.skg figure img.sknote{aspect-ratio:auto!important;box-shadow:none!important;border-radius:0!important;object-fit:contain!important;flex:none!important;height:auto!important;min-height:0!important;max-width:none}
+.skg figure img.sknote{position:absolute!important;top:32.4%!important;margin:0!important;padding:0!important}
+.skg figure img.sknote.l{left:2.62%!important;width:3.32%!important}
+.skg figure img.sknote.r{left:94.2%!important;width:3.75%!important}
