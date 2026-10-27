@@ -680,12 +680,13 @@ function placeViewCam(){
   var f=+floorEl.value, c=Math.cos(yaw), sn=Math.sin(yaw), hz=(SCH==='A'?AD:BD)/2+2, k=1/Math.max(Math.abs(c)/VIEWX,Math.abs(sn)/hz,1e-6);
   var p=c<-.3? T.localToWorld(new THREE.Vector3(X0-1.8,FL[f]+1.6,(Z0+ZM-SL)/2+sn*Math.min(8,Math.abs(sn/c)*1.8))) : T.localToWorld(new THREE.Vector3(TX+c*k,FL[f]+1.6,sn*k)); camera.position.copy(p); if(unitEye) camera.position.copy(unitEye);
   var d=new THREE.Vector3(Math.cos(yaw)*Math.cos(pitch),Math.sin(pitch),Math.sin(yaw)*Math.cos(pitch)).applyQuaternion(world.quaternion);
-  camera.lookAt(p.clone().add(d));
+  camera.lookAt(camera.position.clone().add(d));   // nhìn theo hướng từ đúng chỗ đứng (kể cả khi đứng trong căn)
 }
 var bClose=document.getElementById('mClose'), fly=null, DEF=null,
   bOver=document.getElementById('mOverview'), bView=document.getElementById('mView'), bSpin=document.getElementById('mSpin'), hint=document.getElementById('viewhint');
 function setMode(m){
-  if(m!=='view') unitEye=null;
+  if(m!=='view'){ unitEye=null; clearRoom(); inUnit=null; }
+  if(m==='view') hint.textContent='Kéo để nhìn quanh 360° · quay lưng ra biển là hướng TP, sông Hàn, sân bay';
   if(m===mode&&m!=='spin') return;
   if(mode==='view'&&m!=='view'&&saved){camera.position.copy(saved.p);controls.target.copy(saved.t);}
   if(m==='view'){ saved={p:camera.position.clone(),t:controls.target.clone()}; controls.enabled=false; controls.autoRotate=false; yaw=0; pitch=-.04; camera.fov=60; camera.updateProjectionMatrix(); hi.visible=false; placeViewCam(); hint.hidden=false; setTimeout(function(){hint.hidden=true;},3500); }
@@ -700,7 +701,13 @@ function flyClose(){ var f=+floorEl.value, fx=TX+AW/2; var m=innerWidth<600; fly
 var drag=null;
 renderer.domElement.addEventListener('pointerdown',function(e){ if(mode!=='view') return; drag={x:e.clientX,y:e.clientY,yaw:yaw,pitch:pitch}; renderer.domElement.setPointerCapture(e.pointerId); });
 renderer.domElement.addEventListener('pointermove',function(e){ if(!drag) return; yaw=drag.yaw-(e.clientX-drag.x)*.004; pitch=Math.max(-.6,Math.min(.35,drag.pitch+(e.clientY-drag.y)*.003)); placeViewCam(); });
-window.addEventListener('pointerup',function(){drag=null;});
+window.addEventListener('pointerup',function(e){
+  // đang đứng trong căn: chạm sàn (không kéo) thì đi tới chỗ đó
+  if(drag&&inRoom&&mode==='view'&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)<6){ var rc=new THREE.Raycaster(), b=renderer.domElement.getBoundingClientRect();
+    rc.setFromCamera(new THREE.Vector2((e.clientX-b.left)/b.width*2-1,-(e.clientY-b.top)/b.height*2+1),camera);
+    var fm=inRoom.getObjectByName('inFloor'), h=fm&&rc.intersectObject(fm)[0];
+    if(h){ var to=h.point.clone(); to.y=unitEye.y; var st=unitEye.clone(), k=0; (function step(){ k=Math.min(1,k+.08); unitEye.lerpVectors(st,to,k*k*(3-2*k)); placeViewCam(); if(k<1) requestAnimationFrame(step); })(); } }
+  drag=null; });
 
 hourEl.oninput=function(){setTime(+hourEl.value);};
 document.getElementById('sA').onclick=function(){setScheme('A');}; document.getElementById('sB').onclick=function(){setScheme('B');};
@@ -778,7 +785,8 @@ function planFloorUI(f){
   ofcBtn.style.display=planOn?'block':'none';
   if(typeof uCard!=='undefined'&&uCard) { uCard.style.display='none'; uHi.visible=false; }
 }
-var setFloor0=setFloor; setFloor=function(f){ setFloor0(f); if(planOn){ hi.visible=false; updPlan(false); } };
+var setFloor0=setFloor;
+setFloor=function(f){ setFloor0(f); if(planOn){ hi.visible=false; updPlan(false); } if(inUnit&&mode==='view'&&inFloor!==f){ var r=inUnit; setTimeout(function(){ viewFromUnit(r); },0); } };   // đang ở trong căn: đổi tầng thì vào đúng căn đó ở tầng mới
 // góc nhìn đỉnh tháp từ trên xuống như phối cảnh CĐT (nhìn từ phía biển, thấy mái, khung đất nung, khối 18–19 thấp hơn)
 function flyTop(){ var m=innerWidth<600, c=new THREE.Vector3(X1-16,TOP-22,Z0+24);
   if(planOn) setPlan(false); if(mode==='view') setMode('overview');
@@ -855,6 +863,49 @@ function openUnitTool(r){
   ov.querySelector('.c').onclick=function(){ ov.remove(); }; ov.onclick=function(e){ if(e.target===ov) ov.remove(); };
   document.body.appendChild(ov);
 }
+/* ---------- căn hộ thật để đứng bên trong khi xem view (5D): sàn, tường, cửa kính, rèm, nội thất theo đúng khung và hướng căn ---------- */
+var inRoom=null, inUnit=null, inFloor=null;
+function clearRoom(){ if(inRoom){ T.remove(inRoom); inRoom.traverse(function(o){ if(o.geometry) o.geometry.dispose(); }); inRoom=null; } }
+function buildRoom4(r,f){
+  clearRoom(); var g=new THREE.Group(); T.add(g); inRoom=g;
+  var fc=r[6], u0=r[2],u1=r[3],v0=r[4],v1=r[5], EW=(fc==='E'||fc==='W'), D=EW?v1-v0:u1-u0, Wd=EW?u1-u0:v1-v0, y0=FL[f]+.3;   // sàn căn nằm trên sàn bê tông của tháp
+  // (a: từ cửa kính vào trong, b: dọc mặt kính) → toạ độ tháp
+  function P(a,b){ var u,v; if(fc==='E'){ v=v0+a; u=u0+b; } else if(fc==='W'){ v=v1-a; u=u0+b; } else if(fc==='N'){ u=u0+a; v=v0+b; } else { u=u1-a; v=v0+b; } return [X1-v, Z0+u]; }
+  function bx(a0,a1,b0,b1,y,h,m,noCast){ var p0=P(a0,b0), p1=P(a1,b1), x0=Math.min(p0[0],p1[0]), x1=Math.max(p0[0],p1[0]), z0=Math.min(p0[1],p1[1]), z1=Math.max(p0[1],p1[1]);
+    var me=new THREE.Mesh(new THREE.BoxGeometry(Math.max(.01,x1-x0),h,Math.max(.01,z1-z0)),m); me.position.set((x0+x1)/2,y0+y+h/2,(z0+z1)/2); me.castShadow=!noCast; me.receiveShadow=true; g.add(me); return me; }
+  var wd=M(0x9c6b42,{roughness:.85,envMapIntensity:.2}), wall=M(0xf3efe8,{roughness:.95}), ceil=M(0xfbfaf7,{roughness:1}), alu=M(0x3a4048,{roughness:.35,metalness:.7}),
+      gl=new THREE.MeshStandardMaterial({color:0xcfe6f2,transparent:true,opacity:.1,roughness:0,metalness:.6,depthWrite:false}), sofa=M(0xcfc8bd,{roughness:1}), sofa2=M(0x6f8796,{roughness:1}),
+      oak=M(0x8a6240,{roughness:.5}), rug=M(0xe2d8c8,{roughness:1}), cur=new THREE.MeshStandardMaterial({color:0xfffaf0,transparent:true,opacity:.85,roughness:1,side:THREE.DoubleSide}),
+      blk=M(0x1b1d21,{roughness:.2}), leaf=M(0x4f8a3e,{roughness:.8}), pot=M(0xd9cfc0,{roughness:.9}), lampM=new THREE.MeshStandardMaterial({color:0xfff1d6,emissive:0xffc77a,emissiveIntensity:1});
+  var H=2.95;
+  bx(0,D,0,Wd,-.04,.04,wd,true);                       // sàn gỗ
+  bx(0,D,0,Wd,H,.06,ceil);                             // trần (đổ bóng nắng vào phòng)
+  bx(0,D,-.12,0,0,H,wall); bx(0,D,Wd,Wd+.12,0,H,wall); bx(D,D+.12,0,Wd,0,H,wall);   // 2 tường bên + tường sau
+  bx(0,.08,0,Wd,0,.06,alu); bx(0,.1,0,Wd,2.7,.25,wall); bx(0,.04,0,Wd,0,2.7,gl,true);   // mặt kính sát trần
+  for(var b=0;b<=Wd+.01;b+=Math.max(1.1,Wd/Math.round(Wd/1.3))) bx(-.02,.06,b-.03,b+.03,0,2.7,alu,true);
+  [[.05,.55],[Wd-.55,Wd-.05]].forEach(function(q){ for(var i=0;i<4;i++) bx(.12+(i%2)*.06,.16+(i%2)*.06,q[0]+i*.125,q[0]+i*.125+.1,.05,2.6,cur,true); });   // rèm 2 bên
+  var cb=Wd/2, sa=Math.min(D-1.2,3.6);
+  bx(1.2,sa+.2,cb-1.3,cb+1.3,0,.012,rug,true);                                            // thảm
+  bx(sa,sa+.85,cb-1.05,cb+1.05,.1,.32,sofa); bx(sa+.65,sa+.85,cb-1.05,cb+1.05,.42,.45,sofa); bx(sa,sa+.85,cb-1.05,cb-.88,.42,.22,sofa); bx(sa,sa+.85,cb+.88,cb+1.05,.42,.22,sofa);   // sofa quay ra cửa kính
+  bx(sa+.1,sa+.3,cb-.6,cb-.2,.45,.35,sofa2); bx(sa+.1,sa+.3,cb+.2,cb+.6,.45,.35,sofa2);   // gối
+  var ct=new THREE.Mesh(new THREE.CylinderGeometry(.45,.45,.04,28),oak); var cp=P(sa-.9,cb); ct.position.set(cp[0],y0+.42,cp[1]); ct.castShadow=true; g.add(ct);
+  var cl=new THREE.Mesh(new THREE.CylinderGeometry(.05,.08,.4,10),blk); cl.position.set(cp[0],y0+.2,cp[1]); g.add(cl);
+  if(Wd>3.2){ bx(sa-1.2,sa-.4,.25,.75,.05,.42,sofa2); }                                   // ghế đơn
+  bx(sa-1.4,sa-.2,Wd-.45,Wd-.05,0,.5,oak); bx(sa-1.3,sa-.3,Wd-.14,Wd-.1,.9,.65,blk);      // kệ + TV trên tường
+  function plant(a,b2,s2){ var pp=P(a,b2), c1=new THREE.Mesh(new THREE.CylinderGeometry(.2*s2,.15*s2,.4*s2,14),pot); c1.position.set(pp[0],y0+.2*s2,pp[1]); g.add(c1);
+    for(var k=0;k<6;k++){ var lf=new THREE.Mesh(new THREE.SphereGeometry(.2*s2,10,8),leaf); lf.scale.set(1,1.5,1); lf.position.set(pp[0]+Math.cos(k)*.12*s2,y0+(.6+(k%3)*.18)*s2,pp[1]+Math.sin(k)*.12*s2); lf.castShadow=true; g.add(lf); } }
+  plant(.45,.4,1.3); plant(.45,Wd-.4,1);
+  bx(D-.06,D,Wd/2-.5,Wd/2+.5,0,2.15,M(0x8a6240,{roughness:.5}));                           // cửa ra vào ở tường sau
+  if(D>5){ bx(D-2.6,D-.4,.0,.6,0,.88,M(0xe9e4dc,{roughness:.45})); bx(D-2.6,D-.4,0,.62,.88,.04,M(0xf3f1ee,{roughness:.2})); bx(D-2.6,D-.4,0,.35,1.5,.7,M(0xe9e4dc,{roughness:.45})); }   // tủ bếp dọc tường bên
+  if(D>5.5){ var da=Math.min(D-1,sa+2.1); bx(da-.45,da+.45,cb-.75,cb+.75,.72,.04,oak); bx(da-.4,da+.4,cb-.7,cb+.7,0,.72,M(0x2a2a2a)).scale.set(.06,1,.06);   // bàn ăn
+    [[-.6,-.4],[-.6,.4],[.6,-.4],[.6,.4]].forEach(function(c){ bx(da+c[0]-.2,da+c[0]+.2,cb+c[1]-.2,cb+c[1]+.2,0,.45,sofa2); });
+    var pl=new THREE.Mesh(new THREE.SphereGeometry(.18,16,12),lampM); var pq=P(da,cb); pl.position.set(pq[0],y0+2.1,pq[1]); g.add(pl); }
+  var lt=new THREE.PointLight(0xffd8a8,.55,9,2); var lq=P(D*.6,cb); lt.position.set(lq[0],y0+2.6,lq[1]); g.add(lt);       // đèn trần ấm
+  var fm=bx(.3,D-.3,.3,Wd-.3,0,.01,new THREE.MeshBasicMaterial({visible:false}),true); fm.name='inFloor';
+  function Q(x,z){ var v=X1-x, u=z-Z0; return fc==='E'?[v-v0,u-u0]:fc==='W'?[v1-v,u-u0]:fc==='N'?[u-u0,v-v0]:[u1-u,v-v0]; }
+  inUnit=r; inFloor=f; g.userData={P:P,Q:Q,D:D,Wd:Wd,y0:y0};
+  return {eye:P(Math.max(1.6,Math.min(D-.9,sa+1.6)),cb), y:y0+1.55};
+}
 function viewFromUnit(r){
   var f=uFloor(), y=FL[f]+1.6, uc=(r[2]+r[3])/2, vc=(r[4]+r[5])/2, p;
   if(r[6]==='E') p=new THREE.Vector3(X1-r[4]+1.4,y,Z0+uc);
@@ -864,8 +915,11 @@ function viewFromUnit(r){
   if(uCard) uCard.style.display='none'; uHi.visible=false;
   if(planOn) setPlan(false);
   floorEl.value=f; setFloor(f);
-  setMode('view'); yaw=UVIEW[r[6]][1]; pitch=-.05; unitEye=T.localToWorld(p); placeViewCam();
-  mainLbl.textContent='View từ căn '+uCode(r)+' · '+UVIEW[r[6]][0];
+  setMode('view'); yaw=UVIEW[r[6]][1]; pitch=-.08;
+  var rm=buildRoom4(r,f); p=new THREE.Vector3(rm.eye[0],rm.y,rm.eye[1]);     // đứng bên trong căn, nhìn ra cửa kính
+  unitEye=T.localToWorld(p); placeViewCam();
+  mainLbl.textContent='Trong căn '+uCode(r)+' · '+UVIEW[r[6]][0];
+  hint.textContent='Kéo để nhìn quanh căn · chạm vào sàn để đi tới chỗ đó'; hint.hidden=false; setTimeout(function(){ hint.hidden=true; },5000);
 }
 (function(){ var down=null, rc=new THREE.Raycaster(), ndc=new THREE.Vector2();
   renderer.domElement.addEventListener('pointerdown',function(e){ down=[e.clientX,e.clientY]; });
@@ -889,6 +943,10 @@ var hQ=/[?&]h=([\d.]+)/.exec(location.search); if(hQ) hourEl.value=hQ[1]; var fQ
 setFloor(+floorEl.value); setTime(+hourEl.value); refreshEnv();
 if(/[?&]plan/.test(location.search)) setTimeout(function(){ setPlan(true); },400);
 if(/[?&]top/.test(location.search)) setTimeout(flyTop,400);
+// mở thẳng bên trong 1 căn: &in=15&f=18 (tầng 30: &in=07&f=30)
+(function(){ var m=/[?&]in=([0-9A-Za-z]+)/.exec(location.search); if(!m) return; var id=m[1].toUpperCase(), L=(+floorEl.value>=30?UNITS30:UNITS), r=null;
+  L.forEach(function(x){ if(x[0]===id) r=x; }); if(r) setTimeout(function(){ viewFromUnit(r); },600); })();
+window.SS4D={go:function(id,f){ inUnit=null; floorEl.value=f; setFloor(f); var r=null; (f>=30?UNITS30:UNITS).forEach(function(x){ if(x[0]===id) r=x; }); if(r) viewFromUnit(r); }, turn:function(d){ yaw+=d; placeViewCam(); }};
 if(/schemeB/.test(location.search)) setScheme('B');
 var camQ=/cam=([-\d.]+),([-\d.]+),([-\d.]+)/.exec(location.search); if(camQ){controls.target.copy(world.localToWorld(new THREE.Vector3(-47,60,46)));camera.position.copy(world.localToWorld(new THREE.Vector3(-47+ +camQ[1],+camQ[2],46+ +camQ[3]))); var tg=/tgt=([-\d.]+),([-\d.]+),([-\d.]+)/.exec(location.search); if(tg){ controls.target.copy(world.localToWorld(new THREE.Vector3(-47+ +tg[1],+tg[2],46+ +tg[3]))); controls.maxDistance=8000; } }
 if(/topB/.test(location.search)){controls.target.copy(world.localToWorld(new THREE.Vector3(-47,90,46)));camera.position.copy(world.localToWorld(new THREE.Vector3(90,95,-60)));}
@@ -941,6 +999,9 @@ function loop(){
   for(var ci=0;ci<8;ci++){ v.set(ci&1?PX1:PX0, ci&2?TOP+4:0, ci&4?PZ1:PZ0-15); T.localToWorld(v); v.project(camera); if(v.z<1){ var sx=(v.x+1)/2*W, sy=(1-v.y)/2*H; tr[0]=Math.min(tr[0],sx); tr[1]=Math.min(tr[1],sy); tr[2]=Math.max(tr[2],sx); tr[3]=Math.max(tr[3],sy); } }
   for(var j=0;j<LBL.length;j++){ var L=LBL[j]; v.copy(L.p); if(L.obj!==scene) L.obj.localToWorld(v); v.project(camera);
     var vis=v.z<1&&v.x>-1.1&&v.x<1.1&&v.y>-1.1&&v.y<1.1 && !(mode==='view'&&L.cls==='main');
+    if(vis&&inRoom&&mode==='view'&&unitEye){ var ud=inRoom.userData, lp=L.p.clone(); if(L.obj!==T){ if(L.obj!==scene) L.obj.localToWorld(lp); T.worldToLocal(lp); }
+      var ep=T.worldToLocal(unitEye.clone()), le=ud.Q(lp.x,lp.z), ee=ud.Q(ep.x,ep.z);
+      if(le[0]>=0) vis=false; else { var tt=ee[0]/(ee[0]-le[0]), bc=ee[1]+tt*(le[1]-ee[1]), yc=ep.y+tt*(lp.y-ep.y); if(!(bc>0&&bc<ud.Wd&&yc>ud.y0&&yc<ud.y0+2.75)) vis=false; } }   // trong căn: chỉ nhãn nhìn thấy qua cửa kính
     if(vis){ var px=(v.x+1)/2*W, py=(1-v.y)/2*H, w=L.w||(L.w=L.e.offsetWidth||L.e.textContent.length*7), h=L.h||(L.h=L.e.offsetHeight||22);
       var r=[px-w/2-4,py-h-3,px+w/2+4,py+3];
       if(L.cls!=='main'&&mode!=='view'&&r[0]<tr[2]&&r[2]>tr[0]&&r[1]<tr[3]&&r[3]>tr[1]) vis=false;
