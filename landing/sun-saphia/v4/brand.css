@@ -692,3 +692,13 @@ section[id]{scroll-margin-top:96px}
 .tcc b i{font-style:normal}.tcc p strong{color:#fff;font-weight:700}.tcc:not(.hot) p strong{color:#FFD9A8}
 .tcr{grid-template-columns:1fr}
 em.dk{display:block;font-style:italic;font-size:12.5px;font-weight:600;letter-spacing:.04em;opacity:.85;margin:-2px 0 6px}.tcr em.dk{color:var(--mut);margin:0}.hnum em.dk{color:#FFD9A8;margin:0 0 2px}
+/* Cho thuê từ bao nhiêu – trong khối giá Ads */
+.rtw{margin-top:22px}.rtw h3{text-align:center;color:#fff;font-size:22px;margin:0 0 12px}.rtw h3 b{color:var(--yl)}
+.rtg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rtc{background:#fff;border-radius:16px;padding:16px;text-align:center;color:var(--ink)}
+.rtc span{display:block;font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--nv)}
+.rtc b{display:block;font-family:Fahkwang,Georgia,serif;font-size:32px;color:var(--or);margin-top:6px}.rtc b small{font-size:15px;color:var(--mut);font-family:'Be Vietnam Pro',sans-serif}
+.rtc em.dk{color:var(--mut);margin:0 0 6px}.rtc p{margin:0;color:var(--ink);text-align:center!important}.rtc p strong{color:var(--nv)}
+.rtw .src a{color:var(--yl)}
+@media(max-width:760px){.rtg{grid-template-columns:1fr}}
+.rtw .rtc p,.tcx .tcc p{text-align:center!important;text-align-last:center!important}
