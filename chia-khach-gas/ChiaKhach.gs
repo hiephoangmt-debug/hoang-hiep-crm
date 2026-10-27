@@ -678,7 +678,8 @@ function kiemTraHan_() {
   var now = Date.now(), ngay = phutMotNgay(), khacDay = false;
   rows_('Khach', T_KHACH).forEach(function (k) {
     var st = k.trang_thai, p;
-    if ((DANG_GIU.test(st) || /cho_giao|cho_quan_ly/.test(st)) && laSoThu_(k.sdt)) { huyKhachThu_(k); return; }
+    /* Số thử: đang giữ / chờ chia → huỷ; đã bị đóng như khách thường (chưa trả lượt) → vẫn trả lượt 1 lần */
+    if ((DANG_GIU.test(st) || /cho_giao|cho_quan_ly/.test(st) || (st === 'dong' && !/^Khách thử/.test(k.ly_do_dong))) && laSoThu_(k.sdt)) { huyKhachThu_(k); return; }
     if (st === 'cho_giao') {
       if (laKhac_(k) && khacDay) return;   // data telesale chờ nhiều: hết người rảnh thì để phút sau
       giao_(k); if (laKhac_(k) && k.trang_thai === 'cho_giao') khacDay = true; return;
@@ -748,7 +749,8 @@ function lenh_(m) {
     if (c === '/huy') {
       var hk = arg ? timKhach_(arg.toUpperCase().split(/\s+/)[0]) : null;
       if (!hk) { gui_(chat, 'Gõ: <code>/huy K39</code> – huỷ khách thử, trả lại lượt cho sale đã bị giao. Số thử dùng thường xuyên thì thêm vào dòng SO_THU trong tab CauHinh.'); return; }
-      if (hk.trang_thai === 'dong' || hk.trang_thai === 'chot') { gui_(chat, 'Khách ' + esc(hk.id) + ' đã đóng / chốt, không huỷ.'); return; }
+      if (hk.trang_thai === 'chot') { gui_(chat, 'Khách ' + esc(hk.id) + ' đã chốt, không huỷ.'); return; }
+      if (/^Khách thử/.test(hk.ly_do_dong)) { gui_(chat, 'Khách ' + esc(hk.id) + ' đã huỷ và trả lượt rồi.'); return; }
       huyKhachThu_(hk); return;
     }
     if (c === '/chialai') {

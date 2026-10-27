@@ -84,4 +84,16 @@ ok(all().some(k=>k.sdt==='0905000777'&&k.trang_thai==='cho_nhan'),'khách Saphia
   msg(900,'/huy '+kh2.id); run();
   ok(all().find(k=>k.sdt==='0977888999').trang_thai==='dong'&&!vg().da.includes(g3),'/huy Mã: đóng khách thử, trả lượt');
 }
+
+// ===== Số thử đã bị quản lý đóng như khách thường trước khi khai báo SO_THU → vẫn trả lượt =====
+{ const vg=()=>JSON.parse(props.VONG_MOI);
+  crmRow('0966111222','Thử 2'); adv(1); run(); let k=all().find(x=>x.sdt==='0966111222'); const g=k.nguoi_giu;
+  click(g,'n:'+k.id); run(); click(g,'b:'+k.id+':khong'); run(); msg(Number(g),'môi giới'); run(); click(900,'dd:'+k.id); run();
+  k=all().find(x=>x.sdt==='0966111222'); ok(k.trang_thai==='dong'&&vg().da.includes(g),'số thử bị đóng như khách thường: còn mất lượt');
+  const ch=active.s['CauHinh'].d.filter(r=>r[0]==='SO_THU'); ch.forEach(r=>r[1]='0904567009; 0967273982; 0966111222'); adv(1); run();
+  k=all().find(x=>x.sdt==='0966111222');
+  ok(/^Khách thử/.test(k.ly_do_dong)&&!vg().da.includes(g),'thêm vào SO_THU sau khi đã đóng: vẫn tự trả lượt');
+  const n=to(900).filter(s=>/Đã huỷ khách thử/.test(s.text)).length; adv(1); run();
+  ok(to(900).filter(s=>/Đã huỷ khách thử/.test(s.text)).length===n,'chỉ trả lượt 1 lần');
+}
 console.log('\nTỔNG LỖI: '+fails);process.exit(fails?1:0);
