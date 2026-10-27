@@ -690,7 +690,7 @@ function setMode(m){
   if(m===mode&&m!=='spin') return;
   if(mode==='view'&&m!=='view'&&saved){camera.position.copy(saved.p);controls.target.copy(saved.t);}
   if(m==='view'){ saved={p:camera.position.clone(),t:controls.target.clone()}; controls.enabled=false; controls.autoRotate=false; yaw=0; pitch=-.04; camera.fov=60; camera.updateProjectionMatrix(); hi.visible=false; placeViewCam(); hint.hidden=false; setTimeout(function(){hint.hidden=true;},3500); }
-  else { controls.enabled=true; camera.fov=42; camera.updateProjectionMatrix(); hi.visible=true; hint.hidden=true; controls.autoRotate=(m==='spin')&&!reduce; }
+  else { controls.enabled=true; camera.near=2; camera.clearViewOffset(); camera.aspect=innerWidth/innerHeight; camera.fov=42; camera.updateProjectionMatrix(); hi.visible=true; hint.hidden=true; controls.autoRotate=(m==='spin')&&!reduce; }
   if(m==='overview'&&DEF&&(mode==='close'||mode==='view')) flyTo(DEF.p,DEF.t);
   if(m==='close') flyClose();
   mode=m; bClose.setAttribute('aria-pressed',m==='close'); bOver.setAttribute('aria-pressed',m==='overview'); bView.setAttribute('aria-pressed',m==='view'); bSpin.setAttribute('aria-pressed',m==='spin');
@@ -706,7 +706,8 @@ window.addEventListener('pointerup',function(e){
   if(drag&&inRoom&&mode==='view'&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)<6){ var rc=new THREE.Raycaster(), b=renderer.domElement.getBoundingClientRect();
     rc.setFromCamera(new THREE.Vector2((e.clientX-b.left)/b.width*2-1,-(e.clientY-b.top)/b.height*2+1),camera);
     var fm=inRoom.getObjectByName('inFloor'), h=fm&&rc.intersectObject(fm)[0];
-    if(h){ var to=h.point.clone(); to.y=unitEye.y; var st=unitEye.clone(), k=0; (function step(){ k=Math.min(1,k+.08); unitEye.lerpVectors(st,to,k*k*(3-2*k)); placeViewCam(); if(k<1) requestAnimationFrame(step); })(); } }
+    if(h){ var st=unitEye.clone(), to=h.point.clone(); to.y=st.y; var dv=to.clone().sub(st), dl=dv.length(), go=Math.min(dl-.7,3); if(go<.15) return void(drag=null); to=st.clone().add(dv.multiplyScalar(go/dl)); var k=0;   // dừng trước chỗ chạm ~0,7 m, mỗi lần tối đa 3 m: không đi xuyên vào bàn ghế, tường
+      (function step(){ k=Math.min(1,k+.08); unitEye.lerpVectors(st,to,k*k*(3-2*k)); placeViewCam(); if(k<1) requestAnimationFrame(step); })(); } }
   drag=null; });
 
 hourEl.oninput=function(){setTime(+hourEl.value);};
@@ -934,7 +935,7 @@ function buildRoom4(r,f){
   var H=2.95, hasL=(typeof CCL!=='undefined')&&(f>=30?CCL.u30[r[0]]:CCL.u[r[0]]);
   if(hasL&&hasL.length){ var eyeLook=layoutRoom(g,hasL,y0,H); }
   var fm=bx(0,D,0,Wd,0,.01,new THREE.MeshBasicMaterial({visible:false}),true); fm.name='inFloor';
-  var lt=new THREE.PointLight(0xffd8a8,.5,10,2); var lq=P(D*.55,Wd/2); lt.position.set(lq[0],y0+2.6,lq[1]); g.add(lt);
+  var lt=new THREE.PointLight(0xffe2bc,.9,12,2); var lq=P(D*.55,Wd/2); lt.position.set(lq[0],y0+2.6,lq[1]); g.add(lt); g.add(new THREE.HemisphereLight(0xffffff,0xe0cfb4,.3));   // đèn trần + ánh sáng dịu trong phòng, không bị xám
   function Q(x,z){ var v=X1-x, u=z-Z0; return fc==='E'?[v-v0,u-u0]:fc==='W'?[v1-v,u-u0]:fc==='N'?[u-u0,v-v0]:[u1-u,v-v0]; }
   inUnit=r; inFloor=f; g.userData={P:P,Q:Q,D:D,Wd:Wd,y0:y0};
   // ẩn mảng mặt ngoài (dải đất nung, lam…) che ngay trước cửa kính của căn đang đứng: thực tế có cửa sổ, không che view
@@ -957,7 +958,7 @@ function viewFromUnit(r){
   floorEl.value=f; setFloor(f);
   setMode('view'); yaw=UVIEW[r[6]][1]; pitch=-.08;
   var rm=buildRoom4(r,f); p=new THREE.Vector3(rm.eye[0],rm.y,rm.eye[1]); if(rm.look) yaw=Math.atan2(rm.look[1]-rm.eye[1],rm.look[0]-rm.eye[0]);     // đứng bên trong căn, nhìn ra cửa kính
-  unitEye=T.localToWorld(p); placeViewCam();
+  unitEye=T.localToWorld(p); roomCam(); placeViewCam();
   mainLbl.textContent='Trong căn '+uCode(r)+' · '+UVIEW[r[6]][0];
   hint.textContent='Kéo để nhìn quanh căn · chạm vào sàn để đi tới chỗ đó'; hint.hidden=false; setTimeout(function(){ hint.hidden=true; },5000);
 }
@@ -1020,7 +1021,13 @@ function sign(grp,w,x,y,z,ry){ var m=new THREE.Mesh(new THREE.PlaneGeometry(w,w/
 
 /* ---------- Loop ---------- */
 var needle=document.getElementById('needle'), clock=new THREE.Clock(), v=new THREE.Vector3(), fwd=new THREE.Vector3();
-function onResize(){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);}
+function onResize(){renderer.setSize(innerWidth,innerHeight); roomCam();}
+// đứng trong căn: góc nhìn rộng (~80° ngang) và tâm ảnh nằm giữa phần màn hình không bị bảng điều khiển che, để trên điện thoại vẫn thấy cả phòng, không bị phóng to như ống nhòm
+function roomCam(){ var W=innerWidth, Hc=innerHeight;
+  if(!(inRoom&&mode==='view')){ camera.near=2; camera.clearViewOffset(); camera.aspect=W/Hc; camera.updateProjectionMatrix(); return; }
+  var cs=document.querySelector('.console'), ct=cs?cs.getBoundingClientRect().top:Hc, vis=Math.max(Hc*.35,Math.min(Hc,ct));
+  var tv=Math.max(Math.tan(30*Math.PI/180),Math.tan(40*Math.PI/180)*vis/W), sc=tv/(vis/2), Hv=2*(Hc-vis/2);
+  camera.near=.12; camera.fov=2*Math.atan(sc*Hv/2)*180/Math.PI; camera.aspect=W/Hv; camera.setViewOffset(W,Hv,0,Hc-vis,W,Hc); camera.updateProjectionMatrix(); }
 window.addEventListener('resize',onResize);
 function loop(){
   requestAnimationFrame(loop);
@@ -1039,6 +1046,7 @@ function loop(){
   for(var ci=0;ci<8;ci++){ v.set(ci&1?PX1:PX0, ci&2?TOP+4:0, ci&4?PZ1:PZ0-15); T.localToWorld(v); v.project(camera); if(v.z<1){ var sx=(v.x+1)/2*W, sy=(1-v.y)/2*H; tr[0]=Math.min(tr[0],sx); tr[1]=Math.min(tr[1],sy); tr[2]=Math.max(tr[2],sx); tr[3]=Math.max(tr[3],sy); } }
   for(var j=0;j<LBL.length;j++){ var L=LBL[j]; v.copy(L.p); if(L.obj!==scene) L.obj.localToWorld(v); v.project(camera);
     var vis=v.z<1&&v.x>-1.1&&v.x<1.1&&v.y>-1.1&&v.y<1.1 && !(mode==='view'&&L.cls==='main');
+    if(inRoom&&mode==='view') vis=false;   // đứng trong căn: ẩn hết nhãn để không che view
     if(vis&&inRoom&&mode==='view'&&unitEye){ var ud=inRoom.userData, lp=L.p.clone(); if(L.obj!==T){ if(L.obj!==scene) L.obj.localToWorld(lp); T.worldToLocal(lp); }
       var ep=T.worldToLocal(unitEye.clone()), le=ud.Q(lp.x,lp.z), ee=ud.Q(ep.x,ep.z);
       if(le[0]>=0) vis=false; else { var tt=ee[0]/(ee[0]-le[0]), bc=ee[1]+tt*(le[1]-ee[1]), yc=ep.y+tt*(lp.y-ep.y); if(!(bc>0&&bc<ud.Wd&&yc>ud.y0&&yc<ud.y0+2.75)) vis=false; } }   // trong căn: chỉ nhãn nhìn thấy qua cửa kính
