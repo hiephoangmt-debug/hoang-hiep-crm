@@ -250,8 +250,18 @@ scene.add(sun); scene.add(sun.target);
 var world=new THREE.Group(); world.rotation.y=-Math.PI/4; scene.add(world);
 var SITE_LAT=16.009588, SITE_LON=108.242570;   // vị trí dự án (anh Hiệp cung cấp, Google Maps)
 function LL(lat,lon){ return [(lon-SITE_LON)*Math.cos(SITE_LAT*Math.PI/180)*111320, -(lat-SITE_LAT)*110574]; }
-var CC_LL=[[16.0255,108.2245],[16.0200,108.2300],[16.015086,108.235155],[16.0128,108.2405],[16.0085,108.2470],[16.0030,108.2500],[15.9950,108.2510],[15.9850,108.2530],[15.9700,108.2570],[15.9400,108.2680]];   // sông Cổ Cò: tách từ sông Hàn gần cầu Hòa Xuân, qua cầu Trung Lương (toạ độ anh Hiệp), vòng phía Bắc – Đông dự án, chảy dọc phía Tây Ngũ Hành Sơn (đoạn giữa ước lượng)
-function nearRiver(xs,zs,m){ var P=CC_LL.map(function(q){ return LL(q[0],q[1]); }); for(var i=0;i<P.length-1;i++){ var a=P[i],b=P[i+1],dx=b[0]-a[0],dz=b[1]-a[1],t=Math.max(0,Math.min(1,((xs-a[0])*dx+(zs-a[1])*dz)/(dx*dx+dz*dz))); if(Math.hypot(xs-a[0]-t*dx,zs-a[1]-t*dz)<m) return true; } return false; }
+// Mặt nước quanh đảo Sunneva Island – vẽ theo ảnh vệ tinh anh Hiệp gửi (hướng Bắc lên trên),
+// căn tỷ lệ bằng 2 mốc: cầu Bờ Quan (16.012547, 108.247079) ở điểm ảnh (1420,1112) và Sunneva Island (16.016665, 108.244697) ở (1072,548): ~0,77 m/điểm ảnh
+var BQ=LL(16.012547,108.247079);
+function PXS(px,py){ return [BQ[0]+(px-1420)*.77, BQ[1]+(py-1112)*.77]; }
+var LAKE=[[-450,-250],[450,-250],[650,60],[950,150],[1100,200],[1200,250],[1220,300],[1350,420],[1500,520],[1600,700],[1640,900],[1560,1060],[1420,1112],[1380,1100],[1150,1040],[900,960],[700,880],[520,760],[330,640],[140,620],[-120,720],[-300,800],[-450,700]].map(function(p){ return PXS(p[0],p[1]); });
+var ISLAND=[[420,350],[520,330],[700,370],[1000,420],[1150,470],[1350,600],[1460,700],[1480,830],[1420,900],[1300,920],[1100,870],[800,700],[600,620],[470,560],[410,450]].map(function(p){ return PXS(p[0],p[1]); });
+// nhánh sông: phía Tây nối sông Hàn qua cầu Trung Lương; phía Nam qua cầu Bờ Quan chảy dọc phía Tây Ngũ Hành Sơn
+var CC_W=[[16.0255,108.2245],[16.0200,108.2300],[16.015086,108.235155],[16.0160,108.2385]];
+var CC_S=[[16.012547,108.247079],[16.0085,108.2500],[16.0030,108.2510],[15.9950,108.2512],[15.9850,108.2530],[15.9700,108.2570],[15.9400,108.2680]];
+function inP(x,z,P){ var c=false; for(var i=0,j=P.length-1;i<P.length;j=i++){ if(((P[i][1]>z)!==(P[j][1]>z))&&(x<(P[j][0]-P[i][0])*(z-P[i][1])/(P[j][1]-P[i][1])+P[i][0])) c=!c; } return c; }
+function nearLine(xs,zs,L,m){ var P=L.map(function(q){ return LL(q[0],q[1]); }); for(var i=0;i<P.length-1;i++){ var a=P[i],b=P[i+1],dx=b[0]-a[0],dz=b[1]-a[1],t=Math.max(0,Math.min(1,((xs-a[0])*dx+(zs-a[1])*dz)/(dx*dx+dz*dz))); if(Math.hypot(xs-a[0]-t*dx,zs-a[1]-t*dz)<m) return true; } return false; }
+function nearRiver(xs,zs,m){ if(inP(xs,zs,LAKE)&&!inP(xs,zs,ISLAND)) return true; return nearLine(xs,zs,CC_W,m)||nearLine(xs,zs,CC_S,m); }
 function flat(w,d,col,x,z,y,rot,grp){var m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),M(col));m.rotation.x=-Math.PI/2;if(rot)m.rotation.z=rot;m.position.set(x,y||0.05,z);m.receiveShadow=true;(grp||world).add(m);return m;}
 var ground=new THREE.Mesh(new THREE.PlaneGeometry(40000,40000),M(0xb9b48f)); ground.rotation.x=-Math.PI/2; ground.receiveShadow=true; scene.add(ground);
 flat(1700,1700,0xa9b388,0,0,0.02);   // nền khu đô thị (cỏ / đất)
@@ -444,7 +454,10 @@ function riverLL(pts,w,y){ var P=pts.map(function(q){ return LL(q[0],q[1]); }), 
   var sh=new THREE.Shape(); L.forEach(function(p,i){ if(i) sh.lineTo(p[0],-p[1]); else sh.moveTo(p[0],-p[1]); }); for(var i=R.length-1;i>=0;i--) sh.lineTo(R[i][0],-R[i][1]);
   var g=new THREE.ShapeGeometry(sh); g.rotateX(-Math.PI/2); var m=new THREE.Mesh(g,waterMat); m.position.y=y||.2; m.receiveShadow=true; scene.add(m); return P; }
 // sông Cổ Cò: từ sông Hàn chảy xuống phía Nam, giữa dự án và Ngũ Hành Sơn
-var CC=riverLL(CC_LL,70);
+var CC=riverLL(CC_S,80); riverLL(CC_W,120);
+(function(){ var sh=new THREE.Shape(); LAKE.forEach(function(p,i){ if(i) sh.lineTo(p[0],-p[1]); else sh.moveTo(p[0],-p[1]); });
+  var h=new THREE.Path(); ISLAND.forEach(function(p,i){ if(i) h.lineTo(p[0],-p[1]); else h.moveTo(p[0],-p[1]); }); sh.holes.push(h);
+  var g=new THREE.ShapeGeometry(sh); g.rotateX(-Math.PI/2); var m=new THREE.Mesh(g,waterMat); m.position.y=.22; m.receiveShadow=true; scene.add(m); })();
 // sông Hàn: qua cầu Tiên Sơn, cầu Trần Thị Lý, cầu Rồng, ra cửa biển
 var HAN=riverLL([[15.995,108.212],[16.012,108.219],[16.024314,108.223033],[16.032,108.229],[16.03947,108.233302],[16.050,108.2315],[16.06104,108.227019],[16.075,108.2255],[16.090,108.222],[16.105,108.218]],300,.18);   // qua điểm bắn pháo hoa DIFF và cầu Rồng
 // biển: đường bờ từ Sơn Trà xuống Mỹ Khê, Non Nước (ước lượng)
@@ -486,17 +499,25 @@ var SVD=LL(15.999020,108.223335); (function(){ var m=new THREE.Mesh(new THREE.To
 // AEON Mall Hòa Xuân (khối thương mại lớn, thấp tầng)
 var AEON=LL(15.995380,108.216964); (function(){ var m=new THREE.Mesh(new THREE.BoxGeometry(240,22,150),M(0xf1efe9,{roughness:.6})); m.position.set(AEON[0],11,AEON[1]); m.castShadow=true; scene.add(m); })();
 // Làng đại học Đà Nẵng, FPT City, sân golf (ước lượng)
-var LDH=LL(15.977213,108.248975), FPT=LL(15.982294,108.260892), GOLF=LL(15.9440,108.2830), DRG=LL(16.061040,108.227019), DT=LL(16.0700,108.2190), MK=LL(16.048543,108.250789), STB=LL(16.017091,108.263561), DIFF=LL(16.039470,108.233302), HA=LLnear(15.877520,108.332702,9000);   // sân golf, downtown: ước lượng
-sFlat(700,520,0x8db86a,GOLF[0],GOLF[1],.08); sFlat(900,700,0x8db86a,GOLF[0]+600,GOLF[1]+500,.08);
+var LDH=LL(15.977213,108.248975), FPT=LL(15.982294,108.260892), GOLF=LL(15.9867,108.2637), DRG=LL(16.061040,108.227019), DT=LL(16.0700,108.2190), MK=LL(16.048543,108.250789), STB=LL(16.017091,108.263561), DIFF=LL(16.039470,108.233302), HA=LLnear(15.877520,108.332702,9000);   // sân golf, downtown: ước lượng
+sFlat(650,900,0x8db86a,GOLF[0],GOLF[1],.35); sFlat(500,600,0x8db86a,GOLF[0]+350,GOLF[1]+700,.35);   // Legend Danang Golf Resort (đo trên ảnh bản đồ anh Hiệp gửi)
 (function(){ var dm=new THREE.Object3D(), im=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),M(0xe6e2d8,{roughness:.7}),90), q=0;
   [[LDH,40],[FPT,50]].forEach(function(c){ for(var i=0;i<c[1];i++){ var h=rnd(10,32); dm.position.set(c[0][0]+rnd(-450,450),h/2,c[0][1]+rnd(-350,350)); dm.scale.set(rnd(20,60),h,rnd(16,36)); dm.updateMatrix(); im.setMatrixAt(q++,dm.matrix); } });
   im.count=q; im.castShadow=true; scene.add(im); })();
 // MM Mega Market, cầu Hòa Xuân, cầu Trung Lương (toạ độ anh Hiệp)
-var MEGA=LL(16.024962,108.220191), CHX=LL(16.024314,108.223033), CTL=LL(16.015086,108.235155);
+var MEGA=LL(16.024962,108.220191), CHX=LL(16.024314,108.223033), CTL=LL(16.015086,108.235155), CBQ=LL(16.012547,108.247079), SNV=LL(16.016665,108.244697);
 (function(){ var m=new THREE.Mesh(new THREE.BoxGeometry(170,16,120),M(0xeef0f2,{roughness:.6})); m.position.set(MEGA[0],8,MEGA[1]); m.castShadow=true; scene.add(m); })();
 function bridgeAt(p,river,len,w){ var best=1e18, dir=[1,0]; for(var i=0;i<river.length-1;i++){ var a=river[i], b=river[i+1], d=Math.hypot(p[0]-(a[0]+b[0])/2,p[1]-(a[1]+b[1])/2); if(d<best){ best=d; var dx=b[0]-a[0], dz=b[1]-a[1], l=Math.hypot(dx,dz)||1; dir=[dx/l,dz/l]; } }
   var m=new THREE.Mesh(new THREE.BoxGeometry(len,1.6,w),M(0xd9d5cc,{roughness:.7})); m.position.set(p[0],4,p[1]); m.rotation.y=-Math.atan2(-dir[0],dir[1]); m.castShadow=true; scene.add(m); }
-bridgeAt(CHX,HAN,420,22); bridgeAt(CTL,CC,130,18);
+bridgeAt(CHX,HAN,420,22); bridgeAt(CTL,CC,130,18); bridgeAt(CBQ,CC,120,18);
+// Sun Saphia Residence (toạ độ anh Hiệp): tháp 30 tầng ~114 m
+var SAP=LL(16.021190,108.257780); (function(){ var m=new THREE.Mesh(new THREE.BoxGeometry(50,114,40),M(0xdfe9ee,{roughness:.35,metalness:.1,envMapIntensity:.7})); m.position.set(SAP[0],57,SAP[1]); m.castShadow=true; scene.add(m); })();
+var NNB=LL(16.0018,108.2624);   // bãi biển Non Nước (đo trên ảnh bản đồ)
+// công viên Đầm Sen (toạ độ anh Hiệp): mặt cỏ, hồ, cây
+var DS=LL(16.002240,108.250477); (function(){ sFlat(360,300,0x7fae58,DS[0],DS[1],.4); sFlat(150,90,0x3f9fb5,DS[0]+20,DS[1]+10,.45);
+  var dm=new THREE.Object3D(), im=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(3.2,0),M(0x4d8a3c,{roughness:.95}),90);
+  for(var i=0;i<90;i++){ var x=rnd(-170,170), z=rnd(-140,140); if(Math.abs(x-20)<85&&Math.abs(z-10)<55){ i--; continue; } dm.position.set(DS[0]+x,6,DS[1]+z); dm.scale.setScalar(rnd(.8,1.4)); dm.updateMatrix(); im.setMatrixAt(i,dm.matrix); }
+  im.castShadow=true; scene.add(im); })();
 // cầu Rồng
 (function(){ var m=new THREE.Mesh(new THREE.BoxGeometry(37,8,666),M(0xd8b14a,{roughness:.5,metalness:.3})); m.position.set(DRG[0],8,DRG[1]); m.rotation.y=Math.PI/2; scene.add(m); })();
 
@@ -520,15 +541,15 @@ label('Nguyễn Phước Lan','road',world,[-260,2,0]); label('Nguyễn Phước
 label('Minh Mạng','road',world,[0,2,-300]); label('Minh Mạng','road',world,[0,2,280]);
 label('Công viên (ước lượng)','',world,[100,6,-210]);
 (function(){ function L(t,p,h,cls){ label(t,cls||'',scene,[p[0],h||12,p[1]]); }
-  var cc=CC[3]; L('Sông Cổ Cò',[cc[0],cc[1]],8);
+  var cc=CC[2]; L('Sông Cổ Cò',[cc[0],cc[1]],8); L('Sunneva Island',SNV,10);
   L('Ngũ Hành Sơn',NHS,130,'far');
   L('Biển Mỹ Khê',MK,8); L('Biển Sơn Thủy',STB,8); L('Biển Đông',[STB[0]+3500,STB[1]],8,'far'); L('Hội An (~'+Math.round(HA[3]/1000)+' km)',HA,60,'far');
   L('Bán đảo Sơn Trà',ST,720,'far');
   L('Cù Lao Chàm (~'+Math.round(CLC[3]/1000)+' km)',CLC,300,'far');
   L('Trung tâm Đà Nẵng (Downtown)',DT,190,'far'); L('Cầu Rồng',DRG,40,'far'); L('Điểm bắn pháo hoa DIFF',DIFF,40,'far');
   L('Sân bay quốc tế Đà Nẵng',LL(16.054092,108.200513),30,'far');
-  L('Sân vận động Chi Lăng',SVD,30); L('MM Mega Market',MEGA,25); L('Cầu Hòa Xuân',CHX,12); L('Cầu Trung Lương',CTL,12); L('AEON Mall Hòa Xuân',AEON,30);
-  L('Làng Đại học Đà Nẵng',LDH,40); L('FPT City',FPT,40); L('Sân golf',GOLF,20,'far'); })();
+  L('Sân vận động Chi Lăng',SVD,30); L('MM Mega Market',MEGA,25); L('Cầu Hòa Xuân',CHX,12); L('Cầu Trung Lương',CTL,12); L('Cầu Bờ Quan',CBQ,12); L('AEON Mall Hòa Xuân',AEON,30);
+  L('Làng Đại học Đà Nẵng',LDH,40); L('FPT City',FPT,40); L('Sân golf Legend Danang',GOLF,20,'far'); L('Sun Saphia Residence',SAP,124); L('Bãi biển Non Nước',NNB,8); L('Công viên Đầm Sen',DS,14); })();
 
 /* ---------- Thời gian trong ngày (chiều thứ 4) ---------- */
 var hourEl=document.getElementById('hour'), hourOut=document.getElementById('hourOut');
