@@ -192,9 +192,9 @@ var BAL={T2:{'01':18.94,'02':18.95,'03A':29.59,'03':84.29},
  T3:{'01':18.94,'02':18.95,'03A':29.59,'03':84.29,'28':29.00,'27':29.20,'26':29.20,'25':39.96,'24':53.71,'23':53.71,'22':53.71,'21':53.71,'20':55.32}};
 var FNOTE={T2:'Tầng tiện ích: bể bơi trên mái đế, Gym + Yoga 478 m² · 12 căn',T3:'Tầng đầu của tháp: nhiều căn có ban công / sân lớn, sân vườn phía sau',TYP:'Tầng điển hình 3A–28 · 28 căn/tầng',T29:'Như tầng điển hình, không có căn 18 và 19 (vườn mái) · 26 căn',T30:'Tầng trên cùng, layout riêng: 16 căn 1PN / 1PN+1 / 2PN rộng hơn'};
 // tầng 30: [mã, loại, mặt thoáng, x0,y0,x1,y1 (px trên bản vẽ CĐT 1500×1200)], diện tích [thông thủy, tim tường]
-var U30=[['07','1PN+1','EN',330,437,495,545],['08','1PN','E',495,437,610,575],['09','1PN+1','E',610,437,705,575],['10','1PN','E',705,437,820,575],['11','1PN+1','E',820,437,915,575],
- ['06','2PN','N',330,545,465,695],['05','1PN','N',330,695,465,815],['03A','1PN','N',330,815,465,930],['03','1PN+1','WN',330,930,480,1037],['02','1PN+1','WS',480,930,630,1037],['01','1PN','S',492,810,630,930],
- ['16','1PN+1','W',612,600,705,738],['15','1PN','W',705,600,822,738],['12B','1PN','W',822,600,938,738],['12A','1PN','W',938,600,1055,738],['12','1PN','WS',1055,572,1172,738]];
+var U30=[['07','1PN+1','ENW',330,437,495,545],['08','1PN','E',495,437,610,575],['09','1PN+1','E',610,437,705,575],['10','1PN','E',705,437,820,575],['11','1PN+1','E',820,437,915,575],
+ ['06','2PN','NWE',330,545,465,695],['05','1PN','NWE',330,695,465,815],['03A','1PN','NWE',330,815,465,930],['03','1PN+1','WNE',330,930,480,1037],['02','1PN+1','WS',480,930,630,1037],['01','1PN','S',492,810,630,930],
+ ['16','1PN+1','W',612,600,705,738],['15','1PN','W',705,600,822,738],['12B','1PN','W',822,600,938,738],['12A','1PN','W',938,600,1055,738],['12','1PN','WSE',1055,572,1172,738]];
 var A30={'07':[71.29,77.32],'08':[64.63,69.16],'09':[52.20,56.42],'10':[64.37,69.16],'11':[51.18,56.42],'06':[83.97,91.15],'05':[64.41,69.27],'03A':[64.08,69.27],
  '03':[63.73,68.71],'02':[63.34,68.23],'01':[63.02,67.64],'16':[49.99,55.18],'15':[63.02,67.64],'12B':[63.02,67.64],'12A':[62.97,67.64],'12':[73.71,80.97]};
 COL['1PN']='#5DB977'; NAME['1PN']='1PN'; TINT['1PN']='#c9ebd2'; LIGHT['1PN']='#eaf7ee';
@@ -299,16 +299,16 @@ var VIEW={E:['Biển Đông trực diện','Bình minh trên biển, bán đảo
           S:['Hướng Nam · đô thị','Khu đô thị phía Nam, Ngũ Hành Sơn, hướng Hội An.','Ít nắng gắt trực tiếp']};
 // [mã, loại, u0,u1, v0,v1, mặt thoáng (mặt chính đứng đầu), [mặt kính dài, mặt kính ngắn] cho căn 2PN góc]
 // u: Bắc→Nam dọc Trường Sa, v: từ mặt biển vào trong (mét) – theo slide "Mặt bằng tầng điển hình" của CĐT
-var U=[['11','2PN',0,9.9,0,7.25,'EN',['E','N']],['12','STU',10,13.8,0,9,'E'],['12A','STU',13.8,17.6,0,9,'E'],['12B','1PN+1',17.6,23.8,0,9,'E'],
+var U=[['11','2PN',0,9.9,0,7.25,'ENW',['E','N']],['12','STU',10,13.8,0,9,'E'],['12A','STU',13.8,17.6,0,9,'E'],['12B','1PN+1',17.6,23.8,0,9,'E'],
  ['15','STU',23.8,27.6,0,9,'E'],['16','STU',27.6,31.4,0,9,'E'],['17','1PN+1',31.4,37.6,0,9,'E'],
  ['18','2PN',39.9,47.15,-9.9,0,'EN',['N','E']],['19','2PN',47.15,54.4,-9.9,0,'ES',['S','E']],
- ['10','1PN+1',0,9,7.25,13.45,'N'],['09','STU',0,9,13.45,17.25,'N'],['08','STU',0,9,17.25,21.05,'N'],['07','STU',0,9,21.05,24.85,'N'],
- ['06','STU',0,9,24.85,28.65,'N'],['05','STU',0,9,28.65,32.45,'N'],
- ['03A','2PN',0,9.9,32.45,39.7,'WN',['W','N']],['03','2PN',9.9,19.8,32.45,39.7,'WS',['W','S']],
+ ['10','1PN+1',0,9,7.25,13.45,'NWE'],['09','STU',0,9,13.45,17.25,'NWE'],['08','STU',0,9,17.25,21.05,'NWE'],['07','STU',0,9,21.05,24.85,'NWE'],
+ ['06','STU',0,9,24.85,28.65,'NWE'],['05','STU',0,9,28.65,32.45,'NWE'],
+ ['03A','2PN',0,9.9,32.45,39.7,'WNE',['W','N']],['03','2PN',9.9,19.8,32.45,39.7,'WS',['W','S']],
  ['01','STU',10.8,19.8,24.85,28.65,'S'],['02','STU',10.8,19.8,28.65,32.45,'S'],
  ['28','1PN+1',17.6,23.8,10.7,19.7,'W'],['27','STU',23.8,27.6,10.7,19.7,'W'],['26','STU',27.6,31.4,10.7,19.7,'W'],['25','STU',31.4,35.2,10.7,19.7,'W'],
  ['24','STU',35.2,39,10.7,19.7,'W'],['23','STU',39,42.8,10.7,19.7,'W'],['22','STU',42.8,46.6,10.7,19.7,'W'],['21','STU',46.6,50.4,10.7,19.7,'W'],
- ['20','STU',47.6,54.4,8.8,19.7,'WS',null,'STUL']];   // căn 20: studio lớn đầu hồi, ôm cuối hành lang, 2 góc bo
+ ['20','STU',47.6,54.4,8.8,19.7,'WSE',null,'STUL']];   // căn 20: studio lớn đầu hồi, ôm cuối hành lang, 2 góc bo
 function SK(r){ return r[8]||r[1]; }
 // căn đối xứng (soi gương) theo bản vẽ CĐT: các cặp căn cạnh nhau quay lưng WC vào nhau hoặc bếp + hộp gen + lô gia điều hòa vào nhau
 var MIR={'12A':1,'16':1,'26':1,'24':1,'22':1,'09':1,'07':1,'05':1,'02':1};
@@ -668,7 +668,7 @@ function buildRoom30(r){ init3(); if(!R3) return; if(R3.piv) R3.sc.remove(R3.piv
   var face=r[2][0], dv={E:[0,-1],W:[0,1],N:[-1,0],S:[1,0]}[face]; R3.eye=[0,0]; R3.look=[dv[0]*4,dv[1]*4];
   R3.W=b[1]-b[0]; R3.D=b[3]-b[2]; setMode(R3.mode||'plan'); showHour(); if(R3.size) R3.size(); }
 function match(r){ return (state.v==='all'||r[6].indexOf(state.v)>=0)&&(state.t==='all'||r[1]===state.t); }
-function filter(){ var pl=document.getElementById('plan'); if(pl){ pl.classList.toggle('pick',LAY(state.floor)==='T30'?state.s30!=null:state.sel!=null); pl.classList.toggle('flt',state.v!=='all'||state.t!=='all'); }
+function filter(){ var pl=document.getElementById('plan'); if(pl){ pl.classList.toggle('pick',(state.v==='all'&&state.t==='all')&&(LAY(state.floor)==='T30'?state.s30!=null:state.sel!=null)); pl.classList.toggle('flt',state.v!=='all'||state.t!=='all'); }
   if(LAY(state.floor)==='T30'){ [].forEach.call(document.querySelectorAll('#plan [data-j]'),function(el){ var j=+el.getAttribute('data-j'); el.classList.toggle('dim',!m30(U30[j])); el.classList.toggle('sel',j===state.s30); }); return; }
   [].forEach.call(document.querySelectorAll('#plan .u'),function(el){ var r=U[+el.getAttribute('data-i')]; el.classList.toggle('dim',!match(r)); el.classList.toggle('sel',+el.getAttribute('data-i')===state.sel); }); }
 
