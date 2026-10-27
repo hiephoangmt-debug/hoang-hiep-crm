@@ -4,10 +4,12 @@ here = pathlib.Path(__file__).parent
 shell = (here / 'shell.html').read_text(encoding='utf-8')
 scene = (here / 'scene.js').read_text(encoding='utf-8')
 osm = (here.parent / 'osm' / 'osm-data.js').read_text(encoding='utf-8')   # đường, sông hồ, công viên thật (OpenStreetMap)
+plans = (here.parent / 'plans' / 'plans-data.js').read_text(encoding='utf-8')   # mặt bằng tầng F1, F5 trích từ bản vẽ CĐT
 body = (shell
         + '<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>\n'
         + '<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>\n'
         + '<script>\n' + osm + '</script>\n'
+        + '<script>\n' + plans + '</script>\n'
         + '<script>\n' + scene + '</script>\n')
 (here / 'fours-4d.html').write_text('<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n' + body + '</html>\n', encoding='utf-8')
 

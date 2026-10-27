@@ -88,6 +88,44 @@ input[type=range]{accent-color:var(--orange)}
 .viewhint{background:var(--navy);color:#fff;border-color:var(--orange)}
 .contact b{white-space:nowrap}
 @media (max-width:760px){.contact a{display:none}.srb{width:38px;height:38px;font-size:16px}.compass{top:calc(84px + env(safe-area-inset-top,0px))}}
+
+/* ===== Mặt bằng tầng ===== */
+.plan{position:fixed;left:0;right:0;z-index:6;display:flex;flex-direction:column;background:#f6f8fb;color:var(--navy);border-top:1px solid #dfe5ec}
+.plan[hidden]{display:none}
+.plan.mini{left:auto;right:max(12px,env(safe-area-inset-right,0px));width:auto;background:transparent;border:0;pointer-events:none}
+.plan.mini .plan-b,.plan.mini .plan-legend,.plan.mini .unit-card,.plan.mini .ptabs,.plan.mini select,.plan.mini #planTitle{display:none}
+.plan.mini .plan-h{pointer-events:auto;background:#fff;border:1.5px solid var(--navy);border-radius:22px;margin-top:10px;box-shadow:0 4px 14px rgba(10,37,64,.2)}
+.plan-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px max(12px,env(safe-area-inset-left,0px));background:#fff;border-bottom:1px solid #e3e8ee}
+.plan-h .ptabs{display:flex;gap:6px}
+.plan-h .pt{font:700 13px var(--font);padding:7px 12px;border-radius:18px;border:1.5px solid var(--navy);background:#fff;color:var(--navy);cursor:pointer}
+.plan-h .pt[aria-pressed="true"]{background:var(--navy);color:#fff}
+.plan-h select{font:700 13px var(--font);padding:7px 10px;border-radius:18px;border:1.5px solid var(--navy);background:#fff;color:var(--navy)}
+#planTitle{font-size:12px;color:#4a5d72;flex:1 1 auto;min-width:120px}
+.plan-h .pbtn{font:600 12.5px var(--font);padding:7px 12px;border-radius:18px;border:1.5px solid var(--orange);background:#fff;color:var(--orange2);cursor:pointer;white-space:nowrap}
+.plan-h .px{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--navy);background:#fff;color:var(--navy);font-size:16px;cursor:pointer}
+.plan-b{position:relative;flex:1 1 auto;min-height:0}
+.plan-b svg{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);font-family:var(--font)}
+.plan-b .pu{cursor:pointer}
+.plan-b .pu:hover path,.plan-b .pu:focus path{stroke:#FF6A2B;stroke-width:.4}
+.plan-b .pu.on path{stroke:#FF6A2B;stroke-width:.55;filter:drop-shadow(0 0 .4px #FF6A2B)}
+.plan-b .pu:focus{outline:none}
+.plan-wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-18deg);font-weight:800;font-size:clamp(14px,3.2vw,26px);color:rgba(10,37,64,.10);white-space:nowrap;pointer-events:none;text-align:center;line-height:1.3}
+.plan-legend{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:6px max(12px,env(safe-area-inset-left,0px));font-size:11.5px;color:#4a5d72;background:#fff;border-top:1px solid #e3e8ee}
+.plan-legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:4px;vertical-align:-2px;border:1px solid rgba(10,37,64,.3)}
+.unit-card{position:absolute;right:12px;bottom:12px;width:min(320px,calc(100% - 24px));background:#fff;border:1.5px solid var(--navy);border-radius:14px;box-shadow:0 10px 30px rgba(10,37,64,.25);padding:12px 14px;z-index:2}
+.unit-card[hidden]{display:none}
+.unit-card .c-code{font-weight:800;font-size:17px}
+.unit-card .c-type{font-size:12.5px;color:#4a5d72;margin:2px 0 8px}
+.unit-card .c-rows div{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:4px 0;border-bottom:1px dashed #e3e8ee}
+.unit-card .c-rows b{color:var(--orange2);font-variant-numeric:tabular-nums;text-align:right}
+.unit-card .c-act{display:flex;gap:8px;margin-top:10px}
+.unit-card .c-act button,.unit-card .c-act a{flex:1;font:700 13px var(--font);padding:9px 8px;border-radius:20px;text-align:center;text-decoration:none;cursor:pointer}
+.unit-card .c-view{background:var(--orange);color:#fff;border:0}
+.unit-card .c-view:disabled{opacity:.45}
+.unit-card .c-zalo{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+.unit-card .c-x{position:absolute;right:8px;top:6px;border:0;background:none;font-size:18px;color:#4a5d72;cursor:pointer}
+.unit-card .c-note{font-size:10.5px;color:#7a8796;margin:8px 0 0}
+@media (max-width:760px){.unit-card{left:12px;right:12px;width:auto}#planTitle{order:5;flex-basis:100%}body.plan-on .console{display:none}}
 </style>
 
 <div id="app"></div>
@@ -108,6 +146,26 @@ input[type=range]{accent-color:var(--orange)}
 
 <div class="viewhint" id="viewhint" hidden>Kéo để nhìn quanh 360° · phía Đông là sông Cổ Cò, biển; phía Bắc là TP, sông Hàn</div>
 
+<div class="plan" id="plan" hidden>
+  <div class="plan-h">
+    <div class="ptabs" role="group" aria-label="Chọn tòa"><button class="pt" data-t="F1" aria-pressed="true">Tòa F1</button><button class="pt" data-t="F5" aria-pressed="false">Tòa F5</button></div>
+    <select id="planFloor" aria-label="Chọn tầng"></select>
+    <span id="planTitle"></span>
+    <button class="pbtn" id="plan3d">Xem 3D tầng này</button>
+    <button class="px" id="planClose" aria-label="Đóng mặt bằng">✕</button>
+  </div>
+  <div class="plan-b">
+    <div class="plan-wm">Minh họa · thông số theo CĐT<br>0904 567 009</div>
+    <svg id="planSvg" preserveAspectRatio="xMidYMid meet" aria-label="Mặt bằng tầng"></svg>
+    <div class="unit-card" id="unitCard" hidden>
+      <button class="c-x" aria-label="Đóng">✕</button>
+      <div class="c-code"></div><div class="c-type"></div><div class="c-rows"></div>
+      <div class="c-act"><button class="c-view">View từ căn này</button><a class="c-zalo" target="_blank" rel="noopener">Hỏi căn này qua Zalo</a></div>
+      <p class="c-note">Diện tích, loại căn theo mặt bằng tầng CĐT; mặt thoáng suy ra từ bản vẽ. Thông số chính thức theo hợp đồng mua bán.</p>
+    </div>
+  </div>
+  <div class="plan-legend"><span><i style="background:#86b5c6"></i>Studio</span><span><i style="background:#bf8f78"></i>1PN</span><span><i style="background:#5d8f46"></i>1PN+</span><span><i style="background:#f6b625"></i>2PN</span><span><i style="background:#ee6b4d"></i>3PN / 2PN+</span><span><i style="background:#d7ecb0"></i>Sân vườn</span><span>Bấm vào căn để xem</span></div>
+</div>
 <section class="console" aria-label="Điều khiển mô hình">
   <div class="modes" role="group" aria-label="Chế độ xem">
     <button class="chip" id="mOverview" aria-pressed="true">3D · Tổng quan</button>
@@ -115,6 +173,7 @@ input[type=range]{accent-color:var(--orange)}
     <button class="chip" id="mView" aria-pressed="false">5D · View từ căn</button>
     <button class="chip" id="mSpin" aria-pressed="false">Tự xoay</button>
         <button class="chip" id="mTop" aria-pressed="false">Đỉnh tháp</button>
+    <button class="chip" id="mPlan" aria-pressed="false">Mặt bằng tầng</button>
           </div>
   <div class="sl">
     <label for="hour">4D · Giờ trong ngày</label>
@@ -123,10 +182,10 @@ input[type=range]{accent-color:var(--orange)}
   </div>
   <div class="sl">
     <label for="floor">Tầng</label>
-    <input id="floor" type="range" min="3" max="20" step="1" value="12">
+    <input id="floor" type="range" min="3" max="19" step="1" value="12">
     <output id="floorOut" for="floor">Tầng 12</output>
   </div>
-  <p class="note">Mô hình dựng lại theo mặt bằng tầng và phối cảnh của chủ đầu tư để minh họa vị trí, hướng nắng và tầm nhìn; không phải bản vẽ thiết kế. Tòa F2 theo mặt bằng tầng 8–19; F1, F3, F5 là ước lượng. Đường, sông hồ, công viên quanh dự án theo bản đồ © OpenStreetMap; nhà thấp tầng xung quanh là minh họa. Thông số chính thức theo hợp đồng mua bán.</p>
+  <p class="note">Mô hình dựng lại theo mặt bằng tầng và phối cảnh của chủ đầu tư để minh họa vị trí, hướng nắng và tầm nhìn; không phải bản vẽ thiết kế. Tòa F1, F5 theo đúng đường bao mặt bằng tầng CĐT (đo trên bản vẽ, tỷ lệ theo diện tích thông thủy); F2 theo mặt bằng tầng 8–19; F3 là ước lượng. Đường, sông hồ, công viên quanh dự án theo bản đồ © OpenStreetMap; nhà thấp tầng xung quanh là minh họa. Thông số chính thức theo hợp đồng mua bán.</p>
 </section>
 
 <script>
