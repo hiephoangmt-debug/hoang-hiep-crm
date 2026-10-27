@@ -672,3 +672,21 @@ background:linear-gradient(165deg,transparent 0%,transparent 40%,rgba(255,214,14
 .skcd p{margin:0;font-size:14px;color:#D6E0EF}.skcd .btn{align-self:center}
 .skcd{background-color:#0B2447;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(140deg,#0B2447,#275286);background-size:28px 28px,28px 28px,auto}
 .top .tb>.tcta{margin-left:auto}
+/* Mục lục trang Ads + khối giá & thanh toán */
+section[id]{scroll-margin-top:96px}
+@media(max-width:760px){section[id]{scroll-margin-top:150px}}
+.mnav.ptoc a.on{background:var(--nv);color:#fff}
+.tcx .sh{text-align:center}
+.tcg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+.tcc{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:18px;text-align:center}
+.tcc span{display:block;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#AFC0DA}
+.tcc b{display:block;font-family:Fahkwang,Georgia,serif;font-size:34px;color:#fff;margin:6px 0}
+.tcc p{margin:0;color:#D6E0EF;font-size:14.5px;text-align:center!important}
+.tcc.hot{background:linear-gradient(160deg,#F2802F,#E96118);border-color:transparent;box-shadow:0 18px 34px -18px rgba(233,97,24,.8)}.tcc.hot span,.tcc.hot p{color:#fff}
+.tcal{margin-top:18px;background:#fff;color:var(--ink);border-radius:16px;padding:16px 18px;display:grid;grid-template-columns:1.2fr 1fr;gap:16px;align-items:center}
+.tcl label{font-weight:600;color:var(--nv)}.tcl label b{color:var(--or);font-size:20px}
+.tcl input{width:100%;margin-top:10px;accent-color:#E96118}
+.tcr{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tcr div{background:var(--pp);border-radius:12px;padding:10px;text-align:center}
+.tcr small{display:block;font-size:12px;color:var(--mut)}.tcr b{font-size:22px;color:var(--or)}
+@media(max-width:760px){.tcg{grid-template-columns:1fr}.tcal{grid-template-columns:1fr}.tcc b{font-size:28px}}
+.tcc b i{font-style:normal}.tcc p strong{color:#fff;font-weight:700}.tcc:not(.hot) p strong{color:#FFD9A8}

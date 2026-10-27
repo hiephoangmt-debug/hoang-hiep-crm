@@ -569,6 +569,24 @@ def vitri_dark(sid='vi-tri', ctx='ADS'):
             '<a class="gml" href="https://www.google.com/maps/search/?api=1&amp;query=16.021300,108.257659" target="_blank" rel="noopener">📍 Mở trong Google Maps</a></div></div>'
             '</div></div></section>') % (sid, ctx)
 
+ADS_TOC = [('su-kien', 'Sự kiện 01/11'), ('tai-chinh', 'Giá &amp; thanh toán'), ('quy-hoach', 'Quy hoạch'), ('vi-tri', 'Vị trí'), ('mat-bang', 'Mặt bằng'), ('dong-tien', 'Cho thuê'), ('phap-ly', 'Pháp lý')]
+
+def tai_chinh(ctx='ADS'):
+    return ('<section class="sec nv tcx" id="tai-chinh"><div class="wrap">'
+            '<div class="sh"><span class="ey">Giá &amp; thanh toán dự kiến</span><h2 class="dp">Chỉ từ <b>hơn 2 tỷ</b> – thanh toán <b>25%</b> đến khi nhận nhà</h2></div>'
+            '<div class="tcg"><div class="tcc"><span>Giá dự kiến</span><b>Từ hơn 2 tỷ</b><p>Căn hộ mặt biển của Sun Group tại Đà Nẵng</p></div>'
+            '<div class="tcc hot"><span>Đến khi nhận nhà (11/2028)</span><b>~<i id="tcbig">525 triệu</i></b><p><strong>Chỉ 25% giá căn</strong> · thanh toán dần theo tiến độ ~2 năm</p></div>'
+            '<div class="tcc"><span>Khi nhận nhà</span><b>Phần còn lại</b><p><strong>75% giá căn</strong> · theo chính sách chủ đầu tư, Vietcombank, BIDV, NCB hỗ trợ vay</p></div></div>'
+            '<div class="tcal"><div class="tcl"><label for="tcv">Giá căn anh/chị quan tâm: <b id="tcvv">2,1 tỷ</b></label>'
+            '<input type="range" id="tcv" min="2" max="6" step="0.1" value="2.1" aria-label="Giá căn (tỷ đồng)"></div>'
+            '<div class="tcr"><div><small>25% đến khi nhận nhà</small><b id="tc25">525 triệu</b></div><div><small>Chia đều ~24 tháng, mỗi tháng khoảng</small><b id="tcm">22 triệu</b></div></div></div>'
+            '<p class="src" style="margin-top:10px">Ước tính để anh/chị hình dung dòng tiền; giá, tiến độ và chính sách chính thức theo công bố của chủ đầu tư tại sự kiện ra mắt 01/11/2026.</p>'
+            '<div class="hcta" style="justify-content:center"><button type="button" class="btn" data-pop data-interest="' + ctx + ' – nhận bảng giá &amp; lịch thanh toán 25%">Nhận bảng giá &amp; lịch thanh toán chi tiết</button></div>'
+            '<script>(function(){var r=document.getElementById("tcv");if(!r)return;function f(x){return x>=1000?(x/1000).toFixed(2).replace(".",",").replace(/,?0+$/,"")+" tỷ":Math.round(x)+" triệu"}'
+            'function u(){var v=parseFloat(r.value),q=v*1000*0.25;document.getElementById("tcvv").textContent=v.toFixed(1).replace(".",",")+" tỷ";document.getElementById("tc25").textContent=f(q);document.getElementById("tcbig").textContent=f(q);document.getElementById("tcm").textContent=Math.round(q/24)+" triệu"}'
+            'r.addEventListener("input",u);u()})();</script>'
+            '</div></section>')
+
 def ads(domain):
     url = MAIN + '/ads'  # cả hai tên miền chuẩn hóa về trang ads chính
     HB = RAW + '90c9302fe8dca2fa597009660b9635821c7d1eb5/landing/sun-saphia/v4/img/hero-bien'
@@ -587,7 +605,7 @@ def ads(domain):
          '<div class="hcvt"><div class="wrap"><span class="tag">🔥 Ra mắt &amp; nhận booking <b>01/11/2026</b></span>'
          '<h1 class="dp">Sun Saphia Residence</h1><p class="msg">Căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng – mở cửa là biển</p>'
          '<div class="cdn" data-cd="2026-11-01T09:00:00+07:00"><span class="cdl">⏳ Đếm ngược sự kiện ra mắt · 9:00 CN 01/11/2026 · Hilton Đà Nẵng</span><div class="cdb"><div><b data-u="d">--</b><small>ngày</small></div><div><b data-u="h">--</b><small>giờ</small></div><div><b data-u="m">--</b><small>phút</small></div><div><b data-u="s">--</b><small>giây</small></div></div></div><script>(function(){var T=+new Date("2026-11-01T09:00:00+07:00");function z(n){return(n<10?"0":"")+n}function t(){var d=Math.max(0,T-Date.now())/1000;document.querySelectorAll(".cdn").forEach(function(e){var u={d:Math.floor(d/86400),h:Math.floor(d%%86400/3600),m:Math.floor(d%%3600/60),s:Math.floor(d%%60)};for(var k in u){var b=e.querySelector("[data-u="+k+"]");if(b)b.textContent=k=="d"?u[k]:z(u[k])}var l=e.querySelector(".cdl");if(d<=0&&l)l.textContent="🎉 Sự kiện ra mắt 01/11/2026 đã diễn ra – đang nhận booking"})}t();setInterval(t,1000)})();</script><div class="hnum"><div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>30 tầng</b><span>114 m · 782 căn</span></div>'
-         '<div><b>2,45 ha</b><span>công viên ngay trước mặt</span></div><div><b>3,5 m</b><span>trần cao mỗi căn</span></div></div>'
+         '<div><b>2 tỷ+</b><span>giá dự kiến chỉ từ hơn 2 tỷ/căn</span></div><div><b>~525 triệu</b><span>25%% đến khi nhận nhà (căn 2,1 tỷ)</span></div></div>'
          '<div class="hcta"><a class="btn" href="#dang-ky-dau">Nhận bảng giá gốc qua Zalo</a><button type="button" class="btn ghost" data-film>▶ Xem phim dự án 3 phút</button></div></div></div></section>'
          '<section class="hero cine2"><div class="hbody" id="dang-ky-dau"><div class="wrap"><div class="g2"><div class="hl">'
          '<span class="tag">🔥 Ra mắt &amp; nhận booking <b>01/11/2026</b></span>'
@@ -608,6 +626,7 @@ def ads(domain):
         form('dau', 'ADS – form đầu trang', title='Nhận bảng giá gốc từ đại lý', note='Bảng giá gốc, mặt bằng tầng, chính sách – gửi qua Zalo ngay khi chủ đầu tư công bố. Đăng ký miễn phí.', h='h2'),
         hero_perks())
     b += su_kien('ADS')
+    b += tai_chinh('ADS')
     b += tldr('Sun Saphia Residence', [('Dự án', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, 30 tầng, 782 căn'), ('Loại căn', 'Studio 30 m² · 1BR+ 50 m² · 2BR 60–70 m²'),
         ('Pháp lý', 'GCN đầu tư · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Mở bán', 'Ra mắt 01/11/2026'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('★', 'Thời điểm vàng', 'Vì sao <b>đăng ký sớm</b>?', 'o') + why_now() + '</div></section>')
@@ -634,9 +653,14 @@ def ads(domain):
     b += cta_block('ADS – form cuối trang')
     title = 'Sun Saphia Residence – Căn hộ mặt biển Đà Nẵng | Đại lý chính thức TATILAND'
     desc = 'Căn hộ mặt biển Đà Nẵng: Studio 30m², 1BR+ 50m², 2BR 60–70m², ra biển 400m, pháp lý minh bạch, Vietcombank, BIDV, NCB hỗ trợ vay. Bảng giá gốc từ đại lý chính thức TATILAND.'
+    for frag, sid in [('4 quy hoạch <b>bao quanh dự án</b>', 'quy-hoach'), ('Tiềm năng <b>dòng tiền</b>', 'dong-tien'), ('Pháp lý <b>rõ ràng</b>', 'phap-ly')]:
+        i = b.find(frag)
+        if i > 0:
+            j = b.rfind('<section', 0, i); t = b.index('>', j)
+            if ' id="' not in b[j:t]: b = b[:j] + '<section id="%s"' % sid + b[j + 8:]
     html = head(title, desc, url, OG, 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES], FAV)
     b = b.replace('{M}', MAIN)
-    html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(True) + '</body>\n</html>\n'
+    html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(True) + '</body>\n</html>\n'
     return copy_fix(html)
 
 def tinh_dong_tien():
