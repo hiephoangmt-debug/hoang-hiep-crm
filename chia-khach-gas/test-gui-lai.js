@@ -2,7 +2,7 @@ const vm=require('vm'),fs=require('fs');
 const code=fs.readFileSync(__dirname+'/ChiaKhach.gs','utf8').replace("var BOT_TOKEN_DAN_VAO_DAY = 'DÁN_MÃ_BOT_CHIA_KHÁCH_VÀO_ĐÂY';","var BOT_TOKEN_DAN_VAO_DAY = 'TEST123';").replace("var LINK_SHEET_CRM_DAN_VAO_DAY = 'DÁN_LINK_SHEET_CRM_HOÀNG_HIỆP_VÀO_ĐÂY';","var LINK_SHEET_CRM_DAN_VAO_DAY = 'https://docs.google.com/spreadsheets/d/crm-id/edit#gid=0';");
 let NOW=Date.UTC(2026,9,20,2,0); // 9:00 VN
 const RD=Date; class FD extends RD{constructor(...a){a.length?super(...a):super(NOW)} static now(){return NOW}}
-const gs=x=>typeof x==='string'&&x[0]==="'"?x.slice(1):(typeof x==='string'&&/^0\d{8,}$/.test(x)?Number(x):x); // giống Google Sheet
+const gs=x=>typeof x==='string'&&x[0]==="'"?x.slice(1):(typeof x==='string'&&/^0\d{8,}$/.test(x)?Number(x):(typeof x==='string'&&/^\d+,\d+$/.test(x)?Number(x.replace(',','.')):x)); // giống Sheet tiếng Việt: "1,2" thành số // giống Google Sheet
 function Sheet(name){this.name=name;this.d=[];}
 Sheet.prototype={getLastRow(){return this.d.length},getLastColumn(){return Math.max(0,...this.d.map(r=>r.length))},
  setFrozenRows(){},hideSheet(){},deleteRow(r){this.d.splice(r-1,1)},
@@ -59,8 +59,51 @@ guiLai(rZ,'FourS Tower','form đầu trang'); adv(1); run();
 ok(!all().some(k=>k.sdt==='0912345111'),'khách gửi lại trên web FourS: không chia (đúng như hiện nay)');
 // Anh Hiệp thử lại lần nữa bằng số của mình → lúc này được chia (để kiểm tra đường đi)
 guiLai(rHiep,'Saphia Residence','Form ADS'); adv(1); run();
-ok(all().some(k=>k.sdt==='0904567009'&&k.trang_thai==='cho_nhan'),'thử lại lần 2 sau khi dán bản mới: khách vào bot và được giao');
+ok(!all().some(k=>k.sdt==='0904567009'),'số anh Hiệp mặc định là số thử (SO_THU): gửi lại cũng không chia');
 // Khách Saphia mới hoàn toàn vẫn chia như cũ
 crmRow('0905000777','Mới tinh'); adv(1); run();
 ok(all().some(k=>k.sdt==='0905000777'&&k.trang_thai==='cho_nhan'),'khách Saphia mới (Website) vẫn chia bình thường');
+
+// ===== Số thử =====
+{ const vg=()=>JSON.parse(props.VONG_MOI);
+  const truoc=vg().da.slice();
+  crmRow('0967273982','Thử'); adv(1); run();
+  let kt=all().find(k=>k.sdt==='0967273982'); const g1=kt.nguoi_giu;
+  adv(31); run(); kt=all().find(k=>k.sdt==='0967273982'); const g2=kt.nguoi_giu;
+  ok(g1!==g2&&vg().da.includes(g2),'trước khi khai báo: số thử bị giao 2 người, cả 2 mất lượt');
+  // quản lý thêm số vào SO_THU (tab CauHinh) → bot tự huỷ, trả lượt
+  active.s['CauHinh'].appendRow(['SO_THU',"'0904567009; 0967273982",'']); adv(1); run();
+  kt=all().find(k=>k.sdt==='0967273982');
+  ok(kt.trang_thai==='dong'&&!vg().da.includes(g1)&&!vg().da.includes(g2)&&/trả lượt: .+, .+/.test(vm.runInContext("rows_('NhatKy',T_NK).filter(function(r){return r.hanh_dong==='huỷ khách thử'})[0].chi_tiet",ctx)),'thêm vào SO_THU: tự huỷ khách thử, trả lại lượt cho cả 2 người');
+  ok(edits.some(e=>String(e.chat_id)===g2&&/số thử/.test(e.text))&&to(900).some(s=>/Đã huỷ khách thử/.test(s.text)),'báo sale đang giữ và báo quản lý');
+  // số thử gửi lại: không chia
+  const n0=all().length; const r=kh.d.find(x=>String(x[3]).endsWith('967273982')); r[9]=2; adv(1); run();
+  ok(all().length===n0&&!all().some(k=>k.sdt==='0967273982'&&k.trang_thai!=='dong'),'số thử gửi lại: bot bỏ qua, không chia');
+  // /huy bằng tay
+  crmRow('0977888999','Thử tay'); adv(1); run(); const kh2=all().find(k=>k.sdt==='0977888999'); const g3=kh2.nguoi_giu;
+  msg(900,'/huy '+kh2.id); run();
+  ok(all().find(k=>k.sdt==='0977888999').trang_thai==='dong'&&!vg().da.includes(g3),'/huy Mã: đóng khách thử, trả lượt');
+}
+
+// ===== Số thử đã bị quản lý đóng như khách thường trước khi khai báo SO_THU → vẫn trả lượt =====
+{ const vg=()=>JSON.parse(props.VONG_MOI);
+  crmRow('0966111222','Thử 2'); adv(1); run(); let k=all().find(x=>x.sdt==='0966111222'); const g=k.nguoi_giu;
+  click(g,'n:'+k.id); run(); click(g,'b:'+k.id+':khong'); run(); msg(Number(g),'môi giới'); run(); click(900,'dd:'+k.id); run();
+  k=all().find(x=>x.sdt==='0966111222'); ok(k.trang_thai==='dong'&&vg().da.includes(g),'số thử bị đóng như khách thường: còn mất lượt');
+  const ch=active.s['CauHinh'].d.filter(r=>r[0]==='SO_THU'); ch.forEach(r=>r[1]='0904567009; 0967273982; 0966111222'); adv(1); run();
+  k=all().find(x=>x.sdt==='0966111222');
+  ok(/^Khách thử/.test(k.ly_do_dong)&&!vg().da.includes(g),'thêm vào SO_THU sau khi đã đóng: vẫn tự trả lượt');
+  const n=to(900).filter(s=>/Đã huỷ khách thử/.test(s.text)).length; adv(1); run();
+  ok(to(900).filter(s=>/Đã huỷ khách thử/.test(s.text)).length===n,'chỉ trả lượt 1 lần');
+}
+
+// ===== Báo cáo không tính khách thử =====
+{ const bc=vm.runInContext('baoCao_(Date.now())',ctx), tuan=vm.runInContext('baoCaoTuan_(Date.now())',ctx);
+  const ids=all().filter(k=>/^Khách thử/.test(k.ly_do_dong)).map(k=>k.id);
+  const giaoThu=vm.runInContext("rows_('NhatKy',T_NK).filter(function(r){return r.hanh_dong==='được giao'})",ctx).filter(r=>ids.includes(r.khach)).length;
+  const giaoAll=vm.runInContext("rows_('NhatKy',T_NK).filter(function(r){return r.hanh_dong==='được giao'})",ctx).length;
+  const tong=s=>[...s.matchAll(/\((\d+)\/(\d+)\)/g)].reduce((a,m)=>a+Number(m[2]),0);
+  ok(ids.length>=2&&giaoThu>0&&tong(tuan)===giaoAll-giaoThu,'xếp hạng tuần không đếm lượt giao khách thử ('+tong(tuan)+' = '+giaoAll+' − '+giaoThu+')');
+  ok(!/Thử/.test(bc),'báo cáo ngày không tính khách thử');
+}
 console.log('\nTỔNG LỖI: '+fails);process.exit(fails?1:0);

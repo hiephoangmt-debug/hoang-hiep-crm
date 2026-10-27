@@ -49,6 +49,7 @@ var MAC_DINH = {
   NGUON_KHAC_SHEET_ID: '',   // ID Sheet "DATA CHẠY GOOGLE" (khách dự án khác); để trống = không chia dự án khác
   NGUON_KHAC_TAB: '',        // chỉ đọc các tab này (cách nhau dấu phẩy); để trống = mọi tab dự án
   TOI_DA_CHUA_BAO_CAO_KHAC: 3, // data telesale: mỗi sale giữ tối đa ngần này khách chưa báo cáo, xong mới giao tiếp
+  SO_THU: '0904567009',       // số dùng để thử (cách nhau dấu chấm phẩy ; để Sheet không hiểu thành số): bot không chia; đang giữ thì tự huỷ và trả lượt
   DU_AN_CHIA: 'saphia,shaphia', // khách cũ (đã có trong CRM) gửi lại từ web mà "Dự án quan tâm" có chữ này cũng được chia
   NHOM_RIENG: 'fours,saphia' // khách có chữ này (trang / nhu cầu / nguồn) tính lượt FourS–Saphia; còn lại là dự án khác
 };
@@ -130,6 +131,8 @@ function che(sdt) { sdt = String(sdt || ''); return sdt.length >= 8 ? sdt.slice(
 function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 function dsCfg_(k) { return String(cfg(k) || '').toLowerCase().split(',').map(function (x) { return x.trim(); }).filter(String); }
 function laKhac_(k) { return k.nhom === 'khac'; }
+/* Số thử: tách theo mọi ký tự không phải số (dấu phẩy, chấm phẩy, khoảng trắng…) */
+function laSoThu_(sdt) { sdt = normPhone(sdt); return !!sdt && String(cfg('SO_THU') || '').split(/[^\d+]+/).some(function (x) { return x && normPhone(x) === sdt; }); }
 /* Khách thuộc nhóm FourS/Saphia nếu trang, nhu cầu hoặc nguồn có chữ trong NHOM_RIENG */
 function laNhomRieng_(chu) { chu = String(chu || '').toLowerCase().replace(/\s+/g, ''); return dsCfg_('NHOM_RIENG').some(function (x) { return chu.indexOf(x.replace(/\s+/g, '')) > -1; }); }
 function normPhone(p) { p = String(p == null ? '' : p).replace(/\D/g, ''); if (p.indexOf('84') === 0 && p.length === 11) p = '0' + p.slice(2); if (p.length === 9) p = '0' + p; return p; }
@@ -154,7 +157,8 @@ function rows_(name, head) {
   return list;
 }
 function save_(name, head, o) {
-  var sh = tab_(name, head), v = [head.map(function (h) { return o[h] == null ? '' : (h === 'sdt' && o[h] !== '' ? "'" + o[h] : o[h]); })];  // ' giữ số 0 đầu
+  /* ' giữ nguyên chữ: số 0 đầu của SĐT; danh sách mã sale "123,456" (Sheet tiếng Việt hiểu dấu phẩy là số thập phân) */
+  var sh = tab_(name, head), v = [head.map(function (h) { return o[h] == null ? '' : ((h === 'sdt' || h === 'da_qua') && o[h] !== '' ? "'" + o[h] : o[h]); })];
   if (o._r) sh.getRange(o._r, 1, 1, head.length).setValues(v);
   else { sh.appendRow(v[0]); o._r = sh.getLastRow(); }
 }
@@ -247,7 +251,7 @@ function caiDat() {
 function datLenh_() {
   var sale = [{command: 'khach', description: 'Khách đang giữ và giờ hạn'}, {command: 'giahan', description: 'Xin thêm 1 ngày: /giahan K12'},
     {command: 'nghi', description: 'Tạm ngưng nhận khách'}, {command: 'lam', description: 'Nhận khách trở lại'}, {command: 'dangky', description: 'Xin vào đội: /dangky Tên'}];
-  var ql = [{command: 'them', description: 'Thêm khách: /them Số Tên - nhu cầu'}, {command: 'themkhac', description: 'Khách dự án khác (không tính lượt FourS/Saphia)'}, {command: 'chialai', description: 'Chia lại khách sang nhánh 2, 3…: /chialai K12'}, {command: 'sale', description: 'Danh sách đội'},
+  var ql = [{command: 'them', description: 'Thêm khách: /them Số Tên - nhu cầu'}, {command: 'themkhac', description: 'Khách dự án khác (không tính lượt FourS/Saphia)'}, {command: 'huy', description: 'Huỷ khách thử, trả lượt: /huy K39'}, {command: 'chialai', description: 'Chia lại khách sang nhánh 2, 3…: /chialai K12'}, {command: 'sale', description: 'Danh sách đội'},
     {command: 'baocao', description: 'Báo cáo hôm nay'}, {command: 'tuan', description: 'Xếp hạng 7 ngày'}, {command: 'tam', description: 'Tạm dừng sale: /tam Tên'},
     {command: 'mo', description: 'Mở lại / duyệt sale: /mo Tên'}, {command: 'xoa', description: 'Sale nghỉ việc: /xoa Tên'}];
   var a = tg_('setMyCommands', {commands: sale});
@@ -308,7 +312,7 @@ function layKhachCRM_() {
       ghi_chu: (j > -1 ? gc.slice(j + 2) : gc).slice(0, 300), loai: String(r[39] || ''), trang: String(r[40] || ''), du_an: String(r[41] || ''),
       so_lan: Number(r[9]) || 1, gui_lai: String(r[46] || '')};
   }).filter(function (k) {
-    if (k.sdt.length !== 10) return false;
+    if (k.sdt.length !== 10 || laSoThu_(k.sdt)) return false;
     var chu = (k.trang + ' ' + k.web).toLowerCase(), duAn = k.du_an.toLowerCase();
     /* 1. khách để số trên web, trang thuộc LOC_TRANG */
     if (k.loai === 'Website' && (!loc.length || loc.some(function (x) { return chu.indexOf(x) > -1; }))) return true;
@@ -613,6 +617,34 @@ function layVong_(key, dangLam) {
   P().setProperty(key, JSON.stringify(vg));
   return vg;
 }
+/* Khách thử (số trong SO_THU hoặc quản lý gõ /huy): đóng khách, báo sale, trả lại lượt vòng cho mọi người đã bị giao khách này */
+function huyKhachThu_(k) {
+  /* Ai đã được giao khách này, ở vòng nào: đọc từ nhật ký (cột da_qua có thể đã bị Sheet làm hỏng) */
+  var theoTen = {}, tra = {VONG_MOI: [], VONG_LAI: []}, ai = [];
+  rows_('Sale', T_SALE).forEach(function (x) { theoTen[x.ten] = String(x.chat_id); });
+  rows_('NhatKy', T_NK).forEach(function (r) {
+    if (r.khach !== k.id || r.hanh_dong !== 'được giao' || /dự án khác/.test(r.chi_tiet)) return;
+    var id = theoTen[r.nguoi]; if (!id) return;
+    tra[/nhánh [2-9]/.test(r.chi_tiet) ? 'VONG_LAI' : 'VONG_MOI'].push(id);
+    if (ai.indexOf(id) < 0) ai.push(id);
+  });
+  if (k.nguoi_giu && ai.indexOf(String(k.nguoi_giu)) < 0) ai.push(String(k.nguoi_giu));
+  ['VONG_MOI', 'VONG_LAI'].forEach(function (key) {
+    if (!tra[key].length) return;
+    var vg = layVong_(key, salesDangLam_());
+    vg.da = vg.da.filter(function (x) { return tra[key].indexOf(String(x)) < 0; });
+    P().setProperty(key, JSON.stringify(vg));
+  });
+  if (k.nguoi_giu && DANG_GIU.test(k.trang_thai)) {
+    P().deleteProperty('LYDO_' + k.nguoi_giu);
+    sua_(k.nguoi_giu, k.msg_id, '🧪 <b>Khách ' + esc(k.id) + '</b> là số thử của quản lý, đã huỷ. Bạn không bị mất lượt chia.');
+  }
+  k.trang_thai = 'dong'; k.ly_do_dong = 'Khách thử – huỷ, trả lượt'; save_('Khach', T_KHACH, k);
+  var ten = ai.map(function (id) { var x = timSale_(id); return x ? x.ten : id; }).join(', ');
+  log_('quản lý', 'huỷ khách thử', k.id, 'trả lượt: ' + (ten || 'không ai'));
+  baoQL_('🧪 Đã huỷ khách thử ' + esc(k.id) + ' (' + esc(che(k.sdt)) + ')' + (ten ? ', trả lại lượt cho: ' + esc(ten) : '') + '.');
+  return ten;
+}
 function sangNhanhMoi_(k) { if (!laKhac_(k)) { k.nhanh = Number(k.nhanh || 1) + 1; k.so_luot = 0; } }
 /* Quản lý chia lại 1 khách (kể cả khách đã đóng): sang nhánh tiếp theo */
 function chiaLai_(kc) {
@@ -624,8 +656,8 @@ function thuHoi_(k, lyDo) {
   sua_(k.nguoi_giu, k.msg_id, '⛔ <b>Khách ' + esc(k.id) + ' đã được thu hồi</b> (' + esc(lyDo) + ').\nSố điện thoại đã ẩn.');
   log_(k.ten_sale, 'thu hồi', k.id, lyDo);
   if (/^không bấm nhận/.test(lyDo)) {
-    var hom = vnDay(Date.now()), ten = k.ten_sale;
-    var lan = rows_('NhatKy', T_NK).filter(function (r) { return r.nguoi === ten && r.hanh_dong === 'thu hồi' && /^không bấm nhận/.test(r.chi_tiet) && vnDay(ms(r.thoi_gian)) === hom; }).length;
+    var hom = vnDay(Date.now()), ten = k.ten_sale, thu = maKhachThu_();
+    var lan = rows_('NhatKy', T_NK).filter(function (r) { return r.nguoi === ten && r.hanh_dong === 'thu hồi' && /^không bấm nhận/.test(r.chi_tiet) && vnDay(ms(r.thoi_gian)) === hom && !thu[r.khach]; }).length;
     var sl = timSale_(k.nguoi_giu);
     if (sl && sl.trang_thai === 'lam' && lan >= num('THU_HOI_TU_DUNG')) {
       sl.trang_thai = 'nghi'; save_('Sale', T_SALE, sl); log_('hệ thống', 'tự tạm dừng', '', sl.ten + ' bị thu hồi ' + lan + ' lần hôm nay');
@@ -646,6 +678,8 @@ function kiemTraHan_() {
   var now = Date.now(), ngay = phutMotNgay(), khacDay = false;
   rows_('Khach', T_KHACH).forEach(function (k) {
     var st = k.trang_thai, p;
+    /* Số thử: đang giữ / chờ chia → huỷ; đã bị đóng như khách thường (chưa trả lượt) → vẫn trả lượt 1 lần */
+    if ((DANG_GIU.test(st) || /cho_giao|cho_quan_ly/.test(st) || (st === 'dong' && !/^Khách thử/.test(k.ly_do_dong))) && laSoThu_(k.sdt)) { huyKhachThu_(k); return; }
     if (st === 'cho_giao') {
       if (laKhac_(k) && khacDay) return;   // data telesale chờ nhiều: hết người rảnh thì để phút sau
       giao_(k); if (laKhac_(k) && k.trang_thai === 'cho_giao') khacDay = true; return;
@@ -712,6 +746,13 @@ function lenh_(m) {
     }
     if (c === '/them' || c === '/themkhac') { gui_(chat, themKhachTay_(t.replace(/^\S+[ \t]*/, ''), c === '/themkhac' ? 'khac' : '')); return; }
     if (c === '/sale') { gui_(chat, danhSachSale_()); return; }
+    if (c === '/huy') {
+      var hk = arg ? timKhach_(arg.toUpperCase().split(/\s+/)[0]) : null;
+      if (!hk) { gui_(chat, 'Gõ: <code>/huy K39</code> – huỷ khách thử, trả lại lượt cho sale đã bị giao. Số thử dùng thường xuyên thì thêm vào dòng SO_THU trong tab CauHinh.'); return; }
+      if (hk.trang_thai === 'chot') { gui_(chat, 'Khách ' + esc(hk.id) + ' đã chốt, không huỷ.'); return; }
+      if (/^Khách thử/.test(hk.ly_do_dong)) { gui_(chat, 'Khách ' + esc(hk.id) + ' đã huỷ và trả lượt rồi.'); return; }
+      huyKhachThu_(hk); return;
+    }
     if (c === '/chialai') {
       var ids = arg.toUpperCase().split(/[\s,]+/).filter(String), out = [];
       if (!ids.length) { gui_(chat, 'Gõ: <code>/chialai K12</code> (nhiều khách: <code>/chialai K12 K15</code>). Khách sang nhánh tiếp theo, chia vòng riêng, không mất lượt khách mới của sale.'); return; }
@@ -729,7 +770,7 @@ function lenh_(m) {
       x.trang_thai = c === '/tam' ? 'nghi' : 'lam'; save_('Sale', T_SALE, x); log_('quản lý', c === '/tam' ? 'tạm dừng' : 'mở lại', '', x.ten);
       gui_(chat, (c === '/tam' ? '⏸ Tạm dừng chia cho ' : '▶️ Mở lại chia cho ') + esc(x.ten)); return;
     }
-    gui_(chat, 'Lệnh quản lý: /them Số Tên - nhu cầu · /themkhac (dự án khác) · /chialai Mã · /sale · /baocao · /tuan · /tam Tên · /mo Tên · /xoa Tên'); return;
+    gui_(chat, 'Lệnh quản lý: /them Số Tên - nhu cầu · /themkhac (dự án khác) · /chialai Mã · /huy Mã (khách thử) · /sale · /baocao · /tuan · /tam Tên · /mo Tên · /xoa Tên'); return;
   }
   if (!s || /cho_duyet|tu_choi|nghi_viec/.test(s.trang_thai)) { gui_(chat, 'Nhắn <code>/dangky Tên của bạn</code> để xin vào đội chia khách.'); return; }
   /* Đang chờ ghi lý do đóng khách: tin tiếp theo (không phải lệnh) là lý do */
@@ -837,9 +878,12 @@ function danhSachSale_() {
   var vg = layVong_('VONG_MOI', salesDangLam_());
   return '<b>Đội chia khách</b> · khách mới đang ở <b>vòng ' + vg.so + '</b>\n' + l.map(function (s) { return (s.trang_thai === 'lam' ? '▶️ ' : s.trang_thai === 'nghi' ? '⏸ ' : '⏳ ') + esc(s.ten) + (s.trang_thai === 'lam' ? (vg.da.indexOf(String(s.chat_id)) > -1 ? ' ✔ đã nhận vòng này' : ' · chưa nhận vòng này') : '') + ' – đang giữ ' + dangGiu_(s.chat_id, null, '') + (dangGiu_(s.chat_id, null, 'khac') ? ' (+' + dangGiu_(s.chat_id, null, 'khac') + ' dự án khác)' : ''); }).join('\n');
 }
+/* Khách thử (số trong SO_THU hoặc đã huỷ là khách thử): không tính vào báo cáo, xếp hạng, luật tự tạm dừng */
+function laKhachThu_(k) { return /^Khách thử/.test(String(k.ly_do_dong || '')) || laSoThu_(k.sdt); }
+function maKhachThu_() { var m = {}; rows_('Khach', T_KHACH).forEach(function (k) { if (laKhachThu_(k)) m[k.id] = 1; }); return m; }
 function baoCao_(t) {
-  var hom = vnDay(t), nk = rows_('NhatKy', T_NK).filter(function (r) { return vnDay(ms(r.thoi_gian)) === hom; });
-  var kh = rows_('Khach', T_KHACH), moi = kh.filter(function (k) { return vnDay(ms(k.luc_vao)) === hom; }).length;
+  var thu = maKhachThu_(), hom = vnDay(t), nk = rows_('NhatKy', T_NK).filter(function (r) { return vnDay(ms(r.thoi_gian)) === hom && !thu[r.khach]; });
+  var kh = rows_('Khach', T_KHACH).filter(function (k) { return !thu[k.id]; }), moi = kh.filter(function (k) { return vnDay(ms(k.luc_vao)) === hom; }).length;
   var by = {};
   nk.forEach(function (r) { var n = r.nguoi; if (!n || n === 'hệ thống' || n === 'quản lý') return; by[n] = by[n] || {giao: 0, nhan: 0, thu: 0, bc: 0}; if (r.hanh_dong === 'được giao') by[n].giao++; if (r.hanh_dong === 'nhận khách') by[n].nhan++; if (r.hanh_dong === 'thu hồi') by[n].thu++; if (r.hanh_dong === 'báo cáo') by[n].bc++; });
   var chot = {}, cd = {};
@@ -853,8 +897,8 @@ function baoCao_(t) {
 function baoCaoToi() { baoQL_(baoCao_(Date.now())); }
 /* Xếp hạng 7 ngày gần nhất: tỷ lệ nhận đúng hạn, báo cáo đúng hạn, chuyển đổi, chốt */
 function baoCaoTuan_(t) {
-  var tu = t - 7 * 86400000, by = {};
-  var nk = rows_('NhatKy', T_NK).filter(function (r) { return ms(r.thoi_gian) >= tu && ms(r.thoi_gian) <= t; });
+  var tu = t - 7 * 86400000, by = {}, thu = maKhachThu_();
+  var nk = rows_('NhatKy', T_NK).filter(function (r) { return ms(r.thoi_gian) >= tu && ms(r.thoi_gian) <= t && !thu[r.khach]; });
   nk.forEach(function (r) {
     var n = r.nguoi; if (!n || n === 'hệ thống' || n === 'quản lý') return;
     var b = by[n] = by[n] || {giao: 0, nhan: 0, khongNhan: 0, khongBc: 0, cd: 0, chot: 0};
