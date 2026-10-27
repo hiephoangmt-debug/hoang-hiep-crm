@@ -72,13 +72,13 @@ def tiles(pos='tr'):
 
 PAGES = [('/', 'Tổng quan'), ('/bang-gia', 'Bảng giá'), ('/mat-bang', 'Mặt bằng'), ('/phap-ly', 'Pháp lý'), ('/quy-hoach', 'Quy hoạch'), ('/cho-thue', 'Cho thuê'), ('/tinh-dong-tien', 'Tính dòng tiền')]
 
-def header(cur, base, logo, cta='#dang-ky'):
-    nav = ''.join('<a href="%s%s"%s>%s</a>' % (base, p if p != '/' else '/', ' aria-current="page"' if p == cur else '', t)
+def header(cur, base, logo, cta='#dang-ky', menu=True):
+    nav = '' if not menu else ''.join('<a href="%s%s"%s>%s</a>' % (base, p if p != '/' else '/', ' aria-current="page"' if p == cur else '', t)
                   for p, t in PAGES)
     return ('<header class="top"><div class="wrap tb">'
-            '<a class="lgc" href="%s/" aria-label="Sun Saphia Residence – trang chủ"><img src="%s" alt="" width="40" height="57"><span>SUN SAPHIA<i>RESIDENCE</i></span></a>'
-            '<nav class="mnav" aria-label="Các trang dự án">%s</nav>'
-            '<a class="tcta" href="%s">Nhận bảng giá</a></div></header>') % (base, logo, nav, cta)
+            '<a class="lgc" href="%s" aria-label="Sun Saphia Residence – trang chủ"><img src="%s" alt="" width="40" height="57"><span>SUN SAPHIA<i>RESIDENCE</i></span></a>'
+            + ('<nav class="mnav" aria-label="Các trang dự án">%s</nav>' % nav if menu else '') +
+            '<a class="tcta" href="%s">Nhận bảng giá</a></div></header>') % ((base + '/') if menu else '#dau-trang', logo, cta)
 
 def crumbs(items):
     """items: [(tên, url)] – mục cuối là trang hiện tại."""
