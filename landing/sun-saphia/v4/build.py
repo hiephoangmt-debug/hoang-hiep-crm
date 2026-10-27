@@ -579,11 +579,11 @@ def tai_chinh(ctx='ADS'):
             '<div class="tcc"><span>Khi nhận nhà</span><b>Phần còn lại</b><p><strong>75% giá căn</strong> · theo chính sách chủ đầu tư, Vietcombank, BIDV, NCB hỗ trợ vay</p></div></div>'
             '<div class="tcal"><div class="tcl"><label for="tcv">Giá căn anh/chị quan tâm: <b id="tcvv">2,1 tỷ</b></label>'
             '<input type="range" id="tcv" min="2" max="6" step="0.1" value="2.1" aria-label="Giá căn (tỷ đồng)"></div>'
-            '<div class="tcr"><div><small>25% đến khi nhận nhà</small><b id="tc25">525 triệu</b></div><div><small>Chia đều ~24 tháng, mỗi tháng khoảng</small><b id="tcm">22 triệu</b></div></div></div>'
+            '<div class="tcr"><div><small>25% đến khi nhận nhà</small><b id="tc25">525 triệu</b></div></div></div>'
             '<p class="src" style="margin-top:10px">Ước tính để anh/chị hình dung dòng tiền; giá, tiến độ và chính sách chính thức theo công bố của chủ đầu tư tại sự kiện ra mắt 01/11/2026.</p>'
             '<div class="hcta" style="justify-content:center"><button type="button" class="btn" data-pop data-interest="' + ctx + ' – nhận bảng giá &amp; lịch thanh toán 25%">Nhận bảng giá &amp; lịch thanh toán chi tiết</button></div>'
             '<script>(function(){var r=document.getElementById("tcv");if(!r)return;function f(x){return x>=1000?(x/1000).toFixed(2).replace(".",",").replace(/,?0+$/,"")+" tỷ":Math.round(x)+" triệu"}'
-            'function u(){var v=parseFloat(r.value),q=v*1000*0.25;document.getElementById("tcvv").textContent=v.toFixed(1).replace(".",",")+" tỷ";document.getElementById("tc25").textContent=f(q);document.getElementById("tcbig").textContent=f(q);document.getElementById("tcm").textContent=Math.round(q/24)+" triệu"}'
+            'function u(){var v=parseFloat(r.value),q=v*1000*0.25;document.getElementById("tcvv").textContent=v.toFixed(1).replace(".",",")+" tỷ";document.getElementById("tc25").textContent=f(q);document.getElementById("tcbig").textContent=f(q)}'
             'r.addEventListener("input",u);u()})();</script>'
             '</div></section>')
 
