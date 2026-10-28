@@ -141,8 +141,10 @@ function FI(name){ return FLN.indexOf(String(name)); }
 
 // Đường bao mặt bằng tầng 8–19 Tòa F2 đo trên bản vẽ CĐT (tỷ lệ ~14,4 px/m, đối chiếu diện tích từng căn):
 // X: trái→phải bản vẽ (mét), Y: trên→dưới bản vẽ; khối hình chữ U, sân trống quay lên phía trên bản vẽ (Đông Bắc)
-var F2PTS=[[0,0],[19.4,0],[19.4,15.5],[43.2,15.5],[43.2,0],[62.6,0],[62.6,41.7],[43.2,41.7],[43.2,39.4],[19.4,39.4],[19.4,41.7],[0,41.7]];
-var F2W=62.6, F2D=41.7;
+// F2: đường bao lấy từ mặt bằng tầng 8–19 của CĐT (plans-data.js, tỷ lệ theo diện tích thông thủy từng căn)
+var F2B=(window.FS_PLANS&&FS_PLANS.F2)?FS_PLANS.F2.bands.filter(function(b){ return b.key==='F2_8'; })[0]:null;
+var F2PTS=F2B?F2B.foot:[[0,0],[19.4,0],[19.4,15.5],[43.2,15.5],[43.2,0],[62.6,0],[62.6,41.7],[43.2,41.7],[43.2,39.4],[19.4,39.4],[19.4,41.7],[0,41.7]];
+var F2W=F2B?FS_PLANS.F2.W:62.6, F2D=F2B?FS_PLANS.F2.D:41.7;
 // offset đa giác vuông góc (g>0: nới ra ngoài)
 function offsetPts(P,g){ var n=P.length, out=[], area=0; for(var i=0;i<n;i++){ var a=P[i], b=P[(i+1)%n]; area+=a[0]*b[1]-b[0]*a[1]; } var s=area>0?1:-1;
   for(var i=0;i<n;i++){ var p=P[(i-1+n)%n], c=P[i], q=P[(i+1)%n];
@@ -229,7 +231,8 @@ function inPoly(x,y,P){ var c=false; for(var i=0,j=P.length-1;i<P.length;j=i++){
 // Bố trí 4 tòa quanh giao lộ Nguyễn Phước Lan – Minh Mạng (theo sơ đồ 4 tòa của CĐT):
 // F2 góc trên-phải, F1 trên-trái, F5 dưới-trái, F3 dưới-phải. Mặt dưới bản vẽ F2 nhìn ra Nguyễn Phước Lan, mặt trái nhìn ra Minh Mạng.
 // Vị trí đo trên phối cảnh nhìn từ trên cao của CĐT (~4,47 px/m, đối chiếu bề ngang F2 = 62,6 m): mép tháp cách tim giao lộ ~20 m.
-var F2=makeTower('F2',F2PTS,F2W,F2D, 20+F2W/2, -(20.6+F2D/2), 0, {podBot:2.3, cores:[[25,30],[38,30]]});
+var F2G=(function(){ var B=window.FS_PLANS&&FS_PLANS.F2&&FS_PLANS.F2.bands.filter(function(b){ return b.key==='F2_5'; })[0]; return B&&B.gardens.length?B.gardens:null; })();
+var F2=makeTower('F2',F2PTS,F2W,F2D, 20+F2W/2, -(20.6+F2D/2), 0, {r:F2B?.6:2.5, podBot:2.3, gardens:F2G, cores:[[F2W*.4,F2D*.7],[F2W*.6,F2D*.7]]});
 // Tòa F1, F5: đường bao lấy trực tiếp từ bản vẽ mặt bằng CĐT (plans-data.js): tách vùng màu căn hộ + tường,
 // quy ra mét theo diện tích thông thủy CĐT ghi trên từng căn (sai số tỷ lệ ~0,5%). Gốc toạ độ = góc trên-trái thân tháp.
 var PL=window.FS_PLANS||{};
@@ -445,7 +448,7 @@ var vtmp=new THREE.Vector3();
 function eyeOnTower(f,dirScene){
   var inv=new THREE.Quaternion(); T.getWorldQuaternion(inv); inv.invert();
   var d=dirScene.clone().setY(0).normalize().applyQuaternion(inv);   // hướng trong khung tháp (x: phải bản vẽ, z: xuống bản vẽ)
-  var o=[F2.cx,27.5], best=1e9;   // tâm khối giữa (toạ độ bản vẽ)
+  var o=[F2.cx,F2D*.72], best=1e9;   // tâm khối giữa (toạ độ bản vẽ)
   for(var i=0;i<F2PTS.length;i++){ var a=F2PTS[i], b=F2PTS[(i+1)%F2PTS.length], ex=b[0]-a[0], ey=b[1]-a[1], den=d.x*ey-d.z*ex; if(Math.abs(den)<1e-9) continue;
     var t=((a[0]-o[0])*ey-(a[1]-o[1])*ex)/den, u=((a[0]-o[0])*d.z-(a[1]-o[1])*d.x)/den; if(t>0&&u>=0&&u<=1&&t<best) best=t; }
   if(best>1e8) best=10; best+=1.5;   // đứng ngay mép ban công, ngoài hàng khung trắng – không bị cột che
@@ -545,9 +548,9 @@ if(/[?&]close/.test(location.search)) setMode('close');
 (function(){
   var panel=document.getElementById('plan'); if(!panel||!window.FS_PLANS) return;
   var svg=document.getElementById('planSvg'), selF=document.getElementById('planFloor'), card=document.getElementById('unitCard'), bPlan=document.getElementById('mPlan');
-  var NS='http://www.w3.org/2000/svg', TYPEC={'STU':'#86b5c6','1PN':'#bf8f78','1PN+':'#5d8f46','2PN':'#f6b625','3PN':'#ee6b4d'};
+  var NS='http://www.w3.org/2000/svg', TYPEC={'STU':'#86b5c6','1PN':'#bf8f78','1PN+':'#5d8f46','2PN':'#f6b625','3PN':'#ee6b4d','P':'#a993d6'};
   var TNAME={'STU':'Studio','1PN':'1 phòng ngủ','1PN+':'1 phòng ngủ + 1','2PN':'2 phòng ngủ','2PN+':'2 phòng ngủ + 1','3PN':'3 phòng ngủ'};
-  var TW={F1:F1,F5:F5}, cur={t:'F1',f:FI('12')};
+  var TW={F1:F1,F2:F2,F5:F5}, cur={t:'F2',f:FI('12')};
   // tên tầng có trong bản vẽ từng tòa (tầng 2 → 19)
   function floorsOf(t){ var out=[]; for(var f=2;f<=19;f++) if(band(t,FN(f))) out.push(f); return out; }
   function upBrg(t){ return PL[t].up==='NW'?BRG-90:BRG; }   // hướng (độ) của phía trên tờ bản vẽ
@@ -595,7 +598,7 @@ if(/[?&]close/.test(location.search)) setMode('close');
     card.querySelector('.c-rows').innerHTML=rows.map(function(r){ return '<div><span>'+r[0]+'</span><b>'+r[1]+'</b></div>'; }).join('');
     var z=card.querySelector('.c-zalo'); z.href='https://zalo.me/0904567009';
     card.querySelector('.c-view').onclick=function(){ viewFrom(u,fs); };
-    var ni=card.querySelector('.c-int'); if(ni){ var bk=(band(cur.t,FN(cur.f))||{}).key, GK={F1_3:'F1_3',F1_4:'F1_4',F5_3:'F5_3',F5_4:'F5_3',F5_16:'F5_16'}, uk=(GK[bk]?GK[bk]:cur.t)+'-'+u.code; ni.href='https://raw.githack.com/hiephoangmt-debug/hoang-hiep-crm/telegram-notify/projects/fours/interior/interior.html?u='+encodeURIComponent(uk)+'&view=plan'; }
+    var ni=card.querySelector('.c-int'); if(ni){ var bk=(band(cur.t,FN(cur.f))||{}).key, GK={F1_3:'F1_3',F1_4:'F1_4',F5_3:'F5_3',F5_4:'F5_3',F5_16:'F5_16',F2_3:'F2_3',F2_3A:'F2_3A',F2_5:'F2_5',F2_6:'F2_6',F2_7:'F2_7'}, uk=(GK[bk]?GK[bk]:cur.t)+'-'+u.code; ni.href='https://raw.githack.com/hiephoangmt-debug/hoang-hiep-crm/telegram-notify/projects/fours/interior/interior.html?u='+encodeURIComponent(uk)+'&view=plan'; }
     card.querySelector('.c-view').disabled=!fs.length;
     card.hidden=false;
   }
@@ -614,12 +617,12 @@ if(/[?&]close/.test(location.search)) setMode('close');
   function cut3d(){ while(cutG.children.length){ var o=cutG.children.pop(); if(o.geometry) o.geometry.dispose(); }
     if(panel.hidden&&!panel.classList.contains('mini')){ CLIP.constant=1e5; cutG.visible=false; return; }
     var f=cur.f, y=FL[f]; CLIP.constant=y+1.25; cutG.visible=true;
-    ['F1','F5'].forEach(function(t){ var B=band(t,FN(f)), T0=TW[t]; if(!B) return; var g=new THREE.Group(); g.position.copy(T0.grp.position); g.rotation.y=T0.rotY; cutG.add(g);
+    ['F1','F2','F5'].forEach(function(t){ var B=band(t,FN(f)), T0=TW[t]; if(!B) return; var g=new THREE.Group(); g.position.copy(T0.grp.position); g.rotation.y=T0.rotY; cutG.add(g);
       var fl=new THREE.ExtrudeGeometry(shapeOf(B.foot,.3,T0.cx,T0.cy),{depth:.3,bevelEnabled:false}); fl.rotateX(-Math.PI/2); var fm=new THREE.Mesh(fl,M(0xf4f1ea)); fm.position.y=y; g.add(fm);
       B.units.forEach(function(u){ var ge=new THREE.ExtrudeGeometry(shapeOf(u.poly,.05,T0.cx,T0.cy),{depth:1.15,bevelEnabled:false}); ge.rotateX(-Math.PI/2);
         var mm=new THREE.Mesh(ge,M(new THREE.Color(TYPEC[u.color]||'#ccc').getHex(),{roughness:.7})); mm.position.y=y+.3; mm.castShadow=true; g.add(mm); }); });
     // các tòa khác: nắp sàn để thấy rõ mặt cắt
-    [F2,F3].forEach(function(T0){ var fl=new THREE.ExtrudeGeometry(shapeOf(T0.P,2.5,T0.cx,T0.cy),{depth:.3,bevelEnabled:false}); fl.rotateX(-Math.PI/2); var g=new THREE.Mesh(fl,M(0xe9e5dc)); g.position.set(T0.grp.position.x,y+1.2,T0.grp.position.z); g.rotation.y=T0.rotY; cutG.add(g); });
+    [F3].forEach(function(T0){ var fl=new THREE.ExtrudeGeometry(shapeOf(T0.P,2.5,T0.cx,T0.cy),{depth:.3,bevelEnabled:false}); fl.rotateX(-Math.PI/2); var g=new THREE.Mesh(fl,M(0xe9e5dc)); g.position.set(T0.grp.position.x,y+1.2,T0.grp.position.z); g.rotation.y=T0.rotY; cutG.add(g); });
   }
   function fillFloors(){ var fs=floorsOf(cur.t); if(fs.indexOf(cur.f)<0) cur.f=fs.indexOf(FI('12'))>=0?FI('12'):fs[fs.length-1];
     selF.innerHTML=fs.map(function(f){ return '<option value="'+f+'"'+(f===cur.f?' selected':'')+'>Tầng '+FN(f)+'</option>'; }).join(''); }
@@ -636,7 +639,7 @@ if(/[?&]close/.test(location.search)) setMode('close');
   card.querySelector('.c-x').onclick=function(){ card.hidden=true; if(selU) selU.classList.remove('on'); };
   panel.querySelectorAll('[data-t]').forEach(function(b){ b.onclick=function(){ setTower(b.getAttribute('data-t')); }; });
   selF.onchange=function(){ cur.f=+selF.value; floorEl.value=cur.f; setFloor(cur.f); draw(); flyPlan(); };
-  var pm=/[?&]plan=(F[15])(?:-([0-9A]+))?/.exec(location.search); if(pm){ cur.t=pm[1]; if(pm[2]&&FI(pm[2])>0) cur.f=FI(pm[2]); setTimeout(function(){ openPlan(); setTower(cur.t); },300); }
+  var pm=/[?&]plan=(F[125])(?:-([0-9A]+))?/.exec(location.search); if(pm){ cur.t=pm[1]; if(pm[2]&&FI(pm[2])>0) cur.f=FI(pm[2]); setTimeout(function(){ openPlan(); setTower(cur.t); },300); }
   function sync(f){ if(panel.hidden) return; if(floorsOf(cur.t).indexOf(f)<0) return; cur.f=f; fillFloors(); draw(); }
   window.__fsPlan={open:openPlan,close:closePlan,setTower:setTower,sync:sync};
 })();

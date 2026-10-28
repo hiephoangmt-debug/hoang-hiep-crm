@@ -2,7 +2,7 @@
 import sys, json, subprocess, numpy as np
 from PIL import Image, ImageFilter
 CC=sys.argv[0].rsplit('/',1)[0]+'/cc'
-COL={'STU':(119,166,182),'1PN':(182,132,109),'1PN+':(64,108,49),'2PN':(252,184,23),'3PN':(240,109,79)}
+COL={'STU':(119,166,182),'1PN':(182,132,109),'1PN+':(64,108,49),'2PN':(252,184,23),'3PN':(240,109,79),'P':(155,130,195)}
 def label(mask):
     H,W=mask.shape; r=subprocess.run([CC,str(W),str(H)],input=mask.astype(np.uint8).tobytes(),capture_output=True,check=True)
     return np.frombuffer(r.stdout,dtype=np.int32).reshape(H,W)

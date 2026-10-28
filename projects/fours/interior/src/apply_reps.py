@@ -31,13 +31,14 @@ def wallmask(code,b,op,N=96,src=None):
         a=f((x0-b[0])/(b[2]-b[0]),(y0-b[1])/(b[3]-b[1])); c=f((x1-b[0])/(b[2]-b[0]),(y1-b[1])/(b[3]-b[1]))
         g.rectangle([min(a[0],c[0])*N,min(a[1],c[1])*N,max(a[0],c[0])*N,max(a[1],c[1])*N],fill=1)
     m=np.asarray(im).astype(bool); return m
+TOLD=0.06
 def best_op(rp,sp,rk=None,sk=None):
     rb,sb=bb(rp),bb(sp); ms=mask(sp,sb,'id'); best=(0,None)
     wsb=wallmask(sk,sb,'id') if sk else None
     for op in OPS:
         swap=op in('r90','r270','tr','atr'); rw,rh=rb[2]-rb[0],rb[3]-rb[1]; sw,sh=sb[2]-sb[0],sb[3]-sb[1]
         if swap: rw,rh=rh,rw
-        if abs(rw-sw)>0.06*sw or abs(rh-sh)>0.06*sh: continue
+        if abs(rw-sw)>TOLD*sw or abs(rh-sh)>TOLD*sh: continue
         mr=mask(rp,rb,op); iou=(mr&ms).sum()/max(1,(mr|ms).sum())
         if sk:
             from PIL import ImageFilter
@@ -53,16 +54,18 @@ units={c:D[c]['unit'] for c in D}; runits={c:REPD[c]['unit'] for c in REPD}
 out={}
 for code,R in D.items():
     u=units[code]; cands=[]
-    for rk,rep in REPS.items():
-        selfk=rep.get('self')
-        if selfk:
-            if selfk!=code or rep.get('floor')!=FLOOR: continue
-            ru=units[code]
-        elif rk not in runits or (rep.get('floor') and rep.get('floor')!=FLOOR): continue
-        else: ru=runits[rk]
-        if ru['type']!=u['type'] or abs(ru['tt']-u['tt'])>0.08*u['tt']: continue
-        iou,op=best_op(ru['polyPx'],u['polyPx'],None if selfk else rk,None if selfk else code) if not selfk else (1.0,'id')
-        if op: cands.append((iou,rk,op))
+    for TOLA,TOLD in ((0.08,0.06),(0.16,0.14),(0.16,0.2)):   # lần 2: nới dung sai cho căn tầng sân vườn bị cắt góc
+      if cands: break
+      for rk,rep in REPS.items():
+          selfk=rep.get('self')
+          if selfk:
+              if selfk!=code or rep.get('floor')!=FLOOR: continue
+              ru=units[code]
+          elif rk not in runits or (rep.get('floor') and rep.get('floor')!=FLOOR): continue
+          else: ru=runits[rk]
+          if ru['type']!=u['type'] or abs(ru['tt']-u['tt'])>TOLA*u['tt']: continue
+          iou,op=best_op(ru['polyPx'],u['polyPx'],None if selfk else rk,None if selfk else code) if not selfk else (1.0,'id')
+          if op: cands.append((iou,rk,op))
     if not cands: print('!! không có mẫu cho',code,u['type']); continue
     iou,rk,op=max(cands); rep=REPS[rk]; sk=rep.get('self'); RR=D[sk] if sk else REPD[rk]
     rb,sb=bb((units[sk] if sk else runits[rk])['polyPx']),bb(u['polyPx']); f=OPS[op]

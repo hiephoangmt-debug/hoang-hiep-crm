@@ -12,7 +12,8 @@ def dp(pts,eps):
         return rec(a,a+1+i)+rec(a+1+i,b) if dist[i]>eps else [a]
     P=np.vstack([pts,pts[:1]]); pts=P; m=int(np.hypot(*(P-P[0]).T).argmax())
     idx=rec(0,m)+rec(m,len(P)-1); return [[round(float(pts[i][0]),2),round(float(pts[i][1]),2)] for i in idx]
-TOW={'F1':{'up':'NE','bands':[('F1_2',['2']),('F1_3',['3']),('F1_4',['3A','5','6','7']),('F1_8',['8','9','10','11','12','12A','15','16','17','18','19'])],'ref':'F1_8'},
+TOW={'F2':{'up':'NE','perband':True,'bands':[('F2_3',['3']),('F2_3A',['3A']),('F2_5',['5']),('F2_6',['6']),('F2_7',['7']),('F2_8',['8','9','10','11','12','12A','15','16','17','18','19'])],'ref':'F2_8'},
+     'F1':{'up':'NE','bands':[('F1_2',['2']),('F1_3',['3']),('F1_4',['3A','5','6','7']),('F1_8',['8','9','10','11','12','12A','15','16','17','18','19'])],'ref':'F1_8'},
      'F5':{'up':'NW','bands':[('F5_2',['2']),('F5_3',['3']),('F5_4',['3A','5','6','7']),('F5_8',['8','9','10','11','12','12A','15']),('F5_16',['16']),('F5_17',['17','18','19'])],'ref':'F5_8'}}
 IMG={}
 out={}
@@ -28,6 +29,10 @@ for t,cfg in TOW.items():
     T={'up':cfg['up'],'mpp':round(mpp,5),'originPx':[ox,oy],'W':round((max(fx)-ox)*mpp,2),'D':round((max(fy)-oy)*mpp,2),'bands':[]}
     for k,floors in cfg['bands']:
         d=D[k]; name=f"{t}-{k.split('_')[1]}.jpg"; IMG[name]=d['img']
+        if cfg.get('perband'):   # mỗi tờ một tỷ lệ: tính riêng, gốc = góc trên-trái đường bao tháp của tờ đó
+            mpp=float(np.median([np.sqrt(u['tt']/area(u['polyPx'])) for u in d['units']]))
+            fx=[p[0] for p in d['footPx']]; fy=[p[1] for p in d['footPx']]; ox,oy=min(fx),min(fy)
+            if k==cfg['ref']: T.update(mpp=round(mpp,5),W=round((max(fx)-ox)*mpp,2),D=round((max(fy)-oy)*mpp,2))
         T['bands'].append({'key':k,'floors':floors,'src':d['img'],
           'foot':m(d['footPx'],.25),'gardens':[m(g,.25) for g in d['gardensPx']],
           'units':[{'code':u['code'],'type':u['type'],'color':u['color'],'tt':u['tt'],**({'tim':u['tim']} if 'tim' in u else {}),**({'san':u['san']} if 'san' in u else {}),
