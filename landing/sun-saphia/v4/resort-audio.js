@@ -68,13 +68,7 @@ function SSResort(C, out) {
     piano(c.lh[3], hum(t + BEAT * 2), 0.11);
     piano(c.lh[1], hum(t + BEAT * 2.5), 0.1);
     piano(c.lh[2], hum(t + BEAT * 3), 0.1);
-    /* tay phải: giai điệu đi từng bậc, cuối câu ngân dài */
-    var beats = phraseEnd ? [0, 2] : (Math.random() < 0.5 ? [0, 1.5, 2.5] : [0, 1, 2, 3]);
-    beats.forEach(function (bt, k) {
-      if (k > 0 && Math.random() < 0.15) return;
-      pos = Math.max(0, Math.min(c.rh.length - 1, pos + [-1, -1, 0, 1, 1, -2, 2][Math.floor(Math.random() * 7)]));
-      piano(c.rh[pos], hum(t + bt * BEAT + 0.02), 0.2 + Math.random() * 0.04);
-    });
+    /* đã bỏ tay phải (nốt cao) theo yêu cầu – chỉ giữ rải hợp âm quãng trầm */
     if (idx % 2 === 0) wv(t + 0.5);
     idx++;
   }
