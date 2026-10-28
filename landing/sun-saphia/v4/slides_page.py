@@ -14,6 +14,11 @@ BLOB = {  # ảnh trong bộ slide → ảnh dự án trên GitHub
     'e517c482f01cd18fef7a51cba73cc2d7': 'khach-du-lich-900.webp',
     'b1d35360fb183472b182e57f9fcf6e22': 'thap-bien-hoang-hon-900.webp',
 }
+
+D4 = ('<section class="sec alt" id="xem-4d"><div class="wrap"><span class="ey">Mô hình 3D · 4D minh họa</span>'
+      '<h2 class="dp" style="margin:6px 0 10px">Xoay tòa tháp, xem <b>nắng theo giờ</b> và view từ căn</h2>'
+      '<p class="lead" style="margin:0 0 16px">Chọn tầng, kéo để xoay, xem hướng biển và hướng nắng. Mô hình dựng lại để minh họa, không phải bản vẽ thiết kế của chủ đầu tư.</p>'
+      '<div id="chon-can"></div></div></section>')
 FONTS = '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=Playfair+Display:wght@500..800&display=swap">'
 # Chỗ để trống trong slide chỉ dành cho sale; bản cho khách bỏ đi
 KHACH_FIX = [(' [__ triệu] trước khi cho thuê', ' trước khi cho thuê')]
@@ -100,6 +105,7 @@ def viewer(slides, ctx, notes=False, pdf=True):
         items += '<div class="sp-it"><div class="sp-s" aria-label="Slide %d"><div class="sp-c">%s</div><span class="sp-n">%d/%d</span></div>%s</div>' % (n, h, n, len(slides), nt)
     bar = ('<div class="sp-bar"><button type="button" data-sp-play>▶ Trình chiếu toàn màn hình</button>'
            + ('<button type="button" class="alt" data-sp-pdf>⬇ Tải về (PDF)</button>' if pdf else '')
+           + '<a href="#xem-4d" style="font-weight:700;font-size:15px;border-radius:999px;padding:11px 20px;background:#16406A;color:#F7F3EC;text-decoration:none">🧭 Xem 3D · 4D</a>'
            + '<small>%d slide · chạm vào slide để phóng to, vuốt để chuyển</small></div>' % len(slides))
     return CSS + '<div class="sp" id="sp" data-ctx="%s">%s<div class="sp-list">%s</div></div>' % (ctx, bar, items) + JS
 
@@ -115,13 +121,13 @@ def trinh_chieu(page, ORG, RES):
     b = ('<section class="sec" style="padding-top:28px"><div class="wrap" style="max-width:1240px">'
          '<span class="ey">Trình chiếu · 22 slide</span><h1 class="dp" style="margin:6px 0 10px">Sun Saphia – <b>bài toán đầu tư</b> căn hộ mặt biển</h1>'
          '<p class="lead" style="margin:0 0 18px">Thị trường, sản phẩm, giá tham khảo, dòng tiền cho thuê và so sánh với khách sạn, villa. Giá là giá tham khảo từ chủ đầu tư, bài toán là minh họa, không phải cam kết.</p></div>'
-         + viewer(fixed, 'khach') + '</section>'
-         '<section class="sec alt" id="dang-ky"><div class="wrap" style="max-width:640px">'
+         + viewer(fixed, 'khach') + '</section>' + D4 +
+         '<section class="sec" id="dang-ky"><div class="wrap" style="max-width:640px">'
          + form('tc', 'Trình chiếu – nhận bảng tính', title='Nhận bảng tính dòng tiền đúng căn anh/chị chọn',
                 note='Bảng tính theo giá thật khi chủ đầu tư công bố, mặt bằng 3D và lịch sự kiện – gửi qua Zalo.', btn='Nhận qua Zalo')
          + '</div></section>')
     return page('/trinh-chieu', title, desc, 'slide sun saphia, bài toán đầu tư sun saphia, giá thuê khách sạn đà nẵng, so sánh khách sạn mini villa đà nẵng',
-                b, [], '/trinh-chieu').replace('</head>', FONTS + '\n</head>', 1)
+                b, [], '/trinh-chieu', tools=True).replace('</head>', FONTS + '\n</head>', 1)
 
 GATE = '''<section class="sec" id="sp-gate" style="padding-top:40px"><div class="wrap" style="max-width:560px">
 <span class="ey">Tài liệu nội bộ đội sale</span><h1 class="dp" style="margin:6px 0 10px">Đào tạo sale <b>Sun Saphia</b></h1>
@@ -153,5 +159,5 @@ def dao_tao(head, header, tail, FAV, OG, LOGO):
     html += ('<body>\n' + header('/dao-tao-sale', MAIN, LOGO, menu=False, cta='https://zalo.me/0904567009') + '\n<main id="dau-trang">' + GATE
              + '<section class="sec" id="sp-main" style="display:none;padding-top:28px"><div class="wrap" style="max-width:1240px"><span class="ey">Đào tạo sale · 31 slide</span>'
              '<h1 class="dp" style="margin:6px 0 16px">Sun Saphia – <b>tài liệu đào tạo</b></h1></div>'
-             + viewer(slides, 'dao-tao', notes=True) + '</section></main>\n' + tail(False) + GATE_JS + '</body>\n</html>\n')
+             + viewer(slides, 'dao-tao', notes=True) + D4 + '</section></main>\n' + tail(True) + GATE_JS + '</body>\n</html>\n')
     return html.replace('>Nhận bảng giá</a></div></header>', '>Zalo anh Hiệp</a></div></header>')
