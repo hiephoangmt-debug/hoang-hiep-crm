@@ -52,6 +52,18 @@ function hh_posts_kinh_te_dem_my_khe( $posts ) {
 <li><strong>Dải ven biển phía Nam Võ Nguyên Giáp – Trường Sa:</strong> việc đấu giá khai thác dịch vụ bãi biển dọc toàn tuyến giúp bờ biển sôi động hơn cả về đêm; các dự án căn hộ mặt biển như <a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a> (giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận) nằm trên cùng trục.</li>
 <li><strong>Cần thận trọng:</strong> dự án mới ở bước chủ trương – đề xuất; tiến độ thực tế phụ thuộc thủ tục đầu tư, đất đai. Không nên trả giá cao chỉ vì "sắp có phố đêm" khi chưa có giấy phép.</li>
 </ul>
+<h2>Ảnh hưởng đến Sun Saphia Residence</h2>
+<p><a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a> nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, cùng trục biển với khu đề xuất ở 268 Võ Nguyên Giáp. Theo nhận định của Hoàng Hiệp:</p>
+<table>
+<thead><tr><th>Yếu tố</th><th>Tác động tới Sun Saphia</th></tr></thead>
+<tbody>
+<tr><td>Tổ hợp kinh tế đêm 268 Võ Nguyên Giáp (đề xuất)</td><td>Thêm một điểm vui chơi, ăn uống buổi tối gần dự án – theo tài liệu dự án, từ Saphia tới khu An Thượng khoảng 5–10 phút đi ô tô. Đủ gần để đi chơi, nhưng không sát vách nên dự án vẫn giữ được sự yên tĩnh.</td></tr>
+<tr><td>Đấu giá khai thác dịch vụ bãi biển tuyến Hoàng Sa – Võ Nguyên Giáp – Trường Sa</td><td>Tuyến này đi qua đoạn biển trước dự án. Cùng với công viên công cộng 2,45 ha và bãi tắm Sơn Thủy (khoảng 400 m), mặt biển trước Saphia có thể sôi động hơn, có dịch vụ cả buổi tối.</td></tr>
+<tr><td>Cho thuê ngắn ngày</td><td>Khách du lịch thường chọn nơi ở gần chỗ chơi buổi tối. Căn studio, 1PN của Saphia – nhóm hay cho thuê theo đêm – có thêm điểm cộng khi giới thiệu cho khách. Xem <a href="/du-an/sun-saphia-residence/cho-thue/">bài toán cho thuê Sun Saphia</a>.</td></tr>
+<tr><td>Rủi ro</td><td>Tổ hợp mới là đề xuất, chưa cấp phép; mốc khởi công 11/2026 là kế hoạch doanh nghiệp. Ngược lại, khu vui chơi đông khách cũng có thể kéo theo tiếng ồn, kẹt xe giờ cao điểm trên Võ Nguyên Giáp.</td></tr>
+</tbody>
+</table>
+<p>Tóm lại: tin này là điểm cộng về <strong>trải nghiệm và khả năng cho thuê</strong> cho các dự án ven biển Ngũ Hành Sơn, trong đó có Sun Saphia, nhưng chưa nên xem là lý do để trả giá cao hơn khi dự án kinh tế đêm chưa có giấy phép.</p>
 <p>Liên quan: <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">Quy hoạch chung Đà Nẵng đến 2050</a> dự báo khoảng 130 – 135 triệu lượt khách lưu trú năm 2050 – nền tảng cho kinh tế đêm ven biển. Cần tư vấn căn hộ ven biển Mỹ Khê, nhắn Zalo Hoàng Hiệp 0904 567 009.</p>
 <p class="src">Nguồn: Báo Đà Nẵng, Tuổi Trẻ, CafeF, Người Quan sát, Cổng TTĐT Bộ Văn hóa, Thể thao và Du lịch (10/2026).</p>
 HTML,
@@ -68,6 +80,7 @@ HTML,
 				array( 'Khu kinh tế đêm biển Mỹ Khê nằm ở đâu?', 'Theo đề xuất, tổ hợp nằm tại 268 Võ Nguyên Giáp, phường Ngũ Hành Sơn, đối diện biển Mỹ Khê, sát khu phố du lịch An Thượng; có đường nội khu nối Trần Bạch Đằng ra Võ Nguyên Giáp.' ),
 				array( 'Khu kinh tế đêm Mỹ Khê đã được cấp phép chưa?', 'Chưa. Ngày 27/10/2026 thành phố mới thống nhất chủ trương và đánh giá cao đề xuất; doanh nghiệp còn phải thực hiện thủ tục chấp thuận đầu tư, cấp phép xây dựng.' ),
 				array( 'Bao giờ khu kinh tế đêm Mỹ Khê hoạt động?', 'Theo kế hoạch doanh nghiệp đưa ra, khu kinh tế đêm khởi công tháng 11/2026 và đón khách từ tháng 4/2027; mốc thực tế phụ thuộc thủ tục đầu tư.' ),
+				array( 'Kinh tế đêm Mỹ Khê ảnh hưởng gì đến Sun Saphia Residence?', 'Sun Saphia cùng trục biển Võ Nguyên Giáp, cách khu An Thượng khoảng 5–10 phút đi ô tô (theo tài liệu dự án). Thêm điểm vui chơi buổi tối và dịch vụ bãi biển là điểm cộng cho ở và cho thuê ngắn ngày; tuy nhiên tổ hợp kinh tế đêm mới là đề xuất, chưa cấp phép.' ),
 			),
 		),
 		'sources'   => array(

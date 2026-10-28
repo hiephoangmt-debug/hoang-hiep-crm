@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.45** + plugin Hoàng Hiệp CRM **2.20.93**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.45** + plugin Hoàng Hiệp CRM **2.20.94**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.94: tác động tới Sun Saphia (28/10/2026)
+
+- Bài Kinh tế đêm biển Mỹ Khê: thêm mục "Ảnh hưởng đến Sun Saphia Residence" (bảng 4 yếu tố: tổ hợp kinh tế đêm, đấu giá dịch vụ bãi biển, cho thuê ngắn ngày, rủi ro) và 1 câu hỏi FAQ.
+- Bài Quy hoạch chung Đà Nẵng 2050: thêm ý về Sun Saphia (trục biển, ga đường sắt đô thị 09, công viên 2,45 ha).
+- Sau khi cài: bấm Nhập / cập nhật dữ liệu – bài cũ tự cập nhật (nếu chưa sửa tay).
 
 ## Có gì mới – plugin 2.20.93: bài Kinh tế đêm biển Mỹ Khê (28/10/2026)
 
