@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.45** + plugin Hoàng Hiệp CRM **2.20.91**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.45** + plugin Hoàng Hiệp CRM **2.20.92**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.92: bài Quy hoạch chung Đà Nẵng 2050 (28/10/2026)
+
+- Bài mới (chuyên mục Hạ tầng & quy hoạch): /quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/ – tóm tắt Quyết định 2016/QĐ-TTg ngày 21/10/2026: phạm vi, dân số 2040–2050, mô hình 3 vùng – 3 cực – 2 trục – 4 hành lang, 30 đô thị, khu lấn biển, cảng – sân bay – đường sắt, phân kỳ; kèm nhận định tác động BĐS (ghi rõ là ý kiến riêng) và FAQ.
+- Số liệu lấy từ Cổng thông tin điện tử TP Đà Nẵng; có ảnh đại diện tự vẽ.
+- Sau khi cài: bấm Nhập / cập nhật dữ liệu, bài đăng ngay.
 
 ## Có gì mới – giao diện 2.15.45: trang Sun Saphia cân đều 2 bên (27/10/2026)
 
