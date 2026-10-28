@@ -747,8 +747,8 @@ def ads(domain):
                      (3, band('Mỗi tầng chỉ vài căn nhìn thẳng ra biển', 'Người đăng ký sớm được gửi mặt bằng trước và ưu tiên chọn căn ngay khi mở bán.', 'Ưu tiên chọn căn', 'ADS – ưu tiên chọn căn')),
                      (6, band('Nhận bảng tính dòng tiền theo căn', 'Giá thuê, lấp đầy, lợi nhuận từng căn – gửi qua Zalo.', 'Nhận bảng tính', 'ADS – bảng tính dòng tiền'))])
     b += cta_block('ADS – form cuối trang')
-    title = 'Sun Saphia Residence – Căn hộ mặt biển Đà Nẵng | Đại lý chính thức TATILAND'
-    desc = 'Căn hộ mặt biển Đà Nẵng: Studio 30m², 1BR+ 50m², 2BR 60–70m², ra biển 400m, công trình cấp I, Vietcombank, BIDV, NCB hỗ trợ vay. Bảng giá gốc từ đại lý chính thức TATILAND.'
+    title = 'Sun Saphia Residence – Căn hộ mặt biển Sun Group Đà Nẵng chỉ từ 1,8 tỷ'
+    desc = 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: Studio chỉ từ ~1,8 tỷ (dự kiến), thanh toán 25% đến khi nhận nhà, vay 70% hỗ trợ lãi suất 24 tháng. Cách biển 400m, công trình cấp I. Zalo 0904 567 009.'
     for frag, sid in [('4 quy hoạch <b>bao quanh dự án</b>', 'quy-hoach'), ('Tiềm năng <b>dòng tiền</b>', 'dong-tien'), ('Công trình <b>cấp I</b>', 'phap-ly')]:
         i = b.find(frag)
         if i > 0:
