@@ -53,7 +53,7 @@ def frame(im,n,photo_note=None):
     d.rounded_rectangle((60,H-90,500,H-24),33,fill=ORANGE)
     d.text((88,H-77),'☎ 0904 567 009',font=F(B,36),fill=WHITE)
     d.text((530,H-86),'Hotline/Zalo · Hoàng Hiệp',font=F(B,26),fill=WHITE)
-    d.text((530,H-50),'chuyên viên tư vấn',font=F(R,22),fill=SOFT)
+    d.text((530,H-50),'Web: sun-saphia-residence.com',font=F(B,22),fill=GOLD)   # link web: mô hình 4D, chọn căn, nội thất
     if photo_note: d.text((60,H-140),photo_note,font=F(R,19),fill=(230,236,244))
     return im
 
@@ -181,10 +181,17 @@ save(im,12)
 
 # 13 CTA
 im=shade(cover(os.path.join(IMG,'ss-thap-hd.webp'),focus=0.6),top=80,bottom=250,start=0.35); d=ImageDraw.Draw(im)
-badge(d,60,560,'Dự kiến mở bán cuối 11/2026')
-y=text(d,60,650,'Nhận bảng giá & mặt bằng Sun Saphia Residence',F(B,58),WHITE)
+badge(d,60,430,'Dự kiến mở bán cuối 11/2026')
+y=text(d,60,520,'Nhận bảng giá & mặt bằng Sun Saphia Residence',F(B,58),WHITE)
 d.rounded_rectangle((60,y+30,W-60,y+140),55,fill=ORANGE); f=F(B,44); s='Nhắn Zalo 0904 567 009'; d.text(((W-d.textlength(s,font=f))//2,y+57),s,font=f,fill=WHITE)
-text(d,60,y+175,'✔ Miễn phí, không thu tiền giữ chỗ\n✔ Tư vấn 1-1, gửi tài liệu chính thức khi có',F(R,32),SOFT)
+y=text(d,60,y+170,'✔ Miễn phí, không thu tiền giữ chỗ\n✔ Tư vấn 1-1, gửi tài liệu chính thức khi có',F(R,32),SOFT)
+# mã QR + link web: xem mô hình 4D, chọn căn theo view, nội thất từng căn
+import qrcode
+URL='https://www.sun-saphia-residence.com/'
+qr=qrcode.QRCode(border=1,box_size=10); qr.add_data(URL); qr.make(fit=True); q=qr.make_image(fill_color=(10,37,64),back_color='white').convert('RGB').resize((176,176),Image.NEAREST)
+cy=min(y+18,H-110-206); d.rounded_rectangle((60,cy,W-60,cy+196),26,fill=(255,255,255)); im.paste(q,(70,cy+10))
+d.text((270,cy+30),'Quét mã: xem mô hình 4D,',font=F(B,32),fill=NAVY); d.text((270,cy+72),'chọn căn & nội thất từng căn',font=F(B,32),fill=NAVY)
+d.text((270,cy+124),'www.sun-saphia-residence.com',font=F(B,30),fill=ORANGE)
 save(im,13)
 
 # contact sheet
