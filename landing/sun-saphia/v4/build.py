@@ -298,10 +298,10 @@ def gia_tang15():
             '<p class="g15lead">Chủ đầu tư vừa đưa giá tham khảo 3 căn Studio ở <b>tầng 15</b>: <b>căn số 15</b>, <b>căn số 09</b> và <b>căn số 24</b> (mã căn = số tầng + số căn, ví dụ 1515 là tầng 15 căn 15). Anh/chị xem vị trí từng căn trên mặt bằng để thấy vì sao <b>cùng diện tích mà giá khác nhau</b>.</p>'
             '<div class="g15w"><figure class="g15m"><img src="' + I + '" width="1500" height="1105" loading="lazy" decoding="async" alt="Mặt bằng tầng điển hình Sun Saphia (áp dụng tầng 15) – vị trí căn 1515, 1509, 1524">' + pins +
             '<figcaption>Mặt bằng tầng điển hình 3A–28 · phía trên là hướng biển</figcaption></figure>'
-            '<div class="g15t"><table><thead><tr><th>Căn</th><th>Vị trí</th><th>Giá tham khảo</th><th>Đơn giá</th><th>Đến khi nhận nhà (25%)</th><th>Vay 70%</th></tr></thead><tbody>' + rows + '</tbody></table>'
-            '<ul class="ck g15why"><li><b>Hướng biển trực diện</b> đắt nhất – mở cửa là thấy biển.</li><li><b>Cánh hông</b> mềm hơn khoảng 0,5 tỷ, vẫn thoáng.</li>'
-            '<li><b>Dãy phía sau</b> giá tốt nhất – hợp mua cho thuê dài hạn.</li><li><b>Tầng thấp hơn</b> mỗi tầng giảm thêm ~10–30 triệu → Studio tầng thấp không sân vườn ước tính <b>chỉ từ ~1,8 tỷ</b>.</li></ul>'
-            '<p class="note">Giá tham khảo chủ đầu tư đưa ra cho tầng 15, theo phương án thanh toán 25% + vay (vay 70%, hỗ trợ lãi suất tới 24 tháng); chưa gồm VAT và phí bảo trì, chưa trừ chiết khấu. Giá chính thức từng căn công bố khi gần mở bán.</p>'
+            '<div class="g15l"><h3 class="g15h">Vì sao cùng 30 m² mà giá khác nhau?</h3><ul class="ck g15why"><li><b>Hướng biển trực diện</b> đắt nhất – mở cửa là thấy biển.</li><li><b>Cánh hông</b> mềm hơn khoảng 0,5 tỷ, vẫn thoáng.</li>'
+            '<li><b>Dãy phía sau</b> giá tốt nhất – hợp mua cho thuê dài hạn.</li><li><b>Tầng thấp hơn</b> mỗi tầng giảm thêm ~10–30 triệu → Studio tầng thấp không sân vườn ước tính <b>chỉ từ ~1,8 tỷ</b>.</li></ul></div>'
+            '<div class="g15t"><table><thead><tr><th>Căn</th><th>Vị trí</th><th>Giá tham khảo</th><th>Đơn giá</th><th>Đến khi nhận nhà (25%)</th><th>Vay 70%</th></tr></thead><tbody>' + rows + '</tbody></table></div><div class="g15r"><p class="g15k">💡 Cùng dòng căn số 24 nhưng ở <b>tầng thấp</b>: chỉ khoảng <b>1,8–2 tỷ</b> → đến khi nhận nhà trả <b>~450–500 triệu</b>.</p>'
+                        '<p class="note">Giá tham khảo chủ đầu tư đưa ra cho tầng 15, theo phương án thanh toán 25% + vay (vay 70%, hỗ trợ lãi suất tới 24 tháng); chưa gồm VAT và phí bảo trì, chưa trừ chiết khấu. Giá chính thức từng căn công bố khi gần mở bán.</p>'
             '<button type="button" class="btn" data-pop data-interest="Bảng giá – giá tầng 15">Nhận giá căn còn trống đúng tầng anh/chị thích</button></div></div></div></section>')
 
 def bang_gia():
