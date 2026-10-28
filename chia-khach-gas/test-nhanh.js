@@ -84,4 +84,9 @@ ok(new Set(nh2).size===nh2.length,'3 khách nhánh 2 chia cho 3 người khác n
 k1=K('K1'); click(k1.nguoi_giu,'n:K1'); run(); click(k1.nguoi_giu,'b:K1:goi'); run();
 advW(14*60*3+5); run(); k1=K('K1');
 ok(Number(k1.nhanh)===3&&!String(k1.da_qua).split(',').includes(k1.nguoi_giu),'nhánh 2 lại 3 ngày chưa chuyển đổi → nhánh 3, giao người chưa từng giữ ('+ten[k1.nguoi_giu]+')');
+// /tailieu: sale và quản lý đều nhận 2 nút Slide chủ đầu tư + Slide nội bộ; người lạ thì không
+msg(3,'/tailieu');run(); let tl=lastTo(3); const btn=JSON.stringify(tl.reply_markup||{});
+ok(/Slide chủ đầu tư/.test(tl.text)&&btn.includes('/trinh-chieu')&&btn.includes('/dao-tao-sale'),'/tailieu (sale): gửi 2 nút Slide chủ đầu tư + Slide nội bộ');
+msg(900,'/tailieu');run(); ok(JSON.stringify(lastTo(900).reply_markup||{}).includes('/dao-tao-sale'),'/tailieu (quản lý) cũng nhận');
+msg(777,'/tailieu');run(); ok(!/trinh-chieu|dao-tao/.test(JSON.stringify(lastTo(777))),'người chưa vào đội gõ /tailieu: không nhận link');
 console.log('\nTỔNG LỖI: '+fails);process.exit(fails?1:0);

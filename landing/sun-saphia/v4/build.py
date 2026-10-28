@@ -1129,6 +1129,9 @@ if __name__ == '__main__':
            'ads.html': ads(MAIN), 'ads-shaphia.html': ads('https://www.sun-shaphiaresidence.com')}
     # Trang chủ tên miền phụ: cùng nội dung, chuẩn hóa về tên miền chính để tránh trùng nội dung
     out['shaphia.html'] = out['trang-chu.html']
+    import slides_page
+    out['trinh-chieu.html'] = slides_page.trinh_chieu(page, ORG, RES)
+    out['dao-tao-sale.html'] = slides_page.dao_tao(head, header, tail, FAV, OG, LOGO)
     for k, v in out.items():
         left = re.findall(r'\{\{|%[sd]\b', v)
         open(OUT + k, 'w', encoding='utf8').write(v)

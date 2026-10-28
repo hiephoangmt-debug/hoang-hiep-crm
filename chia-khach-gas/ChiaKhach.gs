@@ -51,7 +51,9 @@ var MAC_DINH = {
   TOI_DA_CHUA_BAO_CAO_KHAC: 3, // data telesale: mỗi sale giữ tối đa ngần này khách chưa báo cáo, xong mới giao tiếp
   SO_THU: '0904567009',       // số dùng để thử (cách nhau dấu chấm phẩy ; để Sheet không hiểu thành số): bot không chia; đang giữ thì tự huỷ và trả lượt
   DU_AN_CHIA: 'saphia,shaphia', // khách cũ (đã có trong CRM) gửi lại từ web mà "Dự án quan tâm" có chữ này cũng được chia
-  NHOM_RIENG: 'fours,saphia' // khách có chữ này (trang / nhu cầu / nguồn) tính lượt FourS–Saphia; còn lại là dự án khác
+  NHOM_RIENG: 'fours,saphia', // khách có chữ này (trang / nhu cầu / nguồn) tính lượt FourS–Saphia; còn lại là dự án khác
+  SLIDE_CDT: 'https://www.sun-saphia-residence.com/trinh-chieu',    // lệnh /tailieu – slide dự án theo tài liệu chủ đầu tư (gửi khách được)
+  SLIDE_NOI_BO: 'https://www.sun-saphia-residence.com/dao-tao-sale' // lệnh /tailieu – slide nội bộ đào tạo sale (không gửi khách)
 };
 
 var BC = {  // nút báo cáo của sale
@@ -196,6 +198,16 @@ function nhac_(k, text, nut) {
   if (nut) p.reply_markup = {inline_keyboard: nut};
   if (k.msg_id) p.reply_to_message_id = Number(k.msg_id);
   tg_('sendMessage', p);
+}
+/* Lệnh /tailieu: 2 nhóm slide – chủ đầu tư (gửi khách được) và nội bộ (chỉ đội sale) */
+function taiLieu_(chat) {
+  var cdt = cfg('SLIDE_CDT'), nb = cfg('SLIDE_NOI_BO'), nut = [];
+  if (cdt) nut.push([{text: '📊 Slide chủ đầu tư (gửi khách)', url: cdt}]);
+  if (nb) nut.push([{text: '🔒 Slide nội bộ (đào tạo sale)', url: nb}]);
+  gui_(chat, '<b>📁 Tài liệu Sun Saphia</b>\n\n'
+    + '📊 <b>Slide chủ đầu tư</b> – thị trường, sản phẩm, giá tham khảo, dòng tiền, bản đồ giá thuê. Gửi link cho khách được.\n\n'
+    + '🔒 <b>Slide nội bộ</b> – kịch bản tư vấn, 3 khách mẫu, xử lý từ chối, tin nhắn Zalo mẫu. <b>Không gửi khách.</b> Lần đầu mở: nhập tên và số Zalo của bạn.\n\n'
+    + 'Trong trang: bấm ▶ Trình chiếu để chiếu toàn màn hình, ⬇ Tải về để lưu PDF.', nut.length ? nut : null);
 }
 function coNhac_(k, f) { return String(k.nhac || '').split(',').indexOf(f) > -1; }
 function datNhac_(k, f) { var l = String(k.nhac || '').split(',').filter(String); if (l.indexOf(f) < 0) l.push(f); k.nhac = l.join(','); }
@@ -746,6 +758,7 @@ function lenh_(m) {
     }
     if (c === '/them' || c === '/themkhac') { gui_(chat, themKhachTay_(t.replace(/^\S+[ \t]*/, ''), c === '/themkhac' ? 'khac' : '')); return; }
     if (c === '/sale') { gui_(chat, danhSachSale_()); return; }
+    if (c === '/tailieu') { taiLieu_(chat); return; }
     if (c === '/huy') {
       var hk = arg ? timKhach_(arg.toUpperCase().split(/\s+/)[0]) : null;
       if (!hk) { gui_(chat, 'Gõ: <code>/huy K39</code> – huỷ khách thử, trả lại lượt cho sale đã bị giao. Số thử dùng thường xuyên thì thêm vào dòng SO_THU trong tab CauHinh.'); return; }
@@ -770,7 +783,7 @@ function lenh_(m) {
       x.trang_thai = c === '/tam' ? 'nghi' : 'lam'; save_('Sale', T_SALE, x); log_('quản lý', c === '/tam' ? 'tạm dừng' : 'mở lại', '', x.ten);
       gui_(chat, (c === '/tam' ? '⏸ Tạm dừng chia cho ' : '▶️ Mở lại chia cho ') + esc(x.ten)); return;
     }
-    gui_(chat, 'Lệnh quản lý: /them Số Tên - nhu cầu · /themkhac (dự án khác) · /chialai Mã · /huy Mã (khách thử) · /sale · /baocao · /tuan · /tam Tên · /mo Tên · /xoa Tên'); return;
+    gui_(chat, 'Lệnh quản lý: /them Số Tên - nhu cầu · /themkhac (dự án khác) · /chialai Mã · /huy Mã (khách thử) · /sale · /baocao · /tuan · /tam Tên · /mo Tên · /xoa Tên · /tailieu (slide)'); return;
   }
   if (!s || /cho_duyet|tu_choi|nghi_viec/.test(s.trang_thai)) { gui_(chat, 'Nhắn <code>/dangky Tên của bạn</code> để xin vào đội chia khách.'); return; }
   /* Đang chờ ghi lý do đóng khách: tin tiếp theo (không phải lệnh) là lý do */
@@ -786,6 +799,7 @@ function lenh_(m) {
     }
     P().deleteProperty('LYDO_' + chat);
   }
+  if (c === '/tailieu') { taiLieu_(chat); return; }
   if (c === '/nghi') { s.trang_thai = 'nghi'; save_('Sale', T_SALE, s); log_(s.ten, 'tự nghỉ'); gui_(chat, '⏸ Đã tạm dừng nhận khách. Nhắn /lam để nhận lại.'); return; }
   if (c === '/lam') { s.trang_thai = 'lam'; save_('Sale', T_SALE, s); log_(s.ten, 'đi làm'); gui_(chat, '▶️ Đã bật nhận khách.'); return; }
   if (c === '/giahan') {
@@ -798,7 +812,7 @@ function lenh_(m) {
     var l = rows_('Khach', T_KHACH).filter(function (k) { return String(k.nguoi_giu) === chat && DANG_GIU.test(k.trang_thai) && k.trang_thai !== 'cho_nhan'; });
     gui_(chat, l.length ? '<b>Khách bạn đang giữ</b>\n' + l.map(function (k) { var h = han_(k); return '• ' + esc(k.id) + ' ' + esc(k.sdt) + ' – ' + esc(k.bao_cao || 'chưa báo cáo') + (h ? '\n   ⏱ ' + h.viec + ' trước <b>' + fmt(h.luc) + '</b>' : '') + (k.trang_thai === 'dang_cham' && conGiaHan_(k) ? ' · gia hạn: <code>/giahan ' + esc(k.id) + '</code>' : ''); }).join('\n') + '\n\nSau thời gian trên sẽ bị thu hồi.' : 'Bạn chưa giữ khách nào.'); return;
   }
-  gui_(chat, 'Lệnh: /khach (khách đang giữ) · /giahan Mã (xin thêm ' + num('GIA_HAN_NGAY') + ' ngày) · /nghi · /lam');
+  gui_(chat, 'Lệnh: /khach (khách đang giữ) · /giahan Mã (xin thêm ' + num('GIA_HAN_NGAY') + ' ngày) · /tailieu (slide chủ đầu tư, slide nội bộ) · /nghi · /lam');
 }
 
 function bam_(q) {
@@ -809,7 +823,7 @@ function bam_(q) {
     var s = timSale_(parts[1]); if (!s) return tl('Không thấy');
     if (s.trang_thai !== 'cho_duyet') { sua_(q.message.chat.id, q.message.message_id, (s.trang_thai === 'tu_choi' ? '❌ Đã từ chối ' : '✅ Đã duyệt ') + esc(s.ten)); return tl('Đã xử lý rồi'); }
     s.trang_thai = parts[0] === 'dy' ? 'lam' : 'tu_choi'; save_('Sale', T_SALE, s); log_('quản lý', parts[0] === 'dy' ? 'duyệt sale' : 'từ chối sale', '', s.ten);
-    gui_(s.chat_id, parts[0] === 'dy' ? '✅ Quản lý đã duyệt. Bạn sẽ nhận khách lần lượt. Lệnh: /khach · /nghi · /lam' : 'Yêu cầu vào đội chưa được duyệt.');
+    gui_(s.chat_id, parts[0] === 'dy' ? '✅ Quản lý đã duyệt. Bạn sẽ nhận khách lần lượt. Lệnh: /khach · /tailieu · /nghi · /lam' : 'Yêu cầu vào đội chưa được duyệt.');
     sua_(q.message.chat.id, q.message.message_id, (parts[0] === 'dy' ? '✅ Đã duyệt ' : '❌ Đã từ chối ') + esc(s.ten));
     return tl('Xong');
   }
