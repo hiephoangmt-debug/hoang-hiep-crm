@@ -14,7 +14,8 @@ function SSResort(C, out) {
   function hz(m) { return 440 * Math.pow(2, (m - 69) / 12); }
   /* Fmaj9 – Dm9 – Bbmaj9 – C6/9 */
   var CH = [[41, 57, 60, 64, 67], [38, 53, 57, 60, 64], [46, 50, 57, 60, 62], [36, 52, 55, 57, 62]];
-  var PENTA = [[77, 79, 81, 84, 86, 88], [74, 77, 79, 81, 84, 86], [74, 77, 81, 82, 84, 86], [76, 79, 81, 84, 86, 88]];
+  var PENTA = [[65, 67, 69, 72, 74, 76], [62, 65, 67, 69, 72, 74], [62, 65, 69, 70, 72, 74], [64, 67, 69, 72, 74, 76]];
+  var pos = 2;
 
   function pad(m, t, dur, lvl) {
     [-5, 5].forEach(function (cents, k) {
@@ -25,13 +26,16 @@ function SSResort(C, out) {
       o.connect(g); g.connect(bus); o.start(t); o.stop(t + dur + 3.2);
     });
   }
-  function bell(m, t, lvl) {
-    [[1, 1], [2.0, 0.28], [3.01, 0.08]].forEach(function (h) {
-      var o = C.createOscillator(); o.type = 'sine'; o.frequency.value = hz(m) * h[0];
+  /* piano điện ấm (kiểu Rhodes): bấm mềm, ngân dài, lọc bớt âm cao – thay tiếng chuông */
+  var keyLP = C.createBiquadFilter(); keyLP.type = 'lowpass'; keyLP.frequency.value = 1500; keyLP.Q.value = 0.3; keyLP.connect(bus);
+  function key(m, t, lvl) {
+    [[1, 1, 'sine'], [2, 0.12, 'sine'], [1, 0.18, 'triangle']].forEach(function (h) {
+      var o = C.createOscillator(); o.type = h[2]; o.frequency.value = hz(m) * h[0];
       var g = C.createGain(); g.gain.setValueAtTime(0.0001, t);
-      g.gain.linearRampToValueAtTime(lvl * h[1], t + 0.015);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + 3.2 / h[0] + 0.8);
-      o.connect(g); g.connect(bus); o.start(t); o.stop(t + 4.2);
+      g.gain.linearRampToValueAtTime(lvl * h[1], t + 0.06);
+      g.gain.exponentialRampToValueAtTime(lvl * h[1] * 0.35, t + 0.9);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 4.2);
+      o.connect(g); g.connect(keyLP); o.start(t); o.stop(t + 4.4);
     });
   }
   /* sóng rất khẽ phía dưới */
@@ -50,10 +54,14 @@ function SSResort(C, out) {
   var BAR = 8, idx = 0;
   function schedule(t) {
     var c = CH[idx % 4], p = PENTA[idx % 4];
-    pad(c[0] - 12, t, BAR, 0.05);
+    pad(c[0] - 12, t, BAR, 0.045);
     for (var i = 1; i < c.length; i++) pad(c[i], t, BAR, 0.022);
-    var x = t + 0.6 + Math.random() * 0.6;
-    while (x < t + BAR - 0.4) { if (Math.random() < 0.72) bell(p[Math.floor(Math.random() * p.length)], x, 0.07 + Math.random() * 0.04); x += 0.9 + Math.random() * 1.5; }
+    var x = t + 1.2 + Math.random() * 0.8, n = 0;
+    while (x < t + BAR - 1.5 && n < 4) {
+      pos = Math.max(0, Math.min(p.length - 1, pos + [-1, -1, 0, 1, 1, 2, -2][Math.floor(Math.random() * 7)]));
+      key(p[pos], x, 0.06 + Math.random() * 0.02); n++;
+      x += 1.4 + Math.random() * 1.4;
+    }
     wv(t + 1); wv(t + 1 + BAR / 2);
     idx++;
   }
