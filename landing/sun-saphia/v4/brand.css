@@ -757,9 +757,10 @@ em.dk{display:block;font-style:italic;font-size:12.5px;font-weight:600;letter-sp
 /* Cân đều 2 cột so sánh đầu tư */
 .dtg{align-items:stretch}.dtc{display:flex;flex-direction:column}.dtc ul{flex:1;align-content:space-evenly}
 /* Lộ trình thanh toán 25% + vay 70% */
-.tcs{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;counter-reset:tcs}
+.tcs{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;counter-reset:tcs}
 .tcs li{position:relative;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:14px 14px 14px 50px;counter-increment:tcs}
 .tcs li::before{content:counter(tcs);position:absolute;left:14px;top:14px;width:26px;height:26px;border-radius:50%;background:#E96118;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
 .tcs b{display:block;color:#fff;font-size:15px}.tcs span{display:block;color:#D6E0EF;font-size:13.5px;line-height:1.45;margin-top:3px}.tcs strong{color:#F7A66B}
 .tcr{grid-template-columns:1fr 1fr!important}
 @media(max-width:980px){.tcs{grid-template-columns:1fr 1fr}}@media(max-width:760px){.tcs{grid-template-columns:1fr}.tcr{grid-template-columns:1fr!important}}
+.tcs span{text-align:left!important;text-align-last:left!important}
