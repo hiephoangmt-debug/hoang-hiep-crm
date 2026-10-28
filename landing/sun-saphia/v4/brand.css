@@ -818,3 +818,4 @@ em.dk{display:block;font-style:italic;font-size:12.5px;font-weight:600;letter-sp
 .g15t thead{display:none}.g15t table,.g15t tbody,.g15t tr,.g15t td{display:block;width:100%}.g15t tr{border-top:1px solid var(--ln);padding:6px 0}.g15t td{border:0;padding:3px 12px;display:flex;justify-content:space-between;gap:10px;text-align:right}
 .g15t td::before{content:attr(data-l);color:var(--mut);font-size:12.5px;text-align:left}.g15t td small{display:inline;margin-left:6px}}
 .g15t td:nth-child(n+3){white-space:nowrap}
+.g15t td:first-child b{white-space:nowrap}@media(min-width:861px){.g15w{grid-template-columns:1fr 1.1fr}}

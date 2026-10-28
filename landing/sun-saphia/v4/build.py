@@ -290,12 +290,12 @@ def gia_tang15():
          ('1524', 61.2, 52.5, 'Dãy phía sau – view phố, giá mềm nhất', 2.13, 'sau')]
     def f(x):
         return ('%.2f' % x).rstrip('0').rstrip('.').replace('.', ',') + ' tỷ' if x >= 1 else '%d triệu' % round(x * 1000)
-    pins = ''.join('<span class="g15p g15-%s" style="left:%.1f%%;top:%.1f%%"><b>%s</b>%s</span>' % (c, x, y, code, f(p)) for code, x, y, _, p, c in U)
-    rows = ''.join('<tr class="g15-%s"><td data-l="Căn"><b>%s</b><small>Studio 30 m²</small></td><td data-l="Vị trí">%s</td><td data-l="Giá tham khảo"><b class="g15v">%s</b></td>'
+    pins = ''.join('<span class="g15p g15-%s" style="left:%.1f%%;top:%.1f%%"><b>Tầng 15 · Căn %s</b>%s</span>' % (c, x, y, code[2:], f(p)) for code, x, y, _, p, c in U)
+    rows = ''.join('<tr class="g15-%s"><td data-l="Căn"><b>Tầng 15 · Căn %s</b><small>Mã %s · Studio 30 m²</small></td><td data-l="Vị trí">%s</td><td data-l="Giá tham khảo"><b class="g15v">%s</b></td>'
                    '<td data-l="Đơn giá">~%d tr/m²</td><td data-l="Đến khi nhận nhà (25%%)">~%s</td><td data-l="Vay 70%%">~%s</td></tr>'
-                   % (c, code, v, f(p), round(p * 1000 / 30), f(p * .25), f(p * .7)) for code, x, y, v, p, c in U)
+                   % (c, code[2:], code, v, f(p), round(p * 1000 / 30), f(p * .25), f(p * .7)) for code, x, y, v, p, c in U)
     return ('<section class="sec" id="gia-tang-15"><div class="wrap">' + sh('★', 'Giá tham khảo từ chủ đầu tư', 'Giá <b>tầng 15</b> – căn nào, giá bao nhiêu?', 'o') +
-            '<p class="g15lead">Chủ đầu tư vừa đưa giá tham khảo 3 căn Studio tầng 15. Anh/chị xem vị trí từng căn trên mặt bằng để thấy vì sao <b>cùng diện tích mà giá khác nhau</b>.</p>'
+            '<p class="g15lead">Chủ đầu tư vừa đưa giá tham khảo 3 căn Studio ở <b>tầng 15</b>: <b>căn số 15</b>, <b>căn số 09</b> và <b>căn số 24</b> (mã căn = số tầng + số căn, ví dụ 1515 là tầng 15 căn 15). Anh/chị xem vị trí từng căn trên mặt bằng để thấy vì sao <b>cùng diện tích mà giá khác nhau</b>.</p>'
             '<div class="g15w"><figure class="g15m"><img src="' + I + '" width="1500" height="1105" loading="lazy" decoding="async" alt="Mặt bằng tầng điển hình Sun Saphia (áp dụng tầng 15) – vị trí căn 1515, 1509, 1524">' + pins +
             '<figcaption>Mặt bằng tầng điển hình 3A–28 · phía trên là hướng biển</figcaption></figure>'
             '<div class="g15t"><table><thead><tr><th>Căn</th><th>Vị trí</th><th>Giá tham khảo</th><th>Đơn giá</th><th>Đến khi nhận nhà (25%)</th><th>Vay 70%</th></tr></thead><tbody>' + rows + '</tbody></table>'
