@@ -43,7 +43,7 @@ def page(path, title, desc, kw, body, lds, cur, tools=False, canon=None, robots=
     return copy_fix(quiz_end(html))
 
 def quiz_end(html):
-    """Đưa trò chơi tìm căn xuống ngay trên form chốt cuối trang."""
+    """Đưa phần test tìm căn xuống ngay trên form chốt cuối trang."""
     a = html.find('<section class="sec tcn" id="tim-can"')
     if a < 0 or 'id="dang-ky"' not in html: return html
     e = html.find('</section>', html.find('</script>', a)) + len('</section>')
@@ -588,42 +588,65 @@ def vitri_dark(sid='vi-tri', ctx='ADS'):
 ADS_TOC = [('su-kien', 'Sự kiện 01/11'), ('tai-chinh', 'Giá &amp; thanh toán'), ('dau-tu', 'Đầu tư 1 sàn'), ('quy-hoach', 'Quy hoạch'), ('vi-tri', 'Vị trí'), ('mat-bang', 'Mặt bằng'), ('dong-tien', 'Cho thuê'), ('tim-can', 'Căn hợp với tôi')]
 
 def tim_can(ctx='ADS'):
-    Q = [('muc', 'Anh/chị mua để làm gì?', False, [('o', '🏖 Để ở / nghỉ dưỡng gia đình'), ('ngan', '🧳 Cho thuê ngắn hạn (theo đêm)'), ('dai', '📅 Cho thuê dài hạn (theo tháng)'), ('tg', '📈 Đầu tư tăng giá'), ('san', '🏢 Mua nhiều căn / 1 sàn')]),
-         ('nguoi', 'Thường có mấy người ở?', False, [('1', '👤 1–2 người'), ('3', '👨‍👩‍👧 3–4 người'), ('5', '👨‍👩‍👧‍👦 5 người trở lên')]),
-         ('von', 'Ngân sách dự kiến?', False, [('2', '💰 Khoảng 2–3 tỷ'), ('4', '💰💰 3–5 tỷ'), ('6', '💎 Trên 5 tỷ'), ('it', '🔑 Vốn ít – muốn dùng 25% + vay')]),
-         ('uu', 'Anh/chị ưu tiên gì? (chọn nhiều)', True, [('bien', '🌊 View biển thẳng'), ('cao', '🏙 Tầng cao, nhìn xa'), ('vuon', '🌿 Ban công / sân vườn rộng'), ('goc', '📐 Căn góc, 2 mặt thoáng'), ('gia', '🏷 Giá tốt nhất')])]
+    Q = [('muc', 'Anh/chị mua để làm gì?', False, [('o', '🏖 Để ở / nghỉ dưỡng gia đình'), ('ngan', '🧳 Cho thuê ngắn hạn (theo đêm)'), ('dai', '📅 Cho thuê dài hạn (theo tháng)'), ('tg', '📈 Đầu tư chờ tăng giá'), ('san', '🏢 Mua nhiều căn / cả 1 sàn')]),
+         ('nguoi', 'Thường có mấy người cùng ở / cùng đi?', False, [('1', '👤 1–2 người'), ('3', '👨‍👩‍👧 3–4 người'), ('5', '👨‍👩‍👧‍👦 5 người trở lên')]),
+         ('von', 'Tài chính anh/chị dự tính thế nào?', False, [('it', '🔑 Có sẵn khoảng 500–900 triệu, còn lại vay'), ('2', '💰 Khoảng 2–3 tỷ'), ('4', '💰💰 Khoảng 3–5 tỷ'), ('6', '💎 Trên 5 tỷ')]),
+         ('uu', 'Điều gì làm anh/chị “ưng” nhất? (chọn nhiều)', True, [('bien', '🌊 Mở cửa thấy biển'), ('cao', '🏙 Tầng cao, nhìn xa'), ('vuon', '🌿 Ban công / sân vườn rộng'), ('goc', '📐 Căn góc, 2 mặt thoáng'), ('gia', '🏷 Giá mềm nhất')])]
     qs = ''
     for i, (k, t, multi, opts) in enumerate(Q):
         qs += ('<div class="tq%s" data-q="%s" data-m="%d"><p class="tqn">Câu %d/4</p><h3>%s</h3><div class="tqo">%s</div>%s</div>') % (
             '' if i == 0 else ' off', k, 1 if multi else 0, i + 1, t,
             ''.join('<button type="button" data-v="%s">%s</button>' % o for o in opts),
-            '<button type="button" class="btn sm tqnext">Xem căn hợp với tôi →</button>' if multi else '')
-    js = r'''<script>(function(){var R=document.getElementById("timcan");if(!R)return;var A={uu:[]},L={muc:{o:"Để ở/nghỉ dưỡng",ngan:"Cho thuê ngắn hạn",dai:"Cho thuê dài hạn",tg:"Đầu tư tăng giá",san:"Mua nhiều căn/1 sàn"},nguoi:{"1":"1–2 người","3":"3–4 người","5":"5+ người"},von:{"2":"2–3 tỷ","4":"3–5 tỷ","6":"trên 5 tỷ",it:"vốn ít, 25% + vay"},uu:{bien:"view biển",cao:"tầng cao",vuon:"ban công/sân vườn",goc:"căn góc",gia:"giá tốt"}};
-var qs=[].slice.call(R.querySelectorAll(".tq")),bar=R.querySelector(".tqbar i");function show(i){qs.forEach(function(q,j){q.classList.toggle("off",j!==i)});bar.style.width=(i/qs.length*100)+"%"}
-R.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var q=b.closest(".tq");if(b.classList.contains("tqre")){A={uu:[]};R.querySelector(".tqr").classList.add("off");R.querySelectorAll(".tqo button").forEach(function(x){x.classList.remove("on")});show(0);return}
-if(!q)return;var k=q.getAttribute("data-q"),i=qs.indexOf(q);if(b.classList.contains("tqnext")){res();return}
+            '<button type="button" class="btn sm tqnext">Xem phương án của tôi →</button>' if multi else '')
+    js = r'''<script>(function(){var R=document.getElementById("timcan");if(!R)return;var A={uu:[]},
+L={muc:{o:"Để ở/nghỉ dưỡng",ngan:"Cho thuê ngắn hạn",dai:"Cho thuê dài hạn",tg:"Đầu tư tăng giá",san:"Mua nhiều căn/1 sàn"},nguoi:{"1":"1–2 người","3":"3–4 người","5":"5+ người"},von:{it:"vốn sẵn 500–900tr, còn lại vay","2":"2–3 tỷ","4":"3–5 tỷ","6":"trên 5 tỷ"},uu:{bien:"view biển",cao:"tầng cao",vuon:"ban công/sân vườn",goc:"căn góc",gia:"giá mềm"}},
+FUN={o:"Chuẩn gu nghỉ dưỡng – sáng mở cửa là gió biển 🌊",ngan:"Khách du lịch Đà Nẵng mê căn nhìn biển lắm ạ 🧳",dai:"Thu nhập đều tay mỗi tháng, nghe đã thấy yên tâm 📅",tg:"Mặt biển Sun Group – hàng hiếm, đúng gu nhà đầu tư 📈",san:"Ồ, gặp nhà đầu tư lớn rồi 😄","1":"Gọn nhẹ, tự do – chọn căn dễ lắm ạ","3":"Gia đình nhỏ ấm áp – cần thêm 1 góc riêng","5":"Cả nhà cùng ra biển, vui phải biết 🎉",it:"Vốn vừa phải vẫn vào được – vì chỉ cần ~25% đến nhận nhà 😉","2":"Vừa đẹp tầm Studio – 1BR+ ạ","4":"Tầm này chọn căn thoải mái rồi ạ","6":"Tầm này chọn căn đẹp nhất tòa được luôn ✨"},
+D={st:{t:"Studio",a:"30–31 m² (Studio góc 40 m²)",p:2.1,l:18,s:30},br1:{t:"1BR+ – 1 phòng ngủ + phòng đa năng",a:"49–51 m² (tầng 30 có dòng 1BR 63–74 m²)",p:3.5,l:24,s:42},br2:{t:"2BR – 2 phòng ngủ",a:"60–70 m² (tầng 30 có căn 83,97 m²)",p:4.6,l:35,s:0},san:{t:"Cả 1 sàn (28 căn) hoặc nhóm Studio",a:"Tầng điển hình ~1.110 m² · có chiết khấu khi mua nhiều căn",p:78,l:610,s:0}};
+function f(x){return x>=1?(Math.round(x*100)/100).toString().replace(".",",")+" tỷ":Math.round(x*1000)+" triệu"}function tr(x){return x>=1000?f(x/1000):Math.round(x)+" tr"}
+var qs=[].slice.call(R.querySelectorAll(".tq")),bar=R.querySelector(".tqbar i"),fun=R.querySelector(".tqfun");function show(i){qs.forEach(function(q,j){q.classList.toggle("off",j!==i)});bar.style.width=(i/qs.length*100)+"%"}
+function say(v){if(!FUN[v])return;fun.textContent=FUN[v];fun.classList.remove("on");void fun.offsetWidth;fun.classList.add("on")}
+R.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
+if(b.hasAttribute("data-ask")){var q=b.getAttribute("data-ask");try{if(window.gtag)gtag("event","tim_can_hoi",{event_label:q})}catch(x){}if(window.hhcAsk)window.hhcAsk(q);else location.href="https://zalo.me/0904567009";return}
+if(b.classList.contains("tqre")){A={uu:[]};R.querySelectorAll(".tqo button.on").forEach(function(x){x.classList.remove("on")});R.querySelector(".tqr").classList.add("off");fun.classList.remove("on");show(0);return}
+var q=b.closest(".tq");if(!q)return;var i=qs.indexOf(q),k=q.getAttribute("data-q");
+if(b.classList.contains("tqnext")){res();return}
 if(q.getAttribute("data-m")==="1"){b.classList.toggle("on");var v=b.getAttribute("data-v"),p=A.uu.indexOf(v);if(p<0)A.uu.push(v);else A.uu.splice(p,1);return}
-q.querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b)});A[k]=b.getAttribute("data-v");setTimeout(function(){show(i+1)},250)});
+q.querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b)});A[k]=b.getAttribute("data-v");say(A[k]);setTimeout(function(){show(i+1)},450)});
 function has(x){return A.uu.indexOf(x)>=0}
-function res(){var t,area,why=[],tip=[],num="";
-if(A.muc==="san"){t="1 sàn hoặc nhóm Studio";area="Tầng điển hình 28 căn (~1.110 m²)";why.push("Mua nhiều căn có chiết khấu, vận hành như khách sạn");num="1 sàn dự kiến ~78 tỷ · ~25% đến nhận nhà · thuê dài hạn cả sàn ~610 tr/tháng"}
-else if(A.nguoi==="5"||A.von==="6"){t="2BR – 2 phòng ngủ";area="60–70 m² (tầng 30 có căn 83,97 m²)";why.push("Đủ phòng cho gia đình đông người, phòng khách riêng");num="Cho thuê dài hạn ~35 tr/tháng (~420 tr/năm) dự kiến"}
-else if(A.nguoi==="3"||A.von==="4"){t="1BR+ – 1 phòng ngủ + phòng đa năng";area="49–51 m² (tầng 30 có dòng 1BR 63–74 m²)";why.push("Vừa ở gia đình nhỏ, vừa dễ cho thuê");num="Thuê dài hạn ~24 tr/tháng · ngắn hạn ~42 tr/tháng dự kiến"}
-else{t="Studio";area="30–31 m² (Studio góc 40 m²)";why.push("Vốn vào nhẹ nhất, dòng cho thuê dễ nhất");num="Giá dự kiến từ hơn 2 tỷ · ~525 tr đến nhận nhà · thuê ngắn hạn ~30 tr/tháng"}
-if(A.muc==="ngan")why.push("Khách du lịch thích căn mặt biển, giá đêm Studio 2,2–2,9 tr");if(A.muc==="dai")why.push("Thuê tháng ổn định, ít công vận hành");if(A.muc==="o")why.push("Mở cửa là biển, ~400 m ra bãi tắm Sơn Thủy");if(A.von==="it")why.push("Chỉ ~25% đến nhận nhà, vay 70% chủ đầu tư trả lãi, ân hạn gốc");
-if(has("vuon"))tip.push("Tầng 2–3: Studio ban công 53,71 m², 2BR ban công tới 84,29 m²");if(has("cao"))tip.push("Tầng 20–30: tầng 30 chỉ 16 căn, căn rộng nhất tòa");if(has("goc"))tip.push("Căn góc bo tròn 2 mặt thoáng (vị trí 03, 03A, 11, 18, 19, 20)");if(has("bien"))tip.push("Dãy căn mặt trước tòa nhìn thẳng biển Mỹ Khê – Sơn Thủy");if(has("gia"))tip.push("Tầng thấp – trung, hướng phụ thường có giá tốt hơn");if(!tip.length)tip.push("Đại lý lọc giúp căn còn trống đúng nhu cầu");
-var r=R.querySelector(".tqr");r.querySelector(".tqt").textContent=t;r.querySelector(".tqa").textContent=area;r.querySelector(".tqw").innerHTML=why.map(function(x){return"<li>"+x+"</li>"}).join("");r.querySelector(".tqp").innerHTML=tip.map(function(x){return"<li>"+x+"</li>"}).join("");r.querySelector(".tqnum").textContent=num;
-var sum="Gợi ý: "+t+" · "+(L.muc[A.muc]||"")+" · "+(L.nguoi[A.nguoi]||"")+" · "+(L.von[A.von]||"")+(A.uu.length?" · ưu tiên "+A.uu.map(function(x){return L.uu[x]}).join(", "):"");r.querySelector("textarea").value=sum;
-qs.forEach(function(q){q.classList.add("off")});bar.style.width="100%";r.classList.remove("off");try{if(window.gtag)gtag("event","tim_can",{event_label:t})}catch(x){}r.scrollIntoView({behavior:"smooth",block:"start"})}})();</script>'''
-    return ('<section class="sec tcn" id="tim-can"><div class="wrap"><div class="sh"><span class="ey">Trò chơi 30 giây</span><h2 class="dp">Căn nào <b>hợp với anh/chị?</b></h2></div>'
-            '<div class="tqw0" id="timcan"><div class="tqbar"><i></i></div>' + qs +
-            '<div class="tqr off"><span class="tqk">🎯 Căn hợp với anh/chị nhất</span><h3 class="tqt"></h3><p class="tqa"></p>'
-            '<div class="tqg"><div><b>Vì sao hợp</b><ul class="ck tqw"></ul></div><div><b>Gợi ý tầng / vị trí căn</b><ul class="ck tqp"></ul></div></div><p class="tqnum"></p>'
-            '<form class="hm-form tqf" data-form="' + ctx + ' – trò chơi tìm căn"><textarea name="nhu_cau" hidden></textarea>'
+function li(a){return a.map(function(x){return"<li>"+x+"</li>"}).join("")}
+function res(){var k,why=[],tip=[],ask=[];
+if(A.muc==="san")k="san";else if(A.nguoi==="5"||A.von==="6")k="br2";else if(A.nguoi==="3"||A.von==="4")k="br1";else k="st";
+var d=D[k],P=d.p,c25=P*.25,c70=P*.7,c5=P*.05,yl=d.l*12,ys=d.s*12;
+if(k==="san"){why.push("Mua cả sàn được chiết khấu, vận hành như 1 khách sạn mini ngay mặt biển");why.push("Không phải xin phép xây, không lo giá vật liệu leo thang");}
+else if(k==="br2")why.push("Đủ phòng cho cả nhà, có phòng khách riêng để quây quần");else if(k==="br1")why.push("Vừa ở gia đình nhỏ, vừa dễ cho thuê – phòng đa năng làm phòng làm việc / phòng trẻ");else why.push("Vốn vào nhẹ nhất, dễ cho thuê nhất – khách du lịch chuộng Studio");
+if(A.muc==="ngan")why.push("Khách du lịch thích căn nhìn biển, giá đêm Studio dự kiến 2,2–2,9 tr");if(A.muc==="dai")why.push("Thuê theo tháng ổn định, ít công quản lý");if(A.muc==="o")why.push("Mở cửa là biển, ~400 m ra bãi tắm Sơn Thủy");if(A.muc==="tg")why.push("Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng – quỹ căn có hạn");if(A.von==="it")why.push("Chỉ ~25% đến nhận nhà – vay 70% chủ đầu tư trả lãi, ân hạn gốc");
+if(has("vuon"))tip.push("Tầng 2–3: Studio ban công 53,71 m², 2BR ban công tới 84,29 m²");if(has("cao"))tip.push("Tầng 20–30: tầng 30 chỉ 16 căn, căn rộng nhất tòa");if(has("goc"))tip.push("Căn góc bo tròn 2 mặt thoáng (vị trí 03, 03A, 11, 18, 19, 20)");if(has("bien"))tip.push("Dãy căn mặt trước nhìn thẳng biển Mỹ Khê – Sơn Thủy");if(has("gia"))tip.push("Tầng thấp – trung, hướng phụ: giá mềm hơn mà vẫn gần biển");if(!tip.length)tip.push("Dãy căn mặt trước nhìn biển – nhóm được hỏi nhiều nhất");
+var m='<div class="tqm"><div><small>Giá dự kiến</small><b>'+(k==="san"?"~":"")+f(P)+(k==="st"?"+":"")+'</b><em>'+(k==="st"?"từ hơn 2 tỷ":"ước tính ~70 tr/m²")+'</em></div>'+
+'<div class="hl"><small>Đến nhận nhà chỉ trả</small><b>~'+f(c25)+'</b><em>25% giá căn</em></div>'+
+'<div><small>Vay ngân hàng 70%</small><b>~'+f(c70)+'</b><em>CĐT trả lãi + ân hạn gốc đến nhận nhà</em></div>'+
+'<div><small>Cho thuê dự kiến</small><b>'+tr(d.l)+'<i>/tháng</i></b><em>'+(k==="san"?"thuê dài hạn cả sàn · ~"+tr(yl)+"/năm":"dài hạn · ~"+tr(yl)+"/năm"+(d.s?" · ngắn hạn ~"+tr(d.s)+"/tháng":""))+'</em></div></div>';
+var y=Math.round(yl/(P*1000)*1000)/10;
+var note='<p class="tqnote">💡 <b>Đọc nhanh bài toán:</b> bỏ ra khoảng <b>'+f(c25)+'</b> trong suốt thời gian xây, giai đoạn này <b>gần như 0 đồng lãi</b> vì chủ đầu tư trả thay. Khi nhận nhà, tiền thuê dài hạn dự kiến ~<b>'+String(y).replace(".",",")+'%/năm</b> trên giá căn (trước chi phí). Nhận sổ đóng thêm 5% (~'+f(c5)+').'+(k!=="san"?' Studio cùng dải biển đang chào <b>5,2–10,5 tỷ</b> – ở đây dự kiến từ hơn 2 tỷ.':' So với khách sạn rao bán gần biển 65–89 tỷ nhưng nằm đường sau.')+'</p>';
+ask.push("Sau nhận nhà, tiền thuê có đủ trả góp không?");
+if(k==="san")ask.push("Mua 1 sàn được chiết khấu bao nhiêu?");else if(has("goc")||has("cao"))ask.push("Căn góc nhìn được những hướng nào?");else ask.push("Căn nào view biển đẹp nhất?");
+ask.push(A.muc==="ngan"||A.muc==="dai"?"Khách thuê ở đây chủ yếu là ai?":"Vì sao giá thấp hơn dự án bên cạnh?");ask.push("Sự kiện 01/11 có quà gì?");
+var r=R.querySelector(".tqr");r.querySelector(".tqt").textContent=d.t;r.querySelector(".tqa").textContent=d.a;r.querySelector(".tqw").innerHTML=li(why);r.querySelector(".tqp").innerHTML=li(tip);
+r.querySelector(".tqmw").innerHTML=m+note;r.querySelector(".tqask").innerHTML=ask.map(function(x){return'<button type="button" data-ask="'+x+'">'+x+'</button>'}).join("");
+var sum="Phương án: "+d.t+" · "+(L.muc[A.muc]||"")+" · "+(L.nguoi[A.nguoi]||"")+" · "+(L.von[A.von]||"")+(A.uu.length?" · ưu tiên "+A.uu.map(function(x){return L.uu[x]}).join(", "):"")+" · giá dự kiến "+f(P)+", 25% ~"+f(c25);r.querySelector("textarea").value=sum;
+qs.forEach(function(q){q.classList.add("off")});fun.classList.remove("on");bar.style.width="100%";r.classList.remove("off");try{if(window.gtag)gtag("event","tim_can",{event_label:d.t})}catch(x){}r.scrollIntoView({behavior:"smooth",block:"start"})}})();</script>'''
+    return ('<section class="sec tcn" id="tim-can"><div class="wrap"><div class="sh"><span class="ey">Thử nhanh 30 giây · 4 câu</span><h2 class="dp">Căn nào <b>hợp với anh/chị?</b></h2>'
+            '<p class="tqsub">Chọn vài ý thôi – em gợi ý loại căn và tính luôn bài toán tiền cho mình, nhẹ nhàng dễ hiểu 😊</p></div>'
+            '<div class="tqw0" id="timcan"><div class="tqbar"><i></i></div><p class="tqfun" aria-live="polite"></p>' + qs +
+            '<div class="tqr off"><span class="tqk">🎯 Phương án hợp với anh/chị</span><h3 class="tqt"></h3><p class="tqa"></p>'
+            '<div class="tqg"><div><b>Vì sao hợp</b><ul class="ck tqw"></ul></div><div><b>Gợi ý tầng / vị trí căn</b><ul class="ck tqp"></ul></div></div>'
+            '<h4 class="tqh">Bài toán tiền <span>(dự kiến)</span></h4><div class="tqmw"></div>'
+            '<div class="tqq"><b>Anh/chị có đang thắc mắc… 👀</b><div class="tqask"></div></div>'
+            '<div class="tqz"><p><b>Muốn bảng tính chi tiết đúng căn này?</b> Anh Hiệp gửi qua Zalo: căn còn trống, giá từng căn khi công bố, lịch thanh toán và bảng dòng tiền cho thuê.</p>'
+            '<form class="hm-form tqf" data-form="' + ctx + ' – test tìm căn"><textarea name="nhu_cau" hidden></textarea>'
             '<input name="name" type="text" placeholder="Anh/chị tên gì ạ?" autocomplete="name"><input name="phone" type="tel" inputmode="tel" placeholder="Số Zalo 09xx xxx xxx" required autocomplete="tel">'
-            '<button class="btn" type="submit">Gửi tôi danh sách căn phù hợp</button></form>'
-            '<p class="src" style="margin-top:8px">Anh Hiệp gửi danh sách căn còn trống đúng nhu cầu qua Zalo · miễn phí · số liệu dự kiến</p>'
-            '<button type="button" class="tqre">↺ Chơi lại</button></div></div></div>' + js + '</section>')
+            '<button class="btn" type="submit">Gửi phương án qua Zalo cho tôi</button></form>'
+            '<p class="tqzl">Hoặc <a href="https://zalo.me/0904567009" target="_blank" rel="noopener">nhắn Zalo anh Hiệp 0904 567 009</a> · miễn phí · số liệu dự kiến, giá chính thức theo chủ đầu tư</p></div>'
+            '<button type="button" class="tqre">↺ Làm lại</button></div></div></div>' + js + '</section>')
 
 
 def tai_chinh(ctx='ADS'):

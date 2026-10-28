@@ -363,6 +363,7 @@
     setTimeout(function () { try { inp.focus({preventScroll: true}); } catch (e) {} }, 250);
   }
   window.hhcOpen = open;
+  window.hhcAsk = function (q) { openWith(q); };
 
   /* ---------- Khách dừng lâu ở một phần trang: hỏi khéo, gợi 2 câu hỏi đúng phần đó ---------- */
   var DWELL = 7000, NUDGE_MAX = 3, NUDGE_GAP = 35000;
