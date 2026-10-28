@@ -78,7 +78,7 @@ def page_body():
         '</div></div>'
         '<a class="zl-big o6" href="' + ZALO + '" target="_blank" rel="noopener">Chat Zalo ' + TEL_S + '</a>'
         '<p class="note o7"><b>Lưu ý:</b> đây là bảng tính tham khảo theo giả định, không phải cam kết lợi nhuận. Kết quả thực tế phụ thuộc giá mua, mùa du lịch, cách vận hành và chi phí thực tế. '
-        'Giá Sun Saphia Residence dự kiến từ khoảng 1,8–2 tỷ/căn, chính thức theo công bố của chủ đầu tư; giá thuê đối chiếu lấy từ tài liệu sự kiện Kick-off tháng 10/2026.</p>'
+        'Giá Sun Saphia Residence dự kiến từ khoảng 1,8 tỷ/căn, chính thức theo công bố của chủ đầu tư; giá thuê đối chiếu lấy từ tài liệu sự kiện Kick-off tháng 10/2026.</p>'
         '</div>')
     js = '''<script>(function(){
 var U={studio:{d:[2.5,1,5,0.1],m:[19,10,35,1],n:'Studio'},'1pn':{d:[3.5,1.5,7,0.1],m:[25,12,45,1],n:'1PN+'},'2pn':{d:[4.5,2,9,0.1],m:[35,18,60,1],n:'2PN'}};
