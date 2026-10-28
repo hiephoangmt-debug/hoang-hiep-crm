@@ -40,7 +40,16 @@ def page(path, title, desc, kw, body, lds, cur, tools=False, canon=None, robots=
         body = body[:i] + vitri_dark('vi-tri', VT_PAGES[path]) + body[i:]
     html = head(title, desc, canon or url, OG, kw, lds + [ORG, RES], FAV)
     html += '<body>\n' + header(cur, MAIN, LOGO) + '\n<main id="dau-trang">' + body + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(tools) + wave_audio() + '</body>\n</html>\n'
-    return copy_fix(html)
+    return copy_fix(quiz_end(html))
+
+def quiz_end(html):
+    """Đưa trò chơi tìm căn xuống ngay trên form chốt cuối trang."""
+    a = html.find('<section class="sec tcn" id="tim-can"')
+    if a < 0 or 'id="dang-ky"' not in html: return html
+    e = html.find('</section>', html.find('</script>', a)) + len('</section>')
+    q = html[a:e]; html = html[:a] + html[e:]
+    i = html.find('<section class="sec" id="dang-ky"')
+    return html[:i] + q + html[i:]
 
 def band(*a, **k):
     return '<div class="bandw">' + cta_band(*a, **k) + '</div>'
@@ -576,7 +585,7 @@ def vitri_dark(sid='vi-tri', ctx='ADS'):
             '<a class="gml" href="https://www.google.com/maps/search/?api=1&amp;query=16.021300,108.257659" target="_blank" rel="noopener">📍 Mở trong Google Maps</a></div></div>'
             '</div></div></section>') % (sid, ctx)
 
-ADS_TOC = [('su-kien', 'Sự kiện 01/11'), ('tai-chinh', 'Giá &amp; thanh toán'), ('tim-can', 'Căn hợp với tôi'), ('dau-tu', 'Đầu tư 1 sàn'), ('quy-hoach', 'Quy hoạch'), ('vi-tri', 'Vị trí'), ('mat-bang', 'Mặt bằng'), ('dong-tien', 'Cho thuê')]
+ADS_TOC = [('su-kien', 'Sự kiện 01/11'), ('tai-chinh', 'Giá &amp; thanh toán'), ('dau-tu', 'Đầu tư 1 sàn'), ('quy-hoach', 'Quy hoạch'), ('vi-tri', 'Vị trí'), ('mat-bang', 'Mặt bằng'), ('dong-tien', 'Cho thuê'), ('tim-can', 'Căn hợp với tôi')]
 
 def tim_can(ctx='ADS'):
     Q = [('muc', 'Anh/chị mua để làm gì?', False, [('o', '🏖 Để ở / nghỉ dưỡng gia đình'), ('ngan', '🧳 Cho thuê ngắn hạn (theo đêm)'), ('dai', '📅 Cho thuê dài hạn (theo tháng)'), ('tg', '📈 Đầu tư tăng giá'), ('san', '🏢 Mua nhiều căn / 1 sàn')]),
@@ -726,7 +735,7 @@ def ads(domain):
     html = head(title, desc, url, OG, 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES], FAV)
     b = b.replace('{M}', MAIN)
     html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN, pages=False) + '\n' + popup() + tail(True) + wave_audio() + '</body>\n</html>\n'
-    return copy_fix(html)
+    return copy_fix(quiz_end(html))
 
 def tinh_dong_tien():
     cr, cld = crumbs([('Trang chủ', MAIN + '/'), ('Sun Saphia Residence', MAIN + '/'), ('Tính dòng tiền', MAIN + '/tinh-dong-tien')])
