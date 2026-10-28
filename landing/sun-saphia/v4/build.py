@@ -282,6 +282,28 @@ def sub_hero(path, name, h1, lead, img_name, alt, label):
             '<h1 class="dp">%s</h1>' + SLOGAN + '%s<p class="lead just">%s</p>%s</div><div class="hr">%s<div class="pic">%s</div></div></div></div></section>') % (
         SK, cr, SK, h1, author(), lead, hero_perks(), form('dau', label, h='h2'), (img_name if img_name.startswith('<') else img(img_name, alt, eager=True))), ld
 
+def gia_tang15():
+    """Giá tham khảo tầng 15 (rumor từ chủ đầu tư) – chỉ rõ 3 căn mẫu trên mặt bằng."""
+    I = RAW + '82607488b0132bb3c6b51585b33a71fd19edd0fc/landing/sun-saphia/v4/img/mat-bang-tang-3a-28.webp'
+    U = [('1515', 49.0, 34.0, 'Dãy trước – nhìn thẳng ra biển', 2.85, 'bien'),
+         ('1509', 26.7, 49.3, 'Cánh hông – view thành phố, thoáng', 2.37, 'hong'),
+         ('1524', 61.2, 52.5, 'Dãy phía sau – view phố, giá mềm nhất', 2.13, 'sau')]
+    def f(x):
+        return ('%.2f' % x).rstrip('0').rstrip('.').replace('.', ',') + ' tỷ' if x >= 1 else '%d triệu' % round(x * 1000)
+    pins = ''.join('<span class="g15p g15-%s" style="left:%.1f%%;top:%.1f%%"><b>%s</b>%s</span>' % (c, x, y, code, f(p)) for code, x, y, _, p, c in U)
+    rows = ''.join('<tr class="g15-%s"><td data-l="Căn"><b>%s</b><small>Studio 30 m²</small></td><td data-l="Vị trí">%s</td><td data-l="Giá tham khảo"><b class="g15v">%s</b></td>'
+                   '<td data-l="Đơn giá">~%d tr/m²</td><td data-l="Đến khi nhận nhà (25%%)">~%s</td><td data-l="Vay 70%%">~%s</td></tr>'
+                   % (c, code, v, f(p), round(p * 1000 / 30), f(p * .25), f(p * .7)) for code, x, y, v, p, c in U)
+    return ('<section class="sec" id="gia-tang-15"><div class="wrap">' + sh('★', 'Giá tham khảo từ chủ đầu tư', 'Giá <b>tầng 15</b> – căn nào, giá bao nhiêu?', 'o') +
+            '<p class="g15lead">Chủ đầu tư vừa đưa giá tham khảo 3 căn Studio tầng 15. Anh/chị xem vị trí từng căn trên mặt bằng để thấy vì sao <b>cùng diện tích mà giá khác nhau</b>.</p>'
+            '<div class="g15w"><figure class="g15m"><img src="' + I + '" width="1500" height="1105" loading="lazy" decoding="async" alt="Mặt bằng tầng điển hình Sun Saphia (áp dụng tầng 15) – vị trí căn 1515, 1509, 1524">' + pins +
+            '<figcaption>Mặt bằng tầng điển hình 3A–28 · phía trên là hướng biển</figcaption></figure>'
+            '<div class="g15t"><table><thead><tr><th>Căn</th><th>Vị trí</th><th>Giá tham khảo</th><th>Đơn giá</th><th>Đến khi nhận nhà (25%)</th><th>Vay 70%</th></tr></thead><tbody>' + rows + '</tbody></table>'
+            '<ul class="ck g15why"><li><b>Hướng biển trực diện</b> đắt nhất – mở cửa là thấy biển.</li><li><b>Cánh hông</b> mềm hơn khoảng 0,5 tỷ, vẫn thoáng.</li>'
+            '<li><b>Dãy phía sau</b> giá tốt nhất – hợp mua cho thuê dài hạn.</li><li><b>Tầng thấp hơn</b> mỗi tầng giảm thêm ~10–30 triệu → Studio tầng thấp không sân vườn ước tính <b>chỉ từ ~1,8 tỷ</b>.</li></ul>'
+            '<p class="note">Giá tham khảo chủ đầu tư đưa ra cho tầng 15, theo phương án thanh toán 25% + vay (vay 70%, hỗ trợ lãi suất tới 24 tháng); chưa gồm VAT và phí bảo trì, chưa trừ chiết khấu. Giá chính thức từng căn công bố khi gần mở bán.</p>'
+            '<button type="button" class="btn" data-pop data-interest="Bảng giá – giá tầng 15">Nhận giá căn còn trống đúng tầng anh/chị thích</button></div></div></div></section>')
+
 def bang_gia():
     hero, cld = sub_hero('/bang-gia', 'Bảng giá', 'Giá Sun Saphia Residence – <b>bảng giá</b> căn hộ mặt biển Đà Nẵng',
                          'Giá Sun Saphia Residence dự kiến chỉ từ khoảng 1,8 tỷ/căn, thanh toán khoảng 25% đến khi nhận nhà; bảng giá chính thức từng căn chủ đầu tư công bố khi gần mở bán. Trang này tổng hợp giá thị trường căn hộ mặt biển Đà Nẵng, những yếu tố làm giá từng căn khác nhau, cách vay ngân hàng – và sẽ cập nhật ngay khi có giá.',
@@ -293,7 +315,7 @@ def bang_gia():
         ('Ngân hàng nào cho vay mua Sun Saphia Residence?', 'Vietcombank, BIDV và NCB hỗ trợ cho vay. Tỷ lệ vay, thời gian ân hạn và hỗ trợ lãi suất theo chính sách bán hàng công bố khi mở bán.'),
         ('Mua qua đại lý có đắt hơn mua trực tiếp?', 'Không. TATILAND là đại lý phân phối chính thức do Sun Property chứng nhận, áp dụng bảng giá và chính sách gốc của chủ đầu tư.'),
         ('Bây giờ có phải đặt cọc để giữ giá?', 'Không. Hiện chỉ đăng ký nhận thông tin, không thu bất kỳ khoản tiền nào.')])
-    b = hero
+    b = hero + gia_tang15()
     b += tldr('giá Sun Saphia Residence', [('Giá chính thức', 'Chưa công bố; hiện có giá tham khảo từ chủ đầu tư: Studio tầng 15 ~2,1–2,9 tỷ (giá theo phương án thanh toán 25% + vay), tầng thấp hơn giảm ~10–30 triệu/tầng, giá chính thức công bố khi gần mở bán'), ('Giá tham khảo trong bài toán', '3 tỷ (studio 30 m²), 4,5 tỷ (1BR 50 m²) – giá giả định, không phải giá bán'),
         ('Giá thị trường ven biển', 'Studio 5,2–10,5 tỷ · 1BR 7,7–11,5 tỷ · 2BR 17,4–21,7 tỷ (The Soleil, Futa, Nobu)'), ('Vay', 'Vietcombank, BIDV, NCB; hỗ trợ lãi suất theo chính sách khi mở bán'),
         ('Nhận bảng giá gốc', 'Đại lý chính thức TATILAND · Zalo 0904 567 009 · không thu tiền giữ chỗ')])
