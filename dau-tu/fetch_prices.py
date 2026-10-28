@@ -7,6 +7,7 @@ Kênh tự động:
   - Lãi suất Fed: biên độ mục tiêu (trên/dưới) và lãi suất thực tế EFFR – Fed New York (dự phòng: FRED)
   - VN-Index, VN30, HNX-Index, UPCoM và ~30 cổ phiếu lớn             – DNSE (dự phòng: VNDirect)
   - Khối ngoại mua/bán ròng toàn sàn HOSE và từng mã lớn – CafeF
+  - Tin tức thị trường: RSS CafeF, Vietstock, VnEconomy, VnExpress (chứng khoán, ngân hàng, BĐS, vàng, vĩ mô)
   - Lãi vay tín chấp / thế chấp (Techcombank, Topi) và vay mua nhà ưu đãi (Smartland) theo ngân hàng
   - Lãi suất tiết kiệm tại quầy / online ~38 ngân hàng – 24hMoney (dự phòng: Người Quan Sát)
 Kênh nhập tay (sửa file CSV trong data/):
@@ -38,6 +39,7 @@ STOCKS_FILE = DATA / "stocks.json"
 RATES_FILE = DATA / "lai_suat_auto.json"
 TICKERS_FILE = DATA / "ma_ck.json"
 LOANS_FILE = DATA / "lai_vay_auto.json"
+NEWS_FILE = DATA / "tin_tuc.json"
 TERMS = ("1", "3", "6", "12", "18", "24", "36")
 KEEP_DAYS = 800  # giữ tối đa ~2 năm cho chỉ số / vàng
 STOCK_KEEP = 260  # ~1 năm phiên cho từng mã
@@ -653,6 +655,56 @@ def fetch_loans():
     return {"bang": bang, "nguon": used}
 
 
+# ---------------------------------------------------------------- Tin tức thị trường (RSS)
+NEWS_FEEDS = (
+    ("Chứng khoán", "CafeF", "https://cafef.vn/thi-truong-chung-khoan.rss"),
+    ("Chứng khoán", "Vietstock", "https://vietstock.vn/830/chung-khoan/co-phieu.rss"),
+    ("Chứng khoán", "VnEconomy", "https://vneconomy.vn/chung-khoan.rss"),
+    ("Ngân hàng – lãi suất", "CafeF", "https://cafef.vn/tai-chinh-ngan-hang.rss"),
+    ("Ngân hàng – lãi suất", "VnEconomy", "https://vneconomy.vn/tai-chinh.rss"),
+    ("Bất động sản", "CafeF", "https://cafef.vn/bat-dong-san.rss"),
+    ("Bất động sản", "VnExpress", "https://vnexpress.net/rss/bat-dong-san.rss"),
+    ("Vàng – hàng hoá", "Vietstock", "https://vietstock.vn/759/hang-hoa/vang-va-kim-loai-quy.rss"),
+    ("Vàng – hàng hoá", "CafeF", "https://cafef.vn/thi-truong.rss"),
+    ("Vĩ mô", "CafeF", "https://cafef.vn/vi-mo-dau-tu.rss"),
+    ("Vĩ mô", "VnExpress", "https://vnexpress.net/rss/kinh-doanh.rss"),
+)
+NEWS_KEEP_DAYS = 7
+
+
+def _xml_text(x):
+    x = re.sub(r"<!\[CDATA\[(.*?)\]\]>", r"\1", x or "", flags=re.S)
+    x = html.unescape(re.sub(r"<[^>]+>", " ", html.unescape(x)))
+    return re.sub(r"\s+", " ", x).strip()
+
+
+def fetch_news():
+    """Tin mới từ RSS các báo kinh tế. Trả danh sách {t, l, s, c, d, m} (tiêu đề, link, nguồn, nhóm, giờ ISO, tóm tắt)."""
+    from email.utils import parsedate_to_datetime
+    out, errs = [], []
+    for cat, src, url in NEWS_FEEDS:
+        try:
+            xml = get(url, timeout=20).text
+            for it in re.findall(r"<item\b.*?</item>", xml, flags=re.S):
+                tag = lambda n: (re.search(rf"<{n}\b[^>]*>(.*?)</{n}>", it, flags=re.S) or [None, ""])[1]  # noqa: E731
+                title, link = _xml_text(tag("title")), _xml_text(tag("link")) or _xml_text(tag("guid"))
+                if not title or not link.startswith("http"):
+                    continue
+                try:
+                    d = parsedate_to_datetime(_xml_text(tag("pubDate"))).astimezone(VN_TZ)
+                except Exception:  # noqa: BLE001
+                    continue
+                desc = _xml_text(tag("description"))[:220]
+                out.append({"t": title, "l": link, "s": src, "c": cat, "d": d.isoformat(timespec="minutes"), "m": desc})
+        except Exception as e:  # noqa: BLE001
+            errs.append(f"{src} {cat}: {e}")
+    for e in errs:
+        log("   " + e)
+    if not out:
+        raise ValueError(" | ".join(errs) or "không có tin")
+    return out
+
+
 # ---------------------------------------------------------------- main
 def main():
     DATA.mkdir(exist_ok=True)
@@ -807,6 +859,25 @@ def main():
 
     step("Lãi vay", lai_vay)
 
+    news = load(NEWS_FILE, {"items": []})
+
+    def tin_tuc():
+        fresh = fetch_news()
+        # gộp với tin đã lưu, bỏ trùng theo link / tiêu đề, giữ 7 ngày gần nhất
+        cutoff = (datetime.now(VN_TZ) - timedelta(days=NEWS_KEEP_DAYS)).isoformat()
+        seen, items = set(), []
+        for it in sorted(fresh + news.get("items", []), key=lambda x: x["d"], reverse=True):
+            k1, k2 = it["l"].split("?")[0], re.sub(r"\W+", "", it["t"].lower())[:80]
+            if it["d"] < cutoff or k1 in seen or k2 in seen:
+                continue
+            seen.update((k1, k2))
+            items.append(it)
+        news["items"] = items[:400]
+        news["updated"] = datetime.now(VN_TZ).isoformat(timespec="minutes")
+        log(f"   {len(fresh)} tin mới đọc, lưu {len(news['items'])} tin")
+
+    step("Tin tức", tin_tuc)
+
     def ds_ma():
         # danh sách mã cho ô tra cứu – mỗi ngày lấy 1 lần
         old = load(TICKERS_FILE, {})
@@ -860,6 +931,8 @@ def main():
     prices["errors"] = errors
     stocks["updated"] = now
     save(PRICES_FILE, prices)
+    if news.get("items"):
+        save(NEWS_FILE, news)
     if loans:
         save(LOANS_FILE, loans)
     if rates:
