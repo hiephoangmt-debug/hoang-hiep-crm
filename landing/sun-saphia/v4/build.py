@@ -23,11 +23,17 @@ def article_ld(title, desc, url, pub='2026-10-17', mod='2026-10-24'):
     return {'@type': 'Article', 'headline': title, 'description': desc, 'datePublished': pub, 'dateModified': mod,
             'author': PERSON, 'publisher': ORG, 'image': OG, 'mainEntityOfPage': url, 'inLanguage': 'vi', 'about': {'@id': MAIN + '/#du-an'}}
 
+INV_PAGES = {'/bang-gia': 'BẢNG GIÁ', '/mat-bang': 'MẶT BẰNG', '/cho-thue': 'CHO THUÊ', '/tinh-dong-tien': 'TÍNH DÒNG TIỀN', '/vi-sao-sun-group': 'VÌ SAO SUN GROUP', '/quy-hoach': 'QUY HOẠCH', '/phap-ly': 'PHÁP LÝ'}
+
 VT_PAGES = {'/bang-gia': 'BẢNG GIÁ', '/mat-bang': 'MẶT BẰNG', '/phap-ly': 'PHÁP LÝ', '/cho-thue': 'CHO THUÊ', '/vi-sao-sun-group': 'VÌ SAO SUN GROUP', '/quy-hoach': 'QUY HOẠCH'}
 
 def page(path, title, desc, kw, body, lds, cur, tools=False, canon=None, robots='index,follow'):
     url = MAIN + path
     body = body.replace('{M}', MAIN)
+    if path in INV_PAGES and 'id="tai-chinh"' not in body:
+        m = re.search(r'<section class="sec[^"]*" id="hoi-dap"', body)
+        i = m.start() if m else body.rfind('<section')
+        body = body[:i] + tai_chinh(INV_PAGES[path]) + dau_tu_san(INV_PAGES[path]) + body[i:]
     if path in VT_PAGES and 'sec nv vtd' not in body:
         m = re.search(r'<section class="sec[^"]*" id="hoi-dap"', body)
         i = m.start() if m else body.rfind('<section')
@@ -123,7 +129,7 @@ def home():
         ('Sun Saphia Residence có bao nhiêu tầng, bao nhiêu căn?', '1 tòa tháp 30 tầng, cao 114 m, 2 tầng hầm, tổng 782 căn trên khu đất 3.720,1 m². Căn hộ bố trí từ tầng 3A đến tầng 28, trần cao 3,5 m.'),
         ('Có những loại căn nào?', 'Studio 30–31 m² (513 căn), 1BR+ 50–51 m² (108 căn), 2BR 60–70 m² (133 căn), bàn giao hoàn thiện cơ bản.'),
         ('Pháp lý Sun Saphia Residence thế nào?', 'GCN đăng ký đầu tư mã dự án 2572746483 do Sở Tài chính TP Đà Nẵng cấp, chứng nhận lần đầu 17/09/2026; thời hạn dự án 50 năm; công trình cấp I, niên hạn sử dụng 100 năm. Nghị quyết 278/NQ-CP (18/9/2026) xác định thời hạn sử dụng chung cư theo niên hạn công trình.'),
-        ('Giá bán Sun Saphia Residence bao nhiêu?', 'Chủ đầu tư chưa công bố bảng giá chính thức. Căn hộ mặt biển Đà Nẵng đang chào bán khoảng: studio 5,2–10,5 tỷ, 1BR 7,7–11,5 tỷ, 2BR 17,4–21,7 tỷ (tham khảo tại Kick-off).'),
+        ('Giá bán Sun Saphia Residence bao nhiêu?', 'Giá dự kiến chỉ từ hơn 2 tỷ/căn, thanh toán khoảng 25% đến khi nhận nhà (11/2028); bảng giá chính thức từng căn công bố tại sự kiện ra mắt 01/11/2026. Để so sánh, căn hộ mặt biển Đà Nẵng khác đang chào bán: studio 5,2–10,5 tỷ, 1BR 7,7–11,5 tỷ, 2BR 17,4–21,7 tỷ (tham khảo tại Kick-off).'),
         ('Khi nào mở bán, khi nào bàn giao?', 'Sự kiện ra mắt và chính thức nhận booking: 9:00 Chủ nhật 01/11/2026 tại khách sạn Hilton Đà Nẵng (50 Bạch Đằng); bàn giao dự kiến tháng 11/2028 (kế hoạch, có thể thay đổi theo công bố của chủ đầu tư).'),
         ('Vì sao nên quan tâm từ bây giờ?', 'Lãi suất đang có tín hiệu giảm, giai đoạn đầu thường có chính sách giá và hỗ trợ lãi suất tốt nhất, và người đăng ký sớm được chọn căn đẹp trước. Chính sách cụ thể theo công bố khi mở bán.'),
         ('Bây giờ có phải đặt cọc không?', 'Không. Hiện chỉ đăng ký nhận thông tin, bảng giá và mặt bằng; không thu bất kỳ khoản tiền nào.')])
@@ -133,10 +139,11 @@ def home():
            ('tien-do', 'Tiến độ'), ('hoi-dap', 'Hỏi đáp')]
     b = cover() + hero_home()
     b += su_kien('HOME')
+    b += tai_chinh('HOME') + dau_tu_san('HOME')
     b += tldr('Sun Saphia Residence', [('Là gì', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, do Sun Property phát triển'), ('Vị trí', 'Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, phường Ngũ Hành Sơn; ra biển Sơn Thủy ~400 m'),
         ('Quy mô', '1 tòa 30 tầng (114 m), 2 hầm, 782 căn trên 3.720,1 m²'), ('Loại căn', 'Studio 30–31 m² (513) · 1BR+ 50–51 m² (108) · 2BR 60–70 m² (133), trần 3,5 m'),
         ('Pháp lý', 'GCN đầu tư 2572746483 (17/09/2026), công trình cấp I niên hạn 100 năm'), ('Ngân hàng', 'Vietcombank, BIDV, NCB hỗ trợ vay'),
-        ('Mở bán · bàn giao', 'Ra mắt 01/11/2026 (Hilton Đà Nẵng) · bàn giao 11/2028'), ('Giá bán', 'Chưa công bố; đăng ký để nhận bảng giá gốc qua Zalo 0904 567 009')])
+        ('Mở bán · bàn giao', 'Ra mắt 01/11/2026 (Hilton Đà Nẵng) · bàn giao 11/2028'), ('Giá bán', 'Dự kiến từ hơn 2 tỷ/căn · thanh toán ~25% đến khi nhận nhà · bảng giá gốc qua Zalo 0904 567 009')])
     b += '<section class="sec" style="padding-top:0"><div class="wrap">' + daily() + '<div class="toc" style="margin-top:26px">' + ''.join('<a href="#%s">%s</a>' % t for t in toc) + '</div></div></section>'
     # Thời điểm
     b += ('<section class="sec nv" id="thoi-diem">' + tiles('tr') + '<div class="wrap">'
@@ -268,7 +275,7 @@ def sub_hero(path, name, h1, lead, img_name, alt, label):
 
 def bang_gia():
     hero, cld = sub_hero('/bang-gia', 'Bảng giá', 'Giá Sun Saphia Residence – <b>bảng giá</b> căn hộ mặt biển Đà Nẵng',
-                         'Đến ngày 23/10/2026, chủ đầu tư chưa công bố bảng giá chính thức Sun Saphia Residence; dự kiến công bố tại sự kiện ra mắt 01/11/2026. Trang này tổng hợp giá thị trường căn hộ mặt biển Đà Nẵng, những yếu tố làm giá từng căn khác nhau, cách vay ngân hàng – và sẽ cập nhật ngay khi có giá.',
+                         'Giá Sun Saphia Residence dự kiến chỉ từ hơn 2 tỷ/căn, thanh toán khoảng 25% đến khi nhận nhà; bảng giá chính thức từng căn công bố tại sự kiện ra mắt 01/11/2026. Trang này tổng hợp giá thị trường căn hộ mặt biển Đà Nẵng, những yếu tố làm giá từng căn khác nhau, cách vay ngân hàng – và sẽ cập nhật ngay khi có giá.',
                          'thap-tren-cao-ngay', 'Toàn cảnh Sun Saphia Residence bên bờ biển Đà Nẵng nhìn từ trên cao', 'Web – bảng giá đầu trang')
     fq, fld = faq([
         ('Khi nào có bảng giá Sun Saphia Residence?', 'Dự kiến công bố tại sự kiện ra mắt 01/11/2026. Anh/chị để lại số Zalo để nhận bảng giá gốc ngay khi chủ đầu tư công bố.'),
@@ -282,7 +289,7 @@ def bang_gia():
         ('Giá thị trường ven biển', 'Studio 5,2–10,5 tỷ · 1BR 7,7–11,5 tỷ · 2BR 17,4–21,7 tỷ (The Soleil, Futa, Nobu)'), ('Vay', 'Vietcombank, BIDV, NCB; hỗ trợ lãi suất theo chính sách khi mở bán'),
         ('Nhận bảng giá gốc', 'Đại lý chính thức TATILAND · Zalo 0904 567 009 · không thu tiền giữ chỗ')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Tình trạng giá', 'Giá Sun Saphia Residence <b>hiện tại</b>', 'o') +
-          '<div class="g2 eq"><div class="txt"><p>Chủ đầu tư Sun Property chưa công bố giá bán chính thức. Mọi con số "giá Sun Saphia" đang lan truyền trước ngày mở bán chỉ là phỏng đoán.</p>'
+          '<div class="g2 eq"><div class="txt"><p>Giá dự kiến <b>chỉ từ hơn 2 tỷ/căn</b>, thanh toán khoảng <b>25% đến khi nhận nhà</b>. Bảng giá chính thức từng căn chủ đầu tư công bố tại sự kiện ra mắt 01/11/2026.</p>'
           '<p>Tại Kick-off, chủ đầu tư dùng <b>giá tham khảo 3 tỷ cho studio 30 m²</b> và <b>4,5 tỷ cho 1BR 50 m²</b> để minh họa bài toán cho thuê – đây là giá giả định, không phải giá bán.</p>'
           '<ul class="ck"><li>Bảng giá chính thức: dự kiến công bố tại sự kiện ra mắt 01/11/2026</li><li>Phương thức thanh toán, hỗ trợ lãi suất: công bố cùng chính sách bán hàng</li><li>Người đăng ký trước nhận bảng giá và mặt bằng căn còn trống sớm nhất</li></ul>'
           + slogan_box('Bảng giá – giữa trang') + '</div>'
@@ -582,7 +589,7 @@ def tai_chinh(ctx='ADS'):
             '<div class="tcr"><div><small>25% đến khi nhận nhà</small><b id="tc25">525 triệu</b><em class="dk">dự kiến</em></div></div></div>'
             '<p class="src" style="margin-top:10px">Ước tính để anh/chị hình dung dòng tiền; giá, tiến độ và chính sách chính thức theo công bố của chủ đầu tư tại sự kiện ra mắt 01/11/2026.</p>'
             '<div class="rtw"><h3>Cho thuê <b>từ bao nhiêu?</b></h3><div class="rtg"><div class="rtc"><span class="rtt">Studio · 30–31 m²</span><div class="rtr"><small>Dài hạn (theo tháng)</small><b>~18 triệu<i>/tháng</i></b><span>≈ 216 triệu/năm</span></div><div class="rtr"><small>Ngắn hạn (theo đêm)</small><b>~30 triệu<i>/tháng</i></b><span>≈ 356 triệu/năm</span></div><em class="dk">dự kiến</em></div><div class="rtc"><span class="rtt">1BR+ · 50–51 m²</span><div class="rtr"><small>Dài hạn (theo tháng)</small><b>~24 triệu<i>/tháng</i></b><span>≈ 288 triệu/năm</span></div><div class="rtr"><small>Ngắn hạn (theo đêm)</small><b>~42 triệu<i>/tháng</i></b><span>≈ 505 triệu/năm</span></div><em class="dk">dự kiến</em></div><div class="rtc"><span class="rtt">2BR · 60–70 m²</span><div class="rtr"><small>Dài hạn (theo tháng)</small><b>~35 triệu<i>/tháng</i></b><span>≈ 420 triệu/năm</span></div><div class="rtr"><small>Ngắn hạn (theo đêm)</small><b class="ask">Theo mùa</b><span>nhận bảng tính riêng</span></div><em class="dk">dự kiến</em></div></div>'
-            '<p class="src" style="margin-top:8px">Dài hạn: tham chiếu căn hộ Sun Group bên sông Hàn (The Panoma: Studio 18–20 tr, 1PN 24 tr, 2PN 35 tr/tháng). Ngắn hạn: giá đêm căn view biển Studio 2,2–2,9 tr, 1BR+ 3,4–3,7 tr (tài liệu Kick-off), giả định lấp đầy 60%, đã trừ ~35% chi phí vận hành. <a href="#dong-tien">Xem phần dòng tiền →</a></p></div>'
+            '<p class="src" style="margin-top:8px">Dài hạn: tham chiếu căn hộ Sun Group bên sông Hàn (The Panoma: Studio 18–20 tr, 1PN 24 tr, 2PN 35 tr/tháng). Ngắn hạn: giá đêm căn view biển Studio 2,2–2,9 tr, 1BR+ 3,4–3,7 tr (tài liệu Kick-off), giả định lấp đầy 60%, đã trừ ~35% chi phí vận hành.</p></div>'
 
             '<div class="hcta" style="justify-content:center"><button type="button" class="btn" data-pop data-interest="' + ctx + ' – nhận bảng giá &amp; lịch thanh toán 25%">Nhận bảng giá &amp; lịch thanh toán chi tiết</button></div>'
             '<script>(function(){var r=document.getElementById("tcv");if(!r)return;function f(x){return x>=1000?(x/1000).toFixed(2).replace(".",",").replace(/,?0+$/,"")+" tỷ":Math.round(x)+" triệu"}'
@@ -598,7 +605,7 @@ def dau_tu_san(ctx='ADS'):
             '<p class="lead just" style="max-width:860px;margin:0 auto 18px;text-align:center">Thuê dài hạn có dòng tiền ổn định, thuê ngắn hạn cho doanh thu cao hơn theo mùa. Nếu anh/chị đang tính xây tòa căn hộ hay khách sạn để cho thuê, đây có thể là một lựa chọn gọn hơn.</p>'
             '<div class="dtg"><div class="dtc no"><h3>Tự xây tòa căn hộ / khách sạn</h3><ul>' + ''.join('<li>%s</li>' % x for x in no) + '</ul></div>'
             '<div class="dtc yes"><h3>Đầu tư 1 sàn hoặc nhiều căn Sun Saphia</h3><ul>' + ''.join('<li>%s</li>' % x for x in yes) + '</ul></div></div>'
-            '<div class="dtb"><h3>Bài toán <b>1 sàn</b>: so với mua khách sạn gần biển</h3><div class="dtt"><table><thead><tr><th></th><th>Khách sạn rao bán gần biển Mỹ Khê</th><th>1 sàn Sun Saphia (tầng điển hình)</th></tr></thead><tbody><tr><th>Giá</th><td data-l="Khách sạn gần biển"><b>65–89 tỷ</b> (tin rao, trả gần hết khi sang nhượng)</td><td data-l="1 sàn Sun Saphia"><b>~78 tỷ</b> dự kiến · chưa trừ chiết khấu mua sàn</td></tr><tr><th>Vốn đến khi nhận</th><td data-l="Khách sạn gần biển">Gần như toàn bộ ngay</td><td data-l="1 sàn Sun Saphia"><b>~19–20 tỷ</b> (25%) đến 11/2028, phần còn lại có ngân hàng hỗ trợ</td></tr><tr><th>Quy mô</th><td data-l="Khách sạn gần biển">37–60 phòng khách sạn trên lô đất 185–235 m², 10–12 tầng</td><td data-l="1 sàn Sun Saphia">28 căn hộ 30–70 m² (19 Studio, 4 1BR+, 5 2BR), ~1.110 m² thông thủy</td></tr><tr><th>Tầm nhìn</th><td data-l="Khách sạn gần biển">Tòa thấp giữa phố, view bị che dần</td><td data-l="1 sàn Sun Saphia">Tòa 30 tầng mặt biển, view biển – sông – Ngũ Hành Sơn thoáng</td></tr><tr><th>Tiện ích & thương hiệu</th><td data-l="Khách sạn gần biển">Tự vận hành, ít tiện ích chung</td><td data-l="1 sàn Sun Saphia">Thương hiệu Sun Group, hồ bơi, gym, khối đế thương mại</td></tr><tr><th>Cho thuê tham chiếu</th><td data-l="Khách sạn gần biển">Ví dụ tin rao: 37 phòng thuê nguyên tòa ~280 triệu/tháng</td><td data-l="1 sàn Sun Saphia">Thuê dài hạn cả sàn ~610 triệu/tháng dự kiến (theo giá thuê Panoma)</td></tr><tr><th>Pháp lý</th><td data-l="Khách sạn gần biển">Tự kiểm tra hoàn công, PCCC từng tòa</td><td data-l="1 sàn Sun Saphia">GCN đầu tư đã có, công trình cấp I</td></tr></tbody></table></div><p class="src">Khách sạn: giá chào bán trên các tin rao tháng 5–7/2026 (Hồ Nghinh 11 tầng 40 phòng 70 tỷ; Lê Mạnh Trinh 12 tầng 60 phòng 89 tỷ; Phạm Văn Đồng 37 phòng 65 tỷ, đang cho thuê ~280 tr/tháng), chưa phải giá giao dịch. 1 sàn Saphia: ước tính theo mặt bằng tầng 3A–28 và mức giá dự kiến từ hơn 2 tỷ cho Studio 30 m² (~70 tr/m² thông thủy); giá chính thức theo công bố của chủ đầu tư.</p></div>'
+            '<div class="dtb"><h3>Bài toán <b>1 sàn</b>: so với mua khách sạn gần biển</h3><div class="dtt"><table><thead><tr><th></th><th>Khách sạn rao bán gần biển Mỹ Khê</th><th>1 sàn Sun Saphia (tầng điển hình)</th></tr></thead><tbody><tr><th>Giá</th><td data-l="Khách sạn gần biển"><b>65–89 tỷ</b> cho lô 185–235 m² đường phía sau; lô lớn sát biển rao tới <b>165 tỷ</b></td><td data-l="1 sàn Sun Saphia"><b>~78 tỷ</b> dự kiến · chưa trừ chiết khấu mua sàn</td></tr><tr><th>Vốn đến khi nhận</th><td data-l="Khách sạn gần biển">Gần như toàn bộ ngay</td><td data-l="1 sàn Sun Saphia"><b>~19–20 tỷ</b> (25%) đến 11/2028, phần còn lại có ngân hàng hỗ trợ</td></tr><tr><th>Quy mô</th><td data-l="Khách sạn gần biển">37–60 phòng khách sạn nhỏ, 10–12 tầng</td><td data-l="1 sàn Sun Saphia">28 căn hộ 30–70 m² (19 Studio, 4 1BR+, 5 2BR), ~1.110 m² thông thủy</td></tr><tr><th>Vị trí &amp; tầm nhìn</th><td data-l="Khách sạn gần biển">Dưới 150 tỷ đa phần ở <b>đường phía sau</b> (Hồ Nghinh, Lê Mạnh Trinh, Phạm Văn Đồng) – <b>không mặt biển</b>, view bị các tòa phía trước che</td><td data-l="1 sàn Sun Saphia"><b>Mặt tiền trục biển</b> Võ Nguyên Giáp, tòa 30 tầng – view biển, sông Hàn, Ngũ Hành Sơn thoáng; công viên 2,45 ha phía trước</td></tr><tr><th>Tiện ích & thương hiệu</th><td data-l="Khách sạn gần biển">Tự vận hành, ít tiện ích chung</td><td data-l="1 sàn Sun Saphia">Thương hiệu Sun Group, hồ bơi, gym, khối đế thương mại</td></tr><tr><th>Cho thuê tham chiếu</th><td data-l="Khách sạn gần biển">Ví dụ tin rao: 37 phòng thuê nguyên tòa ~280 triệu/tháng</td><td data-l="1 sàn Sun Saphia">Thuê dài hạn cả sàn ~610 triệu/tháng dự kiến (theo giá thuê Panoma)</td></tr><tr><th>Pháp lý</th><td data-l="Khách sạn gần biển">Tự kiểm tra hoàn công, PCCC từng tòa</td><td data-l="1 sàn Sun Saphia">GCN đầu tư đã có, công trình cấp I</td></tr></tbody></table></div><p class="src dsrc"><b>Dẫn chứng – tin rao trên nhadatdanang.asia, alonhadat.com.vn tháng 5–7/2026 (giá chào bán, chưa phải giá chốt):</b> Hồ Nghinh – 11 tầng, 40 phòng, 70 tỷ · Lê Mạnh Trinh – 12 tầng, 60 phòng, 89 tỷ · Lô 368 m², ngang 18,5 m – 165 tỷ. 1 sàn Saphia ước tính theo mặt bằng tầng 3A–28 (~1.110 m² thông thủy) và mức giá dự kiến từ hơn 2 tỷ cho Studio 30 m² (~70 tr/m²); giá chính thức theo công bố của chủ đầu tư.</p></div>'
             '<div class="hcta" style="justify-content:center;margin-top:18px"><button type="button" class="btn" data-pop data-interest="' + ctx + ' – phương án đầu tư 1 sàn / nhiều căn">Nhận phương án đầu tư 1 sàn / nhiều căn</button></div>'
             '<p class="src" style="text-align:center;margin-top:8px">Mức chiết khấu mua sàn / nhiều căn theo chính sách chủ đầu tư từng đợt – đại lý gửi phương án riêng theo ngân sách của anh/chị.</p>'
             '</div></section>')
@@ -634,7 +641,7 @@ def ads(domain):
          '<a class="play" href="#ss4d" data-4d><i aria-hidden="true">▶</i><span><b>Xem dự án 3D · 4D</b><small>Xoay tòa tháp · nắng theo giờ · view biển từ căn</small></span></a>'
          '</div><div class="hr">%s</div></div></div></div></section>'
          '<section class="hstrip"><div class="wrap">%s'
-         '<div class="qlinks"><a href="{M}/bang-gia">Bảng giá</a><a href="#mat-bang">Mặt bằng &amp; chọn căn</a><a href="{M}/tinh-dong-tien">Tính dòng tiền</a><a href="#tai-chinh">Giá &amp; thanh toán</a></div></div></section>'
+         '<div class="qlinks"><a href="#tai-chinh">Giá &amp; thanh toán</a><a href="#mat-bang">Mặt bằng &amp; chọn căn</a><a href="#dau-tu">Đầu tư 1 sàn</a><a href="#su-kien">Sự kiện 01/11</a></div></div></section>'
          '<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-4d]");if(!a)return;var b=document.getElementById("ss4d-box");if(!b)return;e.preventDefault();if(innerWidth<=760&&window.ss4dFull){ss4dFull();return}'
          'try{b.scrollIntoView({behavior:"smooth",block:"center"})}catch(x){b.scrollIntoView()}var g=document.getElementById("ss4d-go");if(g)g.click();'
          'try{if(window.gtag)gtag("event","xem_4d",{event_label:"hero"})}catch(x){}});</script>') % (
@@ -666,7 +673,6 @@ def ads(domain):
     b = bands_at(b, [(1, band('Thời điểm vàng – đừng để lỡ đợt đầu', 'Nhận bảng giá gốc và chính sách sớm nhất qua Zalo.', 'Nhận bảng giá sớm', 'ADS – sau lý do mua sớm')),
                      (3, band('Mỗi tầng chỉ vài căn nhìn thẳng ra biển', 'Người đăng ký sớm được gửi mặt bằng trước và ưu tiên chọn căn ngay khi mở bán.', 'Ưu tiên chọn căn', 'ADS – ưu tiên chọn căn')),
                      (6, band('Nhận bảng tính dòng tiền theo căn', 'Giá thuê, lấp đầy, lợi nhuận từng căn – gửi qua Zalo.', 'Nhận bảng tính', 'ADS – bảng tính dòng tiền'))])
-    b += ('<section class="sec alt"><div class="wrap"><h2 class="dp" style="font-size:30px;margin-bottom:16px">Tìm hiểu <b>thêm</b></h2>' + related('/ads') + '</div></section>')
     b += cta_block('ADS – form cuối trang')
     title = 'Sun Saphia Residence – Căn hộ mặt biển Đà Nẵng | Đại lý chính thức TATILAND'
     desc = 'Căn hộ mặt biển Đà Nẵng: Studio 30m², 1BR+ 50m², 2BR 60–70m², ra biển 400m, công trình cấp I, Vietcombank, BIDV, NCB hỗ trợ vay. Bảng giá gốc từ đại lý chính thức TATILAND.'
@@ -675,9 +681,10 @@ def ads(domain):
         if i > 0:
             j = b.rfind('<section', 0, i); t = b.index('>', j)
             if ' id="' not in b[j:t]: b = b[:j] + '<section id="%s"' % sid + b[j + 8:]
+    b = re.sub(r'<p[^>]*><a class="lk" href="\{M\}/quy-hoach">[^<]*</a></p>', '', b)
     html = head(title, desc, url, OG, 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES], FAV)
     b = b.replace('{M}', MAIN)
-    html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(True) + '</body>\n</html>\n'
+    html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN, pages=False) + '\n' + popup() + tail(True) + '</body>\n</html>\n'
     return copy_fix(html)
 
 def tinh_dong_tien():
@@ -711,7 +718,7 @@ def vi_sao():
         ('Sun Group đã làm những dự án nào ở Đà Nẵng?', 'Du lịch – nghỉ dưỡng: Sun World Ba Na Hills (cáp treo, Cầu Vàng), InterContinental Danang Sun Peninsula Resort, Premier Village Danang Resort, Sun World Asia Park; biệt thự biển tại Premier Village. Căn hộ: Sun Cosmo, Sun Ponte, Sun Symphony ven sông Hàn; Sun Galaxy Complex; FourS Tower (Sun Riverpolis). Sun Saphia Residence là dự án căn hộ cao tầng mặt biển đầu tiên.'),
         ('Khu đất trước Sun Saphia sẽ làm gì?', 'UBND TP Đà Nẵng đã phê duyệt dự án Công viên công cộng (Quyết định 2958/QĐ-UBND) trên khoảng 2,45 ha đất thu hồi từ dự án Hòn Ngọc Á Châu, tổng mức đầu tư hơn 47 tỷ đồng, giai đoạn 2025–2027, gồm quảng trường biển, đường dạo, khu vui chơi, bãi đậu xe, khu tắm nước ngọt.'),
         ('Vì sao căn hộ mặt biển ở Đà Nẵng hiếm?', 'Biển là tài nguyên hữu hạn; dải đất ven biển Đà Nẵng phần lớn đã dành cho resort, khách sạn và không gian công cộng. Bãi biển là tài sản công, nên căn hộ có thể nhìn thẳng ra biển và đi bộ ra bãi tắm chỉ còn rất ít vị trí.'),
-        ('Căn hộ mặt biển Đà Nẵng đang chào bán giá bao nhiêu?', 'Theo giá chào bán trình bày tại Kick-off: studio khoảng 5,2–10,5 tỷ, 1BR 7,7–11,5 tỷ, 2BR 17,4–21,7 tỷ tùy dự án (The Soleil, Futa Residence, Nobu). Giá Sun Saphia Residence chưa công bố, dự kiến thông tin tại sự kiện ra mắt 01/11/2026.'),
+        ('Căn hộ mặt biển Đà Nẵng đang chào bán giá bao nhiêu?', 'Theo giá chào bán trình bày tại Kick-off: studio khoảng 5,2–10,5 tỷ, 1BR 7,7–11,5 tỷ, 2BR 17,4–21,7 tỷ tùy dự án (The Soleil, Futa Residence, Nobu). Sun Saphia Residence dự kiến chỉ từ hơn 2 tỷ/căn, thanh toán khoảng 25% đến khi nhận nhà.'),
         ('Mua căn hộ mặt biển để cho thuê có tốt không?', 'Đà Nẵng đón 15,86 triệu lượt khách 9 tháng đầu 2026 (+29,6%); khách sạn Sun Group miền Trung lấp đầy 81,3% năm 2026. Studio view biển đang cho thuê 2,2–2,9 triệu/đêm ngoài mùa cao điểm. Kết quả thực tế phụ thuộc giá mua, mùa vụ và cách vận hành.'),
         ('Khi nào mở bán Sun Saphia Residence?', 'Sự kiện ra mắt, nhận booking 9:00 Chủ nhật 01/11/2026 tại Hilton Đà Nẵng; bàn giao dự kiến tháng 11/2028. Đăng ký nhận thông tin, bảng giá là miễn phí.')])
     b = hero

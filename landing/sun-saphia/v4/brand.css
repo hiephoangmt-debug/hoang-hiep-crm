@@ -733,3 +733,19 @@ em.dk{display:block;font-style:italic;font-size:12.5px;font-weight:600;letter-sp
 .dtt tr{border:1px solid var(--ln);border-radius:12px;margin-bottom:10px;overflow:hidden}.dtt tbody th{background:var(--pp);border:0;width:auto}
 .dtt td{border:0;padding:8px 12px}.dtt td::before{content:attr(data-l);display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}
 .dtt td:last-child::before{color:var(--or)}}
+/* Ads: chỉ navy + cam, không vàng */
+.tcx .ey,.dts .ey{color:#F2802F}
+.tcx .dp b,.dts .dp b,.rtw h3 b,.dtc.yes b,.cap1 b{color:#F2802F}
+.tcc:not(.hot) p strong{color:#F7A66B}.hnum em.dk{color:#F7A66B}
+.rtw .src a,.tcx .src a{color:#F7A66B}
+.dtb h3 b,.dtt td:last-child b{color:#E96118}
+.dtt td b{font-weight:700}.dtt td:nth-child(2) b{color:#5b6577}
+.dsrc a{color:var(--nv);text-decoration:underline;text-underline-offset:2px}
+/* Ads: chỉ navy + cam, không vàng */
+.tcx .ey,.dts .ey{color:#F2802F}
+.tcx .dp b,.dts .dp b,.rtw h3 b,.dtc.yes b,.cap1 b{color:#F2802F}
+.tcc:not(.hot) p strong{color:#F7A66B}.hnum em.dk{color:#F7A66B}
+.rtw .src a,.tcx .src a{color:#F7A66B}
+.dtb h3 b,.dtt td:last-child b{color:#E96118}
+.dtt td:nth-child(2) b{color:#5b6577}
+.dsrc a{color:var(--nv);text-decoration:underline;text-underline-offset:2px}

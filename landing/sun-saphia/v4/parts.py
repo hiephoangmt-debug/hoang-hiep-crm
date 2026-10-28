@@ -95,10 +95,11 @@ def author():
     return ('<p class="by"><b>Hoàng Phạm Đình Hiệp</b> – Giám đốc kinh doanh TATILAND, đại lý phân phối chính thức · '
             'Cập nhật %s theo tài liệu Kick-off của chủ đầu tư</p>') % UPDATED
 
-def footer(base):
-    links = ' · '.join('<a href="%s%s">%s</a>' % (base, p, t) for p, t in PAGES)
-    links += ' · <a href="%s/vi-sao-sun-group">Vì sao căn hộ mặt biển</a>' % base
-    links += ' · <a href="%s/chinh-sach-bao-mat">Chính sách bảo mật</a>' % base
+def footer(base, pages=True):
+    links = '' if not pages else ' · '.join('<a href="%s%s">%s</a>' % (base, p, t) for p, t in PAGES)
+    if pages:
+        links += ' · <a href="%s/vi-sao-sun-group">Vì sao căn hộ mặt biển</a>' % base
+        links += ' · <a href="%s/chinh-sach-bao-mat">Chính sách bảo mật</a>' % base
     return ('<footer class="ft"><div class="wrap">'
             '<div class="fbr"><img src="' + RAW + '093918cb38d81f5e24fbe4d8477cea21e3de6ca8/landing/sun-saphia/v4/img/logo-mark.webp" alt="" width="34" height="48" loading="lazy">'
             '<div><b>SUN SAPHIA RESIDENCE</b><span>Trước mặt là Biển · Sau lưng là Sông · Bên cạnh là Núi</span></div>'
