@@ -951,9 +951,62 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
   var ABBR = {ko: 'khong', k: 'khong', kh: 'khong', khg: 'khong', hok: 'khong', hong: 'khong', hem: 'khong', dc: 'duoc', dk: 'duoc', bn: 'bao nhieu', bnh: 'bao nhieu', bnhieu: 'bao nhieu',
     cdt: 'chu dau tu', sh: 'so hong', pn: 'phong ngu', ntn: 'nhu the nao', j: 'gi', mk: 'minh', mik: 'minh', vs: 'voi', sdt: 'so dien thoai', dt: 'dien thoai',
     bh: 'bao gio', bgio: 'bao gio', ib: 'nhan tin', dky: 'dang ky', tks: 'cam on', thks: 'cam on', thank: 'cam on', thanks: 'cam on', r: 'roi', ms: 'moi', lm: 'lam',
-    tr: 'trieu', ty: 'ty', oke: 'ok', okie: 'ok', okay: 'ok', zl: 'zalo', ad: 'anh', e: 'em', nt: 'nhan tin', ng: 'nguoi', bds: 'bat dong san', tl: 'tra loi', bt: 'binh thuong', mn: 'moi nguoi'};
+    tr: 'trieu', ty: 'ty', oke: 'ok', okie: 'ok', okay: 'ok', zl: 'zalo', ad: 'anh', e: 'em', nt: 'nhan tin', ng: 'nguoi', bds: 'bat dong san', tl: 'tra loi', bt: 'binh thuong', mn: 'moi nguoi',
+    vtri: 'vi tri', vt: 'vi tri', dtich: 'dien tich', cty: 'cong ty', ks: 'khach san', tt: 'thanh toan', nh: 'ngan hang', ls: 'lai suat', hk: 'khong', kg: 'khong', ak: 'a', hn: 'ha noi', sg: 'sai gon', hcm: 'ho chi minh', dn: 'da nang', dnang: 'da nang', qh: 'quy hoach', pl: 'phap ly', mb: 'mat bang', sk: 'su kien', bg: 'bang gia', tg: 'thoi gian', gd: 'gia dinh', nn: 'nguoi nuoc ngoai', bnhiu: 'bao nhieu', bnhiue: 'bao nhieu', dien: 'dien', cn: 'chu nhat', stu: 'studio', std: 'studio',
+    price: 'gia', prices: 'gia', pricing: 'gia', cost: 'gia', location: 'vi tri', where: 'o dau', address: 'dia chi', beach: 'bien', sea: 'bien', ocean: 'bien', seaview: 'view bien', rent: 'cho thue', rental: 'cho thue', lease: 'cho thue', airbnb: 'cho thue ngan han', loan: 'vay ngan hang', mortgage: 'vay ngan hang', bank: 'ngan hang', payment: 'thanh toan', pay: 'thanh toan', installment: 'thanh toan', legal: 'phap ly', ownership: 'so huu', freehold: 'so huu lau dai', handover: 'ban giao', completion: 'ban giao', bedroom: 'phong ngu', bedrooms: 'phong ngu', apartment: 'can ho', apartments: 'can ho', condo: 'can ho', flat: 'can ho', unit: 'can', units: 'can', floor: 'tang', floorplan: 'mat bang', layout: 'mat bang', event: 'su kien', launch: 'ra mat', deposit: 'dat coc', discount: 'chiet khau', promotion: 'uu dai', airport: 'san bay', foreigner: 'nguoi nuoc ngoai', foreigners: 'nguoi nuoc ngoai', foreign: 'nguoi nuoc ngoai', expat: 'nguoi nuoc ngoai', amenities: 'tien ich', amenity: 'tien ich', facilities: 'tien ich', pool: 'ho boi', invest: 'dau tu', investment: 'dau tu', investor: 'dau tu', yield: 'loi nhuan', profit: 'loi nhuan', developer: 'chu dau tu', phone: 'so dien thoai', whatsapp: 'zalo', contact: 'lien he', when: 'khi nao', size: 'dien tich', area: 'dien tich', sqm: 'm2', expensive: 'dat qua', cheap: 're', cheapest: 're nhat', far: 'bao xa', distance: 'bao xa', buy: 'mua', furniture: 'noi that', furnished: 'noi that', tax: 'thue vat', fee: 'phi', interest: 'lai suat', hotel: 'khach san', center: 'trung tam', centre: 'trung tam', downtown: 'trung tam', visit: 'xem nha', weather: 'thoi tiet', rain: 'troi mua', food: 'an gi', eat: 'an gi', restaurant: 'quan an', test: 'test', showroom: 'nha mau'};
+
+  /* ---------- Hiểu tiếng Anh: đổi cụm từ tiếng Anh sang tiếng Việt trước khi tìm ý ---------- */
+  var EN_PH = [['how much is', 'gia bao nhieu'], ['how much', 'gia bao nhieu'], ['how far', 'bao xa'], ['how long', 'bao lau'], ['open sale', 'mo ban'], ['for sale', 'mo ban'], ['floor plan', 'mat bang'], ['one bedroom', '1 phong ngu'], ['two bedroom', '2 phong ngu'], ['1 bed', '1 phong ngu'], ['2 bed', '2 phong ngu'], ['interest rate', 'lai suat'], ['down payment', 'tra truoc'], ['payment plan', 'tien do thanh toan'], ['service fee', 'phi quan ly'], ['management fee', 'phi quan ly'], ['sea view', 'view bien'], ['ocean view', 'view bien'], ['rental income', 'cho thue'], ['can foreigners', 'nguoi nuoc ngoai'], ['real person', 'nguoi that'], ['talk to', 'gap nguoi'], ['thank you', 'cam on']];
+  var EN_W = / (what|how|where|when|which|price|prices|cost|location|beach|apartment|apartments|condo|rent|rental|loan|payment|legal|foreigner|foreigners|bedroom|bedrooms|hello|please|thanks|thank|interested|available|project|invest|airport|handover|deposit|discount|weather|would|could|does|is there|are there|i want|i would|do you|can i|tell me) /;
+  var VI_W = / (khong|ko|k|gia|bao nhieu|bn|mua|duoc|dc|nhu|the nao|ntn|o dau|vay|cho thue|nha|anh|chi|em|e|minh|toi|nhe|voi|co|la|cua|nao|re|dat|tang|phong|ban|xem|gi|j|sao|roi|chua|biet|hoi|tks|cam on|vang|da|oi|lam|nhieu|bien|thue|von|tien) /;
+  var EN_W_G = new RegExp(EN_W.source.replace(/^ /, '(?<= )').replace(/ $/, '(?= )'), 'g'), VI_W_G = new RegExp(VI_W.source.replace(/^ /, '(?<= )').replace(/ $/, '(?= )'), 'g');
+  var enMode = false;
+  var EN_ASK = 'Leave your phone / WhatsApp / Zalo number and Mr. Hiep will send you the full details in English.';
+  var EN_CH = ['Price', 'Location', 'Rental income', 'Can foreigners buy?'];
+  var EN_DEF = ['Thanks for your question! Mr. Hiep (official agent, speaks English) can answer this in detail. Message him on Zalo/WhatsApp ' + SO + ' or leave your number here.'];
+  var EN_A = {
+    ngoai: ['Got it 😊 By the way – beachfront apartments by Sun Group in Da Nang now start from only ~VND 1.8 bn, with ~25% paid until handover. Would you like the location or the price list?'],
+    ngoaidl: ['Da Nang always has great beaches and food 😄 Speaking of beaches – Sun Saphia is just 400 m from My Khe / Son Thuy beach, and short-term rentals there are in high demand. Do you visit Da Nang often?'],
+    chao: ['Hello! I am the quick-reply assistant of Mr. Hoang Hiep for Sun Saphia Residence – the first beachfront apartment tower by Sun Group in Da Nang. Are you looking to live, holiday or invest (rent out)?'],
+    gia: ['Great news 🎉 Beachfront apartments by Sun Group from only about VND 1.8 billion (~US$70k) for a studio (estimated, excl. VAT). You pay just ~25% until handover (11/2028); the bank lends 70% with interest support for up to 24 months.\n• Studio: from ~VND 1.8 bn\n• 1BR+: from ~VND 3 bn\n• 2BR: from ~VND 3.8 bn\nOfficial prices are announced close to the sale opening. Which type interests you?'],
+    giakhac: ['Both numbers are right 😊 VND 2.1 bn is the developer’s reference price for a studio on floor 15. Each lower floor is about VND 10–30 million cheaper, so low-floor studios start from about VND 1.8 bn. Do you prefer the best price or the best sea view?'],
+    giatang: ['Reference prices by floor: floor 15 studios ~VND 2.1–2.9 bn (sea-facing units are highest); each lower floor is ~VND 10–30 million cheaper; lowest from ~VND 1.8 bn (excl. VAT). Do you prefer a lower price or a higher view?'],
+    gialoai: ['Estimated starting prices: Studio from ~VND 1.8 bn (~VND 450 m until handover), 1BR+ (~50 m²) from ~VND 3 bn, 2BR (60–70 m²) from ~VND 3.8 bn. Comparable beachfront units in Da Nang sell for VND 5–20 bn. How many people will stay?'],
+    vat: ['Current reference prices exclude VAT and the maintenance fee and are before discounts – early bookers usually get an extra discount when the official policy is released. Shall I add you to the priority list?'],
+    vitri: ['Sun Saphia Residence is on Vo Nguyen Giap beach road, Ngu Hanh Son district, Da Nang – about 400 m to My Khe / Son Thuy beach, ~15 minutes to the airport and the Dragon Bridge, ~30 minutes to Hoi An. A 2.45 ha public park is planned right in front.'],
+    bien: ['About 400 m to the beach (Son Thuy – My Khe), just a few minutes’ walk through the seaside park. Sea-facing units look straight at the ocean, and higher floors are more open.'],
+    sanbay: ['Da Nang International Airport is about 15 minutes by car.'],
+    loaican: ['There are 3 types: Studio (~30–40 m²), 1BR+ (1 bedroom + flex room, ~50 m²) and 2BR (~60–84 m²), in a 30-storey tower with 782 units. Which one fits you?'],
+    mbstudio: ['Studios are ~30–31 m² (corner studios ~40 m²) – compact, easy to rent out, and the most affordable entry from ~VND 1.8 bn.'],
+    mb1pn: ['1BR+ units are ~49–51 m²: 1 bedroom plus a flexible room (office/kids). Estimated from ~VND 3 bn.'],
+    mb2pn: ['2BR units are ~60–70 m² (up to ~84 m² on floor 30), good for families. Estimated from ~VND 3.8 bn.'],
+    chothue: ['Estimated rental income: Studio ~VND 18 m/month long-term or ~VND 30 m/month short-term; 1BR+ ~VND 24 m long-term / ~VND 42 m short-term; 2BR ~VND 35 m/month long-term. These are reference figures, not guaranteed returns. Long-term or short-term rental?'],
+    dautu: ['Why investors like it: first beachfront apartments by Sun Group in Da Nang, only ~25% of capital needed until handover, 70% bank loan with interest support up to 24 months, and strong tourist rental demand. Would you like a cash-flow estimate for one unit?'],
+    muasan: ['Buying a whole floor (28 units, ~1,110 m²) is possible with a multi-unit discount – roughly VND 78 bn (estimate), ~25% until handover. It works like a mini hotel on the beachfront without building permits. Shall Mr. Hiep send you the floor calculation?'],
+    phaply: ['The project is a Grade-I construction developed by Sun Property (Sun Group). Foreigners can generally buy apartments in Vietnam within the legal foreign-ownership quota; Mr. Hiep will confirm the exact conditions and documents for you.'],
+    thanhtoan: ['Payment plan (expected): pay ~25% gradually until handover (11/2028); the bank lends 70% with developer interest support for up to 24 months; early repayment before handover is free; the last 5% is paid when you receive the ownership certificate. Booking is VND 50 m, fully refundable if you don’t buy.'],
+    vay: ['Bank loan up to 70% (Vietcombank, BIDV, NCB), with developer interest support for up to 24 months; you pay ~25% until handover. Example: a VND 1.8 bn unit – ~VND 450 m paid, loan ~VND 1.26 bn.'],
+    laisuat: ['The developer supports the loan interest for up to 24 months. You pay ~25% until handover (11/2028), early repayment before handover is free, and 5% at certificate issuance. Many buyers then cover the instalments with rental income.'],
+    sukien: ['Launch event: 9:00, Sunday 1 Nov 2026 at Hilton Da Nang (50 Bach Dang). Bookings open at 10:18; there is also a lucky draw. Shall I reserve an invitation for you?'],
+    skno: ['No problem! Mr. Hiep can send you all the launch information right after the event and help you reserve a unit remotely. There are also events on 15/11 in Da Nang and the developer’s sales event on 28/11.'],
+    lichsk: ['Upcoming events: 1/11 launch & booking (Da Nang), 8/11 (Hanoi), 15/11 booking event (Da Nang), 21/11 (Hanoi), 28/11 developer sales event (~1,000 guests). Which city suits you?'],
+    moban: ['The project launches and accepts bookings from 1 Nov 2026 (Hilton Da Nang). Official prices are released close to the sale opening.'],
+    coc: ['A booking is VND 50 million per unit and is fully refundable if you decide not to buy. Booking early gives priority to choose the best units.'],
+    bangiao: ['Expected handover: November 2028, basic-finish standard (no early key).'],
+    hoanthien: ['Units are handed over with a basic finish, so you can furnish them in your own style or with a rental package. Expected handover 11/2028.'],
+    tienich: ['Amenities include a swimming pool, gym, yoga & wellness areas, kids’ area and retail, plus the beach and seaside park just 400 m away.'],
+    cdt: ['The developer is Sun Property, a member of Sun Group – the group behind Ba Na Hills, Sun World and many resorts in Da Nang.'],
+    daily: ['Mr. Hoang Hiep is an official sales agent for Sun Saphia Residence. Zalo/WhatsApp ' + SO + '.'],
+    zalo: ['You can contact Mr. Hoang Hiep on Zalo/WhatsApp: ' + SO + ' (English supported).'],
+    xem: ['Mr. Hiep can arrange a site visit and show you the project area and sample materials – just leave your number with a convenient time.'],
+    nguoi: ['Sure – Mr. Hoang Hiep will contact you directly. Please leave your phone/WhatsApp number or message ' + SO + '.'],
+    camon: ['You’re welcome! Anything else you’d like to know – price, rental income or legal?'],
+    luadao: ['Sun Saphia is an official Sun Group (Sun Property) project, and Mr. Hiep is an official agent. All payments are made to the developer’s accounts under a booking agreement, never to individuals.']
+  };
+
   function norm(t) {
     var x = String(t || '').toLowerCase().replace(/đ/g, 'd').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+    x = ' ' + x + ' '; EN_PH.forEach(function (p) { x = x.split(' ' + p[0] + ' ').join(' ' + p[1] + ' '); }); x = x.trim();
     return ' ' + x.split(' ').map(function (w) { return ABBR[w] || w; }).join(' ') + ' ';
   }
   var BAD = ['dm', 'dmm', 'dcm', 'dkm', 'dit', 'djt', 'du ma', 'vcl', 'vkl', 'vl', 'cc', 'clm', 'cmm', 'cmn', 'loz', 'buoi', 'deo', 'me may', 'cha may', 'oc cho', 'do ngu', 'ngu vay', 'ngu the', 'ngu nhu', 'lol', 'fuck', 'shit'];
@@ -1045,7 +1098,7 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
     {id: 'mbstudio', k: ['studio', 'can studio', 'mat bang studio', 'ban ve studio', 'studio co gi', 'studio rong', 'studio bo tri', 'studio may phong'],
       a: ['Dạ căn Studio bố trí gọn mà đủ ạ: logia ngoài cùng có chỗ máy giặt, phòng ngủ liền phòng khách trong một không gian mở, bếp chữ L có chỗ ăn, WC tách khu tắm đứng. Diện tích 30–31 m² (kích thước 3,8 × 9 m), trần cao 3,5 m.\nCăn này hợp cho thuê theo đêm, khách cặp đôi hay khách công tác ạ.', 'Dạ Studio 30–31 m² có logia (chỗ máy giặt), giường đôi và sofa chung một không gian, bếp chữ L, WC tách khu tắm đứng ạ. Trần cao 3,5 m.\nStudio có 513 căn, khoảng 2/3 dự án, dễ cho thuê nhất ạ.'],
       c: ['Cho thuê', 'Căn 1PN+'], ask: 'Anh/Chị để lại Zalo, em gửi bản vẽ Studio rõ nét kèm vị trí căn trên tầng ạ.', topic: 'Mặt bằng Studio'},
-    {id: 'mb1pn', k: ['1pn+', '1br+', '1pn', '1br', '1 phong ngu', 'can 1pn', 'phong da nang', 'da nang phong', '1 ngu', 'mot phong ngu', 'can 1pn+'],
+    {id: 'mb1pn', k: ['1br la gi', 'la 1br', '1pn la gi', 'la 1pn', '1br+ la gi', 'phong da nang la gi', '1pn+', '1br+', '1pn', '1br', '1 phong ngu', 'can 1pn', 'phong da nang', 'da nang phong', '1 ngu', 'mot phong ngu', 'can 1pn+'],
       a: ['Dạ căn 1PN+ có 2 kiểu ạ:\n• 1 phòng ngủ + phòng đa năng: phòng ngủ có bàn làm việc, thêm phòng đa năng kê giường đơn cho con hoặc làm phòng làm việc.\n• 2 phòng ngủ 1 vệ sinh: phòng đa năng kê được giường đôi thành phòng ngủ thứ hai, logia rộng hết chiều ngang căn.\nDòng 1BR+1 50–51 m² (6,2 × 9 m), 108 căn; cả hai đều có phòng khách, bếp với bàn ăn 4 ghế ạ.', 'Dạ 1PN+ là căn 1 phòng ngủ có thêm phòng đa năng ạ. Kiểu thường thì phòng đa năng làm phòng làm việc hoặc kê giường đơn; kiểu lớn thì kê được giường đôi, thành căn 2 phòng ngủ 1 vệ sinh.\nAnh/Chị ở mấy người để em gợi ý kiểu hợp ạ?'],
       c: ['Căn 2 phòng ngủ', 'Để ở'], ask: 'Anh/Chị để lại Zalo, em gửi bản vẽ 2 kiểu 1PN+ để mình so sánh ạ.', topic: 'Mặt bằng 1PN+'},
     {id: 'mb2pn', k: ['2 phong ngu', '2pn', '2br', '2 br', '2 ngu', 'hai phong ngu', 'can 2 phong', '2 phong ngu 1 ve sinh', '2pn 1wc', 'can rong', 'can lon', 'gia dinh 4', '4 nguoi', '3 nguoi'],
@@ -1090,7 +1143,7 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
     {id: 'coc', k: ['dat coc', 'coc', 'giu cho', 'booking', 'dat cho', 'giu can', 'chuyen khoan', 'tra truoc'],
       a: ['Dạ hiện mình đặt chỗ (booking) 50 triệu/căn, hoàn lại 100% nếu không mua ạ. Đặt chỗ được ưu tiên chọn căn đẹp, và từ sự kiện ra mắt 01/11/2026 chủ đầu tư chính thức nhận booking; căn view đẹp em thấy cũng nhiều khách hỏi lắm ạ.\nTiền đặt chỗ chuyển theo hướng dẫn của đại lý phân phối chính thức, em không nhận tiền qua khung chat; đăng ký trên trang không thu khoản nào ạ.'],
       c: ['Giá bán', 'Pháp lý'], ask: 'Anh/Chị để lại số Zalo, anh Hiệp gọi hướng dẫn đặt chỗ đúng quy trình ạ.', strong: 1, topic: 'Booking / đặt cọc'},
-    {id: 'moban', k: ['mo ban', 'khi nao mo ban', 'bao gio mo ban', 'ngay mo ban', 'dang ban', 'ban chua', 'da ban', 'ra hang', 'bao gio ban', 'con can khong', 'het can chua', 'con khong', 'nhan booking khi nao'],
+    {id: 'moban', k: ['mo ban', 'co mua duoc khong', 'mua duoc khong', 'mua duoc chua', 'dat mua duoc', 'khi nao mo ban', 'bao gio mo ban', 'ngay mo ban', 'dang ban', 'ban chua', 'da ban', 'ra hang', 'bao gio ban', 'con can khong', 'het can chua', 'con khong', 'nhan booking khi nao'],
       a: EVT_ON ? ['Dạ Sun Saphia chính thức ra mắt và nhận booking tại sự kiện 9:00 Chủ nhật 01/11/2026 ở Hilton Đà Nẵng ạ. Hiện chưa mở bán đại trà, nên đây đúng là lúc danh sách ưu tiên được xếp chỗ chọn căn.\nAnh/Chị có muốn em giữ thư mời tham dự cho mình không ạ?', 'Dạ chỉ còn một mốc rất gần thôi ạ: Chủ nhật 01/11/2026, chủ đầu tư ra mắt tại Hilton Đà Nẵng, 10:18 bắt đầu nhận booking. Căn view biển tầng cao thường được chọn nhanh nhất trong buổi đầu.\nAnh/Chị muốn em đăng ký thư mời cho mình không ạ?'] : ['Dạ Sun Saphia đã ra mắt và nhận booking từ 01/11/2026 ạ. Căn đẹp đang được chọn dần, anh Hiệp cập nhật danh sách căn còn trống mỗi ngày.'],
       c: ['Không đi được', 'Booking thế nào'], ask: 'Anh/Chị để lại Zalo, em gửi danh sách căn còn trống và chính sách mới nhất ạ.', strong: 1, hk: 'skmoi', topic: 'Thời điểm mở bán'},
     {id: 'vay', k: ['vay ngan hang', 'vay 70', 'an han goc', 'ho tro lai suat', 'lai 0', '0 lai', 'tra no truoc han', 'tat toan', 'vay von', 'cho vay', 'vay duoc', 'vay bao nhieu', 'vay tien', 'duoc vay', 'ngan hang', 'lai suat', 'tra gop', 'chiet khau', 'uu dai', 'khuyen mai', 'ho tro', 'von vay', 'don bay'],
@@ -1127,6 +1180,12 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
     {id: 'qhchac', k: ['quy hoach treo', 'du an treo', 'co lam that', 'co lam khong', 'bao gio lam', 'khi nao lam', 'chac chan khong', 'chi la quy hoach', 'tren giay', 'noi cho hay'],
       a: ['Dạ Anh/Chị hỏi rất đúng ạ, em nói rõ từng cái:\n• Công viên 2,45 ha trước dự án: đã có quyết định phê duyệt dự án (2958/QĐ-UBND), vốn ngân sách – chắc chắn nhất.\n• Mở rộng trục biển 2.633 tỷ: thành phố đưa vào nhóm ưu tiên, đang chuẩn bị đầu tư.\n• Đường sắt đô thị: đang ở bước đề xuất, chưa phê duyệt.\n• Công viên Ngũ Hành Sơn: đang giải phóng mặt bằng.\nEm chỉ tư vấn trên cái đã có văn bản, phần còn lại xem như điểm cộng tương lai. Link nguồn từng dự án em để ở sun-saphia-residence.com/quy-hoach ạ.'],
       c: ['Pháp lý', 'Công viên trước dự án'], ask: 'Anh/Chị để lại Zalo, em gửi link văn bản, bài báo của từng dự án để mình tự kiểm chứng ạ.', strong: 1, topic: 'Quy hoạch – độ chắc chắn'},
+    {id: 'ngoai', k: ['test', 'test thu', 'thu thoi', 'thu xem', 'kiem tra', 'lan 1', 'lan 2', 'lan 3', 'khoe khong', 'dang lam gi', 'lam gi do', 'ban ten gi', 'em ten gi', 'may tuoi', 'nguoi yeu', 'buon qua', 'chan qua', 'vui qua', 'ke chuyen', 'haha', 'hihi', 'kkk', 'hehe', 'an com chua', 'ngu chua', 'dep trai', 'xinh', 'chao buoi', 'cuoi tuan'],
+      a: ['Dạ em nhận được rồi ạ 😊 Nhân tiện khoe Anh/Chị một tin vui: căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng đang có giá dự kiến chỉ từ khoảng 1,8 tỷ, đóng ~450 triệu là tới lúc nhận nhà.\nAnh/Chị muốn em gửi nhanh vị trí hay bảng giá ạ?', 'Dạ em là trợ lý nhỏ của anh Hiệp, chuyên "tám" về căn hộ mặt biển thôi ạ 😄 Hỏi em giá, vị trí, cho thuê hay pháp lý… em trả lời liền.\nAnh/Chị đang tìm căn để ở, nghỉ dưỡng hay đầu tư ạ?'],
+      c: ['Giá bán', 'Vị trí dự án'], topic: 'Chat ngoài lề'},
+    {id: 'ngoaidl', k: ['thoi tiet', 'troi mua', 'da nang mua', 'co mua khong', 'mua khong', 'mua to', 'mua lon', 'mua bao', 'hom nay mua', 'nang nong', 'troi dep', 'troi nang', 'nong qua', 'lanh qua', 'bao lu', 'an gi', 'quan an', 'an o dau', 'mon ngon', 'dac san', 'choi gi', 'di dau choi', 'du lich da nang', 'diem du lich', 'cau rong phun lua', 'ba na', 'hoi an choi', 'khach san nao', 'homestay', 'resort nao'],
+      a: ['Dạ Đà Nẵng thì lúc nào cũng có biển đẹp, đồ ăn ngon ạ 😄 Mà nói tới biển: Sun Saphia cách bãi Sơn Thủy – Mỹ Khê chỉ ~400 m, sáng đi bộ vài phút là tắm biển, chiều ngồi ban công ngắm hoàng hôn.\nAnh/Chị có hay ra Đà Nẵng nghỉ dưỡng không ạ?', 'Dạ câu này em mách nhỏ: khách du lịch ra Đà Nẵng đông quanh năm, nên căn hộ gần biển cho thuê rất chạy ạ – Studio Sun Saphia dự kiến thuê ngắn hạn ~30 triệu/tháng, giá mua chỉ từ ~1,8 tỷ.\nAnh/Chị có muốn em tính thử bài toán cho thuê không ạ?'],
+      c: ['Cho thuê', 'Vị trí dự án'], topic: 'Hỏi chuyện du lịch Đà Nẵng'},
     {id: 'camon', k: ['cam on', 'ok', 'hieu roi', 'duoc roi', 'vang', 'da biet', 'tot qua', 'hay qua'],
       a: ['Dạ em cảm ơn Anh/Chị ạ. Anh/Chị cần thêm gì cứ nhắn em nhé.', 'Dạ vâng ạ, có gì Anh/Chị cứ hỏi tiếp, em trả lời ngay.'], c: []}
   ];
@@ -1170,7 +1229,7 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
   };
   var AFF = / (co|muon|vang|ok|duoc|uh|u|um|dong y|gui|gui di|gui em|gui anh|gui chi|nhe|yes|chac chan|tat nhien|duoc a|co a|muon a) /;
   var NEG = / (khong|thoi|chua|de sau|khong can|khoi|no) /;
-  var ALIAS = {'Hết hạn thì sao': 'het han thi sao', 'Không đi được': 'khong di duoc', 'Booking thế nào': 'booking', 'Đăng ký tham dự thế nào?': 'dang ky tham du', 'Không đi được thì sao?': 'khong di duoc', 'Studio': 'studio', '2BR': '2br', 'Để ở': 'de o', 'Cho thuê': 'cho thue', 'Tiện ích': 'tien ich', 'Bàn giao': 'ban giao', 'Pháp lý': 'phap ly', 'Chủ đầu tư': 'chu dau tu',
+  var ALIAS = {'Price': 'gia', 'Location': 'vi tri', 'Rental income': 'cho thue', 'Can foreigners buy?': 'nguoi nuoc ngoai mua', 'Hết hạn thì sao': 'het han thi sao', 'Không đi được': 'khong di duoc', 'Booking thế nào': 'booking', 'Đăng ký tham dự thế nào?': 'dang ky tham du', 'Không đi được thì sao?': 'khong di duoc', 'Studio': 'studio', '2BR': '2br', 'Để ở': 'de o', 'Cho thuê': 'cho thue', 'Tiện ích': 'tien ich', 'Bàn giao': 'ban giao', 'Pháp lý': 'phap ly', 'Chủ đầu tư': 'chu dau tu',
     'Vị trí dự án': 'vi tri', 'Loại căn hộ': 'loai can', 'Cách biển bao xa': 'cach bien', 'Giá bán': 'gia ban', 'Quy mô dự án': 'quy mo', 'Thị trường du lịch': 'du lich', 'Gặp anh Hiệp': 'gap anh hiep', 'Mở rộng đường biển': 'mo rong duong bien', 'Đường sắt đô thị': 'duong sat do thi', 'Công viên Ngũ Hành Sơn': 'cong vien ngu hanh son', 'Quy hoạch quanh dự án': 'quy hoach', 'Công viên trước dự án': 'cong vien', 'Hạ tầng xung quanh': 'ha tang'};
 
   /* ---------- Giao diện ---------- */
@@ -1379,6 +1438,7 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
 
   function ask(q) {
     var raw = String(q).slice(0, 500);
+    if (/[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]/i.test(raw)) enMode = false; else { var rw = ' ' + raw.toLowerCase().replace(/[^a-z0-9]+/g, ' ') + ' ', isEn = EN_W.test(rw), isVi = VI_W.test(rw); if (isEn && !isVi) enMode = true; else if (isVi && !isEn) enMode = false; else if (isEn && isVi) enMode = (rw.match(EN_W_G) || []).length > (rw.match(VI_W_G) || []).length; }
     bubble(raw, 'me'); convo.push('Khách: ' + raw); turn++; clearTimeout(idleT); asked[norm(raw)] = 1;
     var n = norm(ALIAS[raw] || raw);
     var nm = findName(raw); if (nm) name = nm;
@@ -1403,6 +1463,7 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
 
     /* 4. Khách trả lời ngắn "có/không" cho câu gợi mở vừa rồi */
     var words = n.trim().split(' ').length, hk = lastHook; lastHook = null;
+    var tsc = 0; KB.forEach(function (it) { var sc = 0; it.k.forEach(function (k) { if (has(n, k)) sc += k.length + 2; }); if (sc > tsc) tsc = sc; }); if (tsc >= 5 && words >= 2) hk = null;
     if (hk === 'skmoi' && words <= 7 && (NEG.test(n) || / (ban|ban roi|ban lam|khong ranh|xa qua|o xa|de sau|lan sau|chac khong) /.test(n))) { for (var y = 0; y < KB.length; y++) if (KB[y].id === 'skno') { respond(KB[y]); return; } }
     if (hk === 'skmoi' && words <= 5 && AFF.test(n) && !NEG.test(n)) { addTopic('Đăng ký thư mời sự kiện 01/11'); lastAsk = turn; lastHook = 'lead';
       say(phone ? 'Dạ em đã ghi tên Anh/Chị vào danh sách thư mời ạ, anh Hiệp sẽ gọi xác nhận và gửi định vị Hilton qua Zalo.' : pick(['Dạ tuyệt quá ạ! Anh/Chị cho em xin tên và số Zalo, em đăng ký thư mời và gửi định vị Hilton cho mình ngay ạ.', 'Dạ vâng ạ, em giữ một suất cho mình. Anh/Chị gõ tên và số Zalo ở ô bên dưới giúp em nhé, anh Hiệp sẽ gửi thư mời điện tử.'])); return; }
@@ -1414,15 +1475,16 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
       if (hk === 'lead') lastAsk = turn;
       say(pick(['Dạ vâng ạ, Anh/Chị cần thông tin gì cứ hỏi em nhé.', 'Dạ không sao ạ. Anh/Chị muốn tìm hiểu thêm phần nào ạ?']), ['Vị trí dự án', 'Loại căn hộ']); return;
     }
-    if (!hk && words <= 2 && AFF.test(n) && !NEG.test(n)) { say(pick(['Dạ vâng ạ. Anh/Chị muốn em gửi thêm phần nào: vị trí, loại căn hay bảng giá khi công bố ạ?', 'Dạ em đây ạ. Anh/Chị cần em nói thêm về vị trí, loại căn hay tiện ích ạ?']), ['Loại căn hộ', 'Giá bán']); return; }
-    if (!hk && words <= 2 && NEG.test(n)) { say('Dạ vâng ạ, Anh/Chị cần thông tin gì cứ hỏi em nhé.', ['Vị trí dự án', 'Loại căn hộ']); return; }
+    if (!hk && tsc < 5 && words <= 2 && AFF.test(n) && !NEG.test(n)) { say(pick(['Dạ vâng ạ. Anh/Chị muốn em gửi thêm phần nào: vị trí, loại căn hay bảng giá khi công bố ạ?', 'Dạ em đây ạ. Anh/Chị cần em nói thêm về vị trí, loại căn hay tiện ích ạ?']), ['Loại căn hộ', 'Giá bán']); return; }
+    if (!hk && tsc < 5 && words <= 2 && NEG.test(n)) { say('Dạ vâng ạ, Anh/Chị cần thông tin gì cứ hỏi em nhé.', ['Vị trí dự án', 'Loại căn hộ']); return; }
     /* 5. Tìm ý */
     var best = null, score = 0;
     KB.forEach(function (it) { var sc = 0; it.k.forEach(function (k) { if (has(n, k)) sc += k.length + 2; }); if (sc > score) { score = sc; best = it; } });
     if (!best || score < 3) {
       miss++;
+      if (enMode) { if (miss >= 2) { miss = 0; say(EN_DEF[0], []); } else say('Sorry, could you tell me a bit more? For example "price", "location" or "rental income".', EN_CH); return; }
       if (miss >= 2) { miss = 0; say('Dạ câu này em xin chuyển anh Hiệp trả lời cho chính xác ạ. Anh/Chị nhắn Zalo ' + SO + ' hoặc để lại số, anh Hiệp phản hồi ngay.', []); return; }
-      say(pick(['Dạ em chưa rõ ý Anh/Chị lắm ạ. Anh/Chị đang muốn hỏi về vị trí, loại căn hay giá ạ?', 'Dạ Anh/Chị nói rõ hơn giúp em một chút được không ạ, ví dụ "cách biển bao xa" hay "có mấy loại căn"?']), ['Vị trí dự án', 'Loại căn hộ']);
+      say(pick(['Dạ câu này em ghi lại để anh Hiệp trả lời kỹ hơn ạ 😊 Trong lúc chờ, Anh/Chị xem nhanh tin vui này: căn hộ mặt biển Sun Group giá dự kiến chỉ từ ~1,8 tỷ, đóng ~25% là tới lúc nhận nhà.\nAnh/Chị muốn em gửi vị trí hay bảng giá trước ạ?', 'Dạ em chưa bắt kịp ý Anh/Chị lắm 😅 Nhưng có một tin em nghĩ Anh/Chị sẽ thích: Studio mặt biển Sun Group chỉ từ ~1,8 tỷ, cách biển 400 m, cho thuê rất chạy.\nAnh/Chị quan tâm để ở hay cho thuê ạ?']), ['Giá bán', 'Vị trí dự án', 'Cho thuê']);
       return;
     }
     respond(best);
@@ -1433,6 +1495,7 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
     if (best.refuse) refused = true;
     if (best.human) urgent('muốn nói chuyện với người thật');
     var txt = variant(best), asked = false;
+    if (enMode) { txt = pick(EN_A[best.id] || EN_DEF); if (!phone && !refused && turn - lastAsk >= 3 && (best.ask || best.strong) && turn >= 2) { lastAsk = turn; txt += '\n' + EN_ASK; lastHook = 'lead'; } say(txt, EN_CH); return; }
     if (best.human) { var nn2 = nightNote(); if (nn2) txt += '\nGiờ này ' + nn2 + ' ạ.'; }
     /* Xin số khéo: đúng chủ đề, cách 3 lượt, khách từ chối thì thôi */
     if (best.ask && !(best.hk && EVT_ON) && !phone && !refused && turn - lastAsk >= 3 && (best.strong || turn >= 2)) { lastAsk = turn; txt += '\n' + best.ask; asked = true; }
