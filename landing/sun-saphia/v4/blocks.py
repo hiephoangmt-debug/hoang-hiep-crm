@@ -242,7 +242,7 @@ def related(cur):
 
 def cta_block(label, title='Giữ suất <b>ưu tiên chọn căn</b> trước ngày ra mắt', sub='Căn view biển tầng cao thường được chọn hết ngay trong buổi ra mắt 01/11. Để lại số Zalo, anh/chị có đủ thông tin để chọn căn trước, không phải chen ở hội trường.'):
     gets = ['Bảng giá gốc từng căn ngay khi chủ đầu tư công bố',
-            'Lịch thanh toán 25%% – vay 70%% chủ đầu tư trả lãi, ân hạn gốc',
+            'Lịch thanh toán 25%% – vay 70%% hỗ trợ lãi suất tới 24 tháng',
             'Danh sách căn view biển còn trống + mặt bằng từng tầng',
             'Thư mời sự kiện 01/11 tại Hilton + phiếu bốc thăm quà',
             'Bảng tính cho thuê dài hạn / ngắn hạn theo căn']
