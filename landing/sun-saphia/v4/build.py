@@ -40,7 +40,30 @@ def page(path, title, desc, kw, body, lds, cur, tools=False, canon=None, robots=
         body = body[:i] + vitri_dark('vi-tri', VT_PAGES[path]) + body[i:]
     html = head(title, desc, canon or url, OG, kw, lds + [ORG, RES], FAV)
     html += '<body>\n' + header(cur, MAIN, LOGO) + '\n<main id="dau-trang">' + body + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(tools) + wave_audio() + '</body>\n</html>\n'
-    return copy_fix(quiz_end(html))
+    return copy_fix(tour_insert(quiz_end(html)))
+
+KUULA = 'https://kuula.co/share/LxsbY?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1'
+
+def tour360():
+    """Tour 360° (Kuula) – bấm mới tải để trang nhẹ."""
+    bg = SK + 'thap-tren-cao-ngay.webp'
+    return ('<section class="sec t360" id="tour-360"><div class="wrap">' + sh('↻', 'Tham quan ảo', 'Xem <b>360°</b> – như đang đứng tại Sun Saphia', 'o') +
+            '<div class="t360w" data-src="' + KUULA + '" style="background-image:linear-gradient(rgba(10,30,60,.45),rgba(10,30,60,.65)),url(' + bg + ')">'
+            '<button type="button" class="t360b" aria-label="Mở tour 360 độ"><span class="t360i">360°</span><b>Bấm để xem 360°</b><small>Kéo để xoay · chạm hai ngón để phóng to · bấm ⛶ để toàn màn hình</small></button></div>'
+            '<div class="t360c"><p>Xem xong muốn biết <b>căn nào nhìn được góc này</b> và giá bao nhiêu? Anh Hiệp gửi danh sách căn còn trống đúng hướng anh/chị thích.</p>'
+            '<button type="button" class="btn" data-pop data-interest="Tour 360 – hỏi căn đúng hướng">Hỏi căn đúng hướng view này</button></div></div>'
+            '<script>(function(){var w=document.querySelector("#tour-360 .t360w");if(!w)return;w.querySelector(".t360b").addEventListener("click",function(){'
+            'var f=document.createElement("iframe");f.src=w.getAttribute("data-src");f.setAttribute("allow","xr-spatial-tracking; gyroscope; accelerometer; fullscreen");f.setAttribute("allowfullscreen","");f.setAttribute("loading","lazy");f.title="Tour 360 Sun Saphia Residence";'
+            'w.innerHTML="";w.appendChild(f);w.classList.add("on");try{if(window.gtag)gtag("event","tour_360",{event_label:location.pathname})}catch(x){}});})();</script></section>')
+
+def tour_insert(html):
+    if 'id="tour-360"' in html or '<main' not in html: return html
+    for anchor in ['id="mat-bang"', 'id="tai-chinh"']:
+        i = html.find(anchor)
+        if i >= 0:
+            i = html.rfind('<section', 0, i)
+            return html[:i] + tour360() + html[i:]
+    return html
 
 def quiz_end(html):
     """Đưa phần test tìm căn xuống ngay trên form chốt cuối trang."""
@@ -607,7 +630,7 @@ def vitri_dark(sid='vi-tri', ctx='ADS'):
             '<a class="gml" href="https://www.google.com/maps/search/?api=1&amp;query=16.021300,108.257659" target="_blank" rel="noopener">📍 Mở trong Google Maps</a></div></div>'
             '</div></div></section>') % (sid, ctx)
 
-ADS_TOC = [('su-kien', 'Sự kiện 01/11'), ('tai-chinh', 'Giá &amp; thanh toán'), ('dau-tu', 'Đầu tư 1 sàn'), ('quy-hoach', 'Quy hoạch'), ('vi-tri', 'Vị trí'), ('mat-bang', 'Mặt bằng'), ('dong-tien', 'Cho thuê'), ('tim-can', 'Căn hợp với tôi')]
+ADS_TOC = [('su-kien', 'Sự kiện 01/11'), ('tai-chinh', 'Giá &amp; thanh toán'), ('dau-tu', 'Đầu tư 1 sàn'), ('quy-hoach', 'Quy hoạch'), ('vi-tri', 'Vị trí'), ('tour-360', 'Xem 360°'), ('mat-bang', 'Mặt bằng'), ('dong-tien', 'Cho thuê'), ('tim-can', 'Căn hợp với tôi')]
 
 def tim_can(ctx='ADS'):
     Q = [('muc', 'Anh/chị mua để làm gì?', False, [('o', '🏖 Để ở / nghỉ dưỡng gia đình'), ('ngan', '🧳 Cho thuê ngắn hạn (theo đêm)'), ('dai', '📅 Cho thuê dài hạn (theo tháng)'), ('tg', '📈 Đầu tư chờ tăng giá'), ('san', '🏢 Mua nhiều căn / cả 1 sàn')]),
@@ -780,7 +803,7 @@ def ads(domain):
     html = head(title, desc, url, OG, 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES], FAV)
     b = b.replace('{M}', MAIN)
     html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN, pages=False) + '\n' + popup() + tail(True) + wave_audio() + '</body>\n</html>\n'
-    return copy_fix(quiz_end(html))
+    return copy_fix(tour_insert(quiz_end(html)))
 
 def tinh_dong_tien():
     cr, cld = crumbs([('Trang chủ', MAIN + '/'), ('Sun Saphia Residence', MAIN + '/'), ('Tính dòng tiền', MAIN + '/tinh-dong-tien')])
