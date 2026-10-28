@@ -75,7 +75,7 @@ def glass_mat():
     nt.links.new(mx.outputs[0], o.inputs['Surface']); m.blend_method = 'BLEND'; return m
 
 FLOOR = wood_floor()
-WALL = mat('tuong', (.94, .9, .84), .9, noise=(40, .08, .02))
+WALL = mat('tuong', (.96, .94, .9), .9, noise=(40, .08, .02))
 EXT = mat('tuong-ngoai', (.9, .88, .84), .9)
 CEIL = mat('tran', (.96, .95, .93), .95)
 TILE = tile_mat('gach-wc', (.82, .8, .76), (.79, .77, .73), .6)
@@ -101,8 +101,39 @@ POT = mat('chau', (.78, .74, .68), .8)
 SHEER = mat('rem-voan', (.97, .96, .93), 1., transm=.65)
 DRAPE = mat('rem-day', (.6, .55, .48), 1., noise=(150, .2, .1))
 LAMP = mat('den', (1, .9, .75), .5, emit=(1, .82, .6), estr=6)
-DOWN = mat('den-am-tran', (1, 1, 1), .5, emit=(1, .9, .78), estr=25)
+DOWN = mat('den-am-tran', (1, 1, 1), .5, emit=(1, .9, .78), estr=40)
 ART1 = mat('tranh1', (.75, .55, .35), .7, noise=(3, .8, .0)); ART2 = mat('tranh2', (.35, .5, .55), .7, noise=(2.5, .8, .0))
+LUX = os.environ.get('STYLE', '') == 'lux'      # phong cách khách sạn 5–6 sao
+BRASS = STEEL
+def marble(name, base, vein, tile=(1.2, .6), rough=.06):
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; b = nt.nodes['Principled BSDF']
+    tc = nt.nodes.new('ShaderNodeTexCoord'); br = nt.nodes.new('ShaderNodeTexBrick'); br.offset = .5
+    br.inputs['Scale'].default_value = 1 / tile[0]; br.inputs['Brick Width'].default_value = 1; br.inputs['Row Height'].default_value = tile[1] / tile[0]; br.inputs['Mortar Size'].default_value = .0015
+    br.inputs['Color1'].default_value = (*base, 1); br.inputs['Color2'].default_value = (*[c * .985 for c in base], 1); br.inputs['Mortar'].default_value = (.7, .68, .64, 1)
+    nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = .7; nz.inputs['Detail'].default_value = 15; nz.inputs['Distortion'].default_value = 2.2
+    rp = nt.nodes.new('ShaderNodeValToRGB'); el = rp.color_ramp.elements; el[0].position = .492; el[0].color = (1, 1, 1, 1); el[1].position = .5; el[1].color = (*[1 - (1 - c) * .55 for c in vein], 1)
+    e3 = el.new(.508); e3.color = (1, 1, 1, 1)
+    mx = nt.nodes.new('ShaderNodeMix'); mx.data_type = 'RGBA'; mx.blend_type = 'MULTIPLY'; mx.inputs['Factor'].default_value = 1
+    nt.links.new(tc.outputs['Object'], br.inputs['Vector']); nt.links.new(tc.outputs['Object'], nz.inputs['Vector']); nt.links.new(nz.outputs['Fac'], rp.inputs['Fac'])
+    nt.links.new(br.outputs['Color'], mx.inputs[6]); nt.links.new(rp.outputs['Color'], mx.inputs[7]); nt.links.new(mx.outputs[2], b.inputs['Base Color'])
+    b.inputs['Roughness'].default_value = rough; return m
+def velvet(name, col): 
+    m = mat(name, col, .75, noise=(150, .2, .06)); b = m.node_tree.nodes['Principled BSDF']
+    b.inputs['Sheen Weight'].default_value = .45; b.inputs['Sheen Roughness'].default_value = .4; b.inputs['Sheen Tint'].default_value = (1, 1, 1, 1); return m
+if LUX:
+    FLOOR = marble('san-marble', (.93, .91, .88), (.6, .57, .54)); TILE = marble('wc-marble', (.9, .88, .85), (.48, .45, .42), (.6, .6), .1)
+    DECK = wood_floor(); WALL = mat('tuong-lux', (.86, .82, .76), .85, noise=(40, .06, .02)); CEIL = mat('tran-lux', (.97, .96, .94), .95)
+    WALNUT = mat('oc-cho-lux', (.19, .1, .055), .3, noise=(25, .35, .02)); OAK = mat('go-lux', (.34, .2, .11), .3, noise=(25, .35, .02))
+    BRASS = mat('dong', (.86, .62, .33), .22, 1.)
+    FAB = velvet('nhung-xanh-reu', (.025, .085, .07)); FAB2 = velvet('nhung-taupe', (.4, .33, .27)); CHAIRF = velvet('boucle-kem', (.86, .82, .76))
+    FAB3 = mat('da-cognac', (.42, .2, .09), .45); LINEN = mat('ga-lux', (.97, .96, .94), .9, noise=(60, .1, .08)); RUG = mat('tham-lux', (.8, .77, .72), 1., noise=(250, .3, .15))
+    STONE = marble('da-ban', (.96, .95, .93), (.5, .48, .46), (4, 4), .08); CAB = mat('tu-den', (.06, .06, .065), .35)
+    DRAPE = velvet('rem-nhung', (.52, .45, .38)); ART1 = mat('tranh-vang', (.82, .66, .4), .35, .5, noise=(1.8, .9, 0)); ART2 = mat('tranh-xanh', (.2, .3, .3), .5, noise=(1.5, .9, 0))
+COVE = mat('led-hat', (1, 1, 1), .5, emit=(1, .76, .5), estr=9)
+def torus(cx, cy, cz, R, r, m, parent=None):
+    bpy.ops.mesh.primitive_torus_add(major_radius=R, minor_radius=r, major_segments=64, minor_segments=12, location=(cx, cy, cz)); o = bpy.context.object; o.data.materials.append(m)
+    if parent: o.parent = parent
+    return o
 
 # ---------------- dựng hình ----------------
 def box(cx, cy, z0, sx, sy, sz, m, rot=0., bevel=.012, parent=None, name='o'):
@@ -170,6 +201,17 @@ def wall_seg(s):
                         box(cc.x, cc.y, .03, .1, .025, H - .12, SHEER, ang, 0, name='rem')
         elif k == 'r':
             piece(t0, t1, 0, 1.1, .015, GLASS, 'lan-can'); piece(t0, t1, 1.08, .05, .06, ALU)
+    if LUX and k in ('x', 'w', 'g'):   # gờ trần hắt đèn LED dọc tường (trần giật cấp)
+        th = .2 if k == 'x' else (.12 if k == 'w' else .07); nv = Vector((-u.y, u.x))
+        for sd in (-1, 1):
+            c = (a + b) / 2 + nv * sd * (th / 2 + (.11 if k != 'g' else .32))
+            box(c.x, c.y, H - .22, L, .2 if k != 'g' else .62, .1, CEIL, ang, 0, name='go-tran')
+            c2 = (a + b) / 2 + nv * sd * (th / 2 + (.2 if k != 'g' else .62)); box(c2.x, c2.y, H - .12, L, .02, .025, COVE, ang, 0, name='led')
+    if LUX and k == 'g' and L > 1.4:   # rèm nhung dày 2 đầu
+        for (r0, r1) in ((.0, .5), (L - .5, L)):
+            for c3 in range(5):
+                t = r0 + (c3 + .5) * (r1 - r0) / 5; cc = a + u * t - Vector((-u.y, u.x)) * (.26 + .035 * (c3 % 2))
+                box(cc.x, cc.y, .02, .11, .04, H - .26, DRAPE, ang, 0, name='rem-day')
     for g in gaps:
         t0, t1 = g[0] * kk, g[1] * kk
         piece(t0, t1, 2.15, H - 2.15, .2 if k == 'x' else .12, EXT if k == 'x' else WALL)
@@ -207,13 +249,19 @@ for it in SP['items']:
     o = frame(x, y, face); hw, hd = w / 2, d / 2          # trong khung: X = bề ngang, +Y = mặt trước, lưng ở -Y
     if k == 'bed':
         box(0, 0, 0, w + .1, d + .05, .32, WALNUT, parent=o); box(0, .03, .32, w - .02, d - .12, .24, LINEN, bevel=.06, parent=o)
-        box(0, d * .14, .5, w + .04, d * .66, .09, FAB, bevel=.04, parent=o); box(0, d * .38, .58, w + .06, .4, .03, FAB3, bevel=.01, parent=o)
+        box(0, d * .14, .5, w + .04, d * .66, .09, LINEN if LUX else FAB, bevel=.04, parent=o); box(0, d * .38, .58, w + .06, .4, .03, FAB if LUX else FAB3, bevel=.01, parent=o)
         box(0, -hd + .03, 0, w + .3, .1, 1.15, FAB2, bevel=.03, parent=o)
         for sd in (-1, 1): box(sd * w * .24, -hd + .32, .52, w * .42, .34, .14, LINEN, bevel=.06, parent=o)
         box(0, 0, -.001, w + 1.2, d + .4, .012, RUG, 0, 0, parent=o)
-        e2 = box(0, -hd - .005, 1.45, 1.0, .03, .6, ART1, 0, .005, parent=o)
+        if LUX:   # đầu giường bọc nhung cao + ốp gỗ óc chó nan + đèn tường đồng + đôn cuối giường
+            box(0, -hd - .04, 0, w + .9, .1, 1.45, FAB2, bevel=.03, parent=o)
+            for i in range(int((w + 2.2) / .06)): box(-(w + 2.2) / 2 + i * .06 + .03, -hd - .12, 0, .035, .04, H, WALNUT, 0, .004, parent=o)
+            for sd in (-1, 1): box(sd * (w / 2 + .55), -hd - .07, 1.55, .04, .1, .24, BRASS, 0, .005, parent=o); cyl(sd * (w / 2 + .55), -hd + .02, 1.6, .06, .14, LAMP, parent=o)
+            box(0, hd + .32, 0, w * .75, .42, .46, FAB, bevel=.04, parent=o); [box(sx_ * (w * .375 - .04), hd + .32, 0, .03, .38, .06, BRASS, 0, 0, parent=o) for sx_ in (-1, 1)]
+        else: e2 = box(0, -hd - .005, 1.45, 1.0, .03, .6, ART1, 0, .005, parent=o)
     elif k == 'ns':
-        box(0, 0, 0, w, d, .5, OAK, parent=o); cyl(0, -.05, .5, .07, .32, WHITE, parent=o); cyl(0, -.05, .82, .14, .2, LAMP, parent=o)
+        box(0, 0, 0, w, d, .5, WALNUT if LUX else OAK, parent=o); cyl(0, -.05, .5, .07, .32, BRASS if LUX else WHITE, parent=o); cyl(0, -.05, .82, .14, .2, LAMP, parent=o)
+        if LUX: box(0, 0, .5, w + .01, d + .01, .02, STONE, 0, .003, parent=o)
     elif k in ('sofa', 'arm', 'daybed'):
         arms = k != 'daybed'; aw = .16 if arms else 0
         box(0, 0, .08, w, d, .32, FAB, parent=o); box(0, -hd + .1, .4, w, .2, .45, FAB, bevel=.05, parent=o)
@@ -223,13 +271,20 @@ for it in SP['items']:
         for i in range(n): box(-hw + aw + cw * (i + .5), .06, .4, cw - .02, d - .28, .13, FAB, bevel=.05, parent=o); box(-hw + aw + cw * (i + .5), -hd + .3, .52, cw - .04, .16, .38, FAB, bevel=.06, parent=o)
         for sd in (-1, 1): box(sd * (hw - aw - .25), -hd + .44, .55, .4, .12, .38, FAB3 if sd < 0 else FAB2, bevel=.05, parent=o)
         for sx_ in (-1, 1):
-            for sy_ in (-1, 1): box(sx_ * (hw - .06), sy_ * (hd - .06), 0, .04, .04, .08, WALNUT, 0, 0, parent=o)
+            for sy_ in (-1, 1): box(sx_ * (hw - .06), sy_ * (hd - .06), 0, .04, .04, .08, BRASS if LUX else WALNUT, 0, 0, parent=o)
+        if LUX and k == 'sofa':   # đèn cây cần cong bằng đồng cạnh sofa
+            cyl(hw + .3, -hd + .2, 0, .16, .03, STONE, parent=o); cyl(hw + .3, -hd + .2, .03, .015, 1.9, BRASS, parent=o); cyl(hw + .3, -hd + .2 + .45, 1.55, .2, .2, LAMP, parent=o)
+            box(hw + .3, -hd + .42, 1.9, .03, .5, .03, BRASS, 0, 0, parent=o)
         if k == 'sofa': box(0, .9, -.001, max(w, 2.0) + .2, 1.8, .012, RUG, 0, 0, parent=o); box(0, -hd - .02, 1.3, 1.2, .03, .75, ART2, 0, .005, parent=o)
     elif k == 'rtab':
-        h = ex.get('h', .42); cyl(0, 0, h - .03, hw, .03, OAK, parent=o, verts=48); cyl(0, 0, 0, .05, h - .03, BLACK, parent=o); cyl(0, 0, 0, hw * .5, .02, BLACK, parent=o)
+        h = ex.get('h', .42); cyl(0, 0, h - .03, hw, .03, STONE if LUX else OAK, parent=o, verts=48); cyl(0, 0, 0, .05, h - .03, BRASS if LUX else BLACK, parent=o); cyl(0, 0, 0, hw * .5, .02, BRASS if LUX else BLACK, parent=o)
     elif k == 'tv':
-        box(0, 0, .18, w, d * .9, .36, WALNUT, parent=o); box(0, -hd + .03, 1.0, w * .78, .04, w * .78 * .5625, BLACK, 0, .005, parent=o)
-        box(0, -hd - .01, .54, w + .2, .025, 1.9, OAK, 0, 0, parent=o)     # mảng ốp gỗ sau TV
+        box(0, .14, .18, w, d * .6, .36, WALNUT, parent=o); box(0, -hd + .2, 1.0, w * .78, .04, w * .78 * .5625, BLACK, 0, .005, parent=o)
+        if LUX:   # vách ốp nan gỗ óc chó kịch trần + nẹp đồng
+            for i in range(int((w + .8) / .06)): box(-(w + .8) / 2 + i * .06 + .03, -hd + .15, 0, .035, .04, H, WALNUT, 0, .004, parent=o)
+            for sd in (-1, 1): box(sd * ((w + .8) / 2 + .01), -hd + .15, 0, .015, .05, H, BRASS, 0, 0, parent=o)
+            box(0, hd - .02, .2, w, .01, .015, BRASS, 0, 0, parent=o)
+        else: box(0, -hd - .01, .54, w + .2, .025, 1.9, OAK, 0, 0, parent=o)     # mảng ốp gỗ sau TV
     elif k == 'kit':
         box(0, 0, .1, w, d, .78, CAB, .0, .004, parent=o); box(0, 0, 0, w - .02, d - .06, .1, BLACK, 0, 0, parent=o)
         box(0, .01, .88, w + .02, d + .02, .03, STONE, 0, .003, parent=o); box(0, -hd + .01, .91, w, .015, .62, STONE, 0, 0, parent=o)
@@ -239,7 +294,8 @@ for it in SP['items']:
             if not ex.get('noup'): box(hx, -hd + .2, 1.45, .6, .4, .08, STEEL, 0, 0, parent=o)
         if ex.get('sink') is not None:
             sxp = -hw + ex['sink'] * w; box(sxp, .02, .78, .55, .42, .13, STEEL, 0, 0, parent=o); cyl(sxp, -hd + .1, .91, .015, .3, STEEL, parent=o)
-        for i in range(max(1, int(w / .6))): box(-hw + (i + .5) * w / max(1, int(w / .6)), hd + .005, .8, .2, .015, .012, STEEL, 0, 0, parent=o)
+        for i in range(max(1, int(w / .6))): box(-hw + (i + .5) * w / max(1, int(w / .6)), hd + .005, .8, .2, .015, .012, BRASS, 0, 0, parent=o)
+        if LUX and not ex.get('noup'): box(0, -hd + .01, .91, w, .015, .64, STONE, 0, 0, parent=o); box(0, -hd + .2, 1.5, w, .02, .02, COVE, 0, 0, parent=o)
     elif k == 'fridge':
         box(0, 0, 0, w - .02, d - .02, 1.85, STEEL, parent=o); box(0, hd - .01, .9, .02, .02, .5, BLACK, 0, 0, parent=o)
     elif k == 'wc':
@@ -248,23 +304,28 @@ for it in SP['items']:
         box(0, 0, .35 if k == 'van' else 0, w, d, .5 if k == 'van' else .85, OAK if k == 'van' else WHITE, parent=o)
         box(0, .02, .85, w * .55, d * .7, .12, CER, bevel=.04, parent=o); box(0, -hd + .02, 1.1, w * .9, .02, .8, GLASS, 0, 0, parent=o)
         box(0, -hd + .03, 1.92, w * .8, .04, .04, LAMP, 0, 0, parent=o)
+        if LUX: box(0, 0, .85, w + .01, d + .01, .02, STONE, 0, .003, parent=o); cyl(0, -hd + .08, .87, .012, .28, BRASS, parent=o); box(0, -hd + .015, 1.1, w * .95, .01, .82, LAMP, 0, 0, parent=o)
     elif k == 'ward':
         box(0, 0, 0, w, d, 2.4, OAK, .0, .004, parent=o); n = max(2, round(w / .5))
         for i in range(1, n): box(-hw + w * i / n, hd + .002, .05, .006, .006, 2.3, WALNUT, 0, 0, parent=o)
-        for i in range(n): box(-hw + w * (i + .5) / n + (.18 if i % 2 else -.18), hd + .015, 1.0, .02, .025, .35, STEEL, 0, 0, parent=o)
+        for i in range(n): box(-hw + w * (i + .5) / n + (.18 if i % 2 else -.18), hd + .015, 1.0, .02, .025, .35, BRASS, 0, 0, parent=o)
     elif k == 'dtab':
-        box(0, 0, .72, w, d, .035, OAK, parent=o); [box(sx_ * (hw - .08), sy_ * (hd - .08), 0, .05, .05, .72, BLACK, 0, 0, parent=o) for sx_ in (-1, 1) for sy_ in (-1, 1)]
+        box(0, 0, .72, w, d, .035, STONE if LUX else OAK, parent=o); [box(sx_ * (hw - .08), sy_ * (hd - .08), 0, .05, .05, .72, BRASS if LUX else BLACK, 0, 0, parent=o) for sx_ in (-1, 1) for sy_ in (-1, 1)]
         cols = [0] if w < 1.1 else [-w / 4, w / 4]
         for sd in (-1, 1):
             for cx_ in cols:
                 box(cx_, sd * (hd + .22), .3, .44, .44, .16, CHAIRF, bevel=.03, parent=o); box(cx_, sd * (hd + .42), .46, .42, .04, .4, OAK, bevel=.01, parent=o)
                 [box(cx_ + ax * .19, sd * (hd + .22) + ay * .19, 0, .03, .03, .3, WALNUT, 0, 0, parent=o) for ax in (-1, 1) for ay in (-1, 1)]
-        cyl(0, 0, 1.75, .22, .18, LAMP, parent=o); cyl(0, 0, 1.93, .006, H - 1.93, BLACK, parent=o)
+        if LUX:   # đèn chùm vòng đồng 2 tầng
+            torus(0, 0, 1.85, .5, .018, BRASS, parent=o); torus(0, 0, 1.85, .5, .008, LAMP, parent=o).location.z = 1.83
+            torus(0, 0, 2.0, .32, .015, BRASS, parent=o); torus(0, 0, 2.0, .32, .007, LAMP, parent=o).location.z = 1.98
+            for a_ in range(3): cyl(.5 * math.cos(a_ * 2.09), .5 * math.sin(a_ * 2.09), 1.85, .003, H - 1.85, BRASS, parent=o)
+        else: cyl(0, 0, 1.75, .22, .18, LAMP, parent=o); cyl(0, 0, 1.93, .006, H - 1.93, BLACK, parent=o)
     elif k == 'desk':
         box(0, 0, .72, w, d, .03, OAK, parent=o); box(-hw + .03, 0, 0, .04, d - .05, .72, BLACK, 0, 0, parent=o); box(hw - .03, 0, 0, .04, d - .05, .72, BLACK, 0, 0, parent=o)
         box(.2, -.05, .75, .5, .3, .02, BLACK, 0, 0, parent=o); box(-.3, -.12, .75, .12, .12, .35, LAMP, 0, .01, parent=o)
     elif k in ('chair', 'stool'):
-        box(0, 0, 0, w, d, .46, FAB2 if k == 'chair' else OAK, bevel=.03, parent=o)
+        box(0, 0, 0, w, d, .46, (CHAIRF if LUX else FAB2) if k == 'chair' else OAK, bevel=.03, parent=o)
         if k == 'chair': box(0, -hd + .03, .46, w, .05, .42, FAB2, bevel=.02, parent=o)
     elif k == 'cab':
         box(0, 0, .1, w, d, .55, OAK, .0, .004, parent=o); sphere(-w * .25, 0, .8, .12, LEAF, 1.3, parent=o); cyl(w * .2, 0, .65, .05, .25, WHITE, parent=o)
@@ -277,7 +338,7 @@ for it in SP['items']:
         box(0, 0, 0, w, d, .5, CAB, parent=o)
 
 # đèn âm trần (lưới ~1,4 m) – vừa thấy đèn, vừa là nguồn sáng
-nx_, ny_ = int((X1 - X0) / 1.4), int((Y1 - Y0) / 1.4)
+nx_, ny_ = int((X1 - X0) / (2.0 if LUX else 1.4)), int((Y1 - Y0) / (2.0 if LUX else 1.4))
 for gx in range(1, nx_ + 1):
     for gy in range(1, ny_ + 1):
         cyl(X0 + gx * (X1 - X0) / (nx_ + 1), Y0 + gy * (Y1 - Y0) / (ny_ + 1), H - .012, .05, .01, DOWN, verts=16)
@@ -318,7 +379,7 @@ try: cy.denoiser = 'OPENIMAGEDENOISE'
 except Exception: pass
 cy.max_bounces = 8; cy.diffuse_bounces = 4; cy.glossy_bounces = 3; cy.transparent_max_bounces = 12; cy.caustics_reflective = False; cy.caustics_refractive = False
 cy.sample_clamp_indirect = 4; cy.light_sampling_threshold = .01
-sc.view_settings.view_transform = 'AgX'; sc.view_settings.look = 'AgX - Medium High Contrast'; sc.view_settings.exposure = .6
+sc.view_settings.view_transform = 'AgX'; sc.view_settings.look = 'AgX - Base Contrast'; sc.view_settings.exposure = float(os.environ.get('EXPO', '1.15'))
 sc.render.resolution_x, sc.render.resolution_y = RW, RH; sc.render.image_settings.file_format = 'PNG'
 
 cam_d = bpy.data.cameras.new('cam'); cam = bpy.data.objects.new('cam', cam_d); sc.collection.objects.link(cam); sc.camera = cam
@@ -344,7 +405,7 @@ for s in SHOTS:
         for o in bpy.data.objects:
             if o.type == 'MESH' and o.data.vertices and min(v.co.z for v in o.data.vertices) + o.location.z > H - .1: o.hide_render = True
         if X1 - X0 > Y1 - Y0: sc.render.resolution_x, sc.render.resolution_y = max(RW, RH), round(max(RW, RH) * (Y1 - Y0 + 1) / (X1 - X0 + 1))
-        sc.view_settings.exposure = .1
+        sc.view_settings.exposure = .45
         shoot('top', ((X0 + X1) / 2, (Y0 + Y1) / 2), None, ortho=max(X1 - X0, Y1 - Y0) + 1.0)
     elif s in SH:
         e, l, lens, z, sy = SH[s]; shoot(s, e, l, lens, z, sy)
@@ -352,7 +413,7 @@ for s in SHOTS:
 # ---------------- video 9:16: đi từ cửa vào ra ban công rồi quay sang phòng ngủ ----------------
 if 'video' in SHOTS:
     sc.render.resolution_x, sc.render.resolution_y = int(os.environ.get('VW', '540')), int(os.environ.get('VH', '960'))
-    sc.view_settings.exposure = .6; cam_d.type = 'PERSP'; cam_d.lens = 14; cam_d.shift_y = 0
+    sc.view_settings.exposure = float(os.environ.get('EXPO', '1.15')); cam_d.type = 'PERSP'; cam_d.lens = 14; cam_d.shift_y = 0
     PATH = [((4.3, .9), (4.5, 9.5)), ((4.5, 3.4), (4.6, 9.5)), ((4.6, 5.6), (4.8, 9.5)), ((4.7, 6.3), (6.4, 3.6)), ((4.7, 6.7), (4.6, 9.6))]   # (đứng, nhìn) bản vẽ
     FPS = 24; SEG = int(os.environ.get('SEGF', '36')); sc.render.fps = FPS
     sc.frame_start = 1; sc.frame_end = SEG * (len(PATH) - 1) + 1

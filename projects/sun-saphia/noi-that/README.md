@@ -7,6 +7,7 @@ Script `dung-can-blender.py` dựng căn từ đúng dữ liệu layout của c�
 python3 -m venv bvenv && ./bvenv/bin/pip install bpy==4.2.0      # Blender 4.2 dạng thư viện Python (~0,5 GB)
 # ccl.json = biến CCL lấy từ 4d/sun-saphia-4d.html (layout từng căn)
 SUNROT=0 ./bvenv/bin/python dung-can-blender.py ccl.json u30 10 out living,living2,bed,plus,top 128 1080x1350
+STYLE=lux EXPO=1.1 SUNROT=0 ./bvenv/bin/python dung-can-blender.py ccl.json u30 10 out living,living2,bed,plus,top 128 1080x1350   # luxury khách sạn 5–6 sao
 SUNROT=0 VW=432 VH=768 ./bvenv/bin/python dung-can-blender.py ccl.json u30 10 out video 16      # video 9:16
 ```
 - `u30` = tầng 30, `u` = tầng điển hình; `10` = mã căn (SP3010).
