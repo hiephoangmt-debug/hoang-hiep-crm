@@ -858,7 +858,7 @@ if(/[?&]close/.test(location.search)) setMode('close');
     card.querySelector('.c-rows').innerHTML=rows.map(function(r){ return '<div><span>'+r[0]+'</span><b>'+r[1]+'</b></div>'; }).join('');
     var z=card.querySelector('.c-zalo'); z.href='https://zalo.me/0904567009';
     card.querySelector('.c-view').onclick=function(){ viewFrom(u,fs); };
-    var ni=card.querySelector('.c-int'); if(ni){ ni.href='https://raw.githack.com/hiephoangmt-debug/hoang-hiep-crm/telegram-notify/projects/fours/interior/interior.html?u='+encodeURIComponent(cur.t+'-'+u.code)+'&view=plan'; }
+    var ni=card.querySelector('.c-int'); if(ni){ var bk=(band(cur.t,FN(cur.f))||{}).key, GK={F1_3:'F1_3',F1_4:'F1_4',F5_3:'F5_3',F5_4:'F5_3',F5_16:'F5_16'}, uk=(GK[bk]?GK[bk]:cur.t)+'-'+u.code; ni.href='https://raw.githack.com/hiephoangmt-debug/hoang-hiep-crm/telegram-notify/projects/fours/interior/interior.html?u='+encodeURIComponent(uk)+'&view=plan'; }
     card.querySelector('.c-view').disabled=!fs.length;
     card.hidden=false;
   }

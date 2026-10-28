@@ -15,6 +15,7 @@ function bbox(P){ var b = [1e9, 1e9, -1e9, -1e9]; P.forEach(function(p){ b[0] = 
 function vn(n, d){ return n.toFixed(d == null ? 2 : d).replace('.', ','); }
 
 /* ---------- tường: lưới 2,5 cm → khối chữ nhật (vỏ ngoài trừ phòng, trừ cửa đi; cửa sổ/cửa kính xử lý riêng) ---------- */
+if (!U.gardens) U.gardens = U.garden ? [{ poly: U.garden.poly, rails: [U.garden.rail] }] : [];
 if (!U.env){ var RB = bbox([].concat.apply([], U.rooms.map(function(r){ return r.poly; })).concat([].concat.apply([], U.wallRects.map(function(w){ return [[w[0], w[1]], [w[2], w[3]]]; })))); U.env = [[RB[0], RB[1]], [RB[2], RB[1]], [RB[2], RB[3]], [RB[0], RB[3]]]; U.doors = U.doors || []; U.windows = U.windows || []; }
 var G = 0.025, EB = bbox(U.env), NX = Math.round((EB[2] - EB[0]) / G), NY = Math.round((EB[3] - EB[1]) / G);
 function cellKind(i, j){
@@ -53,7 +54,7 @@ else { WALLS = rects(1); DOORS = rects(3); GLASSD = rects(4); WINS = rects(5); }
 var COLORS = { wood: '#ecdcc2', tile: '#e4e9ec', grass: '#cfe6a8', wall: '#1d2733', furn: '#ffffff', line: '#46505c', soft: '#d9dee4', accent: '#FF6A2B', navy: '#0A2540' };
 function plan2d(){
   var NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg');
-  var all = U.env.concat(U.garden ? U.garden.poly : []), b = bbox(all), m = 1.6;
+  var all = U.env.concat([].concat.apply([], U.gardens.map(function(g){ return g.poly; }))), b = bbox(all), m = 1.6;
   var vb = [b[0] - m - 0.6, b[1] - m - 2.2, b[2] - b[0] + 2 * m + 0.6, b[3] - b[1] + 2 * m + 3.4];
   svg.setAttribute('viewBox', vb.join(' ')); svg.setAttribute('xmlns', NS);
   svg.style.width = '100%'; svg.style.height = '100%'; svg.style.fontFamily = "'Be Vietnam Pro',Arial,sans-serif";
@@ -69,8 +70,8 @@ function plan2d(){
   var gp = el('pattern', { id: 'grass', width: .4, height: .4, patternUnits: 'userSpaceOnUse' }, defs);
   el('rect', { width: .4, height: .4, fill: COLORS.grass }, gp); el('path', { d: 'M.1 .3l.03-.08M.28 .12l.03-.07', stroke: '#9fc276', 'stroke-width': .015 }, gp);
   // sân vườn
-  if (U.garden){ el('path', { d: path(U.garden.poly), fill: 'url(#grass)', stroke: '#8fb465', 'stroke-width': .03 });
-    el('path', { d: 'M' + U.garden.rail.map(function(p){ return p.join(' '); }).join('L'), fill: 'none', stroke: '#5fa3c9', 'stroke-width': .07 }); }
+  U.gardens.forEach(function(G){ el('path', { d: path(G.poly), fill: 'url(#grass)', stroke: '#8fb465', 'stroke-width': .03 });
+    G.rails.forEach(function(R2){ el('path', { d: 'M' + R2.map(function(p){ return p.join(' '); }).join('L'), fill: 'none', stroke: '#5fa3c9', 'stroke-width': .07 }); }); });
   // phòng
   U.rooms.forEach(function(r){ el('path', { d: path(r.poly), fill: r.floor === 'tile' ? 'url(#tile)' : 'url(#wood)' }); });
   // tường, cửa sổ, cửa kính
@@ -135,6 +136,9 @@ function plan2d(){
     var L = r.label || labelPt(r);
     tag(L[0], L[1], r.name.toUpperCase(), vn(a, 1) + ' m²', vn(bb[2] - bb[0]) + ' × ' + vn(bb[3] - bb[1]) + ' m', big); });
   // sân vườn nhãn
+  if (U.auto && U.gardens.length){ var GA = U.gardens.slice().sort(function(a, c){ return area(c.poly) - area(a.poly); })[0], gb = bbox(GA.poly), gv = (gb[3] - gb[1]) > (gb[2] - gb[0]) * 1.4, gx = (gb[0] + gb[2]) / 2, gy = (gb[1] + gb[3]) / 2, gbest = -1;
+    for (var gi = 1; gi < 20; gi++) for (var gj = 1; gj < 20; gj++){ var qx = gb[0] + (gb[2] - gb[0]) * gi / 20, qy = gb[1] + (gb[3] - gb[1]) * gj / 20; if (!inPoly(qx, qy, GA.poly)) continue; var dd = 9; for (var e = 0; e < GA.poly.length; e++){ var A1 = GA.poly[e], A2 = GA.poly[(e + 1) % GA.poly.length], ex = A2[0] - A1[0], ey = A2[1] - A1[1], tt = Math.max(0, Math.min(1, ((qx - A1[0]) * ex + (qy - A1[1]) * ey) / ((ex * ex + ey * ey) || 1))); dd = Math.min(dd, Math.hypot(qx - A1[0] - tt * ex, qy - A1[1] - tt * ey)); } if (dd > gbest){ gbest = dd; gx = qx; gy = qy; } }
+    txt(gx, gy, 'SÂN VƯỜN', .2, { attr: { 'font-weight': 800, transform: gv ? 'rotate(-90 ' + gx + ' ' + gy + ')' : '' } }); if (U.gardenTT) txt(gv ? gx + .28 : gx, gv ? gy : gy + .25, 'TT ' + vn(U.gardenTT, 1) + ' m² (theo CĐT)', .14, { attr: { fill: COLORS.accent, 'font-weight': 800, transform: gv ? 'rotate(-90 ' + (gx + .28) + ' ' + gy + ')' : '' } }); }
   if (U.garden){ txt(-1.55, 7.6, 'SÂN VƯỜN', .2, { attr: { 'font-weight': 800, transform: 'rotate(-90 -1.55 7.6)' } }); txt(-1.25, 7.6, 'TT ' + vn(U.gardenTT, 1) + ' m² (theo CĐT)', .14, { attr: { fill: COLORS.accent, 'font-weight': 800, transform: 'rotate(-90 -1.25 7.6)' } });
   }
   // kích thước tổng
@@ -200,7 +204,7 @@ function scene3d(){
   // nền xung quanh + sàn tầng
   var ground = new THREE.Mesh(new THREE.PlaneGeometry(80, 80), M(0xd9d6cf, { roughness: 1 })); ground.rotation.x = -Math.PI / 2; ground.position.set(cx0, -.06, cz0); ground.receiveShadow = true; scene.add(ground);
   flatPoly(U.env, M(0xbdb8ae), -.02);
-  if (U.garden) flatPoly(U.garden.poly, mat.grass, .01);
+  U.gardens.forEach(function(G){ flatPoly(G.poly, mat.grass, .01); });
   U.rooms.forEach(function(r){ flatPoly(r.poly, r.floor === 'tile' ? mat.tile : mat.wood, .02); });
   // tường + cửa
   WALLS.forEach(function(w){ box(w[2] - w[0], WH, w[3] - w[1], mat.wall, (w[0] + w[2]) / 2, WH / 2, (w[1] + w[3]) / 2); });
@@ -216,9 +220,9 @@ function scene3d(){
     if (hz){ var s = (c[1] + c[3]) / 2 > (r[1] + r[3]) / 2 ? 1 : -1; g.position.set(r[0], 0, s > 0 ? r[3] : r[1]); g.rotation.y = -s * Math.PI / 2 * OPEN; }
     else { var s2 = (c[0] + c[2]) / 2 > (r[0] + r[2]) / 2 ? 1 : -1; g.position.set(s2 > 0 ? r[2] : r[0], 0, r[1]); g.rotation.y = s2 > 0 ? -Math.PI / 2 + Math.PI / 2 * OPEN : -Math.PI / 2 - Math.PI / 2 * OPEN; } });
   // lan can kính sân vườn
-  if (U.garden){ var Rl = U.garden.rail; for (var k = 0; k < Rl.length - 1; k++){ var a = Rl[k], b2 = Rl[k + 1], L2 = Math.hypot(b2[0] - a[0], b2[1] - a[1]), ang = Math.atan2(b2[1] - a[1], b2[0] - a[0]);
+  U.gardens.forEach(function(G){ G.rails.forEach(function(Rl){ for (var k = 0; k < Rl.length - 1; k++){ var a = Rl[k], b2 = Rl[k + 1], L2 = Math.hypot(b2[0] - a[0], b2[1] - a[1]), ang = Math.atan2(b2[1] - a[1], b2[0] - a[0]);
       var gp = box(L2, 1.1, .03, mat.glass, (a[0] + b2[0]) / 2, .55, (a[1] + b2[1]) / 2); gp.rotation.y = -ang; gp.castShadow = false;
-      var tr = box(L2, .05, .06, mat.steel, (a[0] + b2[0]) / 2, 1.12, (a[1] + b2[1]) / 2); tr.rotation.y = -ang; } }
+      var tr = box(L2, .05, .06, mat.steel, (a[0] + b2[0]) / 2, 1.12, (a[1] + b2[1]) / 2); tr.rotation.y = -ang; } }); });
 
   /* ---- nội thất ---- */
   function holder(it){ var b = it.b || 'T', lw = (b === 'L' || b === 'R') ? it.d : it.w, ld = (b === 'L' || b === 'R') ? it.w : it.d;
