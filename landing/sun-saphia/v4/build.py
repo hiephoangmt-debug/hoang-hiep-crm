@@ -630,7 +630,7 @@ def vitri_dark(sid='vi-tri', ctx='ADS'):
             '<a class="gml" href="https://www.google.com/maps/search/?api=1&amp;query=16.021300,108.257659" target="_blank" rel="noopener">📍 Mở trong Google Maps</a></div></div>'
             '</div></div></section>') % (sid, ctx)
 
-ADS_TOC = [('su-kien', 'Sự kiện 01/11'), ('tai-chinh', 'Giá &amp; thanh toán'), ('dau-tu', 'Đầu tư 1 sàn'), ('quy-hoach', 'Quy hoạch'), ('vi-tri', 'Vị trí'), ('tour-360', 'Xem 360°'), ('mat-bang', 'Mặt bằng'), ('dong-tien', 'Cho thuê'), ('tim-can', 'Căn hợp với tôi')]
+ADS_TOC = [('tai-chinh', 'Giá &amp; thanh toán'), ('vi-tri', 'Vị trí'), ('tour-360', 'Xem 360°'), ('mat-bang', 'Mặt bằng'), ('tim-can', 'Chọn căn')]
 
 def tim_can(ctx='ADS'):
     Q = [('muc', 'Anh/chị mua để làm gì?', False, [('o', '🏖 Để ở / nghỉ dưỡng gia đình'), ('ngan', '🧳 Cho thuê ngắn hạn (theo đêm)'), ('dai', '📅 Cho thuê dài hạn (theo tháng)'), ('tg', '📈 Đầu tư chờ tăng giá'), ('san', '🏢 Mua nhiều căn / cả 1 sàn')]),
