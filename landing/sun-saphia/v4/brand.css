@@ -721,3 +721,15 @@ em.dk{display:block;font-style:italic;font-size:12.5px;font-weight:600;letter-sp
 .dtc.yes li::before{content:"✓";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:#E96118;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px}
 @media(max-width:760px){.dtg{grid-template-columns:1fr}}
 .rtc .rtr span{text-transform:none;letter-spacing:0}
+/* Bài toán 1 sàn */
+.dtb{margin-top:22px;background:#fff;border:1px solid var(--ln);border-radius:18px;padding:18px 20px;box-shadow:var(--sh)}
+.dtb h3{margin:0 0 12px;color:var(--nv);font-size:21px}.dtb h3 b{color:var(--or)}
+.dtt{overflow-x:auto}.dtt table{width:100%;border-collapse:collapse;min-width:620px}
+.dtt th,.dtt td{padding:10px 12px;border-bottom:1px solid var(--ln);text-align:left;vertical-align:top;font-size:14.5px;line-height:1.5}
+.dtt thead th{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}.dtt thead th:last-child{color:#fff;background:var(--nv);border-radius:10px 10px 0 0}
+.dtt tbody th{color:var(--nv);white-space:nowrap;width:150px}.dtt td:nth-child(2){color:#5b6577}
+.dtt td:last-child{background:#FFF4EA;color:var(--ink)}.dtt td:last-child b{color:var(--or)}
+@media(max-width:760px){.dtt table{min-width:0}.dtt thead{display:none}.dtt table,.dtt tbody,.dtt tr,.dtt th,.dtt td{display:block;width:auto}
+.dtt tr{border:1px solid var(--ln);border-radius:12px;margin-bottom:10px;overflow:hidden}.dtt tbody th{background:var(--pp);border:0;width:auto}
+.dtt td{border:0;padding:8px 12px}.dtt td::before{content:attr(data-l);display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}
+.dtt td:last-child::before{color:var(--or)}}
