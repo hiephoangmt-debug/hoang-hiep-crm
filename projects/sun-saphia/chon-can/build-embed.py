@@ -4,7 +4,10 @@ import json, pathlib, sys
 here = pathlib.Path(__file__).parent
 sha = sys.argv[1] if len(sys.argv) > 1 else 'main'
 model = 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/%s/projects/sun-saphia/4d/sun-saphia-4d.html' % sha
-body = (here / 'chon-can.html').read_text(encoding='utf-8').replace('__MODEL__', model)
+import subprocess
+# ảnh / video nội thất: dùng commit mới nhất có thay đổi thư mục images/noi-that (link cố định, không bị cache cũ)
+ntsha = subprocess.run(['git', 'log', '-1', '--format=%H', '--', str(here.parent / 'images' / 'noi-that')], capture_output=True, text=True, cwd=here).stdout.strip() or 'main'
+body = (here / 'chon-can.html').read_text(encoding='utf-8').replace('__MODEL__', model).replace('__NTSHA__', ntsha)
 doc = ('<!doctype html><html lang="vi"><head><meta charset="utf-8">'
        '<meta name="viewport" content="width=device-width,initial-scale=1"><base target="_blank">' + body + '</html>')
 js = r'''/* Sun Saphia – Chọn căn theo view (mặt bằng tầng theo tỷ lệ + 3D căn + nắng theo giờ). Sinh tự động bởi build-embed.py */
