@@ -775,3 +775,19 @@ em.dk{display:block;font-style:italic;font-size:12.5px;font-weight:600;letter-sp
 .wvh[hidden]{display:none}@keyframes wvh{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
 @media(min-width:761px){.wvh{bottom:32px}}
 .ctx .dp b,.ctx .trust b{color:#F2802F!important}
+/* Trò chơi tìm căn */
+.tcn{background:linear-gradient(170deg,#F3F6FB,#FFF4EA)}
+.tqw0{max-width:860px;margin:0 auto;background:#fff;border-radius:20px;padding:22px 24px;box-shadow:var(--sh);border:1px solid var(--ln)}
+.tqbar{height:8px;border-radius:99px;background:var(--pp);overflow:hidden;margin-bottom:16px}.tqbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#F2802F,#E96118);transition:width .4s}
+.tq.off,.tqr.off{display:none}.tqn{margin:0;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--or)}
+.tq h3{color:var(--nv);font-size:22px;margin:4px 0 14px}.tqo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tqo button{text-align:left;border:1.5px solid var(--ln);background:#fff;border-radius:14px;padding:14px 16px;font:600 15.5px/1.35 'Be Vietnam Pro',sans-serif;color:var(--ink);cursor:pointer;transition:all .15s}
+.tqo button:hover{border-color:#F2B48A;background:#FFF8F2}.tqo button.on{border-color:#E96118;background:#FFF1E6;color:#C2410C;box-shadow:0 0 0 3px rgba(233,97,24,.15)}
+.tqnext{margin-top:14px}
+.tqk{display:inline-block;background:#FFF1E6;color:#C2410C;font-weight:800;border-radius:999px;padding:6px 12px;font-size:13px}
+.tqr h3{font-family:Fahkwang,Georgia,serif;font-size:32px;color:var(--nv);margin:10px 0 2px}.tqa{margin:0 0 12px;color:var(--mut);font-weight:600}
+.tqg{display:grid;grid-template-columns:1fr 1fr;gap:16px}.tqg b{color:var(--nv)}.tqnum{background:var(--nv);color:#fff;border-radius:12px;padding:10px 14px;font-weight:600;margin:12px 0}
+.tqf{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;margin-top:6px}.tqf input{border:1.5px solid var(--ln);border-radius:12px;padding:12px 14px;font-size:15px}
+.tqre{margin-top:10px;background:none;border:0;color:var(--nv);font-weight:700;cursor:pointer}
+@media(max-width:760px){.tqo,.tqg,.tqf{grid-template-columns:1fr}.tqr h3{font-size:26px}}
+.tqr li,.tqr p{text-align:left!important}
