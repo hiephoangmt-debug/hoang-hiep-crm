@@ -63,3 +63,41 @@ add_action(
 		}
 	}
 );
+
+/**
+ * Khung cao bằng nội dung bảng thống kê: bảng gửi chiều cao qua postMessage, trang này đặt lại chiều cao iframe
+ * → chỉ còn một thanh cuộn (của trang), lướt trên điện thoại không bị khựng do cuộn lồng nhau.
+ * Bảng chưa hỗ trợ thì khung giữ nguyên 85vh như cũ.
+ */
+add_action(
+	'wp_footer',
+	static function () {
+		if ( ! is_page( HH_TKDT_SLUG ) ) {
+			return;
+		}
+		?>
+<script id="hh-tkdt-js">
+(function () {
+	var ORIGIN = 'https://hiephoangmt-debug.github.io';
+	var f = document.querySelector('iframe[src^="' + ORIGIN + '/hoang-hiep-crm/dau-tu/"]');
+	if (!f) return;
+	f.loading = 'eager';
+	function headH() { var h = document.querySelector('.site-header'); return h ? h.getBoundingClientRect().height : 0; }
+	addEventListener('message', function (e) {
+		if (e.origin !== ORIGIN || e.source !== f.contentWindow || !e.data || typeof e.data !== 'object') return;
+		var d = e.data;
+		if (d.hhDauTu === 'h') {
+			var h = Math.max(640, Math.min(200000, +d.h || 0));
+			if (h) { f.style.height = h + 'px'; f.style.minHeight = '0'; f.setAttribute('scrolling', 'no'); }
+		} else if (d.hhDauTu === 'go') {
+			var top = f.getBoundingClientRect().top + scrollY + (+d.y || 0);
+			var vt = scrollY + headH(), vb = scrollY + innerHeight;
+			if (d.nearest && top >= vt && top + (+d.h || 0) <= vb) return;
+			scrollTo({ top: Math.max(0, top - headH() - 8), behavior: d.smooth ? 'smooth' : 'auto' });
+		}
+	});
+})();
+</script>
+		<?php
+	}
+);
