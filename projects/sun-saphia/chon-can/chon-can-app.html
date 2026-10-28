@@ -647,9 +647,12 @@ function plan30(){
 }
 function m30(r){ return (state.v==='all'||r[2].indexOf(state.v)>=0)&&(state.t==='all'||r[1]===state.t||(state.t==='STU'&&false)); }
 /* ---------- nội thất mẫu render (Blender) theo từng căn: ảnh + video đi trong căn ---------- */
-var NT_BASE='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@2c61ef72e6b4bb8bac61c59236bd1410e9fc0786/projects/sun-saphia/images/noi-that/';
-var NT={'30-10':{s:'Nội thất luxury · khách sạn 5–6 sao',img:[['sp3010-lux-phong-khach.webp','Phòng khách'],['sp3010-lux-phong-khach-2.webp','Từ lô-gia nhìn vào'],['sp3010-lux-phong-ngu.webp','Phòng ngủ view biển'],['sp3010-lux-phong-plus1.webp','Phòng +1'],['sp3010-lux-mat-bang-3d.webp','Mặt bằng 3D']],vid:'sp3010-lux-video-9x16.mp4'}};
-function ntShow(key,code){ var el=document.getElementById('nt'), d=NT[key]; if(!el) return; if(!d){ el.hidden=true; el.innerHTML=''; return; }
+var NT_BASE='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@107cd3ef7cd29fb5df16594d819c0035e6894205/projects/sun-saphia/images/noi-that/';
+var NT=/*NT-DATA*/{'30-10':{img:[['sp3010-lux-phong-khach.webp','Phòng khách'],['sp3010-lux-phong-khach-2.webp','Từ lô-gia nhìn vào'],['sp3010-lux-phong-ngu.webp','Phòng ngủ view biển'],['sp3010-lux-phong-plus1.webp','Phòng +1'],['sp3010-lux-mat-bang-3d.webp','Mặt bằng 3D']],vid:'sp3010-lux-video-9x16.mp4'},"30-11":{"img":[["sp-30-11-living.webp","Phòng khách"],["sp-30-11-living2.webp","Nhìn từ lô-gia vào"],["sp-30-11-bed.webp","Phòng ngủ"],["sp-30-11-plus.webp","Phòng +1"],["sp-30-11-top.webp","Mặt bằng 3D"]]},"30-12":{"img":[["sp-30-12-living.webp","Phòng khách"],["sp-30-12-living2.webp","Nhìn từ lô-gia vào"],["sp-30-12-bed.webp","Phòng ngủ"],["sp-30-12-plus.webp","Phòng +1"],["sp-30-12-top.webp","Mặt bằng 3D"]]},"30-15":{"img":[["sp-30-15-living.webp","Phòng khách"],["sp-30-15-living2.webp","Nhìn từ lô-gia vào"],["sp-30-15-bed.webp","Phòng ngủ"],["sp-30-15-plus.webp","Phòng +1"],["sp-30-15-top.webp","Mặt bằng 3D"]]},"30-16":{"img":[["sp-30-16-living.webp","Phòng khách"],["sp-30-16-living2.webp","Nhìn từ lô-gia vào"],["sp-30-16-bed.webp","Phòng ngủ"],["sp-30-16-plus.webp","Phòng +1"],["sp-30-16-top.webp","Mặt bằng 3D"]]}}/*/NT-DATA*/;
+function ntKeys(f,id){ var L=LAY(f); return f>=30?['30-'+id]:L==='T2'?['G2-'+id,'T-'+id]:L==='T3'?['G3-'+id,'T-'+id]:['T-'+id]; }
+function ntShow(keys,code){ var el=document.getElementById('nt'); if(!el) return; var d={s:'Nội thất luxury · khách sạn 5–6 sao',img:[],vid:null};
+  keys.forEach(function(k){ var x=NT[k]; if(!x) return; d.img=d.img.concat(x.img); if(x.vid&&!d.vid) d.vid=x.vid; });
+  if(!d.img.length){ el.hidden=true; el.innerHTML=''; return; }
   el.hidden=false;
   el.innerHTML='<div class="h"><b>✦ '+d.s+'</b><small>Căn '+code+' · render minh họa</small></div><div class="row">'+d.img.map(function(m,i){ return '<button type="button" data-i="'+i+'"><img loading="lazy" src="'+NT_BASE+m[0]+'" alt="'+m[1]+'"><span>'+m[1]+'</span></button>'; }).join('')+'</div>'
     +(d.vid?'<button type="button" class="vb">▶ Video đi tham quan căn hộ</button>':'')
@@ -671,7 +674,7 @@ function select30(j){
     +f.split('').map(function(c,k){return '<span class="tag'+(k?'':' o')+'">'+VIEW[c][0]+'</span>'}).join('')
     +'<p><b>View:</b> '+f.split('').map(function(c){return VIEW[c][1]}).join(' ')+'</p><p><b>Nắng:</b> '+VIEW[m][2]+'.</p>'
     +'<p>Tầng 30 là tầng trên cùng, layout riêng với căn rộng hơn tầng điển hình. Mặt bằng căn vẽ lại theo bản vẽ CĐT (nội thất minh họa).</p>';
-  ntShow('30-'+r[0],'SP30'+r[0]); unitPlan30(r); buildRoom30(r);
+  ntShow(ntKeys(30,r[0]),'SP30'+r[0]); unitPlan30(r); buildRoom30(r);
   var dir={E:'viewE',W:'viewW',N:'viewN',S:'viewS'}[m], hr={E:6.3,W:17.3,N:9,S:15}[m];
   var priv=!/^about:/.test(location.href)&&!/[?&]pub=1/.test(location.search), sfx=priv?('&k='+encodeURIComponent(window.SS_KEY||'')+(/[?&]crm/.test(location.search)?'&crm':'')):'&pub=1';
   document.getElementById('go5d').href=MODEL+'?h='+hr+'&f=30&'+dir+sfx;
@@ -723,7 +726,7 @@ function select(i){
   document.getElementById('goPlan').href=MODEL+'?plan&f='+Math.max(3,Math.min(30,fl))+'&h=10'+sfx;
   var hour=document.getElementById('hour'); hour.value={E:8,W:16.5,N:10,S:14}[m]; showHour();
   document.querySelector('.pair').classList.toggle('wide',t==='2PN');
-  ntShow(state.floor+'-'+r[0],code(r[0])); unitPlan(r,code(r[0]));
+  ntShow(ntKeys(state.floor,r[0]),code(r[0])); unitPlan(r,code(r[0]));
   buildRoom(r); if(R3&&R3.size) R3.size();
 }
 
@@ -1239,7 +1242,8 @@ document.getElementById('hour').addEventListener('input',showHour);
 window.__ccExport=function(){ var sp={}; Object.keys(SPEC).forEach(function(k){ var s=SPEC[k]; sp[k]={W:s.W,D:s.D,floor:s.floor,segs:s.segs,blocks:s.blocks||[],zones:s.zones||[],shw:s.shw||[],items:s.items,eye:s.eye,look:s.look}; });
   var u={}; U.forEach(function(r){ u[r[0]]=[[SK(r),unitM(r)]]; });
   var u30={}; U30.forEach(function(r){ u30[r[0]]=G30[r[0]].filter(function(q){ return q[5]!=='RECT'; }).map(function(q){ return [q[5],partM(q)]; }); });
-  return {spec:sp,u:u,u30:u30}; };
+  var gd={}; [['T2',GARD2],['T3',GARD]].forEach(function(x){ gd[x[0]]={}; Object.keys(BAL[x[0]]).forEach(function(id){ if(x[1][id]) gd[x[0]][id]={poly:roundPts(x[1][id].p,x[1][id].r),area:BAL[x[0]][id]}; }); });   // sân vườn tầng 2–3 (toạ độ tháp)
+  return {spec:sp,u:u,u30:u30,gard:gd}; };
 (function(){ // mở thẳng 1 căn: ?u=<mã căn>&f=<tầng> (dùng khi bấm căn trên mô hình 4D)
   var q=location.search||'', mu=/[?&]u=([0-9A-Za-z]+)/.exec(q), mf=/[?&]f=(\d+)/.exec(q), idx=5;
   if(mf){ var fv=Math.max(2,Math.min(30,+mf[1])); state.floor=fv; fe.value=fv; document.getElementById('flo').textContent=fname(fv); }
