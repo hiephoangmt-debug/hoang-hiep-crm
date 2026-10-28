@@ -16,7 +16,7 @@ function SSResort(C, out) {
   /* tiếng piano: các họa âm hơi lệch (như dây đàn thật), họa âm cao tắt nhanh, 2 dây lệch nhẹ cho ấm */
   function piano(m, t, vel) {
     var f0 = hz(m), dec = 2.2 + (72 - m) * 0.06; if (dec < 1.4) dec = 1.4;
-    var lp = C.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1200 + vel * 5000; lp.connect(bus);
+    var lp = C.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900 + vel * 3200; lp.connect(bus);
     for (var n = 1; n <= AMP.length; n++) {
       var a = AMP[n - 1] * vel; if (f0 * n > 9000) break;
       [0, 1.6].forEach(function (cents, k) {
@@ -24,7 +24,7 @@ function SSResort(C, out) {
         o.frequency.value = f0 * n * Math.sqrt(1 + 0.00035 * n * n); o.detune.value = cents;
         var g = C.createGain(), dn = dec / Math.pow(n, 0.7);
         g.gain.setValueAtTime(0.0001, t);
-        g.gain.linearRampToValueAtTime(a * (k ? 0.45 : 0.55), t + 0.006);
+        g.gain.linearRampToValueAtTime(a * (k ? 0.45 : 0.55), t + 0.018);
         g.gain.exponentialRampToValueAtTime(a * 0.25, t + 0.25 * dn);
         g.gain.exponentialRampToValueAtTime(0.0001, t + dn + 0.4);
         o.connect(g); g.connect(lp); o.start(t); o.stop(t + dn + 0.5);
@@ -61,19 +61,19 @@ function SSResort(C, out) {
   function schedule(t) {
     var c = PROG[idx % PROG.length], phraseEnd = (idx % 4) === 3;
     /* tay trái: bass + rải hợp âm nhẹ */
-    piano(c.b, hum(t), 0.42);
-    piano(c.lh[0], hum(t + BEAT * 0.5), 0.22);
-    piano(c.lh[1], hum(t + BEAT * 1), 0.2);
-    piano(c.lh[2], hum(t + BEAT * 1.5), 0.2);
-    piano(c.lh[3], hum(t + BEAT * 2), 0.18);
-    piano(c.lh[1], hum(t + BEAT * 2.5), 0.17);
-    piano(c.lh[2], hum(t + BEAT * 3), 0.17);
+    piano(c.b, hum(t), 0.26);
+    piano(c.lh[0], hum(t + BEAT * 0.5), 0.13);
+    piano(c.lh[1], hum(t + BEAT * 1), 0.12);
+    piano(c.lh[2], hum(t + BEAT * 1.5), 0.12);
+    piano(c.lh[3], hum(t + BEAT * 2), 0.11);
+    piano(c.lh[1], hum(t + BEAT * 2.5), 0.1);
+    piano(c.lh[2], hum(t + BEAT * 3), 0.1);
     /* tay phải: giai điệu đi từng bậc, cuối câu ngân dài */
     var beats = phraseEnd ? [0, 2] : (Math.random() < 0.5 ? [0, 1.5, 2.5] : [0, 1, 2, 3]);
     beats.forEach(function (bt, k) {
       if (k > 0 && Math.random() < 0.15) return;
       pos = Math.max(0, Math.min(c.rh.length - 1, pos + [-1, -1, 0, 1, 1, -2, 2][Math.floor(Math.random() * 7)]));
-      piano(c.rh[pos], hum(t + bt * BEAT + 0.02), 0.34 + Math.random() * 0.08);
+      piano(c.rh[pos], hum(t + bt * BEAT + 0.02), 0.2 + Math.random() * 0.04);
     });
     if (idx % 2 === 0) wv(t + 0.5);
     idx++;
