@@ -222,3 +222,22 @@ def tldr(title, items):
     return ('<section class="sec" style="padding:0 0 34px"><div class="wrap"><div class="tldr"><h2>Tóm tắt nhanh: %s</h2><dl>%s</dl>'
             '<p class="src" style="margin:10px 0 0">Cập nhật %s · Nguồn: tài liệu Kick-off của chủ đầu tư Sun Property · TATILAND – đại lý phân phối chính thức</p></div></div></section>') % (
         title, ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % x for x in items), UPDATED)
+
+def wave_audio():
+    """Tiếng sóng biển tạo bằng WebAudio (không cần file): bắt đầu nhỏ khi khách chạm lần đầu, nút bật/tắt góc trái dưới."""
+    return ('<button type="button" class="wvb" id="wvb" aria-label="Bật/tắt tiếng sóng biển" title="Tiếng sóng biển">🔇</button>'
+            '<script>(function(){var C,G,on=false,st=false,KEY="ss_wave_off";var off=false;try{off=localStorage.getItem(KEY)==="1"}catch(e){}'
+            'var btn=document.getElementById("wvb");function ui(){btn.textContent=on?"🔊":"🔇";btn.classList.toggle("on",on)}'
+            'function noise(ctx,brown){var n=ctx.sampleRate*4,b=ctx.createBuffer(1,n,ctx.sampleRate),d=b.getChannelData(0),l=0;for(var i=0;i<n;i++){var w=Math.random()*2-1;if(brown){l=(l+0.02*w)/1.02;d[i]=l*3.5}else d[i]=w*0.4}var s=ctx.createBufferSource();s.buffer=b;s.loop=true;return s}'
+            'function layer(ctx,out,brown,freq,base,depth,period,ph){var s=noise(ctx,brown),f=ctx.createBiquadFilter();f.type="lowpass";f.frequency.value=freq;var g=ctx.createGain();g.gain.value=base;'
+            'var o=ctx.createOscillator();o.frequency.value=1/period;var og=ctx.createGain();og.gain.value=depth;o.connect(og);og.connect(g.gain);s.connect(f);f.connect(g);g.connect(out);s.start(0,ph);o.start(ctx.currentTime+ph)}'
+            'function build(){var A=window.AudioContext||window.webkitAudioContext;if(!A)return false;C=new A();G=C.createGain();G.gain.value=0;G.connect(C.destination);'
+            'layer(C,G,true,520,0.55,0.45,9,0);layer(C,G,true,900,0.25,0.22,6.5,2.3);layer(C,G,false,2600,0.05,0.05,9,4.1);return true}'
+            'function fade(v,t){if(!C)return;var n=C.currentTime;G.gain.cancelScheduledValues(n);G.gain.setValueAtTime(G.gain.value,n);G.gain.linearRampToValueAtTime(v,n+t)}'
+            'function start(){if(!C&&!build())return;if(C.state==="suspended")C.resume();fade(0.16,3);on=true;ui()}'
+            'function stop(){fade(0,0.8);on=false;ui()}'
+            'btn.addEventListener("click",function(e){e.stopPropagation();st=true;if(on){stop();try{localStorage.setItem(KEY,"1")}catch(x){}}else{start();try{localStorage.removeItem(KEY)}catch(x){}}});'
+            'function first(e){if(st)return;st=true;document.removeEventListener("pointerdown",first,true);document.removeEventListener("keydown",first,true);if(!off)start()}'
+            'document.addEventListener("pointerdown",first,true);document.addEventListener("keydown",first,true);'
+            'document.addEventListener("play",function(e){if(e.target&&!e.target.muted&&on){stop()}},true);'
+            'document.addEventListener("visibilitychange",function(){if(!C)return;if(document.hidden)C.suspend();else if(on)C.resume()});ui()})();</script>')

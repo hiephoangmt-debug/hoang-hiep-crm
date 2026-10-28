@@ -749,3 +749,10 @@ em.dk{display:block;font-style:italic;font-size:12.5px;font-weight:600;letter-sp
 .dtb h3 b,.dtt td:last-child b{color:#E96118}
 .dtt td:nth-child(2) b{color:#5b6577}
 .dsrc a{color:var(--nv);text-decoration:underline;text-underline-offset:2px}
+/* Nút tiếng sóng biển */
+.wvb{position:fixed;left:14px;bottom:86px;z-index:60;width:44px;height:44px;border-radius:50%;border:2px solid #fff;background:var(--nv);color:#fff;font-size:19px;line-height:1;cursor:pointer;box-shadow:0 8px 20px -8px rgba(11,36,71,.6);opacity:.85}
+.wvb.on{background:linear-gradient(160deg,#F2802F,#E96118);opacity:1;animation:wvp 2.6s ease-in-out infinite}
+@keyframes wvp{0%,100%{box-shadow:0 0 0 0 rgba(233,97,24,.45)}50%{box-shadow:0 0 0 10px rgba(233,97,24,0)}}
+@media(min-width:761px){.wvb{bottom:24px}}
+/* Cân đều 2 cột so sánh đầu tư */
+.dtg{align-items:stretch}.dtc{display:flex;flex-direction:column}.dtc ul{flex:1;align-content:space-evenly}

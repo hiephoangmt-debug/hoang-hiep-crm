@@ -39,7 +39,7 @@ def page(path, title, desc, kw, body, lds, cur, tools=False, canon=None, robots=
         i = m.start() if m else body.rfind('<section')
         body = body[:i] + vitri_dark('vi-tri', VT_PAGES[path]) + body[i:]
     html = head(title, desc, canon or url, OG, kw, lds + [ORG, RES], FAV)
-    html += '<body>\n' + header(cur, MAIN, LOGO) + '\n<main id="dau-trang">' + body + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(tools) + '</body>\n</html>\n'
+    html += '<body>\n' + header(cur, MAIN, LOGO) + '\n<main id="dau-trang">' + body + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(tools) + wave_audio() + '</body>\n</html>\n'
     return copy_fix(html)
 
 def band(*a, **k):
@@ -684,7 +684,7 @@ def ads(domain):
     b = re.sub(r'<p[^>]*><a class="lk" href="\{M\}/quy-hoach">[^<]*</a></p>', '', b)
     html = head(title, desc, url, OG, 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES], FAV)
     b = b.replace('{M}', MAIN)
-    html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN, pages=False) + '\n' + popup() + tail(True) + '</body>\n</html>\n'
+    html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN, pages=False) + '\n' + popup() + tail(True) + wave_audio() + '</body>\n</html>\n'
     return copy_fix(html)
 
 def tinh_dong_tien():
