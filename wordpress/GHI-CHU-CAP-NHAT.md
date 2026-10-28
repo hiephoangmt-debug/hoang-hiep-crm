@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.45** + plugin Hoàng Hiệp CRM **2.20.94**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.46** + plugin Hoàng Hiệp CRM **2.20.95**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.95 + giao diện 2.15.46: trang Thống kê đầu tư (29/10/2026)
+
+- Trang mới **Thống kê đầu tư** – https://hiephoangmt.com/thong-ke-dau-tu/ – tự tạo (đã xuất bản) lần đầu anh vào trang quản trị sau khi cài. Nội dung là một khối HTML tùy chỉnh nhúng bảng thống kê (https://hiephoangmt-debug.github.io/hoang-hiep-crm/dau-tu/) + link "Mở toàn màn hình ↗". Trang hiển thị rộng 1200 px; có mô tả Google riêng.
+- Menu chính: thêm mục "Thống kê đầu tư" giữa "Tin tức" và "Về Hiệp" (tự thêm, không cần sửa Giao diện → Menu; nếu anh tự thêm trong menu thì không bị trùng).
+- Đầu trang máy tính: menu gọn lại một chút, khẩu hiệu dưới tên được xuống dòng thay vì bị cắt "…", hotline từ 1301–1700 px chỉ hiện nút gọi.
+- Nếu xóa trang, web không tự tạo lại.
 
 ## Có gì mới – plugin 2.20.94: tác động tới Sun Saphia (28/10/2026)
 

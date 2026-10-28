@@ -31,7 +31,7 @@ $hh_t    = 'vi' !== $hh_lang ? hh_lang_strings( $hh_lang ) : null;
 					<img class="brand__mark" src="<?php echo esc_url( hoanghiep_photo( 'avatar' ) ); ?>" alt="<?php echo esc_attr( hoanghiep_opt( 'hh_person_name' ) ); ?>" width="46" height="46">
 					<span class="brand__text">
 						<span class="brand__name"><?php echo esc_html( hoanghiep_opt( 'hh_person_name' ) ); ?></span>
-						<span class="brand__tag"><?php echo esc_html( $hh_t ? $hh_t['brand_tag'] : hoanghiep_opt( 'hh_person_title' ) ); ?></span>
+						<span class="brand__tag"><?php echo str_replace( array( 'Đà Nẵng', 'Da Nang' ), array( 'Đà&nbsp;Nẵng', 'Da&nbsp;Nang' ), esc_html( $hh_t ? $hh_t['brand_tag'] : hoanghiep_opt( 'hh_person_title' ) ) ); // phpcs:ignore ?></span>
 					</span>
 				</a>
 			<?php endif; ?>

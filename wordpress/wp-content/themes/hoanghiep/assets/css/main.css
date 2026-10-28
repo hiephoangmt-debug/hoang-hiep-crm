@@ -191,6 +191,12 @@ p { margin: 0 0 1em; }
 .brand__link, .brand__text { min-width: 0; }
 .brand__tag { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 @media (min-width: 1001px) and (max-width: 1500px) { .primary-nav a { padding-inline: 9px; } .primary-nav a::after { left: 9px; right: 9px; } }
+/* Menu nhiều mục: gọn lại để tên + khẩu hiệu không bị cắt. */
+.brand__name { white-space: nowrap; }
+@media (min-width: 1001px) and (max-width: 1700px) { .primary-nav a { padding-inline: 7px; } .primary-nav a::after { left: 7px; right: 7px; } .primary-nav .menu-item-has-children > a { padding-right: 20px; } }
+@media (min-width: 1301px) and (max-width: 1700px) { .header-hotline > span:last-child { display: none; } }
+@media (min-width: 1001px) and (max-width: 1199px) { .primary-nav a { padding-inline: 5px; font-size: .86rem; } .primary-nav a::after { left: 5px; right: 5px; } }
+@media (min-width: 1001px) { .brand__tag { white-space: normal; line-height: 1.25; max-width: 270px; } }
 .nav-toggle { flex: none; }
 @media (max-width: 1000px) {
 	:root { --header-h: 64px; }
