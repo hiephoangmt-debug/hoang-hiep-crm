@@ -226,17 +226,17 @@ def tldr(title, items):
 def wave_audio():
     """Nhạc nền kiểu resort tự sinh (resort-audio.js): bắt đầu nhỏ khi khách chạm lần đầu, nút bật/tắt góc trái dưới."""
     eng = open(D + 'v4/resort-audio.js', encoding='utf8').read()
-    return ('<button type="button" class="wvb" id="wvb" aria-label="Bật/tắt nhạc nền" title="Nhạc nền thư giãn">🔇</button>'
+    return ('<button type="button" class="wvb" id="wvb" aria-label="Bật/tắt nhạc nền" title="Nhạc nền thư giãn">🔇</button><span class="wvh" id="wvh" hidden>🎵 Chạm để nghe nhạc thư giãn</span>'
             '<script>' + eng + '</script>'
             '<script>(function(){var C,M,R,on=false,st=false,T=null,nx=0,KEY="ss_wave_off",off=false;try{off=localStorage.getItem(KEY)==="1"}catch(e){}'
-            'var btn=document.getElementById("wvb");function ui(){btn.textContent=on?"🎵":"🔇";btn.classList.toggle("on",on)}'
+            'var btn=document.getElementById("wvb"),hint=document.getElementById("wvh");function ui(){btn.textContent=on?"🎵":"🔇";btn.classList.toggle("on",on);if(on&&hint)hint.hidden=true}'
             'function tick(){if(!C)return;while(nx<C.currentTime+R.BAR){R.schedule(nx);nx+=R.BAR}T=setTimeout(tick,2000)}'
             'function build(){var A=window.AudioContext||window.webkitAudioContext;if(!A)return false;C=new A();M=C.createGain();M.gain.value=0;M.connect(C.destination);R=SSResort(C,M);nx=C.currentTime+0.1;tick();return true}'
             'function fade(v,t){if(!C)return;var n=C.currentTime;M.gain.cancelScheduledValues(n);M.gain.setValueAtTime(M.gain.value,n);M.gain.linearRampToValueAtTime(v,n+t)}'
             'function start(){if(!C&&!build())return;if(C.state==="suspended")C.resume();fade(0.38,4);on=true;ui()}'
             'function stop(){fade(0,1);on=false;ui()}'
             'btn.addEventListener("click",function(e){e.stopPropagation();st=true;if(on){stop();try{localStorage.setItem(KEY,"1")}catch(x){}}else{start();try{localStorage.removeItem(KEY)}catch(x){}}});'
-            'function first(e){if(st)return;st=true;document.removeEventListener("pointerdown",first,true);document.removeEventListener("keydown",first,true);if(!off)start()}'
-            'document.addEventListener("pointerdown",first,true);document.addEventListener("keydown",first,true);'
+            'var EV=["pointerdown","pointerup","touchend","click","keydown"];function first(e){if(st)return;if(!C&&!build())return;if(C.state==="suspended")C.resume();start();if(C.state==="running"||e.type!=="pointerdown"){st=true;EV.forEach(function(n){document.removeEventListener(n,first,true)})}}'
+            'if(!off){EV.forEach(function(n){document.addEventListener(n,first,true)});try{if(build()){C.resume().then(function(){if(C.state==="running"&&!st){st=true;start()}}).catch(function(){})}}catch(x){}setTimeout(function(){if(!on&&hint){hint.hidden=false;setTimeout(function(){hint.hidden=true},9000)}},2500)}'
             'document.addEventListener("play",function(e){if(e.target&&!e.target.muted&&on){stop()}},true);'
             'document.addEventListener("visibilitychange",function(){if(!C)return;if(document.hidden)C.suspend();else if(on)C.resume()});ui()})();</script>')

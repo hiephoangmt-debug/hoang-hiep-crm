@@ -240,14 +240,23 @@ def related(cur):
     it = [x for x in it if x[0] != cur][:4]
     return '<div class="rel">' + ''.join('<a href="%s%s">%s<span>%s</span></a>' % (MAIN, p, t, d) for p, t, d in it) + '</div>'
 
-def cta_block(label, title='Có bảng giá là anh/chị <b>nhận ngay</b>', sub='Căn hộ mặt biển có số lượng giới hạn theo mặt bằng. Người trong danh sách quan tâm nhận thông tin sớm để so sánh, chọn căn kỹ trước ngày mở bán.'):
-    return ('<section class="sec" id="dang-ky"><div class="wrap"><div class="cta">%s<div class="g2"><div>'
-            '<span class="ey" style="color:var(--yl)">Đăng ký nhận thông tin</span><h2 class="dp">%s</h2>'
-            '<p style="margin-top:14px">%s</p><ul class="ck" style="color:#fff"><li>Bảng giá gốc &amp; chính sách thanh toán</li><li>Mặt bằng từng tầng, căn còn trống</li><li>Bảng tính dòng tiền theo căn anh/chị chọn</li></ul>'
-            '<div class="cta2"><a class="btn zl" href="%s" target="_blank" rel="noopener"><span class="hm">Nhắn </span>Zalo %s</a><a class="btn call" href="tel:%s">Gọi ngay</a></div>'
-            '<div class="trust"><div><b>Đại lý chính thức</b><span>Sun Property chứng nhận 23/10/2026</span></div><div><b>0 đồng</b><span>Không thu tiền giữ chỗ</span></div><div><b>Phản hồi nhanh</b><span>Gửi tài liệu qua Zalo trong ít phút</span></div></div>'
-            '</div>%s</div></div></div></section>') % (
-        tiles('tr'), title, sub, ZALO, TEL_S, TEL, form('cuoi', label, title='Gửi tôi bảng giá', note='Gửi qua Zalo ngay khi chủ đầu tư công bố. Miễn phí, không ràng buộc.', btn='Gửi tôi bảng giá'))
+def cta_block(label, title='Giữ suất <b>ưu tiên chọn căn</b> trước ngày ra mắt', sub='Căn view biển tầng cao thường được chọn hết ngay trong buổi ra mắt 01/11. Để lại số Zalo, anh/chị có đủ thông tin để chọn căn trước, không phải chen ở hội trường.'):
+    gets = ['Bảng giá gốc từng căn ngay khi chủ đầu tư công bố',
+            'Lịch thanh toán 25%% – vay 70%% chủ đầu tư trả lãi, ân hạn gốc',
+            'Danh sách căn view biển còn trống + mặt bằng từng tầng',
+            'Thư mời sự kiện 01/11 tại Hilton + phiếu bốc thăm quà',
+            'Bảng tính cho thuê dài hạn / ngắn hạn theo căn']
+    return ('<section class="sec" id="dang-ky"><div class="wrap"><div class="cta ctx">%s<div class="g2"><div>'
+            '<span class="ey" style="color:#F2802F">🔥 Ưu tiên cho người đăng ký sớm</span><h2 class="dp">%s</h2>'
+            '<p style="margin-top:12px">%s</p>'
+            '<div class="ccd"><span class="ccdt">⏳ Còn lại tới sự kiện ra mắt 01/11</span><div class="ccdb"><div><b data-c="d">--</b><small>ngày</small></div><div><b data-c="h">--</b><small>giờ</small></div><div><b data-c="m">--</b><small>phút</small></div><div><b data-c="s">--</b><small>giây</small></div></div></div>'
+            '<p class="cgt">Anh/chị nhận ngay qua Zalo – <b>miễn phí</b>:</p><ul class="ck cget">' + ''.join('<li>' + g + '</li>' for g in gets) + '</ul>'
+            '<div class="cta2"><a class="btn zl" href="%s" target="_blank" rel="noopener"><span class="hm">Nhắn&nbsp;</span>Zalo %s</a><a class="btn call" href="tel:%s">Gọi ngay</a></div>'
+            '<div class="trust"><div><b>Đại lý chính thức</b><span>Sun Property chứng nhận 23/10/2026</span></div><div><b>0 đồng</b><span>Đăng ký không thu bất kỳ khoản nào</span></div><div><b>Bảo mật số</b><span>Chỉ anh Hiệp liên hệ, không chia sẻ</span></div></div>'
+            '</div>%s</div></div></div>'
+            '<script>(function(){var T=Date.parse("2026-11-01T09:00:00+07:00");function z(n){return(n<10?"0":"")+n}function t(){var d=Math.max(0,T-Date.now())/1e3;document.querySelectorAll(".ccd").forEach(function(e){var u={d:Math.floor(d/86400),h:Math.floor(d%%86400/3600),m:Math.floor(d%%3600/60),s:Math.floor(d%%60)};for(var k in u){var b=e.querySelector("[data-c="+k+"]");if(b)b.textContent=k=="d"?u[k]:z(u[k])}if(d<=0){var x=e.querySelector(".ccdt");if(x)x.textContent="🎉 Đã ra mắt – căn đẹp đang được chọn dần";e.querySelector(".ccdb").style.display="none"}})}t();setInterval(t,1000)})();</script>'
+            '</section>') % (
+        tiles('tr'), title, sub, ZALO, TEL_S, TEL, form('cuoi', label, title='Nhận bảng giá &amp; giữ suất ưu tiên', note='Chỉ cần số Zalo – anh Hiệp gửi tài liệu trong ít phút. Miễn phí, không ràng buộc.', btn='Giữ suất ưu tiên ngay'))
 
 def hero_stats():
     return ('<div class="stats"><div><b>30 tầng</b><span>114 m · 2 hầm</span></div><div><b>782 căn</b><span>Studio · 1BR+ · 2BR</span></div>'
