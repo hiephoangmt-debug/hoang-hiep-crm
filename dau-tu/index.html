@@ -155,6 +155,8 @@ tr.pick { cursor: pointer; } tr.pick:hover td, tr.pick[aria-selected="true"] td 
   background: #fab21933; color: var(--ink); margin-left: 6px; }
 footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
 .err { color: var(--down-text); font-size: 12px; }
+html.embed .toolbar { position: static; }
+section.far canvas { visibility: hidden; }
 </style>
 </head>
 <body>
@@ -1051,7 +1053,7 @@ function renderLaiVay() {
   }).join('');
   $('tblLv').innerHTML = head + '<tbody>' + body + '</tbody>';
   $('tblLv').querySelectorAll('th').forEach(t => t.onclick = () => { const k = t.dataset.k; if (lvSort === k) lvAsc = !lvAsc; else { lvSort = k; lvAsc = k === 'name' || k !== 'chg'; } renderLaiVay(); });
-  $('tblLv').querySelectorAll('tr.pick').forEach(t => t.onclick = () => { lvBank = t.dataset.b; renderLaiVay(); document.getElementById('lvDetail').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); });
+  $('tblLv').querySelectorAll('tr.pick').forEach(t => t.onclick = () => { lvBank = t.dataset.b; renderLaiVay(); goTo(document.getElementById('lvDetail'), { behavior: 'smooth', block: 'nearest' }); });
   // biểu đồ tất cả ngân hàng của loại đang chọn
   $('lvAllTitle').textContent = LV_TITLE[lvKind] + ' (%/năm)';
   const bars = [...rows].sort((a, b) => a.main - b.main).map(r => ({ name: r.name, v: r.main, ghi_chu: (r.mainKey ? r.notes[r.mainKey] : Object.values(r.notes).find(n => n.lai_suat === r.main))?.ghi_chu }));
@@ -1295,7 +1297,7 @@ function renderLsAuto() {
       for (const [d, arr] of Object.entries((RA.lich_su || {})[lsKind + '|' + name] || {})) if (arr && arr[ti] != null) hist[d] = arr[ti];
       return { name, hist, tag: BIG4.includes(name.toLowerCase().replace(/\s+/g, '')) ? ' <span class="pill">Big4</span>' : '' };
     });
-    histMatrix($('tblLs'), hrows, lsView, { higherGood: true, selected: lsBank, onPick: (b) => { lsBank = b; renderLs(); document.getElementById('lsDetail').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } });
+    histMatrix($('tblLs'), hrows, lsView, { higherGood: true, selected: lsBank, onPick: (b) => { lsBank = b; renderLs(); goTo(document.getElementById('lsDetail'), { behavior: 'smooth', block: 'nearest' }); } });
   }
   else $('tblLs').querySelectorAll('th').forEach(th => th.onclick = () => {
     const k = th.dataset.k;
@@ -1306,7 +1308,7 @@ function renderLsAuto() {
   const colors = { 'Tại quầy': '--s1', 'Online': '--s2', 'Tổng hợp': '--s3' };
   const ds = kinds.map(k => line(k + ' – TB 12 tháng', rateAvgHistory(k), css(colors[k] || '--s4'), { pointRadius: 3 }));
   draw('cLs', { type: 'line', data: { datasets: ds }, options: baseOpts('%/năm', { legend: true, dec: 2, tickDec: 1 }) });
-  if (lsView === 'now') $('tblLs').querySelectorAll('tr.pick').forEach(t => t.onclick = () => { lsBank = t.dataset.b; renderLs(); document.getElementById('lsDetail').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); });
+  if (lsView === 'now') $('tblLs').querySelectorAll('tr.pick').forEach(t => t.onclick = () => { lsBank = t.dataset.b; renderLs(); goTo(document.getElementById('lsDetail'), { behavior: 'smooth', block: 'nearest' }); });
   renderLsBank();
 }
 let lsBank = null;
@@ -1494,7 +1496,7 @@ async function lookup(raw, scroll) {
   if (!code) return;
   $('maInput').value = code;
   const seq = ++maSeq;
-  if (scroll) document.getElementById('tra-cuu').scrollIntoView({ behavior: 'smooth' });
+  if (scroll) goTo(document.getElementById('tra-cuu'), { behavior: 'smooth' });
   $('maResult').innerHTML = `<div class="card empty">Đang tải ${esc(code)}…</div>`;
   const [pr, fr, lv] = await Promise.allSettled([maPrices(code), maForeign(code), maLive(code)]);
   if (seq !== maSeq) return;
@@ -1560,32 +1562,69 @@ function drawMa() {
 }
 
 // Thanh chọn mục: bấm để nhảy tới mục, tự sáng mục đang xem
+// Nhúng trong trang khác (iframe): khung cao bằng nội dung, trang ngoài tự cuộn – không cuộn lồng nhau.
+const EMB = window.parent !== window;
+function goTo(el, opt = {}) {
+  if (!el) return;
+  if (EMB) { const r = el.getBoundingClientRect(); parent.postMessage({ hhDauTu: 'go', y: Math.round(r.top + scrollY), h: Math.round(r.height), nearest: opt.block === 'nearest', smooth: opt.behavior === 'smooth' }, '*'); return; }
+  el.scrollIntoView(opt);
+}
+if (EMB) {
+  document.documentElement.classList.add('embed');
+  let pend = 0, lastH = 0;
+  const post = () => { pend = 0; const h = Math.ceil(document.documentElement.scrollHeight); if (h !== lastH) { lastH = h; parent.postMessage({ hhDauTu: 'h', h }, '*'); } };
+  const ask = () => { if (!pend) pend = requestAnimationFrame(post); };
+  new ResizeObserver(ask).observe(document.body);
+  addEventListener('load', ask);
+  ask();
+}
+
+// Biểu đồ ở mục xa màn hình: tạm ẩn (không đổi bố cục) để lướt nhẹ hơn. Gốc mặc định của IntersectionObserver là màn hình
+// của trang ngoài cùng, nên vẫn đúng khi bảng nằm trong iframe cao bằng nội dung.
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver((es) => es.forEach(e => e.target.classList.toggle('far', !e.isIntersecting)), { rootMargin: '150% 0px' });
+  document.querySelectorAll('main section, body > section, section[id]').forEach(s => io.observe(s));
+}
+
 function initNav() {
   const bar = document.querySelector('.toolbar');
   const setH = () => document.documentElement.style.setProperty('--stick', bar.offsetHeight + 'px');
   setH(); addEventListener('resize', setH);
   const links = [...$('nav').querySelectorAll('a')];
-  const mark = (id) => links.forEach(a => {
-    const on = a.getAttribute('href') === '#' + id;
-    a.setAttribute('aria-current', String(on));
-    if (on) a.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-  });
+  const navEl = $('nav');
+  let curId = null;
+  const mark = (id) => {
+    if (id === curId) return;
+    curId = id;
+    links.forEach(a => {
+      const on = a.getAttribute('href') === '#' + id;
+      a.setAttribute('aria-current', String(on));
+      if (on) { // chỉ cuộn ngang thanh mục, không đụng tới cuộn dọc của trang
+        const l = a.getBoundingClientRect().left - navEl.getBoundingClientRect().left + navEl.scrollLeft;
+        const want = l - (navEl.clientWidth - a.offsetWidth) / 2;
+        if (l < navEl.scrollLeft || l + a.offsetWidth > navEl.scrollLeft + navEl.clientWidth) navEl.scrollTo({ left: Math.max(0, want) });
+      }
+    });
+  };
   links.forEach(a => a.addEventListener('click', (e) => {
     e.preventDefault();
     const id = a.getAttribute('href').slice(1);
-    document.getElementById(id).scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    goTo(document.getElementById(id), { behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     mark(id);
   }));
   const secs = links.map(a => document.getElementById(a.getAttribute('href').slice(1)));
-  const onScroll = () => {
+  let tick = 0;
+  const onScroll = () => { if (!tick) tick = requestAnimationFrame(check); };
+  const check = () => {
+    tick = 0;
     const y = bar.getBoundingClientRect().bottom + 24;
     let cur = secs[0];
     for (const s of secs) if (s.getBoundingClientRect().top <= y) cur = s;
     if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = secs.at(-1);
     mark(cur.id);
   };
-  addEventListener('scroll', onScroll, { passive: true }); onScroll();
-  if (location.hash && document.getElementById(location.hash.slice(1))) setTimeout(() => document.getElementById(location.hash.slice(1)).scrollIntoView(), 50);
+  if (!EMB) { addEventListener('scroll', onScroll, { passive: true }); check(); } else mark(secs[0].id);
+  if (location.hash && document.getElementById(location.hash.slice(1))) setTimeout(() => goTo(document.getElementById(location.hash.slice(1))), 50);
 }
 
 function initRange() {
