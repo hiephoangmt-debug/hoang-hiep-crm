@@ -233,7 +233,7 @@ def wave_audio():
             'function tick(){if(!C)return;while(nx<C.currentTime+R.BAR){R.schedule(nx);nx+=R.BAR}T=setTimeout(tick,2000)}'
             'function build(){var A=window.AudioContext||window.webkitAudioContext;if(!A)return false;C=new A();M=C.createGain();M.gain.value=0;M.connect(C.destination);R=SSResort(C,M);nx=C.currentTime+0.1;tick();return true}'
             'function fade(v,t){if(!C)return;var n=C.currentTime;M.gain.cancelScheduledValues(n);M.gain.setValueAtTime(M.gain.value,n);M.gain.linearRampToValueAtTime(v,n+t)}'
-            'function start(){if(!C&&!build())return;if(C.state==="suspended")C.resume();fade(1.3,4);on=true;ui()}'
+            'function start(){if(!C&&!build())return;if(C.state==="suspended")C.resume();fade(0.38,4);on=true;ui()}'
             'function stop(){fade(0,1);on=false;ui()}'
             'btn.addEventListener("click",function(e){e.stopPropagation();st=true;if(on){stop();try{localStorage.setItem(KEY,"1")}catch(x){}}else{start();try{localStorage.removeItem(KEY)}catch(x){}}});'
             'function first(e){if(st)return;st=true;document.removeEventListener("pointerdown",first,true);document.removeEventListener("keydown",first,true);if(!off)start()}'

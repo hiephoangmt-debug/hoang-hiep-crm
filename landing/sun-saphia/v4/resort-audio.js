@@ -1,42 +1,35 @@
-/* Nhạc nền resort tự sinh bằng WebAudio (không dùng file, không bản quyền):
-   hợp âm pad êm + nốt chuông/piano thưa + tiếng sóng rất khẽ. Dùng chung cho trang web và bản xuất thử. */
+/* Nhạc piano nhẹ nhàng kiểu lounge resort biển, tự sinh bằng WebAudio (không dùng file, không bản quyền):
+   tay trái rải hợp âm, tay phải giai điệu thong thả, tiếng sóng khẽ phía dưới. */
 function SSResort(C, out) {
-  var bus = C.createGain(); bus.gain.value = 1;
-  var tone = C.createBiquadFilter(); tone.type = 'lowpass'; tone.frequency.value = 3200;
-  var dry = C.createGain(); dry.gain.value = 0.55;
-  var wet = C.createGain(); wet.gain.value = 0.75;
+  var bus = C.createGain(); bus.gain.value = 0.9;
+  var tone = C.createBiquadFilter(); tone.type = 'lowpass'; tone.frequency.value = 4200;
+  var dry = C.createGain(); dry.gain.value = 0.7;
+  var wet = C.createGain(); wet.gain.value = 0.45;
   var rev = C.createConvolver();
-  var len = Math.floor(C.sampleRate * 3.2), ir = C.createBuffer(2, len, C.sampleRate);
-  for (var ch = 0; ch < 2; ch++) { var d = ir.getChannelData(ch); for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
+  var len = Math.floor(C.sampleRate * 2.6), ir = C.createBuffer(2, len, C.sampleRate);
+  for (var ch = 0; ch < 2; ch++) { var d = ir.getChannelData(ch); for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3); }
   rev.buffer = ir;
   bus.connect(tone); tone.connect(dry); dry.connect(out); tone.connect(rev); rev.connect(wet); wet.connect(out);
 
   function hz(m) { return 440 * Math.pow(2, (m - 69) / 12); }
-  /* Fmaj9 – Dm9 – Bbmaj9 – C6/9 */
-  var CH = [[41, 57, 60, 64, 67], [38, 53, 57, 60, 64], [46, 50, 57, 60, 62], [36, 52, 55, 57, 62]];
-  var PENTA = [[65, 67, 69, 72, 74, 76], [62, 65, 67, 69, 72, 74], [62, 65, 69, 70, 72, 74], [64, 67, 69, 72, 74, 76]];
-  var pos = 2;
-
-  function pad(m, t, dur, lvl) {
-    [-5, 5].forEach(function (cents, k) {
-      var o = C.createOscillator(); o.type = k ? 'triangle' : 'sine'; o.frequency.value = hz(m); o.detune.value = cents;
-      var g = C.createGain(); g.gain.setValueAtTime(0.0001, t);
-      g.gain.linearRampToValueAtTime(lvl, t + 2.6); g.gain.setValueAtTime(lvl, t + dur - 0.5);
-      g.gain.linearRampToValueAtTime(0.0001, t + dur + 3);
-      o.connect(g); g.connect(bus); o.start(t); o.stop(t + dur + 3.2);
-    });
-  }
-  /* piano điện ấm (kiểu Rhodes): bấm mềm, ngân dài, lọc bớt âm cao – thay tiếng chuông */
-  var keyLP = C.createBiquadFilter(); keyLP.type = 'lowpass'; keyLP.frequency.value = 1500; keyLP.Q.value = 0.3; keyLP.connect(bus);
-  function key(m, t, lvl) {
-    [[1, 1, 'sine'], [2, 0.12, 'sine'], [1, 0.18, 'triangle']].forEach(function (h) {
-      var o = C.createOscillator(); o.type = h[2]; o.frequency.value = hz(m) * h[0];
-      var g = C.createGain(); g.gain.setValueAtTime(0.0001, t);
-      g.gain.linearRampToValueAtTime(lvl * h[1], t + 0.06);
-      g.gain.exponentialRampToValueAtTime(lvl * h[1] * 0.35, t + 0.9);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + 4.2);
-      o.connect(g); g.connect(keyLP); o.start(t); o.stop(t + 4.4);
-    });
+  var AMP = [1, 0.42, 0.22, 0.12, 0.06, 0.035, 0.02];
+  /* tiếng piano: các họa âm hơi lệch (như dây đàn thật), họa âm cao tắt nhanh, 2 dây lệch nhẹ cho ấm */
+  function piano(m, t, vel) {
+    var f0 = hz(m), dec = 2.2 + (72 - m) * 0.06; if (dec < 1.4) dec = 1.4;
+    var lp = C.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1200 + vel * 5000; lp.connect(bus);
+    for (var n = 1; n <= AMP.length; n++) {
+      var a = AMP[n - 1] * vel; if (f0 * n > 9000) break;
+      [0, 1.6].forEach(function (cents, k) {
+        var o = C.createOscillator(); o.type = 'sine';
+        o.frequency.value = f0 * n * Math.sqrt(1 + 0.00035 * n * n); o.detune.value = cents;
+        var g = C.createGain(), dn = dec / Math.pow(n, 0.7);
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.linearRampToValueAtTime(a * (k ? 0.45 : 0.55), t + 0.006);
+        g.gain.exponentialRampToValueAtTime(a * 0.25, t + 0.25 * dn);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dn + 0.4);
+        o.connect(g); g.connect(lp); o.start(t); o.stop(t + dn + 0.5);
+      });
+    }
   }
   /* sóng rất khẽ phía dưới */
   function waveBed() {
@@ -48,21 +41,41 @@ function SSResort(C, out) {
     var g = C.createGain(); g.gain.value = 0.0001;
     s.connect(hp); hp.connect(lp); lp.connect(g); g.connect(out); s.start();
     return function (t) { var up = 2.6 + Math.random(), dn = 4.5 + Math.random() * 1.5;
-      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.06, t + up); g.gain.exponentialRampToValueAtTime(0.0001, t + up + dn); };
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.05, t + up); g.gain.exponentialRampToValueAtTime(0.0001, t + up + dn); };
   }
   var wv = waveBed();
-  var BAR = 8, idx = 0;
+
+  /* Vòng hợp âm: Cmaj7 – Am7 – Fmaj7 – G6 | Em7 – Am7 – Dm7 – G7sus */
+  var PROG = [
+    { b: 36, lh: [43, 52, 55, 59], rh: [72, 74, 76, 79, 83] },
+    { b: 45, lh: [52, 55, 60, 64], rh: [69, 72, 74, 76, 79] },
+    { b: 41, lh: [48, 52, 57, 60], rh: [69, 72, 74, 76, 77] },
+    { b: 43, lh: [50, 55, 59, 64], rh: [71, 74, 76, 79, 81] },
+    { b: 40, lh: [47, 52, 55, 62], rh: [71, 74, 76, 79, 83] },
+    { b: 45, lh: [52, 55, 60, 64], rh: [69, 72, 74, 76, 79] },
+    { b: 38, lh: [45, 50, 53, 60], rh: [69, 72, 74, 77, 81] },
+    { b: 43, lh: [50, 53, 55, 60], rh: [72, 74, 77, 79, 81] }
+  ];
+  var BEAT = 0.95, BAR = BEAT * 4, idx = 0, pos = 2;
+  function hum(x) { return x + (Math.random() - 0.5) * 0.03; }
   function schedule(t) {
-    var c = CH[idx % 4], p = PENTA[idx % 4];
-    pad(c[0] - 12, t, BAR, 0.045);
-    for (var i = 1; i < c.length; i++) pad(c[i], t, BAR, 0.022);
-    var x = t + 1.2 + Math.random() * 0.8, n = 0;
-    while (x < t + BAR - 1.5 && n < 4) {
-      pos = Math.max(0, Math.min(p.length - 1, pos + [-1, -1, 0, 1, 1, 2, -2][Math.floor(Math.random() * 7)]));
-      key(p[pos], x, 0.06 + Math.random() * 0.02); n++;
-      x += 1.4 + Math.random() * 1.4;
-    }
-    wv(t + 1); wv(t + 1 + BAR / 2);
+    var c = PROG[idx % PROG.length], phraseEnd = (idx % 4) === 3;
+    /* tay trái: bass + rải hợp âm nhẹ */
+    piano(c.b, hum(t), 0.42);
+    piano(c.lh[0], hum(t + BEAT * 0.5), 0.22);
+    piano(c.lh[1], hum(t + BEAT * 1), 0.2);
+    piano(c.lh[2], hum(t + BEAT * 1.5), 0.2);
+    piano(c.lh[3], hum(t + BEAT * 2), 0.18);
+    piano(c.lh[1], hum(t + BEAT * 2.5), 0.17);
+    piano(c.lh[2], hum(t + BEAT * 3), 0.17);
+    /* tay phải: giai điệu đi từng bậc, cuối câu ngân dài */
+    var beats = phraseEnd ? [0, 2] : (Math.random() < 0.5 ? [0, 1.5, 2.5] : [0, 1, 2, 3]);
+    beats.forEach(function (bt, k) {
+      if (k > 0 && Math.random() < 0.15) return;
+      pos = Math.max(0, Math.min(c.rh.length - 1, pos + [-1, -1, 0, 1, 1, -2, 2][Math.floor(Math.random() * 7)]));
+      piano(c.rh[pos], hum(t + bt * BEAT + 0.02), 0.34 + Math.random() * 0.08);
+    });
+    if (idx % 2 === 0) wv(t + 0.5);
     idx++;
   }
   return { schedule: schedule, BAR: BAR };
