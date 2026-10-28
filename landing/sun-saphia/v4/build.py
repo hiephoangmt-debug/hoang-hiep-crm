@@ -138,7 +138,7 @@ def home():
         ('Sun Saphia Residence có bao nhiêu tầng, bao nhiêu căn?', '1 tòa tháp 30 tầng, cao 114 m, 2 tầng hầm, tổng 782 căn trên khu đất 3.720,1 m². Căn hộ bố trí từ tầng 3A đến tầng 28, trần cao 3,5 m.'),
         ('Có những loại căn nào?', 'Studio 30–31 m² (513 căn), 1BR+ 50–51 m² (108 căn), 2BR 60–70 m² (133 căn), bàn giao hoàn thiện cơ bản.'),
         ('Pháp lý Sun Saphia Residence thế nào?', 'GCN đăng ký đầu tư mã dự án 2572746483 do Sở Tài chính TP Đà Nẵng cấp, chứng nhận lần đầu 17/09/2026; thời hạn dự án 50 năm; công trình cấp I, niên hạn sử dụng 100 năm. Nghị quyết 278/NQ-CP (18/9/2026) xác định thời hạn sử dụng chung cư theo niên hạn công trình.'),
-        ('Giá bán Sun Saphia Residence bao nhiêu?', 'Giá dự kiến chỉ từ hơn 2 tỷ/căn, thanh toán khoảng 25% đến khi nhận nhà (11/2028); bảng giá chính thức từng căn công bố tại sự kiện ra mắt 01/11/2026. Để so sánh, căn hộ mặt biển Đà Nẵng khác đang chào bán: studio 5,2–10,5 tỷ, 1BR 7,7–11,5 tỷ, 2BR 17,4–21,7 tỷ (tham khảo tại Kick-off).'),
+        ('Giá bán Sun Saphia Residence bao nhiêu?', 'Giá dự kiến chỉ từ hơn 2 tỷ/căn, thanh toán khoảng 25% đến khi nhận nhà (11/2028); bảng giá chính thức từng căn chủ đầu tư công bố khi gần mở bán. Để so sánh, căn hộ mặt biển Đà Nẵng khác đang chào bán: studio 5,2–10,5 tỷ, 1BR 7,7–11,5 tỷ, 2BR 17,4–21,7 tỷ (tham khảo tại Kick-off).'),
         ('Khi nào mở bán, khi nào bàn giao?', 'Sự kiện ra mắt và chính thức nhận booking: 9:00 Chủ nhật 01/11/2026 tại khách sạn Hilton Đà Nẵng (50 Bạch Đằng); bàn giao dự kiến tháng 11/2028 (kế hoạch, có thể thay đổi theo công bố của chủ đầu tư).'),
         ('Vì sao nên quan tâm từ bây giờ?', 'Lãi suất đang có tín hiệu giảm, giai đoạn đầu thường có chính sách giá và hỗ trợ lãi suất tốt nhất, và người đăng ký sớm được chọn căn đẹp trước. Chính sách cụ thể theo công bố khi mở bán.'),
         ('Bây giờ có phải đặt cọc không?', 'Không. Hiện chỉ đăng ký nhận thông tin, bảng giá và mặt bằng; không thu bất kỳ khoản tiền nào.')])
@@ -284,23 +284,23 @@ def sub_hero(path, name, h1, lead, img_name, alt, label):
 
 def bang_gia():
     hero, cld = sub_hero('/bang-gia', 'Bảng giá', 'Giá Sun Saphia Residence – <b>bảng giá</b> căn hộ mặt biển Đà Nẵng',
-                         'Giá Sun Saphia Residence dự kiến chỉ từ hơn 2 tỷ/căn, thanh toán khoảng 25% đến khi nhận nhà; bảng giá chính thức từng căn công bố tại sự kiện ra mắt 01/11/2026. Trang này tổng hợp giá thị trường căn hộ mặt biển Đà Nẵng, những yếu tố làm giá từng căn khác nhau, cách vay ngân hàng – và sẽ cập nhật ngay khi có giá.',
+                         'Giá Sun Saphia Residence dự kiến chỉ từ hơn 2 tỷ/căn, thanh toán khoảng 25% đến khi nhận nhà; bảng giá chính thức từng căn chủ đầu tư công bố khi gần mở bán. Trang này tổng hợp giá thị trường căn hộ mặt biển Đà Nẵng, những yếu tố làm giá từng căn khác nhau, cách vay ngân hàng – và sẽ cập nhật ngay khi có giá.',
                          'thap-tren-cao-ngay', 'Toàn cảnh Sun Saphia Residence bên bờ biển Đà Nẵng nhìn từ trên cao', 'Web – bảng giá đầu trang')
     fq, fld = faq([
-        ('Khi nào có bảng giá Sun Saphia Residence?', 'Dự kiến công bố tại sự kiện ra mắt 01/11/2026. Anh/chị để lại số Zalo để nhận bảng giá gốc ngay khi chủ đầu tư công bố.'),
+        ('Khi nào có bảng giá Sun Saphia Residence?', 'Chủ đầu tư công bố khi gần mở bán. Anh/chị để lại số Zalo để nhận bảng giá gốc ngay khi chủ đầu tư công bố.'),
         ('Giá căn hộ mặt biển Đà Nẵng hiện bao nhiêu?', 'Theo giá chào bán trình bày tại Kick-off: studio khoảng 5,2–10,5 tỷ, 1BR 7,7–11,5 tỷ, 2BR 17,4–21,7 tỷ tùy dự án (The Soleil, Futa Residence, Nobu). The Newtown Diamond: 1BR+ 5,3–5,6 tỷ, 2BR 6,8–8,3 tỷ.'),
         ('Giá tham khảo 3 tỷ và 4,5 tỷ trong bài toán cho thuê là giá bán?', 'Không. Đó là giá giả định chủ đầu tư dùng để minh họa bài toán cho thuê (studio 30 m² và 1BR 50 m²), chưa phải giá bán chính thức.'),
         ('Ngân hàng nào cho vay mua Sun Saphia Residence?', 'Vietcombank, BIDV và NCB hỗ trợ cho vay. Tỷ lệ vay, thời gian ân hạn và hỗ trợ lãi suất theo chính sách bán hàng công bố khi mở bán.'),
         ('Mua qua đại lý có đắt hơn mua trực tiếp?', 'Không. TATILAND là đại lý phân phối chính thức do Sun Property chứng nhận, áp dụng bảng giá và chính sách gốc của chủ đầu tư.'),
         ('Bây giờ có phải đặt cọc để giữ giá?', 'Không. Hiện chỉ đăng ký nhận thông tin, không thu bất kỳ khoản tiền nào.')])
     b = hero
-    b += tldr('giá Sun Saphia Residence', [('Giá chính thức', 'Chưa công bố đến 23/10/2026; dự kiến công bố tại sự kiện ra mắt 01/11/2026'), ('Giá tham khảo trong bài toán', '3 tỷ (studio 30 m²), 4,5 tỷ (1BR 50 m²) – giá giả định, không phải giá bán'),
+    b += tldr('giá Sun Saphia Residence', [('Giá chính thức', 'Chưa công bố; hiện có giá tham khảo Studio tầng trung ~2,1–2,9 tỷ, giá chính thức công bố khi gần mở bán'), ('Giá tham khảo trong bài toán', '3 tỷ (studio 30 m²), 4,5 tỷ (1BR 50 m²) – giá giả định, không phải giá bán'),
         ('Giá thị trường ven biển', 'Studio 5,2–10,5 tỷ · 1BR 7,7–11,5 tỷ · 2BR 17,4–21,7 tỷ (The Soleil, Futa, Nobu)'), ('Vay', 'Vietcombank, BIDV, NCB; hỗ trợ lãi suất theo chính sách khi mở bán'),
         ('Nhận bảng giá gốc', 'Đại lý chính thức TATILAND · Zalo 0904 567 009 · không thu tiền giữ chỗ')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Tình trạng giá', 'Giá Sun Saphia Residence <b>hiện tại</b>', 'o') +
-          '<div class="g2 eq"><div class="txt"><p>Giá dự kiến <b>chỉ từ hơn 2 tỷ/căn</b>, thanh toán khoảng <b>25% đến khi nhận nhà</b>. Bảng giá chính thức từng căn chủ đầu tư công bố tại sự kiện ra mắt 01/11/2026.</p>'
+          '<div class="g2 eq"><div class="txt"><p>Giá dự kiến <b>chỉ từ hơn 2 tỷ/căn</b>, thanh toán khoảng <b>25% đến khi nhận nhà</b>. Bảng giá chính thức từng căn chủ đầu tư công bố khi gần mở bán.</p>'
           '<p>Tại Kick-off, chủ đầu tư dùng <b>giá tham khảo 3 tỷ cho studio 30 m²</b> và <b>4,5 tỷ cho 1BR 50 m²</b> để minh họa bài toán cho thuê – đây là giá giả định, không phải giá bán.</p>'
-          '<ul class="ck"><li>Bảng giá chính thức: dự kiến công bố tại sự kiện ra mắt 01/11/2026</li><li>Phương thức thanh toán, hỗ trợ lãi suất: công bố cùng chính sách bán hàng</li><li>Người đăng ký trước nhận bảng giá và mặt bằng căn còn trống sớm nhất</li></ul>'
+          '<ul class="ck"><li>Bảng giá chính thức: chủ đầu tư công bố khi gần mở bán</li><li>Phương thức thanh toán, hỗ trợ lãi suất: công bố cùng chính sách bán hàng</li><li>Người đăng ký trước nhận bảng giá và mặt bằng căn còn trống sớm nhất</li></ul>'
           + slogan_box('Bảng giá – giữa trang') + '</div>'
           '<div class="g2" style="gap:14px">' + why_cards() + '</div></div></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('2', 'So sánh', 'Giá căn hộ <b>mặt biển Đà Nẵng</b> đang chào bán', 'y') +
@@ -621,7 +621,7 @@ if(k==="san"){why.push("Mua cả sàn được chiết khấu, vận hành như 
 else if(k==="br2")why.push("Đủ phòng cho cả nhà, có phòng khách riêng để quây quần");else if(k==="br1")why.push("Vừa ở gia đình nhỏ, vừa dễ cho thuê – phòng đa năng làm phòng làm việc / phòng trẻ");else why.push("Vốn vào nhẹ nhất, dễ cho thuê nhất – khách du lịch chuộng Studio");
 if(A.muc==="ngan")why.push("Khách du lịch thích căn nhìn biển, giá đêm Studio dự kiến 2,2–2,9 tr");if(A.muc==="dai")why.push("Thuê theo tháng ổn định, ít công quản lý");if(A.muc==="o")why.push("Mở cửa là biển, ~400 m ra bãi tắm Sơn Thủy");if(A.muc==="tg")why.push("Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng – quỹ căn có hạn");if(A.von==="it")why.push("Chỉ ~25% đến nhận nhà – vay 70% được hỗ trợ lãi suất tới 24 tháng");
 if(has("vuon"))tip.push("Tầng 2–3: Studio ban công 53,71 m², 2BR ban công tới 84,29 m²");if(has("cao"))tip.push("Tầng 20–30: tầng 30 chỉ 16 căn, căn rộng nhất tòa");if(has("goc"))tip.push("Căn góc bo tròn 2 mặt thoáng (vị trí 03, 03A, 11, 18, 19, 20)");if(has("bien"))tip.push("Dãy căn mặt trước nhìn thẳng biển Mỹ Khê – Sơn Thủy");if(has("gia"))tip.push("Tầng thấp – trung, hướng phụ: giá mềm hơn mà vẫn gần biển");if(!tip.length)tip.push("Dãy căn mặt trước nhìn biển – nhóm được hỏi nhiều nhất");
-var m='<div class="tqm"><div><small>Giá dự kiến</small><b>'+(k==="san"?"~":"")+f(P)+(k==="st"?"+":"")+'</b><em>'+(k==="st"?"tầng trung ~2,1–2,9 tỷ, chưa VAT":"ước tính ~70 tr/m²")+'</em></div>'+
+var m='<div class="tqm"><div><small>Giá dự kiến</small><b>'+(k==="san"?"~":"")+f(P)+(k==="st"?"+":"")+'</b><em>'+(k==="st"?"tham khảo tầng trung 2,1–2,9 tỷ":"ước tính ~70 tr/m²")+'</em></div>'+
 '<div class="hl"><small>Đến nhận nhà chỉ trả</small><b>~'+f(c25)+'</b><em>25% giá căn</em></div>'+
 '<div><small>Vay ngân hàng 70%</small><b>~'+f(c70)+'</b><em>hỗ trợ lãi suất lên tới 24 tháng</em></div>'+
 '<div><small>Cho thuê dự kiến</small><b>'+tr(d.l)+'<i>/tháng</i></b><em>'+(k==="san"?"thuê dài hạn cả sàn · ~"+tr(yl)+"/năm":"dài hạn · ~"+tr(yl)+"/năm"+(d.s?" · ngắn hạn ~"+tr(d.s)+"/tháng":""))+'</em></div></div>';
@@ -652,7 +652,7 @@ qs.forEach(function(q){q.classList.add("off")});fun.classList.remove("on");bar.s
 def tai_chinh(ctx='ADS'):
     return ('<section class="sec nv tcx" id="tai-chinh"><div class="wrap">'
             '<div class="sh"><span class="ey">Giá &amp; thanh toán dự kiến</span><h2 class="dp">Chỉ từ <b>hơn 2 tỷ</b> – thanh toán <b>25%</b> đến khi nhận nhà</h2></div>'
-            '<div class="tcg"><div class="tcc"><span>Giá dự kiến</span><b>Từ hơn 2 tỷ</b><em class="dk">dự kiến</em><p>Studio tầng trung khoảng <strong>2,1–2,9 tỷ</strong> tùy vị trí · chưa VAT</p></div>'
+            '<div class="tcg"><div class="tcc"><span>Giá dự kiến</span><b>Từ hơn 2 tỷ</b><em class="dk">dự kiến</em><p>Studio tầng trung tham khảo <strong>2,1–2,9 tỷ</strong> · chưa VAT · giá chính thức công bố khi mở bán</p></div>'
             '<div class="tcc hot"><span>Đến khi nhận nhà (11/2028)</span><b>~<i id="tcbig">525 triệu</i></b><em class="dk">dự kiến</em><p><strong>Chỉ 25% giá căn</strong> · thanh toán dần theo tiến độ ~2 năm</p></div>'
             '<div class="tcc"><span>Vay ngân hàng 70%</span><b>Hỗ trợ lãi suất</b><p><strong>Lên tới 24 tháng</strong> · miễn phí trả nợ trước hạn · <strong>5%</strong> khi nhận sổ</p></div></div>'
             '<ol class="tcs"><li><b>Từ nay → 11/2028</b><span>Chỉ thanh toán dần <strong>25%</strong> theo tiến độ</span></li><li><b>Khoản vay 70%</b><span>Chủ đầu tư <strong>hỗ trợ lãi suất lên tới 24 tháng</strong></span></li><li><b>Trước khi nhận nhà</b><span>Muốn tất toán sớm: <strong>miễn phí trả nợ trước hạn</strong></span></li><li><b>Nhận nhà 11/2028</b><span>Bắt đầu trả góp ngân hàng, hoặc cho thuê lấy tiền thuê trả góp</span></li><li><b>Khi nhận sổ</b><span>Thanh toán <strong>5%</strong> còn lại</span></li></ol>'
