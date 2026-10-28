@@ -224,19 +224,17 @@ def tldr(title, items):
         title, ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % x for x in items), UPDATED)
 
 def wave_audio():
-    """Tiếng sóng biển tạo bằng WebAudio (không cần file): bắt đầu nhỏ khi khách chạm lần đầu, nút bật/tắt góc trái dưới."""
-    return ('<button type="button" class="wvb" id="wvb" aria-label="Bật/tắt tiếng sóng biển" title="Tiếng sóng biển">🔇</button>'
-            '<script>(function(){var C,G,on=false,st=false,KEY="ss_wave_off";var off=false;try{off=localStorage.getItem(KEY)==="1"}catch(e){}'
-            'var btn=document.getElementById("wvb");function ui(){btn.textContent=on?"🔊":"🔇";btn.classList.toggle("on",on)}'
-            'function noise(ctx){var n=ctx.sampleRate*3,b=ctx.createBuffer(1,n,ctx.sampleRate),d=b.getChannelData(0),b0=0,b1=0,b2=0;for(var i=0;i<n;i++){var w=Math.random()*2-1;b0=0.99765*b0+w*0.099;b1=0.963*b1+w*0.2965;b2=0.57*b2+w*1.0526;d[i]=(b0+b1+b2+w*0.1848)*0.22}var s=ctx.createBufferSource();s.buffer=b;s.loop=true;return s}'
-            'function voice(ctx,out){var s=noise(ctx),hp=ctx.createBiquadFilter();hp.type="highpass";hp.frequency.value=380;var lp=ctx.createBiquadFilter();lp.type="lowpass";lp.frequency.value=900;lp.Q.value=0.4;var g=ctx.createGain();g.gain.value=0.0001;s.connect(hp);hp.connect(lp);lp.connect(g);g.connect(out);s.start(0,Math.random()*2);return{g:g,lp:lp}}'
-            'function wave(v,t){var up=2.2+Math.random()*1.2,dn=3.8+Math.random()*2,pk=0.55+Math.random()*0.45;v.g.gain.cancelScheduledValues(t);v.g.gain.setValueAtTime(0.0001,t);v.g.gain.exponentialRampToValueAtTime(pk,t+up);v.g.gain.exponentialRampToValueAtTime(0.0001,t+up+dn);'
-            'v.lp.frequency.cancelScheduledValues(t);v.lp.frequency.setValueAtTime(700,t);v.lp.frequency.linearRampToValueAtTime(2600+Math.random()*900,t+up);v.lp.frequency.linearRampToValueAtTime(800,t+up+dn);return up+dn}'
-            'var V=[],T=null;function loop(){if(!C)return;var t=C.currentTime+0.05;V.forEach(function(v,i){wave(v,t+i*(2.5+Math.random()*1.5))});T=setTimeout(loop,(6.5+Math.random()*3)*1000)}'
-            'function build(){var A=window.AudioContext||window.webkitAudioContext;if(!A)return false;C=new A();G=C.createGain();G.gain.value=0;G.connect(C.destination);V=[voice(C,G),voice(C,G)];loop();return true}'
-            'function fade(v,t){if(!C)return;var n=C.currentTime;G.gain.cancelScheduledValues(n);G.gain.setValueAtTime(G.gain.value,n);G.gain.linearRampToValueAtTime(v,n+t)}'
-            'function start(){if(!C&&!build())return;if(C.state==="suspended")C.resume();fade(0.22,3);on=true;ui()}'
-            'function stop(){fade(0,0.8);on=false;ui()}'
+    """Nhạc nền kiểu resort tự sinh (resort-audio.js): bắt đầu nhỏ khi khách chạm lần đầu, nút bật/tắt góc trái dưới."""
+    eng = open(D + 'v4/resort-audio.js', encoding='utf8').read()
+    return ('<button type="button" class="wvb" id="wvb" aria-label="Bật/tắt nhạc nền" title="Nhạc nền thư giãn">🔇</button>'
+            '<script>' + eng + '</script>'
+            '<script>(function(){var C,M,R,on=false,st=false,T=null,nx=0,KEY="ss_wave_off",off=false;try{off=localStorage.getItem(KEY)==="1"}catch(e){}'
+            'var btn=document.getElementById("wvb");function ui(){btn.textContent=on?"🎵":"🔇";btn.classList.toggle("on",on)}'
+            'function tick(){if(!C)return;while(nx<C.currentTime+R.BAR){R.schedule(nx);nx+=R.BAR}T=setTimeout(tick,2000)}'
+            'function build(){var A=window.AudioContext||window.webkitAudioContext;if(!A)return false;C=new A();M=C.createGain();M.gain.value=0;M.connect(C.destination);R=SSResort(C,M);nx=C.currentTime+0.1;tick();return true}'
+            'function fade(v,t){if(!C)return;var n=C.currentTime;M.gain.cancelScheduledValues(n);M.gain.setValueAtTime(M.gain.value,n);M.gain.linearRampToValueAtTime(v,n+t)}'
+            'function start(){if(!C&&!build())return;if(C.state==="suspended")C.resume();fade(1.3,4);on=true;ui()}'
+            'function stop(){fade(0,1);on=false;ui()}'
             'btn.addEventListener("click",function(e){e.stopPropagation();st=true;if(on){stop();try{localStorage.setItem(KEY,"1")}catch(x){}}else{start();try{localStorage.removeItem(KEY)}catch(x){}}});'
             'function first(e){if(st)return;st=true;document.removeEventListener("pointerdown",first,true);document.removeEventListener("keydown",first,true);if(!off)start()}'
             'document.addEventListener("pointerdown",first,true);document.addEventListener("keydown",first,true);'
