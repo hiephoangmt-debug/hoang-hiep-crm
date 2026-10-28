@@ -294,7 +294,7 @@ def bang_gia():
         ('Mua qua đại lý có đắt hơn mua trực tiếp?', 'Không. TATILAND là đại lý phân phối chính thức do Sun Property chứng nhận, áp dụng bảng giá và chính sách gốc của chủ đầu tư.'),
         ('Bây giờ có phải đặt cọc để giữ giá?', 'Không. Hiện chỉ đăng ký nhận thông tin, không thu bất kỳ khoản tiền nào.')])
     b = hero
-    b += tldr('giá Sun Saphia Residence', [('Giá chính thức', 'Chưa công bố; hiện có giá tham khảo Studio tầng trung ~2,1–2,9 tỷ, giá chính thức công bố khi gần mở bán'), ('Giá tham khảo trong bài toán', '3 tỷ (studio 30 m²), 4,5 tỷ (1BR 50 m²) – giá giả định, không phải giá bán'),
+    b += tldr('giá Sun Saphia Residence', [('Giá chính thức', 'Chưa công bố; hiện có giá tham khảo từ chủ đầu tư: Studio tầng trung ~2,1–2,9 tỷ, giá chính thức công bố khi gần mở bán'), ('Giá tham khảo trong bài toán', '3 tỷ (studio 30 m²), 4,5 tỷ (1BR 50 m²) – giá giả định, không phải giá bán'),
         ('Giá thị trường ven biển', 'Studio 5,2–10,5 tỷ · 1BR 7,7–11,5 tỷ · 2BR 17,4–21,7 tỷ (The Soleil, Futa, Nobu)'), ('Vay', 'Vietcombank, BIDV, NCB; hỗ trợ lãi suất theo chính sách khi mở bán'),
         ('Nhận bảng giá gốc', 'Đại lý chính thức TATILAND · Zalo 0904 567 009 · không thu tiền giữ chỗ')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Tình trạng giá', 'Giá Sun Saphia Residence <b>hiện tại</b>', 'o') +
@@ -621,7 +621,7 @@ if(k==="san"){why.push("Mua cả sàn được chiết khấu, vận hành như 
 else if(k==="br2")why.push("Đủ phòng cho cả nhà, có phòng khách riêng để quây quần");else if(k==="br1")why.push("Vừa ở gia đình nhỏ, vừa dễ cho thuê – phòng đa năng làm phòng làm việc / phòng trẻ");else why.push("Vốn vào nhẹ nhất, dễ cho thuê nhất – khách du lịch chuộng Studio");
 if(A.muc==="ngan")why.push("Khách du lịch thích căn nhìn biển, giá đêm Studio dự kiến 2,2–2,9 tr");if(A.muc==="dai")why.push("Thuê theo tháng ổn định, ít công quản lý");if(A.muc==="o")why.push("Mở cửa là biển, ~400 m ra bãi tắm Sơn Thủy");if(A.muc==="tg")why.push("Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng – quỹ căn có hạn");if(A.von==="it")why.push("Chỉ ~25% đến nhận nhà – vay 70% được hỗ trợ lãi suất tới 24 tháng");
 if(has("vuon"))tip.push("Tầng 2–3: Studio ban công 53,71 m², 2BR ban công tới 84,29 m²");if(has("cao"))tip.push("Tầng 20–30: tầng 30 chỉ 16 căn, căn rộng nhất tòa");if(has("goc"))tip.push("Căn góc bo tròn 2 mặt thoáng (vị trí 03, 03A, 11, 18, 19, 20)");if(has("bien"))tip.push("Dãy căn mặt trước nhìn thẳng biển Mỹ Khê – Sơn Thủy");if(has("gia"))tip.push("Tầng thấp – trung, hướng phụ: giá mềm hơn mà vẫn gần biển");if(!tip.length)tip.push("Dãy căn mặt trước nhìn biển – nhóm được hỏi nhiều nhất");
-var m='<div class="tqm"><div><small>Giá dự kiến</small><b>'+(k==="san"?"~":"")+f(P)+(k==="st"?"+":"")+'</b><em>'+(k==="st"?"tham khảo tầng trung 2,1–2,9 tỷ":"ước tính ~70 tr/m²")+'</em></div>'+
+var m='<div class="tqm"><div><small>Giá dự kiến</small><b>'+(k==="san"?"~":"")+f(P)+(k==="st"?"+":"")+'</b><em>'+(k==="st"?"tham khảo CĐT: tầng trung 2,1–2,9 tỷ":"ước tính ~70 tr/m²")+'</em></div>'+
 '<div class="hl"><small>Đến nhận nhà chỉ trả</small><b>~'+f(c25)+'</b><em>25% giá căn</em></div>'+
 '<div><small>Vay ngân hàng 70%</small><b>~'+f(c70)+'</b><em>hỗ trợ lãi suất lên tới 24 tháng</em></div>'+
 '<div><small>Cho thuê dự kiến</small><b>'+tr(d.l)+'<i>/tháng</i></b><em>'+(k==="san"?"thuê dài hạn cả sàn · ~"+tr(yl)+"/năm":"dài hạn · ~"+tr(yl)+"/năm"+(d.s?" · ngắn hạn ~"+tr(d.s)+"/tháng":""))+'</em></div></div>';
@@ -652,7 +652,7 @@ qs.forEach(function(q){q.classList.add("off")});fun.classList.remove("on");bar.s
 def tai_chinh(ctx='ADS'):
     return ('<section class="sec nv tcx" id="tai-chinh"><div class="wrap">'
             '<div class="sh"><span class="ey">Giá &amp; thanh toán dự kiến</span><h2 class="dp">Chỉ từ <b>hơn 2 tỷ</b> – thanh toán <b>25%</b> đến khi nhận nhà</h2></div>'
-            '<div class="tcg"><div class="tcc"><span>Giá dự kiến</span><b>Từ hơn 2 tỷ</b><em class="dk">dự kiến</em><p>Studio tầng trung tham khảo <strong>2,1–2,9 tỷ</strong> · chưa VAT · giá chính thức công bố khi mở bán</p></div>'
+            '<div class="tcg"><div class="tcc"><span>Giá dự kiến</span><b>Từ hơn 2 tỷ</b><em class="dk">dự kiến</em><p>Giá tham khảo từ chủ đầu tư: Studio tầng trung <strong>2,1–2,9 tỷ</strong> · chưa VAT · giá chính thức công bố khi mở bán</p></div>'
             '<div class="tcc hot"><span>Đến khi nhận nhà (11/2028)</span><b>~<i id="tcbig">525 triệu</i></b><em class="dk">dự kiến</em><p><strong>Chỉ 25% giá căn</strong> · thanh toán dần theo tiến độ ~2 năm</p></div>'
             '<div class="tcc"><span>Vay ngân hàng 70%</span><b>Hỗ trợ lãi suất</b><p><strong>Lên tới 24 tháng</strong> · miễn phí trả nợ trước hạn · <strong>5%</strong> khi nhận sổ</p></div></div>'
             '<ol class="tcs"><li><b>Từ nay → 11/2028</b><span>Chỉ thanh toán dần <strong>25%</strong> theo tiến độ</span></li><li><b>Khoản vay 70%</b><span>Chủ đầu tư <strong>hỗ trợ lãi suất lên tới 24 tháng</strong></span></li><li><b>Trước khi nhận nhà</b><span>Muốn tất toán sớm: <strong>miễn phí trả nợ trước hạn</strong></span></li><li><b>Nhận nhà 11/2028</b><span>Bắt đầu trả góp ngân hàng, hoặc cho thuê lấy tiền thuê trả góp</span></li><li><b>Khi nhận sổ</b><span>Thanh toán <strong>5%</strong> còn lại</span></li></ol>'
