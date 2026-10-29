@@ -17,8 +17,10 @@ function hh_posts_phan_luong_cau_hoa_xuan( $posts ) {
 		'project'   => '',
 		'category'  => 'Hạ tầng & quy hoạch',
 		'date'      => '2026-10-29 10:00:00',
-		'image'     => 'plugin:img/tin-tuc/phan-luong-cau-hoa-xuan-31-10-2026.jpg',
-		'image_alt' => 'Phân luồng giao thông cầu Hòa Xuân từ 31/10/2026 – tóm tắt các điểm chính',
+		'image'         => 'plugin:img/tin-tuc/so-do-phan-luong-cau-hoa-xuan-31-10-2026.jpg',
+		'image_alt'     => 'Sơ đồ phân luồng giao thông cầu Hòa Xuân từ 31/10/2026 – phạm vi phân luồng từ xa và phân luồng gần',
+		'image_caption' => 'Sơ đồ phương án điều tiết, phân luồng giao thông từ xa thi công cụm nút giao Lê Thanh Nghị – Cách Mạng Tháng Tám – Thăng Long – đường dẫn lên cầu Hòa Xuân (đường đứt đỏ: phân luồng từ xa; đứt xanh: phân luồng gần). Nguồn: phương án phân luồng của dự án, báo chí đăng 28/10/2026.',
+		'image_replace' => 'phan-luong-cau-hoa-xuan-31-10-2026',
 		'content'   => <<<'HTML'
 <p>Từ <strong>9h ngày 31/10/2026</strong>, TP Đà Nẵng tổ chức phân luồng giao thông để thi công <a href="/cum-nut-giao-cau-hoa-xuan-bat-dong-san-nam-da-nang/">cụm nút giao Lê Thanh Nghị – Cách Mạng Tháng Tám – Thăng Long – đường dẫn lên cầu Hòa Xuân</a> (khởi công 25/8/2026). Việc phân luồng gồm hai lớp: phân luồng từ xa để xe lớn tránh hẳn khu vực, và tổ chức giao thông ngay trong phạm vi công trường.</p>
 
@@ -43,6 +45,8 @@ function hh_posts_phan_luong_cau_hoa_xuan( $posts ) {
 <li>Phía Đông: đường Thăng Long, Nguyễn Phước Lan</li>
 <li>Phía Tây: đường Nguyễn Hữu Thọ, Võ Chí Công</li>
 </ul>
+<!--hh-featured-->
+<p>Bấm vào sơ đồ để xem ảnh lớn. Các vị trí biển báo trên sơ đồ có thể được điều chỉnh khi thi công theo thực tế hiện trường.</p>
 
 <h2>Xe đi cảng Tiên Sa, xe container đi đường nào?</h2>
 <ul>

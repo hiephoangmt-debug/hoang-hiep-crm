@@ -412,6 +412,10 @@ function hh_news_featured_in_content( $html, $id, $n ) {
 	}
 	$img = wp_get_attachment_image( $thumb, 'large', false, array( 'alt' => $n['image_alt'] ?? $n['title'], 'loading' => 'lazy' ) );
 	$cap = ! empty( $n['image_caption'] ) ? '<figcaption>' . esc_html( $n['image_caption'] ) . '</figcaption>' : '';
+	$full = wp_get_attachment_url( $thumb );
+	if ( $full ) {
+		$img = '<a href="' . esc_url( $full ) . '" target="_blank" rel="noopener">' . $img . '</a>'; // bấm để xem ảnh gốc khổ lớn
+	}
 	return str_replace( '<!--hh-featured-->', '<figure class="wp-block-image">' . $img . $cap . '</figure>', $html );
 }
 
@@ -526,8 +530,18 @@ function hh_import_news() {
 		if ( ! empty( $n['tags'] ) ) {
 			wp_set_post_tags( $id, $n['tags'], true ); // Thêm thẻ, giữ thẻ đã có.
 		}
-		// Ảnh đại diện đi kèm plugin ("plugin:img/…"): chỉ gắn khi bài chưa có ảnh đại diện.
-		if ( ! empty( $n['image'] ) && ! has_post_thumbnail( $id ) && function_exists( 'hh_img_link_local_path' ) ) {
+		// Ảnh đại diện đi kèm plugin ("plugin:img/…"): chỉ gắn khi bài chưa có ảnh đại diện,
+		// hoặc khi bài khai báo 'image_replace' và ảnh đang dùng là ảnh web gắn trước đó (khác ảnh mới).
+		$hh_thumb   = get_post_thumbnail_id( $id );
+		$hh_replace = false;
+		if ( ! empty( $n['image_replace'] ) && $hh_thumb ) {
+			// 'image_replace' = tên file ảnh cũ (không đuôi) mà web đã gắn; chỉ thay đúng ảnh đó, không đụng ảnh bạn tự chọn.
+			$hh_src     = (string) get_post_meta( $hh_thumb, '_hh_img_src', true );
+			$hh_file    = pathinfo( (string) get_attached_file( $hh_thumb ), PATHINFO_FILENAME );
+			$hh_old     = (string) $n['image_replace'];
+			$hh_replace = $hh_src !== ( $n['image'] ?? '' ) && ( false !== strpos( $hh_src, $hh_old ) || 0 === strpos( $hh_file, $hh_old ) );
+		}
+		if ( ! empty( $n['image'] ) && ( ! $hh_thumb || $hh_replace ) && function_exists( 'hh_img_link_local_path' ) ) {
 			$file = hh_img_link_local_path( hh_img_link_key( $n['image'] ) );
 			if ( $file ) {
 				require_once ABSPATH . 'wp-admin/includes/file.php';
@@ -541,6 +555,14 @@ function hh_import_news() {
 					} else {
 						update_post_meta( $att, '_wp_attachment_image_alt', $n['image_alt'] ?? $n['title'] );
 						set_post_thumbnail( $id, $att );
+						update_post_meta( $att, '_hh_img_src', $n['image'] );
+						if ( $hh_replace ) {
+							$stored = get_post_field( 'post_content', $id );
+							if ( md5( $stored ) === get_post_meta( $id, '_hh_news_hash', true ) ) { // bài chưa sửa tay
+								wp_update_post( array( 'ID' => $id, 'post_content' => hh_news_featured_in_content( hh_news_build_content( $n, $n['seo'] ?? array() ), $id, $n ) ) );
+								update_post_meta( $id, '_hh_news_hash', md5( get_post_field( 'post_content', $id ) ) );
+							}
+						}
 					}
 				}
 			}
