@@ -667,7 +667,6 @@ label('Công viên biển Trường Sa (quy hoạch) · cuối Minh Mạng','',w
 label('Resort ven biển','',world,[70,12,282]);
 label('Bãi biển · bãi tắm Sơn Thủy','',world,[COASTX(560)-30,4,560]);
 label('Crowne Plaza Danang','',world,[70,58,-470]);
-label('Hyatt Regency Danang','',world,[72,30,470]);
 // các dự án, điểm mốc, resort quanh dự án (toạ độ đổi từ GPS)
 (function(){ var pm=M(0xff6a2b,{emissive:0xff6a2b,emissiveIntensity:.6}); [[-2053,527],[-2135,-1355],[-1585,-2896],[-1533,-85]].forEach(function(q){   // cọc đánh dấu vị trí
   var c=new THREE.Mesh(new THREE.CylinderGeometry(2.5,2.5,50,10),pm); c.position.set(q[0],25,q[1]); world.add(c); var b=new THREE.Mesh(new THREE.SphereGeometry(9,16,12),pm); b.position.set(q[0],56,q[1]); world.add(b); }); })();
@@ -675,12 +674,14 @@ label('Fours Tower','far',world,[-2053,60,527]);
 label('S Light Tower','far',world,[-2135,60,-1355]);
 label('Điểm bắn pháo hoa DIFF','far',world,[-1585,40,-2896]);
 label('Sun Neva Island','far',world,[-1533,40,-85]);
-label('Pullman Danang Beach Resort','far',world,[166,26,-2265]);
+label('Olalani Resort','far',world,[136,26,-903]);
+label('TIA Wellness Resort','far',world,[104,26,-1086]);
+label('Furama Villas','far',world,[162,26,-1834]);
+label('Pullman Resort','far',world,[169,26,-2255]);
+label('Premier Village','far',world,[101,26,-2498]);
+label('Hyatt Regency Resort','far',world,[84,26,1024]);
 label('Furama Resort Đà Nẵng','far',world,[187,26,-2113]);
-label('Furama Villas','far',world,[149,26,-1786]);
-label('TIA Wellness Resort','far',world,[166,26,-1084]);
-label('Olalani Resort & Condotel','far',world,[159,26,-915]);
-label('Danang Marriott Resort & Spa','far',world,[151,26,1754]);
+label('Marriott Resort','far',world,[61,26,1827]);
 label('Meliá Danang Beach Resort','far',world,[155,26,2604]);
 label('Pulchra Resort Đà Nẵng','far',world,[88,26,4010]);
 label('Biển Đông','far',world,[900,4,-150]);
@@ -852,7 +853,7 @@ var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false);
   if(r) viewFromUnit(r); else bView0(); };
 
 /* ---------- bấm vào căn trên mặt bằng tầng: hiện thẻ căn, mở mặt bằng & 3D căn, view từ đúng căn ---------- */
-var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/2dd1630716870d2c5efbcd355e5f2687fca913f5/projects/sun-saphia/chon-can/chon-can-app.html';
+var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/841ed968c9e2f732961ad8bfa5aac3e0be425e33/projects/sun-saphia/chon-can/chon-can-app.html';
 var unitEye=null;
 // [mã, loại, u0,u1, v0,v1, hướng mặt kính chính] – cùng số liệu với công cụ chọn căn
 var UNITS=[['11','2PN',0,11.1,0,8.1,'E'],['12','STU',11.19,14.99,0,9.1,'E'],['12A','STU',14.99,18.8,0,9.1,'E'],['12B','1PN',18.8,25.02,0,9.1,'E'],['15','STU',25.02,28.82,0,9.1,'E'],['16','STU',28.82,32.64,0,9.1,'E'],['17','1PN',32.64,38.91,0,9.1,'E'],
