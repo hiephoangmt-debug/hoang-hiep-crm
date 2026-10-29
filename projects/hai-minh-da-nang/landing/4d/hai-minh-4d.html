@@ -974,7 +974,7 @@ function updatePlanes(dt){ pT+=dt;
 /* ---------- Labels ---------- */
 var labelsEl=document.getElementById('labels'), LBL=[];
 function label(text,cls,obj,pos){var e=document.createElement('div');e.className='lb '+(cls||'');e.textContent=text;labelsEl.appendChild(e);LBL.push({e:e,obj:obj,p:new THREE.Vector3(pos[0],pos[1],pos[2]),cls:cls});return e;}
-var mainLbl=label('SUN SAPHIA · 30 tầng','main',T,[0,TOP+18,0]);
+var mainLbl=label('SUN SAPHIA','main',T,[0,TOP+18,0]);
 label('Võ Nguyên Giáp','road',world,[0,2,-360]);
 label('Trường Sa','road',world,[0,2,640]);
 label('Nguyễn Đức Thuận','road',world,[-250,2,14]);
@@ -1055,7 +1055,7 @@ function setTime(h){
 var floorEl=document.getElementById('floor'), floorOut=document.getElementById('floorOut');
 var mode='overview', saved=null, yaw=0, pitch=-.04;
 function FN(f){ return f===4?'3A':String(f); }   // tầng 3A thay cho tầng 4 (theo bản vẽ CĐT)
-function setFloor(f){ curF=f; fitHi(); hi.position.y=FL[f]-.2; floorOut.textContent='Tầng '+FN(f); mainLbl.textContent='SUN SAPHIA · tầng '+FN(f)+' (~'+Math.round(FL[f]+1.6)+' m)'; if(mode==='view') placeViewCam(); if(mode==='close') flyClose(); }
+function setFloor(f){ curF=f; fitHi(); hi.position.y=FL[f]-.2; floorOut.textContent='Tầng '+FN(f); mainLbl.textContent='SUN SAPHIA'; if(mode==='view') placeViewCam(); if(mode==='close') flyClose(); }
 function placeViewCam(){
   var f=+floorEl.value, c=Math.cos(yaw), sn=Math.sin(yaw), hz=(SCH==='A'?AD:BD)/2+2, k=1/Math.max(Math.abs(c)/VIEWX,Math.abs(sn)/hz,1e-6);
   var p=c<-.3? T.localToWorld(new THREE.Vector3(X0-1.8,FL[f]+1.6,(Z0+ZM-SL)/2+sn*Math.min(8,Math.abs(sn/c)*1.8))) : T.localToWorld(new THREE.Vector3(TX+c*k,FL[f]+1.6,sn*k)); camera.position.copy(p); if(unitEye) camera.position.copy(unitEye);
@@ -1171,11 +1171,11 @@ setFloor=function(f){ setFloor0(f); if(planOn){ hi.visible=false; updPlan(false)
 // góc nhìn đỉnh tháp từ trên xuống như phối cảnh CĐT (nhìn từ phía biển, thấy mái, khung đất nung, khối 18–19 thấp hơn)
 function flyTop(){ var m=innerWidth<600, c=new THREE.Vector3(X1-16,TOP-22,Z0+24);
   if(planOn) setPlan(false); if(mode==='view') setMode('overview');
-  hi.visible=false; mainLbl.textContent='ĐỈNH THÁP · tầng 29–30 · mái khối 18–19 là vườn';
+  hi.visible=false; mainLbl.textContent='SUN SAPHIA';
   flyTo(T.localToWorld(new THREE.Vector3(c.x+(m?150:105),TOP+(m?175:118),c.z+(m?-20:-14))),T.localToWorld(c)); }
 document.getElementById('mTop').onclick=flyTop;
 // bay tới cụm Sun FourS Tower (~2 km phía Tây, giao lộ Minh Mạng – Nguyễn Phước Lan)
-document.getElementById('mSL').onclick=function(){ if(planOn) setPlan(false); if(mode==='view') setMode('overview'); hi.visible=false; controls.maxDistance=8000; mainLbl.textContent='SUN SAPHIA · 30 tầng';
+document.getElementById('mSL').onclick=function(){ if(planOn) setPlan(false); if(mode==='view') setMode('overview'); hi.visible=false; controls.maxDistance=8000; mainLbl.textContent='SUN SAPHIA';
   var m=innerWidth<600; flyTo(world.localToWorld(new THREE.Vector3(m?-1820:-1880,m?300:230,m?-1100:-1160)),world.localToWorld(new THREE.Vector3(-2155,45,-1337))); };   // bay tới S Light Tower (SL1, SL2)
 document.getElementById('mDrg').onclick=function(){ if(planOn) setPlan(false); if(mode==='view') setMode('overview'); hi.visible=false; controls.maxDistance=8000;
   hourEl.value=21; setTime(21); flyTo(world.localToWorld(new THREE.Vector3(-560,140,-4850)),world.localToWorld(new THREE.Vector3(-1000,25,-5300))); };   // tối, cầu Rồng phun lửa
@@ -1183,7 +1183,7 @@ document.getElementById('mSnd').onclick=function(){ setSnd(!sndOn); };
 document.getElementById('mFw').onclick=function(){ setSnd(true); if(planOn) setPlan(false); if(mode==='view') setMode('overview'); hi.visible=false; controls.maxDistance=8000;
   hourEl.value=20; setTime(20); flyTo(world.localToWorld(new THREE.Vector3(-560,420,-1650)),world.localToWorld(new THREE.Vector3(-1585,220,-2896))); };   // tối, nhìn pháo hoa DIFF bên sông Hàn
 document.getElementById('mFours').onclick=function(){ if(planOn) setPlan(false); if(mode==='view') setMode('overview'); hi.visible=false;
-  var m=innerWidth<600; controls.maxDistance=8000; mainLbl.textContent='SUN SAPHIA · 30 tầng';
+  var m=innerWidth<600; controls.maxDistance=8000; mainLbl.textContent='SUN SAPHIA';
   flyTo(world.localToWorld(new THREE.Vector3(m?-1550:-1620,m?520:400,m?1000:880)),world.localToWorld(new THREE.Vector3(-2053,30,527))); };
 var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false);
   // 5D: vào thẳng 1 căn hướng biển ở tầng đang chọn (đứng trong căn thật, nội thất đúng mặt bằng)
@@ -1191,7 +1191,7 @@ var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false);
   if(r) viewFromUnit(r); else bView0(); };
 
 /* ---------- bấm vào căn trên mặt bằng tầng: hiện thẻ căn, mở mặt bằng & 3D căn, view từ đúng căn ---------- */
-var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/f03c2b5533f1cd5d4fcb8219b8d6628390993007/projects/sun-saphia/chon-can/chon-can-app.html';
+var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/0c9fd6deb62ceb807f5249a7fc87ad18059dfef3/projects/sun-saphia/chon-can/chon-can-app.html';
 var unitEye=null;
 // [mã, loại, u0,u1, v0,v1, hướng mặt kính chính] – cùng số liệu với công cụ chọn căn
 var UNITS=[['11','2PN',0,11.1,0,8.1,'E'],['12','STU',11.19,14.99,0,9.1,'E'],['12A','STU',14.99,18.8,0,9.1,'E'],['12B','1PN',18.8,25.02,0,9.1,'E'],['15','STU',25.02,28.82,0,9.1,'E'],['16','STU',28.82,32.64,0,9.1,'E'],['17','1PN',32.64,38.91,0,9.1,'E'],
