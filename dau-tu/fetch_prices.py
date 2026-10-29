@@ -7,6 +7,7 @@ Kênh tự động:
   - Lãi suất Fed: biên độ mục tiêu (trên/dưới) và lãi suất thực tế EFFR – Fed New York (dự phòng: FRED)
   - VN-Index, VN30, HNX-Index, UPCoM và ~30 cổ phiếu lớn             – DNSE (dự phòng: VNDirect)
   - Khối ngoại mua/bán ròng toàn sàn HOSE và từng mã lớn – CafeF
+  - Giá rao bán BĐS Đà Nẵng theo quận/phường (trung vị tr/m² từ tin đăng Chợ Tốt Nhà), mỗi ngày 1 lần
   - Tin tức thị trường: RSS CafeF, Vietstock, VnEconomy, VnExpress (chứng khoán, ngân hàng, BĐS, vàng, vĩ mô)
   - Lãi vay tín chấp / thế chấp (Techcombank, Topi) và vay mua nhà ưu đãi (Smartland) theo ngân hàng
   - Lãi suất tiết kiệm tại quầy / online ~38 ngân hàng – 24hMoney (dự phòng: Người Quan Sát)
@@ -40,6 +41,7 @@ RATES_FILE = DATA / "lai_suat_auto.json"
 TICKERS_FILE = DATA / "ma_ck.json"
 LOANS_FILE = DATA / "lai_vay_auto.json"
 NEWS_FILE = DATA / "tin_tuc.json"
+LISTINGS_FILE = DATA / "bds_rao.json"
 TERMS = ("1", "3", "6", "12", "18", "24", "36")
 KEEP_DAYS = 800  # giữ tối đa ~2 năm cho chỉ số / vàng
 STOCK_KEEP = 260  # ~1 năm phiên cho từng mã
@@ -705,6 +707,54 @@ def fetch_news():
     return out
 
 
+# ---------------------------------------------------------------- Giá rao bán BĐS (Chợ Tốt Nhà)
+CHOTOT_REGION = 3017  # Đà Nẵng
+CHOTOT_CATS = {1040: "Đất", 1020: "Nhà ở", 1010: "Căn hộ"}
+
+
+def _stats(vals):
+    v = sorted(vals)
+    q = lambda p: v[min(len(v) - 1, int(round(p * (len(v) - 1))))]  # noqa: E731
+    return {"n": len(v), "med": round(q(0.5), 1), "p25": round(q(0.25), 1), "p75": round(q(0.75), 1)}
+
+
+def fetch_listings():
+    """Tin rao bán BĐS Đà Nẵng trên Chợ Tốt Nhà -> giá rao/m² trung vị theo loại, quận, phường."""
+    rows, seen = [], set()
+    for cg, kind in CHOTOT_CATS.items():
+        o = 0
+        while o < 3000:
+            r = get("https://gateway.chotot.com/v1/public/ad-listing",
+                    params={"region_v2": CHOTOT_REGION, "cg": cg, "st": "s", "limit": 50, "o": o}, timeout=30)
+            ads = r.json().get("ads") or []
+            if not ads:
+                break
+            for a in ads:
+                if a.get("list_id") in seen or a.get("is_price_not_valid"):
+                    continue
+                seen.add(a.get("list_id"))
+                ppm, size = a.get("price_million_per_m2"), a.get("size") or 0
+                if not ppm or size < 10 or not (2 <= ppm <= 1500):
+                    continue  # bỏ tin thiếu diện tích / giá vô lý
+                rows.append((kind, a.get("area_name") or "Khác", a.get("ward_name") or "", float(ppm)))
+            o += len(ads)
+            time.sleep(0.4)
+    if len(rows) < 100:
+        raise ValueError(f"quá ít tin hợp lệ ({len(rows)})")
+    by_q, by_p, by_k = {}, {}, {}
+    for kind, quan, phuong, ppm in rows:
+        by_k.setdefault(kind, []).append(ppm)
+        by_q.setdefault(kind, {}).setdefault(quan, []).append(ppm)
+        if phuong:
+            by_p.setdefault(kind, {}).setdefault(f"{quan}|{phuong}", []).append(ppm)
+    return {
+        "tong": len(rows),
+        "toan_tp": {k: _stats(v) for k, v in by_k.items()},
+        "quan": {k: {q: _stats(v) for q, v in d.items() if len(v) >= 5} for k, d in by_q.items()},
+        "phuong": {k: {q: _stats(v) for q, v in d.items() if len(v) >= 5} for k, d in by_p.items()},
+    }
+
+
 # ---------------------------------------------------------------- main
 def main():
     DATA.mkdir(exist_ok=True)
@@ -878,6 +928,27 @@ def main():
 
     step("Tin tức", tin_tuc)
 
+    rao = load(LISTINGS_FILE, {})
+
+    def gia_rao():
+        if rao.get("ngay") == today():
+            log("   đã lấy hôm nay")
+            return
+        res = fetch_listings()
+        rao.update({"ngay": today(), "nguon": "Chợ Tốt Nhà", **res})
+        hist = rao.setdefault("lich_su", {})
+        for kind, st in res["toan_tp"].items():
+            hist.setdefault(f"{kind}|Toàn thành phố", {})[today()] = st["med"]
+        for kind, d in res["quan"].items():
+            for quan, st in d.items():
+                hist.setdefault(f"{kind}|{quan}", {})[today()] = st["med"]
+        for h in hist.values():
+            for d in sorted(h)[:-KEEP_DAYS]:
+                del h[d]
+        log(f"   {res['tong']} tin hợp lệ: " + ", ".join(f"{k} {v['n']} tin, trung vị {v['med']} tr/m²" for k, v in res["toan_tp"].items()))
+
+    step("Giá rao BĐS", gia_rao)
+
     def ds_ma():
         # danh sách mã cho ô tra cứu – mỗi ngày lấy 1 lần
         old = load(TICKERS_FILE, {})
@@ -933,6 +1004,8 @@ def main():
     save(PRICES_FILE, prices)
     if news.get("items"):
         save(NEWS_FILE, news)
+    if rao.get("ngay"):
+        save(LISTINGS_FILE, rao)
     if loans:
         save(LOANS_FILE, loans)
     if rates:
