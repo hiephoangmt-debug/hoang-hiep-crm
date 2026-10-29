@@ -521,7 +521,7 @@ SHL = {   # điểm đứng / điểm nhìn theo toạ độ bản vẽ từng l
  '2PN':   {'living': ((6.1, 7.0), (0.3, 8.4)), 'living2': ((2.3, 7.1), (6.7, 8.8)), 'bed': ((3.45, 2.6), (0.6, 0.5)), 'plus': ((3.4, 5.75), (0.4, 3.6))},
 }
 SHL['2PN1'] = SHL['2PN']
-SHL['2PN11'] = {'living': ((5.8, 8.6), (0.3, 10.0)), 'living2': ((1.6, 10.5), (6.2, 8.3)), 'bed': ((4.9, 2.0), (0.9, 2.6)), 'plus': ((4.0, 5.1), (0.6, 6.5))}
+SHL['2PN11'] = {'living': ((5.8, 8.6), (0.3, 10.0)), 'living2': ((1.6, 10.5), (6.2, 8.3)), 'bed': ((5.1, 4.2), (1.0, 1.6)), 'plus': ((4.05, 5.9), (0.6, 6.4))}
 SHL['2PNT'] = {'living': ((7.2, 5.0), (7.2, -1.0)), 'living2': ((7.0, 0.7), (6.5, 7.5)), 'bed': ((2.0, 5.0), (1.0, 0.5)), 'plus': ((3.4, 3.9), (4.8, 0.3))}
 SHL['2PN1L'] = dict(SHL['2PN11'], plus=((4.0, 4.6), (0.5, 8.0)))
 SHL['1PN+1L'] = SHL['1PN+1']
@@ -543,10 +543,27 @@ for s in SHOTS:
         for o in bpy.data.objects:
             if o.type == 'MESH' and o.data.materials and o.data.materials[0] in (GLASS, RGLASS):
                 for sl_ in o.material_slots: sl_.link = 'OBJECT'; sl_.material = CLR
+        # hạ thấp các bức tường phía người xem (nửa căn gần máy ảnh) để nhìn rõ bên trong
+        _on = Vector((OUTN.x, OUTN.y)) if OUTN.length > .01 else Vector((1, 0))
+        _az = math.atan2(_on.y, _on.x) + math.radians(float(os.environ.get('TOPAZ', '-38'))); _hd = Vector((math.cos(_az), math.sin(_az)))
+        _cx = (min(p[0] for p in BX) + max(p[0] for p in BX)) / 2; _cy = (min(p[1] for p in BX) + max(p[1] for p in BX)) / 2
+        _ext = max(abs((Vector(p) - Vector((_cx, _cy))).dot(_hd)) for p in BX); LOWH = float(os.environ.get('TOPLOW', '1.0'))
+        for o in list(bpy.data.objects):
+            if o.type != 'MESH' or o.hide_render or o.parent is not None or not o.data.materials or o.data.materials[0] not in (WALL, EXT): continue
+            vs_ = [o.matrix_world @ v.co for v in o.data.vertices]; zs_ = [v.z for v in vs_]
+            if max(zs_) < H - .05: continue
+            c_ = Vector((sum(v.x for v in vs_) / len(vs_), sum(v.y for v in vs_) / len(vs_)))
+            if (c_ - Vector((_cx, _cy))).dot(_hd) < .25 * _ext: continue
+            o.data = o.data.copy(); zb = min(zs_)
+            for v in o.data.vertices:
+                if (o.matrix_world @ v.co).z > zb + LOWH: v.co.z = (zb + LOWH - o.location.z) / max(1e-6, o.scale.z)
         for o in list(bpy.data.objects):
             if o.type != 'MESH' or o.hide_render or not o.data.materials: continue
             mt_ = o.data.materials[0]
             zs = [v.co.z for v in o.data.vertices]; z0_, z1_ = min(zs) + o.location.z, max(zs) + o.location.z
+            if o.parent is None and mt_ in (WALL, EXT) and LOWH - .05 < z1_ < H - .05:       # mặt cắt đỉnh tường đã hạ
+                cp = o.copy(); sc.collection.objects.link(cp); cp.scale.z = .015 / max(.01, z1_ - z0_); cp.location.z = z1_ + .005
+                cp.material_slots[0].link = 'OBJECT'; cp.material_slots[0].material = CAPW; continue
             if o.parent is None and mt_ in (WALL, EXT) and z1_ > H - .05:                  # mặt cắt đỉnh tường màu trắng
                 cp = o.copy(); sc.collection.objects.link(cp); cp.scale.z = .015 / max(.01, z1_ - z0_); cp.location.z = H + .005
                 cp.material_slots[0].link = 'OBJECT'; cp.material_slots[0].material = CAPW

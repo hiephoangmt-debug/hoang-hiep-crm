@@ -2,7 +2,7 @@
 import json, os, re, subprocess
 from PIL import Image
 S = os.path.dirname(os.path.abspath(__file__)); R = '/home/user/hoang-hiep-crm/projects/sun-saphia'
-C = json.load(open(S + '/ccl2.json')); OUT = R + '/images/noi-that'
+C = json.load(open(S + '/ccl2.json')); OUT = R + '/images/noi-that'; OUTC = R + '/images/noi-that-crm'; os.makedirs(OUTC, exist_ok=True)
 def lay(name):
     k, uid = name.split('-', 1); parts = C['u30'][uid] if k == '30' else C['u'][uid]
     return max(parts, key=lambda p: C['spec'][p[0]]['W'] * C['spec'][p[0]]['D'])[0]
@@ -26,6 +26,12 @@ for name in sorted(NEW | OLD):
         dst = OUT + '/' + fn
         if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(f) or shot == 'top':
             subprocess.run(['python3', S + '/wmk2.py', src, dst, 'Nội thất luxury minh họa, thông số theo CĐT · 0904567009'], check=True)
+        dc = OUTC + '/' + fn   # bản CRM nội bộ: không chữ chìm web, không số điện thoại
+        if shot == 'top':
+            srcc = d + '/top_ban_crm.png'; subprocess.run(['python3', S + '/compose_top.py', d, name, srcc], check=True, env=dict(os.environ, CRM='1'))
+        else: srcc = f
+        if not os.path.exists(dc) or os.path.getmtime(dc) < os.path.getmtime(f) or shot == 'top':
+            subprocess.run(['python3', S + '/wmk_crm.py', srcc, dc, 'Nội thất minh họa, thông số theo CĐT'], check=True)
         items.append([fn, cap])
     if items: nt[name] = {'img': items}
 p = R + '/chon-can/chon-can.html'; s = open(p, encoding='utf-8').read()
