@@ -13,10 +13,10 @@ Trang web biểu đồ theo ngày cho các kênh: **vàng SJC & thế giới, b�
 
 | File | Cột | Ghi chú |
 |---|---|---|
-| `data/bds.csv` | `ngay,khu_vuc,gia_m2,ghi_chu` | giá triệu đồng/m², mỗi khu vực một đường |
+| `data/bds.csv` | `ngay,nhom,khu_vuc,gia_m2,gia_min,gia_max,loai_gia,nguon,url,ghi_chu` | giá triệu đồng/m². `nhom`: Căn hộ / Đất nền / Nhà riêng / Nhà mặt phố / Biệt thự. Có số trung bình thì điền `gia_m2`; nguồn chỉ cho khoảng giá thì điền `gia_min`/`gia_max` (để trống `gia_m2`). `loai_gia`: rao bán / sơ cấp / giao dịch / bình quân. `url`: link bài/báo cáo gốc. Chỉ nhập số có trong nguồn, không tự tính. |
 | `data/lai_suat.csv` | `ngay,ngan_hang,ky_han_thang,lai_suat,hinh_thuc,ghi_chu` | Dự phòng khi bot không lấy được lãi suất tự động (`data/lai_suat_auto.json`, nguồn 24hMoney / Người Quan Sát) |
 
-BĐS: giá rao bán theo quý từ báo cáo Batdongsan.com.vn. Lãi suất: bot tự lấy mỗi lần chạy. Cập nhật thêm dòng mới khi có số mới (sửa trực tiếp trên GitHub được, cả trên điện thoại).
+BĐS: số theo quý/tháng từ báo cáo Batdongsan.com.vn, DKRA, CBRE, Savills, Avison Young, VARS (mỗi dòng có link nguồn); phần giá rao Chợ Tốt Nhà do bot tự tính mỗi ngày. Lãi suất: bot tự lấy mỗi lần chạy. Cập nhật thêm dòng mới khi có số mới (sửa trực tiếp trên GitHub được, cả trên điện thoại).
 Ngày viết dạng `YYYY-MM-DD`; tên khu vực / ngân hàng không dùng dấu phẩy.
 
 | `data/lai_vay.csv` | `ngay,ngan_hang,loai,ky_han,lai_suat,chenh_lech,ghi_chu` | Lãi vay %/năm; `loai` = `Bình quân` (ngày = cuối tháng), `Mua nhà` (ky_han = thời gian cố định, VD `12 tháng`) hoặc `Kinh doanh` (`Ngắn hạn` / `Trung dài hạn`) |

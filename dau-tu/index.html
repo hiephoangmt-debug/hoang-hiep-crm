@@ -108,6 +108,8 @@ h2::before { content: ""; display: inline-block; width: 10px; height: 10px; bord
 @media (max-width: 480px) { .counts button.card { padding: 10px 8px; } .counts .badge { font-size: 12px; white-space: normal; } .counts .n { font-size: 22px; } }
 .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; white-space: nowrap; }
 .tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.bdsT .nm a { color: var(--ink-2); }
+.bdsT td:first-child { white-space: normal; min-width: 120px; }
 table { border-collapse: collapse; width: 100%; font-size: 14px; }
 th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--grid); white-space: nowrap; }
 th { color: var(--ink-2); font-weight: 600; font-size: 13px; cursor: pointer; user-select: none; background: var(--surface); }
@@ -281,8 +283,15 @@ section.far canvas { visibility: hidden; }
 
   <section id="bds">
     <h2>Bất động sản <span id="bdsSample"></span></h2>
-    <p class="note">Hai nguồn: giá rao theo quý từ báo cáo Batdongsan.com.vn (nhập tay), và giá rao theo tin đăng Chợ Tốt Nhà (bot tự tính mỗi ngày, bên dưới). Giá <b>rao bán</b> trung bình (triệu đồng/m²) theo quý, từ báo cáo thị trường của Batdongsan.com.vn – không phải giá giao dịch thật hay bảng giá nhà nước. Một số mốc quý II được tính ngược từ % thay đổi trong báo cáo (chạm vào điểm để xem ghi chú). Số liệu nhập tay trong <code>dau-tu/data/bds.csv</code>; biểu đồ luôn hiện toàn bộ các quý.</p>
-    <div class="card"><h3>Theo báo cáo quý (Batdongsan.com.vn)</h3><div class="chart"><canvas id="cBds"></canvas></div></div>
+    <p class="note">Hai phần: (1) giá theo <b>báo cáo thị trường</b> của cơ quan nhà nước, công ty nghiên cứu (DKRA, Savills, CBRE…) và trang rao (Batdongsan.com.vn…), nhập theo quý/tháng, mỗi số có link nguồn; (2) giá rao theo tin đăng Chợ Tốt Nhà, bot tự tính mỗi ngày (bên dưới). Đơn vị triệu đồng/m². <b>Giá rao bán</b> là giá người bán đăng, thường cao hơn giá giao dịch thật; <b>sơ cấp</b> là giá chủ đầu tư mở bán.</p>
+    <div class="card"><h3>Theo báo cáo thị trường</h3>
+      <div class="toolbar-in"><div class="seg" id="bdsKinds" role="group" aria-label="Loại bất động sản"></div></div>
+      <div class="chart"><canvas id="cBds"></canvas></div>
+      <h3 style="margin-top:14px">Số mới nhất theo nguồn</h3>
+      <div class="stats" id="bdsHiLo"></div>
+      <div class="tbl-wrap"><table id="tblBds" class="bdsT"></table></div>
+      <p class="note" style="margin:8px 0 0">Đơn vị triệu đồng/m². “Toàn TP”: số chung của cả thành phố theo báo cáo (phần lớn là Đà Nẵng cũ, trước khi sáp nhập Quảng Nam); “Quảng Nam cũ” ghi riêng. Bấm tên nguồn để mở báo cáo gốc; chạm vào điểm trên biểu đồ để xem ghi chú. Số liệu nhập trong <code>dau-tu/data/bds.csv</code>.</p>
+    </div>
 
     <div class="card" style="margin-top:12px" id="raoCard">
       <h3>Giá rao bán theo tin đăng – Chợ Tốt Nhà (cập nhật hằng ngày)</h3>
@@ -436,7 +445,7 @@ Promise.all([j('data/prices.json'), j('data/stocks.json'), t('data/bds.csv'), t(
     RA = ra && ra.bang && Object.keys(ra.bang).length ? ra : null;
     P = p || P; P.series = P.series || {};
     ST = s || ST; ST.symbols = ST.symbols || {};
-    BDS = csv(b).map(r => ({ ...r, gia_m2: +r.gia_m2 })).filter(r => !isNaN(r.gia_m2));
+    BDS = bdsParse(csv(b));
     LS = csv(l).map(r => ({ ...r, lai_suat: +r.lai_suat, ky_han_thang: +r.ky_han_thang })).filter(r => !isNaN(r.lai_suat));
     $('updated').textContent = P.updated
       ? 'Vàng, chứng khoán, khối ngoại, tỷ giá, hàng hoá, bất động sản – biểu đồ theo ngày.'
@@ -501,15 +510,26 @@ function goldWorldVnd() {
   return g.map(([d, v]) => { const r = at(u, d) ?? u[0][1]; return [d, v * r * LUONG_PER_OZ / 1e6]; });
 }
 // Chuỗi BĐS dùng cho ô tổng quan và biểu đồ so sánh: khu vực có nhiều mốc số liệu nhất
-function bdsMainName() {
-  const cnt = {};
-  BDS.forEach(r => cnt[r.khu_vuc] = (cnt[r.khu_vuc] || 0) + 1);
-  return Object.keys(cnt).reduce((a, b) => cnt[b] > (cnt[a] || 0) ? b : a, null);
+// bds.csv: ngay,nhom,khu_vuc,gia_m2,gia_min,gia_max,loai_gia,nguon,url,ghi_chu (file cũ chỉ có ngay,khu_vuc,gia_m2,ghi_chu)
+const numOrNull = (x) => x == null || String(x).trim() === '' || isNaN(+x) ? null : +x;
+function bdsParse(rows) {
+  return rows.map(r => {
+    let nhom = r.nhom || '', kv = r.khu_vuc || '';
+    if (!nhom) { const m = kv.match(/^(.+?)\s+[–-]\s+(.+)$/); if (m) { nhom = m[1]; kv = m[2]; } else nhom = 'Khác'; }
+    return { ...r, nhom, khu_vuc: kv, gia_m2: numOrNull(r.gia_m2), gia_min: numOrNull(r.gia_min), gia_max: numOrNull(r.gia_max),
+      loai_gia: r.loai_gia || 'rao bán', nguon: r.nguon || '', url: r.url || '' };
+  }).filter(r => r.gia_m2 != null || (r.gia_min != null && r.gia_max != null));
 }
-function bdsAvg() {
-  const name = bdsMainName();
-  return BDS.filter(r => r.khu_vuc === name).sort((a, b) => a.ngay < b.ngay ? -1 : 1).map(r => [r.ngay, r.gia_m2]);
+const bdsKey = (r) => `${r.khu_vuc} · ${r.nguon || '?'}${r.loai_gia && r.loai_gia !== 'rao bán' ? ' (' + r.loai_gia + ')' : ''}`;
+function bdsSeries(rows) {
+  const by = {};
+  rows.filter(r => r.gia_m2 != null).forEach(r => (by[bdsKey(r)] = by[bdsKey(r)] || []).push(r));
+  return Object.entries(by).map(([k, a]) => ({ key: k, rows: a.sort((x, y) => x.ngay < y.ngay ? -1 : 1) }))
+    .sort((a, b) => b.rows.length - a.rows.length || (b.rows.at(-1).ngay > a.rows.at(-1).ngay ? 1 : -1));
 }
+// Chuỗi BĐS cho ô tổng quan và biểu đồ so sánh: chuỗi có nhiều mốc nhất
+function bdsMainName() { const x = bdsSeries(BDS)[0]; return x ? `BĐS ${x.rows[0].nhom.toLowerCase()} – ${x.rows[0].nguon}` : null; }
+function bdsAvg() { const s = bdsSeries(BDS)[0]; return s ? s.rows.map(r => [r.ngay, r.gia_m2]) : []; }
 function savingsIndex(s, e) {
   const rates = LS.filter(r => r.ky_han_thang === 12 && !/online/i.test(r.hinh_thuc || ''));
   const use = rates.length ? rates : LS;
@@ -1310,21 +1330,46 @@ function renderRao() {
     pl.map(r => `<tr><td><b>${esc(r.p)}</b></td><td>${fmt(r.med, 1)}</td><td>${r.min == null ? '–' : fmt(r.min, 1)}</td><td>${r.max == null ? '–' : fmt(r.max, 1)}</td><td>${fmt(r.p25, 0)}–${fmt(r.p75, 0)}</td><td>${fmt(r.n)}</td></tr>`).join('') + '</tbody>'
     : '<tr><td class="empty">Chưa đủ tin (cần ít nhất 5 tin mỗi phường).</td></tr>';
 }
+let bdsKind = null;
+const kyLabel = (d) => { const [y, m, dd] = d.split('-').map(Number); const qEnd = [3, 6, 9, 12].includes(m) && dd >= 28; return qEnd ? `Q${m / 3}/${y}` : `T${m}/${y}`; };
 function renderBds(s) {
-  const areas = [...new Set(BDS.map(r => r.khu_vuc))];
+  const kinds = [...new Set(BDS.map(r => r.nhom))];
+  if (!kinds.includes(bdsKind)) bdsKind = kinds.includes('Căn hộ') ? 'Căn hộ' : kinds[0];
+  $('bdsKinds').innerHTML = kinds.map(k => `<button aria-pressed="${k === bdsKind}">${esc(k)}</button>`).join('');
+  $('bdsKinds').querySelectorAll('button').forEach((b, i) => b.onclick = () => { bdsKind = kinds[i]; renderBds(s); });
+  const rows = BDS.filter(r => r.nhom === bdsKind);
   const colors = ['--s1', '--s2', '--s3', '--s4', '--s5', '--s6', '--s7'];
-  const ds = areas.slice(0, 7).map((a, i) => line(a,
-    BDS.filter(r => r.khu_vuc === a).sort((x, y) => x.ngay < y.ngay ? -1 : 1).map(r => [r.ngay, r.gia_m2]),
-    css(colors[i]), { pointRadius: 3 }));
-  const o = baseOpts('tr/m²', { legend: true, dec: 0, xunit: 'quarter' });
+  const ser = bdsSeries(rows).slice(0, 7);
+  const ds = ser.map((x, i) => line(x.key, x.rows.map(r => [r.ngay, r.gia_m2]), css(colors[i]), { pointRadius: 3 }));
+  const o = baseOpts('tr/m²', { legend: true, dec: 1, xunit: 'quarter' });
   o.interaction = { mode: 'nearest', intersect: false };
   o.scales.x.time.displayFormats.quarter = "'Q'q/yyyy";
-  o.plugins.tooltip.callbacks.title = (it) => { if (!it.length) return ''; const d = new Date(it[0].parsed.x); return `Quý ${Math.floor(d.getMonth() / 3) + 1}/${d.getFullYear()}`; };
+  o.plugins.tooltip.callbacks.title = (it) => { if (!it.length) return ''; return kyLabel(keyOf(it[0].parsed.x)); };
   o.plugins.tooltip.callbacks.afterLabel = (c) => {
-    const r = BDS.find(x => x.khu_vuc === c.dataset.label && tsOf(x.ngay) === c.parsed.x);
+    const r = ser[c.datasetIndex]?.rows.find(x => tsOf(x.ngay) === c.parsed.x);
     return r && r.ghi_chu ? ' ' + r.ghi_chu : '';
   };
   draw('cBds', { type: 'line', data: { datasets: ds }, options: o });
+  // Bảng: số mới nhất của mỗi chuỗi (khu vực · nguồn · loại giá), kể cả số dạng khoảng
+  const last = {};
+  rows.forEach(r => { const k = bdsKey(r); if (!last[k] || r.ngay > last[k].ngay) last[k] = r; });
+  const list = Object.values(last).sort((a, b) => (b.ngay > a.ngay ? 1 : b.ngay < a.ngay ? -1 : 0) || ((b.gia_m2 ?? b.gia_max) - (a.gia_m2 ?? a.gia_max)));
+  const n1 = (v) => v == null ? '–' : fmt(v, 1);
+  const link = (r) => r.url ? `<a href="${esc(/^https?:\/\//i.test(r.url) ? r.url : '#')}" target="_blank" rel="noopener">${esc(r.nguon || 'nguồn')}</a>` : esc(r.nguon);
+  const rng = (r) => r.gia_min != null && r.gia_max != null ? `${n1(r.gia_min)} – ${n1(r.gia_max)}` : r.gia_min != null ? `từ ${n1(r.gia_min)}` : r.gia_max != null ? `đến ${n1(r.gia_max)}` : '–';
+  $('tblBds').innerHTML = `<thead><tr><th>Khu vực</th><th>Trung bình</th><th>Thấp – cao</th></tr></thead><tbody>` +
+    list.map(r => `<tr${r.ghi_chu ? ` title="${esc(r.ghi_chu)}"` : ''}><td>${esc(r.khu_vuc)}<span class="nm">${esc(r.loai_gia)} · ${link(r)} · ${kyLabel(r.ngay)}</span></td><td><b>${n1(r.gia_m2)}</b></td><td>${rng(r)}</td></tr>`).join('') + '</tbody>';
+  // Cao nhất / thấp nhất: chỉ so các khu vực được nêu tên trong quý mới nhất (không so số trung bình toàn TP, không trộn các kỳ)
+  const newest = list.reduce((m, r) => r.ngay > m ? r.ngay : m, '');
+  const qStart = (d) => { const [y, m] = d.split('-').map(Number); const q0 = Math.floor((m - 1) / 3) * 3 + 1; return `${y}-${String(q0).padStart(2, '0')}-01`; };
+  const cur = newest ? list.filter(r => r.ngay >= qStart(newest)) : [];
+  const areas = cur.filter(r => r.khu_vuc !== 'Toàn TP');
+  const hi = areas.map(r => ({ r, v: r.gia_max ?? r.gia_m2 })).filter(x => x.v != null).sort((a, b) => b.v - a.v)[0];
+  const lo = areas.map(r => ({ r, v: r.gia_min ?? r.gia_m2 })).filter(x => x.v != null).sort((a, b) => a.v - b.v)[0];
+  const who = (x) => `${esc(x.r.khu_vuc)} – ${esc(x.r.nguon)}${x.r.gia_m2 == null ? ', khoảng giá' : ''}`;
+  $('bdsHiLo').innerHTML = hi && lo && areas.length > 1
+    ? `<span>${kyLabel(newest)}, trong các khu vực báo cáo nêu:</span><span>Cao nhất <b>${fmt(hi.v, 1)} tr/m²</b> (${who(hi)})</span><span>Thấp nhất <b>${fmt(lo.v, 1)} tr/m²</b> (${who(lo)})</span>`
+    : '';
   const sample = BDS.some(r => /MẪU/i.test(r.ghi_chu || ''));
   $('bdsSample').innerHTML = sample ? '<span class="sample">Số liệu mẫu</span>' : '';
 }

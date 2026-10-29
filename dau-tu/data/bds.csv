@@ -1,12 +1,40 @@
-ngay,khu_vuc,gia_m2,ghi_chu
-2025-03-31,Nhà mặt phố – Đà Nẵng (cũ),106,Giá rao bán Q1/2025 – Batdongsan.com.vn (báo cáo Q3/2026)
-2026-06-30,Nhà mặt phố – Đà Nẵng (cũ),147,Q2/2026 – tính ngược từ mức giảm 7% của Q3
-2026-09-30,Nhà mặt phố – Đà Nẵng (cũ),137,Giá rao bán Q3/2026 – Batdongsan.com.vn
-2026-06-30,Đất nền – Đà Nẵng (cũ),84,Q2/2026 – Batdongsan.com.vn
-2026-09-30,Đất nền – Đà Nẵng (cũ),78,Giá rao bán Q3/2026 (giảm 7%) – Batdongsan.com.vn
-2026-06-30,Đất nền – Liên Chiểu,48,Q2/2026 – tính ngược từ mức giảm 8% của Q3
-2026-09-30,Đất nền – Liên Chiểu,44,Giá rao bán Q3/2026 (giảm 8%) – Batdongsan.com.vn
-2026-06-30,Đất nền – Hội An,37,Q2/2026 – tính ngược từ mức tăng 5% của Q3
-2026-09-30,Đất nền – Hội An,39,Giá rao bán Q3/2026 (tăng 5%) – Batdongsan.com.vn
-2026-09-30,Nhà phố – Ngũ Hành Sơn,188,Giá rao bán Q3/2026 – Batdongsan.com.vn
-2026-09-30,Nhà phố – Sơn Trà,181,Giá rao bán Q3/2026 – Batdongsan.com.vn
+ngay,nhom,khu_vuc,gia_m2,gia_min,gia_max,loai_gia,nguon,url,ghi_chu
+2026-09-30,Biệt thự,Toàn TP,100,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,Đi ngang so với quý trước
+2024-03-31,Căn hộ,Hải Châu,,,150,sơ cấp,Avison Young,https://vnexpress.net/chung-cu-moi-o-da-nang-tiep-da-tang-gia-4741921.html,Mức cao nhất, nguồn ghi "gần 150"
+2026-09-30,Căn hộ,Hải Châu,85,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,Quận đắt nhất; đi ngang so với quý trước
+2026-09-30,Căn hộ,Liên Chiểu,41,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,Quận rẻ nhất trong các quận được nêu; +2%
+2026-09-30,Căn hộ,Ngũ Hành Sơn,56,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,-2% so với quý trước
+2026-09-30,Căn hộ,Sơn Trà,82,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,-1% so với quý trước
+2024-03-31,Căn hộ,Toàn TP,,50,80,sơ cấp,Avison Young,https://vnexpress.net/chung-cu-moi-o-da-nang-tiep-da-tang-gia-4741921.html,Khoảng giá sơ cấp phổ biến quý 1/2024
+2024-06-30,Căn hộ,Toàn TP,,75,88,sơ cấp,Avison Young,https://vnexpress.net/gia-can-ho-moi-o-da-nang-tang-20-4782844.html,Khoảng giá sơ cấp quý 2/2024
+2024-09-30,Căn hộ,Toàn TP,,75,87.5,sơ cấp,Avison Young,https://vnexpress.net/gan-50-chung-cu-moi-da-nang-duoc-tieu-thu-trong-quy-iii-4816076.html,Khoảng giá sơ cấp quý 3/2024
+2024-03-31,Căn hộ,Toàn TP,46,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,Mốc quý 1/2024 nêu trong báo cáo quý 3/2026
+2026-09-30,Căn hộ,Toàn TP,67,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,Báo cáo quý 3/2026 (15/10/2026); -1% so với quý trước
+2025-06-30,Căn hộ,Toàn TP,85,,,sơ cấp,CBRE,https://vietnamfinance.vn/gia-can-ho-da-nang-tang-manh-cao-nhat-cham-200-trieu-dong-m2-d130002.html,Tính trên diện tích thông thủy; +27% so với cùng kỳ
+2026-03-31,Căn hộ,Toàn TP,83,,,sơ cấp,CBRE,https://vnexpress.net/chung-cu-moi-o-da-nang-ngay-cang-dat-do-5067793.html,+12% so với cùng kỳ
+2026-03-31,Căn hộ,Toàn TP,,120,,sơ cấp,CBRE,https://vnexpress.net/chung-cu-moi-o-da-nang-ngay-cang-dat-do-5067793.html,Hàng mở bán mới trong quý đều trên 120 tr/m²
+2024-03-31,Căn hộ,Toàn TP,,50,65,giao dịch,DKRA,https://vnexpress.net/chung-cu-moi-o-da-nang-tiep-da-tang-gia-4741921.html,Khoảng giá nơi giao dịch tập trung
+2025-06-30,Căn hộ,Toàn TP,77,,,sơ cấp,Savills,https://viettimes.vn/da-nang-bat-dong-san-tang-truong-tich-cuc-chuyen-gia-khuyen-cao-gi-nha-dau-tu-post189050.html,Giá sơ cấp bình quân
+2025-03-31,Căn hộ,Toàn TP,62,,,bình quân,VARS,https://vnexpress.net/hoi-moi-gioi-nguon-cung-nha-o-moi-chu-yeu-phuc-vu-nguoi-giau-4873156.html,Giá bình quân theo tập mẫu VARS
+2025-06-30,Căn hộ,Toàn TP,66.4,,,bình quân,VARS,https://diendandoanhnghiep.vn/doc-vi-thi-truong-bat-dong-san-nua-dau-nam-2025-nguon-cung-tang-vot-gia-van-neo-cao-10157856.html,Giá bình quân theo tập mẫu VARS
+2026-09-30,Căn hộ,Toàn TP,68.9,,,bình quân,VARS,https://vietbao.vn/bat-dong-san-da-nang-gia-can-ho-di-ngang-nhieu-du-an-hut-khach-613408.html,Giá bình quân theo tập mẫu VARS, công bố 17/10/2026
+2026-09-30,Nhà mặt phố,Hải Châu,157,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,+23% so với quý 1/2025
+2026-09-30,Nhà mặt phố,Ngũ Hành Sơn,188,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,Cao nhất; +45% so với quý 1/2025
+2026-09-30,Nhà mặt phố,Sơn Trà,181,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,+43% so với quý 1/2025
+2025-03-31,Nhà mặt phố,Toàn TP,106,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,Mốc quý 1/2025 nêu trong báo cáo quý 3/2026
+2026-09-30,Nhà mặt phố,Toàn TP,137,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,-7% so với quý trước; +29% so với quý 1/2025
+2026-09-30,Nhà riêng,Toàn TP,82,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,-7% so với quý trước
+2026-09-30,Đất nền,Hội An,39,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,+5% so với quý trước
+2026-09-30,Đất nền,Liên Chiểu,44,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,-8% so với quý trước (giảm mạnh nhất)
+2026-09-30,Đất nền,P. Hội An Tây,,29.3,47,sơ cấp,DKRA,https://doanhnhan.baophapluat.vn/dat-nen-da-nang-khan-nguon-cung-gia-thu-cap-tiep-tuc-chiu-ap-luc-giam.html,Khoảng giá sơ cấp
+2026-09-30,Đất nền,P. Hội An Đông,,45.6,61.6,sơ cấp,DKRA,https://baodautu.vn/thi-truong-dat-nen-can-ho-da-nang-quy-iii2026-dong-tien-chon-loc-d729484.html,Khoảng giá sơ cấp; cao nhất trong 3 khu vực DKRA nêu
+2026-09-30,Đất nền,P. Điện Bàn Đông,,17.4,26,sơ cấp,DKRA,https://doanhnhan.baophapluat.vn/dat-nen-da-nang-khan-nguon-cung-gia-thu-cap-tiep-tuc-chiu-ap-luc-giam.html,Khoảng giá sơ cấp; thấp nhất trong 3 khu vực DKRA nêu
+2026-09-30,Đất nền,Quảng Nam cũ,22,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,Tăng từ 10 tr/m² (quý 1/2023)
+2024-06-30,Đất nền,Quảng Nam cũ,19.5,,,sơ cấp,DKRA,https://thoibaotaichinhvietnam.vn/nhieu-hap-luc-tich-cuc-tu-thi-truong-bat-dong-san-da-nang-va-phu-can-155815.html,Giá trung bình nhóm sản phẩm giao dịch chủ yếu
+2024-09-30,Đất nền,Quảng Nam cũ,,11.3,61.6,sơ cấp,DKRA,https://vneconomy.vn/bat-dong-san-da-nang-va-vung-phu-can-suc-cau-thap.htm,Khoảng giá sơ cấp thấp nhất – cao nhất
+2026-06-30,Đất nền,Toàn TP,84,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,Mốc quý 2/2026 nêu trong báo cáo quý 3/2026
+2026-09-30,Đất nền,Toàn TP,78,,,rao bán,Batdongsan.com.vn,https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618,Báo cáo quý 3/2026 (15/10/2026); -7% so với quý trước
+2024-06-30,Đất nền,Toàn TP,51.2,,,sơ cấp,DKRA,https://thoibaotaichinhvietnam.vn/nhieu-hap-luc-tich-cuc-tu-thi-truong-bat-dong-san-da-nang-va-phu-can-155815.html,Giá trung bình nhóm sản phẩm giao dịch chủ yếu
+2024-09-30,Đất nền,Toàn TP,,27.2,126.4,sơ cấp,DKRA,https://vneconomy.vn/bat-dong-san-da-nang-va-vung-phu-can-suc-cau-thap.htm,Khoảng giá sơ cấp thấp nhất – cao nhất
+2025-04-30,Đất nền,Toàn TP,,32.2,126.4,sơ cấp,DKRA,https://cafef.vn/dat-nen-da-nang-quang-nam-dang-co-chuyen-bien-moi-gia-tang-tro-lai-188250518134127453.chn,Bản tin tháng 4/2025; khoảng giá sơ cấp
+2025-06-30,Đất nền,Toàn TP,54,32.2,126.4,sơ cấp,DKRA,https://cafef.vn/dat-nen-da-nang-bat-ngo-tang-nhiet-188250719073323185.chn,Giao dịch tập trung quanh 54 tr/m²; khoảng giá sơ cấp
