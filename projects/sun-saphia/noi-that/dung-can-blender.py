@@ -212,7 +212,7 @@ for _pt in PARTS:
                 curved = x0 != x1 and y0 != y1; short = (t1 - t0) < .9 or curved; ov = 0 if curved else (.035 if short else 0)   # kính bo cong: không đố đứng, không chồng mép (hết sọc đen)   # góc kính cong ghép từ nhiều đoạn ngắn: không đố đứng, khung nối liền (hết răng cưa)
                 if curved: CG.append((a + u * t0, a + u * t1))   # kính cong: dựng 1 tấm liền mạch sau
                 elif not (TOUR and inner) and not os.environ.get('NOGLASS'): piece(t0 - ov, t1 + ov, 0, H - .06, .012, GLASS, 'kinh')
-                if curved: piece(t0 - .03, t1 + .03, H - .08, .1, .09, WALL); piece(t0 - .02, t1 + .02, 0, .04, .04, ALU)
+                if curved: jz = (len(CG) % 3) * .004; piece(t0 - .06, t1 + .06, H - .16 - jz, .2, .5, CEIL, 'tran-vien'); piece(t0 - .02, t1 + .02, 0, .04, .04, ALU)   # lệch vài mm: hết nhiễu tam giác đen
                 else: piece(t0 - ov, t1 + ov, H - .08, .08, .07, ALU); piece(t0 - ov, t1 + ov, 0, .05, .07, ALU)
                 n = max(1, round((t1 - t0) / 1.3))
                 for j in range(n + 1):
@@ -230,7 +230,7 @@ for _pt in PARTS:
             th = .2 if k == 'x' else (.12 if k == 'w' else .07); nv = Vector((-u.y, u.x))
             for sd in (-1, 1):
                 c = (a + b) / 2 + nv * sd * (th / 2 + (.07 if k != 'g' else .2))
-                cv = x0 != x1 and y0 != y1; box(c.x, c.y, H - .14, L + (.12 if cv else 0), .12 if k != 'g' else .38, .07, CEIL, ang, 0, name='go-tran')   # đoạn cong: nối chồng, hết khe tam giác đen
+                cv = x0 != x1 and y0 != y1; jz2 = ((len(CG) % 3) * .004 if cv else 0); box(c.x, c.y, H - .14 - jz2, L + (.12 if cv else 0), .12 if k != 'g' else .38, .07, CEIL, ang, 0, name='go-tran')   # đoạn cong: nối chồng, hết khe tam giác đen
                 c2 = (a + b) / 2 + nv * sd * (th / 2 + (.13 if k != 'g' else .38)); box(c2.x, c2.y, H - .07, L + (.04 if cv else 0), .02, .02, COVE, ang, 0, name='led')
         if LUX and k == 'g' and L > 1.4:   # rèm nhung dày 2 đầu
             for (r0, r1) in ((.0, .5), (L - .5, L)):
