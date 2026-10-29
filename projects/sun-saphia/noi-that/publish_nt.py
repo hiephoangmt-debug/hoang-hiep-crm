@@ -20,7 +20,7 @@ for name in sorted(NEW | OLD):
         if shot == 'top' and name.startswith('G'): cap = 'Mặt bằng 3D có sân vườn'
         if not os.path.exists(f) or os.path.getsize(f) < 20000:   # chưa render lại: giữ ảnh đã đăng trước đó (nếu có)
             fn0 = 'sp-%s-%s.webp' % (name.lower(), shot)
-            if os.path.exists(OUT + '/' + fn0): items.append([fn0, cap])
+            if os.path.exists(OUTC + '/' + fn0): items.append([fn0, cap])   # trang dùng bộ ảnh sạch (noi-that-crm)
             continue
         if shot == 'plus' and L.startswith('2PN'): cap = 'Phòng ngủ 2'
         if shot == 'living2' and L.startswith('STU'): cap = 'Nhìn về bếp & cửa vào'
