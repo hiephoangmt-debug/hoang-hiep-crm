@@ -1050,7 +1050,10 @@ function placeWM(){ var W=innerWidth,H=innerHeight, w=Math.min(W*.72,480), h=w/4
 placeWM(); window.addEventListener('resize',placeWM); setTimeout(placeWM,800);
 if(true){ wm.visible=false;   // tạm thời ẩn số điện thoại ở mọi bản
     // xem trong CRM nội bộ: không chữ chìm, không số điện thoại / Zalo
-  var ct=document.querySelector('.contact'); if(ct) [].slice.call(ct.childNodes).forEach(function(n){ if(!(n.classList&&n.classList.contains('compass'))) ct.removeChild(n); }); }
+  var ct=document.querySelector('.contact'); if(ct){ [].slice.call(ct.childNodes).forEach(function(n){ if(!(n.classList&&n.classList.contains('compass'))) ct.removeChild(n); });
+    var hl=document.createElement('div'); hl.className='hl'; hl.innerHTML='<span>400 m ra biển Mỹ Khê</span><b>Studio từ ~1,8 tỷ*</b><span>Thanh toán 25% đến khi nhận nhà</span><i>*giá tham khảo dự kiến, chờ CĐT công bố</i>';
+    ct.insertBefore(hl,ct.firstChild);
+    var hs=document.createElement('style'); hs.textContent='.contact .hl span{display:block;font-size:12px}.contact .hl i{display:block;font-size:10px;opacity:.7;font-style:normal}@media (max-width:760px){.contact .hl span:last-of-type,.contact .hl i{display:none}}'; document.head.appendChild(hs); } }
 // rooftop signage: HM logo + phone on the crown, facing Trường Sa (east) and Nguyễn Đức Thuận (north)
 var sgC=document.createElement('canvas'); sgC.width=1024; sgC.height=256; (function(g){ g.fillStyle='#0b2a3d'; g.fillRect(0,0,1024,256); drawLogo(g,16,16,224);
   g.fillStyle='#d8bd88'; g.font='800 92px "Be Vietnam Pro",Arial,sans-serif'; g.textBaseline='middle'; g.fillText('SUN SAPHIA',270,92); g.fillStyle='#ffffff'; g.font='700 64px "Be Vietnam Pro",Arial,sans-serif'; g.fillText('RESIDENCE',272,190); })(sgC.getContext('2d'));
