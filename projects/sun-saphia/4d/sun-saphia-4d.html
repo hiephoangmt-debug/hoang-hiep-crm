@@ -1051,7 +1051,7 @@ placeWM(); window.addEventListener('resize',placeWM); setTimeout(placeWM,800);
 if(true){ wm.visible=false;   // tạm thời ẩn số điện thoại ở mọi bản
     // xem trong CRM nội bộ: không chữ chìm, không số điện thoại / Zalo
   var ct=document.querySelector('.contact'); if(ct){ [].slice.call(ct.childNodes).forEach(function(n){ if(!(n.classList&&n.classList.contains('compass'))) ct.removeChild(n); });
-    var hl=document.createElement('div'); hl.className='hl'; hl.innerHTML='<span>400 m ra biển Mỹ Khê</span><b>Studio từ ~1,8 tỷ*</b><span>Thanh toán 25% đến khi nhận nhà</span><i>*giá tham khảo dự kiến, chờ CĐT công bố</i>';
+    var hl=document.createElement('div'); hl.className='hl'; hl.innerHTML='<span>Studio 30 m² · tầng 15</span><b>2,13 – 2,85 tỷ*</b><span>Trả 25% ~533 triệu đến khi nhận nhà</span><i>*giá tham khảo CĐT, chưa VAT, chờ công bố chính thức</i>';
     ct.insertBefore(hl,ct.firstChild);
     var hs=document.createElement('style'); hs.textContent='.contact .hl span{display:block;font-size:12px}.contact .hl i{display:block;font-size:10px;opacity:.7;font-style:normal}@media (max-width:760px){.contact .hl span:last-of-type,.contact .hl i{display:none}}'; document.head.appendChild(hs); } }
 // rooftop signage: HM logo + phone on the crown, facing Trường Sa (east) and Nguyễn Đức Thuận (north)
