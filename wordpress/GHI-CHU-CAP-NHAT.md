@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.46** + plugin Hoàng Hiệp CRM **2.20.96**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.47** + plugin Hoàng Hiệp CRM **2.20.97**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.47 + plugin 2.20.97: giá dự kiến Sun Saphia (29/10/2026)
+
+- Trang Sun Saphia Residence: mục mới "Giá dự kiến tầng 15" (sau "Vì sao nên xuống tiền", có trong mục lục): studio 30 m² dãy mặt biển 2,85 tỷ, cánh bên 2,37 tỷ, dãy phía sau 2,13 tỷ – giá có vay, chưa VAT & KPBT, chưa trừ chiết khấu; hỗ trợ lãi suất tới 24 tháng, không early key, sự kiện bán hàng dự kiến 28/11. Thẻ "Chủ đầu tư hỗ trợ lãi suất" ghi "lên tới 24 tháng".
+- Bài "Giá Sun Saphia Residence bao nhiêu?" (rev 3): thêm bảng giá dự kiến, chính sách, lịch sự kiện, giá tham khảo căn hộ mặt biển theo tài liệu CĐT 28/10; tiêu đề/mô tả/FAQ mới. Web tự cập nhật bài qua mục tự đăng bài (nếu bài chưa sửa tay).
+- Không đăng mã căn, tên đại lý, ảnh buổi họp.
 
 ## Có gì mới – plugin 2.20.96: trang Thống kê đầu tư lướt mượt (29/10/2026)
 

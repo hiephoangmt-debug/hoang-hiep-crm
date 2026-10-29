@@ -26,21 +26,43 @@ function hh_posts_sun_saphia_dot_2( $posts ) {
 	/* ---------------- 22/10 – Giá ---------------- */
 	$posts[] = array(
 		'slug'     => 'gia-sun-saphia-residence-bao-nhieu',
-		'title'    => 'Giá Sun Saphia Residence bao nhiêu? Ước tính tổng tiền studio, 1PN+1, 2PN (cập nhật 10/2026)',
-		'excerpt'  => 'Giá Sun Saphia Residence chưa được Sun Group công bố; tin rao đang ghi khoảng 64,5 – 83 triệu/m². Bảng ước tính tổng tiền từng loại căn và cách đọc giá cho đúng.',
+		'title'    => 'Giá Sun Saphia Residence bao nhiêu? Giá dự kiến studio tầng 15 từ 2,13 tỷ (cập nhật 28/10/2026)',
+		'excerpt'  => 'Giá dự kiến (rumor) Sun Saphia Residence ngày 28/10/2026: studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ (giá có vay, chưa VAT, chưa KPBT), hỗ trợ lãi suất tới 24 tháng. Cách đọc giá và so sánh căn hộ ven biển.',
 		'keyword'  => 'giá Sun Saphia Residence',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'bảng giá Sun Saphia', 'giá căn hộ Sun Saphia Đà Nẵng', 'giá studio Sun Saphia' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-22 15:00',
-		'rev'      => 2, // 23/10: thêm giá tham khảo trong tài liệu chủ đầu tư, pháp lý 50 năm.
+		'rev'      => 3, // 28/10: giá dự kiến (rumor) studio tầng 15, chính sách hỗ trợ lãi suất 24 tháng, sự kiện bán hàng 28/11.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Sun Saphia Residence', 'Giá căn hộ Đà Nẵng' ),
 		'image'    => 'plugin:img/tin-tuc/gia-sun-saphia-residence.jpg',
 		'content'  => <<<HTML
-<p><strong>Giá Sun Saphia Residence</strong> là câu hỏi Hoàng Hiệp nhận nhiều nhất từ khi dự án nhận giữ chỗ. Đến ngày đăng bài, Sun Group <strong>chưa công bố bảng giá chính thức</strong>. Bài này tổng hợp mức giá đang xuất hiện trên tin rao, ước tính tổng tiền từng loại căn và chỉ ra những điểm cần hỏi khi nhận bảng giá thật của {$saphia}.</p>
+<p><strong>Giá Sun Saphia Residence</strong> là câu hỏi Hoàng Hiệp nhận nhiều nhất từ khi dự án nhận giữ chỗ. Ngày <strong>28/10/2026</strong>, chủ đầu tư đưa ra <strong>giá dự kiến (giá "rumor") cho một số căn studio tầng 15</strong>; bảng giá chính thức từng căn sẽ có khi mở bán. Bài này cập nhật mức giá dự kiến đó, cách đọc giá cho đúng và so sánh với các dự án ven biển khác của {$saphia}.</p>
 <!--hh-featured-->
-<h2>Giá Sun Saphia Residence trên tin rao</h2>
-<p>Các trang tổng hợp tin đăng ghi nhận mức giá khác nhau giữa các tin, khoảng <strong>64,5 – 83 triệu/m²</strong>, nhiều tin để "giá thỏa thuận". Đây là giá người đăng tự ghi, chưa phải giá của chủ đầu tư, và chưa rõ đã gồm VAT, phí bảo trì hay chưa.</p>
+<h2>Giá dự kiến studio tầng 15 (28/10/2026)</h2>
+<table>
+<thead><tr><th>Vị trí căn studio tầng 15</th><th>Thông thủy</th><th>Giá dự kiến (có vay)</th><th>Quy ra/m² thông thủy</th></tr></thead>
+<tbody>
+<tr><td>Dãy mặt biển – view biển trực diện</td><td>30 m²</td><td><strong>2,85 tỷ</strong></td><td>khoảng 95 triệu/m²</td></tr>
+<tr><td>Cánh bên – hông tòa</td><td>30 m²</td><td><strong>2,37 tỷ</strong></td><td>khoảng 79 triệu/m²</td></tr>
+<tr><td>Dãy phía sau – không hướng biển</td><td>30 m²</td><td><strong>2,13 tỷ</strong></td><td>khoảng 71 triệu/m²</td></tr>
+</tbody>
+</table>
+<ul>
+<li>Đây là <strong>giá dự kiến</strong> áp dụng khi mua theo <strong>phương án có vay ngân hàng</strong>, chưa phải giá chốt.</li>
+<li>Giá <strong>chưa gồm VAT</strong> và <strong>kinh phí bảo trì 2%</strong>, <strong>chưa trừ chiết khấu</strong> đặt chỗ sớm.</li>
+<li>Bàn giao <strong>hoàn thiện cơ bản</strong>.</li>
+<li>Cột giá/m² do Hoàng Hiệp tự tính (chia cho 30 m² thông thủy) để dễ so sánh.</li>
+</ul>
+<p>Chênh lệch giữa căn mặt biển và căn phía sau cùng tầng khoảng <strong>0,7 tỷ</strong> – view biển là yếu tố quyết định giá lớn nhất ở Sun Saphia.</p>
+<h2>Chính sách bán hàng và lịch sự kiện</h2>
+<ul>
+<li><strong>Hỗ trợ lãi suất lên tới 24 tháng</strong>.</li>
+<li><strong>Không có chương trình nhận nhà sớm (early key)</strong>; bàn giao dự kiến tháng 11/2028.</li>
+<li>Các sự kiện giới thiệu dự án tại Đà Nẵng dự kiến ngày 01/11 và 15/11/2026; <strong>sự kiện bán hàng của chủ đầu tư dự kiến 28/11/2026</strong>.</li>
+</ul>
+<h2>Giá Sun Saphia Residence trên tin rao (trước 28/10)</h2>
+<p>Trước khi có giá dự kiến, các trang tổng hợp tin đăng ghi nhận mức giá khác nhau giữa các tin, khoảng <strong>64,5 – 83 triệu/m²</strong>, nhiều tin để "giá thỏa thuận". Đây là giá người đăng tự ghi, chưa phải giá của chủ đầu tư, và chưa rõ đã gồm VAT, phí bảo trì hay chưa.</p>
 <h2>Ước tính tổng tiền theo loại căn</h2>
 <p>Lấy khoảng giá tin rao nhân với diện tích công bố (chưa rõ diện tích thông thủy hay tim tường):</p>
 <table>
@@ -55,6 +77,7 @@ function hh_posts_sun_saphia_dot_2( $posts ) {
 <h2>Giá tham khảo trong tài liệu chủ đầu tư (10/2026)</h2>
 <p>Trong bài toán cho thuê của tài liệu giới thiệu dự án, chủ đầu tư dùng <strong>giá tham khảo studio 30 m² khoảng 3 tỷ</strong> (khoảng 100 triệu/m²) và <strong>căn 1PN 50 m² khoảng 4,5 tỷ</strong> (khoảng 90 triệu/m²). Đây là con số minh họa cho bài toán, chưa phải bảng giá – nhưng cho thấy giá mở bán nhiều khả năng cao hơn mức tin rao 64,5 – 83 triệu/m².</p>
 <h2>So với căn hộ ven biển khác</h2>
+<p>Tài liệu giới thiệu ngày 28/10/2026 của chủ đầu tư đưa mức <strong>giá tham khảo căn hộ mặt biển trên thị trường Đà Nẵng</strong>: studio khoảng <strong>5,x – 6,x tỷ</strong>, căn 1PN khoảng <strong>7,x – 9,x tỷ</strong>, căn 2PN khoảng <strong>12,x – 20,x tỷ</strong>. So với mức này, studio Sun Saphia tầng 15 giá dự kiến 2,13 – 2,85 tỷ thấp hơn nhiều về tổng tiền, chủ yếu vì diện tích nhỏ (30 m²).</p>
 <p>Tài liệu bán hàng của chủ đầu tư dẫn giá chuyển nhượng tham khảo studio tại The Soleil khoảng 4,6 – 5,4 tỷ, Nobu Đà Nẵng khoảng 6,3 – 6,4 tỷ. Studio Sun Costa Residence giá bán 2025 khoảng 2,45 – 2,95 tỷ (chưa VAT). Nếu giá Sun Saphia nằm trong khoảng tin rao, studio Sun Saphia thuộc nhóm tổng tiền dễ tiếp cận nhất trong các căn hộ sát biển. Xem thêm <a href="/studio-ven-bien-da-nang-gia-mua-gia-thue-2026/">giá studio ven biển Đà Nẵng 2026</a>.</p>
 <h2>5 câu cần hỏi khi nhận bảng giá</h2>
 <ol>
@@ -68,16 +91,17 @@ function hh_posts_sun_saphia_dot_2( $posts ) {
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá Sun Saphia Residence: ước tính studio, 1PN+1, 2PN',
-			'desc'      => 'Giá Sun Saphia Residence chưa công bố, tin rao khoảng 64,5 – 83 triệu/m². Ước tính studio 1,9 – 2,6 tỷ, 1PN+1, 2PN và 5 câu cần hỏi khi nhận bảng giá.',
+			'seo_title' => 'Giá Sun Saphia Residence: studio tầng 15 từ 2,13 tỷ',
+			'desc'      => 'Giá dự kiến Sun Saphia Residence 28/10/2026: studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ (có vay, chưa VAT, KPBT), hỗ trợ lãi suất 24 tháng, mở bán dự kiến 28/11.',
 			'points'    => array(
-				'Chủ đầu tư chưa công bố bảng giá chính thức (10/2026)',
-				'Tin rao ghi khoảng 64,5 – 83 triệu/m² – chưa phải giá chủ đầu tư',
-				'Ước tính studio 30 – 31 m² khoảng 1,9 – 2,6 tỷ',
+				'Giá dự kiến 28/10/2026: studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ (phương án có vay)',
+				'Chưa gồm VAT, kinh phí bảo trì 2%, chưa trừ chiết khấu đặt chỗ sớm',
+				'Hỗ trợ lãi suất lên tới 24 tháng; sự kiện bán hàng dự kiến 28/11/2026',
 			),
 			'faq'       => array(
-				array( 'Giá Sun Saphia Residence bao nhiêu một m²?', 'Chưa có bảng giá chính thức. Tin rao 10/2026 ghi khoảng 64,5 – 83 triệu/m²; bài toán cho thuê của chủ đầu tư dùng giá tham khảo studio 30 m² khoảng 3 tỷ, 1PN 50 m² khoảng 4,5 tỷ.' ),
-				array( 'Studio Sun Saphia Residence giá bao nhiêu?', 'Ước tính theo giá tin rao, studio 30 – 31 m² khoảng 1,9 – 2,6 tỷ; giá thật phụ thuộc tầng, view và chính sách khi mở bán.' ),
+				array( 'Studio Sun Saphia Residence giá bao nhiêu?', 'Giá dự kiến ngày 28/10/2026 cho studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ tùy vị trí (căn mặt biển cao nhất), theo phương án có vay, chưa gồm VAT và kinh phí bảo trì, chưa trừ chiết khấu.' ),
+				array( 'Giá Sun Saphia Residence bao nhiêu một m²?', 'Quy từ giá dự kiến studio tầng 15, khoảng 71 – 95 triệu/m² thông thủy (Hoàng Hiệp tự tính). Bảng giá chính thức từng căn có khi mở bán.' ),
+				array( 'Sun Saphia Residence có hỗ trợ lãi suất không?', 'Có, chính sách đợt giới thiệu hỗ trợ lãi suất lên tới 24 tháng; không có chương trình nhận nhà sớm (early key).' ),
 			),
 		),
 		'sources'  => array(),
