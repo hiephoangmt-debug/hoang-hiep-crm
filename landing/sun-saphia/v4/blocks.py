@@ -291,7 +291,7 @@ def popup():
             'document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-pop]");if(b){e.preventDefault();op(b.getAttribute("data-interest")||"");}'
             'else if(e.target===p||e.target.closest(".lpx"))cl();});document.addEventListener("keydown",function(e){if(e.key==="Escape")cl();});'
             'function once(k){try{if(sessionStorage.getItem(k))return false;sessionStorage.setItem(k,1);}catch(x){}return true;}'
-            /* Không chồng popup: khách đã để số thì thôi; đang có ô mở khóa 4D hoặc khung chat thì đợi */
+            # Không chồng popup: khách đã để số thì thôi; đang có ô mở khóa 4D hoặc khung chat thì đợi
             'function lead(){try{for(var i=0;i<localStorage.length;i++)if(/^(hhc_sent_|ss4d_ok)/.test(localStorage.key(i)))return true}catch(x){}return false}'
             'function bz(){return document.body.classList.contains("ss4d-gate")||!!document.querySelector(".hhc-b.on")}'
             'function auto(){if(shown||lead()||document.querySelector(".hhc-ok"))return;if(bz()){setTimeout(auto,10000);return}if(once("ssPopT"))op("tự mở sau 45 giây");}setTimeout(auto,45000);'
