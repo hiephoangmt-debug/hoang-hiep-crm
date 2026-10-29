@@ -481,6 +481,14 @@ var T=new THREE.Group(); T.position.set(-47,0,39); world.add(T);
 var FL=[]; var y=0; for(var f=1;f<=30;f++){FL[f]=y; y+= f===1?7:f===2?6:(f===30?6:3.5);} var TOP=y;   // tầng 1 cao 7 m, tầng 2 cao 6 m, tầng 3–29 3,5 m, tầng 30 cao 6 m → mái ≈113,5 m
 var glass=M(0x5f86a6,{roughness:.06,metalness:.75,envMapIntensity:1.15,emissive:0xffc27a,emissiveIntensity:0});
 var glassTop=M(0x7aa0bd,{roughness:.05,metalness:.7,envMapIntensity:1.2,emissive:0xffd29a,emissiveIntensity:0});
+// buổi tối: ô cửa sáng đèn ngẫu nhiên theo từng căn (≈ 3 m × 1 tầng 3,5 m), tông vàng ấm / trắng
+(function(){ var cv=document.createElement('canvas'); cv.width=cv.height=512; var g=cv.getContext('2d'); g.fillStyle='#000'; g.fillRect(0,0,512,512);
+  var rs=7; function rnd2(){ rs=(rs*16807)%2147483647; return rs/2147483647; }
+  for(var r=0;r<16;r++) for(var c=0;c<16;c++){ var v=rnd2(); if(v<.28) continue; var warm=rnd2()<.7, b=.55+.45*rnd2();
+    g.fillStyle=warm?'rgba(255,'+Math.round(196*b+40)+','+Math.round(120*b)+','+b+')':'rgba('+Math.round(235*b)+','+Math.round(240*b)+',255,'+b+')';
+    g.fillRect(c*32+2,r*32+3,28,22); }
+  var t=new THREE.CanvasTexture(cv); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.repeat.set(1/48,1/56); t.encoding=THREE.sRGBEncoding;
+  glass.emissiveMap=t; glass.emissive.set(0xffffff); glassTop.emissiveMap=t; glassTop.emissive.set(0xffffff); glass.needsUpdate=glassTop.needsUpdate=true; })();
 var white=M(0xf4f2ec,{roughness:.45,metalness:.05,envMapIntensity:.4});
 var bronze=M(0xa8724a,{roughness:.42,metalness:.45,envMapIntensity:.7});
 var beige=M(0xdcc8a6,{roughness:.6,metalness:.05,envMapIntensity:.4});
@@ -745,7 +753,7 @@ function setTime(h){
   skyU.sunDir.value.copy(dir); skyU.sunCol.value.copy(lerpC(C(0xfff3d8),C(0xff9a4a),low)).multiplyScalar(1-night);
   scene.fog.color.copy(hor);
   seaMat.color.copy(lerpC(lerpC(C(0x1b8fa8),C(0x3a5d84),low),C(0x0c1a30),night));
-  glass.emissiveIntensity=night*.55;
+  glass.emissiveIntensity=night*1.8; glassTop.emissiveIntensity=night*1.8;
   renderer.toneMappingExposure=.74-.16*night;
   var hh=Math.floor(h), mm=Math.round((h-hh)*60/5)*5; if(mm===60){hh++;mm=0;}
   hourOut.textContent=(hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm;
@@ -881,7 +889,7 @@ var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false);
   if(r) viewFromUnit(r); else bView0(); };
 
 /* ---------- bấm vào căn trên mặt bằng tầng: hiện thẻ căn, mở mặt bằng & 3D căn, view từ đúng căn ---------- */
-var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/1d6b44b01e5052d334409e12856674a2245f42ea/projects/sun-saphia/chon-can/chon-can-app.html';
+var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/2228534269a8acc37f5a3449ea0aa433def564ce/projects/sun-saphia/chon-can/chon-can-app.html';
 var unitEye=null;
 // [mã, loại, u0,u1, v0,v1, hướng mặt kính chính] – cùng số liệu với công cụ chọn căn
 var UNITS=[['11','2PN',0,11.1,0,8.1,'E'],['12','STU',11.19,14.99,0,9.1,'E'],['12A','STU',14.99,18.8,0,9.1,'E'],['12B','1PN',18.8,25.02,0,9.1,'E'],['15','STU',25.02,28.82,0,9.1,'E'],['16','STU',28.82,32.64,0,9.1,'E'],['17','1PN',32.64,38.91,0,9.1,'E'],
