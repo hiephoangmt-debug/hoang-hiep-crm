@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.47** + plugin Hoàng Hiệp CRM **2.20.97**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.47** + plugin Hoàng Hiệp CRM **2.20.98**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.98: bài Phân luồng cầu Hòa Xuân từ 31/10 (29/10/2026)
+
+- Bài mới (Hạ tầng & quy hoạch): /phan-luong-giao-thong-cau-hoa-xuan-tu-31-10-2026/ – thời gian, khu vực hạn chế, xe bị cấm (tải > 2,5 tấn, khách từ 16 chỗ, container 4h–23h), tuyến thay thế đi cảng Tiên Sa, cấm dừng đỗ, nội dung thi công, ảnh hưởng BĐS khu Nam (nhận định riêng), FAQ. Ảnh đại diện tự vẽ (không đăng lại sơ đồ phân luồng gốc).
 
 ## Có gì mới – giao diện 2.15.47 + plugin 2.20.97: giá dự kiến Sun Saphia (29/10/2026)
 
