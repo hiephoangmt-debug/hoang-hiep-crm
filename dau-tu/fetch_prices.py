@@ -712,10 +712,16 @@ CHOTOT_REGION = 3017  # Đà Nẵng
 CHOTOT_CATS = {1040: "Đất", 1020: "Nhà ở", 1010: "Căn hộ"}
 
 
-def _stats(vals):
-    v = sorted(vals)
+def _stats(items, links=False):
+    """items: [(giá/m², tin)] -> trung vị, khoảng 25–75%, thấp nhất, cao nhất (kèm tin nếu links)."""
+    items = sorted(items, key=lambda x: x[0])
+    v = [x[0] for x in items]
     q = lambda p: v[min(len(v) - 1, int(round(p * (len(v) - 1))))]  # noqa: E731
-    return {"n": len(v), "med": round(q(0.5), 1), "p25": round(q(0.25), 1), "p75": round(q(0.75), 1)}
+    out = {"n": len(v), "med": round(q(0.5), 1), "p25": round(q(0.25), 1), "p75": round(q(0.75), 1),
+           "min": round(v[0], 1), "max": round(v[-1], 1)}
+    if links:
+        out["tin_min"], out["tin_max"] = items[0][1], items[-1][1]
+    return out
 
 
 def fetch_listings():
@@ -736,21 +742,23 @@ def fetch_listings():
                 ppm, size = a.get("price_million_per_m2"), a.get("size") or 0
                 if not ppm or size < 10 or not (2 <= ppm <= 1500):
                     continue  # bỏ tin thiếu diện tích / giá vô lý
-                rows.append((kind, a.get("area_name") or "Khác", a.get("ward_name") or "", float(ppm)))
+                tin = {"t": (a.get("subject") or "")[:90], "gia": a.get("price"), "dt": size,
+                       "p": a.get("ward_name") or "", "u": f"https://www.nhatot.com/{a.get('list_id')}.htm"}
+                rows.append((kind, a.get("area_name") or "Khác", a.get("ward_name") or "", float(ppm), tin))
             o += len(ads)
             time.sleep(0.4)
     if len(rows) < 100:
         raise ValueError(f"quá ít tin hợp lệ ({len(rows)})")
     by_q, by_p, by_k = {}, {}, {}
-    for kind, quan, phuong, ppm in rows:
-        by_k.setdefault(kind, []).append(ppm)
-        by_q.setdefault(kind, {}).setdefault(quan, []).append(ppm)
+    for kind, quan, phuong, ppm, tin in rows:
+        by_k.setdefault(kind, []).append((ppm, tin))
+        by_q.setdefault(kind, {}).setdefault(quan, []).append((ppm, tin))
         if phuong:
-            by_p.setdefault(kind, {}).setdefault(f"{quan}|{phuong}", []).append(ppm)
+            by_p.setdefault(kind, {}).setdefault(f"{quan}|{phuong}", []).append((ppm, tin))
     return {
         "tong": len(rows),
-        "toan_tp": {k: _stats(v) for k, v in by_k.items()},
-        "quan": {k: {q: _stats(v) for q, v in d.items() if len(v) >= 5} for k, d in by_q.items()},
+        "toan_tp": {k: _stats(v, True) for k, v in by_k.items()},
+        "quan": {k: {q: _stats(v, True) for q, v in d.items() if len(v) >= 5} for k, d in by_q.items()},
         "phuong": {k: {q: _stats(v) for q, v in d.items() if len(v) >= 5} for k, d in by_p.items()},
     }
 
@@ -931,7 +939,7 @@ def main():
     rao = load(LISTINGS_FILE, {})
 
     def gia_rao():
-        if rao.get("ngay") == today():
+        if rao.get("ngay") == today() and all("max" in v for v in (rao.get("toan_tp") or {}).values()):
             log("   đã lấy hôm nay")
             return
         res = fetch_listings()

@@ -286,7 +286,7 @@ section.far canvas { visibility: hidden; }
 
     <div class="card" style="margin-top:12px" id="raoCard">
       <h3>Giá rao bán theo tin đăng – Chợ Tốt Nhà (cập nhật hằng ngày)</h3>
-      <p class="note" style="margin:0 0 8px">Bot đọc toàn bộ tin rao bán ở Đà Nẵng mỗi ngày, tính <b>giá rao/m² trung vị</b> (một nửa số tin rẻ hơn, một nửa đắt hơn) theo quận/phường; bỏ tin thiếu diện tích hoặc giá vô lý. “Khoảng phổ biến” là giá của nửa số tin ở giữa. Đây là giá người bán đăng, thường cao hơn giá chốt.</p>
+      <p class="note" style="margin:0 0 8px">Bot đọc toàn bộ tin rao bán ở Đà Nẵng mỗi ngày, tính <b>giá rao/m² trung vị</b> (một nửa số tin rẻ hơn, một nửa đắt hơn) theo quận/phường; bỏ tin thiếu diện tích hoặc giá vô lý. “Khoảng phổ biến” là giá của nửa số tin ở giữa. Thấp nhất / cao nhất là 1 tin rao cụ thể – bấm số để mở tin trên Chợ Tốt và tự kiểm tra (có thể là tin rao ảo hoặc nhập sai diện tích). Đây là giá người bán đăng, thường cao hơn giá chốt.</p>
       <div class="toolbar-in"><div class="seg" id="raoKinds" role="group" aria-label="Loại bất động sản"></div></div>
       <div class="viewbar"><div class="seg" id="raoView" role="group" aria-label="Xem theo"></div></div>
       <div class="stats" id="raoStats"></div>
@@ -1280,13 +1280,18 @@ function renderRao() {
   viewSeg($('raoView'), raoView, (v) => { raoView = v; renderRao(); });
   const city = RAO.toan_tp[raoKind] || {};
   const qs = Object.entries(RAO.quan[raoKind] || {}).map(([q, st]) => ({ q, ...st })).sort((a, b) => b.med - a.med);
+  // link tới tin rao thấp nhất / cao nhất để người xem tự kiểm tra
+  const tinLink = (v, tin) => v == null ? '–' : tin && /^https:\/\/www\.nhatot\.com\//.test(tin.u)
+    ? `<a class="link" href="${esc(tin.u)}" target="_blank" rel="noopener" title="${esc(tin.t)} – ${tin.gia ? fmt(tin.gia / 1e9, 2) + ' tỷ' : ''}, ${fmt(tin.dt)} m²${tin.p ? ', ' + esc(tin.p) : ''}">${fmt(v, 1)}</a>` : fmt(v, 1);
   $('raoStats').innerHTML = `<span>Toàn thành phố: <b>${fmt(city.med, 1)} tr/m²</b> (khoảng ${fmt(city.p25, 0)}–${fmt(city.p75, 0)})</span>
+    ${city.min != null ? `<span>Thấp nhất: <b>${tinLink(city.min, city.tin_min)}</b> · cao nhất: <b>${tinLink(city.max, city.tin_max)}</b> tr/m²</span>` : ''}
     <span>${fmt(city.n)} tin ${esc(raoKind.toLowerCase())} · tổng ${fmt(RAO.tong)} tin hợp lệ</span><span>Nguồn: <b>${esc(RAO.nguon)}</b>, ngày ${dvn(RAO.ngay)}</span>`;
   if (raoView === 'now') {
     const mx = qs.length ? qs[0].med : 0;
     $('tblRao').classList.remove('hm');
-    $('tblRao').innerHTML = '<thead><tr><th>Quận/huyện</th><th>Giá rao trung vị (tr/m²)</th><th>Khoảng phổ biến</th><th>Số tin</th></tr></thead><tbody>' +
-      qs.map(r => `<tr class="pick" data-q="${esc(r.q)}" aria-selected="${r.q === raoQuan}"><td><b>${esc(r.q)}</b></td><td>${r.med === mx ? `<b>${fmt(r.med, 1)}</b>` : fmt(r.med, 1)}</td><td>${fmt(r.p25, 0)}–${fmt(r.p75, 0)}</td><td>${fmt(r.n)}</td></tr>`).join('') + '</tbody>';
+    $('tblRao').innerHTML = '<thead><tr><th>Quận/huyện</th><th>Trung vị (tr/m²)</th><th>Thấp nhất</th><th>Cao nhất</th><th>Khoảng phổ biến</th><th>Số tin</th></tr></thead><tbody>' +
+      qs.map(r => `<tr class="pick" data-q="${esc(r.q)}" aria-selected="${r.q === raoQuan}"><td><b>${esc(r.q)}</b></td><td>${r.med === mx ? `<b>${fmt(r.med, 1)}</b>` : fmt(r.med, 1)}</td><td>${tinLink(r.min, r.tin_min)}</td><td>${tinLink(r.max, r.tin_max)}</td><td>${fmt(r.p25, 0)}–${fmt(r.p75, 0)}</td><td>${fmt(r.n)}</td></tr>`).join('') + '</tbody>';
+    $('tblRao').querySelectorAll('a.link').forEach(a => a.onclick = (e) => e.stopPropagation());
     $('tblRao').querySelectorAll('tr.pick').forEach(t => t.onclick = () => { raoQuan = t.dataset.q; renderRao(); });
   } else {
     const hist = RAO.lich_su || {};
@@ -1301,8 +1306,8 @@ function renderRao() {
   $('raoQuan').innerHTML = quans.map(q => `<option${q === raoQuan ? ' selected' : ''}>${esc(q)}</option>`).join('');
   $('raoQuan').onchange = () => { raoQuan = $('raoQuan').value; renderRao(); };
   const pl = ph.filter(r => r.quan === raoQuan).sort((a, b) => b.med - a.med);
-  $('tblRaoP').innerHTML = pl.length ? '<thead><tr><th>Phường/xã</th><th>Trung vị (tr/m²)</th><th>Khoảng phổ biến</th><th>Số tin</th></tr></thead><tbody>' +
-    pl.map(r => `<tr><td><b>${esc(r.p)}</b></td><td>${fmt(r.med, 1)}</td><td>${fmt(r.p25, 0)}–${fmt(r.p75, 0)}</td><td>${fmt(r.n)}</td></tr>`).join('') + '</tbody>'
+  $('tblRaoP').innerHTML = pl.length ? '<thead><tr><th>Phường/xã</th><th>Trung vị (tr/m²)</th><th>Thấp nhất</th><th>Cao nhất</th><th>Khoảng phổ biến</th><th>Số tin</th></tr></thead><tbody>' +
+    pl.map(r => `<tr><td><b>${esc(r.p)}</b></td><td>${fmt(r.med, 1)}</td><td>${r.min == null ? '–' : fmt(r.min, 1)}</td><td>${r.max == null ? '–' : fmt(r.max, 1)}</td><td>${fmt(r.p25, 0)}–${fmt(r.p75, 0)}</td><td>${fmt(r.n)}</td></tr>`).join('') + '</tbody>'
     : '<tr><td class="empty">Chưa đủ tin (cần ít nhất 5 tin mỗi phường).</td></tr>';
 }
 function renderBds(s) {
