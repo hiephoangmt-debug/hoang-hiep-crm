@@ -186,7 +186,7 @@ body{margin:0;background:var(--bg);font-family:var(--font);color:var(--navy);-we
 <script>
 (function(){
 var MODEL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/67f0f6387af8413615066eab1405e8136417a257/projects/sun-saphia/4d/sun-saphia-4d.html';
-var FLOOR_TEX='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d2c068bdf94af0038c110135328a496209367d34/projects/sun-saphia/images/mat-bang-tang-4d.webp';
+var FLOOR_TEX='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@fc9b82144fb625185ad7102d11d00039c66a8cac/projects/sun-saphia/images/mat-bang-tang-4d.webp';
 var COL={'STU':'#E86A78','1PN+1':'#4FB3E0','2PN':'#F2C14E'};
 var NAME={'STU':'Studio','1PN+1':'1PN+1','2PN':'2PN'};
 var TINT={'STU':'#f7c1c6','1PN+1':'#b5def2','2PN':'#f9e19c'}, LIGHT={'STU':'#fdebed','1PN+1':'#e6f4fb','2PN':'#fdf3d4'};   // màu sàn theo loại căn (như chú thích CĐT)
@@ -897,7 +897,7 @@ function init3(){
   size(); window.addEventListener('resize',size); R3.size=size;
   (function loop(){ if(!R3||R3.r!==r) return; requestAnimationFrame(loop); ctl.update(); r.render(sc,cam); })();
 }
-var FLOOR_IMG='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@7a29e8b47d1eee7b39c78ffbf078cc5906cea125/projects/sun-saphia/images/';
+var FLOOR_IMG='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@fc9b82144fb625185ad7102d11d00039c66a8cac/projects/sun-saphia/images/';
 // đỉnh đa giác có góc bo (cung tròn) → dãy điểm
 function roundPts(P,R){ var n=P.length, o=[]; R=R||{};
   for(var i=0;i<n;i++){ var p=P[i], r=R[i]; if(!r){ o.push(p); continue; } var rx=r.length?r[0]:r, ry=r.length?r[1]:r;
