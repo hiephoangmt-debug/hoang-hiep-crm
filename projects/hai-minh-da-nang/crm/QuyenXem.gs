@@ -10,12 +10,12 @@
 var QX_SHEET = 'Quyền xem';
 // Google OAuth Client ID (loại Web) dùng cho nút "Đăng nhập bằng Google" – dán vào đây hoặc đặt Script property GOOGLE_CLIENT_ID
 var QX_GOOGLE_CLIENT_ID = '';
-var QX_XEM_URL = 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/e0117acf451b67f7100612bece8971c5f315cac4/projects/sun-saphia/xem/xem-du-an.html';
+var QX_XEM_URL = 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/c4236934762c2fc01901a0352ff9d71bcc004a49/projects/sun-saphia/xem/xem-du-an.html';
 var QX_LINKS = {
-  'Xem dự án (4D + chọn căn + 3D cả tầng, đăng nhập 1 lần)': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/e0117acf451b67f7100612bece8971c5f315cac4/projects/sun-saphia/xem/xem-du-an.html',
-  '4D nội bộ': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/109518f39dc6efb2f7ea761f1c8bb529eede989e/projects/sun-saphia/4d/sun-saphia-4d.html?crm',
-  '4D – mặt bằng tầng': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/109518f39dc6efb2f7ea761f1c8bb529eede989e/projects/sun-saphia/4d/sun-saphia-4d.html?crm&plan&f=18',
-  'Chọn căn (mặt bằng & 3D từng căn)': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/88fda2f1c3415299c45f2ffb8662072998def865/projects/sun-saphia/chon-can/chon-can-app.html'
+  'Xem dự án (4D + chọn căn + 3D cả tầng, đăng nhập 1 lần)': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/c4236934762c2fc01901a0352ff9d71bcc004a49/projects/sun-saphia/xem/xem-du-an.html',
+  '4D nội bộ': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/39b134838f11066f6b0901e23e378c168ee88624/projects/sun-saphia/4d/sun-saphia-4d.html?crm',
+  '4D – mặt bằng tầng': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/39b134838f11066f6b0901e23e378c168ee88624/projects/sun-saphia/4d/sun-saphia-4d.html?crm&plan&f=18',
+  'Chọn căn (mặt bằng & 3D từng căn)': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/b482fe98625fa883d0aa26c69d0ec4adae6667dc/projects/sun-saphia/chon-can/chon-can-app.html'
 };
 function qxSheet_() {
   var ss = SpreadsheetApp.getActive(), sh = ss.getSheetByName(QX_SHEET);
