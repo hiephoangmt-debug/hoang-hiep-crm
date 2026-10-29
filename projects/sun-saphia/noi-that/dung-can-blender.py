@@ -550,7 +550,7 @@ for s in SHOTS:
         _c0 = Vector(((min(p[0] for p in BX) + max(p[0] for p in BX)) / 2, (min(p[1] for p in BX) + max(p[1] for p in BX)) / 2))
         _ext = max(abs((Vector(p) - _c0).dot(_hd)) for p in BX)
         for o in list(bpy.data.objects):
-            if o.type != 'MESH' or o.hide_render or o.parent is not None or not o.data.materials or not o.data.vertices: continue
+            if o.type != 'MESH' or o.hide_render or not o.data.materials or not o.data.vertices: continue
             if o.name.startswith('rem'): o.hide_render = True; continue
             vs_ = [o.matrix_world @ v.co for v in o.data.vertices]; zs_ = [v.z for v in vs_]   # cắt cả đồ vật (tủ, kệ, rèm, đèn thả)
             if max(zs_) <= LOWH + .02 or min(zs_) < -.3: continue
@@ -558,9 +558,10 @@ for s in SHOTS:
             if o.data.materials[0] in (EXT, GLASS, ALU) and (c_ - _c0).dot(_hd) < -.35 * _ext: continue   # tường bao đối diện: giữ nguyên
             zb = min(zs_)
             if zb > LOWH - .05: o.hide_render = True; continue                                   # lanh tô, khung trên: nằm trên mặt cắt
-            o.data = o.data.copy()
+            o.data = o.data.copy(); mw_ = o.matrix_world.copy(); mi_ = mw_.inverted()
             for v in o.data.vertices:
-                if (o.matrix_world @ v.co).z > LOWH: v.co.z = (LOWH - o.location.z) / max(1e-6, o.scale.z)
+                w_ = mw_ @ v.co
+                if w_.z > LOWH: w_.z = LOWH; v.co = mi_ @ w_
         for o in list(bpy.data.objects):
             if o.type != 'MESH' or o.hide_render or not o.data.materials: continue
             mt_ = o.data.materials[0]
