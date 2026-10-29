@@ -712,17 +712,17 @@ CHOTOT_REGION = 3017  # Đà Nẵng
 CHOTOT_CATS = {1040: "Đất", 1020: "Nhà ở", 1010: "Căn hộ"}
 
 
-LOC_BAT_THUONG = 0.05  # bỏ 5% tin rẻ nhất và 5% tin đắt nhất mỗi nhóm (tin gõ nhầm giá, diện tích, tin ảo)
+LOC_BAT_THUONG = 0.05  # bỏ 5% tin rẻ nhất mỗi nhóm (tin gõ nhầm giá, diện tích, tin ảo); đầu đắt giữ nguyên vì đó là lô mặt biển, mặt sông thật
 
 
 def _stats(items, links=False):
     """items: [(giá/m², tin)] -> trung vị, khoảng 25–75%, thấp nhất, cao nhất (kèm tin nếu links),
-    tính sau khi bỏ 5% tin bất thường mỗi đầu."""
+    tính sau khi bỏ 5% tin rẻ nhất (tin bất thường thường nằm ở đầu rẻ)."""
     items = sorted(items, key=lambda x: x[0])
     k = int(len(items) * LOC_BAT_THUONG)
-    bo = 2 * k
+    bo = k
     if k:
-        items = items[k:len(items) - k]
+        items = items[k:]
     v = [x[0] for x in items]
     q = lambda p: v[min(len(v) - 1, int(round(p * (len(v) - 1))))]  # noqa: E731
     out = {"n": len(v), "med": round(q(0.5), 1), "p25": round(q(0.25), 1), "p75": round(q(0.75), 1),
@@ -1014,11 +1014,11 @@ def main():
     rao = load(LISTINGS_FILE, {})
 
     def gia_rao():
-        if rao.get("ngay") == today() and "duong" in rao and all("bo" in v for v in (rao.get("toan_tp") or {}).values()):
+        if rao.get("ngay") == today() and "duong" in rao and rao.get("loc") == "re-5":
             log("   đã lấy hôm nay")
             return
         res = fetch_listings()
-        rao.update({"ngay": today(), "nguon": "Chợ Tốt Nhà", **res})
+        rao.update({"ngay": today(), "nguon": "Chợ Tốt Nhà", "loc": "re-5", **res})
         hist = rao.setdefault("lich_su", {})
         for kind, st in res["toan_tp"].items():
             hist.setdefault(f"{kind}|Toàn thành phố", {})[today()] = st["med"]
