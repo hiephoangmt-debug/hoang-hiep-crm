@@ -1,7 +1,7 @@
 """Chạy render nội thất luxury cho tất cả căn (bỏ qua ảnh đã có). Thứ tự: tầng 30 → sân vườn tầng 2–3 → tầng điển hình → video tham quan HQ."""
 import json, os, subprocess, sys
 S = os.path.dirname(os.path.abspath(__file__)); C = json.load(open(S + '/ccl2.json'))
-SHOT = {'1PN+1': 'living,living2,bed,plus,top', '2PN': 'living,living2,bed,plus,top', '2PN1': 'living,living2,bed,plus,top', 'STU': 'living,living2,top', 'STUL': 'living,living2,top', '2PN11': 'living,living2,bed,plus,top', '2PN1L': 'living,living2,bed,top', '1PN+1L': 'living,living2,bed,plus,top'}
+SHOT = {'1PN+1': 'living,living2,bed,plus,top', '2PN': 'living,living2,bed,plus,top', '2PN1': 'living,living2,bed,plus,top', 'STU': 'living,living2,top', 'STUL': 'living,living2,top', '2PN11': 'living,living2,bed,plus,top', '2PNT': 'living,living2,bed,plus,top', '2PN1L': 'living,living2,bed,top', '1PN+1L': 'living,living2,bed,plus,top'}
 def main_lay(parts): return max(parts, key=lambda p: C['spec'][p[0]]['W'] * C['spec'][p[0]]['D'] * max(abs(p[1][0]), abs(p[1][1])))[0]
 JOBS = []
 for k in C['u30']:
