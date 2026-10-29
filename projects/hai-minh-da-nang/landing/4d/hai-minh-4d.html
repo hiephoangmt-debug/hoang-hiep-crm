@@ -117,6 +117,7 @@ input[type=range]{accent-color:var(--orange)}
     <button class="chip" id="mPlan" aria-pressed="false">Mặt bằng tầng</button>
     <button class="chip" id="mTop" aria-pressed="false">Đỉnh tháp</button>
     <button class="chip" id="mFours" aria-pressed="false">FourS</button>
+    <button class="chip" id="mSL" aria-pressed="false">S Light</button>
     <button class="chip" id="mFw" aria-pressed="false">Pháo hoa</button>
     <button class="chip" id="mDrg" aria-pressed="false">Cầu Rồng</button>
     <button class="chip" id="mSnd" aria-pressed="false" title="Bật/tắt tiếng pháo hoa">🔇 Tiếng</button>
@@ -733,7 +734,7 @@ function updateCars(dt){ cars.forEach(function(c,i){ c.s+=c.v*dt;
 updateCars(0);
 /* ---------- Du thuyền & dù lượn ngoài biển (minh họa) ---------- */
 var boats=[];
-var boatWin=M(0x24323f,{roughness:.2,metalness:.3,emissive:0xffd9a0,emissiveIntensity:0}), boatLights=[];
+var boatWin=M(0x24323f,{roughness:.2,metalness:.3,emissive:0xffd9a0,emissiveIntensity:0}), boatLights=[], boatFx=[];
 (function(){ var wh=M(0xfafafa,{roughness:.3,metalness:.1}), dk=M(0x24323f,{roughness:.2,metalness:.3}), tk=M(0xb98a5a,{roughness:.6}), wk=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.55,depthWrite:false});
   function yacht(L){ var g=new THREE.Group(), h=new THREE.Mesh(new THREE.CylinderGeometry(L*.17,L*.13,L,10,1),wh); h.rotation.x=Math.PI/2; h.scale.set(1,1,.55); h.position.y=L*.08; g.add(h);
     var bow=new THREE.Mesh(new THREE.ConeGeometry(L*.17,L*.32,10),wh); bow.rotation.x=Math.PI/2; bow.position.set(0,L*.08,L*.66); bow.scale.set(1,.55,1); g.add(bow);
@@ -743,10 +744,23 @@ var boatWin=M(0x24323f,{roughness:.2,metalness:.3,emissive:0xffd9a0,emissiveInte
     var fly=new THREE.Mesh(new THREE.BoxGeometry(L*.17,L*.06,L*.22),wh); fly.position.set(0,L*.32,-L*.1); g.add(fly);
     var wake=new THREE.Mesh(new THREE.PlaneGeometry(L*.5,L*2.4),wk); wake.rotation.x=-Math.PI/2; wake.position.set(0,.15,-L*1.6); g.add(wake);
     var lt=new THREE.Mesh(new THREE.SphereGeometry(L*.025+.25,8,6),new THREE.MeshBasicMaterial({color:0xfff2c8,transparent:true,opacity:0})); lt.position.set(0,L*.4,-L*.1); g.add(lt); boatLights.push(lt);
-    g.traverse(function(o){ if(o.isMesh&&o!==wake&&o!==lt) o.castShadow=true; }); return g; }
+    // đèn trang trí buổi tối: dây đèn từ mũi → đỉnh cột → đuôi, viền boong, vệt phản chiếu trên mặt nước
+    var mast=new THREE.Mesh(new THREE.CylinderGeometry(.08*L/30+.05,.1*L/30+.06,L*.36,6),wh); mast.position.set(0,L*.5,-L*.1); g.add(mast);
+    var P=[], C=[], pal=[[1,.9,.6],[.55,.85,1],[1,.55,.95],[1,1,.85],[.7,1,.85]], cc=0;
+    function pt(x,y,z){ P.push(x,y,z); var c=pal[cc++%pal.length]; C.push(c[0],c[1],c[2]); }
+    for(var i=0;i<=12;i++){ var t=i/12; pt(0,L*.2+t*L*.48,L*.8-t*L*.9); pt(0,L*.68-t*L*.48,-L*.1-t*L*.42); }
+    for(var i=0;i<=14;i++){ var z=-L*.45+i/14*L*1.05; pt(L*.155,L*.17,z); pt(-L*.155,L*.17,z); }
+    for(var i=0;i<=6;i++){ var z=-L*.25+i/6*L*.4; pt(L*.105,L*.29,z); pt(-L*.105,L*.29,z); }
+    var pg=new THREE.BufferGeometry(); pg.setAttribute('position',new THREE.Float32BufferAttribute(P,3)); pg.setAttribute('color',new THREE.Float32BufferAttribute(C,3));
+    var pm=new THREE.PointsMaterial({map:GLOWTEX,size:L>20?10:7,sizeAttenuation:false,vertexColors:true,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending});
+    g.add(new THREE.Points(pg,pm));
+    var rf=new THREE.Mesh(new THREE.PlaneGeometry(L*1.6,L*2.6),new THREE.MeshBasicMaterial({map:GLOWTEX,color:0xffc878,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending})); rf.rotation.x=-Math.PI/2; rf.position.y=.25; g.add(rf);
+    var ul=new THREE.Mesh(new THREE.PlaneGeometry(L*1.1,L*1.9),new THREE.MeshBasicMaterial({map:GLOWTEX,color:0x2fb6ff,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending})); ul.rotation.x=-Math.PI/2; ul.position.y=.2; g.add(ul);
+    boatFx.push({p:pm,r:rf.material,u:ul.material,ph:Math.random()*6});
+    g.traverse(function(o){ if(o.isMesh&&o!==wake&&o!==lt&&o!==rf&&o!==ul) o.castShadow=true; }); return g; }
   function speedboat(){ var g=yacht(12); return g; }
   // du thuyền: chạy dọc bờ biển, cách bờ 250–700 m
-  [[34,170,-1600,1600,7],[44,300,1400,-1700,5],[28,240,-300,2200,8],[38,420,2000,-900,6]].forEach(function(b){ var g=yacht(b[0]); world.add(g); boats.push({g:g,off:b[1],z0:b[2],z1:b[3],v:b[4],t:Math.random(),kind:'y'}); });
+  [[34,170,-1600,1600,7],[44,300,1400,-1700,5],[28,240,-300,2200,8],[38,420,2000,-900,6],[52,620,-2600,800,4],[30,520,900,-2400,6],[46,780,-1200,2600,4.5],[26,360,2400,200,7],[60,980,-3000,1500,3.5],[36,700,1800,-2800,5],[32,880,-400,-3200,5.5],[42,1150,2800,-600,4],[24,450,-2200,-200,8],[50,1300,-1800,2900,3.8]].forEach(function(b){ var g=yacht(b[0]); world.add(g); boats.push({g:g,off:b[1],z0:b[2],z1:b[3],v:b[4],t:Math.random(),kind:'y'}); });
   // dù lượn: cano kéo dù bay ~45 m
   var cols=[[0xff6a2b,0xffffff],[0xe8c547,0x2f7fd0]];
   [[120,-900,900,9],[160,1200,-400,10]].forEach(function(b,i){ var g=speedboat(); world.add(g);
@@ -790,10 +804,12 @@ function updateFireworks(dt){ if(curNight>.5){ fwT-=dt; if(fwT<=0){ fwLaunch(); 
     for(var i=0;i<f.v.length;i++){ var v=f.v[i]; v[1]-=9.8*dt*.6; v[0]*=.985; v[1]*=.985; v[2]*=.985; a.array[i*3]+=v[0]*dt; a.array[i*3+1]+=v[1]*dt; a.array[i*3+2]+=v[2]*dt; }
     a.needsUpdate=true; f.p.material.opacity=Math.max(0,1-f.t/2.8);
     if(f.t>2.8){ world.remove(f.p); f.p.geometry.dispose(); f.p.material.dispose(); fws.splice(k,1); } } }
-function updateBoats(dt,tm){ boats.forEach(function(b){ var L=Math.abs(b.z1-b.z0); b.t+=dt*b.v/L; var ph=b.t%2, f=ph<1?ph:2-ph, dir=(ph<1?1:-1)*(b.z1>b.z0?1:-1);
+function updateBoats(dt,tm){ var n=curNight; boatFx.forEach(function(f){ f.p.opacity=n*(.8+.2*Math.sin(tm*2.3+f.ph)); f.r.opacity=n*.35; f.u.opacity=n*.55; });
+  boats.forEach(function(b){ var L=Math.abs(b.z1-b.z0); b.t+=dt*b.v/L; var ph=b.t%2, f=ph<1?ph:2-ph, dir=(ph<1?1:-1)*(b.z1>b.z0?1:-1);
     var z=b.z0+(b.z1-b.z0)*f, x=COASTX(z)+b.off+Math.sin(b.t*3)*20;
     b.g.position.set(x,.2+Math.sin(tm*1.3+b.off)*.15,z); b.g.rotation.y=dir>0?0:Math.PI; b.g.rotation.z=Math.sin(tm*1.1+b.off)*.03;
-    if(b.kind==='p'){ var cz=z-dir*55, cy=44+Math.sin(tm*.7+b.off)*3; b.chute.position.set(x+6,cy,cz); b.chute.rotation.x=dir*.25;
+    if(b.kind==='p'){ var dv=curNight<.45; b.g.visible=b.chute.visible=b.ln.visible=dv; }
+    if(b.kind==='p'&&b.g.visible){ var cz=z-dir*55, cy=44+Math.sin(tm*.7+b.off)*3; b.chute.position.set(x+6,cy,cz); b.chute.rotation.x=dir*.25;
       var pa=b.ln.geometry.attributes.position; pa.setXYZ(0,x,1.5,z-dir*3); pa.setXYZ(1,x+6,cy-9,cz); pa.needsUpdate=true; } }); }
 
 /* S Light Tower (Sun NeO City, Hòa Xuân · góc Nguyễn Đình Thi × 29/3): 2 tòa 22 tầng nổi (~80 m) – khối minh hoạ theo thông tin công bố */
@@ -810,6 +826,21 @@ var ROADS2=[[-624,402,-653,405,-752,407,-903,410,-991,412,-1034,413,-1060,421],[
       var m=new THREE.Mesh(new THREE.PlaneGeometry(22,L),gm); m.rotation.order='YXZ'; m.rotation.set(-Math.PI/2,Math.atan2(ux,uz),0); m.position.set((x0+x1)/2,.35,(z0+z1)/2); world.add(m); streetGlow.push(m); } });
   lampHeads2=new THREE.InstancedMesh(new THREE.SphereGeometry(1.1,8,6),new THREE.MeshBasicMaterial({color:0xffd59a,transparent:true,opacity:0}),pts.length);
   var mt=new THREE.Matrix4(); pts.forEach(function(q,i){ mt.makeTranslation(q[0],9,q[1]); lampHeads2.setMatrixAt(i,mt); }); world.add(lampHeads2); })();
+
+/* người đi dạo trên bãi biển (dọc mép nước), buổi tối ít người hơn */
+var walkers=[], walkB=null, walkH=null;
+(function(){ var N=160, sh=[0xe74c3c,0x3498db,0xf1c40f,0xffffff,0x2ecc71,0xe67e22,0x9b59b6,0x1abc9c,0xff7eb6,0x34495e];
+  walkB=new THREE.InstancedMesh(new THREE.CylinderGeometry(.2,.24,1.25,6),M(0xffffff,{roughness:.8}),N);
+  walkH=new THREE.InstancedMesh(new THREE.SphereGeometry(.15,8,6),M(0x8d5b3e,{roughness:.8}),N);
+  var cc=new THREE.Color();
+  for(var i=0;i<N;i++){ walkers.push({z:rnd(-1100,1250),dx:rnd(4,48),v:rnd(.9,1.5)*(srnd()<.5?-1:1),ph:rnd(0,6),night:i<55}); walkB.setColorAt(i,cc.set(sh[i%sh.length])); }
+  walkB.castShadow=true; world.add(walkB); world.add(walkH); })();
+var _wm=new THREE.Matrix4();
+function updateWalkers(dt,tm){ var n=curNight>.5;
+  for(var i=0;i<walkers.length;i++){ var w=walkers[i]; w.z+=w.v*dt; if(w.z>1250) w.z=-1100; if(w.z<-1100) w.z=1250;
+    var x=COASTX(w.z)-w.dx, by=Math.abs(Math.sin(tm*5+w.ph))*.05, show=!n||w.night, sc=show?1:0;
+    _wm.makeScale(sc,sc,sc); _wm.setPosition(x,.62+by,w.z); walkB.setMatrixAt(i,_wm); _wm.setPosition(x,1.42+by,w.z); walkH.setMatrixAt(i,_wm); }
+  walkB.instanceMatrix.needsUpdate=walkH.instanceMatrix.needsUpdate=true; }
 
 /* tàu hàng lớn chạy xa ngoài khơi (Bắc ↔ Nam), buổi tối sáng đèn */
 var ships=[];
@@ -898,6 +929,22 @@ function glowStrip(g,len,x,y,z,col){ var m=new THREE.Mesh(new THREE.BoxGeometry(
   bridgeFx.push(function(dt,tm,n){ var h=(.55+.25*Math.sin(tm*.3))%1; cm.color.setHSL(h,1,.6); cm.opacity=.35+.6*n; pm.emissive.setHSL(h,.9,.55); pm.emissiveIntensity=n*.8;
     ls.forEach(function(m,i){ m.material.color.setHSL((h+i*.08)%1,1,.65); m.material.opacity=n; }); });
 })();
+(function(){ var b=bridgeGrp([-1772,-4242],[-1046,-4028]), g=b.g, L=b.L, DY=10;   // Cầu Trần Thị Lý: dây văng 1 trụ nghiêng hình cánh buồm (~145 m), dài ~730 m
+  var deck=new THREE.Mesh(new THREE.BoxGeometry(L,2,34),M(0x8d9096,{roughness:.8})); deck.position.y=DY; g.add(deck);
+  for(var x=-L/2+35;x<L/2;x+=60){ var p=new THREE.Mesh(new THREE.BoxGeometry(5,DY,20),M(0x9a9da2)); p.position.set(x,DY/2,0); g.add(p); }
+  var pm=M(0xeeeeea,{roughness:.45,emissive:0xffffff,emissiveIntensity:0}), x0=-L*.12, H=145, lean=.32;
+  var py=new THREE.Mesh(new THREE.CylinderGeometry(1.6,4.8,H,4),pm); py.geometry.translate(0,H/2,0); py.scale.set(1.6,1,.9); py.position.set(x0,DY,0); py.rotation.z=lean; g.add(py);   // trụ nghiêng về phía Tây
+  var top=new THREE.Vector3(x0-Math.sin(lean)*H,DY+Math.cos(lean)*H,0), v=[];
+  for(var k=0;k<16;k++){ var f2=.42+k/15*.55, ax=x0-Math.sin(lean)*H*f2, ay=DY+Math.cos(lean)*H*f2;
+    [-1.2,1.2].forEach(function(z){ v.push(ax,ay,z, x0+25+k*(L*.5-25)/15,DY+1,z*2); }); }                 // dây nhịp chính về phía Đông
+  for(var k=0;k<8;k++){ var f3=.8+k/7*.2, ax=x0-Math.sin(lean)*H*f3, ay=DY+Math.cos(lean)*H*f3; [-1.2,1.2].forEach(function(z){ v.push(ax,ay,z, x0-90-k*14,DY+1,z*2); }); }   // dây néo phía Tây
+  var lg=new THREE.BufferGeometry(); lg.setAttribute('position',new THREE.Float32BufferAttribute(v,3));
+  var cm=new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.4}); g.add(new THREE.LineSegments(lg,cm));
+  var beacon=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOWTEX,color:0xff3030,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending,sizeAttenuation:false})); beacon.scale.setScalar(.02); beacon.position.copy(top); g.add(beacon);
+  var ls=[glowStrip(g,L,0,DY+1.2,17,0xffe0a0),glowStrip(g,L,0,DY+1.2,-17,0xffe0a0)];
+  bridgeFx.push(function(dt,tm,n){ var h=(tm*.04)%1; cm.color.setHSL(h,.9,.65); cm.opacity=.4+.55*n; pm.emissive.setHSL((h+.5)%1,.7,.6); pm.emissiveIntensity=n*.75;
+    ls.forEach(function(m){ m.material.opacity=n; }); beacon.material.opacity=n*(((tm%1.5)<.6)?1:.15); });
+})();
 function updateBridges(dt,tm){ var n=curNight; bridgeFx.forEach(function(f){ f(dt,tm,n); }); }
 
 /* máy bay sân bay Đà Nẵng: đường băng 17R/35L (GPS ~16.039,108.201 → 16.070,108.200); cất cánh hướng Bắc, hạ cánh từ phía Nam lên */
@@ -914,7 +961,7 @@ var RW_S=new THREE.Vector3(-4755,0,-4272), RW_N=new THREE.Vector3(-3410,0,-7487)
     var win=new THREE.Mesh(new THREE.BoxGeometry(4.3*S,.35*S,30*S),new THREE.MeshBasicMaterial({color:0xffe1a0,transparent:true,opacity:0})); win.position.set(0,.7*S,1*S); g.add(win); U.win=win; g.userData.U=U; g.userData.ph=Math.random();
     g.rotation.order='YXZ'; g.rotation.y=Math.atan2(RW_D.x,RW_D.z); world.add(g); return g; }
   planes.push({g:plane(),kind:'dep',t:0,T:80},{g:plane(),kind:'arr',t:40,T:80}); })();
-var pT=0; window.__4d={look:function(c,t){ camera.position.copy(world.localToWorld(new THREE.Vector3(c[0],c[1],c[2]))); controls.target.copy(world.localToWorld(new THREE.Vector3(t[0],t[1],t[2]))); controls.update(); },br:function(dt){ updateBridges(dt,performance.now()/1000); },planes:planes,fw:function(dt){ updateFireworks(dt); },setTime:function(h){ hourEl.value=h; setTime(h); }};
+var pT=0; window.__4d={cx:COASTX,boats:boats,look:function(c,t){ camera.position.copy(world.localToWorld(new THREE.Vector3(c[0],c[1],c[2]))); controls.target.copy(world.localToWorld(new THREE.Vector3(t[0],t[1],t[2]))); controls.update(); },br:function(dt){ updateBridges(dt,performance.now()/1000); },planes:planes,fw:function(dt){ updateFireworks(dt); },setTime:function(h){ hourEl.value=h; setTime(h); }};
 function updatePlanes(dt){ pT+=dt;
   planes.forEach(function(p){ p.t=(p.t+dt)%p.T; var u=p.t/p.T, d, y, pitch=0, vis=true;
     if(p.kind==='dep'){ var roll=.22; if(u<roll){ var a=u/roll; d=200+a*a*1900; y=2; } else { var b=(u-roll)/(1-roll); d=2100+b*14000; y=2+b*14000*.13; pitch=-.13; } }
@@ -962,6 +1009,7 @@ label('Meliá Danang Beach Resort','far',world,[155,26,2604]);
 label('Pulchra Resort Đà Nẵng','far',world,[88,26,4010]);
 label('Cầu Rồng','far',world,[-1120,62,-5304]);
 label('Cầu Sông Hàn','far',world,[-690,50,-6455]);
+label('Cầu Trần Thị Lý','far',world,[-1409,170,-4135]);
 label('Biển Đông','far',world,[900,4,-150]);
 label('Bán đảo Sơn Trà','far',scene,[2000,760,-11550]);
 label('Tượng Quan Thế Âm · chùa Linh Ứng','far',scene,[2049,150,-8623]);
@@ -970,7 +1018,7 @@ label('Ngũ Hành Sơn','far',scene,[NHS[0],120,NHS[1]]);
   label('Cù Lao Chàm (~28 km)','far',scene,[__CLC[0],160,__CLC[1]]);
   // Hội An / Cửa Đại (Thu Bồn river mouth): ~25 km SSE (bearing ~153°), label placed at reduced distance along that bearing
   label('Hội An · Cửa Đại (~25 km)','far',scene,[SITE.x+2900,60,SITE.z+5820]);
-  L('Sông Hàn',930,700); L('Cầu Tiên Sơn',980,470); L('Cầu Trần Thị Lý',880,40);
+  L('Sông Hàn',930,700); L('Cầu Tiên Sơn',980,470);
   L('Trung tâm TP (Hải Châu)',640,-250,80); L('Lotte Mart',865,440,30); L('Sân bay quốc tế Đà Nẵng',140,-100,30); })();
 
 /* ---------- Time of day (the 4th dimension) ---------- */
@@ -996,7 +1044,7 @@ function setTime(h){
   skyU.sunDir.value.copy(dir); skyU.sunCol.value.copy(lerpC(C(0xfff3d8),C(0xff9a4a),low)).multiplyScalar(1-night);
   scene.fog.color.copy(hor);
   seaMat.color.copy(lerpC(lerpC(C(0x1b8fa8),C(0x3a5d84),low),C(0x0c1a30),night));
-  glass.emissiveIntensity=night*1.8; glassTop.emissiveIntensity=night*1.8; (NIGHT_MATS||[]).forEach(function(q){ q[0].emissiveIntensity=night*q[1]; }); curNight=night; if(lampHeads2) lampHeads2.material.opacity=night; if(ladyB){ ladyB.m.emissiveIntensity=night*.85; ladyB.glow.material.opacity=night*.55; } if(lampHeads){ lampHeads.material.opacity=night; streetGlow.forEach(function(m){ m.material.opacity=.4*night; }); } if(carLights){ carLights.f.material.opacity=carLights.r.material.opacity=night; carLights.b.material.opacity=.55*night; } if(typeof boatWin!=='undefined'){ boatWin.emissiveIntensity=night*2.2; boatLights.forEach(function(l){ l.material.opacity=night; l.scale.setScalar(1+night*2); }); }
+  glass.emissiveIntensity=night*1.8; glassTop.emissiveIntensity=night*1.8; (NIGHT_MATS||[]).forEach(function(q){ q[0].emissiveIntensity=night*q[1]; }); curNight=night; if(lampHeads2) lampHeads2.material.opacity=night; if(ladyB){ ladyB.m.emissiveIntensity=night*.85; ladyB.glow.material.opacity=night*.55; } if(lampHeads){ lampHeads.material.opacity=night; streetGlow.forEach(function(m){ m.material.opacity=.4*night; }); } if(carLights){ carLights.f.material.opacity=carLights.r.material.opacity=night; carLights.b.material.opacity=.55*night; } if(typeof boatWin!=='undefined'){ boatWin.emissiveIntensity=night*2.2; boatLights.forEach(function(l){ l.material.opacity=night; l.scale.setScalar(1+night*.5); }); }
   renderer.toneMappingExposure=.74-.16*night;
   var hh=Math.floor(h), mm=Math.round((h-hh)*60/5)*5; if(mm===60){hh++;mm=0;}
   hourOut.textContent=(hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm;
@@ -1127,6 +1175,8 @@ function flyTop(){ var m=innerWidth<600, c=new THREE.Vector3(X1-16,TOP-22,Z0+24)
   flyTo(T.localToWorld(new THREE.Vector3(c.x+(m?150:105),TOP+(m?175:118),c.z+(m?-20:-14))),T.localToWorld(c)); }
 document.getElementById('mTop').onclick=flyTop;
 // bay tới cụm Sun FourS Tower (~2 km phía Tây, giao lộ Minh Mạng – Nguyễn Phước Lan)
+document.getElementById('mSL').onclick=function(){ if(planOn) setPlan(false); if(mode==='view') setMode('overview'); hi.visible=false; controls.maxDistance=8000; mainLbl.textContent='SUN SAPHIA · 30 tầng';
+  var m=innerWidth<600; flyTo(world.localToWorld(new THREE.Vector3(m?-1820:-1880,m?300:230,m?-1100:-1160)),world.localToWorld(new THREE.Vector3(-2155,45,-1337))); };   // bay tới S Light Tower (SL1, SL2)
 document.getElementById('mDrg').onclick=function(){ if(planOn) setPlan(false); if(mode==='view') setMode('overview'); hi.visible=false; controls.maxDistance=8000;
   hourEl.value=21; setTime(21); flyTo(world.localToWorld(new THREE.Vector3(-560,140,-4850)),world.localToWorld(new THREE.Vector3(-1000,25,-5300))); };   // tối, cầu Rồng phun lửa
 document.getElementById('mSnd').onclick=function(){ setSnd(!sndOn); };
@@ -1141,7 +1191,7 @@ var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false);
   if(r) viewFromUnit(r); else bView0(); };
 
 /* ---------- bấm vào căn trên mặt bằng tầng: hiện thẻ căn, mở mặt bằng & 3D căn, view từ đúng căn ---------- */
-var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/4c75d12e05d8d22791b73fe579b6b76ed58b9913/projects/sun-saphia/chon-can/chon-can-app.html';
+var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/22b1d711362abbaaf240217fdce0e9fdfaea9f0b/projects/sun-saphia/chon-can/chon-can-app.html';
 var unitEye=null;
 // [mã, loại, u0,u1, v0,v1, hướng mặt kính chính] – cùng số liệu với công cụ chọn căn
 var UNITS=[['11','2PN',0,11.1,0,8.1,'E'],['12','STU',11.19,14.99,0,9.1,'E'],['12A','STU',14.99,18.8,0,9.1,'E'],['12B','1PN',18.8,25.02,0,9.1,'E'],['15','STU',25.02,28.82,0,9.1,'E'],['16','STU',28.82,32.64,0,9.1,'E'],['17','1PN',32.64,38.91,0,9.1,'E'],
@@ -1380,7 +1430,7 @@ function loop(){
   requestAnimationFrame(loop);
   if(document.getElementById('uOv')) return;   // đang xem căn / 3D cả tầng: dừng vẽ 4D cho nhẹ máy
   var dt=Math.min(.1,clock.getDelta()), t=clock.elapsedTime;
-  if(!reduce){ updateCars(dt); updateBoats(dt,performance.now()/1000); updateFireworks(Math.min(dt,.05)); updatePlanes(Math.min(dt,.1)); updateShips(dt,performance.now()/1000); updateBridges(Math.min(dt,.05),performance.now()/1000); }
+  if(!reduce){ updateCars(dt); updateBoats(dt,performance.now()/1000); updateFireworks(Math.min(dt,.05)); updatePlanes(Math.min(dt,.1)); updateShips(dt,performance.now()/1000); updateWalkers(Math.min(dt,.1),performance.now()/1000); updateBridges(Math.min(dt,.05),performance.now()/1000); }
   if(playing){ var hv=+hourEl.value+0.02; if(hv>20) hv=5; hourEl.value=hv; setTime(hv); }
   if(!reduce){ var a=seaPos.array; for(var i=0;i<a.length;i+=3){ var bx=seaBase[i], bz=seaBase[i+2]; a[i+1]=.3*Math.sin(bx*.045+t*1.1)+.2*Math.sin(bz*.06+t*1.6+bx*.01); } seaPos.needsUpdate=true; seaGeo.computeVertexNormals(); }
   if(fly){ fly.k=Math.min(1,fly.k+Math.max(dt,.03)/1.2); var e=fly.k<.5?2*fly.k*fly.k:1-Math.pow(-2*fly.k+2,2)/2; camera.position.lerpVectors(fly.p0,fly.p1,e); controls.target.lerpVectors(fly.t0,fly.t1,e); if(fly.k>=1) fly=null; }
