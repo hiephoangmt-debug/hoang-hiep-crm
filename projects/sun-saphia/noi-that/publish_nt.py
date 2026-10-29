@@ -14,8 +14,14 @@ for name in sorted(NEW | OLD):
     d = S + ('/rAll/' if name in NEW else '/rAll_old/') + name; L = lay(name); items = []
     for shot in ORDER:
         f = d + '/' + shot + '.png'
-        if not os.path.exists(f) or os.path.getsize(f) < 20000: continue
         cap = CAP[shot]
+        if shot == 'plus' and L.startswith('2PN'): cap = 'Phòng ngủ 2'
+        if shot == 'living2' and L.startswith('STU'): cap = 'Nhìn về bếp & cửa vào'
+        if shot == 'top' and name.startswith('G'): cap = 'Mặt bằng 3D có sân vườn'
+        if not os.path.exists(f) or os.path.getsize(f) < 20000:   # chưa render lại: giữ ảnh đã đăng trước đó (nếu có)
+            fn0 = 'sp-%s-%s.webp' % (name.lower(), shot)
+            if os.path.exists(OUT + '/' + fn0): items.append([fn0, cap])
+            continue
         if shot == 'plus' and L.startswith('2PN'): cap = 'Phòng ngủ 2'
         if shot == 'living2' and L.startswith('STU'): cap = 'Nhìn về bếp & cửa vào'
         if shot == 'top' and name.startswith('G'): cap = 'Mặt bằng 3D có sân vườn'
