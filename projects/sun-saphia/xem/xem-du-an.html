@@ -45,8 +45,8 @@
 (function(){
 var API='https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec', SITE='kGYgRtNhbHZr';
 var GCID='';   // Google OAuth Client ID (Web) – để trống thì ẩn nút Google
-var U4D='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/4525e3d0e12f0a900d283d29f05e805c69e1bc41/projects/sun-saphia/4d/sun-saphia-4d.html';
-var UCC='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/83c6e5a9f84929043722c9b2adfb61774c085c99/projects/sun-saphia/chon-can/chon-can-app.html';
+var U4D='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/5d5378cbfd0b640392706f594576aa4a89f5cc50/projects/sun-saphia/4d/sun-saphia-4d.html';
+var UCC='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/e2678c7394ff5e03f3b082f49f0db879783ecab6/projects/sun-saphia/chon-can/chon-can-app.html';
 var $=function(i){ return document.getElementById(i); }, step='email', email='', KEY=null;
 function msg(t,ok){ $('msg').textContent=t; $('msg').className='m'+(ok?' ok':''); }
 function call(params,cb){ var name='xg'+Date.now()+Math.floor(Math.random()*1e4), s=document.createElement('script'), done=false, q=['cb='+name,'key='+SITE];
