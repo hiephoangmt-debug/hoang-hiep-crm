@@ -217,7 +217,7 @@ scene.fog=new THREE.Fog(0xcfe2f2,900,9000);
 var camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,2,16000);
 var controls=new THREE.OrbitControls(camera,renderer.domElement);
 controls.enableDamping=true; controls.dampingFactor=.08; controls.maxPolarAngle=Math.PI*.485; controls.minDistance=70; controls.maxDistance=2600;
-controls.autoRotateSpeed=.6;
+controls.autoRotateSpeed=.18;   // tự xoay chậm: ~5,5 phút một vòng
 
 function M(c,o){o=o||{};return new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.85,metalness:0,envMapIntensity:.25},o));}
 
@@ -798,29 +798,58 @@ var GLOWTEX=(function(){ var c=document.createElement('canvas'); c.width=c.heigh
 var bridgeFx=[];
 function bridgeGrp(A,B){ var dx=B[0]-A[0], dz=B[1]-A[1], L=Math.hypot(dx,dz), g=new THREE.Group(); g.position.set((A[0]+B[0])/2,0,(A[1]+B[1])/2); g.rotation.y=Math.atan2(-dz/L,dx/L); world.add(g); return {g:g,L:L}; }
 function glowStrip(g,len,x,y,z,col){ var m=new THREE.Mesh(new THREE.BoxGeometry(len,.5,.5),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:0})); m.position.set(x,y,z); g.add(m); return m; }
-(function(){ var b=bridgeGrp([-1474,-5450],[-772,-5158]), g=b.g, L=b.L, DY=12;
+(function(){ var b=bridgeGrp([-1474,-5450],[-772,-5158]), g=b.g, L=b.L, DY=12;   // Cầu Rồng: dài ~666 m, rộng 37,5 m, thân rồng thép 5 vòm ở dải giữa
   var deck=new THREE.Mesh(new THREE.BoxGeometry(L,2.2,37),M(0x8d9096,{roughness:.8})); deck.position.y=DY; g.add(deck);
   for(var x=-L/2+40;x<L/2;x+=70){ var p=new THREE.Mesh(new THREE.BoxGeometry(5,DY,22),M(0x9a9da2)); p.position.set(x,DY/2,0); g.add(p); }
-  var pts=[]; for(var i=0;i<=120;i++){ var t=i/120, x=-L*.46+t*L*.86, y=DY+1+30*Math.pow(Math.abs(Math.sin(Math.PI*2.5*t)),.85); if(t>.93) y=DY+18+(t-.93)*60; pts.push(new THREE.Vector3(x,y,0)); }
-  var dm=M(0xf2c230,{roughness:.4,metalness:.5,emissive:0xffffff,emissiveIntensity:0});
-  var body=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),240,2.4,10,false),dm); g.add(body);
-  var hx=pts[120].x, hy=pts[120].y, head=new THREE.Group(); head.position.set(hx,hy,0); g.add(head);
-  var sk=new THREE.Mesh(new THREE.BoxGeometry(12,6,6),dm); sk.position.x=4; head.add(sk);
-  var jaw=new THREE.Mesh(new THREE.ConeGeometry(3,10,8),dm); jaw.rotation.z=-Math.PI/2; jaw.position.set(13,-1,0); head.add(jaw);
-  [-2,2].forEach(function(z){ var h=new THREE.Mesh(new THREE.ConeGeometry(.9,8,6),dm); h.position.set(0,6,z); h.rotation.z=.6; head.add(h); });
-  var tail=new THREE.Mesh(new THREE.ConeGeometry(2.4,14,8),dm); tail.rotation.z=Math.PI/2; tail.position.set(pts[0].x-6,pts[0].y,0); g.add(tail);
-  var ls=[glowStrip(g,L,0,DY+1.4,18.3,0xffd38a),glowStrip(g,L,0,DY+1.4,-18.3,0xffd38a)];
-  // lửa phun từ miệng rồng
-  var N=420, pos=new Float32Array(N*3), P=[]; for(var k=0;k<N;k++){ pos[k*3+1]=-999; P.push({life:0,v:[0,0,0]}); }
-  var fg=new THREE.BufferGeometry(); fg.setAttribute('position',new THREE.BufferAttribute(pos,3));
-  var fm=new THREE.PointsMaterial({color:0xff7a1a,size:4,sizeAttenuation:true,transparent:true,opacity:.5,depthWrite:false,blending:THREE.AdditiveBlending});
+  // đường cong thân: đuôi cuộn (Tây) → 5 vòm → cổ ngẩng → đầu (Đông, hướng biển)
+  var P=[], x0=-L*.47, x1=L*.36, AMP=[22,30,37,31,25];
+  for(var i=0;i<=8;i++){ var a=Math.PI*.5+i/8*Math.PI*1.7; P.push(new THREE.Vector3(x0-8+Math.cos(a)*7,DY+10+Math.sin(a)*7,0)); }
+  P.reverse(); P.push(new THREE.Vector3(x0,DY-1,0));
+  for(var i=1;i<=150;i++){ var t=i/150, k=Math.min(4,Math.floor(t*5)), ph=t*5-k; P.push(new THREE.Vector3(x0+t*(x1-x0),DY-3+AMP[k]*Math.pow(Math.sin(Math.PI*ph),.9),0)); }
+  var hx=L*.43, hy=DY+30; [[.2,4],[.45,12],[.7,22],[.9,28]].forEach(function(q){ P.push(new THREE.Vector3(x1+(hx-x1)*q[0],DY+q[1],0)); }); P.push(new THREE.Vector3(hx,hy,0));
+  var curve=new THREE.CatmullRomCurve3(P), SEG=420, RS=12, R=3.1;
+  var tg=new THREE.TubeGeometry(curve,SEG,R,RS,false), pa=tg.attributes.position, cp=curve.getSpacedPoints(SEG);
+  for(var i=0;i<=SEG;i++){ var t=i/SEG, sc=t<.06?.2+.8*t/.06:(t>.95?1.15:1); for(var j=0;j<=RS;j++){ var k2=i*(RS+1)+j, c=cp[i];
+    pa.setXYZ(k2,c.x+(pa.getX(k2)-c.x)*sc,c.y+(pa.getY(k2)-c.y)*sc*1.15,c.z+(pa.getZ(k2)-c.z)*sc*.85); } }
+  tg.computeVertexNormals();
+  // đèn LED chạy màu dọc thân (buổi tối)
+  var lc=document.createElement('canvas'); lc.width=256; lc.height=4; var lg=lc.getContext('2d'); for(var u=0;u<256;u++){ lg.fillStyle='hsl('+(u/256*360)+',100%,55%)'; lg.fillRect(u,0,1,4); }
+  var led=new THREE.CanvasTexture(lc); led.wrapS=THREE.RepeatWrapping; led.repeat.set(3,1);
+  var dm=M(0xf0be2a,{roughness:.35,metalness:.55,emissive:0xffffff,emissiveIntensity:0,emissiveMap:led}); g.add(new THREE.Mesh(tg,dm));
+  // vây lưng
+  var fins=new THREE.InstancedMesh(new THREE.ConeGeometry(1.1,3.6,4),dm,80), mt=new THREE.Matrix4(), q4=new THREE.Quaternion(), up=new THREE.Vector3(0,1,0), nn=new THREE.Vector3();
+  for(var i=0;i<80;i++){ var t=.07+i/80*.86, c=curve.getPointAt(t), tn=curve.getTangentAt(t); nn.set(-tn.y,tn.x,0).normalize(); if(nn.y<0) nn.negate(); q4.setFromUnitVectors(up,nn); mt.compose(c.clone().addScaledVector(nn,R*1.05+1.4),q4,new THREE.Vector3(1,1,1)); fins.setMatrixAt(i,mt); }
+  g.add(fins);
+  var hm=M(0xf0be2a,{roughness:.35,metalness:.55,emissive:0xffffff,emissiveIntensity:0});
+  // đầu rồng
+  var head=new THREE.Group(); head.position.set(hx,hy,0); head.rotation.z=.12; g.add(head);
+  function part(geo,x,y,z,rx,ry,rz,m){ var o=new THREE.Mesh(geo,m||hm); o.position.set(x,y,z); o.rotation.set(rx||0,ry||0,rz||0); head.add(o); return o; }
+  part(new THREE.SphereGeometry(5,14,10),0,1,0).scale.set(1.3,1,.9);                                  // sọ
+  part(new THREE.CylinderGeometry(2.2,3.6,11,10),7.5,1.6,0,0,0,-Math.PI/2+.12).scale.set(1,1,.8);     // mõm trên
+  part(new THREE.CylinderGeometry(1.4,2.6,10,10),6.8,-2.6,0,0,0,-Math.PI/2-.38).scale.set(1,1,.75);   // hàm dưới (há miệng)
+  [-1.4,1.4].forEach(function(z){ part(new THREE.ConeGeometry(.35,1.6,5),11.5,.2,z,Math.PI,0,0,M(0xffffff)); part(new THREE.ConeGeometry(.3,1.3,5),10.8,-1.8,z,0,0,0,M(0xffffff)); });   // răng nanh
+  var eyeM=new THREE.MeshBasicMaterial({color:0xff3b1a});
+  [-2.8,2.8].forEach(function(z){ part(new THREE.SphereGeometry(.9,10,8),3.2,3.6,z,0,0,0,eyeM);
+    part(new THREE.ConeGeometry(.9,11,8),-4,8,z*1.1,0,0,1.05);                                       // sừng vuốt ra sau
+    part(new THREE.ConeGeometry(.5,6,6),-1,4.5,z*1.5,z>0?-.7:.7,0,.7);
+    var wh=new THREE.CatmullRomCurve3([new THREE.Vector3(10,-.5,z*.6),new THREE.Vector3(6,-3,z*2.2),new THREE.Vector3(0,-5,z*3.4),new THREE.Vector3(-7,-4,z*4.5)]);
+    head.add(new THREE.Mesh(new THREE.TubeGeometry(wh,20,.35,6,false),hm)); });                        // râu
+  for(var k=0;k<7;k++) part(new THREE.ConeGeometry(.9,6-k*.4,5),-4-k*2.4,4.6-k*.9,0,0,0,1.2+k*.08);       // bờm
+  // lửa: luồng hạt vàng → cam → đỏ từ miệng
+  var N=520, pos=new Float32Array(N*3), col=new Float32Array(N*3), PR=[]; for(var k=0;k<N;k++){ pos[k*3+1]=-999; PR.push({life:0,v:[0,0,0]}); }
+  var fg=new THREE.BufferGeometry(); fg.setAttribute('position',new THREE.BufferAttribute(pos,3)); fg.setAttribute('color',new THREE.BufferAttribute(col,3));
+  var fgc=document.createElement('canvas'); fgc.width=fgc.height=32; var fgx=fgc.getContext('2d'), fgr=fgx.createRadialGradient(16,16,0,16,16,16); fgr.addColorStop(0,'#fff'); fgr.addColorStop(.4,'rgba(255,255,255,.6)'); fgr.addColorStop(1,'rgba(255,255,255,0)'); fgx.fillStyle=fgr; fgx.fillRect(0,0,32,32);
+  var fm=new THREE.PointsMaterial({map:new THREE.CanvasTexture(fgc),size:5,sizeAttenuation:true,vertexColors:true,transparent:true,opacity:.9,depthWrite:false,blending:THREE.AdditiveBlending});
   var fire=new THREE.Points(fg,fm); fire.frustumCulled=false; g.add(fire);
-  var mouth=new THREE.Vector3(hx+18,hy-1,0), fi=0, ft=0;
-  bridgeFx.push(function(dt,tm,n){ dm.emissive.setHSL((tm*.08)%1,.9,.5); dm.emissiveIntensity=n*.9; ls.forEach(function(m){ m.material.opacity=n; });
-    ft=(ft+dt)%9; var on=n>.5&&ft<3.2, a=fg.attributes.position.array;
-    if(on) for(var e=0;e<9;e++){ var p=P[fi], j=fi*3; p.life=1; var sp=34+Math.random()*10; p.v=[sp,6+Math.random()*6-3,(Math.random()-.5)*7]; a[j]=mouth.x; a[j+1]=mouth.y; a[j+2]=mouth.z; fi=(fi+1)%N; }
-    for(var k=0;k<N;k++){ var q=P[k]; if(q.life<=0) continue; q.life-=dt*1.1; var j2=k*3; if(q.life<=0){ a[j2+1]=-999; continue; } q.v[1]+=dt*6; a[j2]+=q.v[0]*dt; a[j2+1]+=q.v[1]*dt; a[j2+2]+=q.v[2]*dt; q.v[0]*=.97; }
-    fg.attributes.position.needsUpdate=true; fm.color.setHSL(.05-.03*(ft%1),1,.42); });
+  var mouth=new THREE.Vector3(), fi=0, ft=0; head.updateMatrix(); mouth.set(12.5,-.6,0).applyMatrix4(head.matrix);
+  var ls=[glowStrip(g,L,0,DY+1.4,18.3,0xffd38a),glowStrip(g,L,0,DY+1.4,-18.3,0xffd38a)];
+  bridgeFx.push(function(dt,tm,n){ led.offset.x=(tm*.12)%1; dm.emissiveIntensity=n*1.1; hm.emissive.setHSL((1-((tm*.12*3)%1)+.9)%1,1,.55); hm.emissiveIntensity=n*.9; eyeM.color.setHSL(.02,1,.3+.3*n); ls.forEach(function(m){ m.material.opacity=n; });
+    ft=(ft+dt)%9; var on=n>.5&&ft<3.2, a=fg.attributes.position.array, cl=fg.attributes.color.array;
+    if(on) for(var e=0;e<10;e++){ var p=PR[fi], j=fi*3, sp=30+Math.random()*12; p.life=1; p.v=[Math.cos(.15)*sp,Math.sin(.15)*sp+(Math.random()-.5)*5,(Math.random()-.5)*6]; a[j]=mouth.x+Math.random()*2; a[j+1]=mouth.y; a[j+2]=mouth.z; fi=(fi+1)%N; }
+    for(var k=0;k<N;k++){ var q=PR[k], j2=k*3; if(q.life<=0) continue; q.life-=dt*1.25; if(q.life<=0){ a[j2+1]=-999; continue; }
+      q.v[1]+=dt*7; q.v[0]*=.965; q.v[2]*=1.01; a[j2]+=q.v[0]*dt; a[j2+1]+=q.v[1]*dt; a[j2+2]+=q.v[2]*dt;
+      var l=q.life; cl[j2]=.95*l+.05; cl[j2+1]=Math.max(0,l*l*.8); cl[j2+2]=Math.max(0,l*l*l*.35); }
+    fg.attributes.position.needsUpdate=true; fg.attributes.color.needsUpdate=true; });
 })();
 (function(){ var b=bridgeGrp([-927,-6526],[-453,-6384]), g=b.g, L=b.L, DY=9;
   var deck=new THREE.Mesh(new THREE.BoxGeometry(L,1.8,12.5),M(0x8d9096,{roughness:.8})); deck.position.y=DY; g.add(deck);
@@ -849,7 +878,7 @@ var RW_S=new THREE.Vector3(-4755,0,-4272), RW_N=new THREE.Vector3(-3410,0,-7487)
     var win=new THREE.Mesh(new THREE.BoxGeometry(4.3*S,.35*S,30*S),new THREE.MeshBasicMaterial({color:0xffe1a0,transparent:true,opacity:0})); win.position.set(0,.7*S,1*S); g.add(win); U.win=win; g.userData.U=U; g.userData.ph=Math.random();
     g.rotation.order='YXZ'; g.rotation.y=Math.atan2(RW_D.x,RW_D.z); world.add(g); return g; }
   planes.push({g:plane(),kind:'dep',t:0,T:80},{g:plane(),kind:'arr',t:40,T:80}); })();
-var pT=0; window.__4d={br:function(dt){ updateBridges(dt,performance.now()/1000); },planes:planes,fw:function(dt){ updateFireworks(dt); },setTime:function(h){ hourEl.value=h; setTime(h); }};
+var pT=0; window.__4d={look:function(c,t){ camera.position.copy(world.localToWorld(new THREE.Vector3(c[0],c[1],c[2]))); controls.target.copy(world.localToWorld(new THREE.Vector3(t[0],t[1],t[2]))); controls.update(); },br:function(dt){ updateBridges(dt,performance.now()/1000); },planes:planes,fw:function(dt){ updateFireworks(dt); },setTime:function(h){ hourEl.value=h; setTime(h); }};
 function updatePlanes(dt){ pT+=dt;
   planes.forEach(function(p){ p.t=(p.t+dt)%p.T; var u=p.t/p.T, d, y, pitch=0, vis=true;
     if(p.kind==='dep'){ var roll=.22; if(u<roll){ var a=u/roll; d=200+a*a*1900; y=2; } else { var b=(u-roll)/(1-roll); d=2100+b*14000; y=2+b*14000*.13; pitch=-.13; } }
@@ -895,7 +924,7 @@ label('Furama Resort Đà Nẵng','far',world,[187,26,-2113]);
 label('Marriott Resort','far',world,[61,26,1827]);
 label('Meliá Danang Beach Resort','far',world,[155,26,2604]);
 label('Pulchra Resort Đà Nẵng','far',world,[88,26,4010]);
-label('Cầu Rồng','far',world,[-1120,60,-5304]);
+label('Cầu Rồng','far',world,[-1120,62,-5304]);
 label('Cầu Sông Hàn','far',world,[-690,50,-6455]);
 label('Biển Đông','far',world,[900,4,-150]);
 label('Bán đảo Sơn Trà','far',scene,[1300,560,-5200]);
