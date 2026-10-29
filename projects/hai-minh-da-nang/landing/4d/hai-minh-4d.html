@@ -473,6 +473,13 @@ hill(1600,-5200,2300,520,0x5f8a6f); hill(400,-4800,900,300,0x6a917a);
   if(lo.length){ var m1=add(mergeGeos(lo),M(0xe6dfd2,{roughness:.8})); m1.castShadow=true; }
   if(hi.length){ var m2=add(mergeGeos(hi),M(0xd9e2ea,{roughness:.35,metalness:.25,envMapIntensity:.9})); m2.castShadow=true; }
 })();
+// Sun FourS Tower (4 tòa F1, F2, F3, F5 · 20 tầng · mái ~70 m): đường bao lấy từ mô hình 4D FourS, quy đổi theo toạ độ GPS dự án
+var FOURS=[[-1988.9, 518.4, -1979.8, 535.6, -1993.6, 542.8, -1982.4, 563.9, -1968.7, 556.6, -1959.7, 573.8, -1996.5, 593.2, -2005.6, 576.1, -2003.6, 575.0, -2014.7, 554.0, -2016.7, 555.0, -2025.8, 537.9], [-2031.2, 440.1, -2032.7, 440.1, -2033.9, 440.7, -2033.7, 441.1, -2034.0, 440.7, -2066.1, 457.7, -2067.0, 459.2, -2066.8, 460.1, -2059.1, 474.8, -2058.3, 475.4, -2057.2, 475.3, -2044.8, 468.8, -2043.8, 470.7, -2045.1, 471.4, -2041.9, 477.5, -2040.6, 476.8, -2039.6, 478.8, -2049.3, 483.9, -2049.1, 484.2, -2049.4, 483.9, -2052.1, 485.4, -2052.6, 486.8, -2044.8, 501.8, -2043.7, 502.6, -2042.4, 502.5, -2039.2, 500.8, -2039.3, 500.6, -2039.2, 500.8, -2009.2, 485.0, -2008.3, 483.6, -2008.3, 482.6, -2010.4, 478.7, -2010.7, 478.8, -2010.4, 478.7, -2016.3, 467.6, -2017.1, 467.3, -2018.1, 467.4, -2023.7, 470.4, -2029.0, 460.4, -2023.3, 457.4, -2022.6, 456.7, -2022.5, 455.8, -2028.1, 445.1, -2028.4, 445.2, -2028.2, 445.0, -2030.3, 441.1], [-2146.6, 522.3, -2146.8, 523.4, -2146.7, 524.8, -2134.4, 548.0, -2133.2, 549.0, -2131.5, 549.4, -2119.5, 543.2, -2118.9, 542.3, -2119.1, 541.2, -2092.8, 527.3, -2091.9, 528.1, -2091.0, 528.1, -2079.7, 522.1, -2078.7, 521.1, -2078.3, 519.6, -2078.6, 518.5, -2100.8, 476.3, -2102.1, 475.2, -2103.4, 474.9, -2104.4, 475.1, -2126.9, 487.0, -2127.8, 488.1, -2128.1, 489.3, -2127.9, 490.6, -2124.3, 497.4, -2123.4, 498.0, -2122.6, 498.0, -2115.7, 494.2, -2106.6, 511.4, -2124.5, 520.9, -2123.2, 523.4, -2124.6, 524.1, -2123.6, 526.4, -2124.1, 526.1, -2124.3, 525.0, -2125.0, 524.5, -2124.5, 523.9, -2126.9, 519.4, -2127.2, 519.6, -2126.9, 519.4, -2129.6, 514.2, -2130.7, 513.5, -2137.4, 516.7, -2137.1, 517.2, -2137.4, 516.7, -2145.5, 521.0], [-2061.7, 554.6, -2036.0, 603.2, -2057.3, 614.4, -2073.6, 583.5, -2108.1, 601.7, -2117.4, 584.0]];
+(function(){ var pod=M(0xe9e3d6,{roughness:.7}), body=M(0xdfe7ee,{roughness:.25,metalness:.35,envMapIntensity:1}), crown=M(0xf4f1ea,{roughness:.6});
+  FOURS.forEach(function(P){ var sh=new THREE.Shape(); for(var i=0;i<P.length;i+=2){ if(i) sh.lineTo(P[i],-P[i+1]); else sh.moveTo(P[i],-P[i+1]); }
+    function ex(y0,h,m){ var g=new THREE.ExtrudeGeometry(sh,{depth:h,bevelEnabled:false}); g.rotateX(-Math.PI/2); var o=new THREE.Mesh(g,m); o.position.y=y0; o.castShadow=o.receiveShadow=true; world.add(o); return o; }
+    ex(0,10.5,pod); ex(10.5,59.6,body); ex(70.1,1.2,crown);
+    for(var f=1;f<=17;f++) ex(10.5+f*3.35-.15,.3,crown); }); })();
 
 /* ---------- Sun Saphia Residence tower – theo phối cảnh mới của dự án ---------- */
 /* Khối tháp thẳng hình chữ nhật 30 tầng (~114 m): kính xanh nhạt, viền sàn trắng, các trụ đứng màu đồng,
@@ -704,9 +711,9 @@ label('Resort ven biển','',world,[70,12,282]);
 label('Bãi biển · bãi tắm Sơn Thủy','',world,[COASTX(560)-30,4,560]);
 label('Crowne Plaza Danang','',world,[70,58,-470]);
 // các dự án, điểm mốc, resort quanh dự án (toạ độ đổi từ GPS)
-(function(){ var pm=M(0xff6a2b,{emissive:0xff6a2b,emissiveIntensity:.6}); [[-2053,527],[-2135,-1355],[-1585,-2896],[-1533,-85]].forEach(function(q){   // cọc đánh dấu vị trí
+(function(){ var pm=M(0xff6a2b,{emissive:0xff6a2b,emissiveIntensity:.6}); [[-2135,-1355],[-1585,-2896],[-1533,-85]].forEach(function(q){   // cọc đánh dấu vị trí
   var c=new THREE.Mesh(new THREE.CylinderGeometry(2.5,2.5,50,10),pm); c.position.set(q[0],25,q[1]); world.add(c); var b=new THREE.Mesh(new THREE.SphereGeometry(9,16,12),pm); b.position.set(q[0],56,q[1]); world.add(b); }); })();
-label('Fours Tower','far',world,[-2053,60,527]);
+label('Sun FourS Tower · 4 tòa 20 tầng','far',world,[-2053,96,527]);
 label('S Light Tower','far',world,[-2135,60,-1355]);
 label('Điểm bắn pháo hoa DIFF','far',world,[-1585,40,-2896]);
 label('Sun Neva Island','far',world,[-1533,40,-85]);
@@ -889,7 +896,7 @@ var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false);
   if(r) viewFromUnit(r); else bView0(); };
 
 /* ---------- bấm vào căn trên mặt bằng tầng: hiện thẻ căn, mở mặt bằng & 3D căn, view từ đúng căn ---------- */
-var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/2228534269a8acc37f5a3449ea0aa433def564ce/projects/sun-saphia/chon-can/chon-can-app.html';
+var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/ea444bc1ee0301d75181ca1e09dc15274cd79c84/projects/sun-saphia/chon-can/chon-can-app.html';
 var unitEye=null;
 // [mã, loại, u0,u1, v0,v1, hướng mặt kính chính] – cùng số liệu với công cụ chọn căn
 var UNITS=[['11','2PN',0,11.1,0,8.1,'E'],['12','STU',11.19,14.99,0,9.1,'E'],['12A','STU',14.99,18.8,0,9.1,'E'],['12B','1PN',18.8,25.02,0,9.1,'E'],['15','STU',25.02,28.82,0,9.1,'E'],['16','STU',28.82,32.64,0,9.1,'E'],['17','1PN',32.64,38.91,0,9.1,'E'],
