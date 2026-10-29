@@ -449,9 +449,46 @@ box(22,46,120,70,-470,0xf1ede4); box(60,18,26,60,-400,0xe9e2d4); box(30,12,40,90
 box(70,22,20,72,470,0xf3efe6);
 for(var i=0;i<18;i++) box(9,7,9,40+(i%6)*12,510+Math.floor(i/6)*16,0xe8d8c2);
 // biệt thự resort mái ngói đỏ phía Nam đường Minh Mạng
+var GLOWTEX=(function(){ var c=document.createElement('canvas'); c.width=c.height=64; var g=c.getContext('2d'), r=g.createRadialGradient(32,32,0,32,32,32); r.addColorStop(0,'rgba(255,255,255,1)'); r.addColorStop(.25,'rgba(255,255,255,.75)'); r.addColorStop(1,'rgba(255,255,255,0)'); g.fillStyle=r; g.fillRect(0,0,64,64); return new THREE.CanvasTexture(c); })();
 // distant hills: Sơn Trà (north) and Ngũ Hành Sơn (south-west)
 function hill(x,z,r,h,c){var m=new THREE.Mesh(new THREE.SphereGeometry(1,24,12),M(c,{roughness:1}));m.scale.set(r,h,r*.7);m.position.set(x,0,z);scene.add(m);return m;}
-hill(1600,-5200,2300,520,0x5f8a6f); hill(400,-4800,900,300,0x6a917a);
+// Sơn Trà đặt theo GPS (đỉnh ~16.12,108.273 · cao ~690 m): khối chính + sườn Tây (Tiên Sa); không phủ sương để vẫn thấy từ xa
+[[2000,-11550,4200,690,0x6b8f78],[-1500,-10600,1500,320,0x74967f]].forEach(function(h){ var m=hill(h[0],h[1],h[2],h[3],h[4]); m.material.fog=false; });
+// Tượng Quan Thế Âm chùa Linh Ứng Bãi Bụt (16.099623,108.277131): cao 67 m, đài sen Ø35 m, trên sườn Nam Sơn Trà – buổi tối chiếu sáng
+var ladyB=null;
+(function(){ var g=new THREE.Group(); g.position.set(2049,62,-8623); scene.add(g);
+  var wm=M(0xf3f1ea,{roughness:.55,fog:false,emissive:0xfff1d6,emissiveIntensity:0}), sm=M(0xd9d4c7,{roughness:.8,fog:false});
+  // tỉ lệ theo ảnh thực tế: nhà đế tròn có cửa vòm ~6,5 m → vành mây ~5,5 m → đài sen 2 lớp ~8 m → tượng ~48 m (tổng ~67 m)
+  function add(geo,m,x,y,z,rx,ry,rz){ var o=new THREE.Mesh(geo,m); o.position.set(x||0,y||0,z||0); o.rotation.set(rx||0,ry||0,rz||0); g.add(o); return o; }
+  function lathe(p,seg){ return new THREE.LatheGeometry(p.map(function(q){ return new THREE.Vector2(q[0],q[1]); }),seg||28); }
+  var dk=M(0x5b5f66,{roughness:.8,fog:false}), cl=M(0xe4edf0,{roughness:.6,fog:false,emissive:0xfff1d6,emissiveIntensity:0});
+  add(new THREE.CylinderGeometry(21,23,70,12),sm,0,-35,0);                                   // nền đá trên sườn núi
+  add(new THREE.BoxGeometry(14,3,16),sm,0,-1.5,24);                                         // bậc thang
+  add(new THREE.CylinderGeometry(17,17,6.5,32),wm,0,3.25,0);                                // nhà đế tròn
+  for(var i=0;i<10;i++){ var a=i/10*Math.PI*2; add(new THREE.BoxGeometry(2.6,4.2,.6),dk,Math.sin(a)*17.1,2.4,Math.cos(a)*17.1,0,a,0); }   // cửa vòm
+  add(new THREE.CylinderGeometry(18.2,18.2,1,32),wm,0,7,0);                                 // vành mái
+  add(new THREE.CylinderGeometry(15.2,16.4,5.5,32),cl,0,10.2,0);                            // vành mây chạm nổi
+  for(var i=0;i<20;i++){ var a=i/20*Math.PI*2, c=add(new THREE.SphereGeometry(1.7,10,8),cl,Math.sin(a)*15.6,9.6+(i%2)*1.6,Math.cos(a)*15.6); c.scale.set(1.3,.8,.6); c.rotation.y=a; }
+  [[18,11.4,13.5,6.4,.75],[14,8.4,15.5,5.6,.4]].forEach(function(t){ for(var i=0;i<t[0];i++){ var a=(i+(t[0]===14?.5:0))/t[0]*Math.PI*2, p=new THREE.Group(); p.position.set(Math.sin(a)*t[1],t[2],Math.cos(a)*t[1]); p.rotation.y=a; g.add(p);
+      var pe=new THREE.Mesh(new THREE.SphereGeometry(1,12,10),wm); pe.scale.set(t[3]*.42,t[3]*.62,t[3]*.16); pe.rotation.x=t[4]; pe.position.y=t[3]*.35; p.add(pe); } });   // cánh sen 2 lớp
+  add(new THREE.CylinderGeometry(9.8,11,3,28),wm,0,15,0);
+  var Y=17;   // chân tượng
+  var robe=add(lathe([[0,0],[8.4,0],[8.8,1.3],[7.5,3.6],[6.8,9],[6.2,17],[5.6,24],[5.4,29],[5.8,32.5],[5.3,35.5],[4.3,37],[1.7,38.4],[0,38.6]]),wm,0,Y,0); robe.scale.z=.72;
+  add(lathe([[0,0],[9,0],[9.2,.8],[8.2,1.8],[0,1.9]]),wm,0,Y-.6,0).scale.z=.8;              // gấu áo xoè
+  var hd=add(new THREE.SphereGeometry(2.6,18,14),wm,0,Y+40.6,.3); hd.scale.set(.95,1.25,1);  // đầu
+  add(new THREE.CylinderGeometry(1.9,2.8,4.2,16),wm,0,Y+44.6,-.3);                          // mũ miện cao
+  add(new THREE.SphereGeometry(.9,10,8),wm,0,Y+47.1,-.1);
+  add(new THREE.CylinderGeometry(3.2,6.2,10,20,1,true,Math.PI*.5,Math.PI),wm,0,Y+40,-.3);  // khăn trùm từ đầu xuống vai
+  add(new THREE.CylinderGeometry(6.2,7.6,22,20,1,true,Math.PI*.5,Math.PI),wm,0,Y+24,-.3);  // khăn buông sau lưng
+  add(new THREE.TorusGeometry(2.4,.32,8,24),wm,0,Y+36.6,1.6,1.2,0,0);                       // chuỗi hạt
+  [-1,1].forEach(function(sd){ var sl=add(new THREE.CylinderGeometry(1.5,3.0,22,12),wm,sd*5.5,Y+25,.8,0,0,sd*.1); sl.scale.z=.6; });   // tay áo dài buông 2 bên
+  add(new THREE.CylinderGeometry(.85,.95,6,10),wm,1.9,Y+32,3.7,-.12,0,0);                    // tay phải giơ trước ngực
+  add(new THREE.BoxGeometry(1.4,2.4,.7),wm,1.9,Y+36,3.9);
+  add(new THREE.CylinderGeometry(.85,.95,6,10),wm,-.6,Y+28.3,3.9,0,0,Math.PI/2);             // tay trái ngang eo
+  add(lathe([[0,0],[.9,.2],[1.1,1.3],[.35,2.4],[.5,3.1],[0,3.2]],12),wm,.4,Y+29.2,4.3);      // bình cam lộ
+  var glow=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOWTEX,color:0xffe7b8,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending,fog:false})); glow.scale.set(140,200,1); glow.position.y=38; g.add(glow);
+  g.rotation.y=Math.PI*.25;   // tượng hướng mặt ra biển (Đông Nam)
+  ladyB={m:wm,glow:glow}; })();
 // Ngũ Hành Sơn (Marble Mountains): ~1.9 km south of the lot, between Lê Văn Hiến and Trường Sa
 
 
@@ -793,7 +830,6 @@ var ships=[];
 function updateShips(dt,tm){ var n=curNight; ships.forEach(function(s){ var L=Math.abs(s.z1-s.z0); s.t+=dt*s.v/L; var ph=s.t%2, f=ph<1?ph:2-ph, dir=(ph<1?1:-1)*(s.z1>s.z0?1:-1);
     s.g.position.set(s.x,.3+Math.sin(tm*.5+s.x)*.3,s.z0+(s.z1-s.z0)*f); s.g.rotation.y=dir>0?0:Math.PI; s.ls.forEach(function(l){ l.material.opacity=n; l.scale.setScalar(1+n*1.3); }); }); }
 
-var GLOWTEX=(function(){ var c=document.createElement('canvas'); c.width=c.height=64; var g=c.getContext('2d'), r=g.createRadialGradient(32,32,0,32,32,32); r.addColorStop(0,'rgba(255,255,255,1)'); r.addColorStop(.25,'rgba(255,255,255,.75)'); r.addColorStop(1,'rgba(255,255,255,0)'); g.fillStyle=r; g.fillRect(0,0,64,64); return new THREE.CanvasTexture(c); })();
 /* Cầu Rồng (đầu rồng hướng ra biển, buổi tối đổi màu + phun lửa) và Cầu Sông Hàn (dây văng sáng đèn) – vị trí theo OpenStreetMap */
 var bridgeFx=[];
 function bridgeGrp(A,B){ var dx=B[0]-A[0], dz=B[1]-A[1], L=Math.hypot(dx,dz), g=new THREE.Group(); g.position.set((A[0]+B[0])/2,0,(A[1]+B[1])/2); g.rotation.y=Math.atan2(-dz/L,dx/L); world.add(g); return {g:g,L:L}; }
@@ -927,7 +963,8 @@ label('Pulchra Resort Đà Nẵng','far',world,[88,26,4010]);
 label('Cầu Rồng','far',world,[-1120,62,-5304]);
 label('Cầu Sông Hàn','far',world,[-690,50,-6455]);
 label('Biển Đông','far',world,[900,4,-150]);
-label('Bán đảo Sơn Trà','far',scene,[1300,560,-5200]);
+label('Bán đảo Sơn Trà','far',scene,[2000,760,-11550]);
+label('Tượng Quan Thế Âm · chùa Linh Ứng','far',scene,[2049,150,-8623]);
 label('Ngũ Hành Sơn','far',scene,[NHS[0],120,NHS[1]]);
 (function(){ function L(t,px,py,h){ var q=mp(px,py); label(t,'far',scene,[q[0],h||20,q[1]]); }
   label('Cù Lao Chàm (~28 km)','far',scene,[__CLC[0],160,__CLC[1]]);
@@ -959,7 +996,7 @@ function setTime(h){
   skyU.sunDir.value.copy(dir); skyU.sunCol.value.copy(lerpC(C(0xfff3d8),C(0xff9a4a),low)).multiplyScalar(1-night);
   scene.fog.color.copy(hor);
   seaMat.color.copy(lerpC(lerpC(C(0x1b8fa8),C(0x3a5d84),low),C(0x0c1a30),night));
-  glass.emissiveIntensity=night*1.8; glassTop.emissiveIntensity=night*1.8; (NIGHT_MATS||[]).forEach(function(q){ q[0].emissiveIntensity=night*q[1]; }); curNight=night; if(lampHeads2) lampHeads2.material.opacity=night; if(lampHeads){ lampHeads.material.opacity=night; streetGlow.forEach(function(m){ m.material.opacity=.4*night; }); } if(carLights){ carLights.f.material.opacity=carLights.r.material.opacity=night; carLights.b.material.opacity=.55*night; } if(typeof boatWin!=='undefined'){ boatWin.emissiveIntensity=night*2.2; boatLights.forEach(function(l){ l.material.opacity=night; l.scale.setScalar(1+night*2); }); }
+  glass.emissiveIntensity=night*1.8; glassTop.emissiveIntensity=night*1.8; (NIGHT_MATS||[]).forEach(function(q){ q[0].emissiveIntensity=night*q[1]; }); curNight=night; if(lampHeads2) lampHeads2.material.opacity=night; if(ladyB){ ladyB.m.emissiveIntensity=night*.85; ladyB.glow.material.opacity=night*.55; } if(lampHeads){ lampHeads.material.opacity=night; streetGlow.forEach(function(m){ m.material.opacity=.4*night; }); } if(carLights){ carLights.f.material.opacity=carLights.r.material.opacity=night; carLights.b.material.opacity=.55*night; } if(typeof boatWin!=='undefined'){ boatWin.emissiveIntensity=night*2.2; boatLights.forEach(function(l){ l.material.opacity=night; l.scale.setScalar(1+night*2); }); }
   renderer.toneMappingExposure=.74-.16*night;
   var hh=Math.floor(h), mm=Math.round((h-hh)*60/5)*5; if(mm===60){hh++;mm=0;}
   hourOut.textContent=(hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm;
