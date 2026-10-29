@@ -543,16 +543,22 @@ for s in SHOTS:
         for o in bpy.data.objects:
             if o.type == 'MESH' and o.data.materials and o.data.materials[0] in (GLASS, RGLASS):
                 for sl_ in o.material_slots: sl_.link = 'OBJECT'; sl_.material = CLR
-        # cắt ngang toàn bộ tường, kính, khung ở cùng một độ cao (kiểu mặt bằng phối cảnh bán hàng): tường trong và tường bao như nhau
-        LOWH = float(os.environ.get('TOPCUT', '2.2'))
+        # mặt cắt bên trong: tường trong + tường/kính phía người xem cắt ở 1,3 m; chỉ giữ nguyên tường bao đối diện
+        LOWH = float(os.environ.get('TOPCUT', '1.3'))
+        _on = Vector((OUTN.x, OUTN.y)) if OUTN.length > .01 else Vector((1, 0))
+        _az = math.atan2(_on.y, _on.x) + math.radians(float(os.environ.get('TOPAZ', '-38'))); _hd = Vector((math.cos(_az), math.sin(_az)))
+        _c0 = Vector(((min(p[0] for p in BX) + max(p[0] for p in BX)) / 2, (min(p[1] for p in BX) + max(p[1] for p in BX)) / 2))
+        _ext = max(abs((Vector(p) - _c0).dot(_hd)) for p in BX)
         for o in list(bpy.data.objects):
             if o.type != 'MESH' or o.hide_render or o.parent is not None or not o.data.materials or not o.data.vertices: continue
-            if o.name.startswith(('rem', 'canh-cua')) and o.name.startswith('rem'): o.hide_render = True; continue
+            if o.name.startswith('rem'): o.hide_render = True; continue
             if o.data.materials[0] not in (WALL, EXT, GLASS, ALU, OAK): continue
             vs_ = [o.matrix_world @ v.co for v in o.data.vertices]; zs_ = [v.z for v in vs_]
             if max(zs_) <= LOWH + .02: continue
+            c_ = Vector((sum(v.x for v in vs_) / len(vs_), sum(v.y for v in vs_) / len(vs_)))
+            if o.data.materials[0] in (EXT, GLASS, ALU) and (c_ - _c0).dot(_hd) < -.35 * _ext: continue   # tường bao đối diện: giữ nguyên
             zb = min(zs_)
-            if zb > LOWH - .05: o.hide_render = True; continue                                   # lanh tô, khung trên kính: nằm trên mặt cắt
+            if zb > LOWH - .05: o.hide_render = True; continue                                   # lanh tô, khung trên: nằm trên mặt cắt
             o.data = o.data.copy()
             for v in o.data.vertices:
                 if (o.matrix_world @ v.co).z > LOWH: v.co.z = (LOWH - o.location.z) / max(1e-6, o.scale.z)
