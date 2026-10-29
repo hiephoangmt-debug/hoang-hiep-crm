@@ -308,7 +308,7 @@ var INFO={'STU':['30–31 m²','3,8 × 9,0 m','giường đôi kê sát tường
           'STUL':['40,03 m² thông thủy (46,38 m² tim tường)','4,0 × 9 m + sảnh vào 2,8 m','studio lớn ở đầu hồi, 2 mặt thoáng (Tây + Nam) với 2 góc bo, giường đôi, sofa, bàn ăn, bếp + tủ lạnh, WC vách kính, ban công'],
           '1PN+1':['49–51 m²','6,2 × 9,0 m','phòng ngủ có cửa sổ, góc +1 (giường ban ngày, bàn làm việc), WC vách kính, bếp + bàn ăn 4 chỗ, phòng khách mở ra ban công'],
           '2PN':['60–70 m²','7,25 × 9,9 m','căn góc mặt kính bo cong, 2 phòng ngủ, 2 WC, phòng giặt, bếp chữ L, bàn ăn 4 chỗ, phòng khách mở ra lô gia'],
-          '2PN11':['70,21 m² thông thủy (77,35 m² tim tường)','9,9 × 7,25 m (gồm lô gia)','căn góc, lô gia chữ L ~1 m chạy hết mặt biển, vòng qua góc bo xuống tới chỗ máy giặt; 2 phòng ngủ cạnh nhau nhìn ra biển (phòng 1 có cửa ra lô gia), 2 WC, bếp + bàn ăn, phòng khách mở ra lô gia']};
+          '2PN11':['70,21 m² thông thủy (77,35 m² tim tường)','9,9 × 7,25 m (gồm lô gia) + lối vào','căn góc, lô gia chữ L ~1 m chạy hết mặt biển, vòng qua góc bo xuống tới chỗ máy giặt; 2 phòng ngủ cạnh nhau nhìn ra biển (phòng 1 có cửa ra lô gia), 2 WC, bếp + bàn ăn, phòng khách mở ra lô gia']};
 var VIEW={E:['Biển Đông trực diện','Bình minh trên biển, bán đảo Sơn Trà phía Bắc, Cù Lao Chàm phía Đông Nam.','Nắng sáng dịu, chiều mát'],
           W:['Sông Hàn · trung tâm TP','Hoàng hôn phía sông Hàn, thành phố lên đèn, xa xa núi Bà Nà.','Nắng chiều – nên có rèm'],
           N:['Hướng Bắc · Sơn Trà','Nhìn dọc trục Võ Nguyên Giáp về bán đảo Sơn Trà, chéo ra biển.','Ít nắng gắt trực tiếp'],
@@ -435,13 +435,13 @@ SPEC['2PN1']=(function(){ var b=JSON.parse(JSON.stringify(SPEC['2PN'])); b.floor
 SPEC['2PN11']=(function(){ var R=2.6,L=1.05, OA=arcP(R,R,R,Math.PI,1.5*Math.PI,10), IA=arcP(R,R,R-L,Math.PI,1.5*Math.PI,8), s=[], i;
   for(i=0;i<OA.length-1;i++) s.push([OA[i][0],OA[i][1],OA[i+1][0],OA[i+1][1],'r']);
   for(i=0;i<IA.length-1;i++) s.push([IA[i][0],IA[i][1],IA[i+1][0],IA[i+1][1],'g']);
-  s=s.concat([[0,R,0,9.9,'r'],[0,9.9,7.25,9.9,'x'],[7.25,0,7.25,9.9,'x',[[9.2,9.85,1]]],[6.5,8.45,7.25,8.45,'w'],
+  s=s.concat([[0,R,0,9.9,'r'],[0,9.9,8.0,9.9,'x'],[7.25,0,7.25,9.0,'x'],[7.25,9.0,8.0,9.0,'x'],[8.0,9.0,8.0,9.9,'x',[[0.05,0.85,1]]],[6.5,8.45,7.25,8.45,'w'],
    [R,0,6.8,0,'r'],[6.8,0,7.25,0,'x'],
    [L,R,L,3.55,'g'],[L,3.55,L,4.57,'x'],[L,4.57,L,6.36,'g'],[L,6.36,L,8.47,'x'],[L,8.47,L,9.9,'g'],
    [R,L,5.6,L,'x',[[1.85,2.7,1]]],[5.6,0,5.6,L,'g'],[6.8,0,6.8,L,'w'],[5.6,L,7.25,L,'w'],
    [L,4.0,5.6,4.0,'w',[[3.4,4.25,-1]]],[4.31,4.0,4.31,7.0,'w',[[0.17,0.97,1]]],[L,7.0,4.31,7.0,'w'],
    [5.6,L,5.6,6.12,'w',[[0.74,1.37,1],[3.72,4.36,1]]],[5.6,3.58,7.25,3.58,'w'],[5.6,6.12,7.25,6.12,'w']]);
-  return {W:7.25,D:9.9,floor:OA.concat([[7.25,0],[7.25,9.9],[0,9.9]]), segs:s, blocks:[],
+  return {W:8.0,D:9.9,floor:OA.concat([[7.25,0],[7.25,9.0],[8.0,9.0],[8.0,9.9],[0,9.9]]), segs:s, blocks:[],
    zones:[['wc',5.6,L,7.25,3.58],['wc',5.6,3.58,7.25,6.12],['bal',0,R,L,9.9],['bal',R,0,6.8,L]],
    shw:[[5.65,2.78,6.45,3.53,'r'],[5.65,3.65,6.45,4.4,'r']], rugs:[[1.5,7.55,3.4,9.45]], rrugs:[],
    items:[['bed',3.2,2.95,1.6,2.0,'u'],['ns',2.15,3.75,.45,.4,'u'],['ns',4.25,3.75,.45,.4,'u'],['ward',3.5,1.35,1.8,.6,'d'],
@@ -451,13 +451,16 @@ SPEC['2PN11']=(function(){ var R=2.6,L=1.05, OA=arcP(R,R,R,Math.PI,1.5*Math.PI,1
     ['kit',6.95,7.6,1.65,.6,'l',{sink:.35,hob:.75}],['fridge',6.92,6.47,.65,.65,'l'],['cab',5.85,9.72,.8,.35,'u'],
     ['wc',6.85,1.4,.4,.7,'l'],['van',6.95,2.3,.7,.45,'l'],['van',6.95,5.0,.7,.45,'l'],['wc',6.85,5.75,.4,.7,'l'],['wash',6.2,0.5,.6,.6,'d'],
     ['plant',0.5,5.2,.5],['plant',0.5,9.35,.5],['plant',4.6,0.5,.45]],
-   labels:[['Ngủ 1',2.2,2.3],['Ngủ 2',3.75,5.3],['Khách',3.5,8.4],['Ăn',5.7,8.85],['Bếp',6.3,7.6],['Sảnh',6.75,8.95],['WC',6.35,1.95],['WC',6.4,5.25],['Lô gia',0.5,6.6],['Lô gia',3.9,0.5]],
+   labels:[['Ngủ 1',2.2,2.3],['Ngủ 2',3.75,5.3],['Khách',3.5,8.4],['Ăn',5.7,8.85],['Bếp',6.3,7.6],['Sảnh',7.2,9.45],['WC',6.35,1.95],['WC',6.4,5.25],['Lô gia',0.5,6.6],['Lô gia',3.9,0.5]],
    eye:[3.6,8.3], look:[-4,7.6]}; })();
 // tầng 30: căn góc 1PN+1 (3007, 3003, 3002) cũng có lô gia ôm góc bo: như căn 11 nhưng bỏ phòng ngủ 2, phòng khách + ăn rộng
 SPEC['2PN1L']=(function(){ var b=JSON.parse(JSON.stringify(SPEC['2PN11'])), D=['4.31,4,4.31,7','1.05,7,4.31,7'];
-  b.floor=SPEC['2PN11'].floor; b.segs=SPEC['2PN11'].segs.filter(function(s){ return D.indexOf([s[0],s[1],s[2],s[3]].join(','))<0; });
-  b.items=b.items.filter(function(it){ return !(it[2]>4.5&&it[2]<7.2&&it[1]<4.5); }).concat([['dtab',2.6,5.5,1.4,.8,'l']]);
-  b.labels=b.labels.filter(function(l){ return l[0]!=='Ngủ 2'&&l[0]!=='Ăn'; }).concat([['Ăn',3.6,5.5]]); return b; })();
+  b.W=7.25; b.floor=SPEC['2PN11'].floor.filter(function(p){ return p[0]<7.9&&!(p[0]===7.25&&p[1]===9); }).concat([]); b.floor.splice(b.floor.length-1,0,[7.25,9.9]);
+  var X=['0,9.9,8,9.9','7.25,0,7.25,9','7.25,9,8,9','8,9,8,9.9'];
+  b.segs=SPEC['2PN11'].segs.filter(function(s){ var k=[s[0],s[1],s[2],s[3]].join(','); return D.indexOf(k)<0&&X.indexOf(k)<0; }).concat([[0,9.9,7.25,9.9,'x'],[7.25,0,7.25,9.9,'x',[[9.05,9.85,1]]]]);
+  b.labels=b.labels.map(function(l){ return l[0]==='Sảnh'?['Sảnh',6.85,9.3]:l; });
+  b.items=b.items.filter(function(it){ return !(it[2]>4.5&&it[2]<7.2&&it[1]<4.5); }).concat([['arm',2.2,5.3,.8,.8,'d'],['rtab',3.1,5.3,.5,.5],['plant',1.5,6.4,.45]]);
+  b.labels=b.labels.filter(function(l){ return l[0]!=='Ngủ 2'; }).concat([['Đọc sách',3.75,5.3]]); return b; })();
 // tầng 30: các căn 1PN / 1PN+1 có lô gia chạy hết mặt kính (máy giặt ở đầu lô gia), phòng ngủ lùi vào sau vách kính
 SPEC['1PN+1L']=(function(){ var b=JSON.parse(JSON.stringify(SPEC['1PN+1']));
   b.segs=b.segs.filter(function(s){ return !(s[1]===9&&s[3]===9); }).map(function(s){ return (s[0]===3.15&&s[1]===4.55&&s[2]===3.15&&s[3]===9)?[3.15,4.55,3.15,7.8,'w']:s; })
