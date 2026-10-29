@@ -543,22 +543,19 @@ for s in SHOTS:
         for o in bpy.data.objects:
             if o.type == 'MESH' and o.data.materials and o.data.materials[0] in (GLASS, RGLASS):
                 for sl_ in o.material_slots: sl_.link = 'OBJECT'; sl_.material = CLR
-        # hạ thấp các bức tường phía người xem (nửa căn gần máy ảnh) để nhìn rõ bên trong
-        _on = Vector((OUTN.x, OUTN.y)) if OUTN.length > .01 else Vector((1, 0))
-        _az = math.atan2(_on.y, _on.x) + math.radians(float(os.environ.get('TOPAZ', '-38'))); _hd = Vector((math.cos(_az), math.sin(_az)))
-        _cx = (min(p[0] for p in BX) + max(p[0] for p in BX)) / 2; _cy = (min(p[1] for p in BX) + max(p[1] for p in BX)) / 2
-        _ext = max(abs((Vector(p) - Vector((_cx, _cy))).dot(_hd)) for p in BX); LOWH = float(os.environ.get('TOPLOW', '1.0'))
+        # cắt ngang toàn bộ tường, kính, khung ở cùng một độ cao (kiểu mặt bằng phối cảnh bán hàng): tường trong và tường bao như nhau
+        LOWH = float(os.environ.get('TOPCUT', '2.2'))
         for o in list(bpy.data.objects):
-            if o.type != 'MESH' or o.hide_render or o.parent is not None or not o.data.materials or o.data.materials[0] not in (WALL, EXT): continue
+            if o.type != 'MESH' or o.hide_render or o.parent is not None or not o.data.materials or not o.data.vertices: continue
+            if o.name.startswith(('rem', 'canh-cua')) and o.name.startswith('rem'): o.hide_render = True; continue
+            if o.data.materials[0] not in (WALL, EXT, GLASS, ALU, OAK): continue
             vs_ = [o.matrix_world @ v.co for v in o.data.vertices]; zs_ = [v.z for v in vs_]
-            if max(zs_) < H - .05 and not (o.data.materials[0] == WALL and min(zs_) > 1.5): continue
-            c_ = Vector((sum(v.x for v in vs_) / len(vs_), sum(v.y for v in vs_) / len(vs_)))
-            if o.data.materials[0] == EXT and (c_ - Vector((_cx, _cy))).dot(_hd) < .25 * _ext: continue   # chỉ giữ cao tường bao phía xa; tường trong hạ hết
+            if max(zs_) <= LOWH + .02: continue
             zb = min(zs_)
-            if zb > LOWH - .05: o.hide_render = True; continue                                   # lanh tô trên cửa của tường đã hạ
+            if zb > LOWH - .05: o.hide_render = True; continue                                   # lanh tô, khung trên kính: nằm trên mặt cắt
             o.data = o.data.copy()
             for v in o.data.vertices:
-                if (o.matrix_world @ v.co).z > zb + LOWH: v.co.z = (zb + LOWH - o.location.z) / max(1e-6, o.scale.z)
+                if (o.matrix_world @ v.co).z > LOWH: v.co.z = (LOWH - o.location.z) / max(1e-6, o.scale.z)
         for o in list(bpy.data.objects):
             if o.type != 'MESH' or o.hide_render or not o.data.materials: continue
             mt_ = o.data.materials[0]
@@ -596,7 +593,7 @@ for s in SHOTS:
         bpy.ops.mesh.primitive_plane_add(size=300, location=(cen.x, cen.y, -.06)); sh_ = bpy.context.object; sh_.is_shadow_catcher = True
         on = Vector((OUTN.x, OUTN.y)) if OUTN.length > .01 else Vector((1, 0))
         az = math.atan2(on.y, on.x) + math.radians(float(os.environ.get('TOPAZ', '-38')))   # đứng phía mặt kính, lệch sang 1 góc
-        EL = math.radians(float(os.environ.get('TOPEL', '55'))); dvec = Vector((math.cos(az) * math.cos(EL), math.sin(az) * math.cos(EL), math.sin(EL)))
+        EL = math.radians(float(os.environ.get('TOPEL', '58'))); dvec = Vector((math.cos(az) * math.cos(EL), math.sin(az) * math.cos(EL), math.sin(EL)))
         cam_d.type = 'PERSP'; cam_d.lens = 45; cam_d.sensor_fit = 'AUTO'; cam_d.shift_x = cam_d.shift_y = 0; cam_d.clip_end = 2000
         sc.render.resolution_x, sc.render.resolution_y = TW_, TH_
         pts = [Vector((x, y, z)) for x in (X0, X1) for y in (Y0, Y1) for z in (0, H)] + [Vector((p[0], p[1], 0)) for p in BX]
