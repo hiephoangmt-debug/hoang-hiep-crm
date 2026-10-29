@@ -552,9 +552,8 @@ for s in SHOTS:
         for o in list(bpy.data.objects):
             if o.type != 'MESH' or o.hide_render or o.parent is not None or not o.data.materials or not o.data.vertices: continue
             if o.name.startswith('rem'): o.hide_render = True; continue
-            if o.data.materials[0] not in (WALL, EXT, GLASS, ALU, OAK): continue
-            vs_ = [o.matrix_world @ v.co for v in o.data.vertices]; zs_ = [v.z for v in vs_]
-            if max(zs_) <= LOWH + .02: continue
+            vs_ = [o.matrix_world @ v.co for v in o.data.vertices]; zs_ = [v.z for v in vs_]   # cắt cả đồ vật (tủ, kệ, rèm, đèn thả)
+            if max(zs_) <= LOWH + .02 or min(zs_) < -.3: continue
             c_ = Vector((sum(v.x for v in vs_) / len(vs_), sum(v.y for v in vs_) / len(vs_)))
             if o.data.materials[0] in (EXT, GLASS, ALU) and (c_ - _c0).dot(_hd) < -.35 * _ext: continue   # tường bao đối diện: giữ nguyên
             zb = min(zs_)
