@@ -304,6 +304,15 @@ section.far canvas { visibility: hidden; }
       <h3 style="margin-top:14px">Theo phường</h3>
       <div class="toolbar-in"><select id="raoQuan" class="sel" aria-label="Chọn quận"></select></div>
       <div class="tbl-wrap"><table id="tblRaoP"></table></div>
+
+      <h3 style="margin-top:18px">Theo tuyến đường</h3>
+      <p class="note" style="margin:0 0 8px">Gom tin theo tên đường trong tin rao. <b>Mặt tiền</b> = tin người đăng đánh dấu mặt tiền đường (không tính kiệt/hẻm). Nhóm: <b>Ven biển</b> (Võ Nguyên Giáp, Hoàng Sa, Trường Sa, Nguyễn Tất Thành), <b>Ven sông Hàn</b> (Bạch Đằng, Trần Hưng Đạo, Như Nguyệt, Lê Văn Duyệt), <b>Trục chính ra biển, sông</b> (Phạm Văn Đồng, Võ Văn Kiệt, Nguyễn Văn Linh, Lê Duẩn, Hùng Vương, Trần Phú, 2 Tháng 9…). Đường có ít tin thì con số chỉ để tham khảo.</p>
+      <div class="tiles" id="raoGroups" style="margin-bottom:10px;grid-template-columns:repeat(auto-fill,minmax(140px,1fr))"></div>
+      <div class="viewbar">
+        <div class="seg" id="raoMt" role="group" aria-label="Loại tin"></div>
+        <div class="search-box" style="flex:1;min-width:160px"><input id="raoDuongQ" class="sel" style="width:100%" type="search" placeholder="Tìm đường: Bạch Đằng, Võ Nguyên Giáp…" aria-label="Tìm đường"></div>
+      </div>
+      <div class="tbl-wrap"><table id="tblRaoD"></table></div>
     </div>
   </section>
 
@@ -1329,6 +1338,34 @@ function renderRao() {
   $('tblRaoP').innerHTML = pl.length ? '<thead><tr><th>Phường/xã</th><th>Trung vị (tr/m²)</th><th>Thấp nhất</th><th>Cao nhất</th><th>Khoảng phổ biến</th><th>Số tin</th></tr></thead><tbody>' +
     pl.map(r => `<tr><td><b>${esc(r.p)}</b></td><td>${fmt(r.med, 1)}</td><td>${r.min == null ? '–' : fmt(r.min, 1)}</td><td>${r.max == null ? '–' : fmt(r.max, 1)}</td><td>${fmt(r.p25, 0)}–${fmt(r.p75, 0)}</td><td>${fmt(r.n)}</td></tr>`).join('') + '</tbody>'
     : '<tr><td class="empty">Chưa đủ tin (cần ít nhất 5 tin mỗi phường).</td></tr>';
+  renderRaoStreets(tinLink);
+}
+let raoMt = true, raoDuongN = 30;
+function renderRaoStreets(tinLink) {
+  const duong = (RAO.duong || {})[raoKind] || {}, nhom = (RAO.nhom || {})[raoKind] || {};
+  if (!Object.keys(duong).length) { $('raoGroups').innerHTML = ''; $('tblRaoD').innerHTML = '<tr><td class="empty">Chưa có số liệu theo đường – bot sẽ tính ở lần chạy tới.</td></tr>'; return; }
+  // ô nhóm đường (ưu tiên số mặt tiền)
+  const city = RAO.toan_tp[raoKind] || {};
+  const tile = (name, st) => {
+    const use = raoMt && st.mt ? st.mt : st;
+    return `<div class="card tile"><div class="lbl">${esc(name)}${raoMt && st.mt ? ' · mặt tiền' : ''}</div>
+      <div class="val">${fmt(use.med, 1)} <span class="unit">tr/m²</span></div>
+      <div class="unit">${fmt(use.n)} tin · cao nhất ${tinLink(use.max, use.tin_max)}${city.med ? ` · gấp ${fmt(use.med / city.med, 1)} lần TB thành phố` : ''}</div></div>`;
+  };
+  $('raoGroups').innerHTML = ['Ven sông Hàn', 'Ven biển', 'Trục chính ra biển, sông'].filter(g => nhom[g]).map(g => tile(g, nhom[g])).join('') +
+    `<div class="card tile"><div class="lbl">Toàn thành phố</div><div class="val">${fmt(city.med, 1)} <span class="unit">tr/m²</span></div><div class="unit">${fmt(city.n)} tin (tất cả)</div></div>`;
+  $('raoMt').innerHTML = [[true, 'Chỉ mặt tiền'], [false, 'Tất cả tin']].map(([v, l]) => `<button data-v="${v}" aria-pressed="${v === raoMt}">${l}</button>`).join('');
+  $('raoMt').querySelectorAll('button').forEach(b => b.onclick = () => { raoMt = b.dataset.v === 'true'; raoDuongN = 30; renderRao(); });
+  const q = noAcc($('raoDuongQ').value.trim());
+  $('raoDuongQ').oninput = () => { raoDuongN = 30; renderRaoStreets(tinLink); };
+  const rows = Object.entries(duong).map(([name, st]) => ({ name, st, use: raoMt ? st.mt : st }))
+    .filter(r => r.use && (!q || noAcc(r.name).includes(q))).sort((a, b) => b.use.med - a.use.med);
+  if (!rows.length) { $('tblRaoD').innerHTML = `<tr><td class="empty">${q ? 'Không thấy đường này' : 'Chưa đủ tin'}${raoMt ? ' (thử “Tất cả tin”)' : ''}.</td></tr>`; return; }
+  const badge = (g) => g ? ` <span class="pill">${esc(g === 'Trục chính ra biển, sông' ? 'Trục chính' : g)}</span>` : '';
+  $('tblRaoD').innerHTML = '<thead><tr><th>Đường</th><th>Trung vị (tr/m²)</th><th>Thấp nhất</th><th>Cao nhất</th><th>Số tin</th><th>Quận</th></tr></thead><tbody>' +
+    rows.slice(0, raoDuongN).map((r, i) => `<tr><td><b>${i + 1}. ${esc(r.name)}</b>${badge(r.st.nhom)}</td><td><b>${fmt(r.use.med, 1)}</b></td><td>${tinLink(r.use.min, r.use.tin_min)}</td><td>${tinLink(r.use.max, r.use.tin_max)}</td><td>${fmt(r.use.n)}</td><td>${esc((r.st.quan || '').replace(/^(Quận|Huyện) /, ''))}</td></tr>`).join('') + '</tbody>' +
+    (rows.length > raoDuongN ? `<tfoot><tr><td colspan="6"><button class="btn more" id="raoDuongMore">Xem thêm (${rows.length - raoDuongN} đường)</button></td></tr></tfoot>` : '');
+  const m = $('raoDuongMore'); if (m) m.onclick = () => { raoDuongN += 30; renderRaoStreets(tinLink); };
 }
 let bdsKind = null;
 const kyLabel = (d) => { const [y, m, dd] = d.split('-').map(Number); const qEnd = [3, 6, 9, 12].includes(m) && dd >= 28; return qEnd ? `Q${m / 3}/${y}` : `T${m}/${y}`; };
