@@ -137,7 +137,7 @@ def panel_wall(name, col, joint=.6):
     return m
 if LUX:
     FLOOR = marble('san-marble', (.93, .91, .88), (.6, .57, .54)); TILE = marble('wc-marble', (.9, .88, .85), (.48, .45, .42), (.6, .6), .1)
-    DECK = wood_floor(); WALL = panel_wall('tuong-op-tam', (.72, .64, .55)); EXT = panel_wall('tuong-bao-op-tam', (.8, .75, .68), .9); CEIL = mat('tran-lux', (.97, .96, .94), .95)
+    DECK = wood_floor(); WALL = panel_wall('tuong-op-tam', (.9, .87, .82)); EXT = panel_wall('tuong-bao-op-tam', (.93, .91, .87), .9)   # tông kem sáng cho phòng thoáng; CEIL = mat('tran-lux', (.97, .96, .94), .95)
     WALNUT = mat('oc-cho-lux', (.19, .1, .055), .3, noise=(25, .35, .02)); OAK = mat('go-lux', (.34, .2, .11), .3, noise=(25, .35, .02))
     BRASS = mat('dong', (.86, .62, .33), .22, 1.)
     FAB = velvet('nhung-xanh-reu', (.025, .085, .07)); FAB2 = velvet('nhung-taupe', (.4, .33, .27)); CHAIRF = velvet('boucle-kem', (.86, .82, .76))
@@ -502,6 +502,11 @@ cy.max_bounces = 8; cy.diffuse_bounces = 4; cy.glossy_bounces = 3; cy.transparen
 cy.sample_clamp_indirect = 4; cy.light_sampling_threshold = .01
 sc.view_settings.view_transform = 'AgX'; sc.view_settings.look = 'AgX - Base Contrast'; sc.view_settings.exposure = float(os.environ.get('EXPO', '1.15'))
 sc.render.resolution_x, sc.render.resolution_y = RW, RH; sc.render.image_settings.file_format = 'PNG'
+# đèn trần tổng dịu (như ánh sáng hắt từ trần thạch cao) để phòng sáng, không tối góc
+if True:
+    _fl = bpy.data.lights.new('den-tran-tong', 'AREA'); _fl.shape = 'RECTANGLE'; _fl.size = X1 - X0; _fl.size_y = Y1 - Y0
+    _fl.energy = (X1 - X0) * (Y1 - Y0) * float(os.environ.get('FILL', '9')); _fl.color = (1, .95, .88)
+    _fo = bpy.data.objects.new('den-tran-tong', _fl); sc.collection.objects.link(_fo); _fo.location = ((X0 + X1) / 2, (Y0 + Y1) / 2, H - .06)
 
 cam_d = bpy.data.cameras.new('cam'); cam = bpy.data.objects.new('cam', cam_d); sc.collection.objects.link(cam); sc.camera = cam
 cam_d.sensor_width = 36; cam_d.clip_start = .05; cam_d.clip_end = 30000
@@ -574,6 +579,7 @@ for s in SHOTS:
                 cp.material_slots[0].link = 'OBJECT'; cp.material_slots[0].material = CAPW
         TW_, TH_ = (int(v) for v in os.environ.get('TOPRES', '1080x1350').split('x'))
         sc.render.film_transparent = True; sun.energy = 0
+        if 'den-tran-tong' in bpy.data.objects: bpy.data.objects['den-tran-tong'].hide_render = True
         wd.node_tree.nodes['Background'].inputs['Strength'].default_value = float(os.environ.get('TOPSKY', '.25')); sky.sun_disc = False   # không còn bóng nắng dài
         X0, X1, Y0, Y1 = min(p[0] for p in BX), max(p[0] for p in BX), min(p[1] for p in BX), max(p[1] for p in BX)
         cen = Vector(((X0 + X1) / 2, (Y0 + Y1) / 2, 0))
