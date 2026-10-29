@@ -153,7 +153,7 @@ input[type=range]{accent-color:var(--orange)}
   ov.innerHTML='<div class="bx"><div class="lg">SR</div><h3>Link riêng Sun Saphia Residence</h3><p id="ssGateTx">Nhập email đã được Hoàng Hiệp cấp quyền để vào xem (chỉ cần 1 lần trên mỗi máy).</p>'
    +'<input id="ssGateIn" type="email" autocomplete="email" autocapitalize="off" placeholder="Email của bạn"><button type="button" id="ssGateBt">Vào xem</button>'
    +'<button type="button" class="lnk" id="ssGateBk" style="display:none">← Nhập email khác</button><div class="m" id="ssGateMsg"></div>'
-   +'<p style="margin:10px 0 0">Chưa được cấp quyền? Liên hệ <a href="tel:0904567009">0904 567 009</a> · <a href="https://zalo.me/0904567009">Zalo</a></p></div>';
+   +'<p style="margin:10px 0 0">Chưa được cấp quyền? Liên hệ người gửi link cho bạn.</p></div>';
   function mount(){ if(!document.getElementById('ssGate')) (document.body||document.documentElement).appendChild(ov); }
   if(document.body) mount(); else document.addEventListener('DOMContentLoaded',mount); mount();
   var $=function(s){ return ov.querySelector(s); }, step='email', email='';
@@ -1048,11 +1048,12 @@ var wm=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({
 var consoleEl=document.querySelector('.console');
 function placeWM(){ var W=innerWidth,H=innerHeight, w=Math.min(W*.72,480), h=w/4, cb=consoleEl?consoleEl.getBoundingClientRect().height:140; hudCam.right=W; hudCam.top=H; hudCam.updateProjectionMatrix(); wm.scale.set(w,h,1); wm.position.set(W/2,cb+(H-cb)*.42,0); }
 placeWM(); window.addEventListener('resize',placeWM); setTimeout(placeWM,800);
-if(/[?&]crm/.test(location.search)){ wm.visible=false;   // xem trong CRM nội bộ: không chữ chìm, không số điện thoại / Zalo
+if(true){ wm.visible=false;   // tạm thời ẩn số điện thoại ở mọi bản
+    // xem trong CRM nội bộ: không chữ chìm, không số điện thoại / Zalo
   var ct=document.querySelector('.contact'); if(ct) [].slice.call(ct.childNodes).forEach(function(n){ if(!(n.classList&&n.classList.contains('compass'))) ct.removeChild(n); }); }
 // rooftop signage: HM logo + phone on the crown, facing Trường Sa (east) and Nguyễn Đức Thuận (north)
 var sgC=document.createElement('canvas'); sgC.width=1024; sgC.height=256; (function(g){ g.fillStyle='#0b2a3d'; g.fillRect(0,0,1024,256); drawLogo(g,16,16,224);
-  g.fillStyle='#d8bd88'; g.font='800 92px "Be Vietnam Pro",Arial,sans-serif'; g.textBaseline='middle'; g.fillText('SUN SAPHIA',270,92); g.fillStyle='#ffffff'; g.font='700 64px "Be Vietnam Pro",Arial,sans-serif'; g.fillText(/[?&]crm/.test(location.search)?'RESIDENCE':'0904 567 009',272,190); })(sgC.getContext('2d'));
+  g.fillStyle='#d8bd88'; g.font='800 92px "Be Vietnam Pro",Arial,sans-serif'; g.textBaseline='middle'; g.fillText('SUN SAPHIA',270,92); g.fillStyle='#ffffff'; g.font='700 64px "Be Vietnam Pro",Arial,sans-serif'; g.fillText('RESIDENCE',272,190); })(sgC.getContext('2d'));
 var sgTex=new THREE.CanvasTexture(sgC); sgTex.encoding=THREE.sRGBEncoding;
 var sgMat=new THREE.MeshBasicMaterial({map:sgTex,toneMapped:false});
 function sign(grp,w,x,y,z,ry){ var m=new THREE.Mesh(new THREE.PlaneGeometry(w,w/4),sgMat); m.position.set(x,y,z); m.rotation.y=ry; grp.add(m); return m; }
