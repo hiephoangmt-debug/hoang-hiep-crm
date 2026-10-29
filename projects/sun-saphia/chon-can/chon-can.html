@@ -186,7 +186,7 @@ body{margin:0;background:var(--bg);font-family:var(--font);color:var(--navy);-we
 <script>
 (function(){
 var MODEL='__MODEL__';
-var FLOOR_TEX='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@62565b299ea36032491c1c351b7b7bdd18df2ec1/projects/sun-saphia/images/mat-bang-tang-4d.webp';
+var FLOOR_TEX='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@2c953f56ec08a1c00b4a2c6b0c3129a0a8008da3/projects/sun-saphia/images/mat-bang-tang-4d.webp';
 var COL={'STU':'#E86A78','1PN+1':'#4FB3E0','2PN':'#F2C14E'};
 var NAME={'STU':'Studio','1PN+1':'1PN+1','2PN':'2PN'};
 var TINT={'STU':'#f7c1c6','1PN+1':'#b5def2','2PN':'#f9e19c'}, LIGHT={'STU':'#fdebed','1PN+1':'#e6f4fb','2PN':'#fdf3d4'};   // màu sàn theo loại căn (như chú thích CĐT)
@@ -439,7 +439,7 @@ SPEC['2PN11']=(function(){ var R=3.0,LT=1.1,LL=1.3, OA=arcP(R,R,R,Math.PI,1.5*Ma
   for(i=0;i<IA.length-1;i++) s.push([IA[i][0],IA[i][1],IA[i+1][0],IA[i+1][1],'g']);
   s=s.concat([[0,R,0,11.1,'r'],[0,11.1,8.1,11.1,'x'],[6.96,0,6.96,9.41,'x'],[6.96,9.41,8.1,9.41,'x'],[8.1,9.41,8.1,11.1,'x',[[0.07,0.99,1]]],[6.1,9.41,6.96,9.41,'w'],
    [R,0,6.55,0,'r'],[6.55,0,6.96,0,'x'],
-   [LT,R,LT,3.65,'g'],[LT,3.65,LT,5.0,'x'],[LT,5.0,LT,6.93,'g'],[LT,6.93,LT,8.7,'x'],[LT,8.7,LT,11.1,'g'],
+   [LT,R,LT,3.65,'g'],[LT,3.65,LT,5.0,'x'],[LT,5.0,LT,6.93,'g'],[LT,6.93,LT,7.88,'x'],[LT,7.88,LT,11.1,'g'],
    [R,LL,5.43,LL,'x',[[1.4,2.2,1]]],[5.43,0,5.43,LL,'g'],[6.55,0,6.55,LL,'w'],[5.43,LL,6.96,LL,'w'],
    [LT,4.59,5.43,4.59,'w',[[3.3,4.1,-1]]],[4.22,4.59,4.22,7.88,'w',[[0.14,1.01,1]]],[LT,7.88,4.22,7.88,'w'],
    [5.43,LL,5.43,6.79,'w',[[0.87,1.56,1],[4.08,4.78,1]]],[5.43,4.1,6.96,4.1,'w'],[5.43,6.79,6.96,6.79,'w']]);
@@ -899,7 +899,7 @@ function init3(){
   size(); window.addEventListener('resize',size); R3.size=size;
   (function loop(){ if(!R3||R3.r!==r) return; requestAnimationFrame(loop); ctl.update(); r.render(sc,cam); })();
 }
-var FLOOR_IMG='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@62565b299ea36032491c1c351b7b7bdd18df2ec1/projects/sun-saphia/images/';
+var FLOOR_IMG='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@2c953f56ec08a1c00b4a2c6b0c3129a0a8008da3/projects/sun-saphia/images/';
 // đỉnh đa giác có góc bo (cung tròn) → dãy điểm
 function roundPts(P,R){ var n=P.length, o=[]; R=R||{};
   for(var i=0;i<n;i++){ var p=P[i], r=R[i]; if(!r){ o.push(p); continue; } var rx=r.length?r[0]:r, ry=r.length?r[1]:r;
