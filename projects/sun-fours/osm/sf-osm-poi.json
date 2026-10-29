@@ -1,0 +1,6393 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-29T23:12:08Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 1758586662,
+  "lat": 16.0043044,
+  "lon": 108.2635270,
+  "tags": {
+    "ele": "160",
+    "name": "Thuỷ Sơn",
+    "name:en": "Mountain of Water",
+    "name:vi": "Thuỷ Sơn",
+    "natural": "peak",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 1758586688,
+  "lat": 16.0033003,
+  "lon": 108.2637522,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1758586699,
+  "lat": 16.0036732,
+  "lon": 108.2634233,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 2093848425,
+  "lat": 15.9980304,
+  "lon": 108.2554472,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name:en": "Pho Da Son Pagoda",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "node",
+  "id": 2093848426,
+  "lat": 15.9983733,
+  "lon": 108.2573722,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name:en": "Linh Son Pagoda",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "node",
+  "id": 2093848428,
+  "lat": 15.9992662,
+  "lon": 108.2554077,
+  "tags": {
+    "addr:housenumber": "48",
+    "addr:postcode": "550000",
+    "addr:street": "Đường Sư Vạn Hạnh",
+    "amenity": "place_of_worship",
+    "name": "Chùa Quán Thế Âm",
+    "name:en": "Quan The Am Pagoda",
+    "name:vi": "Chùa Quán Thế Âm",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "node",
+  "id": 2093848430,
+  "lat": 15.9999106,
+  "lon": 108.2574870,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name:en": "Thai Son Pagoda",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "node",
+  "id": 2093848444,
+  "lat": 16.0050531,
+  "lon": 108.2570768,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name:en": "Long Hoa Pagoda",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "node",
+  "id": 2987457465,
+  "lat": 16.0624934,
+  "lon": 108.2304346,
+  "tags": {
+    "check_date": "2025-11-07",
+    "name": "Danang Riverside",
+    "restaurant": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2987491833,
+  "lat": 16.0648804,
+  "lon": 108.2330280,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Muong Thanh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2987520434,
+  "lat": 16.0644970,
+  "lon": 108.2238240,
+  "tags": {
+    "check_date": "2023-01-07",
+    "name": "Rainbow",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3842864143,
+  "lat": 16.0606999,
+  "lon": 108.2137377,
+  "tags": {
+    "addr:city": "Da Nang",
+    "addr:district": "Hai Chau",
+    "addr:housenumber": "163",
+    "addr:street": "Nguyễn Hoàng",
+    "addr:subdistrict": "Nam Duong",
+    "level": "5",
+    "name": "Oc Tien Sa Hotel",
+    "phone": "+84905123084",
+    "smoking": "outside",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4005611262,
+  "lat": 15.9976102,
+  "lon": 108.2121686,
+  "tags": {
+    "addr:street": "Đô Đốc Tuyết",
+    "amenity": "place_of_worship",
+    "name": "Đền thờ Tiền Hiền làng Lổ Giang"
+  }
+},
+{
+  "type": "node",
+  "id": 4005611263,
+  "lat": 15.9982955,
+  "lon": 108.2124711,
+  "tags": {
+    "addr:street": "Dương Đức Nhan",
+    "amenity": "place_of_worship",
+    "name": "Đình Lổ Giáng"
+  }
+},
+{
+  "type": "node",
+  "id": 4084349084,
+  "lat": 16.0101859,
+  "lon": 108.2535593,
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:housenumber": "65",
+    "addr:street": "Sơn Thủy 8",
+    "name": "Shopi",
+    "opening_hours": "17:00-21:00",
+    "operator": "Diệu Thúy",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 4172034499,
+  "lat": 16.0205336,
+  "lon": 108.2617440,
+  "tags": {
+    "name": "Non Nuoc Beach",
+    "name:en": "Non Nuoc Beach",
+    "name:pt": "Praia Non Nuoc",
+    "natural": "beach",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 4249901095,
+  "lat": 16.0409090,
+  "lon": 108.2107662,
+  "tags": {
+    "addr:street": "Nguyễn Hữu Thọ",
+    "name": "Hoàng Phương Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4280016689,
+  "lat": 16.0056157,
+  "lon": 108.2546345,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Giác Hoàng Viên"
+  }
+},
+{
+  "type": "node",
+  "id": 4294143691,
+  "lat": 16.0480729,
+  "lon": 108.2408883,
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Ngu Hanh Son",
+    "addr:housenumber": "176",
+    "addr:postcode": "550000",
+    "addr:province": "Thành phố Đà Nẵng",
+    "addr:street": "Châu Thị Vĩnh Tế",
+    "amenity": "place_of_worship",
+    "check_date": "2025-05-15",
+    "denomination": "catholic",
+    "name": "Nhà thờ Giáo xứ An Thượng",
+    "name:en": "An Thuong Parish Church",
+    "name:vi": "Nhà thờ Giáo xứ An Thượng",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 4326820491,
+  "lat": 16.0623771,
+  "lon": 108.1918861,
+  "tags": {
+    "addr:housenumber": "194",
+    "addr:street": "Đường Hà Huy Tập",
+    "internet_access": "wlan",
+    "name": "Dai Long hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4386676224,
+  "lat": 15.9798900,
+  "lon": 108.2089787,
+  "tags": {
+    "addr:street": "Quốc lộ 1A",
+    "amenity": "marketplace",
+    "name": "Chợ Miếu Bông"
+  }
+},
+{
+  "type": "node",
+  "id": 4488300691,
+  "lat": 16.0432041,
+  "lon": 108.2451708,
+  "tags": {
+    "shop": "department_store"
+  }
+},
+{
+  "type": "node",
+  "id": 4529361490,
+  "lat": 16.0037549,
+  "lon": 108.2189649,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4582707890,
+  "lat": 16.0593521,
+  "lon": 108.2084405,
+  "tags": {
+    "amenity": "cafe",
+    "name": "CaPhe Giai Khat 78",
+    "name:en": "SAMDI HOTEL",
+    "name:ja": "サムディホテル",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4611974790,
+  "lat": 16.0607119,
+  "lon": 108.2184792,
+  "tags": {
+    "addr:housenumber": "103",
+    "addr:street": "Đường Nguyễn Văn Linh",
+    "name": "Flóra Hotel",
+    "name:vi": "Flóra Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4612193833,
+  "lat": 16.0409715,
+  "lon": 108.2483633,
+  "tags": {
+    "addr:housenumber": "115",
+    "addr:street": "Hồ Xuân Hương",
+    "check_date": "2025-05-23",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Sea Phoenix Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4706189292,
+  "lat": 16.0241549,
+  "lon": 108.2476104,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name:en": "Temple 2505"
+  }
+},
+{
+  "type": "node",
+  "id": 4706189592,
+  "lat": 16.0189817,
+  "lon": 108.2499179,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name:en": "Temple ok"
+  }
+},
+{
+  "type": "node",
+  "id": 4706198391,
+  "lat": 16.0223065,
+  "lon": 108.2427522,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name:en": "Small temple built 2002"
+  }
+},
+{
+  "type": "node",
+  "id": 4707610291,
+  "lat": 16.0536953,
+  "lon": 108.2096156,
+  "tags": {
+    "name": "quan quan hotel",
+    "name:vi": "quan quan hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4855468621,
+  "lat": 16.0608379,
+  "lon": 108.2136384,
+  "tags": {
+    "addr:street": "Nguyễn Hoàng",
+    "internet_access": "wlan",
+    "name": "Nơi ở",
+    "name:vi": "Nơi ở",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4900673921,
+  "lat": 16.0553158,
+  "lon": 108.2453862,
+  "tags": {
+    "addr:housenumber": "54",
+    "addr:street": "Đường An Thượng 26",
+    "check_date": "2025-05-16",
+    "internet_access": "wlan",
+    "name": "San San Hotel",
+    "name:vi": "khách san",
+    "outdoor_seating": "no",
+    "self_service": "no",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4967908922,
+  "lat": 15.9798181,
+  "lon": 108.2497290,
+  "tags": {
+    "name": "Home",
+    "name:vi": "Home",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5010584321,
+  "lat": 16.0232837,
+  "lon": 108.2254027,
+  "tags": {
+    "name:en": "La House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5072875821,
+  "lat": 16.0513135,
+  "lon": 108.2309046,
+  "tags": {
+    "name:en": "Love Bridge",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5228409521,
+  "lat": 16.0638680,
+  "lon": 108.2300951,
+  "tags": {
+    "name:en": "silver hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5272117924,
+  "lat": 16.0616142,
+  "lon": 108.2245243,
+  "tags": {
+    "name:en": "Dragon Bridge West Viewpoint",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5272119321,
+  "lat": 16.0618067,
+  "lon": 108.2298562,
+  "tags": {
+    "name:en": "Dragon Bridge East Viewpoint",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5273998822,
+  "lat": 16.0352694,
+  "lon": 108.2352722,
+  "tags": {
+    "name": "Cầu Tiên Sơn",
+    "name:en": "Tien Son Bridge",
+    "name:vi": "Cầu Tiên Sơn",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5273998823,
+  "lat": 16.0501790,
+  "lon": 108.2293814,
+  "tags": {
+    "addr:postcode": "550000",
+    "name": "Cầu Trần Thị Lý",
+    "name:en": "Tran Thi Ly Bridge",
+    "name:vi": "Cầu Trần Thị Lý",
+    "opening_hours": "24/7",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5273998830,
+  "lat": 16.0577748,
+  "lon": 108.2296131,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5276547123,
+  "lat": 16.0510888,
+  "lon": 108.2292466,
+  "tags": {
+    "name": "Cau Nguyen Van Troi Bridge",
+    "name:en": "Old River Crossing Bridge",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5307682921,
+  "lat": 16.0374466,
+  "lon": 108.2119179,
+  "tags": {
+    "addr:street": "Lương Nhữ Hộc",
+    "name": "chung cư số 4 nguyễn tri phương",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5397904121,
+  "lat": 16.0628057,
+  "lon": 108.2185885,
+  "tags": {
+    "name": "Zion Hostel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5413973113,
+  "lat": 16.0516704,
+  "lon": 108.2119340,
+  "tags": {
+    "addr:housenumber": "275",
+    "addr:street": "Đường Nguyễn Tri Phương",
+    "name": "Red Palace Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5413973628,
+  "lat": 16.0514417,
+  "lon": 108.2114422,
+  "tags": {
+    "addr:housenumber": "456A",
+    "addr:street": "Đường Nguyễn Tri Phương",
+    "name": "King Garden Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5422390221,
+  "lat": 16.0487689,
+  "lon": 108.2484197,
+  "tags": {
+    "check_date": "2025-05-17",
+    "name": "Zenta Hotel",
+    "name:en": "Zenta Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5424056421,
+  "lat": 16.0439303,
+  "lon": 108.2469894,
+  "tags": {
+    "name": "Kara Beachside hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5432701004,
+  "lat": 16.0440988,
+  "lon": 108.2097932,
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Quận Hải Châu",
+    "addr:housenumber": "150",
+    "addr:postcode": "550000",
+    "addr:street": "Đường Nguyễn Hữu Thọ",
+    "addr:subdistrict": "Phường Hòa Cường Bắc",
+    "amenity": "place_of_worship",
+    "contact:facebook": "NhaThoHoaCuongDaNang",
+    "denomination": "catholic",
+    "name": "Nhà thờ Hoà Cường",
+    "name:en": "Hòa Cường Catholic Church",
+    "name:ru": "Католический храм Хоа Кыонг",
+    "phone": "0236 3618 686",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 5450558021,
+  "lat": 16.0428944,
+  "lon": 108.2100876,
+  "tags": {
+    "addr:housenumber": "194",
+    "addr:street": "Nguyễn Hữu Thọ",
+    "email": "hotel4seasons@yahoo.com",
+    "internet_access": "wlan",
+    "name": "Khách sạn Bốn Mùa",
+    "name:en": "4Seasons Hotel",
+    "opening_hours": "24/7",
+    "operator": "Công ty TNHH MTV Khang Thịnh Nguyễn",
+    "phone": "02363799777",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5484867465,
+  "lat": 15.9820688,
+  "lon": 108.2316545,
+  "tags": {
+    "addr:city": "Phường Hòa Quý",
+    "addr:district": "Ngu Hanh Son district",
+    "addr:province": "Da Nang City",
+    "amenity": "university",
+    "name": "Hoa Quy Smart City",
+    "operator": "Pegasus"
+  }
+},
+{
+  "type": "node",
+  "id": 5509501527,
+  "lat": 16.0491115,
+  "lon": 108.2477313,
+  "tags": {
+    "check_date": "2025-05-17",
+    "internet_access": "wlan",
+    "name": "Palazzo Boutique",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5535905123,
+  "lat": 16.0536081,
+  "lon": 108.2089282,
+  "tags": {
+    "addr:street": "Nguyen Huu Tho",
+    "internet_access": "wlan",
+    "name:en": "quan quan hotel",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5583697622,
+  "lat": 16.0628484,
+  "lon": 108.2306558,
+  "tags": {
+    "addr:housenumber": "108",
+    "addr:street": "Cao Bá Quát",
+    "internet_access": "wlan",
+    "name": "Cents Hotel",
+    "name:de": "Cents Da Nang Hotel",
+    "name:en": "Cents Da Nang Hotel",
+    "phone": "+84913560045",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5600384025,
+  "lat": 15.9783920,
+  "lon": 108.2620769,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Lễ Tân FPT Software"
+  }
+},
+{
+  "type": "node",
+  "id": 5602509021,
+  "lat": 16.0573760,
+  "lon": 108.2430631,
+  "tags": {
+    "addr:housenumber": "27",
+    "addr:street": "K209 Nguyễn Văn Thoại",
+    "check_date": "2024-09-11",
+    "email": "info@tamhousevillahotel.com",
+    "facebook": "https://www.facebook.com/tamhousevillahotel/",
+    "internet_access": "wlan",
+    "name": "Tâm House Villa Hotel",
+    "name:en": "Tam House Villa Hotel",
+    "opening_hours": "24/7",
+    "operator": "Tâm House Villa",
+    "phone": "0936577477",
+    "tourism": "hotel",
+    "website": "http://www.tamhousevillahotel.com"
+  }
+},
+{
+  "type": "node",
+  "id": 5922491411,
+  "lat": 16.0035719,
+  "lon": 108.2621285,
+  "tags": {
+    "amenity": "place_of_worship",
+    "check_date": "2023-01-06",
+    "name": "Vong Giang Dai",
+    "name:en": "River Watching Tower",
+    "name:vi": "Vong Giang Dai",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "node",
+  "id": 5922491443,
+  "lat": 16.0042783,
+  "lon": 108.2635286,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5922495410,
+  "lat": 16.0033953,
+  "lon": 108.2642944,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5947478386,
+  "lat": 16.0541957,
+  "lon": 108.2063052,
+  "tags": {
+    "name": "Landing house",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5950397485,
+  "lat": 16.0618070,
+  "lon": 108.2378752,
+  "tags": {
+    "addr:housenumber": "157-159",
+    "addr:street": "Đường Võ Văn Kiệt",
+    "check_date": "2025-05-23",
+    "name": "Sepon Blue Hotel",
+    "tourism": "hotel",
+    "website": "http://seponblue.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 6075312685,
+  "lat": 16.0034349,
+  "lon": 108.2110958,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:street": "Trịnh Khả",
+    "internet_access": "wlan",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 6108958604,
+  "lat": 16.0492961,
+  "lon": 108.2437637,
+  "tags": {
+    "addr:district": "Ngu Hanh Son",
+    "addr:housenumber": "D10",
+    "addr:postcode": "55000",
+    "addr:province": "Danang",
+    "addr:street": "An Thượng 34",
+    "addr:subdistrict": "My An",
+    "check_date": "2025-05-19",
+    "internet_access": "wlan",
+    "name": "Danang Moment - Boutique Serviced Apartment",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 6332534540,
+  "lat": 16.0488744,
+  "lon": 108.2483821,
+  "tags": {
+    "check_date": "2025-05-17",
+    "name": "Elena",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6332534542,
+  "lat": 16.0491799,
+  "lon": 108.2482850,
+  "tags": {
+    "check_date": "2025-05-17",
+    "name": "Ruby Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6332534544,
+  "lat": 16.0496369,
+  "lon": 108.2481244,
+  "tags": {
+    "name": "Sunrise Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6332534548,
+  "lat": 16.0486026,
+  "lon": 108.2481857,
+  "tags": {
+    "check_date": "2025-05-17",
+    "name": "Angel Hotels",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6369465978,
+  "lat": 16.0409333,
+  "lon": 108.2238913,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Vietnamese Mother Statue"
+  }
+},
+{
+  "type": "node",
+  "id": 6482332185,
+  "lat": 16.0608113,
+  "lon": 108.2202705,
+  "tags": {
+    "name:en": "Mitisa Hotel Da Nang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6514131805,
+  "lat": 16.0309898,
+  "lon": 108.2250188,
+  "tags": {
+    "addr:street": "Đường Trương Chí Cương",
+    "name": "Solar Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6528451001,
+  "lat": 16.0276784,
+  "lon": 108.2218873,
+  "tags": {
+    "name": "Cây đa Đò Xu",
+    "natural": "tree",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 6530479393,
+  "lat": 16.0335638,
+  "lon": 108.2206857,
+  "tags": {
+    "addr:street": "Đường Trịnh Công Sơn",
+    "name": "New Life Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6540133232,
+  "lat": 16.0392379,
+  "lon": 108.2230933,
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:housenumber": "03",
+    "addr:street": "Đường Lưu Quý Kỳ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6540176741,
+  "lat": 16.0130790,
+  "lon": 108.2038844,
+  "tags": {
+    "addr:street": "Kiệt 47 Bình Thái 1",
+    "amenity": "place_of_worship"
+  }
+},
+{
+  "type": "node",
+  "id": 6572764000,
+  "lat": 16.0141734,
+  "lon": 108.2051349,
+  "tags": {
+    "addr:housenumber": "11",
+    "addr:street": "Đường Bình Thái 1",
+    "amenity": "marketplace"
+  }
+},
+{
+  "type": "node",
+  "id": 6771507385,
+  "lat": 16.0632728,
+  "lon": 108.2392229,
+  "tags": {
+    "name:en": "Phu Thinh 2 Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6860614485,
+  "lat": 16.0443346,
+  "lon": 108.2176027,
+  "tags": {
+    "name": "Chung cư Vicoland",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 6976178456,
+  "lat": 16.0420845,
+  "lon": 108.2482750,
+  "tags": {
+    "air_conditioning": "yes",
+    "check_date": "2025-05-23",
+    "name": "Dreams Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7108357495,
+  "lat": 16.0522853,
+  "lon": 108.2395573,
+  "tags": {
+    "name": "Lullaby",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7116041302,
+  "lat": 16.0643682,
+  "lon": 108.2206297,
+  "tags": {
+    "addr:housenumber": "202",
+    "name": "Fivitel Boutique da nang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7202746885,
+  "lat": 16.0520340,
+  "lon": 108.2428026,
+  "tags": {
+    "addr:street": "Đường An Thượng 29",
+    "name": "Tata House",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7241497985,
+  "lat": 16.0636751,
+  "lon": 108.2301325,
+  "tags": {
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 7287989785,
+  "lat": 16.0533008,
+  "lon": 108.2361328,
+  "tags": {
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7301996085,
+  "lat": 16.0370944,
+  "lon": 108.2248186,
+  "tags": {
+    "addr:street": "Đường 2 Tháng 9",
+    "name": "Chợ đêm Helio",
+    "name:en": "Helio Night Market",
+    "name:ko": "야시장",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 7551560985,
+  "lat": 16.0244904,
+  "lon": 108.2498476,
+  "tags": {
+    "name:en": "OYO Tuan Tho",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7608069985,
+  "lat": 16.0393074,
+  "lon": 108.2476055,
+  "tags": {
+    "name:en": "Gia Bao Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 8260978117,
+  "lat": 16.0266322,
+  "lon": 108.2302676,
+  "tags": {
+    "name:en": "View of Son Tra and Asia Park",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 8260988017,
+  "lat": 16.0076609,
+  "lon": 108.2499612,
+  "tags": {
+    "name:en": "View of Marble Mountain (Ngu Hanh Son)",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 8616526724,
+  "lat": 16.0042244,
+  "lon": 108.2520184,
+  "tags": {
+    "addr:street": "Đường Bùi Thế Mỹ",
+    "amenity": "place_of_worship",
+    "name": "Chùa Hương Sơn",
+    "name:en": "Perform Mountain pagoda"
+  }
+},
+{
+  "type": "node",
+  "id": 9243903065,
+  "lat": 15.9896594,
+  "lon": 108.2723335,
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Ngũ Hành Sơn",
+    "addr:housenumber": "02",
+    "addr:postcode": "550000",
+    "addr:province": "Đà Nẵng",
+    "addr:street": "Đường Trường Sa",
+    "addr:subdistrict": "Hoà Hải",
+    "air_conditioning": "yes",
+    "check_date": "2022-12-31",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Aria Đà Nẵng",
+    "phone": "+84902860111",
+    "rooms": "1140",
+    "tourism": "hotel",
+    "website": "https://www.facebook.com/CanhobietthucaocapAriaDaNang"
+  }
+},
+{
+  "type": "node",
+  "id": 10231965517,
+  "lat": 16.0390740,
+  "lon": 108.2442140,
+  "tags": {
+    "check_date": "2025-05-23",
+    "internet_access": "wlan",
+    "name:en": "Nostalgia DS Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10232416717,
+  "lat": 16.0396159,
+  "lon": 108.2456166,
+  "tags": {
+    "brand": "WinMart",
+    "brand:wikidata": "Q60245505",
+    "check_date": "2025-05-23",
+    "name": "WinMart",
+    "name:en": "WinMart+",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 10294581427,
+  "lat": 16.0617324,
+  "lon": 108.2452005,
+  "tags": {
+    "addr:housenumber": "42",
+    "addr:street": "Đường Lâm Hoành",
+    "check_date": "2022-12-30",
+    "name": "Chi House Hotel & Apartment",
+    "tourism": "hotel",
+    "website": "https://chihousedanang.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 10294581428,
+  "lat": 16.0615001,
+  "lon": 108.2453032,
+  "tags": {
+    "addr:housenumber": "428",
+    "addr:street": "Đường Lâm Hoành",
+    "check_date": "2022-12-30",
+    "name": "Hai Yen Hotel",
+    "tourism": "hotel",
+    "website": "https://m.facebook.com/khachsandanangkhachsangiare/"
+  }
+},
+{
+  "type": "node",
+  "id": 10314394611,
+  "lat": 16.0626468,
+  "lon": 108.2460673,
+  "tags": {
+    "addr:housenumber": "252B",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "check_date": "2023-01-08",
+    "name": "DTC Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10603622205,
+  "lat": 16.0520775,
+  "lon": 108.2156357,
+  "tags": {
+    "name": "Pont main",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 10709724107,
+  "lat": 16.0009523,
+  "lon": 108.2666434,
+  "tags": {
+    "name": "Làng đá mỹ nghệ Non Nước",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 10895629005,
+  "lat": 16.0605750,
+  "lon": 108.2302229,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11161070774,
+  "lat": 16.0610800,
+  "lon": 108.2248167,
+  "tags": {
+    "name": "Dragon's Tail",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 11161070775,
+  "lat": 16.0612476,
+  "lon": 108.2296554,
+  "tags": {
+    "name": "Dragon's Head",
+    "tourism": "attraction",
+    "wikipedia": "en:Dragon_Bridge_(Da_Nang)"
+  }
+},
+{
+  "type": "node",
+  "id": 11161077287,
+  "lat": 16.0613011,
+  "lon": 108.2271187,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11161077288,
+  "lat": 16.0609866,
+  "lon": 108.2271361,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11161077293,
+  "lat": 16.0614899,
+  "lon": 108.2300973,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11161077302,
+  "lat": 16.0610104,
+  "lon": 108.2301094,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11171035906,
+  "lat": 16.0035562,
+  "lon": 108.2621329,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11176025737,
+  "lat": 16.0607097,
+  "lon": 108.2200254,
+  "tags": {
+    "name": "Lang Bich hoa Da Nang",
+    "name:en": "Fresco Village Da Nang",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 11359603957,
+  "lat": 15.9987986,
+  "lon": 108.2051036,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chùa Nam Sơn",
+    "name:vi": "Chùa Nam Sơn",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 11680377169,
+  "lat": 16.0497984,
+  "lon": 108.2477859,
+  "tags": {
+    "addr:street": "89 Tran Bach Dang",
+    "check_date": "2025-05-17",
+    "name": "Señorita boutique hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11896312469,
+  "lat": 16.0431848,
+  "lon": 108.2464496,
+  "tags": {
+    "addr:housenumber": "25-27",
+    "addr:street": "Kiệt 21 Chế Lan Viên",
+    "internet_access": "wlan",
+    "name:en": "Ty house homestay da nang",
+    "phone": "+84905800089",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11896424870,
+  "lat": 16.0529309,
+  "lon": 108.2447910,
+  "tags": {
+    "name:en": "Da nang beach hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11896430969,
+  "lat": 16.0498482,
+  "lon": 108.2450698,
+  "tags": {
+    "name:en": "Dream house homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11896574769,
+  "lat": 16.0454258,
+  "lon": 108.2469527,
+  "tags": {
+    "addr:housenumber": "22",
+    "addr:street": "Đường Mỹ Đa Đông 12",
+    "internet_access": "wlan",
+    "name:en": "Royal apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11934169470,
+  "lat": 16.0432987,
+  "lon": 108.2259900,
+  "tags": {
+    "name": "Queen Cobra",
+    "opening_hours": "Mo-Su 18:00-22:00",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 11938896470,
+  "lat": 15.9724202,
+  "lon": 108.2822877,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Fusion Resort & Villas",
+    "name:fr": "Fusion Resort & Villas",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12133395101,
+  "lat": 16.0499198,
+  "lon": 108.2471017,
+  "tags": {
+    "addr:housenumber": "121",
+    "addr:street": "Đường Hoàng Kế Viêm",
+    "check_date": "2024-09-10",
+    "internet_access": "wlan",
+    "name": "Grand Sea View Hotel",
+    "outdoor_seating": "no",
+    "phone": "+84 236 3959105",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12145093701,
+  "lat": 16.0543834,
+  "lon": 108.2458171,
+  "tags": {
+    "addr:housenumber": "20",
+    "addr:street": "Đường Đỗ Bí",
+    "check_date": "2025-05-16",
+    "internet_access": "wlan",
+    "name": "Cherry Hotel & Apartments",
+    "outdoor_seating": "no",
+    "phone": "+84 795520588;+84 849646669",
+    "self_service": "no",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12147633201,
+  "lat": 16.0551100,
+  "lon": 108.2445499,
+  "tags": {
+    "addr:housenumber": "12-14",
+    "addr:street": "Đường An Thượng 26",
+    "check_date": "2025-05-16",
+    "email": "hodidanang@gmail.com",
+    "internet_access": "wlan",
+    "name": "Hodi Hotel",
+    "outdoor_seating": "no",
+    "phone": "+84 905472702",
+    "self_service": "no",
+    "tourism": "hotel",
+    "website": "https://www.hodihotel.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 12163654196,
+  "lat": 16.0529170,
+  "lon": 108.2440574,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Đường An Thượng 36",
+    "check_date": "2025-05-16",
+    "name": "Adela",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12163654197,
+  "lat": 16.0523364,
+  "lon": 108.2442488,
+  "tags": {
+    "check_date": "2025-05-21",
+    "name": "Sydney Da Nang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12164803912,
+  "lat": 16.0509565,
+  "lon": 108.2466457,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Baan Taley Da Nang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12164803913,
+  "lat": 16.0510524,
+  "lon": 108.2463307,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Raon",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12167609723,
+  "lat": 16.0607363,
+  "lon": 108.2186955,
+  "tags": {
+    "check_date": "2024-09-10",
+    "name": "Malisa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12167609726,
+  "lat": 16.0603892,
+  "lon": 108.2158377,
+  "tags": {
+    "check_date": "2024-09-10",
+    "name": "Mercury",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12167609734,
+  "lat": 16.0601454,
+  "lon": 108.2139664,
+  "tags": {
+    "check_date": "2024-09-10",
+    "name": "Do Hai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12167716638,
+  "lat": 16.0611062,
+  "lon": 108.2347998,
+  "tags": {
+    "check_date": "2024-09-10",
+    "name": "Madame Trang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12167716641,
+  "lat": 16.0615508,
+  "lon": 108.2366800,
+  "tags": {
+    "check_date": "2024-09-10",
+    "name": "Quamientrung",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 12167716642,
+  "lat": 16.0621964,
+  "lon": 108.2373438,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Khanh Vinh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12167716643,
+  "lat": 16.0617163,
+  "lon": 108.2373542,
+  "tags": {
+    "check_date": "2024-09-10",
+    "name": "Calix",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12167716644,
+  "lat": 16.0617252,
+  "lon": 108.2375260,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "San Marino",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12167716645,
+  "lat": 16.0622524,
+  "lon": 108.2376054,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Rivera Boutique",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12167716646,
+  "lat": 16.0623808,
+  "lon": 108.2383449,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Mi An",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12167891403,
+  "lat": 16.0627565,
+  "lon": 108.2420830,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Golden Sun",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12167891404,
+  "lat": 16.0636411,
+  "lon": 108.2431009,
+  "tags": {
+    "check_date": "2024-09-10",
+    "name": "Huong Da",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 12167891417,
+  "lat": 16.0621868,
+  "lon": 108.2454565,
+  "tags": {
+    "check_date": "2024-09-10",
+    "name": "Arrive Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12167891418,
+  "lat": 16.0619012,
+  "lon": 108.2452014,
+  "tags": {
+    "check_date": "2025-05-24",
+    "name": "An House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12167891419,
+  "lat": 16.0615602,
+  "lon": 108.2452591,
+  "tags": {
+    "check_date": "2024-09-10",
+    "name": "K House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12168408886,
+  "lat": 16.0495831,
+  "lon": 108.2467755,
+  "tags": {
+    "check_date": "2024-09-10",
+    "name": "Ecogreen Boutique",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12168408888,
+  "lat": 16.0530106,
+  "lon": 108.2450894,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Samantha Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12168408895,
+  "lat": 16.0488443,
+  "lon": 108.2467801,
+  "tags": {
+    "check_date": "2025-05-25",
+    "name": "Sun Flower Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12168408897,
+  "lat": 16.0490512,
+  "lon": 108.2467206,
+  "tags": {
+    "check_date": "2025-05-25",
+    "name": "Calla Lily",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12168408898,
+  "lat": 16.0493539,
+  "lon": 108.2468532,
+  "tags": {
+    "check_date": "2024-09-10",
+    "name": "Pink Garden",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169174292,
+  "lat": 16.0556054,
+  "lon": 108.2435891,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "Charming",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169339369,
+  "lat": 16.0535165,
+  "lon": 108.2405561,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "Flower Beachstay",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12169743813,
+  "lat": 16.0351466,
+  "lon": 108.2514666,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "Adaline",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169743815,
+  "lat": 16.0546988,
+  "lon": 108.2442688,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "Ritzy Boutique",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169743821,
+  "lat": 16.0533644,
+  "lon": 108.2446517,
+  "tags": {
+    "check_date": "2025-05-21",
+    "name": "Platinum",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169743824,
+  "lat": 16.0494535,
+  "lon": 108.2468195,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "Coala",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169743826,
+  "lat": 16.0556203,
+  "lon": 108.2436414,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "Classic",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169743833,
+  "lat": 16.0404802,
+  "lon": 108.2490041,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "K-Mart",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 12169743835,
+  "lat": 16.0549862,
+  "lon": 108.2441810,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Sofia Suite",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169743836,
+  "lat": 16.0542202,
+  "lon": 108.2444428,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "Thuc Thanh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169743838,
+  "lat": 16.0498528,
+  "lon": 108.2458381,
+  "tags": {
+    "name": "LIVIE",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169743844,
+  "lat": 16.0513804,
+  "lon": 108.2454781,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "Gold Time",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169835018,
+  "lat": 16.0582833,
+  "lon": 108.2447647,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Bac Nam",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169835021,
+  "lat": 16.0598468,
+  "lon": 108.2444625,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Yellow Apricot",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169835023,
+  "lat": 16.0584770,
+  "lon": 108.2429344,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "Ka Thy",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12169835028,
+  "lat": 16.0628702,
+  "lon": 108.2433333,
+  "tags": {
+    "check_date": "2025-05-06",
+    "name": "Sun Flower",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169835029,
+  "lat": 16.0628378,
+  "lon": 108.2423845,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "White Sand",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12169835039,
+  "lat": 16.0643528,
+  "lon": 108.2415280,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "Reveur",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12169835055,
+  "lat": 16.0649909,
+  "lon": 108.2405242,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "Phuc Dong",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12169835057,
+  "lat": 16.0640016,
+  "lon": 108.2404203,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "Lantana",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12171092714,
+  "lat": 16.0558131,
+  "lon": 108.2441849,
+  "tags": {
+    "check_date": "2024-09-11",
+    "name": "Q-beach",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12171219558,
+  "lat": 16.0646836,
+  "lon": 108.2394561,
+  "tags": {
+    "check_date": "2024-09-12",
+    "name": "Duy Tuan",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12171219560,
+  "lat": 16.0631699,
+  "lon": 108.2389372,
+  "tags": {
+    "check_date": "2024-09-12",
+    "name": "Temo House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12171219562,
+  "lat": 16.0618918,
+  "lon": 108.2383488,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Andy",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12171219565,
+  "lat": 16.0605038,
+  "lon": 108.2386328,
+  "tags": {
+    "check_date": "2024-09-12",
+    "name": "Lee’s",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12171219577,
+  "lat": 16.0555647,
+  "lon": 108.2398856,
+  "tags": {
+    "check_date": "2024-09-12",
+    "name": "An Cu",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12173072807,
+  "lat": 16.0505457,
+  "lon": 108.2453403,
+  "tags": {
+    "check_date": "2025-05-15",
+    "name": "Sunny Beach",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12173072809,
+  "lat": 16.0516896,
+  "lon": 108.2455943,
+  "tags": {
+    "check_date": "2024-09-12",
+    "name": "Flower Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12173072810,
+  "lat": 16.0514313,
+  "lon": 108.2456554,
+  "tags": {
+    "check_date": "2024-09-12",
+    "name": "Blue-S",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12173072813,
+  "lat": 16.0518234,
+  "lon": 108.2460698,
+  "tags": {
+    "check_date": "2024-09-12",
+    "name": "May Beach",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12173072815,
+  "lat": 16.0516645,
+  "lon": 108.2464677,
+  "tags": {
+    "check_date": "2025-05-14",
+    "name": "The Sail",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12173072816,
+  "lat": 16.0517038,
+  "lon": 108.2466046,
+  "tags": {
+    "check_date": "2025-05-14",
+    "name": "Santa Luxury",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12173072818,
+  "lat": 16.0520862,
+  "lon": 108.2467460,
+  "tags": {
+    "check_date": "2025-05-15",
+    "name": "Cicilia",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12173072820,
+  "lat": 16.0522539,
+  "lon": 108.2467055,
+  "tags": {
+    "check_date": "2024-09-12",
+    "name": "Golden Lotus Luxury",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12173072821,
+  "lat": 16.0526876,
+  "lon": 108.2465521,
+  "tags": {
+    "check_date": "2024-09-12",
+    "name": "Monalisa Luxury",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12174005659,
+  "lat": 16.0609549,
+  "lon": 108.2395499,
+  "tags": {
+    "check_date": "2024-09-13",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12174005660,
+  "lat": 16.0635419,
+  "lon": 108.2400529,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "Thanh Tam",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12174005661,
+  "lat": 16.0635395,
+  "lon": 108.2396845,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "Nice House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12174005662,
+  "lat": 16.0636538,
+  "lon": 108.2399726,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "Fun House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12174005663,
+  "lat": 16.0637383,
+  "lon": 108.2399671,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "King House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12174005664,
+  "lat": 16.0640584,
+  "lon": 108.2395003,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "Fairy Apartment",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12174005666,
+  "lat": 16.0645627,
+  "lon": 108.2394575,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "Tony Apartment & Homestay",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12174018928,
+  "lat": 16.0648129,
+  "lon": 108.2397979,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "SH Apartment",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12174018930,
+  "lat": 16.0635601,
+  "lon": 108.2399744,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "My Son",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12174890736,
+  "lat": 16.0607908,
+  "lon": 108.2394890,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "Le Cap",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12174890748,
+  "lat": 16.0634944,
+  "lon": 108.2404459,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "Oasis",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12174890749,
+  "lat": 16.0635830,
+  "lon": 108.2396831,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "Lis Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12174890751,
+  "lat": 16.0587845,
+  "lon": 108.2390702,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "Fussa",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12174890752,
+  "lat": 16.0569401,
+  "lon": 108.2396574,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "Thai Ba Thanh",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12175071919,
+  "lat": 16.0564911,
+  "lon": 108.2319668,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "Euro Star",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12175071920,
+  "lat": 16.0565373,
+  "lon": 108.2313682,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "Xenia",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12175129739,
+  "lat": 16.0576787,
+  "lon": 108.2222689,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "Phu An",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12175129741,
+  "lat": 16.0520127,
+  "lon": 108.2328752,
+  "tags": {
+    "check_date": "2024-09-13",
+    "name": "Fivitel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12179612701,
+  "lat": 16.0489445,
+  "lon": 108.2463031,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Đường An Thượng 4",
+    "email": "lukinnhotel@gmail.com",
+    "internet_access": "wlan",
+    "name": "Luk Inn & Hostel",
+    "outdoor_seating": "no",
+    "phone": "+842363912122",
+    "self_service": "no",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12185882401,
+  "lat": 16.0576960,
+  "lon": 108.2169606,
+  "tags": {
+    "addr:housenumber": "322-324",
+    "addr:street": "Đường Hoàng Diệu",
+    "email": "quaccuonghotel.dng@gmail.com",
+    "internet_access": "wlan",
+    "name": "Quốc Cường Center Hotel",
+    "outdoor_seating": "no",
+    "phone": "+84 1900232343;+84 2363654950",
+    "self_service": "no",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12280414801,
+  "lat": 16.0177381,
+  "lon": 108.2574538,
+  "tags": {
+    "name": "Full-Market",
+    "opening_hours": "24/7",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 12346362901,
+  "lat": 16.0640178,
+  "lon": 108.2198533,
+  "tags": {
+    "addr:housenumber": "136-140",
+    "addr:street": "Đường Phan Châu Trinh",
+    "name": "Moonlight Hotel Suites & Spa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12377587602,
+  "lat": 16.0404222,
+  "lon": 108.2455770,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "VernalHome Boutique DaNang",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12382574001,
+  "lat": 16.0509684,
+  "lon": 108.2471195,
+  "tags": {
+    "name": "Golden lotus",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12410940702,
+  "lat": 16.0626108,
+  "lon": 108.2418096,
+  "tags": {
+    "addr:housenumber": "105",
+    "addr:street": "Đường Võ Văn Kiệt",
+    "email": "info@centurydanang.com",
+    "internet_access": "wlan",
+    "name": "Century Hotel",
+    "phone": "+84 2363939007",
+    "tourism": "hotel",
+    "website": "https://centurydanang.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 12420727301,
+  "lat": 16.0483143,
+  "lon": 108.2421121,
+  "tags": {
+    "addr:housenumber": "38",
+    "addr:postcode": "550000",
+    "addr:street": "Đường Hoàng Kế Viêm",
+    "check_date": "2025-05-15",
+    "internet_access": "wlan",
+    "name": "TA Boutique Hotel",
+    "phone": "+84 795 795 795",
+    "tourism": "hotel",
+    "website": "https://taboutiquehotel.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 12424894566,
+  "lat": 16.0037125,
+  "lon": 108.2642740,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12424930688,
+  "lat": 16.0042078,
+  "lon": 108.2647738,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12672844901,
+  "lat": 16.0393731,
+  "lon": 108.2470593,
+  "tags": {
+    "name": "Sun Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12811004201,
+  "lat": 16.0509803,
+  "lon": 108.2457063,
+  "tags": {
+    "name": "Doji Stars",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12814061552,
+  "lat": 16.0627779,
+  "lon": 108.2433478,
+  "tags": {
+    "check_date": "2025-05-06",
+    "name": "Seaside",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12814942622,
+  "lat": 16.0134541,
+  "lon": 108.2569083,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12814942623,
+  "lat": 16.0135664,
+  "lon": 108.2571570,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12814942624,
+  "lat": 16.0142733,
+  "lon": 108.2587261,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12814942625,
+  "lat": 16.0172642,
+  "lon": 108.2576898,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12814942633,
+  "lat": 15.9988028,
+  "lon": 108.2561799,
+  "tags": {
+    "amenity": "place_of_worship"
+  }
+},
+{
+  "type": "node",
+  "id": 12815918301,
+  "lat": 16.0547776,
+  "lon": 108.2446210,
+  "tags": {
+    "name": "Bao chau hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12815921301,
+  "lat": 16.0547382,
+  "lon": 108.2444810,
+  "tags": {
+    "name": "Sky star",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12817099303,
+  "lat": 16.0488836,
+  "lon": 108.2463256,
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Ngu Hanh Son",
+    "addr:housenumber": "14",
+    "addr:postcode": "550000",
+    "addr:province": "Danang",
+    "addr:street": "Đường An Thượng 4",
+    "addr:subdistrict": "My An",
+    "air_conditioning": "yes",
+    "branch": "Nghe Home An Thượng 4",
+    "email": "nghehomestaydanang@gmail.com",
+    "image": "https://nghehomestaydanang.com/nghe_home_homestay_02.html",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Nghe Home - Homestay Da Nang",
+    "opening_hours": "24/7",
+    "phone": "+84 96 250 32 97",
+    "reservation": "yes",
+    "rooms": "12",
+    "tourism": "hotel",
+    "website": "https://nghehomestaydanang.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 12828171059,
+  "lat": 16.0493492,
+  "lon": 108.2473793,
+  "tags": {
+    "check_date": "2025-05-11",
+    "name": "Palazzo 3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12828171062,
+  "lat": 16.0492358,
+  "lon": 108.2474049,
+  "tags": {
+    "check_date": "2025-05-17",
+    "name": "Ton Motel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12830368142,
+  "lat": 16.0532775,
+  "lon": 108.2464319,
+  "tags": {
+    "check_date": "2025-05-12",
+    "name": "Golden Lotus Apartment",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12830376530,
+  "lat": 16.0501518,
+  "lon": 108.2468625,
+  "tags": {
+    "check_date": "2025-05-17",
+    "name": "Taian Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12830376531,
+  "lat": 16.0503144,
+  "lon": 108.2468573,
+  "tags": {
+    "check_date": "2025-05-11",
+    "name": "Taiyo Hotel & Appartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12830376533,
+  "lat": 16.0505423,
+  "lon": 108.2467810,
+  "tags": {
+    "check_date": "2025-05-11",
+    "name": "Viva",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12830575022,
+  "lat": 16.0572936,
+  "lon": 108.2462048,
+  "tags": {
+    "check_date": "2025-05-12",
+    "name": "My Khe 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12830575024,
+  "lat": 16.0603836,
+  "lon": 108.2458465,
+  "tags": {
+    "check_date": "2025-05-12",
+    "name": "My Khe",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12830575033,
+  "lat": 16.0548038,
+  "lon": 108.2457339,
+  "tags": {
+    "check_date": "2025-05-12",
+    "name": "Coral Cove",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12830575034,
+  "lat": 16.0543887,
+  "lon": 108.2461266,
+  "tags": {
+    "addr:city": "Da Nang",
+    "addr:district": "Ngu Hanh Son",
+    "addr:housenumber": "134 -136",
+    "addr:province": "Hoi An",
+    "addr:street": "Đường Trần Bạch Đằng",
+    "addr:subdistrict": "My An",
+    "air_conditioning": "yes",
+    "bar": "yes",
+    "check_date": "2025-10-01",
+    "contact:facebook": "https://www.facebook.com/AlaniHotelDanang",
+    "email": "Info@alanidananghotel.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "mobile": "+84 942945139",
+    "name": "Alani Da Nang Hotel",
+    "opening_hours": "24/7",
+    "phone": "+84 236 3887 227",
+    "tourism": "hotel",
+    "website": "https://alanidananghotel.com"
+  }
+},
+{
+  "type": "node",
+  "id": 12836635400,
+  "lat": 16.0511358,
+  "lon": 108.2463029,
+  "tags": {
+    "check_date": "2025-05-14",
+    "name": "Dominica",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12837179230,
+  "lat": 16.0529181,
+  "lon": 108.2464931,
+  "tags": {
+    "check_date": "2025-05-14",
+    "name": "Menora Premium",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12837179233,
+  "lat": 16.0583443,
+  "lon": 108.2451026,
+  "tags": {
+    "brand": "Hotel Indigo",
+    "brand:wikidata": "Q5911596",
+    "check_date": "2025-05-16",
+    "name": "Villa LeNa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12837179239,
+  "lat": 16.0528160,
+  "lon": 108.2460726,
+  "tags": {
+    "check_date": "2025-05-14",
+    "name": "Capecia Hotel&Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12837179240,
+  "lat": 16.0527630,
+  "lon": 108.2458868,
+  "tags": {
+    "check_date": "2025-05-14",
+    "name": "Monalisa Hotel&Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12837179241,
+  "lat": 16.0525491,
+  "lon": 108.2458263,
+  "tags": {
+    "check_date": "2025-05-14",
+    "name": "Sana Da Nang Beach Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12839466634,
+  "lat": 16.0512665,
+  "lon": 108.2460516,
+  "tags": {
+    "check_date": "2025-05-15",
+    "name": "Yến Vy Hotel & Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12839774216,
+  "lat": 16.0518511,
+  "lon": 108.2461684,
+  "tags": {
+    "check_date": "2025-05-15",
+    "name": "Bao Ahn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12839895644,
+  "lat": 16.0481924,
+  "lon": 108.2416003,
+  "tags": {
+    "brand": "Hotel Indigo",
+    "brand:wikidata": "Q5911596",
+    "check_date": "2025-05-18",
+    "name": "Dongson",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12839895655,
+  "lat": 16.0485588,
+  "lon": 108.2429687,
+  "tags": {
+    "check_date": "2025-05-15",
+    "name": "Topaz",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12839924377,
+  "lat": 16.0511199,
+  "lon": 108.2468165,
+  "tags": {
+    "check_date": "2025-05-15",
+    "name": "Le Maison De Anh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12839924378,
+  "lat": 16.0508817,
+  "lon": 108.2469142,
+  "tags": {
+    "check_date": "2025-05-15",
+    "name": "Golden Lotus",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12839924379,
+  "lat": 16.0509137,
+  "lon": 108.2466540,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "TA Apartment",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12841078463,
+  "lat": 16.0620888,
+  "lon": 108.2435965,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Dao Ngoc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12841099498,
+  "lat": 16.0554417,
+  "lon": 108.2451384,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Celina",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12841099499,
+  "lat": 16.0525055,
+  "lon": 108.2449396,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Phoenix Hotel&Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12841099500,
+  "lat": 16.0531718,
+  "lon": 108.2443017,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Alida",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12841142105,
+  "lat": 16.0552752,
+  "lon": 108.2451879,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Sea Near Me",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12841142106,
+  "lat": 16.0555060,
+  "lon": 108.2453200,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Sen Boutique",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12841142107,
+  "lat": 16.0553731,
+  "lon": 108.2455614,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Trang Ngan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12841142112,
+  "lat": 16.0555465,
+  "lon": 108.2454864,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Ronal",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12841766771,
+  "lat": 16.0544622,
+  "lon": 108.2453791,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Oseven",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12842150960,
+  "lat": 16.0505176,
+  "lon": 108.2460331,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Essenza",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12842150961,
+  "lat": 16.0507668,
+  "lon": 108.2457811,
+  "tags": {
+    "check_date": "2025-05-16",
+    "name": "Hi Coffe&Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12843891478,
+  "lat": 16.0488177,
+  "lon": 108.2484030,
+  "tags": {
+    "check_date": "2025-05-17",
+    "name": "The Light",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12843891479,
+  "lat": 16.0492822,
+  "lon": 108.2479491,
+  "tags": {
+    "check_date": "2025-05-17",
+    "name": "Royal Charm",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12843891483,
+  "lat": 16.0496633,
+  "lon": 108.2478286,
+  "tags": {
+    "check_date": "2025-05-17",
+    "name": "Sofiana",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12843891484,
+  "lat": 16.0494674,
+  "lon": 108.2478905,
+  "tags": {
+    "check_date": "2025-05-17",
+    "name": "Silana",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12843891486,
+  "lat": 16.0493692,
+  "lon": 108.2476482,
+  "tags": {
+    "check_date": "2025-05-17",
+    "name": "Palazzo Luxury",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12843891490,
+  "lat": 16.0485125,
+  "lon": 108.2479136,
+  "tags": {
+    "check_date": "2025-05-17",
+    "name": "Harbor",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12843905564,
+  "lat": 16.0490552,
+  "lon": 108.2474405,
+  "tags": {
+    "check_date": "2025-05-17",
+    "name": "Sweet Home",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12843905567,
+  "lat": 16.0485900,
+  "lon": 108.2473343,
+  "tags": {
+    "check_date": "2025-05-17",
+    "name": "Draco",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12846565759,
+  "lat": 16.0497163,
+  "lon": 108.2453707,
+  "tags": {
+    "check_date": "2025-05-18",
+    "name": "Danang Beach Apartment",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12846565764,
+  "lat": 16.0492677,
+  "lon": 108.2436910,
+  "tags": {
+    "check_date": "2025-05-18",
+    "name": "Sen Boutique Villa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12846565765,
+  "lat": 16.0486705,
+  "lon": 108.2435523,
+  "tags": {
+    "check_date": "2025-05-18",
+    "name": "Non Residence",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12846565766,
+  "lat": 16.0486776,
+  "lon": 108.2425885,
+  "tags": {
+    "check_date": "2025-05-18",
+    "name": "Aloka Suite",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12846565767,
+  "lat": 16.0485358,
+  "lon": 108.2422151,
+  "tags": {
+    "check_date": "2025-05-18",
+    "name": "Moon",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12846565768,
+  "lat": 16.0484039,
+  "lon": 108.2418993,
+  "tags": {
+    "check_date": "2025-05-18",
+    "name": "Ba Dinh",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12846670901,
+  "lat": 16.0474045,
+  "lon": 108.2439278,
+  "tags": {
+    "check_date": "2025-05-18",
+    "name": "Sandy Bay 2",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12846670903,
+  "lat": 16.0476813,
+  "lon": 108.2438305,
+  "tags": {
+    "check_date": "2025-05-18",
+    "name": "Mike’s Place",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12846671001,
+  "lat": 16.0490867,
+  "lon": 108.2457665,
+  "tags": {
+    "check_date": "2025-05-18",
+    "name": "Sincero",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12846671302,
+  "lat": 16.0489953,
+  "lon": 108.2408212,
+  "tags": {
+    "check_date": "2025-05-18",
+    "name": "Sandy Bay",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12846757801,
+  "lat": 16.0479756,
+  "lon": 108.2458597,
+  "tags": {
+    "check_date": "2025-05-18",
+    "name": "Hero",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12846758101,
+  "lat": 16.0489952,
+  "lon": 108.2408211,
+  "tags": {
+    "check_date": "2025-05-18",
+    "name": "Sandy Bay",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12847100501,
+  "lat": 16.0565733,
+  "lon": 108.2081824,
+  "tags": {
+    "name": "Khoi Nguon",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12848643538,
+  "lat": 16.0503647,
+  "lon": 108.2460874,
+  "tags": {
+    "check_date": "2025-05-19",
+    "name": "Danang Beach 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12848643540,
+  "lat": 16.0499527,
+  "lon": 108.2447196,
+  "tags": {
+    "check_date": "2025-05-19",
+    "name": "Win Win",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12848643541,
+  "lat": 16.0499095,
+  "lon": 108.2447339,
+  "tags": {
+    "check_date": "2025-05-19",
+    "name": "Maris",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12848643543,
+  "lat": 16.0495408,
+  "lon": 108.2447134,
+  "tags": {
+    "check_date": "2025-05-19",
+    "name": "Isabella Apartment",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12848643545,
+  "lat": 16.0493117,
+  "lon": 108.2438847,
+  "tags": {
+    "check_date": "2025-05-19",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12848643547,
+  "lat": 16.0487287,
+  "lon": 108.2428648,
+  "tags": {
+    "check_date": "2025-05-19",
+    "name": "TN Apartment",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12848643548,
+  "lat": 16.0487051,
+  "lon": 108.2428054,
+  "tags": {
+    "check_date": "2025-05-19",
+    "name": "Quang Nhat",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12848662374,
+  "lat": 16.0483730,
+  "lon": 108.2432305,
+  "tags": {
+    "check_date": "2025-05-19",
+    "name": "Green Garden Residence",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12850675081,
+  "lat": 16.0469086,
+  "lon": 108.2421830,
+  "tags": {
+    "check_date": "2025-05-20",
+    "name": "TV’s hotel & appartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12850675084,
+  "lat": 16.0476619,
+  "lon": 108.2431959,
+  "tags": {
+    "check_date": "2025-05-20",
+    "name": "Rio",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12850675087,
+  "lat": 16.0484722,
+  "lon": 108.2438895,
+  "tags": {
+    "check_date": "2025-05-20",
+    "name": "My An Suites",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12850675091,
+  "lat": 16.0487665,
+  "lon": 108.2449317,
+  "tags": {
+    "check_date": "2025-05-20",
+    "name": "Alabasta",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12853200237,
+  "lat": 16.0521524,
+  "lon": 108.2463283,
+  "tags": {
+    "check_date": "2025-05-20",
+    "name": "Hummer",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12853200241,
+  "lat": 16.0520699,
+  "lon": 108.2453125,
+  "tags": {
+    "check_date": "2025-05-21",
+    "name": "Sea Light",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12853200244,
+  "lat": 16.0521537,
+  "lon": 108.2455486,
+  "tags": {
+    "check_date": "2025-05-21",
+    "name": "Sweden Hotel&Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12853200246,
+  "lat": 16.0519591,
+  "lon": 108.2455553,
+  "tags": {
+    "check_date": "2025-05-21",
+    "name": "Mama Hotel&Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12853200249,
+  "lat": 16.0522349,
+  "lon": 108.2458597,
+  "tags": {
+    "check_date": "2025-05-21",
+    "name": "Cantona",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12853200251,
+  "lat": 16.0521233,
+  "lon": 108.2460193,
+  "tags": {
+    "check_date": "2025-05-21",
+    "name": "Sea Swan",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12853200252,
+  "lat": 16.0521457,
+  "lon": 108.2461048,
+  "tags": {
+    "check_date": "2025-05-21",
+    "name": "Jolia",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12853205986,
+  "lat": 16.0527182,
+  "lon": 108.2451556,
+  "tags": {
+    "check_date": "2025-05-21",
+    "name": "Flamingo",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12853205987,
+  "lat": 16.0527826,
+  "lon": 108.2451368,
+  "tags": {
+    "check_date": "2025-05-21",
+    "name": "Hung Thinh",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12853205988,
+  "lat": 16.0528999,
+  "lon": 108.2451235,
+  "tags": {
+    "check_date": "2025-05-21",
+    "name": "Nguyen Homestay",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12853205989,
+  "lat": 16.0532529,
+  "lon": 108.2446875,
+  "tags": {
+    "addr:street": "Đường Lê Quang Đạo",
+    "check_date": "2025-05-21",
+    "name": "Pura Vida",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12853339259,
+  "lat": 16.0520112,
+  "lon": 108.2442468,
+  "tags": {
+    "addr:housenumber": "71-73",
+    "addr:postcode": "550000",
+    "addr:street": "Đường Phan Tôn",
+    "check_date": "2025-05-21",
+    "name": "Lagom Boutique Hotel",
+    "self_service": "no",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12853339260,
+  "lat": 16.0520009,
+  "lon": 108.2441690,
+  "tags": {
+    "check_date": "2025-05-21",
+    "name": "Misa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12853339261,
+  "lat": 16.0523566,
+  "lon": 108.2444882,
+  "tags": {
+    "check_date": "2025-05-21",
+    "name": "Kiwi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12856967327,
+  "lat": 16.0492933,
+  "lon": 108.2466344,
+  "tags": {
+    "check_date": "2025-05-22",
+    "name": "The Stay",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12856967328,
+  "lat": 16.0492250,
+  "lon": 108.2468906,
+  "tags": {
+    "check_date": "2025-05-22",
+    "name": "Happy Apartment",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12856967329,
+  "lat": 16.0491322,
+  "lon": 108.2466867,
+  "tags": {
+    "check_date": "2025-05-22",
+    "name": "Phamily Residence",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12856976257,
+  "lat": 16.0623165,
+  "lon": 108.2378917,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Regal",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12857894303,
+  "lat": 16.0398975,
+  "lon": 108.2461626,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Silla",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12857894306,
+  "lat": 16.0452359,
+  "lon": 108.2409417,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Zones",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12857894315,
+  "lat": 16.0392199,
+  "lon": 108.2446274,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Gold Coast",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12857894317,
+  "lat": 16.0404767,
+  "lon": 108.2473089,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Le Indochina",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12857894323,
+  "lat": 16.0530180,
+  "lon": 108.2457045,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Louis Mo",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12857894326,
+  "lat": 16.0530606,
+  "lon": 108.2457876,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "The Pacific",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12857894327,
+  "lat": 16.0530838,
+  "lon": 108.2459231,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "The Nevis",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12857894328,
+  "lat": 16.0407150,
+  "lon": 108.2478502,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Urchin",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12857894330,
+  "lat": 16.0608098,
+  "lon": 108.2452974,
+  "tags": {
+    "addr:housenumber": "52",
+    "addr:street": "Đường Lâm Hoành",
+    "check_date": "2026-07-26",
+    "name": "Salmalia",
+    "name:en": "Salmalia Boutique Hotel & Spa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12857894333,
+  "lat": 16.0396330,
+  "lon": 108.2466084,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Titan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12857894336,
+  "lat": 16.0431603,
+  "lon": 108.2478601,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "L’Amore",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12857901315,
+  "lat": 16.0462259,
+  "lon": 108.2450350,
+  "tags": {
+    "check_date": "2025-05-23",
+    "name": "Teu",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12866278354,
+  "lat": 16.0516177,
+  "lon": 108.2436687,
+  "tags": {
+    "check_date": "2025-05-27",
+    "name": "An Home",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12866278355,
+  "lat": 16.0518677,
+  "lon": 108.2433656,
+  "tags": {
+    "check_date": "2025-05-27",
+    "name": "Dubai Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12866278356,
+  "lat": 16.0526229,
+  "lon": 108.2439047,
+  "tags": {
+    "check_date": "2025-05-27",
+    "name": "Danang Beach Apartment",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12870331345,
+  "lat": 16.0517091,
+  "lon": 108.2441128,
+  "tags": {
+    "check_date": "2025-05-27",
+    "name": "Mari Apartment",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12888751601,
+  "lat": 16.0490527,
+  "lon": 108.2390398,
+  "tags": {
+    "name": "The Now Boutique Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12920427943,
+  "lat": 16.0516072,
+  "lon": 108.2059173,
+  "tags": {
+    "name": "Nhà Khách Quân Chủng Phòng Không- Không Quân",
+    "name:en": "Air Defense - Air Force Guest House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13196845301,
+  "lat": 16.0470752,
+  "lon": 108.2221530,
+  "tags": {
+    "name": "Louis luxury apartments",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13286320865,
+  "lat": 16.0637843,
+  "lon": 108.2329443,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Phùng Khắc Khoan",
+    "check_date": "2025-11-07",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "Sailor's Home",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "tourism": "apartment",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 13290069642,
+  "lat": 16.0627649,
+  "lon": 108.2316066,
+  "tags": {
+    "check_date": "2025-11-09",
+    "contact:facebook": "@100088167894370/",
+    "name": "Maison Vy Anh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13290085560,
+  "lat": 16.0627597,
+  "lon": 108.2316834,
+  "tags": {
+    "check_date": "2025-11-09",
+    "name": "Hà Phan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13426851201,
+  "lat": 16.0378297,
+  "lon": 108.2502389,
+  "tags": {
+    "addr:housenumber": "510",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "contact:instagram": "vhotel.luxuryboutique",
+    "email": "info@v-hotel.vn",
+    "internet_access": "wlan",
+    "name": "V-Hotel Da NANG BEACH",
+    "phone": "(+84) 236 3 666 660",
+    "tourism": "hotel",
+    "website": "https://v-hotel.com.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 13511441601,
+  "lat": 16.0370478,
+  "lon": 108.2397901,
+  "tags": {
+    "addr:housenumber": "02",
+    "addr:street": "Đường An Tư Công Chúa",
+    "internet_access": "wlan",
+    "name": "Arita Rivera Hotel",
+    "name:en": "RHM Luxury Hotel And Suite",
+    "self_service": "no",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13525483833,
+  "lat": 16.0039418,
+  "lon": 108.2633507,
+  "tags": {
+    "name": "Hard to climb",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13525483898,
+  "lat": 16.0043075,
+  "lon": 108.2622081,
+  "tags": {
+    "amenity": "place_of_worship"
+  }
+},
+{
+  "type": "node",
+  "id": 13525490004,
+  "lat": 16.0039430,
+  "lon": 108.2640663,
+  "tags": {
+    "amenity": "place_of_worship"
+  }
+},
+{
+  "type": "node",
+  "id": 13525490015,
+  "lat": 16.0040276,
+  "lon": 108.2641085,
+  "tags": {
+    "amenity": "place_of_worship"
+  }
+},
+{
+  "type": "node",
+  "id": 13671225601,
+  "lat": 16.0094313,
+  "lon": 108.2573552,
+  "tags": {
+    "name": "Winmart",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 13671297801,
+  "lat": 16.0094313,
+  "lon": 108.2573552,
+  "tags": {
+    "name": "Winmart",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 13828339481,
+  "lat": 15.9715387,
+  "lon": 108.2375402,
+  "tags": {
+    "addr:city": "Phường Ngũ Hành Sơn",
+    "addr:postcode": "50510",
+    "addr:province": "Đà Nẵng",
+    "addr:street": "Lưu Quang Vũ",
+    "name": "Tạp Hoá Cô Bê",
+    "opening_hours": "Mo-Su 08:00-22:00",
+    "payment:cash": "yes",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 13828351864,
+  "lat": 15.9724345,
+  "lon": 108.2403135,
+  "tags": {
+    "addr:city": "Phường Ngũ Hành Sơn",
+    "addr:postcode": "50510",
+    "addr:province": "Đà Nẵng",
+    "addr:street": "Lưu Quang Vũ",
+    "name": "Tạp Hoá Bà Cử",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 13860986981,
+  "lat": 16.0400378,
+  "lon": 108.2177077,
+  "tags": {
+    "name": "D Mart",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 13861001333,
+  "lat": 16.0446264,
+  "lon": 108.2475141,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13898071201,
+  "lat": 16.0407053,
+  "lon": 108.2463941,
+  "tags": {
+    "name": "Sun River Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14027134201,
+  "lat": 16.0240730,
+  "lon": 108.2447890,
+  "tags": {
+    "check_date": "2026-07-19",
+    "name": "Full Market",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 14027134202,
+  "lat": 16.0547521,
+  "lon": 108.2329237,
+  "tags": {
+    "check_date": "2026-07-19",
+    "name": "K-Market",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 14064309345,
+  "lat": 16.0560731,
+  "lon": 108.2431836,
+  "tags": {
+    "addr:housenumber": "K195/6",
+    "addr:street": "K195 Nguyễn Văn Thoại",
+    "name": "Journey Living Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14068778547,
+  "lat": 16.0611554,
+  "lon": 108.2460138,
+  "tags": {
+    "check_date": "2026-07-28",
+    "name": "Nesta Celia Danang Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14077083617,
+  "lat": 16.0037614,
+  "lon": 108.2643541,
+  "tags": {
+    "amenity": "place_of_worship",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "node",
+  "id": 14221468719,
+  "lat": 16.0487900,
+  "lon": 108.2437919,
+  "tags": {
+    "check_date": "2026-09-27",
+    "name": "Full-Market",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "way",
+  "id": 118614280,
+  "center": {
+    "lat": 16.0416775,
+    "lon": 108.2424764
+  },
+  "tags": {
+    "amenity": "marketplace",
+    "building": "yes",
+    "name": "Chợ Bắc Mỹ An"
+  }
+},
+{
+  "type": "way",
+  "id": 118614290,
+  "center": {
+    "lat": 16.0409022,
+    "lon": 108.2506327
+  },
+  "tags": {
+    "branch": "Danang",
+    "brand": "Pullman",
+    "brand:wikidata": "Q3410757",
+    "check_date": "2023-01-07",
+    "name": "Pullman Beach Resort",
+    "tourism": "hotel",
+    "website": "https://www.pullman-danang.com"
+  }
+},
+{
+  "type": "way",
+  "id": 118666391,
+  "center": {
+    "lat": 16.0557323,
+    "lon": 108.2464593
+  },
+  "tags": {
+    "building": "hotel",
+    "check_date": "2023-01-08",
+    "name": "Doan 27 Da Nang",
+    "name:vi": "Doan 27 Da Nang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 118672509,
+  "center": {
+    "lat": 16.0308565,
+    "lon": 108.2196957
+  },
+  "tags": {
+    "addr:housenumber": "65",
+    "addr:street": "Đường Lê Nổ",
+    "amenity": "marketplace",
+    "name": "Chợ Đầu mối Hoà Cường",
+    "not:building": "yes",
+    "operator": "Công ty Quản lý và Phát triển các chợ Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 164333073,
+  "center": {
+    "lat": 16.0273564,
+    "lon": 108.2568824
+  },
+  "tags": {
+    "addr:city": "Danang",
+    "addr:district": "Ngu Hanh Son District",
+    "addr:housenumber": "8",
+    "addr:street": "Vo Nguyen Giap Street",
+    "addr:subdistrict": "Khue My Ward",
+    "brand": "Crowne Plaza",
+    "brand:wikidata": "Q2746220",
+    "check_date": "2022-12-31",
+    "name": "Crowne Plaza Danang",
+    "tourism": "hotel",
+    "website": "https://www.ihg.com/crowneplaza/hotels/us/en/danang/dadch/hoteldetail"
+  }
+},
+{
+  "type": "way",
+  "id": 164333079,
+  "center": {
+    "lat": 16.0311818,
+    "lon": 108.2552016
+  },
+  "tags": {
+    "check_date": "2022-12-31",
+    "name": "Tia Wellness Resort",
+    "tourism": "hotel",
+    "website": "https://tiawellnessresort.com"
+  }
+},
+{
+  "type": "way",
+  "id": 164333086,
+  "center": {
+    "lat": 16.0126126,
+    "lon": 108.2637436
+  },
+  "tags": {
+    "addr:city": "Danang",
+    "addr:housenumber": "5",
+    "addr:postcode": "550000",
+    "addr:street": "Đường Trường Sa",
+    "addr:subdistrict": "Ngũ Hành Sơn",
+    "air_conditioning": "yes",
+    "bar": "yes",
+    "branch": "Danang",
+    "brand": "Hyatt Regency",
+    "brand:wikidata": "Q115794868",
+    "check_date": "2026-10-12",
+    "contact:facebook": "https://www.facebook.com/HyattRegencyDanang",
+    "contact:instagram": "https://www.instagram.com/hyattregencydanang/",
+    "description": "Situated on a tranquil stretch of white sandy Non Nuoc beach, Hyatt Regency Danang Resort and Spa spans 49 acres is an ideal base to explore the exotic charms of Central Vietnam no matter the occasion, from meetings and events to memorable family vacation",
+    "email": "danang.regency@hyatt.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Hyatt Regency Danang Resort and Spa",
+    "name:en": "Hyatt Regency Danang Resort and Spa",
+    "opening_hours": "24/7",
+    "phone": "+84 236 398 1234",
+    "reservation": "recommended",
+    "rooms": "376",
+    "smoking": "separated",
+    "tourism": "hotel",
+    "website": "https://www.hyatt.com/en-US/hotel/vietnam/hyatt-regency-danang-resort-and-spa/danhr",
+    "wikidata": "Q111402875"
+  }
+},
+{
+  "type": "way",
+  "id": 164333087,
+  "center": {
+    "lat": 16.0297701,
+    "lon": 108.2558011
+  },
+  "tags": {
+    "addr:housenumber": "111",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "check_date": "2023-01-06",
+    "name": "Olalani Resort & Condotel",
+    "tourism": "hotel",
+    "website": "https://olalani.net"
+  }
+},
+{
+  "type": "way",
+  "id": 164333100,
+  "center": {
+    "lat": 16.0077720,
+    "lon": 108.2660623
+  },
+  "tags": {
+    "addr:housenumber": "7",
+    "addr:street": "Đường Trường Sa",
+    "brand": "Marriott",
+    "brand:wikidata": "Q3918608",
+    "check_date": "2022-12-31",
+    "name": "Danang Marriott Resort & Spa",
+    "tourism": "hotel",
+    "website": "https://www.marriott.com/en-us/hotels/dadmr-danang-marriott-resort-and-spa/overview/"
+  }
+},
+{
+  "type": "way",
+  "id": 302763993,
+  "center": {
+    "lat": 16.0247479,
+    "lon": 108.2202854
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Hải Châu",
+    "addr:housenumber": "5",
+    "addr:street": "Cách Mạng Tháng Tám",
+    "addr:subdistrict": "Hòa Cường Nam",
+    "building": "yes",
+    "internet_access": "wlan",
+    "name": "MM Mega Market Đà Nẵng",
+    "opening_hours": "Mo-Su 06:00-22:30",
+    "shop": "mall",
+    "website": "https://www.mmvietnam.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 302765734,
+  "center": {
+    "lat": 16.0348676,
+    "lon": 108.2292317
+  },
+  "tags": {
+    "addr:housenumber": "06",
+    "addr:street": "Đường Nại Nam",
+    "building": "yes",
+    "building:levels": "5",
+    "name": "Lotte Mart",
+    "opening_hours": "Mo-Su 07:30-22:30",
+    "shop": "mall"
+  }
+},
+{
+  "type": "way",
+  "id": 302770813,
+  "center": {
+    "lat": 16.0634704,
+    "lon": 108.2236971
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Hải Châu",
+    "addr:housenumber": "238",
+    "addr:street": "Bạch Đằng",
+    "addr:subdistrict": "Phước Ninh",
+    "building": "yes",
+    "building:levels": "20",
+    "internet_access": "yes",
+    "name": "Khách sạn Green Plaza",
+    "name:en": "Green Plaza Hotel",
+    "stars": "4",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 302944359,
+  "center": {
+    "lat": 16.0025790,
+    "lon": 108.2152281
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "name": "Chùa Trung Lương",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 303499553,
+  "center": {
+    "lat": 16.0373611,
+    "lon": 108.2274803
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "heritage": "2",
+    "name": "Đình Nại Nam",
+    "religion": "vietnamese_folk"
+  }
+},
+{
+  "type": "way",
+  "id": 305994966,
+  "center": {
+    "lat": 16.0482332,
+    "lon": 108.2268177
+  },
+  "tags": {
+    "brand": "Mercure",
+    "brand:wikidata": "Q1709809",
+    "building": "yes",
+    "name": "Grand Mercure Danang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 338489785,
+  "center": {
+    "lat": 15.9750405,
+    "lon": 108.2523603
+  },
+  "tags": {
+    "addr:housenumber": "470",
+    "addr:street": "Đường Trần Đại Nghĩa",
+    "amenity": "university",
+    "contact:email": "info@vku.udn.vn",
+    "contact:phone": "+84 236 3667 117",
+    "contact:website": "https://vku.udn.vn/",
+    "education": "university",
+    "name": "Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn",
+    "operator": "Đại học Đà Nẵng",
+    "operator:type": "univeristy"
+  }
+},
+{
+  "type": "way",
+  "id": 344021057,
+  "center": {
+    "lat": 16.0226987,
+    "lon": 108.2493906
+  },
+  "tags": {
+    "addr:street": "Lê Văn Hiến",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Phụ sản - Nhi Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 363224651,
+  "center": {
+    "lat": 16.0478068,
+    "lon": 108.2482658
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Nhà thờ Đức Mẹ Sao Biển",
+    "name:ru": "Церковь Пресвятой Девы Марии",
+    "religion": "christian"
+  }
+},
+{
+  "type": "way",
+  "id": 406780032,
+  "center": {
+    "lat": 16.0135663,
+    "lon": 108.2070723
+  },
+  "tags": {
+    "addr:street": "Hoàng Xuân Hãn",
+    "amenity": "marketplace",
+    "name": "Chợ Cẩm Lệ"
+  }
+},
+{
+  "type": "way",
+  "id": 485212452,
+  "center": {
+    "lat": 16.0397373,
+    "lon": 108.2513983
+  },
+  "tags": {
+    "addr:city": "Da Nang",
+    "addr:country": "VN",
+    "addr:district": "Ngũ Hành Sơn",
+    "addr:housenumber": "105",
+    "addr:street": "Võ Nguyên Giáp",
+    "check_date": "2022-12-31",
+    "contact:facebook": "https://facebook.com/furamaresort",
+    "contact:fax": "+84 236 3847666",
+    "contact:phone": "+84 236 3847888",
+    "contact:twitter": "https://twitter.com/furamaresort",
+    "contact:youtube": "https://www.youtube.com/user/furamaresortvietnam",
+    "name": "Furama Resort",
+    "stars": "5",
+    "tourism": "hotel",
+    "website": "https://furamavietnam.com"
+  }
+},
+{
+  "type": "way",
+  "id": 486214075,
+  "center": {
+    "lat": 16.0368971,
+    "lon": 108.2523434
+  },
+  "tags": {
+    "addr:city": "Da Nang",
+    "addr:district": "Ngũ Hành Sơn",
+    "addr:housenumber": "107",
+    "addr:street": "Võ Nguyên Giáp",
+    "check_date": "2023-01-07",
+    "contact:phone": "+84 236 3847 333",
+    "name": "Furama Villas",
+    "stars": "5",
+    "tourism": "hotel",
+    "website": "https://furamavillasdanang.com"
+  }
+},
+{
+  "type": "way",
+  "id": 488435095,
+  "center": {
+    "lat": 16.0344551,
+    "lon": 108.2115779
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:housenumber": "131",
+    "addr:street": "Đường Lương Nhữ Hộc",
+    "amenity": "university",
+    "contact:website": "https://ufl.udn.vn",
+    "education": "university",
+    "name": "Trường Đại học Ngoại ngữ",
+    "operator": "Đại học Đà Nẵng",
+    "operator:type": "university"
+  }
+},
+{
+  "type": "way",
+  "id": 489789425,
+  "center": {
+    "lat": 16.0387507,
+    "lon": 108.2112279
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "amenity": "hospital",
+    "name": "Bệnh viện Đa khoa Quốc tế Vinmec Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 503548472,
+  "center": {
+    "lat": 16.0565659,
+    "lon": 108.2457965
+  },
+  "tags": {
+    "building": "hotel",
+    "check_date": "2025-05-23",
+    "name": "Gió Biển 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 513706270,
+  "center": {
+    "lat": 16.0007837,
+    "lon": 108.2693892
+  },
+  "tags": {
+    "brand": "Meliá",
+    "brand:wikidata": "Q1815030",
+    "check_date": "2022-12-31",
+    "name": "Meliá Danang Beach Resort",
+    "tourism": "hotel",
+    "website": "https://www.melia.com/en/hotels/vietnam/da-nang/melia-danang-beach-resort"
+  }
+},
+{
+  "type": "way",
+  "id": 513706286,
+  "center": {
+    "lat": 15.9946289,
+    "lon": 108.2708655
+  },
+  "tags": {
+    "addr:housenumber": "23",
+    "addr:street": "Đường Trường Sa",
+    "brand": "Marriott",
+    "brand:wikidata": "Q3918608",
+    "check_date": "2025-06-22",
+    "name": "Danang Marriott Resort & Spa, Non Nuoc Beach Villas",
+    "tourism": "hotel",
+    "website": "https://vinpearl.com/en/hotels/vinpearl-resort-spa-da-nang"
+  }
+},
+{
+  "type": "way",
+  "id": 513706294,
+  "center": {
+    "lat": 15.9889626,
+    "lon": 108.2742520
+  },
+  "tags": {
+    "name": "Pulchra Resort Da Nang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 549188946,
+  "center": {
+    "lat": 15.9811663,
+    "lon": 108.2785281
+  },
+  "tags": {
+    "addr:city": "Da Nang",
+    "addr:housenumber": "35",
+    "addr:street": "Đường Trường Sa",
+    "brand": "Sheraton",
+    "brand:wikidata": "Q634831",
+    "check_date": "2022-12-31",
+    "name": "Sheraton Grand Danang Resort & Spa",
+    "rooms": "258",
+    "tourism": "hotel",
+    "website": "https://www.marriott.com/en-us/hotels/dadsi-sheraton-grand-danang-resort/overview/"
+  }
+},
+{
+  "type": "way",
+  "id": 549190143,
+  "center": {
+    "lat": 15.9760622,
+    "lon": 108.2814589
+  },
+  "tags": {
+    "addr:city": "Da Nang",
+    "addr:street": "Đường Trường Sa",
+    "alt_name": "The Ocean Villas",
+    "check_date": "2026-07-16",
+    "name": "The Ocean Resort",
+    "tourism": "hotel",
+    "website": "https://theoceanvillas.com.vn",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 561996753,
+  "center": {
+    "lat": 16.0374445,
+    "lon": 108.2196525
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:housenumber": "68",
+    "addr:street": "Phan Đăng Lưu",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Mắt thành phố Đà Nẵng",
+    "name:en": "Eye Hospital Danang"
+  }
+},
+{
+  "type": "way",
+  "id": 627383447,
+  "center": {
+    "lat": 16.0039648,
+    "lon": 108.2621425
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "check_date": "2023-01-06",
+    "name": "Chùa Tam Tôn",
+    "name:en": "Tam Ton Pagoda",
+    "name:vi": "Chùa Tam Tôn",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 627383449,
+  "center": {
+    "lat": 16.0035505,
+    "lon": 108.2642407
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "building:levels": "7",
+    "check_date": "2023-01-06",
+    "name": "Tháp Xá Lợi",
+    "name:en": "Xa Loi Tower",
+    "name:vi": "Tháp Xá Lợi",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 627383450,
+  "center": {
+    "lat": 16.0035961,
+    "lon": 108.2628878
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 627383451,
+  "center": {
+    "lat": 16.0038895,
+    "lon": 108.2627912
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "check_date": "2023-01-06",
+    "name": "Chùa Tam Thai",
+    "name:en": "Tam Thai Pagoda",
+    "name:vi": "Chùa Tam Thai",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 627383452,
+  "center": {
+    "lat": 16.0039608,
+    "lon": 108.2625503
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 630836302,
+  "center": {
+    "lat": 16.0489670,
+    "lon": 108.2486727
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Ngũ Hành Sơn",
+    "addr:housenumber": "304",
+    "addr:postcode": "50507",
+    "addr:province": "Danang",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "addr:subdistrict": "Mỹ An",
+    "air_conditioning": "yes",
+    "brand": "Yarra",
+    "building": "hotel",
+    "building:levels": "20",
+    "check_date": "2023-01-08",
+    "email": "info@yarraoceansuitesdanang.com",
+    "height": "41",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Yarra Ocean Suites Danang",
+    "phone": "+84 236 6269 888",
+    "rooms": "106",
+    "tourism": "hotel",
+    "website": "https://yarraoceansuitesdanang.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 630840063,
+  "center": {
+    "lat": 16.0617540,
+    "lon": 108.2458241
+  },
+  "tags": {
+    "addr:housenumber": "252",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "building": "hotel",
+    "building:levels": "7",
+    "check_date": "2025-06-14",
+    "height": "21",
+    "name": "Grand Tourane Hotel",
+    "tourism": "hotel",
+    "website": "https://grandtouranehotel.com"
+  }
+},
+{
+  "type": "way",
+  "id": 693058157,
+  "center": {
+    "lat": 16.0534080,
+    "lon": 108.2474346
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Ngũ Hành Sơn",
+    "addr:housenumber": "274",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "addr:subdistrict": "Mỹ An",
+    "building": "hotel",
+    "check_date": "2022-12-29",
+    "name": "Serene Hotel",
+    "tourism": "hotel",
+    "website": "https://www.serenehoteldanang.com"
+  }
+},
+{
+  "type": "way",
+  "id": 693058158,
+  "center": {
+    "lat": 16.0526466,
+    "lon": 108.2476882
+  },
+  "tags": {
+    "addr:housenumber": "282",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "building": "hotel",
+    "check_date": "2026-07-22",
+    "name": "Rosamia Hotel",
+    "phone": "+84 236 3954 999",
+    "tourism": "hotel",
+    "website": "https://rosamiahotel.com"
+  }
+},
+{
+  "type": "way",
+  "id": 693058159,
+  "center": {
+    "lat": 16.0530480,
+    "lon": 108.2475340
+  },
+  "tags": {
+    "addr:housenumber": "278",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "building": "hotel",
+    "check_date": "2022-12-29",
+    "name": "Haian Beach Hotel & Spa",
+    "phone": "+84 236 2228 666",
+    "tourism": "hotel",
+    "website": "https://www.haianbeachhotelspa.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 693059133,
+  "center": {
+    "lat": 16.0537170,
+    "lon": 108.2473363
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Ngũ Hành Sơn",
+    "addr:housenumber": "270",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "addr:subdistrict": "Mỹ An",
+    "building": "hotel",
+    "check_date": "2022-12-29",
+    "height": "171",
+    "name": "Mường Thanh Đà Nẵng",
+    "tourism": "hotel",
+    "website": "https://luxurydanang.muongthanh.com"
+  }
+},
+{
+  "type": "way",
+  "id": 693341949,
+  "center": {
+    "lat": 16.0632964,
+    "lon": 108.2442152
+  },
+  "tags": {
+    "addr:housenumber": "32",
+    "addr:street": "Đường Võ Văn Kiệt",
+    "building": "hotel",
+    "name": "Pavilion Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 693369267,
+  "center": {
+    "lat": 16.0579424,
+    "lon": 108.2461126
+  },
+  "tags": {
+    "addr:housenumber": "258",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "building": "hotel",
+    "building:levels": "10",
+    "check_date": "2022-12-29",
+    "name": "DLG Hotel",
+    "tourism": "hotel",
+    "website": "https://dlghoteldanang.com"
+  }
+},
+{
+  "type": "way",
+  "id": 693561549,
+  "center": {
+    "lat": 16.0629990,
+    "lon": 108.2315627
+  },
+  "tags": {
+    "addr:street": "Đường Mai Hắc Đế",
+    "building": "hotel",
+    "name": "Dang's Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 693632344,
+  "center": {
+    "lat": 16.0543992,
+    "lon": 108.2340148
+  },
+  "tags": {
+    "addr:street": "Đường Trần Quang Diệu",
+    "building": "hotel",
+    "name": "Sunshine Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 693812580,
+  "center": {
+    "lat": 16.0552430,
+    "lon": 108.2418994
+  },
+  "tags": {
+    "addr:street": "Đường Nguyễn Văn Thoại",
+    "building": "hotel",
+    "check_date": "2024-09-10",
+    "name": "Fivitel King",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 693812581,
+  "center": {
+    "lat": 16.0560194,
+    "lon": 108.2446106
+  },
+  "tags": {
+    "addr:housenumber": "305",
+    "addr:street": "Đường Nguyễn Văn Thoại",
+    "air_conditioning": "yes",
+    "alt_name": "Song Cong Hotel",
+    "bar": "yes",
+    "building": "hotel",
+    "building:levels": "15",
+    "check_date": "2026-07-05",
+    "contact:facebook": "https://www.facebook.com/socohoteldanang/",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "SOCO Hotel",
+    "stars": "4",
+    "tourism": "hotel",
+    "website": "https://socohoteldanang.business.site/"
+  }
+},
+{
+  "type": "way",
+  "id": 693813887,
+  "center": {
+    "lat": 16.0551407,
+    "lon": 108.2417020
+  },
+  "tags": {
+    "addr:street": "Đường Nguyễn Văn Thoại",
+    "building": "hotel",
+    "name": "Huỳnh Gia Hưng Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 693816095,
+  "center": {
+    "lat": 16.0557895,
+    "lon": 108.2453896
+  },
+  "tags": {
+    "addr:street": "Đường Nguyễn Văn Thoại",
+    "building": "hotel",
+    "check_date": "2024-09-10",
+    "name": "Mercy Emerald",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 693816096,
+  "center": {
+    "lat": 16.0557547,
+    "lon": 108.2452706
+  },
+  "tags": {
+    "addr:street": "Đường Nguyễn Văn Thoại",
+    "building": "hotel",
+    "check_date": "2024-09-10",
+    "name": "Richico Apartments & Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 693818948,
+  "center": {
+    "lat": 16.0440706,
+    "lon": 108.2226201
+  },
+  "tags": {
+    "addr:street": "Đường 2 Tháng 9",
+    "building": "hotel",
+    "name": "Minh Toan Galaxy Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 693819568,
+  "center": {
+    "lat": 16.0385512,
+    "lon": 108.2233794
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:housenumber": "380",
+    "addr:street": "Đường 2 Tháng 9",
+    "building": "hotel",
+    "building:levels": "6",
+    "internet_access": "wlan",
+    "name": "Brown Bean Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 693819569,
+  "center": {
+    "lat": 16.0390132,
+    "lon": 108.2233260
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:street": "Đường 2 Tháng 9",
+    "building": "hotel",
+    "name": "Fortune Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 693822334,
+  "center": {
+    "lat": 16.0545911,
+    "lon": 108.2448629
+  },
+  "tags": {
+    "addr:street": "Đường Phan Liêm",
+    "building": "hotel",
+    "name": "Terra boutique hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 693822335,
+  "center": {
+    "lat": 16.0531897,
+    "lon": 108.2447665
+  },
+  "tags": {
+    "addr:street": "Đường Lê Quang Đạo",
+    "building": "hotel",
+    "check_date": "2025-05-16",
+    "name": "Pham Thanh Apartment",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "way",
+  "id": 693832643,
+  "center": {
+    "lat": 16.0486758,
+    "lon": 108.2424470
+  },
+  "tags": {
+    "addr:street": "Đường Hoàng Kế Viêm",
+    "building": "hotel",
+    "check_date": "2025-05-15",
+    "name": "Hanami Hotel DaNang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 693837785,
+  "center": {
+    "lat": 16.0415754,
+    "lon": 108.2483774
+  },
+  "tags": {
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "building": "hotel",
+    "check_date": "2023-01-07",
+    "name": "Fansipan Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 694831926,
+  "center": {
+    "lat": 16.0611683,
+    "lon": 108.2278981
+  },
+  "tags": {
+    "bridge:structure": "arch",
+    "description": "Saturday and Sunday, 9pm",
+    "layer": "1",
+    "man_made": "bridge",
+    "name": "Cầu Rồng",
+    "name:en": "Dragon Bridge",
+    "name:id": "Jembatan Naga",
+    "name:ko": "드래곤 브릿지",
+    "name:ru": "Мост Дракона",
+    "name:zh": "龙桥",
+    "name:zh-Hans": "龙桥",
+    "name:zh-Hant": "龍橋",
+    "opening_hours": "24/7",
+    "tourism": "attraction",
+    "wikidata": "Q5305270"
+  }
+},
+{
+  "type": "way",
+  "id": 695008783,
+  "center": {
+    "lat": 16.0277102,
+    "lon": 108.2218037
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "name": "Miếu Cây Đa Đò Xu",
+    "name:en": "Shrine to the Banyan Tree of Do Xu",
+    "religion": "vietnamese_folk"
+  }
+},
+{
+  "type": "way",
+  "id": 695008824,
+  "center": {
+    "lat": 16.0325717,
+    "lon": 108.2257285
+  },
+  "tags": {
+    "addr:housenumber": "34",
+    "addr:street": "Đường Nguyễn Lộ Trạch",
+    "building": "hotel",
+    "building:levels": "5",
+    "name": "Tuyên Sơn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 695040195,
+  "center": {
+    "lat": 16.0198681,
+    "lon": 108.2063485
+  },
+  "tags": {
+    "addr:housenumber": "100",
+    "addr:street": "Đường Thành Thái",
+    "amenity": "place_of_worship",
+    "building": "temple"
+  }
+},
+{
+  "type": "way",
+  "id": 699673422,
+  "center": {
+    "lat": 16.0412115,
+    "lon": 108.2448999
+  },
+  "tags": {
+    "addr:housenumber": "04",
+    "addr:street": "Đường Lưu Quang Thuận",
+    "amenity": "hospital",
+    "building": "hospital",
+    "name": "Trạm Y tế phường Mỹ An"
+  }
+},
+{
+  "type": "way",
+  "id": 699673423,
+  "center": {
+    "lat": 16.0427276,
+    "lon": 108.2479052
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:housenumber": "388",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "building": "hotel",
+    "check_date": "2025-05-23",
+    "name": "Tehana Beach Hotel Da Nang",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 699689157,
+  "center": {
+    "lat": 16.0436930,
+    "lon": 108.2475135
+  },
+  "tags": {
+    "addr:housenumber": "364",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "building": "yes",
+    "check_date": "2025-05-23",
+    "name": "Lavencos",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 699752876,
+  "center": {
+    "lat": 16.0509701,
+    "lon": 108.2481284
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Ngũ Hành Sơn",
+    "addr:housenumber": "294",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "addr:subdistrict": "Mỹ An",
+    "building": "yes",
+    "check_date": "2025-05-18",
+    "name": "Eden Hotel",
+    "phone": "+84 236 37 55555",
+    "tourism": "hotel",
+    "website": "https://edendananghotel.com"
+  }
+},
+{
+  "type": "way",
+  "id": 699752877,
+  "center": {
+    "lat": 16.0515496,
+    "lon": 108.2479742
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Ngũ Hành Sơn",
+    "addr:housenumber": "288",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "addr:subdistrict": "Mỹ An",
+    "building": "yes",
+    "check_date": "2025-05-18",
+    "name": "Balcona Hotel",
+    "phone": "+84 2366 29 92 92",
+    "tourism": "hotel",
+    "website": "https://balconahotel.com"
+  }
+},
+{
+  "type": "way",
+  "id": 908406622,
+  "center": {
+    "lat": 16.0323165,
+    "lon": 108.2221658
+  },
+  "tags": {
+    "addr:housenumber": "556",
+    "addr:street": "Đường Núi Thành",
+    "amenity": "university",
+    "education": "university",
+    "name": "Trường Đại học Kiến trúc Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 968380513,
+  "center": {
+    "lat": 16.0475147,
+    "lon": 108.2398720
+  },
+  "tags": {
+    "addr:housenumber": "71",
+    "addr:street": "Đường Ngũ Hành Sơn",
+    "amenity": "university",
+    "contact:website": "https://due.udn.vn/",
+    "name": "Trường Đại học Kinh tế - Đại học Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 1044449890,
+  "center": {
+    "lat": 15.9753368,
+    "lon": 108.2507009
+  },
+  "tags": {
+    "amenity": "university",
+    "name": "Khoa Giáo dục Quốc phòng và An ninh - Đại học Đà Nẵng",
+    "operator": "Đại học Đà Nẵng",
+    "operator:type": "university"
+  }
+},
+{
+  "type": "way",
+  "id": 1044449892,
+  "center": {
+    "lat": 15.9737845,
+    "lon": 108.2479587
+  },
+  "tags": {
+    "amenity": "university",
+    "contact:email": "smp@ac.udn.vn",
+    "contact:phone": "+84 236 7109 357",
+    "contact:website": "https://smp.udn.vn/",
+    "name": "Trường Y Dược - Đại học Đà Nẵng",
+    "operator": "Đại học Đà Nẵng",
+    "operator:type": "university"
+  }
+},
+{
+  "type": "way",
+  "id": 1046782306,
+  "center": {
+    "lat": 16.0606539,
+    "lon": 108.2225133
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Vanda",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1047111454,
+  "center": {
+    "lat": 16.0321872,
+    "lon": 108.2209880
+  },
+  "tags": {
+    "addr:housenumber": "33",
+    "addr:street": "Đường Xô Viết Nghệ Tĩnh",
+    "amenity": "university",
+    "education": "university",
+    "name": "Trường Đại học Đông Á"
+  }
+},
+{
+  "type": "way",
+  "id": 1050159048,
+  "center": {
+    "lat": 16.0631466,
+    "lon": 108.2437009
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Dana Marina",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1050159049,
+  "center": {
+    "lat": 16.0631729,
+    "lon": 108.2437900
+  },
+  "tags": {
+    "building": "yes",
+    "check_date": "2024-09-10",
+    "name": "Adaline Hotel & Suites",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1050159050,
+  "center": {
+    "lat": 16.0632195,
+    "lon": 108.2439411
+  },
+  "tags": {
+    "addr:city": "Da Nang",
+    "addr:district": "Son Tra District",
+    "addr:housenumber": "39A",
+    "addr:postcode": "550000",
+    "addr:province": "Da Nang",
+    "addr:street": "Đường Võ Văn Kiệt",
+    "addr:subdistrict": "Phước Mỹ",
+    "building": "yes",
+    "check_date": "2026-02-07",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Royal Ocean",
+    "phone": "+84935359992",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1050159051,
+  "center": {
+    "lat": 16.0633520,
+    "lon": 108.2444128
+  },
+  "tags": {
+    "addr:city": "Da Nang",
+    "addr:district": "Son Tra District",
+    "addr:housenumber": "27",
+    "addr:street": "Võ Văn Kiệt",
+    "building": "yes",
+    "name": "Kova Diamond",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1050159052,
+  "center": {
+    "lat": 16.0634880,
+    "lon": 108.2449325
+  },
+  "tags": {
+    "building": "yes",
+    "check_date": "2024-09-10",
+    "name": "Stella Maris Beach",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1050159053,
+  "center": {
+    "lat": 16.0633452,
+    "lon": 108.2449783
+  },
+  "tags": {
+    "building": "yes",
+    "check_date": "2024-09-10",
+    "name": "Thanh Tuyet Son",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1050159054,
+  "center": {
+    "lat": 16.0629675,
+    "lon": 108.2450785
+  },
+  "tags": {
+    "building": "yes",
+    "check_date": "2024-09-10",
+    "name": "J-Bay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1050159061,
+  "center": {
+    "lat": 16.0621113,
+    "lon": 108.2451665
+  },
+  "tags": {
+    "brand": "Sala Hotel Group",
+    "building": "yes",
+    "check_date": "2022-12-29",
+    "name": "Sala Danang Beach Hotel",
+    "tourism": "hotel",
+    "website": "https://salahotelgroup.com/en/saladanangbeachhotel/"
+  }
+},
+{
+  "type": "way",
+  "id": 1050159503,
+  "center": {
+    "lat": 16.0628221,
+    "lon": 108.2438037
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Hạnh Phước Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1076716243,
+  "center": {
+    "lat": 16.0249934,
+    "lon": 108.2482473
+  },
+  "tags": {
+    "amenity": "marketplace",
+    "building": "yes",
+    "name": "Chợ Khuê Mỹ"
+  }
+},
+{
+  "type": "way",
+  "id": 1127653586,
+  "center": {
+    "lat": 15.9795472,
+    "lon": 108.2791001
+  },
+  "tags": {
+    "addr:city": "Da Nang",
+    "addr:street": "Đường Trường Sa",
+    "area": "yes",
+    "name": "The Ocean Estates",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1127653587,
+  "center": {
+    "lat": 15.9740863,
+    "lon": 108.2805259
+  },
+  "tags": {
+    "building": "yes",
+    "name": "The Ocean Suites",
+    "tourism": "apartment",
+    "website": "https://cvr.com.vn/project/ocean-suites-danang/"
+  }
+},
+{
+  "type": "way",
+  "id": 1127655296,
+  "center": {
+    "lat": 15.9635343,
+    "lon": 108.2893873
+  },
+  "tags": {
+    "area": "yes",
+    "check_date": "2023-01-05",
+    "name": "Shilla Monogram",
+    "tourism": "hotel",
+    "website": "https://www.shillamonogram.com/dnmg/index.do"
+  }
+},
+{
+  "type": "way",
+  "id": 1169531153,
+  "center": {
+    "lat": 15.9738502,
+    "lon": 108.2493128
+  },
+  "tags": {
+    "amenity": "university",
+    "contact:website": "https://ute.udn.vn/",
+    "name": "Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng (cơ sở 2)"
+  }
+},
+{
+  "type": "way",
+  "id": 1169542373,
+  "center": {
+    "lat": 15.9725563,
+    "lon": 108.2488373
+  },
+  "tags": {
+    "amenity": "university",
+    "name": "Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn (khu V)"
+  }
+},
+{
+  "type": "way",
+  "id": 1169542377,
+  "center": {
+    "lat": 15.9790070,
+    "lon": 108.2473203
+  },
+  "tags": {
+    "addr:street": "Đường Nam Kỳ Khởi Nghĩa",
+    "amenity": "university",
+    "name": "Trường Đại học Kỹ thuật Y - Dược Đà Nẵng (cơ sở 2)"
+  }
+},
+{
+  "type": "way",
+  "id": 1181331919,
+  "center": {
+    "lat": 16.0533423,
+    "lon": 108.2461344
+  },
+  "tags": {
+    "addr:city": "Da Nang",
+    "addr:housenumber": "69-71-73",
+    "addr:street": "Đường Đỗ Bí",
+    "building": "hotel",
+    "check_date": "2025-05-16",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Menora Grand Hotel",
+    "stars": "3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181331950,
+  "center": {
+    "lat": 16.0494999,
+    "lon": 108.2470182
+  },
+  "tags": {
+    "building": "hotel",
+    "name": "Avatar",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181331955,
+  "center": {
+    "lat": 16.0511520,
+    "lon": 108.2480701
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Ngũ Hành Sơn",
+    "addr:housenumber": "292",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "addr:subdistrict": "Mỹ An",
+    "building": "yes",
+    "name": "TMS Hotel Da Nang Beach",
+    "phone": "+842363755999",
+    "tourism": "hotel",
+    "website": "https://tmshotel.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 1181331956,
+  "center": {
+    "lat": 16.0515374,
+    "lon": 108.2467947
+  },
+  "tags": {
+    "building": "hotel",
+    "check_date": "2025-05-14",
+    "name": "Đảo Ngọc Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181331957,
+  "center": {
+    "lat": 16.0515739,
+    "lon": 108.2469282
+  },
+  "tags": {
+    "building": "hotel",
+    "name": "Nhật Minh Hotel & Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181331958,
+  "center": {
+    "lat": 16.0514998,
+    "lon": 108.2466576
+  },
+  "tags": {
+    "building": "hotel",
+    "check_date": "2025-05-14",
+    "name": "Amunra Ocean Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181331971,
+  "center": {
+    "lat": 16.0520663,
+    "lon": 108.2444586
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Aria Grand",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181331985,
+  "center": {
+    "lat": 16.0530618,
+    "lon": 108.2462490
+  },
+  "tags": {
+    "addr:city": "Da Nang",
+    "addr:housenumber": "85",
+    "addr:street": "Đường Đỗ Bí",
+    "alt_name": "Delicate Hotel",
+    "building": "hotel",
+    "building:levels": "8",
+    "check_date": "2026-08-24",
+    "check_in": "14:00",
+    "internet_access": "wlan",
+    "internet_access:ssid": "DELICATE APARTAMENT T6_5G",
+    "name": "Delicate Apartment and Hotel Danang",
+    "phone": "+84 987 422 609",
+    "source": "survey",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181331991,
+  "center": {
+    "lat": 16.0506778,
+    "lon": 108.2475893
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Tamarind Hotel Da Nang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181331993,
+  "center": {
+    "lat": 16.0509049,
+    "lon": 108.2455049
+  },
+  "tags": {
+    "building": "yes",
+    "check_date": "2025-05-16",
+    "internet_access": "wlan",
+    "name": "Sea Queen",
+    "name:ko": "퀀즈 핑거 호텔 다낭: 여기가 진짜 위치. 부킹닷컴 위치는 잘못되었습니다.",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181332023,
+  "center": {
+    "lat": 16.0484650,
+    "lon": 108.2471503
+  },
+  "tags": {
+    "building": "yes",
+    "check_date": "2025-05-15",
+    "name": "Charming Beauty",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181332432,
+  "center": {
+    "lat": 16.0542710,
+    "lon": 108.2446117
+  },
+  "tags": {
+    "building": "hotel",
+    "check_date": "2024-09-10",
+    "name": "Grand Sunrise Boutique",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181332437,
+  "center": {
+    "lat": 16.0546248,
+    "lon": 108.2434272
+  },
+  "tags": {
+    "addr:housenumber": "120",
+    "addr:street": "Nguyễn Văn Thoaij",
+    "building": "hotel",
+    "name": "Royal Lotus Hotel",
+    "phone": "+845116261999",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181332440,
+  "center": {
+    "lat": 16.0555767,
+    "lon": 108.2446616
+  },
+  "tags": {
+    "building": "hotel",
+    "check_date": "2024-09-10",
+    "name": "Khách sạn HaNoi Blue",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181332443,
+  "center": {
+    "lat": 16.0544811,
+    "lon": 108.2445561
+  },
+  "tags": {
+    "addr:housenumber": "04-06",
+    "addr:street": "Đường Phan Liêm",
+    "building": "hotel",
+    "internet_access": "wlan",
+    "name": "Golden star hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181332446,
+  "center": {
+    "lat": 16.0537379,
+    "lon": 108.2462250
+  },
+  "tags": {
+    "building": "hotel",
+    "name:en": "Halina Hotel & Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181332448,
+  "center": {
+    "lat": 16.0536005,
+    "lon": 108.2460693
+  },
+  "tags": {
+    "building": "hotel",
+    "building:levels": "7",
+    "check_date": "2025-05-16",
+    "name": "Davue",
+    "roof:levels": "0",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181332452,
+  "center": {
+    "lat": 16.0541732,
+    "lon": 108.2460942
+  },
+  "tags": {
+    "building": "yes",
+    "name:en": "Alani hotel and spa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181332457,
+  "center": {
+    "lat": 16.0549336,
+    "lon": 108.2449047
+  },
+  "tags": {
+    "building": "hotel",
+    "name": "Grand Ocean",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181332461,
+  "center": {
+    "lat": 16.0551388,
+    "lon": 108.2457846
+  },
+  "tags": {
+    "addr:housenumber": "96",
+    "addr:street": "Đường Trần Bạch Đằng",
+    "amenity": "cafe",
+    "building": "hotel",
+    "name": "PAMA Boutique Hotel & Bistro",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181510562,
+  "center": {
+    "lat": 16.0053318,
+    "lon": 108.2095449
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Phục hồi chức năng thành phố Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 1181510563,
+  "center": {
+    "lat": 16.0057641,
+    "lon": 108.2106405
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Y học cổ truyền thành phố Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 1204147770,
+  "center": {
+    "lat": 16.0615571,
+    "lon": 108.2218356
+  },
+  "tags": {
+    "building": "yes",
+    "building:levels": "10",
+    "check_date": "2026-07-30",
+    "name": "Cozy Danang Boutique Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1205388457,
+  "center": {
+    "lat": 16.0042763,
+    "lon": 108.2643746
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "check_date": "2023-01-06",
+    "name": "Chùa Linh Ứng",
+    "name:en": "Linh Ung Pagoda",
+    "name:ja": "リンウン寺",
+    "name:vi": "Chùa Linh Ứng",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 1205388470,
+  "center": {
+    "lat": 16.0041315,
+    "lon": 108.2614605
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "name": "Chùa Từ Tâm",
+    "name:en": "Tu Tam Pagoda",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 1226646137,
+  "center": {
+    "lat": 16.0083739,
+    "lon": 108.2571427
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Trung tâm Y tế quận Ngũ Hành Sơn"
+  }
+},
+{
+  "type": "way",
+  "id": 1247489930,
+  "center": {
+    "lat": 16.0376880,
+    "lon": 108.2405755
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "barrier": "fence",
+    "landuse": "religious",
+    "name:en": "Ba Da Pagoda (Chua Ba Da)",
+    "name:vi": "Chúa Bà Đa"
+  }
+},
+{
+  "type": "way",
+  "id": 1247733893,
+  "center": {
+    "lat": 16.0580785,
+    "lon": 108.2232243
+  },
+  "tags": {
+    "building": "roof",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "way",
+  "id": 1278495622,
+  "center": {
+    "lat": 16.0640518,
+    "lon": 108.2426191
+  },
+  "tags": {
+    "building": "hotel",
+    "name": "Phước Mỹ An",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1305378712,
+  "center": {
+    "lat": 16.0549240,
+    "lon": 108.2409394
+  },
+  "tags": {
+    "building": "hotel",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "Khách sạn Estrella",
+    "phone": "+842363872288",
+    "stars": "4",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1314176489,
+  "center": {
+    "lat": 16.0520010,
+    "lon": 108.2479181
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Quà Đà Nẵng",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "way",
+  "id": 1314176490,
+  "center": {
+    "lat": 16.0517939,
+    "lon": 108.2479104
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Ngũ Hành Sơn",
+    "addr:housenumber": "286",
+    "addr:street": "Đường Võ Nguyên Giáp",
+    "addr:subdistrict": "Mỹ An",
+    "building": "yes",
+    "name": "M Hotel Da Nang",
+    "phone": "+842363816868",
+    "tourism": "hotel",
+    "website": "https://mhotel.vn/property/m-suite-da-nang/"
+  }
+},
+{
+  "type": "way",
+  "id": 1314327486,
+  "center": {
+    "lat": 16.0545660,
+    "lon": 108.2420772
+  },
+  "tags": {
+    "area": "yes",
+    "name": "Risemount Premier Resort",
+    "tourism": "hotel",
+    "website": "https://risemountresortdanang.com"
+  }
+},
+{
+  "type": "way",
+  "id": 1314405275,
+  "center": {
+    "lat": 16.0534682,
+    "lon": 108.2460938
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Ngũ Hành Sơn",
+    "addr:housenumber": "63-65-67",
+    "addr:postcode": "550000",
+    "addr:province": "Danang",
+    "addr:street": "Đường Đỗ Bí",
+    "addr:subdistrict": "Mỹ An",
+    "check_date": "2025-05-16",
+    "email": "info@goldenlinehotel.com",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Goldenline Hotel Đà Nẵng",
+    "name:vi": "hotel.",
+    "opening_hours": "24/7",
+    "rooms": "56",
+    "tourism": "hotel",
+    "website": "http://goldenlinehotel.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 1314405277,
+  "center": {
+    "lat": 16.0557159,
+    "lon": 108.2455880
+  },
+  "tags": {
+    "air_conditioning": "yes",
+    "building": "hotel",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "Sea Wind Hotel",
+    "phone": "+84902168899",
+    "tourism": "hotel",
+    "website": "https://khach-san-seawind.business.site/"
+  }
+},
+{
+  "type": "way",
+  "id": 1314405293,
+  "center": {
+    "lat": 16.0541286,
+    "lon": 108.2469595
+  },
+  "tags": {
+    "building": "hotel",
+    "check_date": "2025-05-20",
+    "name": "Nesta hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1314407879,
+  "center": {
+    "lat": 16.0558165,
+    "lon": 108.2454825
+  },
+  "tags": {
+    "addr:street": "Đường Nguyễn Văn Thoại",
+    "building": "hotel",
+    "check_date": "2024-09-10",
+    "name": "Toan Thang Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1314407881,
+  "center": {
+    "lat": 16.0556578,
+    "lon": 108.2449395
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Ruby Star",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1314408205,
+  "center": {
+    "lat": 16.0556340,
+    "lon": 108.2448577
+  },
+  "tags": {
+    "air_conditioning": "yes",
+    "building": "yes",
+    "changing_table": "no",
+    "check_date": "2026-07-05",
+    "name": "MoonMilk",
+    "payment:cards": "yes",
+    "payment:cash": "yes",
+    "self_checkout": "no",
+    "shop": "supermarket",
+    "toilets": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 1314616042,
+  "center": {
+    "lat": 16.0633768,
+    "lon": 108.2445010
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Delicate",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1314684508,
+  "center": {
+    "lat": 16.0552293,
+    "lon": 108.2457543
+  },
+  "tags": {
+    "addr:city": "Da Nang",
+    "addr:district": "Ngu Hanh Son",
+    "addr:province": "Hoi An",
+    "addr:street": "Tran Bach Dang",
+    "addr:subdistrict": "An Thuong",
+    "bar": "yes",
+    "building": "yes",
+    "contact:facebook": "https://www.facebook.com/sunnyoceandanang",
+    "description": "Sunny Ocean Hotel features a rooftop pool with ocean views, a modern fitness center, on-site restaurant and bar, rooms with daily buffet breakfast and full amenities. Guests enjoy free Wi-Fi, airport transfers, 24-hour reception, tours, car rental...",
+    "email": "sales@sunnyoceandanang.com",
+    "image": "https://sunnyoceanhotel.com/uploads/photos/720x4801745549850_1727_88503a4b7af4286d6489c926c93752b7.jpg",
+    "mobile": "+84 937 835 444",
+    "name": "Sunny Ocean Hotel",
+    "phone": "+84 2363 583 999",
+    "tourism": "hotel",
+    "website": "https://sunnyoceanhotel.com"
+  }
+},
+{
+  "type": "way",
+  "id": 1314684509,
+  "center": {
+    "lat": 16.0547642,
+    "lon": 108.2454862
+  },
+  "tags": {
+    "addr:housenumber": "48",
+    "addr:street": "Phan Liêm",
+    "building": "yes",
+    "check_date": "2024-09-10",
+    "name": "Haya",
+    "operator": "Chị An",
+    "phone": "0869133648",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1314684510,
+  "center": {
+    "lat": 16.0549934,
+    "lon": 108.2450731
+  },
+  "tags": {
+    "building": "hotel",
+    "name": "Valencia",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1314768595,
+  "center": {
+    "lat": 16.0500739,
+    "lon": 108.2453881
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Ngũ Hành Sơn",
+    "addr:housenumber": "86",
+    "addr:postcode": "550000",
+    "addr:province": "Danang",
+    "addr:street": "Đường Lê Quang Đạo",
+    "addr:subdistrict": "Bắc Mỹ Phú",
+    "building": "hotel",
+    "check_date": "2025-05-18",
+    "internet_access:fee": "no",
+    "name": "Golden Lotus Grand",
+    "phone": "0236 3846 666",
+    "stars": "4",
+    "tourism": "hotel",
+    "website": "https://goldenlotusgrandhotel.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 1326232560,
+  "center": {
+    "lat": 16.0425792,
+    "lon": 108.2119277
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Quận Hải Châu",
+    "addr:street": "Đường Nguyễn Quang Bích",
+    "addr:subdistrict": "Phường Hòa Cường Bắc",
+    "amenity": "marketplace",
+    "name": "Chợ Nguyễn Tri Phương"
+  }
+},
+{
+  "type": "way",
+  "id": 1326233277,
+  "center": {
+    "lat": 16.0432513,
+    "lon": 108.2179878
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Quận Hải Châu",
+    "addr:street": "Đường Lê Thanh Nghị",
+    "addr:subdistrict": "Phường Hòa Cường Bắc",
+    "amenity": "marketplace",
+    "name": "Chợ Hòa Cường"
+  }
+},
+{
+  "type": "way",
+  "id": 1326320368,
+  "center": {
+    "lat": 16.0061957,
+    "lon": 108.2146404
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Quận Cẩm Lệ",
+    "addr:street": "Đường Đô Đốc Bảo",
+    "addr:subdistrict": "Phường Hòa Xuân",
+    "amenity": "marketplace",
+    "name": "Chợ Hòa Xuân"
+  }
+},
+{
+  "type": "way",
+  "id": 1326324217,
+  "center": {
+    "lat": 15.9951476,
+    "lon": 108.2573177
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Quận Ngũ Hành Sơn",
+    "addr:subdistrict": "Phường Hòa Hải",
+    "amenity": "marketplace",
+    "name": "Chợ Non Nước"
+  }
+},
+{
+  "type": "way",
+  "id": 1329067403,
+  "center": {
+    "lat": 16.0299334,
+    "lon": 108.2563541
+  },
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1329067404,
+  "center": {
+    "lat": 16.0297854,
+    "lon": 108.2560510
+  },
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1342932705,
+  "center": {
+    "lat": 16.0043802,
+    "lon": 108.2640081
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 1374632791,
+  "center": {
+    "lat": 16.0150181,
+    "lon": 108.2253481
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "barrier": "fence",
+    "denomination": "catholic",
+    "name": "Nhà thờ Giáo xứ Cồn Dầu",
+    "religion": "christian"
+  }
+},
+{
+  "type": "way",
+  "id": 1421133117,
+  "center": {
+    "lat": 16.0647234,
+    "lon": 108.2233412
+  },
+  "tags": {
+    "building": "yes",
+    "building:levels": "16",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1474308642,
+  "center": {
+    "lat": 16.0037003,
+    "lon": 108.2642407
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "name": "Vong Hai Dai",
+    "name:en": "Sea Watching Tower",
+    "name:vi": "Vong Hai Dai",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 1474308649,
+  "center": {
+    "lat": 16.0402158,
+    "lon": 108.2404548
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "landuse": "religious",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 1481285653,
+  "center": {
+    "lat": 16.0157229,
+    "lon": 108.2495049
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Miếu Thành Hoàng Bổn Xứ"
+  }
+},
+{
+  "type": "way",
+  "id": 1482141441,
+  "center": {
+    "lat": 16.0052100,
+    "lon": 108.2530709
+  },
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 1523944144,
+  "center": {
+    "lat": 16.0386294,
+    "lon": 108.2233764
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:street": "Đường 2 Tháng 9",
+    "building": "hotel",
+    "internet_access": "wlan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1524495306,
+  "center": {
+    "lat": 16.0229038,
+    "lon": 108.2142000
+  },
+  "tags": {
+    "addr:housenumber": "64",
+    "addr:street": "Đường Cách Mạng Tháng Tám",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Đa khoa Tâm Trí Đà Nẵng",
+    "name:en": "Da Nang Tam Tri General Hospital",
+    "website": "https://bvtamtridanang.com.vn"
+  }
+},
+{
+  "type": "way",
+  "id": 1539070264,
+  "center": {
+    "lat": 16.0619185,
+    "lon": 108.2092284
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Thanh Khê",
+    "addr:housenumber": "157",
+    "addr:postcode": "550000",
+    "addr:street": "Đường Phan Thanh",
+    "building": "yes",
+    "facebook": "https://www.facebook.com/oplung157phanthanh/",
+    "name": "Phụ kiện 09",
+    "name:en": "Phu Kien 09",
+    "opening_hours": "Mo-Su 07:30-22:00",
+    "shop": "mall"
+  }
+},
+{
+  "type": "way",
+  "id": 1540071684,
+  "center": {
+    "lat": 15.9777540,
+    "lon": 108.2625417
+  },
+  "tags": {
+    "addr:postcode": "55000",
+    "building": "yes",
+    "name": "Full Market Nam Kỳ Khởi Nghĩa",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "way",
+  "id": 1546877395,
+  "center": {
+    "lat": 16.0614674,
+    "lon": 108.2365080
+  },
+  "tags": {
+    "addr:housenumber": "183",
+    "addr:street": "Đường Võ Văn Kiệt",
+    "building": "hotel",
+    "building:levels": "16",
+    "name": "Gemma",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1556684594,
+  "center": {
+    "lat": 16.0629990,
+    "lon": 108.2372528
+  },
+  "tags": {
+    "building": "yes",
+    "name": "The Nang Suites",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "relation",
+  "id": 8552348,
+  "center": {
+    "lat": 16.0017096,
+    "lon": 108.2596132
+  },
+  "tags": {
+    "name": "Ngũ Hành Sơn",
+    "name:en": "Marble Mountains",
+    "name:es": "Montañas de Mármol",
+    "name:ko": "오행산(마블마운틴)",
+    "name:vi": "Ngũ Hành Sơn",
+    "natural": "wood",
+    "tourism": "attraction",
+    "type": "multipolygon",
+    "website": "https://nguhanhson.org",
+    "wikidata": "Q6755207",
+    "wikipedia": "vi:Ngũ Hành Sơn"
+  }
+}
+
+  ]
+}
