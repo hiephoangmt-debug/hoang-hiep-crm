@@ -230,8 +230,8 @@ for _pt in PARTS:
             th = .2 if k == 'x' else (.12 if k == 'w' else .07); nv = Vector((-u.y, u.x))
             for sd in (-1, 1):
                 c = (a + b) / 2 + nv * sd * (th / 2 + (.07 if k != 'g' else .2))
-                box(c.x, c.y, H - .14, L, .12 if k != 'g' else .38, .07, CEIL, ang, 0, name='go-tran')
-                c2 = (a + b) / 2 + nv * sd * (th / 2 + (.13 if k != 'g' else .38)); box(c2.x, c2.y, H - .07, L, .02, .02, COVE, ang, 0, name='led')
+                cv = x0 != x1 and y0 != y1; box(c.x, c.y, H - .14, L + (.12 if cv else 0), .12 if k != 'g' else .38, .07, CEIL, ang, 0, name='go-tran')   # đoạn cong: nối chồng, hết khe tam giác đen
+                c2 = (a + b) / 2 + nv * sd * (th / 2 + (.13 if k != 'g' else .38)); box(c2.x, c2.y, H - .07, L + (.04 if cv else 0), .02, .02, COVE, ang, 0, name='led')
         if LUX and k == 'g' and L > 1.4:   # rèm nhung dày 2 đầu
             for (r0, r1) in ((.0, .5), (L - .5, L)):
                 for c3 in range(5):
@@ -427,7 +427,7 @@ for _pt in PARTS:
             box(0, -hd + .03, 1.92, w * .8, .04, .04, LAMP, 0, 0, parent=o)
             if LUX: box(0, 0, .85, w + .01, d + .01, .02, STONE, 0, .003, parent=o); cyl(0, -hd + .08, .87, .012, .28, BRASS, parent=o); box(0, -hd + .015, 1.1, w * .95, .01, .82, LAMP, 0, 0, parent=o)
         elif k == 'ward':   # tủ áo cửa kính khói khung đồng, bên trong đèn LED + quần áo treo
-            TG = mat('kinh-tu', (.7, .62, .54), .02, 0., .5, None, 0., .96); IN = mat('trong-tu', (.62, .5, .38), .5)
+            TG = mat('kinh-tu', (.78, .72, .64), .16, 0., .3, None, 0., .9); IN = mat('trong-tu', (.62, .5, .38), .5)
             CL = [mat('ao-' + str(i), c, .85) for i, c in enumerate([(.85, .83, .78), (.2, .25, .35), (.55, .42, .3), (.7, .7, .72), (.12, .12, .14), (.6, .2, .2)])]
             box(0, -hd + .015, 0, w, .03, 2.4, IN, 0, 0, parent=o)                                   # vách hậu sáng màu
             for sx_ in (-1, 1): box(sx_ * (hw - .015), 0, 0, .03, d, 2.4, WALNUT, 0, 0, parent=o)     # 2 hông
