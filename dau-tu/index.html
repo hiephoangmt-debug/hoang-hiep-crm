@@ -93,6 +93,14 @@ h2::before { content: ""; display: inline-block; width: 10px; height: 10px; bord
 .card h3 { font-size: 15px; margin: 0 0 8px; }
 .stats { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px; margin: 0 0 10px; color: var(--ink-2); }
 .stats b { color: var(--ink); }
+.gtoday { width: 100%; border-collapse: collapse; margin: 0 0 12px; font-size: 15px; }
+.gtoday { table-layout: fixed; }
+.gtoday th, .gtoday td { padding: 8px 6px; border-bottom: 1px solid var(--grid); text-align: right; white-space: normal; position: static; box-shadow: none; }
+.gtoday th:first-child, .gtoday td:first-child { width: 42%; }
+.gtoday small { display: block; font-size: 12px; color: var(--ink-2); font-weight: 400; }
+.gtoday th:first-child, .gtoday td:first-child { text-align: left; }
+.gtoday td.chi { font-weight: 700; color: var(--ink); }
+.gtoday caption { caption-side: bottom; text-align: left; font-size: 13px; color: var(--ink-2); padding-top: 6px; }
 .counts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
 .counts button { text-align: left; font: inherit; color: inherit; cursor: pointer; }
 .counts button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--orange); }
@@ -224,8 +232,8 @@ section.far canvas { visibility: hidden; }
 
   <section id="vang">
     <h2>Vàng</h2>
-    <p class="note">Giá SJC mua/bán và giá vàng thế giới quy đổi ra triệu đồng/lượng (theo tỷ giá USD/VND cùng ngày) – khoảng cách giữa hai đường là chênh lệch SJC so với thế giới.</p>
-    <div class="card"><div class="stats" id="goldStats"></div><div class="chart"><canvas id="cGold"></canvas></div></div>
+    <p class="note">Bảng trên: giá vàng miếng SJC mới nhất theo lượng và theo chỉ (1 lượng = 10 chỉ). Biểu đồ: giá SJC mua/bán và giá vàng thế giới quy đổi ra triệu đồng/lượng (theo tỷ giá USD/VND cùng ngày) – khoảng cách giữa hai đường là chênh lệch SJC so với thế giới.</p>
+    <div class="card"><div id="goldToday"></div><div class="stats" id="goldStats"></div><div class="chart"><canvas id="cGold"></canvas></div></div>
   </section>
 
   <section id="chung-khoan">
@@ -601,6 +609,7 @@ function change(arr, s) {
 function renderTiles(s) {
   const items = [
     ['Vàng SJC (bán)', pts('sjc_ban'), 'tr/lượng', 1],
+    ['Vàng SJC 1 chỉ (bán)', pts('sjc_ban').map(([d, v]) => [d, v / 10]), 'tr/chỉ', 2],
     ['Vàng thế giới', pts('vang_tg'), 'USD/oz', 0],
     ['VN-Index', pts('vnindex'), 'điểm', 2],
     ['VN30', pts('vn30'), 'điểm', 2],
@@ -658,13 +667,30 @@ function renderCompare(s, e) {
   draw('cCompare', { type: 'line', data: { datasets: ds }, options: o });
 }
 
+// Giá vàng miếng SJC mới nhất: theo lượng và theo chỉ (1 lượng = 10 chỉ)
+function renderGoldToday() {
+  const b = pts('sjc_mua'), a = pts('sjc_ban');
+  if (!a.length || !b.length) { $('goldToday').innerHTML = ''; return; }
+  const buy = b.at(-1)[1], sell = a.at(-1)[1], d = a.at(-1)[0];
+  const day = d.split('-').reverse().join('/');
+  const tr = (v) => fmt(v, 2) + ' tr';
+  $('goldToday').innerHTML = `<table class="gtoday"><thead><tr><th>Vàng miếng SJC</th><th>1 lượng</th><th>1 chỉ</th></tr></thead><tbody>
+    <tr><td>Mua vào <small>(tiệm mua của khách)</small></td><td>${tr(buy)}</td><td class="chi">${tr(buy / 10)}</td></tr>
+    <tr><td>Bán ra <small>(khách mua)</small></td><td>${tr(sell)}</td><td class="chi">${tr(sell / 10)}</td></tr>
+    <tr><td>Chênh mua – bán</td><td>${tr(sell - buy)}</td><td>${fmt((sell - buy) / 10 * 1000, 0)} nghìn</td></tr>
+    </tbody><caption>Giá ngày ${day}${P.sjc_nguon ? ' · nguồn ' + esc(P.sjc_nguon) : ''} · tham khảo, giá tại tiệm có thể khác.</caption></table>`;
+}
+
 function renderGold(s) {
+  renderGoldToday();
   const ds = [
     line('SJC bán ra', inRange(pts('sjc_ban'), s), css('--s2')),
     line('SJC mua vào', inRange(pts('sjc_mua'), s), css('--s4')),
     line('Thế giới quy đổi', inRange(goldWorldVnd(), s), css('--s3')),
   ];
-  draw('cGold', { type: 'line', data: { datasets: ds }, options: baseOpts('tr/lượng', { legend: true, dec: 1 }) });
+  const go = baseOpts('tr/lượng', { legend: true, dec: 1 });
+  go.plugins.tooltip.callbacks.label = (c) => ` ${c.dataset.label}: ${fmt(c.parsed.y, 1)} tr/lượng · ${fmt(c.parsed.y / 10, 2)} tr/chỉ`;
+  draw('cGold', { type: 'line', data: { datasets: ds }, options: go });
 }
 
 function renderKn(s) {
