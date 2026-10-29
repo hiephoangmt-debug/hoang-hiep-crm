@@ -11,9 +11,9 @@ Thêm mô hình 4D dự án vào CRM Sale (trang "Bảng hàng dự án"), khôn
    - `link4dKhach`: link gửi khách (nếu trống thì dùng `link4d`).
 
    Điền sẵn cho dự án tên **Sun Saphia Residence**:
-   - `link4d` = `https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/e132d52bd27274a20bb6ab3ef24fb5a0941e6aef/projects/sun-saphia/4d/sun-saphia-4d.html?crm`
+   - `link4d` = `https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/8a922d9d539e1d45e013140f605dafa9b07e21a0/projects/sun-saphia/4d/sun-saphia-4d.html?crm`
    - `link4dKhach` = `https://www.sun-saphia-residence.com/#ss4d`
-   - (tuỳ chọn) `linkChonCan` = `https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/ac4499a17ad4c8143c8f199d411036a305d17aa2/projects/sun-saphia/chon-can/chon-can-app.html?crm` – công cụ chọn căn: mặt bằng từng tầng 2 → 30 (kèm bản vẽ CĐT), mặt bằng từng căn, 3D, tải ảnh có số điện thoại.
+   - (tuỳ chọn) `linkChonCan` = `https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/6392ad19c867d5bd6f34e3d2c8028bdf1e41e79f/projects/sun-saphia/chon-can/chon-can-app.html?crm` – công cụ chọn căn: mặt bằng từng tầng 2 → 30 (kèm bản vẽ CĐT), mặt bằng từng căn, 3D, tải ảnh có số điện thoại.
    - Mặt bằng tầng đặt trên tòa nhà: thêm `&plan&f=<tầng>` vào cuối `link4d` (ví dụ `...sun-saphia-4d.html?crm&plan&f=18`). `?crm` = bản nội bộ, không có chữ chìm.
 
 2. **Màn sửa dự án (quyền Quản trị / Giám đốc)**: thêm 2 ô nhập "Link mô hình 4D (nhúng)" và "Link 4D gửi khách", lưu vào 2 trường trên.
