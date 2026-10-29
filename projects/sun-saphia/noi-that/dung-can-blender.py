@@ -209,9 +209,11 @@ for _pt in PARTS:
             elif k == 'w': piece(t0 - e0 * .6, t1 + e1 * .6, 0, H, .12, WALL)
             elif k == 'g':
                 inner = not (min(x0, x1) <= 0 or max(x0, x1) >= W or min(y0, y1) <= 0 or max(y0, y1) >= D) if (x0 == x1 or y0 == y1) else False
-                short = (t1 - t0) < .9; ov = .035 if short else 0   # góc kính cong ghép từ nhiều đoạn ngắn: không đố đứng, khung nối liền (hết răng cưa)
-                if not (TOUR and inner): piece(t0 - ov, t1 + ov, 0, H - .06, .012, GLASS, 'kinh')
-                piece(t0 - ov, t1 + ov, H - .08, .08, .07, ALU); piece(t0 - ov, t1 + ov, 0, .05, .07, ALU)
+                curved = x0 != x1 and y0 != y1; short = (t1 - t0) < .9 or curved; ov = 0 if curved else (.035 if short else 0)   # kính bo cong: không đố đứng, không chồng mép (hết sọc đen)   # góc kính cong ghép từ nhiều đoạn ngắn: không đố đứng, khung nối liền (hết răng cưa)
+                if curved: CG.append((a + u * t0, a + u * t1))   # kính cong: dựng 1 tấm liền mạch sau
+                elif not (TOUR and inner) and not os.environ.get('NOGLASS'): piece(t0 - ov, t1 + ov, 0, H - .06, .012, GLASS, 'kinh')
+                if curved: piece(t0 - .03, t1 + .03, H - .08, .1, .09, WALL); piece(t0 - .02, t1 + .02, 0, .04, .04, ALU)
+                else: piece(t0 - ov, t1 + ov, H - .08, .08, .07, ALU); piece(t0 - ov, t1 + ov, 0, .05, .07, ALU)
                 n = max(1, round((t1 - t0) / 1.3))
                 for j in range(n + 1):
                     if short: break
@@ -246,7 +248,20 @@ for _pt in PARTS:
                 nrm = Vector((-u.y, u.x)) * (g[2] if len(g) > 2 else 1); hinge = a + u * t0; w_ = t1 - t0 - .08
                 c = hinge - u * (w_ / 2 + .02) + nrm * .09; box(c.x, c.y, 0, w_, .04, 2.1, OAK, ang, 0, name='canh-cua')   # cánh mở hết, áp sát tường – không chắn lối đi
 
+    CG = []
     for s in SP['segs']: wall_seg(s)
+    # kính bo cong: nối các đoạn xiên liên tiếp thành 1 tấm cong, pháp tuyến mượt (không còn sọc phản chiếu)
+    chains = []
+    for p0, p1 in CG:
+        for ch in chains:
+            if (ch[-1] - p0).length < .02: ch.append(p1); break
+            if (ch[0] - p1).length < .02: ch.insert(0, p0); break
+        else: chains.append([p0, p1])
+    for ch in chains:
+        me = bpy.data.meshes.new('kinh-cong'); vs = [(p.x, p.y, 0.) for p in ch] + [(p.x, p.y, H - .06) for p in ch]; n_ = len(ch)
+        me.from_pydata(vs, [], [(i, i + 1, n_ + i + 1, n_ + i) for i in range(n_ - 1)]); me.update()
+        for pl in me.polygons: pl.use_smooth = True
+        ob = bpy.data.objects.new('kinh', me); ob.data.materials.append(GLASS); bpy.context.collection.objects.link(ob)
     for bl in SP.get('blocks', []):
         a, b = P(bl[0], bl[1]), P(bl[2], bl[3]); box((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, 0, abs(b[0] - a[0]), abs(b[1] - a[1]), H, WALL)
     def panel(p0, p1, z0, h, th, m):   # tấm thẳng giữa 2 điểm bản vẽ
@@ -411,10 +426,29 @@ for _pt in PARTS:
             box(0, .02, .85, w * .55, d * .7, .12, CER, bevel=.04, parent=o); box(0, -hd + .02, 1.1, w * .9, .02, .8, GLASS, 0, 0, parent=o)
             box(0, -hd + .03, 1.92, w * .8, .04, .04, LAMP, 0, 0, parent=o)
             if LUX: box(0, 0, .85, w + .01, d + .01, .02, STONE, 0, .003, parent=o); cyl(0, -hd + .08, .87, .012, .28, BRASS, parent=o); box(0, -hd + .015, 1.1, w * .95, .01, .82, LAMP, 0, 0, parent=o)
-        elif k == 'ward':
-            box(0, 0, 0, w, d, 2.4, OAK, .0, .004, parent=o); n = max(2, round(w / .5))
-            for i in range(1, n): box(-hw + w * i / n, hd + .002, .05, .006, .006, 2.3, WALNUT, 0, 0, parent=o)
-            for i in range(n): box(-hw + w * (i + .5) / n + (.18 if i % 2 else -.18), hd + .015, 1.0, .02, .025, .35, BRASS, 0, 0, parent=o)
+        elif k == 'ward':   # tủ áo cửa kính khói khung đồng, bên trong đèn LED + quần áo treo
+            TG = mat('kinh-tu', (.7, .62, .54), .02, 0., .5, None, 0., .96); IN = mat('trong-tu', (.62, .5, .38), .5)
+            CL = [mat('ao-' + str(i), c, .85) for i, c in enumerate([(.85, .83, .78), (.2, .25, .35), (.55, .42, .3), (.7, .7, .72), (.12, .12, .14), (.6, .2, .2)])]
+            box(0, -hd + .015, 0, w, .03, 2.4, IN, 0, 0, parent=o)                                   # vách hậu sáng màu
+            for sx_ in (-1, 1): box(sx_ * (hw - .015), 0, 0, .03, d, 2.4, WALNUT, 0, 0, parent=o)     # 2 hông
+            box(0, 0, 2.37, w, d, .03, WALNUT, 0, 0, parent=o); box(0, 0, 0, w, d, .08, WALNUT, 0, 0, parent=o)
+            n = max(2, round(w / .5))
+            for i in range(1, n): box(-hw + w * i / n, 0, .08, .025, d - .04, 2.29, WALNUT, 0, 0, parent=o)   # vách chia khoang
+            box(0, 0, 1.95, w - .04, d - .06, .025, WALNUT, 0, 0, parent=o)                       # đợt trên
+            box(0, -hd + .05, 2.3, w - .1, .02, .015, LAMP, 0, 0, parent=o); [box(sx_ * (hw - .05), 0, .15, .015, .02, 2.1, LAMP, 0, 0, parent=o) for sx_ in (-1, 1)]; box(0, hd - .08, 1.93, w - .1, .015, .012, LAMP, 0, 0, parent=o)   # LED
+            for i in range(n):
+                cx_ = -hw + w * (i + .5) / n; box(cx_, 0, 1.78, w / n - .06, .012, .012, BRASS, 0, 0, parent=o)   # thanh treo
+                if i % 3 != 2:
+                    for j in range(5):
+                        x_ = cx_ - w / n / 2 + .07 + j * (w / n - .14) / 4; box(x_, 0, .95 + (j % 2) * .12, .035, d * .72, .8 - (j % 2) * .12, CL[(i * 5 + j) % 6], 0, .01, parent=o)
+                else:
+                    for j in range(3): box(cx_, 0, .45 + j * .38, w / n - .1, d * .8, .1, CL[(i + j) % 6], 0, .01, parent=o); box(cx_, 0, .4 + j * .38, w / n - .06, d - .06, .02, WALNUT, 0, 0, parent=o)
+            for i in range(n):   # cửa kính khói, khung đồng mảnh
+                cx_ = -hw + w * (i + .5) / n; dw = w / n - .01
+                box(cx_, hd - .012, .08, dw - .04, .008, 2.26, TG, 0, 0, parent=o)
+                for sx_ in (-1, 1): box(cx_ + sx_ * (dw / 2 - .01), hd - .012, .08, .02, .02, 2.28, BRASS, 0, 0, parent=o)
+                for z_ in (.08, 2.34): box(cx_, hd - .012, z_, dw, .02, .02, BRASS, 0, 0, parent=o)
+                box(cx_ + (.42 * dw / 2 if i % 2 else -.42 * dw / 2), hd + .01, .9, .015, .02, .5, BRASS, 0, 0, parent=o)
         elif k == 'dtab':
             box(0, 0, .72, w, d, .035, STONE if LUX else OAK, parent=o); [box(sx_ * (hw - .08), sy_ * (hd - .08), 0, .05, .05, .72, BRASS if LUX else BLACK, 0, 0, parent=o) for sx_ in (-1, 1) for sy_ in (-1, 1)]
             cols = [0] if w < 1.1 else [-w / 4, w / 4]
@@ -500,7 +534,7 @@ try: cy.denoiser = 'OPENIMAGEDENOISE'
 except Exception: pass
 cy.max_bounces = 8; cy.diffuse_bounces = 4; cy.glossy_bounces = 3; cy.transparent_max_bounces = 12; cy.caustics_reflective = False; cy.caustics_refractive = False
 cy.sample_clamp_indirect = 4; cy.light_sampling_threshold = .01
-sc.view_settings.view_transform = 'AgX'; sc.view_settings.look = 'AgX - Base Contrast'; sc.view_settings.exposure = float(os.environ.get('EXPO', '1.15'))
+sc.view_settings.view_transform = 'AgX'; sc.view_settings.look = os.environ.get('LOOK', 'AgX - Base Contrast'); sc.view_settings.exposure = float(os.environ.get('EXPO', '1.15'))
 sc.render.resolution_x, sc.render.resolution_y = RW, RH; sc.render.image_settings.file_format = 'PNG'
 # đèn trần tổng dịu (như ánh sáng hắt từ trần thạch cao) để phòng sáng, không tối góc
 if True:
