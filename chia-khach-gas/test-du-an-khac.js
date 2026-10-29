@@ -63,7 +63,7 @@ dRow(dt,'2026-10-22 13:00:40','Hùng','912345678','CĂN 1PN (47,4 m2)','https://
 dRow(cora,'2026-10-22 13:01:00','Lan','0935111222','https://cora-tower.com/?utm_source=chatgpt.com','chatgpt.com');
 dRow(fs4,'2026-10-22 13:01:00','F','0935333444','https://www.sun-fours-tower.com/');
 dRow(th,'a','b','0935555666');
-run();
+adv(5);run();
 const kd=vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return k.nhom==='khac'})",ctx);
 ok(kd.length===2,'2 khách dự án khác được tạo (Hùng gửi 2 lần = 1 khách; bỏ tab FourS và tab hệ thống): '+kd.map(k=>k.ten).join(','));
 const hung=kd.find(k=>k.ten==='Hùng');
@@ -77,7 +77,7 @@ ok(kd[0].nguoi_giu!==kd[1].nguoi_giu,'2 khách dự án khác chia cho 2 ngườ
 adv(1);crmRow('0901000004','S4');run();
 {const vg=JSON.parse(props.VONG_MOI); ok(K('K'+(3+kd.length+1)).trang_thai==='cho_nhan'&&vg.so===2&&vg.da.length===1,'khách Saphia thứ 4 mở vòng 2 (3 sale đã nhận đủ vòng 1), khách dự án khác không tính vào vòng');}
 // khách dự án khác gửi lại khi đang có người giữ: báo người giữ, không tạo mới
-const holder=hung.nguoi_giu; adv(1); dRow(dt,'2026-10-22 14:00:00','Hùng','0912345678','https://www.sun-danangdowntown.com/'); run();
+const holder=hung.nguoi_giu; adv(5); dRow(dt,'2026-10-22 14:00:00','Hùng','0912345678','https://www.sun-danangdowntown.com/'); run();
 ok(vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return k.sdt==='0912345678'}).length",ctx)===1&&/vừa để lại thông tin/.test(lastTo(holder).text),'khách dự án khác gửi lại: báo người đang giữ, không chia trùng');
 // /them có trang dự án khác → nhóm khác ; /them không trang → nhóm FourS/Saphia ; /themkhac → khác
 msg(900,'/them 0977000001 A - 2PN\nTrang: https://www.sun-danangdowntown.com/');msg(900,'/them 0977000002 B - F2');msg(900,'/themkhac 0977000003 C - Spana');run();
@@ -86,9 +86,9 @@ ok(nh('0977000001')==='khac'&&nh('0977000002')===''&&nh('0977000003')==='khac','
 // /sale hiển thị tách
 msg(900,'/sale');run(); ok(/dự án khác/.test(lastTo(900).text),'/sale tách số khách dự án khác');
 // thêm tab mới sau này: không đổ data cũ của tab đó
-const nt=data.insertSheet('Tab mới');dRow(nt,'x','Old','0944000111','https://abc.com');run();
+const nt=data.insertSheet('Tab mới');dRow(nt,'x','Old','0944000111','https://abc.com');adv(5);run();
 ok(!vm.runInContext("rows_('Khach',T_KHACH).some(function(k){return k.sdt==='0944000111'})",ctx),'tab mới thêm sau: data có sẵn không bị chia');
-dRow(nt,'x','New','0944000222','https://abc.com');run();
+dRow(nt,'x','New','0944000222','https://abc.com');adv(5);run();
 ok(vm.runInContext("rows_('Khach',T_KHACH).some(function(k){return k.sdt==='0944000222'&&k.nhom==='khac'})",ctx),'tab mới: dòng thêm sau được chia');
 
 // ===== Tab NhapData: dán 1 loạt data telesale =====
