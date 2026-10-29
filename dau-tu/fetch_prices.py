@@ -732,6 +732,34 @@ def _stats(items, links=False):
     return out
 
 
+# Nhóm tuyến đường (so khớp tên không dấu)
+STREET_GROUPS = {
+    "Ven biển": ["vo nguyen giap", "hoang sa", "truong sa", "nguyen tat thanh"],
+    "Ven sông Hàn": ["bach dang", "tran hung dao", "nhu nguyet", "le van duyet"],
+    "Trục chính ra biển, sông": ["pham van dong", "vo van kiet", "nguyen van linh", "le duan", "hung vuong",
+                                  "tran phu", "2 thang 9", "ngo quyen", "dien bien phu", "nguyen huu tho",
+                                  "duy tan", "phan chau trinh", "ho xuan huong", "ton duc thang"],
+}
+
+
+def street_key(raw):
+    """'Đường Võ Nguyên Giáp' / 'võ nguyên giáp.' / '2/9' -> 'vo nguyen giap' / '2 thang 9'."""
+    import unicodedata
+    t = unicodedata.normalize("NFD", raw or "").replace("đ", "d").replace("Đ", "D")
+    t = t.encode("ascii", "ignore").decode().lower()
+    t = re.sub(r"\b(\d{1,2})\s*/\s*(\d{1,2})\b", r"\1 thang \2", t)
+    t = re.sub(r"^\s*(duong|pho|kiet|hem|ngo)\s+", "", t)
+    t = re.sub(r"[^a-z0-9 ]+", " ", t)
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def street_group(key):
+    for g, names in STREET_GROUPS.items():
+        if any(key == n or key.startswith(n + " ") for n in names):
+            return g
+    return None
+
+
 def fetch_listings():
     """Tin rao bán BĐS Đà Nẵng trên Chợ Tốt Nhà -> giá rao/m² trung vị theo loại, quận, phường."""
     rows, seen = [], set()
@@ -750,8 +778,10 @@ def fetch_listings():
                 ppm, size = a.get("price_million_per_m2"), a.get("size") or 0
                 if not ppm or size < 10 or not (2 <= ppm <= 1500):
                     continue  # bỏ tin thiếu diện tích / giá vô lý
+                street = re.sub(r"^\s*(Đường|đường|Phố|phố)\s+", "", (a.get("street_name") or "").strip()).strip(" .,-")
                 tin = {"t": (a.get("subject") or "")[:90], "gia": a.get("price"), "dt": size,
-                       "p": a.get("ward_name") or "", "u": f"https://www.nhatot.com/{a.get('list_id')}.htm"}
+                       "p": a.get("ward_name") or "", "d": street[:40], "mt": bool(a.get("is_main_street")),
+                       "u": f"https://www.nhatot.com/{a.get('list_id')}.htm"}
                 rows.append((kind, a.get("area_name") or "Khác", a.get("ward_name") or "", float(ppm), tin))
             o += len(ads)
             time.sleep(0.4)
@@ -763,8 +793,45 @@ def fetch_listings():
         by_q.setdefault(kind, {}).setdefault(quan, []).append((ppm, tin))
         if phuong:
             by_p.setdefault(kind, {}).setdefault(f"{quan}|{phuong}", []).append((ppm, tin))
+    # theo tuyến đường: tất cả tin và riêng tin mặt tiền
+    by_s, names, by_g = {}, {}, {}
+    for kind, quan, phuong, ppm, tin in rows:
+        key = street_key(tin["d"])
+        if len(key) < 3:
+            continue
+        names.setdefault(key, {}).setdefault(tin["d"], 0)
+        names[key][tin["d"]] += 1
+        by_s.setdefault(kind, {}).setdefault(key, []).append((ppm, tin, quan))
+        g = street_group(key)
+        if g:
+            by_g.setdefault(kind, {}).setdefault(g, []).append((ppm, tin))
+    pretty = {k: max(v, key=v.get) for k, v in names.items()}
+
+    def street_stats(items):
+        st = _stats([(p, t) for p, t, _ in items], True)
+        mt = [(p, t) for p, t, _ in items if t["mt"]]
+        if len(mt) >= 2:
+            st["mt"] = _stats(mt, True)
+        qs = [q for _, _, q in items]
+        st["quan"] = max(set(qs), key=qs.count)
+        return st
+
+    duong = {k: {pretty[key]: {**street_stats(v), "nhom": street_group(key) or ""} for key, v in d.items() if len(v) >= 3}
+             for k, d in by_s.items()}
+    nhom = {}
+    for k, d in by_g.items():
+        for g, v in d.items():
+            if len(v) < 2:
+                continue
+            st = _stats(v, True)
+            mt = [x for x in v if x[1]["mt"]]
+            if len(mt) >= 2:
+                st["mt"] = _stats(mt, True)
+            nhom.setdefault(k, {})[g] = st
     return {
         "tong": len(rows),
+        "duong": duong,
+        "nhom": nhom,
         "toan_tp": {k: _stats(v, True) for k, v in by_k.items()},
         "quan": {k: {q: _stats(v, True) for q, v in d.items() if len(v) >= 5} for k, d in by_q.items()},
         "phuong": {k: {q: _stats(v) for q, v in d.items() if len(v) >= 5} for k, d in by_p.items()},
@@ -947,7 +1014,7 @@ def main():
     rao = load(LISTINGS_FILE, {})
 
     def gia_rao():
-        if rao.get("ngay") == today() and all("bo" in v for v in (rao.get("toan_tp") or {}).values()):
+        if rao.get("ngay") == today() and "duong" in rao and all("bo" in v for v in (rao.get("toan_tp") or {}).values()):
             log("   đã lấy hôm nay")
             return
         res = fetch_listings()
@@ -958,6 +1025,9 @@ def main():
         for kind, d in res["quan"].items():
             for quan, st in d.items():
                 hist.setdefault(f"{kind}|{quan}", {})[today()] = st["med"]
+        for kind, d in res.get("nhom", {}).items():
+            for g, st in d.items():
+                hist.setdefault(f"{kind}|Nhóm đường: {g}", {})[today()] = st["med"]
         for h in hist.values():
             for d in sorted(h)[:-KEEP_DAYS]:
                 del h[d]
