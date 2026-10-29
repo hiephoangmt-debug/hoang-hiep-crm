@@ -37,7 +37,7 @@ js = r'''/* Sun Saphia 3D·4D·5D – chèn vào trang (dán loader trong "Trư�
     var box = document.getElementById('ss4d-box'), done = false;
     function load(){ if (done) return; done = true;
       var f = document.createElement('iframe'); f.title = 'Mô hình Sun Saphia'; f.setAttribute('allow', 'fullscreen');
-      f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0'; f.srcdoc = DOC; box.innerHTML = ''; box.appendChild(f);
+      f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0'; f.srcdoc = DOC.replace('<head>', '<head><script>window.SS4D_CFG=' + JSON.stringify({gate: +(window.SS4D_GATE || 0), ctx: location.pathname}) + '<\/script>'); box.innerHTML = ''; box.appendChild(f);
     }
     document.getElementById('ss4d-go').onclick = load;
     var root = document.documentElement;

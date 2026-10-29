@@ -475,7 +475,7 @@
   }
   function busy() {
     var a = document.activeElement;
-    return box.classList.contains('on') || (a && /INPUT|TEXTAREA|SELECT/.test(a.tagName)) || Date.now() - loadAt < 8000;
+    return box.classList.contains('on') || (a && /INPUT|TEXTAREA|SELECT/.test(a.tagName)) || Date.now() - loadAt < 8000 || /\b(lp-on|ss4d-gate)\b/.test(document.body.className);
   }
   function showNudge(rule) {
     var qs = rule.q.filter(function (q) { return !asked[norm(q)]; }); if (!qs.length) return;

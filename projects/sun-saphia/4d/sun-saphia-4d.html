@@ -820,6 +820,76 @@ if(/viewW/.test(location.search)){ setMode('view'); yaw=Math.PI; placeViewCam();
 if(/viewS/.test(location.search)){ setMode('view'); yaw=Math.PI/2; placeViewCam(); }
 if(/viewN/.test(location.search)){ setMode('view'); yaw=-Math.PI/2; placeViewCam(); }
 if(/viewE/.test(location.search)){ setMode('view'); yaw=0; placeViewCam(); }
+/* ---------- Tự xoay toàn cảnh + nút gọi + cổng nhận thông tin (trang Ads) ---------- */
+(function(){
+  var CFG=window.SS4D_CFG||{};
+  /* 1. Mở ra tự xoay chậm để thấy toàn cảnh; khách chạm/kéo là dừng */
+  if(!reduce&&mode==='overview'&&!location.search){ controls.autoRotate=true; controls.autoRotateSpeed=.45;
+    var stop=function(){ if(mode!=='spin') controls.autoRotate=false; renderer.domElement.removeEventListener('pointerdown',stop); renderer.domElement.removeEventListener('wheel',stop); };
+    renderer.domElement.addEventListener('pointerdown',stop); renderer.domElement.addEventListener('wheel',stop,{passive:true}); }
+  /* 2. Nút gọi / Zalo luôn hiện trong mô hình */
+  var st=document.createElement('style');
+  st.textContent='#ssCall{position:fixed;right:10px;z-index:7;display:flex;gap:6px;font-family:inherit}'
+    +'#ssCall a{display:inline-flex;align-items:center;gap:6px;padding:9px 13px;border-radius:999px;font:800 13px/1 "Be Vietnam Pro",Arial,sans-serif;text-decoration:none;box-shadow:0 4px 14px rgba(10,37,64,.28)}'
+    +'#ssCall .c{background:#E96118;color:#fff}#ssCall .z{background:#0068FF;color:#fff}'
+    +'#ssGate{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(10,37,64,.55);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);font-family:"Be Vietnam Pro",Arial,sans-serif}'
+    +'#ssGate .k{background:#fff;border-radius:18px;max-width:380px;width:100%;padding:22px 20px;box-shadow:0 18px 50px rgba(0,0,0,.35);color:#0A2540}'
+    +'#ssGate h3{margin:0 0 6px;font-size:19px;line-height:1.3}#ssGate p{margin:0 0 12px;font-size:14px;line-height:1.5;color:#45556b}'
+    +'#ssGate input{display:block;width:100%;box-sizing:border-box;margin:0 0 9px;padding:13px 14px;font-size:16px;border:1.5px solid #d6dce5;border-radius:12px;background:#f8fafc;font-family:inherit}'
+    +'#ssGate button{width:100%;border:0;border-radius:999px;background:#E96118;color:#fff;font:800 16px/1 inherit;padding:14px;cursor:pointer}'
+    +'#ssGate small{display:block;text-align:center;margin-top:10px;font-size:13px;color:#45556b}#ssGate small a{color:#0068FF;font-weight:700}#ssGate .er{display:none;color:#b42318;font-size:13px;margin:-4px 0 8px}';
+  document.head.appendChild(st);
+  var call=document.createElement('div'); call.id='ssCall';
+  call.innerHTML='<a class="c" href="tel:0904567009" target="_top">📞 0904 567 009</a><a class="z" href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo</a>';
+  document.body.appendChild(call);
+  var con=document.querySelector('.console');
+  function placeCall(){ call.style.bottom=((con?con.offsetHeight:0)+10)+'px'; }
+  placeCall(); addEventListener('resize',placeCall); setTimeout(placeCall,600);
+  /* 3. Cổng nhận thông tin (chỉ bật khi trang đặt SS4D_GATE): xem CFG.gate giây rồi nhập số Zalo mới xem tiếp */
+  var KEY='ss4d_ok', PD=null; try{ PD=parent.document; }catch(e){}
+  function ok(){ try{ if(localStorage.getItem(KEY)) return true; for(var i=0;i<localStorage.length;i++) if(/^hhc_sent_/.test(localStorage.key(i))) return true; }catch(e){} return false; }
+  if(!(CFG.gate>0)||ok()) return;
+  /* Không chồng popup: đợi khi popup nhận bảng giá hoặc khung chat đang mở */
+  function busy(){ if(!PD) return false; return PD.body.classList.contains('lp-on')||!!PD.querySelector('.hhc-b.on'); }
+  function seen(){ try{ if(!PD||!frameElement) return true; var r=frameElement.getBoundingClientRect(), H=parent.innerHeight; return r.bottom>H*.25&&r.top<H*.75; }catch(e){ return true; } }
+  var left=CFG.gate*1000, last=Date.now(), shown=false;
+  var tk=setInterval(function(){ var n=Date.now(); if(!document.hidden&&seen()) left-=n-last; last=n; if(left<=0&&!busy()&&!ok()){ clearInterval(tk); gate(); } },500);
+  /* Số Zalo di động Việt Nam hợp lệ; chặn số bậy (lặp, dãy liên tiếp) và số của anh Hiệp */
+  function norm(v){ var p=String(v||'').replace(/\D/g,''); if(p.indexOf('84')===0&&p.length===11) p='0'+p.slice(2); return p; }
+  function check(p){
+    if(!/^0\d{9}$/.test(p)) return 'Số Zalo gồm 10 số, ví dụ 0905 xxx xxx.';
+    if(!/^0(3[2-9]|5[2689]|7[06-9]|8[1-9]|9\d)/.test(p)) return 'Đầu số chưa đúng số di động Việt Nam, anh/chị kiểm tra lại giúp em.';
+    if(p==='0904567009') return 'Đây là số của anh Hiệp ạ, anh/chị nhập số Zalo của mình nhé.';
+    var t=p.slice(3);
+    if(/^(\d)\1{6}$/.test(t)||/(\d)\1{5}/.test(p)||/0123456|1234567|2345678|3456789|9876543|8765432|7654321|6543210/.test(p)||/^(\d\d)\1{2}/.test(t)) return 'Số này chưa giống số Zalo thật, anh/chị nhập đúng số để nhận ảnh view và bảng giá nhé.';
+    return '';
+  }
+  window.__ss4dCheck=check;
+  function gate(){ if(shown) return; shown=true; controls.autoRotate=true; controls.autoRotateSpeed=.3;
+    if(PD) PD.body.classList.add('ss4d-gate');
+    var g=document.createElement('div'); g.id='ssGate'; g.setAttribute('role','dialog'); g.setAttribute('aria-label','Mở khóa xem tiếp mô hình');
+    g.innerHTML='<div class="k"><h3>🔓 Tầng anh/chị chọn nhìn ra biển tới đâu?</h3>'
+      +'<p>Nhập số Zalo để <b>mở khóa xem tiếp</b> view từ căn, nắng theo giờ, mặt bằng tầng. Anh Hiệp gửi ngay qua Zalo: <b>ảnh view thực tế đúng tầng</b> và <b>giá tham khảo</b> căn anh/chị chọn.</p>'
+      +'<input id="gP" type="tel" inputmode="numeric" autocomplete="tel" maxlength="14" placeholder="Số Zalo của anh/chị" aria-label="Số Zalo"><div class="er" id="gE"></div>'
+      +'<input id="gN" type="text" autocomplete="name" placeholder="Tên (không bắt buộc)" aria-label="Tên">'
+      +'<button type="button" id="gB">Mở khóa xem tiếp →</button><small>Miễn phí · chỉ nhắn Zalo · hoặc <a href="tel:0904567009" target="_top">gọi 0904 567 009</a></small></div>';
+    document.body.appendChild(g);
+    var P=document.getElementById('gP'), E=document.getElementById('gE');
+    setTimeout(function(){ if(innerWidth>760) P.focus(); },150);
+    try{ if(parent.gtag) parent.gtag('event','ss4d_gate_show',{event_label:CFG.ctx||''}); }catch(e){}
+    P.addEventListener('input',function(){ E.style.display='none'; });
+    function go(){ var p=norm(P.value), m=check(p);
+      if(m){ E.textContent=m; E.style.display='block'; P.focus(); return; }
+      var n=document.getElementById('gN').value.trim();
+      try{ if(parent.hhcLead) parent.hhcLead({name:n,phone:p,interest:'Mô hình 3D·4D – mở khóa xem tiếp ('+(CFG.ctx||'web')+') · tầng '+floorEl.value}); }catch(e){}
+      try{ localStorage.setItem(KEY,p); }catch(e){}
+      try{ if(parent.gtag) parent.gtag('event','ss4d_gate_ok',{event_label:CFG.ctx||''}); }catch(e){}
+      g.querySelector('.k').innerHTML='<h3>✅ Đã mở khóa!</h3><p>Cảm ơn anh/chị. Anh Hiệp sẽ nhắn Zalo ảnh view và giá tham khảo tầng '+floorEl.value+' trong ít phút.</p>';
+      setTimeout(function(){ g.remove(); if(PD) PD.body.classList.remove('ss4d-gate'); controls.autoRotate=false; },1600); }
+    document.getElementById('gB').onclick=go;
+    g.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); go(); } });
+  }
+})();
 loop();
 })();
 </script>
