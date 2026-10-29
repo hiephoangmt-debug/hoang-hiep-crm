@@ -38,6 +38,7 @@ body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--font);ov
 .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
 .chip:focus-visible,.sl input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .sl{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;min-width:0}
+.sl[hidden]{display:none}
 .sl label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .sl output{font-weight:800;font-size:15px;min-width:64px;text-align:right;font-variant-numeric:tabular-nums}
 .sl .play{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--chip);color:var(--ink);cursor:pointer;font-size:13px}
@@ -128,6 +129,11 @@ input[type=range]{accent-color:var(--orange)}
     <label for="hour">4D · Giờ trong ngày</label>
     <input id="hour" type="range" min="5" max="20" step="0.05" value="7.5">
     <div style="display:flex;gap:8px;align-items:center"><output id="hourOut" for="hour">07:30</output><button class="play" id="play" aria-label="Chạy thời gian">▶</button></div>
+  </div>
+  <div class="sl" id="spinRow" hidden>
+    <label for="spinSp">Tốc độ xoay</label>
+    <input id="spinSp" type="range" min="0.05" max="1.5" step="0.01" value="0.18">
+    <output id="spinOut" for="spinSp">~5,6 phút/vòng</output>
   </div>
   <div class="sl">
     <label for="floor">Tầng</label>
@@ -1070,7 +1076,7 @@ function setMode(m){
   if(m===mode&&m!=='spin') return;
   if(mode==='view'&&m!=='view'&&saved){camera.position.copy(saved.p);controls.target.copy(saved.t);}
   if(m==='view'){ saved={p:camera.position.clone(),t:controls.target.clone()}; controls.enabled=false; controls.autoRotate=false; yaw=0; pitch=-.04; camera.fov=60; camera.updateProjectionMatrix(); hi.visible=false; placeViewCam(); hint.hidden=false; setTimeout(function(){hint.hidden=true;},3500); }
-  else { controls.enabled=true; camera.near=2; camera.clearViewOffset(); camera.aspect=innerWidth/innerHeight; camera.fov=42; camera.updateProjectionMatrix(); hi.visible=true; hint.hidden=true; controls.autoRotate=(m==='spin')&&!reduce; }
+  else { controls.enabled=true; camera.near=2; camera.clearViewOffset(); camera.aspect=innerWidth/innerHeight; camera.fov=42; camera.updateProjectionMatrix(); hi.visible=true; hint.hidden=true; controls.autoRotate=(m==='spin')&&!reduce; } document.getElementById('spinRow').hidden=(m!=='spin');
   if(m==='overview'&&DEF&&(mode==='close'||mode==='view')) flyTo(DEF.p,DEF.t);
   if(m==='close') flyClose();
   mode=m; bClose.setAttribute('aria-pressed',m==='close'); bOver.setAttribute('aria-pressed',m==='overview'); bView.setAttribute('aria-pressed',m==='view'); bSpin.setAttribute('aria-pressed',m==='spin');
@@ -1182,6 +1188,10 @@ setFloor=function(f){ setFloor0(f); if(planOn){ hi.visible=false; updPlan(false)
     if(e.pointerType!=='mouse'&&t-last<450&&Math.hypot(e.clientX-lx,e.clientY-ly)<40){ last=0; zoomAt(e.clientX,e.clientY); } else { last=t; lx=e.clientX; ly=e.clientY; } });
   renderer.domElement.addEventListener('dblclick',function(e){ zoomAt(e.clientX,e.clientY); });
 })();
+// thanh tốc độ tự xoay (thời gian 1 vòng = 60 / tốc độ giây)
+(function(){ var sp=document.getElementById('spinSp'), out=document.getElementById('spinOut');
+  function upd(){ var v=+sp.value; controls.autoRotateSpeed=v; var t=60/v; out.textContent=t>=90?'~'+(t/60).toFixed(1).replace('.',',')+' phút/vòng':'~'+Math.round(t)+' giây/vòng'; }
+  sp.addEventListener('input',upd); upd(); })();
 function flyTop(){ var m=innerWidth<600, c=new THREE.Vector3(X1-16,TOP-22,Z0+24);
   if(planOn) setPlan(false); if(mode==='view') setMode('overview');
   hi.visible=false; mainLbl.textContent='SUN SAPHIA';
