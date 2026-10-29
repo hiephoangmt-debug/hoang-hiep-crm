@@ -838,7 +838,7 @@ var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false);
   if(r) viewFromUnit(r); else bView0(); };
 
 /* ---------- bấm vào căn trên mặt bằng tầng: hiện thẻ căn, mở mặt bằng & 3D căn, view từ đúng căn ---------- */
-var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/8a897a9f5ccb845fa51a5b310fa894b680b7a6c3/projects/sun-saphia/chon-can/chon-can-app.html';
+var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/006efcceaeefdb77f3ec3d8eabdcbe189b86f6d2/projects/sun-saphia/chon-can/chon-can-app.html';
 var unitEye=null;
 // [mã, loại, u0,u1, v0,v1, hướng mặt kính chính] – cùng số liệu với công cụ chọn căn
 var UNITS=[['11','2PN',0,11.1,0,8.1,'E'],['12','STU',11.19,14.99,0,9.1,'E'],['12A','STU',14.99,18.8,0,9.1,'E'],['12B','1PN',18.8,25.02,0,9.1,'E'],['15','STU',25.02,28.82,0,9.1,'E'],['16','STU',28.82,32.64,0,9.1,'E'],['17','1PN',32.64,38.91,0,9.1,'E'],
@@ -1048,10 +1048,11 @@ var wm=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({
 var consoleEl=document.querySelector('.console');
 function placeWM(){ var W=innerWidth,H=innerHeight, w=Math.min(W*.72,480), h=w/4, cb=consoleEl?consoleEl.getBoundingClientRect().height:140; hudCam.right=W; hudCam.top=H; hudCam.updateProjectionMatrix(); wm.scale.set(w,h,1); wm.position.set(W/2,cb+(H-cb)*.42,0); }
 placeWM(); window.addEventListener('resize',placeWM); setTimeout(placeWM,800);
-if(/[?&]crm/.test(location.search)) wm.visible=false;   // xem trong CRM nội bộ: không cần chữ chìm
+if(/[?&]crm/.test(location.search)){ wm.visible=false;   // xem trong CRM nội bộ: không chữ chìm, không số điện thoại / Zalo
+  var ct=document.querySelector('.contact'); if(ct) [].slice.call(ct.childNodes).forEach(function(n){ if(!(n.classList&&n.classList.contains('compass'))) ct.removeChild(n); }); }
 // rooftop signage: HM logo + phone on the crown, facing Trường Sa (east) and Nguyễn Đức Thuận (north)
 var sgC=document.createElement('canvas'); sgC.width=1024; sgC.height=256; (function(g){ g.fillStyle='#0b2a3d'; g.fillRect(0,0,1024,256); drawLogo(g,16,16,224);
-  g.fillStyle='#d8bd88'; g.font='800 92px "Be Vietnam Pro",Arial,sans-serif'; g.textBaseline='middle'; g.fillText('SUN SAPHIA',270,92); g.fillStyle='#ffffff'; g.font='700 64px "Be Vietnam Pro",Arial,sans-serif'; g.fillText('0904 567 009',272,190); })(sgC.getContext('2d'));
+  g.fillStyle='#d8bd88'; g.font='800 92px "Be Vietnam Pro",Arial,sans-serif'; g.textBaseline='middle'; g.fillText('SUN SAPHIA',270,92); g.fillStyle='#ffffff'; g.font='700 64px "Be Vietnam Pro",Arial,sans-serif'; g.fillText(/[?&]crm/.test(location.search)?'RESIDENCE':'0904 567 009',272,190); })(sgC.getContext('2d'));
 var sgTex=new THREE.CanvasTexture(sgC); sgTex.encoding=THREE.sRGBEncoding;
 var sgMat=new THREE.MeshBasicMaterial({map:sgTex,toneMapped:false});
 function sign(grp,w,x,y,z,ry){ var m=new THREE.Mesh(new THREE.PlaneGeometry(w,w/4),sgMat); m.position.set(x,y,z); m.rotation.y=ry; grp.add(m); return m; }
