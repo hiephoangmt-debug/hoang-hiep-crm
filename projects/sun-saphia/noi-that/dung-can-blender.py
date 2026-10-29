@@ -551,10 +551,12 @@ for s in SHOTS:
         for o in list(bpy.data.objects):
             if o.type != 'MESH' or o.hide_render or o.parent is not None or not o.data.materials or o.data.materials[0] not in (WALL, EXT): continue
             vs_ = [o.matrix_world @ v.co for v in o.data.vertices]; zs_ = [v.z for v in vs_]
-            if max(zs_) < H - .05: continue
+            if max(zs_) < H - .05 and not (o.data.materials[0] == WALL and min(zs_) > 1.5): continue
             c_ = Vector((sum(v.x for v in vs_) / len(vs_), sum(v.y for v in vs_) / len(vs_)))
-            if (c_ - Vector((_cx, _cy))).dot(_hd) < .25 * _ext: continue
-            o.data = o.data.copy(); zb = min(zs_)
+            if o.data.materials[0] == EXT and (c_ - Vector((_cx, _cy))).dot(_hd) < .25 * _ext: continue   # chỉ giữ cao tường bao phía xa; tường trong hạ hết
+            zb = min(zs_)
+            if zb > LOWH - .05: o.hide_render = True; continue                                   # lanh tô trên cửa của tường đã hạ
+            o.data = o.data.copy()
             for v in o.data.vertices:
                 if (o.matrix_world @ v.co).z > zb + LOWH: v.co.z = (zb + LOWH - o.location.z) / max(1e-6, o.scale.z)
         for o in list(bpy.data.objects):
