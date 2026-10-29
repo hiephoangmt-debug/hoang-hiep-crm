@@ -755,7 +755,7 @@ var playing=false, playBtn=document.getElementById('play');
 playBtn.onclick=function(){playing=!playing; playBtn.textContent=playing?'❚❚':'▶'; playBtn.setAttribute('aria-label',playing?'Dừng':'Chạy thời gian');};
 
 /* ---------- mặt bằng tầng đặt lên tòa nhà: cắt ngang tháp tại tầng đang chọn ---------- */
-var PLAN_URL='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d2c068bdf94af0038c110135328a496209367d34/projects/sun-saphia/images/mat-bang-tang-4d.webp';
+var PLAN_URL='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@6b14e224e677521388e20cfdc8a81b62cd2b70d6/projects/sun-saphia/images/mat-bang-tang-4d.webp';
 var planOn=false, planMesh=null, clipped=false, clipP=new THREE.Plane(new THREE.Vector3(0,-1,0),0), bPlan=document.getElementById('mPlan');
 function planY(f){ return FL[Math.max(2,Math.min(30,f))]; }
 function clipTower(on){
@@ -765,7 +765,7 @@ function clipTower(on){
   clipped=true;
 }
 var planTx=[null,null,null,null];   // [tầng 3A–29, tầng 30 (layout riêng), tầng 3 (có sân vườn từng căn)]
-var PLAN_IMG='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@9b97b23b21a408498b972669ec271e0e4641e570/projects/sun-saphia/images/';
+var PLAN_IMG='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@6b14e224e677521388e20cfdc8a81b62cd2b70d6/projects/sun-saphia/images/';
 var PLAN_F=[null,PLAN_IMG+'mat-bang-tang-30-4d.webp',PLAN_IMG+'mat-bang-tang-3-4d.webp',PLAN_IMG+'mat-bang-tang-2-4d.webp'], PLAN_H=[49.6,49.6,53.4,53.4];   // tầng 2: mái đế + bể bơi, Gym   // ảnh tầng 3 dài thêm phía sau (sân vườn)
 function planTex(f){ if(!planMesh) return; var k=f>=30?1:f===3?2:f===2?3:0;
   if(!planTx[k]){ var ld=new THREE.TextureLoader(); ld.setCrossOrigin('anonymous'); var t=ld.load(PLAN_F[k]); t.encoding=THREE.sRGBEncoding; t.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy()); t.generateMipmaps=true; t.minFilter=THREE.LinearMipmapLinearFilter; planTx[k]=t; }
