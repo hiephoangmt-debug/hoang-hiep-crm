@@ -39,7 +39,7 @@ def page(path, title, desc, kw, body, lds, cur, tools=False, canon=None, robots=
         i = m.start() if m else body.rfind('<section')
         body = body[:i] + vitri_dark('vi-tri', VT_PAGES[path]) + body[i:]
     html = head(title, desc, canon or url, OG, kw, lds + [ORG, RES], FAV)
-    html += '<body>\n' + header(cur, MAIN, LOGO) + '\n<main id="dau-trang">' + body + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(tools) + wave_audio() + '</body>\n</html>\n'
+    html += '<body>\n' + header(cur, MAIN, LOGO) + '\n<main id="dau-trang">' + body + '</main>\n' + footer(MAIN) + '\n' + popup() + ('<script>window.SS4D_GATE=20;</script>' if tools else '') + tail(tools) + wave_audio() + '</body>\n</html>\n'
     return copy_fix(tour_insert(quiz_end(html)))
 
 KUULA = 'https://kuula.co/share/LxsbY?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1'
