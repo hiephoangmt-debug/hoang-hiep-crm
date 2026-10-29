@@ -295,7 +295,7 @@ section.far canvas { visibility: hidden; }
 
     <div class="card" style="margin-top:12px" id="raoCard">
       <h3>Giá rao bán theo tin đăng – Chợ Tốt Nhà (cập nhật hằng ngày)</h3>
-      <p class="note" style="margin:0 0 8px">Bot đọc toàn bộ tin rao bán ở Đà Nẵng mỗi ngày, tính <b>giá rao/m² trung vị</b> (một nửa số tin rẻ hơn, một nửa đắt hơn) theo quận/phường; bỏ tin thiếu diện tích hoặc giá vô lý. “Khoảng phổ biến” là giá của nửa số tin ở giữa. Mỗi nhóm đã bỏ 5% tin rẻ nhất (thường là tin gõ nhầm giá, diện tích hoặc tin ảo) trước khi tính; đầu giá cao giữ nguyên vì đó thường là lô mặt biển, mặt sông thật. Thấp nhất / cao nhất là 1 tin rao cụ thể còn lại sau khi lọc – bấm số để mở tin trên Chợ Tốt và tự kiểm tra. Đây là giá người bán đăng, thường cao hơn giá chốt.</p>
+      <p class="note" style="margin:0 0 8px">Bot đọc toàn bộ tin rao bán ở Đà Nẵng mỗi ngày, tính <b>giá rao/m² trung vị</b> (một nửa số tin rẻ hơn, một nửa đắt hơn) theo quận/phường; bỏ tin thiếu diện tích hoặc giá vô lý. “Khoảng phổ biến” là giá của nửa số tin ở giữa. Tin có giá/m² cao hơn 5 lần hoặc thấp hơn 1/5 mức trung vị của chính quận đó bị bỏ (thường là tin gõ nhầm giá, diện tích); lô mặt biển, mặt sông thật thường chỉ gấp 2–4 lần nên vẫn được giữ. Thấp nhất / cao nhất là 1 tin rao cụ thể còn lại sau khi lọc – bấm số để mở tin trên Chợ Tốt và tự kiểm tra. Đây là giá người bán đăng, thường cao hơn giá chốt.</p>
       <div class="toolbar-in"><div class="seg" id="raoKinds" role="group" aria-label="Loại bất động sản"></div></div>
       <div class="viewbar"><div class="seg" id="raoView" role="group" aria-label="Xem theo"></div></div>
       <div class="stats" id="raoStats"></div>

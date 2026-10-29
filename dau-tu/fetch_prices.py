@@ -712,21 +712,20 @@ CHOTOT_REGION = 3017  # Đà Nẵng
 CHOTOT_CATS = {1040: "Đất", 1020: "Nhà ở", 1010: "Căn hộ"}
 
 
-LOC_BAT_THUONG = 0.05  # bỏ 5% tin rẻ nhất mỗi nhóm (tin gõ nhầm giá, diện tích, tin ảo); đầu đắt giữ nguyên vì đó là lô mặt biển, mặt sông thật
+# Lọc tin bất thường theo mặt bằng giá của chính quận đó: bỏ tin có giá/m² cao hơn 5 lần hoặc thấp hơn 1/5 trung vị
+# của quận (cùng loại BĐS). Lô mặt biển, mặt sông thật thường chỉ 2–4 lần trung vị quận nên được giữ;
+# tin gõ nhầm giá, diện tích (VD đất Hòa Khánh 460 tr/m², nhà 830 tr/m²) bị bỏ.
+LOC_GAP = 5
 
 
 def _stats(items, links=False):
-    """items: [(giá/m², tin)] -> trung vị, khoảng 25–75%, thấp nhất, cao nhất (kèm tin nếu links),
-    tính sau khi bỏ 5% tin rẻ nhất (tin bất thường thường nằm ở đầu rẻ)."""
+    """items: [(giá/m², tin)] -> trung vị, khoảng 25–75%, thấp nhất, cao nhất (kèm tin nếu links).
+    Tin bất thường đã được lọc trước trong fetch_listings (so với trung vị quận)."""
     items = sorted(items, key=lambda x: x[0])
-    k = int(len(items) * LOC_BAT_THUONG)
-    bo = k
-    if k:
-        items = items[k:]
     v = [x[0] for x in items]
     q = lambda p: v[min(len(v) - 1, int(round(p * (len(v) - 1))))]  # noqa: E731
     out = {"n": len(v), "med": round(q(0.5), 1), "p25": round(q(0.25), 1), "p75": round(q(0.75), 1),
-           "min": round(v[0], 1), "max": round(v[-1], 1), "bo": bo}
+           "min": round(v[0], 1), "max": round(v[-1], 1)}
     if links:
         out["tin_min"], out["tin_max"] = items[0][1], items[-1][1]
     return out
@@ -787,6 +786,21 @@ def fetch_listings():
             time.sleep(0.4)
     if len(rows) < 100:
         raise ValueError(f"quá ít tin hợp lệ ({len(rows)})")
+    # lọc tin bất thường: so với trung vị quận cùng loại (quận < 5 tin thì so với trung vị toàn TP)
+    med = lambda xs: sorted(xs)[len(xs) // 2]  # noqa: E731
+    vq, vk = {}, {}
+    for kind, quan, phuong, ppm, tin in rows:
+        vq.setdefault((kind, quan), []).append(ppm)
+        vk.setdefault(kind, []).append(ppm)
+    keep, bo = [], {}
+    for r in rows:
+        kind, quan, ppm = r[0], r[1], r[3]
+        ref = med(vq[(kind, quan)]) if len(vq[(kind, quan)]) >= 5 else med(vk[kind])
+        if ppm > ref * LOC_GAP or ppm < ref / LOC_GAP:
+            bo[kind] = bo.get(kind, 0) + 1
+            continue
+        keep.append(r)
+    rows = keep
     by_q, by_p, by_k = {}, {}, {}
     for kind, quan, phuong, ppm, tin in rows:
         by_k.setdefault(kind, []).append((ppm, tin))
@@ -832,7 +846,7 @@ def fetch_listings():
         "tong": len(rows),
         "duong": duong,
         "nhom": nhom,
-        "toan_tp": {k: _stats(v, True) for k, v in by_k.items()},
+        "toan_tp": {k: {**_stats(v, True), "bo": bo.get(k, 0)} for k, v in by_k.items()},
         "quan": {k: {q: _stats(v, True) for q, v in d.items() if len(v) >= 5} for k, d in by_q.items()},
         "phuong": {k: {q: _stats(v) for q, v in d.items() if len(v) >= 5} for k, d in by_p.items()},
     }
@@ -1014,11 +1028,11 @@ def main():
     rao = load(LISTINGS_FILE, {})
 
     def gia_rao():
-        if rao.get("ngay") == today() and "duong" in rao and rao.get("loc") == "re-5":
+        if rao.get("ngay") == today() and "duong" in rao and rao.get("loc") == "quan-5x":
             log("   đã lấy hôm nay")
             return
         res = fetch_listings()
-        rao.update({"ngay": today(), "nguon": "Chợ Tốt Nhà", "loc": "re-5", **res})
+        rao.update({"ngay": today(), "nguon": "Chợ Tốt Nhà", "loc": "quan-5x", **res})
         hist = rao.setdefault("lich_su", {})
         for kind, st in res["toan_tp"].items():
             hist.setdefault(f"{kind}|Toàn thành phố", {})[today()] = st["med"]
