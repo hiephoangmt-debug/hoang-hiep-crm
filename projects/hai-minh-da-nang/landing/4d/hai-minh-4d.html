@@ -752,7 +752,7 @@ var boatWin=M(0x24323f,{roughness:.2,metalness:.3,emissive:0xffd9a0,emissiveInte
     for(var i=0;i<=14;i++){ var z=-L*.45+i/14*L*1.05; pt(L*.155,L*.17,z); pt(-L*.155,L*.17,z); }
     for(var i=0;i<=6;i++){ var z=-L*.25+i/6*L*.4; pt(L*.105,L*.29,z); pt(-L*.105,L*.29,z); }
     var pg=new THREE.BufferGeometry(); pg.setAttribute('position',new THREE.Float32BufferAttribute(P,3)); pg.setAttribute('color',new THREE.Float32BufferAttribute(C,3));
-    var pm=new THREE.PointsMaterial({map:GLOWTEX,size:L>20?10:7,sizeAttenuation:false,vertexColors:true,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending});
+    var pm=new THREE.PointsMaterial({map:GLOWTEX,size:Math.max(.9,L*.045),sizeAttenuation:true,vertexColors:true,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending});
     g.add(new THREE.Points(pg,pm));
     var rf=new THREE.Mesh(new THREE.PlaneGeometry(L*1.6,L*2.6),new THREE.MeshBasicMaterial({map:GLOWTEX,color:0xffc878,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending})); rf.rotation.x=-Math.PI/2; rf.position.y=.25; g.add(rf);
     var ul=new THREE.Mesh(new THREE.PlaneGeometry(L*1.1,L*1.9),new THREE.MeshBasicMaterial({map:GLOWTEX,color:0x2fb6ff,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending})); ul.rotation.x=-Math.PI/2; ul.position.y=.2; g.add(ul);
@@ -804,7 +804,7 @@ function updateFireworks(dt){ if(curNight>.5){ fwT-=dt; if(fwT<=0){ fwLaunch(); 
     for(var i=0;i<f.v.length;i++){ var v=f.v[i]; v[1]-=9.8*dt*.6; v[0]*=.985; v[1]*=.985; v[2]*=.985; a.array[i*3]+=v[0]*dt; a.array[i*3+1]+=v[1]*dt; a.array[i*3+2]+=v[2]*dt; }
     a.needsUpdate=true; f.p.material.opacity=Math.max(0,1-f.t/2.8);
     if(f.t>2.8){ world.remove(f.p); f.p.geometry.dispose(); f.p.material.dispose(); fws.splice(k,1); } } }
-function updateBoats(dt,tm){ var n=curNight; boatFx.forEach(function(f){ f.p.opacity=n*(.8+.2*Math.sin(tm*2.3+f.ph)); f.r.opacity=n*.35; f.u.opacity=n*.55; });
+function updateBoats(dt,tm){ var n=curNight; boatFx.forEach(function(f){ f.p.opacity=n*(.55+.2*Math.sin(tm*2.3+f.ph)); f.r.opacity=n*.18; f.u.opacity=n*.3; });
   boats.forEach(function(b){ var L=Math.abs(b.z1-b.z0); b.t+=dt*b.v/L; var ph=b.t%2, f=ph<1?ph:2-ph, dir=(ph<1?1:-1)*(b.z1>b.z0?1:-1);
     var z=b.z0+(b.z1-b.z0)*f, x=COASTX(z)+b.off+Math.sin(b.t*3)*20;
     b.g.position.set(x,.2+Math.sin(tm*1.3+b.off)*.15,z); b.g.rotation.y=dir>0?0:Math.PI; b.g.rotation.z=Math.sin(tm*1.1+b.off)*.03;
@@ -1191,7 +1191,7 @@ var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false);
   if(r) viewFromUnit(r); else bView0(); };
 
 /* ---------- bấm vào căn trên mặt bằng tầng: hiện thẻ căn, mở mặt bằng & 3D căn, view từ đúng căn ---------- */
-var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/22b1d711362abbaaf240217fdce0e9fdfaea9f0b/projects/sun-saphia/chon-can/chon-can-app.html';
+var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/f03c2b5533f1cd5d4fcb8219b8d6628390993007/projects/sun-saphia/chon-can/chon-can-app.html';
 var unitEye=null;
 // [mã, loại, u0,u1, v0,v1, hướng mặt kính chính] – cùng số liệu với công cụ chọn căn
 var UNITS=[['11','2PN',0,11.1,0,8.1,'E'],['12','STU',11.19,14.99,0,9.1,'E'],['12A','STU',14.99,18.8,0,9.1,'E'],['12B','1PN',18.8,25.02,0,9.1,'E'],['15','STU',25.02,28.82,0,9.1,'E'],['16','STU',28.82,32.64,0,9.1,'E'],['17','1PN',32.64,38.91,0,9.1,'E'],
