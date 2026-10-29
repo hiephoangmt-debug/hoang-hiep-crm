@@ -126,9 +126,18 @@ def marble(name, base, vein, tile=(1.2, .6), rough=.06):
 def velvet(name, col): 
     m = mat(name, col, .75, noise=(150, .2, .06)); b = m.node_tree.nodes['Principled BSDF']
     b.inputs['Sheen Weight'].default_value = .45; b.inputs['Sheen Roughness'].default_value = .4; b.inputs['Sheen Tint'].default_value = (1, 1, 1, 1); return m
+def panel_wall(name, col, joint=.6):
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; b = nt.nodes['Principled BSDF']
+    tc = nt.nodes.new('ShaderNodeTexCoord'); sp = nt.nodes.new('ShaderNodeSeparateXYZ'); cb = nt.nodes.new('ShaderNodeCombineXYZ')
+    br = nt.nodes.new('ShaderNodeTexBrick'); br.offset = 0; br.inputs['Scale'].default_value = 1 / joint; br.inputs['Brick Width'].default_value = 1; br.inputs['Row Height'].default_value = 20
+    br.inputs['Mortar Size'].default_value = .006; br.inputs['Color1'].default_value = (*col, 1); br.inputs['Color2'].default_value = (*[c * .985 for c in col], 1); br.inputs['Mortar'].default_value = (*[c * .62 for c in col], 1)
+    nt.links.new(tc.outputs['Object'], sp.inputs[0]); nt.links.new(sp.outputs['X'], cb.inputs['X']); nt.links.new(sp.outputs['Z'], cb.inputs['Y'])
+    nt.links.new(cb.outputs[0], br.inputs['Vector']); nt.links.new(br.outputs['Color'], b.inputs['Base Color']); b.inputs['Roughness'].default_value = .7
+    bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = .3; nt.links.new(br.outputs['Fac'], bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], b.inputs['Normal'])
+    return m
 if LUX:
     FLOOR = marble('san-marble', (.93, .91, .88), (.6, .57, .54)); TILE = marble('wc-marble', (.9, .88, .85), (.48, .45, .42), (.6, .6), .1)
-    DECK = wood_floor(); WALL = mat('tuong-lux', (.86, .82, .76), .85, noise=(40, .06, .02)); CEIL = mat('tran-lux', (.97, .96, .94), .95)
+    DECK = wood_floor(); WALL = panel_wall('tuong-op-tam', (.72, .64, .55)); EXT = panel_wall('tuong-bao-op-tam', (.8, .75, .68), .9); CEIL = mat('tran-lux', (.97, .96, .94), .95)
     WALNUT = mat('oc-cho-lux', (.19, .1, .055), .3, noise=(25, .35, .02)); OAK = mat('go-lux', (.34, .2, .11), .3, noise=(25, .35, .02))
     BRASS = mat('dong', (.86, .62, .33), .22, 1.)
     FAB = velvet('nhung-xanh-reu', (.025, .085, .07)); FAB2 = velvet('nhung-taupe', (.4, .33, .27)); CHAIRF = velvet('boucle-kem', (.86, .82, .76))
@@ -200,10 +209,12 @@ for _pt in PARTS:
             elif k == 'w': piece(t0 - e0 * .6, t1 + e1 * .6, 0, H, .12, WALL)
             elif k == 'g':
                 inner = not (min(x0, x1) <= 0 or max(x0, x1) >= W or min(y0, y1) <= 0 or max(y0, y1) >= D) if (x0 == x1 or y0 == y1) else False
-                if not (TOUR and inner): piece(t0, t1, 0, H - .06, .012, GLASS, 'kinh')
-                piece(t0, t1, H - .08, .08, .07, ALU); piece(t0, t1, 0, .05, .07, ALU)
+                short = (t1 - t0) < .9; ov = .035 if short else 0   # góc kính cong ghép từ nhiều đoạn ngắn: không đố đứng, khung nối liền (hết răng cưa)
+                if not (TOUR and inner): piece(t0 - ov, t1 + ov, 0, H - .06, .012, GLASS, 'kinh')
+                piece(t0 - ov, t1 + ov, H - .08, .08, .07, ALU); piece(t0 - ov, t1 + ov, 0, .05, .07, ALU)
                 n = max(1, round((t1 - t0) / 1.3))
                 for j in range(n + 1):
+                    if short: break
                     if TOUR and inner and 0 < j < n: continue   # cửa kính lô-gia mở hết
                     t = t0 + (t1 - t0) * j / n; piece(t - .025, t + .025, 0, H, .07, ALU)
                 if t1 - t0 > 1.4:   # rèm voan 2 đầu
@@ -510,17 +521,86 @@ SHL = {   # điểm đứng / điểm nhìn theo toạ độ bản vẽ từng l
  '2PN':   {'living': ((6.1, 7.0), (0.3, 8.4)), 'living2': ((2.3, 7.1), (6.7, 8.8)), 'bed': ((3.45, 2.6), (0.6, 0.5)), 'plus': ((3.4, 5.75), (0.4, 3.6))},
 }
 SHL['2PN1'] = SHL['2PN']
+SHL['2PN11'] = {'living': ((5.4, 7.4), (0.3, 8.7)), 'living2': ((1.5, 9.4), (6.5, 7.0)), 'bed': ((5.0, 2.6), (0.8, 1.3)), 'plus': ((3.95, 4.6), (0.5, 6.0))}
+SHL['2PN1L'] = dict(SHL['2PN11'], plus=((4.0, 4.6), (0.5, 8.0)))
+SHL['1PN+1L'] = SHL['1PN+1']
 SH = {k: (v[0], v[1], 15, 1.5, 0.) for k, v in SHL.get(LAY, SHL['1PN+1']).items()}
 for s in SHOTS:
-    if s == 'top':
+    if s == 'top':   # mặt bằng 3D phối cảnh nghiêng từ góc (kiểu bản vẽ bán hàng): bỏ trần, tường để nguyên, nền xám nhạt, kèm số đo
+        from bpy_extras.object_utils import world_to_camera_view
+        UX0, UX1, UY0, UY1 = X0, X1, Y0, Y1                                   # khung căn (không gồm sân vườn)
         for o in bpy.data.objects:
-            if o.name.startswith('tran'): o.hide_render = True   # bỏ trần để nhìn từ trên xuống
+            if o.type != 'MESH' or not o.data.vertices: continue
+            if o.name.startswith(('tran', 'go-tran', 'led', 'rem', 'than-thap')): o.hide_render = True; continue
+            zs = [v.co.z for v in o.data.vertices]; z0_, z1_ = min(zs) + o.location.z, max(zs) + o.location.z
+            if z1_ < -.5 or (o.parent is None and z0_ > H - .1): o.hide_render = True   # đất/phố dưới thấp, đèn âm trần
+        CAPW = mat('mat-cat-trang', (.97, .97, .96), .8)
+        CLR = bpy.data.materials.new('kinh-trong'); CLR.use_nodes = True; nt_ = CLR.node_tree; nt_.nodes.clear()   # kính trong, phản chiếu rất nhẹ
+        o_ = nt_.nodes.new('ShaderNodeOutputMaterial'); tr_ = nt_.nodes.new('ShaderNodeBsdfTransparent'); tr_.inputs['Color'].default_value = (.93, .97, 1, 1)
+        gl_ = nt_.nodes.new('ShaderNodeBsdfGlossy'); gl_.inputs['Roughness'].default_value = .05; gl_.inputs['Color'].default_value = (.85, .9, .95, 1)
+        mx_ = nt_.nodes.new('ShaderNodeMixShader'); mx_.inputs[0].default_value = .07; nt_.links.new(tr_.outputs[0], mx_.inputs[1]); nt_.links.new(gl_.outputs[0], mx_.inputs[2]); nt_.links.new(mx_.outputs[0], o_.inputs['Surface'])
         for o in bpy.data.objects:
-            if o.type == 'MESH' and o.data.vertices and min(v.co.z for v in o.data.vertices) + o.location.z > H - .1: o.hide_render = True
-        X0, X1, Y0, Y1 = min(p[0] for p in BX), max(p[0] for p in BX), min(p[1] for p in BX), max(p[1] for p in BX)   # gồm cả sân vườn
-        if X1 - X0 > Y1 - Y0: sc.render.resolution_x, sc.render.resolution_y = max(RW, RH), round(max(RW, RH) * (Y1 - Y0 + 1) / (X1 - X0 + 1))
-        sc.view_settings.exposure = .45
-        shoot('top', ((X0 + X1) / 2, (Y0 + Y1) / 2), None, ortho=max(X1 - X0, Y1 - Y0) + 1.0)
+            if o.type == 'MESH' and o.data.materials and o.data.materials[0] in (GLASS, RGLASS):
+                for sl_ in o.material_slots: sl_.link = 'OBJECT'; sl_.material = CLR
+        for o in list(bpy.data.objects):
+            if o.type != 'MESH' or o.hide_render or not o.data.materials: continue
+            mt_ = o.data.materials[0]
+            zs = [v.co.z for v in o.data.vertices]; z0_, z1_ = min(zs) + o.location.z, max(zs) + o.location.z
+            if o.parent is None and mt_ in (WALL, EXT) and z1_ > H - .05:                  # mặt cắt đỉnh tường màu trắng
+                cp = o.copy(); sc.collection.objects.link(cp); cp.scale.z = .015 / max(.01, z1_ - z0_); cp.location.z = H + .005
+                cp.material_slots[0].link = 'OBJECT'; cp.material_slots[0].material = CAPW
+        TW_, TH_ = (int(v) for v in os.environ.get('TOPRES', '1080x1350').split('x'))
+        sc.render.film_transparent = True; sun.energy = 0
+        wd.node_tree.nodes['Background'].inputs['Strength'].default_value = float(os.environ.get('TOPSKY', '.25')); sky.sun_disc = False   # không còn bóng nắng dài
+        X0, X1, Y0, Y1 = min(p[0] for p in BX), max(p[0] for p in BX), min(p[1] for p in BX), max(p[1] for p in BX)
+        cen = Vector(((X0 + X1) / 2, (Y0 + Y1) / 2, 0))
+        # ánh sáng như ảnh bán hàng: đèn lớn dịu phía trên + đèn rọi tường tạo vệt sáng vòm trên tường, tông vàng ấm
+        al = bpy.data.lights.new('den-tong', 'AREA'); al.shape = 'RECTANGLE'; al.size = X1 - X0 + 2; al.size_y = Y1 - Y0 + 2
+        al.energy = (X1 - X0 + 2) * (Y1 - Y0 + 2) * float(os.environ.get('TOPAREA', '8')); al.color = (1, .93, .84); ao = bpy.data.objects.new('den-tong', al); sc.collection.objects.link(ao); ao.location = (cen.x, cen.y, H + 4)
+        nsp = 0
+        for o in list(bpy.data.objects):
+            if o.type != 'MESH' or o.hide_render or o.parent is not None or not o.data.materials or o.data.materials[0] not in (WALL, EXT) or nsp > 90: continue
+            vs = [o.matrix_world @ v.co for v in o.data.vertices]; zs = [v.z for v in vs]
+            if max(zs) < H - .05: continue
+            ux_ = Vector((math.cos(o.rotation_euler[2]), math.sin(o.rotation_euler[2]))); Lw = max((v.xy - o.location.xy).dot(ux_) for v in vs) * 2
+            if Lw < 1.2: continue
+            nv_ = Vector((-ux_.y, ux_.x)); n_ = max(1, int(Lw / 1.5))
+            for i_ in range(n_):
+                t_ = -Lw / 2 + (i_ + .5) * Lw / n_
+                for sd in (-1, 1):
+                    q_ = o.location.xy + ux_ * t_ + nv_ * sd * .42
+                    if not (X0 < q_.x < X1 and Y0 < q_.y < Y1): continue
+                    sl = bpy.data.lights.new('roi-tuong', 'SPOT'); sl.energy = float(os.environ.get('TOPSPOT', '130')); sl.spot_size = math.radians(95); sl.spot_blend = .85; sl.color = (1, .82, .62); sl.shadow_soft_size = .05
+                    so_ = bpy.data.objects.new('roi-tuong', sl); sc.collection.objects.link(so_); so_.location = (q_.x, q_.y, H - .08); nsp += 1
+        # bóng đổ mềm xuống nền (shadow catcher)
+        bpy.ops.mesh.primitive_plane_add(size=300, location=(cen.x, cen.y, -.06)); sh_ = bpy.context.object; sh_.is_shadow_catcher = True
+        on = Vector((OUTN.x, OUTN.y)) if OUTN.length > .01 else Vector((1, 0))
+        az = math.atan2(on.y, on.x) + math.radians(float(os.environ.get('TOPAZ', '-38')))   # đứng phía mặt kính, lệch sang 1 góc
+        EL = math.radians(float(os.environ.get('TOPEL', '55'))); dvec = Vector((math.cos(az) * math.cos(EL), math.sin(az) * math.cos(EL), math.sin(EL)))
+        cam_d.type = 'PERSP'; cam_d.lens = 45; cam_d.sensor_fit = 'AUTO'; cam_d.shift_x = cam_d.shift_y = 0; cam_d.clip_end = 2000
+        sc.render.resolution_x, sc.render.resolution_y = TW_, TH_
+        pts = [Vector((x, y, z)) for x in (X0, X1) for y in (Y0, Y1) for z in (0, H)] + [Vector((p[0], p[1], 0)) for p in BX]
+        dist = 40.
+        for it_ in range(6):   # canh khung: căn chiếm ~82% khung, nằm giữa (chừa chỗ nhãn phía dưới)
+            cam.location = cen + Vector((0, 0, H / 2)) + dvec * dist; cam.rotation_euler = (-dvec).to_track_quat('-Z', 'Y').to_euler(); bpy.context.view_layer.update()
+            pr = [world_to_camera_view(sc, cam, q) for q in pts]
+            mnx, mxx, mny, mxy = min(r.x for r in pr), max(r.x for r in pr), min(r.y for r in pr), max(r.y for r in pr)
+            fill = max((mxx - mnx) / .93, (mxy - mny) / .8)
+            dist *= fill
+            cam_d.shift_x += ((mnx + mxx) / 2 - .5) * (1 if TW_ >= TH_ else TW_ / TH_)
+            cam_d.shift_y += ((mny + mxy) / 2 - .55) * (TH_ / TW_ if TW_ >= TH_ else 1)
+        sc.view_settings.exposure = float(os.environ.get('TOPEXPO', '-0.3')); sc.view_settings.look = 'AgX - Medium High Contrast'
+        bpy.context.view_layer.update()
+        def px(q): r = world_to_camera_view(sc, cam, q); return [round(r.x * TW_, 1), round((1 - r.y) * TH_, 1)]
+        corners = [Vector((x, y, 0)) for x in (UX0, UX1) for y in (UY0, UY1)]
+        near = max(corners, key=lambda q: (q - cen).dot(dvec))                 # góc gần máy ảnh nhất
+        dims = []
+        for axis in (0, 1):
+            far = near.copy(); far[axis] = (UX0 + UX1 - near.x) if axis == 0 else (UY0 + UY1 - near.y)
+            off = Vector((0, 0, 0)); oa = 1 - axis; off[oa] = 1.1 * (1 if near[oa] > cen[oa] else -1)
+            dims.append([px(near + off), px(far + off), int(round(abs(far[axis] - near[axis]) * 1000 / 10) * 10)])
+        json.dump({'dims': dims, 'w': TW_, 'h': TH_}, open(os.path.join(OUT, 'top.json'), 'w'))
+        sc.render.filepath = os.path.join(OUT, 'top.png'); bpy.ops.render.render(write_still=True); print('xong top', flush=True)
     elif s == 'garden' and GGLASS:   # từ trong căn nhìn ra sân vườn
         c2, nv = GGLASS; e_ = c2 - nv * 2.6; g_ = Vector(GCEN)
         cam_d.type = 'PERSP'; cam_d.lens = 14; cam_d.shift_y = 0; cam.location = (e_.x, e_.y, 1.35)

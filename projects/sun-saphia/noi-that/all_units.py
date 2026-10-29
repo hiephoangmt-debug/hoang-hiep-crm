@@ -1,11 +1,11 @@
 """Chạy render nội thất luxury cho tất cả căn (bỏ qua ảnh đã có). Thứ tự: tầng 30 → sân vườn tầng 2–3 → tầng điển hình → video tham quan HQ."""
 import json, os, subprocess, sys
 S = os.path.dirname(os.path.abspath(__file__)); C = json.load(open(S + '/ccl2.json'))
-SHOT = {'1PN+1': 'living,living2,bed,plus,top', '2PN': 'living,living2,bed,plus,top', '2PN1': 'living,living2,bed,plus,top', 'STU': 'living,living2,top', 'STUL': 'living,living2,top'}
+SHOT = {'1PN+1': 'living,living2,bed,plus,top', '2PN': 'living,living2,bed,plus,top', '2PN1': 'living,living2,bed,plus,top', 'STU': 'living,living2,top', 'STUL': 'living,living2,top', '2PN11': 'living,living2,bed,plus,top', '2PN1L': 'living,living2,bed,top', '1PN+1L': 'living,living2,bed,plus,top'}
 def main_lay(parts): return max(parts, key=lambda p: C['spec'][p[0]]['W'] * C['spec'][p[0]]['D'] * max(abs(p[1][0]), abs(p[1][1])))[0]
 JOBS = []
 for k in C['u30']:
-    if k != '10': JOBS.append(('u30', k, '30-' + k, SHOT[main_lay(C['u30'][k])], {'FLOOR_H': '108'}))
+    JOBS.append(('u30', k, '30-' + k, SHOT[main_lay(C['u30'][k])], {'FLOOR_H': '108'}))
 for g, fh in (('T3', '13'), ('T2', '8.6')):
     for k in C['gard'][g]: JOBS.append(('u', k, 'G' + g[1] + '-' + k, 'garden,top', {'FLOOR_H': fh, 'GARD': g}))
 for k in sorted(C['u']): JOBS.append(('u', k, 'T-' + k, SHOT[main_lay(C['u'][k])], {'FLOOR_H': '64'}))
