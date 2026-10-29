@@ -164,9 +164,13 @@ function save_(name, head, o) {
   if (o._r) sh.getRange(o._r, 1, 1, head.length).setValues(v);
   else { sh.appendRow(v[0]); o._r = sh.getLastRow(); }
 }
+/* Tab CauHinh chỉ đọc 1 lần mỗi lần chạy (trước đây đọc hàng trăm lần → bot chạy lâu, Google tạm dừng vì quá hạn mức 90 phút/ngày) */
+var CH_NHO_ = null;
 function tabMap_(name) {
+  if (name === 'CauHinh' && CH_NHO_) return CH_NHO_;
   var sh = tab_(name, ['khoa', 'gia_tri', 'ghi_chu']), n = sh.getLastRow(), m = {};
   if (n > 1) sh.getRange(2, 1, n - 1, 2).getValues().forEach(function (r) { if (r[0]) m[String(r[0]).trim()] = r[1]; });
+  if (name === 'CauHinh') CH_NHO_ = m;
   return m;
 }
 /* Chữ bắt đầu bằng = + - @ thì Sheet hiểu là công thức (#ERROR!): thêm dấu ' để giữ nguyên chữ */
@@ -220,6 +224,7 @@ function baoQL_(text, nut) { var q = quanLy_(); if (q) gui_(q, text, nut); }
 var BOT_TOKEN_DAN_VAO_DAY = 'DÁN_MÃ_BOT_CHIA_KHÁCH_VÀO_ĐÂY';
 var LINK_SHEET_CRM_DAN_VAO_DAY = 'DÁN_LINK_SHEET_CRM_HOÀNG_HIỆP_VÀO_ĐÂY';
 function caiDat() {
+  CH_NHO_ = null;
   if (BOT_TOKEN_DAN_VAO_DAY.indexOf('DÁN_') !== 0) P().setProperty('BOT_TOKEN', BOT_TOKEN_DAN_VAO_DAY);
   if (!P().getProperty('BOT_TOKEN')) throw new Error('Chưa dán mã bot vào dòng BOT_TOKEN_DAN_VAO_DAY');
   tg_('deleteWebhook', {});
@@ -245,6 +250,7 @@ function caiDat() {
     var rowsCH = sh.getRange(2, 1, sh.getLastRow() - 1, 1).getValues();
     for (var i = 0; i < rowsCH.length; i++) if (rowsCH[i][0] === 'CRM_SHEET_ID') sh.getRange(i + 2, 2).setValue(crmId);
   }
+  CH_NHO_ = null;   // vừa ghi CauHinh: đọc lại
   if (!cfg('CRM_SHEET_ID')) throw new Error('Chưa dán link Sheet CRM vào dòng LINK_SHEET_CRM_DAN_VAO_DAY');
   try { SpreadsheetApp.openById(cfg('CRM_SHEET_ID')).getSheetByName(cfg('CRM_TAB')).getLastRow(); }
   catch (e) { throw new Error('Không mở được Sheet CRM hoặc tab "' + cfg('CRM_TAB') + '". Kiểm tra link và dùng đúng tài khoản Google đang giữ Sheet CRM.'); }
@@ -295,6 +301,7 @@ function ghiNhanKhachCu_() {
 /* ======================= VÒNG CHẠY MỖI PHÚT ======================= */
 function chayMoiPhut() {
   var lock = LockService.getScriptLock(); if (!lock.tryLock(20000)) return;
+  CH_NHO_ = null;   // đọc lại CauHinh mới nhất cho lần chạy này
   /* Nút bấm của sale được xử lý trước và xen giữa các việc nặng, để không phải chờ chia data xong */
   var bd = Date.now();
   try { capNhatTieuDe_(); xuLyTinNhan_(); nhanKhachMoi_(); xuLyTinNhan_(); nhapData_(bd + 25000); xuLyTinNhan_(); kiemTraHan_(); xuLyTinNhan_(); }
@@ -306,7 +313,7 @@ function capNhatTieuDe_() {
   if (P().getProperty('TIEU_DE') === '6') return;
   /* Ghi link mở thẳng trình soạn code vào tab CauHinh (để lần sau dán code mới từ điện thoại) */
   var ch = tab_('CauHinh', ['khoa', 'gia_tri', 'ghi_chu']), link = 'https://script.google.com/d/' + ScriptApp.getScriptId() + '/edit';
-  if (!tabMap_('CauHinh').hasOwnProperty('LINK_CODE')) ch.appendRow(['LINK_CODE', link, 'Bấm để mở thẳng Apps Script, dán code mới']);
+  if (!tabMap_('CauHinh').hasOwnProperty('LINK_CODE')) { ch.appendRow(['LINK_CODE', link, 'Bấm để mở thẳng Apps Script, dán code mới']); CH_NHO_ = null; }
   [['Sale', T_SALE], ['Khach', T_KHACH], ['DaChia', T_DACHIA]].forEach(function (x) { tab_(x[0], x[1]).getRange(1, 1, 1, x[1].length).setValues([x[1]]); });
   var nd = tab_('NhapData'); if (!nd.getLastRow()) nd.getRange(1, 1).setValue(HD_NHAP);
   P().setProperty('TIEU_DE', '6');
@@ -389,6 +396,9 @@ function nhanKhachMoi_() {
 var TAB_HE_THONG = /^(TONG_HOP|UPLOAD_|CRM_|SAN_PHAM)/i;
 function layKhachKhac_() {
   var id = String(cfg('NGUON_KHAC_SHEET_ID') || '').trim(); if (!id) return [];
+  /* Quét 16 tab tốn thời gian: 5 phút mới quét 1 lần */
+  var lucQuet = Number(P().getProperty('LUC_QUET_KHAC') || 0); if (Date.now() - lucQuet < 5 * 60000) return [];
+  P().setProperty('LUC_QUET_KHAC', String(Date.now()));
   var m = id.match(/\/d\/([a-zA-Z0-9_-]+)/); if (m) id = m[1];
   var ss; try { ss = SpreadsheetApp.openById(id); } catch (e) { return []; }
   var chon = dsCfg_('NGUON_KHAC_TAB'), dauTien = !P().getProperty('DA_XEM_KHAC');
