@@ -8,7 +8,7 @@ F = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'; FR = '/usr/share/fon
 NAVY, ORANGE, BG = (10, 37, 64), (232, 92, 30), (226, 226, 224)
 T30 = {'07': '1PN+1', '08': '1PN', '09': '1PN+1', '10': '1PN', '11': '1PN+1', '06': '2PN', '05': '1PN', '03A': '1PN', '03': '1PN+1', '02': '1PN+1', '01': '1PN',
        '16': '1PN+1', '15': '1PN', '12B': '1PN', '12A': '1PN', '12': '1PN'}
-LBL = {'STU': 'STUDIO', 'STUL': 'STUDIO', '1PN': '1 PHÒNG NGỦ', '1PN+1': '1 PHÒNG NGỦ +', '2PN': '2 PHÒNG NGỦ', '2PN1': '2 PHÒNG NGỦ'}
+LBL = {'STU': 'STUDIO', 'STUL': 'STUDIO', '1PN': '1 PHÒNG NGỦ', '1PN+1': '1 PHÒNG NGỦ +', '2PN': '2 PHÒNG NGỦ', '2PN1': '2 PHÒNG NGỦ', '2PN11': '2 PHÒNG NGỦ', '2PNT': '2 PHÒNG NGỦ', '2PN1L': '1 PHÒNG NGỦ +', '1PN+1L': '1 PHÒNG NGỦ +'}
 k, uid = name.split('-', 1); fl = '30' if k == '30' else None
 parts_all = C['u30'] if k == '30' else C['u']
 lay = max(parts_all[uid], key=lambda p: C['spec'][p[0]]['W'] * C['spec'][p[0]]['D'])[0]
