@@ -7,6 +7,7 @@ sha = sys.argv[1]
 src = subprocess.check_output(['git', 'show', sha + ':projects/sun-saphia/chon-can/chon-can-embed.js'], cwd=here).decode('utf-8')
 css = ('.hd,#dl3d,#dl2d,#rc .note{display:none!important}'
        'body:not(.picked) #rc{display:none!important}body:not(.picked) .wrap{grid-template-columns:1fr!important;max-width:1060px;margin:0 auto}'
+       'body:not(.picked) #plan:not(.flt) svg .u{opacity:1!important}body:not(.picked) #plan .u.sel .b{stroke:#fff!important;stroke-width:2!important}'
        'body.picked .wrap{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)!important;align-items:start}'
        '#rc{animation:ssIn .45s ease}@keyframes ssIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}'
        '#ssLead{display:block;width:100%;border:0;border-radius:12px;background:linear-gradient(135deg,#FF8A3D,#E8460F);color:#fff;font:800 16px var(--font);padding:14px;cursor:pointer;box-shadow:0 8px 18px rgba(232,70,15,.3)}'
