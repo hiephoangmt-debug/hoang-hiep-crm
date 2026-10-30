@@ -1,13 +1,19 @@
 /* Chế độ HERO: ẩn thanh điều khiển, nắng theo giờ thực ở Đà Nẵng, tự xoay chậm quanh tòa tháp, chữ chìm số điện thoại vẽ vào ảnh WebGL */
 (function(){
   try{ wm.visible=false; }catch(e){}   /* bỏ khối logo + số ở giữa; chống chụp bằng lớp chữ chìm chéo trên trang */
-  /* giờ theo hướng nhìn: nhìn ra biển (phía +x) = bình minh ~7h, quay về thành phố = hoàng hôn ~18h, chuyển mượt theo vòng xoay */
-  var lastH=-1;
+  /* Ngày đêm chạy TỚI theo chiều tự xoay (góc nhìn tăng dần):
+     nhìn ra biển 5h50 mặt trời mọc từ biển → trưa → chiều → hướng thành phố 21h đêm, đèn phố + pháo hoa
+     → đêm khuya → rạng sáng → lại nhìn ra biển: mặt trời mọc. Không bao giờ chạy ngược. */
+  var lastH=-99;
+  function fmt(h){ h=((h%24)+24)%24; var H=Math.floor(h),M=Math.round((h-H)*60); if(M===60){H=(H+1)%24;M=0;} return (H<10?'0':'')+H+':'+(M<10?'0':'')+M; }
   function tick(){ try{
-    var cp=world.worldToLocal(camera.position.clone()), tp=world.worldToLocal(controls.target.clone()), dx=tp.x-cp.x, dz=tp.z-cp.z, L=Math.hypot(dx,dz)||1, c=dx/L;
-    var t=(1-c)/2, h=t<.5?5.6+Math.pow(t/.5,1.5)*6.9:12.5+Math.pow((t-.5)/.5,.6)*7.5;   /* biển: mặt trời vừa mọc → trưa → hoàng hôn → hướng thành phố: đêm 20h (đèn phố + pháo hoa tự bắn) */
-    hourEl.value=h.toFixed(2); setTime(h); try{ parent.postMessage({ss4dHero:'h',h:h},'*'); }catch(e){} if(typeof refreshEnv==='function') refreshEnv();
-    if(hourOut){ var H=Math.floor(h),M=Math.round((h-H)*60); if(M===60){H++;M=0;} hourOut.textContent=(H<10?'0':'')+H+':'+(M<10?'0':'')+M; } }catch(e){} }
+    var cp=world.worldToLocal(camera.position.clone()), tp=world.worldToLocal(controls.target.clone());
+    var a=Math.atan2(tp.z-cp.z,tp.x-cp.x), u=(((a/(2*Math.PI))%1)+1)%1;   /* 0 = nhìn thẳng ra biển (+x) */
+    var h=u<.5?5.8+(u/.5)*15.2:21+((u-.5)/.5)*8.8; if(h>=24) h-=24;
+    if(Math.abs(h-lastH)<.03) return; lastH=h;
+    hourEl.value=Math.max(+hourEl.min,Math.min(+hourEl.max,h)).toFixed(2); setTime(h); if(typeof refreshEnv==='function') refreshEnv();
+    try{ parent.postMessage({ss4dHero:'h',h:h},'*'); }catch(e){}
+    if(hourOut) hourOut.textContent=fmt(h); }catch(e){} }
   function cam(){ try{
     var m=innerWidth/innerHeight<1.1, t=world.localToWorld(new THREE.Vector3(-47,m?70:60,46));
     var off=new THREE.Vector3(-430,150,-370).multiplyScalar(m?.88:.82);   /* góc đẹp nhất: từ phía Tây Bắc, biển phía sau bên trái, công viên phía trước tòa */
