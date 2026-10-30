@@ -259,7 +259,7 @@ def home():
           + units_table() +
           '<div class="g2 eq" style="margin-top:26px">' + fig('mat-bang-tong-the', 'Mặt bằng tổng thể Sun Saphia Residence hướng ra biển Mỹ Khê, phía trước là công viên ven biển', 'Mặt bằng tổng thể – tối ưu tầm view biển Mỹ Khê', wm=True)
           + fig('layout-tang-3a-28', 'Layout tầng điển hình 3A–28 tòa Saphia, 28 căn mỗi tầng', 'Layout tầng 3A–28', wm=True) + '</div>'
-          '<div style="margin-top:22px">' + units_drawings() + '</div>'
+          '<div style="margin-top:22px">' + units_drawings(V4) + '</div>'
           '<p style="margin-top:18px"><a class="btn sm nv" href="{M}/mat-bang">Xem chi tiết mặt bằng từng loại căn →</a></p>'
           '<div id="chon-can"></div></div></section>')
     # 05 Pháp lý
@@ -448,7 +448,7 @@ def mat_bang():
     b += tldr('mặt bằng Sun Saphia Residence', [('Tầng căn hộ', 'Từ tầng 3A đến tầng 28, 28 căn mỗi tầng điển hình'), ('Studio', '30–31 m², 3,8 × 9 m, 513 căn'), ('1BR+1', '50–51 m², 6,2 × 9 m, 108 căn'),
         ('2BR', '60–70 m², 7,25 × 9,9 m, 133 căn, có căn góc bo tròn'), ('Chiều cao căn hộ', '3,5 m, bàn giao hoàn thiện cơ bản'), ('Hướng view', 'Biển Mỹ Khê – Sơn Thủy, Ngũ Hành Sơn, sông Hàn, đô thị')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Cơ cấu', '782 căn – <b>3 loại căn</b>', 'o') + units_table() +
-          '<div style="margin-top:24px">' + units_drawings() + '</div></div></section>')
+          '<div style="margin-top:24px">' + units_drawings(V4) + '</div></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('2', 'Layout tầng', 'Mặt bằng <b>từng tầng</b> tòa Saphia', 'n')
           + tang_viewer() +
           '<div id="chon-can"></div></div></section>')
@@ -804,7 +804,7 @@ def ads(domain):
     b += pband('30 tầng bên <b>biển Mỹ Khê</b>', 'Căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng – sự kiện ra mắt 9:00 Chủ nhật 01/11/2026 tại Hilton Đà Nẵng.', 'ADS – dải ảnh tòa tháp')
     b += vitri_dark('vi-tri', 'ADS')
     b += ('<section class="sec alt" id="mat-bang"><div class="wrap">' + sh('04', 'Mặt bằng', 'Chọn căn trên <b>mặt bằng tầng</b>', 'n') + units_table() +
-          '<div style="margin-top:20px">' + units_drawings() + '</div><div id="chon-can"></div></div></section>')
+          '<div style="margin-top:20px">' + units_drawings(V4) + '</div><div id="chon-can"></div></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('02', 'Tầm nhìn', 'Mỗi hướng <b>một khung tranh</b>', 'o') + views('<img class="vb" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1668w" sizes="(max-width: 760px) 100vw, 900px" width="1668" height="943" alt="Biển ngay ngoài ban công – căn hộ cao tầng mặt biển Đà Nẵng lúc hoàng hôn (ảnh minh họa)" loading="lazy" decoding="async">' % (HB, HB, HB)) + '</div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('06', 'Tiện ích', 'Sống gắn với <b>biển mỗi ngày</b>', 'y') +
           '<div class="g3"><article class="card">' + ('<img class="r" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 400px" width="1600" height="900" alt="Hồ bơi tầng 3 nhìn ra biển – Sun Saphia Residence (ảnh minh họa)" loading="lazy" decoding="async">' % ((RAW + 'a0a6849c15880dc681b6e91708d2a0752bd2aa43/landing/sun-saphia/v4/img/ho-boi-tang-3',) * 3)) + '<h3 style="margin-top:12px">Hồ bơi tầng 3 view biển</h3></article>'
