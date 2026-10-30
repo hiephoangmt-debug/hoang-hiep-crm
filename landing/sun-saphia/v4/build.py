@@ -735,7 +735,7 @@ def vitri_dark(sid='vi-tri', ctx='ADS'):
             '</div></div></section>') % (sid, ctx)
 
 ADS_TOC = [('su-kien', 'Sự kiện'), ('tong-quan', 'Tổng quan'), ('vi-tri', 'Vị trí'), ('tien-ich', 'Tiện ích'), ('mat-bang', 'Mặt bằng'), ('loai-can', 'Loại căn'),
-           ('tai-chinh', 'Chính sách'), ('quy-hoach', 'Quy hoạch'), ('dau-tu', 'Đầu tư'), ('phap-ly', 'Pháp lý')]   # theo đúng thứ tự bố cục trang Ads
+           ('tai-chinh', 'Chính sách')]   # theo đúng thứ tự bố cục trang Ads
 
 def tim_can(ctx='ADS'):
     Q = [('muc', 'Anh/chị mua để làm gì?', False, [('o', '🏖 Để ở / nghỉ dưỡng gia đình'), ('ngan', '🧳 Cho thuê ngắn hạn (theo đêm)'), ('dai', '📅 Cho thuê dài hạn (theo tháng)'), ('tg', '📈 Đầu tư chờ tăng giá'), ('san', '🏢 Mua nhiều căn / cả 1 sàn')]),
