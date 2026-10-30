@@ -67,6 +67,13 @@ ok(/0910000006/.test(lastTo(1).text)&&/Data 02 dòng 9/.test(lastTo(1).text),'nh
 ok(d1.d[9][2]==='An','khách nét (Hẹn gặp) An giữ luôn');
 adv(1); run(); ok(ai('An')===4,'chưa báo cáo số mới → không giao tiếp');
 d2.d[8][3]='Không nhu cầu'; adv(1); run(); ok(ai('An')===5&&d2.d[9][2]==='An','báo cáo xong → giao số kế tiếp ngay phút sau');
+ok(to(2).some(x=>/0910000003/.test(x.text)&&x.reply_markup),'số đang giữ sẵn (Bình) cũng được nhắn kèm nút báo cáo');
+ok(to(1).filter(x=>/0910000006/.test(x.text)).length===1,'không nhắn lặp cùng một số');
+click(2,'ts:Data 01:12:5'); click(2,'ts:Data 01:13:6'); click(2,'ts:Data 01:14:0'); run();
+ok(d1.d[11][3]==='Hẹn gặp / xem dự án','bấm nút trên Telegram → ghi thẳng vào file');
+ok(ai('Bình')===4&&/Data 02 dòng 11/.test(lastTo(2).text),'báo cáo qua Telegram → giao số tiếp ngay');
+ok(edits.some(e=>/Đã báo cáo: <b>Hẹn gặp/.test(e.text)),'tin cũ đổi thành "Đã báo cáo"');
+d1.d[12][3]=''; click(1,'ts:Data 01:13:0'); run(); ok(d1.d[12][3]==='','bấm số của người khác → không ghi'); d1.d[12][3]='Không nhu cầu';
 NOW=vn(20,22); d2.d[9][3]='Môi giới'; run(); ok(ai('An')===5,'ngoài giờ làm việc không giao');
 NOW=vn(21,9); let n=0; while(n++<60){ [...d1.d.slice(8),...d2.d.slice(8)].forEach(r=>{if(r[2]&&!r[3])r[3]='Không nghe máy'}); adv(1); run(); }
 ok(ai('An')+ai('Bình')===30,'gọi hết thì giao hết kho');
