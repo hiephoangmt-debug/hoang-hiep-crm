@@ -21,5 +21,7 @@
     controls.enableZoom=false; controls.enablePan=false; controls.autoRotate=true; controls.autoRotateSpeed=.32; controls.update();
     DEF={p:camera.position.clone(),t:controls.target.clone()}; }catch(e){} }
   cam(); tick(); setInterval(tick,250); addEventListener('resize',function(){ setTimeout(cam,50); });
+  /* trang mẹ yêu cầu dừng / chạy tiếp (khi hiện ô mở khóa) */
+  addEventListener('message',function(e){ var d=e.data; if(!d||!d.ss4dHero) return; if(d.ss4dHero==='pause') controls.autoRotate=false; if(d.ss4dHero==='play') controls.autoRotate=true; });
   try{ parent.postMessage({ss4dHero:'ready'},'*'); }catch(e){}
 })();
