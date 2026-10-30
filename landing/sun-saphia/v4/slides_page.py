@@ -14,6 +14,9 @@ BLOB = {  # ảnh trong bộ slide → ảnh dự án trên GitHub
     'e517c482f01cd18fef7a51cba73cc2d7': 'khach-du-lich-900.webp',
     'b1d35360fb183472b182e57f9fcf6e22': 'thap-bien-hoang-hon-900.webp',
     '6caf5273fe88e0c6c8c3b3628a7174d6': RAW + 'b9c11c4f91fff47b6e1cad83391796b7f917d490/landing/sun-saphia/v4/img/view-huong-dong.webp',
+    '9efa78a97711191b59e4eb4b4fa7b7af': RAW + '4bb529ee170658be2b1ca2b16d0edae4f413dd90/landing/sun-saphia/v4/img/mb-can-studio.webp',
+    '5046b59e5244683f830586e2c761b957': RAW + '4bb529ee170658be2b1ca2b16d0edae4f413dd90/landing/sun-saphia/v4/img/mb-can-1br.webp',
+    'c132857ebb4e1cf5843c339f1e12a1b8': RAW + '4bb529ee170658be2b1ca2b16d0edae4f413dd90/landing/sun-saphia/v4/img/mb-can-2br.webp',
     '38424840af6223a072bc3407247d0104': RAW + 'b9c11c4f91fff47b6e1cad83391796b7f917d490/landing/sun-saphia/v4/img/view-huong-dong-nam.webp',
 }
 
@@ -134,7 +137,7 @@ def trinh_chieu(page, ORG, RES):
 
 GATE = '''<section class="sec" id="sp-gate" style="padding-top:40px"><div class="wrap" style="max-width:560px">
 <span class="ey">Tài liệu nội bộ đội sale</span><h1 class="dp" style="margin:6px 0 10px">Đào tạo sale <b>Sun Saphia</b></h1>
-<p class="lead">32 slide: thị trường, sản phẩm, bài toán dòng tiền, bản đồ giá thuê, 3 khách mẫu, xử lý từ chối, tin nhắn Zalo. Nhập số Zalo của bạn để xem và tải về.</p>
+<p class="lead">33 slide: thị trường, sản phẩm, bài toán dòng tiền, bản đồ giá thuê, 3 khách mẫu, xử lý từ chối, tin nhắn Zalo. Nhập số Zalo của bạn để xem và tải về.</p>
 <style>.sp-gf label{display:block;font-size:13px;font-weight:700;color:#0E2A47;margin:10px 0 6px}.sp-gf input{width:100%;box-sizing:border-box;padding:14px 15px;font-size:16px;font-family:inherit;border:1.5px solid #d6dce5;border-radius:12px;background:#f8fafc}.sp-gf button{width:100%;margin-top:14px}</style><form class="sp-gf" id="sp-gf" style="margin-top:16px"><label for="sg-n">Họ và tên</label><input id="sg-n" name="name" type="text" autocomplete="name" placeholder="Tên của bạn" required>
 <label for="sg-p">Số Zalo</label><input id="sg-p" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx" required>
 <p id="sg-e" style="color:#A33A12;font-size:14px;margin:8px 0 0;display:none">Số Zalo cần đủ 10 số, ví dụ 0904 567 009.</p>
@@ -160,7 +163,7 @@ def dao_tao(head, header, tail, FAV, OG, LOGO):
     html = head(title, desc, MAIN + '/dao-tao-sale', OG, 'đào tạo sale', [], FAV, robots='noindex,nofollow,noarchive')
     html = html.replace('</head>', FONTS + '\n</head>', 1)
     html += ('<body>\n' + header('/dao-tao-sale', MAIN, LOGO, menu=False, cta='https://zalo.me/0904567009') + '\n<main id="dau-trang">' + GATE
-             + '<section class="sec" id="sp-main" style="display:none;padding-top:28px"><div class="wrap" style="max-width:1240px"><span class="ey">Đào tạo sale · 32 slide</span>'
+             + '<section class="sec" id="sp-main" style="display:none;padding-top:28px"><div class="wrap" style="max-width:1240px"><span class="ey">Đào tạo sale · 33 slide</span>'
              '<h1 class="dp" style="margin:6px 0 16px">Sun Saphia – <b>tài liệu đào tạo</b></h1></div>'
              + viewer(slides, 'dao-tao', notes=True) + D4 + '</section></main>\n' + tail(True) + GATE_JS + '</body>\n</html>\n')
     return html.replace('>Nhận bảng giá</a></div></header>', '>Zalo anh Hiệp</a></div></header>')
