@@ -280,12 +280,12 @@ flat(100,700,0xa7b98a,62,610,0.06);
 // beach
 // sea
 var seaGeo=new THREE.PlaneGeometry(7000,9000,140,180); seaGeo.rotateX(-Math.PI/2);
-var seaMat=M(0xffffff,{roughness:.22,metalness:0,envMapIntensity:.35});
+var seaMat=M(0xffffff,{roughness:.22,metalness:0,envMapIntensity:.25,fog:false});   // biển không phủ sương: xanh đậm tới chân trời
 var sea=new THREE.Mesh(seaGeo,seaMat); sea.position.set(174+3500,.7,0); sea.receiveShadow=true; world.add(sea);
 (function(){ var a=seaGeo.attributes.position.array; for(var i=0;i<a.length;i+=3){ var cx=COASTX(a[i+2])-sea.position.x; if(a[i]<cx) a[i]=cx; } })();   // mép biển theo đường bờ biển thật
 var seaPos=seaGeo.attributes.position, seaBase=new Float32Array(seaPos.array);
 // màu nước theo khoảng cách bờ: xanh ngọc sát bờ → xanh dương → xanh đậm ngoài khơi
-(function(){ var p=seaGeo.attributes.position.array, n=p.length/3, col=new Float32Array(n*3), c=new THREE.Color(), c0=new THREE.Color(0x22c3c4), c1=new THREE.Color(0x0b86c2), c2=new THREE.Color(0x064c98), c3=new THREE.Color(0x042a5e);
+(function(){ var p=seaGeo.attributes.position.array, n=p.length/3, col=new Float32Array(n*3), c=new THREE.Color(), c0=new THREE.Color(0x14b5bd), c1=new THREE.Color(0x0672b4), c2=new THREE.Color(0x043d88), c3=new THREE.Color(0x02214f);
   for(var i=0;i<n;i++){ var d=p[i*3]+sea.position.x-COASTX(p[i*3+2]);
     if(d<70) c.copy(c0).lerp(c1,d/70); else if(d<450) c.copy(c1).lerp(c2,(d-70)/380); else c.copy(c2).lerp(c3,Math.min(1,(d-450)/2500));
     col[i*3]=c.r; col[i*3+1]=c.g; col[i*3+2]=c.b; }
@@ -1226,7 +1226,7 @@ var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false);
   if(r) viewFromUnit(r); else bView0(); };
 
 /* ---------- bấm vào căn trên mặt bằng tầng: hiện thẻ căn, mở mặt bằng & 3D căn, view từ đúng căn ---------- */
-var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/ebf10628e94bf2125020308dac345412161198cd/projects/sun-saphia/chon-can/chon-can-app.html';
+var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/601557bb5f199525464d2565e01459fc9a18c995/projects/sun-saphia/chon-can/chon-can-app.html';
 var unitEye=null;
 // [mã, loại, u0,u1, v0,v1, hướng mặt kính chính] – cùng số liệu với công cụ chọn căn
 var UNITS=[['11','2PN',0,11.1,0,8.1,'E'],['12','STU',11.19,14.99,0,9.1,'E'],['12A','STU',14.99,18.8,0,9.1,'E'],['12B','1PN',18.8,25.02,0,9.1,'E'],['15','STU',25.02,28.82,0,9.1,'E'],['16','STU',28.82,32.64,0,9.1,'E'],['17','1PN',32.64,38.91,0,9.1,'E'],
