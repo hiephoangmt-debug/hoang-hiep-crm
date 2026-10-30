@@ -1,6 +1,6 @@
 /* Chế độ HERO: ẩn thanh điều khiển, nắng theo giờ thực ở Đà Nẵng, tự xoay chậm quanh tòa tháp, chữ chìm số điện thoại vẽ vào ảnh WebGL */
 (function(){
-  try{ wm.visible=true; wm.material.opacity=.3; placeWM(); setTimeout(placeWM,600); }catch(e){}
+  try{ wm.visible=false; }catch(e){}   /* bỏ khối logo + số ở giữa; chống chụp bằng lớp chữ chìm chéo trên trang */
   function vnHour(){ var d=new Date(); return ((d.getUTCHours()+7)%24)+d.getUTCMinutes()/60; }
   function tick(){ try{ var h=Math.max(+hourEl.min,Math.min(+hourEl.max,vnHour())); hourEl.value=h.toFixed(2); setTime(h); if(typeof refreshEnv==='function') refreshEnv(); if(hourOut){ var H=Math.floor(h),M=Math.round((h-H)*60); hourOut.textContent=(H<10?'0':'')+H+':'+(M<10?'0':'')+M; } }catch(e){} }
   function cam(){ try{
