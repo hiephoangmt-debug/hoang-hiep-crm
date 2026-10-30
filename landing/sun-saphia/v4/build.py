@@ -429,7 +429,7 @@ def mb_tuongtac(src='Web'):
     """Mặt bằng tương tác: tầng điển hình 3A–28 bấm từng căn hiện thông tin; tab các tầng đặc biệt 2, 3, 29, 30; bấm ảnh phóng to."""
     import json as _j, os
     D = _j.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'mb-units.json'), encoding='utf8'))
-    VE = RAW + 'f49e6fa292112d342083916a261a642a5fc30739/landing/sun-saphia/v4/img/mat-bang-tang-dien-hinh-ve'
+    VE = RAW + 'c588d4a0d0c28b14f38035eaf7e5801bf791d189/landing/sun-saphia/v4/img/mat-bang-tang-dien-hinh-ve'
     T = RAW + '82607488b0132bb3c6b51585b33a71fd19edd0fc/landing/sun-saphia/v4/img/mat-bang-tang-'
     paths = ''.join('<path class="mbx-u" data-u="%d" d="%s" tabindex="0" role="button" aria-label="Căn số %s"/>' % (i, u['d'], u['id']) for i, u in enumerate(D['u']))
     data = _j.dumps({'u': [[u['id'], u['t'], u['k'], u['face'], u['a']] for u in D['u']], 'I': D['INFO'], 'V': D['VIEW'], 's': src}, ensure_ascii=False)
@@ -437,11 +437,11 @@ def mb_tuongtac(src='Web'):
         '<button type="button" data-mt="%s">%s <small>%s</small></button>' % (k, n, sub.split(' · ')[0] if ' · ' in sub else sub) for k, n, sub, _, _ in TANG_F if k != '3a-28')
     pans = ('<div class="mbx-p" data-mp="dh"><div class="mbx-g"><figure class="mbx-f"><img src="%s-900.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 760px" width="1600" height="1498" loading="lazy" decoding="async" '
             'alt="Mặt bằng tầng điển hình 3A–28 Sun Saphia Residence: 28 căn/tầng gồm 19 Studio, 4 căn 1PN+1, 5 căn 2PN góc bo; phía trên là biển Đông, đường Trường Sa">'
-            '<svg viewBox="%s" aria-label="Bấm vào căn để xem thông tin">%s</svg></figure>'
+            '<svg viewBox="%s" aria-label="Bấm vào căn để xem thông tin"><defs><clipPath id="mbx-clip"><path d="%s"/></clipPath></defs><g clip-path="url(#mbx-clip)">%s</g></svg></figure>'
             '<div class="mbx-c" aria-live="polite"><span class="ey">Tầng điển hình 3A–28 · 25 tầng</span><h3>👆 Bấm vào một căn trên mặt bằng</h3>'
             '<p>Xem ngay loại căn, diện tích, hướng view và bố trí của căn đó.</p><div class="mbx-m"><div><b>19</b><span>Studio</span></div><div><b>4</b><span>1PN+1</span></div><div><b>5</b><span>2PN góc</span></div></div>'
             '<p class="mbx-b"><button type="button" class="mbx-z" data-z="%s.webp">🔍 Phóng to mặt bằng</button><button type="button" class="mbx-z" data-z="%s3a-28.webp">📐 Bản vẽ CĐT tầng này</button></p></div></div></div>') % (
-        VE, VE, VE, D['vb'], paths, VE, T)
+        VE, VE, VE, D['vb'], D['clip'], paths, VE, T)
     for k, n, sub, mix, pts in TANG_F:
         if k == '3a-28':
             continue
