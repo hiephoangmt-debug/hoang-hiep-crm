@@ -259,7 +259,7 @@ def home():
           + units_table() +
           '<div class="g2 eq" style="margin-top:26px">' + fig('mat-bang-tong-the', 'Mặt bằng tổng thể Sun Saphia Residence hướng ra biển Mỹ Khê, phía trước là công viên ven biển', 'Mặt bằng tổng thể – tối ưu tầm view biển Mỹ Khê', wm=True)
           + fig('layout-tang-3a-28', 'Layout tầng điển hình 3A–28 tòa Saphia, 28 căn mỗi tầng', 'Layout tầng 3A–28', wm=True) + '</div>'
-          + mb_ve() +
+          + mb_tuongtac() +
           '<div style="margin-top:22px">' + units_drawings(V4) + '</div>'
           '<p style="margin-top:18px"><a class="btn sm nv" href="{M}/mat-bang">Xem chi tiết mặt bằng từng loại căn →</a></p>'
           '<div id="chon-can"></div></div></section>')
@@ -414,18 +414,80 @@ def mb_ve(src='Web'):
             '<figcaption>Mặt bằng tầng điển hình 3A–28 · 28 căn/tầng · phía trên là biển Đông · bấm ảnh để xem cỡ lớn</figcaption></figure>'
             '<p style="text-align:center;margin-top:14px"><button type="button" class="btn" data-pop data-interest="%s – mặt bằng tầng điển hình, hỏi căn còn trống">Nhận danh sách căn còn trống theo tầng</button></p>') % (I, I, I, I, src)
 
+TANG_F = [('2', 'Tầng 2', 'Tầng tiện ích + 12 căn', [('Studio', 7), ('1BR+', 1), ('2BR', 4)],
+           ['Cùng tầng với <b>hồ bơi</b> và khu <b>Gym + Yoga 478 m²</b>', '2BR SP0203 có ban công <b>84,29 m²</b>, SP0203A ban công 29,59 m²', 'Studio SP0201, SP0202 có ban công ~19 m²']),
+          ('3', 'Tầng 3', '28 căn · ban công sân vườn', [('Studio', 19), ('1BR+', 4), ('2BR', 5)],
+           ['Nhiều căn có <b>ban công lớn</b> nhìn xuống mái xanh khối đế', 'Studio SP0321–SP0324 ban công <b>53,71 m²</b>, SP0320 ban công 55,32 m²', '2BR SP0303 ban công 84,29 m² – hiếm trong tòa']),
+          ('3a-28', 'Tầng 3A–28', '25 tầng điển hình · 28 căn/tầng', [('Studio', 19), ('1BR+', 4), ('2BR', 5)],
+           ['Studio 30–31 m² thông thủy, căn Studio góc rộng 40,03 m²', '1BR+ 48,98–51,11 m² · 2BR 60,30–70,21 m², căn góc bo tròn', 'Dãy căn hướng biển chạy dọc mặt trước tòa']),
+          ('29', 'Tầng 29', '26 căn · vườn trên mái', [('Studio', 19), ('1BR+', 4), ('2BR', 3)],
+           ['Cùng layout tầng điển hình, góc tòa là <b>vườn trên mái</b>', 'Tầng cao, tầm nhìn biển và thành phố thoáng', '2BR còn 3 căn: hai căn góc và căn đầu hồi']),
+          ('30', 'Tầng 30', 'Tầng cao nhất · 16 căn lớn', [('1BR', 9), ('1BR+', 6), ('2BR', 1)],
+           ['Dòng <b>1BR 62,97–73,71 m²</b> chỉ có ở tầng 30', '1BR+ 49,99–71,29 m² · 2BR SP3006 rộng <b>83,97 m²</b>', 'Số lượng ít nhất tòa – phù hợp khách muốn căn rộng, tầng cao']),]
+
+def mb_tuongtac(src='Web'):
+    """Mặt bằng tương tác: tầng điển hình 3A–28 bấm từng căn hiện thông tin; tab các tầng đặc biệt 2, 3, 29, 30; bấm ảnh phóng to."""
+    import json as _j, os
+    D = _j.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'mb-units.json'), encoding='utf8'))
+    VE = RAW + 'f49e6fa292112d342083916a261a642a5fc30739/landing/sun-saphia/v4/img/mat-bang-tang-dien-hinh-ve'
+    T = RAW + '82607488b0132bb3c6b51585b33a71fd19edd0fc/landing/sun-saphia/v4/img/mat-bang-tang-'
+    paths = ''.join('<path class="mbx-u" data-u="%d" d="%s" tabindex="0" role="button" aria-label="Căn số %s"/>' % (i, u['d'], u['id']) for i, u in enumerate(D['u']))
+    data = _j.dumps({'u': [[u['id'], u['t'], u['k'], u['face'], u['a']] for u in D['u']], 'I': D['INFO'], 'V': D['VIEW'], 's': src}, ensure_ascii=False)
+    tabs = '<button type="button" data-mt="dh" class="on" aria-selected="true">Tầng 3A–28 <small>bấm từng căn</small></button>' + ''.join(
+        '<button type="button" data-mt="%s">%s <small>%s</small></button>' % (k, n, sub.split(' · ')[0] if ' · ' in sub else sub) for k, n, sub, _, _ in TANG_F if k != '3a-28')
+    pans = ('<div class="mbx-p" data-mp="dh"><div class="mbx-g"><figure class="mbx-f"><img src="%s-900.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 760px" width="1600" height="1498" loading="lazy" decoding="async" '
+            'alt="Mặt bằng tầng điển hình 3A–28 Sun Saphia Residence: 28 căn/tầng gồm 19 Studio, 4 căn 1PN+1, 5 căn 2PN góc bo; phía trên là biển Đông, đường Trường Sa">'
+            '<svg viewBox="%s" aria-label="Bấm vào căn để xem thông tin">%s</svg></figure>'
+            '<div class="mbx-c" aria-live="polite"><span class="ey">Tầng điển hình 3A–28 · 25 tầng</span><h3>👆 Bấm vào một căn trên mặt bằng</h3>'
+            '<p>Xem ngay loại căn, diện tích, hướng view và bố trí của căn đó.</p><div class="mbx-m"><div><b>19</b><span>Studio</span></div><div><b>4</b><span>1PN+1</span></div><div><b>5</b><span>2PN góc</span></div></div>'
+            '<p class="mbx-b"><button type="button" class="mbx-z" data-z="%s.webp">🔍 Phóng to mặt bằng</button><button type="button" class="mbx-z" data-z="%s3a-28.webp">📐 Bản vẽ CĐT tầng này</button></p></div></div></div>') % (
+        VE, VE, VE, D['vb'], paths, VE, T)
+    for k, n, sub, mix, pts in TANG_F:
+        if k == '3a-28':
+            continue
+        tot = sum(c for _, c in mix)
+        pans += ('<div class="mbx-p off" data-mp="%s"><div class="mbx-g"><figure class="mbx-f mbx-zf" data-z="%s%s.webp"><img src="%s%s-900.webp" srcset="%s%s-900.webp 900w, %s%s.webp 1500w" sizes="(max-width: 760px) 100vw, 760px" width="1500" height="1105" loading="lazy" decoding="async" alt="Mặt bằng %s Sun Saphia Residence – %d căn"><span class="mbx-h">🔍 Bấm để phóng to</span></figure>'
+                 '<div class="mbx-c"><span class="ey">%s · tầng đặc biệt</span><h3>%s</h3><div class="mbx-m">%s</div><ul class="ck">%s</ul>'
+                 '<p class="mbx-b"><button type="button" class="btn sm" data-pop data-interest="%s – mặt bằng %s, hỏi căn còn trống">Nhận căn còn trống %s</button></p></div></div></div>') % (
+            k, T, k, T, k, T, k, T, k, n.lower(), tot, n, sub, ''.join('<div><b>%d</b><span>%s</span></div>' % (c, t) for t, c in mix),
+            ''.join('<li>%s</li>' % x for x in pts), src, n.lower(), n.lower())
+    css = ('<style>.mbx{margin-top:22px}.mbx-t{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}.mbx-t button{border:1px solid var(--ln,#d9dee5);background:#fff;color:var(--nv,#0A2540);font:700 15px/1.2 inherit;padding:10px 16px;border-radius:999px;cursor:pointer;text-align:left}'
+           '.mbx-t button small{display:block;font-weight:500;font-size:12px;opacity:.75}.mbx-t button.on{background:var(--nv,#0A2540);border-color:var(--nv,#0A2540);color:#fff}'
+           '.mbx-p.off{display:none}.mbx-g{display:grid;grid-template-columns:1.7fr 1fr;gap:24px;align-items:start}.mbx-f{position:relative;margin:0;border-radius:14px;overflow:hidden;background:#f7f4ee;box-shadow:0 8px 24px rgba(10,37,64,.10)}'
+           '.mbx-f img{display:block;width:100%;height:auto}.mbx-f svg{position:absolute;inset:0;width:100%;height:100%}.mbx-u{fill:transparent;stroke:transparent;stroke-width:3;cursor:pointer;transition:fill .15s}'
+           '.mbx-u:hover,.mbx-u:focus{fill:rgba(233,97,24,.22);outline:none}.mbx-u.on{fill:rgba(233,97,24,.35);stroke:#E96118}.mbx-zf{cursor:zoom-in}.mbx-h{position:absolute;right:10px;bottom:10px;background:rgba(10,37,64,.8);color:#fff;font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px}'
+           '.mbx-c{background:#fff;border:1px solid var(--ln,#e4dccd);border-radius:14px;padding:20px 22px;position:sticky;top:90px}.mbx-c h3{margin:6px 0 8px;font-size:22px;color:var(--nv,#0A2540)}.mbx-c p{margin:0 0 10px;line-height:1.5}'
+           '.mbx-m{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.mbx-m div{background:#f7f4ee;border-radius:10px;padding:8px;text-align:center}.mbx-m b{display:block;font-size:22px;color:#E96118}.mbx-m span{font-size:13px}'
+           '.mbx-b{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px!important}.mbx-z{border:1px solid var(--nv,#0A2540);background:#fff;color:var(--nv,#0A2540);font:700 14px inherit;padding:9px 14px;border-radius:999px;cursor:pointer}'
+           '.mbx-r{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:15px;margin:10px 0}.mbx-r dt{color:#6a7280}.mbx-r dd{margin:0;font-weight:600}'
+           '.mbx-lb{position:fixed;inset:0;z-index:2147483000;background:rgba(5,15,28,.92);display:flex;align-items:center;justify-content:center;padding:12px;cursor:zoom-out}.mbx-lb img{max-width:100%;max-height:100%;object-fit:contain;background:#fff;border-radius:8px}'
+           '.mbx-lb b{position:absolute;top:10px;right:16px;color:#fff;font-size:34px;line-height:1}@media(max-width:860px){.mbx-g{grid-template-columns:1fr}.mbx-c{position:static}.mbx-t button{flex:1 1 auto;padding:8px 12px;font-size:14px}}</style>')
+    js = ('<script>(function(){var r=document.currentScript.previousElementSibling,D=' + data.replace('</', '<\\/') + ';'
+          'function e(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;"}[c]})}'
+          'function m2(x){return String(x).replace(".",",")}'
+          'function lb(src){var d=document.createElement("div");d.className="mbx-lb";d.setAttribute("role","dialog");d.innerHTML="<b aria-hidden=true>×</b><img alt=\\"Mặt bằng phóng to\\" src=\\""+e(src)+"\\">";'
+          'function x(){d.remove();document.removeEventListener("keydown",k)}function k(ev){if(ev.key==="Escape")x()}d.onclick=x;document.addEventListener("keydown",k);document.body.appendChild(d)}'
+          'function show(i){var u=D.u[i],I=D.I[u[2]]||D.I[u[1]],V=D.V[u[3].charAt(0)],N={"STU":"Studio","1PN+1":"1PN+1","2PN":"2PN góc"}[u[1]];'
+          'r.querySelectorAll(".mbx-u").forEach(function(p){p.classList.toggle("on",+p.getAttribute("data-u")===i)});'
+          'var c=r.querySelector("[data-mp=dh] .mbx-c");'
+          'c.innerHTML="<span class=ey>Tầng 3A–28 · căn số "+e(u[0])+"</span><h3>Căn số "+e(u[0])+" · "+N+"</h3><dl class=mbx-r>"'
+          '+(u[4]?"<dt>Diện tích</dt><dd>"+m2(u[4][0])+" m² thông thủy · "+m2(u[4][1])+" m² tim tường</dd>":"")'
+          '+"<dt>Kích thước</dt><dd>"+e(I[1])+"</dd><dt>Hướng view</dt><dd>"+e(V[0])+"</dd><dt>Nắng</dt><dd>"+e(V[2])+"</dd></dl>"'
+          '+"<p>"+e(V[1])+"</p><p><b>Bố trí:</b> "+e(I[2])+".</p>"'
+          '+"<p class=mbx-b><button type=button class=\\"btn sm\\" data-pop data-interest=\\""+e(D.s+" – mặt bằng: căn số "+u[0]+" ("+N+", tầng 3A–28)")+"\\">Nhận giá căn số "+e(u[0])+"</button>"'
+          '+"<button type=button class=mbx-z data-z=\\""+e(r.querySelector("[data-mp=dh] .mbx-z").getAttribute("data-z"))+"\\">🔍 Phóng to</button></p>";'
+          'if(innerWidth<860)c.scrollIntoView({behavior:"smooth",block:"nearest"})}'
+          'r.addEventListener("click",function(ev){var t=ev.target.closest("[data-mt]");if(t){r.querySelectorAll("[data-mt]").forEach(function(b){var on=b===t;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});'
+          'r.querySelectorAll("[data-mp]").forEach(function(p){p.classList.toggle("off",p.getAttribute("data-mp")!==t.getAttribute("data-mt"))});try{gtag("event","mb_tang",{event_label:t.getAttribute("data-mt")})}catch(x){}return}'
+          'var u=ev.target.closest(".mbx-u");if(u){show(+u.getAttribute("data-u"));try{gtag("event","mb_can",{event_label:D.u[+u.getAttribute("data-u")][0]})}catch(x){}return}'
+          'var z=ev.target.closest("[data-z]");if(z){lb(z.getAttribute("data-z"))}});'
+          'r.addEventListener("keydown",function(ev){var u=ev.target.closest&&ev.target.closest(".mbx-u");if(u&&(ev.key==="Enter"||ev.key===" ")){ev.preventDefault();show(+u.getAttribute("data-u"))}})})();</script>')
+    return css + '<div class="mbx"><div class="mbx-t" role="tablist">' + tabs + '</div>' + pans + '</div>' + js
+
+
 def tang_viewer():
     I = RAW + '82607488b0132bb3c6b51585b33a71fd19edd0fc/landing/sun-saphia/v4/img/mat-bang-tang-'
-    F = [('2', 'Tầng 2', 'Tầng tiện ích + 12 căn', [('Studio', 7), ('1BR+', 1), ('2BR', 4)],
-          ['Cùng tầng với <b>hồ bơi</b> và khu <b>Gym + Yoga 478 m²</b>', '2BR SP0203 có ban công <b>84,29 m²</b>, SP0203A ban công 29,59 m²', 'Studio SP0201, SP0202 có ban công ~19 m²']),
-         ('3', 'Tầng 3', '28 căn · ban công sân vườn', [('Studio', 19), ('1BR+', 4), ('2BR', 5)],
-          ['Nhiều căn có <b>ban công lớn</b> nhìn xuống mái xanh khối đế', 'Studio SP0321–SP0324 ban công <b>53,71 m²</b>, SP0320 ban công 55,32 m²', '2BR SP0303 ban công 84,29 m² – hiếm trong tòa']),
-         ('3a-28', 'Tầng 3A–28', '25 tầng điển hình · 28 căn/tầng', [('Studio', 19), ('1BR+', 4), ('2BR', 5)],
-          ['Studio 30–31 m² thông thủy, căn Studio góc rộng 40,03 m²', '1BR+ 48,98–51,11 m² · 2BR 60,30–70,21 m², căn góc bo tròn', 'Dãy căn hướng biển chạy dọc mặt trước tòa']),
-         ('29', 'Tầng 29', '26 căn · vườn trên mái', [('Studio', 19), ('1BR+', 4), ('2BR', 3)],
-          ['Cùng layout tầng điển hình, góc tòa là <b>vườn trên mái</b>', 'Tầng cao, tầm nhìn biển và thành phố thoáng', '2BR còn 3 căn: hai căn góc và căn đầu hồi']),
-         ('30', 'Tầng 30', 'Tầng cao nhất · 16 căn lớn', [('1BR', 9), ('1BR+', 6), ('2BR', 1)],
-          ['Dòng <b>1BR 62,97–73,71 m²</b> chỉ có ở tầng 30', '1BR+ 49,99–71,29 m² · 2BR SP3006 rộng <b>83,97 m²</b>', 'Số lượng ít nhất tòa – phù hợp khách muốn căn rộng, tầng cao']),]
+    F = TANG_F
     tabs = ''.join('<button type="button" role="tab" data-tg="%s"%s>%s</button>' % (k, ' class="on" aria-selected="true"' if i == 0 else '', n) for i, (k, n, _, _, _) in enumerate(F))
     pans = ''
     for i, (k, n, sub, mix, pts) in enumerate(F):
@@ -458,7 +520,7 @@ def mat_bang():
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Cơ cấu', '782 căn – <b>3 loại căn</b>', 'o') + units_table() +
           '<div style="margin-top:24px">' + units_drawings(V4) + '</div></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('2', 'Layout tầng', 'Mặt bằng <b>từng tầng</b> tòa Saphia', 'n')
-          + mb_ve() + '<div style="margin-top:26px">' + tang_viewer() + '</div>' +
+          + mb_tuongtac() +
           '<div id="chon-can"></div></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('3', 'Hướng view', 'Mỗi hướng <b>một khung tranh</b>', 'y') + views() + '</div></section>')
     b += ('<section class="sec" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>mặt bằng</b>', 'o') + fq + '<h3 style="margin-top:26px">Xem thêm</h3>' + related('/mat-bang') + '</div></section>')
@@ -812,7 +874,7 @@ def ads(domain):
     b += pband('30 tầng bên <b>biển Mỹ Khê</b>', 'Căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng – sự kiện ra mắt 9:00 Chủ nhật 01/11/2026 tại Hilton Đà Nẵng.', 'ADS – dải ảnh tòa tháp')
     b += vitri_dark('vi-tri', 'ADS')
     b += ('<section class="sec alt" id="mat-bang"><div class="wrap">' + sh('04', 'Mặt bằng', 'Chọn căn trên <b>mặt bằng tầng</b>', 'n') + units_table() +
-          mb_ve('ADS') +
+          mb_tuongtac('ADS') +
           '<div style="margin-top:20px">' + units_drawings(V4) + '</div><div id="chon-can"></div></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('02', 'Tầm nhìn', 'Mỗi hướng <b>một khung tranh</b>', 'o') + views('<img class="vb" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1668w" sizes="(max-width: 760px) 100vw, 900px" width="1668" height="943" alt="Biển ngay ngoài ban công – căn hộ cao tầng mặt biển Đà Nẵng lúc hoàng hôn (ảnh minh họa)" loading="lazy" decoding="async">' % (HB, HB, HB)) + '</div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('06', 'Tiện ích', 'Sống gắn với <b>biển mỗi ngày</b>', 'y') +
