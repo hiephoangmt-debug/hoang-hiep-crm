@@ -259,6 +259,7 @@ def home():
           + units_table() +
           '<div class="g2 eq" style="margin-top:26px">' + fig('mat-bang-tong-the', 'Mặt bằng tổng thể Sun Saphia Residence hướng ra biển Mỹ Khê, phía trước là công viên ven biển', 'Mặt bằng tổng thể – tối ưu tầm view biển Mỹ Khê', wm=True)
           + fig('layout-tang-3a-28', 'Layout tầng điển hình 3A–28 tòa Saphia, 28 căn mỗi tầng', 'Layout tầng 3A–28', wm=True) + '</div>'
+          + mb_ve() +
           '<div style="margin-top:22px">' + units_drawings(V4) + '</div>'
           '<p style="margin-top:18px"><a class="btn sm nv" href="{M}/mat-bang">Xem chi tiết mặt bằng từng loại căn →</a></p>'
           '<div id="chon-can"></div></div></section>')
@@ -406,6 +407,13 @@ def bang_gia():
     return page('/bang-gia', title, desc, 'giá sun saphia residence, bảng giá sun saphia, giá căn hộ sun saphia đà nẵng, giá căn hộ mặt biển đà nẵng, vay mua sun saphia',
                 b, [article_ld(title, desc, MAIN + '/bang-gia'), cld, fld], '/bang-gia')
 
+def mb_ve(src='Web'):
+    """Bản vẽ mặt bằng tầng điển hình 3A–28 (vẽ theo tỷ lệ, có watermark) + nút nhận căn còn trống."""
+    I = RAW + 'f49e6fa292112d342083916a261a642a5fc30739/landing/sun-saphia/v4/img/mat-bang-tang-dien-hinh-ve'
+    return ('<figure class="fg" style="margin:22px 0 0"><a href="%s.webp" target="_blank" rel="noopener"><img src="%s-900.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 1000px" width="1600" height="1498" loading="lazy" decoding="async" alt="Mặt bằng tầng điển hình 3A–28 Sun Saphia Residence: 28 căn/tầng gồm 19 Studio, 4 căn 1PN+1, 5 căn 2PN góc bo; phía trên là biển Đông, đường Trường Sa"></a>'
+            '<figcaption>Mặt bằng tầng điển hình 3A–28 · 28 căn/tầng · phía trên là biển Đông · bấm ảnh để xem cỡ lớn</figcaption></figure>'
+            '<p style="text-align:center;margin-top:14px"><button type="button" class="btn" data-pop data-interest="%s – mặt bằng tầng điển hình, hỏi căn còn trống">Nhận danh sách căn còn trống theo tầng</button></p>') % (I, I, I, I, src)
+
 def tang_viewer():
     I = RAW + '82607488b0132bb3c6b51585b33a71fd19edd0fc/landing/sun-saphia/v4/img/mat-bang-tang-'
     F = [('2', 'Tầng 2', 'Tầng tiện ích + 12 căn', [('Studio', 7), ('1BR+', 1), ('2BR', 4)],
@@ -450,7 +458,7 @@ def mat_bang():
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Cơ cấu', '782 căn – <b>3 loại căn</b>', 'o') + units_table() +
           '<div style="margin-top:24px">' + units_drawings(V4) + '</div></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('2', 'Layout tầng', 'Mặt bằng <b>từng tầng</b> tòa Saphia', 'n')
-          + tang_viewer() +
+          + mb_ve() + '<div style="margin-top:26px">' + tang_viewer() + '</div>' +
           '<div id="chon-can"></div></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('3', 'Hướng view', 'Mỗi hướng <b>một khung tranh</b>', 'y') + views() + '</div></section>')
     b += ('<section class="sec" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>mặt bằng</b>', 'o') + fq + '<h3 style="margin-top:26px">Xem thêm</h3>' + related('/mat-bang') + '</div></section>')
@@ -804,6 +812,7 @@ def ads(domain):
     b += pband('30 tầng bên <b>biển Mỹ Khê</b>', 'Căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng – sự kiện ra mắt 9:00 Chủ nhật 01/11/2026 tại Hilton Đà Nẵng.', 'ADS – dải ảnh tòa tháp')
     b += vitri_dark('vi-tri', 'ADS')
     b += ('<section class="sec alt" id="mat-bang"><div class="wrap">' + sh('04', 'Mặt bằng', 'Chọn căn trên <b>mặt bằng tầng</b>', 'n') + units_table() +
+          mb_ve('ADS') +
           '<div style="margin-top:20px">' + units_drawings(V4) + '</div><div id="chon-can"></div></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('02', 'Tầm nhìn', 'Mỗi hướng <b>một khung tranh</b>', 'o') + views('<img class="vb" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1668w" sizes="(max-width: 760px) 100vw, 900px" width="1668" height="943" alt="Biển ngay ngoài ban công – căn hộ cao tầng mặt biển Đà Nẵng lúc hoàng hôn (ảnh minh họa)" loading="lazy" decoding="async">' % (HB, HB, HB)) + '</div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('06', 'Tiện ích', 'Sống gắn với <b>biển mỗi ngày</b>', 'y') +

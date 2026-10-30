@@ -182,3 +182,11 @@ Sửa ngay trong tab **CauHinh**, không cần sửa code:
 - che số và xoá số khi thu hồi;
 - báo cáo, chốt;
 - các lệnh.
+
+## Khách FourS: quản lý tự chọn sale (không tự chia)
+
+- Khách có chữ **FourS** (trang, nhu cầu hoặc nguồn) **không tự chia**. Bot gửi quản lý tin "🧑‍💼 Khách FourS chờ anh chọn sale" kèm số, nhu cầu và **nút tên từng sale**. Bấm tên ai thì giao người đó.
+- Bấm tên khác trên cùng tin để **chuyển sale** (người cũ bị thu hồi, ẩn số).
+- Sale không bấm nhận đúng hạn: khách quay về quản lý chọn lại, không tự chia.
+- Khách Saphia và dự án khác vẫn tự chia như cũ.
+- Đổi danh sách dự án chia tay: dòng `CHIA_TAY` trong tab CauHinh (ví dụ `fours,saphia`). Để trống = tự chia hết.
