@@ -530,6 +530,8 @@ if OUTN.length > .01:   # nắng chiếu vào từ phía mặt kính của căn 
 
 # ---------------- render ----------------
 sc.render.engine = 'CYCLES'; cy = sc.cycles; cy.device = 'CPU'; cy.samples = SAMPLES; cy.use_denoising = True
+try: cy.denoising_input_passes = 'RGB_ALBEDO_NORMAL'; cy.denoising_prefilter = 'ACCURATE'   # khử nhiễu giữ chi tiết (đỡ mờ)
+except Exception: pass
 try: cy.denoiser = 'OPENIMAGEDENOISE'
 except Exception: pass
 cy.max_bounces = 8; cy.diffuse_bounces = 4; cy.glossy_bounces = 3; cy.transparent_max_bounces = 12; cy.caustics_reflective = False; cy.caustics_refractive = False
