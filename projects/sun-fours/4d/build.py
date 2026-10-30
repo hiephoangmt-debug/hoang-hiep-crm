@@ -94,7 +94,7 @@ gate = rep(gate, "<div class=\"lg\">SR</div><h3>Link riêng Sun Saphia Residence
 osm_js = (REPO / 'projects/sun-fours/osm/sf-osm-scene.js').read_text(encoding='utf-8').split('\n', 1)[1].strip()
 plans_js = (REPO / 'projects/fours/plans/plans-data.js').read_text(encoding='utf-8')
 stock_js = (REPO / 'landing-pages/assets/fourstower/data/stock.js').read_text(encoding='utf-8')
-mbc_js = (H / 'src/f2-mbc.js').read_text(encoding='utf-8')
+mbc_js = (H / 'src/f2-mbc.js').read_text(encoding='utf-8') + '\n' + (H / 'src/plan-img.js').read_text(encoding='utf-8')
 data = ('<script>/*OSM-DATA*/' + osm_js + '/*/OSM-DATA*/</script>\n<script>\n' + plans_js + '\n' + stock_js + '\n' + mbc_js + '\n</script>')
 
 # --- 2. khung cảnh (giữ nguyên) ---
@@ -226,7 +226,7 @@ tail = tail[:a] + tail[b:]
 a = tail.index("if(/closeMod/.test(location.search))"); b = tail.index('loop();')
 tail = tail[:a] + "if(/closeMod/.test(location.search)) setMode('close');\n" + tail[b:]
 
-out = '\n'.join([head, gate, data, core, towers, '', sap, mid, plan, tail])
+out = '<meta charset="utf-8">\n' + '\n'.join([head, gate, data, core, towers, '', sap, mid, plan, tail])
 out = out.replace('Sun Saphia 3D', 'Sun FourS 3D')
 (H / 'sun-fours-4d.html').write_text(out, encoding='utf-8')
 print('đèn thêm', len(ROADS_ADD), 'đoạn'); print('sun-fours-4d.html', len(out) // 1024, 'KB · FourS', [round(v, 1) for v in FC], 'MM', [round(v) for v in pMM], 'NPL', [round(v) for v in pNPL], '·', hl)

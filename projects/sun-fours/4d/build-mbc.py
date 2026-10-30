@@ -31,11 +31,12 @@ for k in KEYS:
     off[k] = (ix * RES, iy * RES)          # cộng vào toạ độ tờ k để trùng tờ 8–19
 b8 = bb(D['8']['foot']); br = bb(ref['foot'])
 gx = (br[0] + br[2]) / 2 - (b8[0] + b8[2]) / 2; gy = (br[1] + br[3]) / 2 - (b8[1] + b8[3]) / 2
-out = {}
+out = {}; IMG = {}
 for k in KEYS:
     d = D[k]; dx, dy = off[k][0] + gx, off[k][1] + gy
     P = lambda p: [round(p[0] + dx, 2), round(p[1] + dy, 2)]
     Rr = lambda r: [round(r[0] + dx, 2), round(r[1] + dy, 2), round(r[2] + dx, 2), round(r[3] + dy, 2)]
+    IMG['MBC_F2_' + k] = {'src': d['src'], 'mpp': d['mpp'], 'dx': dx, 'dy': dy}
     out['F2_' + k] = {'key': 'MBC_F2_' + k, 'title': d['title'], 'foot': [P(p) for p in d['foot']], 'gardens': [],
         'walls': [Rr(r) for r in d['walls']], 'glass': [Rr(r) for r in d['glass']],
         'doors': [{'h': P(x['h']), 'l': P(x['leaf']), 'c': P(x['closed']), 'r': round(x['r'], 2)} for x in d['doors']],
@@ -45,3 +46,4 @@ FLOORS = {'1': 'F2_1', '2': 'F2_2', '3': 'F2_3', '3A': 'F2_3A', '5': 'F2_5', '6'
 for f in ['8', '9', '10', '11', '12', '12A', '15', '16', '17', '18', '19']: FLOORS[f] = 'F2_8'
 js = '/* Mặt bằng chuẩn Tòa F2 (vẽ lại từ bản gốc CĐT) – sinh bởi build-mbc.py */\nwindow.FS_MBC=' + json.dumps({'F2': {'floors': FLOORS, 'sheets': out}}, separators=(',', ':'), ensure_ascii=False) + ';\n'
 (H / 'src/f2-mbc.js').write_text(js, encoding='utf-8'); print(len(js) // 1024, 'KB')
+json.dump(IMG, open(H / 'src/f2-mbc-img.json', 'w'), indent=1)

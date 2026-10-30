@@ -24,8 +24,10 @@ function um2(x){ return String(x).replace('.',','); }
 
 // ảnh mặt bằng tầng: vẽ lại theo đường bao + căn hộ trích từ bản vẽ CĐT (đúng toạ độ khối tháp → đặt khít lên mặt cắt)
 var PLAN_TX={};
+var PIMG_BASE=(/^https?:/.test(location.href)&&/sun-fours-4d\.html/.test(location.pathname))?'plan-img/':'https://raw.githack.com/hiephoangmt-debug/hoang-hiep-crm/telegram-notify/projects/sun-fours/4d/plan-img/';
 function planTex(t,B){ var key=t+B.key; if(PLAN_TX[key]) return PLAN_TX[key];
   var A=B.foot.slice(); B.gardens.forEach(function(G){ A=A.concat(G); }); var b=bbP(A), m=1.2; b=[b[0]-m,b[1]-m,b[2]+m,b[3]+m];
+  var PI=window.FS_PIMG&&FS_PIMG[B.key]; if(PI) b=PI.slice();   // có ảnh bản vẽ CĐT: dùng đúng khung ảnh
   var W=b[2]-b[0], D=b[3]-b[1], S=Math.min(48,4096/Math.max(W,D)), c=document.createElement('canvas'); c.width=Math.ceil(W*S); c.height=Math.ceil(D*S);
   var g=c.getContext('2d'); g.setTransform(S,0,0,S,-b[0]*S,-b[1]*S); g.lineJoin='round';
   function pth(P){ g.beginPath(); P.forEach(function(p,i){ if(i) g.lineTo(p[0],p[1]); else g.moveTo(p[0],p[1]); }); g.closePath(); }
@@ -44,6 +46,17 @@ function planTex(t,B){ var key=t+B.key; if(PLAN_TX[key]) return PLAN_TX[key];
     var s2=um2(u.tt)+' m²', f2=Math.min(fs*.6,w/(s2.length*.6+.6)); if(f2>=.42){ g.font='600 '+f2+'px "Be Vietnam Pro",Arial,sans-serif'; g.fillText(s2,p[0],p[1]+fs*.55); } });
   g.font='700 1px "Be Vietnam Pro",Arial,sans-serif'; g.textAlign='left'; g.fillStyle='#0A2540'; g.fillText('Tòa '+t+' · minh họa, thông số theo CĐT',b[0]+.4,b[3]-.6);
   var tx=new THREE.CanvasTexture(c); tx.encoding=THREE.sRGBEncoding; tx.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy());
+  if(PI){ var im=new Image(); im.crossOrigin='anonymous';   // ảnh mặt bằng gốc CĐT đặt đúng toạ độ thân tháp, thêm số căn để dễ bấm
+    im.onload=function(){ var c2=document.createElement('canvas'); c2.width=im.naturalWidth; c2.height=im.naturalHeight; var g2=c2.getContext('2d'), k=c2.width/(b[2]-b[0]);
+      g2.drawImage(im,0,0); g2.setTransform(k,0,0,k,-b[0]*k,-b[1]*k);
+      var mk=document.createElement('canvas'); mk.width=c2.width; mk.height=c2.height; var gm=mk.getContext('2d'); gm.setTransform(k,0,0,k,-b[0]*k,-b[1]*k); gm.fillStyle=gm.strokeStyle='#000'; gm.lineWidth=7; gm.lineJoin='round';   // chỉ giữ phần tòa nhà + sân vườn (bỏ chú thích bên ngoài)
+      [B.foot].concat(B.gardens||[]).forEach(function(P){ gm.beginPath(); P.forEach(function(q,i){ if(i) gm.lineTo(q[0],q[1]); else gm.moveTo(q[0],q[1]); }); gm.closePath(); gm.fill(); gm.stroke(); });
+      g2.save(); g2.setTransform(1,0,0,1,0,0); g2.globalCompositeOperation='destination-in'; g2.drawImage(mk,0,0); g2.restore();
+      g2.globalCompositeOperation='source-over'; g2.textAlign='center'; g2.textBaseline='middle'; g2.lineJoin='round';
+      B.units.forEach(function(u){ var p=labelPt(u.poly), ub=bbP(u.poly), fs=Math.max(.7,Math.min(1.25,(ub[2]-ub[0])/(u.code.length*.75+.8)));
+        g2.font='800 '+fs+'px "Be Vietnam Pro",Arial,sans-serif'; g2.lineWidth=fs*.28; g2.strokeStyle='rgba(255,255,255,.95)'; g2.strokeText(u.code,p[0],p[1]); g2.fillStyle='#0A2540'; g2.fillText(u.code,p[0],p[1]); });
+      tx.image=c2; tx.needsUpdate=true; };
+    im.src=PIMG_BASE+B.key+'.webp'; }
   return (PLAN_TX[key]={tx:tx,b:b}); }
 var planOn=false, bPlan=document.getElementById('mPlan'), curT='F2', PM={}, CAPS={};
 renderer.localClippingEnabled=true;
@@ -53,13 +66,21 @@ function planMesh(t){ if(PM[t]) return PM[t]; var m=new THREE.Mesh(new THREE.Pla
   m.geometry.rotateX(-Math.PI/2); m.renderOrder=3; m.visible=false; TOWERS[t].grp.add(m); return (PM[t]=m); }
 function capMesh(t){ if(CAPS[t]) return CAPS[t]; var T0=TOWERS[t], g=new THREE.ExtrudeGeometry(shapeOf(T0.P,.6,T0.cx,T0.cy),{depth:.3,bevelEnabled:false}); g.rotateX(-Math.PI/2);
   var m=new THREE.Mesh(g,M(0xe9e5dc)); m.visible=false; T0.grp.add(m); return (CAPS[t]=m); }
+// tường, kính, cửa đúng mặt bằng chuẩn dựng 3D cao 1,2 m trên mặt cắt (Tòa F2)
+var WALL3={}, wallM=M(0x2b3440,{roughness:.8}), glassM=M(0x5fa3c9,{roughness:.2,metalness:.2,transparent:true,opacity:.75}), doorM=M(0xb88a5c,{roughness:.6});
+function walls3(t,B){ if(!B.walls) return null; var k=t+B.key; if(WALL3[k]) return WALL3[k]; var T0=TOWERS[t], g=new THREE.Group(), bx=new THREE.BoxGeometry(1,1,1); bx.translate(0,.5,0);
+  function inst(L,mat,h){ var im=new THREE.InstancedMesh(bx,mat,L.length), o=new THREE.Object3D(); L.forEach(function(r,i){ o.position.set((r[0]+r[2])/2-T0.cx,0,(r[1]+r[3])/2-T0.cy); o.scale.set(Math.max(.04,r[2]-r[0]),h,Math.max(.04,r[3]-r[1])); o.updateMatrix(); im.setMatrixAt(i,o.matrix); }); im.castShadow=true; g.add(im); }
+  inst(B.walls,wallM,1.2); inst(B.glass,glassM,1.0);
+  var dl=B.doors.map(function(d){ var x0=Math.min(d.h[0],d.c[0]), x1=Math.max(d.h[0],d.c[0]), y0=Math.min(d.h[1],d.c[1]), y1=Math.max(d.h[1],d.c[1]); return [x0,y0,x1,y1]; });   // cửa đóng: tấm gỗ thấp đúng ô cửa
+  inst(dl.map(function(r){ var w=r[2]-r[0], d=r[3]-r[1]; return w>d?[r[0],(r[1]+r[3])/2-.03,r[2],(r[1]+r[3])/2+.03]:[(r[0]+r[2])/2-.03,r[1],(r[0]+r[2])/2+.03,r[3]]; }),doorM,.9);
+  g.visible=false; T0.grp.add(g); return (WALL3[k]=g); }
 function updPlan(doFly){
   var f=+floorEl.value, y=FL[f];
   CLIP.constant=planOn?y+.5:1e5;
   ['F1','F2','F3','F5'].forEach(function(t){ var B=bandAt(t,f), T0=TOWERS[t];
     if(B){ var P=planTex(t,B), m=planMesh(t); m.material.map=P.tx; m.material.needsUpdate=true; m.scale.set(P.b[2]-P.b[0],1,P.b[3]-P.b[1]);
-      m.position.set((P.b[0]+P.b[2])/2-T0.cx,y+.42,(P.b[1]+P.b[3])/2-T0.cy); m.visible=planOn; m.userData={t:t,B:B}; if(CAPS[t]) CAPS[t].visible=false; }
-    else { if(PM[t]) PM[t].visible=false; var c=capMesh(t); c.position.y=y+.2; c.visible=planOn; } });
+      m.position.set((P.b[0]+P.b[2])/2-T0.cx,y+.42,(P.b[1]+P.b[3])/2-T0.cy); m.visible=planOn; m.userData={t:t,B:B}; for(var wk in WALL3) if(WALL3[wk].parent===T0.grp) WALL3[wk].visible=false; var w3=false;   // anh Hiệp: dùng nguyên ảnh mặt bằng CĐT, không dựng lại tường if(w3){ w3.position.y=y+.44; w3.visible=true; } if(CAPS[t]) CAPS[t].visible=false; }
+    else { for(var wk2 in WALL3) if(WALL3[wk2].parent===T0.grp) WALL3[wk2].visible=false; if(PM[t]) PM[t].visible=false; var c=capMesh(t); c.position.y=y+.2; c.visible=planOn; } });
   floorOut.textContent='Tầng '+FN(f)+(planOn?' · bấm căn':'');
   if(planOn) planFloorUI(f);
   if(doFly) flyPlan();
