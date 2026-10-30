@@ -75,7 +75,9 @@ GATE = r"""    function sentL(){ try{ if(localStorage.getItem('ss4d_ok')) return
         g.querySelector('.c').innerHTML='<div class="lk" style="background:#1e9e5a">✓</div><h3>Cảm ơn '+(n?('anh/chị '+n.replace(/[<>&]/g,'')):'anh/chị')+'!</h3><p class="sb" style="margin:0">Mời xem tiếp mô hình. Anh Hiệp sẽ gửi bảng giá qua Zalo sớm.</p>';
         setTimeout(function(){ g.remove(); box.classList.remove('lock'); try{ box.querySelector('iframe').contentWindow.postMessage({ss4dHero:'play'},'*'); }catch(e){} },1500); };
     }
-    function arm(){ if(sentL()) return; clearTimeout(gT); gT=setTimeout(function(){ var r=box.getBoundingClientRect(); if(r.bottom>0&&r.top<innerHeight) gate(); else { var io2=new IntersectionObserver(function(es){ if(es[0].isIntersecting){ io2.disconnect(); gate(); } }); io2.observe(box); } },25000); }
+    function arm(){ if(sentL()) return; var seen=0, last=Date.now(); clearInterval(gT); gT=setInterval(function(){ var now=Date.now(), dt=Math.min(now-last,5000); last=now; if(gOn||sentL()){ clearInterval(gT); return; }
+      if(document.visibilityState==='hidden') return; var r=box.getBoundingClientRect(), vh=innerHeight, vis=Math.min(r.bottom,vh)-Math.max(r.top,0);
+      if(vis>r.height*0.5||vis>vh*0.6) seen+=dt; if(seen>=60000){ clearInterval(gT); gate(); } },1000); }
 """
 out = out.replace("    function load(){ if (done) return; done = true;", GATE + "    function load(){ if (done) return; done = true;")
 out = out.replace("box.innerHTML = ''; box.appendChild(f);", "box.innerHTML = ''; box.appendChild(f); arm();")

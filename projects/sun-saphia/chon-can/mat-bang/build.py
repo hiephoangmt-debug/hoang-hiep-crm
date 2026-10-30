@@ -18,7 +18,9 @@ css = ('.hd,#dl3d,#dl2d,#rc .note{display:none!important}'
        '#ssHint{max-width:1060px;margin:10px auto 0;padding:12px 16px;background:#fff3e8;border:1.5px solid #ffd2b3;border-radius:12px;color:#0A2540;font-size:14.5px;line-height:1.5;text-align:center}'
        '@media(max-width:820px){#ssHint{margin:10px 12px 0}body.picked #rc{width:calc(100%% - 12px)}}') % ()
 js = r'''(function(){
-  function H(){ try{ parent.postMessage({sscc:'h2',h:Math.ceil(document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  function cH(){ var m=0, k=document.body.children; for(var i=0;i<k.length;i++){ var e=k[i]; if(e.id==='ssBg'||/^(SCRIPT|STYLE|LINK)$/.test(e.tagName)) continue; var r=e.getBoundingClientRect(); if(r.height>0&&r.bottom>m) m=r.bottom; }
+    var rc=document.getElementById('rc'); if(document.body.classList.contains('picked')&&rc){ var b=rc.getBoundingClientRect().bottom+12; if(b>m) m=b; } return Math.ceil(m+(window.scrollY||0)+10); }
+  function H(){ try{ parent.postMessage({sscc:'h2',h:cH()},'*'); }catch(e){} }
   setInterval(H,700); addEventListener('load',H); addEventListener('resize',H);
   function code(){ var i=document.getElementById('info'); var m=i&&/SP\d{3,4}[A-Z]?/.exec(i.textContent||''); return m?m[0]:''; }
   function typ(){ var i=document.getElementById('info'), t=(i&&i.textContent)||''; return /2PN/.test(t)?'2PN':/1PN\+1/.test(t)?'1PN+1':/1BR/.test(t)?'1BR':'Studio'; }
@@ -29,14 +31,14 @@ js = r'''(function(){
       l.onclick=function(){ var f=document.getElementById('floor'); try{ parent.postMessage({sscc:'lead',unit:code(),type:typ(),floor:f?f.value:''},'*'); }catch(e){} }; }
     l.textContent='Nhận giá & tình trạng căn '+(c||'này')+' →'; }
   function bg(){ var g=document.getElementById('ssBg'); if(!g){ g=document.createElement('div'); g.id='ssBg'; document.body.appendChild(g); g.onclick=close; }
-    g.style.height=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)+'px'; return g; }
-  function close(){ document.body.classList.remove('picked'); H(); }
+    g.style.height=cH()+'px'; return g; }
+  function close(){ document.body.classList.remove('picked'); var g=document.getElementById('ssBg'); if(g) g.style.height='0'; H(); }
   addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
   document.addEventListener('click',function(e){ var u=e.target.closest&&e.target.closest('#plan .u'); if(!u) return;
     var first=!document.body.classList.contains('picked'); document.body.classList.add('picked');
     var rc=document.getElementById('rc'), w=document.querySelector('.wrap');
     if(!document.getElementById('ssX')){ var x=document.createElement('button'); x.type='button'; x.id='ssX'; x.setAttribute('aria-label','Đóng'); x.textContent='×'; x.onclick=close; rc.insertBefore(x,rc.firstChild); }
-    var top=u.getBoundingClientRect().top-w.getBoundingClientRect().top-(innerWidth<=820?60:140); rc.style.top=Math.max(8,top)+'px';
+    var top=u.getBoundingClientRect().top-w.getBoundingClientRect().top-(innerWidth<=820?60:140); var lim=w.offsetHeight-rc.offsetHeight-8; if(lim>8&&top>lim) top=lim; rc.style.top=Math.max(8,top)+'px';
     bg();
     setTimeout(function(){ try{ dispatchEvent(new Event('resize')); }catch(x){} lead(); bg(); H();
       try{ parent.postMessage({sscc:'scrollrc',y:rc.getBoundingClientRect().top},'*'); }catch(x){} },first?80:20);
