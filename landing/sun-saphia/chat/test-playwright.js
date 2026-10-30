@@ -35,7 +35,7 @@ async function send(page,t){ await page.fill('.hhc-i input',t); await page.press
    ['cho thue dc bn 1 thang', r=>/8–9,5 triệu/.test(r)&&/muaban\.net/.test(r)&&/không (cam kết|phải cam kết)/.test(r), 'cho thuê: số liệu có nguồn, không cam kết'],
    ['đắt quá', r=>/hiểu|cân nhắc|vốn/.test(r), 'chê đắt'],
    ['co lua dao ko vay', r=>/không thu/.test(r), 'nghi lừa đảo'],
-   ['em là máy trả lời à', r=>/không phải người thật|trợ lý trả lời nhanh/.test(r), 'hỏi có phải máy'],
+   ['em là máy trả lời à', r=>/trợ lý tự động/.test(r), 'hỏi có phải máy'],
    ['xyz qwe abc', r=>/chưa rõ|rõ hơn/.test(r), 'câu lạ lần 1: hỏi lại'],
    ['mnb vcx lkj', r=>/chuyển anh Hiệp/.test(r), 'câu lạ lần 2: chuyển anh Hiệp'],
    ['dm trả lời gì kỳ vậy', r=>/xin lỗi/.test(r), 'văng tục: xin lỗi, chuyển anh Hiệp'],
