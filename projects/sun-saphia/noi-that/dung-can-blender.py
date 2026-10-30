@@ -212,7 +212,7 @@ for _pt in PARTS:
                 curved = x0 != x1 and y0 != y1; short = (t1 - t0) < .9 or curved; ov = 0 if curved else (.035 if short else 0)   # kính bo cong: không đố đứng, không chồng mép (hết sọc đen)   # góc kính cong ghép từ nhiều đoạn ngắn: không đố đứng, khung nối liền (hết răng cưa)
                 if curved: CG.append((a + u * t0, a + u * t1))   # kính cong: dựng 1 tấm liền mạch sau
                 elif not (TOUR and inner) and not os.environ.get('NOGLASS'): piece(t0 - ov, t1 + ov, 0, H - .06, .012, GLASS, 'kinh')
-                if curved: jz = (len(CG) % 3) * .004; piece(t0 - .06, t1 + .06, H - .16 - jz, .2, .5, CEIL, 'tran-vien'); piece(t0 - .02, t1 + .02, 0, .04, .04, ALU)   # lệch vài mm: hết nhiễu tam giác đen
+                if curved: jz = (len(CG) % 3) * .004; piece(t0 - .06, t1 + .06, H - .1 - jz, .14, .16, CEIL, 'tran-vien'); piece(t0 - .02, t1 + .02, 0, .04, .04, ALU)   # lệch vài mm: hết nhiễu tam giác đen
                 else: piece(t0 - ov, t1 + ov, H - .08, .08, .07, ALU); piece(t0 - ov, t1 + ov, 0, .05, .07, ALU)
                 n = max(1, round((t1 - t0) / 1.3))
                 for j in range(n + 1):
