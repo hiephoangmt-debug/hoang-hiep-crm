@@ -27,7 +27,7 @@ async function send(page,t){ await page.fill('.hhc-i input',t); await page.press
   console.log('\n=== '+file+' – hội thoại ban ngày');
   const {ctx,page,sent,errs}=await setup(b,{file,q:'?utm_source=google&utm_campaign=ss-test&gclid=abc',time:'2026-10-19T10:00:00+07:00'});
   await openChat(page);
-  const greet=(await page.$$eval('.hhc-bot',e=>e.map(x=>x.innerText)))[0]||''; ok(/trợ lý trả lời nhanh của anh Hoàng Hiệp/.test(greet),'chào: tự giới thiệu là trợ lý trả lời nhanh');
+  const greet=(await page.$$eval('.hhc-bot',e=>e.map(x=>x.innerText)))[0]||''; ok(/trợ lý của anh Hiệp – Giám đốc kinh doanh Sun Saphia Residence/.test(greet),'chào: tự giới thiệu là trợ lý của anh Hiệp');
   const T=[
    ['giá bao nhiêu vậy em', r=>/chưa công bố/.test(r) && !/\d+([.,]\d+)?\s*(tỷ|ty)/i.test(r), 'hỏi giá: không nêu giá'],
    ['o dau vay', r=>/Võ Nguyên Giáp/.test(r), 'vị trí (không dấu)'],
