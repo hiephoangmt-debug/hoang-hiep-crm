@@ -172,7 +172,7 @@ COPY_FIX = [
     ('It can be view from your Home.', 'Biển ngay ngoài ban công.'),
     ('Giữ chỗ, ký hợp đồng đúng quy trình chủ đầu tư', 'Giữ chỗ, ký hợp đồng đúng quy trình chủ đầu tư; tiền đặt chỗ nộp vào tài khoản TATILAND/chủ đầu tư, không qua tài khoản cá nhân'),
     ('<b>0 đồng</b><span>Không thu tiền giữ chỗ</span>', '<b>Miễn phí</b><span>Đăng ký nhận thông tin miễn phí</span>'),
-    ('Ưu tiên người đăng ký sớm', 'Đại lý phân phối chính thức TATILAND'),
+    ('Ưu tiên người đăng ký sớm', 'Bảng giá gốc · gửi qua Zalo'),
     ('<li>Ưu tiên chọn căn view biển trước ngày mở bán</li><li>Không thu tiền giữ chỗ</li>', '<li>Hướng dẫn chọn căn và đặt chỗ theo quy trình chính thức</li><li>Đăng ký nhận thông tin miễn phí</li>'),
     ('Bây giờ có phải đặt cọc để giữ giá?', 'Đặt chỗ Sun Saphia Residence thế nào?'),
     ('Bây giờ có phải đặt cọc không?', 'Đặt chỗ Sun Saphia Residence thế nào?'),

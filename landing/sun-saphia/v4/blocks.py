@@ -307,6 +307,5 @@ def popup():
             # Không chồng popup: khách đã để số thì thôi; đang có ô mở khóa 4D hoặc khung chat thì đợi
             'function lead(){try{for(var i=0;i<localStorage.length;i++)if(/^(hhc_sent_|ss4d_ok)/.test(localStorage.key(i)))return true}catch(x){}return false}'
             'function bz(){return document.body.classList.contains("ss4d-gate")||!!document.querySelector(".hhc-b.on")}'
-            'function auto(){if(shown||lead()||document.querySelector(".hhc-ok"))return;if(bz()){setTimeout(auto,10000);return}if(once("ssPopT"))op("tự mở sau 45 giây");}setTimeout(auto,45000);'
-            'document.addEventListener("mouseout",function(e){if(!e.relatedTarget&&e.clientY<8&&!shown&&innerWidth>900&&!lead()&&!bz()&&once("ssPopE"))op("sắp rời trang");});'
+            'function auto(){if(shown||lead()||document.querySelector(".hhc-ok"))return;if(bz()){setTimeout(auto,10000);return}if(once("ssPopT"))op("tự mở sau 45 giây");}/* tắt tự mở: popup chỉ hiện khi khách bấm nút */'
             '})();</script>') % SK
