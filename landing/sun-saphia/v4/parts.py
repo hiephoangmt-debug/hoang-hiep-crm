@@ -13,7 +13,7 @@ TEL_S = '0904 567 009'
 ZALO = 'https://zalo.me/0904567009'
 UPDATED = '24/10/2026'
 CC_SHA = '0bccc5a6effc3f93a94da42b0bce243f583ab252'
-D4_SHA = '856584a8acecb38c4000d42f244f6fcc9741b5ed'
+D4_SHA = '55c690b48ee878f069761663cdee51001eac3d5a'
 SLOGAN = '<p class="slogan">Trước mặt là <b>Biển</b> · Sau lưng là <b>Sông</b> · Bên cạnh là <b>Núi</b></p>'
 
 def esc(s):
@@ -132,7 +132,7 @@ def tail(with_tools):
     b = s.index('</body>')
     t = s[a:b]
     t = re.sub(r'hoang-hiep-crm@[0-9a-f]{40}/projects/sun-saphia/chon-can/chon-can-embed\.js', 'hoang-hiep-crm@' + CC_SHA + '/projects/sun-saphia/chon-can/mat-bang/chon-can-embed.js', t)   # bản chỉ mặt bằng
-    t = re.sub(r'hoang-hiep-crm@[0-9a-f]{40}/projects/sun-saphia/4d/sun-saphia-4d-embed\.js', 'hoang-hiep-crm@' + D4_SHA + '/projects/sun-saphia/4d/sun-saphia-4d-embed.js', t)
+    t = re.sub(r'hoang-hiep-crm@[0-9a-f]{40}/projects/sun-saphia/4d/sun-saphia-4d-embed\.js', 'hoang-hiep-crm@' + D4_SHA + '/projects/sun-saphia/4d/web/sun-saphia-4d-embed.js', t)
     if not with_tools:
         x = t.index('<!-- 4D + CHỌN CĂN 3D -->'); y = t.index('<!-- /4D -->') + len('<!-- /4D -->')
         t = t[:x] + t[y:]
