@@ -61,7 +61,7 @@
     }
     function arm(){ if(sentL()) return; var seen=0, last=Date.now(); clearInterval(gT); gT=setInterval(function(){ var now=Date.now(), dt=Math.min(now-last,5000); last=now; if(gOn||sentL()){ clearInterval(gT); return; }
       if(document.visibilityState==='hidden') return; var r=box.getBoundingClientRect(), vh=innerHeight, vis=Math.min(r.bottom,vh)-Math.max(r.top,0);
-      if(vis>r.height*0.5||vis>vh*0.6) seen+=dt; if(seen>=60000){ clearInterval(gT); gate(); } },1000); }
+      if(vis>r.height*0.5||vis>vh*0.6) seen+=dt; if(seen>=30000){ clearInterval(gT); gate(); } },1000); }
     function load(){ if (done) return; done = true;
       var f = document.createElement('iframe'); f.title = 'Mô hình Sun Saphia'; f.setAttribute('allow', 'fullscreen');
       f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0'; box.oncontextmenu = function(){ return false; }; f.srcdoc = DOC; box.innerHTML = ''; box.appendChild(f); arm();

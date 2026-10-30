@@ -77,7 +77,7 @@ GATE = r"""    function sentL(){ try{ if(localStorage.getItem('ss4d_ok')) return
     }
     function arm(){ if(sentL()) return; var seen=0, last=Date.now(); clearInterval(gT); gT=setInterval(function(){ var now=Date.now(), dt=Math.min(now-last,5000); last=now; if(gOn||sentL()){ clearInterval(gT); return; }
       if(document.visibilityState==='hidden') return; var r=box.getBoundingClientRect(), vh=innerHeight, vis=Math.min(r.bottom,vh)-Math.max(r.top,0);
-      if(vis>r.height*0.5||vis>vh*0.6) seen+=dt; if(seen>=60000){ clearInterval(gT); gate(); } },1000); }
+      if(vis>r.height*0.5||vis>vh*0.6) seen+=dt; if(seen>=30000){ clearInterval(gT); gate(); } },1000); }
 """
 out = out.replace("    function load(){ if (done) return; done = true;", GATE + "    function load(){ if (done) return; done = true;")
 out = out.replace("box.innerHTML = ''; box.appendChild(f);", "box.innerHTML = ''; box.appendChild(f); arm();")
