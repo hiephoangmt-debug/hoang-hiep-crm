@@ -53,6 +53,9 @@ var MAC_DINH = {
   DU_AN_CHIA: 'saphia,shaphia', // khách cũ (đã có trong CRM) gửi lại từ web mà "Dự án quan tâm" có chữ này cũng được chia
   CHIA_TAY: 'fours',          // khách có chữ này (trang / nhu cầu / nguồn) KHÔNG tự chia: bot gửi quản lý kèm nút tên sale để chọn người nhận; để trống = tự chia hết
   NHOM_RIENG: 'fours,saphia', // khách có chữ này (trang / nhu cầu / nguồn) tính lượt FourS–Saphia; còn lại là dự án khác
+  TELESALE_SHEET_ID: '',     // file báo cáo telesale (tab "Data 01", "Data 02"…): ai báo cáo hết số đang giữ thì tự cấp thêm; để trống = tắt
+  TELESALE_THEM: 1,          // mỗi lần giao ngần này số (1 = chia từng số: gọi xong, báo cáo xong mới giao số tiếp)
+  TELESALE_GIO_HAN: 17,      // hạn báo cáo: giờ này trong ngày được giao (giao sát giờ cộng 30–60 phút; sau giờ này / Chủ nhật thì sang ngày làm việc sau)
   SLIDE_CDT: 'https://www.sun-saphia-residence.com/trinh-chieu',    // lệnh /tailieu – slide dự án theo tài liệu chủ đầu tư (gửi khách được)
   SLIDE_NOI_BO: 'https://www.sun-saphia-residence.com/dao-tao-sale' // lệnh /tailieu – slide nội bộ đào tạo sale (không gửi khách)
 };
@@ -305,8 +308,97 @@ function chayMoiPhut() {
   CH_NHO_ = null;   // đọc lại CauHinh mới nhất cho lần chạy này
   /* Nút bấm của sale được xử lý trước và xen giữa các việc nặng, để không phải chờ chia data xong */
   var bd = Date.now();
-  try { capNhatTieuDe_(); xuLyTinNhan_(); nhanKhachMoi_(); xuLyTinNhan_(); nhapData_(bd + 25000); xuLyTinNhan_(); kiemTraHan_(); xuLyTinNhan_(); }
+  try { capNhatTieuDe_(); xuLyTinNhan_(); nhanKhachMoi_(); xuLyTinNhan_(); nhapData_(bd + 25000); xuLyTinNhan_(); try { capTelesale_(); } catch (e) {} xuLyTinNhan_(); kiemTraHan_(); xuLyTinNhan_(); }
   finally { lock.releaseLock(); }
+}
+
+/* ======================= DATA TELESALE: CẤP THEO ĐỢT =======================
+   File báo cáo riêng (không đụng lượt FourS/Saphia). Dòng 9 trở xuống: A Dự án | B SĐT | C Nhân sự | D Tình trạng | E Giao lúc | F Hạn.
+   Bạn nào báo cáo hết số đang giữ (cột D đã điền) thì cấp thêm số tiếp theo trong kho (dòng chưa có tên), giữ đúng thứ tự.
+   Chưa gọi xong thì không cấp thêm. Không thu hồi: khách nét bạn đó giữ luôn. */
+function hanTele_(t) {
+  var G = num('TELESALE_GIO_HAN'), d = new Date(t + 7 * 3600000), h = vnHour(t);
+  function luc(x) { return Date.UTC(x.getUTCFullYear(), x.getUTCMonth(), x.getUTCDate(), G) - 7 * 3600000; }
+  if (d.getUTCDay() === 0 || h >= G) {
+    do { d = new Date(d.getTime() + 86400000); } while (d.getUTCDay() === 0);
+    return luc(d);
+  }
+  var con = G - h;
+  return luc(d) + (con < 1 ? 60 : con < 1.5 ? 30 : 0) * 60000;
+}
+var TT_TELE = ['Không nghe máy', 'Thuê bao / sai số', 'Gọi lại sau', 'Đã gọi – đang tư vấn', 'Quan tâm – đã gửi thông tin', 'Hẹn gặp / xem dự án', 'Không nhu cầu', 'Môi giới'];
+function teleId_() { var id = String(cfg('TELESALE_SHEET_ID') || '').trim(), m = id.match(/\/d\/([a-zA-Z0-9_-]+)/); return m ? m[1] : id; }
+function chuanTen_(x) { return String(x || '').toLowerCase().replace(/\s+/g, ' ').trim(); }
+function nutTele_(tab, dong) {
+  var n = TT_TELE.map(function (t, i) { return {text: t, callback_data: 'ts:' + tab + ':' + dong + ':' + i}; }), o = [];
+  for (var i = 0; i < n.length; i += 2) o.push(n.slice(i, i + 2));
+  return o;
+}
+function capTelesale_() {
+  var id = teleId_(); if (!id) return;
+  if (!trongGio(Date.now())) return;   // ngoài giờ làm việc không giao
+  var ss; try { ss = SpreadsheetApp.openById(id); } catch (e) { return; }
+  var bang = [], con = {}, kho = [];
+  ss.getSheets().forEach(function (sh) {
+    if (!/^data\s*\d+/i.test(sh.getName())) return;
+    var n = sh.getLastRow(); if (n < 9) return;
+    var v = sh.getRange(9, 1, n - 8, 6).getValues(), b = {sh: sh, v: v, doi: false}; bang.push(b);
+    v.forEach(function (r, i) {
+      var ten = String(r[2] || '').trim();
+      if (ten) { con[ten] = (con[ten] || 0) + (String(r[3] || '').trim() ? 0 : 1); }
+      else if (String(r[1] || '').replace(/\D/g, '').length >= 9) kho.push({b: b, i: i});
+    });
+  });
+  /* 1. Ai đã báo cáo hết số đang giữ thì giao số tiếp trong kho (đúng thứ tự) */
+  var xong = Object.keys(con).filter(function (t) { return con[t] === 0; });
+  for (var i = xong.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), x = xong[i]; xong[i] = xong[j]; xong[j] = x; }
+  var bay = Date.now(), han = hanTele_(bay), soThem = Math.max(1, num('TELESALE_THEM'));
+  xong.forEach(function (ten) {
+    var lay = kho.splice(0, soThem); if (!lay.length) return;
+    lay.forEach(function (o) { var r = o.b.v[o.i]; r[2] = ten; r[4] = new Date(bay); r[5] = new Date(han); o.b.doi = true; });
+    log_(ten, 'Giao data telesale', lay.length === 1 ? normPhone(lay[0].b.v[lay[0].i][1]) : '', lay.length + ' số, hạn ' + fmt(han));
+  });
+  bang.forEach(function (b) {
+    if (!b.doi) return;
+    b.sh.getRange(9, 3, b.v.length, 1).setValues(b.v.map(function (r) { return [r[2]]; }));
+    b.sh.getRange(9, 5, b.v.length, 2).setValues(b.v.map(function (r) { return [r[4], r[5]]; }));
+  });
+  /* 2. Số đang giữ chưa báo cáo mà chưa nhắn sale thì nhắn kèm nút báo cáo (bấm là ghi thẳng vào file) */
+  var daGui = JSON.parse(P().getProperty('TELESALE_DA_GUI') || '{}'), conGui = {}, sales = rows_('Sale', T_SALE);
+  bang.forEach(function (b) {
+    var tab = b.sh.getName();
+    b.v.forEach(function (r, i) {
+      var ten = String(r[2] || '').trim(); if (!ten || String(r[3] || '').trim()) return;
+      var k = tab + '!' + (i + 9) + '!' + chuanTen_(ten);
+      if (daGui[k]) { conGui[k] = 1; return; }
+      var s = sales.filter(function (x) { return chuanTen_(x.ten) === chuanTen_(ten); })[0]; if (!s || !s.chat_id) return;
+      var hn = r[5] instanceof Date ? r[5].getTime() : 0;
+      gui_(s.chat_id, '📞 <b>Data telesale – số của bạn</b>\n📱 <b>' + esc(normPhone(r[1])) + '</b> · ' + esc(String(r[0] || '').trim()) + (hn ? '\n⏱ Hạn báo cáo: <b>trước ' + fmt(hn) + '</b>' : '') +
+        '\nGọi xong bấm tình trạng bên dưới, bot tự ghi báo cáo và giao số tiếp.', nutTele_(tab, i + 9));
+      conGui[k] = 1;
+    });
+  });
+  P().setProperty('TELESALE_DA_GUI', JSON.stringify(conGui));
+  if (!kho.length && !P().getProperty('TELESALE_HET')) {
+    P().setProperty('TELESALE_HET', '1');
+    baoQL_('📞 <b>Data telesale</b>: kho đã giao hết.\nDán thêm số vào cuối tab Data (để trống cột Nhân sự) là bot tự giao tiếp.');
+  }
+  if (kho.length) P().deleteProperty('TELESALE_HET');
+}
+/* Sale bấm nút tình trạng trên Telegram: ghi vào cột D file telesale rồi giao số tiếp ngay */
+function bamTele_(q, parts, tl) {
+  var s = timSale_(String(q.from.id)), tt = TT_TELE[Number(parts[3])], dong = Number(parts[2]);
+  if (!s || !tt || !dong) return tl('Không hợp lệ');
+  var ss; try { ss = SpreadsheetApp.openById(teleId_()); } catch (e) { return tl('Không mở được file'); }
+  var sh = ss.getSheetByName(parts[1]); if (!sh) return tl('Không thấy tab ' + parts[1]);
+  var r = sh.getRange(dong, 1, 1, 4).getValues()[0], sdt = esc(normPhone(r[1]));
+  if (chuanTen_(r[2]) !== chuanTen_(s.ten)) { sua_(q.message.chat.id, q.message.message_id, '📱 ' + sdt + ' – số này không còn giao cho bạn.'); return tl('Số này không còn của bạn'); }
+  if (String(r[3] || '').trim()) { sua_(q.message.chat.id, q.message.message_id, '📱 <b>' + sdt + '</b>\n✅ Đã báo cáo: <b>' + esc(r[3]) + '</b>'); return tl('Đã báo cáo rồi'); }
+  sh.getRange(dong, 4).setValue(tt);
+  sua_(q.message.chat.id, q.message.message_id, '📱 <b>' + sdt + '</b>\n✅ Đã báo cáo: <b>' + esc(tt) + '</b>');
+  log_(s.ten, 'Báo cáo telesale', normPhone(r[1]), tt);
+  tl('Đã ghi báo cáo');
+  capTelesale_();
 }
 
 /* Bản cũ chưa có cột mới (nhom, luc_giao_khac): ghi thêm tiêu đề 1 lần */
@@ -864,6 +956,7 @@ function bam_(q) {
     sua_(q.message.chat.id, q.message.message_id, (parts[0] === 'dy' ? '✅ Đã duyệt ' : '❌ Đã từ chối ') + esc(s.ten));
     return tl('Xong');
   }
+  if (parts[0] === 'ts') return bamTele_(q, parts, tl);
   if (parts[0] === 'dd') {
     if (chat !== String(quanLy_())) return tl('Chỉ quản lý');
     var kdd = timKhach_(parts[1]); if (!kdd || kdd.trang_thai !== 'cho_duyet_dong') return tl('Không còn chờ duyệt');

@@ -39,12 +39,25 @@ UNITS = [
 def units_table():
     return tbl(['Loại căn', 'Diện tích', 'Kích thước', 'Số lượng', 'Bố trí', 'Phù hợp'], [list(u) for u in UNITS]) + '<p class="src">Ba loại căn đã công bố chi tiết: 754 căn; phần còn lại trong tổng 782 căn theo công bố chính thức của chủ đầu tư.</p>'
 
-def units_drawings():
+def units_drawings(base=None):
+    """Mặt bằng 3 loại căn. base = thư mục ảnh v4/img: dùng bản mới có sơ đồ vị trí căn trên tầng (tô vàng)."""
+    if not base:
+        return ('<div class="g3 eqi">'
+                + fig('can-studio', 'Mặt bằng căn Studio Sun Saphia Residence 30 m², kích thước 3,8 × 9 m', '<b>Studio</b> · 30–31 m² · 3,8 × 9 m', wm=True)
+                + fig('can-1br', 'Mặt bằng căn 1BR+1 Sun Saphia Residence 50 m², kích thước 6,2 × 9 m', '<b>1BR+1</b> · 50–51 m² · 6,2 × 9 m', wm=True)
+                + fig('can-2br', 'Mặt bằng căn 2BR góc Sun Saphia Residence 60–70 m², kích thước 7,25 × 9,9 m', '<b>2BR</b> · 60–70 m² · 7,25 × 9,9 m', wm=True)
+                + '</div>')
+    def one(n, alt, cap):
+        return ('<figure class="fg wm"><img src="%smb-can-%s.webp" width="960" height="641" alt="%s" loading="lazy" decoding="async">'
+                '<figcaption>%s</figcaption></figure>') % (base, n, alt, cap)
     return ('<div class="g3 eqi">'
-            + fig('can-studio', 'Mặt bằng căn Studio Sun Saphia Residence 30 m², kích thước 3,8 × 9 m', '<b>Studio</b> · 30–31 m² · 3,8 × 9 m', wm=True)
-            + fig('can-1br', 'Mặt bằng căn 1BR+1 Sun Saphia Residence 50 m², kích thước 6,2 × 9 m', '<b>1BR+1</b> · 50–51 m² · 6,2 × 9 m', wm=True)
-            + fig('can-2br', 'Mặt bằng căn 2BR góc Sun Saphia Residence 60–70 m², kích thước 7,25 × 9,9 m', '<b>2BR</b> · 60–70 m² · 7,25 × 9,9 m', wm=True)
-            + '</div>')
+            + one('studio', 'Mặt bằng căn Studio Sun Saphia Residence 3,8 × 9 m: bếp, giường, sofa, logia, WC tách khu tắm; sơ đồ tầng tô vàng vị trí các căn Studio',
+                  '<b>Studio</b> · 30–31 m² · 3,8 × 9 m · <span>chiếm phần lớn 2 cánh tòa (tô vàng)</span>')
+            + one('1br', 'Mặt bằng căn 1BR+1 Sun Saphia Residence 6,2 × 9 m: phòng ngủ, phòng đa năng, phòng khách, bếp, logia; sơ đồ tầng tô vàng vị trí các căn 1BR+1',
+                  '<b>1BR+1</b> · 50–51 m² · 6,2 × 9 m · <span>phòng ngủ + phòng đa năng, logia</span>')
+            + one('2br', 'Mặt bằng căn 2BR góc Sun Saphia Residence 7,25 × 9,9 m: 2 phòng ngủ, 2 WC, phòng khách, bếp, logia, kính bo cong; sơ đồ tầng tô vàng vị trí căn góc',
+                  '<b>2BR</b> · 60–70 m² · 7,25 × 9,9 m · <span>căn góc, kính bo cong 2 mặt thoáng</span>')
+            + '</div><p class="src">Mặt bằng theo tài liệu chủ đầu tư; nội thất minh họa, bàn giao hoàn thiện cơ bản. Ô tô vàng trên sơ đồ nhỏ là vị trí loại căn đó trên tầng.</p>')
 
 PRICES = [
     ('The Soleil Đà Nẵng', '5,2–5,5 tỷ', '7,7–7,8 tỷ', '17,5 tỷ', '–'),

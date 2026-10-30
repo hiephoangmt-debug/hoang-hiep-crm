@@ -56,13 +56,37 @@ def tour360():
             'var f=document.createElement("iframe");f.src=w.getAttribute("data-src");f.setAttribute("allow","xr-spatial-tracking; gyroscope; accelerometer; fullscreen");f.setAttribute("allowfullscreen","");f.setAttribute("loading","lazy");f.title="Tour 360 Sun Saphia Residence";'
             'w.innerHTML="";w.appendChild(f);w.classList.add("on");try{if(window.gtag)gtag("event","tour_360",{event_label:location.pathname})}catch(x){}});})();</script></section>')
 
+def tam_view(d4=False):
+    """Tầm view theo hướng (ảnh minh họa): hướng Đông nhìn thẳng biển, hướng Đông Nam nhìn dọc bờ biển."""
+    def one(name, w, h, tag, title, lines, alt):
+        return ('<figure class="tvf"><div class="tvi"><img src="%s%s.webp" srcset="%s%s-900.webp 900w, %s%s.webp %dw" sizes="(max-width: 760px) 100vw, 560px" width="%d" height="%d" alt="%s" loading="lazy" decoding="async">'
+                '<span class="tvt">%s</span></div><figcaption><b>%s</b>%s</figcaption></figure>') % (V4, name, V4, name, V4, name, w, w, h, alt, tag, title, ''.join('<span>%s</span>' % l for l in lines))
+    return ('<section class="sec alt" id="tam-view"><div class="wrap">' + sh('◎', 'Tầm view từ căn', 'Mở rèm ra là thấy gì? <b>View theo từng hướng</b>', 'o') +
+            '<style>#tam-view .tvg{display:grid;grid-template-columns:1fr 1fr;gap:22px}#tam-view .tvf{margin:0;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(10,37,64,.10)}'
+            '#tam-view .tvi{position:relative}#tam-view .tvi img{display:block;width:100%;height:auto}'
+            '#tam-view .tvt{position:absolute;left:12px;top:12px;background:#E96118;color:#fff;font-weight:800;font-size:13px;padding:7px 12px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.25)}'
+            '#tam-view figcaption{padding:14px 16px 16px;font-size:14.5px;line-height:1.55;color:#3D4A5C}#tam-view figcaption b{display:block;color:#0A2540;font-size:16.5px;margin-bottom:4px}'
+            '#tam-view figcaption span{display:block}#tam-view figcaption span:before{content:"✓ ";color:#E96118;font-weight:800}'
+            '#tam-view .tvn{font-size:12.5px;color:#6A7280;margin:12px 0 0}#tam-view .tvc{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px}'
+            '@media(max-width:760px){#tam-view .tvg{grid-template-columns:1fr}}</style>'
+            '<div class="tvg">'
+            + one('view-huong-dong', 1886, 834, '🧭 Hướng Đông', 'Hướng Đông · nhìn thẳng ra biển',
+                  ['Biển Mỹ Khê – Sơn Thủy trải ngang trước mặt, đón bình minh trên biển', 'Bán đảo Sơn Trà bên trái, ngày trong thấy rõ', 'Hợp phòng ngủ, cho thuê theo đêm giá cao'],
+                  'Phòng ngủ hướng Đông Sun Saphia (ảnh minh họa): cửa kính lớn nhìn thẳng ra biển Mỹ Khê – Sơn Thủy, xa xa là bán đảo Sơn Trà')
+            + one('view-huong-dong-nam', 1880, 837, '🧭 Hướng Đông Nam', 'Hướng Đông Nam · biển và dải resort',
+                  ['Biển chạy dài về phía Hội An, núi Cù Lao Chàm phía xa', 'Dải resort, biệt thự ven biển và trục đường Trường Sa bên dưới', 'Logia đón gió biển, nắng sáng dịu'],
+                  'Ban công hướng Đông Nam Sun Saphia (ảnh minh họa): biển chạy dài, dải resort ven biển, trục đường Trường Sa và cây xanh bên dưới')
+            + '</div><p class="tvn">Ảnh minh họa tầm nhìn từ tầng cao theo hướng; view thực tế tùy tầng, vị trí căn và công trình xung quanh. ' + ('Xem thêm ở mô hình 3D·4D, chế độ “5D · View từ căn”.' if d4 else '') + '</p>'
+            '<div class="tvc"><button type="button" class="btn" data-pop data-interest="Tầm view – nhận ảnh view đúng tầng">Nhận ảnh view đúng tầng anh/chị chọn</button>'
+            + ('<a class="btn ghost2" href="#ss4d" data-4d>Xem view từ căn trên mô hình 4D</a>' if d4 else '') + '</div></div></section>')
+
 def tour_insert(html):
     if 'id="tour-360"' in html or '<main' not in html: return html
     for anchor in ['id="mat-bang"', 'id="tai-chinh"']:
         i = html.find(anchor)
         if i >= 0:
             i = html.rfind('<section', 0, i)
-            return html[:i] + tour360() + html[i:]
+            return html[:i] + tam_view('4d-embed.js' in html) + tour360() + html[i:]
     return html
 
 def quiz_end(html):
@@ -235,7 +259,7 @@ def home():
           + units_table() +
           '<div class="g2 eq" style="margin-top:26px">' + fig('mat-bang-tong-the', 'Mặt bằng tổng thể Sun Saphia Residence hướng ra biển Mỹ Khê, phía trước là công viên ven biển', 'Mặt bằng tổng thể – tối ưu tầm view biển Mỹ Khê', wm=True)
           + fig('layout-tang-3a-28', 'Layout tầng điển hình 3A–28 tòa Saphia, 28 căn mỗi tầng', 'Layout tầng 3A–28', wm=True) + '</div>'
-          '<div style="margin-top:22px">' + units_drawings() + '</div>'
+          '<div style="margin-top:22px">' + units_drawings(V4) + '</div>'
           '<p style="margin-top:18px"><a class="btn sm nv" href="{M}/mat-bang">Xem chi tiết mặt bằng từng loại căn →</a></p>'
           '<div id="chon-can"></div></div></section>')
     # 05 Pháp lý
@@ -424,7 +448,7 @@ def mat_bang():
     b += tldr('mặt bằng Sun Saphia Residence', [('Tầng căn hộ', 'Từ tầng 3A đến tầng 28, 28 căn mỗi tầng điển hình'), ('Studio', '30–31 m², 3,8 × 9 m, 513 căn'), ('1BR+1', '50–51 m², 6,2 × 9 m, 108 căn'),
         ('2BR', '60–70 m², 7,25 × 9,9 m, 133 căn, có căn góc bo tròn'), ('Chiều cao căn hộ', '3,5 m, bàn giao hoàn thiện cơ bản'), ('Hướng view', 'Biển Mỹ Khê – Sơn Thủy, Ngũ Hành Sơn, sông Hàn, đô thị')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Cơ cấu', '782 căn – <b>3 loại căn</b>', 'o') + units_table() +
-          '<div style="margin-top:24px">' + units_drawings() + '</div></div></section>')
+          '<div style="margin-top:24px">' + units_drawings(V4) + '</div></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('2', 'Layout tầng', 'Mặt bằng <b>từng tầng</b> tòa Saphia', 'n')
           + tang_viewer() +
           '<div id="chon-can"></div></div></section>')
@@ -780,7 +804,10 @@ def ads(domain):
     b += pband('30 tầng bên <b>biển Mỹ Khê</b>', 'Căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng – sự kiện ra mắt 9:00 Chủ nhật 01/11/2026 tại Hilton Đà Nẵng.', 'ADS – dải ảnh tòa tháp')
     b += vitri_dark('vi-tri', 'ADS')
     b += ('<section class="sec alt" id="mat-bang"><div class="wrap">' + sh('04', 'Mặt bằng', 'Chọn căn trên <b>mặt bằng tầng</b>', 'n') + units_table() +
-          '<div style="margin-top:20px">' + units_drawings() + '</div><div id="chon-can"></div></div></section>')
+          (lambda I: '<figure class="fg" style="margin:22px 0 0"><a href="%s.webp" target="_blank" rel="noopener"><img src="%s-900.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 1000px" width="1600" height="1498" loading="lazy" decoding="async" alt="Mặt bằng tầng điển hình 3A–28 Sun Saphia Residence: 28 căn/tầng gồm 19 Studio, 4 căn 1PN+1, 5 căn 2PN góc bo; phía trên là biển Đông, đường Trường Sa"></a>'
+            '<figcaption>Mặt bằng tầng điển hình 3A–28 · 28 căn/tầng · phía trên là biển Đông · bấm ảnh để xem cỡ lớn</figcaption></figure>'
+            '<p style="text-align:center;margin-top:14px"><button type="button" class="btn" data-pop data-interest="ADS – mặt bằng tầng điển hình, hỏi căn còn trống">Nhận danh sách căn còn trống theo tầng</button></p>' % (I, I, I, I))(RAW + 'f49e6fa292112d342083916a261a642a5fc30739/landing/sun-saphia/v4/img/mat-bang-tang-dien-hinh-ve') +
+          '<div style="margin-top:20px">' + units_drawings(V4) + '</div><div id="chon-can"></div></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('02', 'Tầm nhìn', 'Mỗi hướng <b>một khung tranh</b>', 'o') + views('<img class="vb" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1668w" sizes="(max-width: 760px) 100vw, 900px" width="1668" height="943" alt="Biển ngay ngoài ban công – căn hộ cao tầng mặt biển Đà Nẵng lúc hoàng hôn (ảnh minh họa)" loading="lazy" decoding="async">' % (HB, HB, HB)) + '</div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('06', 'Tiện ích', 'Sống gắn với <b>biển mỗi ngày</b>', 'y') +
           '<div class="g3"><article class="card">' + ('<img class="r" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 400px" width="1600" height="900" alt="Hồ bơi tầng 3 nhìn ra biển – Sun Saphia Residence (ảnh minh họa)" loading="lazy" decoding="async">' % ((RAW + 'a0a6849c15880dc681b6e91708d2a0752bd2aa43/landing/sun-saphia/v4/img/ho-boi-tang-3',) * 3)) + '<h3 style="margin-top:12px">Hồ bơi tầng 3 view biển</h3></article>'
@@ -802,7 +829,7 @@ def ads(domain):
     b = re.sub(r'<p[^>]*><a class="lk" href="\{M\}/quy-hoach">[^<]*</a></p>', '', b)
     html = head(title, desc, url, OG, 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES], FAV)
     b = b.replace('{M}', MAIN)
-    html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN, pages=False) + '\n' + popup() + '<script>window.SS4D_GATE=20;</script>' + tail(True) + wave_audio() + '</body>\n</html>\n'
+    html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN, pages=False) + '\n' + popup() + '<script>window.SS4D_GATE=20;</script><style>#sscc{display:none!important}</style>' + tail(True) + wave_audio() + '</body>\n</html>\n'
     return copy_fix(tour_insert(quiz_end(html)))
 
 def tinh_dong_tien():

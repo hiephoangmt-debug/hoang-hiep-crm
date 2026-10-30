@@ -27,7 +27,7 @@ async function send(page,t){ await page.fill('.hhc-i input',t); await page.press
   console.log('\n=== '+file+' – hội thoại ban ngày');
   const {ctx,page,sent,errs}=await setup(b,{file,q:'?utm_source=google&utm_campaign=ss-test&gclid=abc',time:'2026-10-19T10:00:00+07:00'});
   await openChat(page);
-  const greet=(await page.$$eval('.hhc-bot',e=>e.map(x=>x.innerText)))[0]||''; ok(/trợ lý trả lời nhanh của anh Hoàng Hiệp/.test(greet),'chào: tự giới thiệu là trợ lý trả lời nhanh');
+  const greet=(await page.$$eval('.hhc-bot',e=>e.map(x=>x.innerText)))[0]||''; ok(/trợ lý của anh Hiệp – Giám đốc kinh doanh Sun Saphia Residence/.test(greet),'chào: tự giới thiệu là trợ lý của anh Hiệp');
   const T=[
    ['giá bao nhiêu vậy em', r=>/chưa công bố/.test(r) && !/\d+([.,]\d+)?\s*(tỷ|ty)/i.test(r), 'hỏi giá: không nêu giá'],
    ['o dau vay', r=>/Võ Nguyên Giáp/.test(r), 'vị trí (không dấu)'],
@@ -35,7 +35,7 @@ async function send(page,t){ await page.fill('.hhc-i input',t); await page.press
    ['cho thue dc bn 1 thang', r=>/8–9,5 triệu/.test(r)&&/muaban\.net/.test(r)&&/không (cam kết|phải cam kết)/.test(r), 'cho thuê: số liệu có nguồn, không cam kết'],
    ['đắt quá', r=>/hiểu|cân nhắc|vốn/.test(r), 'chê đắt'],
    ['co lua dao ko vay', r=>/không thu/.test(r), 'nghi lừa đảo'],
-   ['em là máy trả lời à', r=>/không phải người thật|trợ lý trả lời nhanh/.test(r), 'hỏi có phải máy'],
+   ['em là máy trả lời à', r=>/trợ lý tự động/.test(r), 'hỏi có phải máy'],
    ['xyz qwe abc', r=>/chưa rõ|rõ hơn/.test(r), 'câu lạ lần 1: hỏi lại'],
    ['mnb vcx lkj', r=>/chuyển anh Hiệp/.test(r), 'câu lạ lần 2: chuyển anh Hiệp'],
    ['dm trả lời gì kỳ vậy', r=>/xin lỗi/.test(r), 'văng tục: xin lỗi, chuyển anh Hiệp'],
