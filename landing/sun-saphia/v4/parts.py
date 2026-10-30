@@ -79,7 +79,8 @@ def header(cur, base, logo, cta='#dang-ky', menu=True, toc=None):
     if menu:
         h += '<nav class="mnav" aria-label="Các trang dự án">' + ''.join('<a href="%s%s"%s>%s</a>' % (base, p if p != '/' else '/', ' aria-current="page"' if p == cur else '', t) for p, t in PAGES) + '</nav>'
     if toc:
-        h += ('<nav class="mnav ptoc" aria-label="Mục lục trang">' + ''.join('<a href="#%s">%s</a>' % t for t in toc) + '</nav>'
+        h += ('<style>@media(min-width:761px){.mnav.ptoc{flex:1 1 auto;min-width:0;overflow-x:auto;scrollbar-width:none;margin:0 8px;gap:0}.mnav.ptoc a:first-child{margin-left:auto}.mnav.ptoc a:last-child{margin-right:auto}.mnav.ptoc::-webkit-scrollbar{display:none}.mnav.ptoc a{font-size:13px;padding:7px 8px}}</style>'
+              '<nav class="mnav ptoc" aria-label="Mục lục trang">' + ''.join('<a href="#%s">%s</a>' % t for t in toc) + '</nav>'
               '<script>(function(){var n=document.currentScript.previousElementSibling,L=[].slice.call(n.querySelectorAll("a"));if(!("IntersectionObserver" in window))return;function go(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){L.forEach(function(a){var on=a.getAttribute("href")==="#"+e.target.id;a.classList.toggle("on",on);if(on&&a.scrollIntoView&&n.scrollWidth>n.clientWidth)n.scrollTo({left:a.offsetLeft-20,behavior:"smooth"})})}})},{rootMargin:"-30% 0px -60% 0px"});L.forEach(function(a){var t=document.getElementById(a.getAttribute("href").slice(1));if(t)io.observe(t)})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go()})();</script>')
     return h + '<a class="tcta" href="' + cta + '">Nhận bảng giá</a></div></header>'
 

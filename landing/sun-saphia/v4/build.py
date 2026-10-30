@@ -734,7 +734,8 @@ def vitri_dark(sid='vi-tri', ctx='ADS'):
             '<a class="gml" href="https://www.google.com/maps/search/?api=1&amp;query=16.021300,108.257659" target="_blank" rel="noopener">📍 Mở trong Google Maps</a></div></div>'
             '</div></div></section>') % (sid, ctx)
 
-ADS_TOC = [('tai-chinh', 'Giá &amp; thanh toán'), ('vi-tri', 'Vị trí'), ('tour-360', 'Xem 360°'), ('mat-bang', 'Mặt bằng'), ('tim-can', 'Chọn căn')]
+ADS_TOC = [('su-kien', 'Sự kiện'), ('tong-quan', 'Tổng quan'), ('vi-tri', 'Vị trí'), ('tien-ich', 'Tiện ích'), ('mat-bang', 'Mặt bằng'), ('loai-can', 'Loại căn'),
+           ('tai-chinh', 'Chính sách'), ('quy-hoach', 'Quy hoạch'), ('dau-tu', 'Đầu tư'), ('phap-ly', 'Pháp lý')]   # theo đúng thứ tự bố cục trang Ads
 
 def tim_can(ctx='ADS'):
     Q = [('muc', 'Anh/chị mua để làm gì?', False, [('o', '🏖 Để ở / nghỉ dưỡng gia đình'), ('ngan', '🧳 Cho thuê ngắn hạn (theo đêm)'), ('dai', '📅 Cho thuê dài hạn (theo tháng)'), ('tg', '📈 Đầu tư chờ tăng giá'), ('san', '🏢 Mua nhiều căn / cả 1 sàn')]),
@@ -907,7 +908,7 @@ def ads(domain):
         form('dau', 'ADS – form đầu trang', title='Nhận bảng giá gốc từ đại lý', note='Bảng giá gốc, mặt bằng tầng, chính sách – gửi qua Zalo ngay khi chủ đầu tư công bố. Đăng ký miễn phí.', h='h2'),
         hero_perks())
     # Bố cục: hero 4D → sự kiện → tổng quan → vị trí → tiện ích → (360°, tầm view) → mặt bằng → loại căn → chính sách → quy hoạch → đầu tư → pháp lý → tầm nhìn
-    b = b.replace('<section class="hero cine2">', su_kien('ADS') + '<section class="hero cine2">', 1)
+    b = b.replace('<section class="hero cine2">', su_kien('ADS') + '<section class="hero cine2" id="tong-quan">', 1)
     b += tldr('Sun Saphia Residence', [('Dự án', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, 30 tầng, 782 căn'), ('Loại căn', 'Studio 30 m² · 1BR+ 50 m² · 2BR 60–70 m²'),
         ('Công trình', 'Cấp I, niên hạn 100 năm · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Mở bán', 'Ra mắt 01/11/2026'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
     b += ('<section class="sec"><div class="wrap">' + sh('☀', 'Một ngày ở Saphia', 'Mở cửa ra là <b>biển</b>', 'y') +
@@ -916,7 +917,7 @@ def ads(domain):
           '<p class="src" style="margin-top:8px">Ảnh chụp thực tế bãi biển Mỹ Khê – Sơn Thủy hướng về bán đảo Sơn Trà.</p></div></section>')
     b += pband('30 tầng bên <b>biển Mỹ Khê</b>', 'Căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng – sự kiện ra mắt 9:00 Chủ nhật 01/11/2026 tại Hilton Đà Nẵng.', 'ADS – dải ảnh tòa tháp')
     b += vitri_dark('vi-tri', 'ADS')
-    b += ('<section class="sec alt"><div class="wrap">' + sh('04', 'Tiện ích nội – ngoại khu', 'Sống gắn với <b>biển mỗi ngày</b>', 'y') +
+    b += ('<section class="sec alt" id="tien-ich"><div class="wrap">' + sh('04', 'Tiện ích nội – ngoại khu', 'Sống gắn với <b>biển mỗi ngày</b>', 'y') +
           '<div class="g3"><article class="card">' + ('<img class="r" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 400px" width="1600" height="900" alt="Hồ bơi tầng 3 nhìn ra biển – Sun Saphia Residence (ảnh minh họa)" loading="lazy" decoding="async">' % ((RAW + 'a0a6849c15880dc681b6e91708d2a0752bd2aa43/landing/sun-saphia/v4/img/ho-boi-tang-3',) * 3)) + '<h3 style="margin-top:12px">Hồ bơi tầng 3 view biển</h3></article>'
           '<article class="card">' + img('tien-ich-gym', 'Gym, pilates (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Gym · Yoga · Pilates</h3></article>'
           '<article class="card">' + img('the-thao-bien', 'Thể thao biển (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Kayak · SUP · Jetski</h3></article></div>' + khoi_de() + '</div></section>')
