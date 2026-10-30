@@ -712,7 +712,7 @@ function plan30(){
 function m30(r){ return (state.v==='all'||r[2].indexOf(state.v)>=0)&&(state.t==='all'||r[1]===state.t||(state.t==='STU'&&false)); }
 /* ---------- nội thất mẫu render (Blender) theo từng căn: ảnh + video đi trong căn ---------- */
 var CRM=true;   // tạm thời: mọi bản đều ẩn số điện thoại, Zalo, chữ chìm (đổi lại /[?&]crm/.test(location.search) khi cần hiện)   // bản CRM nội bộ: không số điện thoại, không chữ chìm web
-var NT_BASE='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e097337298b92ed845392408077579aeafa14aa6/projects/sun-saphia/images/noi-that-crm/';   // ảnh nội thất sạch: không số điện thoại, không chữ chìm web
+var NT_BASE='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@6039dcc475570cda4213f284a15e60623eff95c7/projects/sun-saphia/images/noi-that-crm/';   // ảnh nội thất sạch: không số điện thoại, không chữ chìm web
 if(CRM){ var crmCss=document.createElement('style'); crmCss.textContent='.hd>a[href^="tel:"],a.btn.z{display:none!important}'; document.head.appendChild(crmCss); }
 if(CRM) document.addEventListener('DOMContentLoaded',function(){ var hd=document.querySelector('.hd'); if(!hd) return; var d=document.createElement('div'); d.style.cssText='color:#fff;font-weight:800;text-align:right;font-size:13px;line-height:1.35';
   d.innerHTML='Studio tầng 15: 2,13 – 2,85 tỷ*<br><span style="font-weight:600;font-size:11px;color:#C9D6E3">Trả 25% ~533 triệu đến khi nhận nhà · *giá tham khảo CĐT, chưa VAT</span>'; hd.appendChild(d); });
