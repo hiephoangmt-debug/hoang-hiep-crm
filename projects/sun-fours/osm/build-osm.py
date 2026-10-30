@@ -113,7 +113,7 @@ for f in ('sf-osm-buildings.json', 'sf-osm-tall.json', 'ss-osm-buildings2.json',
         seen.add(w['id']); t = w['tags']; P = [W(*Nb[n]) for n in w['nodes'] if n in Nb]
         if len(P) < 4 or area(P) < 25: continue
         c = cen(P)
-        if dS(c) < 70 or dF(c) < 95: continue
+        if dS(c) < 70 or dF(c) < 150: continue   # khu đất 4 tòa FourS (dựng riêng)
         if dF(c) > 6500 and dS(c) > 3000: continue
         try: h = float(str(t.get('height', '')).replace('m', '').split(';')[0])
         except ValueError:

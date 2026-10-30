@@ -1,8 +1,8 @@
 /* ---------- MẶT BẰNG TẦNG trên tòa nhà: cắt ngang 4 tòa ở cao độ tầng đang chọn, đặt mặt bằng căn (vẽ lại từ bản vẽ CĐT) ---------- */
 var CRM=/[?&]crm/.test(location.search);
 var CC_URL='__CC_URL__';
-var TYPEC={'STU':'#86b5c6','1PN':'#bf8f78','1PN+':'#5d8f46','2PN':'#f6b625','2PN+':'#f6b625','3PN':'#ee6b4d','P':'#a993d6'};
-var TNAME={'STU':'Studio','1PN':'1 phòng ngủ','1PN+':'1 phòng ngủ + 1','2PN':'2 phòng ngủ','2PN+':'2 phòng ngủ + 1','3PN':'3 phòng ngủ','P':'1PN+ (khối giữa)'};
+var TYPEC={'STU':'#86b5c6','1PN':'#bf8f78','1PN+':'#5d8f46','2PN':'#f6b625','2PN+':'#f6b625','3PN':'#ee6b4d','P':'#a993d6','SH':'#c9b9e6'};
+var TNAME={'STU':'Studio','1PN':'1 phòng ngủ','1PN+':'1 phòng ngủ + 1','2PN':'2 phòng ngủ','2PN+':'2 phòng ngủ + 1','3PN':'3 phòng ngủ','P':'1PN+ (khối giữa)','SH':'Thương mại (shophouse)'};
 var TWN=['F1','F2','F5'];                       // tòa có mặt bằng CĐT
 function pad(f){ var m=/^(\d+)(.*)$/.exec(f); return (m[1].length<2?'0':'')+m[1]+m[2]; }
 function bbP(P){ var b=[1e9,1e9,-1e9,-1e9]; P.forEach(function(p){ b[0]=Math.min(b[0],p[0]); b[1]=Math.min(b[1],p[1]); b[2]=Math.max(b[2],p[0]); b[3]=Math.max(b[3],p[1]); }); return b; }
@@ -15,7 +15,7 @@ function faces(u,B){ var c=labelPt(u.poly), out=[];
   DIRS.forEach(function(d){ var x=c[0], y=c[1], k=0; while(k<400&&inPoly(x,y,u.poly)){ x+=d[0]*.25; y+=d[1]*.25; k++; }
     for(var s=0;s<=10;s++){ var px=x+d[0]*s*.25, py=y+d[1]*s*.25; if(!inPoly(px,py,B.foot)){ out.push({d:d,p:[px,py]}); break; } } });
   return out; }
-function bandAt(t,f){ return PL[t]?band(t,FN(f)):null; }
+function bandAt(t,f){ if(t==='F2'&&window.FS_MBC){ var k=FS_MBC.F2.floors[FN(f)]; return k?FS_MBC.F2.sheets[k]:null; } return PL[t]?band(t,FN(f)):null; }   // F2: mặt bằng chuẩn (tường, kính, cửa đo trên bản gốc CĐT)
 function nearBandFloor(t,f){ if(bandAt(t,f)) return f; for(var k=1;k<19;k++){ if(bandAt(t,f-k)) return f-k; if(bandAt(t,f+k)) return f+k; } return f; }
 function uCodeOf(t,f,u){ return t+'-'+pad(FN(f))+'-'+u.code; }
 var STOCK={}; (window.FOURS_STOCK&&FOURS_STOCK.units||[]).forEach(function(r){ STOCK[r[0]]=r; });
@@ -31,11 +31,16 @@ function planTex(t,B){ var key=t+B.key; if(PLAN_TX[key]) return PLAN_TX[key];
   function pth(P){ g.beginPath(); P.forEach(function(p,i){ if(i) g.lineTo(p[0],p[1]); else g.moveTo(p[0],p[1]); }); g.closePath(); }
   B.gardens.forEach(function(G){ pth(G); g.fillStyle='#cfe8a6'; g.fill(); g.strokeStyle='#8cb85e'; g.lineWidth=.12; g.stroke(); });
   pth(B.foot); g.fillStyle='#f6f3ec'; g.fill();
-  B.units.forEach(function(u){ pth(u.poly); g.fillStyle=TYPEC[u.color]||'#ccc'; g.fill(); g.strokeStyle='#0A2540'; g.lineWidth=.14; g.stroke(); });
-  pth(B.foot); g.strokeStyle='#0A2540'; g.lineWidth=.38; g.stroke();
+  var MB=!!B.walls;
+  B.units.forEach(function(u){ pth(u.poly); g.globalAlpha=MB?.55:1; g.fillStyle=TYPEC[u.color]||'#ccc'; g.fill(); g.globalAlpha=1; if(!MB){ g.strokeStyle='#0A2540'; g.lineWidth=.14; g.stroke(); } });
+  if(MB){ g.fillStyle='#5fa3c9'; B.glass.forEach(function(r){ g.fillRect(r[0],r[1],Math.max(.04,r[2]-r[0]),Math.max(.04,r[3]-r[1])); });
+    g.fillStyle='#1d2733'; B.walls.forEach(function(r){ g.fillRect(r[0],r[1],r[2]-r[0],r[3]-r[1]); });
+    g.strokeStyle='#56606b'; g.lineWidth=.05; B.doors.forEach(function(d){ var a1=Math.atan2(d.l[1]-d.h[1],d.l[0]-d.h[0]), a2=Math.atan2(d.c[1]-d.h[1],d.c[0]-d.h[0]), sw=((a2-a1+Math.PI*2)%(Math.PI*2))<Math.PI;
+      g.beginPath(); g.moveTo(d.h[0],d.h[1]); g.lineTo(d.l[0],d.l[1]); g.arc(d.h[0],d.h[1],d.r,a1,a2,!sw); g.stroke(); }); }
+  else { pth(B.foot); g.strokeStyle='#0A2540'; g.lineWidth=.38; g.stroke(); }
   g.fillStyle='#0A2540'; g.textAlign='center'; g.textBaseline='middle';
   B.units.forEach(function(u){ var p=labelPt(u.poly), ub=bbP(u.poly), w=ub[2]-ub[0], h=ub[3]-ub[1], fs=Math.max(.8,Math.min(1.9,w/(u.code.length*.72+.6),h/3));
-    g.font='800 '+fs+'px "Be Vietnam Pro",Arial,sans-serif'; g.fillText(u.code,p[0],p[1]-fs*.25);
+    if(MB) fs=Math.min(fs,1.3); g.font='800 '+fs+'px "Be Vietnam Pro",Arial,sans-serif'; g.fillText(u.code,p[0],p[1]-fs*.25);
     var s2=um2(u.tt)+' m²', f2=Math.min(fs*.6,w/(s2.length*.6+.6)); if(f2>=.42){ g.font='600 '+f2+'px "Be Vietnam Pro",Arial,sans-serif'; g.fillText(s2,p[0],p[1]+fs*.55); } });
   g.font='700 1px "Be Vietnam Pro",Arial,sans-serif'; g.textAlign='left'; g.fillStyle='#0A2540'; g.fillText('Tòa '+t+' · minh họa, thông số theo CĐT',b[0]+.4,b[3]-.6);
   var tx=new THREE.CanvasTexture(c); tx.encoding=THREE.sRGBEncoding; tx.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy());
@@ -126,7 +131,7 @@ var inRoom=null, inUnit=null, inFloor=null, unitEye=null;
 var inHidden=[];
 function clearRoom(){ inHidden.forEach(function(o){ o.visible=true; }); inHidden=[]; if(inRoom){ inRoom.parent&&inRoom.parent.remove(inRoom); inRoom.traverse(function(o){ if(o.geometry) o.geometry.dispose(); }); inRoom=null; } }
 var RM={wood:M(0xb08a62,{roughness:.6}),wall:M(0xf3efe8,{roughness:.95,side:THREE.DoubleSide}),ceil:M(0xfbfaf7,{roughness:1,side:THREE.DoubleSide}),alu:M(0x3a4048,{roughness:.35,metalness:.7}),
-  glass:new THREE.MeshStandardMaterial({color:0xcfe6f2,transparent:true,opacity:.1,roughness:0,metalness:.6,depthWrite:false,side:THREE.DoubleSide}),cur:new THREE.MeshStandardMaterial({color:0xfffaf0,transparent:true,opacity:.85,roughness:1,side:THREE.DoubleSide})};
+  glass:new THREE.MeshStandardMaterial({color:0xcfe6f2,transparent:true,opacity:.05,roughness:0,metalness:.6,depthWrite:false,side:THREE.FrontSide}),cur:new THREE.MeshStandardMaterial({color:0xfffaf0,transparent:true,opacity:.85,roughness:1,side:THREE.DoubleSide})};
 function buildRoom(t,f,B,u,face){
   clearRoom(); var T0=TOWERS[t], g=new THREE.Group(); T0.grp.add(g); inRoom=g; inUnit={t:t,code:u.code}; inFloor=f;
   T0.grp.children.forEach(function(o){ var pr=o.geometry&&o.geometry.parameters; if(o.isInstancedMesh&&pr&&pr.width===.55&&o.visible){ o.visible=false; inHidden.push(o); } });   // ẩn khung trắng dọc mặt ngoài tòa đang đứng (thực tế là cột mảnh, không che view)
@@ -139,10 +144,15 @@ function buildRoom(t,f,B,u,face){
     var nx=sg*dy/L, ny=-sg*dx/L, mx=(a[0]+b[0])/2, my=(a[1]+b[1])/2, ext=!inPoly(mx+nx*.9,my+ny*.9,B.foot)&&!(B.gardens||[]).some(function(G){ return inPoly(mx+nx*.9,my+ny*.9,G); }), gard=!ext&&!inPoly(mx+nx*.9,my+ny*.9,B.foot);
     var A=[a[0]-cx,a[1]-cy], Bp=[b[0]-cx,b[1]-cy];
     if(ext||gard){ cand.push({m:[mx,my],n:[nx,ny],L:L}); if(L>bl){ bl=L; best={m:[mx,my],n:[nx,ny]}; }
+      if(B.walls) continue;
       seg(A[0],A[1],Bp[0],Bp[1],y0,H-.06,.03,RM.glass); seg(A[0],A[1],Bp[0],Bp[1],y0+H-.12,.12,.08,RM.alu); seg(A[0],A[1],Bp[0],Bp[1],y0,.05,.08,RM.alu);
       var k=Math.max(1,Math.round(L/1.25)); for(var j=0;j<=k;j++){ var tt=j/k, x=A[0]+(Bp[0]-A[0])*tt, z=A[1]+(Bp[1]-A[1])*tt; seg(x-dx/L*.03,z-dy/L*.03,x+dx/L*.03,z+dy/L*.03,y0,H,.07,RM.alu); }
       if(L>3){ [[0,.5],[L-.5,L]].forEach(function(r2){ for(var c2=0;c2<4;c2++){ var t2=(r2[0]+(c2+.5)*(r2[1]-r2[0])/4)/L; var x=A[0]+(Bp[0]-A[0])*t2-nx*.12, z=A[1]+(Bp[1]-A[1])*t2-ny*.12; seg(x-dx/L*.05,z-dy/L*.05,x+dx/L*.05,z+dy/L*.05,y0+.05,H-.25,.02,RM.cur); } }); } }
-    else seg(A[0],A[1],Bp[0],Bp[1],y0,H,.14,RM.wall); }
+    else if(!B.walls) seg(A[0],A[1],Bp[0],Bp[1],y0,H,.14,RM.wall); }
+  if(B.walls){ var ub=bbP(P), m3=.35; function nr(r){ return r[2]>ub[0]-m3&&r[0]<ub[2]+m3&&r[3]>ub[1]-m3&&r[1]<ub[3]+m3; }   // tường, vách, kính đúng mặt bằng chuẩn
+    B.walls.forEach(function(r){ if(!nr(r)) return; var w=Math.max(.04,r[2]-r[0]), d=Math.max(.04,r[3]-r[1]), me=new THREE.Mesh(new THREE.BoxGeometry(w,H,d),RM.wall); me.position.set((r[0]+r[2])/2-cx,y0+H/2,(r[1]+r[3])/2-cy); g.add(me); });
+    B.glass.forEach(function(r){ if(!nr(r)) return; var w=Math.max(.03,r[2]-r[0]), d=Math.max(.03,r[3]-r[1]), me=new THREE.Mesh(new THREE.BoxGeometry(w,H-.08,d),RM.glass); me.position.set((r[0]+r[2])/2-cx,y0+(H-.08)/2,(r[1]+r[3])/2-cy); g.add(me);
+      var fr=new THREE.Mesh(new THREE.BoxGeometry(w+.02,.08,d+.02),RM.alu); fr.position.set(me.position.x,y0+H-.04,me.position.z); g.add(fr); }); }
   var lp=labelPt(P), lt=new THREE.PointLight(0xffe2bc,.8,14,2); lt.position.set(lp[0]-cx,y0+2.5,lp[1]-cy); g.add(lt); g.add(new THREE.HemisphereLight(0xffffff,0xe0cfb4,.28));
   // chỗ đứng: trong căn, cách mặt kính lớn nhất ~2,2 m, nhìn thẳng ra kính
   if(face){ var fb=null; cand.forEach(function(c){ if(c.n[0]*face.d[0]+c.n[1]*face.d[1]>.9&&(!fb||c.L>fb.L)) fb=c; }); if(fb) best=fb; }   // đứng giữa mặt kính lớn nhất phía hướng view

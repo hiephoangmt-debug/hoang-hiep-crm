@@ -39,6 +39,34 @@ def road_pt(name, want=190, side=None):
 pMM = road_pt('Đường Minh Mạng', side=lambda p: p[1] < FC[1])
 pNPL = road_pt('Đường Quảng Nam', side=lambda p: p[0] < FC[0])
 
+# đèn đường thêm: Quảng Nam (Nguyễn Phước Lan) và Minh Mạng quanh dự án (tuyến theo OpenStreetMap, bỏ đoạn đã có đèn)
+m2 = re.search(r'var ROADS2=(\[\[.*?\]\]), lampHeads2', src)
+OLD = json.loads(m2.group(1))
+segs = [(R2[i], R2[i+1], R2[i+2], R2[i+3]) for R2 in OLD for i in range(0, len(R2) - 3, 2)]
+def near_seg(x, z, S, tol):
+    for a in S:
+        dx, dz = a[2]-a[0], a[3]-a[1]; L2 = dx*dx + dz*dz or 1; t = max(0, min(1, ((x-a[0])*dx + (z-a[1])*dz) / L2))
+        if math.hypot(x - a[0] - t*dx, z - a[1] - t*dz) < tol: return True
+    return False
+NEW = []
+for w in osm:
+    if w['type'] != 'way' or w.get('tags', {}).get('name') not in ('Đường Quảng Nam', 'Đường Minh Mạng'): continue
+    P = [W(*N[n]) for n in w['nodes'] if n in N]
+    run = []
+    for p in P:
+        ok = math.hypot(p[0]-FC[0], p[1]-FC[1]) < 2600 and not near_seg(p[0], p[1], segs, 14)
+        if ok: run.append(p)
+        else:
+            if len(run) > 1: NEW.append(run)
+            run = []
+    if len(run) > 1: NEW.append(run)
+added = []
+for run in NEW:
+    for a, b in zip(run, run[1:]):
+        mx, mz = (a[0]+b[0])/2, (a[1]+b[1])/2
+        if near_seg(mx, mz, added, 12): continue
+        added.append((a[0], a[1], b[0], b[1]))
+ROADS_ADD = [[round(v) for v in (s_[0], s_[1], s_[2], s_[3])] for s_ in added if math.hypot(s_[2]-s_[0], s_[3]-s_[1]) > 3]
 # --- 1. đầu trang, giao diện ---
 head = '\n'.join(seg(1, 145))
 head = rep(head, '<title>Sun Saphia 3D · 4D · 5D</title>', '<title>Sun FourS Tower 3D · 4D · 5D</title>')
@@ -66,10 +94,12 @@ gate = rep(gate, "<div class=\"lg\">SR</div><h3>Link riêng Sun Saphia Residence
 osm_js = (REPO / 'projects/sun-fours/osm/sf-osm-scene.js').read_text(encoding='utf-8').split('\n', 1)[1].strip()
 plans_js = (REPO / 'projects/fours/plans/plans-data.js').read_text(encoding='utf-8')
 stock_js = (REPO / 'landing-pages/assets/fourstower/data/stock.js').read_text(encoding='utf-8')
-data = ('<script>/*OSM-DATA*/' + osm_js + '/*/OSM-DATA*/</script>\n<script>\n' + plans_js + '\n' + stock_js + '\n</script>')
+mbc_js = (H / 'src/f2-mbc.js').read_text(encoding='utf-8')
+data = ('<script>/*OSM-DATA*/' + osm_js + '/*/OSM-DATA*/</script>\n<script>\n' + plans_js + '\n' + stock_js + '\n' + mbc_js + '\n</script>')
 
 # --- 2. khung cảnh (giữ nguyên) ---
 core = '\n'.join(seg(207, 524))
+core = rep(core, 'if(OHIT(lx,lz)||Math.hypot(lx,lz)<700) continue;', 'if(OHIT(lx,lz)||Math.hypot(lx,lz)<700||Math.hypot(lx-(%.1f),lz-(%.1f))<190) continue;' % FC)   # không đặt khối nhà minh họa lên khu đất FourS
 
 # --- 3. 4 tòa FourS (thay khối FourS đơn giản cũ) ---
 fs = (REPO / 'projects/fours/4d/scene.js').read_text(encoding='utf-8').split('\n')
@@ -108,6 +138,7 @@ for s in ["label('Khu đất dự án · 3.720,1 m²','',world,[-50,3,64]); labe
 mid = rep(mid, "label('S Light Tower · 2 tòa 22 tầng','far',world,[-2155,100,-1337]);",
           "label('S Light Tower · 2 tòa 22 tầng','far',world,[-2155,100,-1337]);\nlabel('Sun Saphia Residence · 30 tầng','far',world,[-47,STOP+12,39]);\n"
           "label('Minh Mạng','road',world,[%.0f,3,%.0f]);\nlabel('Nguyễn Phước Lan','road',world,[%.0f,3,%.0f]);" % (pMM[0], pMM[1], pNPL[0], pNPL[1]))
+mid = rep(mid, "label('Cầu Trần Thị Lý',", "label('Cầu Trung Lương','far',world,[-2520,22,-356]); label('Cầu Bờ Quan (Minh Mạng)','far',world,[-1478,20,435]);\nlabel('Cầu Trần Thị Lý',")
 mid = rep(mid, "function FN(f){ return f===4?'3A':String(f); }   // tầng 3A thay cho tầng 4 (theo bản vẽ CĐT)\n", '')
 mid = rep(mid, "function setFloor(f){ curF=f; fitHi(); hi.position.y=FL[f]-.2; floorOut.textContent='Tầng '+FN(f); mainLbl.textContent='SUN SAPHIA';",
           "function setFloor(f){ curF=f; fitHi(); hi.position.y=FL[f]-.2; floorOut.textContent='Tầng '+FN(f); mainLbl.textContent='SUN FOURS';")
@@ -118,6 +149,9 @@ mid = mid[:a] + '''function placeViewCam(){ if(!unitEye) return; camera.position
 mid = rep(mid, "  if(m==='view') hint.textContent='Kéo để nhìn quanh 360° · quay lưng ra biển là hướng TP, sông Hàn, sân bay';", "  if(m==='view') hint.textContent='Kéo để nhìn quanh 360°';")
 a = mid.index('function flyClose(){'); b = mid.index(' bView.onclick=function(){setMode(\'view\');};')
 mid = mid[:a] + "function flyClose(){ var f=+floorEl.value, m=innerWidth<600, T0=TOWERS[(typeof curT!=='undefined'&&curT)||'F2']; T0.grp.updateMatrixWorld(true); flyTo(T0.grp.localToWorld(new THREE.Vector3(m?-40:-25,FL[f]+(m?40:26),-(T0.D/2+(m?125:90)))),T0.grp.localToWorld(new THREE.Vector3(0,FL[f],0))); }" + mid[b:]
+mid = rep(mid, 'var ROADS2=[[', 'var ROADS2=' + json.dumps(ROADS_ADD, separators=(',', ':'))[:-1] + ',[')
+# cầu Trung Lương (Quảng Nam qua sông Cổ Cò) và cầu Bờ Quan (Minh Mạng) – vị trí, chiều dài theo OpenStreetMap; tối sáng đèn, đổi màu
+mid = rep(mid, 'function updateBridges(dt,tm){', (H / 'src/bridges2.js').read_text(encoding='utf-8') + '\nfunction updateBridges(dt,tm){')
 # xe chạy cả trên các trục quanh FourS (Minh Mạng, Nguyễn Phước Lan, 29/3, Nguyễn Đình Thi), bật đèn pha buổi tối
 mid = rep(mid, '/* người đi dạo trên bãi biển', '''var cars2=[], car2M=null, car2F=null, car2R=null;
 (function(){ var P=ROADS2.map(function(R){ var c=[0]; for(var i=2;i<R.length;i+=2) c.push(c[c.length-1]+Math.hypot(R[i]-R[i-2],R[i+1]-R[i-1])); return {R:R,c:c,len:c[c.length-1]}; }).filter(function(p){ return p.len>120; });
@@ -195,4 +229,4 @@ tail = tail[:a] + "if(/closeMod/.test(location.search)) setMode('close');\n" + t
 out = '\n'.join([head, gate, data, core, towers, '', sap, mid, plan, tail])
 out = out.replace('Sun Saphia 3D', 'Sun FourS 3D')
 (H / 'sun-fours-4d.html').write_text(out, encoding='utf-8')
-print('sun-fours-4d.html', len(out) // 1024, 'KB · FourS', [round(v, 1) for v in FC], 'MM', [round(v) for v in pMM], 'NPL', [round(v) for v in pNPL], '·', hl)
+print('đèn thêm', len(ROADS_ADD), 'đoạn'); print('sun-fours-4d.html', len(out) // 1024, 'KB · FourS', [round(v, 1) for v in FC], 'MM', [round(v) for v in pMM], 'NPL', [round(v) for v in pNPL], '·', hl)
