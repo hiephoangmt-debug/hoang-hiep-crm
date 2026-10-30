@@ -12,7 +12,7 @@ TEL = '0904567009'
 TEL_S = '0904 567 009'
 ZALO = 'https://zalo.me/0904567009'
 UPDATED = '24/10/2026'
-CC_SHA = '3af63bb28efa8f81c7675afdabc1ffb52bec06dc'
+CC_SHA = '3d8d6244ba6c90f5d1a5f7e19c63b7df74ab8c98'
 D4_SHA = '9b3d45c781224ed5c2578d46a43a8f667cb2ef80'
 SLOGAN = '<p class="slogan">Trước mặt là <b>Biển</b> · Sau lưng là <b>Sông</b> · Bên cạnh là <b>Núi</b></p>'
 

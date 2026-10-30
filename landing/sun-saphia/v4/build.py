@@ -931,7 +931,7 @@ def ads(domain):
     b = re.sub(r'<p[^>]*><a class="lk" href="\{M\}/quy-hoach">[^<]*</a></p>', '', b)
     html = head(title, desc, url, OG, 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES], FAV)
     b = b.replace('{M}', MAIN)
-    html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN, pages=False) + '\n' + popup() + '<script>window.SS4D_GATE=20;</script><style>#sscc{display:none!important}</style>' + tail(True) + wave_audio() + '</body>\n</html>\n'
+    html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN, pages=False) + '\n' + popup() + '<script>window.SS4D_GATE=20;</script>' + tail(True) + wave_audio() + '</body>\n</html>\n'
     return copy_fix(tour_insert(quiz_end(html)))
 
 def tinh_dong_tien():
