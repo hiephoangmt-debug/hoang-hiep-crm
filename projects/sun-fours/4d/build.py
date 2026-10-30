@@ -94,7 +94,7 @@ gate = rep(gate, "<div class=\"lg\">SR</div><h3>Link riêng Sun Saphia Residence
 osm_js = (REPO / 'projects/sun-fours/osm/sf-osm-scene.js').read_text(encoding='utf-8').split('\n', 1)[1].strip()
 plans_js = (REPO / 'projects/fours/plans/plans-data.js').read_text(encoding='utf-8')
 stock_js = (REPO / 'landing-pages/assets/fourstower/data/stock.js').read_text(encoding='utf-8')
-mbc_js = (H / 'src/f2-mbc.js').read_text(encoding='utf-8') + '\n' + (H / 'src/plan-img.js').read_text(encoding='utf-8')
+mbc_js = (H / 'src/f2-mbc-lite.js').read_text(encoding='utf-8') + '\n' + (H / 'src/plan-img.js').read_text(encoding='utf-8')
 data = ('<script>/*OSM-DATA*/' + osm_js + '/*/OSM-DATA*/</script>\n<script>\n' + plans_js + '\n' + stock_js + '\n' + mbc_js + '\n</script>')
 
 # --- 2. khung cảnh (giữ nguyên) ---

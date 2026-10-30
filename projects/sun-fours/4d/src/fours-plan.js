@@ -79,7 +79,7 @@ function updPlan(doFly){
   CLIP.constant=planOn?y+.5:1e5;
   ['F1','F2','F3','F5'].forEach(function(t){ var B=bandAt(t,f), T0=TOWERS[t];
     if(B){ var P=planTex(t,B), m=planMesh(t); m.material.map=P.tx; m.material.needsUpdate=true; m.scale.set(P.b[2]-P.b[0],1,P.b[3]-P.b[1]);
-      m.position.set((P.b[0]+P.b[2])/2-T0.cx,y+.42,(P.b[1]+P.b[3])/2-T0.cy); m.visible=planOn; m.userData={t:t,B:B}; for(var wk in WALL3) if(WALL3[wk].parent===T0.grp) WALL3[wk].visible=false; var w3=false;   // anh Hiệp: dùng nguyên ảnh mặt bằng CĐT, không dựng lại tường if(w3){ w3.position.y=y+.44; w3.visible=true; } if(CAPS[t]) CAPS[t].visible=false; }
+      m.position.set((P.b[0]+P.b[2])/2-T0.cx,y+.42,(P.b[1]+P.b[3])/2-T0.cy); m.visible=planOn; m.userData={t:t,B:B}; for(var wk in WALL3) if(WALL3[wk].parent===T0.grp) WALL3[wk].visible=false; var w3=false; /* dùng nguyên ảnh mặt bằng CĐT, không dựng lại tường */ if(w3){ w3.position.y=y+.44; w3.visible=true; } if(CAPS[t]) CAPS[t].visible=false; }
     else { for(var wk2 in WALL3) if(WALL3[wk2].parent===T0.grp) WALL3[wk2].visible=false; if(PM[t]) PM[t].visible=false; var c=capMesh(t); c.position.y=y+.2; c.visible=planOn; } });
   floorOut.textContent='Tầng '+FN(f)+(planOn?' · bấm căn':'');
   if(planOn) planFloorUI(f);
