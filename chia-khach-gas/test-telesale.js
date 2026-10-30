@@ -63,7 +63,7 @@ d1.d[10][3]='Gọi lại sau'; adv(1); run();
 ok(ai('An')===4&&ai('Bình')===3,'An báo cáo hết → giao đúng 1 số, Bình chưa xong không được giao');
 ok(d2.d[8][2]==='An'&&d2.d[9][2]==='','giao đúng thứ tự từ đầu kho');
 ok(d2.d[8][4] instanceof Date && d2.d[8][5] instanceof Date,'ghi giờ giao + hạn');
-ok(/0910000006/.test(lastTo(1).text)&&/Data 02 dòng 9/.test(lastTo(1).text),'nhắn An số điện thoại + vị trí dòng');
+ok(/0910000006/.test(lastTo(1).text)&&/nutTele|ts:Data 02:9:/.test(JSON.stringify(lastTo(1).reply_markup))&&!/docs.google/.test(lastTo(1).text),'nhắn An số điện thoại kèm nút, không lộ link file');
 ok(d1.d[9][2]==='An','khách nét (Hẹn gặp) An giữ luôn');
 adv(1); run(); ok(ai('An')===4,'chưa báo cáo số mới → không giao tiếp');
 d2.d[8][3]='Không nhu cầu'; adv(1); run(); ok(ai('An')===5&&d2.d[9][2]==='An','báo cáo xong → giao số kế tiếp ngay phút sau');
@@ -71,7 +71,7 @@ ok(to(2).some(x=>/0910000003/.test(x.text)&&x.reply_markup),'số đang giữ s�
 ok(to(1).filter(x=>/0910000006/.test(x.text)).length===1,'không nhắn lặp cùng một số');
 click(2,'ts:Data 01:12:5'); click(2,'ts:Data 01:13:6'); click(2,'ts:Data 01:14:0'); run();
 ok(d1.d[11][3]==='Hẹn gặp / xem dự án','bấm nút trên Telegram → ghi thẳng vào file');
-ok(ai('Bình')===4&&/Data 02 dòng 11/.test(lastTo(2).text),'báo cáo qua Telegram → giao số tiếp ngay');
+ok(ai('Bình')===4&&/ts:Data 02:11:/.test(JSON.stringify(lastTo(2).reply_markup)),'báo cáo qua Telegram → giao số tiếp ngay');
 ok(edits.some(e=>/Đã báo cáo: <b>Hẹn gặp/.test(e.text)),'tin cũ đổi thành "Đã báo cáo"');
 d1.d[12][3]=''; click(1,'ts:Data 01:13:0'); run(); ok(d1.d[12][3]==='','bấm số của người khác → không ghi'); d1.d[12][3]='Không nhu cầu';
 NOW=vn(20,22); d2.d[9][3]='Môi giới'; run(); ok(ai('An')===5,'ngoài giờ làm việc không giao');

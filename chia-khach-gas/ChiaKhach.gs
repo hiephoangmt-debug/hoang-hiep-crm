@@ -364,7 +364,6 @@ function capTelesale_() {
   });
   /* 2. Số đang giữ chưa báo cáo mà chưa nhắn sale thì nhắn kèm nút báo cáo (bấm là ghi thẳng vào file) */
   var daGui = JSON.parse(P().getProperty('TELESALE_DA_GUI') || '{}'), conGui = {}, sales = rows_('Sale', T_SALE);
-  var link = 'https://docs.google.com/spreadsheets/d/' + id + '/edit';
   bang.forEach(function (b) {
     var tab = b.sh.getName();
     b.v.forEach(function (r, i) {
@@ -373,9 +372,8 @@ function capTelesale_() {
       if (daGui[k]) { conGui[k] = 1; return; }
       var s = sales.filter(function (x) { return chuanTen_(x.ten) === chuanTen_(ten); })[0]; if (!s || !s.chat_id) return;
       var hn = r[5] instanceof Date ? r[5].getTime() : 0;
-      gui_(s.chat_id, '📞 <b>Data telesale – số của bạn</b>\n📱 <b>' + esc(normPhone(r[1])) + '</b> · ' + esc(String(r[0] || '').trim()) +
-        '\n<i>' + esc(tab) + ' dòng ' + (i + 9) + '</i>' + (hn ? '\n⏱ Hạn báo cáo: <b>trước ' + fmt(hn) + '</b>' : '') +
-        '\nGọi xong bấm tình trạng bên dưới, bot ghi vào file và giao số tiếp.\n📄 ' + link, nutTele_(tab, i + 9));
+      gui_(s.chat_id, '📞 <b>Data telesale – số của bạn</b>\n📱 <b>' + esc(normPhone(r[1])) + '</b> · ' + esc(String(r[0] || '').trim()) + (hn ? '\n⏱ Hạn báo cáo: <b>trước ' + fmt(hn) + '</b>' : '') +
+        '\nGọi xong bấm tình trạng bên dưới, bot tự ghi báo cáo và giao số tiếp.', nutTele_(tab, i + 9));
       conGui[k] = 1;
     });
   });
@@ -398,7 +396,7 @@ function bamTele_(q, parts, tl) {
   sh.getRange(dong, 4).setValue(tt);
   sua_(q.message.chat.id, q.message.message_id, '📱 <b>' + sdt + '</b>\n✅ Đã báo cáo: <b>' + esc(tt) + '</b>');
   log_(s.ten, 'Báo cáo telesale', normPhone(r[1]), tt);
-  tl('Đã ghi vào file');
+  tl('Đã ghi báo cáo');
   capTelesale_();
 }
 
