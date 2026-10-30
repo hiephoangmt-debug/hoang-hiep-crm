@@ -5,7 +5,7 @@
   var lastH=-1;
   function tick(){ try{
     var cp=world.worldToLocal(camera.position.clone()), tp=world.worldToLocal(controls.target.clone()), dx=tp.x-cp.x, dz=tp.z-cp.z, L=Math.hypot(dx,dz)||1, c=dx/L;
-    var h=12.5-6.2*c; h=Math.max(+hourEl.min,Math.min(+hourEl.max,h)); if(Math.abs(h-lastH)<.04) return; lastH=h;
+    var t=(1-c)/2, h=t<.5?5.6+Math.pow(t/.5,1.5)*6.9:12.5+Math.pow((t-.5)/.5,.6)*7.5;   /* biển: mặt trời vừa mọc → trưa → hoàng hôn → hướng thành phố: đêm 20h (đèn phố + pháo hoa tự bắn) */
     hourEl.value=h.toFixed(2); setTime(h); try{ parent.postMessage({ss4dHero:'h',h:h},'*'); }catch(e){} if(typeof refreshEnv==='function') refreshEnv();
     if(hourOut){ var H=Math.floor(h),M=Math.round((h-H)*60); if(M===60){H++;M=0;} hourOut.textContent=(H<10?'0':'')+H+':'+(M<10?'0':'')+M; } }catch(e){} }
   function cam(){ try{
