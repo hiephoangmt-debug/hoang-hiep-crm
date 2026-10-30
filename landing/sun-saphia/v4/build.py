@@ -906,33 +906,35 @@ def ads(domain):
        
         form('dau', 'ADS – form đầu trang', title='Nhận bảng giá gốc từ đại lý', note='Bảng giá gốc, mặt bằng tầng, chính sách – gửi qua Zalo ngay khi chủ đầu tư công bố. Đăng ký miễn phí.', h='h2'),
         hero_perks())
-    b += su_kien('ADS')
-    b += tai_chinh('ADS')
-    b += tim_can('ADS')
-    b += dau_tu_san('ADS')
+    # Bố cục: hero 4D → sự kiện → tổng quan → vị trí → tiện ích → (360°, tầm view) → mặt bằng → loại căn → chính sách → quy hoạch → đầu tư → pháp lý → tầm nhìn
+    b = b.replace('<section class="hero cine2">', su_kien('ADS') + '<section class="hero cine2">', 1)
     b += tldr('Sun Saphia Residence', [('Dự án', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, 30 tầng, 782 căn'), ('Loại căn', 'Studio 30 m² · 1BR+ 50 m² · 2BR 60–70 m²'),
         ('Công trình', 'Cấp I, niên hạn 100 năm · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Mở bán', 'Ra mắt 01/11/2026'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
-    b += ('<section class="sec alt"><div class="wrap">' + sh('★', 'Thời điểm vàng', 'Vì sao <b>đăng ký sớm</b>?', 'o') + why_now() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('☀', 'Một ngày ở Saphia', 'Mở cửa ra là <b>biển</b>', 'y') +
           day4()
           + bgal() +
           '<p class="src" style="margin-top:8px">Ảnh chụp thực tế bãi biển Mỹ Khê – Sơn Thủy hướng về bán đảo Sơn Trà.</p></div></section>')
-    b += qh4()
     b += pband('30 tầng bên <b>biển Mỹ Khê</b>', 'Căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng – sự kiện ra mắt 9:00 Chủ nhật 01/11/2026 tại Hilton Đà Nẵng.', 'ADS – dải ảnh tòa tháp')
     b += vitri_dark('vi-tri', 'ADS')
-    b += ('<section class="sec alt" id="mat-bang"><div class="wrap">' + sh('04', 'Mặt bằng', 'Chọn căn trên <b>mặt bằng tầng</b>', 'n') + units_table() +
-          mb_tuongtac('ADS') +
-          '<div style="margin-top:20px">' + units_drawings(V4) + '</div><div id="chon-can"></div></div></section>')
-    b += ('<section class="sec"><div class="wrap">' + sh('02', 'Tầm nhìn', 'Mỗi hướng <b>một khung tranh</b>', 'o') + views('<img class="vb" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1668w" sizes="(max-width: 760px) 100vw, 900px" width="1668" height="943" alt="Biển ngay ngoài ban công – căn hộ cao tầng mặt biển Đà Nẵng lúc hoàng hôn (ảnh minh họa)" loading="lazy" decoding="async">' % (HB, HB, HB)) + '</div></section>')
-    b += ('<section class="sec alt"><div class="wrap">' + sh('06', 'Tiện ích', 'Sống gắn với <b>biển mỗi ngày</b>', 'y') +
+    b += ('<section class="sec alt"><div class="wrap">' + sh('04', 'Tiện ích nội – ngoại khu', 'Sống gắn với <b>biển mỗi ngày</b>', 'y') +
           '<div class="g3"><article class="card">' + ('<img class="r" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 400px" width="1600" height="900" alt="Hồ bơi tầng 3 nhìn ra biển – Sun Saphia Residence (ảnh minh họa)" loading="lazy" decoding="async">' % ((RAW + 'a0a6849c15880dc681b6e91708d2a0752bd2aa43/landing/sun-saphia/v4/img/ho-boi-tang-3',) * 3)) + '<h3 style="margin-top:12px">Hồ bơi tầng 3 view biển</h3></article>'
           '<article class="card">' + img('tien-ich-gym', 'Gym, pilates (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Gym · Yoga · Pilates</h3></article>'
           '<article class="card">' + img('the-thao-bien', 'Thể thao biển (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Kayak · SUP · Jetski</h3></article></div>' + khoi_de() + '</div></section>')
-    b += ('<section class="sec"><div class="wrap">' + sh('09', 'Cho thuê', 'Tiềm năng <b>dòng tiền</b>', 'o') + rent_night() + '<div style="margin-top:20px">' + rent_case() + '</div></div></section>')
-    b += ('<section class="sec alt"><div class="wrap">' + sh('05', 'Pháp lý', 'Công trình <b>cấp I</b> – pháp lý rõ ràng', 'n') + legal_box_ads() + '<div style="margin-top:26px">' + daily() + '</div></div></section>')
-    b = bands_at(b, [(1, band('Thời điểm vàng – đừng để lỡ đợt đầu', 'Nhận bảng giá gốc và chính sách sớm nhất qua Zalo.', 'Nhận bảng giá sớm', 'ADS – sau lý do mua sớm')),
-                     (3, band('Mỗi tầng chỉ vài căn nhìn thẳng ra biển', 'Người đăng ký sớm được gửi mặt bằng trước và ưu tiên chọn căn ngay khi mở bán.', 'Ưu tiên chọn căn', 'ADS – ưu tiên chọn căn')),
-                     (6, band('Nhận bảng tính dòng tiền theo căn', 'Giá thuê, lấp đầy, lợi nhuận từng căn – gửi qua Zalo.', 'Nhận bảng tính', 'ADS – bảng tính dòng tiền'))])
+    b += band('Mỗi tầng chỉ vài căn nhìn thẳng ra biển', 'Người đăng ký sớm được gửi mặt bằng trước và ưu tiên chọn căn ngay khi mở bán.', 'Ưu tiên chọn căn', 'ADS – ưu tiên chọn căn')
+    b += ('<section class="sec" id="mat-bang"><div class="wrap">' + sh('05', 'Mặt bằng', 'Chọn căn trên <b>mặt bằng tầng</b>', 'n') +
+          mb_tuongtac('ADS') + '<div id="chon-can"></div></div></section>')
+    b += ('<section class="sec alt" id="loai-can"><div class="wrap">' + sh('06', 'Loại căn', '3 loại căn – <b>Studio · 1BR+1 · 2BR</b>', 'o') + units_table() +
+          '<div style="margin-top:20px">' + units_drawings(V4) + '</div></div></section>')
+    b += tai_chinh('ADS')
+    b += ('<section class="sec alt"><div class="wrap">' + sh('★', 'Thời điểm vàng', 'Vì sao <b>đăng ký sớm</b>?', 'o') + why_now() + '</div></section>')
+    b += band('Thời điểm vàng – đừng để lỡ đợt đầu', 'Nhận bảng giá gốc và chính sách sớm nhất qua Zalo.', 'Nhận bảng giá sớm', 'ADS – sau lý do mua sớm')
+    b += qh4()
+    b += dau_tu_san('ADS')
+    b += ('<section class="sec"><div class="wrap">' + sh('09', 'Bài toán đầu tư · cho thuê', 'Tiềm năng <b>dòng tiền</b>', 'o') + rent_night() + '<div style="margin-top:20px">' + rent_case() + '</div></div></section>')
+    b += band('Nhận bảng tính dòng tiền theo căn', 'Giá thuê, lấp đầy, lợi nhuận từng căn – gửi qua Zalo.', 'Nhận bảng tính', 'ADS – bảng tính dòng tiền')
+    b += ('<section class="sec alt"><div class="wrap">' + sh('10', 'Pháp lý', 'Công trình <b>cấp I</b> – pháp lý rõ ràng', 'n') + legal_box_ads() + '<div style="margin-top:26px">' + daily() + '</div></div></section>')
+    b += ('<section class="sec"><div class="wrap">' + sh('11', 'Tầm nhìn', 'Mỗi hướng <b>một khung tranh</b>', 'o') + views('<img class="vb" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1668w" sizes="(max-width: 760px) 100vw, 900px" width="1668" height="943" alt="Biển ngay ngoài ban công – căn hộ cao tầng mặt biển Đà Nẵng lúc hoàng hôn (ảnh minh họa)" loading="lazy" decoding="async">' % (HB, HB, HB)) + '</div></section>')
+    b += tim_can('ADS')
     b += cta_block('ADS – form cuối trang')
     title = 'Sun Saphia Residence – Căn hộ mặt biển Sun Group Đà Nẵng chỉ từ 1,8 tỷ'
     desc = 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: Studio chỉ từ ~1,8 tỷ (dự kiến), thanh toán 25% đến khi nhận nhà, vay 70% hỗ trợ lãi suất 24 tháng. Cách biển 400m, công trình cấp I. Zalo 0904 567 009.'
