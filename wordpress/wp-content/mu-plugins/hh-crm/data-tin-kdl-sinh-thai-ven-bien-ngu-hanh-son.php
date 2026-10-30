@@ -18,9 +18,10 @@ function hh_posts_kdl_sinh_thai_ven_bien_ngu_hanh_son( $posts ) {
 		'project'   => '',
 		'category'  => 'Hạ tầng & quy hoạch',
 		'date'      => '2026-10-30 15:00:00',
-		'image'         => 'plugin:img/tin-tuc/kdl-sinh-thai-ven-bien-ngu-hanh-son.jpg',
-		'image_alt'     => 'Khu du lịch sinh thái ven biển Ngũ Hành Sơn – tóm tắt quy hoạch 1/500: khách sạn 5 sao 30 tầng, 2 tháp căn hộ du lịch 15 tầng',
-		'image_caption' => 'Tóm tắt thông tin quy hoạch 1/500 của dự án (Hoàng Hiệp tổng hợp, thông tin đang chờ xác nhận chính thức).',
+		'image'         => 'plugin:img/tin-tuc/so-do-kdl-sinh-thai-ven-bien-ngu-hanh-son.jpg',
+		'image_alt'     => 'Sơ đồ vị trí khu du lịch sinh thái ven biển Ngũ Hành Sơn giữa Fusion Resort và Naman Retreat: khách sạn 5 sao 30 tầng, 2 tháp căn hộ du lịch 15 tầng, biệt thự',
+		'image_caption' => 'Sơ đồ minh hoạ vị trí và các khu chức năng (Hoàng Hiệp vẽ, không theo tỷ lệ; thông tin theo quy hoạch 1/500, đang chờ xác nhận chính thức).',
+		'image_replace' => 'kdl-sinh-thai-ven-bien-ngu-hanh-son',
 		'content'   => <<<'HTML'
 <p>Dự án <strong>Khu du lịch, dịch vụ sinh thái ven biển tại phường Ngũ Hành Sơn</strong> (Đà Nẵng) đã dọn dẹp mặt bằng và bắt đầu triển khai những hạng mục đầu tiên, theo hình ảnh công trường được chia sẻ ngày 30/10/2026. Chủ đầu tư là <strong>Công ty TNHH Đầu tư và Phát triển Đệ Nhất</strong>.</p>
 <p><em>Lưu ý: thông tin quy mô dưới đây theo quy hoạch tổng mặt bằng tỷ lệ 1/500 được chấp thuận tháng 4/2026, được chia sẻ trên mạng xã hội. Hoàng Hiệp chưa thấy báo chí, cơ quan nhà nước công bố chính thức – thông tin đang chờ xác nhận, sẽ cập nhật khi có nguồn chính thống.</em></p>
