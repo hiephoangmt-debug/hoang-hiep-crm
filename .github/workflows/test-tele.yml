@@ -11,5 +11,5 @@ jobs:
         run: |
           U="https://script.google.com/macros/s/AKfycbwvmG1HMtrQOeUXCuBJ6CHmMb4TcCZ53_n5lwPAt3-6-lG2_fIRX0q25Rv-6LPwVWXZHw/exec"
           echo "== GET"; curl -sSL -m 60 "$U" ; echo
-          echo "== POST"; curl -sSL -m 90 -X POST "$U?key=sft-tg-4821" -H "Content-Type: text/plain;charset=utf-8" \
-            --data '{"name":"TEST Claude kiem tra","phone":"0900000123","interest":"Kiểm tra hệ thống – không phải khách thật","can_quan_tam":"F2 (test)","utm_source":"test","source":"kiem-tra"}' ; echo
+          echo "== POST"; curl -sSL -m 90 "$U?key=sft-tg-4821" -H "Content-Type: text/plain;charset=utf-8" \
+            --data '{"name":"TEST Claude kiem tra","phone":"0900000124","interest":"Kiểm tra hệ thống – không phải khách thật","can_quan_tam":"F2 (test)","utm_source":"test","source":"kiem-tra"}' ; echo
