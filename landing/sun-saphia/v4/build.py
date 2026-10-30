@@ -832,7 +832,7 @@ def dau_tu_san(ctx='ADS'):
             '<p class="src" style="text-align:center;margin-top:8px">Mức chiết khấu mua sàn / nhiều căn theo chính sách chủ đầu tư từng đợt – đại lý gửi phương án riêng theo ngân sách của anh/chị.</p>'
             '</div></section>')
 
-def ads(domain):
+def ads(domain, home_page=False):
     url = MAIN + '/ads'  # cả hai tên miền chuẩn hóa về trang ads chính
     HB = RAW + '90c9302fe8dca2fa597009660b9635821c7d1eb5/landing/sun-saphia/v4/img/hero-bien'
     b = ('<section class="hcv"><div class="hban hvid">'
@@ -947,7 +947,7 @@ def ads(domain):
     b = re.sub(r'<p[^>]*><a class="lk" href="\{M\}/quy-hoach">[^<]*</a></p>', '', b)
     html = head(title, desc, url, OG, 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES], FAV)
     b = b.replace('{M}', MAIN)
-    html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN, pages=False) + '\n' + popup() + '<script>window.SS4D_GATE=20;</script>' + tail(True) + wave_audio() + '</body>\n</html>\n'
+    html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN, pages=home_page) + '\n' + popup() + '<script>window.SS4D_GATE=20;</script>' + tail(True) + wave_audio() + '</body>\n</html>\n'
     return copy_fix(tour_insert(quiz_end(html)))
 
 def tinh_dong_tien():
@@ -1273,6 +1273,10 @@ if __name__ == '__main__':
     out = {'trang-chu.html': home(), 'bang-gia.html': bang_gia(), 'mat-bang.html': mat_bang(), 'phap-ly.html': phap_ly(), 'cho-thue.html': cho_thue(), 'tinh-dong-tien.html': tinh_dong_tien(), 'vi-sao-sun-group.html': vi_sao(), 'quy-hoach.html': cong_vien(), 'chinh-sach-bao-mat.html': chinh_sach(),
            'ads.html': ads(MAIN), 'ads-shaphia.html': ads('https://www.sun-shaphiaresidence.com')}
     # Trang chủ tên miền phụ: cùng nội dung, chuẩn hóa về tên miền chính để tránh trùng nội dung
+    # Trang chính = bố cục trang Ads (hero 4D …), đường dẫn chuẩn là trang chủ; lead ghi nguồn "Trang chủ"; /ads giữ nguyên cho quảng cáo
+    out['trang-chu-cu.html'] = out['trang-chu.html']   # bản trang chủ cũ, giữ để khôi phục khi cần
+    hp = ads(MAIN, home_page=True).replace(MAIN + '/ads"', MAIN + '/"').replace('ADS – ', 'Trang chủ – ')
+    out['trang-chu.html'] = hp
     out['shaphia.html'] = out['trang-chu.html']
     import slides_page
     out['trinh-chieu.html'] = slides_page.trinh_chieu(page, ORG, RES)
