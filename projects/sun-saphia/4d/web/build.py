@@ -21,8 +21,10 @@ js = ('(function(){function add(){if(document.getElementById("ssWm"))return;var 
 i = src.index('var DOC = ') + len('var DOC = ')
 j = src.index(';\n', i)
 doc = json.loads(src[i:j].replace('<\\/', '</'))
-CAM = [("camera.position.copy(world.localToWorld(new THREE.Vector3(-377,260,-214)));", "camera.position.copy(world.localToWorld(new THREE.Vector3(-482,329,-304)));"),
-       ("camera.position.copy(world.localToWorld(new THREE.Vector3(-520,360,-330)));", "camera.position.copy(world.localToWorld(new THREE.Vector3(-616,423,-408)));")]
+CAM = [("camera.position.copy(world.localToWorld(new THREE.Vector3(-377,260,-214)));", "camera.position.copy(world.localToWorld(new THREE.Vector3(-497,170,-319)));"),
+       ("camera.position.copy(world.localToWorld(new THREE.Vector3(-520,360,-330)));", "camera.position.copy(world.localToWorld(new THREE.Vector3(-610,215,-402)));")]
+CAM.append(("var tgt=world.localToWorld(new THREE.Vector3(-27,30,86));", "var tgt=world.localToWorld(new THREE.Vector3(-27,44,86));"))
+CAM.append(("controls.target.copy(world.localToWorld(new THREE.Vector3(-40,45,60)));", "controls.target.copy(world.localToWorld(new THREE.Vector3(-40,52,60)));"))
 for a_, b_ in CAM:
     assert a_ in doc; doc = doc.replace(a_, b_)
 k = doc.index('</style>'); doc = doc[:k] + css + doc[k:]
