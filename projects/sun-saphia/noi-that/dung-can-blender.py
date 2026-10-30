@@ -136,8 +136,8 @@ def panel_wall(name, col, joint=.6):
     bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = .3; nt.links.new(br.outputs['Fac'], bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], b.inputs['Normal'])
     return m
 if LUX:
-    FLOOR = marble('san-marble', (.93, .91, .88), (.6, .57, .54)); TILE = marble('wc-marble', (.9, .88, .85), (.48, .45, .42), (.6, .6), .1)
-    DECK = wood_floor(); WALL = panel_wall('tuong-op-tam', (.9, .87, .82)); EXT = panel_wall('tuong-bao-op-tam', (.93, .91, .87), .9)   # tông kem sáng cho phòng thoáng; CEIL = mat('tran-lux', (.97, .96, .94), .95)
+    FLOOR = marble('san-marble', (.93 * float(os.environ.get('TONE', '1')), .91 * float(os.environ.get('TONE', '1')), .88 * float(os.environ.get('TONE', '1'))), (.6, .57, .54)); TILE = marble('wc-marble', (.9, .88, .85), (.48, .45, .42), (.6, .6), .1)
+    DECK = wood_floor(); _tn = float(os.environ.get('TONE', '1')); WALL = panel_wall('tuong-op-tam', (.9 * _tn, .87 * _tn, .82 * _tn * .97)); EXT = panel_wall('tuong-bao-op-tam', (.93 * _tn, .91 * _tn, .87 * _tn * .97), .9)   # tông kem sáng cho phòng thoáng; CEIL = mat('tran-lux', (.97, .96, .94), .95)
     WALNUT = mat('oc-cho-lux', (.19, .1, .055), .3, noise=(25, .35, .02)); OAK = mat('go-lux', (.34, .2, .11), .3, noise=(25, .35, .02))
     BRASS = mat('dong', (.86, .62, .33), .22, 1.)
     FAB = velvet('nhung-xanh-reu', (.025, .085, .07)); FAB2 = velvet('nhung-taupe', (.4, .33, .27)); CHAIRF = velvet('boucle-kem', (.86, .82, .76))
