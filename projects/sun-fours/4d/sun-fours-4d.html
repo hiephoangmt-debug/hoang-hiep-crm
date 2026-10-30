@@ -1397,7 +1397,7 @@ function updatePlanes(dt){ pT+=dt;
 /* ---------- Labels ---------- */
 var labelsEl=document.getElementById('labels'), LBL=[];
 function label(text,cls,obj,pos){var e=document.createElement('div');e.className='lb '+(cls||'');e.textContent=text;labelsEl.appendChild(e);LBL.push({e:e,obj:obj,p:new THREE.Vector3(pos[0],pos[1],pos[2]),cls:cls});return e;}
-var mainLbl=label('SUN FOURS','main',T,[0,TOP+16,0]);
+var mainLbl=label('SUN FOURS','main',T,[0,TOP+16,0]); LBL.pop(); mainLbl.remove();   // anh Hiệp: bỏ nhãn/logo ở giữa mô hình
 label('Võ Nguyên Giáp','road',world,[0,2,-360]);
 label('Trường Sa','road',world,[0,2,640]);
 label('Nguyễn Đức Thuận','road',world,[-250,2,14]);

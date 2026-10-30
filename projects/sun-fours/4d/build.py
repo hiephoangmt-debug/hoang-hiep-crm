@@ -128,7 +128,7 @@ var B={visible:false};
 
 # --- 5. hiệu ứng, nhãn, giờ trong ngày, chế độ xem (giữ nguyên, sửa phần gắn với tòa chính) ---
 mid = '\n'.join(seg(690, 1104))
-mid = rep(mid, "var mainLbl=label('SUN SAPHIA','main',T,[0,TOP+18,0]);", "var mainLbl=label('SUN FOURS','main',T,[0,TOP+16,0]);")
+mid = rep(mid, "var mainLbl=label('SUN SAPHIA','main',T,[0,TOP+18,0]);", "var mainLbl=label('SUN FOURS','main',T,[0,TOP+16,0]); LBL.pop(); mainLbl.remove();   // anh Hiệp: bỏ nhãn/logo ở giữa mô hình")
 for s in ["label('Khu đất dự án · 3.720,1 m²','',world,[-50,3,64]); label('Khu thấp tầng & hồ cảnh quan (phối cảnh minh họa)','',world,[66,14,-430]); ",
           "label('Dải đất resort ven biển (đang điều chỉnh quy hoạch)','',world,[62,10,-60]);\n",
           "label('Hồ bơi phía trước (theo phối cảnh)','',world,[66,8,8]);\n",
