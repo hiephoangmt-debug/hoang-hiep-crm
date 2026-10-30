@@ -429,13 +429,16 @@ def mb_tuongtac(src='Web'):
     """Mặt bằng tương tác: tầng điển hình 3A–28 bấm từng căn hiện thông tin; tab các tầng đặc biệt 2, 3, 29, 30; bấm ảnh phóng to."""
     import json as _j, os
     D = _j.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'mb-units.json'), encoding='utf8'))
-    VE = RAW + 'c588d4a0d0c28b14f38035eaf7e5801bf791d189/landing/sun-saphia/v4/img/mat-bang-tang-dien-hinh-ve'
+    VE = RAW + '3af63bb28efa8f81c7675afdabc1ffb52bec06dc/landing/sun-saphia/v4/img/mat-bang-tang-dien-hinh-ve'
     T = RAW + '82607488b0132bb3c6b51585b33a71fd19edd0fc/landing/sun-saphia/v4/img/mat-bang-tang-'
     paths = ''.join('<path class="mbx-u" data-u="%d" d="%s" tabindex="0" role="button" aria-label="Căn số %s"/>' % (i, u['d'], u['id']) for i, u in enumerate(D['u']))
     data = _j.dumps({'u': [[u['id'], u['t'], u['k'], u['face'], u['a']] for u in D['u']], 'I': D['INFO'], 'V': D['VIEW'], 's': src}, ensure_ascii=False)
     tabs = '<button type="button" data-mt="dh" class="on" aria-selected="true">Tầng 3A–28 <small>bấm từng căn</small></button>' + ''.join(
         '<button type="button" data-mt="%s">%s <small>%s</small></button>' % (k, n, sub.split(' · ')[0] if ' · ' in sub else sub) for k, n, sub, _, _ in TANG_F if k != '3a-28')
-    pans = ('<div class="mbx-p" data-mp="dh"><div class="mbx-g"><figure class="mbx-f"><img src="%s-900.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 760px" width="1600" height="1498" loading="lazy" decoding="async" '
+    fsel = ('<div class="mbx-fl"><label for="mbx-sel">Chọn tầng</label><button type="button" class="mbx-st" data-st="-1" aria-label="Tầng dưới">−</button>'
+            '<select id="mbx-sel"><option value="0">Tất cả tầng 3A–28</option>' + ''.join('<option value="%d">Tầng %s</option>' % (f, '3A' if f == 3 else f) for f in range(3, 29)) + '</select>'
+            '<button type="button" class="mbx-st" data-st="1" aria-label="Tầng trên">+</button><span class="mbx-fh">Chọn tầng để xem mã căn và độ cao view</span></div>')
+    pans = ('<div class="mbx-p" data-mp="dh">' + fsel + '<div class="mbx-g"><figure class="mbx-f"><img src="%s-900.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 760px" width="1600" height="1498" loading="lazy" decoding="async" '
             'alt="Mặt bằng tầng điển hình 3A–28 Sun Saphia Residence: 28 căn/tầng gồm 19 Studio, 4 căn 1PN+1, 5 căn 2PN góc bo; phía trên là biển Đông, đường Trường Sa">'
             '<svg viewBox="%s" aria-label="Bấm vào căn để xem thông tin"><defs><clipPath id="mbx-clip"><path d="%s"/></clipPath></defs><g clip-path="url(#mbx-clip)">%s</g></svg></figure>'
             '<div class="mbx-c" aria-live="polite"><span class="ey">Tầng điển hình 3A–28 · 25 tầng</span><h3>👆 Bấm vào một căn trên mặt bằng</h3>'
@@ -459,28 +462,35 @@ def mb_tuongtac(src='Web'):
            '.mbx-c{background:#fff;border:1px solid var(--ln,#e4dccd);border-radius:14px;padding:20px 22px;position:sticky;top:90px}.mbx-c h3{margin:6px 0 8px;font-size:22px;color:var(--nv,#0A2540)}.mbx-c p{margin:0 0 10px;line-height:1.5}'
            '.mbx-m{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.mbx-m div{background:#f7f4ee;border-radius:10px;padding:8px;text-align:center}.mbx-m b{display:block;font-size:22px;color:#E96118}.mbx-m span{font-size:13px}'
            '.mbx-b{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px!important}.mbx-z{border:1px solid var(--nv,#0A2540);background:#fff;color:var(--nv,#0A2540);font:700 14px inherit;padding:9px 14px;border-radius:999px;cursor:pointer}'
+           '.mbx-fl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px}.mbx-fl label{font-weight:800;color:var(--nv,#0A2540)}.mbx-fl select{font:700 15px inherit;padding:8px 12px;border:1px solid var(--ln,#d9dee5);border-radius:10px;background:#fff;color:var(--nv,#0A2540)}'
+           '.mbx-st{width:38px;height:38px;border-radius:50%;border:1px solid var(--nv,#0A2540);background:#fff;color:var(--nv,#0A2540);font:800 18px/1 inherit;cursor:pointer}.mbx-fh{font-size:14px;color:#6a7280}'
            '.mbx-r{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:15px;margin:10px 0}.mbx-r dt{color:#6a7280}.mbx-r dd{margin:0;font-weight:600}'
            '.mbx-lb{position:fixed;inset:0;z-index:2147483000;background:rgba(5,15,28,.92);display:flex;align-items:center;justify-content:center;padding:12px;cursor:zoom-out}.mbx-lb img{max-width:100%;max-height:100%;object-fit:contain;background:#fff;border-radius:8px}'
            '.mbx-lb b{position:absolute;top:10px;right:16px;color:#fff;font-size:34px;line-height:1}@media(max-width:860px){.mbx-g{grid-template-columns:1fr}.mbx-c{position:static}.mbx-t button{flex:1 1 auto;padding:8px 12px;font-size:14px}}</style>')
     js = ('<script>(function(){var r=document.currentScript.previousElementSibling,D=' + data.replace('</', '<\\/') + ';'
           'function e(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;"}[c]})}'
           'function m2(x){return String(x).replace(".",",")}'
+          'var F=0,SEL=-1;function fn(f){return f===3?"3A":String(f)}function pad(f){return(f<10?"0":"")+f}function el(f){return Math.round(13+(f-3)*3.5+1.6)}'
           'function lb(src){var d=document.createElement("div");d.className="mbx-lb";d.setAttribute("role","dialog");d.innerHTML="<b aria-hidden=true>×</b><img alt=\\"Mặt bằng phóng to\\" src=\\""+e(src)+"\\">";'
           'function x(){d.remove();document.removeEventListener("keydown",k)}function k(ev){if(ev.key==="Escape")x()}d.onclick=x;document.addEventListener("keydown",k);document.body.appendChild(d)}'
-          'function show(i){var u=D.u[i],I=D.I[u[2]]||D.I[u[1]],V=D.V[u[3].charAt(0)],N={"STU":"Studio","1PN+1":"1PN+1","2PN":"2PN góc"}[u[1]];'
+          'function show(i){SEL=i;var u=D.u[i],I=D.I[u[2]]||D.I[u[1]],V=D.V[u[3].charAt(0)],N={"STU":"Studio","1PN+1":"1PN+1","2PN":"2PN góc"}[u[1]];'
           'r.querySelectorAll(".mbx-u").forEach(function(p){p.classList.toggle("on",+p.getAttribute("data-u")===i)});'
           'var c=r.querySelector("[data-mp=dh] .mbx-c");'
-          'c.innerHTML="<span class=ey>Tầng 3A–28 · căn số "+e(u[0])+"</span><h3>Căn số "+e(u[0])+" · "+N+"</h3><dl class=mbx-r>"'
+          'var cd=F?"SP"+pad(F)+u[0]:"",tl=F?"tầng "+fn(F):"tầng 3A–28";'
+          'c.innerHTML="<span class=ey>"+(F?"Tầng "+fn(F)+" · mã căn "+cd:"Tầng 3A–28 · căn số "+e(u[0]))+"</span><h3>"+(F?"Căn "+cd:"Căn số "+e(u[0]))+" · "+N+"</h3><dl class=mbx-r>"'
+          '+(F?"<dt>Tầng</dt><dd>"+fn(F)+" · view cao ~"+el(F)+" m</dd>":"<dt>Tầng</dt><dd>3A–28 (chọn tầng ở trên để có mã căn)</dd>")'
           '+(u[4]?"<dt>Diện tích</dt><dd>"+m2(u[4][0])+" m² thông thủy · "+m2(u[4][1])+" m² tim tường</dd>":"")'
           '+"<dt>Kích thước</dt><dd>"+e(I[1])+"</dd><dt>Hướng view</dt><dd>"+e(V[0])+"</dd><dt>Nắng</dt><dd>"+e(V[2])+"</dd></dl>"'
           '+"<p>"+e(V[1])+"</p><p><b>Bố trí:</b> "+e(I[2])+".</p>"'
-          '+"<p class=mbx-b><button type=button class=\\"btn sm\\" data-pop data-interest=\\""+e(D.s+" – mặt bằng: căn số "+u[0]+" ("+N+", tầng 3A–28)")+"\\">Nhận giá căn số "+e(u[0])+"</button>"'
+          '+"<p class=mbx-b><button type=button class=\\"btn sm\\" data-pop data-interest=\\""+e(D.s+" – mặt bằng: căn "+(F?cd:"số "+u[0])+" ("+N+", "+tl+")")+"\\">Nhận giá căn "+e(F?cd:"số "+u[0])+"</button>"'
           '+"<button type=button class=mbx-z data-z=\\""+e(r.querySelector("[data-mp=dh] .mbx-z").getAttribute("data-z"))+"\\">🔍 Phóng to</button></p>";'
           'if(innerWidth<860)c.scrollIntoView({behavior:"smooth",block:"nearest"})}'
           'r.addEventListener("click",function(ev){var t=ev.target.closest("[data-mt]");if(t){r.querySelectorAll("[data-mt]").forEach(function(b){var on=b===t;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});'
           'r.querySelectorAll("[data-mp]").forEach(function(p){p.classList.toggle("off",p.getAttribute("data-mp")!==t.getAttribute("data-mt"))});try{gtag("event","mb_tang",{event_label:t.getAttribute("data-mt")})}catch(x){}return}'
           'var u=ev.target.closest(".mbx-u");if(u){show(+u.getAttribute("data-u"));try{gtag("event","mb_can",{event_label:D.u[+u.getAttribute("data-u")][0]})}catch(x){}return}'
           'var z=ev.target.closest("[data-z]");if(z){lb(z.getAttribute("data-z"))}});'
+          'var sl=r.querySelector("#mbx-sel"),fh=r.querySelector(".mbx-fh");function setF(f){F=f;sl.value=f;fh.textContent=f?"Tầng "+fn(f)+" · view cao ~"+el(f)+" m · bấm căn để xem mã căn":"Chọn tầng để xem mã căn và độ cao view";if(SEL>=0)show(SEL);try{gtag("event","mb_floor",{event_label:fn(f)})}catch(x){}}'
+          'sl.addEventListener("change",function(){setF(+sl.value)});r.querySelectorAll("[data-st]").forEach(function(b){b.addEventListener("click",function(){var f=F||17;f+=+b.getAttribute("data-st");setF(Math.max(3,Math.min(28,f)))})});'
           'r.addEventListener("keydown",function(ev){var u=ev.target.closest&&ev.target.closest(".mbx-u");if(u&&(ev.key==="Enter"||ev.key===" ")){ev.preventDefault();show(+u.getAttribute("data-u"))}})})();</script>')
     return css + '<div class="mbx"><div class="mbx-t" role="tablist">' + tabs + '</div>' + pans + '</div>' + js
 
