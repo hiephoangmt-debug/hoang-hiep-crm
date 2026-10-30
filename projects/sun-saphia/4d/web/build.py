@@ -21,6 +21,10 @@ js = ('(function(){function add(){if(document.getElementById("ssWm"))return;var 
 i = src.index('var DOC = ') + len('var DOC = ')
 j = src.index(';\n', i)
 doc = json.loads(src[i:j].replace('<\\/', '</'))
+CAM = [("camera.position.copy(world.localToWorld(new THREE.Vector3(-377,260,-214)));", "camera.position.copy(world.localToWorld(new THREE.Vector3(-482,329,-304)));"),
+       ("camera.position.copy(world.localToWorld(new THREE.Vector3(-520,360,-330)));", "camera.position.copy(world.localToWorld(new THREE.Vector3(-616,423,-408)));")]
+for a_, b_ in CAM:
+    assert a_ in doc; doc = doc.replace(a_, b_)
 k = doc.index('</style>'); doc = doc[:k] + css + doc[k:]
 k = doc.rindex('</body>') if '</body>' in doc else len(doc); doc = doc[:k] + '<script>' + js + '</script>' + doc[k:]
 out = src[:i] + json.dumps(doc, ensure_ascii=False).replace('</', '<\\/') + src[j:]
