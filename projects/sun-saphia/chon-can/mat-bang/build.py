@@ -6,13 +6,17 @@ here = pathlib.Path(__file__).parent
 sha = sys.argv[1]
 src = subprocess.check_output(['git', 'show', sha + ':projects/sun-saphia/chon-can/chon-can-embed.js'], cwd=here).decode('utf-8')
 css = ('.hd,#dl3d,#dl2d,#rc .note{display:none!important}'
-       'body:not(.picked) #rc{display:none!important}body:not(.picked) .wrap{grid-template-columns:1fr!important;max-width:1060px;margin:0 auto}'
+       '.wrap{grid-template-columns:1fr!important;max-width:1060px;margin:0 auto;position:relative}'
+       'body:not(.picked) #rc{display:none!important}'
        'body:not(.picked) #plan:not(.flt) svg .u{opacity:1!important}body:not(.picked) #plan .u.sel .b{stroke:#fff!important;stroke-width:2!important}'
-       'body.picked .wrap{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)!important;align-items:start}'
-       '#rc{animation:ssIn .45s ease}@keyframes ssIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}'
-       '#ssLead{display:block;width:100%;border:0;border-radius:12px;background:linear-gradient(135deg,#FF8A3D,#E8460F);color:#fff;font:800 16px var(--font);padding:14px;cursor:pointer;box-shadow:0 8px 18px rgba(232,70,15,.3)}'
-       '#ssHint{max-width:1060px;margin:10px auto 0;padding:12px 16px;background:#fff3e8;border:1.5px solid #ffd2b3;border-radius:12px;color:#0A2540;font-size:14.5px;line-height:1.5;text-align:center}body.picked #ssHint{display:none}'
-       '@media(max-width:820px){body.picked .wrap{grid-template-columns:1fr!important}#ssHint{margin:10px 12px 0}}')
+       'body.picked #rc{position:absolute;left:0;right:0;margin:0 auto;width:min(900px,calc(100%% - 16px));z-index:60;box-shadow:0 24px 70px rgba(10,37,64,.45);border-radius:16px;animation:ssIn .35s ease}'
+       '@keyframes ssIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}'
+       '#ssBg{display:none;position:absolute;left:0;top:0;width:100%%;z-index:55;background:rgba(10,37,64,.55);backdrop-filter:blur(2px)}body.picked #ssBg{display:block}'
+       '#ssX{position:absolute;top:8px;right:8px;z-index:5;width:38px;height:38px;border-radius:50%%;border:0;background:#0A2540;color:#fff;font:700 22px/38px var(--font);cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.25)}'
+       '#rc #info{padding-right:52px}'
+       '#ssLead{display:block;width:100%%;border:0;border-radius:12px;background:linear-gradient(135deg,#FF8A3D,#E8460F);color:#fff;font:800 16px var(--font);padding:14px;cursor:pointer;box-shadow:0 8px 18px rgba(232,70,15,.3)}'
+       '#ssHint{max-width:1060px;margin:10px auto 0;padding:12px 16px;background:#fff3e8;border:1.5px solid #ffd2b3;border-radius:12px;color:#0A2540;font-size:14.5px;line-height:1.5;text-align:center}'
+       '@media(max-width:820px){#ssHint{margin:10px 12px 0}body.picked #rc{width:calc(100%% - 12px)}}') % ()
 js = r'''(function(){
   function H(){ try{ parent.postMessage({sscc:'h2',h:Math.ceil(document.documentElement.scrollHeight)},'*'); }catch(e){} }
   setInterval(H,700); addEventListener('load',H); addEventListener('resize',H);
@@ -24,10 +28,18 @@ js = r'''(function(){
     if(!l){ l=document.createElement('button'); l.type='button'; l.id='ssLead'; b.insertBefore(l,b.firstChild);
       l.onclick=function(){ var f=document.getElementById('floor'); try{ parent.postMessage({sscc:'lead',unit:code(),type:typ(),floor:f?f.value:''},'*'); }catch(e){} }; }
     l.textContent='Nhận giá & tình trạng căn '+(c||'này')+' →'; }
-  document.addEventListener('click',function(e){ if(!(e.target.closest&&e.target.closest('#plan .u'))) return;
+  function bg(){ var g=document.getElementById('ssBg'); if(!g){ g=document.createElement('div'); g.id='ssBg'; document.body.appendChild(g); g.onclick=close; }
+    g.style.height=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)+'px'; return g; }
+  function close(){ document.body.classList.remove('picked'); H(); }
+  addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+  document.addEventListener('click',function(e){ var u=e.target.closest&&e.target.closest('#plan .u'); if(!u) return;
     var first=!document.body.classList.contains('picked'); document.body.classList.add('picked');
-    setTimeout(function(){ try{ dispatchEvent(new Event('resize')); }catch(x){} lead(); H();
-      if(innerWidth<=820){ try{ parent.postMessage({sscc:'scrollrc',y:document.getElementById('rc').getBoundingClientRect().top},'*'); }catch(x){} } },first?80:20);
+    var rc=document.getElementById('rc'), w=document.querySelector('.wrap');
+    if(!document.getElementById('ssX')){ var x=document.createElement('button'); x.type='button'; x.id='ssX'; x.setAttribute('aria-label','Đóng'); x.textContent='×'; x.onclick=close; rc.insertBefore(x,rc.firstChild); }
+    var top=u.getBoundingClientRect().top-w.getBoundingClientRect().top-(innerWidth<=820?60:140); rc.style.top=Math.max(8,top)+'px';
+    bg();
+    setTimeout(function(){ try{ dispatchEvent(new Event('resize')); }catch(x){} lead(); bg(); H();
+      try{ parent.postMessage({sscc:'scrollrc',y:rc.getBoundingClientRect().top},'*'); }catch(x){} },first?80:20);
     try{ parent.postMessage({sscc:'pick'},'*'); }catch(x){} },true);
   setInterval(lead,500); if(document.readyState!=='loading') hint(); else addEventListener('DOMContentLoaded',hint); setTimeout(hint,300);
 })();'''

@@ -259,8 +259,7 @@ def home():
           + units_table() +
           '<div class="g2 eq" style="margin-top:26px">' + fig('mat-bang-tong-the', 'Mặt bằng tổng thể Sun Saphia Residence hướng ra biển Mỹ Khê, phía trước là công viên ven biển', 'Mặt bằng tổng thể – tối ưu tầm view biển Mỹ Khê', wm=True)
           + fig('layout-tang-3a-28', 'Layout tầng điển hình 3A–28 tòa Saphia, 28 căn mỗi tầng', 'Layout tầng 3A–28', wm=True) + '</div>'
-          + mb_tuongtac() +
-          '<div style="margin-top:22px">' + units_drawings(V4) + '</div>'
+          + '<div style="margin-top:22px">' + units_drawings(V4) + '</div>'
           '<p style="margin-top:18px"><a class="btn sm nv" href="{M}/mat-bang">Xem chi tiết mặt bằng từng loại căn →</a></p>'
           '<div id="chon-can"></div></div></section>')
     # 05 Pháp lý
@@ -530,8 +529,7 @@ def mat_bang():
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Cơ cấu', '782 căn – <b>3 loại căn</b>', 'o') + units_table() +
           '<div style="margin-top:24px">' + units_drawings(V4) + '</div></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('2', 'Layout tầng', 'Mặt bằng <b>từng tầng</b> tòa Saphia', 'n')
-          + mb_tuongtac() +
-          '<div id="chon-can"></div></div></section>')
+          + '<div id="chon-can"></div></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('3', 'Hướng view', 'Mỗi hướng <b>một khung tranh</b>', 'y') + views() + '</div></section>')
     b += ('<section class="sec" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>mặt bằng</b>', 'o') + fq + '<h3 style="margin-top:26px">Xem thêm</h3>' + related('/mat-bang') + '</div></section>')
     b = bands_at(b, [(1, band('Căn view biển đẹp có hạn trên mỗi tầng', 'Để lại số để được ưu tiên chọn căn trên mặt bằng ngay khi mở bán.', 'Ưu tiên chọn căn', 'Mặt bằng – ưu tiên chọn căn', ('/bang-gia', 'Xem giá từng loại căn'))),
@@ -923,7 +921,7 @@ def ads(domain, home_page=False):
           '<article class="card">' + img('the-thao-bien', 'Thể thao biển (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Kayak · SUP · Jetski</h3></article></div>' + khoi_de() + '</div></section>')
     b += band('Mỗi tầng chỉ vài căn nhìn thẳng ra biển', 'Người đăng ký sớm được gửi mặt bằng trước và ưu tiên chọn căn ngay khi mở bán.', 'Ưu tiên chọn căn', 'ADS – ưu tiên chọn căn')
     b += ('<section class="sec" id="mat-bang"><div class="wrap">' + sh('05', 'Mặt bằng', 'Chọn căn trên <b>mặt bằng tầng</b>', 'n') +
-          mb_tuongtac('ADS') + '<div id="chon-can"></div></div></section>')
+          '<div id="chon-can"></div></div></section>')
     b += ('<section class="sec alt" id="loai-can"><div class="wrap">' + sh('06', 'Loại căn', '3 loại căn – <b>Studio · 1BR+1 · 2BR</b>', 'o') + units_table() +
           '<div style="margin-top:20px">' + units_drawings(V4) + '</div></div></section>')
     b += tai_chinh('ADS')
