@@ -22,7 +22,11 @@ out = r'''/* Sun Saphia – hero 4D: mô hình 3D tự xoay chậm, nắng theo 
       f.srcdoc=h; box.insertBefore(f,box.firstChild.nextSibling);
       try{ if(window.gtag) gtag('event','hero_4d',{event_label:location.pathname}); }catch(e){} }).catch(function(){});
   }
-  if(document.readyState==='complete') setTimeout(go,600); else addEventListener('load',function(){ setTimeout(go,600); });
+  /* tải ngay khi DOM sẵn sàng, không chờ toàn bộ ảnh/video của trang */
+  var ld=document.createElement('span'); ld.className='h4dload'; ld.textContent='⏳ Đang tải mô hình 4D…'; ld.style.cssText='position:absolute;right:14px;top:12px;z-index:2;background:rgba(10,37,64,.75);color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px'; box.appendChild(ld);
+  addEventListener('message',function(e){ if(e.data&&e.data.ss4dHero==='ready') setTimeout(function(){ ld.remove(); },1200); });
+  setTimeout(function(){ if(ld.parentNode) ld.remove(); },30000);
+  if(document.readyState!=='loading') setTimeout(go,50); else addEventListener('DOMContentLoaded',function(){ setTimeout(go,50); });
 })();
 '''.replace('__SRC__', json.dumps(src)).replace('__JS__', json.dumps(js, ensure_ascii=False).replace('</', '<\\/')).replace('__CSS__', json.dumps(css, ensure_ascii=False).replace('</', '<\\/'))
 (here / 'hero-4d-embed.js').write_text(out, encoding='utf-8')
