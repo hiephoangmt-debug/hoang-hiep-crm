@@ -52,6 +52,7 @@ var MAC_DINH = {
   SO_THU: '0904567009',       // số dùng để thử (cách nhau dấu chấm phẩy ; để Sheet không hiểu thành số): bot không chia; đang giữ thì tự huỷ và trả lượt
   DU_AN_CHIA: 'saphia,shaphia', // khách cũ (đã có trong CRM) gửi lại từ web mà "Dự án quan tâm" có chữ này cũng được chia
   NHOM_RIENG: 'fours,saphia', // khách có chữ này (trang / nhu cầu / nguồn) tính lượt FourS–Saphia; còn lại là dự án khác
+  TU_CHIA: 0,                // 1 = khách mới từ web / DATA CHẠY GOOGLE tự chia; 0 = chỉ báo quản lý, bấm "Chia khách này" hoặc /them mới chia
   TELESALE_SHEET_ID: '',     // file báo cáo telesale (tab "Data 01", "Data 02"…): ai báo cáo hết số đang giữ thì tự cấp thêm; để trống = tắt
   TELESALE_THEM: 1,          // mỗi lần giao ngần này số (1 = chia từng số: gọi xong, báo cáo xong mới giao số tiếp)
   TELESALE_GIO_HAN: 17,      // hạn báo cáo: giờ này trong ngày được giao (giao sát giờ cộng 30–60 phút; sau giờ này / Chủ nhật thì sang ngày làm việc sau)
@@ -473,6 +474,22 @@ function nhanKhachMoi_() {
     nhac_(k, '🔁 <b>Khách ' + esc(k.id) + ' vừa để lại thông tin</b> trên web' + (c.ghi_chu ? ' (' + esc(c.ghi_chu.slice(0, 120)) + ')' : '') + '. Liên hệ ngay giúp nhé.');
     log_(k.ten_sale, 'khách quay lại', k.id, 'web'); return false;
   });
+  /* Không tự chia: báo quản lý từng khách kèm nút, bấm mới chia */
+  if (!Number(cfg('TU_CHIA'))) {
+    var cho = JSON.parse(P().getProperty('CHO_THEM') || '{}');
+    moi.forEach(function (c) {
+      var nc = [c.du_an, c.ghi_chu].filter(String).join(' · ');
+      cho[c.sdt] = {ten: String(c.ten || '').slice(0, 60), nc: nc.slice(0, 200), nguon: String(c.utm || c.web || '').slice(0, 100), trang: String(c.trang || '').slice(0, 200), nhom: c.nhom || '', luc: Date.now()};
+      baoQL_('🆕 <b>Khách mới đổ về – chưa chia</b>' + (c.nhom === 'khac' ? ' (dự án khác)' : '') + '\n👤 ' + esc(c.ten || '(không tên)') + ' · 📱 ' + esc(c.sdt) +
+        (nc ? '\n📝 ' + esc(nc.slice(0, 150)) : '') + (c.trang ? '\n🌐 ' + esc(String(c.trang).slice(0, 80)) : '') +
+        '\nBấm nút để chia, hoặc gõ /them.', [[{text: '➕ Chia khách này', callback_data: 'tm:' + c.sdt}]]);
+      log_('hệ thống', 'khách mới chờ quản lý chia', '', che(c.sdt));
+    });
+    var ks = Object.keys(cho).sort(function (a, b) { return cho[b].luc - cho[a].luc; });
+    ks.slice(40).forEach(function (k) { delete cho[k]; });
+    P().setProperty('CHO_THEM', JSON.stringify(cho));
+    return;
+  }
   moi.forEach(function (c) {
     dem++;
     var k = {id: 'K' + dem, luc_vao: nowD(), ten: c.ten, sdt: c.sdt, nhu_cau: [c.du_an, c.ghi_chu].filter(String).join(' · '),
@@ -930,6 +947,15 @@ function bam_(q) {
     return tl('Xong');
   }
   if (parts[0] === 'ts') return bamTele_(q, parts, tl);
+  if (parts[0] === 'tm') {
+    if (chat !== String(quanLy_())) return tl('Chỉ quản lý');
+    var cho = JSON.parse(P().getProperty('CHO_THEM') || '{}'), c = cho[parts[1]];
+    if (!c) { sua_(q.message.chat.id, q.message.message_id, '✅ Khách ' + esc(parts[1]) + ' đã xử lý rồi.'); return tl('Đã xử lý rồi'); }
+    delete cho[parts[1]]; P().setProperty('CHO_THEM', JSON.stringify(cho));
+    var dongThem = parts[1] + ' ' + (c.ten || '') + (c.nc ? ' - ' + c.nc.replace(/\s+-\s+/g, ' · ') : '') + (c.nguon ? '\nNguồn: ' + c.nguon : '') + (c.trang ? '\nTrang: ' + c.trang : '');
+    sua_(q.message.chat.id, q.message.message_id, themKhachTay_(dongThem, c.nhom === 'khac' ? 'khac' : ''));
+    return tl('Đã chia');
+  }
   if (parts[0] === 'dd') {
     if (chat !== String(quanLy_())) return tl('Chỉ quản lý');
     var kdd = timKhach_(parts[1]); if (!kdd || kdd.trang_thai !== 'cho_duyet_dong') return tl('Không còn chờ duyệt');
