@@ -886,27 +886,28 @@ def ads(domain, home_page=False):
          '<h1 class="dp">Sun Saphia Residence</h1><p class="msg">Căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng – mở cửa là biển</p>'
          '<div class="cdn" data-cd="2026-11-01T09:00:00+07:00"><span class="cdl">⏳ Đếm ngược sự kiện ra mắt · 9:00 CN 01/11/2026 · Hilton Đà Nẵng</span><div class="cdb"><div><b data-u="d">--</b><small>ngày</small></div><div><b data-u="h">--</b><small>giờ</small></div><div><b data-u="m">--</b><small>phút</small></div><div><b data-u="s">--</b><small>giây</small></div></div></div><script>(function(){var T=+new Date("2026-11-01T09:00:00+07:00");function z(n){return(n<10?"0":"")+n}function t(){var d=Math.max(0,T-Date.now())/1000;document.querySelectorAll(".cdn").forEach(function(e){var u={d:Math.floor(d/86400),h:Math.floor(d%%86400/3600),m:Math.floor(d%%3600/60),s:Math.floor(d%%60)};for(var k in u){var b=e.querySelector("[data-u="+k+"]");if(b)b.textContent=k=="d"?u[k]:z(u[k])}var l=e.querySelector(".cdl");if(d<=0&&l)l.textContent="🎉 Sự kiện ra mắt 01/11/2026 đã diễn ra – đang nhận booking"})}t();setInterval(t,1000)})();</script><div class="hnum"><div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>30 tầng</b><span>114 m · 782 căn</span></div>'
          '<div><b>1,8 tỷ</b><em class="dk">dự kiến</em><span>Studio tầng thấp · giá tham khảo CĐT</span></div><div><b>~450 triệu</b><em class="dk">dự kiến</em><span>25%% đến khi nhận nhà (căn 1,8 tỷ)</span></div></div>'
-         '<div class="hcta"><a class="btn" href="#dang-ky-dau">Nhận bảng giá gốc qua Zalo</a><button type="button" class="btn ghost" data-film>▶ Xem phim dự án 3 phút</button></div></div></div></section>'
-         '<section class="hero cine2"><div class="hbody" id="dang-ky-dau"><div class="wrap"><div class="g2"><div class="hl">'
-         '<span class="tag">🔥 Ra mắt &amp; nhận booking <b>01/11/2026</b></span>'
-         '<h2 class="dp">Bảng giá gốc từ <b>đại lý chính thức</b></h2>'
-         + SLOGAN +
-         '<ul class="ck"><li><b>Đại lý chính thức TATILAND</b> – bảng giá gốc từ đại lý, gửi qua Zalo khi công bố</li>'
-         '<li><b>Studio 30 m², 1BR+ 50 m², 2BR 60–70 m²</b> · trần cao 3,5 m, view biển</li>'
-         '<li><b>400 m ra bãi tắm Sơn Thủy</b> · giao lộ Võ Nguyên Giáp – Trường Sa</li>'
-         '<li><b>Công trình cấp I</b>, niên hạn 100 năm · Vietcombank, BIDV, NCB hỗ trợ vay</li></ul>'
-         '<a class="play" href="#ss4d" data-4d><i aria-hidden="true">▶</i><span><b>Xem dự án 3D · 4D</b><small>Xoay tòa tháp · nắng theo giờ · view biển từ căn</small></span></a>'
-         '</div><div class="hr">%s</div></div></div></div></section>'
+         '<div class="hcta"><a class="btn" href="#dang-ky">Nhận bảng giá gốc qua Zalo</a><button type="button" class="btn ghost" data-film>▶ Xem phim dự án 3 phút</button></div></div></div></section>'
+         '<section class="sec tq" id="tong-quan"><div class="wrap">'
+         '<style>.tq{background:linear-gradient(180deg,#fff,#f6f1e7)}.tq .tqh{font-size:clamp(28px,4.2vw,46px);line-height:1.15;color:#0A2540;margin:6px 0 14px;font-weight:800}.tq .tqh b{color:#E96118}'
+         '.tq .tqp{font-size:17.5px;line-height:1.75;color:#33475b;max-width:860px;margin:0 0 12px;text-align:justify}.tq .tqp b{color:#0A2540}'
+         '.tqk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:22px 0 18px}.tqk div{background:#fff;border:1px solid #eadfcb;border-radius:14px;padding:14px 12px;text-align:center;box-shadow:0 6px 16px rgba(10,37,64,.06)}'
+         '.tqk b{display:block;font-size:24px;color:#E96118;font-weight:800}.tqk span{font-size:13.5px;color:#5d6b7a}.tqa{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.tqa a.nx{color:#0A2540;font-weight:700;text-decoration:none;border-bottom:2px solid #E96118}'
+         '@media(max-width:760px){.tqk{grid-template-columns:repeat(2,minmax(0,1fr))}.tq .tqp{font-size:16px;text-align:left}}</style>'
+         + sh('01', 'Tổng quan dự án', 'Một tòa tháp – <b>ba khung trời</b>: biển, sông, núi', 'o') +
+         '<p class="tqp">Sáng mở rèm, <b>mặt trời mọc lên từ biển Mỹ Khê</b>. Chiều xuống, Sơn Trà và Ngũ Hành Sơn đổi màu ngay trước tầm mắt. Đêm về, ánh đèn sông Hàn và <b>pháo hoa mùa lễ hội</b> sáng rực phía thành phố. Đó là nhịp sống mỗi ngày ở <b>Sun Saphia Residence</b> – căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng.</p>'
+         '<p class="tqp">Tòa tháp 30 tầng đứng ở giao lộ <b>Võ Nguyên Giáp – Trường Sa</b>, cách bãi tắm Sơn Thủy khoảng 400 m. Dự án chỉ có ba loại căn gọn gàng – <b>Studio 30 m², 1BR+ 50 m², 2BR 60–70 m²</b>, trần cao 3,5 m – vừa để ở, vừa dễ cho thuê. Mời anh/chị kéo xuống xem vị trí, tiện ích và tự chọn căn trên mặt bằng từng tầng.</p>'
+         '<div class="tqk"><div><b>30 tầng</b><span>782 căn hộ</span></div><div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>3,5 m</b><span>trần cao mỗi căn</span></div><div><b>Cấp I</b><span>niên hạn công trình 100 năm</span></div></div>'
+         '<div class="tqa"><button type="button" class="btn" data-pop data-interest="ADS – tổng quan">Nhận bảng giá gốc qua Zalo</button><a class="nx" href="#vi-tri">Xem vị trí dự án ↓</a></div>'
+         '</div></section>'
          '<section class="hstrip"><div class="wrap">%s'
          '<div class="qlinks"><a href="#tai-chinh">Giá &amp; thanh toán</a><a href="#mat-bang">Mặt bằng &amp; chọn căn</a><a href="#dau-tu">Đầu tư 1 sàn</a><a href="#su-kien">Sự kiện 01/11</a></div></div></section>'
          '<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-4d]");if(!a)return;var b=document.getElementById("ss4d-box");if(!b)return;e.preventDefault();if(innerWidth<=760&&window.ss4dFull){ss4dFull();return}'
          'try{b.scrollIntoView({behavior:"smooth",block:"center"})}catch(x){b.scrollIntoView()}var g=document.getElementById("ss4d-go");if(g)g.click();'
          'try{if(window.gtag)gtag("event","xem_4d",{event_label:"hero"})}catch(x){}});</script>') % (
        
-        form('dau', 'ADS – form đầu trang', title='Nhận bảng giá gốc từ đại lý', note='Bảng giá gốc, mặt bằng tầng, chính sách – gửi qua Zalo ngay khi chủ đầu tư công bố. Đăng ký miễn phí.', h='h2'),
-        hero_perks())
+        hero_perks(),)
     # Bố cục: hero 4D → sự kiện → tổng quan → vị trí → tiện ích → (360°, tầm view) → mặt bằng → loại căn → chính sách → quy hoạch → đầu tư → pháp lý → tầm nhìn
-    b = b.replace('<section class="hero cine2">', su_kien('ADS') + '<section class="hero cine2" id="tong-quan">', 1)
+    b = b.replace('<section class="sec tq" id="tong-quan">', su_kien('ADS') + '<section class="sec tq" id="tong-quan">', 1)
     b += tldr('Sun Saphia Residence', [('Dự án', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, 30 tầng, 782 căn'), ('Loại căn', 'Studio 30 m² · 1BR+ 50 m² · 2BR 60–70 m²'),
         ('Công trình', 'Cấp I, niên hạn 100 năm · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Mở bán', 'Ra mắt 01/11/2026'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
     b += ('<section class="sec"><div class="wrap">' + sh('☀', 'Một ngày ở Saphia', 'Mở cửa ra là <b>biển</b>', 'y') +
