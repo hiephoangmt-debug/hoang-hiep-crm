@@ -52,6 +52,9 @@ var MAC_DINH = {
   SO_THU: '0904567009',       // số dùng để thử (cách nhau dấu chấm phẩy ; để Sheet không hiểu thành số): bot không chia; đang giữ thì tự huỷ và trả lượt
   DU_AN_CHIA: 'saphia,shaphia', // khách cũ (đã có trong CRM) gửi lại từ web mà "Dự án quan tâm" có chữ này cũng được chia
   NHOM_RIENG: 'fours,saphia', // khách có chữ này (trang / nhu cầu / nguồn) tính lượt FourS–Saphia; còn lại là dự án khác
+  TELESALE_SHEET_ID: '',     // file báo cáo telesale (tab "Data 01", "Data 02"…): ai báo cáo hết số đang giữ thì tự cấp thêm; để trống = tắt
+  TELESALE_THEM: 10,         // mỗi lần cấp thêm ngần này số
+  TELESALE_GIO_HAN: 17,      // hạn báo cáo: giờ này trong ngày được giao (giao sát giờ cộng 30–60 phút; sau giờ này / Chủ nhật thì sang ngày làm việc sau)
   SLIDE_CDT: 'https://www.sun-saphia-residence.com/trinh-chieu',    // lệnh /tailieu – slide dự án theo tài liệu chủ đầu tư (gửi khách được)
   SLIDE_NOI_BO: 'https://www.sun-saphia-residence.com/dao-tao-sale' // lệnh /tailieu – slide nội bộ đào tạo sale (không gửi khách)
 };
@@ -304,8 +307,66 @@ function chayMoiPhut() {
   CH_NHO_ = null;   // đọc lại CauHinh mới nhất cho lần chạy này
   /* Nút bấm của sale được xử lý trước và xen giữa các việc nặng, để không phải chờ chia data xong */
   var bd = Date.now();
-  try { capNhatTieuDe_(); xuLyTinNhan_(); nhanKhachMoi_(); xuLyTinNhan_(); nhapData_(bd + 25000); xuLyTinNhan_(); kiemTraHan_(); xuLyTinNhan_(); }
+  try { capNhatTieuDe_(); xuLyTinNhan_(); nhanKhachMoi_(); xuLyTinNhan_(); nhapData_(bd + 25000); xuLyTinNhan_(); try { capTelesale_(); } catch (e) {} xuLyTinNhan_(); kiemTraHan_(); xuLyTinNhan_(); }
   finally { lock.releaseLock(); }
+}
+
+/* ======================= DATA TELESALE: CẤP THEO ĐỢT =======================
+   File báo cáo riêng (không đụng lượt FourS/Saphia). Dòng 9 trở xuống: A Dự án | B SĐT | C Nhân sự | D Tình trạng | E Giao lúc | F Hạn.
+   Bạn nào báo cáo hết số đang giữ (cột D đã điền) thì cấp thêm số tiếp theo trong kho (dòng chưa có tên), giữ đúng thứ tự.
+   Chưa gọi xong thì không cấp thêm. Không thu hồi: khách nét bạn đó giữ luôn. */
+function hanTele_(t) {
+  var G = num('TELESALE_GIO_HAN'), d = new Date(t + 7 * 3600000), h = vnHour(t);
+  function luc(x) { return Date.UTC(x.getUTCFullYear(), x.getUTCMonth(), x.getUTCDate(), G) - 7 * 3600000; }
+  if (d.getUTCDay() === 0 || h >= G) {
+    do { d = new Date(d.getTime() + 86400000); } while (d.getUTCDay() === 0);
+    return luc(d);
+  }
+  var con = G - h;
+  return luc(d) + (con < 1 ? 60 : con < 1.5 ? 30 : 0) * 60000;
+}
+function capTelesale_() {
+  var id = String(cfg('TELESALE_SHEET_ID') || '').trim(); if (!id) return;
+  var lucQuet = Number(P().getProperty('LUC_TELESALE') || 0); if (Date.now() - lucQuet < 2 * 60000) return;
+  P().setProperty('LUC_TELESALE', String(Date.now()));
+  var m = id.match(/\/d\/([a-zA-Z0-9_-]+)/); if (m) id = m[1];
+  var ss; try { ss = SpreadsheetApp.openById(id); } catch (e) { return; }
+  var bang = [], con = {}, kho = [];
+  ss.getSheets().forEach(function (sh) {
+    if (!/^data\s*\d+/i.test(sh.getName())) return;
+    var n = sh.getLastRow(); if (n < 9) return;
+    var v = sh.getRange(9, 1, n - 8, 6).getValues(), b = {sh: sh, v: v, doi: false}; bang.push(b);
+    v.forEach(function (r, i) {
+      var ten = String(r[2] || '').trim();
+      if (ten) { con[ten] = (con[ten] || 0) + (String(r[3] || '').trim() ? 0 : 1); }
+      else if (String(r[1] || '').replace(/\D/g, '').length >= 9) kho.push({b: b, i: i});
+    });
+  });
+  var xong = Object.keys(con).filter(function (t) { return con[t] === 0; });
+  if (!xong.length || !kho.length) return;
+  for (var i = xong.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), x = xong[i]; xong[i] = xong[j]; xong[j] = x; }
+  var bay = Date.now(), han = hanTele_(bay), soThem = Math.max(1, num('TELESALE_THEM')), cap = {};
+  xong.forEach(function (ten) {
+    var lay = kho.splice(0, soThem); if (!lay.length) return;
+    lay.forEach(function (o) { var r = o.b.v[o.i]; r[2] = ten; r[4] = new Date(bay); r[5] = new Date(han); o.b.doi = true; });
+    cap[ten] = lay.length;
+  });
+  bang.forEach(function (b) {
+    if (!b.doi) return;
+    b.sh.getRange(9, 3, b.v.length, 1).setValues(b.v.map(function (r) { return [r[2]]; }));
+    b.sh.getRange(9, 5, b.v.length, 2).setValues(b.v.map(function (r) { return [r[4], r[5]]; }));
+  });
+  var link = 'https://docs.google.com/spreadsheets/d/' + id + '/edit', sales = rows_('Sale', T_SALE), dong = [];
+  function chuan(x) { return String(x || '').toLowerCase().replace(/\s+/g, ' ').trim(); }
+  Object.keys(cap).forEach(function (ten) {
+    dong.push('• ' + esc(ten) + ': +' + cap[ten] + ' số');
+    log_(ten, 'Cấp thêm data telesale', '', cap[ten] + ' số, hạn ' + fmt(han));
+    var s = sales.filter(function (x) { return chuan(x.ten) === chuan(ten); })[0];
+    if (s && s.chat_id) gui_(s.chat_id, '📞 <b>Data telesale</b>: bạn đã báo cáo hết, được cấp thêm <b>' + cap[ten] + ' số</b>.\n' +
+      'Mở file, lọc tên bạn ở cột Nhân sự.\n⏱ Hạn báo cáo: <b>trước ' + fmt(han) + '</b>\n👉 ' + link);
+  });
+  baoQL_('📞 <b>Data telesale – cấp thêm</b> (hạn ' + fmt(han) + ')\n' + dong.join('\n') + '\nKho còn ' + kho.length + ' số.' +
+    (kho.length ? '' : '\n⚠️ Kho đã hết – dán thêm số vào cuối tab Data (để trống cột Nhân sự) là bot tự cấp tiếp.'));
 }
 
 /* Bản cũ chưa có cột mới (nhom, luc_giao_khac): ghi thêm tiêu đề 1 lần */
