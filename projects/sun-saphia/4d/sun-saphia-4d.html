@@ -639,7 +639,7 @@ var playing=false, playBtn=document.getElementById('play');
 playBtn.onclick=function(){playing=!playing; playBtn.textContent=playing?'❚❚':'▶'; playBtn.setAttribute('aria-label',playing?'Dừng':'Chạy thời gian');};
 
 /* ---------- mặt bằng tầng đặt lên tòa nhà: cắt ngang tháp tại tầng đang chọn ---------- */
-var PLAN_URL='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d2c068bdf94af0038c110135328a496209367d34/projects/sun-saphia/images/mat-bang-tang-4d.webp';
+var PLAN_URL='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@1a2fdcc30c2a85c317a08d4d1ad3c259d32e9bdc/projects/sun-saphia/images/mat-bang-tang-4d.webp';
 var planOn=false, planMesh=null, clipped=false, clipP=new THREE.Plane(new THREE.Vector3(0,-1,0),0), bPlan=document.getElementById('mPlan');
 function planY(f){ return FL[Math.max(3,Math.min(28,f))]; }
 function clipTower(on){
@@ -660,8 +660,14 @@ function updPlan(fly){
   planMesh.position.y=y+.4; clipP.constant=T.localToWorld(new THREE.Vector3(0,y+.5,0)).y;
   mainLbl.textContent='MẶT BẰNG TẦNG '+(f<=28?f:'3A–28')+' · bấm vào căn để xem';
   floorOut.textContent='Tầng '+f+' · bấm căn';
-  if(fly){ var m=innerWidth<600, c=new THREE.Vector3(X1-14.9,y,Z0+27.2);
-    flyTo(T.localToWorld(new THREE.Vector3(c.x-(m?70:46),y+(m?150:60),c.z+(m?2:3))),T.localToWorld(new THREE.Vector3(c.x+(m?6:2),y,c.z))); }
+  if(fly){ var c=new THREE.Vector3(X1-14.9,y,Z0+27.2);
+    /* nhìn gần như thẳng từ trên xuống, tự tính khoảng cách để cả mặt bằng (49,6 m dọc màn hình × 54,4 m ngang) vừa khung */
+    /* trừ phần bị thanh tiêu đề (.top) và bảng điều khiển (.console) che, căn mặt bằng vào giữa phần còn thấy */
+    var H=innerHeight, tp=document.querySelector('.top'), cs=document.querySelector('.console'), t0=tp?Math.max(0,tp.getBoundingClientRect().bottom):0, t1=cs?Math.min(H,cs.getBoundingClientRect().top):H;
+    if(t1-t0<H*.3){ t0=0; t1=H; }
+    var tv=Math.tan(camera.fov*Math.PI/360), asp=camera.aspect||1, fr=(t1-t0)/H, mg=1.1, d=Math.max(49.6/2*mg/(tv*fr), 54.4/2*mg/(tv*asp)), tl=.12;
+    var sh=((t0+t1)/2-H/2)*2*d*tv/H;   // dịch tâm (m) theo chiều dọc màn hình (+x của mặt bằng là phía trên màn hình)
+    flyTo(T.localToWorld(new THREE.Vector3(c.x-d*tl+sh,y+d,c.z)),T.localToWorld(new THREE.Vector3(c.x+1.5+sh,y,c.z))); }
 }
 function setPlan(on){
   if(on&&mode==='view') setMode('overview');
