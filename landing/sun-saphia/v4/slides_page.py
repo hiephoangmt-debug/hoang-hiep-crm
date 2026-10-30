@@ -1,4 +1,4 @@
-# Trang slide trên web: /trinh-chieu (cho khách, slide 1–22) và /dao-tao-sale (cho đội sale, đủ 31 slide + ghi chú).
+# Trang slide trên web: /trinh-chieu (cho khách, slide khách) và /dao-tao-sale (cho đội sale, đủ bộ slide + ghi chú).
 # Nguồn slide: thư mục slides/ (xuất từ bộ slide "Sun Saphia – Bài toán đầu tư").
 import json, os, re
 from parts import *
@@ -13,6 +13,8 @@ BLOB = {  # ảnh trong bộ slide → ảnh dự án trên GitHub
     'f62f4dff03f1383a3064bd9a64994ee2': 'mo-rong-duong-bien-900.webp',
     'e517c482f01cd18fef7a51cba73cc2d7': 'khach-du-lich-900.webp',
     'b1d35360fb183472b182e57f9fcf6e22': 'thap-bien-hoang-hon-900.webp',
+    '6caf5273fe88e0c6c8c3b3628a7174d6': RAW + 'b9c11c4f91fff47b6e1cad83391796b7f917d490/landing/sun-saphia/v4/img/view-huong-dong.webp',
+    '38424840af6223a072bc3407247d0104': RAW + 'b9c11c4f91fff47b6e1cad83391796b7f917d490/landing/sun-saphia/v4/img/view-huong-dong-nam.webp',
 }
 
 D4 = ('<section class="sec alt" id="xem-4d"><div class="wrap"><span class="ey">Mô hình 3D · 4D minh họa</span>'
@@ -88,7 +90,7 @@ def load():
     out = []
     for sid in deck['order']:
         h = open(SD + 'slides/' + sid + '.html', encoding='utf8').read().strip()
-        h = re.sub(r'/_blob/([0-9a-f]{32})', lambda m: SK + BLOB[m.group(1)], h)
+        h = re.sub(r'/_blob/([0-9a-f]{32})', lambda m: BLOB[m.group(1)] if BLOB[m.group(1)].startswith('http') else SK + BLOB[m.group(1)], h)
         note = ''
         m = re.search(r'<aside>(.*?)</aside>', h, re.S)
         if m:
@@ -110,7 +112,8 @@ def viewer(slides, ctx, notes=False, pdf=True):
     return CSS + '<div class="sp" id="sp" data-ctx="%s">%s<div class="sp-list">%s</div></div>' % (ctx, bar, items) + JS
 
 def trinh_chieu(page, ORG, RES):
-    slides = load()[:22]
+    allS = load()
+    slides = allS[:[x[0] for x in allS].index('dt-quy-trinh')]
     fixed = []
     for sid, h, note in slides:
         for a, b in KHACH_FIX:
@@ -119,7 +122,7 @@ def trinh_chieu(page, ORG, RES):
     title = 'Sun Saphia Residence – Bài toán đầu tư căn hộ mặt biển (slide)'
     desc = 'Bộ slide Sun Saphia Residence: thị trường Đà Nẵng, quy hoạch 2050, giá tham khảo tầng 15, thanh toán 25%, bài toán cho thuê, bản đồ giá thuê khách sạn, so sánh khách sạn mini và villa.'
     b = ('<section class="sec" style="padding-top:28px"><div class="wrap" style="max-width:1240px">'
-         '<span class="ey">Trình chiếu · 22 slide</span><h1 class="dp" style="margin:6px 0 10px">Sun Saphia – <b>bài toán đầu tư</b> căn hộ mặt biển</h1>'
+         '<span class="ey">Trình chiếu · %d slide</span>' % len(slides) + '<h1 class="dp" style="margin:6px 0 10px">Sun Saphia – <b>bài toán đầu tư</b> căn hộ mặt biển</h1>'
          '<p class="lead" style="margin:0 0 18px">Thị trường, sản phẩm, giá tham khảo, dòng tiền cho thuê và so sánh với khách sạn, villa. Giá là giá tham khảo từ chủ đầu tư, bài toán là minh họa, không phải cam kết.</p></div>'
          + viewer(fixed, 'khach') + '</section>' + D4 +
          '<section class="sec" id="dang-ky"><div class="wrap" style="max-width:640px">'
@@ -131,7 +134,7 @@ def trinh_chieu(page, ORG, RES):
 
 GATE = '''<section class="sec" id="sp-gate" style="padding-top:40px"><div class="wrap" style="max-width:560px">
 <span class="ey">Tài liệu nội bộ đội sale</span><h1 class="dp" style="margin:6px 0 10px">Đào tạo sale <b>Sun Saphia</b></h1>
-<p class="lead">31 slide: thị trường, sản phẩm, bài toán dòng tiền, bản đồ giá thuê, 3 khách mẫu, xử lý từ chối, tin nhắn Zalo. Nhập số Zalo của bạn để xem và tải về.</p>
+<p class="lead">32 slide: thị trường, sản phẩm, bài toán dòng tiền, bản đồ giá thuê, 3 khách mẫu, xử lý từ chối, tin nhắn Zalo. Nhập số Zalo của bạn để xem và tải về.</p>
 <style>.sp-gf label{display:block;font-size:13px;font-weight:700;color:#0E2A47;margin:10px 0 6px}.sp-gf input{width:100%;box-sizing:border-box;padding:14px 15px;font-size:16px;font-family:inherit;border:1.5px solid #d6dce5;border-radius:12px;background:#f8fafc}.sp-gf button{width:100%;margin-top:14px}</style><form class="sp-gf" id="sp-gf" style="margin-top:16px"><label for="sg-n">Họ và tên</label><input id="sg-n" name="name" type="text" autocomplete="name" placeholder="Tên của bạn" required>
 <label for="sg-p">Số Zalo</label><input id="sg-p" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx" required>
 <p id="sg-e" style="color:#A33A12;font-size:14px;margin:8px 0 0;display:none">Số Zalo cần đủ 10 số, ví dụ 0904 567 009.</p>
@@ -157,7 +160,7 @@ def dao_tao(head, header, tail, FAV, OG, LOGO):
     html = head(title, desc, MAIN + '/dao-tao-sale', OG, 'đào tạo sale', [], FAV, robots='noindex,nofollow,noarchive')
     html = html.replace('</head>', FONTS + '\n</head>', 1)
     html += ('<body>\n' + header('/dao-tao-sale', MAIN, LOGO, menu=False, cta='https://zalo.me/0904567009') + '\n<main id="dau-trang">' + GATE
-             + '<section class="sec" id="sp-main" style="display:none;padding-top:28px"><div class="wrap" style="max-width:1240px"><span class="ey">Đào tạo sale · 31 slide</span>'
+             + '<section class="sec" id="sp-main" style="display:none;padding-top:28px"><div class="wrap" style="max-width:1240px"><span class="ey">Đào tạo sale · 32 slide</span>'
              '<h1 class="dp" style="margin:6px 0 16px">Sun Saphia – <b>tài liệu đào tạo</b></h1></div>'
              + viewer(slides, 'dao-tao', notes=True) + D4 + '</section></main>\n' + tail(True) + GATE_JS + '</body>\n</html>\n')
     return html.replace('>Nhận bảng giá</a></div></header>', '>Zalo anh Hiệp</a></div></header>')
