@@ -217,7 +217,7 @@ for e in load('buildings'):
         mn = t.get('min_height')
         try: mn = float(mn) if mn else 0
         except Exception: mn = 0
-        out.write(struct.pack('<BBHH', len(r), TYPE.get(t.get('building'), 0), min(65535, int(h * 10)), min(65535, int(mn * 10))))
+        out.write(struct.pack('<BBHH', len(r), TYPE.get(t.get('building'), 0), max(0, min(65535, int(h * 10))), max(0, min(65535, int(mn * 10)))))
         for x, z in r:
             out.write(struct.pack('<hh', max(-32768, min(32767, round(x / 2))), max(-32768, min(32767, round(z / 2)))))
         n += 1; heights.append(h)

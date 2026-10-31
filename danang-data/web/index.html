@@ -50,7 +50,10 @@
     <button class="chip active" id="pinBtn">🏷 Nhãn</button>
     <button class="chip active" id="carBtn">🚗 Xe &amp; tàu</button>
     <button class="chip" id="veBtn">📏 Độ cao ×2</button>
-    <button class="chip" id="homeBtn">↺ Toàn cảnh</button>
+    <button class="chip" id="homeBtn">↺ Đà Nẵng</button>
+    <button class="chip" id="haBtn">🏮 Hội An</button>
+    <button class="chip" id="caBtn" hidden>🏡 Casamia</button>
+    <button class="chip active" id="hvbBtn" hidden>🏗 Hải Vân Bay hoàn thiện</button>
   </div>
   <div class="credit">Bản đồ © OpenStreetMap contributors (ODbL) · Địa hình: Terrain Tiles (Mapzen, AWS Open Data)</div>
 </footer>
@@ -88,8 +91,18 @@ const [meta, bldBuf, demBuf, landNear, maskNear, landFar, maskFar] = await Promi
 say('Đang dựng thành phố…');
 await new Promise((r) => setTimeout(r, 30));
 
+const ringArea = (r) => Math.abs(r.reduce((a, p, i) => { const q = r[(i + 1) % r.length]; return a + p[0] * q[1] - q[0] * p[1]; }, 0) / 2);
+const inRing = (r, x, z) => { let c = false; for (let i = 0, j = r.length - 1; i < r.length; j = i++) { const [xi, zi] = r[i], [xj, zj] = r[j]; if ((zi > z) !== (zj > z) && x < ((xj - xi) * (z - zi)) / (zj - zi) + xi) c = !c; } return c; };
+const findProject = (re, fallback) => {
+  const list = (meta.projects || []).filter((p) => p.rings && p.id[0] === 'w' && re.test(p.name || ''));
+  const pick = list.sort((a, b) => ringArea(b.rings[0]) - ringArea(a.rings[0]))[0];
+  return pick || (fallback ? (meta.projects || []).filter((p) => p.rings && fallback(p)).sort((a, b) => ringArea(b.rings[0]) - ringArea(a.rings[0]))[0] : null);
+};
 const LL = (lat, lon) => [(lon - meta.origin[1]) * meta.kx, -(lat - meta.origin[0]) * meta.kz];
 
+const HA = LL(15.8772, 108.3282); // trung tâm phố cổ Hội An
+const CASA = findProject(/casamia|balanca/i);
+const HVB = findProject(/^(vinhomes )?(hải vân bay|hai van bay)/i);
 // ===== Renderer, camera =====
 const stage = $('stage');
 const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
@@ -247,7 +260,9 @@ const buildings = (() => {
     for (let i = 0; i < n; i++) { const x = dv.getInt16(o, true) * 2, z = dv.getInt16(o + 2, true) * 2; o += 4; xs.push(x); zs.push(z); cx += x; cz += z; }
     cx /= n; cz /= n;
     const base = groundY(cx, cz) + minH, top = groundY(cx, cz) + h;
-    const pal = PAL[type] || PAL[0];
+    if (HVB && inRing(HVB.rings[0], cx, cz)) continue; // thay bằng mô phỏng khi hoàn thiện
+    const oldTown = Math.hypot(cx - HA[0], cz - HA[1]) < 560 && h < 16;
+    const pal = oldTown ? ['#e8c25a', '#f0cf6e', '#e2b552', '#f3d98a', '#d9a94a'] : PAL[type] || PAL[0];
     c.set(pal[(rnd() * pal.length) | 0]);
     const cr = c.r * 255, cg = c.g * 255, cb = c.b * 255, sd = rnd();
     let area = 0;
@@ -266,7 +281,7 @@ const buildings = (() => {
     }
     // mái
     const r0 = v;
-    for (let i = 0; i < n; i++) { pos.set([xs[i], top, zs[i]], v * 3); nor.set([0, 127, 0], v * 3); col.set([cr * 0.86, cg * 0.86, cb * 0.86], v * 3); wuv.set([0, -1, sd], v * 3); v++; }
+    for (let i = 0; i < n; i++) { pos.set([xs[i], top, zs[i]], v * 3); nor.set([0, 127, 0], v * 3); col.set(oldTown ? [150, 72, 44] : [cr * 0.86, cg * 0.86, cb * 0.86], v * 3); wuv.set([0, -1, sd], v * 3); v++; }
     let tris;
     if (n === 4) tris = [[0, 1, 2], [0, 2, 3]];
     else tris = THREE.ShapeUtils.triangulateShape(xs.map((x, i) => new THREE.Vector2(x, zs[i])), []);
@@ -551,6 +566,110 @@ let wheelLights;
   PINPOS['Tượng Phật Quan Âm – chùa Linh Ứng'] = V3(x, y + 80, z);
 }
 
+const PLACES_EXTRA = [];
+// ===== Hội An: đèn lồng phố cổ, hoa đăng trên sông Hoài, Chùa Cầu =====
+const LCOL = [[1, 0.22, 0.12], [1, 0.72, 0.18], [1, 0.48, 0.1], [1, 0.3, 0.55]];
+const lanternPts = [], lanternCol = [];
+for (const p of meta.minor.concat(meta.roads.map((r) => r.pts))) {
+  if (!p.some(([x, z]) => Math.hypot(x - HA[0], z - HA[1]) < 900)) continue;
+  sampleLine(p, 5, (x, z, dx, dz) => {
+    if (Math.hypot(x - HA[0], z - HA[1]) > 750) return;
+    const sd = rnd() < 0.5 ? -1 : 1;
+    lanternPts.push(x - dz * 4 * sd, groundY(x, z) + 4.5, z + dx * 4 * sd); lanternCol.push(...LCOL[(rnd() * 4) | 0]);
+  });
+}
+const hoaDang = [], hoaDangCol = [];
+for (let i = 0; i < 4000 && hoaDang.length < 900; i++) {
+  const x = HA[0] - 900 + rnd() * 2200, z = HA[1] - 200 + rnd() * 700;
+  if (!MASK(x, z)) { hoaDang.push(x, 1.2, z); hoaDangCol.push(...LCOL[(rnd() * 4) | 0]); }
+}
+const lanterns = pointCloud(lanternPts.concat(hoaDang), 0xffffff, 6, lanternCol.concat(hoaDangCol));
+{
+  const [x, z] = LL(15.87726, 108.32605), y = groundY(x, z);
+  const g = new THREE.Group(); g.position.set(x, y + 1.2, z);
+  const red = new THREE.MeshStandardMaterial({ color: 0x9b3b2a, roughness: 0.7 }), tile = new THREE.MeshStandardMaterial({ color: 0x5e3322, roughness: 0.85 });
+  const body = new THREE.Mesh(new THREE.BoxGeometry(18, 3.4, 4.6), red); body.position.y = 1.7; g.add(body);
+  const roofShape = new THREE.Shape([new THREE.Vector2(-3.4, 0), new THREE.Vector2(3.4, 0), new THREE.Vector2(0, 2.4)]);
+  const roof = new THREE.Mesh(new THREE.ExtrudeGeometry(roofShape, { depth: 19, bevelEnabled: false }), tile);
+  roof.rotation.y = Math.PI / 2; roof.position.set(-9.5, 3.4, 0); g.add(roof);
+  const mid = new THREE.Mesh(new THREE.BoxGeometry(5, 4.4, 6.4), red); mid.position.set(0, 2.2, 1.2); g.add(mid);
+  const roof2 = new THREE.Mesh(new THREE.ExtrudeGeometry(new THREE.Shape([new THREE.Vector2(-4.4, 0), new THREE.Vector2(4.4, 0), new THREE.Vector2(0, 2.8)]), { depth: 6, bevelEnabled: false }), tile);
+  roof2.position.set(0, 4.4, -1.8); g.add(roof2);
+  world.add(g);
+  PINPOS['Chùa Cầu (Hội An)'] = V3(x, y + 30, z);
+}
+
+// ===== Dự án Casamia Balanca Hội An (ranh giới theo OpenStreetMap) =====
+function outline(ring, color, h) {
+  const pts = ring.map(([x, z]) => V3(x, groundY(x, z) + h, z));
+  const g = new THREE.BufferGeometry().setFromPoints(pts.concat([pts[0]]));
+  const m = new THREE.LineBasicMaterial({ color }); m.userData.base = new THREE.Color(color); m.userData.night = new THREE.Color(color).multiplyScalar(1.6);
+  glowLines.push(m);
+  world.add(new THREE.Line(g, m));
+  const shape = new THREE.Shape(ring.map(([x, z]) => new THREE.Vector2(x, -z)));
+  const fill = new THREE.Mesh(new THREE.ShapeGeometry(shape), new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.07, depthWrite: false }));
+  fill.rotation.x = -Math.PI / 2; fill.position.y = groundY(ring[0][0], ring[0][1]) + 1.5; world.add(fill);
+  let cx = 0, cz = 0; for (const [x, z] of ring) { cx += x; cz += z; }
+  return V3(cx / ring.length, 0, cz / ring.length);
+}
+let casaPos = null;
+if (CASA) { casaPos = outline(CASA.rings[0], 0xffc23d, 4); PINPOS['Casamia Balanca Hội An'] = casaPos.clone().setY(groundY(casaPos.x, casaPos.z) + 60); }
+
+// ===== Vinhomes Hải Vân Bay: mô phỏng khi hoàn thiện (4 phân khu, ~5.900 căn thấp tầng) =====
+const hvbGroup = new THREE.Group(); world.add(hvbGroup);
+let hvbPos = null;
+if (HVB) {
+  const ring = HVB.rings[0];
+  hvbPos = outline(ring, 0x5ad1ff, 4);
+  // trục chính của khu đất
+  let sxx = 0, szz = 0, sxz = 0;
+  for (const [x, z] of ring) { const dx = x - hvbPos.x, dz = z - hvbPos.z; sxx += dx * dx; szz += dz * dz; sxz += dx * dz; }
+  const ang = 0.5 * Math.atan2(2 * sxz, sxx - szz), ux = Math.cos(ang), uz = Math.sin(ang);
+  let amin = 1e9, amax = -1e9; for (const [x, z] of ring) { const a = (x - hvbPos.x) * ux + (z - hvbPos.z) * uz; amin = Math.min(amin, a); amax = Math.max(amax, a); }
+  const ZONES = [
+    { name: 'Phân khu Châu Âu', wall: ['#f4efe6', '#efe4d2', '#f7f3ec'], roof: '#b5532f' },
+    { name: 'Phân khu Châu Á', wall: ['#e9dcc4', '#d9c7a6', '#efe6d4'], roof: '#5a3b2a' },
+    { name: 'Phân khu Nhật Bản', wall: ['#f2f2ef', '#e4e2dc', '#d9d6cf'], roof: '#33383f' },
+    { name: 'Phân khu Monaco', wall: ['#f6eedf', '#fbf6ec', '#efe2c8'], roof: '#2f6f9f' },
+  ];
+  const homes = [], towers = [], hl = [];
+  const SX = 16, SZ = 26;
+  let k = 0;
+  for (let a = amin; a < amax; a += SX) for (let b = -3000; b < 3000; b += SZ) {
+    const col = Math.round((a - amin) / SX), row = Math.round((b + 3000) / SZ);
+    if (col % 7 === 0 || row % 5 === 0) continue; // đường nội khu
+    const x = hvbPos.x + a * ux - b * uz, z = hvbPos.z + a * uz + b * ux;
+    if (!inRing(ring, x, z) || !MASK(x, z)) continue;
+    const zi = Math.min(3, Math.floor(((a - amin) / (amax - amin)) * 4));
+    homes.push({ x, z, zi, h: zi === 2 ? 7 : 9 + (rnd() < 0.3 ? 3.5 : 0) });
+    if (row % 5 === 1 && col % 2 === 0) hl.push(x - uz * 13, groundY(x, z) + 6, z + ux * 13);
+  }
+  const monaco = homes.filter((p) => p.zi === 3);
+  for (let i = 0; i < 6 && monaco.length; i++) { const p = monaco[(rnd() * monaco.length) | 0]; towers.push(p); }
+  const q = new THREE.Quaternion().setFromAxisAngle(V3(0, 1, 0), -ang), m4 = new THREE.Matrix4(), c = new THREE.Color();
+  const bodyMat = new THREE.MeshStandardMaterial({ roughness: 0.6 }), roofMat = new THREE.MeshStandardMaterial({ roughness: 0.7 });
+  const bodies = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1).translate(0, 0.5, 0), bodyMat, homes.length);
+  const roofs = new THREE.InstancedMesh(new THREE.ConeGeometry(0.72, 1, 4).rotateY(Math.PI / 4).translate(0, 0.5, 0), roofMat, homes.length);
+  homes.forEach((p, i) => {
+    const y = groundY(p.x, p.z), Z = ZONES[p.zi];
+    m4.compose(V3(p.x, y, p.z), q, V3(11, p.h, 15)); bodies.setMatrixAt(i, m4); bodies.setColorAt(i, c.set(Z.wall[(rnd() * Z.wall.length) | 0]));
+    m4.compose(V3(p.x, y + p.h, p.z), q, V3(13, p.zi === 2 ? 2.2 : 4, 17)); roofs.setMatrixAt(i, m4); roofs.setColorAt(i, c.set(Z.roof));
+  });
+  hvbGroup.add(bodies, roofs);
+  const tw = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1).translate(0, 0.5, 0), new THREE.MeshStandardMaterial({ color: 0xe8eef6, roughness: 0.3, metalness: 0.2, emissive: 0xffc070, emissiveIntensity: 0 }), towers.length);
+  towers.forEach((p, i) => { m4.compose(V3(p.x, groundY(p.x, p.z), p.z), q, V3(30, 60 + rnd() * 40, 45)); tw.setMatrixAt(i, m4); });
+  hvbGroup.add(tw); hvbGroup.userData.tw = tw.material;
+  const hvbLights = pointCloud(hl, 0xffd08a, 12); world.remove(hvbLights); hvbGroup.add(hvbLights); hvbGroup.userData.lights = hvbLights.material;
+  for (let zi = 0; zi < 4; zi++) {
+    const a = amin + (zi + 0.5) * (amax - amin) / 4, zs = homes.filter((p) => p.zi === zi);
+    if (!zs.length) continue;
+    let cx = 0, cz = 0; for (const p of zs) { cx += p.x; cz += p.z; }
+    PLACES_EXTRA.push({ name: ZONES[zi].name, pos: V3(cx / zs.length, 40, cz / zs.length), big: false });
+  }
+  PINPOS['Vinhomes Hải Vân Bay (mô phỏng khi hoàn thiện)'] = hvbPos.clone().setY(groundY(hvbPos.x, hvbPos.z) + 120);
+  console.log('hvb homes', homes.length);
+}
+
 // ===== Nhãn địa danh =====
 const fromLabel = (name) => meta.labels.find((l) => l.name === name);
 const PLACES = [];
@@ -565,6 +684,12 @@ addPlace('Cảng Tiên Sa', ...LL(16.1215, 108.2125), 40);
 addPlace('Vịnh Đà Nẵng', ...LL(16.13, 108.16), 20);
 addPlace('Cù Lao Chàm', ...LL(15.955, 108.51), 150);
 addPlace('Sông Hàn', ...LL(16.067, 108.2272), 20);
+addPlace('Phố cổ Hội An', ...HA, 60);
+addPlace('Sông Thu Bồn', ...LL(15.8745, 108.338), 20);
+addPlace('Biển An Bàng', ...LL(15.9150, 108.3445), 30);
+addPlace('Biển Cửa Đại', ...LL(15.8935, 108.3795), 30);
+addPlace('Rừng dừa Bảy Mẫu', ...LL(15.8697, 108.3610), 30);
+for (const p of PLACES_EXTRA) PLACES.push({ ...p, pos: p.pos.clone().setY(groundY(p.pos.x, p.pos.z) + 40) });
 for (const [nm, list] of Object.entries(byName)) {
   if (!nm.startsWith('cầu') || PLACES.some((p) => p.name.toLowerCase().startsWith(nm))) continue;
   const br = list.slice().sort((a, b) => b.total - a.total)[0], c = along(br, 0.5);
@@ -692,6 +817,8 @@ function applyTime(hr) {
   U.uNight.value = night;
   streetLights.material.opacity = 0.05 + night * 0.95;
   bridgeLights.material.opacity = 0.1 + night * 0.9;
+  lanterns.material.opacity = 0.1 + night * 0.9;
+  if (hvbGroup.userData.lights) { hvbGroup.userData.lights.opacity = 0.05 + night * 0.95; hvbGroup.userData.tw.emissiveIntensity = night * 0.5; }
   carPts.material.opacity = 0.15 + night * 0.85;
   for (const m of glowMats) m.color.copy(m.userData.base).multiplyScalar(0.55 + night * 0.9);
   dragonMat.emissiveIntensity = 0.05 + night * 1.1;
@@ -712,6 +839,9 @@ $('pinBtn').onclick = () => { showPins = !showPins; $('pinBtn').classList.toggle
 $('carBtn').onclick = () => { carPts.visible = !carPts.visible; boats.forEach((b) => (b.g.visible = carPts.visible)); $('carBtn').classList.toggle('active', carPts.visible); };
 $('veBtn').onclick = () => { world.scale.y = world.scale.y > 1 ? 1 : 2; $('veBtn').classList.toggle('active', world.scale.y > 1); };
 $('homeBtn').onclick = () => flyTo(HOME.target, HOME.cam);
+$('haBtn').onclick = () => flyTo(V3(HA[0], 0, HA[1]), V3(HA[0] + 900, 1100, HA[1] + 1900));
+if (casaPos) { $('caBtn').hidden = false; $('caBtn').onclick = () => flyTo(casaPos.clone(), V3(casaPos.x + 500, 650, casaPos.z + 1100)); }
+if (hvbPos) { $('hvbBtn').hidden = false; $('hvbBtn').onclick = () => { hvbGroup.visible = !hvbGroup.visible; $('hvbBtn').classList.toggle('active', hvbGroup.visible); if (hvbGroup.visible) flyTo(hvbPos.clone(), V3(hvbPos.x + 1200, 1500, hvbPos.z + 2600)); }; }
 
 // ===== Kết xuất =====
 const composer = new EffectComposer(renderer);
