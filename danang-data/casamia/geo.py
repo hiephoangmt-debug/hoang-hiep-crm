@@ -31,39 +31,81 @@ cols = np.array([c[1] for c in PAL])
 d = ((im[:, :, None, :] - cols[None, None]) ** 2).sum(-1)
 cls = d.argmin(-1); cls[d.min(-1) > 34 ** 2] = -1
 cls[1290:, :1400] = -1
-lab = np.full((H, W), -1, np.int32); comps = []
-for y in range(H):
-    for x in np.nonzero(cls[y] >= 0)[0]:
-        if lab[y, x] >= 0 or not inside(x, y): continue
-        c = cls[y, x]; q = collections.deque([(y, x)]); lab[y, x] = len(comps); px = []
+# --- Nhận nguyên DẢI nhà theo màu (lấp các vạch chia lô), rồi chia đều thành lô theo bề ngang chuẩn ---
+from PIL import ImageFilter
+sitem = np.zeros((H, W), bool)
+_m = Image.new('L', (W, H), 0); ImageDraw.Draw(_m).polygon(SITE, fill=1); sitem = np.asarray(_m).astype(bool)
+def components(mask):
+    lab = np.full(mask.shape, -1, np.int32); out = []
+    ys, xs = np.nonzero(mask)
+    for y0, x0 in zip(ys, xs):
+        if lab[y0, x0] >= 0: continue
+        q = collections.deque([(y0, x0)]); lab[y0, x0] = len(out); px = []
         while q:
             cy, cx = q.popleft(); px.append((cx, cy))
             for ny, nx in ((cy + 1, cx), (cy - 1, cx), (cy, cx + 1), (cy, cx - 1)):
-                if 0 <= ny < H and 0 <= nx < W and lab[ny, nx] < 0 and cls[ny, nx] == c:
-                    lab[ny, nx] = len(comps); q.append((ny, nx))
-        comps.append((c, px))
+                if 0 <= ny < H and 0 <= nx < W and lab[ny, nx] < 0 and mask[ny, nx]:
+                    lab[ny, nx] = len(out); q.append((ny, nx))
+        out.append(np.array(px, float))
+    return out
+mlen = lambda v: float(np.linalg.norm(JM @ v))
 lots = []
-for c, px in comps:
-    if len(px) < 0.35 * PAL[c][3] * PAL[c][4] * PXM * PXM: continue
-    code, _, fl, lw, ld = PAL[c]
-    p = np.array(px, float); m = p.mean(0); _, _, vt = np.linalg.svd(p - m, full_matrices=False)
-    a, b = vt[0], vt[1]
+def place(p, code, fl, lw, ld, depth=0, pax=None):
+    if len(p) < 30: return
+    m = p.mean(0); _, _, vt = np.linalg.svd(p - m, full_matrices=False); a, b = vt[0], vt[1]
+    if pax is not None and abs(b @ pax) > abs(a @ pax): a, b = b, a           # giữ trục dọc dãy theo dải mẹ (dải cong)
     pa, pb = (p - m) @ a, (p - m) @ b
     L, Wd = pa.max() - pa.min(), pb.max() - pb.min()
-    if Wd < 5: continue
+    Lm, Wm = L * mlen(a), Wd * mlen(b)
+    if pax is None and Lm < Wm: a, b, pa, pb, L, Wd, Lm, Wm = b, a, pb, pa, Wd, L, Wm, Lm   # trục dài = dọc dãy
+    fill = len(p) / max(1, L * Wd)
+    if fill < 0.72 and Lm > 3 * lw and depth < 5:                            # dải cong: cắt đôi
+        cut = np.median(pa); place(p[pa <= cut], code, fl, lw, ld, depth + 1, a); place(p[pa > cut], code, fl, lw, ld, depth + 1, a); return
+    if Wm < 0.55 * ld or Lm < 0.6 * lw: return
+    nr = max(1, round(Wm / ld)); n = max(1, round(Lm / lw))
     ctr = m + a * (pa.max() + pa.min()) / 2 + b * (pb.max() + pb.min()) / 2
-    D = ld * PXM
-    if L <= 1.5 * D:      # một lô: trục dài = chiều sâu
-        items = [(ctr, a)]
-    else:                 # dải nhiều lô chưa tách: chia đều theo bề ngang lô
-        k = max(1, round(L / (lw * PXM)))
-        items = [(ctr + a * ((i + 0.5) / k - 0.5) * L, b) for i in range(k)]
-    for (cx, cy), axis in items:
-        lat, lon = geo(cx, cy)
-        # hướng trục chiều sâu sang toạ độ thật (bắc = -z)
-        e = np.array([cx + axis[0] * 10, cy + axis[1] * 10]); la2, lo2 = geo(*e)
-        ang = float(np.arctan2(-(la2 - lat) * 110600, (lo2 - lon) * 107072))
-        lots.append({'t': code, 'f': fl, 'lat': round(lat, 7), 'lon': round(lon, 7), 'w': lw, 'd': ld, 'a': round(ang, 4), 'px': [round(float(cx)), round(float(cy))]})
+    for r in range(nr):
+        for i in range(n):
+            c = ctr + a * ((i + 0.5) / n - 0.5) * L + b * ((r + 0.5) / nr - 0.5) * Wd
+            lat, lon = geo(*c)
+            e = c + b * 10; la2, lo2 = geo(*e)
+            ang = float(np.arctan2(-(la2 - lat) * 110600, (lo2 - lon) * 107072))
+            lots.append({'t': code, 'f': fl, 'lat': round(lat, 7), 'lon': round(lon, 7), 'w': round(Lm / n, 2), 'd': round(Wm / nr, 2), 'a': round(ang, 4),
+                         'px': [round(float(c[0])), round(float(c[1]))], 'strip': len(STRIPS), 'si': i, 'sn': n, 'sr': r, 'snr': nr})
+    STRIPS.append(code)
+STRIPS = []
+_br = im.mean(-1); TEXT = (_br < 85) & ((im.max(-1) - im.min(-1)) < 30)
+for ci, (code, col, fl, lw, ld) in enumerate(PAL):
+    m1 = (cls == ci) & sitem
+    near = np.asarray(Image.fromarray(m1.astype(np.uint8) * 255).filter(ImageFilter.MaxFilter(13))) > 127
+    m1 = m1 | (near & TEXT)                                                 # chữ/số in trên lô thuộc về dải
+    mk = Image.fromarray(m1.astype(np.uint8) * 255).filter(ImageFilter.MaxFilter(5)).filter(ImageFilter.MinFilter(7))
+    for p in components(np.asarray(mk) > 127):
+        if len(p) * MPP * MPP < 0.6 * lw * ld: continue
+        place(p, code, fl, lw, ld)
+print('dải', len(STRIPS))
+# --- Dải đo tay trên mặt bằng (nơi chữ in đè làm vỡ dải): P0 -> P1 dọc dãy, v = vectơ chiều sâu, n lô ---
+def manual(code, fl, P0, P1, v, n):
+    P0, P1, v = np.array(P0, float), np.array(P1, float), np.array(v, float)
+    Lm, Dm = mlen(P1 - P0), mlen(v)
+    for i in range(n):
+        c = P0 + (P1 - P0) * (i + 0.5) / n + v / 2
+        lat, lon = geo(*c); la2, lo2 = geo(*(c + v / np.linalg.norm(v) * 10))
+        lots.append({'t': code, 'f': fl, 'lat': round(lat, 7), 'lon': round(lon, 7), 'w': round(Lm / n, 2), 'd': round(Dm, 2),
+                     'a': round(float(np.arctan2(-(la2 - lat) * 110600, (lo2 - lon) * 107072)), 4), 'px': [round(float(c[0])), round(float(c[1]))]})
+inbox = lambda l, x0, y0, x1, y1: x0 <= l['px'][0] <= x1 and y0 <= l['px'][1] <= y1
+lots = [l for l in lots if not (l['t'] in ('B3', 'B4', 'B1', 'B2') and inbox(l, 1440, 1150, 1720, 1420))]
+lots = [l for l in lots if not (l['t'].startswith('LK') and inbox(l, 820, 680, 930, 800))]     # khu bãi xe, không phải lô
+_bt3 = [(1395, 1196), (1625, 1075), (1651, 1124), (1421, 1245)]
+lots = [l for l in lots if not inside(l['px'][0], l['px'][1], _bt3)]
+manual('B1', 3, (1395, 1196), (1625, 1075), (26, 49), 10)      # BT3: 10 lô 10 × 25 m
+manual('B3', 3, (1477, 1250), (1652, 1177), (23, 57), 7)        # BT2: 7 lô 12 × 25 m
+manual('B4', 2, (1467, 1342), (1695, 1240), (28, 53), 9)        # BT1: 9 lô 12 × 28 m (2 tầng)
+lk4 = [l for l in lots if l['t'] == 'LK' and l['px'][1] > 860]
+if lk4:
+    ang = float(np.median([l['a'] for l in lk4]))
+    for l in lots:
+        if l['t'] == 'LK5': l['a'] = ang
 lots = [l for l in lots if not (l['px'][1] < 90 or (l['px'][0] > 1780 and l['px'][1] < 360))]
 for l in lots:
     if l['px'][1] > 1255 and l['px'][0] > 1420 and l['t'] in ('B1', 'B3'): l.update(t='B4', f=2, w=12, d=28)
@@ -95,6 +137,7 @@ TARGET = {('SL1', 'L'): 9, ('SL1', 'R'): 9, ('SL2', 'L'): 8, ('SL2', 'R'): 9, ('
 newlots = []
 nchain = 0
 for key, G0 in groups.items():
+    if key[0] != 'PH': continue
     P = np.array([tom(l['px']) for l in G0]); w = G0[0]['w']
     dep = np.array([[np.cos(l['a']), np.sin(l['a'])] for l in G0])
     par = list(range(len(G0)))

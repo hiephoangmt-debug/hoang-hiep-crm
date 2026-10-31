@@ -67,8 +67,8 @@
 <div class="unit" id="unit" hidden>
   <button class="x" id="unitX" aria-label="Đóng">✕</button>
   <b id="unitT"></b><small id="unitS"></small>
-  <table><tr><td>Diện tích đất</td><td>178 m² (8 × 22,25 m)</td></tr><tr><td>Sàn xây dựng</td><td>316,09 m²</td></tr><tr><td>Sân vườn</td><td>78,22 m²</td></tr><tr><td>Quy mô</td><td>3 tầng + tầng kỹ thuật, sân thượng 20 m²</td></tr><tr><td>Công năng</td><td>4 phòng ngủ (2 master), 5 WC, phòng khách 27 m², bếp + ăn 38 m², phòng đọc, phòng đa năng</td></tr></table>
-  <div class="row"><button class="chip" data-plan="ph-noi-that.jpg">📐 Mặt bằng mẫu nội thất</button><button class="chip" data-plan="ph-mat-ngoai.jpg">📐 Mặt bằng mẫu mặt ngoài</button></div>
+  <table id="unitTb"></table>
+  <div class="row" id="unitPlans"></div>
 </div>
 <div class="plan" id="plan" hidden><button class="x" id="planX" aria-label="Đóng">✕</button><img id="planImg" alt="Mặt bằng căn điển hình Park Home" /></div>
 <div class="loading" id="loading">Đang tải dữ liệu Đà Nẵng…</div>
@@ -687,7 +687,7 @@ if (CASA_DATA) {
     casaGroup.add(gm);
   }
   // --- Biệt thự: tường vàng nghệ, mái dốc xám đá, kính lớn, hồ bơi riêng hướng kênh ---
-  const lots = CASA_DATA.lots.filter((l) => l.t !== 'PH');
+  const lots = CASA_DATA.lots.filter((l) => l.t !== 'PH' && !l.t.startsWith('B'));
   const WALL = ['#d6a22e', '#cf9a2a', '#dcab3c', '#c99327', '#e0b24a'];
   const body = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1).translate(0, 0.5, 0), new THREE.MeshStandardMaterial({ roughness: 0.85, emissive: 0xffb050, emissiveIntensity: 0 }), lots.length);
   const gable = new THREE.ExtrudeGeometry(new THREE.Shape([new THREE.Vector2(-0.5, 0), new THREE.Vector2(0.5, 0), new THREE.Vector2(0, 1)]), { depth: 1, bevelEnabled: false }).translate(0, 0, -0.5);
@@ -736,6 +736,77 @@ if (CASA_DATA) {
   glass.count = ng; pools.count = np; deck.count = nd; palmT.count = palmC.count = npl;
   casaGroup.add(body, roof, glass, pools, deck, palmT, palmC);
   casaGroup.userData.body = body.material; casaGroup.userData.glass = glassMat;
+
+  // --- Biệt thự BT theo mẫu BT1 / BT1A (lô chuẩn 10 × 25 m, co giãn theo kích thước lô thật) ---
+  //   dọc chiều sâu từ đường ra kênh: sân trước 6,2 m (đỗ xe + vườn) | nhà 12,4 m (tầng trên 13 m, ban công 2 đầu) | sàn gỗ + hồ bơi 21,8 m² sát kênh
+  //   ngang: nhà rộng 8,2 m, sân hông 1,8 m; 3 tầng + tầng kỹ thuật 2 khối mái dốc kẹp sân thượng 12 m²
+  {
+    const V = CASA_DATA.lots.filter((l) => l.t.startsWith('B')), n = V.length;
+    const box = new THREE.BoxGeometry(1, 1, 1).translate(0, 0.5, 0);
+    const mk = (geo, mat, count) => { const m = new THREE.InstancedMesh(geo, mat, count); m.count = 0; casaGroup.add(m); return m; };
+    const wallB = new THREE.MeshStandardMaterial({ roughness: 0.85, emissive: 0xffb050, emissiveIntensity: 0 });
+    const I = {
+      wall: mk(box, wallB, n * 3), gable: mk(gable, new THREE.MeshStandardMaterial({ color: 0x30343a, roughness: 0.55, metalness: 0.15 }), n * 2),
+      glass: mk(box, glassMat, n * 6), green: mk(box, leaf, n * 5), terrace: mk(box, new THREE.MeshStandardMaterial({ color: 0xa8432f, roughness: 0.9 }), n),
+      pool: mk(box, poolMat, n), deck: mk(box, new THREE.MeshStandardMaterial({ color: 0x8a6448, roughness: 0.8 }), n), pad: mk(box, paving, n * 2),
+      lawn: mk(box, new THREE.MeshStandardMaterial({ color: 0x6f9a4a, roughness: 1 }), n * 2),
+      car: mk(box, new THREE.MeshStandardMaterial({ color: 0xf2f2f2, metalness: 0.6, roughness: 0.3 }), n),
+      palmT: mk(new THREE.CylinderGeometry(0.22, 0.35, 1, 6).translate(0, 0.5, 0), new THREE.MeshStandardMaterial({ color: 0x7a5a3a }), n * 2),
+      palmC: mk(new THREE.ConeGeometry(1, 0.6, 7).rotateX(Math.PI), leaf, n * 2),
+    };
+    const put = (key, p, th, sx, sy, sz, col) => {
+      const im = I[key], k = im.count++;
+      m4.compose(p, q.setFromAxisAngle(V3(0, 1, 0), th), V3(sx, sy, sz)); im.setMatrixAt(k, m4);
+      if (col) im.setColorAt(k, c.set(col));
+    };
+    const WALLS = ['#d6a22e', '#cf9a2a', '#dcab3c', '#c99327', '#e0b24a'], CARS = ['#f2f2f2', '#1f2226', '#8d939b', '#f2f2f2', '#5a1e22'];
+    V.forEach((l, idx) => {
+      const [x0, z0] = LL(l.lat, l.lon), y = groundY(x0, z0);
+      const s = l.ws || 1;                                        // phía giáp kênh (sau nhà)
+      const ux = Math.cos(l.a) * s, uz = Math.sin(l.a) * s;       // hướng từ đường ra kênh
+      const vx = -uz, vz = ux, th = Math.atan2(ux, uz);
+      const kd = l.d / 25, kw = l.w / 10, D = l.d, Wl = l.w;
+      // toạ độ cục bộ: t = mét tính từ mép lô phía đường (0..D), w = lệch ngang so với tim lô
+      const at = (t, w, h) => V3(x0 + ux * (t - D / 2) + vx * w, y + h, z0 + uz * (t - D / 2) + vz * w);
+      const HW = 8.2 * kw, side = 1.8 * kw, wc = -side / 2;      // nhà dồn về một bên, sân hông 1,8 m bên còn lại
+      const g0 = 6.2 * kd, g1 = 18.6 * kd, u0 = 6.25 * kd, u1 = 19.27 * kd;
+      const fl = l.f, H0 = 3.8, HF = 3.5, Htop = H0 + (fl - 1) * HF;
+      const wall = WALLS[idx % WALLS.length];
+      l.ctr = at((g0 + g1) / 2, wc, 0);
+      // tầng trệt + các tầng trên (tầng trên sâu hơn, có ban công 2 đầu)
+      put('wall', at((g0 + g1) / 2, wc, 0), th, HW, H0, g1 - g0, wall);
+      put('wall', at((u0 + u1) / 2, wc, H0), th, HW, (fl - 1) * HF, (u1 - u0) - 2.6 * kd, wall);
+      put('glass', at(g1 + 0.05, wc, 0.3), th, HW * 0.86, 3.1, 0.12);                   // mặt kính phòng khách mở ra hồ bơi
+      put('glass', at(g0 - 0.05, wc + HW * 0.2, 0.3), th, HW * 0.45, 3.1, 0.12);         // hiên trước
+      for (let f = 1; f < fl; f++) for (const [t, sg] of [[u1 - 1.3 * kd, 1], [u0 + 1.3 * kd, -1]]) {
+        put('glass', at(t - sg * 0.05, wc, H0 + (f - 1) * HF + 0.2), th, HW * 0.8, 2.8, 0.12);
+        put('green', at(t + sg * 1.25 * kd, wc, H0 + (f - 1) * HF), th, HW, 0.9, 0.35);   // bồn cây ban công, cây rủ
+      }
+      put('wall', at((u0 + u1) / 2, wc, H0 + (fl - 1) * HF - 0.01), th, HW, 0.25, u1 - u0, '#c9c2b6');  // sàn ban công
+      // tầng kỹ thuật: 2 khối mái dốc (đầu hồi quay ra đường và ra kênh) kẹp sân thượng
+      const b1 = [g0 + 0.3, g0 + 4.9 * kd], b2 = [g1 - 5.1 * kd, g1 - 0.2];
+      for (const [a, b] of [b1, b2]) put('gable', at((a + b) / 2, wc, Htop), th, HW + 0.4, 4.6, b - a + 0.5);
+      put('terrace', at((b1[1] + b2[0]) / 2, wc, Htop), th, HW - 0.4, 0.3, b2[0] - b1[1]);
+      put('green', at((b1[1] + b2[0]) / 2, wc + HW / 2 - 0.6, Htop + 0.3), th, 1, 1.2, b2[0] - b1[1] - 0.4);
+      // sân trước: chỗ đỗ xe + lối đá + vườn; sân hông cỏ
+      put('pad', at(g0 / 2, wc - HW / 2 + 1.7, 0.12), th, 3.4, 0.2, g0 - 0.6);
+      put('car', at(g0 / 2, wc - HW / 2 + 1.7, 0.95), th, 1.85, 1.35, 4.5, CARS[idx % CARS.length]);
+      put('lawn', at(g0 / 2, wc + 1.7, 0.1), th, HW - 3.4, 0.2, g0 - 0.6);
+      put('lawn', at(D / 2, wc + HW / 2 + side / 2, 0.08), th, side, 0.2, D - 0.6);
+      // sau nhà: sàn gỗ + hồ bơi riêng sát kênh, bậc đá xuống nước
+      put('deck', at((g1 + D) / 2, wc, 0.1), th, HW + side * 0.4, 0.3, D - g1 - 0.2);
+      put('pool', at(g1 + 3.0 * kd + 1.45 * kd, wc + 0.2, 0.2), th, 7.5 * kw, 0.3, 2.9 * kd);
+      put('pad', at(D + 1.2, wc - HW / 2 + 1.6, 0.4), th, 2.2, 0.25, 2.2);
+      for (const [t, w] of [[1.2, wc + HW / 2 - 0.8], [g1 + 1.4, wc + HW / 2 + side / 2]]) {
+        const ph = 10 + ((idx * 7 + t) % 5);
+        put('palmT', at(t, w, 0), 0, 1, ph, 1); put('palmC', at(t, w, ph), idx + t, 2.8, 1.4, 2.8);
+      }
+      if (idx % 3 === 0) pillar(at(g0 + 0.3, wc + HW / 2 + 0.3, 0), Htop * 0.85, 0.45);       // hoa giấy leo góc nhà
+      glow.push(...at(g1 + 0.6, wc, 2.5).toArray());
+    });
+    for (const k in I) { I[k].instanceMatrix.needsUpdate = true; if (I[k].instanceColor) I[k].instanceColor.needsUpdate = true; }
+    casaGroup.userData.btBody = I.wall; casaGroup.userData.btLots = V; casaGroup.userData.btWall = wallB;
+  }
 
   // --- Park Home SL1–SL4: theo mẫu căn điển hình (lô 8 × 22,25 m, nhà 16,05 × ~7 m, 3 tầng + tầng kỹ thuật) ---
   {
@@ -1132,7 +1203,7 @@ function applyTime(hr) {
   streetLights.material.opacity = 0.05 + night * 0.95;
   bridgeLights.material.opacity = 0.1 + night * 0.9;
   lanterns.material.opacity = 0.1 + night * 0.9;
-  if (casaGroup.userData.lights) { casaGroup.userData.lights.opacity = 0.05 + night * 0.95; casaGroup.userData.body.emissiveIntensity = night * 0.18; casaGroup.userData.hotel.emissiveIntensity = night * 0.25; casaGroup.userData.mall.emissiveIntensity = night * 0.3; casaGroup.userData.glass.emissiveIntensity = night * 0.9; if (casaGroup.userData.phWall) casaGroup.userData.phWall.emissiveIntensity = night * 0.12; }
+  if (casaGroup.userData.lights) { casaGroup.userData.lights.opacity = 0.05 + night * 0.95; casaGroup.userData.body.emissiveIntensity = night * 0.18; casaGroup.userData.hotel.emissiveIntensity = night * 0.25; casaGroup.userData.mall.emissiveIntensity = night * 0.3; casaGroup.userData.glass.emissiveIntensity = night * 0.9; if (casaGroup.userData.phWall) casaGroup.userData.phWall.emissiveIntensity = night * 0.12; if (casaGroup.userData.btWall) casaGroup.userData.btWall.emissiveIntensity = night * 0.12; }
   for (const f of casaAnim) f(performance.now() / 1000, night);
   if (hvbGroup.userData.lights) { hvbGroup.userData.lights.opacity = 0.05 + night * 0.95; hvbGroup.userData.tw.emissiveIntensity = night * 0.5; }
   carPts.material.opacity = 0.15 + night * 0.85;
@@ -1215,16 +1286,33 @@ $('loading').style.opacity = 0; setTimeout(() => $('loading').remove(), 700);
   el.addEventListener('pointerdown', (e) => (down = [e.clientX, e.clientY]));
   el.addEventListener('pointerup', (e) => {
     if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return;
-    const body = casaGroup.userData.phBody; if (!body) return;
+    const U = casaGroup.userData; if (!U.phBody) return;
     ray2.setFromCamera(new THREE.Vector2((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1), camera);
-    const hit = ray2.intersectObject(body)[0]; if (!hit) return;
-    const l = casaGroup.userData.phLots[hit.instanceId];
-    $('unitT').textContent = `Park Home · dãy ${l.row} · căn ${l.pair ? 'song lập' : 'đơn lập'}`;
-    $('unitS').textContent = l.pair ? 'Ghép đôi chung tường với căn bên cạnh, sân trước 5 m có chỗ đỗ xe' : (l.row === 'SL3' || l.row === 'SL4' ? 'Căn đầu hồi, đứng riêng' : 'Căn giáp vệt cây xanh giữa dãy, đứng riêng');
+    const hits = [[U.phBody, U.phLots], [U.btBody, U.btLots]].map(([b, L]) => { const h = b && ray2.intersectObject(b)[0]; return h && { d: h.distance, l: L[b === U.btBody ? Math.floor(h.instanceId / 3) : h.instanceId] }; }).filter(Boolean).sort((a, b) => a.d - b.d);
+    if (!hits.length) return;
+    const l = hits[0].l; let rows, plans;
+    if (l.t === 'PH') {
+      $('unitT').textContent = `Park Home · dãy ${l.row} · căn ${l.pair ? 'song lập' : 'đơn lập'}`;
+      $('unitS').textContent = l.pair ? 'Ghép đôi chung tường với căn bên cạnh, sân trước 5 m có chỗ đỗ xe' : (l.row === 'SL3' || l.row === 'SL4' ? 'Căn đầu hồi, đứng riêng' : 'Căn giáp vệt cây xanh giữa dãy, đứng riêng');
+      rows = [['Diện tích đất', '178 m² (8 × 22,25 m)'], ['Sàn xây dựng', '316,09 m²'], ['Sân vườn', '78,22 m²'], ['Quy mô', '3 tầng + tầng kỹ thuật, sân thượng 20 m²'], ['Công năng', '4 phòng ngủ (2 master), 5 WC, phòng khách 27 m², bếp + ăn 38 m², phòng đọc, phòng đa năng']];
+      plans = [['ph-noi-that.jpg', 'Mặt bằng mẫu nội thất'], ['ph-mat-ngoai.jpg', 'Mặt bằng mẫu mặt ngoài']];
+    } else {
+      const NAME = { B1: 'BT3–BT8', B2: 'BT9–BT12', B3: 'BT2 · BT12A', B4: 'BT1', B5: 'BT14' };
+      $('unitT').textContent = `Biệt thự ven kênh · dãy ${NAME[l.t] || 'BT'}`;
+      $('unitS').textContent = 'Theo mẫu BT1 / BT1A: sân trước đỗ xe, nhà lệch một bên chừa sân hông 1,8 m, hồ bơi riêng sát kênh';
+      const area = (l.w * l.d).toFixed(0);
+      rows = [['Kích thước lô (trên bản đồ)', `${l.w.toFixed(1)} × ${l.d.toFixed(1)} m ≈ ${area} m²`], ['Quy mô', `${l.f} tầng + tầng kỹ thuật (2 khối mái dốc, sân thượng 12 m²)`],
+        ['Tầng trệt', 'Phòng khách + ăn 55,6 m², bếp 13,5 m², hiên 8,7 m², phòng đa năng, WC, hồ bơi 21,8 m²'], ['Tầng 1', 'P.ngủ 17,1 m² + 19,6 m², thông tầng, phòng thay đồ, 2 WC'],
+        ['Tầng 2', 'P.ngủ 17,1 m² + 19,6 m², phòng đa năng, phòng thay đồ, 2 WC'], ['Tầng kỹ thuật', 'Phòng giặt 6,7 m², sân 12,2 m² + 12,5 m²']];
+      plans = [['bt1.jpg', 'Mặt bằng mẫu BT1'], ['bt1a.jpg', 'Mặt bằng mẫu BT1A']];
+    }
+    const tb = $('unitTb'); tb.textContent = '';
+    for (const [k, v] of rows) { const tr = tb.insertRow(); tr.insertCell().textContent = k; tr.insertCell().textContent = v; }
+    const pl = $('unitPlans'); pl.textContent = '';
+    for (const [src, label] of plans) { const b = document.createElement('button'); b.className = 'chip'; b.textContent = '📐 ' + label; b.onclick = () => { $('planImg').src = src; $('plan').hidden = false; }; pl.appendChild(b); }
     $('unit').hidden = false; mark.position.copy(l.ctr).setY(l.ctr.y + 0.5); mark.visible = true; setTour(false);
   });
   $('unitX').onclick = () => { $('unit').hidden = true; mark.visible = false; };
-  document.querySelectorAll('[data-plan]').forEach((b) => (b.onclick = () => { $('planImg').src = b.dataset.plan; $('plan').hidden = false; }));
   $('planX').onclick = () => ($('plan').hidden = true);
 }
 window.dn = { flyTo, PLACES, camera, controls, V3, setTour, scene, casaGroup, THREE };
