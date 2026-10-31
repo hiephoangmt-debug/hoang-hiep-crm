@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Toàn cảnh 4D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: #0b1220; color: #eef2ff; font-family: Inter, system-ui, sans-serif; overflow: hidden; }
+    #stage { position: fixed; inset: 0; touch-action: none; cursor: grab; }
+    #stage.drag { cursor: grabbing; }
+    #stage.adding { cursor: crosshair; }
+    #stage canvas { display: block; }
+    .top { position: fixed; top: 0; left: 0; right: 0; padding: max(10px, env(safe-area-inset-top)) 14px 10px; display: flex; align-items: center; gap: 10px; background: linear-gradient(#0b1220cc, transparent); pointer-events: none; }
+    .top h1 { margin: 0; font-size: 16px; font-weight: 700; }
+    .top small { display: block; font-size: 12px; opacity: .75; font-weight: 500; }
+    .top a { pointer-events: auto; margin-left: auto; color: #eef2ff; text-decoration: none; font-size: 13px; padding: 6px 10px; border-radius: 999px; background: #ffffff1f; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; padding: 8px 12px max(12px, env(safe-area-inset-bottom)); background: linear-gradient(transparent, #0b1220e6 40%); }
+    .chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+    .chips::-webkit-scrollbar { display: none; }
+    .chip { flex: none; border: 0; border-radius: 999px; padding: 8px 12px; font: 600 13px Inter, sans-serif; color: #eef2ff; background: #ffffff24; backdrop-filter: blur(6px); cursor: pointer; white-space: nowrap; }
+    .chip.active { background: #f59e0b; color: #1f1300; }
+    .mini { position: relative; margin: 0 0 8px; height: 46px; border-radius: 8px; overflow: hidden; background: #000 center/100% 100% no-repeat; cursor: pointer; box-shadow: 0 0 0 1px #ffffff33; }
+    .mini i { position: absolute; border: 2px solid #f59e0b; border-radius: 3px; box-shadow: 0 0 0 999px #0008; pointer-events: none; }
+    .pins { position: fixed; inset: 0; pointer-events: none; }
+    .pin { position: absolute; transform: translate(-50%, -100%); pointer-events: auto; display: flex; flex-direction: column; align-items: center; cursor: pointer; }
+    .pin b { font: 600 12px Inter, sans-serif; background: #fffffff0; color: #111827; padding: 4px 9px; border-radius: 999px; white-space: nowrap; box-shadow: 0 2px 8px #0006; }
+    .pin span { width: 2px; height: 22px; background: linear-gradient(#fff, #fff0); }
+    .pin em { width: 10px; height: 10px; border-radius: 50%; background: #f59e0b; box-shadow: 0 0 0 4px #f59e0b55; animation: pulse 1.6s infinite; margin-top: -4px; }
+    @keyframes pulse { 50% { box-shadow: 0 0 0 9px #f59e0b00; } }
+    .toast { position: fixed; left: 50%; top: 70px; transform: translateX(-50%); background: #111827ee; padding: 8px 14px; border-radius: 10px; font-size: 13px; opacity: 0; transition: opacity .3s; pointer-events: none; max-width: calc(100% - 32px); text-align: center; }
+    .toast.show { opacity: 1; }
+    .hint { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 14px; background: #0009; padding: 10px 16px; border-radius: 12px; pointer-events: none; transition: opacity .6s; }
+  </style>
+</head>
+<body>
+  <div id="stage"></div>
+  <div class="pins" id="pins"></div>
+  <header class="top">
+    <div><h1 id="title">Toàn cảnh dự án</h1><small>Kéo để xoay · chụm / cuộn để phóng to</small></div>
+    <a href="./toa-nha.html">🏢 Bảng hàng</a>
+  </header>
+  <div class="hint" id="hint">👆 Kéo để ngắm toàn cảnh</div>
+  <div class="toast" id="toast"></div>
+  <footer class="bar">
+    <div class="mini" id="mini"><i id="miniBox"></i></div>
+    <div class="chips">
+      <button class="chip active" id="tourBtn">▶ Tự lướt</button>
+      <button class="chip" id="gyroBtn">📱 Xoay điện thoại</button>
+      <button class="chip active" id="pinBtn">🏷 Nhãn</button>
+      <button class="chip" id="addBtn">📍 Gắn nhãn</button>
+      <button class="chip" id="nightBtn">🌙 Đêm lung linh</button>
+      <button class="chip" id="shotBtn">⬇ Chụp ảnh</button>
+      <button class="chip" id="fullBtn">⛶ Toàn màn hình</button>
+      <label class="chip" for="file">🖼 Ảnh khác</label>
+      <input type="file" id="file" accept="image/*" hidden />
+    </div>
+  </footer>
+  <script type="module" src="./src/pano-page.js"></script>
+</body>
+</html>

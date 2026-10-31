@@ -34,6 +34,14 @@ npm run build      # bản tĩnh trong dist/ (upload lên hosting bất kỳ)
 - Khối lượng tự động: sàn theo vật liệu (+5% hao hụt), sơn tường đã trừ cửa, trần thạch cao (thường/chống ẩm), len chân tường, đèn, LED, cửa chính/cửa phòng/cửa WC, cửa sổ, cửa lùa, rèm, vách lam, nội thất theo từng phòng.
 - Đơn giá tham khảo sửa trực tiếp, hệ số phong cách, dự phòng %, VAT %, xuất Excel (CSV), in/PDF.
 
+## Toàn cảnh 4D (`toan-canh.html`)
+
+Xem ảnh toàn cảnh / flycam như đang đứng giữa không trung: kéo để xoay, chụm 2 ngón hoặc cuộn chuột để phóng to, tự lướt khi để yên, xoay theo điện thoại, nhãn địa điểm (nhấn để bay tới, nhấn giữ để sửa/xoá), chế độ đêm lung linh, bản đồ thu nhỏ, chụp ảnh.
+
+- Ảnh mặc định: `public/pano/toan-canh.jpg`. Đổi ảnh: `toan-canh.html?img=./pano/ten-anh.jpg&title=Tên dự án`, hoặc nút **🖼 Ảnh khác**.
+- Ảnh tỉ lệ 2:1 (ảnh 360° flycam) tự dựng thành quả cầu nhìn mọi hướng; ảnh rộng thường được dán lên cung trụ vừa khít.
+- Nhãn mẫu sửa trong `DEFAULT_PINS` ở `src/pano-page.js` (u, v = vị trí theo tỉ lệ ảnh).
+
 ## Cấu trúc mã
 
 | File | Vai trò |
