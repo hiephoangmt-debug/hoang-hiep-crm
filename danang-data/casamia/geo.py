@@ -69,13 +69,33 @@ for l in lots:
 cnt = collections.Counter(l['t'] for l in lots)
 print('lots', len(lots), dict(cnt))
 site = [list(map(lambda v: round(v, 7), geo(x, y))) for x, y in SITE]
+G = lambda pts: [list(geo(x, y)) for x, y in pts]
+def zone(sel):
+    ps = [l['px'] for l in lots if sel(l)]
+    return list(geo(sum(p[0] for p in ps) / len(ps), sum(p[1] for p in ps) / len(ps)))
 extras = {
-    'hotel': {'name': 'Khách sạn Đảo Dừa', 'll': geo(1090, 880), 'w': 34, 'd': 70, 'h': 26, 'a_px': [1, -0.35]},
-    'club': {'name': 'Clubhouse (3 tầng)', 'll': geo(840, 705), 'w': 22, 'd': 34, 'h': 12},
-    'mall': {'name': 'Trung tâm thương mại & dịch vụ (5 tầng)', 'll': geo(870, 610), 'w': 26, 'd': 40, 'h': 19},
-    'pool': {'name': 'Grand Central Park – hồ vô cực', 'll': geo(1150, 770), 'r': 45 * MPP},
-    'bungalows': [geo(1900 + 25 * np.sin(i / 3), 440 + i * 22) for i in range(22)],
-    'entrance': geo(395, 905),
+    # khách sạn Đảo Dừa: dãy khối đất nung cong ôm mép đảo dừa phía đông nam
+    'hotelArc': G([(1655, 945), (1690, 985), (1730, 1022), (1775, 1050), (1825, 1072), (1880, 1088)]),
+    'hotelPool': list(geo(1830, 1130)), 'conf': list(geo(1770, 990)),
+    # đường từ Grand Central -> cầu cong qua kênh -> dọc đảo dừa tới khách sạn
+    'road': G([(1180, 965), (1300, 870), (1400, 778), (1440, 760)]),
+    'bridge': G([(1440, 760), (1470, 746), (1500, 740), (1540, 750), (1568, 778), (1580, 815), (1585, 860)]),
+    'roadHotel': G([(1585, 860), (1610, 910), (1640, 950), (1670, 1000), (1695, 1050), (1720, 1090), (1745, 1130)]),
+    # đại lộ La Duna: cổng chào hoa giấy -> trung tâm thương mại -> quảng trường nhạc nước
+    'boulevard': G([(395, 910), (475, 893), (600, 870), (750, 843), (900, 818), (975, 805), (1040, 785)]),
+    'gate': list(geo(400, 905)),
+    'mall': {'ll': list(geo(870, 725)), 'glass': list(geo(905, 700))},
+    'club': {'ll': list(geo(1110, 905)), 'pool': list(geo(1100, 852))},
+    'fountain': {'ll': list(geo(1175, 765)), 'r': 75 * MPP},
+    'plaza': {'ll': list(geo(1085, 770)), 'r': 45 * MPP},
+    'bungalows': G([(1900 + 25 * np.sin(i / 3), 440 + i * 22) for i in range(22)]),
+    'zones': {
+        'Phân khu La Riva – Waterside Villa': zone(lambda l: l['t'] in ('B1', 'B3', 'B4') and l['px'][1] > 850),
+        'Forestside Villa': zone(lambda l: l['t'] in ('B2', 'B5', 'B3', 'B1') and l['px'][1] < 700 and l['px'][0] > 1000),
+        'Park Villa': zone(lambda l: l['t'] == 'SL' and l['px'][0] > 900),
+        'Park Home': zone(lambda l: l['t'] == 'SL' and l['px'][0] < 900),
+        'The Boutique (Đại lộ La Duna)': zone(lambda l: l['t'].startswith('LK')),
+    },
 }
 json.dump({'site': site, 'lots': lots, 'extras': extras}, open(S + 'dn/casamia.json', 'w'), ensure_ascii=False, separators=(',', ':'))
 vis = Image.open(src).convert('RGB'); dr = ImageDraw.Draw(vis)
