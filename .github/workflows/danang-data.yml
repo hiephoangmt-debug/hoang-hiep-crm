@@ -1,0 +1,26 @@
+# Tải dữ liệu bản đồ thật của Đà Nẵng (OpenStreetMap + địa hình) cho mô hình 3D.
+# Chỉ chạy trên nhánh claude/danang-data, kết quả commit vào danang-data/raw/.
+name: Tải dữ liệu Đà Nẵng 3D
+on:
+  push:
+    branches: [claude/danang-data]
+    paths: ['danang-data/fetch.py', '.github/workflows/danang-data.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python danang-data/fetch.py
+      - name: Lưu dữ liệu vào nhánh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git add danang-data/raw
+          git commit -m "danang-data: dữ liệu thô OSM + địa hình [skip ci]" || echo "không có gì mới"
+          git push
