@@ -4,8 +4,8 @@ import gzip, json, math, os, time, urllib.parse, urllib.request
 
 OUT = os.path.join(os.path.dirname(__file__), 'raw')
 os.makedirs(OUT, exist_ok=True)
-CITY = '15.96,108.10,16.17,108.35'      # nam, tây, bắc, đông: nội thành
-WIDE = '15.85,107.90,16.30,108.55'      # rộng hơn: biển, núi Hải Vân, Sơn Trà
+CITY = '15.84,108.10,16.17,108.40'      # nam, tây, bắc, đông: Đà Nẵng + Hội An
+WIDE = '15.76,107.90,16.30,108.60'      # rộng hơn: biển, núi, Cù Lao Chàm
 ENDPOINTS = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter',
              'https://overpass.private.coffee/api/interpreter', 'https://maps.mail.ru/osm/tools/overpass/api/interpreter']
 QUERIES = {
