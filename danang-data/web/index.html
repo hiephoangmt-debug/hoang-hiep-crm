@@ -370,7 +370,8 @@ for (const r of meta.roads) sampleLine(r.pts, 28, (x, z, dx, dz) => {
   lamp.push(x - dz * o, groundY(x, z) + 7, z + dx * o, x + dz * o, groundY(x, z) + 7, z - dx * o);
 });
 for (const p of meta.minor) sampleLine(p, 40, (x, z) => lamp.push(x, groundY(x, z) + 6, z));
-const streetLights = pointCloud(lamp, 0xffb15c, 16);
+const dropInCasa = (arr) => { if (!CASA_RING) return arr; const o = []; for (let i = 0; i < arr.length; i += 3) if (!inRing(CASA_RING, arr[i], arr[i + 2])) o.push(arr[i], arr[i + 1], arr[i + 2]); return o; };
+const streetLights = pointCloud(dropInCasa(lamp), 0xffb15c, 16);
 
 // ===== Cầu (vị trí thật từ OpenStreetMap) =====
 const glowMats = [];
@@ -668,6 +669,23 @@ if (CASA_DATA) {
   const pillar = (p, h = 11, w = 1) => pillars.push([p.x, p.y, p.z, h, w]);
   const lampPts = [], lampCol = [];
 
+  // --- Nền dự án vẽ đúng theo mặt bằng: đường nội khu, kênh, hồ, công viên, cây xanh ---
+  if (CASA_DATA.ground) {
+    const G = CASA_DATA.ground, p00 = P(G.c00), p10 = P(G.c10), p01 = P(G.c01), p11 = p10.clone().add(p01).sub(p00);
+    const NX = 120, NY = 100, pos = [], uv = [], ix = [];
+    const ex = p10.clone().sub(p00), ey = p01.clone().sub(p00);
+    for (let j = 0; j <= NY; j++) for (let i = 0; i <= NX; i++) {
+      const u = i / NX, v = j / NY, x = p00.x + ex.x * u + ey.x * v, z = p00.z + ex.z * u + ey.z * v;
+      pos.push(x, Math.max(demAt(x, z), 1.5) + 0.3, z); uv.push(u, 1 - v);
+      if (i < NX && j < NY) { const k = j * (NX + 1) + i; ix.push(k, k + NX + 1, k + 1, k + 1, k + NX + 1, k + NX + 2); }
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+    g.setIndex(ix); g.computeVertexNormals();
+    const tex = new THREE.TextureLoader().load(G.img); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    const gm = new THREE.Mesh(g, new THREE.MeshStandardMaterial({ map: tex, alphaTest: 0.5, roughness: 0.9, side: THREE.DoubleSide }));
+    casaGroup.add(gm);
+  }
   // --- Biệt thự: tường vàng nghệ, mái dốc xám đá, kính lớn, hồ bơi riêng hướng kênh ---
   const lots = CASA_DATA.lots.filter((l) => l.t !== 'PH');
   const WALL = ['#d6a22e', '#cf9a2a', '#dcab3c', '#c99327', '#e0b24a'];
@@ -690,7 +708,7 @@ if (CASA_DATA) {
     const H = l.f * 3.5 + 0.8, D = l.d * (villa ? 0.55 : 0.68), Wd = l.w - (villa ? 1.2 : 0.15);
     // phía nào giáp nước -> mặt kính + hồ bơi quay ra kênh
     let s = 0;
-    for (const sg of [1, -1]) { const tx = x + ux * sg * (l.d / 2 + 6), tz = z + uz * sg * (l.d / 2 + 6); if (!MASK(tx, tz)) s = sg; }
+    if (l.ws !== undefined) s = l.ws; else for (const sg of [1, -1]) { const tx = x + ux * sg * (l.d / 2 + 6), tz = z + uz * sg * (l.d / 2 + 6); if (!MASK(tx, tz)) s = sg; }
     const off = villa ? -s * l.d * 0.12 : 0;
     const cx = x + ux * off, cz = z + uz * off;
     m4.compose(V3(cx, y, cz), q, V3(Wd, H, D)); body.setMatrixAt(i, m4); body.setColorAt(i, c.set(WALL[(rnd() * WALL.length) | 0]));
@@ -769,7 +787,6 @@ if (CASA_DATA) {
 
   // --- Đại lộ La Duna: cổng chào hoa giấy, hàng cây, đèn lồng ---
   const blv = smooth(E.boulevard, 80);
-  ribbon(blv, 26, paving); ribbon(blv, 9, asphalt, 0.45);
   blv.forEach((p, i) => {
     if (i % 3) return;
     const a = blv[Math.max(0, i - 1)], b = blv[Math.min(blv.length - 1, i + 1)], dx = b.x - a.x, dz = b.z - a.z, L = Math.hypot(dx, dz) || 1;
@@ -841,7 +858,6 @@ if (CASA_DATA) {
   // --- Đường ra đảo dừa: cầu cong vòng qua kênh, lan can, tới khách sạn Đảo Dừa ---
   {
     const road = smooth(E.road, 30), br = smooth(E.bridge, 50, (t, p) => Math.max(p.y, 1) + 2 + Math.sin(t * Math.PI) * 4), rh = smooth(E.roadHotel, 40);
-    ribbon(road, 9, asphalt); ribbon(rh, 9, asphalt);
     const deckM = ribbon(br, 10, new THREE.MeshStandardMaterial({ color: 0xa8acb2, roughness: 0.7 }), 0.6);
     const rail = [];
     br.forEach((p, i) => {

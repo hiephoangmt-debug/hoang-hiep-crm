@@ -4,16 +4,17 @@ import numpy as np
 from PIL import Image, ImageDraw
 S = '/tmp/claude-0/-home-user-hoang-hiep-crm/a6a2328e-835a-5cf8-85bd-3dca724fc4bb/scratchpad/'
 src = '/root/.claude/uploads/a6a2328e-835a-5cf8-85bd-3dca724fc4bb/ac5bd11a-image.jpg'
-M = np.array(json.load(open(S + 'casa/affine.json')))  # plan px -> zoom px
+import os
+M = np.array(json.load(open(S + ('casa/affine2.json' if os.path.exists(S + 'casa/affine2.json') else 'casa/affine.json'))))  # plan px -> zoom px (affine2: đã hiệu chỉnh theo kích thước lô chuẩn)
 N_, W_, SCX, SCY = 15.889, 108.366, 57678.0, 60000.0
 def geo(px, py):
     zx, zy = np.array([px, py, 1.0]) @ M
     return N_ - zy / SCY, W_ + zx / SCX
-mz = np.sqrt(abs(np.linalg.det(M[:2])))            # zoom px / plan px
-MPP = mz * 1.85                                     # mét / plan px
+KM = np.diag([107072 / SCX, 110600 / SCY]); JM = KM @ M[:2].T; TM = KM @ M[2]   # plan px -> mét (đông, nam)
+MPP = float(np.sqrt(abs(np.linalg.det(JM))))          # mét / plan px
 PXM = 1 / MPP
 print('m per plan px', round(MPP, 3))
-SITE = [(300, 450), (1080, 330), (1480, 40), (1760, 60), (1960, 400), (1960, 1180), (1700, 1420), (1430, 1400), (900, 1120), (480, 1100), (380, 1100), (300, 600)]
+SITE = [(330, 465), (560, 395), (1065, 330), (1360, 100), (1500, 38), (1640, 40), (1790, 110), (1880, 400), (1955, 700), (1950, 1010), (1870, 1180), (1700, 1290), (1480, 1400), (1440, 1395), (1410, 1335), (1150, 1225), (940, 1110), (930, 1080), (500, 1080), (440, 1095), (395, 1100), (380, 900), (340, 700)]
 def inside(x, y, poly=SITE):
     c = False
     for i in range(len(poly)):
@@ -81,20 +82,66 @@ for l in lots:
     row = 'SL1' if c < 730 else 'SL2' if c < 790 else 'SL3' if c < 860 else 'SL4'
     t = float(np.dot(l['px'], RU)); side = 'L' if t < 420 else 'R'
     front = RN if row in ('SL1', 'SL3') else -RN
-    l.update(t='PH', row=row, fa=wang(l['px'], front), ua=wang(l['px'], RU), w=8, d=22.25, f=3)
+    l.update(t='PH', row=row, side=side, fa=wang(l['px'], front), ua=wang(l['px'], RU), w=8, d=22.25, f=3)
     blocks[(row, side)].append((t, l))
-for (row, side), items in blocks.items():
-    items.sort(key=lambda it: it[0]); ls = [l for _, l in items]
-    single = set()
-    if row in ('SL3', 'SL4'): single |= {0, len(ls) - 1}                       # đơn lập ở đầu hồi
-    else: single |= {len(ls) - 1} if side == 'L' else {0}                       # đơn lập giáp vệt cây xanh giữa dãy
+for (row, side), items in list(blocks.items()): pass
+# --- Xếp thẳng hàng từng dãy lô đúng bề ngang chuẩn ---
+tom = lambda p: JM @ np.asarray(p, float) + TM
+frm = lambda m: (N_ - m[1] / 110600, W_ + m[0] / 107072)
+groups = collections.defaultdict(list)
+for l in lots: groups[(l['t'], l.get('row'), l.get('side'), l['px'][0] < 900 if l['t'] == 'SL' else 0)].append(l)
+# số căn mỗi nửa dãy Park Home theo số ghi trên mặt bằng (SL1 18, SL2–SL4 17)
+TARGET = {('SL1', 'L'): 9, ('SL1', 'R'): 9, ('SL2', 'L'): 8, ('SL2', 'R'): 9, ('SL3', 'L'): 8, ('SL3', 'R'): 9, ('SL4', 'L'): 7, ('SL4', 'R'): 10}
+newlots = []
+nchain = 0
+for key, G0 in groups.items():
+    P = np.array([tom(l['px']) for l in G0]); w = G0[0]['w']
+    dep = np.array([[np.cos(l['a']), np.sin(l['a'])] for l in G0])
+    par = list(range(len(G0)))
+    def f(i):
+        while par[i] != i: par[i] = par[par[i]]; i = par[i]
+        return i
+    for i in range(len(G0)):
+        for j in range(i + 1, len(G0)):
+            v = P[j] - P[i]
+            if np.linalg.norm(v) < 1.45 * w and abs(v @ dep[i]) < 4: par[f(i)] = f(j)
+    comps = collections.defaultdict(list)
+    for i in range(len(G0)): comps[f(i)].append(i)
+    if key[0] == 'PH': comps = {0: list(range(len(G0)))}   # mỗi nửa dãy Park Home là một dãy liền
+    for idx in comps.values():
+        Q = P[idx]; c = Q.mean(0)
+        if len(idx) >= 3: d = np.linalg.svd(Q - c)[2][0]
+        elif len(idx) == 2: d = (Q[1] - Q[0]) / np.linalg.norm(Q[1] - Q[0])
+        else: d = np.array([-dep[idx[0]][1], dep[idx[0]][0]])
+        if key[0] == 'PH':
+            ru = JM @ RU
+            if d @ ru < 0: d = -d
+        order = sorted(range(len(idx)), key=lambda k: (Q[k] - c) @ d)
+        if key[0] == 'PH' and len(comps) == 1:
+            tg = TARGET[(key[1], key[2])]
+            while len(order) > tg: lots.remove(G0[idx[order.pop()]])
+            while len(order) < tg:
+                cp = dict(G0[idx[order[-1]]]); newlots.append(cp); G0.append(cp); idx.append(len(G0) - 1); order.append(len(idx) - 1)
+        nrm = np.array([-d[1], d[0]])
+        for rank, k in enumerate(order):
+            l = G0[idx[k]]; m = c + d * (rank - (len(idx) - 1) / 2) * w
+            l['lat'], l['lon'] = [round(v, 7) for v in frm(m)]
+            l['a'] = round(float(np.arctan2(nrm[1], nrm[0])), 4)
+            if key[0] == 'PH':
+                fr = JM @ (RN if l['row'] in ('SL1', 'SL3') else -RN)
+                fn = nrm if fr @ nrm > 0 else -nrm
+                l['ua'] = round(float(np.arctan2(d[1], d[0])), 4); l['fa'] = round(float(np.arctan2(fn[1], fn[0])), 4)
+        nchain += 1
+lots += newlots
+# ghép song lập / đơn lập Park Home theo thứ tự dọc dãy (sau khi căn thẳng)
+for (row, side) in TARGET:
+    ls = sorted([l for l in lots if l['t'] == 'PH' and l['row'] == row and l['side'] == side], key=lambda l: (l['lon'] * 107072) * np.cos(l['ua']) + (-l['lat'] * 110600) * np.sin(l['ua']))
+    single = {0, len(ls) - 1} if row in ('SL3', 'SL4') else ({len(ls) - 1} if side == 'L' else {0})
     i = 0
     while i < len(ls):
-        if i in single or i + 1 >= len(ls) or (i + 1) in single:
-            ls[i].update(pair=0); i += 1
-        else:
-            ls[i].update(pair=1); ls[i + 1].update(pair=-1); i += 2               # pair = phía (dọc dãy) có nhà ghép
-print('park home', {k: len(v) for k, v in sorted(blocks.items())}, 'đơn lập', sum(1 for l in lots if l.get('pair') == 0))
+        if i in single or i + 1 >= len(ls) or (i + 1) in single: ls[i]['pair'] = 0; i += 1
+        else: ls[i]['pair'], ls[i + 1]['pair'] = 1, -1; i += 2
+print('dãy lô đã căn thẳng', nchain, '| Park Home', sum(l['t'] == 'PH' for l in lots), 'đơn lập', sum(l.get('pair') == 0 for l in lots if l['t'] == 'PH'))
 G = lambda pts: [list(geo(x, y)) for x, y in pts]
 def zone(sel):
     ps = [l['px'] for l in lots if sel(l)]
