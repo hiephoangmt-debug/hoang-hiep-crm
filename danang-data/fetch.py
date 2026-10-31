@@ -24,7 +24,7 @@ QUERIES = {
 }
 
 def overpass(name, q):
-    for attempt in range(8):
+    for attempt in range(5):
         url = ENDPOINTS[attempt % len(ENDPOINTS)]
         try:
             print(name, '->', url, flush=True)
@@ -61,25 +61,37 @@ def tiles(z=12):
     print('terrain tiles', x0, y0, x1, y1, flush=True)
 
 def tiled(name, q, n=3):
-    """Chia vùng nội thành thành n×n ô để máy chủ không quá tải, rồi gộp lại."""
+    """Chia vùng nội thành thành n×n ô để máy chủ không quá tải; ô nào đã tải thì bỏ qua (chạy lại được)."""
     s, w, nn, e = map(float, CITY.split(','))
-    seen, els = set(), []
+    parts, failed = [], []
     for i in range(n):
         for j in range(n):
             bb = f'{s + (nn - s) * i / n:.4f},{w + (e - w) * j / n:.4f},{s + (nn - s) * (i + 1) / n:.4f},{w + (e - w) * (j + 1) / n:.4f}'
             part = f'{name}_{i}{j}'
-            overpass(part, q.replace(CITY, bb))
-            with gzip.open(os.path.join(OUT, part + '.json.gz')) as f:
-                for el in json.load(f)['elements']:
-                    if (el['type'], el['id']) not in seen:
-                        seen.add((el['type'], el['id'])); els.append(el)
-            os.remove(os.path.join(OUT, part + '.json.gz'))
+            parts.append(part)
+            if os.path.exists(os.path.join(OUT, part + '.json.gz')): continue
+            try: overpass(part, q.replace(CITY, bb))
+            except SystemExit: failed.append(part)
+    if failed:
+        print('Chưa tải được:', failed, flush=True); return False
+    seen, els = set(), []
+    for part in parts:
+        with gzip.open(os.path.join(OUT, part + '.json.gz')) as f:
+            for el in json.load(f)['elements']:
+                if (el['type'], el['id']) not in seen:
+                    seen.add((el['type'], el['id'])); els.append(el)
     with gzip.open(os.path.join(OUT, name + '.json.gz'), 'wb', 9) as f:
         f.write(json.dumps({'elements': els}).encode())
+    for part in parts: os.remove(os.path.join(OUT, part + '.json.gz'))
     print(name, len(els), 'elements (gộp)', flush=True)
+    return True
 
 tiles()
+ok = True
 for k, q in QUERIES.items():
     if not os.path.exists(os.path.join(OUT, k + '.json.gz')):
-        if k in ('buildings', 'roads'): tiled(k, q)
-        else: overpass(k, q)
+        if k in ('buildings', 'roads'): ok = tiled(k, q) and ok
+        else:
+            try: overpass(k, q)
+            except SystemExit: ok = False
+if not ok: raise SystemExit('Còn phần chưa tải được — chạy lại workflow để tải tiếp')

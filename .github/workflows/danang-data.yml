@@ -6,6 +6,8 @@ on:
     branches: [claude/danang-data]
     paths: ['danang-data/fetch.py', '.github/workflows/danang-data.yml']
   workflow_dispatch:
+concurrency:
+  group: danang-data
 permissions:
   contents: write
 jobs:
@@ -17,7 +19,8 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - run: python danang-data/fetch.py
-      - name: Lưu dữ liệu vào nhánh
+      - name: Lưu dữ liệu vào nhánh (cả khi mới tải được một phần)
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
