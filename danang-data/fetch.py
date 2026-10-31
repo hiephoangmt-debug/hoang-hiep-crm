@@ -11,7 +11,7 @@ ENDPOINTS = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.s
 QUERIES = {
     'buildings': f'[out:json][timeout:900][maxsize:1073741824];(way["building"]({CITY});relation["building"]({CITY}););out tags geom;',
     'water': f'[out:json][timeout:600];(way["natural"="coastline"]({WIDE});way["natural"="water"]({WIDE});relation["natural"="water"]({WIDE});'
-             f'way["waterway"="riverbank"]({WIDE});relation["waterway"="riverbank"]({WIDE});way["waterway"~"^(river|canal)$"]({WIDE}););out tags geom;',
+             f'way["waterway"="riverbank"]({WIDE});relation["waterway"="riverbank"]({WIDE});way["waterway"~"^(river|canal)$"]({WIDE}););out geom;',
     'roads': f'[out:json][timeout:600];way["highway"~"^(motorway|trunk|primary|secondary|tertiary|residential|unclassified|living_street|service|motorway_link|trunk_link|primary_link|secondary_link)$"]({CITY});out tags geom;',
     'places': f'[out:json][timeout:600];(way["aeroway"~"^(runway|aerodrome|apron|taxiway)$"]({CITY});way["leisure"~"^(park|stadium|golf_course)$"]({CITY});'
               f'way["natural"~"^(beach|wood|sand)$"]({WIDE});way["landuse"~"^(forest|grass|cemetery)$"]({CITY});node["natural"="peak"]({WIDE});'
