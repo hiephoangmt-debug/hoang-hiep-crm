@@ -69,6 +69,32 @@ for l in lots:
 cnt = collections.Counter(l['t'] for l in lots)
 print('lots', len(lots), dict(cnt))
 site = [list(map(lambda v: round(v, 7), geo(x, y))) for x, y in SITE]
+# --- Park Home (SL1–SL4): dãy, song lập/đơn lập, hướng mặt tiền ---
+RU, RN = np.array([0.975, -0.22]), np.array([0.22, 0.975])   # dọc dãy, vuông góc dãy (hướng xuống)
+def wang(px, v):
+    la, lo = geo(*px); la2, lo2 = geo(px[0] + v[0] * 10, px[1] + v[1] * 10)
+    return round(float(np.arctan2(-(la2 - la) * 110600, (lo2 - lo) * 107072)), 4)
+blocks = collections.defaultdict(list)
+for l in lots:
+    if l['t'] != 'SL' or l['px'][0] >= 900: continue
+    c = l['px'][1] + 0.226 * l['px'][0]
+    row = 'SL1' if c < 730 else 'SL2' if c < 790 else 'SL3' if c < 860 else 'SL4'
+    t = float(np.dot(l['px'], RU)); side = 'L' if t < 420 else 'R'
+    front = RN if row in ('SL1', 'SL3') else -RN
+    l.update(t='PH', row=row, fa=wang(l['px'], front), ua=wang(l['px'], RU), w=8, d=22.25, f=3)
+    blocks[(row, side)].append((t, l))
+for (row, side), items in blocks.items():
+    items.sort(key=lambda it: it[0]); ls = [l for _, l in items]
+    single = set()
+    if row in ('SL3', 'SL4'): single |= {0, len(ls) - 1}                       # đơn lập ở đầu hồi
+    else: single |= {len(ls) - 1} if side == 'L' else {0}                       # đơn lập giáp vệt cây xanh giữa dãy
+    i = 0
+    while i < len(ls):
+        if i in single or i + 1 >= len(ls) or (i + 1) in single:
+            ls[i].update(pair=0); i += 1
+        else:
+            ls[i].update(pair=1); ls[i + 1].update(pair=-1); i += 2               # pair = phía (dọc dãy) có nhà ghép
+print('park home', {k: len(v) for k, v in sorted(blocks.items())}, 'đơn lập', sum(1 for l in lots if l.get('pair') == 0))
 G = lambda pts: [list(geo(x, y)) for x, y in pts]
 def zone(sel):
     ps = [l['px'] for l in lots if sel(l)]
@@ -93,7 +119,7 @@ extras = {
         'Phân khu La Riva – Waterside Villa': zone(lambda l: l['t'] in ('B1', 'B3', 'B4') and l['px'][1] > 850),
         'Forestside Villa': zone(lambda l: l['t'] in ('B2', 'B5', 'B3', 'B1') and l['px'][1] < 700 and l['px'][0] > 1000),
         'Park Villa': zone(lambda l: l['t'] == 'SL' and l['px'][0] > 900),
-        'Park Home': zone(lambda l: l['t'] == 'SL' and l['px'][0] < 900),
+        'Park Home (SL1–SL4)': zone(lambda l: l['t'] == 'PH'),
         'The Boutique (Đại lộ La Duna)': zone(lambda l: l['t'].startswith('LK')),
     },
 }

@@ -31,6 +31,13 @@
   .pin b { font: 600 12px Inter, sans-serif; background: #fffffff0; color: #111827; padding: 4px 9px; border-radius: 999px; white-space: nowrap; box-shadow: 0 2px 8px #0006; }
   .pin.small b { font-size: 11px; background: #111827d9; color: #fff; }
   .pin span { width: 2px; height: 18px; background: linear-gradient(#fff, #fff0); }
+  .unit { position: fixed; left: 12px; right: 12px; bottom: 112px; max-width: 420px; margin: 0 auto; background: #0f172af2; border: 1px solid #ffffff22; border-radius: 14px; padding: 14px 14px 12px; font-size: 13px; box-shadow: 0 8px 30px #0008; }
+  .unit b { display: block; font-size: 15px; } .unit small { opacity: .75; }
+  .unit table { width: 100%; border-collapse: collapse; margin: 8px 0; } .unit td { padding: 4px 0; border-bottom: 1px solid #ffffff14; vertical-align: top; } .unit td:first-child { opacity: .7; width: 38%; }
+  .unit .row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .x { position: absolute; top: 8px; right: 8px; border: 0; background: #ffffff1f; color: var(--fg); border-radius: 999px; width: 30px; height: 30px; cursor: pointer; }
+  .plan { position: fixed; inset: 0; background: #000d; overflow: auto; z-index: 5; padding: 50px 12px 20px; text-align: center; }
+  .plan img { max-width: 100%; width: 720px; border-radius: 8px; background: #fff; }
   .loading { position: fixed; inset: 0; display: grid; place-items: center; background: var(--bg); font-size: 14px; transition: opacity .6s; text-align: center; padding: 16px; }
 </style>
 </head>
@@ -57,6 +64,13 @@
   </div>
   <div class="credit">Bản đồ © OpenStreetMap contributors (ODbL) · Địa hình: Terrain Tiles (Mapzen, AWS Open Data)</div>
 </footer>
+<div class="unit" id="unit" hidden>
+  <button class="x" id="unitX" aria-label="Đóng">✕</button>
+  <b id="unitT"></b><small id="unitS"></small>
+  <table><tr><td>Diện tích đất</td><td>178 m² (8 × 22,25 m)</td></tr><tr><td>Sàn xây dựng</td><td>316,09 m²</td></tr><tr><td>Sân vườn</td><td>78,22 m²</td></tr><tr><td>Quy mô</td><td>3 tầng + tầng kỹ thuật, sân thượng 20 m²</td></tr><tr><td>Công năng</td><td>4 phòng ngủ (2 master), 5 WC, phòng khách 27 m², bếp + ăn 38 m², phòng đọc, phòng đa năng</td></tr></table>
+  <div class="row"><button class="chip" data-plan="ph-noi-that.jpg">📐 Mặt bằng mẫu nội thất</button><button class="chip" data-plan="ph-mat-ngoai.jpg">📐 Mặt bằng mẫu mặt ngoài</button></div>
+</div>
+<div class="plan" id="plan" hidden><button class="x" id="planX" aria-label="Đóng">✕</button><img id="planImg" alt="Mặt bằng căn điển hình Park Home" /></div>
 <div class="loading" id="loading">Đang tải dữ liệu Đà Nẵng…</div>
 
 <script type="importmap">
@@ -651,11 +665,11 @@ if (CASA_DATA) {
   const smooth = (lls, n = 60, yfn) => new THREE.CatmullRomCurve3(lls.map(P)).getSpacedPoints(n).map((p, i, a) => (yfn ? p.setY(yfn(i / (a.length - 1), p)) : p));
   // trụ hoa giấy
   const pillars = [];
-  const pillar = (p, h = 11) => pillars.push([p.x, p.y, p.z, h]);
+  const pillar = (p, h = 11, w = 1) => pillars.push([p.x, p.y, p.z, h, w]);
   const lampPts = [], lampCol = [];
 
   // --- Biệt thự: tường vàng nghệ, mái dốc xám đá, kính lớn, hồ bơi riêng hướng kênh ---
-  const lots = CASA_DATA.lots;
+  const lots = CASA_DATA.lots.filter((l) => l.t !== 'PH');
   const WALL = ['#d6a22e', '#cf9a2a', '#dcab3c', '#c99327', '#e0b24a'];
   const body = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1).translate(0, 0.5, 0), new THREE.MeshStandardMaterial({ roughness: 0.85, emissive: 0xffb050, emissiveIntensity: 0 }), lots.length);
   const gable = new THREE.ExtrudeGeometry(new THREE.Shape([new THREE.Vector2(-0.5, 0), new THREE.Vector2(0.5, 0), new THREE.Vector2(0, 1)]), { depth: 1, bevelEnabled: false }).translate(0, 0, -0.5);
@@ -704,6 +718,54 @@ if (CASA_DATA) {
   glass.count = ng; pools.count = np; deck.count = nd; palmT.count = palmC.count = npl;
   casaGroup.add(body, roof, glass, pools, deck, palmT, palmC);
   casaGroup.userData.body = body.material; casaGroup.userData.glass = glassMat;
+
+  // --- Park Home SL1–SL4: theo mẫu căn điển hình (lô 8 × 22,25 m, nhà 16,05 × ~7 m, 3 tầng + tầng kỹ thuật) ---
+  {
+    const PH = CASA_DATA.lots.filter((l) => l.t === 'PH'), n = PH.length;
+    const box = new THREE.BoxGeometry(1, 1, 1);
+    const mk = (geo, mat, count) => { const m = new THREE.InstancedMesh(geo, mat, count); m.count = 0; casaGroup.add(m); return m; };
+    const wallM = new THREE.MeshStandardMaterial({ roughness: 0.85, emissive: 0xffb050, emissiveIntensity: 0 });
+    const I = {
+      body: mk(box, wallM, n), tech: mk(box, wallM, n * 2),
+      gable: mk(gable, new THREE.MeshStandardMaterial({ color: 0x30343a, roughness: 0.55, metalness: 0.15 }), n * 2),
+      glass: mk(box, glassMat, n * 3), terrace: mk(box, new THREE.MeshStandardMaterial({ color: 0xa8432f, roughness: 0.9 }), n),
+      green: mk(box, leaf, n * 4), pad: mk(box, paving, n * 2), lawn: mk(box, new THREE.MeshStandardMaterial({ color: 0x6f9a4a, roughness: 1 }), n),
+      car: mk(box, new THREE.MeshStandardMaterial({ color: 0xf2f2f2, metalness: 0.6, roughness: 0.3 }), n),
+    };
+    const put = (key, p, th, sx, sy, sz, col) => {
+      const im = I[key], k = im.count++;
+      m4.compose(p, q.setFromAxisAngle(V3(0, 1, 0), th), V3(sx, sy, sz)); im.setMatrixAt(k, m4);
+      if (col) im.setColorAt(k, c.set(col));
+    };
+    const WALLS = ['#d8a634', '#d29e2d', '#ddae42', '#cf9a2a'], CARS = ['#f2f2f2', '#1f2226', '#8d939b', '#f2f2f2', '#5a1e22'];
+    PH.forEach((l, idx) => {
+      const [x0, z0] = LL(l.lat, l.lon), y = groundY(x0, z0);
+      const fx = Math.cos(l.fa), fz = Math.sin(l.fa), ux = Math.cos(l.ua), uz = Math.sin(l.ua), th = Math.atan2(fx, fz);
+      const W = l.pair ? 6.95 : 6.8, shift = l.pair * (8 - W) / 2;
+      const at = (pu, pv, h) => V3(x0 + ux * pu + fx * pv, y + h, z0 + uz * pu + fz * pv);
+      const wall = WALLS[idx % WALLS.length];
+      l.ctr = at(shift, -1.9, 0); l.idx = idx;
+      // thân nhà 3 tầng (16,05 m sâu), lùi 5 m sau sân trước, 1,2 m sân sau
+      put('body', at(shift, -1.9, 5.25), th, W, 10.5, 16.05, wall);
+      // tầng kỹ thuật: 2 khối mái dốc (đầu hồi quay ra đường), giữa là sân thượng 20 m²
+      put('tech', at(shift, 3.1, 11.6), th, W, 2.2, 6, wall); put('tech', at(shift, -6.4, 11.6), th, W, 2.2, 7, wall);
+      put('gable', at(shift, 3.1, 12.7), th, W + 0.5, 4.2, 6.6); put('gable', at(shift, -6.4, 12.7), th, W + 0.5, 4.2, 7.6);
+      put('terrace', at(shift, -1.4, 10.6), th, W - 0.3, 0.2, 3);
+      // mặt tiền kính sát trần + ban công/loggia có cây rủ
+      put('glass', at(shift, 6.18, 1.6), th, W * 0.82, 2.8, 0.12); put('glass', at(shift, 6.18, 5.1), th, W * 0.7, 2.6, 0.12); put('glass', at(shift, 6.18, 8.6), th, W * 0.7, 2.6, 0.12);
+      put('green', at(shift, 6.5, 3.6), th, W * 0.86, 0.7, 0.8); put('green', at(shift, 6.5, 7.1), th, W * 0.86, 0.7, 0.8);
+      put('green', at(shift, -10.4, 0.6), th, W, 1.2, 0.9); put('green', at(shift - l.pair * (W / 2 + 0.5), -1.9, 0.6), th, 0.9, 1.2, 14);
+      // sân trước 5 m: chỗ đỗ xe (phía ngoài) + bãi cỏ
+      const outer = l.pair ? -l.pair : (idx % 2 ? 1 : -1);
+      put('pad', at(shift + outer * 1.6, 8.6, 0.15), th, 3.4, 0.25, 5); put('lawn', at(shift - outer * 1.9, 8.6, 0.12), th, W - 3.6, 0.2, 5);
+      put('pad', at(shift, 6.6, 0.18), th, W, 0.25, 0.9);
+      put('car', at(shift + outer * 1.6, 8.7, 0.95), th, 1.85, 1.35, 4.5, CARS[idx % CARS.length]);
+      glow.push(...at(shift, 6.6, 3).toArray());
+      if (idx % 2 === 0) pillar(at(shift + outer * (W / 2 - 0.3), 6.4, 0), 9, 0.4);
+    });
+    for (const k in I) { I[k].instanceMatrix.needsUpdate = true; if (I[k].instanceColor) I[k].instanceColor.needsUpdate = true; }
+    casaGroup.userData.phBody = I.body; casaGroup.userData.phLots = PH; casaGroup.userData.phWall = wallM;
+  }
 
   // --- Đại lộ La Duna: cổng chào hoa giấy, hàng cây, đèn lồng ---
   const blv = smooth(E.boulevard, 80);
@@ -841,7 +903,7 @@ if (CASA_DATA) {
     bougain.color.set(0xffffff);
     const pm = new THREE.InstancedMesh(pg, bougain, pillars.length);
     const cols = ['#d04ab8', '#e0609a', '#a940c8', '#e8853a', '#cf4fa8', '#f08cc0'];
-    pillars.forEach(([x, y, z, h], i) => { m4.compose(V3(x, y, z), q.identity(), V3(1, h, 1)); pm.setMatrixAt(i, m4); pm.setColorAt(i, c.set(cols[i % cols.length])); });
+    pillars.forEach(([x, y, z, h, w], i) => { m4.compose(V3(x, y, z), q.identity(), V3(w, h, w)); pm.setMatrixAt(i, m4); pm.setColorAt(i, c.set(cols[i % cols.length])); });
     casaGroup.add(pm);
   }
   const casaLamps = pointCloud(glow.concat(lampPts), 0xffffff, 7, glow.map((_, i) => [1, 0.78, 0.45][i % 3]).concat(lampCol));
@@ -1054,7 +1116,7 @@ function applyTime(hr) {
   streetLights.material.opacity = 0.05 + night * 0.95;
   bridgeLights.material.opacity = 0.1 + night * 0.9;
   lanterns.material.opacity = 0.1 + night * 0.9;
-  if (casaGroup.userData.lights) { casaGroup.userData.lights.opacity = 0.05 + night * 0.95; casaGroup.userData.body.emissiveIntensity = night * 0.18; casaGroup.userData.hotel.emissiveIntensity = night * 0.25; casaGroup.userData.mall.emissiveIntensity = night * 0.3; casaGroup.userData.glass.emissiveIntensity = night * 0.9; }
+  if (casaGroup.userData.lights) { casaGroup.userData.lights.opacity = 0.05 + night * 0.95; casaGroup.userData.body.emissiveIntensity = night * 0.18; casaGroup.userData.hotel.emissiveIntensity = night * 0.25; casaGroup.userData.mall.emissiveIntensity = night * 0.3; casaGroup.userData.glass.emissiveIntensity = night * 0.9; if (casaGroup.userData.phWall) casaGroup.userData.phWall.emissiveIntensity = night * 0.12; }
   for (const f of casaAnim) f(performance.now() / 1000, night);
   if (hvbGroup.userData.lights) { hvbGroup.userData.lights.opacity = 0.05 + night * 0.95; hvbGroup.userData.tw.emissiveIntensity = night * 0.5; }
   carPts.material.opacity = 0.15 + night * 0.85;
@@ -1130,6 +1192,25 @@ function tick() {
 applyTime(hour); refreshEnv(); envAt = hour;
 tick();
 $('loading').style.opacity = 0; setTimeout(() => $('loading').remove(), 700);
+// chạm vào một căn Park Home -> bảng thông tin + mặt bằng mẫu
+{
+  const el = renderer.domElement, ray2 = new THREE.Raycaster(); let down = null;
+  const mark = new THREE.Mesh(new THREE.TorusGeometry(9, 0.6, 6, 40), new THREE.MeshBasicMaterial({ color: 0xffd34d })); mark.rotation.x = Math.PI / 2; mark.visible = false; world.add(mark);
+  el.addEventListener('pointerdown', (e) => (down = [e.clientX, e.clientY]));
+  el.addEventListener('pointerup', (e) => {
+    if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return;
+    const body = casaGroup.userData.phBody; if (!body) return;
+    ray2.setFromCamera(new THREE.Vector2((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1), camera);
+    const hit = ray2.intersectObject(body)[0]; if (!hit) return;
+    const l = casaGroup.userData.phLots[hit.instanceId];
+    $('unitT').textContent = `Park Home · dãy ${l.row} · căn ${l.pair ? 'song lập' : 'đơn lập'}`;
+    $('unitS').textContent = l.pair ? 'Ghép đôi chung tường với căn bên cạnh, sân trước 5 m có chỗ đỗ xe' : (l.row === 'SL3' || l.row === 'SL4' ? 'Căn đầu hồi, đứng riêng' : 'Căn giáp vệt cây xanh giữa dãy, đứng riêng');
+    $('unit').hidden = false; mark.position.copy(l.ctr).setY(l.ctr.y + 0.5); mark.visible = true; setTour(false);
+  });
+  $('unitX').onclick = () => { $('unit').hidden = true; mark.visible = false; };
+  document.querySelectorAll('[data-plan]').forEach((b) => (b.onclick = () => { $('planImg').src = b.dataset.plan; $('plan').hidden = false; }));
+  $('planX').onclick = () => ($('plan').hidden = true);
+}
 window.dn = { flyTo, PLACES, camera, controls, V3, setTour, scene, casaGroup, THREE };
 console.log('buildings', buildings.count, 'lamps', lamp.length / 3, 'bridges', deckBoxes.length);
 </script>
