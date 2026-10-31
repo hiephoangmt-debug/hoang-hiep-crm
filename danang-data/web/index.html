@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Đà Nẵng 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg: #0b1220; --fg: #eef2ff; --chip: #ffffff24; --accent: #f59e0b; --accent-fg: #1f1300; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #0b1220; } }
+  :root[data-theme="dark"] { --bg: #0b1220; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--fg); font-family: Inter, system-ui, sans-serif; }
+  #stage { position: fixed; inset: 0; touch-action: none; }
+  #stage canvas { display: block; }
+  .top { position: fixed; top: 0; left: 0; right: 0; padding: max(10px, env(safe-area-inset-top)) 16px 12px; background: linear-gradient(#0b1220aa, transparent); pointer-events: none; }
+  .top h1 { margin: 0; font-size: 16px; }
+  .top small { font-size: 12px; opacity: .8; }
+  .bar { position: fixed; left: 0; right: 0; bottom: 0; padding: 8px 16px max(10px, env(safe-area-inset-bottom)); background: linear-gradient(transparent, #0b1220e6 35%); }
+  .time { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font: 600 13px Inter, sans-serif; }
+  .time output { min-width: 58px; }
+  .time input { flex: 1; accent-color: var(--accent); }
+  .chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; border: 0; border-radius: 999px; padding: 8px 12px; font: 600 13px Inter, sans-serif; color: var(--fg); background: var(--chip); backdrop-filter: blur(6px); cursor: pointer; white-space: nowrap; }
+  .chip.active { background: var(--accent); color: var(--accent-fg); }
+  .credit { font-size: 10px; opacity: .6; margin-top: 6px; }
+  .pins { position: fixed; inset: 0; pointer-events: none; }
+  .pin { position: absolute; transform: translate(-50%, -100%); pointer-events: auto; display: flex; flex-direction: column; align-items: center; cursor: pointer; }
+  .pin b { font: 600 12px Inter, sans-serif; background: #fffffff0; color: #111827; padding: 4px 9px; border-radius: 999px; white-space: nowrap; box-shadow: 0 2px 8px #0006; }
+  .pin.small b { font-size: 11px; background: #111827d9; color: #fff; }
+  .pin span { width: 2px; height: 18px; background: linear-gradient(#fff, #fff0); }
+  .loading { position: fixed; inset: 0; display: grid; place-items: center; background: var(--bg); font-size: 14px; transition: opacity .6s; text-align: center; padding: 16px; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div class="pins" id="pins"></div>
+<header class="top"><h1>Đà Nẵng 3D · 5D</h1><small>Toạ độ, nhà, cầu, sông, biển, núi theo dữ liệu thật — kéo để xoay, chụm để phóng</small></header>
+<footer class="bar">
+  <div class="time"><output id="clock">18:45</output><input id="hour" type="range" min="0" max="24" step="0.05" value="18.75" aria-label="Giờ trong ngày" /></div>
+  <div class="chips">
+    <button class="chip active" id="tourBtn">🎬 Tự bay</button>
+    <button class="chip" id="flowBtn">⏩ Thời gian trôi</button>
+    <button class="chip" data-h="12">☀️ Trưa</button>
+    <button class="chip" data-h="17.6">🌇 Hoàng hôn</button>
+    <button class="chip" data-h="18.75">🌆 Chạng vạng</button>
+    <button class="chip" data-h="21.5">🌃 Đêm</button>
+    <button class="chip active" id="pinBtn">🏷 Nhãn</button>
+    <button class="chip active" id="carBtn">🚗 Xe &amp; tàu</button>
+    <button class="chip" id="veBtn">📏 Độ cao ×2</button>
+    <button class="chip" id="homeBtn">↺ Toàn cảnh</button>
+  </div>
+  <div class="credit">Bản đồ © OpenStreetMap contributors (ODbL) · Địa hình: Terrain Tiles (Mapzen, AWS Open Data)</div>
+</footer>
+<div class="loading" id="loading">Đang tải dữ liệu Đà Nẵng…</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+const $ = (id) => document.getElementById(id);
+const say = (t) => { const l = $('loading'); if (l) l.textContent = t; };
+const V3 = (x, y, z) => new THREE.Vector3(x, y, z);
+const mod = (a, n) => ((a % n) + n) % n;
+let seed = 7;
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+// ===== Tải dữ liệu =====
+const texLoader = new THREE.TextureLoader();
+const b64 = async (r) => { if (!r.ok) throw new Error(r.url); const t = (await r.text()).trim(); const s = atob(t), a = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) a[i] = s.charCodeAt(i); return a.buffer; };
+const loadTex = (u) => new Promise((res, rej) => texLoader.load(u, res, undefined, () => rej(new Error('Không tải được ' + u))));
+const [meta, bldBuf, demBuf, landNear, maskNear, landFar, maskFar] = await Promise.all([
+  fetch('meta.json').then((r) => r.json()), fetch('bld.txt').then(b64), fetch('dem.txt').then(b64),
+  loadTex('land-near.jpg'), loadTex('mask-near.png'), loadTex('land-far.jpg'), loadTex('mask-far.png'),
+]).catch((e) => { say('Lỗi tải dữ liệu: ' + e.message); throw e; });
+say('Đang dựng thành phố…');
+await new Promise((r) => setTimeout(r, 30));
+
+const LL = (lat, lon) => [(lon - meta.origin[1]) * meta.kx, -(lat - meta.origin[0]) * meta.kz];
+
+// ===== Renderer, camera =====
+const stage = $('stage');
+const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
+const DPR = Math.min(devicePixelRatio, 1.5);
+renderer.setPixelRatio(DPR);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+stage.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, 1, 2, 300000);
+const world = new THREE.Group(); // mọi thứ trên mặt đất (để phóng độ cao)
+scene.add(world);
+
+// ===== Địa hình (độ cao thật, mét) =====
+const [DW, DH] = meta.dem;
+const DEM = new Int16Array(demBuf);
+const [fx0, fz0, fx1, fz1] = meta.far;
+function demAt(x, z) {
+  const fi = ((x - fx0) / (fx1 - fx0)) * DW - 0.5, fj = ((z - fz0) / (fz1 - fz0)) * DH - 0.5;
+  const i = THREE.MathUtils.clamp(Math.floor(fi), 0, DW - 2), j = THREE.MathUtils.clamp(Math.floor(fj), 0, DH - 2);
+  const u = THREE.MathUtils.clamp(fi - i, 0, 1), v = THREE.MathUtils.clamp(fj - j, 0, 1);
+  const a = DEM[j * DW + i], b = DEM[j * DW + i + 1], c = DEM[(j + 1) * DW + i], d = DEM[(j + 1) * DW + i + 1];
+  return (a * (1 - u) + b * u) * (1 - v) + (c * (1 - u) + d * u) * v;
+}
+const groundY = (x, z) => Math.max(demAt(x, z), 1.5);
+
+function landPlane([x0, z0, x1, z1], map, alpha, segX, offY, order) {
+  const w = x1 - x0, h = z1 - z0;
+  const g = new THREE.PlaneGeometry(w, h, segX, Math.round((segX * h) / w));
+  g.rotateX(-Math.PI / 2);
+  g.translate((x0 + x1) / 2, 0, (z0 + z1) / 2);
+  const p = g.attributes.position, col = new Float32Array(p.count * 3);
+  for (let k = 0; k < p.count; k++) {
+    const e = demAt(p.getX(k), p.getZ(k));
+    p.setY(k, Math.max(e, 1.5) + offY);
+    // vùng cao chuyển dần sang màu rừng
+    const t = THREE.MathUtils.smoothstep(e, 25, 140), r = THREE.MathUtils.smoothstep(e, 700, 1300);
+    col.set([1 - 0.42 * t + 0.25 * r, 1 - 0.12 * t + 0.1 * r, 1 - 0.38 * t + 0.25 * r], k * 3);
+  }
+  g.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  g.computeVertexNormals();
+  map.colorSpace = THREE.SRGBColorSpace;
+  map.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  const m = new THREE.Mesh(g, new THREE.MeshStandardMaterial({ map, alphaMap: alpha, alphaTest: 0.5, vertexColors: true, roughness: 0.95 }));
+  m.renderOrder = order;
+  world.add(m);
+  return m;
+}
+landPlane(meta.far, landFar, maskFar, 640, -2, 0);
+landPlane(meta.near, landNear, maskNear, 760, 0, 1);
+
+// Mặt nạ nước (độ phân giải thấp) để kiểm tra một điểm là đất hay nước
+const MASK = (() => {
+  const img = maskNear.image, W = 1024, H = Math.round((1024 * img.height) / img.width);
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const g = c.getContext('2d'); g.drawImage(img, 0, 0, W, H);
+  const d = g.getImageData(0, 0, W, H).data, a = new Uint8Array(W * H);
+  for (let i = 0; i < a.length; i++) a[i] = d[i * 4] > 127 ? 1 : 0;
+  const [x0, z0, x1, z1] = meta.near;
+  return (x, z) => {
+    const i = Math.floor(((x - x0) / (x1 - x0)) * W), j = Math.floor(((z - z0) / (z1 - z0)) * H);
+    return i < 0 || j < 0 || i >= W || j >= H ? 1 : a[j * W + i];
+  };
+})();
+
+// ===== Bầu trời & ngày đêm (chiều thứ 4) =====
+const skyU = { top: { value: new THREE.Color() }, hor: { value: new THREE.Color() }, sunDir: { value: V3(0, 1, 0) }, sunCol: { value: new THREE.Color() } };
+const skyMat = new THREE.ShaderMaterial({
+  uniforms: skyU, side: THREE.BackSide, depthWrite: false, depthTest: false, fog: false,
+  vertexShader: `varying vec3 vP; void main(){ vP = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.); }`,
+  fragmentShader: `uniform vec3 top, hor, sunDir, sunCol; varying vec3 vP;
+    void main(){ float h = vP.y;
+      vec3 c = mix(hor, top, smoothstep(-0.02, 0.45, h));
+      c = mix(c, hor * 0.6, smoothstep(0.0, -0.2, h));
+      float s = max(dot(vP, normalize(sunDir)), 0.);
+      c += sunCol * (pow(s, 600.) * 4. + pow(s, 12.) * 0.35);
+      gl_FragColor = vec4(c, 1.);
+      #include <tonemapping_fragment>
+      #include <colorspace_fragment>
+    }`,
+});
+const sky = new THREE.Mesh(new THREE.SphereGeometry(150000, 32, 16), skyMat);
+sky.renderOrder = -10; sky.frustumCulled = false;
+scene.add(sky);
+const skyScene = new THREE.Scene();
+skyScene.add(new THREE.Mesh(new THREE.SphereGeometry(100, 32, 16), skyMat));
+const pmrem = new THREE.PMREMGenerator(renderer);
+
+const KEYS = [
+  [0, '#040816', '#141d38', '#8899cc', 0.0, 0.35, 1.0, 1.0],
+  [5.2, '#0d1730', '#3a3a62', '#ff9a66', 0.0, 0.4, 0.9, 1.0],
+  [6.2, '#35558f', '#f2a77a', '#ffb37a', 0.8, 0.7, 0.35, 0.95],
+  [8, '#3a72c4', '#cfe0f0', '#fff1dc', 2.2, 1.0, 0.0, 0.9],
+  [12, '#2f6fd6', '#bcd8f2', '#ffffff', 2.8, 1.1, 0.0, 0.85],
+  [16.5, '#3767b0', '#f1d4a6', '#ffe2b0', 2.2, 1.0, 0.0, 0.9],
+  [17.7, '#33549a', '#f39a62', '#ff9a50', 1.3, 0.8, 0.3, 0.95],
+  [18.75, '#1d3a78', '#9fa3c8', '#ff9a6a', 0.3, 0.6, 0.85, 1.05],
+  [19.8, '#0c1735', '#3a3f6e', '#6070a0', 0.0, 0.45, 1.0, 1.05],
+  [24, '#040816', '#141d38', '#8899cc', 0.0, 0.35, 1.0, 1.0],
+].map(([h, a, b, c, ...n]) => [h, new THREE.Color(a), new THREE.Color(b), new THREE.Color(c), ...n]);
+const hemi = new THREE.HemisphereLight(0xffffff, 0x333344, 1);
+const sun = new THREE.DirectionalLight(0xffffff, 1);
+scene.add(hemi, sun, sun.target);
+scene.fog = new THREE.Fog(0x000000, 9000, 90000);
+
+// ===== Biển =====
+function canvasTex(w, h, draw, srgb = true) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  draw(c.getContext('2d'), w, h);
+  const t = new THREE.CanvasTexture(c);
+  if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+const normalTex = canvasTex(256, 256, (g, w, h) => {
+  const img = g.createImageData(w, h);
+  const f = (x, y) => Math.sin(x * 0.11 + Math.sin(y * 0.07) * 2) + Math.sin(y * 0.13 + Math.sin(x * 0.05) * 3) * 0.7 + Math.sin((x + y) * 0.23) * 0.3;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const dx = f(x + 1, y) - f(x - 1, y), dy = f(x, y + 1) - f(x, y - 1);
+    const n = V3(-dx, -dy, 2).normalize(), i = (y * w + x) * 4;
+    img.data[i] = (n.x * 0.5 + 0.5) * 255; img.data[i + 1] = (n.y * 0.5 + 0.5) * 255; img.data[i + 2] = (n.z * 0.5 + 0.5) * 255; img.data[i + 3] = 255;
+  }
+  g.putImageData(img, 0, 0);
+}, false);
+normalTex.wrapS = normalTex.wrapT = THREE.RepeatWrapping;
+normalTex.repeat.set(5000, 5000);
+const water = new THREE.Mesh(new THREE.PlaneGeometry(300000, 300000),
+  new THREE.MeshStandardMaterial({ color: 0x1b3a66, roughness: 0.08, metalness: 0.9, normalMap: normalTex, normalScale: new THREE.Vector2(0.3, 0.3) }));
+water.rotation.x = -Math.PI / 2;
+water.renderOrder = -1;
+scene.add(water);
+
+// ===== Nhà (đúng hình dạng & chiều cao theo OpenStreetMap) =====
+const U = { uNight: { value: 0 }, uLit: { value: 0.5 } };
+const PAL = [
+  ['#e9e4da', '#f1eee8', '#e7d9b8', '#d8e2ea', '#efe2c9', '#f0d7cf', '#dfe6d6', '#cfd8e2'], // nhà ở
+  ['#e8eef6', '#d6e2f0', '#f4f2ee', '#c9d8ea'], // chung cư
+  ['#dfe9f5', '#c4d6ec', '#f2f2f2', '#b9cde6'], // khách sạn
+  ['#d6dde6', '#c9d3df', '#e6e1d6'], // thương mại
+  ['#c7c9cc', '#b8c0c8', '#d0cec8'], // công nghiệp
+  ['#efe3c4', '#e8d8b0'], // trường học, bệnh viện
+  ['#e9c36b', '#d99a4e', '#c9584a'], // chùa, nhà thờ
+];
+const buildings = (() => {
+  const dv = new DataView(bldBuf);
+  let o = 0, nv = 0, ni = 0, nb = 0;
+  while (o < dv.byteLength) { const n = dv.getUint8(o); nv += n * 5; ni += n * 6 + (n - 2) * 3; o += 6 + n * 4; nb++; }
+  const pos = new Float32Array(nv * 3), nor = new Int8Array(nv * 3), col = new Uint8Array(nv * 3), wuv = new Float32Array(nv * 3);
+  const idx = new Uint32Array(ni);
+  let v = 0, k = 0; o = 0;
+  const xs = [], zs = [], c = new THREE.Color();
+  while (o < dv.byteLength) {
+    const n = dv.getUint8(o), type = dv.getUint8(o + 1), h = dv.getUint16(o + 2, true) / 10, minH = dv.getUint16(o + 4, true) / 10;
+    o += 6;
+    xs.length = zs.length = 0;
+    let cx = 0, cz = 0;
+    for (let i = 0; i < n; i++) { const x = dv.getInt16(o, true) * 2, z = dv.getInt16(o + 2, true) * 2; o += 4; xs.push(x); zs.push(z); cx += x; cz += z; }
+    cx /= n; cz /= n;
+    const base = groundY(cx, cz) + minH, top = groundY(cx, cz) + h;
+    const pal = PAL[type] || PAL[0];
+    c.set(pal[(rnd() * pal.length) | 0]);
+    const cr = c.r * 255, cg = c.g * 255, cb = c.b * 255, sd = rnd();
+    let area = 0;
+    for (let i = 0; i < n; i++) { const j = (i + 1) % n; area += xs[i] * zs[j] - xs[j] * zs[i]; }
+    let per = 0;
+    for (let i = 0; i < n; i++) {
+      const j = (i + 1) % n, dx = xs[j] - xs[i], dz = zs[j] - zs[i], L = Math.hypot(dx, dz) || 1;
+      const nx = (area > 0 ? dz : -dz) / L, nz = (area > 0 ? -dx : dx) / L;
+      const quad = [[xs[i], base, zs[i], per, 0], [xs[j], base, zs[j], per + L, 0], [xs[j], top, zs[j], per + L, top - base], [xs[i], top, zs[i], per, top - base]];
+      for (const [x, y, z, u, w] of quad) {
+        pos.set([x, y, z], v * 3); nor.set([nx * 127, 0, nz * 127], v * 3); col.set([cr, cg, cb], v * 3); wuv.set([u, w, sd], v * 3); v++;
+      }
+      const b0 = v - 4;
+      if (area > 0) idx.set([b0, b0 + 2, b0 + 1, b0, b0 + 3, b0 + 2], k); else idx.set([b0, b0 + 1, b0 + 2, b0, b0 + 2, b0 + 3], k);
+      k += 6; per += L;
+    }
+    // mái
+    const r0 = v;
+    for (let i = 0; i < n; i++) { pos.set([xs[i], top, zs[i]], v * 3); nor.set([0, 127, 0], v * 3); col.set([cr * 0.86, cg * 0.86, cb * 0.86], v * 3); wuv.set([0, -1, sd], v * 3); v++; }
+    let tris;
+    if (n === 4) tris = [[0, 1, 2], [0, 2, 3]];
+    else tris = THREE.ShapeUtils.triangulateShape(xs.map((x, i) => new THREE.Vector2(x, zs[i])), []);
+    for (const [a, b, d] of tris) {
+      const ny = (zs[b] - zs[a]) * (xs[d] - xs[a]) - (xs[b] - xs[a]) * (zs[d] - zs[a]);
+      idx.set(ny > 0 ? [r0 + a, r0 + b, r0 + d] : [r0 + a, r0 + d, r0 + b], k); k += 3;
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  g.setAttribute('normal', new THREE.BufferAttribute(nor, 3, true));
+  g.setAttribute('color', new THREE.BufferAttribute(col, 3, true));
+  g.setAttribute('wuv', new THREE.BufferAttribute(wuv, 3));
+  g.setIndex(new THREE.BufferAttribute(idx.subarray(0, k), 1));
+  g.computeBoundingSphere();
+  const m = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.6, metalness: 0.05 });
+  m.onBeforeCompile = (s) => {
+    Object.assign(s.uniforms, U);
+    s.vertexShader = s.vertexShader.replace('#include <common>', '#include <common>\nattribute vec3 wuv; varying vec3 vW;')
+      .replace('#include <begin_vertex>', '#include <begin_vertex>\nvW = wuv;');
+    s.fragmentShader = s.fragmentShader.replace('#include <common>', '#include <common>\nvarying vec3 vW; uniform float uNight; uniform float uLit;')
+      .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+        if (vW.y >= 0.0) {
+          vec2 q = vec2(vW.x / 3.4, vW.y / 3.3);
+          vec2 f = fract(q), cell = floor(q);
+          float aa = clamp(1.5 - fwidth(q.y) * 2.5, 0.0, 1.0);
+          float win = step(0.2, f.x) * step(f.x, 0.8) * step(0.3, f.y) * step(f.y, 0.82) * step(1.0, cell.y) * aa;
+          float r = fract(sin(dot(cell + vW.z * 97.3, vec2(12.9898, 78.233))) * 43758.5453);
+          diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * 0.35 + vec3(0.04, 0.07, 0.11), win * 0.75);
+          vec3 warm = mix(vec3(1.0, 0.7, 0.38), vec3(0.78, 0.86, 1.0), step(0.82, fract(r * 7.13)));
+          totalEmissiveRadiance += warm * uNight * (win * step(r, uLit) * 1.7 + (1.0 - aa) * uLit * 0.22 * step(1.0, vW.y));
+        }`);
+  };
+  const mesh = new THREE.Mesh(g, m);
+  world.add(mesh);
+  return { mesh, count: nb };
+})();
+
+// ===== Đèn đường (theo mạng đường thật) =====
+const glowTex = canvasTex(32, 32, (g) => {
+  const r = g.createRadialGradient(16, 16, 0, 16, 16, 16);
+  r.addColorStop(0, '#fff'); r.addColorStop(0.25, '#ffffffcc'); r.addColorStop(1, '#fff0');
+  g.fillStyle = r; g.fillRect(0, 0, 32, 32);
+});
+function pointCloud(arr, color, size, colors) {
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(arr, 3));
+  if (colors) g.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+  const m = new THREE.PointsMaterial({ color, size, map: glowTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, vertexColors: !!colors });
+  const p = new THREE.Points(g, m);
+  p.frustumCulled = false;
+  world.add(p);
+  return p;
+}
+const lamp = [];
+function sampleLine(pts, step, cb) {
+  let carry = 0;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const [ax, az] = pts[i], [bx, bz] = pts[i + 1], L = Math.hypot(bx - ax, bz - az);
+    let s = carry;
+    for (; s < L; s += step) cb(ax + ((bx - ax) * s) / L, az + ((bz - az) * s) / L, (bx - ax) / L, (bz - az) / L);
+    carry = s - L;
+  }
+}
+for (const r of meta.roads) sampleLine(r.pts, 28, (x, z, dx, dz) => {
+  const o = 4 + r.w * 3;
+  lamp.push(x - dz * o, groundY(x, z) + 7, z + dx * o, x + dz * o, groundY(x, z) + 7, z - dx * o);
+});
+for (const p of meta.minor) sampleLine(p, 40, (x, z) => lamp.push(x, groundY(x, z) + 6, z));
+const streetLights = pointCloud(lamp, 0xffb15c, 16);
+
+// ===== Cầu (vị trí thật từ OpenStreetMap) =====
+const glowMats = [];
+const lit = (hex) => { const m = new THREE.MeshBasicMaterial({ color: hex }); m.userData.base = new THREE.Color(hex); glowMats.push(m); return m; };
+const white = new THREE.MeshStandardMaterial({ color: 0xe6e9ee, roughness: 0.5 });
+const deckMat = new THREE.MeshStandardMaterial({ color: 0x8d949e, roughness: 0.8 });
+const MAJOR = ['cầu rồng', 'cầu trần thị lý', 'cầu sông hàn', 'cầu thuận phước', 'cầu tiên sơn', 'cầu hòa xuân', 'cầu nguyễn văn trỗi', 'cầu cẩm lệ', 'cầu nguyễn tri phương', 'cầu khuê đông'];
+const WID = { motorway: 24, trunk: 22, primary: 20, secondary: 16, tertiary: 12, residential: 8, unclassified: 8 };
+const deckBoxes = [], pierPos = [], bridgeLamps = [];
+const byName = {};
+for (const b of meta.bridges) {
+  const nm = (b.name || '').toLowerCase();
+  const major = MAJOR.some((m) => nm.startsWith(m));
+  const w = WID[b.hw] || 8, pts = b.pts;
+  let total = 0; for (let i = 0; i < pts.length - 1; i++) total += Math.hypot(pts[i + 1][0] - pts[i][0], pts[i + 1][1] - pts[i][1]);
+  if (total < 15) continue;
+  const lift = major ? 10 : 5;
+  let acc = 0;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const [ax, az] = pts[i], [bx, bz] = pts[i + 1], L = Math.hypot(bx - ax, bz - az);
+    const mid = acc + L / 2; acc += L;
+    const ramp = Math.min(1, Math.min(mid, total - mid) / Math.max(30, total * 0.12));
+    const y = Math.max(groundY((ax + bx) / 2, (az + bz) / 2), 1.5) * (1 - ramp) + Math.max(lift, groundY((ax + bx) / 2, (az + bz) / 2) + 3) * ramp;
+    deckBoxes.push({ x: (ax + bx) / 2, z: (az + bz) / 2, y, L: L + 0.5, w, a: Math.atan2(-(bz - az), bx - ax) });
+  }
+  sampleLine(pts, 18, (x, z, dx, dz) => {
+    if (!MASK(x, z)) pierPos.push(x, z, lift);
+    for (const s of [-1, 1]) bridgeLamps.push(x - dz * (w / 2) * s, lift + 2.5, z + dx * (w / 2) * s);
+  });
+  if (nm) (byName[nm] ||= []).push({ pts, total, lift, w });
+}
+{
+  const box = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 2, 1), deckMat, deckBoxes.length);
+  const m = new THREE.Matrix4(), q = new THREE.Quaternion();
+  deckBoxes.forEach((d, i) => { q.setFromAxisAngle(V3(0, 1, 0), d.a); m.compose(V3(d.x, d.y - 1, d.z), q, V3(d.L, 1, d.w)); box.setMatrixAt(i, m); });
+  world.add(box);
+  const piers = new THREE.InstancedMesh(new THREE.CylinderGeometry(1.6, 1.8, 1, 8), deckMat, pierPos.length / 3);
+  for (let i = 0; i < pierPos.length / 3; i++) { const h = pierPos[i * 3 + 2]; m.compose(V3(pierPos[i * 3], h / 2 - 2, pierPos[i * 3 + 1]), q.identity(), V3(1, h, 1)); piers.setMatrixAt(i, m); }
+  world.add(piers);
+}
+const bridgeLights = pointCloud(bridgeLamps, 0xffd59a, 10);
+
+const longest = (nm) => (byName[nm] || []).slice().sort((a, b) => b.total - a.total)[0];
+function along(br, t) { // điểm & hướng tại tỉ lệ t trên cầu
+  const target = t * br.total; let acc = 0;
+  for (let i = 0; i < br.pts.length - 1; i++) {
+    const [ax, az] = br.pts[i], [bx, bz] = br.pts[i + 1], L = Math.hypot(bx - ax, bz - az);
+    if (acc + L >= target || i === br.pts.length - 2) { const k = (target - acc) / L; return { x: ax + (bx - ax) * k, z: az + (bz - az) * k, dx: (bx - ax) / L, dz: (bz - az) / L }; }
+    acc += L;
+  }
+}
+const westToEast = (br) => (br.pts[0][0] > br.pts[br.pts.length - 1][0] ? { ...br, pts: br.pts.slice().reverse() } : br);
+const PINPOS = {};
+// Cầu Rồng: thân rồng 5 nhịp uốn lượn, đầu rồng hướng ra biển (phía đông)
+const dragonMat = new THREE.MeshStandardMaterial({ color: 0xe0a91c, emissive: 0xffb000, emissiveIntensity: 0.1, roughness: 0.35, metalness: 0.5 });
+{
+  const br0 = longest('cầu rồng');
+  if (br0) {
+    const br = westToEast(br0), pts = [];
+    // 5 vòm thân rồng, cổ vươn lên đầu rồng ở phía đông
+    for (let k = 0; k <= 160; k++) {
+      const u = k / 160, t = 0.12 + u * 0.78, p = along(br, t);
+      let y = br.lift + 1 + Math.abs(Math.sin((Math.min(u, 0.86) / 0.86) * Math.PI * 5)) * 36;
+      if (u > 0.86) y = br.lift + 1 + ((u - 0.86) / 0.14) * 30;
+      pts.push(V3(p.x, y, p.z));
+    }
+    const body = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 500, 2.4, 10), dragonMat);
+    world.add(body);
+    const e = along(br, 0.905), head = new THREE.Group();
+    const skull = new THREE.Mesh(new THREE.ConeGeometry(4, 14, 10), dragonMat); skull.rotation.z = -Math.PI / 2; skull.position.x = 5; head.add(skull);
+    const jaw = new THREE.Mesh(new THREE.ConeGeometry(2.4, 11, 8), dragonMat); jaw.rotation.z = -Math.PI / 2 - 0.35; jaw.position.set(5, -3, 0); head.add(jaw);
+    for (const sd of [-1, 1]) { const horn = new THREE.Mesh(new THREE.ConeGeometry(1, 9, 6), dragonMat); horn.position.set(-2, 5, sd * 2); horn.rotation.z = 0.9; head.add(horn); }
+    const mane = new THREE.Mesh(new THREE.ConeGeometry(2, 8, 6), dragonMat); mane.position.set(-5, 2, 0); mane.rotation.z = 1.2; head.add(mane);
+    head.position.set(e.x, br.lift + 33, e.z); head.rotation.y = Math.atan2(-e.dz, e.dx);
+    world.add(head);
+    const c = along(br, 0.5); PINPOS['Cầu Rồng'] = V3(c.x, br.lift + 45, c.z);
+  }
+}
+// Cầu Trần Thị Lý: một trụ tháp nghiêng ~145 m, dây văng toả quạt
+{
+  const br0 = longest('cầu trần thị lý');
+  if (br0) {
+    const br = westToEast(br0), p = along(br, 0.42), ang = Math.atan2(-p.dz, p.dx);
+    const g = new THREE.Group(); g.position.set(p.x, br.lift, p.z); g.rotation.y = ang;
+    const H = 145, tilt = 0.32;
+    const py = new THREE.Mesh(new THREE.BoxGeometry(4, H, 3), white); py.position.set(-Math.sin(tilt) * H / 2, Math.cos(tilt) * H / 2, 0); py.rotation.z = tilt; g.add(py);
+    const top = V3(-Math.sin(tilt) * H, Math.cos(tilt) * H, 0), cp = [];
+    for (let k = 1; k <= 14; k++) for (const s of [-1, 1]) {
+      const yk = top.y * (0.45 + k * 0.038), xk = top.x * (0.45 + k * 0.038);
+      cp.push(xk, yk, 0, 8 + k * 13, 1, s * (br.w / 2 - 1));
+    }
+    const cg = new THREE.BufferGeometry(); cg.setAttribute('position', new THREE.Float32BufferAttribute(cp, 3));
+    g.add(new THREE.LineSegments(cg, new THREE.LineBasicMaterial({ color: 0xf2f5fa })));
+    const beacon = new THREE.Mesh(new THREE.SphereGeometry(2), lit(0xfff3d6)); beacon.position.copy(top); g.add(beacon);
+    world.add(g);
+    PINPOS['Cầu Trần Thị Lý'] = V3(p.x, br.lift + 150, p.z);
+  }
+}
+// Cầu Thuận Phước: cầu treo dây võng, 2 tháp
+{
+  const br0 = longest('cầu thuận phước');
+  if (br0) {
+    const br = westToEast(br0), H = 88;
+    let wStart = 0.2, wEnd = 0.8;
+    for (let t = 0; t <= 1; t += 0.01) { const p = along(br, t); if (!MASK(p.x, p.z)) { wStart = t; break; } }
+    for (let t = 1; t >= 0; t -= 0.01) { const p = along(br, t); if (!MASK(p.x, p.z)) { wEnd = t; break; } }
+    const t1 = wStart + (wEnd - wStart) * 0.25, t2 = wStart + (wEnd - wStart) * 0.75;
+    const towers = [t1, t2].map((t) => along(br, t));
+    for (const p of towers) {
+      const ang = Math.atan2(-p.dz, p.dx);
+      for (const s of [-1, 1]) {
+        const leg = new THREE.Mesh(new THREE.BoxGeometry(3, H, 3), white);
+        leg.position.set(p.x + p.dz * s * (br.w / 2 + 1), br.lift + H / 2 - 4, p.z - p.dx * s * (br.w / 2 + 1)); leg.rotation.y = ang; world.add(leg);
+      }
+      const beam = new THREE.Mesh(new THREE.BoxGeometry(3, 3, br.w + 5), white); beam.position.set(p.x, br.lift + H - 8, p.z); beam.rotation.y = ang; world.add(beam);
+    }
+    for (const s of [-1, 1]) {
+      const cable = [], hang = [];
+      for (let k = 0; k <= 160; k++) {
+        const t = wStart - 0.04 + (k / 160) * (wEnd - wStart + 0.08), p = along(br, THREE.MathUtils.clamp(t, 0, 1));
+        let y;
+        if (t < t1) y = br.lift + 2 + (H - 6) * THREE.MathUtils.clamp((t - (wStart - 0.04)) / (t1 - wStart + 0.04), 0, 1);
+        else if (t > t2) y = br.lift + 2 + (H - 6) * THREE.MathUtils.clamp(((wEnd + 0.04) - t) / (wEnd + 0.04 - t2), 0, 1);
+        else { const u = (t - t1) / (t2 - t1); y = br.lift + 6 + (H - 10) * Math.pow(2 * u - 1, 2); }
+        const x = p.x + p.dz * s * (br.w / 2 + 1), z = p.z - p.dx * s * (br.w / 2 + 1);
+        cable.push(x, y, z);
+        if (k % 3 === 0 && t > t1 && t < t2) hang.push(x, y, z, x, br.lift + 1, z);
+      }
+      const g1 = new THREE.BufferGeometry(); g1.setAttribute('position', new THREE.Float32BufferAttribute(cable, 3));
+      world.add(new THREE.Line(g1, new THREE.LineBasicMaterial({ color: 0xf4f6fa })));
+      const g2 = new THREE.BufferGeometry(); g2.setAttribute('position', new THREE.Float32BufferAttribute(hang, 3));
+      world.add(new THREE.LineSegments(g2, new THREE.LineBasicMaterial({ color: 0xd9dee6, transparent: true, opacity: 0.7 })));
+    }
+    const c = along(br, (wStart + wEnd) / 2); PINPOS['Cầu Thuận Phước'] = V3(c.x, br.lift + 95, c.z);
+  }
+}
+const glowLines = [];
+// Cầu Sông Hàn (cầu quay): 2 trụ tháp thấp ở nhịp giữa, dây văng hai bên
+{
+  const br0 = longest('cầu sông hàn');
+  if (br0) {
+    const br = westToEast(br0);
+    for (const t of [0.43, 0.57]) {
+      const p = along(br, t), H = 38, cp = [];
+      for (const sd of [-1, 1]) {
+        const leg = new THREE.Mesh(new THREE.BoxGeometry(2.2, H, 2.2), white);
+        leg.position.set(p.x + p.dz * sd * (br.w / 2 + 1), br.lift + H / 2, p.z - p.dx * sd * (br.w / 2 + 1)); world.add(leg);
+        for (let k = 1; k <= 6; k++) for (const dir of [-1, 1]) {
+          const q = along(br, THREE.MathUtils.clamp(t + dir * k * 0.012, 0, 1));
+          cp.push(p.x + p.dz * sd * (br.w / 2 + 1), br.lift + H - k * 2.5, p.z - p.dx * sd * (br.w / 2 + 1), q.x + q.dz * sd * (br.w / 2), br.lift + 1, q.z - q.dx * sd * (br.w / 2));
+        }
+      }
+      const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(cp, 3));
+      const lm = new THREE.LineBasicMaterial({ color: 0xf2f4f8 }); lm.userData.base = new THREE.Color(0xf2f4f8); lm.userData.night = new THREE.Color(0x7fd0ff); glowLines.push(lm);
+      world.add(new THREE.LineSegments(g, lm));
+    }
+  }
+}
+// Cầu Nguyễn Văn Trỗi: cầu giàn thép cũ (nay là cầu đi bộ, thắp đèn tím ban đêm)
+{
+  const br0 = longest('cầu nguyễn văn trỗi');
+  if (br0) {
+    const br = westToEast(br0), lp = [], N = Math.max(8, Math.round(br.total / 12));
+    for (let k = 0; k < N; k++) {
+      const a = along(br, k / N), b = along(br, (k + 1) / N);
+      for (const sd of [-1, 1]) {
+        const ox = (q) => q.x + q.dz * sd * (br.w / 2), oz = (q) => q.z - q.dx * sd * (br.w / 2), y0 = br.lift, y1 = br.lift + 9;
+        lp.push(ox(a), y1, oz(a), ox(b), y1, oz(b), ox(a), y0, oz(a), ox(a), y1, oz(a), ox(a), y0, oz(a), ox(b), y1, oz(b), ox(a), y1, oz(a), ox(b), y0, oz(b));
+      }
+    }
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(lp, 3));
+    const lm = new THREE.LineBasicMaterial({ color: 0xa04a3a }); lm.userData.base = new THREE.Color(0xa04a3a); lm.userData.night = new THREE.Color(0xc070ff); glowLines.push(lm);
+    world.add(new THREE.LineSegments(g, lm));
+  }
+}
+for (const [nm, label] of [['cầu sông hàn', 'Cầu Sông Hàn (cầu quay)'], ['cầu tiên sơn', 'Cầu Tiên Sơn'], ['cầu hòa xuân', 'Cầu Hòa Xuân'], ['cầu nguyễn văn trỗi', 'Cầu Nguyễn Văn Trỗi']]) {
+  const br = longest(nm);
+  if (br) { const c = along(br, 0.5); PINPOS[label] = V3(c.x, br.lift + 25, c.z); }
+}
+
+// ===== Vòng quay Sun Wheel (Công viên Châu Á) & tượng Phật Quan Âm chùa Linh Ứng =====
+const wheel = new THREE.Group();
+let wheelLights;
+{
+  const [x, z] = LL(16.0393, 108.2266), R = 54;
+  wheel.position.set(x, groundY(x, z) + R + 8, z); wheel.rotation.y = 1.2;
+  const spin = new THREE.Group(); wheel.add(spin); wheel.userData.spin = spin;
+  spin.add(new THREE.Mesh(new THREE.TorusGeometry(R, 1, 6, 96), white));
+  const sp = [], lp = [], lc = [];
+  for (let k = 0; k < 64; k++) {
+    const a = (k / 64) * Math.PI * 2;
+    if (k % 2 === 0) sp.push(0, 0, 0, Math.cos(a) * R, Math.sin(a) * R, 0);
+    lp.push(Math.cos(a) * R, Math.sin(a) * R, 0); lc.push(1, 1, 1);
+    if (k % 2 === 0) { const cab = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), lit(0xffd0f0)); cab.position.set(Math.cos(a) * (R + 2.5), Math.sin(a) * (R + 2.5), 0); spin.add(cab); }
+  }
+  const sg = new THREE.BufferGeometry(); sg.setAttribute('position', new THREE.Float32BufferAttribute(sp, 3));
+  spin.add(new THREE.LineSegments(sg, new THREE.LineBasicMaterial({ color: 0xdfe6f2 })));
+  const lg = new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.Float32BufferAttribute(lp, 3)); lg.setAttribute('color', new THREE.Float32BufferAttribute(lc, 3));
+  wheelLights = new THREE.Points(lg, new THREE.PointsMaterial({ size: 9, map: glowTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, vertexColors: true }));
+  spin.add(wheelLights);
+  for (const s of [-1, 1]) { const leg = new THREE.Mesh(new THREE.CylinderGeometry(1, 1.4, R + 12), white); leg.position.set(s * 16, -(R + 12) / 2, 0); leg.rotation.z = s * 0.28; wheel.add(leg); }
+  world.add(wheel);
+  PINPOS['Sun Wheel – Công viên Châu Á'] = V3(x, groundY(x, z) + 2 * R + 25, z);
+}
+{
+  const [x, z] = LL(16.1003, 108.2776), y = groundY(x, z);
+  const g = new THREE.Group(); g.position.set(x, y, z);
+  const base = new THREE.Mesh(new THREE.CylinderGeometry(9, 11, 12, 16), white); base.position.y = 6; g.add(base);
+  const body = new THREE.Mesh(new THREE.LatheGeometry([[6, 0], [6.5, 10], [5, 30], [4, 42], [2.6, 50], [0, 50]].map(([r, h]) => new THREE.Vector2(r, h)), 20), white); body.position.y = 12; g.add(body);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(3.2, 16, 12), white); head.position.y = 64; g.add(head);
+  world.add(g);
+  PINPOS['Tượng Phật Quan Âm – chùa Linh Ứng'] = V3(x, y + 80, z);
+}
+
+// ===== Nhãn địa danh =====
+const fromLabel = (name) => meta.labels.find((l) => l.name === name);
+const PLACES = [];
+const addPlace = (name, x, z, dy, big = true) => PLACES.push({ name, pos: V3(x, groundY(x, z) + dy, z), big });
+for (const [n, p] of Object.entries(PINPOS)) PLACES.push({ name: n, pos: p, big: n.startsWith('Cầu') || n.startsWith('Sun') || n.startsWith('Tượng') });
+for (const [src, name, dy] of [['Sân bay quốc tế Đà Nẵng', 'Sân bay quốc tế Đà Nẵng', 40], ['Núi Sơn Trà', 'Bán đảo Sơn Trà (696 m)', 60], ['Ngũ Hành Sơn', 'Ngũ Hành Sơn', 120],
+  ['Đèo Hải Vân', 'Đèo Hải Vân', 80], ['Sun World Bà Nà Hills', 'Bà Nà Hills', 120], ['Bãi tắm Non Nước', 'Biển Non Nước', 30], ['Bãi biển Bắc', 'Bãi Bắc (Sơn Trà)', 30]]) {
+  const l = fromLabel(src); if (l) addPlace(name, l.x, l.z, dy);
+}
+{ const l = fromLabel('My Khe Beach Park'); if (l) addPlace('Biển Mỹ Khê', l.x + 250, l.z, 30); }
+addPlace('Cảng Tiên Sa', ...LL(16.1215, 108.2125), 40);
+addPlace('Vịnh Đà Nẵng', ...LL(16.13, 108.16), 20);
+addPlace('Cù Lao Chàm', ...LL(15.955, 108.51), 150);
+addPlace('Sông Hàn', ...LL(16.067, 108.2272), 20);
+for (const [nm, list] of Object.entries(byName)) {
+  if (!nm.startsWith('cầu') || PLACES.some((p) => p.name.toLowerCase().startsWith(nm))) continue;
+  const br = list.slice().sort((a, b) => b.total - a.total)[0], c = along(br, 0.5);
+  const name = list[0] && meta.bridges.find((b) => (b.name || '').toLowerCase() === nm)?.name;
+  PLACES.push({ name: name || nm, pos: V3(c.x, br.lift + 15, c.z), big: false });
+}
+for (const t of meta.tall) if (t.h >= 100) PLACES.push({ name: t.name, pos: V3(t.x, groundY(t.x, t.z) + t.h + 10, t.z), big: false });
+const pinsEl = $('pins');
+for (const p of PLACES) {
+  const el = document.createElement('div');
+  el.className = 'pin' + (p.big ? '' : ' small'); el.innerHTML = '<b></b><span></span>';
+  el.querySelector('b').textContent = p.name;
+  el.onclick = () => flyTo(p.pos);
+  pinsEl.appendChild(el); p.el = el;
+}
+let showPins = true;
+const pv = new THREE.Vector3();
+function updatePins() {
+  for (const p of PLACES) {
+    pv.copy(p.pos); pv.y *= world.scale.y;
+    const d = pv.distanceTo(camera.position);
+    pv.project(camera);
+    const vis = showPins && pv.z < 1 && Math.abs(pv.x) < 1.05 && Math.abs(pv.y) < 1.05 && (p.big ? d < 60000 : d < 3500);
+    p.el.style.display = vis ? '' : 'none';
+    if (vis) { p.el.style.left = ((pv.x + 1) / 2) * innerWidth + 'px'; p.el.style.top = ((1 - pv.y) / 2) * innerHeight + 'px'; }
+  }
+}
+
+// ===== Chuyển động (chiều thứ 5): xe trên đường thật, tàu thuyền =====
+const routes = meta.roads.map((r) => {
+  const cum = [0];
+  for (let i = 1; i < r.pts.length; i++) cum.push(cum[i - 1] + Math.hypot(r.pts[i][0] - r.pts[i - 1][0], r.pts[i][1] - r.pts[i - 1][1]));
+  return { pts: r.pts, cum, len: cum[cum.length - 1], w: r.w };
+}).filter((r) => r.len > 80);
+const totalLen = routes.reduce((a, r) => a + r.len, 0);
+const CARS = 3000, carPos = new Float32Array(CARS * 3), carCol = new Float32Array(CARS * 3), cars = [];
+for (let i = 0; i < CARS; i++) {
+  let pick = rnd() * totalLen, r = routes[0];
+  for (const q of routes) { pick -= q.len; if (pick <= 0) { r = q; break; } }
+  const dir = rnd() < 0.5 ? 1 : -1;
+  cars.push({ r, s: rnd() * r.len, v: (9 + rnd() * 9) * dir, seg: 0, lane: dir * (2 + r.w) });
+  carCol.set(dir > 0 === (i % 2 === 0) ? [1, 0.95, 0.85] : [1, 0.18, 0.1], i * 3);
+}
+const carPts = pointCloud(carPos, 0xffffff, 7, carCol);
+function updateCars(dt) {
+  for (let i = 0; i < CARS; i++) {
+    const c = cars[i], r = c.r;
+    c.s += c.v * dt;
+    if (c.s > r.len) c.s -= r.len; if (c.s < 0) c.s += r.len;
+    while (c.seg < r.cum.length - 2 && r.cum[c.seg + 1] < c.s) c.seg++;
+    while (c.seg > 0 && r.cum[c.seg] > c.s) c.seg--;
+    const [ax, az] = r.pts[c.seg], [bx, bz] = r.pts[c.seg + 1];
+    const L = r.cum[c.seg + 1] - r.cum[c.seg] || 1, k = (c.s - r.cum[c.seg]) / L;
+    const dx = (bx - ax) / L, dz = (bz - az) / L, x = ax + (bx - ax) * k - dz * c.lane, z = az + (bz - az) * k + dx * c.lane;
+    carPos[i * 3] = x; carPos[i * 3 + 1] = (MASK(x, z) ? groundY(x, z) : 12) + 2; carPos[i * 3 + 2] = z;
+  }
+  carPts.geometry.attributes.position.needsUpdate = true;
+}
+// Tàu thuyền: dọc sông Hàn và ngoài vịnh
+const hanRiver = [[16.005, 108.2278], [16.020, 108.2262], [16.0352, 108.2300], [16.045, 108.2296], [16.0527, 108.2297], [16.0612, 108.2272], [16.0720, 108.2268], [16.080, 108.2246], [16.087, 108.2192], [16.095, 108.2140]]
+  .map(([a, b]) => { const [x, z] = LL(a, b); return V3(x, 0, z); });
+const riverCurve = new THREE.CatmullRomCurve3(hanRiver);
+const boats = [], boatMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.5 });
+for (let i = 0; i < 22; i++) {
+  const sea = i >= 12, s = sea ? 2.4 : 1;
+  const g = new THREE.Group();
+  const hull = new THREE.Mesh(new THREE.BoxGeometry(6 * s, 3 * s, 22 * s), boatMat); hull.position.y = 1.5 * s; g.add(hull);
+  const cab = new THREE.Mesh(new THREE.BoxGeometry(5 * s, 3 * s, 8 * s), boatMat); cab.position.set(0, 4 * s, -3 * s); g.add(cab);
+  const l = new THREE.Mesh(new THREE.SphereGeometry(1.5 * s), lit(0xfff0c8)); l.position.y = 7 * s; g.add(l);
+  world.add(g);
+  const a = LL(16.10 + rnd() * 0.06, 108.13 + rnd() * 0.05), b = LL(16.16 + rnd() * 0.05, 108.24 + rnd() * 0.15);
+  boats.push({ g, sea, u: rnd(), v: (sea ? 0.004 : 0.012) * (0.5 + rnd()) * (rnd() < 0.5 ? 1 : -1), off: (rnd() - 0.5) * 120, a, b });
+}
+function updateBoats(dt) {
+  for (const b of boats) {
+    b.u = mod(b.u + b.v * dt * 0.1, 1);
+    if (b.sea) {
+      const k = 0.5 - 0.5 * Math.cos(b.u * Math.PI * 2);
+      b.g.position.set(b.a[0] + (b.b[0] - b.a[0]) * k, 0, b.a[1] + (b.b[1] - b.a[1]) * k);
+      b.g.rotation.y = Math.atan2(b.b[0] - b.a[0], b.b[1] - b.a[1]) + (Math.sin(b.u * Math.PI * 2) < 0 ? Math.PI : 0);
+    } else {
+      const p = riverCurve.getPointAt(b.u), t = riverCurve.getTangentAt(b.u);
+      b.g.position.set(p.x - t.z * b.off, 0, p.z + t.x * b.off);
+      b.g.rotation.y = Math.atan2(t.x, t.z) + (b.v < 0 ? Math.PI : 0);
+    }
+  }
+}
+
+// ===== Camera, bay =====
+const controls = new OrbitControls(camera, renderer.domElement);
+const [hx, hz] = LL(15.992, 108.238), [tx, tz] = LL(16.072, 108.222);
+const HOME = { cam: V3(hx, 3200, hz), target: V3(tx, 0, tz) };
+camera.position.copy(HOME.cam); controls.target.copy(HOME.target);
+Object.assign(controls, { enableDamping: true, dampingFactor: 0.08, minDistance: 40, maxDistance: 70000, maxPolarAngle: 1.47, zoomToCursor: true });
+let fly = null, tour = true, tourT = 0;
+function flyTo(target, cam) {
+  const t = target.clone(); t.y *= world.scale.y;
+  const dir = camera.position.clone().sub(controls.target).normalize();
+  const dist = THREE.MathUtils.clamp(t.y * 4 + 600, 700, 6000);
+  fly = { t: 0, c0: camera.position.clone(), t0: controls.target.clone(), t1: t, c1: cam ? cam.clone() : t.clone().add(dir.multiplyScalar(dist)).setY(Math.max(t.y + dist * 0.45, 250)) };
+  setTour(false);
+}
+function setTour(on) { tour = on; $('tourBtn').classList.toggle('active', on); }
+controls.addEventListener('start', () => { setTour(false); fly = null; });
+
+// ===== Áp màu theo giờ =====
+let hour = 18.75, flow = false, envAt = -1, envTimer = 0, night = 0;
+const bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), 0.6, 0.45, 0.72);
+const tmpC = new THREE.Color();
+function applyTime(hr) {
+  let a = KEYS[0], b = KEYS[1];
+  for (let i = 0; i < KEYS.length - 1; i++) if (hr >= KEYS[i][0] && hr <= KEYS[i + 1][0]) { a = KEYS[i]; b = KEYS[i + 1]; break; }
+  const k = (hr - a[0]) / (b[0] - a[0] || 1), L = (i) => a[i] + (b[i] - a[i]) * k;
+  skyU.top.value.copy(a[1]).lerp(b[1], k); skyU.hor.value.copy(a[2]).lerp(b[2], k); skyU.sunCol.value.copy(a[3]).lerp(b[3], k);
+  const f = (hr - 6) / 12, el = Math.sin(f * Math.PI);
+  const sd = V3(Math.cos(f * Math.PI) * 0.9, Math.max(el * 0.75, -0.2), 0.25).normalize();
+  if (hr < 5 || hr > 19.5) sd.set(-0.3, 0.5, -0.6).normalize();
+  skyU.sunDir.value.copy(sd);
+  sun.position.copy(controls.target).addScaledVector(sd, 20000); sun.target.position.copy(controls.target);
+  sun.color.copy(skyU.sunCol.value); sun.intensity = L(4) + (hr < 5 || hr > 19.5 ? 0.25 : 0);
+  hemi.color.copy(skyU.top.value).lerp(new THREE.Color(0.85, 0.9, 1), 0.45); hemi.groundColor.set(0x2a3040); hemi.intensity = L(5);
+  night = L(6);
+  renderer.toneMappingExposure = L(7);
+  scene.fog.color.copy(skyU.hor.value).lerp(skyU.top.value, 0.5);
+  U.uNight.value = night;
+  streetLights.material.opacity = 0.05 + night * 0.95;
+  bridgeLights.material.opacity = 0.1 + night * 0.9;
+  carPts.material.opacity = 0.15 + night * 0.85;
+  for (const m of glowMats) m.color.copy(m.userData.base).multiplyScalar(0.55 + night * 0.9);
+  dragonMat.emissiveIntensity = 0.05 + night * 1.1;
+  for (const m of glowLines) m.color.copy(m.userData.base).lerp(m.userData.night, night);
+  water.material.color.set(0x1b3a66).lerp(tmpC.set(0x0a1a33), night * 0.6);
+  bloom.strength = 0.12 + night * 0.85;
+  const h = Math.floor(hr) % 24, mnt = Math.floor((hr % 1) * 60);
+  $('clock').textContent = `${String(h).padStart(2, '0')}:${String(mnt).padStart(2, '0')}`;
+}
+function refreshEnv() { scene.environment?.dispose(); scene.environment = pmrem.fromScene(skyScene, 0, 1, 1000).texture; }
+
+// ===== Giao diện =====
+$('hour').oninput = (e) => { hour = +e.target.value; };
+document.querySelectorAll('[data-h]').forEach((b) => (b.onclick = () => { hour = +b.dataset.h; $('hour').value = hour; flow = false; $('flowBtn').classList.remove('active'); }));
+$('flowBtn').onclick = () => { flow = !flow; $('flowBtn').classList.toggle('active', flow); };
+$('tourBtn').onclick = () => setTour(!tour);
+$('pinBtn').onclick = () => { showPins = !showPins; $('pinBtn').classList.toggle('active', showPins); };
+$('carBtn').onclick = () => { carPts.visible = !carPts.visible; boats.forEach((b) => (b.g.visible = carPts.visible)); $('carBtn').classList.toggle('active', carPts.visible); };
+$('veBtn').onclick = () => { world.scale.y = world.scale.y > 1 ? 1 : 2; $('veBtn').classList.toggle('active', world.scale.y > 1); };
+$('homeBtn').onclick = () => flyTo(HOME.target, HOME.cam);
+
+// ===== Kết xuất =====
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+composer.addPass(bloom);
+composer.addPass(new OutputPass());
+function resize() {
+  renderer.setSize(innerWidth, innerHeight);
+  composer.setSize(innerWidth, innerHeight); composer.setPixelRatio(DPR);
+  camera.aspect = innerWidth / innerHeight; camera.fov = camera.aspect < 0.8 ? 60 : 45; camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize);
+resize();
+
+const timer = new THREE.Timer();
+function tick() {
+  timer.update();
+  const dt = Math.min(timer.getDelta(), 0.1);
+  if (flow) { hour = mod(hour + dt * 0.6, 24); $('hour').value = hour; }
+  applyTime(hour);
+  envTimer -= dt;
+  if (Math.abs(envAt - hour) > 0.15 && envTimer <= 0) { refreshEnv(); envAt = hour; envTimer = 0.4; }
+  normalTex.offset.x += dt * 0.004; normalTex.offset.y += dt * 0.002;
+  wheel.userData.spin.rotation.z += dt * 0.05;
+  const col = wheelLights.geometry.attributes.color, tt = performance.now() / 1000;
+  for (let i = 0; i < col.count; i++) { tmpC.setHSL(mod(i / col.count + tt * 0.15, 1), 0.9, 0.6); col.setXYZ(i, tmpC.r, tmpC.g, tmpC.b); }
+  col.needsUpdate = true;
+  if (night > 0.5) dragonMat.emissive.setHSL(mod(tt * 0.05, 1), 0.9, 0.5); else dragonMat.emissive.set(0xffb000);
+  if (carPts.visible) { updateCars(dt); updateBoats(dt); }
+  if (fly) {
+    fly.t = Math.min(1, fly.t + dt / 2);
+    const e = fly.t < 0.5 ? 4 * fly.t ** 3 : 1 - (-2 * fly.t + 2) ** 3 / 2;
+    camera.position.lerpVectors(fly.c0, fly.c1, e); controls.target.lerpVectors(fly.t0, fly.t1, e);
+    if (fly.t >= 1) fly = null;
+  } else if (tour) {
+    tourT += dt * 0.05;
+    const off = camera.position.clone().sub(controls.target), sph = new THREE.Spherical().setFromVector3(off);
+    sph.theta += (Math.sin(tourT) * 0.6 - sph.theta) * dt * 0.6;
+    sph.radius += (9000 + Math.cos(tourT * 1.7) * 2500 - sph.radius) * dt * 0.3;
+    sph.phi += (1.05 + Math.sin(tourT * 1.3) * 0.12 - sph.phi) * dt * 0.4;
+    camera.position.copy(controls.target).add(new THREE.Vector3().setFromSpherical(sph));
+  }
+  controls.update();
+  composer.render();
+  updatePins();
+  requestAnimationFrame(tick);
+}
+applyTime(hour); refreshEnv(); envAt = hour;
+tick();
+$('loading').style.opacity = 0; setTimeout(() => $('loading').remove(), 700);
+window.dn = { flyTo, PLACES, camera, controls, V3, setTour };
+console.log('buildings', buildings.count, 'lamps', lamp.length / 3, 'bridges', deckBoxes.length);
+</script>
+</body>
+</html>
