@@ -21,8 +21,8 @@ KX = 111320 * math.cos(math.radians(LAT0))
 KZ = 110600
 def P(lat, lon): return ((lon - LON0) * KX, -(lat - LAT0) * KZ)
 
-NEAR = (15.96, 108.10, 16.17, 108.35)   # nam, tây, bắc, đông
-WIDE = (15.85, 107.90, 16.30, 108.55)
+NEAR = (15.84, 108.10, 16.17, 108.40)   # nam, tây, bắc, đông
+WIDE = (15.76, 107.90, 16.30, 108.60)
 def box(b):
     s, w, n, e = b
     x0, z1 = P(s, w); x1, z0 = P(n, e)
@@ -72,6 +72,7 @@ road_els = load('roads')
 def make_layers(b, W):
     x0, z0, x1, z1 = box(b)
     H = int(round(W * (z1 - z0) / (x1 - x0)))
+    if H > 4096: W, H = int(W * 4096 / H), 4096
     sx = W / (x1 - x0)
     tp = lambda pts: [((x - x0) * sx, (z - z0) * sx) for x, z in pts]
     # 1) biển: vẽ đường bờ biển rồi loang từ điểm giữa biển
@@ -81,7 +82,7 @@ def make_layers(b, W):
     for e in coast:
         for outer, _ in geom(e):
             d.line(tp(outer), fill=128, width=2)
-    for lat, lon in [(16.05, 108.40), (16.15, 108.17), (15.90, 108.50), (16.25, 108.30)]:
+    for lat, lon in [(16.05, 108.40), (16.15, 108.17), (15.90, 108.50), (16.25, 108.30), (15.80, 108.55)]:
         px, pz = tp([P(lat, lon)])[0]
         if 0 <= px < W and 0 <= pz < H and m.getpixel((int(px), int(pz))) == 255:
             ImageDraw.floodfill(m, (int(px), int(pz)), 0)
@@ -257,7 +258,19 @@ for e in place_els:
         'beach' if t.get('natural') == 'beach' else 'airport' if t.get('aeroway') == 'aerodrome' else \
         'park' if t.get('leisure') else 'bridge' if t.get('man_made') == 'bridge' else 'poi'
     labels.append({'name': nm, 'kind': kind, 'x': round(x), 'z': round(z), 'ele': t.get('ele')})
-meta = {'origin': [LAT0, LON0], 'kx': KX, 'kz': KZ, 'near': bn, 'far': bf, 'dem': [DW, DH],
+projects = []
+if os.path.exists(os.path.join(RAW, 'projects.json.gz')):
+    for e in load('projects'):
+        t = e.get('tags', {})
+        item = {'id': e['type'][0] + str(e['id']), 'name': t.get('name', ''), 'tags': {k: v for k, v in t.items() if k in (
+            'name', 'name:en', 'landuse', 'historic', 'tourism', 'natural', 'building', 'operator', 'start_date', 'construction', 'leisure', 'place')}}
+        if e['type'] == 'node':
+            x, z = P(e['lat'], e['lon']); item['pt'] = [round(x), round(z)]
+        else:
+            item['rings'] = [[[round(x), round(z)] for x, z in outer] for outer, _ in geom(e) if len(outer) > 2]
+            if not item['rings']: continue
+        projects.append(item)
+meta = {'projects': projects, 'origin': [LAT0, LON0], 'kx': KX, 'kz': KZ, 'near': bn, 'far': bf, 'dem': [DW, DH],
         'roads': roads, 'minor': minor, 'bridges': bridges, 'labels': labels, 'tall': named}
 json.dump(meta, open(os.path.join(OUT, 'meta.json'), 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 print('roads', len(roads), 'minor', len(minor), 'bridges', len(bridges), 'labels', len(labels), 'tall', len(named))
