@@ -101,6 +101,9 @@ const findProject = (re, fallback) => {
 const LL = (lat, lon) => [(lon - meta.origin[1]) * meta.kx, -(lat - meta.origin[0]) * meta.kz];
 
 const HA = LL(15.8772, 108.3282); // trung tâm phố cổ Hội An
+// Casamia Balanca Hội An: từng lô lấy từ mặt bằng 363 lô, đã khớp toạ độ thật
+const CASA_DATA = await fetch('casamia.json').then((r) => (r.ok ? r.json() : null)).catch(() => null);
+const CASA_RING = CASA_DATA ? CASA_DATA.site.map(([la, lo]) => LL(la, lo)) : null;
 const CASA = findProject(/casamia|balanca/i);
 const HVB = findProject(/^(vinhomes )?(hải vân bay|hai van bay)/i);
 // ===== Renderer, camera =====
@@ -261,6 +264,7 @@ const buildings = (() => {
     cx /= n; cz /= n;
     const base = groundY(cx, cz) + minH, top = groundY(cx, cz) + h;
     if (HVB && inRing(HVB.rings[0], cx, cz)) continue; // thay bằng mô phỏng khi hoàn thiện
+    if (CASA_RING && inRing(CASA_RING, cx, cz)) continue; // thay bằng mặt bằng Casamia
     const oldTown = Math.hypot(cx - HA[0], cz - HA[1]) < 560 && h < 16;
     const pal = oldTown ? ['#e8c25a', '#f0cf6e', '#e2b552', '#f3d98a', '#d9a94a'] : PAL[type] || PAL[0];
     c.set(pal[(rnd() * pal.length) | 0]);
@@ -600,20 +604,88 @@ const lanterns = pointCloud(lanternPts.concat(hoaDang), 0xffffff, 6, lanternCol.
 }
 
 // ===== Dự án Casamia Balanca Hội An (ranh giới theo OpenStreetMap) =====
-function outline(ring, color, h) {
+function outline(ring, color, h, fillIt = true) {
   const pts = ring.map(([x, z]) => V3(x, groundY(x, z) + h, z));
   const g = new THREE.BufferGeometry().setFromPoints(pts.concat([pts[0]]));
   const m = new THREE.LineBasicMaterial({ color }); m.userData.base = new THREE.Color(color); m.userData.night = new THREE.Color(color).multiplyScalar(1.6);
   glowLines.push(m);
   world.add(new THREE.Line(g, m));
   const shape = new THREE.Shape(ring.map(([x, z]) => new THREE.Vector2(x, -z)));
+  if (fillIt) {
   const fill = new THREE.Mesh(new THREE.ShapeGeometry(shape), new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.07, depthWrite: false }));
   fill.rotation.x = -Math.PI / 2; fill.position.y = groundY(ring[0][0], ring[0][1]) + 1.5; world.add(fill);
+  }
   let cx = 0, cz = 0; for (const [x, z] of ring) { cx += x; cz += z; }
   return V3(cx / ring.length, 0, cz / ring.length);
 }
 let casaPos = null;
 if (CASA) { casaPos = outline(CASA.rings[0], 0xffc23d, 4); PINPOS['Casamia Balanca Hội An'] = casaPos.clone().setY(groundY(casaPos.x, casaPos.z) + 60); }
+
+
+// ===== Casamia Balanca Hội An: biệt thự tường vàng mái dốc xám, dừa, khách sạn Đảo Dừa =====
+const casaGroup = new THREE.Group(); world.add(casaGroup);
+if (CASA_DATA) {
+  const lots = CASA_DATA.lots, m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), c = new THREE.Color();
+  const WALL = ['#e8c46a', '#e2b85a', '#efcf7c', '#dcb056', '#f0d283'];
+  const body = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1).translate(0, 0.5, 0), new THREE.MeshStandardMaterial({ roughness: 0.75, emissive: 0xffb050, emissiveIntensity: 0 }), lots.length);
+  const gable = new THREE.ExtrudeGeometry(new THREE.Shape([new THREE.Vector2(-0.5, 0), new THREE.Vector2(0.5, 0), new THREE.Vector2(0, 1)]), { depth: 1, bevelEnabled: false }).translate(0, 0, -0.5);
+  const roof = new THREE.InstancedMesh(gable, new THREE.MeshStandardMaterial({ color: 0x3b4048, roughness: 0.6, metalness: 0.2 }), lots.length);
+  const palmT = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.25, 0.4, 1, 6).translate(0, 0.5, 0), new THREE.MeshStandardMaterial({ color: 0x7a5a3a }), lots.length);
+  const palmC = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1, 0), new THREE.MeshStandardMaterial({ color: 0x3f7a35, roughness: 0.9, flatShading: true }), lots.length);
+  const glow = [];
+  let np = 0;
+  lots.forEach((l, i) => {
+    const [x, z] = LL(l.lat, l.lon), y = groundY(x, z);
+    const th = Math.atan2(Math.cos(l.a), Math.sin(l.a));
+    q.setFromAxisAngle(V3(0, 1, 0), th);
+    const H = l.f * 3.6 + 0.6, D = l.d * 0.62, Wd = l.w - (l.t === 'SL' || l.t.startsWith('LK') ? 0.2 : 0.8);
+    m4.compose(V3(x, y, z), q, V3(Wd, H, D)); body.setMatrixAt(i, m4); body.setColorAt(i, c.set(WALL[(rnd() * WALL.length) | 0]));
+    m4.compose(V3(x, y + H, z), q, V3(Wd + 0.6, l.f === 2 ? 3.2 : 4.2, D + 0.8)); roof.setMatrixAt(i, m4);
+    glow.push(x, y + 3, z);
+    if (rnd() < 0.7) {
+      const ox = x + Math.cos(l.a) * (D / 2 + 2.5) + Math.sin(l.a) * (rnd() - 0.5) * l.w, oz = z + Math.sin(l.a) * (D / 2 + 2.5) - Math.cos(l.a) * (rnd() - 0.5) * l.w, ph = 9 + rnd() * 5;
+      m4.compose(V3(ox, y, oz), q.identity(), V3(1, ph, 1)); palmT.setMatrixAt(np, m4);
+      m4.compose(V3(ox, y + ph, oz), q.setFromEuler(new THREE.Euler(0, rnd() * 6, 0)), V3(3.2, 1.1, 3.2)); palmC.setMatrixAt(np, m4); np++;
+    }
+  });
+  palmT.count = palmC.count = np;
+  casaGroup.add(body, roof, palmT, palmC);
+  casaGroup.userData.body = body.material;
+  const casaLights = pointCloud(glow, 0xffc27a, 7); world.remove(casaLights); casaGroup.add(casaLights); casaGroup.userData.lights = casaLights.material;
+  const E = CASA_DATA.extras;
+  // Khách sạn Đảo Dừa: khối hộp đất nung xếp tầng phủ cây xanh
+  {
+    const [x, z] = LL(...E.hotel.ll), y = groundY(x, z), g = new THREE.Group();
+    const terra = new THREE.MeshStandardMaterial({ color: 0xb4583a, roughness: 0.85, emissive: 0xffa860, emissiveIntensity: 0 }), green = new THREE.MeshStandardMaterial({ color: 0x4f7d3a, roughness: 1 });
+    for (let lv = 0; lv < 7; lv++) for (let k = 0; k < 9; k++) {
+      if (rnd() < 0.18) continue;
+      const bx = new THREE.Mesh(new THREE.BoxGeometry(6, 3.4, 6), rnd() < 0.85 ? terra : white);
+      bx.position.set((k - 4) * 7.5 + (rnd() - 0.5) * 2, lv * 3.6 + 1.7, (rnd() - 0.5) * (22 - lv * 2)); g.add(bx);
+      if (rnd() < 0.35) { const gr = new THREE.Mesh(new THREE.SphereGeometry(1.8, 6, 4), green); gr.position.copy(bx.position).add(V3(0, 2.4, 0)); g.add(gr); }
+    }
+    g.position.set(x, y, z); g.rotation.y = -0.45; casaGroup.add(g); casaGroup.userData.hotel = terra;
+    PINPOS['Khách sạn Đảo Dừa (Casamia)'] = V3(x, y + 50, z);
+  }
+  for (const k of ['club', 'mall']) {
+    const [x, z] = LL(...E[k].ll), y = groundY(x, z);
+    const b = new THREE.Mesh(new THREE.BoxGeometry(E[k].w, E[k].h, E[k].d), white); b.position.set(x, y + E[k].h / 2, z); b.rotation.y = -0.3; casaGroup.add(b);
+  }
+  {
+    const [x, z] = LL(...E.pool.ll);
+    const pool = new THREE.Mesh(new THREE.CircleGeometry(E.pool.r, 48), new THREE.MeshStandardMaterial({ color: 0x5fd3d0, roughness: 0.15, metalness: 0.3, emissive: 0x2aa6b0, emissiveIntensity: 0.15 }));
+    pool.rotation.x = -Math.PI / 2; pool.position.set(x, groundY(x, z) + 0.4, z); casaGroup.add(pool);
+    const ring = new THREE.Mesh(new THREE.RingGeometry(E.pool.r, E.pool.r + 6, 48), white); ring.rotation.x = -Math.PI / 2; ring.position.set(x, groundY(x, z) + 0.35, z); casaGroup.add(ring);
+    PINPOS['Grand Central Park (Casamia)'] = V3(x, groundY(x, z) + 25, z);
+  }
+  const thatch = new THREE.MeshStandardMaterial({ color: 0x8a6a3e, roughness: 1 });
+  for (const ll of E.bungalows) {
+    const [x, z] = LL(...ll), y = groundY(x, z);
+    const b = new THREE.Mesh(new THREE.BoxGeometry(6, 3.2, 6), new THREE.MeshStandardMaterial({ color: 0xd8c3a0 })); b.position.set(x, y + 1.6, z); casaGroup.add(b);
+    const r = new THREE.Mesh(new THREE.ConeGeometry(5.5, 4, 4).rotateY(Math.PI / 4), thatch); r.position.set(x, y + 5.2, z); casaGroup.add(r);
+  }
+  casaPos = outline(CASA_RING, 0xffc23d, 4, false);
+  PINPOS['Casamia Balanca Hội An (mặt bằng 363 lô)'] = casaPos.clone().setY(groundY(casaPos.x, casaPos.z) + 90);
+}
 
 // ===== Vinhomes Hải Vân Bay: mô phỏng khi hoàn thiện (4 phân khu, ~5.900 căn thấp tầng) =====
 const hvbGroup = new THREE.Group(); world.add(hvbGroup);
@@ -818,6 +890,7 @@ function applyTime(hr) {
   streetLights.material.opacity = 0.05 + night * 0.95;
   bridgeLights.material.opacity = 0.1 + night * 0.9;
   lanterns.material.opacity = 0.1 + night * 0.9;
+  if (casaGroup.userData.lights) { casaGroup.userData.lights.opacity = 0.05 + night * 0.95; casaGroup.userData.body.emissiveIntensity = night * 0.18; casaGroup.userData.hotel.emissiveIntensity = night * 0.25; }
   if (hvbGroup.userData.lights) { hvbGroup.userData.lights.opacity = 0.05 + night * 0.95; hvbGroup.userData.tw.emissiveIntensity = night * 0.5; }
   carPts.material.opacity = 0.15 + night * 0.85;
   for (const m of glowMats) m.color.copy(m.userData.base).multiplyScalar(0.55 + night * 0.9);
@@ -840,7 +913,7 @@ $('carBtn').onclick = () => { carPts.visible = !carPts.visible; boats.forEach((b
 $('veBtn').onclick = () => { world.scale.y = world.scale.y > 1 ? 1 : 2; $('veBtn').classList.toggle('active', world.scale.y > 1); };
 $('homeBtn').onclick = () => flyTo(HOME.target, HOME.cam);
 $('haBtn').onclick = () => flyTo(V3(HA[0], 0, HA[1]), V3(HA[0] + 900, 1100, HA[1] + 1900));
-if (casaPos) { $('caBtn').hidden = false; $('caBtn').onclick = () => flyTo(casaPos.clone(), V3(casaPos.x + 500, 650, casaPos.z + 1100)); }
+if (casaPos) { $('caBtn').hidden = false; $('caBtn').onclick = () => flyTo(casaPos.clone(), V3(casaPos.x + 420, 380, casaPos.z + 720)); }
 if (hvbPos) { $('hvbBtn').hidden = false; $('hvbBtn').onclick = () => { hvbGroup.visible = !hvbGroup.visible; $('hvbBtn').classList.toggle('active', hvbGroup.visible); if (hvbGroup.visible) flyTo(hvbPos.clone(), V3(hvbPos.x + 1200, 1500, hvbPos.z + 2600)); }; }
 
 // ===== Kết xuất =====
