@@ -689,13 +689,14 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		// Nhắn 2 tin như người: câu đùa, rồi câu hỏi nhu cầu.
 		return preg_replace( '/([😄😅😊😋🤗🌊🙏]) (?=\S)/u', "$1\n\n", $witty, 1 );
 	}
+	// Khách nhắc tên dự án ("Ko, dự án Cora") → trả lời về dự án, không hiểu thành lời đáp ngắn.
+	$mentioned = hh_chat_project_lookup( $t );
 	// Câu trả lời ngắn nối theo câu chat vừa hỏi ("để ở", "cho thuê", "gần biển", "ok", "chưa"…).
-	$follow = hh_chat_followup( $t, $prev, array( 'x' => hh_chat_address( $all ), 'name' => $name, 'budget' => $budget, 'has_lead' => $has_lead, 'need' => $need ) );
+	$follow = $mentioned && $mentioned !== (int) $page ? '' : hh_chat_followup( $t, $prev, array( 'x' => hh_chat_address( $all ), 'name' => $name, 'budget' => $budget, 'has_lead' => $has_lead, 'need' => $need ) );
 	if ( $follow ) {
 		return $follow;
 	}
 	// Câu hỏi đáp có sẵn trên web (dự án đang xem / dự án khách nhắc tên / bài viết), hiểu theo nghĩa gần nhất.
-	$mentioned = hh_chat_project_lookup( $t );
 	$faq       = hh_chat_faq_match( $t, $page );
 	if ( $faq ) {
 		$where = (int) $faq['id'] !== (int) $page ? ' Chi tiết: ' . get_permalink( $faq['id'] ) : '';
@@ -730,7 +731,13 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		}
 		$pr  = function_exists( 'hh_project_price' ) ? hh_project_price( $other ) : '';
 		$rs  = trim( (string) get_post_meta( $other, 'hh_p_resale_price', true ) );
-		$txt = get_the_title( $other ) . ( $pr && false === strpos( $pr, 'Liên hệ' ) ? ': ' . mb_strtolower( $pr ) . ' (tham khảo)' : '' ) . ( $rs ? '. Mặt bằng bán lại: ' . mb_substr( $rs, 0, 160 ) : '' ) . '. Chi tiết: ' . get_permalink( $other );
+		$has_pr = $pr && false === strpos( $pr, 'Liên hệ' );
+		// Chưa có giá → nói vị trí, bàn giao để khách biết em đang nói đúng dự án.
+		$addr = $has_pr || $rs ? '' : trim( wp_strip_all_tags( (string) get_post_meta( $other, 'hh_p_address', true ) ) );
+		$hand = $has_pr || $rs ? '' : trim( wp_strip_all_tags( (string) get_post_meta( $other, 'hh_p_handover', true ) ) );
+		$txt  = get_the_title( $other ) . ( $has_pr ? ': ' . mb_strtolower( $pr ) . ' (tham khảo)' : '' ) . ( $rs ? '. Mặt bằng bán lại: ' . mb_substr( $rs, 0, 160 ) : '' )
+			. ( $addr ? ' ở ' . mb_substr( $addr, 0, 120 ) : '' ) . ( $hand ? '; bàn giao: ' . mb_substr( $hand, 0, 90 ) : '' )
+			. ( $has_pr || $rs ? '' : '. Giá từng căn em gửi theo bảng mới nhất' ) . '. Chi tiết: ' . get_permalink( $other );
 		return $ack . $txt . ( $ask ?: ' Anh/chị quan tâm loại căn nào ở dự án này ạ?' );
 	}
 
@@ -1161,6 +1168,22 @@ function hh_chat_script_reply_intl( $lang, $msgs, $page, $has_lead, $new_lead ) 
 		: $pick( array( "기꺼이 도와드릴게요 😊 다낭에서 아파트, 빌라, 토지, 임대 중 무엇을 찾으세요?", "알겠습니다! 관심 있는 지역이나 프로젝트를 알려주시면 바로 가격을 알려드릴게요. 또는 $name ($phone)에게 연락 주세요." ) ) . $ask;
 }
 
+/**
+ * Tên (đã bỏ dấu, bỏ đuôi chung) đủ riêng để nhận ra dự án: dài từ 6 ký tự; hoặc một từ 4 – 5 chữ cái
+ * như "cora", "fours", "nobu", "naman" (khách hay gõ tắt) – trừ từ tiếng Việt thường gặp; hoặc tên viết tắt quen thuộc.
+ */
+function hh_chat_name_ok( $c ) {
+	$len = mb_strlen( $c );
+	if ( $len >= 6 ) {
+		return true;
+	}
+	if ( in_array( $c, array( 'fpt' ), true ) ) {
+		return true;
+	}
+	$common = array( 'nam', 'bac', 'dong', 'tay', 'khu', 'nha', 'dat', 'bien', 'song', 'view', 'city', 'home', 'park', 'land', 'gold', 'star', 'green', 'river', 'ocean', 'beach', 'villa', 'house', 'hotel', 'plaza', 'tower', 'royal', 'thue', 'mua', 'ban', 'gia', 'can', 'tien', 'nhanh', 'trung', 'tam', 'phuc', 'thanh', 'hoang', 'minh', 'long', 'phat', 'thinh', 'hung', 'binh', 'hoa', 'ngoc', 'kim', 'xuan', 'thuy' );
+	return $len >= 4 && preg_match( '/^[a-z]+$/', $c ) && ! in_array( $c, $common, true );
+}
+
 /** Dự án trên web có tên nằm trong câu hỏi (bỏ dấu, bỏ chữ "Đà Nẵng"); ưu tiên tên dài nhất. */
 function hh_chat_project_lookup( $t ) {
 	$best = 0;
@@ -1174,7 +1197,7 @@ function hh_chat_project_lookup( $t ) {
 			foreach ( array_unique( array( $n, trim( preg_replace( '/\s(residence|residences|tower|towers|city|complex)$/', '', $n ) ) ) ) as $c ) {
 				// Điểm: tên khớp dài hơn thắng; cùng độ dài thì ưu tiên dự án chính (không phải tòa / phân khu con).
 				$score = mb_strlen( $c ) * 2 + ( get_post_meta( $id, 'hh_p_parent', true ) ? 0 : 1 );
-				if ( mb_strlen( $c ) >= 6 && $score > $len && false !== strpos( ' ' . preg_replace( '/\s+/', ' ', preg_replace( '/[^a-z0-9 ]/', ' ', $t ) ) . ' ', ' ' . $c . ' ' ) ) {
+				if ( hh_chat_name_ok( $c ) && $score > $len && false !== strpos( ' ' . preg_replace( '/\s+/', ' ', preg_replace( '/[^a-z0-9 ]/', ' ', $t ) ) . ' ', ' ' . $c . ' ' ) ) {
 					$best = $id;
 					$len  = $score;
 				}
