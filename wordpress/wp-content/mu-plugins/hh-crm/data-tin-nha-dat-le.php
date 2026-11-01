@@ -50,6 +50,59 @@ function hh_single_listing_dataset() {
 </ul>
 <p>Khách doanh nghiệp quan tâm, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận vị trí cụ thể, hồ sơ và đặt lịch khảo sát.</p>',
 	);
+	// 01/11/2026 – lô đất 4 mặt tiền Hoàng Sa – Hồ Học Lãm (Thọ Quang, Sơn Trà). Không ghi số tờ / thửa, tên chủ đất.
+	$list[] = array(
+		'rev'     => 1,
+		'slug'    => 'ban-dat-4-mat-tien-hoang-sa-son-tra-583-m2-giay-phep-khach-san',
+		'title'   => 'Bán lô đất 4 mặt tiền đường biển Hoàng Sa, Sơn Trà – 583,6 m², ngang 27,6 m, kèm giấy phép khách sạn 22 tầng',
+		'excerpt' => 'Lô đất 4 mặt tiền góc Hoàng Sa – Hồ Học Lãm (Thọ Quang, Sơn Trà), view trực diện biển, 583,6 m², ngang 27,6 m. Tặng kèm giấy phép xây dựng và thiết kế khách sạn 5 sao 22 tầng, 94 phòng. Giá 190 tỷ, thương lượng.',
+		'kind'    => 'dat-nen',
+		'area'    => 'son-tra',
+		'image'   => 'img/nha-dat/lo-dat-4-mat-tien-hoang-sa-son-tra.jpg',
+		'alt'     => 'Sơ đồ vị trí lô đất 4 mặt tiền 583,6 m² góc đường Hoàng Sa – Hồ Học Lãm, Sơn Trà, Đà Nẵng, view biển',
+		'meta'    => array(
+			'hh_deal'        => 'ban',
+			'hh_status'      => 'con-hang',
+			'hh_price'       => 190000,
+			'hh_negotiable'  => '1',
+			'hh_address'     => 'Góc đường Hoàng Sa – Hồ Học Lãm, phường Thọ Quang (cũ), Sơn Trà, Đà Nẵng',
+			'hh_map_address' => 'Hoàng Sa, Hồ Học Lãm, Thọ Quang, Sơn Trà, Đà Nẵng',
+			'hh_area'        => 583.6,
+			'hh_width'       => 27.6,
+			'hh_frontage'    => 27.6,
+			'hh_direction'   => '',
+			'hh_legal'       => '',
+			'hh_featured'    => '1',
+			'hh_features'    => "4 mặt tiền, góc đường biển Hoàng Sa – Hồ Học Lãm\nView trực diện biển, chỉ cách bãi cát một con đường\nDiện tích 583,6 m², ngang 27,6 m – hiếm lô lớn vuông vức trên trục biển\nTặng kèm giấy phép xây dựng và hồ sơ thiết kế khách sạn 5 sao 22 tầng, 94 phòng (theo chủ đất)\nKhu đông khách du lịch: dịch vụ chèo SUP, nhà hàng hải sản, khách sạn ven biển\nGiá 190 tỷ, còn thương lượng",
+			'hh_nearby'      => "Bãi biển Hoàng Sa – bên kia đường\nKhu dịch vụ chèo SUP, nhà hàng hải sản – ngay quanh lô\nBán đảo Sơn Trà, chùa Linh Ứng – vài phút đi xe\nCầu Rồng, trung tâm Hải Châu – khoảng 10 – 15 phút",
+		),
+		'content' => '<p>Chủ gửi bán lô đất <strong>4 mặt tiền</strong> hiếm có trên trục biển <strong>Hoàng Sa</strong> (đoạn đường biển nối tiếp Võ Nguyên Giáp về phía bán đảo Sơn Trà), góc đường Hoàng Sa – Hồ Học Lãm, phường Thọ Quang (cũ), Sơn Trà, Đà Nẵng. Lô đất <strong>view trực diện biển</strong>, diện tích <strong>583,6 m²</strong>, ngang <strong>27,6 m</strong>. Giá <strong>190 tỷ, thương lượng</strong> – khoảng 325,6 triệu/m².</p>
+<h2>Điểm đặc biệt: có sẵn giấy phép khách sạn 22 tầng</h2>
+<p>Theo chủ đất, lô đất được <strong>tặng kèm giấy phép xây dựng và đầy đủ hồ sơ thiết kế khách sạn 5 sao 22 tầng, 94 phòng</strong>. Nhà đầu tư rút ngắn được thời gian xin phép, thiết kế – thường mất nhiều tháng với một dự án khách sạn cao tầng ven biển. Tính ra, giá đất khoảng 2,02 tỷ cho mỗi phòng khách sạn theo thiết kế (chưa gồm chi phí xây dựng).</p>
+<h2>Thông tin lô đất</h2>
+<table>
+<tbody>
+<tr><th>Vị trí</th><td>Góc Hoàng Sa – Hồ Học Lãm, Thọ Quang (cũ), Sơn Trà, Đà Nẵng</td></tr>
+<tr><th>Diện tích</th><td>583,6 m²</td></tr>
+<tr><th>Chiều ngang</th><td>27,6 m</td></tr>
+<tr><th>Mặt tiền</th><td>4 mặt tiền (đường biển Hoàng Sa, Hồ Học Lãm và hai lối bên)</td></tr>
+<tr><th>Hồ sơ kèm theo</th><td>Giấy phép xây dựng, thiết kế khách sạn 5 sao 22 tầng, 94 phòng (theo chủ đất)</td></tr>
+<tr><th>Giá</th><td>190 tỷ, thương lượng (khoảng 325,6 triệu/m²)</td></tr>
+</tbody>
+</table>
+<h2>Phù hợp với ai?</h2>
+<ul>
+<li><strong>Nhà đầu tư khách sạn</strong>: xây ngay theo giấy phép có sẵn, khai thác khách du lịch biển Đà Nẵng đang tăng mạnh.</li>
+<li><strong>Doanh nghiệp cần tài sản trên trục biển</strong>: lô lớn, vuông vức, nhiều mặt tiền – hiếm trên tuyến Hoàng Sa – Võ Nguyên Giáp.</li>
+<li><strong>Giữ tài sản dài hạn</strong>: đất mặt tiền biển Sơn Trà ngày càng ít lô lớn được giao dịch.</li>
+</ul>
+<h2>Lưu ý khi tìm hiểu</h2>
+<ul>
+<li>Diện tích, kích thước, giấy phép xây dựng và hồ sơ thiết kế theo thông tin chủ đất cung cấp; khách được xem bản gốc và kiểm tra tại cơ quan chức năng trước khi đặt cọc.</li>
+<li>Nên kiểm tra quy hoạch chi tiết, chỉ tiêu xây dựng và thời hạn hiệu lực của giấy phép xây dựng (giấy phép có thời hạn khởi công).</li>
+</ul>
+<p>Xem bảng giá đất mặt tiền các tuyến biển tại <a href="/thong-ke-dau-tu/">Thống kê đầu tư</a>. Khách có nhu cầu thực, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận hồ sơ, vị trí chính xác và đặt lịch xem đất.</p>',
+	);
 	return apply_filters( 'hh_single_listing_dataset', $list );
 }
 
