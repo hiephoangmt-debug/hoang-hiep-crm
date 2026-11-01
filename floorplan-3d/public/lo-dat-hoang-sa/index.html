@@ -38,6 +38,10 @@
   .pin b { font: 600 11.5px Inter; background: #fffffff0; color: #111827; padding: 3px 8px; border-radius: 999px; white-space: nowrap; box-shadow: 0 2px 8px #0005; }
   .pin.red b { background: var(--red); color: #fff; }
   .pin span { width: 2px; height: 14px; background: linear-gradient(#fff, #fff0); }
+  .wm { position: fixed; inset: 0; pointer-events: none; z-index: 4; display: grid; place-items: center; overflow: hidden; user-select: none; -webkit-user-select: none; }
+  .wm div { transform: rotate(-24deg); text-align: center; font: 800 clamp(26px, 9vw, 64px)/1.15 Inter, sans-serif; color: #ffffff; opacity: .32; text-shadow: 0 0 3px #0008; letter-spacing: 1px; white-space: nowrap; }
+  .wm small { display: block; font-size: .42em; font-weight: 700; letter-spacing: 2px; }
+  .wm .tile { position: absolute; font-size: clamp(13px, 3.4vw, 20px); opacity: .1; }
   .loading { position: fixed; inset: 0; display: grid; place-items: center; background: var(--bg); transition: opacity .5s; z-index: 9; }
 </style>
 </head>
@@ -74,6 +78,7 @@
   </div>
   <div class="note">Hình 3D minh hoạ: vị trí theo bản đồ địa chính, khối khách sạn dựng theo thông số rao bán (22 tầng, 94 phòng), nhà xung quanh mô phỏng. Kéo để xoay, chụm để phóng.</div>
 </footer>
+<div class="wm" id="wm" aria-hidden="true"></div>
 <div class="loading" id="loading">Đang tải phối cảnh…</div>
 
 <script type="importmap">
@@ -95,6 +100,13 @@ const $ = (id) => document.getElementById(id);
   if (CONTACT.zalo) { const a = document.createElement('a'); a.className = 'alt'; a.href = 'https://zalo.me/' + CONTACT.zalo.replace(/\s/g, ''); a.target = '_blank'; a.textContent = '💬 Nhắn Zalo'; c.appendChild(a); }
   if (!c.children.length) c.remove();
 }
+// chữ mờ chống sao chép: số điện thoại ở giữa + lặp nhỏ khắp màn hình
+{
+  const wm = $('wm'), txt = CONTACT.phone || CONTACT.name;
+  const big = document.createElement('div'); big.textContent = txt; const sm = document.createElement('small'); sm.textContent = CONTACT.phone ? CONTACT.name + ' · chính chủ' : 'Lô đất Hoàng Sa'; big.appendChild(sm); wm.appendChild(big);
+  for (let r = 0; r < 7; r++) for (let k = 0; k < 3; k++) { const t = document.createElement('div'); t.className = 'tile'; t.textContent = txt; t.style.left = (k * 38 + (r % 2) * 18 - 8) + '%'; t.style.top = (r * 15 + 4) + '%'; wm.appendChild(t); }
+}
+document.addEventListener('contextmenu', (e) => e.preventDefault());
 let seed = 9; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
 const V3 = (x, y, z) => new THREE.Vector3(x, y, z);
 const MOBILE = Math.min(innerWidth, innerHeight) < 700;
