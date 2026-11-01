@@ -62,6 +62,9 @@ body{margin:0;background:var(--bg);font-family:var(--font);color:var(--navy);-we
 #f3 .f3h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 12px;color:#fff;font-size:13px}#f3 .f3h b{font-size:16px}#f3 .f3h span{flex:1;min-width:160px;color:#c9d6e3}
 #f3 button{border:0;border-radius:16px;padding:7px 12px;font:800 13px var(--font);cursor:pointer;background:#fff;color:var(--navy)}#f3 .f3x{background:var(--or);color:#fff}
 #f3 .f3c{flex:1;position:relative;min-height:0}#f3 .f3c canvas{display:block;width:100%;height:100%}
+#f3 .f3l{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.94);border-radius:12px;padding:9px 12px;color:#0A2540;font:700 12.5px var(--font);box-shadow:0 4px 14px rgba(10,37,64,.18);pointer-events:none;max-width:calc(100% - 20px)}
+#f3 .f3l b{display:block;font-size:13px;margin-bottom:5px}#f3 .f3l div{display:flex;align-items:center;gap:7px;margin:3px 0}#f3 .f3l i{width:16px;height:12px;border-radius:3px;flex:0 0 16px}#f3 .f3l small{margin-left:auto;padding-left:12px;font-weight:600;color:#41505f;font-size:12px}#f3 .f3l p{margin:3px 0 0;font:600 11.5px var(--font);color:#0A2540;max-width:300px}#f3 .f3l em{max-width:300px;display:block;margin-top:5px;font:600 10.5px var(--font);color:#5d6b7a}
+@media(max-width:600px){#f3 .f3l{font-size:11px;padding:7px 9px}#f3 .f3l em{display:none}#f3 .f3l p{font-size:10.5px}}
 #f3 .f3w{position:absolute;right:10px;bottom:8px;color:rgba(10,37,64,.55);font:800 12px var(--font);pointer-events:none}
 .note{font-size:11.5px;color:#5d6b7a;padding:0 16px 12px;margin:0}
 #rc{min-width:0}#room{min-width:0;overflow:hidden}#room canvas{max-width:100%}.pair>*{min-width:0}#nt{min-width:0;max-width:calc(100% - 32px);overflow:hidden;margin:0 16px 12px;border-radius:14px;background:linear-gradient(135deg,#1c1712,#3a2c1e);color:#f3e6cf;padding:12px 12px 10px}
@@ -1138,6 +1141,10 @@ function showHour(){
 
 /* ---------- 3D CẢ TẦNG: phối cảnh cắt ngang cả tầng (tường cắt thấp) như ảnh minh họa mặt bằng 3D ----------
    dựng lại từng căn (tường, kính, nội thất) đúng vị trí trên mặt bằng tầng, lõi thang, hành lang, sân vườn; tầng 2 có bể bơi, WC, gym */
+var F3LEG={}, F3NOTE=[], F3BAL=[]; function f3LegDraw(x,H){ var ks=Object.keys(F3LEG), ORD=['STU','1PN','1PN+1','2PN']; ks.sort(function(a,b){ return ORD.indexOf(a)-ORD.indexOf(b); }); var lh=30, w=330, h=48+ks.length*lh, y0=H-h-20;
+  x.fillStyle='rgba(255,255,255,.95)'; x.fillRect(20,y0,w,h); x.fillStyle='#0A2540'; x.font='800 20px Arial'; x.fillText('Chú thích',34,y0+30);
+  ks.forEach(function(k,i){ var q=F3LEG[k], y=y0+48+i*lh; x.fillStyle='#'+(TINT3[k]||0xcccccc).toString(16).padStart(6,'0'); x.fillRect(34,y,22,16); x.fillStyle='#0A2540'; x.font='700 17px Arial';
+    x.fillText((k==='STU'?'Studio':k)+' · '+q.n+' căn'+(q.a?' · '+m2(q.a)+(q.b>q.a?'–'+m2(q.b):'')+' m²':''),66,y+14); }); } function f3Leg(t,a){ var q=F3LEG[t]||(F3LEG[t]={n:0,a:0,b:0}); q.n++; if(a){ q.a=q.a?Math.min(q.a,a[0]):a[0]; q.b=Math.max(q.b,a[0]); } }
 var F3=null, TINT3={'STU':0xf2a7ae,'1PN+1':0x9fd2ec,'1PN':0xa9dcb5,'2PN':0xf4d58a};   // sàn tô màu theo loại căn như chú thích
 function f3Open(){
   if(!window.THREE) return;
@@ -1156,7 +1163,12 @@ function f3Open(){
   var sun=new THREE.DirectionalLight(0xfff2dc,1.55); sun.position.set(-26,62,-34); sun.castShadow=true; sun.shadow.mapSize.set(2048,2048);
   var sc2=sun.shadow.camera; sc2.left=-42; sc2.right=42; sc2.top=42; sc2.bottom=-42; sc2.near=1; sc2.far=160; sun.shadow.bias=-.0008; sun.shadow.normalBias=.03; sun.shadow.radius=3; sc.add(sun); sc.add(sun.target);
   var root=new THREE.Group(); root.position.set(-27.2,0,-16.8); sc.add(root); sun.target.position.set(0,0,0);
-  var walls=[], units=[]; f3Build(root,walls,units);
+  var walls=[], units=[]; F3LEG={}; F3NOTE=[]; F3BAL=[]; f3Build(root,walls,units); if(F3BAL.length) F3NOTE.push('Ban công / sân riêng (m²): '+F3BAL.join(', '));
+  // chú thích: màu theo loại căn, số căn, diện tích thông thủy trên tầng này
+  var lg=document.createElement('div'); lg.className='f3l'; var ORD=['STU','1PN','1PN+1','2PN'];
+  lg.innerHTML='<b>Chú thích tầng '+fname(state.floor)+'</b>'+Object.keys(F3LEG).sort(function(a,b){ return ORD.indexOf(a)-ORD.indexOf(b); }).map(function(k){ var q=F3LEG[k];
+    return '<div><i style="background:#'+(TINT3[k]||0xcccccc).toString(16).padStart(6,'0')+'"></i>'+(k==='STU'?'Studio':k)+' · '+q.n+' căn<small>'+(q.a?m2(q.a)+(q.b>q.a?'–'+m2(q.b):'')+' m²':'')+'</small></div>'; }).join('')+F3NOTE.map(function(t){ return '<p>'+t+'</p>'; }).join('')+'<em>Diện tích thông thủy theo mặt bằng CĐT'+(FNOTE[LAY(state.floor)]?' · '+FNOTE[LAY(state.floor)]:'')+'</em>';
+  ov.querySelector('.f3c').appendChild(lg);
   // màu và ảnh vân về đúng không gian màu sRGB (đậm, rõ như ảnh minh họa, không bị bạc màu)
   var seen=new Set(); root.traverse(function(o){ if(!o.material||o.isSprite) return; (Array.isArray(o.material)?o.material:[o.material]).forEach(function(m){ if(seen.has(m)) return; seen.add(m);
     if(m.color) m.color.convertSRGBToLinear(); if(m.emissive) m.emissive.convertSRGBToLinear(); if(m.map&&m.map.encoding!==THREE.sRGBEncoding){ m.map.encoding=THREE.sRGBEncoding; m.map.needsUpdate=true; }
@@ -1176,7 +1188,7 @@ function f3Open(){
   var alive=true; (function loop(){ if(!alive) return; requestAnimationFrame(loop); ctl.update(); r.render(sc,cam); })();
   function close(){ alive=false; window.removeEventListener('resize',size); r.dispose(); ov.remove(); }
   ov.querySelector('.f3x').onclick=close;
-  ov.querySelector('.f3d').onclick=function(){ r.render(sc,cam); var c=document.createElement('canvas'); c.width=r.domElement.width; c.height=r.domElement.height; c.getContext('2d').drawImage(r.domElement,0,0); stamp(c,'Sun Saphia Residence · 3D cả tầng '+fname(state.floor)+' · minh họa'); saveCanvas(c,'Sun-Saphia-tang-'+fname(state.floor)+'-3D.png'); };
+  ov.querySelector('.f3d').onclick=function(){ r.render(sc,cam); var c=document.createElement('canvas'); c.width=r.domElement.width; c.height=r.domElement.height; var cx2=c.getContext('2d'); cx2.drawImage(r.domElement,0,0); f3LegDraw(cx2,c.height); stamp(c,'Sun Saphia Residence · 3D cả tầng '+fname(state.floor)+' · minh họa'); saveCanvas(c,'Sun-Saphia-tang-'+fname(state.floor)+'-3D.png'); };
   // bấm vào căn → đóng và mở chi tiết căn
   var dn=null, rc=new THREE.Raycaster(), nd=new THREE.Vector2();
   r.domElement.addEventListener('pointerdown',function(e){ dn=[e.clientX,e.clientY]; });
@@ -1264,15 +1276,15 @@ function f3Build(root,walls,units){
   var B=BAL[LL]; if(B){ var GD0=LL==='T2'?GARD2:GARD, gm={woodD:mat(0x7a5434),leaf:mat(0x4f8a3e,{roughness:.8}),leaf2:mat(0x3f7432,{roughness:.8}),fab:mat(0xd9d4cc)};
     U.forEach(function(r){ if(onFloor(r)&&B[r[0]]&&GD0[r[0]]){ var gg=addGarden(root,r,GD0[r[0]],gm); gg.position.y=-.32; } }); }
   // nhãn mã căn
-  function label(txt,sub,col,u,v){ var c=document.createElement('canvas'); c.width=256; c.height=128; var g2=c.getContext('2d');
-    g2.fillStyle='rgba(255,255,255,.93)'; g2.strokeStyle=col; g2.lineWidth=8; g2.beginPath(); if(g2.roundRect) g2.roundRect(8,8,240,112,22); else g2.rect(8,8,240,112); g2.fill(); g2.stroke();
-    g2.fillStyle='#0A2540'; g2.textAlign='center'; g2.font='800 54px Be Vietnam Pro,Arial'; g2.fillText(txt,128,66); g2.font='700 30px Be Vietnam Pro,Arial'; g2.fillText(sub,128,104);
+  function label(txt,sub,col,u,v){ var c=document.createElement('canvas'); c.width=320; c.height=128; var g2=c.getContext('2d');
+    g2.fillStyle='rgba(255,255,255,.95)'; g2.strokeStyle=col; g2.lineWidth=8; g2.beginPath(); if(g2.roundRect) g2.roundRect(8,8,304,112,22); else g2.rect(8,8,304,112); g2.fill(); g2.stroke();
+    g2.fillStyle='#0A2540'; g2.textAlign='center'; g2.font='800 54px Be Vietnam Pro,Arial'; g2.fillText(txt,160,64); g2.font='700 28px Be Vietnam Pro,Arial'; g2.fillText(sub,160,104);
     var tx=new THREE.CanvasTexture(c); tx.encoding=THREE.sRGBEncoding; var sp2=new THREE.Sprite(new THREE.SpriteMaterial({map:tx,depthTest:false}));
-    sp2.scale.set(2.9,1.45,1); sp2.position.set(u,3.2,v); sp2.renderOrder=9; root.add(sp2); }
-  if(LL==='T30') U30.forEach(function(r){ var b=G30[r[0]], u0=1e9,u1=-1e9,v0=1e9,v1=-1e9; b.forEach(function(q){ u0=Math.min(u0,q[0]); u1=Math.max(u1,q[1]); v0=Math.min(v0,q[2]); v1=Math.max(v1,q[3]); }); label('30'+r[0],NAME[r[1]],COL[r[1]],(u0+u1)/2,(v0+v1)/2); });
+    sp2.scale.set(3.6,1.45,1); sp2.position.set(u,3.2,v); sp2.renderOrder=9; root.add(sp2); }
+  if(LL==='T30') U30.forEach(function(r){ var b=G30[r[0]], u0=1e9,u1=-1e9,v0=1e9,v1=-1e9; b.forEach(function(q){ u0=Math.min(u0,q[0]); u1=Math.max(u1,q[1]); v0=Math.min(v0,q[2]); v1=Math.max(v1,q[3]); }); var a=A30[r[0]]; f3Leg(r[1],a); label('30'+r[0],(NAME[r[1]]||r[1])+(a?' · '+m2(a[0])+' m²':''),COL[r[1]]||'#7cbf8a',(u0+u1)/2,(v0+v1)/2); });
   else U.forEach(function(r){ if(!onFloor(r)) return; var cu=(r[2]+r[3])/2, cv=(r[4]+r[5])/2, d=(r[6]||'E')[0], lu=cu, lv=cv, O=2.6;
     if(d==='E') lv=r[4]-O; else if(d==='W') lv=r[5]+O; else if(d==='N') lu=r[2]-O; else lu=r[3]+O;   // số căn đặt ra ngoài mặt kính của căn, có vạch chỉ vào căn: không che nội thất
-    label(r[0],NAME[r[1]],COL[r[1]],lu,lv);
+    var a=areaOf(r[0]), bl=BAL[LL]&&BAL[LL][r[0]]; f3Leg(r[1],a); if(SK(r)==='2PN11') F3NOTE.push('Căn '+r[0]+': 2PN góc, lô gia chữ L chạy hết mặt biển, vòng qua góc bo'); if(bl) F3BAL.push(r[0]+' ('+m2(bl)+')'); label(r[0],NAME[r[1]]+(a?' · '+m2(a[0])+' m²':''),COL[r[1]],lu,lv);
     var lg=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(cu+(lu-cu)*.35,1.25,cv+(lv-cv)*.35),new THREE.Vector3(lu,2.6,lv)]); var ln=new THREE.Line(lg,new THREE.LineBasicMaterial({color:new THREE.Color(COL[r[1]]),depthTest:false})); ln.renderOrder=8; root.add(ln); });
 }
 
