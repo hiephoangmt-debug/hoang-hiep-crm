@@ -277,7 +277,9 @@ for _pt in PARTS:
             else:          # cửa phòng: khuôn + cánh mở 90°
                 piece(t0, t0 + .04, 0, 2.15, .14, OAK); piece(t1 - .04, t1, 0, 2.15, .14, OAK)
                 nrm = Vector((-u.y, u.x)) * (g[2] if len(g) > 2 else 1); hinge = a + u * t0; w_ = t1 - t0 - .08
-                c = hinge - u * (w_ / 2 + .02) + nrm * .09; box(c.x, c.y, 0, w_, .04, 2.1, OAK, ang, 0, name='canh-cua')   # cánh mở hết, áp sát tường – không chắn lối đi
+                if os.environ.get('DOOROPEN', '0') == '1':
+                    c = hinge - u * (w_ / 2 + .02) + nrm * .09; box(c.x, c.y, 0, w_, .04, 2.1, OAK, ang, 0, name='canh-cua')   # cánh mở hết, áp sát tường
+                else: piece(t0 + .04, t1 - .04, 0, 2.12, .04, OAK, 'canh-cua')   # cánh đóng trong khuôn: không còn tấm gỗ lơ lửng sau đầu giường
 
     CG = []
     for s in SP['segs']: wall_seg(s)
@@ -409,9 +411,9 @@ for _pt in PARTS:
             box(0, .05, -.001, w + .8, d + .1, .012, RUG, 0, 0, parent=o)
             BEDS.append((o, w, d))
             if LUX and AIRY:   # như ảnh mẫu: tấm ốp bọc nỉ dọc cao gần trần + hắt LED, giường bọc boucle kem, khăn + gối đất nung, đôn cuối giường, đèn thả 2 bên
-                PW = w + 1.5; n_ = max(4, int(round(PW / .5))); pw_ = PW / n_
-                for i in range(n_): box(-PW / 2 + (i + .5) * pw_, -hd - .1, .0, pw_ - .012, .08, H - .35, FAB2, bevel=.03, parent=o)
-                box(0, -hd - .06, H - .37, PW, .02, .02, COVE, 0, 0, parent=o)
+                PW = w + .9; n_ = max(4, int(round(PW / .32))); pw_ = PW / n_   # đầu giường bọc nỉ dọc cao 1,3 m sát sau giường + tab đầu giường, hắt LED trên đỉnh
+                for i in range(n_): box(-PW / 2 + (i + .5) * pw_, -hd - .07, .0, pw_ - .01, .06, 1.3, FAB2, bevel=.025, parent=o)
+                box(0, -hd - .1, 1.3, PW, .03, .02, COVE, 0, 0, parent=o)
                 box(0, 0, 0, w + .14, d + .08, .34, CHAIRF, bevel=.05, parent=o); box(0, -hd + .02, 0, w + .14, .16, 1.0, CHAIRF, bevel=.06, parent=o)
                 box(0, d * .3, .6, w + .1, .55, .025, FAB3, bevel=.01, parent=o); box(w * .32, d * .3 + .2, .2, .03, .5, .4, FAB3, 0, .005, parent=o)
                 for sd in (-1, 1): box(sd * w * .2, -hd + .48, .6, w * .32, .14, .3, FAB3, bevel=.07, parent=o)
