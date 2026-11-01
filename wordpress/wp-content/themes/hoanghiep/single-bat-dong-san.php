@@ -128,7 +128,12 @@ while ( have_posts() ) :
 				</section>
 			<?php endif; ?>
 
-			<?php if ( 'ban' === $deal ) : ?>
+			<?php
+			// Bảng tính vay & dòng tiền: chỉ hợp căn hộ, nhà vài tỷ. Tin từ 30 tỷ (lô đất lớn, khách sạn…) hoặc tin bật
+			// "Ẩn bảng tính khoản vay" thì không hiện.
+			$show_calc = 'ban' === $deal && ! hh_meta( 'hh_no_finance' ) && (float) hh_meta( 'hh_price' ) < 30000;
+			?>
+			<?php if ( $show_calc ) : ?>
 				<section class="block" id="tai-chinh">
 					<h2 class="block__title">Tính khoản vay &amp; dòng tiền</h2>
 					<?php get_template_part( 'template-parts/finance', null, array( 'mode' => 'listing', 'no_rent' => has_term( array( 'dat-nen', 'mat-bang-kinh-doanh' ), 'loai-bds', $id ) ) ); // Đất, mặt bằng: không hiện bài toán cho thuê căn hộ. ?>

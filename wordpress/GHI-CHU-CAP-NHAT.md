@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.49** + plugin Hoàng Hiệp CRM **2.20.108**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.50** + plugin Hoàng Hiệp CRM **2.20.109**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.109, giao diện 2.15.50: ẩn bảng tính khoản vay ở tin giá lớn (01/11/2026)
+- Tin nhà đất từ 30 tỷ (lô đất lớn, khách sạn – như lô Hoàng Sa 190 tỷ, khu đất Hoàng Văn Thái 50 tỷ) không hiện khối "Tính khoản vay & dòng tiền".
+- Ô mới "Ẩn bảng tính khoản vay & dòng tiền" (tab Thông tin cơ bản của tin) để tắt khối này ở tin bất kỳ.
 
 ## Có gì mới – plugin 2.20.108, giao diện 2.15.49: bản đồ tin nhà đất ghim theo tọa độ (01/11/2026)
 - Ô "Địa chỉ hoặc tọa độ trên bản đồ Google" (tab Hình ảnh & video của tin nhà đất) nhận tọa độ dạng 16.0xxx, 108.2xxx → bản đồ ghim đúng điểm, phóng gần hơn. Có hướng dẫn lấy tọa độ ngay dưới ô.

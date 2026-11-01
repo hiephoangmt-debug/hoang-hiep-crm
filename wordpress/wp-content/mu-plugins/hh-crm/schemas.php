@@ -261,6 +261,7 @@ function hh_listing_schema() {
 				'hh_address'    => array( 'type' => 'text', 'label' => 'Địa chỉ', 'placeholder' => 'VD: 123 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng' ),
 				'hh_project'    => array( 'type' => 'post', 'label' => 'Thuộc dự án', 'post_type' => 'du-an', 'half' => true, 'help' => 'Tin sẽ hiện ở mục "Chuyển nhượng & cho thuê" của trang dự án.' ),
 				'hh_featured'   => array( 'type' => 'checkbox', 'label' => 'Tin HOT (xếp đầu mục "hot mới" cuối trang)', 'half' => true ),
+				'hh_no_finance' => array( 'type' => 'checkbox', 'label' => 'Ẩn bảng tính khoản vay & dòng tiền (tin từ 30 tỷ tự ẩn)', 'half' => true ),
 			),
 		),
 		'dac-diem'  => array(
