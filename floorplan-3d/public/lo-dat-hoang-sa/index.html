@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Lô đất view biển Hoàng Sa</title>
+<meta name="description" content="Bán lô đất 4 mặt tiền Võ Nguyên Giáp – Hoàng Sa, view trực diện biển Đà Nẵng. 583,6 m², ngang 27,6 m. Tặng GPXD + thiết kế khách sạn 5 sao 22 tầng, 94 phòng. Giá 190 tỷ." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg: #0b1626; --fg: #f4f7fb; --panel: #0d1b2ee8; --chip: #ffffff26; --accent: #f2b33d; --accent-fg: #241600; --red: #e5321f; }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --bg: #0b1626; } }
+  :root[data-theme="light"] { --bg: #0b1626; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--fg); font-family: Inter, system-ui, sans-serif; }
+  #stage { position: fixed; inset: 0; touch-action: none; }
+  .card { position: fixed; top: max(10px, env(safe-area-inset-top)); left: 12px; right: 12px; max-width: 460px; background: var(--panel); backdrop-filter: blur(10px); border-radius: 16px; padding: 12px 14px; box-shadow: 0 8px 30px #0006; }
+  .card .tag { display: inline-block; background: var(--red); color: #fff; font: 700 11px Inter; padding: 3px 8px; border-radius: 999px; letter-spacing: .3px; }
+  .card h1 { margin: 6px 0 2px; font-size: 15.5px; line-height: 1.25; }
+  .card .sub { font-size: 12.5px; opacity: .85; }
+  .card .price { display: flex; gap: 14px; align-items: baseline; margin-top: 8px; flex-wrap: wrap; }
+  .card .price b { font-size: 24px; color: var(--accent); font-weight: 800; }
+  .card .price span { font-size: 12.5px; opacity: .85; }
+  .card details { margin-top: 6px; font-size: 13px; }
+  .card summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+  .card ul { margin: 6px 0 0; padding-left: 18px; line-height: 1.5; }
+  .bar { position: fixed; left: 0; right: 0; bottom: 0; padding: 8px 12px max(12px, env(safe-area-inset-bottom)); background: linear-gradient(transparent, #0b1626e6 40%); }
+  .chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; border: 0; border-radius: 999px; padding: 9px 13px; font: 600 13px Inter, sans-serif; color: var(--fg); background: var(--chip); backdrop-filter: blur(6px); cursor: pointer; white-space: nowrap; }
+  .chip.active { background: var(--accent); color: var(--accent-fg); }
+  .cta { display: flex; gap: 8px; margin-bottom: 8px; }
+  .cta a { flex: 1; text-align: center; text-decoration: none; font: 700 14px Inter; padding: 11px; border-radius: 12px; background: var(--red); color: #fff; }
+  .cta a.alt { background: #1f8a4c; }
+  .note { font-size: 10.5px; opacity: .65; margin-top: 6px; }
+  .pins { position: fixed; inset: 0; pointer-events: none; }
+  .pin { position: absolute; transform: translate(-50%, -100%); display: flex; flex-direction: column; align-items: center; }
+  .pin b { font: 600 11.5px Inter; background: #fffffff0; color: #111827; padding: 3px 8px; border-radius: 999px; white-space: nowrap; box-shadow: 0 2px 8px #0005; }
+  .pin.red b { background: var(--red); color: #fff; }
+  .pin span { width: 2px; height: 14px; background: linear-gradient(#fff, #fff0); }
+  .loading { position: fixed; inset: 0; display: grid; place-items: center; background: var(--bg); transition: opacity .5s; z-index: 9; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div class="pins" id="pins"></div>
+<section class="card">
+  <span class="tag">ĐỘC QUYỀN · HIẾM CÓ</span>
+  <h1>Lô đất 4 mặt tiền Võ Nguyên Giáp – Hoàng Sa, view trực diện biển</h1>
+  <div class="sub">Thọ Quang, Sơn Trà, Đà Nẵng · Tặng GPXD + thiết kế KS 5★ 22 tầng, 94 phòng</div>
+  <div class="price"><b>190 tỷ</b><span>583,6 m² · ngang 27,6 m · thương lượng</span></div>
+  <details>
+    <summary>Xem thông tin chi tiết</summary>
+    <ul>
+      <li>Diện tích 583,6 m² (bản đồ địa chính 587 m²), ngang 27,6 m</li>
+      <li>4 mặt tiền: Hoàng Sa (view biển), Hồ Học Lãm và 2 đường nhánh</li>
+      <li>Tờ 126 · Thửa 30 · phường Thọ Quang, Sơn Trà</li>
+      <li>Tặng giấy phép xây dựng + đầy đủ hồ sơ thiết kế khách sạn 5 sao 22 tầng, 94 phòng</li>
+      <li>Cách bờ biển ≈ 60 m · ≈ 5 km tới cầu Rồng · ≈ 7 km tới sân bay</li>
+    </ul>
+  </details>
+</section>
+<footer class="bar">
+  <div class="cta" id="cta"></div>
+  <div class="chips">
+    <button class="chip active" data-view="hero">🏙 Toàn cảnh</button>
+    <button class="chip" data-view="sea">🌊 Từ biển nhìn vào</button>
+    <button class="chip" data-view="street">🚗 Mặt đường Hoàng Sa</button>
+    <button class="chip" data-view="roof">👁 View từ tầng 22</button>
+    <button class="chip" data-view="top">⬇ Nhìn từ trên (lô đất)</button>
+    <button class="chip active" id="hotelBtn">🏨 Khách sạn 22 tầng</button>
+    <button class="chip" id="nightBtn">🌙 Ban đêm</button>
+    <button class="chip" id="orbitBtn">🎬 Bay quanh</button>
+  </div>
+  <div class="note">Hình 3D minh hoạ: vị trí theo bản đồ địa chính, khối khách sạn dựng theo thông số rao bán (22 tầng, 94 phòng), nhà xung quanh mô phỏng. Kéo để xoay, chụm để phóng.</div>
+</footer>
+<div class="loading" id="loading">Đang tải phối cảnh…</div>
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { Sky } from 'three/addons/objects/Sky.js';
+import { Water } from 'three/addons/objects/Water.js';
+
+// ===== Liên hệ: sửa số điện thoại / Zalo tại đây =====
+const CONTACT = { name: 'Hoàng Hiệp', phone: '', zalo: '' };
+
+const $ = (id) => document.getElementById(id);
+{
+  const c = $('cta');
+  if (CONTACT.phone) { const a = document.createElement('a'); a.href = 'tel:' + CONTACT.phone.replace(/\s/g, ''); a.textContent = '📞 Gọi ' + CONTACT.name; c.appendChild(a); }
+  if (CONTACT.zalo) { const a = document.createElement('a'); a.className = 'alt'; a.href = 'https://zalo.me/' + CONTACT.zalo.replace(/\s/g, ''); a.target = '_blank'; a.textContent = '💬 Nhắn Zalo'; c.appendChild(a); }
+  if (!c.children.length) c.remove();
+}
+let seed = 9; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const V3 = (x, y, z) => new THREE.Vector3(x, y, z);
+const MOBILE = Math.min(innerWidth, innerHeight) < 700;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.5 : 2));
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+$('stage').appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, 1, 0.5, 6000);
+const controls = new OrbitControls(camera, renderer.domElement);
+Object.assign(controls, { enableDamping: true, maxPolarAngle: 1.5, minDistance: 8, maxDistance: 1500 });
+
+// toạ độ: x = đông, z = nam (m). Gốc = góc Nam của lô. Đường Hoàng Sa chạy hướng 26° (Bắc-Đông Bắc), biển ở phía Đông.
+const EN = (e, n) => V3(e, 0, -n);
+const LOT = [[0, 0], [15.8, 22.85], [-3.84, 33.2], [-18.07, 10.18]];
+const C = LOT.reduce((a, p) => [a[0] + p[0] / 4, a[1] + p[1] / 4], [0, 0]);
+const ROAD_U = [Math.sin(0.454), Math.cos(0.454)], ROAD_N = [ROAD_U[1], -ROAD_U[0]];     // dọc đường, vuông góc (về phía biển)
+const along = (e, n) => e * ROAD_U[0] + n * ROAD_U[1], across = (e, n) => e * ROAD_N[0] + n * ROAD_N[1];
+const RX = across(13.3, -7.3) + 2;      // tim đường Hoàng Sa (khoảng cách ngang từ góc Nam)
+const fromRoad = (a, b) => [ROAD_U[0] * a + ROAD_N[0] * b, ROAD_U[1] * a + ROAD_N[1] * b];   // (dọc, ngang) -> (đông, bắc)
+const ROT = -Math.atan2(ROAD_U[0], ROAD_U[1]);   // góc xoay quanh trục y để hộp chạy dọc đường
+
+// ===== vật liệu =====
+function canvasTex(w, h, draw, rep = [1, 1], srgb = true) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h);
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(...rep); if (srgb) t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+}
+const sandTex = canvasTex(256, 256, (g, w, h) => { g.fillStyle = '#e3cfa6'; g.fillRect(0, 0, w, h); for (let i = 0; i < 6000; i++) { g.fillStyle = `hsl(40,${30 + rnd() * 20}%,${68 + rnd() * 18}%)`; g.fillRect(rnd() * w, rnd() * h, 1.5, 1.5); } }, [40, 40]);
+const asphaltTex = canvasTex(64, 512, (g, w, h) => { g.fillStyle = '#3d4249'; g.fillRect(0, 0, w, h); for (let i = 0; i < 1500; i++) { g.fillStyle = `rgba(255,255,255,${rnd() * 0.05})`; g.fillRect(rnd() * w, rnd() * h, 1, 1); } g.fillStyle = '#e8e8e8'; for (let y = 0; y < h; y += 64) g.fillRect(w / 2 - 1, y, 2, 32); }, [1, 20]);
+const winTex = canvasTex(128, 128, (g, w, h) => { g.fillStyle = '#e8e2d6'; g.fillRect(0, 0, w, h); g.fillStyle = '#4c6377'; for (let r = 0; r < 4; r++) for (let k = 0; k < 4; k++) g.fillRect(6 + k * 31, 8 + r * 31, 20, 18); }, [1, 1]);
+const winLit = canvasTex(128, 128, (g, w, h) => { g.fillStyle = '#000'; g.fillRect(0, 0, w, h); for (let r = 0; r < 4; r++) for (let k = 0; k < 4; k++) if (rnd() < 0.5) { g.fillStyle = rnd() < 0.8 ? '#ffcf8a' : '#d8e6ff'; g.fillRect(6 + k * 31, 8 + r * 31, 20, 18); } }, [1, 1]);
+const frondTex = canvasTex(64, 256, (g, w, h) => { for (let i = 0; i < 70; i++) { const v = i / 70, y = h * v, len = (w / 2) * Math.sin(Math.PI * (0.08 + v * 0.92)); for (const s of [-1, 1]) { g.strokeStyle = `hsl(${88 + rnd() * 18},50%,${24 + rnd() * 14}%)`; g.lineWidth = 2.2; g.beginPath(); g.moveTo(w / 2, y); g.quadraticCurveTo(w / 2 + s * len * 0.6, y + 6, w / 2 + s * len, y + 18); g.stroke(); } } });
+const M = {
+  sand: new THREE.MeshStandardMaterial({ map: sandTex, roughness: 1 }),
+  land: new THREE.MeshStandardMaterial({ color: 0x9a9a88, roughness: 1 }),
+  road: new THREE.MeshStandardMaterial({ map: asphaltTex, roughness: 0.95 }),
+  walk: new THREE.MeshStandardMaterial({ color: 0xc9c2b4, roughness: 0.9 }),
+  grass: new THREE.MeshStandardMaterial({ color: 0x5f8f42, roughness: 1 }),
+  lot: new THREE.MeshStandardMaterial({ color: 0xb59a74, roughness: 1 }),
+  house: new THREE.MeshStandardMaterial({ map: winTex, emissiveMap: winLit, emissive: 0xffffff, emissiveIntensity: 0, roughness: 0.8 }),
+  roofs: [0xb5523a, 0x8a8f96, 0x5f6670, 0xc96a45, 0xd8d4cc].map((c) => new THREE.MeshStandardMaterial({ color: c, roughness: 0.8 })),
+  trunk: new THREE.MeshStandardMaterial({ color: 0x7a6550, roughness: 1 }),
+  frond: new THREE.MeshStandardMaterial({ map: frondTex, alphaTest: 0.45, side: THREE.DoubleSide, roughness: 0.8 }),
+  // khách sạn
+  glass: new THREE.MeshPhysicalMaterial({ color: 0x3b5a74, roughness: 0.04, metalness: 0.5, clearcoat: 1, emissive: 0xffd39a, emissiveIntensity: 0 }),
+  white: new THREE.MeshStandardMaterial({ color: 0xf3f0ea, roughness: 0.45 }),
+  stone: new THREE.MeshStandardMaterial({ color: 0xcfc4b0, roughness: 0.6 }),
+  gold: new THREE.MeshStandardMaterial({ color: 0xc9a25a, roughness: 0.35, metalness: 0.7 }),
+  pool: new THREE.MeshPhysicalMaterial({ color: 0x3fc4d4, roughness: 0.05, clearcoat: 1, emissive: 0x0a7f8f, emissiveIntensity: 0.25 }),
+  red: new THREE.MeshBasicMaterial({ color: 0xff3b30, transparent: true, opacity: 0.35, depthWrite: false, side: THREE.DoubleSide }),
+};
+const add = (m, cast = true) => { m.castShadow = cast; m.receiveShadow = true; scene.add(m); return m; };
+const boxAlong = (len, w, h, mat, a, b, y, cast = false) => { const [e, n] = fromRoad(a, b); const m = add(new THREE.Mesh(new THREE.BoxGeometry(w, h, len), mat), cast); m.position.set(e, y + h / 2, -n); m.rotation.y = ROT; return m; };
+
+// ===== mặt đất: đất liền, đường Hoàng Sa, bãi cát, biển =====
+boxAlong(3000, 2000, 1, M.land, 0, RX - 1000 - 16, -1.0);        // đất liền phía tây
+boxAlong(3000, 24, 0.2, M.road, 0, RX, -0.1);                   // đường Hoàng Sa 4 làn
+boxAlong(3000, 1.5, 0.35, M.grass, 0, RX, 0);                    // dải phân cách
+boxAlong(3000, 6, 0.3, M.walk, 0, RX - 15, 0);                   // vỉa hè phía đất
+boxAlong(3000, 8, 0.3, M.walk, 0, RX + 16, 0);                   // vỉa hè ven biển
+boxAlong(3000, 70, 0.6, M.sand, 0, RX + 55, -0.55);              // bãi cát
+const waterNormals = canvasTex(256, 256, (g, w, h) => {
+  const img = g.createImageData(w, h), f = (x, y) => Math.sin(x * 0.11 + Math.sin(y * 0.07) * 2) + Math.sin(y * 0.13 + Math.sin(x * 0.05) * 3) * 0.7 + Math.sin((x + y) * 0.23) * 0.3;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const dx = f(x + 1, y) - f(x - 1, y), dy = f(x, y + 1) - f(x, y - 1), L = Math.hypot(dx, dy, 2), i = (y * w + x) * 4; img.data[i] = (-dx / L * 0.5 + 0.5) * 255; img.data[i + 1] = (-dy / L * 0.5 + 0.5) * 255; img.data[i + 2] = (2 / L * 0.5 + 0.5) * 255; img.data[i + 3] = 255; }
+  g.putImageData(img, 0, 0);
+}, [1, 1], false);
+const water = new Water(new THREE.PlaneGeometry(6000, 6000), { textureWidth: MOBILE ? 512 : 1024, textureHeight: MOBILE ? 512 : 1024, waterNormals, sunDirection: V3(0.5, 0.5, 0), sunColor: 0xfff2d8, waterColor: 0x1b5a78, distortionScale: 2.2, fog: true });
+water.rotation.x = -Math.PI / 2; water.position.y = -0.7; scene.add(water);
+// sóng vỗ bờ (dải bọt trắng)
+const foam = boxAlong(3000, 3, 0.05, new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 }), 0, RX + 89, -0.62);
+
+// ===== cây dừa =====
+function frondGeo(L, W) { const geo = new THREE.PlaneGeometry(W, L, 2, 10), p = geo.attributes.position; for (let i = 0; i < p.count; i++) { const t = (p.getY(i) + L / 2) / L; p.setXYZ(i, p.getX(i) * Math.sin(Math.PI * Math.min(1, 0.15 + t)), -0.55 * L * t * t + 0.25 * L * t, t * L); } geo.computeVertexNormals(); return geo; }
+const FR = [frondGeo(4.2, 1.3), frondGeo(3.6, 1.1)];
+function palm(e, n, h) {
+  const g = new THREE.Group(); g.position.copy(EN(e, n)); scene.add(g);
+  const lean = 0.1 + rnd() * 0.2, pts = []; for (let i = 0; i <= 6; i++) { const t = i / 6; pts.push(V3(Math.sin(t * 1.4) * lean * h * 0.6, t * h, 0)); }
+  const tr = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 10, 0.2, 6), M.trunk); tr.castShadow = true; g.add(tr);
+  for (let i = 0; i < 14; i++) { const f = new THREE.Mesh(FR[i % 2], M.frond); f.position.copy(pts[6]); f.rotation.order = 'YXZ'; f.rotation.y = (i / 14) * 6.28 + rnd() * 0.3; f.rotation.x = -0.2 + (i % 3) * 0.28; f.castShadow = true; g.add(f); }
+  g.rotation.y = rnd() * 6;
+}
+for (let a = -400; a < 400; a += 9 + rnd() * 8) { const [e, n] = fromRoad(a, RX + 22 + rnd() * 14); palm(e, n, 7 + rnd() * 4); }
+for (let a = -400; a < 400; a += 14) { const [e, n] = fromRoad(a, RX - 13.5); palm(e, n, 6 + rnd() * 2); }
+
+// ===== nhà xung quanh (mô phỏng mật độ phố biển Sơn Trà) =====
+const inLot = (e, n, pad) => { const pts = LOT; let c = false; for (let i = 0, j = 3; i < 4; j = i++) { const [xi, yi] = pts[i], [xj, yj] = pts[j]; if ((yi > n) !== (yj > n) && e < ((xj - xi) * (n - yi)) / (yj - yi) + xi) c = !c; } return c || Math.hypot(e - C[0], n - C[1]) < pad; };
+const houseGeo = new THREE.BoxGeometry(1, 1, 1).translate(0, 0.5, 0);
+const HOUSES_ = 0;
+const HOUSES = [0xf3efe6, 0xe9dcc0, 0xd7e3ea, 0xf0d9c4, 0xe2e6dc, 0xcdbfa8].map((c) => { const m = M.house.clone(); m.color.set(c); return m; });
+for (let a = -380; a < 380; a += 11) for (let b = RX - 22; b > RX - 340; b -= 13) {
+  if ((Math.abs(b - (RX - 22 - 13 * 4)) < 5) || (Math.abs(a - 40) < 5) || (Math.abs(a + 110) < 5)) continue;   // đường nhánh
+  const aa = a + (rnd() - 0.5) * 2, bb = b + (rnd() - 0.5) * 2, [e, n] = fromRoad(aa, bb);
+  if (inLot(e, n, 26) || rnd() < 0.12) continue;
+  const front = b > RX - 40, fl = front ? (rnd() < 0.18 ? 6 + Math.floor(rnd() * 9) : 3 + Math.floor(rnd() * 3)) : (rnd() < 0.05 ? 5 + Math.floor(rnd() * 3) : 1 + Math.floor(rnd() * 3));
+  const w = 7 + rnd() * 3, d = 10 + rnd() * 4, h = fl * 3.3;
+  const m = new THREE.Mesh(houseGeo, HOUSES[Math.floor(rnd() * HOUSES.length)]); m.position.copy(EN(e, n)); m.rotation.y = ROT; m.scale.set(d, h, w); add(m);
+  const t = M.house.map.clone(); t.repeat.set(Math.round(w / 3.5), fl / 1.0); t.needsUpdate = true;
+  const r = new THREE.Mesh(new THREE.BoxGeometry(d + 0.4, 0.5, w + 0.4), M.roofs[Math.floor(rnd() * 5)]); r.position.copy(EN(e, n)).setY(h); r.rotation.y = ROT; add(r);
+}
+
+// ===== lô đất + khách sạn 5 sao 22 tầng, 94 phòng =====
+const lotShape = (pad) => new THREE.Shape(LOT.map(([e, n]) => { const vx = e - C[0], vy = n - C[1], L = Math.hypot(vx, vy); return new THREE.Vector2(e - vx / L * pad, n - vy / L * pad); }));
+const prism = (pad, y, h, mat, parent) => { const m = new THREE.Mesh(new THREE.ExtrudeGeometry(lotShape(pad), { depth: h, bevelEnabled: false }), mat); m.rotation.x = -Math.PI / 2; m.position.y = y; m.castShadow = m.receiveShadow = true; (parent || scene).add(m); return m; };
+prism(0, 0, 0.25, M.lot);
+const lotFill = prism(-0.3, 0.25, 0.15, M.red);
+const lotEdge = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.ExtrudeGeometry(lotShape(0), { depth: 3, bevelEnabled: false })), new THREE.LineBasicMaterial({ color: 0xff2a2a }));
+lotEdge.rotation.x = -Math.PI / 2; scene.add(lotEdge);
+const hotel = new THREE.Group(); scene.add(hotel);
+const H1 = 5.5, HF = 3.3, NF = 22;
+prism(1.6, 0, H1, M.glass, hotel);                                     // sảnh kính cao 5,5 m
+prism(0.6, H1, 0.8, M.white, hotel);                                   // mái sảnh đua ra
+prism(1.6, H1 + 0.8, 2 * HF - 0.8, M.stone, hotel);                    // tầng 2–3: nhà hàng, spa
+for (let k = 0; k < 6; k++) prism(1.5 + 0.02 * k, H1 + 1.3 + k * 0.9, 0.12, M.gold, hotel);   // nẹp trang trí khối đế
+for (let f = 3; f < NF; f++) {                                          // 19 tầng phòng: kính sàn–trần + ban công kính
+  const y = H1 + (f - 1) * HF;
+  prism(3.4, y, HF - 0.3, M.glass, hotel);
+  prism(2.3, y + HF - 0.3, 0.3, M.white, hotel);
+}
+// trụ đứng trang trí 2 góc tháp (đường nét khách sạn 5 sao)
+for (const i of [1, 3]) { const [e, n] = LOT[i], vx = e - C[0], vy = n - C[1], L = Math.hypot(vx, vy), p = EN(e - vx / L * 3.2, n - vy / L * 3.2); const c = new THREE.Mesh(new THREE.BoxGeometry(1.2, (NF - 3) * HF + 8, 1.2), M.white); c.position.copy(p).setY(H1 + 2 * HF + ((NF - 3) * HF + 8) / 2); c.castShadow = true; hotel.add(c); }
+const TOP = H1 + (NF - 1) * HF;
+prism(2.3, TOP, 1.2, M.white, hotel);
+prism(4.6, TOP + 1.2, 0.35, M.pool, hotel);                             // hồ bơi vô cực sân thượng
+const bar = prism(8, TOP + 1.2, 4.2, M.glass, hotel);                   // sky bar
+prism(7.6, TOP + 5.4, 0.5, M.white, hotel);
+const crown = new THREE.Mesh(new THREE.TorusGeometry(6, 0.25, 6, 40), M.gold); crown.rotation.x = Math.PI / 2; crown.position.copy(EN(C[0], C[1])).setY(TOP + 6.2); hotel.add(crown);
+
+// ===== nhãn =====
+const LABELS = [
+  { t: '📍 Lô đất 583,6 m² · 190 tỷ', p: () => EN(C[0], C[1]).setY(hotel.visible ? TOP + 10 : 12), red: true },
+  { t: 'Đường Hoàng Sa', p: () => { const [e, n] = fromRoad(70, RX); return EN(e, n).setY(2); } },
+  { t: 'Hồ Học Lãm', p: () => EN(5, -12).setY(2) },
+  { t: 'Biển Đà Nẵng', p: () => { const [e, n] = fromRoad(-30, RX + 160); return EN(e, n).setY(2); } },
+  { t: '↑ Bán đảo Sơn Trà', p: () => { const [e, n] = fromRoad(380, RX + 20); return EN(e, n).setY(6); } },
+  { t: '↓ Mỹ Khê · Cầu Rồng', p: () => { const [e, n] = fromRoad(-380, RX + 20); return EN(e, n).setY(6); } },
+];
+for (const L of LABELS) { const el = document.createElement('div'); el.className = 'pin' + (L.red ? ' red' : ''); el.innerHTML = '<b></b><span></span>'; el.querySelector('b').textContent = L.t; $('pins').appendChild(el); L.el = el; }
+const pv = V3(0, 0, 0);
+function updateLabels() { for (const L of LABELS) { pv.copy(L.p()).project(camera); const ok = pv.z < 1 && Math.abs(pv.x) < 1.05 && Math.abs(pv.y) < 1.05; L.el.style.display = ok ? '' : 'none'; if (ok) { L.el.style.left = ((pv.x + 1) / 2) * innerWidth + 'px'; L.el.style.top = ((1 - pv.y) / 2) * innerHeight + 'px'; } } }
+
+// ===== bầu trời, ánh sáng =====
+const sky = new Sky(); sky.scale.setScalar(5000); scene.add(sky);
+Object.assign(sky.material.uniforms.turbidity, { value: 4 }); sky.material.uniforms.rayleigh.value = 1.3; sky.material.uniforms.mieCoefficient.value = 0.004;
+const pmrem = new THREE.PMREMGenerator(renderer), envScene = new THREE.Scene(), sky2 = new Sky(); sky2.scale.setScalar(5000); envScene.add(sky2);
+const hemi = new THREE.HemisphereLight(0xdfeeff, 0x7a6a50, 0.6); scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xfff0d6, 3); sun.castShadow = true;
+Object.assign(sun.shadow.camera, { left: -120, right: 120, top: 120, bottom: -120, near: 1, far: 600 }); sun.shadow.mapSize.set(MOBILE ? 2048 : 4096, MOBILE ? 2048 : 4096); sun.shadow.bias = -0.0003; sun.shadow.normalBias = 0.05;
+scene.add(sun, sun.target); sun.target.position.copy(EN(C[0], C[1]));
+let night = false, envRT;
+function setNight(on) {
+  night = on; $('nightBtn').classList.toggle('active', on);
+  const el = on ? -8 : 28, az = THREE.MathUtils.degToRad(115);          // nắng sáng chiếu từ phía biển (Đông-Đông Nam)
+  const dir = V3().setFromSphericalCoords(1, THREE.MathUtils.degToRad(90 - Math.max(el, 3)), az);
+  for (const s of [sky, sky2]) s.material.uniforms.sunPosition.value.setFromSphericalCoords(1, THREE.MathUtils.degToRad(90 - el), az);
+  sun.position.copy(sun.target.position).addScaledVector(dir, 300); sun.intensity = on ? 0.15 : 3; sun.color.set(on ? 0x8aa0d0 : 0xfff0d6); hemi.intensity = on ? 0.15 : 0.6;
+  water.material.uniforms.sunDirection.value.copy(dir); water.material.uniforms.sunColor.value.set(on ? 0x223355 : 0xfff2d8);
+  sky.visible = !on; scene.background = on ? new THREE.Color(0x0b1430) : null;
+  scene.fog = new THREE.Fog(on ? 0x0b1430 : 0xcfdde8, 400, 2600);
+  envRT?.dispose(); envRT = pmrem.fromScene(envScene); scene.environment = envRT.texture; scene.environmentIntensity = on ? 0.05 : 0.25;
+  M.glass.emissiveIntensity = on ? 0.7 : 0; HOUSES.forEach((m) => (m.emissiveIntensity = on ? 0.9 : 0)); M.pool.emissiveIntensity = on ? 1 : 0.25;
+  renderer.toneMappingExposure = on ? 1.05 : 0.78;
+}
+setNight(false);
+
+// ===== góc nhìn =====
+const target0 = EN(C[0], C[1]);
+const VIEWS = {
+  hero: () => { const [e, n] = fromRoad(-160, RX + 140); return [EN(e, n).setY(120), target0.clone().setY(30)]; },
+  sea: () => { const [e, n] = fromRoad(-40, RX + 230); return [EN(e, n).setY(12), target0.clone().setY(38)]; },
+  street: () => { const [e, n] = fromRoad(-55, RX + 6); return [EN(e, n).setY(1.7), target0.clone().setY(25)]; },
+  roof: () => { const [e, n] = fromRoad(8, RX + 400); return [EN(C[0], C[1]).setY(TOP + 3.2), EN(e, n).setY(TOP - 30)]; },
+  top: () => [EN(C[0] + 0.1, C[1]).setY(110), target0.clone()],
+};
+let anim = null, orbit = false;
+function go(v, instant) {
+  document.querySelectorAll('[data-view]').forEach((b) => b.classList.toggle('active', b.dataset.view === v));
+  if (v === 'roof' && !hotel.visible) toggleHotel();
+  if ((v === 'top') === hotel.visible) toggleHotel();
+  const [p, t] = VIEWS[v]();
+  controls.minDistance = v === 'roof' ? 0.1 : 8;
+  if (instant) { camera.position.copy(p); controls.target.copy(t); return; }
+  anim = { t: 0, p0: camera.position.clone(), t0: controls.target.clone(), p1: p, t1: t };
+}
+function toggleHotel() { hotel.visible = !hotel.visible; $('hotelBtn').classList.toggle('active', hotel.visible); }
+document.querySelectorAll('[data-view]').forEach((b) => (b.onclick = () => { orbit = false; $('orbitBtn').classList.remove('active'); go(b.dataset.view); }));
+$('hotelBtn').onclick = toggleHotel;
+$('nightBtn').onclick = () => setNight(!night);
+$('orbitBtn').onclick = () => { orbit = !orbit; $('orbitBtn').classList.toggle('active', orbit); if (orbit) { anim = null; controls.target.copy(target0).setY(30); } };
+controls.addEventListener('start', () => { anim = null; orbit = false; $('orbitBtn').classList.remove('active'); });
+go('hero', true);
+
+function resize() { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.fov = camera.aspect < 0.8 ? 60 : 45; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+const clock = new THREE.Timer();
+renderer.setAnimationLoop(() => {
+  clock.update(); const dt = Math.min(clock.getDelta(), 0.1), tt = clock.getElapsed();
+  if (anim) { anim.t = Math.min(1, anim.t + dt / 1.6); const e = anim.t < 0.5 ? 4 * anim.t ** 3 : 1 - (-2 * anim.t + 2) ** 3 / 2; camera.position.lerpVectors(anim.p0, anim.p1, e); controls.target.lerpVectors(anim.t0, anim.t1, e); if (anim.t >= 1) anim = null; }
+  if (orbit) { const d = camera.position.clone().sub(controls.target); d.applyAxisAngle(V3(0, 1, 0), dt * 0.12); camera.position.copy(controls.target).add(d); }
+  water.material.uniforms.time.value += dt * 0.5;
+  lotFill.material.opacity = 0.25 + 0.15 * Math.sin(tt * 2.5);
+  foam.material.opacity = 0.35 + 0.25 * Math.sin(tt * 1.3);
+  controls.update(); renderer.render(scene, camera); updateLabels();
+});
+$('loading').style.opacity = 0; setTimeout(() => $('loading').remove(), 500);
+window.lot = { go, setNight, toggleHotel };
+</script>
+</body>
+</html>
