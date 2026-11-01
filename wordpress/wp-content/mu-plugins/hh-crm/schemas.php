@@ -320,7 +320,7 @@ function hh_listing_schema() {
 			'fields' => array(
 				'hh_gallery'     => array( 'type' => 'gallery', 'label' => 'Ảnh thực tế' ),
 				'hh_video'       => array( 'type' => 'url', 'label' => 'Video YouTube', 'placeholder' => 'https://www.youtube.com/watch?v=…' ),
-				'hh_map_address' => array( 'type' => 'text', 'label' => 'Địa chỉ trên bản đồ Google', 'placeholder' => 'Để trống sẽ dùng địa chỉ ở tab Thông tin cơ bản' ),
+				'hh_map_address' => array( 'type' => 'text', 'label' => 'Địa chỉ hoặc tọa độ trên bản đồ Google', 'placeholder' => 'VD: 16.0921, 108.2489 – để trống sẽ dùng địa chỉ', 'help' => 'Chính xác nhất: mở Google Maps, giữ tay (hoặc chuột phải) đúng vị trí → chép dãy số tọa độ → dán vào đây.' ),
 				'hh_3d_url'      => array( 'type' => 'url', 'label' => 'Link phối cảnh 3D (khách xoay xem ngay trên trang tin)', 'placeholder' => 'https://hiephoangmt-debug.github.io/hoang-hiep-crm/…' ),
 			),
 		),

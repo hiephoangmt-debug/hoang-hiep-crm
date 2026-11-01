@@ -146,7 +146,7 @@ while ( have_posts() ) :
 			<?php if ( $map_addr ) : ?>
 				<section class="block">
 					<h2 class="block__title">Vị trí</h2>
-					<?php hh_map( $map_addr ); ?>
+					<?php hh_map( $map_addr, $map_addr ); // Ô bản đồ là tọa độ (16.0xx, 108.2xx) → ghim đúng điểm. ?>
 				</section>
 			<?php endif; ?>
 
