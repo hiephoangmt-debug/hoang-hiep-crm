@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.47** + plugin Hoàng Hiệp CRM **2.20.105**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.47** + plugin Hoàng Hiệp CRM **2.20.106**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,9 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.106: tin lô đất Hoàng Sa có link phối cảnh 3D (01/11/2026)
+- Tin bán lô đất 4 mặt tiền Hoàng Sa thêm link "Xem phối cảnh 3D lô đất và khách sạn 22 tầng" (trang GitHub Pages lo-dat-hoang-sa). Tin đã đăng (chưa sửa tay) tự cập nhật.
 
 ## Có gì mới – plugin 2.20.105: tin bán lô đất 4 mặt tiền Hoàng Sa, Sơn Trà (01/11/2026)
 - Tin mới (Nhà đất → Đất nền, Sơn Trà, tin HOT): lô đất 4 mặt tiền góc Hoàng Sa – Hồ Học Lãm, 583,6 m², ngang 27,6 m, view biển, kèm giấy phép xây dựng + thiết kế khách sạn 5 sao 22 tầng 94 phòng; giá 190 tỷ thương lượng. Có bản đồ Google và sơ đồ vị trí tự vẽ. Không ghi số tờ / thửa, tên chủ đất.

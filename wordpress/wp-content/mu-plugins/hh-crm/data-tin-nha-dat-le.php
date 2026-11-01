@@ -52,7 +52,7 @@ function hh_single_listing_dataset() {
 	);
 	// 01/11/2026 – lô đất 4 mặt tiền Hoàng Sa – Hồ Học Lãm (Thọ Quang, Sơn Trà). Không ghi số tờ / thửa, tên chủ đất.
 	$list[] = array(
-		'rev'     => 1,
+		'rev'     => 2, // 01/11: thêm link phối cảnh 3D.
 		'slug'    => 'ban-dat-4-mat-tien-hoang-sa-son-tra-583-m2-giay-phep-khach-san',
 		'title'   => 'Bán lô đất 4 mặt tiền đường biển Hoàng Sa, Sơn Trà – 583,6 m², ngang 27,6 m, kèm giấy phép khách sạn 22 tầng',
 		'excerpt' => 'Lô đất 4 mặt tiền góc Hoàng Sa – Hồ Học Lãm (Thọ Quang, Sơn Trà), view trực diện biển, 583,6 m², ngang 27,6 m. Tặng kèm giấy phép xây dựng và thiết kế khách sạn 5 sao 22 tầng, 94 phòng. Giá 190 tỷ, thương lượng.',
@@ -77,6 +77,7 @@ function hh_single_listing_dataset() {
 			'hh_nearby'      => "Bãi biển Hoàng Sa – bên kia đường\nKhu dịch vụ chèo SUP, nhà hàng hải sản – ngay quanh lô\nBán đảo Sơn Trà, chùa Linh Ứng – vài phút đi xe\nCầu Rồng, trung tâm Hải Châu – khoảng 10 – 15 phút",
 		),
 		'content' => '<p>Chủ gửi bán lô đất <strong>4 mặt tiền</strong> hiếm có trên trục biển <strong>Hoàng Sa</strong> (đoạn đường biển nối tiếp Võ Nguyên Giáp về phía bán đảo Sơn Trà), góc đường Hoàng Sa – Hồ Học Lãm, phường Thọ Quang (cũ), Sơn Trà, Đà Nẵng. Lô đất <strong>view trực diện biển</strong>, diện tích <strong>583,6 m²</strong>, ngang <strong>27,6 m</strong>. Giá <strong>190 tỷ, thương lượng</strong> – khoảng 325,6 triệu/m².</p>
+<p><a href="https://hiephoangmt-debug.github.io/hoang-hiep-crm/lo-dat-hoang-sa/" target="_blank" rel="noopener"><strong>Xem phối cảnh 3D lô đất và khách sạn 22 tầng ↗</strong></a> – xoay xem vị trí, view từ tầng 22, mặt đường Hoàng Sa, ban ngày và ban đêm (hình minh hoạ).</p>
 <h2>Điểm đặc biệt: có sẵn giấy phép khách sạn 22 tầng</h2>
 <p>Theo chủ đất, lô đất được <strong>tặng kèm giấy phép xây dựng và đầy đủ hồ sơ thiết kế khách sạn 5 sao 22 tầng, 94 phòng</strong>. Nhà đầu tư rút ngắn được thời gian xin phép, thiết kế – thường mất nhiều tháng với một dự án khách sạn cao tầng ven biển. Tính ra, giá đất khoảng 2,02 tỷ cho mỗi phòng khách sạn theo thiết kế (chưa gồm chi phí xây dựng).</p>
 <h2>Thông tin lô đất</h2>
