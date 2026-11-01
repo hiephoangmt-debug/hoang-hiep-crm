@@ -729,6 +729,7 @@ function hh_import_projects() {
 		}
 		update_post_meta( $id, 'hh_p_sources', implode( "\n", $p['sources'] ) );
 	}
+	delete_transient( 'hh_chat_faq2' ); // Trợ lý chat đọc lại câu hỏi đáp vừa cập nhật.
 	// Lượt 2: nối dự án thành phần / phân khu với tổ hợp (sau khi mọi dự án đã được tạo).
 	foreach ( hh_project_dataset() as $p ) {
 		if ( empty( $p['parent'] ) ) {

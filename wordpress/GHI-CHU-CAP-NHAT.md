@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.47** + plugin Hoàng Hiệp CRM **2.20.102**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.47** + plugin Hoàng Hiệp CRM **2.20.103**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.103: trợ lý chat tập trung vào dự án khách đang xem (01/11/2026)
+- Khách đang ở trang dự án nào (hoặc đã nhắc tên dự án nào) thì trợ lý trả lời trong dự án đó: tầm tiền, loại căn, "căn nào giá tốt" → giá từng loại căn, vốn tự có, căn vào thấp nhất của chính dự án đó.
+- Chỉ gợi ý dự án khác khi khách hỏi rõ ("dự án khác", "còn dự án nào", "so sánh với…") hoặc tìm loại nhà dự án này không có (đang xem căn hộ mà hỏi đất nền).
+- Sun Saphia: câu hỏi đáp về giá đổi sang giá dự kiến studio tầng 15 (2,13 / 2,37 / 2,85 tỷ), sự kiện bán hàng dự kiến 28/11.
+- Bấm "Nhập / cập nhật dữ liệu" là trợ lý đọc lại ngay câu hỏi đáp mới.
 
 ## Có gì mới – plugin 2.20.102: trợ lý chat so sánh dự án, không lặp, ưu tiên FourS – Sun Saphia (01/11/2026)
 - Khách hỏi "dự án nào giá tốt", "cái nào rẻ nhất", "nên chọn dự án nào" hoặc trả lời "ok" khi trợ lý mời so sánh → trợ lý so các dự án vừa gợi ý theo giá vào, khu vực, bàn giao và nói rõ dự án giá vào thấp nhất, dự án nhận nhà sớm.
