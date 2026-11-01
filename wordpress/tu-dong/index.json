@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-01T02:37:27+00:00",
+    "updated": "2026-11-01T03:00:32+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do",
@@ -156,10 +156,22 @@
             "file": "bai/vay-mua-sun-saphia-residence-tra-gop-hang-thang.txt"
         },
         {
+            "slug": "cong-vien-bien-truong-sa-2-45-ha-truoc-sun-saphia-residence",
+            "title": "Công viên biển 2,45 ha trên đường Trường Sa: đất dự án bỏ hoang thành công viên trước Sun Saphia Residence",
+            "publish": "2026-11-02 15:00",
+            "file": "bai/cong-vien-bien-truong-sa-2-45-ha-truoc-sun-saphia-residence.txt"
+        },
+        {
             "slug": "khach-du-lich-da-nang-2026-nhu-cau-thue-can-ho-ven-bien",
             "title": "Đà Nẵng đón 15,86 triệu khách lưu trú 9 tháng 2026: tín hiệu gì cho căn hộ ven biển như Sun Saphia Residence?",
             "publish": "2026-11-03 08:00",
             "file": "bai/khach-du-lich-da-nang-2026-nhu-cau-thue-can-ho-ven-bien.txt"
+        },
+        {
+            "slug": "gia-phong-khach-san-ven-bien-da-nang-2026-sun-saphia",
+            "title": "Giá phòng khách sạn ven biển Đà Nẵng 2026: 5 sao, 4 sao, phố trong – căn studio Sun Saphia Residence đứng ở đâu?",
+            "publish": "2026-11-03 15:00",
+            "file": "bai/gia-phong-khach-san-ven-bien-da-nang-2026-sun-saphia.txt"
         },
         {
             "slug": "cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue",
@@ -168,10 +180,22 @@
             "file": "bai/cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue.txt"
         },
         {
+            "slug": "dau-tu-cho-thue-da-nang-can-ho-luu-tru-biet-thu-nha-pho-shophouse",
+            "title": "Đầu tư cho thuê ở Đà Nẵng: căn hộ lưu trú như Sun Saphia Residence, biệt thự biển, nhà phố hay shophouse?",
+            "publish": "2026-11-04 15:00",
+            "file": "bai/dau-tu-cho-thue-da-nang-can-ho-luu-tru-biet-thu-nha-pho-shophouse.txt"
+        },
+        {
             "slug": "thi-truong-can-ho-da-nang-quy-3-2026-sun-saphia-residence",
             "title": "Thị trường căn hộ Đà Nẵng quý III/2026: nguồn cung giảm 14%, Sun Saphia Residence ra hàng lúc nào là hợp lý?",
             "publish": "2026-11-05 08:00",
             "file": "bai/thi-truong-can-ho-da-nang-quy-3-2026-sun-saphia-residence.txt"
+        },
+        {
+            "slug": "dau-tu-khach-san-da-nang-xay-moi-mua-lai-hay-mua-can-luu-tru",
+            "title": "Đầu tư khách sạn ở Đà Nẵng: xây mới, mua lại hay mua căn lưu trú như Sun Saphia Residence?",
+            "publish": "2026-11-05 15:00",
+            "file": "bai/dau-tu-khach-san-da-nang-xay-moi-mua-lai-hay-mua-can-luu-tru.txt"
         },
         {
             "slug": "thanh-toan-can-ho-hinh-thanh-tuong-lai-sun-saphia-residence",
@@ -180,10 +204,22 @@
             "file": "bai/thanh-toan-can-ho-hinh-thanh-tuong-lai-sun-saphia-residence.txt"
         },
         {
+            "slug": "phi-booking-agoda-airbnb-cho-thue-can-ho-sun-saphia",
+            "title": "Phí Booking, Agoda, Airbnb khi cho thuê căn hộ: mỗi % hoa hồng ăn bao nhiêu vào lợi nhuận studio Sun Saphia Residence?",
+            "publish": "2026-11-06 15:00",
+            "file": "bai/phi-booking-agoda-airbnb-cho-thue-can-ho-sun-saphia.txt"
+        },
+        {
             "slug": "chuan-bi-su-kien-ban-hang-sun-saphia-residence-28-11",
             "title": "Sự kiện bán hàng Sun Saphia Residence 28/11/2026: 7 việc nên chuẩn bị trước để chọn được căn ưng ý",
             "publish": "2026-11-07 08:00",
             "file": "bai/chuan-bi-su-kien-ban-hang-sun-saphia-residence-28-11.txt"
+        },
+        {
+            "slug": "cong-trinh-cap-1-la-gi-nien-han-100-nam-sun-saphia-residence",
+            "title": "Công trình cấp I là gì? Tòa 30 tầng Sun Saphia Residence và niên hạn sử dụng 100 năm",
+            "publish": "2026-11-07 15:00",
+            "file": "bai/cong-trinh-cap-1-la-gi-nien-han-100-nam-sun-saphia-residence.txt"
         },
         {
             "slug": "ho-tro-lai-suat-24-thang-sun-saphia-residence-tinh-thu",
