@@ -29,6 +29,7 @@
   .pins { position: fixed; inset: 0; pointer-events: none; }
   .pin { position: absolute; transform: translate(-50%, -100%); pointer-events: auto; display: flex; flex-direction: column; align-items: center; cursor: pointer; }
   .pin b { font: 600 12px Inter, sans-serif; background: #fffffff0; color: #111827; padding: 4px 9px; border-radius: 999px; white-space: nowrap; box-shadow: 0 2px 8px #0006; }
+  .pin.lotpin b { background: #e5281f; color: #fff; }
   .pin.small b { font-size: 11px; background: #111827d9; color: #fff; }
   .pin span { width: 2px; height: 18px; background: linear-gradient(#fff, #fff0); }
   .unit { position: fixed; left: 12px; right: 12px; bottom: 112px; max-width: 420px; margin: 0 auto; background: #0f172af2; border: 1px solid #ffffff22; border-radius: 14px; padding: 14px 14px 12px; font-size: 13px; box-shadow: 0 8px 30px #0008; }
@@ -59,6 +60,7 @@
     <button class="chip" id="veBtn">📏 Độ cao ×2</button>
     <button class="chip" id="homeBtn">↺ Đà Nẵng</button>
     <button class="chip" id="haBtn">🏮 Hội An</button>
+    <button class="chip" id="lotBtn">📍 Lô đất Hoàng Sa</button>
     <button class="chip" id="caBtn" hidden>🏡 Casamia</button>
     <button class="chip active" id="hvbBtn" hidden>🏗 Hải Vân Bay hoàn thiện</button>
   </div>
@@ -117,6 +119,8 @@ const LL = (lat, lon) => [(lon - meta.origin[1]) * meta.kx, -(lat - meta.origin[
 const HA = LL(15.8772, 108.3282); // trung tâm phố cổ Hội An
 // Casamia Balanca Hội An: từng lô lấy từ mặt bằng 363 lô, đã khớp toạ độ thật
 const CASA_DATA = await fetch('casamia.json').then((r) => (r.ok ? r.json() : null)).catch(() => null);
+// Lô đất Tờ 126 Thửa 30, Thọ Quang, Sơn Trà – góc Hoàng Sa × Hồ Học Lãm (587 m²)
+const LOT = { ring: [[16.0901884, 108.2498909], [16.090395, 108.2500385], [16.0904889, 108.249855], [16.0902804, 108.249722]].map(([la, lo]) => LL(la, lo)) };
 const CASA_RING = CASA_DATA ? CASA_DATA.site.map(([la, lo]) => LL(la, lo)) : null;
 const CASA = findProject(/casamia|balanca/i);
 const HVB = findProject(/^(vinhomes )?(hải vân bay|hai van bay)/i);
@@ -280,6 +284,7 @@ const buildings = (() => {
     const base = groundY(cx, cz) + minH, top = groundY(cx, cz) + h;
     if (HVB && inRing(HVB.rings[0], cx, cz)) continue; // thay bằng mô phỏng khi hoàn thiện
     if (CASA_RING && inRing(CASA_RING, cx, cz)) continue; // thay bằng mặt bằng Casamia
+    if (inRing(LOT.ring, cx, cz)) continue;               // lô đất trống
     const oldTown = Math.hypot(cx - HA[0], cz - HA[1]) < 560 && h < 16;
     const pal = oldTown ? ['#e8c25a', '#f0cf6e', '#e2b552', '#f3d98a', '#d9a94a'] : PAL[type] || PAL[0];
     c.set(pal[(rnd() * pal.length) | 0]);
@@ -1139,7 +1144,7 @@ function updatePins() {
     pv.copy(p.pos); pv.y *= world.scale.y;
     const d = pv.distanceTo(camera.position);
     pv.project(camera);
-    const vis = showPins && pv.z < 1 && Math.abs(pv.x) < 1.05 && Math.abs(pv.y) < 1.05 && (p.big ? d < 60000 : d < 3500);
+    const vis = showPins && pv.z < 1 && Math.abs(pv.x) < 1.05 && Math.abs(pv.y) < 1.05 && (p.lotEdge ? d < 600 : p.big ? d < 60000 : d < 3500);
     p.el.style.display = vis ? '' : 'none';
     if (vis) { p.el.style.left = ((pv.x + 1) / 2) * innerWidth + 'px'; p.el.style.top = ((1 - pv.y) / 2) * innerHeight + 'px'; }
   }
@@ -1269,6 +1274,41 @@ $('carBtn').onclick = () => { carPts.visible = !carPts.visible; boats.forEach((b
 $('veBtn').onclick = () => { world.scale.y = world.scale.y > 1 ? 1 : 2; $('veBtn').classList.toggle('active', world.scale.y > 1); };
 $('homeBtn').onclick = () => flyTo(HOME.target, HOME.cam);
 $('haBtn').onclick = () => flyTo(V3(HA[0], 0, HA[1]), V3(HA[0] + 900, 1100, HA[1] + 1900));
+// ---- Lô đất Hoàng Sa: tô đỏ, cột sáng, nhãn, bảng thông tin ----
+{
+  const ring = LOT.ring, g = new THREE.Group(); world.add(g);
+  let cx = 0, cz = 0; for (const [x, z] of ring) { cx += x; cz += z; } cx /= 4; cz /= 4;
+  const y0 = groundY(cx, cz);
+  const shape = new THREE.Shape(ring.map(([x, z]) => new THREE.Vector2(x, -z)));
+  const fill = new THREE.Mesh(new THREE.ShapeGeometry(shape), new THREE.MeshBasicMaterial({ color: 0xff3030, transparent: true, opacity: 0.45, depthWrite: false, side: THREE.DoubleSide }));
+  fill.rotation.x = -Math.PI / 2; fill.position.y = y0 + 0.6; g.add(fill);
+  const vol = new THREE.Mesh(new THREE.ExtrudeGeometry(shape, { depth: 6, bevelEnabled: false }), new THREE.MeshBasicMaterial({ color: 0xff3b30, transparent: true, opacity: 0.18, depthWrite: false }));
+  vol.rotation.x = -Math.PI / 2; vol.position.y = y0; g.add(vol);
+  const edge = new THREE.LineSegments(new THREE.EdgesGeometry(vol.geometry), new THREE.LineBasicMaterial({ color: 0xff2a2a })); edge.rotation.x = -Math.PI / 2; edge.position.y = y0; g.add(edge);
+  const beam = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 4, 220, 16, 1, true), new THREE.MeshBasicMaterial({ color: 0xff5a4a, transparent: true, opacity: 0.25, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending }));
+  beam.position.set(cx, y0 + 110, cz); g.add(beam);
+  // số đo cạnh theo trích lục (18,7 / 26,6 / 17,9 / 24,6 m)
+  const L = ['26,6 m', '18,7 m', '24,6 m', '17,9 m'];
+  ring.forEach(([x, z], i) => { const [x2, z2] = ring[(i + 1) % 4]; PLACES.push({ name: L[i], pos: V3((x + x2) / 2, y0 + 3, (z + z2) / 2), big: false, lotEdge: true }); });
+  const lotPos = V3(cx, y0 + 40, cz);
+  PLACES.push({ name: '📍 Lô đất 587 m² · Tờ 126 Thửa 30 · 4 mặt tiền', pos: lotPos, big: true, lot: true });
+  for (const p of PLACES) if ((p.lot || p.lotEdge) && !p.el) {
+    const el = document.createElement('div'); el.className = 'pin' + (p.big ? ' lotpin' : ' small'); el.innerHTML = '<b></b><span></span>';
+    el.querySelector('b').textContent = p.name; el.onclick = () => (p.lot ? $('lotBtn').click() : null); $('pins').appendChild(el); p.el = el;
+  }
+  casaAnim.push((t) => { beam.material.opacity = 0.18 + 0.1 * Math.sin(t * 2); fill.material.opacity = 0.35 + 0.15 * Math.sin(t * 2); });
+  const showLot = () => {
+    $('unitT').textContent = 'Lô đất Tờ 126 · Thửa 30 — Thọ Quang, Sơn Trà';
+    $('unitS').textContent = 'Góc đường Hoàng Sa × Hồ Học Lãm, đối diện bãi biển Mân Thái – vị trí theo ảnh Google Maps & bản đồ địa chính bạn gửi';
+    const tb = $('unitTb'); tb.textContent = '';
+    for (const [k, v] of [['Diện tích', '587 m² (theo bản đồ địa chính) · 583,6 m² (tin rao)'], ['Kích thước cạnh', '18,7 × 26,6 × 17,9 × 24,6 m · ngang 27,6 m'], ['Mặt tiền', '4 mặt tiền: Hoàng Sa (view biển), Hồ Học Lãm và 2 lối đi'], ['Mục đích sử dụng (QHSDĐ 2020)', 'Mã 119'], ['Quy hoạch xây dựng', 'Thuộc Tổng mặt bằng Khu vực phía Đông và bán đảo Sơn Trà'], ['Khoảng cách', '≈ 60 m ra bờ biển · ≈ 5 km tới cầu Rồng']]) {
+      const tr = tb.insertRow(); tr.insertCell().textContent = k; tr.insertCell().textContent = v;
+    }
+    $('unitPlans').textContent = ''; $('unit').hidden = false; setTour(false);
+  };
+  $('lotBtn').onclick = () => { flyTo(V3(cx, 0, cz), V3(cx + 140, 120, cz + 170)); setTimeout(showLot, 1800); };
+  LOT.vol = vol; LOT.show = showLot;
+}
 if (casaPos) { $('caBtn').hidden = false; $('caBtn').onclick = () => flyTo(casaPos.clone(), V3(casaPos.x + 420, 380, casaPos.z + 720)); }
 if (hvbPos) { $('hvbBtn').hidden = false; $('hvbBtn').onclick = () => { hvbGroup.visible = !hvbGroup.visible; $('hvbBtn').classList.toggle('active', hvbGroup.visible); if (hvbGroup.visible) flyTo(hvbPos.clone(), V3(hvbPos.x + 1200, 1500, hvbPos.z + 2600)); }; }
 
@@ -1328,6 +1368,7 @@ $('loading').style.opacity = 0; setTimeout(() => $('loading').remove(), 700);
   el.addEventListener('pointerdown', (e) => (down = [e.clientX, e.clientY]));
   el.addEventListener('pointerup', (e) => {
     if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return;
+    if (LOT.vol) { ray2.setFromCamera(new THREE.Vector2((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1), camera); if (ray2.intersectObject(LOT.vol).length) { LOT.show(); return; } }
     const U = casaGroup.userData; if (!U.phBody) return;
     ray2.setFromCamera(new THREE.Vector2((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1), camera);
     const hits = [[U.phBody, U.phLots], [U.btBody, U.btLots]].map(([b, L]) => { const h = b && ray2.intersectObject(b)[0]; return h && { d: h.distance, l: L[b === U.btBody ? Math.floor(h.instanceId / 3) : h.instanceId] }; }).filter(Boolean).sort((a, b) => a.d - b.d);
