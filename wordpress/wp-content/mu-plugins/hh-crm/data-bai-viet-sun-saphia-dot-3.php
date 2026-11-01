@@ -207,19 +207,21 @@ HTML
 	$posts[] = array(
 		'slug'     => 'vay-mua-sun-saphia-residence-tra-gop-hang-thang',
 		'title'    => 'Vay mua Sun Saphia Residence: trả góp mỗi tháng bao nhiêu với lãi suất 10 – 12%?',
-		'excerpt'  => 'Bảng tính trả góp khi vay 50 – 60% mua căn Sun Saphia Residence: studio 3 tỷ vay 1,5 tỷ trả khoảng 14,5 – 18,8 triệu/tháng (20 năm). Ngân hàng hỗ trợ: VietinBank, BIDV, NCB.',
+		'excerpt'  => 'Bảng tính trả góp khi vay 50 – 60% mua căn Sun Saphia Residence: studio 3 tỷ vay 1,5 tỷ trả khoảng 14,5 – 18,8 triệu/tháng (20 năm). Ngân hàng hỗ trợ: Vietcombank, BIDV, NCB.',
 		'keyword'  => 'vay mua Sun Saphia Residence',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'trả góp căn hộ Sun Saphia', 'lãi suất vay mua nhà 2026', 'vay mua căn hộ Đà Nẵng' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-02 08:00',
+		'rev'      => 2, // 01/11: ngân hàng hỗ trợ Vietcombank, BIDV, NCB.
+		'image_replace' => true, // Ảnh cũ ghi VietinBank.
 		'category' => 'Kinh nghiệm',
 		'tags'     => array( 'Sun Saphia Residence', 'Vay mua nhà' ),
 		'image'    => 'plugin:img/tin-tuc/vay-mua-sun-saphia-residence.jpg',
 		'content'  => <<<HTML
-<p>Theo tài liệu chủ đầu tư tháng 10/2026, <strong>Sun Saphia Residence</strong> có ngân hàng hỗ trợ cho vay là <strong>VietinBank, BIDV và NCB</strong>. Bài này tính thử số tiền trả mỗi tháng khi vay mua studio và căn 1PN, với mức lãi suất đang phổ biến trên thị trường.</p>
+<p>Theo tài liệu chủ đầu tư tháng 10/2026, <strong>Sun Saphia Residence</strong> có ngân hàng hỗ trợ cho vay là <strong>Vietcombank, BIDV và NCB</strong>. Bài này tính thử số tiền trả mỗi tháng khi vay mua studio và căn 1PN, với mức lãi suất đang phổ biến trên thị trường.</p>
 <!--hh-featured-->
 <h2>Lãi suất vay mua nhà đang ở mức nào?</h2>
-<p>Khảo sát của báo chí cuối tháng 9/2026 ghi lãi vay mua nhà tại BIDV khoảng 9,5 – 10,5%/năm và VietinBank khoảng 9 – 10,5%/năm trong thời gian ưu đãi; sau ưu đãi, lãi thả nổi thường cao hơn. Lãi suất áp dụng thực tế tùy gói vay, hồ sơ và chính sách hỗ trợ của chủ đầu tư khi mở bán – cần hỏi trực tiếp ngân hàng.</p>
+<p>Khảo sát của báo chí cuối tháng 9/2026 ghi lãi vay mua nhà tại BIDV khoảng 9,5 – 10,5%/năm và Vietcombank khoảng 9 – 10,5%/năm trong thời gian ưu đãi; sau ưu đãi, lãi thả nổi thường cao hơn. Lãi suất áp dụng thực tế tùy gói vay, hồ sơ và chính sách hỗ trợ của chủ đầu tư khi mở bán – cần hỏi trực tiếp ngân hàng.</p>
 <h2>Bảng tính trả góp (giả định)</h2>
 <p>Giá căn theo bài toán tham khảo của chủ đầu tư: studio 30 m² khoảng 3 tỷ, căn 1PN 50 m² khoảng 4,5 tỷ. Trả góp đều (gốc + lãi bằng nhau mỗi tháng):</p>
 <table>
@@ -250,14 +252,14 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Vay mua Sun Saphia Residence: trả góp mỗi tháng',
-			'desc'      => 'Vay mua Sun Saphia Residence: studio 3 tỷ vay 1,5 tỷ trả khoảng 14,5 – 18,8 triệu/tháng (20 năm, lãi 10 – 12%). Ngân hàng hỗ trợ VietinBank, BIDV, NCB.',
+			'desc'      => 'Vay mua Sun Saphia Residence: studio 3 tỷ vay 1,5 tỷ trả khoảng 14,5 – 18,8 triệu/tháng (20 năm, lãi 10 – 12%). Ngân hàng hỗ trợ Vietcombank, BIDV, NCB.',
 			'points'    => array(
-				'Ngân hàng hỗ trợ: VietinBank, BIDV, NCB (tài liệu chủ đầu tư 10/2026)',
+				'Ngân hàng hỗ trợ: Vietcombank, BIDV, NCB (tài liệu chủ đầu tư 10/2026)',
 				'Studio vay 1,5 tỷ, 20 năm: khoảng 14,5 – 16,5 triệu/tháng',
 				'Lãi vay mua nhà cuối 9/2026 khoảng 9 – 10,5%/năm thời gian ưu đãi',
 			),
 			'faq'       => array(
-				array( 'Ngân hàng nào cho vay mua Sun Saphia Residence?', 'Tài liệu chủ đầu tư tháng 10/2026 ghi ngân hàng hỗ trợ là VietinBank, BIDV và NCB.' ),
+				array( 'Ngân hàng nào cho vay mua Sun Saphia Residence?', 'Tài liệu chủ đầu tư tháng 10/2026 ghi ngân hàng hỗ trợ là Vietcombank, BIDV và NCB.' ),
 				array( 'Vay 1,5 tỷ mua căn hộ trả mỗi tháng bao nhiêu?', 'Trả góp đều 20 năm: khoảng 14,5 triệu/tháng với lãi 10%/năm, khoảng 16,5 triệu/tháng với lãi 12%/năm.' ),
 			),
 		),

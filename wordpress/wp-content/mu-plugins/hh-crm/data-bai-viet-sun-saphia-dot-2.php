@@ -232,11 +232,13 @@ HTML
 		'keywords_extra' => array( 'Sun Saphia Residence', 'Sun Saphia sở hữu 50 năm', 'Sun Saphia sổ hồng', 'pháp lý căn hộ Sun Group Đà Nẵng' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-25 15:00',
+		'rev'      => 2, // 01/11: ngân hàng hỗ trợ Vietcombank, BIDV, NCB.
+		'image_replace' => true, // Ảnh cũ ghi VietinBank.
 		'category' => 'Kinh nghiệm',
 		'tags'     => array( 'Sun Saphia Residence', 'Pháp lý bất động sản' ),
 		'image'    => 'plugin:img/tin-tuc/phap-ly-sun-saphia-residence.jpg',
 		'content'  => <<<HTML
-<p><strong>Pháp lý Sun Saphia Residence</strong> đã rõ hơn: tài liệu giới thiệu dự án của chủ đầu tư (10/2026) ghi <strong>thời hạn dự án 50 năm kể từ ngày 17/09/2026</strong>, công trình <strong>cấp I, niên hạn sử dụng 100 năm</strong>; ngân hàng hỗ trợ gồm VietinBank, BIDV, NCB. Bài giải thích ý nghĩa của thời hạn này và các giấy tờ cần hỏi khi mua {$saphia}.</p>
+<p><strong>Pháp lý Sun Saphia Residence</strong> đã rõ hơn: tài liệu giới thiệu dự án của chủ đầu tư (10/2026) ghi <strong>thời hạn dự án 50 năm kể từ ngày 17/09/2026</strong>, công trình <strong>cấp I, niên hạn sử dụng 100 năm</strong>; ngân hàng hỗ trợ gồm Vietcombank, BIDV, NCB. Bài giải thích ý nghĩa của thời hạn này và các giấy tờ cần hỏi khi mua {$saphia}.</p>
 <!--hh-featured-->
 <h2>Thời hạn 50 năm của Sun Saphia nghĩa là gì?</h2>
 <ul>
@@ -280,7 +282,7 @@ HTML
 			),
 			'faq'       => array(
 				array( 'Sun Saphia Residence sở hữu bao lâu?', 'Theo tài liệu chủ đầu tư, thời hạn dự án 50 năm kể từ ngày 17/09/2026; công trình cấp I có niên hạn sử dụng 100 năm. Người mua đối chiếu thời hạn ghi trong hợp đồng mua bán.' ),
-				array( 'Sun Saphia Residence có sổ hồng không?', 'Căn hộ có thời hạn vẫn được cấp giấy chứng nhận, ghi thời hạn theo thời hạn dự án (50 năm từ 17/09/2026). Ngân hàng hỗ trợ: VietinBank, BIDV, NCB.' ),
+				array( 'Sun Saphia Residence có sổ hồng không?', 'Căn hộ có thời hạn vẫn được cấp giấy chứng nhận, ghi thời hạn theo thời hạn dự án (50 năm từ 17/09/2026). Ngân hàng hỗ trợ: Vietcombank, BIDV, NCB.' ),
 			),
 		),
 		'sources'  => array(),
@@ -295,6 +297,7 @@ HTML
 		'keywords_extra' => array( 'Sun Saphia Residence', 'Sun Saphia cho thuê', 'lợi nhuận căn hộ Sun Saphia', 'đầu tư căn hộ biển Đà Nẵng' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-26 15:00',
+		'rev'      => 2, // 01/11: ngân hàng hỗ trợ Vietcombank, BIDV, NCB.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Sun Saphia Residence', 'Đầu tư cho thuê' ),
 		'image'    => 'plugin:img/tin-tuc/dau-tu-sun-saphia-residence.jpg',
@@ -318,7 +321,7 @@ HTML
 </table>
 <p>Bài toán của chủ đầu tư giả định cho thuê ngắn ngày 2,5 triệu/đêm, lấp đầy 60% (doanh thu khoảng 540 triệu/năm), lợi nhuận 65% doanh thu. Nếu lấp đầy chỉ 45% và lợi nhuận còn 55% (mùa mưa, cạnh tranh giá), lợi nhuận còn khoảng 226 triệu/năm – lợi suất khoảng 7,5%. Khách sạn, căn hộ view biển lân cận đang cho thuê studio khoảng 2,2 – 2,9 triệu/đêm ngoài mùa cao điểm.</p>
 <h2>Nếu vay ngân hàng</h2>
-<p>Vay 50% (1,5 tỷ), giả định lãi suất sau ưu đãi 10%/năm thì tiền lãi khoảng 150 triệu/năm – cao hơn lợi nhuận ở 3 kịch bản thận trọng, thấp hơn bài toán của chủ đầu tư. Nghĩa là dòng tiền chỉ đủ trả lãi khi cho thuê ngắn ngày hiệu quả; nếu chỉ cho thuê theo tháng, lợi nhuận phải đến từ tăng giá hoặc chính sách hỗ trợ lãi suất. Ngân hàng hỗ trợ dự án: VietinBank, BIDV, NCB.</p>
+<p>Vay 50% (1,5 tỷ), giả định lãi suất sau ưu đãi 10%/năm thì tiền lãi khoảng 150 triệu/năm – cao hơn lợi nhuận ở 3 kịch bản thận trọng, thấp hơn bài toán của chủ đầu tư. Nghĩa là dòng tiền chỉ đủ trả lãi khi cho thuê ngắn ngày hiệu quả; nếu chỉ cho thuê theo tháng, lợi nhuận phải đến từ tăng giá hoặc chính sách hỗ trợ lãi suất. Ngân hàng hỗ trợ dự án: Vietcombank, BIDV, NCB.</p>
 <h2>Rủi ro riêng của dự án nhiều studio</h2>
 <ul>
 <li>Nhiều căn cùng loại cùng cho thuê → cạnh tranh giá, nhất là mùa thấp điểm (tháng 9 – 12).</li>
@@ -345,7 +348,7 @@ HTML
 			),
 			'faq'       => array(
 				array( 'Mua studio Sun Saphia Residence cho thuê lãi bao nhiêu?', 'Bài toán của chủ đầu tư: studio 30 m² giá tham khảo 3 tỷ, 2,5 triệu/đêm, lấp đầy 60% cho lợi nhuận khoảng 351 triệu/năm (11,7%); kịch bản thận trọng 3,5 – 5,5% tương đương 105 – 165 triệu/năm.' ),
-				array( 'Có nên vay để mua Sun Saphia Residence cho thuê?', 'Vay 50% căn 3 tỷ với lãi 10%/năm tốn khoảng 150 triệu/năm; chỉ đủ trả khi cho thuê ngắn ngày hiệu quả. Ngân hàng hỗ trợ dự án: VietinBank, BIDV, NCB.' ),
+				array( 'Có nên vay để mua Sun Saphia Residence cho thuê?', 'Vay 50% căn 3 tỷ với lãi 10%/năm tốn khoảng 150 triệu/năm; chỉ đủ trả khi cho thuê ngắn ngày hiệu quả. Ngân hàng hỗ trợ dự án: Vietcombank, BIDV, NCB.' ),
 			),
 		),
 		'sources'  => array(),

@@ -44,7 +44,7 @@ function hh_posts_sun_saphia_dot_4( $posts ) {
 <h2>Giữ chỗ khác đặt cọc</h2>
 <p>Khoản giữ chỗ (booking) hiện nay chỉ là thỏa thuận ưu tiên chọn căn, chưa phải tiền cọc theo luật. Trước khi chuyển tiền, nên yêu cầu ghi rõ: số tiền, thời hạn, trường hợp được hoàn lại và hoàn trong bao lâu. Chi tiết ở bài <a href="/giu-cho-booking-can-ho-moi-da-nang-can-biet/">giữ chỗ căn hộ mới cần biết</a>.</p>
 <h2>Bảo lãnh ngân hàng – lớp bảo vệ người mua</h2>
-<p>Với nhà ở hình thành trong tương lai, chủ đầu tư phải có ngân hàng bảo lãnh nghĩa vụ tài chính: nếu không bàn giao đúng cam kết, người mua có cơ sở yêu cầu ngân hàng hoàn tiền đã trả. Khi ký hợp đồng mua bán, nên xin <strong>thư bảo lãnh cho đúng căn của mình</strong> và giữ bản gốc. Ngân hàng hỗ trợ cho vay dự án theo tài liệu chủ đầu tư: VietinBank, BIDV, NCB.</p>
+<p>Với nhà ở hình thành trong tương lai, chủ đầu tư phải có ngân hàng bảo lãnh nghĩa vụ tài chính: nếu không bàn giao đúng cam kết, người mua có cơ sở yêu cầu ngân hàng hoàn tiền đã trả. Khi ký hợp đồng mua bán, nên xin <strong>thư bảo lãnh cho đúng căn của mình</strong> và giữ bản gốc. Ngân hàng hỗ trợ cho vay dự án theo tài liệu chủ đầu tư: Vietcombank, BIDV, NCB.</p>
 <h2>Áp vào Sun Saphia: tự tính trước</h2>
 <p>Ví dụ minh hoạ với studio tầng 15 dãy mặt biển giá dự kiến 2,85 tỷ (giá có vay, chưa VAT, chưa kinh phí bảo trì – <a href="/gia-sun-saphia-residence-bao-nhieu/">xem giá dự kiến</a>):</p>
 <ul>
@@ -87,6 +87,8 @@ HTML
 		'keywords_extra' => array( 'Sun Saphia Residence', 'mở bán Sun Saphia', 'Sun Saphia 28/11', 'chọn căn Sun Saphia' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-07 08:00',
+		'rev'      => 2, // 01/11: ngân hàng hỗ trợ Vietcombank, BIDV, NCB.
+		'image_replace' => true, // Ảnh cũ ghi VietinBank.
 		'category' => 'Kinh nghiệm',
 		'tags'     => array( 'Sun Saphia Residence', 'Kinh nghiệm mua nhà' ),
 		'image'    => 'plugin:img/tin-tuc/su-kien-ban-hang-sun-saphia-residence.jpg',
@@ -98,7 +100,7 @@ HTML
 <h2>2. Tính tổng tiền, không chỉ giá căn</h2>
 <p>Giá dự kiến studio tầng 15 từ 2,13 đến 2,85 tỷ là giá có vay, <strong>chưa gồm VAT và 2% kinh phí bảo trì</strong> (<a href="/gia-sun-saphia-residence-bao-nhieu/">chi tiết giá</a>). Cộng thêm lệ phí trước bạ, nội thất – xem <a href="/chi-phi-mua-can-ho-sun-saphia-residence-ngoai-gia-ban/">chi phí ngoài giá bán</a>.</p>
 <h2>3. Chốt phương án tiền: tự có hay vay</h2>
-<p>Nếu vay, nên hỏi trước ngân hàng hỗ trợ dự án (VietinBank, BIDV, NCB theo tài liệu chủ đầu tư) về hạn mức và hồ sơ thu nhập. Chính sách dự án có hỗ trợ lãi suất tới 24 tháng – tính thử ở bài <a href="/vay-mua-sun-saphia-residence-tra-gop-hang-thang/">vay mua Sun Saphia trả góp</a>.</p>
+<p>Nếu vay, nên hỏi trước ngân hàng hỗ trợ dự án (Vietcombank, BIDV, NCB theo tài liệu chủ đầu tư) về hạn mức và hồ sơ thu nhập. Chính sách dự án có hỗ trợ lãi suất tới 24 tháng – tính thử ở bài <a href="/vay-mua-sun-saphia-residence-tra-gop-hang-thang/">vay mua Sun Saphia trả góp</a>.</p>
 <h2>4. Mang đủ giấy tờ cá nhân</h2>
 <p>Căn cước công dân của người đứng tên (và vợ/chồng nếu tài sản chung), thông tin tài khoản để chuyển tiền. Ở xa không đến được, hỏi trước cách ký và chuyển tiền từ xa – xem <a href="/mua-can-ho-da-nang-tu-ha-noi-tp-hcm-kinh-nghiem/">mua căn hộ Đà Nẵng từ xa</a>.</p>
 <h2>5. Chuẩn bị câu hỏi về giá và chính sách</h2>

@@ -132,18 +132,18 @@ add_filter(
 			'hh_p_handover_std'  => 'Hoàn thiện cơ bản',
 			'hh_p_ownership'     => 'Thời hạn 50 năm kể từ 17/09/2026 (thời hạn dự án); công trình cấp I, niên hạn sử dụng 100 năm',
 			'hh_p_legal'         => 'Thời hạn dự án 50 năm kể từ ngày 17/09/2026; công trình cấp I, niên hạn sử dụng 100 năm (theo tài liệu chủ đầu tư 10/2026)',
-			'hh_p_loan_bank'     => 'VietinBank, BIDV, NCB',
+			'hh_p_loan_bank'     => 'Vietcombank, BIDV, NCB',
 			'hh_p_price_expected' => '2130', // Giá dự kiến studio tầng 15 (28/10/2026) – trợ lý chat dùng, trang vẫn ghi Liên hệ.
 			'hh_p_price_hint'    => 'Studio 30 m² tầng 15 giá dự kiến 2,13 tỷ (dãy phía sau), 2,37 tỷ (cánh bên), 2,85 tỷ (dãy mặt biển) – giá có vay, chưa VAT và 2% bảo trì; sự kiện bán hàng dự kiến 28/11/2026, bảng giá chính thức công bố khi mở bán',
 			'hh_p_design_desc'   => 'Mặt bằng tầng điển hình 3A – 28 có 28 căn/sàn: 19 studio (thông thủy 30 – 31 m², căn góc 40 m²), 4 căn 1PN+ (49 – 51 m²) và 5 căn 2PN (60 – 70 m²). Dãy căn phía Đông hướng biển Mỹ Khê – Sơn Thủy; căn 2PN nằm ở các góc tòa. Studio mặt tiền 3,8 m, sâu 9 m; căn 1PN+ có thêm phòng đa năng. Kiến trúc lấy cảm hứng từ điêu khắc Chăm Pa và hình tượng vũ nữ Apsara.',
-			'hh_p_highlights'    => "Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng (theo chủ đầu tư)\nTòa 30 tầng cao 114 m, 782 căn, chiều cao tầng căn hộ 3,5 m\nĐối diện công viên bãi tắm ven biển khoảng 2,45 ha thành phố đang đầu tư\nKhoảng 500 m tới ga LRT 09 tuyến đường sắt đô thị sân bay – biển\nTầm nhìn biển Mỹ Khê, Ngũ Hành Sơn, sông và đô thị\nThời hạn 50 năm từ 17/09/2026, ngân hàng hỗ trợ VietinBank, BIDV, NCB",
+			'hh_p_highlights'    => "Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng (theo chủ đầu tư)\nTòa 30 tầng cao 114 m, 782 căn, chiều cao tầng căn hộ 3,5 m\nĐối diện công viên bãi tắm ven biển khoảng 2,45 ha thành phố đang đầu tư\nKhoảng 500 m tới ga LRT 09 tuyến đường sắt đô thị sân bay – biển\nTầm nhìn biển Mỹ Khê, Ngũ Hành Sơn, sông và đô thị\nThời hạn 50 năm từ 17/09/2026, ngân hàng hỗ trợ Vietcombank, BIDV, NCB",
 			'hh_p_location_desc' => 'Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu bãi tắm Sơn Thủy – đoạn biển giữa Mỹ Khê và Non Nước. Phía trước là công viên công cộng khoảng 2,45 ha trên phần đất thu hồi từ dự án Hòn Ngọc Á Châu; khoảng 500 m tới ga LRT 09.',
 			'hh_p_connections'   => "Đối diện | Công viên bãi tắm ven biển\nKhoảng 500 m | Ga LRT 09 (đường sắt đô thị, dự kiến)\nKhoảng 4 km | Sun Galaxy, Đà Nẵng Downtown\nGần | Danh thắng Ngũ Hành Sơn, Sun Riverpolis",
 			'hh_p_amenities_in'  => "Bể bơi view biển, yoga\nGym, pilates\nKhối đế thương mại\n2 tầng hầm đỗ xe",
 			'hh_p_amenities_out' => "Chuỗi 3 công viên bãi tắm: Sơn Thủy, công viên đối diện dự án, công viên bãi tắm Huyền Trân Công Chúa\nThể thao biển: kayak, SUP, dù lượn, jetski\nDanh thắng Ngũ Hành Sơn\nResort ven biển, sân golf; trường học, siêu thị, bệnh viện",
 			'hh_p_rental'        => 'Bài toán tham khảo của chủ đầu tư (cho thuê ngắn ngày): studio 30 m² giá tham khảo 3 tỷ, 2,5 triệu/đêm, lấp đầy 60% → lợi nhuận khoảng 351 triệu/năm (11,7%); 1PN 50 m² giá tham khảo 4,5 tỷ, 3,5 triệu/đêm → khoảng 492 triệu/năm (10,9%). Đây là giả định của tài liệu bán hàng, không phải cam kết.',
 			'hh_p_image_links'   => implode( "\n", array_merge( $lines, $add_lines ) ),
-			'hh_p_faq'           => "Sun Saphia Residence ở đâu? | Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu bãi tắm Sơn Thủy, phường Ngũ Hành Sơn, Đà Nẵng – đối diện công viên bãi tắm khoảng 2,45 ha.\nSun Saphia Residence có bao nhiêu căn? | 782 căn trong tòa 30 tầng cao 114 m; theo tài liệu 10/2026: 513 studio 30 – 31 m², 108 căn 1PN+ khoảng 50 m², 133 căn 2PN 60 – 70 m².\nSun Saphia Residence sở hữu bao lâu? | Thời hạn dự án 50 năm kể từ ngày 17/09/2026; công trình cấp I, niên hạn sử dụng 100 năm.\nSun Saphia Residence bao giờ bàn giao? | Dự kiến tháng 11/2028, tiêu chuẩn hoàn thiện cơ bản.\nGiá Sun Saphia Residence bao nhiêu? | Giá dự kiến studio 30 m² tầng 15: 2,13 tỷ (dãy phía sau), 2,37 tỷ (cánh bên), 2,85 tỷ (dãy mặt biển) – giá có vay, chưa VAT và 2% bảo trì. Bảng giá chính thức công bố tại sự kiện bán hàng dự kiến 28/11/2026.\nNgân hàng nào hỗ trợ vay mua Sun Saphia Residence? | VietinBank, BIDV và NCB theo tài liệu giới thiệu dự án.",
+			'hh_p_faq'           => "Sun Saphia Residence ở đâu? | Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu bãi tắm Sơn Thủy, phường Ngũ Hành Sơn, Đà Nẵng – đối diện công viên bãi tắm khoảng 2,45 ha.\nSun Saphia Residence có bao nhiêu căn? | 782 căn trong tòa 30 tầng cao 114 m; theo tài liệu 10/2026: 513 studio 30 – 31 m², 108 căn 1PN+ khoảng 50 m², 133 căn 2PN 60 – 70 m².\nSun Saphia Residence sở hữu bao lâu? | Thời hạn dự án 50 năm kể từ ngày 17/09/2026; công trình cấp I, niên hạn sử dụng 100 năm.\nSun Saphia Residence bao giờ bàn giao? | Dự kiến tháng 11/2028, tiêu chuẩn hoàn thiện cơ bản.\nGiá Sun Saphia Residence bao nhiêu? | Giá dự kiến studio 30 m² tầng 15: 2,13 tỷ (dãy phía sau), 2,37 tỷ (cánh bên), 2,85 tỷ (dãy mặt biển) – giá có vay, chưa VAT và 2% bảo trì. Bảng giá chính thức công bố tại sự kiện bán hàng dự kiến 28/11/2026.\nNgân hàng nào hỗ trợ vay mua Sun Saphia Residence? | Vietcombank, BIDV và NCB theo tài liệu giới thiệu dự án.",
 		);
 		$p['fix_meta'] = (array) ( $p['fix_meta'] ?? array() );
 		foreach ( $new_meta as $k => $v ) {
@@ -152,8 +152,16 @@ add_filter(
 			}
 			$p['meta'][ $k ] = $v;
 		}
+		// 01/11/2026: ngân hàng hỗ trợ là Vietcombank (bản 23/10 ghi nhầm VietinBank) – các ô web tự đặt được phép thay.
+		$vtb = static fn( $x ) => str_replace( array( 'Vietcombank, BIDV, NCB', 'Vietcombank, BIDV và NCB' ), array( 'VietinBank, BIDV, NCB', 'VietinBank, BIDV và NCB' ), $x );
+		foreach ( array( 'hh_p_loan_bank', 'hh_p_highlights', 'hh_p_faq' ) as $k ) {
+			$p['fix_meta'][ $k ]   = (array) ( $p['fix_meta'][ $k ] ?? array() );
+			$p['fix_meta'][ $k ][] = $vtb( $new_meta[ $k ] );
+		}
+		$faq_vtb = $vtb( $new_meta['hh_p_faq'] );
 		// 01/11/2026: câu hỏi đáp về giá đổi sang giá dự kiến – bản 23/10 (web tự đặt) được phép thay.
 		$p['fix_meta']['hh_p_faq'][] = str_replace( 'Giá Sun Saphia Residence bao nhiêu? | Giá dự kiến studio 30 m² tầng 15: 2,13 tỷ (dãy phía sau), 2,37 tỷ (cánh bên), 2,85 tỷ (dãy mặt biển) – giá có vay, chưa VAT và 2% bảo trì. Bảng giá chính thức công bố tại sự kiện bán hàng dự kiến 28/11/2026.', 'Giá Sun Saphia Residence bao nhiêu? | Chưa có bảng giá chính thức; bài toán cho thuê trong tài liệu chủ đầu tư dùng giá tham khảo studio 30 m² khoảng 3 tỷ, căn 1PN 50 m² khoảng 4,5 tỷ.', $new_meta['hh_p_faq'] );
+		$p['fix_meta']['hh_p_faq'][] = $vtb( str_replace( 'Giá Sun Saphia Residence bao nhiêu? | Giá dự kiến studio 30 m² tầng 15: 2,13 tỷ (dãy phía sau), 2,37 tỷ (cánh bên), 2,85 tỷ (dãy mặt biển) – giá có vay, chưa VAT và 2% bảo trì. Bảng giá chính thức công bố tại sự kiện bán hàng dự kiến 28/11/2026.', 'Giá Sun Saphia Residence bao nhiêu? | Chưa có bảng giá chính thức; bài toán cho thuê trong tài liệu chủ đầu tư dùng giá tham khảo studio 30 m² khoảng 3 tỷ, căn 1PN 50 m² khoảng 4,5 tỷ.', $new_meta['hh_p_faq'] ) );
 		$p['fix_content'] = array( $p['content'] );
 		$p['fix_excerpt'] = $p['excerpt'];
 		$p['excerpt']     = 'Sun Saphia Residence – căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: tòa 30 tầng (114 m) giao lộ Võ Nguyên Giáp – Trường Sa, 782 căn studio, 1PN+, 2PN, thời hạn 50 năm, đối diện công viên bãi tắm Sơn Thủy, bàn giao 11/2028.';
@@ -171,7 +179,7 @@ add_filter(
 <tr><th>Loại căn</th><td>Studio 30 – 31 m² (513 căn), 1PN+ 49 – 51 m² (108 căn), 2PN 60 – 70 m² (133 căn)</td></tr>
 <tr><th>Pháp lý</th><td>Thời hạn dự án 50 năm kể từ 17/09/2026; công trình cấp I, niên hạn sử dụng 100 năm</td></tr>
 <tr><th>Bàn giao</th><td>Dự kiến tháng 11/2028, hoàn thiện cơ bản</td></tr>
-<tr><th>Ngân hàng hỗ trợ</th><td>VietinBank, BIDV, NCB</td></tr>
+<tr><th>Ngân hàng hỗ trợ</th><td>Vietcombank, BIDV, NCB</td></tr>
 <tr><th>Giá</th><td>Chưa có bảng giá chính thức – liên hệ để nhận khi mở bán</td></tr>
 </tbody>
 </table>
@@ -231,6 +239,7 @@ add_filter(
 <li><strong>Nhà đầu tư cho thuê</strong>: studio tầng cao hướng biển; cân nhắc yếu tố thời hạn 50 năm khi tính giá bán lại.</li>
 </ul>
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> để nhận mặt bằng tầng, bảng giá và chính sách Sun Saphia Residence ngay khi mở bán, hoặc gửi yêu cầu tại <a href="/lien-he/">trang liên hệ</a>.</p>';
+		$p['fix_content'][] = $vtb( $p['content'] ); // Bản 23/10 ghi VietinBank.
 		unset( $p );
 		return $projects;
 	},
