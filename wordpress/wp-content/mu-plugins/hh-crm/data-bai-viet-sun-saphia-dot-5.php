@@ -22,6 +22,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 		'keywords_extra' => array( 'Sun Saphia Residence', 'Sun Saphia Đà Nẵng', 'view Sun Saphia Residence', 'giá Sun Saphia Residence', 'Sun Saphia cho thuê' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-01 15:00',
+		'rev'      => 2, // 01/11: thống nhất mốc bàn giao dự kiến 11/2028.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Sun Saphia Residence', 'Căn hộ biển Đà Nẵng', 'Đánh giá dự án' ),
 		'image'    => 'plugin:img/tin-tuc/review-sun-saphia-residence.jpg',
@@ -39,7 +40,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 <tr><th>Pháp lý</th><td>Giấy chứng nhận đăng ký đầu tư cấp lần đầu 17/09/2026; thời hạn dự án 50 năm; công trình cấp I, niên hạn 100 năm</td></tr>
 <tr><th>Giá dự kiến</th><td>Studio tầng 15: 2,13 – 2,85 tỷ (giá có vay, chưa VAT, chưa 2% bảo trì)</td></tr>
 <tr><th>Sự kiện bán hàng</th><td>Dự kiến 28/11/2026</td></tr>
-<tr><th>Bàn giao</th><td>Dự kiến 11/2028, hoàn thiện cơ bản (tài liệu kick-off ghi cuối 2028 – đầu 2029)</td></tr>
+<tr><th>Bàn giao</th><td>Dự kiến tháng 11/2028, hoàn thiện cơ bản</td></tr>
 </tbody>
 </table>
 
@@ -122,7 +123,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 <tr><td>Cơ sở</td><td>1,2 tr · 50%</td><td>2,75 tr · 80%</td><td>Khoảng 328 triệu</td><td>15,4%</td><td>11,5%</td></tr>
 </tbody>
 </table>
-<p><strong>Trừ khấu hao cho căn có thời hạn</strong>: căn 50 năm, bàn giao khoảng cuối 2028 thì thời gian khai thác còn khoảng 47 năm. Chia đều giá mua cho 47 năm, mỗi năm "hao" khoảng 2,1% – lợi suất sau khấu hao ở kịch bản thận trọng còn khoảng 7 – 10%.</p>
+<p><strong>Trừ khấu hao cho căn có thời hạn</strong>: căn 50 năm, bàn giao dự kiến tháng 11/2028 thì thời gian khai thác còn khoảng 47 năm. Chia đều giá mua cho 47 năm, mỗi năm "hao" khoảng 2,1% – lợi suất sau khấu hao ở kịch bản thận trọng còn khoảng 7 – 10%.</p>
 <p><strong>Chưa trừ</strong>: VAT trên giá mua, thuế cho thuê (khi doanh thu trên 100 triệu/năm), phí quản lý, nội thất, lãi vay. Để đối chiếu, lợi suất cho thuê căn hộ Đà Nẵng nói chung khoảng 4,5%/năm (Batdongsan.com.vn, quý 3/2026) – bài toán cho thuê theo đêm chỉ đạt khi vận hành tốt. Xem kịch bản thận trọng hơn ở bài <a href="/dau-tu-sun-saphia-residence-cho-thue-dong-tien/">đầu tư Sun Saphia cho thuê</a>.</p>
 <p><strong>Kênh bán phòng ảnh hưởng thẳng tới lợi nhuận</strong>: hoa hồng Booking.com khoảng 15 – 18%, Agoda 12 – 20%, Airbnb 3% nếu chia phí với khách; tham gia mọi chương trình khuyến mãi có thể đẩy chi phí lên 25 – 30%. Khi chủ đầu tư công bố đơn vị vận hành, nên hỏi rõ: phí bao nhiêu, bán qua kênh nào, báo cáo doanh thu ra sao.</p>
 
