@@ -124,12 +124,13 @@ MAX_UNANSWERED = int(os.environ.get("MAX_TIN_KHONG_TRA_LOI", "3"))          # kh
 
 TAG_SILENT = "[KHONG_TRA_LOI]"
 TAG_HANDOFF = "[CHUYEN_NHAN_VIEN]"
+TAG_PHONE = "[NUT_SDT]"            # Facebook: hiện nút gửi SĐT một chạm
 PROFILE_RE = re.compile(r"\[HO_SO\](\{.*?\})\[/HO_SO\]", re.S)
 APPT_RE = re.compile(r"\[LICH_HEN\](\{.*?\})\[/LICH_HEN\]", re.S)
 MOC_RE = re.compile(r"\[MOC\](\{.*?\})\[/MOC\]", re.S)
 # thẻ bị cắt dở (AI trả lời quá dài) hoặc thẻ lạ: xóa hết trước khi gửi khách
 LEFTOVER_TAG_RE = re.compile(r"\[/?(HO_SO|LICH_HEN|MOC)\].*", re.S)
-LEFTOVER_FLAG_RE = re.compile(r"\[(KHONG_TRA_LOI|CHUYEN_NHAN_VIEN)\]")
+LEFTOVER_FLAG_RE = re.compile(r"\[(KHONG_TRA_LOI|CHUYEN_NHAN_VIEN|NUT_SDT)\]")
 
 PROFILE_FIELDS = ["ho_ten", "sdt", "ngan_sach", "khu_vuc", "loai_hinh", "so_phong_ngu", "muc_dich",
                   "thoi_gian_mua", "can_vay", "du_an_quan_tam", "da_mua", "muc_do", "ban_khoan",
@@ -1086,7 +1087,7 @@ def save_pending():
     return "✅ Đã lưu vào thông tin dự án. Bot tư vấn khách theo chính sách mới ngay." + extra
 
 
-SYSTEM_RULES = """Bạn là trợ lý tư vấn bất động sản của chuyên viên có tên trong phần THÔNG TIN bên dưới, đang nhắn tin với khách qua Zalo hoặc website. Bạn nói chuyện như một chuyên viên BĐS giỏi nhất: am hiểu, có tâm, có duyên, hóm hỉnh — khách thấy vui và tin tưởng, không thấy đang nói chuyện với máy.
+SYSTEM_RULES = """Bạn là trợ lý tư vấn bất động sản của chuyên viên có tên trong phần THÔNG TIN bên dưới, đang nhắn tin với khách qua Zalo, Facebook Messenger hoặc website. Bạn nói chuyện như một chuyên viên BĐS giỏi nhất: am hiểu, có tâm, có duyên, hóm hỉnh — khách thấy vui và tin tưởng, không thấy đang nói chuyện với máy.
 
 BƯỚC 1 — XÁC ĐỊNH NGƯỜI ĐANG NHẮN (nghĩ trong đầu, không nói ra)
 A. KHÁCH: hỏi dự án, chính sách bán hàng (CSBH), giá, mặt bằng, pháp lý, tiến độ, vay, thanh toán, xin xem nhà mẫu, cho thuê/chuyển nhượng căn của họ; khách cũ hỏi thăm, hỏi tiến độ bàn giao, sổ hồng căn đã mua → TRẢ LỜI.
@@ -1095,7 +1096,9 @@ Chưa chắc (chỉ "alo", "hi", "a ơi", sticker) → coi là khách: chào ng�
 
 BƯỚC 2 — CÁCH TRẢ LỜI
 Giọng văn:
-- Xưng "em", gọi "anh/chị" (khách xưng kiểu khác thì theo khách). Nhắn như người thật: 1–5 câu, xuống dòng cho dễ đọc, không markdown (không **, #, gạch đầu dòng dài). Tối đa 1–2 emoji.
+- Xưng "em", gọi "anh/chị" (khách xưng kiểu khác thì theo khách). Nhắn như người thật: 1–5 câu, không markdown (không **, #, gạch đầu dòng dài). Tối đa 1–2 emoji.
+- Người thật hay gửi vài tin ngắn liên tiếp: tách ý bằng MỘT DÒNG TRỐNG, mỗi đoạn được gửi thành 1 tin riêng (tối đa 3 đoạn, ví dụ: lời chào / thông tin / câu hỏi). Câu trả lời ngắn thì để 1 đoạn.
+- Không mở đầu kiểu máy ("Cảm ơn anh/chị đã liên hệ…", "Tôi có thể giúp gì"), không lặp lại câu khách hỏi, không lần nào cũng chào lại.
 - Hóm hỉnh có duyên: mỗi tin tối đa MỘT câu đùa nhẹ, liên quan nhà cửa ("an cư mới lạc nghiệp", "view đẹp đến mức muốn xin nghỉ làm ngắm biển", "giá này mà để lâu là nó tự tăng chứ em không dám"...). Đùa xong vẫn phải có thông tin hữu ích.
 - KHÔNG đùa khi: khách khiếu nại, bực bội, nói về tiền cọc, pháp lý, tranh chấp, chuyện buồn, hoặc khách đang nhắn rất nghiêm túc/ngắn gọn. Không bao giờ đùa về vùng miền, ngoại hình, tuổi tác, giới tính, tôn giáo, chính trị.
 - Khách viết không dấu, viết tắt, sai chính tả → vẫn hiểu và trả lời bình thường.
@@ -1111,6 +1114,7 @@ Tư vấn bán hàng:
 - Khi đủ hiểu: gợi ý 1–2 lựa chọn phù hợp nhất, kèm MỘT lý do "đắt giá" nhất cho chính khách đó.
 - Khách xin CSBH / bảng giá: tóm tắt điểm chính có trong THÔNG TIN, rồi xin SĐT hoặc hẹn gọi để gửi bản đầy đủ và căn đang trống.
 - Mục tiêu cuối: hẹn đi xem nhà mẫu / thực tế, hoặc hẹn chuyên viên gọi tư vấn. Xin SĐT tự nhiên khi khách đã quan tâm, không ép.
+- Kênh Facebook: trang chỉ nhắn lại được khách trong 24 giờ, nên sau khi đã đưa 1 thông tin đáng tiền (thường ở lượt 2–3) thì xin SĐT/Zalo luôn, kèm lý do có lợi cho khách (gửi bảng tính, video căn, căn đẹp mới về). Khi xin SĐT trên Facebook, đặt [NUT_SDT] ở cuối tin để khách bấm gửi số một chạm, và nói khéo "anh/chị bấm nút bên dưới giúp em nha". Khách từ chối thì thôi, không xin lại trong 2–3 lượt sau.
 - Khách cũ / khách quay lại: chào như người quen, nhắc lại nhu cầu hoặc căn lần trước, hỏi thăm, cập nhật thông tin mới phù hợp.
 - Khách chê đắt / còn phân vân: đồng cảm, đưa góc nhìn (giá trên m², phương án thanh toán giãn, so sánh khu vực), không chê dự án khác.
 
@@ -1127,6 +1131,7 @@ THẺ ĐIỀU KHIỂN — đặt ở CUỐI tin, khách không nhìn thấy
   −15 chỉ hỏi chung chung, "hỏi cho biết" · −20 chê đắt mạnh và không cân nhắc thêm · −30 nói đã mua chỗ khác / không có nhu cầu. Mốc: ≥70 nóng, 40–69 ấm, <40 lạnh. Ghi muc_do tương ứng (nong/am/lanh).
 - [LICH_HEN]{"ho_ten":"","sdt":"","du_an":"","thoi_gian":"","luc":"YYYY-MM-DD HH:MM","dia_diem":"","ghi_chu":""}[/LICH_HEN] khi khách đã chốt lịch xem nhà hoặc lịch gọi (phải có SĐT và thời gian). "luc" là thời điểm chính xác tính từ "Bây giờ là" (ví dụ "sáng mai 9h" → ngày mai 09:00).
 - [MOC]{"ngay":"YYYY-MM-DD","viec":""}[/MOC] khi khách nhắc 1 MỐC THỜI GIAN quan trọng sắp tới: ngày có tiền / bán xong nhà cũ, ngày ký HĐMB / HĐĐC, ngày đóng tiền đợt, ngày bàn giao, ngày gia đình quyết định, ngày đi công tác về, hạn CSBH khách đang nhắm. "ngay" tính từ "Bây giờ là" ("cuối tháng" → ngày cuối tháng này). "viec" ngắn gọn, ví dụ "đóng đợt 2 – 30%".
+- [NUT_SDT] (chỉ kênh Facebook) khi đang xin SĐT và hồ sơ chưa có SĐT.
 - [CHUYEN_NHAN_VIEN] khi: khách muốn nói chuyện/gọi với người thật ngay, muốn đặt cọc/giữ căn, đàm phán giá hoặc chiết khấu riêng, khiếu nại, hỏi pháp lý chi tiết của một căn cụ thể, hoặc câu hỏi không có trong THÔNG TIN. Khi đó báo khách là chuyên viên sẽ liên hệ trong ít phút.
 
 DẪN DẮT KHÁCH ĐẾN XEM NHÀ / CHỐT – khéo, tự nhiên, không ép
@@ -1190,8 +1195,11 @@ def build_system(cid):
         blocks.append({"type": "text", "text": f"Bây giờ là {datetime.now().strftime('%H:%M %d/%m/%Y')}."})
         return blocks
     ctx = [f"Bây giờ là {datetime.now().strftime('%H:%M, %A %d/%m/%Y')}.",
-           "Kênh: " + ("website (LadiPage)" if cid.startswith("web_") else "Zalo"),
-           "Tên Zalo của khách: " + (c.get("ten") or "chưa rõ")]
+           "Kênh: " + ("website (LadiPage)" if cid.startswith("web_") else
+                       "Facebook Messenger (chỉ nhắn lại được trong 24h)" if cid.startswith("fb_") else "Zalo"),
+           "Tên " + ("Facebook" if cid.startswith("fb_") else "Zalo") + " của khách: " + (c.get("ten") or "chưa rõ")]
+    if c.get("nguon"):
+        ctx.append("Khách đến từ: " + c["nguon"])
     if c.get("lan_dau", "")[:10] < datetime.now().strftime("%Y-%m-%d"):
         ctx.append(f"Khách QUAY LẠI, nhắn lần đầu ngày {c['lan_dau'][:10]}.")
         prev = [m["t"] for m in c.get("tin", [])[:-1] if m["role"] == "user"]
@@ -1243,7 +1251,8 @@ def label(cid):
     return f"{hs.get('ho_ten') or c.get('ten') or 'Khách'} ({cid})"
 
 
-def handle_customer(cid, channel, name, text, images=None):
+def handle_customer(cid, channel, name, text, images=None, started=None):
+    started = started or time.time()
     ignore = load_ignore()
     if cid in ignore:
         if FORWARD_IGNORED:
@@ -1319,6 +1328,8 @@ def handle_customer(cid, channel, name, text, images=None):
                 notify_owner(cid, f"🏠 {label(cid)} nói đã mua: {changed['da_mua']}\n"
                              f"Nếu khách mua qua anh/chị: /damua {cid} <căn> để bot chăm sóc hậu mãi.")
             if changed.get("sdt"):
+                if cid.startswith("fb_"):
+                    bg(fb_lead_event, cid)
                 suggest_friend_request(cid)
                 old = find_old_customer(cid, changed["sdt"])
                 if old:
@@ -1358,10 +1369,45 @@ def handle_customer(cid, channel, name, text, images=None):
         notify_owner(cid, admin_too=True, text=f"🙋 CẦN ANH/CHỊ XỬ LÝ: {label(cid)}\nKhách nói: \"{text[:400]}\"\n"
                      f"Bot đã tạm dừng {HUMAN_PAUSE_MIN} phút.\n↩️ /tl {cid} <nội dung> · 📞 /goi {cid}")
 
+    ask_phone = TAG_PHONE in answer and not c.get("ho_so", {}).get("sdt")
     answer = LEFTOVER_FLAG_RE.sub("", LEFTOVER_TAG_RE.sub("", answer)).strip() or FALLBACK
     store.add_msg(cid, "assistant", answer)
-    send_text(cid, answer)
+    send_reply(cid, answer, ask_phone, started)
     log(f"-> {name or cid}: {answer[:90]}")
+
+
+HUMAN_DELAY = os.environ.get("NHAN_NHU_NGUOI", "1") == "1"   # 0 = trả lời ngay, không chờ
+
+
+def bubbles(text, max_parts=3):
+    """Tách câu trả lời thành vài tin ngắn theo dòng trống (như người thật nhắn)."""
+    parts = [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()]
+    if len(parts) > max_parts:
+        parts = parts[:max_parts - 1] + ["\n".join(parts[max_parts - 1:])]
+    return parts or [text]
+
+
+def typing_seconds(part):
+    """Thời gian 'gõ' giống người: ~1,5 giây + 1 giây mỗi 22 ký tự, tối đa 9 giây."""
+    return min(9.0, 1.5 + len(part) / 22) * random.uniform(0.85, 1.15)
+
+
+def send_reply(cid, answer, ask_phone=False, started=None):
+    parts = bubbles(answer)
+    human = HUMAN_DELAY and not cid.startswith("web_")   # khung chat web chờ phản hồi ngay
+    for i, part in enumerate(parts):
+        if human:
+            wait = typing_seconds(part)
+            if i == 0 and started:
+                wait -= time.time() - started    # đã mất thời gian chờ AI soạn thì bớt đi
+            if wait > 0.3:
+                send_typing(cid)
+                time.sleep(wait)
+        last = i == len(parts) - 1
+        if cid.startswith("fb_"):
+            fb_send(cid, part, ask_phone=ask_phone and last)
+        else:
+            send_text(cid, part)
 
 
 # =============================================================== CHĂM SÓC TỰ ĐỘNG
@@ -2927,12 +2973,26 @@ def team_report(days=7):
 FB_VERIFY_TOKEN = os.environ.get("FB_VERIFY_TOKEN", "").strip()
 FB_APP_SECRET = os.environ.get("FB_APP_SECRET", "").strip()
 FB_PAGES = dict(x.split(":", 1) for x in os.environ.get("FB_PAGE_TOKENS", "").split(",") if ":" in x)
-FB_GRAPH = "https://graph.facebook.com/v19.0/"
+FB_GRAPH = "https://graph.facebook.com/" + os.environ.get("FB_GRAPH_VERSION", "v23.0") + "/"
+FB_META = "bds-bot"                     # đánh dấu tin do bot gửi, để phân biệt với tin nhân viên gõ tay
+FB_GOM_GIAY = float(os.environ.get("FB_GOM_GIAY", "5"))              # chờ khách nhắn xong mới trả lời
+FB_HUMAN_PAUSE_MIN = int(os.environ.get("FB_NHAN_VIEN_DUNG_PHUT", "180"))  # nhân viên vào chat → bot im
+FB_COMMENT_REPLY = os.environ.get("FB_TRA_LOI_BINH_LUAN", "1") == "1"
+FB_PUBLIC_REPLY = os.environ.get("FB_TRA_LOI_CONG_KHAI", "1") == "1"
+FB_DATASET_ID = os.environ.get("FB_DATASET_ID", "").strip()          # Conversions API: báo "có SĐT" cho quảng cáo
+FB_CAPI_TOKEN = os.environ.get("FB_CAPI_TOKEN", "").strip()
+PUBLIC_REPLIES = [
+    "Dạ em vừa nhắn riêng cho anh/chị rồi ạ, mình check tin nhắn giúp em nha 💌",
+    "Dạ em gửi thông tin chi tiết vào inbox cho anh/chị rồi ạ 😊",
+    "Em inbox anh/chị rồi nha, có gì thắc mắc mình nhắn em liền ạ!",
+    "Dạ anh/chị xem tin nhắn giúp em nhé, em gửi đầy đủ rồi ạ 🏡",
+    "Em đã nhắn riêng anh/chị rồi ạ, cảm ơn mình đã quan tâm nha!",
+]
 
 
 def fb_window_open(c, now=None):
-    """Facebook chỉ cho trang nhắn trong 24h kể từ tin cuối của khách."""
-    users = [parse_time(m["t"]) for m in c.get("tin", []) if m["role"] == "user"]
+    """Facebook chỉ cho trang nhắn trong 24h kể từ tin cuối của khách (bình luận không tính)."""
+    users = [parse_time(m["t"]) for m in c.get("tin", []) if m["role"] == "user" and not m.get("binh_luan")]
     users = [u for u in users if u]
     return bool(users) and ((now or datetime.now()) - max(users)).total_seconds() < 23.5 * 3600
 
@@ -2946,14 +3006,19 @@ def fb_token_for(cid):
     return FB_PAGES.get(page) or (next(iter(FB_PAGES.values())) if len(FB_PAGES) == 1 else "")
 
 
-def fb_send(cid, text):
+def fb_send(cid, text, ask_phone=False):
     token = fb_token_for(cid)
     if not token:
         log("Thiếu token trang Facebook cho", cid)
         return
-    for part in split_text(text, 1900):
+    parts = split_text(text, 1900)
+    for i, part in enumerate(parts):
+        message = {"text": part, "metadata": FB_META}
+        if ask_phone and i == len(parts) - 1:
+            # Messenger tự điền SĐT của khách vào nút, khách chỉ cần bấm
+            message["quick_replies"] = [{"content_type": "user_phone_number"}]
         res = fb_api("me/messages", {"recipient": {"id": cid[3:]}, "messaging_type": "RESPONSE",
-                                     "message": {"text": part}}, token)
+                                     "message": message}, token)
         if res.get("error"):
             log("Lỗi gửi Facebook:", str(res.get("error"))[:300])
 
@@ -2976,33 +3041,192 @@ def fb_signature_ok(raw: bytes, header: str):
     return hmac.compare_digest(expected, header or "")
 
 
+def fb_lead_event(cid):
+    """Báo Facebook 'khách đã để lại SĐT' để quảng cáo tìm thêm người giống vậy (chỉ 1 lần mỗi khách)."""
+    c = store.customers.get(cid) or {}
+    if not FB_DATASET_ID or c.get("fb_lead"):
+        return
+    token = FB_CAPI_TOKEN or fb_token_for(cid)
+    if not token:
+        return
+    body = {"data": [{"event_name": "LeadSubmitted", "event_time": int(time.time()),
+                      "action_source": "business_messaging", "messaging_channel": "messenger",
+                      "user_data": {"page_id": c.get("fb_page", ""), "page_scoped_user_id": cid[3:]}}]}
+    res = fb_api(FB_DATASET_ID + "/events", body, token)
+    if res.get("error"):
+        log("Lỗi gửi sự kiện SĐT cho Facebook:", str(res.get("error"))[:300])
+        return
+    with store.lock:
+        c["fb_lead"] = now_str()
+        store.save()
+    log("📈 Đã báo Facebook: khách để lại SĐT", cid)
+
+
+# ------------------------------------------------- gom tin: khách nhắn 3 tin liền → trả lời 1 lần
+fb_buffers: dict = {}
+fb_buffers_lock = threading.Lock()
+
+
+def fb_queue(cid, name, text, images):
+    with fb_buffers_lock:
+        b = fb_buffers.setdefault(cid, {"texts": [], "images": [], "name": name, "started": time.time()})
+        b["texts"].append(text)
+        b["images"] += images
+        if b.get("timer"):
+            b["timer"].cancel()
+        b["timer"] = threading.Timer(FB_GOM_GIAY, fb_flush, args=(cid,))
+        b["timer"].daemon = True
+        b["timer"].start()
+
+
+def fb_flush(cid):
+    with fb_buffers_lock:
+        b = fb_buffers.pop(cid, None)
+    if not b:
+        return
+    try:
+        with chat_lock(cid):
+            handle_customer(cid, "facebook", b["name"], "\n".join(b["texts"]), b["images"], started=b["started"])
+    except Exception as e:
+        log("Lỗi xử lý tin Facebook:", repr(e))
+
+
+def fb_staff_echo(page, ev, msg):
+    """Nhân viên trả lời tay trong hộp thư trang → ghi vào lịch sử và cho bot im một lúc."""
+    psid = str((ev.get("recipient") or {}).get("id", ""))
+    cid = "fb_" + psid
+    if not psid or cid not in store.customers:
+        return
+    text = (msg.get("text") or "").strip() or "[Nhân viên gửi tệp/ảnh]"
+    store.add_msg(cid, "assistant", text)
+    with fb_buffers_lock:          # khách đang chờ bot trả lời thì thôi, nhân viên đã trả lời
+        b = fb_buffers.pop(cid, None)
+        if b and b.get("timer"):
+            b["timer"].cancel()
+    was_paused = store.is_paused(cid)
+    store.pause(cid, FB_HUMAN_PAUSE_MIN)
+    if not was_paused:
+        notify_owner(cid, f"👤 Có người đang chat tay với {label(cid)} trên trang Facebook → bot tạm im "
+                     f"{FB_HUMAN_PAUSE_MIN // 60} giờ.\nCho bot làm tiếp ngay: /bat {cid}")
+
+
+COMMENT_PROMPT = """CHẾ ĐỘ TRẢ LỜI BÌNH LUẬN: khách vừa bình luận dưới bài đăng / quảng cáo của fanpage. Tin bạn viết là TIN NHẮN RIÊNG ĐẦU TIÊN gửi vào inbox khách (khách chưa từng nhắn).
+- Mở đầu tự nhiên nhắc tới bình luận ("Dạ em thấy anh/chị hỏi giá bên dưới bài…"), trả lời đúng điều khách hỏi theo THÔNG TIN, rồi hỏi 1 câu lựa chọn dễ trả lời để khách nhắn lại.
+- Chỉ 1 đoạn, 2–4 câu. Không xin SĐT ở tin này, không dùng [NUT_SDT].
+- Bình luận KHÔNG có ý quan tâm mua/thuê (chỉ khen, tag bạn bè, chấm, sticker, chửi, quảng cáo, môi giới khác) → chỉ trả về [KHONG_TRA_LOI]."""
+fb_seen_comments: dict = {}       # comment_id -> lúc nhận (chống trả lời 2 lần)
+fb_comment_users: dict = {}       # (người bình luận, bài) -> lúc đã nhắn riêng
+
+
+def fb_handle_comment(page, v):
+    comment_id, post_id = str(v.get("comment_id", "")), str(v.get("post_id", ""))
+    who = v.get("from") or {}
+    uid, name, text = str(who.get("id", "")), who.get("name", ""), (v.get("message") or "").strip()
+    now = time.time()
+    if not comment_id or uid == page or not text or comment_id in fb_seen_comments:
+        return
+    fb_seen_comments[comment_id] = now
+    for k in [k for k, t in fb_seen_comments.items() if now - t > 7 * 86400]:
+        fb_seen_comments.pop(k, None)
+    if uid and now - fb_comment_users.get((uid, post_id), 0) < 86400:
+        return                     # đã nhắn riêng người này về bài này hôm nay
+    token = FB_PAGES.get(page) or (next(iter(FB_PAGES.values())) if len(FB_PAGES) == 1 else "")
+    if not token:
+        return
+    if HUMAN_DELAY:
+        time.sleep(random.uniform(15, 40))   # người thật cũng cần lúc mới thấy bình luận
+    system = build_system("") + [{"type": "text", "text": COMMENT_PROMPT}]
+    raw = ask_claude(system, [{"role": "user", "content": f"Bình luận của {name or 'khách'}: {text}"}], 500)
+    if not raw or TAG_SILENT in raw:
+        if raw:
+            log("Bỏ qua bình luận (không phải khách hỏi mua):", text[:80])
+        return
+    answer = MOC_RE.sub("", APPT_RE.sub("", PROFILE_RE.sub("", raw)))
+    answer = LEFTOVER_FLAG_RE.sub("", LEFTOVER_TAG_RE.sub("", answer)).strip()
+    answer = re.sub(r"\n\s*\n", "\n", answer)
+    if not answer:
+        return
+    res = fb_api(page + "/messages", {"recipient": {"comment_id": comment_id},
+                                      "message": {"text": answer[:1900], "metadata": FB_META}}, token)
+    if res.get("error"):
+        log("Lỗi nhắn riêng khách bình luận:", str(res.get("error"))[:300])
+        return
+    if uid:
+        fb_comment_users[(uid, post_id)] = now
+    if FB_PUBLIC_REPLY:
+        fb_api(comment_id + "/comments", {"message": random.choice(PUBLIC_REPLIES)}, token)
+    psid = str(res.get("recipient_id", ""))
+    if not psid:
+        return
+    cid = "fb_" + psid
+    c = store.get(cid, "facebook", name)
+    first_time = not c["tin"]
+    with store.lock:
+        c["fb_page"] = page
+        c["nguon"] = "bình luận dưới bài Facebook: \"" + text[:150] + "\""
+        c["loai"] = "khach"
+        if not c.get("phu_trach"):
+            c["phu_trach"] = pick_owner()
+    store.add_msg(cid, "user", "[Khách bình luận dưới bài] " + text)
+    with store.lock:
+        c["tin"][-1]["binh_luan"] = True
+    store.add_msg(cid, "assistant", answer)
+    log(f"💬 Bình luận {name or cid}: {text[:60]} → đã nhắn riêng")
+    if first_time:
+        msg = (f"🆕 Khách mới (bình luận Facebook): {name or 'Khách'}\n\"{text[:300]}\"\n"
+               f"Bot đã nhắn riêng, chờ khách trả lời.\nMã khách: {cid}\n👉 /khach {cid}")
+        own = owner_of(cid)
+        if own and not is_admin(own):
+            send_text(own, "📥 KHÁCH MỚI GIAO CHO ANH/CHỊ\n" + msg)
+        notify_admin(msg)
+
+
 def handle_fb_payload(data):
     for entry in data.get("entry", []) or []:
         page = str(entry.get("id", ""))
+        # bình luận dưới bài đăng / quảng cáo
+        for ch in entry.get("changes", []) or []:
+            v = ch.get("value") or {}
+            if (FB_COMMENT_REPLY and ch.get("field") == "feed" and v.get("item") == "comment"
+                    and v.get("verb") == "add"):
+                bg(fb_handle_comment, page, v)
+        # tin nhắn Messenger
         for ev in entry.get("messaging", []) or []:
             msg = ev.get("message") or {}
-            psid = str((ev.get("sender") or {}).get("id", ""))
-            if not msg or msg.get("is_echo") or not psid or psid == page:
+            if msg.get("is_echo"):
+                if msg.get("metadata") != FB_META:
+                    fb_staff_echo(page, ev, msg)
                 continue
+            psid = str((ev.get("sender") or {}).get("id", ""))
+            if not psid or psid == page:
+                continue
+            cid = "fb_" + psid
+            ref = ev.get("referral") or msg.get("referral") or (ev.get("postback") or {}).get("referral") or {}
+            if ref.get("source") == "ADS" or ref.get("ad_id"):
+                c = store.get(cid, "facebook")
+                title = (ref.get("ads_context_data") or {}).get("ad_title", "")
+                with store.lock:
+                    c["fb_ad"] = str(ref.get("ad_id", ""))
+                    c["nguon"] = "quảng cáo Facebook" + (f" \"{title}\"" if title else "")
             text = (msg.get("text") or "").strip()
+            qr = (msg.get("quick_reply") or {}).get("payload", "")
+            if qr and PHONE_RE.search(qr):
+                text = "[Khách bấm nút gửi SĐT] " + qr
+            pb = ev.get("postback") or {}
+            if pb and not text:
+                text = (pb.get("title") or pb.get("payload") or "").strip()
             images = [a["payload"]["url"] for a in msg.get("attachments", []) or []
                       if a.get("type") == "image" and (a.get("payload") or {}).get("url")]
+            if not msg and not pb:
+                continue
             if images and not text:
                 text = "[Khách gửi ảnh]"
             text = text or "[Khách gửi nội dung bot không đọc được]"
-            cid = "fb_" + psid
             c = store.get(cid, "facebook")
             with store.lock:
                 c["fb_page"] = page
             name = c.get("ten") or fb_name(psid, FB_PAGES.get(page, ""))
-
-            def run(cid=cid, name=name, text=text, images=images):
-                try:
-                    with chat_lock(cid):
-                        handle_customer(cid, "facebook", name, text, images)
-                except Exception as e:
-                    log("Lỗi xử lý tin Facebook:", repr(e))
-            threading.Thread(target=run, daemon=True).start()
+            fb_queue(cid, name, text, images)
 
 
 # =============================================================== TRANG WEB CRM

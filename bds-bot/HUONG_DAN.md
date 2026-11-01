@@ -819,10 +819,41 @@ Bot trả lời khách nhắn **trang Facebook** của anh/chị, giống Zalo: 
 6. Quay lại Messenger → **Webhooks → Add Callback URL**:
    - Callback URL: `https://<tên-miền-của-bot>/fb/webhook`
    - Verify token: đúng chuỗi `FB_VERIFY_TOKEN` ở trên → **Verify and save**.
-7. **Add subscriptions** cho từng trang → tick **messages**.
+7. **Add subscriptions** cho từng trang → tick **messages**, **messaging_postbacks**, **messaging_referrals**, **message_echoes** và **feed** (feed để bot trả lời bình luận).
 8. Thử: dùng tài khoản Facebook của anh/chị (admin trang) nhắn trang → bot trả lời là được.
 
 **Lưu ý quan trọng:**
 - Khi app ở **chế độ phát triển**, bot chỉ trả lời **người có vai trò trong app/trang** (anh/chị, nhân viên được thêm làm tester). Muốn trả lời **mọi khách**, phải gửi **App Review** quyền `pages_messaging` và **xác minh doanh nghiệp** với Facebook (thường mất vài ngày, cần giấy phép kinh doanh). Facebook có thể từ chối, nên chuẩn bị video quay cảnh bot trả lời khách.
 - Facebook chỉ cho trang **nhắn khách trong 24 giờ** kể từ tin cuối của khách. Bot tự tuân theo: quá 24 giờ thì không chăm sóc tự động và không gửi chiến dịch cho khách Facebook. Muốn liên lạc tiếp, hãy xin SĐT hoặc Zalo của khách trong 24 giờ đầu (bot đã được dạy xin SĐT).
 - Các trang đang **mất kết nối với LadiChat** vẫn kết nối bot được, hai bên độc lập.
+
+**Bot nhắn giống người thật (tự bật sẵn)**
+- Chờ vài giây như đang gõ (hiện "đang soạn tin…"), tách câu trả lời thành 2–3 tin ngắn.
+- Khách nhắn liền mấy tin ("cho hỏi giá" · "căn 2pn" · "view gì") → bot đợi khách nhắn xong rồi trả lời gộp 1 lần.
+- Khi xin SĐT, bot hiện nút **gửi số điện thoại**: Messenger điền sẵn số của khách, khách chỉ cần bấm.
+- Khách hỏi thẳng "có phải bot không" → bot trả lời thật là trợ lý trực 24/7 và mời chuyên viên gọi lại.
+- Tắt chế độ chờ (trả lời ngay): thêm `NHAN_NHU_NGUOI=0` vào `.env`.
+
+**Nhân viên chat tay → bot tự im**
+- Anh/chị hoặc nhân viên trả lời khách ngay trong hộp thư trang (Meta Business Suite, LadiChat…) → bot tự im **3 giờ** với khách đó và báo anh/chị. Muốn bot làm tiếp ngay: `/bat <mã khách>`.
+- Đổi số phút: `FB_NHAN_VIEN_DUNG_PHUT=180`.
+- ⚠️ **Tắt "Trả lời tự động / Tin nhắn chào" trong Meta Business Suite và LadiChat**, nếu không bot tưởng có người trả lời và tự im.
+
+**Trả lời bình luận dưới bài / quảng cáo**
+- Khách bình luận hỏi giá, hỏi thông tin → sau 15–40 giây bot **nhắn riêng vào inbox** khách, rồi trả lời công khai dưới bình luận kiểu "Dạ em đã nhắn riêng cho anh/chị rồi ạ 💌" (câu thay đổi mỗi lần).
+- Bình luận chỉ khen, tag bạn bè, spam, môi giới khác → bot bỏ qua.
+- Mỗi người chỉ được nhắn riêng 1 lần cho mỗi bài trong 1 ngày.
+- Cần thêm quyền khi làm App Review: `pages_manage_engagement`, `pages_read_user_content`, `pages_manage_metadata`.
+- Tắt trả lời công khai: `FB_TRA_LOI_CONG_KHAI=0`. Tắt hẳn phần bình luận: `FB_TRA_LOI_BINH_LUAN=0`.
+
+**Báo Facebook "khách đã để lại SĐT" (giúp quảng cáo ra số rẻ hơn)**
+Mỗi khi bot xin được SĐT của khách Facebook, bot báo cho Facebook. Khi đó quảng cáo có thể tối ưu theo **người để lại số** thay vì chỉ người nhắn tin.
+1. Vào **Trình quản lý sự kiện (Events Manager)** → **Kết nối nguồn dữ liệu → Messaging** → chọn trang → tạo **Dataset**, copy **Dataset ID**.
+2. Trong Dataset → **Cài đặt → Conversions API → Tạo mã truy cập**, copy.
+3. Thêm vào `.env`:
+   ```
+   FB_DATASET_ID=<Dataset ID>
+   FB_CAPI_TOKEN=<mã truy cập>
+   ```
+   rồi `systemctl restart bdsbot`. Nhật ký bot hiện "📈 Đã báo Facebook: khách để lại SĐT" là chạy.
+4. Chạy quảng cáo tin nhắn 1–2 tuần cho có dữ liệu, sau đó tạo chiến dịch mục tiêu **Khách hàng tiềm năng**, nơi chuyển đổi **Messenger**, chọn Dataset trên để tối ưu theo người để lại SĐT.
