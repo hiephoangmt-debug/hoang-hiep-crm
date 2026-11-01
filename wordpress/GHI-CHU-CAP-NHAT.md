@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.47** + plugin Hoàng Hiệp CRM **2.20.101**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.47** + plugin Hoàng Hiệp CRM **2.20.102**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.102: trợ lý chat so sánh dự án, không lặp, ưu tiên FourS – Sun Saphia (01/11/2026)
+- Khách hỏi "dự án nào giá tốt", "cái nào rẻ nhất", "nên chọn dự án nào" hoặc trả lời "ok" khi trợ lý mời so sánh → trợ lý so các dự án vừa gợi ý theo giá vào, khu vực, bàn giao và nói rõ dự án giá vào thấp nhất, dự án nhận nhà sớm.
+- Không gợi ý lặp lại dự án đã gửi trong cuộc chat; khách hỏi thêm thì đưa dự án khác. FourS F2 và FourS Tower tính là một dự án.
+- Dự án anh đang bán chính (có trang landing: FourS, Sun Saphia) được gợi ý trước. Dự án chưa có "giá từ" dùng giá trong bảng vốn (FourS studio từ khoảng 1,7 tỷ) hoặc giá dự kiến (Sun Saphia dự kiến từ 2,13 tỷ) – trang dự án vẫn hiển thị như cũ.
 
 ## Có gì mới – plugin 2.20.101: trợ lý chat nhận đúng tên dự án ngắn (01/11/2026)
 - Khách gõ tên ngắn như "Cora", "FourS", "Nobu", "Naman", "Vista", "Azura", "Alizé", "FPT City" → trợ lý trả lời đúng dự án đó (trước đây chỉ nhận tên từ 6 ký tự nên gợi ý nhầm dự án khác).

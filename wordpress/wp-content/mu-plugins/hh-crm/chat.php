@@ -581,7 +581,52 @@ function hh_chat_budget( $t ) {
 }
 
 /** 3 phương án cụ thể theo nhu cầu: dự án (căn hộ / biệt thự / đất nền / shophouse) hoặc tin cho thuê. */
-function hh_chat_options( $need, $budget = 0, $exclude = 0, $rooms = '' ) {
+/**
+ * Giá vào của dự án cho trợ lý chat: [triệu đồng, nhãn]. Ưu tiên ô "giá từ"; chưa có thì giá dự kiến (hh_p_price_expected);
+ * chưa có nữa thì mức thấp nhất trong bảng vốn ("Giá từ ~1,7 tỷ"). [0, ''] nếu không có.
+ */
+function hh_chat_price_from( $id ) {
+	$from = (float) get_post_meta( $id, 'hh_p_price_from', true );
+	if ( $from ) {
+		return array( $from, 'từ' );
+	}
+	$exp = (float) get_post_meta( $id, 'hh_p_price_expected', true );
+	if ( $exp ) {
+		return array( $exp, 'dự kiến từ' );
+	}
+	$min = 0;
+	foreach ( preg_split( '/\r\n|\n/', (string) get_post_meta( $id, 'hh_p_capital_table', true ) ) as $line ) {
+		$cols = array_map( 'trim', explode( '|', $line ) );
+		if ( isset( $cols[1] ) && preg_match( '/(\d+(?:,\d+)?)\s*tỷ/u', $cols[1], $m ) ) {
+			$v   = 1000 * (float) str_replace( ',', '.', $m[1] );
+			$min = $min ? min( $min, $v ) : $v;
+		}
+	}
+	return $min ? array( $min, 'từ khoảng' ) : array( 0, '' );
+}
+
+/**
+ * Nhóm dự án: tòa / phân khu con có tên bắt đầu giống dự án mẹ (FourS Tower F2 → FourS Tower) tính chung với dự án mẹ;
+ * dự án nằm trong khu đô thị lớn nhưng tên khác (FourS trong Sun Riverpolis) là dự án riêng.
+ */
+function hh_chat_family( $id ) {
+	$par = (int) get_post_meta( $id, 'hh_p_parent', true );
+	if ( ! $par ) {
+		return (int) $id;
+	}
+	$clean = static fn( $x ) => trim( preg_replace( '/\s+/', ' ', preg_replace( '/\b(da nang|tower|toa|khu|phan khu)\b|[^a-z0-9 ]/', ' ', mb_strtolower( remove_accents( $x ) ) ) ) );
+	$w     = explode( ' ', $clean( get_the_title( $par ) ) );
+	$pw    = strlen( $w[0] ) >= 4 ? array( $w[0] ) : array_slice( $w, 0, 2 ); // "fours", "capital", "vinhomes"…
+	return false !== strpos( ' ' . $clean( get_the_title( $id ) ) . ' ', ' ' . implode( ' ', $pw ) . ' ' ) ? $par : (int) $id;
+}
+
+/** Dự án Hoàng Hiệp đang bán chính (có trang landing riêng) – trợ lý giới thiệu trước. */
+function hh_chat_is_focus( $id ) {
+	$slug = get_post_field( 'post_name', $id );
+	return $slug && is_file( get_template_directory() . '/landing/' . $slug . '.html' );
+}
+
+function hh_chat_options( $need, $budget = 0, $exclude = 0, $rooms = '', $skip = '' ) {
 	$rows = array();
 	if ( 'thue' === $need ) {
 		$room_re = '' === $rooms ? '' : ( 'studio' === $rooms ? '/studio/iu' : '/\\b' . $rooms . '\\s*(pn|phòng ngủ)/iu' );
@@ -605,24 +650,43 @@ function hh_chat_options( $need, $budget = 0, $exclude = 0, $rooms = '' ) {
 	if ( $tax ) {
 		$args['tax_query'] = array( array( 'taxonomy' => 'loai-du-an', 'field' => 'slug', 'terms' => $tax ) );
 	}
+	$seen_fam = array();
+	$posts    = get_posts( $args );
+	foreach ( $posts as $p ) {
+		if ( '' !== $skip && false !== mb_strpos( $skip, $p->post_title ) ) {
+			$seen_fam[ hh_chat_family( $p->ID ) ] = 1; // Đã gửi tòa nào thì cả dự án tính là đã gửi.
+		}
+	}
+	$focus  = array();
 	$priced = array();
 	$other  = array();
-	foreach ( get_posts( $args ) as $p ) {
+	foreach ( $posts as $p ) {
 		if ( (int) get_post_meta( $p->ID, 'hh_p_parent', true ) && ! $tax ) {
 			continue;
 		}
-		$from = (float) get_post_meta( $p->ID, 'hh_p_price_from', true );
+		list( $from, $lbl ) = hh_chat_price_from( $p->ID );
 		if ( $budget && $from && $from > $budget * 1.1 ) {
 			continue;
 		}
-		$line = $p->post_title . ( $from ? ' – từ ' . hh_format_price( $from ) : '' );
-		if ( $from ) {
+		if ( '' !== $skip && false !== mb_strpos( $skip, $p->post_title ) ) {
+			continue; // Đã gợi ý ở lượt trước trong cuộc chat.
+		}
+		// Một dự án chỉ gợi ý một lần: FourS F2 và FourS Tower là một (kể cả khi đã gửi ở lượt trước).
+		$fam = hh_chat_family( $p->ID );
+		if ( isset( $seen_fam[ $fam ] ) ) {
+			continue;
+		}
+		$seen_fam[ $fam ] = 1;
+		$line = $p->post_title . ( $from ? ' – ' . $lbl . ' ' . hh_format_price( $from ) : '' );
+		if ( hh_chat_is_focus( $p->ID ) ) {
+			$focus[] = $line;
+		} elseif ( $from ) {
 			$priced[] = $line;
 		} else {
 			$other[] = $line;
 		}
 	}
-	return array_slice( array_merge( $priced, $other ), 0, 3 );
+	return array_slice( array_merge( $focus, $priced, $other ), 0, 3 );
 }
 
 function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
@@ -638,6 +702,7 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 	$f     = hh_chat_project_facts( $page );
 	$title = $f['Tên'] ?? '';
 	$prev  = $bots ? end( $bots )['text'] : '';
+	$said  = implode( "\n", array_column( $bots, 'text' ) ); // Mọi tin trợ lý đã nhắn – để không gợi ý lặp.
 
 	// Xin số tối đa 1 lần mỗi 2 lượt, không xin ở lượt đầu; lượt trước đã xin thì lượt này thôi.
 	$asked_last = (bool) preg_match( '/xin số|số zalo|số điện thoại|để lại số/iu', $prev );
@@ -689,6 +754,13 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		// Nhắn 2 tin như người: câu đùa, rồi câu hỏi nhu cầu.
 		return preg_replace( '/([😄😅😊😋🤗🌊🙏]) (?=\S)/u', "$1\n\n", $witty, 1 );
 	}
+	$cmp_yes = preg_match( '/so sanh/u', remove_accents( mb_strtolower( $prev ) ) ) && preg_match( '/^(ok|co|u|vang|da|duoc|dong y|so sanh|muon|co a|ok em|duoc em)\b/', $t );
+	if ( $cmp_yes || preg_match( '/gia (tot|mem|re|hop ly)|re nhat|re hon|tot nhat|hop ly nhat|dang mua nhat|nen (chon|mua|lay)( du an| can)? (nao|cai nao)|(du an|can|cai) nao (tot|re|hon|dang|hop|ngon)|so sanh/', $t ) ) {
+		$cmp = hh_chat_compare( $bots, $need, $budget, $page );
+		if ( $cmp ) {
+			return $cmp . ( $ask ?: '' );
+		}
+	}
 	// Khách nhắc tên dự án ("Ko, dự án Cora") → trả lời về dự án, không hiểu thành lời đáp ngắn.
 	$mentioned = hh_chat_project_lookup( $t );
 	// Câu trả lời ngắn nối theo câu chat vừa hỏi ("để ở", "cho thuê", "gần biển", "ok", "chưa"…).
@@ -696,6 +768,7 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 	if ( $follow ) {
 		return $follow;
 	}
+	// Khách hỏi so sánh ("dự án nào giá tốt", "cái nào rẻ nhất", "nên chọn dự án nào") → so các dự án vừa gợi ý.
 	// Câu hỏi đáp có sẵn trên web (dự án đang xem / dự án khách nhắc tên / bài viết), hiểu theo nghĩa gần nhất.
 	$faq       = hh_chat_faq_match( $t, $page );
 	if ( $faq ) {
@@ -732,6 +805,13 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		$pr  = function_exists( 'hh_project_price' ) ? hh_project_price( $other ) : '';
 		$rs  = trim( (string) get_post_meta( $other, 'hh_p_resale_price', true ) );
 		$has_pr = $pr && false === strpos( $pr, 'Liên hệ' );
+		if ( ! $has_pr ) {
+			list( $pf, $pl ) = hh_chat_price_from( $other );
+			if ( $pf ) {
+				$pr     = $pl . ' ' . hh_format_price( $pf );
+				$has_pr = true;
+			}
+		}
 		// Chưa có giá → nói vị trí, bàn giao để khách biết em đang nói đúng dự án.
 		$addr = $has_pr || $rs ? '' : trim( wp_strip_all_tags( (string) get_post_meta( $other, 'hh_p_address', true ) ) );
 		$hand = $has_pr || $rs ? '' : trim( wp_strip_all_tags( (string) get_post_meta( $other, 'hh_p_handover', true ) ) );
@@ -811,8 +891,13 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		if ( $rooms && ! $opts ) {
 			return $ack . 'Hiện trên web chưa đăng căn ' . ( 'studio' === $rooms ? 'studio' : $rooms . ' phòng ngủ' ) . ' ' . $labels[ $need ] . ' phù hợp, ' . $name . ' có thêm nhiều căn chưa đăng.' . ( $has_lead ? ' Em báo ' . $name . ' gửi danh sách cho anh/chị ngay ạ.' : ' Anh/chị cho em xin số Zalo, em gửi danh sách căn đúng nhu cầu nhé.' );
 		}
-		$seen = array_filter( $opts, static fn( $o ) => false !== mb_strpos( $prev, $o ) );
+		$seen = array_filter( $opts, static fn( $o ) => false !== mb_strpos( $said, $o ) );
 		if ( $opts && count( $seen ) === count( $opts ) && ! $rooms ) {
+			// Đã gửi danh sách này trong cuộc chat → gợi ý thêm dự án khác thay vì lặp lại.
+			$more = preg_match( '/\b(khac|them|nua|con (du an|can|cai) nao|du an nao|can nao)\b/', $t ) || ! preg_match( '/\?$/', trim( $prev ) ) ? hh_chat_options( $need, $budget, $page, $rooms, $said ) : array();
+			if ( $more ) {
+				return $ack . $lc( 'Ngoài các dự án em đã gửi, thêm ' ) . count( $more ) . ' lựa chọn ' . $labels[ $need ] . ( $budget ? ' trong tầm ' . hh_format_price( $budget, 'thue' === $need && $budget < 300 ) : '' ) . ':' . "\n• " . implode( "\n• ", $more ) . "\n" . ( $ask ? trim( $ask ) : 'Anh/chị muốn em so sánh nhanh các dự án này không ạ?' );
+			}
 			// Đã gửi danh sách này ở lượt trước → bước tiếp theo, không lặp lại.
 			return $has_lead
 				? 'Dạ vâng ạ. ' . $name . ' sẽ gửi chi tiết các căn này qua Zalo và gọi anh/chị sớm. Anh/chị muốn đặt lịch đi xem thực tế luôn không ạ?'
@@ -1182,6 +1267,67 @@ function hh_chat_name_ok( $c ) {
 	}
 	$common = array( 'nam', 'bac', 'dong', 'tay', 'khu', 'nha', 'dat', 'bien', 'song', 'view', 'city', 'home', 'park', 'land', 'gold', 'star', 'green', 'river', 'ocean', 'beach', 'villa', 'house', 'hotel', 'plaza', 'tower', 'royal', 'thue', 'mua', 'ban', 'gia', 'can', 'tien', 'nhanh', 'trung', 'tam', 'phuc', 'thanh', 'hoang', 'minh', 'long', 'phat', 'thinh', 'hung', 'binh', 'hoa', 'ngoc', 'kim', 'xuan', 'thuy' );
 	return $len >= 4 && preg_match( '/^[a-z]+$/', $c ) && ! in_array( $c, $common, true );
+}
+
+/**
+ * So sánh các dự án vừa gợi ý ở lượt trước (hoặc gợi ý mới theo nhu cầu, tầm tiền): giá từ, khu vực, bàn giao;
+ * nói rõ dự án giá vào thấp nhất và dự án nhận nhà sớm nhất. '' nếu không có gì để so.
+ */
+function hh_chat_compare( $bots, $need, $budget, $page ) {
+	$ids  = array();
+	$all  = get_posts( array( 'post_type' => 'du-an', 'post_status' => 'publish', 'numberposts' => 300 ) );
+	// Danh sách gần nhất trợ lý đã gửi (tin mới nhất có từ 2 dự án trở lên).
+	foreach ( array_reverse( (array) $bots ) as $b ) {
+		$ids = array();
+		foreach ( $all as $p ) {
+			if ( false !== mb_strpos( (string) $b['text'], $p->post_title ) ) {
+				$ids[] = $p->ID;
+			}
+		}
+		if ( count( $ids ) >= 2 ) {
+			break;
+		}
+	}
+	if ( count( $ids ) < 2 ) {
+		$ids = array();
+		foreach ( hh_chat_options( $need ?: 'can-ho', $budget, $page ) as $line ) {
+			foreach ( get_posts( array( 'post_type' => 'du-an', 'post_status' => 'publish', 'numberposts' => 300 ) ) as $p ) {
+				if ( 0 === mb_strpos( $line, $p->post_title ) ) {
+					$ids[] = $p->ID;
+					break;
+				}
+			}
+		}
+	}
+	$rows = array();
+	foreach ( array_unique( $ids ) as $id ) {
+		list( $from, $lbl ) = hh_chat_price_from( $id );
+		$area = wp_get_post_terms( $id, 'khu-vuc', array( 'fields' => 'names' ) );
+		$hand = trim( preg_split( '/[;(]/u', wp_strip_all_tags( (string) get_post_meta( $id, 'hh_p_handover', true ) ) )[0] );
+		$m2   = trim( preg_split( '/\s*\(/u', trim( wp_strip_all_tags( (string) get_post_meta( $id, 'hh_p_price_m2', true ) ) ) )[0] );
+		$rows[] = array(
+			'id'    => $id,
+			'from'  => $from,
+			'ready' => 'dang-ban-giao' === get_post_meta( $id, 'hh_p_status', true ),
+			'lbl'   => $lbl,
+			'line'  => get_the_title( $id ) . ( $from ? ' – ' . $lbl . ' ' . hh_format_price( $from ) : '' ) . ( $m2 ? ' (' . preg_replace( '/\s*\(tham khảo\)/u', '', mb_strtolower( $m2 ) ) . ')' : '' )
+				. ( ! is_wp_error( $area ) && $area ? ' · ' . $area[0] : '' ) . ( $hand ? ' · ' . mb_strtolower( mb_substr( $hand, 0, 1 ) ) . mb_substr( $hand, 1, 60 ) : '' ),
+		);
+	}
+	$priced = array_values( array_filter( $rows, static fn( $r ) => $r['from'] > 0 ) );
+	if ( count( $priced ) < 2 ) {
+		return '';
+	}
+	usort( $priced, static fn( $a, $b ) => $a['from'] <=> $b['from'] );
+	$cheap = $priced[0];
+	$ready = array_values( array_filter( $rows, static fn( $r ) => $r['ready'] ) );
+	$out   = 'Dạ, em so nhanh ' . count( $priced ) . " dự án theo giá vào (tham khảo):\n• " . implode( "\n• ", array_column( $priced, 'line' ) ) . "\n\n";
+	$out  .= 'Giá vào thấp nhất là ' . get_the_title( $cheap['id'] ) . ' (' . $cheap['lbl'] . ' ' . hh_format_price( $cheap['from'] ) . ').';
+	if ( $ready && $ready[0]['id'] !== $cheap['id'] ) {
+		$out .= ' Cần nhận nhà ở ngay thì ' . get_the_title( $ready[0]['id'] ) . ' đang bàn giao.';
+	}
+	$out .= ' "Giá tốt" còn tùy đơn giá/m², vị trí và mục đích; anh/chị mua để ở hay cho thuê để em chốt 1 căn hợp nhất ạ? Chi tiết: ' . get_permalink( $cheap['id'] );
+	return $out;
 }
 
 /** Dự án trên web có tên nằm trong câu hỏi (bỏ dấu, bỏ chữ "Đà Nẵng"); ưu tiên tên dài nhất. */

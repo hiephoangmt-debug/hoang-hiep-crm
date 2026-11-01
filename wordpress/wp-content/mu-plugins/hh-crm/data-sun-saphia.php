@@ -133,6 +133,7 @@ add_filter(
 			'hh_p_ownership'     => 'Thời hạn 50 năm kể từ 17/09/2026 (thời hạn dự án); công trình cấp I, niên hạn sử dụng 100 năm',
 			'hh_p_legal'         => 'Thời hạn dự án 50 năm kể từ ngày 17/09/2026; công trình cấp I, niên hạn sử dụng 100 năm (theo tài liệu chủ đầu tư 10/2026)',
 			'hh_p_loan_bank'     => 'VietinBank, BIDV, NCB',
+			'hh_p_price_expected' => '2130', // Giá dự kiến studio tầng 15 (28/10/2026) – trợ lý chat dùng, trang vẫn ghi Liên hệ.
 			'hh_p_design_desc'   => 'Mặt bằng tầng điển hình 3A – 28 có 28 căn/sàn: 19 studio (thông thủy 30 – 31 m², căn góc 40 m²), 4 căn 1PN+ (49 – 51 m²) và 5 căn 2PN (60 – 70 m²). Dãy căn phía Đông hướng biển Mỹ Khê – Sơn Thủy; căn 2PN nằm ở các góc tòa. Studio mặt tiền 3,8 m, sâu 9 m; căn 1PN+ có thêm phòng đa năng. Kiến trúc lấy cảm hứng từ điêu khắc Chăm Pa và hình tượng vũ nữ Apsara.',
 			'hh_p_highlights'    => "Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng (theo chủ đầu tư)\nTòa 30 tầng cao 114 m, 782 căn, chiều cao tầng căn hộ 3,5 m\nĐối diện công viên bãi tắm ven biển khoảng 2,45 ha thành phố đang đầu tư\nKhoảng 500 m tới ga LRT 09 tuyến đường sắt đô thị sân bay – biển\nTầm nhìn biển Mỹ Khê, Ngũ Hành Sơn, sông và đô thị\nThời hạn 50 năm từ 17/09/2026, ngân hàng hỗ trợ VietinBank, BIDV, NCB",
 			'hh_p_location_desc' => 'Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu bãi tắm Sơn Thủy – đoạn biển giữa Mỹ Khê và Non Nước. Phía trước là công viên công cộng khoảng 2,45 ha trên phần đất thu hồi từ dự án Hòn Ngọc Á Châu; khoảng 500 m tới ga LRT 09.',
