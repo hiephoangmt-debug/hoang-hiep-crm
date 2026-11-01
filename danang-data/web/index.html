@@ -120,7 +120,7 @@ const HA = LL(15.8772, 108.3282); // trung tâm phố cổ Hội An
 // Casamia Balanca Hội An: từng lô lấy từ mặt bằng 363 lô, đã khớp toạ độ thật
 const CASA_DATA = await fetch('casamia.json').then((r) => (r.ok ? r.json() : null)).catch(() => null);
 // Lô đất Tờ 126 Thửa 30, Thọ Quang, Sơn Trà – góc Hoàng Sa × Hồ Học Lãm (587 m²)
-const LOT = { ring: [[16.0901884, 108.2498909], [16.090395, 108.2500385], [16.0904889, 108.249855], [16.0902804, 108.249722]].map(([la, lo]) => LL(la, lo)) };
+const LOT = { ring: [[16.0901963, 108.2498741], [16.090422, 108.249988], [16.0904882, 108.249792], [16.0902628, 108.2496928]].map(([la, lo]) => LL(la, lo)) };
 const CASA_RING = CASA_DATA ? CASA_DATA.site.map(([la, lo]) => LL(la, lo)) : null;
 const CASA = findProject(/casamia|balanca/i);
 const HVB = findProject(/^(vinhomes )?(hải vân bay|hai van bay)/i);
@@ -1290,23 +1290,51 @@ $('haBtn').onclick = () => flyTo(V3(HA[0], 0, HA[1]), V3(HA[0] + 900, 1100, HA[1
   // số đo cạnh theo trích lục (18,7 / 26,6 / 17,9 / 24,6 m)
   const L = ['26,6 m', '18,7 m', '24,6 m', '17,9 m'];
   ring.forEach(([x, z], i) => { const [x2, z2] = ring[(i + 1) % 4]; PLACES.push({ name: L[i], pos: V3((x + x2) / 2, y0 + 3, (z + z2) / 2), big: false, lotEdge: true }); });
-  const lotPos = V3(cx, y0 + 40, cz);
-  PLACES.push({ name: '📍 Lô đất 587 m² · Tờ 126 Thửa 30 · 4 mặt tiền', pos: lotPos, big: true, lot: true });
+  // ---- Khách sạn 5 sao 22 tầng, 94 phòng (khối minh hoạ theo giấy phép được tặng kèm) ----
+  const hotel = new THREE.Group(); world.add(hotel);
+  const inset = (r, d) => { const c = [cx, cz]; return r.map(([x, z]) => { const vx = x - c[0], vz = z - c[1], L = Math.hypot(vx, vz); return [x - vx / L * d, z - vz / L * d]; }); };
+  const prism = (r, h0, h, mat) => { const sh = new THREE.Shape(r.map(([x, z]) => new THREE.Vector2(x, -z))); const m = new THREE.Mesh(new THREE.ExtrudeGeometry(sh, { depth: h, bevelEnabled: false }), mat); m.rotation.x = -Math.PI / 2; m.position.y = y0 + h0; hotel.add(m); return m; };
+  const podMat = new THREE.MeshStandardMaterial({ color: 0xd9d2c3, roughness: 0.6 });
+  const glassH = new THREE.MeshStandardMaterial({ color: 0x5f86a6, roughness: 0.08, metalness: 0.6, emissive: 0xffd9a0, emissiveIntensity: 0 });
+  const slabMat = new THREE.MeshStandardMaterial({ color: 0xf2efe8, roughness: 0.5 });
+  const H1 = 5.0, HF = 3.3, NF = 22;
+  prism(inset(ring, 1.5), 0, H1, glassH);                       // sảnh tầng 1 cao 5 m, kính
+  prism(inset(ring, 1.0), H1, 0.6, slabMat);
+  prism(inset(ring, 1.5), H1 + 0.6, 2 * HF - 0.6, podMat);     // tầng 2–3: nhà hàng, spa
+  const tower = inset(ring, 3.2);
+  for (let f = 3; f < NF; f++) {                                // tầng phòng: kính + ban công trắng
+    const y = H1 + (f - 1) * HF;
+    prism(tower, y, HF - 0.35, glassH);
+    prism(inset(ring, 2.2), y + HF - 0.35, 0.35, slabMat);
+  }
+  const top = H1 + (NF - 1) * HF;
+  prism(inset(ring, 2.2), top, 1.2, slabMat);                   // sân thượng, hồ bơi vô cực
+  const poolTop = prism(inset(ring, 4.5), top + 1.2, 0.3, new THREE.MeshStandardMaterial({ color: 0x48c9d6, roughness: 0.1, emissive: 0x1aa0b0, emissiveIntensity: 0.3 }));
+  prism(inset(ring, 6.5).map(([x, z]) => [x - (x - cx) * 0.3, z - (z - cz) * 0.3]), top + 1.2, 4, glassH);   // sky bar
+  hotel.visible = true; LOT.hotel = hotel; LOT.glass = glassH; LOT.topY = y0 + top;
+  vol.visible = edge.visible = false; beam.position.y = y0 + top + 120;
+  const lotPos = V3(cx, y0 + top + 18, cz);
+  PLACES.push({ name: '📍 Bán lô 583,6 m² · 4 mặt tiền Hoàng Sa · KS 5* 22 tầng · 190 tỷ', pos: lotPos, big: true, lot: true });
   for (const p of PLACES) if ((p.lot || p.lotEdge) && !p.el) {
     const el = document.createElement('div'); el.className = 'pin' + (p.big ? ' lotpin' : ' small'); el.innerHTML = '<b></b><span></span>';
     el.querySelector('b').textContent = p.name; el.onclick = () => (p.lot ? $('lotBtn').click() : null); $('pins').appendChild(el); p.el = el;
   }
-  casaAnim.push((t) => { beam.material.opacity = 0.18 + 0.1 * Math.sin(t * 2); fill.material.opacity = 0.35 + 0.15 * Math.sin(t * 2); });
+  casaAnim.push((t, night) => { glassH.emissiveIntensity = night * 0.55; beam.material.opacity = 0.18 + 0.1 * Math.sin(t * 2); fill.material.opacity = 0.35 + 0.15 * Math.sin(t * 2); });
   const showLot = () => {
-    $('unitT').textContent = 'Lô đất Tờ 126 · Thửa 30 — Thọ Quang, Sơn Trà';
-    $('unitS').textContent = 'Góc đường Hoàng Sa × Hồ Học Lãm, đối diện bãi biển Mân Thái – vị trí theo ảnh Google Maps & bản đồ địa chính bạn gửi';
+    $('unitT').textContent = 'Bán lô đất 4 mặt tiền Võ Nguyên Giáp – Hoàng Sa';
+    $('unitS').textContent = 'View trực diện biển · Tặng giấy phép xây dựng + đầy đủ thiết kế khách sạn 5 sao 22 tầng, 94 phòng';
     const tb = $('unitTb'); tb.textContent = '';
-    for (const [k, v] of [['Diện tích', '587 m² (theo bản đồ địa chính) · 583,6 m² (tin rao)'], ['Kích thước cạnh', '18,7 × 26,6 × 17,9 × 24,6 m · ngang 27,6 m'], ['Mặt tiền', '4 mặt tiền: Hoàng Sa (view biển), Hồ Học Lãm và 2 lối đi'], ['Mục đích sử dụng (QHSDĐ 2020)', 'Mã 119'], ['Quy hoạch xây dựng', 'Thuộc Tổng mặt bằng Khu vực phía Đông và bán đảo Sơn Trà'], ['Khoảng cách', '≈ 60 m ra bờ biển · ≈ 5 km tới cầu Rồng']]) {
+    for (const [k, v] of [['Giá', '190 tỷ (thương lượng) ≈ 325 triệu/m²'], ['Diện tích', '583,6 m² · ngang 27,6 m (bản đồ địa chính: 587 m²)'], ['Pháp lý', 'Tờ 126 · Thửa 30 · Thọ Quang, Sơn Trà · mã đất 119 (QHSDĐ 2020)'], ['Tặng kèm', 'Giấy phép xây dựng + thiết kế KS 5 sao 22 tầng, 94 phòng'], ['Mặt tiền', '4 mặt tiền: Hoàng Sa (view biển), Hồ Học Lãm, 2 đường nhánh'], ['Khối 3D', 'Minh hoạ: sảnh 5 m, tầng 2–3 nhà hàng/spa, 19 tầng phòng (~5 phòng/tầng), sân thượng hồ bơi + sky bar · cao ≈ 75 m']]) {
       const tr = tb.insertRow(); tr.insertCell().textContent = k; tr.insertCell().textContent = v;
     }
-    $('unitPlans').textContent = ''; $('unit').hidden = false; setTour(false);
+    const pl = $('unitPlans'); pl.textContent = '';
+    const mkb = (t, f) => { const b = document.createElement('button'); b.className = 'chip'; b.textContent = t; b.onclick = f; pl.appendChild(b); };
+    mkb('🏨 Bật/tắt khối khách sạn', () => { hotel.visible = !hotel.visible; vol.visible = edge.visible = !hotel.visible; });
+    mkb('👁 View từ sân thượng tầng 22', () => { $('unit').hidden = true; const sea = V3(cx + 600, LOT.topY, cz - 280); flyTo(sea, V3(cx - 8, LOT.topY + 6, cz + 4)); });
+    mkb('🛰 Toàn cảnh khu vực', () => { $('unit').hidden = true; flyTo(V3(cx, 0, cz), V3(cx - 900, 650, cz + 1100)); });
+    $('unit').hidden = false; setTour(false);
   };
-  $('lotBtn').onclick = () => { flyTo(V3(cx, 0, cz), V3(cx + 140, 120, cz + 170)); setTimeout(showLot, 1800); };
+  $('lotBtn').onclick = () => { flyTo(V3(cx, 30, cz), V3(cx + 230, 160, cz + 260)); setTimeout(showLot, 1800); };
   LOT.vol = vol; LOT.show = showLot;
 }
 if (casaPos) { $('caBtn').hidden = false; $('caBtn').onclick = () => flyTo(casaPos.clone(), V3(casaPos.x + 420, 380, casaPos.z + 720)); }
@@ -1368,7 +1396,7 @@ $('loading').style.opacity = 0; setTimeout(() => $('loading').remove(), 700);
   el.addEventListener('pointerdown', (e) => (down = [e.clientX, e.clientY]));
   el.addEventListener('pointerup', (e) => {
     if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return;
-    if (LOT.vol) { ray2.setFromCamera(new THREE.Vector2((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1), camera); if (ray2.intersectObject(LOT.vol).length) { LOT.show(); return; } }
+    if (LOT.vol) { ray2.setFromCamera(new THREE.Vector2((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1), camera); if (ray2.intersectObjects([LOT.vol, LOT.hotel], true).length) { LOT.show(); return; } }
     const U = casaGroup.userData; if (!U.phBody) return;
     ray2.setFromCamera(new THREE.Vector2((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1), camera);
     const hits = [[U.phBody, U.phLots], [U.btBody, U.btLots]].map(([b, L]) => { const h = b && ray2.intersectObject(b)[0]; return h && { d: h.distance, l: L[b === U.btBody ? Math.floor(h.instanceId / 3) : h.instanceId] }; }).filter(Boolean).sort((a, b) => a.d - b.d);
