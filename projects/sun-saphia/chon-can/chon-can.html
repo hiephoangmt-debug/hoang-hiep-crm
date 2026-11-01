@@ -69,8 +69,8 @@ body{margin:0;background:var(--bg);font-family:var(--font);color:var(--navy);-we
 #nt .h{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
 #nt .h b{font-size:14px;letter-spacing:.02em}#nt .h small{font-size:11px;color:#cdb58e}
 #nt .row{max-width:100%;display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
-#nt .row button{flex:0 0 auto;width:96px;padding:0;border:0;border-radius:9px;overflow:hidden;background:#000;cursor:pointer;position:relative}
-#nt .row img{display:block;width:96px;height:120px;object-fit:cover}
+#nt .row button{flex:0 0 auto;width:160px;padding:0;border:0;border-radius:9px;overflow:hidden;background:#000;cursor:pointer;position:relative}
+#nt .row img{display:block;width:160px;height:90px;object-fit:cover}
 #nt .row span{position:absolute;left:0;right:0;bottom:0;font-size:10px;font-weight:700;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.75));padding:10px 4px 4px;text-align:center}
 #nt .vb{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:8px;padding:11px;border:0;border-radius:10px;background:#c9a15b;color:#1c1712;font-weight:800;font-size:14px;cursor:pointer;font-family:var(--font)}
 #ntbox{position:fixed;inset:0;z-index:60;background:rgba(8,10,14,.94);display:flex;align-items:center;justify-content:center;flex-direction:column}
@@ -1145,28 +1145,33 @@ function f3Open(){
   ov.innerHTML='<div class="f3h"><b>3D cả tầng '+fname(state.floor)+'</b><span>kéo xoay · 2 ngón để phóng to · bấm vào căn để xem chi tiết</span><button type="button" class="f3d">⬇ Tải ảnh</button><button type="button" class="f3x">✕ Đóng</button></div><div class="f3c"></div><div class="f3w">minh họa theo mặt bằng CĐT</div>';
   document.body.appendChild(ov);
   var el=ov.querySelector('.f3c'), r=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});
-  r.setPixelRatio(Math.min(window.devicePixelRatio||1,1.6)); r.shadowMap.enabled=true; r.shadowMap.type=THREE.PCFSoftShadowMap; r.outputEncoding=THREE.sRGBEncoding; r.toneMapping=THREE.ACESFilmicToneMapping; r.toneMappingExposure=1;
+  r.setPixelRatio(Math.min(window.devicePixelRatio||1,2)); r.shadowMap.enabled=true; r.shadowMap.type=THREE.PCFSoftShadowMap; r.outputEncoding=THREE.sRGBEncoding; r.toneMapping=THREE.ACESFilmicToneMapping; r.toneMappingExposure=.84;   // dịu, không chói
   el.appendChild(r.domElement);
   var sc=new THREE.Scene(); sc.background=new THREE.Color(0xd9dde1);
   var cam=new THREE.PerspectiveCamera(40,1,.5,600), ctl=new THREE.OrbitControls(cam,r.domElement);
   ctl.enableDamping=true; ctl.maxPolarAngle=Math.PI*.46; ctl.minDistance=12; ctl.maxDistance=170;
   var es=new THREE.Scene(); es.add(new THREE.Mesh(new THREE.SphereGeometry(50,16,8),new THREE.MeshBasicMaterial({color:0x9fb3c4,side:THREE.BackSide})));
   sc.environment=new THREE.PMREMGenerator(r).fromScene(es,.04).texture;
-  sc.add(new THREE.HemisphereLight(0xffffff,0x9d927f,.75));
-  var sun=new THREE.DirectionalLight(0xfff2dc,2.1); sun.position.set(-26,62,-34); sun.castShadow=true; sun.shadow.mapSize.set(2048,2048);
-  var sc2=sun.shadow.camera; sc2.left=-42; sc2.right=42; sc2.top=42; sc2.bottom=-42; sc2.near=1; sc2.far=160; sun.shadow.bias=-.0008; sc.add(sun); sc.add(sun.target);
+  sc.add(new THREE.HemisphereLight(0xffffff,0x9d927f,.7));
+  var sun=new THREE.DirectionalLight(0xfff2dc,1.55); sun.position.set(-26,62,-34); sun.castShadow=true; sun.shadow.mapSize.set(2048,2048);
+  var sc2=sun.shadow.camera; sc2.left=-42; sc2.right=42; sc2.top=42; sc2.bottom=-42; sc2.near=1; sc2.far=160; sun.shadow.bias=-.0008; sun.shadow.normalBias=.03; sun.shadow.radius=3; sc.add(sun); sc.add(sun.target);
   var root=new THREE.Group(); root.position.set(-27.2,0,-16.8); sc.add(root); sun.target.position.set(0,0,0);
   var walls=[], units=[]; f3Build(root,walls,units);
   // màu và ảnh vân về đúng không gian màu sRGB (đậm, rõ như ảnh minh họa, không bị bạc màu)
   var seen=new Set(); root.traverse(function(o){ if(!o.material||o.isSprite) return; (Array.isArray(o.material)?o.material:[o.material]).forEach(function(m){ if(seen.has(m)) return; seen.add(m);
-    if(m.color) m.color.convertSRGBToLinear(); if(m.emissive) m.emissive.convertSRGBToLinear(); if(m.map&&m.map.encoding!==THREE.sRGBEncoding){ m.map.encoding=THREE.sRGBEncoding; m.map.needsUpdate=true; } m.needsUpdate=true; }); });
+    if(m.color) m.color.convertSRGBToLinear(); if(m.emissive) m.emissive.convertSRGBToLinear(); if(m.map&&m.map.encoding!==THREE.sRGBEncoding){ m.map.encoding=THREE.sRGBEncoding; m.map.needsUpdate=true; }
+    if(m.map){ m.map.anisotropy=Math.min(8,r.capabilities.getMaxAnisotropy()); m.map.minFilter=THREE.LinearMipmapLinearFilter; m.map.generateMipmaps=true; m.map.needsUpdate=true; }
+    if(m.isMeshStandardMaterial){ m.roughness=Math.max(m.roughness,.5); m.metalness=Math.min(m.metalness,.25); m.envMapIntensity=.45; }   // bớt phản chiếu bóng loáng: nhìn từ xa không lấp lánh, chói
+    m.needsUpdate=true; }); });
   // tường cắt thấp 1,2 m để nhìn vào trong căn
-  walls.forEach(function(a){ var m=a[0],h=a[1],y=a[2]; if(y>=1.3||a[3]){ m.visible=false; return; } var hh=Math.min(h,1.2); m.scale.y=hh/h; m.position.y=y+hh/2; });
+  var CAP=new THREE.MeshBasicMaterial({color:0x1d2228}), sideM={};
+  walls.forEach(function(a){ var m=a[0],h=a[1],y=a[2]; if(y>=1.3||a[3]){ m.visible=false; return; } var hh=Math.min(h,1.2); m.scale.y=hh/h; m.position.y=y+hh/2;
+    if(m.geometry&&m.geometry.type==='BoxGeometry'&&!Array.isArray(m.material)&&!m.material.transparent){ var sd=m.material; m.material=[sd,sd,CAP,sd,sd,sd]; } });   // mặt cắt tường tô đậm như bản vẽ: dễ phân biệt tường, phòng
   ctl.maxDistance=320;
   function size(){ var w=el.clientWidth,h=el.clientHeight; r.setSize(w,h); cam.aspect=w/h; cam.updateProjectionMatrix(); }
   size();
   // đặt camera vừa khít cả tầng theo khổ màn hình (điện thoại dọc vẫn thấy hết)
-  (function(){ var hv=cam.fov*Math.PI/360, hh=Math.atan(Math.tan(hv)*cam.aspect), port=cam.aspect<.9, d=(port?28:31)/Math.sin(Math.min(hv,hh)), dir=(port?new THREE.Vector3(-.2,.93,.3):new THREE.Vector3(-.36,.8,.48)).normalize();
+  (function(){ var hv=cam.fov*Math.PI/360, hh=Math.atan(Math.tan(hv)*cam.aspect), port=cam.aspect<.9, d=(port?32:35)/Math.sin(Math.min(hv,hh)), dir=(port?new THREE.Vector3(-.2,.93,.3):new THREE.Vector3(-.36,.8,.48)).normalize();
     cam.position.copy(dir.multiplyScalar(d)); ctl.target.set(0,0,0); ctl.update(); })(); window.addEventListener('resize',size);
   var alive=true; (function loop(){ if(!alive) return; requestAnimationFrame(loop); ctl.update(); r.render(sc,cam); })();
   function close(){ alive=false; window.removeEventListener('resize',size); r.dispose(); ov.remove(); }
@@ -1265,7 +1270,10 @@ function f3Build(root,walls,units){
     var tx=new THREE.CanvasTexture(c); tx.encoding=THREE.sRGBEncoding; var sp2=new THREE.Sprite(new THREE.SpriteMaterial({map:tx,depthTest:false}));
     sp2.scale.set(2.9,1.45,1); sp2.position.set(u,3.2,v); sp2.renderOrder=9; root.add(sp2); }
   if(LL==='T30') U30.forEach(function(r){ var b=G30[r[0]], u0=1e9,u1=-1e9,v0=1e9,v1=-1e9; b.forEach(function(q){ u0=Math.min(u0,q[0]); u1=Math.max(u1,q[1]); v0=Math.min(v0,q[2]); v1=Math.max(v1,q[3]); }); label('30'+r[0],NAME[r[1]],COL[r[1]],(u0+u1)/2,(v0+v1)/2); });
-  else U.forEach(function(r){ if(onFloor(r)) label(r[0],NAME[r[1]],COL[r[1]],(r[2]+r[3])/2,(r[4]+r[5])/2); });
+  else U.forEach(function(r){ if(!onFloor(r)) return; var cu=(r[2]+r[3])/2, cv=(r[4]+r[5])/2, d=(r[6]||'E')[0], lu=cu, lv=cv, O=2.6;
+    if(d==='E') lv=r[4]-O; else if(d==='W') lv=r[5]+O; else if(d==='N') lu=r[2]-O; else lu=r[3]+O;   // số căn đặt ra ngoài mặt kính của căn, có vạch chỉ vào căn: không che nội thất
+    label(r[0],NAME[r[1]],COL[r[1]],lu,lv);
+    var lg=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(cu+(lu-cu)*.35,1.25,cv+(lv-cv)*.35),new THREE.Vector3(lu,2.6,lv)]); var ln=new THREE.Line(lg,new THREE.LineBasicMaterial({color:new THREE.Color(COL[r[1]]),depthTest:false})); ln.renderOrder=8; root.add(ln); });
 }
 
 /* ---------- tải ảnh về (có watermark số điện thoại) ---------- */
