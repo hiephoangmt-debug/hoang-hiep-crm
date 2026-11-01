@@ -626,6 +626,10 @@ p { margin: 0 0 1em; }
 .map, .video { position: relative; aspect-ratio: 16 / 9; margin-top: 16px; border-radius: var(--radius); overflow: hidden; background: var(--tint); }
 .map { aspect-ratio: 16 / 8; }
 .map iframe, .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+/* Phối cảnh 3D nhúng trong tin nhà đất (khách xoay ngay trên web). */
+.view3d { position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius-lg); overflow: hidden; background: #0b1a2a; }
+.view3d iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+@media (min-width: 900px) { .view3d { aspect-ratio: 16 / 9; } }
 
 /* Finance calculator */
 .finance__intro { margin-bottom: 20px; padding: 16px 20px; border-left: 4px solid var(--gold-2); background: var(--gold-soft); border-radius: 0 8px 8px 0; }

@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.47** + plugin Hoàng Hiệp CRM **2.20.106**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.48** + plugin Hoàng Hiệp CRM **2.20.107**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.107, giao diện 2.15.48: xoay phối cảnh 3D ngay trong tin nhà đất (01/11/2026)
+- Tin nhà đất có ô mới "Link phối cảnh 3D" (tab Hình ảnh & video). Điền link → trang tin hiện khối "Phối cảnh 3D": khách kéo để xoay, chụm để phóng ngay trên web, kèm nút "Mở toàn màn hình".
+- Tin lô đất 4 mặt tiền Hoàng Sa đã gắn sẵn phối cảnh 3D lô đất và khách sạn 22 tầng.
 
 ## Có gì mới – plugin 2.20.106: tin lô đất Hoàng Sa có link phối cảnh 3D (01/11/2026)
 - Tin bán lô đất 4 mặt tiền Hoàng Sa thêm link "Xem phối cảnh 3D lô đất và khách sạn 22 tầng" (trang GitHub Pages lo-dat-hoang-sa). Tin đã đăng (chưa sửa tay) tự cập nhật.

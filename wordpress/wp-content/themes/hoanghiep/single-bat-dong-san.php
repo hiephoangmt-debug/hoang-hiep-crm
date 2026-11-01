@@ -119,6 +119,15 @@ while ( have_posts() ) :
 				</section>
 			<?php endif; ?>
 
+			<?php $view3d = hh_meta( 'hh_3d_url' ); ?>
+			<?php if ( $view3d && 0 === strpos( $view3d, 'https://' ) ) : ?>
+				<section class="block" id="phoi-canh-3d">
+					<h2 class="block__title">Phối cảnh 3D</h2>
+					<div class="view3d"><iframe src="<?php echo esc_url( $view3d ); ?>" title="Phối cảnh 3D <?php echo esc_attr( get_the_title() ); ?>" loading="lazy" allow="fullscreen; xr-spatial-tracking" allowfullscreen></iframe></div>
+					<p class="map-links">Kéo để xoay, chụm hai ngón để phóng to (hình minh hoạ) · <a href="<?php echo esc_url( $view3d ); ?>" target="_blank" rel="noopener">Mở toàn màn hình ↗</a></p>
+				</section>
+			<?php endif; ?>
+
 			<?php if ( 'ban' === $deal ) : ?>
 				<section class="block" id="tai-chinh">
 					<h2 class="block__title">Tính khoản vay &amp; dòng tiền</h2>

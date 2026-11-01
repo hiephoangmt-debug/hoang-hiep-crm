@@ -321,6 +321,7 @@ function hh_listing_schema() {
 				'hh_gallery'     => array( 'type' => 'gallery', 'label' => 'Ảnh thực tế' ),
 				'hh_video'       => array( 'type' => 'url', 'label' => 'Video YouTube', 'placeholder' => 'https://www.youtube.com/watch?v=…' ),
 				'hh_map_address' => array( 'type' => 'text', 'label' => 'Địa chỉ trên bản đồ Google', 'placeholder' => 'Để trống sẽ dùng địa chỉ ở tab Thông tin cơ bản' ),
+				'hh_3d_url'      => array( 'type' => 'url', 'label' => 'Link phối cảnh 3D (khách xoay xem ngay trên trang tin)', 'placeholder' => 'https://hiephoangmt-debug.github.io/hoang-hiep-crm/…' ),
 			),
 		),
 	);
