@@ -139,7 +139,12 @@ function villa(ox, mirror = 1, fl = 3) {
   box(3.9, 0.06, 6.0, M.paver, X(1.95 + 0.05), 0, 3.0, g, { cast: false });                 // bãi đỗ xe 17,5 m²
   for (let i = 0; i < 8; i++) box(1.2, 0.08, 0.45, M.walk, X(5.2), 0, 0.5 + i * 0.75, g);  // lối đá vào hiên
   box(1.6, 0.1, 4.3, M.wood, X(7.1), 0, 2.4, g);                                              // sàn gỗ sân vườn trước
-  box(0.25, 1.1, 25, M.leaf, X(9.88), 0, 12.5, g);                                            // hàng rào cây ranh giới
+  // hàng rào ranh giới giữa 2 căn: chạy suốt từ vỉa hè ra tới mép kè bờ sông (tường thấp + hàng cây xén)
+  for (const ex of [0.08, 9.92]) {
+    box(0.16, 0.45, 24.6, M.stone, X(ex), 0, 13.1, g);
+    box(0.3, 1.25, 23.6, M.leaf, X(ex), 0.45, 13.6, g);
+    for (let i = 0; i < 26; i++) { const b = new THREE.Mesh(new THREE.IcosahedronGeometry(0.28, 0), i % 4 ? M.leaf2 : M.bougain); b.position.set(X(ex), 1.75, 2.2 + i * 0.9); g.add(b); }
+  }
   box(10, 0.45, 0.35, M.stone, 0, 0, 0.18, g);                                               // bó vỉa + bồn hoa trước
   for (let i = 0; i < 9; i++) { const f = new THREE.Mesh(new THREE.IcosahedronGeometry(0.32, 0), i % 2 ? M.bougain : M.leaf2); f.position.set(X(4.2 + i * 0.65), 0.6, 0.2); f.castShadow = true; g.add(f); }
 
