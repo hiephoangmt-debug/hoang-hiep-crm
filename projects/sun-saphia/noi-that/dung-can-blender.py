@@ -413,7 +413,7 @@ for _pt in PARTS:
             if LUX and AIRY:   # như ảnh mẫu: tấm ốp bọc nỉ dọc cao gần trần + hắt LED, giường bọc boucle kem, khăn + gối đất nung, đôn cuối giường, đèn thả 2 bên
                 PW = w + .9; n_ = max(4, int(round(PW / .32))); pw_ = PW / n_   # đầu giường bọc nỉ dọc cao 1,3 m sát sau giường + tab đầu giường, hắt LED trên đỉnh
                 for i in range(n_): box(-PW / 2 + (i + .5) * pw_, -hd - .07, .0, pw_ - .01, .06, 1.3, FAB2, bevel=.025, parent=o)
-                box(0, -hd - .1, 1.3, PW, .03, .02, COVE, 0, 0, parent=o)
+                box(0, -hd - .07, 1.3, PW, .03, .02, COVE, 0, 0, parent=o)
                 box(0, 0, 0, w + .14, d + .08, .34, CHAIRF, bevel=.05, parent=o); box(0, -hd + .02, 0, w + .14, .16, 1.0, CHAIRF, bevel=.06, parent=o)
                 box(0, d * .3, .6, w + .1, .55, .025, FAB3, bevel=.01, parent=o); box(w * .32, d * .3 + .2, .2, .03, .5, .4, FAB3, 0, .005, parent=o)
                 for sd in (-1, 1): box(sd * w * .2, -hd + .48, .6, w * .32, .14, .3, FAB3, bevel=.07, parent=o)
@@ -610,13 +610,18 @@ def shoot(name, eye, look, lens=16, z=1.35, shift_y=0., ortho=None):
             fw = ob.matrix_world.to_3x3() @ Vector((0, 1, 0)); fw.z = 0; fw.normalize(); rt = Vector((fw.y, -fw.x, 0))   # hướng cuối giường lấy từ ma trận (đúng cả căn lật)
             p0 = c_ + fw * (bd / 2 + .75); a_ = min(ray(p0, fw), ray(p0 - Vector((0, 0, .8)), fw)); p1 = p0 + fw * max(0., a_ - .3)
             sides = [(min(ray(p1, rt * sg), ray(p1 - Vector((0, 0, .8)), rt * sg)), sg) for sg in (-1, 1)]; b_, sg = max(sides)
-            t_ = c_ - fw * (bd * .25) - rt * sg * (bw * .15); hb = c_ - fw * (bd * .3); hb.z = .95
-            def los(e2):   # thấy được giường, phía trước thoáng, không đứng lọt trong tủ/tường
-                v_ = hb - e2; w_ = (t_ - e2); w_.z = 0
-                return ray(e2, v_.normalized(), v_.length) >= v_.length - .05 and ray(e2, w_.normalized(), 2.) >= 1.2 and min(ray(e2, Vector((1, 0, 0)), .3), ray(e2, Vector((-1, 0, 0)), .3), ray(e2, Vector((0, 1, 0)), .3), ray(e2, Vector((0, -1, 0)), .3)) >= .25
-            for e_ in (p1 + rt * sg * max(0., min(b_ - .3, bw / 2 + 1.2)), p1 + rt * sg * max(0., min(b_ - .3, .6)), p1, p0, c_ + fw * (bd / 2 + .45)):
-                if los(e_): break
-            ex, ey, lx, ly = e_.x, e_.y, t_.x, t_.y
+            hb = c_ - fw * (bd * .3); hb.z = .95
+            def los(e2, t2):   # thấy được giường, phía trước thoáng, không đứng lọt trong tủ/tường
+                v_ = hb - e2; w_ = (t2 - e2); w_.z = 0
+                return ray(e2, v_.normalized(), v_.length) >= v_.length - .05 and ray(e2, w_.normalized(), 2.) >= 1.0 and min(ray(e2, Vector((1, 0, 0)), .3), ray(e2, Vector((-1, 0, 0)), .3), ray(e2, Vector((0, 1, 0)), .3), ray(e2, Vector((0, -1, 0)), .3)) >= .2
+            CAND = []
+            for s2 in (sg, -sg):   # ưu tiên: góc cuối giường phía rộng → cạnh góc cuối giường → cạnh giường (khi cuối giường vướng tủ)
+                t2 = c_ - fw * (bd * .25) - rt * s2 * (bw * .15)
+                if s2 == sg: CAND += [(p1 + rt * s2 * max(0., min(b_ - .3, bw / 2 + 1.2)), t2), (p1 + rt * s2 * max(0., min(b_ - .3, .6)), t2), (p1, t2), (p0, t2)]
+                t3 = c_ - fw * (bd * .3) - rt * s2 * (bw * .45)
+                CAND += [(c_ + fw * (bd / 2 + .15) + rt * s2 * (bw / 2 + .45), t3), (c_ + fw * (bd * .15) + rt * s2 * (bw / 2 + .45), t3)]
+            for e_, t2 in CAND:
+                if los(e_, t2): ex, ey, lx, ly = e_.x, e_.y, t2.x, t2.y; break   # không chỗ nào đạt: giữ góc máy đặt sẵn
         cam.location = (ex, ey, z)
         cam.rotation_euler = (math.radians(90), 0, math.atan2(ly - ey, lx - ex) - math.pi / 2)
     sc.render.filepath = os.path.join(OUT, name + '.png'); bpy.ops.render.render(write_still=True); print('xong', name, flush=True)
