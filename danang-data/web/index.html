@@ -737,6 +737,11 @@ if (CASA_DATA) {
   casaGroup.add(body, roof, glass, pools, deck, palmT, palmC);
   casaGroup.userData.body = body.material; casaGroup.userData.glass = glassMat;
 
+  const mkTex = (w, h, draw) => { const cv = document.createElement('canvas'); cv.width = w; cv.height = h; draw(cv.getContext('2d'), w, h); const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; return t; };
+  const vineMat = new THREE.MeshStandardMaterial({ alphaTest: 0.4, side: THREE.DoubleSide, roughness: 0.85, map: mkTex(256, 128, (g, w, h) => {
+    for (let i = 0; i < 70; i++) { const x = rnd() * w, L = h * (0.3 + rnd() * 0.7); for (let y = 0; y < L; y += 3) { g.fillStyle = `hsl(${85 + rnd() * 30},${45 + rnd() * 20}%,${26 + rnd() * 22}%)`; g.beginPath(); g.ellipse(x + Math.sin(y * 0.15 + i) * 2 + (rnd() - 0.5) * 4, y, 2.4, 1.6, rnd() * 3, 0, 7); g.fill(); } }
+  }) });
+  const hedgeMat = new THREE.MeshStandardMaterial({ roughness: 0.9, map: mkTex(128, 128, (g, w, h) => { g.fillStyle = '#2f5a26'; g.fillRect(0, 0, w, h); for (let i = 0; i < 1800; i++) { g.fillStyle = `hsl(${88 + rnd() * 30},${40 + rnd() * 20}%,${18 + rnd() * 26}%)`; g.beginPath(); g.ellipse(rnd() * w, rnd() * h, 3, 1.8, rnd() * 3, 0, 7); g.fill(); } }) });
   // --- Biệt thự BT theo mẫu BT1 / BT1A (lô chuẩn 10 × 25 m, co giãn theo kích thước lô thật) ---
   //   dọc chiều sâu từ đường ra kênh: sân trước 6,2 m (đỗ xe + vườn) | nhà 12,4 m (tầng trên 13 m, ban công 2 đầu) | sàn gỗ + hồ bơi 21,8 m² sát kênh
   //   ngang: nhà rộng 8,2 m, sân hông 1,8 m; 3 tầng + tầng kỹ thuật 2 khối mái dốc kẹp sân thượng 12 m²
@@ -753,12 +758,19 @@ if (CASA_DATA) {
       car: mk(box, new THREE.MeshStandardMaterial({ color: 0xf2f2f2, metalness: 0.6, roughness: 0.3 }), n),
       palmT: mk(new THREE.CylinderGeometry(0.22, 0.35, 1, 6).translate(0, 0.5, 0), new THREE.MeshStandardMaterial({ color: 0x7a5a3a }), n * 2),
       palmC: mk(new THREE.ConeGeometry(1, 0.6, 7).rotateX(Math.PI), leaf, n * 2),
+      frame: mk(box, wallB, n * 6),                                                      // khung hộp lớn ôm lô gia
+      vine: mk(new THREE.PlaneGeometry(1, 1), vineMat, n * 4),                           // dây leo buông rủ
+      hedge: mk(box, hedgeMat, n * 2),                                                   // hàng rào cây ranh giới ra tới bờ
+      dock: mk(box, new THREE.MeshStandardMaterial({ color: 0x8a6448, roughness: 0.8 }), n),
+      lounger: mk(box, new THREE.MeshStandardMaterial({ color: 0xf2eee6, roughness: 0.9 }), n * 2),
+      umb: mk(new THREE.ConeGeometry(1, 0.35, 8, 1, true), new THREE.MeshStandardMaterial({ color: 0xf4efe6, roughness: 0.9, side: THREE.DoubleSide }), n),
     };
     const put = (key, p, th, sx, sy, sz, col) => {
       const im = I[key], k = im.count++;
       m4.compose(p, q.setFromAxisAngle(V3(0, 1, 0), th), V3(sx, sy, sz)); im.setMatrixAt(k, m4);
       if (col) im.setColorAt(k, c.set(col));
     };
+    const yachtSpots = [];
     const WALLS = ['#d6a22e', '#cf9a2a', '#dcab3c', '#c99327', '#e0b24a'], CARS = ['#f2f2f2', '#1f2226', '#8d939b', '#f2f2f2', '#5a1e22'];
     V.forEach((l, idx) => {
       const [x0, z0] = LL(l.lat, l.lon), y = groundY(x0, z0);
@@ -802,10 +814,40 @@ if (CASA_DATA) {
         put('palmT', at(t, w, 0), 0, 1, ph, 1); put('palmC', at(t, w, ph), idx + t, 2.8, 1.4, 2.8);
       }
       if (idx % 3 === 0) pillar(at(g0 + 0.3, wc + HW / 2 + 0.3, 0), Htop * 0.85, 0.45);       // hoa giấy leo góc nhà
+      // khung hộp lớn + dây leo ở cả mặt tiền và mặt sau (theo phối cảnh)
+      for (const [t, sg] of [[u0, -1], [u1, 1]]) {
+        const tf = t + sg * 0.1, Hf = (fl - 1) * HF;
+        put('frame', at(tf, wc - HW / 2 + 0.22, H0), th, 0.45, Hf, 0.5, wall);
+        put('frame', at(tf, wc + HW / 2 - 0.22, H0), th, 0.45, Hf, 0.5, wall);
+        put('frame', at(tf, wc, Htop - 0.45), th, HW, 0.45, 0.5, wall);
+        for (let f = 1; f < fl; f++) put('vine', at(tf + sg * 0.3, wc, H0 + (f - 1) * HF - 0.5), th + (sg > 0 ? 0 : Math.PI), HW * 0.85, 1.8, 1);
+      }
+      // hàng rào cây hai bên lô chạy suốt ra tới mép kênh
+      put('hedge', at(D / 2 + 0.5, -Wl / 2 + 0.15, 0), th, 0.3, 1.5, D + 1);
+      if (!l.ws) put('hedge', at(D / 2 + 0.5, Wl / 2 - 0.15, 0), th, 0.3, 1.5, D + 1);
+      // ghế nằm + dù cạnh hồ bơi
+      for (const dw of [2.3, 3.2]) put('lounger', at(g1 + 1.2, wc + dw, 0.15), th, 0.7, 0.35, 1.9);
+      put('umb', at(g1 + 1.4, wc + HW / 2 - 0.3, 2.5), 0, 1.5, 1.2, 1.5);
+      // cầu tàu gỗ riêng; cứ khoảng 3 căn giáp kênh mới có 1 du thuyền
+      if (l.ws) {
+        put('dock', at(D + 2.2, wc - HW / 2 + 1.6, 0.25), th, 1.4, 0.2, 3.0);
+        if (idx % 3 === 1) yachtSpots.push({ p: at(D + 6.5, wc, 0), th });
+      }
       glow.push(...at(g1 + 0.6, wc, 2.5).toArray());
     });
     for (const k in I) { I[k].instanceMatrix.needsUpdate = true; if (I[k].instanceColor) I[k].instanceColor.needsUpdate = true; }
     casaGroup.userData.btBody = I.wall; casaGroup.userData.btLots = V; casaGroup.userData.btWall = wallB;
+    // du thuyền thưa, đậu cách bờ, khẽ nhấp nhô
+    const yHull = new THREE.MeshStandardMaterial({ color: 0xf7f7f5, roughness: 0.25 }), yDark = new THREE.MeshStandardMaterial({ color: 0x1b2430, roughness: 0.1, emissive: 0xffc987, emissiveIntensity: 0 });
+    const ys = [];
+    for (const { p, th } of yachtSpots) {
+      const yg = new THREE.Group(); yg.position.set(p.x, 0.2, p.z); yg.rotation.y = th + Math.PI / 2 + (Math.random() - 0.5) * 0.3;
+      const hull = new THREE.Mesh(new THREE.CapsuleGeometry(1.4, 6, 4, 10).rotateZ(Math.PI / 2), yHull); hull.scale.y = 0.55; yg.add(hull);
+      const cab = new THREE.Mesh(new THREE.BoxGeometry(3.6, 1.1, 2.2), yHull); cab.position.set(-0.6, 1.1, 0); yg.add(cab);
+      const win = new THREE.Mesh(new THREE.BoxGeometry(3.7, 0.5, 2.25), yDark); win.position.set(-0.6, 1.15, 0); yg.add(win);
+      casaGroup.add(yg); ys.push(yg);
+    }
+    casaAnim.push((t, night) => { yDark.emissiveIntensity = night * 0.8; ys.forEach((y, i) => { y.position.y = 0.2 + Math.sin(t * 0.9 + i) * 0.08; }); });
   }
 
   // --- Park Home SL1–SL4: theo mẫu căn điển hình (lô 8 × 22,25 m, nhà 16,05 × ~7 m, 3 tầng + tầng kỹ thuật) ---
@@ -1304,12 +1346,12 @@ $('loading').style.opacity = 0; setTimeout(() => $('loading').remove(), 700);
       rows = [['Kích thước lô (trên bản đồ)', `${l.w.toFixed(1)} × ${l.d.toFixed(1)} m ≈ ${area} m²`], ['Quy mô', `${l.f} tầng + tầng kỹ thuật (2 khối mái dốc, sân thượng 12 m²)`],
         ['Tầng trệt', 'Phòng khách + ăn 55,6 m², bếp 13,5 m², hiên 8,7 m², phòng đa năng, WC, hồ bơi 21,8 m²'], ['Tầng 1', 'P.ngủ 17,1 m² + 19,6 m², thông tầng, phòng thay đồ, 2 WC'],
         ['Tầng 2', 'P.ngủ 17,1 m² + 19,6 m², phòng đa năng, phòng thay đồ, 2 WC'], ['Tầng kỹ thuật', 'Phòng giặt 6,7 m², sân 12,2 m² + 12,5 m²']];
-      plans = [['bt1.jpg', 'Mặt bằng mẫu BT1'], ['bt1a.jpg', 'Mặt bằng mẫu BT1A']];
+      plans = [['bt1.jpg', 'Mặt bằng mẫu BT1'], ['bt1a.jpg', 'Mặt bằng mẫu BT1A'], ['https://claude.ai/artifact/Xgffx63YKZaomsDYDCSQBS', 'Phối cảnh chi tiết dãy BT']];
     }
     const tb = $('unitTb'); tb.textContent = '';
     for (const [k, v] of rows) { const tr = tb.insertRow(); tr.insertCell().textContent = k; tr.insertCell().textContent = v; }
     const pl = $('unitPlans'); pl.textContent = '';
-    for (const [src, label] of plans) { const b = document.createElement('button'); b.className = 'chip'; b.textContent = '📐 ' + label; b.onclick = () => { $('planImg').src = src; $('plan').hidden = false; }; pl.appendChild(b); }
+    for (const [src, label] of plans) { const b = document.createElement('button'); b.className = 'chip'; b.textContent = '📐 ' + label; b.onclick = () => { if (src.startsWith('http')) { window.open(src, '_blank'); return; } $('planImg').src = src; $('plan').hidden = false; }; pl.appendChild(b); }
     $('unit').hidden = false; mark.position.copy(l.ctr).setY(l.ctr.y + 0.5); mark.visible = true; setTour(false);
   });
   $('unitX').onclick = () => { $('unit').hidden = true; mark.visible = false; };
