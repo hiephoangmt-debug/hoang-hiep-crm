@@ -416,8 +416,8 @@ for _pt in PARTS:
                 box(0, -hd - .07, 1.3, PW, .03, .02, COVE, 0, 0, parent=o)
                 box(0, 0, 0, w + .14, d + .08, .34, CHAIRF, bevel=.05, parent=o); box(0, -hd + .02, 0, w + .14, .16, 1.0, CHAIRF, bevel=.06, parent=o)
                 box(0, d * .3, .6, w + .1, .55, .025, FAB3, bevel=.01, parent=o); box(w * .32, d * .3 + .2, .2, .03, .5, .4, FAB3, 0, .005, parent=o)
-                for sd in (-1, 1): box(sd * w * .2, -hd + .48, .6, w * .32, .14, .3, FAB3, bevel=.07, parent=o)
-                box(0, hd + .36, 0, w * .75, .42, .44, CHAIRF, bevel=.06, parent=o)
+                for sd in (-1, 1): box(sd * w * .18, -hd + .52, .6, .42, .09, .3, FAB3, bevel=.045, parent=o)   # gối tựa nhỏ mềm, không thành khối
+                if not str(LAY).startswith('STU'): box(0, hd + .36, 0, w * .75, .42, .44, CHAIRF, bevel=.06, parent=o)   # studio: bỏ đôn cuối giường cho thoáng lối đi
                 for sd in (-1, 1):
                     cyl(sd * (w / 2 + .32), -hd + .12, 1.15, .004, H - 1.15, BRASS, parent=o); cyl(sd * (w / 2 + .32), -hd + .12, 1.0, .035, .16, LAMP, parent=o)
             elif LUX:   # đầu giường bọc nhung cao + ốp gỗ óc chó nan + đèn tường đồng + đôn cuối giường
