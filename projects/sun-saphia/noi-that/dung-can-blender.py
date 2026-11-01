@@ -143,6 +143,10 @@ if LUX:
     FAB = velvet('nhung-xanh-reu', (.025, .085, .07)); FAB2 = velvet('nhung-taupe', (.4, .33, .27)); CHAIRF = velvet('boucle-kem', (.86, .82, .76))
     FAB3 = mat('da-cognac', (.42, .2, .09), .45); LINEN = mat('ga-lux', (.97, .96, .94), .9, noise=(60, .1, .08)); RUG = mat('tham-lux', (.8, .77, .72), 1., noise=(250, .3, .15))
     STONE = marble('da-ban', (.96, .95, .93), (.5, .48, .46), (4, 4), .08); CAB = mat('tu-den', (.06, .06, .065), .35)
+    AIRY = os.environ.get('AIRY', '1') == '1'   # tông sáng thoáng như ảnh mẫu: gỗ sồi sáng, sofa kem cát, điểm nhấn đất nung
+    if AIRY:
+        WALNUT = mat('go-soi-sang', (.52, .37, .24), .35, noise=(25, .3, .02)); FAB = velvet('boucle-cat', (.74, .68, .6)); FAB3 = velvet('nhung-dat-nung', (.3, .085, .04))
+        FAB2 = velvet('ni-be', (.72, .64, .55))
     DRAPE = velvet('rem-nhung', (.52, .45, .38)); ART1 = mat('tranh-vang', (.82, .66, .4), .35, .5, noise=(1.8, .9, 0)); ART2 = mat('tranh-xanh', (.2, .3, .3), .5, noise=(1.5, .9, 0))
 COVE = mat('led-hat', (1, 1, 1), .5, emit=(1, .76, .5), estr=9)
 def torus(cx, cy, cz, R, r, m, parent=None):
@@ -168,6 +172,33 @@ def cyl(cx, cy, z0, r, h, m, parent=None, verts=32):
     if parent: o.parent = parent
     return o
 
+LEAF2 = mat('la-sang', (.16, .36, .11), .55, noise=(40, .3, .1)); SOIL = mat('dat-chau', (.05, .035, .025), 1.)
+POTC = mat('chau-gom', (.8, .76, .7), .6, noise=(80, .2, .05))
+def plant(cx, cy, h=1.0, parent=None, seed=1):
+    """Cây chậu thật hơn: chậu gốm thuôn, đất, nhiều lá dài cong (kiểu thiên điểu / cau cảnh) thay cho cục cầu xanh."""
+    import random as _rr; rr = _rr.Random(seed)
+    ph = .32 * h + .1
+    bpy.ops.mesh.primitive_cone_add(vertices=32, radius1=.14 * h + .04, radius2=.19 * h + .05, depth=ph, location=(cx, cy, ph / 2)); po = bpy.context.object; po.data.materials.append(POTC)
+    for q in po.data.polygons: q.use_smooth = True
+    if parent: po.parent = parent
+    cyl(cx, cy, ph - .03, .17 * h + .04, .02, SOIL, parent=parent)
+    me = bpy.data.meshes.new('la'); bm = bmesh.new(); N = int(22 + 14 * h)
+    for i in range(N):
+        a = i * 2.39996 + rr.uniform(-.2, .2); el = rr.uniform(.9, 1.35); L = h * rr.uniform(.55, .95); W = h * rr.uniform(.07, .11); dr = rr.uniform(.15, .4) * L
+        hv = Vector((math.cos(a), math.sin(a), 0)); pv = Vector((-math.sin(a), math.cos(a), 0)); base = Vector((cx, cy, ph - .02)) + hv * rr.uniform(0, .04)
+        S = 9; rows = []
+        for j in range(S + 1):
+            t = j / S; c = base + hv * (L * t * math.cos(el)) + Vector((0, 0, L * t * math.sin(el) - dr * t * t))
+            ww = (.08 if t < .35 else math.sin(math.pi * (t - .35) / .65) * .5 + .5) * W * (1 - t * .3) if t < .995 else 0
+            fold = Vector((0, 0, ww * .25))
+            rows.append((bm.verts.new(c - pv * ww / 2 + fold), bm.verts.new(c), bm.verts.new(c + pv * ww / 2 + fold)))
+        for j in range(S):
+            for k_ in range(2): bm.faces.new((rows[j][k_], rows[j][k_ + 1], rows[j + 1][k_ + 1], rows[j + 1][k_]))
+    bm.to_mesh(me); bm.free(); lo = bpy.data.objects.new('la-cay', me); sc.collection.objects.link(lo)
+    me.materials.append(LEAF); me.materials.append(LEAF2)
+    for q in me.polygons: q.use_smooth = True; q.material_index = (q.index // 18) % 2
+    if parent: lo.parent = parent
+    return lo
 def sphere(cx, cy, cz, r, m, sz=1., parent=None):
     bpy.ops.mesh.primitive_ico_sphere_add(radius=r, subdivisions=3, location=(cx, cy, cz)); o = bpy.context.object
     o.scale[2] = sz; o.data.materials.append(m)
@@ -356,6 +387,7 @@ if TOUR:   # hành lang chung trước cửa căn (thảm, trần, tường, đ�
 
 # ---------------- nội thất theo bản vẽ ----------------
 DIRV = {'u': (0, -1), 'd': (0, 1), 'l': (-1, 0), 'r': (1, 0)}
+BEDS = []
 def frame(x, y, face):
     v = DIRV.get(face, (0, 1)); fx, fy = L(*v)                     # hướng mặt trước (Blender)
     e = bpy.data.objects.new('noi-that', None); sc.collection.objects.link(e)
@@ -375,7 +407,18 @@ for _pt in PARTS:
             box(0, -hd + .03, 0, w + .3, .1, 1.15, FAB2, bevel=.03, parent=o)
             for sd in (-1, 1): box(sd * w * .24, -hd + .32, .52, w * .42, .34, .14, LINEN, bevel=.06, parent=o)
             box(0, .05, -.001, w + .8, d + .1, .012, RUG, 0, 0, parent=o)
-            if LUX:   # đầu giường bọc nhung cao + ốp gỗ óc chó nan + đèn tường đồng + đôn cuối giường
+            BEDS.append((o, w, d))
+            if LUX and AIRY:   # như ảnh mẫu: tấm ốp bọc nỉ dọc cao gần trần + hắt LED, giường bọc boucle kem, khăn + gối đất nung, đôn cuối giường, đèn thả 2 bên
+                PW = w + 1.5; n_ = max(4, int(round(PW / .5))); pw_ = PW / n_
+                for i in range(n_): box(-PW / 2 + (i + .5) * pw_, -hd - .1, .0, pw_ - .012, .08, H - .35, FAB2, bevel=.03, parent=o)
+                box(0, -hd - .06, H - .37, PW, .02, .02, COVE, 0, 0, parent=o)
+                box(0, 0, 0, w + .14, d + .08, .34, CHAIRF, bevel=.05, parent=o); box(0, -hd + .02, 0, w + .14, .16, 1.0, CHAIRF, bevel=.06, parent=o)
+                box(0, d * .3, .6, w + .1, .55, .025, FAB3, bevel=.01, parent=o); box(w * .32, d * .3 + .2, .2, .03, .5, .4, FAB3, 0, .005, parent=o)
+                for sd in (-1, 1): box(sd * w * .2, -hd + .48, .6, w * .32, .14, .3, FAB3, bevel=.07, parent=o)
+                box(0, hd + .36, 0, w * .75, .42, .44, CHAIRF, bevel=.06, parent=o)
+                for sd in (-1, 1):
+                    cyl(sd * (w / 2 + .32), -hd + .12, 1.15, .004, H - 1.15, BRASS, parent=o); cyl(sd * (w / 2 + .32), -hd + .12, 1.0, .035, .16, LAMP, parent=o)
+            elif LUX:   # đầu giường bọc nhung cao + ốp gỗ óc chó nan + đèn tường đồng + đôn cuối giường
                 box(0, -hd - .04, 0, w + .9, .1, 1.45, FAB2, bevel=.03, parent=o)
                 for i in range(int((w + 2.2) / .06)): box(-(w + 2.2) / 2 + i * .06 + .03, -hd - .12, 0, .035, .04, H, WALNUT, 0, .004, parent=o)
                 for sd in (-1, 1): box(sd * (w / 2 + .55), -hd - .07, 1.55, .04, .1, .24, BRASS, 0, .005, parent=o); cyl(sd * (w / 2 + .55), -hd + .02, 1.6, .06, .14, LAMP, parent=o)
@@ -468,10 +511,9 @@ for _pt in PARTS:
             box(0, 0, 0, w, d, .46, (CHAIRF if LUX else FAB2) if k == 'chair' else OAK, bevel=.03, parent=o)
             if k == 'chair': box(0, -hd + .03, .46, w, .05, .42, FAB2, bevel=.02, parent=o)
         elif k == 'cab':
-            box(0, 0, .1, w, d, .55, OAK, .0, .004, parent=o); sphere(-w * .25, 0, .8, .12, LEAF, 1.3, parent=o); cyl(w * .2, 0, .65, .05, .25, WHITE, parent=o)
+            box(0, 0, .1, w, d, .55, OAK, .0, .004, parent=o); cyl(w * .2, 0, .65, .05, .25, WHITE, parent=o)
         elif k == 'plant':
-            cyl(0, 0, 0, .17, .42, POT, parent=o)
-            for i in range(7): sphere(.12 * math.cos(i * .9), .12 * math.sin(i * .9), .62 + .12 * (i % 3), w * .32, LEAF, 1.4, parent=o)
+            plant(0, 0, max(1.0, min(1.8, w * 3.0)), parent=o, seed=int(x * 100 + y * 10))
         elif k == 'ac':
             box(0, 0, 0, w, d, .6, WHITE, parent=o)
         else:
@@ -551,13 +593,35 @@ def shoot(name, eye, look, lens=16, z=1.35, shift_y=0., ortho=None):
         cam_d.type = 'ORTHO'; cam_d.ortho_scale = ortho; cam.location = (*eye, 9); cam.rotation_euler = (0, 0, 0)
     else:
         cam_d.type = 'PERSP'; cam_d.lens = lens; cam_d.shift_y = shift_y
-        ex, ey = P(*eye); lx, ly = P(*look); cam.location = (ex, ey, z)
+        ex, ey = P(*eye); lx, ly = P(*look)
+        dg_ = bpy.context.evaluated_depsgraph_get()
+        def ray(o_, d_, far=6.):
+            ok_, loc_, *_ = sc.ray_cast(dg_, o_, d_, distance=far); return (loc_ - o_).length if ok_ else far
+        bed_ = None
+        if name in ('bed', 'plus') and BEDS and os.environ.get('BEDCAM', '1') == '1':   # phòng ngủ: đứng góc phía cuối giường, nhìn chéo về đầu giường + cửa kính (như ảnh mẫu)
+            bpy.context.view_layer.update()
+            cand = [(Vector((ob.matrix_world.translation.x - ex, ob.matrix_world.translation.y - ey)).length, ob, bw, bd) for ob, bw, bd in BEDS]
+            dist_, ob, bw, bd = min(cand, key=lambda t: t[0])
+            if dist_ < 3.5: bed_ = (ob, bw, bd)
+        if bed_:
+            ob, bw, bd = bed_; c_ = ob.matrix_world.translation.copy(); c_.z = z
+            fw = ob.matrix_world.to_3x3() @ Vector((0, 1, 0)); fw.z = 0; fw.normalize(); rt = Vector((fw.y, -fw.x, 0))   # hướng cuối giường lấy từ ma trận (đúng cả căn lật)
+            p0 = c_ + fw * (bd / 2 + .75); a_ = min(ray(p0, fw), ray(p0 - Vector((0, 0, .8)), fw)); p1 = p0 + fw * max(0., a_ - .3)
+            sides = [(min(ray(p1, rt * sg), ray(p1 - Vector((0, 0, .8)), rt * sg)), sg) for sg in (-1, 1)]; b_, sg = max(sides)
+            t_ = c_ - fw * (bd * .25) - rt * sg * (bw * .15); hb = c_ - fw * (bd * .3); hb.z = .95
+            def los(e2):   # thấy được giường, phía trước thoáng, không đứng lọt trong tủ/tường
+                v_ = hb - e2; w_ = (t_ - e2); w_.z = 0
+                return ray(e2, v_.normalized(), v_.length) >= v_.length - .05 and ray(e2, w_.normalized(), 2.) >= 1.2 and min(ray(e2, Vector((1, 0, 0)), .3), ray(e2, Vector((-1, 0, 0)), .3), ray(e2, Vector((0, 1, 0)), .3), ray(e2, Vector((0, -1, 0)), .3)) >= .25
+            for e_ in (p1 + rt * sg * max(0., min(b_ - .3, bw / 2 + 1.2)), p1 + rt * sg * max(0., min(b_ - .3, .6)), p1, p0, c_ + fw * (bd / 2 + .45)):
+                if los(e_): break
+            ex, ey, lx, ly = e_.x, e_.y, t_.x, t_.y
+        cam.location = (ex, ey, z)
         cam.rotation_euler = (math.radians(90), 0, math.atan2(ly - ey, lx - ex) - math.pi / 2)
     sc.render.filepath = os.path.join(OUT, name + '.png'); bpy.ops.render.render(write_still=True); print('xong', name, flush=True)
 
 SHL = {   # điểm đứng / điểm nhìn theo toạ độ bản vẽ từng loại căn
  '1PN+1': {'living': ((4.6, 0.7), (4.6, 9.5)), 'living2': ((4.65, 7.45), (5.1, 0.8)), 'bed': ((2.45, 5.4), (0.7, 8.9)), 'plus': ((4.0, 3.75), (0.3, 2.5))},
- 'STU':   {'living': ((2.75, 3.65), (1.4, 9.6)), 'living2': ((1.7, 7.25), (3.1, 1.4))},
+ 'STU':   {'living': ((2.45, 3.4), (1.6, 9.6)), 'living2': ((1.7, 7.25), (3.1, 1.4))},
  'STUL':  {'living': ((5.8, 1.2), (4.3, 10.5)), 'living2': ((4.0, 9.2), (6.2, 1.2))},
  '2PN':   {'living': ((6.1, 7.0), (0.3, 8.4)), 'living2': ((2.3, 7.1), (6.7, 8.8)), 'bed': ((3.45, 2.6), (0.6, 0.5)), 'plus': ((3.4, 5.75), (0.4, 3.6))},
 }
@@ -566,7 +630,8 @@ SHL['2PN11'] = {'living': ((5.8, 8.6), (0.3, 10.0)), 'living2': ((1.6, 10.5), (6
 SHL['2PNT'] = {'living': ((7.2, 5.0), (7.2, -1.0)), 'living2': ((7.3, 1.6), (6.0, 7.6)), 'bed': ((2.75, 3.75), (0.2, 1.0)), 'plus': ((5.25, 3.2), (3.9, 0.0))}
 SHL['2PN1L'] = dict(SHL['2PN11'], plus=((4.0, 4.6), (0.5, 8.0)))
 SHL['1PN+1L'] = SHL['1PN+1']
-SH = {k: (v[0], v[1], 15, 1.5, 0.) for k, v in SHL.get(LAY, SHL['1PN+1']).items()}
+_LENS, _CZ = float(os.environ.get('LENS', '13')), float(os.environ.get('CAMZ', '1.2'))   # ống kính rộng, máy thấp như ảnh chụp bất động sản (khung ngang 16:9)
+SH = {k: (v[0], v[1], _LENS, _CZ, (-.04 if k in ('bed', 'plus') else 0.)) for k, v in SHL.get(LAY, SHL['1PN+1']).items()}
 for s in SHOTS:
     if s == 'top':   # mặt bằng 3D phối cảnh nghiêng từ góc (kiểu bản vẽ bán hàng): bỏ trần, tường để nguyên, nền xám nhạt, kèm số đo
         from bpy_extras.object_utils import world_to_camera_view

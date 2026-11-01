@@ -50,8 +50,8 @@ T_ = lambda q: ((q[0] - ou) * pk, (q[1] - ov) * pk)
 for gk, gv in GD.items(): md.polygon([T_(q) for q in gv['poly']], fill=(150, 205, 140, 255) if gk == uid else (210, 228, 204, 255), outline=(150, 170, 150, 255))
 for uk, v in allu.items():
     for lay_, m in v: md.polygon([T_(q) for q in ppoly(lay_, m)], fill=(222, 40, 40, 255) if uk == uid else (238, 238, 236, 255), outline=(90, 90, 90, 255) if uk != uid else (120, 0, 0, 255))
-KW = 300 if H0 > W0 else 340; mini = mini.resize((KW, round(mini.size[1] * KW / mini.size[0])), Image.LANCZOS); KH = mini.size[1]
-kx, ky = (W0 - KW - 46, 78) if H0 > W0 else (W0 - KW - 56, H0 - KH - 110)
+KW = 300 if H0 > W0 else 240; mini = mini.resize((KW, round(mini.size[1] * KW / mini.size[0])), Image.LANCZOS); KH = mini.size[1]
+kx, ky = (W0 - KW - 46, 78) if H0 > W0 else (W0 - KW - 40, 66)
 g.rounded_rectangle([kx - 12, ky - 12, kx + KW + 12, ky + KH + 12], 10, fill=(255, 255, 255, 240), outline=(170, 170, 170, 255))
 cv.alpha_composite(mini, (kx, ky)); g = ImageDraw.Draw(cv)
 g.text((kx, ky - 40), '↑ Biển Đông', font=ImageFont.truetype(F, 18), fill=NAVY + (255,))
