@@ -672,7 +672,7 @@ for s in SHOTS:
             if o.type != 'MESH' or o.hide_render or not o.data.materials or not o.data.vertices: continue
             if o.name.startswith('rem'): o.hide_render = True; continue
             vs_ = [o.matrix_world @ v.co for v in o.data.vertices]; zs_ = [v.z for v in vs_]   # cắt cả đồ vật (tủ, kệ, rèm, đèn thả)
-            if max(zs_) <= LOWH + .02 or min(zs_) < -.3: continue
+            if max(zs_) <= LOWH + .02 or min(zs_) < -.3 or o.name.startswith('la-cay') or o.data.materials[0].name.startswith(('la', 'than-cay', 'go-teak-than')): continue   # cây chậu giữ nguyên (không ép phẳng thành đốm đen)
             c_ = Vector((sum(v.x for v in vs_) / len(vs_), sum(v.y for v in vs_) / len(vs_)))
             if o.data.materials[0] in (EXT, GLASS, ALU) and (c_ - _c0).dot(_hd) < -.35 * _ext: continue   # tường bao đối diện: giữ nguyên
             zb = min(zs_)
@@ -745,7 +745,7 @@ for s in SHOTS:
         json.dump({'dims': dims, 'w': TW_, 'h': TH_}, open(os.path.join(OUT, 'top.json'), 'w'))
         sc.render.filepath = os.path.join(OUT, 'top.png'); bpy.ops.render.render(write_still=True); print('xong top', flush=True)
     elif s == 'garden' and GGLASS:   # từ trong căn nhìn ra sân vườn
-        c2, nv = GGLASS; e_ = c2 - nv * 2.6; g_ = Vector(GCEN)
+        c2, nv = GGLASS; e_ = c2 - nv * float(os.environ.get('GBACK', '1.1')); g_ = Vector(GCEN)   # đứng sát cửa kính: thấy rộng sân vườn, không bị rèm che
         cam_d.type = 'PERSP'; cam_d.lens = 14; cam_d.shift_y = 0; cam.location = (e_.x, e_.y, 1.35)
         cam.rotation_euler = (math.radians(86), 0, math.atan2(g_.y - e_.y, g_.x - e_.x) - math.pi / 2)
         sc.render.filepath = os.path.join(OUT, 'garden.png'); bpy.ops.render.render(write_still=True); print('xong garden', flush=True)
