@@ -1270,19 +1270,19 @@ def chinh_sach():
 # Tông màu dự án: biển – trời – cát – nắng (theo bộ nhận diện "Biển trời khiêu vũ")
 PALETTE = {
     # biến màu chung
-    '--cr2:#FFEDE2': '--cr2:#F8E6D6', '--pp:#F3F6FB': '--pp:#E4F4F3', '--cr:#FFFFFF': '--cr:#FCF6EF', '--nvd:#0B2447': '--nvd:#12707A',
-    '--or:#E96118': '--or:#E58A4E', '--or2:#F2802F': '--or2:#F4B26E', '--yl:#FFAA01': '--yl:#FFD9A0',
-    '--nv:#275286': '--nv:#1C8C96', '--nv2:#1A3A66': '--nv2:#178089', '--ink:#2B3650': '--ink:#22505A',
-    '--mut:#5F6A80': '--mut:#5C787D', '--ln:#E3E9F2': '--ln:#D5EBEA',
+    '--cr2:#FFEDE2': '--cr2:#F7EBD6', '--pp:#F3F6FB': '--pp:#EAF7FB', '--cr:#FFFFFF': '--cr:#FFFCF6', '--nvd:#0B2447': '--nvd:#0E6E99',
+    '--or:#E96118': '--or:#E8893A', '--or2:#F2802F': '--or2:#F4A45B', '--yl:#FFAA01': '--yl:#F3D7A4',
+    '--nv:#275286': '--nv:#168FC2', '--nv2:#1A3A66': '--nv2:#1280B0', '--ink:#2B3650': '--ink:#16485F',
+    '--mut:#5F6A80': '--mut:#557585', '--ln:#E3E9F2': '--ln:#D3EAF2',
     # mã màu viết thẳng
-    '#E96118': '#E58A4E', '#F26B1D': '#E58A4E', '#F2802F': '#F4B26E', '#FF8A3D': '#F4B26E', '#E8460F': '#D9733A',
-    '#F7A66B': '#F7C59A', '#FFB37A': '#F7C59A', '#FFD9A8': '#F8DFC4', '#FFF1E6': '#FCEFE3', '#FFF6EE': '#FCF7EE',
-    '#FFF4EA': '#FBF4E6', '#FFC24F': '#FFD9A0', '#FFB347': '#FFD9A0', '#FFAA01': '#FFD9A0', '#C2410C': '#B8602E',
-    '#0B2447': '#12707A', '#0A2540': '#12707A', '#0B2545': '#12707A', '#0A1F38': '#178089', '#275286': '#1C8C96',
-    '#24507F': '#1C8C96', '#1E4D8C': '#1C8C96', '#1A3A66': '#178089',
-    'rgba(233,97,24': 'rgba(229,138,78', 'rgba(255,138,61': 'rgba(244,178,110', 'rgba(240,123,31': 'rgba(229,138,78',
-    'rgba(11,36,71': 'rgba(18,112,122', 'rgba(10,37,64': 'rgba(18,112,122', 'rgba(39,82,134': 'rgba(28,140,150',
-    'rgba(255,170,1': 'rgba(255,217,160', 'rgba(232,70,15': 'rgba(217,115,58',
+    '#E96118': '#E8893A', '#F26B1D': '#E8893A', '#F2802F': '#F4A45B', '#FF8A3D': '#F4A45B', '#E8460F': '#D9762A',
+    '#F7A66B': '#F6BE86', '#FFB37A': '#F6BE86', '#FFD9A8': '#F1D9B0', '#FFF1E6': '#FBF1E0', '#FFF6EE': '#FCF7EE',
+    '#FFF4EA': '#FBF4E6', '#FFC24F': '#E9C58D', '#FFB347': '#E9C58D', '#FFAA01': '#E9C58D', '#C2410C': '#B8672A',
+    '#0B2447': '#0E6E99', '#0A2540': '#0E6E99', '#0B2545': '#0E6E99', '#0A1F38': '#1280B0', '#275286': '#168FC2',
+    '#24507F': '#168FC2', '#1E4D8C': '#168FC2', '#1A3A66': '#1280B0',
+    'rgba(233,97,24': 'rgba(232,137,58', 'rgba(255,138,61': 'rgba(244,164,91', 'rgba(240,123,31': 'rgba(232,137,58',
+    'rgba(11,36,71': 'rgba(14,110,153', 'rgba(10,37,64': 'rgba(14,110,153', 'rgba(39,82,134': 'rgba(22,143,194',
+    'rgba(255,170,1': 'rgba(233,197,141', 'rgba(232,70,15': 'rgba(217,118,42',
 }
 FRESH = ('<style id="ss-fresh">'
          'figure img,.card img,img.r,.bgal img,.day4 img,.pband img,.h4d img.hv,.views img,.fig img,section img[loading]{filter:saturate(1.16) brightness(1.05) contrast(1.03)}'
