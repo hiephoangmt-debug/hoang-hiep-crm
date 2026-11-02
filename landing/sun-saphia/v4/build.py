@@ -1266,6 +1266,35 @@ def chinh_sach():
     desc = 'Chính sách bảo mật thông tin khách hàng của trang thông tin dự án Sun Saphia Residence: thu thập gì, dùng vào việc gì, lưu bao lâu, quyền xem, sửa, xoá theo Nghị định 13/2023/NĐ-CP.'
     return page(P, title, desc, 'chính sách bảo mật sun saphia residence, bảo vệ dữ liệu cá nhân', b, [cld], P)
 
+
+# Tông màu dự án: biển – trời – cát – nắng (theo bộ nhận diện "Biển trời khiêu vũ")
+PALETTE = {
+    # biến màu chung
+    '--cr2:#FFEDE2': '--cr2:#F7EEDD', '--pp:#F3F6FB': '--pp:#EEF6FA', '--nvd:#0B2447': '--nvd:#1B5876',
+    '--or:#E96118': '--or:#DD8331', '--or2:#F2802F': '--or2:#F0A548', '--yl:#FFAA01': '--yl:#F2C46D',
+    '--nv:#275286': '--nv:#2A6F93', '--nv2:#1A3A66': '--nv2:#1E5576', '--ink:#2B3650': '--ink:#24485C',
+    '--mut:#5F6A80': '--mut:#5B7282', '--ln:#E3E9F2': '--ln:#DCE9EF',
+    # mã màu viết thẳng
+    '#E96118': '#DD8331', '#F26B1D': '#DD8331', '#F2802F': '#F0A548', '#FF8A3D': '#F0A548', '#E8460F': '#CF7428',
+    '#F7A66B': '#F3C07E', '#FFB37A': '#F3C07E', '#FFD9A8': '#F3DDB5', '#FFF1E6': '#FBF3E4', '#FFF6EE': '#FCF7EE',
+    '#FFF4EA': '#FBF4E6', '#FFC24F': '#F2C46D', '#FFB347': '#F2C46D', '#FFAA01': '#F2C46D', '#C2410C': '#B5651F',
+    '#0B2447': '#123F5A', '#0A2540': '#123F5A', '#0B2545': '#123F5A', '#0A1F38': '#174E69', '#275286': '#2A6F93',
+    '#24507F': '#2A6F93', '#1E4D8C': '#2A6F93', '#1A3A66': '#1E5576',
+    'rgba(233,97,24': 'rgba(221,131,49', 'rgba(255,138,61': 'rgba(240,165,72', 'rgba(240,123,31': 'rgba(221,131,49',
+    'rgba(11,36,71': 'rgba(18,63,90', 'rgba(10,37,64': 'rgba(18,63,90', 'rgba(39,82,134': 'rgba(42,111,147',
+    'rgba(255,170,1': 'rgba(242,196,109', 'rgba(232,70,15': 'rgba(207,116,40',
+}
+FRESH = ('<style id="ss-fresh">'
+         'figure img,.card img,img.r,.bgal img,.day4 img,.pband img,.h4d img.hv,.views img,.fig img,section img[loading]{filter:saturate(1.16) brightness(1.05) contrast(1.03)}'
+         'img[src*="logo"],img[alt*="logo" i],img[src*="favicon"],img[src*="mat-bang"],img[src*="layout"],img[src*="ban-ve"],img[src*="phap-ly"],img[src*="giay"]{filter:none!important}'
+         '</style>')
+def palette(html):
+    for a, b in PALETTE.items():
+        html = re.sub(re.escape(a), b, html, flags=re.I)
+    if '</head>' in html and 'ss-fresh' not in html:
+        html = html.replace('</head>', FRESH + '</head>', 1)
+    return html
+
 if __name__ == '__main__':
     import os
     os.makedirs(OUT, exist_ok=True)
@@ -1281,6 +1310,7 @@ if __name__ == '__main__':
     out['trinh-chieu.html'] = slides_page.trinh_chieu(page, ORG, RES)
     out['dao-tao-sale.html'] = slides_page.dao_tao(head, header, tail, FAV, OG, LOGO)
     for k, v in out.items():
+        v = palette(v)
         left = re.findall(r'\{\{|%[sd]\b', v)
         open(OUT + k, 'w', encoding='utf8').write(v)
         print(k, len(v))
