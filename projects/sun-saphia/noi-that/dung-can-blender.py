@@ -365,7 +365,7 @@ if GD:
             while inU(st.x, st.y) and (st - c2).length < 6: st += nv * .3
             en = Vector(GCEN); Lp = (en - st).length; ang2 = math.atan2(en.y - st.y, en.x - st.x)
             d_ = .3; k_ = 0
-            while d_ < Lp - 1.1:
+            while d_ < Lp - 1.35 - .36:   # đá lát dừng trước sân tròn: không chồng mặt phẳng (hết ô đen)
                 q_ = st + (en - st) * (d_ / Lp); box(q_.x, q_.y, -.02, .62, .42, .05, STN, ang2 + (random.random() - .5) * .15 if 'random' in dir() else ang2, .01, name='da'); d_ += .72; k_ += 1
             cyl(en.x, en.y, -.02, 1.35, .05, STN, verts=48)
             cyl(en.x, en.y, .7, .4, .04, TEAK); cyl(en.x, en.y, .03, .04, .67, TEAK)
