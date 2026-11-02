@@ -745,6 +745,8 @@ for s in SHOTS:
         json.dump({'dims': dims, 'w': TW_, 'h': TH_}, open(os.path.join(OUT, 'top.json'), 'w'))
         sc.render.filepath = os.path.join(OUT, 'top.png'); bpy.ops.render.render(write_still=True); print('xong top', flush=True)
     elif s == 'garden' and GGLASS:   # từ trong căn nhìn ra sân vườn
+        for o_ in bpy.data.objects:
+            if o_.name.startswith('rem'): o_.hide_render = True   # kéo rèm ra hết: máy đứng sát cửa kính không bị rèm che
         c2, nv = GGLASS; e_ = c2 - nv * float(os.environ.get('GBACK', '1.1')); g_ = Vector(GCEN)   # đứng sát cửa kính: thấy rộng sân vườn, không bị rèm che
         cam_d.type = 'PERSP'; cam_d.lens = 14; cam_d.shift_y = 0; cam.location = (e_.x, e_.y, 1.35)
         cam.rotation_euler = (math.radians(86), 0, math.atan2(g_.y - e_.y, g_.x - e_.x) - math.pi / 2)
