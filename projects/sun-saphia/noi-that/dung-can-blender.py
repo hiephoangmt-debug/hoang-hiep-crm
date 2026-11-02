@@ -86,6 +86,8 @@ CEIL = mat('tran', (.96, .95, .93), .95)
 TILE = tile_mat('gach-wc', (.82, .8, .76), (.79, .77, .73), .6)
 DECK = tile_mat('gach-ban-cong', (.62, .58, .52), (.58, .54, .48), .6, .6)
 GLASS = glass_mat(); RGLASS = glass_mat('kinh-lan-can', 1.08)
+CGLASS = glass_mat('kinh-cong-nhe'); _n = CGLASS.node_tree.nodes; _fr = [x for x in _n if x.type == 'FRESNEL'][0]; _mx = [x for x in _n if x.type == 'MIX_SHADER'][0]
+_mul = _n.new('ShaderNodeMath'); _mul.operation = 'MULTIPLY'; _mul.inputs[1].default_value = .12; CGLASS.node_tree.links.new(_fr.outputs[0], _mul.inputs[0]); CGLASS.node_tree.links.new(_mul.outputs[0], _mx.inputs[0])   # kính cong: phản chiếu tối đa 12%, hết vệt đen cong
 ALU = mat('nhom', (.12, .13, .14), .35, .8)
 OAK = mat('go-soi', (.55, .4, .26), .45, noise=(18, .3, .02))
 WALNUT = mat('go-oc-cho', (.28, .17, .1), .4, noise=(18, .3, .02))
@@ -294,7 +296,7 @@ for _pt in PARTS:
         me = bpy.data.meshes.new('kinh-cong'); vs = [(p.x, p.y, 0.) for p in ch] + [(p.x, p.y, H - .06) for p in ch]; n_ = len(ch)
         me.from_pydata(vs, [], [(i, i + 1, n_ + i + 1, n_ + i) for i in range(n_ - 1)]); me.update()
         for pl in me.polygons: pl.use_smooth = True
-        ob = bpy.data.objects.new('kinh', me); ob.data.materials.append(GLASS); bpy.context.collection.objects.link(ob)
+        ob = bpy.data.objects.new('kinh', me); ob.data.materials.append(CGLASS); bpy.context.collection.objects.link(ob)
     for bl in SP.get('blocks', []):
         a, b = P(bl[0], bl[1]), P(bl[2], bl[3]); box((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, 0, abs(b[0] - a[0]), abs(b[1] - a[1]), H, WALL)
     def panel(p0, p1, z0, h, th, m):   # tấm thẳng giữa 2 điểm bản vẽ
@@ -629,7 +631,7 @@ def shoot(name, eye, look, lens=16, z=1.35, shift_y=0., ortho=None):
 SHL = {   # điểm đứng / điểm nhìn theo toạ độ bản vẽ từng loại căn
  '1PN+1': {'living': ((4.6, 0.7), (4.6, 9.5)), 'living2': ((4.65, 7.45), (5.1, 0.8)), 'bed': ((2.45, 5.4), (0.7, 8.9)), 'plus': ((4.0, 3.75), (0.3, 2.5))},
  'STU':   {'living': ((2.45, 3.4), (1.6, 9.6)), 'living2': ((1.7, 7.25), (3.1, 1.4))},
- 'STUL':  {'living': ((5.8, 1.2), (4.3, 10.5)), 'living2': ((4.0, 9.2), (6.2, 1.2))},
+ 'STUL':  {'living': ((5.3, 5.1), (2.8, 10.6)), 'living2': ((4.0, 9.2), (5.0, 1.2))},
  '2PN':   {'living': ((6.1, 7.0), (0.3, 8.4)), 'living2': ((2.3, 7.1), (6.7, 8.8)), 'bed': ((3.45, 2.6), (0.6, 0.5)), 'plus': ((3.4, 5.75), (0.4, 3.6))},
 }
 SHL['2PN1'] = SHL['2PN']
