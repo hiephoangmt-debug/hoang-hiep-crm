@@ -76,7 +76,8 @@ def glass_mat(name='kinh', ior=1.5):
     o = nt.nodes.new('ShaderNodeOutputMaterial'); tr = nt.nodes.new('ShaderNodeBsdfTransparent'); tr.inputs['Color'].default_value = (.93, .97, .98, 1)
     gl = nt.nodes.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = 0
     fr = nt.nodes.new('ShaderNodeFresnel'); fr.inputs['IOR'].default_value = ior
-    mx = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(fr.outputs[0], mx.inputs[0]); nt.links.new(tr.outputs[0], mx.inputs[1]); nt.links.new(gl.outputs[0], mx.inputs[2])
+    mx = nt.nodes.new('ShaderNodeMixShader'); cap = nt.nodes.new('ShaderNodeMath'); cap.operation = 'MULTIPLY'; cap.inputs[1].default_value = float(os.environ.get('GLASSREF', '.15'))   # phản chiếu tối đa 15%: hết vệt đen kiểu gương ở góc xiên
+    nt.links.new(fr.outputs[0], cap.inputs[0]); nt.links.new(cap.outputs[0], mx.inputs[0]); nt.links.new(tr.outputs[0], mx.inputs[1]); nt.links.new(gl.outputs[0], mx.inputs[2])
     nt.links.new(mx.outputs[0], o.inputs['Surface']); m.blend_method = 'BLEND'; return m
 
 FLOOR = wood_floor()
@@ -86,8 +87,7 @@ CEIL = mat('tran', (.96, .95, .93), .95)
 TILE = tile_mat('gach-wc', (.82, .8, .76), (.79, .77, .73), .6)
 DECK = tile_mat('gach-ban-cong', (.62, .58, .52), (.58, .54, .48), .6, .6)
 GLASS = glass_mat(); RGLASS = glass_mat('kinh-lan-can', 1.08)
-CGLASS = glass_mat('kinh-cong-nhe'); _n = CGLASS.node_tree.nodes; _fr = [x for x in _n if x.type == 'FRESNEL'][0]; _mx = [x for x in _n if x.type == 'MIX_SHADER'][0]
-_mul = _n.new('ShaderNodeMath'); _mul.operation = 'MULTIPLY'; _mul.inputs[1].default_value = .12; CGLASS.node_tree.links.new(_fr.outputs[0], _mul.inputs[0]); CGLASS.node_tree.links.new(_mul.outputs[0], _mx.inputs[0])   # kính cong: phản chiếu tối đa 12%, hết vệt đen cong
+CGLASS = GLASS   # kính cong: phản chiếu tối đa 12%, hết vệt đen cong
 ALU = mat('nhom', (.12, .13, .14), .35, .8)
 OAK = mat('go-soi', (.55, .4, .26), .45, noise=(18, .3, .02))
 WALNUT = mat('go-oc-cho', (.28, .17, .1), .4, noise=(18, .3, .02))
@@ -613,17 +613,21 @@ def shoot(name, eye, look, lens=16, z=1.35, shift_y=0., ortho=None):
             p0 = c_ + fw * (bd / 2 + .75); a_ = min(ray(p0, fw), ray(p0 - Vector((0, 0, .8)), fw)); p1 = p0 + fw * max(0., a_ - .3)
             sides = [(min(ray(p1, rt * sg), ray(p1 - Vector((0, 0, .8)), rt * sg)), sg) for sg in (-1, 1)]; b_, sg = max(sides)
             hb = c_ - fw * (bd * .3); hb.z = .95
-            def los(e2, t2):   # thấy được giường, phía trước thoáng, không đứng lọt trong tủ/tường
-                v_ = hb - e2; w_ = (t2 - e2); w_.z = 0
-                return ray(e2, v_.normalized(), v_.length) >= v_.length - .05 and ray(e2, w_.normalized(), 2.) >= 1.0 and min(ray(e2, Vector((1, 0, 0)), .3), ray(e2, Vector((-1, 0, 0)), .3), ray(e2, Vector((0, 1, 0)), .3), ray(e2, Vector((0, -1, 0)), .3)) >= .2
+            def score(e2, t2):   # (đạt hết điều kiện?, độ thoáng khung hình) – thấy giường, phía trước + 2 bên khung thoáng, không đứng lọt trong tủ/tường
+                v_ = hb - e2; w_ = (t2 - e2); w_.z = 0; wn = w_.normalized()
+                if ray(e2, v_.normalized(), v_.length) < v_.length - .05: return (False, -1.)
+                diag = min(ray(e2, Vector((wn.x * math.cos(a3) - wn.y * math.sin(a3), wn.x * math.sin(a3) + wn.y * math.cos(a3), 0)), 1.5) for a3 in (.87, -.87, .5, -.5))
+                fwd = ray(e2, wn, 2.); side = min(ray(e2, Vector(dd), .3) for dd in ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0)))
+                return (diag >= .9 and fwd >= 1.0 and side >= .2, min(diag, 1.5) + min(fwd, 2.) * .3 + (0 if side >= .2 else -5))   # 2 mép khung (±50°) thoáng ≥ 0,9 m
             CAND = []
             for s2 in (sg, -sg):   # ưu tiên: góc cuối giường phía rộng → cạnh góc cuối giường → cạnh giường (khi cuối giường vướng tủ)
                 t2 = c_ - fw * (bd * .25) - rt * s2 * (bw * .15)
                 if s2 == sg: CAND += [(p1 + rt * s2 * max(0., min(b_ - .3, bw / 2 + 1.2)), t2), (p1 + rt * s2 * max(0., min(b_ - .3, .6)), t2), (p1, t2), (p0, t2)]
                 t3 = c_ - fw * (bd * .3) - rt * s2 * (bw * .45)
                 CAND += [(c_ + fw * (bd / 2 + .15) + rt * s2 * (bw / 2 + .45), t3), (c_ + fw * (bd * .15) + rt * s2 * (bw / 2 + .45), t3)]
-            for e_, t2 in CAND:
-                if los(e_, t2): ex, ey, lx, ly = e_.x, e_.y, t2.x, t2.y; break   # không chỗ nào đạt: giữ góc máy đặt sẵn
+            SC = [(score(e_, t2), e_, t2) for e_, t2 in CAND]; ok_ = [q for q in SC if q[0][0]]
+            pick = max(ok_ or SC, key=lambda q: q[0][1])
+            if pick[0][1] > 0: ex, ey, lx, ly = pick[1].x, pick[1].y, pick[2].x, pick[2].y   # không chỗ nào đạt: giữ góc máy đặt sẵn
         cam.location = (ex, ey, z)
         cam.rotation_euler = (math.radians(90), 0, math.atan2(ly - ey, lx - ex) - math.pi / 2)
     sc.render.filepath = os.path.join(OUT, name + '.png'); bpy.ops.render.render(write_still=True); print('xong', name, flush=True)
