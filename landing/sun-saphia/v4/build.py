@@ -1286,6 +1286,11 @@ PALETTE = {
 }
 FRESH = ('<style id="ss-fresh">'
          'figure img,.card img,img.r,.bgal img,.day4 img,.pband img,.h4d img.hv,.views img,.fig img,section img[loading]{filter:saturate(1.16) brightness(1.05) contrast(1.03)}'
+         '.hcv{background:linear-gradient(180deg,#C9E9F1 0%,#F9E6C9 26%,#FDEFD9 36%,#B9E5EF 52%,#8BD3E5 70%,#5DBFDD 86%,#E9C58D 100%)!important;color:#16485F!important}'
+         '.hcvt h1.dp{color:#0E6E99!important}.hcvt .msg{color:#16485F!important}.hcvt .msg b{color:#E8893A!important}.hcvt .cdl{color:#0E6E99!important}'
+         '.hcv .hnum div{background:rgba(255,255,255,.62)!important;border:1px solid rgba(255,255,255,.9)!important;box-shadow:0 10px 24px -14px rgba(14,110,153,.45)}'
+         '.hcv .hnum b{color:#168FC2!important}.hcv .hnum span{color:#2F5F72!important}.hcv .hnum em.dk{color:#E8893A!important}'
+         '.hcv .btn.ghost{border-color:#0E6E99!important;color:#0E6E99!important;background:rgba(255,255,255,.55)!important}'
          'img[src*="logo"],img[alt*="logo" i],img[src*="favicon"],img[src*="mat-bang"],img[src*="layout"],img[src*="ban-ve"],img[src*="phap-ly"],img[src*="giay"]{filter:none!important}'
          '</style>')
 def palette(html):
