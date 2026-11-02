@@ -1017,9 +1017,8 @@ function crmEvidenceFolder_(project, meta) {
   var byChannel = SHEET_PLATFORMS.some(function (p) { return crmSubFind_(root, p); });
   var f = root;
   if (byChannel) {
-    // <Kênh>[/<Tuần>][/<Dự án>]/<Nhân sự>
+    // <Kênh>[/<Dự án>]/<Nhân sự> — không chia thư mục tuần (lọc tuần theo ngày tải ảnh)
     f = crmSubFind_(root, meta.nenTang || 'Facebook') || crmSub_(root, meta.nenTang === 'Đăng tin' ? 'Kênh đăng tin' : meta.nenTang || 'Khác');
-    if (lv.week) f = crmSub_(f, crmWeekFolder_(meta.tuan));
     if (lv.project) f = crmSub_(f, project.khoa || project.ten);
     return crmSub_(f, meta.nhanSu || 'Chưa gán');
   }
