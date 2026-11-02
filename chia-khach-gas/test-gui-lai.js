@@ -81,7 +81,7 @@ ok(all().some(k=>k.sdt==='0905000777'&&k.trang_thai==='cho_nhan'),'khách Saphia
   ok(all().length===n0&&!all().some(k=>k.sdt==='0967273982'&&k.trang_thai!=='dong'),'số thử gửi lại: bot bỏ qua, không chia');
   // /huy bằng tay
   crmRow('0977888999','Thử tay'); adv(1); run(); const kh2=all().find(k=>k.sdt==='0977888999'); const g3=kh2.nguoi_giu;
-  msg(900,'/huy '+kh2.id); run();
+  msg(900,'/huy '+kh2.id); run(); ok(all().find(k=>k.sdt==='0977888999').trang_thai!=='dong','/huy hỏi lại trước, chưa huỷ ngay'); click(900,'hx:'+kh2.id); run();
   ok(all().find(k=>k.sdt==='0977888999').trang_thai==='dong'&&!vg().da.includes(g3),'/huy Mã: đóng khách thử, trả lượt');
 }
 

@@ -274,7 +274,7 @@ function caiDat() {
 function datLenh_() {
   var sale = [{command: 'khach', description: 'Khách đang giữ và giờ hạn'}, {command: 'giahan', description: 'Xin thêm 1 ngày: /giahan K12'},
     {command: 'nghi', description: 'Tạm ngưng nhận khách'}, {command: 'lam', description: 'Nhận khách trở lại'}, {command: 'dangky', description: 'Xin vào đội: /dangky Tên'}];
-  var ql = [{command: 'them', description: 'Thêm khách: /them Số Tên - nhu cầu'}, {command: 'themkhac', description: 'Khách dự án khác (không tính lượt FourS/Saphia)'}, {command: 'huy', description: 'Huỷ khách thử, trả lượt: /huy K39'}, {command: 'chialai', description: 'Chia lại khách sang nhánh 2, 3…: /chialai K12'}, {command: 'sale', description: 'Danh sách đội'},
+  var ql = [{command: 'them', description: 'Thêm khách: /them Số Tên - nhu cầu'}, {command: 'themkhac', description: 'Khách dự án khác (không tính lượt FourS/Saphia)'}, {command: 'huy', description: 'Huỷ khách thử, trả lượt: /huy K39'}, {command: 'dong', description: 'Dừng chia khách thật: /dong K38 Khách đã mua'}, {command: 'chialai', description: 'Chia lại khách sang nhánh 2, 3…: /chialai K12'}, {command: 'sale', description: 'Danh sách đội'},
     {command: 'baocao', description: 'Báo cáo hôm nay'}, {command: 'tuan', description: 'Xếp hạng 7 ngày'}, {command: 'tam', description: 'Tạm dừng sale: /tam Tên'},
     {command: 'mo', description: 'Mở lại / duyệt sale: /mo Tên'}, {command: 'xoa', description: 'Sale nghỉ việc: /xoa Tên'}];
   var a = tg_('setMyCommands', {commands: sale});
@@ -803,6 +803,18 @@ function huyKhachThu_(k) {
   baoQL_('🧪 Đã huỷ khách thử ' + esc(k.id) + ' (' + esc(che(k.sdt)) + ')' + (ten ? ', trả lại lượt cho: ' + esc(ten) : '') + '.');
   return ten;
 }
+/* Quản lý dừng chia khách thật (vd. khách đã mua): đóng khách, báo sale đang giữ, KHÔNG trả lượt */
+function dongKhachQL_(k, lyDo) {
+  if (k.trang_thai === 'dong') return 'Khách ' + esc(k.id) + ' đã đóng rồi' + (k.ly_do_dong ? ' (' + esc(k.ly_do_dong) + ')' : '') + '.';
+  lyDo = String(lyDo || '').trim() || 'Quản lý dừng chia';
+  if (k.nguoi_giu && (DANG_GIU.test(k.trang_thai) || k.trang_thai === 'chot')) {
+    P().deleteProperty('LYDO_' + k.nguoi_giu);
+    sua_(k.nguoi_giu, k.msg_id, tinKhach_(k, true) + '\n\n🛑 Quản lý đã dừng chia khách này. Lý do: ' + esc(lyDo));
+  }
+  k.trang_thai = 'dong'; k.ly_do_dong = lyDo.slice(0, 200); save_('Khach', T_KHACH, k);
+  log_('quản lý', 'dừng chia', k.id, lyDo);
+  return '🛑 Đã dừng chia khách ' + esc(k.id) + (k.ten ? ' – ' + esc(k.ten) : '') + (k.ten_sale ? ' (đang ở ' + esc(k.ten_sale) + ')' : '') + '. Lý do: ' + esc(lyDo) + '\nKhông thu hồi, không nhắc, không trả lượt.';
+}
 function sangNhanhMoi_(k) { if (!laKhac_(k)) { k.nhanh = Number(k.nhanh || 1) + 1; k.so_luot = 0; } }
 /* Quản lý chia lại 1 khách (kể cả khách đã đóng): sang nhánh tiếp theo */
 function chiaLai_(kc) {
@@ -910,7 +922,15 @@ function lenh_(m) {
       if (!hk) { gui_(chat, 'Gõ: <code>/huy K39</code> – huỷ khách thử, trả lại lượt cho sale đã bị giao. Số thử dùng thường xuyên thì thêm vào dòng SO_THU trong tab CauHinh.'); return; }
       if (hk.trang_thai === 'chot') { gui_(chat, 'Khách ' + esc(hk.id) + ' đã chốt, không huỷ.'); return; }
       if (/^Khách thử/.test(hk.ly_do_dong)) { gui_(chat, 'Khách ' + esc(hk.id) + ' đã huỷ và trả lượt rồi.'); return; }
-      huyKhachThu_(hk); return;
+      /* Hỏi lại trước khi huỷ, tránh huỷ nhầm khách thật */
+      gui_(chat, '❓ <b>' + esc(hk.id) + '</b>' + (hk.ten ? ' – ' + esc(hk.ten) : '') + ' · ' + esc(che(hk.sdt)) + (hk.ten_sale ? ' · đang ở ' + esc(hk.ten_sale) : '') +
+        '\nĐây là số thử hay khách thật?', [[{text: '🧪 Số thử – huỷ, trả lượt', callback_data: 'hx:' + hk.id}], [{text: '🛑 Khách thật – chỉ dừng chia', callback_data: 'dg:' + hk.id}]]);
+      return;
+    }
+    if (c === '/dong') {
+      var dm = (arg || '').match(/^\s*(K\d+)\s*(.*)$/i), dk = dm ? timKhach_(dm[1].toUpperCase()) : null;
+      if (!dk) { gui_(chat, 'Gõ: <code>/dong K38 Khách đã mua</code> – dừng chia khách (không thu hồi, không nhắc, không trả lượt).'); return; }
+      gui_(chat, dongKhachQL_(dk, dm[2])); return;
     }
     if (c === '/chialai') {
       var ids = arg.toUpperCase().split(/[\s,]+/).filter(String), out = [];
@@ -929,7 +949,7 @@ function lenh_(m) {
       x.trang_thai = c === '/tam' ? 'nghi' : 'lam'; save_('Sale', T_SALE, x); log_('quản lý', c === '/tam' ? 'tạm dừng' : 'mở lại', '', x.ten);
       gui_(chat, (c === '/tam' ? '⏸ Tạm dừng chia cho ' : '▶️ Mở lại chia cho ') + esc(x.ten)); return;
     }
-    gui_(chat, 'Lệnh quản lý: /them Số Tên - nhu cầu · /themkhac (dự án khác) · /chialai Mã · /huy Mã (khách thử) · /sale · /baocao · /tuan · /tam Tên · /mo Tên · /xoa Tên · /tailieu (slide)'); return;
+    gui_(chat, 'Lệnh quản lý: /them Số Tên - nhu cầu · /themkhac (dự án khác) · /chialai Mã · /huy Mã (khách thử) · /dong Mã Lý do (dừng chia) · /sale · /baocao · /tuan · /tam Tên · /mo Tên · /xoa Tên · /tailieu (slide)'); return;
   }
   if (!s || /cho_duyet|tu_choi|nghi_viec/.test(s.trang_thai)) { gui_(chat, 'Nhắn <code>/dangky Tên của bạn</code> để xin vào đội chia khách.'); return; }
   /* Đang chờ ghi lý do đóng khách: tin tiếp theo (không phải lệnh) là lý do */
@@ -974,6 +994,15 @@ function bam_(q) {
     return tl('Xong');
   }
   if (parts[0] === 'ts') return bamTele_(q, parts, tl);
+  if (parts[0] === 'hx' || parts[0] === 'dg') {
+    if (chat !== String(quanLy_())) return tl('Chỉ quản lý');
+    var kx = timKhach_(parts[1]); if (!kx) return tl('Không thấy');
+    if (parts[0] === 'dg') { sua_(q.message.chat.id, q.message.message_id, dongKhachQL_(kx, '')); return tl('Đã dừng chia'); }
+    if (kx.trang_thai === 'chot' || /^Khách thử/.test(kx.ly_do_dong)) { sua_(q.message.chat.id, q.message.message_id, 'Khách ' + esc(kx.id) + (kx.trang_thai === 'chot' ? ' đã chốt, không huỷ.' : ' đã huỷ rồi.')); return tl('Không huỷ'); }
+    var tra = huyKhachThu_(kx);
+    sua_(q.message.chat.id, q.message.message_id, '🧪 Đã huỷ số thử ' + esc(kx.id) + (tra ? ', trả lượt: ' + esc(tra) : '') + '.');
+    return tl('Đã huỷ');
+  }
   if (parts[0] === 'tm') {
     if (chat !== String(quanLy_())) return tl('Chỉ quản lý');
     var cho = JSON.parse(P().getProperty('CHO_THEM') || '{}'), c = cho[parts[1]];

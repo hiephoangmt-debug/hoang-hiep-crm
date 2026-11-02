@@ -51,4 +51,15 @@ const k=all()[0]; ok(k&&k.sdt==='0905123456'&&k.ten==='Chị Lan'&&k.trang_thai=
 ok(/sun-saphia-residence/.test(k.trang)&&k.nhom==='','giữ trang nguồn, tính lượt Saphia');
 click(900,'tm:0905123456'); run(); ok(all().length===1,'bấm lại lần 2 → không chia trùng');
 msg(900,'/them 0911222333 Anh Minh - quan tâm 2PN'); run(); ok(all().length===2,'/them vẫn chia ngay như cũ');
+const k2=()=>all().find(x=>x.sdt==='0911222333');
+const holder=k2().nguoi_giu; ok(!!holder,'K2 đang ở 1 sale');
+msg(900,'/huy '+k2().id); run(); ok(k2().trang_thai!=='dong'&&/Số thử hay khách thật|số thử hay khách thật/.test(lastTo(900).text),'/huy hỏi lại: số thử hay khách thật');
+click(900,'dg:'+k2().id); run();
+ok(k2().trang_thai==='dong'&&k2().ly_do_dong==='Quản lý dừng chia','bấm "Khách thật" → chỉ dừng chia');
+ok(!vm.runInContext("rows_('NhatKy',T_NK).some(function(r){return r.hanh_dong==='huỷ khách thử'})",ctx),'không trả lượt');
+ok(edits.some(e=>String(e.chat_id)===String(holder)&&/dừng chia/.test(e.text)),'báo sale đang giữ');
+msg(900,'/dong '+k.id+' Khách đã mua'); run(); ok(all()[0].trang_thai==='dong'&&all()[0].ly_do_dong==='Khách đã mua','/dong Mã Lý do → dừng chia, ghi lý do');
+msg(900,'/dong '+k.id); run(); ok(/đã đóng rồi/.test(lastTo(900).text),'/dong lần 2 → báo đã đóng');
+const nk=vm.runInContext("rows_('NhatKy',T_NK).filter(function(r){return r.hanh_dong==='được giao'}).length",ctx); adv(600); run();
+ok(vm.runInContext("rows_('NhatKy',T_NK).filter(function(r){return r.hanh_dong==='được giao'}).length",ctx)===nk,'khách đã dừng không bị chia lại');
 console.log(fails?'TỔNG LỖI: '+fails:'TỔNG LỖI: 0');
