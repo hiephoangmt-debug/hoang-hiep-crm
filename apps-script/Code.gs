@@ -625,8 +625,8 @@ function crmWebReport(k) {
   var sc = crmReportScope_(bc.tuan, Object.keys(rows.reduce(function (o, r) { o[r.tuan] = 1; return o; }, {})));
   var last = sc.weeks[sc.weeks.length - 1] || String(bc.tuan);
   var soLieu = rows.filter(function (r) { return String(r.tuan) <= last; }).map(function (r) { return pick(r, cols); });
-  // ảnh nghiệm thu chỉ có ở báo cáo tuần (báo cáo tháng / toàn chiến dịch là bản tổng hợp số)
-  var chungTu = sc.ky !== 'tuan' ? [] : crmRows_('ChungTu').filter(function (r) { return r.duAn === bc.duAn && String(r.tuan) === String(bc.tuan); })
+  // ảnh nghiệm thu: báo cáo tuần = ảnh của tuần; báo cáo tháng = ảnh chụp cả tháng (mã tháng "2026-10"); toàn chiến dịch: không có ảnh
+  var chungTu = sc.ky === 'all' ? [] : crmRows_('ChungTu').filter(function (r) { return r.duAn === bc.duAn && String(r.tuan) === String(bc.tuan); })
     .map(function (r) { return pick(r, ['id', 'nhanSu', 'nenTang', 'loai', 'tenFile', 'soTien', 'vat']); });
   return {
     duAn: bc.duAn, tuan: bc.tuan, trangThai: bc.trangThai, ngayTao: bc.ngayTao, pdfUrl: bc.pdfUrl, pptxUrl: bc.pptxUrl,

@@ -142,7 +142,7 @@
   // ------------------------------------------------------------ dựng trang
   function render() {
     const all = effective(D.soLieu);
-    const per = periodOf(D), range = per.ky !== "tuan";
+    const per = periodOf(D), range = per.ky !== "tuan", noShots = per.ky === "all"; // báo cáo tháng có ảnh nghiệm thu tháng
     PREV = per.prev;
     const inW = new Set(per.weeks), inP = new Set(D.prevWeeks || [addDays(D.tuan, -7)]);
     const W = all.filter((r) => inW.has(r.tuan));
@@ -158,7 +158,7 @@
 
     // nghiệm thu: mỗi người × kênh đã chạy × loại ảnh bắt buộc
     const need = [];
-    if (!range) staff.forEach((s) => {
+    if (!noShots) staff.forEach((s) => {
       PLATS.forEach((p) => {
         const ran = W.some((r) => r.nhanSu === s && (r.nenTang || "Facebook") === p) || ev.some((c) => c.nhanSu === s && c.nenTang === p);
         if (!ran) return;
@@ -183,7 +183,7 @@
       <div class="tile"><span>Ngân sách thực chạy</span><b>${fmt(t.cost)} đ</b>${delta(t.cost, tp.cost)}</div>
       <div class="tile"><span>Lead</span><b>${fmt(t.lead)}</b>${delta(t.lead, tp.lead)}</div>
       <div class="tile"><span>Chi phí / lead</span><b>${t.lead ? fmt(t.cpl) + " đ" : "–"}</b>${t.lead && tp.lead ? delta(t.cpl, tp.cpl) : "<small>&nbsp;</small>"}</div>
-      ${range ? `<div class="tile"><span>Số tuần có số liệu</span><b>${new Set(W.map((r) => r.tuan)).size}</b><small>${staff.length} nhân sự</small></div>`
+      ${noShots || (range && !ev.length) ? `<div class="tile"><span>Số tuần có số liệu</span><b>${new Set(W.map((r) => r.tuan)).size}</b><small>${staff.length} nhân sự</small></div>`
         : `<div class="tile"><span>Nghiệm thu</span><b>${okN}/${need.length}</b><small class="${okN === need.length ? "ok-t" : "miss-t"}">${okN === need.length ? "Đủ ảnh nghiệm thu" : need.length - okN + " trang còn thiếu ảnh"}</small></div>`}
     </div>`;
 
@@ -229,7 +229,7 @@
         </tbody></table></div>` : `<p class="muted">Chưa có số liệu.</p>`;
       const shot = (k) => (c) => `<figure class="shot"><div class="ph" data-img="${esc(c.id)}" data-pdf="${/\.pdf$/i.test(c.tenFile || "") ? 1 : ""}">Đang tải ảnh…</div>
             <figcaption><b>${KIND[c.loai] || KIND[k]}</b>${c.soTien ? ` · ${fmt(num(c.soTien))} đ${c.vat !== "" && c.vat != null ? " (VAT " + esc(c.vat) + "%)" : ""}` : ""}<br>${esc(c.tenFile)}</figcaption></figure>`;
-      const chans = range ? "" : ps.map((p) => {
+      const chans = noShots ? "" : ps.map((p) => {
         const slots = NEED[p].map((k) => {
           const got = ev.filter((c) => c.nhanSu === s && c.nenTang === p && slotOf(p, c.loai) === k);
           if (!got.length) return `<figure class="shot miss"><div class="ph">CHƯA CÓ ẢNH<br>${KIND[k]}</div></figure>`;

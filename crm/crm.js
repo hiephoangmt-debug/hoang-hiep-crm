@@ -67,7 +67,7 @@
     set.add(isoOf(cur));
     set.add(isoOf(weekStartOf(prev)));
     S.SoLieu.forEach((r) => r.tuan && set.add(r.tuan));
-    S.ChungTu.forEach((r) => r.tuan && set.add(r.tuan));
+    S.ChungTu.forEach((r) => /^\d{4}-\d{2}-\d{2}$/.test(r.tuan || "") && set.add(r.tuan)); // ảnh nghiệm thu tháng có mã "2026-10", không phải tuần
     return Array.from(set).sort().reverse();
   }
   const latestDataWeek = () => S.SoLieu.map((r) => r.tuan).sort().pop() || isoOf(weekStartOf(new Date()));
@@ -690,18 +690,21 @@
   // cột của bảng kiểm: chỉ loại ảnh có ít nhất một kênh bắt buộc (mẫu mới không còn slide hoá đơn -> ẩn cột Hoá đơn)
   const CHECK_KINDS = Object.keys(KINDS).filter((k) => Object.values(REQ).some((r) => r[k]));
   const reqOf = (p, k) => (REQ[p] || {})[k === "qc" && !(REQ[p] || {}).qc ? "ads" : k] || "";
-  /** Tuần đang xem ở tab Ảnh & chứng từ: một tuần, hoặc các tuần của tháng khi chọn "Cả tháng". */
+  /**
+   * Tab Ảnh & chứng từ chọn "Cả tháng": ảnh nghiệm thu chụp cả tháng (1 đến cuối tháng) lưu với mã tháng "2026-10"
+   * và vào báo cáo tháng; người phải có ảnh = người có số liệu ở các tuần trong tháng (số tháng = cộng các tuần).
+   */
   function evWeeks() {
     const w = $("evWeek").value, pj = $("evProject").value;
     if (kyOf(w) !== "thang") return [w];
-    return Array.from(new Set(S.SoLieu.concat(S.ChungTu).filter((r) => r.duAn === pj && r.tuan && weekMonth(r.tuan) === w).map((r) => r.tuan))).sort();
+    return Array.from(new Set(S.SoLieu.filter((r) => r.duAn === pj && /^\d{4}-\d{2}-\d{2}$/.test(r.tuan || "") && weekMonth(r.tuan) === w).map((r) => r.tuan))).sort();
   }
   const evIsMonth = () => kyOf($("evWeek").value) === "thang";
   /** Bảng kiểm nghiệm thu: mỗi nhân sự × kênh đã chạy × loại ảnh bắt buộc -> đã có / thiếu. */
   function renderChecklist() {
     const w = $("evWeek").value, pj = $("evProject").value, wks = evWeeks(), month = evIsMonth();
     const data = effective(S.SoLieu.filter((r) => wks.includes(r.tuan) && r.duAn === pj));
-    const ev = S.ChungTu.filter((r) => wks.includes(r.tuan) && r.duAn === pj);
+    const ev = S.ChungTu.filter((r) => r.tuan === w && r.duAn === pj);
     const staff = Array.from(new Set(data.map((r) => r.nhanSu).concat(ev.map((r) => r.nhanSu)).filter(Boolean)));
     const order = staffNames();
     staff.sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99));
@@ -720,15 +723,6 @@
           const isK = (r) => r.nhanSu === st && r.nenTang === p && (r.loai === k || (k === "ads" && r.loai === "qc" && !REQ[p].qc));
           const n = ev.filter(isK).length;
           const need = `${st} · ${PLATFORM_LABEL[p]} · ${KINDS[k]} – cần thấy rõ: ${REQ[p][k]}`;
-          if (month) {
-            // cả tháng: tuần nào người này chạy kênh này mà chưa có ảnh loại này
-            const ran = wks.filter((x) => data.some((r) => r.tuan === x && r.nhanSu === st && (r.nenTang || "Facebook") === p) || ev.some((r) => r.tuan === x && r.nhanSu === st && r.nenTang === p));
-            const lack = ran.filter((x) => !ev.some((r) => r.tuan === x && isK(r)));
-            missing += lack.length;
-            return lack.length
-              ? `<td class="miss-cell" data-req="${esc(need)}">Thiếu tuần ${esc(lack.map((x) => weekLabel(x)).join(", "))}${n ? `<br><small>đã có ${n} ảnh</small>` : ""}</td>`
-              : `<td class="ok-cell" data-req="${esc(need)} (đã có ${n} ảnh)">✓ ${n}</td>`;
-          }
           if (!n) missing++;
           if (n) return `<td class="ok-cell" title="${esc(REQ[p][k])}" data-req="${esc(need)} (đã có ${n} ảnh)">✓ ${n}</td>`;
           // cùng người, cùng kênh, cùng loại đã có ở dự án khác trong tuần (vd. hoá đơn chung Sun + Casamia) -> lấy sang
@@ -791,10 +785,9 @@
     renderChecklist();
     const w = $("evWeek").value, pj = $("evProject").value, wks = evWeeks(), month = evIsMonth();
     const staff = staffNames();
-    // cả tháng chỉ để xem: tải ảnh / lấy từ Drive / xếp thư mục làm theo từng tuần
+    // cả tháng: tải ảnh chụp cả tháng; "Lấy ảnh có sẵn trên Drive" / "Xếp lại" vẫn làm theo từng tuần
     $("evMonthNote").hidden = !month;
-    $("evUploadCard").hidden = month;
-    ["evScan", "evTidy", "evDedupe"].forEach((id) => { $(id).hidden = month; });
+    ["evScan", "evTidy"].forEach((id) => { $(id).hidden = month; });
     $("evPending").innerHTML = pending.length ? pending.map((p, i) => `
       <figure class="img"><img src="${p.preview || p.url}" alt="${esc(p.file.name)}">
         <figcaption><span class="fname" title="${esc(p.file.name)}">${esc(p.file.name)}</span>
@@ -807,14 +800,14 @@
           <button type="button" class="link danger" data-unpend="${i}">Bỏ</button></div>
         </figcaption></figure>`).join("") : "";
     $("evUpload").hidden = !pending.length;
-    const rows = S.ChungTu.filter((r) => wks.includes(r.tuan) && r.duAn === pj).sort((a, b) => String(a.tuan).localeCompare(String(b.tuan)));
-    $("evCount").textContent = `${rows.length} ảnh đã lưu` + (month ? ` · ${wks.length} tuần` : "");
+    const rows = S.ChungTu.filter((r) => r.tuan === w && r.duAn === pj);
+    $("evCount").textContent = `${rows.length} ảnh đã lưu`;
     Array.from(evSel).filter((id) => !rows.some((r) => r.id === id)).forEach((id) => evSel.delete(id));
     $("evDelSel").textContent = `Xoá đã chọn (${evSel.size})`;
     $("evDelSel").disabled = !evSel.size;
     $("evList").innerHTML = rows.length ? rows.map((r) => `
       <figure class="img${evSel.has(r.id) ? " sel" : ""}">${canEdit(r) ? `<label class="pick"><input type="checkbox" data-evsel="${esc(r.id)}"${evSel.has(r.id) ? " checked" : ""}> Chọn</label>` : `<span class="pick muted" title="Chỉ quản trị mới sửa/xoá ảnh của người khác">⊘ ${esc(r.nhanSu || "chưa gán")}</span>`}<a href="${esc(r.url)}" target="_blank" rel="noopener"><img src="https://drive.google.com/thumbnail?id=${esc(r.fileId)}&sz=w400" alt="${esc(r.tenFile)}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'noimg',textContent:'Mở chứng từ'}))"></a>
-        <figcaption>${month ? `<small class="muted">Tuần ${esc(weekLabel(r.tuan))}</small>` : ""}<span class="fname" title="${esc(r.tenFile)}">${esc(r.tenFile)}</span><fieldset class="ro"${canEdit(r) ? "" : " disabled"}>
+        <figcaption><span class="fname" title="${esc(r.tenFile)}">${esc(r.tenFile)}</span><fieldset class="ro"${canEdit(r) ? "" : " disabled"}>
           <div class="row"><select data-ev="${esc(r.id)}" data-f="nenTang">${PLATFORMS.map((x) => opt(x, PLATFORM_LABEL[x], r.nenTang)).join("")}</select>
           <select data-ev="${esc(r.id)}" data-f="loai">${Object.entries(KINDS).map(([k, l]) => opt(k, l, r.loai)).join("")}</select></div>
           <div class="row"><select data-ev="${esc(r.id)}" data-f="nhanSu" class="${r.nhanSu ? "" : "warn"}">${opt("", "(chưa gán nhân sự)", r.nhanSu)}${(isAdmin() ? staff : Array.from(new Set([r.nhanSu, myName()].filter(Boolean)))).map((x) => opt(x, x, r.nhanSu)).join("")}${newStaffOpt()}</select>
@@ -826,7 +819,6 @@
         </fieldset></figcaption></figure>`).join("") : `<p class="muted">Chưa có ảnh chứng từ cho ${month ? "tháng" : "tuần"} này.</p>`;
   }
   async function addPending(files) {
-    if (evIsMonth()) { toast("Đang xem cả tháng – chọn một tuần cụ thể ở ô Tuần rồi mới tải ảnh.", "err"); return; }
     const staff = $("evStaff").value;
     const list = Array.from(files).filter((f) => /^image\//.test(f.type) || B.isPdf(f));
     // cùng nội dung + cùng nhân sự mới là trùng: hoá đơn chung của nhiều người được lưu cho từng người
@@ -858,10 +850,10 @@
       if (r.platform) p.nenTang = r.platform;
       if (r.staff && r.by === "id") p.nhanSu = r.staff;
       p.account = r.account || "";
-      p.campaigns = p.loai === "hoadon" ? [] : B.extractCampaigns(p.text || "").map((c) => Object.assign(c, { use: !c.rounded && !c.overview && (dateInWeek(c.date, w) || (!!c.until && dateInWeek(c.until, w))) }));
+      p.campaigns = p.loai === "hoadon" || kyOf(w) === "thang" ? [] : B.extractCampaigns(p.text || "").map((c) => Object.assign(c, { use: !c.rounded && !c.overview && (dateInWeek(c.date, w) || (!!c.until && dateInWeek(c.until, w))) }));
       // không đọc ra số: mở sẵn một dòng điền tay ngay dưới ảnh
-      if (p.loai !== "hoadon" && !p.campaigns.length) p.campaigns = [{ manual: true, name: "", spent: 0, results: 0, resultType: "lead", use: false }];
-      p.invoice = B.extractInvoice(p.text || "", w) || { total: 0, vat: null };
+      if (p.loai !== "hoadon" && kyOf(w) !== "thang" && !p.campaigns.length) p.campaigns = [{ manual: true, name: "", spent: 0, results: 0, resultType: "lead", use: false }];
+      p.invoice = B.extractInvoice(p.text || "", kyOf(w) === "tuan" ? w : "") || { total: 0, vat: null };
       if (!p.account && p.invoice.account) p.account = p.invoice.account;
       p.note = "Đọc: " + ([r.kind && KINDS[r.kind], r.account && "TK " + r.account,
         p.campaigns.length && p.loai !== "hoadon" && p.campaigns.length + " chiến dịch",
@@ -1154,7 +1146,7 @@
           soTien: p.loai === "hoadon" && p.invoice ? p.invoice.total || "" : "", vat: p.loai === "hoadon" && p.invoice && p.invoice.vat != null ? p.invoice.vat : "" },
           await B.blobToB64(p.file));
         if (!S.ChungTu.some((x) => x.id === rec.id)) S.ChungTu.push(rec);
-        nRows += await saveCampaignRows(p.campaigns, { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, file: p.file.name, account: p.account });
+        if (kyOf(w) === "tuan") nRows += await saveCampaignRows(p.campaigns, { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, file: p.file.name, account: p.account });
         if (p.loai === "hoadon") await rememberAccount(p.account, p.nhanSu, p.nenTang);
       }
     });
@@ -1162,7 +1154,7 @@
     pending.forEach((p) => URL.revokeObjectURL(p.url));
     pending = [];
     let sheetNote = "", sheetErr = false;
-    for (const g of invGroups) {
+    for (const g of kyOf(w) === "tuan" ? invGroups : []) {
       const [ns, nt] = g.split("|");
       toast("Đang tính chi phí (+phí) từ hoá đơn…", "busy");
       try { sheetNote += await applyInvoices(pj, w, ns, nt); } catch (e) { sheetNote += " Chưa áp được hoá đơn: " + e.message; }
@@ -1172,7 +1164,7 @@
       try { sheetNote = pushNote(await pushToSheet(pj, w)); }
       catch (e) { sheetNote = " Chưa ghi được vào Google Sheet: " + e.message; sheetErr = true; }
     }
-    toast(`Đã lưu ${n} chứng từ vào Drive (thư mục chứng từ › kênh › ${weekLabel(w)} › ${pj} › tên bạn)` + (nRows ? ` và ${nRows} dòng số liệu đọc từ ảnh (xem tab Nhập số liệu).` : ".") + sheetNote, sheetErr ? "err" : "ok");
+    toast(`Đã lưu ${n} chứng từ ${periodLabel(w)} vào Drive (thư mục chứng từ › kênh › tên bạn)` + (nRows ? ` và ${nRows} dòng số liệu đọc từ ảnh (xem tab Nhập số liệu).` : ".") + sheetNote, sheetErr ? "err" : "ok");
     renderEvidence();
   }
 
@@ -1382,10 +1374,10 @@
       try { await dedupeEvidence(pjName, w); } catch (e) { console.error(e); }
     }
     const prev = S.BaoCao.find((r) => r.duAn === pjName && r.tuan === w);
-    const ev = ky === "tuan" ? S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.nhanSu) : [];
+    const ev = ky !== "all" ? S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.nhanSu) : [];
     const staffN = new Set(rows.map((r) => r.nhanSu).concat(ev.map((r) => r.nhanSu)).filter(Boolean)).size;
     const out = { tuan: w, duAn: pjName, trangThai: prev ? prev.trangThai : "Nháp", webKey: (prev && prev.webKey) || newWebKey(),
-      tomTat: `Trang web · ${staffN} nhân sự` + (ky === "tuan" ? `, ${ev.length} ảnh/chứng từ` : `, ${wks.length} tuần`), ngayTao: nowStamp() };
+      tomTat: `Trang web · ${staffN} nhân sự` + (ky === "tuan" ? `, ${ev.length} ảnh/chứng từ` : `, ${wks.length} tuần` + (ev.length ? `, ${ev.length} ảnh/chứng từ` : "")), ngayTao: nowStamp() };
     if (prev) out.id = prev.id;
     const saved = await call("crmSave", "BaoCao", out);
     S.BaoCao = S.BaoCao.filter((r) => r.id !== saved.id).concat(saved);
@@ -1453,6 +1445,8 @@
       try { await dedupeEvidence(pjName, w); } catch (e) { console.error(e); }
       ev = S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.nhanSu);
     }
+    // báo cáo tháng: ảnh nghiệm thu chụp cả tháng (lưu ở tab Ảnh & chứng từ › "Cả tháng")
+    if (ky === "thang") ev = S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.nhanSu);
     const images = [];
     let i = 0;
     for (const r of ev) {
@@ -1559,7 +1553,7 @@
   /** Số ảnh / dòng số liệu thêm vào sau lần tạo báo cáo r. */
   function newSince(r) {
     const after = (x) => x.duAn === r.duAn && inKey(r.tuan, x.tuan, r.duAn) && String(x.ngayTao) > String(r.ngayTao);
-    return { anh: kyOf(r.tuan) === "tuan" ? S.ChungTu.filter(after).length : 0, so: S.SoLieu.filter(after).length };
+    return { anh: kyOf(r.tuan) !== "all" ? S.ChungTu.filter((x) => x.duAn === r.duAn && x.tuan === r.tuan && String(x.ngayTao) > String(r.ngayTao)).length : 0, so: S.SoLieu.filter(after).length };
   }
   function renderReports() {
     const rows = S.BaoCao.filter((r) => inBrand(r.duAn)).sort((a, b) => String(b.tuan + b.ngayTao).localeCompare(String(a.tuan + a.ngayTao)));
@@ -1801,7 +1795,7 @@
       toast("Đã lưu.", "ok");
       renderChecklist();
     });
-    const evRows = () => S.ChungTu.filter((r) => evWeeks().includes(r.tuan) && r.duAn === $("evProject").value);
+    const evRows = () => S.ChungTu.filter((r) => r.tuan === $("evWeek").value && r.duAn === $("evProject").value);
     $("evList").addEventListener("change", (e) => {
       const id = e.target.dataset.evsel;
       if (!id) return;
