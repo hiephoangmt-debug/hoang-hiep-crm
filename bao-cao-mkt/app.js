@@ -457,7 +457,7 @@
     const szCell = byTag(proto, "a:tc").map((tc) => byTag(tc, "a:rPr").find((r) => r.getAttribute("sz"))).find((r, j) => r && colKey[j]);
     const sz = szCell ? szCell.getAttribute("sz") : null;
     if (sz) rows.concat(totalRow ? [totalRow] : []).forEach((tr) => byTag(tr, "a:tc").forEach((tc) => byTag(tc, "a:rPr").forEach((r) => r.setAttribute("sz", sz))));
-    const noteH = review.note ? Math.round(0.42 * EMU_IN) : 0;
+    const noteH = review.note ? Math.round(0.5 * EMU_IN) : 0;
     const maxH = slideH * 0.96 - t.box.y - noteH;
     const all = byTag(tbl, "a:tr"), tot = all.reduce((h, tr) => h + +tr.getAttribute("h"), 0);
     if (tot > maxH) {
@@ -471,9 +471,9 @@
       const esc = (x) => String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
       const xml = `<p:sp xmlns:p="${NS.p}" xmlns:a="${NS.a}"><p:nvSpPr><p:cNvPr id="9901" name="Chu thich DATA MKT"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr>` +
         `<p:spPr><a:xfrm><a:off x="${t.box.x}" y="${t.box.y + tblH + Math.round(0.06 * EMU_IN)}"/><a:ext cx="${t.box.w}" cy="${noteH}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/></p:spPr>` +
-        `<p:txBody><a:bodyPr wrap="square" lIns="0" tIns="0" rIns="0" bIns="0"><a:normAutofit/></a:bodyPr><a:lstStyle/>` +
-        `<a:p><a:r><a:rPr lang="vi-VN" sz="1100" b="1"><a:solidFill><a:srgbClr val="885E1E"/></a:solidFill></a:rPr><a:t>Chú thích: </a:t></a:r>` +
-        `<a:r><a:rPr lang="vi-VN" sz="1100"><a:solidFill><a:srgbClr val="595959"/></a:solidFill></a:rPr><a:t>${esc(review.note)}</a:t></a:r></a:p></p:txBody></p:sp>`;
+        `<p:txBody><a:bodyPr wrap="square" lIns="0" tIns="0" rIns="0" bIns="0"><a:noAutofit/></a:bodyPr><a:lstStyle/>` +
+        `<a:p><a:r><a:rPr lang="vi-VN" sz="1500" b="1"><a:solidFill><a:srgbClr val="885E1E"/></a:solidFill></a:rPr><a:t>Chú thích: </a:t></a:r>` +
+        `<a:r><a:rPr lang="vi-VN" sz="1500"><a:solidFill><a:srgbClr val="595959"/></a:solidFill></a:rPr><a:t>${esc(review.note)}</a:t></a:r></a:p></p:txBody></p:sp>`;
       const sp = new DOMParser().parseFromString(xml, "application/xml").documentElement;
       t.el.parentNode.insertBefore(t.el.ownerDocument.importNode(sp, true), t.el.nextSibling);
     }
