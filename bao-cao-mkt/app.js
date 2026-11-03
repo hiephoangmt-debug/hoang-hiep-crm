@@ -485,7 +485,7 @@
   function fillText(doc, ctx) {
     for (const body of shapeBodies(doc)) {
       const t = bodyText(body).trim();
-      if (/^TUẦN\s*\d*$/i.test(t) && (ctx.title || ctx.weekNo)) {
+      if (/^(TUẦN|THÁNG)\s*\d*$/i.test(t) && (ctx.title || ctx.weekNo)) {
         setBodyText(body, ctx.title || "TUẦN " + ctx.weekNo);
         widen(body, (ctx.title ? 11 : 6) * EMU_IN, true);
         // "THÁNG 10/2026", "TỔNG CHIẾN DỊCH": một dòng, không xuống dòng đè lên dòng ngày

@@ -1193,14 +1193,16 @@
   // Mẫu cũ (10/10) trên Drive chưa có kênh Đăng tin -> dùng mẫu COLLECTION 16/10 (có Đăng tin) đi kèm mã nguồn
   const OLD_TPL = "10S0gG5T_o1WOqqkvUiFdwdhauqoa9mA6";
   const NEW_TPL_PATH = "bao-cao-mkt/mau/mau-collection-16-10.pptx";
-  async function newTemplate() {
+  // báo cáo tháng dùng mẫu riêng (bản sao của mẫu tuần, bìa "THÁNG"): sửa mẫu tháng không ảnh hưởng báo cáo tuần
+  const MONTH_TPL_PATH = "bao-cao-mkt/mau/mau-collection-thang.pptx";
+  async function newTemplate(path) {
     if (!/^https:\/\/[^/]+\/gh\//.test(CODE_BASE)) return null;
     const m = /\/gh\/([^@]+)@([^/]+)\/$/.exec(CODE_BASE);
     const hosts = [CODE_BASE].concat(["fastly", "gcore"].map((h) => CODE_BASE.replace(/^https:\/\/[^/]+/, `https://${h}.jsdelivr.net`)),
       m ? [`https://raw.githubusercontent.com/${m[1]}/${m[2]}/`] : []);
     for (const base of hosts) {
       try {
-        const r = await fetch(base + NEW_TPL_PATH);
+        const r = await fetch(base + (path || NEW_TPL_PATH));
         if (r.ok) { const b = await r.blob(); if (b.size > 100000) return b; }
       } catch (e) { console.error(e); }
     }
@@ -1449,13 +1451,15 @@
     // báo cáo tuần: kèm các tuần trước để so sánh; báo cáo tháng / chiến dịch: đúng các tuần trong kỳ
     const rows = effective(S.SoLieu.filter((r) => r.duAn === pjName && (ky === "tuan" ? isWeekKey(r.tuan) && r.tuan <= w : wks.includes(r.tuan))));
     if (!last || !rows.some((r) => wks.includes(r.tuan))) throw new Error(`${pjName}: chưa có số liệu ${periodLabel(w)}.`);
-    if (!tplCache[tplId]) {
-      const nt = tplId === OLD_TPL ? await newTemplate() : null;
-      if (nt) { tplCache[tplId] = nt; tplSrc[tplId] = "mẫu 16/10"; }
+    // mẫu tháng riêng (khoá cache riêng) – mẫu tuần giữ nguyên
+    const tplKey = ky === "thang" && tplId === OLD_TPL ? tplId + "|thang" : tplId;
+    if (!tplCache[tplKey]) {
+      const nt = tplId === OLD_TPL ? await newTemplate(ky === "thang" ? MONTH_TPL_PATH : NEW_TPL_PATH) : null;
+      if (nt) { tplCache[tplKey] = nt; tplSrc[tplKey] = ky === "thang" ? "mẫu tháng" : "mẫu 16/10"; }
       else {
         const t = await gas("downloadFile", tplId, TOKEN);
-        tplCache[tplId] = B.b64ToBlob(t.b64, t.type);
-        tplSrc[tplId] = tplId === OLD_TPL ? "mẫu Drive 10/10 (không tải được mẫu 16/10)" : "mẫu Drive";
+        tplCache[tplKey] = B.b64ToBlob(t.b64, t.type);
+        tplSrc[tplKey] = tplId === OLD_TPL ? "mẫu Drive 10/10 (không tải được mẫu 16/10)" : "mẫu Drive";
       }
     }
     const accStaff = new Map(rows.map((r) => [r.taiKhoan || r.nhanSu || "(không rõ)", r.nhanSu]));
@@ -1486,7 +1490,7 @@
     const span = `${pad(d0.getDate())}/${pad(d0.getMonth() + 1)}/${d0.getFullYear()} - ${pad(d1.getDate())}/${pad(d1.getMonth() + 1)}/${d1.getFullYear()}`;
     toast(`${pjName}: đang dựng báo cáo…`, "busy");
     const res = await B.buildReport({
-      template: await tplCache[tplId].arrayBuffer(), weeks: weeksForReport(rows), week: weekLabel(last),
+      template: await tplCache[tplKey].arrayBuffer(), weeks: weeksForReport(rows), week: weekLabel(last),
       year: String(parseIso(last).getFullYear()), campaign: pj.chienDich || "", period: ky === "tuan" ? "" : span,
       rangeText: ky === "thang" ? span.replace(/\//g, ".") : "",
       title: ky === "thang" ? monthLabel(w).toUpperCase() : ky === "all" ? "TỔNG CHIẾN DỊCH" : "",
@@ -1506,7 +1510,7 @@
     const b64 = await B.blobToB64(res.blob);
     const out = { tuan: w, duAn: pjName, trangThai: "Nháp", pdfUrl: "", pptxUrl: "",
       tomTat: `${res.slides} slide, ${res.staffCount} nhân sự` + (ky === "tuan" ? `, ${res.nImg} ảnh` : `, ${wks.length} tuần`) +
-        (res.missing ? `, thiếu ${res.missing} ảnh nghiệm thu` : "") + ` · ${(res.blob.size / 1048576).toFixed(1)} MB · ${tplSrc[tplId] || "mẫu Drive"}` };
+        (res.missing ? `, thiếu ${res.missing} ảnh nghiệm thu` : "") + ` · ${(res.blob.size / 1048576).toFixed(1)} MB · ${tplSrc[tplKey] || "mẫu Drive"}` };
     // tạo lại: ghi đè vào file cũ để link đã gửi nhóm vẫn mở được bản mới
     const prev = S.BaoCao.find((r) => r.duAn === pjName && r.tuan === w);
     const data = await uploadData(b64, pjName);
