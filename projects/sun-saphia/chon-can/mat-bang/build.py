@@ -43,6 +43,8 @@ js = r'''(function(){
     setTimeout(function(){ try{ dispatchEvent(new Event('resize')); }catch(x){} lead(); bg(); H();
       try{ parent.postMessage({sscc:'scrollrc',y:rc.getBoundingClientRect().top},'*'); }catch(x){} },first?80:20);
     try{ parent.postMessage({sscc:'pick'},'*'); }catch(x){} },true);
+  try{ new MutationObserver(function(ms){ ms.forEach(function(m){ [].forEach.call(m.addedNodes,function(n){ if(n.id!=='lbx'||!parent||parent===window) return;
+      var im=[].map.call(n.querySelectorAll('img'),function(i){ return {src:i.src,alt:i.alt}; }); n.remove(); try{ parent.postMessage({sscc:'lbx',imgs:im},'*'); }catch(x){} }); }); }).observe(document.body,{childList:true}); }catch(x){}
   setInterval(lead,500); if(document.readyState!=='loading') hint(); else addEventListener('DOMContentLoaded',hint); setTimeout(hint,300);
 })();'''
 i = src.index('var DOC = ') + len('var DOC = ')
@@ -59,6 +61,13 @@ out = out.replace("function fit(){ box.style.height = (window.innerWidth < 820 ?
   "    window.addEventListener('message', function(e){ var d=e.data; if(!d||!d.sscc) return;\n"
   "      if(d.sscc==='h2'&&d.h>300&&Math.abs(d.h-hh)>4){ hh=d.h; fit(); }\n"
   "      if(d.sscc==='scrollrc'){ try{ window.scrollTo({top:box.getBoundingClientRect().top+window.pageYOffset+d.y-70,behavior:'smooth'}); }catch(x){} }\n"
+  "      if(d.sscc==='lbx'&&d.imgs&&d.imgs.length){ var ov=document.createElement('div'); ov.style.cssText='position:fixed;inset:0;z-index:2147483000;background:rgba(14,110,153,.88);display:flex;align-items:center;justify-content:center;padding:12px';\n"
+  "        var w=document.createElement('div'); w.style.cssText='position:relative;max-width:1500px;width:100%;max-height:100%;overflow:auto;background:#fff;border-radius:14px';\n"
+  "        var c=document.createElement('button'); c.type='button'; c.textContent='✕ Đóng'; c.style.cssText='position:sticky;float:right;top:8px;margin:8px;z-index:2;border:0;border-radius:18px;background:#F4A45B;color:#fff;font-weight:800;font-size:15px;padding:8px 14px;cursor:pointer';\n"
+  "        w.appendChild(c); d.imgs.forEach(function(x){ var i=document.createElement('img'); i.src=x.src; i.alt=x.alt||''; i.style.cssText='display:block;width:100%;height:auto'; w.appendChild(i); });\n"
+  "        ov.appendChild(w); var ho=document.documentElement.style.overflow; document.documentElement.style.overflow='hidden';\n"
+  "        function cl(){ ov.remove(); document.documentElement.style.overflow=ho; document.removeEventListener('keydown',ek); } function ek(e){ if(e.key==='Escape') cl(); }\n"
+  "        c.onclick=cl; ov.onclick=function(e){ if(e.target===ov) cl(); }; document.addEventListener('keydown',ek); document.body.appendChild(ov); }\n"
   "      if(d.sscc==='lead'){ var it=(document.getElementById('h4d')?'ADS':'Web')+' – chọn căn '+d.unit+' ('+d.type+', tầng '+d.floor+')', b=document.createElement('button');\n"
   "        b.type='button'; b.setAttribute('data-pop',''); b.setAttribute('data-interest',it); b.style.display='none'; document.body.appendChild(b); b.click(); setTimeout(function(){ b.remove(); },100);\n"
   "        try{ if(window.gtag) gtag('event','chon_can_lead',{event_label:d.unit}); }catch(x){} } });")
