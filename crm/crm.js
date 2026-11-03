@@ -815,7 +815,12 @@
     Array.from(evSel).filter((id) => !rows.some((r) => r.id === id)).forEach((id) => evSel.delete(id));
     $("evDelSel").textContent = `Xoá đã chọn (${evSel.size})`;
     $("evDelSel").disabled = !evSel.size;
-    $("evList").innerHTML = rows.length ? rows.map((r) => `
+    // nhóm theo từng bạn (cả người phải có ảnh mà chưa tải) cho dễ nhìn
+    const order = staffNames();
+    const need = Array.from(new Set(effective(S.SoLieu.filter((r) => r.duAn === pj && (wks.includes(r.tuan) || r.tuan === w))).map((r) => r.nhanSu).filter(Boolean)
+      .concat(rows.map((r) => r.nhanSu || ""))))
+      .sort((a, b) => (a ? order.indexOf(a) + 1 || 99 : 999) - (b ? order.indexOf(b) + 1 || 99 : 999));
+    const fig = (r) => `
       <figure class="img${evSel.has(r.id) ? " sel" : ""}">${canEdit(r) ? `<label class="pick"><input type="checkbox" data-evsel="${esc(r.id)}"${evSel.has(r.id) ? " checked" : ""}> Chọn</label>` : `<span class="pick muted" title="Chỉ quản trị mới sửa/xoá ảnh của người khác">⊘ ${esc(r.nhanSu || "chưa gán")}</span>`}<a href="${esc(r.url)}" target="_blank" rel="noopener"><img src="https://drive.google.com/thumbnail?id=${esc(r.fileId)}&sz=w400" alt="${esc(r.tenFile)}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'noimg',textContent:'Mở chứng từ'}))"></a>
         <figcaption><span class="fname" title="${esc(r.tenFile)}">${esc(r.tenFile)}</span><fieldset class="ro"${canEdit(r) ? "" : " disabled"}>
           <div class="row"><select data-ev="${esc(r.id)}" data-f="nenTang">${PLATFORMS.map((x) => opt(x, PLATFORM_LABEL[x], r.nenTang)).join("")}</select>
@@ -826,7 +831,12 @@
             <button type="button" class="link small" data-invread="${esc(r.id)}">Đọc số tiền trên hoá đơn</button>
             ${invoiceInputs(`data-inv="${esc(r.id)}"`, r.soTien, r.vat, soleAccount(r.nhanSu, r.nenTang))}
             <button type="button" class="small" data-invsave="${esc(r.id)}" style="width:100%;margin-top:4px">Lưu & tính Chi phí (+phí)</button></div>`}
-        </fieldset></figcaption></figure>`).join("") : `<p class="muted">Chưa có ảnh chứng từ cho ${month ? "tháng" : "tuần"} này.</p>`;
+        </fieldset></figcaption></figure>`;
+    $("evList").innerHTML = need.length ? need.map((st) => {
+      const mine = rows.filter((r) => (r.nhanSu || "") === st);
+      return `<div class="evgrp"><h4>${st ? esc(st) : "Chưa gán nhân sự"} <small class="${mine.length ? "muted" : "warn-text"}">${mine.length ? mine.length + " ảnh" : "chưa có ảnh"}</small></h4>
+        ${mine.length ? `<div class="imgs">${mine.map(fig).join("")}</div>` : ""}</div>`;
+    }).join("") : `<p class="muted">Chưa có ảnh chứng từ cho ${month ? "tháng" : "tuần"} này.</p>`;
   }
   async function addPending(files) {
     const staff = $("evStaff").value;
