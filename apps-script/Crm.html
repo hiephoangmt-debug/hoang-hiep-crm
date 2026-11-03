@@ -128,6 +128,7 @@
   .camp.manual .lead { width:56px; }
   .drop.over { border-color:var(--accent); background:var(--accent-soft); }
   .drop input { display:block; margin:8px auto 0; max-width:100%; }
+  .evgrp { margin-top:14px; } .evgrp h4 { margin:0; padding:6px 0; border-bottom:1px solid var(--line, #e5e7eb); font-size:15px; } .evgrp h4 small { font-weight:400; margin-left:6px; }
   .imgs { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; margin-top:10px; }
   .img { margin:0; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--bg); min-width:0; }
   .img img, .img .noimg { display:block; width:100%; height:150px; object-fit:cover; object-position:top; background:var(--hover); }
@@ -161,7 +162,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v74)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v75)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
@@ -246,7 +247,7 @@
         <p class="hint">Mỗi kênh đã chạy cần đủ ảnh: Facebook / TikTok / Zalo: <b>Chiến dịch</b> + <b>QC đang chạy</b> + <b>Hoá đơn</b>; Google: <b>Chiến dịch</b> + <b>Hoá đơn</b>; Đăng tin: <b>Chiến dịch</b> (màn hình tin đăng) + <b>Hoá đơn</b> (chi tiết giao dịch). Bấm vào ô bất kỳ để xem các mục phải khoanh; “Không cần” = kênh này không cần loại ảnh đó. Hoá đơn được đặt vào trang “HÓA ĐƠN” sau ảnh của kênh trong báo cáo, và dùng để tính chi phí gồm VAT.</p>
         <div class="wrap" id="evCheck"></div>
       </section>
-      <p class="hint" id="evMonthNote" hidden><b>Ảnh nghiệm thu cả tháng</b>: chụp Trình quản lý quảng cáo / hoá đơn với khoảng ngày <b>ngày 1 đến ngày cuối tháng</b> rồi tải lên ở đây – ảnh này vào báo cáo tháng. Số liệu tháng vẫn là cộng các tuần (ảnh tháng không ghi thêm số).</p>
+      <p class="hint" id="evMonthNote" hidden><b>Ảnh nghiệm thu cả tháng</b>: chụp Trình quản lý quảng cáo / hoá đơn với khoảng ngày <b>ngày 1 đến ngày cuối tháng</b> rồi tải lên ở đây – ảnh này vào báo cáo tháng. Số cả tháng nhập ở tab <b>Nhập số liệu</b> (chọn cùng “Cả tháng”); chưa nhập thì báo cáo tháng cộng các tuần.</p>
       <section class="card" id="evUploadCard">
         <h3>Tải ảnh chụp màn hình / chứng từ</h3>
         <div class="drop" id="evDrop">Kéo thả ảnh chụp màn hình quảng cáo, hoá đơn (ảnh hoặc PDF) vào đây, <b>dán ảnh vừa chụp bằng Ctrl + V</b> (Mac: Cmd + V), hoặc
@@ -266,7 +267,7 @@
           <button type="button" id="evSelDup" class="ghost small" title="Tự tick các ảnh cùng file, cùng nội dung hoặc cùng tên, giữ lại một ảnh mỗi nhóm">Chọn ảnh trùng</button>
           <button type="button" id="evDelSel" class="small danger" disabled>Xoá đã chọn (0)</button>
         </div>
-        <div class="imgs" id="evList"></div>
+        <div id="evList"></div>
       </section>
     </div>
 
@@ -306,7 +307,7 @@
 <script>
 (function () {
   // tải lần lượt từng file, file nào lỗi thì thử máy chủ dự phòng kế tiếp
-  var list = [["https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js", "https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"], ["https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js", "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"], ["https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@024d686716e37bb20dc7e3e2d1af9007807f8555/crm/logos.js", "https://fastly.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@024d686716e37bb20dc7e3e2d1af9007807f8555/crm/logos.js", "https://gcore.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@024d686716e37bb20dc7e3e2d1af9007807f8555/crm/logos.js", "https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/024d686716e37bb20dc7e3e2d1af9007807f8555/crm/logos.js", "https://cdn.statically.io/gh/hiephoangmt-debug/hoang-hiep-crm/024d686716e37bb20dc7e3e2d1af9007807f8555/crm/logos.js"], ["https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@024d686716e37bb20dc7e3e2d1af9007807f8555/bao-cao-mkt/config.js", "https://fastly.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@024d686716e37bb20dc7e3e2d1af9007807f8555/bao-cao-mkt/config.js", "https://gcore.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@024d686716e37bb20dc7e3e2d1af9007807f8555/bao-cao-mkt/config.js", "https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/024d686716e37bb20dc7e3e2d1af9007807f8555/bao-cao-mkt/config.js", "https://cdn.statically.io/gh/hiephoangmt-debug/hoang-hiep-crm/024d686716e37bb20dc7e3e2d1af9007807f8555/bao-cao-mkt/config.js"], ["https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@024d686716e37bb20dc7e3e2d1af9007807f8555/bao-cao-mkt/app.js", "https://fastly.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@024d686716e37bb20dc7e3e2d1af9007807f8555/bao-cao-mkt/app.js", "https://gcore.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@024d686716e37bb20dc7e3e2d1af9007807f8555/bao-cao-mkt/app.js", "https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/024d686716e37bb20dc7e3e2d1af9007807f8555/bao-cao-mkt/app.js", "https://cdn.statically.io/gh/hiephoangmt-debug/hoang-hiep-crm/024d686716e37bb20dc7e3e2d1af9007807f8555/bao-cao-mkt/app.js"], ["https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@024d686716e37bb20dc7e3e2d1af9007807f8555/crm/crm.js", "https://fastly.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@024d686716e37bb20dc7e3e2d1af9007807f8555/crm/crm.js", "https://gcore.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@024d686716e37bb20dc7e3e2d1af9007807f8555/crm/crm.js", "https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/024d686716e37bb20dc7e3e2d1af9007807f8555/crm/crm.js", "https://cdn.statically.io/gh/hiephoangmt-debug/hoang-hiep-crm/024d686716e37bb20dc7e3e2d1af9007807f8555/crm/crm.js"]];
+  var list = [["https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js", "https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"], ["https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js", "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"], ["https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/crm/logos.js", "https://fastly.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/crm/logos.js", "https://gcore.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/crm/logos.js", "https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/crm/logos.js", "https://cdn.statically.io/gh/hiephoangmt-debug/hoang-hiep-crm/9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/crm/logos.js"], ["https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/bao-cao-mkt/config.js", "https://fastly.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/bao-cao-mkt/config.js", "https://gcore.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/bao-cao-mkt/config.js", "https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/bao-cao-mkt/config.js", "https://cdn.statically.io/gh/hiephoangmt-debug/hoang-hiep-crm/9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/bao-cao-mkt/config.js"], ["https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/bao-cao-mkt/app.js", "https://fastly.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/bao-cao-mkt/app.js", "https://gcore.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/bao-cao-mkt/app.js", "https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/bao-cao-mkt/app.js", "https://cdn.statically.io/gh/hiephoangmt-debug/hoang-hiep-crm/9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/bao-cao-mkt/app.js"], ["https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/crm/crm.js", "https://fastly.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/crm/crm.js", "https://gcore.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/crm/crm.js", "https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/crm/crm.js", "https://cdn.statically.io/gh/hiephoangmt-debug/hoang-hiep-crm/9b49c753b44ee5dfb8ed523cc8edbe021e2d0d12/crm/crm.js"]];
   function load(i, k) {
     if (i >= list.length) return;
     var s = document.createElement("script");
