@@ -100,6 +100,28 @@
     const covered = new Set(rows.filter((r) => !isWeekKey(r.tuan)).map(k));
     return rows.filter((r) => !isWeekKey(r.tuan) || !covered.has(k(r)));
   }
+  /**
+   * Báo cáo tháng: lead / MQL / SQL / DEAL chưa nhập cho tháng (ô trống) -> lấy tổng các tuần trong tháng
+   * của đúng dự án · nhân sự · kênh (số phễu bán hàng các bạn đã nhập theo tuần). Ô đã nhập cho tháng giữ nguyên.
+   */
+  function monthFunnel(rows, key) {
+    if (kyOf(key) !== "thang") return rows;
+    const g = (r) => r.duAn + "|" + r.nhanSu + "|" + (r.nenTang || "Facebook");
+    const wk = effective(S.SoLieu.filter((r) => isWeekKey(r.tuan) && weekMonth(r.tuan) === key));
+    const blank = (v) => v === "" || v == null;
+    const done = new Set();
+    return rows.map((r) => {
+      if (r.tuan !== key) return r;
+      const k = g(r), mine = rows.filter((x) => x.tuan === key && g(x) === k), o = Object.assign({}, r);
+      ["lead", "mql", "sql", "deal"].forEach((f) => {
+        if (done.has(k + f) || !mine.every((x) => blank(x[f]))) return;
+        done.add(k + f);
+        const ws = wk.filter((x) => g(x) === k && !blank(x[f]));
+        if (ws.length) o[f] = ws.reduce((n, x) => n + num(x[f]), 0);
+      });
+      return o;
+    });
+  }
   const inKey = (key, w, pjName) => (kyOf(key) === "tuan" ? w === key : weeksOfKey(key, pjName).includes(w));
 
   // ------------------------------------------------------------ trạng thái
@@ -1410,7 +1432,7 @@
   /** Báo cáo dạng trang web: chỉ cần số liệu + ảnh đã lưu, không dựng PPTX (rất nhanh). */
   async function buildWeb(pjName, w) {
     const ky = kyOf(w), wks = weeksOfKey(w, pjName);
-    const rows = monthFirst(effective(S.SoLieu.filter((r) => r.duAn === pjName && wks.includes(r.tuan))));
+    const rows = monthFunnel(monthFirst(effective(S.SoLieu.filter((r) => r.duAn === pjName && wks.includes(r.tuan)))), w);
     if (!rows.length) throw new Error(`${pjName}: chưa có số liệu ${periodLabel(w)}.`);
     if (ky === "tuan") {
       try { await importDriveEvidence(pjName, w); } catch (e) { console.error(e); }
@@ -1449,12 +1471,14 @@
   /** Bảng "REVIEW KẾT QUẢ SÀN": Lead / MQL / SQL / Deal của từng nhân sự ở mọi dự án trong kỳ w. */
   function reviewData(w) {
     const projects = S.DuAn.map((p) => ({ key: p.khoa || p.ten, name: p.ten }));
-    const rows = monthFirst(effective(S.SoLieu.filter((r) => weeksOfKey(w, r.duAn).includes(r.tuan))));
+    const rows = monthFunnel(monthFirst(effective(S.SoLieu.filter((r) => weeksOfKey(w, r.duAn).includes(r.tuan)))), w);
     const order = staffNames();
     const staff = Array.from(new Set(rows.map((r) => r.nhanSu).filter(Boolean)))
       .sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99));
     return {
       projects, san: "COLLECTION",
+      note: "Lead = khách để lại thông tin từ quảng cáo · MQL = khách hàng quan tâm · SQL = khách hàng tiềm năng (đủ điều kiện mua) · Deal = giao dịch đã chốt." +
+        (kyOf(w) === "thang" ? " Báo cáo tháng: ô chưa nhập số cả tháng lấy tổng các tuần trong tháng." : ""),
       rows: staff.map((st) => ({ staff: st, by: Object.fromEntries(projects.map((p) => {
         const rs = rows.filter((r) => r.nhanSu === st && r.duAn === p.name);
         const t = (k) => rs.reduce((n, r) => n + num(r[k]), 0);
@@ -1470,7 +1494,7 @@
     if (!tplId) throw new Error(`Dự án ${pjName} chưa có link PPTX mẫu (tab Danh mục).`);
     const last = wks[wks.length - 1];
     // báo cáo tuần: kèm các tuần trước để so sánh; báo cáo tháng / chiến dịch: đúng các tuần trong kỳ
-    const rows = monthFirst(effective(S.SoLieu.filter((r) => r.duAn === pjName && (ky === "tuan" ? isWeekKey(r.tuan) && r.tuan <= w : wks.includes(r.tuan)))));
+    const rows = monthFunnel(monthFirst(effective(S.SoLieu.filter((r) => r.duAn === pjName && (ky === "tuan" ? isWeekKey(r.tuan) && r.tuan <= w : wks.includes(r.tuan))))), w);
     if (!last || !rows.some((r) => wks.includes(r.tuan))) throw new Error(`${pjName}: chưa có số liệu ${periodLabel(w)}.`);
     // mẫu tháng riêng (khoá cache riêng) – mẫu tuần giữ nguyên
     const tplKey = ky === "thang" && tplId === OLD_TPL ? tplId + "|thang" : tplId;

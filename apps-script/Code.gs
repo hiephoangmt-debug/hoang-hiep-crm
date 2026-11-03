@@ -631,6 +631,26 @@ function crmWebReport(k) {
   var sc = crmReportScope_(bc.tuan, Object.keys(rows.reduce(function (o, r) { o[r.tuan] = 1; return o; }, {})));
   var last = sc.weeks[sc.weeks.length - 1] || String(bc.tuan);
   var inScope = sc.weeks.concat(sc.prevWeeks);
+  // báo cáo tháng: lead / MQL / SQL / DEAL chưa nhập cho tháng -> tổng các tuần trong tháng (cùng nhân sự · kênh)
+  if (sc.ky === 'thang') {
+    var gk = function (r) { return r.nhanSu + '|' + (r.nenTang || 'Facebook'); };
+    var blank = function (v) { return v === '' || v === null || v === undefined; };
+    var wkRows = rows.filter(function (r) { var t = String(r.tuan); return /^\d{4}-\d{2}-\d{2}$/.test(t) && crmWeekMonth_(t) === String(bc.tuan); });
+    var done = {};
+    rows = rows.map(function (r) {
+      if (String(r.tuan) !== String(bc.tuan)) return r;
+      var k = gk(r), o = {};
+      Object.keys(r).forEach(function (x) { o[x] = r[x]; });
+      var mine = rows.filter(function (x) { return String(x.tuan) === String(bc.tuan) && gk(x) === k; });
+      ['lead', 'mql', 'sql', 'deal'].forEach(function (f) {
+        if (done[k + f] || !mine.every(function (x) { return blank(x[f]); })) return;
+        done[k + f] = 1;
+        var ws = wkRows.filter(function (x) { return gk(x) === k && !blank(x[f]); });
+        if (ws.length) o[f] = ws.reduce(function (n, x) { return n + (Number(String(x[f]).replace(/[^\d.-]/g, '')) || 0); }, 0);
+      });
+      return o;
+    });
+  }
   var soLieu = rows.filter(function (r) {
     var t = String(r.tuan);
     return sc.ky === 'tuan' ? /^\d{4}-\d{2}-\d{2}$/.test(t) && t <= last : inScope.indexOf(t) >= 0;
