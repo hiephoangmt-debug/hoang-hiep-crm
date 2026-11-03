@@ -160,7 +160,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v72)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v73)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
@@ -245,7 +245,8 @@
         <p class="hint">Mỗi kênh đã chạy cần đủ ảnh: Facebook / TikTok / Zalo: <b>Chiến dịch</b> + <b>QC đang chạy</b> + <b>Hoá đơn</b>; Google: <b>Chiến dịch</b> + <b>Hoá đơn</b>; Đăng tin: <b>Chiến dịch</b> (màn hình tin đăng) + <b>Hoá đơn</b> (chi tiết giao dịch). Bấm vào ô bất kỳ để xem các mục phải khoanh; “Không cần” = kênh này không cần loại ảnh đó. Hoá đơn được đặt vào trang “HÓA ĐƠN” sau ảnh của kênh trong báo cáo, và dùng để tính chi phí gồm VAT.</p>
         <div class="wrap" id="evCheck"></div>
       </section>
-      <section class="card">
+      <p class="hint" id="evMonthNote" hidden>Đang xem <b>cả tháng</b> (gộp các tuần trong tháng). Muốn tải ảnh, lấy ảnh từ Drive hoặc xếp lại thư mục thì chọn một tuần cụ thể.</p>
+      <section class="card" id="evUploadCard">
         <h3>Tải ảnh chụp màn hình / chứng từ</h3>
         <div class="drop" id="evDrop">Kéo thả ảnh chụp màn hình quảng cáo, hoá đơn (ảnh hoặc PDF) vào đây, <b>dán ảnh vừa chụp bằng Ctrl + V</b> (Mac: Cmd + V), hoặc
           <input type="file" id="evFiles" accept="image/*,application/pdf,.pdf" multiple>
