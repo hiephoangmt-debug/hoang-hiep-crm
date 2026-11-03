@@ -616,7 +616,8 @@ function crmReportScope_(key, allWeeks) {
   if (/^\d{4}-\d{2}$/.test(key)) {
     var y = +key.slice(0, 4), m = +key.slice(5, 7) - 1;
     var pm = (m === 0 ? y - 1 : y) + '-' + ('0' + (m === 0 ? 12 : m)).slice(-2);
-    var ofMonth = function (m) { return months.indexOf(m) >= 0 ? [m] : allWeeks.filter(function (w) { return crmWeekMonth_(w) === m; }); };
+    // tháng: mã tháng (nếu có người nhập số cả tháng) + các tuần; trang báo cáo bỏ số tuần của người đã có số tháng
+    var ofMonth = function (m) { return (months.indexOf(m) >= 0 ? [m] : []).concat(allWeeks.filter(function (w) { return crmWeekMonth_(w) === m; })); };
     return { ky: 'thang', weeks: ofMonth(key), prevWeeks: ofMonth(pm) };
   }
   return { ky: 'all', weeks: allWeeks, prevWeeks: [] };

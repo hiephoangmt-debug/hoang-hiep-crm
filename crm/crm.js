@@ -90,8 +90,15 @@
   function weeksOfKey(key, pjName) {
     const ky = kyOf(key);
     const all = Array.from(new Set(S.SoLieu.filter((r) => r.duAn === pjName && isWeekKey(r.tuan)).map((r) => r.tuan))).sort();
-    if (ky === "thang" && S.SoLieu.some((r) => r.duAn === pjName && r.tuan === key)) return [key]; // có số nhập riêng cho tháng: dùng số đó
-    return ky === "tuan" ? [key] : ky === "thang" ? all.filter((w) => weekMonth(w) === key) : all;
+    // tháng: các tuần trong tháng + mã tháng nếu có người nhập số cả tháng (monthFirst bỏ số tuần của đúng người · kênh đó)
+    if (ky === "thang") return (S.SoLieu.some((r) => r.duAn === pjName && r.tuan === key) ? [key] : []).concat(all.filter((w) => weekMonth(w) === key));
+    return ky === "tuan" ? [key] : all;
+  }
+  /** Báo cáo tháng: người · kênh đã nhập số cả tháng thì dùng số tháng thay cho các tuần của người đó; người khác vẫn cộng các tuần. */
+  function monthFirst(rows) {
+    const k = (r) => r.duAn + "|" + r.nhanSu + "|" + (r.nenTang || "Facebook");
+    const covered = new Set(rows.filter((r) => !isWeekKey(r.tuan)).map(k));
+    return rows.filter((r) => !isWeekKey(r.tuan) || !covered.has(k(r)));
   }
   const inKey = (key, w, pjName) => (kyOf(key) === "tuan" ? w === key : weeksOfKey(key, pjName).includes(w));
 
@@ -1398,7 +1405,7 @@
   /** Báo cáo dạng trang web: chỉ cần số liệu + ảnh đã lưu, không dựng PPTX (rất nhanh). */
   async function buildWeb(pjName, w) {
     const ky = kyOf(w), wks = weeksOfKey(w, pjName);
-    const rows = effective(S.SoLieu.filter((r) => r.duAn === pjName && wks.includes(r.tuan)));
+    const rows = monthFirst(effective(S.SoLieu.filter((r) => r.duAn === pjName && wks.includes(r.tuan))));
     if (!rows.length) throw new Error(`${pjName}: chưa có số liệu ${periodLabel(w)}.`);
     if (ky === "tuan") {
       try { await importDriveEvidence(pjName, w); } catch (e) { console.error(e); }
@@ -1408,7 +1415,7 @@
     const ev = ky !== "all" ? S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.nhanSu) : [];
     const staffN = new Set(rows.map((r) => r.nhanSu).concat(ev.map((r) => r.nhanSu)).filter(Boolean)).size;
     const out = { tuan: w, duAn: pjName, trangThai: prev ? prev.trangThai : "Nháp", webKey: (prev && prev.webKey) || newWebKey(),
-      tomTat: `Trang web · ${staffN} nhân sự` + (ky === "tuan" ? `, ${ev.length} ảnh/chứng từ` : (wks[0] === w ? ", số nhập theo tháng" : `, ${wks.length} tuần`) + (ev.length ? `, ${ev.length} ảnh/chứng từ` : "")), ngayTao: nowStamp() };
+      tomTat: `Trang web · ${staffN} nhân sự` + (ky === "tuan" ? `, ${ev.length} ảnh/chứng từ` : (wks[0] === w ? `, số tháng + ${wks.length - 1} tuần` : `, ${wks.length} tuần`) + (ev.length ? `, ${ev.length} ảnh/chứng từ` : "")), ngayTao: nowStamp() };
     if (prev) out.id = prev.id;
     const saved = await call("crmSave", "BaoCao", out);
     S.BaoCao = S.BaoCao.filter((r) => r.id !== saved.id).concat(saved);
@@ -1437,7 +1444,7 @@
   /** Bảng "REVIEW KẾT QUẢ SÀN": Lead / MQL / SQL / Deal của từng nhân sự ở mọi dự án trong kỳ w. */
   function reviewData(w) {
     const projects = S.DuAn.map((p) => ({ key: p.khoa || p.ten, name: p.ten }));
-    const rows = effective(S.SoLieu.filter((r) => weeksOfKey(w, r.duAn).includes(r.tuan)));
+    const rows = monthFirst(effective(S.SoLieu.filter((r) => weeksOfKey(w, r.duAn).includes(r.tuan))));
     const order = staffNames();
     const staff = Array.from(new Set(rows.map((r) => r.nhanSu).filter(Boolean)))
       .sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99));
@@ -1458,7 +1465,7 @@
     if (!tplId) throw new Error(`Dự án ${pjName} chưa có link PPTX mẫu (tab Danh mục).`);
     const last = wks[wks.length - 1];
     // báo cáo tuần: kèm các tuần trước để so sánh; báo cáo tháng / chiến dịch: đúng các tuần trong kỳ
-    const rows = effective(S.SoLieu.filter((r) => r.duAn === pjName && (ky === "tuan" ? isWeekKey(r.tuan) && r.tuan <= w : wks.includes(r.tuan))));
+    const rows = monthFirst(effective(S.SoLieu.filter((r) => r.duAn === pjName && (ky === "tuan" ? isWeekKey(r.tuan) && r.tuan <= w : wks.includes(r.tuan)))));
     if (!last || !rows.some((r) => wks.includes(r.tuan))) throw new Error(`${pjName}: chưa có số liệu ${periodLabel(w)}.`);
     // mẫu tháng riêng (khoá cache riêng) – mẫu tuần giữ nguyên
     const tplKey = ky === "thang" && tplId === OLD_TPL ? tplId + "|thang" : tplId;
@@ -1518,7 +1525,7 @@
     const sub = ky === "all" ? "Tổng chiến dịch" : "Tháng " + (ky === "thang" ? w : weekMonth(w)).split("-").reverse().join("-");
     const b64 = await B.blobToB64(res.blob);
     const out = { tuan: w, duAn: pjName, trangThai: "Nháp", pdfUrl: "", pptxUrl: "",
-      tomTat: `${res.slides} slide, ${res.staffCount} nhân sự` + (ky === "tuan" ? `, ${res.nImg} ảnh` : (wks[0] === w ? ", số nhập theo tháng" : `, ${wks.length} tuần`) + (res.nImg ? `, ${res.nImg} ảnh` : "")) +
+      tomTat: `${res.slides} slide, ${res.staffCount} nhân sự` + (ky === "tuan" ? `, ${res.nImg} ảnh` : (wks[0] === w ? `, số tháng + ${wks.length - 1} tuần` : `, ${wks.length} tuần`) + (res.nImg ? `, ${res.nImg} ảnh` : "")) +
         (res.missing ? `, thiếu ${res.missing} ảnh nghiệm thu` : "") + ` · ${(res.blob.size / 1048576).toFixed(1)} MB · ${tplSrc[tplKey] || "mẫu Drive"}` };
     // tạo lại: ghi đè vào file cũ để link đã gửi nhóm vẫn mở được bản mới
     const prev = S.BaoCao.find((r) => r.duAn === pjName && r.tuan === w);

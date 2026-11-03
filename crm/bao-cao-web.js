@@ -55,7 +55,7 @@
     if (ky === "thang") {
       // tháng dương lịch: ngày 1 đến ngày cuối tháng
       const [y, m] = String(d.tuan).split("-"), last = new Date(+y, +m, 0).getDate(), mm = String(m).padStart(2, "0");
-      return { ky, weeks, name: `Tháng ${+m}/${y}`, html: `Tháng <b>${+m}/${y}</b> (01/${mm}/${y} – ${last}/${mm}/${y}, ${weeks.length === 1 && weeks[0] === String(d.tuan) ? "số nhập theo tháng" : weeks.length + " tuần"})`, prev: "tháng trước" };
+      return { ky, weeks, name: `Tháng ${+m}/${y}`, html: `Tháng <b>${+m}/${y}</b> (01/${mm}/${y} – ${last}/${mm}/${y}, ${weeks.includes(String(d.tuan)) ? "số cả tháng của người đã nhập + " + (weeks.length - 1) + " tuần" : weeks.length + " tuần"})`, prev: "tháng trước" };
     }
     if (ky === "all") return { ky, weeks, name: "Toàn chiến dịch", html: `Toàn chiến dịch <b>${span}</b> (${weeks.length} tuần)`, prev: "" };
     return { ky, weeks, name: `tuần ${wkLabel(d.tuan)}`, html: `Tuần <b>${wkLabel(d.tuan, true)}</b>`, prev: "tuần trước" };
@@ -145,8 +145,12 @@
     const per = periodOf(D), range = per.ky !== "tuan", noShots = per.ky === "all"; // báo cáo tháng có ảnh nghiệm thu tháng
     PREV = per.prev;
     const inW = new Set(per.weeks), inP = new Set(D.prevWeeks || [addDays(D.tuan, -7)]);
-    const W = all.filter((r) => inW.has(r.tuan));
-    const P = all.filter((r) => inP.has(r.tuan));
+    // báo cáo tháng: người · kênh đã nhập số cả tháng thì bỏ số các tuần của người đó (người khác vẫn cộng các tuần)
+    const isWk = (t) => /^\d{4}-\d{2}-\d{2}$/.test(String(t));
+    const monthFirst = (rows) => { const k = (r) => r.nhanSu + "|" + (r.nenTang || "Facebook"), cov = new Set(rows.filter((r) => !isWk(r.tuan)).map(k));
+      return rows.filter((r) => !isWk(r.tuan) || !cov.has(k(r))); };
+    const W = monthFirst(all.filter((r) => inW.has(r.tuan)));
+    const P = monthFirst(all.filter((r) => inP.has(r.tuan)));
     const t = sum(W), tp = sum(P);
     const brand = String(D.logo || "");
     const logo = (window.TATI_LOGOS || {})[brand];
@@ -192,7 +196,7 @@
       return { label: PLAB[p], value: s.fee, color: PCOL[p], note: `${fmt(s.lead)} lead · ${t.fee ? fmt1((s.fee / t.fee) * 100) : 0}%` }; });
     const rowsBy = {};
     staff.forEach((s) => { rowsBy[s] = {}; PLATS.forEach((p) => { rowsBy[s][p] = sum(W.filter((r) => r.nhanSu === s && (r.nenTang || "Facebook") === p)).fee; }); });
-    const weeks = range ? per.weeks.filter((w) => all.some((r) => r.tuan === w))
+    const weeks = range ? per.weeks.filter((w) => isWk(w) && W.some((r) => r.tuan === w))
       : Array.from(new Set(all.map((r) => r.tuan))).filter((w) => w <= D.tuan).sort().slice(-6);
     const trendC = weeks.map((w) => ({ label: wkLabel(w), short: wkLabel(w).split(" – ")[0], value: sum(all.filter((r) => r.tuan === w)).fee, cur: range || w === D.tuan }));
     const trendL = weeks.map((w) => ({ label: wkLabel(w), short: wkLabel(w).split(" – ")[0], value: sum(all.filter((r) => r.tuan === w)).lead, cur: range || w === D.tuan }));
