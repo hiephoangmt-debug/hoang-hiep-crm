@@ -113,9 +113,13 @@
   function aggregate(recs) {
     const t = {};
     SUM_FIELDS.forEach((k) => (t[k] = recs.reduce((s, r) => s + r[k], 0)));
-    t.frequency = t.reach ? t.impressions / t.reach : 0;
-    t.ctr = t.impressions ? t.clicks / t.impressions : 0;
-    t.cpm = t.impressions ? (t.cost / t.impressions) * 1000 : 0;
+    // chỉ số tỉ lệ: chỉ tính trên các dòng có đủ số (dòng thiếu tiếp cận / lượt nhấp không làm lệch kết quả)
+    const part = (has, k) => recs.filter(has).reduce((s, r) => s + r[k], 0);
+    const impR = part((r) => r.reach > 0, "impressions"), impC = part((r) => r.clicks > 0, "impressions");
+    const impI = t.impressions, costI = part((r) => r.impressions > 0, "cost");
+    t.frequency = t.reach && impR ? impR / t.reach : 0;
+    t.ctr = t.clicks && impC ? t.clicks / impC : 0;
+    t.cpm = impI && costI ? (costI / impI) * 1000 : 0;
     t.accounts = new Set(recs.map((r) => r.account).filter(Boolean)).size;
     t.hasFunnel = recs.some((r) => r.hasFunnel);
     return t;
@@ -305,13 +309,15 @@
       if (h.startsWith("ngan sach thuc chay")) return fmtInt(r.cost);
       if (h.startsWith("ngan sach")) return fmtInt(r.cost_fee); // "Ngân sách đăng tin" / "Ngân sách": số đã trả
       if (h.startsWith("lead")) return fmtInt(r.lead);
-      if (h.startsWith("impressions")) return fmtInt(r.impressions);
-      if (h.startsWith("reach")) return fmtInt(r.reach);
-      if (h.startsWith("frequency")) return fmtDec(r.frequency);
-      if (h.startsWith("luot nhap")) return fmtInt(r.clicks);
-      if (h.startsWith("ctr")) return fmtDec(r.ctr * 100) + "%";
-      if (h.startsWith("cpm")) return fmtInt(r.cpm);
-      if (h.startsWith("luot xem")) return fmtInt(r.views);
+      // chưa có số -> "–" (không ghi 0 / 0,00% dễ hiểu nhầm là kết quả thật)
+      const opt = (v, f) => (v ? f(v) : "–");
+      if (h.startsWith("impressions")) return opt(r.impressions, fmtInt);
+      if (h.startsWith("reach")) return opt(r.reach, fmtInt);
+      if (h.startsWith("frequency")) return opt(r.frequency, fmtDec);
+      if (h.startsWith("luot nhap")) return opt(r.clicks, fmtInt);
+      if (h.startsWith("ctr")) return opt(r.ctr, (v) => fmtDec(v * 100) + "%");
+      if (h.startsWith("cpm")) return opt(r.cpm, fmtInt);
+      if (h.startsWith("luot xem")) return opt(r.views, fmtInt);
       if (/^(deal|mql|sql)/.test(h)) {
         const k = h.slice(0, 4).trim();
         return r.hasFunnel ? fmtInt(r[k] || 0) : "-";
@@ -480,6 +486,24 @@
     if (!b || b.w >= minW) return;
     if (center) b.off.setAttribute("x", String(Math.max(0, b.x - Math.round((minW - b.w) / 2))));
     b.ext.setAttribute("cx", String(minW));
+  }
+
+  /**
+   * Cho file mở bằng Google Slides / Canva giống PowerPoint:
+   * - tiêu đề ngắn ("GOOGLE", "FACEBOOK ADS:", "HÓA ĐƠN GOOGLE:", "BÁO CÁO TỔNG:") không xuống dòng ("GOOGL / E", tiêu đề đè lên ảnh)
+   * - bỏ các dòng đánh số còn trống (Google Slides hiện thành "1. 2. 3.")
+   */
+  function tidySlide(doc) {
+    for (const body of shapeBodies(doc)) {
+      const t = bodyText(body).trim();
+      if (t.length <= 22 && /^(facebook|google|tiktok|zalo|đăng tin|kênh đăng tin|hóa đơn|hoá đơn|báo cáo tổng)\b/i.test(t)) {
+        const bp = byTag(body, "a:bodyPr")[0];
+        if (bp) bp.setAttribute("wrap", "none");
+      }
+      byTag(body, "a:p").forEach((p) => {
+        if (byTag(p, "a:buAutoNum").length && !paraText(p).trim() && byTag(body, "a:p").length > 1) p.parentNode.removeChild(p);
+      });
+    }
   }
 
   function fillText(doc, ctx) {
@@ -909,6 +933,7 @@
       const s = o.s;
       fillText(s.doc, o.ctx);
       if (o.invoice) invoiceTitle(s.doc, o.invoice);
+      tidySlide(s.doc);
       if (opts.logo) swapLogo(s, opts.logo, logoRefs, logos);
       s.tables.forEach((t, i) => {
         t.platform = o.src.tables[i] ? o.src.tables[i].platform : t.platform;
