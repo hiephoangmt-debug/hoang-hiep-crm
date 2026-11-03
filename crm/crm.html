@@ -127,6 +127,7 @@
   .camp.manual .lead { width:56px; }
   .drop.over { border-color:var(--accent); background:var(--accent-soft); }
   .drop input { display:block; margin:8px auto 0; max-width:100%; }
+  .evview { display:flex; align-items:center; gap:6px; font-size:14px; margin-left:auto; margin-right:8px; } .evview select { min-width:170px; }
   .evgrp { margin-top:14px; } .evgrp h4 { margin:0; padding:6px 0; border-bottom:1px solid var(--line, #e5e7eb); font-size:15px; } .evgrp h4 small { font-weight:400; margin-left:6px; }
   .imgs { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; margin-top:10px; }
   .img { margin:0; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--bg); min-width:0; }
@@ -259,6 +260,7 @@
       </section>
       <section class="card">
         <div class="sec-head"><h3>Đã lưu <small id="evCount" class="muted"></small></h3>
+          <label class="evview">Xem ảnh của<select id="evView"><option value="">Tất cả</option></select></label>
           <button type="button" id="evDedupe" class="ghost small" title="Ảnh cùng nội dung chỉ giữ một, bản thừa chuyển vào thùng rác Drive">Xoá ảnh trùng</button></div>
         <div class="row evbar">
           <button type="button" id="evSelAll" class="ghost small">Chọn tất cả</button>

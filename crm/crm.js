@@ -832,7 +832,16 @@
             ${invoiceInputs(`data-inv="${esc(r.id)}"`, r.soTien, r.vat, soleAccount(r.nhanSu, r.nenTang))}
             <button type="button" class="small" data-invsave="${esc(r.id)}" style="width:100%;margin-top:4px">Lưu & tính Chi phí (+phí)</button></div>`}
         </fieldset></figcaption></figure>`;
-    $("evList").innerHTML = need.length ? need.map((st) => {
+    // ô "Xem ảnh của": mỗi bạn xem mục của mình, "Tất cả" = mọi người (nhân viên mặc định xem tên mình)
+    const view = $("evView");
+    if (!view.dataset.init) { view.dataset.init = "1"; view.value = ""; if (!isAdmin() && myName()) view.dataset.want = myName(); }
+    const curView = view.dataset.want != null ? view.dataset.want : view.value;
+    const vOf = (st) => st || "__none"; // "" là "Tất cả": người chưa gán dùng mã riêng
+    view.innerHTML = opt("", `Tất cả (${need.length} người)`, curView) + need.map((st) => opt(vOf(st), (st || "Chưa gán nhân sự") + ` (${rows.filter((r) => (r.nhanSu || "") === st).length})`, curView)).join("");
+    view.value = need.some((st) => vOf(st) === curView) ? curView : "";
+    delete view.dataset.want;
+    const shown = view.value === "" ? need : need.filter((st) => vOf(st) === view.value);
+    $("evList").innerHTML = shown.length ? shown.map((st) => {
       const mine = rows.filter((r) => (r.nhanSu || "") === st);
       return `<div class="evgrp"><h4>${st ? esc(st) : "Chưa gán nhân sự"} <small class="${mine.length ? "muted" : "warn-text"}">${mine.length ? mine.length + " ảnh" : "chưa có ảnh"}</small></h4>
         ${mine.length ? `<div class="imgs">${mine.map(fig).join("")}</div>` : ""}</div>`;
@@ -1642,7 +1651,7 @@
         renderEntries();
       });
     });
-    ["evWeek", "evProject"].forEach((id) => $(id).addEventListener("change", renderEvidence));
+    ["evWeek", "evProject", "evView"].forEach((id) => $(id).addEventListener("change", renderEvidence));
     $("evStaff").addEventListener("change", () => {
       const me = $("evStaff").value;
       $("evStaff").classList.toggle("warn", !me);
@@ -1819,7 +1828,8 @@
       toast("Đã lưu.", "ok");
       renderChecklist();
     });
-    const evRows = () => S.ChungTu.filter((r) => r.tuan === $("evWeek").value && r.duAn === $("evProject").value);
+    const evRows = () => S.ChungTu.filter((r) => r.tuan === $("evWeek").value && r.duAn === $("evProject").value &&
+      (!$("evView").value || ($("evView").value === "__none" ? !r.nhanSu : r.nhanSu === $("evView").value)));
     $("evList").addEventListener("change", (e) => {
       const id = e.target.dataset.evsel;
       if (!id) return;
