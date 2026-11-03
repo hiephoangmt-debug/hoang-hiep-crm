@@ -184,6 +184,33 @@ def pillow(cx, cy, z0, sx, sy, sz, m, lean=.28, parent=None):
     if parent: o.parent = parent
     return o
 
+def drape(cx, cy, ztop, Wt, D, hang, th, m, parent=None, seed=0, amp=.012, puff=.03):
+    """Tấm vải thật: phẳng trên mặt đệm (phồng nhẹ, nếp nhăn mềm), bo tròn qua mép rồi rủ xuống 2 bên có nếp gợn dọc."""
+    from mathutils import noise as _nz
+    nx, ny = 56, 26; r = .05; xs = []; L = Wt / 2 + hang
+    pts = []
+    for j in range(ny + 1):
+        y = -D / 2 + D * j / ny
+        for i in range(nx + 1):
+            x = -L + 2 * L * i / nx; sg = 1 if x >= 0 else -1; ax = abs(x)
+            n_ = _nz.noise(Vector((x * 3.1, y * 3.1, seed))) + .5 * _nz.noise(Vector((x * 7, y * 7, seed + 9)))
+            if ax <= Wt / 2:
+                X = x; Z = ztop + puff * (1 - (2 * ax / Wt) ** 2) * (1 - (2 * abs(y) / D) ** 6) + amp * n_
+            else:
+                t_ = ax - Wt / 2; q = r * math.pi / 2
+                if t_ < q: an = t_ / r; X = sg * (Wt / 2 + r * math.sin(an)); Z = ztop - r * (1 - math.cos(an))
+                else: X = sg * (Wt / 2 + r + (t_ - q) * .05); Z = ztop - r - (t_ - q)
+                X += sg * .012 * math.sin(y * 21 + seed) * min(1, t_ / .15); Z += amp * .5 * n_   # nếp gợn dọc phần rủ
+            pts.append((cx + X, cy + y, Z))
+    fs = [(j * (nx + 1) + i, j * (nx + 1) + i + 1, (j + 1) * (nx + 1) + i + 1, (j + 1) * (nx + 1) + i) for j in range(ny) for i in range(nx)]
+    me = bpy.data.meshes.new('vai'); me.from_pydata(pts, [], fs); me.update(); o = bpy.data.objects.new('vai', me); sc.collection.objects.link(o)
+    so = o.modifiers.new('so', 'SOLIDIFY'); so.thickness = th; so.offset = 1
+    sd_ = o.modifiers.new('sd', 'SUBSURF'); sd_.levels = 1; sd_.render_levels = 1
+    for p_ in me.polygons: p_.use_smooth = True
+    me.materials.append(m)
+    if parent: o.parent = parent
+    return o
+
 def cyl(cx, cy, z0, r, h, m, parent=None, verts=32):
     bpy.ops.mesh.primitive_cylinder_add(radius=r, depth=h, vertices=verts, location=(cx, cy, z0 + h / 2))
     o = bpy.context.object; o.data.materials.append(m)
@@ -423,7 +450,8 @@ for _pt in PARTS:
         o = frame(x, y, face); hw, hd = w / 2, d / 2          # trong khung: X = bề ngang, +Y = mặt trước, lưng ở -Y
         if k == 'bed':
             box(0, 0, 0, w + .1, d + .05, .32, WALNUT, parent=o); box(0, .03, .32, w - .02, d - .12, .24, LINEN, bevel=.06, parent=o)
-            box(0, d * .14, .5, w + .04, d * .66, .09, LINEN if LUX else FAB, bevel=.04, parent=o); box(0, d * .38, .58, w + .06, .4, .03, FAB if LUX else FAB3, bevel=.01, parent=o)
+            if LUX and AIRY: drape(0, (.55 + .02) / 2, .565, w - .04, d - .55, .3, .035, LINEN, parent=o, seed=x + y, amp=.014)   # chăn phủ thật: phồng nhẹ, nếp nhăn, rủ 2 bên đệm
+            else: box(0, d * .14, .5, w + .04, d * .66, .09, LINEN if LUX else FAB, bevel=.04, parent=o); box(0, d * .38, .58, w + .06, .4, .03, FAB if LUX else FAB3, bevel=.01, parent=o)
             box(0, -hd + .03, 0, w + .3, .1, 1.15, FAB2, bevel=.03, parent=o)
             for sd in (-1, 1): pillow(sd * w * .235, -hd + .34, .34, w * .45, .17, .5, LINEN, lean=1.5, parent=o)   # 2 gối trắng nằm thẳng hàng sát đầu giường
             box(0, .05, -.001, w + .8, d + .1, .012, RUG, 0, 0, parent=o)
@@ -433,7 +461,7 @@ for _pt in PARTS:
                 for i in range(n_): box(-PW / 2 + (i + .5) * pw_, -hd - .07, .0, pw_ - .01, .06, 1.3, FAB2, bevel=.025, parent=o)
                 box(0, -hd - .07, 1.3, PW, .03, .02, COVE, 0, 0, parent=o)
                 box(0, 0, 0, w + .14, d + .08, .34, CHAIRF, bevel=.05, parent=o); box(0, -hd + .02, 0, w + .14, .16, 1.0, CHAIRF, bevel=.06, parent=o)
-                box(0, d * .3, .6, w + .1, .55, .025, FAB3, bevel=.01, parent=o)   # khăn trải ngang chân giường
+                drape(0, d * .3, .64, w - .02, .5, .4, .012, FAB3, parent=o, seed=x * 3 + y, amp=.008, puff=.0)   # khăn trải ngang chân giường, rủ xuống 2 bên
                 pillow(0, -hd + .66, .48, w * .62, .15, .3, FAB3, lean=1.25, parent=o)   # 1 gối dài đất nung nằm chính giữa phía trước (kiểu khách sạn)   # gối tựa đất nung mềm, ngả vào đầu giường
                 if not str(LAY).startswith('STU'): box(0, hd + .36, 0, w * .75, .42, .44, CHAIRF, bevel=.06, parent=o)   # studio: bỏ đôn cuối giường cho thoáng lối đi
                 for sd in (-1, 1):
@@ -661,6 +689,40 @@ SHL['2PN1L'] = dict(SHL['2PN11'], plus=((4.0, 4.6), (0.5, 8.0)))
 SHL['1PN+1L'] = SHL['1PN+1']
 _LENS, _CZ = float(os.environ.get('LENS', '13')), float(os.environ.get('CAMZ', '1.2'))   # ống kính rộng, máy thấp như ảnh chụp bất động sản (khung ngang 16:9)
 SH = {k: (v[0], v[1], _LENS, _CZ, (-.04 if k in ('bed', 'plus') else 0.)) for k, v in SHL.get(LAY, SHL['1PN+1']).items()}
+def _realism():   # vật liệu như thật: vải có nếp nhăn + bóng vải, gỗ có vân, tường/trần hơi loang
+    if os.environ.get('REAL', '1') != '1': return
+    for m in list(bpy.data.materials):
+        if not m.use_nodes or 'Principled BSDF' not in m.node_tree.nodes: continue
+        nt = m.node_tree; b = nt.nodes['Principled BSDF']; nm = m.name
+        def bump(h_out, st, dist=.04):
+            bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = st; bp.inputs['Distance'].default_value = dist
+            old = b.inputs['Normal'].links[0].from_socket if b.inputs['Normal'].links else None
+            if old: nt.links.new(old, bp.inputs['Normal'])
+            nt.links.new(h_out, bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], b.inputs['Normal'])
+        if nm.startswith(('ga', 'nhung', 'boucle', 'ni-be', 'vai', 'nem', 'rem', 'tham', 'goi')):   # vải: nếp nhăn mềm + sợi dệt
+            wv = nt.nodes.new('ShaderNodeTexWave'); wv.inputs['Scale'].default_value = 2.2; wv.inputs['Distortion'].default_value = 7; wv.inputs['Detail'].default_value = 3; wv.inputs['Detail Scale'].default_value = 1.5
+            ns = nt.nodes.new('ShaderNodeTexNoise'); ns.inputs['Scale'].default_value = 4; ns.inputs['Detail'].default_value = 4
+            mx = nt.nodes.new('ShaderNodeMath'); mx.operation = 'MULTIPLY'; nt.links.new(wv.outputs['Fac'], mx.inputs[0]); nt.links.new(ns.outputs['Fac'], mx.inputs[1])
+            bump(mx.outputs[0], .35 if nm.startswith(('ga', 'goi')) else .18, .02)
+            if b.inputs['Sheen Weight'].default_value < .2: b.inputs['Sheen Weight'].default_value = .3; b.inputs['Sheen Roughness'].default_value = .5
+        elif nm.startswith(('go-', 'oc-cho', 'tu-go')) and nm != 'go-tran':   # gỗ: vân dọc thớ
+            tc = nt.nodes.new('ShaderNodeTexCoord'); mp = nt.nodes.new('ShaderNodeMapping'); mp.inputs['Scale'].default_value = (1, 1, 14)
+            wv = nt.nodes.new('ShaderNodeTexWave'); wv.wave_type = 'RINGS'; wv.inputs['Scale'].default_value = 3; wv.inputs['Distortion'].default_value = 9; wv.inputs['Detail'].default_value = 4
+            nt.links.new(tc.outputs['Object'], mp.inputs['Vector']); nt.links.new(mp.outputs['Vector'], wv.inputs['Vector'])
+            base = b.inputs['Base Color'].links[0].from_socket if b.inputs['Base Color'].links else None
+            mc = nt.nodes.new('ShaderNodeMix'); mc.data_type = 'RGBA'; mc.blend_type = 'MULTIPLY'; mc.inputs['Factor'].default_value = .28
+            if base: nt.links.new(base, mc.inputs[6])
+            else: mc.inputs[6].default_value = b.inputs['Base Color'].default_value
+            nt.links.new(wv.outputs['Color'], mc.inputs[7]); nt.links.new(mc.outputs[2], b.inputs['Base Color']); bump(wv.outputs['Fac'], .06, .01)
+        elif nm.startswith(('tuong', 'tran')):   # sơn tường / trần: loang rất nhẹ, không phẳng lì như nhựa
+            ns = nt.nodes.new('ShaderNodeTexNoise'); ns.inputs['Scale'].default_value = .8; ns.inputs['Detail'].default_value = 3
+            base = b.inputs['Base Color'].links[0].from_socket if b.inputs['Base Color'].links else None
+            mc = nt.nodes.new('ShaderNodeMix'); mc.data_type = 'RGBA'; mc.blend_type = 'MULTIPLY'; mc.inputs['Factor'].default_value = .07
+            if base: nt.links.new(base, mc.inputs[6])
+            else: mc.inputs[6].default_value = b.inputs['Base Color'].default_value
+            nt.links.new(ns.outputs['Color'], mc.inputs[7]); nt.links.new(mc.outputs[2], b.inputs['Base Color'])
+            ns2 = nt.nodes.new('ShaderNodeTexNoise'); ns2.inputs['Scale'].default_value = 300; bump(ns2.outputs['Fac'], .04, .005)
+_realism()
 for s in SHOTS:
     if s == 'top':   # mặt bằng 3D phối cảnh nghiêng từ góc (kiểu bản vẽ bán hàng): bỏ trần, tường để nguyên, nền xám nhạt, kèm số đo
         from bpy_extras.object_utils import world_to_camera_view

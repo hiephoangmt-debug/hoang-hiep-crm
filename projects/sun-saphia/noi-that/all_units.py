@@ -12,7 +12,7 @@ for g, fh in (('T3', '13'), ('T2', '8.6')):
 for key, uid, name, shots, env in JOBS:
     out = S + '/rAll/' + name; need = [s for s in shots.split(',') if not os.path.exists(out + '/' + s + '.png')]
     if not need: continue
-    e = dict(os.environ, STYLE='lux', EXPO='1.0', FILL='1.5', LOOK='AgX - Medium High Contrast', TONE='.84', SUNROT='0', TOPRES='1440x810', **env)
+    e = dict(os.environ, STYLE='lux', EXPO='1.0', FILL='.8', LOOK='AgX - Medium High Contrast', TONE='.84', SUNROT='0', TOPRES='1440x810', **env)
     print('>>', name, need, flush=True)
-    subprocess.run([S + '/bvenv/bin/python', S + '/bl/room.py', S + '/ccl2.json', key, uid, out, ','.join(need), '160', '1440x810'], env=e, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run([S + '/bvenv/bin/python', S + '/bl/room.py', S + '/ccl2.json', key, uid, out, ','.join(need), '128', '1440x810'], env=e, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 print('XONG ANH', flush=True)
