@@ -53,6 +53,7 @@ var MAC_DINH = {
   DU_AN_CHIA: 'saphia,shaphia', // khách cũ (đã có trong CRM) gửi lại từ web mà "Dự án quan tâm" có chữ này cũng được chia
   CHIA_TAY: 'fours',          // khách có chữ này (trang / nhu cầu / nguồn) KHÔNG tự chia: bot gửi quản lý kèm nút tên sale để chọn người nhận; để trống = tự chia hết
   NHOM_RIENG: 'fours,saphia', // khách có chữ này (trang / nhu cầu / nguồn) tính lượt FourS–Saphia; còn lại là dự án khác
+  DUNG_CHIA: 0,              // 1 = dừng chia khách FourS/Saphia: không tự thu hồi, không giao lại, không nhắc hạn (khách ai đang giữ người đó giữ); quản lý vẫn bấm chia / /them được
   TU_CHIA: 0,                // 1 = khách mới từ web / DATA CHẠY GOOGLE tự chia; 0 = chỉ báo quản lý, bấm "Chia khách này" hoặc /them mới chia
   TELESALE_SHEET_ID: '',     // file báo cáo telesale (tab "Data 01", "Data 02"…): ai báo cáo hết số đang giữ thì tự cấp thêm; để trống = tắt
   TELESALE_THEM: 1,          // mỗi lần giao ngần này số (1 = chia từng số: gọi xong, báo cáo xong mới giao số tiếp)
@@ -850,6 +851,7 @@ function kiemTraHan_() {
     var st = k.trang_thai, p;
     /* Số thử: đang giữ / chờ chia → huỷ; đã bị đóng như khách thường (chưa trả lượt) → vẫn trả lượt 1 lần */
     if ((DANG_GIU.test(st) || /cho_giao|cho_quan_ly/.test(st) || (st === 'dong' && !/^Khách thử/.test(k.ly_do_dong))) && laSoThu_(k.sdt)) { huyKhachThu_(k); return; }
+    if (!laKhac_(k) && Number(cfg('DUNG_CHIA'))) return;   // đang dừng chia FourS/Saphia
     if (st === 'cho_giao') {
       if (laKhac_(k) && khacDay) return;   // data telesale chờ nhiều: hết người rảnh thì để phút sau
       giao_(k); if (laKhac_(k) && k.trang_thai === 'cho_giao') khacDay = true; return;

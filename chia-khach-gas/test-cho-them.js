@@ -62,4 +62,10 @@ msg(900,'/dong '+k.id+' Khách đã mua'); run(); ok(all()[0].trang_thai==='dong
 msg(900,'/dong '+k.id); run(); ok(/đã đóng rồi/.test(lastTo(900).text),'/dong lần 2 → báo đã đóng');
 const nk=vm.runInContext("rows_('NhatKy',T_NK).filter(function(r){return r.hanh_dong==='được giao'}).length",ctx); adv(600); run();
 ok(vm.runInContext("rows_('NhatKy',T_NK).filter(function(r){return r.hanh_dong==='được giao'}).length",ctx)===nk,'khách đã dừng không bị chia lại');
+// Dừng chia: khách đang giữ quá hạn không bị thu hồi
+msg(900,'/them 0933444555 Chị Hoa'); run(); const k3=()=>all().find(x=>x.sdt==='0933444555'); const h3=k3().nguoi_giu;
+vm.runInContext("(function(){var sh=tab_('CauHinh');var v=sh.getRange(2,1,sh.getLastRow()-1,1).getValues();for(var i=0;i<v.length;i++)if(v[i][0]==='DUNG_CHIA')sh.getRange(i+2,2).setValue(1);})()",ctx);
+adv(120); run(); ok(k3().nguoi_giu===h3&&k3().trang_thai==='cho_nhan','DUNG_CHIA=1: quá hạn nhận vẫn không thu hồi, không giao lại');
+vm.runInContext("(function(){var sh=tab_('CauHinh');var v=sh.getRange(2,1,sh.getLastRow()-1,1).getValues();for(var i=0;i<v.length;i++)if(v[i][0]==='DUNG_CHIA')sh.getRange(i+2,2).setValue(0);})()",ctx);
+adv(1); run(); ok(k3().nguoi_giu!==h3||k3().trang_thai!=='cho_nhan','DUNG_CHIA=0: thu hồi lại như cũ');
 console.log(fails?'TỔNG LỖI: '+fails:'TỔNG LỖI: 0');
