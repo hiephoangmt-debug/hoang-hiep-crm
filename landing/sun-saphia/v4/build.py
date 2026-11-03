@@ -703,8 +703,8 @@ def su_kien(ctx='ADS'):
           ('2026-11-21', '21/11', 'Hà Nội', 'Sự kiện nhận booking', 'Quy mô khoảng 500 khách', ''),
           ('2026-11-28', '28/11', 'Chủ đầu tư', 'Sự kiện bán hàng của Chủ đầu tư', 'Quy mô khoảng 1.000 khách', 'evbig')]
     evs = ''.join('<li class="%s" data-end="%s"><time>%s</time><div><span class="evp">%s</span><b>%s</b><small>%s</small></div>'
-                  '<button type="button" class="evb" data-pop data-interest="%s – đăng ký sự kiện %s (%s)">Đăng ký</button></li>'
-                  % (c, e, d, p, t, n, ctx, d, t.replace('&amp;', '&')) for e, d, p, t, n, c in EV)
+                  '<button type="button" class="evb" data-pop data-interest="%s – đăng ký sự kiện %s (%s)" data-ev-t="%s" data-ev-d="%s · %s" data-ev-n="%s">Đăng ký</button></li>'
+                  % (c, e, d, p, t, n, ctx, d, t.replace('&amp;', '&'), t.replace('&amp;', '&'), d, p, n) for e, d, p, t, n, c in EV)
     tl = ('<section class="sec evt" id="su-kien"><div class="wrap">'
           '<style>.evt{background:linear-gradient(180deg,#FFFCF6,#EAF7FB)}.evl{text-align:left;list-style:none;margin:22px auto 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:1100px}.evl>li{flex:0 1 calc(25% - 11px);min-width:250px}@media(max-width:600px){.evl>li{flex-basis:100%}}'
           '.evl li{position:relative;display:flex!important;flex-wrap:nowrap;text-align:left;gap:12px;align-items:flex-start;background:#fff;border:1px solid #D3EAF2;border-radius:16px;padding:14px 14px 50px;box-shadow:0 10px 24px -18px rgba(14,110,153,.5)}'
@@ -726,7 +726,7 @@ def su_kien(ctx='ADS'):
           '<div><span class="k">📅 Sự kiện sắp diễn ra · Hà Nội</span><h3><i>Tinh hoa</i> căn hộ nghỉ dưỡng mặt biển Đà Nẵng</h3>'
           '<p style="margin:0;text-align:left">Sự kiện giới thiệu dự án Sun Saphia Residence dành cho khách hàng tại Hà Nội – xem sa bàn, nghe chính sách và được tư vấn chọn căn trực tiếp.</p>'
           '<dl><dt>Thời gian</dt><dd>9:00 · Chủ nhật 08/11/2026</dd><dt>Địa điểm</dt><dd>Sun Gallery Tây Hồ View</dd><dt>Địa chỉ</dt><dd>58 Quảng Bá, Tây Hồ, Hà Nội</dd></dl>'
-          '<div class="hcta"><button type="button" class="btn" data-pop data-interest="' + ctx + ' – đăng ký thư mời sự kiện 08/11 Sun Gallery Tây Hồ View">Đăng ký nhận thư mời</button>'
+          '<div class="hcta"><button type="button" class="btn" data-pop data-interest="' + ctx + ' – đăng ký thư mời sự kiện 08/11 Sun Gallery Tây Hồ View" data-ev-t="Sự kiện giới thiệu dự án" data-ev-d="9:00 CN 08/11 · Hà Nội" data-ev-n="Sun Gallery Tây Hồ View · 58 Quảng Bá, Tây Hồ, Hà Nội">Đăng ký nhận thư mời</button>'
           '<a class="btn ghost2" href="https://www.google.com/maps/search/?api=1&amp;query=Sun+Gallery+T%C3%A2y+H%E1%BB%93+View+58+Qu%E1%BA%A3ng+B%C3%A1+T%C3%A2y+H%E1%BB%93+H%C3%A0+N%E1%BB%99i" target="_blank" rel="noopener">📍 Chỉ đường</a></div></div></div>'
           '<script>(function(){if(Date.now()>Date.parse("2026-11-08T13:00:00+07:00")){var e=document.getElementById("ev0811");if(e)e.style.display="none"}})();</script>'
           '<ol class="evl">' + evs + '</ol>'
