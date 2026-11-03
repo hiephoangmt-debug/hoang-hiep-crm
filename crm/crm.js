@@ -1440,13 +1440,16 @@
     const order = staffNames();
     const staffList = Array.from(new Set(scopeRows.map((r) => r.nhanSu).concat(ev.map((r) => r.nhanSu)).filter(Boolean)))
       .sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99));
-    const d0 = parseIso(wks[0]), d1 = parseIso(last);
-    d1.setDate(d1.getDate() + 6);
+    // báo cáo tháng: ghi đúng ngày 1 đến ngày cuối tháng (vd 01/10/2026 - 31/10/2026)
+    const d0 = ky === "thang" ? new Date(+w.slice(0, 4), +w.slice(5, 7) - 1, 1) : parseIso(wks[0]);
+    const d1 = ky === "thang" ? new Date(+w.slice(0, 4), +w.slice(5, 7), 0) : parseIso(last);
+    if (ky !== "thang") d1.setDate(d1.getDate() + 6);
     const span = `${pad(d0.getDate())}/${pad(d0.getMonth() + 1)}/${d0.getFullYear()} - ${pad(d1.getDate())}/${pad(d1.getMonth() + 1)}/${d1.getFullYear()}`;
     toast(`${pjName}: đang dựng báo cáo…`, "busy");
     const res = await B.buildReport({
       template: await tplCache[tplId].arrayBuffer(), weeks: weeksForReport(rows), week: weekLabel(last),
       year: String(parseIso(last).getFullYear()), campaign: pj.chienDich || "", period: ky === "tuan" ? "" : span,
+      rangeText: ky === "thang" ? span.replace(/\//g, ".") : "",
       title: ky === "thang" ? monthLabel(w).toUpperCase() : ky === "all" ? "TỔNG CHIẾN DỊCH" : "",
       images, staffList, staffOf: (acc) => accStaff.get(acc) || "",
       scope: ky === "tuan" ? "week" : "all", perSlide: 1, dropUnused: true, dropEmptyImageSlides: true,

@@ -52,7 +52,11 @@
   function periodOf(d) {
     const ky = d.ky || "tuan", weeks = (d.weeks && d.weeks.length ? d.weeks : [d.tuan]).slice().sort();
     const span = `${wkLabel(weeks[0], true).split(" – ")[0]}/${parseIso(weeks[0]).getFullYear()} – ${wkLabel(weeks[weeks.length - 1], true).split(" – ")[1]}`;
-    if (ky === "thang") { const [y, m] = String(d.tuan).split("-"); return { ky, weeks, name: `Tháng ${+m}/${y}`, html: `Tháng <b>${+m}/${y}</b> (${span}, ${weeks.length} tuần)`, prev: "tháng trước" }; }
+    if (ky === "thang") {
+      // tháng dương lịch: ngày 1 đến ngày cuối tháng
+      const [y, m] = String(d.tuan).split("-"), last = new Date(+y, +m, 0).getDate(), mm = String(m).padStart(2, "0");
+      return { ky, weeks, name: `Tháng ${+m}/${y}`, html: `Tháng <b>${+m}/${y}</b> (01/${mm}/${y} – ${last}/${mm}/${y}, ${weeks.length} tuần)`, prev: "tháng trước" };
+    }
     if (ky === "all") return { ky, weeks, name: "Toàn chiến dịch", html: `Toàn chiến dịch <b>${span}</b> (${weeks.length} tuần)`, prev: "" };
     return { ky, weeks, name: `tuần ${wkLabel(d.tuan)}`, html: `Tuần <b>${wkLabel(d.tuan, true)}</b>`, prev: "tuần trước" };
   }

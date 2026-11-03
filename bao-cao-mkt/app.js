@@ -748,7 +748,7 @@
       campaign: opts.campaign, title: opts.title || "",
       period: opts.period || `${d1.replace(".", "/")} - ${d2.replace(".", "/")}/${opts.year}`,
       weekNo: opts.weekNo || names.indexOf(week) - names.indexOf(active[0]) + 1,
-      weekRangeText: `${d1}.${opts.year} - ${d2}.${opts.year}`,
+      weekRangeText: opts.rangeText || `${d1}.${opts.year} - ${d2}.${opts.year}`,
     };
     const imgList = opts.images || [];
     const imgsFor = (staff) => (p, k) => imgList
