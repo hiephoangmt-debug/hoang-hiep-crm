@@ -706,7 +706,7 @@ def su_kien(ctx='ADS'):
                   '<button type="button" class="evb" data-pop data-interest="%s – đăng ký sự kiện %s (%s)">Đăng ký</button></li>'
                   % (c, e, d, p, t, n, ctx, d, t.replace('&amp;', '&')) for e, d, p, t, n, c in EV)
     tl = ('<section class="sec evt" id="su-kien"><div class="wrap">'
-          '<style>.evt{background:linear-gradient(180deg,#FFFCF6,#EAF7FB)}.evl{text-align:left;list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}'
+          '<style>.evt{background:linear-gradient(180deg,#FFFCF6,#EAF7FB)}.evl{text-align:left;list-style:none;margin:22px auto 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:1100px}.evl>li{flex:0 1 calc(25% - 11px);min-width:250px}@media(max-width:600px){.evl>li{flex-basis:100%}}'
           '.evl li{position:relative;display:flex!important;flex-wrap:nowrap;text-align:left;gap:12px;align-items:flex-start;background:#fff;border:1px solid #D3EAF2;border-radius:16px;padding:14px 14px 50px;box-shadow:0 10px 24px -18px rgba(14,110,153,.5)}'
           '.evl time{flex:0 0 auto;min-width:64px;text-align:center;background:linear-gradient(160deg,#168FC2,#0E6E99);color:#fff;font-weight:800;font-size:14px;line-height:1.25;border-radius:12px;padding:9px 8px}'
           '.evl li.evrs time{background:linear-gradient(160deg,#8BD3E5,#168FC2)}.evl li.evbig{border:2px solid #F4A45B;background:linear-gradient(160deg,#FFF8EE,#FFFFFF)}.evl li.evbig time{background:linear-gradient(160deg,#F4A45B,#E8893A)}'
@@ -717,8 +717,8 @@ def su_kien(ctx='ADS'):
           '.evl li.evnext{outline:3px solid rgba(244,164,91,.55);outline-offset:2px}.evl li.evnext .evp::after{content:" · Sắp diễn ra";color:#168FC2}</style>'
           + sh('📅', 'Lịch sự kiện tháng 11', 'Sự kiện <b>sắp tới</b> – đăng ký để giữ chỗ', 'o') +
           '<p class="lead">Mỗi sự kiện là một đợt nhận booking và tư vấn trực tiếp. Đăng ký trước để anh Hiệp gửi thư mời, địa điểm và giữ chỗ cho anh/chị.</p>'
-          '<div class="evf" id="ev0811"><style>.evf{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:26px;align-items:center;background:#fff;border:2px solid #F4A45B;border-radius:22px;padding:18px;margin:22px 0 6px;box-shadow:0 20px 44px -28px rgba(14,110,153,.55)}'
-          '.evf img{width:100%;height:auto;border-radius:14px;display:block}.evf .k{display:inline-block;background:linear-gradient(135deg,#F4A45B,#E8893A);color:#fff;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;border-radius:999px}'
+          '<div class="evf" id="ev0811"><style>.evf{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center;max-width:1000px;margin-left:auto!important;margin-right:auto!important;padding:28px 36px!important;background:#fff;border:2px solid #F4A45B;border-radius:22px;padding:18px;margin:22px 0 6px;box-shadow:0 20px 44px -28px rgba(14,110,153,.55)}'
+          '.evf img{width:100%;max-width:380px;height:auto;border-radius:14px;display:block;margin:0 auto;box-shadow:0 18px 40px -24px rgba(14,110,153,.6)}.evf .k{display:inline-block;background:linear-gradient(135deg,#F4A45B,#E8893A);color:#fff;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;border-radius:999px}'
           '.evf h3{margin:10px 0 6px;font-family:Fahkwang,serif;font-weight:400;font-size:clamp(24px,3vw,34px);line-height:1.2;color:#0E6E99;text-align:left}.evf h3 i{font-family:"Great Vibes",cursive;font-style:normal;font-size:1.35em;color:#168FC2}'
           '.evf dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:12px 0 16px;text-align:left}.evf dt{color:#557585;font-size:14px}.evf dd{margin:0;font-weight:700;color:#16485F}'
           '.evf .hcta{justify-content:flex-start}@media(max-width:700px){.evf{grid-template-columns:1fr}.evf img{max-width:360px;margin:0 auto}}</style>'
