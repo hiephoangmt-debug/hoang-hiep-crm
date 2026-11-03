@@ -765,6 +765,7 @@
     </div>`;
   }
   function campaignRows(p, i) {
+    if (evIsMonth()) return ""; // ảnh tháng chỉ là nghiệm thu: không ghi số (số tháng = cộng các tuần)
     const add = p.loai === "hoadon" ? "" : `<button type="button" class="link small" data-addcamp="${i}">+ Điền số tay (chiến dịch, chi tiêu, lead)</button>`;
     if (!p.campaigns || !p.campaigns.length) return add ? `<div class="camps">${add}</div>` : "";
     return `<div class="camps"><b>Số liệu của ảnh</b> <small class="muted">(tick dòng có chi tiêu trong tuần này – kể cả chiến dịch đã tắt; sửa số nếu đọc sai)</small>
