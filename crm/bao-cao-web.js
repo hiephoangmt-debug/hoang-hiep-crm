@@ -308,7 +308,7 @@
 
   async function start() {
     try {
-      K = await new Promise((res) => { try { google.script.url.getLocation((l) => res((l.parameter || {}).k || "")); } catch (_) { res(""); } setTimeout(() => res(""), 3000); });
+      K = window.__BC_K || await new Promise((res) => { try { google.script.url.getLocation((l) => res((l.parameter || {}).k || "")); } catch (_) { res(""); } setTimeout(() => res(""), 15000); });
       if (!K) throw new Error("Link báo cáo thiếu mã. Nhờ quản trị gửi lại link.");
       D = await run("crmWebReport", K);
       render();

@@ -19,8 +19,11 @@ function doGet(e) {
   }
   if (page === 'bc') {
     // Báo cáo dạng trang web (link có mã riêng của từng báo cáo, ai có link đều xem được)
-    return HtmlService.createHtmlOutputFromFile('BaoCaoWeb')
-      .setTitle('Báo cáo Marketing tuần')
+    // gắn sẵn mã báo cáo vào trang: không phụ thuộc google.script.url (chậm trên điện thoại -> "Link báo cáo thiếu mã")
+    var k = String(q.k || '').replace(/[^a-z0-9]/gi, '');
+    var bc = HtmlService.createHtmlOutputFromFile('BaoCaoWeb').getContent();
+    return HtmlService.createHtmlOutput(bc.replace('<head>', '<head><script>window.__BC_K = "' + k + '";</script>'))
+      .setTitle('Báo cáo Marketing')
       .addMetaTag('viewport', 'width=device-width, initial-scale=1');
   }
   var report = page === 'baocao';
