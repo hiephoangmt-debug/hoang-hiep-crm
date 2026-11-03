@@ -55,7 +55,7 @@
     if (ky === "thang") {
       // tháng dương lịch: ngày 1 đến ngày cuối tháng
       const [y, m] = String(d.tuan).split("-"), last = new Date(+y, +m, 0).getDate(), mm = String(m).padStart(2, "0");
-      return { ky, weeks, name: `Tháng ${+m}/${y}`, html: `Tháng <b>${+m}/${y}</b> (01/${mm}/${y} – ${last}/${mm}/${y}, ${weeks.includes(String(d.tuan)) ? "số cả tháng của người đã nhập + " + (weeks.length - 1) + " tuần" : weeks.length + " tuần"})`, prev: "tháng trước" };
+      return { ky, weeks, name: `Tháng ${+m}/${y}`, html: `Tháng <b>${+m}/${y}</b> (01/${mm}/${y} – ${last}/${mm}/${y}, số nhập cho cả tháng)`, prev: "tháng trước" };
     }
     if (ky === "all") return { ky, weeks, name: "Toàn chiến dịch", html: `Toàn chiến dịch <b>${span}</b> (${weeks.length} tuần)`, prev: "" };
     return { ky, weeks, name: `tuần ${wkLabel(d.tuan)}`, html: `Tuần <b>${wkLabel(d.tuan, true)}</b>`, prev: "tuần trước" };
@@ -187,7 +187,8 @@
       <div class="tile"><span>Ngân sách thực chạy</span><b>${fmt(t.cost)} đ</b>${delta(t.cost, tp.cost)}</div>
       <div class="tile"><span>Lead</span><b>${fmt(t.lead)}</b>${delta(t.lead, tp.lead)}</div>
       <div class="tile"><span>Chi phí / lead</span><b>${t.lead ? fmt(t.cpl) + " đ" : "–"}</b>${t.lead && tp.lead ? delta(t.cpl, tp.cpl) : "<small>&nbsp;</small>"}</div>
-      ${noShots || (range && !ev.length) ? `<div class="tile"><span>Số tuần có số liệu</span><b>${new Set(W.map((r) => r.tuan)).size}</b><small>${staff.length} nhân sự</small></div>`
+      ${noShots || (range && !ev.length) ? (per.ky === "thang" ? `<div class="tile"><span>Nhân sự</span><b>${staff.length}</b><small>số nhập cho cả tháng</small></div>`
+        : `<div class="tile"><span>Số tuần có số liệu</span><b>${new Set(W.map((r) => r.tuan)).size}</b><small>${staff.length} nhân sự</small></div>`)
         : `<div class="tile"><span>Nghiệm thu</span><b>${okN}/${need.length}</b><small class="${okN === need.length ? "ok-t" : "miss-t"}">${okN === need.length ? "Đủ ảnh nghiệm thu" : need.length - okN + " trang còn thiếu ảnh"}</small></div>`}
     </div>`;
 

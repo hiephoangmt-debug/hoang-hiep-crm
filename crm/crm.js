@@ -90,8 +90,8 @@
   function weeksOfKey(key, pjName) {
     const ky = kyOf(key);
     const all = Array.from(new Set(S.SoLieu.filter((r) => r.duAn === pjName && isWeekKey(r.tuan)).map((r) => r.tuan))).sort();
-    // tháng: các tuần trong tháng + mã tháng nếu có người nhập số cả tháng (monthFirst bỏ số tuần của đúng người · kênh đó)
-    if (ky === "thang") return (S.SoLieu.some((r) => r.duAn === pjName && r.tuan === key) ? [key] : []).concat(all.filter((w) => weekMonth(w) === key));
+    // báo cáo tháng tách riêng: chỉ số nhập cho cả tháng (mã "2026-10"), không cộng / trộn số tuần
+    if (ky === "thang") return [key];
     return ky === "tuan" ? [key] : all;
   }
   /** Báo cáo tháng: người · kênh đã nhập số cả tháng thì dùng số tháng thay cho các tuần của người đó; người khác vẫn cộng các tuần. */
@@ -241,12 +241,17 @@
     fillSelect($("dbFrom"), allW, $("dbFrom").value || allW[Math.max(0, allW.length - 4)][0]);
     fillSelect($("dbTo"), allW, $("dbTo").value || allW[allW.length - 1][0]);
     // Nhập số liệu / Chứng từ / Báo cáo
-    // tab Ảnh & chứng từ: thêm "Cả tháng" (ngày 1 đến ngày cuối tháng) để xem ảnh của các tuần trong tháng
-    const evMonths = Array.from(new Set(dataWeeks.map(weekMonth))).sort().reverse()
-      .map((m) => [m, `Cả ${monthLabel(m).toLowerCase()} (01/${m.slice(5, 7)} – ${new Date(+m.slice(0, 4), +m.slice(5, 7), 0).getDate()}/${m.slice(5, 7)})`]);
+    // ô "Báo cáo: Theo tuần / Theo tháng" (tab Nhập số liệu, Ảnh & chứng từ): tháng là kỳ riêng, ngày 1 đến cuối tháng
+    const curMonth = weekMonth(isoOf(weekStartOf(new Date())));
+    const monthList = Array.from(new Set(dataWeeks.map(weekMonth).concat(S.SoLieu.concat(S.ChungTu).map((r) => r.tuan).filter((t) => /^\d{4}-\d{2}$/.test(t || ""))).concat([curMonth]))).sort().reverse()
+      .map((m) => [m, `${monthLabel(m)} (01/${m.slice(5, 7)} – ${new Date(+m.slice(0, 4), +m.slice(5, 7), 0).getDate()}/${m.slice(5, 7)})`]);
     for (const p of ["en", "ev", "rp"]) {
-      fillSelect($(p + "Week"), p !== "rp" ? weeks.concat(evMonths) : weeks, $(p + "Week").value || latestDataWeek());
-      $(p + "Week").add(new Option("Tuần khác… (chọn ngày trên lịch)", PICK_WEEK));
+      const monthly = p !== "rp" && $(p + "Kind").value === "thang";
+      if (p !== "rp") $(p + "WeekLbl").textContent = monthly ? "Tháng" : "Tuần";
+      const cur = $(p + "Week").value;
+      fillSelect($(p + "Week"), monthly ? monthList : weeks,
+        monthly ? (/^\d{4}-\d{2}$/.test(cur) ? cur : weekMonth(latestDataWeek())) : (isWeekKey(cur) ? cur : latestDataWeek()));
+      if (!monthly) $(p + "Week").add(new Option("Tuần khác… (chọn ngày trên lịch)", PICK_WEEK));
       fillSelect($(p + "Project"), projects, p === "rp" ? $(p + "Project").value : $(p + "Project").value || projects[0], p === "rp" ? "Tất cả dự án" : null);
     }
     const months = Array.from(new Set(dataWeeks.map(weekMonth))).sort().reverse().map((m) => [m, monthLabel(m)]);
@@ -719,7 +724,7 @@
   /** Bảng kiểm nghiệm thu: mỗi nhân sự × kênh đã chạy × loại ảnh bắt buộc -> đã có / thiếu. */
   function renderChecklist() {
     const w = $("evWeek").value, pj = $("evProject").value, wks = evWeeks(), month = evIsMonth();
-    const data = effective(S.SoLieu.filter((r) => (wks.includes(r.tuan) || r.tuan === w) && r.duAn === pj));
+    const data = effective(S.SoLieu.filter((r) => (month ? r.tuan === w : wks.includes(r.tuan)) && r.duAn === pj));
     const ev = S.ChungTu.filter((r) => r.tuan === w && r.duAn === pj);
     const staff = Array.from(new Set(data.map((r) => r.nhanSu).concat(ev.map((r) => r.nhanSu)).filter(Boolean)));
     const order = staffNames();
@@ -824,7 +829,7 @@
     $("evDelSel").disabled = !evSel.size;
     // nhóm theo từng bạn (cả người phải có ảnh mà chưa tải) cho dễ nhìn
     const order = staffNames();
-    const need = Array.from(new Set(effective(S.SoLieu.filter((r) => r.duAn === pj && (wks.includes(r.tuan) || r.tuan === w))).map((r) => r.nhanSu).filter(Boolean)
+    const need = Array.from(new Set(effective(S.SoLieu.filter((r) => r.duAn === pj && (month ? r.tuan === w : wks.includes(r.tuan)))).map((r) => r.nhanSu).filter(Boolean)
       .concat(rows.map((r) => r.nhanSu || ""))))
       .sort((a, b) => (a ? order.indexOf(a) + 1 || 99 : 999) - (b ? order.indexOf(b) + 1 || 99 : 999));
     const fig = (r) => `
@@ -1659,6 +1664,11 @@
       });
     });
     ["evWeek", "evProject", "evView"].forEach((id) => $(id).addEventListener("change", renderEvidence));
+    $("evKind").addEventListener("change", () => { refreshFilters(); renderEvidence(); });
+    $("enKind").addEventListener("change", () => {
+      if (!confirmDiscard()) { $("enKind").value = $("enKind").value === "thang" ? "tuan" : "thang"; return; }
+      refreshFilters(); renderEntries();
+    });
     $("evStaff").addEventListener("change", () => {
       const me = $("evStaff").value;
       $("evStaff").classList.toggle("warn", !me);
