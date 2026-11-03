@@ -1399,7 +1399,7 @@
     const ev = ky !== "all" ? S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.nhanSu) : [];
     const staffN = new Set(rows.map((r) => r.nhanSu).concat(ev.map((r) => r.nhanSu)).filter(Boolean)).size;
     const out = { tuan: w, duAn: pjName, trangThai: prev ? prev.trangThai : "Nháp", webKey: (prev && prev.webKey) || newWebKey(),
-      tomTat: `Trang web · ${staffN} nhân sự` + (ky === "tuan" ? `, ${ev.length} ảnh/chứng từ` : `, ${wks.length} tuần` + (ev.length ? `, ${ev.length} ảnh/chứng từ` : "")), ngayTao: nowStamp() };
+      tomTat: `Trang web · ${staffN} nhân sự` + (ky === "tuan" ? `, ${ev.length} ảnh/chứng từ` : (wks[0] === w ? ", số nhập theo tháng" : `, ${wks.length} tuần`) + (ev.length ? `, ${ev.length} ảnh/chứng từ` : "")), ngayTao: nowStamp() };
     if (prev) out.id = prev.id;
     const saved = await call("crmSave", "BaoCao", out);
     S.BaoCao = S.BaoCao.filter((r) => r.id !== saved.id).concat(saved);
@@ -1509,7 +1509,7 @@
     const sub = ky === "all" ? "Tổng chiến dịch" : "Tháng " + (ky === "thang" ? w : weekMonth(w)).split("-").reverse().join("-");
     const b64 = await B.blobToB64(res.blob);
     const out = { tuan: w, duAn: pjName, trangThai: "Nháp", pdfUrl: "", pptxUrl: "",
-      tomTat: `${res.slides} slide, ${res.staffCount} nhân sự` + (ky === "tuan" ? `, ${res.nImg} ảnh` : `, ${wks.length} tuần`) +
+      tomTat: `${res.slides} slide, ${res.staffCount} nhân sự` + (ky === "tuan" ? `, ${res.nImg} ảnh` : (wks[0] === w ? ", số nhập theo tháng" : `, ${wks.length} tuần`) + (res.nImg ? `, ${res.nImg} ảnh` : "")) +
         (res.missing ? `, thiếu ${res.missing} ảnh nghiệm thu` : "") + ` · ${(res.blob.size / 1048576).toFixed(1)} MB · ${tplSrc[tplKey] || "mẫu Drive"}` };
     // tạo lại: ghi đè vào file cũ để link đã gửi nhóm vẫn mở được bản mới
     const prev = S.BaoCao.find((r) => r.duAn === pjName && r.tuan === w);
