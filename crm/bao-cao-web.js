@@ -16,10 +16,10 @@
   /** Ô ảnh nghiệm thu của một ảnh: Google và Đăng tin không có ô "QC đang chạy" (ảnh đó vào ô Chiến dịch). */
   const slotOf = (p, loai) => ((p === "Đăng tin" || p === "Google") && loai === "qc" ? "ads" : loai);
   const pad = (n) => String(n).padStart(2, "0");
-  const parseIso = (s) => { const [y, m, d] = String(s).split("-").map(Number); return new Date(y, m - 1, d); };
+  const parseIso = (s) => { const [y, m, d] = String(s).split("-").map(Number); return new Date(y, m - 1, d || 1); };
   const isoOf = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
   const addDays = (iso, k) => { const d = parseIso(iso); d.setDate(d.getDate() + k); return isoOf(d); };
-  const wkLabel = (iso, year) => { const a = parseIso(iso), b = parseIso(addDays(iso, 6));
+  const wkLabel = (iso, year) => { const a = parseIso(iso), b = /^\d{4}-\d{2}$/.test(String(iso)) ? new Date(a.getFullYear(), a.getMonth() + 1, 0) : parseIso(addDays(iso, 6));
     return `${pad(a.getDate())}/${pad(a.getMonth() + 1)} – ${pad(b.getDate())}/${pad(b.getMonth() + 1)}${year ? "/" + b.getFullYear() : ""}`; };
 
   let K = "", D = null;
@@ -55,7 +55,7 @@
     if (ky === "thang") {
       // tháng dương lịch: ngày 1 đến ngày cuối tháng
       const [y, m] = String(d.tuan).split("-"), last = new Date(+y, +m, 0).getDate(), mm = String(m).padStart(2, "0");
-      return { ky, weeks, name: `Tháng ${+m}/${y}`, html: `Tháng <b>${+m}/${y}</b> (01/${mm}/${y} – ${last}/${mm}/${y}, ${weeks.length} tuần)`, prev: "tháng trước" };
+      return { ky, weeks, name: `Tháng ${+m}/${y}`, html: `Tháng <b>${+m}/${y}</b> (01/${mm}/${y} – ${last}/${mm}/${y}, ${weeks.length === 1 && weeks[0] === String(d.tuan) ? "số nhập theo tháng" : weeks.length + " tuần"})`, prev: "tháng trước" };
     }
     if (ky === "all") return { ky, weeks, name: "Toàn chiến dịch", html: `Toàn chiến dịch <b>${span}</b> (${weeks.length} tuần)`, prev: "" };
     return { ky, weeks, name: `tuần ${wkLabel(d.tuan)}`, html: `Tuần <b>${wkLabel(d.tuan, true)}</b>`, prev: "tuần trước" };

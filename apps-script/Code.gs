@@ -599,7 +599,9 @@ function crmWeekMonth_(iso) {
 /** Kỳ báo cáo theo mã: tuần "2026-10-05", tháng "2026-10", toàn chiến dịch "all". */
 function crmReportScope_(key, allWeeks) {
   key = String(key);
-  allWeeks = allWeeks.slice().sort();
+  // allWeeks có thể có mã tháng "2026-10" (số nhập riêng cho cả tháng): chỉ báo cáo tháng dùng mã đó
+  var months = allWeeks.filter(function (w) { return /^\d{4}-\d{2}$/.test(w); });
+  allWeeks = allWeeks.filter(function (w) { return /^\d{4}-\d{2}-\d{2}$/.test(w); }).sort();
   if (/^\d{4}-\d{2}-\d{2}$/.test(key)) {
     // tuần trước = tuần có số liệu ngay trước (từ 10/10/2026 tuần đổi sang thứ 7 – thứ 6 nên không luôn là -7 ngày)
     var before = allWeeks.filter(function (w) { return w < key; });
@@ -611,8 +613,8 @@ function crmReportScope_(key, allWeeks) {
   if (/^\d{4}-\d{2}$/.test(key)) {
     var y = +key.slice(0, 4), m = +key.slice(5, 7) - 1;
     var pm = (m === 0 ? y - 1 : y) + '-' + ('0' + (m === 0 ? 12 : m)).slice(-2);
-    return { ky: 'thang', weeks: allWeeks.filter(function (w) { return crmWeekMonth_(w) === key; }),
-      prevWeeks: allWeeks.filter(function (w) { return crmWeekMonth_(w) === pm; }) };
+    var ofMonth = function (m) { return months.indexOf(m) >= 0 ? [m] : allWeeks.filter(function (w) { return crmWeekMonth_(w) === m; }); };
+    return { ky: 'thang', weeks: ofMonth(key), prevWeeks: ofMonth(pm) };
   }
   return { ky: 'all', weeks: allWeeks, prevWeeks: [] };
 }
@@ -624,7 +626,11 @@ function crmWebReport(k) {
   var rows = crmRows_('SoLieu').filter(function (r) { return r.duAn === bc.duAn && r.tuan; });
   var sc = crmReportScope_(bc.tuan, Object.keys(rows.reduce(function (o, r) { o[r.tuan] = 1; return o; }, {})));
   var last = sc.weeks[sc.weeks.length - 1] || String(bc.tuan);
-  var soLieu = rows.filter(function (r) { return String(r.tuan) <= last; }).map(function (r) { return pick(r, cols); });
+  var inScope = sc.weeks.concat(sc.prevWeeks);
+  var soLieu = rows.filter(function (r) {
+    var t = String(r.tuan);
+    return sc.ky === 'tuan' ? /^\d{4}-\d{2}-\d{2}$/.test(t) && t <= last : inScope.indexOf(t) >= 0;
+  }).map(function (r) { return pick(r, cols); });
   // ảnh nghiệm thu: báo cáo tuần = ảnh của tuần; báo cáo tháng = ảnh chụp cả tháng (mã tháng "2026-10"); toàn chiến dịch: không có ảnh
   var chungTu = sc.ky === 'all' ? [] : crmRows_('ChungTu').filter(function (r) { return r.duAn === bc.duAn && String(r.tuan) === String(bc.tuan); })
     .map(function (r) { return pick(r, ['id', 'nhanSu', 'nenTang', 'loai', 'tenFile', 'soTien', 'vat']); });

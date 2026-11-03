@@ -35,7 +35,9 @@
   // ------------------------------------------------------------ tuần
   const pad = (n) => String(n).padStart(2, "0");
   const isoOf = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-  const parseIso = (s) => { const [y, m, d] = String(s).split("-").map(Number); return new Date(y, m - 1, d); };
+  const parseIso = (s) => { const [y, m, d] = String(s).split("-").map(Number); return new Date(y, m - 1, d || 1); };
+  /** Mã kỳ của số liệu / ảnh: tuần "2026-10-17" hoặc tháng "2026-10" (nhập riêng cho báo cáo tháng). */
+  const isWeekKey = (t) => /^\d{4}-\d{2}-\d{2}$/.test(String(t || ""));
   /**
    * Ngày bắt đầu tuần báo cáo chứa ngày d.
    * Từ 10/10/2026: tuần chạy thứ 7 → thứ 6 (10/10 – 16/10, 17/10 – 23/10, …).
@@ -49,6 +51,10 @@
     return x;
   };
   function weekLabel(iso, withYear) {
+    if (/^\d{4}-\d{2}$/.test(String(iso))) { // tháng: 01/10 - 31/10
+      const a = parseIso(iso), b = new Date(a.getFullYear(), a.getMonth() + 1, 0);
+      return `01/${pad(a.getMonth() + 1)} - ${pad(b.getDate())}/${pad(b.getMonth() + 1)}` + (withYear ? `/${b.getFullYear()}` : "");
+    }
     const a = parseIso(iso), b = new Date(a);
     b.setDate(a.getDate() + 6);
     return `${pad(a.getDate())}/${pad(a.getMonth() + 1)} - ${pad(b.getDate())}/${pad(b.getMonth() + 1)}` + (withYear ? `/${b.getFullYear()}` : "");
@@ -66,11 +72,11 @@
     prev.setDate(prev.getDate() - 1);
     set.add(isoOf(cur));
     set.add(isoOf(weekStartOf(prev)));
-    S.SoLieu.forEach((r) => r.tuan && set.add(r.tuan));
+    S.SoLieu.forEach((r) => isWeekKey(r.tuan) && set.add(r.tuan));
     S.ChungTu.forEach((r) => /^\d{4}-\d{2}-\d{2}$/.test(r.tuan || "") && set.add(r.tuan)); // ảnh nghiệm thu tháng có mã "2026-10", không phải tuần
     return Array.from(set).sort().reverse();
   }
-  const latestDataWeek = () => S.SoLieu.map((r) => r.tuan).sort().pop() || isoOf(weekStartOf(new Date()));
+  const latestDataWeek = () => S.SoLieu.map((r) => r.tuan).filter(isWeekKey).sort().pop() || isoOf(weekStartOf(new Date()));
   /** Tháng của tuần = tháng chứa ngày giữa tuần (ngày thứ 4 của tuần; tuần vắt qua 2 tháng chỉ thuộc 1 tháng). "2026-09-28" -> "2026-10" */
   const weekMonth = (iso) => { const d = parseIso(iso); d.setDate(d.getDate() + 3); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}`; };
   const monthLabel = (m) => `Tháng ${+m.slice(5, 7)}/${m.slice(0, 4)}`;
@@ -83,7 +89,8 @@
   /** Các tuần có số liệu của dự án thuộc kỳ. */
   function weeksOfKey(key, pjName) {
     const ky = kyOf(key);
-    const all = Array.from(new Set(S.SoLieu.filter((r) => r.duAn === pjName && r.tuan).map((r) => r.tuan))).sort();
+    const all = Array.from(new Set(S.SoLieu.filter((r) => r.duAn === pjName && isWeekKey(r.tuan)).map((r) => r.tuan))).sort();
+    if (ky === "thang" && S.SoLieu.some((r) => r.duAn === pjName && r.tuan === key)) return [key]; // có số nhập riêng cho tháng: dùng số đó
     return ky === "tuan" ? [key] : ky === "thang" ? all.filter((w) => weekMonth(w) === key) : all;
   }
   const inKey = (key, w, pjName) => (kyOf(key) === "tuan" ? w === key : weeksOfKey(key, pjName).includes(w));
@@ -221,7 +228,7 @@
     const projects = brandNames();
     const staff = staffNames();
     // Tổng quan
-    const dataWeeks = Array.from(new Set(S.SoLieu.map((r) => r.tuan))).sort();
+    const dataWeeks = Array.from(new Set(S.SoLieu.map((r) => r.tuan).filter(isWeekKey))).sort();
     const allW = (dataWeeks.length ? dataWeeks : [latestDataWeek()]).map((w) => [w, weekLabel(w, true)]);
     fillSelect($("dbProject"), projects, $("dbProject").value, "Tất cả dự án");
     fillSelect($("dbFrom"), allW, $("dbFrom").value || allW[Math.max(0, allW.length - 4)][0]);
@@ -231,7 +238,7 @@
     const evMonths = Array.from(new Set(dataWeeks.map(weekMonth))).sort().reverse()
       .map((m) => [m, `Cả ${monthLabel(m).toLowerCase()} (01/${m.slice(5, 7)} – ${new Date(+m.slice(0, 4), +m.slice(5, 7), 0).getDate()}/${m.slice(5, 7)})`]);
     for (const p of ["en", "ev", "rp"]) {
-      fillSelect($(p + "Week"), p === "ev" ? weeks.concat(evMonths) : weeks, $(p + "Week").value || latestDataWeek());
+      fillSelect($(p + "Week"), p !== "rp" ? weeks.concat(evMonths) : weeks, $(p + "Week").value || latestDataWeek());
       $(p + "Week").add(new Option("Tuần khác… (chọn ngày trên lịch)", PICK_WEEK));
       fillSelect($(p + "Project"), projects, p === "rp" ? $(p + "Project").value : $(p + "Project").value || projects[0], p === "rp" ? "Tất cả dự án" : null);
     }
@@ -318,7 +325,7 @@
   }
   function renderDashboard() {
     const pj = $("dbProject").value, from = $("dbFrom").value, to = $("dbTo").value;
-    const rows = effective(S.SoLieu.filter((r) => (pj ? r.duAn === pj : inBrand(r.duAn)) && r.tuan >= from && r.tuan <= to));
+    const rows = effective(S.SoLieu.filter((r) => (pj ? r.duAn === pj : inBrand(r.duAn)) && isWeekKey(r.tuan) && r.tuan >= from && r.tuan <= to));
     const t = sumOf(rows);
     const tiles = [
       ["Chi phí gồm phí nền tảng", fmtInt(t.chiPhiPhi) + " đ"],
@@ -549,6 +556,7 @@
 
   /** Nhập số liệu từ Google Sheet của dự án (mẫu "BÁO CÁO NGHIỆM THU THÁNG"). */
   async function importSheet() {
+    if (!isWeekKey($("enWeek").value)) return toast("Đang chọn cả tháng: số tháng nhập tay trong bảng. Lấy từ Google Sheet chỉ làm theo từng tuần.", "err");
     if (!confirmDiscard()) return;
     const pj = project($("enProject").value);
     if (!B.parseDriveId(pj.nguonSoLieu)) return toast("Dự án chưa có link Google Sheet số liệu (tab Danh mục).", "err");
@@ -592,6 +600,7 @@
 
   /** Ghi số đọc từ ảnh (nguồn "anh") của dự án + tuần vào Google Sheet số liệu của dự án: chỉ ô trống / ô app đã ghi. */
   async function pushToSheet(pjName, w) {
+    if (!isWeekKey(w)) return null; // số nhập cho cả tháng chỉ lưu trong CRM (Google Sheet dự án chia theo tuần)
     const groups = new Map();
     S.SoLieu.filter((r) => r.nguon === "anh" && r.duAn === pjName && r.tuan === w && mineOnly(r)).forEach((r) => {
       const key = r.nenTang + "|" + (digitsOf(r.taiKhoan) || r.nhanSu);
@@ -703,7 +712,7 @@
   /** Bảng kiểm nghiệm thu: mỗi nhân sự × kênh đã chạy × loại ảnh bắt buộc -> đã có / thiếu. */
   function renderChecklist() {
     const w = $("evWeek").value, pj = $("evProject").value, wks = evWeeks(), month = evIsMonth();
-    const data = effective(S.SoLieu.filter((r) => wks.includes(r.tuan) && r.duAn === pj));
+    const data = effective(S.SoLieu.filter((r) => (wks.includes(r.tuan) || r.tuan === w) && r.duAn === pj));
     const ev = S.ChungTu.filter((r) => r.tuan === w && r.duAn === pj);
     const staff = Array.from(new Set(data.map((r) => r.nhanSu).concat(ev.map((r) => r.nhanSu)).filter(Boolean)));
     const order = staffNames();
@@ -1428,7 +1437,7 @@
     if (!tplId) throw new Error(`Dự án ${pjName} chưa có link PPTX mẫu (tab Danh mục).`);
     const last = wks[wks.length - 1];
     // báo cáo tuần: kèm các tuần trước để so sánh; báo cáo tháng / chiến dịch: đúng các tuần trong kỳ
-    const rows = effective(S.SoLieu.filter((r) => r.duAn === pjName && (ky === "tuan" ? r.tuan <= w : wks.includes(r.tuan))));
+    const rows = effective(S.SoLieu.filter((r) => r.duAn === pjName && (ky === "tuan" ? isWeekKey(r.tuan) && r.tuan <= w : wks.includes(r.tuan))));
     if (!last || !rows.some((r) => wks.includes(r.tuan))) throw new Error(`${pjName}: chưa có số liệu ${periodLabel(w)}.`);
     if (!tplCache[tplId]) {
       const nt = tplId === OLD_TPL ? await newTemplate() : null;
