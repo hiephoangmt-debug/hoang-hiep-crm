@@ -168,6 +168,22 @@ def box(cx, cy, z0, sx, sy, sz, m, rot=0., bevel=.012, parent=None, name='o'):
     for p in o.data.polygons: p.use_smooth = True
     return o
 
+def pillow(cx, cy, z0, sx, sy, sz, m, lean=.28, parent=None):
+    """Gối thật: khối mềm bo tròn (subdivision), phồng giữa, mỏng mép, ngả nhẹ về đầu giường."""
+    bpy.ops.mesh.primitive_cube_add(size=1); o = bpy.context.object; o.name = 'goi'
+    bm_ = bmesh.new(); bm_.from_mesh(o.data); bmesh.ops.subdivide_edges(bm_, edges=bm_.edges[:], cuts=7, use_grid_fill=True); bm_.to_mesh(o.data); bm_.free()   # lưới dày: giữ dáng vuông, chỉ bo mép
+    for v in o.data.vertices:   # phồng giữa, mép mỏng dẹt như gối nhồi bông
+        ex_, ez_ = abs(v.co.x) * 2, abs(v.co.z) * 2
+        v.co.y *= .25 + .75 * (1 - ex_ ** 4) * (1 - ez_ ** 4)
+        v.co.x *= 1 - .06 * (1 - ez_ ** 2); v.co.z *= 1 - .06 * (1 - ex_ ** 2)   # cạnh hơi lõm vào như gối thật
+    o.scale = (sx, sy, sz); o.location = (cx, cy, z0 + sz / 2); o.rotation_euler[0] = -lean
+    bpy.ops.object.transform_apply(scale=True)
+    sd_ = o.modifiers.new('sd', 'SUBSURF'); sd_.levels = 1; sd_.render_levels = 2
+    o.data.materials.append(m)
+    for p_ in o.data.polygons: p_.use_smooth = True
+    if parent: o.parent = parent
+    return o
+
 def cyl(cx, cy, z0, r, h, m, parent=None, verts=32):
     bpy.ops.mesh.primitive_cylinder_add(radius=r, depth=h, vertices=verts, location=(cx, cy, z0 + h / 2))
     o = bpy.context.object; o.data.materials.append(m)
@@ -409,7 +425,7 @@ for _pt in PARTS:
             box(0, 0, 0, w + .1, d + .05, .32, WALNUT, parent=o); box(0, .03, .32, w - .02, d - .12, .24, LINEN, bevel=.06, parent=o)
             box(0, d * .14, .5, w + .04, d * .66, .09, LINEN if LUX else FAB, bevel=.04, parent=o); box(0, d * .38, .58, w + .06, .4, .03, FAB if LUX else FAB3, bevel=.01, parent=o)
             box(0, -hd + .03, 0, w + .3, .1, 1.15, FAB2, bevel=.03, parent=o)
-            for sd in (-1, 1): box(sd * w * .24, -hd + .32, .52, w * .42, .34, .14, LINEN, bevel=.06, parent=o)
+            for sd in (-1, 1): pillow(sd * w * .235, -hd + .34, .34, w * .45, .17, .5, LINEN, lean=1.5, parent=o)   # 2 gối trắng nằm thẳng hàng sát đầu giường
             box(0, .05, -.001, w + .8, d + .1, .012, RUG, 0, 0, parent=o)
             BEDS.append((o, w, d))
             if LUX and AIRY:   # như ảnh mẫu: tấm ốp bọc nỉ dọc cao gần trần + hắt LED, giường bọc boucle kem, khăn + gối đất nung, đôn cuối giường, đèn thả 2 bên
@@ -417,8 +433,8 @@ for _pt in PARTS:
                 for i in range(n_): box(-PW / 2 + (i + .5) * pw_, -hd - .07, .0, pw_ - .01, .06, 1.3, FAB2, bevel=.025, parent=o)
                 box(0, -hd - .07, 1.3, PW, .03, .02, COVE, 0, 0, parent=o)
                 box(0, 0, 0, w + .14, d + .08, .34, CHAIRF, bevel=.05, parent=o); box(0, -hd + .02, 0, w + .14, .16, 1.0, CHAIRF, bevel=.06, parent=o)
-                box(0, d * .3, .6, w + .1, .55, .025, FAB3, bevel=.01, parent=o); box(w * .32, d * .3 + .2, .2, .03, .5, .4, FAB3, 0, .005, parent=o)
-                for sd in (-1, 1): box(sd * w * .18, -hd + .52, .6, .42, .09, .3, FAB3, bevel=.045, parent=o)   # gối tựa nhỏ mềm, không thành khối
+                box(0, d * .3, .6, w + .1, .55, .025, FAB3, bevel=.01, parent=o)   # khăn trải ngang chân giường
+                pillow(0, -hd + .66, .48, w * .62, .15, .3, FAB3, lean=1.25, parent=o)   # 1 gối dài đất nung nằm chính giữa phía trước (kiểu khách sạn)   # gối tựa đất nung mềm, ngả vào đầu giường
                 if not str(LAY).startswith('STU'): box(0, hd + .36, 0, w * .75, .42, .44, CHAIRF, bevel=.06, parent=o)   # studio: bỏ đôn cuối giường cho thoáng lối đi
                 for sd in (-1, 1):
                     cyl(sd * (w / 2 + .32), -hd + .12, 1.15, .004, H - 1.15, BRASS, parent=o); cyl(sd * (w / 2 + .32), -hd + .12, 1.0, .035, .16, LAMP, parent=o)

@@ -14,5 +14,5 @@ for key, uid, name, shots, env in JOBS:
     if not need: continue
     e = dict(os.environ, STYLE='lux', EXPO='1.0', FILL='1.5', LOOK='AgX - Medium High Contrast', TONE='.84', SUNROT='0', TOPRES='1440x810', **env)
     print('>>', name, need, flush=True)
-    subprocess.run([S + '/bvenv/bin/python', S + '/bl/room.py', S + '/ccl2.json', key, uid, out, ','.join(need), '96', '1440x810'], env=e, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run([S + '/bvenv/bin/python', S + '/bl/room.py', S + '/ccl2.json', key, uid, out, ','.join(need), '160', '1440x810'], env=e, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 print('XONG ANH', flush=True)
