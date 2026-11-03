@@ -450,7 +450,7 @@ for _pt in PARTS:
         o = frame(x, y, face); hw, hd = w / 2, d / 2          # trong khung: X = bề ngang, +Y = mặt trước, lưng ở -Y
         if k == 'bed':
             box(0, 0, 0, w + .1, d + .05, .32, WALNUT, parent=o); box(0, .03, .32, w - .02, d - .12, .24, LINEN, bevel=.06, parent=o)
-            if LUX and AIRY: drape(0, (.55 + .02) / 2, .565, w - .04, d - .55, .3, .035, LINEN, parent=o, seed=x + y, amp=.014)   # chăn phủ thật: phồng nhẹ, nếp nhăn, rủ 2 bên đệm
+            if LUX and AIRY: drape(0, (.55 + .02) / 2, .565, w - .04, d - .55, .19, .035, LINEN, parent=o, seed=x + y, amp=.014)   # chăn phủ thật: phồng nhẹ, nếp nhăn, rủ 2 bên đệm
             else: box(0, d * .14, .5, w + .04, d * .66, .09, LINEN if LUX else FAB, bevel=.04, parent=o); box(0, d * .38, .58, w + .06, .4, .03, FAB if LUX else FAB3, bevel=.01, parent=o)
             box(0, -hd + .03, 0, w + .3, .1, 1.15, FAB2, bevel=.03, parent=o)
             for sd in (-1, 1): pillow(sd * w * .235, -hd + .34, .34, w * .45, .17, .5, LINEN, lean=1.5, parent=o)   # 2 gối trắng nằm thẳng hàng sát đầu giường
@@ -461,7 +461,7 @@ for _pt in PARTS:
                 for i in range(n_): box(-PW / 2 + (i + .5) * pw_, -hd - .07, .0, pw_ - .01, .06, 1.3, FAB2, bevel=.025, parent=o)
                 box(0, -hd - .07, 1.3, PW, .03, .02, COVE, 0, 0, parent=o)
                 box(0, 0, 0, w + .14, d + .08, .34, CHAIRF, bevel=.05, parent=o); box(0, -hd + .02, 0, w + .14, .16, 1.0, CHAIRF, bevel=.06, parent=o)
-                drape(0, d * .3, .64, w - .02, .5, .4, .012, FAB3, parent=o, seed=x * 3 + y, amp=.008, puff=.0)   # khăn trải ngang chân giường, rủ xuống 2 bên
+                drape(0, d * .3, .64, w + .2, .5, .24, .012, FAB3, parent=o, seed=x * 3 + y, amp=.008, puff=.0)   # rộng hơn khung giường: rủ ra ngoài, không bị khung đâm xuyên   # khăn trải ngang chân giường, rủ xuống 2 bên
                 pillow(0, -hd + .66, .48, w * .62, .15, .3, FAB3, lean=1.25, parent=o)   # 1 gối dài đất nung nằm chính giữa phía trước (kiểu khách sạn)   # gối tựa đất nung mềm, ngả vào đầu giường
                 if not str(LAY).startswith('STU'): box(0, hd + .36, 0, w * .75, .42, .44, CHAIRF, bevel=.06, parent=o)   # studio: bỏ đôn cuối giường cho thoáng lối đi
                 for sd in (-1, 1):
