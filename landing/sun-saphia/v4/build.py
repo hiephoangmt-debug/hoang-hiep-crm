@@ -605,7 +605,7 @@ def cho_thue():
                          'Studio view biển Đà Nẵng đang cho thuê 2,2–2,9 triệu/đêm, 1BR+ 3,4–3,7 triệu/đêm (ngoài mùa cao điểm); khách sạn Sun Group miền Trung lấp đầy 81,3% năm 2026. Trang này tổng hợp nguồn khách thuê, giá thuê theo đêm và theo tháng, và công cụ để anh/chị tự tính dòng tiền theo từng căn.',
                          ('<img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 900px" width="1600" height="900" alt="Hồ bơi tầng 3 nhìn ra biển Đà Nẵng lúc hoàng hôn – Sun Saphia Residence (ảnh minh họa)" fetchpriority="high" decoding="async">' % ((RAW + 'a0a6849c15880dc681b6e91708d2a0752bd2aa43/landing/sun-saphia/v4/img/ho-boi-tang-3',) * 3)), 'Hồ bơi tầng 3', 'Web – cho thuê đầu trang')
     fq, fld = faq([
-        ('Cho thuê căn hộ Sun Saphia được bao nhiêu?', 'Giá thuê căn hộ view biển Đà Nẵng hiện khoảng 2,2–2,9 triệu/đêm (studio) và 3,4–3,7 triệu/đêm (1BR+), chưa tính mùa cao điểm. Thuê tháng thực tế tại Sun Ponte (dự án Sun Group cạnh cầu Rồng, 11/2026): studio 12–17 triệu, 1BR+ 18–27 triệu, 2PN 25–50 triệu, 3PN khoảng 48 triệu; các tòa ven sông Hàn khác: studio 18–20 triệu, 1PN 14–27 triệu, 2PN 20–45 triệu.'),
+        ('Cho thuê căn hộ Sun Saphia được bao nhiêu?', 'Giá thuê căn hộ view biển Đà Nẵng hiện khoảng 2,2–2,9 triệu/đêm (studio) và 3,4–3,7 triệu/đêm (1BR+), chưa tính mùa cao điểm. Thuê tháng các tòa ven sông Hàn: studio 18–20 triệu, 1PN 14–27 triệu, 2PN 20–45 triệu.'),
         ('Tỷ lệ lấp đầy thực tế ra sao?', 'Bài toán minh họa của chủ đầu tư dùng 60%. Khách sạn của Sun Group tại miền Trung đạt 81,3% năm 2026 (từ 70,65% năm 2025) – cao nhất cả nước.'),
         ('Lợi nhuận 11,7% có phải cam kết?', 'Không. Đó là bài toán minh họa với giá giả định 3 tỷ, giá thuê 2,5 triệu/đêm, lấp đầy 60%, lợi nhuận 65% doanh thu. Kết quả thực tế phụ thuộc giá mua, mùa vụ và cách vận hành.'),
         ('Ai sẽ thuê căn hộ?', 'Ba nhóm chính: nhân sự chuỗi resort ven biển (thuê trung hạn), khách thuê ngắn ngày kiểu Airbnb và khách du lịch ưu tiên căn hộ mặt biển.'),
@@ -614,7 +614,7 @@ def cho_thue():
         ('Cần chuẩn bị gì để cho thuê?', 'Nội thất phong cách nghỉ dưỡng, thiết bị cơ bản (máy lạnh, wifi, bếp, máy giặt, khoá mã số), đồ dùng (ga gối 3 bộ xoay vòng, khăn, đồ vệ sinh), đồ an toàn (bình chữa cháy, hộp sơ cứu), ảnh chụp đẹp và tài khoản trên Airbnb, Booking, Agoda.'),
         ('Có đơn vị vận hành cho thuê không?', 'Phương án vận hành theo công bố của chủ đầu tư khi mở bán; đại lý sẽ tư vấn các lựa chọn tự vận hành hoặc thuê đơn vị quản lý.')])
     b = hero
-    b += tldr('cho thuê căn hộ Sun Saphia', [('Giá thuê theo đêm', 'Studio view biển 2,2–2,9 triệu · 1BR+ 3,4–3,7 triệu (ngoài mùa cao điểm)'), ('Giá thuê tháng thực tế – Sun Ponte', 'Studio 12–17 triệu · 1BR+ 18–27 triệu · 2PN 25–50 triệu · 3PN ~48 triệu (đủ nội thất, 11/2026)'),
+    b += tldr('cho thuê căn hộ Sun Saphia', [('Giá thuê theo đêm', 'Studio view biển 2,2–2,9 triệu · 1BR+ 3,4–3,7 triệu (ngoài mùa cao điểm)'), ('Giá thuê theo tháng (khu lân cận)', 'Studio 18–20 triệu · 1PN 14–27 triệu · 2PN 20–45 triệu'),
         ('Lấp đầy', 'Khách sạn Sun Group miền Trung 81,3% năm 2026'), ('Bài toán minh họa', 'Studio 3 tỷ, 2,5 tr/đêm, lấp đầy 60% → ~351 triệu/năm (11,7%) – không phải cam kết'),
         ('Khách thuê', 'Nhân sự chuỗi resort, khách Airbnb ngắn ngày, khách du lịch')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Nguồn cầu', '3 dòng di dân – <b>1 điểm đến</b>', 'o') + migration() + '</div></section>')
