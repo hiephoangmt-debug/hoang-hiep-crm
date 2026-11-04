@@ -75,8 +75,8 @@ def interior(base):
     pans = ''
     for k, (name, caps) in NT.items():
         pans += '<div class="ntp" data-k="%s">' % k + ''.join(
-            '<figure><img src="%snt-%s-%d.webp" alt="Concept nội thất căn %s Sun Saphia Residence: %s (ảnh minh họa của chủ đầu tư)" loading="lazy" decoding="async"><figcaption>%s</figcaption></figure>'
-            % (base, k, i, name, c.lower(), c) for i, c in enumerate(caps)) + '</div>'
+            '<figure><img src="%snt-%s-%d.webp" srcset="%snt-%s-%d.webp 1x, %snt-%s-%d@2x.webp 2x" alt="Concept nội thất căn %s Sun Saphia Residence: %s (ảnh minh họa của chủ đầu tư)" loading="lazy" decoding="async"><figcaption>%s</figcaption></figure>'
+            % (base, k, i, base, k, i, base, k, i, name, c.lower(), c) for i, c in enumerate(caps)) + '</div>'
     css = ('<style>.ntw{margin-top:30px}.ntw h3{margin:0 0 4px;font-family:Fahkwang,serif;font-weight:400;font-size:clamp(22px,2.6vw,30px);color:#0E6E99}.ntw .ntl{margin:0 0 14px;color:#557585;font-size:14.5px}'
            '.ntw input{position:absolute;opacity:0;pointer-events:none}.ntw label{display:inline-block;padding:8px 18px;margin:0 8px 14px 0;border-radius:999px;border:1.5px solid #B9E5EF;background:#fff;color:#0E6E99;font-weight:700;cursor:pointer;font-size:14.5px}'
            '.ntw .ntp{display:none;grid-template-columns:repeat(4,1fr);gap:10px}'
