@@ -43,7 +43,7 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 ## Có gì mới – plugin 2.20.112 (04/11/2026)
 
-- **Sun Symphony Residence – mặt bằng tầng 3 tòa:** thêm 38 bản vẽ mặt bằng của chủ đầu tư (S1: 15 ảnh, S2: 11 ảnh, S3: 12 ảnh), mỗi ảnh một tab "S1 · Tầng 3", "S3 · Tầng 23 – 28"… trong mục Mặt bằng của trang dự án; bấm ảnh để phóng to xem diện tích từng căn.
+- **Sun Symphony Residence – mặt bằng tầng 3 tòa:** thêm 38 bản vẽ mặt bằng của chủ đầu tư (S1: 15 ảnh, S2: 11 ảnh, S3: 12 ảnh), mỗi ảnh một tab "S1 · Tầng 3", "S1 · Tầng 3A – 12A", "S3 · Tầng 23 – 28"… trong mục Mặt bằng của trang dự án; bấm ảnh để phóng to xem diện tích từng căn.
 - Ảnh tải ngầm tối đa 15 ảnh mỗi lượt: sau khi cài, bấm **Nhập / cập nhật dữ liệu** thêm 2–3 lần (hoặc chờ vài phút) cho tới khi đủ 38 tab.
 - Chỉ điền khi ô "Link ảnh" của trang Sun Symphony đang trống; nếu anh đã tự nhập link ảnh ở đó thì giữ nguyên.
 
