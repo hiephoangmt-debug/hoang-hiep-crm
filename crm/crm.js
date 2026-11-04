@@ -1476,8 +1476,9 @@
     // chỉ nhân sự có số liệu ở dự án đang làm báo cáo (Sun ra người chạy Sun, Casa ra người chạy Casa)
     const staff = Array.from(new Set(rows.filter((r) => !pjName || r.duAn === pjName).map((r) => r.nhanSu).filter(Boolean)))
       .sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99));
+    const only = pjName && (projects.find((p) => p.name === pjName) || {}).key;
     return {
-      projects, san: "COLLECTION",
+      projects, san: "COLLECTION", only,
       note: "Lead = khách để lại thông tin từ quảng cáo · MQL = khách hàng quan tâm · SQL = khách hàng tiềm năng (đủ điều kiện mua) · Deal = giao dịch đã chốt." +
         (kyOf(w) === "thang" ? " Báo cáo tháng: ô chưa nhập số cả tháng lấy tổng các tuần trong tháng." : ""),
       rows: staff.map((st) => ({ staff: st, by: Object.fromEntries(projects.map((p) => {

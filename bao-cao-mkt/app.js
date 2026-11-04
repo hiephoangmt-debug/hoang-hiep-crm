@@ -421,6 +421,40 @@
       const pj = review.projects.find((p) => group[j] && group[j].includes(norm(p.key)));
       return k && pj ? [pj.key, k[1]] : null;
     });
+    // báo cáo một dự án: bỏ cột Lead/MQL/SQL/Deal của dự án khác (vd báo cáo Casa không có cột Sun), giữ nguyên bề rộng bảng
+    if (review.only) {
+      const cut = colKey.map((ck, j) => (ck && ck[0] !== review.only ? j : -1)).filter((j) => j >= 0);
+      if (cut.length && cut.length < colKey.filter(Boolean).length) {
+        const grid = byTag(tbl, "a:gridCol");
+        const W0 = grid.reduce((a, g) => a + +g.getAttribute("w"), 0);
+        cut.slice().reverse().forEach((j) => {
+          byTag(tbl, "a:tr").forEach((tr) => {
+            const tcs = byTag(tr, "a:tc"), tc = tcs[j];
+            if (!tc) return;
+            const span = +(tc.getAttribute("gridSpan") || 1);
+            if (tc.getAttribute("hMerge")) {
+              // ô bị gộp: giảm gridSpan của ô gốc bên trái
+              for (let k = j - 1; k >= 0; k--) if (!tcs[k].getAttribute("hMerge")) {
+                const g = +(tcs[k].getAttribute("gridSpan") || 1) - 1;
+                if (g > 1) tcs[k].setAttribute("gridSpan", String(g)); else tcs[k].removeAttribute("gridSpan");
+                break;
+              }
+            } else if (span > 1 && tcs[j + 1]) {
+              // ô gốc của khối gộp: chuyển nội dung sang ô kế tiếp
+              const nx = tc.cloneNode(true);
+              if (span - 1 > 1) nx.setAttribute("gridSpan", String(span - 1)); else nx.removeAttribute("gridSpan");
+              tr.replaceChild(nx, tcs[j + 1]);
+            }
+            tr.removeChild(tc);
+          });
+          grid[j].parentNode.removeChild(grid[j]);
+        });
+        const g2 = byTag(tbl, "a:gridCol"), W1 = g2.reduce((a, g) => a + +g.getAttribute("w"), 0);
+        g2.forEach((g) => g.setAttribute("w", String(Math.round(+g.getAttribute("w") * W0 / W1))));
+        for (let k = cut.length - 1; k >= 0; k--) { colKey.splice(cut[k], 1); }
+        trs.splice(0, trs.length, ...byTag(tbl, "a:tr"));
+      }
+    }
     let rows = trs.slice(mi + 1);
     const totalRow = rows.length > 1 && /^tong/.test(txt(rows[rows.length - 1]).join(" ").trim()) ? rows.pop() : null;
     const n = Math.max(1, review.rows.length);
