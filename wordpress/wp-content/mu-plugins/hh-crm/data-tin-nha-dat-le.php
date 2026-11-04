@@ -10,13 +10,13 @@ defined( 'ABSPATH' ) || exit;
 function hh_single_listing_dataset() {
 	$list   = array();
 	$list[] = array(
-		'rev'     => 2, // Tăng số này khi sửa nội dung → tin đã đăng (chưa sửa tay) tự cập nhật.
+		'rev'     => 3, // Tăng số này khi sửa nội dung → tin đã đăng (chưa sửa tay) tự cập nhật. 3: ảnh khổ 4:3.
 			'slug'    => 'chuyen-nhuong-dat-thuong-mai-dich-vu-mat-tien-hoang-van-thai-2404-m2',
 		'title'   => 'Chuyển nhượng 2.404 m² đất thương mại dịch vụ mặt tiền 42 m đường Hoàng Văn Thái, Đà Nẵng',
 		'excerpt' => 'Khu đất TMDV 2.404,4 m² mặt tiền khoảng 42 m đường Hoàng Văn Thái (~35 m); thuê đất trả tiền một lần đến 20/01/2066; nhà 4 tầng và sân bê tông; giá 50 tỷ gồm VAT.',
 		'kind'    => 'mat-bang-kinh-doanh',
 		'area'    => 'lien-chieu',
-		'image'   => 'img/nha-dat/chuyen-nhuong-dat-tmdv-mat-tien-hoang-van-thai.jpg',
+		'image'   => 'img/nha-dat/chuyen-nhuong-dat-tmdv-mat-tien-hoang-van-thai-4x3.jpg', // Khổ 4:3: thẻ tin không cắt mất chữ.
 		'alt'     => 'Sơ đồ khu đất thương mại dịch vụ 2.404,4 m² mặt tiền 42 m đường Hoàng Văn Thái, Đà Nẵng',
 		'meta'    => array(
 			'hh_deal'        => 'ban',
@@ -52,13 +52,13 @@ function hh_single_listing_dataset() {
 	);
 	// 01/11/2026 – lô đất 4 mặt tiền Hoàng Sa – Hồ Học Lãm (Thọ Quang, Sơn Trà). Không ghi số tờ / thửa, tên chủ đất.
 	$list[] = array(
-		'rev'     => 3, // 01/11: phối cảnh 3D nhúng ngay trong trang tin (hh_3d_url).
+		'rev'     => 4, // 01/11: phối cảnh 3D nhúng ngay trong trang tin (hh_3d_url). 04/11: ảnh khổ 4:3.
 		'slug'    => 'ban-dat-4-mat-tien-hoang-sa-son-tra-583-m2-giay-phep-khach-san',
 		'title'   => 'Bán lô đất 4 mặt tiền đường biển Hoàng Sa, Sơn Trà – 583,6 m², ngang 27,6 m, kèm giấy phép khách sạn 22 tầng',
 		'excerpt' => 'Lô đất 4 mặt tiền góc Hoàng Sa – Hồ Học Lãm (Thọ Quang, Sơn Trà), view trực diện biển, 583,6 m², ngang 27,6 m. Tặng kèm giấy phép xây dựng và thiết kế khách sạn 5 sao 22 tầng, 94 phòng. Giá 190 tỷ, thương lượng.',
 		'kind'    => 'dat-nen',
 		'area'    => 'son-tra',
-		'image'   => 'img/nha-dat/lo-dat-4-mat-tien-hoang-sa-son-tra.jpg',
+		'image'   => 'img/nha-dat/lo-dat-4-mat-tien-hoang-sa-son-tra-4x3.jpg', // Khổ 4:3: thẻ tin không cắt mất chữ.
 		'alt'     => 'Sơ đồ vị trí lô đất 4 mặt tiền 583,6 m² góc đường Hoàng Sa – Hồ Học Lãm, Sơn Trà, Đà Nẵng, view biển',
 		'meta'    => array(
 			'hh_deal'        => 'ban',
@@ -107,13 +107,13 @@ function hh_single_listing_dataset() {
 	);
 	// 04/11/2026 – cặp đất view biển đường Hoàng Sa 224 m². Không ghi ký hiệu lô (gửi khi khách liên hệ).
 	$list[] = array(
-		'rev'     => 1,
+		'rev'     => 2, // 04/11: ảnh khổ 4:3.
 		'slug'    => 'ban-cap-dat-view-bien-duong-hoang-sa-son-tra-224-m2',
 		'title'   => 'Bán cặp đất view biển đường Hoàng Sa, Sơn Trà – 224 m², 420 triệu/m²',
 		'excerpt' => 'Cặp đất liền kề mặt tiền đường biển Hoàng Sa (Sơn Trà, Đà Nẵng), view trực diện biển, tổng 224 m². Giá 420 triệu/m² (khoảng 94,08 tỷ), thương lượng.',
 		'kind'    => 'dat-nen',
 		'area'    => 'son-tra',
-		'image'   => 'img/nha-dat/cap-dat-view-bien-hoang-sa-224-m2.jpg',
+		'image'   => 'img/nha-dat/cap-dat-view-bien-hoang-sa-224-m2-4x3.jpg', // Khổ 4:3: thẻ tin không cắt mất chữ.
 		'alt'     => 'Cặp đất view biển đường Hoàng Sa, Sơn Trà, Đà Nẵng – 224 m², giá 420 triệu/m²',
 		'meta'    => array(
 			'hh_deal'        => 'ban',
@@ -154,6 +154,28 @@ function hh_single_listing_dataset() {
 	return apply_filters( 'hh_single_listing_dataset', $list );
 }
 
+/**
+ * Thay ảnh đại diện tin khi dữ liệu đổi ảnh (VD bản khổ 4:3). Chỉ thay ảnh do web tự gắn (tên file ảnh hiện tại
+ * cùng gốc với ảnh mới); ảnh anh tự chọn giữ nguyên.
+ */
+function hh_listing_swap_image( $id, $l ) {
+	$new = (string) ( $l['image'] ?? '' );
+	$cur = (string) get_post_meta( $id, '_hh_listing_img', true );
+	$file = HH_CRM_DIR . $new;
+	if ( '' === $new || $cur === $new || ! is_file( $file ) || ! function_exists( 'hh_quick_post_image' ) ) {
+		return;
+	}
+	$thumb = (int) get_post_thumbnail_id( $id );
+	$stem  = preg_replace( '/-4x3$/', '', pathinfo( $new, PATHINFO_FILENAME ) );
+	$tfile = $thumb ? pathinfo( (string) get_attached_file( $thumb ), PATHINFO_FILENAME ) : '';
+	if ( $thumb && 0 !== strpos( $tfile, $stem ) ) {
+		return; // Ảnh do anh tự đổi (tên file khác ảnh web gắn).
+	}
+	if ( hh_quick_post_image( $id, array( 'name' => pathinfo( $file, PATHINFO_FILENAME ), 'alt' => $l['alt'] ?? '', 'caption' => '', 'data' => base64_encode( file_get_contents( $file ) ) ) ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions
+		update_post_meta( $id, '_hh_listing_img', $new );
+	}
+}
+
 /** Tạo tin chưa có (theo đường dẫn); tin đã có chỉ cập nhật khi tăng 'rev' và tin chưa bị sửa tay. Trả về số tin tạo mới. */
 function hh_import_single_listings() {
 	$created = 0;
@@ -168,6 +190,7 @@ function hh_import_single_listings() {
 				}
 				update_post_meta( $old->ID, '_hh_news_hash', md5( get_post_field( 'post_content', $old->ID ) ) );
 				update_post_meta( $old->ID, '_hh_listing_rev', $rev );
+				hh_listing_swap_image( $old->ID, $l );
 			}
 			continue;
 		}
@@ -200,6 +223,7 @@ function hh_import_single_listings() {
 		}
 		update_post_meta( $id, '_hh_news_hash', md5( get_post_field( 'post_content', $id ) ) );
 		update_post_meta( $id, '_hh_listing_rev', (int) ( $l['rev'] ?? 1 ) );
+		update_post_meta( $id, '_hh_listing_img', $l['image'] ?? '' );
 		++$created;
 	}
 	return $created;

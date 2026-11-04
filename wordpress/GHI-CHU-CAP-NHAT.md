@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.50** + plugin Hoàng Hiệp CRM **2.20.110**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.50** + plugin Hoàng Hiệp CRM **2.20.111**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.111: ảnh tin nhà đất khổ 4:3, thẻ tin không bị che chữ (04/11/2026)
+- 3 tin (đất TMDV Hoàng Văn Thái, lô 583,6 m² Hoàng Sa, cặp đất 224 m² Hoàng Sa): ảnh vẽ lại khổ 4:3, chữ nằm trong vùng an toàn – thẻ tin ở danh sách, trang chủ không còn cắt mất chữ, nhãn liên hệ.
+- Bấm "Nhập / cập nhật dữ liệu" → web tự thay ảnh đại diện các tin này (chỉ thay ảnh do web gắn; ảnh anh tự đổi giữ nguyên).
 
 ## Có gì mới – plugin 2.20.110: tin bán cặp đất view biển đường Hoàng Sa 224 m² (04/11/2026)
 - Tin mới (Nhà đất → Đất nền, Sơn Trà, tin HOT): cặp đất liền kề mặt tiền đường biển Hoàng Sa, 224 m², 420 triệu/m² (khoảng 94,08 tỷ), thương lượng. Ảnh tin tự vẽ; không ghi ký hiệu lô. Tin từ 30 tỷ nên không hiện bảng tính khoản vay.
