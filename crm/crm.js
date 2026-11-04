@@ -1469,11 +1469,12 @@
     return { parts };
   }
   /** Bảng "REVIEW KẾT QUẢ SÀN": Lead / MQL / SQL / Deal của từng nhân sự ở mọi dự án trong kỳ w. */
-  function reviewData(w) {
+  function reviewData(w, pjName) {
     const projects = S.DuAn.map((p) => ({ key: p.khoa || p.ten, name: p.ten }));
     const rows = monthFunnel(monthFirst(effective(S.SoLieu.filter((r) => weeksOfKey(w, r.duAn).includes(r.tuan)))), w);
     const order = staffNames();
-    const staff = Array.from(new Set(rows.map((r) => r.nhanSu).filter(Boolean)))
+    // chỉ nhân sự có số liệu ở dự án đang làm báo cáo (Sun ra người chạy Sun, Casa ra người chạy Casa)
+    const staff = Array.from(new Set(rows.filter((r) => !pjName || r.duAn === pjName).map((r) => r.nhanSu).filter(Boolean)))
       .sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99));
     return {
       projects, san: "COLLECTION",
@@ -1545,7 +1546,7 @@
       maxImageSide: 1600, // ảnh chụp màn hình thu nhỏ còn ~1600px: vẫn rõ chữ, file nhẹ hơn nhiều
       logo: pj.logo || "", logos: (window.BAO_CAO_MKT_CONFIG || {}).logos, logoMedia: window.TATI_LOGO_MEDIA,
       logoSizes: window.TATI_LOGO_SIZES, logoExtra: window.TATI_LOGO_EXTRA,
-      review: reviewData(w),
+      review: reviewData(w, pjName),
     });
     const tag = ky === "tuan" ? weekLabel(w).replace(/[\/ ]/g, "") : ky === "thang" ? `Thang${w.slice(5, 7)}-${w.slice(0, 4)}` : "ToanChienDich";
     const name = `Bao_cao_${pjName.replace(/\s+/g, "_")}_${tag}.pptx`;
