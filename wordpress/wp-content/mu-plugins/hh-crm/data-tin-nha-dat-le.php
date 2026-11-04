@@ -105,6 +105,52 @@ function hh_single_listing_dataset() {
 </ul>
 <p>Xem bảng giá đất mặt tiền các tuyến biển tại <a href="/thong-ke-dau-tu/">Thống kê đầu tư</a>. Khách có nhu cầu thực, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận hồ sơ, vị trí chính xác và đặt lịch xem đất.</p>',
 	);
+	// 04/11/2026 – cặp đất view biển đường Hoàng Sa 224 m². Không ghi ký hiệu lô (gửi khi khách liên hệ).
+	$list[] = array(
+		'rev'     => 1,
+		'slug'    => 'ban-cap-dat-view-bien-duong-hoang-sa-son-tra-224-m2',
+		'title'   => 'Bán cặp đất view biển đường Hoàng Sa, Sơn Trà – 224 m², 420 triệu/m²',
+		'excerpt' => 'Cặp đất liền kề mặt tiền đường biển Hoàng Sa (Sơn Trà, Đà Nẵng), view trực diện biển, tổng 224 m². Giá 420 triệu/m² (khoảng 94,08 tỷ), thương lượng.',
+		'kind'    => 'dat-nen',
+		'area'    => 'son-tra',
+		'image'   => 'img/nha-dat/cap-dat-view-bien-hoang-sa-224-m2.jpg',
+		'alt'     => 'Cặp đất view biển đường Hoàng Sa, Sơn Trà, Đà Nẵng – 224 m², giá 420 triệu/m²',
+		'meta'    => array(
+			'hh_deal'        => 'ban',
+			'hh_status'      => 'con-hang',
+			'hh_price'       => 94080,
+			'hh_negotiable'  => '1',
+			'hh_address'     => 'Mặt tiền đường Hoàng Sa, Sơn Trà, Đà Nẵng (vị trí cụ thể gửi khi liên hệ)',
+			'hh_map_address' => 'Đường Hoàng Sa, Sơn Trà, Đà Nẵng',
+			'hh_area'        => 224,
+			'hh_legal'       => '',
+			'hh_featured'    => '1',
+			'hh_features'    => "Cặp 2 lô liền kề, tổng 224 m² – gộp được mặt tiền rộng\nMặt tiền đường biển Hoàng Sa, view trực diện biển\nBên kia đường là bãi cát, hàng dừa ven biển\nPhù hợp xây khách sạn, căn hộ dịch vụ hoặc giữ tài sản\nGiá 420 triệu/m², còn thương lượng",
+			'hh_nearby'      => "Bãi biển Hoàng Sa – bên kia đường\nBán đảo Sơn Trà, chùa Linh Ứng – vài phút đi xe\nCầu Rồng, trung tâm Hải Châu – khoảng 10 – 15 phút",
+		),
+		'content' => '<p>Bán <strong>cặp đất view biển</strong> mặt tiền đường <strong>Hoàng Sa</strong>, Sơn Trà, Đà Nẵng – tổng diện tích <strong>224 m²</strong>, view trực diện biển, bên kia đường là bãi cát và hàng dừa. Giá <strong>420 triệu/m²</strong> (khoảng <strong>94,08 tỷ</strong> cho cả cặp), còn thương lượng.</p>
+<h2>Thông tin cặp đất</h2>
+<table>
+<tbody>
+<tr><th>Vị trí</th><td>Mặt tiền đường biển Hoàng Sa, Sơn Trà, Đà Nẵng</td></tr>
+<tr><th>Diện tích</th><td>224 m² (cặp 2 lô liền kề)</td></tr>
+<tr><th>Giá</th><td>420 triệu/m² – khoảng 94,08 tỷ, thương lượng</td></tr>
+<tr><th>View</th><td>Trực diện biển</td></tr>
+</tbody>
+</table>
+<h2>Vì sao cặp đất mặt biển Hoàng Sa đáng chú ý?</h2>
+<ul>
+<li><strong>Mặt tiền gộp rộng</strong>: hai lô liền kề cho phép thiết kế khách sạn, căn hộ dịch vụ có mặt đứng lớn hướng biển – điều một lô đơn khó làm.</li>
+<li><strong>Trục biển Sơn Trà</strong>: đường Hoàng Sa nối tiếp Võ Nguyên Giáp về phía bán đảo Sơn Trà, khu khách du lịch đông, nhiều khách sạn ven biển.</li>
+<li><strong>Quỹ đất mặt biển ngày càng hiếm</strong>: lô trống mặt tiền đường biển còn rất ít để xây mới.</li>
+</ul>
+<h2>Lưu ý khi tìm hiểu</h2>
+<ul>
+<li>Diện tích, ký hiệu lô và pháp lý theo thông tin chủ đất; khách được xem giấy tờ và kiểm tra tại cơ quan chức năng trước khi đặt cọc.</li>
+<li>Nên kiểm tra quy hoạch chi tiết, chỉ tiêu xây dựng (tầng cao, mật độ) nếu dự định xây khách sạn.</li>
+</ul>
+<p>Xem bảng giá đất mặt tiền các tuyến biển tại <a href="/thong-ke-dau-tu/">Thống kê đầu tư</a>. Khách có nhu cầu thực, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận vị trí, giấy tờ và đặt lịch xem đất.</p>',
+	);
 	return apply_filters( 'hh_single_listing_dataset', $list );
 }
 
