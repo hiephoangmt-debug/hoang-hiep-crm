@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.53** + plugin Hoàng Hiệp CRM **2.20.122**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.53** + plugin Hoàng Hiệp CRM **2.20.123**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.123 (04/11/2026)
+
+- **Dự án mới: Meta City Tam Kỳ** (Him Lam Meta City, 76,19 ha, 1.753 sản phẩm; GĐ1 712 sản phẩm – 479 đất nền, 233 nhà phố thương mại; ra thị trường dự kiến Q1/2027). Trang có giá dự kiến GĐ1 (đất nền 102 – 105 m² 2,32 – 3,1 tỷ/lô; nhà phố xây thô 3,5 tầng 5,1 – 5,51 tỷ/căn), vị trí – kết nối, 3 cụm cảnh quan, FAQ và 18 ảnh: phối cảnh, nhà phố, tiện ích, quy hoạch 1/500 (đã cắt khung tên, con dấu, chữ ký).
+- **Khu vực mới "Tam Kỳ"** (tự tạo khi cài). Ảnh tải tối đa 15 ảnh mỗi lượt – bấm **Nhập / cập nhật dữ liệu** 2 lần cho đủ 18 ảnh.
 
 ## Có gì mới – giao diện 2.15.53 (04/11/2026)
 

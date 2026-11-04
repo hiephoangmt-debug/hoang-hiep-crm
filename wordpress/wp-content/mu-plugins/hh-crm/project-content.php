@@ -67,6 +67,11 @@ function hh_area_profiles() {
 			'links' => array( array( '10 – 20 phút', 'Sân bay Chu Lai' ), array( 'Khoảng 30 phút', 'Trung tâm Tam Kỳ' ), array( 'Khoảng 1 giờ', 'Phố cổ Hội An' ), array( 'Khoảng 1,5 giờ (85 km)', 'Trung tâm Đà Nẵng' ) ),
 			'near'  => array( 'Khu kinh tế mở Chu Lai', 'Sân bay Chu Lai', 'Sông Trường Giang, biển Tam Hải' ),
 		),
+		'tam-ky'       => array(
+			'desc'  => 'Tam Kỳ (Quảng Nam cũ, nay thuộc Đà Nẵng) là đô thị trung tâm phía Nam, có Quảng trường 24/3, Bệnh viện Đa khoa Quảng Nam, các KCN Tam Thăng – Thuận Yên và biển Tam Thanh.',
+			'links' => array( array( 'Khoảng 15 phút', 'Biển Tam Thanh' ), array( 'Khoảng 30 phút', 'Sân bay Chu Lai' ), array( 'Khoảng 1 giờ', 'Phố cổ Hội An' ), array( 'Khoảng 1,5 giờ', 'Trung tâm Đà Nẵng' ) ),
+			'near'  => array( 'Quảng trường 24/3, trung tâm Tam Kỳ', 'KCN Tam Thăng, KCN Thuận Yên', 'Biển Tam Thanh, đường ven biển Võ Chí Công' ),
+		),
 	);
 }
 

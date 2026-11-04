@@ -152,13 +152,14 @@ function hh_default_terms() {
 			'dien-ban'      => array( 'Điện Bàn', array() ),
 			'duy-xuyen'     => array( 'Duy Xuyên', array() ),
 			'nui-thanh'     => array( 'Núi Thành', array() ),
+			'tam-ky'        => array( 'Tam Kỳ', array() ),
 		),
 	);
 }
 
 add_action( 'init', 'hh_seed_terms', 20 );
 function hh_seed_terms() {
-	if ( wp_installing() || '9' === get_option( 'hh_terms_seeded' ) ) {
+	if ( wp_installing() || '10' === get_option( 'hh_terms_seeded' ) ) {
 		return;
 	}
 	// Đổi tên cũ "Shophouse" → "Nhà phố – Shophouse".
@@ -189,7 +190,7 @@ function hh_seed_terms() {
 			}
 		}
 	}
-	update_option( 'hh_terms_seeded', '9' );
+	update_option( 'hh_terms_seeded', '10' );
 }
 
 /**
@@ -221,7 +222,7 @@ function hh_villa_split() {
 add_action(
 	'init',
 	static function () {
-		if ( in_array( get_option( 'hh_terms_seeded' ), array( '8', '9' ), true ) && ! get_option( 'hh_villa_split' ) ) {
+		if ( in_array( get_option( 'hh_terms_seeded' ), array( '8', '9', '10' ), true ) && ! get_option( 'hh_villa_split' ) ) {
 			hh_villa_split();
 		}
 	},
