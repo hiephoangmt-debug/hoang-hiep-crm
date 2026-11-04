@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.52** + plugin Hoàng Hiệp CRM **2.20.120**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.52** + plugin Hoàng Hiệp CRM **2.20.121**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.121 (04/11/2026)
+
+- **Mặt bằng penthouse lên web (13 bản vẽ chủ đầu tư):** Spana 6 tab (S1, S2 – tầng 22 penthouse, duplex tầng chính, duplex tầng lửng), Cora 6 tab (A1, A2 – tầng 25 penthouse, duplex tầng chính, tầng lửng), S-Light 1 tab (tầng 22 SL1, SL2). Bản A0 trên Drive nặng 18 – 25 MB nên web tải qua link ảnh thu nhỏ của Drive (rộng 2400 px). Bấm **Nhập / cập nhật dữ liệu** để tải; nếu báo lỗi "không tải được" thì thư mục Drive chưa mở chia sẻ "Bất kỳ ai có đường liên kết".
+- Cora, S-Light: ảnh chỉ tự điền khi ô "Link ảnh" của dự án đang trống.
 
 ## Có gì mới – plugin 2.20.120 (04/11/2026)
 

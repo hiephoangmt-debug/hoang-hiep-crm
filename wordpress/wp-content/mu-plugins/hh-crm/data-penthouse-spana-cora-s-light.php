@@ -109,3 +109,49 @@ HTML,
 	);
 	return $posts;
 }
+
+// Mặt bằng penthouse (bản vẽ chủ đầu tư A0 trên Drive, 18 – 25 MB): dùng link ảnh thu nhỏ của Drive (rộng 2400 px)
+// để web tải được (web chỉ nhận ảnh dưới 15 MB). Nối thêm vào danh sách ảnh hiện có của từng dự án.
+add_filter(
+	'hh_project_dataset',
+	static function ( $projects ) {
+		$th   = static fn( $id, $alt, $title ) => "https://drive.google.com/thumbnail?id=$id&sz=w2400 | $alt (bản vẽ chủ đầu tư, tham khảo) | mặt bằng | $title";
+		$add  = array(
+			'spana-tower'   => array(
+				$th( '1qPj0247yqcTbqWJJzAApyt4GUx_thdC6', 'Mặt bằng tầng 22 penthouse tòa S1 Spana Tower', 'S1 – Tầng 22 penthouse' ),
+				$th( '13uXwUJELljXRJ5rXiX8NafJkYqGLiCPp', 'Gợi ý duplex penthouse tầng 22 tòa S1 Spana Tower – tầng chính', 'S1 – Penthouse duplex (tầng chính)' ),
+				$th( '11OpvLwoMa5K2aVsSPTPdEsWPP8RT7N2h', 'Gợi ý duplex penthouse tầng 22 tòa S1 Spana Tower – tầng lửng', 'S1 – Penthouse duplex (tầng lửng)' ),
+				$th( '1mvKILKKt-adN4eF2qleZgh5viCkBENkV', 'Mặt bằng tầng 22 penthouse tòa S2 Spana Tower', 'S2 – Tầng 22 penthouse' ),
+				$th( '1zPlfUs3Bk_Oi6SCJf3r1SoSYDapKltHw', 'Gợi ý duplex penthouse tầng 22 tòa S2 Spana Tower – tầng chính', 'S2 – Penthouse duplex (tầng chính)' ),
+				$th( '1KErVLcN7UGT-ZvxGYDPDMc4PUbKy8tsE', 'Gợi ý duplex penthouse tầng 22 tòa S2 Spana Tower – tầng lửng', 'S2 – Penthouse duplex (tầng lửng)' ),
+			),
+			'cora-tower'    => array(
+				$th( '1DeZ_Zj9gp4LwldG-D97NEifbYqsouZJr', 'Mặt bằng tầng 25 penthouse tòa A1 Cora Tower', 'A1 – Tầng 25 penthouse' ),
+				$th( '1MHwHaNY9eY-QrZM33JxWpPYS6QysYAMB', 'Gợi ý duplex penthouse tầng 25 tòa A1 Cora Tower – tầng chính', 'A1 – Penthouse duplex (tầng chính)' ),
+				$th( '1TsE0z3Lhnr-hvP3f0wLyfpJr_03U7c2z', 'Gợi ý duplex penthouse tầng 25 tòa A1 Cora Tower – tầng lửng', 'A1 – Penthouse duplex (tầng lửng)' ),
+				$th( '18QrJj4Yg7I5J9f73O1gfmkxZJklUtXjY', 'Mặt bằng tầng 25 penthouse tòa A2 Cora Tower', 'A2 – Tầng 25 penthouse' ),
+				$th( '1ssew8F9oc0R39HMtEOAy6kzVATW9G7mB', 'Gợi ý duplex penthouse tầng 25 tòa A2 Cora Tower – tầng chính', 'A2 – Penthouse duplex (tầng chính)' ),
+				$th( '1NP04DODlPP10hu3oL6fDHVfc__XSrWGB', 'Gợi ý duplex penthouse tầng 25 tòa A2 Cora Tower – tầng lửng', 'A2 – Penthouse duplex (tầng lửng)' ),
+			),
+			's-light-tower' => array(
+				$th( '1Uh4cy2bMQRx3PmVLFqAGJVvIcppD-0li', 'Mặt bằng tầng 22 penthouse tòa SL1, SL2 S-Light Tower – view sông Hàn, Cẩm Lệ, Đô Tỏa', 'Tầng 22 penthouse (SL1, SL2)' ),
+			),
+		);
+		foreach ( $projects as $i => $p ) {
+			$slug = $p['slug'] ?? '';
+			if ( empty( $add[ $slug ] ) ) {
+				continue;
+			}
+			$cur = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+			if ( false !== strpos( $cur, 'drive.google.com/thumbnail' ) ) {
+				continue;
+			}
+			$projects[ $i ]['meta']['hh_p_image_links'] = trim( $cur . "\n" . implode( "\n", $add[ $slug ] ) );
+			if ( '' !== $cur ) {
+				$projects[ $i ]['fix_meta']['hh_p_image_links'] = array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $cur ) );
+			}
+		}
+		return $projects;
+	},
+	66 // Sau ảnh shophouse Spana (65).
+);
