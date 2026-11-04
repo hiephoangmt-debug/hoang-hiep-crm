@@ -38,18 +38,19 @@ d = ImageDraw.Draw(im, 'RGBA')
 I = '/usr/share/fonts/opentype/inter/'
 f = lambda n, s: ImageFont.truetype(I + n, s)
 GOLD, CREAM, MUTED = (214, 176, 108), (246, 241, 232), (196, 192, 186)
-x0 = 110
+# Vùng chữ an toàn cho điện thoại (cắt ~150 px mỗi bên) và tránh ảnh đại diện tròn ở giữa dưới (x 540–1100, y ≥ 500).
+x0 = 205
 def spaced(t, xy, font, fill, sp):
     x, y = xy
     for ch in t:
         d.text((x, y), ch, font=font, fill=fill)
         x += d.textlength(ch, font=font) + sp
-d.line([(x0, 176), (x0 + 46, 176)], fill=GOLD, width=3)
-spaced('BẤT ĐỘNG SẢN ĐÀ NẴNG', (x0 + 62, 162), f('Inter-SemiBold.otf', 26), GOLD, 5)
-d.text((x0 - 4, 205), 'Hoàng Hiệp', font=f('InterDisplay-SemiBold.otf', 118), fill=CREAM)
-d.text((x0, 360), 'Tư vấn mua bán · chuyển nhượng · cho thuê', font=f('Inter-Light.otf', 33), fill=CREAM)
-d.text((x0, 408), 'Căn hộ, nhà phố, đất nền, biệt thự tại Đà Nẵng', font=f('Inter-Light.otf', 29), fill=MUTED)
-d.rounded_rectangle([x0, 478, x0 + 392, 540], radius=31, fill=GOLD)
-d.text((x0 + 34, 490), 'Zalo  0904 567 009', font=f('Inter-SemiBold.otf', 31), fill=(30, 28, 32))
-d.text((x0, 568), 'hiephoangmt.com', font=f('Inter-Medium.otf', 27), fill=MUTED)
+d.line([(x0, 168), (x0 + 40, 168)], fill=GOLD, width=3)
+spaced('BẤT ĐỘNG SẢN ĐÀ NẴNG', (x0 + 54, 155), f('Inter-SemiBold.otf', 24), GOLD, 4)
+d.text((x0 - 4, 190), 'Hoàng Hiệp', font=f('InterDisplay-SemiBold.otf', 104), fill=CREAM)
+d.text((x0, 328), 'Mua bán · chuyển nhượng · cho thuê', font=f('Inter-Light.otf', 31), fill=CREAM)
+d.text((x0, 372), 'Căn hộ, nhà phố, đất nền, biệt thự', font=f('Inter-Light.otf', 28), fill=MUTED)
+d.rounded_rectangle([x0, 432, x0 + 330, 488], radius=28, fill=GOLD)
+d.text((x0 + 28, 442), 'Zalo  0904 567 009', font=f('Inter-SemiBold.otf', 27), fill=(30, 28, 32))
+d.text((x0, 512), 'hiephoangmt.com', font=f('Inter-Medium.otf', 25), fill=MUTED)
 im.save(OUT, quality=93, optimize=True, progressive=True)
