@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Dự án 3D Đà Nẵng – Hoàng Hiệp</title>
+<meta name="description" content="Xem phối cảnh 3D các dự án và lô đất Đà Nẵng – Hội An: bấm vào là bay tới, xoay, phóng to, ngày/đêm." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg: #f4f1ea; --fg: #1d2430; --muted: #5d6675; --card: #ffffff; --line: #e4ded2; --accent: #c8901f; --red: #d9361f; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #0d1420; --fg: #eef2ff; --muted: #a3adbd; --card: #152033; --line: #24324a; } }
+  :root[data-theme="dark"] { --bg: #0d1420; --fg: #eef2ff; --muted: #a3adbd; --card: #152033; --line: #24324a; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: Inter, system-ui, sans-serif; }
+  header { padding: max(20px, env(safe-area-inset-top)) 16px 8px; max-width: 1080px; margin: 0 auto; }
+  header h1 { margin: 0; font-size: clamp(22px, 5vw, 32px); font-weight: 800; }
+  header p { margin: 6px 0 0; color: var(--muted); font-size: 14.5px; }
+  .grid { max-width: 1080px; margin: 0 auto; padding: 12px 16px 32px; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
+  a.card { display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; transition: transform .15s, box-shadow .15s; }
+  a.card:hover { transform: translateY(-2px); box-shadow: 0 10px 28px #0002; }
+  .thumb { height: 150px; position: relative; display: grid; place-items: center; font-size: 46px; color: #fff; }
+  .thumb .tag { position: absolute; left: 10px; top: 10px; background: #000a; color: #fff; font: 700 11px Inter; padding: 4px 8px; border-radius: 999px; }
+  .thumb .tag.hot { background: var(--red); }
+  .body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .body h2 { margin: 0; font-size: 16.5px; line-height: 1.3; }
+  .body p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.45; flex: 1; }
+  .meta { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
+  .price { font-weight: 800; color: var(--accent); font-size: 17px; }
+  .go { font: 700 13px Inter; color: var(--red); }
+  footer { max-width: 1080px; margin: 0 auto; padding: 0 16px max(24px, env(safe-area-inset-bottom)); color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Dự án 3D Đà Nẵng – Hội An</h1>
+  <p>Bấm vào từng dự án để xem phối cảnh 3D: kéo để xoay, chụm để phóng, xem ngày/đêm, view ra biển.</p>
+</header>
+<main class="grid">
+  <a class="card" href="../lo-dat-hoang-sa/">
+    <div class="thumb" style="background:linear-gradient(135deg,#1b5a78,#4aa3c7)"><span class="tag hot">BÁN · ĐỘC QUYỀN</span>🏨</div>
+    <div class="body"><h2>Lô đất 4 mặt tiền Võ Nguyên Giáp – Hoàng Sa</h2>
+      <p>583,6 m², ngang 27,6 m, view trực diện biển. Tặng GPXD + thiết kế khách sạn 5★ 22 tầng, 94 phòng.</p>
+      <div class="meta"><span class="price">190 tỷ</span><span class="go">Xem 3D →</span></div></div>
+  </a>
+  <a class="card" href="../da-nang-3d/?go=casamia">
+    <div class="thumb" style="background:linear-gradient(135deg,#b8841f,#e5b84a)"><span class="tag">HỘI AN</span>🏡</div>
+    <div class="body"><h2>Casamia Balanca Hội An</h2>
+      <p>Mặt bằng 363 lô đúng vị trí: Park Home, biệt thự ven kênh La Riva, khách sạn Đảo Dừa, đại lộ La Duna, nhạc nước. Chạm từng căn để xem mặt bằng.</p>
+      <div class="meta"><span class="price">Đạt Phương</span><span class="go">Xem 3D →</span></div></div>
+  </a>
+  <a class="card" href="../biet-thu-bt/">
+    <div class="thumb" style="background:linear-gradient(135deg,#2c6e6a,#5fb39a)"><span class="tag">CASAMIA</span>🛥</div>
+    <div class="body"><h2>Dãy biệt thự BT ven kênh – phối cảnh chi tiết</h2>
+      <p>Mẫu BT1/BT1A, 2 tầng & 3 tầng: mặt tiền, mặt sau hồ bơi riêng, cầu tàu, du thuyền, ngày/đêm.</p>
+      <div class="meta"><span class="price">Lô 10 × 25 m</span><span class="go">Xem 3D →</span></div></div>
+  </a>
+  <a class="card" href="../da-nang-3d/?go=hvb">
+    <div class="thumb" style="background:linear-gradient(135deg,#2f6f9f,#78b5e0)"><span class="tag">LIÊN CHIỂU</span>🏗</div>
+    <div class="body"><h2>Vinhomes Hải Vân Bay (mô phỏng hoàn thiện)</h2>
+      <p>Chân đèo Hải Vân, 4 phân khu Châu Âu – Châu Á – Nhật Bản – Monaco.</p>
+      <div class="meta"><span class="price">Vinhomes</span><span class="go">Xem 3D →</span></div></div>
+  </a>
+  <a class="card" href="../da-nang-3d/?go=hoian">
+    <div class="thumb" style="background:linear-gradient(135deg,#a8432f,#e08a3a)"><span class="tag">DI SẢN</span>🏮</div>
+    <div class="body"><h2>Phố cổ Hội An</h2>
+      <p>Phố cổ tường vàng mái ngói, đèn lồng, Chùa Cầu, sông Thu Bồn, biển An Bàng – Cửa Đại.</p>
+      <div class="meta"><span class="price">Hội An</span><span class="go">Xem 3D →</span></div></div>
+  </a>
+  <a class="card" href="../da-nang-3d/">
+    <div class="thumb" style="background:linear-gradient(135deg,#1d2a4a,#4b5d8f)"><span class="tag">TOÀN CẢNH</span>🌉</div>
+    <div class="body"><h2>Đà Nẵng 3D – toàn thành phố</h2>
+      <p>82.000 toà nhà thật, cầu Rồng, Trần Thị Lý, Thuận Phước, sông Hàn, Sơn Trà, Hải Vân. Kéo giờ ngày ↔ đêm.</p>
+      <div class="meta"><span class="price">Bản đồ 3D</span><span class="go">Xem 3D →</span></div></div>
+  </a>
+</main>
+<footer>Hình 3D minh hoạ dựng từ dữ liệu bản đồ (© OpenStreetMap contributors) và mặt bằng dự án; công trình là khối mô phỏng, không phải bản vẽ chính thức. Bản đồ 3D toàn thành phố khá nặng, nên mở bằng Wi-Fi.</footer>
+</body>
+</html>
