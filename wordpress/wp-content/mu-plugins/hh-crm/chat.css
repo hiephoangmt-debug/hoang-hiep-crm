@@ -37,10 +37,10 @@
 .hhc__chips:not(:empty) { padding-bottom: 10px; }
 .hhc__chip { padding: 6px 12px; border: 1px solid var(--hhc-cta); border-radius: 999px; background: #fff; color: var(--hhc-cta); font: inherit; font-size: .8rem; font-weight: 600; cursor: pointer; }
 .hhc__chip:hover { background: var(--hhc-cta); color: #fff; }
-.hhc__form { display: flex; gap: 8px; padding: 10px; border-top: 1px solid var(--hhc-line); background: #fff; }
-.hhc__form input { flex: 1; min-width: 0; padding: 10px 12px; border: 1px solid var(--hhc-line); border-radius: 999px; font: inherit; font-size: 16px; color: var(--hhc-ink); }
+.hhc__form { display: flex; align-items: center; gap: 8px; flex: none; padding: 10px; border-top: 1px solid var(--hhc-line); background: #fff; }
+.hhc__form input { flex: 1 1 auto; width: auto; min-width: 0; padding: 10px 12px; border: 1px solid var(--hhc-line); border-radius: 999px; font: inherit; font-size: 16px; color: var(--hhc-ink); }
 .hhc__form input:focus { outline: 2px solid var(--hhc-gold); border-color: transparent; }
-.hhc__form button { width: 42px; border: 0; border-radius: 50%; background: var(--hhc-cta); color: #fff; font-size: 1rem; cursor: pointer; }
+.hhc__form button { flex: 0 0 44px; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: var(--hhc-cta); color: #fff; font-size: 1rem; cursor: pointer; }
 .hhc__foot { margin: 0; padding: 0 12px 10px; background: #fff; font-size: .76rem; color: #7a869a; text-align: center; }
 .hhc__foot a { color: var(--hhc-navy); font-weight: 700; }
 @media (prefers-reduced-motion: reduce) { .hhc__typing i { animation: none; } }

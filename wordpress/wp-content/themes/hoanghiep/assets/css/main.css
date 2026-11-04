@@ -67,6 +67,8 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+/* Không cho trang trượt ngang trên điện thoại (một khối tràn mép làm lệch cả trang, đẩy nút Gửi của chat ra ngoài). */
+html, body { overflow-x: clip; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 60px); }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
 

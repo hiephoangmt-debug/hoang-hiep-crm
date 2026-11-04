@@ -51,7 +51,7 @@
 			'</header>' +
 			'<div class="hhc__log" aria-live="polite"></div>' +
 			'<div class="hhc__chips"></div>' +
-			'<form class="hhc__form"><input type="text" name="m" autocomplete="off" maxlength="800" placeholder="' + esc( T.placeholder || 'Nhập câu hỏi hoặc số Zalo…' ) + '" aria-label="Tin nhắn"><button type="submit" aria-label="Gửi">➤</button></form>' +
+			'<form class="hhc__form"><input type="text" name="m" autocomplete="off" maxlength="800" placeholder="' + esc( T.placeholder || 'Nhập câu hỏi hoặc số Zalo…' ) + '" aria-label="Tin nhắn"><button type="submit" aria-label="Gửi"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M3.4 20.4 21 12 3.4 3.6l-.01 6.53L15 12 3.39 13.87z"/></svg></button></form>' +
 			'<p class="hhc__foot">' + esc( T.call || 'Hoặc gọi/Zalo' ) + ' <a href="' + esc( C.zalo ) + '" target="_blank" rel="noopener">' + esc( C.phone ) + '</a></p>' +
 		'</section>';
 	document.body.appendChild( root );
@@ -125,12 +125,33 @@
 			pendingNudge = null;
 		}
 		renderChips();
+		fit();
 		setTimeout( function () { input.focus(); }, 50 );
 		try { sessionStorage.setItem( 'hh_chat_seen', '1' ); } catch ( e ) {}
 	}
 	function close() {
 		panel.hidden = true;
 		root.classList.remove( 'is-open' );
+		fit();
+	}
+	// Điện thoại: bàn phím bật lên hoặc trang bị trượt ngang thì khung chat bám theo phần màn hình đang thấy, nút Gửi không bị đẩy ra ngoài.
+	var vv = window.visualViewport;
+	function fit() {
+		if ( panel.hidden || ! vv || window.innerWidth > 700 ) {
+			panel.style.left = panel.style.right = panel.style.top = panel.style.bottom = panel.style.width = panel.style.height = '';
+			return;
+		}
+		var h = Math.min( vv.height - 16, Math.max( 320, Math.min( window.innerHeight * 0.75, window.innerHeight - 90 ) ) );
+		panel.style.left = Math.round( vv.offsetLeft + 8 ) + 'px';
+		panel.style.width = Math.round( vv.width - 16 ) + 'px';
+		panel.style.right = 'auto';
+		panel.style.bottom = 'auto';
+		panel.style.height = Math.round( h ) + 'px';
+		panel.style.top = Math.round( vv.offsetTop + vv.height - 8 - h ) + 'px';
+	}
+	if ( vv ) {
+		vv.addEventListener( 'resize', fit );
+		vv.addEventListener( 'scroll', fit );
 	}
 	function send( text ) {
 		text = ( text || '' ).trim();
