@@ -71,17 +71,18 @@ def price_table():
         '<p class="src">Giá chào bán tham khảo trình bày tại Kick-off 23/10/2026; không phải giá Sun Saphia Residence.</p>'
 
 RENT_MONTH = [
-    ('Sam Tower', '–', '15 tr', '23 tr', '–'),
-    ('Hilton', '–', '–', '35 tr', '–'),
-    ('Filmore', '–', '27 tr', '45 tr', '–'),
-    ('Hiyori', '–', '–', '25 tr', '–'),
-    ('Mornachy', '–', '14 tr', '20 tr', '35 tr'),
-    ('Panoma', '18–20 tr', '24 tr', '35 tr', '–'),
+    ('<b>Sun Ponte</b><br><small>Sun Group · thực tế 11/2026</small>', '12–17&nbsp;tr', '18–27&nbsp;tr', '25–50&nbsp;tr', '~48&nbsp;tr'),
+    ('Sam Tower', '–', '15&nbsp;tr', '23&nbsp;tr', '–'),
+    ('Hilton', '–', '–', '35&nbsp;tr', '–'),
+    ('Filmore', '–', '27&nbsp;tr', '45&nbsp;tr', '–'),
+    ('Hiyori', '–', '–', '25&nbsp;tr', '–'),
+    ('Mornachy', '–', '14&nbsp;tr', '20&nbsp;tr', '35&nbsp;tr'),
+    ('Panoma', '18–20&nbsp;tr', '24&nbsp;tr', '35&nbsp;tr', '–'),
 ]
 
 def rent_month_table():
     return tbl(['Căn hộ đang cho thuê', 'Studio', '1PN', '2PN', '3PN'], [list(r) for r in RENT_MONTH]) + \
-        '<p class="src">Giá thuê theo tháng các tòa căn hộ ven sông Hàn – trung tâm, khảo sát tin đăng (tài liệu Kick-off 23/10/2026).</p>'
+        '<p class="src">Sun Ponte: bảng hàng cho thuê 11/2026 – căn đủ nội thất, thuê tối thiểu 3 tháng (1PN = 1BR+ 49–50 m², 2PN 68–91 m², 3PN 91 m²). Các tòa khác: tin đăng ven sông Hàn – trung tâm (tài liệu Kick-off 23/10/2026).</p>'
 
 def rent_night():
     return ('<div class="kpi"><div><b>2,2–2,9 tr</b><span>Studio view biển / đêm</span><small>giá trung bình ngoài mùa cao điểm</small></div>'

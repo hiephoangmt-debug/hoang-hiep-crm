@@ -48,6 +48,7 @@ def page_body():
     seg_u = ''.join('<button type="button" data-u="%s" aria-pressed="%s">%s<small>%s</small></button>' % (k, 'true' if i == 0 else 'false', n, a)
                     for i, (k, n, a) in enumerate(units))
     month = tbl(['Căn hộ cho thuê tháng', 'Giá/tháng'], [
+        ['Sun Ponte – Studio / 1BR+', '12–17 / 18–27 triệu'], ['Sun Ponte – 2PN / 3PN', '25–50 / ~48 triệu'],
         ['Panoma – Studio', '18–20 triệu'], ['Panoma – 1PN / 2PN', '24 / 35 triệu'], ['Filmore – 1PN / 2PN', '27 / 45 triệu'],
         ['Hilton – 2PN', '35 triệu'], ['Hiyori – 2PN', '25 triệu'], ['Sam Tower – 1PN / 2PN', '15 / 23 triệu'], ['Mornachy – 1PN / 2PN / 3PN', '14 / 20 / 35 triệu']])
     night = tbl(['Phòng view biển thuê ngày (mùa thấp điểm)', 'Giá/đêm'], [['Studio view biển', '2,2–2,9 triệu'], ['1BR+ view biển', '3,4–3,7 triệu']])
