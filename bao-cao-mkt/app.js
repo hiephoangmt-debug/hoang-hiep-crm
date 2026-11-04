@@ -627,9 +627,18 @@
     const maxId = byTag(doc, "p:cNvPr").reduce((m, e) => Math.max(m, parseInt(e.getAttribute("id") || "0", 10)), 0);
     const B = frame.box;
     const n = files.length;
-    const cols = n === 1 ? 1 : 2;
-    const rowsN = Math.ceil(n / cols);
     const gap = Math.round(0.15 * EMU_IN);
+    const sizes = [];
+    for (const f of files) sizes.push(await imageSize(f));
+    // chọn số cột cho ảnh to nhất (ảnh điện thoại dọc xếp 1 hàng, ảnh máy tính ngang xếp 2 x 2)
+    let cols = 1, best = -1;
+    for (let c = 1; c <= n; c++) {
+      const rn = Math.ceil(n / c);
+      const cw0 = (B.w - gap * (c - 1)) / c, ch0 = (B.h - gap * (rn - 1)) / rn;
+      const area = sizes.reduce((a, [iw, ih]) => { const r = Math.min(cw0 / iw, ch0 / ih); return a + iw * ih * r * r; }, 0);
+      if (area > best * 1.02) { best = area; cols = c; }
+    }
+    const rowsN = Math.ceil(n / cols);
     const cw = Math.floor((B.w - gap * (cols - 1)) / cols);
     const ch = Math.floor((B.h - gap * (rowsN - 1)) / rowsN);
     for (let k = 0; k < n; k++) {
@@ -648,7 +657,7 @@
       rel.setAttribute("Target", "../media/" + mediaName);
       relRoot.appendChild(rel);
 
-      const [iw, ih] = await imageSize(f);
+      const [iw, ih] = sizes[k];
       const ratio = Math.min(cw / iw, ch / ih);
       const w = Math.round(iw * ratio), h = Math.round(ih * ratio);
       const c = k % cols, r = Math.floor(k / cols);
@@ -756,6 +765,8 @@
 
   function chunk(arr, size) {
     const out = [];
+    // chia đều (5 ảnh, tối đa 4/trang -> 3 + 2 thay vì 4 + 1)
+    size = Math.ceil(arr.length / Math.max(1, Math.ceil(arr.length / size)));
     for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
     return out;
   }
