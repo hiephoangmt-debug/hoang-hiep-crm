@@ -61,7 +61,32 @@ def units_drawings(base=None):
                   '<b>2BR A</b> · thông thủy 67,69 m² · tim tường 76,36 m² · <span>căn góc bo cong</span>', 1800, 1272, True)
             + one('2br-c', 'Layout mặt bằng căn 2BR C tòa Saphia: phòng khách, bếp và bàn ăn, 2 phòng ngủ, 2 vệ sinh, logia; thông thủy 61,14 m², tim tường 68,67 m²',
                   '<b>2BR C</b> · thông thủy 61,14 m² · tim tường 68,67 m² · <span>căn góc bo cong</span>', 1800, 1272, True)
-            + '</div><p class="src">Layout mặt bằng tòa Saphia theo tài liệu chủ đầu tư; nội thất minh họa, bàn giao liền tường (fit-out). Ô tô màu trên sơ đồ nhỏ là vị trí căn trên tầng.</p>')
+            + '</div><p class="src">Layout mặt bằng tòa Saphia theo tài liệu chủ đầu tư; nội thất minh họa, bàn giao liền tường (fit-out). Ô tô màu trên sơ đồ nhỏ là vị trí căn trên tầng.</p>' + interior(base))
+
+NT = {
+    'studio': ('Studio', ['Không gian ngủ và góc làm việc', 'Giường ngủ, tường xanh hoa văn thổ cẩm', 'Bếp gọn và tủ áo', 'Phòng tắm kính, gạch sọc', 'Góc nhìn tổng thể căn Studio']),
+    '1br': ('1BR+', ['Phòng ngủ chính view phố biển', 'Bàn ăn và phòng khách', 'Bếp cánh xanh, sàn gạch hoa', 'Phòng tắm gạch sọc cam đất', 'Phòng ngủ phụ (phòng đa năng)']),
+    '2br': ('2BR', ['Phòng khách và bàn ăn', 'Bếp chữ L, tủ lạnh âm', 'Phòng ngủ chính', 'Phòng tắm kính', 'Phòng ngủ thứ hai', 'Góc phòng ngủ cạnh cửa kính']),
+}
+
+def interior(base):
+    """Concept nội thất gợi ý của chủ đầu tư – tab theo loại căn (CSS, không cần JS)."""
+    tabs = ''.join('<input type="radio" name="ntt" id="ntt-%s"%s><label for="ntt-%s">%s</label>' % (k, ' checked' if i == 0 else '', k, NT[k][0]) for i, k in enumerate(NT))
+    pans = ''
+    for k, (name, caps) in NT.items():
+        pans += '<div class="ntp" data-k="%s">' % k + ''.join(
+            '<figure><img src="%snt-%s-%d.webp" alt="Concept nội thất căn %s Sun Saphia Residence: %s (ảnh minh họa của chủ đầu tư)" loading="lazy" decoding="async"><figcaption>%s</figcaption></figure>'
+            % (base, k, i, name, c.lower(), c) for i, c in enumerate(caps)) + '</div>'
+    css = ('<style>.ntw{margin-top:30px}.ntw h3{margin:0 0 4px;font-family:Fahkwang,serif;font-weight:400;font-size:clamp(22px,2.6vw,30px);color:#0E6E99}.ntw .ntl{margin:0 0 14px;color:#557585;font-size:14.5px}'
+           '.ntw input{position:absolute;opacity:0;pointer-events:none}.ntw label{display:inline-block;padding:8px 18px;margin:0 8px 14px 0;border-radius:999px;border:1.5px solid #B9E5EF;background:#fff;color:#0E6E99;font-weight:700;cursor:pointer;font-size:14.5px}'
+           '.ntw .ntp{display:none;grid-template-columns:repeat(4,1fr);gap:10px}'
+           + ''.join('#ntt-%s:checked~label[for=ntt-%s]{background:#168FC2;border-color:#168FC2;color:#fff}#ntt-%s:checked~.ntps .ntp[data-k=%s]{display:grid}' % (k, k, k, k) for k in NT) +
+           '.ntw figure{margin:0;position:relative;border-radius:12px;overflow:hidden;background:#EAF7FB}.ntw figure img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;display:block}'
+           '.ntw figure:first-child{grid-column:span 2;grid-row:span 2}.ntw figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px 10px 7px;font-size:12.5px;color:#fff;background:linear-gradient(transparent,rgba(10,40,60,.65));text-align:left}'
+           '@media(max-width:760px){.ntw .ntp{grid-template-columns:1fr 1fr}}</style>')
+    return ('<div class="ntw">' + css + '<h3>Concept nội thất gợi ý của chủ đầu tư</h3>'
+            '<p class="ntl">Căn hộ bàn giao liền tường (đã có điều hòa, bình nóng lạnh, thiết bị vệ sinh, đèn). Nội thất rời, tủ bếp và thiết bị bếp chủ nhà tự chọn – dưới đây là concept chủ đầu tư gợi ý cho từng loại căn.</p>'
+            + tabs + '<div class="ntps">' + pans + '</div><p class="src">*Ảnh minh họa – concept nội thất gợi ý theo tài liệu chủ đầu tư, không phải tiêu chuẩn bàn giao.</p></div>')
 
 PRICES = [
     ('The Soleil Đà Nẵng', '5,2–5,5 tỷ', '7,7–7,8 tỷ', '17,5 tỷ', '–'),
