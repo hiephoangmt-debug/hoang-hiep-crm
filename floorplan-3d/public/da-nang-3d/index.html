@@ -39,6 +39,12 @@
   .x { position: absolute; top: 8px; right: 8px; border: 0; background: #ffffff1f; color: var(--fg); border-radius: 999px; width: 30px; height: 30px; cursor: pointer; }
   .plan { position: fixed; inset: 0; background: #000d; overflow: auto; z-index: 5; padding: 50px 12px 20px; text-align: center; }
   .plan img { max-width: 100%; width: 720px; border-radius: 8px; background: #fff; }
+  .prjlist { position: fixed; left: 12px; right: 12px; bottom: 112px; max-width: 420px; max-height: 52vh; overflow: auto; margin: 0 auto; background: #0f172af2; border: 1px solid #ffffff22; border-radius: 14px; padding: 12px; box-shadow: 0 8px 30px #0008; z-index: 4; }
+  .prjlist b { display: block; margin-bottom: 8px; }
+  .prjlist button { display: flex; width: 100%; gap: 8px; align-items: baseline; text-align: left; border: 0; background: #ffffff12; color: var(--fg); border-radius: 10px; padding: 9px 10px; margin-bottom: 6px; font: 600 13px Inter, sans-serif; cursor: pointer; }
+  .prjlist button small { opacity: .7; font-weight: 400; margin-left: auto; white-space: nowrap; }
+  .pin.prj b { background: #f2b33d; color: #241600; }
+  a.chip { text-decoration: none; display: inline-block; }
   .loading { position: fixed; inset: 0; display: grid; place-items: center; background: var(--bg); font-size: 14px; transition: opacity .6s; text-align: center; padding: 16px; }
 </style>
 </head>
@@ -60,6 +66,7 @@
     <button class="chip" id="veBtn">📏 Độ cao ×2</button>
     <button class="chip" id="homeBtn">↺ Đà Nẵng</button>
     <button class="chip" id="haBtn">🏮 Hội An</button>
+    <button class="chip" id="prjBtn">🏢 Dự án</button>
     <button class="chip" id="lotBtn">📍 Lô đất Hoàng Sa</button>
     <button class="chip" id="caBtn" hidden>🏡 Casamia</button>
     <button class="chip active" id="hvbBtn" hidden>🏗 Hải Vân Bay hoàn thiện</button>
@@ -72,9 +79,11 @@
   <table id="unitTb"></table>
   <div class="row" id="unitPlans"></div>
 </div>
+<div class="prjlist" id="prjList" hidden><b>Dự án đang mở bán</b><div id="prjItems"></div></div>
 <div class="plan" id="plan" hidden><button class="x" id="planX" aria-label="Đóng">✕</button><img id="planImg" alt="Mặt bằng căn điển hình Park Home" /></div>
 <div class="loading" id="loading">Đang tải dữ liệu Đà Nẵng…</div>
 
+<script src="projects.js"></script>
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
@@ -1396,6 +1405,7 @@ $('loading').style.opacity = 0; setTimeout(() => $('loading').remove(), 700);
   el.addEventListener('pointerdown', (e) => (down = [e.clientX, e.clientY]));
   el.addEventListener('pointerup', (e) => {
     if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return;
+    if (PROJECTS.length) { ray2.setFromCamera(new THREE.Vector2((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1), camera); const P = PROJECTS.find((P) => ray2.intersectObjects(P.hit).length); if (P) { window.showProject(P); return; } }
     if (LOT.vol) { ray2.setFromCamera(new THREE.Vector2((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1), camera); if (ray2.intersectObjects([LOT.vol, LOT.hotel], true).length) { LOT.show(); return; } }
     const U = casaGroup.userData; if (!U.phBody) return;
     ray2.setFromCamera(new THREE.Vector2((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1), camera);
@@ -1427,9 +1437,42 @@ $('loading').style.opacity = 0; setTimeout(() => $('loading').remove(), 700);
   $('planX').onclick = () => ($('plan').hidden = true);
 }
 window.dn = { flyTo, PLACES, camera, controls, V3, setTour, scene, casaGroup, THREE };
+// ===== Các dự án đang bán: ghim vàng, chạm xem thông tin + link landing page =====
+const PROJECTS = window.PROJECTS_DATA || [];
+{
+  const mat = new THREE.MeshBasicMaterial({ color: 0xffc23d, transparent: true, opacity: 0.85 });
+  const beamMat = new THREE.MeshBasicMaterial({ color: 0xffc23d, transparent: true, opacity: 0.22, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide });
+  const items = $('prjItems');
+  for (const P of PROJECTS) {
+    const [x, z] = LL(P.lat, P.lon), y = groundY(x, z), H = P.h || 90;
+    const pole = new THREE.Mesh(new THREE.CylinderGeometry(1.4, 1.4, H, 8), mat); pole.position.set(x, y + H / 2, z); world.add(pole);
+    const ball = new THREE.Mesh(new THREE.SphereGeometry(6, 16, 12), mat); ball.position.set(x, y + H, z); world.add(ball);
+    const beam = new THREE.Mesh(new THREE.CylinderGeometry(3, 10, 400, 12, 1, true), beamMat); beam.position.set(x, y + H + 200, z); world.add(beam);
+    P.pos = V3(x, y + H + 12, z); P.hit = [pole, ball];
+    const pl = { name: '🏢 ' + P.name, pos: P.pos, big: true, prj: P };
+    PLACES.push(pl);
+    const el = document.createElement('div'); el.className = 'pin prj'; el.innerHTML = '<b></b><span></span>'; el.querySelector('b').textContent = pl.name;
+    el.onclick = () => showProject(P); $('pins').appendChild(el); pl.el = el;
+    const b = document.createElement('button'); b.innerHTML = '<span></span><small></small>'; b.firstChild.textContent = P.name; b.lastChild.textContent = P.area || '';
+    b.onclick = () => { $('prjList').hidden = true; $('prjBtn').classList.remove('active'); showProject(P); }; items.appendChild(b);
+  }
+  function showProject(P) {
+    flyTo(V3(P.pos.x, 0, P.pos.z), V3(P.pos.x + 380, 300, P.pos.z + 480));
+    $('unitT').textContent = P.name; $('unitS').textContent = P.headline || '';
+    const tb = $('unitTb'); tb.textContent = '';
+    for (const [k, v] of [['Vị trí', P.address], ['Chủ đầu tư', P.developer], ['Quy mô', P.scale], ['Giá', P.price]]) if (v) { const tr = tb.insertRow(); tr.insertCell().textContent = k; tr.insertCell().textContent = v; }
+    const pl = $('unitPlans'); pl.textContent = '';
+    if (P.url) { const a = document.createElement('a'); a.className = 'chip active'; a.href = P.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = '🌐 Xem trang dự án'; pl.appendChild(a); }
+    if (P.page3d) { const a = document.createElement('a'); a.className = 'chip'; a.href = P.page3d; a.target = '_blank'; a.textContent = '🎥 Phối cảnh 3D chi tiết'; pl.appendChild(a); }
+    $('unit').hidden = false; setTour(false);
+  }
+  window.showProject = showProject;
+  $('prjBtn').onclick = () => { $('prjList').hidden = !$('prjList').hidden; $('prjBtn').classList.toggle('active', !$('prjList').hidden); };
+  if (!PROJECTS.length) $('prjBtn').hidden = true;
+}
 // mở thẳng một dự án qua link: ?go=casamia | lot | hoian | hvb
 { const GO = new URLSearchParams(location.search).get('go');
-  if (GO) setTimeout(() => { if (GO === 'casamia') $('caBtn').click(); else if (GO === 'lot') $('lotBtn').click(); else if (GO === 'hoian') $('haBtn').click();
+  if (GO) setTimeout(() => { if (GO === 'du-an') $('prjBtn').click(); else if (GO === 'casamia') $('caBtn').click(); else if (GO === 'lot') $('lotBtn').click(); else if (GO === 'hoian') $('haBtn').click();
     else if (GO === 'hvb' && hvbPos) flyTo(hvbPos.clone(), V3(hvbPos.x + 1200, 1500, hvbPos.z + 2600)); }, 900); }
 console.log('buildings', buildings.count, 'lamps', lamp.length / 3, 'bridges', deckBoxes.length);
 </script>

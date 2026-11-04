@@ -28,7 +28,7 @@
   ov.appendChild(x);
   var fr = null;
   b.onclick = function () {
-    if (!fr) { fr = document.createElement('iframe'); fr.src = base + page + '/'; fr.allow = 'fullscreen; accelerometer; gyroscope'; fr.title = 'Dự án 4D'; ov.appendChild(fr); }
+    if (!fr) { fr = document.createElement('iframe'); fr.src = base + (/[?#]|\/$/.test(page) ? page : page + '/'); fr.allow = 'fullscreen; accelerometer; gyroscope'; fr.title = 'Dự án 4D'; ov.appendChild(fr); }
     ov.classList.add('on'); document.documentElement.style.overflow = 'hidden';
   };
   x.onclick = function () { ov.classList.remove('on'); document.documentElement.style.overflow = ''; };
