@@ -44,7 +44,8 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 ## Có gì mới – plugin 2.20.112 (04/11/2026)
 
 - **Sun Symphony Residence – mặt bằng tầng 3 tòa:** thêm 38 bản vẽ mặt bằng của chủ đầu tư (S1: 15 ảnh, S2: 11 ảnh, S3: 12 ảnh), mỗi ảnh một tab "S1 · Tầng 3", "S1 · Tầng 3A – 12A", "S3 · Tầng 23 – 28"… trong mục Mặt bằng của trang dự án; bấm ảnh để phóng to xem diện tích từng căn.
-- Ảnh tải ngầm tối đa 15 ảnh mỗi lượt: sau khi cài, bấm **Nhập / cập nhật dữ liệu** thêm 2–3 lần (hoặc chờ vài phút) cho tới khi đủ 38 tab.
+- Thêm sơ đồ **chiều cao tầng tòa S2** (Hoàng Hiệp tự vẽ từ số liệu chủ đầu tư): shophouse tầng 1 – 2, tiện ích tầng 3 (hồ bơi vô cực 450 m², phòng sinh hoạt cộng đồng 325 m², gym 125 m²), căn hộ 3A – 22, penthouse 15 – 16 và 23 – 24; mục "Thiết kế" của trang có đoạn mô tả tương ứng (chỉ điền khi ô đang trống). Tab S2 tầng 24 ghi rõ là penthouse thông tầng 23 – 24.
+- Ảnh tải ngầm tối đa 15 ảnh mỗi lượt: sau khi cài, bấm **Nhập / cập nhật dữ liệu** thêm 2–3 lần (hoặc chờ vài phút) cho tới khi đủ 39 tab.
 - Chỉ điền khi ô "Link ảnh" của trang Sun Symphony đang trống; nếu anh đã tự nhập link ảnh ở đó thì giữ nguyên.
 
 ## Có gì mới – plugin 2.20.111: ảnh tin nhà đất khổ 4:3, thẻ tin không bị che chữ (04/11/2026)
