@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.52** + plugin Hoàng Hiệp CRM **2.20.115**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.52** + plugin Hoàng Hiệp CRM **2.20.116**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.116 (04/11/2026)
+
+- **Sun Ponte – bộ ảnh chủ đầu tư đầy đủ (20 ảnh):** 12 phối cảnh (toàn cảnh cầu Rồng làm ảnh đại diện, nhìn từ sông Hàn, cầu Rồng, hoàng hôn, về đêm, phố thương mại, shophouse khối đế, sảnh, nhà phố The Rio), mặt bằng tổng thể, sơ đồ chiều cao tầng, mặt bằng tầng 3A – 18, 19/21/23, 20/22/24 và layout căn 1PN+, 2PN, 3PN. Mặt bằng tầng 3A – 18 thay bằng bản gốc chủ đầu tư; bỏ ảnh có logo, chữ chìm (đơn vị phân phối, đơn vị dựng hình "3D ART"). Mục Thiết kế viết lại theo sơ đồ chiều cao tầng (shophouse 1 – 2, tiện ích tầng 3, căn hộ 3A – 17, loft 18, connection 19 – 24, penthouse 25 – 26).
+- Web tải tối đa 15 ảnh mỗi lượt: bấm **Nhập / cập nhật dữ liệu** 2 lần (hoặc chờ vài phút) cho đủ 20 ảnh.
 
 ## Có gì mới – plugin 2.20.115 (04/11/2026)
 
