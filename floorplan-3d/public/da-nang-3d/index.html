@@ -1445,14 +1445,17 @@ const PROJECTS = window.PROJECTS_DATA || [];
   const items = $('prjItems');
   for (const P of PROJECTS) {
     const [x, z] = LL(P.lat, P.lon), y = groundY(x, z), H = P.h || 90;
-    const pole = new THREE.Mesh(new THREE.CylinderGeometry(1.4, 1.4, H, 8), mat); pole.position.set(x, y + H / 2, z); world.add(pole);
-    const ball = new THREE.Mesh(new THREE.SphereGeometry(6, 16, 12), mat); ball.position.set(x, y + H, z); world.add(ball);
-    const beam = new THREE.Mesh(new THREE.CylinderGeometry(3, 10, 400, 12, 1, true), beamMat); beam.position.set(x, y + H + 200, z); world.add(beam);
-    P.pos = V3(x, y + H + 12, z); P.hit = [pole, ball];
+    P.pos = V3(x, y + H + 12, z); P.hit = [];
+    if (P.pin !== false) {
+      const pole = new THREE.Mesh(new THREE.CylinderGeometry(1.4, 1.4, H, 8), mat); pole.position.set(x, y + H / 2, z); world.add(pole);
+      const ball = new THREE.Mesh(new THREE.SphereGeometry(6, 16, 12), mat); ball.position.set(x, y + H, z); world.add(ball);
+      const beam = new THREE.Mesh(new THREE.CylinderGeometry(3, 10, 400, 12, 1, true), beamMat); beam.position.set(x, y + H + 200, z); world.add(beam);
+      P.hit = [pole, ball];
+    }
     const pl = { name: '🏢 ' + P.name, pos: P.pos, big: true, prj: P };
-    PLACES.push(pl);
+    if (P.pin !== false) PLACES.push(pl);
     const el = document.createElement('div'); el.className = 'pin prj'; el.innerHTML = '<b></b><span></span>'; el.querySelector('b').textContent = pl.name;
-    el.onclick = () => showProject(P); $('pins').appendChild(el); pl.el = el;
+    el.onclick = () => showProject(P); if (P.pin !== false) { $('pins').appendChild(el); pl.el = el; }
     const b = document.createElement('button'); b.innerHTML = '<span></span><small></small>'; b.firstChild.textContent = P.name; b.lastChild.textContent = P.area || '';
     b.onclick = () => { $('prjList').hidden = true; $('prjBtn').classList.remove('active'); showProject(P); }; items.appendChild(b);
   }
