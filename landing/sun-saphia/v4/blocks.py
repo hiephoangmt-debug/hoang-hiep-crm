@@ -80,7 +80,7 @@ def interior(base):
     css = ('<style>.ntw{margin-top:30px}.ntw h3{margin:0 0 4px;font-family:Fahkwang,serif;font-weight:400;font-size:clamp(22px,2.6vw,30px);color:#0E6E99}.ntw .ntl{margin:0 0 14px;color:#557585;font-size:14.5px}'
            '.ntw input{position:absolute;opacity:0;pointer-events:none}.ntw label{display:inline-block;padding:8px 18px;margin:0 8px 14px 0;border-radius:999px;border:1.5px solid #B9E5EF;background:#fff;color:#0E6E99;font-weight:700;cursor:pointer;font-size:14.5px}'
            '.ntw .ntp{display:none;grid-template-columns:repeat(4,1fr);gap:10px}'
-           + ''.join('#ntt-%s:checked~label[for=ntt-%s]{background:#168FC2;border-color:#168FC2;color:#fff}#ntt-%s:checked~.ntps .ntp[data-k=%s]{display:grid}' % (k, k, k, k) for k in NT) +
+           + ''.join('#ntt-%s:checked~label[for=ntt-%s]{background:#168FC2;border-color:#168FC2;color:#fff}#ntt-%s:checked~.ntps .ntp[data-k=\"%s\"]{display:grid}' % (k, k, k, k) for k in NT) +
            '.ntw figure{margin:0;position:relative;border-radius:12px;overflow:hidden;background:#EAF7FB}.ntw figure img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;display:block}'
            '.ntw figure:first-child{grid-column:span 2;grid-row:span 2}.ntw figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px 10px 7px;font-size:12.5px;color:#fff;background:linear-gradient(transparent,rgba(10,40,60,.65));text-align:left}'
            '@media(max-width:760px){.ntw .ntp{grid-template-columns:1fr 1fr}}</style>')
