@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.52** + plugin Hoàng Hiệp CRM **2.20.118**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.52** + plugin Hoàng Hiệp CRM **2.20.119**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.119 (04/11/2026)
+
+- **Penthouse Spana – Cora – S-Light:** trang dự án có mô tả penthouse mới (Spana tầng 22 tòa S1, S2 – 1PN+, 2PN, 3PN; Cora tầng 25 tòa A1, A2 – 1PN, 2PN, 2PN+1; S-Light tầng 22 tòa SL1, SL2) và gợi ý duplex tầng lửng (Spana, Cora). Thay mô tả chung chung cũ nếu anh chưa sửa tay.
+- **Bài tin mới:** "Penthouse Spana, Cora, S-Light: tầng đỉnh giới hạn của Sun Group tại Hòa Xuân" (chuyên mục Dự án, ảnh bìa tự vẽ, bảng so sánh, FAQ). Chưa có ảnh layout vì bản vẽ trên Drive là khổ A0 18 – 25 MB (web chỉ nhận ảnh dưới 15 MB) – anh gửi ảnh chụp màn hình để thêm sau.
 
 ## Có gì mới – plugin 2.20.118 (04/11/2026)
 
