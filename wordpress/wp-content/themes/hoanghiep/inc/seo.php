@@ -1256,7 +1256,8 @@ function hh_seo_redirect_duplicates() {
 	if ( is_post_type_archive( 'bat-dong-san' ) && ! get_query_var( 'hh_deal' ) && ! get_query_var( 'hh_term' ) && ! $filtered ) {
 		// Ô tìm kiếm "Tất cả" (/nha-dat/?tk=…) vẫn chạy, chỉ trang không lọc chuyển về /mua-ban/ (trang lọc đã noindex).
 		$target = hh_deal_url( 'ban' );
-	} elseif ( is_tax( 'loai-bds' ) ) {
+	} elseif ( is_tax( 'loai-bds' ) && ! get_query_var( 'hh_deal' ) ) {
+		// Chỉ trang cũ /loai-nha-dat/{loại}/; /mua-ban/{loại}/?loai-bds=… (bộ lọc) đã là URL chuẩn – không chuyển (tránh vòng lặp).
 		$term = get_queried_object();
 		$deal = hh_seo_listing_lastmod( 'ban', $term ) || ! hh_seo_listing_lastmod( 'thue', $term ) ? 'ban' : 'thue';
 		$target = hh_deal_term_url( $deal, $term );
@@ -1269,6 +1270,10 @@ function hh_seo_redirect_duplicates() {
 		$target = trailingslashit( $target ) . user_trailingslashit( 'page/' . $paged, 'paged' );
 	}
 	$query = (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_QUERY ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+	$path  = (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+	if ( untrailingslashit( (string) wp_parse_url( $target, PHP_URL_PATH ) ) === untrailingslashit( $path ) ) {
+		return; // Đã đúng URL chuẩn – không tự chuyển về chính nó.
+	}
 	wp_safe_redirect( $target . ( $query ? '?' . $query : '' ), 301 );
 	exit;
 }
