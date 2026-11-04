@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.50** + plugin Hoàng Hiệp CRM **2.20.111**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.50** + plugin Hoàng Hiệp CRM **2.20.112**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.112 (04/11/2026)
+
+- **Sun Symphony Residence – mặt bằng tầng 3 tòa:** thêm 38 bản vẽ mặt bằng của chủ đầu tư (S1: 15 ảnh, S2: 11 ảnh, S3: 12 ảnh), mỗi ảnh một tab "S1 · Tầng 3", "S3 · Tầng 23 – 28"… trong mục Mặt bằng của trang dự án; bấm ảnh để phóng to xem diện tích từng căn.
+- Ảnh tải ngầm tối đa 15 ảnh mỗi lượt: sau khi cài, bấm **Nhập / cập nhật dữ liệu** thêm 2–3 lần (hoặc chờ vài phút) cho tới khi đủ 38 tab.
+- Chỉ điền khi ô "Link ảnh" của trang Sun Symphony đang trống; nếu anh đã tự nhập link ảnh ở đó thì giữ nguyên.
 
 ## Có gì mới – plugin 2.20.111: ảnh tin nhà đất khổ 4:3, thẻ tin không bị che chữ (04/11/2026)
 - 3 tin (đất TMDV Hoàng Văn Thái, lô 583,6 m² Hoàng Sa, cặp đất 224 m² Hoàng Sa): ảnh vẽ lại khổ 4:3, chữ nằm trong vùng an toàn – thẻ tin ở danh sách, trang chủ không còn cắt mất chữ, nhãn liên hệ.
