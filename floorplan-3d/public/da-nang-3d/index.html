@@ -129,6 +129,7 @@ const HA = LL(15.8772, 108.3282); // trung tâm phố cổ Hội An
 // Casamia Balanca Hội An: từng lô lấy từ mặt bằng 363 lô, đã khớp toạ độ thật
 const CASA_DATA = await fetch('casamia.json').then((r) => (r.ok ? r.json() : null)).catch(() => null);
 // Lô đất Tờ 126 Thửa 30, Thọ Quang, Sơn Trà – góc Hoàng Sa × Hồ Học Lãm (587 m²)
+const PRJ_EXCL = (window.PROJECTS_DATA || []).filter((P) => P.model).map((P) => { const [x, z] = LL(P.lat, P.lon); return [x, z, Math.hypot(P.model.plot[0], P.model.plot[1]) / 2 * 0.95]; });
 const LOT = { ring: [[16.0901963, 108.2498741], [16.090422, 108.249988], [16.0904882, 108.249792], [16.0902628, 108.2496928]].map(([la, lo]) => LL(la, lo)) };
 const CASA_RING = CASA_DATA ? CASA_DATA.site.map(([la, lo]) => LL(la, lo)) : null;
 const CASA = findProject(/casamia|balanca/i);
@@ -294,6 +295,7 @@ const buildings = (() => {
     if (HVB && inRing(HVB.rings[0], cx, cz)) continue; // thay bằng mô phỏng khi hoàn thiện
     if (CASA_RING && inRing(CASA_RING, cx, cz)) continue; // thay bằng mặt bằng Casamia
     if (inRing(LOT.ring, cx, cz)) continue;               // lô đất trống
+    if (PRJ_EXCL.some(([px, pz, r]) => Math.hypot(cx - px, cz - pz) < r)) continue;   // thay bằng khối dự án
     const oldTown = Math.hypot(cx - HA[0], cz - HA[1]) < 560 && h < 16;
     const pal = oldTown ? ['#e8c25a', '#f0cf6e', '#e2b552', '#f3d98a', '#d9a94a'] : PAL[type] || PAL[0];
     c.set(pal[(rnd() * pal.length) | 0]);
@@ -1440,18 +1442,55 @@ window.dn = { flyTo, PLACES, camera, controls, V3, setTour, scene, casaGroup, TH
 // ===== Các dự án đang bán: ghim vàng, chạm xem thông tin + link landing page =====
 const PROJECTS = window.PROJECTS_DATA || [];
 {
-  const mat = new THREE.MeshBasicMaterial({ color: 0xffc23d, transparent: true, opacity: 0.85 });
-  const beamMat = new THREE.MeshBasicMaterial({ color: 0xffc23d, transparent: true, opacity: 0.22, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide });
+  // --- vật liệu khối dự án: kính có vạch sàn, đèn cửa sổ ban đêm, mặt bằng lát đá ---
+  const ctex = (w, h, f) => { const c = document.createElement('canvas'); c.width = w; c.height = h; f(c.getContext('2d'), w, h); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.colorSpace = THREE.SRGBColorSpace; return t; };
+  const facadeT = ctex(64, 64, (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#9fc3dc'); gr.addColorStop(1, '#4f7894'); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+    g.fillStyle = '#eef2f5'; g.fillRect(0, h - 7, w, 7); g.fillStyle = '#2c3e4d'; for (let x = 0; x < w; x += 16) g.fillRect(x, 0, 2, h - 7); });
+  const facadeE = ctex(256, 256, (g, w, h) => { g.fillStyle = '#000'; g.fillRect(0, 0, w, h); for (let r = 0; r < 16; r++) for (let k = 0; k < 16; k++) if (rnd() < 0.55) { g.fillStyle = rnd() < 0.8 ? '#ffcf8a' : '#cfe0ff'; g.fillRect(k * 16 + 2, r * 16 + 2, 12, 8); } });
+  const plazaT = ctex(128, 128, (g, w, h) => { g.fillStyle = '#d8d2c6'; g.fillRect(0, 0, w, h); g.strokeStyle = '#b9b1a3'; g.lineWidth = 2; for (let i = 0; i <= w; i += 32) { g.beginPath(); g.moveTo(i, 0); g.lineTo(i, h); g.stroke(); g.beginPath(); g.moveTo(0, i); g.lineTo(w, i); g.stroke(); } });
+  const glassP = new THREE.MeshStandardMaterial({ map: facadeT, emissiveMap: facadeE, emissive: 0xffffff, emissiveIntensity: 0, roughness: 0.15, metalness: 0.5 });
+  const podP = new THREE.MeshStandardMaterial({ color: 0xe9e4da, roughness: 0.6, emissive: 0xffd9a0, emissiveIntensity: 0 });
+  const crownP = new THREE.MeshStandardMaterial({ color: 0xd8b25e, roughness: 0.3, metalness: 0.7, emissive: 0xffb84a, emissiveIntensity: 0 });
+  const plazaM = new THREE.MeshStandardMaterial({ map: plazaT, roughness: 0.9 }), lawnM = new THREE.MeshStandardMaterial({ color: 0x5f9446, roughness: 1 });
+  const poolM = new THREE.MeshStandardMaterial({ color: 0x4cc6d6, roughness: 0.1, emissive: 0x1aa0b0, emissiveIntensity: 0.25 }), edgeM = new THREE.LineBasicMaterial({ color: 0xffc23d });
+  const treeM = new THREE.MeshStandardMaterial({ color: 0x3f7a35, roughness: 1, flatShading: true });
+  casaAnim.push((t, night) => { glassP.emissiveIntensity = night * 0.9; podP.emissiveIntensity = night * 0.25; crownP.emissiveIntensity = 0.1 + night * 1.2; });
+  const roadAngle = (x, z) => { let best = 1e9, ang = 0; for (const r of meta.roads) for (let i = 0; i < r.pts.length - 1; i++) { const [ax, az] = r.pts[i], [bx, bz] = r.pts[i + 1], dx = bx - ax, dz = bz - az, L2 = dx * dx + dz * dz || 1, t = Math.max(0, Math.min(1, ((x - ax) * dx + (z - az) * dz) / L2)), d = Math.hypot(ax + dx * t - x, az + dz * t - z); if (d < best) { best = d; ang = Math.atan2(dz, dx); } } return ang; };
+  function buildProject(P, x, z, y) {
+    const M = P.model, g = new THREE.Group(); g.position.set(x, y, z); g.rotation.y = -(M.rot ?? roadAngle(x, z)); world.add(g);
+    const [pw, pd] = M.plot, hit = [];
+    const box = (w, h, d, mat, px, py, pz) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); m.position.set(px, py + h / 2, pz); m.castShadow = m.receiveShadow = true; g.add(m); hit.push(m); return m; };
+    // mặt bằng khu đất: viền vàng, lát đá, cỏ, hồ bơi, cây
+    const plate = box(pw, 0.6, pd, plazaM, 0, 0, 0);
+    box(pw - 6, 0.2, 4, lawnM, 0, 0.6, pd / 2 - 3); box(pw - 6, 0.2, 4, lawnM, 0, 0.6, -pd / 2 + 3);
+    const eg = new THREE.EdgesGeometry(new THREE.BoxGeometry(pw, 1.2, pd)); const edge = new THREE.LineSegments(eg, edgeM); edge.position.y = 0.6; g.add(edge);
+    for (const [px, pz, w, d] of M.pools || []) box(w, 0.4, d, poolM, px, 0.6, pz);
+    for (let i = 0; i < (M.trees ?? 14); i++) { const a = (i / (M.trees ?? 14)) * Math.PI * 2, tx = Math.cos(a) * (pw / 2 - 3), tz = Math.sin(a) * (pd / 2 - 3); const tr = new THREE.Mesh(new THREE.IcosahedronGeometry(2.4, 0), treeM); tr.position.set(Math.max(-pw / 2 + 3, Math.min(pw / 2 - 3, tx)), 3.5, Math.max(-pd / 2 + 3, Math.min(pd / 2 - 3, tz))); g.add(tr); }
+    for (const [px, pz, w, d, h] of M.podiums || []) { box(w, h, d, podP, px, 0.6, pz); box(w + 1, 0.8, d + 1, podP, px, 0.6 + h, pz); }
+    let top = 0;
+    for (const T of M.towers) {
+      const [px, pz, w, d, floors, fh = 3.4, base = 0] = T, H = floors * fh; let yy = 0.6 + base, ww = w, dd = d;
+      const segs = T[7] || 1;                         // số đoạn thu nhỏ dần lên đỉnh
+      for (let k = 0; k < segs; k++) {
+        const h = H / segs, m = box(ww, h, dd, glassP, px, yy, pz);
+        m.material = glassP.clone(); m.material.map = facadeT.clone(); m.material.map.repeat.set(Math.max(1, ww / 8), h / fh); m.material.map.needsUpdate = true;
+        m.material.emissiveMap = facadeE.clone(); m.material.emissiveMap.repeat.set(Math.max(1, ww / 8) / 16, h / fh / 16); m.material.emissiveMap.needsUpdate = true;
+        casaAnim.push(((mm) => (t, night) => { mm.emissiveIntensity = night * 0.9; })(m.material));
+        yy += h; ww *= 0.86; dd *= 0.86;
+      }
+      box(ww * 0.8, 3, dd * 0.8, crownP, px, yy, pz);                       // vương miện sáng trên đỉnh
+      if (T[8]) { const sp = new THREE.Mesh(new THREE.ConeGeometry(Math.min(ww, dd) * 0.3, T[8], 8), crownP); sp.position.set(px, yy + 3 + T[8] / 2, pz); g.add(sp); hit.push(sp); yy += T[8]; }
+      top = Math.max(top, yy + 3);
+    }
+    for (const [px, pz, r, h] of M.domes || []) { const d = new THREE.Mesh(new THREE.SphereGeometry(r, 32, 12, 0, Math.PI * 2, 0, Math.PI / 2), crownP); d.scale.y = h / r; d.position.set(px, 0.6, pz); g.add(d); hit.push(d); }
+    return { hit, top };
+  }
   const items = $('prjItems');
   for (const P of PROJECTS) {
-    const [x, z] = LL(P.lat, P.lon), y = groundY(x, z), H = P.h || 90;
-    P.pos = V3(x, y + H + 12, z); P.hit = [];
-    if (P.pin !== false) {
-      const pole = new THREE.Mesh(new THREE.CylinderGeometry(1.4, 1.4, H, 8), mat); pole.position.set(x, y + H / 2, z); world.add(pole);
-      const ball = new THREE.Mesh(new THREE.SphereGeometry(6, 16, 12), mat); ball.position.set(x, y + H, z); world.add(ball);
-      const beam = new THREE.Mesh(new THREE.CylinderGeometry(3, 10, 400, 12, 1, true), beamMat); beam.position.set(x, y + H + 200, z); world.add(beam);
-      P.hit = [pole, ball];
-    }
+    const [x, z] = LL(P.lat, P.lon), y = groundY(x, z);
+    let top = P.h || 90; P.hit = [];
+    if (P.model) { const r = buildProject(P, x, z, y); P.hit = r.hit; top = r.top; }
+    P.pos = V3(x, y + top + 15, z);
     const pl = { name: '🏢 ' + P.name, pos: P.pos, big: true, prj: P };
     if (P.pin !== false) PLACES.push(pl);
     const el = document.createElement('div'); el.className = 'pin prj'; el.innerHTML = '<b></b><span></span>'; el.querySelector('b').textContent = pl.name;
@@ -1460,7 +1499,8 @@ const PROJECTS = window.PROJECTS_DATA || [];
     b.onclick = () => { $('prjList').hidden = true; $('prjBtn').classList.remove('active'); showProject(P); }; items.appendChild(b);
   }
   function showProject(P) {
-    flyTo(V3(P.pos.x, 0, P.pos.z), V3(P.pos.x + 380, 300, P.pos.z + 480));
+    const R = P.model ? Math.max(P.model.plot[0], P.model.plot[1], P.pos.y * 0.9) : 200;
+    flyTo(V3(P.pos.x, P.pos.y * 0.35, P.pos.z), V3(P.pos.x + R * 1.4, P.pos.y * 0.7 + R * 0.6, P.pos.z + R * 1.9));
     $('unitT').textContent = P.name; $('unitS').textContent = P.headline || '';
     const tb = $('unitTb'); tb.textContent = '';
     for (const [k, v] of [['Vị trí', P.address], ['Chủ đầu tư', P.developer], ['Quy mô', P.scale], ['Giá', P.price]]) if (v) { const tr = tb.insertRow(); tr.insertCell().textContent = k; tr.insertCell().textContent = v; }
@@ -1470,6 +1510,10 @@ const PROJECTS = window.PROJECTS_DATA || [];
     $('unit').hidden = false; setTour(false);
   }
   window.showProject = showProject;
+  if (PROJECTS.some((P) => P.hideWheel && P.model)) {   // Công viên Châu Á được thay bằng Da Nang Downtown
+    wheel.visible = false;
+    for (let i = PLACES.length - 1; i >= 0; i--) if (PLACES[i].name.startsWith('Sun Wheel')) { PLACES[i].el?.remove(); PLACES.splice(i, 1); }
+  }
   $('prjBtn').onclick = () => { $('prjList').hidden = !$('prjList').hidden; $('prjBtn').classList.toggle('active', !$('prjList').hidden); };
   if (!PROJECTS.length) $('prjBtn').hidden = true;
 }
