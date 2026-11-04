@@ -66,6 +66,7 @@ add_action(
 				'avatar'  => function_exists( 'hoanghiep_photo' ) ? hoanghiep_photo( 'avatar' ) : '',
 				'phone'   => $phone,
 				'zalo'    => 'https://zalo.me/' . preg_replace( '/[^0-9]/', '', $opt( 'hh_zalo', $phone ) ),
+				'fb'      => function_exists( 'hoanghiep_opt' ) ? hoanghiep_opt( 'hh_facebook' ) : '',
 				'lang'    => $lang,
 				'ui'      => $ui,
 				'greet'   => 'vi' !== $lang ? $ui['greet'] : ( $greet ?: ( $title

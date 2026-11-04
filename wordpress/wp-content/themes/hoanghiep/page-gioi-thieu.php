@@ -32,6 +32,9 @@ $stats = hoanghiep_stats();
 			<div class="hero__actions">
 				<a class="btn btn--gold btn--cta" href="tel:<?php echo esc_attr( hoanghiep_tel() ); ?>"><?php echo hh_icon( 'phone' ); // phpcs:ignore ?> <?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?></a>
 				<a class="btn btn--ghost" href="https://zalo.me/<?php echo esc_attr( hoanghiep_tel( hoanghiep_opt( 'hh_zalo' ) ) ); ?>" target="_blank" rel="noopener">Kết bạn Zalo</a>
+				<?php if ( hoanghiep_opt( 'hh_facebook' ) ) : ?>
+					<a class="btn btn--ghost" href="<?php echo esc_url( hoanghiep_opt( 'hh_facebook' ) ); ?>" target="_blank" rel="noopener">Fanpage Facebook</a>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

@@ -33,7 +33,7 @@ function hoanghiep_defaults() {
 		'hh_email'         => 'hiephoangmt@gmail.com',
 		'hh_address'       => 'Đà Nẵng',
 		'hh_hours'         => '8:00 – 21:00, tất cả các ngày',
-		'hh_facebook'      => '',
+		'hh_facebook'      => 'https://www.facebook.com/hiephoangmt',
 		'hh_youtube'       => '',
 		'hh_tiktok'        => '',
 		// Banner.
@@ -45,7 +45,9 @@ function hoanghiep_defaults() {
 
 function hoanghiep_opt( $key ) {
 	$defaults = hoanghiep_defaults();
-	return (string) get_theme_mod( $key, $defaults[ $key ] ?? '' );
+	$v = (string) get_theme_mod( $key, $defaults[ $key ] ?? '' );
+	// Link Fanpage: ô để trống trong Tùy biến vẫn dùng Trang mặc định.
+	return ( '' === $v && 'hh_facebook' === $key ) ? $defaults[ $key ] : $v;
 }
 
 function hoanghiep_tel( $phone = null ) {

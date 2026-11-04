@@ -5,7 +5,7 @@ get_header();
 	<div class="container">
 		<p class="breadcrumb"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a> / Liên hệ</p>
 		<h1 class="page-head__title">Liên hệ với <?php echo esc_html( hoanghiep_opt( 'hh_person_name' ) ); ?></h1>
-		<p class="page-head__lead">Gọi điện, nhắn Zalo hoặc để lại thông tin – Hiệp sẽ phản hồi ngay trong giờ làm việc.</p>
+		<p class="page-head__lead">Gọi điện, nhắn Zalo, nhắn Fanpage hoặc để lại thông tin – Hiệp sẽ phản hồi ngay trong giờ làm việc.</p>
 	</div>
 </div>
 
@@ -29,6 +29,9 @@ get_header();
 			<?php hh_agent_card(); ?>
 			<ul class="contact-list">
 				<li><?php echo hh_icon( 'mail' ); // phpcs:ignore ?><span><small>Email</small><a href="mailto:<?php echo esc_attr( hoanghiep_opt( 'hh_email' ) ); ?>"><?php echo esc_html( hoanghiep_opt( 'hh_email' ) ); ?></a></span></li>
+				<?php if ( hoanghiep_opt( 'hh_facebook' ) ) : ?>
+					<li><?php echo hh_icon( 'handshake' ); // phpcs:ignore ?><span><small>Fanpage Facebook</small><a href="<?php echo esc_url( hoanghiep_opt( 'hh_facebook' ) ); ?>" target="_blank" rel="noopener">facebook.com/hiephoangmt</a></span></li>
+				<?php endif; ?>
 				<li><?php echo hh_icon( 'pin' ); // phpcs:ignore ?><span><small>Khu vực hoạt động</small><?php echo esc_html( hoanghiep_opt( 'hh_address' ) ); ?></span></li>
 				<li><?php echo hh_icon( 'clock' ); // phpcs:ignore ?><span><small>Giờ làm việc</small><?php echo esc_html( hoanghiep_opt( 'hh_hours' ) ); ?></span></li>
 			</ul>

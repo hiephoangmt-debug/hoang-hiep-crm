@@ -52,7 +52,7 @@
 			'<div class="hhc__log" aria-live="polite"></div>' +
 			'<div class="hhc__chips"></div>' +
 			'<form class="hhc__form"><input type="text" name="m" autocomplete="off" maxlength="800" placeholder="' + esc( T.placeholder || 'Nhập câu hỏi hoặc số Zalo…' ) + '" aria-label="Tin nhắn"><button type="submit" aria-label="Gửi"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M3.4 20.4 21 12 3.4 3.6l-.01 6.53L15 12 3.39 13.87z"/></svg></button></form>' +
-			'<p class="hhc__foot">' + esc( T.call || 'Hoặc gọi/Zalo' ) + ' <a href="' + esc( C.zalo ) + '" target="_blank" rel="noopener">' + esc( C.phone ) + '</a></p>' +
+			'<p class="hhc__foot">' + esc( T.call || 'Hoặc gọi/Zalo' ) + ' <a href="' + esc( C.zalo ) + '" target="_blank" rel="noopener">' + esc( C.phone ) + '</a>' + ( C.fb ? ' · <a href="' + esc( C.fb ) + '" target="_blank" rel="noopener">Facebook</a>' : '' ) + '</p>' +
 		'</section>';
 	document.body.appendChild( root );
 
