@@ -164,6 +164,9 @@ def dao_tao(head, header, tail, FAV, OG, LOGO):
     html = html.replace('</head>', FONTS + '\n</head>', 1)
     html += ('<body>\n' + header('/dao-tao-sale', MAIN, LOGO, menu=False, cta='https://zalo.me/0904567009') + '\n<main id="dau-trang">' + GATE
              + '<section class="sec" id="sp-main" style="display:none;padding-top:28px"><div class="wrap" style="max-width:1240px"><span class="ey">Đào tạo sale · 33 slide</span>'
-             '<h1 class="dp" style="margin:6px 0 16px">Sun Saphia – <b>tài liệu đào tạo</b></h1></div>'
+             '<h1 class="dp" style="margin:6px 0 12px">Sun Saphia – <b>tài liệu đào tạo</b></h1>'
+             '<p style="margin:0 0 18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center"><a class="btn sm" id="spDrive" href="#" target="_blank" rel="noopener">📁 Thư mục tài liệu dự án (Google Drive)</a>'
+             '<span style="font-size:13px;color:#557585">Layout tầng, layout căn, phim dự án, slide đào tạo, KV brand</span></p>'
+             '<script>(function(){var a=document.getElementById("spDrive");if(a)a.href=atob("' + __import__('base64').b64encode(b'https://drive.google.com/drive/folders/1sMzOCcPfnrBO7X6M0hAA0HjKcHD5y8_c').decode() + '")})();</script></div>'
              + viewer(slides, 'dao-tao', notes=True) + D4 + '</section></main>\n' + tail(True) + GATE_JS + '</body>\n</html>\n')
     return html.replace('>Nhận bảng giá</a></div></header>', '>Zalo anh Hiệp</a></div></header>')
