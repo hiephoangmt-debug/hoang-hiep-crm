@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.53** + plugin Hoàng Hiệp CRM **2.20.128**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.53** + plugin Hoàng Hiệp CRM **2.20.129**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.129 (04/11/2026)
+
+- **Bản tin chính sách (Hạ tầng & quy hoạch, chỉ tin Đà Nẵng):** "Chính sách mới ảnh hưởng bất động sản Đà Nẵng (11/2026)" – Quy hoạch chung 2050 (QĐ 2016/QĐ-TTg), thủ tục đất đai (QĐ 135/2026, 91/2026), hệ số điều chỉnh giá đất 2026 (QĐ 101/2026), khu vực được chuyển nhượng đất có hạ tầng (QĐ 30/2026), nhà ở xã hội (Chỉ thị 10, QĐ 111, 69, 149/2026), dự thảo Luật Đất đai sửa đổi, sân bay Đà Nẵng; mỗi mục có "tác động" và lời khuyên; ảnh bìa tự vẽ; thẻ tag.
 
 ## Có gì mới – plugin 2.20.128 (04/11/2026)
 

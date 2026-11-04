@@ -21,6 +21,8 @@ function hh_news_tags_map() {
 		'bang-gia-dat-da-nang-sua-doi-2026'                             => array( 'Bảng giá đất Đà Nẵng', 'Pháp lý nhà đất', 'HĐND Đà Nẵng', 'Quy hoạch Đà Nẵng' ),
 		'duong-tranh-nam-hai-van-6-lan-bat-dong-san-lien-chieu'         => array( 'Đường tránh Nam Hải Vân', 'Liên Chiểu', 'Cảng Liên Chiểu' ),
 		'tin-ha-tang-da-nang-thang-10-2026'                             => array( 'Cầu Hòa Xuân', 'Quốc lộ 14D', 'Liên Chiểu', 'Đầu tư công Đà Nẵng', 'HĐND Đà Nẵng', 'Hợp nhất Đà Nẵng Quảng Nam' ),
+		'chinh-sach-moi-anh-huong-bat-dong-san-da-nang-11-2026'          => array( 'Chính sách bất động sản', 'Pháp lý nhà đất', 'Quy hoạch Đà Nẵng', 'Bảng giá đất Đà Nẵng', 'Nhà ở xã hội' ),
+		'quy-hoach-chung-do-thi-hoa-tien-da-nang-2050'                  => array( 'Quy hoạch Đà Nẵng', 'Hòa Vang', 'Đường sắt tốc độ cao' ),
 		'cong-vien-cau-lac-bo-the-thao-bien-bai-tam-son-thuy'           => array( 'Ngũ Hành Sơn', 'Biển Đà Nẵng', 'Bất động sản Đà Nẵng' ),
 	);
 }

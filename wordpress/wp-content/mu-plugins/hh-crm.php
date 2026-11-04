@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Hoàng Hiệp CRM
  * Description: Dự án, nhà đất mua bán / cho thuê và khách hàng tiềm năng cho hiephoangmt.com.
- * Version: 2.20.128
+ * Version: 2.20.129
  * Author: Hoàng Hiệp
  */
 
@@ -13,7 +13,7 @@ if ( defined( 'HH_CRM_VERSION' ) ) {
 	return;
 }
 
-define( 'HH_CRM_VERSION', '2.20.128' );
+define( 'HH_CRM_VERSION', '2.20.129' );
 define( 'HH_CRM_DIR', __DIR__ . '/hh-crm/' );
 define( 'HH_CRM_URL', WPMU_PLUGIN_URL . '/hh-crm/' );
 
@@ -57,6 +57,7 @@ require HH_CRM_DIR . 'data-sun-ponte-tien-do.php';
 require HH_CRM_DIR . 'data-meta-city-tam-ky.php';
 require HH_CRM_DIR . 'data-camellia-tien-do.php';
 require HH_CRM_DIR . 'data-tin-quy-hoach-hoa-tien-2050.php';
+require HH_CRM_DIR . 'data-tin-chinh-sach-bds-11-2026.php';
 require HH_CRM_DIR . 'data-fusion-anh.php';
 require HH_CRM_DIR . 'data-casamia-balanca-anh.php';
 require HH_CRM_DIR . 'data-sun-group-da-nang.php';
