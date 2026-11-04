@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.51** + plugin Hoàng Hiệp CRM **2.20.113**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.52** + plugin Hoàng Hiệp CRM **2.20.113**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.52 (04/11/2026)
+
+- **Mặt bằng theo tòa, theo tầng:** dự án nhiều tòa (tiêu đề ảnh dạng "S1 · Tầng 3") hiện hàng nút chọn tòa trước (Tòa S1 / S2 / S3, kèm số mặt bằng), bấm tòa nào chỉ hiện các tầng của tòa đó – không còn một rổ 39 nút. Dự án một tòa giữ nguyên như cũ.
 
 ## Có gì mới – plugin 2.20.113, giao diện 2.15.51 (04/11/2026)
 

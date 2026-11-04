@@ -165,6 +165,23 @@
 			} );
 		} );
 	} );
+	// Mặt bằng nhiều tòa: chọn tòa → chỉ hiện các tầng của tòa đó, mở tầng đầu tiên.
+	$$( '.floors--grouped' ).forEach( ( box ) => {
+		$$( '.floors__group', box ).forEach( ( g ) => {
+			g.addEventListener( 'click', () => {
+				$$( '.floors__group', box ).forEach( ( x ) => {
+					x.classList.toggle( 'is-active', x === g );
+					x.setAttribute( 'aria-selected', x === g ? 'true' : 'false' );
+				} );
+				const tabs = $$( '.floors__tabs .ptabs__tab', box );
+				tabs.forEach( ( t ) => { t.hidden = t.dataset.fgroup !== g.dataset.fgroup; } );
+				const first = tabs.find( ( t ) => ! t.hidden );
+				if ( first ) {
+					first.click();
+				}
+			} );
+		} );
+	} );
 	// Link từ trang tổng hợp (VD .../#sp-penthouse) mở đúng tab sản phẩm.
 	if ( /^#sp-[a-z-]+$/.test( location.hash ) ) {
 		const tab = document.querySelector( '.ptabs__tab[data-ptab="' + location.hash.slice( 4 ) + '"]' );

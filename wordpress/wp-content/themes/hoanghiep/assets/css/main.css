@@ -999,6 +999,14 @@ body.has-pop { overflow: hidden; }
 .floors__tabs { margin-bottom: 14px; }
 .floors__panel a { display: block; padding: 12px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow); cursor: zoom-in; }
 .floors__panel img { width: 100%; height: auto; border-radius: var(--radius); }
+.floors__groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 8px; margin-bottom: 12px; }
+.floors__group { display: grid; gap: 2px; padding: 10px 8px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); font: inherit; color: var(--navy); text-align: center; cursor: pointer; }
+.floors__group strong { font-size: 1.05rem; }
+.floors__group span { font-size: .78rem; color: var(--muted); }
+.floors__group.is-active { border-color: var(--navy); background: var(--navy); color: var(--white); }
+.floors__group.is-active span { color: rgba(255, 255, 255, .75); }
+.floors__tabs .ptabs__tab[hidden] { display: none; }
+.floors--grouped .floors__tabs .ptabs__tab { padding: 8px 12px; font-size: .9rem; }
 .floors__hint { margin: 10px 0 0; font-size: .85rem; color: var(--muted); text-align: center; }
 
 /* Các loại căn hộ */
