@@ -6,12 +6,12 @@ here = pathlib.Path(__file__).parent
 sha = sys.argv[1]
 src = subprocess.check_output(['git', 'show', sha + ':projects/sun-saphia/4d/sun-saphia-4d-embed.js'], cwd=here).decode('utf-8')
 svg = ("<svg xmlns='http://www.w3.org/2000/svg' width='460' height='250'><g transform='rotate(-22 230 125)' font-family='Arial,sans-serif' font-weight='700' text-anchor='middle'>"
-       "<text x='230' y='118' font-size='22' fill='rgba(255,255,255,.30)' stroke='rgba(10,37,64,.22)' stroke-width='.8'>Sun Saphia · Zalo 0904 567 009</text>"
-       "<text x='230' y='146' font-size='13' fill='rgba(255,255,255,.26)' stroke='rgba(10,37,64,.18)' stroke-width='.6'>sun-saphia-residence.com · Hoàng Hiệp</text></g></svg>")
+       "<text x='230' y='118' font-size='17' fill='rgba(255,255,255,.17)' stroke='rgba(10,37,64,.10)' stroke-width='.5'>Sun Saphia · Zalo 0904 567 009</text>"
+       "<text x='230' y='140' font-size='11' fill='rgba(255,255,255,.15)' stroke='rgba(10,37,64,.08)' stroke-width='.4'>sun-saphia-residence.com · Hoàng Hiệp</text></g></svg>")
 url = 'data:image/svg+xml;charset=utf-8,' + urllib.parse.quote(svg)
-css = ('#ssWm{position:fixed;inset:0;pointer-events:none;z-index:40;background-image:url("%s");background-size:460px 250px}'
+css = ('#ssWm{position:fixed;inset:0;pointer-events:none;z-index:40;background-image:url("%s");background-size:460px 250px}@media(max-width:700px){#ssWm{background-size:340px 185px;background-position:30px 60px}}'
        '#ssWmB{position:fixed;right:10px;bottom:auto;top:50%%;transform:translateY(-50%%) rotate(-90deg);transform-origin:right center;pointer-events:none;z-index:41;'
-       'font:800 12px/1 Arial,sans-serif;letter-spacing:.06em;color:rgba(255,255,255,.75);text-shadow:0 1px 3px rgba(0,0,0,.6);white-space:nowrap}'
+       'font:700 10px/1 Arial,sans-serif;letter-spacing:.06em;color:rgba(255,255,255,.42);text-shadow:0 1px 2px rgba(0,0,0,.35);white-space:nowrap}'
        'body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}') % url
 js = ('(function(){function add(){if(document.getElementById("ssWm"))return;var w=document.createElement("div");w.id="ssWm";w.setAttribute("aria-hidden","true");document.body.appendChild(w);'
       'var b=document.createElement("div");b.id="ssWmB";b.textContent="Sun Saphia · Zalo 0904 567 009";document.body.appendChild(b);}'
