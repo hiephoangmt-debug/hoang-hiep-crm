@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.52** + plugin Hoàng Hiệp CRM **2.20.119**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.52** + plugin Hoàng Hiệp CRM **2.20.120**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.120 (04/11/2026)
+
+- **Spana Tower – shophouse khối đế:** thêm 2 tab mặt bằng "S1/S2 – Shophouse tầng 1 (kích thước)" (bản vẽ chủ đầu tư, web tải thẳng từ Drive) và viết lại mô tả shophouse: căn điển hình mặt tiền ~6,2 m, ~88 m² (thông thủy ~82,8 m²), căn góc mặt tiền ~7,5 m, dãy căn lớn S1 ~120,7 m², diện tích từ ~46 m² đến gần 148 m². Thay mô tả cũ nếu anh chưa sửa tay.
 
 ## Có gì mới – plugin 2.20.119 (04/11/2026)
 

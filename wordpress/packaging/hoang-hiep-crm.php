@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Hoàng Hiệp CRM
  * Description: Dự án, nhà đất mua bán / cho thuê, khách hàng tiềm năng và dữ liệu dự án Đà Nẵng cho hiephoangmt.com. Dùng kèm giao diện Hoàng Hiệp.
- * Version: 2.20.119
+ * Version: 2.20.120
  * Author: Hoàng Hiệp
  * Requires PHP: 7.4
  */
@@ -14,7 +14,7 @@ if ( defined( 'HH_CRM_VERSION' ) ) {
 	return;
 }
 
-define( 'HH_CRM_VERSION', '2.20.119' );
+define( 'HH_CRM_VERSION', '2.20.120' );
 define( 'HH_CRM_DIR', __DIR__ . '/hh-crm/' );
 define( 'HH_CRM_URL', plugin_dir_url( __FILE__ ) . 'hh-crm/' );
 
@@ -53,6 +53,7 @@ require HH_CRM_DIR . 'data-sun-ponte-gia-thue.php';
 require HH_CRM_DIR . 'data-sun-ponte-mat-bang.php';
 require HH_CRM_DIR . 'data-spana-tien-do.php';
 require HH_CRM_DIR . 'data-penthouse-spana-cora-s-light.php';
+require HH_CRM_DIR . 'data-spana-shophouse.php';
 require HH_CRM_DIR . 'data-fusion-anh.php';
 require HH_CRM_DIR . 'data-casamia-balanca-anh.php';
 require HH_CRM_DIR . 'data-sun-group-da-nang.php';
