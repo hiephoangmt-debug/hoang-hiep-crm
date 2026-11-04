@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.52** + plugin Hoàng Hiệp CRM **2.20.114**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.52** + plugin Hoàng Hiệp CRM **2.20.115**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.115 (04/11/2026)
+
+- **Sun Ponte – mặt bằng & tiện ích:** thêm ảnh mặt bằng tầng 3A – 18 và ảnh tầng tiện ích (đã che/cắt logo đơn vị phân phối). Mục Thiết kế có mô tả cơ cấu căn (studio, 1PN+, 2PN, 3PN, double key), hướng view từng mặt, tiện ích tầng và quy hoạch The Rio; ô "Đơn giá / m²" ghi 64 – 96 triệu/m² tùy view (bảng giá tầng 8, tham khảo). Ảnh tổng thể và ảnh giá theo view có chữ chìm trang khác nên chỉ lấy số liệu, không đăng ảnh. Chỉ điền ô đang trống.
 
 ## Có gì mới – plugin 2.20.114 (04/11/2026)
 
