@@ -406,6 +406,19 @@ function hh_news_build_content( $n, $seo ) {
 
 /** Chỗ đánh dấu <!--hh-featured--> trong bài → ảnh đại diện (alt chứa từ khoá) để Rank Math nhận ảnh trong nội dung. */
 function hh_news_featured_in_content( $html, $id, $n ) {
+	// Ảnh đi kèm plugin chèn giữa bài: <!--hh-img:img/tin-tuc/ten.jpg|Chú thích-->.
+	$html  = preg_replace_callback(
+		'/<!--hh-img:([a-z0-9\/._-]+\.(?:jpe?g|png|webp))\|([^>]*?)-->/i',
+		static function ( $m ) {
+			if ( ! defined( 'HH_CRM_DIR' ) || ! is_readable( HH_CRM_DIR . $m[1] ) ) {
+				return '';
+			}
+			$url = HH_CRM_URL . $m[1];
+			$cap = trim( $m[2] );
+			return '<figure class="wp-block-image"><a href="' . esc_url( $url ) . '" target="_blank" rel="noopener"><img src="' . esc_url( $url ) . '" alt="' . esc_attr( $cap ) . '" loading="lazy"></a>' . ( $cap ? '<figcaption>' . esc_html( $cap ) . '</figcaption>' : '' ) . '</figure>';
+		},
+		$html
+	);
 	$thumb = get_post_thumbnail_id( $id );
 	if ( false === strpos( $html, '<!--hh-featured-->' ) || ! $thumb ) {
 		return $html;
@@ -568,7 +581,7 @@ function hh_import_news() {
 			}
 		}
 		$stored = get_post_field( 'post_content', $id );
-		if ( false !== strpos( $stored, '<!--hh-featured-->' ) && has_post_thumbnail( $id ) ) {
+		if ( ( false !== strpos( $stored, '<!--hh-featured-->' ) && has_post_thumbnail( $id ) ) || false !== strpos( $stored, '<!--hh-img:' ) ) {
 			$hash_ok = md5( $stored ) === get_post_meta( $id, '_hh_news_hash', true );
 			wp_update_post( array( 'ID' => $id, 'post_content' => hh_news_featured_in_content( $stored, $id, $n ) ) );
 			if ( $hash_ok ) {

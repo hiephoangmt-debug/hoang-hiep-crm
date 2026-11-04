@@ -1,7 +1,7 @@
 <?php
 /**
  * Bài: Định hướng quy hoạch chung đô thị Hòa Tiến (Đà Nẵng) đến 2050 – nội dung anh Hiệp gửi 04/11/2026 kèm sơ đồ vị trí,
- * bản đồ sử dụng đất (ảnh gốc có chữ chìm "Quy hoạch quốc gia – tài liệu tham khảo" và logo trang khác → không đăng).
+ * bản đồ sử dụng đất (anh Hiệp yêu cầu đăng: giữ nguyên chữ chìm, logo nguồn "Quy hoạch quốc gia – tài liệu tham khảo", ghi nguồn).
  * Ảnh đại diện tự vẽ.
  */
 
@@ -27,6 +27,7 @@ function hh_posts_quy_hoach_hoa_tien_2050( $posts ) {
 
 <h2>Phạm vi</h2>
 <p>Ranh giới nghiên cứu gồm toàn bộ xã Hòa Tiến mới: phía Bắc giáp xã Hòa Vang và phường Cẩm Lệ; phía Nam giáp xã Đại Lộc và phường Điện Bàn Bắc; phía Tây giáp xã Hà Nha và xã Hòa Vang; phía Đông giáp phường Hòa Xuân và phường Điện Bàn Bắc. Thời hạn quy hoạch đến năm 2050.</p>
+<!--hh-img:img/tin-tuc/quy-hoach-hoa-tien-2050-vi-tri-lien-he-vung.jpg|Sơ đồ vị trí và mối liên hệ vùng – quy hoạch chung đô thị Hòa Tiến đến 2050 (nguồn: Quy hoạch quốc gia, tài liệu tham khảo; bấm để xem ảnh lớn)-->
 
 <h2>Cấu trúc không gian</h2>
 <ul>
@@ -45,6 +46,7 @@ function hh_posts_quy_hoach_hoa_tien_2050( $posts ) {
 <tr><td>Công nghiệp &amp; hỗn hợp</td><td>Phú Sơn Nam; khu Nam Sơn giáp Vành đai phía Tây</td><td>Cụm công nghiệp Hòa Tiến 1, Hòa Tiến 2; trung tâm logistics, kho bãi</td></tr>
 </tbody>
 </table>
+<!--hh-img:img/tin-tuc/quy-hoach-hoa-tien-2050-ban-do-su-dung-dat.jpg|Bản đồ sử dụng đất quy hoạch đô thị Hòa Tiến đến 2050 (nguồn: Quy hoạch quốc gia, tài liệu tham khảo; bấm để xem ảnh lớn)-->
 
 <h2>Làng truyền thống và khung xanh</h2>
 <p>Khu dân cư hiện hữu được chỉnh trang theo mô hình "làng trong đô thị", bảo tồn các làng ven sông Yên, sông Cẩm Lệ như làng nghề dệt chiếu Cẩm Nê, Yến Nê, Dương Sơn, La Châu, La Bông. Khung sinh thái nối từ rừng phía Tây, hồ Đồng Nghệ qua sông Túy Loan, sông Yên đến công viên, hồ điều hòa, công viên ngập nước phía Đông. Hạ tầng chiến lược gồm nâng cấp QL14B, ĐT605, tuyến Nam Kỳ Khởi Nghĩa, Vành đai phía Tây, cao tốc CT.01 và kết nối với <strong>ga hành khách đường sắt tốc độ cao Bắc – Nam dự kiến đặt tại Hòa Tiến</strong>.</p>
@@ -57,7 +59,7 @@ function hh_posts_quy_hoach_hoa_tien_2050( $posts ) {
 <li>Trước khi mua đất Hòa Tiến, nên kiểm tra quy hoạch sử dụng đất từng thửa tại xã, tránh lô nằm trong đất quốc phòng, hành lang giao thông, cây xanh hoặc vùng ngập.</li>
 </ul>
 <p>Cần kiểm tra quy hoạch một lô đất ở Hòa Tiến, Hòa Vang, Cẩm Lệ: nhắn Zalo Hoàng Hiệp 0904 567 009.</p>
-<p class="src">Nguồn: hồ sơ định hướng quy hoạch chung đô thị Hòa Tiến, TP Đà Nẵng đến năm 2050 (sơ đồ vị trí, bản đồ sử dụng đất – tài liệu tham khảo, 11/2026).</p>
+<p class="src">Nguồn: hồ sơ định hướng quy hoạch chung đô thị Hòa Tiến, TP Đà Nẵng đến năm 2050 (sơ đồ vị trí, bản đồ sử dụng đất – Quy hoạch quốc gia, tài liệu tham khảo, 11/2026).</p>
 HTML,
 		'seo'           => array(
 			'seo_title' => 'Quy hoạch đô thị Hòa Tiến Đà Nẵng đến 2050',

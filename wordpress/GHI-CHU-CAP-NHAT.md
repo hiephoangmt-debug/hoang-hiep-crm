@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.53** + plugin Hoàng Hiệp CRM **2.20.127**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.53** + plugin Hoàng Hiệp CRM **2.20.128**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.128 (04/11/2026)
+
+- **Bài quy hoạch Hòa Tiến 2050 có hình quy hoạch:** chèn sơ đồ vị trí – liên hệ vùng và bản đồ sử dụng đất vào giữa bài (bấm xem ảnh lớn), ghi nguồn "Quy hoạch quốc gia – tài liệu tham khảo", giữ nguyên chữ chìm, logo nguồn. Bài đã đăng (chưa sửa tay) tự cập nhật khi bấm Nhập / cập nhật dữ liệu.
+- Tin tức hỗ trợ chèn ảnh đi kèm plugin giữa bài (`<!--hh-img:img/…jpg|chú thích-->`).
 
 ## Có gì mới – plugin 2.20.127 (04/11/2026)
 
