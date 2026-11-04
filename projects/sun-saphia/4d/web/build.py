@@ -84,3 +84,6 @@ out = out.replace("box.innerHTML = ''; box.appendChild(f);", "box.innerHTML = ''
 assert 'arm();' in out and 'function gate()' in out
 (here / 'sun-saphia-4d-embed.js').write_text(out, encoding='utf-8')
 print(len(out))
+
+# gọn khung trên điện thoại (không che mô hình)
+subprocess.check_call([sys.executable, str(here / "mobile_fix.py"), str(here / "sun-saphia-4d-embed.js")])
