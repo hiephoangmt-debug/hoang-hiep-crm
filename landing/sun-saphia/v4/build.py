@@ -200,7 +200,7 @@ def home():
         ('Quy mô', '1 tòa 30 tầng (114 m), 2 hầm, 782 căn trên 3.720,1 m²'), ('Loại căn', 'Studio 30–31 m² (513) · 1BR+ 50–51 m² (108) · 2BR 60–70 m² (133), trần 3,5 m'),
         ('Pháp lý', 'GCN đầu tư 2572746483 (17/09/2026), công trình cấp I niên hạn 100 năm'), ('Ngân hàng', 'Vietcombank, BIDV, NCB hỗ trợ vay'),
         ('Mở bán · bàn giao', 'Ra mắt 01/11/2026 (Hilton Đà Nẵng) · bàn giao 11/2028'), ('Giá bán', 'Dự kiến từ khoảng 1,8 tỷ/căn · thanh toán ~25% đến khi nhận nhà · bảng giá gốc qua Zalo 0904 567 009')])
-    b += '<section class="sec" style="padding-top:0"><div class="wrap">' + daily() + '<div class="toc" style="margin-top:26px">' + ''.join('<a href="#%s">%s</a>' % t for t in toc) + '</div></div></section>'
+    b += '<section class="sec" style="padding-top:0"><div class="wrap"><div class="toc" style="margin-top:26px">' + ''.join('<a href="#%s">%s</a>' % t for t in toc) + '</div></div></section>'
     # Thời điểm
     b += ('<section class="sec nv" id="thoi-diem">' + tiles('tr') + '<div class="wrap">'
           + sh('★', 'Thời điểm', 'Bất động sản <b>dòng tiền – giá trị thực – nghỉ dưỡng</b> lên ngôi', 'y') +
@@ -586,7 +586,7 @@ def phap_ly():
           '<ul class="ck" style="margin-top:10px"><li>Thời hạn sở hữu căn hộ và quyền gia hạn khi hết hạn</li><li>Trách nhiệm của chủ đầu tư, ban quản trị khi kiểm định, cải tạo toà nhà</li><li>Nghĩa vụ tài chính phát sinh (nếu có) khi gia hạn</li></ul>'
           '<button type="button" class="btn sm" data-pop data-interest="Pháp lý – hỏi về hết hạn" style="margin-top:12px">Nhận giải thích từ đại lý</button></div><div class="hfl"><span class="n">QUY TRÌNH KHI HẾT NIÊN HẠN</span><div class="fs">🏢 Hết niên hạn theo hồ sơ thiết kế<small>Điều 58 Luật Nhà ở 2023</small></div><div class="fa">▼</div><div class="fs">🔍 Kiểm định chất lượng toà nhà<small>Cơ quan có thẩm quyền tổ chức</small></div><div class="fa">▼</div><div class="fb"><div class="fs ok"><b>✅ Còn an toàn</b>Tiếp tục sử dụng</div><div class="fs no"><b>⚠️ Không an toàn</b>Cải tạo, xây lại – bồi thường, tái định cư hoặc căn mới<small>Điều 59</small></div></div><div class="fs gr"><b>50 năm thời hạn đất</b>Hết hạn được xem xét gia hạn<small>Luật Đất đai 2024</small></div></div></div></div></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('5', 'Tiến độ', 'Mốc thời gian <b>dự án</b>', 'y') + timeline() + '</div></section>')
-    b += ('<section class="sec"><div class="wrap">' + sh('6', 'Mua ở đâu', 'Mua qua <b>đại lý phân phối chính thức</b>', 'o') + daily() +
+    b += ('<section class="sec"><div class="wrap">' + sh('6', 'Mua ở đâu', 'Mua qua <b>đại lý phân phối chính thức</b>', 'o') + daily() + MIENTRU +
           '<div class="g4" style="margin-top:24px"><div class="card"><span class="n">BƯỚC 1</span><h3 class="oc">Đăng ký</h3><p>Để lại số Zalo, nhận tài liệu, mặt bằng. Không thu tiền.</p></div>'
           '<div class="card"><span class="n">BƯỚC 2</span><h3 class="oc">Nhận bảng giá</h3><p>Bảng giá, chính sách gốc khi chủ đầu tư công bố; chọn căn trên mặt bằng.</p></div>'
           '<div class="card"><span class="n">BƯỚC 3</span><h3 class="oc">Giữ chỗ / đặt cọc</h3><p>Theo quy trình chủ đầu tư tại sự kiện mở bán; tiền chuyển vào tài khoản theo hướng dẫn chính thức.</p></div>'
@@ -1017,7 +1017,7 @@ def ads(domain, home_page=False):
     b += dau_tu_san('ADS')
     b += ('<section class="sec"><div class="wrap">' + sh('09', 'Bài toán đầu tư · cho thuê', 'Tiềm năng <b>dòng tiền</b>', 'o') + rent_night() + '<div style="margin-top:20px">' + rent_case() + '</div></div></section>')
     b += band('Nhận bảng tính dòng tiền theo căn', 'Giá thuê, lấp đầy, lợi nhuận từng căn – gửi qua Zalo.', 'Nhận bảng tính', 'ADS – bảng tính dòng tiền')
-    b += ('<section class="sec alt"><div class="wrap">' + sh('10', 'Pháp lý', 'Công trình <b>cấp I</b> – pháp lý rõ ràng', 'n') + legal_box_ads() + '<div style="margin-top:26px">' + daily() + '</div></div></section>')
+    b += ('<section class="sec alt"><div class="wrap">' + sh('10', 'Pháp lý', 'Công trình <b>cấp I</b> – pháp lý rõ ràng', 'n') + legal_box_ads() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('11', 'Tầm nhìn', 'Mỗi hướng <b>một khung tranh</b>', 'o') + views('<img class="vb" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1668w" sizes="(max-width: 760px) 100vw, 900px" width="1668" height="943" alt="Biển ngay ngoài ban công – căn hộ cao tầng mặt biển Đà Nẵng lúc hoàng hôn (ảnh minh họa)" loading="lazy" decoding="async">' % (HB, HB, HB)) + '</div></section>')
     b += tim_can('ADS')
     b += cta_block('ADS – form cuối trang')

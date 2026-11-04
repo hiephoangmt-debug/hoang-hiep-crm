@@ -106,15 +106,20 @@ def footer(base, pages=True):
             '<div><b>SUN SAPHIA RESIDENCE</b><span>Trước mặt là Biển · Sau lưng là Sông · Bên cạnh là Núi</span></div>'
             '<a class="btn sm" href="#" data-pop data-interest="Chân trang">Nhận bảng giá gốc</a></div>'
             '<p class="fl">%s</p>'
-            '<p>Trang thông tin dự án Sun Saphia Residence do <b>Hoàng Phạm Đình Hiệp</b> – Giám đốc kinh doanh TATILAND (Công ty CP Đầu tư Địa ốc TATI), '
-            'đại lý phân phối chính thức dự án theo chứng nhận của Sun Property ngày 23/10/2026 – thực hiện. Đây không phải website của chủ đầu tư. '
-            'Thông tin, hình ảnh tổng hợp từ tài liệu giới thiệu dự án và nguồn công khai, mang tính tham khảo; bảng giá, chính sách và thông tin chính thức '
-            'theo công bố của Chủ đầu tư và Hợp đồng mua bán. Hình ảnh phối cảnh, tiện ích là minh họa.</p>'
-            '<p>Liên hệ tư vấn: Hoàng Hiệp · Hotline/Zalo <a href="tel:%s">%s</a> · Email <a href="mailto:hiephoangmt@gmail.com">hiephoangmt@gmail.com</a></p>'
-            '<p>Chính sách bảo mật: thông tin anh/chị gửi chỉ dùng để chuyên viên liên hệ tư vấn; không bán hay chia sẻ cho bên thứ ba; '
-            'yêu cầu xóa dữ liệu qua Hotline/Zalo hoặc email trên (Nghị định 13/2023/NĐ-CP). <a href="' + MAIN + '/chinh-sach-bao-mat">Xem chính sách bảo mật</a>.</p></div></footer>'
+            '<p class="fsm" style="font-size:12.5px;line-height:1.55;opacity:.85">Trang thông tin do Hoàng Hiệp – TATILAND, <a href="' + MAIN + '/phap-ly#dai-ly">đại lý phân phối chính thức</a> thực hiện; không phải website chủ đầu tư. Hình ảnh minh họa. '
+            'Hotline/Zalo <a href="tel:%s">%s</a> · <a href="' + MAIN + '/chinh-sach-bao-mat">Bảo mật</a></p></div></footer>'
             '<a class="pill" href="#dang-ky">📩 Nhận bảng giá ngay khi công bố</a>'
 ) % (links, TEL, TEL_S)
+
+MIENTRU = ('<p style="margin-top:16px;font-size:13.5px;color:#557585">Trang thông tin dự án do Hoàng Phạm Đình Hiệp – Giám đốc kinh doanh TATILAND (Công ty CP Đầu tư Địa ốc TATI) thực hiện, không phải website của chủ đầu tư. '
+           'Thông tin, hình ảnh tổng hợp từ tài liệu giới thiệu dự án và nguồn công khai, mang tính tham khảo; bảng giá, chính sách và thông tin chính thức theo công bố của Chủ đầu tư và Hợp đồng mua bán. Hình ảnh phối cảnh, tiện ích là minh họa.</p>')
+
+def daily_mini():
+    return ('<section class="sec dlm" style="padding:22px 0"><div class="wrap"><style>.dlmb{display:flex;align-items:center;gap:14px;max-width:760px;margin:0 auto;padding:12px 16px;border:1px solid #D3EAF2;border-radius:14px;background:#fff}'
+            '.dlmb img{width:56px;height:70px;object-fit:cover;border-radius:8px;flex:none}.dlmb p{margin:0;font-size:13.5px;line-height:1.5;color:#557585;text-align:left}.dlmb b{color:#0E6E99}</style>'
+            '<div class="dlmb" id="dai-ly"><img src="%s" width="56" height="70" loading="lazy" decoding="async" alt="Chứng nhận TATILAND là đại lý phân phối chính thức Sun Saphia Residence">'
+            '<p><b>TATILAND – đại lý phân phối chính thức</b> Sun Saphia Residence, được Sun Property chứng nhận ngày 23/10/2026. '
+            'Tư vấn trực tiếp: Hoàng Phạm Đình Hiệp – Giám đốc kinh doanh.</p></div></div></section>') % CERT
 
 def daily():
     return ('<div class="daily" id="dai-ly"><img src="%s" width="900" height="1126" loading="lazy" decoding="async" '
