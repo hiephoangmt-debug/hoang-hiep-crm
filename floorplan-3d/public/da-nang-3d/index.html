@@ -129,7 +129,7 @@ const HA = LL(15.8772, 108.3282); // trung tâm phố cổ Hội An
 // Casamia Balanca Hội An: từng lô lấy từ mặt bằng 363 lô, đã khớp toạ độ thật
 const CASA_DATA = await fetch('casamia.json').then((r) => (r.ok ? r.json() : null)).catch(() => null);
 // Lô đất Tờ 126 Thửa 30, Thọ Quang, Sơn Trà – góc Hoàng Sa × Hồ Học Lãm (587 m²)
-const PRJ_EXCL = (window.PROJECTS_DATA || []).filter((P) => P.model).map((P) => { const [x, z] = LL(P.lat, P.lon); return [x, z, Math.hypot(P.model.plot[0], P.model.plot[1]) / 2 * 0.95]; });
+const PRJ_EXCL = (window.PROJECTS_DATA || []).filter((P) => P.model).map((P) => { const [x, z] = LL(P.lat, P.lon); return [x, z, Math.hypot(P.model.plot[0], P.model.plot[1]) / 2 * 0.6]; });
 const LOT = { ring: [[16.0901963, 108.2498741], [16.090422, 108.249988], [16.0904882, 108.249792], [16.0902628, 108.2496928]].map(([la, lo]) => LL(la, lo)) };
 const CASA_RING = CASA_DATA ? CASA_DATA.site.map(([la, lo]) => LL(la, lo)) : null;
 const CASA = findProject(/casamia|balanca/i);
@@ -1456,8 +1456,26 @@ const PROJECTS = window.PROJECTS_DATA || [];
   const treeM = new THREE.MeshStandardMaterial({ color: 0x3f7a35, roughness: 1, flatShading: true });
   casaAnim.push((t, night) => { glassP.emissiveIntensity = night * 0.9; podP.emissiveIntensity = night * 0.25; crownP.emissiveIntensity = 0.1 + night * 1.2; });
   const roadAngle = (x, z) => { let best = 1e9, ang = 0; for (const r of meta.roads) for (let i = 0; i < r.pts.length - 1; i++) { const [ax, az] = r.pts[i], [bx, bz] = r.pts[i + 1], dx = bx - ax, dz = bz - az, L2 = dx * dx + dz * dz || 1, t = Math.max(0, Math.min(1, ((x - ax) * dx + (z - az) * dz) / L2)), d = Math.hypot(ax + dx * t - x, az + dz * t - z); if (d < best) { best = d; ang = Math.atan2(dz, dx); } } return ang; };
+  // Toạ độ dự án thường là điểm địa chỉ (giữa ngã tư / trên mặt đường) -> dời khu đất vào trong ô phố gần nhất,
+  // sao cho không đè lên đường và mặt nước; khu đất xoay song song con đường gần nhất.
+  const ROADPTS = []; for (const r of meta.roads.map((r) => r.pts).concat(meta.minor)) sampleLine(r, 6, (x, z) => ROADPTS.push(x, z));
+  function fitPlot(P, x0, z0) {
+    const [pw, pd] = P.model.plot, ang = P.model.rot ?? roadAngle(x0, z0), c = Math.cos(ang), s = Math.sin(ang), R = Math.hypot(pw, pd) / 2;
+    const cost = (cx, cz) => {
+      let n = 0;
+      for (let i = 0; i < ROADPTS.length; i += 2) { const dx = ROADPTS[i] - cx, dz = ROADPTS[i + 1] - cz; if (Math.abs(dx) > R || Math.abs(dz) > R) continue;
+        const u = dx * c + dz * s, v = -dx * s + dz * c; if (Math.abs(u) < pw / 2 + 2 && Math.abs(v) < pd / 2 + 2) n++; }
+      for (let i = -2; i <= 2; i++) for (let j = -2; j <= 2; j++) { const u = (i / 2) * pw / 2, v = (j / 2) * pd / 2; if (!MASK(cx + u * c - v * s, cz + u * s + v * c)) n += 6; }
+      return n + Math.hypot(cx - x0, cz - z0) / 40;
+    };
+    let best = [x0, z0, cost(x0, z0)];
+    const lim = P.model.search ?? 220;
+    for (let r = 10; r <= lim; r += 10) for (let a = 0; a < 24; a++) { const cx = x0 + Math.cos(a / 24 * 6.283) * r, cz = z0 + Math.sin(a / 24 * 6.283) * r, k = cost(cx, cz); if (k < best[2]) best = [cx, cz, k]; }
+    return { x: best[0], z: best[1], ang };
+  }
   function buildProject(P, x, z, y) {
-    const M = P.model, g = new THREE.Group(); g.position.set(x, y, z); g.rotation.y = -(M.rot ?? roadAngle(x, z)); world.add(g);
+    const M = P.model, F = fitPlot(P, x, z); x = F.x; z = F.z; y = groundY(x, z); P.fit = F;
+    const g = new THREE.Group(); g.position.set(x, y, z); g.rotation.y = -F.ang; world.add(g);
     const [pw, pd] = M.plot, hit = [];
     const box = (w, h, d, mat, px, py, pz) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); m.position.set(px, py + h / 2, pz); m.castShadow = m.receiveShadow = true; g.add(m); hit.push(m); return m; };
     // mặt bằng khu đất: viền vàng, lát đá, cỏ, hồ bơi, cây
@@ -1483,14 +1501,15 @@ const PROJECTS = window.PROJECTS_DATA || [];
       top = Math.max(top, yy + 3);
     }
     for (const [px, pz, r, h] of M.domes || []) { const d = new THREE.Mesh(new THREE.SphereGeometry(r, 32, 12, 0, Math.PI * 2, 0, Math.PI / 2), crownP); d.scale.y = h / r; d.position.set(px, 0.6, pz); g.add(d); hit.push(d); }
-    return { hit, top };
+    return { hit, top, x, z, y };
   }
   const items = $('prjItems');
   for (const P of PROJECTS) {
     const [x, z] = LL(P.lat, P.lon), y = groundY(x, z);
     let top = P.h || 90; P.hit = [];
-    if (P.model) { const r = buildProject(P, x, z, y); P.hit = r.hit; top = r.top; }
-    P.pos = V3(x, y + top + 15, z);
+    let px = x, pz = z, py = y;
+    if (P.model) { const r = buildProject(P, x, z, y); P.hit = r.hit; top = r.top; px = r.x; pz = r.z; py = r.y; }
+    P.pos = V3(px, py + top + 15, pz);
     const pl = { name: '🏢 ' + P.name, pos: P.pos, big: true, prj: P };
     if (P.pin !== false) PLACES.push(pl);
     const el = document.createElement('div'); el.className = 'pin prj'; el.innerHTML = '<b></b><span></span>'; el.querySelector('b').textContent = pl.name;
