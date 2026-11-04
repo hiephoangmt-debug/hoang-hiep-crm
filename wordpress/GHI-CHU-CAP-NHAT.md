@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.52** + plugin Hoàng Hiệp CRM **2.20.116**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.52** + plugin Hoàng Hiệp CRM **2.20.117**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.117 (04/11/2026)
+
+- **Sun Ponte – giá thuê chưa đổi trên web:** bản trước chỉ thay khi ô "Giá thuê tham khảo" còn đúng nguyên văn giá cũ nên không ăn. Bản này ghi đè giá thuê mới (bảng 11/2026) và nhận định thị trường một lần ngay khi anh vào trang quản trị sau khi cài, rồi xoá bộ nhớ đệm LiteSpeed và bộ nhớ chat – không cần bấm nhập dữ liệu. Lưu ý: nếu dự án có tin cho thuê đang đăng, ô Giá thuê ưu tiên khoảng giá từ các tin đó.
 
 ## Có gì mới – plugin 2.20.116 (04/11/2026)
 
