@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.53** + plugin Hoàng Hiệp CRM **2.20.125**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.53** + plugin Hoàng Hiệp CRM **2.20.126**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.126 (04/11/2026)
+
+- **Chủ đầu tư mới (/chu-dau-tu/):** thêm hồ sơ **Địa ốc Thành Lâm** (chủ đầu tư The Camellia Sơn Trà, MBLand phát triển) và **Thương mại BĐS Tây Bắc** (chủ đầu tư Meta City Tam Kỳ – Khu đô thị kiểu mẫu Tây Bắc), có mốc thời gian, lưu ý cho người mua, FAQ và nguồn báo chí. Trang dự án tự gắn link sang hồ sơ chủ đầu tư. Spana, Cora, S-Light, Sun Ponte, Sun Symphony đã thuộc hồ sơ Sun Group sẵn có.
 
 ## Có gì mới – plugin 2.20.125 (04/11/2026)
 
