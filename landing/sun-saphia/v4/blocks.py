@@ -61,7 +61,7 @@ def units_drawings(base=None):
                   '<b>2BR A</b> · thông thủy 67,69 m² · tim tường 76,36 m² · <span>căn góc bo cong</span>', 1800, 1272, True)
             + one('2br-c', 'Layout mặt bằng căn 2BR C tòa Saphia: phòng khách, bếp và bàn ăn, 2 phòng ngủ, 2 vệ sinh, logia; thông thủy 61,14 m², tim tường 68,67 m²',
                   '<b>2BR C</b> · thông thủy 61,14 m² · tim tường 68,67 m² · <span>căn góc bo cong</span>', 1800, 1272, True)
-            + '</div><p class="src">Layout mặt bằng tòa Saphia theo tài liệu chủ đầu tư; nội thất minh họa, bàn giao hoàn thiện cơ bản. Ô tô màu trên sơ đồ nhỏ là vị trí căn trên tầng.</p>')
+            + '</div><p class="src">Layout mặt bằng tòa Saphia theo tài liệu chủ đầu tư; nội thất minh họa, bàn giao liền tường (fit-out). Ô tô màu trên sơ đồ nhỏ là vị trí căn trên tầng.</p>')
 
 PRICES = [
     ('The Soleil Đà Nẵng', '5,2–5,5 tỷ', '7,7–7,8 tỷ', '17,5 tỷ', '–'),
@@ -89,7 +89,7 @@ def rent_month_table():
 
 def rent_night():
     return ('<div class="kpi"><div><b>2,2–2,9 tr</b><span>Studio view biển / đêm</span><small>giá trung bình ngoài mùa cao điểm</small></div>'
-            '<div><b>3,4–3,7 tr</b><span>1BR+ view biển / đêm</span><small>giá trung bình ngoài mùa cao điểm</small></div>'
+            '<div><b>3,3–3,7 tr</b><span>1BR+ view biển / đêm</span><small>giá trung bình ngoài mùa cao điểm</small></div>'
             '<div><b>81,3%</b><span>Lấp đầy khách sạn Sun Group miền Trung</span><small>năm 2026, từ 70,65% năm 2025</small></div></div>'
             '<p class="src">Tham chiếu giá thuê: Wyndham Soleil Danang, Saha Casa Boutique Hotel Danang, Radisson Hotel Danang (tài liệu Kick-off).</p>')
 
@@ -277,7 +277,7 @@ def cta_block(label, title='Giữ suất <b>ưu tiên chọn căn</b> trước n
 
 def hero_stats():
     return ('<div class="stats"><div><b>30 tầng</b><span>114 m · 2 hầm</span></div><div><b>782 căn</b><span>Studio · 1BR+ · 2BR</span></div>'
-            '<div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>3,5 m</b><span>trần cao mỗi căn</span></div></div>')
+            '<div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>3,5 m</b><span>chiều cao tầng mỗi căn</span></div></div>')
 
 def hero_perks():
     return hero_stats() + ('<div class="perk"><b>Đăng ký sớm – nhận trước:</b><span>Bảng giá gốc</span><span>Mặt bằng căn trống</span>'

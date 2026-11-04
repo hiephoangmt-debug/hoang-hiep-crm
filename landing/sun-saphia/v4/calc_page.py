@@ -50,7 +50,7 @@ def page_body():
     month = tbl(['Căn hộ cho thuê tháng', 'Giá/tháng'], [
         ['Panoma – Studio', '18–20 triệu'], ['Panoma – 1PN / 2PN', '24 / 35 triệu'], ['Filmore – 1PN / 2PN', '27 / 45 triệu'],
         ['Hilton – 2PN', '35 triệu'], ['Hiyori – 2PN', '25 triệu'], ['Sam Tower – 1PN / 2PN', '15 / 23 triệu'], ['Mornachy – 1PN / 2PN / 3PN', '14 / 20 / 35 triệu']])
-    night = tbl(['Phòng view biển thuê ngày (mùa thấp điểm)', 'Giá/đêm'], [['Studio view biển', '2,2–2,9 triệu'], ['1BR+ view biển', '3,4–3,7 triệu']])
+    night = tbl(['Phòng view biển thuê ngày (mùa thấp điểm)', 'Giá/đêm'], [['Studio view biển', '2,2–2,9 triệu'], ['1BR+ view biển', '3,3–3,7 triệu']])
     left = (
         '<div class="col">'
         '<div class="tc o1"><h2>1. Chọn loại căn</h2><div class="seg s3" id="segU">' + seg_u + '</div>'
