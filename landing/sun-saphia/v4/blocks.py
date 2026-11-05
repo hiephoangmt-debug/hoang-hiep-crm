@@ -66,7 +66,7 @@ def units_drawings(base=None):
 NT = {
     'studio': ('Studio', ['Không gian ngủ và góc làm việc', 'Giường ngủ, tường xanh hoa văn thổ cẩm', 'Bếp gọn và tủ áo', 'Phòng tắm kính, gạch sọc', 'Góc nhìn tổng thể căn Studio']),
     '1br': ('1BR+', ['Phòng ngủ chính view phố biển', 'Bàn ăn và phòng khách', 'Bếp cánh xanh, sàn gạch hoa', 'Phòng tắm gạch sọc cam đất', 'Phòng ngủ phụ (phòng đa năng)']),
-    '2br': ('2BR', ['Phòng khách và bàn ăn', 'Bếp chữ L, tủ lạnh âm', 'Phòng ngủ chính', 'Phòng tắm kính', 'Phòng ngủ thứ hai', 'Góc phòng ngủ cạnh cửa kính']),
+    '2br': ('2BR', ['Phòng khách và bàn ăn', 'Bếp chữ L, tủ lạnh âm', 'Phòng ngủ chính', 'Phòng tắm kính', 'Phòng ngủ thứ hai']),
 }
 
 def interior(base):
