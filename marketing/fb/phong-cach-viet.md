@@ -26,3 +26,10 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 - Câu ra lệnh, giọng dạy đời: "đừng…", "phải…", "xuống tiền liền", "chốt ngay".
 - Chữ mạnh, giật: "lì", "bay", "cháy hàng", "hot hòn họt", "duy nhất", "cơ hội cuối cùng".
 - VIẾT HOA cả câu, dấu chấm than dồn dập, hứa "miễn phí", "cam kết lời", "đại lý chính thức".
+
+## Ảnh (anh Hiệp góp ý 05/11: "bài đăng hình không đẹp" – bài FPT Plaza 3 dùng 6 thẻ chữ khung ngang bị Facebook cắt mất chữ)
+- Ảnh đầu tiên: khổ DỌC 1080×1350, chứa toàn bộ thông tin chính (tiêu đề, bảng giá/số liệu gọn, ảnh đại diện Hoàng Hiệp). Mẫu: wordpress/bai-viet/fb-fpt-plaza-3-can-co-so-11-2026.py (nhánh wordpress).
+- Ảnh 2–4: ảnh THẬT hoặc phối cảnh đẹp của dự án/khu vực, không phải thẻ chữ.
+- KHÔNG dùng nhiều thẻ chữ khung ngang trong một album: Facebook cắt ảnh thành ô vuông, chữ sát mép sẽ mất. Nếu bắt buộc có chữ trên ảnh phụ, đặt chữ trong vùng giữa (cách mép trái/phải ≥ 20% chiều rộng).
+- Không dùng ảnh mặt bằng có in mã căn; không đặt mặt bằng làm ảnh đầu.
+- Trước khi hẹn: ghép thử album thành lưới như Facebook hiển thị và mở ra xem lại.

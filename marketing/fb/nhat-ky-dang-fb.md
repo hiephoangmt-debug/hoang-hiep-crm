@@ -10,3 +10,4 @@
 | 05/11/2026 | Sun | 12:45 | FourS Tower F2: chính sách từ 17/10/2026, quà nội thất Nhà Xinh 35–100 triệu | /chinh-sach-fours-tower-f2-17-10-2026-qua-noi-that-nha-xinh/ |
 | 05/11/2026 | Hoàng Hiệp | 10:00 | (phiên khác) FPT Plaza 3 – căn có sổ cần bán | /mua-ban/?duan=fpt-plaza-3 |
 | 05/11/2026 | Hoàng Hiệp | 19:30 | (phiên khác) 5 chính sách mới ảnh hưởng nhà đất Đà Nẵng 11/2026 | /chinh-sach-moi-anh-huong-bat-dong-san-da-nang-11-2026/ |
+| 06/11/2026 | Hoàng Hiệp | 08:30 | FPT Plaza 3 – căn có sổ (đăng lại, ảnh dọc mới thay bản 05/11 bị cắt chữ) | /mua-ban/?duan=fpt-plaza-3 |
