@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.59** + plugin Hoàng Hiệp CRM **2.20.145**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.59** + plugin Hoàng Hiệp CRM **2.20.146**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.146 (05/11/2026)
+
+- **Sun Ponte – 4 tin cho thuê** (mục Mua bán → Cho thuê và mục "Chuyển nhượng & cho thuê" trên trang dự án), theo bảng căn cho thuê 11/2026, chỉ căn còn trống, ghi tầng thấp/trung/cao, không ghi mã căn: studio 7 căn 14 – 17 triệu; 1PN+ 4 căn 22 – 27 triệu; 2PN 70 – 76 m² 6 căn 25 – 38 triệu; căn lớn 2PN/3PN 91 m² 45 – 50 triệu (3PN 102 m², Dual 105 m² liên hệ). Căn nào đã cho thuê: sửa tin → Tình trạng "Đã giao dịch".
 
 ## Có gì mới – plugin 2.20.145 (05/11/2026)
 

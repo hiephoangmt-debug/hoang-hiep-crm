@@ -287,6 +287,124 @@ function hh_single_listing_dataset() {
 		);
 	}
 
+	// 05/11/2026 – căn cho thuê Sun Ponte Residence theo bảng căn cho thuê anh Hiệp gửi (chỉ căn còn trống).
+	// Gom theo loại căn, chỉ ghi tầng thấp (3 – 8) / trung (9 – 12) / cao (12A – 24); không ghi mã căn.
+	$ponte      = '<a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a>';
+	$ponte_rent = array(
+		array(
+			'slug'  => 'cho-thue-can-ho-sun-ponte-studio-full-noi-that',
+			'title' => 'Cho thuê studio Sun Ponte Residence 26 – 30 m², full nội thất – 7 căn từ 14 triệu/tháng',
+			'excerpt' => '7 căn studio 26 – 30 m² Sun Ponte Residence (Trần Hưng Đạo, cạnh cầu Rồng) đang trống, full nội thất, view sông Hàn hoặc biển – thành phố: 14 – 17 triệu/tháng, thuê tối thiểu 3 tháng.',
+			'beds' => '', 'm2' => 26, 'price' => 14, 'max' => 17, 'type' => 'Studio', 'size' => '26 – 30 m²',
+			'img'  => 'img/sun-ponte/sun-ponte-toan-canh-cau-rong.jpg',
+			'rows' => array(
+				array( 'Tầng thấp', '30 m²', '100% sông Hàn', '15 triệu' ),
+				array( 'Tầng cao', '26 m²', '100% sông Hàn', '16 triệu' ),
+				array( 'Tầng cao', '26 m²', '100% sông Hàn', '17 triệu (nhận thuê từ 1 tháng)' ),
+				array( 'Tầng cao', '26 m²', 'Biển, thành phố', '14 triệu' ),
+				array( 'Tầng cao', '26 m²', 'Biển, thành phố', '15 triệu' ),
+				array( 'Tầng cao', '30 m²', 'Biển, thành phố', '16 triệu' ),
+				array( 'Tầng cao', '30 m²', 'Biển, thành phố', 'Liên hệ' ),
+			),
+		),
+		array(
+			'slug'  => 'cho-thue-can-ho-sun-ponte-1pn-plus-49m2-full-noi-that',
+			'title' => 'Cho thuê căn 1PN+ Sun Ponte Residence 49 m², full nội thất – 4 căn 22 – 27 triệu/tháng',
+			'excerpt' => '4 căn 1PN+ khoảng 49 m² Sun Ponte Residence đang trống, full nội thất, view sông Hàn hoặc biển – thành phố: 22 – 27 triệu/tháng, thuê tối thiểu 3 tháng.',
+			'beds' => 1, 'm2' => 49, 'price' => 22, 'max' => 27, 'type' => '1PN+ (1 phòng ngủ + 1 phòng linh hoạt)', 'size' => 'Khoảng 49 m²',
+			'img'  => 'img/sun-ponte/sun-ponte-hoang-hon-song-han.jpg',
+			'rows' => array(
+				array( 'Tầng thấp', '49 m²', 'Biển, thành phố', '22 triệu' ),
+				array( 'Tầng thấp', '49 m²', 'Biển, thành phố', '23 triệu' ),
+				array( 'Tầng trung', '49 m²', '100% sông Hàn', '27 triệu' ),
+				array( 'Tầng cao', '49 m²', 'Biển, thành phố', '25 triệu' ),
+			),
+		),
+		array(
+			'slug'  => 'cho-thue-can-ho-sun-ponte-2pn-70-76m2-full-noi-that',
+			'title' => 'Cho thuê căn 2PN Sun Ponte Residence 70 – 76 m², view sông Hàn, cầu Rồng – 6 căn 25 – 38 triệu/tháng',
+			'excerpt' => '6 căn 2 phòng ngủ 70 – 76 m² Sun Ponte Residence đang trống, full nội thất, view sông Hàn, cầu Rồng, cầu Trần Thị Lý: 25 – 38 triệu/tháng, thuê tối thiểu 3 tháng.',
+			'beds' => 2, 'm2' => 70, 'price' => 25, 'max' => 38, 'type' => '2 phòng ngủ', 'size' => '70 – 76 m²',
+			'img'  => 'img/sun-ponte/sun-ponte-nhin-tu-song-han.jpg',
+			'rows' => array(
+				array( 'Tầng thấp', '75,8 m²', 'Sông Hàn, cầu Rồng, thành phố', '25 triệu' ),
+				array( 'Tầng thấp', '75 m²', 'Sông Hàn, cầu Rồng, thành phố', '30 triệu' ),
+				array( 'Tầng trung', '70 m²', 'Cầu Rồng, sông Hàn', '38 triệu' ),
+				array( 'Tầng trung', '70 m²', 'Cầu Rồng, sông Hàn', '38 triệu' ),
+				array( 'Tầng trung', '70 m²', '100% sông Hàn', '38 triệu' ),
+				array( 'Tầng cao', '70 m²', 'Sông Hàn, cầu Trần Thị Lý', '35 triệu' ),
+			),
+		),
+		array(
+			'slug'  => 'cho-thue-can-ho-sun-ponte-2pn-3pn-91m2-view-song-han',
+			'title' => 'Cho thuê căn lớn Sun Ponte Residence 2PN, 3PN 91 – 105 m², 100% view sông Hàn – từ 45 triệu/tháng',
+			'excerpt' => 'Căn 2PN, 3PN 91 m² Sun Ponte Residence trực diện sông Hàn, full nội thất: 45 – 50 triệu/tháng; căn 3PN 102 m² và căn Dual 105 m² liên hệ giá. Thuê tối thiểu 3 tháng.',
+			'beds' => 2, 'm2' => 91, 'price' => 45, 'max' => 50, 'type' => '2PN, 3PN, căn Dual', 'size' => '91 – 105 m²',
+			'img'  => 'img/sun-ponte/sun-ponte-ve-dem-phao-hoa.jpg',
+			'rows' => array(
+				array( 'Tầng cao', '2PN 91 m²', '100% sông Hàn', '45 triệu' ),
+				array( 'Tầng cao', '2PN 91 m²', '100% sông Hàn', '50 triệu' ),
+				array( 'Tầng thấp', '3PN 91 m²', '100% sông Hàn', '48 triệu' ),
+				array( 'Tầng cao', '3PN 91 m²', '100% sông Hàn', '48 triệu' ),
+				array( 'Tầng cao', '3PN 102 m²', '100% sông Hàn', 'Liên hệ' ),
+				array( 'Tầng cao', 'Căn Dual 105 m²', 'Biển, thành phố', 'Liên hệ' ),
+			),
+		),
+	);
+	foreach ( $ponte_rent as $u ) {
+		$rows = '';
+		foreach ( $u['rows'] as $r ) {
+			$rows .= '<tr><td>' . implode( '</td><td>', $r ) . '</td></tr>';
+		}
+		$list[] = array(
+			'rev'     => 1,
+			'slug'    => $u['slug'],
+			'project' => 'sun-ponte-residence',
+			'title'   => $u['title'],
+			'excerpt' => $u['excerpt'],
+			'kind'    => 'can-ho-chung-cu',
+			'area'    => 'son-tra',
+			'image'   => $u['img'],
+			'alt'     => $u['title'],
+			'meta'    => array_filter(
+				array(
+					'hh_deal'        => 'thue',
+					'hh_status'      => 'con-hang',
+					'hh_price'       => $u['price'],
+					'hh_price_max'   => $u['max'],
+					'hh_address'     => 'Sun Ponte Residence, đường Trần Hưng Đạo, Sơn Trà, Đà Nẵng – cạnh cầu Rồng',
+					'hh_map_address' => 'Sun Ponte Residence, Trần Hưng Đạo, Sơn Trà, Đà Nẵng',
+					'hh_area'        => $u['m2'],
+					'hh_bedrooms'    => $u['beds'],
+					'hh_furniture'   => 'day-du',
+					'hh_min_term'    => '3 tháng',
+					'hh_features'    => count( $u['rows'] ) . " căn đang trống để chọn tầng, view\nFull nội thất, vào ở ngay\nMặt tiền sông Hàn, giữa cầu Rồng và cầu Trần Thị Lý\nKhông nuôi thú cưng",
+				),
+				static fn( $v ) => '' !== (string) $v
+			),
+			'content' => '<p>Cho thuê căn hộ ' . $u['type'] . ' tại ' . $ponte . ' – tòa tháp 26 tầng của Sun Group trên đường Trần Hưng Đạo (Sơn Trà), mặt tiền sông Hàn, giữa cầu Rồng và cầu Trần Thị Lý. Các căn dưới đây đang trống theo bảng căn cho thuê tháng 11/2026.</p>
+<h2>Các căn đang trống</h2>
+<table><thead><tr><th>Vị trí</th><th>Diện tích</th><th>View</th><th>Giá thuê/tháng</th></tr></thead><tbody>' . $rows . '</tbody></table>
+<p>Tầng thấp: tầng 3 – 8 · tầng trung: 9 – 12 · tầng cao: 12A – 24.</p>
+<h2>Điều kiện thuê</h2>
+<ul>
+<li>Bàn giao full nội thất, vào ở ngay.</li>
+<li>Thuê tối thiểu 3 tháng' . ( 'Studio' === $u['type'] ? ' (có căn nhận thuê từ 1 tháng)' : '' ) . '.</li>
+<li>Không nuôi thú cưng.</li>
+<li>Giá tham khảo tháng 11/2026, thay đổi theo thời điểm – căn có thể đã có khách, gọi trước để kiểm tra.</li>
+</ul>
+<h2>Thông tin căn hộ</h2>
+<table><tbody>
+<tr><th>Dự án</th><td>' . $ponte . ', Sơn Trà, Đà Nẵng</td></tr>
+<tr><th>Loại căn</th><td>' . $u['type'] . '</td></tr>
+<tr><th>Diện tích</th><td>' . $u['size'] . '</td></tr>
+<tr><th>Nội thất</th><td>Đầy đủ</td></tr>
+<tr><th>Giá thuê</th><td>' . $u['price'] . ' – ' . $u['max'] . ' triệu/tháng</td></tr>
+</tbody></table>
+<p>Xem tiện ích, mặt bằng và layout căn tại <a href="/du-an/sun-ponte-residence/">trang dự án Sun Ponte Residence</a>. Xem căn, đặt cọc giữ căn: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>',
+		);
+	}
+
 	return apply_filters( 'hh_single_listing_dataset', $list );
 }
 
