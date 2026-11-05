@@ -580,7 +580,10 @@
           const m = /^(Facebook|Tiktok|Zalo|Google|Đăng tin):\s*$/i.exec(pt);
           if (m) {
             const name = m[1][0].toUpperCase() + m[1].slice(1).toLowerCase();
-            setParaText(p, `${name === "Tiktok" ? "TikTok" : name}: ${fmtInt((ctx.totals[name] || {}).cost_fee || 0)} VNĐ`);
+            const v = (ctx.totals[name] || {}).cost_fee || 0;
+            // kênh không chạy (0 đ) thì bỏ dòng, nếu có kênh khác đang chạy
+            if (!v && ctx.hideZero && Object.values(ctx.totals || {}).some((x) => (x || {}).cost_fee)) { p.parentNode.removeChild(p); return; }
+            setParaText(p, `${name === "Tiktok" ? "TikTok" : name}: ${fmtInt(v)} VNĐ`);
             widen(body, 9 * EMU_IN, false);
           } else if (/^NHÂN SỰ:/.test(pt) && ctx.staff) {
             setParaText(p, "NHÂN SỰ: " + ctx.staff);
@@ -654,12 +657,25 @@
   }
 
   /** Thay ảnh demo bằng ảnh chứng từ (xếp lưới trong khung demo), bỏ số chú thích và dòng "*Demo". */
-  async function placeImages(zip, s, files, state) {
+  async function placeImages(zip, s, files, state, hideGuide, slideW) {
     const doc = s.doc, frame = s.frame;
     const relRoot = s.relsDoc.documentElement;
     const usedIds = new Set(Array.from(relRoot.getElementsByTagName("Relationship")).map((r) => r.getAttribute("Id")));
     const maxId = byTag(doc, "p:cNvPr").reduce((m, e) => Math.max(m, parseInt(e.getAttribute("id") || "0", 10)), 0);
-    const B = frame.box;
+    const B = { x: frame.box.x, y: frame.box.y, w: frame.box.w, h: frame.box.h };
+    // đã có ảnh: bỏ khối hướng dẫn chụp ("*Lưu ý … Khoanh các mục sau …") bên cạnh khung ảnh, ảnh dùng cả chỗ đó
+    if (hideGuide) {
+      topShapes(doc).forEach((sh) => {
+        const b = sh.box;
+        if (!b || sh.el === frame.el || sh.embed || !sh.text) return;
+        const beside = b.x >= B.x + B.w * 0.6 && b.y < B.y + B.h && b.y + b.h > B.y;
+        if (beside && (/^\*?luu y/.test(norm(sh.text)) || /khoanh|muc sau/.test(norm(sh.text)))) {
+          // lề phải bằng lề trái của khung ảnh, không tràn mép slide
+          B.w = Math.max(B.w, Math.min(b.x + b.w, slideW ? slideW - B.x : Infinity) - B.x);
+          sh.el.parentNode.removeChild(sh.el);
+        }
+      });
+    }
     const n = files.length;
     const gap = Math.round(0.15 * EMU_IN);
     const sizes = [];
@@ -827,7 +843,7 @@
     const d1 = scopeWeeks[0].split("-")[0].trim().replace("/", ".");
     const d2 = scopeWeeks[scopeWeeks.length - 1].split("-")[1].trim().replace("/", ".");
     const base = {
-      campaign: opts.campaign, title: opts.title || "",
+      campaign: opts.campaign, title: opts.title || "", hideZero: !!opts.hideZeroChannels,
       period: opts.period || `${d1.replace(".", "/")} - ${d2.replace(".", "/")}/${opts.year}`,
       weekNo: opts.weekNo || names.indexOf(week) - names.indexOf(active[0]) + 1,
       weekRangeText: opts.rangeText || `${d1}.${opts.year} - ${d2}.${opts.year}`,
@@ -999,7 +1015,7 @@
         else fillTable(t, o.ctx.data, H, accountLabel);
       });
       if (o.files.length) {
-        await placeImages(zip, s, o.files, state);
+        await placeImages(zip, s, o.files, state, !!opts.hideGuide, W);
         nImg += o.files.length;
       } else if (o.placeholder && s.frame) {
         markMissing(s);
