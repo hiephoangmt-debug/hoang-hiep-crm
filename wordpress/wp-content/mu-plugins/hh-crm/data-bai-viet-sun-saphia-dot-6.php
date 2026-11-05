@@ -18,6 +18,7 @@ function hh_posts_sun_saphia_dot_6( $posts ) {
 	/* ---------------- 02/11 – Công viên biển 2,45 ha ---------------- */
 	$posts[] = array(
 		'slug'     => 'cong-vien-bien-truong-sa-2-45-ha-truoc-sun-saphia-residence',
+		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Công viên biển 2,45 ha trên đường Trường Sa: đất dự án bỏ hoang thành công viên trước Sun Saphia Residence',
 		'excerpt'  => 'Đà Nẵng thu hồi khoảng 2,45 ha từ dự án resort Hòn Ngọc Á Châu bỏ hoang để làm công viên công cộng ven biển trên đường Trường Sa, vốn khoảng 47 tỷ, làm đến 2027 – ngay phía trước Sun Saphia Residence.',
 		'keyword'  => 'công viên biển Trường Sa Đà Nẵng',
@@ -41,12 +42,14 @@ function hh_posts_sun_saphia_dot_6( $posts ) {
 </tbody>
 </table>
 <p>Gần đó còn dự án riêng "Công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy", nối thành chuỗi công viên bãi tắm dọc tuyến biển: bãi tắm Sơn Thủy – công viên đối diện Sun Saphia – công viên bãi tắm cuối đường Huyền Trân Công Chúa.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Ý nghĩa với người dân và du khách</h2>
 <ul>
 <li>Thêm lối xuống biển công cộng, chỗ đỗ xe – đoạn biển này trước đây bị rào chắn bởi khu đất bỏ hoang.</li>
 <li>Không gian sự kiện, thể dục ven biển cho cư dân khu Sơn Thủy, Mỹ An, Khuê Mỹ.</li>
 <li>Xử lý một "vết sẹo" đô thị tồn tại hơn 10 năm trên tuyến biển đẹp nhất thành phố.</li>
 </ul>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
 <h2>Tác động tới Sun Saphia Residence – nhận định của Hoàng Hiệp</h2>
 <ul>
 <li><strong>Cảnh quan phía trước được giữ thoáng</strong>: thay vì một công trình cao tầng chắn view, phía trước là công viên – có lợi cho các căn hướng biển.</li>
@@ -77,6 +80,7 @@ HTML
 	/* ---------------- 03/11 – Thị trường khách sạn ---------------- */
 	$posts[] = array(
 		'slug'     => 'gia-phong-khach-san-ven-bien-da-nang-2026-sun-saphia',
+		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Giá phòng khách sạn ven biển Đà Nẵng 2026: 5 sao, 4 sao, phố trong – căn studio Sun Saphia Residence đứng ở đâu?',
 		'excerpt'  => 'Giá phòng tham khảo 10/2026: resort 5 sao mặt biển khoảng 3,7 – 3,9 triệu/đêm, 4 sao mặt biển 1,25 – 3,13 triệu, 2 – 3 sao phố trong 0,4 – 0,9 triệu. Khách sạn 4 – 5 sao lấp đầy 88 – 90% quý III/2026.',
 		'keyword'  => 'giá phòng khách sạn ven biển Đà Nẵng',
@@ -103,6 +107,7 @@ HTML
 </tbody>
 </table>
 <p>Giá lấy trên các trang đặt phòng, thay đổi theo ngày, hạng phòng và mùa; chỉ để tham khảo.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Công suất phòng: khách sạn cao cấp đang đầy</h2>
 <ul>
 <li>Khách sạn 4 – 5 sao Đà Nẵng lấp đầy khoảng <strong>88 – 90%</strong> trong quý III/2026 (Avison Young).</li>
@@ -110,6 +115,7 @@ HTML
 <li>Khách sạn của Sun Group tại miền Trung đạt công suất khoảng 81,3% năm 2026 (theo chủ đầu tư).</li>
 <li>Áp lực: gần <strong>7.000 phòng mới</strong> sắp vào thị trường, có thể kéo giá phòng xuống ở phân khúc trung cấp.</li>
 </ul>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
 <h2>Studio Sun Saphia Residence nằm ở đâu?</h2>
 <p>Bài toán của chủ đầu tư giả định studio 30 m² view biển cho thuê khoảng <strong>2,2 – 2,9 triệu/đêm</strong> ngoài mùa cao điểm – ngang nhóm 4 sao mặt biển, thấp hơn resort 5 sao, cao hơn khách sạn phố trong không có view biển trực diện. Điểm cộng: tòa 30 tầng mặt dài hướng biển, có bếp, bể bơi, gym; điểm trừ: chưa vận hành, chưa có đánh giá thực tế trên các kênh đặt phòng.</p>
 <h2>Đọc số liệu thế nào khi tính dòng tiền?</h2>
@@ -141,6 +147,7 @@ HTML
 	/* ---------------- 04/11 – So sánh loại hình đầu tư cho thuê ---------------- */
 	$posts[] = array(
 		'slug'     => 'dau-tu-cho-thue-da-nang-can-ho-luu-tru-biet-thu-nha-pho-shophouse',
+		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Đầu tư cho thuê ở Đà Nẵng: căn hộ lưu trú như Sun Saphia Residence, biệt thự biển, nhà phố hay shophouse?',
 		'excerpt'  => 'So sánh 4 loại hình cho thuê ở Đà Nẵng: shophouse mặt tiền (lợi suất khoảng 2 – 3%), nhà phố trung tâm (1,4 – 1,8%), biệt thự biển (3,6 – 5,5%) và căn hộ lưu trú vốn nhỏ như studio Sun Saphia Residence.',
 		'keyword'  => 'đầu tư cho thuê Đà Nẵng',
@@ -164,8 +171,10 @@ HTML
 </tbody>
 </table>
 <p>Giá shophouse, biệt thự là giá rao 2026 (báo chí, trang tin bất động sản); giá thuê nhà phố, biệt thự theo khảo sát thực tế của Hoàng Hiệp. Lợi suất biệt thự đã trừ khoảng 35% chi phí vận hành.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
 <h2>Vì sao căn hộ lưu trú cho lợi suất cao hơn?</h2>
 <p>Giá thuê theo đêm của một studio view biển (khoảng 2,2 – 2,9 triệu ngoài cao điểm theo giả định của chủ đầu tư) gần bằng giá thuê tính theo mỗi phòng ngủ của biệt thự biển, nhưng vốn vào nhỏ hơn hàng chục lần. Ví dụ theo mùa (180 đêm thấp điểm, 180 đêm cao điểm, chủ nhà nhận 65%): studio có thể mang về khoảng 261 – 328 triệu/năm trước thuế, phí và khấu hao – chi tiết ở bài {$review}. Đổi lại, dòng tiền này phụ thuộc lấp đầy và chất lượng vận hành, không ổn định như hợp đồng thuê dài hạn.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-layout-can-1pn-plus.jpg|Layout căn 1PN+ Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Chọn theo mục tiêu</h2>
 <ul>
 <li><strong>Cần dòng tiền với vốn 2 – 3 tỷ</strong>: căn hộ lưu trú ven biển; chia vốn mua 2 – 3 căn ở vị trí khác nhau để giảm rủi ro.</li>
@@ -194,6 +203,7 @@ HTML
 	/* ---------------- 05/11 – Xây, mua khách sạn hay mua căn lưu trú ---------------- */
 	$posts[] = array(
 		'slug'     => 'dau-tu-khach-san-da-nang-xay-moi-mua-lai-hay-mua-can-luu-tru',
+		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Đầu tư khách sạn ở Đà Nẵng: xây mới, mua lại hay mua căn lưu trú như Sun Saphia Residence?',
 		'excerpt'  => 'Muốn có khách sạn ở Đà Nẵng: xây mới 3 sao 30 – 50 phòng tốn khoảng 15 – 30 tỷ chưa gồm đất, mất 2 – 3 năm; khách sạn 3 sao 50 phòng rao khoảng 67 tỷ; hoặc mua một căn lưu trú mặt biển như Sun Saphia Residence từ khoảng 2,1 tỷ.',
 		'keyword'  => 'đầu tư khách sạn Đà Nẵng',
@@ -217,11 +227,13 @@ HTML
 <tr><td>Rủi ro chính</td><td>Vượt vốn, chậm tiến độ, thiếu kinh nghiệm</td><td>Xuống cấp, cạnh tranh gần 7.000 phòng mới</td><td>Lấp đầy theo mùa, phí vận hành, thời hạn 50 năm</td></tr>
 </tbody>
 </table>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
 <h2>Khi nào nên tự xây hoặc mua lại?</h2>
 <ul>
 <li>Có vốn lớn, có đất hoặc tìm được khách sạn giá hợp lý, và có kinh nghiệm (hoặc đối tác) vận hành.</li>
 <li>Muốn toàn quyền thương hiệu, giá phòng, và sở hữu đất – tài sản giữ được lâu dài.</li>
 </ul>
+<!--hh-img:img/sun-saphia/sun-saphia-layout-can-1pn-plus.jpg|Layout căn 1PN+ Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Khi nào căn lưu trú hợp hơn?</h2>
 <ul>
 <li>Vốn 2 – 3 tỷ, muốn "sở hữu một phòng khách sạn mặt biển" mà không tự xin phép, tự vận hành.</li>
@@ -251,6 +263,7 @@ HTML
 	/* ---------------- 06/11 – Phí kênh bán phòng ---------------- */
 	$posts[] = array(
 		'slug'     => 'phi-booking-agoda-airbnb-cho-thue-can-ho-sun-saphia',
+		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Phí Booking, Agoda, Airbnb khi cho thuê căn hộ: mỗi % hoa hồng ăn bao nhiêu vào lợi nhuận studio Sun Saphia Residence?',
 		'excerpt'  => 'Hoa hồng kênh đặt phòng: Booking.com 15 – 18%, Agoda 12 – 20%, Airbnb 3% nếu chia phí với khách, Expedia 15 – 17%. Tham gia hết khuyến mãi có thể đẩy chi phí lên 25 – 30%. Giảm 5% phí kênh có thể thêm khoảng 25 triệu/năm cho một studio.',
 		'keyword'  => 'phí Booking Agoda Airbnb cho thuê căn hộ',
@@ -276,8 +289,10 @@ HTML
 </tbody>
 </table>
 <p>Mức phí tổng hợp từ các trang quản lý khách sạn 2026, thay đổi theo hợp đồng từng kênh.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Phối cảnh Sun Saphia Residence bên biển Sơn Thủy lúc hoàng hôn (ảnh chủ đầu tư)-->
 <h2>Bẫy khuyến mãi</h2>
 <p>Các chương trình như giảm giá thành viên, ưu đãi bí mật, khuyến mãi theo mùa giúp tăng hiển thị nhưng cộng dồn với hoa hồng, chi phí thực có thể lên <strong>25 – 30% doanh thu</strong>. Tham gia có chọn lọc theo mùa thay vì bật tất cả.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Mỗi % phí đáng bao nhiêu tiền?</h2>
 <p>Ví dụ minh hoạ: studio doanh thu khoảng 504 triệu/năm (180 đêm thấp điểm 1,2 triệu × 50%, 180 đêm cao điểm 2,75 triệu × 80%). Giảm 5% phí kênh nghĩa là thêm khoảng <strong>25 triệu/năm</strong> – tương đương hơn 1% lợi suất trên căn giá khoảng 2,1 tỷ.</p>
 <h2>Câu nên hỏi đơn vị vận hành</h2>
@@ -310,6 +325,7 @@ HTML
 	/* ---------------- 07/11 – Công trình cấp I ---------------- */
 	$posts[] = array(
 		'slug'     => 'cong-trinh-cap-1-la-gi-nien-han-100-nam-sun-saphia-residence',
+		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Công trình cấp I là gì? Tòa 30 tầng Sun Saphia Residence và niên hạn sử dụng 100 năm',
 		'excerpt'  => 'Theo Thông tư 06/2021/TT-BXD, nhà cao trên 75 – 200 m hoặc 25 – 50 tầng là công trình cấp I. Sun Saphia Residence 30 tầng, cao khoảng 114 m thuộc cấp I, chủ đầu tư công bố niên hạn sử dụng 100 năm. Ý nghĩa với người mua căn 50 năm.',
 		'keyword'  => 'công trình cấp I là gì',
@@ -334,12 +350,14 @@ HTML
 </tbody>
 </table>
 <p>Theo Thông tư 06/2021/TT-BXD (Phụ lục II), đã được sửa đổi, bổ sung năm 2025. Sun Saphia Residence 30 tầng, cao khoảng 114 m nên thuộc <strong>cấp I</strong>.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-toa-thap-30-tang.jpg|Phối cảnh tòa tháp 30 tầng Sun Saphia Residence (ảnh chủ đầu tư)-->
 <h2>Cấp công trình nói lên điều gì?</h2>
 <ul>
 <li>Cấp càng cao, yêu cầu về kết cấu, phòng cháy chữa cháy, thẩm định thiết kế càng khắt khe.</li>
 <li>Nhà cấp I thường được thiết kế với tuổi thọ dài – chủ đầu tư Sun Saphia công bố niên hạn sử dụng <strong>100 năm</strong>.</li>
 <li>Theo quy định hiện hành, thời hạn sử dụng nhà chung cư xác định theo hồ sơ thiết kế, ghi trong văn bản thẩm định – không tự suy ra từ bảng phân cấp. Người mua nên hỏi văn bản thẩm định thiết kế làm căn cứ cho con số 100 năm.</li>
 </ul>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Niên hạn 100 năm và thời hạn 50 năm khác nhau thế nào?</h2>
 <table>
 <thead><tr><th></th><th>Thời hạn dự án (đất)</th><th>Niên hạn công trình</th></tr></thead>

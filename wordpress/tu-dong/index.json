@@ -1,30 +1,33 @@
 {
-    "updated": "2026-11-04T23:45:54+00:00",
+    "updated": "2026-11-05T02:02:31+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do",
             "title": "Cao tốc nội thị Đà Nẵng – Chu Lai gần 90 km: hướng tuyến, quy mô, tiến độ và tác động tới Sun Saphia Residence",
             "publish": "2026-10-19 15:00",
             "file": "bai/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do.txt",
-            "rev": 2
+            "rev": 3
         },
         {
             "slug": "studio-ven-bien-da-nang-gia-mua-gia-thue-2026",
             "title": "Studio ven biển Đà Nẵng 2026: giá mua, giá thuê, dòng tiền và 513 studio Sun Saphia Residence",
             "publish": "2026-10-20 08:00",
-            "file": "bai/studio-ven-bien-da-nang-gia-mua-gia-thue-2026.txt"
+            "file": "bai/studio-ven-bien-da-nang-gia-mua-gia-thue-2026.txt",
+            "rev": 2
         },
         {
             "slug": "mo-rong-duong-vo-nguyen-giap-truong-sa-lac-long-quan-2633-ty",
             "title": "Mở rộng đường Võ Nguyên Giáp – Trường Sa 2.633 tỷ: Sun Saphia Residence và bất động sản ven biển hưởng lợi gì?",
             "publish": "2026-10-21 08:00",
-            "file": "bai/mo-rong-duong-vo-nguyen-giap-truong-sa-lac-long-quan-2633-ty.txt"
+            "file": "bai/mo-rong-duong-vo-nguyen-giap-truong-sa-lac-long-quan-2633-ty.txt",
+            "rev": 2
         },
         {
             "slug": "duong-sat-do-thi-san-bay-my-khe-hoi-an-bat-dong-san-huong-loi",
             "title": "Đường sắt đô thị sân bay – Mỹ Khê – Hội An: tiến độ mới nhất, căn hộ ven biển như Sun Saphia Residence hưởng lợi",
             "publish": "2026-10-22 08:00",
-            "file": "bai/duong-sat-do-thi-san-bay-my-khe-hoi-an-bat-dong-san-huong-loi.txt"
+            "file": "bai/duong-sat-do-thi-san-bay-my-khe-hoi-an-bat-dong-san-huong-loi.txt",
+            "rev": 2
         },
         {
             "slug": "cai-tao-canh-quan-hai-bo-song-han-29-ha",
@@ -43,7 +46,7 @@
             "title": "Giá Sun Saphia Residence bao nhiêu? Giá dự kiến studio tầng 15 từ 2,13 tỷ (cập nhật 28/10/2026)",
             "publish": "2026-10-22 15:00",
             "file": "bai/gia-sun-saphia-residence-bao-nhieu.txt",
-            "rev": 3
+            "rev": 4
         },
         {
             "slug": "truong-tieu-hoc-cong-lap-khu-do-thi-sinh-thai-hoa-xuan",
@@ -56,52 +59,56 @@
             "title": "Các dự án căn hộ Sun Group ở Đà Nẵng 2026: từ Sun Symphony đến Sun Saphia Residence – vị trí, bàn giao, giá",
             "publish": "2026-10-23 08:00",
             "file": "bai/du-an-can-ho-sun-group-da-nang-2026.txt",
-            "rev": 2
+            "rev": 3
         },
         {
             "slug": "mat-bang-can-ho-sun-saphia-residence",
             "title": "Mặt bằng Sun Saphia Residence: 782 căn, 513 studio, 108 căn 1PN+, 133 căn 2PN – chọn căn nào?",
             "publish": "2026-10-23 15:00",
             "file": "bai/mat-bang-can-ho-sun-saphia-residence.txt",
-            "rev": 2
+            "rev": 3
         },
         {
             "slug": "giu-cho-booking-can-ho-moi-da-nang-can-biet",
             "title": "Giữ chỗ (booking) căn hộ mới như Sun Saphia Residence: khác gì đặt cọc, có lấy lại tiền được không?",
             "publish": "2026-10-24 08:00",
-            "file": "bai/giu-cho-booking-can-ho-moi-da-nang-can-biet.txt"
+            "file": "bai/giu-cho-booking-can-ho-moi-da-nang-can-biet.txt",
+            "rev": 2
         },
         {
             "slug": "sun-saphia-residence-o-dau-vi-tri",
             "title": "Sun Saphia Residence ở đâu? Vị trí trên đường Trường Sa, bãi tắm Sơn Thủy và kết nối xung quanh",
             "publish": "2026-10-24 15:00",
-            "file": "bai/sun-saphia-residence-o-dau-vi-tri.txt"
+            "file": "bai/sun-saphia-residence-o-dau-vi-tri.txt",
+            "rev": 2
         },
         {
             "slug": "can-ho-ven-bien-my-khe-son-thuy-non-nuoc-so-sanh",
             "title": "Mua căn hộ ven biển Đà Nẵng: Mỹ Khê, Sơn Thủy (Sun Saphia Residence) hay Non Nước?",
             "publish": "2026-10-25 08:00",
-            "file": "bai/can-ho-ven-bien-my-khe-son-thuy-non-nuoc-so-sanh.txt"
+            "file": "bai/can-ho-ven-bien-my-khe-son-thuy-non-nuoc-so-sanh.txt",
+            "rev": 2
         },
         {
             "slug": "phap-ly-sun-saphia-residence-so-huu-bao-lau",
             "title": "Pháp lý Sun Saphia Residence: thời hạn 50 năm từ 17/9/2026, công trình niên hạn 100 năm – người mua cần biết gì?",
             "publish": "2026-10-25 15:00",
             "file": "bai/phap-ly-sun-saphia-residence-so-huu-bao-lau.txt",
-            "rev": 2
+            "rev": 3
         },
         {
             "slug": "mua-can-ho-da-nang-tu-ha-noi-tp-hcm-kinh-nghiem",
             "title": "Ở Hà Nội, TP.HCM mua căn hộ Đà Nẵng từ xa: kinh nghiệm an toàn, ví dụ Sun Saphia Residence",
             "publish": "2026-10-26 08:00",
-            "file": "bai/mua-can-ho-da-nang-tu-ha-noi-tp-hcm-kinh-nghiem.txt"
+            "file": "bai/mua-can-ho-da-nang-tu-ha-noi-tp-hcm-kinh-nghiem.txt",
+            "rev": 2
         },
         {
             "slug": "dau-tu-sun-saphia-residence-cho-thue-dong-tien",
             "title": "Đầu tư Sun Saphia Residence cho thuê: 3 kịch bản dòng tiền studio và rủi ro cần tính trước",
             "publish": "2026-10-26 15:00",
             "file": "bai/dau-tu-sun-saphia-residence-cho-thue-dong-tien.txt",
-            "rev": 2
+            "rev": 3
         },
         {
             "slug": "gia-dat-nam-viet-a-da-nang-10-2026",
@@ -113,87 +120,99 @@
             "slug": "co-nen-mua-sun-saphia-residence-uu-nhuoc-diem",
             "title": "Có nên mua Sun Saphia Residence? 6 ưu điểm, 4 điểm cần cân nhắc trước khi giữ chỗ",
             "publish": "2026-10-27 15:00",
-            "file": "bai/co-nen-mua-sun-saphia-residence-uu-nhuoc-diem.txt"
+            "file": "bai/co-nen-mua-sun-saphia-residence-uu-nhuoc-diem.txt",
+            "rev": 2
         },
         {
             "slug": "tien-do-sun-saphia-residence-mo-ban-ban-giao",
             "title": "Tiến độ Sun Saphia Residence: giữ chỗ, mở bán, xây dựng và bàn giao 11/2028",
             "publish": "2026-10-28 15:00",
-            "file": "bai/tien-do-sun-saphia-residence-mo-ban-ban-giao.txt"
+            "file": "bai/tien-do-sun-saphia-residence-mo-ban-ban-giao.txt",
+            "rev": 2
         },
         {
             "slug": "sun-saphia-residence-va-khu-do-thi-saphia-khac-nhau",
             "title": "Sun Saphia Residence và Khu đô thị Saphia Ngũ Hành Sơn khác nhau thế nào? Tránh nhầm khi tìm mua",
             "publish": "2026-10-29 15:00",
-            "file": "bai/sun-saphia-residence-va-khu-do-thi-saphia-khac-nhau.txt"
+            "file": "bai/sun-saphia-residence-va-khu-do-thi-saphia-khac-nhau.txt",
+            "rev": 2
         },
         {
             "slug": "studio-sun-saphia-residence-30-m2-bo-tri-ai-nen-mua",
             "title": "Studio Sun Saphia Residence 30 m²: bố trí, công năng và ai nên mua",
             "publish": "2026-10-30 08:00",
-            "file": "bai/studio-sun-saphia-residence-30-m2-bo-tri-ai-nen-mua.txt"
+            "file": "bai/studio-sun-saphia-residence-30-m2-bo-tri-ai-nen-mua.txt",
+            "rev": 2
         },
         {
             "slug": "tien-ich-sun-saphia-residence-noi-khu-xung-quanh",
             "title": "Tiện ích Sun Saphia Residence: trong tòa và quanh dự án ven biển Sơn Thủy",
             "publish": "2026-10-31 08:00",
-            "file": "bai/tien-ich-sun-saphia-residence-noi-khu-xung-quanh.txt"
+            "file": "bai/tien-ich-sun-saphia-residence-noi-khu-xung-quanh.txt",
+            "rev": 2
         },
         {
             "slug": "chi-phi-mua-can-ho-sun-saphia-residence-ngoai-gia-ban",
             "title": "Mua Sun Saphia Residence cần thêm bao nhiêu ngoài giá bán? VAT, phí bảo trì, lệ phí trước bạ",
             "publish": "2026-11-01 08:00",
-            "file": "bai/chi-phi-mua-can-ho-sun-saphia-residence-ngoai-gia-ban.txt"
+            "file": "bai/chi-phi-mua-can-ho-sun-saphia-residence-ngoai-gia-ban.txt",
+            "rev": 2
         },
         {
             "slug": "danh-gia-sun-saphia-residence-chi-tiet",
             "title": "Đánh giá Sun Saphia Residence (11/2026): vị trí, view 4 hướng, giá dự kiến, dòng tiền cho thuê và pháp lý",
             "publish": "2026-11-01 15:00",
             "file": "bai/danh-gia-sun-saphia-residence-chi-tiet.txt",
-            "rev": 2
+            "rev": 3
         },
         {
             "slug": "vay-mua-sun-saphia-residence-tra-gop-hang-thang",
             "title": "Vay mua Sun Saphia Residence: trả góp mỗi tháng bao nhiêu với lãi suất 10 – 12%?",
             "publish": "2026-11-02 08:00",
             "file": "bai/vay-mua-sun-saphia-residence-tra-gop-hang-thang.txt",
-            "rev": 2
+            "rev": 3
         },
         {
             "slug": "cong-vien-bien-truong-sa-2-45-ha-truoc-sun-saphia-residence",
             "title": "Công viên biển 2,45 ha trên đường Trường Sa: đất dự án bỏ hoang thành công viên trước Sun Saphia Residence",
             "publish": "2026-11-02 15:00",
-            "file": "bai/cong-vien-bien-truong-sa-2-45-ha-truoc-sun-saphia-residence.txt"
+            "file": "bai/cong-vien-bien-truong-sa-2-45-ha-truoc-sun-saphia-residence.txt",
+            "rev": 2
         },
         {
             "slug": "khach-du-lich-da-nang-2026-nhu-cau-thue-can-ho-ven-bien",
             "title": "Đà Nẵng đón 15,86 triệu khách lưu trú 9 tháng 2026: tín hiệu gì cho căn hộ ven biển như Sun Saphia Residence?",
             "publish": "2026-11-03 08:00",
-            "file": "bai/khach-du-lich-da-nang-2026-nhu-cau-thue-can-ho-ven-bien.txt"
+            "file": "bai/khach-du-lich-da-nang-2026-nhu-cau-thue-can-ho-ven-bien.txt",
+            "rev": 2
         },
         {
             "slug": "gia-phong-khach-san-ven-bien-da-nang-2026-sun-saphia",
             "title": "Giá phòng khách sạn ven biển Đà Nẵng 2026: 5 sao, 4 sao, phố trong – căn studio Sun Saphia Residence đứng ở đâu?",
             "publish": "2026-11-03 15:00",
-            "file": "bai/gia-phong-khach-san-ven-bien-da-nang-2026-sun-saphia.txt"
+            "file": "bai/gia-phong-khach-san-ven-bien-da-nang-2026-sun-saphia.txt",
+            "rev": 2
         },
         {
             "slug": "cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue",
             "title": "Cho thuê ngắn ngày căn hộ Sun Saphia Residence: pháp lý, khai báo lưu trú và thuế cần biết",
             "publish": "2026-11-04 08:00",
-            "file": "bai/cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue.txt"
+            "file": "bai/cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue.txt",
+            "rev": 2
         },
         {
             "slug": "dau-tu-cho-thue-da-nang-can-ho-luu-tru-biet-thu-nha-pho-shophouse",
             "title": "Đầu tư cho thuê ở Đà Nẵng: căn hộ lưu trú như Sun Saphia Residence, biệt thự biển, nhà phố hay shophouse?",
             "publish": "2026-11-04 15:00",
-            "file": "bai/dau-tu-cho-thue-da-nang-can-ho-luu-tru-biet-thu-nha-pho-shophouse.txt"
+            "file": "bai/dau-tu-cho-thue-da-nang-can-ho-luu-tru-biet-thu-nha-pho-shophouse.txt",
+            "rev": 2
         },
         {
             "slug": "thi-truong-can-ho-da-nang-quy-3-2026-sun-saphia-residence",
             "title": "Thị trường căn hộ Đà Nẵng quý III/2026: nguồn cung giảm 14%, Sun Saphia Residence ra hàng lúc nào là hợp lý?",
             "publish": "2026-11-05 08:00",
-            "file": "bai/thi-truong-can-ho-da-nang-quy-3-2026-sun-saphia-residence.txt"
+            "file": "bai/thi-truong-can-ho-da-nang-quy-3-2026-sun-saphia-residence.txt",
+            "rev": 2
         },
         {
             "slug": "da-nang-an-dinh-thoi-han-khoi-cong-3-khu-do-thi-chu-lai",
@@ -205,62 +224,71 @@
             "slug": "dau-tu-khach-san-da-nang-xay-moi-mua-lai-hay-mua-can-luu-tru",
             "title": "Đầu tư khách sạn ở Đà Nẵng: xây mới, mua lại hay mua căn lưu trú như Sun Saphia Residence?",
             "publish": "2026-11-05 15:00",
-            "file": "bai/dau-tu-khach-san-da-nang-xay-moi-mua-lai-hay-mua-can-luu-tru.txt"
+            "file": "bai/dau-tu-khach-san-da-nang-xay-moi-mua-lai-hay-mua-can-luu-tru.txt",
+            "rev": 2
         },
         {
             "slug": "thanh-toan-can-ho-hinh-thanh-tuong-lai-sun-saphia-residence",
             "title": "Mua Sun Saphia Residence trả tiền thế nào? Mức cọc 5%, 30%, 70%, 95% theo Luật Kinh doanh BĐS 2023",
             "publish": "2026-11-06 08:00",
-            "file": "bai/thanh-toan-can-ho-hinh-thanh-tuong-lai-sun-saphia-residence.txt"
+            "file": "bai/thanh-toan-can-ho-hinh-thanh-tuong-lai-sun-saphia-residence.txt",
+            "rev": 2
         },
         {
             "slug": "phi-booking-agoda-airbnb-cho-thue-can-ho-sun-saphia",
             "title": "Phí Booking, Agoda, Airbnb khi cho thuê căn hộ: mỗi % hoa hồng ăn bao nhiêu vào lợi nhuận studio Sun Saphia Residence?",
             "publish": "2026-11-06 15:00",
-            "file": "bai/phi-booking-agoda-airbnb-cho-thue-can-ho-sun-saphia.txt"
+            "file": "bai/phi-booking-agoda-airbnb-cho-thue-can-ho-sun-saphia.txt",
+            "rev": 2
         },
         {
             "slug": "chuan-bi-su-kien-ban-hang-sun-saphia-residence-28-11",
             "title": "Sự kiện bán hàng Sun Saphia Residence 28/11/2026: 7 việc nên chuẩn bị trước để chọn được căn ưng ý",
             "publish": "2026-11-07 08:00",
             "file": "bai/chuan-bi-su-kien-ban-hang-sun-saphia-residence-28-11.txt",
-            "rev": 2
+            "rev": 3
         },
         {
             "slug": "cong-trinh-cap-1-la-gi-nien-han-100-nam-sun-saphia-residence",
             "title": "Công trình cấp I là gì? Tòa 30 tầng Sun Saphia Residence và niên hạn sử dụng 100 năm",
             "publish": "2026-11-07 15:00",
-            "file": "bai/cong-trinh-cap-1-la-gi-nien-han-100-nam-sun-saphia-residence.txt"
+            "file": "bai/cong-trinh-cap-1-la-gi-nien-han-100-nam-sun-saphia-residence.txt",
+            "rev": 2
         },
         {
             "slug": "ho-tro-lai-suat-24-thang-sun-saphia-residence-tinh-thu",
             "title": "Hỗ trợ lãi suất 24 tháng khi mua Sun Saphia Residence: tính thử tiết kiệm bao nhiêu và trả bao nhiêu từ tháng 25",
             "publish": "2026-11-08 08:00",
-            "file": "bai/ho-tro-lai-suat-24-thang-sun-saphia-residence-tinh-thu.txt"
+            "file": "bai/ho-tro-lai-suat-24-thang-sun-saphia-residence-tinh-thu.txt",
+            "rev": 2
         },
         {
             "slug": "gui-tiet-kiem-hay-mua-studio-sun-saphia-residence-cho-thue",
             "title": "Gửi tiết kiệm hay mua studio Sun Saphia Residence cho thuê? So sánh với lãi suất 5,4 – 6,7%/năm",
             "publish": "2026-11-09 08:00",
-            "file": "bai/gui-tiet-kiem-hay-mua-studio-sun-saphia-residence-cho-thue.txt"
+            "file": "bai/gui-tiet-kiem-hay-mua-studio-sun-saphia-residence-cho-thue.txt",
+            "rev": 2
         },
         {
             "slug": "can-ho-ven-bien-hoi-muoi-mua-bao-sun-saphia-residence",
             "title": "Căn hộ ven biển như Sun Saphia Residence: hơi muối, mùa mưa bão và những gì cần kiểm tra, bảo trì",
             "publish": "2026-11-10 08:00",
-            "file": "bai/can-ho-ven-bien-hoi-muoi-mua-bao-sun-saphia-residence.txt"
+            "file": "bai/can-ho-ven-bien-hoi-muoi-mua-bao-sun-saphia-residence.txt",
+            "rev": 2
         },
         {
             "slug": "chuyen-nhuong-hop-dong-sun-saphia-residence-truoc-ban-giao",
             "title": "Bán lại Sun Saphia Residence trước khi nhận nhà: chuyển nhượng hợp đồng thế nào, thuế 2% ai nộp?",
             "publish": "2026-11-11 08:00",
-            "file": "bai/chuyen-nhuong-hop-dong-sun-saphia-residence-truoc-ban-giao.txt"
+            "file": "bai/chuyen-nhuong-hop-dong-sun-saphia-residence-truoc-ban-giao.txt",
+            "rev": 2
         },
         {
             "slug": "dai-bien-truong-sa-ngu-hanh-son-resort-sun-saphia-residence",
             "title": "Dải biển Trường Sa – Ngũ Hành Sơn: resort, khách sạn quốc tế và vị trí của Sun Saphia Residence",
             "publish": "2026-11-12 08:00",
-            "file": "bai/dai-bien-truong-sa-ngu-hanh-son-resort-sun-saphia-residence.txt"
+            "file": "bai/dai-bien-truong-sa-ngu-hanh-son-resort-sun-saphia-residence.txt",
+            "rev": 2
         }
     ]
 }

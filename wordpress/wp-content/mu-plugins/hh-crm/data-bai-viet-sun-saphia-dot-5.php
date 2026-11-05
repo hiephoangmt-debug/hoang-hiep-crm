@@ -22,7 +22,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 		'keywords_extra' => array( 'Sun Saphia Residence', 'Sun Saphia Đà Nẵng', 'view Sun Saphia Residence', 'giá Sun Saphia Residence', 'Sun Saphia cho thuê' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-01 15:00',
-		'rev'      => 2, // 01/11: thống nhất mốc bàn giao dự kiến 11/2028.
+		'rev'      => 3, // 01/11: thống nhất mốc bàn giao dự kiến 11/2028.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Sun Saphia Residence', 'Căn hộ biển Đà Nẵng', 'Đánh giá dự án' ),
 		'image'    => 'plugin:img/tin-tuc/review-sun-saphia-residence.jpg',
@@ -44,6 +44,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 </tbody>
 </table>
 
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Phối cảnh Sun Saphia Residence bên biển Sơn Thủy lúc hoàng hôn (ảnh chủ đầu tư)-->
 <h2>1. Vị trí: sát biển, giữa trung tâm và Hội An</h2>
 <p>Dự án nằm đúng khúc chuyển từ đại lộ Võ Nguyên Giáp sang đường Trường Sa – nơi bắt đầu dải resort ven biển Đà Nẵng – Hội An. Các khoảng cách chính theo tài liệu dự án và Google Maps:</p>
 <table>
@@ -60,6 +61,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 <p><strong>Hạ tầng sắp tới</strong>: mở rộng trục Võ Nguyên Giáp – Trường Sa – Lạc Long Quân (vốn dự kiến 2.633 tỷ, nhóm ưu tiên "luồng xanh"); tuyến <a href="/duong-sat-do-thi-san-bay-my-khe-hoi-an-bat-dong-san-huong-loi/">đường sắt đô thị sân bay – Hội An</a> dự kiến khởi công giai đoạn 1 tháng 2/2027; phía Bắc có đề xuất <a href="/kinh-te-dem-bien-my-khe-da-nang-2026/">tổ hợp kinh tế đêm Mỹ Khê</a> tại 268 Võ Nguyên Giáp. Các dự án này đang ở giai đoạn quy hoạch, đề xuất – tiến độ có thể thay đổi.</p>
 <p><em>Đánh giá vị trí:</em> mạnh nhất của dự án. Đi bộ ra biển, gần phố du lịch nhưng không nằm trong khu ồn ào, kết nối thuận cả về trung tâm lẫn Hội An.</p>
 
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>2. View Sun Saphia Residence: tầng 15 nhìn thấy gì theo từng hướng?</h2>
 <p>Hoàng Hiệp dựng mô hình 3D từ mặt đứng tầng 15 để hình dung tầm nhìn (minh hoạ, không phải ảnh chụp thật; công trình xung quanh là ước lượng):</p>
 <table>

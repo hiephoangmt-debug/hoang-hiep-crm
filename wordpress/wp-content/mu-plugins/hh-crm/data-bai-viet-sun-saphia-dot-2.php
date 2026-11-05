@@ -32,7 +32,7 @@ function hh_posts_sun_saphia_dot_2( $posts ) {
 		'keywords_extra' => array( 'Sun Saphia Residence', 'bảng giá Sun Saphia', 'giá căn hộ Sun Saphia Đà Nẵng', 'giá studio Sun Saphia' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-22 15:00',
-		'rev'      => 3, // 28/10: giá dự kiến (rumor) studio tầng 15, chính sách hỗ trợ lãi suất 24 tháng, sự kiện bán hàng 28/11.
+		'rev'      => 4, // 28/10: giá dự kiến (rumor) studio tầng 15, chính sách hỗ trợ lãi suất 24 tháng, sự kiện bán hàng 28/11.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Sun Saphia Residence', 'Giá căn hộ Đà Nẵng' ),
 		'image'    => 'plugin:img/tin-tuc/gia-sun-saphia-residence.jpg',
@@ -55,12 +55,14 @@ function hh_posts_sun_saphia_dot_2( $posts ) {
 <li>Cột giá/m² do Hoàng Hiệp tự tính (chia cho 30 m² thông thủy) để dễ so sánh.</li>
 </ul>
 <p>Chênh lệch giữa căn mặt biển và căn phía sau cùng tầng khoảng <strong>0,7 tỷ</strong> – view biển là yếu tố quyết định giá lớn nhất ở Sun Saphia.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Phối cảnh Sun Saphia Residence bên biển Sơn Thủy lúc hoàng hôn (ảnh chủ đầu tư)-->
 <h2>Chính sách bán hàng và lịch sự kiện</h2>
 <ul>
 <li><strong>Hỗ trợ lãi suất lên tới 24 tháng</strong>.</li>
 <li><strong>Không có chương trình nhận nhà sớm (early key)</strong>; bàn giao dự kiến tháng 11/2028.</li>
 <li>Các sự kiện giới thiệu dự án tại Đà Nẵng dự kiến ngày 01/11 và 15/11/2026; <strong>sự kiện bán hàng của chủ đầu tư dự kiến 28/11/2026</strong>.</li>
 </ul>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Giá Sun Saphia Residence trên tin rao (trước 28/10)</h2>
 <p>Trước khi có giá dự kiến, các trang tổng hợp tin đăng ghi nhận mức giá khác nhau giữa các tin, khoảng <strong>64,5 – 83 triệu/m²</strong>, nhiều tin để "giá thỏa thuận". Đây là giá người đăng tự ghi, chưa phải giá của chủ đầu tư, và chưa rõ đã gồm VAT, phí bảo trì hay chưa.</p>
 <h2>Ước tính tổng tiền theo loại căn</h2>
@@ -116,7 +118,7 @@ HTML
 		'keywords_extra' => array( 'Sun Saphia Residence', 'layout căn hộ Sun Saphia', 'căn hộ 2 phòng ngủ Sun Saphia', 'căn 1PN+1 Sun Saphia' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-23 15:00',
-		'rev'      => 2, // 23/10: số căn 2PN 133, mặt bằng tầng 3A – 28 (28 căn/sàn) theo tài liệu chủ đầu tư.
+		'rev'      => 3, // 23/10: số căn 2PN 133, mặt bằng tầng 3A – 28 (28 căn/sàn) theo tài liệu chủ đầu tư.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Sun Saphia Residence', 'Mặt bằng căn hộ' ),
 		'image'    => 'plugin:img/tin-tuc/mat-bang-sun-saphia-residence.jpg',
@@ -134,8 +136,10 @@ HTML
 </tbody>
 </table>
 <p>Ba loại căn cộng lại 754 căn theo tài liệu giới thiệu ngày 23/10/2026 (tài liệu trước ghi 149 căn 2PN); số căn còn lại thuộc các tầng có mặt bằng khác, chưa công bố chi tiết.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Mặt bằng tầng 3A – 28: 28 căn mỗi sàn</h2>
 <p>Mặt bằng tầng điển hình của chủ đầu tư cho thấy mỗi sàn từ tầng 3A đến 28 có <strong>19 studio, 4 căn 1PN+ và 5 căn 2PN</strong>. Studio thông thủy 30 – 31 m² (căn góc 40 m²), mặt tiền 3,8 m, sâu 9 m; 1PN+ thông thủy 49 – 51 m²; 2PN thông thủy 60 – 70 m² nằm ở các góc tòa. Dãy căn phía Đông nhìn ra biển. Chiều cao tầng căn hộ 3,5 m, bàn giao hoàn thiện cơ bản.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-layout-can-2pn.jpg|Layout căn 2 phòng ngủ Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Studio 30 – 31 m²: cho thuê ngắn hạn</h2>
 <p>Tổng tiền thấp nhất, dễ cho thuê theo ngày cho khách du lịch. Đổi lại, 513 căn cùng loại trong một tòa nghĩa là cạnh tranh cho thuê cao: căn tầng cao, nhìn biển, gần thang máy nhưng không sát phòng kỹ thuật sẽ có lợi thế.</p>
 <h2>1PN+1 50 – 51 m²: ở hoặc cho thuê dài hạn</h2>
@@ -171,6 +175,7 @@ HTML
 	/* ---------------- 24/10 – Vị trí ---------------- */
 	$posts[] = array(
 		'slug'     => 'sun-saphia-residence-o-dau-vi-tri',
+		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Sun Saphia Residence ở đâu? Vị trí trên đường Trường Sa, bãi tắm Sơn Thủy và kết nối xung quanh',
 		'excerpt'  => 'Sun Saphia Residence nằm trên đường Trường Sa, khu bãi tắm Sơn Thủy, phường Ngũ Hành Sơn, Đà Nẵng – đối diện công viên ven biển khoảng 2,45 ha. Xung quanh có gì, đi đâu bao xa.',
 		'keyword'  => 'Sun Saphia Residence ở đâu',
@@ -185,9 +190,11 @@ HTML
 <!--hh-featured-->
 <h2>Địa chỉ và thông tin nhanh</h2>
 {$facts}
+<!--hh-img:img/sun-saphia/sun-saphia-so-do-vi-tri.jpg|Sơ đồ vị trí Sun Saphia Residence – biển Sơn Thủy, đường Trường Sa (Hoàng Hiệp vẽ minh hoạ)-->
 <h2>Phía trước: công viên bãi tắm Sơn Thủy</h2>
 <p>Bên kia đường Trường Sa, thành phố đã thu hồi khoảng <strong>2,45 ha</strong> đất phía Nam dự án Hòn Ngọc Á Châu (bỏ hoang nhiều năm) để làm công viên công cộng, tổng mức đầu tư hơn 47 tỷ đồng, thực hiện giai đoạn 2025 – 2027: bãi đỗ xe, đường dạo, sân tập, khu vui chơi trẻ em, quảng trường biển (VietnamPlus, Tiền Phong). Cư dân ra biển qua công viên thay vì khu đất trống.</p>
 <p>Dọc tuyến biển có chuỗi 3 công viên bãi tắm: bãi tắm Sơn Thủy, công viên đối diện dự án và công viên bãi tắm cuối đường Huyền Trân Công Chúa. Từ tầng cao, tầm nhìn bao quát biển Mỹ Khê, Ngũ Hành Sơn, dòng sông phía Tây và đô thị.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-ban-do-ket-noi.jpg|Bản đồ kết nối Sun Saphia Residence với trung tâm Đà Nẵng, sân bay, Hội An (tài liệu chủ đầu tư)-->
 <h2>Xung quanh có gì?</h2>
 <ul>
 <li>Danh thắng <strong>Ngũ Hành Sơn</strong>, các resort ven biển như Premier Village, Sheraton Grand, sân golf ven biển.</li>
@@ -232,7 +239,7 @@ HTML
 		'keywords_extra' => array( 'Sun Saphia Residence', 'Sun Saphia sở hữu 50 năm', 'Sun Saphia sổ hồng', 'pháp lý căn hộ Sun Group Đà Nẵng' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-25 15:00',
-		'rev'      => 2, // 01/11: ngân hàng hỗ trợ Vietcombank, BIDV, NCB.
+		'rev'      => 3, // 01/11: ngân hàng hỗ trợ Vietcombank, BIDV, NCB.
 		'image_replace' => true, // Ảnh cũ ghi VietinBank.
 		'category' => 'Kinh nghiệm',
 		'tags'     => array( 'Sun Saphia Residence', 'Pháp lý bất động sản' ),
@@ -246,6 +253,7 @@ HTML
 <li><strong>Niên hạn công trình 100 năm</strong> là tuổi thọ thiết kế của tòa nhà cấp I – dài hơn thời hạn đất.</li>
 <li>Nghị quyết 278/NQ-CP ngày 18/9/2026 của Chính phủ giao các cơ quan làm rõ thời hạn sử dụng chung cư theo niên hạn công trình và quyền, nghĩa vụ khi hết thời hạn, hướng tới tách bạch quyền sở hữu căn hộ và quyền sử dụng đất – thu hẹp khoảng cách giữa căn hộ 50 năm và căn hộ lâu dài.</li>
 </ul>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-toa-thap-30-tang.jpg|Phối cảnh tòa tháp 30 tầng Sun Saphia Residence (ảnh chủ đầu tư)-->
 <h2>Căn hộ 50 năm khác căn hộ lâu dài thế nào?</h2>
 <table>
 <thead><tr><th></th><th>Có thời hạn (thường 50 năm)</th><th>Sở hữu lâu dài</th></tr></thead>
@@ -257,6 +265,7 @@ HTML
 </tbody>
 </table>
 <p>Căn hộ có thời hạn không xấu – nhiều sản phẩm ven biển Đà Nẵng là loại này – nhưng người mua cần biết rõ để so giá cho đúng.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Mua ở giai đoạn giữ chỗ: tiền được bảo vệ đến đâu?</h2>
 <p>Luật Kinh doanh bất động sản 2023 cho phép chủ đầu tư thu tiền đặt cọc tối đa 5% giá bán khi dự án <strong>đã đủ điều kiện</strong> đưa vào kinh doanh. Trước đó, khoản giữ chỗ (booking) chỉ là thỏa thuận ưu tiên mua – nên yêu cầu ghi rõ được hoàn lại. Chi tiết: <a href="/giu-cho-booking-can-ho-moi-da-nang-can-biet/">giữ chỗ căn hộ mới cần biết</a>.</p>
 <h2>6 giấy tờ nên hỏi</h2>
@@ -297,7 +306,7 @@ HTML
 		'keywords_extra' => array( 'Sun Saphia Residence', 'Sun Saphia cho thuê', 'lợi nhuận căn hộ Sun Saphia', 'đầu tư căn hộ biển Đà Nẵng' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-26 15:00',
-		'rev'      => 2, // 01/11: ngân hàng hỗ trợ Vietcombank, BIDV, NCB.
+		'rev'      => 3, // 01/11: ngân hàng hỗ trợ Vietcombank, BIDV, NCB.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Sun Saphia Residence', 'Đầu tư cho thuê' ),
 		'image'    => 'plugin:img/tin-tuc/dau-tu-sun-saphia-residence.jpg',
@@ -309,6 +318,7 @@ HTML
 <li>Giá mua studio: 3 tỷ – mức giá tham khảo chủ đầu tư dùng trong bài toán cho thuê (xem <a href="/gia-sun-saphia-residence-bao-nhieu/">giá Sun Saphia</a>).</li>
 <li>Lợi suất cho thuê căn hộ Đà Nẵng mặt bằng chung khoảng 4,5%/năm (Batdongsan.com.vn, quý 3/2026).</li>
 </ul>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
 <h2>3 kịch bản lợi nhuận ròng mỗi năm</h2>
 <table>
 <thead><tr><th>Kịch bản</th><th>Lợi suất ròng</th><th>Lợi nhuận/năm</th><th>Bình quân/tháng</th></tr></thead>
@@ -320,6 +330,7 @@ HTML
 </tbody>
 </table>
 <p>Bài toán của chủ đầu tư giả định cho thuê ngắn ngày 2,5 triệu/đêm, lấp đầy 60% (doanh thu khoảng 540 triệu/năm), lợi nhuận 65% doanh thu. Nếu lấp đầy chỉ 45% và lợi nhuận còn 55% (mùa mưa, cạnh tranh giá), lợi nhuận còn khoảng 226 triệu/năm – lợi suất khoảng 7,5%. Khách sạn, căn hộ view biển lân cận đang cho thuê studio khoảng 2,2 – 2,9 triệu/đêm ngoài mùa cao điểm.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-layout-can-1pn-plus.jpg|Layout căn 1PN+ Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Nếu vay ngân hàng</h2>
 <p>Vay 50% (1,5 tỷ), giả định lãi suất sau ưu đãi 10%/năm thì tiền lãi khoảng 150 triệu/năm – cao hơn lợi nhuận ở 3 kịch bản thận trọng, thấp hơn bài toán của chủ đầu tư. Nghĩa là dòng tiền chỉ đủ trả lãi khi cho thuê ngắn ngày hiệu quả; nếu chỉ cho thuê theo tháng, lợi nhuận phải đến từ tăng giá hoặc chính sách hỗ trợ lãi suất. Ngân hàng hỗ trợ dự án: Vietcombank, BIDV, NCB.</p>
 <h2>Rủi ro riêng của dự án nhiều studio</h2>
@@ -357,6 +368,7 @@ HTML
 	/* ---------------- 27/10 – Có nên mua ---------------- */
 	$posts[] = array(
 		'slug'     => 'co-nen-mua-sun-saphia-residence-uu-nhuoc-diem',
+		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Có nên mua Sun Saphia Residence? 6 ưu điểm, 4 điểm cần cân nhắc trước khi giữ chỗ',
 		'excerpt'  => 'Có nên mua Sun Saphia Residence – căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng? Ưu điểm về vị trí, thương hiệu, tổng tiền và những điểm cần cân nhắc: pháp lý, giá, cạnh tranh cho thuê.',
 		'keyword'  => 'có nên mua Sun Saphia Residence',
@@ -378,6 +390,7 @@ HTML
 <li><strong>Khu biển yên tĩnh hơn Mỹ Khê</strong> nhưng vẫn gần trung tâm (khoảng 4 km tới Sun Galaxy, Đà Nẵng Downtown theo chủ đầu tư).</li>
 <li><strong>Bàn giao 11/2028</strong> – thời gian dài để thanh toán theo tiến độ.</li>
 </ol>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-ven-bien-son-thuy.jpg|Sun Saphia Residence nhìn từ biển Sơn Thủy, Ngũ Hành Sơn (ảnh chủ đầu tư)-->
 <h2>4 điểm cần cân nhắc</h2>
 <ol>
 <li><strong>Thời hạn 50 năm</strong> kể từ 17/09/2026 (công trình niên hạn 100 năm) – hợp đầu tư, nghỉ dưỡng hơn là để lại lâu dài (<a href="/phap-ly-sun-saphia-residence-so-huu-bao-lau/">chi tiết</a>).</li>
@@ -385,6 +398,7 @@ HTML
 <li><strong>513 studio</strong> trong một tòa – cạnh tranh cho thuê và bán lại.</li>
 <li><strong>Thời gian chờ</strong>: hơn 2 năm đến bàn giao, tiền vốn nằm im nếu không có dòng tiền khác.</li>
 </ol>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Hợp với ai?</h2>
 <table>
 <thead><tr><th>Mục đích</th><th>Gợi ý</th></tr></thead>
@@ -418,6 +432,7 @@ HTML
 	/* ---------------- 28/10 – Tiến độ ---------------- */
 	$posts[] = array(
 		'slug'     => 'tien-do-sun-saphia-residence-mo-ban-ban-giao',
+		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Tiến độ Sun Saphia Residence: giữ chỗ, mở bán, xây dựng và bàn giao 11/2028',
 		'excerpt'  => 'Tiến độ Sun Saphia Residence cập nhật 10/2026: dự án đang nhận giữ chỗ, chưa công bố bảng giá; bàn giao dự kiến 11/2028. Các mốc tiếp theo và cách theo dõi.',
 		'keyword'  => 'tiến độ Sun Saphia Residence',
@@ -442,6 +457,7 @@ HTML
 <tr><td>Bàn giao</td><td>Dự kiến tháng 11/2028, hoàn thiện cơ bản</td></tr>
 </tbody>
 </table>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Phối cảnh Sun Saphia Residence bên biển Sơn Thủy lúc hoàng hôn (ảnh chủ đầu tư)-->
 <h2>Hạ tầng xung quanh đi cùng tiến độ dự án</h2>
 <ul>
 <li>Công viên bãi tắm Sơn Thủy khoảng 2,45 ha: thực hiện giai đoạn 2025 – 2027.</li>
@@ -449,6 +465,7 @@ HTML
 <li>Cao tốc nội thị Đà Nẵng – Chu Lai: dự kiến khởi công 10/2027 (<a href="/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do/">chi tiết</a>).</li>
 </ul>
 <p>Nếu đúng kế hoạch, khi Sun Saphia bàn giao cuối 2028 thì công viên phía trước đã hoàn thành – lợi thế cho người nhận nhà đợt đầu.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Theo dõi tiến độ thế nào?</h2>
 <ul>
 <li>Đăng ký nhận tin để Hoàng Hiệp gửi ngay khi có bảng giá, mặt bằng, hồ sơ pháp lý.</li>
@@ -476,6 +493,7 @@ HTML
 	/* ---------------- 29/10 – Phân biệt Khu đô thị Saphia ---------------- */
 	$posts[] = array(
 		'slug'     => 'sun-saphia-residence-va-khu-do-thi-saphia-khac-nhau',
+		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Sun Saphia Residence và Khu đô thị Saphia Ngũ Hành Sơn khác nhau thế nào? Tránh nhầm khi tìm mua',
 		'excerpt'  => 'Tìm "Saphia Đà Nẵng" ra hai dự án khác nhau: Sun Saphia Residence (căn hộ 30 tầng của Sun Group trên đường Trường Sa) và Khu đô thị Saphia (đất nền, khu Khuê Mỹ cũ). Bảng phân biệt nhanh.',
 		'keyword'  => 'Saphia Đà Nẵng',
@@ -499,8 +517,10 @@ HTML
 <tr><td>Giai đoạn</td><td>Đang nhận giữ chỗ, bàn giao dự kiến 11/2028</td><td>Đã hình thành, giao dịch chuyển nhượng</td></tr>
 </tbody>
 </table>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-ven-bien-son-thuy.jpg|Sun Saphia Residence nhìn từ biển Sơn Thủy, Ngũ Hành Sơn (ảnh chủ đầu tư)-->
 <h2>Sun Saphia Residence</h2>
 <p>{$saphia} là tòa căn hộ 30 tầng (114 m) trên khu đất 3.720,1 m², 782 căn, phía trước là công viên bãi tắm Sơn Thủy khoảng 2,45 ha. Theo chủ đầu tư, đây là dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng. Xem thêm <a href="/sun-saphia-residence-o-dau-vi-tri/">vị trí Sun Saphia Residence</a> và <a href="/mat-bang-can-ho-sun-saphia-residence/">mặt bằng các loại căn</a>.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Khu đô thị Saphia</h2>
 <p>Khu đô thị Saphia (còn gọi Saphia Complex trong hồ sơ quy hoạch khu khách sạn và dân cư) là khu đất nền tại khu Khuê Mỹ cũ, nay thuộc phường Ngũ Hành Sơn. Giao dịch chủ yếu là chuyển nhượng lô đất; giá trên các trang rao là giá người bán tự đăng. Khi mua đất ở đây, kiểm tra sổ đỏ, quy hoạch 1/500 và thời hạn sử dụng ghi trên giấy chứng nhận từng lô.</p>
 <h2>Mẹo tìm đúng dự án</h2>
