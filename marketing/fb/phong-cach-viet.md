@@ -29,7 +29,8 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 
 ## Ảnh (anh Hiệp góp ý 05/11: "bài đăng hình không đẹp" – bài FPT Plaza 3 dùng 6 thẻ chữ khung ngang bị Facebook cắt mất chữ)
 - Ảnh đầu tiên: khổ DỌC 1080×1350, chứa toàn bộ thông tin chính (tiêu đề, bảng giá/số liệu gọn, ảnh đại diện Hoàng Hiệp). Mẫu: wordpress/bai-viet/fb-fpt-plaza-3-can-co-so-11-2026.py (nhánh wordpress).
-- Ảnh 2–4: ảnh THẬT hoặc phối cảnh đẹp của dự án/khu vực, không phải thẻ chữ.
+- **Ảnh có chữ (thẻ thông tin, bảng giá, chính sách) → đăng MỘT ẢNH DUY NHẤT** (media chỉ 1 URL). Anh Hiệp góp ý 05/11: album 3 ảnh làm Facebook ép ảnh đầu thành cột dọc hẹp (~1:2), cắt mất hai bên ảnh chính sách FourS.
+- Bài album (2–4 ảnh) CHỈ gồm ảnh thật / phối cảnh không có chữ quan trọng; ảnh đầu ưu tiên khổ ngang hoặc vuông. Không trộn thẻ chữ vào album.
 - KHÔNG dùng nhiều thẻ chữ khung ngang trong một album: Facebook cắt ảnh thành ô vuông, chữ sát mép sẽ mất. Nếu bắt buộc có chữ trên ảnh phụ, đặt chữ trong vùng giữa (cách mép trái/phải ≥ 20% chiều rộng).
 - Không dùng ảnh mặt bằng có in mã căn; không đặt mặt bằng làm ảnh đầu.
 - Trước khi hẹn: ghép thử album thành lưới như Facebook hiển thị và mở ra xem lại.
