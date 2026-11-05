@@ -81,12 +81,12 @@ def tam_view(d4=False):
             + ('<a class="btn ghost2" href="#ss4d" data-4d>Xem view từ căn trên mô hình 4D</a>' if d4 else '') + '</div></div></section>')
 
 def tour_insert(html):
-    if 'id="tour-360"' in html or '<main' not in html: return html
+    if 'id="tam-view"' in html or '<main' not in html: return html
     for anchor in ['id="mat-bang"', 'id="tai-chinh"']:
         i = html.find(anchor)
         if i >= 0:
             i = html.rfind('<section', 0, i)
-            return html[:i] + tam_view('4d-embed.js' in html) + tour360() + html[i:]
+            return html[:i] + tam_view('4d-embed.js' in html) + html[i:]
     return html
 
 def quiz_end(html):

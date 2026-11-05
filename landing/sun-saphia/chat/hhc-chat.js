@@ -89,7 +89,7 @@
   var EN_CH = ['Price', 'Location', 'Rental income', 'Can foreigners buy?'];
   var EN_DEF = ['Thanks for your question! Mr. Hiep (official agent, speaks English) can answer this in detail. Message him on Zalo/WhatsApp ' + SO + ' or leave your number here.'];
   var EN_A = {
-    tour: ['There is a 360° virtual tour on this page 😍 Scroll to the "360°" section (or tap "Xem 360°" in the menu) and press the orange button – tap ⛶ for full screen. Which view direction do you like?'],
+    tour: ['On this page there is an illustrative 3D–4D model 😍 Tap "5D · View từ căn" and pick a floor to see the sea view from that unit; drag to rotate the tower. The "Tầm view từ căn" section shows view photos by direction. Which view direction do you like?'],
     ngoai: ['Got it 😊 By the way – beachfront apartments by Sun Group in Da Nang now start from only ~VND 1.8 bn, with ~25% paid until handover. Would you like the location or the price list?'],
     ngoaidl: ['Da Nang always has great beaches and food 😄 Speaking of beaches – Sun Saphia is just 400 m from My Khe / Son Thuy beach, and short-term rentals there are in high demand. Do you visit Da Nang often?'],
     chao: ['Hello! I am the quick-reply assistant of Mr. Hoang Hiep for Sun Saphia Residence – the first beachfront apartment tower by Sun Group in Da Nang. Are you looking to live, holiday or invest (rent out)?'],
@@ -348,8 +348,8 @@
       a: ['Dạ Đà Nẵng thì lúc nào cũng có biển đẹp, đồ ăn ngon ạ 😄 Mà nói tới biển: Sun Saphia cách bãi Sơn Thủy – Mỹ Khê chỉ ~400 m, sáng đi bộ vài phút là tắm biển, chiều ngồi ban công ngắm hoàng hôn.\nAnh/Chị có hay ra Đà Nẵng nghỉ dưỡng không ạ?', 'Dạ câu này em mách nhỏ: khách du lịch ra Đà Nẵng đông quanh năm, nên căn hộ gần biển cho thuê rất chạy ạ – Studio Sun Saphia dự kiến thuê ngắn hạn ~30 triệu/tháng, giá mua chỉ từ ~1,8 tỷ.\nAnh/Chị có muốn em tính thử bài toán cho thuê không ạ?'],
       c: ['Cho thuê', 'Vị trí dự án'], topic: 'Hỏi chuyện du lịch Đà Nẵng'},
     {id: 'tour', k: ['360', 'xem 360', 'tour 360', 'tham quan ao', 'thuc te ao', 'vr', 'video', 'xem thuc te', 'hinh anh thuc te', 'anh thuc te', 'xem view', 'view that', 'virtual tour'],
-      a: ['Dạ trên trang có tour 360° ạ 😍 Anh/Chị kéo xuống mục "Xem 360°" (hoặc bấm "Xem 360°" ở thanh mục lục), bấm nút cam là xoay được toàn cảnh, bấm ⛶ để xem toàn màn hình.\nXem xong Anh/Chị thích hướng nào, em lọc giúp căn còn trống đúng hướng đó nhé?'],
-      c: ['Giá theo tầng', 'Vị trí dự án'], ask: 'Anh/Chị để lại Zalo, anh Hiệp gửi thêm video, ảnh thực tế và danh sách căn đúng hướng ạ.', topic: 'Xem tour 360°'},
+      a: ['Dạ trên trang có mô hình 3D – 4D minh họa ạ 😍 Anh/Chị bấm "5D · View từ căn", chọn tầng là xem được tầm nhìn ra biển từ căn đó; kéo để xoay tòa tháp, chỉnh giờ để xem nắng. Mục "Tầm view từ căn" có thêm ảnh view theo từng hướng.\nXem xong Anh/Chị thích hướng nào, em lọc giúp căn còn trống đúng hướng đó nhé?'],
+      c: ['Giá theo tầng', 'Vị trí dự án'], ask: 'Anh/Chị để lại Zalo, anh Hiệp gửi thêm video, ảnh thực tế và danh sách căn đúng hướng ạ.', topic: 'Xem view / mô hình 4D'},
     {id: 'camon', k: ['cam on', 'ok', 'hieu roi', 'duoc roi', 'vang', 'da biet', 'tot qua', 'hay qua'],
       a: ['Dạ em cảm ơn Anh/Chị ạ. Anh/Chị cần thêm gì cứ nhắn em nhé.', 'Dạ vâng ạ, có gì Anh/Chị cứ hỏi tiếp, em trả lời ngay.'], c: []}
   ];
