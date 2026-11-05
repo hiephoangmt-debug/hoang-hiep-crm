@@ -1,0 +1,14 @@
+# Kiểm tra trang toa-f2-ads có chạy không (chụp màn hình + lỗi). Anh Hiệp báo trang không chạy.
+name: Kiem tra trang ADS F2
+on:
+  push:
+    branches: [claude/test-tele]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm i playwright@1.47.2 && npx playwright install --with-deps chromium
+      - run: node check/shot.js
+      - uses: actions/upload-artifact@v4
+        with: { name: shots, path: check/*.png }
