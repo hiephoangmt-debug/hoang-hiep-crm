@@ -426,5 +426,87 @@ HTML
 		'sources'  => array(),
 	);
 
+
+	/* ---------------- 06/11 – Hoiana Beach Villas (bộ tài liệu chủ đầu tư anh Hiệp gửi 05/11) ---------------- */
+	$hbv     = '<a href="/du-an/hoiana-beach-villas/">Hoiana Beach Villas</a>';
+	$posts[] = array(
+		'slug'     => 'hoiana-beach-villas-7-dong-biet-thu-dien-tich-tien-ich',
+		'title'    => 'Hoiana Beach Villas: 198 biệt thự biển Nam Hội An – 7 dòng biệt thự, diện tích, tiện ích và vị trí từng dòng',
+		'excerpt'  => 'Hoiana Beach Villas có 198 biệt thự biển 3 – 9 phòng ngủ trong quần thể Hoiana Resort & Golf: Shore, Dune, Azure, Pearl, Marina Villa và 2 dinh thự Patina, Veranda. Diện tích đất 350 – 3.132 m², hồ bơi riêng, bàn giao full nội thất.',
+		'keyword'  => 'Hoiana Beach Villas',
+		'keywords_extra' => array( 'biệt thự biển Hoiana', 'Hoiana Resort & Golf', 'biệt thự biển Hội An', 'Marina Villa Hoiana', 'Dune Villa Hoiana' ),
+		'project'  => 'hoiana-beach-villas',
+		'schedule' => '2026-11-06 09:30',
+		'category' => 'Dự án',
+		'tags'     => array( 'Hoiana', 'Biệt thự biển', 'Hội An' ),
+		'image'    => 'plugin:img/tin-tuc/hoiana-beach-villas-7-dong-biet-thu.jpg',
+		'image_alt' => 'Hoiana Beach Villas – 7 dòng biệt thự, số phòng ngủ, diện tích đất và số căn',
+		'content'  => <<<HTML
+<p>{$hbv} là phân khu biệt thự biển của quần thể <a href="/du-an/hoiana-resort-golf/">Hoiana Resort &amp; Golf</a> tại Nam Hội An (Duy Xuyên, Quảng Nam cũ – nay thuộc TP. Đà Nẵng), cách phố cổ Hội An khoảng 15 phút. Phân khu gồm <strong>198 biệt thự 3 – 9 phòng ngủ</strong>, mỗi căn có hồ bơi riêng, garage riêng và bàn giao đầy đủ nội thất. Bài viết tổng hợp từ tài liệu thông tin dự án của chủ đầu tư (05/2026).</p>
+<!--hh-featured-->
+<h2>Chủ đầu tư và quần thể Hoiana</h2>
+<p>Chủ đầu tư là <strong>Công ty TNHH Phát triển Nam Hội An (HASD)</strong>, thành lập năm 2010, 100% vốn nước ngoài, trong đó 75% cổ phần thuộc VMS Group (Hồng Kông); New World Development (Hồng Kông) là đối tác tham gia phát triển. Hoiana là khu nghỉ dưỡng tích hợp tổng vốn khoảng <strong>4 tỷ USD</strong> (đã giải ngân khoảng 1,4 tỷ USD), trải trên gần 1.000 ha với <strong>4 km bờ biển</strong>.</p>
+<p>Tiện ích đã vận hành trong quần thể: hơn 1.200 phòng khách sạn, hơn 25 nhà hàng và beach club, 5 spa, 3 hồ bơi lớn, 8 sân pickleball, sân golf Hoiana Shores 18 hố (7.004 yards, par 71, clubhouse 6.000 m²) do Robert Trent Jones Jr. thiết kế, trung tâm giải trí (KTV, bowling, bi-a, golf giả lập, khu trẻ em) mở từ 02/2026.</p>
+<!--hh-dimg:1WFS7kd0OZyRm7Tal2kgj2mjQirYoHrr6|Phối cảnh Marina Villa (loại F) – biệt thự 4 phòng ngủ trực diện biển (ảnh chủ đầu tư)-->
+<h2>7 dòng biệt thự Hoiana Beach Villas</h2>
+<table>
+<thead><tr><th>Dòng biệt thự</th><th>Phòng ngủ</th><th>Đất (m²)</th><th>Sàn (m²)</th><th>Vườn mở rộng (m²)</th><th>Số căn</th></tr></thead>
+<tbody>
+<tr><td>Shore Villa (loại A)</td><td>3</td><td>350</td><td>263</td><td>100</td><td>36</td></tr>
+<tr><td>Dune Villa (loại C)</td><td>3</td><td>544</td><td>352</td><td>170</td><td>70</td></tr>
+<tr><td>Azure Villa (loại D)</td><td>4</td><td>630</td><td>398</td><td>270</td><td>46</td></tr>
+<tr><td>Pearl Villa (loại E)</td><td>4</td><td>702</td><td>478</td><td>270</td><td>21</td></tr>
+<tr><td>Marina Villa (loại F)</td><td>4</td><td>840</td><td>553</td><td>400</td><td>23</td></tr>
+<tr><td>Patina Mansion (loại B)</td><td>7</td><td>2.208</td><td>1.655</td><td>1.345</td><td>1</td></tr>
+<tr><td>Veranda Mansion (loại G)</td><td>9</td><td>3.132</td><td>2.329</td><td>1.600</td><td>1</td></tr>
+</tbody>
+</table>
+<p>Diện tích vườn mở rộng có thể thay đổi theo vị trí từng căn. Biệt thự cao tối đa 2 tầng.</p>
+<h2>Vị trí từng dòng biệt thự</h2>
+<ul>
+<li><strong>Trực diện biển:</strong> Marina Villa, Patina Mansion và Veranda Mansion nằm dọc đường bờ biển riêng. Patina (7 phòng ngủ, gần 20 không gian chức năng, hồ bơi vô cực riêng) và Veranda (9 phòng ngủ, căn góc nhìn biển và sân golf, duy nhất có tầng mái rooftop) là hai dinh thự độc bản.</li>
+<li><strong>Lùi phía sau, giữa vườn:</strong> Dune Villa và Azure Villa – không gian yên tĩnh giữa các khu vườn riêng.</li>
+<li><strong>Kế biển, giáp sân golf:</strong> Pearl Villa, tầm nhìn hướng biển và thảm cỏ sân golf.</li>
+<li><strong>Giữa mảng xanh nội khu:</strong> Shore Villa – dòng có mức giá tiếp cận tốt nhất.</li>
+</ul>
+<!--hh-dimg:1nqByEUObXTmBT82wWzPW6030AesKSUly|Sân vườn sau và hồ bơi riêng Azure Villa (loại D) (ảnh chủ đầu tư)-->
+<!--hh-dimg:1DqIQXSNcuPYHfagIFaDg-gYumDWW2iJw|Phối cảnh Dune Villa (loại C) – biệt thự 3 phòng ngủ giữa vườn (ảnh chủ đầu tư)-->
+<h2>Thiết kế: nhiệt đới đương đại, cảm hứng Hội An</h2>
+<p>Kiến trúc theo phong cách nhiệt đới đương đại, lấy cảm hứng từ di sản Hội An và Chùa Cầu: các không gian sinh hoạt nối liền, mở ra vườn và hồ bơi. Nội thất tối giản với gỗ, đá tự nhiên, bề mặt đan thủ công và bảng màu trung tính. Cảnh quan theo ý tưởng năm giác quan – vườn hương liệu, cây bản địa, mặt nước và lối dạo.</p>
+<!--hh-dimg:1TDX1HxC-PagWaNpcE67ID691Z8ZaXDtB|Phòng khách Azure Villa (loại D) (ảnh chủ đầu tư)-->
+<!--hh-dimg:16CMsBN0-9IqWtqUBkFRsQrZ_P__j-Hxz|Sảnh vào nhìn ra hồ bơi riêng – Azure Villa (loại D) (ảnh chủ đầu tư)-->
+<h2>Tiện ích riêng của phân khu</h2>
+<ul>
+<li>Hồ bơi riêng và garage riêng trong từng biệt thự.</li>
+<li>Beach club với hồ bơi vô cực dọc bờ biển, nhà hàng The Garden.</li>
+<li>Trung tâm chăm sóc sức khỏe: gym, yoga, spa; Kid's club.</li>
+<li>Sảnh đón, lối vào riêng; concierge và an ninh 24/7; đơn vị vận hành chuyên nghiệp.</li>
+<li>Cư dân dùng toàn bộ tiện ích của Hoiana Resort &amp; Golf: sân golf, nhà hàng, giải trí, chăm sóc sức khỏe.</li>
+</ul>
+<!--hh-dimg:1Ei1XH_OJtqdO36Pc4Jc8m-R5JTQILKZM|Marina Villa (loại F) – góc phối cảnh khác (ảnh chủ đầu tư)-->
+<h2>Nhận định của Hoàng Hiệp</h2>
+<p>Hoiana Beach Villas phù hợp khách mua biệt thự biển để nghỉ dưỡng và cho thuê trong một quần thể đã vận hành thật – khách sạn, golf, nhà hàng, beach club đều đang hoạt động, không phải chờ tiện ích hình thành. Số lượng chỉ 198 căn, mật độ xây dựng thấp, mỗi căn có hồ bơi và vườn riêng. Khi chọn căn, anh chị nên cân nhắc giữa nhóm trực diện biển (Marina) và nhóm giữa vườn (Dune, Azure) theo ngân sách và nhu cầu khai thác; hỏi kỹ phương án vận hành cho thuê, phí quản lý và tiến độ bàn giao trước khi xuống tiền.</p>
+<p>Xem thêm ảnh phối cảnh, bảng loại căn tại <a href="/du-an/hoiana-beach-villas/">trang dự án Hoiana Beach Villas</a>. Nhận bảng giá, chính sách và hồ sơ dự án: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: tài liệu thông tin dự án Hoiana Beach Villas của chủ đầu tư (05/2026), hoiana.com. Ảnh: phối cảnh của chủ đầu tư, mang tính minh họa.</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Hoiana Beach Villas: 7 dòng biệt thự biển, diện tích',
+			'desc'      => 'Hoiana Beach Villas – 198 biệt thự biển Nam Hội An, 3 – 9 phòng ngủ, đất 350 – 3.132 m², hồ bơi riêng, full nội thất. Vị trí từng dòng, tiện ích. Gọi Hoàng Hiệp.',
+			'points'    => array(
+				'198 biệt thự 3 – 9 phòng ngủ: Shore, Dune, Azure, Pearl, Marina Villa, Patina và Veranda Mansion',
+				'Đất 350 – 3.132 m², mỗi căn có hồ bơi riêng, garage riêng, bàn giao full nội thất',
+				'Nằm trong Hoiana Resort & Golf gần 1.000 ha, 4 km bờ biển, cách phố cổ Hội An khoảng 15 phút',
+			),
+			'faq'       => array(
+				array( 'Hoiana Beach Villas có bao nhiêu căn?', '198 biệt thự: Shore Villa 36 căn, Dune Villa 70, Azure Villa 46, Pearl Villa 21, Marina Villa 23, Patina Mansion 1 và Veranda Mansion 1.' ),
+				array( 'Diện tích biệt thự Hoiana Beach Villas bao nhiêu?', 'Đất từ 350 m² (Shore Villa, 3 phòng ngủ) đến 840 m² (Marina Villa, 4 phòng ngủ); hai dinh thự Patina 2.208 m² và Veranda 3.132 m².' ),
+				array( 'Dòng nào trực diện biển?', 'Marina Villa, Patina Mansion và Veranda Mansion nằm dọc bờ biển; Pearl Villa kế biển, giáp sân golf.' ),
+				array( 'Ai là chủ đầu tư Hoiana Beach Villas?', 'Công ty TNHH Phát triển Nam Hội An (HASD), 100% vốn nước ngoài, 75% cổ phần thuộc VMS Group (Hồng Kông).' ),
+			),
+		),
+		'sources'  => array( 'https://www.hoiana.com/hoiana-beach-villas' ),
+	);
+
 	return $posts;
 }

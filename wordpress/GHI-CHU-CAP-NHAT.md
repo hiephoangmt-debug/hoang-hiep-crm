@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.59** + plugin Hoàng Hiệp CRM **2.20.148**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.59** + plugin Hoàng Hiệp CRM **2.20.149**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.149 (05/11/2026)
+
+- **Hoiana Beach Villas** (tài liệu chủ đầu tư 05/2026): bảng 7 dòng biệt thự (Shore, Dune, Azure, Pearl, Marina Villa, Patina, Veranda Mansion – đất, sàn, vườn, số căn), điểm nổi bật, thiết kế, tiện ích; 19 ảnh phối cảnh Marina (F), Azure (D), Dune (C) – web tải ngầm từ Drive vài lượt. Không đăng hồ sơ pháp lý (anh gửi khách khi cần).
+- **Bài viết "Hoiana Beach Villas: 198 biệt thự biển Nam Hội An…"** tự đăng 09:30 ngày 06/11 (Tự đăng bài), có ảnh phối cảnh chèn giữa bài – ảnh hiện dần khi web tải xong ảnh dự án.
+- Mới: chèn ảnh Drive giữa bài bằng `<!--hh-dimg:MÃ_FILE|chú thích-->` (dùng ảnh đã tải về Thư viện qua ô Link ảnh của dự án).
 
 ## Có gì mới – plugin 2.20.148 (05/11/2026)
 
