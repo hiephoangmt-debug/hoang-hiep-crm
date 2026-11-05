@@ -353,5 +353,76 @@ HTML
 		'sources'  => array( 'https://guland.vn/du-an/khu-do-thi-nam-viet-a-da-nang' ),
 	);
 
+	/* ---------------- 05/11 – Chính sách FourS F2 từ 17/10/2026 (anh Hiệp gửi) ---------------- */
+	$posts[] = array(
+		'slug'     => 'chinh-sach-fours-tower-f2-17-10-2026-qua-noi-that-nha-xinh',
+		'title'    => 'Chính sách FourS Tower F2 từ 17/10/2026: tặng nội thất Nhà Xinh đến 100 triệu, chiết khấu thanh toán sớm đến 12%',
+		'excerpt'  => 'Sun FourS Tower Tòa F2 cập nhật CSBH 4.2 từ 17/10/2026: quà nội thất Nhà Xinh 35 – 100 triệu trừ vào giá bán, không vay chiết khấu 3%, thanh toán sớm 95% / 70% / 50% chiết khấu 12% / 5% / 2,5%.',
+		'keyword'  => 'chính sách FourS Tower F2',
+		'keywords_extra' => array( 'FourS Tower F2', 'Tháp Mai FourS', 'Sun FourS Tower', 'nội thất Nhà Xinh', 'CSBH 4.2 FourS' ),
+		'project'  => 'fours-tower-f2-thap-mai',
+		'schedule' => '2026-11-05 12:00',
+		'category' => 'Dự án',
+		'tags'     => array( 'FourS Tower', 'Sun Group', 'Chính sách bán hàng' ),
+		'image'    => 'plugin:img/tin-tuc/fours-f2-chinh-sach-17-10-2026.jpg',
+		'image_alt' => 'Chính sách FourS Tower Tòa F2 từ 17/10/2026: quà nội thất Nhà Xinh 35 – 100 triệu và các mức chiết khấu',
+		'content'  => <<<HTML
+<p>Sun FourS Tower <strong>Tòa F2 – Tháp Mai</strong> cập nhật chính sách bán hàng (CSBH 4.2) áp dụng từ ngày <strong>17/10/2026</strong>. Điểm mới là <strong>gói quà tặng nội thất Nhà Xinh</strong> trừ thẳng vào giá bán, cộng dồn với các chiết khấu không vay và thanh toán sớm. Hoàng Hiệp tóm tắt theo phiếu tính giá của chủ đầu tư.</p>
+<!--hh-featured-->
+<h2>Quà tặng nội thất Nhà Xinh theo loại căn</h2>
+<table>
+<thead><tr><th>Loại căn</th><th>Giá trị quà (trừ vào giá bán chưa VAT)</th></tr></thead>
+<tbody>
+<tr><td>Studio</td><td>35 triệu đồng</td></tr>
+<tr><td>1PN và 1PN+</td><td>50 triệu đồng</td></tr>
+<tr><td>2PN</td><td>75 triệu đồng</td></tr>
+<tr><td>3PN</td><td>100 triệu đồng</td></tr>
+</tbody>
+</table>
+<h2>Các mức chiết khấu cộng thêm</h2>
+<ul>
+<li><strong>Không vay ngân hàng:</strong> chiết khấu 3%.</li>
+<li><strong>Thanh toán sớm 95%:</strong> chiết khấu thêm 12%.</li>
+<li><strong>Thanh toán sớm 70%:</strong> chiết khấu thêm 5%, nhận bàn giao sử dụng theo chính sách Sun Early Key rồi thanh toán phần còn lại.</li>
+<li><strong>Thanh toán sớm 50%:</strong> chiết khấu thêm 2,5%.</li>
+<li><strong>Vay ngân hàng:</strong> vẫn nhận quà Nhà Xinh, không áp dụng chiết khấu không vay 3%; ngân hàng giải ngân 70% sau khi ký hợp đồng mua bán.</li>
+</ul>
+<p>Các chiết khấu áp dụng lần lượt trên giá bán chưa VAT và kinh phí bảo trì. Chiết khấu thanh toán sớm áp dụng theo mốc thời hạn chủ đầu tư công bố từng đợt – anh chị liên hệ để được xác nhận thời hạn hiện hành trước khi chọn phương án.</p>
+<h2>Ví dụ theo phiếu tính giá của chủ đầu tư</h2>
+<p>Căn 1PN+ diện tích thông thủy 53 m², giá niêm yết khoảng 3,02 tỷ đồng (đã gồm VAT và kinh phí bảo trì):</p>
+<table>
+<thead><tr><th>Phương án</th><th>Ưu đãi áp dụng</th><th>Tổng thanh toán</th><th>Tiết kiệm so với niêm yết</th></tr></thead>
+<tbody>
+<tr><td>Thanh toán sớm 95%</td><td>Nhà Xinh + không vay 3% + 12%</td><td>khoảng 2,534 tỷ</td><td>khoảng 491 triệu (16,2%)</td></tr>
+<tr><td>Thanh toán sớm 70%</td><td>Nhà Xinh + không vay 3% + 5%</td><td>khoảng 2,735 tỷ</td><td>khoảng 289 triệu (9,6%)</td></tr>
+<tr><td>Thanh toán sớm 50%</td><td>Nhà Xinh + không vay 3% + 2,5%</td><td>khoảng 2,807 tỷ</td><td>khoảng 217 triệu (7,2%)</td></tr>
+<tr><td>Tiến độ chuẩn, không vay</td><td>Nhà Xinh + không vay 3%</td><td>khoảng 2,879 tỷ</td><td>khoảng 145 triệu (4,8%)</td></tr>
+<tr><td>Vay ngân hàng 70%</td><td>Nhà Xinh</td><td>khoảng 2,968 tỷ</td><td>khoảng 56 triệu (1,9%)</td></tr>
+</tbody>
+</table>
+<p>Đặt cọc 100 triệu đồng (Studio, 1PN, 1PN+, 2PN) và 150 triệu đồng (3PN). Số liệu trên là ví dụ trong phiếu tính giá, giá từng căn khác nhau theo tầng, hướng và diện tích.</p>
+<h2>Góc nhìn của Hoàng Hiệp</h2>
+<p>So với đợt trước, quà nội thất Nhà Xinh giúp căn hộ có thể đưa vào sử dụng hoặc cho thuê sớm hơn mà không phải bỏ thêm nhiều chi phí hoàn thiện. Với người có sẵn dòng tiền, phương án thanh toán sớm vẫn là cách tiết kiệm nhiều nhất; người cần giữ tiền mặt có thể chọn vay 70% và vẫn nhận quà nội thất.</p>
+<p>Xem thêm: <a href="/du-an/fours-tower-f2-thap-mai/">FourS Tower F2 – Tháp Mai</a> · <a href="/du-an/fours-tower/">tổng quan FourS Tower</a>. Cần phiếu tính giá theo đúng căn và phương án anh chị chọn, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: phiếu tính giá CSBH 4.2 Tòa F2 của chủ đầu tư, áp dụng từ 17/10/2026.</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Chính sách FourS F2 từ 17/10: quà Nhà Xinh đến 100tr',
+			'desc'      => 'FourS Tower F2 CSBH 4.2 từ 17/10/2026: quà nội thất Nhà Xinh 35 – 100 triệu, không vay 3%, thanh toán sớm 95%/70%/50% chiết khấu 12%/5%/2,5%.',
+			'points'    => array(
+				'Quà nội thất Nhà Xinh: Studio 35 triệu, 1PN/1PN+ 50 triệu, 2PN 75 triệu, 3PN 100 triệu',
+				'Không vay chiết khấu 3%; thanh toán sớm 95% / 70% / 50%: 12% / 5% / 2,5%',
+				'Ví dụ căn 1PN+ niêm yết ~3,02 tỷ: thanh toán sớm 95% còn khoảng 2,534 tỷ',
+			),
+			'faq'       => array(
+				array( 'Chính sách FourS Tower F2 từ 17/10/2026 có gì mới?', 'Tặng gói nội thất Nhà Xinh trừ vào giá bán: Studio 35 triệu, 1PN và 1PN+ 50 triệu, 2PN 75 triệu, 3PN 100 triệu; cộng dồn chiết khấu không vay 3% và thanh toán sớm.' ),
+				array( 'Vay ngân hàng có được quà Nhà Xinh không?', 'Có. Phương án vay vẫn nhận quà nội thất Nhà Xinh, chỉ không áp dụng chiết khấu không vay 3%.' ),
+				array( 'Thanh toán sớm FourS F2 được chiết khấu bao nhiêu?', 'Thanh toán sớm 95% chiết khấu 12%, 70% chiết khấu 5%, 50% chiết khấu 2,5%, theo thời hạn chủ đầu tư công bố từng đợt.' ),
+			),
+		),
+		'sources'  => array(),
+	);
+
 	return $posts;
 }
