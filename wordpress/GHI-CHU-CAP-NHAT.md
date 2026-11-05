@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.55** + plugin Hoàng Hiệp CRM **2.20.138**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.56** + plugin Hoàng Hiệp CRM **2.20.139**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.139 · giao diện 2.15.56 (05/11/2026)
+
+- **Trang mới "Chính sách bán hàng & bảng tính giá"** (`/chinh-sach-bang-tinh/`), có mục **Chính sách & bảng tính** trên menu chính: mỗi dự án Sun một thẻ gồm chính sách đang áp dụng, nút **Bảng tính giá** (hoặc "Nhận phiếu tính giá qua Zalo" khi dự án chưa có bảng tính) và danh sách bài chính sách theo từng tháng. Trang tự tạo khi anh vào trang quản trị.
+- Chuyên mục tin tức mới **Chính sách bán hàng**: mỗi dự án một bài mỗi tháng (tháng 11/2026: Spana, Cora, S-Light, FourS F1-F5, FourS F2 – web tự đăng chiều 5/11).
+- Bảng tính giá: phiếu tính giá Excel của chủ đầu tư đóng gói trong plugin (thư mục `ptg/`) sẽ tự nạp vào trang `/du-an/<dự án>/bang-tinh/` khi bấm **Nhập / cập nhật dữ liệu** (không đè file anh tự chọn).
 
 ## Có gì mới – plugin 2.20.138 (05/11/2026)
 

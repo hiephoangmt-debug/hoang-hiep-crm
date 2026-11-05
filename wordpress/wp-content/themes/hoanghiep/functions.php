@@ -122,6 +122,7 @@ function hoanghiep_fallback_menu( $args = array() ) {
 		array( 'Mua bán', hh_deal_url( 'ban' ) ),
 		array( 'Cho thuê', hh_deal_url( 'thue' ) ),
 		array( 'Tin tức', home_url( '/tin-tuc/' ) ),
+		array( 'Chính sách & bảng tính', function_exists( 'hh_csbt_url' ) ? hh_csbt_url() : '' ),
 		array( 'Bản đồ dự án', function_exists( 'hh_bdda_url' ) ? hh_bdda_url() : '' ),
 		array( 'Thống kê đầu tư', function_exists( 'hh_tkdt_url' ) ? hh_tkdt_url() : '' ),
 		array( 'Về Hiệp', home_url( '/gioi-thieu/' ) ),
@@ -523,6 +524,37 @@ add_filter(
 			return $items;
 		}
 		return $items . '<li class="menu-item"><a href="' . esc_url( hh_cdt_url() ) . '">Chủ đầu tư</a></li>';
+	},
+	10,
+	2
+);
+
+/** Menu chính: thêm mục cấp 1 "Chính sách & bảng tính" trước "Bản đồ dự án" / "Về Hiệp" (hoặc cuối menu) nếu menu chưa có link này. */
+add_filter(
+	'wp_nav_menu_objects',
+	static function ( $items, $args ) {
+		if ( 'primary' !== ( $args->theme_location ?? '' ) || ! function_exists( 'hh_csbt_url' ) || ! hh_csbt_url() ) {
+			return $items;
+		}
+		$url = hh_csbt_url();
+		$pos = null;
+		foreach ( array_values( $items ) as $i => $it ) {
+			if ( false !== strpos( (string) $it->url, '/chinh-sach-bang-tinh' ) ) {
+				return $items;
+			}
+			if ( null === $pos && ! (int) $it->menu_item_parent && ( false !== strpos( (string) $it->url, '/ban-do-du-an' ) || false !== strpos( (string) $it->url, '/gioi-thieu' ) ) ) {
+				$pos = $i;
+			}
+		}
+		$current = untrailingslashit( home_url( strtok( add_query_arg( array() ), '?' ) ) ) === untrailingslashit( $url );
+		$item    = (object) array(
+			'ID' => 991003, 'db_id' => 991003, 'menu_item_parent' => 0, 'object_id' => 991003, 'object' => 'custom', 'type' => 'custom',
+			'type_label' => 'Liên kết tự tạo', 'title' => 'Chính sách & bảng tính', 'url' => $url, 'target' => '', 'attr_title' => '', 'description' => '',
+			'xfn' => '', 'status' => 'publish', 'classes' => array_filter( array( 'menu-item', 'menu-item-type-custom', $current ? 'current-menu-item' : '' ) ), 'current' => $current,
+		);
+		$items = array_values( $items );
+		array_splice( $items, null === $pos ? count( $items ) : $pos, 0, array( $item ) );
+		return $items;
 	},
 	10,
 	2
