@@ -1,0 +1,27 @@
+# Tải ranh giới các dự án Vin ở Hà Nội từ OpenStreetMap (chạy trên nhánh claude/danang-data).
+name: Tải dữ liệu dự án Vin Hà Nội
+on:
+  push:
+    branches: [claude/danang-data]
+    paths: ['hanoi-vin/fetch.py', '.github/workflows/hanoi-vin.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: hanoi-vin
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python hanoi-vin/fetch.py
+      - name: Lưu dữ liệu
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git add hanoi-vin/raw
+          git commit -m "hanoi-vin: dữ liệu OSM [skip ci]" || echo "không có gì mới"
+          git pull --rebase -q origin claude/danang-data && git push
