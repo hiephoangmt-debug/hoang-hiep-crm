@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Bản đồ dự án Đà Nẵng</title>
+<meta name="description" content="Bản đồ dự án bất động sản Đà Nẵng – Hội An trên ảnh vệ tinh: Sun Saphia, Da Nang Downtown, Cora Tower, Vinhomes Hải Vân Bay, Casamia Balanca, FPT City, Times Square..." />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg: #0d1420; --fg: #eef2ff; --panel: #0f1a2bf0; --line: #ffffff22; --dt: #e5322d; --ch: #f2a33a; --muted: #a9b4c6; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font-family: Inter, system-ui, sans-serif; }
+  #map { position: fixed; inset: 0; }
+  .head { position: fixed; z-index: 500; top: max(10px, env(safe-area-inset-top)); left: 10px; right: 10px; max-width: 440px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; box-shadow: 0 8px 24px #0006; }
+  .head h1 { margin: 0; font-size: 16px; } .head p { margin: 3px 0 0; font-size: 12px; color: var(--muted); }
+  .legend { display: flex; gap: 12px; margin-top: 6px; font-size: 12px; flex-wrap: wrap; }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+  .bar { position: fixed; z-index: 500; left: 0; right: 0; bottom: 0; padding: 8px 10px max(10px, env(safe-area-inset-bottom)); }
+  .chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; border: 0; border-radius: 999px; padding: 8px 12px; font: 600 12.5px Inter, sans-serif; color: var(--fg); background: #0f1a2bdd; border: 1px solid var(--line); cursor: pointer; white-space: nowrap; }
+  .chip.dt { border-color: var(--dt); } .chip.ch { border-color: var(--ch); } .chip.on { background: #fff; color: #111; }
+  .card { position: fixed; z-index: 600; left: 10px; right: 10px; bottom: 64px; max-width: 420px; margin: 0 auto; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; box-shadow: 0 8px 28px #0008; }
+  .card h2 { margin: 0 30px 4px 0; font-size: 16px; } .card p { margin: 3px 0; font-size: 13px; color: #d6deeb; }
+  .card a.chip { text-decoration: none; display: inline-block; }
+  .card a.chip.go { background: #e5322d; border-color: #e5322d; }
+  .pin { width: 26px; height: 26px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #e5322d; border: 2px solid #fff; box-shadow: 0 2px 6px #0009; }
+  .card .x { position: absolute; right: 10px; top: 8px; border: 0; background: #ffffff1c; color: var(--fg); width: 28px; height: 28px; border-radius: 50%; cursor: pointer; }
+  .lbl { background: transparent; border: 0; box-shadow: none; color: #fff; font: 700 12px Inter, sans-serif; text-shadow: 0 0 3px #000, 0 0 6px #000; white-space: nowrap; }
+  .lbl::before { display: none; }
+  .z-lo .lbl-khac { display: none; } .z-xlo .lbl-ban { display: none; }
+  .poi { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; background: #fff; border: 2px solid #c22; box-shadow: 0 1px 4px #0008; }
+  .leaflet-control-layers { font: 13px Inter, sans-serif; }
+  .leaflet-top.leaflet-right { top: 96px; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<header class="head">
+  <h1>Bản đồ dự án · Đà Nẵng – Hội An</h1>
+  <p>Vị trí, ranh giới trên ảnh vệ tinh. Bấm vào dự án để xem giá & trang dự án.</p>
+  <div class="legend"><span><i style="background:var(--dt)"></i>Đang phân phối</span><span><i style="background:var(--ch)"></i>Dự án lân cận</span></div>
+</header>
+<footer class="bar"><div class="chips" id="chips"><button class="chip on" id="allBtn">🗺 Toàn cảnh</button></div></footer>
+<div class="card" id="card" hidden><button class="x" id="cx" aria-label="Đóng">✕</button><h2 id="ct"></h2><p id="ca"></p><p id="ch"></p><p id="cs"></p><p id="cp" style="font-weight:700;color:#f2b33d"></p><p id="cn" style="font-size:11.5px;color:var(--muted)"></p><div id="cb" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(async function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var map = L.map('map', { zoomControl: false, preferCanvas: true }).setView([16.05, 108.22], 11);
+  L.control.zoom({ position: 'bottomright' }).addTo(map);
+  var sat = L.layerGroup([
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: 'Ảnh vệ tinh © Esri' }),
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19 }),
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, opacity: .6 })
+  ]).addTo(map);
+  var street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap contributors' });
+  L.control.layers({ 'Ảnh vệ tinh': sat, 'Bản đồ đường': street }, null, { position: 'topright' }).addTo(map);
+  map.attributionControl.addAttribution('Ranh giới dự án © OpenStreetMap contributors (ODbL)');
+
+  var data = await (await fetch('du-an-da-nang.geojson')).json();
+  var COL = { ban: '#e5322d', khac: '#f2a33a' }, ICON = { Vinmec: '🏥', Vinschool: '🎓', VinUni: '🎓', Vincom: '🛍' };
+  var layers = [], all = L.featureGroup().addTo(map), poi = L.layerGroup();
+  function show(f, lay) {
+    var p = f.properties;
+    $('ct').textContent = p.name; $('ca').textContent = '📍 ' + p.area;
+    $('ch').textContent = p.headline || ''; $('cs').textContent = p.scale ? '🏢 ' + p.scale : ''; $('cp').textContent = p.price ? '💰 ' + p.price : '';
+    $('cn').textContent = p.ha ? 'Ranh trên bản đồ ~' + (p.ha >= 1 ? p.ha.toLocaleString('vi-VN') + ' ha' : Math.round(p.ha * 1e4).toLocaleString('vi-VN') + ' m²') + ' (OpenStreetMap / mặt bằng; có thể khác số CĐT công bố)' : 'Vị trí theo địa chỉ dự án';
+    var cb = $('cb'); cb.textContent = '';
+    if (p.url) { var a = document.createElement('a'); a.className = 'chip go'; a.href = p.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = '🌐 Xem trang dự án'; cb.appendChild(a); }
+    if (p.d3) { var a2 = document.createElement('a'); a2.className = 'chip'; a2.href = p.d3; a2.target = '_blank'; a2.textContent = '🎥 Xem 3D'; cb.appendChild(a2); }
+    $('card').hidden = false; if (lay.getBounds) map.flyToBounds(lay.getBounds(), { padding: [60, 60], maxZoom: 17, duration: 1.2 }); else map.flyTo(lay.getLatLng(), 17, { duration: 1.2 });
+    document.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('on', c.dataset.n === p.name); });
+  }
+  data.features.sort(function (a, b) { return (a.properties.grp === 'ban' ? 0 : 1) - (b.properties.grp === 'ban' ? 0 : 1); });
+  data.features.forEach(function (f) {
+    var p = f.properties;
+    var c = COL[p.grp], lay;
+    if (f.geometry.type === 'Point') lay = L.marker([f.geometry.coordinates[1], f.geometry.coordinates[0]], { icon: L.divIcon({ className: '', html: '<div class="pin"></div>', iconSize: [26, 26], iconAnchor: [13, 26] }) }).addTo(all);
+    else lay = L.geoJSON(f, { style: { color: c, weight: 2.5, fillColor: c, fillOpacity: .25 } }).addTo(all);
+    if (f.geometry.type !== 'Point' && p.ha < 5 && p.grp === 'ban') {   // dự án nhỏ: thêm ghim để nhìn từ xa vẫn thấy
+      var ctr = lay.getBounds().getCenter(), pm = L.marker(ctr, { icon: L.divIcon({ className: '', html: '<div class="pin"></div>', iconSize: [26, 26], iconAnchor: [13, 26] }) }).addTo(all);
+      pm.on('click', function () { show(f, lay); });
+    }
+    lay.bindTooltip(p.name, { permanent: true, direction: f.geometry.type === 'Point' ? 'top' : 'center', offset: f.geometry.type === 'Point' ? [0, -24] : [0, 0], className: 'lbl lbl-' + p.grp });
+    lay.on('click', function () { show(f, lay); });
+    var b = document.createElement('button'); b.className = 'chip ' + (p.grp === 'ban' ? 'dt' : 'ch'); b.dataset.n = p.name; b.textContent = p.name;
+    b.onclick = function () { show(f, lay); }; $('chips').appendChild(b);
+  });
+  map.fitBounds(all.getBounds(), { padding: [20, 20] });
+  function zl() { var z = map.getZoom(); map.getContainer().classList.toggle('z-lo', z < 14); map.getContainer().classList.toggle('z-xlo', z < 12); if (z >= 14) poi.addTo(map); else poi.remove(); }
+  map.on('zoomend', zl); zl();
+  $('allBtn').onclick = function () { $('card').hidden = true; map.flyToBounds(all.getBounds(), { padding: [20, 20], duration: 1.2 }); document.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('on', c.id === 'allBtn'); }); };
+  $('cx').onclick = function () { $('card').hidden = true; };
+})();
+</script>
+</body>
+</html>
