@@ -220,6 +220,73 @@ function hh_single_listing_dataset() {
 		);
 	}
 
+	// 05/11/2026 (đợt 2) – 7 căn FPT Plaza 3 ký gửi, đã có sổ: gộp 6 căn 1PN 42 m² cùng hướng thành 1 tin; không ghi mã căn, số tầng cụ thể.
+	$fpt_more = array(
+		array(
+			'slug'  => 'ban-can-ho-fpt-plaza-3-1pn-42m2-huong-tay-bac-da-co-so',
+			'title' => 'Bán căn hộ FPT Plaza 3 1PN 42 m², ban công hướng Tây Bắc – 6 căn từ 2,35 tỷ, đã có sổ',
+			'excerpt' => '6 căn 1 phòng ngủ 42 m² FPT Plaza 3 (FPT City, Ngũ Hành Sơn), ban công hướng Tây Bắc, đã có sổ: tầng thấp 2,35 – 2,5 tỷ, tầng trung và tầng cao 2,4 tỷ.',
+			'beds' => 1, 'm2' => 42.06, 'dir' => 'tay-bac', 'price' => 2350, 'max' => 2500,
+			'img'  => 'img/nha-dat/fpt-plaza-3-1pn-42m2-tay-bac-4x3.jpg',
+			'alt'  => 'Căn hộ 1 phòng ngủ 42 m² FPT Plaza 3, ban công hướng Tây Bắc – 2,35 – 2,5 tỷ',
+			'rows' => '<tr><td>Tầng thấp</td><td>3 căn</td><td>2,35 – 2,5 tỷ</td></tr><tr><td>Tầng trung</td><td>2 căn</td><td>2,4 tỷ</td></tr><tr><td>Tầng cao</td><td>1 căn</td><td>2,4 tỷ</td></tr>',
+			'lead' => '<strong>6 căn 1 phòng ngủ 42 m²</strong>, ban công hướng <strong>Tây Bắc</strong>, đã có sổ – giá từ <strong>2,35 tỷ</strong>. Căn 1PN diện tích gọn, phù hợp người trẻ ở hoặc mua cho thuê.',
+		),
+		array(
+			'slug'  => 'ban-can-ho-fpt-plaza-3-2pn-69m2-huong-dong-nam-tang-cao-da-co-so',
+			'title' => 'Bán căn hộ FPT Plaza 3 2PN 69,13 m², ban công hướng Đông Nam, tầng cao – 3,8 tỷ, đã có sổ',
+			'excerpt' => 'Căn 2 phòng ngủ 69,13 m² FPT Plaza 3 (FPT City, Ngũ Hành Sơn), tầng cao, ban công hướng Đông Nam, đã có sổ. Giá 3,8 tỷ.',
+			'beds' => 2, 'm2' => 69.13, 'dir' => 'dong-nam', 'price' => 3800, 'max' => 0,
+			'img'  => 'img/nha-dat/fpt-plaza-3-2pn-69m2-dong-nam-4x3.jpg',
+			'alt'  => 'Căn hộ 2 phòng ngủ 69,13 m² FPT Plaza 3, tầng cao, ban công hướng Đông Nam – 3,8 tỷ',
+			'rows' => '',
+			'lead' => 'căn <strong>2 phòng ngủ 69,13 m²</strong>, <strong>tầng cao</strong>, ban công hướng <strong>Đông Nam</strong>, đã có sổ – giá <strong>3,8 tỷ</strong>.',
+		),
+	);
+	foreach ( $fpt_more as $u ) {
+		$gia    = $u['max'] ? '2,35 – 2,5 tỷ' : '3,8 tỷ';
+		$list[] = array(
+			'rev'     => 1,
+			'slug'    => $u['slug'],
+			'project' => 'fpt-plaza-3',
+			'title'   => $u['title'],
+			'excerpt' => $u['excerpt'],
+			'kind'    => 'can-ho-chung-cu',
+			'area'    => 'ngu-hanh-son',
+			'image'   => $u['img'],
+			'alt'     => $u['alt'],
+			'meta'    => array_filter(
+				array(
+					'hh_deal'        => 'ban',
+					'hh_status'      => 'con-hang',
+					'hh_price'       => $u['price'],
+					'hh_price_max'   => $u['max'] ?: '',
+					'hh_address'     => 'FPT Plaza 3, khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng',
+					'hh_map_address' => 'FPT Plaza 3, FPT City, Ngũ Hành Sơn, Đà Nẵng',
+					'hh_area'        => $u['m2'],
+					'hh_bedrooms'    => $u['beds'],
+					'hh_balcony'     => $u['dir'],
+					'hh_legal'       => 'so-hong',
+					'hh_features'    => ( 1 === $u['beds'] ? "6 căn 1 phòng ngủ 42 m² để chọn tầng\nBan công hướng Tây Bắc\n" : "Căn 2 phòng ngủ 69,13 m², tầng cao\nBan công hướng Đông Nam\n" ) . "Đã có sổ, công chứng sang tên nhanh\nGiá " . $gia,
+				),
+				static fn( $v ) => '' !== (string) $v
+			),
+			'content' => '<p>Bán căn hộ tại ' . $fpt3 . ' – khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng: ' . $u['lead'] . '</p>' . ( $u['rows'] ? '
+<h2>Các căn đang bán</h2>
+<table><thead><tr><th>Vị trí</th><th>Số căn</th><th>Giá</th></tr></thead><tbody>' . $u['rows'] . '</tbody></table>' : '' ) . '
+<h2>Thông tin căn hộ</h2>
+<table><tbody>
+<tr><th>Dự án</th><td>' . $fpt3 . ', FPT City Đà Nẵng</td></tr>
+<tr><th>Loại căn</th><td>' . $u['beds'] . ' phòng ngủ</td></tr>
+<tr><th>Diện tích</th><td>' . str_replace( '.', ',', (string) $u['m2'] ) . ' m²</td></tr>
+<tr><th>Hướng ban công</th><td>' . ( 1 === $u['beds'] ? 'Tây Bắc' : 'Đông Nam' ) . '</td></tr>
+<tr><th>Pháp lý</th><td>Đã có sổ</td></tr>
+<tr><th>Giá</th><td>' . $gia . '</td></tr>
+</tbody></table>
+<p>Xem mặt bằng tầng và các căn khác tại <a href="/du-an/fpt-plaza-3/">trang dự án FPT Plaza 3</a>. Chọn căn, xem nhà và làm thủ tục: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>',
+		);
+	}
+
 	return apply_filters( 'hh_single_listing_dataset', $list );
 }
 
