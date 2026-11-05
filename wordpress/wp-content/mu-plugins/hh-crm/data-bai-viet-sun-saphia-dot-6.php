@@ -147,7 +147,7 @@ HTML
 	/* ---------------- 04/11 – So sánh loại hình đầu tư cho thuê ---------------- */
 	$posts[] = array(
 		'slug'     => 'dau-tu-cho-thue-da-nang-can-ho-luu-tru-biet-thu-nha-pho-shophouse',
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 05/11: chèn ảnh dự án.
 		'title'    => 'Đầu tư cho thuê ở Đà Nẵng: căn hộ lưu trú như Sun Saphia Residence, biệt thự biển, nhà phố hay shophouse?',
 		'excerpt'  => 'So sánh 4 loại hình cho thuê ở Đà Nẵng: shophouse mặt tiền (lợi suất khoảng 2 – 3%), nhà phố trung tâm (1,4 – 1,8%), biệt thự biển (3,6 – 5,5%) và căn hộ lưu trú vốn nhỏ như studio Sun Saphia Residence.',
 		'keyword'  => 'đầu tư cho thuê Đà Nẵng',
@@ -174,7 +174,7 @@ HTML
 <!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
 <h2>Vì sao căn hộ lưu trú cho lợi suất cao hơn?</h2>
 <p>Giá thuê theo đêm của một studio view biển (khoảng 2,2 – 2,9 triệu ngoài cao điểm theo giả định của chủ đầu tư) gần bằng giá thuê tính theo mỗi phòng ngủ của biệt thự biển, nhưng vốn vào nhỏ hơn hàng chục lần. Ví dụ theo mùa (180 đêm thấp điểm, 180 đêm cao điểm, chủ nhà nhận 65%): studio có thể mang về khoảng 261 – 328 triệu/năm trước thuế, phí và khấu hao – chi tiết ở bài {$review}. Đổi lại, dòng tiền này phụ thuộc lấp đầy và chất lượng vận hành, không ổn định như hợp đồng thuê dài hạn.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-can-1pn-plus.jpg|Layout căn 1PN+ Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-1pn-plus-51m2.jpg|Layout căn 1PN+ 51 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Chọn theo mục tiêu</h2>
 <ul>
 <li><strong>Cần dòng tiền với vốn 2 – 3 tỷ</strong>: căn hộ lưu trú ven biển; chia vốn mua 2 – 3 căn ở vị trí khác nhau để giảm rủi ro.</li>
@@ -203,7 +203,7 @@ HTML
 	/* ---------------- 05/11 – Xây, mua khách sạn hay mua căn lưu trú ---------------- */
 	$posts[] = array(
 		'slug'     => 'dau-tu-khach-san-da-nang-xay-moi-mua-lai-hay-mua-can-luu-tru',
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 05/11: chèn ảnh dự án.
 		'title'    => 'Đầu tư khách sạn ở Đà Nẵng: xây mới, mua lại hay mua căn lưu trú như Sun Saphia Residence?',
 		'excerpt'  => 'Muốn có khách sạn ở Đà Nẵng: xây mới 3 sao 30 – 50 phòng tốn khoảng 15 – 30 tỷ chưa gồm đất, mất 2 – 3 năm; khách sạn 3 sao 50 phòng rao khoảng 67 tỷ; hoặc mua một căn lưu trú mặt biển như Sun Saphia Residence từ khoảng 2,1 tỷ.',
 		'keyword'  => 'đầu tư khách sạn Đà Nẵng',
@@ -233,7 +233,7 @@ HTML
 <li>Có vốn lớn, có đất hoặc tìm được khách sạn giá hợp lý, và có kinh nghiệm (hoặc đối tác) vận hành.</li>
 <li>Muốn toàn quyền thương hiệu, giá phòng, và sở hữu đất – tài sản giữ được lâu dài.</li>
 </ul>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-can-1pn-plus.jpg|Layout căn 1PN+ Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-1pn-plus-51m2.jpg|Layout căn 1PN+ 51 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Khi nào căn lưu trú hợp hơn?</h2>
 <ul>
 <li>Vốn 2 – 3 tỷ, muốn "sở hữu một phòng khách sạn mặt biển" mà không tự xin phép, tự vận hành.</li>

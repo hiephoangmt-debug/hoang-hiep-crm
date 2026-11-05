@@ -53,3 +53,36 @@ add_filter(
 	},
 	22
 );
+
+// 05/11/2026: 6 layout căn bản nét của chủ đầu tư (anh Hiệp gửi) thay 3 layout cũ bị mờ.
+add_filter(
+	'hh_project_dataset',
+	static function ( $projects ) {
+		$new = array(
+			'studio-30m2'     => 'Layout căn Studio Sun Saphia Residence – thông thủy 30 m², tim tường 43,88 m² | layout | Studio 30 m²',
+			'studio-goc-40m2' => 'Layout căn Studio góc Sun Saphia Residence – thông thủy 40,03 m², tim tường 46,38 m² | layout | Studio góc 40 m²',
+			'1pn-plus-51m2'   => 'Layout căn 1PN+ Sun Saphia Residence – thông thủy 51,11 m², tim tường 56,42 m² | layout | 1PN+ 51 m²',
+			'2pn-61m2'        => 'Layout căn 2PN góc Sun Saphia Residence – thông thủy 61,14 m², tim tường 68,67 m² | layout | 2PN 61 m²',
+			'2pn-67m2'        => 'Layout căn 2PN góc Sun Saphia Residence – thông thủy 67,69 m², tim tường 76,36 m² | layout | 2PN 67 m²',
+			'2pn-70m2'        => 'Layout căn 2PN góc có lô gia rộng Sun Saphia Residence – thông thủy 70,21 m², tim tường 77,35 m² | layout | 2PN 70 m²',
+		);
+		foreach ( $projects as &$p ) {
+			if ( 'sun-saphia-residence' !== ( $p['slug'] ?? '' ) ) {
+				continue;
+			}
+			$links = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+			if ( '' === $links || false !== strpos( $links, 'sun-saphia-layout-studio-30m2.jpg' ) ) {
+				continue;
+			}
+			$kept = array_filter( explode( "\n", $links ), static fn( $l ) => ! preg_match( '/sun-saphia-layout-can-(studio|1pn-plus|2pn)\.jpg/', $l ) );
+			foreach ( $new as $f => $line ) {
+				$kept[] = 'plugin:img/sun-saphia/sun-saphia-layout-' . $f . '.jpg | ' . $line;
+			}
+			$p['meta']['hh_p_image_links']     = implode( "\n", $kept );
+			$p['fix_meta']['hh_p_image_links'] = array_values( array_unique( array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $links ) ) ) );
+		}
+		unset( $p );
+		return $projects;
+	},
+	23 // Ngay sau bộ lọc 4D / mặt bằng tầng (22).
+);

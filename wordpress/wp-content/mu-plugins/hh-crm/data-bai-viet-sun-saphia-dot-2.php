@@ -118,7 +118,7 @@ HTML
 		'keywords_extra' => array( 'Sun Saphia Residence', 'layout căn hộ Sun Saphia', 'căn hộ 2 phòng ngủ Sun Saphia', 'căn 1PN+1 Sun Saphia' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-23 15:00',
-		'rev'      => 3, // 23/10: số căn 2PN 133, mặt bằng tầng 3A – 28 (28 căn/sàn) theo tài liệu chủ đầu tư.
+		'rev'      => 4, // 23/10: số căn 2PN 133, mặt bằng tầng 3A – 28 (28 căn/sàn) theo tài liệu chủ đầu tư.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Sun Saphia Residence', 'Mặt bằng căn hộ' ),
 		'image'    => 'plugin:img/tin-tuc/mat-bang-sun-saphia-residence.jpg',
@@ -139,7 +139,12 @@ HTML
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Mặt bằng tầng 3A – 28: 28 căn mỗi sàn</h2>
 <p>Mặt bằng tầng điển hình của chủ đầu tư cho thấy mỗi sàn từ tầng 3A đến 28 có <strong>19 studio, 4 căn 1PN+ và 5 căn 2PN</strong>. Studio thông thủy 30 – 31 m² (căn góc 40 m²), mặt tiền 3,8 m, sâu 9 m; 1PN+ thông thủy 49 – 51 m²; 2PN thông thủy 60 – 70 m² nằm ở các góc tòa. Dãy căn phía Đông nhìn ra biển. Chiều cao tầng căn hộ 3,5 m, bàn giao hoàn thiện cơ bản.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-can-2pn.jpg|Layout căn 2 phòng ngủ Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-2pn-67m2.jpg|Layout căn 2 phòng ngủ 67,69 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Layout căn Studio 30 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-goc-40m2.jpg|Layout căn Studio góc 40,03 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-1pn-plus-51m2.jpg|Layout căn 1PN+ 51,11 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-2pn-61m2.jpg|Layout căn 2PN góc 61,14 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-2pn-70m2.jpg|Layout căn 2PN góc 70,21 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Studio 30 – 31 m²: cho thuê ngắn hạn</h2>
 <p>Tổng tiền thấp nhất, dễ cho thuê theo ngày cho khách du lịch. Đổi lại, 513 căn cùng loại trong một tòa nghĩa là cạnh tranh cho thuê cao: căn tầng cao, nhìn biển, gần thang máy nhưng không sát phòng kỹ thuật sẽ có lợi thế.</p>
 <h2>1PN+1 50 – 51 m²: ở hoặc cho thuê dài hạn</h2>
@@ -306,7 +311,7 @@ HTML
 		'keywords_extra' => array( 'Sun Saphia Residence', 'Sun Saphia cho thuê', 'lợi nhuận căn hộ Sun Saphia', 'đầu tư căn hộ biển Đà Nẵng' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-26 15:00',
-		'rev'      => 3, // 01/11: ngân hàng hỗ trợ Vietcombank, BIDV, NCB.
+		'rev'      => 4, // 01/11: ngân hàng hỗ trợ Vietcombank, BIDV, NCB.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Sun Saphia Residence', 'Đầu tư cho thuê' ),
 		'image'    => 'plugin:img/tin-tuc/dau-tu-sun-saphia-residence.jpg',
@@ -330,7 +335,7 @@ HTML
 </tbody>
 </table>
 <p>Bài toán của chủ đầu tư giả định cho thuê ngắn ngày 2,5 triệu/đêm, lấp đầy 60% (doanh thu khoảng 540 triệu/năm), lợi nhuận 65% doanh thu. Nếu lấp đầy chỉ 45% và lợi nhuận còn 55% (mùa mưa, cạnh tranh giá), lợi nhuận còn khoảng 226 triệu/năm – lợi suất khoảng 7,5%. Khách sạn, căn hộ view biển lân cận đang cho thuê studio khoảng 2,2 – 2,9 triệu/đêm ngoài mùa cao điểm.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-can-1pn-plus.jpg|Layout căn 1PN+ Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-1pn-plus-51m2.jpg|Layout căn 1PN+ 51 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Nếu vay ngân hàng</h2>
 <p>Vay 50% (1,5 tỷ), giả định lãi suất sau ưu đãi 10%/năm thì tiền lãi khoảng 150 triệu/năm – cao hơn lợi nhuận ở 3 kịch bản thận trọng, thấp hơn bài toán của chủ đầu tư. Nghĩa là dòng tiền chỉ đủ trả lãi khi cho thuê ngắn ngày hiệu quả; nếu chỉ cho thuê theo tháng, lợi nhuận phải đến từ tăng giá hoặc chính sách hỗ trợ lãi suất. Ngân hàng hỗ trợ dự án: Vietcombank, BIDV, NCB.</p>
 <h2>Rủi ro riêng của dự án nhiều studio</h2>

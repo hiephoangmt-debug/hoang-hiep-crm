@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.54** + plugin Hoàng Hiệp CRM **2.20.134**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.54** + plugin Hoàng Hiệp CRM **2.20.135**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.135 (05/11/2026)
+
+- **Sun Saphia Residence**: 6 layout căn bản nét của chủ đầu tư (Studio 30 m², Studio góc 40 m², 1PN+ 51 m², 2PN 61 / 67 / 70 m², có thông thủy và tim tường) thay 3 layout cũ bị mờ.
+- 37 bài tin tức về Sun Saphia được chèn thêm 2 ảnh dự án (phối cảnh, mặt bằng, layout, sơ đồ vị trí) giữa bài; bài "Mặt bằng căn hộ" có đủ 6 layout. Web tự cập nhật bài (bài anh đã sửa tay giữ nguyên).
 
 ## Có gì mới – plugin 2.20.134 (05/11/2026)
 

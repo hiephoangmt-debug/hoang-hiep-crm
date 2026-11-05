@@ -211,7 +211,7 @@ HTML
 	/* ---------------- 09/11 – Gửi tiết kiệm hay mua studio cho thuê ---------------- */
 	$posts[] = array(
 		'slug'     => 'gui-tiet-kiem-hay-mua-studio-sun-saphia-residence-cho-thue',
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 05/11: chèn ảnh dự án.
 		'title'    => 'Gửi tiết kiệm hay mua studio Sun Saphia Residence cho thuê? So sánh với lãi suất 5,4 – 6,7%/năm',
 		'excerpt'  => 'Cùng khoảng 3,19 tỷ (studio 2,85 tỷ cộng VAT và 2% bảo trì): gửi tiết kiệm 12 tháng 5,4 – 6,7%/năm cho khoảng 172 – 214 triệu; cho thuê lợi suất ròng 3,5 – 5,5% cho khoảng 112 – 176 triệu. Phần chênh nằm ở tăng giá và rủi ro.',
 		'keyword'  => 'gửi tiết kiệm hay mua căn hộ cho thuê',
@@ -237,7 +237,7 @@ HTML
 </tbody>
 </table>
 <p>Lãi suất tiết kiệm: CafeBiz 20/10/2026, 24hMoney 29/10/2026 (tổng hợp ở trang <a href="/thong-ke-dau-tu/">Thống kê đầu tư</a>). Lợi suất 4,5%/năm: Batdongsan.com.vn, quý 3/2026. Lợi suất cho thuê tính trên tổng tiền, đã trừ chi phí vận hành.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-can-studio.jpg|Layout căn Studio Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Layout căn Studio 30 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Chênh lệch nằm ở đâu?</h2>
 <ul>
 <li><strong>Thu nhập đều</strong>: tiết kiệm nhỉnh hơn hoặc tương đương, gần như không rủi ro, rút được khi cần.</li>

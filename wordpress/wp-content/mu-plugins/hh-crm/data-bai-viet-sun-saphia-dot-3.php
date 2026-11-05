@@ -16,7 +16,7 @@ function hh_posts_sun_saphia_dot_3( $posts ) {
 	/* ---------------- 30/10 – Studio ---------------- */
 	$posts[] = array(
 		'slug'     => 'studio-sun-saphia-residence-30-m2-bo-tri-ai-nen-mua',
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 05/11: chèn ảnh dự án.
 		'title'    => 'Studio Sun Saphia Residence 30 m²: bố trí, công năng và ai nên mua',
 		'excerpt'  => 'Studio chiếm 513/782 căn Sun Saphia Residence: thông thủy 30 – 31 m², mặt tiền 3,8 m, trần 3,5 m, 19 căn mỗi sàn. Bố trí thế nào, hợp với ai, chọn căn ra sao.',
 		'keyword'  => 'studio Sun Saphia Residence',
@@ -39,7 +39,7 @@ function hh_posts_sun_saphia_dot_3( $posts ) {
 <tr><th>Bàn giao</th><td>Hoàn thiện cơ bản, dự kiến 11/2028</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-can-studio.jpg|Layout căn Studio Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Layout căn Studio 30 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Bố trí bên trong</h2>
 <p>Căn mặt tiền hẹp, sâu nên thường xếp theo một trục: cửa vào – bếp và vệ sinh – khu ngủ, sinh hoạt sát cửa kính. Trần 3,5 m giúp căn nhỏ thoáng hơn căn hộ thông thường, có chỗ cho kệ cao hoặc giường gác thấp. Vì bàn giao hoàn thiện cơ bản, chủ nhà tự chọn nội thất theo mục đích ở hay cho thuê.</p>
 <p>Xem toàn bộ loại căn và cách chia sàn ở bài <a href="/mat-bang-can-ho-sun-saphia-residence/">mặt bằng Sun Saphia Residence</a>.</p>
@@ -342,7 +342,7 @@ HTML
 	/* ---------------- 04/11 – Pháp lý cho thuê ngắn ngày ---------------- */
 	$posts[] = array(
 		'slug'     => 'cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue',
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 05/11: chèn ảnh dự án.
 		'title'    => 'Cho thuê ngắn ngày căn hộ Sun Saphia Residence: pháp lý, khai báo lưu trú và thuế cần biết',
 		'excerpt'  => 'Trước khi mua Sun Saphia Residence để cho thuê theo ngày, cần biết: căn hộ phải dùng đúng công năng, đăng ký cơ sở lưu trú nếu kinh doanh du lịch, khai báo lưu trú cho khách và kê khai thuế.',
 		'keyword'  => 'cho thuê ngắn ngày căn hộ Đà Nẵng',
@@ -360,7 +360,7 @@ HTML
 <!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
 <h2>2. Đăng ký cơ sở lưu trú nếu kinh doanh du lịch</h2>
 <p>Cho khách du lịch thuê theo đêm là hoạt động kinh doanh lưu trú. Theo hướng quản lý hiện nay (ví dụ quy định mới của TP.HCM năm 2026), chủ căn hộ khai thác căn hộ du lịch phải <strong>đăng ký cơ sở lưu trú</strong> và đáp ứng điều kiện an ninh trật tự, phòng cháy. Báo chí cũng ghi nhận mức phạt tới hàng trăm triệu đồng với việc biến căn hộ thành cơ sở lưu trú trái phép. Đà Nẵng có thể áp dụng quy định riêng – cần hỏi phường và cơ quan du lịch thành phố.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-can-1pn-plus.jpg|Layout căn 1PN+ Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-1pn-plus-51m2.jpg|Layout căn 1PN+ 51 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>3. Khai báo lưu trú cho mọi khách</h2>
 <p>Mọi khách thuê, nhất là khách nước ngoài, phải được khai báo lưu trú với công an theo Luật Cư trú. Căn hộ tự nhận phòng bằng mật khẩu vẫn phải khai báo – đây là lỗi nhiều chủ nhà hay bỏ sót.</p>
 <h2>4. Kê khai thuế</h2>
