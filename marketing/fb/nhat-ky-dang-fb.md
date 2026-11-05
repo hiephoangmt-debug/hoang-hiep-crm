@@ -7,3 +7,6 @@
 | 05/11/2026 | Sun | 10:30 | Sun Ponte: ảnh flycam thực tế 11/2026, quy mô tháp + The Rio | /du-an/sun-ponte-residence/ |
 | 05/11/2026 | Sun | 15:00 | Sun Saphia: 5 việc chuẩn bị trước sự kiện bán hàng 28/11 | /du-an/sun-saphia-residence/ |
 | 05/11/2026 | Sun | 20:00 | Sun Solar: vị trí 9 Lê Duẩn, 256 căn hướng sông Hàn, tiện ích | /du-an/sun-solar-residence/ |
+| 05/11/2026 | Sun | 12:45 | FourS Tower F2: chính sách từ 17/10/2026, quà nội thất Nhà Xinh 35–100 triệu | /chinh-sach-fours-tower-f2-17-10-2026-qua-noi-that-nha-xinh/ |
+| 05/11/2026 | Hoàng Hiệp | 10:00 | (phiên khác) FPT Plaza 3 – căn có sổ cần bán | /mua-ban/?duan=fpt-plaza-3 |
+| 05/11/2026 | Hoàng Hiệp | 19:30 | (phiên khác) 5 chính sách mới ảnh hưởng nhà đất Đà Nẵng 11/2026 | /chinh-sach-moi-anh-huong-bat-dong-san-da-nang-11-2026/ |
