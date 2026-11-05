@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-05T02:37:40+00:00",
+    "updated": "2026-11-05T04:38:01+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do",
@@ -246,6 +246,12 @@
             "publish": "2026-11-06 15:00",
             "file": "bai/phi-booking-agoda-airbnb-cho-thue-can-ho-sun-saphia.txt",
             "rev": 2
+        },
+        {
+            "slug": "chinh-sach-ban-hang-du-an-sun-group-da-nang-thang-11-2026",
+            "title": "Chính sách bán hàng các dự án Sun Group Đà Nẵng tháng 11/2026: Spana, Cora, S-Light, FourS",
+            "publish": "2026-11-06 15:30",
+            "file": "bai/chinh-sach-ban-hang-du-an-sun-group-da-nang-thang-11-2026.txt"
         },
         {
             "slug": "chuan-bi-su-kien-ban-hang-sun-saphia-residence-28-11",
