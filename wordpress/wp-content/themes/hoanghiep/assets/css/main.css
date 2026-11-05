@@ -200,6 +200,15 @@ p { margin: 0 0 1em; }
 @media (min-width: 1001px) and (max-width: 1199px) { .primary-nav a { padding-inline: 5px; font-size: .86rem; } .primary-nav a::after { left: 5px; right: 5px; } }
 @media (min-width: 1001px) { .brand__tag { white-space: normal; line-height: 1.25; max-width: 270px; } }
 .nav-toggle { flex: none; }
+/* Logo và tên luôn giữ nguyên kích thước; menu co lại, mục thừa dồn vào "Thêm" (main.js). */
+.brand, .brand__mark, .custom-logo { flex: none; }
+@media (min-width: 1001px) {
+	.primary-nav { flex: 1 1 auto; min-width: 0; display: flex; justify-content: flex-end; }
+	.primary-nav > ul { flex-wrap: nowrap; }
+	.primary-nav .menu-more > .sub-menu { left: auto; right: 0; }
+	.primary-nav .menu-more .sub-menu .sub-menu { left: auto; right: 100%; border-radius: 8px 0 8px 8px; }
+}
+@media (min-width: 1001px) and (max-width: 1399px) { .brand__tag { display: none; } }
 @media (max-width: 1000px) {
 	:root { --header-h: 64px; }
 	.nav-toggle { display: block; }

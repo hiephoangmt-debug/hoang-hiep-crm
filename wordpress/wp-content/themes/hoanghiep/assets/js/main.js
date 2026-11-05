@@ -32,6 +32,36 @@
 		} );
 	}
 
+	// Máy tính: menu dài không đủ chỗ → dồn các mục cuối vào "Thêm ▾" (logo và tên không bị ép).
+	const navList = nav && nav.querySelector( ':scope > ul' );
+	if ( navList ) {
+		const items = Array.from( navList.children );
+		const more = document.createElement( 'li' );
+		more.className = 'menu-item menu-item-has-children menu-more';
+		more.innerHTML = '<a href="#" aria-haspopup="true">Thêm</a><ul class="sub-menu"></ul>';
+		const moreList = more.querySelector( 'ul' );
+		more.firstChild.addEventListener( 'click', ( e ) => e.preventDefault() );
+		const fit = () => {
+			items.forEach( ( li ) => navList.appendChild( li ) );
+			more.remove();
+			if ( window.innerWidth <= 1000 || navList.scrollWidth <= nav.clientWidth + 1 ) {
+				return;
+			}
+			navList.appendChild( more );
+			for ( let k = items.length - 1; k > 0 && navList.scrollWidth > nav.clientWidth + 1; k-- ) {
+				moreList.insertBefore( items[ k ], moreList.firstChild );
+			}
+			more.classList.toggle( 'current-menu-item', !! moreList.querySelector( '.current-menu-item' ) );
+		};
+		let t;
+		window.addEventListener( 'resize', () => {
+			clearTimeout( t );
+			t = setTimeout( fit, 120 );
+		} );
+		fit();
+		document.fonts && document.fonts.ready.then( fit );
+	}
+
 	// Header shadow on scroll.
 	const header = $( '.site-header' );
 	if ( header ) {
