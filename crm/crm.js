@@ -1542,7 +1542,8 @@
       rangeText: ky === "thang" ? span.replace(/\//g, ".") : "",
       title: ky === "thang" ? monthLabel(w).toUpperCase() : ky === "all" ? "TỔNG CHIẾN DỊCH" : "",
       images, staffList, staffOf: (acc) => accStaff.get(acc) || "",
-      scope: ky === "tuan" ? "week" : "all", hideGuide: true, hideZeroChannels: true, perSlide: 4, // gom ảnh cùng nhân sự + kênh + loại: tối đa 4 ảnh / trang dropUnused: true, dropEmptyImageSlides: true,
+      scope: ky === "tuan" ? "week" : "all", hideGuide: true, hideZeroChannels: true, dropUnused: true, dropEmptyImageSlides: true,
+      perSlide: 4, // gom ảnh cùng nhân sự + kênh + loại: tối đa 4 ảnh / trang
       placeholderMissing: ky === "tuan" && $("rpKeepMissing").checked,
       maxImageSide: 1600, // ảnh chụp màn hình thu nhỏ còn ~1600px: vẫn rõ chữ, file nhẹ hơn nhiều
       logo: pj.logo || "", logos: (window.BAO_CAO_MKT_CONFIG || {}).logos, logoMedia: window.TATI_LOGO_MEDIA,
