@@ -12,7 +12,8 @@ import re
 WEB = pathlib.Path(__file__).resolve().parent.parent
 OUT = WEB / 'ladipage' / 'basic'
 SITE = 'https://www.sun-danangdowntown.com'
-CDN = 'https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@claude/great-tesla-ki0len/web/images/'
+# Gắn theo commit để CDN lấy đúng ảnh mới (đổi ảnh thì cập nhật mã commit này)
+CDN = 'https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@b7aba6a284bd80ea183b695b572b37c5e78cde12/web/images/'
 PAGES = {
     'index.html': ('da-nang-downtown.html', True),
     'sun-galaxy-complex/index.html': ('sun-galaxy-complex.html', False),

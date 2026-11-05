@@ -10,7 +10,7 @@ import pathlib
 import re
 
 WEB = pathlib.Path(__file__).resolve().parent.parent
-RAW = 'https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/claude/great-tesla-ki0len/web/images/'
+RAW = 'https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/b7aba6a284bd80ea183b695b572b37c5e78cde12/web/images/'
 
 LOAN = '''    <h3 id="tinh-vay">Ví dụ khoản vay minh họa</h3>
     <p>Giả định vay 70% giá trị, ân hạn gốc và hỗ trợ lãi 0% trong 30 tháng, sau đó lãi suất 10%/năm, thời hạn vay 20 năm. Kết quả chỉ để tham khảo, lãi suất thực tế theo ngân hàng tại thời điểm giải ngân.</p>
