@@ -405,6 +405,56 @@ function hh_single_listing_dataset() {
 		);
 	}
 
+	// 05/11/2026 – căn 3PN Sun Ponte chuyển nhượng HĐMB (phiếu tính giá anh Hiệp gửi). Không ghi mã căn; giá bán chờ anh báo.
+	$list[] = array(
+		'rev'     => 1,
+		'slug'    => 'ban-can-ho-sun-ponte-3pn-91m2-tang-thap-chuyen-nhuong-hdmb',
+		'project' => 'sun-ponte-residence',
+		'title'   => 'Bán căn 3 phòng ngủ Sun Ponte Residence 91,1 m², tầng thấp – chuyển nhượng hợp đồng mua bán',
+		'excerpt' => 'Căn 3PN Sun Ponte Residence (Trần Hưng Đạo, cạnh cầu Rồng) 91,1 m² thông thủy, tầng thấp, sở hữu lâu dài. Giá trị hợp đồng mua bán 8,32 tỷ (gồm VAT, kinh phí bảo trì); đã qua các đợt thanh toán 95%, 5% cuối đóng khi nhận sổ.',
+		'kind'    => 'can-ho-chung-cu',
+		'area'    => 'son-tra',
+		'image'   => 'img/sun-ponte/sun-ponte-thap-va-cau-tran-thi-ly.jpg',
+		'alt'     => 'Tòa tháp Sun Ponte Residence bên sông Hàn – bán căn 3 phòng ngủ 91,1 m²',
+		'meta'    => array(
+			'hh_deal'        => 'ban',
+			'hh_status'      => 'con-hang',
+			'hh_address'     => 'Sun Ponte Residence, đường Trần Hưng Đạo, Sơn Trà, Đà Nẵng – cạnh cầu Rồng',
+			'hh_map_address' => 'Sun Ponte Residence, Trần Hưng Đạo, Sơn Trà, Đà Nẵng',
+			'hh_area'        => 91.1,
+			'hh_bedrooms'    => 3,
+			'hh_legal'       => 'hdmb',
+			'hh_floor_no'    => 'Tầng thấp',
+			'hh_features'    => "Căn 3 phòng ngủ 91,1 m² thông thủy (98,5 m² tim tường)\nGiá trị HĐMB 8,32 tỷ đã gồm VAT và kinh phí bảo trì\nĐã qua các đợt thanh toán 95%, 5% cuối đóng khi nhận sổ\nSở hữu lâu dài, mặt tiền sông Hàn giữa cầu Rồng và cầu Trần Thị Lý",
+		),
+		'content' => '<p>Bán căn hộ <strong>3 phòng ngủ 91,1 m²</strong> tại <a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a> – tòa tháp 26 tầng của Sun Group trên đường Trần Hưng Đạo (Sơn Trà), mặt tiền sông Hàn, giữa cầu Rồng và cầu Trần Thị Lý. Căn ở <strong>tầng thấp</strong>, giao dịch theo hình thức chuyển nhượng hợp đồng mua bán (HĐMB).</p>
+<h2>Thông tin căn hộ</h2>
+<table><tbody>
+<tr><th>Dự án</th><td><a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a>, Sơn Trà, Đà Nẵng</td></tr>
+<tr><th>Loại căn</th><td>3 phòng ngủ</td></tr>
+<tr><th>Diện tích</th><td>91,1 m² thông thủy (98,5 m² tim tường)</td></tr>
+<tr><th>Vị trí</th><td>Tầng thấp</td></tr>
+<tr><th>Pháp lý</th><td>Hợp đồng mua bán ký 02/2025, sở hữu lâu dài – chờ cấp sổ</td></tr>
+<tr><th>Giá trị HĐMB</th><td>Khoảng 8,32 tỷ (gồm VAT và kinh phí bảo trì)</td></tr>
+<tr><th>Giá bán</th><td>Liên hệ</td></tr>
+</tbody></table>
+<h2>Tiến độ thanh toán theo hợp đồng</h2>
+<table><thead><tr><th>Đợt</th><th>Tỷ lệ</th><th>Hạn</th></tr></thead><tbody>
+<tr><td>Đợt 1</td><td>5% (gồm VAT)</td><td>02/2025</td></tr>
+<tr><td>Đợt 2</td><td>65% (gồm VAT)</td><td>03/2025</td></tr>
+<tr><td>Đợt 3</td><td>25% (gồm VAT) + kinh phí bảo trì</td><td>31/12/2025</td></tr>
+<tr><td>Đợt cuối</td><td>5%</td><td>Khi nhận sổ</td></tr>
+</tbody></table>
+<p>Theo hợp đồng, các đợt đến 31/12/2025 đã đến hạn (95% giá trị căn và kinh phí bảo trì); 5% cuối đóng khi chủ đầu tư thông báo cấp giấy chứng nhận. Người mua nhận chuyển nhượng HĐMB: công chứng văn bản chuyển nhượng và nộp chủ đầu tư xác nhận – xem chi tiết tại bài <a href="/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/">mua căn hộ chuyển nhượng Đà Nẵng</a>.</p>
+<h2>Vì sao chọn căn 3PN Sun Ponte</h2>
+<ul>
+<li>Căn 3 phòng ngủ ít trong tòa, phù hợp gia đình ở lâu dài ngay trung tâm, 1 phút tới cầu Rồng, 3 – 5 phút ra biển Mỹ Khê.</li>
+<li>Giá thuê tham khảo căn 3PN 91 m² full nội thất khoảng 48 triệu/tháng (bảng căn cho thuê 11/2026) – xem <a href="/du-an/sun-ponte-residence/#thu-cap">giá thuê Sun Ponte</a>.</li>
+<li>Tiện ích tòa: hồ bơi vô cực, gym, yoga, spa, kids club, công viên ven sông.</li>
+</ul>
+<p>Xem mặt bằng, layout căn 3PN tại <a href="/du-an/sun-ponte-residence/">trang dự án Sun Ponte Residence</a>. Nhận giá bán, xem căn và hồ sơ: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>',
+	);
+
 	return apply_filters( 'hh_single_listing_dataset', $list );
 }
 
