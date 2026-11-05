@@ -65,7 +65,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold2);border-co
 .zl{display:inline-block;margin-left:6px;padding:1px 9px;border-radius:99px;background:#E8F1FF;color:var(--blue);font-size:12px;font-weight:600;text-decoration:none;vertical-align:middle}.zl.on{background:var(--blue);color:#fff}.zl:hover{filter:brightness(.95)}
 .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:8px}.fld{display:flex;flex-direction:column;gap:2px}.fld input,.fld select{width:100%}
 .rowtodo td{background:var(--redsoft)}.cnote{width:150px}
-.ctab{min-width:900px}.ctab th.srt{cursor:pointer;white-space:nowrap}.ctab td{vertical-align:top}.nw{white-space:nowrap}.btn.sm{padding:3px 9px;font-size:12.5px}.chk{display:flex;gap:6px;align-items:center;font-size:14px}.pager{justify-content:center;margin-top:10px}
+.ctab{min-width:900px}.ctab .stk{position:sticky;left:0;z-index:3;background:var(--card);box-shadow:2px 0 0 var(--line)}.ctab tr.rowtodo .stk{background:var(--redsoft)}.ctab tr:hover .stk{background:#FAFBFE}.ctab .wnd{min-width:200px}.ctab th.srt{cursor:pointer;white-space:nowrap}.ctab td{vertical-align:top}.nw{white-space:nowrap}.btn.sm{padding:3px 9px;font-size:12.5px}.chk{display:flex;gap:6px;align-items:center;font-size:14px}.pager{justify-content:center;margin-top:10px}
 .mrow{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;box-shadow:0 1px 2px rgba(11,31,61,.05);cursor:pointer;display:flex;flex-direction:column;gap:6px}.mrow.todo{border-left:4px solid var(--red)}
 .btn.xs{min-height:24px!important;padding:1px 9px;font-size:12px;border-radius:7px;line-height:1.4}.mph{flex-wrap:nowrap}.mph .phn{white-space:nowrap}.mph .tag{white-space:nowrap}
 .mbtn{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.mbtn .btn.sm{min-height:32px;padding:3px 16px}.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;border-top:1px solid var(--line);padding-top:8px}.mc{display:flex;flex-direction:column;font-size:13px;min-width:0;overflow-wrap:anywhere}.mc .b{font-weight:700;color:var(--navy9)}
@@ -142,7 +142,7 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
 
 <script>
 window.onerror = function (m, s, l) { var d = document.getElementById('diag'); if (d) d.textContent = 'Lỗi trang: ' + m + (l ? ' (dòng ' + l + ')' : ''); };
-var UI_VER = 'ui-48';
+var UI_VER = 'ui-49';
 var KEY = /*__KEY__*/'', D = null, tab = 'home', F = { status: 'todo', site: '', q: '', clicks: 'todo', cw: '', cch: '', cd: 'all', src: '', as: '', sort: 'new', prov: '', bud: '', when: '', sc: '', sd: 'asc', page: 1, df: '', dt: '', cf: '', ct: '', area: '', proj: '', dim: 'area' }, G = '';
 try { G = localStorage.getItem('crm_group') || ''; } catch (e) {}
 var STATUS = ['Mới', 'Đã liên hệ', 'Đang tư vấn', 'Đang cân nhắc', 'Quan tâm', 'Hẹn xem', 'Đã xem dự án', 'Đang thương lượng', 'Booking', 'Chốt', 'Mất', 'Tạm dừng'];
@@ -453,7 +453,7 @@ var COLS = [
   { k: 'act', t: 'Thao tác', v: null }
 ];
 var COL_OLD = ['code', 'name', 'province', 'phone', 'zalo', 'src', 'site', 'purpose', 'status', 'careCount', 'careAt', 'careResult', 'viewProject', 'next', 'act'];
-var COL_DEFAULT = ['code', 'name', 'province', 'phone', 'zalo', 'src', 'purpose', 'status', 'careCount', 'careAt', 'careResult', 'viewProject', 'next', 'sale', 'act'];
+var COL_DEFAULT = ['name', 'province', 'phone', 'src', 'purpose', 'status', 'careAt', 'next', 'sale', 'act'];   // gọn cho vừa khung, cột khác bật ở nút Cột hiển thị
 function visCols() { try { var v = JSON.parse(localStorage.getItem('crm_cols') || 'null'); if (v && v.length && JSON.stringify(v) !== JSON.stringify(COL_OLD)) return v; } catch (e) {} return COL_DEFAULT; }   // cột Dự án quan tâm đã gộp vào Nguồn khách (theo tên web dự án)
 var PAGE = 25;
 function leadsFiltered() {
@@ -666,17 +666,17 @@ function leads() {
   var body;
   if (wide) {
     var cols = COLS.filter(function (x) { return vc.indexOf(x.k) >= 0; });
-    body = '<div class="card tw"><table class="ctab"><tr>' + cols.map(function (x) { return '<th' + (x.v ? ' data-sc="' + x.k + '" class="srt"' : '') + '>' + x.t + (F.sc === x.k ? (F.sd === 'desc' ? ' ▼' : ' ▲') : '') + '</th>'; }).join('') + '</tr>' +
+    body = '<div class="card tw"><table class="ctab"><tr>' + cols.map(function (x) { return '<th' + (x.v ? ' data-sc="' + x.k + '"' : '') + ' class="' + (x.v ? 'srt ' : '') + (x.k === 'name' ? 'stk' : x.k === 'purpose' ? 'wnd' : '') + '">' + x.t + (F.sc === x.k ? (F.sd === 'desc' ? ' ▼' : ' ▲') : '') + '</th>'; }).join('') + '</tr>' +
       (slice.map(function (l) { return '<tr class="' + (todo(l) ? 'rowtodo' : '') + '">' + cols.map(function (x) {
         if (x.k === 'act') return '<td class="nw"><button class="btn z sm" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button> <button class="btn g sm" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button> <button class="btn sm" data-open="' + esc(l.phone) + '">Hồ sơ</button> <button class="btn sm" data-del="' + esc(l.phone) + '" title="Xoá khách này" style="color:var(--red)">Xoá</button></td>';
         var v = esc(x.v(l));
         if (x.k === 'sale') return '<td class="nw">' + saleSel(l) + '</td>';
-        if (x.k === 'name') { var h = heat(l); return '<td class="nw"><b>' + v + '</b>' + (h ? ' <span class="tag ' + h[1] + '">' + h[0] + '</span>' : '') + '</td>'; }
+        if (x.k === 'name') { var h = heat(l); return '<td class="nw stk"><b>' + v + '</b>' + (h ? ' <span class="tag ' + h[1] + '">' + h[0] + '</span>' : '') + '</td>'; }
         if (x.k === 'phone') return '<td class="nw">' + v + ' ' + zl(l.phone, l) + '</td>';
         if (x.tag) return '<td><span class="tag ' + (todo(l) ? 'red' : l.status === 'Chốt' ? 'grn' : 'amb') + '">' + (todo(l) ? 'Chưa liên hệ' : v) + '</span></td>';
         if (x.due) return '<td class="nw">' + (l.next && l.next < ymdNow(0) ? '<span class="tag red">' + v + ' · quá hạn</span>' : l.next === ymdNow(0) ? '<span class="tag amb">Hôm nay</span>' : v) + '</td>';
         if (x.k === 'src') return '<td class="small" style="min-width:170px">' + srcHtml(l) + '</td>';
-        return '<td class="small">' + v + '</td>'; }).join('') + '</tr>'; }).join('') || '<tr><td colspan="' + cols.length + '" class="mut">Không có khách nào. Bấm "+ Thêm khách" hoặc "Nhập danh sách" để thêm.</td></tr>') + '</table></div>';
+        return '<td class="small' + (x.k === 'purpose' ? ' wnd' : '') + '">' + v + '</td>'; }).join('') + '</tr>'; }).join('') || '<tr><td colspan="' + cols.length + '" class="mut">Không có khách nào. Bấm "+ Thêm khách" hoặc "Nhập danh sách" để thêm.</td></tr>') + '</table></div>';
   } else body = slice.map(function (l) { return mobRow(l); }).join('') || '<div class="card mut">Không có khách nào.</div>';
   var kpiHtml = wide ? '<div class="grid kc">' + kp.map(function (x) { return '<div class="kpi ' + (x[2] && x[0] > 0 ? 'alert' : '') + '"><b>' + esc(x[0]) + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>' :
     '<div class="row chips kpis">' + [kp[0], kp[1], kp[2], kp[3]].map(function (x) { return '<span class="kchip' + (x[2] && x[0] > 0 ? ' red' : '') + '"><b>' + esc(x[0]) + '</b> ' + x[1] + '</span>'; }).join('') + '</div>';
