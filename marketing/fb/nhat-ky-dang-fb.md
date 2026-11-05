@@ -12,3 +12,4 @@
 | 05/11/2026 | Hoàng Hiệp | 19:30 | (phiên khác) 5 chính sách mới ảnh hưởng nhà đất Đà Nẵng 11/2026 | /chinh-sach-moi-anh-huong-bat-dong-san-da-nang-11-2026/ |
 | 06/11/2026 | Hoàng Hiệp | 08:30 | FPT Plaza 3 – căn có sổ (đăng lại, ảnh dọc mới thay bản 05/11 bị cắt chữ) | /mua-ban/?duan=fpt-plaza-3 |
 | 05/11/2026 | Sun | 17:30 | FourS F2 chính sách 17/10 – đăng lại 1 ảnh (bản 12:45 album bị cắt ảnh, nhờ anh xoá) | /chinh-sach-fours-tower-f2-17-10-2026-qua-noi-that-nha-xinh/ |
+| 06/11/2026 | Hoàng Hiệp | 11:30 | Quy hoạch chung đô thị Thăng Điền đến 2050 (QĐ 5047/QĐ-UBND) – 1 ảnh | /quy-hoach-chung-do-thi-thang-dien-den-2050/ |
