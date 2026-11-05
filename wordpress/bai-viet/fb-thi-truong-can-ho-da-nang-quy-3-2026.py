@@ -60,8 +60,8 @@ tw = d.textlength(tag, font=ft) / S
 d.rounded_rectangle(P(60, 64, 60 + tw + 44, 106), radius=21 * S, fill=GOLD)
 d.text(P(82, 72), tag, font=ft, fill=NAVY)
 d.text(P(58, 126), 'Căn hộ Đà Nẵng:', font=F('InterDisplay-ExtraBold.otf', 70), fill=CREAM)
-d.text(P(58, 206), 'hàng ít đi,', font=F('InterDisplay-ExtraBold.otf', 70), fill=CREAM)
-d.text(P(58, 286), 'giá vẫn “cứng”', font=F('InterDisplay-ExtraBold.otf', 70), fill=(255, 196, 140))
+d.text(P(58, 206), 'nguồn cung ít đi,', font=F('InterDisplay-ExtraBold.otf', 70), fill=CREAM)
+d.text(P(58, 286), 'giá vẫn giữ vững', font=F('InterDisplay-ExtraBold.otf', 70), fill=(255, 196, 140))
 
 # Khối số liệu
 d.rectangle(P(0, 640, W, H), fill=NAVY)
