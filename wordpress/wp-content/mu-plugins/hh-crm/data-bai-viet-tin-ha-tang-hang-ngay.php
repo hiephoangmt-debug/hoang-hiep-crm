@@ -148,6 +148,67 @@ HTML
 		),
 		'sources'        => array(),
 	);
+	/* ---------------- 06/11 – Quy hoạch chung đô thị Thăng Điền đến 2050 ---------------- */
+	$posts[] = array(
+		'slug'           => 'quy-hoach-chung-do-thi-thang-dien-den-2050',
+		'title'          => 'Đà Nẵng duyệt nhiệm vụ quy hoạch chung đô thị Thăng Điền đến 2050: hơn 6.158 ha, gần 96.500 dân',
+		'excerpt'        => 'Ngày 5/11/2026, Đà Nẵng phê duyệt nhiệm vụ quy hoạch chung đô thị Thăng Điền đến năm 2050 (QĐ 5047/QĐ-UBND): khoảng 6.158,71 ha, dân số dự báo khoảng 96.498 người, định hướng dịch vụ, logistics, công nghiệp sạch.',
+		'keyword'        => 'quy hoạch đô thị Thăng Điền',
+		'keywords_extra' => array( 'đô thị Thăng Điền', 'xã Thăng Điền Đà Nẵng', 'quy hoạch phía Nam Đà Nẵng', 'Thăng Bình cũ' ),
+		'project'        => 'hoiana-resort-golf',
+		'schedule'       => '2026-11-06 08:00',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Quy hoạch Đà Nẵng', 'Thăng Điền', 'Đô thị mới' ),
+		'image'          => 'plugin:img/tin-tuc/quy-hoach-chung-do-thi-thang-dien-2050.jpg',
+		'image_alt'      => 'Sơ đồ minh hoạ đô thị Thăng Điền giữa Quốc lộ 1, các trục Đông – Tây và biển, quy hoạch chung đến năm 2050',
+		'content'        => <<<HTML
+<p>Ngày 5/11/2026, UBND thành phố Đà Nẵng cho biết đã ban hành <strong>Quyết định số 5047/QĐ-UBND</strong> phê duyệt nhiệm vụ <strong>quy hoạch chung đô thị Thăng Điền đến năm 2050</strong>. Đây là bước đầu để định hướng không gian đô thị và thúc đẩy kinh tế khu vực phía Nam thành phố.</p>
+<!--hh-featured-->
+<h2>Những con số chính</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Theo nhiệm vụ quy hoạch</th></tr></thead>
+<tbody>
+<tr><td>Phạm vi</td><td>Toàn bộ địa giới hành chính xã Thăng Điền, hình thành từ việc hợp nhất 3 xã Bình Tú, Bình Trung và Bình An trước đây</td></tr>
+<tr><td>Diện tích tự nhiên</td><td>Khoảng 6.158,71 ha</td></tr>
+<tr><td>Dân số dự báo năm 2050</td><td>Khoảng 96.498 người (gồm dân số thường trú và dân số quy đổi)</td></tr>
+<tr><td>Định hướng chức năng</td><td>Trung tâm dịch vụ, logistics, công nghiệp sạch và nông nghiệp công nghệ cao ở phía Nam Đà Nẵng</td></tr>
+<tr><td>Khung không gian</td><td>Quốc lộ 1 và các trục Đông – Tây giữ vai trò quan trọng trong tổ chức không gian</td></tr>
+<tr><td>Đơn vị tổ chức lập</td><td>UBND xã Thăng Điền chủ trì, phối hợp các sở, ngành</td></tr>
+</tbody>
+</table>
+<p>Theo quy hoạch chung thành phố, Thăng Điền là một trong 7 đô thị mới dự kiến hình thành đến năm 2050, cùng Duy Nghĩa, Thăng An, Thăng Trường, Tây Hồ, Vu Gia và Hoàng Sa. Đến năm 2050, toàn thành phố có khoảng 30 đô thị (23 đô thị hiện hữu và 7 đô thị mới). Bối cảnh chung xem thêm tại <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">quy hoạch chung Đà Nẵng đến 2050</a>.</p>
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Mới là nhiệm vụ quy hoạch:</strong> đây là bước xác định phạm vi, mục tiêu để lập đồ án. Ranh giới khu chức năng, đường quy hoạch và chỉ tiêu sử dụng đất từng khu vực chỉ rõ khi đồ án quy hoạch chung được phê duyệt.</li>
+<li><strong>Đất quanh trục Quốc lộ 1 và các tuyến Đông – Tây</strong> được nhắc tới là khung không gian chính, nên thường được quan tâm sớm. Tuy nhiên, khi chưa có đồ án, anh chị nên kiểm tra quy hoạch sử dụng đất hiện hành của từng thửa trước khi giao dịch.</li>
+<li><strong>Định hướng logistics, công nghiệp sạch</strong> có thể kéo theo nhu cầu nhà ở cho người lao động và dịch vụ đi kèm trong dài hạn; tiến độ phụ thuộc vào việc lập đồ án và thu hút đầu tư.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<p>Hiện Hoàng Hiệp chưa có dự án phân phối nằm trong xã Thăng Điền. Các dự án cùng hành lang ven biển phía Nam đang có trên web:</p>
+<ul>
+<li><a href="/du-an/hoiana-resort-golf/">Hoiana Resort &amp; Golf</a> – quần thể nghỉ dưỡng ven biển phía Bắc khu vực, cùng hưởng lợi khi hạ tầng và dân cư phía Nam thành phố phát triển.</li>
+<li><a href="/du-an/vinh-an-hoa-city/">Vịnh An Hòa City</a> – khu đô thị phía Nam, gần Khu kinh tế mở Chu Lai, cùng nằm trong vùng định hướng công nghiệp – logistics.</li>
+</ul>
+<p>Cần kiểm tra quy hoạch một lô đất cụ thể ở khu vực Thăng Bình cũ, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: Quyết định 5047/QĐ-UBND của UBND thành phố Đà Nẵng (theo báo chí đưa tin ngày 5/11/2026: Doanh nghiệp &amp; Hội nhập); số liệu ghi theo nội dung báo chí trích dẫn.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Quy hoạch đô thị Thăng Điền đến 2050: 6.158 ha',
+			'desc'      => 'Đà Nẵng duyệt nhiệm vụ quy hoạch chung đô thị Thăng Điền đến 2050 (QĐ 5047/QĐ-UBND, 5/11/2026): khoảng 6.158,71 ha, dân số dự báo 96.498 người.',
+			'points'    => array(
+				'QĐ 5047/QĐ-UBND ngày 5/11/2026 phê duyệt nhiệm vụ quy hoạch chung đô thị Thăng Điền đến 2050',
+				'Khoảng 6.158,71 ha, gồm 3 xã cũ Bình Tú, Bình Trung, Bình An; dân số dự báo khoảng 96.498 người',
+				'Định hướng dịch vụ, logistics, công nghiệp sạch, nông nghiệp công nghệ cao; Quốc lộ 1 và trục Đông – Tây là khung chính',
+			),
+			'faq'       => array(
+				array( 'Đô thị Thăng Điền ở đâu?', 'Là xã Thăng Điền thuộc TP Đà Nẵng, hình thành từ việc hợp nhất 3 xã Bình Tú, Bình Trung, Bình An (huyện Thăng Bình cũ), diện tích khoảng 6.158,71 ha.' ),
+				array( 'Quy hoạch Thăng Điền đã có bản đồ chi tiết chưa?', 'Chưa. Ngày 5/11/2026 mới phê duyệt nhiệm vụ quy hoạch; ranh giới các khu chức năng chỉ rõ khi đồ án quy hoạch chung được phê duyệt.' ),
+				array( 'Thăng Điền được định hướng phát triển gì?', 'Trung tâm dịch vụ, logistics, công nghiệp sạch và nông nghiệp công nghệ cao ở phía Nam Đà Nẵng.' ),
+			),
+		),
+		'sources'        => array( 'https://doanhnghiephoinhap.vn/da-nang-quy-hoach-do-thi-thang-dien-hon-6100ha-dan-so-gan-100000-nguoi-153582.html' ),
+	);
 
 	return $posts;
 }
