@@ -68,6 +68,26 @@ add_filter(
 				}
 			}
 		}
+		// Ảnh bìa các trang Hoiana khác (chưa có ảnh): quần thể dùng phối cảnh phân khu Beach Villas; Shores, Residences dùng ảnh thông tin tự vẽ.
+		$covers = array(
+			'hoiana-resort-golf'        => "https://drive.google.com/thumbnail?id=1WFS7kd0OZyRm7Tal2kgj2mjQirYoHrr6&sz=w2400 | Phối cảnh phân khu Hoiana Beach Villas (Marina Villa) trong quần thể Hoiana Resort & Golf | đại diện\nhttps://drive.google.com/thumbnail?id=1nqByEUObXTmBT82wWzPW6030AesKSUly&sz=w2400 | Sân vườn và hồ bơi riêng biệt thự Azure Villa – phân khu Hoiana Beach Villas | thư viện\nhttps://drive.google.com/thumbnail?id=1DqIQXSNcuPYHfagIFaDg-gYumDWW2iJw&sz=w2400 | Dune Villa – phân khu Hoiana Beach Villas | thư viện",
+			'hoiana-shores-golf-villas' => 'plugin:img/hoiana/hoiana-shores-golf-villas-thong-tin.jpg | Hoiana Shores Golf Villas – 88 biệt thự sân golf 3 – 5 phòng ngủ, đất 710 – 1.500 m² | đại diện',
+			'hoiana-residences'         => 'plugin:img/hoiana/hoiana-residences-thong-tin.jpg | Hoiana Residences – 2 tòa căn hộ khách sạn, 270 căn trong quần thể Hoiana | đại diện',
+		);
+		foreach ( $projects as $i => $p ) {
+			$slug = $p['slug'] ?? '';
+			if ( empty( $covers[ $slug ] ) ) {
+				continue;
+			}
+			$cur = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+			$key = explode( ' |', $covers[ $slug ] )[0];
+			if ( false === strpos( $cur, $key ) ) {
+				$projects[ $i ]['meta']['hh_p_image_links'] = trim( $cur . "\n" . $covers[ $slug ] );
+				if ( '' !== $cur ) {
+					$projects[ $i ]['fix_meta']['hh_p_image_links'] = array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $cur ) );
+				}
+			}
+		}
 		return $projects;
 	},
 	69
