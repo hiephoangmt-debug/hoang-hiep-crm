@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Bản đồ dự án Vinhomes Hà Nội</title>
+<meta name="description" content="Bản đồ ranh giới các dự án Vinhomes tại Hà Nội trên nền ảnh vệ tinh: Ocean Park 1-2-3, Smart City, Global Gate, Wonder City, King Park, Riverside, Times City, Royal City..." />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg: #0d1420; --fg: #eef2ff; --panel: #0f1a2bf0; --line: #ffffff22; --dt: #e5322d; --ch: #f2a33a; --muted: #a9b4c6; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font-family: Inter, system-ui, sans-serif; }
+  #map { position: fixed; inset: 0; }
+  .head { position: fixed; z-index: 500; top: max(10px, env(safe-area-inset-top)); left: 10px; right: 10px; max-width: 440px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; box-shadow: 0 8px 24px #0006; }
+  .head h1 { margin: 0; font-size: 16px; } .head p { margin: 3px 0 0; font-size: 12px; color: var(--muted); }
+  .legend { display: flex; gap: 12px; margin-top: 6px; font-size: 12px; flex-wrap: wrap; }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+  .bar { position: fixed; z-index: 500; left: 0; right: 0; bottom: 0; padding: 8px 10px max(10px, env(safe-area-inset-bottom)); }
+  .chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; border: 0; border-radius: 999px; padding: 8px 12px; font: 600 12.5px Inter, sans-serif; color: var(--fg); background: #0f1a2bdd; border: 1px solid var(--line); cursor: pointer; white-space: nowrap; }
+  .chip.dt { border-color: var(--dt); } .chip.ch { border-color: var(--ch); } .chip.on { background: #fff; color: #111; }
+  .card { position: fixed; z-index: 600; left: 10px; right: 10px; bottom: 64px; max-width: 420px; margin: 0 auto; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; box-shadow: 0 8px 28px #0008; }
+  .card h2 { margin: 0 30px 4px 0; font-size: 16px; } .card p { margin: 3px 0; font-size: 13px; color: #d6deeb; }
+  .card .x { position: absolute; right: 10px; top: 8px; border: 0; background: #ffffff1c; color: var(--fg); width: 28px; height: 28px; border-radius: 50%; cursor: pointer; }
+  .lbl { background: transparent; border: 0; box-shadow: none; color: #fff; font: 700 12px Inter, sans-serif; text-shadow: 0 0 3px #000, 0 0 6px #000; white-space: nowrap; }
+  .lbl::before { display: none; }
+  .z-lo .lbl-ch { display: none; }
+  .poi { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; background: #fff; border: 2px solid #c22; box-shadow: 0 1px 4px #0008; }
+  .leaflet-control-layers { font: 13px Inter, sans-serif; }
+  .leaflet-top.leaflet-right { top: 96px; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<header class="head">
+  <h1>Bản đồ dự án Vinhomes · Hà Nội</h1>
+  <p>Ranh giới theo OpenStreetMap trên ảnh vệ tinh. Bấm vào dự án để xem.</p>
+  <div class="legend"><span><i style="background:var(--dt)"></i>Đại đô thị</span><span><i style="background:var(--ch)"></i>Khu căn hộ / biệt thự</span><span>🏥 Vinmec · 🎓 Vinschool/VinUni · 🛍 Vincom</span></div>
+</header>
+<footer class="bar"><div class="chips" id="chips"><button class="chip on" id="allBtn">🗺 Toàn cảnh</button></div></footer>
+<div class="card" id="card" hidden><button class="x" id="cx" aria-label="Đóng">✕</button><h2 id="ct"></h2><p id="ca"></p><p id="ch"></p><p id="cn" style="font-size:11.5px;color:var(--muted)"></p></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(async function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var map = L.map('map', { zoomControl: false, preferCanvas: true }).setView([21.03, 105.85], 11);
+  L.control.zoom({ position: 'bottomright' }).addTo(map);
+  var sat = L.layerGroup([
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: 'Ảnh vệ tinh © Esri' }),
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19 }),
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, opacity: .6 })
+  ]).addTo(map);
+  var street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap contributors' });
+  L.control.layers({ 'Ảnh vệ tinh': sat, 'Bản đồ đường': street }, null, { position: 'topright' }).addTo(map);
+  map.attributionControl.addAttribution('Ranh giới dự án © OpenStreetMap contributors (ODbL)');
+
+  var data = await (await fetch('vin-hanoi.geojson')).json();
+  var COL = { dt: '#e5322d', ch: '#f2a33a' }, ICON = { Vinmec: '🏥', Vinschool: '🎓', VinUni: '🎓', Vincom: '🛍' };
+  var layers = [], all = L.featureGroup().addTo(map), poi = L.layerGroup();
+  function show(f, lay) {
+    var p = f.properties;
+    $('ct').textContent = p.name; $('ca').textContent = '📍 ' + p.area;
+    $('ch').textContent = 'Diện tích theo ranh trên bản đồ: ~' + p.ha.toLocaleString('vi-VN') + ' ha';
+    $('cn').textContent = 'Số đo từ ranh giới OpenStreetMap, có thể khác quy mô chủ đầu tư công bố.';
+    $('card').hidden = false; map.flyToBounds(lay.getBounds(), { padding: [40, 40], maxZoom: 17, duration: 1.2 });
+    document.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('on', c.dataset.n === p.name); });
+  }
+  data.features.forEach(function (f) {
+    var p = f.properties;
+    if (f.geometry.type === 'Point') {
+      L.marker([f.geometry.coordinates[1], f.geometry.coordinates[0]], { icon: L.divIcon({ className: '', html: '<div class="poi">' + ICON[p.poi] + '</div>', iconSize: [22, 22] }) })
+        .bindTooltip(p.name).addTo(poi); return;
+    }
+    var c = COL[p.grp];
+    var lay = L.geoJSON(f, { style: { color: c, weight: 2.5, fillColor: c, fillOpacity: .22 } }).addTo(all);
+    lay.bindTooltip(p.name.replace('Vinhomes ', ''), { permanent: true, direction: 'center', className: 'lbl lbl-' + p.grp });
+    lay.on('click', function () { show(f, lay); });
+    var b = document.createElement('button'); b.className = 'chip ' + p.grp; b.dataset.n = p.name; b.textContent = p.name.replace('Vinhomes ', '');
+    b.onclick = function () { show(f, lay); }; $('chips').appendChild(b);
+  });
+  map.fitBounds(all.getBounds(), { padding: [20, 20] });
+  function zl() { var z = map.getZoom(); map.getContainer().classList.toggle('z-lo', z < 13); if (z >= 14) poi.addTo(map); else poi.remove(); }
+  map.on('zoomend', zl); zl();
+  $('allBtn').onclick = function () { $('card').hidden = true; map.flyToBounds(all.getBounds(), { padding: [20, 20], duration: 1.2 }); document.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('on', c.id === 'allBtn'); }); };
+  $('cx').onclick = function () { $('card').hidden = true; };
+})();
+</script>
+</body>
+</html>
