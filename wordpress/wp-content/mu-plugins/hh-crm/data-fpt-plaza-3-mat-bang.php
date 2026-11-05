@@ -30,12 +30,16 @@ add_filter(
 		foreach ( $floors as $file => $title ) {
 			$lines[] = "plugin:img/fpt-plaza-3/fpt-plaza-3-mat-bang-$file.jpg | Mặt bằng $title FPT Plaza 3 Đà Nẵng | mặt bằng | $title";
 		}
+		$old   = implode( "\n", $lines ); // Bản 12/10 (chưa có căn mẫu) – thay bằng bản mới nếu web chưa sửa tay.
+		// 05/11/2026: mặt bằng căn hộ mẫu 2PN 57,84 m² (chủ đầu tư, anh Hiệp gửi).
+		$lines[] = 'plugin:img/fpt-plaza-3/fpt-plaza-3-mat-bang-can-2pn-57m2.jpg | Mặt bằng căn hộ 2 phòng ngủ 57,84 m² FPT Plaza 3 (tầng 3 – 12A, 14 – 25) | mặt bằng | Căn 2PN 57,84 m²';
 		foreach ( $projects as $i => $p ) {
 			if ( 'fpt-plaza-3' !== ( $p['slug'] ?? '' ) ) {
 				continue;
 			}
+			$projects[ $i ]['fix_meta']['hh_p_image_links'] = array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $old ) );
+			$projects[ $i ]['meta']['hh_p_image_links']     = implode( "\n", $lines );
 			$projects[ $i ]['meta'] += array(
-				'hh_p_image_links' => implode( "\n", $lines ),
 				'hh_p_blocks'      => '1 tòa, 2 sảnh thang máy (cánh W và cánh E)',
 				'hh_p_unit_area'   => '1PN khoảng 42 m² · 1PN+1 khoảng 47 – 51 m² · 2PN khoảng 55 – 69 m² · 2PN+1 khoảng 73 – 76 m² · 3PN khoảng 72 – 80 m² · 3PN+1 khoảng 81 – 124 m²',
 				'hh_p_unit_types'  => "Căn 1PN | 41,7 – 42,1 m² | 1 | Liên hệ\nCăn 1PN+1 | 46,9 – 50,6 m² | 1 + phòng đa năng | Liên hệ\nCăn 2PN | 55,4 – 69,2 m² | 2 | Khoảng 2,6 – 4 tỷ (tin rao)\nCăn 2PN+1 | 72,7 – 76,4 m² | 2 + phòng đa năng | Liên hệ\nCăn 3PN | 71,5 – 80,1 m² | 3 | Liên hệ\nCăn 3PN+1 | 81,1 – 123,6 m² | 3 + phòng đa năng | Liên hệ\nCăn 2 tầng (tầng 1 – 2) | 88,2 – 148,4 m² | 1 – 2 | Liên hệ\nThương mại dịch vụ tầng 1 | 55,8 – 201,2 m² | – | Liên hệ",
