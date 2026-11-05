@@ -395,7 +395,7 @@ HTML
 		'keyword'  => 'Sun Saphia Residence hỏi đáp',
 		'keywords_extra' => array( 'tiêu chuẩn bàn giao Sun Saphia', 'phí quản lý Sun Saphia', 'Sun Saphia cho thuê', 'tiến độ Sun Saphia Residence' ),
 		'project'  => 'sun-saphia-residence',
-		'schedule' => '2026-11-05 17:30',
+		'schedule' => '2026-11-05 16:00',
 		'category' => 'Dự án',
 		'tags'     => array( 'Sun Saphia Residence', 'Ngũ Hành Sơn', 'Căn hộ ven biển' ),
 		'image'    => 'plugin:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg',
