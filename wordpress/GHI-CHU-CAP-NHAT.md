@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.59** + plugin Hoàng Hiệp CRM **2.20.149**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.59** + plugin Hoàng Hiệp CRM **2.20.150**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.150 (05/11/2026)
+
+- **Chatbot hiểu sâu hơn:** ngoài giá và vị trí, chatbot nay biết bảng loại căn, chính sách bán hàng, điểm nổi bật, tiện ích, giá thuê của mọi dự án có dữ liệu (VD Hoiana Beach Villas 7 dòng biệt thự, chính sách Sun tháng 11, giá thuê Sun Ponte); ở trang dự án còn biết thêm phân khu, thiết kế, kết nối, giá bán lại, tiến độ. Kiến thức tự làm mới khi cài bản mới.
+- Chatbot không gửi hồ sơ pháp lý qua chat – mời khách để lại số để anh gửi trực tiếp.
 
 ## Có gì mới – plugin 2.20.149 (05/11/2026)
 

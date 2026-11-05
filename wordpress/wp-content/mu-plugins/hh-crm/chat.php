@@ -320,6 +320,15 @@ function hh_chat_project_facts( $page ) {
 		'Vốn tự có'    => implode( '; ', array_map( static fn( $r ) => $r[0] . ': ' . $r[2] . ' (' . $r[1] . ')', hh_table( 'hh_p_capital_table', 4, $page ) ) ),
 		'Bảng giá'     => implode( '; ', array_map( static fn( $r ) => implode( ' | ', array_filter( $r ) ), array_slice( hh_table( 'hh_p_price_table', 4, $page ), 0, 8 ) ) ),
 		'Điểm nổi bật' => implode( '; ', array_slice( hh_lines( 'hh_p_highlights', $page ), 0, 5 ) ),
+		'Loại căn'     => implode( '; ', array_map( static fn( $r ) => implode( ' | ', array_filter( $r ) ), array_slice( hh_table( 'hh_p_unit_types', 4, $page ), 0, 10 ) ) ),
+		'Phân khu'     => implode( '; ', array_map( static fn( $r ) => implode( ' | ', array_filter( $r ) ), array_slice( hh_table( 'hh_p_zones', 4, $page ), 0, 8 ) ) ),
+		'Thiết kế'     => mb_substr( $m( 'hh_p_design_desc' ), 0, 600 ),
+		'Tiện ích'     => implode( '; ', array_slice( hh_lines( 'hh_p_amenities_in', $page ), 0, 10 ) ),
+		'Kết nối'      => implode( '; ', array_slice( hh_lines( 'hh_p_connections', $page ), 0, 6 ) ),
+		'Bán lại'      => $m( 'hh_p_resale_price' ),
+		'Giá thuê'     => $m( 'hh_p_rent_price' ),
+		'Thị trường thứ cấp' => mb_substr( $m( 'hh_p_resale_note' ), 0, 500 ),
+		'Tiến độ'      => implode( '; ', array_slice( hh_lines( 'hh_p_progress', $page ), -4 ) ),
 	);
 	return array_filter( $facts, static fn( $v ) => '' !== trim( (string) $v ) );
 }
@@ -376,6 +385,7 @@ Hóm hỉnh, duyên dáng – kiểu người Đà Nẵng vui tính, không ki�
 - Lịch sự: không châm chọc khách, không đùa tôn giáo, chính trị, vùng miền, ngoại hình, giới tính; không thô tục. Khách cáu hoặc phàn nàn: nghiêm túc, xin lỗi ngắn gọn, giải quyết ngay.
 
 Quy tắc bắt buộc:
+- Hồ sơ pháp lý (giấy chứng nhận, quyết định quy hoạch, giấy phép…) không gửi hay trích số hiệu qua chat: nói ngắn gọn tình trạng pháp lý nếu dữ liệu có, rồi đề nghị để lại số để {$name} gửi trọn bộ hồ sơ trực tiếp.
 - Không bịa giá, chiết khấu, tiến độ, pháp lý, số căn, quy hoạch hay cam kết lợi nhuận. Chỉ dùng số trong dữ liệu hoặc kết quả tra web có nguồn; không có thì nói {$name} sẽ gửi chính xác (lý do tốt để xin số).
 - Giá là giá tham khảo / giá rao, thay đổi theo thời điểm và từng căn; không hứa chắc tăng giá hay lời lãi.
 - Chủ đề ngoài bất động sản nhưng về Đà Nẵng (đường đi, khách sạn, ăn uống, du lịch, thời tiết, trường học, bệnh viện): trả lời ngắn gọn, hữu ích rồi nối về nhà đất khi hợp. Chủ đề không liên quan hẳn: từ chối dí dỏm, nhẹ nhàng.
@@ -442,10 +452,43 @@ function hh_chat_knowledge() {
 		$out[] = '- ' . get_the_date( 'd/m/Y', $p ) . ' | ' . $p->post_title . ' | ' . $clip( $p->post_excerpt ?: $p->post_content, 260 ) . ' | ' . get_permalink( $p );
 	}
 
-	$kb = mb_substr( implode( "\n", $out ), 0, 150000 );
+	// Hồ sơ chi tiết các dự án có loại căn / chính sách / giá thuê – để trả lời sâu khi khách hỏi ở bất kỳ trang nào.
+	$out[] = "\n## Hồ sơ chi tiết dự án (loại căn, chính sách, tiện ích, giá thuê – ưu tiên dùng khi khách hỏi chi tiết)";
+	foreach ( get_posts( array( 'post_type' => 'du-an', 'post_status' => 'publish', 'numberposts' => 250, 'orderby' => 'title', 'order' => 'ASC' ) ) as $p ) {
+		$lines = static fn( $k, $n ) => implode( '; ', array_slice( array_filter( array_map( 'trim', explode( "\n", (string) get_post_meta( $p->ID, $k, true ) ) ) ), 0, $n ) );
+		$d     = array_filter(
+			array(
+				'Loại căn'   => $clip( $lines( 'hh_p_unit_types', 10 ), 700 ),
+				'Chính sách' => $clip( $lines( 'hh_p_policy', 8 ), 700 ),
+				'Nổi bật'    => $clip( $lines( 'hh_p_highlights', 5 ), 400 ),
+				'Tiện ích'   => $clip( $lines( 'hh_p_amenities_in', 8 ), 350 ),
+				'Thuê'       => $clip( get_post_meta( $p->ID, 'hh_p_rent_price', true ), 300 ),
+			)
+		);
+		if ( ! isset( $d['Loại căn'] ) && ! isset( $d['Chính sách'] ) && ! isset( $d['Thuê'] ) ) {
+			continue;
+		}
+		$row = array( '### ' . $p->post_title . ' – ' . get_permalink( $p ) );
+		foreach ( $d as $k => $v ) {
+			$row[] = $k . ': ' . $v;
+		}
+		$out[] = implode( "\n", $row );
+	}
+
+	$kb = mb_substr( implode( "\n", $out ), 0, 220000 );
 	set_transient( 'hh_chat_kb', $kb, 6 * HOUR_IN_SECONDS );
 	return $kb;
 }
+// Cài bản plugin mới (dữ liệu dự án đổi qua Nhập / cập nhật dữ liệu) → làm mới kiến thức chat.
+add_action(
+	'init',
+	static function () {
+		if ( get_option( 'hh_chat_kb_ver' ) !== HH_CRM_VERSION ) {
+			delete_transient( 'hh_chat_kb' );
+			update_option( 'hh_chat_kb_ver', HH_CRM_VERSION, false );
+		}
+	}
+);
 add_action(
 	'save_post',
 	static function ( $id, $post ) {
