@@ -1,6 +1,6 @@
 <?php
 /**
- * Trang "Bản đồ dự án" (/ban-do-du-an/): bản đồ ảnh vệ tinh các dự án Đà Nẵng – Hội An và Vinhomes Hà Nội
+ * Trang "Bản đồ dự án" (/ban-do-du-an/): bản đồ ảnh vệ tinh các dự án Đà Nẵng – Hội An
  * (ranh giới theo OpenStreetMap, ghim dự án đang phân phối, giá, link sang trang dự án của website).
  * Bản đồ chạy trên GitHub Pages và được nhúng bằng khung; bấm "Xem trang dự án" mở trang /du-an/... của website ngay trong tab.
  * Tự tạo trang một lần khi quản trị viên vào trang quản trị; xóa trang thì không tự tạo lại. Menu chính thêm mục qua giao diện.
@@ -15,7 +15,6 @@ function hh_bdda_content() {
 	$site = rawurlencode( untrailingslashit( home_url() ) );
 	return "<!-- wp:html -->\n"
 		. '<div class="hh-bdda-tabs"><button type="button" class="on" data-src="' . esc_attr( HH_BDDA_BASE . 'du-an-da-nang/?site=' . $site ) . '">📍 Đà Nẵng – Hội An</button>'
-		. '<button type="button" data-src="' . esc_attr( HH_BDDA_BASE . 'vin-ha-noi/' ) . '">🗺 Vinhomes Hà Nội</button>'
 		. '<button type="button" data-src="' . esc_attr( HH_BDDA_BASE . 'da-nang-3d/?go=du-an' ) . '">🏙 Đà Nẵng 3D</button></div>' . "\n"
 		. '<iframe class="hh-bdda" src="' . esc_attr( HH_BDDA_BASE . 'du-an-da-nang/?site=' . $site ) . '" title="Bản đồ dự án bất động sản" style="width:100%;height:80vh;min-height:520px;border:0;border-radius:12px" allow="fullscreen; accelerometer; gyroscope" loading="eager"></iframe>' . "\n"
 		. '<p style="text-align:center;font-size:14px">Bấm vào dự án trên bản đồ để xem giá và trang dự án · <a class="hh-bdda-full" href="' . esc_attr( HH_BDDA_BASE . 'du-an-da-nang/?site=' . $site ) . '" target="_blank" rel="noopener">Mở toàn màn hình ↗</a></p>' . "\n"
@@ -36,7 +35,7 @@ function hh_bdda_ensure_page() {
 				'post_title'   => 'Bản đồ dự án',
 				'post_name'    => HH_BDDA_SLUG,
 				'post_content' => hh_bdda_content(),
-				'post_excerpt' => 'Bản đồ ảnh vệ tinh các dự án bất động sản Đà Nẵng – Hội An (Sun Saphia, Da Nang Downtown, Cora Tower, Vinhomes Hải Vân Bay, Casamia Balanca, FPT City…) và các dự án Vinhomes tại Hà Nội: vị trí, ranh giới, giá tham khảo.',
+				'post_excerpt' => 'Bản đồ ảnh vệ tinh các dự án bất động sản Đà Nẵng – Hội An (Sun Saphia, Da Nang Downtown, Cora Tower, Vinhomes Hải Vân Bay, Casamia Balanca, FPT City…): vị trí, ranh giới, giá tham khảo.',
 			),
 			true
 		);

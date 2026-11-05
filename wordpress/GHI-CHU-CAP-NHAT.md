@@ -52,7 +52,6 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 - **Trang mới "Bản đồ dự án"** (`/ban-do-du-an/`), có mục **Bản đồ dự án** trên menu chính (trước "Về Hiệp"):
   - Tab **Đà Nẵng – Hội An**: bản đồ ảnh vệ tinh, ranh giới và ghim các dự án đang phân phối (Sun Saphia, Da Nang Downtown, Sun Galaxy, Cora Tower, Vinhomes Hải Vân Bay, Casamia Balanca, Times Square, Masteri, FPT City, lô đất Hoàng Sa) và dự án lân cận. Bấm dự án → giá, quy mô, nút **Xem trang dự án** mở đúng trang `/du-an/...` của web.
-  - Tab **Vinhomes Hà Nội**: ranh giới 17 dự án Vinhomes trên ảnh vệ tinh.
   - Tab **Đà Nẵng 3D**: mô hình 3D toàn thành phố có khối các dự án.
 - Trang tự tạo khi anh vào trang quản trị sau khi cập nhật (không cần nhập dữ liệu). Xóa trang thì không tự tạo lại.
 
