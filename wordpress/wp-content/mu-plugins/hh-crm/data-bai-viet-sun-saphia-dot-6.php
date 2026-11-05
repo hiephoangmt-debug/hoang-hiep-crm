@@ -387,5 +387,89 @@ HTML
 		'sources'  => array(),
 	);
 
+	/* ---------------- 05/11 – Hỏi đáp Sun Saphia theo chủ đầu tư (buổi đào tạo 04/11/2026) ---------------- */
+	$posts[] = array(
+		'slug'     => 'sun-saphia-residence-hoi-dap-ban-giao-phi-quan-ly-cho-thue',
+		'title'    => 'Sun Saphia Residence hỏi đáp: bàn giao gì, phí quản lý, cho thuê, sổ 50 năm, quy hoạch xung quanh',
+		'excerpt'  => 'Giải đáp các câu khách mua Sun Saphia Residence hay hỏi theo thông tin chủ đầu tư (04/11/2026): bàn giao liền tường trừ bếp, trần cao 3,5 m sàn – sàn, phí quản lý dự kiến 15.000 – 20.000 đ/m², tự cho thuê, sổ hồng 50 năm, tiến độ ép cọc.',
+		'keyword'  => 'Sun Saphia Residence hỏi đáp',
+		'keywords_extra' => array( 'tiêu chuẩn bàn giao Sun Saphia', 'phí quản lý Sun Saphia', 'Sun Saphia cho thuê', 'tiến độ Sun Saphia Residence' ),
+		'project'  => 'sun-saphia-residence',
+		'schedule' => '2026-11-05 17:30',
+		'category' => 'Dự án',
+		'tags'     => array( 'Sun Saphia Residence', 'Ngũ Hành Sơn', 'Căn hộ ven biển' ),
+		'image'    => 'plugin:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg',
+		'image_alt' => 'Phối cảnh Sun Saphia Residence bên biển Sơn Thủy lúc hoàng hôn',
+		'content'  => <<<HTML
+<p>Ngày 04/11/2026, chủ đầu tư {$saphia} giải đáp loạt câu hỏi khách mua quan tâm: bàn giao nội thất gì, phí quản lý, có được tự cho thuê, sổ hồng 50 năm, quy hoạch quanh tòa nhà và tiến độ thi công. Hoàng Hiệp tổng hợp lại theo từng nhóm.</p>
+<!--hh-featured-->
+<h2>Bàn giao và thiết kế căn hộ</h2>
+<table>
+<tbody>
+<tr><th>Tiêu chuẩn bàn giao</th><td>Liền tường (fit-out), <strong>trừ tủ bếp, thiết bị bếp và hút mùi</strong>: hoàn thiện trần, tường, sàn; thiết bị vệ sinh, bình nóng lạnh, điều hòa; cửa, khóa, đèn, công tắc, ổ cắm, hệ thống PCCC</td></tr>
+<tr><th>Thay đổi nội thất</th><td>Chủ đầu tư bàn giao đúng cam kết ban đầu, không nhận bớt/thêm nội thất hay cấn trừ tiền</td></tr>
+<tr><th>Chiều cao tầng căn hộ</th><td>3,5 m – tính từ sàn dưới đến sàn trên (sàn thô), chưa trừ lớp hoàn thiện</td></tr>
+<tr><th>Hành lang / ban công</th><td>Hành lang rộng thông thủy 1,6 m; ban công rộng thông thủy 1 m; lan can thép mạ kẽm nhúng nóng, sơn tĩnh điện (thay lan can kính để thoáng gió)</td></tr>
+<tr><th>Khối đế, tầng đặc biệt</th><td>Tầng 1 shophouse cao 7 m; tầng 2 tiện ích cao 5,5 m; tầng 3 có căn hộ sân vườn; tầng 29 có 2 căn kèm sân vườn riêng; tầng 30 penthouse cao 6,5 m</td></tr>
+<tr><th>Bể bơi</th><td>Dài nhất 27 m, rộng nhất 11 m, sâu nhất 1,2 m</td></tr>
+<tr><th>Thang máy</th><td>7 thang, chia 2 sảnh thang cho 28 căn/sàn; chủ đầu tư cho biết tính theo quy chuẩn dân số (căn 25 – 45 m² tính 1 người) và tham khảo tiêu chuẩn CIBSE (chờ thang 45 – 60 giây)</td></tr>
+</tbody>
+</table>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence: 28 căn, 2 sảnh thang (bản vẽ chủ đầu tư, tham khảo)-->
+<p><strong>Đập thông căn:</strong> không được đập thông tầng (kết cấu không cho phép). Chủ đầu tư không đập thông sẵn hai căn trước bàn giao vì phải nghiệm thu PCCC đúng giấy phép xây dựng; sau khi nhận nhà, chủ căn hộ có thể thông tường giữa 2 căn nếu không phải tường chịu lực (tường 30 trên bản vẽ) hay hộp kỹ thuật, và phải gửi thiết kế cho ban quản lý duyệt trước khi làm.</p>
+<h2>Phí quản lý, vận hành và cho thuê</h2>
+<ul>
+<li><strong>Phí quản lý</strong> dự kiến ghi trong hợp đồng mua bán: 15.000 – 20.000 đ/m²/tháng. Theo luật, khoảng 1 năm sau bàn giao cư dân họp hội nghị nhà chung cư, bầu Ban quản trị và có thể quyết lại mức phí, đơn vị quản lý.</li>
+<li><strong>Đơn vị quản lý</strong>: Sun Paradise Land (giống Sun Symphony). Chủ căn hộ <strong>tự quyết để ở hay cho thuê</strong>, không bắt buộc ký gửi lại chủ đầu tư; có thể tự vận hành hoặc thuê đơn vị quản lý cho thuê bên ngoài.</li>
+<li><strong>Giá thuê tham khảo</strong> chủ đầu tư khảo sát ở căn hộ mặt biển lúc chưa vào mùa cao điểm: studio 2,2 – 2,9 triệu/đêm, 1PN+ 3,3 – 3,7 triệu/đêm; chi phí vận hành khoảng 35% doanh thu. Đây là số tham khảo, không phải cam kết.</li>
+</ul>
+<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Layout căn Studio 30 m² Sun Saphia Residence – loại căn chiếm khoảng 65% dự án (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Pháp lý và thủ tục</h2>
+<ul>
+<li>Căn hộ thương mại dịch vụ, được cấp <strong>sổ hồng có thời hạn 50 năm kể từ 17/09/2026</strong>; công trình cấp I, niên hạn 100 năm. Hết 50 năm, chủ đầu tư dự kiến hướng gia hạn bằng cách nộp tiền sử dụng đất tương ứng phần diện tích căn hộ – cần chờ quy định khi đó.</li>
+<li>Căn hộ thương mại dịch vụ vẫn đăng ký tạm trú được.</li>
+<li><strong>Không bán cho người nước ngoài</strong> và các trường hợp có yếu tố nước ngoài theo quy định với loại hình này.</li>
+<li>Ký <strong>hợp đồng thỏa thuận nguyên tắc trước, hợp đồng mua bán sau</strong> – để khách kịp chuẩn bị hồ sơ vay và có thể chuyển nhượng, đổi tên trước khi ký hợp đồng mua bán. Hồ sơ pháp lý đầy đủ công bố trên trang dự án khi ký hợp đồng mua bán, theo quy định của Sở Xây dựng.</li>
+<li>Bảo lãnh ngân hàng không áp dụng với dự án thương mại dịch vụ.</li>
+</ul>
+<p>Chi tiết về thời hạn và niên hạn: <a href="/cong-trinh-cap-1-la-gi-nien-han-100-nam-sun-saphia-residence/">công trình cấp I, niên hạn 100 năm là gì</a>.</p>
+<h2>Quy hoạch xung quanh và tiến độ</h2>
+<table>
+<thead><tr><th>Hướng</th><th>Theo chủ đầu tư</th></tr></thead>
+<tbody>
+<tr><td>Đông (biển)</td><td>Dự án resort thấp tầng; phần đất 2,45 ha thu hồi từ dự án Hòn Ngọc Á Châu làm công viên, bãi tắm công cộng do thành phố thực hiện; phần đất còn lại chờ điều chỉnh quy hoạch, dự kiến ưu tiên thấp tầng</td></tr>
+<tr><td>Nam</td><td>Quy hoạch 26 – 30 tầng (các lô còn thời hạn 30 – 35 năm); mặt này không có căn nhìn trực diện</td></tr>
+<tr><td>Tây</td><td>Tối đa 7 tầng</td></tr>
+<tr><td>Bắc</td><td>Khu sân bay Nước Mặn, chưa có thông tin điều chỉnh</td></tr>
+</tbody>
+</table>
+<p><strong>Tiến độ (04/11/2026):</strong> đã hoàn thành ép cọc (cùng thời gian với FourS), đang chuyển giao mặt bằng cho nhà thầu thi công tầng hầm, sau đó là phần thân. Xem thêm <a href="/cong-vien-bien-truong-sa-2-45-ha-truoc-sun-saphia-residence/">công viên biển 2,45 ha trước dự án</a>.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Nhận định của Hoàng Hiệp</h2>
+<p>Điểm cần cân nhắc nhất là chi phí làm bếp (không gồm trong bàn giao) và bài toán cho thuê: số liệu 2,2 – 2,9 triệu/đêm cho studio là khảo sát của chủ đầu tư, nên tự tính thêm tỷ lệ lấp đầy theo mùa trước khi xuống tiền. Ở chiều ngược lại, việc được tự vận hành, không bắt buộc ký gửi giúp chủ nhà linh hoạt hơn. Xem thêm {$review}.</p>
+{$cta}
+<p class="src">Nguồn: tài liệu hỏi đáp của chủ đầu tư Sun Saphia Residence (04/11/2026). Thông tin tham khảo, có thể thay đổi theo hợp đồng và quy định.</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Sun Saphia Residence hỏi đáp: bàn giao, phí, cho thuê',
+			'desc'      => 'Sun Saphia Residence bàn giao liền tường trừ bếp, trần 3,5 m sàn – sàn, phí quản lý 15.000 – 20.000 đ/m², được tự cho thuê, sổ hồng 50 năm, đã xong ép cọc.',
+			'points'    => array(
+				'Bàn giao liền tường, trừ tủ bếp, thiết bị bếp và hút mùi.',
+				'Phí quản lý dự kiến 15.000 – 20.000 đ/m²/tháng; chủ nhà tự quyết ở hay cho thuê.',
+				'Sổ hồng thời hạn 50 năm từ 17/09/2026, công trình cấp I niên hạn 100 năm.',
+				'Đã hoàn thành ép cọc, chuẩn bị thi công tầng hầm (04/11/2026).',
+			),
+			'faq'       => array(
+				array( 'Sun Saphia Residence bàn giao nội thất gì?', 'Bàn giao liền tường trừ tủ bếp, thiết bị bếp và hút mùi: hoàn thiện trần, tường, sàn, thiết bị vệ sinh, bình nóng lạnh, điều hòa, cửa, khóa, đèn, công tắc, ổ cắm, PCCC.' ),
+				array( 'Phí quản lý Sun Saphia Residence bao nhiêu?', 'Dự kiến 15.000 – 20.000 đ/m²/tháng theo hợp đồng mua bán; Ban quản trị cư dân có thể quyết lại sau khi thành lập.' ),
+				array( 'Mua Sun Saphia có bắt buộc ký gửi cho thuê không?', 'Không. Chủ căn hộ tự quyết để ở hay cho thuê, có thể tự vận hành hoặc thuê đơn vị bên ngoài.' ),
+				array( 'Người nước ngoài có mua được Sun Saphia không?', 'Không. Căn hộ thương mại dịch vụ của dự án không bán cho người nước ngoài và các trường hợp có yếu tố nước ngoài.' ),
+				array( 'Sun Saphia Residence đang thi công đến đâu?', 'Theo chủ đầu tư (04/11/2026), dự án đã hoàn thành ép cọc và đang chuyển sang thi công tầng hầm.' ),
+			),
+		),
+		'sources'  => array(),
+	);
+
 	return $posts;
 }
