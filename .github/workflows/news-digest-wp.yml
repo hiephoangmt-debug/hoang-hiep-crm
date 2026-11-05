@@ -3,9 +3,8 @@
 # Cần secret: WP_USER, WP_APP_PASSWORD (Application Password trong WordPress).
 name: Bản tin lên website
 
+# 05/11/2026: anh Hiệp tắt bản tin tự động (đăng nhiều quá) – chỉ còn chạy tay.
 on:
-  schedule:
-    - cron: '20 1 * * *'    # 08:20 giờ Việt Nam (GitHub có thể trễ vài phút)
   workflow_dispatch:
     inputs:
       date:
