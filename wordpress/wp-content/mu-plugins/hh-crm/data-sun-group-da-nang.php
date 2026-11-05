@@ -190,7 +190,7 @@ function hh_dataset_sun_group_da_nang( $projects ) {
 			'hh_p_progress' => array( "19/8/2025 | Khởi công Đà Nẵng Downtown\n25/7/2026 | Khởi công Sun Galaxy Complex" ),
 		),
 		'content' => <<<'HTML'
-<p><strong>Đà Nẵng Downtown</strong> (Da Nang Downtown) là siêu tổ hợp văn hóa – giải trí – thương mại – đô thị 76,92 ha của Sun Group trên khu đất Công viên Châu Á (Asia Park) cũ, ven bờ Đông sông Hàn giữa cầu Trần Thị Lý và cầu Tiên Sơn. Tổng vốn khoảng 79.790 tỷ đồng, khởi công ngày 19/8/2025.</p>
+<p><strong>Đà Nẵng Downtown</strong> (Da Nang Downtown) là siêu tổ hợp văn hóa – giải trí – thương mại – đô thị 76,92 ha của Sun Group trên khu đất Công viên Châu Á (Asia Park) cũ, ven bờ Tây sông Hàn giữa cầu Trần Thị Lý và cầu Tiên Sơn. Tổng vốn khoảng 79.790 tỷ đồng, khởi công ngày 19/8/2025.</p>
 <figure><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@claude/great-tesla-ki0len/web/images/da-nang-downtown-phoi-canh-1920.webp" alt="Phối cảnh phố thương mại ven sông Đà Nẵng Downtown với tòa tháp 69 tầng" loading="lazy" width="1600"><figcaption>Phố thương mại ven sông và tòa tháp 69 tầng. Ảnh minh họa.</figcaption></figure>
 <h2>Điểm nhấn của dự án</h2>
 <ul>
@@ -207,7 +207,7 @@ function hh_dataset_sun_group_da_nang( $projects ) {
 <h2>Xem chi tiết từng phân khu</h2>
 <ul>
 <li><a href="https://www.sun-danangdowntown.com/">Trang thông tin Đà Nẵng Downtown</a>: vị trí, quy hoạch, pháp lý, công cụ tính khoản vay.</li>
-<li><a href="https://www.sun-danangdowntown.com/sun-galaxy-complex">Sun Galaxy Complex</a> (hoặc <a href="https://www.sun-galaxy-complex.com.vn/">sun-galaxy-complex.com.vn</a>): Moon Gate, khán đài 30.000 chỗ, loại căn, giá tham khảo.</li>
+<li><a href="https://www.sun-galaxy-complex.com.vn/">Sun Galaxy Complex</a>: Moon Gate, khán đài 30.000 chỗ, loại căn, giá tham khảo.</li>
 <li><a href="https://www.sun-danangdowntown.com/thap-69-tang">Tháp 69 tầng</a>: ý tưởng kiến trúc, công năng, so sánh các tòa nhà cao nhất Việt Nam.</li>
 </ul>
 <p><em>Thông tin tổng hợp từ báo chí và tài liệu giới thiệu dự án, cập nhật 23/10/2026; giá và chính sách có thể thay đổi theo chủ đầu tư.</em></p>
@@ -261,7 +261,7 @@ HTML
 <p>Khán đài bậc thang cao dần từ tầng 1 đến tầng 4, sân khấu DIFF nổi trên mặt nước, công viên ven sông và đường 6 làn đi ngầm bên dưới khán đài. Quy hoạch được duyệt ghi gần 20.000 chỗ; tài liệu giới thiệu mới nhất ghi khoảng 30.000 chỗ.</p>
 <h2>Tiến độ và giá</h2>
 <p>Ngày 17/10/2026 công trường đang thi công cọc móng với hàng chục máy khoan cọc nhồi. Dự án đang nhận giữ chỗ (khoảng 50 triệu/căn), chưa công bố bảng giá chính thức; các mức giá lưu hành từ 60 đến khoảng 148 triệu/m² chỉ để tham khảo.</p>
-<p>Xem đầy đủ thông số, mặt bằng, công cụ tính vay và đăng ký nhận bảng giá tại <a href="https://www.sun-galaxy-complex.com.vn/">sun-galaxy-complex.com.vn</a> hoặc <a href="https://www.sun-danangdowntown.com/sun-galaxy-complex">trang Sun Galaxy Complex trên Đà Nẵng Downtown</a>.</p>
+<p>Xem đầy đủ thông số, mặt bằng, công cụ tính vay và đăng ký nhận bảng giá tại <a href="https://www.sun-galaxy-complex.com.vn/">sun-galaxy-complex.com.vn</a>.</p>
 <p><em>Thông tin tổng hợp từ báo chí và tài liệu giới thiệu dự án, cập nhật 23/10/2026; giá và chính sách có thể thay đổi theo chủ đầu tư.</em></p>
 HTML
 		,
@@ -449,6 +449,24 @@ HTML
 		),
 		'sources' => array( 'https://congly.com.vn/sun-costa-residence-can-ho-can-bien-my-khe-tam-diem-du-lich-da-nang/', 'https://congly.com.vn/sun-costa-residence-to-hop-bat-dong-san-can-bien-sinh-loi-tai-da-nang/' ),
 	);
+
+	// Bản 2.20.67 ghi nhầm "bờ Đông" và trỏ trang Galaxy về sun-danangdowntown.com (nay canonical là sun-galaxy-complex.com.vn):
+	// thay bài giới thiệu nếu vẫn đúng bản cũ do web nhập
+	$old = array(
+		'da-nang-downtown'   => array(
+			'ven bờ Tây sông Hàn giữa' => 'ven bờ Đông sông Hàn giữa',
+			'<li><a href="https://www.sun-galaxy-complex.com.vn/">Sun Galaxy Complex</a>: ' => '<li><a href="https://www.sun-danangdowntown.com/sun-galaxy-complex">Sun Galaxy Complex</a> (hoặc <a href="https://www.sun-galaxy-complex.com.vn/">sun-galaxy-complex.com.vn</a>): ',
+		),
+		'sun-galaxy-complex' => array(
+			'<a href="https://www.sun-galaxy-complex.com.vn/">sun-galaxy-complex.com.vn</a>.</p>' => '<a href="https://www.sun-galaxy-complex.com.vn/">sun-galaxy-complex.com.vn</a> hoặc <a href="https://www.sun-danangdowntown.com/sun-galaxy-complex">trang Sun Galaxy Complex trên Đà Nẵng Downtown</a>.</p>',
+		),
+	);
+	foreach ( $projects as $i => $p ) {
+		$slug = $p['slug'] ?? '';
+		if ( isset( $old[ $slug ] ) && ! empty( $p['content'] ) ) {
+			$projects[ $i ]['fix_content'] = array( strtr( $p['content'], $old[ $slug ] ) );
+		}
+	}
 
 	return $projects;
 }

@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.58** + plugin Hoàng Hiệp CRM **2.20.142**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.58** + plugin Hoàng Hiệp CRM **2.20.143**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.143 (05/11/2026)
+
+- **Đà Nẵng Downtown**: sửa vị trí trong bài giới thiệu thành **bờ Tây sông Hàn** (đất Công viên Châu Á cũ, Hải Châu; bản trước ghi nhầm bờ Đông).
+- **Sun Galaxy Complex**: liên kết chỉ trỏ về www.sun-galaxy-complex.com.vn (trang chuẩn cho Google), bỏ liên kết trùng sang sun-danangdowntown.com/sun-galaxy-complex.
+- Chỉ thay bài còn đúng bản 2.20.67 do web nhập; bài anh đã tự sửa giữ nguyên.
+- Sau khi giải nén: **Dự án → Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu**, rồi **LiteSpeed Cache → Purge All**.
 
 ## Có gì mới – plugin 2.20.142 (05/11/2026)
 
