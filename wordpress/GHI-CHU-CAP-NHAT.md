@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.55** + plugin Hoàng Hiệp CRM **2.20.137**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.56** + plugin Hoàng Hiệp CRM **2.20.139**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -41,6 +41,16 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
 
+## Có gì mới – plugin 2.20.139 · giao diện 2.15.56 (05/11/2026)
+
+- **Trang mới "Chính sách bán hàng & bảng tính giá"** (`/chinh-sach-bang-tinh/`), có mục **Chính sách & bảng tính** trên menu chính: mỗi dự án Sun một thẻ gồm chính sách đang áp dụng, nút **Bảng tính giá** (hoặc "Nhận phiếu tính giá qua Zalo" khi dự án chưa có bảng tính) và danh sách bài chính sách theo từng tháng. Trang tự tạo khi anh vào trang quản trị.
+- Chuyên mục tin tức mới **Chính sách bán hàng**: mỗi dự án một bài mỗi tháng (tháng 11/2026: Spana, Cora, S-Light, FourS F1-F5, FourS F2 – web tự đăng chiều 5/11).
+- Bảng tính giá: phiếu tính giá Excel của chủ đầu tư đóng gói trong plugin (thư mục `ptg/`) sẽ tự nạp vào trang `/du-an/<dự án>/bang-tinh/` khi bấm **Nhập / cập nhật dữ liệu** (không đè file anh tự chọn).
+
+## Có gì mới – plugin 2.20.138 (05/11/2026)
+
+- Chính sách Cora shop khối đế, S-Light: bổ sung Early Bird 3% (có thời hạn), chiết khấu 1% khi không lấy bảo lãnh ngân hàng, tiến độ thanh toán chuẩn shop Cora.
+
 ## Có gì mới – plugin 2.20.137 (05/11/2026)
 
 - Chính sách bán hàng tháng 11/2026 (chủ đầu tư) cho Spana, Cora (căn hộ + shop khối đế), S-Light (căn hộ + penthouse), FourS F1, F5, F2: chiết khấu không vay, thanh toán sớm (hạn 25/11), đặt cọc, giãn tiến độ, hỗ trợ lãi suất. Thay mục "Chính sách bán hàng" cũ nếu anh chưa sửa tay.
@@ -48,7 +58,6 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 - **Trang mới "Bản đồ dự án"** (`/ban-do-du-an/`), có mục **Bản đồ dự án** trên menu chính (trước "Về Hiệp"):
   - Tab **Đà Nẵng – Hội An**: bản đồ ảnh vệ tinh, ranh giới và ghim các dự án đang phân phối (Sun Saphia, Da Nang Downtown, Sun Galaxy, Cora Tower, Vinhomes Hải Vân Bay, Casamia Balanca, Times Square, Masteri, FPT City, lô đất Hoàng Sa) và dự án lân cận. Bấm dự án → giá, quy mô, nút **Xem trang dự án** mở đúng trang `/du-an/...` của web.
-  - Tab **Vinhomes Hà Nội**: ranh giới 17 dự án Vinhomes trên ảnh vệ tinh.
   - Tab **Đà Nẵng 3D**: mô hình 3D toàn thành phố có khối các dự án.
 - Trang tự tạo khi anh vào trang quản trị sau khi cập nhật (không cần nhập dữ liệu). Xóa trang thì không tự tạo lại.
 

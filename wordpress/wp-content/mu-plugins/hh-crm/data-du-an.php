@@ -769,6 +769,9 @@ function hh_import_projects() {
 	$news     = function_exists( 'hh_import_news' ) ? hh_import_news() : 0;
 	$listings = function_exists( 'hh_import_listings' ) ? hh_import_listings() : 0;
 	$listings += function_exists( 'hh_import_single_listings' ) ? hh_import_single_listings() : 0; // Tin riêng lẻ (không thuộc dự án).
+	if ( function_exists( 'hh_units_import_bundled' ) ) {
+		hh_units_import_bundled(); // Phiếu tính giá chủ đầu tư đóng gói (ptg/) → bảng tính từng dự án.
+	}
 	return array( $created, $updated, $news, $listings );
 }
 
