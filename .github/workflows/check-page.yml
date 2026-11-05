@@ -1,4 +1,4 @@
-# Kiểm tra trang toa-f2-ads có chạy không (chụp màn hình + lỗi). Anh Hiệp báo trang không chạy.
+# Kiểm tra trang toa-f2-ads: HTML thô trả về (độ dài, phần đầu, phần cuối). Anh Hiệp báo trang trắng.
 name: Kiem tra trang ADS F2
 on:
   push:
@@ -7,8 +7,9 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: npm i playwright@1.47.2 && npx playwright install --with-deps chromium
-      - run: node check/shot.js
-      - uses: actions/upload-artifact@v4
-        with: { name: shots, path: check/*.png }
+      - run: |
+          for u in https://www.sun-fours-tower.com/toa-f2-ads https://www.sun-fours-tower.com/toa-f2; do
+            curl -sSL -A "Mozilla/5.0" "$u" -o p.html -w "\n== $u %{http_code} %{size_download} bytes\n"
+            echo "-- head:"; head -c 1500 p.html; echo; echo "-- tail:"; tail -c 600 p.html; echo
+            grep -c "<script" p.html || true
+          done
