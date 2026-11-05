@@ -113,6 +113,7 @@ require HH_CRM_DIR . 'nhap-du-an-nhanh.php';
 require HH_CRM_DIR . 'nhap-bai-nhanh.php';
 require HH_CRM_DIR . 'data-bai-viet-casamia-dong-tien.php';
 require HH_CRM_DIR . 'trang-thong-ke-dau-tu.php';
+require HH_CRM_DIR . 'trang-ban-do-du-an.php';
 require HH_CRM_DIR . 'setup.php';
 require HH_CRM_DIR . 'houzez-import.php';
 
