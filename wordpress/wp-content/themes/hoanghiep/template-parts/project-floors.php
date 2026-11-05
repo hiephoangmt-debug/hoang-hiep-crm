@@ -11,6 +11,16 @@ $label = static function ( $img, $i ) {
 	$t = trim( (string) get_the_title( $img ) );
 	return ( '' === $t || preg_match( '/^(img|dsc|image|screenshot|mat-bang)?[\s_\-]*[\d_\-]+$/i', $t ) ) ? 'Mặt bằng ' . ( $i + 1 ) : $t;
 };
+// Bỏ tab trùng tên (ảnh từng bị tải hai lần).
+$seen_label = array();
+foreach ( $ids as $i => $img ) {
+	$sig = mb_strtolower( $label( $img, $i ) );
+	if ( isset( $seen_label[ $sig ] ) && ! preg_match( '/^mặt bằng \d+$/u', $sig ) ) {
+		unset( $ids[ $i ] );
+	}
+	$seen_label[ $sig ] = true;
+}
+$ids = array_values( $ids );
 // Nhóm theo tòa: chỉ khi mọi tiêu đề đều có dạng "Tòa · Tầng" (hoặc "Tòa – Tầng") và có từ 2 tòa trở lên.
 $groups = array();
 $parts  = array();

@@ -179,6 +179,13 @@ add_action(
 		if ( ! $queue ) {
 			return;
 		}
+		// Khóa: hai lượt cron chạy cùng lúc (nhiều người vào web) từng tải một ảnh hai lần → tab mặt bằng bị lặp.
+		if ( ! add_option( 'hh_img_links_lock', time(), '', 'no' ) ) {
+			if ( time() - (int) get_option( 'hh_img_links_lock' ) < 300 ) {
+				return;
+			}
+			update_option( 'hh_img_links_lock', time(), false );
+		}
 		$post_id = $queue[0];
 		$tries   = (int) get_post_meta( $post_id, '_hh_img_links_tries', true );
 		$before  = hh_img_links_pending( $post_id );
@@ -190,14 +197,57 @@ add_action(
 			update_post_meta( $post_id, '_hh_img_links_err', array( 'Lỗi khi tải ảnh: ' . $e->getMessage() ) );
 			$tries += 1;
 		}
+		hh_img_dedupe( $post_id );
 		update_post_meta( $post_id, '_hh_img_links_tries', $tries );
 		if ( 'du-an' !== get_post_type( $post_id ) || ! hh_img_links_pending( $post_id ) || $tries >= 3 ) {
 			array_shift( $queue );
 			delete_post_meta( $post_id, '_hh_img_links_tries' );
 		}
 		update_option( 'hh_img_links_queue', $queue, false );
+		delete_option( 'hh_img_links_lock' );
 		if ( $queue ) {
 			wp_schedule_single_event( time() + 20, 'hh_img_links_cron' );
+		}
+	}
+);
+
+/**
+ * Bỏ ảnh trùng khỏi các ô ảnh của dự án (cùng tiêu đề + chú thích + dung lượng file – do tải trùng trước đây).
+ * Chỉ gỡ khỏi danh sách hiển thị, ảnh vẫn còn trong Thư viện.
+ */
+function hh_img_dedupe( $post_id ) {
+	foreach ( array( 'hh_p_gallery', 'hh_p_amenities_img', 'hh_p_floorplans', 'hh_p_unit_layouts', 'hh_p_masterplan_img', 'hh_p_progress_gallery' ) as $key ) {
+		$ids  = array_values( array_filter( array_map( 'absint', explode( ',', (string) get_post_meta( $post_id, $key, true ) ) ) ) );
+		$keep = array();
+		$seen = array();
+		foreach ( $ids as $id ) {
+			$att  = get_post( $id );
+			$file = get_attached_file( $id );
+			if ( $att && ( '' !== trim( $att->post_title ) || '' !== trim( $att->post_excerpt ) ) ) {
+				$sig = mb_strtolower( trim( $att->post_title ) ) . '|' . trim( $att->post_excerpt ) . '|' . ( $file && is_file( $file ) ? filesize( $file ) : '' );
+				if ( isset( $seen[ $sig ] ) ) {
+					continue;
+				}
+				$seen[ $sig ] = true;
+			}
+			$keep[] = $id;
+		}
+		if ( count( $keep ) !== count( $ids ) ) {
+			update_post_meta( $post_id, $key, implode( ',', $keep ) );
+		}
+	}
+}
+
+/** Dọn ảnh trùng của mọi dự án một lần sau khi cập nhật. */
+add_action(
+	'admin_init',
+	static function () {
+		if ( get_option( 'hh_img_dedupe_v1' ) || ! current_user_can( 'edit_posts' ) ) {
+			return;
+		}
+		update_option( 'hh_img_dedupe_v1', 1, false );
+		foreach ( get_posts( array( 'post_type' => 'du-an', 'post_status' => 'any', 'numberposts' => -1, 'fields' => 'ids' ) ) as $pid ) {
+			hh_img_dedupe( $pid );
 		}
 	}
 );
