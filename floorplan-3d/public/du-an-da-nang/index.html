@@ -50,6 +50,8 @@
 <script>
 (async function () {
   var $ = function (id) { return document.getElementById(id); };
+  // nhúng trên website (vd ?site=https://hiephoangmt.com): nút 'Xem trang dự án' mở trang dự án của website đó
+  var SITE = (new URLSearchParams(location.search).get('site') || '').replace(/\/$/, ''); if (!/^https:\/\/(www\.)?hiephoangmt\.com$/.test(SITE)) SITE = '';
   var map = L.map('map', { zoomControl: false, preferCanvas: true }).setView([16.05, 108.22], 11);
   L.control.zoom({ position: 'bottomright' }).addTo(map);
   var sat = L.layerGroup([
@@ -70,7 +72,8 @@
     $('ch').textContent = p.headline || ''; $('cs').textContent = p.scale ? '🏢 ' + p.scale : ''; $('cp').textContent = p.price ? '💰 ' + p.price : '';
     $('cn').textContent = p.ha ? 'Ranh trên bản đồ ~' + (p.ha >= 1 ? p.ha.toLocaleString('vi-VN') + ' ha' : Math.round(p.ha * 1e4).toLocaleString('vi-VN') + ' m²') + ' (OpenStreetMap / mặt bằng; có thể khác số CĐT công bố)' : 'Vị trí theo địa chỉ dự án';
     var cb = $('cb'); cb.textContent = '';
-    if (p.url) { var a = document.createElement('a'); a.className = 'chip go'; a.href = p.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = '🌐 Xem trang dự án'; cb.appendChild(a); }
+    var href = SITE && p.wp ? SITE + '/du-an/' + p.wp + '/' : p.url;
+    if (href) { var a = document.createElement('a'); a.className = 'chip go'; a.href = href; a.target = SITE && p.wp ? '_top' : '_blank'; a.rel = 'noopener'; a.textContent = '🌐 Xem trang dự án'; cb.appendChild(a); }
     if (p.d3) { var a2 = document.createElement('a'); a2.className = 'chip'; a2.href = p.d3; a2.target = '_blank'; a2.textContent = '🎥 Xem 3D'; cb.appendChild(a2); }
     $('card').hidden = false; if (lay.getBounds) map.flyToBounds(lay.getBounds(), { padding: [60, 60], maxZoom: 17, duration: 1.2 }); else map.flyTo(lay.getLatLng(), 17, { duration: 1.2 });
     document.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('on', c.dataset.n === p.name); });
