@@ -401,6 +401,7 @@ HTML
 </tbody>
 </table>
 <p>Đặt cọc 100 triệu đồng (Studio, 1PN, 1PN+, 2PN) và 150 triệu đồng (3PN). Số liệu trên là ví dụ trong phiếu tính giá, giá từng căn khác nhau theo tầng, hướng và diện tích.</p>
+<p><strong>Lưu ý:</strong> chính sách 17/10/2026 áp dụng cho các căn mở bán mới. Một số căn đã được nhận từ đợt trước vẫn giữ chính sách đợt 26/9/2026 (có Early Bird 3%). Hoàng Hiệp sẽ xác nhận chính sách áp dụng cho từng căn cụ thể khi anh chị chọn căn.</p>
 <h2>Góc nhìn của Hoàng Hiệp</h2>
 <p>So với đợt trước, quà nội thất Nhà Xinh giúp căn hộ có thể đưa vào sử dụng hoặc cho thuê sớm hơn mà không phải bỏ thêm nhiều chi phí hoàn thiện. Với người có sẵn dòng tiền, phương án thanh toán sớm vẫn là cách tiết kiệm nhiều nhất; người cần giữ tiền mặt có thể chọn vay 70% và vẫn nhận quà nội thất.</p>
 <p>Xem thêm: <a href="/du-an/fours-tower-f2-thap-mai/">FourS Tower F2 – Tháp Mai</a> · <a href="/du-an/fours-tower/">tổng quan FourS Tower</a>. Cần phiếu tính giá theo đúng căn và phương án anh chị chọn, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
@@ -417,6 +418,7 @@ HTML
 			),
 			'faq'       => array(
 				array( 'Chính sách FourS Tower F2 từ 17/10/2026 có gì mới?', 'Tặng gói nội thất Nhà Xinh trừ vào giá bán: Studio 35 triệu, 1PN và 1PN+ 50 triệu, 2PN 75 triệu, 3PN 100 triệu; cộng dồn chiết khấu không vay 3% và thanh toán sớm.' ),
+				array( 'Căn nào áp dụng chính sách 17/10/2026?', 'Chính sách 17/10/2026 áp dụng cho các căn mở bán mới; một số căn đã nhận từ đợt trước vẫn giữ chính sách đợt 26/9/2026. Chính sách áp dụng được xác nhận theo từng căn.' ),
 				array( 'Vay ngân hàng có được quà Nhà Xinh không?', 'Có. Phương án vay vẫn nhận quà nội thất Nhà Xinh, chỉ không áp dụng chiết khấu không vay 3%.' ),
 				array( 'Thanh toán sớm FourS F2 được chiết khấu bao nhiêu?', 'Thanh toán sớm 95% chiết khấu 12%, 70% chiết khấu 5%, 50% chiết khấu 2,5%, theo thời hạn chủ đầu tư công bố từng đợt.' ),
 			),
