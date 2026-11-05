@@ -112,10 +112,10 @@ ft = F('Inter-Bold.otf', 22)
 tw = d.textlength(tag, font=ft) / S
 d.rounded_rectangle(P(64, 70, 64 + tw + 44, 112), radius=21 * S, fill=GOLD)
 d.text(P(86, 78), tag, font=ft, fill=NAVY)
-d.text(P(60, 136), 'Chu Lai sắp', font=F('InterDisplay-ExtraBold.otf', 82), fill=CREAM)
-d.text(P(60, 228), '“thay áo mới”', font=F('InterDisplay-ExtraBold.otf', 82), fill=PEACH)
-d.text(P(64, 336), '3 khu đô thị · hơn 40.400 tỷ', font=F('Inter-SemiBold.otf', 34), fill=CREAM)
-d.text(P(64, 382), 'Lần này có hẳn hạn chót khởi công', font=F('Inter-Regular.otf', 28), fill=(235, 225, 215))
+d.text(P(60, 136), 'Chu Lai đón', font=F('InterDisplay-ExtraBold.otf', 82), fill=CREAM)
+d.text(P(60, 228), '3 khu đô thị mới', font=F('InterDisplay-ExtraBold.otf', 82), fill=PEACH)
+d.text(P(64, 336), 'Tổng vốn đầu tư hơn 40.400 tỷ đồng', font=F('Inter-SemiBold.otf', 34), fill=CREAM)
+d.text(P(64, 382), 'Đã có thời hạn khởi công cụ thể', font=F('Inter-Regular.otf', 28), fill=(235, 225, 215))
 
 # --- Khối thông tin (770 → 1350) ---
 d.rectangle(P(0, 770, W, H), fill=NAVY)
