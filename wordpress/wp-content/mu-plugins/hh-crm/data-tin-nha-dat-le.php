@@ -151,6 +151,75 @@ function hh_single_listing_dataset() {
 </ul>
 <p>Xem bảng giá đất mặt tiền các tuyến biển tại <a href="/thong-ke-dau-tu/">Thống kê đầu tư</a>. Khách có nhu cầu thực, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận vị trí, giấy tờ và đặt lịch xem đất.</p>',
 	);
+	// 05/11/2026 – 8 căn FPT Plaza 3 cần bán (hàng hợp tác môi giới, sẵn sổ hồng). Không ghi tên, số điện thoại bên đăng, không mã căn.
+	$fpt3 = '<a href="/du-an/fpt-plaza-3/">FPT Plaza 3</a>';
+	$dirs = array( 'dong' => 'Đông', 'tay' => 'Tây', 'nam' => 'Nam', 'bac' => 'Bắc', 'dong-bac' => 'Đông Bắc' );
+	// beds, m², hướng, nội thất (day-du = full nội thất, co-ban = nội thất chủ đầu tư), giá (triệu), "từ"? (giá rao dạng 2,3x tỷ), căn góc?
+	$fpt_units = array(
+		array( 1, 50, 'bac', 'day-du', 2300, true, false ),
+		array( 2, 57, 'dong', 'co-ban', 2600, true, false ),
+		array( 2, 57, 'bac', 'co-ban', 2600, true, false ),
+		array( 2, 67, '', 'co-ban', 3500, true, false ),
+		array( 2, 64, 'tay', 'day-du', 3100, false, false ),
+		array( 2, 62, 'nam', '', 3050, false, true ), // Tin rao không ghi nội thất.
+		array( 2, 62, 'nam', 'day-du', 3500, false, true ),
+		array( 3, 74, 'dong-bac', 'day-du', 4250, false, false ),
+	);
+	foreach ( $fpt_units as list( $beds, $m2, $dir, $furn, $price, $from, $corner ) ) {
+		$pn    = 1 === $beds ? '1PN+' : $beds . 'PN';
+		$pnt   = 1 === $beds ? '1 phòng ngủ +' : $beds . ' phòng ngủ';
+		$hd    = $dir ? 'hướng ' . mb_strtolower( $dirs[ $dir ] ) : '';
+		$nt    = array( 'day-du' => 'full nội thất', 'co-ban' => 'nội thất chủ đầu tư' )[ $furn ] ?? '';
+		$gia   = ( $from ? rtrim( rtrim( number_format( $price / 1000, 2, ',', '' ), '0' ), ',' ) . 'x tỷ' : rtrim( rtrim( number_format( $price / 1000, 2, ',', '' ), '0' ), ',' ) . ' tỷ' );
+		$bits  = array_filter( array( $m2 . ' m²', $hd, $corner ? 'căn góc' : '', $nt ) );
+		$slug  = 'ban-can-ho-fpt-plaza-3-' . $beds . 'pn-' . $m2 . 'm2' . ( $dir ? '-huong-' . $dir : '' ) . ( $corner ? '-can-goc' : '' ) . ( $furn ? '-' . $furn : '' );
+		$img   = 'img/nha-dat/fpt-plaza-3-' . $beds . 'pn-' . $m2 . 'm2' . ( $dir ? '-' . $dir : '' ) . ( $corner ? '-goc' : '' ) . ( $furn ? '-' . $furn : '' ) . '-4x3.jpg';
+		$list[] = array(
+			'rev'     => 1,
+			'slug'    => $slug,
+			'project' => 'fpt-plaza-3',
+			'title'   => 'Bán căn hộ FPT Plaza 3 ' . $pn . ' ' . implode( ', ', $bits ) . ' – ' . $gia . ', sẵn sổ hồng',
+			'excerpt' => 'Căn hộ ' . $pnt . ' FPT Plaza 3 (FPT City, Ngũ Hành Sơn, Đà Nẵng): ' . implode( ', ', $bits ) . '. Giá ' . $gia . ', có thương lượng, sẵn sổ hồng.',
+			'kind'    => 'can-ho-chung-cu',
+			'area'    => 'ngu-hanh-son',
+			'image'   => $img,
+			'alt'     => 'Căn hộ ' . $pnt . ' ' . $m2 . ' m² FPT Plaza 3, FPT City Đà Nẵng – giá ' . $gia,
+			'meta'    => array(
+				'hh_deal'        => 'ban',
+				'hh_status'      => 'con-hang',
+				'hh_price'       => $price,
+				'hh_price_from'  => $from ? '1' : '',
+				'hh_negotiable'  => '1',
+				'hh_address'     => 'FPT Plaza 3, khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng',
+				'hh_map_address' => 'FPT Plaza 3, FPT City, Ngũ Hành Sơn, Đà Nẵng',
+				'hh_area'        => $m2,
+				'hh_bedrooms'    => $beds,
+				'hh_direction'   => $dir,
+				'hh_furniture'   => $furn,
+				'hh_legal'       => 'so-hong',
+				'hh_features'    => implode( "\n", array_filter( array( 'Căn hộ ' . $pnt . ', diện tích ' . $m2 . ' m²', $hd ? ucfirst( $hd ) . ( $corner ? ', căn góc thoáng hai mặt' : '' ) : '', array( 'day-du' => 'Full nội thất, dọn vào ở hoặc cho thuê ngay', 'co-ban' => 'Nội thất bàn giao của chủ đầu tư' )[ $furn ] ?? '', 'Sẵn sổ hồng, công chứng sang tên nhanh', 'Giá ' . $gia . ', có thương lượng cho khách thiện chí' ) ) ),
+			),
+			'content' => '<p>Bán căn hộ <strong>' . $pnt . '</strong> tại ' . $fpt3 . ' – khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng: <strong>' . esc_html( implode( ', ', $bits ) ) . '</strong>. Giá <strong>' . $gia . '</strong>, có thương lượng cho khách thiện chí. Căn đã <strong>sẵn sổ hồng</strong>.</p>
+<h2>Thông tin căn hộ</h2>
+<table><tbody>
+<tr><th>Dự án</th><td>' . $fpt3 . ', FPT City Đà Nẵng</td></tr>
+<tr><th>Loại căn</th><td>' . $pnt . '</td></tr>
+<tr><th>Diện tích</th><td>' . $m2 . ' m²</td></tr>' . ( $hd ? '
+<tr><th>Hướng</th><td>' . $dirs[ $dir ] . ( $corner ? ' – căn góc' : '' ) . '</td></tr>' : '' ) . '
+' . ( $furn ? '<tr><th>Nội thất</th><td>' . ( 'day-du' === $furn ? 'Full nội thất' : 'Nội thất bàn giao của chủ đầu tư' ) . '</td></tr>' : '' ) . '
+<tr><th>Pháp lý</th><td>Sổ hồng</td></tr>
+<tr><th>Giá</th><td>' . $gia . ' – thương lượng</td></tr>
+</tbody></table>
+<h2>Vì sao chọn FPT Plaza 3</h2>
+<ul>
+<li>Nằm trong khu đô thị FPT City quy hoạch đồng bộ: trường học FPT các cấp, công viên, tiện ích nội khu.</li>
+<li>Gần Đại học FPT và tòa văn phòng FPT Complex – nguồn khách thuê là giảng viên, nhân viên công nghệ khá ổn định.</li>
+<li>Đã có sổ hồng nên giao dịch, vay ngân hàng và sang tên thuận lợi hơn căn chưa có sổ.</li>
+</ul>
+<p>Xem thêm các căn khác tại <a href="/du-an/fpt-plaza-3/">trang dự án FPT Plaza 3</a>. Hẹn xem nhà, nhận ảnh thực tế và làm việc trực tiếp với chủ nhà: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>',
+		);
+	}
+
 	return apply_filters( 'hh_single_listing_dataset', $list );
 }
 
@@ -210,6 +279,10 @@ function hh_import_single_listings() {
 		}
 		foreach ( $l['meta'] as $k => $v ) {
 			update_post_meta( $id, $k, $v );
+		}
+		$proj = empty( $l['project'] ) ? null : get_page_by_path( $l['project'], OBJECT, 'du-an' );
+		if ( $proj ) {
+			update_post_meta( $id, 'hh_project', $proj->ID ); // Tin hiện ở mục "Chuyển nhượng & cho thuê" của trang dự án.
 		}
 		if ( term_exists( $l['kind'], 'loai-bds' ) ) {
 			wp_set_object_terms( $id, $l['kind'], 'loai-bds' );

@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.54** + plugin Hoàng Hiệp CRM **2.20.130**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.54** + plugin Hoàng Hiệp CRM **2.20.131**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.131 (05/11/2026)
+
+- 8 tin bán căn hộ **FPT Plaza 3** (1PN+ đến 3PN, 50 – 74 m², 2,3x – 4,25 tỷ, sẵn sổ hồng) ở mục Mua bán, gắn vào trang dự án FPT Plaza 3, ảnh thẻ tự vẽ. Liên hệ đứng tên Hoàng Hiệp. Bấm **Nhập / cập nhật dữ liệu** để đăng.
 
 ## Có gì mới – plugin 2.20.130, giao diện 2.15.54 (05/11/2026)
 
