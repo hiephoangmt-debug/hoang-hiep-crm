@@ -913,6 +913,44 @@ def dau_tu_san(ctx='ADS'):
             '<p class="src" style="text-align:center;margin-top:8px">Mức chiết khấu mua sàn / nhiều căn theo chính sách chủ đầu tư từng đợt – đại lý gửi phương án riêng theo ngân sách của anh/chị.</p>'
             '</div></section>')
 
+def hero_fx():
+    """Đầu trang kiểu FourS: tiêu đề + 3 con số lớn + dấu tick bên trái, form bên phải; ngay dưới là dải số liệu."""
+    P = 'https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ee46a5171093f0137923551fcb2d6e6593653c16/landing/sun-saphia/v4/vid/poster.webp'
+    css = ('<style>.hx{position:relative;color:#fff;background:#0A2E4A url("' + P + '") center/cover no-repeat;overflow:hidden}'
+           '.hx:before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(6,34,58,.96) 0%,rgba(8,52,86,.9) 52%,rgba(10,70,110,.62) 100%)}'
+           '.hxw{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:54px 20px 50px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:44px;align-items:center}'
+           '.hxe{display:block;font-size:13px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:#FFB15C;margin-bottom:14px}'
+           '.hx h1{font-family:inherit;font-size:clamp(32px,4.6vw,54px);line-height:1.12;margin:0 0 16px;color:#fff;font-weight:800}.hx h1 em{font-style:italic;color:#FF9A45}'
+           '.hxl{font-size:17px;line-height:1.65;color:#DCEAF4;margin:0 0 22px;max-width:620px}.hxl b{color:#fff}'
+           '.hxn{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 18px;max-width:620px}'
+           '.hxn div{border:1px solid rgba(255,154,69,.75);border-radius:14px;padding:14px 10px 12px;text-align:center;background:rgba(255,255,255,.04)}'
+           '.hxn b{display:block;font-size:clamp(30px,3.6vw,42px);line-height:1.05;color:#FF9A45;font-weight:800}.hxn span{display:block;font-size:13px;line-height:1.35;color:#E6EEF5;margin-top:6px}'
+           '.hxc{display:flex;flex-wrap:wrap;gap:8px 18px;list-style:none;margin:0;padding:0;font-size:14px;color:#E6EEF5}.hxc li:before{content:"✓ ";color:#FF9A45;font-weight:800}'
+           '.hxa{margin-top:18px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}.hxa button{background:none;border:0;color:#fff;font-weight:700;font-size:15px;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:4px}'
+           '.hxf{background:#fff;color:#0A2540;border-radius:20px;border-top:5px solid #F2802F;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);padding:6px 4px 4px}'
+           '.hxf .fc{box-shadow:none!important;border:0!important;margin:0!important;background:#fff!important}.hxk{display:inline-block;margin:14px 0 0 22px;background:#FFF1E4;color:#C4560F;font-size:13px;font-weight:800;padding:6px 12px;border-radius:999px}.hxk b{font-variant-numeric:tabular-nums}'
+           '.hxs{background:#0E3A60;color:#fff}.hxsw{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}'
+           '.hxs div{text-align:center;padding:22px 8px;border-left:1px solid rgba(255,255,255,.12)}.hxs div:first-child{border-left:0}'
+           '.hxs b{display:block;font-size:clamp(26px,3vw,40px);line-height:1.1;color:#FF9A45;font-weight:800}.hxs span{display:block;font-size:13.5px;color:#D5E2EE;margin-top:4px}'
+           '@media(max-width:900px){.hxw{grid-template-columns:1fr;gap:26px;padding:30px 16px 30px}.hxl{font-size:16px}.hxn{gap:8px}.hxn div{padding:11px 4px 10px}.hxn b{font-size:26px!important}.hxn span{font-size:12px}.hxc{font-size:13.5px;gap:6px 14px}'
+           '.hxsw{grid-template-columns:repeat(2,minmax(0,1fr))}.hxs div{border-left:0;border-top:1px solid rgba(255,255,255,.12);padding:14px 6px}.hxs div:last-child{grid-column:1/-1}.hxk{margin-left:16px}}</style>')
+    js = ('<script>(function(){var EV=[["2026-11-08T09:00:00+07:00","08/11"],["2026-11-15T08:00:00+07:00","15/11"],["2026-11-21T08:00:00+07:00","21/11"],["2026-11-28T08:00:00+07:00","28/11"]];'
+          'var k=document.getElementById("hxk");if(!k)return;function t(){var n=Date.now();for(var i=0;i<EV.length;i++){var d=Date.parse(EV[i][0])-n;if(d>0){var D=Math.floor(d/864e5),H=Math.floor(d/36e5)%24;'
+          'k.innerHTML="⏳ Sự kiện "+EV[i][1]+" · còn <b>"+(D?D+" ngày ":"")+H+" giờ</b>";return}}k.style.display="none"}t();setInterval(t,30000)})();</script>')
+    return (css + '<section class="hx" id="dau"><div class="hxw"><div>'
+            '<span class="hxe">Sun Group · Mặt biển Sơn Thủy, Đà Nẵng</span>'
+            '<h1>Căn hộ mặt biển Sun Group – chỉ <em>~450 triệu</em> đến khi nhận nhà</h1>'
+            '<p class="hxl">Sun Saphia Residence – căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng. Studio giá dự kiến <b>từ ~1,8 tỷ</b>, thanh toán <b>25%</b> đến khi nhận nhà, ngân hàng cho vay <b>70%</b> hỗ trợ lãi suất tới 24 tháng.</p>'
+            '<div class="hxn"><div><b>25%</b><span>vốn tự có đến khi nhận nhà</span></div><div><b>70%</b><span>vay ngân hàng, hỗ trợ lãi suất tới 24 tháng</span></div><div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div></div>'
+            '<ul class="hxc"><li>Sun Group phát triển</li><li>Công trình cấp I · niên hạn 100 năm</li><li>Sổ hồng lâu dài 50 năm</li><li>Sự kiện 9:00 CN 08/11 · Sun Gallery Tây Hồ View</li><li>Đại lý phân phối chính thức</li></ul>'
+            '<div class="hxa"><button type="button" data-film>▶ Xem phim dự án 3 phút</button><button type="button" data-4d>🏙 Xem mô hình 4D</button></div>'
+            '<p style="margin:14px 0 0;font-size:12px;color:#9FB8CC">Giá và chính sách dự kiến, theo thông tin chủ đầu tư công bố chính thức.</p></div>'
+            '<div class="hxf"><span class="hxk" id="hxk">⏳ Sự kiện 08/11 tại Hà Nội</span>'
+            + form('dau', 'ADS – form đầu trang', title='Nhận bảng giá &amp; giỏ căn view biển', note='Gửi qua Zalo trong 15 phút – không cần gặp mặt. Bảng tính từng đợt thanh toán đúng căn anh/chị chọn.', btn='NHẬN BẢNG GIÁ QUA ZALO →', h='h2') +
+            '</div></div></section>'
+            '<section class="hxs" aria-label="Số liệu dự án"><div class="hxsw"><div><b>30 tầng</b><span>cao 114 m</span></div><div><b>782</b><span>căn hộ</span></div>'
+            '<div><b>2,45 ha</b><span>công viên biển trước mặt</span></div><div><b>3,5 m</b><span>chiều cao tầng</span></div><div><b>1,8 tỷ</b><span>giá dự kiến từ (Studio)</span></div></div></section>' + js)
+
 def ads(domain, home_page=False):
     url = MAIN + '/ads'  # cả hai tên miền chuẩn hóa về trang ads chính
     HB = RAW + '90c9302fe8dca2fa597009660b9635821c7d1eb5/landing/sun-saphia/v4/img/hero-bien'
@@ -995,6 +1033,8 @@ def ads(domain, home_page=False):
        
         hero_perks(),)
     # Bố cục: hero 4D → sự kiện → tổng quan → vị trí → tiện ích → (360°, tầm view) → mặt bằng → loại căn → chính sách → quy hoạch → đầu tư → pháp lý → tầm nhìn
+    i = b.index('<div class="hcvt">'); b = b[:i] + '</section>' + b[b.index('</section>', i) + 10:]
+    b = hero_fx() + b
     b = b.replace('<section class="sec tq" id="tong-quan">', su_kien('ADS') + '<section class="sec tq" id="tong-quan">', 1)
     b += tldr('Sun Saphia Residence', [('Dự án', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, 30 tầng, 782 căn'), ('Loại căn', 'Studio 30 m² · 1BR+ 50 m² · 2BR 60–70 m²'),
         ('Công trình', 'Cấp I, niên hạn 100 năm · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Mở bán', 'Ra mắt 01/11/2026'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
@@ -1391,11 +1431,35 @@ FRESH = ('<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=
          '.ssl{text-align:center!important;text-align-last:center!important;margin:12px 0 10px;font-family:Fahkwang,serif;font-size:clamp(18px,2.3vw,26px);color:#0E6E99}.ssl i{font-family:"Great Vibes",cursive;font-style:normal;font-size:1.55em;color:#168FC2;margin-right:4px}.ssl span{color:#F4A45B;margin:0 6px}'
          'img[src*="logo"],img[alt*="logo" i],img[src*="favicon"],img[src*="mat-bang"],img[src*="layout"],img[src*="ban-ve"],img[src*="phap-ly"],img[src*="giay"]{filter:none!important}'
          '</style>')
+# Tông màu FourS (navy + cam + kem, tiêu đề Playfair) – đồng bộ với sun-fours-tower.com. Bộ "biển" cũ giữ ở PALETTE/FRESH để khôi phục khi cần.
+FOURS = {
+    '--cr2:#FFEDE2': '--cr2:#F6F1EC', '--pp:#F3F6FB': '--pp:#F6F1EC', '--nvd:#0B2447': '--nvd:#0B1A3A',
+    '--or:#E96118': '--or:#F07B1F', '--or2:#F2802F': '--or2:#FFA04A', '--yl:#FFAA01': '--yl:#FFB067',
+    '--nv:#275286': '--nv:#13285A', '--nv2:#1A3A66': '--nv2:#1F3F82', '--ink:#2B3650': '--ink:#1B2333',
+    '--mut:#5F6A80': '--mut:#5A6275', '--ln:#E3E9F2': '--ln:#E7DDD3',
+    '#E96118': '#F07B1F', '#F26B1D': '#F07B1F', '#F2802F': '#F47A1F', '#FF8A3D': '#FFA04A', '#E8460F': '#E0600A',
+    '#0B2447': '#0B1A3A', '#0A2540': '#0B1A3A', '#0B2545': '#0B1A3A', '#0A1F38': '#0B1A3A', '#275286': '#13285A',
+    '#24507F': '#13285A', '#1E4D8C': '#1F3F82', '#1A3A66': '#13285A', '#FFB347': '#FFB067', '#FFC24F': '#FFB067', '#FFAA01': '#FFB067',
+    '#0A2E4A': '#0B1A3A', '#0E3A60': '#13285A', '#FF9A45': '#FFA04A', '#FFB15C': '#FFB067',
+    'rgba(233,97,24': 'rgba(240,123,31', 'rgba(255,138,61': 'rgba(255,160,74', 'rgba(11,36,71': 'rgba(11,26,58', 'rgba(10,37,64': 'rgba(11,26,58',
+    'rgba(39,82,134': 'rgba(19,40,90', 'rgba(6,34,58': 'rgba(11,26,58', 'rgba(8,52,86': 'rgba(13,32,72', 'rgba(10,70,110': 'rgba(19,40,90',
+}
+FOURS_CSS = ('<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&amp;subset=vietnamese&amp;display=swap"><style id="ss-fours">'
+             'h1,h2,.dp,.sh h2,.fct,.hx h1{font-family:"Playfair Display",Georgia,serif!important;letter-spacing:0;font-variant-numeric:lining-nums}'
+             'h2.dp b,.sh h2 b,.dp b,.hx h1 em{font-style:italic;color:#F07B1F}'
+             '.hcv{background:#0B1A3A!important;padding-bottom:0!important}.hcv .cap{color:#9FB0CC}'
+             '.sec.alt,.tq{background:#F6F1EC!important}'
+             '.top{background:rgba(11,26,58,.97)!important;border-bottom:1px solid rgba(255,255,255,.08)!important}.top .mnav a{color:#fff!important;background:transparent!important}.top .mnav a:hover{background:rgba(255,255,255,.1)!important}'
+             '.top .mnav a[aria-current],.top .mnav.ptoc a.on{background:#F07B1F!important;color:#fff!important}.lgc span{color:#FFA04A!important}.lgc i{color:#FFB067!important}'
+             '.hxn b,.hxs b,.hnum b,.tqk b,.cdb b,.ccdb b{font-family:"Playfair Display",Georgia,serif!important;font-variant-numeric:lining-nums}'
+             'img[src*="logo"],img[src*="mat-bang"],img[src*="layout"],img[src*="phap-ly"],img[src*="giay"]{filter:none!important}'
+             '</style>')
+
 def palette(html):
-    for a, b in PALETTE.items():
+    for a, b in FOURS.items():
         html = re.sub(re.escape(a), b, html, flags=re.I)
-    if '</head>' in html and 'ss-fresh' not in html:
-        html = html.replace('</head>', FRESH + '</head>', 1)
+    if '</head>' in html and 'ss-fours' not in html:
+        html = html.replace('</head>', FOURS_CSS + '</head>', 1)
     return html
 
 if __name__ == '__main__':
