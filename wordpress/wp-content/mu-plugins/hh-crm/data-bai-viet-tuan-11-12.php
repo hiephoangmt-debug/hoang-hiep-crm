@@ -526,13 +526,14 @@ HTML
 	$posts[] = array(
 		'slug'     => 'sun-ponte-residence-gia-chuyen-nhuong-cho-thue',
 		'title'    => 'Sun Ponte Residence: giá chuyển nhượng, giá cho thuê và các loại căn 2026',
-		'excerpt'  => 'Sun Ponte Residence cạnh cầu Rồng: 495 căn hộ, 7 penthouse, 26 shophouse; chuyển nhượng khoảng 70 – 112 triệu/m², thuê 2PN khoảng 32 – 40 triệu/tháng (tham khảo 10/2026).',
+		'excerpt'  => 'Sun Ponte Residence cạnh cầu Rồng: 495 căn hộ, 7 penthouse, 26 shophouse; chuyển nhượng khoảng 70 – 112 triệu/m² (10/2026), cho thuê studio 11 – 17 triệu, 2PN 25 – 38 triệu/tháng (bảng giá thuê 11/2026).',
+		'rev'      => '2026-11-05', // Giá thuê theo bảng căn cho thuê 11/2026.
 		'keyword'  => 'Sun Ponte Residence',
 		'project'  => 'sun-ponte-residence',
 		'week'     => 12,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p><strong>Sun Ponte Residence</strong> là tòa tháp 26 tầng của Sun Group trên đường Trần Hưng Đạo (Sơn Trà), nằm giữa cầu Rồng và cầu Trần Thị Lý, mặt tiền sông Hàn. Căn hộ bắt đầu bàn giao từ tháng 3/2026, nên thị trường đã hình thành giá chuyển nhượng và giá thuê. Tham khảo tháng 10/2026: chuyển nhượng khoảng 70 – 112 triệu/m², căn 2PN cho thuê khoảng 32 – 40 triệu/tháng.</p>
+<p><strong>Sun Ponte Residence</strong> là tòa tháp 26 tầng của Sun Group trên đường Trần Hưng Đạo (Sơn Trà), nằm giữa cầu Rồng và cầu Trần Thị Lý, mặt tiền sông Hàn. Căn hộ bắt đầu bàn giao từ tháng 3/2026, nên thị trường đã hình thành giá chuyển nhượng và giá thuê. Giá chuyển nhượng tham khảo tháng 10/2026 khoảng 70 – 112 triệu/m²; giá thuê theo bảng căn cho thuê tháng 11/2026: studio 11 – 17 triệu, 2PN 25 – 38 triệu/tháng (full nội thất).</p>
 
 <h2>Thông tin nhanh Sun Ponte Residence</h2>
 <table>
@@ -571,14 +572,16 @@ HTML
 
 <h2>Giá cho thuê Sun Ponte Residence</h2>
 <table>
-<thead><tr><th>Loại căn</th><th>Giá thuê tham khảo/tháng</th></tr></thead>
+<thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá thuê tham khảo/tháng (11/2026)</th></tr></thead>
 <tbody>
-<tr><td>Studio</td><td>Khoảng 13 – 20 triệu</td></tr>
-<tr><td>1 phòng ngủ</td><td>Khoảng 20 – 30 triệu</td></tr>
-<tr><td>2 phòng ngủ</td><td>Khoảng 32 – 40 triệu</td></tr>
+<tr><td>Studio</td><td>26 – 30 m²</td><td>11 – 17 triệu</td></tr>
+<tr><td>1PN+</td><td>49 – 50 m²</td><td>18 – 27 triệu</td></tr>
+<tr><td>2 phòng ngủ</td><td>68 – 78 m²</td><td>25 – 38 triệu</td></tr>
+<tr><td>2 phòng ngủ (căn lớn)</td><td>91 m²</td><td>45 – 50 triệu</td></tr>
+<tr><td>3 phòng ngủ</td><td>91 m²</td><td>Khoảng 48 triệu</td></tr>
 </tbody>
 </table>
-<p>Trong nhóm căn hộ ven sông Hàn, Sun Ponte có giá thuê 2PN được rao cao nhất nhờ vị trí sát cầu Rồng, gần các điểm du lịch. Đây là giá rao, chưa phải lợi suất bảo đảm.</p>
+<p>Theo bảng căn cho thuê tháng 11/2026 (khoảng 40 căn): tất cả bàn giao full nội thất, không nuôi thú cưng, thuê tối thiểu 3 tháng (một số studio nhận thuê từ 1 tháng); khoảng 1/3 số căn trong bảng đã có khách thuê. Căn 3PN 102 m² và căn Dual 105 m² liên hệ giá. Giá thay đổi theo tầng, view và thời điểm – đây là giá chào thuê, chưa phải lợi suất bảo đảm.</p>
 
 <h2>Phân khu The Rio</h2>
 <p><a href="/du-an/the-rio-sun-ponte/">The Rio</a> là phân khu thấp tầng giới hạn của Sun Ponte, ra mắt tháng 7/2025, gồm 41 nhà phố 6,5 tầng và 16 biệt thự đơn lập, song lập do Aedas thiết kế, dùng chung tiện ích với tòa tháp. Giá The Rio giao dịch theo từng căn – liên hệ để nhận thông tin.</p>
@@ -598,15 +601,15 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Sun Ponte Residence: giá chuyển nhượng, cho thuê 2026',
-			'desc'      => 'Sun Ponte Residence cạnh cầu Rồng: 495 căn hộ, chuyển nhượng 70 – 112 triệu/m², thuê 2PN 32 – 40 triệu/tháng (tham khảo 10/2026). Gọi Hoàng Hiệp.',
+			'desc'      => 'Sun Ponte Residence cạnh cầu Rồng: 495 căn hộ, chuyển nhượng 70 – 112 triệu/m², thuê studio 11 – 17 triệu, 2PN 25 – 38 triệu/tháng (11/2026). Gọi Hoàng Hiệp.',
 			'points'    => array(
 				'Tòa 26 tầng, 495 căn hộ, 7 penthouse, 26 shophouse; bàn giao từ 3/2026',
 				'Chuyển nhượng: studio/1PN 2,96 – 4,49 tỷ, 2PN 4,3 – 6,9 tỷ (tham khảo)',
-				'Cho thuê 2PN khoảng 32 – 40 triệu/tháng, cao nhất nhóm ven sông Hàn',
+				'Cho thuê full nội thất (11/2026): studio 11 – 17 triệu, 1PN+ 18 – 27 triệu, 2PN 25 – 38 triệu/tháng',
 			),
 			'faq'       => array(
 				array( 'Giá chuyển nhượng Sun Ponte Residence bao nhiêu?', 'Tham khảo tháng 10/2026: studio/1PN khoảng 2,96 – 4,49 tỷ, 1PN+ 3,6 – 4,9 tỷ, 2PN 4,3 – 6,9 tỷ, 3PN 5,6 – 10 tỷ.' ),
-				array( 'Thuê căn hộ Sun Ponte giá bao nhiêu?', 'Studio khoảng 13 – 20 triệu/tháng, 1PN 20 – 30 triệu, 2PN 32 – 40 triệu theo tin rao.' ),
+				array( 'Thuê căn hộ Sun Ponte giá bao nhiêu?', 'Theo bảng căn cho thuê tháng 11/2026 (full nội thất): studio 11 – 17 triệu/tháng, 1PN+ 18 – 27 triệu, 2PN 68 – 78 m² 25 – 38 triệu, 2PN 91 m² 45 – 50 triệu, 3PN 91 m² khoảng 48 triệu.' ),
 				array( 'Sun Ponte Residence đã bàn giao chưa?', 'Căn hộ bắt đầu bàn giao từ tháng 3/2026, hoàn tất dự kiến quý 3/2026 theo kế hoạch công bố.' ),
 				array( 'The Rio thuộc dự án nào?', 'The Rio là phân khu thấp tầng của Sun Ponte Residence, gồm 41 nhà phố và 16 biệt thự cạnh cầu Rồng.' ),
 			),

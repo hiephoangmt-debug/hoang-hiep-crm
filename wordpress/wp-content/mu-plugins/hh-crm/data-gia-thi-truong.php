@@ -31,7 +31,7 @@ function hh_dataset_gia_thi_truong( $projects ) {
 		),
 		'sun-ponte-residence'     => array(
 			'resale'  => 'Studio/1PN khoảng 2,96 – 4,49 tỷ; 1PN+ khoảng 3,6 – 4,9 tỷ; 2PN khoảng 4,3 – 6,9 tỷ; 3PN khoảng 5,6 – 10 tỷ (≈ 70 – 112 triệu/m²)',
-			'rent'    => 'Studio khoảng 13 – 20 triệu/tháng; 1PN khoảng 20 – 30 triệu/tháng; 2PN khoảng 32 – 40 triệu/tháng',
+			'rent'    => 'Studio 11 – 17 triệu/tháng; 1PN+ 18 – 27 triệu/tháng; 2PN 25 – 38 triệu/tháng (căn 91 m² 45 – 50 triệu); 3PN khoảng 48 triệu/tháng – bảng giá cho thuê 11/2026, full nội thất',
 			'sources' => array(
 				'https://batdongsan.com.vn/ban-can-ho-chung-cu-sun-ponte-residence-da-nang',
 				'https://thuviennhadat.vn/bat-dong-san/gia-ban-sun-ponte-residence-da-nang-gia-can-ho-chung-cu-thang-7-2025-20625.html',

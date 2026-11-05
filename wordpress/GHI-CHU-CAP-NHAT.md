@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.59** + plugin Hoàng Hiệp CRM **2.20.144**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.59** + plugin Hoàng Hiệp CRM **2.20.145**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.145 (05/11/2026)
+
+- **Sun Ponte – giá thuê 11/2026** trong bài "Sun Ponte Residence: giá chuyển nhượng, giá cho thuê…" (tóm tắt, bảng giá thuê theo diện tích, mô tả SEO, hỏi đáp) và bảng giá thị trường: studio 11 – 17 triệu, 1PN+ 18 – 27 triệu, 2PN 25 – 38 triệu (91 m² 45 – 50 triệu), 3PN khoảng 48 triệu/tháng. Bài tự cập nhật khi bấm Nhập / cập nhật dữ liệu.
+- Gói cập nhật từ bản này là **gói nhẹ (~3 MB)** – chỉ code + ảnh mới; ảnh đã có trên web giữ nguyên.
 
 ## Có gì mới – plugin 2.20.144 · giao diện 2.15.59 (05/11/2026)
 
