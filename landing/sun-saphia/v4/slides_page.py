@@ -169,4 +169,4 @@ def dao_tao(head, header, tail, FAV, OG, LOGO):
              '<span style="font-size:13px;color:#557585">Layout tầng, layout căn, phim dự án, slide đào tạo, KV brand</span></p>'
              '<script>(function(){var a=document.getElementById("spDrive");if(a)a.href=atob("' + __import__('base64').b64encode(b'https://drive.google.com/drive/folders/1sMzOCcPfnrBO7X6M0hAA0HjKcHD5y8_c').decode() + '")})();</script></div>'
              + viewer(slides, 'dao-tao', notes=True) + D4 + '</section></main>\n' + tail(True) + GATE_JS + '</body>\n</html>\n')
-    return html.replace('>Nhận bảng giá</a></div></header>', '>Zalo anh Hiệp</a></div></header>')
+    return html.replace('>Nhận bảng giá</a></div></header>', '>Nhắn Zalo</a></div></header>')

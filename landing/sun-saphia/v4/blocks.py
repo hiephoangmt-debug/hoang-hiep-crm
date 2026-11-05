@@ -282,23 +282,41 @@ def related(cur):
     it = [x for x in it if x[0] != cur][:4]
     return '<div class="rel">' + ''.join('<a href="%s%s">%s<span>%s</span></a>' % (MAIN, p, t, d) for p, t, d in it) + '</div>'
 
-def cta_block(label, title='Giữ suất <b>ưu tiên chọn căn</b> trước ngày ra mắt', sub='Căn view biển tầng cao thường được chọn hết ngay trong buổi ra mắt 01/11. Để lại số Zalo, anh/chị có đủ thông tin để chọn căn trước, không phải chen ở hội trường.'):
+def more_pages():
+    """Cuối trang chủ: thẻ dẫn sang từng trang con (giống trang FourS)."""
+    it = [('/bang-gia', '💰', 'Bảng giá', 'Giá dự kiến từng loại căn, so sánh căn hộ mặt biển, vay 70%'),
+          ('/mat-bang', '📐', 'Mặt bằng & chọn căn', 'Layout tầng, Studio, 1BR+, 2BR, concept nội thất'),
+          ('/phap-ly', '⚖️', 'Pháp lý & tiến độ', 'GCN đầu tư, sổ hồng 50 năm, mốc thi công – bàn giao'),
+          ('/quy-hoach', '🏞️', 'Quy hoạch xung quanh', 'Công viên 2,45 ha, trục biển, đường sắt, Ngũ Hành Sơn'),
+          ('/cho-thue', '🔑', 'Cho thuê', 'Giá thuê theo đêm, lấp đầy, nhóm khách thuê'),
+          ('/tinh-dong-tien', '🧮', 'Bảng tính dòng tiền', 'Tự tính vốn bỏ ra và tiền thuê thu về theo căn')]
+    cards = ''.join('<a class="mpc" href="%s%s"><span class="mpi">%s</span><b>%s →</b><span>%s</span></a>' % (MAIN, p, ic, t, d) for p, ic, t, d in it)
+    return ('<section class="sec alt" id="tim-hieu-them"><div class="wrap">'
+            '<style>#tim-hieu-them .mpg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}'
+            '#tim-hieu-them .mpc{display:flex;flex-direction:column;gap:6px;padding:18px 20px;background:#fff;border:1px solid #D3EAF2;border-radius:16px;text-decoration:none;color:#16485F;box-shadow:0 8px 22px -18px rgba(14,110,153,.55);transition:transform .15s,border-color .15s}'
+            '#tim-hieu-them .mpc:hover{transform:translateY(-2px);border-color:#F4A45B}#tim-hieu-them .mpi{font-size:26px;line-height:1}'
+            '#tim-hieu-them .mpc b{font-size:17px;color:#0E6E99}#tim-hieu-them .mpc span:last-child{font-size:14px;color:#557585;line-height:1.5}'
+            '@media(max-width:760px){#tim-hieu-them .mpg{grid-template-columns:1fr 1fr}}@media(max-width:420px){#tim-hieu-them .mpg{grid-template-columns:1fr}}</style>'
+            '<span class="ey">Tìm hiểu thêm</span><h2 class="dp" style="margin:6px 0 0">Xem chi tiết <b>từng hạng mục</b></h2>'
+            '<div class="mpg">' + cards + '</div></div></section>')
+
+def cta_block(label, title='Để lại số – <b>nhận đủ thông tin</b> trong 15 phút', sub='Căn view biển tầng cao luôn được chọn trước. Để lại số Zalo, anh/chị nhận bảng giá, căn còn trống và bảng tính dòng tiền đúng căn mình quan tâm – chọn trước, không phải chờ tới ngày sự kiện.'):
     gets = ['Bảng giá gốc từng căn ngay khi chủ đầu tư công bố',
             'Lịch thanh toán 25%% – vay 70%% hỗ trợ lãi suất tới 24 tháng',
             'Danh sách căn view biển còn trống + mặt bằng từng tầng',
-            'Thư mời sự kiện 01/11 tại Hilton + phiếu bốc thăm quà',
+            'Thư mời sự kiện 08/11 tại Sun Gallery Tây Hồ View + bốc thăm quà',
             'Bảng tính cho thuê dài hạn / ngắn hạn theo căn']
     return ('<section class="sec" id="dang-ky"><div class="wrap"><div class="cta ctx">%s<div class="g2"><div>'
-            '<span class="ey" style="color:#F2802F">🔥 Ưu tiên cho người đăng ký sớm</span><h2 class="dp">%s</h2>'
+            '<span class="ey" style="color:#F2802F">🔥 Ưu tiên cho người đến sớm</span><h2 class="dp">%s</h2>'
             '<p style="margin-top:12px">%s</p>'
-            '<div class="ccd"><span class="ccdt">⏳ Còn lại tới sự kiện ra mắt 01/11</span><div class="ccdb"><div><b data-c="d">--</b><small>ngày</small></div><div><b data-c="h">--</b><small>giờ</small></div><div><b data-c="m">--</b><small>phút</small></div><div><b data-c="s">--</b><small>giây</small></div></div></div>'
+            '<div class="ccd"><span class="ccdt">⏳ Còn lại tới sự kiện 08/11 tại Hà Nội</span><div class="ccdb"><div><b data-c="d">--</b><small>ngày</small></div><div><b data-c="h">--</b><small>giờ</small></div><div><b data-c="m">--</b><small>phút</small></div><div><b data-c="s">--</b><small>giây</small></div></div></div>'
             '<p class="cgt">Anh/chị nhận ngay qua Zalo – <b>miễn phí</b>:</p><ul class="ck cget">' + ''.join('<li>' + g + '</li>' for g in gets) + '</ul>'
             '<div class="cta2"><a class="btn zl" href="%s" target="_blank" rel="noopener"><span class="hm">Nhắn&nbsp;</span>Zalo %s</a><a class="btn call" href="tel:%s">Gọi ngay</a></div>'
-            '<div class="trust"><div><b>Đại lý chính thức</b><span>Sun Property chứng nhận 23/10/2026</span></div><div><b>0 đồng</b><span>Đăng ký không thu bất kỳ khoản nào</span></div><div><b>Bảo mật số</b><span>Chỉ anh Hiệp liên hệ, không chia sẻ</span></div></div>'
+            '<div class="trust"><div><b>Đại lý chính thức</b><span>Sun Property chứng nhận 23/10/2026</span></div><div><b>0 đồng</b><span>Đăng ký không thu bất kỳ khoản nào</span></div><div><b>Bảo mật số</b><span>Chỉ chuyên viên tư vấn liên hệ, không chia sẻ</span></div></div>'
             '</div>%s</div></div></div>'
-            '<script>(function(){var T=Date.parse("2026-11-01T09:00:00+07:00");function z(n){return(n<10?"0":"")+n}function t(){var d=Math.max(0,T-Date.now())/1e3;document.querySelectorAll(".ccd").forEach(function(e){var u={d:Math.floor(d/86400),h:Math.floor(d%%86400/3600),m:Math.floor(d%%3600/60),s:Math.floor(d%%60)};for(var k in u){var b=e.querySelector("[data-c="+k+"]");if(b)b.textContent=k=="d"?u[k]:z(u[k])}if(d<=0){var x=e.querySelector(".ccdt");if(x)x.textContent="🎉 Đã ra mắt – căn đẹp đang được chọn dần";e.querySelector(".ccdb").style.display="none"}})}t();setInterval(t,1000)})();</script>'
+            '<script>(function(){var T=Date.parse("2026-11-08T09:00:00+07:00");if(Date.now()>T){document.querySelectorAll(".ccd").forEach(function(e){e.style.display="none"});return}function z(n){return(n<10?"0":"")+n}function t(){var d=Math.max(0,T-Date.now())/1e3;document.querySelectorAll(".ccd").forEach(function(e){var u={d:Math.floor(d/86400),h:Math.floor(d%%86400/3600),m:Math.floor(d%%3600/60),s:Math.floor(d%%60)};for(var k in u){var b=e.querySelector("[data-c="+k+"]");if(b)b.textContent=k=="d"?u[k]:z(u[k])}if(d<=0){var x=e.querySelector(".ccdt");if(x)x.textContent="🎉 Đã ra mắt – căn đẹp đang được chọn dần";e.querySelector(".ccdb").style.display="none"}})}t();setInterval(t,1000)})();</script>'
             '</section>') % (
-        tiles('tr'), title, sub, ZALO, TEL_S, TEL, form('cuoi', label, title='Nhận bảng giá &amp; giữ suất ưu tiên', note='Chỉ cần số Zalo – anh Hiệp gửi tài liệu trong ít phút. Miễn phí, không ràng buộc.', btn='Giữ suất ưu tiên ngay'))
+        tiles('tr'), title, sub, ZALO, TEL_S, TEL, form('cuoi', label, title='Nhận bảng giá &amp; giữ suất ưu tiên', note='Chỉ cần số Zalo – chuyên viên gửi tài liệu trong ít phút. Miễn phí, không ràng buộc.', btn='Giữ suất ưu tiên ngay'))
 
 def hero_stats():
     return ('<div class="stats"><div><b>30 tầng</b><span>114 m · 2 hầm</span></div><div><b>782 căn</b><span>Studio · 1BR+ · 2BR</span></div>'
@@ -331,7 +349,7 @@ def popup():
             'function ev(el){var t=el&&el.getAttribute("data-ev-t"),h=p.querySelector("#lp-t"),e=p.querySelector(".lpc .ey"),l=p.querySelector(".lpc .ck"),bt=f.querySelector("button");'
             'if(!t){h.innerHTML=T0;e.innerHTML=E0;l.innerHTML=L0;bt.textContent=B0;return}function x(s){return String(s||"").replace(/[<>&]/g,"")}'
             'e.innerHTML="📅 Đăng ký tham dự sự kiện";h.innerHTML=x(t)+" <b>"+x(el.getAttribute("data-ev-d"))+"</b>";'
-            'l.innerHTML="<li>"+x(el.getAttribute("data-ev-n"))+"</li><li>Anh Hiệp gửi thư mời, giờ và địa điểm chính xác qua Zalo</li><li>Giữ chỗ ngồi &amp; tư vấn chọn căn tại sự kiện – miễn phí</li>";bt.textContent="Đăng ký tham dự"}'
+            'l.innerHTML="<li>"+x(el.getAttribute("data-ev-n"))+"</li><li>Chuyên viên gửi thư mời, giờ và địa điểm chính xác qua Zalo</li><li>Giữ chỗ ngồi &amp; tư vấn chọn căn tại sự kiện – miễn phí</li>";bt.textContent="Đăng ký tham dự"}'
             'function op(it,el){ev(el);f.setAttribute("data-form",base+(it?" – "+it:""));p.hidden=false;document.body.classList.add("lp-on");shown=true;'
             'setTimeout(function(){var i=f.querySelector("[name=phone]");if(i&&innerWidth>760)i.focus();},80);}'
             'function cl(){p.hidden=true;document.body.classList.remove("lp-on");}'
