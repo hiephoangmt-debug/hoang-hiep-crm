@@ -439,15 +439,17 @@ HTML
 		'schedule' => '2026-11-06 09:30',
 		'category' => 'Dự án',
 		'tags'     => array( 'Hoiana', 'Biệt thự biển', 'Hội An' ),
-		'image'    => 'plugin:img/tin-tuc/hoiana-beach-villas-7-dong-biet-thu.jpg',
-		'image_alt' => 'Hoiana Beach Villas – 7 dòng biệt thự, số phòng ngủ, diện tích đất và số căn',
+		'image_drive' => '1WFS7kd0OZyRm7Tal2kgj2mjQirYoHrr6', // Ảnh bìa: phối cảnh Marina Villa (ảnh dự án đã tải về web).
+		'image'    => 'plugin:img/tin-tuc/hoiana-beach-villas-7-dong-biet-thu.jpg', // Dự phòng khi web chưa có ảnh dự án.
+		'image_alt' => 'Phối cảnh Marina Villa – biệt thự 4 phòng ngủ trực diện biển, Hoiana Beach Villas',
+		'image_caption' => 'Phối cảnh Marina Villa (loại F), Hoiana Beach Villas – ảnh chủ đầu tư',
 		'content'  => <<<HTML
 <p>{$hbv} là phân khu biệt thự biển của quần thể <a href="/du-an/hoiana-resort-golf/">Hoiana Resort &amp; Golf</a> tại Nam Hội An (Duy Xuyên, Quảng Nam cũ – nay thuộc TP. Đà Nẵng), cách phố cổ Hội An khoảng 15 phút. Phân khu gồm <strong>198 biệt thự 3 – 9 phòng ngủ</strong>, mỗi căn có hồ bơi riêng, garage riêng và bàn giao đầy đủ nội thất. Bài viết tổng hợp từ tài liệu thông tin dự án của chủ đầu tư (05/2026).</p>
 <!--hh-featured-->
 <h2>Chủ đầu tư và quần thể Hoiana</h2>
 <p>Chủ đầu tư là <strong>Công ty TNHH Phát triển Nam Hội An (HASD)</strong>, thành lập năm 2010, 100% vốn nước ngoài, trong đó 75% cổ phần thuộc VMS Group (Hồng Kông); New World Development (Hồng Kông) là đối tác tham gia phát triển. Hoiana là khu nghỉ dưỡng tích hợp tổng vốn khoảng <strong>4 tỷ USD</strong> (đã giải ngân khoảng 1,4 tỷ USD), trải trên gần 1.000 ha với <strong>4 km bờ biển</strong>.</p>
 <p>Tiện ích đã vận hành trong quần thể: hơn 1.200 phòng khách sạn, hơn 25 nhà hàng và beach club, 5 spa, 3 hồ bơi lớn, 8 sân pickleball, sân golf Hoiana Shores 18 hố (7.004 yards, par 71, clubhouse 6.000 m²) do Robert Trent Jones Jr. thiết kế, trung tâm giải trí (KTV, bowling, bi-a, golf giả lập, khu trẻ em) mở từ 02/2026.</p>
-<!--hh-dimg:1WFS7kd0OZyRm7Tal2kgj2mjQirYoHrr6|Phối cảnh Marina Villa (loại F) – biệt thự 4 phòng ngủ trực diện biển (ảnh chủ đầu tư)-->
+<!--hh-dimg:1hHYHOYbTciyVJ5pcJYsK6mUAVXdN5dOE|Phối cảnh Marina Villa (loại F) – biệt thự 4 phòng ngủ trực diện biển (ảnh chủ đầu tư)-->
 <h2>7 dòng biệt thự Hoiana Beach Villas</h2>
 <table>
 <thead><tr><th>Dòng biệt thự</th><th>Phòng ngủ</th><th>Đất (m²)</th><th>Sàn (m²)</th><th>Vườn mở rộng (m²)</th><th>Số căn</th></tr></thead>

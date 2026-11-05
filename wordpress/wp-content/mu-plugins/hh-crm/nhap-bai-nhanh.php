@@ -100,6 +100,13 @@ function hh_quick_post_create( $n ) {
 	if ( is_wp_error( $id ) ) {
 		return $id;
 	}
+	// 'image_drive': ảnh bìa là ảnh dự án đã tải về Thư viện (mã file Google Drive) – không có thì dùng 'image'.
+	if ( ! empty( $n['image_drive'] ) && ! has_post_thumbnail( $id ) && function_exists( 'hh_drive_attachment_id' ) ) {
+		$att = hh_drive_attachment_id( (string) $n['image_drive'] );
+		if ( $att ) {
+			set_post_thumbnail( $id, $att );
+		}
+	}
 	if ( ! empty( $n['image'] ) && ! has_post_thumbnail( $id ) ) {
 		hh_quick_post_image( $id, (array) $n['image'] );
 	}
