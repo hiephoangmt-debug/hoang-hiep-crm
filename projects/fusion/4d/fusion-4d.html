@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Fusion Resort &amp; Villas 4D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap">
+<style>
+/* Mô hình 4D Fusion Resort & Villas Đà Nẵng: 85 biệt thự đặt theo mặt bằng tổng thể chủ đầu tư, tô màu theo loại, không ghi mã căn. */
+:root{--navy:#0A2540;--console:rgba(9,30,52,.88);--ink:#F3F6FA;--muted:#A9BCD0;--accent:#C9A15B;--line:rgba(255,255,255,.16);--chip:rgba(255,255,255,.08);
+  --font:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color-scheme:dark}
+html,body{height:100%}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--font);overflow:hidden;-webkit-font-smoothing:antialiased}
+#app{position:fixed;inset:0}
+#app canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+.top{position:fixed;top:0;left:0;right:0;z-index:5;pointer-events:none;padding:calc(12px + env(safe-area-inset-top,0px)) 16px 28px;
+  display:flex;justify-content:space-between;align-items:flex-start;gap:12px;background:linear-gradient(rgba(6,20,36,.75),rgba(6,20,36,0))}
+.brand small{display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.brand h1{margin:2px 0 4px;font-size:22px;font-weight:800}
+.brand h1 span{color:var(--accent)}
+.brand p{margin:0;font-size:13px;color:var(--muted)}
+.contact{pointer-events:auto;text-align:right;font-size:12px;color:var(--muted)}
+.contact b{display:block;font-size:17px;color:var(--ink);font-variant-numeric:tabular-nums}
+.contact a{color:var(--accent);font-weight:600;text-decoration:none}
+.console{position:fixed;left:0;right:0;bottom:0;z-index:5;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
+  background:var(--console);border-top:1px solid var(--line);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.row+.row{margin-top:8px}
+.chip{font:600 12.5px var(--font);color:var(--ink);background:var(--chip);border:1px solid var(--line);border-radius:20px;padding:7px 12px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.chip i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#0A2540}
+.chip.off{opacity:.38}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.note{font-size:11.5px;color:var(--muted);margin:8px 0 0}
+.labels{position:fixed;inset:0;pointer-events:none;z-index:3;overflow:hidden}
+.lb{position:absolute;transform:translate(-50%,-100%);font-size:12px;font-weight:600;white-space:nowrap;color:#fff;background:rgba(9,30,52,.74);
+  border:1px solid rgba(255,255,255,.18);padding:3px 8px;border-radius:12px}
+.lb.sea{background:transparent;border:0;font-size:20px;font-weight:800;letter-spacing:3px;color:#e9f6ff;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.card{position:fixed;z-index:6;left:16px;top:calc(90px + env(safe-area-inset-top,0px));width:min(300px,calc(100% - 32px));background:var(--console);
+  border:1px solid var(--line);border-radius:14px;padding:14px 16px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.card[hidden]{display:none}
+.card h2{margin:0 0 2px;font-size:17px}
+.card .tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:10px;color:#0A2540;margin-bottom:8px}
+.card dl{margin:6px 0 10px;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px}
+.card dt{color:var(--muted)}
+.card dd{margin:0}
+.card p{font-size:12px;color:var(--muted);margin:0 0 10px}
+.card .x{position:absolute;right:8px;top:6px;background:none;border:0;color:var(--muted);font-size:22px;cursor:pointer}
+.card a.btn{display:block;text-align:center;background:var(--accent);color:#0A2540;font-weight:800;text-decoration:none;padding:9px;border-radius:10px;font-size:14px}
+.err{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:15px;color:var(--muted)}
+@media (max-width:760px){.note{display:none}.brand h1{font-size:18px}.brand p{display:none}.contact b{font-size:15px}.lb{font-size:11px}.chip{font-size:11.5px;padding:6px 10px}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="labels" id="labels"></div>
+<header class="top">
+  <div class="brand">
+    <small>Mô hình 4D · Đà Nẵng</small>
+    <h1>Fusion Resort <span>&amp;</span> Villas</h1>
+    <p>85 biệt thự trên 15,75 ha · bấm vào biệt thự để xem loại và diện tích</p>
+  </div>
+  <div class="contact">Hoàng Hiệp · Zalo<b>0904 567 009</b><a href="https://zalo.me/0904567009" target="_blank" rel="noopener">Nhắn Zalo hỏi căn →</a></div>
+</header>
+<aside class="card" id="card" hidden>
+  <button class="x" type="button" aria-label="Đóng">&times;</button>
+  <span class="tag" id="cTag"></span>
+  <h2 id="cName"></h2>
+  <dl id="cDl"></dl>
+  <p id="cNote"></p>
+  <a class="btn" id="cBtn" href="https://zalo.me/0904567009" target="_blank" rel="noopener">Hỏi giá loại căn này qua Zalo</a>
+</aside>
+<nav class="console">
+  <div class="row" id="types"></div>
+  <div class="row">
+    <button class="chip" type="button" data-view="tong" aria-pressed="true">Toàn khu</button>
+    <button class="chip" type="button" data-view="bien">Nhìn từ biển</button>
+    <button class="chip" type="button" data-view="tren">Từ trên cao</button>
+    <button class="chip" type="button" id="real" aria-pressed="false">Màu mái thực tế</button>
+    <button class="chip" type="button" id="spin" aria-pressed="false">Tự xoay</button>
+  </div>
+  <p class="note">Dựng lại theo mặt bằng tổng thể của chủ đầu tư để minh họa vị trí – không theo tỷ lệ chính xác. Giá, căn còn trống: liên hệ 0904 567 009.</p>
+</nav>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+'use strict';
+if(!window.THREE){document.body.insertAdjacentHTML('beforeend','<div class="err">Không tải được mô hình. Vui lòng tải lại trang hoặc nhắn Zalo 0904 567 009.</div>');return;}
+
+/* ---------- Loại biệt thự (theo bảng của chủ đầu tư) ---------- */
+var T={
+  pres:{name:'Presidential Villa',pn:'6 phòng ngủ',col:'#6bbf3a',land:'Khoảng 1.718 m²',villa:'Khoảng 1.236 m²',n:'1 căn',note:'Căn lớn nhất, sát bãi biển.'},
+  b5:{name:'Beach Front Villa',pn:'5 phòng ngủ',col:'#2f5fd0',land:'850 – 950 m²',villa:'Khoảng 725 m²',n:'9 căn',note:'Hàng sát bãi cát, nhìn thẳng ra biển.'},
+  p5:{name:'Premier Villa',pn:'5 phòng ngủ',col:'#2f5fd0',land:'641 – 767 m²',villa:'487 – 541 m²',n:'Premier: 14 căn',note:'Dãy Premier giữa khu, gần hồ bơi chính.'},
+  p4:{name:'Premier Villa',pn:'4 phòng ngủ',col:'#f2a03d',land:'641 – 767 m²',villa:'487 – 541 m²',n:'Premier: 14 căn',note:'Dãy Premier giữa khu, gần hồ bơi chính.'},
+  p3:{name:'Premier Villa',pn:'3 phòng ngủ',col:'#d9a514',land:'641 – 767 m²',villa:'487 – 541 m²',n:'Premier: 14 căn',note:'Căn cuối dãy Premier.'},
+  bg4:{name:'Beach Garden Villa',pn:'4 phòng ngủ',col:'#9b4fc0',land:'750 – 902 m²',villa:'Khoảng 463 m²',n:'11 căn',note:'Xếp chéo, sân vườn rộng. Chủ đầu tư còn 1 căn 4 phòng ngủ.'},
+  bg3:{name:'Beach Garden Villa',pn:'3 phòng ngủ',col:'#d9a514',land:'750 – 902 m²',villa:'Khoảng 463 m²',n:'11 căn',note:'Xếp chéo, sân vườn rộng.'},
+  gt:{name:'Garden Terrace Villa',pn:'2 phòng ngủ',col:'#f3d43a',land:'418 – 513 m²',villa:'302 – 384 m²',n:'40 căn',note:'Hai cụm vườn yên tĩnh phía trong.'},
+  gf:{name:'Garden Front Villa',pn:'1 phòng ngủ',col:'#c4501f',land:'370 – 535 m²',villa:'Khoảng 210 m²',n:'10 căn',note:'Đầu các dãy Garden.'}
+};
+var GROUPS=[['pres','Presidential 6PN',['pres']],['b5','Beach Front 5PN',['b5']],['p4','Premier 3–5PN',['p5','p4','p3']],['bg4','Beach Garden 3–4PN',['bg4','bg3']],['gt','Garden Terrace 2PN',['gt']],['gf','Garden Front 1PN',['gf']]];
+
+/* ---------- Toạ độ theo mặt bằng chủ đầu tư (ảnh 2000×1125) → mét ---------- */
+var K=0.4, CX=1080, CY=645;
+function X(x){return (x-CX)*K} function Z(y){return (y-CY)*K}
+var V=[]; // {x0,y0,x1,y1,t,rot}
+function villa(x0,y0,x1,y1,t){V.push({x0:x0,y0:y0,x1:x1,y1:y1,t:t})}
+function row(x0,x1,y0,y1,n,t,gap){gap=gap||4;var w=(x1-x0-gap*(n-1))/n;for(var i=0;i<n;i++){var a=x0+i*(w+gap);villa(a,y0,a+w,y1,t)}}
+function col(x0,x1,y0,y1,ts,gap){gap=gap||5;var n=ts.length,h=(y1-y0-gap*(n-1))/n;ts.forEach(function(t,i){var a=y0+i*(h+gap);villa(x0,a,x1,a+h,t)})}
+function diag(cx,cy,s,t){V.push({x0:cx-s*.72,y0:cy-s*.72,x1:cx+s*.72,y1:cy+s*.72,t:t,rot:Math.PI/4})}
+// Cụm trên
+villa(783,258,822,318,'gf');villa(828,258,867,318,'gf');row(875,1290,256,330,10,'gt');villa(1295,318,1345,352,'gt');
+villa(738,318,790,352,'gf');villa(738,356,790,390,'gf');villa(790,392,830,442,'gf');row(836,1252,376,442,10,'gt');
+for(var i=0;i<6;i++)diag(1010+i*62,520,33,i<5?'bg4':'bg3');
+col(1388,1498,262,562,['p4','p4','p4','p4','p4','p4','p3']);
+villa(1555,258,1650,352,'pres');col(1522,1640,362,562,['b5','b5','b5','b5']);
+// Cụm dưới
+for(i=0;i<5;i++)diag(1012+i*62,760,33,i<4?'bg4':'bg3');
+col(1330,1448,728,1032,['p5','p4','p4','p4','p4','p4','p3']);
+col(1475,1592,795,1032,['b5','b5','b5','b5','b5']);
+villa(790,840,830,896,'gf');row(836,1212,840,906,9,'gt');villa(738,904,790,938,'gf');villa(738,942,790,976,'gf');
+villa(785,976,824,1032,'gf');villa(830,976,869,1032,'gf');row(876,1235,958,1032,9,'gt');villa(1240,940,1292,976,'gt');
+
+/* ---------- Cảnh ---------- */
+var app=document.getElementById('app');
+var R=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});
+R.setPixelRatio(Math.min(window.devicePixelRatio||1,2));R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;
+app.appendChild(R.domElement);
+var S=new THREE.Scene();S.background=new THREE.Color('#bcd9ea');S.fog=new THREE.Fog('#bcd9ea',700,1500);
+var cam=new THREE.PerspectiveCamera(42,1,1,4000);
+var ctl=new THREE.OrbitControls(cam,R.domElement);ctl.enableDamping=true;ctl.maxPolarAngle=Math.PI*.47;ctl.minDistance=40;ctl.maxDistance=900;ctl.target.set(10,0,0);
+S.add(new THREE.HemisphereLight('#ffffff','#6f8060',.6));
+var sun=new THREE.DirectionalLight('#fff4e0',.7);sun.position.set(220,320,-160);sun.castShadow=true;
+sun.shadow.mapSize.set(2048,2048);var sc=sun.shadow.camera;sc.left=-300;sc.right=300;sc.top=300;sc.bottom=-300;sc.far=900;S.add(sun);
+
+function mat(c,o){return new THREE.MeshLambertMaterial(Object.assign({color:c},o||{}))}
+function flat(pts,y,c){ // đa giác phẳng theo toạ độ mặt bằng
+  var sh=new THREE.Shape();pts.forEach(function(p,i){i?sh.lineTo(X(p[0]),Z(p[1])):sh.moveTo(X(p[0]),Z(p[1]))});
+  var g=new THREE.ShapeGeometry(sh);g.rotateX(Math.PI/2);var m=new THREE.Mesh(g,mat(c,{side:THREE.DoubleSide}));m.position.y=y;m.receiveShadow=true;S.add(m);return m}
+function box(x0,y0,x1,y1,h,c,y){var g=new THREE.BoxGeometry(Math.abs(X(x1)-X(x0)),h,Math.abs(Z(y1)-Z(y0)));var m=new THREE.Mesh(g,mat(c));
+  m.position.set((X(x0)+X(x1))/2,(y||0)+h/2,(Z(y0)+Z(y1))/2);m.castShadow=m.receiveShadow=true;S.add(m);return m}
+
+// Nền: đất xung quanh, biển, bãi cát, khu đất
+flat([[0,-300],[2600,-300],[2600,1600],[0,1600]],-0.6,'#a9b98f');
+flat([[1700,-300],[2600,-300],[2600,1600],[1610,1600]],-0.3,'#4fa3c7');
+flat([[1662,-300],[1745,-300],[1652,1600],[1572,1600]],-0.2,'#efdfb6');
+flat([[515,220],[1660,228],[1570,1072],[495,1072]],0,'#a9c48f');
+// Đường Trường Sa phía Tây
+flat([[440,-300],[485,-300],[470,1600],[425,1600]],0.05,'#6f747a');
+// Đường nội khu
+var road='#e8e2d4';
+function ring(x0,y0,x1,y1){var w=7;box(x0,y0,x1,y0+w,0.12,road);box(x0,y1-w,x1,y1,0.12,road);box(x0,y0,x0+w,y1,0.12,road);box(x1-w,y0,x1,y1,0.12,road)}
+ring(720,240,1365,462);ring(720,828,1322,1058);
+box(500,638,1612,652,0.12,road);box(706,232,718,1066,0.12,road);box(1366,236,1378,1062,0.12,road);
+// Tiện ích
+box(585,255,700,440,0.15,'#9aa3ab');box(575,700,690,832,0.15,'#9aa3ab');box(585,852,700,1040,0.15,'#9aa3ab');
+box(578,462,690,560,0.2,'#5d9c6a');
+box(770,540,860,752,10,'#efe9dd'); // khách sạn & sảnh đón
+box(870,598,1100,692,6,'#efe9dd');
+box(1200,598,1312,700,7,'#efe9dd');
+box(1325,606,1535,688,0.35,'#3fb3e0');
+box(750,482,812,512,0.3,'#55bde6');box(750,772,812,802,0.3,'#55bde6');
+box(1515,725,1585,788,5,'#efe9dd');
+
+/* ---------- Biệt thự ---------- */
+var ROOF=new THREE.ConeGeometry(1,1,4,1);ROOF.rotateY(Math.PI/4);
+var wallM=mat('#fbf8f2'), poolM=mat('#46b6e4'), pick=[], roofs=[];
+V.forEach(function(v){
+  var w=Math.abs(X(v.x1)-X(v.x0)), d=Math.abs(Z(v.y1)-Z(v.y0)), cx=(X(v.x0)+X(v.x1))/2, cz=(Z(v.y0)+Z(v.y1))/2;
+  var big=v.t==='pres'?1.25:1, h=(v.t==='gf'?4:6.5)*big;
+  var g=new THREE.Group();g.position.set(cx,0,cz);if(v.rot)g.rotation.y=v.rot;
+  var bw=w*.78, bd=d*.62;
+  var body=new THREE.Mesh(new THREE.BoxGeometry(bw,h,bd),wallM);body.position.set(0,h/2,-d*.12);body.castShadow=body.receiveShadow=true;g.add(body);
+  var roof=new THREE.Mesh(ROOF,mat(T[v.t].col));
+  roof.scale.set(bw*.76,h*.42,bd*.76);roof.position.set(0,h+h*.225,-d*.12);roof.castShadow=true;g.add(roof);
+  var pool=new THREE.Mesh(new THREE.BoxGeometry(bw*.7,.25,d*.2),poolM);pool.position.set(0,.15,d*.32);g.add(pool);
+  body.userData=roof.userData=pool.userData={v:v};
+  pick.push(body,roof,pool);roofs.push(roof);v.g=g;v.roof=roof;S.add(g);
+});
+
+/* ---------- Cây dừa dọc bờ biển và đường nội khu ---------- */
+(function(){
+  var pts=[],r=function(a,b){return a+Math.random()*(b-a)};
+  for(var y=230;y<1070;y+=14)pts.push([1660-(y-220)*.106+r(-6,6),y]);
+  for(y=240;y<1060;y+=26){pts.push([725+r(-3,3),y]);pts.push([1378+r(-3,3),y])}
+  for(var x=520;x<1600;x+=30){pts.push([x,630]);pts.push([x,660])}
+  for(i=0;i<70;i++)pts.push([r(520,700),r(230,1060)]);
+  var trunk=new THREE.InstancedMesh(new THREE.CylinderGeometry(.25,.35,9,5),mat('#8a6b4a'),pts.length);
+  var crown=new THREE.InstancedMesh(new THREE.SphereGeometry(2.6,7,5),mat('#3f8a3a'),pts.length);
+  var o=new THREE.Object3D();
+  pts.forEach(function(p,k){var s=r(.8,1.2);o.position.set(X(p[0]),4.5*s,Z(p[1]));o.scale.set(s,s,s);o.updateMatrix();trunk.setMatrixAt(k,o.matrix);
+    o.position.y=9*s;o.scale.set(s,s*.6,s);o.updateMatrix();crown.setMatrixAt(k,o.matrix)});
+  trunk.castShadow=crown.castShadow=true;S.add(trunk);S.add(crown);
+})();
+
+/* ---------- Nhãn ---------- */
+var LB=[['BIỂN',1820,640,0,'sea'],['Bãi biển riêng',1700,470,1],['Hồ bơi chính',1430,647,2],['Nhà hàng chính',1256,650,9],['Spa',985,645,8],
+  ['Khách sạn & sảnh',815,645,12],['Lối vào · Trường Sa',455,645,2],['Bãi đỗ xe',642,348,2],['Bãi đỗ xe',642,946,2]];
+var box2=document.getElementById('labels'),lbs=LB.map(function(l){var e=document.createElement('div');e.className='lb '+(l[4]||'');e.textContent=l[0];box2.appendChild(e);return{e:e,p:new THREE.Vector3(X(l[1]),l[3]+3,Z(l[2]))}});
+function place(){var w=innerWidth,h=innerHeight,v=new THREE.Vector3();lbs.forEach(function(l){v.copy(l.p).project(cam);var on=v.z<1&&Math.abs(v.x)<1.1&&Math.abs(v.y)<1.1;
+  l.e.style.display=on?'':'none';if(on){l.e.style.left=((v.x+1)/2*w)+'px';l.e.style.top=((1-v.y)/2*h)+'px'}})}
+
+/* ---------- Chữ chìm thương hiệu trên nền (vẫn còn khi chụp màn hình) ---------- */
+(function(){var c=document.createElement('canvas');c.width=1024;c.height=256;var g=c.getContext('2d');g.fillStyle='rgba(255,255,255,.55)';
+  g.font='800 92px "Be Vietnam Pro",Arial,sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('HOÀNG HIỆP · 0904 567 009',512,128);
+  var t=new THREE.CanvasTexture(c),m=new THREE.Mesh(new THREE.PlaneGeometry(140,35),new THREE.MeshBasicMaterial({map:t,transparent:true,depthWrite:false}));
+  m.rotation.x=-Math.PI/2;m.position.set(X(1080),.4,Z(1100));S.add(m)})();
+
+/* ---------- Bộ lọc loại ---------- */
+var on={},types=document.getElementById('types');
+GROUPS.forEach(function(gp){on[gp[0]]=true;var b=document.createElement('button');b.className='chip';b.type='button';
+  b.innerHTML='<i style="background:'+T[gp[2][0]].col+'"></i>'+gp[1];
+  b.onclick=function(){on[gp[0]]=!on[gp[0]];b.classList.toggle('off',!on[gp[0]]);paint()};types.appendChild(b)});
+function grp(t){for(var k=0;k<GROUPS.length;k++)if(GROUPS[k][2].indexOf(t)>=0)return GROUPS[k][0]}
+var real=false,sel=null;
+function paint(){V.forEach(function(v){var vis=on[grp(v.t)];v.g.visible=vis;
+  v.roof.material.color.set(real?'#c8662e':T[v.t].col);v.roof.material.emissive.set(v===sel?'#553300':'#000000')})}
+document.getElementById('real').onclick=function(){real=!real;this.setAttribute('aria-pressed',real);paint()};
+
+/* ---------- Bấm chọn biệt thự ---------- */
+var ray=new THREE.Raycaster(),m2=new THREE.Vector2(),down=null,card=document.getElementById('card');
+R.domElement.addEventListener('pointerdown',function(e){down=[e.clientX,e.clientY]});
+R.domElement.addEventListener('pointerup',function(e){if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>6)return;
+  m2.set(e.clientX/innerWidth*2-1,-e.clientY/innerHeight*2+1);ray.setFromCamera(m2,cam);
+  var hit=ray.intersectObjects(pick.filter(function(o){return o.parent.visible}))[0];show(hit?hit.object.userData.v:null)});
+function show(v){sel=v;paint();if(!v){card.hidden=true;return}var t=T[v.t];
+  document.getElementById('cTag').textContent=t.pn;document.getElementById('cTag').style.background=t.col;
+  document.getElementById('cName').textContent=t.name;
+  document.getElementById('cDl').innerHTML='<dt>Đất</dt><dd>'+t.land+'</dd><dt>Biệt thự</dt><dd>'+t.villa+'</dd><dt>Số căn</dt><dd>'+t.n+'</dd><dt>Tiện ích</dt><dd>Hồ bơi riêng, sân vườn</dd>';
+  document.getElementById('cNote').textContent=t.note+' Diện tích theo bảng chủ đầu tư, tham khảo.';
+  document.getElementById('cBtn').href='https://zalo.me/0904567009';card.hidden=false}
+card.querySelector('.x').onclick=function(){show(null)};
+
+/* ---------- Góc nhìn ---------- */
+var VIEWS={tong:[[-170,260,330],[30,0,10]],bien:[[480,120,40],[0,0,0]],tren:[[40,560,1],[40,0,0]]},anim=null;
+function go(k,now){var p=VIEWS[k];if(now){cam.position.set.apply(cam.position,p[0]);ctl.target.set.apply(ctl.target,p[1]);return}
+  anim={t:0,a:cam.position.clone(),b:new THREE.Vector3().fromArray(p[0]),ta:ctl.target.clone(),tb:new THREE.Vector3().fromArray(p[1])}}
+document.querySelectorAll('[data-view]').forEach(function(b){b.onclick=function(){document.querySelectorAll('[data-view]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});go(b.dataset.view)}});
+var spin=document.getElementById('spin');spin.onclick=function(){ctl.autoRotate=!ctl.autoRotate;ctl.autoRotateSpeed=.6;spin.setAttribute('aria-pressed',ctl.autoRotate)};
+var v0=/[#&]bien/.test(location.hash)?'bien':'tong';go(v0,true);document.querySelectorAll('[data-view]').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.view===v0)});
+
+function size(){var w=innerWidth,h=innerHeight;R.setSize(w,h);cam.aspect=w/h;cam.fov=w<h?60:42;cam.updateProjectionMatrix()}
+addEventListener('resize',size);size();paint();
+(function loop(){requestAnimationFrame(loop);
+  if(anim){anim.t=Math.min(1,anim.t+.03);var e=anim.t<.5?2*anim.t*anim.t:1-Math.pow(-2*anim.t+2,2)/2;cam.position.lerpVectors(anim.a,anim.b,e);ctl.target.lerpVectors(anim.ta,anim.tb,e);if(anim.t>=1)anim=null}
+  ctl.update();R.render(S,cam);place()})();
+})();
+</script>
+</body>
+</html>
