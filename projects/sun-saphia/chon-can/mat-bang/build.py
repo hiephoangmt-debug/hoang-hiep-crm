@@ -72,5 +72,6 @@ out = out.replace("function fit(){ box.style.height = (window.innerWidth < 820 ?
   "        b.type='button'; b.setAttribute('data-pop',''); b.setAttribute('data-interest',it); b.style.display='none'; document.body.appendChild(b); b.click(); setTimeout(function(){ b.remove(); },100);\n"
   "        try{ if(window.gtag) gtag('event','chon_can_lead',{event_label:d.unit}); }catch(x){} } });")
 assert 'bản chỉ mặt bằng' in out and "d.sscc==='h2'" in out
+import sticky; out = sticky.patch(out)  # bảng căn bám theo màn hình khi cuộn
 (here / 'chon-can-embed.js').write_text(out, encoding='utf-8')
 print(len(out))
