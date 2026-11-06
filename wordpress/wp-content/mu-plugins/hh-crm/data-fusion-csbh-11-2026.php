@@ -139,9 +139,9 @@ add_action(
 
 // Sơ đồ mặt bằng có mã căn: nếu tải lỗi thì tải lại; đặt đầu mục Mặt bằng tổng thể, gỡ bản vẽ lại không mã.
 add_action(
-	'admin_init',
+	'init', // Chạy cả khi khách xem trang (ảnh tải xong qua cron) – chỉ đến khi xong một lần.
 	static function () {
-		if ( get_option( 'hh_fusion_mb_ma_can_ok' ) || ! current_user_can( 'edit_posts' ) ) {
+		if ( get_option( 'hh_fusion_mb_ma_can_ok' ) ) {
 			return;
 		}
 		$post = get_page_by_path( 'fusion-resort-villas-da-nang', OBJECT, 'du-an' );

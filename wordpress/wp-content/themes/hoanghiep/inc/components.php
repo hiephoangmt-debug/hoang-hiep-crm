@@ -64,7 +64,7 @@ function hh_gallery( $ids, $group, $class = 'gallery-grid' ) {
 			'<a href="%s" data-lightbox="%s">%s</a>',
 			esc_url( $full ),
 			esc_attr( $group ),
-			wp_get_attachment_image( $id, 'hh-card', false, array( 'loading' => 'lazy' ) )
+			wp_get_attachment_image( $id, 'gallery-single' === $class ? 'large' : 'hh-card', false, array( 'loading' => 'lazy' ) ) // Ảnh đơn (mặt bằng tổng): không cắt khung
 		);
 	}
 	echo '</div>';

@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.62** + plugin Hoàng Hiệp CRM **2.20.164**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.63** + plugin Hoàng Hiệp CRM **2.20.165**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.165 · giao diện 2.15.63 (06/11/2026)
+
+- **Mặt bằng tổng thể không còn bị cắt hai bên:** ảnh trong mục Mặt bằng tổng thể hiện đủ khung (trước đây bị cắt về tỷ lệ 3:2).
+- **Fusion – hết trùng sơ đồ:** tự gỡ bản sơ đồ không mã khỏi mục Mặt bằng tổng thể ngay khi có lượt xem trang (không cần vào trang quản trị); còn bản có mã căn và ảnh chụp từ trên cao.
 
 ## Có gì mới – plugin 2.20.164 (06/11/2026)
 
