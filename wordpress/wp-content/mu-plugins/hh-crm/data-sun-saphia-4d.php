@@ -86,3 +86,25 @@ add_filter(
 	},
 	23 // Ngay sau bộ lọc 4D / mặt bằng tầng (22).
 );
+
+// 06/11/2026: ảnh đại diện mới (anh Hiệp gửi) – toàn cảnh tòa tháp bên biển Sơn Thủy lúc hoàng hôn; ảnh đại diện cũ chuyển vào Thư viện.
+// Chạy sau cùng (24) để ô ảnh đang có trên web (kết quả bộ lọc 23) nằm trong danh sách được phép thay.
+add_filter(
+	'hh_project_dataset',
+	static function ( $projects ) {
+		foreach ( $projects as &$p ) {
+			if ( 'sun-saphia-residence' !== ( $p['slug'] ?? '' ) ) {
+				continue;
+			}
+			$links = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+			if ( '' === $links || false !== strpos( $links, 'sun-saphia-phoi-canh-hoang-hon-toan-canh.jpg' ) ) {
+				continue;
+			}
+			$p['meta']['hh_p_image_links']     = 'plugin:img/sun-saphia/sun-saphia-phoi-canh-hoang-hon-toan-canh.jpg | Sun Saphia Residence – tòa tháp 30 tầng của Sun Group bên biển Sơn Thủy lúc hoàng hôn, phối cảnh chủ đầu tư | đại diện | Toàn cảnh lúc hoàng hôn' . "\n" . str_replace( ' | đại diện', ' | thư viện', $links );
+			$p['fix_meta']['hh_p_image_links'] = array_values( array_unique( array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $links ) ) ) );
+		}
+		unset( $p );
+		return $projects;
+	},
+	24
+);

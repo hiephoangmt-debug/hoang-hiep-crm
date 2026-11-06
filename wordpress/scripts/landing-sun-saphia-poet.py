@@ -85,8 +85,8 @@ body = f'''<!--HH-LANDING-BODY-->
 <main id="top">
 <!-- HERO -->
 <figure class="hero-view">
-  <img src="{IMG['bia']}" alt="Sun Saphia Residence – tòa tháp 30 tầng bên biển Mỹ Khê – Sơn Thủy, phối cảnh chủ đầu tư" fetchpriority="high" decoding="async">
-  <figcaption>Sun Saphia Residence · biển Mỹ Khê – Sơn Thủy · phối cảnh minh họa</figcaption>
+  <img src="{P}sun-saphia-phoi-canh-hoang-hon-toan-canh.jpg" width="1800" height="996" alt="Sun Saphia Residence – tòa tháp 30 tầng của Sun Group bên biển Sơn Thủy lúc hoàng hôn, phối cảnh chủ đầu tư" fetchpriority="high" decoding="async">
+  <figcaption>Sun Saphia Residence · biển Sơn Thủy lúc hoàng hôn · phối cảnh chủ đầu tư</figcaption>
 </figure>
 <section class="hero" aria-labelledby="h1">
   <div class="container">
