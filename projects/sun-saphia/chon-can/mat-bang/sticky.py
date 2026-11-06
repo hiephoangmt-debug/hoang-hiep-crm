@@ -6,7 +6,7 @@
 Dùng: python3 sticky.py  (sửa tại chỗ chon-can-embed.js; build.py cũng gọi patch())."""
 import json, pathlib
 
-INNER = r'''<style id="ssNoScroll">html,body{overflow:hidden!important;overscroll-behavior:none}</style><script>(function(){
+INNER = r'''<style id="ssNoScroll">html{overflow:hidden!important;overscroll-behavior:none}body{overflow:visible!important}</style><script>(function(){
   addEventListener('scroll',function(){ if(window.scrollY||window.scrollX) window.scrollTo(0,0); },{passive:true});
   var VP=null;
   function stick(){ if(!VP||!document.body.classList.contains('picked')) return;
