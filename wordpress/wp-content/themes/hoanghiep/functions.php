@@ -85,7 +85,8 @@ add_action(
 			return;
 		}
 		$done = true;
-		echo '<script src="https://script.google.com/macros/s/AKfycbyMWXl47PShn-ikZKwrFONJb9z89NOmVG6yIioyjGxo55IEbLh4yP7KiREPsxgSbxBl/exec?js=1" data-key="mPkoCnOIiCnl" async></script>' . "\n";
+		// Trang được dựng sẵn khi rê chuột (tai-truoc-trang.php) chỉ gửi dữ liệu khi khách thật sự mở trang.
+		echo '<script>(function(){function go(){var s=document.createElement("script");s.src="https://script.google.com/macros/s/AKfycbyMWXl47PShn-ikZKwrFONJb9z89NOmVG6yIioyjGxo55IEbLh4yP7KiREPsxgSbxBl/exec?js=1";s.async=true;s.setAttribute("data-key","mPkoCnOIiCnl");document.head.appendChild(s);}if(document.prerendering){document.addEventListener("prerenderingchange",go,{once:true});}else{go();}})();</script>' . "\n";
 	},
 	3
 );
