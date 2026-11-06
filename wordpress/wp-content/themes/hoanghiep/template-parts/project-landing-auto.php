@@ -373,7 +373,7 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
         $poster = 0 === strpos( $poster, 'plugin:' ) && defined( 'HH_CRM_URL' ) ? HH_CRM_URL . substr( $poster, 7 ) : ( ctype_digit( $poster ) ? $url( (int) $poster, 'large' ) : $poster );
         $poster = $poster ?: ( $hero ? $url( $hero, 'large' ) : '' );
         ?>
-        <a class="tour" href="<?php echo esc_url( $m( $k ) ); ?>" target="_blank" rel="noopener"><?php if ( $poster ) : ?><img src="<?php echo esc_url( $poster ); ?>" alt="<?php echo esc_attr( $lb . ' ' . $title ); ?>" loading="lazy" decoding="async"><?php endif; ?><span>▶ <?php echo $e( $lb ); ?></span></a>
+        <a class="tour" href="<?php echo esc_url( $m( $k ) ); ?>" target="_blank" rel="noopener" data-tour="<?php echo esc_url( $m( $k ) ); ?>" data-title="<?php echo esc_attr( $lb . ' ' . $short_name ); ?>"><?php if ( $poster ) : ?><img src="<?php echo esc_url( $poster ); ?>" alt="<?php echo esc_attr( $lb . ' ' . $title ); ?>" loading="lazy" decoding="async"><?php endif; ?><span>▶ <?php echo $e( $lb ); ?></span></a>
       <?php endforeach; ?>
     </div>
   </div>
@@ -671,6 +671,16 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
 
 <div class="float"><a class="zl js-zalo" href="<?php echo esc_url( $zalo ); ?>" target="_blank" rel="noopener" aria-label="Nhắn Zalo">Zalo</a><a class="call" href="tel:0904567009" aria-label="Gọi <?php echo esc_attr( $phone ); ?>">Gọi</a></div>
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Xem ảnh"><button type="button" aria-label="Đóng">×</button><img alt=""></div>
+<div class="tv" id="tv" role="dialog" aria-modal="true" aria-label="Tham quan trực tuyến" hidden><div class="tv-bar"><b></b><a href="#" target="_blank" rel="noopener">Mở tab mới ↗</a><button type="button" aria-label="Đóng">×</button></div><iframe title="Tham quan trực tuyến" allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer; autoplay" allowfullscreen loading="lazy"></iframe></div>
+<script>
+// Xem 4D / 360 ngay trong trang (khung toàn màn hình), không chuyển sang web khác. Nút Quay lại trên điện thoại cũng đóng khung.
+(function(){var tv=document.getElementById('tv');if(!tv)return;var fr=tv.querySelector('iframe'),t=tv.querySelector('b'),ext=tv.querySelector('a'),open=false;
+function close(back){if(!open)return;open=false;tv.hidden=true;fr.src='about:blank';document.documentElement.style.overflow='';if(back&&history.state&&history.state.hhTour)history.back();}
+document.querySelectorAll('a.tour[data-tour]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();t.textContent=a.dataset.title||'';ext.href=a.dataset.tour;fr.src=a.dataset.tour;tv.hidden=false;open=true;document.documentElement.style.overflow='hidden';try{history.pushState({hhTour:1},'');}catch(x){}});});
+tv.querySelector('button').addEventListener('click',function(){close(true);});
+addEventListener('popstate',function(){close(false);});
+addEventListener('keydown',function(e){if('Escape'===e.key)close(true);});})();
+</script>
 
 <script>
 (function(){

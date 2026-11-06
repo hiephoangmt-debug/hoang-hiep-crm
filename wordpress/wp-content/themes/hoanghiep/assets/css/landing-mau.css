@@ -267,3 +267,11 @@ body.admin-bar header.top{top:32px}
 .tbl .num{white-space:nowrap}
 @media (max-width:600px){.tbl th:nth-child(3),.tbl td:nth-child(3){display:table-cell}.tbl th,.tbl td{padding:10px 8px;font-size:13.5px}}
 .tbl td.gia{font-weight:700;color:#a5302b}.tbl td.ghi-chu{font-weight:400;color:inherit}
+/* Khung xem 4D / 360 trong trang. */
+.tv{position:fixed;inset:0;z-index:100002;background:#05101e;display:flex;flex-direction:column}
+.tv[hidden]{display:none}
+.tv-bar{display:flex;align-items:center;gap:12px;padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top));background:#0b1a2e;color:#fff}
+.tv-bar b{flex:1;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tv-bar a{color:#e7c98f;font-size:13px;text-decoration:none;white-space:nowrap}
+.tv-bar button{width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:24px;cursor:pointer;flex:none}
+.tv iframe{flex:1;width:100%;border:0;background:#05101e}

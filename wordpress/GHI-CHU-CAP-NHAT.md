@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.84** + plugin Hoàng Hiệp CRM **2.20.201**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.85** + plugin Hoàng Hiệp CRM **2.20.202**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -45,7 +45,9 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 - **Landing The Poet:** ảnh chính (toàn cảnh biển Mỹ Khê – Sơn Trà) hiện trọn ở đầu trang, không lớp phủ tối, không chữ đè; tiêu đề, thông tin nhanh và nút đặt ngay bên dưới ảnh.
 
-## Có gì mới – plugin 2.20.201 · giao diện 2.15.84 (06/11/2026)
+## Có gì mới – plugin 2.20.202 · giao diện 2.15.85 (06/11/2026)
+
+- **Xem 4D / 360 ngay trong trang (FPT Plaza 4, Sun Solar…):** bấm ô "Xem mô hình 4D" / "Xem 360°" mở khung toàn màn hình trên chính trang dự án thay vì chuyển sang web khác; nút × hoặc nút Quay lại trên điện thoại để đóng; có link "Mở tab mới" phòng khi web gốc không cho nhúng.
 
 - **Sun Symphony Residence (tổ hợp S1 – S3):** trang trước chỉ có mặt bằng tầng, nay thêm ảnh đại diện toàn cảnh lúc hoàng hôn, 4 phối cảnh tổ hợp, 10 ảnh công viên nội khu Central Park S1 – S2 và River Park, 12 ảnh nhà mẫu Studio / 1PN+1 (mục Nội thất căn mẫu), layout khối đế tầng 1 – 2 từng tòa, 31 layout căn hộ tòa S1 / S2 / S3.
 
