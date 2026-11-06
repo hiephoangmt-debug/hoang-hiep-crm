@@ -16,7 +16,7 @@ CSS = TAG + ('body.pm .top{display:none!important}'
   'body.pm .modes{grid-column:auto!important;flex-wrap:nowrap!important}body.pm .modes .chip{display:none!important}body.pm .modes #mPlan{display:inline-block!important}'
   'body.pm .note,body.pm #spinRow{display:none!important}body.pm .console .sl:has(#floor){order:-1}body.pm .modes{order:-2}'
   'body.pm #f3Btn{display:none!important}body.pm #ofcBtn{bottom:calc(env(safe-area-inset-bottom,0px) + 14px)!important}'
-  'body.pm .compass{display:none!important}body.pm #uCard{top:var(--uct,70px)!important;bottom:auto!important}body.pm.pu #ofcBtn{display:none!important}'
+  'body.pm .compass{display:none!important}body.pm #uCard{top:auto!important;bottom:calc(env(safe-area-inset-bottom,0px) + 12px)!important;left:12px!important;right:auto!important;transform:none!important;width:min(320px,calc(100% - 24px))!important;padding:10px 12px!important;opacity:.97}body.pm #uCard h4{font-size:15px!important;margin:0 0 4px!important}body.pm #uCard .s{font-size:12.5px!important;line-height:1.4!important}body.pm #uCard .b button{padding:8px 10px!important;font-size:13px!important}body.pm.pu #ofcBtn{display:none!important}'
   '@media (max-width:760px){body.pm .console{grid-template-columns:1fr!important;gap:6px!important;padding-top:8px!important;padding-bottom:8px!important}'
   'body.pm .modes{display:none!important}body.pm .console .sl label{font-size:10.5px!important}}')
 OLD = "bPlan.onclick=function(){ setPlan(!planOn); };"
