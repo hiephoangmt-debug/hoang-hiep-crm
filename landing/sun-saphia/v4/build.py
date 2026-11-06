@@ -500,6 +500,8 @@ def mb_4d():
     return ('<p class="lead" style="margin:4px 0 14px">Kéo thanh <b>Tầng</b> và <b>Giờ trong ngày</b> phía trên mô hình, bấm vào từng căn để xem loại căn, diện tích và hướng view. '
             'Màu căn: <b style="color:#E06A6A">Studio</b> · <b style="color:#3A8FC9">1PN+1</b> · <b style="color:#C9962A">2PN góc bo</b>.</p>'
             '<style>body.tool-on #wvb,body.tool-on #wvh{opacity:0!important;pointer-events:none!important;transition:opacity .2s}</style>'
+            '<script>(function(){var n=0;(function t(){var b=document.getElementById("ss4d-box");if(!b){if(++n<200)setTimeout(t,300);return}if(!("IntersectionObserver" in window))return;'
+            'new IntersectionObserver(function(es){es.forEach(function(e){var on=e.intersectionRatio>.35||(e.isIntersecting&&e.intersectionRect.height>innerHeight*.5);document.body.classList.toggle("tool-on",on)})},{threshold:[0,.1,.2,.35,.5,.75,1]}).observe(b)})()})();</script>'
             '<div id="chon-can"></div>'
             '<script>window.SS4D_NOGATE=1;addEventListener("message",function(e){var d=e.data;if(!d||!d.ss4dUnit)return;var u=d.ss4dUnit;'
             'try{if(window.gtag)gtag("event",d.lead?"mb4d_lead":"mb4d_can",{event_label:u.code})}catch(x){}'
