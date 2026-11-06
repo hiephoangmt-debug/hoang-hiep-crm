@@ -4,7 +4,8 @@
  * - 22 phối cảnh / tiện ích / sảnh sạch (không chữ in sẵn) thay 8 ảnh poster mạng xã hội cũ;
  * - mặt bằng tầng 5, 6, 7 – 19 (bản cập nhật diện tích, thay "tầng 8 – 19" cũ) và tầng 20 (bể bơi bốn mùa, gym & yoga);
  * - layout 5 loại căn (Studio, 1PN, 1PN+1, 2PN, 3PN);
- * - tiêu chuẩn bàn giao (bảng TCBG của chủ đầu tư).
+ * - tiêu chuẩn bàn giao (bảng TCBG của chủ đầu tư);
+ * - tour 360° (Kuula).
  * Ưu đãi thanh toán sớm hạn 25/10/2026 đã hết → bỏ khỏi trang (giữ các ưu đãi CSBH04 không ghi hạn).
  * Chạy sau data-sun-solar-csbh04.php (30). Ô nào anh đã tự sửa thì không đè (fix_meta chỉ thay giá trị web nhập).
  */
@@ -87,6 +88,10 @@ add_filter(
 			$new   = implode( "\n", hh_sun_solar_11_2026_images() ) . ( '' !== $keep ? "\n" . $keep : '' );
 			$p['meta']['hh_p_image_links'] = $new;
 			$p['fix_meta']['hh_p_image_links'] = array_values( array_unique( array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $old ) ) ) );
+
+			// Tour 360° của chủ đầu tư (Kuula, anh Hiệp gửi 06/11/2026) – ảnh xem trước là phối cảnh căn hộ nhìn thành phố.
+			$p['meta']['hh_p_tour_360']        = 'https://kuula.co/share/collection/71lrB?logo=1&info=1&fs=1&vr=0&thumbs=1';
+			$p['meta']['hh_p_tour_360_poster'] = 'plugin:img/sun-solar/sun-solar-cdt-can-ho-nhin-thanh-pho.jpg';
 
 			// Tiêu chuẩn bàn giao (ô đang trống thì điền).
 			$p['meta']['hh_p_handover_std'] = 'Bàn giao hoàn thiện theo bảng tiêu chuẩn của chủ đầu tư: trần thạch cao, sơn Dulux/Jotun; phòng ngủ lát gỗ công nghiệp; rèm 2 lớp; tủ bếp, mặt đá, bếp và hút mùi Hafele/Teka; thiết bị vệ sinh Toto/Grohe, vách tắm kính cường lực (nếu có), bình nóng lạnh Ariston/Ferroli; điều hòa Daikin/Mitsubishi/Panasonic (âm trần phòng khách, treo tường phòng ngủ); cửa chính gỗ chống cháy, khóa thông minh; lô gia lát gạch chống trơn, lan can kính cường lực (hoặc tương đương).';

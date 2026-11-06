@@ -47,7 +47,7 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 ## Có gì mới – plugin 2.20.186 · giao diện 2.15.82 (06/11/2026)
 
-- **Sun Solar Residence – bộ tài liệu chủ đầu tư:** 22 phối cảnh, tiện ích (bể bơi bốn mùa, gym & yoga, spa, thư viện, kids club, phòng thư giãn, sân thượng) và sảnh – ảnh sạch không chữ, thay 8 ảnh poster cũ; ảnh đại diện mới (toàn cảnh lúc hoàng hôn); mặt bằng tầng 5, 6, 7 – 19 (bản cập nhật diện tích, thay tầng 8 – 19) và tầng 20; layout 5 loại căn (Studio 33,1 m² – 3PN 99,7 m²); tiêu chuẩn bàn giao. Bỏ ưu đãi thanh toán sớm hạn 25/10/2026 đã hết (khung ưu đãi, bảng chiết khấu, đồng hồ đếm ngược). Ảnh cũ tự gỡ khỏi trang khi ảnh mới tải xong.
+- **Sun Solar Residence – bộ tài liệu chủ đầu tư:** 22 phối cảnh, tiện ích (bể bơi bốn mùa, gym & yoga, spa, thư viện, kids club, phòng thư giãn, sân thượng) và sảnh – ảnh sạch không chữ, thay 8 ảnh poster cũ; ảnh đại diện mới (toàn cảnh lúc hoàng hôn); mặt bằng tầng 5, 6, 7 – 19 (bản cập nhật diện tích, thay tầng 8 – 19) và tầng 20; layout 5 loại căn (Studio 33,1 m² – 3PN 99,7 m²); tiêu chuẩn bàn giao; tour 360° (mục Xem 4D / 360). Bỏ ưu đãi thanh toán sớm hạn 25/10/2026 đã hết (khung ưu đãi, bảng chiết khấu, đồng hồ đếm ngược). Ảnh cũ tự gỡ khỏi trang khi ảnh mới tải xong.
 
 - **Thẻ tin nhà đất không còn bị cắt hình:** khung ảnh thẻ tin đổi sang 3:2 đúng bằng ảnh thẻ web tạo ra (trước đây ảnh 3:2 bị đặt vào khung 4:3 nên mất hai bên); ảnh thẻ tự vẽ của 12 biệt thự biển và 8 khách sạn vẽ lại khổ 3:2, chừa góc trái trên cho nhãn "Bán" – tin đã nhập tự đổi ảnh khi bấm Nhập dữ liệu.
 
