@@ -158,8 +158,8 @@ ring(720,240,1365,462);ring(720,828,1322,1058);
 box(500,638,1612,652,0.12,road);box(706,232,718,1066,0.12,road);box(1366,236,1378,1062,0.12,road);
 // Tiện ích
 box(585,255,700,440,0.15,'#9aa3ab');box(575,700,690,832,0.15,'#9aa3ab');box(585,852,700,1040,0.15,'#9aa3ab');
-box(578,462,690,560,0.2,'#5d9c6a');
-box(770,540,860,752,10,'#efe9dd'); // khách sạn & sảnh đón
+box(578,462,690,560,0.2,'#3f8a8c');
+box(770,540,860,752,10,'#efe9dd');box(788,585,850,705,62,'#8ea6b8',10); // khách sạn 18 tầng trên khối đế sảnh (cạnh lối vào Trường Sa)
 box(870,598,1100,692,6,'#efe9dd');
 box(1200,598,1312,700,7,'#efe9dd');
 box(1325,606,1535,688,0.35,'#3fb3e0');
@@ -199,10 +199,17 @@ V.forEach(function(v){
 
 /* ---------- Nhãn ---------- */
 var LB=[['BIỂN',1820,640,0,'sea'],['Bãi biển riêng',1700,470,1],['Hồ bơi chính',1430,647,2],['Nhà hàng chính',1256,650,9],['Spa',985,645,8],
-  ['Khách sạn & sảnh',815,645,12],['Lối vào · Trường Sa',455,645,2],['Bãi đỗ xe',642,348,2],['Bãi đỗ xe',642,946,2]];
-var box2=document.getElementById('labels'),lbs=LB.map(function(l){var e=document.createElement('div');e.className='lb '+(l[4]||'');e.textContent=l[0];box2.appendChild(e);return{e:e,p:new THREE.Vector3(X(l[1]),l[3]+3,Z(l[2]))}});
+  ['Khách sạn 18 tầng',818,645,76],['Sân tennis',634,511,2],['The Ocean Villas',1000,90,2],['Sân golf',330,420,2],['Rừng phi lao',1150,1150,2],['Lối vào · Trường Sa',455,645,2],['Bãi đỗ xe',642,348,2],['Bãi đỗ xe',642,946,2]];
+var box2=document.getElementById('labels');function mk(t,x,y,z,c){var e=document.createElement('div');e.className='lb '+(c||'');e.textContent=t;box2.appendChild(e);return{e:e,p:new THREE.Vector3(x,y,z)}}
+var lbs=LB.map(function(l){var e=document.createElement('div');e.className='lb '+(l[4]||'');e.textContent=l[0];box2.appendChild(e);return{e:e,p:new THREE.Vector3(X(l[1]),l[3]+3,Z(l[2]))}});
 function place(){var w=innerWidth,h=innerHeight,v=new THREE.Vector3();lbs.forEach(function(l){v.copy(l.p).project(cam);var on=v.z<1&&Math.abs(v.x)<1.1&&Math.abs(v.y)<1.1;
   l.e.style.display=on?'':'none';if(on){l.e.style.left=((v.x+1)/2*w)+'px';l.e.style.top=((1-v.y)/2*h)+'px'}})}
+
+/* ---------- La bàn trên nền: hướng Bắc theo mặt bằng chủ đầu tư và ảnh vệ tinh (biển ở hướng Đông – Đông Bắc) ---------- */
+(function(){var sh=new THREE.Shape();sh.moveTo(0,-16);sh.lineTo(6,6);sh.lineTo(0,2);sh.lineTo(-6,6);sh.lineTo(0,-16);
+  var g=new THREE.ShapeGeometry(sh);g.rotateX(Math.PI/2);var m=new THREE.Mesh(g,new THREE.MeshBasicMaterial({color:'#0A2540',side:THREE.DoubleSide}));
+  m.rotation.y=-Math.PI/6;m.position.set(X(560),.5,Z(1130));S.add(m);
+  lbs.push(mk('Bắc',X(560)+9,4,Z(1130)-15));})();
 
 /* ---------- Chữ chìm thương hiệu trên nền (vẫn còn khi chụp màn hình) ---------- */
 (function(){var c=document.createElement('canvas');c.width=1024;c.height=256;var g=c.getContext('2d');g.fillStyle='rgba(255,255,255,.55)';
@@ -236,7 +243,7 @@ function show(v){sel=v;paint();if(!v){card.hidden=true;return}var t=T[v.t];
 card.querySelector('.x').onclick=function(){show(null)};
 
 /* ---------- Góc nhìn ---------- */
-var VIEWS={tong:[[-170,260,330],[30,0,10]],bien:[[480,120,40],[0,0,0]],tren:[[40,560,1],[40,0,0]]},anim=null;
+var VIEWS={tong:[[-170,260,330],[30,0,10]],bien:[[480,120,40],[0,0,0]],tren:[[37.5,600,4.3],[40,0,0]]},anim=null;
 function go(k,now){var p=VIEWS[k];if(now){cam.position.set.apply(cam.position,p[0]);ctl.target.set.apply(ctl.target,p[1]);return}
   anim={t:0,a:cam.position.clone(),b:new THREE.Vector3().fromArray(p[0]),ta:ctl.target.clone(),tb:new THREE.Vector3().fromArray(p[1])}}
 document.querySelectorAll('[data-view]').forEach(function(b){b.onclick=function(){document.querySelectorAll('[data-view]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});go(b.dataset.view)}});
