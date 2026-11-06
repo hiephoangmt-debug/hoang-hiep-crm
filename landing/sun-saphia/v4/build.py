@@ -1557,8 +1557,9 @@ if __name__ == '__main__':
     import slides_page
     out['trinh-chieu.html'] = slides_page.trinh_chieu(page, ORG, RES)
     out['dao-tao-sale.html'] = slides_page.dao_tao(head, header, tail, FAV, OG, LOGO)
+    import cdn
     for k, v in out.items():
-        v = palette(v)
+        v = cdn.finish(palette(v))
         left = re.findall(r'\{\{|%[sd]\b', v)
         open(OUT + k, 'w', encoding='utf8').write(v)
         print(k, len(v))
