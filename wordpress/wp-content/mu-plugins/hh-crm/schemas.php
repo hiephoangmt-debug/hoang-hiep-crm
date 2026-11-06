@@ -184,6 +184,7 @@ function hh_project_schema() {
 		'hoi-dap'   => array(
 			'title'  => 'Hỏi đáp',
 			'fields' => array(
+				'hh_p_chat_docs' => array( 'type' => 'textarea', 'label' => 'Tài liệu cho trợ lý chat (không hiện trên web)', 'help' => 'Dán bộ hỏi đáp, chính sách bán hàng, tiêu chuẩn bàn giao… của chủ đầu tư – trợ lý chat đọc để trả lời khách đang xem dự án này. Ghi chú nội bộ (VD "không báo % chiết khấu") cũng được.' ),
 				'hh_p_faq' => array( 'type' => 'table', 'label' => 'Câu hỏi thường gặp', 'help' => 'Để trống, website tự tạo câu hỏi từ thông tin dự án (chủ đầu tư, vị trí, pháp lý, bàn giao…).', 'columns' => array( 'Câu hỏi', 'Trả lời' ), 'placeholder' => "Dự án có sổ hồng chưa? | Sổ hồng cấp sau khi nhận nhà khoảng 12 tháng.\nNgười nước ngoài có mua được không? | Được, theo hạn mức 30% số căn mỗi tòa." ),
 			),
 		),

@@ -384,6 +384,16 @@ Khi khách hỏi nghiêm túc (giá, pháp lý, thuế phí, vay, quy hoạch, s
 - Giọng vẫn ấm, gần gũi như người quen rành nghề – không khô như văn bản hành chính.
 - Không biết thì nói thật và hẹn {$name} kiểm tra, không đoán.
 
+Tài liệu dự án: khi có "Tài liệu chi tiết dự án khách đang xem" (bộ hỏi đáp, chính sách, danh mục bàn giao của chủ đầu tư), trả lời theo đúng tài liệu đó – như người đã đọc kỹ hồ sơ dự án; làm theo ghi chú nội bộ trong tài liệu (VD không báo % chiết khấu, không nêu đơn vị phân phối) và không đọc nguyên văn ghi chú nội bộ cho khách.
+
+Hỏi khách – tìm hiểu nhu cầu như người sale giỏi (mỗi lượt chỉ hỏi 1 câu, lồng tự nhiên sau câu trả lời, không hỏi lại điều đã biết):
+- Mua để ở hay đầu tư / cho thuê? Ở thì mấy người, cần mấy phòng ngủ; đầu tư thì kỳ vọng cho thuê hay lướt.
+- Ngân sách khoảng bao nhiêu, có vay ngân hàng không – từ đó gợi ý loại căn và phương thức thanh toán phù hợp (VD vốn ít thì vay + hỗ trợ lãi suất, vốn sẵn thì trả sớm được ưu đãi cao nhất).
+- Thích hướng / view nào (biển, sông, phố), tầng thấp hay cao; khi nào cần nhận nhà.
+- Đã xem dự án nào khác chưa – để so sánh giúp khách bằng số liệu.
+- Khi đủ thông tin: gợi ý 1 – 2 loại căn cụ thể kèm giá tham khảo, rồi đề nghị gửi bảng tính dòng tiền / căn đang trống qua Zalo.
+- Khách để lại số: tóm tắt nhu cầu khách đã nói trong 1 câu (VD "Em ghi nhận: căn 2PN view biển, ngân sách khoảng 6 tỷ, vay 50%") để {$name} gọi lại đúng ý.
+
 Mục tiêu bán hàng:
 - Lượt đầu chỉ giúp và hỏi 1 câu hiểu nhu cầu (ở hay đầu tư, ngân sách, loại căn, khu vực), chưa xin số.
 - Gợi ý dự án / căn trên web thì kèm link trang đó trong "Kiến thức thị trường".
@@ -480,9 +490,10 @@ function hh_chat_knowledge() {
 				'Thanh toán' => $clip( $lines( 'hh_p_payment', 10 ), 500 ),
 				'Bàn giao'   => $clip( get_post_meta( $p->ID, 'hh_p_handover_std', true ), 300 ),
 				'Hỏi đáp'    => $clip( str_replace( "\n", ' || ', (string) get_post_meta( $p->ID, 'hh_p_faq', true ) ), 3000 ),
+				'Tài liệu'   => $clip( hh_chat_project_docs( $p->ID, 6000 ), 6000 ),
 			)
 		);
-		if ( ! isset( $d['Loại căn'] ) && ! isset( $d['Chính sách'] ) && ! isset( $d['Thuê'] ) && ! isset( $d['Biệt thự'] ) && ! isset( $d['Hỏi đáp'] ) ) {
+		if ( ! isset( $d['Loại căn'] ) && ! isset( $d['Chính sách'] ) && ! isset( $d['Thuê'] ) && ! isset( $d['Biệt thự'] ) && ! isset( $d['Hỏi đáp'] ) && ! isset( $d['Tài liệu'] ) ) {
 			continue;
 		}
 		$row = array( '### ' . $p->post_title . ' – ' . get_permalink( $p ) );
@@ -517,6 +528,19 @@ add_action(
 	2
 );
 
+/** Tài liệu chi tiết của dự án cho trợ lý chat: ô "Tài liệu cho trợ lý chat" + file tai-lieu-chat/{slug}.txt đi kèm plugin. */
+function hh_chat_project_docs( $page, $max = 30000 ) {
+	if ( ! $page || 'du-an' !== get_post_type( $page ) ) {
+		return '';
+	}
+	$docs = trim( (string) get_post_meta( $page, 'hh_p_chat_docs', true ) );
+	$file = __DIR__ . '/tai-lieu-chat/' . sanitize_file_name( get_post_field( 'post_name', $page ) ) . '.txt';
+	if ( is_readable( $file ) ) {
+		$docs .= ( $docs ? "\n\n" : '' ) . trim( (string) file_get_contents( $file ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	}
+	return mb_substr( $docs, 0, $max );
+}
+
 function hh_chat_ai_reply( $msgs, $page, $lead_phone ) {
 	$facts   = hh_chat_project_facts( $page );
 	$context = 'Hôm nay: ' . wp_date( 'd/m/Y' ) . "\n";
@@ -550,6 +574,11 @@ function hh_chat_ai_reply( $msgs, $page, $lead_phone ) {
 		),
 		'messages'   => $messages,
 	);
+	// Tài liệu chi tiết của dự án khách đang xem (Q&A, chính sách, bàn giao của chủ đầu tư) – đặt trước dữ liệu trang, lưu đệm theo dự án.
+	$docs = hh_chat_project_docs( $page );
+	if ( $docs ) {
+		array_splice( $body['system'], 2, 0, array( array( 'type' => 'text', 'text' => "Tài liệu chi tiết dự án khách đang xem (" . get_the_title( $page ) . ") – nguồn ưu tiên khi trả lời về dự án này; làm theo các ghi chú nội bộ trong tài liệu:\n" . $docs, 'cache_control' => array( 'type' => 'ephemeral', 'ttl' => '1h' ) ) ) );
+	}
 	// Tra cứu web (giá đất, quy hoạch, khách sạn, tin mới…) – tối đa 3 lần tìm mỗi câu trả lời.
 	if ( '0' !== (string) hh_chat_opt( 'web', '1' ) ) {
 		$body['tools'] = array(

@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.67** + plugin Hoàng Hiệp CRM **2.20.173**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.67** + plugin Hoàng Hiệp CRM **2.20.174**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.174 (06/11/2026)
+
+- **Trợ lý chat đọc tài liệu dự án:** ô mới "Tài liệu cho trợ lý chat (không hiện trên web)" ở mỗi dự án – dán bộ Q&A, chính sách, danh mục bàn giao của chủ đầu tư; khách đang xem dự án nào, chat đọc trọn tài liệu dự án đó (lưu đệm, không tốn thêm nhiều). Ghi chú nội bộ trong tài liệu (VD "không báo % chiết khấu") được tuân theo.
+- **The Poet Residence:** đã nạp sẵn tài liệu (bộ Q&A chủ đầu tư, giá tham khảo, 5 phương thức thanh toán, hỗ trợ vay, danh mục vật tư bàn giao, pháp lý tóm tắt).
+- **Chat chủ động hỏi khách như sale:** ở hay đầu tư, mấy phòng, ngân sách – có vay không, hướng / view, thời gian nhận nhà, đã xem dự án nào – rồi gợi ý loại căn + giá; khách để lại số thì tóm tắt nhu cầu 1 câu để anh gọi lại đúng ý.
 
 ## Có gì mới – giao diện 2.15.67 (06/11/2026)
 
