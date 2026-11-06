@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.84** + plugin Hoàng Hiệp CRM **2.20.198**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.84** + plugin Hoàng Hiệp CRM **2.20.199**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -45,7 +45,9 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 - **Landing The Poet:** ảnh chính (toàn cảnh biển Mỹ Khê – Sơn Trà) hiện trọn ở đầu trang, không lớp phủ tối, không chữ đè; tiêu đề, thông tin nhanh và nút đặt ngay bên dưới ảnh.
 
-## Có gì mới – plugin 2.20.198 · giao diện 2.15.84 (06/11/2026)
+## Có gì mới – plugin 2.20.199 · giao diện 2.15.84 (06/11/2026)
+
+- **Symphony 5 – Sun Symphony Residence (tài liệu chủ đầu tư):** 19 phối cảnh / tiện ích (ảnh đại diện hoàng hôn bên sông Hàn), tổng mặt bằng phân khu, mặt bằng 7 nhóm tầng (3 → 31), layout 5 căn (Studio 30,1 m² → 2PN 62,7 m²); pháp lý (đấu giá 14/12/2025, chấp thuận NĐT 12/3/2026, giao đất 50 năm, QH 1/500 23/4/2026); CSBH 02 (từ 20/7/2026): Sun Early Key 70% nhận căn dự kiến 30/6/2028, không vay 5% giãn 50 tháng, vay 70% HTLS 30 tháng, lịch thanh toán; tiêu chuẩn bàn giao thô + đơn giá hoàn thiện; loại căn, tiện ích, kết nối; nối vào tổ hợp Sun Symphony Residence. Không đăng mốc chiết khấu thanh toán sớm hạn 25/7/2026 (đã hết).
 
 - **Nhúng chat AI vào LadiPage:** dán 1 dòng `<script src="https://hiephoangmt.com/?hh_chat_nhung=1&du_an=…" defer></script>` vào trang LadiPage → hiện đúng khung chat của web (AI, trả lời theo dự án), khách để số lưu vào Khách hàng + báo Telegram (nguồn ghi "[LadiPage] …"). Khóa API vẫn chỉ ở máy chủ web. Chỉ tên miền LadiPage / tên miền anh khai trong Chat trên web mới dùng được. Mã nhúng có sẵn trong trang Chat trên web.
 
