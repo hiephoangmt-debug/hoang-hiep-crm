@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 function hh_chat_norm( $t ) {
 	$t = preg_replace( '/([a-z])\1{2,}/', '$1', (string) $t ); // quaaaa → qua
 	$t = preg_replace( '/[!?.,;:~]+/', ' $0 ', $t );
-	$t = preg_replace( '/\b([1-5])\s*(phong ngu|p\.?n|ngu)\b/', '$1pn', $t ); // "2 phòng ngủ", "2 PN" → 2pn
+	$t = preg_replace( '/\b([1-5])\s*(phong ngu|p\.?n|ngu|br|bed|beds|bedroom|bedrooms|pn\+)\b/', '$1pn', $t ); // "2 phòng ngủ", "2 PN", "2br", "2 bedroom" → 2pn
 	// Tiền: "3t5", "3ty5" = 3,5 tỷ; "3 tỏi" = 3 tỷ; "500 củ", "500tr" = 500 triệu.
 	$t = preg_replace( '/\b(\d+)\s*(t|ty|ti)(\d)\b/', '$1.$3 ty', $t );
 	$t = preg_replace( '/\b(\d+(?:[.,]\d+)?)\s*(toi|ty|ti)\b/', '$1 ty', $t );

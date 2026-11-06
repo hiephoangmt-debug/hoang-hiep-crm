@@ -1026,6 +1026,16 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 			$v = $f['Vốn tự có'] ?? ( $f['Vay'] ?? '' );
 			return $ack . ( $v ? $lc( 'Vốn tự có tham khảo – ' ) . mb_substr( $v, 0, 240 ) . '.' : $lc( 'Em tính được vốn tự có và lịch thanh toán theo đúng căn anh/chị chọn.' ) ) . ( $ask ?: ' Anh/chị dự kiến chuẩn bị khoảng bao nhiêu vốn ban đầu ạ?' );
 		}
+		// Hỏi diện tích / loại căn ("căn 2PN diện tích bao nhiêu", "studio rộng bao nhiêu") → bảng loại căn của dự án.
+		$rooms_q = preg_match( '/\\bstudio\\b/', $t ) ? 'studio' : ( preg_match( '/\\b([1-4])pn\\b/', $t, $rmq ) ? $rmq[1] . 'pn' : '' );
+		if ( preg_match( '/dien tich|rong (bao|may|khong)|bao nhieu m|may m2|\\bm2\\b|loai can|co nhung can|co can (nao|gi)|layout|mat bang can/', $t ) || ( $rooms_q && ! preg_match( '/gia|bao nhieu tien|\\bty\\b|trieu|von|vay/', $t ) ) ) {
+			$types = hh_table( 'hh_p_unit_types', 4, $page );
+			$match = $rooms_q ? array_values( array_filter( $types, static fn( $r ) => 0 === strpos( str_replace( array( 'can ', ' ' ), '', mb_strtolower( remove_accents( $r[0] ) ) ), $rooms_q ) ) ) : $types;
+			if ( $match ) {
+				$line = implode( '; ', array_map( static fn( $r ) => $r[0] . ' ' . $r[1] . ( $r[3] && 'Liên hệ' !== $r[3] ? ' – giá ' . $r[3] : '' ), array_slice( $match, 0, 6 ) ) );
+				return $ack . $lc( 'Ở ' ) . $title . ': ' . $line . ' (giá tham khảo).' . ( $rooms_q ? ' Anh/chị muốn em gửi layout căn ' . strtoupper( $rooms_q ) . ' và các căn còn trống không ạ?' : ' Anh/chị quan tâm loại căn nào, em gửi layout và căn còn trống ạ?' );
+			}
+		}
 		if ( preg_match( '/cho thue|khai thac|kinh doanh (luu tru|cho thue)|airbnb|dong tien|o (lien|ngay)|o luon/', $t ) ) {
 			return $ack . $lc( hh_chat_rental_text( $page ) ) . ' Anh/chị mua để ở hay để cho thuê ạ? Nếu cho thuê, em tính thử dòng tiền theo căn studio / 1PN để anh/chị so sánh nhé.';
 		}
@@ -1043,7 +1053,7 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 			return $ack . $lc( 'Chủ đầu tư ' ) . $title . ' là ' . $f['Chủ đầu tư'] . '.' . ( $ask ?: ' Anh/chị muốn em gửi thêm hồ sơ pháp lý dự án không ạ?' );
 		}
 		if ( preg_match( '/(du an|cai) (nay|nay la|do) (la gi|the nao|ra sao|sao)|gioi thieu|tong quan|thong tin du an|chua hieu|la du an gi|co gi (hay|dac biet|noi bat)|diem noi bat/', $t ) ) {
-			return $ack . $lc( hh_chat_project_brief( $page ) ) . ( $ask ?: ' Anh/chị muốn hỏi thêm về giá, mặt bằng hay vị trí ạ?' );
+			return $ack . $lc( 'Em tóm tắt nhanh về ' ) . hh_chat_project_brief( $page ) . ( $ask ?: ' Anh/chị muốn hỏi thêm về giá, mặt bằng hay vị trí ạ?' );
 		}
 		if ( $has( 'phap ly', 'so hong', 'so do', 'lau dai' ) && isset( $f['Pháp lý'] ) ) {
 			return $ack . $lc( 'Pháp lý: ' ) . $f['Pháp lý'] . '.' . $ask;
@@ -1135,7 +1145,7 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		$brief = hh_chat_project_brief( $page );
 		$open  = $pick( array( ' Anh/chị đang cân nhắc mua để ở hay đầu tư cho thuê ạ?', ' Anh/chị muốn em nói thêm về giá từng loại căn, vị trí hay tiến độ xây dựng ạ?', ' Anh/chị quan tâm căn studio, 1 phòng ngủ hay 2 phòng ngủ ạ?' ) );
 		return false === mb_strpos( $said, mb_substr( $brief, 0, 50 ) )
-			? 'Dạ em tóm tắt nhanh: ' . $lc( $brief ) . $open
+			? 'Dạ em tóm tắt nhanh về ' . $brief . $open
 			: 'Dạ em chưa rõ anh/chị hỏi phần nào của ' . $title . ' ạ.' . $open;
 	}
 	// Không rõ ý: không lặp lại câu trước.
@@ -1151,7 +1161,7 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 	if ( $title && $page && 'du-an' === get_post_type( $page ) ) {
 		$brief = hh_chat_project_brief( $page );
 		if ( false === mb_strpos( $said, mb_substr( $brief, 0, 50 ) ) ) {
-			return 'Dạ em tóm tắt nhanh: ' . $lc( $brief ) . ' Anh/chị muốn biết thêm giá, mặt bằng, vị trí hay tiến độ ạ?';
+			return 'Dạ em tóm tắt nhanh về ' . $brief . ' Anh/chị muốn biết thêm giá, mặt bằng, vị trí hay tiến độ ạ?';
 		}
 	}
 	return $title
