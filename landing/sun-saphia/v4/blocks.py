@@ -304,7 +304,7 @@ def cta_block(label, title='Để lại số – <b>nhận đủ thông tin</b> 
     gets = ['Bảng giá gốc từng căn ngay khi chủ đầu tư công bố',
             'Lịch thanh toán 25%% – vay 70%% hỗ trợ lãi suất tới 24 tháng',
             'Danh sách căn view biển còn trống + mặt bằng từng tầng',
-            'Thư mời sự kiện 08/11 tại Sun Gallery Tây Hồ View + bốc thăm quà',
+            'Thư mời sự kiện 08/11 (Hà Nội) và ngày mở bán 05/12 (Đà Nẵng)',
             'Bảng tính cho thuê dài hạn / ngắn hạn theo căn']
     return ('<section class="sec" id="dang-ky"><div class="wrap"><div class="cta ctx">%s<div class="g2"><div>'
             '<span class="ey" style="color:#F2802F">🔥 Ưu tiên cho người đến sớm</span><h2 class="dp">%s</h2>'
@@ -314,7 +314,10 @@ def cta_block(label, title='Để lại số – <b>nhận đủ thông tin</b> 
             '<div class="cta2"><a class="btn zl" href="%s" target="_blank" rel="noopener"><span class="hm">Nhắn&nbsp;</span>Zalo %s</a><a class="btn call" href="tel:%s">Gọi ngay</a></div>'
             '<div class="trust"><div><b>Đại lý chính thức</b><span>Sun Property chứng nhận 23/10/2026</span></div><div><b>0 đồng</b><span>Đăng ký không thu bất kỳ khoản nào</span></div><div><b>Bảo mật số</b><span>Chỉ chuyên viên tư vấn liên hệ, không chia sẻ</span></div></div>'
             '</div>%s</div></div></div>'
-            '<script>(function(){var T=Date.parse("2026-11-08T09:00:00+07:00");if(Date.now()>T){document.querySelectorAll(".ccd").forEach(function(e){e.style.display="none"});return}function z(n){return(n<10?"0":"")+n}function t(){var d=Math.max(0,T-Date.now())/1e3;document.querySelectorAll(".ccd").forEach(function(e){var u={d:Math.floor(d/86400),h:Math.floor(d%%86400/3600),m:Math.floor(d%%3600/60),s:Math.floor(d%%60)};for(var k in u){var b=e.querySelector("[data-c="+k+"]");if(b)b.textContent=k=="d"?u[k]:z(u[k])}if(d<=0){var x=e.querySelector(".ccdt");if(x)x.textContent="🎉 Đã ra mắt – căn đẹp đang được chọn dần";e.querySelector(".ccdb").style.display="none"}})}t();setInterval(t,1000)})();</script>'
+            '<script>(function(){var EV=[["2026-11-08T09:00:00+07:00","sự kiện 08/11 tại Hà Nội"],["2026-11-15T08:00:00+07:00","sự kiện 15/11 tại Đà Nẵng"],["2026-11-22T08:00:00+07:00","sự kiện 22/11 tại Hà Nội"],["2026-12-05T08:00:00+07:00","ngày mở bán 05/12 tại Đà Nẵng"]];'
+            'function z(n){return(n<10?"0":"")+n}function t(){var now=Date.now(),T=0,L="";for(var i=0;i<EV.length;i++){var x=Date.parse(EV[i][0]);if(x>now){T=x;L=EV[i][1];break}}'
+            'document.querySelectorAll(".ccd").forEach(function(e){if(!T){e.style.display="none";return}var d=(T-now)/1e3,u={d:Math.floor(d/86400),h:Math.floor(d%%86400/3600),m:Math.floor(d%%3600/60),s:Math.floor(d%%60)};'
+            'for(var k in u){var b=e.querySelector("[data-c="+k+"]");if(b)b.textContent=k=="d"?u[k]:z(u[k])}var c=e.querySelector(".ccdt");if(c)c.textContent="⏳ Còn lại tới "+L})}t();setInterval(t,1000)})();</script>'
             '</section>') % (
         tiles('tr'), title, sub, ZALO, TEL_S, TEL, form('cuoi', label, title='Nhận bảng giá &amp; giữ suất ưu tiên', note='Chỉ cần số Zalo – chuyên viên gửi tài liệu trong ít phút. Miễn phí, không ràng buộc.', btn='Giữ suất ưu tiên ngay'))
 
