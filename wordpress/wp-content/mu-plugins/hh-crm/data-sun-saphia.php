@@ -162,6 +162,18 @@ add_filter(
 		// 01/11/2026: câu hỏi đáp về giá đổi sang giá dự kiến – bản 23/10 (web tự đặt) được phép thay.
 		$p['fix_meta']['hh_p_faq'][] = str_replace( 'Giá Sun Saphia Residence bao nhiêu? | Giá dự kiến studio 30 m² tầng 15: 2,13 tỷ (dãy phía sau), 2,37 tỷ (cánh bên), 2,85 tỷ (dãy mặt biển) – giá có vay, chưa VAT và 2% bảo trì. Bảng giá chính thức công bố tại sự kiện bán hàng dự kiến 28/11/2026.', 'Giá Sun Saphia Residence bao nhiêu? | Chưa có bảng giá chính thức; bài toán cho thuê trong tài liệu chủ đầu tư dùng giá tham khảo studio 30 m² khoảng 3 tỷ, căn 1PN 50 m² khoảng 4,5 tỷ.', $new_meta['hh_p_faq'] );
 		$p['fix_meta']['hh_p_faq'][] = $vtb( str_replace( 'Giá Sun Saphia Residence bao nhiêu? | Giá dự kiến studio 30 m² tầng 15: 2,13 tỷ (dãy phía sau), 2,37 tỷ (cánh bên), 2,85 tỷ (dãy mặt biển) – giá có vay, chưa VAT và 2% bảo trì. Bảng giá chính thức công bố tại sự kiện bán hàng dự kiến 28/11/2026.', 'Giá Sun Saphia Residence bao nhiêu? | Chưa có bảng giá chính thức; bài toán cho thuê trong tài liệu chủ đầu tư dùng giá tham khảo studio 30 m² khoảng 3 tỷ, căn 1PN 50 m² khoảng 4,5 tỷ.', $new_meta['hh_p_faq'] ) );
+		// 06/11/2026: lịch triển khai mới – sự kiện bán hàng chủ đầu tư dời sang 05/12/2026 tại Đà Nẵng (bản 28/11 đã lên web → được phép thay).
+		$d0512 = static fn( $x ) => str_replace( array( 'sự kiện bán hàng dự kiến 28/11/2026', 'Bảng giá chính thức công bố tại sự kiện bán hàng dự kiến 28/11/2026', '28/11/2026' ), array( 'sự kiện bán hàng của chủ đầu tư dự kiến 05/12/2026 tại Đà Nẵng', 'Bảng giá chính thức công bố tại sự kiện bán hàng của chủ đầu tư dự kiến 05/12/2026 tại Đà Nẵng', '05/12/2026' ), (string) $x );
+		foreach ( $p['meta'] as $k => $v ) {
+			if ( is_string( $v ) && $d0512( $v ) !== $v ) {
+				$p['fix_meta'][ $k ]   = (array) ( $p['fix_meta'][ $k ] ?? array() );
+				$p['fix_meta'][ $k ][] = $v;
+				if ( 'hh_p_faq' === $k ) {
+					$p['fix_meta'][ $k ][] = $vtb( $v );
+				}
+				$p['meta'][ $k ] = $d0512( $v );
+			}
+		}
 		$p['fix_content'] = array( $p['content'] );
 		$p['fix_excerpt'] = $p['excerpt'];
 		$p['excerpt']     = 'Sun Saphia Residence – căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: tòa 30 tầng (114 m) giao lộ Võ Nguyên Giáp – Trường Sa, 782 căn studio, 1PN+, 2PN, thời hạn 50 năm, đối diện công viên bãi tắm Sơn Thủy, bàn giao 11/2028.';

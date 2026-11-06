@@ -29,7 +29,7 @@ function hh_posts_sun_saphia_dot_4( $posts ) {
 		'tags'     => array( 'Sun Saphia Residence', 'Pháp lý bất động sản' ),
 		'image'    => 'plugin:img/tin-tuc/thanh-toan-sun-saphia-residence.jpg',
 		'content'  => <<<HTML
-<p>{$saphia} đang ở giai đoạn giữ chỗ, sự kiện bán hàng của chủ đầu tư dự kiến 28/11/2026, bàn giao dự kiến 11/2028. Đây là <strong>căn hộ hình thành trong tương lai</strong> – mua khi tòa nhà chưa xây xong – nên tiền trả cho chủ đầu tư bị Luật Kinh doanh bất động sản 2023 giới hạn theo từng mốc. Bài tóm tắt các mốc đó để người mua đối chiếu với phương án thanh toán khi có hợp đồng.</p>
+<p>{$saphia} đang ở giai đoạn giữ chỗ, sự kiện bán hàng của chủ đầu tư dự kiến 05/12/2026, bàn giao dự kiến 11/2028. Đây là <strong>căn hộ hình thành trong tương lai</strong> – mua khi tòa nhà chưa xây xong – nên tiền trả cho chủ đầu tư bị Luật Kinh doanh bất động sản 2023 giới hạn theo từng mốc. Bài tóm tắt các mốc đó để người mua đối chiếu với phương án thanh toán khi có hợp đồng.</p>
 <!--hh-featured-->
 <h2>4 mốc tiền theo Luật Kinh doanh bất động sản 2023</h2>
 <table>
@@ -84,8 +84,8 @@ HTML
 	/* ---------------- 07/11 – Chuẩn bị sự kiện bán hàng 28/11 ---------------- */
 	$posts[] = array(
 		'slug'     => 'chuan-bi-su-kien-ban-hang-sun-saphia-residence-28-11',
-		'title'    => 'Sự kiện bán hàng Sun Saphia Residence 28/11/2026: 7 việc nên chuẩn bị trước để chọn được căn ưng ý',
-		'excerpt'  => 'Sự kiện bán hàng Sun Saphia Residence dự kiến 28/11/2026. Chuẩn bị gì trước: chọn sẵn 3 căn, tính tổng tiền gồm VAT và 2% bảo trì, hồ sơ vay, câu hỏi về giá, chính sách và giấy tờ dự án.',
+		'title'    => 'Sự kiện bán hàng Sun Saphia Residence 05/12/2026: 7 việc nên chuẩn bị trước để chọn được căn ưng ý',
+		'excerpt'  => 'Sự kiện bán hàng Sun Saphia Residence dự kiến 05/12/2026. Chuẩn bị gì trước: chọn sẵn 3 căn, tính tổng tiền gồm VAT và 2% bảo trì, hồ sơ vay, câu hỏi về giá, chính sách và giấy tờ dự án.',
 		'keyword'  => 'sự kiện bán hàng Sun Saphia Residence',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'mở bán Sun Saphia', 'Sun Saphia 28/11', 'chọn căn Sun Saphia' ),
 		'project'  => 'sun-saphia-residence',
@@ -96,7 +96,7 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Kinh nghiệm mua nhà' ),
 		'image'    => 'plugin:img/tin-tuc/su-kien-ban-hang-sun-saphia-residence.jpg',
 		'content'  => <<<HTML
-<p>Theo thông tin chủ đầu tư đưa ra ngày 28/10/2026, {$saphia} có các buổi giới thiệu dự án tại Đà Nẵng dự kiến ngày 01/11 và 15/11, và <strong>sự kiện bán hàng dự kiến ngày 28/11/2026</strong>. Ở các đợt mở bán căn hộ ven biển, căn đẹp thường được chọn trong những giờ đầu – người chuẩn bị trước có lợi thế. Dưới đây là 7 việc nên làm trước ngày đó.</p>
+<p>Theo lịch triển khai cập nhật ngày 06/11/2026, {$saphia} có chuỗi sự kiện giới thiệu từ 08/11 đến 02/12 (Đà Nẵng 09/11 và 15/11, Hà Nội 08/11 và 22/11) và <strong>sự kiện bán hàng của chủ đầu tư tại Đà Nẵng dự kiến ngày 05/12/2026</strong>, quy mô khoảng 1.000 khách. Ở các đợt mở bán căn hộ ven biển, căn đẹp thường được chọn trong những giờ đầu – người chuẩn bị trước có lợi thế. Dưới đây là 7 việc nên làm trước ngày đó.</p>
 <!--hh-featured-->
 <h2>1. Chọn sẵn 3 căn theo thứ tự ưu tiên</h2>
 <p>Mỗi sàn tầng 3A – 28 có 28 căn: 19 studio, 4 căn 1PN+, 5 căn 2PN (<a href="/mat-bang-can-ho-sun-saphia-residence/">xem mặt bằng</a>). Chọn 1 căn chính và 2 căn dự phòng khác tầng hoặc khác dãy để không bị động khi căn đầu tiên đã có người chọn.</p>
@@ -124,14 +124,14 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Sự kiện bán hàng Sun Saphia Residence 28/11: chuẩn bị gì',
-			'desc'      => 'Sự kiện bán hàng Sun Saphia Residence dự kiến 28/11/2026: chọn sẵn 3 căn, tính tổng tiền gồm VAT và 2% bảo trì, hồ sơ vay, câu hỏi về giá và giấy tờ dự án.',
+			'desc'      => 'Sự kiện bán hàng Sun Saphia Residence dự kiến 05/12/2026: chọn sẵn 3 căn, tính tổng tiền gồm VAT và 2% bảo trì, hồ sơ vay, câu hỏi về giá và giấy tờ dự án.',
 			'points'    => array(
-				'Sự kiện bán hàng dự kiến 28/11/2026; giới thiệu dự án dự kiến 01/11 và 15/11',
+				'Sự kiện bán hàng dự kiến 05/12/2026 tại Đà Nẵng; giới thiệu dự án từ 08/11 đến 02/12',
 				'Chọn 1 căn chính và 2 căn dự phòng, tính tổng tiền gồm VAT và 2% bảo trì',
 				'Hỏi rõ chiết khấu, hỗ trợ lãi suất 24 tháng và văn bản đủ điều kiện bán',
 			),
 			'faq'       => array(
-				array( 'Khi nào Sun Saphia Residence mở bán?', 'Theo thông tin chủ đầu tư ngày 28/10/2026, sự kiện bán hàng dự kiến ngày 28/11/2026; lịch có thể thay đổi.' ),
+				array( 'Khi nào Sun Saphia Residence mở bán?', 'Theo lịch cập nhật ngày 06/11/2026, sự kiện bán hàng của chủ đầu tư dự kiến ngày 05/12/2026 tại Đà Nẵng; lịch có thể thay đổi.' ),
 				array( 'Đi sự kiện bán hàng Sun Saphia cần mang gì?', 'Căn cước công dân của người đứng tên (và vợ/chồng nếu tài sản chung), phương án tài chính, danh sách căn ưu tiên và các câu hỏi về giá, chính sách.' ),
 			),
 		),

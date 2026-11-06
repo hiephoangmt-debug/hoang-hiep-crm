@@ -39,7 +39,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 <tr><th>Sản phẩm</th><td>782 căn: studio 30 – 31 m² (513 căn), 1PN+ 50 – 51 m² (108 căn), 2PN 60 – 70 m² (133 căn); trần 3,5 m</td></tr>
 <tr><th>Pháp lý</th><td>Giấy chứng nhận đăng ký đầu tư cấp lần đầu 17/09/2026; thời hạn dự án 50 năm; công trình cấp I, niên hạn 100 năm</td></tr>
 <tr><th>Giá dự kiến</th><td>Studio tầng 15: 2,13 – 2,85 tỷ (giá có vay, chưa VAT, chưa 2% bảo trì)</td></tr>
-<tr><th>Sự kiện bán hàng</th><td>Dự kiến 28/11/2026</td></tr>
+<tr><th>Sự kiện bán hàng</th><td>Dự kiến 05/12/2026</td></tr>
 <tr><th>Bàn giao</th><td>Dự kiến tháng 11/2028, hoàn thiện cơ bản</td></tr>
 </tbody>
 </table>
@@ -144,9 +144,9 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 <thead><tr><th>Thời gian</th><th>Sự kiện</th></tr></thead>
 <tbody>
 <tr><td>23/10/2026</td><td>Kick-off dự án "Đón ánh dương, giao hòa nhịp sống" tại Đà Nẵng</td></tr>
-<tr><td>01/11 và 15/11/2026</td><td>Sự kiện giới thiệu, nhận đặt chỗ tại Đà Nẵng</td></tr>
+<tr><td>08/11 – 02/12/2026</td><td>Chuỗi sự kiện giới thiệu, nhận đặt chỗ (Đà Nẵng 09/11, 15/11; Hà Nội 08/11, 22/11)</td></tr>
 <tr><td>Từ 09/11/2026</td><td>Roadshow giới thiệu dự án tại Đà Nẵng</td></tr>
-<tr><td>28/11/2026</td><td>Sự kiện bán hàng của chủ đầu tư (dự kiến)</td></tr>
+<tr><td>05/12/2026</td><td>Sự kiện bán hàng của chủ đầu tư tại Đà Nẵng (dự kiến, khoảng 1.000 khách)</td></tr>
 <tr><td>11/2028</td><td>Bàn giao dự kiến</td></tr>
 </tbody>
 </table>
@@ -176,7 +176,7 @@ HTML
 				'Studio tầng 15 giá dự kiến 2,13 – 2,85 tỷ (có vay, chưa VAT, chưa 2% bảo trì)',
 				'Khách sạn 4 sao mặt biển quanh dự án khoảng 1,7 – 3,1 triệu/đêm; giả định studio 2,2 – 2,9 triệu',
 				'Thời hạn 50 năm – trừ khấu hao khoảng 2,1%/năm khi tính lợi suất',
-				'Sự kiện bán hàng dự kiến 28/11/2026, bàn giao dự kiến 11/2028',
+				'Sự kiện bán hàng dự kiến 05/12/2026, bàn giao dự kiến 11/2028',
 			),
 			'faq'       => array(
 				array( 'Sun Saphia Residence có đáng mua không?', 'Hợp người muốn căn biển thương hiệu Sun Group với vốn khoảng 2 – 3 tỷ để nghỉ dưỡng kết hợp cho thuê và chấp nhận thời hạn 50 năm. Cần cân nhắc cạnh tranh cho thuê (513 studio cùng tòa) và hơn 2 năm chờ bàn giao.' ),
@@ -184,7 +184,7 @@ HTML
 				array( 'Căn hộ Sun Saphia view hướng nào đẹp nhất?', 'Hướng Đông nhìn thẳng biển Mỹ Khê – Sơn Thủy, giá cao nhất; hướng Nam thấy Ngũ Hành Sơn; hướng Bắc thấy Sơn Trà và các cầu sông Hàn; hướng Tây nhìn thành phố, giá vào thấp hơn.' ),
 				array( 'Giá studio Sun Saphia Residence bao nhiêu?', 'Giá dự kiến studio 30 m² tầng 15 từ 2,13 tỷ (dãy phía sau) đến 2,85 tỷ (dãy mặt biển), áp dụng khi mua có vay, chưa VAT và 2% bảo trì; bảng giá chính thức công bố khi mở bán.' ),
 				array( 'Cho thuê studio Sun Saphia được bao nhiêu?', 'Ví dụ theo mùa (180 đêm thấp điểm, 180 đêm cao điểm, chủ nhà nhận 65%): khoảng 261 – 328 triệu/năm trước thuế, phí và khấu hao. Đây là giả định minh hoạ, không phải cam kết.' ),
-				array( 'Khi nào Sun Saphia Residence mở bán?', 'Sự kiện bán hàng của chủ đầu tư dự kiến ngày 28/11/2026; bàn giao dự kiến tháng 11/2028.' ),
+				array( 'Khi nào Sun Saphia Residence mở bán?', 'Sự kiện bán hàng của chủ đầu tư dự kiến ngày 05/12/2026; bàn giao dự kiến tháng 11/2028.' ),
 			),
 		),
 		'sources'  => array(

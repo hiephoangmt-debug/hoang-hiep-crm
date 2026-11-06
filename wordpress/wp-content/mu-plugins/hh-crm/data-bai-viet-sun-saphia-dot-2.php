@@ -60,7 +60,7 @@ function hh_posts_sun_saphia_dot_2( $posts ) {
 <ul>
 <li><strong>Hỗ trợ lãi suất lên tới 24 tháng</strong>.</li>
 <li><strong>Không có chương trình nhận nhà sớm (early key)</strong>; bàn giao dự kiến tháng 11/2028.</li>
-<li>Các sự kiện giới thiệu dự án tại Đà Nẵng dự kiến ngày 01/11 và 15/11/2026; <strong>sự kiện bán hàng của chủ đầu tư dự kiến 28/11/2026</strong>.</li>
+<li>Chuỗi sự kiện giới thiệu dự án từ 08/11 đến 02/12/2026 (Đà Nẵng 09/11 và 15/11, Hà Nội 08/11 và 22/11); <strong>sự kiện bán hàng của chủ đầu tư tại Đà Nẵng dự kiến 05/12/2026</strong> (lịch cập nhật 06/11/2026).</li>
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Giá Sun Saphia Residence trên tin rao (trước 28/10)</h2>
@@ -98,7 +98,7 @@ HTML
 			'points'    => array(
 				'Giá dự kiến 28/10/2026: studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ (phương án có vay)',
 				'Chưa gồm VAT, kinh phí bảo trì 2%, chưa trừ chiết khấu đặt chỗ sớm',
-				'Hỗ trợ lãi suất lên tới 24 tháng; sự kiện bán hàng dự kiến 28/11/2026',
+				'Hỗ trợ lãi suất lên tới 24 tháng; sự kiện bán hàng dự kiến 05/12/2026',
 			),
 			'faq'       => array(
 				array( 'Studio Sun Saphia Residence giá bao nhiêu?', 'Giá dự kiến ngày 28/10/2026 cho studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ tùy vị trí (căn mặt biển cao nhất), theo phương án có vay, chưa gồm VAT và kinh phí bảo trì, chưa trừ chiết khấu.' ),
