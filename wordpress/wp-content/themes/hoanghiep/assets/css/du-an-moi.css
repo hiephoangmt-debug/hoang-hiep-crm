@@ -70,3 +70,54 @@ body.single-du-an.du-an-moi { --lp-navy: #0e1c33; --lp-navy2: #172b4a; --lp-gold
 	.du-an-moi .layout__main .block { border-radius: 16px; padding: 20px 16px; margin-inline: -4px; }
 	.du-an-moi .project-hero::after { background: linear-gradient(0deg, rgba(14, 28, 51, .95) 0%, rgba(14, 28, 51, .5) 60%, rgba(14, 28, 51, .2) 100%); }
 }
+
+/* ===== Bố cục kiểu landing The Poet (06/11/2026): ảnh chính không che, bỏ cột phải, mỗi mục một dải full-width ===== */
+/* Đầu trang: ảnh chính hiện trọn phía trên, chữ nằm ở dải xanh đêm bên dưới */
+.du-an-moi .project-hero { display: block; min-height: 0; background: var(--lp-navy); }
+.du-an-moi .project-hero::before, .du-an-moi .project-hero::after { display: none; }
+.du-an-moi .project-hero__bg { position: static; display: block; width: 100%; height: min(78vh, 720px); object-fit: cover; opacity: 1; }
+.du-an-moi .project-hero__content { padding-block: 40px 96px; }
+.du-an-moi .project-hero .project-hero__title { text-shadow: none; }
+.du-an-moi .project-hero .breadcrumb { margin-top: 0; }
+
+/* Bỏ cột phải – nội dung chạy hết chiều ngang */
+.du-an-moi .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding-block: 0; }
+.du-an-moi .layout > .layout__side { display: none; }
+.du-an-moi .layout__main { max-width: none; }
+
+/* Mỗi mục là một dải màu tràn màn hình, xen kẽ kem / trắng */
+.du-an-moi .layout__main > .block { --band: var(--lp-sand); background: var(--band); border: 0; border-radius: 0; box-shadow: 0 0 0 100vmax var(--band); clip-path: inset(0 -100vmax); padding: clamp(44px, 6vw, 80px) 0; margin: 0; }
+.du-an-moi .layout__main > .block:nth-child(even of .block) { --band: #fff; }
+.du-an-moi .layout__main > .block .block__title { font-size: clamp(1.7rem, 3.2vw, 2.5rem); max-width: 860px; }
+.du-an-moi .layout__main > .calc-fold { margin: 32px 0; }
+.du-an-moi .layout__main > .contact-block { --band: linear-gradient(135deg, var(--lp-navy), var(--lp-navy2)); background: var(--lp-navy); box-shadow: 0 0 0 100vmax var(--lp-navy); color: #fff; }
+.du-an-moi .contact-block .block__title, .du-an-moi .contact-block h3 { color: #fff; }
+
+/* Vị trí: dải tối như mẫu, bản đồ lớn */
+.du-an-moi .layout__main > #vi-tri { --band: var(--lp-navy); color: rgba(255, 255, 255, .86); }
+.du-an-moi #vi-tri .block__title, .du-an-moi #vi-tri .block__sub, .du-an-moi #vi-tri strong, .du-an-moi #vi-tri b { color: #fff; }
+.du-an-moi #vi-tri .prose, .du-an-moi #vi-tri p, .du-an-moi #vi-tri li { color: rgba(255, 255, 255, .82); }
+.du-an-moi #vi-tri a:not(.btn) { color: var(--lp-gold2); }
+.du-an-moi #vi-tri .icon { color: var(--lp-gold2); }
+.du-an-moi #vi-tri .px-location iframe, .du-an-moi #vi-tri .px-location__img img { border-radius: 16px; }
+.du-an-moi #vi-tri .px-location__map iframe { min-height: 380px; }
+.du-an-moi #vi-tri .data-table td, .du-an-moi #vi-tri table td { color: var(--ink, #1b2433); }
+.du-an-moi #vi-tri .cta-box { background: var(--lp-navy2); border: 1px solid rgba(216, 182, 124, .3); }
+
+/* Mặt bằng tầng tiện ích trong mục Tiện ích */
+.du-an-moi .amen-plans { margin-bottom: 28px; }
+.du-an-moi .amen-plans .floors__panel img, .du-an-moi .amen-plans .ptabs__panel img { border-radius: 14px; }
+
+/* Nội thất căn mẫu: ảnh đầu lớn, các ảnh còn lại lưới */
+.gallery-grid--interior { grid-template-columns: repeat(3, 1fr); }
+.gallery-grid--interior a:first-child { grid-column: span 2; grid-row: span 2; }
+.gallery-grid--interior a:first-child img { height: 100%; aspect-ratio: auto; object-fit: cover; }
+
+@media (max-width: 760px) {
+	.du-an-moi .project-hero__bg { height: auto; aspect-ratio: 16 / 10; }
+	.du-an-moi .project-hero__content { padding-block: 28px 72px; }
+	.du-an-moi .layout__main > .block { padding: 40px 0; margin-inline: 0; }
+	.du-an-moi #vi-tri .px-location__map iframe { min-height: 300px; }
+	.du-an-moi .address-line { text-align: left; }
+	.gallery-grid--interior { grid-template-columns: repeat(2, 1fr); }
+}

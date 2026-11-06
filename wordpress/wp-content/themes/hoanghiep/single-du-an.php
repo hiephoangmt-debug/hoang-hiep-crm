@@ -22,6 +22,14 @@ while ( have_posts() ) :
 	$faq         = hh_project_faq();
 	$news        = hh_project_news();
 	$gallery     = hh_ids( 'hh_p_gallery' );
+	// Ảnh nội thất căn mẫu (tiêu đề / alt có "căn mẫu", "nội thất"…) tách khỏi thư viện thành mục riêng.
+	$img_text    = static fn( $img ) => get_the_title( $img ) . ' ' . get_post_meta( $img, '_wp_attachment_image_alt', true );
+	$interior    = array_values( array_filter( (array) $gallery, static fn( $img ) => (bool) preg_match( '/căn (hộ )?mẫu|nội thất|sample|showroom/iu', $img_text( $img ) ) ) );
+	$gallery     = array_values( array_diff( (array) $gallery, $interior ) );
+	// Mặt bằng tầng tiện ích (tiêu đề có "tiện ích") hiện ở mục Tiện ích, không lẫn với mặt bằng tầng căn hộ.
+	$floors_all  = (array) hh_ids( 'hh_p_floorplans' );
+	$amen_plans  = array_values( array_filter( $floors_all, static fn( $img ) => (bool) preg_match( '/tiện ích/iu', get_the_title( $img ) ) ) );
+	$floor_plans = array_values( array_diff( $floors_all, $amen_plans ) );
 	$type        = hh_project_type();
 	$title       = get_the_title();
 	$resale      = hh_project_is_resale();
@@ -41,6 +49,7 @@ while ( have_posts() ) :
 		'mat-bang'   => 'Mặt bằng',
 		'gio-hang'   => hh_table( 'hh_p_hot_units', 5 ) ? 'Giỏ hàng' : '',
 		'san-pham'   => 'Layout căn',
+		'noi-that'   => $interior ? 'Nội thất' : '',
 		'chinh-sach' => $resale ? 'Giá chuyển nhượng' : 'Giá & chính sách',
 		'thu-cap'    => ! $resale && $has_market ? 'Chuyển nhượng & cho thuê' : '',
 		'tien-do'    => 'Tiến độ',
@@ -353,6 +362,10 @@ while ( have_posts() ) :
 				<?php if ( $amenities ) : ?>
 					<p class="amenity-lead"><?php echo esc_html( implode( ' · ', array_slice( array_map( static fn( $a ) => preg_replace( '/\s*\(.*\)$/u', '', $a ), $amenities ), 0, 6 ) ) ); ?></p>
 				<?php endif; ?>
+				<?php if ( $amen_plans ) : ?>
+					<h3 class="block__sub">Mặt bằng tầng tiện ích <?php echo esc_html( $title ); ?></h3>
+					<div class="amen-plans"><?php get_template_part( 'template-parts/project-floors', null, array( 'ids' => $amen_plans ) ); ?></div>
+				<?php endif; ?>
 				<?php get_template_part( 'template-parts/project-amenities', null, array( 'ids' => hh_ids( 'hh_p_amenities_img' ), 'names' => $amenities ) ); ?>
 				<div class="two-col">
 					<div>
@@ -380,7 +393,7 @@ while ( have_posts() ) :
 
 			<section class="block" id="mat-bang">
 				<h2 class="block__title">Mặt bằng <?php echo esc_html( $title ); ?></h2>
-				<?php $has_plan = hh_ids( 'hh_p_masterplan_img' ) || hh_meta( 'hh_p_design_desc' ) || hh_ids( 'hh_p_floorplans' ); ?>
+				<?php $has_plan = hh_ids( 'hh_p_masterplan_img' ) || hh_meta( 'hh_p_design_desc' ) || $floor_plans; ?>
 				<?php if ( hh_ids( 'hh_p_masterplan_img' ) ) : ?>
 					<h3 class="block__sub">Mặt bằng tổng thể <?php echo esc_html( $title ); ?></h3>
 					<?php
@@ -396,9 +409,9 @@ while ( have_posts() ) :
 				<?php if ( hh_meta( 'hh_p_design_desc' ) ) : ?>
 					<p class="prose"><?php echo nl2br( esc_html( hh_meta( 'hh_p_design_desc' ) ) ); ?></p>
 				<?php endif; ?>
-				<?php if ( hh_ids( 'hh_p_floorplans' ) ) : ?>
+				<?php if ( $floor_plans ) : ?>
 					<h3 class="block__sub">Mặt bằng tầng, tòa, phân khu <?php echo esc_html( $title ); ?></h3>
-					<?php get_template_part( 'template-parts/project-floors', null, array( 'ids' => hh_ids( 'hh_p_floorplans' ) ) ); ?>
+					<?php get_template_part( 'template-parts/project-floors', null, array( 'ids' => $floor_plans ) ); ?>
 				<?php endif; ?>
 				<?php if ( ! $has_plan ) : ?>
 					<?php hh_pending( 'Mặt bằng tổng thể và mặt bằng chi tiết từng loại sản phẩm: liên hệ Hiệp để nhận bản PDF đầy đủ.', '' ); ?>
@@ -449,6 +462,14 @@ while ( have_posts() ) :
 				<?php endif; ?>
 				<?php hh_cta_box( $ctas['san-pham'] ); ?>
 			</section>
+
+			<?php if ( $interior ) : ?>
+				<section class="block" id="noi-that">
+					<h2 class="block__title">Nội thất căn hộ mẫu <?php echo esc_html( $title ); ?></h2>
+					<p class="prose">Phối cảnh nội thất căn hộ mẫu của chủ đầu tư. Bàn giao thực tế theo tiêu chuẩn và danh mục vật tư của từng loại căn; đồ rời, trang trí trong ảnh chỉ để minh họa.</p>
+					<?php hh_gallery( $interior, 'noi-that', 'gallery-grid gallery-grid--interior' ); ?>
+				</section>
+			<?php endif; ?>
 
 			<section class="block" id="chinh-sach">
 				<?php if ( $resale ) : ?>
