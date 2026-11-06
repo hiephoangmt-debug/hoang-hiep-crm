@@ -191,11 +191,11 @@ body = f'''<!--HH-LANDING-BODY-->
     </div>
     <p class="note" style="color:rgba(255,255,255,.6)">Công viên công cộng nằm trên phần đất thu hồi của dự án Hòn Ngọc Á Châu bỏ dở từ 2010; phương án Công viên, CLB thể thao biển và bãi tắm Sơn Thủy duyệt tại QĐ 130 (20/3/2025): khoảng 3 ha, mật độ xây dựng khoảng 3,9%. Nguồn: VietnamPlus, Báo Pháp luật, VnEconomy, tài liệu Kick-off. <a class="more" href="/du-an/sun-saphia-residence/quy-hoach/">Bản vẽ công viên & 4 quy hoạch xung quanh →</a></p>
     <div class="locmap rv">
-      <iframe title="Bản đồ vị trí Sun Saphia Residence – Võ Nguyên Giáp, Trường Sa, Ngũ Hành Sơn, Đà Nẵng" src="https://www.google.com/maps?q=V%C3%B5+Nguy%C3%AAn+Gi%C3%A1p+Nguy%E1%BB%85n+%C4%90%E1%BB%A9c+Thu%E1%BA%ADn+Tr%C6%B0%E1%BB%9Dng+Sa+%C4%90%C3%A0+N%E1%BA%B5ng&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      <iframe title="Bản đồ vị trí Sun Saphia Residence – Võ Nguyên Giáp, Trường Sa, Ngũ Hành Sơn, Đà Nẵng" src="https://www.google.com/maps?q=B%C3%A3i+t%E1%BA%AFm+S%C6%A1n+Th%E1%BB%A7y%2C+Tr%C6%B0%E1%BB%9Dng+Sa%2C+Ng%C5%A9+H%C3%A0nh+S%C6%A1n%2C+%C4%90%C3%A0+N%E1%BA%B5ng&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
       <div class="adj">
         <h3>Khu Saphia, phường Ngũ Hành Sơn</h3>
         <ul><li><b>Phía trước:</b> công viên 2,45 ha, bãi tắm Sơn Thủy – Mỹ Khê</li><li><b>Mặt tiền:</b> trục biển Võ Nguyên Giáp – Trường Sa</li><li><b>Phía sau:</b> sông Hàn và trung tâm thành phố</li><li><b>Bên cạnh:</b> danh thắng Ngũ Hành Sơn</li></ul>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=V%C3%B5+Nguy%C3%AAn+Gi%C3%A1p+Nguy%E1%BB%85n+%C4%90%E1%BB%A9c+Thu%E1%BA%ADn+%C4%90%C3%A0+N%E1%BA%B5ng" target="_blank" rel="noopener">📍 Chỉ đường tới dự án ↗</a>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=B%C3%A3i+t%E1%BA%AFm+S%C6%A1n+Th%E1%BB%A7y%2C+Tr%C6%B0%E1%BB%9Dng+Sa%2C+Ng%C5%A9+H%C3%A0nh+S%C6%A1n%2C+%C4%90%C3%A0+N%E1%BA%B5ng" target="_blank" rel="noopener">📍 Chỉ đường tới dự án ↗</a>
         <p style="margin:12px 0 0;font-size:14px;opacity:.85">Muốn xem tận nơi? Hiệp gọi video Zalo dẫn anh/chị đi từ dự án ra biển – miễn phí.</p>
       </div>
     </div>

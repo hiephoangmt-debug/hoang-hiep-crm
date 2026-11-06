@@ -157,8 +157,19 @@ uksort( $times, static fn( $a, $b ) => ( (float) preg_replace( '/[^\d.]/', '', s
 $times = array_slice( $times, 0, 4, true );
 
 // Bản đồ.
-$coords = hh_parse_coords( $m( 'hh_p_map_coords' ) ?: ( $parent ? hh_meta( 'hh_p_map_coords', $parent ) : '' ) );
-$mq     = $coords ? $coords[0] . ',' . $coords[1] : ( $m( 'hh_p_map_address' ) ?: ( $parent && hh_meta( 'hh_p_map_address', $parent ) ? hh_meta( 'hh_p_map_address', $parent ) : $short_name . ', ' . ( $m( 'hh_p_address' ) ?: 'Đà Nẵng' ) ) );
+// Bản đồ – giống giao diện chuẩn: tọa độ → "tên / địa chỉ trên Google Maps" → tìm theo TÊN dự án (Google nhận diện tốt hơn địa chỉ dài
+// kiểu "phường … (cũ)"); tòa / phân khu con chưa có vị trí riêng thì dùng vị trí dự án mẹ.
+$map_name = static function ( $t ) {
+	$t = trim( preg_replace( '/^Tổ hợp\s+|\s*\([^)]*\)/u', '', html_entity_decode( (string) $t, ENT_QUOTES, 'UTF-8' ) ) );
+	return false === mb_stripos( $t, 'Đà Nẵng' ) ? $t . ', Đà Nẵng' : $t;
+};
+$coords = hh_parse_coords( $m( 'hh_p_map_coords' ) );
+$mq     = $m( 'hh_p_map_address' );
+if ( ! $coords && '' === $mq && $parent ) {
+	$coords = hh_parse_coords( hh_meta( 'hh_p_map_coords', $parent ) );
+	$mq     = hh_meta( 'hh_p_map_address', $parent ) ?: ( $coords ? '' : $map_name( get_the_title( $parent ) ) );
+}
+$mq = $coords ? $coords[0] . ',' . $coords[1] : ( '' !== $mq ? $mq : $map_name( $title ) );
 
 // Loại căn: thẻ căn từ bảng loại căn + ảnh layout.
 $units = array();
