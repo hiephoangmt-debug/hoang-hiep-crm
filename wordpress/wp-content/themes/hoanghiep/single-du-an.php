@@ -37,6 +37,7 @@ while ( have_posts() ) :
 		'vi-tri'     => 'Vị trí',
 		'tien-ich'   => 'Tiện ích',
 		'xem-4d'     => ( hh_meta( 'hh_p_tour_4d' ) || hh_meta( 'hh_p_tour_units' ) ) ? 'Xem 4D' : '',
+		'xem-360'    => hh_meta( 'hh_p_tour_360' ) ? 'Xem 360°' : '',
 		'mat-bang'   => 'Mặt bằng',
 		'gio-hang'   => hh_table( 'hh_p_hot_units', 5 ) ? 'Giỏ hàng' : '',
 		'san-pham'   => 'Layout căn',
@@ -363,6 +364,7 @@ while ( have_posts() ) :
 			</section>
 
 			<?php get_template_part( 'template-parts/project-tour' ); ?>
+			<?php get_template_part( 'template-parts/project-tour-360' ); ?>
 
 			<section class="block" id="mat-bang">
 				<h2 class="block__title">Mặt bằng <?php echo esc_html( $title ); ?></h2>

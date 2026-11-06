@@ -329,7 +329,25 @@
 		}
 	};
 
-	$$( '.tour4d' ).forEach( ( box ) => {
+	// Tour 360 của chủ đầu tư nhúng trong trang: bấm là mở, không hỏi số Zalo.
+	$$( '.tour360' ).forEach( ( box ) => {
+		const play = box.querySelector( '.tour4d__play' );
+		if ( ! play ) {
+			return;
+		}
+		play.addEventListener( 'click', () => {
+			const f = document.createElement( 'iframe' );
+			f.src = box.dataset.src;
+			f.title = 'Tham quan 360°';
+			f.allow = 'fullscreen; accelerometer; gyroscope; xr-spatial-tracking';
+			f.allowFullscreen = true;
+			f.referrerPolicy = 'no-referrer';
+			box.classList.add( 'is-on' );
+			box.replaceChildren( f );
+		} );
+	} );
+
+	$$( '.tour4d:not(.tour360)' ).forEach( ( box ) => {
 		const play = box.querySelector( '.tour4d__play' );
 		if ( ! play ) {
 			return;

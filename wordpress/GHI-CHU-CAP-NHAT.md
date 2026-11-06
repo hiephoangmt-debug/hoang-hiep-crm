@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.61** + plugin Hoàng Hiệp CRM **2.20.156**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.62** + plugin Hoàng Hiệp CRM **2.20.157**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.157 · giao diện 2.15.62 (06/11/2026)
+
+- **Tham quan 360° ngay trên trang dự án:** ô mới "Link tour 360°" (Dự án → sửa → mục Hình ảnh). Tour nhúng trong trang, chỉ tải khi khách bấm, không hiện nút / link sang trang khác; có mục "Xem 360°" trên thanh mục lục.
+- **Fusion Resort & Villas:** gắn tour 360° của dự án (ảnh xem trước: toàn cảnh dãy biệt thự). Khi có bộ ảnh 360 gốc sẽ dựng tour riêng trên web.
 
 ## Có gì mới – plugin 2.20.156 (06/11/2026)
 

@@ -176,6 +176,8 @@ function hh_project_schema() {
 				'hh_p_video'   => array( 'type' => 'url', 'label' => 'Video YouTube', 'placeholder' => 'https://www.youtube.com/watch?v=…' ),
 				'hh_p_tour_4d'    => array( 'type' => 'url', 'label' => 'Link mô hình 4D / 3D (xem tự do trên web)', 'placeholder' => 'https://…/sun-saphia-4d.html', 'half' => true, 'help' => 'Web tự thêm pub=1 (bản công khai có chữ chìm số điện thoại), bỏ tham số nội bộ crm.' ),
 				'hh_p_tour_poster' => array( 'type' => 'url', 'label' => 'Ảnh xem trước khung 4D (link ảnh)', 'placeholder' => 'https://…/anh-4d.jpg', 'half' => true ),
+				'hh_p_tour_360'   => array( 'type' => 'url', 'label' => 'Link tour 360° (nhúng trong trang, không hiện link)', 'placeholder' => 'https://…/360/', 'half' => true ),
+				'hh_p_tour_360_poster' => array( 'type' => 'text', 'label' => 'Ảnh xem trước tour 360° (plugin:img/… hoặc link ảnh)', 'half' => true ),
 				'hh_p_tour_units' => array( 'type' => 'url', 'label' => 'Link công cụ chọn căn (khách để lại số Zalo mới mở)', 'placeholder' => 'https://…/chon-can-app.html', 'half' => true ),
 			),
 		),
