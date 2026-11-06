@@ -47,7 +47,7 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 ## Có gì mới – plugin 2.20.184 · giao diện 2.15.68 (06/11/2026)
 
-- **Tin bán biệt thự Đà Nẵng (06/11/2026):** 11 biệt thự / villa đang rao bán (Premier Village, Nam Việt Á, Hòa Xuân, Sơn Trà, Hải Châu, Thanh Khê, Cẩm Lệ – 7,5 đến 59 tỷ) vào mục Biệt thự, ảnh thẻ tin tự vẽ; không tên, số điện thoại, số nhà, ảnh của người đăng.
+- **Tin bán biệt thự biển Đà Nẵng (06/11/2026):** 12 biệt thự / villa mặt biển hoặc cách biển trong khoảng 500 m (An Thượng, Mỹ An, Premier Village, An Hải, Mân Thái, Phước Mỹ, Khuê Mỹ, Sơn Thủy, Hòa Hải – 7,5 đến 125 tỷ) vào mục Biệt thự, ảnh thẻ tin tự vẽ; không tên, số điện thoại, số nhà, ảnh của người đăng.
 
 - **The Poet – 3 phối cảnh mới (anh Hiệp gửi):** toàn cảnh nhìn biển Mỹ Khê – Sơn Trà làm nền đầu trang landing và ảnh đại diện dự án; toàn cảnh đêm nhìn sông Hàn – pháo hoa và tầng mái ngắm pháo hoa ở đầu trang, mục Vị trí (2 hướng view), tab Tầng mái, thư viện, khung đăng ký.
 

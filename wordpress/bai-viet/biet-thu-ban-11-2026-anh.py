@@ -1,4 +1,4 @@
-"""Ảnh thẻ tin tự vẽ (4:3) cho 11 tin bán biệt thự Đà Nẵng (06/11/2026) – không dùng ảnh tin rao của bên khác."""
+"""Ảnh thẻ tin tự vẽ (4:3) cho 12 tin bán biệt thự biển Đà Nẵng (06/11/2026) – không dùng ảnh tin rao của bên khác."""
 import sys, os
 from PIL import Image, ImageDraw, ImageFont
 OUT = sys.argv[1]
@@ -8,17 +8,18 @@ f = lambda s, b=False: ImageFont.truetype(FB if b else F, s)
 GOLD, CREAM, NAVY, GREEN = '#d8b16a', '#f7f1e3', '#0f2240', '#2f6b4f'
 CARDS = [
     # file, nhãn, đường, dòng chính, 3 ý, giá, ghi chú, số tầng (vẽ), hồ bơi
-    ('biet-thu-premier-village-vo-nguyen-giap-300m2', 'BIỆT THỰ · MỸ AN · NGŨ HÀNH SƠN', 'Premier Village', '300 m² · 3 tầng · 5 PN', ['Mặt tiền Võ Nguyên Giáp', 'Sát biển Mỹ Khê', 'Hướng Đông, 15 × 20 m'], '42 tỷ', 'Thương lượng · cạnh phố Tây An Thượng', 3, False),
-    ('biet-thu-le-manh-trinh-234m2-5-tang', 'BIỆT THỰ · AN HẢI · SƠN TRÀ', 'Đường Lê Mạnh Trinh', '234 m² · 5 tầng · thang máy', ['Cách biển khoảng 200 m', '5 – 7 phòng ngủ', 'Hướng Đông, ngang ~12 m'], '59 tỷ', 'Thương lượng · thiết kế tối giản', 5, False),
-    ('biet-thu-le-kim-lang-400m2', 'BIỆT THỰ · CẨM LỆ · ĐÀ NẴNG', 'Đường Lê Kim Lăng', '400 m² · 3 tầng · 6 PN', ['Mặt tiền ngang 20 m', 'Đường 7,5 m, sân ô tô', 'Hoàn thiện cao cấp'], '32 tỷ', 'Thương lượng · đất 20 × 20 m', 3, False),
-    ('biet-thu-nam-viet-a-le-huu-khanh-200m2', 'BIỆT THỰ · KĐT NAM VIỆT Á', 'Đường Lê Hữu Khánh', '200 m² · 3 tầng · 7 PN', ['Hồ bơi riêng', 'Đường 7,5 m, hướng Bắc', 'Ở hoặc cho thuê lưu trú'], '33 tỷ', 'Thương lượng · 10 × 20 m', 3, True),
-    ('villa-doan-khue-nam-viet-a-272m2', 'VILLA · KĐT NAM VIỆT Á', 'Đường Đoàn Khuê', '272 m² · 4 tầng · 7 PN', ['Mới 100%, sàn ~680 m²', '2 hồ bơi, gym, xông hơi', 'Hướng Đông, 10 × 27 m'], '35,5 tỷ', 'Thương lượng · Khuê Mỹ, Ngũ Hành Sơn', 4, True),
-    ('biet-thu-goc-hoa-xuan-anh-duc-182m2', 'BIỆT THỰ GÓC · KĐT HÒA XUÂN', 'Đường Anh Đức', '182 m² · 3 tầng · 4 PN', ['Lô góc 2 mặt tiền', 'Đường 7,5 m', 'Đang có khách thuê'], '17 tỷ', 'Thương lượng · Cẩm Lệ', 3, False),
-    ('biet-thu-goc-tran-van-giap-154m2', 'BIỆT THỰ GÓC · HẢI CHÂU', 'Đường Trần Văn Giáp', '154 m² · 4 tầng · 4 PN', ['Lô góc 2 mặt tiền', 'Có thang máy', 'Trung tâm Hải Châu'], '22,5 tỷ', 'Thương lượng · ngang 14 m', 4, False),
-    ('villa-pham-nhu-tang-225m2', 'VILLA · THANH KHÊ · ĐÀ NẴNG', 'Đường Phạm Nhữ Tăng', '225 m² · 3 tầng · 3 PN', ['Mới xây, có nội thất', 'Ngang 10 m, đường 7,5 m', 'Hướng Tây Nam'], '22 tỷ', 'Thương lượng · 10 × 23 m', 3, False),
-    ('biet-thu-an-xuan-thanh-khe-198m2', 'BIỆT THỰ · THANH KHÊ · ĐÀ NẴNG', 'Đường An Xuân', '198 m² · 3,5 tầng · 4 PN', ['2 mặt tiền', 'Hầm để ô tô', 'Ngang 10 m'], '15,5 tỷ', 'Thương lượng · An Khê', 4, False),
-    ('villa-vo-duy-ninh-man-thai-4-tang', 'VILLA · MÂN THÁI · SƠN TRÀ', 'Đường Võ Duy Ninh', '~63 m² · 4 tầng · 4 PN', ['Hồ bơi riêng, xông hơi', 'Cách biển ~200 m', 'Hướng Đông Nam'], '8,95 tỷ', 'Thương lượng · chủ cần bán', 4, True),
-    ('villa-mini-tra-lo-hoa-hai-100m2', 'VILLA MINI · HÒA HẢI · NGŨ HÀNH SƠN', 'Đường Trà Lộ', '100 m² · 3 tầng · 3 PN', ['Hồ bơi, full nội thất', 'Cách biển ~400 m', 'Hướng Nam, 5 × 20 m'], '7,5 tỷ', 'Thương lượng · mới 100%', 3, True),
+    ('biet-thu-bien-tran-bach-dang-an-thuong-300m2', 'BIỆT THỰ BIỂN · AN THƯỢNG · MỸ KHÊ', 'Mặt tiền Trần Bạch Đằng', '300 m² · 5 tầng · 11 PN', ['Sát biển Mỹ Khê', 'Mặt tiền ngang 15 m', 'Phố Tây An Thượng'], '125 tỷ', 'Thương lượng · Ngũ Hành Sơn', 5, False),
+    ('villa-bien-nguyen-van-thoai-240m2', 'VILLA BIỂN · AN HẢI · SƠN TRÀ', 'Đường Nguyễn Văn Thoại', '240 m² · 3 tầng · 8 PN', ['~150 m ra biển Mỹ Khê', 'Ở + căn hộ cho thuê', 'Trục du lịch ra biển'], '64,5 tỷ', 'Thương lượng · Sơn Trà', 3, False),
+    ('biet-thu-le-manh-trinh-234m2-5-tang', 'BIỆT THỰ BIỂN · AN HẢI · SƠN TRÀ', 'Đường Lê Mạnh Trinh', '234 m² · 5 tầng · thang máy', ['Cách biển khoảng 200 m', '5 – 7 phòng ngủ', 'Hướng Đông, ngang ~12 m'], '59 tỷ', 'Thương lượng · thiết kế tối giản', 5, False),
+    ('biet-thu-pham-quang-anh-gan-bien-357m2', 'BIỆT THỰ BIỂN · AN HẢI · SƠN TRÀ', 'Đường Phạm Quang Ảnh', '~360 m² · 3 tầng', ['Gần biển Mỹ Khê', 'Mặt tiền, hướng Đông', 'Khu phố du lịch'], '45 tỷ', 'Thương lượng · Sơn Trà', 3, False),
+    ('biet-thu-premier-village-vo-nguyen-giap-300m2', 'BIỆT THỰ BIỂN · MỸ AN · NGŨ HÀNH SƠN', 'Premier Village', '300 m² · 3 tầng · 5 PN', ['Mặt tiền Võ Nguyên Giáp', 'Sát biển Mỹ Khê', 'Hướng Đông, 15 × 20 m'], '42 tỷ', 'Thương lượng · cạnh phố Tây An Thượng', 3, False),
+    ('villa-goc-che-lan-vien-110m2', 'VILLA BIỂN · MỸ AN · NGŨ HÀNH SƠN', 'Đường Chế Lan Viên', '~110 m² · 4 tầng · 4 PN', ['1 phút ra biển', 'Lô góc, mới 100%', 'Hồ bơi lớn, hướng Nam'], '20 tỷ', 'Thương lượng · sân thượng', 4, True),
+    ('villa-phuoc-truong-5-sat-bien-80m2', 'VILLA BIỂN · PHƯỚC MỸ · SƠN TRÀ', 'Đường Phước Trường 5', '80 m² · 4 tầng · 4 PN', ['Sát biển Phạm Văn Đồng', 'Khu phố du lịch', 'Hướng Đông Bắc, 5 × 16 m'], '18,2 tỷ', 'Thương lượng · Sơn Trà', 4, False),
+    ('villa-bien-son-thuy-dong-90m2', 'VILLA BIỂN · NGŨ HÀNH SƠN', 'Đường Sơn Thủy Đông 1', '90 m² · 5 tầng · 5 PN', ['Cách biển khoảng 200 m', 'Xây mới 100%', 'Khu bãi tắm Sơn Thủy'], '16 tỷ', 'Thương lượng · ngang 5,5 m', 5, False),
+    ('villa-bien-da-man-dong-135m2', 'VILLA BIỂN · KHUÊ MỸ · NGŨ HÀNH SƠN', 'Đường Đa Mặn Đông 4', '135 m² · 3 tầng · 7 PN', ['3 – 5 phút ra biển Mỹ Khê', 'Có hồ bơi', 'Ở hoặc cho thuê lưu trú'], '11,8 tỷ', 'Thương lượng · Khuê Mỹ', 3, True),
+    ('villa-vo-duy-ninh-man-thai-4-tang', 'VILLA BIỂN · MÂN THÁI · SƠN TRÀ', 'Đường Võ Duy Ninh', '~63 m² · 4 tầng · 4 PN', ['Hồ bơi riêng, xông hơi', 'Cách biển ~200 m', 'Hướng Đông Nam'], '8,95 tỷ', 'Thương lượng · chủ cần bán', 4, True),
+    ('villa-tran-van-thanh-khue-my-4-tang', 'VILLA BIỂN · KHUÊ MỸ · NGŨ HÀNH SƠN', 'Đường Trần Văn Thành', '50 m² · 4 tầng · 4 PN', ['~400 m ra biển Mỹ Khê', 'Có hồ bơi', 'Ngang 5,5 m'], '8,6 tỷ', 'Thương lượng · cho thuê lưu trú', 4, True),
+    ('villa-mini-tra-lo-hoa-hai-100m2', 'VILLA MINI · HÒA HẢI · GẦN BIỂN', 'Đường Trà Lộ', '100 m² · 3 tầng · 3 PN', ['Hồ bơi, full nội thất', 'Cách biển ~400 m', 'Hướng Nam, 5 × 20 m'], '7,5 tỷ', 'Thương lượng · mới 100%', 3, True),
 ]
 for name, area, street, head, rows, gia, note, floors, pool in CARDS:
     W, H = 1600, 1200
@@ -27,7 +28,10 @@ for name, area, street, head, rows, gia, note, floors, pool in CARDS:
     # Biệt thự minh họa: khối nhà rộng, số tầng theo tin, mái bằng, cây hai bên, hồ bơi phía trước nếu có.
     bx, bw, base, fh = 1000, 470, 960, 120 if floors <= 3 else 92
     top = base - floors * fh
-    dr.rectangle([940, base, 1560, 1020], fill=GREEN)
+    dr.rectangle([940, base - 260, 1560, base], fill='#1f6f8b')
+    for k in range(7):
+        dr.arc([950 + k * 88, base - 250, 1020 + k * 88, base - 230], 0, 180, fill='#7cc3d6', width=3)
+    dr.rectangle([940, base, 1560, 1020], fill='#e6d3a3')
     for r in range(floors):
         y0 = top + r * fh
         x0 = bx + (40 if r == 0 and floors > 2 else 0)
