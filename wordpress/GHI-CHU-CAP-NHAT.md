@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.81** + plugin Hoàng Hiệp CRM **2.20.183**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.81** + plugin Hoàng Hiệp CRM **2.20.184**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -45,7 +45,9 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 - **Landing The Poet:** ảnh chính (toàn cảnh biển Mỹ Khê – Sơn Trà) hiện trọn ở đầu trang, không lớp phủ tối, không chữ đè; tiêu đề, thông tin nhanh và nút đặt ngay bên dưới ảnh.
 
-## Có gì mới – plugin 2.20.183 · giao diện 2.15.68 (06/11/2026)
+## Có gì mới – plugin 2.20.184 · giao diện 2.15.68 (06/11/2026)
+
+- **Tin bán biệt thự Đà Nẵng (06/11/2026):** 11 biệt thự / villa đang rao bán (Premier Village, Nam Việt Á, Hòa Xuân, Sơn Trà, Hải Châu, Thanh Khê, Cẩm Lệ – 7,5 đến 59 tỷ) vào mục Biệt thự, ảnh thẻ tin tự vẽ; không tên, số điện thoại, số nhà, ảnh của người đăng.
 
 - **The Poet – 3 phối cảnh mới (anh Hiệp gửi):** toàn cảnh nhìn biển Mỹ Khê – Sơn Trà làm nền đầu trang landing và ảnh đại diện dự án; toàn cảnh đêm nhìn sông Hàn – pháo hoa và tầng mái ngắm pháo hoa ở đầu trang, mục Vị trí (2 hướng view), tab Tầng mái, thư viện, khung đăng ký.
 
