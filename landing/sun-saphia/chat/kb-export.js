@@ -7,7 +7,8 @@ var a = src.indexOf('  var KB = ['), b = src.indexOf('\n  ];\n', a);
 if (a < 0 || b < 0) throw new Error('Không tìm thấy KB trong hhc-chat.js');
 var KB = new Function('SO', 'EVT_ON', 'TEL', 'ZALO', src.slice(a, b + 6) + '\nreturn KB;')(
   '0904 567 009', false, 'tel:0904567009', 'https://zalo.me/0904567009');
-var out = KB.map(function (it) {
+var dau = fs.readFileSync(path.join(__dirname, 'kb-ai-dau.txt'), 'utf8').trim() + '\n\n# CÂU TRẢ LỜI MẪU ĐÃ DUYỆT (theo chủ đề)\n\n';
+var out = dau + KB.map(function (it) {
   return '## ' + (it.topic || it.id) + '\n' + it.a.map(function (x) { return '- ' + x; }).join('\n');
 }).join('\n\n') + '\n';
 fs.writeFileSync(path.join(__dirname, 'kb-ai.txt'), out);
