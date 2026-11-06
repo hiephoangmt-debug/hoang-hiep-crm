@@ -1157,6 +1157,7 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
   /* khách bấm một căn trên mặt bằng 4D: chatbot hỏi thăm, gợi ý tư vấn đúng căn đó */
   window.hhcUnit = function (u) {
     if (!u || !u.code || !nudge2) return;
+    window.__hhcUnitAt = Date.now();
     var t = 'Dạ chào Anh/Chị 👋 Căn ' + u.code + (u.type ? ' (' + u.type + (u.area ? ', ' + u.area + ' m²' : '') + (u.view ? ', view ' + u.view : '') + ')' : '') + ' Anh/Chị chọn đẹp lắm ạ – căn này cũng đang có nhiều khách quan tâm. Anh/Chị cần em hỗ trợ chi tiết giá, chính sách hay bảng tính cho căn này không ạ?';
     var qs = ['Giá căn ' + u.code + ' bao nhiêu?', 'Gửi bảng giá căn ' + u.code + ' qua Zalo', 'Căn ' + (u.type || 'này') + ' cho thuê được bao nhiêu?'];
     if (box.classList.contains('on')) { say(t, qs); return; }
@@ -1199,6 +1200,7 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
     return box.classList.contains('on') || (a && /INPUT|TEXTAREA|SELECT/.test(a.tagName)) || Date.now() - loadAt < 8000 || /\b(lp-on|ss4d-gate)\b/.test(document.body.className);
   }
   function showNudge(rule) {
+    if (Date.now() - (window.__hhcUnitAt || 0) < 180000) return;   // vừa hỏi thăm theo căn: không chen câu gợi ý chung
     var qs = rule.q.filter(function (q) { return !asked[norm(q)]; }); if (!qs.length) return;
     nudge2.innerHTML = '';
     var x = el('button', 'hhc-nx', '×'); x.type = 'button'; x.setAttribute('aria-label', 'Ẩn'); x.onclick = function () { nudge2.classList.remove('on'); };
