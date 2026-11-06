@@ -501,7 +501,7 @@ function hh_special_projects( $key ) {
 			$out[ $id ] = $products[ $key ];
 		}
 	}
-	uksort( $out, static fn( $a, $b ) => (int) (bool) hh_meta( 'hh_p_featured', $b ) - (int) (bool) hh_meta( 'hh_p_featured', $a ) );
+	uksort( $out, static fn( $a, $b ) => array( function_exists( 'hh_project_rank' ) ? hh_project_rank( $a ) : 0, (int) ! hh_meta( 'hh_p_featured', $a ) ) <=> array( function_exists( 'hh_project_rank' ) ? hh_project_rank( $b ) : 0, (int) ! hh_meta( 'hh_p_featured', $b ) ) ); // Đang mở bán trước, rồi HOT.
 	return $out;
 }
 

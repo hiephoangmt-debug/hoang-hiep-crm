@@ -626,9 +626,16 @@ function hh_hot_query( $post_type, $args = array() ) {
 	if ( $args['type_term'] ) {
 		$base['tax_query'] = array( array( 'taxonomy' => 'loai-du-an', 'terms' => (int) $args['type_term'], 'include_children' => true ) );
 	}
+	if ( 'du-an' === $post_type && function_exists( 'hh_sort_projects_by_rank' ) ) {
+		$base['posts_per_page'] = max( 30, $args['limit'] * 5 ); // Lấy rộng rồi xếp: dự án đang bán lên trước, đã bán xong xuống sau.
+	}
 	$hot = get_posts( array_merge( $base, array( 'meta_query' => array_merge( $meta, array( array( 'key' => $flag, 'value' => '1' ) ) ) ) ) );
 	$new = get_posts( array_merge( $base, $meta ? array( 'meta_query' => $meta ) : array() ) );
-	$ids = array_slice( array_values( array_unique( array_merge( $hot, $new ) ) ), 0, $args['limit'] );
+	$ids = array_values( array_unique( array_merge( $hot, $new ) ) );
+	if ( 'du-an' === $post_type && function_exists( 'hh_sort_projects_by_rank' ) ) {
+		$ids = hh_sort_projects_by_rank( $ids );
+	}
+	$ids = array_slice( $ids, 0, $args['limit'] );
 
 	return new WP_Query(
 		array(

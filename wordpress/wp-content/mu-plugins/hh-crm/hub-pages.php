@@ -226,6 +226,7 @@ function hh_hub_projects( $key ) {
 			$out[] = (int) $id;
 		}
 	}
+	$out = function_exists( 'hh_sort_projects_by_rank' ) ? hh_sort_projects_by_rank( $out ) : $out; // Đang bán lên trước.
 	return $cache[ $key ] = $out; // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments
 }
 
