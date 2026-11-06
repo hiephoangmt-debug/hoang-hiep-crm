@@ -48,23 +48,23 @@ add_filter(
 				'hh_p_builder'      => 'Central (Centralcons) – tổng thầu',
 				'hh_p_type'         => 'Căn hộ cao cấp, khối đế thương mại',
 				'hh_p_address'      => '95 – 97 – 99 Hồ Xuân Hương, phường Mỹ An (cũ), Ngũ Hành Sơn, Đà Nẵng',
-				'hh_p_scale'        => 'Đất 2.009,2 m², mật độ xây dựng 59,23%, hệ số sử dụng đất 12,5; sàn nhà ở 17.271 m² (tổng sàn khoảng 30.080 m²); khoảng 689 cư dân',
+				'hh_p_scale'        => 'Đất 2.009 m², 1 tòa 25 tầng, 263 căn',
 				'hh_p_blocks'       => '1 tòa tháp',
 				'hh_p_floors'       => '25 tầng nổi, 2 tầng hầm, 1 tum thang',
 				'hh_p_units'        => '263 căn hộ',
-				'hh_p_ownership'    => 'Sở hữu lâu dài (người Việt Nam); chưa bán cho người nước ngoài',
-				'hh_p_legal'        => 'Đủ điều kiện bán nhà ở hình thành trong tương lai (Công văn 11222/SXD-QLN ngày 24/6/2026 của Sở Xây dựng Đà Nẵng, 263 căn); chủ trương đầu tư 1459/QĐ-UBND (12/7/2023); quy hoạch 1/500 (2585/QĐ-UBND, 12/7/2024); giấy phép xây dựng 414/GPXD (11/4/2025); thẩm duyệt PCCC (3/4/2025); đã có giấy chứng nhận quyền sử dụng đất, đã nộp tiền sử dụng đất (6/2026); dự án chưa thế chấp ngân hàng (theo chủ đầu tư báo cáo); không bán cho người nước ngoài',
+				'hh_p_ownership'    => 'Sở hữu lâu dài (người Việt Nam)',
+				'hh_p_legal'        => 'Đủ điều kiện bán 263 căn (Sở Xây dựng, 24/6/2026); đã có giấy phép xây dựng, sổ đất',
 				'hh_p_designer'     => 'Huni Architectes (chi nhánh Việt Nam); tư vấn giám sát: Viện Khoa học Công nghệ Xây dựng (IBST)',
 				'hh_p_manager'      => 'Tư vấn quản lý vận hành dự kiến: CBRE',
 				'hh_p_payment'      => "Đặt cọc | Ký thỏa thuận đặt cọc | 200 triệu\nĐợt 1 | Trong 10 ngày, ký hợp đồng mua bán | 15% (gồm cọc)\nĐợt 2 – 7 | Theo tiến độ xây dựng (sàn tầng 15, 20, 25, cất nóc) | 55%\nĐợt 8 | Nhận thông báo bàn giao | 25% + kinh phí bảo trì\nĐợt 9 | Nhận giấy chứng nhận | 5%",
 				'hh_p_policy'       => "Phương thức tiêu chuẩn: thanh toán theo tiến độ xây dựng, 25% khi nhận nhà, 5% khi nhận sổ\nThanh toán sớm 70% trong 30 ngày sau ký hợp đồng mua bán (ưu đãi cao nhất)\nNhận nhà ưu việt: thanh toán khoảng 45% trước bàn giao, 25% khi nhận nhà, 25% sau 12 tháng\nVay ngân hàng đến 50 – 70% giá trị căn, chủ đầu tư hỗ trợ lãi suất 100% đến khi nhận nhà, 50% thêm 12 tháng (tối đa 24 tháng), ân hạn gốc 18 – 36 tháng\nNgân hàng bảo lãnh: VietinBank; cho vay: VietinBank, Vietcombank, MB\nMức chiết khấu theo từng phương thức thay đổi theo đợt – liên hệ Hoàng Hiệp để nhận chính sách đang áp dụng",
-				'hh_p_unit_area'    => 'Căn 1PN+ 45,9 – 46,7 m², 2PN 64,7 – 82,5 m², 3PN 90,2 – 91,4 m²; penthouse thông tầng 190 – 235 m² (diện tích thông thủy)',
+				'hh_p_unit_area'    => 'Khoảng 46 – 91 m²; penthouse 190 – 235 m²',
 				'hh_p_price_from'   => 4940,
 				'hh_p_price_m2'     => 'Khoảng 92 – 107 triệu/m² thông thủy, đã gồm VAT (bảng hàng tầng 5 – 8, 11/2026 – tham khảo)',
 				'hh_p_start'        => 'Khởi công 4/2025 (giấy phép xây dựng 11/4/2025)',
-				'hh_p_handover'     => 'Dự kiến năm 2027 (chủ đầu tư công bố tháng 5/2027; lịch thanh toán dự kiến thông báo bàn giao 9/2027). Bảo hành 60 tháng',
+				'hh_p_handover'     => 'Dự kiến năm 2027',
 				'hh_p_highlights'   => "Cách biển Mỹ Khê khoảng 300 m, trên trục Hồ Xuân Hương\nCăn góc view biển Mỹ Khê (hướng Đông Bắc) hoặc view sông Hàn – pháo hoa (hướng Tây Nam)\nKính lớn toàn căn, phòng tắm có cửa sổ riêng\nHồ bơi trong nhà, bể sục, gym, yoga, lounge, nhà hàng – café\nTổng thầu Central",
-				'hh_p_design_desc'  => 'Tháp căn hộ 25 tầng trên khối đế thương mại, mặt đứng khung viền sáng. Mỗi tầng điển hình có các căn 1PN+1 45,8 m², 2PN 64,4 – 80,6 m² và 3PN góc 89,4 m²; căn phía Đông Bắc nhìn biển Mỹ Khê, căn phía Tây Nam nhìn sông Hàn và pháo hoa.',
+				'hh_p_design_desc'  => 'Tháp căn hộ 25 tầng nổi, 2 tầng hầm trên khu đất 2.009,2 m² (mật độ xây dựng khoảng 58 – 59%, hệ số sử dụng đất 12,5, tổng sàn khoảng 30.080 m², khoảng 689 cư dân), mặt đứng khung viền sáng. Cơ cấu theo chủ đầu tư: 1PN+ 45,9 – 46,7 m², 2PN 64,7 – 82,5 m², 3PN 90,2 – 91,4 m², 5 penthouse thông tầng 190 – 235 m² (diện tích thông thủy). Bàn giao dự kiến 2027 (chủ đầu tư công bố tháng 5/2027), bảo hành 60 tháng. Mỗi tầng điển hình có các căn 1PN+1 45,8 m², 2PN 64,4 – 80,6 m² và 3PN góc 89,4 m²; căn phía Đông Bắc nhìn biển Mỹ Khê, căn phía Tây Nam nhìn sông Hàn và pháo hoa.',
 				'hh_p_unit_types'   => "Căn 1PN+1 | 45,8 – 45,9 m² | 1+ | Khoảng 4,94 – 4,95 tỷ
 Căn 2PN hướng Tây Nam | 64,6 – 64,9 m² | 2 | Khoảng 5,96 – 6,04 tỷ
 Căn 2PN hướng Đông Bắc (view biển) | 64,6 – 65,1 m² | 2 | Khoảng 6,12 – 6,44 tỷ
@@ -114,6 +114,14 @@ Căn 3PN góc view biển | 89,9 – 90,1 m² | 3 | Khoảng 9,2 – 9,57 tỷ",
 		);
 		// Bản đã nhập trước đó (2.20.167, 2.20.168): ô nào vẫn đúng bản cũ thì thay bằng bản mới.
 		$cu  = (array) include __DIR__ . '/data-the-poet-residence-cu.php';
+		// Trang đã tạo trước đó (26/10/2026) từ du-an-tong-hop.json: thay số liệu, bài viết, mô tả, tên cũ.
+		if ( function_exists( 'hh_du_an_tong_hop' ) ) {
+			foreach ( hh_du_an_tong_hop()['projects'] as $j ) {
+				if ( 'the-poet-residence-da-nang' === ( $j['slug'] ?? '' ) ) {
+					$cu['json'] = array( 'meta' => (array) ( $j['meta'] ?? array() ), 'content' => (string) ( $j['content'] ?? '' ), 'excerpt' => (string) ( $j['excerpt'] ?? '' ), 'title' => (string) ( $j['title'] ?? '' ) );
+				}
+			}
+		}
 		$new = &$projects[ count( $projects ) - 1 ];
 		foreach ( $cu as $old ) {
 			foreach ( (array) $old['meta'] as $k => $v ) {
@@ -125,7 +133,10 @@ Căn 3PN góc view biển | 89,9 – 90,1 m² | 3 | Khoảng 9,2 – 9,57 tỷ",
 				$new['fix_content'][] = $old['content'];
 			}
 		}
-		$new['fix_excerpt'] = $cu['170']['excerpt'] ?? '';
+		$new['fix_excerpt'] = $cu['json']['excerpt'] ?? ( $cu['170']['excerpt'] ?? '' ); // Trang hiện có mô tả từ bản 26/10.
+		if ( ! empty( $cu['json']['title'] ) ) {
+			$new['fix_title'] = array( $cu['json']['title'] );
+		}
 		unset( $new );
 		return $projects;
 	},

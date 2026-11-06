@@ -96,6 +96,18 @@ while ( have_posts() ) :
 			'Pháp lý'   => hh_meta( 'hh_p_legal' ),
 		)
 	);
+	// Thanh tóm tắt: ô quá dài (VD pháp lý liệt kê nhiều văn bản) chỉ hiện ý đầu – chi tiết đã có trong bài.
+	$key_facts = array_map(
+		static function ( $v ) {
+			$v = (string) $v;
+			if ( mb_strlen( $v ) <= 90 ) {
+				return $v;
+			}
+			$first = trim( preg_split( '/;\s|\n/u', $v )[0] );
+			return mb_strlen( $first ) <= 110 ? $first : wp_trim_words( $first, 16, '…' );
+		},
+		$key_facts
+	);
 	?>
 	<?php hoanghiep_project_inline_css(); ?>
 	<section class="project-hero">
