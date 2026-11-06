@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap">
 <style>
-/* Mô hình 4D Fusion Resort & Villas Đà Nẵng: 85 biệt thự đặt theo mặt bằng tổng thể chủ đầu tư, tô màu theo loại, không ghi mã căn. */
+/* Mô hình 4D Fusion Resort & Villas Đà Nẵng: 85 biệt thự đặt theo mặt bằng tổng thể chủ đầu tư, có mã căn. */
 :root{--navy:#0A2540;--console:rgba(9,30,52,.88);--ink:#F3F6FA;--muted:#A9BCD0;--accent:#C9A15B;--line:rgba(255,255,255,.16);--chip:rgba(255,255,255,.08);
   --font:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color-scheme:dark}
 html,body{height:100%}
@@ -60,7 +60,7 @@ body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--font);ov
   <div class="brand">
     <small>Mô hình 4D · Đà Nẵng</small>
     <h1>Fusion Resort <span>&amp;</span> Villas</h1>
-    <p>85 biệt thự trên 15,75 ha · bấm vào biệt thự để xem loại và diện tích</p>
+    <p>85 biệt thự trên 15,75 ha · có mã căn · bấm vào biệt thự để xem loại và diện tích</p>
   </div>
   <div class="contact">Hoàng Hiệp · Zalo<b>0904 567 009</b><a href="https://zalo.me/0904567009" target="_blank" rel="noopener">Nhắn Zalo hỏi căn →</a></div>
 </header>
@@ -70,7 +70,7 @@ body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--font);ov
   <h2 id="cName"></h2>
   <dl id="cDl"></dl>
   <p id="cNote"></p>
-  <a class="btn" id="cBtn" href="https://zalo.me/0904567009" target="_blank" rel="noopener">Hỏi giá loại căn này qua Zalo</a>
+  <a class="btn" id="cBtn" href="https://zalo.me/0904567009" target="_blank" rel="noopener">Hỏi giá căn này qua Zalo</a>
 </aside>
 <nav class="console">
   <div class="row" id="types"></div>
@@ -79,6 +79,7 @@ body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--font);ov
     <button class="chip" type="button" data-view="bien">Nhìn từ biển</button>
     <button class="chip" type="button" data-view="tren">Từ trên cao</button>
     <button class="chip" type="button" id="real" aria-pressed="false">Tô màu theo loại</button>
+    <button class="chip" type="button" id="codes" aria-pressed="true">Mã căn</button>
     <button class="chip" type="button" id="spin" aria-pressed="false">Tự xoay</button>
   </div>
   <p class="note">Dựng lại theo mặt bằng tổng thể của chủ đầu tư để minh họa vị trí – không theo tỷ lệ chính xác. Giá, căn còn trống: liên hệ 0904 567 009.</p>
@@ -124,6 +125,13 @@ col(1330,1448,728,1032,['p5','p4','p4','p4','p4','p4','p3']);
 col(1475,1592,795,1032,['b5','b5','b5','b5','b5']);
 villa(790,840,830,896,'gf');row(836,1212,840,906,9,'gt');villa(738,904,790,938,'gf');villa(738,942,790,976,'gf');
 villa(785,976,824,1032,'gf');villa(830,976,869,1032,'gf');row(876,1235,958,1032,9,'gt');villa(1240,940,1292,976,'gt');
+
+/* ---------- Mã căn theo mặt bằng chủ đầu tư (cùng thứ tự với danh sách trên) ---------- */
+(function(){function r(p,a){return a.map(function(n){return p+n})}
+  var C=['A3','A4'].concat(r('A',[5,6,7,8,9,10,11,12,14,15]),['A16','A2','A1','B1'],r('B',[2,3,4,5,6,7,8,9,10,11]),r('C',[1,2,3,4,5,6]),r('D',[1,2,3,4,5,6,7]),['J1'],r('J',[2,3,4,5]),
+    r('H',[1,2,3,4,5]),r('M',[1,2,3,4,5,6,7]),r('K',[1,2,3,4,5]),['G1'],r('G',[2,3,4,5,6,7,8,9,10]),['E1','E2','E3','E4'],r('E',[5,6,7,8,9,10,11,12,14]),['E15']);
+  if(C.length!==V.length&&window.console)console.warn('Số mã căn lệch',C.length,V.length);
+  V.forEach(function(v,i){v.code=C[i]||''})})();
 
 /* ---------- Cảnh ---------- */
 var app=document.getElementById('app');
@@ -201,6 +209,14 @@ V.forEach(function(v,n){
   v.g=g;v.roofs=roofs;v.rm=rm;v.base=rm.color.clone();S.add(g);
 });
 
+/* ---------- Nhãn mã căn trên mái (nằm trong ảnh 3D, thu nhỏ theo khoảng cách) ---------- */
+var codeOn=true;
+V.forEach(function(v){var c=document.createElement('canvas');c.width=128;c.height=64;var g=c.getContext('2d');
+  g.fillStyle='rgba(10,37,64,.82)';g.beginPath();if(g.roundRect)g.roundRect(6,10,116,44,12);else g.rect(6,10,116,44);g.fill();
+  g.fillStyle='#fff';g.font='800 34px "Be Vietnam Pro",Arial,sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText(v.code,64,33);
+  var sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),transparent:true,sizeAttenuation:false}));
+  sp.scale.set(.056,.028,1);sp.position.set(v.g.position.x,(v.t==='gf'?7:12),v.g.position.z);sp.renderOrder=5;S.add(sp);v.sp=sp});
+
 /* ---------- Rừng phi lao phía Nam ---------- */
 (function(){var N=260,m=new THREE.InstancedMesh(new THREE.ConeGeometry(3,10,6),mat('#2f5a2c'),N),o=new THREE.Object3D();
   for(var k=0;k<N;k++){var x=560+Math.random()*1000,y=1095+Math.random()*260;o.position.set(X(x),5,Z(y));var s=.7+Math.random()*.6;o.scale.set(s,s,s);o.updateMatrix();m.setMatrixAt(k,o.matrix)}
@@ -248,8 +264,9 @@ GROUPS.forEach(function(gp){on[gp[0]]=true;var b=document.createElement('button'
   b.onclick=function(){on[gp[0]]=!on[gp[0]];b.classList.toggle('off',!on[gp[0]]);paint()};types.appendChild(b)});
 function grp(t){for(var k=0;k<GROUPS.length;k++)if(GROUPS[k][2].indexOf(t)>=0)return GROUPS[k][0]}
 var byType=false,sel=null;
-function paint(){V.forEach(function(v){var vis=on[grp(v.t)];v.g.visible=vis;
+function paint(){V.forEach(function(v){var vis=on[grp(v.t)];v.g.visible=vis;v.sp.visible=vis&&codeOn;
   if(byType)v.rm.color.set(T[v.t].col);else v.rm.color.copy(v.base);v.rm.emissive.set(v===sel?'#664400':'#000000')})}
+document.getElementById('codes').onclick=function(){codeOn=!codeOn;this.setAttribute('aria-pressed',codeOn);paint()};
 document.getElementById('real').onclick=function(){byType=!byType;this.setAttribute('aria-pressed',byType);paint()};
 
 /* ---------- Bấm chọn biệt thự ---------- */
@@ -260,10 +277,10 @@ R.domElement.addEventListener('pointerup',function(e){if(!down||Math.hypot(e.cli
   var hit=ray.intersectObjects(pick.filter(function(o){return o.parent.visible}))[0];show(hit?hit.object.userData.v:null)});
 function show(v){sel=v;paint();if(!v){card.hidden=true;return}var t=T[v.t];
   document.getElementById('cTag').textContent=t.pn;document.getElementById('cTag').style.background=t.col;
-  document.getElementById('cName').textContent=t.name;
+  document.getElementById('cName').textContent='Căn '+v.code+' · '+t.name;
   document.getElementById('cDl').innerHTML='<dt>Đất</dt><dd>'+t.land+'</dd><dt>Biệt thự</dt><dd>'+t.villa+'</dd><dt>Số căn</dt><dd>'+t.n+'</dd><dt>Tiện ích</dt><dd>Hồ bơi riêng, sân vườn</dd>';
   document.getElementById('cNote').textContent=t.note+' Diện tích theo bảng chủ đầu tư, tham khảo.';
-  document.getElementById('cBtn').href='https://zalo.me/0904567009';card.hidden=false}
+  document.getElementById('cBtn').href='https://zalo.me/0904567009';document.getElementById('cBtn').textContent='Hỏi giá căn '+v.code+' qua Zalo';card.hidden=false}
 card.querySelector('.x').onclick=function(){show(null)};
 
 /* ---------- Góc nhìn ---------- */
