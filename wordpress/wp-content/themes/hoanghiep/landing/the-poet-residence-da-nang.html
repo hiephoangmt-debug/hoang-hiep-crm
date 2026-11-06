@@ -72,6 +72,22 @@ section{padding:72px 0}
 .views{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
 .view{border-radius:var(--r);padding:18px;background:linear-gradient(135deg,rgba(185,141,79,.22),rgba(185,141,79,.05));border:1px solid rgba(216,182,124,.3)}
 .view b{color:var(--gold2)}
+/* Bản đồ */
+.locmap{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-top:26px}
+.locmap iframe{border:0;width:100%;height:100%;min-height:360px;border-radius:var(--r);background:var(--navy2)}
+.adj{background:var(--navy2);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:20px}
+.adj h3{margin:0 0 10px;font-family:'Playfair Display',serif;color:var(--gold2);font-size:20px}
+.adj ul{margin:0 0 14px;padding-left:18px;font-size:14px;opacity:.9}
+.adj li{margin-bottom:6px}
+.adj a{color:var(--gold2);font-weight:600}
+/* Mặt bằng tầng tiện ích */
+.plan{display:block;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:16px;background:#fff}
+.plan img{width:100%;height:auto;display:block}
+.plan-cap{font-size:13px;color:var(--muted);margin:-8px 0 16px}
+/* Nội thất căn mẫu */
+.interior{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
+.interior .card-img{aspect-ratio:4/3}
+.interior .card-img:nth-child(1){grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
 /* Tiện ích */
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}
 .tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font:inherit;font-size:14px;cursor:pointer}
@@ -174,7 +190,8 @@ footer.foot{background:#0a1526;color:rgba(255,255,255,.7);font-size:13px;padding
 .hero .container,.split,.cta .container{grid-template-columns:1fr}
 .hero-img{justify-self:stretch}
 .facts,.times,.pays,.brands,.loan{grid-template-columns:repeat(2,1fr)}
-.units,.grid3{grid-template-columns:repeat(2,1fr)}
+.units,.grid3,.interior{grid-template-columns:repeat(2,1fr)}
+.locmap{grid-template-columns:1fr}
 .gallery{grid-template-columns:repeat(2,1fr)}
 .top .btn{display:none}
 }
@@ -197,7 +214,7 @@ section{padding:52px 0}
   <div class="container">
     <a class="brand" href="#top"><b>THE POET</b><small>Residence · Đà Nẵng</small></a>
     <nav class="nav" aria-label="Mục lục">
-      <a href="#tong-quan">Tổng quan</a><a href="#vi-tri">Vị trí</a><a href="#tien-ich">Tiện ích</a><a href="#loai-can">Loại căn</a><a href="#bang-gia">Giá</a><a href="#thanh-toan">Thanh toán</a><a href="#phap-ly">Pháp lý</a><a href="#ban-giao">Bàn giao</a><a href="#hoi-dap">Hỏi đáp</a>
+      <a href="#tong-quan">Tổng quan</a><a href="#vi-tri">Vị trí</a><a href="#tien-ich">Tiện ích</a><a href="#loai-can">Loại căn</a><a href="#noi-that">Nội thất</a><a href="#bang-gia">Giá</a><a href="#thanh-toan">Thanh toán</a><a href="#phap-ly">Pháp lý</a><a href="#ban-giao">Bàn giao</a><a href="#hoi-dap">Hỏi đáp</a>
     </nav>
     <a class="btn btn-gold" href="#dang-ky">Nhận bảng giá</a>
   </div>
@@ -277,6 +294,19 @@ section{padding:52px 0}
       <div class="view"><b>Hướng Đông Bắc – view biển Mỹ Khê</b><br>Căn 1PN+, 2PN và 3PN góc đón gió biển, nắng sớm.</div>
       <div class="view"><b>Hướng Tây Nam – view sông Hàn, pháo hoa</b><br>Căn 2PN góc nhìn về trung tâm, sông Hàn và lễ hội pháo hoa.</div>
     </div>
+    <div class="locmap rv">
+      <iframe title="Bản đồ vị trí The Poet Residence – 95 Hồ Xuân Hương, Ngũ Hành Sơn, Đà Nẵng" src="https://www.google.com/maps?q=95+H%E1%BB%93+Xu%C3%A2n+H%C6%B0%C6%A1ng,+Ng%C5%A9+H%C3%A0nh+S%C6%A1n,+%C4%90%C3%A0+N%E1%BA%B5ng&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      <div class="adj">
+        <h3>Số 95 – 99 Hồ Xuân Hương</h3>
+        <ul>
+          <li><b>Phía Đông:</b> mặt tiền Hồ Xuân Hương, nhìn thẳng ra biển Mỹ Khê</li>
+          <li><b>Phía Bắc:</b> giáp kiệt Chế Lan Viên, hướng về bán đảo Sơn Trà</li>
+          <li><b>Phía Nam:</b> hướng về danh thắng Ngũ Hành Sơn</li>
+          <li><b>Phía Tây:</b> nhìn về sông Hàn và trung tâm thành phố</li>
+        </ul>
+        <a href="https://www.google.com/maps/search/?api=1&query=95+H%E1%BB%93+Xu%C3%A2n+H%C6%B0%C6%A1ng+Ng%C5%A9+H%C3%A0nh+S%C6%A1n+%C4%90%C3%A0+N%E1%BA%B5ng" target="_blank" rel="noopener">📍 Chỉ đường tới dự án ↗</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -286,36 +316,43 @@ section{padding:52px 0}
     <span class="eyebrow">Tiện ích</span>
     <h2 class="title" id="h-ti">Tiện ích <em>trong tòa nhà</em>, mỗi tầng một chức năng</h2>
     <div class="tabs" role="tablist">
-      <button class="tab on" type="button" data-floor="t3">Tầng 3 – Hồ bơi, gym</button>
+      <button class="tab on" type="button" data-floor="t3">Tầng 3 – Hồ bơi</button>
       <button class="tab" type="button" data-floor="t12">Tầng 1 – 2</button>
       <button class="tab" type="button" data-floor="tm">Tầng mái</button>
     </div>
     <div class="floor on" id="t3">
-      <p>Hồ bơi trong nhà cho người lớn (khoảng 231 m²) và trẻ em, bể sục, khu ghế thư giãn; phòng gym – aerobic – yoga nhìn ra phố.</p>
+      <p>Hồ bơi trong nhà cho người lớn (khoảng 231 m²) và hồ bơi trẻ em, khu thư giãn, khu thay đồ, cà phê – bar bên hồ bơi.</p>
+      <a class="plan" href="{{HH_CRM_URL}}img/the-poet/the-poet-mat-bang-tien-ich-tang-3.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-mat-bang-tien-ich-tang-3.jpg" alt="Mặt bằng tiện ích tầng 3 The Poet Residence – hồ bơi, hồ bơi trẻ em, khu thư giãn, cà phê bar" loading="lazy" decoding="async"></a>
+      <p class="plan-cap">Mặt bằng tiện ích tầng 3: ① hồ bơi · ② hồ bơi trẻ em · ③ khu thư giãn · ④ khu thay đồ · ⑤ cà phê / bar. Bấm để phóng to.</p>
       <div class="grid3">
         <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-ho-boi.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-ho-boi.jpg" alt="Hồ bơi trong nhà The Poet Residence" loading="lazy" decoding="async"><span>Hồ bơi trong nhà</span></a>
         <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-be-suc.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-be-suc.jpg" alt="Bể sục và hồ bơi The Poet Residence" loading="lazy" decoding="async"><span>Bể sục</span></a>
         <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-khu-thu-gian.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-khu-thu-gian.jpg" alt="Khu thư giãn bên hồ bơi The Poet Residence" loading="lazy" decoding="async"><span>Khu thư giãn</span></a>
-        <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-gym.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-gym.jpg" alt="Phòng gym The Poet Residence" loading="lazy" decoding="async"><span>Phòng gym</span></a>
-        <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-yoga.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-yoga.jpg" alt="Phòng yoga The Poet Residence" loading="lazy" decoding="async"><span>Phòng yoga</span></a>
         <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-lounge.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-lounge.jpg" alt="Lounge cư dân The Poet Residence" loading="lazy" decoding="async"><span>Lounge cư dân</span></a>
       </div>
     </div>
     <div class="floor" id="t12">
-      <p>Tầng 1: sảnh đón, café, mini mart, văn phòng cho thuê. Tầng 2: 2 nhà trẻ, 2 phòng sinh hoạt cộng đồng, dịch vụ tòa nhà.</p>
+      <p>Tầng 1: sảnh đón, café, mini mart, văn phòng cho thuê. Tầng 2: phòng hội nghị, phòng tập gym, khu trẻ em, nhóm trẻ và khu dịch vụ tòa nhà.</p>
+      <a class="plan" href="{{HH_CRM_URL}}img/the-poet/the-poet-mat-bang-tien-ich-tang-2.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-mat-bang-tien-ich-tang-2.jpg" alt="Mặt bằng tiện ích tầng 2 The Poet Residence – phòng hội nghị, gym, khu trẻ em, nhóm trẻ" loading="lazy" decoding="async"></a>
+      <p class="plan-cap">Mặt bằng tiện ích tầng 2: ① phòng hội nghị · ② phòng tập gym · ③ khu vực trẻ em · ④ nhóm trẻ · ⑤ phòng nhân viên nội bộ. Bấm để phóng to.</p>
       <div class="grid3">
         <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-sanh-don.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-sanh-don.jpg" alt="Sảnh đón The Poet Residence" loading="lazy" decoding="async"><span>Sảnh đón</span></a>
         <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-nha-hang-cafe.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-nha-hang-cafe.jpg" alt="Nhà hàng – café The Poet Residence" loading="lazy" decoding="async"><span>Café – nhà hàng</span></a>
         <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-khoi-de-dem.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-khoi-de-dem.jpg" alt="Khối đế thương mại The Poet Residence về đêm" loading="lazy" decoding="async"><span>Khối đế thương mại</span></a>
+        <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-gym.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-gym.jpg" alt="Phòng gym The Poet Residence" loading="lazy" decoding="async"><span>Phòng gym</span></a>
+        <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-yoga.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-yoga.jpg" alt="Phòng yoga The Poet Residence" loading="lazy" decoding="async"><span>Phòng yoga</span></a>
       </div>
     </div>
     <div class="floor" id="tm">
       <p>Tầng mái ngoài trời – nơi ngắm pháo hoa sông Hàn:</p>
+      <a class="plan" href="{{HH_CRM_URL}}img/the-poet/the-poet-mat-bang-tien-ich-tang-mai.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-mat-bang-tien-ich-tang-mai.jpg" alt="Mặt bằng tiện ích tầng mái The Poet Residence – vườn trà, coffee, quảng trường pháo hoa, khu VIP" loading="lazy" decoding="async"></a>
+      <p class="plan-cap">Mặt bằng tầng mái: ① vườn trà (Thi) · ② coffee · ③ bar coffee · ④ quảng trường pháo hoa · ⑤ vườn "Cầm" · ⑥ khu vui chơi trẻ em · ⑦ khu VIP. Bấm để phóng to.</p>
       <a class="card-img" style="aspect-ratio:16/9;margin-bottom:16px" href="{{HH_CRM_URL}}img/the-poet/the-poet-tang-mai-phao-hoa-song-han.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-tang-mai-phao-hoa-song-han.jpg" alt="Tầng mái The Poet Residence – bar, vườn, ngắm pháo hoa sông Hàn" loading="lazy" decoding="async"><span>Tầng mái – ngắm pháo hoa</span></a>
       <ul class="list-ok">
         <li>Vườn trà (Thi)</li><li>Coffee và bar coffee</li><li>Quảng trường ngắm pháo hoa</li><li>Vườn "Cầm"</li><li>Khu vui chơi trẻ em</li><li>Khu VIP riêng tư</li>
       </ul>
     </div>
+    <p class="note">Mặt bằng tiện ích theo bản vẽ của chủ đầu tư; công năng từng phòng có thể điều chỉnh khi hoàn thiện.</p>
     <ul class="list-ok rv" style="margin-top:24px">
       <li>4 thang máy Schindler, hành lang rộng 1,8 m</li><li>Khoảng 92 chỗ ô tô, 353 chỗ xe máy (2 hầm + tầng 1)</li>
       <li>Kiểm soát xe hầm, thang máy, thang bộ; camera toàn tòa</li><li>Mỗi tầng có phòng rác riêng, 2 cửa cách mùi</li>
@@ -337,6 +374,27 @@ section{padding:52px 0}
       <article class="unit rv"><a class="pic" href="{{HH_CRM_URL}}img/the-poet/the-poet-layout-2pn-80.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-layout-2pn-80.jpg" alt="Layout căn 2PN góc 80,6 m² The Poet Residence" loading="lazy" decoding="async"></a><div class="body"><h3>2PN góc · 80,6 m²</h3><div class="meta"><span>2 WC</span><span>Logia 6,5 m²</span><span>Tây Nam</span></div><p class="note" style="margin:0">Mặt kính dài 15,6 m nhìn về sông Hàn; 1 căn mỗi tầng.</p><div class="price">Khoảng 7,66 tỷ</div><a class="btn btn-navy" href="#dang-ky" data-type="2PN góc 80 m²">Nhận giá căn này</a></div></article>
       <article class="unit rv"><a class="pic" href="{{HH_CRM_URL}}img/the-poet/the-poet-layout-3pn-89.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-layout-3pn-89.jpg" alt="Layout căn 3PN góc 89,4 m² The Poet Residence" loading="lazy" decoding="async"></a><div class="body"><h3>3PN góc · 89,4 m²</h3><div class="meta"><span>2 WC · 2 logia</span><span>View biển</span><span>Đông Bắc</span></div><p class="note" style="margin:0">Cho gia đình nhiều thế hệ, bếp tách biệt cạnh logia; 1 căn mỗi tầng.</p><div class="price">Khoảng 9,2 – 9,57 tỷ</div><a class="btn btn-navy" href="#dang-ky" data-type="3PN góc 89 m²">Nhận giá căn này</a></div></article>
     </div>
+  </div>
+</section>
+
+<!-- NỘI THẤT CĂN MẪU -->
+<section id="noi-that" aria-labelledby="h-nt">
+  <div class="container">
+    <span class="eyebrow">Nội thất căn mẫu</span>
+    <h2 class="title" id="h-nt">Căn hộ mẫu <em>sáng, ấm, nhìn ra biển</em></h2>
+    <p class="lead">Phối cảnh nội thất căn hộ mẫu của chủ đầu tư: phòng khách liền bếp, phòng ngủ có kính lớn, phòng tắm vách kính. Bàn giao thực tế theo danh mục vật tư ở mục Bàn giao (nội thất liền tường); đồ rời, tranh, trang trí trong ảnh chỉ để minh họa.</p>
+    <div class="interior">
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-phong-khach-view-bien.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-phong-khach-view-bien.jpg" alt="Phòng khách nhìn ra biển – căn hộ mẫu The Poet Residence" loading="lazy" decoding="async"><span>Phòng khách nhìn ra biển</span></a>
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-phong-khach-bep.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-phong-khach-bep.jpg" alt="Phòng khách liền bếp – căn hộ mẫu The Poet Residence" loading="lazy" decoding="async"><span>Phòng khách liền bếp</span></a>
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-bep-ban-an.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-bep-ban-an.jpg" alt="Bếp và bàn ăn – căn hộ mẫu The Poet Residence" loading="lazy" decoding="async"><span>Bếp và bàn ăn</span></a>
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-ban-an.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-ban-an.jpg" alt="Khu bàn ăn – căn hộ mẫu The Poet Residence" loading="lazy" decoding="async"><span>Khu bàn ăn</span></a>
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-phong-khach-tranh.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-phong-khach-tranh.jpg" alt="Góc phòng khách – căn hộ mẫu The Poet Residence" loading="lazy" decoding="async"><span>Góc phòng khách</span></a>
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-phong-ngu-master.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-phong-ngu-master.jpg" alt="Phòng ngủ master – căn hộ mẫu The Poet Residence" loading="lazy" decoding="async"><span>Phòng ngủ master</span></a>
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-phong-ngu-2.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-phong-ngu-2.jpg" alt="Phòng ngủ thứ hai – căn hộ mẫu The Poet Residence" loading="lazy" decoding="async"><span>Phòng ngủ thứ hai</span></a>
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-ban-trang-diem.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-ban-trang-diem.jpg" alt="Bàn trang điểm, tủ áo – căn hộ mẫu The Poet Residence" loading="lazy" decoding="async"><span>Bàn trang điểm, tủ áo</span></a>
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-phong-tam.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-can-mau-phong-tam.jpg" alt="Phòng tắm – căn hộ mẫu The Poet Residence" loading="lazy" decoding="async"><span>Phòng tắm</span></a>
+    </div>
+    <p class="note">Ảnh phối cảnh căn hộ mẫu, minh họa của chủ đầu tư.</p>
   </div>
 </section>
 
@@ -515,7 +573,7 @@ section{padding:52px 0}
   });});
   // Xem ảnh lớn.
   var lb=document.getElementById('lb'),li=lb.querySelector('img');
-  document.addEventListener('click',function(e){var a=e.target.closest('a.card-img,a.pic');if(!a)return;e.preventDefault();li.src=a.getAttribute('href');li.alt=(a.querySelector('img')||{}).alt||'';lb.classList.add('on');});
+  document.addEventListener('click',function(e){var a=e.target.closest('a.card-img,a.pic,a.plan');if(!a)return;e.preventDefault();li.src=a.getAttribute('href');li.alt=(a.querySelector('img')||{}).alt||'';lb.classList.add('on');});
   lb.addEventListener('click',function(e){if(e.target!==li){lb.classList.remove('on');}});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('on');});
   // Nút "Nhận giá căn này" chọn sẵn loại căn trong form.
