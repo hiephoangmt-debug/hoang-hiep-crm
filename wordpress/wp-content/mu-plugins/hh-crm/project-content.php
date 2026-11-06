@@ -233,6 +233,19 @@ function hh_project_products( $post_id = null ) {
 			)
 		);
 		$out[ $key ] = compact( 'label', 'cols', 'rows', 'desc', 'gallery', 'in_zones' );
+		$out[ $key ]['relevant'] = (bool) $relevant;
+	}
+	// Dự án không có căn hộ (VD chỉ biệt thự): bảng "Loại căn" là loại biệt thự / nhà phố / đất nền → chuyển sang đúng tab.
+	if ( isset( $out['can-ho'] ) && ! $out['can-ho']['relevant'] && $out['can-ho']['rows'] ) {
+		foreach ( array( 'villa', 'nha-pho', 'dat-nen' ) as $k ) {
+			if ( isset( $out[ $k ] ) && ! $out[ $k ]['rows'] ) {
+				$out[ $k ]['rows']  = $out['can-ho']['rows'];
+				$out[ $k ]['cols']  = array( 'Loại', 'Diện tích', 'Phòng ngủ', 'Giá tham khảo' );
+				$out[ $k ]['cards'] = true;
+				unset( $out['can-ho'] );
+				break;
+			}
+		}
 	}
 	return $out;
 }

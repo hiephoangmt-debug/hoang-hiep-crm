@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.60** + plugin Hoàng Hiệp CRM **2.20.153**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.61** + plugin Hoàng Hiệp CRM **2.20.154**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.154 · giao diện 2.15.61 (06/11/2026)
+
+- **Sửa nhầm "Căn hộ" ở dự án chỉ có biệt thự** (VD Hoiana Beach Villas): bảng loại sản phẩm hiện ở tab **Biệt thự / Villa** (dạng thẻ), tiêu đề mục đổi thành "Loại sản phẩm …"; nhãn thẻ ghi số phòng ngủ (7PN, 9PN) thay vì chữ bị cắt "Patina Man…". Áp dụng tương tự cho dự án chỉ có nhà phố / đất nền.
 
 ## Có gì mới – plugin 2.20.153 · giao diện 2.15.60 (06/11/2026)
 

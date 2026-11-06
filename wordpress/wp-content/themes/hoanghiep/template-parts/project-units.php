@@ -30,7 +30,7 @@ if ( ! $match ) :
 		<?php foreach ( $rows as $i => list( $name, $area, $beds, $price ) ) : ?>
 			<?php
 			$group = function_exists( 'hh_px_unit_group' ) ? hh_px_unit_group( $name ) : '';
-			$badge = $group ?: ( preg_match( '/\d\s*PN\+?/iu', $name, $m ) ? strtoupper( str_replace( ' ', '', $m[0] ) ) : mb_substr( $name, 0, 10 ) );
+			$badge = $group ?: ( preg_match( '/\d\s*PN\+?/iu', $name, $m ) ? strtoupper( str_replace( ' ', '', $m[0] ) ) : ( is_numeric( trim( (string) $beds ) ) ? trim( $beds ) . 'PN' : mb_substr( $name, 0, 10 ) ) );
 			$has_p = $price && ! in_array( mb_strtolower( trim( $price ) ), array( '–', '-', 'liên hệ' ), true );
 			$show  = $has_p ? $price : ( isset( $from[ $group ] ) ? 'từ ' . hh_px_money( $from[ $group ]['price'] ) : '' );
 			?>

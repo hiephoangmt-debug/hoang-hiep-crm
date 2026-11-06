@@ -387,7 +387,7 @@ while ( have_posts() ) :
 			<?php get_template_part( 'template-parts/project-hot-units' ); ?>
 
 			<section class="block" id="san-pham">
-				<h2 class="block__title">Layout căn hộ &amp; loại sản phẩm <?php echo esc_html( $title ); ?></h2>
+				<h2 class="block__title"><?php echo isset( $products['can-ho'] ) ? 'Layout căn hộ &amp; loại sản phẩm' : 'Loại sản phẩm'; // phpcs:ignore ?> <?php echo esc_html( $title ); ?></h2>
 				<?php if ( $products ) : ?>
 					<?php if ( count( $products ) > 1 ) : ?>
 						<div class="ptabs" role="tablist">
@@ -405,7 +405,7 @@ while ( have_posts() ) :
 							<?php if ( $p['in_zones'] && ! $p['rows'] ) : ?>
 								<?php hh_data_table( array( 'Phân khu', 'Loại sản phẩm', 'Quy mô', 'Tình trạng' ), $p['in_zones'] ); ?>
 							<?php endif; ?>
-							<?php if ( 'can-ho' === $key && count( $p['rows'] ) > 1 ) : ?>
+							<?php if ( ( 'can-ho' === $key || ! empty( $p['cards'] ) ) && count( $p['rows'] ) > 1 ) : ?>
 								<?php get_template_part( 'template-parts/project-units', null, array( 'rows' => $p['rows'] ) ); ?>
 							<?php else : ?>
 								<?php hh_data_table( $p['cols'], $p['rows'] ); ?>
