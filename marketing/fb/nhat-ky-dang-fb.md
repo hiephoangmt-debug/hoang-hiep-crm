@@ -17,3 +17,4 @@
 | 06/11/2026 | Sun | 11:30 | (phiên khác) Sun Saphia – hỏi đáp bàn giao, phí quản lý, cho thuê | /sun-saphia-residence-hoi-dap-ban-giao-phi-quan-ly-cho-thue/ |
 | 06/11/2026 | Sun | 16:00 | (phiên khác) Chính sách bán hàng Sun Hòa Xuân tháng 11/2026 | /chinh-sach-ban-hang-du-an-sun-group-da-nang-thang-11-2026/ |
 | 06/11/2026 | Sun | 19:30 | (phiên khác) Tổng hợp dự án Sun Group Đà Nẵng đang mở bán | /du-an-can-ho-sun-group-da-nang-2026/ |
+| 07/11/2026 | Sun | 10:30 | S-Light Penthouse – tầng 22, chính sách 11/2026 (album 3 ảnh phối cảnh) | /chinh-sach-ban-hang-du-an-sun-group-da-nang-thang-11-2026/ |
