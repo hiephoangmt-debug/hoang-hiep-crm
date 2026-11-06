@@ -16,7 +16,7 @@ CSS = TAG + ('body.pm .top{display:none!important}'
   'body.pm .modes{grid-column:auto!important;flex-wrap:nowrap!important}body.pm .modes .chip{display:none!important}body.pm .modes #mPlan{display:inline-block!important}'
   'body.pm .note,body.pm #spinRow{display:none!important}body.pm .console .sl:has(#floor){order:-1}body.pm .modes{order:-2}'
   'body.pm #f3Btn{display:none!important}body.pm #ofcBtn{bottom:calc(env(safe-area-inset-bottom,0px) + 14px)!important}'
-  'body.pm .compass{display:none!important}body.pm #uCard{top:auto!important;bottom:calc(env(safe-area-inset-bottom,0px) + 62px)!important}'
+  'body.pm .compass{display:none!important}body.pm #uCard{top:var(--uct,70px)!important;bottom:auto!important}body.pm.pu #ofcBtn{display:none!important}'
   '@media (max-width:760px){body.pm .console{grid-template-columns:1fr!important;gap:6px!important;padding-top:8px!important;padding-bottom:8px!important}'
   'body.pm .modes{display:none!important}body.pm .console .sl label{font-size:10.5px!important}}')
 OLD = "bPlan.onclick=function(){ setPlan(!planOn); };"
@@ -27,13 +27,14 @@ NEW = (TAG + "\nfunction pmFly(cx,cz,ext){ if(!document.body.classList.contains(
   "  flyTo(T.localToWorld(p),T.localToWorld(tg)); }\n"
   "function pmFrame(){ if(camera.fov!==42){ camera.fov=42; camera.updateProjectionMatrix(); } pmFly(X1-14.9,Z0+27.8,60); }\n"
   "function pmUnit(r){ var y=planY(+floorEl.value), yaw=(UVIEW[r[6]]||[0,0])[1], dx=Math.cos(yaw), dz=Math.sin(yaw), cx=X1-(r[4]+r[5])/2, cz=Z0+(r[2]+r[3])/2, m=innerWidth<600;\n"
-  "  camera.fov=m?72:66; camera.updateProjectionMatrix();\n"
-  "  var p=new THREE.Vector3(cx-dx*(m?9:7.5),y+(m?8:6.5),cz-dz*(m?9:7.5)), tg=new THREE.Vector3(cx+dx*90,y+2,cz+dz*90);\n"
+  "  camera.fov=m?72:66; camera.updateProjectionMatrix(); document.body.classList.add('pu');\n"
+  "  var con=document.querySelector('.console'); document.body.style.setProperty('--uct',((con?con.getBoundingClientRect().bottom:56)+8)+'px');\n"
+  "  var p=new THREE.Vector3(cx-dx*(m?10:8.5),y+(m?8.5:7),cz-dz*(m?10:8.5)), tg=new THREE.Vector3(cx+dx*70,y-(m?5:4),cz+dz*70);\n"
   "  flyTo(T.localToWorld(p),T.localToWorld(tg)); }\n"
   "var showUnitPm0=showUnit; showUnit=function(r){ showUnitPm0(r); if(!document.body.classList.contains('pm')||!uCard) return;\n"
   "  var uf=uFloor(), AR=uf>=30?UA30[r[0]]:(uf===2&&UA2[r[0]])||UAREA[r[0]], inf=UINFO[r[1]]||['',''], vw=UVIEW[r[6]]||[''], code=uCode(r);\n"
   "  var bx=uCard.querySelector('.b'); if(bx) bx.innerHTML='<button class=\\'o\\' data-a=\\'all\\'>← Cả tầng</button><button class=\\'n\\' data-a=\\'lead\\'>Nhận giá căn này</button>';\n"
-  "  function back(){ uCard.style.display='none'; uHi.visible=false; pmFrame(); }\n"
+  "  function back(){ uCard.style.display='none'; uHi.visible=false; document.body.classList.remove('pu'); pmFrame(); }\n"
   "  uCard.querySelector('.x').onclick=back; var ba=uCard.querySelector('[data-a=all]'); if(ba) ba.onclick=back;\n"
   "  var info={code:code,type:inf[0],area:AR?um2(AR[0]):'',view:vw[0],floor:FN(uf)}; var bl=uCard.querySelector('[data-a=lead]'); if(bl) bl.onclick=function(){ try{ parent.postMessage({ss4dUnit:info,lead:1},'*'); }catch(e){} };\n"
   "  pmUnit(r);\n"
