@@ -173,3 +173,23 @@ function hh_dataset_nam_hoi_an_city_2026( $projects ) {
 	}
 	return $projects;
 }
+
+/**
+ * Nam Hội An City: ảnh flycam thực tế anh Hiệp gửi 07/11/2026 (từ bờ Duy Xuyên nhìn về cầu Cửa Đại – Hội An)
+ * làm ảnh đại diện; phối cảnh chủ đầu tư chuyển xuống Thư viện ảnh. Chỉ thay khi ô ảnh còn đúng giá trị web nhập.
+ */
+add_filter( 'hh_project_dataset', 'hh_dataset_nam_hoi_an_city_anh_thuc_te', 22 );
+function hh_dataset_nam_hoi_an_city_anh_thuc_te( $projects ) {
+	foreach ( $projects as $i => $p ) {
+		if ( 'nam-hoi-an-city' !== $p['slug'] ) {
+			continue;
+		}
+		$old  = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+		$line = 'plugin:img/da-nang/duy-xuyen-flycam-song-thu-bon-cau-cua-dai-hoi-an.jpg | Ảnh thực tế flycam Nam Hội An City: dãy nhà phố ven sông Thu Bồn bờ Duy Xuyên, cầu Cửa Đại và Hội An phía xa | đại diện';
+		$p['meta']['hh_p_image_links'] = $line . "\n" . str_replace( '| đại diện', '| thư viện', $old );
+		$p['fix_meta']['hh_p_image_links']   = (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() );
+		$p['fix_meta']['hh_p_image_links'][] = $old;
+		$projects[ $i ] = $p;
+	}
+	return $projects;
+}
