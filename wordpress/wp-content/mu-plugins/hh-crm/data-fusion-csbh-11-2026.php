@@ -41,6 +41,7 @@ Khu vui chơi trẻ em
 An ninh, vận hành, kỹ thuật 24/7; xe buggy nội khu
 Bãi đỗ xe 3.653 m² (khoảng 143 ô tô, 200 xe máy)",
 			'hh_p_design_desc'  => 'Biệt thự thiết kế hướng biển hoặc vườn riêng, đón ánh sáng và gió tự nhiên. Tầng trệt cao 3,7 m, tầng lầu 3 m (thông thủy 2,7 – 2,9 m); hồ bơi riêng 24 – 192 m² tùy loại; hàng rào cao 2 m, đường nội khu rộng 6 m. Bàn giao kèm nội thất gắn tường và nội thất rời theo chính sách bán hàng; bảo hành 24 tháng. Ngoại thất, cảnh quan giữ đồng bộ, nội thất thay đổi khi chủ đầu tư đồng ý.',
+			'hh_p_villa_desc'   => 'Biệt thự 1 – 6 phòng ngủ, mỗi căn có hồ bơi riêng, sân vườn, tường rào; Beach Front và Presidential sát bãi cát, Premier và Beach Garden ở giữa, Garden Terrace và Garden Front quanh hai cụm nội khu. Đất khoảng 370 – 1.718 m². Giá chuyển nhượng theo tin rao 2026 khoảng 32 – 54 tỷ; chủ đầu tư còn 1 căn Beach Garden Villa 4 phòng ngủ.',
 			'hh_p_faq'          => "Fusion Resort & Villas Đà Nẵng ở đâu, quy mô bao nhiêu? | Đường Trường Sa, phường Hòa Hải (cũ), Ngũ Hành Sơn, Đà Nẵng; 15,75 ha gồm 85 biệt thự 1 – 6 phòng ngủ và khách sạn 18 tầng 157 phòng, khoảng 300 m bờ biển.\nChủ đầu tư và đơn vị vận hành là ai? | Chủ đầu tư Công ty TNHH Khách sạn và Biệt thự Nam Phát (Lodgis Hospitality Holding); vận hành bởi Fusion Hotel Group.\nMua biệt thự Fusion được sử dụng thế nào? | Ba lựa chọn: tự ở, cho thuê dài hạn từ 6 tháng, hoặc tham gia chương trình cho thuê do Fusion vận hành.\nChương trình cho thuê chia doanh thu ra sao? | Chủ biệt thự nhận 35% doanh thu gộp cho thuê, chi trả theo quý, kèm 40 điểm nghỉ mỗi năm; không cam kết lợi nhuận tối thiểu. Hợp đồng 5 năm, rút ra báo trước 9 tháng.\nPhí quản lý bao nhiêu? | 25.000 đồng/m² diện tích biệt thự (chưa VAT), tăng tối đa 5%/năm từ 2026. Biệt thự tham gia cho thuê không đóng phí quản lý, chỉ đóng kinh phí bảo trì 2%.\nBiệt thự bàn giao có nội thất không? | Có, gồm nội thất gắn tường và nội thất rời theo chính sách bán hàng; tham gia cho thuê cần gói nội thất tiêu chuẩn Fusion. Bảo hành 24 tháng.\nChủ đầu tư còn căn nào? | Còn 1 căn Beach Garden Villa 4 phòng ngủ, đất 753 m², khoảng 58,41 tỷ chưa VAT (bảng giá 12/2025), chiết khấu 20% khi thanh toán nhanh; các căn khác giao dịch chuyển nhượng.\nKhách nước ngoài mua được không? | Khách nước ngoài ký hợp đồng thuê dài hạn, sử dụng đến hết thời hạn và không được chuyển nhượng (Điều 49 Luật Kinh doanh BĐS, hiệu lực 1/8/2024). Liên hệ Hoàng Hiệp để được tư vấn cụ thể.",
 			'hh_p_rental'       => "Chủ sở hữu chọn: tự ở, cho thuê dài hạn từ 6 tháng, hoặc tham gia chương trình cho thuê (rental pool) do Fusion vận hành.
 Rental pool: chủ nhận 35% doanh thu gộp cho thuê, chi trả theo quý; 40 điểm nghỉ mỗi năm (1 – 2 điểm/đêm tùy mùa), điểm chưa dùng chuyển sang 6 tháng đầu năm sau; giảm 10 – 20% dịch vụ resort.
@@ -68,10 +69,49 @@ Khu biệt thự vận hành từ quý 1/2024, chương trình cho thuê từ th
 					$projects[ $i ]['fix_meta'][ $k ] = array_values( array_unique( $fix ) );
 				}
 			}
+			// Mặt bằng tổng thể: thay bản CĐT (có ghi mã căn) bằng sơ đồ vẽ lại theo loại biệt thự.
+			$links = (string) ( $projects[ $i ]['meta']['hh_p_image_links'] ?? '' );
+			$swap  = preg_replace(
+				'#^plugin:img/fusion/fusion-mat-bang-loai-biet-thu\.jpg \|[^\n]*$#m',
+				'plugin:img/fusion/fusion-mat-bang-ve-lai.jpg | Sơ đồ mặt bằng tổng thể Fusion Resort & Villas Đà Nẵng theo loại biệt thự 1 – 6 phòng ngủ (vẽ lại minh họa theo mặt bằng chủ đầu tư) | tổng thể',
+				$links
+			);
+			if ( $swap !== $links ) {
+				$projects[ $i ]['meta']['hh_p_image_links']     = $swap;
+				$projects[ $i ]['fix_meta']['hh_p_image_links'] = array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $links ) );
+			}
 			$projects[ $i ]['fix_excerpt'] = $p['excerpt'] ?? '';
 			$projects[ $i ]['excerpt']     = 'Biệt thự biển Fusion Resort & Villas Đà Nẵng trên trục Trường Sa (Ngũ Hành Sơn): chủ đầu tư còn 1 căn Beach Garden Villa 4 phòng ngủ, đất 753 m², chiết khấu 20% khi thanh toán nhanh, tặng nội thất 5 sao khoảng 2 tỷ; các căn khác giao dịch chuyển nhượng.';
 		}
 		return $projects;
 	},
-	30 // Sau hh_dataset_biet_thu_ven_bien (20) – nơi khai báo dự án.
+	65 // Sau hh_dataset_biet_thu_ven_bien (20) và bộ ảnh data-fusion-anh.php (60) để thay đúng bản cũ.
+);
+
+// Một lần: gỡ ảnh mặt bằng CĐT cũ (ghi mã căn) khỏi mục Mặt bằng tổng thể – ảnh vẫn còn trong Thư viện.
+add_action(
+	'admin_init',
+	static function () {
+		if ( get_option( 'hh_fusion_mb_cu_go' ) || ! current_user_can( 'edit_posts' ) ) {
+			return;
+		}
+		$post = get_page_by_path( 'fusion-resort-villas-da-nang', OBJECT, 'du-an' );
+		if ( ! $post ) {
+			return;
+		}
+		$done = (array) get_post_meta( $post->ID, '_hh_img_links', true );
+		$old  = (int) ( $done['plugin:img/fusion/fusion-mat-bang-loai-biet-thu.jpg'] ?? 0 );
+		if ( $old ) {
+			foreach ( array( 'hh_p_masterplan_img', 'hh_p_gallery' ) as $key ) {
+				$ids = array_filter( array_map( 'absint', explode( ',', (string) get_post_meta( $post->ID, $key, true ) ) ) );
+				if ( in_array( $old, $ids, true ) ) {
+					update_post_meta( $post->ID, $key, implode( ',', array_diff( $ids, array( $old ) ) ) );
+				}
+			}
+			if ( (int) get_post_thumbnail_id( $post->ID ) === $old ) {
+				delete_post_thumbnail( $post->ID );
+			}
+		}
+		update_option( 'hh_fusion_mb_cu_go', 1, false );
+	}
 );
