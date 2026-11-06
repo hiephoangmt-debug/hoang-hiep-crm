@@ -975,6 +975,22 @@ def dau_tu_san(ctx='ADS'):
             '<p class="src" style="text-align:center;margin-top:8px">Mức chiết khấu mua sàn / nhiều căn theo chính sách chủ đầu tư từng đợt – đại lý gửi phương án riêng theo ngân sách của anh/chị.</p>'
             '</div></section>')
 
+COVER = RAW + 'c7e4765421ea07e778bee76cafa286bec0c840d2/landing/sun-saphia/v4/img/'
+def cover_top():
+    """Ảnh đại diện tràn màn hình ở đầu trang chủ (phối cảnh hoàng hôn), sau đó mới tới phần tiêu đề + form."""
+    return ('<style>.cvt{position:relative;background:#0B1A3A;overflow:hidden}.cvt img{display:block;width:100%;height:clamp(300px,52vw,640px);object-fit:cover;object-position:60% 55%;animation:cvtZ 14s ease-out both}'
+            '@keyframes cvtZ{from{transform:scale(1.08)}to{transform:none}}'
+            '.cvt:after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(rgba(11,26,58,0),rgba(11,26,58,.85));pointer-events:none}'
+            '.cvtc{position:absolute;left:0;right:0;bottom:0;z-index:2;max-width:1180px;margin:0 auto;padding:0 20px 26px;color:#fff;display:flex;justify-content:space-between;align-items:flex-end;gap:16px}'
+            '.cvtc b{display:block;font-family:"Playfair Display",Georgia,serif;font-size:clamp(28px,4.4vw,54px);line-height:1.05;font-weight:700}.cvtc b em{color:#FFA04A}'
+            '.cvtc span{display:block;font-size:clamp(13px,1.4vw,16px);color:#DCE6F2;margin-top:6px}.cvtc small{font-size:11.5px;color:#B8C6DA;white-space:nowrap}'
+            '.cvtd{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.5);color:#fff;text-decoration:none;font-size:20px;animation:cvtB 1.8s infinite}'
+            '@keyframes cvtB{0%,100%{transform:none}50%{transform:translateY(6px)}}'
+            '@media(max-width:760px){.cvt img{height:82vw;min-height:280px;object-position:62% 40%}.cvtc{padding:0 16px 14px}.cvtd{display:none}}@media(prefers-reduced-motion:reduce){.cvt img,.cvtd{animation:none}}</style>'
+            '<section class="cvt" aria-label="Phối cảnh Sun Saphia Residence"><img src="' + COVER + 'cover-saphia-hoang-hon.webp" srcset="' + COVER + 'cover-saphia-hoang-hon-900.webp 900w, ' + COVER + 'cover-saphia-hoang-hon.webp 1800w" sizes="100vw" width="1800" height="996" fetchpriority="high" decoding="async" '
+            'alt="Phối cảnh Sun Saphia Residence lúc hoàng hôn: tòa tháp mặt biển bên bãi tắm Sơn Thủy, phía sau là núi và thành phố Đà Nẵng (ảnh minh họa)">'
+            '<div class="cvtc"><div><b>Sun Saphia <em>Residence</em></b><span>Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng · Mở bán 05/12/2026</span><small>Phối cảnh minh họa</small></div><a class="cvtd" href="#dau" aria-label="Xem tiếp">↓</a></div></section>')
+
 def hero_fx():
     """Đầu trang kiểu FourS: tiêu đề + 3 con số lớn + dấu tick bên trái, form bên phải; ngay dưới là dải số liệu."""
     P = 'https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ee46a5171093f0137923551fcb2d6e6593653c16/landing/sun-saphia/v4/vid/poster.webp'
@@ -1096,7 +1112,7 @@ def ads(domain, home_page=False):
         hero_perks(),)
     # Bố cục: hero 4D → sự kiện → tổng quan → vị trí → tiện ích → (360°, tầm view) → mặt bằng → loại căn → chính sách → quy hoạch → đầu tư → pháp lý → tầm nhìn
     i = b.index('<div class="hcvt">'); b = b[:i] + '</section>' + b[b.index('</section>', i) + 10:]
-    b = hero_fx() + b
+    b = cover_top() + hero_fx() + b
     b = b.replace('<section class="sec tq" id="tong-quan">', su_kien('ADS') + '<section class="sec tq" id="tong-quan">', 1)
     b += tldr('Sun Saphia Residence', [('Dự án', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, 30 tầng, 782 căn'), ('Loại căn', 'Studio 30 m² · 1BR+ 50 m² · 2BR 60–70 m²'),
         ('Công trình', 'Cấp I, niên hạn 100 năm · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Sự kiện', '9:00 CN 08/11/2026 tại Sun Gallery Tây Hồ View, Hà Nội · mở bán 05/12/2026 tại Đà Nẵng'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
@@ -1135,7 +1151,7 @@ def ads(domain, home_page=False):
             j = b.rfind('<section', 0, i); t = b.index('>', j)
             if ' id="' not in b[j:t]: b = b[:j] + '<section id="%s"' % sid + b[j + 8:]
     b = re.sub(r'<p[^>]*><a class="lk" href="\{M\}/quy-hoach">[^<]*</a></p>', '', b)
-    html = head(title, desc, url, OG, 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES], FAV)
+    html = head(title, desc, url, COVER + 'og-saphia-hoang-hon.jpg', 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES], FAV)
     b = b.replace('{M}', MAIN)
     html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN, pages=home_page) + '\n' + popup() + '<script>window.SS4D_GATE=20;</script>' + tail(True) + wave_audio() + '</body>\n</html>\n'
     return copy_fix(tour_insert(quiz_end(html)))
