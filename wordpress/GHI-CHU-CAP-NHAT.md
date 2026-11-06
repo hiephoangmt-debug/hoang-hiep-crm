@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.65** + plugin Hoàng Hiệp CRM **2.20.172**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.66** + plugin Hoàng Hiệp CRM **2.20.173**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.173 · giao diện 2.15.66 (06/11/2026)
+
+- **The Poet Residence có trang landing riêng** (kiểu sun-fours-tower.com): đầu trang, tổng quan, vị trí theo phút đi, tiện ích theo tầng, 6 loại căn có layout + giá, bảng giá, 4 phương thức thanh toán + hỗ trợ vay, pháp lý theo mốc, tiêu chuẩn bàn giao, thư viện, 12 hỏi đáp, form nhận bảng giá (khách lưu vào mục Khách hàng). Ảnh đi kèm plugin (img/the-poet).
+- **Mọi trang dự án đổi sang giao diện mới kiểu landing:** nền kem, tiêu đề chữ có chân, nhãn mục vàng đồng, mỗi mục là thẻ trắng bo góc, thanh mục lục xanh đêm, khung đăng ký nền xanh – giữ nguyên mọi chức năng (4D, 360, tab tòa, giá chuyển nhượng, bảng tính…). Tắt cho một dự án: Dự án → sửa → "Giao diện trang" = "Giao diện cũ".
 
 ## Có gì mới – plugin 2.20.172 · giao diện 2.15.65 (06/11/2026)
 

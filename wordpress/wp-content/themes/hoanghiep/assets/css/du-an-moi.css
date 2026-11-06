@@ -1,0 +1,72 @@
+/*
+ * Giao diện trang dự án kiểu landing (06/11/2026 – mẫu The Poet): nền kem, tiêu đề chữ có chân, điểm nhấn vàng đồng,
+ * mỗi mục là một thẻ trắng bo góc, đầu trang xanh đêm. Chỉ đổi giao diện – giữ nguyên mọi chức năng của trang dự án.
+ * Tắt cho một dự án: Dự án → sửa → "Giao diện trang" = "Chuẩn của web".
+ */
+body.single-du-an.du-an-moi { --lp-navy: #0e1c33; --lp-navy2: #172b4a; --lp-gold: #b98d4f; --lp-gold2: #d8b67c; --lp-sand: #f6f1e9; --lp-line: #e6ddcf; background: var(--lp-sand); }
+
+/* Đầu trang dự án */
+.du-an-moi .project-hero { min-height: clamp(420px, 64vh, 620px); background: radial-gradient(1100px 560px at 78% 25%, #24406b 0%, var(--lp-navy) 62%); }
+.du-an-moi .project-hero__bg { opacity: .55; }
+.du-an-moi .project-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14, 28, 51, .92) 0%, rgba(14, 28, 51, .55) 55%, rgba(14, 28, 51, .15) 100%), linear-gradient(0deg, rgba(14, 28, 51, .85) 0%, rgba(14, 28, 51, 0) 45%); pointer-events: none; }
+.du-an-moi .project-hero__content { position: relative; z-index: 2; }
+.du-an-moi .project-hero__title { font-weight: 600; letter-spacing: -.01em; line-height: 1.08; }
+.du-an-moi .project-hero__kw { display: block; margin-top: 10px; font-family: var(--font-body); font-size: .38em; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--lp-gold2); }
+.du-an-moi .project-hero__dev, .du-an-moi .project-hero__addr { opacity: .9; }
+.du-an-moi .project-hero .pill { border-radius: 999px; }
+
+/* Ô thông tin nhanh */
+.du-an-moi .key-facts { margin-top: -54px; border-radius: 20px; border-top: 4px solid var(--lp-gold); box-shadow: 0 30px 60px -30px rgba(14, 28, 51, .55); }
+.du-an-moi .key-facts div { padding: 20px 22px; border-right-color: var(--lp-line); }
+.du-an-moi .key-facts span, .du-an-moi .key-facts small { letter-spacing: .1em; }
+.du-an-moi .key-facts b, .du-an-moi .key-facts strong { font-size: 1.02rem; }
+
+/* Thanh mục lục */
+.du-an-moi .subnav { background: rgba(14, 28, 51, .96); border: 0; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.du-an-moi .subnav a { color: rgba(255, 255, 255, .82); border-radius: 999px; }
+.du-an-moi .subnav a:hover, .du-an-moi .subnav a.is-active, .du-an-moi .subnav a[aria-current] { color: #fff; background: rgba(255, 255, 255, .12); }
+.du-an-moi .subnav a.is-active { box-shadow: inset 0 -2px 0 var(--lp-gold2); }
+
+/* Mỗi mục là một thẻ */
+.du-an-moi .site-main { padding-top: 0; }
+.du-an-moi .layout__main .block { background: #fff; border: 1px solid var(--lp-line); border-radius: 20px; padding: clamp(22px, 3.2vw, 40px); margin-bottom: 22px; box-shadow: 0 18px 40px -32px rgba(14, 28, 51, .5); }
+.du-an-moi .block__title { font-weight: 600; font-size: clamp(1.55rem, 2.6vw, 2.1rem); color: var(--lp-navy); line-height: 1.2; }
+/* Số mục (01, 02…) thành nhãn vàng có gạch phía trước, như mẫu landing. */
+.du-an-moi .layout__main > .block:not(.contact-block) > .block__title::before { padding-left: 52px; margin-bottom: 10px; color: var(--lp-gold); background: linear-gradient(90deg, var(--lp-gold), var(--lp-gold2)) left center / 40px 2px no-repeat; }
+.du-an-moi .block__sub { font-family: var(--font-display); font-weight: 600; color: var(--lp-navy); }
+.du-an-moi .prose { font-size: 1.02rem; line-height: 1.75; }
+
+/* Bảng, danh sách */
+.du-an-moi .data-table { border-radius: 14px; overflow: hidden; }
+.du-an-moi .data-table th { background: var(--lp-navy); color: #fff; font-weight: 600; font-size: .82rem; letter-spacing: .05em; text-transform: uppercase; }
+.du-an-moi .data-table tr:nth-child(even) td { background: #fbf8f3; }
+.du-an-moi .check-list .icon--check { color: var(--lp-gold); }
+.du-an-moi .spec-list > div, .du-an-moi .spec-list li { border-color: var(--lp-line); }
+
+/* Ảnh */
+.du-an-moi .gallery-grid a, .du-an-moi .gallery-single a, .du-an-moi .amenity-grid__item { border-radius: 14px; }
+.du-an-moi .amenity-grid__item { overflow: hidden; }
+
+/* Nút */
+.du-an-moi .btn--gold { background: linear-gradient(135deg, var(--lp-gold), var(--lp-gold2)); color: #1b1408; border: 0; box-shadow: 0 10px 24px -12px rgba(185, 141, 79, .9); }
+.du-an-moi .btn--gold:hover { filter: brightness(1.05); }
+
+/* Khung mời để lại thông tin trong từng mục */
+.du-an-moi .cta-box { background: linear-gradient(135deg, var(--lp-navy), var(--lp-navy2)); border: 0; border-radius: 16px; color: #fff; box-shadow: 0 20px 40px -26px rgba(14, 28, 51, .8); }
+.du-an-moi .cta-box__title { color: #fff; font-family: var(--font-display); font-size: 1.15rem; }
+.du-an-moi .cta-box__text { color: rgba(255, 255, 255, .78); }
+.du-an-moi .cta-box__icon { background: rgba(216, 182, 124, .16); color: var(--lp-gold2); border-radius: 50%; }
+.du-an-moi .cta-box .btn--outline { color: #fff; border-color: rgba(255, 255, 255, .4); }
+
+/* Cột phải */
+.du-an-moi .side-box { border-radius: 18px; border-color: var(--lp-line); box-shadow: 0 18px 40px -32px rgba(14, 28, 51, .5); }
+.du-an-moi .side-box__title { font-family: var(--font-display); color: var(--lp-navy); }
+
+/* Thẻ dự án liên quan, tin */
+.du-an-moi .project-card, .du-an-moi .listing-card { border-radius: 16px; border-color: var(--lp-line); }
+
+@media (max-width: 760px) {
+	.du-an-moi .key-facts { margin-top: -36px; border-radius: 16px; }
+	.du-an-moi .layout__main .block { border-radius: 16px; padding: 20px 16px; margin-inline: -4px; }
+	.du-an-moi .project-hero::after { background: linear-gradient(0deg, rgba(14, 28, 51, .95) 0%, rgba(14, 28, 51, .5) 60%, rgba(14, 28, 51, .2) 100%); }
+}

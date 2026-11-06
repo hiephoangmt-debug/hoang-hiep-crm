@@ -55,7 +55,7 @@ function hoanghiep_landing_file() {
 		return '';
 	}
 	$id = get_queried_object_id();
-	if ( 'chuan' === get_post_meta( $id, 'hh_p_layout', true ) ) {
+	if ( in_array( get_post_meta( $id, 'hh_p_layout', true ), array( 'chuan', 'cu' ), true ) ) {
 		return '';
 	}
 	$slug = get_post_field( 'post_name', $id );

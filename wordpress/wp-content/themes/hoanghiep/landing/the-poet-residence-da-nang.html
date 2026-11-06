@@ -1,0 +1,513 @@
+<!--HH-LANDING-HEAD-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+/* Landing The Poet Residence – tông xanh đêm + vàng đồng theo nhận diện dự án. */
+:root{--ink:#14223a;--navy:#0e1c33;--navy2:#172b4a;--gold:#b98d4f;--gold2:#d8b67c;--sand:#f6f1e9;--line:#e6ddcf;--muted:#5d6b80;--white:#fff;--r:16px;--sh:0 18px 40px -22px rgba(14,28,51,.45)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Be Vietnam Pro',system-ui,sans-serif;color:var(--ink);background:var(--sand);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.container{width:min(1180px,100% - 32px);margin-inline:auto}
+.serif{font-family:'Playfair Display',Georgia,serif}
+.eyebrow{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+h1,h2,h3{line-height:1.2;margin:0 0 .5em}
+.title{font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:clamp(28px,4vw,44px);color:var(--navy)}
+.title em{color:var(--gold);font-style:italic}
+.lead{font-size:17px;color:var(--muted);max-width:720px}
+section{padding:72px 0}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font:inherit;font-weight:600}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1b1408;box-shadow:0 10px 24px -12px rgba(185,141,79,.9)}
+.btn-ghost{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn-navy{background:var(--navy);color:#fff}
+/* Đầu trang */
+.top{position:sticky;top:0;z-index:50;background:rgba(14,28,51,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff}
+.top .container{display:flex;align-items:center;gap:18px;height:64px}
+.brand{display:flex;flex-direction:column;line-height:1.1;text-decoration:none}
+.brand b{font-family:'Playfair Display',serif;font-size:20px;letter-spacing:.06em}
+.brand small{font-size:11px;color:var(--gold2);letter-spacing:.14em;text-transform:uppercase}
+.nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{padding:8px 11px;border-radius:999px;font-size:14px;text-decoration:none;white-space:nowrap;opacity:.85}
+.nav a:hover,.nav a.on{background:rgba(255,255,255,.12);opacity:1}
+.top .btn{padding:9px 16px;font-size:14px}
+/* Hero */
+.hero{position:relative;background:radial-gradient(1200px 600px at 75% 30%,#24406b 0%,var(--navy) 60%);color:#fff;padding:56px 0 64px;overflow:hidden}
+.hero .container{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(36px,5.4vw,64px);margin:.2em 0 .25em}
+.hero h1 em{color:var(--gold2);font-style:italic;font-weight:500}
+.hero p.sub{font-size:18px;opacity:.88;max-width:560px}
+.badge-ok{display:inline-flex;align-items:center;gap:8px;background:rgba(46,160,67,.18);border:1px solid rgba(110,210,130,.45);color:#c9f2d1;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:26px 0}
+.chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:12px 14px}
+.chip b{display:block;font-size:20px;color:var(--gold2);font-family:'Playfair Display',serif}
+.chip span{font-size:12.5px;opacity:.82}
+.hero .acts{display:flex;gap:12px;flex-wrap:wrap}
+.hero-img{position:relative;border-radius:22px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.7);aspect-ratio:13/18;max-height:640px;justify-self:end;width:100%}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+.hero-img figcaption{position:absolute;left:12px;bottom:12px;font-size:11px;background:rgba(0,0,0,.45);padding:4px 8px;border-radius:8px}
+/* Tổng quan */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.fact{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.fact small{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.fact b{display:block;margin-top:4px;font-size:16px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.split img{border-radius:var(--r);box-shadow:var(--sh);width:100%;height:100%;max-height:520px;object-fit:cover}
+/* Vị trí */
+.dark{background:var(--navy);color:#fff}
+.dark .title{color:#fff}
+.dark .lead{color:rgba(255,255,255,.75)}
+.times{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+.time{background:var(--navy2);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:18px}
+.time b{font-family:'Playfair Display',serif;font-size:28px;color:var(--gold2)}
+.time b small{font-size:14px;font-family:'Be Vietnam Pro'}
+.time ul{margin:8px 0 0;padding-left:18px;font-size:14px;opacity:.9}
+.views{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.view{border-radius:var(--r);padding:18px;background:linear-gradient(135deg,rgba(185,141,79,.22),rgba(185,141,79,.05));border:1px solid rgba(216,182,124,.3)}
+.view b{color:var(--gold2)}
+/* Tiện ích */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}
+.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font:inherit;font-size:14px;cursor:pointer}
+.tab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.floor{display:none}
+.floor.on{display:block}
+.floor p{margin:0 0 14px;color:var(--muted)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card-img{position:relative;border-radius:var(--r);overflow:hidden;background:#ddd;aspect-ratio:4/3;cursor:zoom-in}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.card-img:hover img{transform:scale(1.04)}
+.card-img span{position:absolute;left:10px;bottom:10px;background:rgba(14,28,51,.78);color:#fff;font-size:13px;padding:4px 10px;border-radius:999px}
+.list-ok{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 22px;padding:0;list-style:none;margin:18px 0 0}
+.list-ok li{padding-left:26px;position:relative}
+.list-ok li::before{content:'✓';position:absolute;left:0;top:0;color:var(--gold);font-weight:700}
+/* Loại căn */
+.units{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.unit{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.unit .pic{aspect-ratio:9/8;background:#f3ede3;cursor:zoom-in}
+.unit .pic img{width:100%;height:100%;object-fit:contain}
+.unit .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.unit h3{font-size:18px;margin:0}
+.unit .meta{display:flex;flex-wrap:wrap;gap:6px}
+.unit .meta span{font-size:12.5px;background:var(--sand);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.unit .price{font-weight:700;color:#a5302b;margin-top:auto}
+.unit .btn{justify-content:center;margin-top:8px;padding:10px}
+/* Bảng giá */
+.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-top:24px}
+.tbl th,.tbl td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);font-size:15px}
+.tbl th{background:var(--navy);color:#fff;font-weight:600;font-size:13px;letter-spacing:.05em;text-transform:uppercase}
+.tbl td:last-child{font-weight:700;color:#a5302b;white-space:nowrap}
+.note{font-size:13px;color:var(--muted);margin-top:12px}
+/* Thanh toán */
+.pays{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+.pay{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px;position:relative}
+.pay.hot{border-color:var(--gold);box-shadow:0 0 0 2px rgba(185,141,79,.25)}
+.pay .tag{position:absolute;top:-11px;left:16px;background:var(--gold);color:#1b1408;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px}
+.pay h3{font-size:17px}
+.pay .bar{display:flex;height:10px;border-radius:999px;overflow:hidden;margin:10px 0 12px;background:#eee}
+.pay .bar i{display:block}
+.pay ul{margin:0;padding-left:18px;font-size:14px;color:var(--muted)}
+.loan{margin-top:18px;background:var(--navy);color:#fff;border-radius:var(--r);padding:20px 22px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.loan b{display:block;font-family:'Playfair Display',serif;font-size:24px;color:var(--gold2)}
+.loan span{font-size:13.5px;opacity:.85}
+/* Pháp lý */
+.timeline{list-style:none;padding:0;margin:26px 0 0;border-left:2px solid var(--gold);margin-left:8px}
+.timeline li{position:relative;padding:0 0 18px 22px}
+.timeline li::before{content:'';position:absolute;left:-8px;top:5px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--gold)}
+.timeline li.ok::before{background:var(--gold)}
+.timeline b{display:block}
+.timeline span{color:var(--muted);font-size:14.5px}
+.legal-box{background:#fff;border:1px solid var(--line);border-left:5px solid #2ea043;border-radius:var(--r);padding:18px 20px;margin-top:22px}
+/* Bàn giao */
+.brands{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+.brandc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.brandc small{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold)}
+.brandc b{display:block;font-size:15px;margin-top:2px}
+.brandc span{font-size:13px;color:var(--muted)}
+/* Thư viện */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px}
+.gallery .card-img:nth-child(1){grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+/* Hỏi đáp */
+.faq details{background:#fff;border:1px solid var(--line);border-radius:14px;margin:10px 0;padding:0 18px}
+.faq summary{cursor:pointer;padding:16px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:'+';color:var(--gold);font-size:22px;line-height:1}
+.faq details[open] summary::after{content:'–'}
+.faq details p{margin:0 0 16px;color:var(--muted)}
+.faq-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;margin-top:20px}
+/* Đăng ký */
+.cta{position:relative;background:var(--navy);color:#fff;overflow:hidden}
+.cta .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18}
+.cta .container{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.cta ul{padding-left:20px;opacity:.92}
+.cta .title{color:#fff}
+.form-card{background:#fff;color:var(--ink);border-radius:20px;padding:26px;box-shadow:0 30px 60px -25px rgba(0,0,0,.6)}
+.form-card h3{font-family:'Playfair Display',serif;font-size:24px;margin:0 0 4px}
+.form-card p{margin:0 0 14px;color:var(--muted);font-size:14px}
+.field{margin-bottom:10px}
+.field label{position:absolute;left:-9999px}
+.field input,.field select{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:12px;font:inherit;background:#fbf9f5}
+.form-card .btn{width:100%;justify-content:center;margin-top:6px}
+.ok-msg{display:none;background:#e9f7ec;color:#1f6b31;border-radius:12px;padding:12px;margin-top:10px;font-size:14px}
+.advisor{display:flex;gap:14px;align-items:center;margin-top:22px;background:rgba(255,255,255,.07);border-radius:14px;padding:14px}
+.advisor .av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1b1408;display:grid;place-items:center;font-weight:700;font-size:22px;flex:none}
+.advisor span{display:block;font-size:13.5px;opacity:.85}
+.advisor a{color:var(--gold2);font-weight:700}
+footer.foot{background:#0a1526;color:rgba(255,255,255,.7);font-size:13px;padding:26px 0}
+.float{position:fixed;right:16px;bottom:18px;z-index:60;display:flex;flex-direction:column;gap:10px}
+.float a{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#fff;text-decoration:none;font-weight:700;font-size:13px;box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
+.float .zl{background:#0068ff}
+.float .call{background:#2ea043}
+/* Xem ảnh lớn */
+.lb{position:fixed;inset:0;z-index:90;background:rgba(5,12,24,.94);display:none;place-items:center;padding:40px 14px}
+.lb.on{display:grid}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
+.lb button{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:26px;cursor:pointer}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+@media (max-width:980px){
+.hero .container,.split,.cta .container{grid-template-columns:1fr}
+.hero-img{justify-self:stretch;max-height:520px;aspect-ratio:4/5}
+.facts,.times,.pays,.brands,.loan{grid-template-columns:repeat(2,1fr)}
+.units,.grid3{grid-template-columns:repeat(2,1fr)}
+.gallery{grid-template-columns:repeat(2,1fr)}
+.top .btn{display:none}
+}
+@media (max-width:600px){
+section{padding:52px 0}
+.chips{grid-template-columns:repeat(2,1fr)}
+.units,.grid3,.views,.faq-cols,.list-ok{grid-template-columns:1fr}
+.facts,.brands,.loan{grid-template-columns:1fr 1fr}
+.pays,.times{grid-template-columns:1fr}
+.tbl th:nth-child(3),.tbl td:nth-child(3){display:none}
+.tbl th,.tbl td{padding:12px 10px;font-size:14px}
+.brand small{display:none}
+}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+<!--HH-LANDING-BODY-->
+<header class="top">
+  <div class="container">
+    <a class="brand" href="#top"><b>THE POET</b><small>Residence · Đà Nẵng</small></a>
+    <nav class="nav" aria-label="Mục lục">
+      <a href="#tong-quan">Tổng quan</a><a href="#vi-tri">Vị trí</a><a href="#tien-ich">Tiện ích</a><a href="#loai-can">Loại căn</a><a href="#bang-gia">Giá</a><a href="#thanh-toan">Thanh toán</a><a href="#phap-ly">Pháp lý</a><a href="#ban-giao">Bàn giao</a><a href="#hoi-dap">Hỏi đáp</a>
+    </nav>
+    <a class="btn btn-gold" href="#dang-ky">Nhận bảng giá</a>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero" aria-labelledby="h1">
+  <div class="container">
+    <div>
+      <span class="badge-ok">✔ 263 căn đủ điều kiện bán · Sở Xây dựng 24/6/2026</span>
+      <h1 id="h1">The Poet <em>Residence</em></h1>
+      <p class="sub">Căn hộ 25 tầng trên đường Hồ Xuân Hương, đi bộ khoảng 300 m ra biển Mỹ Khê. Căn view biển hướng Đông Bắc hoặc view sông Hàn – pháo hoa hướng Tây Nam, bàn giao hoàn thiện cao cấp, sở hữu lâu dài.</p>
+      <div class="chips">
+        <div class="chip"><b>~300 m</b><span>ra biển Mỹ Khê</span></div>
+        <div class="chip"><b>263 căn</b><span>25 tầng · 2 hầm</span></div>
+        <div class="chip"><b>4,94 tỷ</b><span>giá tham khảo từ</span></div>
+        <div class="chip"><b>2027</b><span>dự kiến bàn giao</span></div>
+      </div>
+      <div class="acts">
+        <a class="btn btn-gold" href="#dang-ky">Nhận bảng giá & căn trống</a>
+        <a class="btn btn-ghost js-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo 0904 567 009</a>
+      </div>
+    </div>
+    <figure class="hero-img" style="margin:0">
+      <img src="{{HH_CRM_URL}}img/the-poet/the-poet-phoi-canh-dem.jpg" width="1040" height="1600" alt="Phối cảnh The Poet Residence về đêm – tháp căn hộ 25 tầng trên đường Hồ Xuân Hương, Đà Nẵng" fetchpriority="high" decoding="async">
+      <figcaption>Phối cảnh chủ đầu tư</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- TỔNG QUAN -->
+<section id="tong-quan" aria-labelledby="h-tq">
+  <div class="container">
+    <div class="split">
+      <div class="rv">
+        <span class="eyebrow">Tổng quan dự án</span>
+        <h2 class="title" id="h-tq">Nơi trở về là <em>an nhiên</em></h2>
+        <p class="lead">The Poet Residence (Chung cư Hồ Xuân Hương) do Công ty Cổ phần Địa ốc Phúc Thanh An làm chủ đầu tư, tổng thầu Central, thiết kế Huni Architectes, giám sát IBST. Một tòa tháp 25 tầng nổi, 2 tầng hầm trên khu đất 2.009 m², 263 căn hộ từ 1PN+ đến 3PN và 5 căn penthouse thông tầng.</p>
+      </div>
+      <img class="rv" src="{{HH_CRM_URL}}img/the-poet/the-poet-khoi-de-ngay.jpg" width="1600" height="1200" alt="Khối đế và sảnh The Poet Residence trên đường Hồ Xuân Hương" loading="lazy" decoding="async">
+    </div>
+    <div class="facts rv">
+      <div class="fact"><small>Chủ đầu tư</small><b>Địa ốc Phúc Thanh An</b></div>
+      <div class="fact"><small>Vị trí</small><b>95 – 99 Hồ Xuân Hương, Ngũ Hành Sơn</b></div>
+      <div class="fact"><small>Quy mô</small><b>1 tòa · 25 tầng · 263 căn</b></div>
+      <div class="fact"><small>Diện tích căn</small><b>46 – 91 m² · penthouse 190 – 235 m²</b></div>
+      <div class="fact"><small>Pháp lý</small><b>Sở hữu lâu dài · đủ điều kiện bán</b></div>
+      <div class="fact"><small>Tổng thầu</small><b>Central (Centralcons)</b></div>
+      <div class="fact"><small>Bàn giao</small><b>Dự kiến 2027 · hoàn thiện cao cấp</b></div>
+      <div class="fact"><small>Bảo hành</small><b>60 tháng</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- VỊ TRÍ -->
+<section class="dark" id="vi-tri" aria-labelledby="h-vt">
+  <div class="container">
+    <span class="eyebrow">Vị trí</span>
+    <h2 class="title" id="h-vt">Một bước ra biển, <em>vài phút vào phố</em></h2>
+    <p class="lead">Mặt tiền Hồ Xuân Hương (đường rộng 39 m, giải phân cách giữa), phía Bắc giáp kiệt Chế Lan Viên, phía Đông giáp kiệt 101 Hồ Xuân Hương. Khu phố du lịch Mỹ An – sát biển Mỹ Khê, gần cầu Tiên Sơn và khu Đà Nẵng Downtown.</p>
+    <div class="times rv">
+      <div class="time"><b>5 <small>phút</small></b><ul><li>Biển Mỹ Khê</li><li>Lotte Mart, chợ Bắc Mỹ An</li><li>ĐH Kinh tế, trường học các cấp</li><li>Cung thể thao Tiên Sơn</li></ul></div>
+      <div class="time"><b>10 <small>phút</small></b><ul><li>Đà Nẵng Downtown</li><li>Bệnh viện Vinmec, BV Phụ sản – Nhi</li><li>ĐH Kiến trúc, ĐH Đông Á</li><li>Danh thắng Ngũ Hành Sơn</li></ul></div>
+      <div class="time"><b>15 <small>phút</small></b><ul><li>Sân bay quốc tế Đà Nẵng</li><li>Trung tâm hành chính TP</li><li>BV Gia Đình, BV Hoàn Mỹ</li></ul></div>
+      <div class="time"><b>20 – 30 <small>phút</small></b><ul><li>Chùa Linh Ứng Sơn Trà</li><li>Phố cổ Hội An</li></ul></div>
+    </div>
+    <div class="views rv">
+      <div class="view"><b>Hướng Đông Bắc – view biển Mỹ Khê</b><br>Căn 1PN+, 2PN và 3PN góc đón gió biển, nắng sớm.</div>
+      <div class="view"><b>Hướng Tây Nam – view sông Hàn, pháo hoa</b><br>Căn 2PN góc nhìn về trung tâm, sông Hàn và lễ hội pháo hoa.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TIỆN ÍCH -->
+<section id="tien-ich" aria-labelledby="h-ti">
+  <div class="container">
+    <span class="eyebrow">Tiện ích</span>
+    <h2 class="title" id="h-ti">Tiện ích <em>trong tòa nhà</em>, mỗi tầng một chức năng</h2>
+    <div class="tabs" role="tablist">
+      <button class="tab on" type="button" data-floor="t3">Tầng 3 – Hồ bơi, gym</button>
+      <button class="tab" type="button" data-floor="t12">Tầng 1 – 2</button>
+      <button class="tab" type="button" data-floor="tm">Tầng mái</button>
+    </div>
+    <div class="floor on" id="t3">
+      <p>Hồ bơi trong nhà cho người lớn (khoảng 231 m²) và trẻ em, bể sục, khu ghế thư giãn; phòng gym – aerobic – yoga nhìn ra phố.</p>
+      <div class="grid3">
+        <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-ho-boi.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-ho-boi.jpg" alt="Hồ bơi trong nhà The Poet Residence" loading="lazy" decoding="async"><span>Hồ bơi trong nhà</span></a>
+        <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-be-suc.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-be-suc.jpg" alt="Bể sục và hồ bơi The Poet Residence" loading="lazy" decoding="async"><span>Bể sục</span></a>
+        <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-khu-thu-gian.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-khu-thu-gian.jpg" alt="Khu thư giãn bên hồ bơi The Poet Residence" loading="lazy" decoding="async"><span>Khu thư giãn</span></a>
+        <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-gym.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-gym.jpg" alt="Phòng gym The Poet Residence" loading="lazy" decoding="async"><span>Phòng gym</span></a>
+        <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-yoga.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-yoga.jpg" alt="Phòng yoga The Poet Residence" loading="lazy" decoding="async"><span>Phòng yoga</span></a>
+        <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-lounge.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-lounge.jpg" alt="Lounge cư dân The Poet Residence" loading="lazy" decoding="async"><span>Lounge cư dân</span></a>
+      </div>
+    </div>
+    <div class="floor" id="t12">
+      <p>Tầng 1: sảnh đón, café, mini mart, văn phòng cho thuê. Tầng 2: 2 nhà trẻ, 2 phòng sinh hoạt cộng đồng, dịch vụ tòa nhà.</p>
+      <div class="grid3">
+        <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-sanh-don.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-sanh-don.jpg" alt="Sảnh đón The Poet Residence" loading="lazy" decoding="async"><span>Sảnh đón</span></a>
+        <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-nha-hang-cafe.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-nha-hang-cafe.jpg" alt="Nhà hàng – café The Poet Residence" loading="lazy" decoding="async"><span>Café – nhà hàng</span></a>
+        <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-khoi-de-dem.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-khoi-de-dem.jpg" alt="Khối đế thương mại The Poet Residence về đêm" loading="lazy" decoding="async"><span>Khối đế thương mại</span></a>
+      </div>
+    </div>
+    <div class="floor" id="tm">
+      <p>Tầng mái ngoài trời – nơi ngắm pháo hoa sông Hàn:</p>
+      <ul class="list-ok">
+        <li>Vườn trà (Thi)</li><li>Coffee và bar coffee</li><li>Quảng trường ngắm pháo hoa</li><li>Vườn "Cầm"</li><li>Khu vui chơi trẻ em</li><li>Khu VIP riêng tư</li>
+      </ul>
+    </div>
+    <ul class="list-ok rv" style="margin-top:24px">
+      <li>4 thang máy Schindler, hành lang rộng 1,8 m</li><li>Khoảng 92 chỗ ô tô, 353 chỗ xe máy (2 hầm + tầng 1)</li>
+      <li>Kiểm soát xe hầm, thang máy, thang bộ; camera toàn tòa</li><li>Mỗi tầng có phòng rác riêng, 2 cửa cách mùi</li>
+    </ul>
+  </div>
+</section>
+
+<!-- LOẠI CĂN -->
+<section id="loai-can" style="background:#fff" aria-labelledby="h-lc">
+  <div class="container">
+    <span class="eyebrow">Mặt bằng & loại căn</span>
+    <h2 class="title" id="h-lc">6 loại căn điển hình, <em>căn nào cũng có kính lớn</em></h2>
+    <p class="lead">Tầng 4 – 23 mỗi tầng 12 căn. Cơ cấu cả dự án: 1PN+ (61 căn), 2PN (170 căn), 3PN (20 căn), penthouse thông tầng (5 căn). Bấm vào ảnh để xem mặt bằng lớn.</p>
+    <div class="units">
+      <article class="unit rv"><a class="pic" href="{{HH_CRM_URL}}img/the-poet/the-poet-layout-1pn-46.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-layout-1pn-46.jpg" alt="Layout căn 1PN+1 45,8 m² The Poet Residence" loading="lazy" decoding="async"></a><div class="body"><h3>1PN+1 · 45,8 m²</h3><div class="meta"><span>1 WC</span><span>View biển Mỹ Khê</span><span>Đông Bắc</span></div><p class="note" style="margin:0">Phòng +1 làm việc hoặc phòng trẻ; hợp ở và cho thuê.</p><div class="price">Từ khoảng 4,94 tỷ</div><a class="btn btn-navy" href="#dang-ky" data-type="1PN+1">Nhận giá căn này</a></div></article>
+      <article class="unit rv"><a class="pic" href="{{HH_CRM_URL}}img/the-poet/the-poet-layout-2pn-64.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-layout-2pn-64.jpg" alt="Layout căn 2PN 64,4 m² The Poet Residence" loading="lazy" decoding="async"></a><div class="body"><h3>2PN · 64,4 m²</h3><div class="meta"><span>2 WC</span><span>View biển</span><span>Đông Bắc</span></div><p class="note" style="margin:0">Master có phòng tắm riêng; 4 căn mỗi tầng, nhiều hướng chọn.</p><div class="price">Khoảng 5,96 – 6,44 tỷ</div><a class="btn btn-navy" href="#dang-ky" data-type="2PN 64 m²">Nhận giá căn này</a></div></article>
+      <article class="unit rv"><a class="pic" href="{{HH_CRM_URL}}img/the-poet/the-poet-layout-2pn-66.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-layout-2pn-66.jpg" alt="Layout căn 2PN góc 66,2 m² The Poet Residence" loading="lazy" decoding="async"></a><div class="body"><h3>2PN góc · 66,2 m²</h3><div class="meta"><span>2 WC</span><span>Căn góc</span><span>View biển</span></div><p class="note" style="margin:0">Hai mặt thoáng, khu giặt sấy riêng; 2 căn mỗi tầng.</p><div class="price">Khoảng 6,91 – 6,93 tỷ</div><a class="btn btn-navy" href="#dang-ky" data-type="2PN góc 66 m²">Nhận giá căn này</a></div></article>
+      <article class="unit rv"><a class="pic" href="{{HH_CRM_URL}}img/the-poet/the-poet-layout-2pn-75.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-layout-2pn-75.jpg" alt="Layout căn 2PN góc 74,9 m² The Poet Residence" loading="lazy" decoding="async"></a><div class="body"><h3>2PN góc · 74,9 m²</h3><div class="meta"><span>2 WC</span><span>View sông Hàn – pháo hoa</span><span>Tây Nam</span></div><p class="note" style="margin:0">Căn góc mặt Hồ Xuân Hương; 1 căn duy nhất mỗi tầng.</p><div class="price">Khoảng 7,82 – 7,87 tỷ</div><a class="btn btn-navy" href="#dang-ky" data-type="2PN góc 75 m²">Nhận giá căn này</a></div></article>
+      <article class="unit rv"><a class="pic" href="{{HH_CRM_URL}}img/the-poet/the-poet-layout-2pn-80.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-layout-2pn-80.jpg" alt="Layout căn 2PN góc 80,6 m² The Poet Residence" loading="lazy" decoding="async"></a><div class="body"><h3>2PN góc · 80,6 m²</h3><div class="meta"><span>2 WC</span><span>Logia 6,5 m²</span><span>Tây Nam</span></div><p class="note" style="margin:0">Mặt kính dài 15,6 m nhìn về sông Hàn; 1 căn mỗi tầng.</p><div class="price">Khoảng 7,66 tỷ</div><a class="btn btn-navy" href="#dang-ky" data-type="2PN góc 80 m²">Nhận giá căn này</a></div></article>
+      <article class="unit rv"><a class="pic" href="{{HH_CRM_URL}}img/the-poet/the-poet-layout-3pn-89.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-layout-3pn-89.jpg" alt="Layout căn 3PN góc 89,4 m² The Poet Residence" loading="lazy" decoding="async"></a><div class="body"><h3>3PN góc · 89,4 m²</h3><div class="meta"><span>2 WC · 2 logia</span><span>View biển</span><span>Đông Bắc</span></div><p class="note" style="margin:0">Cho gia đình nhiều thế hệ, bếp tách biệt cạnh logia; 1 căn mỗi tầng.</p><div class="price">Khoảng 9,2 – 9,57 tỷ</div><a class="btn btn-navy" href="#dang-ky" data-type="3PN góc 89 m²">Nhận giá căn này</a></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- BẢNG GIÁ -->
+<section id="bang-gia" aria-labelledby="h-bg">
+  <div class="container">
+    <span class="eyebrow">Giá bán tham khảo</span>
+    <h2 class="title" id="h-bg">Khoảng <em>92 – 107 triệu/m²</em> thông thủy, đã gồm VAT</h2>
+    <table class="tbl">
+      <thead><tr><th>Loại căn</th><th>Diện tích thông thủy</th><th>Hướng / view</th><th>Giá tham khảo</th></tr></thead>
+      <tbody>
+        <tr><td>1PN+1</td><td>45,8 – 45,9 m²</td><td>Đông Bắc · biển</td><td>4,94 – 4,95 tỷ</td></tr>
+        <tr><td>2PN</td><td>64,6 – 64,9 m²</td><td>Tây Nam</td><td>5,96 – 6,04 tỷ</td></tr>
+        <tr><td>2PN</td><td>64,6 – 65,1 m²</td><td>Đông Bắc · biển</td><td>6,12 – 6,44 tỷ</td></tr>
+        <tr><td>2PN góc</td><td>67,5 m²</td><td>Đông Bắc · biển</td><td>6,91 – 6,93 tỷ</td></tr>
+        <tr><td>2PN</td><td>73,2 – 73,8 m²</td><td>Đông Bắc · biển</td><td>6,86 – 7,26 tỷ</td></tr>
+        <tr><td>2PN góc</td><td>75,4 – 80,8 m²</td><td>Tây Nam · sông Hàn</td><td>7,66 – 7,87 tỷ</td></tr>
+        <tr><td>3PN góc</td><td>89,9 – 90,1 m²</td><td>Đông Bắc · biển</td><td>9,2 – 9,57 tỷ</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Giá các tầng 5 – 8 theo bảng hàng ngày 06/11/2026, đã gồm VAT, chưa trừ chiết khấu; tầng cao giá cao hơn. Giá và căn còn trống thay đổi theo ngày – để lại số, Hoàng Hiệp gửi bảng giá cập nhật qua Zalo.</p>
+  </div>
+</section>
+
+<!-- THANH TOÁN -->
+<section id="thanh-toan" style="background:#fff" aria-labelledby="h-tt">
+  <div class="container">
+    <span class="eyebrow">Phương thức thanh toán</span>
+    <h2 class="title" id="h-tt">Đặt cọc <em>200 triệu</em> – chọn cách trả hợp dòng tiền</h2>
+    <div class="pays">
+      <div class="pay rv"><h3>Theo tiến độ</h3><div class="bar"><i style="width:70%;background:var(--navy)"></i><i style="width:25%;background:var(--gold)"></i><i style="width:5%;background:#9aa7b8"></i></div><ul><li>15% khi ký hợp đồng (gồm cọc)</li><li>55% theo tiến độ xây dựng</li><li>25% khi nhận nhà, 5% khi nhận sổ</li></ul></div>
+      <div class="pay hot rv"><span class="tag">Ưu đãi cao nhất</span><h3>Thanh toán sớm 70%</h3><div class="bar"><i style="width:70%;background:var(--gold)"></i><i style="width:25%;background:var(--navy)"></i><i style="width:5%;background:#9aa7b8"></i></div><ul><li>15% khi ký + 55% sau 30 ngày</li><li>25% khi nhận nhà</li><li>5% khi nhận sổ</li></ul></div>
+      <div class="pay rv"><h3>Nhận nhà ưu việt</h3><div class="bar"><i style="width:45%;background:var(--navy)"></i><i style="width:25%;background:var(--gold)"></i><i style="width:25%;background:var(--gold2)"></i><i style="width:5%;background:#9aa7b8"></i></div><ul><li>Khoảng 45% trước khi nhận nhà</li><li>25% khi nhận nhà</li><li>25% sau nhận nhà 12 tháng</li></ul></div>
+      <div class="pay rv"><h3>Vay ngân hàng</h3><div class="bar"><i style="width:30%;background:var(--navy)"></i><i style="width:70%;background:#2ea043"></i></div><ul><li>Vốn tự có từ 30%</li><li>Ngân hàng cho vay 50 – 70%</li><li>Chủ đầu tư hỗ trợ lãi suất</li></ul></div>
+    </div>
+    <div class="loan rv">
+      <div><b>70%</b><span>tỷ lệ vay tối đa</span></div>
+      <div><b>24 tháng</b><span>hỗ trợ lãi suất: 100% đến khi nhận nhà, 50% thêm 12 tháng</span></div>
+      <div><b>18 – 36 tháng</b><span>ân hạn nợ gốc (theo ngân hàng)</span></div>
+      <div><b>VietinBank</b><span>bảo lãnh · cho vay: VietinBank, Vietcombank, MB</span></div>
+    </div>
+    <p class="note">Theo chính sách bán hàng chủ đầu tư gần nhất; mức chiết khấu theo từng phương thức thay đổi theo đợt – liên hệ để nhận chính sách đang áp dụng.</p>
+  </div>
+</section>
+
+<!-- PHÁP LÝ -->
+<section id="phap-ly" aria-labelledby="h-pl">
+  <div class="container">
+    <div class="split" style="align-items:start">
+      <div>
+        <span class="eyebrow">Pháp lý & tiến độ</span>
+        <h2 class="title" id="h-pl">Pháp lý <em>đầy đủ</em>, sở hữu lâu dài</h2>
+        <div class="legal-box rv"><b>Đủ điều kiện bán nhà ở hình thành trong tương lai</b><br>Sở Xây dựng Đà Nẵng xác nhận 263 căn đủ điều kiện bán theo Điều 24 Luật Kinh doanh bất động sản 2023 (Công văn 11222/SXD-QLN ngày 24/6/2026). Ngân hàng bảo lãnh: VietinBank. Dự án chưa thế chấp (theo chủ đầu tư báo cáo). Hiện chưa bán cho người nước ngoài.</div>
+        <p class="note">Bản sao văn bản pháp lý: nhắn Zalo 0904 567 009 để nhận.</p>
+      </div>
+      <ol class="timeline rv">
+        <li class="ok"><b>12/7/2023</b><span>UBND TP chấp thuận chủ trương đầu tư và chủ đầu tư</span></li>
+        <li class="ok"><b>12/7/2024</b><span>Phê duyệt quy hoạch tổng mặt bằng 1/500</span></li>
+        <li class="ok"><b>23/1/2025</b><span>Bộ Xây dựng thẩm định báo cáo nghiên cứu khả thi</span></li>
+        <li class="ok"><b>4/2025</b><span>Thẩm duyệt PCCC, giấy phép xây dựng, khởi công</span></li>
+        <li class="ok"><b>12/2025</b><span>Hoàn thành phần móng</span></li>
+        <li class="ok"><b>6/2026</b><span>Nộp tiền sử dụng đất; 263 căn đủ điều kiện bán</span></li>
+        <li><b>2027</b><span>Dự kiến cất nóc đầu năm, bàn giao trong năm 2027</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- BÀN GIAO -->
+<section id="ban-giao" style="background:#fff" aria-labelledby="h-bgi">
+  <div class="container">
+    <span class="eyebrow">Tiêu chuẩn bàn giao</span>
+    <h2 class="title" id="h-bgi">Hoàn thiện cao cấp, <em>thương hiệu quốc tế</em></h2>
+    <div class="brands">
+      <div class="brandc rv"><small>Sàn</small><b>Porcelain 800×800</b><span>Ban công, phòng tắm chống trơn R10</span></div>
+      <div class="brandc rv"><small>Trần · tường</small><b>Vĩnh Tường / Gyproc · Jotun</b><span>Khung chống ăn mòn muối biển</span></div>
+      <div class="brandc rv"><small>Cửa sổ</small><b>Nhôm Xingfa · kính Low-E</b><span>Cách âm, giảm nhiệt, chống UV</span></div>
+      <div class="brandc rv"><small>Cửa chính</small><b>Chống cháy · khóa Sharp</b><span>Vân tay, thẻ từ, mật mã</span></div>
+      <div class="brandc rv"><small>Thiết bị vệ sinh</small><b>Innoci · Grohe · Toto</b><span>Bồn cầu treo, vách tắm kính</span></div>
+      <div class="brandc rv"><small>Bếp</small><b>Teka · Malloca</b><span>Tủ An Cường / Suofeiya, mặt đá</span></div>
+      <div class="brandc rv"><small>Điều hòa · điện</small><b>Samsung âm trần · Legrand</b><span>Nước nóng Ariston</span></div>
+      <div class="brandc rv"><small>Thang máy</small><b>Schindler (Thụy Sĩ)</b><span>4 thang máy</span></div>
+    </div>
+    <p class="note">Theo danh mục vật tư bàn giao của chủ đầu tư (05/3/2026); thương hiệu có thể thay bằng loại tương đương.</p>
+  </div>
+</section>
+
+<!-- THƯ VIỆN -->
+<section id="thu-vien" aria-labelledby="h-tv">
+  <div class="container">
+    <span class="eyebrow">Thư viện ảnh</span>
+    <h2 class="title" id="h-tv">The Poet <em>ngày và đêm</em></h2>
+    <div class="gallery">
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-phoi-canh-ngay.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-phoi-canh-ngay.jpg" alt="Phối cảnh The Poet Residence ban ngày" loading="lazy" decoding="async"></a>
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-phoi-canh-goc-duong.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-phoi-canh-goc-duong.jpg" alt="The Poet Residence nhìn từ góc đường" loading="lazy" decoding="async"></a>
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-phoi-canh-goc-duong-dem.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-phoi-canh-goc-duong-dem.jpg" alt="The Poet Residence lên đèn" loading="lazy" decoding="async"></a>
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-khoi-de-dem.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-khoi-de-dem.jpg" alt="Khối đế The Poet Residence về đêm" loading="lazy" decoding="async"></a>
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-sanh-don.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-sanh-don.jpg" alt="Sảnh đón The Poet Residence" loading="lazy" decoding="async"></a>
+    </div>
+    <p class="note">Ảnh phối cảnh, minh họa của chủ đầu tư.</p>
+  </div>
+</section>
+
+<!-- HỎI ĐÁP -->
+<section class="faq" id="hoi-dap" style="background:#fff" aria-labelledby="h-hd">
+  <div class="container">
+    <span class="eyebrow">Hỏi đáp</span>
+    <h2 class="title" id="h-hd">Khách hay hỏi về <em>The Poet</em></h2>
+    <div class="faq-cols">
+      <div>
+        <details><summary>Dự án đủ điều kiện bán chưa?</summary><p>Đã đủ. Sở Xây dựng Đà Nẵng xác nhận 263 căn đủ điều kiện bán nhà ở hình thành trong tương lai (Công văn 11222/SXD-QLN ngày 24/6/2026); ngân hàng bảo lãnh VietinBank.</p></details>
+        <details><summary>Sở hữu bao lâu? Người nước ngoài mua được không?</summary><p>Người Việt Nam sở hữu lâu dài. Hiện chủ đầu tư chưa được bán cho tổ chức, cá nhân nước ngoài.</p></details>
+        <details><summary>Khi nào bàn giao, bảo hành bao lâu?</summary><p>Dự kiến bàn giao năm 2027 (phần móng xong 12/2025). Căn hộ bảo hành 60 tháng.</p></details>
+        <details><summary>Ngân hàng cho vay bao nhiêu?</summary><p>Tối đa 50 – 70% giá trị căn tùy phương thức; VietinBank, Vietcombank, MB. Chủ đầu tư hỗ trợ lãi suất tối đa 24 tháng (100% đến khi nhận nhà, 50% thêm 12 tháng).</p></details>
+        <details><summary>Phí quản lý bao nhiêu?</summary><p>Chủ đầu tư chưa công bố phí quản lý và phí tiện ích; tư vấn quản lý vận hành dự kiến là CBRE.</p></details>
+        <details><summary>Có chỗ đỗ ô tô không?</summary><p>Có khoảng 92 chỗ ô tô và 353 chỗ xe máy ở 2 tầng hầm và tầng 1.</p></details>
+      </div>
+      <div>
+        <details><summary>Chuyển nhượng hợp đồng thế nào?</summary><p>Được chuyển nhượng khi đã thanh toán đủ các đợt tới thời điểm chuyển nhượng; theo chính sách chủ đầu tư, lần đầu miễn phí, từ lần thứ hai 9 triệu/lần.</p></details>
+        <details><summary>Doanh nghiệp có mua được không?</summary><p>Có. Doanh nghiệp chuẩn bị giấy chứng nhận đăng ký doanh nghiệp, quyết định mua bất động sản, giấy ủy quyền ký và CCCD người đại diện; cá nhân chỉ cần CCCD.</p></details>
+        <details><summary>Mua 2 căn liền nhau có đập thông được không?</summary><p>Không tự ý thay đổi kết cấu; chỉ làm khi được chủ đầu tư hoặc đơn vị quản lý đồng ý bằng văn bản.</p></details>
+        <details><summary>Trần cao bao nhiêu?</summary><p>Tầng căn hộ cao 3,3 m/tầng; hành lang rộng 1,8 m; 4 thang máy.</p></details>
+        <details><summary>An toàn cháy nổ, an ninh ra sao?</summary><p>Đã thẩm duyệt PCCC (báo cháy tự động, chữa cháy nước, khí FM-200, thang máy chữa cháy); kiểm soát xe hầm, thang máy, thang bộ, camera toàn tòa.</p></details>
+        <details><summary>Ai là chủ đầu tư, nhà thầu?</summary><p>Chủ đầu tư Công ty CP Địa ốc Phúc Thanh An; tổng thầu Central; thiết kế Huni Architectes; giám sát IBST.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ĐĂNG KÝ -->
+<section class="cta" id="dang-ky" aria-labelledby="h-cta">
+  <img class="bg" src="{{HH_CRM_URL}}img/the-poet/the-poet-khoi-de-dem.jpg" alt="" loading="lazy" decoding="async">
+  <div class="container">
+    <div class="rv">
+      <span class="eyebrow">Nhận thông tin chi tiết</span>
+      <h2 class="title" id="h-cta">Bảng giá & căn còn trống <em style="color:var(--gold2)">gửi qua Zalo</em></h2>
+      <ul>
+        <li>Bảng giá cập nhật từng căn, từng tầng, từng hướng</li>
+        <li>So sánh phương án: thanh toán sớm, giãn tiến độ, vay ngân hàng</li>
+        <li>Chính sách chiết khấu đang áp dụng của chủ đầu tư</li>
+        <li>Bản sao pháp lý: đủ điều kiện bán, giấy phép xây dựng</li>
+        <li>Hẹn xem sa bàn, nhà mẫu</li>
+      </ul>
+      <div class="advisor"><div class="av">H</div><div><b>Hoàng Hiệp</b><span>Tư vấn bất động sản Đà Nẵng · trực tiếp, không qua tổng đài<br>Zalo/Hotline: <a href="https://zalo.me/0904567009" target="_blank" rel="noopener" class="js-zalo">0904 567 009</a></span></div></div>
+    </div>
+    <form class="form-card lead-form rv" data-form="Nhận bảng giá The Poet" aria-labelledby="f-title">
+      <h3 id="f-title">Nhận bảng giá The Poet</h3>
+      <p>Gửi qua Zalo trong 15 phút giờ hành chính</p>
+      <div class="field"><label for="f-name">Họ và tên</label><input id="f-name" name="name" placeholder="Họ và tên *" autocomplete="name" required></div>
+      <div class="field"><label for="f-phone">Số điện thoại</label><input id="f-phone" name="phone" type="tel" placeholder="Số Zalo / điện thoại *" autocomplete="tel" required pattern="[0-9 +.]{9,14}"></div>
+      <div class="field"><label for="f-type">Loại căn quan tâm</label><select id="f-type" name="type"><option value="">Loại căn quan tâm</option><option>1PN+1</option><option>2PN 64 m²</option><option>2PN góc 66 m²</option><option>2PN góc 75 m²</option><option>2PN góc 80 m²</option><option>3PN góc 89 m²</option><option>Penthouse</option></select></div>
+      <button class="btn btn-gold" type="submit">Nhận bảng giá qua Zalo</button>
+      <div class="ok-msg" role="status">Cảm ơn anh/chị! Hoàng Hiệp sẽ gửi thông tin qua Zalo sớm nhất.</div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="container">The Poet Residence – 95 – 99 Hồ Xuân Hương, Ngũ Hành Sơn, Đà Nẵng. Thông tin, hình ảnh tổng hợp từ tài liệu chủ đầu tư, mang tính tham khảo; giá và chính sách có thể thay đổi. Tư vấn: Hoàng Hiệp – 0904 567 009.</div>
+</footer>
+
+<div class="float"><a class="zl js-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" aria-label="Nhắn Zalo">Zalo</a><a class="call" href="tel:0904567009" aria-label="Gọi 0904 567 009">Gọi</a></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Xem ảnh"><button type="button" aria-label="Đóng">×</button><img alt=""></div>
+
+<script>
+(function(){
+  // Hiện dần khi cuộn tới.
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'}):null;
+  document.querySelectorAll('.rv').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+  // Tab tiện ích theo tầng.
+  document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.toggle('on',x===b);});
+    document.querySelectorAll('.floor').forEach(function(f){f.classList.toggle('on',f.id===b.dataset.floor);});
+  });});
+  // Xem ảnh lớn.
+  var lb=document.getElementById('lb'),li=lb.querySelector('img');
+  document.addEventListener('click',function(e){var a=e.target.closest('a.card-img,a.pic');if(!a)return;e.preventDefault();li.src=a.getAttribute('href');li.alt=(a.querySelector('img')||{}).alt||'';lb.classList.add('on');});
+  lb.addEventListener('click',function(e){if(e.target!==li){lb.classList.remove('on');}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('on');});
+  // Nút "Nhận giá căn này" chọn sẵn loại căn trong form.
+  document.querySelectorAll('[data-type]').forEach(function(a){a.addEventListener('click',function(){var s=document.getElementById('f-type');if(s){for(var i=0;i<s.options.length;i++){if(s.options[i].text===a.dataset.type){s.selectedIndex=i;}}}});});
+  // Form: web lưu khách (script chung của landing); ở đây chỉ báo đã gửi.
+  document.querySelectorAll('.lead-form').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();if(!f.checkValidity()){f.reportValidity();return;}var m=f.querySelector('.ok-msg');if(m)m.style.display='block';f.querySelector('button[type=submit]').disabled=true;});});
+  // Mục lục: đánh dấu mục đang xem.
+  var links=[].slice.call(document.querySelectorAll('.nav a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  window.addEventListener('scroll',function(){var y=window.scrollY+120,cur=-1;secs.forEach(function(s,i){if(s&&s.offsetTop<=y)cur=i;});links.forEach(function(a,i){a.classList.toggle('on',i===cur);});},{passive:true});
+})();
+</script>

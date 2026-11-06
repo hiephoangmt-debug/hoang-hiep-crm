@@ -63,7 +63,25 @@ function hoanghiep_assets() {
 	// Thêm thời điểm sửa file vào phiên bản để trình duyệt / cache tải bản mới ngay sau khi cập nhật.
 	wp_enqueue_style( 'hoanghiep', get_theme_file_uri( 'assets/css/main.css' ), array(), $ver . '.' . filemtime( get_theme_file_path( 'assets/css/main.css' ) ) );
 	wp_enqueue_script( 'hoanghiep', get_theme_file_uri( 'assets/js/main.js' ), array(), $ver . '.' . filemtime( get_theme_file_path( 'assets/js/main.js' ) ), array( 'strategy' => 'defer' ) );
+	// Trang dự án: giao diện kiểu landing (mẫu The Poet) – tắt từng dự án bằng "Giao diện trang" = "Giao diện cũ".
+	if ( hoanghiep_du_an_moi() ) {
+		wp_enqueue_style( 'hoanghiep-du-an-moi', get_theme_file_uri( 'assets/css/du-an-moi.css' ), array( 'hoanghiep' ), $ver . '.' . filemtime( get_theme_file_path( 'assets/css/du-an-moi.css' ) ) );
+	}
 }
+
+/** Trang dự án dùng giao diện mới (kiểu landing) – mặc định bật. */
+function hoanghiep_du_an_moi() {
+	return is_singular( 'du-an' ) && 'cu' !== get_post_meta( get_queried_object_id(), 'hh_p_layout', true ) && ! ( function_exists( 'hoanghiep_landing_file' ) && hoanghiep_landing_file() ); // Trang landing riêng có CSS riêng.
+}
+add_filter(
+	'body_class',
+	static function ( $classes ) {
+		if ( hoanghiep_du_an_moi() ) {
+			$classes[] = 'du-an-moi';
+		}
+		return $classes;
+	}
+);
 
 /** Tải trước font chữ chính (đoạn văn + tiêu đề) để chữ hiện ngay, không nhảy bố cục. */
 add_action(
