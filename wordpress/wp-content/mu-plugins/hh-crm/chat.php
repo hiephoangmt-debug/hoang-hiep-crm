@@ -329,6 +329,10 @@ function hh_chat_project_facts( $page ) {
 		'Giá thuê'     => $m( 'hh_p_rent_price' ),
 		'Thị trường thứ cấp' => mb_substr( $m( 'hh_p_resale_note' ), 0, 500 ),
 		'Tiến độ'      => implode( '; ', array_slice( hh_lines( 'hh_p_progress', $page ), -4 ) ),
+		'Cho thuê / vận hành' => mb_substr( $m( 'hh_p_rental' ), 0, 900 ),
+		'Biệt thự'     => implode( '; ', array_map( static fn( $r ) => implode( ' | ', array_filter( $r ) ), array_slice( hh_table( 'hh_p_villa_table', 4, $page ), 0, 10 ) ) ),
+		'Nhà phố'      => implode( '; ', array_map( static fn( $r ) => implode( ' | ', array_filter( $r ) ), array_slice( hh_table( 'hh_p_nha-pho_table', 4, $page ), 0, 10 ) ) ),
+		'Hỏi đáp'      => mb_substr( implode( ' || ', array_map( static fn( $r ) => $r[0] . ' → ' . $r[1], hh_table( 'hh_p_faq', 2, $page ) ) ), 0, 2500 ),
 	);
 	return array_filter( $facts, static fn( $v ) => '' !== trim( (string) $v ) );
 }
@@ -463,9 +467,12 @@ function hh_chat_knowledge() {
 				'Nổi bật'    => $clip( $lines( 'hh_p_highlights', 5 ), 400 ),
 				'Tiện ích'   => $clip( $lines( 'hh_p_amenities_in', 8 ), 350 ),
 				'Thuê'       => $clip( get_post_meta( $p->ID, 'hh_p_rent_price', true ), 300 ),
+				'Biệt thự'   => $clip( $lines( 'hh_p_villa_table', 8 ), 700 ),
+				'Cho thuê / vận hành' => $clip( get_post_meta( $p->ID, 'hh_p_rental', true ), 600 ),
+				'Hỏi đáp'    => $clip( str_replace( "\n", ' || ', (string) get_post_meta( $p->ID, 'hh_p_faq', true ) ), 1200 ),
 			)
 		);
-		if ( ! isset( $d['Loại căn'] ) && ! isset( $d['Chính sách'] ) && ! isset( $d['Thuê'] ) ) {
+		if ( ! isset( $d['Loại căn'] ) && ! isset( $d['Chính sách'] ) && ! isset( $d['Thuê'] ) && ! isset( $d['Biệt thự'] ) && ! isset( $d['Hỏi đáp'] ) ) {
 			continue;
 		}
 		$row = array( '### ' . $p->post_title . ' – ' . get_permalink( $p ) );
