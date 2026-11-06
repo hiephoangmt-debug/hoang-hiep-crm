@@ -499,6 +499,7 @@ def mb_4d():
     """Mặt bằng tầng = mô hình 4D mở sẵn chế độ "Mặt bằng tầng" (bấm từng căn). Mô hình 4D được đặt ngay sau #chon-can."""
     return ('<p class="lead" style="margin:4px 0 14px">Kéo thanh <b>Tầng</b> và <b>Giờ trong ngày</b> phía trên mô hình, bấm vào từng căn để xem loại căn, diện tích và hướng view. '
             'Màu căn: <b style="color:#E06A6A">Studio</b> · <b style="color:#3A8FC9">1PN+1</b> · <b style="color:#C9962A">2PN góc bo</b>.</p>'
+            '<style>body.tool-on #wvb,body.tool-on #wvh{opacity:0!important;pointer-events:none!important;transition:opacity .2s}</style>'
             '<div id="chon-can"></div>'
             '<script>window.SS4D_NOGATE=1;addEventListener("message",function(e){var d=e.data;if(!d||!d.ss4dUnit)return;var u=d.ss4dUnit;'
             'try{if(window.gtag)gtag("event",d.lead?"mb4d_lead":"mb4d_can",{event_label:u.code})}catch(x){}'
