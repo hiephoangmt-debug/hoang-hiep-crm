@@ -34,10 +34,10 @@ section{padding:72px 0}
 .nav a:hover,.nav a.on{background:rgba(255,255,255,.12);opacity:1}
 .top .btn{padding:9px 16px;font-size:14px}
 /* Hero */
-.hero{position:relative;background:radial-gradient(1200px 600px at 75% 30%,#24406b 0%,var(--navy) 60%);color:#fff;padding:56px 0 64px;overflow:hidden}
-.hero{min-height:min(92vh,760px);display:flex;align-items:center}
-.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(14,28,51,.94) 0%,rgba(14,28,51,.72) 45%,rgba(14,28,51,.25) 100%),linear-gradient(0deg,rgba(14,28,51,.7),rgba(14,28,51,0) 40%)}
+.hero{position:relative;background:radial-gradient(1200px 600px at 75% 30%,#24406b 0%,var(--navy) 60%);color:#fff;padding:48px 0 56px;overflow:hidden}
+.hero-view{position:relative;margin:0;background:var(--navy)}
+.hero-view img{width:100%;height:min(80vh,760px);object-fit:cover;object-position:center 60%}
+.hero-view figcaption{position:absolute;right:14px;bottom:12px;font-size:11.5px;color:#fff;background:rgba(0,0,0,.35);padding:4px 10px;border-radius:999px}
 .hero .container{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
 .hero h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(36px,5.4vw,64px);margin:.2em 0 .25em}
 .hero h1 em{color:var(--gold2);font-style:italic;font-weight:500}
@@ -180,6 +180,8 @@ footer.foot{background:#0a1526;color:rgba(255,255,255,.7);font-size:13px;padding
 }
 @media (max-width:600px){
 section{padding:52px 0}
+.hero-view img{height:auto;aspect-ratio:16/10}
+.hero-view figcaption{font-size:10px;right:8px;bottom:8px}
 .chips{grid-template-columns:repeat(2,1fr)}
 .units,.grid3,.views,.vband,.faq-cols,.list-ok{grid-template-columns:1fr}
 .facts,.brands,.loan{grid-template-columns:1fr 1fr}
@@ -203,8 +205,11 @@ section{padding:52px 0}
 
 <main id="top">
 <!-- HERO -->
+<figure class="hero-view">
+  <img src="{{HH_CRM_URL}}img/the-poet/the-poet-toan-canh-bien-my-khe.jpg" width="2000" height="1125" alt="The Poet Residence nhìn ra biển Mỹ Khê và bán đảo Sơn Trà – phối cảnh chủ đầu tư" fetchpriority="high" decoding="async">
+  <figcaption>The Poet Residence · biển Mỹ Khê – Sơn Trà · phối cảnh chủ đầu tư</figcaption>
+</figure>
 <section class="hero" aria-labelledby="h1">
-  <img class="hero-bg" src="{{HH_CRM_URL}}img/the-poet/the-poet-toan-canh-bien-my-khe.jpg" width="2000" height="1125" alt="" decoding="async">
   <div class="container">
     <div>
       <span class="badge-ok">✔ 263 căn đủ điều kiện bán · Sở Xây dựng 24/6/2026</span>
