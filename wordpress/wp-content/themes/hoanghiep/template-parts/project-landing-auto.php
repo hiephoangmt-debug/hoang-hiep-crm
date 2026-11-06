@@ -77,6 +77,8 @@ $amen_img  = hh_ids( 'hh_p_amenities_img' );
 $master    = hh_ids( 'hh_p_masterplan_img' );
 $layouts   = hh_ids( 'hh_p_unit_layouts' );
 $progress  = hh_ids( 'hh_p_progress_gallery' );
+// Lưới ảnh luôn đủ hàng (không để 1 ảnh lẻ một hàng): cắt về bội số của số cột khi nhiều hơn 1 hàng.
+$full_rows = static fn( $ids, $cols, $max ) => array_slice( $ids, 0, count( $ids ) <= $cols ? count( $ids ) : min( $max, count( $ids ) - count( $ids ) % $cols ) );
 $loc_img   = hh_ids( 'hh_p_location_img' );
 $side_img  = $gallery[0] ?? ( $amen_img[0] ?? 0 );
 $over_img  = $gallery[1] ?? ( $gallery[0] ?? ( $master[0] ?? 0 ) );
@@ -104,7 +106,7 @@ $parent   = (int) $m( 'hh_p_parent' );
 $parent   = $parent && 'publish' === get_post_status( $parent ) ? $parent : 0;
 $group_id = $parent ?: $id;
 $kids     = get_posts( array( 'post_type' => 'du-an', 'post_status' => 'publish', 'numberposts' => 30, 'meta_key' => 'hh_p_parent', 'meta_value' => $group_id, 'orderby' => 'menu_order title', 'order' => 'ASC' ) );
-$family   = $kids ? array_merge( $parent ? array( get_post( $parent ) ) : array(), $kids ) : array();
+$family   = $kids ? array_merge( array( get_post( $group_id ) ), $kids ) : array(); // Luôn có thẻ dự án tổng thể (kể cả khi đang xem chính nó) để bố cục cân đối.
 
 // Chữ ngắn.
 $sub = $excerpt ?: ( $m( 'hh_p_location_desc' ) ?: '' );
@@ -268,12 +270,13 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
   <div class="container">
     <span class="eyebrow">Tổ hợp dự án</span>
     <h2 class="title" id="h-th"><?php echo $parent ? 'Cùng tổ hợp <em>' . $e( get_the_title( $parent ) ) . '</em>' : 'Các dự án trong <em>' . $e( $short_name ) . '</em>'; // phpcs:ignore ?></h2>
-    <div class="kids">
+    <?php $fn = count( $family ); $fcls = 2 === $fn ? ' kids--2' : ( 0 === $fn % 4 ? ' kids--4' : ( 0 === $fn % 3 || $fn > 4 ? ' kids--3' : ' kids--' . $fn ) ); ?>
+    <div class="kids<?php echo esc_attr( $fcls ); ?>">
       <?php foreach ( $family as $p ) : ?>
         <?php $is_cur = (int) $p->ID === $id; $is_par = (int) $p->ID === $parent; ?>
         <a class="kid<?php echo $is_cur ? ' cur' : ''; ?>" href="<?php echo esc_url( get_permalink( $p ) ); ?>"<?php echo $is_cur ? ' aria-current="page"' : ''; ?>>
           <?php if ( has_post_thumbnail( $p ) ) : ?><img src="<?php echo esc_url( (string) get_the_post_thumbnail_url( $p, 'medium_large' ) ); ?>" alt="<?php echo esc_attr( get_the_title( $p ) ); ?>" loading="lazy" decoding="async"><?php endif; ?>
-          <div><small><?php echo $is_cur ? 'Đang xem' : ( $is_par ? 'Tổng thể dự án' : $e( $short( hh_meta( 'hh_p_type', $p->ID ) ?: 'Dự án thành phần', 40 ) ) ); ?></small><b><?php echo $e( get_the_title( $p ) ); ?></b><?php if ( hh_meta( 'hh_p_price_from', $p->ID ) ) : ?><span><?php echo $e( hh_project_price( $p->ID ) ); ?> (tham khảo)</span><?php endif; ?></div>
+          <div><small><?php echo $is_cur ? 'Đang xem' : ( $is_par ? 'Tổng thể dự án' : $e( $short( hh_meta( 'hh_p_type', $p->ID ) ?: 'Dự án thành phần', 40 ) ) ); ?></small><b><?php echo $e( get_the_title( $p ) ); ?></b><?php if ( hh_meta( 'hh_p_price_from', $p->ID ) ) : ?><span><?php echo $e( hh_project_price( $p->ID ) ); ?> (tham khảo)</span><?php elseif ( hh_meta( 'hh_p_address', $p->ID ) ) : ?><span><?php echo $e( $short( hh_meta( 'hh_p_address', $p->ID ), 60 ) ); ?></span><?php endif; ?><?php if ( ! $is_cur ) : ?><em class="kid-go">Xem dự án →</em><?php endif; ?></div>
         </a>
       <?php endforeach; ?>
     </div>
@@ -332,8 +335,8 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
       <?php endforeach; ?>
     <?php endif; ?>
     <?php if ( $amen_img ) : ?>
-    <div class="grid3" style="margin-top:22px">
-      <?php foreach ( array_slice( $amen_img, 0, 9 ) as $i => $img ) { echo $card( $img, wp_get_attachment_caption( $img ) ?: ( $amen_in[ $i ] ?? $cap( $img ) ) ); } // phpcs:ignore ?>
+    <div class="grid3" style="margin-top:22px<?php echo count( $amen_img ) < 3 ? ';grid-template-columns:repeat(' . count( $amen_img ) . ',1fr)' : ''; ?>">
+      <?php foreach ( $full_rows( $amen_img, 3, 9 ) as $i => $img ) { echo $card( $img, wp_get_attachment_caption( $img ) ?: ( $amen_in[ $i ] ?? $cap( $img ) ) ); } // phpcs:ignore ?>
     </div>
     <?php endif; ?>
     <?php if ( $amen_in ) : ?>
@@ -441,7 +444,7 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
     <h2 class="title" id="h-lc">Các loại sản phẩm <em><?php echo $e( $short_name ); ?></em></h2>
     <?php if ( $m( 'hh_p_unit_area' ) ) : ?><p class="lead"><?php echo $e( $m( 'hh_p_unit_area' ) ); ?>. Bấm vào ảnh để xem mặt bằng lớn.</p><?php endif; ?>
     <?php if ( $units ) : ?>
-    <div class="units">
+    <div class="units"<?php echo 4 === count( $units ) ? ' style="grid-template-columns:repeat(2,1fr)"' : ( count( $units ) < 3 ? ' style="grid-template-columns:repeat(' . count( $units ) . ',minmax(0,420px))"' : '' ); ?>>
       <?php foreach ( $units as $u ) : ?>
       <article class="unit rv">
         <?php if ( $u['img'] ) : ?><a class="pic" href="<?php echo esc_url( $url( $u['img'], 'full' ) ); ?>"><img src="<?php echo esc_url( $url( $u['img'], 'medium_large' ) ?: $url( $u['img'], 'full' ) ); ?>" alt="<?php echo esc_attr( $alt( $u['img'] ) ); ?>" loading="lazy" decoding="async"></a><?php endif; ?>
@@ -543,6 +546,9 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
         <?php endif; ?>
         <?php if ( $m( 'hh_p_handover_std' ) ) : ?><div class="std"><b>Tiêu chuẩn bàn giao</b><br><?php echo $e( $m( 'hh_p_handover_std' ) ); ?></div><?php endif; ?>
         <p class="note">Bản sao văn bản pháp lý: nhắn Zalo <?php echo $e( $phone ); ?> để nhận.</p>
+        <?php if ( $progress && count( $progress ) < 3 ) : ?>
+        <div class="vband rv" style="margin-top:18px;grid-template-columns:<?php echo 1 === count( $progress ) ? '1fr' : '1fr 1fr'; ?>"><?php foreach ( $progress as $img ) { echo $card( $img, $cap( $img ), true ); } // phpcs:ignore ?></div>
+        <?php endif; ?>
       </div>
       <?php if ( $timeline[0] ) : ?>
       <ol class="timeline rv">
@@ -552,8 +558,8 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
       </ol>
       <?php endif; ?>
     </div>
-    <?php if ( $progress ) : ?>
-    <div class="grid3" style="margin-top:26px"><?php foreach ( array_slice( $progress, 0, 6 ) as $img ) { echo $card( $img, $cap( $img ) ); } // phpcs:ignore ?></div>
+    <?php if ( count( $progress ) >= 3 ) : ?>
+    <div class="grid3" style="margin-top:26px"><?php foreach ( $full_rows( $progress, 3, 6 ) as $img ) { echo $card( $img, $cap( $img ) ); } // phpcs:ignore ?></div>
     <?php endif; ?>
   </div>
 </section>
