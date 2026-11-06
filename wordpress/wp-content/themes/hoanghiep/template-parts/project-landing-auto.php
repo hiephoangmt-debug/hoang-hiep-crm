@@ -377,14 +377,55 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
       <p class="plan-cap"><?php echo $e( $cap( $img ) ); ?> · bấm để phóng to.</p>
     <?php endforeach; ?>
     <?php if ( $floors ) : ?>
-      <?php if ( count( $floors ) > 1 ) : ?>
-      <div class="tabs" role="tablist">
-        <?php foreach ( $floors as $i => $img ) : ?><button class="tab<?php echo 0 === $i ? ' on' : ''; ?>" type="button" data-floor="mb-<?php echo (int) $i; ?>"><?php echo $e( $short( $cap( $img ), 36 ) ); ?></button><?php endforeach; ?>
+      <?php
+      // Chia theo tòa: "… tòa S1 …" / "S1 · Tầng 3"; ảnh không ghi tòa thuộc tòa của ảnh liền trước. Nhãn gọn: "Tầng 17, 19, 21".
+      $names = array_unique( array_filter( array( $title, $short_name, trim( preg_replace( '/^Tổ hợp\s+/u', '', $title ) ), $parent ? get_the_title( $parent ) : '' ) ) );
+      $fl    = array();
+      $prev  = '';
+      foreach ( $floors as $i => $img ) {
+          $t   = $cap( $img );
+          $toa = preg_match( '/\b(?:tòa|toà|tháp|block|khối)\s+([A-Za-z]{0,3}\d{0,2}[A-Za-z]?)\b/iu', $t, $x ) && '' !== $x[1] ? mb_strtoupper( $x[1] ) : ( preg_match( '/^([A-Z]{1,2}\d{1,2})\s*[·–—-]\s/u', $t, $x ) ? $x[1] : $prev );
+          $lb  = $t;
+          foreach ( $names as $n ) {
+              $lb = str_ireplace( $n, '', $lb );
+          }
+          $lb  = preg_replace( array( '/\b(?:tòa|toà|tháp|block|khối)\s+[A-Za-z]{0,3}\d{0,2}[A-Za-z]?\b/iu', '/^[A-Z]{1,2}\d{1,2}\s*[·–—-]\s*/u', '/^\s*mặt bằng\s*/iu', '/\s*\(.*?\)\s*/u' ), ' ', $lb );
+          $lb  = trim( preg_replace( '/\s{2,}/u', ' ', $lb ), " \t·–—-,.:" );
+          $lb  = '' === $lb ? 'Mặt bằng ' . ( $i + 1 ) : mb_strtoupper( mb_substr( $lb, 0, 1 ) ) . mb_substr( $lb, 1 );
+          $n   = mb_strtolower( $lb );
+          $rk  = false !== mb_strpos( $n, 'sơ đồ' ) || false !== mb_strpos( $n, 'tổng' ) ? -5 : ( false !== mb_strpos( $n, 'hầm' ) ? -1 : ( preg_match( '/(\d+)/', $n, $d ) ? (int) $d[1] : 900 ) );
+          $rk += false !== mb_strpos( $n, 'penthouse' ) ? 500 : ( false !== mb_strpos( $n, 'mái' ) ? 800 : 0 );
+          $fl[] = array( 'img' => $img, 'toa' => $toa, 'lb' => $lb, 'rk' => $rk, 'i' => $i );
+          $prev = $toa;
+      }
+      $toas = array_values( array_unique( array_filter( wp_list_pluck( $fl, 'toa' ) ) ) );
+      if ( count( $toas ) < 2 ) {
+          $toas = array();
+      } else {
+          natsort( $toas );
+          $toas = array_values( $toas );
+          foreach ( $fl as &$f ) {
+              $f['toa'] = $f['toa'] ?: $toas[0];
+          }
+          unset( $f );
+      }
+      usort( $fl, static fn( $a, $b ) => array( $toas ? array_search( $a['toa'], $toas, true ) : 0, $a['rk'], $a['i'] ) <=> array( $toas ? array_search( $b['toa'], $toas, true ) : 0, $b['rk'], $b['i'] ) );
+      $first = $fl[0];
+      ?>
+      <?php if ( $toas ) : ?>
+      <div class="tabs tabs-toa" role="tablist" aria-label="Chọn tòa">
+        <?php foreach ( $toas as $t ) : ?><button class="tab-toa<?php echo $t === $first['toa'] ? ' on' : ''; ?>" type="button" data-toa="<?php echo esc_attr( $t ); ?>">Tòa <?php echo $e( $t ); ?> <small><?php echo (int) count( array_filter( $fl, static fn( $f ) => $f['toa'] === $t ) ); ?> mặt bằng</small></button><?php endforeach; ?>
       </div>
       <?php endif; ?>
-      <?php foreach ( $floors as $i => $img ) : ?>
-      <div class="floor<?php echo 0 === $i ? ' on' : ''; ?>" id="mb-<?php echo (int) $i; ?>">
-        <a class="plan" href="<?php echo esc_url( $url( $img, 'full' ) ); ?>"><img src="<?php echo esc_url( $url( $img, 'large' ) ); ?>" alt="<?php echo esc_attr( $alt( $img ) ); ?>" loading="lazy" decoding="async"></a>
+      <?php if ( count( $fl ) > 1 ) : ?>
+      <div class="tabs" role="tablist">
+        <?php foreach ( $fl as $f ) : ?><button class="tab<?php echo $f === $first ? ' on' : ''; ?>" type="button" data-floor="mb-<?php echo (int) $f['i']; ?>"<?php echo $toas ? ' data-toa="' . esc_attr( $f['toa'] ) . '"' . ( $f['toa'] !== $first['toa'] ? ' hidden' : '' ) : ''; ?>><?php echo $e( $short( $f['lb'], 30 ) ); ?></button><?php endforeach; ?>
+      </div>
+      <?php endif; ?>
+      <?php foreach ( $fl as $f ) : ?>
+      <div class="floor<?php echo $f === $first ? ' on' : ''; ?>" id="mb-<?php echo (int) $f['i']; ?>">
+        <a class="plan" href="<?php echo esc_url( $url( $f['img'], 'full' ) ); ?>"><img src="<?php echo esc_url( $url( $f['img'], 'large' ) ); ?>" alt="<?php echo esc_attr( $alt( $f['img'] ) ); ?>" loading="lazy" decoding="async"></a>
+        <p class="plan-cap"><?php echo $e( ( $f['toa'] ? 'Tòa ' . $f['toa'] . ' · ' : '' ) . $f['lb'] ); ?> · bấm để phóng to.</p>
       </div>
       <?php endforeach; ?>
     <?php endif; ?>
@@ -615,6 +656,13 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
     var sec=b.closest('section');
     sec.querySelectorAll('.tab').forEach(function(x){x.classList.toggle('on',x===b);});
     sec.querySelectorAll('.floor').forEach(function(f){f.classList.toggle('on',f.id===b.dataset.floor);});
+  });});
+  // Mặt bằng chia theo tòa: chọn tòa → hiện các tầng của tòa đó, mở tầng đầu tiên.
+  document.querySelectorAll('.tab-toa').forEach(function(b){b.addEventListener('click',function(){
+    var sec=b.closest('section'),first=null;
+    sec.querySelectorAll('.tab-toa').forEach(function(x){x.classList.toggle('on',x===b);});
+    sec.querySelectorAll('.tab[data-toa]').forEach(function(t){var on=t.dataset.toa===b.dataset.toa;t.hidden=!on;if(on&&!first)first=t;});
+    if(first)first.click();
   });});
   var lb=document.getElementById('lb'),li=lb.querySelector('img');
   document.addEventListener('click',function(e){var a=e.target.closest('a.card-img,a.pic,a.plan');if(!a)return;e.preventDefault();li.src=a.getAttribute('href');li.alt=(a.querySelector('img')||{}).alt||'';lb.classList.add('on');});
