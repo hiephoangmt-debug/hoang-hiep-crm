@@ -975,11 +975,11 @@ def dau_tu_san(ctx='ADS'):
             '<p class="src" style="text-align:center;margin-top:8px">Mức chiết khấu mua sàn / nhiều căn theo chính sách chủ đầu tư từng đợt – đại lý gửi phương án riêng theo ngân sách của anh/chị.</p>'
             '</div></section>')
 
-COVER = RAW + '8bdaa0c600ff817e4f1974c48b268d8dbf3f7724/landing/sun-saphia/v4/img/'
+COVER = RAW + '190e05cf59b44142653b1b4c5dc22dfa807951de/landing/sun-saphia/v4/img/'
 def cover_top():
     """Ảnh đại diện đầu trang chủ: phối cảnh 4K của CĐT lúc hoàng hôn, tràn màn hình."""
     big = COVER + 'cover-saphia-hoang-hon.webp'
-    sm = COVER + 'cover-saphia-hoang-hon-900.webp'
+    sm = COVER + 'cover-saphia-doc.webp'
     return ('<style>.cvt{position:relative;overflow:hidden;background:#0B1A3A;color:#fff}'
             '.cvt img{display:block;width:100%;height:min(86vh,56.25vw);min-height:300px;object-fit:cover;object-position:50% 45%;animation:cvtZ 16s ease-out both}@keyframes cvtZ{from{transform:scale(1.06)}to{transform:none}}'
             '.cvt:after{content:"";position:absolute;inset:auto 0 0 0;height:48%;background:linear-gradient(rgba(11,26,58,0),rgba(11,26,58,.88));pointer-events:none}'
@@ -988,8 +988,8 @@ def cover_top():
             '.cvtc span{display:block;font-size:clamp(13px,1.4vw,17px);color:#E2EAF4;margin-top:8px}.cvtc small{display:block;margin-top:4px;font-size:11px;color:#B8C6DA}'
             '.cvtd{flex:none;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.55);color:#fff;text-decoration:none;font-size:19px;animation:cvtB 1.8s infinite}'
             '@keyframes cvtB{0%,100%{transform:none}50%{transform:translateY(6px)}}'
-            '@media(max-width:760px){.cvt img{height:min(62svh,520px);min-height:340px;object-position:60% 40%}.cvtc{padding:0 14px 12px}.cvtd{display:none}}@media(prefers-reduced-motion:reduce){.cvt img,.cvtd{animation:none}}</style>'
-            '<section class="cvt" aria-label="Phối cảnh Sun Saphia Residence"><picture><source media="(max-width:760px)" srcset="' + sm + '">'
+            '@media(max-width:760px){.cvt img{height:auto;min-height:0;animation:none}.cvt:after{display:none}.cvtc{padding:0 10px 8px;justify-content:flex-end}.cvtc b,.cvtc span,.cvtd{display:none}.cvtc small{margin:0;background:rgba(0,0,0,.35);padding:2px 8px;border-radius:999px}}@media(prefers-reduced-motion:reduce){.cvt img,.cvtd{animation:none}}</style>'
+            '<section class="cvt" aria-label="Phối cảnh Sun Saphia Residence"><picture><source media="(max-width:760px)" srcset="' + sm + '" width="1076" height="1399">'
             '<img src="' + big + '" width="1920" height="1072" fetchpriority="high" decoding="async" '
             'alt="Phối cảnh Sun Saphia Residence nhìn từ trên cao lúc hoàng hôn: tòa tháp giữa mảng xanh, hướng ra biển Đà Nẵng (ảnh minh họa)"></picture>'
             '<div class="cvtc"><div><b>Sun Saphia <em>Residence</em></b><span>Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng · Mở bán 05/12/2026</span><small>Phối cảnh minh họa</small></div><a class="cvtd" href="#dau" aria-label="Xem tiếp">↓</a></div></section>')
