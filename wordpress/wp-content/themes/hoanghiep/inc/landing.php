@@ -90,7 +90,10 @@ add_action(
 		}
 		wp_dequeue_style( 'hoanghiep' );
 		wp_dequeue_script( 'hoanghiep' );
-		wp_dequeue_script( 'hh-chat' );
+		// Landing có khung chat riêng (FourS, Sun Saphia) thì tắt chat của web; landing không có chat (VD The Poet) giữ chatbot.
+		if ( preg_match( '/id="chatForm"|class="hhc-[lb]/', (string) file_get_contents( hoanghiep_landing_file() ) ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions
+			wp_dequeue_script( 'hh-chat' );
+		}
 	},
 	100
 );
