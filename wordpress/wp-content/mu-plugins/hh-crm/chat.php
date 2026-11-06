@@ -591,7 +591,7 @@ function hh_chat_ai_reply( $msgs, $page, $lead_phone ) {
 				'type'          => in_array( $model, array( 'claude-opus-5-5', 'claude-sonnet-5-5' ), true ) ? 'web_search_20260209' : 'web_search_20250305',
 				'name'          => 'web_search',
 				'max_uses'      => 3,
-				'user_location' => array( 'type' => 'approximate', 'city' => 'Da Nang', 'country' => 'VN', 'timezone' => 'Asia/Ho_Chi_Minh' ),
+				// Không gửi user_location: công cụ tìm kiếm không hỗ trợ mã nước VN (lỗi 400). Câu hỏi đã có "Đà Nẵng" trong ngữ cảnh.
 			),
 		);
 	}
@@ -628,6 +628,13 @@ function hh_chat_ai_reply( $msgs, $page, $lead_phone ) {
 		}
 		$code = (int) wp_remote_retrieve_response_code( $res );
 		$data = json_decode( (string) wp_remote_retrieve_body( $res ), true );
+		// Công cụ tra web bị từ chối (vùng / phiên bản) → bỏ tra web, hỏi lại ngay một lần, không rơi về kịch bản.
+		if ( 400 === $code && ! empty( $body['tools'] ) && false !== strpos( (string) ( $data['error']['message'] ?? '' ), 'tools' ) ) {
+			update_option( 'hh_chat_last_error', 'HTTP 400 (đã tự bỏ tra web và trả lời lại): ' . mb_substr( (string) $data['error']['message'], 0, 200 ) . ' (' . wp_date( 'd/m H:i' ) . ')', false );
+			unset( $body['tools'] );
+			--$round;
+			continue;
+		}
 		if ( 200 !== $code || ! is_array( $data ) ) {
 			update_option( 'hh_chat_last_error', 'HTTP ' . $code . ': ' . mb_substr( (string) ( $data['error']['message'] ?? wp_remote_retrieve_body( $res ) ), 0, 300 ) . ' (' . wp_date( 'd/m H:i' ) . ')', false );
 			return '';
