@@ -1154,6 +1154,21 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
   }
   window.hhcOpen = open;
   window.hhcAsk = function (q) { openWith(q); };
+  /* khách bấm một căn trên mặt bằng 4D: chatbot hỏi thăm, gợi ý tư vấn đúng căn đó */
+  window.hhcUnit = function (u) {
+    if (!u || !u.code || !nudge2) return;
+    var t = 'Dạ chào Anh/Chị 👋 Căn ' + u.code + (u.type ? ' (' + u.type + (u.area ? ', ' + u.area + ' m²' : '') + (u.view ? ', view ' + u.view : '') + ')' : '') + ' Anh/Chị chọn đẹp lắm ạ – căn này cũng đang có nhiều khách quan tâm. Anh/Chị cần em hỗ trợ chi tiết giá, chính sách hay bảng tính cho căn này không ạ?';
+    var qs = ['Giá căn ' + u.code + ' bao nhiêu?', 'Gửi bảng giá căn ' + u.code + ' qua Zalo', 'Căn ' + (u.type || 'này') + ' cho thuê được bao nhiêu?'];
+    if (box.classList.contains('on')) { say(t, qs); return; }
+    nudge2.innerHTML = '';
+    var x = el('button', 'hhc-nx', '×'); x.type = 'button'; x.setAttribute('aria-label', 'Ẩn'); x.onclick = function () { nudge2.classList.remove('on'); };
+    var p = el('p'); p.textContent = t; var w = el('div', 'hhc-c');
+    qs.forEach(function (q) { var b = el('button'); b.type = 'button'; b.textContent = q; b.onclick = function () { openWith(q); }; w.appendChild(b); });
+    nudge2.appendChild(x); nudge2.appendChild(p); nudge2.appendChild(w);
+    nudge && nudge.classList.remove('on'); nudge2.classList.add('on');
+    nudge2.style.setProperty('opacity', '1', 'important'); nudge2.style.setProperty('pointer-events', 'auto', 'important');
+    clearTimeout(nudge2.hideT); nudge2.hideT = setTimeout(function () { nudge2.classList.remove('on'); nudge2.style.removeProperty('opacity'); nudge2.style.removeProperty('pointer-events'); }, 25000);
+  };
 
   /* ---------- Khách dừng lâu ở một phần trang: hỏi khéo, gợi 2 câu hỏi đúng phần đó ---------- */
   var DWELL = 7000, NUDGE_MAX = 3, NUDGE_GAP = 35000;
