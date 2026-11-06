@@ -219,7 +219,7 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
 <main id="top">
 <?php if ( $hero ) : ?>
 <!-- HERO -->
-<figure class="hero-view">
+<figure class="hero-view" style="--bg:url('<?php echo esc_url( $url( $hero, 'medium' ) ?: $url( $hero, 'full' ) ); ?>')">
   <img src="<?php echo esc_url( $url( $hero, 'full' ) ); ?>" alt="<?php echo esc_attr( $alt( $hero ) ); ?>" fetchpriority="high" decoding="async">
   <figcaption><?php echo $e( $cap( $hero ) ); ?></figcaption>
 </figure>

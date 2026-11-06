@@ -84,7 +84,7 @@ body = f'''<!--HH-LANDING-BODY-->
 
 <main id="top">
 <!-- HERO -->
-<figure class="hero-view">
+<figure class="hero-view" style="--bg:url('{P}sun-saphia-phoi-canh-hoang-hon-toan-canh.jpg')">
   <img src="{P}sun-saphia-phoi-canh-hoang-hon-toan-canh.jpg" width="1800" height="996" alt="Sun Saphia Residence – tòa tháp 30 tầng của Sun Group bên biển Sơn Thủy lúc hoàng hôn, phối cảnh chủ đầu tư" fetchpriority="high" decoding="async">
   <figcaption>Sun Saphia Residence · biển Sơn Thủy lúc hoàng hôn · phối cảnh chủ đầu tư</figcaption>
 </figure>
@@ -122,7 +122,7 @@ body = f'''<!--HH-LANDING-BODY-->
         <p class="lead">Sun Property – thành viên Tập đoàn Sun Group – phát triển dự án tại giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu Saphia, phường Ngũ Hành Sơn. Tòa tháp 30 tầng – 114 m, 2 tầng hầm trên khu đất 3.720,1 m², căn hộ từ tầng 3A đến tầng 28, bàn giao hoàn thiện cơ bản.</p>
         <p class="note">Thông tin theo tài liệu Kick-off 23/10/2026 của chủ đầu tư; giá bán, chính sách căn cứ công bố chính thức. <a href="/du-an-can-ho-sun-group-da-nang-2026/" style="color:var(--gold)">Lý do Sun Group chọn Đà Nẵng cho căn hộ mặt biển đầu tiên →</a></p>
       </div>
-      <img class="rv" src="{IMG['thapcat']}" alt="Phối cảnh tòa tháp Sun Saphia Residence 30 tầng – 114 m" loading="lazy" decoding="async">
+      <img class="rv" src="{P}sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg" width="1600" height="898" alt="Phối cảnh đêm tòa tháp Sun Saphia Residence 30 tầng bên biển Sơn Thủy" loading="lazy" decoding="async">
     </div>
     <div class="facts rv">
       <div class="fact"><small>Đơn vị phát triển</small><b>Sun Property – Sun Group</b></div>

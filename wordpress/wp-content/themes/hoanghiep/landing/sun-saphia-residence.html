@@ -261,6 +261,12 @@ body.admin-bar header.top{top:32px}
 /* Mặt bằng: ảnh dọc không cao quá màn hình – canh giữa, bấm để xem lớn */
 .plan{display:flex;justify-content:center;align-items:center;background:#fff}
 .plan img{width:auto!important;max-width:100%;height:auto;max-height:min(82vh,960px);object-fit:contain}
+/* Ảnh đầu trang: luôn hiện trọn ảnh (không cắt mất đỉnh tòa tháp), không phóng quá to gây mờ – hai bên là chính ảnh làm mờ */
+.hero-view{position:relative;overflow:hidden;background:var(--navy)}
+.hero-view::before{content:"";position:absolute;inset:-40px;background:var(--bg,none) center/cover no-repeat;filter:blur(28px) brightness(.62) saturate(1.1)}
+.hero-view img{position:relative;z-index:1;display:block;margin:0 auto;width:auto!important;max-width:100%;height:auto!important;max-height:min(82vh,820px);object-fit:contain}
+.hero-view figcaption{z-index:2}
+@media (max-width:600px){.hero-view img{width:100%!important;max-height:none;aspect-ratio:auto!important}}
 
 .stat3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
 .stat3 div{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px}
@@ -290,7 +296,7 @@ body.admin-bar header.top{top:32px}
 
 <main id="top">
 <!-- HERO -->
-<figure class="hero-view">
+<figure class="hero-view" style="--bg:url('{{HH_CRM_URL}}img/sun-saphia/sun-saphia-phoi-canh-hoang-hon-toan-canh.jpg')">
   <img src="{{HH_CRM_URL}}img/sun-saphia/sun-saphia-phoi-canh-hoang-hon-toan-canh.jpg" width="1800" height="996" alt="Sun Saphia Residence – tòa tháp 30 tầng của Sun Group bên biển Sơn Thủy lúc hoàng hôn, phối cảnh chủ đầu tư" fetchpriority="high" decoding="async">
   <figcaption>Sun Saphia Residence · biển Sơn Thủy lúc hoàng hôn · phối cảnh chủ đầu tư</figcaption>
 </figure>
@@ -328,7 +334,7 @@ body.admin-bar header.top{top:32px}
         <p class="lead">Sun Property – thành viên Tập đoàn Sun Group – phát triển dự án tại giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu Saphia, phường Ngũ Hành Sơn. Tòa tháp 30 tầng – 114 m, 2 tầng hầm trên khu đất 3.720,1 m², căn hộ từ tầng 3A đến tầng 28, bàn giao hoàn thiện cơ bản.</p>
         <p class="note">Thông tin theo tài liệu Kick-off 23/10/2026 của chủ đầu tư; giá bán, chính sách căn cứ công bố chính thức. <a href="/du-an-can-ho-sun-group-da-nang-2026/" style="color:var(--gold)">Lý do Sun Group chọn Đà Nẵng cho căn hộ mặt biển đầu tiên →</a></p>
       </div>
-      <img class="rv" src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/cd20c0301cdcc17d5fbb47dd9797b6c2abb8c9be/projects/sun-saphia/sk2310/thap-cat-3.webp" alt="Phối cảnh tòa tháp Sun Saphia Residence 30 tầng – 114 m" loading="lazy" decoding="async">
+      <img class="rv" src="{{HH_CRM_URL}}img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg" width="1600" height="898" alt="Phối cảnh đêm tòa tháp Sun Saphia Residence 30 tầng bên biển Sơn Thủy" loading="lazy" decoding="async">
     </div>
     <div class="facts rv">
       <div class="fact"><small>Đơn vị phát triển</small><b>Sun Property – Sun Group</b></div>
