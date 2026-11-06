@@ -21,7 +21,7 @@ add_filter(
 		);
 		// Thông tin dự án theo tài liệu hỏi đáp của chủ đầu tư (07/5/2026). Không đăng hồ sơ pháp lý (khách cần thì anh Hiệp gửi).
 		$new += array(
-			'hh_p_scale'        => '15,75 ha – khoảng 300 m bờ biển',
+			'hh_p_scale'        => '15,75 ha – mật độ xây dựng khoảng 16,7%, khoảng 300 m bờ biển',
 			'hh_p_units'        => '85 biệt thự 1 – 6 phòng ngủ (giai đoạn 1: 44 căn, giai đoạn 2: 41 căn) và khách sạn 18 tầng 157 phòng',
 			'hh_p_unit_area'    => 'Đất khoảng 370 – 1.718 m², diện tích biệt thự 210 – 1.236 m²',
 			'hh_p_manager'      => 'Fusion Hotel Group',
