@@ -1,6 +1,6 @@
 <?php
 // Dự án có trang landing riêng (VD Sun Saphia Residence): hiện landing thay giao diện chuẩn.
-if ( function_exists( 'hoanghiep_landing_file' ) && hoanghiep_landing_file() ) {
+if ( function_exists( 'hoanghiep_landing_file' ) && ( hoanghiep_landing_file() || hoanghiep_landing_auto() ) ) {
 	the_post();
 	get_template_part( 'template-parts/project-landing' );
 	return;

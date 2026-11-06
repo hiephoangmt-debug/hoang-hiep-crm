@@ -64,6 +64,20 @@ function hoanghiep_landing_file() {
 	return is_file( $file ) ? $file : '';
 }
 
+/**
+ * Trang dự án kiểu landing tự động (mẫu The Poet, dữ liệu lấy từ dự án): mọi dự án không có file landing riêng,
+ * trừ khi "Giao diện trang" chọn Chuẩn / Cũ.
+ */
+function hoanghiep_landing_auto() {
+	if ( ! is_singular( 'du-an' ) || get_query_var( 'hh_landing_sub' ) ) {
+		return false;
+	}
+	if ( in_array( get_post_meta( get_queried_object_id(), 'hh_p_layout', true ), array( 'chuan', 'cu' ), true ) ) {
+		return false;
+	}
+	return '' === hoanghiep_landing_file();
+}
+
 /** Thông tin trang con (tiêu đề, mô tả, đường dẫn) – rỗng nếu đang ở trang dự án. */
 function hoanghiep_landing_meta() {
 	static $meta = null;
@@ -85,6 +99,13 @@ function hoanghiep_landing_meta() {
 add_action(
 	'wp_enqueue_scripts',
 	static function () {
+		if ( hoanghiep_landing_auto() ) {
+			wp_dequeue_style( 'hoanghiep' );
+			wp_dequeue_style( 'hoanghiep-du-an-moi' );
+			wp_dequeue_script( 'hoanghiep' );
+			wp_enqueue_style( 'hoanghiep-landing-mau', get_theme_file_uri( 'assets/css/landing-mau.css' ), array(), wp_get_theme()->get( 'Version' ) . '.' . filemtime( get_theme_file_path( 'assets/css/landing-mau.css' ) ) );
+			return;
+		}
 		if ( ! hoanghiep_landing_file() ) {
 			return;
 		}

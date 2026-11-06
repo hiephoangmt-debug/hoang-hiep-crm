@@ -1,0 +1,629 @@
+<?php
+/**
+ * Trang dự án kiểu landing tự động – cùng bố cục, cùng CSS với trang The Poet (assets/css/landing-mau.css),
+ * nội dung lấy từ dữ liệu dự án. Mục nào chưa có dữ liệu thì không hiện.
+ * Tắt cho một dự án: Dự án → sửa → "Giao diện trang" = "Chuẩn của web" hoặc "Cũ".
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+$id     = get_the_ID();
+$title  = get_the_title();
+$m      = static fn( $k ) => trim( (string) hh_meta( $k, $id ) );
+$e      = static fn( $s ) => esc_html( (string) $s );
+$url    = static fn( $img, $size = 'large' ) => (string) wp_get_attachment_image_url( $img, $size );
+$alt    = static function ( $img ) use ( $title ) {
+	$a = trim( (string) get_post_meta( $img, '_wp_attachment_image_alt', true ) );
+	return '' !== $a ? $a : ( trim( (string) get_the_title( $img ) ) ?: $title );
+};
+$cap    = static function ( $img ) use ( $alt ) {
+	$c = trim( (string) wp_get_attachment_caption( $img ) );
+	$t = trim( (string) get_the_title( $img ) );
+	if ( '' !== $c ) {
+		return $c;
+	}
+	return ( '' !== $t && ! preg_match( '/^[\w\-]+$/u', $t ) ) ? $t : $alt( $img );
+};
+// Đoạn đầu của một ô (trước dấu ; hoặc ( ), gọn cho thẻ thông tin.
+$short  = static function ( $s, $max = 70 ) {
+	$s = trim( (string) $s );
+	if ( mb_strlen( $s ) > $max ) {
+		$s = trim( preg_split( '/\s*[;(]\s*|\.\s/u', $s )[0] );
+	}
+	return mb_strlen( $s ) > $max + 20 ? mb_substr( $s, 0, $max ) . '…' : $s;
+};
+$card   = static function ( $img, $label = '', $big = false ) use ( $url, $alt, $e ) {
+	$full = $url( $img, 'full' );
+	if ( ! $full ) {
+		return '';
+	}
+	return sprintf(
+		'<a class="card-img" href="%s"><img src="%s" alt="%s" loading="lazy" decoding="async">%s</a>',
+		esc_url( $full ),
+		esc_url( $url( $img, $big ? 'large' : 'medium_large' ) ?: $full ),
+		esc_attr( $alt( $img ) ),
+		'' !== $label ? '<span>' . $e( $label ) . '</span>' : ''
+	);
+};
+$phone  = '0904 567 009';
+$zalo   = 'https://zalo.me/0904567009';
+$resale = function_exists( 'hh_project_is_resale' ) && hh_project_is_resale( $id );
+$status = hh_option_label( hh_project_schema(), 'hh_p_status', $m( 'hh_p_status' ) );
+
+// Tên: phần cuối in nghiêng vàng như mẫu ("The Poet <em>Residence</em>").
+$name_html = static function ( $t ) use ( $e ) {
+	if ( preg_match( '/^(.+?)\s+(Đà Nẵng|Quảng Nam|Hội An)$/u', $t, $x ) ) {
+		return $e( $x[1] ) . ' <em>' . $e( $x[2] ) . '</em>';
+	}
+	$w = preg_split( '/\s+/u', $t );
+	if ( count( $w ) < 2 ) {
+		return $e( $t );
+	}
+	$last = array_pop( $w );
+	return $e( implode( ' ', $w ) ) . ' <em>' . $e( $last ) . '</em>';
+};
+$short_name = trim( preg_replace( '/\s+(Đà Nẵng|Quảng Nam|Hội An)$/u', '', preg_replace( '/\s*\([^)]*\)/u', '', $title ) ) );
+
+// Ảnh.
+$hero      = (int) get_post_thumbnail_id();
+$gallery   = hh_ids( 'hh_p_gallery' );
+$img_text  = static fn( $img ) => get_the_title( $img ) . ' ' . get_post_meta( $img, '_wp_attachment_image_alt', true );
+$interior  = array_values( array_filter( $gallery, static fn( $img ) => (bool) preg_match( '/căn (hộ )?mẫu|nội thất|sample|showroom/iu', $img_text( $img ) ) ) );
+$gallery   = array_values( array_diff( $gallery, $interior, array( $hero ) ) );
+$floors    = hh_ids( 'hh_p_floorplans' );
+$amen_plan = array_values( array_filter( $floors, static fn( $img ) => (bool) preg_match( '/tiện ích/iu', get_the_title( $img ) ) ) );
+$floors    = array_values( array_diff( $floors, $amen_plan ) );
+$amen_img  = hh_ids( 'hh_p_amenities_img' );
+$master    = hh_ids( 'hh_p_masterplan_img' );
+$layouts   = hh_ids( 'hh_p_unit_layouts' );
+$progress  = hh_ids( 'hh_p_progress_gallery' );
+$loc_img   = hh_ids( 'hh_p_location_img' );
+$side_img  = $gallery[0] ?? ( $amen_img[0] ?? 0 );
+$over_img  = $gallery[1] ?? ( $gallery[0] ?? ( $master[0] ?? 0 ) );
+
+// Dữ liệu.
+$stats     = function_exists( 'hh_project_key_stats' ) ? hh_project_key_stats( $id, 4 )[0] : array();
+$amen_in   = hh_lines( 'hh_p_amenities_in' );
+$nearby    = hh_project_nearby( $id )[0];
+$conn      = hh_project_connections( $id )[0];
+$products  = hh_project_products( $id );
+$unit_rows = hh_table( 'hh_p_unit_types', 4 );
+$price_tbl = hh_table( 'hh_p_price_table', 4 );
+$payment   = hh_table( 'hh_p_payment', 3 );
+$policy    = hh_lines( 'hh_p_policy' );
+$timeline  = hh_project_timeline( $id );
+$faq       = hh_project_faq( $id );
+$news      = function_exists( 'hh_project_news' ) ? array_slice( (array) hh_project_news( $id, 3 ), 0, 3 ) : array();
+$zones     = hh_table( 'hh_p_zones', 4 );
+$highl     = hh_lines( 'hh_p_highlights' );
+$excerpt   = trim( wp_strip_all_tags( get_the_excerpt() ) );
+$content   = trim( (string) get_post_field( 'post_content', $id ) );
+
+// Tổ hợp: dự án mẹ, các dự án con, các dự án cùng tổ hợp – liên kết qua lại.
+$parent   = (int) $m( 'hh_p_parent' );
+$parent   = $parent && 'publish' === get_post_status( $parent ) ? $parent : 0;
+$group_id = $parent ?: $id;
+$kids     = get_posts( array( 'post_type' => 'du-an', 'post_status' => 'publish', 'numberposts' => 30, 'meta_key' => 'hh_p_parent', 'meta_value' => $group_id, 'orderby' => 'menu_order title', 'order' => 'ASC' ) );
+$family   = $kids ? array_merge( $parent ? array( get_post( $parent ) ) : array(), $kids ) : array();
+
+// Chữ ngắn.
+$sub = $excerpt ?: ( $m( 'hh_p_location_desc' ) ?: '' );
+if ( mb_strlen( $sub ) > 300 ) {
+	$sub = mb_substr( $sub, 0, mb_strrpos( mb_substr( $sub, 0, 300 ), ' ' ) ) . '…';
+}
+if ( count( $stats ) < 4 ) {
+	foreach ( array( array( 'hh_p_units', 'Quy mô' ), array( 'hh_p_unit_area', 'Diện tích' ), array( 'hh_p_handover', 'Bàn giao' ), array( 'hh_p_ownership', 'Sở hữu' ) ) as list( $k, $lb ) ) {
+		if ( count( $stats ) >= 4 ) {
+			break;
+		}
+		if ( $m( $k ) && ! in_array( $lb, wp_list_pluck( $stats, 1 ), true ) ) {
+			$stats[] = array( $short( $m( $k ), 22 ), $lb );
+		}
+	}
+}
+$facts = array_filter(
+	array(
+		'Chủ đầu tư'   => wp_strip_all_tags( $m( 'hh_p_developer' ) ),
+		'Vị trí'       => $m( 'hh_p_address' ),
+		'Loại hình'    => $m( 'hh_p_type' ),
+		'Quy mô'       => $m( 'hh_p_scale' ),
+		'Sản phẩm'     => $m( 'hh_p_units' ) ?: $m( 'hh_p_unit_area' ),
+		'Diện tích'    => $m( 'hh_p_units' ) ? $m( 'hh_p_unit_area' ) : '',
+		'Pháp lý'      => $m( 'hh_p_ownership' ) ?: $m( 'hh_p_legal' ),
+		'Bàn giao'     => $m( 'hh_p_handover' ),
+		'Tổng thầu'    => $m( 'hh_p_builder' ),
+		'Thiết kế'     => $m( 'hh_p_designer' ),
+		'Vận hành'     => $m( 'hh_p_manager' ),
+		'Mật độ'       => $m( 'hh_p_density' ),
+		'Giá chuyển nhượng' => $resale ? $m( 'hh_p_resale_price' ) : '',
+		'Giá thuê'     => $resale ? $m( 'hh_p_rent_price' ) : '',
+		'Tình trạng'   => $status,
+	)
+);
+$facts = array_slice( $facts, 0, 8, true );
+
+// Liên kết vùng → nhóm theo thời gian như mẫu (5 phút, 10 phút…).
+$times = array();
+foreach ( $conn as list( $t, $place ) ) {
+	$t = trim( $t );
+	if ( '' === $t || '' === trim( $place ) ) {
+		continue;
+	}
+	$times[ $t ][] = $place;
+}
+uksort( $times, static fn( $a, $b ) => ( (float) preg_replace( '/[^\d.]/', '', str_replace( ',', '.', $a ) ) ) <=> ( (float) preg_replace( '/[^\d.]/', '', str_replace( ',', '.', $b ) ) ) );
+$times = array_slice( $times, 0, 4, true );
+
+// Bản đồ.
+$coords = hh_parse_coords( $m( 'hh_p_map_coords' ) ?: ( $parent ? hh_meta( 'hh_p_map_coords', $parent ) : '' ) );
+$mq     = $coords ? $coords[0] . ',' . $coords[1] : ( $m( 'hh_p_map_address' ) ?: ( $parent && hh_meta( 'hh_p_map_address', $parent ) ? hh_meta( 'hh_p_map_address', $parent ) : $short_name . ', ' . ( $m( 'hh_p_address' ) ?: 'Đà Nẵng' ) ) );
+
+// Loại căn: thẻ căn từ bảng loại căn + ảnh layout.
+$units = array();
+foreach ( $unit_rows as $i => $r ) {
+	$units[] = array( 'img' => $layouts[ $i ] ?? 0, 'name' => $r[0], 'area' => $r[1], 'bed' => $r[2], 'price' => $r[3] );
+}
+foreach ( array_slice( $layouts, count( $unit_rows ) ) as $img ) {
+	$units[] = array( 'img' => $img, 'name' => $cap( $img ), 'area' => '', 'bed' => '', 'price' => '' );
+}
+$other_products = array_filter( $products, static fn( $p, $k ) => 'can-ho' !== $k && $p['rows'], ARRAY_FILTER_USE_BOTH );
+
+// Mục lục.
+$nav = array_filter(
+	array(
+		'tong-quan'  => 'Tổng quan',
+		'to-hop'     => $family ? 'Tổ hợp' : '',
+		'vi-tri'     => 'Vị trí',
+		'tien-ich'   => ( $amen_in || $amen_img || $amen_plan ) ? 'Tiện ích' : '',
+		'xem-4d'     => ( $m( 'hh_p_tour_4d' ) || $m( 'hh_p_tour_360' ) ) ? 'Xem 4D' : '',
+		'mat-bang'   => ( $master || $floors ) ? 'Mặt bằng' : '',
+		'loai-can'   => ( $units || $other_products ) ? 'Loại căn' : '',
+		'noi-that'   => $interior ? 'Nội thất' : '',
+		'bang-gia'   => ( $price_tbl || $m( 'hh_p_price_from' ) || $m( 'hh_p_resale_price' ) ) ? 'Giá' : '',
+		'thanh-toan' => ( $payment || $policy || $m( 'hh_p_loan' ) ) ? 'Thanh toán' : '',
+		'phap-ly'    => ( $m( 'hh_p_legal' ) || $m( 'hh_p_ownership' ) || $timeline[0] ) ? 'Pháp lý' : '',
+		'thu-vien'   => count( $gallery ) > 1 ? 'Hình ảnh' : '',
+		'hoi-dap'    => $faq ? 'Hỏi đáp' : '',
+	)
+);
+$brand_top = $short_name;
+$brand_sub = trim( preg_replace( '/^.*?,\s*/u', '', (string) $m( 'hh_p_address' ) ) ) ?: 'Đà Nẵng';
+if ( mb_strlen( $brand_sub ) > 34 ) {
+	$brand_sub = 'Đà Nẵng';
+}
+$form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list_pluck( $products, 'label' ) );
+?>
+<header class="top">
+  <div class="container">
+    <a class="brand" href="#top"><b><?php echo $e( mb_strtoupper( mb_strlen( $brand_top ) > 22 ? implode( ' ', array_slice( preg_split( '/\s+/u', $brand_top ), 0, 3 ) ) : $brand_top ) ); ?></b><small><?php echo $e( $brand_sub ); ?></small></a>
+    <nav class="nav" aria-label="Mục lục">
+      <?php foreach ( $nav as $k => $lb ) : ?><a href="#<?php echo esc_attr( $k ); ?>"><?php echo $e( $lb ); ?></a><?php endforeach; ?>
+    </nav>
+    <a class="btn btn-gold" href="#dang-ky"><?php echo $resale ? 'Nhận danh sách căn' : 'Nhận bảng giá'; ?></a>
+  </div>
+</header>
+
+<main id="top">
+<?php if ( $hero ) : ?>
+<!-- HERO -->
+<figure class="hero-view">
+  <img src="<?php echo esc_url( $url( $hero, 'full' ) ); ?>" alt="<?php echo esc_attr( $alt( $hero ) ); ?>" fetchpriority="high" decoding="async">
+  <figcaption><?php echo $e( $cap( $hero ) ); ?></figcaption>
+</figure>
+<?php endif; ?>
+<section class="hero" aria-labelledby="h1">
+  <div class="container">
+    <div>
+      <?php if ( $status || '1' === $m( 'hh_p_sold_out' ) ) : ?><span class="badge-ok">✔ <?php echo $e( '1' === $m( 'hh_p_sold_out' ) ? 'Đã bán hết từ chủ đầu tư' : $status . ( $m( 'hh_p_handover' ) ? ' · bàn giao ' . hh_lcfirst( $short( $m( 'hh_p_handover' ), 30 ) ) : '' ) ); ?></span><?php endif; ?>
+      <?php if ( $parent ) : ?><p style="margin:10px 0 0"><a href="<?php echo esc_url( get_permalink( $parent ) ); ?>" style="color:var(--gold2);font-weight:600;text-decoration:none">Thuộc tổ hợp <?php echo $e( get_the_title( $parent ) ); ?> →</a></p><?php endif; ?>
+      <h1 id="h1"><?php echo $name_html( $title ); // phpcs:ignore WordPress.Security.EscapeOutput -- đã escape. ?></h1>
+      <?php if ( $sub ) : ?><p class="sub"><?php echo $e( $sub ); ?></p><?php endif; ?>
+      <?php if ( $stats ) : ?>
+      <div class="chips">
+        <?php foreach ( $stats as list( $num, $lb ) ) : ?><div class="chip"><b><?php echo $e( $num ); ?></b><span><?php echo $e( $lb ); ?></span></div><?php endforeach; ?>
+      </div>
+      <?php endif; ?>
+      <div class="acts">
+        <a class="btn btn-gold" href="#dang-ky"><?php echo $resale ? 'Nhận danh sách căn đang bán' : 'Nhận bảng giá & căn trống'; ?></a>
+        <a class="btn btn-ghost js-zalo" href="<?php echo esc_url( $zalo ); ?>" target="_blank" rel="noopener">Zalo <?php echo $e( $phone ); ?></a>
+      </div>
+    </div>
+    <?php if ( $side_img ) : ?>
+    <figure class="hero-img" style="margin:0">
+      <img src="<?php echo esc_url( $url( $side_img, 'large' ) ); ?>" alt="<?php echo esc_attr( $alt( $side_img ) ); ?>" decoding="async">
+      <figcaption><?php echo $e( $cap( $side_img ) ); ?></figcaption>
+    </figure>
+    <?php endif; ?>
+  </div>
+</section>
+
+<!-- TỔNG QUAN -->
+<section id="tong-quan" aria-labelledby="h-tq">
+  <div class="container">
+    <div class="split">
+      <div class="rv">
+        <span class="eyebrow">Tổng quan dự án</span>
+        <h2 class="title" id="h-tq">Tổng quan <em><?php echo $e( $short_name ); ?></em></h2>
+        <?php if ( $m( 'hh_p_design_desc' ) || $excerpt ) : ?><p class="lead"><?php echo $e( $short( $m( 'hh_p_design_desc' ) ?: $excerpt, 520 ) ); ?></p><?php endif; ?>
+        <?php if ( $highl ) : ?><ul class="list-ok" style="grid-template-columns:1fr;margin-top:14px"><?php foreach ( array_slice( $highl, 0, 5 ) as $h ) : ?><li><?php echo $e( $h ); ?></li><?php endforeach; ?></ul><?php endif; ?>
+      </div>
+      <?php if ( $over_img ) : ?><img class="rv" src="<?php echo esc_url( $url( $over_img, 'large' ) ); ?>" alt="<?php echo esc_attr( $alt( $over_img ) ); ?>" loading="lazy" decoding="async"><?php endif; ?>
+    </div>
+    <?php if ( $facts ) : ?>
+    <div class="facts rv">
+      <?php foreach ( $facts as $lb => $v ) : ?><div class="fact"><small><?php echo $e( $lb ); ?></small><b><?php echo $e( $short( $v ) ); ?></b></div><?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+    <?php if ( $zones ) : ?>
+    <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Phân khu</th><th>Loại sản phẩm</th><th>Quy mô</th><th>Tình trạng</th></tr></thead><tbody>
+      <?php foreach ( $zones as $r ) : ?><tr><?php foreach ( $r as $c ) : ?><td><?php echo $e( $c ); ?></td><?php endforeach; ?></tr><?php endforeach; ?>
+    </tbody></table></div>
+    <?php endif; ?>
+  </div>
+</section>
+
+<?php if ( $family ) : ?>
+<!-- TỔ HỢP -->
+<section id="to-hop" style="background:#fff" aria-labelledby="h-th">
+  <div class="container">
+    <span class="eyebrow">Tổ hợp dự án</span>
+    <h2 class="title" id="h-th"><?php echo $parent ? 'Cùng tổ hợp <em>' . $e( get_the_title( $parent ) ) . '</em>' : 'Các dự án trong <em>' . $e( $short_name ) . '</em>'; // phpcs:ignore ?></h2>
+    <div class="kids">
+      <?php foreach ( $family as $p ) : ?>
+        <?php $is_cur = (int) $p->ID === $id; $is_par = (int) $p->ID === $parent; ?>
+        <a class="kid<?php echo $is_cur ? ' cur' : ''; ?>" href="<?php echo esc_url( get_permalink( $p ) ); ?>"<?php echo $is_cur ? ' aria-current="page"' : ''; ?>>
+          <?php if ( has_post_thumbnail( $p ) ) : ?><img src="<?php echo esc_url( (string) get_the_post_thumbnail_url( $p, 'medium_large' ) ); ?>" alt="<?php echo esc_attr( get_the_title( $p ) ); ?>" loading="lazy" decoding="async"><?php endif; ?>
+          <div><small><?php echo $is_cur ? 'Đang xem' : ( $is_par ? 'Tổng thể dự án' : $e( $short( hh_meta( 'hh_p_type', $p->ID ) ?: 'Dự án thành phần', 40 ) ) ); ?></small><b><?php echo $e( get_the_title( $p ) ); ?></b><?php if ( hh_meta( 'hh_p_price_from', $p->ID ) ) : ?><span><?php echo $e( hh_project_price( $p->ID ) ); ?> (tham khảo)</span><?php endif; ?></div>
+        </a>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+<!-- VỊ TRÍ -->
+<section class="dark" id="vi-tri" aria-labelledby="h-vt">
+  <div class="container">
+    <span class="eyebrow">Vị trí</span>
+    <h2 class="title" id="h-vt">Vị trí <em><?php echo $e( $short_name ); ?></em></h2>
+    <?php if ( $m( 'hh_p_location_desc' ) ) : ?><p class="lead"><?php echo nl2br( $e( $m( 'hh_p_location_desc' ) ) ); // phpcs:ignore ?></p><?php elseif ( $m( 'hh_p_address' ) ) : ?><p class="lead"><?php echo $e( $m( 'hh_p_address' ) ); ?></p><?php endif; ?>
+    <?php if ( $times ) : ?>
+    <div class="times rv">
+      <?php foreach ( $times as $t => $places ) : ?>
+        <?php $tn = preg_match( '/^([\d,.\s–-]+)\s*(.*)$/u', $t, $x ) ? array( trim( $x[1] ), trim( $x[2] ) ) : array( $t, '' ); ?>
+        <div class="time"><b><?php echo $e( $tn[0] ); ?> <small><?php echo $e( $tn[1] ); ?></small></b><ul><?php foreach ( array_slice( $places, 0, 5 ) as $pl ) : ?><li><?php echo $e( $pl ); ?></li><?php endforeach; ?></ul></div>
+      <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+    <?php $vb = array_slice( $loc_img, 0, 2 ); // Mặt bằng tổng thể đã có ở mục Mặt bằng – không lặp. ?>
+    <?php if ( $vb ) : ?>
+    <div class="vband rv"<?php echo 1 === count( $vb ) ? ' style="grid-template-columns:1fr"' : ''; ?>>
+      <?php foreach ( $vb as $img ) { echo $card( $img, $cap( $img ), true ); } // phpcs:ignore ?>
+    </div>
+    <?php endif; ?>
+    <div class="locmap rv">
+      <iframe title="<?php echo esc_attr( 'Bản đồ vị trí ' . $title ); ?>" src="<?php echo esc_url( 'https://www.google.com/maps?q=' . rawurlencode( $mq ) . '&z=' . ( $coords ? 16 : 15 ) . '&output=embed' ); ?>" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      <div class="adj">
+        <h3><?php echo $e( $m( 'hh_p_address' ) ? $short( $m( 'hh_p_address' ), 60 ) : $short_name ); ?></h3>
+        <?php if ( $nearby ) : ?><ul><?php foreach ( array_slice( $nearby, 0, 6 ) as $n ) : ?><li><?php echo $e( $n ); ?></li><?php endforeach; ?></ul><?php endif; ?>
+        <a href="<?php echo esc_url( 'https://www.google.com/maps/dir/?api=1&destination=' . rawurlencode( $mq ) ); ?>" target="_blank" rel="noopener">📍 Chỉ đường tới dự án ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<?php if ( isset( $nav['tien-ich'] ) ) : ?>
+<!-- TIỆN ÍCH -->
+<section id="tien-ich" aria-labelledby="h-ti">
+  <div class="container">
+    <span class="eyebrow">Tiện ích</span>
+    <h2 class="title" id="h-ti">Tiện ích <em><?php echo $e( $short_name ); ?></em></h2>
+    <?php if ( $amen_plan ) : ?>
+      <?php if ( count( $amen_plan ) > 1 ) : ?>
+      <div class="tabs" role="tablist">
+        <?php foreach ( $amen_plan as $i => $img ) : ?><button class="tab<?php echo 0 === $i ? ' on' : ''; ?>" type="button" data-floor="ti-<?php echo (int) $i; ?>"><?php echo $e( trim( preg_replace( '/^mặt bằng\s*(tiện ích)?\s*/iu', '', $cap( $img ) ) ) ?: 'Mặt bằng ' . ( $i + 1 ) ); ?></button><?php endforeach; ?>
+      </div>
+      <?php endif; ?>
+      <?php foreach ( $amen_plan as $i => $img ) : ?>
+      <div class="floor<?php echo 0 === $i ? ' on' : ''; ?>" id="ti-<?php echo (int) $i; ?>"<?php echo count( $amen_plan ) < 2 ? ' style="margin-top:22px"' : ''; ?>>
+        <a class="plan" href="<?php echo esc_url( $url( $img, 'full' ) ); ?>"><img src="<?php echo esc_url( $url( $img, 'large' ) ); ?>" alt="<?php echo esc_attr( $alt( $img ) ); ?>" loading="lazy" decoding="async"></a>
+        <p class="plan-cap"><?php echo $e( $cap( $img ) ); ?> · bấm để phóng to.</p>
+      </div>
+      <?php endforeach; ?>
+    <?php endif; ?>
+    <?php if ( $amen_img ) : ?>
+    <div class="grid3" style="margin-top:22px">
+      <?php foreach ( array_slice( $amen_img, 0, 9 ) as $i => $img ) { echo $card( $img, wp_get_attachment_caption( $img ) ?: ( $amen_in[ $i ] ?? $cap( $img ) ) ); } // phpcs:ignore ?>
+    </div>
+    <?php endif; ?>
+    <?php if ( $amen_in ) : ?>
+    <ul class="list-ok rv" style="margin-top:24px"><?php foreach ( $amen_in as $a ) : ?><li><?php echo $e( $a ); ?></li><?php endforeach; ?></ul>
+    <?php endif; ?>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if ( isset( $nav['xem-4d'] ) ) : ?>
+<!-- XEM 4D / 360 -->
+<section class="dark" id="xem-4d" aria-labelledby="h-4d">
+  <div class="container">
+    <span class="eyebrow">Tham quan trực tuyến</span>
+    <h2 class="title" id="h-4d">Xem <em><?php echo $e( $short_name ); ?></em> như đang đứng tại dự án</h2>
+    <div class="tours">
+      <?php foreach ( array( array( 'hh_p_tour_4d', 'hh_p_tour_poster', 'Xem mô hình 4D' ), array( 'hh_p_tour_360', 'hh_p_tour_360_poster', 'Xem 360°' ) ) as list( $k, $pk, $lb ) ) : ?>
+        <?php
+        if ( ! $m( $k ) ) {
+			continue;
+        }
+        $poster = $m( $pk );
+        $poster = 0 === strpos( $poster, 'plugin:' ) && defined( 'HH_CRM_URL' ) ? HH_CRM_URL . substr( $poster, 7 ) : ( ctype_digit( $poster ) ? $url( (int) $poster, 'large' ) : $poster );
+        $poster = $poster ?: ( $hero ? $url( $hero, 'large' ) : '' );
+        ?>
+        <a class="tour" href="<?php echo esc_url( $m( $k ) ); ?>" target="_blank" rel="noopener"><?php if ( $poster ) : ?><img src="<?php echo esc_url( $poster ); ?>" alt="<?php echo esc_attr( $lb . ' ' . $title ); ?>" loading="lazy" decoding="async"><?php endif; ?><span>▶ <?php echo $e( $lb ); ?></span></a>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if ( isset( $nav['mat-bang'] ) ) : ?>
+<!-- MẶT BẰNG -->
+<section id="mat-bang" style="background:#fff" aria-labelledby="h-mb">
+  <div class="container">
+    <span class="eyebrow">Mặt bằng</span>
+    <h2 class="title" id="h-mb">Mặt bằng <em><?php echo $e( $short_name ); ?></em></h2>
+    <?php foreach ( array_slice( $master, 0, 2 ) as $img ) : ?>
+      <a class="plan" href="<?php echo esc_url( $url( $img, 'full' ) ); ?>" style="margin-top:22px"><img src="<?php echo esc_url( $url( $img, 'large' ) ); ?>" alt="<?php echo esc_attr( $alt( $img ) ); ?>" loading="lazy" decoding="async"></a>
+      <p class="plan-cap"><?php echo $e( $cap( $img ) ); ?> · bấm để phóng to.</p>
+    <?php endforeach; ?>
+    <?php if ( $floors ) : ?>
+      <?php if ( count( $floors ) > 1 ) : ?>
+      <div class="tabs" role="tablist">
+        <?php foreach ( $floors as $i => $img ) : ?><button class="tab<?php echo 0 === $i ? ' on' : ''; ?>" type="button" data-floor="mb-<?php echo (int) $i; ?>"><?php echo $e( $short( $cap( $img ), 36 ) ); ?></button><?php endforeach; ?>
+      </div>
+      <?php endif; ?>
+      <?php foreach ( $floors as $i => $img ) : ?>
+      <div class="floor<?php echo 0 === $i ? ' on' : ''; ?>" id="mb-<?php echo (int) $i; ?>">
+        <a class="plan" href="<?php echo esc_url( $url( $img, 'full' ) ); ?>"><img src="<?php echo esc_url( $url( $img, 'large' ) ); ?>" alt="<?php echo esc_attr( $alt( $img ) ); ?>" loading="lazy" decoding="async"></a>
+      </div>
+      <?php endforeach; ?>
+    <?php endif; ?>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if ( isset( $nav['loai-can'] ) ) : ?>
+<!-- LOẠI CĂN -->
+<section id="loai-can" aria-labelledby="h-lc">
+  <div class="container">
+    <span class="eyebrow">Loại sản phẩm</span>
+    <h2 class="title" id="h-lc">Các loại sản phẩm <em><?php echo $e( $short_name ); ?></em></h2>
+    <?php if ( $m( 'hh_p_unit_area' ) ) : ?><p class="lead"><?php echo $e( $m( 'hh_p_unit_area' ) ); ?>. Bấm vào ảnh để xem mặt bằng lớn.</p><?php endif; ?>
+    <?php if ( $units ) : ?>
+    <div class="units">
+      <?php foreach ( $units as $u ) : ?>
+      <article class="unit rv">
+        <?php if ( $u['img'] ) : ?><a class="pic" href="<?php echo esc_url( $url( $u['img'], 'full' ) ); ?>"><img src="<?php echo esc_url( $url( $u['img'], 'medium_large' ) ?: $url( $u['img'], 'full' ) ); ?>" alt="<?php echo esc_attr( $alt( $u['img'] ) ); ?>" loading="lazy" decoding="async"></a><?php endif; ?>
+        <div class="body">
+          <h3><?php echo $e( $u['name'] . ( $u['area'] ? ' · ' . $u['area'] : '' ) ); ?></h3>
+          <?php if ( $u['bed'] ) : ?><div class="meta"><span><?php echo $e( is_numeric( $u['bed'] ) ? $u['bed'] . ' phòng ngủ' : $u['bed'] ); ?></span></div><?php endif; ?>
+          <?php if ( $u['price'] ) : ?><div class="price"><?php echo $e( $u['price'] ); ?></div><?php endif; ?>
+          <a class="btn btn-navy" href="#dang-ky" data-type="<?php echo esc_attr( $u['name'] ); ?>">Nhận giá căn này</a>
+        </div>
+      </article>
+      <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+    <?php foreach ( $other_products as $p ) : ?>
+      <h3 style="font-family:'Playfair Display',serif;font-size:24px;margin:28px 0 0"><?php echo $e( $p['label'] ); ?></h3>
+      <?php if ( $p['desc'] ) : ?><p class="note" style="font-size:15px"><?php echo $e( $p['desc'] ); ?></p><?php endif; ?>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><?php foreach ( $p['cols'] as $c ) : ?><th><?php echo $e( $c ); ?></th><?php endforeach; ?></tr></thead><tbody>
+        <?php foreach ( $p['rows'] as $r ) : ?><tr><?php foreach ( $r as $c ) : ?><td><?php echo $e( $c ); ?></td><?php endforeach; ?></tr><?php endforeach; ?>
+      </tbody></table></div>
+    <?php endforeach; ?>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if ( $interior ) : ?>
+<!-- NỘI THẤT CĂN MẪU -->
+<section id="noi-that" style="background:#fff" aria-labelledby="h-nt">
+  <div class="container">
+    <span class="eyebrow">Nội thất căn mẫu</span>
+    <h2 class="title" id="h-nt">Căn hộ mẫu <em><?php echo $e( $short_name ); ?></em></h2>
+    <p class="lead">Phối cảnh nội thất căn hộ mẫu của chủ đầu tư. Bàn giao thực tế theo tiêu chuẩn của từng loại căn; đồ rời, trang trí trong ảnh chỉ để minh họa.</p>
+    <div class="interior">
+      <?php foreach ( array_slice( $interior, 0, 9 ) as $i => $img ) { echo $card( $img, $cap( $img ), 0 === $i ); } // phpcs:ignore ?>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if ( isset( $nav['bang-gia'] ) ) : ?>
+<!-- BẢNG GIÁ -->
+<section id="bang-gia" aria-labelledby="h-bg">
+  <div class="container">
+    <span class="eyebrow"><?php echo $resale ? 'Giá chuyển nhượng' : 'Giá bán tham khảo'; ?></span>
+    <h2 class="title" id="h-bg"><?php echo $resale ? 'Giá chuyển nhượng <em>' . $e( $short( $m( 'hh_p_resale_price' ) ?: 'theo từng căn', 40 ) ) . '</em>' : ( $m( 'hh_p_price_from' ) ? 'Giá <em>' . $e( mb_strtolower( hh_project_price( $id ) ) ) . '</em>' . ( $m( 'hh_p_price_m2' ) ? ', khoảng ' . $e( $m( 'hh_p_price_m2' ) ) : '' ) : 'Bảng giá <em>' . $e( $short_name ) . '</em>' ); // phpcs:ignore ?></h2>
+    <?php if ( $price_tbl ) : ?>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>Sản phẩm</th><th>Diện tích</th><th>Giá tham khảo</th><th>Ghi chú</th></tr></thead>
+      <tbody><?php foreach ( $price_tbl as $r ) : ?><tr><?php foreach ( $r as $c ) : ?><td><?php echo $e( $c ); ?></td><?php endforeach; ?></tr><?php endforeach; ?></tbody>
+    </table></div>
+    <?php endif; ?>
+    <p class="note">Giá tham khảo, chưa trừ chiết khấu; giá và căn còn trống thay đổi theo đợt – để lại số, Hoàng Hiệp gửi bảng giá cập nhật qua Zalo.</p>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if ( isset( $nav['thanh-toan'] ) ) : ?>
+<!-- THANH TOÁN -->
+<section id="thanh-toan" style="background:#fff" aria-labelledby="h-tt">
+  <div class="container">
+    <span class="eyebrow">Chính sách & thanh toán</span>
+    <h2 class="title" id="h-tt">Chính sách bán hàng <em><?php echo $e( $short_name ); ?></em></h2>
+    <?php if ( $policy ) : ?><ul class="list-ok rv" style="margin-top:20px"><?php foreach ( $policy as $p ) : ?><li><?php echo $e( $p ); ?></li><?php endforeach; ?></ul><?php endif; ?>
+    <?php if ( $payment ) : ?>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>Đợt</th><th>Thời điểm</th><th>Tỷ lệ</th></tr></thead>
+      <tbody><?php foreach ( $payment as $r ) : ?><tr><?php foreach ( $r as $c ) : ?><td><?php echo $e( $c ); ?></td><?php endforeach; ?></tr><?php endforeach; ?></tbody>
+    </table></div>
+    <?php endif; ?>
+    <?php
+    $loan = array_filter(
+		array(
+			$m( 'hh_p_loan_ratio' ) ? array( $m( 'hh_p_loan_ratio' ) . ( is_numeric( $m( 'hh_p_loan_ratio' ) ) ? '%' : '' ), 'tỷ lệ vay tối đa' ) : null,
+			$m( 'hh_p_loan_zero_months' ) ? array( $m( 'hh_p_loan_zero_months' ) . ' tháng', 'hỗ trợ lãi suất 0%' ) : null,
+			$m( 'hh_p_loan_grace' ) ? array( $m( 'hh_p_loan_grace' ) . ( is_numeric( $m( 'hh_p_loan_grace' ) ) ? ' tháng' : '' ), 'ân hạn nợ gốc' ) : null,
+			$m( 'hh_p_loan_bank' ) ? array( $short( $m( 'hh_p_loan_bank' ), 24 ), 'ngân hàng cho vay' ) : null,
+		)
+    );
+    ?>
+    <?php if ( count( $loan ) >= 2 ) : ?>
+    <div class="loan rv"><?php foreach ( $loan as list( $b, $s ) ) : ?><div><b><?php echo $e( $b ); ?></b><span><?php echo $e( $s ); ?></span></div><?php endforeach; ?></div>
+    <?php elseif ( $m( 'hh_p_loan' ) ) : ?>
+    <div class="std"><b>Hỗ trợ vay ngân hàng</b><br><?php echo nl2br( $e( $m( 'hh_p_loan' ) ) ); // phpcs:ignore ?></div>
+    <?php endif; ?>
+    <p class="note">Theo chính sách bán hàng chủ đầu tư gần nhất; chính sách thay đổi theo đợt – liên hệ để nhận chính sách đang áp dụng.</p>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if ( isset( $nav['phap-ly'] ) ) : ?>
+<!-- PHÁP LÝ -->
+<section id="phap-ly" aria-labelledby="h-pl">
+  <div class="container">
+    <div class="split" style="align-items:start">
+      <div>
+        <span class="eyebrow">Pháp lý & tiến độ</span>
+        <h2 class="title" id="h-pl">Pháp lý <em><?php echo $e( $short_name ); ?></em></h2>
+        <?php if ( $m( 'hh_p_legal' ) || $m( 'hh_p_ownership' ) ) : ?>
+        <div class="legal-box rv"><?php if ( $m( 'hh_p_ownership' ) ) : ?><b><?php echo $e( $m( 'hh_p_ownership' ) ); ?></b><br><?php endif; ?><?php echo $e( $m( 'hh_p_legal' ) ); ?></div>
+        <?php endif; ?>
+        <?php if ( $m( 'hh_p_handover_std' ) ) : ?><div class="std"><b>Tiêu chuẩn bàn giao</b><br><?php echo $e( $m( 'hh_p_handover_std' ) ); ?></div><?php endif; ?>
+        <p class="note">Bản sao văn bản pháp lý: nhắn Zalo <?php echo $e( $phone ); ?> để nhận.</p>
+      </div>
+      <?php if ( $timeline[0] ) : ?>
+      <ol class="timeline rv">
+        <?php $last = count( $timeline[0] ) - 1; foreach ( $timeline[0] as $i => list( $t, $txt ) ) : ?>
+          <li<?php echo $i < $last || preg_match( '/^đã/iu', $txt ) ? ' class="ok"' : ''; ?>><b><?php echo $e( $t ); ?></b><span><?php echo $e( $txt ); ?></span></li>
+        <?php endforeach; ?>
+      </ol>
+      <?php endif; ?>
+    </div>
+    <?php if ( $progress ) : ?>
+    <div class="grid3" style="margin-top:26px"><?php foreach ( array_slice( $progress, 0, 6 ) as $img ) { echo $card( $img, $cap( $img ) ); } // phpcs:ignore ?></div>
+    <?php endif; ?>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if ( isset( $nav['thu-vien'] ) ) : ?>
+<!-- THƯ VIỆN -->
+<section id="thu-vien" style="background:#fff" aria-labelledby="h-tv">
+  <div class="container">
+    <span class="eyebrow">Thư viện ảnh</span>
+    <h2 class="title" id="h-tv"><?php echo $e( $short_name ); ?> <em>qua hình ảnh</em></h2>
+    <?php $gn = count( $gallery ) >= 9 ? 9 : ( count( $gallery ) >= 5 ? 5 : count( $gallery ) ); ?>
+    <div class="gallery">
+      <?php foreach ( array_slice( $gallery, 0, $gn ) as $i => $img ) { echo $card( $img, '', 0 === $i ); } // phpcs:ignore ?>
+    </div>
+    <p class="note">Ảnh phối cảnh, minh họa của chủ đầu tư; ảnh thực tế có ghi chú riêng.</p>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if ( $news ) : ?>
+<!-- TIN TỨC -->
+<section id="tin-tuc" aria-labelledby="h-tt2">
+  <div class="container">
+    <span class="eyebrow">Tin tức</span>
+    <h2 class="title" id="h-tt2">Tin mới về <em><?php echo $e( $short_name ); ?></em></h2>
+    <div class="news">
+      <?php foreach ( $news as $nid ) : ?>
+        <a class="kid" href="<?php echo esc_url( get_permalink( $nid ) ); ?>">
+          <?php if ( has_post_thumbnail( $nid ) ) : ?><img src="<?php echo esc_url( (string) get_the_post_thumbnail_url( $nid, 'medium_large' ) ); ?>" alt="" loading="lazy" decoding="async"><?php endif; ?>
+          <div><small><?php echo $e( get_the_date( 'd/m/Y', $nid ) ); ?></small><b style="font-size:17px"><?php echo $e( get_the_title( $nid ) ); ?></b></div>
+        </a>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+<!-- HỎI ĐÁP -->
+<section class="faq" id="hoi-dap" style="background:#fff" aria-labelledby="h-hd">
+  <div class="container">
+    <span class="eyebrow">Hỏi đáp</span>
+    <h2 class="title" id="h-hd">Khách hay hỏi về <em><?php echo $e( $short_name ); ?></em></h2>
+    <?php if ( $faq ) : ?>
+    <?php $half = (int) ceil( count( $faq ) / 2 ); ?>
+    <div class="faq-cols">
+      <?php foreach ( array( array_slice( $faq, 0, $half ), array_slice( $faq, $half ) ) as $col ) : ?>
+      <div><?php foreach ( $col as list( $q, $a ) ) : ?><details><summary><?php echo $e( $q ); ?></summary><p><?php echo $e( $a ); ?></p></details><?php endforeach; ?></div>
+      <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+    <?php if ( '' !== $content ) : ?>
+    <details class="intro-more"><summary>Đọc giới thiệu đầy đủ về <?php echo $e( $title ); ?></summary><div class="content"><?php echo apply_filters( 'the_content', $content ); // phpcs:ignore WordPress.Security.EscapeOutput -- nội dung bài viết. ?></div></details>
+    <?php endif; ?>
+  </div>
+</section>
+
+<!-- ĐĂNG KÝ -->
+<section class="cta" id="dang-ky" aria-labelledby="h-cta">
+  <?php if ( $hero ) : ?><img class="bg" src="<?php echo esc_url( $url( $hero, 'large' ) ); ?>" alt="" loading="lazy" decoding="async"><?php endif; ?>
+  <div class="container">
+    <div class="rv">
+      <span class="eyebrow">Nhận thông tin chi tiết</span>
+      <h2 class="title" id="h-cta"><?php echo $resale ? 'Danh sách căn đang bán' : 'Bảng giá & căn còn trống'; ?> <em style="color:var(--gold2)">gửi qua Zalo</em></h2>
+      <ul>
+        <?php if ( $resale ) : ?>
+        <li>Căn chuyển nhượng, cho thuê mới nhất kèm giá thật</li><li>Định giá, kiểm tra sổ hồng trước khi giao dịch</li><li>Nhận ký gửi bán, cho thuê căn của bạn</li>
+        <?php else : ?>
+        <li>Bảng giá cập nhật từng căn, từng tầng, từng hướng</li><li>So sánh phương án: thanh toán sớm, giãn tiến độ, vay ngân hàng</li><li>Chính sách chiết khấu đang áp dụng của chủ đầu tư</li><li>Mặt bằng, pháp lý dự án</li><li>Hẹn đi xem dự án, nhà mẫu</li>
+        <?php endif; ?>
+      </ul>
+      <div class="advisor"><div class="av">H</div><div><b>Hoàng Hiệp</b><span>Tư vấn bất động sản Đà Nẵng · trực tiếp, không qua tổng đài<br>Zalo/Hotline: <a href="<?php echo esc_url( $zalo ); ?>" target="_blank" rel="noopener" class="js-zalo"><?php echo $e( $phone ); ?></a></span></div></div>
+    </div>
+    <form class="form-card lead-form rv" data-form="<?php echo esc_attr( ( $resale ? 'Nhận danh sách căn ' : 'Nhận bảng giá ' ) . $short_name ); ?>" aria-labelledby="f-title">
+      <h3 id="f-title"><?php echo $e( ( $resale ? 'Nhận danh sách căn ' : 'Nhận bảng giá ' ) . $short_name ); ?></h3>
+      <p>Gửi qua Zalo trong 15 phút giờ hành chính</p>
+      <div class="field"><label for="f-name">Họ và tên</label><input id="f-name" name="name" placeholder="Họ và tên *" autocomplete="name" required></div>
+      <div class="field"><label for="f-phone">Số điện thoại</label><input id="f-phone" name="phone" type="tel" placeholder="Số Zalo / điện thoại *" autocomplete="tel" required pattern="[0-9 +.]{9,14}"></div>
+      <?php if ( $form_opts ) : ?><div class="field"><label for="f-type">Loại sản phẩm quan tâm</label><select id="f-type" name="type"><option value="">Loại sản phẩm quan tâm</option><?php foreach ( array_unique( $form_opts ) as $o ) : ?><option><?php echo $e( $o ); ?></option><?php endforeach; ?></select></div><?php endif; ?>
+      <button class="btn btn-gold" type="submit"><?php echo $resale ? 'Nhận danh sách căn qua Zalo' : 'Nhận bảng giá qua Zalo'; ?></button>
+      <div class="ok-msg" role="status">Cảm ơn anh/chị! Hoàng Hiệp sẽ gửi thông tin qua Zalo sớm nhất.</div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="container"><?php echo $e( $title . ( $m( 'hh_p_address' ) ? ' – ' . $m( 'hh_p_address' ) : '' ) ); ?>. Thông tin, hình ảnh tổng hợp từ tài liệu chủ đầu tư, mang tính tham khảo; giá và chính sách có thể thay đổi. Tư vấn: Hoàng Hiệp – <?php echo $e( $phone ); ?>. <a href="<?php echo esc_url( home_url( '/du-an/' ) ); ?>" style="color:var(--gold2)">Xem các dự án khác</a></div>
+</footer>
+
+<div class="float"><a class="zl js-zalo" href="<?php echo esc_url( $zalo ); ?>" target="_blank" rel="noopener" aria-label="Nhắn Zalo">Zalo</a><a class="call" href="tel:0904567009" aria-label="Gọi <?php echo esc_attr( $phone ); ?>">Gọi</a></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Xem ảnh"><button type="button" aria-label="Đóng">×</button><img alt=""></div>
+
+<script>
+(function(){
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'}):null;
+  document.querySelectorAll('.rv').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+  // Tab theo tầng: mỗi nhóm tab chỉ đổi khung trong cùng mục.
+  document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){
+    var sec=b.closest('section');
+    sec.querySelectorAll('.tab').forEach(function(x){x.classList.toggle('on',x===b);});
+    sec.querySelectorAll('.floor').forEach(function(f){f.classList.toggle('on',f.id===b.dataset.floor);});
+  });});
+  var lb=document.getElementById('lb'),li=lb.querySelector('img');
+  document.addEventListener('click',function(e){var a=e.target.closest('a.card-img,a.pic,a.plan');if(!a)return;e.preventDefault();li.src=a.getAttribute('href');li.alt=(a.querySelector('img')||{}).alt||'';lb.classList.add('on');});
+  lb.addEventListener('click',function(e){if(e.target!==li){lb.classList.remove('on');}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('on');});
+  document.querySelectorAll('[data-type]').forEach(function(a){a.addEventListener('click',function(){var s=document.getElementById('f-type');if(s){for(var i=0;i<s.options.length;i++){if(s.options[i].text===a.dataset.type){s.selectedIndex=i;}}}});});
+  document.querySelectorAll('.lead-form').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();if(!f.checkValidity()){f.reportValidity();return;}var m=f.querySelector('.ok-msg');if(m)m.style.display='block';f.querySelector('button[type=submit]').disabled=true;});});
+  var links=[].slice.call(document.querySelectorAll('.nav a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  window.addEventListener('scroll',function(){var y=window.scrollY+120,cur=-1;secs.forEach(function(s,i){if(s&&s.offsetTop<=y)cur=i;});links.forEach(function(a,i){a.classList.toggle('on',i===cur);});},{passive:true});
+})();
+</script>

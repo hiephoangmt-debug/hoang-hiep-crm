@@ -7,9 +7,17 @@
 defined( 'ABSPATH' ) || exit;
 
 $hh_file = hoanghiep_landing_file();
-$hh_html = (string) file_get_contents( $hh_file ); // phpcs:ignore WordPress.WP.AlternativeFunctions
-$hh_head = (string) strstr( (string) strstr( $hh_html, '<!--HH-LANDING-HEAD-->' ), '<!--HH-LANDING-BODY-->', true );
-$hh_body = (string) substr( (string) strstr( $hh_html, '<!--HH-LANDING-BODY-->' ), strlen( '<!--HH-LANDING-BODY-->' ) );
+if ( $hh_file ) {
+	$hh_html = (string) file_get_contents( $hh_file ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	$hh_head = (string) strstr( (string) strstr( $hh_html, '<!--HH-LANDING-HEAD-->' ), '<!--HH-LANDING-BODY-->', true );
+	$hh_body = (string) substr( (string) strstr( $hh_html, '<!--HH-LANDING-BODY-->' ), strlen( '<!--HH-LANDING-BODY-->' ) );
+} else {
+	// Mẫu tự động (giống trang The Poet): CSS landing-mau.css nạp qua wp_head, nội dung dựng từ dữ liệu dự án.
+	$hh_head = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">';
+	ob_start();
+	get_template_part( 'template-parts/project-landing-auto' );
+	$hh_body = (string) ob_get_clean();
+}
 // Ảnh lưu trong plugin (img/…): {{HH_CRM_URL}} → đường dẫn thư mục plugin trên web.
 $hh_body = str_replace( '{{HH_CRM_URL}}', defined( 'HH_CRM_URL' ) ? HH_CRM_URL : '', $hh_body );
 ?><!DOCTYPE html>
@@ -20,6 +28,10 @@ $hh_body = str_replace( '{{HH_CRM_URL}}', defined( 'HH_CRM_URL' ) ? HH_CRM_URL :
 <?php wp_head(); ?>
 <?php echo $hh_head; // phpcs:ignore WordPress.Security.EscapeOutput -- CSS của landing dựng sẵn trong giao diện. ?>
 <style id="hh-landing-mobile">
+/* Đăng nhập (có thanh quản trị WordPress): đầu trang dính ngay dưới thanh, không bị che. */
+body.admin-bar>header.top,body.admin-bar>header#hdr{top:32px}
+@media (max-width:782px){body.admin-bar>header.top,body.admin-bar>header#hdr{top:46px}}
+@media (max-width:600px){body.admin-bar>header.top,body.admin-bar>header#hdr{top:0}}
 /* Điện thoại: bảng nhiều cột (bảng giá, giỏ hàng) thành thẻ từng căn – không bị cắt cột, không xuống dòng từng chữ; đầu trang tự ẩn khi cuộn xuống. */
 body>header,header#hdr,header.top{transition:transform .25s ease,background .3s,padding .3s,box-shadow .3s}
 @media (max-width:760px){

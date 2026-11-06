@@ -1580,3 +1580,12 @@ html.tour-view .contact-dock, html.tour-view .hhc__fab, html.tour-view .hhc__bub
 .cdt-plist li + li { border-top: 1px dashed var(--line); }
 .cdt-plist small { display: block; color: var(--muted, #5b6b80); font-size: .84rem; }
 .site-main .cdt-plist li, .cdt-plist li { text-align: left !important; text-align-last: left; }
+
+/* Thanh quản trị WordPress (khi đăng nhập): đầu trang và thanh mục lục dính ngay dưới, không bị chồng. */
+body.admin-bar { --wpab: 32px; }
+@media (max-width: 782px) { body.admin-bar { --wpab: 46px; } }
+@media (max-width: 600px) { body.admin-bar { --wpab: 0px; } }
+body.admin-bar .site-header { top: var(--wpab); }
+body.admin-bar .subnav { top: calc(var(--wpab) + var(--header-h)); }
+body.admin-bar .sticky { top: calc(var(--wpab) + var(--header-h) + 64px); }
+html:has(body.admin-bar) { scroll-padding-top: calc(32px + var(--header-h) + 60px); }

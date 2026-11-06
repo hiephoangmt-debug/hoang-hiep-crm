@@ -71,7 +71,7 @@ function hoanghiep_assets() {
 
 /** Trang dự án dùng giao diện mới (kiểu landing) – mặc định bật. */
 function hoanghiep_du_an_moi() {
-	return is_singular( 'du-an' ) && 'cu' !== get_post_meta( get_queried_object_id(), 'hh_p_layout', true ) && ! ( function_exists( 'hoanghiep_landing_file' ) && hoanghiep_landing_file() ); // Trang landing riêng có CSS riêng.
+	return is_singular( 'du-an' ) && 'chuan' === get_post_meta( get_queried_object_id(), 'hh_p_layout', true ); // Mặc định dùng mẫu landing tự động (inc/landing.php); "Chuẩn" = giao diện web kiểu mới.
 }
 add_filter(
 	'body_class',
