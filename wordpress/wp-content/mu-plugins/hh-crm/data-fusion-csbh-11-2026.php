@@ -124,3 +124,35 @@ add_action(
 		update_option( 'hh_fusion_mb_cu_go', 1, false );
 	}
 );
+
+// Sơ đồ mặt bằng vẽ lại: nếu lần trước tải lỗi (thiếu file) thì tải lại, và luôn đứng đầu mục Mặt bằng tổng thể.
+add_action(
+	'admin_init',
+	static function () {
+		if ( get_option( 'hh_fusion_mb_ve_lai_ok' ) || ! current_user_can( 'edit_posts' ) ) {
+			return;
+		}
+		$post = get_page_by_path( 'fusion-resort-villas-da-nang', OBJECT, 'du-an' );
+		if ( ! $post ) {
+			return;
+		}
+		$key  = 'plugin:img/fusion/fusion-mat-bang-ve-lai.jpg';
+		$done = (array) get_post_meta( $post->ID, '_hh_img_links', true );
+		$id   = $done[ $key ] ?? null;
+		if ( ! is_int( $id ) ) {
+			if ( null !== $id ) {
+				unset( $done[ $key ] );
+				update_post_meta( $post->ID, '_hh_img_links', $done );
+				delete_post_meta( $post->ID, '_hh_img_fail_' . md5( $key ) );
+			}
+			if ( function_exists( 'hh_img_links_queue' ) ) {
+				hh_img_links_queue( $post->ID );
+			}
+			return; // Chờ tải xong, lần sau xếp thứ tự.
+		}
+		$ids = array_filter( array_map( 'absint', explode( ',', (string) get_post_meta( $post->ID, 'hh_p_masterplan_img', true ) ) ) );
+		$ids = array_values( array_unique( array_merge( array( $id ), array_diff( $ids, array( $id ) ) ) ) );
+		update_post_meta( $post->ID, 'hh_p_masterplan_img', implode( ',', $ids ) );
+		update_option( 'hh_fusion_mb_ve_lai_ok', 1, false );
+	}
+);
