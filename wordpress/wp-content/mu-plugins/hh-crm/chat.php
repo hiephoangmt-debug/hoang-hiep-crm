@@ -1026,6 +1026,9 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 			$v = $f['Vốn tự có'] ?? ( $f['Vay'] ?? '' );
 			return $ack . ( $v ? $lc( 'Vốn tự có tham khảo – ' ) . mb_substr( $v, 0, 240 ) . '.' : $lc( 'Em tính được vốn tự có và lịch thanh toán theo đúng căn anh/chị chọn.' ) ) . ( $ask ?: ' Anh/chị dự kiến chuẩn bị khoảng bao nhiêu vốn ban đầu ạ?' );
 		}
+		if ( preg_match( '/cho thue|khai thac|kinh doanh (luu tru|cho thue)|airbnb|dong tien|o (lien|ngay)|o luon/', $t ) ) {
+			return $ack . $lc( hh_chat_rental_text( $page ) ) . ' Anh/chị mua để ở hay để cho thuê ạ? Nếu cho thuê, em tính thử dòng tiền theo căn studio / 1PN để anh/chị so sánh nhé.';
+		}
 		if ( preg_match( '/o dau|vi tri|dia chi|\\bduong\\b|cho nao|cho nay|nam dau|nam o|khu nao|gan dau|gan gi|phuong nao|quan nao|o khu|cach (bien|song|cau|trung tam)/', $t ) && isset( $f['Vị trí'] ) ) {
 			$conn = array_slice( hh_lines( 'hh_p_connections', $page ), 0, 3 );
 			return $ack . $title . ' nằm tại ' . rtrim( $f['Vị trí'], '. ' ) . '.' . ( $conn ? ' Kết nối: ' . implode( '; ', array_map( static fn( $r ) => str_replace( ' | ', ' – ', $r ), $conn ) ) . '.' : '' ) . ( $ask ?: ' Anh/chị muốn em gửi bản đồ và ảnh thực tế không ạ?' );
@@ -1126,6 +1129,14 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 	// Câu chen ngang không liên quan nhà đất (ngắn, không có từ khoá) → đáp vui, không hỏi máy móc.
 	if ( ! $title && ! $need && ! $budget && mb_strlen( $t ) <= 60 && ! preg_match( '/\b(can ho|can|nha (o|pho|dat|rieng|mat tien)|mua nha|ban nha|thue|dat|lo|du an|gia|mua|ban|phong ngu|pn|tang|so (do|hong)|vay|von|khu|quan|phuong|duong|bien|song|biet thu|villa|shophouse|chung cu|studio|ty|trieu)\b/', $t ) ) {
 		return hh_chat_smalltalk( $t, $name, $prev );
+	}
+	// Trang dự án mà chưa bắt được ý: trả lời bằng thông tin dự án, rồi mở câu hỏi khác – không chỉ xin số Zalo.
+	if ( $title && $page && 'du-an' === get_post_type( $page ) ) {
+		$brief = hh_chat_project_brief( $page );
+		$open  = $pick( array( ' Anh/chị đang cân nhắc mua để ở hay đầu tư cho thuê ạ?', ' Anh/chị muốn em nói thêm về giá từng loại căn, vị trí hay tiến độ xây dựng ạ?', ' Anh/chị quan tâm căn studio, 1 phòng ngủ hay 2 phòng ngủ ạ?' ) );
+		return false === mb_strpos( $said, mb_substr( $brief, 0, 50 ) )
+			? 'Dạ em tóm tắt nhanh: ' . $lc( $brief ) . $open
+			: 'Dạ em chưa rõ anh/chị hỏi phần nào của ' . $title . ' ạ.' . $open;
 	}
 	// Không rõ ý: không lặp lại câu trước.
 	if ( $turn >= 2 && $may_ask ) {
@@ -1709,6 +1720,28 @@ function hh_chat_project_brief( $id ) {
 	}
 	if ( $hand ) {
 		$txt .= ' Bàn giao: ' . rtrim( mb_substr( preg_replace( '/;.*/u', '', $hand ), 0, 120 ), '. ' ) . '.';
+	}
+	return $txt;
+}
+
+/** Trả lời "ở đây cho thuê được không": chỉ dùng dữ liệu dự án (sở hữu, chính sách cho thuê, giá thuê). */
+function hh_chat_rental_text( $id ) {
+	$title = hh_chat_title( $id );
+	$own   = trim( wp_strip_all_tags( (string) get_post_meta( $id, 'hh_p_ownership', true ) . ' ' . (string) get_post_meta( $id, 'hh_p_legal', true ) ) );
+	$rent  = trim( wp_strip_all_tags( (string) get_post_meta( $id, 'hh_p_rental', true ) ) );
+	$price = trim( wp_strip_all_tags( (string) get_post_meta( $id, 'hh_p_rent_price', true ) ) );
+	$pol   = array_values( array_filter( hh_lines( 'hh_p_policy', $id ), static fn( $l ) => false !== mb_stripos( $l, 'cho thuê' ) ) );
+	$long  = false !== mb_stripos( $own, 'lâu dài' ) || false !== mb_stripos( (string) get_post_field( 'post_excerpt', $id ), 'lâu dài' );
+	$txt   = $long || $pol || $rent ? 'Được ạ. ' : '';
+	$txt  .= $long ? 'Căn hộ ' . $title . ' sở hữu lâu dài, chủ nhà tự cho thuê hoặc ở đều được.' : 'Việc cho thuê căn hộ ' . $title . ' theo quyền của chủ sở hữu và nội quy tòa nhà.';
+	if ( $pol ) {
+		$txt .= ' ' . rtrim( mb_substr( $pol[0], 0, 200 ), '. ' ) . '.';
+	}
+	if ( $rent ) {
+		$txt .= ' ' . rtrim( mb_substr( $rent, 0, 220 ), '. ' ) . '.';
+	}
+	if ( $price ) {
+		$txt .= ' Giá thuê tham khảo: ' . rtrim( mb_substr( $price, 0, 140 ), '. ' ) . '.';
 	}
 	return $txt;
 }

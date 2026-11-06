@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.84** + plugin Hoàng Hiệp CRM **2.20.194**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.84** + plugin Hoàng Hiệp CRM **2.20.195**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -45,7 +45,9 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 - **Landing The Poet:** ảnh chính (toàn cảnh biển Mỹ Khê – Sơn Trà) hiện trọn ở đầu trang, không lớp phủ tối, không chữ đè; tiêu đề, thông tin nhanh và nút đặt ngay bên dưới ảnh.
 
-## Có gì mới – plugin 2.20.194 · giao diện 2.15.84 (06/11/2026)
+## Có gì mới – plugin 2.20.195 · giao diện 2.15.84 (06/11/2026)
+
+- **Trợ lý chat trả lời trước, hỏi mở sau:** ở trang dự án, câu chưa rõ ý không còn chỉ xin số Zalo – trợ lý tóm tắt dự án / nói phần liên quan rồi hỏi tiếp (mua ở hay cho thuê, loại căn, giá, vị trí, tiến độ). Thêm câu trả lời "ở đây cho thuê được không" (theo sở hữu, chính sách khai thác cho thuê, giá thuê nếu có). Sun Solar: ghi Sở hữu lâu dài (100% căn hộ).
 
 - **Trợ lý chat hiểu dự án đang xem:** ở trang dự án không còn đáp "câu này hơi khó với em"; hỏi "chỗ này chỗ nào / nằm đâu / khu nào / cách biển bao xa" → trả lời vị trí và kết nối; "dự án này thế nào / chưa hiểu / giới thiệu" → tóm tắt dự án (mô tả, loại căn, giá tham khảo, mốc bàn giao); thêm câu trả lời về tiện ích, bàn giao, chủ đầu tư. Câu chưa rõ ý thì tóm tắt dự án rồi hỏi khách muốn biết phần nào.
 

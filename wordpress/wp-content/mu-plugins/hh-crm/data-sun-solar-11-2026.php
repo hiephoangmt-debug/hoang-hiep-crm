@@ -96,6 +96,9 @@ add_filter(
 			// Tiến độ công trường (flycam anh Hiệp gửi đầu 11/2026 – ảnh có logo đơn vị phân phối nên không đăng; số tầng chưa xác nhận nên không ghi).
 			$p['meta']['hh_p_progress'] = $p['meta']['hh_p_progress'] ?? "11/2026 | Flycam công trường mới nhất: tòa tháp đang thi công phần thân, có lưới bao che, cần trục tháp đang hoạt động";
 
+			// Sở hữu (theo thông tin dự án anh Hiệp gửi: 100% căn hộ pháp lý sở hữu lâu dài) – ô trống thì điền.
+			$p['meta']['hh_p_ownership'] = $p['meta']['hh_p_ownership'] ?? 'Sở hữu lâu dài (100% căn hộ)';
+
 			// Tiêu chuẩn bàn giao (ô đang trống thì điền).
 			$p['meta']['hh_p_handover_std'] = 'Bàn giao hoàn thiện theo bảng tiêu chuẩn của chủ đầu tư: trần thạch cao, sơn Dulux/Jotun; phòng ngủ lát gỗ công nghiệp; rèm 2 lớp; tủ bếp, mặt đá, bếp và hút mùi Hafele/Teka; thiết bị vệ sinh Toto/Grohe, vách tắm kính cường lực (nếu có), bình nóng lạnh Ariston/Ferroli; điều hòa Daikin/Mitsubishi/Panasonic (âm trần phòng khách, treo tường phòng ngủ); cửa chính gỗ chống cháy, khóa thông minh; lô gia lát gạch chống trơn, lan can kính cường lực (hoặc tương đương).';
 
