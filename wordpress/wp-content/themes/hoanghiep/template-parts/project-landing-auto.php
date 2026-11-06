@@ -264,7 +264,10 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
     </div>
     <?php if ( $facts ) : ?>
     <div class="facts rv">
-      <?php foreach ( $facts as $lb => $v ) : ?><div class="fact"><small><?php echo $e( $lb ); ?></small><b><?php echo $e( $short( $v ) ); ?></b></div><?php endforeach; ?>
+      <?php foreach ( $facts as $lb => $v ) : ?><div class="fact"><small><?php echo $e( $lb ); ?></small><b><?php
+      $cdt = 'Chủ đầu tư' === $lb && function_exists( 'hh_cdt_match' ) ? hh_cdt_match( $v ) : array();
+      echo $cdt ? '<a href="' . esc_url( hh_cdt_url( $cdt[0] ) ) . '">' . $e( $short( $v ) ) . '</a>' : $e( $short( $v ) ); // phpcs:ignore -- Tên chủ đầu tư có hồ sơ → link sang trang chủ đầu tư.
+      ?></b></div><?php endforeach; ?>
     </div>
     <?php endif; ?>
     <?php if ( $zones ) : ?>
