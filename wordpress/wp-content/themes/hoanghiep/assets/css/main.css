@@ -336,7 +336,7 @@ p { margin: 0 0 1em; }
 .listing-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: box-shadow .25s, transform .25s; }
 .listing-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
 .listing-card.is-closed { opacity: .72; }
-.listing-card__media { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; }
+.listing-card__media { position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; } /* Khớp ảnh thẻ hh-card 720 × 480 – không cắt thêm hai bên. */
 .listing-card__media img { width: 100%; height: 100%; object-fit: cover; }
 .listing-card__media .pill { position: absolute; top: 10px; left: 10px; }
 .listing-card__media .pill + .pill { left: auto; right: 10px; }

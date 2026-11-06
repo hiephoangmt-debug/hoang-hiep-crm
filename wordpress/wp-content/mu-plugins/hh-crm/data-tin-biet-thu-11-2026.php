@@ -154,13 +154,13 @@ add_filter(
 				$tbl .= '<tr><th>' . esc_html( $th ) . '</th><td>' . esc_html( $td ) . '</td></tr>';
 			}
 			$list[] = array(
-				'rev'     => 1,
+				'rev'     => 2,
 				'slug'    => $k['slug'],
 				'title'   => $k['title'],
 				'excerpt' => wp_strip_all_tags( 'Bán ' . $k['lead'] ) . ' Giá ' . $gia . '.',
 				'kind'    => 'biet-thu',
 				'area'    => $k['area'],
-				'image'   => 'img/nha-dat/' . $k['img'] . '-4x3.jpg',
+				'image'   => 'img/nha-dat/' . $k['img'] . '.jpg', // Ảnh 3:2 (bản 2) – tin đã nhập tự đổi ảnh khi rev tăng.
 				'alt'     => wp_strip_all_tags( $k['title'] ),
 				'meta'    => array_filter(
 					array(

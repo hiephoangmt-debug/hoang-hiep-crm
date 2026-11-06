@@ -1,4 +1,4 @@
-"""Ảnh thẻ tin tự vẽ (4:3) cho 8 tin bán khách sạn / tòa căn hộ dịch vụ Đà Nẵng (06/11/2026) – không dùng ảnh tin rao của bên khác."""
+"""Ảnh thẻ tin tự vẽ (3:2, khớp ảnh thẻ 720 × 480 của web) cho 8 tin bán khách sạn / tòa căn hộ dịch vụ Đà Nẵng (06/11/2026) – không dùng ảnh tin rao của bên khác."""
 import sys, os
 from PIL import Image, ImageDraw, ImageFont
 OUT = sys.argv[1]
@@ -18,36 +18,37 @@ CARDS = [
     ('toa-can-ho-dich-vu-gan-ho-nghinh-11-phong', 'TÒA CĂN HỘ DỊCH VỤ · SƠN TRÀ', 'Gần biển Phạm Văn Đồng', '7 tầng · 11 phòng', ['Sát công viên Hồ Nghinh', 'Mới 100%, full nội thất', 'Đất 90 m²'], '2x tỷ', 'Giá thỏa thuận · khu du lịch Mỹ Khê', 7, False),
 ]
 for name, area, street, head, rows, gia, note, floors, pool in CARDS:
-    W, H = 1600, 1200
+    W, H = 1500, 1000
     im = Image.new('RGB', (W, H), NAVY)
     dr = ImageDraw.Draw(im)
-    # Tòa nhà minh họa: số tầng theo tin, chân là biển.
-    bx, bw, base = 1110, 300, 1000
-    fh = min(46, int(700 / floors))
+    # Tòa nhà minh họa bên phải: số tầng theo tin, chân là biển.
+    bx, bw, base = 1080, 300, 830
+    fh = min(44, int(640 / floors))
     top = base - floors * fh
-    dr.rectangle([980, base, 1540, 1020], fill=SEA)
+    dr.rectangle([940, base, 1460, base + 30], fill=SEA)
     for k in range(6):
-        dr.arc([990 + k * 90, base - 6, 1060 + k * 90, base + 14], 0, 180, fill='#7cc3d6', width=3)
+        dr.arc([950 + k * 84, base - 6, 1016 + k * 84, base + 14], 0, 180, fill='#7cc3d6', width=3)
     dr.rectangle([bx, top, bx + bw, base], fill='#1b3560')
     dr.rectangle([bx - 10, top - 14, bx + bw + 10, top], fill=GOLD)
     for r in range(floors):
         for c in range(4):
             y0 = top + 8 + r * fh
-            dr.rectangle([bx + 20 + c * 70, y0, bx + 70 + c * 70, y0 + fh - 16], fill=GOLD if (r * 4 + c) % 5 == 2 else '#2b4a7c')
+            dr.rectangle([bx + 20 + c * 70, y0, bx + 70 + c * 70, y0 + fh - 14], fill=GOLD if (r * 4 + c) % 5 == 2 else '#2b4a7c')
     if pool:
         dr.rounded_rectangle([bx + 30, top - 34, bx + bw - 30, top - 18], radius=6, fill='#4fb3d1')
-    dr.rectangle([60, 1020, W - 60, 1030], fill=GOLD)
-    dr.text((80, 70), area, font=f(32, True), fill=GOLD)
-    dr.text((80, 120), street, font=f(80 if len(street) < 20 else 66, True), fill=CREAM)
-    dr.text((80, 255), head, font=f(62, True), fill=CREAM)
-    y = 380
+    # Chữ: chừa góc trái trên cho nhãn "Bán" của thẻ tin.
+    dr.text((260, 58), area, font=f(30, True), fill=GOLD)
+    dr.text((80, 140), street, font=f(72 if len(street) < 20 else 60, True), fill=CREAM)
+    dr.text((80, 250), head, font=f(50, True), fill=CREAM)
+    y = 345
     for t in rows:
-        dr.ellipse([84, y + 14, 106, y + 36], fill=GOLD)
-        dr.text((130, y), t, font=f(44), fill=CREAM)
-        y += 78
-    dr.rounded_rectangle([80, 740, 640, 880], radius=26, fill=GOLD)
-    dr.text((115, 765), gia, font=f(76, True), fill=NAVY)
-    dr.text((80, 915), note, font=f(36), fill=CREAM)
-    dr.text((80, 1070), 'Hoàng Hiệp · Zalo 0904 567 009 · hiephoangmt.com', font=f(40, True), fill=GOLD)
-    im.save(os.path.join(OUT, name + '-4x3.jpg'), quality=86, optimize=True, progressive=True)
+        dr.ellipse([84, y + 13, 104, y + 33], fill=GOLD)
+        dr.text((124, y), t, font=f(40), fill=CREAM)
+        y += 66
+    dr.rounded_rectangle([80, 585, 600, 705], radius=24, fill=GOLD)
+    dr.text((112, 603), gia, font=f(70, True), fill=NAVY)
+    dr.text((80, 735), note, font=f(34), fill=CREAM)
+    dr.rectangle([60, 870, W - 60, 879], fill=GOLD)
+    dr.text((80, 902), 'Hoàng Hiệp · Zalo 0904 567 009 · hiephoangmt.com', font=f(38, True), fill=GOLD)
+    im.save(os.path.join(OUT, name + '.jpg'), quality=86, optimize=True, progressive=True)
 print('ok', len(CARDS))
