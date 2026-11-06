@@ -874,7 +874,7 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
   <a href="tel:0904567009" class="f-call" aria-label="Gọi 0904 567 009"><svg viewBox="0 0 24 24" width="25" height="25" fill="#fff" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg><span class="lb">Gọi 0904 567 009</span></a>
 </div>
 <script>
-/* Sun Saphia Residence – Trợ lý trả lời nhanh của anh Hoàng Hiệp.
+/* Sun Saphia Residence – Trợ lý trả lời nhanh.
  * Một tệp dùng chung cho 3 trang LadiPage: chat tự động + gửi khách về Telegram, CRM Hoàng Hiệp, email.
  * Gắn: dán nguyên tệp vào một thẻ script ngay trước thẻ đóng body.
  * Chỉ dùng thông tin dự án đã được duyệt bên dưới (KB); không nêu giá, không hứa lợi nhuận.
@@ -887,6 +887,8 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
   var CRM = 'https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec?key=kGYgRtNhbHZr';
   var MAIL = 'https://formsubmit.co/ajax/hiephoangmt@gmail.com';
   var PROJECT = 'Sun Saphia Residence';
+  /* Trợ lý AI (Claude Haiku) qua Google Apps Script – chat/ai/claude-proxy.gs. Để trống = chỉ trả lời theo từ khóa */
+  var AI = window.HHC_AI_URL || '';
   var TEL = 'tel:0904567009', ZALO = 'https://zalo.me/0904567009', SO = '0904 567 009';
 
   /* ---------- Tiện ích ---------- */
@@ -961,9 +963,9 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
   var VI_W = / (khong|ko|k|gia|bao nhieu|bn|mua|duoc|dc|nhu|the nao|ntn|o dau|vay|cho thue|nha|anh|chi|em|e|minh|toi|nhe|voi|co|la|cua|nao|re|dat|tang|phong|ban|xem|gi|j|sao|roi|chua|biet|hoi|tks|cam on|vang|da|oi|lam|nhieu|bien|thue|von|tien) /;
   var EN_W_G = new RegExp(EN_W.source.replace(/^ /, '(?<= )').replace(/ $/, '(?= )'), 'g'), VI_W_G = new RegExp(VI_W.source.replace(/^ /, '(?<= )').replace(/ $/, '(?= )'), 'g');
   var enMode = false;
-  var EN_ASK = 'Leave your phone / WhatsApp / Zalo number and Mr. Hiep will send you the full details in English.';
+  var EN_ASK = 'Leave your phone / WhatsApp / Zalo number and our consultant will send you the full details in English.';
   var EN_CH = ['Price', 'Location', 'Rental income', 'Can foreigners buy?'];
-  var EN_DEF = ['Thanks for your question! Mr. Hiep (official agent, speaks English) can answer this in detail. Message him on Zalo/WhatsApp ' + SO + ' or leave your number here.'];
+  var EN_DEF = ['Thanks for your question! Our consultant (official agent, speaks English) can answer this in detail. Message us on Zalo/WhatsApp ' + SO + ' or leave your number here.'];
   var EN_A = {
     tour: ['On this page there is an illustrative 3D–4D model 😍 Tap "5D · View từ căn" and pick a floor to see the sea view from that unit; drag to rotate the tower. The "Tầm view từ căn" section shows view photos by direction. Which view direction do you like?'],
     ngoai: ['Got it 😊 By the way – beachfront apartments by Sun Group in Da Nang now start from only ~VND 1.8 bn, with ~25% paid until handover. Would you like the location or the price list?'],
@@ -983,8 +985,8 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
     mb2pn: ['2BR units are ~60–70 m² (up to ~84 m² on floor 30), good for families. Estimated from ~VND 3.8 bn.'],
     chothue: ['Estimated rental income: Studio ~VND 18 m/month long-term or ~VND 30 m/month short-term; 1BR+ ~VND 24 m long-term / ~VND 42 m short-term; 2BR ~VND 35 m/month long-term. These are reference figures, not guaranteed returns. Long-term or short-term rental?'],
     dautu: ['Why investors like it: first beachfront apartments by Sun Group in Da Nang, only ~25% of capital needed until handover, 70% bank loan with interest support up to 24 months, and strong tourist rental demand. Would you like a cash-flow estimate for one unit?'],
-    muasan: ['Buying a whole floor (28 units, ~1,110 m²) is possible with a multi-unit discount – roughly VND 78 bn (estimate), ~25% until handover. It works like a mini hotel on the beachfront without building permits. Shall Mr. Hiep send you the floor calculation?'],
-    phaply: ['The project is a Grade-I construction developed by Sun Property (Sun Group). Foreigners can generally buy apartments in Vietnam within the legal foreign-ownership quota; Mr. Hiep will confirm the exact conditions and documents for you.'],
+    muasan: ['Buying a whole floor (28 units, ~1,110 m²) is possible with a multi-unit discount – roughly VND 78 bn (estimate), ~25% until handover. It works like a mini hotel on the beachfront without building permits. Shall our consultant send you the floor calculation?'],
+    phaply: ['The project is a Grade-I construction developed by Sun Property (Sun Group). Foreigners can generally buy apartments in Vietnam within the legal foreign-ownership quota; our consultant will confirm the exact conditions and documents for you.'],
     thanhtoan: ['Payment plan (expected): pay ~25% gradually until handover (11/2028); the bank lends 70% with developer interest support for up to 24 months; early repayment before handover is free; the last 5% is paid when you receive the ownership certificate. Booking is VND 50 m, fully refundable if you don’t buy.'],
     vay: ['Bank loan up to 70% (Vietcombank, BIDV, NCB), with developer interest support for up to 24 months; you pay ~25% until handover. Example: a VND 1.8 bn unit – ~VND 450 m paid, loan ~VND 1.26 bn.'],
     laisuat: ['The developer supports the loan interest for up to 24 months. You pay ~25% until handover (11/2028), early repayment before handover is free, and 5% at certificate issuance. Many buyers then cover the instalments with rental income.'],
@@ -999,10 +1001,10 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
     cdt: ['The developer is Sun Property, a member of Sun Group – the group behind Ba Na Hills, Sun World and many resorts in Da Nang.'],
     daily: ['Mr. Hoang Hiep is an official sales agent for Sun Saphia Residence. Zalo/WhatsApp ' + SO + '.'],
     zalo: ['You can contact Mr. Hoang Hiep on Zalo/WhatsApp: ' + SO + ' (English supported).'],
-    xem: ['Mr. Hiep can arrange a site visit and show you the project area and sample materials – just leave your number with a convenient time.'],
+    xem: ['Our consultant can arrange a site visit and show you the project area and sample materials – just leave your number with a convenient time.'],
     nguoi: ['Sure – Mr. Hoang Hiep will contact you directly. Please leave your phone/WhatsApp number or message ' + SO + '.'],
     camon: ['You’re welcome! Anything else you’d like to know – price, rental income or legal?'],
-    luadao: ['Sun Saphia is an official Sun Group (Sun Property) project, and Mr. Hiep is an official agent. All payments are made to the developer’s accounts under a booking agreement, never to individuals.']
+    luadao: ['Sun Saphia is an official Sun Group (Sun Property) project, and we are an official agent. All payments are made to the developer’s accounts under a booking agreement, never to individuals.']
   };
 
   function norm(t) {
@@ -1538,6 +1540,33 @@ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
     /* 5. Tìm ý */
     var best = null, score = 0;
     KB.forEach(function (it) { var sc = 0; it.k.forEach(function (k) { if (has(n, k)) sc += k.length + 2; }); if (sc > score) { score = sc; best = it; } });
+    /* 6. Có AI thì hỏi AI; lỗi / chậm / hết hạn mức thì trả lời theo từ khóa như cũ */
+    if (AI && !aiOff && aiN < 30) { aiAsk(raw, best, score); return; }
+    kwAnswer(best, score);
+  }
+
+  var aiN = 0, aiOff = false, aiSid = sget('hhc_sid');
+  if (!aiSid) { aiSid = Math.random().toString(36).slice(2, 10) + Date.now().toString(36); sset('hhc_sid', aiSid); }
+  function aiAsk(raw, best, score) {
+    aiN++;
+    var t = el('div', 'hhc-t'); t.textContent = 'Đang trả lời…'; log.appendChild(t); scrollEnd();
+    var done = false, tm = setTimeout(function () { fin(''); }, 12000);
+    function fin(txt) {
+      if (done) return; done = true; clearTimeout(tm); t.remove();
+      if (!txt) { kwAnswer(best, score); return; }
+      miss = 0; if (best && score >= 3) addTopic(best.topic);
+      if (!phone && /zalo|số điện thoại|để lại số|sđt|phone|whatsapp/i.test(txt)) { lastAsk = turn; lastHook = 'lead'; }
+      say(txt, best && score >= 3 ? best.c : []);
+    }
+    try {
+      fetch(AI, {method: 'POST', headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify({q: raw, h: transcript().slice(-3000), sid: aiSid, phone: phone ? 1 : 0, refused: refused ? 1 : 0, en: enMode ? 1 : 0, page: location.hostname + location.pathname})})
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && d.off) aiOff = true; fin(d && d.ok && d.text ? String(d.text).slice(0, 1200) : ''); })
+        .catch(function () { fin(''); });
+    } catch (e) { fin(''); }
+  }
+
+  function kwAnswer(best, score) {
     if (!best || score < 3) {
       miss++;
       if (enMode) { if (miss >= 2) { miss = 0; say(EN_DEF[0], []); } else say('Sorry, could you tell me a bit more? For example "price", "location" or "rental income".', EN_CH); return; }
