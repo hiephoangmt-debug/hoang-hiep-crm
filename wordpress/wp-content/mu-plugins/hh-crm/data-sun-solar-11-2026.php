@@ -110,6 +110,31 @@ add_filter(
 				implode( "\n", array_map( static fn( $l ) => 0 === strpos( $l, 'Thanh toán sớm 95%' ) ? 'Thanh toán sớm: mức chiết khấu theo phiếu tính giá hiện hành của chủ đầu tư – liên hệ để nhận phiếu tính giá căn cụ thể' : $l, explode( "\n", (string) ( $m['hh_p_policy'] ?? '' ) ) ) ),
 				array( $m['hh_p_policy'] ?? '' )
 			);
+			// Bảng giá: bỏ mã căn, gộp cùng loại căn + diện tích thành khoảng giá; xếp theo loại căn, diện tích.
+			$order  = array( 'Studio' => 0, '1PN' => 1, '1PN+' => 2, '2PN' => 3, '2PN+' => 4, '3PN' => 5 );
+			$num    = static fn( $v ) => (float) str_replace( ',', '.', preg_replace( '/[^0-9,]/', '', (string) $v ) );
+			$groups = array();
+			$note   = '';
+			foreach ( array_filter( explode( "\n", (string) ( $m['hh_p_price_table'] ?? '' ) ) ) as $line ) {
+				$c    = array_map( 'trim', explode( '|', $line ) );
+				$type = trim( preg_replace( '/^[A-Z0-9]+\s*[–-]\s*/u', '', $c[0] ) );
+				$note = $c[3] ?? $note;
+				$groups[ $type . '|' . $c[1] ][] = $num( $c[2] ?? '' );
+			}
+			uksort( $groups, static function ( $a, $b ) use ( $order, $num ) {
+				list( $ta, $aa ) = explode( '|', $a );
+				list( $tb, $ab ) = explode( '|', $b );
+				return array( $order[ $ta ] ?? 9, $num( $aa ) ) <=> array( $order[ $tb ] ?? 9, $num( $ab ) );
+			} );
+			$ty    = static fn( $v ) => number_format( $v, 2, ',', '.' );
+			$lines = array();
+			foreach ( $groups as $k => $prices ) {
+				list( $type, $area ) = explode( '|', $k );
+				$lo      = min( $prices );
+				$hi      = max( $prices );
+				$lines[] = "$type | $area | " . ( $lo === $hi ? $ty( $lo ) : $ty( $lo ) . ' – ' . $ty( $hi ) ) . ' tỷ | ' . $note;
+			}
+			$fix( 'hh_p_price_table', implode( "\n", $lines ), array( $m['hh_p_price_table'] ?? '' ) );
 			$fix(
 				'hh_p_discount_table',
 				implode( "\n", array_map( static fn( $l ) => 0 === strpos( $l, 'Thanh toán sớm 95%' ) ? 'Thanh toán sớm | Theo phiếu tính giá hiện hành | Liên hệ | Quà tặng an cư 5% + không vay 5% + chiết khấu thanh toán sớm theo phiếu tính giá' : $l, explode( "\n", (string) ( $m['hh_p_discount_table'] ?? '' ) ) ) ),

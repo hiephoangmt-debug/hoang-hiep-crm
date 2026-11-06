@@ -503,10 +503,16 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
     <span class="eyebrow"><?php echo $resale ? 'Giá chuyển nhượng' : 'Giá bán tham khảo'; ?></span>
     <h2 class="title" id="h-bg"><?php echo $resale ? 'Giá chuyển nhượng <em>' . $e( $short( $m( 'hh_p_resale_price' ) ?: 'theo từng căn', 40 ) ) . '</em>' : ( $m( 'hh_p_price_from' ) ? 'Giá <em>' . $e( mb_strtolower( hh_project_price( $id ) ) ) . '</em>' . ( $m( 'hh_p_price_m2' ) ? ', khoảng ' . $e( $m( 'hh_p_price_m2' ) ) : '' ) : 'Bảng giá <em>' . $e( $short_name ) . '</em>' ); // phpcs:ignore ?></h2>
     <?php if ( $price_tbl ) : ?>
+    <?php
+    // Ghi chú giống nhau ở mọi dòng → ghi một lần dưới bảng, giá là cột cuối (nổi bật).
+    $pt_notes = array_values( array_unique( array_map( static fn( $r ) => trim( (string) ( $r[3] ?? '' ) ), $price_tbl ) ) );
+    $pt_one   = 1 === count( $pt_notes ) ? $pt_notes[0] : null;
+    ?>
     <div class="tbl-wrap"><table class="tbl">
-      <thead><tr><th>Sản phẩm</th><th>Diện tích</th><th>Giá tham khảo</th><th>Ghi chú</th></tr></thead>
-      <tbody><?php foreach ( $price_tbl as $r ) : ?><tr><?php foreach ( $r as $c ) : ?><td><?php echo $e( $c ); ?></td><?php endforeach; ?></tr><?php endforeach; ?></tbody>
+      <thead><tr><th>Sản phẩm</th><th>Diện tích</th><th>Giá tham khảo</th><?php if ( null === $pt_one ) : ?><th>Ghi chú</th><?php endif; ?></tr></thead>
+      <tbody><?php foreach ( $price_tbl as $r ) : ?><tr><td><?php echo $e( $r[0] ?? '' ); ?></td><td class="num"><?php echo $e( $r[1] ?? '' ); ?></td><td class="num gia"><?php echo $e( $r[2] ?? '' ); ?></td><?php if ( null === $pt_one ) : ?><td class="ghi-chu"><?php echo $e( $r[3] ?? '' ); ?></td><?php endif; ?></tr><?php endforeach; ?></tbody>
     </table></div>
+    <?php if ( $pt_one ) : ?><p class="note"><?php echo $e( $pt_one ); ?>.</p><?php endif; ?>
     <?php endif; ?>
     <p class="note">Giá tham khảo, chưa trừ chiết khấu; giá và căn còn trống thay đổi theo đợt – để lại số, Hoàng Hiệp gửi bảng giá cập nhật qua Zalo.</p>
   </div>
