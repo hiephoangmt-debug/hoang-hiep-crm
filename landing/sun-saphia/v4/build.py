@@ -499,7 +499,8 @@ def mb_4d():
     """Mặt bằng tầng = mô hình 4D mở sẵn chế độ "Mặt bằng tầng" (bấm từng căn). Mô hình 4D được đặt ngay sau #chon-can."""
     return ('<p class="lead" style="margin:4px 0 14px">Kéo thanh <b>Tầng</b> và <b>Giờ trong ngày</b> phía trên mô hình, bấm vào từng căn để xem loại căn, diện tích và hướng view. '
             'Màu căn: <b style="color:#E06A6A">Studio</b> · <b style="color:#3A8FC9">1PN+1</b> · <b style="color:#C9962A">2PN góc bo</b>.</p>'
-            '<style>body.tool-on #wvb,body.tool-on #wvh{opacity:0!important;pointer-events:none!important;transition:opacity .2s}</style>'
+            '<style>body.tool-on #wvb,body.tool-on #wvh{opacity:0!important;pointer-events:none!important;transition:opacity .2s}'
+            'header.top{transition:transform .25s}@media(max-width:820px){body.tool-on header.top{transform:translateY(-110%)}#ss4d-box{height:calc(100svh - 16px)!important;min-height:460px!important}}</style>'
             '<script>(function(){var n=0;(function t(){var b=document.getElementById("ss4d-box");if(!b){if(++n<200)setTimeout(t,300);return}if(!("IntersectionObserver" in window))return;'
             'new IntersectionObserver(function(es){es.forEach(function(e){var on=e.intersectionRatio>.35||(e.isIntersecting&&e.intersectionRect.height>innerHeight*.5);document.body.classList.toggle("tool-on",on)})},{threshold:[0,.1,.2,.35,.5,.75,1]}).observe(b)})()})();</script>'
             '<div id="chon-can"></div>'
@@ -507,6 +508,7 @@ def mb_4d():
             'try{if(window.gtag)gtag("event",d.lead?"mb4d_lead":"mb4d_can",{event_label:u.code})}catch(x){}'
             'if(d.lead){var b=document.createElement("button");b.type="button";b.setAttribute("data-pop","");b.setAttribute("data-interest",(document.getElementById("h4d")?"ADS":"Web")+" – mặt bằng 4D: căn "+u.code+" ("+u.type+", "+u.area+" m², tầng "+u.floor+")");b.style.display="none";document.body.appendChild(b);b.click();setTimeout(function(){b.remove()},100);return}'
             'var bx=document.getElementById("ss4d-box");if(bx){var r=bx.getBoundingClientRect();if(r.bottom<=innerHeight+4&&r.bottom>innerHeight*.5)u.bottom=Math.round(innerHeight-r.bottom+r.height/6+18)}'
+            'if(innerWidth<=820&&bx){var rr=bx.getBoundingClientRect();if(Math.abs(rr.top-8)>24)try{scrollTo({top:rr.top+scrollY-8,behavior:"smooth"})}catch(x){scrollTo(0,rr.top+scrollY-8)}u.bottom=Math.round(rr.height/6+26)}'
             'if(window.hhcUnit)hhcUnit(u)});</script>'
             '<script>(function(){var n=0,seen=0;(function t(){n++;var f=document.querySelector("#ss4d-box iframe"),d=null;try{d=f&&f.contentDocument}catch(e){}'
             'var b=d&&d.getElementById("mPlan"),cv=d&&d.querySelector("canvas");'
