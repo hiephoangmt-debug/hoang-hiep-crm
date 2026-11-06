@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.85** + plugin Hoàng Hiệp CRM **2.20.202**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.86** + plugin Hoàng Hiệp CRM **2.20.203**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.203 · giao diện 2.15.86 (06/11/2026)
+
+- **Biệt thự chỉ từ 200 m² trở lên:** mục tin biệt thự biển chỉ giữ 5 căn đủ 200 m² (Trần Bạch Đằng 300 m², Nguyễn Văn Thoại 240 m², Lê Mạnh Trinh 234 m², Phạm Quang Ảnh 357 m², Premier Village 300 m²); 7 tin dưới 200 m² tự chuyển về bản nháp khi vào trang quản trị (tin anh đã tự sửa thì giữ nguyên).
+
+- **Ô "Chủ đầu tư" trên trang dự án** bấm được, dẫn sang trang giới thiệu chủ đầu tư (nếu đã có hồ sơ).
 
 ## Có gì mới – giao diện 2.15.81 (06/11/2026)
 

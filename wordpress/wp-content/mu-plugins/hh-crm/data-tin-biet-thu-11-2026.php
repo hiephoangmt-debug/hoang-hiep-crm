@@ -9,6 +9,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/** Diện tích đất tối thiểu của tin biệt thự (m²). */
+const HH_BIET_THU_MIN_M2 = 200;
+
 add_filter(
 	'hh_single_listing_dataset',
 	static function ( $list ) {
@@ -136,6 +139,9 @@ add_filter(
 		);
 		$fmt = static fn( $n ) => str_replace( '.', ',', (string) $n );
 		foreach ( $bt as $k ) {
+			if ( (float) $k['m2'] < HH_BIET_THU_MIN_M2 ) {
+				continue; // Biệt thự phải từ 200 m² trở lên (anh Hiệp, 06/11/2026) – căn nhỏ hơn không đăng mục Biệt thự.
+			}
 			$gia  = rtrim( rtrim( number_format( $k['price'] / 1000, 2, ',', '.' ), '0' ), ',' ) . ' tỷ';
 			$rows = array_filter(
 				array(
@@ -194,5 +200,25 @@ add_filter(
 			);
 		}
 		return $list;
+	}
+);
+
+/**
+ * Ẩn (chuyển bản nháp) các tin biệt thự dưới 200 m² đã nhập trước đó – chỉ tin web tự nhập, chưa sửa tay; không xoá.
+ */
+add_action(
+	'admin_init',
+	static function () {
+		if ( get_option( 'hh_biet_thu_200m2_v1' ) || ! current_user_can( 'edit_posts' ) ) {
+			return;
+		}
+		update_option( 'hh_biet_thu_200m2_v1', 1, false );
+		$q = get_posts( array( 'post_type' => 'bat-dong-san', 'post_status' => 'publish', 'numberposts' => -1, 'tax_query' => array( array( 'taxonomy' => 'loai-bds', 'field' => 'slug', 'terms' => 'biet-thu' ) ) ) ); // phpcs:ignore WordPress.DB.SlowDBQuery
+		foreach ( $q as $post ) {
+			$m2 = (float) get_post_meta( $post->ID, 'hh_area', true );
+			if ( $m2 > 0 && $m2 < HH_BIET_THU_MIN_M2 && md5( $post->post_content ) === get_post_meta( $post->ID, '_hh_news_hash', true ) ) {
+				wp_update_post( array( 'ID' => $post->ID, 'post_status' => 'draft' ) );
+			}
+		}
 	}
 );
