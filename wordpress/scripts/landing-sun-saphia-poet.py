@@ -84,8 +84,8 @@ body = f'''<!--HH-LANDING-BODY-->
 
 <main id="top">
 <!-- HERO -->
-<figure class="hero-view" style="--bg:url('{P}sun-saphia-phoi-canh-hoang-hon-toan-canh.jpg')">
-  <img src="{P}sun-saphia-phoi-canh-hoang-hon-toan-canh.jpg" width="1800" height="996" alt="Sun Saphia Residence – tòa tháp 30 tầng của Sun Group bên biển Sơn Thủy lúc hoàng hôn, phối cảnh chủ đầu tư" fetchpriority="high" decoding="async">
+<figure class="hero-view" style="--bg:url('{P}sun-saphia-cdt-hoang-hon-bien-tren-cao.jpg')">
+  <img src="{P}sun-saphia-cdt-hoang-hon-bien-tren-cao.jpg" width="2400" height="1340" alt="Sun Saphia Residence – toàn cảnh tòa tháp 30 tầng bên biển Sơn Thủy lúc hoàng hôn, phối cảnh chủ đầu tư" fetchpriority="high" decoding="async">
   <figcaption>Sun Saphia Residence · biển Sơn Thủy lúc hoàng hôn · phối cảnh chủ đầu tư</figcaption>
 </figure>
 <section class="hero" aria-labelledby="h1">
@@ -106,8 +106,8 @@ body = f'''<!--HH-LANDING-BODY-->
       </div>
     </div>
     <figure class="hero-img" style="margin:0">
-      <img src="{IMG['binhminh']}" alt="Sun Saphia Residence trong nắng sớm – phối cảnh minh họa" decoding="async">
-      <figcaption>Tòa tháp trong nắng sớm · phối cảnh minh họa</figcaption>
+      <img src="{P}sun-saphia-cdt-dem-tren-cao-bien.jpg" alt="Sun Saphia Residence về đêm nhìn từ trên cao – phối cảnh chủ đầu tư" decoding="async">
+      <figcaption>Trục biển lên đèn · phối cảnh chủ đầu tư</figcaption>
     </figure>
   </div>
 </section>
@@ -122,7 +122,7 @@ body = f'''<!--HH-LANDING-BODY-->
         <p class="lead">Sun Property – thành viên Tập đoàn Sun Group – phát triển dự án tại giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu Saphia, phường Ngũ Hành Sơn. Tòa tháp 30 tầng – 114 m, 2 tầng hầm trên khu đất 3.720,1 m², căn hộ từ tầng 3A đến tầng 28, bàn giao hoàn thiện cơ bản.</p>
         <p class="note">Thông tin theo tài liệu Kick-off 23/10/2026 của chủ đầu tư; giá bán, chính sách căn cứ công bố chính thức. <a href="/du-an-can-ho-sun-group-da-nang-2026/" style="color:var(--gold)">Lý do Sun Group chọn Đà Nẵng cho căn hộ mặt biển đầu tiên →</a></p>
       </div>
-      <img class="rv" src="{P}sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg" width="1600" height="898" alt="Phối cảnh đêm tòa tháp Sun Saphia Residence 30 tầng bên biển Sơn Thủy" loading="lazy" decoding="async">
+      <img class="rv" src="{P}sun-saphia-cdt-toa-thap-ngay.jpg" width="1792" height="2400" alt="Tòa tháp Sun Saphia Residence 30 tầng – phối cảnh chủ đầu tư" loading="lazy" decoding="async">
     </div>
     <div class="facts rv">
       <div class="fact"><small>Đơn vị phát triển</small><b>Sun Property – Sun Group</b></div>
@@ -252,7 +252,7 @@ body = f'''<!--HH-LANDING-BODY-->
     </div>
     <div class="floor" id="ti-2">
       <p>Khối đế mặt tiền Võ Nguyên Giáp – phố biển nhộn nhịp ngay dưới chân nhà.</p>
-      <div class="vband" style="margin-top:0">{card(IMG['shop'], 'Khối đế thương mại Sun Saphia Residence', 'Shop, café, nhà hàng hướng ra trục biển')}{card(IMG['kickoff'], 'Tòa tháp Sun Saphia trong nắng sớm', 'Phối cảnh trích thư mời Kick-off 23/10/2026')}</div>
+      <div class="vband" style="margin-top:0">{card(P + 'sun-saphia-cdt-khoi-de-pho-bien.jpg', 'Khối đế thương mại Sun Saphia Residence', 'Shop, café, nhà hàng hướng ra trục biển')}{card(IMG['kickoff'], 'Tòa tháp Sun Saphia trong nắng sớm', 'Phối cảnh trích thư mời Kick-off 23/10/2026')}</div>
       <ul class="list-ok" style="margin-top:18px"><li><b>Mua sắm:</b> tiện ích thiết yếu, cửa hàng ngay trong tòa</li><li><b>Ẩm thực:</b> café, nhà hàng ngắm trục biển</li><li><b>Dòng khách:</b> trục Võ Nguyên Giáp – Trường Sa đông khách du lịch nhất</li><li><b>Cho thuê:</b> ăn uống, mua sắm dưới chân nhà – điểm cộng với khách thuê</li></ul>
     </div>
     <div class="floor" id="ti-3">
@@ -399,9 +399,9 @@ body = f'''<!--HH-LANDING-BODY-->
     <span class="eyebrow">Thư viện ảnh</span>
     <h2 class="title" id="h-tv">Sun Saphia <em>bên biển Đà Nẵng</em></h2>
     <div class="gallery">
-      {card(IMG['hoanghon'], 'Sun Saphia Residence lúc hoàng hôn')}{card(IMG['binhminh'], 'Sun Saphia Residence trong nắng sớm')}{card(IMG['thapcat'], 'Tòa tháp Sun Saphia Residence')}{card(IMG['resort'], 'Sun Saphia Residence về đêm')}{card(IMG['trencao'], 'Sun Saphia Residence nhìn từ trên cao')}
+      {card(P + 'sun-saphia-cdt-dem-tren-cao-bien.jpg', 'Sun Saphia Residence về đêm nhìn từ trên cao')}{card(P + 'sun-saphia-cdt-toa-thap-dem.jpg', 'Tòa tháp Sun Saphia Residence lên đèn')}{card(P + 'sun-saphia-cdt-toa-thap-ngay.jpg', 'Tòa tháp Sun Saphia Residence ban ngày')}{card(P + 'sun-saphia-cdt-khoi-de-pho-bien.jpg', 'Khối đế Sun Saphia Residence')}{card(IMG['hoanghon'], 'Sun Saphia Residence lúc hoàng hôn')}
     </div>
-    <p class="note">Ảnh phối cảnh, minh họa của chủ đầu tư.</p>
+    <p class="note">Ảnh phối cảnh của chủ đầu tư (bộ phối cảnh 10–11/2026), mang tính minh họa.</p>
   </div>
 </section>
 
@@ -435,7 +435,7 @@ body = f'''<!--HH-LANDING-BODY-->
 
 <!-- ĐĂNG KÝ -->
 <section class="cta" id="dang-ky" aria-labelledby="h-cta">
-  <img class="bg" src="{IMG['hoanghon']}" alt="" loading="lazy" decoding="async">
+  <img class="bg" src="{P}sun-saphia-cdt-dem-tren-cao-bien.jpg" alt="" loading="lazy" decoding="async">
   <div class="container">
     <div class="rv">
       <span class="eyebrow">Đăng ký nhận thông tin</span>

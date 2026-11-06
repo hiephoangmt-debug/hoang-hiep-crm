@@ -87,8 +87,9 @@ add_filter(
 	23 // Ngay sau bộ lọc 4D / mặt bằng tầng (22).
 );
 
-// 06/11/2026: ảnh đại diện mới (anh Hiệp gửi) – toàn cảnh tòa tháp bên biển Sơn Thủy lúc hoàng hôn; ảnh đại diện cũ chuyển vào Thư viện.
-// Chạy sau cùng (24) để ô ảnh đang có trên web (kết quả bộ lọc 23) nằm trong danh sách được phép thay.
+// 06/11/2026: ảnh đại diện mới – bộ phối cảnh 4K của chủ đầu tư (Drive "Sun Saphia Residence / Ảnh phối cảnh", anh Hiệp gửi):
+// toàn cảnh từ trên cao lúc hoàng hôn làm ảnh đại diện; 4 ảnh còn lại vào Thư viện; ảnh đại diện cũ chuyển vào Thư viện.
+// Chạy sau cùng (24) để ô ảnh đang có trên web (kết quả bộ lọc 23, hoặc bản 2.15.79–80 có ảnh 900 px) nằm trong danh sách được phép thay.
 add_filter(
 	'hh_project_dataset',
 	static function ( $projects ) {
@@ -97,11 +98,21 @@ add_filter(
 				continue;
 			}
 			$links = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
-			if ( '' === $links || false !== strpos( $links, 'sun-saphia-phoi-canh-hoang-hon-toan-canh.jpg' ) ) {
+			if ( '' === $links || false !== strpos( $links, 'sun-saphia-cdt-hoang-hon-bien-tren-cao.jpg' ) ) {
 				continue;
 			}
-			$p['meta']['hh_p_image_links']     = 'plugin:img/sun-saphia/sun-saphia-phoi-canh-hoang-hon-toan-canh.jpg | Sun Saphia Residence – tòa tháp 30 tầng của Sun Group bên biển Sơn Thủy lúc hoàng hôn, phối cảnh chủ đầu tư | đại diện | Toàn cảnh lúc hoàng hôn' . "\n" . str_replace( ' | đại diện', ' | thư viện', $links );
-			$p['fix_meta']['hh_p_image_links'] = array_values( array_unique( array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $links ) ) ) );
+			$base = str_replace( ' | đại diện', ' | thư viện', $links );
+			$l    = static fn( $f, $alt, $where, $t ) => "plugin:img/sun-saphia/sun-saphia-cdt-$f.jpg | $alt | $where | $t";
+			$new  = array(
+				$l( 'hoang-hon-bien-tren-cao', 'Sun Saphia Residence – toàn cảnh tòa tháp 30 tầng bên biển Sơn Thủy lúc hoàng hôn, phối cảnh chủ đầu tư', 'đại diện', 'Toàn cảnh lúc hoàng hôn' ),
+				$l( 'dem-tren-cao-bien', 'Sun Saphia Residence về đêm nhìn từ trên cao, trục biển Võ Nguyên Giáp – Trường Sa, phối cảnh chủ đầu tư', 'thư viện', 'Toàn cảnh về đêm' ),
+				$l( 'toa-thap-ngay', 'Tòa tháp Sun Saphia Residence 30 tầng ban ngày, phối cảnh chủ đầu tư', 'thư viện', 'Tòa tháp ban ngày' ),
+				$l( 'toa-thap-dem', 'Tòa tháp Sun Saphia Residence lên đèn, phối cảnh chủ đầu tư', 'thư viện', 'Tòa tháp về đêm' ),
+				$l( 'khoi-de-pho-bien', 'Khối đế thương mại Sun Saphia Residence mặt tiền trục biển, phối cảnh chủ đầu tư', 'tiện ích', 'Khối đế thương mại' ),
+			);
+			$p['meta']['hh_p_image_links'] = implode( "\n", $new ) . "\n" . $base;
+			$was_900 = 'plugin:img/sun-saphia/sun-saphia-phoi-canh-hoang-hon-toan-canh.jpg | Sun Saphia Residence – tòa tháp 30 tầng của Sun Group bên biển Sơn Thủy lúc hoàng hôn, phối cảnh chủ đầu tư | đại diện | Toàn cảnh lúc hoàng hôn' . "\n" . $base;
+			$p['fix_meta']['hh_p_image_links'] = array_values( array_unique( array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $links, $was_900 ) ) ) );
 		}
 		unset( $p );
 		return $projects;
