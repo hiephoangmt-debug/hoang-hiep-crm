@@ -26,7 +26,7 @@ CSS = TAG + ('body.pm .top{display:none!important}'
   '.pmc-st i{font-style:normal;font-size:17px}.pmc-st b{display:block;font-size:14px;font-weight:800;line-height:1.15}.pmc-st small{display:block;font-size:10.5px;color:#AFC0D8}'
   '.pmc-b{display:flex;gap:8px;align-items:center}.pmc-b button{border:0;border-radius:999px;font:800 14px inherit;cursor:pointer;white-space:nowrap}.pmc-cta{background:linear-gradient(135deg,#FFA04A,#F07B1F);color:#fff;padding:11px 18px;animation:pmcP 1.8s infinite}.pmc-back{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)!important;padding:10px 14px}'
   '@keyframes pmcP{0%{box-shadow:0 0 0 0 rgba(255,160,74,.7)}70%{box-shadow:0 0 0 12px rgba(255,160,74,0)}100%{box-shadow:0 0 0 0 rgba(255,160,74,0)}}'
-  '.pmc-x{position:absolute;top:8px;right:10px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:15px;cursor:pointer}'
+  'body.pm #uCard .pmc-x{position:absolute!important;top:8px!important;right:10px!important;left:auto!important;width:28px!important;height:28px!important;min-width:0!important;max-width:28px!important;padding:0!important;margin:0!important;border-radius:50%!important;border:0!important;background:rgba(255,255,255,.14)!important;color:#fff!important;font-size:14px!important;line-height:28px!important;text-align:center!important;box-shadow:none!important}'
   '@media (max-width:760px){body.pm.pu #uCard{left:8px!important;right:64px!important}.pmc{grid-template-columns:1fr auto;gap:8px;padding:9px 38px 9px 11px}.pmc-id{border:0;padding:0}.pmc-id b{font-size:19px}.pmc-st{grid-column:1/-1;grid-row:2;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.pmc-st::-webkit-scrollbar{display:none}.pmc-st div{flex:0 0 auto;padding:5px 8px}.pmc-st b{font-size:12.5px}.pmc-b{grid-column:2;grid-row:1}.pmc-back{display:none}.pmc-cta{padding:9px 13px;font-size:13px}}'
   '@media (max-width:760px){body.pm .console{grid-template-columns:1fr!important;gap:6px!important;padding-top:8px!important;padding-bottom:8px!important}'
   'body.pm .modes{display:none!important}body.pm .console .sl label{font-size:10.5px!important}}')
@@ -67,6 +67,12 @@ if TAG not in doc:
     q = "var hv=+hourEl.value+0.02;"
     assert doc.count(q) == 1
     doc = doc.replace(q, "var hv=+hourEl.value+(document.body.classList.contains('pm')?0.012:0.02);")
+    q2 = "if(L.cls!=='main'&&mode!=='view'&&r[0]<tr[2]"
+    assert doc.count(q2) == 1
+    doc = doc.replace(q2, "if(L.cls!=='main'&&mode!=='view'&&!PMU&&r[0]<tr[2]")   # đang xem căn: không ẩn nhãn địa danh sau khối tháp
+    q3 = "  for(var j=0;j<LBL.length;j++){ var L=LBL[j];"
+    assert doc.count(q3) == 1
+    doc = doc.replace(q3, "  var PMU=document.body.classList.contains('pu');\n" + q3)
     p = "if(hv>20) hv=5;"
     assert doc.count(p) == 1
     doc = doc.replace(p, "if(hv>+hourEl.max) hv=+hourEl.min;")
