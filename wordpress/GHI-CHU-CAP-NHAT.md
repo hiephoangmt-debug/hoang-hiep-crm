@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.83** + plugin Hoàng Hiệp CRM **2.20.188**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.83** + plugin Hoàng Hiệp CRM **2.20.189**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -45,13 +45,13 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 - **Landing The Poet:** ảnh chính (toàn cảnh biển Mỹ Khê – Sơn Trà) hiện trọn ở đầu trang, không lớp phủ tối, không chữ đè; tiêu đề, thông tin nhanh và nút đặt ngay bên dưới ảnh.
 
-## Có gì mới – plugin 2.20.188 · giao diện 2.15.83 (06/11/2026)
+## Có gì mới – plugin 2.20.189 · giao diện 2.15.83 (06/11/2026)
 
 - **Vị trí bản đồ đúng chỗ:** Sun Solar (Lê Duẩn, gần ngã tư Yên Bái – trước đây ghim sai), Sun Costa, Sun Symphony, Sun Ponte, Spana, Cora, FourS, The Meridian, Masteri nay ghim theo tọa độ trong bảng "Tọa độ các dự án" của anh (chỉ điền khi ô tọa độ đang trống); các tòa / phân khu con tự theo vị trí dự án mẹ.
 
 - **Bảng giá trên trang dự án (điện thoại):** trước đây cột giá bị ẩn (theo mẫu The Poet ẩn cột 3) và cột ghi chú tô đỏ – nay hiện đủ cột, giá là cột tô đỏ; ghi chú giống nhau ở mọi dòng chỉ ghi một lần dưới bảng. Bảng giá Sun Solar bỏ mã căn, gộp cùng loại căn + diện tích thành khoảng giá (34 dòng → 18 dòng). Bảng lịch thanh toán cũng hiện lại cột Tỷ lệ trên điện thoại.
 
-- **Sun Solar Residence – bộ tài liệu chủ đầu tư:** 22 phối cảnh, tiện ích (bể bơi bốn mùa, gym & yoga, spa, thư viện, kids club, phòng thư giãn, sân thượng) và sảnh – ảnh sạch không chữ, thay 8 ảnh poster cũ; ảnh đại diện mới (toàn cảnh lúc hoàng hôn); mặt bằng tầng 5, 6, 7 – 19 (bản cập nhật diện tích, thay tầng 8 – 19) và tầng 20; layout 5 loại căn (Studio 33,1 m² – 3PN 99,7 m²); tiêu chuẩn bàn giao; tour 360° (mục Xem 4D / 360). Bỏ ưu đãi thanh toán sớm hạn 25/10/2026 đã hết (khung ưu đãi, bảng chiết khấu, đồng hồ đếm ngược). Ảnh cũ tự gỡ khỏi trang khi ảnh mới tải xong.
+- **Sun Solar Residence – bộ tài liệu chủ đầu tư:** 22 phối cảnh, tiện ích (bể bơi bốn mùa, gym & yoga, spa, thư viện, kids club, phòng thư giãn, sân thượng) và sảnh – ảnh sạch không chữ, thay 8 ảnh poster cũ; ảnh đại diện mới (toàn cảnh lúc hoàng hôn); mặt bằng tầng 5, 6, 7 – 19 (bản cập nhật diện tích, thay tầng 8 – 19) và tầng 20; layout 5 loại căn (Studio 33,1 m² – 3PN 99,7 m²); tiêu chuẩn bàn giao; tour 360° (mục Xem 4D / 360). Ưu đãi CSBH04 (kể cả mốc thanh toán sớm 25/10/2026) giữ nguyên vì các sàn còn căn đang ôm – bản 2.20.186 – 2.20.188 từng gỡ, bản 2.20.189 tự trả lại. Ảnh cũ tự gỡ khỏi trang khi ảnh mới tải xong.
 
 - **Thẻ tin nhà đất không còn bị cắt hình:** khung ảnh thẻ tin đổi sang 3:2 đúng bằng ảnh thẻ web tạo ra (trước đây ảnh 3:2 bị đặt vào khung 4:3 nên mất hai bên); ảnh thẻ tự vẽ của 12 biệt thự biển và 8 khách sạn vẽ lại khổ 3:2, chừa góc trái trên cho nhãn "Bán" – tin đã nhập tự đổi ảnh khi bấm Nhập dữ liệu.
 

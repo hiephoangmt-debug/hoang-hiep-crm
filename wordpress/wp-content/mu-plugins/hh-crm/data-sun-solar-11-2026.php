@@ -6,7 +6,7 @@
  * - layout 5 loại căn (Studio, 1PN, 1PN+1, 2PN, 3PN);
  * - tiêu chuẩn bàn giao (bảng TCBG của chủ đầu tư);
  * - tour 360° (Kuula).
- * Ưu đãi thanh toán sớm hạn 25/10/2026 đã hết → bỏ khỏi trang (giữ các ưu đãi CSBH04 không ghi hạn).
+ * Ưu đãi CSBH04 giữ nguyên (sàn còn căn đang ôm theo chính sách này).
  * Chạy sau data-sun-solar-csbh04.php (30). Ô nào anh đã tự sửa thì không đè (fix_meta chỉ thay giá trị web nhập).
  */
 
@@ -96,20 +96,16 @@ add_filter(
 			// Tiêu chuẩn bàn giao (ô đang trống thì điền).
 			$p['meta']['hh_p_handover_std'] = 'Bàn giao hoàn thiện theo bảng tiêu chuẩn của chủ đầu tư: trần thạch cao, sơn Dulux/Jotun; phòng ngủ lát gỗ công nghiệp; rèm 2 lớp; tủ bếp, mặt đá, bếp và hút mùi Hafele/Teka; thiết bị vệ sinh Toto/Grohe, vách tắm kính cường lực (nếu có), bình nóng lạnh Ariston/Ferroli; điều hòa Daikin/Mitsubishi/Panasonic (âm trần phòng khách, treo tường phòng ngủ); cửa chính gỗ chống cháy, khóa thông minh; lô gia lát gạch chống trơn, lan can kính cường lực (hoặc tương đương).';
 
-			// Ưu đãi thanh toán sớm hạn 25/10/2026 đã hết: bỏ dòng hết hạn, giữ ưu đãi không ghi hạn của CSBH04.
-			$m = $p['meta'];
-			$fix( 'hh_p_offer_title', 'Quà tặng an cư 5% + không vay thêm 5%, nhận căn sử dụng khi thanh toán 70%', array( $m['hh_p_offer_title'] ?? '', 'Chiết khấu tổng 20% khi thanh toán sớm 95% trước 25/10/2026', 'Chiết khấu tổng khoảng 18,8% khi thanh toán sớm 95% trước 25/10/2026' ) );
-			$fix( 'hh_p_offer_deadline', '', array( '25/10/2026' ) );
-			$fix(
-				'hh_p_offer_stats',
-				"~9,75% | Quà tặng an cư 5% + không vay 5% (CSBH04, trừ nối tiếp)\n70% | Vay tối đa, hỗ trợ lãi suất đến 30 tháng\n28/04/2027 | Dự kiến nhận căn sử dụng (Sun Early Key)\n3 năm | Miễn phí dịch vụ quản lý căn hộ",
-				array_merge( array( $m['hh_p_offer_stats'] ?? '' ), (array) ( $p['fix_meta']['hh_p_offer_stats'] ?? array() ) )
-			);
-			$fix(
-				'hh_p_policy',
-				implode( "\n", array_map( static fn( $l ) => 0 === strpos( $l, 'Thanh toán sớm 95%' ) ? 'Thanh toán sớm: mức chiết khấu theo phiếu tính giá hiện hành của chủ đầu tư – liên hệ để nhận phiếu tính giá căn cụ thể' : $l, explode( "\n", (string) ( $m['hh_p_policy'] ?? '' ) ) ) ),
-				array( $m['hh_p_policy'] ?? '' )
-			);
+			// Ưu đãi CSBH04 (kể cả mốc thanh toán sớm 25/10/2026) GIỮ NGUYÊN – các sàn còn căn đang ôm theo chính sách này (anh Hiệp, 06/11/2026).
+			// Bản 2.20.186 – 2.20.188 từng thay bằng chữ "đã hết hạn" → trả lại nguyên bản nếu ô vẫn là chữ web đã thay.
+			$m      = $p['meta'];
+			$early  = static fn( $l ) => 0 === strpos( $l, 'Thanh toán sớm 95%' );
+			$swap   = static fn( $text, $repl ) => implode( "\n", array_map( static fn( $l ) => $early( $l ) ? $repl : $l, explode( "\n", (string) $text ) ) );
+			$fix( 'hh_p_offer_title', (string) ( $m['hh_p_offer_title'] ?? '' ), array( 'Quà tặng an cư 5% + không vay thêm 5%, nhận căn sử dụng khi thanh toán 70%' ) );
+			$fix( 'hh_p_offer_stats', (string) ( $m['hh_p_offer_stats'] ?? '' ), array( "~9,75% | Quà tặng an cư 5% + không vay 5% (CSBH04, trừ nối tiếp)\n70% | Vay tối đa, hỗ trợ lãi suất đến 30 tháng\n28/04/2027 | Dự kiến nhận căn sử dụng (Sun Early Key)\n3 năm | Miễn phí dịch vụ quản lý căn hộ", "10% | Quà tặng an cư 5% + không vay 5% (CSBH04)\n70% | Vay tối đa, hỗ trợ lãi suất đến 30 tháng\n28/04/2027 | Dự kiến nhận căn sử dụng (Sun Early Key)\n3 năm | Miễn phí dịch vụ quản lý căn hộ" ) );
+			$fix( 'hh_p_policy', (string) ( $m['hh_p_policy'] ?? '' ), array( $swap( $m['hh_p_policy'] ?? '', 'Thanh toán sớm: mức chiết khấu theo phiếu tính giá hiện hành của chủ đầu tư – liên hệ để nhận phiếu tính giá căn cụ thể' ) ) );
+			$fix( 'hh_p_discount_table', (string) ( $m['hh_p_discount_table'] ?? '' ), array( $swap( $m['hh_p_discount_table'] ?? '', 'Thanh toán sớm | Theo phiếu tính giá hiện hành | Liên hệ | Quà tặng an cư 5% + không vay 5% + chiết khấu thanh toán sớm theo phiếu tính giá' ), $swap( $m['hh_p_discount_table'] ?? '', 'Thanh toán sớm | Theo phiếu tính giá hiện hành | Liên hệ | Quà tặng an cư 5% + không vay 5% + chiết khấu thanh toán sớm (mốc trước 25/10/2026 đã hết hạn)' ) ) );
+			// Hạn 25/10/2026: ô đang trống (bản trước xoá) thì lần nhập này tự điền lại; đồng hồ đếm ngược quá hạn tự ẩn.
 			// Bảng giá: bỏ mã căn, gộp cùng loại căn + diện tích thành khoảng giá; xếp theo loại căn, diện tích.
 			$order  = array( 'Studio' => 0, '1PN' => 1, '1PN+' => 2, '2PN' => 3, '2PN+' => 4, '3PN' => 5 );
 			$num    = static fn( $v ) => (float) str_replace( ',', '.', preg_replace( '/[^0-9,]/', '', (string) $v ) );
@@ -135,11 +131,6 @@ add_filter(
 				$lines[] = "$type | $area | " . ( $lo === $hi ? $ty( $lo ) : $ty( $lo ) . ' – ' . $ty( $hi ) ) . ' tỷ | ' . $note;
 			}
 			$fix( 'hh_p_price_table', implode( "\n", $lines ), array( $m['hh_p_price_table'] ?? '' ) );
-			$fix(
-				'hh_p_discount_table',
-				implode( "\n", array_map( static fn( $l ) => 0 === strpos( $l, 'Thanh toán sớm 95%' ) ? 'Thanh toán sớm | Theo phiếu tính giá hiện hành | Liên hệ | Quà tặng an cư 5% + không vay 5% + chiết khấu thanh toán sớm theo phiếu tính giá' : $l, explode( "\n", (string) ( $m['hh_p_discount_table'] ?? '' ) ) ) ),
-				array( $m['hh_p_discount_table'] ?? '' )
-			);
 		}
 		unset( $p );
 		return $projects;
