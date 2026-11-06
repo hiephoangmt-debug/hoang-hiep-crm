@@ -140,6 +140,10 @@ def tail(with_tools):
     t = re.sub(r'<script src="https://cdn\.jsdelivr\.net/gh/hiephoangmt-debug/hoang-hiep-crm@[0-9a-f]{40}/projects/sun-saphia/chon-can/chon-can-embed\.js" defer></script>\n?', '', t)
     t = t.replace("c=document.getElementById('sscc');", "c=document.getElementById('sscc')||document.getElementById('chon-can');")
     t = re.sub(r'hoang-hiep-crm@[0-9a-f]{40}/projects/sun-saphia/4d/sun-saphia-4d-embed\.js', 'hoang-hiep-crm@' + D4_SHA + '/projects/sun-saphia/4d/web/sun-saphia-4d-embed.js', t)
+    # mô hình 4D: tải từ jsDelivr, lỗi thì tải dự phòng từ githack (bản mới đôi khi jsDelivr chưa kịp có)
+    t = re.sub(r'<script src="(https://cdn\.jsdelivr\.net/gh/hiephoangmt-debug/hoang-hiep-crm@([0-9a-f]{40})/projects/sun-saphia/4d/web/sun-saphia-4d-embed\.js)" defer></script>',
+               lambda m: ('<script>(function(){function ld(u,f){var s=document.createElement("script");s.src=u;s.async=false;if(f)s.onerror=f;document.head.appendChild(s)}'
+                          'ld("%s",function(){ld("https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/%s/projects/sun-saphia/4d/web/sun-saphia-4d-embed.js")})})();</script>') % (m.group(1), m.group(2)), t)
     if not with_tools:
         x = t.index('<!-- 4D + CHỌN CĂN 3D -->'); y = t.index('<!-- /4D -->') + len('<!-- /4D -->')
         t = t[:x] + t[y:]
