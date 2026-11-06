@@ -1026,8 +1026,21 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 			$v = $f['Vốn tự có'] ?? ( $f['Vay'] ?? '' );
 			return $ack . ( $v ? $lc( 'Vốn tự có tham khảo – ' ) . mb_substr( $v, 0, 240 ) . '.' : $lc( 'Em tính được vốn tự có và lịch thanh toán theo đúng căn anh/chị chọn.' ) ) . ( $ask ?: ' Anh/chị dự kiến chuẩn bị khoảng bao nhiêu vốn ban đầu ạ?' );
 		}
-		if ( $has( 'o dau', 'vi tri', 'dia chi', 'duong' ) && isset( $f['Vị trí'] ) ) {
-			return $ack . $title . ' nằm tại ' . $f['Vị trí'] . '.' . ( $ask ?: ' Anh/chị muốn em gửi bản đồ và ảnh thực tế không ạ?' );
+		if ( preg_match( '/o dau|vi tri|dia chi|\\bduong\\b|cho nao|cho nay|nam dau|nam o|khu nao|gan dau|gan gi|phuong nao|quan nao|o khu|cach (bien|song|cau|trung tam)/', $t ) && isset( $f['Vị trí'] ) ) {
+			$conn = array_slice( hh_lines( 'hh_p_connections', $page ), 0, 3 );
+			return $ack . $title . ' nằm tại ' . rtrim( $f['Vị trí'], '. ' ) . '.' . ( $conn ? ' Kết nối: ' . implode( '; ', array_map( static fn( $r ) => str_replace( ' | ', ' – ', $r ), $conn ) ) . '.' : '' ) . ( $ask ?: ' Anh/chị muốn em gửi bản đồ và ảnh thực tế không ạ?' );
+		}
+		if ( preg_match( '/tien ich|ho boi|gym|spa|cong vien|truong hoc|kids/', $t ) && isset( $f['Tiện ích'] ) ) {
+			return $ack . $lc( 'Tiện ích ' ) . $title . ': ' . mb_substr( $f['Tiện ích'], 0, 260 ) . '.' . ( $ask ?: ' Anh/chị muốn em gửi ảnh tiện ích không ạ?' );
+		}
+		if ( preg_match( '/ban giao|khi nao (xong|nhan|o)|nhan nha|nhan can|bao gio (xong|nhan|o)/', $t ) && isset( $f['Bàn giao'] ) ) {
+			return $ack . $lc( 'Bàn giao ' ) . $title . ': ' . mb_substr( $f['Bàn giao'], 0, 240 ) . '.' . ( $ask ?: ' Anh/chị dự định nhận nhà để ở hay cho thuê ạ?' );
+		}
+		if ( preg_match( '/chu dau tu|cua ai|ai lam|ai xay|tap doan/', $t ) && isset( $f['Chủ đầu tư'] ) ) {
+			return $ack . $lc( 'Chủ đầu tư ' ) . $title . ' là ' . $f['Chủ đầu tư'] . '.' . ( $ask ?: ' Anh/chị muốn em gửi thêm hồ sơ pháp lý dự án không ạ?' );
+		}
+		if ( preg_match( '/(du an|cai) (nay|nay la|do) (la gi|the nao|ra sao|sao)|gioi thieu|tong quan|thong tin du an|chua hieu|la du an gi|co gi (hay|dac biet|noi bat)|diem noi bat/', $t ) ) {
+			return $ack . $lc( hh_chat_project_brief( $page ) ) . ( $ask ?: ' Anh/chị muốn hỏi thêm về giá, mặt bằng hay vị trí ạ?' );
 		}
 		if ( $has( 'phap ly', 'so hong', 'so do', 'lau dai' ) && isset( $f['Pháp lý'] ) ) {
 			return $ack . $lc( 'Pháp lý: ' ) . $f['Pháp lý'] . '.' . $ask;
@@ -1111,7 +1124,7 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		}
 	}
 	// Câu chen ngang không liên quan nhà đất (ngắn, không có từ khoá) → đáp vui, không hỏi máy móc.
-	if ( ! $need && ! $budget && mb_strlen( $t ) <= 60 && ! preg_match( '/\b(can ho|can|nha (o|pho|dat|rieng|mat tien)|mua nha|ban nha|thue|dat|lo|du an|gia|mua|ban|phong ngu|pn|tang|so (do|hong)|vay|von|khu|quan|phuong|duong|bien|song|biet thu|villa|shophouse|chung cu|studio|ty|trieu)\b/', $t ) ) {
+	if ( ! $title && ! $need && ! $budget && mb_strlen( $t ) <= 60 && ! preg_match( '/\b(can ho|can|nha (o|pho|dat|rieng|mat tien)|mua nha|ban nha|thue|dat|lo|du an|gia|mua|ban|phong ngu|pn|tang|so (do|hong)|vay|von|khu|quan|phuong|duong|bien|song|biet thu|villa|shophouse|chung cu|studio|ty|trieu)\b/', $t ) ) {
 		return hh_chat_smalltalk( $t, $name, $prev );
 	}
 	// Không rõ ý: không lặp lại câu trước.
@@ -1122,6 +1135,13 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 				"Dạ câu này nói qua điện thoại 2 phút là rõ hơn em gõ 10 tin đó anh/chị 😊 Anh/chị để lại số, $name gọi lại liền, hoặc anh/chị gọi/Zalo $phone ạ.",
 			)
 		);
+	}
+	// Đang ở trang dự án mà chưa bắt được ý: tóm tắt dự án (một lần) rồi hỏi khách muốn biết phần nào.
+	if ( $title && $page && 'du-an' === get_post_type( $page ) ) {
+		$brief = hh_chat_project_brief( $page );
+		if ( false === mb_strpos( $said, mb_substr( $brief, 0, 50 ) ) ) {
+			return 'Dạ em tóm tắt nhanh: ' . $lc( $brief ) . ' Anh/chị muốn biết thêm giá, mặt bằng, vị trí hay tiến độ ạ?';
+		}
 	}
 	return $title
 		? $pick(
@@ -1669,5 +1689,26 @@ function hh_chat_progress_text( $id, $name ) {
 		$txt .= ' Mốc bàn giao: ' . mb_substr( $hand, 0, 200 ) . '.';
 	}
 	$txt .= $pics ? ' Trên trang dự án có ' . $pics . ' ảnh công trường thực tế; ' . $name . ' cập nhật ảnh mới theo tuần.' : ' ' . $name . ' có ảnh công trường cập nhật, gửi anh/chị được ngay.';
+	return $txt;
+}
+
+/** Tóm tắt 1–2 câu về dự án: mô tả ngắn + loại căn, giá tham khảo, mốc bàn giao (chỉ dữ liệu có trên web). */
+function hh_chat_project_brief( $id ) {
+	$title = hh_chat_title( $id );
+	$desc  = trim( wp_strip_all_tags( (string) get_post_field( 'post_excerpt', $id ) ) );
+	$desc  = '' !== $desc ? $desc : trim( wp_strip_all_tags( (string) get_post_meta( $id, 'hh_p_address', true ) ) );
+	$area  = trim( (string) get_post_meta( $id, 'hh_p_unit_area', true ) );
+	$price = function_exists( 'hh_project_price' ) ? hh_project_price( $id ) : '';
+	$hand  = trim( wp_strip_all_tags( (string) get_post_meta( $id, 'hh_p_handover', true ) ) );
+	$txt   = $title . ': ' . rtrim( mb_substr( $desc, 0, 260 ), '. ' ) . '.';
+	if ( $area ) {
+		$txt .= ' Sản phẩm: ' . rtrim( mb_substr( $area, 0, 120 ), '. ' ) . '.';
+	}
+	if ( $price && false === strpos( $price, 'Liên hệ' ) ) {
+		$txt .= ' Giá ' . mb_strtolower( $price ) . ' (tham khảo).';
+	}
+	if ( $hand ) {
+		$txt .= ' Bàn giao: ' . rtrim( mb_substr( preg_replace( '/;.*/u', '', $hand ), 0, 120 ), '. ' ) . '.';
+	}
 	return $txt;
 }
