@@ -393,6 +393,8 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
               $lb = str_ireplace( $n, '', $lb );
           }
           $lb  = preg_replace( array( '/\b(?:tòa|toà|tháp|block|khối)\s+[A-Za-z]{0,3}\d{0,2}[A-Za-z]?\b/iu', '/^[A-Z]{1,2}\d{1,2}\s*[·–—-]\s*/u', '/^\s*mặt bằng\s*/iu', '/\s*\(.*?\)\s*/u' ), ' ', $lb );
+          $lb  = preg_replace( '/\s*,\s*(?=[^\d\s])\D.*$/u', '', $lb ); // Bỏ phần mô tả sau số tầng: "Tầng 3, mặt sông Hàn" → "Tầng 3".
+          $lb  = preg_replace( '/\s+,/u', ',', $lb );
           $lb  = trim( preg_replace( '/\s{2,}/u', ' ', $lb ), " \t·–—-,.:" );
           $lb  = '' === $lb ? 'Mặt bằng ' . ( $i + 1 ) : mb_strtoupper( mb_substr( $lb, 0, 1 ) ) . mb_substr( $lb, 1 );
           $n   = mb_strtolower( $lb );

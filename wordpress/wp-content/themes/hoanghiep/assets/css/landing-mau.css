@@ -253,3 +253,6 @@ body.admin-bar header.top{top:32px}
 @media (max-width:980px){.kids--3,.kids--4{grid-template-columns:1fr 1fr}.kids--2{grid-template-columns:1fr}}
 @media (max-width:600px){.kids--3,.kids--4{grid-template-columns:1fr}.kids--2 .kid{grid-template-columns:40% 1fr}.kids--2 .kid b{font-size:18px}}
 @media (max-width:600px){.units{grid-template-columns:1fr!important}}
+/* Mặt bằng: ảnh dọc không cao quá màn hình – canh giữa, bấm để xem lớn */
+.plan{display:flex;justify-content:center;align-items:center;background:#fff}
+.plan img{width:auto!important;max-width:100%;height:auto;max-height:min(82vh,960px);object-fit:contain}
