@@ -12,7 +12,10 @@ add_filter(
 	static function ( $projects ) {
 		$d   = static fn( $id, $alt, $where, $title = '' ) => "https://drive.google.com/thumbnail?id=$id&sz=w2400 | $alt | $where" . ( $title ? " | $title" : '' );
 		$img = array(
-			$d( '1DymNjJsXNGR7rs92yUJ13fOa98NR2FYs', 'Phối cảnh The Poet Residence – tháp căn hộ 25 tầng trên đường Hồ Xuân Hương, gần biển Mỹ Khê', 'đại diện' ),
+			'plugin:img/the-poet/the-poet-toan-canh-bien-my-khe.jpg | The Poet Residence nhìn ra biển Mỹ Khê và bán đảo Sơn Trà (phối cảnh) | đại diện',
+			'plugin:img/the-poet/the-poet-toan-canh-dem-song-han.jpg | The Poet Residence về đêm nhìn về sông Hàn, cầu Rồng và pháo hoa (phối cảnh) | thư viện',
+			'plugin:img/the-poet/the-poet-tang-mai-phao-hoa-song-han.jpg | Tầng mái The Poet Residence – bar, vườn, ngắm pháo hoa sông Hàn | tiện ích | Tầng mái ngắm pháo hoa',
+			$d( '1DymNjJsXNGR7rs92yUJ13fOa98NR2FYs', 'Phối cảnh The Poet Residence – tháp căn hộ 25 tầng trên đường Hồ Xuân Hương, gần biển Mỹ Khê', 'thư viện' ),
 			$d( '1xtKqF0ZJt8K9Fhys_YX06X8JP5rqrneM', 'The Poet Residence về đêm – tháp căn hộ 25 tầng, Ngũ Hành Sơn, Đà Nẵng', 'thư viện' ),
 			$d( '15_IrbCN6_KqNoDXKmpqe_w43Kd0Yb1cZ', 'Phối cảnh The Poet Residence nhìn từ góc đường', 'thư viện' ),
 			$d( '1ZR3rP2JdLDbGPuosUkR1rqCE1pTuwnlX', 'The Poet Residence lên đèn, mặt đứng với khung viền sáng', 'thư viện' ),

@@ -26,7 +26,7 @@ section{padding:72px 0}
 .top{position:sticky;top:0;z-index:50;background:rgba(14,28,51,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff}
 .top .container{display:flex;align-items:center;gap:18px;height:64px}
 .brand{display:flex;flex-direction:column;line-height:1.1;text-decoration:none}
-.brand b{font-family:'Playfair Display',serif;font-size:20px;letter-spacing:.06em}
+.brand b{font-family:'Playfair Display',serif;font-size:20px;letter-spacing:.06em;white-space:nowrap}
 .brand small{font-size:11px;color:var(--gold2);letter-spacing:.14em;text-transform:uppercase}
 .nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
 .nav::-webkit-scrollbar{display:none}
@@ -35,7 +35,10 @@ section{padding:72px 0}
 .top .btn{padding:9px 16px;font-size:14px}
 /* Hero */
 .hero{position:relative;background:radial-gradient(1200px 600px at 75% 30%,#24406b 0%,var(--navy) 60%);color:#fff;padding:56px 0 64px;overflow:hidden}
-.hero .container{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero{min-height:min(92vh,760px);display:flex;align-items:center}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(14,28,51,.94) 0%,rgba(14,28,51,.72) 45%,rgba(14,28,51,.25) 100%),linear-gradient(0deg,rgba(14,28,51,.7),rgba(14,28,51,0) 40%)}
+.hero .container{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
 .hero h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(36px,5.4vw,64px);margin:.2em 0 .25em}
 .hero h1 em{color:var(--gold2);font-style:italic;font-weight:500}
 .hero p.sub{font-size:18px;opacity:.88;max-width:560px}
@@ -45,7 +48,7 @@ section{padding:72px 0}
 .chip b{display:block;font-size:20px;color:var(--gold2);font-family:'Playfair Display',serif}
 .chip span{font-size:12.5px;opacity:.82}
 .hero .acts{display:flex;gap:12px;flex-wrap:wrap}
-.hero-img{position:relative;border-radius:22px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.7);aspect-ratio:13/18;max-height:640px;justify-self:end;width:100%}
+.hero-img{position:relative;border-radius:22px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.7);aspect-ratio:16/10;justify-self:end;width:100%;border:1px solid rgba(255,255,255,.2)}
 .hero-img img{width:100%;height:100%;object-fit:cover}
 .hero-img figcaption{position:absolute;left:12px;bottom:12px;font-size:11px;background:rgba(0,0,0,.45);padding:4px 8px;border-radius:8px}
 /* Tổng quan */
@@ -64,6 +67,8 @@ section{padding:72px 0}
 .time b{font-family:'Playfair Display',serif;font-size:28px;color:var(--gold2)}
 .time b small{font-size:14px;font-family:'Be Vietnam Pro'}
 .time ul{margin:8px 0 0;padding-left:18px;font-size:14px;opacity:.9}
+.vband{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+.vband .card-img{aspect-ratio:16/9}
 .views{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
 .view{border-radius:var(--r);padding:18px;background:linear-gradient(135deg,rgba(185,141,79,.22),rgba(185,141,79,.05));border:1px solid rgba(216,182,124,.3)}
 .view b{color:var(--gold2)}
@@ -167,7 +172,7 @@ footer.foot{background:#0a1526;color:rgba(255,255,255,.7);font-size:13px;padding
 .rv.in{opacity:1;transform:none}
 @media (max-width:980px){
 .hero .container,.split,.cta .container{grid-template-columns:1fr}
-.hero-img{justify-self:stretch;max-height:520px;aspect-ratio:4/5}
+.hero-img{justify-self:stretch}
 .facts,.times,.pays,.brands,.loan{grid-template-columns:repeat(2,1fr)}
 .units,.grid3{grid-template-columns:repeat(2,1fr)}
 .gallery{grid-template-columns:repeat(2,1fr)}
@@ -176,7 +181,7 @@ footer.foot{background:#0a1526;color:rgba(255,255,255,.7);font-size:13px;padding
 @media (max-width:600px){
 section{padding:52px 0}
 .chips{grid-template-columns:repeat(2,1fr)}
-.units,.grid3,.views,.faq-cols,.list-ok{grid-template-columns:1fr}
+.units,.grid3,.views,.vband,.faq-cols,.list-ok{grid-template-columns:1fr}
 .facts,.brands,.loan{grid-template-columns:1fr 1fr}
 .pays,.times{grid-template-columns:1fr}
 .tbl th:nth-child(3),.tbl td:nth-child(3){display:none}
@@ -199,6 +204,7 @@ section{padding:52px 0}
 <main id="top">
 <!-- HERO -->
 <section class="hero" aria-labelledby="h1">
+  <img class="hero-bg" src="{{HH_CRM_URL}}img/the-poet/the-poet-toan-canh-bien-my-khe.jpg" width="2000" height="1125" alt="" decoding="async">
   <div class="container">
     <div>
       <span class="badge-ok">✔ 263 căn đủ điều kiện bán · Sở Xây dựng 24/6/2026</span>
@@ -216,8 +222,8 @@ section{padding:52px 0}
       </div>
     </div>
     <figure class="hero-img" style="margin:0">
-      <img src="{{HH_CRM_URL}}img/the-poet/the-poet-phoi-canh-dem.jpg" width="1040" height="1600" alt="Phối cảnh The Poet Residence về đêm – tháp căn hộ 25 tầng trên đường Hồ Xuân Hương, Đà Nẵng" fetchpriority="high" decoding="async">
-      <figcaption>Phối cảnh chủ đầu tư</figcaption>
+      <img src="{{HH_CRM_URL}}img/the-poet/the-poet-tang-mai-phao-hoa-song-han.jpg" width="2000" height="1125" alt="Tầng mái The Poet Residence ngắm pháo hoa sông Hàn" fetchpriority="high" decoding="async">
+      <figcaption>Tầng mái ngắm pháo hoa sông Hàn · phối cảnh chủ đầu tư</figcaption>
     </figure>
   </div>
 </section>
@@ -258,6 +264,10 @@ section{padding:52px 0}
       <div class="time"><b>15 <small>phút</small></b><ul><li>Sân bay quốc tế Đà Nẵng</li><li>Trung tâm hành chính TP</li><li>BV Gia Đình, BV Hoàn Mỹ</li></ul></div>
       <div class="time"><b>20 – 30 <small>phút</small></b><ul><li>Chùa Linh Ứng Sơn Trà</li><li>Phố cổ Hội An</li></ul></div>
     </div>
+    <div class="vband rv">
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-toan-canh-bien-my-khe.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-toan-canh-bien-my-khe.jpg" alt="The Poet Residence nhìn ra biển Mỹ Khê và bán đảo Sơn Trà" loading="lazy" decoding="async"><span>Hướng Đông Bắc – biển Mỹ Khê, Sơn Trà</span></a>
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-toan-canh-dem-song-han.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-toan-canh-dem-song-han.jpg" alt="The Poet Residence về đêm nhìn về sông Hàn, cầu Rồng, pháo hoa" loading="lazy" decoding="async"><span>Hướng Tây Nam – sông Hàn, pháo hoa</span></a>
+    </div>
     <div class="views rv">
       <div class="view"><b>Hướng Đông Bắc – view biển Mỹ Khê</b><br>Căn 1PN+, 2PN và 3PN góc đón gió biển, nắng sớm.</div>
       <div class="view"><b>Hướng Tây Nam – view sông Hàn, pháo hoa</b><br>Căn 2PN góc nhìn về trung tâm, sông Hàn và lễ hội pháo hoa.</div>
@@ -296,6 +306,7 @@ section{padding:52px 0}
     </div>
     <div class="floor" id="tm">
       <p>Tầng mái ngoài trời – nơi ngắm pháo hoa sông Hàn:</p>
+      <a class="card-img" style="aspect-ratio:16/9;margin-bottom:16px" href="{{HH_CRM_URL}}img/the-poet/the-poet-tang-mai-phao-hoa-song-han.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-tang-mai-phao-hoa-song-han.jpg" alt="Tầng mái The Poet Residence – bar, vườn, ngắm pháo hoa sông Hàn" loading="lazy" decoding="async"><span>Tầng mái – ngắm pháo hoa</span></a>
       <ul class="list-ok">
         <li>Vườn trà (Thi)</li><li>Coffee và bar coffee</li><li>Quảng trường ngắm pháo hoa</li><li>Vườn "Cầm"</li><li>Khu vui chơi trẻ em</li><li>Khu VIP riêng tư</li>
       </ul>
@@ -414,6 +425,7 @@ section{padding:52px 0}
     <span class="eyebrow">Thư viện ảnh</span>
     <h2 class="title" id="h-tv">The Poet <em>ngày và đêm</em></h2>
     <div class="gallery">
+      <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-toan-canh-dem-song-han.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-toan-canh-dem-song-han.jpg" alt="Toàn cảnh The Poet Residence về đêm, sông Hàn và pháo hoa" loading="lazy" decoding="async"></a>
       <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-phoi-canh-ngay.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-phoi-canh-ngay.jpg" alt="Phối cảnh The Poet Residence ban ngày" loading="lazy" decoding="async"></a>
       <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-phoi-canh-goc-duong.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-phoi-canh-goc-duong.jpg" alt="The Poet Residence nhìn từ góc đường" loading="lazy" decoding="async"></a>
       <a class="card-img" href="{{HH_CRM_URL}}img/the-poet/the-poet-phoi-canh-goc-duong-dem.jpg"><img src="{{HH_CRM_URL}}img/the-poet/the-poet-phoi-canh-goc-duong-dem.jpg" alt="The Poet Residence lên đèn" loading="lazy" decoding="async"></a>
@@ -452,7 +464,7 @@ section{padding:52px 0}
 
 <!-- ĐĂNG KÝ -->
 <section class="cta" id="dang-ky" aria-labelledby="h-cta">
-  <img class="bg" src="{{HH_CRM_URL}}img/the-poet/the-poet-khoi-de-dem.jpg" alt="" loading="lazy" decoding="async">
+  <img class="bg" src="{{HH_CRM_URL}}img/the-poet/the-poet-toan-canh-dem-song-han.jpg" alt="" loading="lazy" decoding="async">
   <div class="container">
     <div class="rv">
       <span class="eyebrow">Nhận thông tin chi tiết</span>

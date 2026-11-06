@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.67** + plugin Hoàng Hiệp CRM **2.20.174**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.68** + plugin Hoàng Hiệp CRM **2.20.175**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.175 · giao diện 2.15.68 (06/11/2026)
+
+- **The Poet – 3 phối cảnh mới (anh Hiệp gửi):** toàn cảnh nhìn biển Mỹ Khê – Sơn Trà làm nền đầu trang landing và ảnh đại diện dự án; toàn cảnh đêm nhìn sông Hàn – pháo hoa và tầng mái ngắm pháo hoa ở đầu trang, mục Vị trí (2 hướng view), tab Tầng mái, thư viện, khung đăng ký.
 
 ## Có gì mới – plugin 2.20.174 (06/11/2026)
 
