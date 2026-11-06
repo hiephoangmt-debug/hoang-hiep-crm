@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.83** + plugin Hoàng Hiệp CRM **2.20.190**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.84** + plugin Hoàng Hiệp CRM **2.20.191**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -45,7 +45,9 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 - **Landing The Poet:** ảnh chính (toàn cảnh biển Mỹ Khê – Sơn Trà) hiện trọn ở đầu trang, không lớp phủ tối, không chữ đè; tiêu đề, thông tin nhanh và nút đặt ngay bên dưới ảnh.
 
-## Có gì mới – plugin 2.20.190 · giao diện 2.15.83 (06/11/2026)
+## Có gì mới – plugin 2.20.191 · giao diện 2.15.84 (06/11/2026)
+
+- **Banner trang chủ – Sun Saphia lên slide đầu với poster anh gửi:** máy tính hiện poster bên phải, nền là phối cảnh hoàng hôn; điện thoại dùng poster làm nền, chữ và nút đặt phía dưới. Ô mới trong dự án: "Poster dọc cho banner trang chủ" – dự án HOT nào có poster sẽ lên slide đầu.
 
 - **Thứ tự dự án:** ở danh sách dự án, trang chủ, trang loại dự án, các trang tổng hợp – dự án Đang mở bán lên đầu, rồi Sắp mở bán, Đang bàn giao; dự án Đã bàn giao hoặc đánh dấu "Chủ đầu tư đã bán hết" xuống cuối. Trong cùng nhóm giữ thứ tự cũ (HOT, mới nhất). Muốn đẩy dự án nào xuống: sửa dự án → Tình trạng = Đã bàn giao, hoặc tích "Chủ đầu tư đã bán hết".
 

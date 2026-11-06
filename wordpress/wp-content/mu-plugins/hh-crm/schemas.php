@@ -32,6 +32,7 @@ function hh_project_schema() {
 					'da-ban-giao'   => 'Đã bàn giao',
 				) ),
 				'hh_p_featured'     => array( 'type' => 'checkbox', 'label' => 'Dự án HOT (lên banner, trang chủ và mục "Dự án hot mới")', 'half' => true ),
+				'hh_p_home_poster'  => array( 'type' => 'text', 'label' => 'Poster dọc cho banner trang chủ (tuỳ chọn)', 'placeholder' => 'Link ảnh, ID ảnh hoặc plugin:img/…', 'half' => true, 'help' => 'Dự án HOT có poster lên slide đầu trang chủ: máy tính hiện poster bên phải, điện thoại dùng poster làm nền.' ),
 				'hh_p_sold_out'     => array( 'type' => 'checkbox', 'label' => 'Chủ đầu tư đã bán hết (trang dự án chuyển sang mua bán, chuyển nhượng, cho thuê)', 'half' => true, 'help' => 'Dự án "Đã bàn giao" cũng tự hiện mục chuyển nhượng & cho thuê lên đầu trang.' ),
 				'hh_p_parent'       => array( 'type' => 'post', 'label' => 'Thuộc tổ hợp / là phân khu của dự án', 'post_type' => 'du-an', 'half' => true, 'help' => 'VD: FPT Plaza 4 thuộc FPT City Đà Nẵng; The Sonata là phân khu của Sun Symphony Residence.' ),
 				'hh_p_name'         => array( 'type' => 'text', 'label' => 'Tên thương mại', 'placeholder' => 'VD: Aurelia Riverside', 'half' => true ),

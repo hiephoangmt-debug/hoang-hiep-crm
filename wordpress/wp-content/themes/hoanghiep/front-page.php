@@ -12,6 +12,21 @@ $featured_projects = new WP_Query(
 	)
 );
 $hero_image = hoanghiep_opt( 'hh_hero_image' );
+// Dự án có poster banner (VD Sun Saphia) lên slide đầu; còn lại giữ thứ tự.
+$hh_poster = static function ( $id ) {
+	$v = trim( (string) hh_meta( 'hh_p_home_poster', $id ) );
+	if ( '' === $v ) {
+		return '';
+	}
+	if ( 0 === strpos( $v, 'plugin:' ) ) {
+		return defined( 'HH_CRM_URL' ) ? HH_CRM_URL . ltrim( substr( $v, 7 ), '/' ) : '';
+	}
+	return ctype_digit( $v ) ? (string) wp_get_attachment_image_url( (int) $v, 'full' ) : $v;
+};
+if ( $featured_projects->posts ) {
+	$order = array_flip( wp_list_pluck( $featured_projects->posts, 'ID' ) );
+	usort( $featured_projects->posts, static fn( $a, $b ) => array( '' === $hh_poster( $a->ID ), $order[ $a->ID ] ) <=> array( '' === $hh_poster( $b->ID ), $order[ $b->ID ] ) );
+}
 ?>
 <section class="hero" data-slider>
 	<?php if ( $featured_projects->have_posts() ) : ?>
@@ -22,9 +37,15 @@ $hero_image = hoanghiep_opt( 'hh_hero_image' );
 			$featured_projects->the_post();
 			$status = hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_status' ) );
 			?>
-			<div class="hero__slide<?php echo 0 === $i ? ' is-active' : ''; ?>">
-				<?php the_post_thumbnail( 'hh-hero', array( 'class' => 'hero__bg', 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'low', 'alt' => '' ) ); ?>
-				<div class="container hero__content">
+			<?php $poster = $hh_poster( get_the_ID() ); ?>
+			<div class="hero__slide<?php echo 0 === $i ? ' is-active' : ''; ?><?php echo $poster ? ' hero__slide--poster' : ''; ?>">
+				<?php if ( $poster ) : ?>
+					<picture><source media="(max-width: 900px)" srcset="<?php echo esc_url( $poster ); ?>"><?php the_post_thumbnail( 'hh-hero', array( 'class' => 'hero__bg hero__bg--poster', 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'low', 'alt' => '' ) ); ?></picture>
+				<?php else : ?>
+					<?php the_post_thumbnail( 'hh-hero', array( 'class' => 'hero__bg', 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'low', 'alt' => '' ) ); ?>
+				<?php endif; ?>
+				<div class="container hero__content<?php echo $poster ? ' hero__content--poster' : ''; ?>">
+					<?php if ( $poster ) : ?><a class="hero__poster" href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( $poster ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" width="1100" height="1430" loading="<?php echo 0 === $i ? 'eager' : 'lazy'; ?>" decoding="async"></a><?php endif; ?>
 					<p class="eyebrow eyebrow--light">Dự án nổi bật<?php echo $status ? ' · ' . esc_html( $status ) : ''; ?></p>
 					<h2 class="hero__title"><?php the_title(); ?></h2>
 					<?php if ( hh_meta( 'hh_p_address' ) ) : ?>

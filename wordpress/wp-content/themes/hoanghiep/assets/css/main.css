@@ -1589,3 +1589,14 @@ body.admin-bar .site-header { top: var(--wpab); }
 body.admin-bar .subnav { top: calc(var(--wpab) + var(--header-h)); }
 body.admin-bar .sticky { top: calc(var(--wpab) + var(--header-h) + 64px); }
 html:has(body.admin-bar) { scroll-padding-top: calc(32px + var(--header-h) + 60px); }
+/* Banner trang chủ: dự án có poster dọc (VD Sun Saphia) – máy tính: poster bên phải; điện thoại: poster làm nền. */
+.hero__content--poster > :not(.hero__poster) { max-width: 600px; }
+.hero__poster { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); width: min(30vw, 360px, 48vh); border: 3px solid var(--gold); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 30px 60px rgba(0, 0, 0, .4); }
+.hero__poster img { display: block; width: 100%; height: auto; }
+@media (max-width: 900px) {
+	.hero__poster { display: none; }
+	.hero__slide--poster { align-items: flex-end; }
+	.hero__slide--poster::before { background: linear-gradient(180deg, rgba(10, 35, 66, 0) 0%, rgba(10, 35, 66, .05) 38%, rgba(10, 35, 66, .82) 62%, rgba(10, 35, 66, .96) 100%); }
+	.hero__bg--poster { object-position: center top; }
+	.hero__slide--poster .hero__meta { display: none; }
+}
