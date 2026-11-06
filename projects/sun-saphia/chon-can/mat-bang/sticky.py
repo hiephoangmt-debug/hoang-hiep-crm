@@ -1,13 +1,17 @@
-"""Bảng thông tin căn bám theo màn hình khi khách cuộn trang (không để lại màn xám trống).
-Trang mẹ gửi vị trí khung nhìn vào iframe; iframe đặt lại `top` của #rc cho luôn nằm trong màn hình.
+"""Sửa lỗi bảng thông tin căn trượt mất, để lại màn xám:
+- Khung chọn căn (iframe) không được tự cuộn bên trong: lăn chuột / vuốt luôn cuộn cả trang,
+  nên bảng căn dài (2PN có ảnh nội thất) không bị kéo lên và khung không bị co lại.
+- Bảng căn ngắn hơn màn hình thì bám ngay dưới thanh menu khi khách cuộn.
+- Khi bấm căn, trang cuộn tới bảng chừa đúng chiều cao thanh menu.
 Dùng: python3 sticky.py  (sửa tại chỗ chon-can-embed.js; build.py cũng gọi patch())."""
 import json, pathlib
 
-INNER = r'''<script>(function(){
+INNER = r'''<style id="ssNoScroll">html,body{overflow:hidden!important;overscroll-behavior:none}</style><script>(function(){
+  addEventListener('scroll',function(){ if(window.scrollY||window.scrollX) window.scrollTo(0,0); },{passive:true});
   var VP=null;
   function stick(){ if(!VP||!document.body.classList.contains('picked')) return;
     var rc=document.getElementById('rc'), w=document.querySelector('.wrap'); if(!rc||!w) return;
-    var wt=w.getBoundingClientRect().top+(window.scrollY||0), y=VP.y-wt, h=rc.offsetHeight, cur=parseFloat(rc.style.top)||0;
+    var wt=w.getBoundingClientRect().top, y=VP.y-wt, h=rc.offsetHeight, cur=parseFloat(rc.style.top)||0;
     var hi=y+VP.hd+8, lo=y+VP.vh-h-8, t;
     if(h<=VP.vh-VP.hd-16) t=hi; else t=Math.min(Math.max(cur,lo),hi);
     var lim=w.offsetHeight-h-8; if(t>lim) t=lim; if(t<8) t=8;
@@ -23,18 +27,29 @@ PARENT_NEW = ("fit(); window.addEventListener('resize', fit);\n"
               "    var vpq=0; function vps(){ if(vpq) return; vpq=1; requestAnimationFrame(function(){ vpq=0; vp(); }); }\n"
               "    window.addEventListener('scroll',vps,{passive:true}); window.addEventListener('resize',vps); setInterval(vp,1000);\n"
               "    window.addEventListener('message',function(e){ var d=e.data; if(d&&d.sscc==='pick'){ vp(); setTimeout(vp,150); setTimeout(vp,700); } });")
+SCROLL_OLD = "+d.y-70,behavior:'smooth'"
+SCROLL_NEW = "+d.y-((document.querySelector('header.top')||{}).offsetHeight||0)-12,behavior:'smooth'"
 
-def patch(out):
-    if 'ssccvp' in out:
-        return out
+def _doc(out):
     i = out.index('var DOC = ') + len('var DOC = ')
     j = out.index(';\n', i)
-    doc = json.loads(out[i:j].replace('<\\/', '</'))
-    k = doc.rindex('</html>') if '</html>' in doc else len(doc)
-    doc = doc[:k] + INNER + doc[k:]
+    return i, j, json.loads(out[i:j].replace('<\\/', '</'))
+
+def patch(out):
+    i, j, doc = _doc(out)
+    # bỏ bản vá cũ (nếu có) rồi chèn bản mới
+    k = doc.find('<script>(function(){\n  var VP=null;')
+    if k >= 0:
+        doc = doc[:k] + doc[doc.index('</script>', k) + 9:]
+    if 'ssNoScroll' not in doc:
+        k = doc.rindex('</html>') if '</html>' in doc else len(doc)
+        doc = doc[:k] + INNER + doc[k:]
     out = out[:i] + json.dumps(doc, ensure_ascii=False).replace('</', '<\\/') + out[j:]
-    assert out.count(PARENT_OLD) == 1
-    return out.replace(PARENT_OLD, PARENT_NEW)
+    if 'ssccvp:1' not in out.split('var DOC = ')[0] + out[out.index(';\n', out.index('var DOC = ')):]:
+        assert out.count(PARENT_OLD) == 1
+        out = out.replace(PARENT_OLD, PARENT_NEW)
+    out = out.replace(SCROLL_OLD, SCROLL_NEW)
+    return out
 
 if __name__ == '__main__':
     p = pathlib.Path(__file__).parent / 'chon-can-embed.js'
