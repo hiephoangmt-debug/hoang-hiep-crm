@@ -13,3 +13,7 @@
 | 06/11/2026 | Hoàng Hiệp | 08:30 | FPT Plaza 3 – căn có sổ (đăng lại, ảnh dọc mới thay bản 05/11 bị cắt chữ) | /mua-ban/?duan=fpt-plaza-3 |
 | 05/11/2026 | Sun | 17:30 | FourS F2 chính sách 17/10 – đăng lại 1 ảnh (bản 12:45 album bị cắt ảnh, nhờ anh xoá) | /chinh-sach-fours-tower-f2-17-10-2026-qua-noi-that-nha-xinh/ |
 | 06/11/2026 | Hoàng Hiệp | 11:30 | Quy hoạch chung đô thị Thăng Điền đến 2050 (QĐ 5047/QĐ-UBND) – 1 ảnh | /quy-hoach-chung-do-thi-thang-dien-den-2050/ |
+| 06/11/2026 | Hoàng Hiệp | 15:30 | Hoiana Beach Villas – 7 dòng biệt thự, 198 căn (1 ảnh) | /hoiana-beach-villas-7-dong-biet-thu-dien-tich-tien-ich/ |
+| 06/11/2026 | Sun | 11:30 | (phiên khác) Sun Saphia – hỏi đáp bàn giao, phí quản lý, cho thuê | /sun-saphia-residence-hoi-dap-ban-giao-phi-quan-ly-cho-thue/ |
+| 06/11/2026 | Sun | 16:00 | (phiên khác) Chính sách bán hàng Sun Hòa Xuân tháng 11/2026 | /chinh-sach-ban-hang-du-an-sun-group-da-nang-thang-11-2026/ |
+| 06/11/2026 | Sun | 19:30 | (phiên khác) Tổng hợp dự án Sun Group Đà Nẵng đang mở bán | /du-an-can-ho-sun-group-da-nang-2026/ |
