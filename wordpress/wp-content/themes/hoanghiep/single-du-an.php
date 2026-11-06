@@ -371,7 +371,15 @@ while ( have_posts() ) :
 				<?php $has_plan = hh_ids( 'hh_p_masterplan_img' ) || hh_meta( 'hh_p_design_desc' ) || hh_ids( 'hh_p_floorplans' ); ?>
 				<?php if ( hh_ids( 'hh_p_masterplan_img' ) ) : ?>
 					<h3 class="block__sub">Mặt bằng tổng thể <?php echo esc_html( $title ); ?></h3>
-					<?php hh_gallery( hh_ids( 'hh_p_masterplan_img' ), 'mat-bang-tong', 'gallery-single' ); ?>
+					<?php
+					// Ảnh đầu (sơ đồ chính) hiện lớn, bấm để phóng to; các ảnh còn lại (phối cảnh, ảnh trên cao) xếp ô nhỏ – đỡ cuộn dài trên điện thoại.
+					$mp_ids = array_values( hh_ids( 'hh_p_masterplan_img' ) );
+					hh_gallery( array_slice( $mp_ids, 0, 1 ), 'mat-bang-tong', 'gallery-single' );
+					?>
+					<p class="gallery-hint">Bấm vào ảnh để phóng to, xem rõ từng căn.</p>
+					<?php if ( count( $mp_ids ) > 1 ) : ?>
+						<?php hh_gallery( array_slice( $mp_ids, 1 ), 'mat-bang-tong', 'gallery-grid' ); ?>
+					<?php endif; ?>
 				<?php endif; ?>
 				<?php if ( hh_meta( 'hh_p_design_desc' ) ) : ?>
 					<p class="prose"><?php echo nl2br( esc_html( hh_meta( 'hh_p_design_desc' ) ) ); ?></p>

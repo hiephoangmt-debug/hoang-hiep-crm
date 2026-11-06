@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.63** + plugin Hoàng Hiệp CRM **2.20.166**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.64** + plugin Hoàng Hiệp CRM **2.20.166**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.64 (06/11/2026)
+
+- **Mục Mặt bằng gọn trên điện thoại:** sơ đồ chính hiện lớn, các ảnh còn lại (phối cảnh, ảnh trên cao) xếp ô nhỏ bên dưới; dòng nhắc "Bấm vào ảnh để phóng to".
+- **Xem ảnh phóng to:** chạm vào ảnh trong khung xem lớn để phóng 2,5 lần đúng chỗ chạm, kéo để xem từng mã căn; chạm lần nữa thu về.
 
 ## Có gì mới – plugin 2.20.166 (06/11/2026)
 

@@ -702,10 +702,12 @@
 		let group = [];
 		let idx = 0;
 		const render = () => {
+			box.classList.remove( 'is-zoom' );
 			img.src = group[ idx ].href;
 			count.textContent = ( idx + 1 ) + ' / ' + group.length;
 		};
 		const close = () => {
+			box.classList.remove( 'is-zoom' );
 			box.hidden = true;
 			document.body.style.overflow = '';
 		};
@@ -725,6 +727,19 @@
 		$( '.lightbox__prev', box ).addEventListener( 'click', () => { idx = ( idx - 1 + group.length ) % group.length; render(); } );
 		$( '.lightbox__next', box ).addEventListener( 'click', () => { idx = ( idx + 1 ) % group.length; render(); } );
 		box.addEventListener( 'click', ( e ) => { if ( e.target === box ) { close(); } } );
+		// Chạm vào ảnh: phóng to 2,5 lần để xem chi tiết (mã căn trên mặt bằng), kéo để di chuyển; chạm lần nữa thu về.
+		img.addEventListener( 'click', ( e ) => {
+			const r = img.getBoundingClientRect();
+			const fx = ( e.clientX - r.left ) / r.width;
+			const fy = ( e.clientY - r.top ) / r.height;
+			const on = box.classList.toggle( 'is-zoom' );
+			if ( on ) {
+				requestAnimationFrame( () => {
+					box.scrollLeft = fx * box.scrollWidth - box.clientWidth / 2;
+					box.scrollTop = fy * box.scrollHeight - box.clientHeight / 2;
+				} );
+			}
+		} );
 		document.addEventListener( 'keydown', ( e ) => {
 			if ( box.hidden ) {
 				return;
