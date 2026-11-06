@@ -95,7 +95,7 @@ text(642, 348, 'Bãi đỗ xe', 17)
 text(632, 766, 'Bãi đỗ xe', 17)
 text(642, 946, 'Bãi đỗ xe', 17)
 rect(578, 462, 690, 560, '#cfdcc6', 8)
-text(634, 511, 'Sân thể thao', 15)
+text(634, 511, 'Sân tennis', 15)
 
 # Lối vào từ đường Trường Sa (phía Tây)
 d.polygon([P(470, 628), P(505, 645), P(470, 662)], fill=GOLD)
@@ -105,7 +105,7 @@ d.text(P(462, 672), 'đường Trường Sa', font=f(16), fill=MUTED, anchor='rm
 # Trục trung tâm: khách sạn – sảnh, spa, nhà hàng, hồ bơi chính sát biển
 rect(770, 540, 860, 752, '#cbbfa8', 8)
 text(815, 628, 'Khách sạn', 17)
-text(815, 652, '& sảnh', 17)
+text(815, 652, '18 tầng', 17)
 rect(870, 598, 1100, 692, '#ddd5c5', 10)
 text(985, 645, 'Spa · khu thư giãn', 18)
 rect(1200, 598, 1312, 700, '#ddd5c5', 10)
@@ -161,7 +161,7 @@ villa(1240, 940, 1292, 976, 'gt')
 
 # La bàn: hướng Bắc theo mặt bằng chủ đầu tư (lệch về trái)
 cx, cy = 300, 1150
-a = math.radians(-118)
+a = math.radians(-60)
 d.line([(cx, cy), (cx + 62 * math.cos(a), cy + 62 * math.sin(a))], fill=NAVY, width=5)
 d.polygon([(cx + 78 * math.cos(a), cy + 78 * math.sin(a)),
            (cx + 56 * math.cos(a + 0.22), cy + 56 * math.sin(a + 0.22)),
@@ -171,7 +171,7 @@ d.text((cx + 50, cy + 10), 'Hướng Bắc', font=f(18), fill=MUTED)
 
 # Tiêu đề và chú thích
 d.text((60, 36), 'FUSION RESORT & VILLAS ĐÀ NẴNG – MẶT BẰNG TỔNG THỂ', font=f(42, True), fill=NAVY)
-d.text((60, 94), '85 biệt thự trên 15,75 ha · tô màu theo loại biệt thự · đường Trường Sa, Ngũ Hành Sơn', font=f(26), fill=MUTED)
+d.text((60, 94), '85 biệt thự trên 15,75 ha · tô màu theo loại · lối vào đường Trường Sa, biển hướng Đông – Đông Bắc', font=f(26), fill=MUTED)
 legend = [
     ('pres', 'Presidential Villa', '6 phòng ngủ · 1 căn'),
     ('b5', 'Beach Front Villa', '5 phòng ngủ · 9 căn sát biển'),

@@ -24,7 +24,7 @@ add_filter(
 			'hh_p_tour_360'        => 'https://fusionresortvillas.com/360/',
 			'hh_p_tour_360_poster' => 'plugin:img/fusion/fusion-toan-canh-day-biet-thu-bien.jpg',
 			// Mô hình 4D mặt bằng tổng thể (dựng theo mặt bằng CĐT, không mã căn) – lưu trong kho mã projects/fusion/4d/.
-			'hh_p_tour_4d'      => 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/163efdf439523c99d3e02ec14263ef3ba6ea19a6/projects/fusion/4d/fusion-4d.html',
+			'hh_p_tour_4d'      => 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/56391180de3c496c5b973203a6df7b01aa4ef00e/projects/fusion/4d/fusion-4d.html',
 			'hh_p_tour_poster'  => 'plugin:img/fusion/fusion-mo-hinh-4d-xem-truoc.jpg',
 			'hh_p_tour_name'    => 'mặt bằng 4D',
 			'hh_p_scale'        => '15,75 ha – mật độ xây dựng khoảng 16,7%, khoảng 300 m bờ biển',
