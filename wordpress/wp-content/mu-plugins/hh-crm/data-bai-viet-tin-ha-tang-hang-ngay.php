@@ -291,6 +291,7 @@ HTML
 	/* ---------------- 07/11 – 3 khu tái định cư Duy Xuyên phục vụ đường sắt tốc độ cao ---------------- */
 	$posts[] = array(
 		'slug'           => 'tai-dinh-cu-duy-xuyen-duong-sat-toc-do-cao-392-ty',
+		'rev'            => 2,
 		'title'          => 'Đà Nẵng duyệt 3 khu tái định cư hơn 392 tỷ tại Duy Xuyên cho đường sắt tốc độ cao Bắc – Nam',
 		'excerpt'        => 'UBND TP Đà Nẵng ban hành Quyết định 5082/QĐ-UBND phê duyệt 3 khu tái định cư Duy Trung, Duy Sơn, Duy Trinh – Duy Sơn (khoảng 31 ha, hơn 392 tỷ đồng, 2026 – 2029) phục vụ giải phóng mặt bằng đường sắt tốc độ cao Bắc – Nam.',
 		'keyword'        => 'tái định cư đường sắt tốc độ cao Duy Xuyên',
@@ -325,7 +326,7 @@ HTML
 <li>Bộ Xây dựng đặt mục tiêu nỗ lực <strong>khởi công vào tháng 12/2027</strong>; gói thầu tư vấn khảo sát, lập báo cáo nghiên cứu khả thi (TV-02) đã mở thầu.</li>
 <li>Ga Đà Nẵng của tuyến dự kiến đặt tại Hòa Sơn – xem thêm <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang/">ga đường sắt tốc độ cao Đà Nẵng tại Hòa Sơn</a>.</li>
 </ul>
-<!--hh-img:img/casamia-balanca/casamia-balanca-flycam-toan-canh-thi-cong.jpg|Ảnh thực tế flycam khu Cẩm Thanh – Hội An (Casamia Balanca đang thi công): dải ven sông Thu Bồn, phía Bắc Duy Xuyên-->
+<!--hh-img:img/da-nang/duy-xuyen-flycam-song-thu-bon-cau-cua-dai-hoi-an.jpg|Ảnh thực tế flycam: từ bờ Duy Xuyên nhìn về cầu Cửa Đại, sông Thu Bồn và Hội An-->
 <h2>Tác động / nhận định của Hoàng Hiệp</h2>
 <ul>
 <li><strong>Tín hiệu tuyến đi vào thực tế:</strong> làm tái định cư trước là bước bắt buộc để giải phóng mặt bằng. Việc Duy Xuyên có quyết định đầu tư cụ thể cho thấy hướng tuyến qua khu vực này đã được xác định ở mức đủ để lập dự án.</li>
