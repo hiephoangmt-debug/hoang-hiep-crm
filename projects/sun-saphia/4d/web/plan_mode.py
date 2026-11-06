@@ -17,6 +17,9 @@ CSS = TAG + ('body.pm .top{display:none!important}'
   'body.pm .note,body.pm #spinRow{display:none!important}body.pm .console .sl:has(#floor){order:-1}body.pm .modes{order:-2}'
   'body.pm #f3Btn{display:none!important}body.pm #ofcBtn{bottom:calc(env(safe-area-inset-bottom,0px) + 14px)!important}'
   'body.pm .compass{display:none!important}body.pm #uCard{top:auto!important;bottom:calc(env(safe-area-inset-bottom,0px) + 12px)!important;left:12px!important;right:auto!important;transform:none!important;width:min(320px,calc(100% - 24px))!important;padding:10px 12px!important;opacity:.97}body.pm #uCard h4{font-size:15px!important;margin:0 0 4px!important}body.pm #uCard .s{font-size:12.5px!important;line-height:1.4!important}body.pm #uCard .b button{padding:8px 10px!important;font-size:13px!important}body.pm.pu #ofcBtn{display:none!important}'
+  'body.pm.pu #uCard{left:8px!important;right:8px!important;width:auto!important;bottom:calc(env(safe-area-inset-bottom,0px) + 8px)!important;max-height:calc(16.6vh - 10px);overflow:hidden;display:grid!important;grid-template-columns:1fr auto;column-gap:14px;align-items:center;padding:8px 42px 8px 14px!important}'
+  'body.pm.pu #uCard h4{grid-column:1}body.pm.pu #uCard .s{grid-column:1}body.pm.pu #uCard .b{grid-column:2;grid-row:1/span 2;display:flex;gap:8px;margin:0!important}'
+  '@media (max-width:600px){body.pm.pu #uCard{padding:6px 34px 6px 10px!important;column-gap:8px}body.pm.pu #uCard h4{font-size:13.5px!important;margin:0 0 2px!important}body.pm.pu #uCard .s{font-size:11.5px!important}body.pm.pu #uCard .b{flex-direction:column;gap:4px}body.pm.pu #uCard .b button{padding:5px 8px!important;font-size:12px!important}}'
   '@media (max-width:760px){body.pm .console{grid-template-columns:1fr!important;gap:6px!important;padding-top:8px!important;padding-bottom:8px!important}'
   'body.pm .modes{display:none!important}body.pm .console .sl label{font-size:10.5px!important}}')
 OLD = "bPlan.onclick=function(){ setPlan(!planOn); };"
@@ -29,8 +32,9 @@ NEW = (TAG + "\nfunction pmFly(cx,cz,ext){ if(!document.body.classList.contains(
   "function pmUnit(r){ var y=planY(+floorEl.value), yaw=(UVIEW[r[6]]||[0,0])[1], dx=Math.cos(yaw), dz=Math.sin(yaw), cx=X1-(r[4]+r[5])/2, cz=Z0+(r[2]+r[3])/2, m=innerWidth<600;\n"
   "  camera.fov=m?70:58; camera.updateProjectionMatrix(); document.body.classList.add('pu');\n"
   "  var con=document.querySelector('.console'); document.body.style.setProperty('--uct',((con?con.getBoundingClientRect().bottom:56)+8)+'px');\n"
-  "  controls.autoRotate=false; var R=m?17:15, h=m?6.5:5;\n"
-  "  var tg=new THREE.Vector3(cx,y+.6,cz), p=new THREE.Vector3(cx-dx*R,y+h,cz-dz*R);\n"
+  "  /* chia khung 6 phần: view 3/6 trên (chân trời ~40%), mặt bằng 2/6 (căn ở ~2/3 chiều cao), thông số 1/6 dưới */\n"
+  "  controls.autoRotate=false; var t=Math.tan(camera.fov*Math.PI/360), a=Math.atan(.2*t), b=a+Math.atan(t/3), R=m?16:15, h=R*Math.tan(b);\n"
+  "  var tg=new THREE.Vector3(cx,y+h-R*Math.tan(a),cz), p=new THREE.Vector3(cx-dx*R,y+h,cz-dz*R);\n"
   "  flyTo(T.localToWorld(p),T.localToWorld(tg)); }\n"
   "var showUnitPm0=showUnit; showUnit=function(r){ showUnitPm0(r); if(!document.body.classList.contains('pm')||!uCard) return;\n"
   "  var uf=uFloor(), AR=uf>=30?UA30[r[0]]:(uf===2&&UA2[r[0]])||UAREA[r[0]], inf=UINFO[r[1]]||['',''], vw=UVIEW[r[6]]||[''], code=uCode(r);\n"
