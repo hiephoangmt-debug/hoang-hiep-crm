@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.62** + plugin Hoàng Hiệp CRM **2.20.158**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.62** + plugin Hoàng Hiệp CRM **2.20.159**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.159 (06/11/2026)
+
+- **Fusion Resort & Villas:** thêm ảnh chụp toàn cảnh từ trên cao (từ Sổ tay cư dân của chủ đầu tư) vào mục Mặt bằng tổng thể; bổ sung chi tiết Chương trình cho thuê 12/12/2024 (điểm nghỉ theo mùa, lịch chi trả 4 đợt, ưu đãi dịch vụ cho chủ biệt thự) và 1 câu hỏi đáp mới cho trợ lý chat.
 
 ## Có gì mới – plugin 2.20.158 (06/11/2026)
 
