@@ -54,13 +54,19 @@ add_filter(
 				'hh_p_units'        => '263 căn hộ',
 				'hh_p_legal'        => 'Đủ điều kiện bán nhà ở hình thành trong tương lai (Công văn 11222/SXD-QLN ngày 24/6/2026 của Sở Xây dựng Đà Nẵng, 263 căn); chủ trương đầu tư 1459/QĐ-UBND (12/7/2023); quy hoạch 1/500 (2585/QĐ-UBND, 12/7/2024); giấy phép xây dựng 414/GPXD (11/4/2025); thẩm duyệt PCCC (3/4/2025); đã có giấy chứng nhận quyền sử dụng đất, đã nộp tiền sử dụng đất (6/2026); dự án chưa thế chấp ngân hàng (theo chủ đầu tư báo cáo); không bán cho người nước ngoài',
 				'hh_p_unit_area'    => 'Khoảng 45,8 – 89,4 m² (căn điển hình); căn lớn nhất đến khoảng 230 m²',
-				'hh_p_price_from'   => 2700,
-				'hh_p_price_m2'     => 'Liên hệ – giá theo từng căn, tầng, hướng (tham khảo từ khoảng 2,7 tỷ)',
+				'hh_p_price_from'   => 4940,
+				'hh_p_price_m2'     => 'Khoảng 92 – 107 triệu/m² thông thủy, đã gồm VAT (bảng hàng tầng 5 – 8, 11/2026 – tham khảo)',
 				'hh_p_start'        => 'Khởi công 4/2025 (giấy phép xây dựng 11/4/2025)',
 				'hh_p_handover'     => 'Dự kiến Quý II – Quý III/2027 (tùy nguồn)',
 				'hh_p_highlights'   => "Cách biển Mỹ Khê khoảng 300 m, trên trục Hồ Xuân Hương\nCăn góc view biển Mỹ Khê (hướng Đông Bắc) hoặc view sông Hàn – pháo hoa (hướng Tây Nam)\nKính lớn toàn căn, phòng tắm có cửa sổ riêng\nHồ bơi trong nhà, bể sục, gym, yoga, lounge, nhà hàng – café\nTổng thầu Central",
 				'hh_p_design_desc'  => 'Tháp căn hộ 25 tầng trên khối đế thương mại, mặt đứng khung viền sáng. Mỗi tầng điển hình có các căn 1PN+1 45,8 m², 2PN 64,4 – 80,6 m² và 3PN góc 89,4 m²; căn phía Đông Bắc nhìn biển Mỹ Khê, căn phía Tây Nam nhìn sông Hàn và pháo hoa.',
-				'hh_p_unit_types'   => "Căn 1PN+1 | 45,8 m² | 1+ | Liên hệ\nCăn 2PN | 64,4 m² | 2 | Liên hệ\nCăn 2PN góc view biển | 66,2 m² | 2 | Liên hệ\nCăn 2PN góc view sông Hàn | 74,9 – 80,6 m² | 2 | Liên hệ\nCăn 3PN góc view biển | 89,4 m² | 3 | Liên hệ",
+				'hh_p_unit_types'   => "Căn 1PN+1 | 45,8 – 45,9 m² | 1+ | Khoảng 4,94 – 4,95 tỷ
+Căn 2PN hướng Tây Nam | 64,6 – 64,9 m² | 2 | Khoảng 5,96 – 6,04 tỷ
+Căn 2PN hướng Đông Bắc (view biển) | 64,6 – 65,1 m² | 2 | Khoảng 6,12 – 6,44 tỷ
+Căn 2PN góc view biển | 67,5 m² | 2 | Khoảng 6,91 – 6,93 tỷ
+Căn 2PN view biển | 73,2 – 73,8 m² | 2 | Khoảng 6,86 – 7,26 tỷ
+Căn 2PN góc view sông Hàn | 75,4 – 80,8 m² | 2 | Khoảng 7,66 – 7,87 tỷ
+Căn 3PN góc view biển | 89,9 – 90,1 m² | 3 | Khoảng 9,2 – 9,57 tỷ",
 				'hh_p_location_desc' => 'Dự án trên đường Hồ Xuân Hương (Ngũ Hành Sơn), đi bộ ra biển Mỹ Khê khoảng 300 m; gần cầu Tiên Sơn, Lotte Mart, khu Đà Nẵng Downtown và sông Hàn.',
 				'hh_p_connections'  => "Khoảng 300 m | Biển Mỹ Khê\nKhoảng 1,5 km | Cầu Tiên Sơn\nKhoảng 2 km | Lotte Mart Đà Nẵng\nKhoảng 3,5 km | Đà Nẵng Downtown\nKhoảng 6,5 km | Sân bay quốc tế Đà Nẵng",
 				'hh_p_amenities_in' => "Sảnh đón, lounge cư dân\nHồ bơi trong nhà, bể sục\nPhòng gym, phòng yoga\nNhà hàng – café\nTầng mái: vườn trà (Thi), coffee, bar coffee, quảng trường ngắm pháo hoa, vườn \"Cầm\", khu vui chơi trẻ em, khu VIP\nKhối đế thương mại, hầm đỗ xe\nThang máy Schindler",
@@ -86,7 +92,9 @@ add_filter(
 <h2>Pháp lý The Poet Residence</h2>
 <p>Ngày 24/6/2026, Sở Xây dựng Đà Nẵng có Công văn 11222/SXD-QLN xác nhận <strong>263 căn hộ</strong> của dự án Chung cư Hồ Xuân Hương (The Poet Residence) <strong>đủ điều kiện bán nhà ở hình thành trong tương lai</strong> theo Điều 24 Luật Kinh doanh bất động sản 2023. Dự án đã có chủ trương đầu tư (2023), quy hoạch 1/500 (2024), giấy phép xây dựng và thẩm duyệt PCCC (4/2025), giấy chứng nhận quyền sử dụng đất và đã nộp tiền sử dụng đất. Theo báo cáo của chủ đầu tư, dự án chưa thế chấp ngân hàng. Căn hộ không bán cho người nước ngoài.</p>
 <h2>Tiến độ</h2>
-<p>Dự án khởi công tháng 4/2025, đã nghiệm thu xong phần móng, bàn giao dự kiến năm 2027 (các nguồn ghi Quý II đến Quý III/2027). Giá bán theo từng căn, tầng và hướng; các nguồn ghi mức khởi điểm khoảng 2,7 tỷ (tham khảo).</p>
+<p>Dự án khởi công tháng 4/2025, đã nghiệm thu xong phần móng, bàn giao dự kiến năm 2027 (các nguồn ghi Quý II đến Quý III/2027). Giá bán theo từng căn, tầng và hướng.</p>
+<h2>Giá bán The Poet Residence (tham khảo 11/2026)</h2>
+<p>Theo bảng hàng các tầng 5 – 8 (giá đã gồm VAT): căn 1PN+1 khoảng 4,94 tỷ; căn 2PN 64 – 65 m² khoảng 5,96 – 6,44 tỷ; căn 2PN 67 – 74 m² view biển khoảng 6,86 – 7,26 tỷ; căn 2PN góc 75 – 81 m² view sông Hàn khoảng 7,66 – 7,87 tỷ; căn 3PN góc khoảng 9,2 – 9,57 tỷ. Đơn giá khoảng 92 – 107 triệu/m² thông thủy; tầng cao giá cao hơn. Giá có thể thay đổi theo từng đợt, liên hệ để nhận bảng giá và căn còn trống mới nhất.</p>
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> để nhận bảng giá, căn còn trống và chính sách thanh toán mới nhất của The Poet Residence.</p>',
 			'sources' => array(
 				'https://www.centralcons.vn/?p=13782',
@@ -96,6 +104,21 @@ add_filter(
 				'https://www.tinnhanhchungkhoan.vn/dia-oc-phuc-thanh-an-lam-chu-dau-tu-chung-cu-hon-792-ty-dong-o-da-nang-post326445.html',
 			),
 		);
+		// Bản đã nhập trước đó (2.20.167, 2.20.168): ô nào vẫn đúng bản cũ thì thay bằng bản mới.
+		$cu  = (array) include __DIR__ . '/data-the-poet-residence-cu.php';
+		$new = &$projects[ count( $projects ) - 1 ];
+		foreach ( $cu as $old ) {
+			foreach ( (array) $old['meta'] as $k => $v ) {
+				if ( isset( $new['meta'][ $k ] ) && (string) $new['meta'][ $k ] !== (string) $v ) {
+					$new['fix_meta'][ $k ][] = (string) $v;
+				}
+			}
+			if ( $old['content'] !== $new['content'] ) {
+				$new['fix_content'][] = $old['content'];
+			}
+		}
+		$new['fix_excerpt'] = $cu['168']['excerpt'] ?? '';
+		unset( $new );
 		return $projects;
 	},
 	20

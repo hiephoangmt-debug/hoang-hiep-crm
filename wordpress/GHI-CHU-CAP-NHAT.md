@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.64** + plugin Hoàng Hiệp CRM **2.20.168**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.64** + plugin Hoàng Hiệp CRM **2.20.169**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.169 (06/11/2026)
+
+- **The Poet Residence – giá tham khảo theo bảng hàng tầng 5 – 8 (06/11/2026, đã gồm VAT):** 1PN+1 khoảng 4,94 tỷ; 2PN 5,96 – 7,87 tỷ; 3PN góc 9,2 – 9,57 tỷ; khoảng 92 – 107 triệu/m² thông thủy. Bỏ mức "từ 2,7 tỷ" của tin rao. Không ghi mã căn. Web tự thay dữ liệu cũ nếu đã cài 2.20.167 / 2.20.168.
 
 ## Có gì mới – plugin 2.20.168 (06/11/2026)
 
