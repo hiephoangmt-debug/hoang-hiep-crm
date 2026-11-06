@@ -136,7 +136,9 @@ def tail(with_tools):
     a = s.index('<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@afea225cd1c07439c244feaf9f6fa8e7bf42a111/projects/sun-saphia/crm/ss-all-nochat.js"')
     b = s.index('</body>')
     t = s[a:b]
-    t = re.sub(r'hoang-hiep-crm@[0-9a-f]{40}/projects/sun-saphia/chon-can/chon-can-embed\.js', 'hoang-hiep-crm@' + CC_SHA + '/projects/sun-saphia/chon-can/mat-bang/chon-can-embed.js', t)   # bản chỉ mặt bằng
+    # bỏ công cụ chọn căn (iframe) – dùng mặt bằng chủ đầu tư (mb_cdt); mô hình 4D đặt ngay sau khối mặt bằng #chon-can
+    t = re.sub(r'<script src="https://cdn\.jsdelivr\.net/gh/hiephoangmt-debug/hoang-hiep-crm@[0-9a-f]{40}/projects/sun-saphia/chon-can/chon-can-embed\.js" defer></script>\n?', '', t)
+    t = t.replace("c=document.getElementById('sscc');", "c=document.getElementById('sscc')||document.getElementById('chon-can');")
     t = re.sub(r'hoang-hiep-crm@[0-9a-f]{40}/projects/sun-saphia/4d/sun-saphia-4d-embed\.js', 'hoang-hiep-crm@' + D4_SHA + '/projects/sun-saphia/4d/web/sun-saphia-4d-embed.js', t)
     if not with_tools:
         x = t.index('<!-- 4D + CHỌN CĂN 3D -->'); y = t.index('<!-- /4D -->') + len('<!-- /4D -->')
