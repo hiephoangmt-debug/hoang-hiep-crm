@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.63** + plugin Hoàng Hiệp CRM **2.20.165**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.63** + plugin Hoàng Hiệp CRM **2.20.166**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.166 (06/11/2026)
+
+- **Fusion – bộ ảnh chủ đầu tư (Drive anh Hiệp gửi 06/11):** 2 phối cảnh tổng thể (đã cắt dải tiêu đề), 4 ảnh flycam hồ bơi chính / bar bên biển, ảnh chụp thực tế 4 căn J2 (Beach Front 5PN), D3 (Premier 4PN), C5 (Beach Garden 4PN), A12 (Garden Terrace 2PN), layout 5 loại biệt thự. Web tự tải dần 2 ảnh mỗi lượt. Bỏ qua ảnh tiến độ 2023 – 2024 (dự án đã vận hành) và trang mặt bằng tổng thể trùng.
 
 ## Có gì mới – plugin 2.20.165 · giao diện 2.15.63 (06/11/2026)
 

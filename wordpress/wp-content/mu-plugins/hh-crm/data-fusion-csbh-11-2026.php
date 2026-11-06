@@ -97,9 +97,47 @@ Khu biệt thự vận hành từ quý 1/2024, chương trình cho thuê từ th
 				'plugin:img/fusion/fusion-mat-bang-ma-can.jpg | Mặt bằng tổng thể Fusion Resort & Villas Đà Nẵng có mã căn, tô màu theo loại biệt thự 1 – 6 phòng ngủ (vẽ lại theo mặt bằng chủ đầu tư) | tổng thể',
 				$swap
 			);
+			// 2.20.166: ảnh chủ đầu tư anh Hiệp gửi (Drive 06/11/2026) – ảnh chụp thực tế 4 căn, flycam, phối cảnh, layout 5 loại biệt thự.
+			$v164 = $swap;
+			$d    = static fn( $id, $alt, $where, $title = '' ) => "https://drive.google.com/thumbnail?id=$id&sz=w2400 | $alt | $where" . ( $title ? " | $title" : '' );
+			$pl   = static fn( $file, $alt, $where, $title = '' ) => "plugin:img/fusion/fusion-$file.jpg | $alt | $where" . ( $title ? " | $title" : '' );
+			$more = array(
+				$pl( 'phoi-canh-tong-the-tu-bien', 'Phối cảnh tổng thể Fusion Resort & Villas Đà Nẵng nhìn từ biển: khách sạn ở lối vào Trường Sa, hồ bơi chính giữa khu, biệt thự sát bãi cát', 'tổng thể', 'Phối cảnh nhìn từ biển' ),
+				$pl( 'phoi-canh-tong-the-tu-truong-sa', 'Phối cảnh tổng thể Fusion Resort & Villas Đà Nẵng nhìn từ đường Trường Sa về phía biển', 'tổng thể', 'Phối cảnh nhìn từ Trường Sa' ),
+				$d( '1AlyDyy_QyiWk_dF-EI2EgKWej18YtTE1', 'Flycam Fusion Resort & Villas Đà Nẵng nhìn từ biển: bãi cát, dãy biệt thự và khách sạn ở lối vào', 'thư viện' ),
+				$d( '10iFIIR12GHavDF8Ub0BBcL6YoXsJrmph', 'Hồ bơi chính và nhà hàng giữa khu Fusion Resort & Villas nhìn từ trên cao', 'tiện ích', 'Hồ bơi chính' ),
+				$d( '1FAowLbfxiqAL1UwyVxIlcFGej5WuY7eI', 'Hồ bơi chính dài hướng ra biển, ghế tắm nắng – Fusion Resort & Villas Đà Nẵng', 'tiện ích', 'Hồ bơi hướng biển' ),
+				$d( '19bugfYRGyqzunuk6S6FrzSRQVY5kD8X6', 'Sàn gỗ, hồ bơi tràn bờ và quầy bar bên bãi biển Fusion Resort & Villas', 'tiện ích', 'Bar bên biển' ),
+				$d( '1yEeUlW3GZrrQmAY8ZxWOXjTENTfwQzcn', 'Căn J2 – Beach Front Villa 5 phòng ngủ: sân hiên, chòi nghỉ và hồ bơi nhìn thẳng ra biển', 'thư viện' ),
+				$d( '165BYFLQpBH0G0K8fvhr0TBBpnP3-9ewf', 'Căn J2 – Beach Front Villa 5 phòng ngủ lúc lên đèn, hồ bơi riêng và chòi nghỉ', 'thư viện' ),
+				$d( '1unj4RMpNZNRy_1fMm_rkp3jFEhpg0Yhi', 'Căn J2 – bàn ăn ngoài trời bên hồ bơi tràn bờ hướng biển', 'thư viện' ),
+				$d( '1QxlF9GyYw-4ZD5yMDzcbgyuS_vSHaFRs', 'Căn J2 – Beach Front Villa ban ngày, hồ bơi riêng bao quanh nhà', 'thư viện' ),
+				$d( '1hXleFAf_drOAmWP24QkHCEfcp10BGeDI', 'Căn J2 – phòng ngủ nhìn ra biển lúc hoàng hôn', 'thư viện' ),
+				$d( '121x5zbnHquJjfGocI8AjNXbsB-5RwLNV', 'Căn D3 – Premier Villa 4 phòng ngủ: hồ bơi riêng và chòi nghỉ giữa sân vườn', 'thư viện' ),
+				$d( '108MNd7LkYjT4_8QUUAnQJUbMwfe2U5bo', 'Căn D3 – Premier Villa lúc lên đèn, bàn ăn ngoài trời bên hồ bơi', 'thư viện' ),
+				$d( '1ePYkd4-ESwVGxOpnRZxF63LVzUHGK1NE', 'Căn D3 – bếp và bàn ăn 8 chỗ, cửa kính mở ra sân vườn', 'thư viện' ),
+				$d( '1TbASwQJNZRlPe6fMjeh4MF5wizPRAVyt', 'Căn D3 – sân vườn, hồ bơi và bàn ăn nhìn từ tầng trên', 'thư viện' ),
+				$d( '1ysA6JhwsPrYx9eWXwMkXKmFwvpqoUey6', 'Căn C5 – Beach Garden Villa 4 phòng ngủ: hồ bơi dài và chòi nghỉ lúc lên đèn', 'thư viện' ),
+				$d( '1BqkFkyZlDpCMF5aKGUav5cxQ5Em8_QgS', 'Căn C5 – chòi nghỉ bên hồ bơi, phòng khách và phòng ngủ mở ra sân', 'thư viện' ),
+				$d( '1bZoxlr5kyc--VP-gubHDTUJzuG9XJRuQ', 'Căn C5 – phòng khách liền bếp, cửa kính ra sân vườn', 'thư viện' ),
+				$d( '1vXsVTcrvx_gINWNWAgeKpS65wU3duXjh', 'Căn C5 – phòng ngủ master Beach Garden Villa', 'thư viện' ),
+				$d( '1V-Z62GKsztz1Hj9OqcA77VyQ6XBWp4dA', 'Căn A12 – Garden Terrace Villa 2 phòng ngủ lúc lên đèn, hồ bơi riêng', 'thư viện' ),
+				$d( '1oEm8754hUubMCST33q60Tya1W8C5NUVR', 'Căn A12 – chòi nghỉ, ghế tắm nắng nhìn ra hồ bơi', 'thư viện' ),
+				$d( '1vwSMNl2tyy32J0VrA4wbqnryYdgA5LCl', 'Căn A12 – phòng khách mở ra sân vườn', 'thư viện' ),
+				$pl( 'layout-beach-front', 'Mặt bằng Beach Front Villa 5 phòng ngủ Fusion Resort & Villas (bản vẽ chủ đầu tư)', 'layout', 'Beach Front Villa 5PN' ),
+				$pl( 'layout-premier', 'Mặt bằng Premier Villa Fusion Resort & Villas (bản vẽ chủ đầu tư)', 'layout', 'Premier Villa 3 – 5PN' ),
+				$pl( 'layout-beach-garden', 'Mặt bằng Beach Garden Villa Fusion Resort & Villas (bản vẽ chủ đầu tư)', 'layout', 'Beach Garden Villa 3 – 4PN' ),
+				$pl( 'layout-garden-terrace', 'Mặt bằng Garden Terrace Villa 2 phòng ngủ Fusion Resort & Villas (bản vẽ chủ đầu tư)', 'layout', 'Garden Terrace Villa 2PN' ),
+				$pl( 'layout-garden-front', 'Mặt bằng Garden Front Villa 1 phòng ngủ Fusion Resort & Villas (bản vẽ chủ đầu tư)', 'layout', 'Garden Front Villa 1PN' ),
+			);
+			foreach ( $more as $line ) {
+				if ( false === strpos( $swap, strtok( $line, ' ' ) ) ) {
+					$swap = rtrim( $swap ) . "\n" . $line;
+				}
+			}
 			if ( $swap !== $links ) {
 				$projects[ $i ]['meta']['hh_p_image_links']     = $swap;
-				$projects[ $i ]['fix_meta']['hh_p_image_links'] = array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $links, $v158, $v163 ) );
+				$projects[ $i ]['fix_meta']['hh_p_image_links'] = array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $links, $v158, $v163, $v164 ) );
 			}
 			$projects[ $i ]['fix_excerpt'] = $p['excerpt'] ?? '';
 			$projects[ $i ]['excerpt']     = 'Biệt thự biển Fusion Resort & Villas Đà Nẵng trên trục Trường Sa (Ngũ Hành Sơn): chủ đầu tư còn 1 căn Beach Garden Villa 4 phòng ngủ, đất 753 m², chiết khấu 20% khi thanh toán nhanh, tặng nội thất 5 sao khoảng 2 tỷ; các căn khác giao dịch chuyển nhượng.';
