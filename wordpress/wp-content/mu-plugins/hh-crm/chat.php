@@ -948,6 +948,11 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 	if ( $follow ) {
 		return $follow;
 	}
+	// Hỏi tiến độ xây dựng ("xây đến tầng mấy", "cất nóc chưa", "đang thi công tới đâu") → trả lời thật theo dữ liệu, không vòng vo xin số.
+	$prog_id = $mentioned ?: ( $page && 'du-an' === get_post_type( $page ) ? (int) $page : 0 );
+	if ( $prog_id && preg_match( '/(xay|thi cong|len) (den|toi|duoc) (tang|dau)|tang may roi|xay (xong|toi dau|den dau|duoc|chua)|dang xay|cat noc|tien do (xay|thi cong|du an|cong trinh|thuc te|cong truong)|cong truong|dang thi cong|thi cong (den|toi|chua)|xay dung (den|toi)|hoan thien (chua|den)|da xay/', $t ) && ! preg_match( '/thanh toan|tra gop|dong tien|nop tien/', $t ) ) {
+		return $ack . $lc( hh_chat_progress_text( $prog_id, $name ) ) . ( $ask ?: ' Anh/chị muốn em gửi ảnh công trường mới nhất không ạ?' );
+	}
 	// Khách hỏi so sánh ("dự án nào giá tốt", "cái nào rẻ nhất", "nên chọn dự án nào") → so các dự án vừa gợi ý.
 	// Câu hỏi đáp có sẵn trên web (dự án đang xem / dự án khách nhắc tên / bài viết), hiểu theo nghĩa gần nhất.
 	$faq       = hh_chat_faq_match( $t, $page );
@@ -1640,4 +1645,29 @@ function hh_chat_settings_page() {
 		</form>
 	</div>
 	<?php
+}
+
+/** Trả lời câu hỏi tiến độ xây dựng của một dự án – chỉ dùng dữ liệu có trên web, không có thì nói thật. */
+function hh_chat_progress_text( $id, $name ) {
+	$title = hh_chat_title( $id );
+	$rows  = array_values( array_filter( array_map( 'trim', hh_lines( 'hh_p_progress', $id ) ) ) );
+	$hand  = trim( wp_strip_all_tags( (string) get_post_meta( $id, 'hh_p_handover', true ) ) );
+	$start = trim( wp_strip_all_tags( (string) get_post_meta( $id, 'hh_p_start', true ) ) );
+	$pics  = count( array_filter( explode( ',', (string) get_post_meta( $id, 'hh_p_progress_gallery', true ) ) ) );
+	// Chỉ lấy các mốc nói về công trường (khởi công, móng, tầng, cất nóc, hoàn thiện, bàn giao), bỏ mốc mở bán / ký kết.
+	$site = array_values( array_filter( $rows, static fn( $r ) => (bool) preg_match( '/khoi cong|mong|tang|cat noc|thi cong|hoan thien|ban giao|ket cau|hầm|ham|xay/u', remove_accents( mb_strtolower( $r ) ) ) ) );
+	if ( $site ) {
+		$last = array_slice( $site, -2 );
+		$txt  = 'Tiến độ ' . $title . ' mới nhất em có: ' . implode( '; ', array_map( static fn( $r ) => str_replace( ' | ', ': ', $r ), $last ) ) . '.';
+	} else {
+		$txt = 'Số tầng đang thi công của ' . $title . ' em chưa có bản cập nhật trên web, nên em không nói ước chừng để tránh sai ạ.';
+		if ( $start ) {
+			$txt .= ' Khởi công: ' . mb_substr( $start, 0, 120 ) . '.';
+		}
+	}
+	if ( $hand ) {
+		$txt .= ' Mốc bàn giao: ' . mb_substr( $hand, 0, 200 ) . '.';
+	}
+	$txt .= $pics ? ' Trên trang dự án có ' . $pics . ' ảnh công trường thực tế; ' . $name . ' cập nhật ảnh mới theo tuần.' : ' ' . $name . ' có ảnh công trường cập nhật, gửi anh/chị được ngay.';
+	return $txt;
 }

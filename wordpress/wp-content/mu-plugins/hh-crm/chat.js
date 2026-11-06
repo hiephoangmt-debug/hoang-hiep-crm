@@ -104,6 +104,19 @@
 		} );
 	}
 	var pendingNudge = null;
+	// Hai câu hỏi gần giống nhau? (so các từ của câu hỏi cuối, bỏ dấu)
+	function sameAsk( a, b ) {
+		var words = function ( t ) {
+			var q = String( t ).split( /(?<=[.!?…])\s+/ ).filter( function ( x ) { return /\?\s*$/.test( x ); } ).pop() || '';
+			return q.toLowerCase().normalize( 'NFD' ).replace( /[\u0300-\u036f]/g, '' ).replace( /đ/g, 'd' ).split( /[^a-z0-9]+/ ).filter( function ( w ) { return w.length > 1 && [ 'anh', 'chi', 'em', 'dang', 'nhe', 'khong' ].indexOf( w ) < 0; } );
+		};
+		var x = words( a ), y = words( b );
+		if ( ! x.length || ! y.length ) {
+			return false;
+		}
+		var hit = y.filter( function ( w ) { return x.indexOf( w ) > -1; } ).length;
+		return hit / Math.min( x.length, y.length ) >= 0.6;
+	}
 	function open() {
 		panel.hidden = false;
 		bubble.hidden = true;
@@ -121,7 +134,11 @@
 			}
 		}
 		if ( pendingNudge ) {
-			addMsg( 'assistant', pendingNudge, true );
+			// Không hỏi lại câu gần giống câu trợ lý vừa hỏi (VD hai lần "căn mấy phòng ngủ").
+			var lastBot = state.msgs.filter( function ( m ) { return 'assistant' === m.role; } ).pop();
+			if ( ! lastBot || ! sameAsk( lastBot.text, pendingNudge ) ) {
+				addMsg( 'assistant', pendingNudge, true );
+			}
 			pendingNudge = null;
 		}
 		renderChips();

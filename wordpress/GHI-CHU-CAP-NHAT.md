@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.84** + plugin Hoàng Hiệp CRM **2.20.191**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.84** + plugin Hoàng Hiệp CRM **2.20.192**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -45,7 +45,9 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 - **Landing The Poet:** ảnh chính (toàn cảnh biển Mỹ Khê – Sơn Trà) hiện trọn ở đầu trang, không lớp phủ tối, không chữ đè; tiêu đề, thông tin nhanh và nút đặt ngay bên dưới ảnh.
 
-## Có gì mới – plugin 2.20.191 · giao diện 2.15.84 (06/11/2026)
+## Có gì mới – plugin 2.20.192 · giao diện 2.15.84 (06/11/2026)
+
+- **Trợ lý chat khéo hơn:** khách hỏi tiến độ xây dựng ("xây đến tầng mấy", "cất nóc chưa", "thi công tới đâu") → trả lời theo mục Tiến độ của dự án (mốc công trường mới nhất, mốc bàn giao, ảnh công trường); chưa có số tầng thì nói thật, không đoán, thay vì chỉ xin số Zalo. Câu gợi ý tự bật không còn hỏi lặp câu trợ lý vừa hỏi (VD hai lần "căn mấy phòng ngủ").
 
 - **Banner trang chủ – Sun Saphia lên slide đầu với poster anh gửi:** máy tính hiện poster bên phải, nền là phối cảnh hoàng hôn; điện thoại dùng poster làm nền, chữ và nút đặt phía dưới. Ô mới trong dự án: "Poster dọc cho banner trang chủ" – dự án HOT nào có poster sẽ lên slide đầu.
 
