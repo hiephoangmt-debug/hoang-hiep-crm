@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.61** + plugin Hoàng Hiệp CRM **2.20.154**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.61** + plugin Hoàng Hiệp CRM **2.20.155**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.155 (06/11/2026)
+
+- **Fusion Resort & Villas Đà Nẵng:** chuyển sang "Đang mở bán" (chủ đầu tư còn 1 căn Beach Garden Villa 4PN, đất 753 m², khoảng 58,41 tỷ chưa VAT theo bảng giá 12/2025); chính sách: chiết khấu 20% khi thanh toán nhanh, tặng nội thất 5 sao ~2 tỷ, 5 năm phí quản lý (villa ở), 40 điểm/năm + 30 điểm trong 2 năm (villa cho thuê). Không đăng phần "chính sách đặc biệt trước 30/9/2026" (đã hết hạn).
+- Bổ sung theo tài liệu hỏi đáp CĐT 05/2026: quy mô 15,75 ha, 85 biệt thự 6 loại (bảng loại biệt thự), tiện ích, thiết kế, chương trình cho thuê (35% doanh thu, 40 điểm/năm, không cam kết lợi nhuận), phí quản lý.
+- **Tin cho thuê biệt thự 2PN Fusion** 500 m², hồ bơi riêng, 3.500 USD/tháng bao phí quản lý, hợp đồng 6 tháng/1 năm.
 
 ## Có gì mới – plugin 2.20.154 · giao diện 2.15.61 (06/11/2026)
 

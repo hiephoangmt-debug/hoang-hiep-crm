@@ -455,6 +455,48 @@ function hh_single_listing_dataset() {
 <p>Xem mặt bằng, layout căn 3PN tại <a href="/du-an/sun-ponte-residence/">trang dự án Sun Ponte Residence</a>. Nhận giá bán, xem căn và hồ sơ: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>',
 	);
 
+	// 06/11/2026 – cho thuê villa 2PN Fusion Resort & Villas (anh Hiệp gửi). Không ghi số nhà; ngày trống ghi trong tin (1/4/2026) đã qua → để "liên hệ".
+	$list[] = array(
+		'rev'     => 1,
+		'slug'    => 'cho-thue-biet-thu-2pn-fusion-resort-villas-da-nang-ho-boi-rieng',
+		'project' => 'fusion-resort-villas-da-nang',
+		'title'   => 'Cho thuê biệt thự 2 phòng ngủ Fusion Resort & Villas Đà Nẵng – 500 m², hồ bơi riêng, 3.500 USD/tháng bao phí quản lý',
+		'excerpt' => 'Biệt thự 2 phòng ngủ trong Fusion Resort & Villas (Trường Sa, Ngũ Hành Sơn): khoảng 500 m², hồ bơi riêng, sân vườn rộng, full nội thất tiêu chuẩn. 3.500 USD/tháng đã gồm phí quản lý, hợp đồng 6 tháng hoặc 1 năm.',
+		'kind'    => 'biet-thu',
+		'area'    => 'ngu-hanh-son',
+		'image'   => 'img/fusion/fusion-san-vuon-ho-boi.jpg',
+		'alt'     => 'Sân vườn và hồ bơi riêng biệt thự Fusion Resort & Villas Đà Nẵng – cho thuê biệt thự 2 phòng ngủ',
+		'meta'    => array(
+			'hh_deal'        => 'thue',
+			'hh_status'      => 'con-hang',
+			'hh_address'     => 'Fusion Resort & Villas, đường Trường Sa, Ngũ Hành Sơn, Đà Nẵng',
+			'hh_map_address' => 'Fusion Resort & Villas Danang, Trường Sa, Ngũ Hành Sơn, Đà Nẵng',
+			'hh_area'        => 500,
+			'hh_bedrooms'    => 2,
+			'hh_furniture'   => 'day-du',
+			'hh_min_term'    => '6 tháng',
+			'hh_rent_incl'   => 'Phí quản lý',
+			'hh_features'    => "Biệt thự 2 phòng ngủ khoảng 500 m², hồ bơi riêng, sân vườn rộng\nFull nội thất tiêu chuẩn resort Fusion\nGiá 3.500 USD/tháng đã gồm phí quản lý\nBảo vệ 24/24, gym, hồ bơi chung, kids club, bãi biển riêng",
+		),
+		'content' => '<p>Cho thuê <strong>biệt thự 2 phòng ngủ</strong> trong <a href="/du-an/fusion-resort-villas-da-nang/">Fusion Resort &amp; Villas Đà Nẵng</a> – khu nghỉ dưỡng 5 sao trên đường Trường Sa (Ngũ Hành Sơn), sát bãi biển riêng.</p>
+<h2>Thông tin biệt thự</h2>
+<table><tbody>
+<tr><th>Loại</th><td>Biệt thự 2 phòng ngủ, hồ bơi riêng, sân vườn rộng</td></tr>
+<tr><th>Diện tích</th><td>Khoảng 500 m²</td></tr>
+<tr><th>Nội thất</th><td>Đầy đủ, tiêu chuẩn resort Fusion</td></tr>
+<tr><th>Giá thuê</th><td>3.500 USD/tháng – đã gồm phí quản lý</td></tr>
+<tr><th>Hợp đồng</th><td>6 tháng hoặc 1 năm</td></tr>
+<tr><th>Thời gian dọn vào</th><td>Liên hệ để kiểm tra lịch trống</td></tr>
+</tbody></table>
+<h2>Tiện ích</h2>
+<ul>
+<li>Bảo vệ 24/24, an ninh và vận hành theo tiêu chuẩn Fusion.</li>
+<li>Phòng gym, hồ bơi chung, kids club, sân tennis, bãi biển riêng.</li>
+<li>Nhà hàng, spa trong resort (chủ nhà và khách thuê được ưu đãi theo chính sách từng thời điểm).</li>
+</ul>
+<p>Xem thêm ảnh, tiện ích và các loại biệt thự tại <a href="/du-an/fusion-resort-villas-da-nang/">trang dự án Fusion Resort &amp; Villas Đà Nẵng</a>. Hẹn xem biệt thự: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>',
+	);
+
 	return apply_filters( 'hh_single_listing_dataset', $list );
 }
 
