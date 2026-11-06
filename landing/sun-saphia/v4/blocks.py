@@ -323,7 +323,7 @@ def cta_block(label, title='Để lại số – <b>nhận đủ thông tin</b> 
 
 def hero_stats():
     return ('<div class="stats"><div><b>30 tầng</b><span>114 m · 2 hầm</span></div><div><b>782 căn</b><span>Studio · 1BR+ · 2BR</span></div>'
-            '<div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>3,5 m</b><span>chiều cao tầng mỗi căn</span></div></div>')
+            '<div><b>~300 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>3,5 m</b><span>chiều cao tầng mỗi căn</span></div></div>')
 
 def hero_perks():
     return hero_stats() + ('<div class="perk"><b>Đăng ký sớm – nhận trước:</b><span>Bảng giá gốc</span><span>Mặt bằng căn trống</span>'

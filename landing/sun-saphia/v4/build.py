@@ -132,7 +132,7 @@ def hero_home():
             'Vietcombank – BIDV – NCB hỗ trợ vay. Bài viết tổng hợp toàn bộ thông tin chủ đầu tư công bố tại sự kiện Kick-off '
             '"Đón ánh dương – Giao hòa nhịp sống" ngày 23/10/2026.</p>'
             '<div class="stats"><div><b>30 tầng</b><span>114 m · 2 hầm</span></div><div><b>782 căn</b><span>Studio · 1BR+ · 2BR</span></div>'
-            '<div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>3,5 m</b><span>chiều cao tầng mỗi căn</span></div></div>'
+            '<div><b>~300 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>3,5 m</b><span>chiều cao tầng mỗi căn</span></div></div>'
             '</div>'
             '<div class="hr">%s<div class="pic pic-home">%s<span>Phối cảnh minh họa</span></div></div></div></div></section>') % (
         SK, SK, form('dau', 'Web – trang chủ đầu trang', h='h2'),
@@ -144,7 +144,7 @@ def bgal():
 def day4():
     return ('<div class="g4" style="margin-bottom:22px">'
           '<div class="card"><span class="n">5:30 SÁNG</span><h3 class="oc">Đón bình minh</h3><p>Mặt trời lên từ biển, nhìn thẳng từ ban công căn hướng Đông.</p></div>'
-          '<div class="card"><span class="n">6:00</span><h3 class="oc">Chạy bộ trên cát</h3><p>Băng qua công viên ~400 m là tới bãi Sơn Thủy – Mỹ Khê.</p></div>'
+          '<div class="card"><span class="n">6:00</span><h3 class="oc">Chạy bộ trên cát</h3><p>Băng qua công viên ~300 m là tới bãi Sơn Thủy – Mỹ Khê.</p></div>'
           '<div class="card"><span class="n">17:00</span><h3 class="oc">Tắm biển cùng cả nhà</h3><p>Nước trong, sóng êm, cát trắng mịn – mùa hè kéo dài 6–7 tháng.</p></div>'
           '<div class="card"><span class="n">19:00</span><h3 class="oc">Hoàng hôn trên sông Hàn</h3><p>Tầng cao nhìn về thành phố lên đèn, Ngũ Hành Sơn phía Nam.</p></div></div>')
 
@@ -181,7 +181,7 @@ def khoi_de():
 
 def home():
     fq, fld = faq([
-        ('Sun Saphia Residence ở đâu?', 'Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu Saphia, phường Ngũ Hành Sơn, TP Đà Nẵng, trên trục biển Võ Nguyên Giáp – Trường Sa; ra bãi tắm Sơn Thủy khoảng 400 m qua công viên ven biển.'),
+        ('Sun Saphia Residence ở đâu?', 'Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu Saphia, phường Ngũ Hành Sơn, TP Đà Nẵng, trên trục biển Võ Nguyên Giáp – Trường Sa; ra bãi tắm Sơn Thủy chỉ hơn 300 m qua công viên ven biển.'),
         ('Chủ đầu tư Sun Saphia Residence là ai?', 'Dự án do Sun Property – thành viên Tập đoàn Sun Group – phát triển, được giới thiệu là dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng.'),
         ('Sun Saphia Residence có bao nhiêu tầng, bao nhiêu căn?', '1 tòa tháp 30 tầng, cao 114 m, 2 tầng hầm, tổng 782 căn trên khu đất 3.720,1 m². Căn hộ bố trí từ tầng 3A đến tầng 28, trần cao 3,5 m.'),
         ('Có những loại căn nào?', 'Studio 30–31 m² (513 căn), 1BR+ 50–51 m² (108 căn), 2BR 60–70 m² (133 căn), bàn giao liền tường (fit-out).'),
@@ -197,7 +197,7 @@ def home():
     b = cover() + hero_home()
     b += su_kien('HOME')
     b += tai_chinh('HOME') + tim_can('HOME') + dau_tu_san('HOME')
-    b += tldr('Sun Saphia Residence', [('Là gì', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, do Sun Property phát triển'), ('Vị trí', 'Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, phường Ngũ Hành Sơn; ra biển Sơn Thủy ~400 m'),
+    b += tldr('Sun Saphia Residence', [('Là gì', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, do Sun Property phát triển'), ('Vị trí', 'Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, phường Ngũ Hành Sơn; ra biển Sơn Thủy ~300 m'),
         ('Quy mô', '1 tòa 30 tầng (114 m), 2 hầm, 782 căn trên 3.720,1 m²'), ('Loại căn', 'Studio 30–31 m² (513) · 1BR+ 50–51 m² (108) · 2BR 60–70 m² (133), trần 3,5 m'),
         ('Pháp lý', 'GCN đầu tư 2572746483 (17/09/2026), công trình cấp I niên hạn 100 năm'), ('Ngân hàng', 'Vietcombank, BIDV, NCB hỗ trợ vay'),
         ('Sự kiện · bàn giao', 'Giới thiệu dự án 08/11/2026 tại Hà Nội · mở bán 05/12/2026 tại Đà Nẵng · bàn giao 11/2028'), ('Giá bán', 'Dự kiến từ khoảng 1,8 tỷ/căn · thanh toán ~25% đến khi nhận nhà · bảng giá gốc qua Zalo 0904 567 009')])
@@ -241,7 +241,7 @@ def home():
           '<ul class="ck"><li>Quảng trường biển, khu tổ chức sự kiện</li><li>Đường dạo, sân tập thể dục, khu vui chơi trẻ em, khu dã ngoại</li><li>Bãi đậu xe, nhà vệ sinh, khu tắm nước ngọt, nhà gửi đồ</li></ul>'
           '<p><a class="lk" href="{M}/quy-hoach">Xem bản vẽ công viên &amp; 4 quy hoạch quanh dự án (trục biển, đường sắt đô thị, Ngũ Hành Sơn) →</a></p>'
           '<p class="src">Nguồn: VietnamPlus · Báo Pháp luật · Báo Văn Hóa · VnEconomy · tài liệu Kick-off. Phần đất còn lại của dự án đang được xử lý theo kết luận thanh tra (9/2026).</p></div>'
-          + ('<figure class="fg"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 900px" width="1600" height="786" alt="Ảnh vệ tinh có chú thích: Sun Saphia Residence, khu đất ven biển quy hoạch công viên phía trước, cách biển khoảng 400 m" loading="lazy" decoding="async"><figcaption>Khu đất công viên ven biển trước dự án</figcaption></figure>' % ((RAW + '07557a38e28b15379350b5b9ac36fc91356ef704/landing/sun-saphia/v4/img/vi-tri-saphia',) * 3)) + '</div></div></section>')
+          + ('<figure class="fg"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 900px" width="1600" height="786" alt="Ảnh vệ tinh có chú thích: Sun Saphia Residence, khu đất ven biển quy hoạch công viên phía trước, cách biển chỉ hơn 300 m" loading="lazy" decoding="async"><figcaption>Khu đất công viên ven biển trước dự án</figcaption></figure>' % ((RAW + '07557a38e28b15379350b5b9ac36fc91356ef704/landing/sun-saphia/v4/img/vi-tri-saphia',) * 3)) + '</div></div></section>')
     # 02 Tầm nhìn
     b += ('<section class="sec alt" id="tam-nhin">' + tiles('tr') + '<div class="wrap">' + sh('02', 'Tầm nhìn', 'Sông, Núi, Biển <b>chung một tầm nhìn</b>', 'o') +
           '<div class="g2 eq"><div class="txt"><p>Từ tầng cao, thiên nhiên mở ra như một vũ điệu đa tầng cảnh sắc: dòng sông, dáng Ngũ Hành Sơn và sắc xanh biển Mỹ Khê cùng hiện diện trong một tầm nhìn khoáng đạt. '
@@ -860,7 +860,7 @@ def su_kien(ctx='ADS'):
 
 def vitri_dark(sid='vi-tri', ctx='ADS'):
     I = RAW + '3c076ddb411cdc4df18a30f1fd09bd98b60ff86a/landing/sun-saphia/v4/img/'
-    T = [('5\'', 'đi bộ', 'Biển Sơn Thủy (~400 m)'), ('3\'', 'phút', 'Chuỗi resort 5 sao ven biển'),
+    T = [('5\'', 'đi bộ', 'Biển Sơn Thủy (~300 m)'), ('3\'', 'phút', 'Chuỗi resort 5 sao ven biển'),
          ('5\'', 'phút', 'Phố du lịch An Thượng'), ('5\'', 'phút', 'Danh thắng Ngũ Hành Sơn'),
          ('6\'', 'đi bộ', 'Ga LRT 09 (quy hoạch, ~500 m)'), ('15\'', 'phút', 'Cầu Rồng · cầu Trần Thị Lý'),
          ('15\'', 'phút', 'Sân bay quốc tế Đà Nẵng'), ('30\'', 'phút', 'Phố cổ Hội An')]
@@ -912,7 +912,7 @@ if(A.muc==="san")k="san";else if(A.nguoi==="5"||A.von==="6")k="br2";else if(A.ng
 var d=D[k],P=d.p,c25=P*.25,c70=P*.7,c5=P*.05,yl=d.l*12,ys=d.s*12;
 if(k==="san"){why.push("Mua cả sàn được chiết khấu, vận hành như 1 khách sạn mini ngay mặt biển");why.push("Không phải xin phép xây, không lo giá vật liệu leo thang");}
 else if(k==="br2")why.push("Đủ phòng cho cả nhà, có phòng khách riêng để quây quần");else if(k==="br1")why.push("Vừa ở gia đình nhỏ, vừa dễ cho thuê – phòng đa năng làm phòng làm việc / phòng trẻ");else why.push("Vốn vào nhẹ nhất, dễ cho thuê nhất – khách du lịch chuộng Studio");
-if(A.muc==="ngan")why.push("Khách du lịch thích căn nhìn biển, giá đêm Studio dự kiến 2,2–2,9 tr");if(A.muc==="dai")why.push("Thuê theo tháng ổn định, ít công quản lý");if(A.muc==="o")why.push("Mở cửa là biển, ~400 m ra bãi tắm Sơn Thủy");if(A.muc==="tg")why.push("Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng – quỹ căn có hạn");if(A.von==="it")why.push("Chỉ ~25% đến nhận nhà – vay 70% được hỗ trợ lãi suất tới 24 tháng");
+if(A.muc==="ngan")why.push("Khách du lịch thích căn nhìn biển, giá đêm Studio dự kiến 2,2–2,9 tr");if(A.muc==="dai")why.push("Thuê theo tháng ổn định, ít công quản lý");if(A.muc==="o")why.push("Mở cửa là biển, ~300 m ra bãi tắm Sơn Thủy");if(A.muc==="tg")why.push("Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng – quỹ căn có hạn");if(A.von==="it")why.push("Chỉ ~25% đến nhận nhà – vay 70% được hỗ trợ lãi suất tới 24 tháng");
 if(has("vuon"))tip.push("Tầng 2–3: Studio ban công 53,71 m², 2BR ban công tới 84,29 m²");if(has("cao"))tip.push("Tầng 20–30: tầng 30 chỉ 16 căn, căn rộng nhất tòa");if(has("goc"))tip.push("Căn góc bo tròn 2 mặt thoáng (vị trí 03, 03A, 11, 18, 19, 20)");if(has("bien"))tip.push("Dãy căn mặt trước nhìn thẳng biển Mỹ Khê – Sơn Thủy");if(has("gia"))tip.push("Tầng thấp: mỗi tầng thấp hơn giá giảm ~10–30 triệu, vẫn gần biển");if(!tip.length)tip.push("Dãy căn mặt trước nhìn biển – nhóm được hỏi nhiều nhất");
 var m='<div class="tqm"><div><small>Giá dự kiến</small><b>'+"~"+f(P)+'</b><em>'+(k==="st"?"tầng thấp chỉ từ ~1,8 tỷ":k==="br1"?"ước tính chỉ từ ~3 tỷ":k==="br2"?"ước tính chỉ từ ~3,8 tỷ":"ước tính ~70 tr/m²")+'</em></div>'+
 '<div class="hl"><small>Đến nhận nhà chỉ trả</small><b>~'+f(c25)+'</b><em>25% giá căn</em></div>'+
@@ -964,7 +964,7 @@ def tai_chinh(ctx='ADS'):
 
 def dau_tu_san(ctx='ADS'):
     no = ['Xin phép xây dựng, PCCC, kinh doanh lưu trú – thủ tục kéo dài nhiều năm', 'Ở xa, đi lại giám sát công trình khó khăn', 'Giá vật liệu, nhân công leo thang, dễ đội vốn', 'Vốn lớn bỏ ra một lần, đọng vốn trong lúc xây', 'Tự lo thương hiệu, tiện ích, tìm khách từ đầu']
-    yes = ['Chủ đầu tư <b>bán nguyên sàn</b> (tầng điển hình 28 căn) hoặc <b>nhiều căn</b> – vận hành như khách sạn', 'Pháp lý dự án đã có, <b>công trình cấp I</b>, Sun Group xây và bàn giao 11/2028', 'Tận dụng <b>thương hiệu Sun Group</b>, hồ bơi, gym, khối đế thương mại có sẵn', 'Vị trí <b>mặt biển Mỹ Khê – Sơn Thủy</b>, ~400 m ra biển, khách du lịch quanh năm', '<b>Có chiết khấu khi mua nhiều căn</b>; vốn nhẹ ~25% đến khi nhận nhà, ngân hàng hỗ trợ vay']
+    yes = ['Chủ đầu tư <b>bán nguyên sàn</b> (tầng điển hình 28 căn) hoặc <b>nhiều căn</b> – vận hành như khách sạn', 'Pháp lý dự án đã có, <b>công trình cấp I</b>, Sun Group xây và bàn giao 11/2028', 'Tận dụng <b>thương hiệu Sun Group</b>, hồ bơi, gym, khối đế thương mại có sẵn', 'Vị trí <b>mặt biển Mỹ Khê – Sơn Thủy</b>, ~300 m ra biển, khách du lịch quanh năm', '<b>Có chiết khấu khi mua nhiều căn</b>; vốn nhẹ ~25% đến khi nhận nhà, ngân hàng hỗ trợ vay']
     return ('<section class="sec dts" id="dau-tu"><div class="wrap">'
             '<div class="sh"><span class="ey">Dành cho nhà đầu tư</span><h2 class="dp">Muốn xây khách sạn? <b>Mua 1 sàn Sun Saphia</b> có thể nhanh hơn</h2></div>'
             '<p class="lead just" style="max-width:860px;margin:0 auto 18px;text-align:center">Thuê dài hạn có dòng tiền ổn định, thuê ngắn hạn cho doanh thu cao hơn theo mùa. Nếu anh/chị đang tính xây tòa căn hộ hay khách sạn để cho thuê, đây có thể là một lựa chọn gọn hơn.</p>'
@@ -1022,7 +1022,7 @@ def hero_fx():
             '<span class="hxe">Sun Group · Mặt biển Sơn Thủy, Đà Nẵng</span>'
             '<h1>Căn hộ mặt biển Sun Group – chỉ <em>~450 triệu</em> đến khi nhận nhà</h1>'
             '<p class="hxl">Sun Saphia Residence – căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng. Studio giá dự kiến <b>từ ~1,8 tỷ</b>, thanh toán <b>25%</b> đến khi nhận nhà, ngân hàng cho vay <b>70%</b> hỗ trợ lãi suất tới 24 tháng.</p>'
-            '<div class="hxn"><div><b>25%</b><span>vốn tự có đến khi nhận nhà</span></div><div><b>70%</b><span>vay ngân hàng, hỗ trợ lãi suất tới 24 tháng</span></div><div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div></div>'
+            '<div class="hxn"><div><b>25%</b><span>vốn tự có đến khi nhận nhà</span></div><div><b>70%</b><span>vay ngân hàng, hỗ trợ lãi suất tới 24 tháng</span></div><div><b>~300 m</b><span>ra bãi tắm Sơn Thủy</span></div></div>'
             '<ul class="hxc"><li>Sun Group phát triển</li><li>Công trình cấp I · niên hạn 100 năm</li><li>Sổ hồng lâu dài 50 năm</li><li>Mở bán 05/12/2026 tại Đà Nẵng</li><li>Sự kiện 9:00 CN 08/11 · Sun Gallery Tây Hồ View</li><li>Đại lý phân phối chính thức</li></ul>'
             '<div class="hxa"><button type="button" data-film>▶ Xem phim dự án 3 phút</button><button type="button" data-4d>🏙 Xem mô hình 4D</button></div>'
             '<p style="margin:14px 0 0;font-size:12px;color:#9FB8CC">Giá và chính sách dự kiến, theo thông tin chủ đầu tư công bố chính thức.</p></div>'
@@ -1086,7 +1086,7 @@ def ads(domain, home_page=False):
          'document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!m.hidden)cl()});})();</script>'
          '<div class="hcvt"><div class="wrap"><span class="tag" id="hevT">📅 Sự kiện sắp tới · <b>08/11/2026</b></span>'
          '<h1 class="dp ssn"><span class="ssn1">Sun Saphia</span> <span class="ssn2">Residence</span></h1><p class="ssl"><i>Biển trời</i> khiêu vũ <span>·</span> Tiện ích hòa nhịp</p><p class="msg">Căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng – mở cửa là biển</p>'
-         '<div class="cdn"><span class="cdl">⏳ Đếm ngược tới sự kiện giới thiệu dự án tại Sun Gallery Tây Hồ View · 9:00 CN 08/11/2026</span><div class="cdb"><div><b data-u="d">--</b><small>ngày</small></div><div><b data-u="h">--</b><small>giờ</small></div><div><b data-u="m">--</b><small>phút</small></div><div><b data-u="s">--</b><small>giây</small></div></div><a class="cdm" href="#su-kien" style="display:inline-block;margin-top:10px;color:#0E6E99;font-weight:700;font-size:14px">Xem lịch sự kiện tháng 11 →</a></div><script>(function(){var EV=[["2026-11-08T09:00:00+07:00","9:00 CN 08/11/2026","sự kiện giới thiệu dự án tại Sun Gallery Tây Hồ View, Hà Nội"],["2026-11-15T08:00:00+07:00","15/11/2026","sự kiện nhận booking tại Đà Nẵng"],["2026-11-21T08:00:00+07:00","21/11/2026","sự kiện nhận booking tại Hà Nội"],["2026-11-28T08:00:00+07:00","28/11/2026","sự kiện bán hàng của Chủ đầu tư"]];function z(n){return(n<10?"0":"")+n}function nx(){var now=Date.now();for(var i=0;i<EV.length;i++){var t=Date.parse(EV[i][0]);if(t>now)return [t,EV[i]]}return null}function t(){var n=nx(),tg=document.getElementById("hevT");document.querySelectorAll(".cdn").forEach(function(e){var l=e.querySelector(".cdl"),c=e.querySelector(".cdb");if(!n){if(c)c.style.display="none";if(l)l.textContent="🏁 Đang nhận booking – liên hệ để giữ căn";return}var d=Math.max(0,n[0]-Date.now())/1000,u={d:Math.floor(d/86400),h:Math.floor(d%%86400/3600),m:Math.floor(d%%3600/60),s:Math.floor(d%%60)};for(var k in u){var b=e.querySelector("[data-u="+k+"]");if(b)b.textContent=k=="d"?u[k]:z(u[k])}if(l)l.textContent="⏳ Đếm ngược tới "+n[1][2]+" · "+n[1][1]});if(tg&&n)tg.innerHTML="📅 Sự kiện sắp tới · <b>"+n[1][1]+"</b>"}t();setInterval(t,1000)})();</script><div class="hnum"><div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>30 tầng</b><span>114 m · 782 căn</span></div>'
+         '<div class="cdn"><span class="cdl">⏳ Đếm ngược tới sự kiện giới thiệu dự án tại Sun Gallery Tây Hồ View · 9:00 CN 08/11/2026</span><div class="cdb"><div><b data-u="d">--</b><small>ngày</small></div><div><b data-u="h">--</b><small>giờ</small></div><div><b data-u="m">--</b><small>phút</small></div><div><b data-u="s">--</b><small>giây</small></div></div><a class="cdm" href="#su-kien" style="display:inline-block;margin-top:10px;color:#0E6E99;font-weight:700;font-size:14px">Xem lịch sự kiện tháng 11 →</a></div><script>(function(){var EV=[["2026-11-08T09:00:00+07:00","9:00 CN 08/11/2026","sự kiện giới thiệu dự án tại Sun Gallery Tây Hồ View, Hà Nội"],["2026-11-15T08:00:00+07:00","15/11/2026","sự kiện nhận booking tại Đà Nẵng"],["2026-11-21T08:00:00+07:00","21/11/2026","sự kiện nhận booking tại Hà Nội"],["2026-11-28T08:00:00+07:00","28/11/2026","sự kiện bán hàng của Chủ đầu tư"]];function z(n){return(n<10?"0":"")+n}function nx(){var now=Date.now();for(var i=0;i<EV.length;i++){var t=Date.parse(EV[i][0]);if(t>now)return [t,EV[i]]}return null}function t(){var n=nx(),tg=document.getElementById("hevT");document.querySelectorAll(".cdn").forEach(function(e){var l=e.querySelector(".cdl"),c=e.querySelector(".cdb");if(!n){if(c)c.style.display="none";if(l)l.textContent="🏁 Đang nhận booking – liên hệ để giữ căn";return}var d=Math.max(0,n[0]-Date.now())/1000,u={d:Math.floor(d/86400),h:Math.floor(d%%86400/3600),m:Math.floor(d%%3600/60),s:Math.floor(d%%60)};for(var k in u){var b=e.querySelector("[data-u="+k+"]");if(b)b.textContent=k=="d"?u[k]:z(u[k])}if(l)l.textContent="⏳ Đếm ngược tới "+n[1][2]+" · "+n[1][1]});if(tg&&n)tg.innerHTML="📅 Sự kiện sắp tới · <b>"+n[1][1]+"</b>"}t();setInterval(t,1000)})();</script><div class="hnum"><div><b>~300 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>30 tầng</b><span>114 m · 782 căn</span></div>'
          '<div><b>1,8 tỷ</b><em class="dk">dự kiến</em><span>Studio tầng thấp · giá tham khảo CĐT</span></div><div><b>~450 triệu</b><em class="dk">dự kiến</em><span>25%% đến khi nhận nhà (căn 1,8 tỷ)</span></div></div>'
          '<div class="hcta"><a class="btn" href="#dang-ky">Nhận bảng giá gốc qua Zalo</a><button type="button" class="btn ghost" data-film>▶ Xem phim dự án 3 phút</button></div></div></div></section>'
          '<section class="sec tq" id="tong-quan"><div class="wrap">'
@@ -1099,11 +1099,11 @@ def ads(domain, home_page=False):
          + sh('01', 'Tổng quan dự án', 'Một tòa tháp – <b>ba khung trời</b>: biển, sông, núi', 'o') +
          '<div class="tqg"><div class="tqt">'
          '<p class="tqp">Sáng mở rèm, <b>mặt trời mọc lên từ biển Mỹ Khê</b>. Chiều xuống, Sơn Trà và Ngũ Hành Sơn đổi màu ngay trước tầm mắt. Đêm về, ánh đèn sông Hàn và <b>pháo hoa mùa lễ hội</b> sáng rực phía thành phố. Đó là nhịp sống mỗi ngày ở <b>Sun Saphia Residence</b> – căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng.</p>'
-         '<p class="tqp">Tòa tháp 30 tầng đứng ở giao lộ <b>Võ Nguyên Giáp – Trường Sa</b>, cách bãi tắm Sơn Thủy khoảng 400 m. Dự án chỉ có ba loại căn gọn gàng – <b>Studio 30 m², 1BR+ 50 m², 2BR 60–70 m²</b>, chiều cao tầng 3,5 m – vừa để ở, vừa dễ cho thuê. Mời anh/chị kéo xuống xem vị trí, tiện ích và tự chọn căn trên mặt bằng từng tầng.</p>'
+         '<p class="tqp">Tòa tháp 30 tầng đứng ở giao lộ <b>Võ Nguyên Giáp – Trường Sa</b>, cách bãi tắm Sơn Thủy chỉ hơn 300 m. Dự án chỉ có ba loại căn gọn gàng – <b>Studio 30 m², 1BR+ 50 m², 2BR 60–70 m²</b>, chiều cao tầng 3,5 m – vừa để ở, vừa dễ cho thuê. Mời anh/chị kéo xuống xem vị trí, tiện ích và tự chọn căn trên mặt bằng từng tầng.</p>'
          '<p class="tqp">Kiến trúc lấy cảm hứng từ <b>nghệ thuật điêu khắc Chăm Pa</b> và hình tượng <b>vũ nữ Apsara</b>, chắt lọc tinh thần di sản bằng ngôn ngữ đương đại – một biểu tượng mới của Sun Group bên biển Đà Nẵng.</p>'
          '</div><figure class="tqf"><img src="' + RAW + '26dd1b88cf3f28ab74c043008a290cec21eae5dd/landing/sun-saphia/v4/img/phoi-canh-vi-tri-cham-pa-800.webp" srcset="' + RAW + '26dd1b88cf3f28ab74c043008a290cec21eae5dd/landing/sun-saphia/v4/img/phoi-canh-vi-tri-cham-pa-800.webp 800w, ' + RAW + '26dd1b88cf3f28ab74c043008a290cec21eae5dd/landing/sun-saphia/v4/img/phoi-canh-vi-tri-cham-pa.webp 1076w" sizes="(max-width: 760px) 100vw, 600px" width="800" height="1040" loading="lazy" decoding="async" alt="Phối cảnh Sun Saphia Residence lúc hoàng hôn tại giao lộ đường Võ Nguyên Giáp – Nguyễn Đức Thuận – Nguyễn Đình Trân, nhìn ra bãi tắm Sơn Thủy, Đà Nẵng">'
          '<figcaption>Phối cảnh minh họa · giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận, sát bãi tắm Sơn Thủy</figcaption></figure></div>'
-         '<div class="tqk"><div><b>30 tầng</b><span>782 căn hộ</span></div><div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>3,5 m</b><span>chiều cao tầng mỗi căn</span></div><div><b>Cấp I</b><span>niên hạn công trình 100 năm</span></div></div>'
+         '<div class="tqk"><div><b>30 tầng</b><span>782 căn hộ</span></div><div><b>~300 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>3,5 m</b><span>chiều cao tầng mỗi căn</span></div><div><b>Cấp I</b><span>niên hạn công trình 100 năm</span></div></div>'
          '<div class="tqa"><button type="button" class="btn" data-pop data-interest="ADS – tổng quan">Nhận bảng giá gốc qua Zalo</button><a class="nx" href="#vi-tri">Xem vị trí dự án ↓</a></div>'
          '</div></section>'
          '<section class="hstrip"><div class="wrap">%s'
@@ -1147,7 +1147,7 @@ def ads(domain, home_page=False):
     b += more_pages()
     b += cta_block('ADS – form cuối trang')
     title = 'Sun Saphia Residence – Căn hộ mặt biển Sun Group Đà Nẵng chỉ từ 1,8 tỷ'
-    desc = 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: Studio chỉ từ ~1,8 tỷ (dự kiến), thanh toán 25% đến khi nhận nhà, vay 70% hỗ trợ lãi suất 24 tháng. Cách biển 400m, công trình cấp I. Zalo 0904 567 009.'
+    desc = 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: Studio chỉ từ ~1,8 tỷ (dự kiến), thanh toán 25% đến khi nhận nhà, vay 70% hỗ trợ lãi suất 24 tháng. Cách biển chỉ hơn 300m, công trình cấp I. Zalo 0904 567 009.'
     for frag, sid in [('4 quy hoạch <b>bao quanh dự án</b>', 'quy-hoach'), ('Tiềm năng <b>dòng tiền</b>', 'dong-tien'), ('Công trình <b>cấp I</b>', 'phap-ly')]:
         i = b.find(frag)
         if i > 0:
@@ -1186,7 +1186,7 @@ def vi_sao():
                          'quỹ đất mặt biển gần như cạn, du lịch Đà Nẵng tăng gần 30%, hạ tầng trục biển và đường sắt đô thị, dân số mới sau sáp nhập, lãi suất đi xuống và nhu cầu căn hộ nhỏ để ở – cho thuê.',
                          'thap-tren-cao-ngay', 'Sun Saphia Residence trên trục biển Võ Nguyên Giáp – Trường Sa nhìn từ trên cao', 'Web – vì sao mặt biển đầu trang')
     fq, fld = faq([
-        ('Sun Saphia Residence có phải căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng?', 'Đúng. Dự án do Sun Property – thành viên Tập đoàn Sun Group – phát triển, được giới thiệu tại Kick-off 23/10/2026 là dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, trên trục Võ Nguyên Giáp – Trường Sa, cách bãi tắm Sơn Thủy khoảng 400 m. Trước đó Sun Group đã có resort và biệt thự biển (InterContinental, Premier Village), nhưng đây là sản phẩm căn hộ cao tầng mặt biển đầu tiên.'),
+        ('Sun Saphia Residence có phải căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng?', 'Đúng. Dự án do Sun Property – thành viên Tập đoàn Sun Group – phát triển, được giới thiệu tại Kick-off 23/10/2026 là dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, trên trục Võ Nguyên Giáp – Trường Sa, cách bãi tắm Sơn Thủy chỉ hơn 300 m. Trước đó Sun Group đã có resort và biệt thự biển (InterContinental, Premier Village), nhưng đây là sản phẩm căn hộ cao tầng mặt biển đầu tiên.'),
         ('Sun Group đã làm những dự án nào ở Đà Nẵng?', 'Du lịch – nghỉ dưỡng: Sun World Ba Na Hills (cáp treo, Cầu Vàng), InterContinental Danang Sun Peninsula Resort, Premier Village Danang Resort, Sun World Asia Park; biệt thự biển tại Premier Village. Căn hộ: Sun Cosmo, Sun Ponte, Sun Symphony ven sông Hàn; Sun Galaxy Complex; FourS Tower (Sun Riverpolis). Sun Saphia Residence là dự án căn hộ cao tầng mặt biển đầu tiên.'),
         ('Khu đất trước Sun Saphia sẽ làm gì?', 'UBND TP Đà Nẵng đã phê duyệt dự án Công viên công cộng (Quyết định 2958/QĐ-UBND) trên khoảng 2,45 ha đất thu hồi từ dự án Hòn Ngọc Á Châu, tổng mức đầu tư hơn 47 tỷ đồng, giai đoạn 2025–2027, gồm quảng trường biển, đường dạo, khu vui chơi, bãi đậu xe, khu tắm nước ngọt.'),
         ('Vì sao căn hộ mặt biển ở Đà Nẵng hiếm?', 'Biển là tài nguyên hữu hạn; dải đất ven biển Đà Nẵng phần lớn đã dành cho resort, khách sạn và không gian công cộng. Bãi biển là tài sản công, nên căn hộ có thể nhìn thẳng ra biển và đi bộ ra bãi tắm chỉ còn rất ít vị trí.'),
@@ -1196,7 +1196,7 @@ def vi_sao():
     b = hero
     b += tldr('vì sao Sun Group ra mắt căn hộ mặt biển tại Đà Nẵng', [
         ('Hành trình', 'Núi (Bà Nà) → resort, biệt thự biển (InterContinental, Premier Village) → căn hộ sông Hàn (Sun Cosmo, Ponte, Symphony) → Nam trung tâm (Galaxy, FourS) → căn hộ cao tầng mặt biển (Saphia)'),
-        ('1. Quỹ đất', 'Đất mặt biển Đà Nẵng gần như cạn; khu Saphia là một trong rất ít vị trí căn hộ đi bộ ra biển (~400 m)'),
+        ('1. Quỹ đất', 'Đất mặt biển Đà Nẵng gần như cạn; khu Saphia là một trong rất ít vị trí căn hộ đi bộ ra biển (~300 m)'),
         ('2. Du lịch', '15,86 triệu lượt khách 9 tháng 2026 (+29,6%); Đà Nẵng là 1 trong 3 cực tăng trưởng du lịch cả nước'),
         ('3. Hạ tầng', 'Mở rộng trục biển 2.633 tỷ; ga LRT 09 cách ~500 m; Khu thương mại tự do Đà Nẵng'),
         ('4. Dân số', '~3 triệu dân sau sáp nhập Quảng Nam; di cư ròng 15–16 nghìn người/năm'),
@@ -1205,10 +1205,10 @@ def vi_sao():
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Quỹ đất', 'Đất mặt biển Đà Nẵng – <b>gần như không còn</b>', 'o') +
           '<div class="g2"><div class="txt just"><p>Biển là tài nguyên hữu hạn. Dải đất ven biển Đà Nẵng từ Sơn Trà về Hội An phần lớn đã thuộc về resort, khách sạn và không gian công cộng; '
           'bãi biển và vùng nước biển là tài sản công do Nhà nước quản lý. Vì vậy những vị trí <b>căn hộ để ở</b> mà đi bộ được ra biển là rất hiếm.</p>'
-          '<p>Sun Saphia Residence nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, trên khu đất 3.720,1 m², cách bãi tắm Sơn Thủy khoảng 400 m qua công viên ven biển. '
+          '<p>Sun Saphia Residence nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, trên khu đất 3.720,1 m², cách bãi tắm Sơn Thủy chỉ hơn 300 m qua công viên ven biển. '
           'Phía trước, thành phố thu hồi khoảng <b>2,45 ha</b> đất của dự án Hòn Ngọc Á Châu bỏ hoang để làm <b>công viên công cộng hơn 47 tỷ đồng</b> (Quyết định 2958/QĐ-UBND, giai đoạn 2025–2027) với quảng trường biển, đường dạo, khu vui chơi – tầm nhìn ra biển được giữ thoáng. <a class="lk" href="{M}/quy-hoach">Xem bản vẽ và 4 quy hoạch quanh dự án →</a></p>'
           '<ul class="ck"><li>Trước mặt là biển Mỹ Khê – Sơn Thủy</li><li>Sau lưng là sông Hàn, bên cạnh là Ngũ Hành Sơn</li><li><b>3 đường xuống biển</b> ngay trước khu Saphia – băng qua đường là tới bãi cát</li><li>Chuỗi 3 công viên bãi tắm: Sơn Thủy, công viên đối diện, Huyền Trân Công Chúa</li></ul></div>'
-          + '<div style="display:flex;flex-direction:column;gap:18px">' + ('<figure class="fg"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 900px" width="1600" height="785" alt="Ảnh vệ tinh khu Saphia: Sun Saphia Residence bên đường ven biển Võ Nguyên Giáp – Trường Sa, phía trước có 3 đường xuống biển Mỹ Khê – Sơn Thủy" loading="lazy" decoding="async"><figcaption>3 đường xuống biển ngay trước khu Saphia (ảnh vệ tinh theo tài liệu Kick-off)</figcaption></figure>' % ((RAW + '120376417ef276742a1870df38743bff7bb94046/landing/sun-saphia/v4/img/ba-duong-xuong-bien',) * 3)) + ('<figure class="fg"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 900px" width="1600" height="786" alt="Bản đồ vị trí Sun Saphia Residence tại giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận, cách biển Mỹ Khê – Sơn Thủy khoảng 400 m, phía trước là khu đất quy hoạch công viên" loading="lazy" decoding="async"><figcaption>Vị trí dự án trên ảnh vệ tinh – trước mặt là khu đất ven biển quy hoạch công viên, rồi tới bãi biển</figcaption></figure>' % ((RAW + '07557a38e28b15379350b5b9ac36fc91356ef704/landing/sun-saphia/v4/img/vi-tri-saphia',) * 3)) + '</div>' + '</div></div></section>')
+          + '<div style="display:flex;flex-direction:column;gap:18px">' + ('<figure class="fg"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 900px" width="1600" height="785" alt="Ảnh vệ tinh khu Saphia: Sun Saphia Residence bên đường ven biển Võ Nguyên Giáp – Trường Sa, phía trước có 3 đường xuống biển Mỹ Khê – Sơn Thủy" loading="lazy" decoding="async"><figcaption>3 đường xuống biển ngay trước khu Saphia (ảnh vệ tinh theo tài liệu Kick-off)</figcaption></figure>' % ((RAW + '120376417ef276742a1870df38743bff7bb94046/landing/sun-saphia/v4/img/ba-duong-xuong-bien',) * 3)) + ('<figure class="fg"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 900px" width="1600" height="786" alt="Bản đồ vị trí Sun Saphia Residence tại giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận, cách biển Mỹ Khê – Sơn Thủy chỉ hơn 300 m, phía trước là khu đất quy hoạch công viên" loading="lazy" decoding="async"><figcaption>Vị trí dự án trên ảnh vệ tinh – trước mặt là khu đất ven biển quy hoạch công viên, rồi tới bãi biển</figcaption></figure>' % ((RAW + '07557a38e28b15379350b5b9ac36fc91356ef704/landing/sun-saphia/v4/img/vi-tri-saphia',) * 3)) + '</div>' + '</div></div></section>')
     b += pband('Căn hộ cao tầng <b>mặt biển đầu tiên</b>', 'Tòa tháp 30 tầng – 114 m của Sun Group trên trục biển Võ Nguyên Giáp – Trường Sa.', 'Vì sao mặt biển – dải ảnh tòa tháp')
     b += ('<section class="sec"><div class="wrap">' + sh('2', 'Hành trình Sun Group', 'Từ núi, qua sông, <b>ra biển</b> Đà Nẵng', 'n') +
           '<div class="txt just"><p>Bà Nà Hills là dự án đầu tiên đánh dấu chặng đường của Sun Group tại Việt Nam (từ 2007). Gần 20 năm qua, tập đoàn đã đi một vòng trọn vẹn quanh Đà Nẵng: '
@@ -1221,7 +1221,7 @@ def vi_sao():
           '</div>'
           '<div class="g2" style="margin-top:22px;align-items:center"><div class="sbox2"><span class="ey">CHẶNG 5 · BIỂN</span><h3 class="dp" style="font-size:30px;margin:6px 0 10px">Căn hộ cao tầng mặt biển – <b>mảnh ghép còn thiếu</b></h3>'
           '<p class="just">Sun Group đã có núi (Bà Nà), có sông (chuỗi căn hộ sông Hàn), có resort và <b>biệt thự biển</b> – nhưng chưa có <b>căn hộ cao tầng</b> nào ngay mặt biển Đà Nẵng. Biệt thự biển giá trị lớn, số lượng ít; căn hộ cao tầng mở cánh cửa sở hữu “nhà mặt biển” cho nhiều người hơn, với vốn vừa sức. Saphia lấp đúng khoảng trống đó: '
-          'trên trục Võ Nguyên Giáp – Trường Sa, cách bãi tắm Sơn Thủy khoảng 400 m, tầm nhìn cùng lúc về biển Mỹ Khê, sông Hàn và Ngũ Hành Sơn. '
+          'trên trục Võ Nguyên Giáp – Trường Sa, cách bãi tắm Sơn Thủy chỉ hơn 300 m, tầm nhìn cùng lúc về biển Mỹ Khê, sông Hàn và Ngũ Hành Sơn. '
           'Vì vậy thông điệp của dự án là <b>“Trước mặt là Biển · Sau lưng là Sông · Bên cạnh là Núi”</b>.</p></div>'
           '<div><ul class="ck"><li><b>Kinh nghiệm bàn giao</b> – chuỗi căn hộ sông Hàn đã về tay cư dân, người mua có thể đến xem chất lượng thực tế</li>'
           '<li><b>Thương hiệu cho thuê</b> – các tòa Sun Group sông Hàn (như The Panoma) đang cho thuê 18–35 triệu/tháng, là mốc tham chiếu cho căn mặt biển</li>'
@@ -1313,7 +1313,7 @@ def cong_vien():
           '<div class="g2" style="align-items:start"><div><div class="txt just">'
           '<p>Sun Saphia Residence nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa. Băng qua đường Trường Sa là dải đất ven biển của dự án KDL Hòn Ngọc Á Châu – khu đất khởi công từ năm 2010 rồi bỏ hoang nhiều năm.</p>'
           '<p>Thành phố đã thống nhất với chủ đầu tư thu hồi <b>khoảng 2,45 ha ở phía Nam</b> dự án để làm <b>công viên công cộng</b>. Trên sơ đồ quy hoạch, khu đất được đánh dấu <b>“Vị trí quy hoạch”</b> – một dải chạy từ đường Trường Sa thẳng ra bờ biển.</p>'
-          '<ul class="ck"><li>Khoảng <b>400 m</b> từ Sun Saphia ra mép biển</li><li>Không gian công cộng – không xây cao tầng chắn tầm nhìn</li><li>Nằm trong chuỗi công viên bãi tắm ven biển Ngũ Hành Sơn</li></ul></div>'
+          '<ul class="ck"><li>Chỉ hơn <b>300 m</b> từ Sun Saphia ra mép biển</li><li>Không gian công cộng – không xây cao tầng chắn tầm nhìn</li><li>Nằm trong chuỗi công viên bãi tắm ven biển Ngũ Hành Sơn</li></ul></div>'
           + fig('khu-dat-cong-vien', 'Ảnh vệ tinh khu vực Sun Saphia Residence và dải đất ven biển phía trước, nơi quy hoạch công viên công cộng', 'Ảnh vệ tinh khu vực – dải đất ven biển phía trước dự án') + '</div>'
           + hf('quy-hoach-vi-tri-cong-vien', 946, 1285, 'Bản đồ quy hoạch khu ven biển Ngũ Hành Sơn, đánh dấu vị trí quy hoạch công viên công cộng giữa các khu du lịch ven biển', 'Sơ đồ “Vị trí quy hoạch” trong hồ sơ dự án công viên') + '</div></div></section>')
     leg = [('1–2', 'Lối vào, trục đường dạo chính từ đường Trường Sa'), ('3', 'Cây xanh cảnh quan'), ('4', 'Thảm cỏ lớn phục vụ hoạt động dã ngoại'),
