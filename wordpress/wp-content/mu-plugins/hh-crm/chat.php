@@ -1655,6 +1655,7 @@ function hh_chat_settings_page() {
 				'model'       => isset( HH_CHAT_MODELS[ $_POST['model'] ?? '' ] ) ? sanitize_text_field( wp_unslash( $_POST['model'] ) ) : 'claude-opus-5-5',
 				'daily_limit' => absint( $_POST['daily_limit'] ?? 300 ),
 				'greeting'    => sanitize_textarea_field( wp_unslash( $_POST['greeting'] ?? '' ) ),
+				'embed_domains' => sanitize_textarea_field( wp_unslash( $_POST['embed_domains'] ?? '' ) ),
 			),
 			false
 		);
@@ -1688,6 +1689,13 @@ function hh_chat_settings_page() {
 				</select></td></tr>
 				<tr><th>Giới hạn AI / ngày</th><td><input type="number" min="0" name="daily_limit" value="<?php echo (int) hh_chat_opt( 'daily_limit', 300 ); ?>" class="small-text"> lượt trả lời (0 = không giới hạn). Quá giới hạn tự chuyển sang trả lời theo kịch bản.</td></tr>
 				<tr><th>Lời chào riêng</th><td><textarea name="greeting" rows="2" class="large-text" placeholder="Để trống: tự chào theo trang khách đang xem"><?php echo esc_textarea( (string) hh_chat_opt( 'greeting' ) ); ?></textarea></td></tr>
+				<tr><th>Nhúng chat vào LadiPage</th><td>
+					<p>Dán 1 dòng dưới đây vào LadiPage (<strong>Cài đặt trang → Mã tùy chỉnh / Tracking → trước thẻ &lt;/body&gt;</strong>, hoặc phần tử <strong>HTML</strong>). Khóa API vẫn nằm trên web này, khách chat ở LadiPage lưu vào Khách hàng và báo Telegram như web chính.</p>
+					<p><code style="display:block;padding:8px;user-select:all">&lt;script src="<?php echo esc_url( home_url( '/?hh_chat_nhung=1&du_an=sun-solar-residence' ) ); ?>" defer&gt;&lt;/script&gt;</code></p>
+					<p class="description">Đổi <code>sun-solar-residence</code> thành đường dẫn dự án của trang LadiPage đó (phần sau /du-an/ trên web) để trợ lý trả lời đúng dự án; bỏ <code>&amp;du_an=…</code> nếu là trang chung.</p>
+					<p><label>Tên miền riêng của trang LadiPage (mỗi dòng 1 tên miền, VD <code>sunsolar-danang.com</code>):<br><textarea name="embed_domains" rows="2" class="large-text code" placeholder="sunsolar-danang.com"><?php echo esc_textarea( (string) hh_chat_opt( 'embed_domains' ) ); ?></textarea></label></p>
+					<p class="description">Tên miền *.ladipage.com, *.ladipage.me, *.ladi.me đã được cho phép sẵn. Web khác chép mã cũng không chat được.</p>
+				</td></tr>
 			</table>
 			<p><button class="button button-primary" name="hh_chat_save" value="1">Lưu</button></p>
 		</form>

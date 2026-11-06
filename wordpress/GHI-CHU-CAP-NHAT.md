@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.84** + plugin Hoàng Hiệp CRM **2.20.197**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.84** + plugin Hoàng Hiệp CRM **2.20.198**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -45,7 +45,9 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 - **Landing The Poet:** ảnh chính (toàn cảnh biển Mỹ Khê – Sơn Trà) hiện trọn ở đầu trang, không lớp phủ tối, không chữ đè; tiêu đề, thông tin nhanh và nút đặt ngay bên dưới ảnh.
 
-## Có gì mới – plugin 2.20.197 · giao diện 2.15.84 (06/11/2026)
+## Có gì mới – plugin 2.20.198 · giao diện 2.15.84 (06/11/2026)
+
+- **Nhúng chat AI vào LadiPage:** dán 1 dòng `<script src="https://hiephoangmt.com/?hh_chat_nhung=1&du_an=…" defer></script>` vào trang LadiPage → hiện đúng khung chat của web (AI, trả lời theo dự án), khách để số lưu vào Khách hàng + báo Telegram (nguồn ghi "[LadiPage] …"). Khóa API vẫn chỉ ở máy chủ web. Chỉ tên miền LadiPage / tên miền anh khai trong Chat trên web mới dùng được. Mã nhúng có sẵn trong trang Chat trên web.
 
 - **Sửa lỗi AI chat (HTTP 400 "Country code VN is not supported"):** bỏ thiết lập vị trí Việt Nam của công cụ tra web; nếu công cụ tra web bị từ chối, trợ lý tự hỏi lại AI không kèm tra web thay vì rơi về kịch bản.
 
