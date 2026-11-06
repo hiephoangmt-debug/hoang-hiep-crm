@@ -26,12 +26,15 @@ NEW = (TAG + "\nfunction pmFrame(){ if(!document.body.classList.contains('pm')||
   "  var tg=new THREE.Vector3(X1-14.9+s,y,Z0+27.8), p=new THREE.Vector3(tg.x-d*0.02,y+d,tg.z);\n"
   "  flyTo(T.localToWorld(p),T.localToWorld(tg)); }\n"
   "bPlan.onclick=function(){ if(document.body.classList.contains('pm')){ if(mode==='view') setMode('overview'); if(!planOn) setPlan(true); setTimeout(pmFrame,30); return; } setPlan(!planOn); };\n"
-  "addEventListener('message',function(e){ var d=e.data; if(!d||!d.ss4dPlanMode) return; document.body.classList.add('pm'); if(mode==='view') setMode('overview'); if(!planOn) setPlan(true); setTimeout(pmFrame,60); });\n"
+  "addEventListener('message',function(e){ var d=e.data; if(!d||!d.ss4dPlanMode) return; if(!document.body.classList.contains('pm')){ hourEl.max='23.5'; var lb=document.querySelector('label[for=hour]'); if(lb) lb.textContent='Giờ · ngày → đêm'; } document.body.classList.add('pm'); if(mode==='view') setMode('overview'); if(!planOn) setPlan(true); setTimeout(pmFrame,60); });\n"
   "addEventListener('resize',function(){ setTimeout(pmFrame,120); });")
 if TAG not in doc:
     k = doc.index('</style>'); doc = doc[:k] + CSS + doc[k:]
     assert doc.count(OLD) == 1
     doc = doc.replace(OLD, NEW)
+    p = "if(hv>20) hv=5;"
+    assert doc.count(p) == 1
+    doc = doc.replace(p, "if(hv>+hourEl.max) hv=+hourEl.min;")
     a = "f3Btn=document.createElement('button');"
     assert doc.count(a) == 1
     doc = doc.replace(a, a + " f3Btn.id='f3Btn';")
