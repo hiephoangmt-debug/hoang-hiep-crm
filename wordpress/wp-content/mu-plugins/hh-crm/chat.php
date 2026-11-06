@@ -9,6 +9,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/** Tên bài / dự án dạng chữ thường cho chat, tin báo, lời nhắc AI: "Hoiana Resort &#038; Golf" → "Hoiana Resort & Golf". */
+function hh_chat_title( $post = 0 ) {
+	return html_entity_decode( wp_strip_all_tags( get_the_title( $post ) ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+}
+
 const HH_CHAT_MODELS = array(
 	'claude-opus-5-5'   => 'Claude Opus 5.5 – trả lời tốt nhất (mặc định)',
 	'claude-sonnet-5-5' => 'Claude Sonnet 5.5 – nhanh, rẻ hơn',
@@ -52,7 +57,7 @@ add_action(
 		$opt     = static fn( $k, $d = '' ) => function_exists( 'hoanghiep_opt' ) ? ( hoanghiep_opt( $k ) ?: $d ) : $d;
 		$phone   = $opt( 'hh_phone', '0904 567 009' );
 		$name    = $opt( 'hh_person_name', 'Hoàng Hiệp' );
-		$title   = $id ? get_the_title( $id ) : '';
+		$title   = $id ? hh_chat_title( $id ) : '';
 		$greet   = trim( (string) hh_chat_opt( 'greeting' ) );
 		$lang    = function_exists( 'hh_lang' ) ? hh_lang() : 'vi';
 		$ui      = hh_chat_ui( $lang, $name, $title );
@@ -88,7 +93,7 @@ add_action(
  */
 function hh_chat_nudges( $id ) {
 	if ( $id && 'du-an' === get_post_type( $id ) ) {
-		$t   = get_the_title( $id );
+		$t   = hh_chat_title( $id );
 		$dl  = trim( (string) hh_meta( 'hh_p_offer_deadline', $id ) );
 		$off = trim( (string) hh_meta( 'hh_p_offer_title', $id ) );
 		return array(
@@ -177,7 +182,7 @@ function hh_chat_handle() {
 	// Báo Telegram khi khách bắt đầu chat (1 lần mỗi cuộc chat), chưa cần số điện thoại.
 	if ( ! $lead_id && function_exists( 'hh_tg_send' ) && '0' !== (string) hh_chat_opt( 'tg_start', '1' ) && ! get_transient( 'hh_chat_tg_' . $conv ) ) {
 		set_transient( 'hh_chat_tg_' . $conv, 1, DAY_IN_SECONDS );
-		hh_tg_send( '💬 Khách đang chat' . ( $page ? ' – ' . get_the_title( $page ) : '' ) . " (chưa để số)\n" . ( function_exists( 'hh_src_lines' ) ? hh_src_lines( $src, $page ) : ( $page ? 'Đang xem: ' . get_the_title( $page ) . ' – ' . get_permalink( $page ) . "\n" : '' ) ) . 'Khách hỏi: ' . $last . "\n\nKhi khách để lại số, tin nhắn có số điện thoại sẽ về đây." );
+		hh_tg_send( '💬 Khách đang chat' . ( $page ? ' – ' . hh_chat_title( $page ) : '' ) . " (chưa để số)\n" . ( function_exists( 'hh_src_lines' ) ? hh_src_lines( $src, $page ) : ( $page ? 'Đang xem: ' . hh_chat_title( $page ) . ' – ' . get_permalink( $page ) . "\n" : '' ) ) . 'Khách hỏi: ' . $last . "\n\nKhi khách để lại số, tin nhắn có số điện thoại sẽ về đây." );
 	}
 
 	$reply = '';
@@ -256,11 +261,11 @@ function hh_chat_save_lead( $phone, $msgs, $page, $src = array() ) {
 	if ( $src && function_exists( 'hh_src_lines' ) ) {
 		$body .= hh_src_lines( $src, $page );
 	} elseif ( $page ) {
-		$body .= '🏢 Đang xem: ' . get_the_title( $page ) . "\n" . get_permalink( $page ) . "\n";
+		$body .= '🏢 Đang xem: ' . hh_chat_title( $page ) . "\n" . get_permalink( $page ) . "\n";
 	}
 	$body .= "\n━━━━━━ NỘI DUNG CHAT ━━━━━━\n\n" . hh_chat_transcript( $msgs ) . "\n\n━━━━━━━━━━━━━━━━━━━━\nXem trong quản trị: " . admin_url( 'post.php?post=' . $lead_id . '&action=edit' );
 	if ( function_exists( 'hh_lead_mail' ) ) {
-		hh_lead_mail( 'KHÁCH MỚI qua chat web' . ( $page ? ' – ' . get_the_title( $page ) : '' ) . ' – ' . $phone, $body );
+		hh_lead_mail( 'KHÁCH MỚI qua chat web' . ( $page ? ' – ' . hh_chat_title( $page ) : '' ) . ' – ' . $phone, $body );
 	}
 	return (int) $lead_id;
 }
@@ -298,7 +303,7 @@ function hh_chat_project_facts( $page ) {
 		return array();
 	}
 	$m     = static fn( $k ) => trim( (string) hh_meta( $k, $page ) );
-	$facts = array( 'Tên' => get_the_title( $page ), 'Link' => get_permalink( $page ) );
+	$facts = array( 'Tên' => hh_chat_title( $page ), 'Link' => get_permalink( $page ) );
 	if ( 'bat-dong-san' === get_post_type( $page ) ) {
 		$facts['Giá'] = function_exists( 'hh_listing_price' ) ? hh_listing_price( $page ) : '';
 		$facts['Địa chỉ'] = $m( 'hh_address' );
@@ -577,7 +582,7 @@ function hh_chat_ai_reply( $msgs, $page, $lead_phone ) {
 	// Tài liệu chi tiết của dự án khách đang xem (Q&A, chính sách, bàn giao của chủ đầu tư) – đặt trước dữ liệu trang, lưu đệm theo dự án.
 	$docs = hh_chat_project_docs( $page );
 	if ( $docs ) {
-		array_splice( $body['system'], 2, 0, array( array( 'type' => 'text', 'text' => "Tài liệu chi tiết dự án khách đang xem (" . get_the_title( $page ) . ") – nguồn ưu tiên khi trả lời về dự án này; làm theo các ghi chú nội bộ trong tài liệu:\n" . $docs, 'cache_control' => array( 'type' => 'ephemeral', 'ttl' => '1h' ) ) ) );
+		array_splice( $body['system'], 2, 0, array( array( 'type' => 'text', 'text' => "Tài liệu chi tiết dự án khách đang xem (" . hh_chat_title( $page ) . ") – nguồn ưu tiên khi trả lời về dự án này; làm theo các ghi chú nội bộ trong tài liệu:\n" . $docs, 'cache_control' => array( 'type' => 'ephemeral', 'ttl' => '1h' ) ) ) );
 	}
 	// Tra cứu web (giá đất, quy hoạch, khách sạn, tin mới…) – tối đa 3 lần tìm mỗi câu trả lời.
 	if ( '0' !== (string) hh_chat_opt( 'web', '1' ) ) {
@@ -705,9 +710,9 @@ function hh_chat_family( $id ) {
 		return (int) $id;
 	}
 	$clean = static fn( $x ) => trim( preg_replace( '/\s+/', ' ', preg_replace( '/\b(da nang|tower|toa|khu|phan khu)\b|[^a-z0-9 ]/', ' ', mb_strtolower( remove_accents( $x ) ) ) ) );
-	$w     = explode( ' ', $clean( get_the_title( $par ) ) );
+	$w     = explode( ' ', $clean( hh_chat_title( $par ) ) );
 	$pw    = strlen( $w[0] ) >= 4 ? array( $w[0] ) : array_slice( $w, 0, 2 ); // "fours", "capital", "vinhomes"…
-	return false !== strpos( ' ' . $clean( get_the_title( $id ) ) . ' ', ' ' . implode( ' ', $pw ) . ' ' ) ? $par : (int) $id;
+	return false !== strpos( ' ' . $clean( hh_chat_title( $id ) ) . ' ', ' ' . implode( ' ', $pw ) . ' ' ) ? $par : (int) $id;
 }
 
 /**
@@ -715,7 +720,7 @@ function hh_chat_family( $id ) {
  * Có tầm tiền thì chỉ lấy loại căn vừa tầm. '' nếu dự án chưa có số nào.
  */
 function hh_chat_compare_in( $id, $budget = 0, $rooms = '' ) {
-	$title = get_the_title( $id );
+	$title = hh_chat_title( $id );
 	$tyval = static function ( $txt ) {
 		return preg_match( '/(\d+(?:,\d+)?)\s*tỷ/u', (string) $txt, $m ) ? 1000 * (float) str_replace( ',', '.', $m[1] ) : 0;
 	};
@@ -974,7 +979,7 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		foreach ( $parts as $k => $v ) {
 			$val = isset( $cu[ $k ] ) ? trim( wp_strip_all_tags( (string) get_post_meta( $other, $v[0], true ) ) ) : '';
 			if ( '' !== $val ) {
-				return $ack . $lc( mb_strtoupper( mb_substr( $v[1], 0, 1 ) ) . mb_substr( $v[1], 1 ) ) . ' ' . get_the_title( $other ) . ': ' . mb_substr( $val, 0, 260 ) . '. Chi tiết: ' . get_permalink( $other ) . ( $ask ?: ' Anh/chị muốn em gửi thêm bảng giá, mặt bằng hay ảnh thực tế ạ?' );
+				return $ack . $lc( mb_strtoupper( mb_substr( $v[1], 0, 1 ) ) . mb_substr( $v[1], 1 ) ) . ' ' . hh_chat_title( $other ) . ': ' . mb_substr( $val, 0, 260 ) . '. Chi tiết: ' . get_permalink( $other ) . ( $ask ?: ' Anh/chị muốn em gửi thêm bảng giá, mặt bằng hay ảnh thực tế ạ?' );
 			}
 		}
 		$pr  = function_exists( 'hh_project_price' ) ? hh_project_price( $other ) : '';
@@ -990,7 +995,7 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		// Chưa có giá → nói vị trí, bàn giao để khách biết em đang nói đúng dự án.
 		$addr = $has_pr || $rs ? '' : trim( wp_strip_all_tags( (string) get_post_meta( $other, 'hh_p_address', true ) ) );
 		$hand = $has_pr || $rs ? '' : trim( wp_strip_all_tags( (string) get_post_meta( $other, 'hh_p_handover', true ) ) );
-		$txt  = get_the_title( $other ) . ( $has_pr ? ': ' . mb_strtolower( $pr ) . ' (tham khảo)' : '' ) . ( $rs ? '. Mặt bằng bán lại: ' . mb_substr( $rs, 0, 160 ) : '' )
+		$txt  = hh_chat_title( $other ) . ( $has_pr ? ': ' . mb_strtolower( $pr ) . ' (tham khảo)' : '' ) . ( $rs ? '. Mặt bằng bán lại: ' . mb_substr( $rs, 0, 160 ) : '' )
 			. ( $addr ? ' ở ' . mb_substr( $addr, 0, 120 ) : '' ) . ( $hand ? '; bàn giao: ' . mb_substr( $hand, 0, 90 ) : '' )
 			. ( $has_pr || $rs ? '' : '. Giá từng căn em gửi theo bảng mới nhất' ) . '. Chi tiết: ' . get_permalink( $other );
 		return $ack . $txt . ( $ask ?: ' Anh/chị quan tâm loại căn nào ở dự án này ạ?' );
@@ -1416,7 +1421,7 @@ function hh_chat_script_reply_intl( $lang, $msgs, $page, $has_lead, $new_lead ) 
 		$rt = trim( (string) get_post_meta( $other, 'hh_p_rent_price', true ) );
 		$tr = static fn( $v ) => str_replace( array( ' tỷ', ' triệu/m²', ' triệu/tháng', 'khoảng ', 'Khoảng ', 'từ ', 'Từ ' ), $en ? array( ' billion VND', ' million VND/m²', ' million VND/month', '~', '~', 'from ', 'From ' ) : array( ' tỷ(10억) 동', '백만 동/m²', '백만 동/월', '약 ', '약 ', '', '' ), $v );
 		$info = array_filter( array( $pr && false === strpos( $pr, 'Liên hệ' ) ? $tr( $pr ) : '', $rs ? ( $en ? 'Resale: ' : '재판매: ' ) . $tr( mb_substr( $rs, 0, 140 ) ) : '', $rt ? ( $en ? 'Rent: ' : '임대: ' ) . $tr( mb_substr( $rt, 0, 120 ) ) : '' ) );
-		return get_the_title( $other ) . ( $info ? "\n• " . implode( "\n• ", $info ) : '' ) . "\n" . ( $en ? 'Prices are indicative and vary by unit. Details: ' : '가격은 참고용이며 호실마다 달라요. 자세히: ' ) . get_permalink( $other ) . ( $ask ?: ( $en ? "\n\nAre you buying to live in, or to rent out?" : "\n\n실거주용이세요, 임대 투자용이세요?" ) );
+		return hh_chat_title( $other ) . ( $info ? "\n• " . implode( "\n• ", $info ) : '' ) . "\n" . ( $en ? 'Prices are indicative and vary by unit. Details: ' : '가격은 참고용이며 호실마다 달라요. 자세히: ' ) . get_permalink( $other ) . ( $ask ?: ( $en ? "\n\nAre you buying to live in, or to rent out?" : "\n\n실거주용이세요, 임대 투자용이세요?" ) );
 	}
 
 	// Hỏi giá nhưng chưa nói dự án → gợi ý vài dự án nổi bật cho người nước ngoài.
@@ -1495,7 +1500,7 @@ function hh_chat_compare( $bots, $need, $budget, $page ) {
 			'from'  => $from,
 			'ready' => 'dang-ban-giao' === get_post_meta( $id, 'hh_p_status', true ),
 			'lbl'   => $lbl,
-			'line'  => get_the_title( $id ) . ( $from ? ' – ' . $lbl . ' ' . hh_format_price( $from ) : '' ) . ( $m2 ? ' (' . preg_replace( '/\s*\(tham khảo\)/u', '', mb_strtolower( $m2 ) ) . ')' : '' )
+			'line'  => hh_chat_title( $id ) . ( $from ? ' – ' . $lbl . ' ' . hh_format_price( $from ) : '' ) . ( $m2 ? ' (' . preg_replace( '/\s*\(tham khảo\)/u', '', mb_strtolower( $m2 ) ) . ')' : '' )
 				. ( ! is_wp_error( $area ) && $area ? ' · ' . $area[0] : '' ) . ( $hand ? ' · ' . mb_strtolower( mb_substr( $hand, 0, 1 ) ) . mb_substr( $hand, 1, 60 ) : '' ),
 		);
 	}
@@ -1507,9 +1512,9 @@ function hh_chat_compare( $bots, $need, $budget, $page ) {
 	$cheap = $priced[0];
 	$ready = array_values( array_filter( $rows, static fn( $r ) => $r['ready'] ) );
 	$out   = 'Dạ, em so nhanh ' . count( $priced ) . " dự án theo giá vào (tham khảo):\n• " . implode( "\n• ", array_column( $priced, 'line' ) ) . "\n\n";
-	$out  .= 'Giá vào thấp nhất là ' . get_the_title( $cheap['id'] ) . ' (' . $cheap['lbl'] . ' ' . hh_format_price( $cheap['from'] ) . ').';
+	$out  .= 'Giá vào thấp nhất là ' . hh_chat_title( $cheap['id'] ) . ' (' . $cheap['lbl'] . ' ' . hh_format_price( $cheap['from'] ) . ').';
 	if ( $ready && $ready[0]['id'] !== $cheap['id'] ) {
-		$out .= ' Cần nhận nhà ở ngay thì ' . get_the_title( $ready[0]['id'] ) . ' đang bàn giao.';
+		$out .= ' Cần nhận nhà ở ngay thì ' . hh_chat_title( $ready[0]['id'] ) . ' đang bàn giao.';
 	}
 	$out .= ' "Giá tốt" còn tùy đơn giá/m², vị trí và mục đích; anh/chị mua để ở hay cho thuê để em chốt 1 căn hợp nhất ạ? Chi tiết: ' . get_permalink( $cheap['id'] );
 	return $out;
@@ -1520,7 +1525,7 @@ function hh_chat_project_lookup( $t ) {
 	$best = 0;
 	$len  = 0;
 	foreach ( get_posts( array( 'post_type' => 'du-an', 'post_status' => 'publish', 'numberposts' => 300, 'fields' => 'ids' ) ) as $id ) {
-		$title = mb_strtolower( remove_accents( get_the_title( $id ) ) );
+		$title = mb_strtolower( remove_accents( hh_chat_title( $id ) ) );
 		// Tên đầy đủ, từng phần quanh dấu "–", và tên bỏ đuôi chung (residence, tower, city…).
 		foreach ( array_merge( array( $title ), preg_split( '/\s+[–-]\s+|\(|\)/u', $title ) ) as $n ) {
 			$n = trim( preg_replace( '/\b(da nang|quang nam|hoi an|to hop|du an)\b/', '', $n ) );
