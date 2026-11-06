@@ -498,7 +498,8 @@
     nudge2.appendChild(x); nudge2.appendChild(p); nudge2.appendChild(w);
     nudge && nudge.classList.remove('on'); nudge2.classList.add('on');
     nudge2.style.setProperty('opacity', '1', 'important'); nudge2.style.setProperty('pointer-events', 'auto', 'important');
-    clearTimeout(nudge2.hideT); nudge2.hideT = setTimeout(function () { nudge2.classList.remove('on'); nudge2.style.removeProperty('opacity'); nudge2.style.removeProperty('pointer-events'); }, 25000);
+    if (u.bottom) nudge2.style.setProperty('bottom', u.bottom + 'px', 'important'); else nudge2.style.removeProperty('bottom');
+    clearTimeout(nudge2.hideT); nudge2.hideT = setTimeout(function () { nudge2.classList.remove('on'); nudge2.style.removeProperty('opacity'); nudge2.style.removeProperty('pointer-events'); nudge2.style.removeProperty('bottom'); }, 25000);
   };
 
   /* ---------- Khách dừng lâu ở một phần trang: hỏi khéo, gợi 2 câu hỏi đúng phần đó ---------- */
