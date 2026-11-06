@@ -41,21 +41,22 @@ add_filter(
 			'type'    => 'can-ho-so-huu-lau-dai',
 			'area'    => 'ngu-hanh-son',
 			'hot'     => true,
-			'excerpt' => 'The Poet Residence – tháp căn hộ 25 tầng, khoảng 263 căn tại 95 – 99 Hồ Xuân Hương (Ngũ Hành Sơn), cách biển Mỹ Khê khoảng 300 m; căn 1PN+1 đến 3PN, view biển hoặc sông Hàn, hồ bơi trong nhà, gym, yoga. Chủ đầu tư Phúc Thanh An.',
+			'excerpt' => 'The Poet Residence – tháp căn hộ 25 tầng, 263 căn đã đủ điều kiện bán (Sở Xây dựng 24/6/2026) tại 95 – 99 Hồ Xuân Hương (Ngũ Hành Sơn), cách biển Mỹ Khê khoảng 300 m; căn 1PN+1 đến 3PN, view biển hoặc sông Hàn, hồ bơi trong nhà, gym, yoga. Chủ đầu tư Phúc Thanh An.',
 			'meta'    => array(
 				'hh_p_status'       => 'dang-mo-ban',
 				'hh_p_developer'    => 'Công ty Cổ phần Địa ốc Phúc Thanh An',
 				'hh_p_builder'      => 'Central (Centralcons) – tổng thầu',
 				'hh_p_type'         => 'Căn hộ cao cấp, khối đế thương mại',
 				'hh_p_address'      => '95 – 97 – 99 Hồ Xuân Hương, phường Mỹ An (cũ), Ngũ Hành Sơn, Đà Nẵng',
-				'hh_p_scale'        => 'Tổng diện tích sàn khoảng 30.080 m²',
+				'hh_p_scale'        => 'Đất 2.009,2 m², mật độ xây dựng 59,23%, hệ số sử dụng đất 12,5; sàn nhà ở 17.271 m² (tổng sàn khoảng 30.080 m²); khoảng 689 cư dân',
 				'hh_p_blocks'       => '1 tòa tháp',
-				'hh_p_floors'       => '25 tầng nổi, 2 – 3 tầng hầm (tùy nguồn)',
-				'hh_p_units'        => 'Khoảng 263 căn hộ',
+				'hh_p_floors'       => '25 tầng nổi, 2 tầng hầm, 1 tum thang',
+				'hh_p_units'        => '263 căn hộ',
+				'hh_p_legal'        => 'Đủ điều kiện bán nhà ở hình thành trong tương lai (Công văn 11222/SXD-QLN ngày 24/6/2026 của Sở Xây dựng Đà Nẵng, 263 căn); chủ trương đầu tư 1459/QĐ-UBND (12/7/2023); quy hoạch 1/500 (2585/QĐ-UBND, 12/7/2024); giấy phép xây dựng 414/GPXD (11/4/2025); thẩm duyệt PCCC (3/4/2025); đã có giấy chứng nhận quyền sử dụng đất, đã nộp tiền sử dụng đất (6/2026); dự án chưa thế chấp ngân hàng (theo chủ đầu tư báo cáo); không bán cho người nước ngoài',
 				'hh_p_unit_area'    => 'Khoảng 45,8 – 89,4 m² (căn điển hình); căn lớn nhất đến khoảng 230 m²',
 				'hh_p_price_from'   => 2700,
 				'hh_p_price_m2'     => 'Liên hệ – giá theo từng căn, tầng, hướng (tham khảo từ khoảng 2,7 tỷ)',
-				'hh_p_start'        => 'Khởi công 10/8/2025',
+				'hh_p_start'        => 'Khởi công 4/2025 (giấy phép xây dựng 11/4/2025)',
 				'hh_p_handover'     => 'Dự kiến Quý II – Quý III/2027 (tùy nguồn)',
 				'hh_p_highlights'   => "Cách biển Mỹ Khê khoảng 300 m, trên trục Hồ Xuân Hương\nCăn góc view biển Mỹ Khê (hướng Đông Bắc) hoặc view sông Hàn – pháo hoa (hướng Tây Nam)\nKính lớn toàn căn, phòng tắm có cửa sổ riêng\nHồ bơi trong nhà, bể sục, gym, yoga, lounge, nhà hàng – café\nTổng thầu Central",
 				'hh_p_design_desc'  => 'Tháp căn hộ 25 tầng trên khối đế thương mại, mặt đứng khung viền sáng. Mỗi tầng điển hình có các căn 1PN+1 45,8 m², 2PN 64,4 – 80,6 m² và 3PN góc 89,4 m²; căn phía Đông Bắc nhìn biển Mỹ Khê, căn phía Tây Nam nhìn sông Hàn và pháo hoa.',
@@ -65,10 +66,10 @@ add_filter(
 				'hh_p_amenities_in' => "Sảnh đón, lounge cư dân\nHồ bơi trong nhà, bể sục\nPhòng gym, phòng yoga\nNhà hàng – café\nTầng mái: vườn trà (Thi), coffee, bar coffee, quảng trường ngắm pháo hoa, vườn \"Cầm\", khu vui chơi trẻ em, khu VIP\nKhối đế thương mại, hầm đỗ xe\nThang máy Schindler",
 				'hh_p_handover_std' => 'Hoàn thiện cao cấp: sàn porcelain, trần Vĩnh Tường / Gyproc, sơn Jotun, cửa Xingfa kính Low-E, khóa điện tử Sharp, thiết bị vệ sinh Innoci / Grohe / Toto, điều hòa âm trần Samsung, điện Legrand, bếp Teka / Malloca (hoặc tương đương)',
 				'hh_p_amenities_out' => "Biển Mỹ Khê\nSông Hàn, cầu Tiên Sơn\nLotte Mart, Đà Nẵng Downtown\nSân bay quốc tế Đà Nẵng",
-				'hh_p_progress'     => "10/8/2025 | Khởi công\n2027 | Dự kiến bàn giao (Quý II – Quý III/2027 tùy nguồn)",
+				'hh_p_progress'     => "12/7/2023 | UBND TP chấp thuận chủ trương đầu tư và chủ đầu tư\n12/7/2024 | Phê duyệt quy hoạch tổng mặt bằng 1/500\n23/1/2025 | Cục Quản lý hoạt động xây dựng (Bộ Xây dựng) thẩm định báo cáo khả thi\n11/4/2025 | Giấy phép xây dựng 414/GPXD; khởi công tháng 4/2025\n2026 | Nghiệm thu hoàn thành phần móng\n24/6/2026 | Sở Xây dựng xác nhận 263 căn đủ điều kiện bán\n2027 | Dự kiến bàn giao (Quý II – Quý III/2027 tùy nguồn)",
 				'hh_p_image_links'  => implode( "\n", $img ),
 			),
-			'content' => '<p><strong>The Poet Residence</strong> là tháp căn hộ 25 tầng của Công ty Cổ phần Địa ốc Phúc Thanh An tại 95 – 99 Hồ Xuân Hương (Ngũ Hành Sơn, Đà Nẵng), cách biển Mỹ Khê khoảng 300 m. Dự án có khoảng 263 căn hộ, tổng thầu là Central, khởi công ngày 10/8/2025.</p>
+			'content' => '<p><strong>The Poet Residence</strong> là tháp căn hộ 25 tầng của Công ty Cổ phần Địa ốc Phúc Thanh An tại 95 – 99 Hồ Xuân Hương (Ngũ Hành Sơn, Đà Nẵng), cách biển Mỹ Khê khoảng 300 m. Dự án có 263 căn hộ trên khu đất 2.009,2 m², tổng thầu là Central, khởi công tháng 4/2025 và đã được Sở Xây dựng xác nhận đủ điều kiện bán (6/2026).</p>
 <h2>Các loại căn The Poet Residence</h2>
 <ul>
 <li>Căn 1PN+1 khoảng 45,8 m², view biển Mỹ Khê.</li>
@@ -82,8 +83,10 @@ add_filter(
 <p>Tầng mái được thiết kế thành không gian ngoài trời gồm vườn trà (Thi), coffee và bar coffee, quảng trường ngắm pháo hoa sông Hàn, vườn "Cầm", khu vui chơi trẻ em và các khu VIP.</p>
 <h2>Tiêu chuẩn bàn giao</h2>
 <p>Căn hộ bàn giao hoàn thiện: sàn gạch porcelain 800×800, trần thạch cao Vĩnh Tường / Gyproc, sơn Jotun, cửa sổ nhôm Xingfa kính hộp Low-E, khóa điện tử Sharp, thiết bị vệ sinh Innoci / Grohe / Toto, điều hòa âm trần Samsung, thiết bị điện Legrand và bếp Teka / Malloca kèm tủ An Cường / Suofeiya (theo danh mục vật tư chủ đầu tư, thương hiệu có thể thay bằng loại tương đương).</p>
+<h2>Pháp lý The Poet Residence</h2>
+<p>Ngày 24/6/2026, Sở Xây dựng Đà Nẵng có Công văn 11222/SXD-QLN xác nhận <strong>263 căn hộ</strong> của dự án Chung cư Hồ Xuân Hương (The Poet Residence) <strong>đủ điều kiện bán nhà ở hình thành trong tương lai</strong> theo Điều 24 Luật Kinh doanh bất động sản 2023. Dự án đã có chủ trương đầu tư (2023), quy hoạch 1/500 (2024), giấy phép xây dựng và thẩm duyệt PCCC (4/2025), giấy chứng nhận quyền sử dụng đất và đã nộp tiền sử dụng đất. Theo báo cáo của chủ đầu tư, dự án chưa thế chấp ngân hàng. Căn hộ không bán cho người nước ngoài.</p>
 <h2>Tiến độ</h2>
-<p>Dự án khởi công tháng 8/2025, bàn giao dự kiến năm 2027 (các nguồn ghi Quý II đến Quý III/2027). Giá bán theo từng căn, tầng và hướng; các nguồn ghi mức khởi điểm khoảng 2,7 tỷ (tham khảo).</p>
+<p>Dự án khởi công tháng 4/2025, đã nghiệm thu xong phần móng, bàn giao dự kiến năm 2027 (các nguồn ghi Quý II đến Quý III/2027). Giá bán theo từng căn, tầng và hướng; các nguồn ghi mức khởi điểm khoảng 2,7 tỷ (tham khảo).</p>
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> để nhận bảng giá, căn còn trống và chính sách thanh toán mới nhất của The Poet Residence.</p>',
 			'sources' => array(
 				'https://www.centralcons.vn/?p=13782',

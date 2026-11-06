@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.64** + plugin Hoàng Hiệp CRM **2.20.167**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.64** + plugin Hoàng Hiệp CRM **2.20.168**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.168 (06/11/2026)
+
+- **The Poet Residence – pháp lý:** đủ điều kiện bán 263 căn (Công văn 11222/SXD-QLN ngày 24/6/2026), chủ trương đầu tư 1459/QĐ-UBND, quy hoạch 1/500, GPXD 414/GPXD (11/4/2025), thẩm duyệt PCCC, đã nộp tiền sử dụng đất, chưa thế chấp, không bán cho người nước ngoài; quy mô theo văn bản (đất 2.009,2 m², 25 tầng nổi + 2 hầm, mật độ 59,23%); tiến độ: khởi công 4/2025, xong phần móng. Chỉ ghi tóm tắt – bản scan pháp lý không đưa lên web (anh gửi khách khi cần).
 
 ## Có gì mới – plugin 2.20.167 (06/11/2026)
 
