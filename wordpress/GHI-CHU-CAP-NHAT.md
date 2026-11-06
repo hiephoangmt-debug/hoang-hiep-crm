@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.64** + plugin Hoàng Hiệp CRM **2.20.166**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.64** + plugin Hoàng Hiệp CRM **2.20.167**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.167 (06/11/2026)
+
+- **Dự án mới: The Poet Residence Đà Nẵng** (/du-an/the-poet-residence-da-nang/) – 95 – 99 Hồ Xuân Hương, Ngũ Hành Sơn; CĐT Phúc Thanh An, tổng thầu Central; 25 tầng, khoảng 263 căn; 6 layout căn (1PN+1 45,8 m² đến 3PN góc 89,4 m², view biển Mỹ Khê / sông Hàn); tiện ích hồ bơi trong nhà, gym, yoga, tầng mái ngắm pháo hoa; tiêu chuẩn bàn giao theo danh mục vật tư CĐT 05/3/2026. Ảnh lấy từ Drive anh Hiệp gửi (phối cảnh, tiện ích, layout); không dùng ảnh căn hộ mẫu có logo đại lý. Bấm "Nhập / cập nhật dữ liệu" để tạo trang.
 
 ## Có gì mới – giao diện 2.15.64 (06/11/2026)
 
