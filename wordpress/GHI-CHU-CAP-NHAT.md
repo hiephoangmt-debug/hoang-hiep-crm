@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.84** + plugin Hoàng Hiệp CRM **2.20.199**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.84** + plugin Hoàng Hiệp CRM **2.20.200**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -45,7 +45,9 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 - **Landing The Poet:** ảnh chính (toàn cảnh biển Mỹ Khê – Sơn Trà) hiện trọn ở đầu trang, không lớp phủ tối, không chữ đè; tiêu đề, thông tin nhanh và nút đặt ngay bên dưới ảnh.
 
-## Có gì mới – plugin 2.20.199 · giao diện 2.15.84 (06/11/2026)
+## Có gì mới – plugin 2.20.200 · giao diện 2.15.84 (06/11/2026)
+
+- **FPT Plaza 4 (tài liệu chủ đầu tư):** ảnh đại diện mới, 10 phối cảnh, sảnh, tiện ích (hồ bơi tầng thượng, vườn tầng 17, công viên…), nội thất căn mẫu 2PN / 2PN+1 / 3PN, mặt bằng 7 tầng, 2 layout căn (đã che mã căn); 1.395 căn, 2 tòa The Nimbus – The Sunrise 20 tầng, 3 hầm, tổng thầu Central, kiến trúc Archivina, sở hữu lâu dài; bàn giao dự kiến quý IV/2027; loại căn và giá tham khảo đợt mở bán 12/2025; lịch thanh toán, ngân hàng hỗ trợ, tiêu chuẩn bàn giao, hỏi đáp; tour 360° và bản đồ 3D.
 
 - **Symphony 5 – Sun Symphony Residence (tài liệu chủ đầu tư):** 19 phối cảnh / tiện ích (ảnh đại diện hoàng hôn bên sông Hàn), tổng mặt bằng phân khu, mặt bằng 7 nhóm tầng (3 → 31), layout 5 căn (Studio 30,1 m² → 2PN 62,7 m²); pháp lý (đấu giá 14/12/2025, chấp thuận NĐT 12/3/2026, giao đất 50 năm, QH 1/500 23/4/2026); CSBH 02 (từ 20/7/2026): Sun Early Key 70% nhận căn dự kiến 30/6/2028, không vay 5% giãn 50 tháng, vay 70% HTLS 30 tháng, lịch thanh toán; tiêu chuẩn bàn giao thô + đơn giá hoàn thiện; loại căn, tiện ích, kết nối; nối vào tổ hợp Sun Symphony Residence. Không đăng mốc chiết khấu thanh toán sớm hạn 25/7/2026 (đã hết).
 

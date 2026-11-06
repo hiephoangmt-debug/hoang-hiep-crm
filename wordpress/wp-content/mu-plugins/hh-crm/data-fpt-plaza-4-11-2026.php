@@ -106,6 +106,9 @@ add_filter(
 
 			// Ô còn trống thì điền.
 			$p['meta'] += array(
+				'hh_p_tour_360'        => 'https://vr360.ddireal.vn/viewer/fpt4', // Link 360 trong thư mục tài liệu dự án (anh Hiệp gửi 06/11/2026).
+				'hh_p_tour_360_poster' => 'plugin:img/fpt-plaza-4/fpt-plaza-4-phoi-canh-tong-the-cong-vien-noi-khu.jpg',
+				'hh_p_tour_4d'         => 'https://fptplaza4.com/project/fpt-city-da-nang/3d-map', // Bản đồ 3D trên trang chính thức của chủ đầu tư.
 				'hh_p_builder'      => 'Công ty CP Xây dựng Central',
 				'hh_p_designer'     => 'Công ty CP Tư vấn Archivina (kiến trúc)',
 				'hh_p_scale'        => 'Khu đất 18.905 m², mật độ xây dựng 43%, tổng sàn xây dựng 190.577 m²',
