@@ -503,6 +503,7 @@ def mb_4d():
             '<script>window.SS4D_NOGATE=1;addEventListener("message",function(e){var d=e.data;if(!d||!d.ss4dUnit)return;var u=d.ss4dUnit;'
             'try{if(window.gtag)gtag("event",d.lead?"mb4d_lead":"mb4d_can",{event_label:u.code})}catch(x){}'
             'if(d.lead){var b=document.createElement("button");b.type="button";b.setAttribute("data-pop","");b.setAttribute("data-interest",(document.getElementById("h4d")?"ADS":"Web")+" – mặt bằng 4D: căn "+u.code+" ("+u.type+", "+u.area+" m², tầng "+u.floor+")");b.style.display="none";document.body.appendChild(b);b.click();setTimeout(function(){b.remove()},100);return}'
+            'var bx=document.getElementById("ss4d-box");if(bx){var r=bx.getBoundingClientRect();if(r.bottom<=innerHeight+4&&r.bottom>innerHeight*.5)u.bottom=Math.round(innerHeight-r.bottom+r.height/6+18)}'
             'if(window.hhcUnit)hhcUnit(u)});</script>'
             '<script>(function(){var n=0,seen=0;(function t(){n++;var f=document.querySelector("#ss4d-box iframe"),d=null;try{d=f&&f.contentDocument}catch(e){}'
             'var b=d&&d.getElementById("mPlan"),cv=d&&d.querySelector("canvas");'
