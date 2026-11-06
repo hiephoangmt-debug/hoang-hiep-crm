@@ -288,5 +288,82 @@ HTML
 		),
 	);
 
+	/* ---------------- 07/11 – 3 khu tái định cư Duy Xuyên phục vụ đường sắt tốc độ cao ---------------- */
+	$posts[] = array(
+		'slug'           => 'tai-dinh-cu-duy-xuyen-duong-sat-toc-do-cao-392-ty',
+		'title'          => 'Đà Nẵng duyệt 3 khu tái định cư hơn 392 tỷ tại Duy Xuyên cho đường sắt tốc độ cao Bắc – Nam',
+		'excerpt'        => 'UBND TP Đà Nẵng ban hành Quyết định 5082/QĐ-UBND phê duyệt 3 khu tái định cư Duy Trung, Duy Sơn, Duy Trinh – Duy Sơn (khoảng 31 ha, hơn 392 tỷ đồng, 2026 – 2029) phục vụ giải phóng mặt bằng đường sắt tốc độ cao Bắc – Nam.',
+		'keyword'        => 'tái định cư đường sắt tốc độ cao Duy Xuyên',
+		'keywords_extra' => array( 'đường sắt tốc độ cao qua Đà Nẵng', 'tái định cư Duy Xuyên', 'Quyết định 5082/QĐ-UBND', 'bất động sản Duy Xuyên' ),
+		'project'        => 'nam-hoi-an-city',
+		'schedule'       => '2026-11-07 08:00',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Đường sắt tốc độ cao', 'Duy Xuyên', 'Tái định cư' ),
+		'image'          => 'plugin:img/tin-tuc/tai-dinh-cu-duy-xuyen-duong-sat-toc-do-cao.jpg',
+		'image_alt'      => 'Sơ đồ minh hoạ 3 khu tái định cư Duy Trung, Duy Sơn, Duy Trinh – Duy Sơn tại xã Duy Xuyên phục vụ đường sắt tốc độ cao Bắc – Nam',
+		'content'        => <<<HTML
+<p>UBND thành phố Đà Nẵng vừa ban hành <strong>Quyết định số 5082/QĐ-UBND</strong> phê duyệt Dự án thành phần 11 – xây dựng <strong>3 khu tái định cư tại xã Duy Xuyên</strong> phục vụ giải phóng mặt bằng tuyến <strong>đường sắt tốc độ cao Bắc – Nam</strong>, tổng mức đầu tư hơn 392 tỷ đồng.</p>
+<!--hh-featured-->
+<h2>Những con số chính</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Theo báo chí đưa tin</th></tr></thead>
+<tbody>
+<tr><td>Văn bản</td><td>Quyết định 5082/QĐ-UBND của UBND TP Đà Nẵng (Dự án thành phần 11)</td></tr>
+<tr><td>Tổng mức đầu tư</td><td>Hơn 392 tỷ đồng</td></tr>
+<tr><td>Tổng diện tích</td><td>Khoảng 31 ha (310.084,38 m²)</td></tr>
+<tr><td>Khu Duy Trung</td><td>Hơn 5,27 ha, thôn Hòa Lâm (xã Duy Trung cũ)</td></tr>
+<tr><td>Khu Duy Sơn</td><td>Khoảng 10,99 ha, thôn Chiêm Sơn (xã Duy Sơn cũ)</td></tr>
+<tr><td>Khu Duy Trinh – Duy Sơn</td><td>Hơn 14,74 ha – lớn nhất trong 3 khu</td></tr>
+<tr><td>Hạ tầng đầu tư</td><td>San nền, đường giao thông, thoát nước mưa, thu gom và xử lý nước thải, cấp nước, phòng cháy chữa cháy, cấp điện, chiếu sáng, cây xanh</td></tr>
+<tr><td>Thời gian thực hiện</td><td>2026 – 2029</td></tr>
+</tbody>
+</table>
+<p>Mục đích là tạo quỹ đất bố trí chỗ ở cho các hộ dân phải di dời khi Nhà nước thu hồi đất làm tuyến đường sắt. Theo VietnamPlus, tổng mức đầu tư giải phóng mặt bằng tuyến đường sắt tốc độ cao qua Đà Nẵng dự kiến hơn 19.551 tỷ đồng.</p>
+<h2>Đường sắt tốc độ cao Bắc – Nam đang ở bước nào?</h2>
+<ul>
+<li>Tuyến dài khoảng 1.541 km, sơ bộ tổng mức đầu tư khoảng 67,34 tỷ USD, gồm 23 ga hành khách và 5 ga hàng hóa.</li>
+<li>Bộ Xây dựng đặt mục tiêu nỗ lực <strong>khởi công vào tháng 12/2027</strong>; gói thầu tư vấn khảo sát, lập báo cáo nghiên cứu khả thi (TV-02) đã mở thầu.</li>
+<li>Ga Đà Nẵng của tuyến dự kiến đặt tại Hòa Sơn – xem thêm <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang/">ga đường sắt tốc độ cao Đà Nẵng tại Hòa Sơn</a>.</li>
+</ul>
+<!--hh-img:img/casamia-balanca/casamia-balanca-flycam-toan-canh-thi-cong.jpg|Ảnh thực tế flycam khu Cẩm Thanh – Hội An (Casamia Balanca đang thi công): dải ven sông Thu Bồn, phía Bắc Duy Xuyên-->
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Tín hiệu tuyến đi vào thực tế:</strong> làm tái định cư trước là bước bắt buộc để giải phóng mặt bằng. Việc Duy Xuyên có quyết định đầu tư cụ thể cho thấy hướng tuyến qua khu vực này đã được xác định ở mức đủ để lập dự án.</li>
+<li><strong>Đất nằm trong hành lang tuyến cần cẩn trọng:</strong> trước khi mua đất ở Duy Xuyên, Điện Bàn hay các xã giáp ranh, anh chị nên hỏi UBND xã hoặc văn phòng đăng ký đất đai xem thửa đất có nằm trong phạm vi thu hồi của tuyến hay khu tái định cư không.</li>
+<li><strong>Không nên kỳ vọng tăng giá ngắn hạn:</strong> tuyến dự kiến khởi công cuối 2027 và hoàn thành khoảng 2035; tác động lên giá đất chủ yếu là dài hạn, tập trung quanh ga chứ không phải dọc tuyến.</li>
+<li><strong>Hạ tầng dân cư mới:</strong> 3 khu tái định cư có đường, điện, nước, cây xanh đồng bộ – góp phần làm dày dân cư phía Nam Hội An trong vài năm tới.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/nam-hoi-an-city/">Nam Hội An City</a> – nằm ở xã Duy Nghĩa (Duy Xuyên cũ), ven sông Thu Bồn, cùng khu vực đang được đầu tư hạ tầng dân cư.</li>
+<li><a href="/du-an/hoiana-resort-golf/">Hoiana Resort &amp; Golf</a> – quần thể ven biển phía Nam Hội An; kết nối đường sắt tốc độ cao trong dài hạn giúp rút ngắn thời gian đi từ các thành phố lớn.</li>
+<li><a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca Hội An</a> – khu biệt thự ở Cẩm Thanh, phía Bắc sông Thu Bồn, cùng hưởng lợi khi vùng Hội An – Duy Xuyên có thêm hạ tầng lớn.</li>
+</ul>
+<p>Cần kiểm tra một thửa đất cụ thể ở Duy Xuyên, Điện Bàn có nằm trong hành lang tuyến hay không, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: Quyết định 5082/QĐ-UBND của UBND TP Đà Nẵng theo báo chí đưa tin đầu tháng 11/2026 (Báo Đà Nẵng, Báo Pháp luật Việt Nam, Tin nhanh Chứng khoán, VietnamPlus); thông tin tuyến đường sắt tốc độ cao theo CafeF (05/11/2026). Chưa đọc được toàn văn quyết định – số liệu ghi theo nội dung báo chí trích dẫn.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Tái định cư Duy Xuyên cho đường sắt tốc độ cao',
+			'desc'      => 'Đà Nẵng duyệt 3 khu tái định cư Duy Trung, Duy Sơn, Duy Trinh – Duy Sơn (~31 ha, hơn 392 tỷ, 2026 – 2029) phục vụ đường sắt tốc độ cao Bắc – Nam.',
+			'points'    => array(
+				'QĐ 5082/QĐ-UBND duyệt Dự án thành phần 11: 3 khu tái định cư tại xã Duy Xuyên, hơn 392 tỷ đồng',
+				'Khoảng 31 ha: Duy Trung 5,27 ha, Duy Sơn 10,99 ha, Duy Trinh – Duy Sơn 14,74 ha; thực hiện 2026 – 2029',
+				'Đường sắt tốc độ cao Bắc – Nam ~1.541 km, mục tiêu khởi công 12/2027; đất trong hành lang tuyến cần kiểm tra kỹ',
+			),
+			'faq'       => array(
+				array( '3 khu tái định cư đường sắt tốc độ cao ở Duy Xuyên nằm đâu?', 'Khu Duy Trung (thôn Hòa Lâm, hơn 5,27 ha), khu Duy Sơn (thôn Chiêm Sơn, khoảng 10,99 ha) và khu Duy Trinh – Duy Sơn (hơn 14,74 ha), đều thuộc xã Duy Xuyên, TP Đà Nẵng.' ),
+				array( 'Tổng vốn và thời gian làm các khu tái định cư?', 'Tổng mức đầu tư hơn 392 tỷ đồng theo Quyết định 5082/QĐ-UBND, dự kiến thực hiện giai đoạn 2026 – 2029.' ),
+				array( 'Đường sắt tốc độ cao Bắc – Nam khi nào khởi công?', 'Bộ Xây dựng đặt mục tiêu nỗ lực khởi công vào tháng 12/2027; dự án dự kiến cơ bản hoàn thành khoảng năm 2035.' ),
+			),
+		),
+		'sources'        => array(
+			'https://baodanang.vn/hon-392-ty-dong-xay-dung-3-khu-tai-dinh-cu-phuc-vu-du-an-duong-sat-toc-do-cao-3357503.html',
+			'https://doanhnhan.baophapluat.vn/da-nang-dau-tu-hon-392-ty-dong-xay-3-khu-tai-dinh-cu-phuc-vu-du-an-duong-sat-toc-do-cao.html',
+			'https://www.vietnamplus.vn/da-nang-trien-khai-tai-dinh-cu-phuc-vu-du-an-duong-sat-toc-do-cao-bac-nam-post1143554.vnp',
+			'https://cafef.vn/sieu-du-an-duong-sat-toc-do-cao-350km-h-di-qua-15-tinh-thanh-von-dau-tu-67-ty-usd-du-kien-khoi-cong-vao-thang-12-2027-vua-co-dien-bien-moi-188261105135853475.chn',
+		),
+	);
+
 	return $posts;
 }
