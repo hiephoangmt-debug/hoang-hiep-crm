@@ -1,4 +1,4 @@
-"""Mặt bằng Fusion Resort & Villas Đà Nẵng vẽ lại bám theo mặt bằng tổng thể chủ đầu tư (đủ 85 căn, đúng hàng – đúng loại, không ghi mã căn)."""
+"""Mặt bằng Fusion Resort & Villas Đà Nẵng vẽ lại bám theo mặt bằng tổng thể chủ đầu tư (đủ 85 căn, đúng hàng – đúng loại, ghi mã căn theo mặt bằng chủ đầu tư)."""
 import math
 import os
 import sys
@@ -36,8 +36,24 @@ def rect(x0, y0, x1, y1, fill, r=6, outline=None, width=1):
     d.rounded_rectangle([P(x0, y0), P(x1, y1)], radius=r, fill=fill, outline=outline, width=width)
 
 
+
+def _codes():
+    a = ['A3', 'A4'] + ['A%d' % i for i in (5, 6, 7, 8, 9, 10, 11, 12, 14, 15)] + ['A16', 'A2', 'A1', 'B1'] + ['B%d' % i for i in range(2, 12)]
+    a += ['C%d' % i for i in range(1, 7)] + ['D%d' % i for i in range(1, 8)] + ['J1'] + ['J%d' % i for i in range(2, 6)]
+    a += ['H%d' % i for i in range(1, 6)] + ['M%d' % i for i in range(1, 8)] + ['K%d' % i for i in range(1, 6)]
+    a += ['G1'] + ['G%d' % i for i in range(2, 11)] + ['E1', 'E2', 'E3', 'E4'] + ['E%d' % i for i in (5, 6, 7, 8, 9, 10, 11, 12, 14)] + ['E15']
+    return iter(a)
+
+
+CODES = _codes()
+
+
+def code_at(cx, cy):
+    d.text(P(cx, cy), next(CODES), font=f(15, True), fill='white', anchor='mm', stroke_width=3, stroke_fill='#0f2240')
+
 def villa(x0, y0, x1, y1, key):
     rect(x0, y0, x1, y1, C[key], 5, 'white', 2)
+    code_at((x0 + x1) / 2, (y0 + y1) / 2)
 
 
 def row(x0, x1, y0, y1, n, key, gap=4):
@@ -62,6 +78,7 @@ def diag(cx, cy, s, key):
         r = math.radians(a + 45)
         pts.append(P(cx + s * math.cos(r), cy + s * math.sin(r)))
     d.polygon(pts, fill=C[key], outline='white', width=2)
+    code_at(cx, cy)
 
 
 def text(x, y, t, size=20, col=NAVY, bold=True):
@@ -171,7 +188,7 @@ d.text((cx + 50, cy + 10), 'Hướng Bắc', font=f(18), fill=MUTED)
 
 # Tiêu đề và chú thích
 d.text((60, 36), 'FUSION RESORT & VILLAS ĐÀ NẴNG – MẶT BẰNG TỔNG THỂ', font=f(42, True), fill=NAVY)
-d.text((60, 94), '85 biệt thự trên 15,75 ha · tô màu theo loại · lối vào đường Trường Sa, biển hướng Đông – Đông Bắc', font=f(26), fill=MUTED)
+d.text((60, 94), '85 biệt thự trên 15,75 ha · tô màu theo loại, ghi mã căn · lối vào Trường Sa, biển hướng Đông – Đông Bắc', font=f(26), fill=MUTED)
 legend = [
     ('pres', 'Presidential Villa', '6 phòng ngủ · 1 căn'),
     ('b5', 'Beach Front Villa', '5 phòng ngủ · 9 căn sát biển'),
@@ -192,4 +209,5 @@ d.text((60, y + 28), 'với Beach Front.', font=f(18), fill=MUTED)
 
 d.text((60, H - 56), 'Vẽ lại theo mặt bằng tổng thể của chủ đầu tư – không theo tỷ lệ chính xác, vị trí từng căn để tham khảo.', font=f(21), fill=MUTED)
 d.text((W - 60, H - 58), 'Hoàng Hiệp · 0904 567 009', font=f(24, True), fill=GOLD, anchor='ra')
-im.save(os.path.join(OUT, 'fusion-mat-bang-ve-lai.jpg'), quality=90, optimize=True, progressive=True)
+assert next(CODES, None) is None, 'thừa mã căn'
+im.save(os.path.join(OUT, 'fusion-mat-bang-ma-can.jpg'), quality=90, optimize=True, progressive=True)

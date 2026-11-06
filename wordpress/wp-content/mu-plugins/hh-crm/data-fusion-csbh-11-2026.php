@@ -24,7 +24,7 @@ add_filter(
 			'hh_p_tour_360'        => 'https://fusionresortvillas.com/360/',
 			'hh_p_tour_360_poster' => 'plugin:img/fusion/fusion-toan-canh-day-biet-thu-bien.jpg',
 			// Mô hình 4D mặt bằng tổng thể (dựng theo mặt bằng CĐT, không mã căn) – lưu trong kho mã projects/fusion/4d/.
-			'hh_p_tour_4d'      => 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/c7d2ca2b3870b6605dfa1abafdac17501acd008a/projects/fusion/4d/fusion-4d.html',
+			'hh_p_tour_4d'      => 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/1a0770dbe9871c4536b1ba21e37cd0b05e76d909/projects/fusion/4d/fusion-4d.html',
 			'hh_p_tour_poster'  => 'plugin:img/fusion/fusion-mo-hinh-4d-xem-truoc.jpg',
 			'hh_p_tour_name'    => 'mặt bằng 4D',
 			'hh_p_scale'        => '15,75 ha – mật độ xây dựng khoảng 16,7%, khoảng 300 m bờ biển',
@@ -64,7 +64,7 @@ Khu biệt thự vận hành từ quý 1/2024, chương trình cho thuê từ th
 			'hh_p_villa_table' => array( 'Biệt thự biển (tin rao) | 486 – 700 m² | – | Khoảng 32 – 54 tỷ' ),
 			'hh_p_unit_area'   => array( 'Đất khoảng 486 – 700 m²' ),
 			'hh_p_manager'     => array( 'Fusion' ),
-			'hh_p_tour_4d'     => array( 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/163efdf439523c99d3e02ec14263ef3ba6ea19a6/projects/fusion/4d/fusion-4d.html', 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/56391180de3c496c5b973203a6df7b01aa4ef00e/projects/fusion/4d/fusion-4d.html' ),
+			'hh_p_tour_4d'     => array( 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/163efdf439523c99d3e02ec14263ef3ba6ea19a6/projects/fusion/4d/fusion-4d.html', 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/56391180de3c496c5b973203a6df7b01aa4ef00e/projects/fusion/4d/fusion-4d.html', 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/c7d2ca2b3870b6605dfa1abafdac17501acd008a/projects/fusion/4d/fusion-4d.html' ),
 		);
 		foreach ( $projects as $i => $p ) {
 			if ( 'fusion-resort-villas-da-nang' !== ( $p['slug'] ?? '' ) ) {
@@ -90,9 +90,16 @@ Khu biệt thự vận hành từ quý 1/2024, chương trình cho thuê từ th
 			if ( false === strpos( $swap, $aerial ) ) {
 				$swap = rtrim( $swap ) . "\n$aerial | Ảnh chụp từ trên cao Fusion Resort & Villas Đà Nẵng: bãi biển riêng, hồ bơi chính và các dãy biệt thự mái ngói | tổng thể | Toàn cảnh từ trên cao";
 			}
+			// 2.20.164: anh Hiệp cho hiện mã căn công khai → sơ đồ vẽ lại có ghi mã căn thay bản không mã.
+			$v163 = $swap;
+			$swap = preg_replace(
+				'#^plugin:img/fusion/fusion-mat-bang-ve-lai\.jpg \|[^\n]*$#m',
+				'plugin:img/fusion/fusion-mat-bang-ma-can.jpg | Mặt bằng tổng thể Fusion Resort & Villas Đà Nẵng có mã căn, tô màu theo loại biệt thự 1 – 6 phòng ngủ (vẽ lại theo mặt bằng chủ đầu tư) | tổng thể',
+				$swap
+			);
 			if ( $swap !== $links ) {
 				$projects[ $i ]['meta']['hh_p_image_links']     = $swap;
-				$projects[ $i ]['fix_meta']['hh_p_image_links'] = array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $links, $v158 ) );
+				$projects[ $i ]['fix_meta']['hh_p_image_links'] = array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $links, $v158, $v163 ) );
 			}
 			$projects[ $i ]['fix_excerpt'] = $p['excerpt'] ?? '';
 			$projects[ $i ]['excerpt']     = 'Biệt thự biển Fusion Resort & Villas Đà Nẵng trên trục Trường Sa (Ngũ Hành Sơn): chủ đầu tư còn 1 căn Beach Garden Villa 4 phòng ngủ, đất 753 m², chiết khấu 20% khi thanh toán nhanh, tặng nội thất 5 sao khoảng 2 tỷ; các căn khác giao dịch chuyển nhượng.';
@@ -130,18 +137,18 @@ add_action(
 	}
 );
 
-// Sơ đồ mặt bằng vẽ lại: nếu lần trước tải lỗi (thiếu file) thì tải lại, và luôn đứng đầu mục Mặt bằng tổng thể.
+// Sơ đồ mặt bằng có mã căn: nếu tải lỗi thì tải lại; đặt đầu mục Mặt bằng tổng thể, gỡ bản vẽ lại không mã.
 add_action(
 	'admin_init',
 	static function () {
-		if ( get_option( 'hh_fusion_mb_ve_lai_ok' ) || ! current_user_can( 'edit_posts' ) ) {
+		if ( get_option( 'hh_fusion_mb_ma_can_ok' ) || ! current_user_can( 'edit_posts' ) ) {
 			return;
 		}
 		$post = get_page_by_path( 'fusion-resort-villas-da-nang', OBJECT, 'du-an' );
 		if ( ! $post ) {
 			return;
 		}
-		$key  = 'plugin:img/fusion/fusion-mat-bang-ve-lai.jpg';
+		$key  = 'plugin:img/fusion/fusion-mat-bang-ma-can.jpg';
 		$done = (array) get_post_meta( $post->ID, '_hh_img_links', true );
 		$id   = $done[ $key ] ?? null;
 		if ( ! is_int( $id ) ) {
@@ -156,8 +163,9 @@ add_action(
 			return; // Chờ tải xong, lần sau xếp thứ tự.
 		}
 		$ids = array_filter( array_map( 'absint', explode( ',', (string) get_post_meta( $post->ID, 'hh_p_masterplan_img', true ) ) ) );
-		$ids = array_values( array_unique( array_merge( array( $id ), array_diff( $ids, array( $id ) ) ) ) );
+		$old = (int) ( $done['plugin:img/fusion/fusion-mat-bang-ve-lai.jpg'] ?? 0 ); // bản không mã căn: gỡ khỏi mục (vẫn còn trong Thư viện)
+		$ids = array_values( array_unique( array_merge( array( $id ), array_diff( $ids, array( $id, $old ) ) ) ) );
 		update_post_meta( $post->ID, 'hh_p_masterplan_img', implode( ',', $ids ) );
-		update_option( 'hh_fusion_mb_ve_lai_ok', 1, false );
+		update_option( 'hh_fusion_mb_ma_can_ok', 1, false );
 	}
 );
