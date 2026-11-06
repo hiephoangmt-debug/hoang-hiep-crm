@@ -93,6 +93,9 @@ add_filter(
 			$p['meta']['hh_p_tour_360']        = 'https://kuula.co/share/collection/71lrB?logo=1&info=1&fs=1&vr=0&thumbs=1';
 			$p['meta']['hh_p_tour_360_poster'] = 'plugin:img/sun-solar/sun-solar-cdt-can-ho-nhin-thanh-pho.jpg';
 
+			// Tiến độ công trường (flycam anh Hiệp gửi đầu 11/2026 – ảnh có logo đơn vị phân phối nên không đăng; số tầng chưa xác nhận nên không ghi).
+			$p['meta']['hh_p_progress'] = $p['meta']['hh_p_progress'] ?? "11/2026 | Flycam công trường mới nhất: tòa tháp đang thi công phần thân, có lưới bao che, cần trục tháp đang hoạt động";
+
 			// Tiêu chuẩn bàn giao (ô đang trống thì điền).
 			$p['meta']['hh_p_handover_std'] = 'Bàn giao hoàn thiện theo bảng tiêu chuẩn của chủ đầu tư: trần thạch cao, sơn Dulux/Jotun; phòng ngủ lát gỗ công nghiệp; rèm 2 lớp; tủ bếp, mặt đá, bếp và hút mùi Hafele/Teka; thiết bị vệ sinh Toto/Grohe, vách tắm kính cường lực (nếu có), bình nóng lạnh Ariston/Ferroli; điều hòa Daikin/Mitsubishi/Panasonic (âm trần phòng khách, treo tường phòng ngủ); cửa chính gỗ chống cháy, khóa thông minh; lô gia lát gạch chống trơn, lan can kính cường lực (hoặc tương đương).';
 
