@@ -311,7 +311,14 @@ function hh_chat_project_facts( $page ) {
 		'Giá'          => function_exists( 'hh_project_price' ) ? hh_project_price( $page ) : '',
 		'Quy mô'       => $m( 'hh_p_scale' ),
 		'Sản phẩm'     => $m( 'hh_p_units' ) . ( $m( 'hh_p_unit_area' ) ? ' – diện tích ' . $m( 'hh_p_unit_area' ) : '' ),
-		'Pháp lý'      => $m( 'hh_p_ownership' ) ?: $m( 'hh_p_legal' ),
+		'Sở hữu'       => $m( 'hh_p_ownership' ),
+		'Pháp lý'      => mb_substr( $m( 'hh_p_legal' ), 0, 700 ),
+		'Tầng / khối'  => trim( $m( 'hh_p_blocks' ) . ' ' . $m( 'hh_p_floors' ) ),
+		'Khởi công'    => $m( 'hh_p_start' ),
+		'Tổng thầu / thiết kế / vận hành' => implode( '; ', array_filter( array( $m( 'hh_p_builder' ), $m( 'hh_p_designer' ), $m( 'hh_p_manager' ) ) ) ),
+		'Tiêu chuẩn bàn giao' => mb_substr( $m( 'hh_p_handover_std' ), 0, 500 ),
+		'Lịch thanh toán' => implode( '; ', array_map( static fn( $r ) => implode( ' | ', array_filter( $r ) ), array_slice( hh_table( 'hh_p_payment', 3, $page ), 0, 10 ) ) ),
+		'Vị trí chi tiết' => mb_substr( $m( 'hh_p_location_desc' ), 0, 500 ),
 		'Bàn giao'     => $m( 'hh_p_handover' ),
 		'Ưu đãi chính' => $m( 'hh_p_offer_title' ),
 		'Hạn ưu đãi'   => $m( 'hh_p_offer_deadline' ),
@@ -469,7 +476,10 @@ function hh_chat_knowledge() {
 				'Thuê'       => $clip( get_post_meta( $p->ID, 'hh_p_rent_price', true ), 300 ),
 				'Biệt thự'   => $clip( $lines( 'hh_p_villa_table', 8 ), 700 ),
 				'Cho thuê / vận hành' => $clip( get_post_meta( $p->ID, 'hh_p_rental', true ), 600 ),
-				'Hỏi đáp'    => $clip( str_replace( "\n", ' || ', (string) get_post_meta( $p->ID, 'hh_p_faq', true ) ), 1200 ),
+				'Pháp lý'    => $clip( get_post_meta( $p->ID, 'hh_p_legal', true ), 500 ),
+				'Thanh toán' => $clip( $lines( 'hh_p_payment', 10 ), 500 ),
+				'Bàn giao'   => $clip( get_post_meta( $p->ID, 'hh_p_handover_std', true ), 300 ),
+				'Hỏi đáp'    => $clip( str_replace( "\n", ' || ', (string) get_post_meta( $p->ID, 'hh_p_faq', true ) ), 3000 ),
 			)
 		);
 		if ( ! isset( $d['Loại căn'] ) && ! isset( $d['Chính sách'] ) && ! isset( $d['Thuê'] ) && ! isset( $d['Biệt thự'] ) && ! isset( $d['Hỏi đáp'] ) ) {

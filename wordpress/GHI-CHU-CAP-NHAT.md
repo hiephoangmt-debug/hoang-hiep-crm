@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.64** + plugin Hoàng Hiệp CRM **2.20.170**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.64** + plugin Hoàng Hiệp CRM **2.20.171**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.171 (06/11/2026)
+
+- **Chatbot đọc thêm:** pháp lý chi tiết (không còn bị ô "Sở hữu" che mất), lịch thanh toán, tiêu chuẩn bàn giao, tổng thầu / thiết kế / vận hành, số tầng, khởi công, vị trí chi tiết; phần hỏi đáp mỗi dự án đọc đến 3.000 ký tự. Áp dụng cho mọi dự án.
+- **The Poet Residence:** đủ ý bộ Q&A chủ đầu tư – sở hữu lâu dài, 16 câu hỏi đáp (chuyển nhượng hợp đồng, phí quản lý chưa công bố, doanh nghiệp mua, đập thông căn, trần 3,3 m, PCCC – an ninh, vay ngân hàng…).
 
 ## Có gì mới – plugin 2.20.170 (06/11/2026)
 
