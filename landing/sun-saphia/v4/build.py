@@ -497,12 +497,12 @@ def mb_tuongtac(src='Web'):
 
 def mb_4d():
     """Mặt bằng tầng = mô hình 4D mở sẵn chế độ "Mặt bằng tầng" (bấm từng căn). Mô hình 4D được đặt ngay sau #chon-can."""
-    return ('<p class="lead" style="margin:4px 0 14px">Chọn tầng ở thanh <b>Tầng</b>, bấm vào từng căn để xem loại căn, diện tích và hướng view. '
+    return ('<p class="lead" style="margin:4px 0 14px">Kéo thanh <b>Tầng</b> và <b>Giờ trong ngày</b> phía trên mô hình, bấm vào từng căn để xem loại căn, diện tích và hướng view. '
             'Màu căn: <b style="color:#E06A6A">Studio</b> · <b style="color:#3A8FC9">1PN+1</b> · <b style="color:#C9962A">2PN góc bo</b>.</p>'
             '<div id="chon-can"></div>'
             '<script>(function(){var n=0,seen=0;(function t(){n++;var f=document.querySelector("#ss4d-box iframe"),d=null;try{d=f&&f.contentDocument}catch(e){}'
             'var b=d&&d.getElementById("mPlan"),cv=d&&d.querySelector("canvas");'
-            'if(b&&cv){if(!seen)seen=Date.now();if(Date.now()-seen>3000){if(b.getAttribute("aria-pressed")!=="true")b.click();return}}'
+            'if(b&&cv){if(!seen)seen=Date.now();if(Date.now()-seen>2500){try{f.contentWindow.postMessage({ss4dPlanMode:1},"*")}catch(e){}if(b.getAttribute("aria-pressed")==="true"&&d.body.classList.contains("pm"))return}}'
             'if(n<400)setTimeout(t,300)})()})();</script>')
 
 def mb_cdt(src='Web'):
