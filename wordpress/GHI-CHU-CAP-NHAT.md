@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.93** + plugin Hoàng Hiệp CRM **2.20.214**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.93** + plugin Hoàng Hiệp CRM **2.20.215**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,17 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.215 (07/11/2026)
+
+- **The Legend Đà Nẵng** (/du-an/the-legend-da-nang/): làm lại trang dự án từ bộ tài liệu Drive.
+  - Lời giới thiệu, điểm nổi bật, ưu đãi ở đầu trang ("Tặng nội thất đến 1,8 tỷ – chiết khấu đến 12%").
+  - Cơ cấu 800 căn hộ, phân khu Legacy / Infinity, penthouse, tháp khách sạn 50 năm.
+  - Bảng giá tham khảo theo loại căn (từ giỏ hàng, không mã căn), ví dụ giá sau ưu đãi.
+  - Chính sách, tiến độ thanh toán, vay 70% hỗ trợ lãi suất 0% 24 tháng, pháp lý (công văn Sở XD 674/SXD-QLN), vật liệu bàn giao.
+  - 15 ảnh: 13 phối cảnh (đã cắt bỏ mã QR Zalo cá nhân ở góc ảnh), 2 ảnh flycam công trường 6/2025. Ảnh đại diện mới: hoàng hôn sông Hàn – cầu Rồng.
+  - Không đăng: mặt bằng tầng (có logo đơn vị phân phối và mã căn), tên/số điện thoại trong tin nhắn, hợp đồng, tài liệu đào tạo.
+- Cài: Nhập nhanh → upload → "Nhập / cập nhật dữ liệu" → "Tải ảnh ngay" → LiteSpeed Purge All.
 
 ## Có gì mới – giao diện 2.15.93 (07/11/2026)
 
