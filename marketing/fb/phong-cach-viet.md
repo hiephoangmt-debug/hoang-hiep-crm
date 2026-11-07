@@ -17,6 +17,10 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 - Hashtag đầu tiên là từ khoá chính viết liền (#SunSaphiaResidence), sau đó là #BatDongSanDaNang và khu vực.
 - Viết tự nhiên, không nhồi từ khoá, không lặp quá 3 lần, câu vẫn mềm mỏng và chỉn chu như trên.
 
+## Đăng từng bài một (anh Hiệp chốt 07/11/2026)
+- Không đẩy nhiều bài cùng lúc. Mỗi bài một giờ riêng; cùng trang cách nhau ≥3 tiếng, giữa 2 trang lệch nhau ≥1 tiếng; bài web cách nhau ≥2 tiếng (trình xuất bài web tự lùi bài trùng giờ).
+- Trước khi hẹn luôn getScheduledPosts cả 2 trang để né giờ đã có bài.
+
 ## Giọng văn
 - Như anh Hiệp nhắn cho khách quen: xưng "Hiệp"/"mình", gọi "anh chị", dùng "ạ" lịch sự (hạn chế "nha").
 - Câu mở nhẹ nhàng, ấm áp, gần đời thường; dí dỏm vừa phải.
