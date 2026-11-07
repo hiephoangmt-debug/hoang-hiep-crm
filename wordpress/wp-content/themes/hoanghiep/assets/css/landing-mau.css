@@ -322,3 +322,12 @@ body.admin-bar header.top{top:32px}
 .nav .nav-out{display:none}
 .hh-mb-open .hh-mb-nav .nav-out{display:block;color:#b98d4f!important;border-top:1px solid #eee}
 @media (max-width:600px){.home-link{width:34px;height:34px}}
+/* Khối đăng ký: 2 cột rộng bằng nhau, cao bằng nhau, thẳng hàng trên – dưới (máy tính) */
+@media (min-width:981px){
+.cta-offer .container{grid-template-columns:1fr 1fr;align-items:stretch;gap:36px}
+.cta-offer .container>div{display:flex;flex-direction:column;justify-content:space-between}
+.cta-offer .container>div .advisor{margin-top:18px}
+.cta-offer .form-card{display:flex;flex-direction:column;justify-content:center;padding:30px 32px}
+.cta-offer .form-card .field input,.cta-offer .form-card .field select{padding-top:14px;padding-bottom:14px}
+}
+@media (min-width:981px){.cta-offer .cta-tag,.cta-offer .form-badge{align-self:flex-start}.cta-offer .form-card h3{font-size:27px}.cta-offer .form-get{font-size:15px;gap:6px}}
