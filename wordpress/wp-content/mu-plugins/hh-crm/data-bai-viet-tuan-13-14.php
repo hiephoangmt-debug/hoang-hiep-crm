@@ -456,7 +456,7 @@ HTML
 		'title'    => 'Đất nền Hòa Xuân 2026: giá theo khu Euro Village 2, Cồn Dầu, KĐT sinh thái Hòa Xuân',
 		'excerpt'  => 'Đất nền Hòa Xuân 2026: Cồn Dầu khoảng 42 – 55 triệu/m², Nam Hòa Xuân lô từ khoảng 3,5 – 5 tỷ, Euro Village 2 lô biệt thự 300 m² tin rao khoảng 85 – 113 triệu/m² (tham khảo).',
 		'keyword'  => 'đất nền Hòa Xuân',
-		'project'  => 'kdt-sinh-thai-hoa-xuan',
+		'project'  => 'sun-neo-city',
 		'week'     => 14,
 		'category' => 'Thị trường',
 		'content'  => <<<'HTML'
@@ -502,7 +502,7 @@ HTML
 
 <h2>Nhận định của Hoàng Hiệp</h2>
 <p>Khách mua để ở nên ưu tiên lô có sổ, đường rộng, gần khu dân cư hiện hữu ở Cồn Dầu hoặc Nam Hòa Xuân. Khách giữ tài sản dài hạn, tài chính mạnh có thể xem đất biệt thự Euro Village 2 – nhưng với biên độ giá rộng như hiện nay, đừng dựa vào giá chào trên mạng; hãy so ít nhất 3 lô cùng khu và kiểm tra quy hoạch từng lô. Hướng dẫn kiểm tra có trong bài <a href="/kiem-tra-phap-ly-quy-hoach-nha-dat-da-nang/">kiểm tra pháp lý, quy hoạch nhà đất Đà Nẵng</a>.</p>
-<p>Xem tổng quan tại trang <a href="/du-an/kdt-sinh-thai-hoa-xuan/">Khu đô thị sinh thái Hòa Xuân</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách lô đất Hòa Xuân đang bán thật theo ngân sách.</p>
+<p>Xem tổng quan tại trang <a href="/du-an/sun-neo-city/">Sun NeO City (Khu đô thị sinh thái Hòa Xuân)</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách lô đất Hòa Xuân đang bán thật theo ngân sách.</p>
 HTML
 		,
 		'seo'      => array(

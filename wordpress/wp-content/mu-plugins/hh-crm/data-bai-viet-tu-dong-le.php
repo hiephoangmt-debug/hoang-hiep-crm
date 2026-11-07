@@ -233,7 +233,7 @@ HTML
 		'excerpt'  => 'Đà Nẵng triển khai đầu tư Trường Tiểu học Hòa Xuân trong Khu đô thị sinh thái Hòa Xuân: khu đất 13.655 m², ba mặt tiền Lê Sỹ, Cồn Dầu 18, Đỗ Quỳ. Ý nghĩa với cư dân và đất nền khu vực.',
 		'keyword'  => 'trường tiểu học Hòa Xuân',
 		'keywords_extra' => array( 'khu đô thị sinh thái Hòa Xuân', 'đất nền Hòa Xuân', 'trường học Cẩm Lệ', 'Cồn Dầu Hòa Xuân' ),
-		'project'  => 'kdt-sinh-thai-hoa-xuan',
+		'project'  => 'sun-neo-city',
 		'schedule' => '2026-10-22 17:00',
 		'category' => 'Thị trường',
 		'tags'     => array( 'Hạ tầng Đà Nẵng', 'Hòa Xuân', 'Trường học' ),
@@ -273,7 +273,7 @@ HTML
 <li><strong>Tiện ích xã hội hoàn thiện dần</strong> là yếu tố giữ giá dài hạn cho khu đô thị mới, bên cạnh hạ tầng giao thông và cảnh quan ven sông Cẩm Lệ.</li>
 </ul>
 <h2>Dự án quanh khu vực</h2>
-<p>Xem thông tin <a href="/du-an/kdt-sinh-thai-hoa-xuan/">Khu đô thị sinh thái Hòa Xuân</a>, phân khu <a href="/du-an/dat-nen-con-dau-hoa-xuan/">đất nền Cồn Dầu Hòa Xuân</a> và <a href="/du-an/euro-village-2/">Euro Village 2</a> ven sông.</p>
+<p>Xem thông tin <a href="/du-an/sun-neo-city/">Sun NeO City (Khu đô thị sinh thái Hòa Xuân)</a>, phân khu <a href="/du-an/dat-nen-con-dau-hoa-xuan/">đất nền Cồn Dầu Hòa Xuân</a> và <a href="/du-an/euro-village-2/">Euro Village 2</a> ven sông.</p>
 <p>Cần tìm lô đất, nhà phố gần trường hoặc kiểm tra quy hoạch một lô ở Hòa Xuân, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 HTML
 		,

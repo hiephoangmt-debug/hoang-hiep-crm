@@ -239,7 +239,7 @@ HTML,
 <h2>Dự án nằm trong vùng hưởng lợi</h2>
 <ul>
 <li>Điện Ngọc – Điện Nam: <a href="/du-an/one-world-regency/">One World Regency</a>, <a href="/du-an/fpt-city-da-nang/">FPT City Đà Nẵng</a>.</li>
-<li>Nam Đà Nẵng: <a href="/du-an/sun-riverpolis/">Sun Riverpolis</a>, <a href="/du-an/kdt-sinh-thai-hoa-xuan/">khu đô thị sinh thái Hòa Xuân</a>, <a href="/du-an/dat-nen-vo-chi-cong/">đất nền Võ Chí Công</a>.</li>
+<li>Nam Đà Nẵng: <a href="/du-an/sun-riverpolis/">Sun Riverpolis</a>, <a href="/du-an/sun-neo-city/">Sun NeO City (khu đô thị sinh thái Hòa Xuân)</a>, <a href="/du-an/dat-nen-vo-chi-cong/">đất nền Võ Chí Công</a>.</li>
 <li>Hội An – Duy Xuyên: <a href="/du-an/casamia-hoi-an/">Casamia</a>, <a href="/du-an/hoiana-resort-golf/">Hoiana Resort &amp; Golf</a>.</li>
 </ul>
 

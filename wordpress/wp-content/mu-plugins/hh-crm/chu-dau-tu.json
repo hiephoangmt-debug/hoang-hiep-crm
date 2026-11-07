@@ -163,15 +163,6 @@
     "note": "Nhà đầu tư: Công ty CP Dịch vụ Cáp treo Bà Nà (VietnamFinance)."
    },
    {
-    "name": "Khu đô thị sinh thái ven sông Hòa Xuân",
-    "where": "Hòa Xuân, Cẩm Lệ (cũ) – ven sông Cẩm Lệ",
-    "type": "Khu đô thị – đất nền",
-    "scale": "Nhiều giai đoạn; đợt đầu 500 lô",
-    "status": "Mở bán từ 6/2015, mở rộng 11/2015",
-    "site_slug": "kdt-sinh-thai-hoa-xuan",
-    "note": "Dự án từng kéo dài khâu đền bù, giải tỏa ở một số khu vực."
-   },
-   {
     "name": "Euro Village 2",
     "where": "Hòa Xuân, Cẩm Lệ (cũ)",
     "type": "Biệt thự, nhà phố",
@@ -280,11 +271,11 @@
     "note": "Cách cầu sông Hàn khoảng 300 m."
    },
    {
-    "name": "Sun NeO City",
+    "name": "Sun NeO City (Khu đô thị sinh thái ven sông Hòa Xuân)",
     "where": "Hòa Xuân, Cẩm Lệ (cũ) – chân cầu Hòa Xuân",
-    "type": "Khu đô thị",
-    "scale": "Gồm các tòa Spana, Cora, S-Light, Charmora City…",
-    "status": "Đang triển khai",
+    "type": "Khu đô thị – căn hộ, đất nền, nhà phố, biệt thự",
+    "scale": "Khoảng 450 ha; gồm Spana, Cora, S-Light, Charmora City, đất nền Cồn Dầu, Euro Village 2…",
+    "status": "Mở bán đất nền từ 6/2015; nay mang tên Sun NeO City, đang triển khai các tòa căn hộ",
     "site_slug": "sun-neo-city",
     "note": ""
    },

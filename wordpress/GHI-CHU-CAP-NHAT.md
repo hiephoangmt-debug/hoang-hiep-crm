@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.87** + plugin Hoàng Hiệp CRM **2.20.208**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.87** + plugin Hoàng Hiệp CRM **2.20.209**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.209 (07/11/2026)
+
+- **Gộp "Khu đô thị sinh thái Hòa Xuân" vào Sun NeO City** (tên cũ – tên mới của cùng một dự án): trang cũ chuyển bản nháp và tự chuyển hướng sang /du-an/sun-neo-city/; Đất nền Cồn Dầu, Euro Village 2 thành dự án thành phần của Sun NeO City (5 thành phần); quy mô ghi khoảng 450 ha, thêm phân khu vào bảng. Mở trang quản trị một lần sau khi nhập để web chuyển xong.
 
 ## Có gì mới – plugin 2.20.208 (07/11/2026)
 
