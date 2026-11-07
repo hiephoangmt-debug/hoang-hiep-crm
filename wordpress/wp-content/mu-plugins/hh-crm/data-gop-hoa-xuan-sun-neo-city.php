@@ -184,3 +184,69 @@ add_action(
 		update_option( 'hh_hoa_xuan_hero_v1', '1', false );
 	}
 );
+
+/** Ảnh flycam Hòa Xuân (ảnh đi kèm plugin) → ID trong Thư viện; chưa có thì đưa vào, ghi nhớ ở trang Sun NeO City để không tải trùng. */
+function hh_hoa_xuan_flycam_id( $name, $alt ) {
+	$neo = get_page_by_path( 'sun-neo-city', OBJECT, 'du-an' );
+	if ( ! $neo ) {
+		return 0;
+	}
+	$key  = 'plugin:img/hoa-xuan/' . $name . '.jpg';
+	$done = (array) get_post_meta( $neo->ID, '_hh_img_links', true );
+	$id   = (int) ( $done[ $key ] ?? 0 );
+	if ( $id && wp_attachment_is_image( $id ) ) {
+		return $id;
+	}
+	$file = HH_CRM_DIR . 'img/hoa-xuan/' . $name . '.jpg';
+	if ( ! is_file( $file ) ) {
+		return 0;
+	}
+	$up = wp_upload_bits( basename( $file ), null, (string) file_get_contents( $file ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	if ( ! empty( $up['error'] ) ) {
+		return 0;
+	}
+	$id = wp_insert_attachment( array( 'post_mime_type' => 'image/jpeg', 'post_title' => $alt, 'post_excerpt' => $alt, 'post_status' => 'inherit' ), $up['file'], $neo->ID );
+	if ( ! $id || is_wp_error( $id ) ) {
+		return 0;
+	}
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+	wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $up['file'] ) );
+	update_post_meta( $id, '_wp_attachment_image_alt', $alt );
+	$done[ $key ] = $id;
+	update_post_meta( $neo->ID, '_hh_img_links', $done );
+	return (int) $id;
+}
+
+/**
+ * Mỗi trang một ảnh nền khác nhau (anh Hiệp 07/11/2026): Euro Village 2 – dãy nhà ven sông Hòa Xuân;
+ * Đất nền Cồn Dầu – sông Cẩm Lệ nhìn về trung tâm. Sun NeO City giữ ảnh toàn cảnh.
+ * Chỉ đổi khi ảnh nền đang là ảnh toàn cảnh dùng chung hoặc bản vẽ Cồn Dầu.
+ */
+add_action(
+	'admin_init',
+	static function () {
+		if ( '1' === get_option( 'hh_hoa_xuan_hero_v2' ) || ! current_user_can( 'edit_posts' ) || '1' !== get_option( 'hh_hoa_xuan_hero_v1' ) ) {
+			return;
+		}
+		$shared = hh_hoa_xuan_flycam_id( 'hoa-xuan-flycam-8-2025-toan-canh-ven-song-cam-le', 'Toàn cảnh khu đô thị ven sông Hòa Xuân (ảnh flycam thực tế 8/2025)' );
+		$map    = array(
+			'euro-village-2'           => array( 'hoa-xuan-flycam-8-2025-day-pho-ven-song-nhin-ve-cau-rong', 'Dãy nhà ven sông Hòa Xuân nhìn về cầu Rồng, sông Hàn (ảnh flycam thực tế 8/2025)' ),
+			'dat-nen-con-dau-hoa-xuan' => array( 'hoa-xuan-flycam-8-2025-song-cam-le-nhin-ve-trung-tam', 'Sông Cẩm Lệ và khu Hòa Xuân nhìn về trung tâm Đà Nẵng (ảnh flycam thực tế 8/2025)' ),
+		);
+		foreach ( $map as $slug => list( $name, $alt ) ) {
+			$p = get_page_by_path( $slug, OBJECT, 'du-an' );
+			if ( ! $p ) {
+				continue;
+			}
+			$cur = (int) get_post_thumbnail_id( $p->ID );
+			if ( $cur && $cur !== $shared && false === strpos( (string) get_attached_file( $cur ), 'tong-mat-bang-khu-do-thi-sun-neo-city' ) ) {
+				continue; // Ảnh anh tự chọn.
+			}
+			$id = hh_hoa_xuan_flycam_id( $name, $alt );
+			if ( $id ) {
+				set_post_thumbnail( $p->ID, $id );
+			}
+		}
+		update_option( 'hh_hoa_xuan_hero_v2', '1', false );
+	}
+);
