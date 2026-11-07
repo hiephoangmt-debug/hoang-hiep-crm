@@ -639,33 +639,62 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
   </div>
 </section>
 
-<!-- ĐĂNG KÝ -->
-<section class="cta" id="dang-ky" aria-labelledby="h-cta">
+<!-- ĐĂNG KÝ – con số ưu đãi + chính sách đang áp dụng + form (07/11/2026) -->
+<?php
+$cta_pol = array();
+foreach ( $policy as $pl ) {
+	$pl = trim( preg_replace( '/^[•\-\*\s]+/u', '', $pl ) );
+	if ( '' !== $pl && ! preg_match( '/:\s*$/u', $pl ) && mb_strlen( $pl ) < 140 ) {
+		$cta_pol[] = $pl;
+	}
+}
+$cta_pol   = array_slice( $cta_pol, 0, 4 );
+$cta_title = $m( 'hh_p_offer_title' );
+$cta_get   = $resale ? array( 'Danh sách căn đang bán, giá thật', 'Kiểm tra sổ, định giá căn', 'Hẹn xem nhà trong tuần' ) : array( 'Bảng giá từng căn, từng tầng', 'Phiếu tính giá theo phương án thanh toán', 'Căn đẹp còn trống, chính sách mới nhất' );
+?>
+<section class="cta cta-offer" id="dang-ky" aria-labelledby="h-cta">
   <?php if ( $hero ) : ?><img class="bg" src="<?php echo esc_url( $url( $hero, 'large' ) ); ?>" alt="" loading="lazy" decoding="async"><?php endif; ?>
   <div class="container">
     <div class="rv">
-      <span class="eyebrow">Nhận thông tin chi tiết</span>
-      <h2 class="title" id="h-cta"><?php echo $resale ? 'Danh sách căn đang bán' : 'Bảng giá & căn còn trống'; ?> <em style="color:var(--gold2)">gửi qua Zalo</em></h2>
-      <ul>
-        <?php if ( $resale ) : ?>
-        <li>Căn chuyển nhượng, cho thuê mới nhất kèm giá thật</li><li>Định giá, kiểm tra sổ hồng trước khi giao dịch</li><li>Nhận ký gửi bán, cho thuê căn của bạn</li>
-        <?php else : ?>
-        <li>Bảng giá cập nhật từng căn, từng tầng, từng hướng</li><li>So sánh phương án: thanh toán sớm, giãn tiến độ, vay ngân hàng</li><li>Chính sách chiết khấu đang áp dụng của chủ đầu tư</li><li>Mặt bằng, pháp lý dự án</li><li>Hẹn đi xem dự án, nhà mẫu</li>
-        <?php endif; ?>
+      <span class="eyebrow cta-tag"><?php echo $resale ? 'Giỏ hàng chuyển nhượng' : 'Ưu đãi đang áp dụng'; ?> · cập nhật <?php echo $e( wp_date( 'm/Y' ) ); ?></span>
+      <h2 class="title" id="h-cta"><?php echo $cta_title ? $e( $cta_title ) : ( $resale ? 'Danh sách căn đang bán' : 'Bảng giá &amp; chính sách' ); ?> <em style="color:var(--gold2)"><?php echo $e( $short_name ); ?></em></h2>
+      <?php if ( $stats ) : ?>
+      <div class="cta-stats"><?php foreach ( $stats as list( $num, $lb ) ) : ?><div><b><?php echo $e( $num ); ?></b><span><?php echo $e( $lb ); ?></span></div><?php endforeach; ?></div>
+      <?php endif; ?>
+      <?php if ( $cta_pol ) : ?>
+      <ul class="cta-pol"><?php foreach ( $cta_pol as $pl ) : ?><li><?php echo $e( $pl ); ?></li><?php endforeach; ?></ul>
+      <?php else : ?>
+      <ul class="cta-pol">
+        <?php if ( $resale ) : ?><li>Căn chuyển nhượng, cho thuê mới nhất kèm giá thật</li><li>Định giá, kiểm tra sổ hồng trước khi giao dịch</li><li>Nhận ký gửi bán, cho thuê căn của bạn</li>
+        <?php else : ?><li>Chính sách chiết khấu đang áp dụng của chủ đầu tư</li><li>So sánh phương án: thanh toán sớm, giãn tiến độ, vay ngân hàng</li><li>Mặt bằng, pháp lý dự án; hẹn đi xem dự án, nhà mẫu</li><?php endif; ?>
       </ul>
+      <?php endif; ?>
       <div class="advisor"><div class="av">H</div><div><b>Hoàng Hiệp</b><span>Tư vấn bất động sản Đà Nẵng · trực tiếp, không qua tổng đài<br>Zalo/Hotline: <a href="<?php echo esc_url( $zalo ); ?>" target="_blank" rel="noopener" class="js-zalo"><?php echo $e( $phone ); ?></a></span></div></div>
     </div>
     <form class="form-card lead-form rv" data-form="<?php echo esc_attr( ( $resale ? 'Nhận danh sách căn ' : 'Nhận bảng giá ' ) . $short_name ); ?>" aria-labelledby="f-title">
+      <span class="form-badge">Miễn phí · gửi qua Zalo trong 15 phút</span>
       <h3 id="f-title"><?php echo $e( ( $resale ? 'Nhận danh sách căn ' : 'Nhận bảng giá ' ) . $short_name ); ?></h3>
-      <p>Gửi qua Zalo trong 15 phút giờ hành chính</p>
+      <ul class="form-get"><?php foreach ( $cta_get as $g ) : ?><li><?php echo $e( $g ); ?></li><?php endforeach; ?></ul>
       <div class="field"><label for="f-name">Họ và tên</label><input id="f-name" name="name" placeholder="Họ và tên *" autocomplete="name" required></div>
-      <div class="field"><label for="f-phone">Số điện thoại</label><input id="f-phone" name="phone" type="tel" placeholder="Số Zalo / điện thoại *" autocomplete="tel" required pattern="[0-9 +.]{9,14}"></div>
+      <div class="field"><label for="f-phone">Số điện thoại</label><input id="f-phone" name="phone" type="tel" inputmode="tel" placeholder="Số Zalo / điện thoại *" autocomplete="tel" required pattern="[0-9 +.]{9,14}"></div>
       <?php if ( $form_opts ) : ?><div class="field"><label for="f-type">Loại sản phẩm quan tâm</label><select id="f-type" name="type"><option value="">Loại sản phẩm quan tâm</option><?php foreach ( array_unique( $form_opts ) as $o ) : ?><option><?php echo $e( $o ); ?></option><?php endforeach; ?></select></div><?php endif; ?>
-      <button class="btn btn-gold" type="submit"><?php echo $resale ? 'Nhận danh sách căn qua Zalo' : 'Nhận bảng giá qua Zalo'; ?></button>
+      <button class="btn btn-gold" type="submit"><?php echo $resale ? 'Nhận danh sách căn qua Zalo' : 'Nhận bảng giá &amp; chính sách qua Zalo'; ?> →</button>
+      <p class="form-safe">Thông tin chỉ dùng để Hoàng Hiệp tư vấn, không chia sẻ cho bên khác.</p>
       <div class="ok-msg" role="status">Cảm ơn anh/chị! Hoàng Hiệp sẽ gửi thông tin qua Zalo sớm nhất.</div>
     </form>
   </div>
 </section>
+<?php
+$bar_num = $stats ? $stats[0][0] . ' ' . mb_strtolower( $stats[0][1] ) : '';
+?>
+<a class="stick-cta" href="#dang-ky" hidden><span><b><?php echo $e( $short_name ); ?></b><?php if ( $bar_num ) : ?><small><?php echo $e( $bar_num ); ?></small><?php endif; ?></span><em><?php echo $resale ? 'Nhận danh sách căn' : 'Nhận bảng giá'; ?></em></a>
+<script>
+// Thanh "Nhận bảng giá" bám đáy màn hình: hiện khi đã cuộn qua phần đầu, ẩn khi khung đăng ký đang hiện.
+(function(){var bar=document.querySelector('.stick-cta'),cta=document.getElementById('dang-ky');if(!bar||!cta)return;var inCta=false;
+if('IntersectionObserver' in window){new IntersectionObserver(function(es){inCta=es[0].isIntersecting;upd();},{threshold:.15}).observe(cta);}
+function upd(){bar.hidden=inCta||window.scrollY<window.innerHeight*0.9;}
+addEventListener('scroll',upd,{passive:true});upd();})();
+</script>
 </main>
 
 <footer class="foot">

@@ -275,3 +275,30 @@ body.admin-bar header.top{top:32px}
 .tv-bar a{color:#e7c98f;font-size:13px;text-decoration:none;white-space:nowrap}
 .tv-bar button{width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:24px;cursor:pointer;flex:none}
 .tv iframe{flex:1;width:100%;border:0;background:#05101e}
+/* Khối đăng ký cuối trang: con số ưu đãi, chính sách, form nổi bật; thanh "Nhận bảng giá" bám đáy (07/11/2026) */
+.cta-offer{padding:72px 0;background:radial-gradient(900px 500px at 15% 0%,#24406b 0%,var(--navy) 65%)}
+.cta-offer .bg{opacity:.12}
+.cta-tag{background:rgba(216,182,124,.16);border:1px solid rgba(216,182,124,.45);border-radius:999px;padding:6px 14px;color:var(--gold2)}
+.cta-offer .title{margin:14px 0 18px;font-size:clamp(28px,4vw,42px);line-height:1.2}
+.cta-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0 0 20px}
+.cta-stats div{background:rgba(255,255,255,.08);border:1px solid rgba(216,182,124,.35);border-radius:16px;padding:14px 16px}
+.cta-stats b{display:block;font-family:'Playfair Display',serif;font-size:clamp(24px,3.2vw,32px);line-height:1.15;color:var(--gold2)}
+.cta-stats span{display:block;font-size:13px;opacity:.85;margin-top:2px}
+.cta-pol{list-style:none;padding:0!important;margin:0;display:grid;gap:8px;opacity:1!important}
+.cta-pol li{position:relative;padding-left:28px;font-size:15.5px;line-height:1.5}
+.cta-pol li:before{content:"✓";position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;background:var(--gold2);color:#1b1408;font-size:12px;font-weight:800;display:grid;place-items:center}
+.cta-offer .form-card{border:2px solid var(--gold2);box-shadow:0 30px 70px -25px rgba(0,0,0,.75),0 0 0 6px rgba(216,182,124,.15)}
+.form-badge{display:inline-block;background:#fdf3e2;color:#8a5a14;font-size:12.5px;font-weight:700;border-radius:999px;padding:5px 12px;margin-bottom:10px}
+.form-get{list-style:none;padding:0;margin:4px 0 14px;display:grid;gap:4px;font-size:14px;color:var(--muted)}
+.form-get li:before{content:"✓ ";color:#2e7d32;font-weight:800}
+.cta-offer .form-card .btn{font-size:16px;padding:15px 18px}
+.form-safe{margin:10px 0 0!important;font-size:12px!important;text-align:center}
+.stick-cta{position:fixed;left:12px;right:84px;bottom:14px;z-index:59;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--navy);color:#fff;border:1px solid rgba(216,182,124,.5);border-radius:16px;padding:10px 10px 10px 16px;text-decoration:none;box-shadow:0 16px 34px -14px rgba(0,0,0,.7)}
+.stick-cta[hidden]{display:none}
+.stick-cta span{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.stick-cta b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stick-cta small{font-size:12px;color:var(--gold2)}
+.stick-cta em{font-style:normal;flex:none;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1b1408;font-weight:800;font-size:14px;border-radius:12px;padding:10px 14px}
+@media (min-width:981px){.stick-cta{left:auto;right:96px;bottom:24px;max-width:420px}}
+@media (max-width:600px){.cta-offer{padding:52px 0}.cta-offer .container{gap:24px}}
+@media (max-width:600px){.cta-tag{letter-spacing:.06em;font-size:11px}.cta-offer .advisor{display:none}.cta-pol li:nth-child(n+4){display:none}.cta-stats b{font-size:24px}}
