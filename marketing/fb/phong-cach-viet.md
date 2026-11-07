@@ -10,6 +10,13 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 - Dí dỏm chỉ ở mức một hình ảnh/câu mở tinh tế; phần số liệu và nhận định viết nghiêm túc.
 - Cấu trúc thống nhất: câu mở (1–2 câu) → 3–5 gạch đầu dòng 1️⃣2️⃣3️⃣ → "Góc nhìn của Hiệp:" → lời mời → "📲 Inbox/Zalo: 0904 567 009" → ghi chú ảnh → hashtag.
 
+## Viết theo key (anh Hiệp chốt 07/11/2026)
+- Mỗi bài chọn **1 từ khoá chính** = `keyword` của bài web gắn link ở bình luận đầu (xem data-bai-viet-*.php hoặc wordpress/tu-dong/bai/*.txt). Bài không có bài web: chọn cụm khách hay tìm, ví dụ "giá Sun Saphia Residence", "căn hộ biển Đà Nẵng".
+- Từ khoá chính nằm ở **câu đầu tiên** (càng gần đầu càng tốt), lặp lại tự nhiên 1–2 lần trong thân bài hoặc "Góc nhìn của Hiệp", và là tiêu đề lớn trên ảnh.
+- Dùng 2–3 **từ khoá phụ** (`keywords_extra`) làm đầu mục, gạch đầu dòng, ví dụ "Tiêu chuẩn bàn giao Sun Saphia:", "Phí quản lý Sun Saphia:".
+- Hashtag đầu tiên là từ khoá chính viết liền (#SunSaphiaResidence), sau đó là #BatDongSanDaNang và khu vực.
+- Viết tự nhiên, không nhồi từ khoá, không lặp quá 3 lần, câu vẫn mềm mỏng và chỉn chu như trên.
+
 ## Giọng văn
 - Như anh Hiệp nhắn cho khách quen: xưng "Hiệp"/"mình", gọi "anh chị", dùng "ạ" lịch sự (hạn chế "nha").
 - Câu mở nhẹ nhàng, ấm áp, gần đời thường; dí dỏm vừa phải.

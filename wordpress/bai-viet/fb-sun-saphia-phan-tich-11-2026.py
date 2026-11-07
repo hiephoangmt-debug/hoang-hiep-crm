@@ -40,8 +40,8 @@ ft = F('Inter-Bold.otf', 21)
 tw = d.textlength(tag, font=ft) / S
 d.rounded_rectangle(P(60, 52, 60 + tw + 40, 92), radius=20 * S, fill=GOLD)
 d.text(P(80, 60), tag, font=ft, fill=NAVY)
-d.text(P(58, 388), 'Sun Saphia Residence', font=F('InterDisplay-ExtraBold.otf', 62), fill=CREAM)
-d.text(P(60, 464), 'Hỏi đáp nói gì với người mua?', font=F('InterDisplay-Bold.otf', 38), fill=(255, 200, 140))
+d.text(P(58, 388), 'Sun Saphia Residence hỏi đáp', font=F('InterDisplay-ExtraBold.otf', 54), fill=CREAM)
+d.text(P(60, 464), 'Bàn giao · phí quản lý · cho thuê · pháp lý', font=F('InterDisplay-Bold.otf', 34), fill=(255, 200, 140))
 
 # Hàng số liệu
 y = PH
