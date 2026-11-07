@@ -21,3 +21,4 @@
 | 07/11/2026 | Hoàng Hiệp | 11:30 | (bản tin) Tái định cư Duy Xuyên – đường sắt tốc độ cao 392 tỷ | /tai-dinh-cu-duy-xuyen-duong-sat-toc-do-cao-392-ty/ |
 | 07/11/2026 | Hoàng Hiệp | 15:30 | 4 điều cần biết khi cho thuê căn hộ theo ngày (1 ảnh dọc: biển Mỹ Khê + 4 điều) | /cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue/ |
 | 07/11/2026 | Sun | 20:00 | Spana Tower – tiến độ thực tế 11/2026, pháp lý, tiện ích (album 4 ảnh) | /du-an/spana-tower/ |
+| 07/11/2026 | Sun | 16:30 | Phân tích Sun Saphia: điểm mạnh, cần cân nhắc, hợp với ai (1 ảnh dọc) | /danh-gia-sun-saphia-residence-chi-tiet/ |
