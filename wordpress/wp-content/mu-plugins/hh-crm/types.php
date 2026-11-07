@@ -115,6 +115,7 @@ function hh_default_terms() {
 	return array(
 		'loai-du-an' => array(
 			'to-hop'    => array( 'Tổ hợp dự án', array() ),
+			'nha-o-xa-hoi' => array( 'Nhà ở xã hội – thu nhập thấp', array() ),
 			'cao-tang'  => array( 'Cao tầng', array(
 				'can-ho-so-huu-lau-dai' => 'Căn hộ sở hữu lâu dài',
 				'can-ho-dich-vu'  => 'Căn hộ dịch vụ (50 năm)',
@@ -159,7 +160,7 @@ function hh_default_terms() {
 
 add_action( 'init', 'hh_seed_terms', 20 );
 function hh_seed_terms() {
-	if ( wp_installing() || '10' === get_option( 'hh_terms_seeded' ) ) {
+	if ( wp_installing() || '11' === get_option( 'hh_terms_seeded' ) ) {
 		return;
 	}
 	// Đổi tên cũ "Shophouse" → "Nhà phố – Shophouse".
@@ -190,7 +191,7 @@ function hh_seed_terms() {
 			}
 		}
 	}
-	update_option( 'hh_terms_seeded', '10' );
+	update_option( 'hh_terms_seeded', '11' );
 }
 
 /**
@@ -253,7 +254,7 @@ function hh_project_types_label( $post_id = null ) {
 
 /** Top-level project groups in display order: Tổ hợp, Cao tầng, Thấp tầng. */
 function hh_project_groups() {
-	$order  = array( 'to-hop', 'cao-tang', 'thap-tang' );
+	$order  = array( 'to-hop', 'cao-tang', 'thap-tang', 'nha-o-xa-hoi' );
 	$groups = get_terms( array( 'taxonomy' => 'loai-du-an', 'hide_empty' => false, 'parent' => 0 ) ) ?: array();
 	usort(
 		$groups,
@@ -626,6 +627,9 @@ function hh_hot_query( $post_type, $args = array() ) {
 	if ( $args['type_term'] ) {
 		$base['tax_query'] = array( array( 'taxonomy' => 'loai-du-an', 'terms' => (int) $args['type_term'], 'include_children' => true ) );
 	}
+	if ( 'du-an' === $post_type && function_exists( 'hh_noxh_tax_exclude' ) && ( ! $args['type_term'] || ! hh_is_noxh_term( (int) $args['type_term'] ) ) ) {
+		$base['tax_query'] = array_merge( (array) ( $base['tax_query'] ?? array() ), array( hh_noxh_tax_exclude() ) ); // Nhà ở xã hội có mục riêng.
+	}
 	if ( 'du-an' === $post_type && function_exists( 'hh_sort_projects_by_rank' ) ) {
 		$base['posts_per_page'] = max( 30, $args['limit'] * 5 ); // Lấy rộng rồi xếp: dự án đang bán lên trước, đã bán xong xuống sau.
 	}
@@ -946,8 +950,9 @@ function hh_project_key_stats( $post_id = null, $max = 4 ) {
 		$stats[] = array( $x[1] . ' ha', 'Quy mô' );
 	}
 	// Số căn / sản phẩm.
-	if ( preg_match( '/(\d{1,3}(?:\.\d{3})+|\d{2,})\s*(căn|sản phẩm|lô|biệt thự)/u', $m( 'hh_p_units' ), $x ) ) {
-		$stats[] = array( $x[1], 'căn' === $x[2] ? 'Số căn' : ( 'lô' === $x[2] ? 'Lô đất' : 'Sản phẩm' ) );
+	// Lấy con số đứng đầu (VD "420 nhà phố … và 30 căn thương mại" → 420 nhà phố).
+	if ( preg_match( '/(\d{1,3}(?:\.\d{3})+|\d{2,})\s*(căn|sản phẩm|lô|biệt thự|nhà phố|shophouse)/u', $m( 'hh_p_units' ), $x ) ) {
+		$stats[] = array( $x[1], array( 'căn' => 'Số căn', 'lô' => 'Lô đất', 'nhà phố' => 'Nhà phố', 'shophouse' => 'Shophouse' )[ $x[2] ] ?? 'Sản phẩm' );
 	}
 	// Bàn giao.
 	$year = (int) wp_date( 'Y' );

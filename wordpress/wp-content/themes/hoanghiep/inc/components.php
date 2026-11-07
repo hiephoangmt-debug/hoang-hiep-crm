@@ -501,6 +501,7 @@ function hh_pillar_heading( $term = null ) {
 		'dat-nen'               => 'Dự án đất nền Đà Nẵng ' . $year,
 		'shophouse'             => 'Nhà phố, shophouse Đà Nẵng ' . $year,
 		'to-hop'                => 'Tổ hợp dự án bất động sản Đà Nẵng ' . $year,
+		'nha-o-xa-hoi'          => 'Nhà ở xã hội, căn hộ thu nhập thấp Đà Nẵng ' . $year,
 	);
 	return $map[ $term->slug ] ?? 'Dự án ' . mb_strtolower( $term->name ) . ' Đà Nẵng ' . $year;
 }

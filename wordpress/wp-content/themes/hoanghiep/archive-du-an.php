@@ -24,10 +24,10 @@ usort( $subtypes, static fn( $a, $b ) => ( 'biet-thu-lau-dai' === $b->slug ) <=>
 			<p class="page-head__lead">Vị trí, mặt bằng, bảng giá và chính sách bán hàng mới nhất của từng dự án.</p>
 		<?php endif; ?>
 		<?php if ( $types && ! is_wp_error( $types ) ) : ?>
-			<nav class="deal-tabs" aria-label="Loại dự án">
+			<nav class="deal-tabs deal-tabs--scroll" aria-label="Loại dự án">
 				<a class="<?php echo $term ? '' : 'is-active'; ?>" href="<?php echo esc_url( get_post_type_archive_link( 'du-an' ) ); ?>">Tất cả</a>
 				<?php foreach ( $types as $t ) : ?>
-					<a class="<?php echo $group && $group->term_id === $t->term_id ? 'is-active' : ''; ?>" href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( $t->name ); ?></a>
+					<a class="<?php echo $group && $group->term_id === $t->term_id ? 'is-active' : ''; ?>" href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( 'nha-o-xa-hoi' === $t->slug ? 'Nhà ở xã hội' : $t->name ); ?></a>
 				<?php endforeach; ?>
 			</nav>
 		<?php endif; ?>
@@ -39,24 +39,18 @@ usort( $subtypes, static fn( $a, $b ) => ( 'biet-thu-lau-dai' === $b->slug ) <=>
 				<?php endforeach; ?>
 			</nav>
 		<?php endif; ?>
-		<?php if ( defined( 'HH_SPECIAL_PAGES' ) && ( ! $term || in_array( $term->slug, array( 'cao-tang', 'can-ho-so-huu-lau-dai', 'can-ho-dich-vu' ), true ) ) ) : ?>
+		<?php if ( defined( 'HH_SPECIAL_PAGES' ) && $term && in_array( $term->slug, array( 'cao-tang', 'can-ho-so-huu-lau-dai', 'can-ho-dich-vu' ), true ) ) : ?>
 			<nav class="type-chips type-chips--head" aria-label="Sản phẩm cao tầng">
 				<?php foreach ( HH_SPECIAL_PAGES as $k => list( , $name ) ) : ?>
 					<a href="<?php echo esc_url( hh_special_url( $k ) ); ?>"><?php echo esc_html( $name ); ?></a>
 				<?php endforeach; ?>
 			</nav>
 		<?php endif; ?>
-		<nav class="status-tabs" aria-label="Tình trạng">
-			<a class="<?php echo '' === $current ? 'is-active' : ''; ?>" href="<?php echo esc_url( remove_query_arg( 'tt', $base . ( $area ? '?khu-vuc=' . rawurlencode( $area ) : '' ) ) ); ?>">Mọi tình trạng</a>
-			<?php foreach ( $statuses as $value => $label ) : ?>
-				<a class="<?php echo $current === $value ? 'is-active' : ''; ?>" href="<?php echo esc_url( add_query_arg( 'tt', $value, $base . ( $area ? '?khu-vuc=' . rawurlencode( $area ) : '' ) ) ); ?>"><?php echo esc_html( $label ); ?></a>
-			<?php endforeach; ?>
-		</nav>
 	</div>
 </div>
 
 <div class="container section">
-	<form class="filter-bar" action="<?php echo esc_url( $base ); ?>" method="get">
+	<form class="filter-bar filter-bar--du-an" action="<?php echo esc_url( $base ); ?>" method="get">
 		<input type="search" name="tk" value="<?php echo esc_attr( (string) get_query_var( 'tk' ) ); ?>" placeholder="Tên dự án, chủ đầu tư…" aria-label="Từ khóa">
 		<?php if ( $areas && ! is_wp_error( $areas ) ) : ?>
 			<select name="khu-vuc" aria-label="Khu vực">
@@ -66,9 +60,12 @@ usort( $subtypes, static fn( $a, $b ) => ( 'biet-thu-lau-dai' === $b->slug ) <=>
 				<?php endforeach; ?>
 			</select>
 		<?php endif; ?>
-		<?php if ( $current ) : ?>
-			<input type="hidden" name="tt" value="<?php echo esc_attr( $current ); ?>">
-		<?php endif; ?>
+		<select name="tt" aria-label="Tình trạng">
+			<option value="">Mọi tình trạng</option>
+			<?php foreach ( $statuses as $value => $label ) : ?>
+				<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $current, $value ); ?>><?php echo esc_html( $label ); ?></option>
+			<?php endforeach; ?>
+		</select>
 		<button class="btn btn--gold" type="submit">Tìm dự án</button>
 	</form>
 

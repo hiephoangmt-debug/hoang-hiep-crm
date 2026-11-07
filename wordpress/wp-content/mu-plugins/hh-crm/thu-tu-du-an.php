@@ -32,7 +32,7 @@ add_filter(
 		$pt         = $q->get( 'post_type' );
 		$is_project = 'du-an' === $pt || ( array( 'du-an' ) === $pt ) || ( '' === $pt && $q->is_tax( 'loai-du-an' ) );
 		$orderby    = $q->get( 'orderby' );
-		if ( ! $is_project || ! in_array( $orderby, array( '', 'date', 'menu_order', 'menu_order date', 'modified' ), true ) || $q->get( 'hh_no_rank' ) ) {
+		if ( ! $is_project || ! in_array( $orderby, array( '', 'date', 'menu_order', 'menu_order date', 'modified' ), true ) || $q->get( 'hh_no_rank' ) || $q->get( 'tk' ) || $q->get( 's' ) ) { // Đang tìm kiếm: giữ thứ tự khớp tên (dự án đúng tên lên đầu).
 			return $clauses;
 		}
 		global $wpdb;

@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.86** + plugin Hoàng Hiệp CRM **2.20.205**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.87** + plugin Hoàng Hiệp CRM **2.20.206**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,18 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.206 · giao diện 2.15.87 (07/11/2026)
+
+- **Menu 3 gạch trên trang dự án (điện thoại):** thanh mục lục (Tổng quan, Vị trí, Tiện ích…) gọn thành nút ☰, bấm sổ danh sách; áp dụng mọi trang dự án dạng landing (tự động, The Poet, Sun Saphia…).
+
+- **Nhà ở xã hội – thu nhập thấp có mục riêng:** tab riêng ở trang Dự án và trong menu Dự án; không còn lẫn vào danh sách dự án thương mại. Vào quản trị một lần để web tự xếp các dự án nhà ở xã hội vào mục.
+
+- **Trang Dự án gọn hơn:** một hàng loại dự án (vuốt ngang trên điện thoại); Shop khối đế / Penthouse / Duplex chỉ hiện trong mục Cao tầng; tình trạng chuyển thành ô chọn cạnh khu vực.
+
+- **Tìm kiếm không dấu:** gõ "Nam Hoi An" ra Nam Hội An City đầu tiên (trước đây bị xếp cuối vì đã bàn giao).
+
+- **Nam Hội An City – 5 tin mua bán, cho thuê:** nhà phố từ 3,65 tỷ; nhà đang cho thuê 34 triệu/tháng giá 6 tỷ; shophouse hoàn thiện từ 6,2 tỷ (có dãy 5 căn 30 tỷ); đất nền từ 2,95 tỷ; cho thuê nguyên căn 3 – 6 PN 30 – 50 triệu/tháng. Không ghi mã lô, số căn. Ô "Số căn" trên trang dự án sửa thành 420 nhà phố.
 
 ## Có gì mới – plugin 2.20.205 (07/11/2026)
 

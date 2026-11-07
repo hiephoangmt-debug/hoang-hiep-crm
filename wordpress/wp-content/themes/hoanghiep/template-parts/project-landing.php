@@ -66,6 +66,44 @@ table.hh-cards .unit-acts{justify-content:flex-start}
 <body <?php body_class( 'hh-landing' ); ?>>
 <?php wp_body_open(); ?>
 <?php echo $hh_body; // phpcs:ignore WordPress.Security.EscapeOutput -- Nội dung landing dựng sẵn trong giao diện. ?>
+<style>
+/* Điện thoại / máy tính bảng: menu mục lục thành nút 3 gạch, bấm sổ danh sách (mọi trang dự án dạng landing). */
+.hh-burger{display:none;flex:none;align-items:center;justify-content:center;width:44px;height:44px;margin-left:auto;padding:0;border:0;border-radius:10px;background:transparent;color:inherit;cursor:pointer}
+.hh-burger svg{width:26px;height:26px}
+.hh-burger .i-close,.hh-mb-open .hh-burger .i-open{display:none}
+.hh-mb-open .hh-burger .i-close{display:block}
+@media (max-width:980px){
+	.hh-burger{display:inline-flex}
+	.hh-mb-nav{display:none!important}
+	.hh-mb-open .hh-mb-nav{display:flex!important;flex-direction:column;position:fixed;left:0;right:0;top:var(--hh-mb-top,64px);z-index:9998;margin:0!important;padding:6px 0!important;width:auto!important;max-height:calc(100vh - var(--hh-mb-top,64px));overflow-y:auto;background:#fff;box-shadow:0 18px 30px -12px rgba(14,28,51,.35);order:initial}
+	.hh-mb-open .hh-mb-nav a{display:block;margin:0;padding:14px 22px!important;border-radius:0!important;background:none!important;color:#14223a!important;opacity:1!important;font-size:16px!important;font-weight:600;white-space:normal;border-bottom:1px solid #eee}
+	.hh-mb-open .hh-mb-nav a:last-child{border-bottom:0}
+	.hh-mb-open .hh-mb-nav a.on,.hh-mb-open .hh-mb-nav a[aria-current]{color:#b98d4f!important}
+}
+</style>
+<script>
+(function(){
+	var nav = document.querySelector('header.top nav.nav, header.top nav.mnav');
+	if (!nav || document.querySelector('.burger')) return; // Landing đã có nút menu riêng (FourS) thì giữ nguyên.
+	var hdr = nav.closest('header'), box = nav.parentNode;
+	var b = document.createElement('button');
+	b.type = 'button'; b.className = 'hh-burger'; b.setAttribute('aria-label', 'Mở menu'); b.setAttribute('aria-expanded', 'false');
+	b.innerHTML = '<svg class="i-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg><svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+	nav.classList.add('hh-mb-nav');
+	box.appendChild(b);
+	function set(open){
+		if (open) document.documentElement.style.setProperty('--hh-mb-top', Math.max(0, Math.round(hdr.getBoundingClientRect().bottom)) + 'px');
+		hdr.classList.toggle('hh-mb-open', open);
+		b.setAttribute('aria-expanded', open ? 'true' : 'false');
+		b.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
+	}
+	b.addEventListener('click', function(){ set(!hdr.classList.contains('hh-mb-open')); });
+	nav.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
+	document.addEventListener('click', function(e){ if (hdr.classList.contains('hh-mb-open') && !hdr.contains(e.target)) set(false); });
+	document.addEventListener('keydown', function(e){ if (e.key === 'Escape') set(false); });
+	window.addEventListener('resize', function(){ if (window.innerWidth > 980) set(false); });
+})();
+</script>
 <script>
 (function(){
 	// Điện thoại: bảng ≥5 cột → thẻ từng dòng (gắn tên cột cho từng ô); bảng ≤4 cột → vừa màn hình, không phải vuốt ngang.

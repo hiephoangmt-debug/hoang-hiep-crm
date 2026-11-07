@@ -1600,3 +1600,11 @@ html:has(body.admin-bar) { scroll-padding-top: calc(32px + var(--header-h) + 60p
 	.hero__bg--poster { object-position: center top; }
 	.hero__slide--poster .hero__meta { display: none; }
 }
+
+/* Trang Dự án: bộ lọc gọn – từ khoá, khu vực, tình trạng (07/11/2026). */
+.filter-bar--du-an select { flex: 1 1 170px; }
+@media (max-width: 640px) {
+	.filter-bar--du-an { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+	.filter-bar--du-an input { grid-column: 1 / -1; }
+	.filter-bar--du-an .btn { grid-column: 1 / -1; justify-content: center; }
+}

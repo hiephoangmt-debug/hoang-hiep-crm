@@ -133,6 +133,7 @@ function hoanghiep_fallback_menu( $args = array() ) {
 				array( 'Đất nền', $type_link( 'dat-nen', $projects ) ),
 				array( 'Nhà phố – Shophouse', $type_link( 'shophouse', $projects ) ),
 			) ),
+			array( 'Nhà ở xã hội – thu nhập thấp', $type_link( 'nha-o-xa-hoi', $projects ) ),
 			array( 'Căn hộ ven sông Hàn', home_url( '/can-ho-ven-song-han-da-nang/' ) ),
 			array( 'Dự án căn hộ mới, sắp mở bán', home_url( '/du-an-can-ho-moi-da-nang/' ) ),
 			array( 'Căn hộ khách sạn – condotel', home_url( '/can-ho-khach-san-condotel-da-nang/' ) ),
