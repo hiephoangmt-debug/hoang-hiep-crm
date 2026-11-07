@@ -313,3 +313,12 @@ body.admin-bar header.top{top:32px}
 @media (max-width:760px){.mp-grid.mp-2{grid-template-columns:1fr}.plan-mp img{max-height:52vh!important}}
 /* Thanh bám đáy trên máy tính đặt bên trái – không đè nút chat "Hỏi em nhé" bên phải */
 @media (min-width:981px){.stick-cta{left:24px;right:auto;bottom:24px;max-width:440px}}
+
+/* Về trang chủ: nút nhà ở đầu trang; link Trang chủ / Tất cả dự án chỉ hiện trong menu 3 gạch (07/11/2026) */
+.home-link{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:10px;color:var(--gold2);border:1px solid rgba(216,182,124,.4);text-decoration:none}
+.home-link svg{width:20px;height:20px}
+.home-link:hover{background:rgba(255,255,255,.1)}
+.top .container{gap:12px}
+.nav .nav-out{display:none}
+.hh-mb-open .hh-mb-nav .nav-out{display:block;color:#b98d4f!important;border-top:1px solid #eee}
+@media (max-width:600px){.home-link{width:34px;height:34px}}

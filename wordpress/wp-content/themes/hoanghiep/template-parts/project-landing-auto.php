@@ -199,6 +199,10 @@ $nav = array_filter(
 		'hoi-dap'    => $faq ? 'Hỏi đáp' : '',
 	)
 );
+if ( $parent && isset( $nav['to-hop'] ) ) {
+	unset( $nav['to-hop'] );
+	$nav['to-hop'] = 'Cùng tổ hợp';
+}
 $brand_top = $short_name;
 $brand_sub = trim( preg_replace( '/^.*?,\s*/u', '', (string) $m( 'hh_p_address' ) ) ) ?: 'Đà Nẵng';
 if ( mb_strlen( $brand_sub ) > 34 ) {
@@ -208,9 +212,11 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
 ?>
 <header class="top">
   <div class="container">
+    <a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="Về trang chủ Hoàng Hiệp" title="Về trang chủ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></a>
     <a class="brand" href="#top"><b><?php echo $e( mb_strtoupper( mb_strlen( $brand_top ) > 22 ? implode( ' ', array_slice( preg_split( '/\s+/u', $brand_top ), 0, 3 ) ) : $brand_top ) ); ?></b><small><?php echo $e( $brand_sub ); ?></small></a>
     <nav class="nav" aria-label="Mục lục">
       <?php foreach ( $nav as $k => $lb ) : ?><a href="#<?php echo esc_attr( $k ); ?>"><?php echo $e( $lb ); ?></a><?php endforeach; ?>
+      <a class="nav-out" href="<?php echo esc_url( home_url( '/' ) ); ?>">← Trang chủ</a><a class="nav-out" href="<?php echo esc_url( home_url( '/du-an/' ) ); ?>">Tất cả dự án</a>
     </nav>
     <a class="btn btn-gold" href="#dang-ky"><?php echo $resale ? 'Nhận danh sách căn' : 'Nhận bảng giá'; ?></a>
   </div>
@@ -278,18 +284,29 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
   </div>
 </section>
 
-<?php if ( $family ) : ?>
+<?php
+// Tổ hợp: trang tổng thể hiện ngay sau Tổng quan; trang dự án con dời xuống cuối trang để khách không bị kéo sang khu khác.
+$family_html = '';
+if ( $family ) :
+	ob_start();
+	?>
 <!-- TỔ HỢP -->
 <section id="to-hop" style="background:#fff" aria-labelledby="h-th">
   <div class="container">
-    <span class="eyebrow">Tổ hợp dự án</span>
-    <h2 class="title" id="h-th"><?php echo $parent ? 'Cùng tổ hợp <em>' . $e( get_the_title( $parent ) ) . '</em>' : 'Các dự án trong <em>' . $e( $short_name ) . '</em>'; // phpcs:ignore ?></h2>
+    <span class="eyebrow"><?php echo $parent ? 'Xem thêm' : 'Tổ hợp dự án'; ?></span>
+    <h2 class="title" id="h-th"><?php echo $parent ? 'Các dự án khác cùng tổ hợp <em>' . $e( get_the_title( $parent ) ) . '</em>' : 'Các dự án trong <em>' . $e( $short_name ) . '</em>'; // phpcs:ignore ?></h2>
     <?php $fn = count( $family ); $fcls = 2 === $fn ? ' kids--2' : ( 0 === $fn % 4 ? ' kids--4' : ( 0 === $fn % 3 || $fn > 4 ? ' kids--3' : ' kids--' . $fn ) ); ?>
     <div class="kids<?php echo esc_attr( $fcls ); ?>">
       <?php foreach ( $family as $p ) : ?>
         <?php $is_cur = (int) $p->ID === $id; $is_par = (int) $p->ID === $parent; ?>
         <a class="kid<?php echo $is_cur ? ' cur' : ''; ?>" href="<?php echo esc_url( get_permalink( $p ) ); ?>"<?php echo $is_cur ? ' aria-current="page"' : ''; ?>>
-          <?php if ( has_post_thumbnail( $p ) ) : ?><img src="<?php echo esc_url( (string) get_the_post_thumbnail_url( $p, 'medium_large' ) ); ?>" alt="<?php echo esc_attr( get_the_title( $p ) ); ?>" loading="lazy" decoding="async"><?php endif; ?>
+          <?php if ( has_post_thumbnail( $p ) ) : ?><img src="<?php echo esc_url( (string) get_the_post_thumbnail_url( $p, 'medium_large' ) ); ?>" alt="<?php echo esc_attr( get_the_title( $p ) ); ?>" loading="lazy" decoding="async"><?php
+	$family_html = ob_get_clean();
+endif;
+if ( ! $parent ) {
+	echo $family_html; // phpcs:ignore WordPress.Security.EscapeOutput -- đã escape khi dựng.
+}
+?>
           <div><small><?php echo $is_cur ? 'Đang xem' : ( $is_par ? 'Tổng thể dự án' : $e( $short( hh_meta( 'hh_p_type', $p->ID ) ?: 'Dự án thành phần', 40 ) ) ); ?></small><b><?php echo $e( get_the_title( $p ) ); ?></b><?php if ( hh_meta( 'hh_p_price_from', $p->ID ) ) : ?><span><?php echo $e( hh_project_price( $p->ID ) ); ?> (tham khảo)</span><?php elseif ( hh_meta( 'hh_p_address', $p->ID ) ) : ?><span><?php echo $e( $short( hh_meta( 'hh_p_address', $p->ID ), 60 ) ); ?></span><?php endif; ?><?php if ( ! $is_cur ) : ?><em class="kid-go">Xem dự án →</em><?php endif; ?></div>
         </a>
       <?php endforeach; ?>
@@ -687,6 +704,7 @@ $cta_get   = $resale ? array( 'Danh sách căn đang bán, giá thật', 'Kiểm
     </form>
   </div>
 </section>
+<?php if ( $parent ) { echo $family_html; } // phpcs:ignore WordPress.Security.EscapeOutput -- Dự án con: tổ hợp ở cuối trang. ?>
 <?php
 // Dòng phụ thanh bám đáy: ưu tiên ưu đãi (chiết khấu, giá từ), viết thành câu tự nhiên.
 $bar_num = '';
@@ -716,7 +734,7 @@ addEventListener('scroll',upd,{passive:true});upd();})();
 </main>
 
 <footer class="foot">
-  <div class="container"><?php echo $e( $title . ( $m( 'hh_p_address' ) ? ' – ' . $m( 'hh_p_address' ) : '' ) ); ?>. Thông tin, hình ảnh tổng hợp từ tài liệu chủ đầu tư, mang tính tham khảo; giá và chính sách có thể thay đổi. Tư vấn: Hoàng Hiệp – <?php echo $e( $phone ); ?>. <a href="<?php echo esc_url( home_url( '/du-an/' ) ); ?>" style="color:var(--gold2)">Xem các dự án khác</a></div>
+  <div class="container"><?php echo $e( $title . ( $m( 'hh_p_address' ) ? ' – ' . $m( 'hh_p_address' ) : '' ) ); ?>. Thông tin, hình ảnh tổng hợp từ tài liệu chủ đầu tư, mang tính tham khảo; giá và chính sách có thể thay đổi. Tư vấn: Hoàng Hiệp – <?php echo $e( $phone ); ?>. <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color:var(--gold2)">← Về trang chủ</a> · <a href="<?php echo esc_url( home_url( '/du-an/' ) ); ?>" style="color:var(--gold2)">Xem các dự án khác</a></div>
 </footer>
 
 <div class="float"><a class="zl js-zalo" href="<?php echo esc_url( $zalo ); ?>" target="_blank" rel="noopener" aria-label="Nhắn Zalo">Zalo</a><a class="call" href="tel:0904567009" aria-label="Gọi <?php echo esc_attr( $phone ); ?>">Gọi</a></div>
@@ -755,7 +773,7 @@ addEventListener('keydown',function(e){if('Escape'===e.key)close(true);});})();
   document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('on');});
   document.querySelectorAll('[data-type]').forEach(function(a){a.addEventListener('click',function(){var s=document.getElementById('f-type');if(s){for(var i=0;i<s.options.length;i++){if(s.options[i].text===a.dataset.type){s.selectedIndex=i;}}}});});
   document.querySelectorAll('.lead-form').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();if(!f.checkValidity()){f.reportValidity();return;}var m=f.querySelector('.ok-msg');if(m)m.style.display='block';f.querySelector('button[type=submit]').disabled=true;});});
-  var links=[].slice.call(document.querySelectorAll('.nav a'));
+  var links=[].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
   var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
   window.addEventListener('scroll',function(){var y=window.scrollY+120,cur=-1;secs.forEach(function(s,i){if(s&&s.offsetTop<=y)cur=i;});links.forEach(function(a,i){a.classList.toggle('on',i===cur);});},{passive:true});
 })();

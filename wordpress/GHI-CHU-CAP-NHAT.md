@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.90** + plugin Hoàng Hiệp CRM **2.20.212**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.91** + plugin Hoàng Hiệp CRM **2.20.212**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.91 (07/11/2026)
+
+- **Mục "Tổ hợp" đúng chỗ:** trang tổng thể (VD FourS Tower, Sun NeO City) vẫn hiện danh sách dự án thành phần ngay sau Tổng quan; trang dự án con (VD FourS F1) dời mục này xuống cuối trang, sau khối đăng ký, đổi tên "Các dự án khác cùng tổ hợp" – khách xem hết dự án đang xem trước.
+
+- **Về trang chủ:** nút hình ngôi nhà ở góc trái đầu trang dự án; menu 3 gạch có thêm "← Trang chủ" và "Tất cả dự án"; cuối trang có link "← Về trang chủ".
 
 ## Có gì mới – giao diện 2.15.90 (07/11/2026)
 
