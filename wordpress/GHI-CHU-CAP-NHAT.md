@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.95** + plugin Hoàng Hiệp CRM **2.20.216**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.95** + plugin Hoàng Hiệp CRM **2.20.217**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.217 (07/11/2026)
+
+- **FPT Plaza 2:** thêm 3 mặt bằng – tầng điển hình (căn 56 – 78 m²), tầng 1 shophouse (23 căn 53 – 126 m²), tầng tiện ích (bể bơi trong nhà, cà phê, phòng thể thao). Đã xóa logo đơn vị phân phối ở góc ảnh.
+- **FPT City Đà Nẵng:** thêm mặt bằng tổng thể toàn khu + sơ đồ phân khu (mục Mặt bằng tổng thể).
+- **Shantira Beach Resort:** thêm 4 mặt bằng tầng (tầng 2 tòa A, tầng 2 tòa B, tầng 3 – 5A – 5, tầng 6 – 11) và 2 layout căn điều chỉnh mới nhất (bỏ các bản trùng).
+- Cài: Nhập nhanh → upload → "Nhập / cập nhật dữ liệu" → **"Tải ảnh ngay"** → LiteSpeed Purge All.
 
 ## Có gì mới – giao diện 2.15.95 (07/11/2026)
 
