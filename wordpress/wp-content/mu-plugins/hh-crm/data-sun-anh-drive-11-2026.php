@@ -54,8 +54,9 @@ add_filter(
 				$th( '1WxT7k9l-1KOqPwTkE1p8kQ1oMhDBg7jQ', 'Phối cảnh Spana Tower từ trên cao', 'thư viện' ),
 				$th( '1zTNCHw0gH2m4o-ysvHDFED62Plril4jr', 'Phối cảnh Spana Tower và trục đường dẫn cầu Hòa Xuân', 'thư viện' ),
 			),
-			'sun-neo-city'        => array(
-				$th( '1Fj7V4DJyp12BKdgOqKwJRbkFkdH-ccL0', 'Tổng mặt bằng khu đô thị Sun NeO City Hòa Xuân (bản vẽ chủ đầu tư, tham khảo)', 'tổng thể' ),
+			// Bản vẽ này là mặt bằng phân lô đất nền Cồn Dầu (anh Hiệp xác nhận 07/11/2026) – chuyển từ trang Sun NeO City sang.
+			'dat-nen-con-dau-hoa-xuan' => array(
+				$th( '1Fj7V4DJyp12BKdgOqKwJRbkFkdH-ccL0', 'Mặt bằng phân lô đất nền Cồn Dầu – Sun NeO City Hòa Xuân (bản vẽ chủ đầu tư, tham khảo)', 'tổng thể' ),
 			),
 			'dat-nen-vo-chi-cong' => array(
 				$th( '1N6zlOPpgHwz6fLhVY5TZtx6DTP8l5hWr', 'Tổng mặt bằng đất nền Võ Chí Công (bản vẽ chủ đầu tư, tham khảo)', 'tổng thể' ),

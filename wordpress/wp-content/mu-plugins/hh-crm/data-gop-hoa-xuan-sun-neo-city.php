@@ -80,3 +80,54 @@ add_action(
 	},
 	1
 );
+
+/**
+ * Bản vẽ "tổng mặt bằng Sun NeO City" thực ra là mặt bằng phân lô đất nền Cồn Dầu (anh Hiệp 07/11/2026):
+ * gỡ khỏi trang Sun NeO City (ảnh tải trùng 2 lần – xoá bản thừa), chuyển 1 bản sang trang Đất nền Cồn Dầu, sửa chú thích.
+ */
+add_action(
+	'admin_init',
+	static function () {
+		if ( '1' === get_option( 'hh_con_dau_plan_v1' ) || ! current_user_can( 'edit_posts' ) ) {
+			return;
+		}
+		$neo = get_page_by_path( 'sun-neo-city', OBJECT, 'du-an' );
+		$cd  = get_page_by_path( 'dat-nen-con-dau-hoa-xuan', OBJECT, 'du-an' );
+		if ( ! $neo || ! $cd ) {
+			return;
+		}
+		$ids  = array_filter( array_map( 'absint', explode( ',', (string) get_post_meta( $neo->ID, 'hh_p_masterplan_img', true ) ) ) );
+		$plan = array();
+		foreach ( $ids as $aid ) {
+			if ( false !== strpos( (string) get_attached_file( $aid ), 'tong-mat-bang-khu-do-thi-sun-neo-city' ) ) {
+				$plan[] = $aid;
+			}
+		}
+		if ( $plan ) {
+			$keep = (int) array_shift( $plan );
+			foreach ( $plan as $dup ) {
+				wp_delete_attachment( $dup, true );
+			}
+			update_post_meta( $neo->ID, 'hh_p_masterplan_img', implode( ',', array_diff( $ids, array( $keep ), $plan ) ) );
+			$alt = 'Mặt bằng phân lô đất nền Cồn Dầu – Sun NeO City Hòa Xuân (bản vẽ chủ đầu tư, tham khảo)';
+			update_post_meta( $keep, '_wp_attachment_image_alt', $alt );
+			wp_update_post( array( 'ID' => $keep, 'post_excerpt' => $alt, 'post_parent' => $cd->ID ) );
+			$cd_ids   = array_filter( array_map( 'absint', explode( ',', (string) get_post_meta( $cd->ID, 'hh_p_masterplan_img', true ) ) ) );
+			$cd_ids[] = $keep;
+			update_post_meta( $cd->ID, 'hh_p_masterplan_img', implode( ',', array_unique( $cd_ids ) ) );
+			// Ghi nhớ link ảnh cho trang Cồn Dầu để web không tải lại bản vẽ này lần nữa.
+			$neo_done = (array) get_post_meta( $neo->ID, '_hh_img_links', true );
+			$cd_done  = (array) get_post_meta( $cd->ID, '_hh_img_links', true );
+			foreach ( $neo_done as $k => $v ) {
+				if ( false !== strpos( (string) $k, '1Fj7V4DJyp12BKdgOqKwJRbkFkdH-ccL0' ) ) {
+					$cd_done[ $k ] = $keep;
+				}
+			}
+			update_post_meta( $cd->ID, '_hh_img_links', $cd_done );
+			if ( ! has_post_thumbnail( $cd->ID ) ) {
+				set_post_thumbnail( $cd->ID, $keep );
+			}
+		}
+		update_option( 'hh_con_dau_plan_v1', '1', false );
+	}
+);

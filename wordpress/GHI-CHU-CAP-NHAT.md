@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.89** + plugin Hoàng Hiệp CRM **2.20.211**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.89** + plugin Hoàng Hiệp CRM **2.20.212**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.212 (07/11/2026)
+
+- **Mặt bằng Cồn Dầu đúng trang:** bản vẽ trước ghi "tổng mặt bằng Sun NeO City" thực ra là mặt bằng phân lô đất nền Cồn Dầu – gỡ khỏi trang Sun NeO City (xoá luôn bản tải trùng), chuyển sang trang Đất nền Cồn Dầu với chú thích đúng. Mở trang quản trị một lần sau khi cài để web chuyển.
 
 ## Có gì mới – giao diện 2.15.89 (07/11/2026)
 
