@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.93** + plugin Hoàng Hiệp CRM **2.20.215**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.94** + plugin Hoàng Hiệp CRM **2.20.216**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,15 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.94 + plugin 2.20.216 (07/11/2026)
+
+- **Chính sách bán hàng hiện bằng con số** (mọi trang dự án): mỗi ưu đãi là một thẻ, con số lớn bên trái (12%, 1,8 tỷ, 24 tháng, 70%…), dòng tiêu đề / ghi chú vẫn là chữ.
+- **Ví dụ giá trước / sau ưu đãi** dưới bảng giá (ô mới "Ví dụ giá sau ưu đãi" trong trang sửa dự án): giá niêm yết gạch ngang → giá còn lại chữ lớn.
+- Bảng giá chia cột cân đối; trên điện thoại cột ghi chú giống nhau gộp thành 1 dòng dưới bảng.
+- Thanh "Nhận bảng giá" bám đáy: màn máy tính bảng thu gọn bên trái, không đè nút chat "Hỏi em nhé".
+- Sửa con số "Chiết khấu đến 6,5%" (lấy nhầm lãi 6,5%/năm) → nay lấy đúng mức cao nhất.
+- **The Legend:** chính sách viết lại mỗi ưu đãi một dòng (chiết khấu đến 12%), bảng giá gọn, ví dụ 2PN 84,5 m²: 14,59 tỷ → khoảng 13,61 tỷ.
 
 ## Có gì mới – plugin 2.20.215 (07/11/2026)
 

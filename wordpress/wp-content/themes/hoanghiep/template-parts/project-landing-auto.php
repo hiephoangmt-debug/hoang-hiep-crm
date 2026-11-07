@@ -538,6 +538,17 @@ if ( ! $parent ) {
     </table></div>
     <?php if ( $pt_one ) : ?><p class="note"><?php echo $e( $pt_one ); ?>.</p><?php endif; ?>
     <?php endif; ?>
+    <?php
+    // Ví dụ giá sau ưu đãi (1 dòng: Căn | Giá niêm yết | Giá sau ưu đãi | Ghi chú) – con số trước / sau đặt cạnh nhau.
+    $pex = array_map( 'trim', explode( '|', $m( 'hh_p_price_example' ) ) );
+    ?>
+    <?php if ( count( $pex ) >= 3 ) : ?>
+    <div class="price-ex rv">
+      <span class="price-ex__tag">Ví dụ thực tế · <?php echo $e( $pex[0] ); ?></span>
+      <div class="price-ex__nums"><div><small>Giá niêm yết</small><s><?php echo $e( $pex[1] ); ?></s></div><i aria-hidden="true">→</i><div><small>Còn khoảng</small><b><?php echo $e( $pex[2] ); ?></b></div></div>
+      <?php if ( ! empty( $pex[3] ) ) : ?><p><?php echo $e( $pex[3] ); ?></p><?php endif; ?>
+    </div>
+    <?php endif; ?>
     <p class="note">Giá tham khảo, chưa trừ chiết khấu; giá và căn còn trống thay đổi theo đợt – để lại số, Hoàng Hiệp gửi bảng giá cập nhật qua Zalo.</p>
   </div>
 </section>
@@ -549,7 +560,24 @@ if ( ! $parent ) {
   <div class="container">
     <span class="eyebrow">Chính sách & thanh toán</span>
     <h2 class="title" id="h-tt">Chính sách bán hàng <em><?php echo $e( $short_name ); ?></em></h2>
-    <?php if ( $policy ) : ?><ul class="list-ok rv" style="margin-top:20px"><?php foreach ( $policy as $p ) : ?><li><?php echo $e( $p ); ?></li><?php endforeach; ?></ul><?php endif; ?>
+    <?php
+    // Mỗi ưu đãi có con số → thẻ số lớn (khách lướt là thấy); dòng tiêu đề / ghi chú giữ dạng chữ.
+    $pol_cards = array();
+    $pol_text  = array();
+    foreach ( $policy as $pl ) {
+    	$pl = trim( preg_replace( '/^[•\-–]\s*/u', '', $pl ) );
+    	if ( ! preg_match( '/:\s*$/u', $pl ) && preg_match_all( '/(\d+(?:[.,]\d+)?)\s*(%(?:\s*\/\s*năm)?|triệu|tỷ|tháng|năm|chỉ vàng)/iu', $pl, $mm, PREG_SET_ORDER ) ) {
+    		$t           = end( $mm );
+    		$pol_cards[] = array( $t[1] . ( '%' === $t[2][0] ? str_replace( ' ', '', $t[2] ) : ' ' . $t[2] ), $pl );
+    	} else {
+    		$pol_text[] = $pl;
+    	}
+    }
+    $pol_head = $pol_text && preg_match( '/:\s*$/u', $pol_text[0] ) ? array_shift( $pol_text ) : '';
+    ?>
+    <?php if ( $pol_head ) : ?><p class="pol-head"><?php echo $e( rtrim( $pol_head, ': ' ) ); ?></p><?php endif; ?>
+    <?php if ( $pol_cards ) : ?><div class="pol-grid rv"><?php foreach ( $pol_cards as list( $num, $txt ) ) : ?><div><b><?php echo $e( $num ); ?></b><span><?php echo $e( $txt ); ?></span></div><?php endforeach; ?></div><?php endif; ?>
+    <?php if ( $pol_text ) : ?><ul class="list-ok rv" style="margin-top:16px"><?php foreach ( $pol_text as $pl ) : ?><li><?php echo $e( $pl ); ?></li><?php endforeach; ?></ul><?php endif; ?>
     <?php if ( $payment ) : ?>
     <div class="tbl-wrap"><table class="tbl">
       <thead><tr><th>Đợt</th><th>Thời điểm</th><th>Tỷ lệ</th></tr></thead>

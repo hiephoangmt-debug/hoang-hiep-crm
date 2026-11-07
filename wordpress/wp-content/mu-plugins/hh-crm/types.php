@@ -924,7 +924,7 @@ function hh_project_key_stats( $post_id = null, $max = 4 ) {
 	$stats  = array();
 
 	// Chiết khấu cao nhất được nêu trong chính sách.
-	if ( preg_match_all( '/chiết khấu[^.\n;,]*?(\d+(?:[.,]\d+)?)\s*%/iu', $policy, $mm ) ) {
+	if ( preg_match_all( '/chiết khấu[^.\n;,]*?(\d+(?:[.,]\d+)?)\s*%(?!\s*\/\s*năm)/iu', $policy, $mm ) ) {
 		$best = max( array_map( $num, $mm[1] ) );
 		if ( $best > 0 && $best < 50 ) {
 			$stats[] = array( str_replace( '.', ',', (string) $best ) . '%', 'Chiết khấu tối đa' );
