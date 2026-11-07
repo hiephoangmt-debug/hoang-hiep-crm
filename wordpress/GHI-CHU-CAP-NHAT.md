@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.94** + plugin Hoàng Hiệp CRM **2.20.216**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.95** + plugin Hoàng Hiệp CRM **2.20.216**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.95 (07/11/2026)
+
+- **Căn đều 2 bên toàn web:** mọi đoạn văn và gạch đầu dòng dài (từ khoảng 2 dòng) đang canh trái → căn đều 2 bên, trên trang thường lẫn trang landing dự án (The Poet, Sun Saphia, FourS, các trang dự án tự động).
+- Giữ nguyên chữ canh giữa / phải, tiêu đề, nút, bảng, menu, form, khung chat.
 
 ## Có gì mới – giao diện 2.15.94 + plugin 2.20.216 (07/11/2026)
 

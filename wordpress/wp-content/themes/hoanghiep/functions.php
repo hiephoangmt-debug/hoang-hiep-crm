@@ -605,3 +605,35 @@ add_filter(
 	10,
 	2
 );
+
+/**
+ * Căn đều 2 bên (justify) cho đoạn văn trên toàn web, kể cả trang landing dự án: chỉ áp cho đoạn đang canh trái
+ * và đủ dài (từ 2 dòng); chữ canh giữa / phải, tiêu đề, nút, bảng, menu, form giữ nguyên.
+ */
+add_action(
+	'wp_footer',
+	static function () {
+		if ( is_admin() ) {
+			return;
+		}
+		?>
+<style>.hh-just{text-align:justify!important;text-justify:inter-word}</style>
+<script>
+(function(){
+	function run(){
+		var els=document.querySelectorAll('p, li, dd, blockquote');
+		for(var i=0;i<els.length;i++){
+			var el=els[i];
+			if(el.closest('nav, button, table, form, header, .tbl-wrap, .hhc, [contenteditable]')) continue;
+			if((el.textContent||'').trim().length<80) continue;
+			var a=getComputedStyle(el).textAlign;
+			if(a==='left'||a==='start') el.classList.add('hh-just');
+		}
+	}
+	if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
+})();
+</script>
+		<?php
+	},
+	99
+);
