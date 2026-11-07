@@ -1,9 +1,10 @@
 """Ảnh FB dọc 1080×1350 – 4 điều cần biết khi cho thuê căn hộ ngắn ngày (theo bài web 04/11/2026).
-Cảnh minh hoạ tự vẽ: vali, chìa khoá, toà căn hộ. Chạy: python3 fb-cho-thue-can-ho-ngan-ngay-4-dieu.py <anh-dai-dien.jpg> <out.jpg>"""
+Nửa trên: ảnh bãi biển Đà Nẵng (img/fusion/fusion-canh-quan-bai-bien.jpg).
+Chạy: python3 fb-cho-thue-can-ho-ngan-ngay-4-dieu.py <anh-dai-dien.jpg> <anh-bien.jpg> <out.jpg>"""
 import sys
 from PIL import Image, ImageDraw, ImageFont
 
-AVA, OUT = sys.argv[1:3]
+AVA, BIEN, OUT = sys.argv[1:4]
 I = '/usr/share/fonts/opentype/inter/'
 NAVY, NAVY2, GOLD, CREAM, MUTED = (15, 34, 64), (24, 48, 86), (216, 177, 106), (248, 242, 230), (176, 186, 206)
 TEAL, CORAL = (94, 196, 178), (240, 140, 110)
@@ -32,43 +33,34 @@ def wrap(d, text, font, maxw):
     return lines
 
 
+PH = 640
 im = Image.new('RGB', (W * S, H * S), NAVY)
+# Ảnh biển phủ kín bề ngang, lấy phần bãi cát + cây dừa; dải tối phía dưới để đọc chữ
+src = Image.open(BIEN).convert('RGB')
+sc = max(W * S / src.width, PH * S / src.height)
+src = src.resize((int(src.width * sc) + 1, int(src.height * sc) + 1), Image.LANCZOS)
+x0 = min(max(0, int(src.width * 0.60) - W * S // 2), src.width - W * S)
+im.paste(src.crop((x0, 0, x0 + W * S, PH * S)), (0, 0))
+ov = Image.new('RGBA', (W * S, PH * S))
+od = ImageDraw.Draw(ov)
+for y in range(PH * S):
+    t = y / (PH * S)
+    a = 90 * (1 - t / 0.2) if t < 0.2 else (235 * ((t - 0.38) / 0.62) ** 0.9 if t > 0.38 else 0)
+    od.line([(0, y), (W * S, y)], fill=NAVY + (int(a),))
+im.paste(ov, (0, 0), ov)
 d = ImageDraw.Draw(im, 'RGBA')
-for y in range(420 * S):
-    d.line([(0, y), (W * S, y)], fill=lerp((14, 30, 60), (36, 66, 110), y / (420 * S)))
-# Toà căn hộ bên phải, cửa sổ sáng
-bx = 700
-d.rectangle(P(bx, 120, bx + 260, 420), fill=(28, 46, 80))
-for r in range(9):
-    for c in range(5):
-        on = (r * 5 + c) % 3 != 0
-        d.rectangle(P(bx + 22 + c * 46, 140 + r * 30, bx + 50 + c * 46, 158 + r * 30),
-                    fill=(255, 214, 150, 230) if on else (60, 80, 120))
-# Vali
-vx, vy = 560, 300
-d.rounded_rectangle(P(vx, vy, vx + 110, vy + 120), radius=16, fill=CORAL)
-d.rounded_rectangle(P(vx + 30, vy - 26, vx + 80, vy + 4), radius=10, outline=CORAL, width=8)
-d.line(P(vx + 36, vy + 10, vx + 36, vy + 110), fill=(200, 100, 80), width=6)
-d.line(P(vx + 74, vy + 10, vx + 74, vy + 110), fill=(200, 100, 80), width=6)
-# Chìa khoá
-kx, ky = 520, 210
-d.ellipse(P(kx, ky, kx + 54, ky + 54), outline=GOLD, width=10)
-d.line(P(kx + 50, ky + 27, kx + 140, ky + 27), fill=GOLD, width=10)
-d.line(P(kx + 112, ky + 27, kx + 112, ky + 50), fill=GOLD, width=10)
-d.line(P(kx + 132, ky + 27, kx + 132, ky + 44), fill=GOLD, width=10)
-d.line(P(0, 420, W, 420), fill=GOLD, width=3 * S)
+d.line(P(0, PH, W, PH), fill=GOLD, width=3 * S)
 
 tag = 'KINH NGHIỆM CHO THUÊ'
 ft = F('Inter-Bold.otf', 21)
 tw = d.textlength(tag, font=ft) / S
-d.rounded_rectangle(P(60, 56, 60 + tw + 40, 96), radius=20 * S, fill=GOLD)
-d.text(P(80, 64), tag, font=ft, fill=NAVY)
-d.text(P(58, 116), 'Cho thuê căn hộ', font=F('InterDisplay-ExtraBold.otf', 60), fill=CREAM)
-d.text(P(58, 190), 'theo ngày:', font=F('InterDisplay-ExtraBold.otf', 60), fill=CREAM)
-d.text(P(60, 270), '4 điều nên biết', font=F('InterDisplay-Bold.otf', 46), fill=(255, 200, 140))
-d.text(P(60, 334), 'trước khi tính dòng tiền', font=F('Inter-Medium.otf', 28), fill=MUTED)
+d.rounded_rectangle(P(60, 52, 60 + tw + 40, 92), radius=20 * S, fill=GOLD)
+d.text(P(80, 60), tag, font=ft, fill=NAVY)
+d.text(P(58, 404), 'Cho thuê căn hộ theo ngày', font=F('InterDisplay-ExtraBold.otf', 58), fill=CREAM)
+d.text(P(60, 478), '4 điều nên biết', font=F('InterDisplay-Bold.otf', 46), fill=(255, 200, 140))
+d.text(P(60, 542), 'trước khi tính dòng tiền cho khách du lịch', font=F('Inter-Medium.otf', 27), fill=(225, 230, 240))
 
-y = 452
+y = 676
 for i, (t, sub) in enumerate(ITEMS):
     d.ellipse(P(60, y + 2, 112, y + 54), fill=TEAL)
     f = F('Inter-Bold.otf', 28)
@@ -79,8 +71,8 @@ for i, (t, sub) in enumerate(ITEMS):
     yy = y + 42
     for line in wrap(d, sub, fs, W - 136 - 60):
         d.text(P(136, yy), line, font=fs, fill=MUTED)
-        yy += 32
-    y = yy + 22
+        yy += 31
+    y = yy + 18
 
 ay = 1200
 a = Image.open(AVA).convert('RGB').resize((100 * S, 100 * S), Image.LANCZOS)
@@ -91,5 +83,5 @@ im.paste(a, P(64, ay), mk)
 d = ImageDraw.Draw(im, 'RGBA')
 d.text(P(192, ay + 10), 'Hoàng Hiệp', font=F('Inter-Bold.otf', 32), fill=CREAM)
 d.text(P(192, ay + 56), 'BĐS Đà Nẵng · Zalo 0904 567 009', font=F('Inter-Medium.otf', 25), fill=GOLD)
-d.text(P(W - 60, 1322), 'Tham khảo, không thay tư vấn pháp lý, thuế', font=F('Inter-Regular.otf', 18), fill=(150, 160, 180), anchor='rs')
+d.text(P(W - 60, 1322), 'Ảnh: bãi biển Đà Nẵng · Tham khảo, không thay tư vấn pháp lý, thuế', font=F('Inter-Regular.otf', 18), fill=(150, 160, 180), anchor='rs')
 im.resize((W, H), Image.LANCZOS).save(OUT, quality=92, optimize=True, progressive=True)
