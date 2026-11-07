@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.87** + plugin Hoàng Hiệp CRM **2.20.209**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.87** + plugin Hoàng Hiệp CRM **2.20.210**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.210 (07/11/2026)
+
+- **Capital Square Đà Nẵng:** thêm 57 ảnh (6 phối cảnh, 28 tiện ích ngoài trời, 16 ảnh flycam tiến độ 9/2025 và 5/2026, 7 mặt bằng điển hình tòa C1, C7, S3); tour 360 xem ngay trong trang; chính sách đặt cọc 100 triệu, thưởng nóng 44 triệu (2PN, 2PN+1) / 66 triệu (3PN) khi ký HĐMB và thanh toán đợt 1; tiêu chuẩn bàn giao liền tường; sở hữu lâu dài (người Việt) / 50 năm (người nước ngoài); bảng giá thêm tòa S3 Broadway (giỏ hàng 11/2026).
+
+- **Newtown Diamond – The Ruby:** tin bán 3 căn 1PN 47 m² tầng cao view biển, từ 3,17 tỷ (giá thanh toán sớm đã trừ chiết khấu 12%), kèm chính sách quà tặng. Không ghi mã căn.
 
 ## Có gì mới – plugin 2.20.209 (07/11/2026)
 
