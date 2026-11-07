@@ -286,9 +286,11 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
 
 <?php
 // Tổ hợp: trang tổng thể hiện ngay sau Tổng quan; trang dự án con dời xuống cuối trang để khách không bị kéo sang khu khác.
-$family_html = '';
-if ( $family ) :
-	ob_start();
+// In trực tiếp qua hàm (không dùng bộ đệm ob – hàm khác trong trang có thể đóng nhầm bộ đệm).
+$render_family = static function () use ( $family, $id, $parent, $e, $short, $short_name ) {
+	if ( ! $family ) {
+		return;
+	}
 	?>
 <!-- TỔ HỢP -->
 <section id="to-hop" style="background:#fff" aria-labelledby="h-th">
@@ -300,20 +302,19 @@ if ( $family ) :
       <?php foreach ( $family as $p ) : ?>
         <?php $is_cur = (int) $p->ID === $id; $is_par = (int) $p->ID === $parent; ?>
         <a class="kid<?php echo $is_cur ? ' cur' : ''; ?>" href="<?php echo esc_url( get_permalink( $p ) ); ?>"<?php echo $is_cur ? ' aria-current="page"' : ''; ?>>
-          <?php if ( has_post_thumbnail( $p ) ) : ?><img src="<?php echo esc_url( (string) get_the_post_thumbnail_url( $p, 'medium_large' ) ); ?>" alt="<?php echo esc_attr( get_the_title( $p ) ); ?>" loading="lazy" decoding="async"><?php
-	$family_html = ob_get_clean();
-endif;
-if ( ! $parent ) {
-	echo $family_html; // phpcs:ignore WordPress.Security.EscapeOutput -- đã escape khi dựng.
-}
-?>
+          <?php if ( has_post_thumbnail( $p ) ) : ?><img src="<?php echo esc_url( (string) get_the_post_thumbnail_url( $p, 'medium_large' ) ); ?>" alt="<?php echo esc_attr( get_the_title( $p ) ); ?>" loading="lazy" decoding="async"><?php endif; ?>
           <div><small><?php echo $is_cur ? 'Đang xem' : ( $is_par ? 'Tổng thể dự án' : $e( $short( hh_meta( 'hh_p_type', $p->ID ) ?: 'Dự án thành phần', 40 ) ) ); ?></small><b><?php echo $e( get_the_title( $p ) ); ?></b><?php if ( hh_meta( 'hh_p_price_from', $p->ID ) ) : ?><span><?php echo $e( hh_project_price( $p->ID ) ); ?> (tham khảo)</span><?php elseif ( hh_meta( 'hh_p_address', $p->ID ) ) : ?><span><?php echo $e( $short( hh_meta( 'hh_p_address', $p->ID ), 60 ) ); ?></span><?php endif; ?><?php if ( ! $is_cur ) : ?><em class="kid-go">Xem dự án →</em><?php endif; ?></div>
         </a>
       <?php endforeach; ?>
     </div>
   </div>
 </section>
-<?php endif; ?>
+<?php
+};
+if ( ! $parent ) {
+	$render_family();
+}
+?>
 
 <!-- VỊ TRÍ -->
 <section class="dark" id="vi-tri" aria-labelledby="h-vt">
@@ -704,7 +705,7 @@ $cta_get   = $resale ? array( 'Danh sách căn đang bán, giá thật', 'Kiểm
     </form>
   </div>
 </section>
-<?php if ( $parent ) { echo $family_html; } // phpcs:ignore WordPress.Security.EscapeOutput -- Dự án con: tổ hợp ở cuối trang. ?>
+<?php if ( $parent ) { $render_family(); } // Dự án con: tổ hợp ở cuối trang. ?>
 <?php
 // Dòng phụ thanh bám đáy: ưu tiên ưu đãi (chiết khấu, giá từ), viết thành câu tự nhiên.
 $bar_num = '';
