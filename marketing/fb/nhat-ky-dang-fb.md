@@ -19,5 +19,5 @@
 | 06/11/2026 | Sun | 19:30 | (phiên khác) Tổng hợp dự án Sun Group Đà Nẵng đang mở bán | /du-an-can-ho-sun-group-da-nang-2026/ |
 | 07/11/2026 | Sun | 10:30 | S-Light Penthouse – tầng 22, chính sách 11/2026 (album 3 ảnh phối cảnh) | /chinh-sach-ban-hang-du-an-sun-group-da-nang-thang-11-2026/ |
 | 07/11/2026 | Hoàng Hiệp | 11:30 | (bản tin) Tái định cư Duy Xuyên – đường sắt tốc độ cao 392 tỷ | /tai-dinh-cu-duy-xuyen-duong-sat-toc-do-cao-392-ty/ |
-| 07/11/2026 | Hoàng Hiệp | 15:30 | 4 điều cần biết khi cho thuê căn hộ theo ngày (1 ảnh) | /cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue/ |
+| 07/11/2026 | Hoàng Hiệp | 15:30 | 4 điều cần biết khi cho thuê căn hộ theo ngày (1 ảnh dọc: bãi biển Đà Nẵng + 4 điều) | /cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue/ |
 | 07/11/2026 | Sun | 20:00 | Spana Tower – tiến độ thực tế 11/2026, pháp lý, tiện ích (album 4 ảnh) | /du-an/spana-tower/ |
