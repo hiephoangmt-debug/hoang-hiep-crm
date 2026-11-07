@@ -4612,7 +4612,7 @@
    ]
   ],
   "intro": [
-   "<strong>GAIA</strong> (Công ty TNHH Đầu tư Bất động sản GAIA) là đơn vị phát triển khu đô thị Gaia City ở Điện Ngọc, thị xã Điện Bàn cũ – nay thuộc phường Điện Bàn Đông, TP. Đà Nẵng. Thông tin công khai về doanh nghiệp này khá ít;",
+   "<strong>GAIA</strong> (Công ty TNHH Đầu tư Bất động sản GAIA) là đơn vị phát triển khu đô thị Gaia City ở Điện Ngọc, thị xã Điện Bàn cũ – nay thuộc phường Điện Bàn Đông, TP. Đà Nẵng. Thông tin công khai về doanh nghiệp này khá ít.",
    "Gaia City là dự án đất nền, nằm trong vùng Đô thị mới Điện Nam – Điện Ngọc, cạnh nhiều khu dân cư khác dọc đường Dũng Sĩ Điện Ngọc. Một số trang rao vặt ghi thời điểm bàn giao dự kiến từ quý III/2017 và các lô từ khoảng 90 m², nhưng đây là thông tin quảng cáo, chưa được đối chiếu với văn bản của cơ quan nhà nước.",
    "Chúng tôi chưa tìm thấy nguồn nào cho thấy Gaia City thuộc nhóm Bách Đạt; một trang rao bán ghi khác nhưng không có văn bản đi kèm. Báo chí năm 2021 cũng lưu ý khu Điện Nam – Điện Ngọc từng gặp nhiều khó khăn về bồi thường, giải phóng mặt bằng. Người mua nên yêu cầu xem quyết định giao đất, quy hoạch chi tiết và tình trạng sổ của từng lô trước khi giao dịch."
   ],
@@ -4646,7 +4646,7 @@
   "faq": [
    [
     "Chủ đầu tư Gaia City Điện Ngọc là ai?",
-    ""
+    "Theo Báo Đầu tư, chủ đầu tư Gaia City Điện Ngọc là Công ty TNHH Đầu tư Bất động sản GAIA."
    ],
    [
     "Gaia City có phải của Bách Đạt?",
@@ -8606,6 +8606,90 @@
    "https://thuviennhadat.vn/bat-dong-san/gia-ban-chung-cu-an-trung-2-da-nang-la-bao-nhieu-16976.html",
    "https://nhandan.vn/da-nang-gia-han-nop-ho-so-mua-nha-o-xa-hoi-cho-nguoi-thu-nhap-thap-post893434.html",
    "https://diendandoanhnghiep.vn/da-nang-doanh-nghiep-bac-thong-tin-ve-viec-ban-nha-o-thu-nhap-thap-khong-dung-quy-dinh-245370.html"
+  ]
+ },
+ {
+  "slug": "tcg-land",
+  "name": "TCG Land",
+  "full_name": "TCG Land – đơn vị phát triển bất động sản thuộc Tập đoàn Thành Công (TC Group)",
+  "aliases": [
+   "TCG Land",
+   "Tập đoàn Thành Công",
+   "TC Group",
+   "Thành Công Group",
+   "Thành Công E&C"
+  ],
+  "facts": [
+   [
+    "Thuộc",
+    "Tập đoàn Thành Công (TC Group)"
+   ],
+   [
+    "Dự án tại Đà Nẵng",
+    "Shilla Monogram Quangnam Danang – Điện Ngọc (Quảng Nam cũ)"
+   ],
+   [
+    "Đối tác vận hành",
+    "The Shilla Hotels & Resorts (Hàn Quốc)"
+   ],
+   [
+    "Thương hiệu nghỉ dưỡng",
+    "The Five Hospitality (The Five Residences, The Five Villas & Resorts)"
+   ]
+  ],
+  "intro": [
+   "<strong>TCG Land</strong> là đơn vị phát triển bất động sản thuộc <strong>Tập đoàn Thành Công (TC Group)</strong>. Tại khu vực Đà Nẵng, TCG Land xây dựng và phát triển khu nghỉ dưỡng <strong>Shilla Monogram Quangnam Danang</strong> ở Điện Ngọc (thị xã Điện Bàn cũ, nay thuộc TP. Đà Nẵng), hợp tác với tập đoàn khách sạn Hàn Quốc The Shilla Hotels & Resorts – đơn vị vận hành.",
+   "Shilla Monogram Quangnam Danang mở cửa từ tháng 6/2020 trên trục đường biển nối Đà Nẵng – Hội An, được giới thiệu là khu nghỉ dưỡng 5 sao đầu tiên của The Shilla tại Việt Nam. Trang của TCG Land mô tả công trình khách sạn 9 tầng trên khu đất khoảng 20 ha; các báo ghi số phòng khoảng 304 – 309 phòng, có biệt thự Monogram Villa mặt biển.",
+   "Ngoài Đà Nẵng, TCG Land phát triển các sản phẩm nghỉ dưỡng dưới thương hiệu The Five Hospitality; thương hiệu Shilla Monogram cũng có cơ sở tại Hà Nội (Shilla Monogram Hanoi Westlake)."
+  ],
+  "timeline": [
+   [
+    "6/2020",
+    "Shilla Monogram Quangnam Danang mở cửa đón khách."
+   ],
+   [
+    "7/2025",
+    "Khu vực Điện Ngọc thuộc TP. Đà Nẵng sau hợp nhất với Quảng Nam."
+   ]
+  ],
+  "projects": [
+   {
+    "name": "Shilla Monogram Quangnam Danang",
+    "where": "Đường Lạc Long Quân, Điện Ngọc (Quảng Nam cũ), TP. Đà Nẵng – ven biển Non Nước",
+    "type": "Khu nghỉ dưỡng 5 sao, khách sạn và biệt thự",
+    "scale": "Khoảng 20 ha; khoảng 304 – 309 phòng (theo các nguồn)",
+    "status": "Đang vận hành từ 6/2020",
+    "site_slug": "shilla-monogram-quang-nam",
+    "note": "Chưa có bảng giá bán công khai cho căn hộ, biệt thự tại dự án."
+   }
+  ],
+  "elsewhere": "Thương hiệu nghỉ dưỡng The Five Hospitality; Shilla Monogram Hanoi Westlake (Hà Nội) hợp tác cùng The Shilla.",
+  "buyer_notes": [
+   "Nếu có căn biệt thự hoặc căn hộ chuyển nhượng, cần xác minh trực tiếp với chủ đầu tư về hình thức sở hữu, thời hạn đất và hợp đồng vận hành.",
+   "Phân biệt rõ đơn vị phát triển (TCG Land) và đơn vị vận hành (The Shilla) khi đọc hợp đồng."
+  ],
+  "faq": [
+   [
+    "Chủ đầu tư Shilla Monogram Quảng Nam – Đà Nẵng là ai?",
+    "TCG Land – đơn vị phát triển bất động sản thuộc Tập đoàn Thành Công – xây dựng và phát triển dự án; The Shilla Hotels & Resorts vận hành khu nghỉ dưỡng."
+   ],
+   [
+    "Shilla Monogram mở cửa khi nào?",
+    "Tháng 6/2020."
+   ],
+   [
+    "Shilla Monogram có bán căn không?",
+    "Các nguồn công khai chưa có bảng giá bán căn hộ, biệt thự; cần hỏi trực tiếp chủ đầu tư nếu có căn chuyển nhượng."
+   ]
+  ],
+  "seo_title": "TCG Land – chủ đầu tư Shilla Monogram Quảng Nam Đà Nẵng",
+  "seo_desc": "TCG Land (Tập đoàn Thành Công) và khu nghỉ dưỡng Shilla Monogram Quangnam Danang ở Điện Ngọc: quy mô, đơn vị vận hành, lưu ý khi mua.",
+  "sources": [
+   "https://tcgland.vn/du-an/shilla-monogram-quangnam-danang",
+   "https://www.tcgland.vn/",
+   "https://thesaigontimes.vn/samsung-mo-resort-5-sao-dau-tien-tai-quang-nam/",
+   "https://baodautu.vn/tap-doan-khach-san-han-quoc-the-shilla-chuan-bi-mo-cua-khu-nghi-duong-dau-tien-tai-viet-nam-d122310.html",
+   "https://thanhcong.vn/tin-tuc/shilla-monogram-quangnam-danang-danh-dau-mot-nam-van-hanh.html"
   ]
  }
 ]
