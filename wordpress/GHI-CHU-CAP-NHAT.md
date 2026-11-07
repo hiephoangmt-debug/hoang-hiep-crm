@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.92** + plugin Hoàng Hiệp CRM **2.20.212**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.92** + plugin Hoàng Hiệp CRM **2.20.213**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.213 (07/11/2026)
+
+- **Ảnh nền Sun NeO City, Euro Village 2, Đất nền Cồn Dầu:** đổi từ bản vẽ mặt bằng Cồn Dầu sang ảnh flycam toàn khu Hòa Xuân ven sông Cẩm Lệ (thực tế 8/2025). Bản vẽ vẫn nằm ở mục Mặt bằng trang Cồn Dầu. Mở trang quản trị một lần sau khi cài, rồi Purge All.
 
 ## Có gì mới – giao diện 2.15.92 (07/11/2026)
 

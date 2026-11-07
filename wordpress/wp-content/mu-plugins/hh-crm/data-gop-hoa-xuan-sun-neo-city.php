@@ -131,3 +131,56 @@ add_action(
 		update_option( 'hh_con_dau_plan_v1', '1', false );
 	}
 );
+
+/**
+ * Ảnh nền (ảnh đại diện) Sun NeO City, Euro Village 2, Đất nền Cồn Dầu đang là bản vẽ mặt bằng Cồn Dầu →
+ * đổi sang ảnh flycam toàn khu Hòa Xuân ven sông Cẩm Lệ (8/2025). Bản vẽ vẫn ở mục Mặt bằng của trang Cồn Dầu.
+ * Chỉ đổi khi ảnh đại diện hiện tại đúng là bản vẽ đó (ảnh anh tự chọn giữ nguyên).
+ */
+add_action(
+	'admin_init',
+	static function () {
+		if ( '1' === get_option( 'hh_hoa_xuan_hero_v1' ) || ! current_user_can( 'edit_posts' ) ) {
+			return;
+		}
+		$neo = get_page_by_path( 'sun-neo-city', OBJECT, 'du-an' );
+		if ( ! $neo ) {
+			return;
+		}
+		$key  = 'plugin:img/hoa-xuan/hoa-xuan-flycam-8-2025-toan-canh-ven-song-cam-le.jpg';
+		$done = (array) get_post_meta( $neo->ID, '_hh_img_links', true );
+		$fly  = (int) ( $done[ $key ] ?? 0 );
+		if ( ! $fly || ! wp_attachment_is_image( $fly ) ) {
+			// Chưa tải: lấy thẳng từ ảnh đi kèm plugin vào Thư viện, ghi nhớ để lần "Tải ảnh" sau không tải trùng.
+			$file = HH_CRM_DIR . 'img/hoa-xuan/hoa-xuan-flycam-8-2025-toan-canh-ven-song-cam-le.jpg';
+			if ( ! is_file( $file ) ) {
+				return;
+			}
+			$up = wp_upload_bits( basename( $file ), null, (string) file_get_contents( $file ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+			if ( ! empty( $up['error'] ) ) {
+				return;
+			}
+			$alt = 'Toàn cảnh khu đô thị ven sông Hòa Xuân, sông Cẩm Lệ uốn quanh, nhìn về trung tâm Đà Nẵng (ảnh flycam thực tế 8/2025)';
+			$fly = wp_insert_attachment( array( 'post_mime_type' => 'image/jpeg', 'post_title' => $alt, 'post_excerpt' => $alt, 'post_status' => 'inherit' ), $up['file'], $neo->ID );
+			if ( ! $fly || is_wp_error( $fly ) ) {
+				return;
+			}
+			require_once ABSPATH . 'wp-admin/includes/image.php';
+			wp_update_attachment_metadata( $fly, wp_generate_attachment_metadata( $fly, $up['file'] ) );
+			update_post_meta( $fly, '_wp_attachment_image_alt', $alt );
+			$done[ $key ] = $fly;
+			update_post_meta( $neo->ID, '_hh_img_links', $done );
+		}
+		foreach ( array( 'sun-neo-city', 'euro-village-2', 'dat-nen-con-dau-hoa-xuan' ) as $slug ) {
+			$p = get_page_by_path( $slug, OBJECT, 'du-an' );
+			if ( ! $p ) {
+				continue;
+			}
+			$cur = (int) get_post_thumbnail_id( $p->ID );
+			if ( ! $cur || false !== strpos( (string) get_attached_file( $cur ), 'tong-mat-bang-khu-do-thi-sun-neo-city' ) ) {
+				set_post_thumbnail( $p->ID, $fly );
+			}
+		}
+		update_option( 'hh_hoa_xuan_hero_v1', '1', false );
+	}
+);
