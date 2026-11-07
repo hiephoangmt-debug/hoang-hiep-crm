@@ -688,7 +688,22 @@ $cta_get   = $resale ? array( 'Danh sách căn đang bán, giá thật', 'Kiểm
   </div>
 </section>
 <?php
-$bar_num = $stats ? $stats[0][0] . ' ' . mb_strtolower( $stats[0][1] ) : '';
+// Dòng phụ thanh bám đáy: ưu tiên ưu đãi (chiết khấu, giá từ), viết thành câu tự nhiên.
+$bar_num = '';
+foreach ( $stats as list( $num, $lb ) ) {
+	$l = mb_strtolower( $lb );
+	if ( false !== strpos( $l, 'chiết khấu' ) ) {
+		$bar_num = 'Chiết khấu đến ' . $num;
+		break;
+	}
+	if ( false !== strpos( $l, 'giá' ) && ! $bar_num ) {
+		$bar_num = 'Giá từ ' . preg_replace( '/^từ\s*/iu', '', $num );
+	}
+}
+if ( ! $bar_num && $stats ) {
+	$l       = mb_strtolower( $stats[0][1] );
+	$bar_num = 'số căn' === $l ? $stats[0][0] . ' căn hộ' : $stats[0][1] . ': ' . $stats[0][0];
+}
 ?>
 <a class="stick-cta" href="#dang-ky" hidden><span><b><?php echo $e( $short_name ); ?></b><?php if ( $bar_num ) : ?><small><?php echo $e( $bar_num ); ?></small><?php endif; ?></span><em><?php echo $resale ? 'Nhận danh sách căn' : 'Nhận bảng giá'; ?></em></a>
 <script>
