@@ -241,8 +241,34 @@ function hoanghiep_override_builder_template( $template ) {
 	} elseif ( is_post_type_archive( array( 'du-an', 'bat-dong-san' ) ) || is_category() ) {
 		$ours = is_category() ? get_category_template() : get_archive_template();
 	}
+	if ( $ours ) {
+		$GLOBALS['hh_builder_override'] = true; // Trang Elementor nhưng hiển thị bằng mẫu của giao diện: không cần file Elementor.
+	}
 	return $ours ?: $template;
 }
+
+/**
+ * Tốc độ: trang dùng mẫu giao diện (kể cả trang từng dựng bằng Elementor) không tải CSS/JS Elementor;
+ * tắt mã emoji của WordPress (trình duyệt đã có sẵn emoji).
+ */
+function hoanghiep_drop_builder_assets() {
+	if ( empty( $GLOBALS['hh_builder_override'] ) ) {
+		return;
+	}
+	foreach ( array( wp_scripts(), wp_styles() ) as $deps ) {
+		foreach ( (array) $deps->queue as $h ) {
+			$src = (string) ( $deps->registered[ $h ]->src ?? '' );
+			if ( preg_match( '/^(elementor|e-|swiper|jquery-numerator|font-awesome)/', $h ) || false !== strpos( $src, '/plugins/elementor' ) || false !== strpos( $src, '/uploads/elementor/' ) ) {
+				$deps->dequeue( $h );
+			}
+		}
+	}
+}
+add_action( 'wp_print_styles', 'hoanghiep_drop_builder_assets', 100 );
+add_action( 'wp_print_scripts', 'hoanghiep_drop_builder_assets', 100 );
+add_action( 'wp_print_footer_scripts', 'hoanghiep_drop_builder_assets', 1 );
+remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
 
 /** Nhắc tắt các plugin chỉ chạy được với giao diện Houzez (gây lỗi nghiêm trọng khi đã đổi giao diện). */

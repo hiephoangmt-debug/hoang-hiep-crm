@@ -37,15 +37,19 @@ if ( $featured_projects->posts ) {
 			$featured_projects->the_post();
 			$status = hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_status' ) );
 			?>
+			<?php
+			// Slide sau slide đầu: chưa tải ảnh (data-src), main.js tải khi slide sắp hiện – trang chủ mở nhanh hơn.
+			$hh_defer = $hh_defer ?? static fn( $html, $n ) => $n ? preg_replace( '/\s(src|srcset)=/', ' data-$1=', $html ) : $html;
+			?>
 			<?php $poster = $hh_poster( get_the_ID() ); ?>
 			<div class="hero__slide<?php echo 0 === $i ? ' is-active' : ''; ?><?php echo $poster ? ' hero__slide--poster' : ''; ?>">
 				<?php if ( $poster ) : ?>
-					<picture><source media="(max-width: 900px)" srcset="<?php echo esc_url( $poster ); ?>"><?php the_post_thumbnail( 'hh-hero', array( 'class' => 'hero__bg hero__bg--poster', 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'low', 'alt' => '' ) ); ?></picture>
+					<?php ob_start(); ?><picture><source media="(max-width: 900px)" srcset="<?php echo esc_url( $poster ); ?>"><?php the_post_thumbnail( 'hh-hero', array( 'class' => 'hero__bg hero__bg--poster', 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'low', 'alt' => '' ) ); ?></picture><?php echo $hh_defer( ob_get_clean(), $i ); // phpcs:ignore ?>
 				<?php else : ?>
-					<?php the_post_thumbnail( 'hh-hero', array( 'class' => 'hero__bg', 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'low', 'alt' => '' ) ); ?>
+					<?php echo $hh_defer( get_the_post_thumbnail( null, 'hh-hero', array( 'class' => 'hero__bg', 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'low', 'alt' => '' ) ), $i ); // phpcs:ignore ?>
 				<?php endif; ?>
 				<div class="container hero__content<?php echo $poster ? ' hero__content--poster' : ''; ?>">
-					<?php if ( $poster ) : ?><a class="hero__poster" href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( $poster ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" width="1100" height="1430" loading="<?php echo 0 === $i ? 'eager' : 'lazy'; ?>" decoding="async"></a><?php endif; ?>
+					<?php if ( $poster ) : ?><a class="hero__poster" href="<?php the_permalink(); ?>"><?php echo $hh_defer( '<img src="' . esc_url( $poster ) . '" alt="' . esc_attr( get_the_title() ) . '" width="1100" height="1430" loading="' . ( 0 === $i ? 'eager' : 'lazy' ) . '" decoding="async">', $i ); // phpcs:ignore ?></a><?php endif; ?>
 					<p class="eyebrow eyebrow--light">Dự án nổi bật<?php echo $status ? ' · ' . esc_html( $status ) : ''; ?></p>
 					<h2 class="hero__title"><?php the_title(); ?></h2>
 					<?php if ( hh_meta( 'hh_p_address' ) ) : ?>

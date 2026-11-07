@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.88** + plugin Hoàng Hiệp CRM **2.20.211**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.89** + plugin Hoàng Hiệp CRM **2.20.211**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.89 (07/11/2026)
+
+- **Web tải nhanh hơn:** trang chủ chỉ tải ảnh slide đầu tiên, các slide sau tải khi sắp hiện (trước đây tải cùng lúc khoảng 1,5 MB ảnh); các trang hiển thị bằng mẫu giao diện không còn tải CSS/JS của Elementor; tắt mã emoji của WordPress. Sau khi cài nhớ LiteSpeed Purge All.
+
+- **Tổng mặt bằng trên trang dự án gọn lại:** ảnh không chiếm cả màn hình, 2 ảnh xếp cạnh nhau trên máy tính, có nút "Phóng to".
 
 ## Có gì mới – giao diện 2.15.88 (07/11/2026)
 

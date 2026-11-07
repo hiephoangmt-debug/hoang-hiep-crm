@@ -389,10 +389,13 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
   <div class="container">
     <span class="eyebrow">Mặt bằng</span>
     <h2 class="title" id="h-mb">Mặt bằng <em><?php echo $e( $short_name ); ?></em></h2>
-    <?php foreach ( array_slice( $master, 0, 2 ) as $img ) : ?>
-      <a class="plan" href="<?php echo esc_url( $url( $img, 'full' ) ); ?>" style="margin-top:22px"><img src="<?php echo esc_url( $url( $img, 'large' ) ); ?>" alt="<?php echo esc_attr( $alt( $img ) ); ?>" loading="lazy" decoding="async"></a>
-      <p class="plan-cap"><?php echo $e( $cap( $img ) ); ?> · bấm để phóng to.</p>
+    <?php $mp = array_slice( $master, 0, 2 ); // Tổng mặt bằng: khung gọn, 2 ảnh xếp cạnh nhau trên máy tính, bấm để phóng to. ?>
+    <?php if ( $mp ) : ?><div class="mp-grid mp-<?php echo count( $mp ); ?>">
+    <?php foreach ( $mp as $img ) : ?>
+      <figure><a class="plan plan-mp" href="<?php echo esc_url( $url( $img, 'full' ) ); ?>"><img src="<?php echo esc_url( $url( $img, 'large' ) ); ?>" alt="<?php echo esc_attr( $alt( $img ) ); ?>" loading="lazy" decoding="async"><span class="zoom">🔍 Phóng to</span></a>
+      <figcaption class="plan-cap"><?php echo $e( $cap( $img ) ); ?></figcaption></figure>
     <?php endforeach; ?>
+    </div><?php endif; ?>
     <?php if ( $floors ) : ?>
       <?php
       // Chia theo tòa: "… tòa S1 …" / "S1 · Tầng 3"; ảnh không ghi tòa thuộc tòa của ảnh liền trước. Nhãn gọn: "Tầng 17, 19, 21".

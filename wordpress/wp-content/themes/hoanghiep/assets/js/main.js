@@ -79,7 +79,24 @@
 		}
 		let i = 0;
 		let timer;
+		// Ảnh slide sau được hoãn (data-src) – nạp khi slide sắp hiện.
+		const load = ( n ) => {
+			const s = slides[ ( n + slides.length ) % slides.length ];
+			$$( '[data-src], [data-srcset]', s ).forEach( ( el ) => {
+				if ( el.dataset.srcset ) {
+					el.setAttribute( 'srcset', el.dataset.srcset );
+					delete el.dataset.srcset;
+				}
+				if ( el.dataset.src ) {
+					el.setAttribute( 'src', el.dataset.src );
+					delete el.dataset.src;
+				}
+			} );
+		};
+		window.addEventListener( 'load', () => setTimeout( () => load( 1 ), 1500 ) );
 		const show = ( n ) => {
+			load( n );
+			load( n + 1 );
 			slides[ i ].classList.remove( 'is-active' );
 			dots[ i ] && dots[ i ].classList.remove( 'is-active' );
 			i = ( n + slides.length ) % slides.length;

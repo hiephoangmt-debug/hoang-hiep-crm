@@ -302,3 +302,12 @@ body.admin-bar header.top{top:32px}
 @media (min-width:981px){.stick-cta{left:auto;right:96px;bottom:24px;max-width:420px}}
 @media (max-width:600px){.cta-offer{padding:52px 0}.cta-offer .container{gap:24px}}
 @media (max-width:600px){.cta-tag{letter-spacing:.06em;font-size:11px}.cta-offer .advisor{display:none}.cta-pol li:nth-child(n+4){display:none}.cta-stats b{font-size:24px}}
+/* Tổng mặt bằng gọn: không chiếm cả màn hình, 2 ảnh cạnh nhau trên máy tính (07/11/2026) */
+.mp-grid{display:grid;gap:18px;margin-top:22px}
+.mp-grid.mp-2{grid-template-columns:1fr 1fr}
+.mp-grid figure{margin:0}
+.plan-mp{position:relative;margin-bottom:8px}
+.plan-mp img{max-height:min(60vh,560px)!important}
+.plan-mp .zoom{position:absolute;right:10px;bottom:10px;background:rgba(14,28,51,.82);color:#fff;font-size:13px;font-weight:600;border-radius:999px;padding:6px 12px}
+.mp-grid .plan-cap{margin:0}
+@media (max-width:760px){.mp-grid.mp-2{grid-template-columns:1fr}.plan-mp img{max-height:52vh!important}}
