@@ -45,4 +45,22 @@ foreach ( $posts as $n ) {
 	echo "$pub  {$n['slug']}\n";
 }
 uasort( $by, static fn( $a, $b ) => strcmp( $a['publish'], $b['publish'] ) );
+// Đăng từng bài một (anh Hiệp 07/11/2026): bài chưa đăng mà trùng giờ hoặc cách bài trước < 2 tiếng thì tự lùi lại.
+$tz  = new DateTimeZone( 'Asia/Ho_Chi_Minh' );
+$now = new DateTime( 'now', $tz );
+$gap = 120 * 60;
+$prev = null;
+foreach ( $by as $slug => $p ) {
+	$t = DateTime::createFromFormat( 'Y-m-d H:i', $p['publish'], $tz );
+	if ( ! $t ) {
+		continue;
+	}
+	if ( $t > $now && null !== $prev && $t->getTimestamp() - $prev->getTimestamp() < $gap ) {
+		$t = ( clone $prev )->modify( '+120 minutes' );
+		fwrite( STDERR, "Giãn lịch: {$slug} {$p['publish']} -> " . $t->format( 'Y-m-d H:i' ) . "\n" );
+		$by[ $slug ]['publish'] = $t->format( 'Y-m-d H:i' );
+	}
+	$prev = $t;
+}
+uasort( $by, static fn( $a, $b ) => strcmp( $a['publish'], $b['publish'] ) );
 file_put_contents( $out . '/index.json', json_encode( array( 'updated' => gmdate( 'c' ), 'posts' => array_values( $by ) ), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . "\n" );
