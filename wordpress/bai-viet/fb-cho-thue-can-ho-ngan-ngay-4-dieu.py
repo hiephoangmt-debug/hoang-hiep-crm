@@ -1,10 +1,11 @@
 """Ảnh FB dọc 1080×1350 – 4 điều cần biết khi cho thuê căn hộ ngắn ngày (theo bài web 04/11/2026).
-Nửa trên: ảnh bãi biển Đà Nẵng (img/fusion/fusion-canh-quan-bai-bien.jpg).
-Chạy: python3 fb-cho-thue-can-ho-ngan-ngay-4-dieu.py <anh-dai-dien.jpg> <anh-bien.jpg> <out.jpg>"""
+Nửa trên: ảnh biển Mỹ Khê (marketing/anh-khu-vuc/bien-my-khe-tren-cao-nhin-ve-son-tra.jpg, XC 0.62).
+Chạy: python3 fb-cho-thue-can-ho-ngan-ngay-4-dieu.py <anh-dai-dien.jpg> <anh-bien.jpg> <out.jpg> [tam-cat-ngang]"""
 import sys
 from PIL import Image, ImageDraw, ImageFont
 
 AVA, BIEN, OUT = sys.argv[1:4]
+XC = float(sys.argv[4]) if len(sys.argv) > 4 else 0.60  # tâm cắt ngang của ảnh biển (0–1)
 I = '/usr/share/fonts/opentype/inter/'
 NAVY, NAVY2, GOLD, CREAM, MUTED = (15, 34, 64), (24, 48, 86), (216, 177, 106), (248, 242, 230), (176, 186, 206)
 TEAL, CORAL = (94, 196, 178), (240, 140, 110)
@@ -39,13 +40,13 @@ im = Image.new('RGB', (W * S, H * S), NAVY)
 src = Image.open(BIEN).convert('RGB')
 sc = max(W * S / src.width, PH * S / src.height)
 src = src.resize((int(src.width * sc) + 1, int(src.height * sc) + 1), Image.LANCZOS)
-x0 = min(max(0, int(src.width * 0.60) - W * S // 2), src.width - W * S)
+x0 = min(max(0, int(src.width * XC) - W * S // 2), src.width - W * S)
 im.paste(src.crop((x0, 0, x0 + W * S, PH * S)), (0, 0))
 ov = Image.new('RGBA', (W * S, PH * S))
 od = ImageDraw.Draw(ov)
 for y in range(PH * S):
     t = y / (PH * S)
-    a = 90 * (1 - t / 0.2) if t < 0.2 else (235 * ((t - 0.38) / 0.62) ** 0.9 if t > 0.38 else 0)
+    a = 90 * (1 - t / 0.2) if t < 0.2 else (240 * ((t - 0.34) / 0.66) ** 0.7 if t > 0.34 else 0)
     od.line([(0, y), (W * S, y)], fill=NAVY + (int(a),))
 im.paste(ov, (0, 0), ov)
 d = ImageDraw.Draw(im, 'RGBA')
@@ -83,5 +84,5 @@ im.paste(a, P(64, ay), mk)
 d = ImageDraw.Draw(im, 'RGBA')
 d.text(P(192, ay + 10), 'Hoàng Hiệp', font=F('Inter-Bold.otf', 32), fill=CREAM)
 d.text(P(192, ay + 56), 'BĐS Đà Nẵng · Zalo 0904 567 009', font=F('Inter-Medium.otf', 25), fill=GOLD)
-d.text(P(W - 60, 1322), 'Ảnh: bãi biển Đà Nẵng · Tham khảo, không thay tư vấn pháp lý, thuế', font=F('Inter-Regular.otf', 18), fill=(150, 160, 180), anchor='rs')
+d.text(P(W - 60, 1322), 'Ảnh: biển Mỹ Khê · Tham khảo, không thay tư vấn pháp lý, thuế', font=F('Inter-Regular.otf', 18), fill=(150, 160, 180), anchor='rs')
 im.resize((W, H), Image.LANCZOS).save(OUT, quality=92, optimize=True, progressive=True)

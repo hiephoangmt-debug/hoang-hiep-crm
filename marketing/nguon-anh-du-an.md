@@ -17,3 +17,6 @@ Thư mục Google Drive tài liệu bán hàng của các dự án. Đọc bằn
 - Mở xem từng ảnh trước khi dùng. Bỏ ảnh có logo hay số điện thoại của đại lý khác, ảnh chỉ có chữ, ảnh mờ.
 - Ảnh phối cảnh phải ghi rõ trong caption, VD "📷 Phối cảnh dự án (tài liệu CĐT)", để không ai hiểu là ảnh thực tế.
 - Thu nhỏ cạnh dài còn ≤1600 px, lưu `marketing/fb/<slug-bai>-<n>.jpg`, push, rồi dùng link raw GitHub cho Metricool.
+
+## Ảnh khu vực Đà Nẵng (ảnh thật)
+Xem `marketing/anh-khu-vuc/README.md`: biển Mỹ Khê, sông Hàn, cầu Rồng, du thuyền, pháo hoa DIFF. Ưu tiên các ảnh này cho bài thị trường, khu vực, cho thuê và du lịch thay cho cảnh tự vẽ.
