@@ -1,4 +1,4 @@
-"""Ảnh FB dọc 1080×1350 – phân tích Sun Saphia Residence: điểm mạnh, điểm cần cân nhắc (số liệu bài web, 06/11/2026).
+"""Ảnh FB dọc 1080×1350 – phân tích Sun Saphia Residence dựa trên bộ hỏi đáp của chủ đầu tư (04/11/2026).
 Nửa trên: phối cảnh CĐT img/sun-saphia/sun-saphia-cdt-hoang-hon-bien-tren-cao.jpg.
 Chạy: python3 fb-sun-saphia-phan-tich-11-2026.py <anh-dai-dien.jpg> <phoi-canh.jpg> <out.jpg>"""
 import sys
@@ -12,12 +12,12 @@ W, H, S = 1080, 1350, 2
 F = lambda n, s: ImageFont.truetype(I + n, s * S)
 P = lambda *v: tuple(int(x * S) for x in v)
 STATS = [('782', 'căn hộ'), ('30', 'tầng'), ('2,13 tỷ', 'studio từ*'), ('11/2028', 'bàn giao')]
-PLUS = ['Cách bãi tắm Sơn Thủy ~400 m, công viên biển 2,45 ha phía trước',
-        'Studio có bếp, tổng tiền vừa, hợp cho thuê khách du lịch',
-        'Hỗ trợ lãi suất tới 24 tháng, gần trùng thời gian xây']
-MINUS = ['Thời hạn 50 năm, hợp đầu tư, nghỉ dưỡng hơn để lại lâu dài',
-         '513 studio trong một tòa, cạnh tranh khi cho thuê, bán lại',
-         'Chưa có bảng giá chính thức, cần so giá/m² khi công bố']
+PLUS = ['Chủ nhà tự cho thuê, không bắt buộc ký gửi chủ đầu tư',
+        'Phía Đông công viên 2,45 ha, phía Tây tối đa 7 tầng',
+        'Đã xong ép cọc; phí quản lý dự kiến 15 – 20 nghìn/m²']
+MINUS = ['Bàn giao chưa gồm tủ bếp, thiết bị bếp, hút mùi',
+         'Sổ 50 năm; loại hình này không có bảo lãnh ngân hàng',
+         'Giá thuê 2,2 – 2,9 triệu/đêm là khảo sát, chưa cam kết']
 
 PH = 560
 im = Image.new('RGB', (W * S, H * S), NAVY)
@@ -35,13 +35,13 @@ for y in range(PH * S):
 im.paste(ov, (0, 0), ov)
 d = ImageDraw.Draw(im, 'RGBA')
 
-tag = 'GÓC NHÌN PHÂN TÍCH · 11/2026'
+tag = 'ĐỌC Q&A CHỦ ĐẦU TƯ · 04/11/2026'
 ft = F('Inter-Bold.otf', 21)
 tw = d.textlength(tag, font=ft) / S
 d.rounded_rectangle(P(60, 52, 60 + tw + 40, 92), radius=20 * S, fill=GOLD)
 d.text(P(80, 60), tag, font=ft, fill=NAVY)
 d.text(P(58, 388), 'Sun Saphia Residence', font=F('InterDisplay-ExtraBold.otf', 62), fill=CREAM)
-d.text(P(60, 464), 'Mạnh ở đâu, cần cân nhắc gì?', font=F('InterDisplay-Bold.otf', 38), fill=(255, 200, 140))
+d.text(P(60, 464), 'Hỏi đáp nói gì với người mua?', font=F('InterDisplay-Bold.otf', 38), fill=(255, 200, 140))
 
 # Hàng số liệu
 y = PH
@@ -67,8 +67,8 @@ def block(y, title, col, sign, items):
     return y
 
 
-y = block(y + 136, 'Điểm mạnh', TEAL, '+', PLUS)
-y = block(y + 18, 'Cần cân nhắc', CORAL, '!', MINUS)
+y = block(y + 136, 'Điểm cộng', TEAL, '+', PLUS)
+y = block(y + 18, 'Cần lưu ý', CORAL, '!', MINUS)
 d.rounded_rectangle(P(60, y + 16, W - 60, y + 70), radius=14 * S, outline=GOLD, width=2 * S)
 d.text(P(W / 2, y + 43), 'Hợp nhất: đầu tư cho thuê · căn nghỉ dưỡng gia đình', font=F('Inter-SemiBold.otf', 24), fill=GOLD, anchor='mm')
 
@@ -81,5 +81,5 @@ im.paste(a, P(64, ay), mk)
 d = ImageDraw.Draw(im, 'RGBA')
 d.text(P(192, ay + 10), 'Hoàng Hiệp', font=F('Inter-Bold.otf', 32), fill=CREAM)
 d.text(P(192, ay + 56), 'BĐS Đà Nẵng · Zalo 0904 567 009', font=F('Inter-Medium.otf', 25), fill=GOLD)
-d.text(P(W - 60, 1326), '*Giá dự kiến studio tầng 15, có vay, chưa VAT · Phối cảnh CĐT', font=F('Inter-Regular.otf', 18), fill=(150, 160, 180), anchor='rs')
+d.text(P(W - 60, 1326), '*Giá dự kiến studio tầng 15, có vay, chưa VAT · Nguồn: Q&A CĐT · Phối cảnh CĐT', font=F('Inter-Regular.otf', 18), fill=(150, 160, 180), anchor='rs')
 im.resize((W, H), Image.LANCZOS).save(OUT, quality=92, optimize=True, progressive=True)
