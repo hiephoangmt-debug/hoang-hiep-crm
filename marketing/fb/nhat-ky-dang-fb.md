@@ -22,3 +22,6 @@
 | 07/11/2026 | Hoàng Hiệp | 15:30 | 4 điều cần biết khi cho thuê căn hộ theo ngày (1 ảnh dọc: biển Mỹ Khê + 4 điều) | /cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue/ |
 | 07/11/2026 | Sun | 20:00 | Spana Tower – tiến độ thực tế 11/2026, pháp lý, tiện ích (album 4 ảnh) | /du-an/spana-tower/ |
 | 07/11/2026 | Sun | 16:30 | Phân tích Sun Saphia dựa trên Q&A chủ đầu tư 04/11: điểm cộng, cần lưu ý (1 ảnh dọc) | /sun-saphia-residence-hoi-dap-ban-giao-phi-quan-ly-cho-thue/ |
+| 08/11/2026 | Sun | 10:30 | Sun Symphony Residence – quy mô, Central Park, River Park, bến du thuyền (album 4 ảnh phối cảnh) | /du-an/sun-symphony-residence/ |
+| 08/11/2026 | Hoàng Hiệp | 15:30 | 16 Bạch Đằng Đà Nẵng – tổ hợp 25 tầng (QĐ 5050) + 3 tiêu chí gỡ dự án tồn đọng (1 ảnh dọc, ảnh sông Hàn) | /da-nang-chap-thuan-to-hop-25-tang-16-bach-dang-go-du-an-ton-dong/ |
+| 08/11/2026 | Sun | 20:00 | Hỗ trợ lãi suất Sun Saphia Residence – tính thử vay 1,5 tỷ (1 ảnh dọc) | /ho-tro-lai-suat-24-thang-sun-saphia-residence-tinh-thu/ |
