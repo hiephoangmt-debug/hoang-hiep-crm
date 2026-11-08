@@ -117,6 +117,7 @@ require HH_CRM_DIR . 'data-fpt-plaza-2-mat-bang-11-2026.php';
 require HH_CRM_DIR . 'data-shantira-mat-bang-11-2026.php';
 require HH_CRM_DIR . 'data-fpt-plaza-3-11-2026.php';
 require HH_CRM_DIR . 'data-peninsula-11-2026.php';
+require HH_CRM_DIR . 'data-mia-center-point-11-2026.php';
 require HH_CRM_DIR . 'data-gia-dat-khach-san.php';
 require HH_CRM_DIR . 'data-tin-tuc-ha-tang.php';
 require HH_CRM_DIR . 'data-bai-viet-tuan-01-02.php';
