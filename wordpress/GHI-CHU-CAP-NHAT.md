@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.96** + plugin Hoàng Hiệp CRM **2.20.220**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.96** + plugin Hoàng Hiệp CRM **2.20.221**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,15 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.221 (08/11/2026)
+
+- **MIA Center Point (trang mới, Liên Chiểu):** tòa 25 tầng, 335 căn tại 61 Ngô Thì Nhậm, sở hữu lâu dài. Trang có giỏ hàng tham khảo 1/2026 (2PN 63–65 m² khoảng 3,02 – 3,46 tỷ; Dual Key 97,7 m² khoảng 5,04 tỷ; duplex 138,9 m² khoảng 7,93 tỷ), phương thức thanh toán theo phiếu tính giá 4/2026, tiêu chuẩn bàn giao nội thất, pháp lý (GPXD 11/GPXD ngày 12/6/2024) và 53 ảnh: phối cảnh, tiện ích, nhà mẫu thực tế, nội thất căn A/C/D, layout 3D, mặt bằng tầng, tiến độ. Ảnh tiến độ 8/2025 đã cắt bỏ logo đơn vị phân phối.
+- **Peninsula Đà Nẵng:** 51 ảnh (phối cảnh, tiện ích, nội thất, mặt bằng, tiến độ thực tế 6 và 10/2026 – đã cắt logo đơn vị phân phối), giá niêm yết 25/07/2026, phương thức thanh toán, link 360°. Chính sách 25/07 – 25/08/2026 ghi rõ là đã hết hạn.
+- **FourS Tower:** tổng mặt bằng 4 tháp, 7 phối cảnh mới; Tòa F2 thêm 13 phối cảnh (kiến trúc, ban công, view), 5 layout 3D (Studio, 1PN+, 2PN 1WC, 2PN, 3PN), mặt bằng tầng 1 – 3; tiêu chuẩn bàn giao căn hộ theo bảng của chủ đầu tư (T5/2026) cho cả 4 trang FourS.
+- **The Legend:** pháp lý thêm thông báo của Sở Xây dựng (khoảng 1/2026) về 800 căn đủ điều kiện bán.
+- Không đăng: hợp đồng mẫu, giỏ ngân hàng, tài liệu đào tạo, quy trình giao dịch, mã căn.
+- Cài: Nhập nhanh → upload → "Nhập / cập nhật dữ liệu" → **"Tải ảnh ngay"** → LiteSpeed Purge All.
 
 ## Có gì mới – giao diện 2.15.96 + plugin 2.20.220 (08/11/2026)
 
