@@ -1,4 +1,4 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"></head><body>
 <title>Bé Vui Học</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -559,7 +559,7 @@ VIEWS["vn:bedoc"] = v => {
         busy = false; micState(false);
         if (["not-allowed", "service-not-allowed", "audio-capture", "network"].includes(err)) {
           srBroken = true; bdRunning = false;
-          bdMsg = ["bad", err === "network" ? "Máy cần có mạng để nghe bé đọc. Bố mẹ chấm bằng nút Đúng hoặc Sai nhé." : "Không mở được micro. Hãy cho phép trình duyệt dùng micro, hoặc bố mẹ chấm bằng nút Đúng / Sai."];
+          bdMsg = ["bad", err === "network" ? "Máy cần có mạng để nghe bé đọc. Bố mẹ chấm bằng nút Đúng hoặc Sai nhé." : "Không mở được micro. Hãy cho phép trình duyệt dùng micro. iPad/iPhone: Cài đặt › Cài đặt chung › Bàn phím › bật Đọc chính tả (và thêm Tiếng Việt). Hoặc bố mẹ chấm bằng nút Đúng / Sai."];
           draw();
         }
         return;
@@ -593,7 +593,12 @@ VIEWS["vn:bedoc"] = v => {
     $("#clearCustom").onclick = () => { store.set("custom", []); L = 0; I = 0; draw(); };
     if (mic) mic.onclick = () => {
       if (bdRunning) { bdStop(); bdMsg = ["", "Đã dừng nghe."]; draw(); }
-      else { bdRunning = true; bdNoHear = 0; draw(); }
+      else {
+        // iPad/iPhone: phải mở khoá giọng đọc và xin quyền micro ngay trong lúc bấm
+        try { if (synth) synth.speak(new SpeechSynthesisUtterance(" ")); } catch (e) {}
+        try { navigator.mediaDevices && navigator.mediaDevices.getUserMedia({ audio: true }).then(s => s.getTracks().forEach(t => t.stop())).catch(() => {}); } catch (e) {}
+        bdRunning = true; bdNoHear = 0; draw();
+      }
     };
     abortRec();
     setTimeout(() => {
