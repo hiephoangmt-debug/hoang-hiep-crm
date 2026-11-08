@@ -1,0 +1,56 @@
+# Tạo âm thanh chuẩn (giọng HoaiMy – Microsoft Azure) cho từng tiếng tiếng Việt của app Bé Vui Học.
+# Cần 2 secret: AZURE_SPEECH_KEY, AZURE_SPEECH_REGION (Azure Speech bản miễn phí F0).
+# Âm thanh lưu trong bộ nhớ đệm của Actions (không đưa vào kho mã). Chưa xong thì tự chạy tiếp,
+# xong thì đăng lại trang. Chạy tay ở tab Actions › "Âm thanh chuẩn Bé Vui Học" › Run workflow.
+name: Âm thanh chuẩn Bé Vui Học
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'be-hoc-lop-1/tools/**'
+      - '.github/workflows/bvh-audio.yml'
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: bvh-audio
+  cancel-in-progress: false
+
+jobs:
+  make:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache/restore@v4
+        with:
+          path: bvh-audio
+          key: bvh-audio-none
+          restore-keys: bvh-audio-
+      - name: Danh sách tiếng
+        run: node be-hoc-lop-1/tools/syllables.mjs > syllables.txt && wc -l syllables.txt
+      - name: Tạo âm thanh còn thiếu
+        id: gen
+        run: python3 be-hoc-lop-1/tools/make_audio.py syllables.txt bvh-audio
+        env:
+          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+          AZURE_SPEECH_REGION: ${{ secrets.AZURE_SPEECH_REGION }}
+      - if: steps.gen.outputs.changed == '1'
+        uses: actions/cache/save@v4
+        with:
+          path: bvh-audio
+          key: bvh-audio-${{ github.run_id }}
+      - name: Chạy tiếp hoặc đăng lại trang
+        if: steps.gen.outputs.changed == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ steps.gen.outputs.done }}" = "1" ]; then
+            gh workflow run deploy-floorplan-3d.yml --ref main
+          else
+            gh workflow run bvh-audio.yml --ref main
+          fi

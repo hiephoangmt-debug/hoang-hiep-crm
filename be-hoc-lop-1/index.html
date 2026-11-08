@@ -209,6 +209,8 @@ textarea { width: 100%; min-height: 120px; font: inherit; border-radius: 10px; b
     </div>
     <label for="tryWord">Thử đọc một từ (để kiểm tra máy đọc có đúng không)
       <span class="row"><input type="text" id="tryWord" value="rau" style="flex:1;min-width:0"><button class="btn" id="tryBtn">Nghe</button></span></label>
+    <label class="row" for="stdAudio" style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="stdAudio" style="width:22px;height:22px"> Dùng âm thanh chuẩn (giọng HoaiMy) cho từng tiếng, đánh vần và câu mẫu</label>
+    <p class="hint" id="audStatus"></p>
     <div class="note"><b>Máy đọc sai chữ (vd "rau" thành "rao")?</b> Giọng tiếng Việt có sẵn trên iPad/iPhone đọc kém. Hãy tải giọng tốt hơn:
       Cài đặt › Trợ năng › Nội dung được đọc › Giọng nói › Tiếng Việt › chạm <b>Linh (Nâng cao)</b> để tải về.
       Tải xong, kiểm tra <b>Linh (Nâng cao)</b> có dấu tích ✓ (là giọng đang dùng). Đóng hẳn Safari rồi mở lại app;
@@ -283,7 +285,65 @@ function loadVoices() {
 if (synth) { loadVoices(); synth.addEventListener ? synth.addEventListener("voiceschanged", loadVoices) : (synth.onvoiceschanged = loadVoices); }
 
 let speakToken = 0;
-function speakOne(text, lang, token, rate) {
+/* ===== ÂM THANH CHUẨN: file đọc sẵn từng tiếng (giọng HoaiMy), tạo bởi tools/make_audio.py =====
+   Dùng cho từng tiếng, từ ngắn, đánh vần và câu mẫu; thiếu file thì dùng giọng của máy. */
+const AUD = { have: new Set(), ctx: null, buf: new Map(), cur: null, on: store.get("stdAudio", true) };
+fetch("audio/index.txt", { cache: "no-cache" }).then(r => r.ok ? r.text() : "").then(t => {
+  t.split("\n").forEach(k => { k = k.trim(); if (k) AUD.have.add(k); }); updateAudStatus();
+}).catch(() => {});
+function unlockAudio() { // iPad chỉ cho phát âm thanh sau khi người dùng chạm
+  try {
+    if (!AUD.ctx) { const C = window.AudioContext || window.webkitAudioContext; if (C) AUD.ctx = new C(); }
+    if (AUD.ctx && AUD.ctx.state !== "running") AUD.ctx.resume();
+  } catch (e) {}
+}
+["pointerdown", "touchend", "click"].forEach(ev => document.addEventListener(ev, unlockAudio, true));
+const audioKey = s => { const p = parseSyl(s); return p.base.replace(/ă/g, "aw").replace(/â/g, "aa").replace(/ê/g, "ee")
+  .replace(/ô/g, "oo").replace(/ơ/g, "ow").replace(/ư/g, "uw").replace(/đ/g, "dd") + p.tone; };
+function audioKeys(text) {
+  const ks = text.split(/\s+/).map(cleanW).filter(Boolean).map(audioKey);
+  return ks.length && ks.every(k => AUD.have.has(k)) ? ks : null;
+}
+function trimBuf(b) { // bỏ khoảng lặng hai đầu
+  const d = b.getChannelData(0), th = 0.02, pad = Math.floor(b.sampleRate * 0.03);
+  let s = 0, e = d.length - 1;
+  while (s < e && Math.abs(d[s]) < th) s++;
+  while (e > s && Math.abs(d[e]) < th) e--;
+  s = Math.max(0, s - pad); e = Math.min(d.length - 1, e + pad);
+  return { b, off: s / b.sampleRate, dur: Math.max(0.05, (e - s) / b.sampleRate) };
+}
+function getBuf(k) {
+  if (!AUD.buf.has(k)) AUD.buf.set(k, fetch("audio/" + encodeURIComponent(k) + ".mp3")
+    .then(r => { if (!r.ok) throw new Error("thiếu " + k); return r.arrayBuffer(); })
+    .then(ab => new Promise((res, rej) => AUD.ctx.decodeAudioData(ab, res, rej))).then(trimBuf)
+    .catch(e => { AUD.buf.delete(k); throw e; }));
+  return AUD.buf.get(k);
+}
+async function playStd(keys, token) {
+  const bufs = await Promise.all(keys.map(getBuf));       // tải đủ rồi mới đọc cho liền mạch
+  for (let i = 0; i < bufs.length; i++) {
+    if (token !== speakToken) return;
+    const x = bufs[i];
+    await new Promise(res => {
+      const src = AUD.ctx.createBufferSource(); src.buffer = x.b; src.connect(AUD.ctx.destination);
+      src.onended = res; AUD.cur = src; src.start(0, x.off, x.dur); setTimeout(res, x.dur * 1000 + 300);
+    });
+    if (i < bufs.length - 1) await new Promise(r => setTimeout(r, 70));
+  }
+}
+function updateAudStatus() {
+  const el = document.getElementById("audStatus"); if (!el) return;
+  el.textContent = AUD.have.size ? `Trang đã có âm thanh chuẩn cho ${AUD.have.size.toLocaleString("vi-VN")} tiếng.`
+    : "Trang chưa có âm thanh chuẩn, máy đang dùng giọng đọc của thiết bị.";
+}
+async function speakOne(text, lang, token, rate, std) {
+  if (lang === "vi" && AUD.on && AUD.have.size && AUD.ctx && AUD.ctx.state === "running") {
+    const n = text.trim().split(/\s+/).length, ks = (std || n <= 3) ? audioKeys(text) : null;
+    if (ks) { try { return await playStd(ks, token); } catch (e) { /* thiếu file: dùng giọng máy */ } }
+  }
+  return speakDevice(text, lang, token, rate);
+}
+function speakDevice(text, lang, token, rate) {
   return new Promise(resolve => {
     if (!synth || token !== speakToken) return resolve();
     const u = new SpeechSynthesisUtterance(text);
@@ -301,13 +361,13 @@ function speakOne(text, lang, token, rate) {
 async function speakSeq(items, gap = 250) {
   if (!synth) return;
   const token = ++speakToken;
-  synth.cancel();
+  synth.cancel(); if (AUD.cur) { try { AUD.cur.stop(); } catch (e) {} AUD.cur = null; }
   document.querySelectorAll(".on[data-hl]").forEach(e => e.classList.remove("on"));
   for (const it of items) {
     if (token !== speakToken) return;
     if (it.wait) { if (it.el) it.el.classList.add("on"); await new Promise(r => setTimeout(r, it.wait)); if (it.el) it.el.classList.remove("on"); continue; }
     if (it.el) { it.el.classList.add("on"); it.el.dataset.hl = "1"; }
-    await speakOne(it.t, it.lang || "vi", token, it.rate);
+    await speakOne(it.t, it.lang || "vi", token, it.rate, it.std);
     if (it.el) it.el.classList.remove("on");
     if (gap) await new Promise(r => setTimeout(r, gap));
   }
@@ -888,7 +948,7 @@ VIEWS["vn:bedoc"] = v => {
     $("#ok").onclick = () => manual(true);
     $("#bad").onclick = () => manual(false);
     $("#spellBtn").onclick = () => { round++; abortRec(); busy = false; micState(false); const m = missed(); guide(m.length ? m : wEls.map((_, i) => i)).then(() => { if (alive() && bdRunning) listenRound(false); }); };
-    $("#model").onclick = () => { round++; abortRec(); busy = false; micState(false); speakSeq(words.length > 1 ? [{ t: text }] : [{ t: cleanW(text), el: wEls[0] }]).then(() => { if (alive() && bdRunning) listenRound(false); }); };
+    $("#model").onclick = () => { round++; abortRec(); busy = false; micState(false); speakSeq(words.length > 1 ? [{ t: text, std: true }] : [{ t: cleanW(text), el: wEls[0] }]).then(() => { if (alive() && bdRunning) listenRound(false); }); };
     $("#prev").onclick = () => next(-1);
     $("#next").onclick = () => next(1);
     const listEl = $("#lessonList"), search = $("#lessonSearch");
@@ -1007,7 +1067,7 @@ VIEWS["vn:doc"] = v => {
     const clean = w => w.replace(/[.,!?]/g, "");
     wEls.forEach(b => b.onclick = () => speakSeq([{ t: clean(words[b.dataset.w]), el: b }]));
     $("#slow").onclick = () => speakSeq(wEls.map((b, i) => ({ t: clean(words[i]), el: b })), 280);
-    $("#full").onclick = () => speakSeq([{ t: SENTENCES[idx] }]);
+    $("#full").onclick = () => speakSeq([{ t: SENTENCES[idx], std: true }]);
     $("#next").onclick = () => { idx = (idx + 1) % SENTENCES.length; store.set("docIdx", idx); draw(); };
     v.querySelectorAll("[data-s]").forEach(b => b.onclick = () => { idx = +b.dataset.s; store.set("docIdx", idx); draw(); });
   };
@@ -1625,6 +1685,8 @@ VIEWS["en:do"] = v => quiz(v, {
 const rate = $("#rate"); rate.value = S.rate; $("#rateVal").textContent = Math.round(S.rate * 100) + "%";
 rate.oninput = () => { S.rate = +rate.value; store.set("rate", S.rate); $("#rateVal").textContent = Math.round(S.rate * 100) + "%"; };
 $("#tryBtn").onclick = () => { const w = $("#tryWord").value.trim(); if (w) say(w); };
+const stdBox = $("#stdAudio"); stdBox.checked = AUD.on; updateAudStatus();
+stdBox.onchange = () => { AUD.on = stdBox.checked; store.set("stdAudio", AUD.on); };
 const easySel = $("#easy"); easySel.value = String(S.level);
 easySel.onchange = () => { S.level = +easySel.value; store.set("level", S.level); };
 const kn = $("#kidName"); kn.value = S.name;
