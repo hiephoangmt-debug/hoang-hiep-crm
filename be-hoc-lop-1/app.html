@@ -440,9 +440,24 @@ function parseSyl(w) {
   return { on, rh, base, tone, word: w };
 }
 // chuỗi đánh vần như cô giáo: "tờ – ui – tui – sắc – túi"
+// Tách vần để đánh vần trước: "ui" -> u – i, "an" -> a – nờ, "iêu" -> iê – u, "oan" -> o – an
+const FINAL_SAY = { ng: "ngờ", nh: "nhờ", ch: "chờ", n: "nờ", m: "mờ", t: "tờ", c: "cờ", p: "pờ", i: "i", y: "i", o: "o", u: "u" };
+function rhymeUnits(rh) {
+  if (rh.length < 2 || ["ia", "ua", "ưa"].includes(rh)) return null;
+  const med = rh.match(/^(o)(?=[aăe])|^(u)(?=[yêâ])/);
+  if (med) { const rest = rh.slice(1); return [med[0], rest.length === 1 ? (rest === "y" ? "i" : rest) : rest]; }
+  const f = rh.match(/(ng|nh|ch|[nmtcpiyou])$/);
+  if (!f) return null;
+  const nucleus = rh.slice(0, rh.length - f[0].length);
+  if (!nucleus || !/[aăâeêioôơuưy]/.test(nucleus)) return null;
+  return [nucleus, FINAL_SAY[f[0]]];
+}
+// chuỗi đánh vần như sách: "túi" -> u – i – ui, tờ – ui – tui – sắc – túi
 function spellParts(w) {
   const p = parseSyl(w), out = [];
-  if (p.on) out.push(CONS_SAY[p.on] || p.on, p.rh, p.base); else out.push(p.rh);
+  const u = rhymeUnits(p.rh);
+  if (u) out.push(...u, p.rh);
+  if (p.on) out.push(CONS_SAY[p.on] || p.on, p.rh, p.base); else if (!u) out.push(p.rh);
   if (p.tone) out.push(TONES[p.tone].short, p.word);
   return out;
 }
@@ -795,12 +810,7 @@ VIEWS["vn:ghep"] = v => {
     const el = v.querySelector(".syll");
     $("#readW").onclick = () => speakSeq([{ t: s.word, el }]);
     $("#spell").onclick = () => {
-      const seq = [];
-      if (s.c) seq.push({ t: CONS_SAY[s.c] || s.c });
-      seq.push({ t: st.c === "gi" && st.r[0] === "i" ? st.r : s.base.slice(s.c.length) || st.r });
-      if (s.c) seq.push({ t: s.base });
-      if (st.t) { seq.push({ t: TONES[st.t].short }); seq.push({ t: s.word }); }
-      seq.forEach(x => x.el = el);
+      const seq = spellParts(s.word).map(t => ({ t, el }));
       speakSeq(seq, 300);
     };
   };
