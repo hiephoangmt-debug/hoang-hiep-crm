@@ -142,7 +142,7 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
 
 <script>
 window.onerror = function (m, s, l) { var d = document.getElementById('diag'); if (d) d.textContent = 'Lỗi trang: ' + m + (l ? ' (dòng ' + l + ')' : ''); };
-var UI_VER = 'ui-50';
+var UI_VER = 'ui-51';
 var KEY = /*__KEY__*/'', D = null, tab = 'home', F = { status: 'todo', site: '', q: '', clicks: 'todo', cw: '', cch: '', cd: 'all', src: '', as: '', sort: 'new', prov: '', bud: '', when: '', sc: '', sd: 'asc', page: 1, df: '', dt: '', cf: '', ct: '', area: '', proj: '', dim: 'area' }, G = '';
 try { G = localStorage.getItem('crm_group') || ''; } catch (e) {}
 var STATUS = ['Mới', 'Đã liên hệ', 'Đang tư vấn', 'Đang cân nhắc', 'Quan tâm', 'Hẹn xem', 'Đã xem dự án', 'Đang thương lượng', 'Booking', 'Chốt', 'Mất', 'Tạm dừng'];
@@ -449,11 +449,12 @@ var COLS = [
   { k: 'viewProject', t: 'Dự án đã xem', v: function (l) { return l.viewCount ? l.viewProject + (l.viewCount > 1 ? ' (+' + (l.viewCount - 1) + ')' : '') : 'Chưa đi xem'; } },
   { k: 'viewAt', t: 'Ngày xem gần nhất', v: function (l) { return l.viewAt ? fdmy(l.viewAt) : '-'; }, s: function (l) { return l.viewAt || ''; } },
   { k: 'next', t: 'Lịch tiếp theo', v: function (l) { return l.next ? fdmy(l.next) : 'Chưa có lịch'; }, s: function (l) { return l.next || '9999'; }, due: 1 },
+  { k: 'prog', t: 'Tiến độ', v: function (l) { return todo(l) ? 'Chưa liên hệ' : l.status; }, s: function (l) { return l.next || '9999'; } },
   { k: 'sale', t: 'Giao sale', v: function (l) { return l.assignee || 'Chưa giao'; }, s: function (l) { return (l.assignee || '').toLowerCase(); } },
   { k: 'act', t: 'Thao tác', v: null }
 ];
 var COL_OLD = ['code', 'name', 'province', 'phone', 'zalo', 'src', 'site', 'purpose', 'status', 'careCount', 'careAt', 'careResult', 'viewProject', 'next', 'act'];
-var COL_DEFAULT = ['name', 'province', 'phone', 'src', 'purpose', 'status', 'careAt', 'next', 'sale', 'act'];   // gọn cho vừa khung, cột khác bật ở nút Cột hiển thị
+var COL_DEFAULT = ['name', 'province', 'phone', 'src', 'purpose', 'prog', 'sale', 'act'];   // gọn cho vừa khung, cột khác bật ở nút Cột hiển thị
 function visCols() { try { var v = JSON.parse(localStorage.getItem('crm_cols') || 'null'); if (v && v.length && JSON.stringify(v) !== JSON.stringify(COL_OLD)) return v; } catch (e) {} return COL_DEFAULT; }   // cột Dự án quan tâm đã gộp vào Nguồn khách (theo tên web dự án)
 var PAGE = 25;
 function leadsFiltered() {
@@ -670,6 +671,7 @@ function leads() {
       (slice.map(function (l) { return '<tr class="' + (todo(l) ? 'rowtodo' : '') + '">' + cols.map(function (x) {
         if (x.k === 'act') return '<td class="nw"><button class="btn z sm" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button> <button class="btn g sm" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button> <button class="btn sm" data-open="' + esc(l.phone) + '">Hồ sơ</button> <button class="btn sm" data-del="' + esc(l.phone) + '" title="Xoá khách này" style="color:var(--red)">Xoá</button></td>';
         var v = esc(x.v(l));
+        if (x.k === 'prog') return '<td class="small">' + (todo(l) ? '<span class="tag red">Chưa liên hệ</span>' : '<span class="tag ' + (l.status === 'Chốt' ? 'grn' : 'amb') + '">' + esc(l.status) + '</span>') + '<div class="mut">' + esc(l.careAt ? 'Chăm ' + ago(l.careAt) + (l.careResult ? ' · ' + l.careResult : '') : 'Chưa chăm') + (l.careCount ? ' · ' + l.careCount + ' lần' : '') + '</div>' + (l.next ? '<div>' + (l.next < ymdNow(0) ? '<span class="tag red">Hẹn ' + dmy(l.next).slice(0, 5) + ' quá hạn</span>' : 'Hẹn ' + dmy(l.next).slice(0, 5)) + '</div>' : '') + '</td>';
         if (x.k === 'sale') return '<td>' + saleSel(l) + '</td>';
         if (x.k === 'name') { var h = heat(l); return '<td class="nw stk"><b>' + v + '</b>' + (h ? ' <span class="tag ' + h[1] + '">' + h[0] + '</span>' : '') + '</td>'; }
         if (x.k === 'phone') return '<td><span class="nw2">' + v + '</span> ' + zl(l.phone, l) + '</td>';
