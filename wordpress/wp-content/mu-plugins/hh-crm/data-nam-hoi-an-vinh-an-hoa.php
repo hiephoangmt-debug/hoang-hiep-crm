@@ -189,6 +189,9 @@ function hh_dataset_nam_hoi_an_city_anh_thuc_te( $projects ) {
 		$p['meta']['hh_p_image_links'] = $line . "\n" . str_replace( '| đại diện', '| thư viện', $old );
 		$p['fix_meta']['hh_p_image_links']   = (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() );
 		$p['fix_meta']['hh_p_image_links'][] = $old;
+		// Tour 360° Matterport anh Hiệp gửi 08/11/2026 – nhúng trong trang (mục "Xem 4D / 360"), ảnh xem trước là ảnh flycam.
+		$p['meta']['hh_p_tour_360']        = 'https://my.matterport.com/show/?m=qecJdRfPDnL&play=1';
+		$p['meta']['hh_p_tour_360_poster'] = 'plugin:img/da-nang/duy-xuyen-flycam-song-thu-bon-cau-cua-dai-hoi-an.jpg';
 		$projects[ $i ] = $p;
 	}
 	return $projects;

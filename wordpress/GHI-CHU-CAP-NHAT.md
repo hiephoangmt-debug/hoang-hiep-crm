@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.95** + plugin Hoàng Hiệp CRM **2.20.217**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.95** + plugin Hoàng Hiệp CRM **2.20.218**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.218 (08/11/2026)
+
+- **Nam Hội An City:** gắn tour 360° (Matterport) vào mục "Tham quan trực tuyến" trên trang dự án – bấm là xem ngay trong trang, có nút mở tab mới; ảnh xem trước là ảnh flycam thực tế.
+- Cài: Nhập nhanh → upload → "Nhập / cập nhật dữ liệu" → LiteSpeed Purge All.
 
 ## Có gì mới – plugin 2.20.217 (07/11/2026)
 
