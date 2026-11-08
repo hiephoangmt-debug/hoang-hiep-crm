@@ -24,10 +24,10 @@ jobs:
           await p.click('#chatBtn');await p.waitForTimeout(1500);
           for (const q of ['Có sổ đỏ không?','Chiết khấu bao nhiêu?','Căn ký ôm áp dụng chính sách nào?','Ưu đãi đến khi nào?','giá căn 2PN bao nhiêu']) {
             const n=await p.locator('#chatBody > *').count();
-            await p.fill('#chatIn',q);await p.press('#chatIn','Enter');await p.waitForTimeout(3500);
+            await p.fill('#chatIn',q);await p.press('#chatIn','Enter');await p.waitForTimeout(9000);
             const t=await p.evaluate(n=>[...document.querySelectorAll('#chatBody > *')].slice(n).map(e=>e.innerText).join(' | '),n);
             console.log('Q:',q,'\n  A:',t.slice(0,500));
           }
-          console.log('JS errors =',err);await b.close();})();
+          console.log('=== TOÀN BỘ CHAT ===\n'+await p.innerText('#chatBody'));console.log('JS errors =',err);await b.close();})();
           JS
           node t.js
