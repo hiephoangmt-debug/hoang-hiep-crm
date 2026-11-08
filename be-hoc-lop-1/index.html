@@ -574,7 +574,7 @@ function micHelp(err) {
   } else t += " Hãy cho phép trình duyệt dùng micro (biểu tượng ổ khoá cạnh địa chỉ trang).";
   return t + " Trong lúc đó bố mẹ chấm bằng nút Đúng / Sai. (mã lỗi: " + err + ")";
 }
-function bdStop() { bdRunning = false; enRunning = false; bdSess++; abortRec(); speakToken++; if (synth) synth.cancel(); }
+function bdStop() { bdRunning = false; enRunning = false; mathRunning = false; bdSess++; abortRec(); speakToken++; if (synth) synth.cancel(); }
 // Nghe bé đọc n tiếng. Câu càng dài máy chờ càng lâu. Lấy cả kết quả tạm (Safari trên iPad
 // thường không báo kết quả cuối). Micro tự tắt giữa câu thì bật lại nghe tiếp và ghép chữ.
 function listen(n, onHear, lang = "vi-VN") {
@@ -859,33 +859,138 @@ VIEWS["vn:doc"] = v => {
 };
 
 /* ---------- Toán ---------- */
-function quiz(v, { title, hint, make, top, bind }) {
+/* ----- Nghe bé nói đáp án (Toán) ----- */
+const VI_DIGIT = { "không": 0, "một": 1, "mốt": 1, "hai": 2, "ba": 3, "bốn": 4, "tư": 4, "năm": 5, "lăm": 5, "sáu": 6, "bảy": 7, "bẩy": 7, "tám": 8, "chín": 9 };
+// "bảy" -> 7, "mười lăm" -> 15, "ba mươi hai" -> 32, "15" -> 15
+function viNumbers(text) {
+  const tk = text.toLowerCase().normalize("NFC").replace(/(\d+)/g, " $1 ").split(/[\s,.!?]+/).filter(Boolean), out = [];
+  for (let i = 0; i < tk.length; i++) {
+    const t = tk[i];
+    if (/^\d+$/.test(t)) { out.push(+t); continue; }
+    if (t === "mười" || t === "chục") {
+      const n = VI_DIGIT[tk[i + 1]]; if (n !== undefined && n > 0) { out.push(10 + n); i++; } else out.push(10); continue;
+    }
+    if (VI_DIGIT[t] !== undefined) {
+      if (tk[i + 1] === "mươi" || tk[i + 1] === "chục") {
+        let v = VI_DIGIT[t] * 10; const u = VI_DIGIT[tk[i + 2]];
+        if (tk[i + 2] === "linh" || tk[i + 2] === "lẻ") { v += VI_DIGIT[tk[i + 3]] || 0; i += 3; }
+        else if (u !== undefined && u > 0) { v += u; i += 2; } else i++;
+        out.push(v); continue;
+      }
+      if (tk[i + 1] === "trăm") { out.push(VI_DIGIT[t] * 100); i++; continue; }
+      out.push(VI_DIGIT[t]);
+    }
+  }
+  return out;
+}
+const SIGN_WORDS = { ">": ["lớn hơn", "lớn", "to hơn", "nhiều hơn"], "<": ["bé hơn", "nhỏ hơn", "bé", "nhỏ", "ít hơn"], "=": ["bằng nhau", "bằng"] };
+// Tìm đáp án bé nói trong các lựa chọn; trả về giá trị đáp án hoặc null
+function pickSpoken(alts, options) {
+  const said = alts.join(" | ").toLowerCase().normalize("NFC");
+  const strs = options.map(String);
+  if (strs.every(o => /^\d+$/.test(o))) {
+    for (const a of alts) { const nums = viNumbers(a); for (let j = nums.length - 1; j >= 0; j--) if (strs.includes(String(nums[j]))) return String(nums[j]); }
+    const any = alts.map(viNumbers).flat(); return any.length ? String(any[any.length - 1]) : null;
+  }
+  if (strs.every(o => SIGN_WORDS[o])) {
+    for (const o of strs) if (SIGN_WORDS[o].slice(0, 2).some(w => said.includes(w))) return o;
+    for (const o of strs) if (SIGN_WORDS[o].some(w => said.includes(w))) return o;
+    return null;
+  }
+  // đáp án chữ: đếm những chữ chỉ đáp án đó có (vd "Hàng dưới" -> "dưới"), chọn đáp án khớp nhiều nhất
+  const words = strs.map(o => o.toLowerCase().split(/\s+/));
+  const has = w => new RegExp("(^|[^\\p{L}])" + w + "($|[^\\p{L}])", "u").test(said);
+  const score = words.map((ws, i) => ws.filter(w => !words.some((o, j) => j !== i && o.includes(w))).filter(has).length);
+  const max = Math.max(...score);
+  return max > 0 && score.filter(x => x === max).length === 1 ? strs[score.indexOf(max)] : null;
+}
+let mathRunning = false;
+function quiz(v, { title, hint, make, top, bind, voice }) {
+  let noHear = 0;
   const round = () => {
-    const q = make();
+    const q = make(), my = ++bdSess, alive = () => my === bdSess;
+    const useMic = voice && SR && !srBroken;
+    if (!useMic) mathRunning = false;
     v.innerHTML = `<div><h2>${title}</h2><p class="hint">${hint}</p></div>${top || ""}
     <div class="q">${q.html}
       <div class="opts">${q.options.map(o => `<button class="opt${q.label ? " lbl" : /^[\d<>=]+$/.test(String(o)) ? "" : " txt"}" data-o="${esc(o)}">${q.label ? q.label(o) : esc(o)}</button>`).join("")}</div>
       <div class="feedback" id="fb" aria-live="polite"></div>
+      ${useMic ? `<button class="btn mic${mathRunning ? "" : " sun"}" id="qMic">${mathRunning ? "■ Dừng nghe" : "▶ Bắt đầu – bé nói đáp án"}</button><p class="heard" id="qHeard"></p>` : ""}
       <div class="row"><button class="btn alt" id="again">Nghe lại</button><button class="btn alt" id="skip">Câu khác</button></div>
     </div>`;
     if (bind) bind(v);
-    let locked = false;
-    const ask = () => q.speak && speakSeq(q.speak);
-    ask();
-    $("#again").onclick = ask;
-    $("#skip").onclick = round;
-    v.querySelectorAll(".opt").forEach(b => b.onclick = () => {
-      if (locked) return;
-      const fb = $("#fb");
-      if (b.dataset.o === String(q.answer)) {
-        locked = true; b.classList.add("ok"); addStar();
-        const p = PRAISE[rand(PRAISE.length)];
-        fb.className = "feedback ok"; fb.textContent = p;
-        speakSeq((q.after || []).concat([{ t: p }])).then(() => setTimeout(round, 400));
-      } else {
-        b.classList.add("bad"); fb.className = "feedback bad"; fb.textContent = TRY; say(TRY);
+    let locked = false, busy = false, tries = 0, rnd = 0;
+    const fb = $("#fb"), mic = $("#qMic"), heard = $("#qHeard");
+    const setFb = (c, t) => { fb.className = "feedback " + c; fb.textContent = t; };
+    if (bdMsg) { setFb(bdMsg[0], bdMsg[1]); bdMsg = null; }
+    const micState = l => { if (!mic) return; mic.classList.toggle("listening", l); mic.textContent = l ? "● Đang nghe… (bấm để dừng)" : "■ Dừng nghe"; };
+    const stopListen = () => { rnd++; abortRec(); busy = false; micState(false); };
+    const btnOf = o => [...v.querySelectorAll(".opt")].find(b => b.dataset.o === String(o));
+    async function choose(o) {
+      if (locked || busy) return;
+      busy = true;
+      const b = btnOf(o);
+      if (String(o) === String(q.answer)) {
+        locked = true; if (b) b.classList.add("ok"); addStar(); noHear = 0;
+        const p = PRAISE[rand(PRAISE.length)]; setFb("ok", p);
+        await speakSeq((q.after || []).concat([{ t: p }]));
+        if (alive()) setTimeout(() => alive() && round(), 400);
+        return;
       }
-    });
+      tries++;
+      if (b) { b.classList.remove("bad"); void b.offsetWidth; b.classList.add("bad"); }
+      if (mathRunning && tries >= 3) { // sai 3 lần: chỉ đáp án đúng rồi sang câu khác
+        locked = true; const ok = btnOf(q.answer); if (ok) ok.classList.add("ok");
+        setFb("bad", "Đáp án đúng là ô màu xanh. Mình làm câu khác nhé!");
+        await speakSeq([{ t: `Chưa đúng rồi. ${S.name} xem đáp án đúng nhé.` }, ...(q.after || []), { t: "Mình làm câu khác nhé." }]);
+        if (alive()) setTimeout(() => alive() && round(), 600);
+        return;
+      }
+      setFb("bad", TRY); await speakSeq([{ t: TRY }]);
+      busy = false;
+      if (alive() && mathRunning) listenRound();
+    }
+    async function listenRound() {
+      if (!alive() || !mathRunning || busy || locked) return;
+      busy = true; const r = ++rnd;
+      await new Promise(res => setTimeout(res, 600)); if (!alive() || r !== rnd) return;
+      micState(true); heard.textContent = "";
+      let alts;
+      try { alts = await listen(1, t => { heard.textContent = "Máy đang nghe: " + t; }); } // đáp án ngắn: nghe xong một câu là chốt
+      catch (err) {
+        if (!alive()) return;
+        busy = false; mathRunning = false;
+        if (["not-allowed", "service-not-allowed", "audio-capture", "network"].includes(err)) srBroken = true;
+        bdMsg = ["bad", micHelp(err)]; return round();
+      }
+      if (!alive() || r !== rnd) return;
+      busy = false; micState(false);
+      if (!mathRunning) return;
+      const ans = alts.length ? pickSpoken(alts, q.options) : null;
+      if (alts.length) heard.textContent = "Máy nghe được: " + alts[0];
+      if (ans === null) {
+        if (++noHear >= 3) { mathRunning = false; noHear = 0; bdMsg = ["bad", `Máy chưa nghe rõ đáp án của ${S.name}. ${S.name} chạm vào đáp án nhé, hoặc bấm Bắt đầu để nói tiếp.`]; return round(); }
+        const t = alts.length ? `Cô chưa nghe rõ. ${S.name} nói lại đáp án nhé.` : `${S.name} trả lời cho cô nghe nhé.`;
+        setFb("bad", t); busy = true; await speakSeq([{ t }]); busy = false;
+        return listenRound();
+      }
+      noHear = 0; choose(ans);
+    }
+    const ask = () => q.speak && speakSeq(q.speak);
+    Promise.resolve(q.speak ? speakSeq(q.speak) : null).then(() => { if (alive() && mathRunning) listenRound(); });
+    $("#again").onclick = () => { stopListen(); Promise.resolve(ask()).then(() => { if (alive() && mathRunning) listenRound(); }); };
+    $("#skip").onclick = () => { stopListen(); round(); };
+    v.querySelectorAll(".opt").forEach(b => b.onclick = () => { if (curRec) stopListen(); choose(b.dataset.o); });
+    if (mic) mic.onclick = () => {
+      if (mathRunning) { mathRunning = false; stopListen(); speakToken++; if (synth) synth.cancel(); setFb("", "Đã dừng nghe."); mic.classList.add("sun"); mic.textContent = "▶ Bắt đầu – bé nói đáp án"; return; }
+      try { if (synth) synth.speak(new SpeechSynthesisUtterance(" ")); } catch (e) {}
+      mic.textContent = "Đang bật micro…";
+      const start = () => { if (!alive()) return; mathRunning = true; noHear = 0; mic.classList.remove("sun"); micState(false); speakSeq(q.speak || []).then(() => { if (alive() && mathRunning) listenRound(); }); };
+      const md = navigator.mediaDevices;
+      if (!md || !md.getUserMedia) return start();
+      md.getUserMedia({ audio: true }).then(st => { st.getTracks().forEach(t => t.stop()); setTimeout(start, 400); })
+        .catch(e => { if (e && e.name === "NotAllowedError") { srBroken = true; bdMsg = ["bad", micHelp("not-allowed")]; round(); } else start(); });
+    };
   };
   round();
 }
@@ -898,7 +1003,7 @@ function numOptions(ans, max, n = 4) {
 }
 const OBJS = [["🐔","con gà"],["🍎","quả táo"],["🌸","bông hoa"],["⭐","ngôi sao"],["🐟","con cá"],["🚗","chiếc ô tô"],["🎈","quả bóng bay"],["🐱","con mèo"]];
 
-VIEWS["math:dem"] = v => quiz(v, {
+VIEWS["math:dem"] = v => quiz(v, { voice: true,
   title: "Đếm hình", hint: "Bé đếm xem có bao nhiêu, rồi chọn số đúng.",
   make() {
     const n = rand(10) + 1, o = OBJS[rand(OBJS.length)];
@@ -925,11 +1030,11 @@ VIEWS["math:tinh"] = v => {
       speak: [{ t: `${a} ${word} ${b} bằng mấy?` }], after: [{ t: `${a} ${word} ${b} bằng ${ans}.` }] };
   };
   const top = `<div class="keys">${[[10,"Phạm vi 10"],[20,"Phạm vi 20"],[100,"Phạm vi 100 (không nhớ)"]].map(([k, n]) => `<button class="chip" data-lv="${k}" aria-pressed="${k === lv}">${n}</button>`).join("")}</div>`;
-  quiz(v, { title: "Phép cộng, phép trừ", hint: "Chọn phạm vi số, rồi chọn đáp án đúng.", make, top,
+  quiz(v, { voice: true, title: "Phép cộng, phép trừ", hint: "Chọn phạm vi số, rồi chọn đáp án đúng.", make, top,
     bind: el => el.querySelectorAll("[data-lv]").forEach(b => b.onclick = () => { store.set("mathLv", +b.dataset.lv); VIEWS["math:tinh"](v); }) });
 };
 
-VIEWS["math:sosanh"] = v => quiz(v, {
+VIEWS["math:sosanh"] = v => quiz(v, { voice: true,
   title: "So sánh số", hint: "Chọn dấu lớn hơn (>), bé hơn (<) hoặc bằng (=).",
   make() {
     const max = rand(2) ? 10 : 100;
@@ -1107,7 +1212,7 @@ VIEWS["math:sach"] = v => {
       <input type="search" id="toanSearch" placeholder="Gõ số bài (10) hoặc tên bài (so sánh, đồng hồ…)" value="${esc(query)}" autocomplete="off">
       <div class="lessonlist" id="toanList"></div></div>
       <h3 class="lessonname">Bài ${L.n}: ${esc(L.title)} <small>(${L.n <= 20 ? "Tập một" : "Tập hai"})</small></h3>`;
-    quiz(v, { title: "Toán 1 theo sách", hint: "Chọn bài đang học trên lớp. Máy đọc câu hỏi, bé chọn đáp án đúng để nhận sao.", top, make: () => GEN[L.gens[rand(L.gens.length)]](),
+    quiz(v, { voice: true, title: "Toán 1 theo sách", hint: "Chọn bài đang học trên lớp. Máy đọc câu hỏi, bé chọn đáp án đúng để nhận sao.", top, make: () => GEN[L.gens[rand(L.gens.length)]](),
       bind: el => {
         const list = $("#toanList", el), search = $("#toanSearch", el);
         const pick = n => { N = n; query = ""; run(); };
