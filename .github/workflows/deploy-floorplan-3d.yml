@@ -8,6 +8,7 @@ on:
     paths:
       - 'floorplan-3d/**'
       - 'dau-tu/**'
+      - 'be-hoc-lop-1/**'
       - '.github/workflows/deploy-floorplan-3d.yml'
   workflow_dispatch:
 
@@ -38,6 +39,9 @@ jobs:
       # Trang Thống kê đầu tư (tĩnh) nằm ở /dau-tu/
       - name: Thêm trang đầu tư
         run: mkdir -p dist/dau-tu && cp -r ../dau-tu/index.html ../dau-tu/data dist/dau-tu/
+      # App học cho bé lớp 1 (tĩnh) nằm ở /be-hoc-lop-1/
+      - name: Thêm app Bé Vui Học
+        run: mkdir -p dist/be-hoc-lop-1 && cp ../be-hoc-lop-1/index.html dist/be-hoc-lop-1/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

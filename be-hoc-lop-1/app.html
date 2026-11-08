@@ -1,0 +1,922 @@
+<title>Bé Vui Học</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap">
+<style>
+/* Layout: one column "school notebook" — tabs on top, a lined ô-li page below, big tap targets for small fingers */
+:root {
+  --bg: #eef4fb;          /* paper-blue page */
+  --paper: #ffffff;       /* notebook sheet */
+  --ink: #1d2340;         /* text */
+  --muted: #5b6386;
+  --tim: #6a3fb5;         /* "mực tím" school ink, main accent */
+  --tim-soft: #ece4fa;
+  --sun: #ffb21e;         /* stars, highlights */
+  --sun-soft: #fff1d1;
+  --ok: #1f9d5a;
+  --ok-soft: #dcf5e7;
+  --bad: #d6453b;
+  --bad-soft: #fde3e0;
+  --blue: #2563c9;
+  --grid: #cfe0f5;
+  --grid-strong: #9dbbe6;
+  --line: #dbe3f0;
+  --shadow: 0 2px 0 #d3dcec;
+  --f-display: "Baloo 2", "Nunito", system-ui, sans-serif;
+  --f-body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141729; --paper: #1d2138; --ink: #eef0fb; --muted: #a8aed0;
+  --tim: #b597f2; --tim-soft: #2f2752; --sun: #ffc54d; --sun-soft: #3a311a;
+  --ok: #4cd38a; --ok-soft: #173b2a; --bad: #ff7d72; --bad-soft: #43201e;
+  --blue: #7fb0ff; --grid: #2a3356; --grid-strong: #3e4c7e; --line: #2d3355; --shadow: 0 2px 0 #0d0f1d;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #141729; --paper: #1d2138; --ink: #eef0fb; --muted: #a8aed0;
+  --tim: #b597f2; --tim-soft: #2f2752; --sun: #ffc54d; --sun-soft: #3a311a;
+  --ok: #4cd38a; --ok-soft: #173b2a; --bad: #ff7d72; --bad-soft: #43201e;
+  --blue: #7fb0ff; --grid: #2a3356; --grid-strong: #3e4c7e; --line: #2d3355; --shadow: 0 2px 0 #0d0f1d;
+  color-scheme: dark }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.5; }
+.wrap { max-width: 980px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 12px 40px; display: grid; gap: 14px; }
+h1, h2, h3 { font-family: var(--f-display); margin: 0; line-height: 1.15; text-wrap: balance; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; }
+
+/* header */
+.top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: baseline; gap: 8px; margin-right: auto; }
+.brand h1 { font-size: 30px; color: var(--tim); font-weight: 800; }
+.brand span { font-weight: 800; color: var(--muted); font-size: 14px; letter-spacing: .06em; text-transform: uppercase; }
+.stars { display: inline-flex; align-items: center; gap: 6px; background: var(--sun-soft); border-radius: 999px; padding: 6px 14px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.stars svg { width: 20px; height: 20px; fill: var(--sun); }
+.iconbtn { border: 2px solid var(--line); background: var(--paper); border-radius: 999px; padding: 6px 14px; font-weight: 800; }
+
+/* main tabs */
+.tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.tab { border: 0; border-radius: 18px; padding: 10px 6px; background: var(--paper); box-shadow: var(--shadow); display: grid; justify-items: center; gap: 0; }
+.tab b { font-family: var(--f-display); font-size: 26px; line-height: 1.1; color: var(--tim); }
+.tab small { font-weight: 800; font-size: 15px; }
+.tab[aria-selected="true"] { background: var(--tim); }
+.tab[aria-selected="true"] b, .tab[aria-selected="true"] small { color: var(--paper); }
+
+.subtabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { border: 2px solid var(--line); background: var(--paper); border-radius: 999px; padding: 6px 14px; font-weight: 800; font-size: 15px; }
+.chip[aria-pressed="true"] { border-color: var(--tim); background: var(--tim-soft); color: var(--tim); }
+
+.sheet { background: var(--paper); border-radius: 22px; padding: 18px; box-shadow: var(--shadow); display: grid; gap: 16px; min-width: 0; }
+.hint { color: var(--muted); margin: 0; font-size: 15px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+/* ô li notebook grid */
+.oli {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid-strong) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-strong) 1px, transparent 1px),
+    linear-gradient(var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px, 12px 12px;
+  border: 2px solid var(--grid-strong); border-radius: 14px;
+}
+
+/* letter / word cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 10px; }
+.card { border: 2px solid var(--line); background: var(--paper); border-radius: 16px; padding: 10px 8px; display: grid; justify-items: center; gap: 2px; text-align: center; min-width: 0; transition: transform .12s; }
+.card:active { transform: scale(.96); }
+.card .big { font-family: var(--f-display); font-size: 40px; line-height: 1.05; color: var(--tim); font-weight: 800; }
+.card .pic { font-size: 34px; line-height: 1.2; }
+.card .w { font-weight: 800; font-size: 18px; overflow-wrap: anywhere; }
+.card .ipa { color: var(--muted); font-size: 14px; }
+.card .vi { color: var(--blue); font-weight: 700; font-size: 14px; }
+.card.on { border-color: var(--sun); background: var(--sun-soft); }
+
+/* tones */
+.tones { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.tone .big { font-size: 52px; }
+
+/* syllable builder */
+.builder { display: grid; gap: 14px; }
+.stage { display: grid; justify-items: center; gap: 8px; padding: 22px 12px; }
+.syll { font-family: var(--f-display); font-size: clamp(64px, 18vw, 120px); font-weight: 800; line-height: 1; letter-spacing: .02em; }
+.syll .c { color: var(--tim); } .syll .r { color: var(--blue); }
+.formula { font-weight: 800; color: var(--muted); font-size: 16px; text-align: center; }
+.note { background: var(--sun-soft); border-radius: 12px; padding: 8px 12px; font-weight: 700; font-size: 15px; }
+.pick h3 { font-size: 18px; margin-bottom: 6px; }
+.pick .grp { color: var(--muted); font-weight: 800; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; margin: 8px 0 4px; }
+.keys { display: flex; flex-wrap: wrap; gap: 6px; }
+.key { min-width: 48px; border: 2px solid var(--line); background: var(--paper); border-radius: 12px; padding: 4px 10px; font-family: var(--f-display); font-size: 22px; font-weight: 800; }
+.key[aria-pressed="true"] { background: var(--tim); border-color: var(--tim); color: var(--paper); }
+.key:disabled { opacity: .3; cursor: not-allowed; }
+
+.btn { border: 0; border-radius: 14px; padding: 10px 18px; font-weight: 800; background: var(--tim); color: var(--paper); box-shadow: var(--shadow); }
+.btn.alt { background: var(--tim-soft); color: var(--tim); }
+.btn.sun { background: var(--sun); color: #2a1d00; }
+
+/* reading */
+.sentence { display: flex; flex-wrap: wrap; gap: 6px 4px; padding: 18px 14px; }
+.word { border: 0; background: transparent; border-radius: 10px; padding: 0 6px; font-family: var(--f-display); font-size: clamp(30px, 7vw, 44px); font-weight: 800; color: var(--ink); }
+.word.on { background: var(--sun); color: #2a1d00; }
+.list { display: grid; gap: 6px; }
+.list button { text-align: left; border: 2px solid var(--line); background: var(--paper); border-radius: 12px; padding: 8px 12px; font-weight: 700; }
+.list button[aria-pressed="true"] { border-color: var(--tim); background: var(--tim-soft); }
+
+/* quiz */
+.q { display: grid; justify-items: center; gap: 14px; text-align: center; }
+.q .prompt { font-family: var(--f-display); font-size: clamp(40px, 11vw, 72px); font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.q .objs { font-size: clamp(32px, 8vw, 46px); line-height: 1.3; max-width: 520px; overflow-wrap: anywhere; }
+.opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px; width: 100%; max-width: 560px; }
+.opt { border: 3px solid var(--line); background: var(--paper); border-radius: 18px; padding: 10px; font-family: var(--f-display); font-size: 38px; font-weight: 800; font-variant-numeric: tabular-nums; min-height: 76px; }
+.opt.ok { border-color: var(--ok); background: var(--ok-soft); color: var(--ok); }
+.opt.bad { border-color: var(--bad); background: var(--bad-soft); color: var(--bad); animation: shake .35s; }
+.feedback { min-height: 30px; font-weight: 800; font-size: 20px; }
+.feedback.ok { color: var(--ok); } .feedback.bad { color: var(--bad); }
+.plus { color: var(--muted); font-size: .6em; padding: 0 .2em; }
+@keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+@keyframes pop { 50% { transform: scale(1.25); } }
+.pop { animation: pop .4s; }
+
+/* settings */
+.settings { display: grid; gap: 12px; }
+.settings label { display: grid; gap: 4px; font-weight: 800; font-size: 15px; }
+.settings select, .settings input[type="range"] { width: 100%; font: inherit; padding: 6px; border-radius: 10px; border: 2px solid var(--line); background: var(--paper); color: var(--ink); }
+.warn { background: var(--bad-soft); color: var(--ink); border-radius: 12px; padding: 10px 14px; font-size: 15px; }
+.warn b { color: var(--bad); }
+.word.miss { background: var(--bad-soft); color: var(--bad); text-decoration: underline wavy var(--bad); }
+.word.good { color: var(--ok); }
+.word.on.miss { background: var(--sun); color: #2a1d00; }
+.status { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-weight: 800; color: var(--muted); font-size: 15px; }
+.dots { display: inline-flex; gap: 5px; align-items: center; }
+.dots i { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--bad); display: inline-block; }
+.dots i.x { background: var(--bad); }
+.mic { font-size: 20px; padding: 14px 24px; border-radius: 999px; }
+.mic.listening { background: var(--bad); animation: pop 1s infinite; }
+.judge { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.judge .btn { font-size: 18px; padding: 14px; }
+.btn.okb { background: var(--ok); } .btn.badb { background: var(--bad); }
+.spellbox { background: var(--tim-soft); border-radius: 14px; padding: 10px 14px; font-weight: 800; color: var(--tim); font-size: 18px; display: grid; gap: 2px; }
+.heard { color: var(--muted); font-size: 15px; margin: 0; }
+details { border: 2px dashed var(--line); border-radius: 14px; padding: 8px 12px; }
+summary { font-weight: 800; cursor: pointer; }
+textarea { width: 100%; min-height: 120px; font: inherit; border-radius: 10px; border: 2px solid var(--line); background: var(--paper); color: var(--ink); padding: 8px; margin: 8px 0; }
+.settings input[type="text"] { width: 100%; font: inherit; padding: 6px 10px; border-radius: 10px; border: 2px solid var(--line); background: var(--paper); color: var(--ink); }
+.book { display: grid; gap: 6px; }
+.booklbl { font-weight: 800; color: var(--muted); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+#lessonSearch { width: 100%; font: inherit; font-size: 18px; padding: 10px 14px; border-radius: 14px; border: 2px solid var(--tim); background: var(--paper); color: var(--ink); }
+.lessonlist { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; max-height: 200px; overflow-y: auto; padding: 2px; }
+.lessonlist button { text-align: left; border: 2px solid var(--line); background: var(--paper); border-radius: 12px; padding: 6px 10px; font-size: 15px; }
+.lessonlist button b { color: var(--tim); }
+.lessonlist button[aria-pressed="true"] { border-color: var(--tim); background: var(--tim-soft); }
+.lessonname { font-size: 22px; color: var(--tim); }
+.lessonname small { font-size: 14px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media (max-width: 480px) { .tab b { font-size: 22px; } .tab small { font-size: 13px; } .sheet { padding: 14px; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><h1>Bé Vui Học</h1><span>Lớp 1</span></div>
+    <div class="stars" title="Số sao bé đã đạt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.8 5.7 21.4l1.5-7.1L1.8 9.4 9 8.6z"/></svg><span id="starCount">0</span></div>
+    <button class="iconbtn" id="btnSettings" aria-expanded="false">Giọng đọc</button>
+  </header>
+
+  <section class="sheet settings" id="settings" hidden>
+    <h2>Cài đặt giọng đọc</h2>
+    <div id="voiceWarn"></div>
+    <label for="kidName">Tên của bé (máy sẽ gọi tên bé)
+      <input type="text" id="kidName" maxlength="30"></label>
+    <label for="viVoice">Giọng tiếng Việt
+      <select id="viVoice"></select></label>
+    <label for="enVoice">Giọng tiếng Anh
+      <select id="enVoice"></select></label>
+    <label for="rate">Tốc độ đọc: <span id="rateVal"></span>
+      <input type="range" id="rate" min="0.5" max="1.2" step="0.05"></label>
+    <div class="row">
+      <button class="btn" data-say="Xin chào, bé cùng học tiếng Việt nhé." data-lang="vi">Thử giọng Việt</button>
+      <button class="btn alt" data-say="Hello! Let's learn English together." data-lang="en">Thử giọng Anh</button>
+    </div>
+    <p class="hint">Giọng đọc lấy từ máy của bé. Giọng chuẩn nhất: Microsoft Edge (giọng HoaiMy, NamMinh), Chrome (Google Tiếng Việt), iPhone (Linh).</p>
+  </section>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" data-tab="vn"><b>Aa</b><small>Tiếng Việt</small></button>
+    <button class="tab" role="tab" data-tab="math"><b>1+2</b><small>Toán</small></button>
+    <button class="tab" role="tab" data-tab="en"><b>ABC</b><small>Tiếng Anh</small></button>
+  </nav>
+
+  <div class="subtabs" id="subtabs"></div>
+  <main class="sheet" id="view"></main>
+</div>
+
+<script>
+(() => {
+"use strict";
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const rand = n => Math.floor(Math.random() * n);
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = rand(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("bvh-" + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem("bvh-" + k, JSON.stringify(v)); } catch (e) {} }
+};
+
+/* ================= GIỌNG ĐỌC ================= */
+const synth = window.speechSynthesis;
+const S = { name: store.get("name", "Hà My"), voices: [], rate: store.get("rate", 0.85), vi: store.get("viVoice", ""), en: store.get("enVoice", "") };
+const norm = l => (l || "").replace("_", "-").toLowerCase();
+function scoreVoice(v, lang) {
+  let s = 0; const n = v.name;
+  if (/natural|neural|online/i.test(n)) s += 50;
+  if (/google/i.test(n)) s += 30;
+  if (/hoaimy|namminh|linh|ava|aria|jenny|samantha|sonia|libby/i.test(n)) s += 15;
+  if (lang === "en" && norm(v.lang) === "en-us") s += 20;
+  if (lang === "en" && norm(v.lang) === "en-gb") s += 10;
+  return s;
+}
+function voicesFor(lang) { return S.voices.filter(v => norm(v.lang).startsWith(lang)).sort((a, b) => scoreVoice(b, lang) - scoreVoice(a, lang)); }
+function pickVoice(lang) {
+  const list = voicesFor(lang);
+  return list.find(v => v.voiceURI === S[lang]) || list[0] || null;
+}
+function fillVoiceSelect(lang) {
+  const sel = $("#" + lang + "Voice"), list = voicesFor(lang), cur = pickVoice(lang);
+  sel.innerHTML = list.length ? list.map(v => `<option value="${esc(v.voiceURI)}"${cur && v.voiceURI === cur.voiceURI ? " selected" : ""}>${esc(v.name)} (${esc(v.lang)})</option>`).join("")
+    : `<option value="">Không tìm thấy giọng — máy dùng giọng mặc định</option>`;
+}
+function loadVoices() {
+  if (!synth) return;
+  S.voices = synth.getVoices();
+  fillVoiceSelect("vi"); fillVoiceSelect("en");
+  const w = $("#voiceWarn");
+  if (S.voices.length && !voicesFor("vi").length) {
+    w.innerHTML = `<div class="warn"><b>Máy chưa có giọng tiếng Việt.</b> Android: Cài đặt › Hệ thống › Ngôn ngữ › Đầu ra chuyển văn bản thành giọng nói › chọn "Dịch vụ lời nói của Google" và tải gói Tiếng Việt. iPhone/iPad: Cài đặt › Trợ năng › Nội dung được đọc › Giọng nói › Tiếng Việt. Máy tính: mở trang bằng Microsoft Edge hoặc Chrome.</div>`;
+  } else w.innerHTML = "";
+}
+if (synth) { loadVoices(); synth.addEventListener ? synth.addEventListener("voiceschanged", loadVoices) : (synth.onvoiceschanged = loadVoices); }
+
+let speakToken = 0;
+function speakOne(text, lang, token) {
+  return new Promise(resolve => {
+    if (!synth || token !== speakToken) return resolve();
+    const u = new SpeechSynthesisUtterance(text);
+    const v = pickVoice(lang);
+    u.lang = v ? v.lang : (lang === "vi" ? "vi-VN" : "en-US");
+    if (v) u.voice = v;
+    u.rate = S.rate; u.pitch = 1.05;
+    let done = false; const fin = () => { if (!done) { done = true; resolve(); } };
+    u.onend = fin; u.onerror = fin;
+    setTimeout(fin, 1500 + text.length * 180 / S.rate); // phòng khi trình duyệt không báo "đọc xong"
+    synth.speak(u);
+  });
+}
+/* đọc lần lượt: items = [{t, lang, el}] — el được tô sáng khi đang đọc */
+async function speakSeq(items, gap = 250) {
+  if (!synth) return;
+  const token = ++speakToken;
+  synth.cancel();
+  document.querySelectorAll(".on[data-hl]").forEach(e => e.classList.remove("on"));
+  for (const it of items) {
+    if (token !== speakToken) return;
+    if (it.wait) { if (it.el) it.el.classList.add("on"); await new Promise(r => setTimeout(r, it.wait)); if (it.el) it.el.classList.remove("on"); continue; }
+    if (it.el) { it.el.classList.add("on"); it.el.dataset.hl = "1"; }
+    await speakOne(it.t, it.lang || "vi", token);
+    if (it.el) it.el.classList.remove("on");
+    if (gap) await new Promise(r => setTimeout(r, gap));
+  }
+}
+const say = (t, lang = "vi") => speakSeq([{ t, lang }], 0);
+
+/* ================= SAO THƯỞNG ================= */
+let stars = store.get("stars", 0);
+function addStar() {
+  stars++; store.set("stars", stars);
+  const el = $("#starCount"); el.textContent = stars;
+  el.parentElement.classList.remove("pop"); void el.offsetWidth; el.parentElement.classList.add("pop");
+}
+$("#starCount").textContent = stars;
+const PRAISE = ["Đúng rồi! Con giỏi quá!", "Tuyệt vời!", "Chính xác! Con làm tốt lắm!", "Hoan hô bé!"];
+const TRY = "Chưa đúng rồi, con thử lại nhé!";
+
+/* ================= TIẾNG VIỆT: DỮ LIỆU ================= */
+// 29 chữ cái: [chữ, cách đọc âm theo sách Tiếng Việt 1, từ ví dụ, hình]
+const ALPHABET = [
+  ["a","a","cá","🐟"],["ă","á","tắm","🛁"],["â","ớ","cân","⚖️"],["b","bờ","bò","🐄"],["c","cờ","cà","🍆"],
+  ["d","dờ","dê","🐐"],["đ","đờ","đèn","💡"],["e","e","xe","🚗"],["ê","ê","dế","🦗"],["g","gờ","gà","🐔"],
+  ["h","hờ","hoa","🌸"],["i","i","mì","🍜"],["k","ca","kéo","✂️"],["l","lờ","lá","🍃"],["m","mờ","mèo","🐱"],
+  ["n","nờ","nơ","🎀"],["o","o","ong","🐝"],["ô","ô","ô","☂️"],["ơ","ơ","cờ","🚩"],["p","pờ","pin","🔋"],
+  ["q","quờ","quà","🎁"],["r","rờ","rổ","🧺"],["s","sờ","sao","⭐"],["t","tờ","táo","🍎"],["u","u","cua","🦀"],
+  ["ư","ư","sư tử","🦁"],["v","vờ","voi","🐘"],["x","xờ","xe đạp","🚲"],["y","i dài","y tá","👩‍⚕️"]
+];
+const TONES = [
+  { name: "thanh ngang", short: "không dấu" }, { name: "dấu huyền", short: "huyền" }, { name: "dấu sắc", short: "sắc" },
+  { name: "dấu hỏi", short: "hỏi" }, { name: "dấu ngã", short: "ngã" }, { name: "dấu nặng", short: "nặng" }
+];
+// mỗi nguyên âm với 6 thanh: ngang, huyền, sắc, hỏi, ngã, nặng
+const VF = {
+  "a":"aàáảãạ","ă":"ăằắẳẵặ","â":"âầấẩẫậ","e":"eèéẻẽẹ","ê":"êềếểễệ","i":"iìíỉĩị",
+  "o":"oòóỏõọ","ô":"ôồốổỗộ","ơ":"ơờớởỡợ","u":"uùúủũụ","ư":"ưừứửữự","y":"yỳýỷỹỵ"
+};
+const isV = c => VF[c] !== undefined;
+// Vị trí đặt dấu thanh (quy tắc chính tả dùng trong sách giáo khoa mới: hoà, thuý)
+function toneIndex(ch) {
+  const s = ch.join("");
+  const uo = s.indexOf("ươ"); if (uo >= 0) return uo + 1;
+  for (let i = 0; i < ch.length; i++) if ("ăâêôơư".includes(ch[i])) return i;
+  const vs = []; ch.forEach((c, i) => { if (isV(c)) vs.push(i); });
+  if (!vs.length) return -1;
+  if (!isV(ch[ch.length - 1])) return vs[vs.length - 1];      // có âm cuối: dấu trên nguyên âm cuối cùng
+  if (vs.length === 1) return vs[0];
+  if (vs.length >= 3) return vs[1];
+  const pair = ch[vs[0]] + ch[vs[1]];
+  return ["oa", "oe", "uy"].includes(pair) ? vs[1] : vs[0];
+}
+function applyTone(word, t) {
+  if (!t) return word;
+  const ch = [...word], i = toneIndex(ch);
+  if (i < 0) return word;
+  ch[i] = VF[ch[i]][t];
+  return ch.join("");
+}
+const STOP = /(p|t|c|ch)$/; // vần có âm cuối p, t, c, ch chỉ đi với dấu sắc, dấu nặng
+
+const CONS = [["","(không)"],["b","bờ"],["c","cờ"],["ch","chờ"],["d","dờ"],["đ","đờ"],["g","gờ"],["gi","di"],["h","hờ"],["kh","khờ"],
+  ["l","lờ"],["m","mờ"],["n","nờ"],["ng","ngờ"],["nh","nhờ"],["p","pờ"],["ph","phờ"],["qu","quờ"],["r","rờ"],["s","sờ"],
+  ["t","tờ"],["th","thờ"],["tr","trờ"],["v","vờ"],["x","xờ"]];
+const CONS_SAY = Object.fromEntries(CONS.concat([["k","ca"],["gh","gờ"],["ngh","ngờ"]]));
+const RHYMES = [
+  ["Âm đơn", "a e ê i o ô ơ u ư y"],
+  ["Vần hai âm", "ai ao au âu ay ây eo êu ia iu oi ôi ơi ua ui ưa ưi ưu"],
+  ["Vần có n, m", "an ăn ân en ên in on ôn ơn un am ăm âm em êm im om ôm ơm um"],
+  ["Vần có ng, nh", "ang ăng âng ong ông ung ưng anh ênh inh"],
+  ["Vần có t, c, p, ch", "at ăt ât et êt it ot ôt ơt ut ưt ac ăc âc oc ôc uc ưc ap ăp âp ep êp ip op ôp ơp up ach êch ich"],
+  ["Vần khó", "oa oe uê uy oai oay oan oat oang uân uyên iên iêt iêu iêng uôi uôn uông ươi ươn ương ươc"]
+];
+
+function buildSyllable(cons, rhyme, tone) {
+  let c = cons, r = rhyme, note = "", bad = "";
+  const f = r[0];
+  if (c === "c" && "eêiy".includes(f)) { c = "k"; note = "Đứng trước e, ê, i ta viết k (đọc là ca)."; }
+  if (c === "g" && "eêi".includes(f)) { c = "gh"; note = "Đứng trước e, ê, i ta viết gh (gờ kép)."; }
+  if (c === "ng" && "eêi".includes(f)) { c = "ngh"; note = "Đứng trước e, ê, i ta viết ngh (ngờ kép)."; }
+  if (c === "gi" && f === "i") r = r.slice(1) || "";
+  if (c === "qu" && "uưoô".includes(f)) bad = "Âm qu không ghép với vần bắt đầu bằng " + f + ".";
+  if (!c && r.startsWith("iê")) { r = "y" + r.slice(1); note = "Không có âm đầu thì viết yê (yên, yêu)."; }
+  let rt = applyTone(r, tone);
+  if (c === "gi" && !r) rt = applyTone("i", tone), c = "g"; // gi + i = gì
+  return { c, r: rt, base: c + r, word: c + rt, note, bad };
+}
+
+const SENTENCES = [
+  "Bé đi học.",
+  "Mẹ mua cá ở chợ.",
+  "Bà kể chuyện cho bé nghe.",
+  "Bố chở bé đi chơi công viên.",
+  "Chú mèo nằm ngủ bên bếp.",
+  "Em yêu cô giáo và các bạn.",
+  "Mùa hè, ve kêu râm ran.",
+  "Cây bàng trước sân trường xanh mát.",
+  "Gà mẹ dẫn đàn gà con đi kiếm mồi.",
+  "Bé chăm chỉ tập viết chữ đẹp."
+];
+
+/* ================= TIẾNG ANH: DỮ LIỆU ================= */
+// [từ, phiên âm IPA (giọng Mỹ), nghĩa, hình]
+const EN = {
+  "Con vật": [["cat","/kæt/","con mèo","🐱"],["dog","/dɔːɡ/","con chó","🐶"],["bird","/bɝːd/","con chim","🐦"],["fish","/fɪʃ/","con cá","🐟"],["duck","/dʌk/","con vịt","🦆"],["cow","/kaʊ/","con bò","🐄"],["pig","/pɪɡ/","con lợn","🐷"],["chicken","/ˈtʃɪkɪn/","con gà","🐔"],["elephant","/ˈelɪfənt/","con voi","🐘"],["monkey","/ˈmʌŋki/","con khỉ","🐒"]],
+  "Màu sắc": [["red","/red/","màu đỏ","🔴"],["blue","/bluː/","màu xanh dương","🔵"],["green","/ɡriːn/","màu xanh lá","🟢"],["yellow","/ˈjeloʊ/","màu vàng","🟡"],["orange","/ˈɔːrɪndʒ/","màu cam","🟠"],["purple","/ˈpɝːpl/","màu tím","🟣"],["brown","/braʊn/","màu nâu","🟤"],["black","/blæk/","màu đen","⚫"],["white","/waɪt/","màu trắng","⚪"]],
+  "Số đếm": [["one","/wʌn/","số 1","1️⃣"],["two","/tuː/","số 2","2️⃣"],["three","/θriː/","số 3","3️⃣"],["four","/fɔːr/","số 4","4️⃣"],["five","/faɪv/","số 5","5️⃣"],["six","/sɪks/","số 6","6️⃣"],["seven","/ˈsevn/","số 7","7️⃣"],["eight","/eɪt/","số 8","8️⃣"],["nine","/naɪn/","số 9","9️⃣"],["ten","/ten/","số 10","🔟"]],
+  "Hoa quả": [["apple","/ˈæpl/","quả táo","🍎"],["banana","/bəˈnænə/","quả chuối","🍌"],["orange","/ˈɔːrɪndʒ/","quả cam","🍊"],["grapes","/ɡreɪps/","quả nho","🍇"],["mango","/ˈmæŋɡoʊ/","quả xoài","🥭"],["watermelon","/ˈwɔːtərmelən/","dưa hấu","🍉"],["strawberry","/ˈstrɔːberi/","dâu tây","🍓"],["pineapple","/ˈpaɪnæpl/","quả dứa","🍍"]],
+  "Đồ dùng học tập": [["book","/bʊk/","quyển sách","📕"],["pen","/pen/","bút mực","🖊️"],["pencil","/ˈpensl/","bút chì","✏️"],["ruler","/ˈruːlər/","thước kẻ","📏"],["bag","/bæɡ/","cặp sách","🎒"],["crayon","/ˈkreɪɑːn/","bút sáp màu","🖍️"],["teacher","/ˈtiːtʃər/","giáo viên","🧑‍🏫"],["school","/skuːl/","trường học","🏫"]],
+  "Gia đình": [["mother","/ˈmʌðər/","mẹ","👩"],["father","/ˈfɑːðər/","bố","👨"],["baby","/ˈbeɪbi/","em bé","👶"],["grandmother","/ˈɡrænmʌðər/","bà","👵"],["grandfather","/ˈɡrænfɑːðər/","ông","👴"],["sister","/ˈsɪstər/","chị gái, em gái","👧"],["brother","/ˈbrʌðər/","anh trai, em trai","👦"]],
+  "Cơ thể": [["eye","/aɪ/","mắt","👁️"],["ear","/ɪr/","tai","👂"],["nose","/noʊz/","mũi","👃"],["mouth","/maʊθ/","miệng","👄"],["hand","/hænd/","bàn tay","✋"],["foot","/fʊt/","bàn chân","🦶"]]
+};
+// Tên chữ cái tiếng Anh viết theo cách đọc để máy đọc đúng
+const EN_ABC = [["A","ay","apple","🍎"],["B","bee","ball","⚽"],["C","see","cat","🐱"],["D","dee","dog","🐶"],["E","ee","egg","🥚"],["F","eff","fish","🐟"],["G","gee","goat","🐐"],["H","aitch","hat","🎩"],["I","eye","ice cream","🍦"],["J","jay","juice","🧃"],["K","kay","kite","🪁"],["L","el","lion","🦁"],["M","em","moon","🌙"],["N","en","nose","👃"],["O","oh","orange","🍊"],["P","pee","pig","🐷"],["Q","cue","queen","👸"],["R","ar","rabbit","🐰"],["S","ess","sun","☀️"],["T","tee","tiger","🐯"],["U","you","umbrella","☂️"],["V","vee","violin","🎻"],["W","double you","water","💧"],["X","ex","box","📦"],["Y","why","yo-yo","🪀"],["Z","zee","zebra","🦓"]];
+const PHRASES = [["Hello!","Xin chào!"],["Good morning!","Chào buổi sáng!"],["How are you?","Bạn có khỏe không?"],["I'm fine, thank you.","Mình khỏe, cảm ơn bạn."],["What's your name?","Bạn tên là gì?"],["My name is Nam.","Tên mình là Nam."],["How old are you?","Bạn mấy tuổi?"],["I'm six years old.","Mình sáu tuổi."],["Thank you!","Cảm ơn!"],["Goodbye! See you later.","Tạm biệt! Hẹn gặp lại."],["Stand up, please.","Mời các con đứng lên."],["Sit down, please.","Mời các con ngồi xuống."]];
+
+/* ================= ĐIỀU HƯỚNG ================= */
+const SUBS = {
+  vn: [["bedoc","Bé tự đọc"],["chu","Chữ cái"],["dau","Dấu thanh"],["ghep","Ghép vần"],["doc","Tập đọc"]],
+  math: [["dem","Đếm hình"],["tinh","Cộng, trừ"],["sosanh","So sánh"]],
+  en: [["tu","Từ vựng"],["abc","Chữ cái ABC"],["cau","Mẫu câu"],["do","Nghe và chọn"]]
+};
+const state = { tab: store.get("tab", "vn"), sub: store.get("sub", {}) };
+function go(tab, sub) {
+  state.tab = tab; state.sub[tab] = sub || state.sub[tab] || SUBS[tab][0][0];
+  store.set("tab", tab); store.set("sub", state.sub);
+  bdStop();
+  document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === tab));
+  $("#subtabs").innerHTML = SUBS[tab].map(([k, n]) => `<button class="chip" data-sub="${k}" aria-pressed="${k === state.sub[tab]}">${n}</button>`).join("");
+  VIEWS[tab + ":" + state.sub[tab]]($("#view"));
+}
+document.addEventListener("click", e => {
+  const t = e.target.closest(".tab"); if (t) return go(t.dataset.tab);
+  const s = e.target.closest("[data-sub]"); if (s) return go(state.tab, s.dataset.sub);
+  const sp = e.target.closest("[data-say]"); if (sp) say(sp.dataset.say, sp.dataset.lang || "vi");
+});
+
+/* ================= CÁC MÀN HÌNH ================= */
+const VIEWS = {};
+
+/* ================= BÉ TỰ ĐỌC (nghe bé đọc, sai thì đọc lại, 3 lần sai thì đánh vần) ================= */
+const TONE_OF = {};
+for (const [b, s] of Object.entries(VF)) [...s].forEach((ch, i) => TONE_OF[ch] = [b, i]);
+const ONSETS = ["ngh","ng","gh","gi","qu","ch","kh","nh","ph","th","tr","b","c","d","đ","g","h","k","l","m","n","p","r","s","t","v","x"];
+const cleanW = w => w.toLowerCase().normalize("NFC").replace(/[.,!?;:"“”()…]/g, "");
+// tách một tiếng thành âm đầu + vần + thanh, ví dụ "túi" -> t + ui + sắc
+function parseSyl(w) {
+  w = cleanW(w);
+  let tone = 0, base = "";
+  for (const ch of w) { const t = TONE_OF[ch]; if (t) { base += t[0]; if (t[1]) tone = t[1]; } else base += ch; }
+  let on = ONSETS.find(o => base.startsWith(o) && base.length > o.length) || "";
+  if (!on && base === "gi") on = "gi";
+  let rh = base.slice(on.length);
+  if (on === "gi" && !rh) rh = "i";
+  return { on, rh, base, tone, word: w };
+}
+// chuỗi đánh vần như cô giáo: "tờ – ui – tui – sắc – túi"
+function spellParts(w) {
+  const p = parseSyl(w), out = [];
+  if (p.on) out.push(CONS_SAY[p.on] || p.on, p.rh, p.base); else out.push(p.rh);
+  if (p.tone) out.push(TONES[p.tone].short, p.word);
+  return out;
+}
+/* ================= SÁCH TIẾNG VIỆT 1 – TẬP MỘT (Kết nối tri thức với cuộc sống) ================= */
+// [số bài, tên bài, âm đầu mới, vần mới, dấu thanh mới (1 huyền, 2 sắc, 3 hỏi, 4 ngã, 5 nặng)]
+const TV1 = [
+  [1,"A a","","a"],[2,"B b, dấu huyền","b","",1],[3,"C c, dấu sắc","c","",2],[4,"E e, Ê ê","","e ê"],[5,"Ôn tập và kể chuyện"],
+  [6,"O o, dấu hỏi","","o",3],[7,"Ô ô, dấu nặng","","ô",5],[8,"D d, Đ đ","d đ",""],[9,"Ơ ơ, dấu ngã","","ơ",4],[10,"Ôn tập và kể chuyện"],
+  [11,"I i, K k","k","i"],[12,"H h, L l","h l",""],[13,"U u, Ư ư","","u ư"],[14,"Ch ch, Kh kh","ch kh",""],[15,"Ôn tập và kể chuyện"],
+  [16,"M m, N n","m n",""],[17,"G g, Gi gi","g gi",""],[18,"Gh gh, Nh nh","gh nh",""],[19,"Ng ng, Ngh ngh","ng ngh",""],[20,"Ôn tập và kể chuyện"],
+  [21,"R r, S s","r s",""],[22,"T t, Tr tr","t tr",""],[23,"Th th, ia","th","ia"],[24,"ua, ưa","","ua ưa"],[25,"Ôn tập và kể chuyện"],
+  [26,"Ph ph, Qu qu","ph qu",""],[27,"V v, X x","v x",""],[28,"Y y","","y"],[29,"Luyện tập chính tả"],[30,"Ôn tập và kể chuyện"],
+  [31,"an ăn ân"],[32,"on ôn ơn"],[33,"en ên in un"],[34,"am ăm âm"],[35,"Ôn tập và kể chuyện"],
+  [36,"om ôm ơm"],[37,"em êm im um"],[38,"ai ay ây"],[39,"oi ôi ơi"],[40,"Ôn tập và kể chuyện"],
+  [41,"ui ưi"],[42,"ao eo"],[43,"au âu êu"],[44,"iu ưu"],[45,"Ôn tập và kể chuyện"],
+  [46,"ac ăc âc"],[47,"oc ôc uc ưc"],[48,"at ăt ât"],[49,"ot ôt ơt"],[50,"Ôn tập và kể chuyện"],
+  [51,"et êt it"],[52,"ut ưt"],[53,"ap ăp âp"],[54,"op ôp ơp"],[55,"Ôn tập và kể chuyện"],
+  [56,"ep êp ip up"],[57,"anh ênh inh"],[58,"ach êch ich"],[59,"ang ăng âng"],[60,"Ôn tập và kể chuyện"],
+  [61,"ong ông ung ưng"],[62,"iêc iên iêp"],[63,"iêng iêm yên"],[64,"iêt iêu yêu"],[65,"Ôn tập và kể chuyện"],
+  [66,"uôi uôm"],[67,"uôc uôt"],[68,"uôn uông"],[69,"ươi ươu"],[70,"Ôn tập và kể chuyện"],
+  [71,"ươc ươt"],[72,"ươm ươp"],[73,"ươn ương"],[74,"oa oe"],[75,"Ôn tập và kể chuyện"],
+  [76,"oan oăn oat oăt"],[77,"oai uê uy"],[78,"uân uât"],[79,"uyên uyêt"],[80,"Ôn tập và kể chuyện"],
+  [81,"Ôn tập"],[82,"Ôn tập"],[83,"Ôn tập"]
+].map(([n, title, c, r, t]) => {
+  const review = /^(Ôn tập|Luyện tập)/.test(title);
+  if (c === undefined && !review) { c = ""; r = title; }
+  return { n, title, review, cons: (c || "").split(" ").filter(Boolean), rhymes: (r || "").split(" ").filter(Boolean), tone: t || 0 };
+});
+// tính chữ, vần, dấu bé đã học tới mỗi bài
+(() => {
+  const C = new Set([""]), R = new Set(), T = new Set([0]);
+  TV1.forEach((L, i) => {
+    L.cons.forEach(x => C.add(x)); L.rhymes.forEach(x => R.add(x)); if (L.tone) T.add(L.tone);
+    L.known = { C: new Set(C), R: new Set(R), T: new Set(T) };
+    if (L.n === 29) { L.cons = ["c", "k", "g", "gh", "ng", "ngh"]; return; } // luyện c/k, g/gh, ng/ngh
+    if (L.review) {
+      const range = { 81: [31, 49], 82: [51, 69], 83: [71, 79] }[L.n];
+      const prev = range ? TV1.filter(x => !x.review && x.n >= range[0] && x.n <= range[1]) : TV1.slice(Math.max(0, i - 4), i).filter(x => !x.review);
+      L.cons = prev.flatMap(x => x.cons); L.rhymes = prev.flatMap(x => x.rhymes); L.reviewOf = range ? [range[0] + "–" + range[1]] : prev.map(x => x.n);
+    }
+  });
+})();
+// Kho từ và câu tự soạn cho bé luyện (không chép từ sách)
+const WORD_BANK = `ba, bà, bé, bê, bế, bè, ca, cà, cá, cò, có, cỏ, bò, bó, bố, cô, cổ, bộ, da, dê, dế, đá, đò, đồ, đế, đổ, bơ, cờ, đỡ, bi, kẻ, kể, kê, kì, kệ, hè, hồ, hổ, lá, lê, lọ, lò, hồ cá, lá cờ, bờ hồ, đu đủ, củ, cú, dù, hũ, lừ đừ, chó, chợ, chè, chị, chú, chữ, khế, khỉ, kho, cá kho, khô, mẹ, má, me, mũ, mì, mơ, mỏ, nơ, nụ, na, no, bố mẹ, ca nô, gà, gỗ, gõ, gò, giỏ, giá, giò, gió, giữ, ghế, ghi, ghẹ, ghé, nhà, nho, nhỏ, nhớ, ngõ, ngô, ngủ, ngã, nghé, nghỉ, nghe, rổ, rá, rễ, sẻ, số, sò, su su, tô, tủ, tổ, tò he, tre, trà, trê, trẻ, thỏ, thả, thợ, thư, mía, tía tô, thìa, cua, rùa, múa, chua, mưa, dưa, cửa, sữa, ngựa, dưa lê, phố, phở, pha, quả, quê, quà, quạ, vé, vở, vó, vẽ, xe, xẻ, xô, xa, y tá, ý, chú ý, đi xe, đi chợ, bạn, bàn, cá rán, khăn, ăn, cân, sân, con, nón, ngon, thôn, ôn bài, sơn, cơn mưa, đèn, khen, nến, tên, số chín, đun, giun, vun, cam, tăm, nấm, cái ấm, tôm, cơm, rơm, xóm, tem, kem, đêm, mềm, chim, sim, chùm nho, hai, tai, máy, tay, dây, mây, cây, voi, còi, bơi, đồi, ổi, chổi, túi, núi, ngửi, gửi, bụi, sao, cáo, chào, mèo, kéo, kẹo, leo trèo, cau, rau, sâu, câu, trâu, kêu, lều, sếu, rìu, địu, cừu, cứu, bác, các, lạc, quả gấc, bậc, sóc, học, cốc, gốc cây, cúc, đục, mực, hát, cát, bát, mắt, mặt, đất, mật ong, chim hót, ngọt, cà rốt, cột, ớt, vợt, thớt, vẹt, tết, mệt, ít, vịt, mít, bút, sút, mứt, nứt, tháp, sạp, cặp, bắp, tập, nấp, họp, cọp, hộp, lớp, dép, bếp, kịp, búp bê, giúp, chanh, xanh, cành, kênh, tính, kính, xinh, sách, ếch, lệch, xích, thích, lịch, bàng, vàng, trăng, măng, tầng, nâng, bóng, sông, trống, súng, rừng, trứng, gừng, cung, tiệc, xiếc, biển, cô tiên, điện, tiếp, thiếp, tiếng, giếng, chiêng, cái liềm, tiêm, yên xe, viết, biết, chiếu, diều, yêu, chuối, muối, buổi sáng, nuôi, buồm, nhuộm, đuốc, thuốc, chuột, buộc, chuồn chuồn, cuộn, chuông, xuồng, rau muống, tươi, mười, người, bưởi, hươu, nước, thước, bước, lướt, mượt, ướt, bướm, mướp, vườn, lươn, gương, giường, đường, trường, hoa, loa, khoe, ngoan, toán, băn khoăn, tóc xoăn, hoạt hình, thoát, loắt choắt, khoai, ngoài, xum xuê, hoa huệ, khuy áo, huy hiệu, mùa xuân, tuần, luật, nghệ thuật, thuyền, câu chuyện, khuyên, tuyết, trăng khuyết`.split(",").map(s => s.trim()).filter(Boolean);
+const SENT_BANK = ["Bé có bê.","Bà bế bé.","Bé có ca.","Bà có bò.","Cô có cờ.","Bố đi đò.","Dì có dế.","Bé đi bộ.","Bà ở quê.","Bé vẽ cá.","Mẹ kể, bé nghe.","Chị Hà có nơ đỏ.","Bố mẹ đi chợ.","Bé ghi chữ.","Nhà bà có ghế gỗ.","Mẹ mua cá.","Bé ăn cơm.","Bé đi nhà trẻ.","Ông tưới cây.","Em vẽ con mèo.","Trời mưa, bé che ô.","Bé thích xem xiếc.","Mẹ nấu canh cua.","Bé chăm học bài.","Chú chó vẫy đuôi.","Cây bưởi sai quả.","Bé tập viết chữ.","Bà trồng rau muống.","Mùa xuân, hoa nở.","Thuyền trôi trên sông.","Chim hót trong vườn.","Bé ngoan, mẹ khen.","Mèo trèo cây cau.","Bé có cái túi nhỏ.","Chú sóc nhặt hạt dẻ.","Bé cầm bút viết bài.","Đêm rằm, trăng sáng.","Chú vịt bơi dưới ao.","Ếch kêu ộp ộp.","Bé đọc sách ở thư viện."].concat(SENTENCES);
+// Bài đọc bố mẹ đã chép từ sách (ảnh bố mẹ gửi)
+const BOOK_EXTRA = { 41: ["Bà gửi cho Hà túi kẹo.", "Lan gửi thư cho Hà kể về quê Lan.", "Ở đó, có nhà sàn nằm ven đồi.", "Mùa này, chim ca rộn rã, sim nở rộ tím cả núi đồi.", "Lan mời Hà lên thăm quê Lan."] };
+// so tiếng không phụ thuộc kiểu bỏ dấu (hoà = hòa)
+const sylKey = w => { const p = parseSyl(w); return p.base + p.tone; };
+const sylsOf = t => t.split(/\s+/).map(cleanW).filter(Boolean);
+function readable(text, L) {
+  return sylsOf(text).every(s => { const p = parseSyl(s); return L.known.C.has(p.on) && L.known.R.has(p.rh) && L.known.T.has(p.tone); });
+}
+function hasTarget(text, L) {
+  return sylsOf(text).some(s => { const p = parseSyl(s); return L.cons.includes(p.on) || L.rhymes.includes(p.rh) || (L.tone && p.tone === L.tone); });
+}
+function lessonItems(n) {
+  const L = TV1.find(x => x.n === n) || TV1[0], out = [];
+  if (!L.review) {
+    out.push(...L.rhymes);
+    L.cons.forEach(c => ["a", "e", "ê", "i", "o", "ô", "ơ", "u", "ư"].filter(r => L.known.R.has(r)).forEach(r => {
+      const s = buildSyllable(c, r, 0); if (!s.bad && s.c === c && out.length < L.rhymes.length + 4 * L.cons.length) out.push(s.word);
+    }));
+  }
+  let words = WORD_BANK.filter(w => readable(w, L) && hasTarget(w, L));
+  if (words.length > 14) { const step = words.length / 14; words = Array.from({ length: 14 }, (_, k) => words[Math.floor(k * step)]); } // trải đều các vần
+  out.push(...words);
+  const sents = SENT_BANK.filter(s => readable(s, L));
+  const withT = sents.filter(s => hasTarget(s, L));
+  out.push(...(withT.length ? withT.slice(0, 4) : sents.slice(-3)));
+  out.push(...(BOOK_EXTRA[n] || []), ...store.get("custom-" + n, []));
+  return [...new Set(out)];
+}
+const plain = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").toLowerCase();
+function searchLessons(q) {
+  q = plain(q.trim()).replace(/^bai\s*/, "");
+  if (!q) return TV1;
+  if (/^\d+$/.test(q)) return TV1.filter(L => String(L.n).startsWith(q));
+  return TV1.filter(L => plain(L.title).split(/[\s,]+/).some(w => w.startsWith(q)) || plain(L.title).includes(q));
+}
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let srBroken = false, curRec = null;
+// Chế độ tự động: bấm "Bắt đầu" một lần, máy tự nghe – chấm – nhắc đọc lại – đánh vần – chuyển câu
+let bdRunning = false, bdSess = 0, bdNoHear = 0, bdMsg = null;
+function abortRec() { if (curRec) { try { curRec.abort(); } catch (e) {} curRec = null; } }
+function bdStop() { bdRunning = false; bdSess++; abortRec(); speakToken++; if (synth) synth.cancel(); }
+function listen(long) {
+  return new Promise((resolve, reject) => {
+    const r = new SR(); curRec = r;
+    r.lang = "vi-VN"; r.maxAlternatives = 5; r.interimResults = false; r.continuous = long;
+    const alts = []; let timer, done = false;
+    const maxT = setTimeout(() => finish(), long ? 20000 : 8000);
+    function finish() { if (done) return; done = true; clearTimeout(timer); clearTimeout(maxT); try { r.stop(); } catch (e) {} if (curRec === r) curRec = null; resolve(alts); }
+    r.onresult = e => {
+      for (let i = e.resultIndex; i < e.results.length; i++) { const res = e.results[i]; if (res.isFinal) for (const a of res) alts.push(a.transcript); }
+      clearTimeout(timer); timer = setTimeout(finish, long ? 2500 : 700);
+    };
+    r.onerror = e => { if (done) return; done = true; clearTimeout(maxT); clearTimeout(timer); if (curRec === r) curRec = null; e.error === "no-speech" || e.error === "aborted" ? resolve(alts) : reject(e.error); };
+    r.onend = finish;
+    try { r.start(); } catch (e) { done = true; clearTimeout(maxT); curRec = null; reject("not-allowed"); }
+  });
+}
+
+VIEWS["vn:bedoc"] = v => {
+  let N = store.get("bdN", 41), I = store.get("bdI", 0), tries = 0, query = "";
+  const draw = () => {
+    const my = ++bdSess;
+    const alive = () => my === bdSess && state.tab === "vn" && state.sub.vn === "bedoc";
+    let busy = false, round = 0;
+    const LS = TV1.find(x => x.n === N) || TV1[0]; N = LS.n;
+    const items = lessonItems(N); if (I >= items.length) I = 0;
+    store.set("bdN", N); store.set("bdI", I);
+    const text = items[I], words = text.split(/\s+/).filter(Boolean);
+    const useMic = SR && !srBroken;
+    if (!useMic) bdRunning = false;
+    v.innerHTML = `<div><h2>${esc(S.name)} tự đọc</h2><p class="hint">${useMic
+      ? "Bấm <b>Bắt đầu</b> một lần. Máy tự nghe bé đọc, tự chấm, đọc sai thì nhắc đọc lại, sai 3 lần thì đánh vần cho bé đọc theo, đọc đúng thì tự sang câu tiếp."
+      : "Máy này không nghe được (cần Chrome hoặc Edge). Bố mẹ nghe bé đọc rồi bấm Đúng hoặc Sai, sai 3 lần máy sẽ đánh vần cho bé đọc theo."} Chạm vào tiếng bé đọc sai để đánh dấu.</p></div>
+    <div class="book">
+      <label for="lessonSearch" class="booklbl">Tiếng Việt 1 – Tập một · tìm bài</label>
+      <input type="search" id="lessonSearch" placeholder="Gõ số bài (41) hoặc âm, vần (ui, ng…)" value="${esc(query)}" autocomplete="off">
+      <div class="lessonlist" id="lessonList"></div>
+    </div>
+    <h3 class="lessonname">Bài ${N}: ${esc(LS.title)}${LS.reviewOf ? ` <small>(ôn bài ${LS.reviewOf.join(", ")})</small>` : ""}</h3>
+    <div class="status"><span>${I + 1} / ${items.length}</span><span>Lần đọc sai <span class="dots" id="dots">${[0,1,2].map(i => `<i class="${i < tries ? "x" : ""}"></i>`).join("")}</span></span></div>
+    <div class="sentence oli">${words.map((w, i) => `<button class="word" data-w="${i}" aria-label="Đánh dấu tiếng ${esc(w)} đọc sai">${esc(w)}</button>`).join("")}</div>
+    <div class="feedback" id="fb" aria-live="polite"></div>
+    <div id="spell"></div>
+    ${useMic ? `<div class="row" style="justify-content:center"><button class="btn mic${bdRunning ? "" : " sun"}" id="mic">${bdRunning ? "■ Dừng nghe" : "▶ Bắt đầu – máy tự nghe bé đọc"}</button></div><p class="heard" id="heard"></p>` : ""}
+    <div class="judge"><button class="btn okb" id="ok">✓ Đúng</button><button class="btn badb" id="bad">✗ Sai</button></div>
+    <div class="row"><button class="btn alt" id="spellBtn">Đánh vần giúp bé</button><button class="btn alt" id="model">Nghe mẫu</button><button class="btn alt" id="prev">‹ Trước</button><button class="btn alt" id="next">Tiếp ›</button></div>
+    <details><summary>Bố mẹ chép bài đọc trong sách cho Bài ${N}</summary>
+      <label for="customTxt" class="hint">Mỗi dòng là một từ hoặc một câu. Máy lưu riêng cho Bài ${N} và thêm vào cuối bài.</label>
+      <textarea id="customTxt" placeholder="túi&#10;gửi thư&#10;Bà gửi cho Hà túi kẹo.">${esc(store.get("custom-" + N, []).join("\n"))}</textarea>
+      <div class="row"><button class="btn" id="saveCustom">Lưu bài</button><button class="btn alt" id="clearCustom">Xoá bài</button></div>
+    </details>`;
+
+    const wEls = [...v.querySelectorAll(".word")], fb = $("#fb"), mic = $("#mic"), heardEl = $("#heard");
+    const setFb = (cls, t) => { fb.className = "feedback " + cls; fb.textContent = t; };
+    if (bdMsg) { setFb(bdMsg[0], bdMsg[1]); bdMsg = null; }
+    const dots = () => $("#dots").innerHTML = [0,1,2].map(i => `<i class="${i < tries ? "x" : ""}"></i>`).join("");
+    wEls.forEach(b => b.onclick = () => b.classList.toggle("miss"));
+    const missed = () => wEls.map((b, i) => b.classList.contains("miss") ? i : -1).filter(i => i >= 0);
+    const next = d => { I = (I + d + items.length) % items.length; tries = 0; draw(); };
+    const micState = listening => { if (!mic) return; mic.classList.toggle("listening", listening); mic.textContent = listening ? "● Đang nghe… (bấm để dừng)" : "■ Dừng nghe"; };
+
+    async function guide(idxs) {
+      setFb("bad", `Cùng đánh vần nhé, ${S.name}!`);
+      $("#spell").innerHTML = `<div class="spellbox">${idxs.map(i => `<span>${esc(cleanW(words[i]))}: ${spellParts(words[i]).map(esc).join(" – ")}</span>`).join("")}</div>`;
+      const seq = [{ t: `${S.name} cùng đánh vần với cô nhé.` }];
+      idxs.forEach(i => {
+        const el = wEls[i], w = cleanW(words[i]);
+        spellParts(words[i]).forEach(t => seq.push({ t, el }));
+        seq.push({ t: `${S.name} đọc theo cô: ${w}`, el }, { wait: 1800, el });
+      });
+      seq.push({ t: words.length > 1 ? `Bây giờ ${S.name} đọc lại cả câu nhé.` : `Bây giờ ${S.name} tự đọc lại nhé.` });
+      await speakSeq(seq, 300);
+    }
+    async function judge(ok, miss) {
+      if (busy) return; busy = true;
+      if (ok) {
+        wEls.forEach(e => { e.classList.remove("miss"); e.classList.add("good"); });
+        addStar(); setFb("ok", `Đúng rồi! ${S.name} đọc giỏi quá!`);
+        await speakSeq([{ t: `Đúng rồi! ${S.name} đọc giỏi quá!` }]);
+        if (!alive()) return;
+        if (I === items.length - 1) {
+          await say(`Hoan hô! ${S.name} đã đọc hết bài rồi.`);
+          if (bdRunning) { bdRunning = false; bdMsg = ["ok", `${S.name} đã đọc hết bài. Chọn bài khác hoặc bấm Bắt đầu để đọc lại.`]; }
+        }
+        return next(1);
+      }
+      tries++; dots();
+      if (!miss.length) miss = missed();
+      if (!miss.length) miss = wEls.map((_, i) => i);
+      miss.forEach(i => wEls[i].classList.add("miss"));
+      if (tries < 3) {
+        const t = `Chưa đúng rồi. ${S.name} đọc lại nhé!`;
+        setFb("bad", `${t} (lần ${tries + 1}/3)`);
+        await speakSeq([{ t }]);
+      } else {
+        await guide([...new Set(miss)]);
+        tries = 0; dots();
+      }
+      if (!alive()) return;
+      busy = false;
+      if (bdRunning) { wEls.forEach(e => e.classList.remove("miss")); listenRound(false); }
+    }
+    // một lượt nghe: máy chờ bé đọc xong rồi so từng tiếng với chữ trên vở
+    async function listenRound(prompt) {
+      if (!alive() || !bdRunning || busy) return;
+      busy = true; const r = ++round;
+      if (prompt) { await speakSeq([{ t: `${S.name} đọc nhé!` }]); if (!alive() || r !== round) return; }
+      micState(true); heardEl.textContent = "";
+      let alts;
+      try { alts = await listen(words.length > 1); }
+      catch (err) {
+        if (!alive()) return;
+        busy = false; micState(false);
+        if (["not-allowed", "service-not-allowed", "audio-capture", "network"].includes(err)) {
+          srBroken = true; bdRunning = false;
+          bdMsg = ["bad", err === "network" ? "Máy cần có mạng để nghe bé đọc. Bố mẹ chấm bằng nút Đúng hoặc Sai nhé." : "Không mở được micro. Hãy cho phép trình duyệt dùng micro. iPad/iPhone: Cài đặt › Cài đặt chung › Bàn phím › bật Đọc chính tả (và thêm Tiếng Việt). Hoặc bố mẹ chấm bằng nút Đúng / Sai."];
+          draw();
+        }
+        return;
+      }
+      if (!alive() || r !== round) return;
+      busy = false; micState(false);
+      if (!bdRunning) return;
+      if (!alts.length) {
+        if (++bdNoHear >= 3) { bdRunning = false; bdNoHear = 0; bdMsg = ["bad", `Máy tạm dừng vì không nghe thấy ${S.name}. Bấm Bắt đầu để đọc tiếp.`]; return draw(); }
+        const t = `Cô chưa nghe thấy. ${S.name} đọc to hơn nhé!`;
+        setFb("bad", t); busy = true; await speakSeq([{ t }]); busy = false;
+        return listenRound(false);
+      }
+      bdNoHear = 0;
+      heardEl.textContent = "Máy nghe được: " + alts[0];
+      const heard = new Set(alts.join(" ").split(/\s+/).map(cleanW).filter(Boolean).map(sylKey));
+      const miss = words.map((w, i) => heard.has(sylKey(w)) ? -1 : i).filter(i => i >= 0);
+      judge(miss.length === 0 || (words.length >= 6 && miss.length <= 1), miss);
+    }
+    // bố mẹ bấm chấm tay thì ngắt lượt nghe đang chạy
+    const manual = ok => { if (curRec) { round++; abortRec(); busy = false; micState(false); } judge(ok, []); };
+
+    $("#ok").onclick = () => manual(true);
+    $("#bad").onclick = () => manual(false);
+    $("#spellBtn").onclick = () => { round++; abortRec(); busy = false; micState(false); const m = missed(); guide(m.length ? m : wEls.map((_, i) => i)).then(() => { if (alive() && bdRunning) listenRound(false); }); };
+    $("#model").onclick = () => { round++; abortRec(); busy = false; micState(false); speakSeq(words.length > 1 ? [{ t: text }] : [{ t: cleanW(text), el: wEls[0] }]).then(() => { if (alive() && bdRunning) listenRound(false); }); };
+    $("#prev").onclick = () => next(-1);
+    $("#next").onclick = () => next(1);
+    const listEl = $("#lessonList"), search = $("#lessonSearch");
+    const renderList = () => {
+      const found = searchLessons(query);
+      listEl.innerHTML = found.length ? found.map(L => `<button data-n="${L.n}" aria-pressed="${L.n === N}"><b>Bài ${L.n}</b> ${esc(L.title)}</button>`).join("") : `<p class="hint">Không thấy bài nào. Thử gõ số bài hoặc một vần khác.</p>`;
+      listEl.querySelectorAll("[data-n]").forEach(b => b.onclick = () => { N = +b.dataset.n; I = 0; tries = 0; query = ""; draw(); });
+      const cur = listEl.querySelector('[aria-pressed="true"]'); if (cur && !query) listEl.scrollTop = cur.offsetTop - listEl.offsetTop - 40;
+    };
+    renderList();
+    search.oninput = () => { query = search.value; renderList(); };
+    search.onkeydown = e => { if (e.key === "Enter") { const f = searchLessons(query); if (f.length) { N = f[0].n; I = 0; tries = 0; query = ""; draw(); } } };
+    $("#saveCustom").onclick = () => { const lines = $("#customTxt").value.split("\n").map(x => x.trim()).filter(Boolean); store.set("custom-" + N, lines); draw(); };
+    $("#clearCustom").onclick = () => { store.set("custom-" + N, []); I = 0; draw(); };
+    if (mic) mic.onclick = () => {
+      if (bdRunning) { bdStop(); bdMsg = ["", "Đã dừng nghe."]; draw(); }
+      else {
+        // iPad/iPhone: phải mở khoá giọng đọc và xin quyền micro ngay trong lúc bấm
+        try { if (synth) synth.speak(new SpeechSynthesisUtterance(" ")); } catch (e) {}
+        try { navigator.mediaDevices && navigator.mediaDevices.getUserMedia({ audio: true }).then(s => s.getTracks().forEach(t => t.stop())).catch(() => {}); } catch (e) {}
+        bdRunning = true; bdNoHear = 0; draw();
+      }
+    };
+    abortRec();
+    setTimeout(() => {
+      if (!alive()) return;
+      if (bdRunning) listenRound(true);
+      else if (!busy) say(`${S.name} đọc nhé!`);
+    }, 300);
+  };
+  draw();
+};
+
+VIEWS["vn:chu"] = v => {
+  v.innerHTML = `<div><h2>Bảng chữ cái tiếng Việt</h2><p class="hint">29 chữ cái. Bé chạm vào chữ để nghe đọc âm và từ ví dụ.</p></div>
+  <div class="cards">${ALPHABET.map((a, i) => `<button class="card" data-i="${i}"><span class="big">${a[0].toUpperCase()} ${a[0]}</span><span class="pic" aria-hidden="true">${a[3]}</span><span class="w">${a[2]}</span></button>`).join("")}</div>`;
+  v.querySelectorAll(".card").forEach(b => b.onclick = () => { const a = ALPHABET[b.dataset.i]; speakSeq([{ t: a[1], el: b }, { t: a[2], el: b }]); });
+};
+
+VIEWS["vn:dau"] = v => {
+  const bases = ["a", "ba", "ma", "la", "co", "me", "hô"];
+  let base = "ba";
+  const draw = () => {
+    v.innerHTML = `<div><h2>Sáu thanh của tiếng Việt</h2><p class="hint">Chọn một tiếng, rồi chạm từng thẻ để nghe sự khác nhau giữa các dấu.</p></div>
+    <div class="keys">${bases.map(b => `<button class="key" data-b="${b}" aria-pressed="${b === base}">${b}</button>`).join("")}</div>
+    <div class="tones">${TONES.map((t, i) => `<button class="card tone oli" data-t="${i}"><span class="big">${applyTone(base, i)}</span><span class="w">${t.name}</span></button>`).join("")}</div>
+    <div class="row"><button class="btn sun" id="readAll">Đọc cả 6 thanh</button></div>`;
+    v.querySelectorAll("[data-b]").forEach(b => b.onclick = () => { base = b.dataset.b; draw(); });
+    const cards = [...v.querySelectorAll(".tone")];
+    cards.forEach(c => c.onclick = () => { const i = +c.dataset.t; speakSeq(i ? [{ t: TONES[i].name, el: c }, { t: applyTone(base, i), el: c }] : [{ t: base, el: c }]); });
+    $("#readAll").onclick = () => speakSeq(cards.map((c, i) => ({ t: applyTone(base, i), el: c })), 350);
+  };
+  draw();
+};
+
+VIEWS["vn:ghep"] = v => {
+  const st = store.get("ghep", { c: "b", r: "a", t: 1 });
+  const draw = () => {
+    if (STOP.test(st.r) && ![2, 5].includes(st.t)) st.t = 2;
+    store.set("ghep", st);
+    const s = buildSyllable(st.c, st.r, st.t);
+    const stop = STOP.test(st.r);
+    v.innerHTML = `<div><h2>Ghép âm và vần</h2><p class="hint">Chọn âm đầu, vần và dấu thanh. Bấm "Đánh vần" để nghe như cô giáo đọc.</p></div>
+    <div class="stage oli">
+      ${s.bad ? `<div class="note">${s.bad}</div>` : `<div class="syll" aria-live="polite"><span class="c">${esc(s.c)}</span><span class="r">${esc(s.r)}</span></div>
+      <div class="formula">${s.c ? `${esc(s.c)} + ${esc(st.r)}` : esc(st.r)}${st.t ? ` + ${TONES[st.t].name}` : ""} = ${esc(s.word)}</div>`}
+      ${s.note ? `<div class="note">${s.note}</div>` : ""}
+      <div class="row"><button class="btn" id="spell"${s.bad ? " disabled" : ""}>Đánh vần</button><button class="btn sun" id="readW"${s.bad ? " disabled" : ""}>Đọc tiếng</button></div>
+    </div>
+    <div class="pick"><h3>1. Âm đầu</h3><div class="keys">${CONS.map(([c, n]) => `<button class="key" data-c="${c}" aria-pressed="${c === st.c}" title="${n}">${c || "–"}</button>`).join("")}</div></div>
+    <div class="pick"><h3>2. Vần</h3>${RHYMES.map(([g, list]) => `<div class="grp">${g}</div><div class="keys">${list.split(" ").map(r => `<button class="key" data-r="${r}" aria-pressed="${r === st.r}">${r}</button>`).join("")}</div>`).join("")}</div>
+    <div class="pick"><h3>3. Dấu thanh</h3><div class="keys">${TONES.map((t, i) => `<button class="key" data-t="${i}" aria-pressed="${i === st.t}"${stop && ![2, 5].includes(i) ? " disabled" : ""}>${t.short}</button>`).join("")}</div>
+    ${stop ? `<p class="hint">Vần kết thúc bằng p, t, c, ch chỉ đi với dấu sắc hoặc dấu nặng.</p>` : ""}</div>`;
+    v.querySelectorAll("[data-c]").forEach(b => b.onclick = () => { st.c = b.dataset.c; draw(); });
+    v.querySelectorAll("[data-r]").forEach(b => b.onclick = () => { st.r = b.dataset.r; draw(); });
+    v.querySelectorAll(".key[data-t]").forEach(b => b.onclick = () => { st.t = +b.dataset.t; draw(); });
+    if (s.bad) return;
+    const el = v.querySelector(".syll");
+    $("#readW").onclick = () => speakSeq([{ t: s.word, el }]);
+    $("#spell").onclick = () => {
+      const seq = [];
+      if (s.c) seq.push({ t: CONS_SAY[s.c] || s.c });
+      seq.push({ t: st.c === "gi" && st.r[0] === "i" ? st.r : s.base.slice(s.c.length) || st.r });
+      if (s.c) seq.push({ t: s.base });
+      if (st.t) { seq.push({ t: TONES[st.t].short }); seq.push({ t: s.word }); }
+      seq.forEach(x => x.el = el);
+      speakSeq(seq, 300);
+    };
+  };
+  draw();
+};
+
+VIEWS["vn:doc"] = v => {
+  let idx = store.get("docIdx", 0) % SENTENCES.length;
+  const draw = () => {
+    const words = SENTENCES[idx].split(" ");
+    v.innerHTML = `<div><h2>Tập đọc câu</h2><p class="hint">Chạm vào từng tiếng để nghe. "Đọc chậm" sẽ tô sáng từng tiếng cho bé đọc theo.</p></div>
+    <div class="sentence oli">${words.map((w, i) => `<button class="word" data-w="${i}">${esc(w)}</button>`).join("")}</div>
+    <div class="row"><button class="btn sun" id="slow">Đọc chậm từng tiếng</button><button class="btn" id="full">Đọc cả câu</button><button class="btn alt" id="next">Câu tiếp theo</button></div>
+    <div class="list">${SENTENCES.map((s, i) => `<button data-s="${i}" aria-pressed="${i === idx}">${i + 1}. ${esc(s)}</button>`).join("")}</div>`;
+    const wEls = [...v.querySelectorAll(".word")];
+    const clean = w => w.replace(/[.,!?]/g, "");
+    wEls.forEach(b => b.onclick = () => speakSeq([{ t: clean(words[b.dataset.w]), el: b }]));
+    $("#slow").onclick = () => speakSeq(wEls.map((b, i) => ({ t: clean(words[i]), el: b })), 280);
+    $("#full").onclick = () => speakSeq([{ t: SENTENCES[idx] }]);
+    $("#next").onclick = () => { idx = (idx + 1) % SENTENCES.length; store.set("docIdx", idx); draw(); };
+    v.querySelectorAll("[data-s]").forEach(b => b.onclick = () => { idx = +b.dataset.s; store.set("docIdx", idx); draw(); });
+  };
+  draw();
+};
+
+/* ---------- Toán ---------- */
+function quiz(v, { title, hint, make, top, bind }) {
+  const round = () => {
+    const q = make();
+    v.innerHTML = `<div><h2>${title}</h2><p class="hint">${hint}</p></div>${top || ""}
+    <div class="q">${q.html}
+      <div class="opts">${q.options.map(o => `<button class="opt" data-o="${esc(o)}"${q.optLang === "en" ? "" : ""}>${q.label ? q.label(o) : esc(o)}</button>`).join("")}</div>
+      <div class="feedback" id="fb" aria-live="polite"></div>
+      <div class="row"><button class="btn alt" id="again">Nghe lại</button><button class="btn alt" id="skip">Câu khác</button></div>
+    </div>`;
+    if (bind) bind(v);
+    let locked = false;
+    const ask = () => q.speak && speakSeq(q.speak);
+    ask();
+    $("#again").onclick = ask;
+    $("#skip").onclick = round;
+    v.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+      if (locked) return;
+      const fb = $("#fb");
+      if (b.dataset.o === String(q.answer)) {
+        locked = true; b.classList.add("ok"); addStar();
+        const p = PRAISE[rand(PRAISE.length)];
+        fb.className = "feedback ok"; fb.textContent = p;
+        speakSeq((q.after || []).concat([{ t: p }])).then(() => setTimeout(round, 400));
+      } else {
+        b.classList.add("bad"); fb.className = "feedback bad"; fb.textContent = TRY; say(TRY);
+      }
+    });
+  };
+  round();
+}
+function numOptions(ans, max, n = 4) {
+  const set = new Set([ans]);
+  let guard = 0;
+  while (set.size < n && guard++ < 200) { const d = rand(5) + 1, x = ans + (Math.random() < .5 ? -d : d); if (x >= 0 && x <= max) set.add(x); }
+  for (let x = 0; set.size < n && x <= max; x++) set.add(x);
+  return shuffle([...set]);
+}
+const OBJS = [["🐔","con gà"],["🍎","quả táo"],["🌸","bông hoa"],["⭐","ngôi sao"],["🐟","con cá"],["🚗","chiếc ô tô"],["🎈","quả bóng bay"],["🐱","con mèo"]];
+
+VIEWS["math:dem"] = v => quiz(v, {
+  title: "Đếm hình", hint: "Bé đếm xem có bao nhiêu, rồi chọn số đúng.",
+  make() {
+    const n = rand(10) + 1, o = OBJS[rand(OBJS.length)];
+    return { html: `<div class="objs" aria-label="${n} ${o[1]}">${o[0].repeat(n)}</div>`, options: numOptions(n, 10, 3), answer: n,
+      speak: [{ t: `Có bao nhiêu ${o[1]}?` }], after: [{ t: `Có ${n} ${o[1]}.` }] };
+  }
+});
+
+VIEWS["math:tinh"] = v => {
+  const lv = store.get("mathLv", 10);
+  const make = () => {
+    let a, b, op = Math.random() < .5 ? "+" : "−";
+    if (lv === 10) { a = rand(11); b = op === "+" ? rand(11 - a) : rand(a + 1); }
+    else if (lv === 20) { a = rand(21); b = op === "+" ? rand(21 - a) : rand(a + 1); }
+    else { // phạm vi 100, không nhớ
+      const t1 = rand(9) + 1, u1 = rand(10);
+      if (op === "+") { const t2 = rand(10 - t1), u2 = rand(10 - u1); a = t1 * 10 + u1; b = t2 * 10 + u2; }
+      else { const t2 = rand(t1 + 1), u2 = rand(u1 + 1); a = t1 * 10 + u1; b = t2 * 10 + u2; }
+    }
+    const ans = op === "+" ? a + b : a - b, word = op === "+" ? "cộng" : "trừ";
+    const dots = lv === 10 ? `<div class="objs" aria-hidden="true">${op === "+" ? "🍎".repeat(a) + '<span class="plus">+</span>' + "🍎".repeat(b) : "🍎".repeat(a - b) + "🍏".repeat(b)}</div>` : "";
+    return { html: `<div class="prompt oli" style="padding:10px 24px">${a} ${op} ${b} = ?</div>${dots}${lv === 10 && op === "−" ? `<p class="hint">Bớt đi ${b} quả táo xanh</p>` : ""}`,
+      options: numOptions(ans, lv === 100 ? 99 : lv), answer: ans,
+      speak: [{ t: `${a} ${word} ${b} bằng mấy?` }], after: [{ t: `${a} ${word} ${b} bằng ${ans}.` }] };
+  };
+  const top = `<div class="keys">${[[10,"Phạm vi 10"],[20,"Phạm vi 20"],[100,"Phạm vi 100 (không nhớ)"]].map(([k, n]) => `<button class="chip" data-lv="${k}" aria-pressed="${k === lv}">${n}</button>`).join("")}</div>`;
+  quiz(v, { title: "Phép cộng, phép trừ", hint: "Chọn phạm vi số, rồi chọn đáp án đúng.", make, top,
+    bind: el => el.querySelectorAll("[data-lv]").forEach(b => b.onclick = () => { store.set("mathLv", +b.dataset.lv); VIEWS["math:tinh"](v); }) });
+};
+
+VIEWS["math:sosanh"] = v => quiz(v, {
+  title: "So sánh số", hint: "Chọn dấu lớn hơn (>), bé hơn (<) hoặc bằng (=).",
+  make() {
+    const max = rand(2) ? 10 : 100;
+    let a = rand(max + 1), b = Math.random() < .2 ? a : rand(max + 1);
+    const ans = a > b ? ">" : a < b ? "<" : "=";
+    const w = { ">": "lớn hơn", "<": "bé hơn", "=": "bằng" }[ans];
+    return { html: `<div class="prompt oli" style="padding:10px 24px">${a} ☐ ${b}</div>`, options: [">", "<", "="], answer: ans,
+      speak: [{ t: `So sánh ${a} và ${b}.` }], after: [{ t: `${a} ${w} ${b}.` }] };
+  }
+});
+
+/* ---------- Tiếng Anh ---------- */
+VIEWS["en:tu"] = v => {
+  let topic = store.get("enTopic", "Con vật"); if (!EN[topic]) topic = "Con vật";
+  const draw = () => {
+    v.innerHTML = `<div><h2>Từ vựng tiếng Anh</h2><p class="hint">Chạm vào thẻ để nghe từ tiếng Anh, rồi nghĩa tiếng Việt. Phiên âm theo giọng Mỹ.</p></div>
+    <div class="keys">${Object.keys(EN).map(k => `<button class="chip" data-tp="${esc(k)}" aria-pressed="${k === topic}">${k}</button>`).join("")}</div>
+    <div class="cards">${EN[topic].map((w, i) => `<button class="card" data-i="${i}"><span class="pic" aria-hidden="true">${w[3]}</span><span class="w">${w[0]}</span><span class="ipa">${w[1]}</span><span class="vi">${w[2]}</span></button>`).join("")}</div>
+    <div class="row"><button class="btn sun" id="all">Đọc cả chủ đề</button></div>`;
+    v.querySelectorAll("[data-tp]").forEach(b => b.onclick = () => { topic = b.dataset.tp; store.set("enTopic", topic); draw(); });
+    const cards = [...v.querySelectorAll(".card")];
+    cards.forEach(c => c.onclick = () => { const w = EN[topic][c.dataset.i]; speakSeq([{ t: w[0], lang: "en", el: c }, { t: w[0], lang: "en", el: c }, { t: w[2], el: c }], 400); });
+    $("#all").onclick = () => speakSeq(cards.map((c, i) => ({ t: EN[topic][i][0], lang: "en", el: c })), 500);
+  };
+  draw();
+};
+
+VIEWS["en:abc"] = v => {
+  v.innerHTML = `<div><h2>Bảng chữ cái tiếng Anh</h2><p class="hint">26 chữ cái. Chạm để nghe tên chữ và một từ bắt đầu bằng chữ đó.</p></div>
+  <div class="cards">${EN_ABC.map((a, i) => `<button class="card" data-i="${i}"><span class="big">${a[0]} ${a[0].toLowerCase()}</span><span class="pic" aria-hidden="true">${a[3]}</span><span class="w">${a[2]}</span></button>`).join("")}</div>
+  <div class="row"><button class="btn sun" id="song">Đọc A đến Z</button></div>`;
+  const cards = [...v.querySelectorAll(".card")];
+  cards.forEach(c => c.onclick = () => { const a = EN_ABC[c.dataset.i]; speakSeq([{ t: a[1], lang: "en", el: c }, { t: a[2], lang: "en", el: c }], 300); });
+  $("#song").onclick = () => speakSeq(cards.map((c, i) => ({ t: EN_ABC[i][1], lang: "en", el: c })), 150);
+};
+
+VIEWS["en:cau"] = v => {
+  v.innerHTML = `<div><h2>Mẫu câu giao tiếp</h2><p class="hint">Chạm vào câu để nghe, bé nhắc lại theo.</p></div>
+  <div class="cards" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">${PHRASES.map((p, i) => `<button class="card" data-i="${i}" style="justify-items:start;text-align:left"><span class="w" style="font-size:20px">${esc(p[0])}</span><span class="vi">${esc(p[1])}</span></button>`).join("")}</div>`;
+  v.querySelectorAll(".card").forEach(c => c.onclick = () => { const p = PHRASES[c.dataset.i]; speakSeq([{ t: p[0], lang: "en", el: c }, { t: p[1], el: c }], 400); });
+};
+
+VIEWS["en:do"] = v => quiz(v, {
+  title: "Nghe và chọn hình", hint: "Bé nghe từ tiếng Anh, rồi chạm vào hình đúng.",
+  make() {
+    const all = Object.values(EN).flat().filter(w => !/\d|🔟/.test(w[3]));
+    const pickW = all[rand(all.length)];
+    const others = shuffle(all.filter(w => w[3] !== pickW[3])).slice(0, 3);
+    const opts = shuffle([pickW, ...others]);
+    const map = Object.fromEntries(opts.map(w => [w[3], w]));
+    return { html: `<div class="prompt" aria-hidden="true">?</div>`, options: opts.map(w => w[3]), answer: pickW[3],
+      label: o => `<span style="font-size:48px">${o}</span>`,
+      speak: [{ t: pickW[0], lang: "en" }], after: [{ t: pickW[0], lang: "en" }, { t: pickW[2] }] };
+  }
+});
+
+/* ================= CÀI ĐẶT ================= */
+const rate = $("#rate"); rate.value = S.rate; $("#rateVal").textContent = Math.round(S.rate * 100) + "%";
+rate.oninput = () => { S.rate = +rate.value; store.set("rate", S.rate); $("#rateVal").textContent = Math.round(S.rate * 100) + "%"; };
+const kn = $("#kidName"); kn.value = S.name;
+kn.oninput = () => { S.name = kn.value.trim() || "bé"; store.set("name", S.name); };
+$("#viVoice").onchange = e => { S.vi = e.target.value; store.set("viVoice", S.vi); };
+$("#enVoice").onchange = e => { S.en = e.target.value; store.set("enVoice", S.en); };
+$("#btnSettings").onclick = e => { const p = $("#settings"); p.hidden = !p.hidden; e.currentTarget.setAttribute("aria-expanded", !p.hidden); if (!p.hidden) loadVoices(); };
+if (!synth) $("#voiceWarn").innerHTML = `<div class="warn"><b>Trình duyệt này không hỗ trợ đọc thành tiếng.</b> Hãy mở bằng Chrome, Edge hoặc Safari bản mới.</div>`;
+
+go(state.tab);
+})();
+</script>
