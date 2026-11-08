@@ -16,7 +16,10 @@
   mỗi bài có câu hỏi tự tạo đúng nội dung bài (đếm, so sánh, mấy và mấy, hình phẳng, khối, vị trí,
   số có hai chữ số, đo độ dài cm, cộng trừ không nhớ, xem giờ, ngày trong tuần). Ngoài ra: đếm hình,
   cộng trừ phạm vi 10 / 20 / 100, so sánh số.
-- **Tiếng Anh**: từ vựng theo chủ đề có phiên âm IPA, bảng chữ cái, mẫu câu, nghe và chọn hình.
+- **Tiếng Anh**: mục **Theo sách** có Starter, 16 Unit và 4 Review của Tiếng Anh 1 Global Success
+  (tên Unit và chữ cái theo sách; từ, câu luyện thêm do máy chọn theo chủ đề). Mỗi Unit: Từ vựng (nghe
+  giọng chuẩn, phiên âm, nghĩa), Nghe và chọn hình, **Bé nói** (máy nghe tiếng Anh và chấm, sai 3 lần
+  thì đọc mẫu chậm). Ngoài ra: từ vựng theo chủ đề, bảng chữ cái, mẫu câu, nghe và chọn hình.
 
 Tên bé đổi được trong mục **Giọng đọc** (mặc định "Hà My").
 

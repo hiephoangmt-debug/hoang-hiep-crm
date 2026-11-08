@@ -170,7 +170,7 @@ textarea { width: 100%; min-height: 120px; font: inherit; border-radius: 10px; b
 .settings input[type="text"] { width: 100%; font: inherit; padding: 6px 10px; border-radius: 10px; border: 2px solid var(--line); background: var(--paper); color: var(--ink); }
 .book { display: grid; gap: 6px; }
 .booklbl { font-weight: 800; color: var(--muted); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
-#lessonSearch, #toanSearch { width: 100%; font: inherit; font-size: 18px; padding: 10px 14px; border-radius: 14px; border: 2px solid var(--tim); background: var(--paper); color: var(--ink); }
+#lessonSearch, #toanSearch, #enSearch { width: 100%; font: inherit; font-size: 18px; padding: 10px 14px; border-radius: 14px; border: 2px solid var(--tim); background: var(--paper); color: var(--ink); }
 .lessonlist { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; max-height: 200px; overflow-y: auto; padding: 2px; }
 .lessonlist button { text-align: left; border: 2px solid var(--line); background: var(--paper); border-radius: 12px; padding: 6px 10px; font-size: 15px; }
 .lessonlist button b { color: var(--tim); }
@@ -265,17 +265,17 @@ function loadVoices() {
 if (synth) { loadVoices(); synth.addEventListener ? synth.addEventListener("voiceschanged", loadVoices) : (synth.onvoiceschanged = loadVoices); }
 
 let speakToken = 0;
-function speakOne(text, lang, token) {
+function speakOne(text, lang, token, rate) {
   return new Promise(resolve => {
     if (!synth || token !== speakToken) return resolve();
     const u = new SpeechSynthesisUtterance(text);
     const v = pickVoice(lang);
     u.lang = v ? v.lang : (lang === "vi" ? "vi-VN" : "en-US");
     if (v) u.voice = v;
-    u.rate = S.rate; u.pitch = 1.05;
+    u.rate = rate || S.rate; u.pitch = 1.05;
     let done = false; const fin = () => { if (!done) { done = true; resolve(); } };
     u.onend = fin; u.onerror = fin;
-    setTimeout(fin, 1500 + text.length * 180 / S.rate); // phòng khi trình duyệt không báo "đọc xong"
+    setTimeout(fin, 1500 + text.length * 180 / (rate || S.rate)); // phòng khi trình duyệt không báo "đọc xong"
     synth.speak(u);
   });
 }
@@ -289,7 +289,7 @@ async function speakSeq(items, gap = 250) {
     if (token !== speakToken) return;
     if (it.wait) { if (it.el) it.el.classList.add("on"); await new Promise(r => setTimeout(r, it.wait)); if (it.el) it.el.classList.remove("on"); continue; }
     if (it.el) { it.el.classList.add("on"); it.el.dataset.hl = "1"; }
-    await speakOne(it.t, it.lang || "vi", token);
+    await speakOne(it.t, it.lang || "vi", token, it.rate);
     if (it.el) it.el.classList.remove("on");
     if (gap) await new Promise(r => setTimeout(r, gap));
   }
@@ -408,7 +408,7 @@ const PHRASES = [["Hello!","Xin chào!"],["Good morning!","Chào buổi sáng!"]
 const SUBS = {
   vn: [["bedoc","Bé tự đọc"],["chu","Chữ cái"],["dau","Dấu thanh"],["ghep","Ghép vần"],["doc","Tập đọc"]],
   math: [["sach","Theo sách"],["dem","Đếm hình"],["tinh","Cộng, trừ"],["sosanh","So sánh"]],
-  en: [["tu","Từ vựng"],["abc","Chữ cái ABC"],["cau","Mẫu câu"],["do","Nghe và chọn"]]
+  en: [["sach","Theo sách"],["tu","Từ vựng"],["abc","Chữ cái ABC"],["cau","Mẫu câu"],["do","Nghe và chọn"]]
 };
 const state = { tab: store.get("tab", "vn"), sub: store.get("sub", {}) };
 function go(tab, sub) {
@@ -577,7 +577,7 @@ function micHelp(err) {
 function bdStop() { bdRunning = false; bdSess++; abortRec(); speakToken++; if (synth) synth.cancel(); }
 // Nghe bé đọc n tiếng. Câu càng dài máy chờ càng lâu. Lấy cả kết quả tạm (Safari trên iPad
 // thường không báo kết quả cuối). Micro tự tắt giữa câu thì bật lại nghe tiếp và ghép chữ.
-function listen(n, onHear) {
+function listen(n, onHear, lang = "vi-VN") {
   const long = n > 1;
   const silence = Math.min(1300 + n * 350, 4500);   // bé ngừng bao lâu thì chốt
   const maxMs = Math.min(8000 + n * 1800, 45000);   // tối đa cho cả lượt đọc
@@ -589,7 +589,7 @@ function listen(n, onHear) {
     function finish() { if (done) return; done = true; clearTimeout(timer); clearTimeout(maxT); try { rec && rec.stop(); } catch (e) {} if (curRec === rec) curRec = null; resolve(combined()); }
     function start() {
       const r = rec = new SR(); curRec = r; cur = [];
-      r.lang = "vi-VN"; r.maxAlternatives = 5; r.interimResults = true; r.continuous = long;
+      r.lang = lang; r.maxAlternatives = 5; r.interimResults = true; r.continuous = long;
       r.onresult = e => {
         const now = [];
         for (let i = 0; i < e.results.length; i++) for (const a of e.results[i]) if (a.transcript.trim()) now.push(a.transcript.trim());
@@ -1126,6 +1126,150 @@ VIEWS["math:sach"] = v => {
 };
 
 /* ---------- Tiếng Anh ---------- */
+/* ---------- Tiếng Anh 1 – Global Success (bộ Kết nối tri thức) ---------- */
+// Tên Unit và chữ cái theo sách; từ và câu luyện thêm do máy chọn cho hợp chủ đề.
+const EN1 = [
+  ["Starter", "Hello", "", [["hello","/həˈloʊ/","xin chào","👋"],["hi","/haɪ/","chào","🙋"],["goodbye","/ɡʊdˈbaɪ/","tạm biệt","👋"],["bye","/baɪ/","tạm biệt","🙌"]], [["Hello! I'm Mai.","Xin chào! Mình là Mai."],["Goodbye, Nam.","Tạm biệt Nam."]]],
+  ["Unit 1", "In the school playground", "B b", [["ball","/bɔːl/","quả bóng","⚽"],["bike","/baɪk/","xe đạp","🚲"],["book","/bʊk/","quyển sách","📕"],["bird","/bɝːd/","con chim","🐦"]], [["I have a ball.","Mình có một quả bóng."],["I like my bike.","Mình thích xe đạp của mình."]]],
+  ["Unit 2", "In the dining room", "C c", [["cake","/keɪk/","bánh ngọt","🍰"],["car","/kɑːr/","ô tô","🚗"],["cat","/kæt/","con mèo","🐱"],["cup","/kʌp/","cái cốc","☕"]], [["I can see a cat.","Mình nhìn thấy một con mèo."],["This is a cake.","Đây là cái bánh."]]],
+  ["Unit 3", "At the street market", "A a", [["apple","/ˈæpl/","quả táo","🍎"],["bag","/bæɡ/","cái túi","🎒"],["hat","/hæt/","cái mũ","👒"],["van","/væn/","xe tải nhỏ","🚐"]], [["It's an apple.","Đó là quả táo."],["I have a bag.","Mình có một cái túi."]]],
+  ["Unit 4", "In the bedroom", "D d", [["dog","/dɔːɡ/","con chó","🐶"],["door","/dɔːr/","cái cửa","🚪"],["duck","/dʌk/","con vịt","🦆"],["doll","/dɑːl/","búp bê","🪆"]], [["Open the door.","Mở cửa ra."],["This is my dog.","Đây là con chó của mình."]]],
+  ["Review 1", "Ôn tập Unit 1–4", "", null, null, [1, 2, 3, 4]],
+  ["Unit 5", "At the fish and chip shop", "I i", [["fish","/fɪʃ/","con cá","🐟"],["chips","/tʃɪps/","khoai tây chiên","🍟"],["milk","/mɪlk/","sữa","🥛"],["pig","/pɪɡ/","con lợn","🐷"]], [["I like fish.","Mình thích cá."],["I like milk.","Mình thích sữa."]]],
+  ["Unit 6", "In the classroom", "E e", [["bed","/bed/","cái giường","🛏️"],["pen","/pen/","bút mực","🖊️"],["red","/red/","màu đỏ","🔴"],["egg","/eɡ/","quả trứng","🥚"]], [["My pen is red.","Bút của mình màu đỏ."],["I have an egg.","Mình có một quả trứng."]]],
+  ["Unit 7", "In the garden", "G g", [["garden","/ˈɡɑːrdn/","khu vườn","🏡"],["girl","/ɡɝːl/","bạn gái","👧"],["goat","/ɡoʊt/","con dê","🐐"],["grapes","/ɡreɪps/","quả nho","🍇"]], [["This is my garden.","Đây là khu vườn của mình."],["I see a goat.","Mình thấy một con dê."]]],
+  ["Unit 8", "In the park", "H h", [["hand","/hænd/","bàn tay","✋"],["horse","/hɔːrs/","con ngựa","🐴"],["hair","/her/","mái tóc","💇"],["house","/haʊs/","ngôi nhà","🏠"]], [["Wash your hands.","Rửa tay nhé."],["I can see a horse.","Mình nhìn thấy một con ngựa."]]],
+  ["Review 2", "Ôn tập Unit 5–8", "", null, null, [7, 8, 9, 10]],
+  ["Unit 9", "In the shoe shop", "O o", [["socks","/sɑːks/","đôi tất","🧦"],["clock","/klɑːk/","đồng hồ","🕐"],["box","/bɑːks/","cái hộp","📦"],["fox","/fɑːks/","con cáo","🦊"]], [["I have red socks.","Mình có đôi tất đỏ."],["This is a clock.","Đây là cái đồng hồ."]]],
+  ["Unit 10", "At the zoo", "M m", [["monkey","/ˈmʌŋki/","con khỉ","🐒"],["mango","/ˈmæŋɡoʊ/","quả xoài","🥭"],["mother","/ˈmʌðər/","mẹ","👩"],["moon","/muːn/","mặt trăng","🌙"]], [["I see a monkey.","Mình thấy một con khỉ."],["I like mangoes.","Mình thích xoài."]]],
+  ["Unit 11", "At the bus stop", "U u", [["bus","/bʌs/","xe buýt","🚌"],["sun","/sʌn/","mặt trời","☀️"],["run","/rʌn/","chạy","🏃"],["umbrella","/ʌmˈbrelə/","cái ô","☂️"]], [["Run to the bus!","Chạy ra xe buýt nào!"],["I see the sun.","Mình thấy mặt trời."]]],
+  ["Unit 12", "At the lake", "L l", [["lake","/leɪk/","cái hồ","🏞️"],["leaf","/liːf/","chiếc lá","🍃"],["lemon","/ˈlemən/","quả chanh","🍋"],["lion","/ˈlaɪən/","sư tử","🦁"]], [["I see a lion.","Mình thấy một con sư tử."],["This is a leaf.","Đây là chiếc lá."]]],
+  ["Review 3", "Ôn tập Unit 9–12", "", null, null, [12, 13, 14, 15]],
+  ["Unit 13", "In the school canteen", "N n", [["noodles","/ˈnuːdlz/","mì sợi","🍜"],["nuts","/nʌts/","hạt lạc, hạt dẻ","🥜"],["nose","/noʊz/","cái mũi","👃"],["nine","/naɪn/","số chín","9️⃣"]], [["I like noodles.","Mình thích mì."],["Touch your nose.","Chạm vào mũi nào."]]],
+  ["Unit 14", "In the toy shop", "T t", [["teddy bear","/ˈtedi ber/","gấu bông","🧸"],["tiger","/ˈtaɪɡər/","con hổ","🐯"],["train","/treɪn/","tàu hỏa","🚂"],["tree","/triː/","cái cây","🌳"]], [["This is my teddy bear.","Đây là gấu bông của mình."],["I see a tiger.","Mình thấy một con hổ."]]],
+  ["Unit 15", "At the football match", "F f", [["football","/ˈfʊtbɔːl/","bóng đá","🏟️"],["face","/feɪs/","khuôn mặt","🙂"],["foot","/fʊt/","bàn chân","🦶"],["frog","/frɑːɡ/","con ếch","🐸"]], [["I like football.","Mình thích bóng đá."],["This is a frog.","Đây là con ếch."]]],
+  ["Unit 16", "At home", "W w", [["water","/ˈwɔːtər/","nước","💧"],["window","/ˈwɪndoʊ/","cửa sổ","🪟"],["watch","/wɑːtʃ/","đồng hồ đeo tay","⌚"],["worm","/wɝːm/","con sâu","🪱"]], [["I like water.","Mình thích nước."],["Open the window.","Mở cửa sổ ra."]]],
+  ["Review 4", "Ôn tập Unit 13–16", "", null, null, [17, 18, 19, 20]]
+].map(([id, title, letter, words, phrases, from], i, arr) => ({ i, id, title, letter, words, phrases, from }));
+EN1.forEach(u => { if (u.from) { const src = u.from.map(k => EN1[k - 1]); u.words = src.flatMap(x => x.words); u.phrases = src.flatMap(x => x.phrases); } });
+const LETTER_NAME = Object.fromEntries(EN_ABC.map(a => [a[0], a[1]]));
+// So câu bé nói với câu mẫu (tiếng Anh). Chế độ dễ: bỏ qua s cuối, cho lệch một chữ cái ở từ dài.
+const enNorm = w => w.toLowerCase().replace(/[^a-z']/g, "").replace(/'s$/, "");
+function editDist(a, b) { const d = Array.from({ length: a.length + 1 }, (_, i) => [i]); for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); return d[a.length][b.length]; }
+function enMatch(target, alts) {
+  const tw = target.split(/\s+/).map(enNorm).filter(Boolean);
+  const hw = alts.join(" ").split(/\s+/).map(enNorm).filter(Boolean);
+  const ok = w => hw.some(h => h === w || (S.easy && (h.replace(/s$/, "") === w.replace(/s$/, "") || (w.length >= 4 && editDist(h, w) <= 1))));
+  const miss = tw.filter(w => !ok(w)).length;
+  return miss <= (S.easy ? Math.floor(tw.length / 4) : 0);
+}
+const enSearch = q => {
+  q = plain(q.trim()); if (!q) return EN1;
+  const num = (q.match(/\d+/) || [])[0], rev = /review|on tap/.test(q);
+  if (num) return EN1.filter(u => u.id.replace(/\D/g, "") === num && (rev ? u.id.startsWith("Review") : !u.id.startsWith("Review") || !EN1.some(x => x.id === "Unit " + num)));
+  if (rev) return EN1.filter(u => u.id.startsWith("Review"));
+  if (/^[a-z]$/.test(q)) return EN1.filter(u => plain(u.letter).startsWith(q));
+  return EN1.filter(u => plain(u.id + " " + u.title).includes(q) || u.words.some(w => w[0].startsWith(q)));
+};
+
+VIEWS["en:sach"] = v => {
+  let U = store.get("enU", 1), mode = store.get("enMode", "tu"), query = "";
+  const draw = () => {
+    const u = EN1[U] || EN1[0]; U = u.i; store.set("enU", U); store.set("enMode", mode);
+    speakToken++; if (synth) synth.cancel(); abortRec();
+    v.innerHTML = `<div><h2>Tiếng Anh 1 theo sách</h2><p class="hint">Global Success (bộ Kết nối tri thức). Chọn Unit bé đang học. Từ và câu luyện thêm do máy chọn theo chủ đề của Unit.</p></div>
+    <div class="book"><label for="enSearch" class="booklbl">Tiếng Anh 1 · tìm Unit</label>
+      <input type="search" id="enSearch" class="lsearch" placeholder="Gõ số Unit (5), chữ cái (B) hoặc từ (cat)" value="${esc(query)}" autocomplete="off">
+      <div class="lessonlist" id="enList"></div></div>
+    <h3 class="lessonname">${esc(u.id)}: ${esc(u.title)}${u.letter ? ` <small>· chữ ${esc(u.letter)}</small>` : ""}</h3>
+    <div class="keys">${[["tu", "Từ vựng"], ["chon", "Nghe và chọn"], ["noi", "Bé nói"]].map(([k, n]) => `<button class="chip" data-m="${k}" aria-pressed="${k === mode}">${n}</button>`).join("")}</div>
+    <div id="enBody" class="body"></div>`;
+    const list = $("#enList"), search = $("#enSearch");
+    const pick = i => { U = i; query = ""; draw(); };
+    const render = () => {
+      const f = enSearch(query);
+      list.innerHTML = f.length ? f.map(x => `<button data-u="${x.i}" aria-pressed="${x.i === U}"><b>${esc(x.id)}</b> ${esc(x.title)}${x.letter ? ` (${esc(x.letter)})` : ""}</button>`).join("") : `<p class="hint">Không thấy Unit nào.</p>`;
+      list.querySelectorAll("[data-u]").forEach(b => b.onclick = () => pick(+b.dataset.u));
+      const cur = list.querySelector('[aria-pressed="true"]'); if (cur && !query) list.scrollTop = cur.offsetTop - list.offsetTop - 40;
+    };
+    render();
+    search.oninput = () => { query = search.value; render(); };
+    search.onkeydown = e => { if (e.key === "Enter") { const f = enSearch(query); if (f.length) pick(f[0].i); } };
+    v.querySelectorAll("[data-m]").forEach(b => b.onclick = () => { mode = b.dataset.m; draw(); });
+    ({ tu: enVocab, chon: enChoose, noi: enSpeak })[mode]($("#enBody"), u);
+  };
+  draw();
+};
+function enVocab(body, u) {
+  const L = u.letter ? u.letter[0] : "";
+  body.innerHTML = `<div class="cards">${L ? `<button class="card" id="letterCard"><span class="big">${esc(u.letter)}</span><span class="w">chữ ${esc(u.letter)}</span><span class="ipa">${esc(LETTER_NAME[L] || "")}</span></button>` : ""}
+    ${u.words.map((w, i) => `<button class="card" data-i="${i}"><span class="pic" aria-hidden="true">${w[3]}</span><span class="w">${esc(w[0])}</span><span class="ipa">${esc(w[1])}</span><span class="vi">${esc(w[2])}</span></button>`).join("")}</div>
+    <h3>Mẫu câu</h3>
+    <div class="cards" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">${u.phrases.map((p, i) => `<button class="card" data-p="${i}" style="justify-items:start;text-align:left"><span class="w" style="font-size:20px">${esc(p[0])}</span><span class="vi">${esc(p[1])}</span></button>`).join("")}</div>
+    <div class="row"><button class="btn sun" id="enAll">Đọc cả bài</button></div>`;
+  const lc = $("#letterCard", body);
+  if (lc) lc.onclick = () => speakSeq([{ t: LETTER_NAME[L], lang: "en", el: lc }, ...u.words.filter(w => w[0][0].toUpperCase() === L).map(w => ({ t: w[0], lang: "en", el: lc }))], 350);
+  const cards = [...body.querySelectorAll("[data-i]")];
+  cards.forEach(c => c.onclick = () => { const w = u.words[c.dataset.i]; speakSeq([{ t: w[0], lang: "en", el: c }, { t: w[0], lang: "en", el: c, rate: .6 }, { t: w[2], el: c }], 400); });
+  body.querySelectorAll("[data-p]").forEach(c => c.onclick = () => { const p = u.phrases[c.dataset.p]; speakSeq([{ t: p[0], lang: "en", el: c }, { t: p[1], el: c }], 400); });
+  $("#enAll", body).onclick = () => speakSeq(cards.map((c, i) => ({ t: u.words[i][0], lang: "en", el: c })), 500);
+}
+function enChoose(body, u) {
+  const others = EN1.filter(x => x.i !== u.i && x.words).flatMap(x => x.words);
+  quiz(body, { title: "Nghe và chọn hình", hint: "Máy đọc một từ tiếng Anh, bé chạm vào hình đúng.", make() {
+    const w = u.words[rand(u.words.length)];
+    const pool = shuffle(u.words.filter(x => x[3] !== w[3]).concat(pickN(others, 3)).filter(x => x[3] !== w[3]));
+    const opts = shuffle([w, ...pool.filter((x, i, a) => a.findIndex(y => y[3] === x[3]) === i).slice(0, 3)]);
+    return { html: `<div class="prompt" aria-hidden="true">?</div>`, options: opts.map(x => x[3]), answer: w[3], label: o => `<span style="font-size:48px">${o}</span>`,
+      speak: [{ t: w[0], lang: "en" }, { t: w[0], lang: "en", rate: .6 }], after: [{ t: w[0], lang: "en" }, { t: w[2] }] };
+  } });
+}
+function enSpeak(body, u) {
+  const items = u.words.map(w => ({ en: w[0], pic: w[3], vi: w[2] })).concat(u.phrases.map(p => ({ en: p[0], pic: "", vi: p[1] })));
+  let k = 0, tries = 0, busy = false, my = ++bdSess;
+  const alive = () => my === bdSess && body.isConnected;
+  const show = () => {
+    const it = items[k];
+    body.innerHTML = `<p class="hint">Bé nhìn hình và chữ rồi nói to bằng tiếng Anh. ${SR ? "Bấm nút rồi nói, máy sẽ nghe và chấm." : "Máy này không nghe được, bố mẹ bấm Đúng hoặc Sai."}</p>
+      <div class="status"><span>${k + 1} / ${items.length}</span><span>Lần nói sai <span class="dots" id="enDots">${[0,1,2].map(i => `<i class="${i < tries ? "x" : ""}"></i>`).join("")}</span></span></div>
+      <div class="stage oli">${it.pic ? `<div class="pic" style="font-size:64px">${it.pic}</div>` : ""}<div class="syll" style="font-size:clamp(34px,9vw,64px)" id="enWord">${esc(it.en)}</div><div class="vi">${esc(it.vi)}</div></div>
+      <div class="feedback" id="enFb" aria-live="polite"></div><p class="heard" id="enHeard"></p>
+      ${SR ? `<div class="row" style="justify-content:center"><button class="btn mic sun" id="enMic">Bấm rồi nói</button></div>` : ""}
+      <div class="judge"><button class="btn okb" id="enOk">✓ Đúng</button><button class="btn badb" id="enBad">✗ Sai</button></div>
+      <div class="row"><button class="btn alt" id="enModel">Nghe mẫu</button><button class="btn alt" id="enPrev">‹ Trước</button><button class="btn alt" id="enNext">Tiếp ›</button></div>`;
+    const fb = $("#enFb", body), el = $("#enWord", body), mic = $("#enMic", body);
+    const setFb = (c, t) => { fb.className = "feedback " + c; fb.textContent = t; };
+    const go = d => { k = (k + d + items.length) % items.length; tries = 0; show(); };
+    const model = () => speakSeq([{ t: it.en, lang: "en", el }, { t: it.en, lang: "en", el, rate: .6 }]);
+    async function judge(ok) {
+      if (busy) return; busy = true;
+      if (ok) { addStar(); setFb("ok", `Great job! ${S.name} nói giỏi quá!`); await speakSeq([{ t: "Great job!", lang: "en" }, { t: `${S.name} nói giỏi quá!` }]); busy = false; if (alive()) go(1); return; }
+      tries++; $("#enDots", body).innerHTML = [0,1,2].map(i => `<i class="${i < tries ? "x" : ""}"></i>`).join("");
+      if (tries < 3) { const t = `Chưa đúng rồi. ${S.name} nói lại nhé!`; setFb("bad", `${t} (lần ${tries + 1}/3)`); await speakSeq([{ t }]); }
+      else { setFb("bad", `Nghe cô nói chậm nhé, rồi ${S.name} nói theo.`); await speakSeq([{ t: "Nghe cô nói nhé." }, { t: it.en, lang: "en", el, rate: .55 }, { t: it.en, lang: "en", el, rate: .55 }, { t: `${S.name} nói theo cô nhé.` }]); tries = 0; }
+      busy = false;
+    }
+    $("#enOk", body).onclick = () => judge(true);
+    $("#enBad", body).onclick = () => judge(false);
+    $("#enModel", body).onclick = model;
+    $("#enPrev", body).onclick = () => go(-1);
+    $("#enNext", body).onclick = () => go(1);
+    if (mic) mic.onclick = async () => {
+      if (busy) return; busy = true; speakToken++; if (synth) synth.cancel();
+      mic.classList.add("listening"); mic.textContent = "● Đang nghe…";
+      let alts;
+      try { alts = await listen(it.en.split(/\s+/).length, t => { $("#enHeard", body).textContent = "Máy đang nghe: " + t; }, "en-US"); }
+      catch (err) { busy = false; mic.classList.remove("listening"); mic.textContent = "Bấm rồi nói"; setFb("bad", micHelp(err)); return; }
+      busy = false; if (!alive()) return; mic.classList.remove("listening"); mic.textContent = "Bấm rồi nói";
+      if (!alts.length) { const t = `${S.name} nói lại cho cô nghe nhé.`; setFb("bad", t); say(t); return; }
+      $("#enHeard", body).textContent = "Máy nghe được: " + alts[0];
+      judge(enMatch(it.en, alts));
+    };
+  };
+  show();
+}
+
 VIEWS["en:tu"] = v => {
   let topic = store.get("enTopic", "Con vật"); if (!EN[topic]) topic = "Con vật";
   const draw = () => {
