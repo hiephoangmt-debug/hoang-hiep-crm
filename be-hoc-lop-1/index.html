@@ -571,24 +571,41 @@ function micHelp(err) {
   return t + " Trong lúc đó bố mẹ chấm bằng nút Đúng / Sai. (mã lỗi: " + err + ")";
 }
 function bdStop() { bdRunning = false; bdSess++; abortRec(); speakToken++; if (synth) synth.cancel(); }
-// Nghe bé đọc. Lấy cả kết quả tạm (Safari trên iPad thường không báo kết quả cuối),
-// bé ngừng nói một lúc thì chốt.
-function listen(long, onHear) {
+// Nghe bé đọc n tiếng. Câu càng dài máy chờ càng lâu. Lấy cả kết quả tạm (Safari trên iPad
+// thường không báo kết quả cuối). Micro tự tắt giữa câu thì bật lại nghe tiếp và ghép chữ.
+function listen(n, onHear) {
+  const long = n > 1;
+  const silence = Math.min(1300 + n * 350, 4500);   // bé ngừng bao lâu thì chốt
+  const maxMs = Math.min(8000 + n * 1800, 45000);   // tối đa cho cả lượt đọc
   return new Promise((resolve, reject) => {
-    const r = new SR(); curRec = r;
-    r.lang = "vi-VN"; r.maxAlternatives = 5; r.interimResults = true; r.continuous = long;
-    let alts = [], timer, done = false;
-    const maxT = setTimeout(() => finish(), long ? 20000 : 9000);
-    function finish() { if (done) return; done = true; clearTimeout(timer); clearTimeout(maxT); try { r.stop(); } catch (e) {} if (curRec === r) curRec = null; resolve(alts); }
-    r.onresult = e => {
-      const now = [];
-      for (let i = 0; i < e.results.length; i++) for (const a of e.results[i]) if (a.transcript.trim()) now.push(a.transcript.trim());
-      if (now.length) { alts = now; if (onHear) onHear(now[0]); }
-      clearTimeout(timer); timer = setTimeout(finish, long ? 2200 : 1300);
-    };
-    r.onerror = e => { if (done) return; if (e.error === "no-speech" || e.error === "aborted") return finish(); done = true; clearTimeout(maxT); clearTimeout(timer); if (curRec === r) curRec = null; reject(e.error); };
-    r.onend = finish;
-    try { r.start(); } catch (e) { done = true; clearTimeout(maxT); curRec = null; reject("not-allowed"); }
+    let done = false, prev = "", cur = [], timer, rec;
+    const t0 = Date.now();
+    const maxT = setTimeout(() => finish(), maxMs);
+    const combined = () => cur.length ? cur.map(c => (prev + " " + c).trim()) : (prev ? [prev] : []);
+    function finish() { if (done) return; done = true; clearTimeout(timer); clearTimeout(maxT); try { rec && rec.stop(); } catch (e) {} if (curRec === rec) curRec = null; resolve(combined()); }
+    function start() {
+      const r = rec = new SR(); curRec = r; cur = [];
+      r.lang = "vi-VN"; r.maxAlternatives = 5; r.interimResults = true; r.continuous = long;
+      r.onresult = e => {
+        const now = [];
+        for (let i = 0; i < e.results.length; i++) for (const a of e.results[i]) if (a.transcript.trim()) now.push(a.transcript.trim());
+        if (now.length) { cur = now; if (onHear) onHear(combined()[0]); }
+        clearTimeout(timer); timer = setTimeout(finish, silence);
+      };
+      r.onerror = e => {
+        if (done || e.error === "no-speech" || e.error === "aborted") return; // onend xử lý tiếp
+        done = true; clearTimeout(maxT); clearTimeout(timer); if (curRec === r) curRec = null; reject(e.error);
+      };
+      r.onend = () => {
+        if (done) return;
+        if (curRec !== r) return finish();            // bị dừng bằng tay
+        if (cur.length) { prev = (prev + " " + cur[0]).trim(); cur = []; }
+        const more = Date.now() - t0 < maxMs - 800 && (long || !prev);
+        if (more) { try { start(); } catch (e) { finish(); } } else finish();
+      };
+      r.start();
+    }
+    try { start(); } catch (e) { done = true; clearTimeout(maxT); curRec = null; reject("not-allowed"); }
   });
 }
 
@@ -685,7 +702,7 @@ VIEWS["vn:bedoc"] = v => {
       let alts;
       // chờ loa nói xong hẳn rồi mới mở micro, để không mất tiếng đầu của bé
       await new Promise(res => setTimeout(res, 600)); if (!alive() || r !== round) return;
-      try { alts = await listen(words.length > 1, t => { heardEl.textContent = "Máy đang nghe: " + t; }); }
+      try { alts = await listen(words.length, t => { heardEl.textContent = "Máy đang nghe: " + t; }); }
       catch (err) {
         if (!alive()) return;
         busy = false; micState(false);
