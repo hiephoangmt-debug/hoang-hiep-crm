@@ -1,4 +1,4 @@
-# Kiểm tra trang toa-f2-ads: HTML thô trả về (độ dài, phần đầu, phần cuối). Anh Hiệp báo trang trắng.
+# Kiểm tra trang thật toa-f2-ads sau khi xuất bản: chữ cũ đã hết, SFT_ADS.lead đúng.
 name: Kiem tra trang ADS F2
 on:
   push:
@@ -8,8 +8,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          for u in https://www.sun-fours-tower.com/toa-f2-ads https://www.sun-fours-tower.com/toa-f2; do
-            curl -sSL -A "Mozilla/5.0" "$u" -o p.html -w "\n== $u %{http_code} %{size_download} bytes\n"
-            echo "-- head:"; head -c 1500 p.html; echo; echo "-- tail:"; tail -c 600 p.html; echo
-            grep -c "<script" p.html || true
-          done
+          u="https://www.sun-fours-tower.com/toa-f2-ads?v=$(date +%s)"
+          curl -sSL -A "Mozilla/5.0" "$u" -o p.html -w "== %{http_code} %{size_download} bytes\n"
+          for s in "26/10" "07/11" "15,5" "tháng 10" "trong tháng 11" "25/11/2026" "Căn chính sách mới" "không cộng dồn" "k61uCK206ZAdEJO0haAD" "2026-11-25T23:59:00+07:00"; do echo "$s: $(grep -o "$s" p.html | wc -l)"; done
+          grep -o '<meta name="description"[^>]*>' p.html
+      - run: |
+          npm i playwright@1 >/dev/null 2>&1 && npx playwright install chromium >/dev/null 2>&1
+          cat > t.js <<'JS'
+          const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await b.newPage();const err=[];p.on('pageerror',e=>err.push(e.message));
+          await p.goto('https://www.sun-fours-tower.com/toa-f2-ads',{waitUntil:'networkidle'});await p.waitForTimeout(2000);
+          console.log('SFT_ADS =',JSON.stringify(await p.evaluate(()=>typeof SFT_ADS!=='undefined'?SFT_ADS:null)));
+          console.log('days =',await p.evaluate(()=>[...document.querySelectorAll('[data-days]')].map(e=>e.textContent).join(',')));
+          console.log('topbar =',await p.evaluate(()=>document.querySelector('.topbar')?.innerText));
+          console.log('JS errors =',err);await b.close();})();
+          JS
+          node t.js
