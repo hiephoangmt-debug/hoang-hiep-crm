@@ -214,8 +214,8 @@ HTML
 		'rev'     => 3, // 05/11: chèn ảnh dự án.
 		'title'    => 'Gửi tiết kiệm hay mua studio Sun Saphia Residence cho thuê? So sánh với lãi suất 5,4 – 6,7%/năm',
 		'excerpt'  => 'Cùng khoảng 3,19 tỷ (studio 2,85 tỷ cộng VAT và 2% bảo trì): gửi tiết kiệm 12 tháng 5,4 – 6,7%/năm cho khoảng 172 – 214 triệu; cho thuê lợi suất ròng 3,5 – 5,5% cho khoảng 112 – 176 triệu. Phần chênh nằm ở tăng giá và rủi ro.',
-		'keyword'  => 'gửi tiết kiệm hay mua căn hộ cho thuê',
-		'keywords_extra' => array( 'Sun Saphia Residence', 'đầu tư studio Đà Nẵng', 'lãi suất tiết kiệm 2026', 'lợi suất cho thuê căn hộ Đà Nẵng' ),
+		'keyword'  => 'gửi tiết kiệm hay mua Sun Saphia Residence',
+		'keywords_extra' => array( 'gửi tiết kiệm hay mua căn hộ cho thuê', 'Sun Saphia Residence', 'đầu tư studio Đà Nẵng', 'lãi suất tiết kiệm 2026', 'lợi suất cho thuê căn hộ Đà Nẵng' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-08 11:30',
 		'category' => 'Thị trường',
@@ -281,8 +281,8 @@ HTML
 		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Căn hộ ven biển như Sun Saphia Residence: hơi muối, mùa mưa bão và những gì cần kiểm tra, bảo trì',
 		'excerpt'  => 'Sống sát biển Đà Nẵng có cái giá riêng: hơi muối làm gỉ kim loại, ẩm, thấm; mùa mưa bão gió mạnh, sóng lớn. Chọn vật liệu nội thất, kiểm tra khi nhận nhà và bảo trì căn hộ ven biển như Sun Saphia Residence.',
-		'keyword'  => 'căn hộ ven biển hơi muối',
-		'keywords_extra' => array( 'Sun Saphia Residence', 'bảo trì căn hộ ven biển', 'căn hộ biển Đà Nẵng mùa mưa bão', 'nội thất căn hộ biển' ),
+		'keyword'  => 'bảo trì căn hộ Sun Saphia Residence',
+		'keywords_extra' => array( 'căn hộ ven biển hơi muối', 'Sun Saphia Residence', 'bảo trì căn hộ ven biển', 'căn hộ biển Đà Nẵng mùa mưa bão', 'nội thất căn hộ biển' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-08 16:30',
 		'category' => 'Kinh nghiệm',
@@ -351,8 +351,8 @@ HTML
 		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Bán lại Sun Saphia Residence trước khi nhận nhà: chuyển nhượng hợp đồng thế nào, thuế 2% ai nộp?',
 		'excerpt'  => 'Mua Sun Saphia Residence rồi muốn bán lại trước bàn giao: Luật Kinh doanh BĐS 2023 cho chuyển nhượng hợp đồng mua bán nhà ở hình thành trong tương lai, lập văn bản, chủ đầu tư xác nhận; thuế thu nhập cá nhân 2% giá chuyển nhượng.',
-		'keyword'  => 'chuyển nhượng hợp đồng mua bán căn hộ',
-		'keywords_extra' => array( 'Sun Saphia Residence', 'bán lại Sun Saphia', 'chuyển nhượng căn hộ hình thành trong tương lai', 'thuế chuyển nhượng căn hộ 2%' ),
+		'keyword'  => 'chuyển nhượng hợp đồng Sun Saphia Residence',
+		'keywords_extra' => array( 'chuyển nhượng hợp đồng mua bán căn hộ', 'Sun Saphia Residence', 'bán lại Sun Saphia', 'chuyển nhượng căn hộ hình thành trong tương lai', 'thuế chuyển nhượng căn hộ 2%' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-09 08:00',
 		'category' => 'Kinh nghiệm',
@@ -416,8 +416,8 @@ HTML
 		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Dải biển Trường Sa – Ngũ Hành Sơn: resort, khách sạn quốc tế và vị trí của Sun Saphia Residence',
 		'excerpt'  => 'Đường Trường Sa (Ngũ Hành Sơn) là dải biển tập trung nhiều resort, khách sạn quốc tế của Đà Nẵng và đang có thêm dự án nghỉ dưỡng mới. Sun Saphia Residence nằm ở đầu dải biển này, cạnh bãi tắm Sơn Thủy.',
-		'keyword'  => 'dải biển Trường Sa Ngũ Hành Sơn',
-		'keywords_extra' => array( 'Sun Saphia Residence', 'resort đường Trường Sa Đà Nẵng', 'bất động sản ven biển Ngũ Hành Sơn', 'căn hộ biển Ngũ Hành Sơn' ),
+		'keyword'  => 'resort quanh Sun Saphia Residence',
+		'keywords_extra' => array( 'dải biển Trường Sa Ngũ Hành Sơn', 'Sun Saphia Residence', 'resort đường Trường Sa Đà Nẵng', 'bất động sản ven biển Ngũ Hành Sơn', 'căn hộ biển Ngũ Hành Sơn' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-09 11:30',
 		'category' => 'Thị trường',
