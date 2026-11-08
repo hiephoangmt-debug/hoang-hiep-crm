@@ -529,6 +529,8 @@ function abortRec() { if (curRec) { try { curRec.abort(); } catch (e) {} curRec 
 function micHelp(err) {
   const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   let t = err === "network" ? "Máy cần có mạng để nghe bé đọc." : "Không mở được micro.";
+  let framed = false; try { framed = window.top !== window.self; } catch (e) { framed = true; }
+  if (framed && err !== "network") return "Trang này đang mở trong Claude nên không dùng được micro. Để máy tự nghe bé đọc, hãy mở bằng Safari hoặc Chrome: hiephoangmt-debug.github.io/hoang-hiep-crm/be-hoc-lop-1/ – Trong lúc đó bố mẹ chấm bằng nút Đúng / Sai.";
   if (ios) {
     if (navigator.standalone) t += " Hãy mở app bằng Safari (gõ địa chỉ), không mở từ biểu tượng ngoài màn hình chính – iPad không cho nghe giọng nói ở chế độ đó.";
     t += " Kiểm tra: Cài đặt › Safari › Micrô › Cho phép; Cài đặt › Cài đặt chung › Bàn phím › Ngôn ngữ Đọc chính tả › chọn Tiếng Việt; Cài đặt › Siri & Tìm kiếm › bật Siri.";
