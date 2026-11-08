@@ -3,7 +3,8 @@
 Ứng dụng web (1 file `index.html`, không cần cài) giúp bé lớp 1 học:
 
 - **Tiếng Việt**
-  - **Bé tự đọc**: bé đọc to, máy nghe bằng micro (Chrome/Edge) hoặc bố mẹ bấm Đúng/Sai.
+  - **Bé tự đọc**: bấm *Bắt đầu* một lần, máy **tự nghe** bé đọc liên tục (Chrome/Edge), tự chấm,
+    tự chuyển câu. Không có micro thì bố mẹ bấm Đúng/Sai.
     Đọc sai → máy nhắc "Hà My đọc lại nhé" (tối đa 3 lần). Sai lần 3 → máy đánh vần
     từng tiếng sai theo cách sách giáo khoa (vd: *tờ – ui – tui – sắc – túi*) rồi cho bé đọc theo.
     Có sẵn Bài 41 (ui, ưi); bố mẹ có thể chép bài khác từ sách vào.
