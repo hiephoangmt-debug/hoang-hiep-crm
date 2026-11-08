@@ -42,6 +42,14 @@ jobs:
       # App học cho bé lớp 1 (tĩnh) nằm ở /be-hoc-lop-1/
       - name: Thêm app Bé Vui Học
         run: mkdir -p dist/be-hoc-lop-1 && cp ../be-hoc-lop-1/index.html dist/be-hoc-lop-1/
+      # Âm thanh chuẩn từng tiếng (tạo bởi workflow bvh-audio.yml, lưu trong bộ nhớ đệm)
+      - uses: actions/cache/restore@v4
+        with:
+          path: bvh-audio
+          key: bvh-audio-none
+          restore-keys: bvh-audio-
+      - name: Thêm âm thanh chuẩn Bé Vui Học
+        run: if [ -f ../bvh-audio/index.txt ]; then cp -r ../bvh-audio dist/be-hoc-lop-1/audio; ls dist/be-hoc-lop-1/audio | wc -l; else echo "Chưa có âm thanh chuẩn"; fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
