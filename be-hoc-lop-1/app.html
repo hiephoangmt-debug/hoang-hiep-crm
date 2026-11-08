@@ -210,7 +210,8 @@ textarea { width: 100%; min-height: 120px; font: inherit; border-radius: 10px; b
       <span class="row"><input type="text" id="tryWord" value="rau" style="flex:1;min-width:0"><button class="btn" id="tryBtn">Nghe</button></span></label>
     <div class="note"><b>Máy đọc sai chữ (vd "rau" thành "rao")?</b> Giọng tiếng Việt có sẵn trên iPad/iPhone đọc kém. Hãy tải giọng tốt hơn:
       Cài đặt › Trợ năng › Nội dung được đọc › Giọng nói › Tiếng Việt › chạm <b>Linh (Nâng cao)</b> để tải về.
-      Tải xong, đóng hẳn Safari rồi mở lại app, chọn giọng có chữ "Nâng cao" ở ô Giọng tiếng Việt bên trên.</div>
+      Tải xong, kiểm tra <b>Linh (Nâng cao)</b> có dấu tích ✓ (là giọng đang dùng). Đóng hẳn Safari rồi mở lại app;
+      ở ô Giọng tiếng Việt bên trên chọn <b>Giọng mặc định của máy (theo Cài đặt)</b>.</div>
     <p class="hint">Giọng đọc lấy từ máy của bé. Giọng chuẩn nhất: Microsoft Edge (giọng HoaiMy, NamMinh), Chrome (Google Tiếng Việt), iPad/iPhone (Linh Nâng cao).</p>
   </section>
 
@@ -251,14 +252,23 @@ function scoreVoice(v, lang) {
   return s;
 }
 function voicesFor(lang) { return S.voices.filter(v => norm(v.lang).startsWith(lang)).sort((a, b) => scoreVoice(b, lang) - scoreVoice(a, lang)); }
+// "__default": không chọn giọng cụ thể, máy dùng giọng đặt trong Cài đặt (iPad/iPhone: Linh (Nâng cao) đã tải
+// thường không hiện trong danh sách của Safari, nhưng vẫn được dùng làm giọng mặc định).
+const IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+const isEnhanced = v => /enhanced|premium|nâng cao|cao cấp/i.test(v.name);
+function voiceChoice(lang) {
+  if (S[lang]) return S[lang];
+  return IOS && !voicesFor(lang).some(isEnhanced) ? "__default" : "";   // iPad: mặc định theo Cài đặt
+}
 function pickVoice(lang) {
-  const list = voicesFor(lang);
-  return list.find(v => v.voiceURI === S[lang]) || list[0] || null;
+  const list = voicesFor(lang), ch = voiceChoice(lang);
+  if (ch === "__default") return null;
+  return list.find(v => v.voiceURI === ch) || list[0] || null;
 }
 function fillVoiceSelect(lang) {
-  const sel = $("#" + lang + "Voice"), list = voicesFor(lang), cur = pickVoice(lang);
-  sel.innerHTML = list.length ? list.map(v => `<option value="${esc(v.voiceURI)}"${cur && v.voiceURI === cur.voiceURI ? " selected" : ""}>${esc(v.name)} (${esc(v.lang)})</option>`).join("")
-    : `<option value="">Không tìm thấy giọng — máy dùng giọng mặc định</option>`;
+  const sel = $("#" + lang + "Voice"), list = voicesFor(lang), cur = pickVoice(lang), def = voiceChoice(lang) === "__default";
+  sel.innerHTML = `<option value="__default"${def ? " selected" : ""}>Giọng mặc định của máy (theo Cài đặt)</option>` +
+    list.map(v => `<option value="${esc(v.voiceURI)}"${!def && cur && v.voiceURI === cur.voiceURI ? " selected" : ""}>${esc(v.name)} (${esc(v.lang)})</option>`).join("");
 }
 function loadVoices() {
   if (!synth) return;
