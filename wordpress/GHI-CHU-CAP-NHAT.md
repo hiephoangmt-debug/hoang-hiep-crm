@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.96** + plugin Hoàng Hiệp CRM **2.20.221**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.96** + plugin Hoàng Hiệp CRM **2.20.222**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.222 (09/11/2026)
+
+- **MIA Center Point:** web đã có sẵn trang "Mia Center Point (Mia Plaza)" (`/du-an/mia-center-point-da-nang/`). Bản 2.20.221 lỡ tạo thêm trang trùng `/du-an/mia-center-point/`; bản này gộp toàn bộ nội dung mới (53 ảnh, giỏ hàng, thanh toán, mặt bằng, layout) vào trang có sẵn và giữ thông tin pháp lý cũ (167 căn đủ điều kiện bán 10/2025, xác định lại giá đất 12/2025, lưu ý giải chấp). Nếu đã cài 2.20.221: mở trang quản trị một lần – trang trùng tự chuyển ảnh sang trang chính rồi vào thùng rác.
+- Cài: chỉ cần gói `cap-nhat-2-mia-fours` mới (đã gồm mọi thay đổi 2.20.221). Thứ tự: gói 1 (Peninsula) → gói 2 mới → "Nhập / cập nhật dữ liệu" → "Tải ảnh ngay" → mở trang quản trị → LiteSpeed Purge All.
 
 ## Có gì mới – plugin 2.20.221 (08/11/2026)
 

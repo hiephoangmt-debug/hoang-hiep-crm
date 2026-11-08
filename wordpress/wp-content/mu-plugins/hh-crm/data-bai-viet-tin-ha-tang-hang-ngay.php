@@ -366,5 +366,76 @@ HTML
 		),
 	);
 
+	/* ---------------- 09/11 – Dự thảo nghị quyết TOD quanh ga đường sắt ---------------- */
+	$posts[] = array(
+		'slug'           => 'da-nang-du-thao-nghi-quyet-tod-quanh-ga-duong-sat',
+		'title'          => 'Đà Nẵng lấy ý kiến dự thảo nghị quyết TOD: tăng hệ số sử dụng đất tối đa 1,5 lần quanh ga đường sắt',
+		'excerpt'        => 'Sở Xây dựng Đà Nẵng lấy ý kiến dự thảo nghị quyết HĐND về phát triển đô thị theo mô hình TOD: hệ số sử dụng đất tối đa có thể tăng đến 1,5 lần so với quy chuẩn trong khoảng 1 km quanh nhà ga; dự kiến trình HĐND kỳ họp cuối năm 2026.',
+		'keyword'        => 'TOD quanh ga đường sắt Đà Nẵng',
+		'keywords_extra' => array( 'dự thảo nghị quyết TOD Đà Nẵng', 'hệ số sử dụng đất quanh nhà ga', 'đô thị TOD Đà Nẵng', 'đường sắt đô thị Đà Nẵng' ),
+		'project'        => 'sun-saphia-residence',
+		'schedule'       => '2026-11-09 08:00',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'TOD', 'Đường sắt', 'Quy hoạch' ),
+		'image'          => 'plugin:img/tin-tuc/tod-quanh-ga-duong-sat-da-nang-du-thao-nghi-quyet.jpg',
+		'image_alt'      => 'Hình minh hoạ đô thị TOD: hệ số sử dụng đất cao dần về phía nhà ga trong bán kính khoảng 1 km',
+		'content'        => <<<HTML
+<p>Sở Xây dựng Đà Nẵng đã ra công văn ngày <strong>23/10/2026</strong> lấy ý kiến <strong>dự thảo nghị quyết của HĐND thành phố</strong> về phát triển đô thị theo mô hình <strong>TOD</strong> (Transit Oriented Development – phát triển đô thị gắn với giao thông công cộng) quanh các nhà ga đường sắt. Điểm đáng chú ý nhất với thị trường: <strong>hệ số sử dụng đất tối đa có thể tăng đến 1,5 lần</strong> so với quy chuẩn hiện hành trong khoảng <strong>1 km quanh nhà ga</strong>.</p>
+<!--hh-featured-->
+<h2>Dự thảo nêu những gì?</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Theo báo chí đưa tin (8/11/2026)</th></tr></thead>
+<tbody>
+<tr><td>Văn bản</td><td>Dự thảo nghị quyết HĐND TP Đà Nẵng, Sở Xây dựng lấy ý kiến từ 23/10/2026</td></tr>
+<tr><td>Hệ số sử dụng đất</td><td>Tối đa của lô đất, ô phố được tăng đến 1,5 lần so với quy chuẩn hiện hành</td></tr>
+<tr><td>Phạm vi áp dụng</td><td>Khoảng 1 km quanh nhà ga; tiêu đề một số báo nêu mỗi khu TOD tối đa khoảng 320 ha</td></tr>
+<tr><td>Chỉ tiêu hạ tầng xã hội</td><td>Diện tích sàn công trình hạ tầng xã hội được tính vào chỉ tiêu đất hạ tầng xã hội (trừ đất trường học)</td></tr>
+<tr><td>Cây xanh</td><td>Mái công trình làm công viên, cây xanh được tính vào chỉ tiêu cây xanh công cộng</td></tr>
+<tr><td>Thời điểm</td><td>Dự kiến trình HĐND thành phố tại kỳ họp cuối năm 2026, sau khi bổ sung theo Luật Phát triển đô thị mới</td></tr>
+</tbody>
+</table>
+<p>Hồ sơ hiện mới xây dựng <strong>nguyên tắc, chỉ tiêu và trình tự</strong>; <strong>chưa xác định ranh giới khu TOD cho nhà ga cụ thể nào</strong>. Trước đó, HĐND TP.HCM đã thông qua nghị quyết tương tự, cũng cho tăng tối đa 1,5 lần hệ số sử dụng đất quanh ga đường sắt.</p>
+<h2>Đà Nẵng sẽ có những nhà ga nào?</h2>
+<ul>
+<li><strong>Đường sắt tốc độ cao Bắc – Nam:</strong> ga Đà Nẵng dự kiến đặt tại Hòa Sơn – xem <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang/">ga đường sắt tốc độ cao Đà Nẵng tại Hòa Sơn</a>.</li>
+<li><strong>Đường sắt đô thị (metro/LRT):</strong> <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">quy hoạch chung Đà Nẵng đến 2050</a> định hướng phát triển các khu đô thị TOD quanh nhà ga; tiến độ các tuyến còn phụ thuộc nguồn vốn.</li>
+</ul>
+<!--hh-img:img/da-nang/song-han-cau-quay-trung-tam-ve-dem.jpg|Ảnh thực tế: cầu sông Hàn và trung tâm Đà Nẵng về đêm-->
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Đất quanh ga sẽ "cao" hơn:</strong> hệ số sử dụng đất tăng nghĩa là cùng một lô đất được xây nhiều sàn hơn – giá trị đất quanh ga tăng theo, nhất là các lô lớn có thể làm căn hộ, văn phòng, thương mại.</li>
+<li><strong>Chưa có ranh giới – chưa nên "đón sóng":</strong> dự thảo chưa chỉ ra khu TOD ở ga nào; tin rao "đất trong vùng TOD" lúc này là chưa có căn cứ. Cần chờ nghị quyết được thông qua và quy hoạch chi tiết từng khu ga.</li>
+<li><strong>Lợi thế dài hạn cho dự án gần ga:</strong> căn hộ cách ga trong khoảng đi bộ sẽ được hưởng hạ tầng công cộng, cây xanh, dịch vụ tập trung – nhưng thời gian tính bằng năm, phụ thuộc tiến độ các tuyến đường sắt.</li>
+<li><strong>Nhà nước thu lại giá trị đất:</strong> mô hình TOD thường đi kèm đấu giá quỹ đất quanh ga để có vốn làm đường sắt – đất đấu giá mới sẽ tăng nguồn cung trong tương lai.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a> – trên trục biển Võ Nguyên Giáp – Trường Sa, theo quy hoạch cách nhà ga đường sắt đô thị số 09 khoảng 500 m; nếu khu ga được quy hoạch TOD, khu vực xung quanh sẽ được đầu tư dày hơn (dài hạn, phụ thuộc tiến độ tuyến).</li>
+</ul>
+<p>Cần kiểm tra một lô đất, căn hộ cụ thể có gần nhà ga theo quy hoạch hay không, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: Vietstock (08/11/2026) và CafeLand (11/2026) đưa tin về dự thảo nghị quyết TOD do Sở Xây dựng Đà Nẵng lấy ý kiến từ 23/10/2026; Báo Tiền Phong, Dân trí (6/2026) về nghị quyết TOD của TP.HCM. Chưa đọc được toàn văn dự thảo – số liệu ghi theo báo chí; con số 320 ha mới thấy ở tiêu đề bài báo, chưa đối chiếu được nội dung.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Dự thảo TOD Đà Nẵng: hệ số đất quanh ga gấp 1,5',
+			'desc'      => 'Đà Nẵng lấy ý kiến dự thảo nghị quyết TOD: hệ số sử dụng đất tối đa tăng đến 1,5 lần trong khoảng 1 km quanh nhà ga, dự kiến trình HĐND cuối 2026.',
+			'points'    => array(
+				'Sở Xây dựng lấy ý kiến dự thảo nghị quyết HĐND về đô thị TOD từ 23/10/2026',
+				'Hệ số sử dụng đất tối đa tăng đến 1,5 lần trong khoảng 1 km quanh nhà ga',
+				'Chưa xác định ranh giới TOD cho nhà ga cụ thể; dự kiến trình HĐND kỳ họp cuối năm 2026',
+			),
+			'faq'       => array(
+				array( 'TOD là gì?', 'TOD (Transit Oriented Development) là mô hình phát triển đô thị gắn với giao thông công cộng: tập trung nhà ở, văn phòng, thương mại với mật độ cao quanh nhà ga đường sắt, metro để người dân đi bộ tới ga.' ),
+				array( 'Dự thảo TOD của Đà Nẵng cho tăng hệ số sử dụng đất bao nhiêu?', 'Theo báo chí, dự thảo cho tăng tối đa 1,5 lần hệ số sử dụng đất tối đa của lô đất, ô phố so với quy chuẩn hiện hành, trong khoảng 1 km quanh nhà ga.' ),
+				array( 'Đã có khu TOD nào ở Đà Nẵng được duyệt chưa?', 'Chưa. Dự thảo mới xây dựng nguyên tắc, chỉ tiêu và trình tự; chưa xác định ranh giới khu TOD cho nhà ga cụ thể. Dự kiến trình HĐND thành phố kỳ họp cuối năm 2026.' ),
+			),
+		),
+		'sources'        => array(
+			'https://vietstock.vn/2026/11/da-nang-muon-nang-he-so-su-dung-dat-15-lan-quanh-ga-tod-moi-khu-toi-da-320ha-4221-1512823.htm',
+			'https://cafeland.vn/tin-tuc/da-nang-de-xuat-quy-hoach-tod-quanh-ga-duong-sat-pham-vi-nao-dat-dai-se-duoc-bo-tri-ra-sao-156586.html',
+			'https://tienphong.vn/tphcm-tang-he-so-su-dung-dat-gop-quanh-tod-len-15-lan-post1853058.tpo',
+		),
+	);
+
 	return $posts;
 }

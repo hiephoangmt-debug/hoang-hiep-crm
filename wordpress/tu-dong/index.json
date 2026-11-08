@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-08T02:17:53+00:00",
+    "updated": "2026-11-08T23:46:26+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do",
@@ -357,9 +357,15 @@
             "rev": 2
         },
         {
+            "slug": "da-nang-du-thao-nghi-quyet-tod-quanh-ga-duong-sat",
+            "title": "Đà Nẵng lấy ý kiến dự thảo nghị quyết TOD: tăng hệ số sử dụng đất tối đa 1,5 lần quanh ga đường sắt",
+            "publish": "2026-11-09 10:00",
+            "file": "bai/da-nang-du-thao-nghi-quyet-tod-quanh-ga-duong-sat.txt"
+        },
+        {
             "slug": "dai-bien-truong-sa-ngu-hanh-son-resort-sun-saphia-residence",
             "title": "Dải biển Trường Sa – Ngũ Hành Sơn: resort, khách sạn quốc tế và vị trí của Sun Saphia Residence",
-            "publish": "2026-11-09 11:30",
+            "publish": "2026-11-09 12:00",
             "file": "bai/dai-bien-truong-sa-ngu-hanh-son-resort-sun-saphia-residence.txt",
             "rev": 2
         },

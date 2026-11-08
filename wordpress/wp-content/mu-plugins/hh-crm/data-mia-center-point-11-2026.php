@@ -12,11 +12,6 @@ defined( 'ABSPATH' ) || exit;
 add_filter(
 	'hh_project_dataset',
 	static function ( $projects ) {
-		foreach ( $projects as $p ) {
-			if ( 'mia-center-point' === ( $p['slug'] ?? '' ) ) {
-				return $projects;
-			}
-		}
 		$im   = static fn( $f, $alt, $where, $title = '' ) => "plugin:img/mia-center-point/mia-center-point-$f.jpg | $alt | $where" . ( $title ? " | $title" : '' );
 		$imgs = array(
 			$im( 'phoi-canh-toa-nha', 'Tòa căn hộ MIA Center Point 25 tầng trên đường Ngô Thì Nhậm, Liên Chiểu (phối cảnh)', 'đại diện' ),
@@ -75,8 +70,8 @@ add_filter(
 		);
 
 		$projects[] = array(
-			'slug'    => 'mia-center-point',
-			'title'   => 'MIA Center Point',
+			'slug'    => 'mia-center-point-da-nang',
+			'title'   => 'MIA Center Point (Mia Plaza)',
 			'type'    => 'can-ho-so-huu-lau-dai',
 			'area'    => 'lien-chieu',
 			'excerpt' => 'MIA Center Point – tòa căn hộ 25 tầng, 335 căn tại 61 Ngô Thì Nhậm (Hòa Khánh Bắc, Liên Chiểu), sở hữu lâu dài, căn 2PN 63 – 67 m² giá tham khảo khoảng 3 – 3,5 tỷ, bàn giao nội thất.',
@@ -92,7 +87,7 @@ add_filter(
 				'hh_p_density'      => '60%',
 				'hh_p_blocks'       => '1 tòa căn hộ',
 				'hh_p_floors'       => '25 tầng nổi, 1 tầng hầm (tầng hầm – tầng 4 là khối đế dịch vụ và để xe)',
-				'hh_p_units'        => '335 căn hộ (17 căn/tầng ở tầng 5 – 20, 16 căn/tầng ở tầng 21 – 23, 15 căn/tầng ở tầng 24 – 25)',
+				'hh_p_units'        => '335 căn hộ, 167 căn đã được Sở Xây dựng xác nhận đủ điều kiện bán (10/2025); 17 căn/tầng ở tầng 5 – 20, 16 căn/tầng ở tầng 21 – 23, 15 căn/tầng ở tầng 24 – 25)',
 				'hh_p_unit_area'    => '63,3 – 259,5 m² (căn 2PN tiêu chuẩn 63,3 – 67,2 m²)',
 				'hh_p_price_m2'     => 'Khoảng 47,7 – 57,1 triệu/m² thông thủy, gồm VAT, chưa gồm 2% phí bảo trì (giỏ hàng 1/2026, tham khảo)',
 				'hh_p_price_from'   => 3018,
@@ -100,7 +95,7 @@ add_filter(
 				'hh_p_price_example' => 'Căn 2PN 64,9 m² tầng 24 | 3,46 tỷ | 3,32 tỷ | Thanh toán sớm 95%: chiết khấu 4% trên giá trước VAT (phiếu tính giá 4/2026, tham khảo)',
 				'hh_p_policy'       => "Chính sách theo phiếu tính giá của chủ đầu tư tháng 4/2026 (tham khảo – hỏi Hoàng Hiệp chính sách hiện hành):\nThanh toán sớm 95%: chiết khấu 4% căn 2PN, 3PN; 3% căn duplex (tính trên giá trước VAT)\nThanh toán tiêu chuẩn: đặt cọc 100 triệu, thanh toán theo 4 đợt đến khi nhận sổ\nGiá đã gồm VAT, chưa gồm 2% kinh phí bảo trì",
 				'hh_p_payment'      => "Đặt cọc | 100 triệu/căn | Khi ký xác nhận nhu cầu\nĐợt 1 | 30% | Trong 10 ngày, ký hợp đồng mua bán\nĐợt 2 | 40% | Trong 60 ngày từ khi ký HĐMB\nĐợt 3 | 25% | Trong 7 ngày từ thông báo bàn giao căn hộ (kèm 2% phí bảo trì)\nĐợt 4 | 5% | Khi chủ đầu tư thông báo bàn giao sổ\nHoặc thanh toán sớm | 95% | Trong 20 ngày từ khi ký xác nhận nhu cầu (chiết khấu 3 – 4%)",
-				'hh_p_legal'        => "Giấy phép xây dựng số 11/GPXD ngày 12/6/2024 của Sở Xây dựng Đà Nẵng (công trình cấp I, 1 tầng hầm + 25 tầng)\nĐất ở, sở hữu lâu dài\nNgân hàng bảo lãnh nghĩa vụ tài chính của chủ đầu tư: Nam A Bank\nChủ đầu tư cho biết đã hoàn thành nghĩa vụ tài chính về đất",
+				'hh_p_legal'        => "Giấy phép xây dựng số 11/GPXD ngày 12/6/2024 của Sở Xây dựng Đà Nẵng (công trình cấp I, 1 tầng hầm + 25 tầng)\nĐất ở, sở hữu lâu dài\nNgân hàng bảo lãnh nghĩa vụ tài chính của chủ đầu tư: Nam A Bank\nSở Xây dựng xác nhận 167 căn đủ điều kiện bán nhà ở hình thành trong tương lai (danh sách công bố 10/2025)\nTháng 12/2025 cơ quan chuyên môn xác định lại giá đất cụ thể do quy hoạch điều chỉnh (theo báo chí); chủ đầu tư cho biết đã hoàn thành nghĩa vụ tài chính về đất\nNếu dự án đang thế chấp, chủ đầu tư phải giải chấp trước khi ký hợp đồng mua bán – nên kiểm tra khi giao dịch",
 				'hh_p_ownership'    => 'Sở hữu lâu dài',
 				'hh_p_start'        => 'Hoàn thành móng 15/10/2024',
 				'hh_p_handover'     => 'Dự kiến Quý 2/2026 theo tài liệu chủ đầu tư (một số tin rao ghi bàn giao từ 8/2026 – hỏi Hoàng Hiệp tình trạng bàn giao hiện tại)',
@@ -112,7 +107,7 @@ add_filter(
 				'hh_p_connections'  => "Khoảng 1 km | MM Mega Market, chợ Hòa Khánh\nKhoảng 1 km | Đại học Bách khoa Đà Nẵng\nKhoảng 1 km | Quảng trường biển Nguyễn Tất Thành",
 				'hh_p_amenities_in' => "Hồ bơi trên cao tầng 25: bể người lớn và bể trẻ em\nNhà trẻ và sân chơi trẻ em tầng 1\nKhu sinh hoạt cộng đồng, sảnh lễ tân, khu vui chơi – thể thao\nCafe, mini mart, gym khối đế\n4 tầng để xe (hầm, tầng 2 – 4), 2 thang nâng ô tô, cửa chống ngập hầm\nCamera 24/24, thẻ thang máy, khóa thông minh, nút SOS, hạ tầng sạc xe điện",
 				'hh_p_amenities_out' => "MM Mega Market, chợ Hòa Khánh\nĐại học Bách khoa Đà Nẵng và các trường đại học khu Hòa Khánh\nBiển Nguyễn Tất Thành, quảng trường biển",
-				'hh_p_progress'     => "15/10/2024 | Hoàn thành móng\n01/2025 | Đổ sàn tầng 5\n04/2025 | Đổ sàn tầng 10\n06/2025 | Đổ sàn tầng 18\n07/2025 | Đổ sàn tầng 20\n09/2025 | Cất nóc (theo kế hoạch chủ đầu tư)\nQuý 2/2026 | Bàn giao dự kiến",
+				'hh_p_progress'     => "15/10/2024 | Hoàn thành móng\n01/2025 | Đổ sàn tầng 5\n04/2025 | Đổ sàn tầng 10\n06/2025 | Đổ sàn tầng 18\n07/2025 | Đổ sàn tầng 20\n10/2025 | Sở Xây dựng công bố 167 căn đủ điều kiện bán\n09/2025 | Cất nóc (theo kế hoạch chủ đầu tư)\nQuý 2/2026 | Bàn giao dự kiến",
 				'hh_p_kpbt'         => 2,
 				'hh_p_image_links'  => implode( "\n", $imgs ),
 			),
@@ -128,13 +123,67 @@ add_filter(
 <h2>Tiện ích</h2>
 <p>Hồ bơi trên cao tầng 25, nhà trẻ và sân chơi tầng 1, khu sinh hoạt cộng đồng, 6 thang máy, 4 tầng để xe với 2 thang nâng ô tô và cửa chống ngập hầm. Căn hộ bàn giao nội thất: sàn gỗ, tủ bếp, bếp từ, máy hút mùi, thiết bị vệ sinh, khóa vân tay.</p>
 <h2>Pháp lý &amp; tiến độ</h2>
-<p>Dự án có giấy phép xây dựng số 11/GPXD ngày 12/6/2024 của Sở Xây dựng Đà Nẵng, Nam A Bank bảo lãnh, tổng thầu Tracodi. Công trình hoàn thành móng tháng 10/2024, đổ sàn tầng 20 tháng 7/2025; chủ đầu tư dự kiến bàn giao Quý 2/2026.</p>
+<p>Dự án có giấy phép xây dựng số 11/GPXD ngày 12/6/2024 của Sở Xây dựng Đà Nẵng, Nam A Bank bảo lãnh, tổng thầu Tracodi. Tháng 10/2025, Sở Xây dựng công bố 167 căn đủ điều kiện bán nhà ở hình thành trong tương lai; tháng 12/2025 thành phố xác định lại giá đất cụ thể do quy hoạch điều chỉnh. Khi giao dịch, người mua nên kiểm tra việc giải chấp (nếu dự án đang thế chấp) trước khi ký hợp đồng. Công trình hoàn thành móng tháng 10/2024, đổ sàn tầng 20 tháng 7/2025; chủ đầu tư dự kiến bàn giao Quý 2/2026.</p>
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> để nhận giỏ hàng, mặt bằng và chính sách mới nhất của MIA Center Point.</p>',
 			'sources' => array(
+				'https://tienphong.vn/cong-bo-bang-danh-sach-10-du-an-du-dieu-kien-ban-nha-o-tai-da-nang-post1786144.html',
+				'https://thanhtra.com.vn/nha-dat-57A4B2310/da-nang-xac-dinh-lai-gia-dat-du-an-can-ho-mia-plaza-fd59ff480.html',
 				'https://cafeland.vn/tin-tuc/giua-con-sot-gia-nha-tai-da-nang-mia-center-point-giu-muc-gia-hap-dan-du-kien-cat-noc-vao-quy-32025-142254.html',
 			),
 		);
+		// Trang đã tạo 26/10/2026 từ du-an-tong-hop.json (cùng slug): ô nào còn đúng bản cũ thì thay bằng bản mới.
+		$new = &$projects[ count( $projects ) - 1 ];
+		if ( function_exists( 'hh_du_an_tong_hop' ) ) {
+			foreach ( hh_du_an_tong_hop()['projects'] as $j ) {
+				if ( 'mia-center-point-da-nang' !== ( $j['slug'] ?? '' ) ) {
+					continue;
+				}
+				foreach ( (array) ( $j['meta'] ?? array() ) as $k => $v ) {
+					if ( '' !== (string) $v && isset( $new['meta'][ $k ] ) && (string) $new['meta'][ $k ] !== (string) $v ) {
+						$new['fix_meta'][ $k ][] = (string) $v;
+					}
+				}
+				$new['fix_content'] = array( (string) ( $j['content'] ?? '' ) );
+				$new['fix_excerpt'] = (string) ( $j['excerpt'] ?? '' );
+				$new['fix_title']   = array( (string) ( $j['title'] ?? '' ) );
+			}
+		}
+		unset( $new );
 		return $projects;
 	},
-	70
+	20 // Trước data-du-an-tong-hop.php (30) – bản JSON cùng slug sẽ không tạo trùng.
+);
+
+/**
+ * Bản 2.20.221 lỡ tạo trang trùng "mia-center-point": chuyển ảnh đã tải sang trang chính "mia-center-point-da-nang"
+ * (chỉ điền ô ảnh còn trống) rồi đưa trang trùng vào thùng rác. Chạy 1 lần khi mở trang quản trị.
+ */
+add_action(
+	'admin_init',
+	static function () {
+		if ( get_option( 'hh_mia_gop_trang_v1' ) ) {
+			return;
+		}
+		$dup  = get_page_by_path( 'mia-center-point', OBJECT, 'du-an' );
+		$main = get_page_by_path( 'mia-center-point-da-nang', OBJECT, 'du-an' );
+		if ( ! $dup ) {
+			update_option( 'hh_mia_gop_trang_v1', '1', false );
+			return;
+		}
+		if ( ! $main ) {
+			return; // Chờ "Nhập / cập nhật dữ liệu" tạo trang chính.
+		}
+		foreach ( array( 'hh_p_gallery', 'hh_p_amenities_img', 'hh_p_floorplans', 'hh_p_unit_layouts', 'hh_p_masterplan_img', 'hh_p_progress_gallery', 'hh_p_location_img', '_thumbnail_id' ) as $k ) {
+			$v = get_post_meta( $dup->ID, $k, true );
+			if ( $v && ! get_post_meta( $main->ID, $k, true ) ) {
+				update_post_meta( $main->ID, $k, $v );
+			}
+		}
+		$links = (array) get_post_meta( $dup->ID, '_hh_img_links', true );
+		if ( $links ) {
+			update_post_meta( $main->ID, '_hh_img_links', array_merge( $links, (array) get_post_meta( $main->ID, '_hh_img_links', true ) ) );
+		}
+		wp_trash_post( $dup->ID );
+		update_option( 'hh_mia_gop_trang_v1', '1', false );
+	}
 );
