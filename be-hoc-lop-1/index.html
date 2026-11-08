@@ -207,7 +207,12 @@ textarea { width: 100%; min-height: 120px; font: inherit; border-radius: 10px; b
       <button class="btn" data-say="Xin chào, bé cùng học tiếng Việt nhé." data-lang="vi">Thử giọng Việt</button>
       <button class="btn alt" data-say="Hello! Let's learn English together." data-lang="en">Thử giọng Anh</button>
     </div>
-    <p class="hint">Giọng đọc lấy từ máy của bé. Giọng chuẩn nhất: Microsoft Edge (giọng HoaiMy, NamMinh), Chrome (Google Tiếng Việt), iPhone (Linh).</p>
+    <label for="tryWord">Thử đọc một từ (để kiểm tra máy đọc có đúng không)
+      <span class="row"><input type="text" id="tryWord" value="rau" style="flex:1;min-width:0"><button class="btn" id="tryBtn">Nghe</button></span></label>
+    <div class="note"><b>Máy đọc sai chữ (vd "rau" thành "rao")?</b> Giọng tiếng Việt có sẵn trên iPad/iPhone đọc kém. Hãy tải giọng tốt hơn:
+      Cài đặt › Trợ năng › Nội dung được đọc › Giọng nói › Tiếng Việt › chạm <b>Linh (Nâng cao)</b> để tải về.
+      Tải xong, đóng hẳn Safari rồi mở lại app, chọn giọng có chữ "Nâng cao" ở ô Giọng tiếng Việt bên trên.</div>
+    <p class="hint">Giọng đọc lấy từ máy của bé. Giọng chuẩn nhất: Microsoft Edge (giọng HoaiMy, NamMinh), Chrome (Google Tiếng Việt), iPad/iPhone (Linh Nâng cao).</p>
   </section>
 
   <nav class="tabs" role="tablist">
@@ -239,6 +244,7 @@ const norm = l => (l || "").replace("_", "-").toLowerCase();
 function scoreVoice(v, lang) {
   let s = 0; const n = v.name;
   if (/natural|neural|online/i.test(n)) s += 50;
+  if (/enhanced|premium|nâng cao|cao cấp/i.test(n)) s += 60; // giọng tải thêm trên iPad/iPhone, đọc chuẩn hơn
   if (/google/i.test(n)) s += 30;
   if (/hoaimy|namminh|linh|ava|aria|jenny|samantha|sonia|libby/i.test(n)) s += 15;
   if (lang === "en" && norm(v.lang) === "en-us") s += 20;
@@ -649,7 +655,8 @@ function searchLessons(q) {
 const ONSET_GROUPS = [["d", "gi", "r", "v"], ["ch", "tr"], ["s", "x"], ["n", "l"], ["c", "k", "qu", "kh"], ["g", "gh"], ["ng", "ngh"], ["t", "th"], ["p", "ph"], ["", "h"]];
 const sameOnset = (a, b) => a === b || ONSET_GROUPS.some(g => g.includes(a) && g.includes(b));
 const rhNorm = r => r.replace(/(ng|nh)$/, "n").replace(/(ch|c)$/, "t").replace(/^y/, "i").replace(/^ơi$/, "ưi").replace(/^ươi$/, "ưi");
-const rhFold = r => rhNorm(r).replace(/[ăâ]/g, "a").replace(/[ơô]/g, "o").replace(/ư/g, "u").replace(/ê/g, "e").replace(/y/g, "i");
+// au/ao, âu/ao, eo/êu: máy hay nghe lẫn khi trẻ đọc nên coi như nhau
+const rhFold = r => rhNorm(r).replace(/[ăâ]/g, "a").replace(/[ơô]/g, "o").replace(/ư/g, "u").replace(/ê/g, "e").replace(/y/g, "i").replace(/([ae])o$/, "$1u");
 function sylMatch(target, heard, rhymeOnly) {
   const t = parseSyl(target);
   return heard.some(h => {
@@ -1594,6 +1601,7 @@ VIEWS["en:do"] = v => quiz(v, {
 /* ================= CÀI ĐẶT ================= */
 const rate = $("#rate"); rate.value = S.rate; $("#rateVal").textContent = Math.round(S.rate * 100) + "%";
 rate.oninput = () => { S.rate = +rate.value; store.set("rate", S.rate); $("#rateVal").textContent = Math.round(S.rate * 100) + "%"; };
+$("#tryBtn").onclick = () => { const w = $("#tryWord").value.trim(); if (w) say(w); };
 const easySel = $("#easy"); easySel.value = String(S.level);
 easySel.onchange = () => { S.level = +easySel.value; store.set("level", S.level); };
 const kn = $("#kidName"); kn.value = S.name;
