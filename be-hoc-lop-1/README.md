@@ -9,7 +9,8 @@
     từng tiếng sai theo cách sách giáo khoa (vd: *tờ – ui – tui – sắc – túi*) rồi cho bé đọc theo.
     Có mục lục 83 bài **Tiếng Việt 1 – Tập một (Kết nối tri thức)**: gõ số bài hoặc âm/vần là ra.
     Mỗi bài tự tạo từ và câu chỉ dùng chữ, vần, dấu bé đã học tới bài đó (kho từ tự soạn,
-    không chép sách). Bố mẹ chép bài đọc trong sách vào ô của từng bài, máy lưu riêng từng bài.
+    không chép sách). Đoạn đọc của sách không nằm trong mã nguồn: bố mẹ dán vào app trên máy của bé
+    (từng bài, hoặc nhiều bài một lần với các dòng "Bài 43:"), chỉ lưu trong trình duyệt của máy đó.
     Có thêm **Tập hai**: 8 chủ đề, 45 bài đọc và bài ôn tập cuối năm; tìm bằng "6.2" (chủ đề 6, bài 2)
     hoặc tên bài. Mỗi bài có tên bài, từ và câu theo chủ đề do máy soạn; bố mẹ chép bài đọc vào từng bài.
   - Chữ cái (29 chữ, đọc âm như sách: bờ, cờ, dờ…), 6 dấu thanh, ghép âm – vần – dấu
