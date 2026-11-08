@@ -193,6 +193,8 @@ textarea { width: 100%; min-height: 120px; font: inherit; border-radius: 10px; b
       <select id="viVoice"></select></label>
     <label for="enVoice">Giọng tiếng Anh
       <select id="enVoice"></select></label>
+    <label for="easy">Mức chấm khi máy nghe bé đọc
+      <select id="easy"><option value="1">Dễ – chấp nhận đọc gần đúng (nên dùng)</option><option value="0">Chuẩn – phải đúng từng âm, từng dấu</option></select></label>
     <label for="rate">Tốc độ đọc: <span id="rateVal"></span>
       <input type="range" id="rate" min="0.5" max="1.2" step="0.05"></label>
     <div class="row">
@@ -226,7 +228,7 @@ const store = {
 
 /* ================= GIỌNG ĐỌC ================= */
 const synth = window.speechSynthesis;
-const S = { name: store.get("name", "Hà My"), voices: [], rate: store.get("rate", 0.85), vi: store.get("viVoice", ""), en: store.get("enVoice", "") };
+const S = { easy: store.get("easy", true), name: store.get("name", "Hà My"), voices: [], rate: store.get("rate", 0.85), vi: store.get("viVoice", ""), en: store.get("enVoice", "") };
 const norm = l => (l || "").replace("_", "-").toLowerCase();
 function scoreVoice(v, lang) {
   let s = 0; const n = v.name;
@@ -522,6 +524,21 @@ function searchLessons(q) {
   if (/^\d+$/.test(q)) return TV1.filter(L => String(L.n).startsWith(q));
   return TV1.filter(L => plain(L.title).split(/[\s,]+/).some(w => w.startsWith(q)) || plain(L.title).includes(q));
 }
+// Chấm tiếng bé đọc. Chế độ dễ chấp nhận lỗi máy hay nghe nhầm ở giọng trẻ em:
+// âm đầu gần nhau (d/gi/r/v, ch/tr, s/x, n/l…), âm cuối n/ng/nh, t/c/ch, và nhầm dấu thanh.
+const ONSET_GROUPS = [["d", "gi", "r", "v"], ["ch", "tr"], ["s", "x"], ["n", "l"], ["c", "k", "qu"], ["g", "gh"], ["ng", "ngh"]];
+const sameOnset = (a, b) => a === b || ONSET_GROUPS.some(g => g.includes(a) && g.includes(b));
+const rhNorm = r => r.replace(/(ng|nh)$/, "n").replace(/(ch|c)$/, "t").replace(/^y/, "i").replace(/^ơi$/, "ưi").replace(/^ươi$/, "ưi");
+function sylMatch(target, heard, rhymeOnly) {
+  const t = parseSyl(target);
+  return heard.some(h => {
+    if (h.base === t.base && h.tone === t.tone) return true;
+    if (!S.easy) return false;
+    const rhOk = h.rh === t.rh || rhNorm(h.rh) === rhNorm(t.rh);
+    if (rhymeOnly) return rhOk;              // đọc vần "ui": máy hay nghe thành "túi", "ủi"…
+    return rhOk && sameOnset(h.on, t.on);    // bỏ qua dấu thanh
+  });
+}
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 let srBroken = false, curRec = null;
 // Chế độ tự động: bấm "Bắt đầu" một lần, máy tự nghe – chấm – nhắc đọc lại – đánh vần – chuyển câu
@@ -539,18 +556,22 @@ function micHelp(err) {
   return t + " Trong lúc đó bố mẹ chấm bằng nút Đúng / Sai. (mã lỗi: " + err + ")";
 }
 function bdStop() { bdRunning = false; bdSess++; abortRec(); speakToken++; if (synth) synth.cancel(); }
-function listen(long) {
+// Nghe bé đọc. Lấy cả kết quả tạm (Safari trên iPad thường không báo kết quả cuối),
+// bé ngừng nói một lúc thì chốt.
+function listen(long, onHear) {
   return new Promise((resolve, reject) => {
     const r = new SR(); curRec = r;
-    r.lang = "vi-VN"; r.maxAlternatives = 5; r.interimResults = false; r.continuous = long;
-    const alts = []; let timer, done = false;
-    const maxT = setTimeout(() => finish(), long ? 20000 : 8000);
+    r.lang = "vi-VN"; r.maxAlternatives = 5; r.interimResults = true; r.continuous = long;
+    let alts = [], timer, done = false;
+    const maxT = setTimeout(() => finish(), long ? 20000 : 9000);
     function finish() { if (done) return; done = true; clearTimeout(timer); clearTimeout(maxT); try { r.stop(); } catch (e) {} if (curRec === r) curRec = null; resolve(alts); }
     r.onresult = e => {
-      for (let i = e.resultIndex; i < e.results.length; i++) { const res = e.results[i]; if (res.isFinal) for (const a of res) alts.push(a.transcript); }
-      clearTimeout(timer); timer = setTimeout(finish, long ? 2500 : 700);
+      const now = [];
+      for (let i = 0; i < e.results.length; i++) for (const a of e.results[i]) if (a.transcript.trim()) now.push(a.transcript.trim());
+      if (now.length) { alts = now; if (onHear) onHear(now[0]); }
+      clearTimeout(timer); timer = setTimeout(finish, long ? 2200 : 1300);
     };
-    r.onerror = e => { if (done) return; done = true; clearTimeout(maxT); clearTimeout(timer); if (curRec === r) curRec = null; e.error === "no-speech" || e.error === "aborted" ? resolve(alts) : reject(e.error); };
+    r.onerror = e => { if (done) return; if (e.error === "no-speech" || e.error === "aborted") return finish(); done = true; clearTimeout(maxT); clearTimeout(timer); if (curRec === r) curRec = null; reject(e.error); };
     r.onend = finish;
     try { r.start(); } catch (e) { done = true; clearTimeout(maxT); curRec = null; reject("not-allowed"); }
   });
@@ -647,7 +668,9 @@ VIEWS["vn:bedoc"] = v => {
       if (prompt) { await speakSeq([{ t: `${S.name} đọc nhé!` }]); if (!alive() || r !== round) return; }
       micState(true); heardEl.textContent = "";
       let alts;
-      try { alts = await listen(words.length > 1); }
+      // chờ loa nói xong hẳn rồi mới mở micro, để không mất tiếng đầu của bé
+      await new Promise(res => setTimeout(res, 600)); if (!alive() || r !== round) return;
+      try { alts = await listen(words.length > 1, t => { heardEl.textContent = "Máy đang nghe: " + t; }); }
       catch (err) {
         if (!alive()) return;
         busy = false; micState(false);
@@ -662,16 +685,18 @@ VIEWS["vn:bedoc"] = v => {
       busy = false; micState(false);
       if (!bdRunning) return;
       if (!alts.length) {
-        if (++bdNoHear >= 3) { bdRunning = false; bdNoHear = 0; bdMsg = ["bad", `Máy tạm dừng vì không nghe thấy ${S.name}. Bấm Bắt đầu để đọc tiếp.`]; return draw(); }
-        const t = `Cô chưa nghe thấy. ${S.name} đọc to hơn nhé!`;
+        if (++bdNoHear >= 2) { bdRunning = false; bdNoHear = 0; bdMsg = ["bad", `Máy này chưa nghe được tiếng ${S.name}. ${S.name} không cần đọc to hơn đâu. Bố mẹ nghe bé đọc rồi bấm Đúng hoặc Sai nhé, hoặc bấm Bắt đầu để thử lại.`]; return draw(); }
+        const t = `${S.name} đọc lại cho cô nghe nhé.`;
         setFb("bad", t); busy = true; await speakSeq([{ t }]); busy = false;
         return listenRound(false);
       }
       bdNoHear = 0;
       heardEl.textContent = "Máy nghe được: " + alts[0];
-      const heard = new Set(alts.join(" ").split(/\s+/).map(cleanW).filter(Boolean).map(sylKey));
-      const miss = words.map((w, i) => heard.has(sylKey(w)) ? -1 : i).filter(i => i >= 0);
-      judge(miss.length === 0 || (words.length >= 6 && miss.length <= 1), miss);
+      const heard = alts.join(" ").split(/\s+/).map(cleanW).filter(Boolean).map(parseSyl);
+      const single = words.length === 1 && !parseSyl(words[0]).on; // thẻ chỉ có vần, vd "ui"
+      const miss = words.map((w, i) => sylMatch(w, heard, single) ? -1 : i).filter(i => i >= 0);
+      const allow = S.easy ? Math.floor(words.length * 0.25) : (words.length >= 6 ? 1 : 0);
+      judge(miss.length <= allow, miss);
     }
     // bố mẹ bấm chấm tay thì ngắt lượt nghe đang chạy
     const manual = ok => { if (curRec) { round++; abortRec(); busy = false; micState(false); } judge(ok, []); };
@@ -933,6 +958,8 @@ VIEWS["en:do"] = v => quiz(v, {
 /* ================= CÀI ĐẶT ================= */
 const rate = $("#rate"); rate.value = S.rate; $("#rateVal").textContent = Math.round(S.rate * 100) + "%";
 rate.oninput = () => { S.rate = +rate.value; store.set("rate", S.rate); $("#rateVal").textContent = Math.round(S.rate * 100) + "%"; };
+const easySel = $("#easy"); easySel.value = S.easy ? "1" : "0";
+easySel.onchange = () => { S.easy = easySel.value === "1"; store.set("easy", S.easy); };
 const kn = $("#kidName"); kn.value = S.name;
 kn.oninput = () => { S.name = kn.value.trim() || "bé"; store.set("name", S.name); };
 $("#viVoice").onchange = e => { S.vi = e.target.value; store.set("viVoice", S.vi); };
