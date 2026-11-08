@@ -7,7 +7,9 @@
     tự chuyển câu. Không có micro thì bố mẹ bấm Đúng/Sai.
     Đọc sai → máy nhắc "Hà My đọc lại nhé" (tối đa 3 lần). Sai lần 3 → máy đánh vần
     từng tiếng sai theo cách sách giáo khoa (vd: *tờ – ui – tui – sắc – túi*) rồi cho bé đọc theo.
-    Có sẵn Bài 41 (ui, ưi); bố mẹ có thể chép bài khác từ sách vào.
+    Có mục lục 83 bài **Tiếng Việt 1 – Tập một (Kết nối tri thức)**: gõ số bài hoặc âm/vần là ra.
+    Mỗi bài tự tạo từ và câu chỉ dùng chữ, vần, dấu bé đã học tới bài đó (kho từ tự soạn,
+    không chép sách). Bố mẹ chép bài đọc trong sách vào ô của từng bài, máy lưu riêng từng bài.
   - Chữ cái (29 chữ, đọc âm như sách: bờ, cờ, dờ…), 6 dấu thanh, ghép âm – vần – dấu
     (tự áp quy tắc c/k, g/gh, ng/ngh, vị trí dấu thanh, vần p/t/c/ch chỉ có sắc/nặng), tập đọc câu.
 - **Toán**: đếm hình, cộng trừ phạm vi 10 / 20 / 100 (không nhớ), so sánh số.
