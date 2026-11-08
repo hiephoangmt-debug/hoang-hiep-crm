@@ -429,12 +429,16 @@ if ( ! $parent ) {
           }
           $lb  = preg_replace( array( '/\b(?:tòa|toà|tháp|block|khối)\s+[A-Za-z]{0,3}\d{0,2}[A-Za-z]?\b/iu', '/^[A-Z]{1,2}\d{1,2}\s*[·–—-]\s*/u', '/^\s*mặt bằng\s*/iu', '/\s*\(.*?\)\s*/u' ), ' ', $lb );
           $lb  = preg_replace( '/\s*,\s*(?=[^\d\s])\D.*$/u', '', $lb ); // Bỏ phần mô tả sau số tầng: "Tầng 3, mặt sông Hàn" → "Tầng 3".
+          $lb  = preg_replace( array( '/\s*:.*$/u', '/\s+(?:Đà Nẵng|Hội An|Quảng Nam)\b/u' ), '', $lb ); // "Tầng 3: bể bơi…" → "Tầng 3"; bỏ tên thành phố còn sót.
           $lb  = preg_replace( '/\s+,/u', ',', $lb );
           $lb  = trim( preg_replace( '/\s{2,}/u', ' ', $lb ), " \t·–—-,.:" );
           $lb  = '' === $lb ? 'Mặt bằng ' . ( $i + 1 ) : mb_strtoupper( mb_substr( $lb, 0, 1 ) ) . mb_substr( $lb, 1 );
           $n   = mb_strtolower( $lb );
           $rk  = false !== mb_strpos( $n, 'sơ đồ' ) || false !== mb_strpos( $n, 'tổng' ) ? -5 : ( false !== mb_strpos( $n, 'hầm' ) ? -1 : ( preg_match( '/(\d+)/', $n, $d ) ? (int) $d[1] : 900 ) );
           $rk += false !== mb_strpos( $n, 'penthouse' ) ? 500 : ( false !== mb_strpos( $n, 'mái' ) ? 800 : 0 );
+          if ( preg_match( '/căn hộ|căn \d|\dpn|phòng ngủ|layout|studio/u', $n ) && ! preg_match( '/tầng|hầm|mái/u', $n ) ) {
+              $rk = 2000 + $rk; // Ảnh mặt bằng căn hộ lẫn vào mặt bằng tầng: xếp sau mọi tầng, không mở đầu tiên.
+          }
           $fl[] = array( 'img' => $img, 'toa' => $toa, 'lb' => $lb, 'rk' => $rk, 'i' => $i );
           $prev = $toa;
       }

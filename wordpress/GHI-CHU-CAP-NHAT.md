@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.95** + plugin Hoàng Hiệp CRM **2.20.219**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.96** + plugin Hoàng Hiệp CRM **2.20.220**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.96 + plugin 2.20.220 (08/11/2026)
+
+- **Mặt bằng tầng (mọi dự án):** tên tab gọn – bỏ chữ "Đà Nẵng" thừa và phần mô tả sau dấu hai chấm ("Tầng 3 : bể bơi trong nhà" → "Tầng 3"); ảnh mặt bằng căn hộ lỡ nằm trong mục mặt bằng tầng được xếp sau cùng, không chen giữa các tầng, không mở đầu tiên.
+- **FPT Plaza 3:** chuyển ảnh mặt bằng căn 2PN 57,84 m² từ "Mặt bằng tầng" sang "Layout loại căn" (tự chạy 1 lần khi mở trang quản trị).
+- Cài: Nhập nhanh → upload → mở trang quản trị một lần → LiteSpeed Purge All.
 
 ## Có gì mới – plugin 2.20.219 (08/11/2026)
 

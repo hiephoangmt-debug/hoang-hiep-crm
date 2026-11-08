@@ -93,3 +93,37 @@ add_filter(
 	},
 	70
 );
+
+/**
+ * 08/11/2026: ảnh mặt bằng căn 2PN 57,84 m² bị xếp vào "Ảnh mặt bằng tầng" (hiện lẫn giữa các tab tầng) –
+ * chuyển sang "Layout loại căn". Chạy một lần.
+ */
+add_action(
+	'admin_init',
+	static function () {
+		if ( get_option( 'hh_fpt3_layout_2pn_v1' ) ) {
+			return;
+		}
+		$p = get_page_by_path( 'fpt-plaza-3', OBJECT, 'du-an' );
+		if ( ! $p ) {
+			return;
+		}
+		$done = (array) get_post_meta( $p->ID, '_hh_img_links', true );
+		$id   = (int) ( $done['plugin:img/fpt-plaza-3/fpt-plaza-3-mat-bang-can-2pn-57m2.jpg'] ?? 0 );
+		if ( ! $id ) {
+			return; // Ảnh chưa tải về – lúc tải sẽ vào đúng mục layout.
+		}
+		$ids   = static fn( $k ) => array_values( array_filter( array_map( 'absint', explode( ',', (string) get_post_meta( $p->ID, $k, true ) ) ) ) );
+		$floor = $ids( 'hh_p_floorplans' );
+		if ( in_array( $id, $floor, true ) ) {
+			update_post_meta( $p->ID, 'hh_p_floorplans', implode( ',', array_diff( $floor, array( $id ) ) ) );
+			$lay = $ids( 'hh_p_unit_layouts' );
+			if ( ! in_array( $id, $lay, true ) ) {
+				array_unshift( $lay, $id );
+				update_post_meta( $p->ID, 'hh_p_unit_layouts', implode( ',', $lay ) );
+			}
+			wp_update_post( array( 'ID' => $id, 'post_title' => '2PN' ) );
+		}
+		update_option( 'hh_fpt3_layout_2pn_v1', '1', false );
+	}
+);
