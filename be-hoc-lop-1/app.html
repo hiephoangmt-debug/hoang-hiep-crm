@@ -169,6 +169,8 @@ textarea { width: 100%; min-height: 120px; font: inherit; border-radius: 10px; b
 .settings input[type="text"] { width: 100%; font: inherit; padding: 6px 10px; border-radius: 10px; border: 2px solid var(--line); background: var(--paper); color: var(--ink); }
 .book { display: grid; gap: 6px; }
 .booklbl { font-weight: 800; color: var(--muted); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+.addbook { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; background: var(--sun-soft); border-radius: 14px; padding: 10px 14px; font-weight: 700; font-size: 15px; }
+.howto { margin: 8px 0; padding-left: 20px; display: grid; gap: 4px; }
 #lessonSearch, #toanSearch, #enSearch { width: 100%; font: inherit; font-size: 18px; padding: 10px 14px; border-radius: 14px; border: 2px solid var(--tim); background: var(--paper); color: var(--ink); }
 .lessonlist { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; max-height: 200px; overflow-y: auto; padding: 2px; }
 .lessonlist button { text-align: left; border: 2px solid var(--line); background: var(--paper); border-radius: 12px; padding: 6px 10px; font-size: 15px; }
@@ -587,6 +589,12 @@ TV2_RAW.forEach(([topic, lessons], ti) => lessons.forEach(([title, words, sents]
 TV2.push({ n: 101 + TV2.length, num: TV2.length + 1, topic: "Ôn tập", title: "Ôn tập và đánh giá cuối năm",
   items: TV2.flatMap(L => L.items.slice(1, 2).concat(L.items.slice(-1))).filter((_, i) => i % 3 === 0) });
 const isBook2 = n => n > 100;
+// Tách đoạn văn dán vào (từ ảnh chụp sách) thành từng câu; bỏ số trang, dòng quá ngắn vô nghĩa
+function splitPassage(text) {
+  return text.replace(/\r/g, "").replace(/[ \t]+/g, " ")
+    .replace(/([^.!?\n])\n(?=[a-zà-ỹđ])/g, "$1 ")          // dòng bị ngắt giữa câu thì nối lại
+    .split(/\n+|(?<=[.!?…])\s+/).map(x => x.trim()).filter(x => x && !/^\d+$/.test(x));
+}
 const lessonOf = n => (isBook2(n) ? TV2 : TV1).find(x => x.n === n);
 function searchBook(book, q) {
   if (book === 1) return searchLessons(q);
@@ -699,6 +707,7 @@ VIEWS["vn:bedoc"] = v => {
     const alive = () => my === bdSess && state.tab === "vn" && state.sub.vn === "bedoc";
     let busy = false, round = 0;
     const book = isBook2(N) ? 2 : 1;
+    const hasPassage = !!(BOOK_EXTRA[N] && BOOK_EXTRA[N].length) || store.get("custom-" + N, []).length > 0;
     const LS = lessonOf(N) || TV1[0]; N = LS.n; store.set("bdN" + book, N);
     const items = lessonItems(N); if (I >= items.length) I = 0;
     store.set("bdN", N); store.set("bdI", I);
@@ -715,6 +724,7 @@ VIEWS["vn:bedoc"] = v => {
       <div class="lessonlist" id="lessonList"></div>
     </div>
     <h3 class="lessonname">${book === 2 ? `<small>${LS.topicNo ? `Chủ đề ${LS.topicNo}: ${esc(LS.topic)}` : "Cuối năm"}</small><br>${LS.topicNo ? `Bài ${LS.lessonNo}: ` : ""}${esc(LS.title)}` : `Bài ${N}: ${esc(LS.title)}`}${LS.reviewOf ? ` <small>(ôn bài ${LS.reviewOf.join(", ")})</small>` : ""}</h3>
+    ${hasPassage ? "" : `<div class="addbook"><span>Bài này chưa có đoạn đọc trong sách.</span><button class="btn alt" id="addPassage">+ Thêm đoạn đọc của sách</button></div>`}
     <div class="status"><span>${I + 1} / ${items.length}</span><span>Lần đọc sai <span class="dots" id="dots">${[0,1,2].map(i => `<i class="${i < tries ? "x" : ""}"></i>`).join("")}</span></span></div>
     <div class="sentence oli">${words.map((w, i) => `<button class="word" data-w="${i}" aria-label="Đánh dấu tiếng ${esc(w)} đọc sai">${esc(w)}</button>`).join("")}</div>
     <div class="feedback" id="fb" aria-live="polite"></div>
@@ -722,8 +732,13 @@ VIEWS["vn:bedoc"] = v => {
     ${useMic ? `<div class="row" style="justify-content:center"><button class="btn mic${bdRunning ? "" : " sun"}" id="mic">${bdRunning ? "■ Dừng nghe" : "▶ Bắt đầu – máy tự nghe bé đọc"}</button></div><p class="heard" id="heard"></p>` : micOff ? `<div class="row" style="justify-content:center"><button class="btn sun" id="micRetry">Thử bật micro lại</button></div>` : ""}
     <div class="judge"><button class="btn okb" id="ok">✓ Đúng</button><button class="btn badb" id="bad">✗ Sai</button></div>
     <div class="row"><button class="btn alt" id="spellBtn">Đánh vần giúp bé</button><button class="btn alt" id="model">Nghe mẫu</button><button class="btn alt" id="prev">‹ Trước</button><button class="btn alt" id="next">Tiếp ›</button></div>
-    <details><summary>Bố mẹ chép bài đọc trong sách cho Bài ${N}</summary>
-      <label for="customTxt" class="hint">Mỗi dòng là một từ hoặc một câu. Máy lưu riêng cho Bài ${N} và thêm vào cuối bài.</label>
+    <details id="bookBox"><summary>Bố mẹ thêm đoạn đọc trong sách cho bài này</summary>
+      <ol class="hint howto">
+        <li>Mở <b>Camera</b> trên iPad/iPhone, hướng vào đoạn đọc trong sách (hoặc mở ảnh đã chụp trong <b>Ảnh</b>).</li>
+        <li>Bấm biểu tượng <b>nhận chữ</b> (ô vuông có dòng kẻ) ở góc ảnh, hoặc giữ ngón tay lên chữ.</li>
+        <li>Chọn cả đoạn → <b>Sao chép</b> → quay lại đây, giữ vào ô bên dưới → <b>Dán</b> → bấm <b>Lưu bài</b>.</li>
+      </ol>
+      <label for="customTxt" class="hint">Dán cả đoạn cũng được: máy tự tách thành từng câu. Máy chỉ lưu trên máy này.</label>
       <textarea id="customTxt" placeholder="túi&#10;gửi thư&#10;Bà gửi cho Hà túi kẹo.">${esc(store.get("custom-" + N, []).join("\n"))}</textarea>
       <div class="row"><button class="btn" id="saveCustom">Lưu bài</button><button class="btn alt" id="clearCustom">Xoá bài</button></div>
     </details>`;
@@ -835,7 +850,9 @@ VIEWS["vn:bedoc"] = v => {
     search.oninput = () => { query = search.value; renderList(); };
     search.onkeydown = e => { if (e.key === "Enter") { const f = searchBook(book, query); if (f.length) { N = f[0].n; I = 0; tries = 0; query = ""; draw(); } } };
     v.querySelectorAll("[data-book]").forEach(b => b.onclick = () => { const nb = +b.dataset.book; if (nb === book) return; N = store.get("bdN" + nb, nb === 1 ? 41 : 101); I = 0; tries = 0; query = ""; draw(); });
-    $("#saveCustom").onclick = () => { const lines = $("#customTxt").value.split("\n").map(x => x.trim()).filter(Boolean); store.set("custom-" + N, lines); draw(); };
+    $("#saveCustom").onclick = () => { store.set("custom-" + N, splitPassage($("#customTxt").value)); I = 0; draw(); };
+    const addP = $("#addPassage");
+    if (addP) addP.onclick = () => { const box = $("#bookBox"); box.open = true; box.scrollIntoView({ behavior: "smooth", block: "start" }); setTimeout(() => $("#customTxt").focus(), 400); };
     $("#clearCustom").onclick = () => { store.set("custom-" + N, []); I = 0; draw(); };
     if (mic) mic.onclick = () => {
       if (bdRunning) { bdStop(); bdMsg = ["", "Đã dừng nghe."]; draw(); }
