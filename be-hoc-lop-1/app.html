@@ -68,7 +68,7 @@ button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px s
 .chip { border: 2px solid var(--line); background: var(--paper); border-radius: 999px; padding: 6px 14px; font-weight: 800; font-size: 15px; }
 .chip[aria-pressed="true"] { border-color: var(--tim); background: var(--tim-soft); color: var(--tim); }
 
-.sheet { background: var(--paper); border-radius: 22px; padding: 18px; box-shadow: var(--shadow); display: grid; gap: 16px; min-width: 0; }
+.sheet { grid-template-columns: minmax(0, 1fr); background: var(--paper); border-radius: 22px; padding: 18px; box-shadow: var(--shadow); display: grid; gap: 16px; min-width: 0; }
 .hint { color: var(--muted); margin: 0; font-size: 15px; }
 .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 
@@ -125,10 +125,14 @@ button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px s
 .list button[aria-pressed="true"] { border-color: var(--tim); background: var(--tim-soft); }
 
 /* quiz */
-.q { display: grid; justify-items: center; gap: 14px; text-align: center; }
+.q { grid-template-columns: minmax(0, 1fr); width: 100%; display: grid; justify-items: center; gap: 14px; text-align: center; }
 .q .prompt { font-family: var(--f-display); font-size: clamp(40px, 11vw, 72px); font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
 .q .objs { font-size: clamp(32px, 8vw, 46px); line-height: 1.3; max-width: 520px; overflow-wrap: anywhere; }
 .opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px; width: 100%; max-width: 560px; }
+.opt.txt { font-family: var(--f-body); font-size: 20px; }
+.opt.lbl { font-size: 26px; }
+.rows { display: grid; gap: 6px; }
+.mathsvg { max-width: 100%; height: auto; }
 .opt { border: 3px solid var(--line); background: var(--paper); border-radius: 18px; padding: 10px; font-family: var(--f-display); font-size: 38px; font-weight: 800; font-variant-numeric: tabular-nums; min-height: 76px; }
 .opt.ok { border-color: var(--ok); background: var(--ok-soft); color: var(--ok); }
 .opt.bad { border-color: var(--bad); background: var(--bad-soft); color: var(--bad); animation: shake .35s; }
@@ -165,7 +169,7 @@ textarea { width: 100%; min-height: 120px; font: inherit; border-radius: 10px; b
 .settings input[type="text"] { width: 100%; font: inherit; padding: 6px 10px; border-radius: 10px; border: 2px solid var(--line); background: var(--paper); color: var(--ink); }
 .book { display: grid; gap: 6px; }
 .booklbl { font-weight: 800; color: var(--muted); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
-#lessonSearch { width: 100%; font: inherit; font-size: 18px; padding: 10px 14px; border-radius: 14px; border: 2px solid var(--tim); background: var(--paper); color: var(--ink); }
+#lessonSearch, #toanSearch { width: 100%; font: inherit; font-size: 18px; padding: 10px 14px; border-radius: 14px; border: 2px solid var(--tim); background: var(--paper); color: var(--ink); }
 .lessonlist { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; max-height: 200px; overflow-y: auto; padding: 2px; }
 .lessonlist button { text-align: left; border: 2px solid var(--line); background: var(--paper); border-radius: 12px; padding: 6px 10px; font-size: 15px; }
 .lessonlist button b { color: var(--tim); }
@@ -402,7 +406,7 @@ const PHRASES = [["Hello!","Xin chào!"],["Good morning!","Chào buổi sáng!"]
 /* ================= ĐIỀU HƯỚNG ================= */
 const SUBS = {
   vn: [["bedoc","Bé tự đọc"],["chu","Chữ cái"],["dau","Dấu thanh"],["ghep","Ghép vần"],["doc","Tập đọc"]],
-  math: [["dem","Đếm hình"],["tinh","Cộng, trừ"],["sosanh","So sánh"]],
+  math: [["sach","Theo sách"],["dem","Đếm hình"],["tinh","Cộng, trừ"],["sosanh","So sánh"]],
   en: [["tu","Từ vựng"],["abc","Chữ cái ABC"],["cau","Mẫu câu"],["do","Nghe và chọn"]]
 };
 const state = { tab: store.get("tab", "vn"), sub: store.get("sub", {}) };
@@ -859,7 +863,7 @@ function quiz(v, { title, hint, make, top, bind }) {
     const q = make();
     v.innerHTML = `<div><h2>${title}</h2><p class="hint">${hint}</p></div>${top || ""}
     <div class="q">${q.html}
-      <div class="opts">${q.options.map(o => `<button class="opt" data-o="${esc(o)}"${q.optLang === "en" ? "" : ""}>${q.label ? q.label(o) : esc(o)}</button>`).join("")}</div>
+      <div class="opts">${q.options.map(o => `<button class="opt${q.label ? " lbl" : /^[\d<>=]+$/.test(String(o)) ? "" : " txt"}" data-o="${esc(o)}">${q.label ? q.label(o) : esc(o)}</button>`).join("")}</div>
       <div class="feedback" id="fb" aria-live="polite"></div>
       <div class="row"><button class="btn alt" id="again">Nghe lại</button><button class="btn alt" id="skip">Câu khác</button></div>
     </div>`;
@@ -935,6 +939,190 @@ VIEWS["math:sosanh"] = v => quiz(v, {
       speak: [{ t: `So sánh ${a} và ${b}.` }], after: [{ t: `${a} ${w} ${b}.` }] };
   }
 });
+
+/* ---------- Toán 1 theo sách (Kết nối tri thức với cuộc sống) ---------- */
+// Câu hỏi do máy tự tạo theo nội dung từng bài, không chép từ sách.
+const RR = (a, b) => a + rand(b - a + 1);
+const pickN = (arr, n) => shuffle(arr).slice(0, n);
+const OBJ_ICONS = ["🍎", "⭐", "🐟", "🌸", "🎈", "🐥", "🍓", "🚗"];
+const svgBox = (inner, w = 140, h = 140) => `<svg class="mathsvg" viewBox="0 0 ${w} ${h}" width="${w * 1.4}" role="img" aria-hidden="true">${inner}</svg>`;
+const SHAPES = {
+  "Hình vuông": c => `<rect x="25" y="25" width="90" height="90" rx="4" fill="${c}" stroke="var(--ink)" stroke-width="3"/>`,
+  "Hình tròn": c => `<circle cx="70" cy="70" r="50" fill="${c}" stroke="var(--ink)" stroke-width="3"/>`,
+  "Hình tam giác": c => `<polygon points="70,18 125,118 15,118" fill="${c}" stroke="var(--ink)" stroke-width="3" stroke-linejoin="round"/>`,
+  "Hình chữ nhật": c => `<rect x="8" y="40" width="124" height="62" rx="4" fill="${c}" stroke="var(--ink)" stroke-width="3"/>`
+};
+const SHAPE_COLORS = ["var(--sun)", "var(--tim-soft)", "var(--ok-soft)", "var(--bad-soft)"];
+const SOLIDS = {
+  "Khối lập phương": c => `<polygon points="30,50 55,25 115,25 90,50" fill="${c}" opacity=".7" stroke="var(--ink)" stroke-width="3"/><polygon points="90,50 115,25 115,85 90,110" fill="${c}" opacity=".45" stroke="var(--ink)" stroke-width="3"/><rect x="30" y="50" width="60" height="60" fill="${c}" stroke="var(--ink)" stroke-width="3"/>`,
+  "Khối hộp chữ nhật": c => `<polygon points="10,60 35,35 135,35 110,60" fill="${c}" opacity=".7" stroke="var(--ink)" stroke-width="3"/><polygon points="110,60 135,35 135,80 110,105" fill="${c}" opacity=".45" stroke="var(--ink)" stroke-width="3"/><rect x="10" y="60" width="100" height="45" fill="${c}" stroke="var(--ink)" stroke-width="3"/>`
+};
+const DAYS = ["Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy", "Chủ nhật"];
+function clockSvg(h) {
+  let s = `<circle cx="70" cy="70" r="62" fill="var(--paper)" stroke="var(--tim)" stroke-width="5"/>`;
+  for (let i = 1; i <= 12; i++) { const a = i * Math.PI / 6; s += `<text x="${70 + 48 * Math.sin(a)}" y="${70 - 48 * Math.cos(a) + 6}" text-anchor="middle" font-size="15" font-weight="800" fill="var(--ink)">${i}</text>`; }
+  const a = h * Math.PI / 6;
+  s += `<line x1="70" y1="70" x2="${70 + 28 * Math.sin(a)}" y2="${70 - 28 * Math.cos(a)}" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/>`;
+  s += `<line x1="70" y1="70" x2="70" y2="22" stroke="var(--bad)" stroke-width="4" stroke-linecap="round"/><circle cx="70" cy="70" r="5" fill="var(--ink)"/>`;
+  return svgBox(s);
+}
+function arithQ(kind) {
+  let a, b, op;
+  if (kind === "add10" || kind === "sub10") { op = kind === "add10" ? "+" : "−"; a = RR(op === "+" ? 0 : 1, 10); b = op === "+" ? rand(11 - a) : rand(a + 1); }
+  else { // phạm vi 100, không nhớ
+    op = kind.startsWith("add") ? "+" : "−";
+    const two = kind.endsWith("22");
+    if (op === "+") {
+      const t1 = RR(1, two ? 8 : 9), t2 = two ? RR(1, 9 - t1) : 0, u1 = RR(0, 8), u2 = RR(1, 9 - u1);
+      a = t1 * 10 + u1; b = t2 * 10 + u2;
+    } else {
+      const t1 = RR(two ? 2 : 1, 9), t2 = two ? RR(1, t1 - 1) : 0, u1 = RR(1, 9), u2 = RR(two ? 0 : 1, u1);
+      a = t1 * 10 + u1; b = t2 * 10 + u2;
+    }
+  }
+  const ans = op === "+" ? a + b : a - b, word = op === "+" ? "cộng" : "trừ";
+  const dots = (kind === "add10" || kind === "sub10") ? `<div class="objs" aria-hidden="true">${op === "+" ? "🍎".repeat(a) + '<span class="plus">+</span>' + "🍎".repeat(b) : "🍎".repeat(a - b) + "🍏".repeat(b)}</div>` : "";
+  return { html: `<div class="prompt oli" style="padding:10px 24px">${a} ${op} ${b} = ?</div>${dots}`, options: numOptions(ans, kind.endsWith("10") ? 10 : 99), answer: ans,
+    speak: [{ t: `${a} ${word} ${b} bằng mấy?` }], after: [{ t: `${a} ${word} ${b} bằng ${ans}.` }] };
+}
+function cmpQ(max) {
+  const a = rand(max + 1), b = Math.random() < .2 ? a : rand(max + 1);
+  const ans = a > b ? ">" : a < b ? "<" : "=", w = { ">": "lớn hơn", "<": "bé hơn", "=": "bằng" }[ans];
+  return { html: `<div class="prompt oli" style="padding:10px 24px">${a} ☐ ${b}</div>`, options: [">", "<", "="], answer: ans,
+    speak: [{ t: `So sánh ${a} và ${b}.` }], after: [{ t: `${a} ${w} ${b}.` }] };
+}
+function countQ(lo, hi) {
+  const n = RR(lo, hi), o = OBJS[rand(OBJS.length)];
+  return { html: `<div class="objs" aria-label="${n} ${o[1]}">${o[0].repeat(n)}</div>`, options: numOptions(n, hi, 3), answer: n,
+    speak: [{ t: `Có bao nhiêu ${o[1]}?` }], after: [{ t: `Có ${n} ${o[1]}.` }] };
+}
+const GEN = {
+  count5: () => countQ(1, 5),
+  count10: () => countQ(1, 10),
+  more() {
+    const a = RR(2, 8), b = Math.random() < .25 ? a : RR(2, 8), ic = pickN(OBJ_ICONS, 2);
+    const ans = a > b ? "Hàng trên" : a < b ? "Hàng dưới" : "Bằng nhau";
+    return { html: `<div class="rows"><div class="objs">${ic[0].repeat(a)}</div><div class="objs">${ic[1].repeat(b)}</div></div>`,
+      options: ["Hàng trên", "Hàng dưới", "Bằng nhau"], answer: ans,
+      speak: [{ t: "Hàng nào nhiều hơn? Hay hai hàng bằng nhau?" }], after: [{ t: `Hàng trên có ${a}, hàng dưới có ${b}.` }] };
+  },
+  cmp10: () => cmpQ(10),
+  cmp100: () => cmpQ(99),
+  split() {
+    const n = RR(2, 10), a = RR(1, n - 1);
+    return { html: `<div class="prompt" style="font-size:clamp(30px,8vw,48px)">${n} gồm ${a} và ?</div><div class="objs">${"🔴".repeat(a)}${"🔵".repeat(n - a)}</div>`,
+      options: numOptions(n - a, 10, 3), answer: n - a, speak: [{ t: `${n} gồm ${a} và mấy?` }], after: [{ t: `${n} gồm ${a} và ${n - a}.` }] };
+  },
+  shape() {
+    const names = Object.keys(SHAPES), k = names[rand(4)];
+    return { html: svgBox(SHAPES[k](SHAPE_COLORS[rand(4)])), options: shuffle(names), answer: k, speak: [{ t: "Đây là hình gì?" }], after: [{ t: `Đây là ${k.toLowerCase()}.` }] };
+  },
+  solid() {
+    const names = Object.keys(SOLIDS), k = names[rand(2)];
+    return { html: svgBox(SOLIDS[k](["var(--sun)", "var(--blue)", "var(--ok)"][rand(3)])), options: names, answer: k, speak: [{ t: "Đây là khối gì?" }], after: [{ t: `Đây là ${k.toLowerCase()}.` }] };
+  },
+  position() {
+    if (Math.random() < .5) {
+      const left = Math.random() < .5, ans = left ? "Bên trái" : "Bên phải";
+      return { html: `<div class="objs">${left ? "🐱 &nbsp; 🐶" : "🐶 &nbsp; 🐱"}</div>`, options: ["Bên trái", "Bên phải"], answer: ans,
+        speak: [{ t: "Con mèo ở bên trái hay bên phải con chó?" }], after: [{ t: `Con mèo ở ${ans.toLowerCase()} con chó.` }] };
+    }
+    const up = Math.random() < .5, ans = up ? "Ở trên" : "Ở dưới";
+    return { html: `<div class="objs" style="display:grid;line-height:1.1">${up ? "<span>⚽</span><span>📦</span>" : "<span>📦</span><span>⚽</span>"}</div>`, options: ["Ở trên", "Ở dưới"], answer: ans,
+      speak: [{ t: "Quả bóng ở trên hay ở dưới cái hộp?" }], after: [{ t: `Quả bóng ${ans.toLowerCase()} cái hộp.` }] };
+  },
+  twodigit() {
+    const t = RR(1, 9), u = rand(10), n = t * 10 + u;
+    if (Math.random() < .5) return { html: `<div class="prompt" style="font-size:clamp(26px,7vw,42px)">${t} chục và ${u} đơn vị</div><div class="objs">${"🔟".repeat(t)} ${"🟡".repeat(u)}</div>`,
+      options: numOptions(n, 99), answer: n, speak: [{ t: `Số gồm ${t} chục và ${u} đơn vị là số nào?` }], after: [{ t: `Đó là số ${n}.` }] };
+    return { html: `<div class="prompt oli" style="padding:10px 24px">${n}</div>`, options: numOptions(t, 9, 3), answer: t, label: o => `${o} chục`,
+      speak: [{ t: `Số ${n} gồm mấy chục?` }], after: [{ t: `Số ${n} gồm ${t} chục và ${u} đơn vị.` }] };
+  },
+  seq100() {
+    const n = RR(2, 98), after = Math.random() < .5, ans = after ? n + 1 : n - 1, w = after ? "liền sau" : "liền trước";
+    return { html: `<div class="prompt" style="font-size:clamp(28px,7vw,44px)">Số ${w} của ${n}</div>`, options: numOptions(ans, 99), answer: ans,
+      speak: [{ t: `Số ${w} của ${n} là số nào?` }], after: [{ t: `Số ${w} của ${n} là ${ans}.` }] };
+  },
+  longer() {
+    let r = RR(4, 12), b = RR(4, 12); while (b === r) b = RR(4, 12);
+    const askLong = Math.random() < .5, w = askLong ? "dài hơn" : "ngắn hơn";
+    const ans = (askLong ? r > b : r < b) ? "Thanh đỏ" : "Thanh xanh";
+    return { html: svgBox(`<rect x="5" y="20" width="${r * 22}" height="22" rx="6" fill="var(--bad)"/><rect x="5" y="70" width="${b * 22}" height="22" rx="6" fill="var(--blue)"/>`, 280, 110),
+      options: ["Thanh đỏ", "Thanh xanh"], answer: ans, speak: [{ t: `Thanh nào ${w}?` }], after: [{ t: `${ans} ${w}.` }] };
+  },
+  cm() {
+    const k = RR(2, 12);
+    let s = `<rect x="10" y="12" width="${k * 20}" height="18" rx="4" fill="var(--sun)" stroke="var(--ink)" stroke-width="2"/>`;
+    s += `<rect x="4" y="40" width="312" height="34" rx="4" fill="var(--sun-soft)" stroke="var(--ink)" stroke-width="2"/>`;
+    for (let i = 0; i <= 15; i++) s += `<line x1="${10 + i * 20}" y1="40" x2="${10 + i * 20}" y2="${i % 5 ? 52 : 58}" stroke="var(--ink)" stroke-width="2"/><text x="${10 + i * 20}" y="70" text-anchor="middle" font-size="11" font-weight="800" fill="var(--ink)">${i}</text>`;
+    return { html: svgBox(s, 320, 80), options: numOptions(k, 15), answer: k, label: o => `${o} cm`,
+      speak: [{ t: "Thanh màu vàng dài mấy xăng-ti-mét?" }], after: [{ t: `Thanh màu vàng dài ${k} xăng-ti-mét.` }] };
+  },
+  add10: () => arithQ("add10"), sub10: () => arithQ("sub10"),
+  add21: () => arithQ("add21"), add22: () => arithQ("add22"), sub21: () => arithQ("sub21"), sub22: () => arithQ("sub22"),
+  clock() {
+    const h = RR(1, 12);
+    return { html: clockSvg(h), options: numOptions(h, 12).map(x => x || 12).filter((x, i, a) => a.indexOf(x) === i), answer: h, label: o => `${o} giờ`,
+      speak: [{ t: "Đồng hồ chỉ mấy giờ?" }], after: [{ t: `Đồng hồ chỉ ${h} giờ.` }] };
+  },
+  weekday() {
+    const i = rand(7), next = Math.random() < .5, j = (i + (next ? 1 : 6)) % 7, w = next ? "Ngày mai" : "Hôm qua";
+    return { html: `<div class="prompt" style="font-size:clamp(24px,6vw,38px)">Hôm nay là ${DAYS[i].toLowerCase()}.<br>${w} là thứ mấy?</div>`,
+      options: shuffle([DAYS[j], ...pickN(DAYS.filter(d => d !== DAYS[j] && d !== DAYS[i]), 2)]), answer: DAYS[j],
+      speak: [{ t: `Hôm nay là ${DAYS[i]}. ${w} là thứ mấy?` }], after: [{ t: `${w} là ${DAYS[j]}.` }] };
+  }
+};
+const T1 = ["count10", "more", "cmp10", "split", "shape", "add10", "sub10", "solid", "position"];
+const TOAN1 = [
+  [1, "Các số 0, 1, 2, 3, 4, 5", ["count5"]], [2, "Các số 6, 7, 8, 9, 10", ["count10"]], [3, "Nhiều hơn, ít hơn, bằng nhau", ["more"]],
+  [4, "So sánh số", ["cmp10"]], [5, "Mấy và mấy", ["split"]], [6, "Luyện tập chung", ["count10", "more", "cmp10", "split"]],
+  [7, "Hình vuông, hình tròn, hình tam giác, hình chữ nhật", ["shape"]], [8, "Thực hành lắp ghép, xếp hình", ["shape"]], [9, "Luyện tập chung", ["shape", "count10"]],
+  [10, "Phép cộng trong phạm vi 10", ["add10"]], [11, "Phép trừ trong phạm vi 10", ["sub10"]], [12, "Bảng cộng, bảng trừ trong phạm vi 10", ["add10", "sub10"]],
+  [13, "Luyện tập chung", ["add10", "sub10", "split"]], [14, "Khối lập phương, khối hộp chữ nhật", ["solid"]], [15, "Vị trí, định hướng trong không gian", ["position"]],
+  [16, "Luyện tập chung", ["solid", "position"]], [17, "Ôn tập các số trong phạm vi 10", ["count10", "cmp10", "split"]], [18, "Ôn tập phép cộng, phép trừ trong phạm vi 10", ["add10", "sub10"]],
+  [19, "Ôn tập hình học", ["shape", "solid", "position"]], [20, "Ôn tập chung", T1],
+  [21, "Số có hai chữ số", ["twodigit"]], [22, "So sánh số có hai chữ số", ["cmp100"]], [23, "Bảng các số từ 1 đến 100", ["seq100"]],
+  [24, "Luyện tập chung", ["twodigit", "cmp100", "seq100"]], [25, "Dài hơn, ngắn hơn", ["longer"]], [26, "Đơn vị đo độ dài (xăng-ti-mét)", ["cm"]],
+  [27, "Thực hành ước lượng và đo độ dài", ["cm", "longer"]], [28, "Luyện tập chung", ["longer", "cm"]],
+  [29, "Phép cộng số có hai chữ số với số có một chữ số", ["add21"]], [30, "Phép cộng số có hai chữ số với số có hai chữ số", ["add22"]],
+  [31, "Phép trừ số có hai chữ số cho số có một chữ số", ["sub21"]], [32, "Phép trừ số có hai chữ số cho số có hai chữ số", ["sub22"]],
+  [33, "Luyện tập chung", ["add21", "add22", "sub21", "sub22"]], [34, "Xem giờ đúng trên đồng hồ", ["clock"]], [35, "Các ngày trong tuần", ["weekday"]],
+  [36, "Thực hành xem lịch và giờ", ["clock", "weekday"]], [37, "Luyện tập chung", ["clock", "weekday"]],
+  [38, "Ôn tập các số và phép tính trong phạm vi 10", ["count10", "cmp10", "add10", "sub10"]], [39, "Ôn tập các số và phép tính trong phạm vi 100", ["twodigit", "cmp100", "add22", "sub22"]],
+  [40, "Ôn tập hình học và đo lường", ["shape", "solid", "longer", "cm", "clock"]], [41, "Ôn tập chung", T1.concat(["twodigit", "cmp100", "add22", "sub22", "cm", "clock", "weekday"])]
+].map(([n, title, gens]) => ({ n, title, gens }));
+function searchList(list, q) {
+  q = plain(q.trim()).replace(/^bai\s*/, "");
+  if (!q) return list;
+  if (/^\d+$/.test(q)) return list.filter(L => String(L.n).startsWith(q));
+  return list.filter(L => plain(L.title).includes(q));
+}
+VIEWS["math:sach"] = v => {
+  let N = store.get("toanN", 1), query = "";
+  const run = () => {
+    const L = TOAN1.find(x => x.n === N) || TOAN1[0]; N = L.n; store.set("toanN", N);
+    const top = `<div class="book">
+      <label for="toanSearch" class="booklbl">Toán 1 – Kết nối tri thức · tìm bài</label>
+      <input type="search" id="toanSearch" placeholder="Gõ số bài (10) hoặc tên bài (so sánh, đồng hồ…)" value="${esc(query)}" autocomplete="off">
+      <div class="lessonlist" id="toanList"></div></div>
+      <h3 class="lessonname">Bài ${L.n}: ${esc(L.title)} <small>(${L.n <= 20 ? "Tập một" : "Tập hai"})</small></h3>`;
+    quiz(v, { title: "Toán 1 theo sách", hint: "Chọn bài đang học trên lớp. Máy đọc câu hỏi, bé chọn đáp án đúng để nhận sao.", top, make: () => GEN[L.gens[rand(L.gens.length)]](),
+      bind: el => {
+        const list = $("#toanList", el), search = $("#toanSearch", el);
+        const pick = n => { N = n; query = ""; run(); };
+        const render = () => {
+          const f = searchList(TOAN1, query);
+          list.innerHTML = f.length ? f.map(x => `<button data-tn="${x.n}" aria-pressed="${x.n === N}"><b>Bài ${x.n}</b> ${esc(x.title)}</button>`).join("") : `<p class="hint">Không thấy bài nào. Thử gõ số bài khác.</p>`;
+          list.querySelectorAll("[data-tn]").forEach(b => b.onclick = () => pick(+b.dataset.tn));
+          const cur = list.querySelector('[aria-pressed="true"]'); if (cur && !query) list.scrollTop = cur.offsetTop - list.offsetTop - 40;
+        };
+        render();
+        search.oninput = () => { query = search.value; render(); };
+        search.onkeydown = e => { if (e.key === "Enter") { const f = searchList(TOAN1, query); if (f.length) pick(f[0].n); } };
+      } });
+  };
+  run();
+};
 
 /* ---------- Tiếng Anh ---------- */
 VIEWS["en:tu"] = v => {
