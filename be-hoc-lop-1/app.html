@@ -518,7 +518,84 @@ function readable(text, L) {
 function hasTarget(text, L) {
   return sylsOf(text).some(s => { const p = parseSyl(s); return L.cons.includes(p.on) || L.rhymes.includes(p.rh) || (L.tone && p.tone === L.tone); });
 }
+/* ================= SÁCH TIẾNG VIỆT 1 – TẬP HAI (Kết nối tri thức với cuộc sống) ================= */
+// Tên chủ đề và tên bài theo sách. Từ và câu luyện đọc do máy soạn theo chủ đề, không chép bài đọc trong sách.
+// Mã bài nội bộ = 100 + số thứ tự, để không trùng với tập một.
+const TV2_RAW = [
+  ["Tôi và các bạn", [
+    ["Tôi là học sinh lớp 1", "học sinh, lớp một, cặp sách, bạn mới, cô giáo", "Em là học sinh lớp một.|Em có nhiều bạn mới."],
+    ["Đôi tai xấu xí", "thỏ con, đôi tai, xấu xí, buồn bã, vui vẻ", "Thỏ con có đôi tai dài.|Bạn bè giúp thỏ vui trở lại."],
+    ["Bạn của gió", "làn gió, mát rượi, cánh diều, lá cây, bay cao", "Gió thổi lá cây xào xạc.|Cánh diều bay cao nhờ gió."],
+    ["Giải thưởng tình bạn", "cuộc thi, chạy đua, vấp ngã, giúp đỡ, tình bạn", "Các bạn dừng lại đỡ bạn bị ngã.|Tình bạn thật đáng quý."],
+    ["Sinh nhật của voi con", "sinh nhật, voi con, món quà, bánh kem, chúc mừng", "Voi con được tặng nhiều quà.|Cả nhà chúc mừng sinh nhật voi con."]]],
+  ["Mái ấm gia đình", [
+    ["Nụ hôn trên bàn tay", "nụ hôn, bàn tay, đến trường, yêu thương, mẹ hiền", "Mẹ hôn lên bàn tay bé.|Bé thấy ấm áp cả ngày."],
+    ["Làm anh", "làm anh, em bé, dỗ dành, nhường nhịn, chia quà", "Làm anh phải biết nhường em.|Anh dỗ em bé nín khóc."],
+    ["Cả nhà đi chơi núi", "đi chơi, ngọn núi, leo dốc, suối nhỏ, cắm trại", "Cả nhà cùng leo núi.|Bé ngắm suối chảy róc rách."],
+    ["Quạt cho bà ngủ", "quạt mát, giấc ngủ, lặng im, thương bà, ngoan ngoãn", "Bé ngồi quạt cho bà ngủ.|Bé đi nhẹ để bà ngủ ngon."],
+    ["Bữa cơm gia đình", "bữa cơm, mâm cơm, quây quần, canh rau, mời ăn", "Cả nhà quây quần bên mâm cơm.|Bé mời ông bà ăn cơm."],
+    ["Ngôi nhà", "ngôi nhà, mái ngói, hàng cây, tiếng chim, sân nhỏ", "Em yêu ngôi nhà của em.|Trước nhà có hàng cây xanh."]]],
+  ["Mái trường mến yêu", [
+    ["Tôi đi học", "buổi sáng, tựu trường, bỡ ngỡ, sân trường, dắt tay", "Mẹ dắt tay em đến trường.|Sân trường rộn rã tiếng cười."],
+    ["Đi học", "con đường, cô giáo, suối reo, trường em, rừng cây", "Em đi học trên con đường nhỏ.|Cô giáo dạy em hát."],
+    ["Hoa yêu thương", "bông hoa, tặng cô, yêu thương, lớp học, chăm ngoan", "Em tặng cô bông hoa đẹp.|Lớp em luôn đầy yêu thương."],
+    ["Cây bàng và lớp học", "cây bàng, lá xanh, cửa sổ, bóng mát, lớp học", "Cây bàng che mát cho lớp học.|Lá bàng xanh mướt vào hè."],
+    ["Bác trống trường", "cái trống, tùng tùng, giờ học, ra chơi, nằm nghỉ", "Trống trường kêu tùng tùng.|Nghe trống, các bạn vào lớp."],
+    ["Giờ ra chơi", "ra chơi, nhảy dây, đá cầu, kéo co, vui vẻ", "Giờ ra chơi em chơi nhảy dây.|Các bạn chơi vui vẻ trên sân."]]],
+  ["Điều em cần biết", [
+    ["Rửa tay trước khi ăn", "rửa tay, xà phòng, sạch sẽ, vi khuẩn, khăn khô", "Em rửa tay bằng xà phòng.|Rửa tay sạch trước khi ăn."],
+    ["Lời chào", "lời chào, lễ phép, ông bà, thầy cô, mỉm cười", "Em chào ông bà khi đi học.|Em lễ phép chào thầy cô."],
+    ["Khi mẹ vắng nhà", "ở nhà, khóa cửa, người lạ, gọi điện, cẩn thận", "Em không mở cửa cho người lạ.|Em gọi điện cho mẹ khi cần."],
+    ["Nếu không may bị lạc", "bị lạc, đứng yên, số điện thoại, chú bảo vệ, bình tĩnh", "Nếu bị lạc, em đứng yên một chỗ.|Em nhớ số điện thoại của bố mẹ."],
+    ["Đèn giao thông", "đèn đỏ, đèn xanh, đèn vàng, dừng lại, qua đường", "Đèn đỏ thì dừng lại.|Đèn xanh mới được đi."]]],
+  ["Bài học từ cuộc sống", [
+    ["Kiến và chim bồ câu", "con kiến, bồ câu, dòng suối, chiếc lá, cứu giúp", "Chim bồ câu thả chiếc lá cứu kiến.|Kiến và bồ câu giúp đỡ nhau."],
+    ["Câu chuyện của rễ", "bộ rễ, thân cây, cành lá, âm thầm, nuôi cây", "Rễ nằm sâu dưới đất.|Nhờ có rễ, cây mới xanh tốt."],
+    ["Câu hỏi của sói", "chó sói, con sóc, cành cây, vui vẻ, buồn bực", "Sóc nhảy nhót trên cành cây.|Sóc vui vì sống tốt bụng."],
+    ["Chú bé chăn cừu", "chăn cừu, nói dối, chó sói, kêu cứu, bài học", "Chú bé nói dối nhiều lần.|Không ai tin người hay nói dối."],
+    ["Tiếng vọng của núi", "tiếng vọng, ngọn núi, gọi to, đáp lại, lời hay", "Em gọi to, núi đáp lại.|Nói lời hay sẽ nghe lời hay."]]],
+  ["Thiên nhiên kì thú", [
+    ["Loài chim của biển cả", "hải âu, biển cả, sải cánh, bão tố, mặt nước", "Hải âu bay trên biển cả.|Hải âu báo bão cho người đi biển."],
+    ["Bảy sắc cầu vồng", "cầu vồng, bảy màu, sau mưa, bầu trời, rực rỡ", "Sau cơn mưa có cầu vồng.|Cầu vồng có bảy màu rực rỡ."],
+    ["Chúa tể rừng xanh", "con hổ, rừng xanh, sức mạnh, vằn đen, gầm vang", "Hổ là chúa tể rừng xanh.|Bộ lông hổ có vằn đen."],
+    ["Cuộc thi tài năng rừng xanh", "cuộc thi, chim hót, thỏ múa, khỉ leo cây, cổ vũ", "Các con vật thi tài trong rừng.|Chim sơn ca hót rất hay."],
+    ["Cây liễu dẻo dai", "cây liễu, cành mềm, dẻo dai, gió bão, bờ hồ", "Cây liễu mọc bên bờ hồ.|Cành liễu mềm nên không gãy."]]],
+  ["Thế giới trong mắt em", [
+    ["Tia nắng đi đâu?", "tia nắng, buổi sáng, ô cửa, sân nhà, chiều tà", "Tia nắng chiếu qua ô cửa.|Buổi chiều, nắng đi đâu mất."],
+    ["Trong giấc mơ buổi sáng", "giấc mơ, buổi sáng, mặt trời, đám mây, thức dậy", "Bé mơ thấy mình bay lên trời.|Ông mặt trời gọi bé thức dậy."],
+    ["Ngày mới bắt đầu", "ngày mới, gà gáy, chim hót, mặt trời mọc, đi học", "Gà gáy báo ngày mới.|Mặt trời mọc, bé chuẩn bị đi học."],
+    ["Hỏi mẹ", "hỏi mẹ, mặt trăng, ngôi sao, bầu trời, tò mò", "Bé hỏi mẹ vì sao trăng sáng.|Mẹ kể cho bé nghe về các vì sao."],
+    ["Những cánh cò", "cánh cò, cánh đồng, lúa xanh, bay lượn, quê hương", "Đàn cò trắng bay trên cánh đồng.|Quê em có cánh đồng lúa xanh."],
+    ["Buổi trưa hè", "buổi trưa, ve kêu, nắng vàng, bóng râm, nghỉ trưa", "Trưa hè ve kêu râm ran.|Bé nằm nghỉ dưới bóng râm."],
+    ["Hoa phượng", "hoa phượng, đỏ rực, mùa hè, chia tay, học trò", "Hoa phượng nở đỏ sân trường.|Hoa phượng báo mùa hè đến."]]],
+  ["Đất nước và con người", [
+    ["Cậu bé thông minh", "cậu bé, thông minh, nhà vua, câu đố, trả lời", "Cậu bé trả lời câu đố của nhà vua.|Ai cũng khen cậu bé thông minh."],
+    ["Lính cứu hỏa", "cứu hỏa, xe cứu hỏa, vòi nước, dập lửa, dũng cảm", "Chú lính cứu hỏa rất dũng cảm.|Xe cứu hỏa chạy đi dập lửa."],
+    ["Lớn lên bạn làm gì?", "lớn lên, bác sĩ, kĩ sư, phi công, ước mơ", "Lớn lên em muốn làm bác sĩ.|Bạn em mơ làm phi công."],
+    ["Ruộng bậc thang ở Sa Pa", "ruộng bậc thang, Sa Pa, lúa chín, sườn núi, vàng óng", "Ruộng bậc thang ở Sa Pa rất đẹp.|Mùa lúa chín, ruộng vàng óng."],
+    ["Nhớ ơn", "nhớ ơn, biết ơn, thầy cô, ông bà, uống nước", "Em biết ơn thầy cô.|Uống nước nhớ nguồn."],
+    ["Du lịch biển Việt Nam", "du lịch, bãi biển, sóng vỗ, cát trắng, Hạ Long", "Nước ta có nhiều bãi biển đẹp.|Hè này cả nhà đi biển."]]]
+];
+const TV2 = [];
+TV2_RAW.forEach(([topic, lessons], ti) => lessons.forEach(([title, words, sents], li) => TV2.push({
+  n: 101 + TV2.length, num: TV2.length + 1, topic, topicNo: ti + 1, lessonNo: li + 1, title,
+  items: [title.replace(/\?$/, ""), ...words.split(",").map(s => s.trim()), ...sents.split("|")]
+})));
+TV2.push({ n: 101 + TV2.length, num: TV2.length + 1, topic: "Ôn tập", title: "Ôn tập và đánh giá cuối năm",
+  items: TV2.flatMap(L => L.items.slice(1, 2).concat(L.items.slice(-1))).filter((_, i) => i % 3 === 0) });
+const isBook2 = n => n > 100;
+const lessonOf = n => (isBook2(n) ? TV2 : TV1).find(x => x.n === n);
+function searchBook(book, q) {
+  if (book === 1) return searchLessons(q);
+  q = plain(q.trim()).replace(/^bai\s*/, "");
+  if (!q) return TV2;
+  const m = q.match(/^(\d)\s*[.,\s]\s*(\d)$/);
+  if (m) return TV2.filter(L => L.topicNo === +m[1] && L.lessonNo === +m[2]);
+  if (/^\d$/.test(q)) return TV2.filter(L => L.topicNo === +q);
+  return TV2.filter(L => plain(L.title + " " + L.topic).includes(q) || L.items.some(w => plain(w).includes(q)));
+}
 function lessonItems(n) {
+  if (isBook2(n)) { const L = lessonOf(n) || TV2[0]; return [...new Set([...L.items, ...store.get("custom-" + L.n, [])])]; }
   const L = TV1.find(x => x.n === n) || TV1[0], out = [];
   if (!L.review) {
     out.push(...L.rhymes);
@@ -618,7 +695,8 @@ VIEWS["vn:bedoc"] = v => {
     const my = ++bdSess;
     const alive = () => my === bdSess && state.tab === "vn" && state.sub.vn === "bedoc";
     let busy = false, round = 0;
-    const LS = TV1.find(x => x.n === N) || TV1[0]; N = LS.n;
+    const book = isBook2(N) ? 2 : 1;
+    const LS = lessonOf(N) || TV1[0]; N = LS.n; store.set("bdN" + book, N);
     const items = lessonItems(N); if (I >= items.length) I = 0;
     store.set("bdN", N); store.set("bdI", I);
     const text = items[I], words = text.split(/\s+/).filter(Boolean);
@@ -628,11 +706,12 @@ VIEWS["vn:bedoc"] = v => {
       ? "Bấm <b>Bắt đầu</b> một lần. Máy tự nghe bé đọc, tự chấm, đọc sai thì nhắc đọc lại, sai 3 lần thì đánh vần cho bé đọc theo, đọc đúng thì tự sang câu tiếp."
       : micOff ? "Micro chưa bật được, xem hướng dẫn bên dưới rồi bấm Thử bật micro lại. Trong lúc đó bố mẹ" : "Máy này không nghe được (cần Chrome hoặc Edge). Bố mẹ nghe bé đọc rồi bấm Đúng hoặc Sai, sai 3 lần máy sẽ đánh vần cho bé đọc theo."} Chạm vào tiếng bé đọc sai để đánh dấu.</p></div>
     <div class="book">
-      <label for="lessonSearch" class="booklbl">Tiếng Việt 1 – Tập một · tìm bài</label>
-      <input type="search" id="lessonSearch" placeholder="Gõ số bài (41) hoặc âm, vần (ui, ng…)" value="${esc(query)}" autocomplete="off">
+      <div class="keys">${[[1, "Tập một"], [2, "Tập hai"]].map(([b, t]) => `<button class="chip" data-book="${b}" aria-pressed="${b === book}">${t}</button>`).join("")}</div>
+      <label for="lessonSearch" class="booklbl">Tiếng Việt 1 – ${book === 1 ? "Tập một" : "Tập hai"} · tìm bài</label>
+      <input type="search" id="lessonSearch" placeholder="${book === 1 ? "Gõ số bài (41) hoặc âm, vần (ui, ng…)" : "Gõ chủ đề và bài (6.2) hoặc tên bài (cầu vồng…)"}" value="${esc(query)}" autocomplete="off">
       <div class="lessonlist" id="lessonList"></div>
     </div>
-    <h3 class="lessonname">Bài ${N}: ${esc(LS.title)}${LS.reviewOf ? ` <small>(ôn bài ${LS.reviewOf.join(", ")})</small>` : ""}</h3>
+    <h3 class="lessonname">${book === 2 ? `<small>${LS.topicNo ? `Chủ đề ${LS.topicNo}: ${esc(LS.topic)}` : "Cuối năm"}</small><br>${LS.topicNo ? `Bài ${LS.lessonNo}: ` : ""}${esc(LS.title)}` : `Bài ${N}: ${esc(LS.title)}`}${LS.reviewOf ? ` <small>(ôn bài ${LS.reviewOf.join(", ")})</small>` : ""}</h3>
     <div class="status"><span>${I + 1} / ${items.length}</span><span>Lần đọc sai <span class="dots" id="dots">${[0,1,2].map(i => `<i class="${i < tries ? "x" : ""}"></i>`).join("")}</span></span></div>
     <div class="sentence oli">${words.map((w, i) => `<button class="word" data-w="${i}" aria-label="Đánh dấu tiếng ${esc(w)} đọc sai">${esc(w)}</button>`).join("")}</div>
     <div class="feedback" id="fb" aria-live="polite"></div>
@@ -744,14 +823,15 @@ VIEWS["vn:bedoc"] = v => {
     $("#next").onclick = () => next(1);
     const listEl = $("#lessonList"), search = $("#lessonSearch");
     const renderList = () => {
-      const found = searchLessons(query);
-      listEl.innerHTML = found.length ? found.map(L => `<button data-n="${L.n}" aria-pressed="${L.n === N}"><b>Bài ${L.n}</b> ${esc(L.title)}</button>`).join("") : `<p class="hint">Không thấy bài nào. Thử gõ số bài hoặc một vần khác.</p>`;
+      const found = searchBook(book, query);
+      listEl.innerHTML = found.length ? found.map(L => `<button data-n="${L.n}" aria-pressed="${L.n === N}"><b>${book === 2 ? (L.topicNo ? `CĐ${L.topicNo} · Bài ${L.lessonNo}` : "Ôn tập") : `Bài ${L.n}`}</b> ${esc(book === 2 && !L.topicNo ? "cuối năm" : L.title)}</button>`).join("") : `<p class="hint">Không thấy bài nào. Thử gõ số bài hoặc một vần khác.</p>`;
       listEl.querySelectorAll("[data-n]").forEach(b => b.onclick = () => { N = +b.dataset.n; I = 0; tries = 0; query = ""; draw(); });
       const cur = listEl.querySelector('[aria-pressed="true"]'); if (cur && !query) listEl.scrollTop = cur.offsetTop - listEl.offsetTop - 40;
     };
     renderList();
     search.oninput = () => { query = search.value; renderList(); };
-    search.onkeydown = e => { if (e.key === "Enter") { const f = searchLessons(query); if (f.length) { N = f[0].n; I = 0; tries = 0; query = ""; draw(); } } };
+    search.onkeydown = e => { if (e.key === "Enter") { const f = searchBook(book, query); if (f.length) { N = f[0].n; I = 0; tries = 0; query = ""; draw(); } } };
+    v.querySelectorAll("[data-book]").forEach(b => b.onclick = () => { const nb = +b.dataset.book; if (nb === book) return; N = store.get("bdN" + nb, nb === 1 ? 41 : 101); I = 0; tries = 0; query = ""; draw(); });
     $("#saveCustom").onclick = () => { const lines = $("#customTxt").value.split("\n").map(x => x.trim()).filter(Boolean); store.set("custom-" + N, lines); draw(); };
     $("#clearCustom").onclick = () => { store.set("custom-" + N, []); I = 0; draw(); };
     if (mic) mic.onclick = () => {

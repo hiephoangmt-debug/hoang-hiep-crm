@@ -10,6 +10,8 @@
     Có mục lục 83 bài **Tiếng Việt 1 – Tập một (Kết nối tri thức)**: gõ số bài hoặc âm/vần là ra.
     Mỗi bài tự tạo từ và câu chỉ dùng chữ, vần, dấu bé đã học tới bài đó (kho từ tự soạn,
     không chép sách). Bố mẹ chép bài đọc trong sách vào ô của từng bài, máy lưu riêng từng bài.
+    Có thêm **Tập hai**: 8 chủ đề, 45 bài đọc và bài ôn tập cuối năm; tìm bằng "6.2" (chủ đề 6, bài 2)
+    hoặc tên bài. Mỗi bài có tên bài, từ và câu theo chủ đề do máy soạn; bố mẹ chép bài đọc vào từng bài.
   - Chữ cái (29 chữ, đọc âm như sách: bờ, cờ, dờ…), 6 dấu thanh, ghép âm – vần – dấu
     (tự áp quy tắc c/k, g/gh, ng/ngh, vị trí dấu thanh, vần p/t/c/ch chỉ có sắc/nặng), tập đọc câu.
 - **Toán**: mục **Theo sách** có 41 bài Toán 1 (Kết nối tri thức, tập một và tập hai), tìm theo số bài hoặc tên bài;
