@@ -465,6 +465,19 @@ function rhymeUnits(rh) {
   return [nucleus, FINAL_SAY[f[0]]];
 }
 // chuỗi đánh vần như sách: "túi" -> u – i – ui, tờ – ui – tui – sắc – túi
+// Cách máy đọc từng phần khi đánh vần, cho giống cô giáo (chữ hiện trên màn hình vẫn giữ như sách):
+// vần/tiếng tận cùng p, t, c, ch đọc có dấu sắc (ac -> ác, thac -> thác); vần iê đứng riêng đọc yê;
+// chữ ă, â đứng riêng đọc tên chữ; nguyên âm đôi iê, uô, ươ đứng riêng đọc ia, ua, ưa.
+const PART_SAY = { "ă": "á", "â": "ớ", "iê": "ia", "yê": "ia", "uô": "ua", "ươ": "ưa", "y": "i" };
+function sayPart(t) {
+  if (PART_SAY[t]) return PART_SAY[t];
+  const p = parseSyl(t);
+  if (!p.rh || p.tone) return t;                       // tên âm (bờ, cờ…), tên dấu, tiếng có dấu: giữ nguyên
+  let w = t;
+  if (!p.on && /^iê/.test(w)) w = "y" + w.slice(1);    // iêt -> yêt, iêu -> yêu
+  if (STOP.test(p.rh)) w = applyTone(w, 2);            // ac -> ác, thac -> thác
+  return w;
+}
 function spellParts(w) {
   const p = parseSyl(w), out = [];
   const u = rhymeUnits(p.rh);
@@ -786,7 +799,7 @@ VIEWS["vn:bedoc"] = v => {
       const seq = [{ t: `${S.name} cùng đánh vần với cô nhé.` }];
       idxs.forEach(i => {
         const el = wEls[i], w = cleanW(words[i]);
-        spellParts(words[i]).forEach(t => seq.push({ t, el }));
+        spellParts(words[i]).forEach(t => seq.push({ t: sayPart(t), el }));
         seq.push({ t: `${S.name} đọc theo cô: ${w}`, el }, { wait: 1800, el });
       });
       seq.push({ t: words.length > 1 ? `Bây giờ ${S.name} đọc lại cả câu nhé.` : `Bây giờ ${S.name} tự đọc lại nhé.` });
@@ -964,7 +977,7 @@ VIEWS["vn:ghep"] = v => {
     const el = v.querySelector(".syll");
     $("#readW").onclick = () => speakSeq([{ t: s.word, el }]);
     $("#spell").onclick = () => {
-      const seq = spellParts(s.word).map(t => ({ t, el }));
+      const seq = spellParts(s.word).map(t => ({ t: sayPart(t), el }));
       speakSeq(seq, 300);
     };
   };
