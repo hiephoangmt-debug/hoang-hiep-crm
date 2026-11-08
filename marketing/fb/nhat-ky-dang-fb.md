@@ -25,3 +25,5 @@
 | 08/11/2026 | Sun | 10:30 | Sun Symphony Residence – quy mô, Central Park, River Park, bến du thuyền (album 4 ảnh phối cảnh) | /du-an/sun-symphony-residence/ |
 | 08/11/2026 | Hoàng Hiệp | 15:30 | 16 Bạch Đằng Đà Nẵng – tổ hợp 25 tầng (QĐ 5050) + 3 tiêu chí gỡ dự án tồn đọng (1 ảnh dọc, ảnh sông Hàn) | /da-nang-chap-thuan-to-hop-25-tang-16-bach-dang-go-du-an-ton-dong/ |
 | 08/11/2026 | Sun | 20:00 | Hỗ trợ lãi suất Sun Saphia Residence – tính thử vay 1,5 tỷ (1 ảnh dọc) | /ho-tro-lai-suat-24-thang-sun-saphia-residence-tinh-thu/ |
+| 08/11/2026 | Sun | 13:30 | (bài web mới 11:30) Gửi tiết kiệm hay mua Sun Saphia Residence cho thuê (1 ảnh dọc) | /gui-tiet-kiem-hay-mua-studio-sun-saphia-residence-cho-thue/ |
+| 08/11/2026 | Hoàng Hiệp | 18:30 | (bài web mới 16:30) Bảo trì căn hộ ven biển: hơi muối, mùa mưa bão (1 ảnh dọc, Mỹ Khê đêm) | /can-ho-ven-bien-hoi-muoi-mua-bao-sun-saphia-residence/ |
