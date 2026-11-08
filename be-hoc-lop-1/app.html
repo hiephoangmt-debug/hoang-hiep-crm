@@ -199,7 +199,7 @@ textarea { width: 100%; min-height: 120px; font: inherit; border-radius: 10px; b
     <label for="enVoice">Giọng tiếng Anh
       <select id="enVoice"></select></label>
     <label for="easy">Mức chấm khi máy nghe bé đọc
-      <select id="easy"><option value="1">Dễ – chấp nhận đọc gần đúng (nên dùng)</option><option value="0">Chuẩn – phải đúng từng âm, từng dấu</option></select></label>
+      <select id="easy"><option value="2">Rất dễ – đúng âm đầu hoặc đúng vần là được</option><option value="1">Dễ – chấp nhận đọc gần đúng (nên dùng)</option><option value="0">Chuẩn – phải đúng từng âm, từng dấu</option></select></label>
     <label for="rate">Tốc độ đọc: <span id="rateVal"></span>
       <input type="range" id="rate" min="0.5" max="1.2" step="0.05"></label>
     <div class="row">
@@ -233,7 +233,7 @@ const store = {
 
 /* ================= GIỌNG ĐỌC ================= */
 const synth = window.speechSynthesis;
-const S = { easy: store.get("easy", true), name: store.get("name", "Hà My"), voices: [], rate: store.get("rate", 0.85), vi: store.get("viVoice", ""), en: store.get("enVoice", "") };
+const S = { level: store.get("level", store.get("easy", true) ? 1 : 0), name: store.get("name", "Hà My"), voices: [], rate: store.get("rate", 0.85), vi: store.get("viVoice", ""), en: store.get("enVoice", "") };
 const norm = l => (l || "").replace("_", "-").toLowerCase();
 function scoreVoice(v, lang) {
   let s = 0; const n = v.name;
@@ -642,21 +642,26 @@ function searchLessons(q) {
   if (/^\d+$/.test(q)) return TV1.filter(L => String(L.n).startsWith(q));
   return TV1.filter(L => plain(L.title).split(/[\s,]+/).some(w => w.startsWith(q)) || plain(L.title).includes(q));
 }
-// Chấm tiếng bé đọc. Chế độ dễ chấp nhận lỗi máy hay nghe nhầm ở giọng trẻ em:
-// âm đầu gần nhau (d/gi/r/v, ch/tr, s/x, n/l…), âm cuối n/ng/nh, t/c/ch, và nhầm dấu thanh.
-const ONSET_GROUPS = [["d", "gi", "r", "v"], ["ch", "tr"], ["s", "x"], ["n", "l"], ["c", "k", "qu"], ["g", "gh"], ["ng", "ngh"]];
+// Chấm tiếng bé đọc. Mức chấm (S.level): 0 chuẩn, 1 dễ, 2 rất dễ.
+// Dễ: bỏ qua dấu thanh và dấu phụ của nguyên âm (au/âu, ơ/ô/o, ư/u, ê/e), âm đầu gần nhau
+// (d/gi/r/v, ch/tr, s/x, n/l, t/th…), âm cuối n/ng/nh, t/c/ch. Rất dễ: đúng âm đầu hoặc đúng vần là được.
+const ONSET_GROUPS = [["d", "gi", "r", "v"], ["ch", "tr"], ["s", "x"], ["n", "l"], ["c", "k", "qu", "kh"], ["g", "gh"], ["ng", "ngh"], ["t", "th"], ["p", "ph"], ["", "h"]];
 const sameOnset = (a, b) => a === b || ONSET_GROUPS.some(g => g.includes(a) && g.includes(b));
 const rhNorm = r => r.replace(/(ng|nh)$/, "n").replace(/(ch|c)$/, "t").replace(/^y/, "i").replace(/^ơi$/, "ưi").replace(/^ươi$/, "ưi");
+const rhFold = r => rhNorm(r).replace(/[ăâ]/g, "a").replace(/[ơô]/g, "o").replace(/ư/g, "u").replace(/ê/g, "e").replace(/y/g, "i");
 function sylMatch(target, heard, rhymeOnly) {
   const t = parseSyl(target);
   return heard.some(h => {
     if (h.base === t.base && h.tone === t.tone) return true;
-    if (!S.easy) return false;
-    const rhOk = h.rh === t.rh || rhNorm(h.rh) === rhNorm(t.rh);
+    if (!S.level) return false;
+    const rhOk = h.rh === t.rh || rhFold(h.rh) === rhFold(t.rh);
     if (rhymeOnly) return rhOk;              // đọc vần "ui": máy hay nghe thành "túi", "ủi"…
-    return rhOk && sameOnset(h.on, t.on);    // bỏ qua dấu thanh
+    const onOk = sameOnset(h.on, t.on);
+    return S.level >= 2 ? (rhOk || onOk) : (rhOk && onOk);
   });
 }
+// Số tiếng được phép sai trong một câu n tiếng
+const allowMiss = n => S.level >= 2 ? Math.floor(n / 2) : S.level === 1 ? (n <= 2 ? 0 : Math.floor(n / 3)) : (n >= 6 ? 1 : 0);
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 let srBroken = false, curRec = null;
 // Chế độ tự động: bấm "Bắt đầu" một lần, máy tự nghe – chấm – nhắc đọc lại – đánh vần – chuyển câu
@@ -843,7 +848,7 @@ VIEWS["vn:bedoc"] = v => {
       const heard = alts.join(" ").split(/\s+/).map(cleanW).filter(Boolean).map(parseSyl);
       const single = words.length === 1 && !parseSyl(words[0]).on; // thẻ chỉ có vần, vd "ui"
       const miss = words.map((w, i) => sylMatch(w, heard, single) ? -1 : i).filter(i => i >= 0);
-      const allow = S.easy ? Math.floor(words.length * 0.25) : (words.length >= 6 ? 1 : 0);
+      const allow = allowMiss(words.length);
       judge(miss.length <= allow, miss);
     }
     // bố mẹ bấm chấm tay thì ngắt lượt nghe đang chạy
@@ -1385,9 +1390,9 @@ function editDist(a, b) { const d = Array.from({ length: a.length + 1 }, (_, i) 
 function enMatch(target, alts) {
   const tw = target.split(/\s+/).map(enNorm).filter(Boolean);
   const hw = alts.join(" ").split(/\s+/).map(enNorm).filter(Boolean);
-  const ok = w => hw.some(h => h === w || (S.easy && (h.replace(/s$/, "") === w.replace(/s$/, "") || (w.length >= 4 && editDist(h, w) <= 1))));
+  const ok = w => hw.some(h => h === w || (S.level >= 1 && (h.replace(/s$/, "") === w.replace(/s$/, "") || (w.length >= (S.level >= 2 ? 3 : 4) && editDist(h, w) <= (S.level >= 2 && w.length >= 5 ? 2 : 1)))));
   const miss = tw.filter(w => !ok(w)).length;
-  return miss <= (S.easy ? Math.floor(tw.length / 4) : 0);
+  return miss <= (S.level >= 2 ? Math.floor(tw.length / 2) : S.level === 1 ? Math.floor(tw.length / 3) : 0);
 }
 const enSearch = q => {
   q = plain(q.trim()); if (!q) return EN1;
@@ -1588,8 +1593,8 @@ VIEWS["en:do"] = v => quiz(v, {
 /* ================= CÀI ĐẶT ================= */
 const rate = $("#rate"); rate.value = S.rate; $("#rateVal").textContent = Math.round(S.rate * 100) + "%";
 rate.oninput = () => { S.rate = +rate.value; store.set("rate", S.rate); $("#rateVal").textContent = Math.round(S.rate * 100) + "%"; };
-const easySel = $("#easy"); easySel.value = S.easy ? "1" : "0";
-easySel.onchange = () => { S.easy = easySel.value === "1"; store.set("easy", S.easy); };
+const easySel = $("#easy"); easySel.value = String(S.level);
+easySel.onchange = () => { S.level = +easySel.value; store.set("level", S.level); };
 const kn = $("#kidName"); kn.value = S.name;
 kn.oninput = () => { S.name = kn.value.trim() || "bé"; store.set("name", S.name); };
 $("#viVoice").onchange = e => { S.vi = e.target.value; store.set("viVoice", S.vi); };
