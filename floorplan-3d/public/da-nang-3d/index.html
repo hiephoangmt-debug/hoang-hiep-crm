@@ -93,6 +93,7 @@
 <script type="module">
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { makeTower408, makeGalaxy } from '../song-han-3d/thap408.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
@@ -1499,6 +1500,16 @@ const PROJECTS = window.PROJECTS_DATA || [];
       box(ww * 0.8, 3, dd * 0.8, crownP, px, yy, pz);                       // vương miện sáng trên đỉnh
       if (T[8]) { const sp = new THREE.Mesh(new THREE.ConeGeometry(Math.min(ww, dd) * 0.3, T[8], 8), crownP); sp.position.set(px, yy + 3 + T[8] / 2, pz); g.add(sp); hit.push(sp); yy += T[8]; }
       top = Math.max(top, yy + 3);
+    }
+    if (M.galaxy) {   // Sun Galaxy Complex: tháp Moon Gate + khán đài DIFF (song-han-3d/thap408.js)
+      const T = makeGalaxy(THREE); T.group.position.set(0, 0.6, 0); g.add(T.group);
+      T.group.traverse((o) => { if (o.isMesh) { o.castShadow = true; hit.push(o); } });
+      casaAnim.push((t, night) => T.setNight(night)); top = Math.max(top, T.height);
+    }
+    if (M.t408) {   // tháp 408 m Da Nang Downtown: dựng theo phối cảnh (song-han-3d/thap408.js)
+      const T = makeTower408(THREE); T.group.position.set(M.t408[0], 0.6, M.t408[1]); g.add(T.group);
+      T.group.traverse((o) => { if (o.isMesh) { o.castShadow = true; hit.push(o); } });
+      casaAnim.push((t, night) => T.setNight(night)); top = Math.max(top, T.height);
     }
     for (const [px, pz, r, h] of M.domes || []) { const d = new THREE.Mesh(new THREE.SphereGeometry(r, 32, 12, 0, Math.PI * 2, 0, Math.PI / 2), crownP); d.scale.y = h / r; d.position.set(px, 0.6, pz); g.add(d); hit.push(d); }
     return { hit, top, x, z, y };

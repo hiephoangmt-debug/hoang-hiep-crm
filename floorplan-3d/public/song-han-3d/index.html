@@ -52,6 +52,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Sky } from 'three/addons/objects/Sky.js';
+import { makeTower408, makeGalaxy } from './thap408.js';
 
 const $ = (id) => document.getElementById(id);
 const V3 = (x, y, z) => new THREE.Vector3(x, y, z);
@@ -62,7 +63,7 @@ const [bx0, bz0, bx1, bz1] = meta.bounds;
 // điểm đo trên ảnh vệ tinh khu Downtown (ảnh cắt 16.0366–16.047, lưới 0,002°) -> toạ độ
 const SP = (X, Y) => LL(16.040 - (Y - 857) * 0.002 / 245, 108.226 + (X - 823) * 0.002 / 235);
 const MAIN = [560, 1420], WHEEL = SP(1075, 780), PDL = 0.217, RIV = 0.42;   // tháp 408 m; vòng quay; hướng Phan Đăng Lưu, hướng bờ sông
-const CLEAR = [[...MAIN, 80], [...SP(1440, 1075), 40]];   // lán trại tạm trên khu đất tháp -> bỏ
+const CLEAR = [[...MAIN, 80], [...SP(1440, 1075), 40], [...LL(16.04315, 108.2376), 110]];   // lán trại tạm trên khu đất tháp -> bỏ
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
 renderer.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.5 : 2));
@@ -225,31 +226,10 @@ function tower(x, z, w, d, fl, ry, mat = towerMat) {   // tháp căn hộ: thân
   addM(new THREE.BoxGeometry(w * 0.7, 6, d * 0.6), glassP, x, h + 4.4, z, ry);
   for (const sx of [-1, 1]) addM(new THREE.BoxGeometry(1.2, 9, d + 1.2), mat, x + Math.cos(ry) * sx * (w / 2), h + 4.5, z - Math.sin(ry) * sx * (w / 2), ry);
 }
-// 03 – tháp 69 tầng 408 m: thân thon, chân loe, mặt cắt elip
+// 03 – tháp 69 tầng 408 m (thap408.js): con mắt vòm quay ra sông, vạt loe + khối đế giật cấp phía Nam
 const [mx, mz] = MAIN;
-{
-  const pts = [];
-  for (let i = 0; i <= 60; i++) { const y = (i / 60) * 396; pts.push(new THREE.Vector2(15.5 + 5 * (1 - y / 396) + 24 * Math.exp(-y / 24), y)); }
-  pts.push(new THREE.Vector2(0, 396));
-  const g = new THREE.LatheGeometry(pts, 48), uv = g.attributes.uv;
-  for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * 4.5, uv.getY(i) * 396 / 13.6);
-  g.scale(1, 1, 0.74);
-  const t = addM(g, finMat, mx, 0, mz, PDL);
-  const crown = addM(new THREE.CylinderGeometry(14.5, 15.6, 12, 48, 1, true), finMat, mx, 402, mz, PDL); crown.scale.z = 0.74;
-  const cap = addM(new THREE.CylinderGeometry(14.5, 14.5, 0.8, 48), goldP, mx, 408, mz, PDL); cap.scale.z = 0.74;
-  // khối đế uốn lượn (vòng elip giật cấp) ôm chân tháp, dọc Phan Đăng Lưu
-  const podMat = tiled(towerMat);
-  const ring = (A, B, t, a0, a1, h) => {
-    const s = new THREE.Shape(), n = 40;
-    for (let i = 0; i <= n; i++) { const a = a0 + (a1 - a0) * i / n; s[i ? 'lineTo' : 'moveTo'](A * Math.cos(a), B * Math.sin(a)); }
-    for (let i = n; i >= 0; i--) { const a = a0 + (a1 - a0) * i / n; s.lineTo((A - t) * Math.cos(a), (B - t) * Math.sin(a)); }
-    const g = new THREE.ExtrudeGeometry(s, { depth: h, bevelEnabled: false, curveSegments: 4 }); g.rotateX(-Math.PI / 2);
-    const m = addM(g, podMat, 0, 0, 0); dtG.remove(m); return m;
-  };
-  const pod = new THREE.Group(); pod.position.set(mx - 55 * Math.cos(PDL), 0, mz + 55 * Math.sin(PDL)); pod.rotation.y = PDL; dtG.add(pod);
-  for (const [A, B, t, a0, a1, h] of [[120, 58, 20, 0.5, 4.2, 30], [92, 40, 16, 1.6, 5.2, 19], [62, 24, 14, 2.4, 6.0, 10]]) pod.add(ring(A, B, t, a0, a1, h));
-  const deck = new THREE.Mesh(new THREE.CircleGeometry(1, 48), new THREE.MeshStandardMaterial({ color: 0x8fae78, roughness: 1 })); deck.scale.set(128, 64, 1); deck.rotation.x = -Math.PI / 2; deck.position.y = 0.4; pod.add(deck);
-}
+const T408 = makeTower408(THREE);
+T408.group.position.set(mx, 0, mz); T408.group.rotation.y = PDL; dtG.add(T408.group);
 // 03 – 2 tháp cạnh tháp 408 m (phía Nam Phan Đăng Lưu) + 12 nhà phố thương mại
 tower(...SP(1440, 1075), 34, 30, 45, PDL); tower(...SP(1300, 1098), 34, 30, 42, PDL, towerMat2);
 // 01 – dải tháp cao tầng dọc bờ sông + 2 tháp phía Bắc Phan Đăng Lưu
@@ -287,11 +267,8 @@ let wheelRot;
   dtG.children.forEach((m) => (m.castShadow = true));
 }
 // Sun Galaxy Complex – bờ Đông, phía Nam đầu cầu Trần Thị Lý: tháp 47 tầng ~183 m, Moon Gate, khán đài DIFF
-const GAL = LL(16.0490, 108.2328), GR = 0.46;
-addM(boxUV(96, 16, 60), lowMat, GAL[0], 8, GAL[1], GR);
-tower(GAL[0] + 6, GAL[1] + 4, 42, 34, 47, GR, towerMat2);
-{ const mg = addM(new THREE.TorusGeometry(26, 2.6, 12, 64), goldP, GAL[0] - 34 * Math.cos(GR) + 0, 28, GAL[1] + 34 * Math.sin(GR), GR + Math.PI / 2); }
-for (let k = 0; k < 4; k++) addM(new THREE.BoxGeometry(14, 4 + k * 4, 130), glassP, GAL[0] - 70 * Math.cos(GR) - k * 9 * Math.cos(GR) - 50 * Math.sin(GR), (4 + k * 4) / 2, GAL[1] + 70 * Math.sin(GR) + k * 9 * Math.sin(GR) - 50 * Math.cos(GR), GR);
+const GAL = LL(16.04315, 108.2376), GR = -1.36;   // khu đất trống bờ Đông đối diện Da Nang Downtown; trục x dọc bờ sông, +z quay ra sông
+const TGAL = makeGalaxy(THREE); TGAL.group.position.set(GAL[0], 0, GAL[1]); TGAL.group.rotation.y = GR; dtG.add(TGAL.group);
 const [dtx, dtz] = MAIN;
 
 // ---- nhãn ----
@@ -324,6 +301,7 @@ function setNight(on) {
   envSky.material.uniforms.sunPosition.value.copy(sky.material.uniforms.sunPosition.value); envRT?.dispose(); envRT = pmrem.fromScene(envScene); scene.environment = envRT.texture;
   scene.environmentIntensity = on ? 0.05 : 0.3;
   U.uNight.value = on ? 1 : 0; for (const [m, v] of nightMats) m.emissiveIntensity = on ? v : (m === goldP ? 0.1 : 0);
+  T408.setNight(on ? 1 : 0); TGAL.setNight(on ? 1 : 0);
   renderer.toneMappingExposure = on ? 1.15 : 0.85;
 }
 setNight(false);
