@@ -53,6 +53,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Sky } from 'three/addons/objects/Sky.js';
 import { makeTower408, makeGalaxy } from './thap408.js';
+import { addBridges } from './cau.js';
 
 const $ = (id) => document.getElementById(id);
 const V3 = (x, y, z) => new THREE.Vector3(x, y, z);
@@ -268,12 +269,13 @@ let wheelRot;
 }
 // Sun Galaxy Complex – bờ Đông, phía Nam đầu cầu Trần Thị Lý: tháp 47 tầng ~183 m, Moon Gate, khán đài DIFF
 const GAL = LL(16.04315, 108.2376), GR = -1.36;   // khu đất trống bờ Đông đối diện Da Nang Downtown; trục x dọc bờ sông, +z quay ra sông
+const BR = addBridges(THREE, scene, LL);   // cầu Rồng, Trần Thị Lý, Nguyễn Văn Trỗi, cầu đi bộ Downtown (cau.js)
 const TGAL = makeGalaxy(THREE); TGAL.group.position.set(GAL[0], 0, GAL[1]); TGAL.group.rotation.y = GR; dtG.add(TGAL.group);
 const [dtx, dtz] = MAIN;
 
 // ---- nhãn ----
 const LABELS = [
-  ['Cầu Rồng', ...LL(16.0612, 108.2270), 25, 0], ['Cầu Trần Thị Lý', ...LL(16.0504, 108.2300), 40, 0], ['Cầu Nguyễn Văn Trỗi', ...LL(16.0545, 108.2283), 20, 0],
+  ['Cầu Rồng', ...LL(16.0612, 108.2270), 40, 0], ['Cầu Trần Thị Lý', ...LL(16.0503, 108.2275), 150, 0], ['Cầu Nguyễn Văn Trỗi', ...LL(16.0512, 108.2292), 20, 0], ['Cầu đi bộ Da Nang Downtown', ...LL(16.0397, 108.2352), 34, 0],
   ['Sông Hàn', ...LL(16.0575, 108.2290), 8, 0], ['Da Nang Downtown – tháp 408 m', dtx, dtz, 425, 1], ['Nhà hát 4.000 chỗ', ...THEATRE, 40, 1], ['Sun Wheel', WHEEL[0], WHEEL[1], 120, 0],
   ['Sun Galaxy Complex – 47 tầng', GAL[0], GAL[1], 190, 1],
   ...meta.tall.filter((t) => t.name && !/^\d+$/.test(t.name)).map((t) => [t.name, t.x, t.z, t.h + 6, 0]),
@@ -301,7 +303,7 @@ function setNight(on) {
   envSky.material.uniforms.sunPosition.value.copy(sky.material.uniforms.sunPosition.value); envRT?.dispose(); envRT = pmrem.fromScene(envScene); scene.environment = envRT.texture;
   scene.environmentIntensity = on ? 0.05 : 0.3;
   U.uNight.value = on ? 1 : 0; for (const [m, v] of nightMats) m.emissiveIntensity = on ? v : (m === goldP ? 0.1 : 0);
-  T408.setNight(on ? 1 : 0); TGAL.setNight(on ? 1 : 0);
+  T408.setNight(on ? 1 : 0); TGAL.setNight(on ? 1 : 0); BR.setNight(on ? 1 : 0);
   renderer.toneMappingExposure = on ? 1.15 : 0.85;
 }
 setNight(false);
