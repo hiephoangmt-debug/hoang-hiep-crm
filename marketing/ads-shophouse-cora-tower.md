@@ -70,7 +70,7 @@ cho thuê, thuê, việc làm, tuyển dụng, hà nội shophouse vinhomes, m�
 1. Shophouse tầng 1 Cora Tower, trần ~7m làm tầng lửng, sở hữu lâu dài. Nhận giỏ hàng ngay.
 2. Vay tối đa 70%, hỗ trợ lãi suất 24 tháng, Sun Early Key thanh toán 70% là nhận nhà.
 3. Mặt kính kịch trần ôm vòng xoay 29/3 – Nguyễn Phước Lan. Xem mặt bằng, mặt tiền từng căn.
-4. Đất Nguyễn Phước Lan 150–230tr/m². Shophouse ngay vòng xoay chỉ ~100–115tr/m².
+4. Đất Nguyễn Phước Lan 150–230tr/m². Shophouse ngay vòng xoay chỉ ~100–135tr/m².
 4. Có sổ đỏ lô đất, văn bản đủ điều kiện bán, bảo lãnh VietinBank. Tư vấn: 0904 567 009.
 
 ### Tiện ích quảng cáo
@@ -103,9 +103,9 @@ cho thuê, thuê, việc làm, tuyển dụng, hà nội shophouse vinhomes, m�
 **Nút:** Tìm hiểu thêm / Gửi tin nhắn
 
 ### Mẫu 2 – Nhà đầu tư (số liệu)
-**Tiêu đề:** Shophouse Cora Tower – vốn ban đầu từ khoảng 1,5 tỷ*
+**Tiêu đề:** Shophouse Cora Tower – vốn ban đầu từ khoảng 1,6 tỷ*
 **Nội dung:**
-> Shop khối đế Sun Group tại Đà Nẵng, giá khoảng 4,96 – 6,04 tỷ/căn (43 – 61,5 m²):
+> Shop khối đế Sun Group tại Đà Nẵng, giá khoảng 5,17 – 9,12 tỷ/căn (43,8 – 87,3 m²):
 > ✅ Vay tối đa 70%, hỗ trợ lãi suất 24 tháng
 > ✅ Tiến độ thanh toán đến 40 tháng
 > ✅ Chiết khấu không vay 5% · Early Bird 3% · Tặng 4% hoàn thiện nội thất kinh doanh
@@ -127,11 +127,11 @@ cho thuê, thuê, việc làm, tuyển dụng, hà nội shophouse vinhomes, m�
 ### Mẫu 4 – So sánh giá đất (nhà đầu tư)
 > Đất mặt tiền Nguyễn Phước Lan đang rao 150 – 230 triệu/m². Một lô 100 m² đã 15 – 23 tỷ, chưa xây, chưa có khách.
 >
-> Ngay tại vòng xoay 29/3 – Nguyễn Phước Lan, **shophouse khối đế Cora Tower** chỉ từ ~4,96 tỷ/căn (~100 – 115 triệu/m², đã gồm VAT):
+> Ngay tại vòng xoay 29/3 – Nguyễn Phước Lan, **shophouse khối đế Cora Tower** chỉ từ ~5,17 tỷ/căn (~100 – 135 triệu/m², đã gồm VAT):
 > ✔ 1.342 căn hộ phía trên – khách có sẵn mỗi ngày
 > ✔ Mặt kính kịch trần, trần ~7 m làm tầng lửng
 > ✔ Sở hữu lâu dài, thương hiệu Sun Group
-> ✔ Vốn ban đầu ~1,5 tỷ – vay 70%, 0% lãi 24 tháng
+> ✔ Vốn ban đầu ~1,6 tỷ – vay 70%, 0% lãi 24 tháng
 >
 > Cùng tuyến đường, cùng dòng người – vốn chỉ bằng khoảng 1/3.
 > 📞 0904 567 009 (Zalo) – nhận giỏ căn còn trống.

@@ -55,7 +55,7 @@ INDEX_ARTICLE = article("Cẩm nang mua căn hộ", "Cora Tower Đà Nẵng: t�
 <p>Mỗi sàn điển hình (tầng 3A–24) có 28 căn, hành lang giữa, 2 lõi thang. Xem chi tiết từng mã căn ở mục <a href="#mat-bang">mặt bằng</a>.</p>
 
 <h3 id="ct-gia">Giá bán Cora Tower và chính sách thanh toán</h3>
-<p>Căn 1PN+ tầng 15 hiện có giá dự kiến khoảng <strong>3,1 – 3,85 tỷ/căn</strong> (giá trần gồm VAT và phí bảo trì, theo chính sách bán hàng); shophouse 43 – 61,5 m² khoảng <strong>4,96 – 6,04 tỷ/căn</strong>. Chính sách nổi bật:</p>
+<p>Theo giỏ hàng cập nhật 19/09/2026, Studio có giá khoảng <strong>2,42 – 2,74 tỷ/căn</strong>, căn 1PN+ khoảng <strong>3,45 – 3,84 tỷ/căn</strong> (đã gồm VAT và phí bảo trì); shophouse 43,8 – 87,3 m² khoảng <strong>5,17 – 9,12 tỷ/căn</strong>. Chính sách nổi bật:</p>
 <ul>
 <li>Chiết khấu <strong>7%</strong> “Đặc quyền hoàn thiện nội thất”; khách không vay chiết khấu thêm <strong>5%</strong> và giãn tiến độ đến <strong>40 tháng</strong>.</li>
 <li>Ngân hàng cho vay tối đa <strong>70%</strong>, hỗ trợ lãi suất đến <strong>24 tháng</strong> (không muộn hơn 30/09/2028), miễn phí trả nợ trước hạn trong thời gian hỗ trợ.</li>
@@ -82,7 +82,7 @@ INDEX_ARTICLE = article("Cẩm nang mua căn hộ", "Cora Tower Đà Nẵng: t�
 # ---------------------------------------------------------------- SHOPHOUSE
 SHOP_TOC = [("sh-buoi-sang", "Một buổi sáng ở shop của anh/chị"), ("sh-vi-sao", "Ba thứ làm nên một shophouse “đẻ ra tiền”"),
             ("sh-gia-dat", "Đất Nguyễn Phước Lan 150–230 triệu/m²"), ("sh-dep", "Mặt tiền tự bán hàng thay chủ"), ("sh-7m", "Trần 7 m: mua một, dùng hai"),
-            ("sh-khai-thac", "Kinh doanh gì để có dòng tiền?"), ("sh-tai-chinh", "Chỉ từ 1,5 tỷ để bắt đầu"),
+            ("sh-khai-thac", "Kinh doanh gì để có dòng tiền?"), ("sh-tai-chinh", "Chỉ từ 1,6 tỷ để bắt đầu"),
             ("sh-phap-ly", "Sở hữu lâu dài – tài sản để lại cho con"), ("sh-chon-can", "Chọn căn: căn đẹp đi trước"),
             ("sh-rui-ro", "Kiểm tra gì trước khi cọc?")]
 
@@ -111,13 +111,13 @@ SHOP_ARTICLE = article("Câu chuyện đầu tư", "Shophouse Cora Tower: mặt 
 
 <h3 id="sh-gia-dat">Đất Nguyễn Phước Lan đã 150 – 230 triệu/m². Shophouse thì sao?</h3>
 <p>Ai từng đi xem đất Hòa Xuân đều thấy rõ: đất mặt tiền <strong>Nguyễn Phước Lan</strong> hiện được rao bán khoảng <strong>150 – 230 triệu đồng/m²</strong>. Một lô 100 m² đã là <strong>15 – 23 tỷ</strong> – chưa tính tiền xây, và vẫn phải tự đi kéo khách.</p>
-<p>Ngay tại vòng xoay 29/3 – Nguyễn Phước Lan, shophouse Cora Tower có giá chỉ khoảng <strong>4,96 – 6,04 tỷ/căn</strong> cho 43 – 61,5 m², tức khoảng <strong>100 – 115 triệu/m²</strong> (đã gồm VAT, phí bảo trì) – thấp hơn đáng kể so với đơn giá đất mặt tiền cùng tuyến đường.</p>
+<p>Ngay tại vòng xoay 29/3 – Nguyễn Phước Lan, shophouse Cora Tower có giá chỉ khoảng <strong>5,17 – 9,12 tỷ/căn</strong> cho 43,8 – 87,3 m², tức khoảng <strong>100 – 135 triệu/m²</strong> (đã gồm VAT, phí bảo trì) – thấp hơn đáng kể so với đơn giá đất mặt tiền cùng tuyến đường.</p>
 <div class="table-wrap"><table>
 <thead><tr><th></th><th>Đất mặt tiền Nguyễn Phước Lan</th><th>Shophouse Cora Tower</th></tr></thead>
 <tbody>
-<tr><td>Đơn giá</td><td>150 – 230 triệu/m² đất</td><td><b>~100 – 115 triệu/m²</b></td></tr>
-<tr><td>Tổng tiền</td><td>15 – 23 tỷ (lô 100 m²)</td><td><b>4,96 – 6,04 tỷ</b></td></tr>
-<tr><td>Vốn ban đầu</td><td>Gần như toàn bộ</td><td><b>~1,5 – 1,8 tỷ</b> (vay 70%, 0% lãi 24 tháng)</td></tr>
+<tr><td>Đơn giá</td><td>150 – 230 triệu/m² đất</td><td><b>~100 – 135 triệu/m²</b></td></tr>
+<tr><td>Tổng tiền</td><td>15 – 23 tỷ (lô 100 m²)</td><td><b>5,17 – 9,12 tỷ</b></td></tr>
+<tr><td>Vốn ban đầu</td><td>Gần như toàn bộ</td><td><b>~1,6 – 2,7 tỷ</b> (vay 70%, 0% lãi 24 tháng)</td></tr>
 <tr><td>Xây dựng</td><td>Tự xây, tự xin phép</td><td><b>Nhận bàn giao</b>, trần ~7 m làm được tầng lửng</td></tr>
 <tr><td>Khách hàng</td><td>Tự kéo</td><td><b>1.342 căn hộ</b> ngay phía trên</td></tr>
 <tr><td>Vận hành</td><td>Tự lo an ninh, vệ sinh</td><td>Ban quản lý chuyên nghiệp của Sun Group</td></tr>
@@ -142,14 +142,14 @@ SHOP_ARTICLE = article("Câu chuyện đầu tư", "Shophouse Cora Tower: mặt 
 <p>Không tự kinh doanh? Cho thuê để thương hiệu khai thác. Báo chí dẫn lời một số chủ shophouse khu Nam trung tâm Đà Nẵng đang cho thuê <strong>35–100 triệu đồng/tháng</strong> tùy vị trí, diện tích (thông tin tham khảo, không phải cam kết).</p>
 <p class="prose-cta inline">Muốn biết căn nào hợp ngành hàng của mình? Gọi/Zalo <a href="tel:{TEL}"><b>{TEL_TXT}</b></a> – chuyên viên gửi ngay mặt bằng và giỏ căn còn trống.</p>
 
-<h3 id="sh-tai-chinh">Chỉ từ khoảng 1,5 tỷ để bắt đầu</h3>
+<h3 id="sh-tai-chinh">Chỉ từ khoảng 1,6 tỷ để bắt đầu</h3>
 <div class="num-row">
 <div><b>70%</b><span>ngân hàng cho vay</span></div>
 <div><b>0%</b><span>lãi suất 24 tháng</span></div>
 <div><b>40</b><span>tháng giãn thanh toán</span></div>
-<div><b>~1,5 tỷ</b><span>vốn tự có ban đầu</span></div>
+<div><b>~1,6 tỷ</b><span>vốn tự có ban đầu</span></div>
 </div>
-<p>Với căn 4,96 – 6,04 tỷ, khoản vay tối đa 70% được hỗ trợ lãi suất 0% trong 24 tháng – vốn tự có ban đầu chỉ khoảng <strong>1,5 – 1,8 tỷ</strong>. Chương trình <strong>Sun Early Key</strong>: thanh toán 70% là nhận nhà, 30% còn lại trả trong 24 tháng – nghĩa là shop có thể <strong>mở cửa đón khách, tạo dòng tiền trước khi trả xong</strong>. Cộng thêm chiết khấu Early Bird 3%, chiết khấu không vay 5% và hỗ trợ hoàn thiện nội thất kinh doanh 4% (xem <a href="#chinh-sach-shop">chính sách</a>).</p>
+<p>Với căn 5,17 – 9,12 tỷ, khoản vay tối đa 70% được hỗ trợ lãi suất 0% trong 24 tháng – vốn tự có ban đầu chỉ khoảng <strong>1,6 – 2,7 tỷ</strong>. Chương trình <strong>Sun Early Key</strong>: thanh toán 70% là nhận nhà, 30% còn lại trả trong 24 tháng – nghĩa là shop có thể <strong>mở cửa đón khách, tạo dòng tiền trước khi trả xong</strong>. Cộng thêm chiết khấu Early Bird 3%, chiết khấu không vay 5% và hỗ trợ hoàn thiện nội thất kinh doanh 4% (xem <a href="#chinh-sach-shop">chính sách</a>).</p>
 
 <h3 id="sh-phap-ly">Sở hữu lâu dài – tài sản để lại cho con</h3>
 <p>Nhiều shop chân đế ở Hà Nội, TP.HCM khai thác rất tốt nhưng chỉ sở hữu có thời hạn. Shophouse Cora Tower thì khác: theo chủ đầu tư, <strong>sở hữu lâu dài</strong> như căn hộ, hình thành đơn vị ở nên <strong>đăng ký được hộ khẩu thường trú</strong>. Hôm nay là cửa hàng của anh/chị, mai kia là tài sản trao lại cho thế hệ sau. (Lưu ý: shophouse không đăng ký giấy phép kinh doanh tại căn; cách làm phổ biến là cho thương hiệu thuê theo hợp đồng ghi mã căn, hoặc dùng làm địa điểm kinh doanh của doanh nghiệp/hộ kinh doanh đăng ký ở địa chỉ khác.)</p>
@@ -237,7 +237,7 @@ SUN_BODY = f'''
 </ul>
 
 <h3 id="sun-gia">Giá căn hộ Sun Đà Nẵng tại Cora Tower</h3>
-<p>Căn 1PN+ tầng 15 khoảng <strong>3,1 – 3,85 tỷ</strong>, shophouse 43 – 61,5 m² khoảng <strong>4,96 – 6,04 tỷ</strong>. Vay tối đa 70%, hỗ trợ lãi suất 0% trong 24 tháng, Sun Early Key thanh toán 70% nhận nhà. Xem <a href="./#gia">bảng giá Cora Tower</a>.</p>
+<p>Studio từ khoảng <strong>2,42 tỷ</strong>, căn 1PN+ khoảng <strong>3,45 – 3,84 tỷ</strong>, shophouse 43,8 – 87,3 m² khoảng <strong>5,17 – 9,12 tỷ</strong>. Vay tối đa 70%, hỗ trợ lãi suất 0% trong 24 tháng, Sun Early Key thanh toán 70% nhận nhà. Xem <a href="./#gia">bảng giá Cora Tower</a>.</p>
 
 <h3 id="sun-quy-trinh">Quy trình mua căn hộ Sun</h3>
 <ol>
@@ -249,7 +249,7 @@ SUN_BODY = f'''
 {CTA}'''
 SUN_FAQ = [
     ("Căn hộ Sun Đà Nẵng nào đã đủ điều kiện bán?", "Cora Tower (lô A2-19, A2-20) có văn bản 7117/SXD-QLN ngày 05/5/2026 của Sở Xây dựng Đà Nẵng về điều kiện nhà ở hình thành trong tương lai đưa vào kinh doanh, kèm bảo lãnh VietinBank."),
-    ("Căn hộ Sun Đà Nẵng giá bao nhiêu?", "Tại Cora Tower, căn 1PN+ tầng 15 khoảng 3,1 – 3,85 tỷ/căn; giá thay đổi theo tầng, hướng và đợt chính sách."),
+    ("Căn hộ Sun Đà Nẵng giá bao nhiêu?", "Tại Cora Tower, Studio từ khoảng 2,42 tỷ, căn 1PN+ khoảng 3,45 – 3,84 tỷ/căn (giỏ hàng 19/09/2026); giá thay đổi theo tầng, hướng và đợt chính sách."),
     ("Mua căn hộ Sun Đà Nẵng được vay bao nhiêu?", "Ngân hàng cho vay tối đa 70% giá trị, hỗ trợ lãi suất 0% trong 24 tháng; có chương trình Sun Early Key thanh toán 70% nhận nhà."),
     ("Sun Neo City ở đâu?", "Sun Neo City là Khu đô thị sinh thái ven sông Hòa Xuân, phường Hòa Xuân, TP Đà Nẵng – khu Nam trung tâm thành phố."),
 ]

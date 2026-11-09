@@ -20,13 +20,13 @@
       a: () => "Dạ em chào anh/chị ạ! Em là trợ lý tư vấn Cora Tower. Anh/chị đang quan tâm căn hộ để ở hay đầu tư, để em gợi ý căn phù hợp nhất ạ?",
       chips: ["Mua để ở", "Đầu tư cho thuê", "Bảng giá"] },
     { id: "price", k: ["gia", "bao nhieu", "bang gia", "tien", "ty", "trieu", "chi phi", "re", "dat"],
-      a: () => "Dạ hiện căn 1PN+ (53,8 m² thông thủy) tầng 15 đang khoảng:\n• Tòa A1: 3,2 – 3,85 tỷ\n• Tòa A2: 3,1 – 3,85 tỷ\n(giá trần đã gồm VAT + phí bảo trì, theo chính sách bán hàng).\n\nGiá từng căn chênh theo tầng, hướng và đợt chính sách. Anh/chị để lại SĐT/Zalo, em gửi ngay bảng giá đầy đủ các tầng kèm căn đẹp còn trống nhé ạ?",
+      a: () => "Dạ giỏ hàng cập nhật 19/09/2026 đang có:\n• Studio 32,3 m²: 2,42 – 2,74 tỷ\n• 1PN+ 54,2 m² tòa A1 (tầng 15 – 23): 3,45 – 3,62 tỷ\n• 1PN+ 53,2 – 54,2 m² tòa A2 (tầng 16 – 19): 3,77 – 3,84 tỷ\n• Shophouse 43,8 – 87,3 m²: 5,17 – 9,12 tỷ\n(đã gồm VAT + phí bảo trì).\n\nGiá từng căn chênh theo tầng, hướng và đợt chính sách. Anh/chị để lại SĐT/Zalo, em gửi ngay bảng giá đầy đủ các tầng kèm căn đẹp còn trống nhé ạ?",
       lead: true, chips: ["Căn 1PN+", "Studio", "2PN – 3PN", "Thanh toán"] },
     { id: "1pn", k: ["1pn", "1pn+", "1 pn", "1 pn+", "pn+", "1 phong ngu", "mot phong ngu", "1br", "1 ngu", "1+1", "pn+"],
-      a: () => "Dạ 1PN+ là dòng căn chủ lực, chiếm nhiều nhất mỗi sàn:\n• Thông thủy 52,3 – 59,6 m² (phổ biến 53,8 m²)\n• 1 phòng ngủ chính + 1 phòng linh hoạt, logia 1,6 m\n• Giá tầng 15 khoảng 3,1 – 3,85 tỷ/căn\n\nCăn này vừa ở vợ chồng trẻ vừa dễ cho thuê. Anh/chị thích tầng cao hay tầng trung, view sông hay view thành phố ạ?",
+      a: () => "Dạ 1PN+ là dòng căn chủ lực, chiếm nhiều nhất mỗi sàn:\n• Thông thủy 52,3 – 59,6 m² (phổ biến 53,8 m²)\n• 1 phòng ngủ chính + 1 phòng linh hoạt, logia 1,6 m\n• Giỏ hàng hiện có khoảng 3,45 – 3,84 tỷ/căn (tầng 15 – 23)\n\nCăn này vừa ở vợ chồng trẻ vừa dễ cho thuê. Anh/chị thích tầng cao hay tầng trung, view sông hay view thành phố ạ?",
       chips: ["Tầng cao", "View sông", "Xem mặt bằng"] },
     { id: "studio", k: ["gia studio", "studio bao nhieu", "studio", "stu", "can nho", "1 nguoi", "mot nguoi"],
-      a: () => "Dạ Studio rộng 32 – 32,2 m² thông thủy (36,1 m² tim tường), là căn có tổng tiền thấp nhất dự án – rất hợp ở một mình hoặc cho thuê ngắn hạn. Số lượng mỗi sàn có hạn nên căn đẹp đi khá nhanh ạ. Anh/chị cho em xin SĐT/Zalo để em gửi giá Studio từng tầng nhé?",
+      a: () => "Dạ Studio rộng 32 – 32,2 m² thông thủy (36,1 m² tim tường), là căn có tổng tiền thấp nhất dự án – giỏ hàng hiện có khoảng 2,42 – 2,74 tỷ/căn (tầng 15 – 22) – rất hợp ở một mình hoặc cho thuê ngắn hạn. Số lượng mỗi sàn có hạn nên căn đẹp đi khá nhanh ạ. Anh/chị cho em xin SĐT/Zalo để em gửi giá Studio từng tầng nhé?",
       lead: true },
     { id: "2pn", k: ["2pn", "2 pn", "2 phong", "hai phong", "2br", "gia dinh", "can goc"],
       a: () => "Dạ căn 2PN rộng 60,6 – 73,4 m² thông thủy, đa số nằm ở góc tòa nên 2 mặt thoáng, rất hợp gia đình nhỏ. Còn 3PN (78,9 m²) mỗi sàn mỗi tòa chỉ có 1 căn ở đầu hồi phía vòng xoay – cực hiếm ạ.\n\nNhà mình mấy người ở để em lọc căn vừa nhất ạ?",
@@ -35,7 +35,7 @@
       a: () => "Dạ 3PN rộng 78,9 m² thông thủy (85,7 – 86,7 m² tim tường), mỗi tòa mỗi sàn chỉ 1 căn ở đầu hồi hướng vòng xoay – view thoáng nhất tòa. Số lượng rất ít nên thường được giữ chỗ sớm. Anh/chị để lại SĐT, em báo ngay căn 3PN còn trống ạ.",
       lead: true },
     { id: "shop", k: ["gia shophouse", "shophouse bao nhieu", "gia shop", "gia khoi de", "shophouse", "khoi de", "kinh doanh", "mat bang thuong mai", "cua hang", "buon ban", "ki ot", "kiot"],
-      a: () => "Dạ shophouse nằm tầng 1 khối đế, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan:\n• Sở hữu lâu dài như căn hộ, đăng ký được hộ khẩu\n• Trần cao ~7 m – làm thêm tầng lửng, gấp đôi diện tích sử dụng\n• Khoảng 63 shop (A1: 33, A2: 30), diện tích 38 – 127 m², mặt tiền 3,5 – 13 m\n• Căn 43 – 61,5 m² giá khoảng 4,96 – 6,04 tỷ/căn (~100 – 115 tr/m², đã gồm VAT & phí bảo trì) – trong khi đất mặt tiền Nguyễn Phước Lan đang rao 150 – 230 tr/m²\n• Vay tối đa 70%, HTLS 24 tháng, tiến độ thanh toán đến 40 tháng\n• Chiết khấu Early Bird 3%, không vay 5%, quà hoàn thiện nội thất kinh doanh 4%\n\nPhía trên là 1.342 căn hộ nên khách có sẵn, nhiều căn đã được cọc. Anh/chị định tự kinh doanh hay cho thuê ạ?",
+      a: () => "Dạ shophouse nằm tầng 1 khối đế, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan:\n• Sở hữu lâu dài như căn hộ, đăng ký được hộ khẩu\n• Trần cao ~7 m – làm thêm tầng lửng, gấp đôi diện tích sử dụng\n• Khoảng 63 shop (A1: 33, A2: 30), diện tích 38 – 127 m², mặt tiền 3,5 – 13 m\n• Giỏ hàng: căn 43,8 – 87,3 m² giá khoảng 5,17 – 9,12 tỷ/căn (~100 – 135 tr/m², đã gồm VAT & phí bảo trì) – trong khi đất mặt tiền Nguyễn Phước Lan đang rao 150 – 230 tr/m²\n• Vay tối đa 70%, HTLS 24 tháng, tiến độ thanh toán đến 40 tháng\n• Chiết khấu Early Bird 3%, không vay 5%, quà hoàn thiện nội thất kinh doanh 4%\n\nPhía trên là 1.342 căn hộ nên khách có sẵn, nhiều căn đã được cọc. Anh/chị định tự kinh doanh hay cho thuê ạ?",
       lead: true, chips: ["Tự kinh doanh", "Cho thuê", "Xem trang shophouse"] },
     { id: "ph", k: ["gia penthouse", "penthouse bao nhieu", "gia duplex", "penthouse", "duplex", "tang 25", "tang thuong", "thong tang", "cao nhat"],
       a: () => "Dạ penthouse nằm tầng 25, trong khối mái màu cam biểu tượng:\n• Trần cao ~7 m – làm thêm tầng lửng thành duplex 2 tầng, CĐT có layout gợi ý\n• Khoảng 24 căn/tòa, sàn chính 51,9 – 88,6 m²; làm lửng: 1PN → 2PN+1, 2PN → 3PN, 2PN+1 → 3PN+1\n• Giá tính theo đơn nguyên 1 căn, phần lửng tự làm không tính thêm\n• Chính sách giống căn hộ: vay 70%, hỗ trợ lãi suất 24 tháng\n\nSố lượng cực kỳ giới hạn nên em gửi thông tin trực tiếp cho khách quan tâm. Anh/chị cho em xin SĐT/Zalo nhé ạ?",
@@ -202,7 +202,7 @@
       state.started = true;
       const h = new Date().getHours();
       const hi = h < 11 ? "Chào buổi sáng" : h < 14 ? "Chào buổi trưa" : h < 18 ? "Chào buổi chiều" : "Chào buổi tối";
-      say(`${hi} anh/chị! Em là trợ lý tư vấn <b>Cora Tower</b> – 2 tòa căn hộ Sun Group (1.342 căn) tại vòng xoay 29/3, Đà Nẵng – đã đủ điều kiện bán, có bảo lãnh VietinBank.\n\nStudio chỉ từ khoảng <b>1,86 tỷ</b> sau chiết khấu, đặt cọc 100 triệu. Anh/chị muốn em hỗ trợ thông tin nào ạ?`);
+      say(`${hi} anh/chị! Em là trợ lý tư vấn <b>Cora Tower</b> – 2 tòa căn hộ Sun Group (1.342 căn) tại vòng xoay 29/3, Đà Nẵng – đã đủ điều kiện bán, có bảo lãnh VietinBank.\n\nStudio từ khoảng <b>2,42 tỷ</b>, 1PN+ từ <b>3,45 tỷ</b>, đặt cọc 100 triệu. Anh/chị muốn em hỗ trợ thông tin nào ạ?`);
     }
     setTimeout(() => input.focus({ preventScroll: true }), 50);
   }

@@ -18,7 +18,7 @@ EMAIL = "hiephoangmt@gmail.com"
 ZALO = f"https://zalo.me/{TEL}"
 AGENT = "Hoàng Phạm Đình Hiệp – Tư vấn Cora Tower"
 AGENT_TITLE = "Hoàng Phạm Đình Hiệp – Giám đốc kinh doanh"
-UPDATED = "07/10/2026"
+UPDATED = "09/11/2026"
 MAPS = "https://www.google.com/maps/search/?api=1&query=Cora+Tower+v%C3%B2ng+xoay+29%2F3+Nguy%E1%BB%85n+Ph%C6%B0%E1%BB%9Bc+Lan+H%C3%B2a+Xu%C3%A2n+%C4%90%C3%A0+N%E1%BA%B5ng"
 
 # name: (width, height, small width, alt)
@@ -113,13 +113,11 @@ UNIT_TYPES = [
     ("3PN", "78,9 – 81,8 m²", "85,7 – 89,1 m²", "Gia đình đa thế hệ, mỗi sàn 1 căn"),
     ("Sân vườn tầng 3", "theo loại căn", "+ sân vườn 10 – 151 m²", "Thích không gian xanh riêng"),
 ]
-PRICES = [
-    ("Tòa A1 – 1PN+ (dãy phía Bắc)", "A10802 – A10810", "3,2 – 3,65 tỷ"),
-    ("Tòa A1 – 1PN+ (dãy phía Nam)", "A10819 – A10825", "3,3 – 3,65 tỷ"),
-    ("Tòa A1 – 1PN+ (A10812A, A10812B)", "Căn sát góc", "3,6 – 3,85 tỷ"),
-    ("Tòa A2 – 1PN+ (dãy phía Bắc)", "A20803 – A20809", "3,1 – 3,4 tỷ"),
-    ("Tòa A2 – 1PN+ (A20812B, A20815)", "Căn sát góc", "3,6 – 3,8 tỷ"),
-    ("Tòa A2 – 1PN+ (dãy phía Nam)", "A20818 – A20826", "3,3 – 3,85 tỷ"),
+PRICES = [  # giỏ hàng (quỹ chung) cập nhật 19/09/2026 – giá đã gồm VAT + KPBT
+    ("Studio · Tòa A1", "Tầng 17 · 32,3 m²", "2,60 tỷ"),
+    ("Studio · Tòa A2", "Tầng 15 – 22 · 32,3 m²", "2,42 – 2,74 tỷ"),
+    ("1PN+ · Tòa A1", "Tầng 15 – 23 · 54,2 m²", "3,45 – 3,62 tỷ"),
+    ("1PN+ · Tòa A2", "Tầng 16 – 19 · 53,2 – 54,2 m²", "3,77 – 3,84 tỷ"),
 ]
 CONNECT = [
     "Vòng xoay đường 29/3 giao Nguyễn Phước Lan – trục chính Nam Hòa Xuân",
@@ -133,7 +131,7 @@ FAQ_INDEX = [
     ("Cora Tower ở đâu?", "Tại vòng xoay đường 29/3 giao Nguyễn Phước Lan, trung tâm khu đô thị Nam Hòa Xuân (Sun Neo City), Đà Nẵng."),
         ("Cora Tower có những loại căn nào?", "Studio 32–32,2 m², 1PN+ 52,3–59,6 m², 2PN 60,6–73,4 m², 3PN 78,9 m² (diện tích thông thủy), căn hộ sân vườn tầng 3, duplex tầng 25 và shophouse tầng 1."),
     ("Mỗi sàn Cora Tower có bao nhiêu căn?", "Theo mặt bằng tầng 3A–24, mỗi tòa A1, A2 có 28 căn/sàn."),
-    ("Giá căn 1PN+ Cora Tower bao nhiêu?", "Thông tin thị trường cho căn 1PN+ tầng 15 khoảng 3,1–3,85 tỷ/căn (giá trần gồm VAT, phí bảo trì, theo chính sách bán hàng). Giá chính thức theo công bố của chủ đầu tư."),
+    ("Giá căn 1PN+ Cora Tower bao nhiêu?", "Theo giỏ hàng cập nhật 19/09/2026, căn 1PN+ 53,2 – 54,2 m² (tầng 15 – 23) khoảng 3,45 – 3,84 tỷ/căn, Studio 32,3 m² khoảng 2,42 – 2,74 tỷ/căn (đã gồm VAT và phí bảo trì). Giá chính thức theo công bố của chủ đầu tư."),
     ("Pháp lý Cora Tower thế nào?", "Đất lô A2-19 (Tòa A1) và A2-20 (Tòa A2) đã có Giấy chứng nhận QSDĐ số DI 103576, DI 103577 cấp 12/4/2023. Sở Xây dựng Đà Nẵng có văn bản 7117/SXD-QLN ngày 05/5/2026 về điều kiện nhà ở hình thành trong tương lai đưa vào kinh doanh; VietinBank cam kết phát hành bảo lãnh; hợp đồng mẫu đã đăng ký tại Sở Công Thương."),
     ("Chủ đầu tư Cora Tower là công ty nào?", "Công ty Cổ phần Tập đoàn Mặt Trời (Sun Group), mã số doanh nghiệp 0305016195, trụ sở Tầng 1M, 36-38 Bạch Đằng, phường Hải Châu, TP Đà Nẵng."),
     ("Cora Tower có bao nhiêu căn hộ?", "Tổng 1.342 căn hộ: Tòa A1 (lô A2-19) 672 căn, Tòa A2 (lô A2-20) 670 căn; mỗi tòa 25 tầng nổi + tum, 2 tầng hầm, cao 97,95 m."),
@@ -142,7 +140,7 @@ FAQ_INDEX = [
     ("Mua Cora Tower ký hợp đồng gì?", "Dự án đã đủ điều kiện ký hợp đồng mua bán (HĐMB). Khách ký hợp đồng thỏa thuận nguyên tắc (HĐTHNV) trước để có thời gian chuẩn bị tài chính, hồ sơ vay, sau đó ký HĐMB theo thông báo của chủ đầu tư."),
 ]
 FAQ_SHOP = [
-    ("Giá shophouse Cora Tower so với giá đất mặt tiền Nguyễn Phước Lan thế nào?", "Đất mặt tiền Nguyễn Phước Lan đang được rao khoảng 150 – 230 triệu/m² (lô 100 m² khoảng 15 – 23 tỷ). Shophouse Cora Tower ngay vòng xoay 29/3 – Nguyễn Phước Lan có giá khoảng 4,96 – 6,04 tỷ/căn 43 – 61,5 m², quy đổi khoảng 100 – 115 triệu/m² sàn, đã gồm VAT và phí bảo trì, vốn ban đầu chỉ khoảng 1,5 – 1,8 tỷ nhờ vay 70%. Giá đất là mức rao bán tham khảo; shophouse là sở hữu sàn trong tòa nhà."),
+    ("Giá shophouse Cora Tower so với giá đất mặt tiền Nguyễn Phước Lan thế nào?", "Đất mặt tiền Nguyễn Phước Lan đang được rao khoảng 150 – 230 triệu/m² (lô 100 m² khoảng 15 – 23 tỷ). Shophouse Cora Tower ngay vòng xoay 29/3 – Nguyễn Phước Lan có giá khoảng 5,17 – 9,12 tỷ/căn 43,8 – 87,3 m², quy đổi khoảng 100 – 135 triệu/m² sàn, đã gồm VAT và phí bảo trì, vốn ban đầu chỉ khoảng 1,6 – 2,7 tỷ nhờ vay 70%. Giá đất là mức rao bán tham khảo; shophouse là sở hữu sàn trong tòa nhà."),
     ("Shophouse Cora Tower nằm ở tầng nào?", "Shophouse thương mại nằm ở tầng 1 khối đế, hướng ra vòng xoay 29/3 – Nguyễn Phước Lan; tầng 2 là dịch vụ – tiện ích."),
     ("Shophouse khối đế Cora Tower có sở hữu lâu dài không?", "Có. Theo chủ đầu tư, shophouse khối đế có pháp lý sở hữu lâu dài như căn hộ: vừa ở vừa kinh doanh được, và đăng ký được hộ khẩu thường trú."),
     ("Shophouse cao bao nhiêu, làm tầng lửng được không?", "Chiều cao tầng khối đế lên tới khoảng 7 m nên có thể làm thêm tầng lửng. Chủ nhà tự hoàn thiện tầng lửng, miễn không ảnh hưởng kết cấu, cơ điện, kiến trúc tòa nhà; hồ sơ phương án gửi Ban quản lý duyệt trong khoảng 1–2 tuần."),
@@ -458,12 +456,12 @@ def units_table():
 def price_table():
     rows = "".join(f'<tr><td>{a}</td><td>{b}</td><td class="price">{c}</td><td><a href="#dang-ky">Giữ căn →</a></td></tr>' for a, b, c in PRICES)
     return f'''<div class="table-wrap reveal"><table>
-          <thead><tr><th>Căn 1PN+ tầng 15</th><th>Mã căn</th><th>Giá dự kiến / căn</th><th></th></tr></thead>
+          <thead><tr><th>Loại căn</th><th>Tầng · diện tích</th><th>Giá / căn</th><th></th></tr></thead>
           <tbody>{rows}
-            <tr><td>Studio · 2PN · 3PN</td><td>Theo tầng, hướng</td><td class="price">Liên hệ</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
-            <tr><td>Shophouse khối đế</td><td>Tầng 1 · 43 – 61,5 m²</td><td class="price">4,96 – 6,04 tỷ</td><td><a href="khoi-de-shophouse.html">Chi tiết →</a></td></tr>
+            <tr><td>2PN · 3PN · sân vườn</td><td>Theo tầng, hướng</td><td class="price">Liên hệ</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
+            <tr><td>Shophouse khối đế</td><td>Tầng 1 · 43,8 – 87,3 m²</td><td class="price">5,17 – 9,12 tỷ</td><td><a href="khoi-de-shophouse.html">Chi tiết →</a></td></tr>
           </tbody></table></div>
-      <p class="note">Giá 1PN+ tầng 15 là thông tin thị trường (giá trần đã gồm VAT + phí bảo trì, theo chính sách bán hàng), chưa phải bảng giá chính thức. Giá các tầng khác chênh lệch theo tầng và hướng. Bảng giá, chính sách chính thức theo công bố của chủ đầu tư.</p>'''
+      <p class="note">Giỏ hàng cập nhật 19/09/2026, giá tổng đã gồm VAT và phí bảo trì, chưa trừ chiết khấu theo chính sách. Số căn còn trống thay đổi hằng ngày – gọi/Zalo 0904 567 009 để nhận giỏ hàng mới nhất. Bảng giá, chính sách chính thức theo công bố của chủ đầu tư.</p>'''
 
 
 # ----------------------------------------------------------------- INDEX
@@ -478,7 +476,7 @@ def build_index():
         faq_ld(FAQ_INDEX),
     ]
     h = head("index", "Cora Tower Đà Nẵng – Căn hộ Sun Group vòng xoay 29/3 | Bảng giá, mặt bằng 2026",
-             "Cora Tower (Sun Group) – 2 tòa A1, A2 cao 25 tầng tại vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Căn 1PN+ tầng 15 từ ~3,1 tỷ, mặt bằng 28 căn/sàn, shophouse khối đế, duplex tầng 25. Gọi 0904 567 009.",
+             "Cora Tower (Sun Group) – 2 tòa A1, A2 cao 25 tầng tại vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Studio từ ~2,42 tỷ, 1PN+ từ ~3,45 tỷ, mặt bằng 28 căn/sàn, shophouse khối đế, duplex tầng 25. Gọi 0904 567 009.",
              "Cora Tower, Sun Cora Tower, Cora Tower Đà Nẵng, giá Cora Tower, mặt bằng Cora Tower, căn hộ 1PN+ Cora Tower, shophouse Cora Tower, duplex Cora Tower, căn hộ 29/3 Hòa Xuân",
              "og-cora-tower.jpg", "Phối cảnh Cora Tower Đà Nẵng", "rTwin", graph)
     body = f'''{header("index", "Nhận bảng giá")}
@@ -490,7 +488,7 @@ def build_index():
       <div>
         <span class="eyebrow">Sun Neo City · Vòng xoay 29/3 · Đà Nẵng</span>
         <h1>Cora Tower – <em>biểu tượng sống mới</em> bên sông Đà Nẵng</h1>
-        <p class="lead">Hai tòa tháp A1 – A2 cao 25 tầng với khối mái kiến trúc màu cam đặc trưng, ngay vòng xoay 29/3 – Nguyễn Phước Lan. Căn hộ 1PN+ tầng 15 chỉ từ khoảng <b>3,1 tỷ</b>.</p>
+        <p class="lead">Hai tòa tháp A1 – A2 cao 25 tầng với khối mái kiến trúc màu cam đặc trưng, ngay vòng xoay 29/3 – Nguyễn Phước Lan. Studio chỉ từ khoảng <b>2,42 tỷ</b>, căn hộ 1PN+ từ khoảng <b>3,45 tỷ</b>.</p>
         <ul class="ticks"><li>Chủ đầu tư Sun Group</li><li>Đủ điều kiện bán – có bảo lãnh</li><li>28 căn/sàn – nhiều lựa chọn</li></ul>
         <div class="cta">
           <a class="btn lg" href="#gia">Xem bảng giá</a>
@@ -513,7 +511,7 @@ def build_index():
         {card("pin", "Vị trí vòng xoay", "Góc vòng xoay 29/3 – Nguyễn Phước Lan, trục giao thông chính Nam Hòa Xuân.")}
         {card("shield", "Sun Group phát triển", "Công ty CP Tập đoàn Mặt Trời. Đất đã có sổ đỏ, Sở Xây dựng xác nhận đủ điều kiện bán.")}
         {card("layers", "Đủ loại hình", "Studio, 1PN+, 2PN, 3PN, căn sân vườn, duplex tầng 25 và shophouse.")}
-        {card("chart", "Giá dễ tiếp cận", "1PN+ tầng 15 khoảng 3,1–3,85 tỷ/căn – phù hợp ở thực và cho thuê.")}
+        {card("chart", "Giá dễ tiếp cận", "Studio từ ~2,42 tỷ, 1PN+ khoảng 3,45 – 3,84 tỷ/căn – phù hợp ở thực và cho thuê.")}
       </div>
     </div>
   </section>
@@ -576,7 +574,7 @@ def build_index():
             <li>Phòng ngủ 1 – 4,1 m chiều sâu</li>
             <li>Phòng ngủ 2 / phòng linh hoạt</li>
             <li>Vệ sinh, logia 1,6 m có chỗ máy giặt</li>
-            <li>Giá dự kiến tầng 15: 3,1 – 3,85 tỷ</li>
+            <li>Giá giỏ hàng 1PN+: khoảng 3,45 – 3,84 tỷ</li>
           </ul>
           <a class="btn" href="#dang-ky">Nhận mặt bằng các căn</a>
           {pic("int1pn", "(max-width:900px) 100vw, 380px", cls="unit-thumb")}
@@ -647,7 +645,7 @@ def build_index():
       <div class="center reveal">
         <span class="kicker">Bảng giá</span>
         <h2>Giá căn hộ Cora Tower tham khảo</h2>
-        <p class="sub">Căn 1PN+ diện tích 53,8 m² thông thủy (58,9 m² tim tường) tại tầng 15.</p>
+        <p class="sub">Giỏ hàng Studio, 1PN+ và shophouse còn trống – cập nhật 19/09/2026.</p>
       </div>
       <div style="margin-top:24px">{price_table()}</div>
       <div class="center" style="margin-top:26px"><a class="btn lg" href="#dang-ky">Nhận bảng giá đầy đủ các tầng</a></div>
@@ -658,7 +656,7 @@ def build_index():
     <div class="wrap split">
       <div class="split-media reveal">
         {pic("rPod", "(max-width:900px) 100vw, 600px")}
-        <div class="badge">4,96 – 6,04 tỷ<small>shophouse 43 – 61,5 m²</small></div>
+        <div class="badge">5,17 – 9,12 tỷ<small>shophouse 43,8 – 87,3 m²</small></div>
       </div>
       <div class="reveal">
         <span class="kicker">Tầng 1 · Khối đế</span>
@@ -805,7 +803,7 @@ def build_shop():
         crumbs("Shophouse khối đế", url), faq_ld(FAQ_SHOP),
     ]
     h = head("khoi-de-shophouse", "Shophouse Cora Tower – Shop khối đế Sun Group Đà Nẵng, sở hữu lâu dài, trần 7m",
-             "Shophouse khối đế Cora Tower (Sun Group) tầng 1, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Kính kịch trần, pháp lý đầy đủ, giá 4,96 – 6,04 tỷ/căn (43 – 61,5 m²). Gọi 0904 567 009.",
+             "Shophouse khối đế Cora Tower (Sun Group) tầng 1, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Kính kịch trần, pháp lý đầy đủ, giá 5,17 – 9,12 tỷ/căn (43,8 – 87,3 m²). Gọi 0904 567 009.",
              "shophouse Cora Tower, khối đế Cora Tower, shophouse khối đế Đà Nẵng, shophouse Hòa Xuân, shophouse 29/3, shophouse Sun Neo City",
              "og-shophouse.jpg", "Khối đế shophouse Cora Tower", "sr06", graph)
     body = f'''{header("shop", "Nhận giỏ hàng")}
@@ -825,7 +823,7 @@ def build_shop():
       {hero_form("Nhận giỏ hàng shophouse", "Diện tích, giá từng căn và chính sách thanh toán mới nhất.", "Shophouse khối đế", "Nhận giỏ hàng")}
     </div>
   </section>
-  {stats([(4.96, " tỷ", "4,96 tỷ", "giá shophouse từ"), (1, "", "1", "tầng shophouse thương mại"), (1342, "", "1.342", "căn hộ phía trên"), (2, "", "2", "tòa tháp A1 &amp; A2")])}
+  {stats([(5.17, " tỷ", "5,17 tỷ", "giá shophouse từ"), (1, "", "1", "tầng shophouse thương mại"), (1342, "", "1.342", "căn hộ phía trên"), (2, "", "2", "tòa tháp A1 &amp; A2")])}
 
   <section>
     <div class="wrap">
@@ -853,7 +851,7 @@ def build_shop():
               <tr><th scope="row">Sở hữu</th><td>Lâu dài như căn hộ; đăng ký được hộ khẩu thường trú</td></tr>
               <tr><th scope="row">Vay ngân hàng</th><td>Tối đa 70%, hỗ trợ lãi suất 0% trong 24 tháng</td></tr>
               <tr><th scope="row">Pháp lý</th><td>Đất lô A2-19, A2-20 đã có GCN QSDĐ; đủ điều kiện bán theo văn bản 7117/SXD-QLN – <a href="phap-ly.html">xem hồ sơ</a></td></tr>
-              <tr><th scope="row">Giá tham khảo</th><td class="price">4,96 – 6,04 tỷ/căn (đã gồm VAT &amp; phí bảo trì)</td></tr>
+              <tr><th scope="row">Giá tham khảo</th><td class="price">5,17 – 9,12 tỷ/căn (đã gồm VAT &amp; phí bảo trì, giỏ hàng 19/09/2026)</td></tr>
               <tr><th scope="row">Diện tích</th><td>Khoảng 38 – 127 m² thông thủy (42 – 138 m² tim tường), mặt tiền 3,5 – 13 m</td></tr>
               <tr><th scope="row">Số lượng</th><td>Khoảng 33 shop tòa A1, 30 shop tòa A2 – <a href="#mat-bang-shop">xem mặt bằng</a></td></tr>
             </tbody>
@@ -1188,7 +1186,7 @@ def build_sun():
               "author": {"@id": f"{D}#agent"}, "publisher": {"@id": f"{D}#agent"}, "mainEntityOfPage": url},
              crumbs("Căn hộ Sun Đà Nẵng", url), faq_ld(SUN_FAQ)]
     h = head("can-ho-sun-da-nang", "Căn hộ Sun Đà Nẵng 2026 – So sánh Cora Tower, Spana, S-Light | Giá, pháp lý",
-             "Tổng hợp căn hộ Sun Group Đà Nẵng tại Sun Neo City Hòa Xuân: so sánh Cora Tower, Spana Tower, S-Light Tower, giá 1PN+ từ ~3,1 tỷ, vay 70%, pháp lý đủ điều kiện bán. Gọi 0904 567 009.",
+             "Tổng hợp căn hộ Sun Group Đà Nẵng tại Sun Neo City Hòa Xuân: so sánh Cora Tower, Spana Tower, S-Light Tower, Studio từ ~2,42 tỷ, 1PN+ từ ~3,45 tỷ, vay 70%, pháp lý đủ điều kiện bán. Gọi 0904 567 009.",
              "căn hộ Sun Đà Nẵng, căn hộ Sun Group Đà Nẵng, Sun Neo City, chung cư Sun Hòa Xuân, Cora Tower, Spana Tower, S-Light Tower",
              "og-cora-tower.jpg", "Căn hộ Sun Group Đà Nẵng", "aHan", graph)
     body = f"""{header("sun", "Nhận bảng giá")}

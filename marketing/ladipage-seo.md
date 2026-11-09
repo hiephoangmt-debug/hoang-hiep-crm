@@ -8,7 +8,7 @@ Cora Tower Đà Nẵng – Căn hộ Sun Group vòng xoay 29/3 | Bảng giá, m�
 ```
 **Mô tả trang:**
 ```
-Cora Tower (Sun Group) – 2 tòa A1, A2 cao 25 tầng tại vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Căn 1PN+ tầng 15 từ ~3,1 tỷ, mặt bằng 28 căn/sàn, shophouse khối đế, duplex tầng 25. Gọi 0904 567 009.
+Cora Tower (Sun Group) – 2 tòa A1, A2 cao 25 tầng tại vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Studio từ ~2,42 tỷ, 1PN+ từ ~3,45 tỷ, mặt bằng 28 căn/sàn, shophouse khối đế, duplex tầng 25. Gọi 0904 567 009.
 ```
 **Từ khoá về trang:**
 ```
@@ -31,7 +31,7 @@ Shophouse Cora Tower – Shop khối đế Sun Group Đà Nẵng, sở hữu lâ
 ```
 **Mô tả trang:**
 ```
-Shophouse khối đế Cora Tower (Sun Group) tầng 1, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Kính kịch trần, pháp lý đầy đủ, giá 4,96 – 6,04 tỷ/căn (43 – 61,5 m²). Gọi 0904 567 009.
+Shophouse khối đế Cora Tower (Sun Group) tầng 1, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Kính kịch trần, pháp lý đầy đủ, giá 5,17 – 9,12 tỷ/căn (43,8 – 87,3 m²). Gọi 0904 567 009.
 ```
 **Từ khoá về trang:**
 ```
