@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.0** + plugin Hoàng Hiệp CRM **2.20.229**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.0** + plugin Hoàng Hiệp CRM **2.20.230**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.230 (09/11/2026)
+
+- **The Legend – shop khối đế:** thêm mục Shop khối đế (19 căn shop – thương mại dịch vụ khối đế đang mở bán theo báo chí 15/10/2026; chính sách thanh toán 50% / 70% / 95% chiết khấu 5,5% / 6,5% / 9,5%); giá "Liên hệ" – chờ bảng giá shop để thêm diện tích, giá từng căn.
+- Cài: Nhập nhanh → upload → "Nhập / cập nhật dữ liệu" → LiteSpeed Purge All.
 
 ## Có gì mới – plugin 2.20.229 (09/11/2026)
 

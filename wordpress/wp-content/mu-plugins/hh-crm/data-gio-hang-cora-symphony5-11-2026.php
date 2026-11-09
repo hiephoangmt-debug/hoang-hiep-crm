@@ -1,6 +1,7 @@
 <?php
 /**
  * Giỏ hàng anh Hiệp gửi 09/11/2026 (Google Sheet): shop khối đế Cora Tower, căn hộ Cora Tower, Symphony 5.
+ * The Legend: shop – thương mại dịch vụ khối đế đang mở bán (theo báo chí 15/10/2026; chưa có bảng giá).
  * Giá tổng đã gồm VAT & kinh phí bảo trì. Không đăng mã căn, tên đại lý, tình trạng cọc.
  */
 
@@ -15,6 +16,10 @@ add_filter(
 				'hh_p_shop_table' => "Shop tầng 1, tòa A2 | 43,8 m² | Khoảng 5,89 tỷ | ≈ 134 triệu/m², gồm VAT & phí bảo trì\nShop tầng 1, tòa A2 | 52,5 m² | Khoảng 5,17 tỷ | ≈ 98 triệu/m²\nShop tầng 1, tòa A2 | 73 m² | Khoảng 8,00 tỷ | ≈ 110 triệu/m²\nShop tầng 1, tòa A2 | 87 m² | Khoảng 9,09 tỷ | ≈ 104 triệu/m²\nShop tầng 1, tòa A2 | 87,3 m² | Khoảng 9,12 tỷ | ≈ 104 triệu/m²",
 				'hh_p_unit_types' => "Studio | 32,3 m² | – | Khoảng 2,42 – 2,74 tỷ (giỏ hàng 11/2026, gồm VAT & phí bảo trì)\nCăn 1PN+ | 53,2 – 54,2 m² | 1 | Khoảng 3,45 – 3,84 tỷ (giỏ hàng 11/2026)\nCăn 2PN | – | 2 | Liên hệ\nCăn 3PN | – | 3 | Liên hệ",
 				'hh_p_price_from' => 2420,
+			),
+			'the-legend-da-nang' => array(
+				'hh_p_shop_desc'  => 'The Legend đang mở bán shop – thương mại dịch vụ khối đế: theo báo chí (15/10/2026), đợt này có 19 căn shop và mặt bằng thương mại dịch vụ ở khối đế hai tòa tháp, ngay cầu Rồng – sông Hàn, khu vực đông khách du lịch và cư dân trung tâm. Chính sách theo đợt: thanh toán 50% / 70% / 95% giá trị được chiết khấu tương ứng 5,5% / 6,5% / 9,5% (theo điều kiện chương trình). Nhận bảng giá, mặt bằng từng shop và chính sách hiện hành: Zalo Hoàng Hiệp 0904 567 009.',
+				'hh_p_shop_table' => "Shop / thương mại dịch vụ khối đế | 19 căn (đợt 10/2026) | Liên hệ | Thanh toán 50% / 70% / 95%: chiết khấu 5,5% / 6,5% / 9,5%",
 			),
 			'symphony-5-sun-symphony-residence' => array(
 				'hh_p_unit_types' => "Studio | 30 – 33 m² (725 căn) | 0 | Khoảng 2,50 – 3,30 tỷ (giỏ hàng 11/2026, gồm VAT & phí bảo trì)\nCăn 1PN | 46,4 – 47,8 m² | 1 | Khoảng 3,09 – 3,30 tỷ (giỏ hàng 11/2026)\nCăn 1PN+ | 44 – 53 m² (331 căn) | 1 | Khoảng 3,45 – 4,54 tỷ (giỏ hàng 11/2026)\nCăn 2PN | 63 – 70 m² (160 căn) | 2 | Liên hệ\nPenthouse | 12 căn | | Liên hệ",
