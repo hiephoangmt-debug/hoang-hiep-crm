@@ -1,0 +1,14 @@
+{
+  "last_release": "2026-10-21.0",
+  "last_run": "2026-11-09T01:17:42.779534+00:00",
+  "theme": "buildings",
+  "type": "building",
+  "bbox": {
+    "xmin": 108.214,
+    "ymin": 16.0365,
+    "xmax": 108.242,
+    "ymax": 16.0665
+  },
+  "backend": "geojson",
+  "output": "/home/runner/work/hoang-hiep-crm/hoang-hiep-crm/dn-chi-tiet/raw/buildings.geojson"
+}
