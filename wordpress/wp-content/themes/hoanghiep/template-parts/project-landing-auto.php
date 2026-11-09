@@ -261,6 +261,13 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
   </div>
 </section>
 
+<?php if ( '' !== trim( (string) $m( 'hh_p_answer' ) ) ) : ?>
+<!-- TRẢ LỜI NHANH: giá, loại căn, ngày cập nhật (Google AI Overview / đoạn trích nổi bật) -->
+<section class="answer-sec" aria-label="Giá bán <?php echo esc_attr( $short_name ); ?>">
+  <div class="container"><div class="hh-answer"><?php echo wp_kses_post( $m( 'hh_p_answer' ) ); ?></div></div>
+</section>
+<?php endif; ?>
+
 <!-- TỔNG QUAN -->
 <section id="tong-quan" aria-labelledby="h-tq">
   <div class="container">

@@ -64,6 +64,13 @@ $hh_body = str_replace( '{{HH_CRM_URL}}', defined( 'HH_CRM_URL' ) ? HH_CRM_URL :
 <?php echo $hh_head; // phpcs:ignore WordPress.Security.EscapeOutput -- CSS của landing dựng sẵn trong giao diện. ?>
 <style id="hh-landing-mobile">
 picture.hh-pic{display:contents}
+.answer-sec{padding:28px 0 6px}
+.hh-answer{border:1px solid rgba(176,125,74,.35);border-left:4px solid #b07d4a;background:#fffaf3;color:#14223a;border-radius:14px;padding:18px 20px 8px;max-width:980px;margin:0 auto;font-size:16px;line-height:1.6}
+.hh-answer p{margin:0 0 10px}
+.hh-answer table{width:100%;border-collapse:collapse;margin:8px 0 10px;font-size:15px;background:#fff}
+.hh-answer th,.hh-answer td{border:1px solid rgba(0,0,0,.08);padding:8px 10px;text-align:left}
+.hh-answer th{background:#f3ece2;font-weight:600}
+.hh-answer small{display:block;color:#6b7280;line-height:1.5}
 /* Đăng nhập (có thanh quản trị WordPress): đầu trang dính ngay dưới thanh, không bị che. */
 body.admin-bar>header.top,body.admin-bar>header#hdr{top:32px}
 @media (max-width:782px){body.admin-bar>header.top,body.admin-bar>header#hdr{top:46px}}

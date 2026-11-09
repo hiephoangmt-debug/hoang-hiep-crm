@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.6** + plugin Hoàng Hiệp CRM **2.20.235**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.7** + plugin Hoàng Hiệp CRM **2.20.236**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.236 / giao diện 2.16.7 (09/11/2026): khung trả lời nhanh giá bán 4 dự án
+
+- Ngay dưới phần đầu trang **FourS Tower, Cora Tower, The Legend, Symphony 5**: khung "Giá bán … (cập nhật …)" – 2 – 3 câu trả lời thẳng, bảng giá theo loại căn, ngày cập nhật, người tổng hợp. Mục đích: Google (AI Overview, đoạn trích nổi bật) và ChatGPT dễ chọn trang làm nguồn khi khách tìm "giá bán {dự án} Đà Nẵng".
+- Số liệu lấy từ dữ liệu đã có: giỏ hàng 11/2026 (Cora, Symphony 5), giỏ hàng chủ đầu tư (The Legend), bảng giá dự kiến F1/F5 trên trang (FourS).
+- Sau khi cài: bấm "Nhập / cập nhật dữ liệu" để ghi khung vào Cora, Legend, Symphony 5.
 
 ## Có gì mới – giao diện 2.16.6 (09/11/2026): bài giá Sun Saphia viết lại đầu bài cho Google AI
 
