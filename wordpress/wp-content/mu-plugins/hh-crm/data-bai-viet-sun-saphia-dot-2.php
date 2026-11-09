@@ -26,20 +26,34 @@ function hh_posts_sun_saphia_dot_2( $posts ) {
 	/* ---------------- 22/10 – Giá ---------------- */
 	$posts[] = array(
 		'slug'     => 'gia-sun-saphia-residence-bao-nhieu',
-		'title'    => 'Giá Sun Saphia Residence bao nhiêu? Giá dự kiến studio tầng 15 từ 2,13 tỷ (cập nhật 28/10/2026)',
+		'title'    => 'Giá bán Sun Saphia Residence Đà Nẵng bao nhiêu? Studio tầng 15 từ 2,13 tỷ (cập nhật 11/2026)',
 		'excerpt'  => 'Giá dự kiến (rumor) Sun Saphia Residence ngày 28/10/2026: studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ (giá có vay, chưa VAT, chưa KPBT), hỗ trợ lãi suất tới 24 tháng. Cách đọc giá và so sánh căn hộ ven biển.',
 		'keyword'  => 'giá Sun Saphia Residence',
 		'keywords_extra' => array( 'giá Sun Saphia Residence bao nhiêu', 'giá căn hộ Sun Saphia', 'giá studio Sun Saphia' ), // 09/11: "Sun Saphia Residence", "Sun Saphia Đà Nẵng" để trang dự án giữ.
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-22 15:00',
-		'rev'      => 5, // 09/11: thêm liên kết đầu bài về trang dự án, nhường từ khoá tên dự án cho trang dự án.
+		'rev'      => 6, // 09/11: khung trả lời nhanh đầu bài (cho Google AI Overview), bảng giá theo loại căn, câu hỏi "Giá bán Sun Saphia Đà Nẵng".
+		// rev 5 // 09/11: thêm liên kết đầu bài về trang dự án, nhường từ khoá tên dự án cho trang dự án.
 		// rev 4 // 28/10: giá dự kiến (rumor) studio tầng 15, chính sách hỗ trợ lãi suất 24 tháng, sự kiện bán hàng 28/11.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Sun Saphia Residence', 'Giá căn hộ Đà Nẵng' ),
 		'image'    => 'plugin:img/tin-tuc/gia-sun-saphia-residence.jpg',
 		'content'  => <<<HTML
+<div class="hh-answer">
+<p><strong>Giá bán Sun Saphia Residence Đà Nẵng (cập nhật 09/11/2026):</strong> chủ đầu tư Sun Group chưa công bố bảng giá chính thức. Giá dự kiến (giá "rumor") ngày 28/10/2026 cho <strong>căn studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ đồng/căn</strong> (khoảng 71 – 95 triệu/m² thông thủy), theo phương án có vay, chưa gồm VAT và 2% phí bảo trì. Sự kiện bán hàng của chủ đầu tư tại Đà Nẵng dự kiến <strong>05/12/2026</strong>.</p>
+<table>
+<thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá bán (tham khảo)</th></tr></thead>
+<tbody>
+<tr><td>Studio tầng 15 – mặt biển</td><td>30 m²</td><td>Khoảng 2,85 tỷ (giá dự kiến CĐT)</td></tr>
+<tr><td>Studio tầng 15 – cánh bên</td><td>30 m²</td><td>Khoảng 2,37 tỷ (giá dự kiến CĐT)</td></tr>
+<tr><td>Studio tầng 15 – phía sau</td><td>30 m²</td><td>Khoảng 2,13 tỷ (giá dự kiến CĐT)</td></tr>
+<tr><td>Căn 1PN+</td><td>50 – 51 m²</td><td>Chưa công bố – ước tính 3,2 – 4,2 tỷ</td></tr>
+<tr><td>Căn 2PN</td><td>60 – 70 m²</td><td>Chưa công bố – ước tính 3,9 – 5,8 tỷ</td></tr>
+</tbody>
+</table>
+<p><small>Tổng hợp: Hoàng Hiệp – môi giới bất động sản Đà Nẵng hơn 15 năm, từ tài liệu chủ đầu tư và thông tin đợt giới thiệu dự án. Dòng 1PN+, 2PN là ước tính theo giá tin rao, chưa phải giá chủ đầu tư. Xem tổng quan <a href="/du-an/sun-saphia-residence/">dự án Sun Saphia Residence Đà Nẵng</a>.</small></p>
+</div>
 <p><strong>Giá Sun Saphia Residence</strong> là câu hỏi Hoàng Hiệp nhận nhiều nhất từ khi dự án nhận giữ chỗ. Ngày <strong>28/10/2026</strong>, chủ đầu tư đưa ra <strong>giá dự kiến (giá "rumor") cho một số căn studio tầng 15</strong>; bảng giá chính thức từng căn sẽ có khi mở bán. Bài này cập nhật mức giá dự kiến đó, cách đọc giá cho đúng và so sánh với các dự án ven biển khác của {$saphia}.</p>
-<p>Tổng quan dự án, mặt bằng, tiến độ và bảng giá khi công bố: xem trang <a href="/du-an/sun-saphia-residence/">dự án Sun Saphia Residence Đà Nẵng</a>.</p>
 <!--hh-featured-->
 <h2>Giá dự kiến studio tầng 15 (28/10/2026)</h2>
 <table>
@@ -95,14 +109,15 @@ function hh_posts_sun_saphia_dot_2( $posts ) {
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá Sun Saphia Residence: studio tầng 15 từ 2,13 tỷ',
-			'desc'      => 'Giá dự kiến Sun Saphia Residence 28/10/2026: studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ (có vay, chưa VAT, KPBT), hỗ trợ lãi suất 24 tháng, mở bán dự kiến 28/11.',
+			'seo_title' => 'Giá bán Sun Saphia Đà Nẵng: studio từ 2,13 tỷ (11/2026)',
+			'desc'      => 'Giá bán Sun Saphia Residence Đà Nẵng 11/2026: studio 30 m² tầng 15 dự kiến 2,13 – 2,85 tỷ (có vay, chưa VAT, phí bảo trì); bán hàng dự kiến 05/12/2026.',
 			'points'    => array(
 				'Giá dự kiến 28/10/2026: studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ (phương án có vay)',
 				'Chưa gồm VAT, kinh phí bảo trì 2%, chưa trừ chiết khấu đặt chỗ sớm',
 				'Hỗ trợ lãi suất lên tới 24 tháng; sự kiện bán hàng dự kiến 05/12/2026',
 			),
 			'faq'       => array(
+				array( 'Giá bán Sun Saphia Residence Đà Nẵng bao nhiêu?', 'Chủ đầu tư chưa công bố bảng giá chính thức. Giá dự kiến ngày 28/10/2026: studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ đồng/căn (khoảng 71 – 95 triệu/m²), phương án có vay, chưa gồm VAT và 2% phí bảo trì. Sự kiện bán hàng tại Đà Nẵng dự kiến 05/12/2026.' ),
 				array( 'Studio Sun Saphia Residence giá bao nhiêu?', 'Giá dự kiến ngày 28/10/2026 cho studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ tùy vị trí (căn mặt biển cao nhất), theo phương án có vay, chưa gồm VAT và kinh phí bảo trì, chưa trừ chiết khấu.' ),
 				array( 'Giá Sun Saphia Residence bao nhiêu một m²?', 'Quy từ giá dự kiến studio tầng 15, khoảng 71 – 95 triệu/m² thông thủy (Hoàng Hiệp tự tính). Bảng giá chính thức từng căn có khi mở bán.' ),
 				array( 'Sun Saphia Residence có hỗ trợ lãi suất không?', 'Có, chính sách đợt giới thiệu hỗ trợ lãi suất lên tới 24 tháng; không có chương trình nhận nhà sớm (early key).' ),
