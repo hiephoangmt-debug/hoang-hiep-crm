@@ -79,6 +79,7 @@ while ( have_posts() ) :
 					$GLOBALS['post'] = get_post( $project_id ); // phpcs:ignore
 					setup_postdata( $GLOBALS['post'] );
 					get_template_part( 'template-parts/project-card' );
+					get_template_part( 'template-parts/project-mat-bang-gia' );
 					wp_reset_postdata();
 					?>
 				</div>

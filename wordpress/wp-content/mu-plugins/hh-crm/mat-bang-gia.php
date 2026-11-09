@@ -93,3 +93,38 @@ function hh_mat_bang_gia_for( $slug, $n = 5 ) {
 	usort( $near, static fn( $a, $b ) => ( $b[2] + $b[3] ) <=> ( $a[2] + $a[3] ) );
 	return array( 'row' => $me, 'near' => $near );
 }
+
+/**
+ * Bài tin tức cũ có nhắc giá theo m²: hiện ô "Giá cập nhật 11/2026" ở đầu bài cho các dự án được nhắc tới.
+ * Không sửa nội dung bài (số liệu trong bài đúng theo thời điểm đăng).
+ */
+add_filter(
+	'the_content',
+	static function ( $content ) {
+		if ( ! is_singular( 'post' ) || ! in_the_loop() || ! is_main_query() ) {
+			return $content;
+		}
+		if ( 'mat-bang-gia-can-ho-da-nang-11-2026' === get_post_field( 'post_name', get_the_ID() ) || ! preg_match( '/(triệu|tr)\s*\/\s*m(²|2)/u', $content ) ) {
+			return $content;
+		}
+		$text  = wp_strip_all_tags( $content );
+		$found = array();
+		foreach ( hh_mat_bang_gia() as $r ) {
+			$short = preg_replace( '/\s+(Residences?|Tower|Condotel|Apartment)$/u', '', $r[1] );
+			if ( false !== mb_stripos( $text, $r[1] ) || ( $short !== $r[1] && preg_match( '/\b' . preg_quote( $short, '/' ) . '\b/u', $text ) ) ) {
+				$found[] = $r;
+			}
+		}
+		if ( ! $found ) {
+			return $content;
+		}
+		$li = '';
+		foreach ( array_slice( $found, 0, 8 ) as $r ) {
+			$name = $r[0] ? '<a href="' . esc_url( home_url( '/du-an/' . $r[0] . '/' ) ) . '">' . esc_html( $r[1] ) . '</a>' : esc_html( $r[1] );
+			$li  .= '<li>' . $name . ': <b>' . esc_html( $r[2] . ' – ' . $r[3] ) . ' triệu/m²</b> <small>(' . esc_html( $r[4] ) . ')</small></li>';
+		}
+		$box = '<div class="mbg-note"><p class="mbg-note__tag">Giá cập nhật 11/2026</p><ul>' . $li . '</ul><p class="mbg-note__more">Số liệu trong bài theo thời điểm đăng. <a href="' . esc_url( hh_mat_bang_gia_url() ) . '">Xem bảng giá 30 dự án căn hộ Đà Nẵng →</a></p></div>';
+		return $box . $content;
+	},
+	9
+);
