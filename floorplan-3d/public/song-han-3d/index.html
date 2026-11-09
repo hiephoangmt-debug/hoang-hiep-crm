@@ -61,7 +61,7 @@ const LL = (lat, lon) => [(lon - meta.origin[1]) * meta.kx, -(lat - meta.origin[
 const [bx0, bz0, bx1, bz1] = meta.bounds;
 // điểm đo trên ảnh vệ tinh khu Downtown (ảnh cắt 16.0366–16.047, lưới 0,002°) -> toạ độ
 const SP = (X, Y) => LL(16.040 - (Y - 857) * 0.002 / 245, 108.226 + (X - 823) * 0.002 / 235);
-const MAIN = [545, 1415], WHEEL = SP(1075, 780), PDL = 0.217, RIV = 0.42;   // tháp 408 m; vòng quay; hướng Phan Đăng Lưu, hướng bờ sông
+const MAIN = [560, 1420], WHEEL = SP(1075, 780), PDL = 0.217, RIV = 0.42;   // tháp 408 m; vòng quay; hướng Phan Đăng Lưu, hướng bờ sông
 const CLEAR = [[...MAIN, 80], [...SP(1440, 1075), 40]];   // lán trại tạm trên khu đất tháp -> bỏ
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
