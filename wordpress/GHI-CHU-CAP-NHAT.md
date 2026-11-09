@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.98** + plugin Hoàng Hiệp CRM **2.20.226**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.98** + plugin Hoàng Hiệp CRM **2.20.227**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.227 (09/11/2026)
+
+- **Peninsula Private:** ô sở hữu ghi "Sở hữu có thời hạn 50 năm – căn hộ dịch vụ trên đất thương mại dịch vụ"; mô tả ngắn thêm "sở hữu 50 năm"; bài "Bất động sản Hải Châu 2026" sửa "sở hữu lâu dài" thành 50 năm.
+- Nhập dữ liệu: mô tả ngắn cũ có thể khai báo nhiều bản (sửa được cả bản 2.20.226 đã nhập).
+- Cài: Nhập nhanh → upload → "Nhập / cập nhật dữ liệu" → LiteSpeed Purge All.
 
 ## Có gì mới – plugin 2.20.226 (09/11/2026)
 

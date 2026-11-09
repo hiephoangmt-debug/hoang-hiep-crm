@@ -562,6 +562,7 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'bat-dong-san-hai-chau-2026',
+		'rev'      => '2026-11-09a', // Peninsula Private: sở hữu 50 năm (căn hộ dịch vụ), không phải lâu dài.
 		'title'    => 'Bất động sản Hải Châu 2026: căn hộ ven sông Hàn và trung tâm',
 		'excerpt'  => 'Bất động sản Hải Châu 2026: Masteri, The Meridian, Danang Landmark, The Filmore, M Riverside, Peninsula Private, Vista Residence – giá tham khảo từng dự án.',
 		'keyword'  => 'bất động sản Hải Châu',
@@ -597,7 +598,7 @@ HTML
 <p>Vista Residence có căn 2PN khoảng 4,5 – 5,56 tỷ, 3PN khoảng 6,8 – 7,56 tỷ, đã bàn giao – phù hợp khách cần ở ngay.</p>
 
 <h3>Các dự án khác đáng chú ý</h3>
-<p>Peninsula Private là tòa 40 tầng, cao khoảng 150 m tại Vũ Duy Thanh – Doãn Khuê (Hòa Cường), 624 căn từ studio đến 3PN, sở hữu lâu dài. M Riverside tại số 6 đường 2/9, đối diện công viên APEC, có 312 căn theo mô hình làm việc – sống – nghỉ dưỡng; loại hình sở hữu theo căn hộ dịch vụ thương mại nên cần đối chiếu hợp đồng. Danang Landmark có 454 căn, phần lớn là căn 2PN view sông Hàn và cầu Rồng, giá khoảng 5,95 – 6,7 tỷ cho căn 61 – 68 m².</p>
+<p>Peninsula Private là tòa 40 tầng, cao khoảng 150 m tại Vũ Duy Thanh – Doãn Khuê (Hòa Cường), 624 căn từ studio đến 3PN; là căn hộ dịch vụ trên đất thương mại dịch vụ, sở hữu có thời hạn 50 năm. M Riverside tại số 6 đường 2/9, đối diện công viên APEC, có 312 căn theo mô hình làm việc – sống – nghỉ dưỡng; loại hình sở hữu theo căn hộ dịch vụ thương mại nên cần đối chiếu hợp đồng. Danang Landmark có 454 căn, phần lớn là căn 2PN view sông Hàn và cầu Rồng, giá khoảng 5,95 – 6,7 tỷ cho căn 61 – 68 m².</p>
 
 <h2>Giá thuê căn hộ Hải Châu</h2>
 <table>

@@ -695,7 +695,7 @@ function hh_import_projects() {
 		}
 
 		// Sửa mô tả ngắn cũ đã nhập sai (chỉ khi bạn chưa tự sửa).
-		if ( ! empty( $p['fix_excerpt'] ) && $p['fix_excerpt'] === get_post_field( 'post_excerpt', $id ) ) {
+		if ( ! empty( $p['fix_excerpt'] ) && in_array( get_post_field( 'post_excerpt', $id ), (array) $p['fix_excerpt'], true ) ) { // Một hoặc nhiều bản cũ.
 			wp_update_post( array( 'ID' => $id, 'post_excerpt' => $p['excerpt'] ) );
 		}
 

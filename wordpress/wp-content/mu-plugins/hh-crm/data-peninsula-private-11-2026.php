@@ -50,7 +50,7 @@ add_filter(
 			$im( 'tien-do-10-2026-cong-truong-goc-khac', 'Ảnh thực tế tháng 10/2026: góc khác của công trường', 'tiến độ', 'Thực tế 10/2026' ),
 		);
 		$new = array(
-			'hh_p_ownership'  => 'Theo Quyết định 1476/QĐ-UBND (15/7/2026), công trình là căn hộ dịch vụ, khách sạn kết hợp thương mại dịch vụ trên đất quy hoạch "Thương mại dịch vụ" – không có tính chất ở (chỉ lưu trú, không cư trú). Thời hạn sở hữu theo giấy chứng nhận và hợp đồng mua bán – hỏi Hoàng Hiệp để đối chiếu trước khi mua.',
+			'hh_p_ownership'  => 'Sở hữu có thời hạn 50 năm – căn hộ dịch vụ trên đất thương mại dịch vụ (theo Quyết định 1476/QĐ-UBND ngày 15/7/2026: căn hộ dịch vụ, khách sạn kết hợp thương mại dịch vụ, không có tính chất ở)',
 			'hh_p_scale'      => 'Khu đất 4.587 m²; đất xây dựng công trình 2.397,6 m²',
 			'hh_p_density'    => '52,27% (điều chỉnh quy hoạch 7/2026)',
 			'hh_p_floors'     => '40 tầng nổi và tum, 3 tầng hầm',
@@ -59,7 +59,7 @@ add_filter(
 			'hh_p_progress'   => "2/8/2025 | Khởi công, động thổ\n15/7/2026 | Duyệt điều chỉnh quy hoạch chi tiết 1/500 (QĐ 1476/QĐ-UBND)\n8/2026 | Mở bán, nhận booking\n10/2026 | Thi công cọc và móng",
 			'hh_p_policy'     => 'Theo thông tin bán hàng 8/2026: booking 50 triệu áp dụng cho 158 suất đầu tiên từ 01/8/2026, miễn phí quản lý 2 năm; ngân hàng hỗ trợ vay đến 70% giá trị căn hộ, có gói 0% lãi suất trong 24 tháng. Chính sách thay đổi theo từng đợt – hỏi Hoàng Hiệp chính sách hiện hành.',
 		);
-		$excerpt = 'Peninsula Private Đà Nẵng – tòa căn hộ dịch vụ cao khoảng 150 m tại Vũ Duy Thanh – Doãn Khuê, phường Hòa Cường: 3 hầm, 40 tầng nổi, 624 căn studio đến 3PN và Sky Villa, giá từ khoảng 65 triệu/m², đang thi công móng (10/2026).';
+		$excerpt = 'Peninsula Private Đà Nẵng – tòa căn hộ dịch vụ sở hữu 50 năm, cao khoảng 150 m tại Vũ Duy Thanh – Doãn Khuê, phường Hòa Cường: 3 hầm, 40 tầng nổi, 624 căn studio đến 3PN và Sky Villa, giá từ khoảng 65 triệu/m², đang thi công móng (10/2026).';
 		foreach ( $projects as $i => $p ) {
 			if ( $slug !== ( $p['slug'] ?? '' ) ) {
 				continue;
@@ -70,11 +70,13 @@ add_filter(
 					$p['fix_meta'][ $k ]   = (array) ( $p['fix_meta'][ $k ] ?? array() );
 					$p['fix_meta'][ $k ][] = $cur;
 				}
+				if ( 'hh_p_ownership' === $k ) { // Bản 2.20.226 đã nhập (chưa ghi 50 năm).
+					$p['fix_meta'][ $k ]   = (array) ( $p['fix_meta'][ $k ] ?? array() );
+					$p['fix_meta'][ $k ][] = 'Theo Quyết định 1476/QĐ-UBND (15/7/2026), công trình là căn hộ dịch vụ, khách sạn kết hợp thương mại dịch vụ trên đất quy hoạch "Thương mại dịch vụ" – không có tính chất ở (chỉ lưu trú, không cư trú). Thời hạn sở hữu theo giấy chứng nhận và hợp đồng mua bán – hỏi Hoàng Hiệp để đối chiếu trước khi mua.';
+				}
 				$p['meta'][ $k ] = $v;
 			}
-			if ( ! empty( $p['excerpt'] ) && $p['excerpt'] !== $excerpt ) {
-				$p['fix_excerpt'] = $p['excerpt'];
-			}
+			$p['fix_excerpt'] = array_values( array_filter( array( (string) ( $p['excerpt'] ?? '' ), 'Peninsula Private Đà Nẵng – tòa căn hộ dịch vụ cao khoảng 150 m tại Vũ Duy Thanh – Doãn Khuê, phường Hòa Cường: 3 hầm, 40 tầng nổi, 624 căn studio đến 3PN và Sky Villa, giá từ khoảng 65 triệu/m², đang thi công móng (10/2026).' ) ) ); // Bản gốc và bản 2.20.226.
 			$p['excerpt'] = $excerpt;
 			$old = (string) ( $p['content'] ?? '' );
 			$fix = preg_replace( '/Ngày 9\/7\/2026, Đất Xanh Miền Trung trở thành đơn vị phân phối chính thức\.\s*/u', '', $old );
