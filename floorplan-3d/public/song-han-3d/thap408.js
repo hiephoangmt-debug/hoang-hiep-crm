@@ -101,6 +101,6 @@ export function makeGalaxy(THREE) {
   for (let k = 0; k < 7; k++) { const h = 2 + k * 2.2, b = new THREE.Mesh(new THREE.BoxGeometry(170, h, 6), seat); b.position.set(0, h / 2, 74 - k * 6); b.castShadow = true; g.add(b); }
   const canopy = new THREE.Mesh(new THREE.BoxGeometry(176, 1.2, 30), gold); canopy.position.set(0, 26, 50); canopy.rotation.x = -0.12; g.add(canopy);
   for (const x of [-80, -40, 0, 40, 80]) { const c = new THREE.Mesh(new THREE.CylinderGeometry(0.8, 0.8, 26, 8), gold); c.position.set(x, 13, 38); g.add(c); }
-  const setNight = (v) => { skin.emissiveIntensity = v * 0.9; gold.emissiveIntensity = 0.1 + v * 1.2; moon.emissiveIntensity = 0.15 + v * 2.4; moon.opacity = 0.35 + v * 0.5; };
+  const setNight = (v) => { skin.emissiveIntensity = v * 0.7; gold.emissiveIntensity = 0.1 + v * 1.2; moon.emissiveIntensity = 0.15 + v * 1.3; moon.opacity = 0.35 + v * 0.5; };
   return { group: g, setNight, height: H + 2 };
 }

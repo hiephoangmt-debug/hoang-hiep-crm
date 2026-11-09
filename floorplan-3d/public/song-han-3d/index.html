@@ -64,7 +64,7 @@ const [bx0, bz0, bx1, bz1] = meta.bounds;
 // điểm đo trên ảnh vệ tinh khu Downtown (ảnh cắt 16.0366–16.047, lưới 0,002°) -> toạ độ
 const SP = (X, Y) => LL(16.040 - (Y - 857) * 0.002 / 245, 108.226 + (X - 823) * 0.002 / 235);
 const MAIN = [560, 1420], WHEEL = SP(1075, 780), PDL = 0.217, RIV = 0.42;   // tháp 408 m; vòng quay; hướng Phan Đăng Lưu, hướng bờ sông
-const CLEAR = [[...MAIN, 80], [...SP(1440, 1075), 40], [...LL(16.04315, 108.2376), 110]];   // lán trại tạm trên khu đất tháp -> bỏ
+const CLEAR = [[...MAIN, 80], [...SP(1440, 1075), 40], [...LL(16.04315, 108.2376), 110], [...LL(16.04427, 108.2252), 28], [...LL(16.04514, 108.22517), 24], [...LL(16.04243, 108.22631), 24]];   // lán trại tạm trên khu đất tháp -> bỏ
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
 renderer.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.5 : 2));
@@ -236,6 +236,16 @@ tower(...SP(1440, 1075), 34, 30, 45, PDL); tower(...SP(1300, 1098), 34, 30, 42, 
 // 01 – dải tháp cao tầng dọc bờ sông + 2 tháp phía Bắc Phan Đăng Lưu
 [[250, 38], [370, 45], [490, 33], [610, 45], [730, 36], [850, 42]].forEach(([y, fl], i) => tower(...SP(1290 + (y - 60) * 0.45 - 70, y), 34, 28, fl, RIV, i % 2 ? towerMat2 : towerMat));
 tower(...SP(1300, 945), 32, 28, 35, PDL, towerMat2); tower(...SP(1440, 918), 32, 28, 40, PDL);
+// 01 – hàng tháp thứ hai phía trong dải ven sông (bên kia kênh), theo phối cảnh
+[[310, 40], [430, 44], [550, 38], [670, 42]].forEach(([y, fl], i) => tower(...SP(1290 + (y - 60) * 0.45 - 140, y), 32, 28, fl, RIV, i % 2 ? towerMat : towerMat2));
+// 01 – cặp tháp gần nhà hát (phía Bắc) và dải phía Tây hồ dọc đường 2 Tháng 9 (QH: 20–45 tầng; 10–15 tầng)
+tower(...SP(1205, 330), 32, 28, 38, RIV); tower(...SP(1160, 250), 30, 26, 34, RIV, towerMat2);
+tower(...LL(16.04427, 108.2252), 34, 26, 36, 0, towerMat2); tower(...LL(16.04514, 108.22517), 30, 24, 15, 0, towerMat);
+{ // tháp tròn mặt vàng đồng (phía Tây vòng quay)
+  const goldTower = facadeTex('res', '#e8d2a2', '#7a5f3b', 0.35), h = 36 * 3.4, [gx, gz] = LL(16.04243, 108.22631);
+  const g = new THREE.CylinderGeometry(17, 17, h, 40, 1, true), uv = g.attributes.uv; for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * 4.4, uv.getY(i) * h / 13.6);
+  addM(g, goldTower, gx, h / 2, gz); addM(new THREE.CylinderGeometry(17.6, 17.6, 2, 40), goldP, gx, h + 1, gz); addM(new THREE.CylinderGeometry(11, 11, 6, 32), glassP, gx, h + 5, gz);
+}
 // 05, 06 – nhà phố / biệt thự thấp tầng uốn theo các bờ hồ
 {
   const lines = [[[1110, 300], [1180, 450], [1240, 600], [1310, 740], [1400, 850]], [[870, 690], [890, 820], [950, 930], [1030, 990]], [[960, 640], [985, 740]], [[1195, 905], [1150, 1010]]];
