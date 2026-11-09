@@ -461,6 +461,19 @@ article .cta-row,article .inline-cta p,.form-note{text-align:left}
   .table-wrap caption{display:block;padding:0 2px 10px;caption-side:top}
   article li,.summary li,.lead-box li,.card p,.related .body span,figcaption,.doc span{text-align:left}
 }
+
+/* Điểm nhấn cam: vệt sáng chạy qua nút và chữ cam */
+.btn-accent,.fab-call{position:relative;overflow:hidden;isolation:isolate}
+.btn-accent::after,.fab-call::after{content:"";position:absolute;top:-20%;bottom:-20%;left:-60%;width:45%;z-index:1;pointer-events:none;
+  background:linear-gradient(105deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.18) 35%,rgba(255,255,255,.75) 50%,rgba(255,255,255,.18) 65%,rgba(255,255,255,0) 100%);
+  transform:skewX(-20deg);animation:shine 3.6s ease-in-out infinite}
+.fab-call::after{animation-delay:1.2s}
+.btn-accent>*,.fab-call>*{position:relative;z-index:2}
+@keyframes shine{0%{left:-60%}38%,100%{left:130%}}
+.hero h1 span,.stat b,.calc-out .big b{background:linear-gradient(100deg,var(--accent-2) 0%,var(--accent-2) 40%,#fff1e2 50%,var(--accent-2) 60%,var(--accent-2) 100%);background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--accent-2);animation:shine-text 4.5s linear infinite}
+@keyframes shine-text{0%{background-position:100% 0}60%,100%{background-position:0 0}}
+@media (prefers-reduced-motion:reduce){.btn-accent::after,.fab-call::after{animation:none;display:none}.hero h1 span,.stat b,.calc-out .big b{animation:none}}
 </style>
 </head>
 <body>
