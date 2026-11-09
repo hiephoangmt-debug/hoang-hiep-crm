@@ -437,5 +437,84 @@ HTML
 		),
 	);
 
+	/* ---------------- 10/11 – Chuẩn bị công bố Quy hoạch chung, Aeon Mall Hòa Xuân ---------------- */
+	$posts[] = array(
+		'slug'           => 'da-nang-cong-bo-quy-hoach-chung-2050-aeon-mall-hoa-xuan-thang-11',
+		'title'          => 'Đà Nẵng chuẩn bị công bố Quy hoạch chung 2050 cuối tháng 11: dự kiến khởi công Aeon Mall Hòa Xuân, tái khởi động Đa Phước',
+		'excerpt'        => 'Đà Nẵng ban hành kế hoạch hội nghị công bố Quy hoạch chung đến 2050 và xúc tiến đầu tư 2026, dự kiến 28/11. Bên lề: dự kiến khởi công Aeon Mall Hòa Xuân (khu đất 101.800 m², vốn hơn 4.300 tỷ), tái khởi động Khu đô thị quốc tế Đa Phước 17/11.',
+		'keyword'        => 'công bố quy hoạch chung Đà Nẵng',
+		'keywords_extra' => array( 'Aeon Mall Hòa Xuân', 'hội nghị xúc tiến đầu tư Đà Nẵng 2026', 'khu đô thị quốc tế Đa Phước', 'bất động sản Hòa Xuân' ),
+		'project'        => 'cora-tower',
+		'schedule'       => '2026-11-10 08:00',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Quy hoạch', 'Hòa Xuân', 'Xúc tiến đầu tư' ),
+		'image'          => 'plugin:img/tin-tuc/cong-bo-quy-hoach-chung-da-nang-aeon-mall-hoa-xuan-11-2026.jpg',
+		'image_alt'      => 'Lịch dự kiến cuối tháng 11/2026 tại Đà Nẵng: tái khởi động Đa Phước, khởi công Aeon Mall Hòa Xuân, khánh thành Quốc lộ 14E, hội nghị công bố Quy hoạch chung',
+		'content'        => <<<HTML
+<p>Chủ tịch UBND TP Đà Nẵng <strong>Nguyễn Mạnh Hùng</strong> đã ký ban hành <strong>kế hoạch tổ chức Hội nghị công bố Quy hoạch chung thành phố đến năm 2050, tầm nhìn đến năm 2075 và Xúc tiến đầu tư năm 2026</strong>. Theo Báo Đầu tư (09/11/2026), hội nghị dự kiến diễn ra <strong>ngày 28/11</strong> tại Trung tâm Hành chính thành phố; một số nguồn khác nêu phương án sáng 21 hoặc 28/11, khoảng 500 đại biểu. Đi kèm là chuỗi sự kiện khởi công, khánh thành – đáng chú ý với bất động sản là <strong>Aeon Mall Hòa Xuân</strong>.</p>
+<!--hh-featured-->
+<h2>Lịch dự kiến cuối tháng 11/2026</h2>
+<table>
+<thead><tr><th>Thời gian (dự kiến)</th><th>Sự kiện</th></tr></thead>
+<tbody>
+<tr><td>17/11</td><td>Lễ tái khởi động Khu đô thị quốc tế Đa Phước (giai đoạn 1)</td></tr>
+<tr><td>Tháng 11</td><td>Khởi công Trung tâm thương mại AEON MALL Đà Nẵng Hòa Xuân (theo Tuổi Trẻ, chủ đầu tư đang hoàn tất thủ tục, hồ sơ thiết kế)</td></tr>
+<tr><td>27 hoặc 29/11</td><td>Khánh thành dự án nâng cấp Quốc lộ 14E</td></tr>
+<tr><td>21 hoặc 28/11</td><td>Hội nghị công bố Quy hoạch chung đến 2050 và xúc tiến đầu tư; trao quyết định phê duyệt quy hoạch</td></tr>
+<tr><td>Bên lề</td><td>Dự kiến khai trương VSAP Lab, khởi công dự án ô tô Volkswagen; triển lãm quy hoạch</td></tr>
+</tbody>
+</table>
+<p>Theo Báo Đầu tư, thành phố cũng đã phê duyệt dự án <strong>Luồng Cửa Lở</strong> với tổng vốn khoảng <strong>7.585 tỷ đồng</strong>. Quy hoạch chung được Phó Thủ tướng ký phê duyệt tại <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">Quyết định 2016/QĐ-TTg ngày 21/10/2026</a>.</p>
+<h2>Aeon Mall Hòa Xuân: những gì đã chắc chắn</h2>
+<ul>
+<li><strong>Vị trí:</strong> mặt tiền đường Trần Nam Trung, phường Hòa Xuân, trong Khu tổ hợp thể thao, giải trí và thương mại Hòa Xuân.</li>
+<li><strong>Khu đất:</strong> 101.800 m², UBND thành phố cho Công ty TNHH AEON Mall Việt Nam thuê, trả tiền một lần, thời hạn đến <strong>07/8/2075</strong>.</li>
+<li><strong>Vốn:</strong> hơn 4.300 tỷ đồng (một số báo ghi khoảng 4.400 tỷ); AEONMALL Việt Nam và BIM Group ký hợp tác phát triển ngày 11/5/2026.</li>
+<li><strong>Quy mô:</strong> được giới thiệu là trung tâm thương mại lớn nhất Đà Nẵng, AEON MALL thứ hai tại thành phố sau cơ sở Thanh Khê.</li>
+<li><strong>Chưa chắc chắn:</strong> ngày khởi công chính thức và thời điểm khai trương chưa được chủ đầu tư công bố.</li>
+</ul>
+<!--hh-img:img/spana-tower/spana-tower-tien-do-11-2026-2-toa-ven-song-cau-hoa-xuan.jpg|Ảnh thực tế 11/2026: khu Hòa Xuân ven sông Cẩm Lệ, cầu Hòa Xuân-->
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Hòa Xuân có thêm "mỏ neo" thương mại:</strong> một trung tâm thương mại cỡ lớn kéo theo việc làm, lưu lượng người và dịch vụ – điều khu Hòa Xuân còn thiếu so với trung tâm. Căn hộ, nhà phố quanh khu tổ hợp thể thao – thương mại có thêm lý do để ở thật và cho thuê.</li>
+<li><strong>Khởi công mới là bước đầu:</strong> từ khởi công đến khai trương thường mất vài năm; giá rao "sát Aeon" tăng ngay lúc này là đi trước hạ tầng. Nên so giá theo khoảng cách thật và tiến độ thật.</li>
+<li><strong>Hội nghị quy hoạch là tín hiệu mở dự án:</strong> quy hoạch chung đã duyệt, thành phố bước sang giai đoạn kêu gọi đầu tư – các quỹ đất, dự án lớn sẽ được công bố dần; người mua nên theo dõi danh mục dự án kêu gọi tại hội nghị để biết khu nào sắp có vốn vào.</li>
+<li><strong>Lịch có thể đổi:</strong> các mốc trên đều là dự kiến theo kế hoạch và báo chí; Hoàng Hiệp sẽ cập nhật khi sự kiện diễn ra.</li>
+</ul>
+<!--hh-img:img/nam-hoa-xuan/nam-hoa-xuan-flycam-8-2025-duong-noi-khu-san-the-thao.jpg|Ảnh thực tế 8/2025: đường nội khu và sân thể thao khu Nam Hòa Xuân-->
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/cora-tower/">Cora Tower</a> – tòa căn hộ Sun Group trong khu đô thị Sun Neo City, phường Hòa Xuân; một trung tâm thương mại lớn cùng khu vực giúp tăng tiện ích sống và nhu cầu thuê.</li>
+<li><a href="/du-an/spana-tower/">Spana Tower</a> và <a href="/du-an/s-light-tower/">S-Light Tower</a> – căn hộ Sun Group ven sông tại Hòa Xuân, hưởng lợi từ việc khu vực có thêm thương mại, dịch vụ quy mô lớn.</li>
+<li><a href="/du-an/sun-neo-city/">Sun Neo City</a> – khu đô thị của Sun Group tại Hòa Xuân, nơi có Cora, Spana, S-Light.</li>
+<li><a href="/dat-nen-hoa-xuan/">Đất nền Hòa Xuân</a> – nhà phố, đất ở trong bán kính phục vụ của trung tâm thương mại sẽ được quan tâm hơn khi dự án khởi công thật.</li>
+</ul>
+<p>Cần bảng giá, giỏ hàng căn hộ Sun Group tại Hòa Xuân hoặc kiểm tra khoảng cách tới khu đất Aeon Mall, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: Báo Đầu tư (09/11/2026) về kế hoạch Hội nghị công bố Quy hoạch chung và xúc tiến đầu tư; Báo Đà Nẵng (11/2026); Tuổi Trẻ (10/2026) về kế hoạch khởi công AEON MALL Hòa Xuân trong tháng 11; CafeLand, VCCI, Nhà Đầu tư (2026) về quyết định cho thuê đất, diện tích, vốn đầu tư. Chưa đọc được toàn văn kế hoạch – ngày giờ ghi theo báo chí, có thể điều chỉnh.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Đà Nẵng công bố Quy hoạch chung 28/11, Aeon Hòa Xuân',
+			'desc'      => 'Đà Nẵng dự kiến công bố Quy hoạch chung 2050 ngày 28/11; bên lề dự kiến khởi công Aeon Mall Hòa Xuân (101.800 m², hơn 4.300 tỷ), tái khởi động Đa Phước.',
+			'points'    => array(
+				'Hội nghị công bố Quy hoạch chung 2050 và xúc tiến đầu tư dự kiến 28/11/2026 tại Trung tâm Hành chính',
+				'Aeon Mall Hòa Xuân: khu đất 101.800 m², thuê đến 07/8/2075, vốn hơn 4.300 tỷ, dự kiến khởi công tháng 11',
+				'17/11 tái khởi động Khu đô thị quốc tế Đa Phước giai đoạn 1; Quốc lộ 14E dự kiến khánh thành cuối tháng 11',
+			),
+			'faq'       => array(
+				array( 'Khi nào Đà Nẵng công bố Quy hoạch chung đến 2050?', 'Theo kế hoạch UBND thành phố được báo chí đưa tin, hội nghị công bố Quy hoạch chung đến năm 2050, tầm nhìn 2075 và xúc tiến đầu tư dự kiến ngày 28/11/2026 tại Trung tâm Hành chính (một số nguồn nêu phương án 21/11).' ),
+				array( 'Aeon Mall Hòa Xuân ở đâu, khi nào khởi công?', 'Dự án nằm mặt tiền đường Trần Nam Trung, phường Hòa Xuân, khu đất 101.800 m², vốn hơn 4.300 tỷ đồng. Báo chí đưa tin chủ đầu tư chuẩn bị khởi công trong tháng 11/2026; ngày chính thức chưa công bố.' ),
+				array( 'Aeon Mall Hòa Xuân ảnh hưởng gì tới bất động sản?', 'Trung tâm thương mại lớn giúp khu Hòa Xuân có thêm tiện ích, việc làm, lưu lượng người – có lợi cho căn hộ, nhà phố quanh đó, nhất là nhu cầu ở và cho thuê. Tuy vậy từ khởi công đến khai trương còn vài năm, nên so giá theo tiến độ thật.' ),
+			),
+		),
+		'sources'        => array(
+			'https://baodautu.vn/da-nang-chuan-bi-to-chuc-hoi-nghi-cong-bo-quy-hoach-chung-va-xuc-tien-dau-tu-d740118.html',
+			'https://baodanang.vn/chuan-bi-cong-bo-quy-hoach-chung-thanh-pho-da-nang-den-nam-2050-tam-nhin-nam-2075-3355754.html',
+			'https://tuoitre.vn/trung-tam-thuong-mai-lon-nhat-mien-trung-cua-aeon-mall-sap-khoi-cong-o-da-nang-100261007161625634.htm',
+			'https://cafeland.vn/tin-tuc/cho-thue-hon-100000-m2-dat-xay-dung-trung-tam-thuong-mai-aeon-mall-da-nang-hoa-xuan-153045.html',
+			'https://www.vcci.com.vn/tin-tuc/bim-group-va-aeonmall-hop-tac-phat-trien-du-an-trung-tam-thuong-mai-hon-4300-ty',
+		),
+	);
+
 	return $posts;
 }
