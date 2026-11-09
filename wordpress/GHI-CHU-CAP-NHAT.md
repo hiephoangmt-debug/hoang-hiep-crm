@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.0** + plugin Hoàng Hiệp CRM **2.20.227**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.0** + plugin Hoàng Hiệp CRM **2.20.228**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.228 (09/11/2026)
+
+- **Cora Tower – shop khối đế:** mục Shop khối đế có bảng 5 shop tầng 1 tòa A2 (43,8 – 87,3 m², khoảng 5,17 – 9,12 tỷ, gồm VAT & phí bảo trì, ≈ 98 – 135 triệu/m²) theo giỏ hàng anh gửi 09/11; loại căn Studio 2,42 – 2,74 tỷ, 1PN+ 3,45 – 3,84 tỷ; giá từ 2,42 tỷ.
+- **Symphony 5:** loại căn Studio 2,50 – 3,30 tỷ, 1PN 3,09 – 3,30 tỷ, 1PN+ 3,45 – 4,54 tỷ (giỏ hàng 11/2026); giá từ 2,50 tỷ.
+- Không đăng mã căn, tên đại lý, tình trạng cọc.
+- Cài: Nhập nhanh → upload → "Nhập / cập nhật dữ liệu" → LiteSpeed Purge All.
 
 ## Có gì mới – giao diện 2.16.0 (09/11/2026)
 
