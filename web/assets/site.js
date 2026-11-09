@@ -14,6 +14,9 @@ const CONFIG = {
   ZALO_URL: "https://zalo.me/0904567009",
   EMAIL: "hiephoangmt@gmail.com"
 };
+// Trang dự án khác (vd. Peninsula Private) khai báo window.SITE trước khi nạp file này
+const SITE = window.SITE || {};
+Object.assign(CONFIG, SITE.config || {});
 
 (function () {
   const $ = (s, r = document) => r.querySelector(s);
@@ -30,7 +33,7 @@ const CONFIG = {
   const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   /* ===== Gửi lead ===== */
-  const projectName = () => (/sun-galaxy-complex/.test(location.pathname) || /galaxy/.test(location.hostname)) ? 'Sun Galaxy Complex'
+  const projectName = () => SITE.config && SITE.config.PROJECT ? CONFIG.PROJECT : (/sun-galaxy-complex/.test(location.pathname) || /galaxy/.test(location.hostname)) ? 'Sun Galaxy Complex'
     : /thap-69-tang/.test(location.pathname) ? 'Tháp 69 tầng (408m) Da Nang Downtown' : CONFIG.PROJECT;
   const VIA_LABEL = { form: 'Form đăng ký', popup: 'Popup tài liệu', chat: 'Chat tự động' };
   async function submitLead(input) {
@@ -194,7 +197,7 @@ const CONFIG = {
   document.body.appendChild(fab);
 
   /* ===== Chat tự động ===== */
-  const KB = [
+  const KB = SITE.kb || [
     { k: ['giá', 'gia', 'bao nhiêu', 'tiền', 'triệu', 'tỷ', 'bảng giá'], a: 'Hiện Sun Group <b>chưa công bố bảng giá chính thức</b>. Mức thị trường đang lưu hành khoảng 60–100 triệu/m² cho Da Nang Downtown, riêng Sun Galaxy Complex các nguồn ghi từ 60 đến khoảng 148 triệu/m². Em gửi anh/chị bảng giá ngay khi có đợt mới nhé?', lead: true },
     { k: ['vị trí', 'vi tri', 'ở đâu', 'địa chỉ', 'chỗ nào'], a: 'Dự án nằm trên đất <b>Công viên Châu Á cũ</b>, phường Hòa Cường, bờ Tây sông Hàn, giữa cầu Trần Thị Lý và cầu Tiên Sơn. Cách biển Mỹ Khê khoảng 2–3 km, sân bay khoảng 10–15 phút.' },
     { k: ['galaxy', 'accor', 'sofitel', 'swiss', 'mgallery', 'moon gate', 'pháo hoa'], a: '<b>Sun Galaxy Complex</b> là phân khu đầu tiên, khởi công 25/7/2026, vốn gần 10.750 tỷ. Tháp 47 tầng (~183m), Accor vận hành Sofitel, Swissôtel, MGallery. Khán đài pháo hoa DIFF gần 30.000 chỗ, bàn giao full nội thất 5 sao, hiện đang thi công cọc móng. Dự án đang <b>nhận giữ chỗ</b> khoảng 50 triệu/căn.', lead: true },
@@ -205,7 +208,8 @@ const CONFIG = {
     { k: ['loại căn', 'studio', 'phòng ngủ', '1pn', '2pn', '3pn', 'penthouse', 'shophouse', 'diện tích'], a: 'Sản phẩm dự kiến gồm Studio, 1PN+, 2PN, 3PN, Sky Villa/Penthouse và shophouse ven sông. Mặt bằng chi tiết công bố theo bảng hàng, em gửi anh/chị layout từng loại nhé?', lead: true },
     { k: ['tiện ích', 'tien ich', 'hồ bơi', 'nhà hát', 'opera'], a: 'Toàn khu có nhà hát opera 4.000 chỗ, bảo tàng, phố thương mại ven sông, khán đài pháo hoa. Nội khu dự kiến có hồ bơi vô cực, gym, spa, kid club.' }
   ];
-  const QUICK = ['Bảng giá', 'Vị trí', 'Sun Galaxy Complex', 'Chính sách vay', 'Pháp lý', 'Gặp chuyên viên'];
+  const QUICK = SITE.quick || ['Bảng giá', 'Vị trí', 'Sun Galaxy Complex', 'Chính sách vay', 'Pháp lý', 'Gặp chuyên viên'];
+  const QUICK_AFTER = SITE.quickAfter || ['Vị trí', 'Sun Galaxy Complex', 'Chính sách vay', 'Pháp lý'];
 
   const chat = document.createElement('section');
   chat.className = 'chat';
@@ -214,7 +218,7 @@ const CONFIG = {
   chat.innerHTML = `
     <header class="chat-head">
       <div class="chat-avatar" aria-hidden="true">HH</div>
-      <div><b>Tư vấn Da Nang Downtown</b><small><i class="online"></i> Trả lời tự động 24/7</small></div>
+      <div><b>${esc(SITE.chatTitle || 'Tư vấn Da Nang Downtown')}</b><small><i class="online"></i> Trả lời tự động 24/7</small></div>
       <button class="chat-x" type="button" aria-label="Đóng chat">×</button>
     </header>
     <div class="chat-body" aria-live="polite"></div>
@@ -270,7 +274,7 @@ const CONFIG = {
       await submitLead({ name: lead.name, phone: lead.phone, channel: lead.channel, via: 'chat', note: lead.log.slice(-12).join(' | ') });
     } catch (e) {}
     await botSay(`Cảm ơn <b>${esc(lead.name)}</b>! Em đã ghi nhận số <b>${esc(lead.phone)}</b>. Chuyên viên sẽ gửi bảng giá và mặt bằng qua ${esc(lead.channel)} trong ít phút.` + afterLeadActions(), 700);
-    setQuick(['Vị trí', 'Sun Galaxy Complex', 'Chính sách vay', 'Pháp lý']);
+    setQuick(QUICK_AFTER);
   }
 
   async function handle(text) {
@@ -334,7 +338,7 @@ const CONFIG = {
     store.set('ddt_chat_seen', '1');
     if (!started) {
       started = true;
-      await botSay('Xin chào anh/chị 👋 Em là trợ lý tư vấn dự án <b>Da Nang Downtown</b> và <b>Sun Galaxy Complex</b>.', 300);
+      await botSay(SITE.greeting || 'Xin chào anh/chị 👋 Em là trợ lý tư vấn dự án <b>Da Nang Downtown</b> và <b>Sun Galaxy Complex</b>.', 300);
       await botSay('Anh/chị quan tâm thông tin nào ạ? Em gửi <b>bảng giá, mặt bằng, chính sách</b> miễn phí qua Zalo.');
       setQuick(QUICK);
     }
