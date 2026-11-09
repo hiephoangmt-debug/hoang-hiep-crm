@@ -192,7 +192,7 @@ $nav = array_filter(
 		'mat-bang'   => ( $master || $floors ) ? 'Mặt bằng' : '',
 		'loai-can'   => ( $units || $other_products ) ? 'Loại căn' : '',
 		'noi-that'   => $interior ? 'Nội thất' : '',
-		'bang-gia'   => ( $price_tbl || $m( 'hh_p_price_from' ) || $m( 'hh_p_resale_price' ) || ( function_exists( 'hh_mat_bang_gia_for' ) && hh_mat_bang_gia_for( get_post_field( 'post_name', $id ) ) ) ) ? 'Giá' : '',
+		'bang-gia'   => ( $price_tbl || $m( 'hh_p_price_from' ) || $m( 'hh_p_resale_price' ) ) ? 'Giá' : '',
 		'thanh-toan' => ( $payment || $policy || $m( 'hh_p_loan' ) ) ? 'Thanh toán' : '',
 		'phap-ly'    => ( $m( 'hh_p_legal' ) || $m( 'hh_p_ownership' ) || $timeline[0] ) ? 'Pháp lý' : '',
 		'thu-vien'   => count( $gallery ) > 1 ? 'Hình ảnh' : '',
@@ -529,7 +529,7 @@ if ( ! $parent ) {
 <section id="bang-gia" aria-labelledby="h-bg">
   <div class="container">
     <span class="eyebrow"><?php echo $resale ? 'Giá chuyển nhượng' : 'Giá bán tham khảo'; ?></span>
-    <h2 class="title" id="h-bg"><?php echo $resale ? 'Giá chuyển nhượng <em>' . $e( $short( $m( 'hh_p_resale_price' ) ?: 'theo từng căn', 40 ) ) . '</em>' : ( $m( 'hh_p_price_from' ) ? 'Giá <em>' . $e( mb_strtolower( hh_project_price( $id ) ) ) . '</em>' . ( $m( 'hh_p_price_m2' ) ? ', khoảng ' . $e( $m( 'hh_p_price_m2' ) ) : '' ) : 'Bảng giá <em>' . $e( $short_name ) . '</em>' ); // phpcs:ignore ?></h2>
+    <h2 class="title" id="h-bg"><?php echo $resale ? 'Giá chuyển nhượng <em>' . $e( $short( $m( 'hh_p_resale_price' ) ?: 'theo từng căn', 40 ) ) . '</em>' : ( $m( 'hh_p_price_from' ) ? 'Giá <em>' . $e( mb_strtolower( hh_project_price( $id ) ) ) . '</em>' . ( $m( 'hh_p_price_m2' ) ? ', khoảng ' . $e( preg_match( '/\d[\d.,]*\s*(?:[–-]\s*\d[\d.,]*\s*)?triệu\s*\/\s*m²/u', $m( 'hh_p_price_m2' ), $pm ) ? $pm[0] : preg_replace( '/^khoảng\s+/iu', '', $m( 'hh_p_price_m2' ) ) ) : '' ) : 'Bảng giá <em>' . $e( $short_name ) . '</em>' ); // phpcs:ignore ?></h2>
     <?php if ( $price_tbl ) : ?>
     <?php
     // Ghi chú giống nhau ở mọi dòng → ghi một lần dưới bảng, giá là cột cuối (nổi bật).
@@ -553,7 +553,6 @@ if ( ! $parent ) {
       <?php if ( ! empty( $pex[3] ) ) : ?><p><?php echo $e( $pex[3] ); ?></p><?php endif; ?>
     </div>
     <?php endif; ?>
-    <?php get_template_part( 'template-parts/project-mat-bang-gia' ); ?>
     <p class="note">Giá tham khảo, chưa trừ chiết khấu; giá và căn còn trống thay đổi theo đợt – để lại số, Hoàng Hiệp gửi bảng giá cập nhật qua Zalo.</p>
   </div>
 </section>

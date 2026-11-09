@@ -471,8 +471,6 @@ while ( have_posts() ) :
 				</section>
 			<?php endif; ?>
 
-			<?php get_template_part( 'template-parts/project-mat-bang-gia' ); ?>
-
 			<section class="block" id="chinh-sach">
 				<?php if ( $resale ) : ?>
 					<h2 class="block__title">Giá chuyển nhượng <?php echo esc_html( $title ); ?></h2>

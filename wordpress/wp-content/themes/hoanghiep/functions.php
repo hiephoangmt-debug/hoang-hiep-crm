@@ -617,15 +617,43 @@ add_action(
 			return;
 		}
 		?>
-<style>.hh-just{text-align:justify!important;text-justify:inter-word}</style>
+<style>.hh-just{text-align:justify!important;text-justify:inter-word}
+@media (max-width:640px){
+.hh-stack{min-width:0!important;width:100%!important;border:0!important;background:none!important;table-layout:auto!important}
+.hh-stack thead,.hh-stack .hh-stack-head,.hh-stack td.hh-empty{display:none!important}
+.hh-stack,.hh-stack tbody,.hh-stack tr,.hh-stack td,.hh-stack th{display:block!important;width:auto!important}
+.hh-stack tr{margin:0 0 12px!important;padding:12px 14px!important;border:1px solid rgba(160,130,90,.28)!important;border-radius:14px!important;background:#fff!important;box-shadow:0 2px 10px rgba(16,35,46,.05)}
+.hh-stack td,.hh-stack tbody th{border:0!important;padding:5px 0!important;text-align:left!important;white-space:normal!important;min-width:0!important;background:none!important}
+.hh-stack td+td{border-top:1px dashed rgba(160,130,90,.25)!important}
+.hh-stack td[data-label]:not(:first-child)::before{content:attr(data-label);display:block;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:#8a7a66;margin-bottom:2px}
+.hh-stack tr>:first-child{font-weight:700;font-size:1.04em;padding-top:0!important}
+.hh-stack-wrap{overflow:visible!important;border:0!important;box-shadow:none!important;background:none!important}
+}</style>
 <script>
 (function(){
+	function tables(){
+		// Bảng từ 3 cột: trên điện thoại hiện dạng thẻ (mỗi dòng một thẻ, nhãn cột trên từng ô) – không tràn ngang.
+		var ts=document.querySelectorAll('table');
+		for(var i=0;i<ts.length;i++){
+			var t=ts[i]; if(t.closest('.hhc,[contenteditable]')||t.classList.contains('hh-stack')) continue;
+			var hr=t.querySelector('thead tr')||t.querySelector('tr');
+			if(!t.querySelector('thead')&&hr) hr.classList.add('hh-stack-head');
+			if(!hr) continue;
+			var hs=hr.querySelectorAll('th'); if(hs.length<3) continue;
+			var lab=[]; for(var k=0;k<hs.length;k++) lab.push((hs[k].textContent||'').trim());
+			var rows=t.querySelectorAll('tbody tr'); if(!rows.length) continue;
+			for(var r=0;r<rows.length;r++){ if(rows[r]===hr) continue; var cs=rows[r].children; for(var c=0;c<cs.length;c++){ if(lab[c]&&!cs[c].hasAttribute('data-label')) cs[c].setAttribute('data-label',lab[c]); if(/^[\s–—-]*$/.test(cs[c].textContent||'')) cs[c].classList.add('hh-empty'); } }
+			t.classList.add('hh-stack');
+			var w=t.parentElement; if(w&&w.children.length===1&&w.tagName!=='BODY') w.classList.add('hh-stack-wrap');
+		}
+	}
 	function run(){
+		tables();
 		var els=document.querySelectorAll('p, li, dd, blockquote');
 		for(var i=0;i<els.length;i++){
 			var el=els[i];
 			if(el.closest('nav, button, table, form, header, .tbl-wrap, .hhc, [contenteditable]')) continue;
-			if((el.textContent||'').trim().length<80) continue;
+			if((el.textContent||'').trim().length<40) continue;
 			var a=getComputedStyle(el).textAlign;
 			if(a==='left'||a==='start') el.classList.add('hh-just');
 		}
