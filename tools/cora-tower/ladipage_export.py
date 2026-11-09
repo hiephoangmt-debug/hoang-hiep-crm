@@ -38,7 +38,8 @@ EXTRA_CSS = """
 .btn.toc-btn:hover{border-color:var(--brand-2);color:var(--brand-2)}
 .nav{gap:6px!important}
 .btn.nav-btn{background:transparent;color:var(--brand);box-shadow:none;padding:6px 9px;font-size:.9rem;border-radius:999px;white-space:nowrap}
-.nav{gap:2px!important;flex-wrap:nowrap!important}
+.navbar{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:8px 16px;background:#fff;border-bottom:1px solid var(--line)}
+.site-head .head-cta{display:inline-flex!important}
 .site-head .btn{white-space:nowrap}
 .btn.nav-btn[aria-current=page],.btn.nav-btn:hover{background:color-mix(in srgb,var(--brand-2) 12%,#fff);color:var(--brand-2)}
 .btn.foot-btn{background:transparent;box-shadow:none;padding:6px 10px;color:inherit;font-weight:600;font-size:.95rem}
@@ -208,6 +209,16 @@ def convert(name):
     s = re.sub(r'<nav class="nav".*?</nav>', linkify("nav-btn"), s, flags=re.S)
     s = re.sub(r'<nav class="toc".*?</nav>', linkify("toc-btn"), s, flags=re.S)
     s = re.sub(r'<nav class="foot-links".*?</nav>', linkify("foot-btn"), s, flags=re.S)
+    # Header: LadiPage builds the mobile layout from the desktop render (media-query
+    # show/hide is lost), so keep only logo + one call button in the header and move
+    # the menu into its own wrapping row of buttons below it.
+    s = re.sub(r'\s*<a class="btn head-cta-alt"[^>]*>.*?</a>', "", s, flags=re.S)
+    m = re.search(r'\s*(<nav class="nav".*?</nav>)', s, flags=re.S)
+    if m:
+        nav = m.group(1).replace('<nav class="nav"', '<nav class="navbar"', 1).replace(">Duplex – Penthouse<", ">Penthouse<")
+        s = s.replace(m.group(0), "", 1)
+        s = s.replace("</header>", "</header>\n" + nav, 1)
+    s = re.sub(r'(<span class="eyebrow">)[^<]*(</span>)', lambda m: m.group(1) + "Vòng xoay 29/3 · Đà Nẵng" + m.group(2), s, count=1) if name == "index.html" else s
 
     # Floating call/Zalo buttons are not exported: LadiPage turns them into static boxes.
     # Paste marketing/ladipage-nut-lien-he.html into an HTML element in the builder instead.
