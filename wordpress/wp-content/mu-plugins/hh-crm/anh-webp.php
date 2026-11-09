@@ -58,3 +58,13 @@ add_action(
 		}
 	}
 );
+
+/** Chất lượng WebP 85: đo SSIM ≈ 0,97 – 0,98 so với ảnh gốc (mắt thường không phân biệt), vẫn nhẹ hơn nhiều lần. */
+add_filter(
+	'wp_editor_set_quality',
+	static function ( $quality, $mime = '' ) {
+		return 'image/webp' === $mime ? 85 : $quality;
+	},
+	10,
+	2
+);

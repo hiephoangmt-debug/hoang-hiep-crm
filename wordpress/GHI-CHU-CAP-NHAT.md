@@ -43,9 +43,9 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 ## Có gì mới – 2.20.233 / giao diện 2.16.2 (09/11/2026): tốc độ điện thoại + IndexNow
 
-- **Ảnh PNG nặng** (phối cảnh Cora 6,6 MB…): các cỡ thu nhỏ chuyển sang WebP, nhẹ hơn 10 – 20 lần. Ảnh tải lên từ nay tự làm; ảnh cũ được xử lý dần mỗi lần mở trang quản trị (vài ảnh/lần). File gốc giữ nguyên.
+- **Ảnh PNG nặng** (phối cảnh Cora 6,6 MB…): các cỡ thu nhỏ chuyển sang WebP, nhẹ hơn nhiều lần, chất lượng 85 (nét như gốc). Ảnh tải lên từ nay tự làm; ảnh cũ được xử lý dần mỗi lần mở trang quản trị (vài ảnh/lần). File gốc giữ nguyên.
 - **Ảnh đầu trang dự án** (mẫu tự động): không tải file gốc nữa, dùng cỡ ≤ 1536px có srcset và kích thước cố định → điện thoại tải nhanh, trang không bị giật (Cora: 6,6 MB → vài trăm KB).
-- **Trang Sun Saphia, The Poet**: điện thoại tải bản WebP 1200px (ví dụ 684 KB → khoảng 100 KB); máy tính vẫn ảnh gốc.
+- **Trang Sun Saphia, The Poet**: điện thoại tải bản WebP 1200px chất lượng 85 (ví dụ 668 KB → 183 KB, nét như ảnh gốc); máy tính vẫn ảnh gốc.
 - **IndexNow**: mỗi khi đăng / sửa bài, dự án, tin nhà đất, web tự báo Bing (nguồn của ChatGPT, Copilot), Yandex…; lần đầu mở quản trị sau khi cài gửi toàn bộ đường dẫn. Google không dùng IndexNow – vẫn theo sơ đồ trang.
 
 ## Có gì mới – 2.20.232 / giao diện 2.16.1 (09/11/2026): SEO theo số liệu Google Search Console
