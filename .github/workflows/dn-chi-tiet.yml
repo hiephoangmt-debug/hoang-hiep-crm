@@ -1,0 +1,29 @@
+# Tải dữ liệu khu trung tâm sông Hàn (nhà Overture Maps + ảnh vệ tinh) cho bản 3D chi tiết. Chạy trên nhánh claude/danang-data.
+name: Tải dữ liệu 3D chi tiết Đà Nẵng
+on:
+  push:
+    branches: [claude/danang-data]
+    paths: ['dn-chi-tiet/fetch.py', '.github/workflows/dn-chi-tiet.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: dn-chi-tiet
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install overturemaps pillow
+      - run: python dn-chi-tiet/fetch.py
+      - name: Lưu dữ liệu
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          gzip -9 -f dn-chi-tiet/raw/buildings.geojson
+          git add dn-chi-tiet/raw
+          git commit -m "dn-chi-tiet: dữ liệu Overture + ảnh vệ tinh [skip ci]" || echo "không có gì mới"
+          git pull --rebase -q origin claude/danang-data && git push
