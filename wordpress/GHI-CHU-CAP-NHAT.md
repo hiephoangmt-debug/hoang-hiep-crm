@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.7** + plugin Hoàng Hiệp CRM **2.20.236**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.8** + plugin Hoàng Hiệp CRM **2.20.237**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.237 / giao diện 2.16.8 (09/11/2026): FourS F2 – thanh toán sớm cho căn đã giữ chỗ trước 26/10
+
+- 6 trang FourS (trang chính, F2, giỏ hàng, bảng tính, hỏi đáp, pháp lý): trước đây sau 26/10 trang tự ẩn ưu đãi và ghi "thanh toán sớm đã hết hạn". Nay ghi đúng: **thanh toán sớm 12% / 5% / 2,5% còn áp dụng cho một số căn đã giữ chỗ trước 26/10/2026 (số lượng có hạn)**; bỏ đồng hồ đếm ngược đã hết giờ, giữ khối ưu đãi.
+- Bảng tính dòng tiền F2: chọn lại được phương án thanh toán sớm, ngày đóng đợt 3 tính từ ngày ký (không còn ngày 26/10 đã qua).
+- Dữ liệu chính sách Tòa F2 (trợ lý chat, khung chính sách): cùng nội dung trên.
 
 ## Có gì mới – 2.20.236 / giao diện 2.16.7 (09/11/2026): khung trả lời nhanh giá bán 4 dự án
 

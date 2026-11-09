@@ -43,6 +43,15 @@ add_filter(
 			if ( isset( $ans[ $p['slug'] ?? '' ] ) ) {
 				$projects[ $i ]['meta']['hh_p_answer'] = $ans[ $p['slug'] ];
 			}
+			// FourS F2: căn đã giữ chỗ trước 26/10/2026 vẫn hưởng thanh toán sớm (anh Hiệp xác nhận 09/11/2026).
+			if ( 'fours-tower-f2-thap-mai' === ( $p['slug'] ?? '' ) && ! empty( $p['meta']['hh_p_policy'] ) ) {
+				$cur = (string) $p['meta']['hh_p_policy'];
+				$new = preg_replace( '/Thanh toán sớm: mức tháng 11\/2026 liên hệ để cập nhật \(mức trước 25\/10: 95% – 12%, 70% – 5%, 50% – 2,5%\)/u', 'Thanh toán sớm 95% / 70% / 50%: chiết khấu 12% / 5% / 2,5% – còn áp dụng cho một số căn đã giữ chỗ trước 26/10/2026 (số lượng có hạn, liên hệ để kiểm tra căn còn ưu đãi)', $cur );
+				if ( $new !== $cur ) {
+					$projects[ $i ]['meta']['hh_p_policy']       = $new;
+					$projects[ $i ]['fix_meta']['hh_p_policy']   = array_values( array_unique( array_merge( (array) ( $p['fix_meta']['hh_p_policy'] ?? array() ), array( $cur ) ) ) );
+				}
+			}
 		}
 		return $projects;
 	},
