@@ -510,5 +510,87 @@ HTML
 		'sources'  => array( 'https://www.hoiana.com/hoiana-beach-villas' ),
 	);
 
+	/* ---------------- 09/11 – Mặt bằng giá căn hộ Đà Nẵng (bản đồ giá Biggee.vn anh Hiệp gửi) ---------------- */
+	$posts[] = array(
+		'slug'     => 'mat-bang-gia-can-ho-da-nang-11-2026',
+		'title'    => 'Mặt bằng giá căn hộ Đà Nẵng 11/2026: từ 21 đến 145 triệu/m² – dự án nào ở mức nào?',
+		'excerpt'  => 'Bảng tổng hợp khoảng giá bán căn hộ hơn 20 dự án tại Đà Nẵng theo bản đồ giá Biggee.vn: dưới 40 triệu/m² ở Liên Chiểu, 45 – 66 triệu/m² ở khu Nam và Sơn Trà, 77 – 145 triệu/m² ven sông Hàn, biển Mỹ Khê.',
+		'keyword'  => 'mặt bằng giá căn hộ Đà Nẵng',
+		'keywords_extra' => array( 'giá căn hộ Đà Nẵng 2026', 'giá căn hộ Đà Nẵng theo m2', 'bảng giá chung cư Đà Nẵng', 'căn hộ ven sông Hàn giá bao nhiêu' ),
+		'schedule' => '2026-11-09 14:00',
+		'category' => 'Thị trường',
+		'tags'     => array( 'Giá căn hộ', 'Thị trường Đà Nẵng' ),
+		'image'    => 'plugin:img/tin-tuc/mat-bang-gia-can-ho-da-nang-11-2026.jpg',
+		'image_alt' => 'Biểu đồ khoảng giá bán căn hộ các dự án Đà Nẵng theo triệu/m², tổng hợp theo bản đồ giá Biggee.vn',
+		'content'  => <<<HTML
+<p>Giá căn hộ Đà Nẵng hiện trải rộng từ khoảng <strong>21 triệu/m²</strong> (nhà ở xã hội Liên Chiểu) đến khoảng <strong>145 triệu/m²</strong> (căn hộ hạng sang ven sông Hàn). Bảng dưới đây tổng hợp khoảng giá bán từng dự án theo <strong>bản đồ mặt bằng giá căn hộ Đà Nẵng của Biggee.vn</strong> (nền tảng dữ liệu bất động sản) – Hoàng Hiệp sắp xếp lại theo mức giá và gắn link tới trang dự án trên web để anh chị tiện xem chi tiết.</p>
+<!--hh-featured-->
+<h2>Bảng giá căn hộ Đà Nẵng theo dự án (triệu/m²)</h2>
+<table>
+<thead><tr><th>Dự án</th><th>Khu vực</th><th>Giá (triệu/m²)</th></tr></thead>
+<tbody>
+<tr><td><a href="/du-an/the-legend-da-nang/">The Legend</a></td><td>Ven sông Hàn, Hải Châu</td><td>129 – 145</td></tr>
+<tr><td><a href="/du-an/wyndham-soleil-da-nang/">Wyndham Soleil</a></td><td>Biển Mỹ Khê, Sơn Trà</td><td>97 – 109</td></tr>
+<tr><td><a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a></td><td>Ven sông Hàn, Sơn Trà</td><td>86 – 106</td></tr>
+<tr><td><a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a></td><td>Ven sông Hàn, cầu Rồng</td><td>95 – 100</td></tr>
+<tr><td><a href="/du-an/the-meridian-da-nang/">The Meridian</a></td><td>Hải Châu – Hòa Cường</td><td>86 – 89</td></tr>
+<tr><td><a href="/du-an/capital-square-da-nang/">Capital Square</a></td><td>Ven sông Hàn, Sơn Trà</td><td>77 – 87</td></tr>
+<tr><td><a href="/du-an/newtown-diamond-da-nang/">Newtown Diamond</a></td><td>Biển Ngũ Hành Sơn</td><td>79 – 81</td></tr>
+<tr><td><a href="/du-an/sun-costa-residence/">Sun Costa</a></td><td>Biển Mỹ Khê, Sơn Trà</td><td>72 – 81</td></tr>
+<tr><td><a href="/du-an/cora-tower/">Cora Tower</a></td><td>Hòa Xuân, Cẩm Lệ</td><td>59 – 77</td></tr>
+<tr><td><a href="/du-an/the-monarchy-da-nang/">The Monarchy</a></td><td>Ven sông Hàn, Sơn Trà</td><td>59 – 70</td></tr>
+<tr><td><a href="/du-an/regal-complex-da-nang/">Regal Complex</a></td><td>Khu Nam, Ngũ Hành Sơn</td><td>62 – 68</td></tr>
+<tr><td>F.Home Apartment</td><td>Hải Châu</td><td>63 – 66</td></tr>
+<tr><td><a href="/du-an/peninsula-da-nang/">The Peninsula</a></td><td>Ven sông Hàn, Sơn Trà</td><td>62 – 66</td></tr>
+<tr><td><a href="/du-an/spana-tower/">Spana Tower</a></td><td>Hòa Xuân, Cẩm Lệ</td><td>60 – 66</td></tr>
+<tr><td><a href="/du-an/muong-thanh-luxury-da-nang-can-ho/">Chung cư Mường Thanh</a></td><td>Biển Võ Nguyên Giáp</td><td>60 – 64</td></tr>
+<tr><td><a href="/du-an/ariyana-beach-resort-suites-da-nang/">Furama Condotel</a></td><td>Biển Ngũ Hành Sơn</td><td>59 – 155</td></tr>
+<tr><td><a href="/du-an/fpt-plaza-4/">FPT Plaza 4</a></td><td>FPT City, Ngũ Hành Sơn</td><td>56 – 58</td></tr>
+<tr><td><a href="/du-an/fpt-plaza-3/">FPT Plaza 3</a></td><td>FPT City, Ngũ Hành Sơn</td><td>51 – 55</td></tr>
+<tr><td>Blue House</td><td>Sơn Trà</td><td>45 – 48</td></tr>
+<tr><td><a href="/du-an/fpt-plaza-2/">FPT Plaza 2</a></td><td>FPT City, Ngũ Hành Sơn</td><td>45 – 46</td></tr>
+<tr><td><a href="/du-an/hoa-binh-green-da-nang/">Hòa Bình Green</a></td><td>Sơn Trà</td><td>35 – 45</td></tr>
+<tr><td>Hoàng Anh Gia Lai</td><td>Thanh Khê</td><td>34 – 39</td></tr>
+<tr><td><a href="/du-an/the-ori-garden/">The Ori Garden</a></td><td>Liên Chiểu</td><td>35 – 37</td></tr>
+<tr><td><a href="/du-an/ecohome-hoa-hiep-da-nang/">Ecohome Hòa Hiệp</a></td><td>Liên Chiểu</td><td>21 – 35</td></tr>
+</tbody>
+</table>
+<p>Giá là khoảng tham khảo theo m², gồm cả căn mới và căn đã bàn giao; giá thực tế từng căn phụ thuộc tầng, view, nội thất và chính sách bán hàng tại thời điểm mua.</p>
+<!--hh-img:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg|Ảnh thực tế flycam 11/2026: sông Hàn – cầu Rồng, khu vực có giá căn hộ cao nhất Đà Nẵng-->
+<h2>Giá chia theo 5 nhóm</h2>
+<ul>
+<li><strong>Trên 100 triệu/m²:</strong> căn hộ hạng sang sát sông Hàn hoặc biển Mỹ Khê – The Legend, Wyndham Soleil, phần căn cao cấp của Sun Symphony.</li>
+<li><strong>80 – 100 triệu/m²:</strong> các dự án mới ven sông Hàn, trung tâm – Sun Ponte, The Meridian, Capital Square, Newtown Diamond.</li>
+<li><strong>60 – 80 triệu/m²:</strong> căn hộ ven biển đã vận hành, các tòa mới ở Hòa Xuân – Sun Costa, Cora Tower, Spana Tower, The Peninsula, Regal Complex.</li>
+<li><strong>40 – 60 triệu/m²:</strong> khu Nam (FPT City), một số chung cư Sơn Trà – FPT Plaza 2 – 4, Blue House.</li>
+<li><strong>Dưới 40 triệu/m²:</strong> Liên Chiểu, Thanh Khê và nhà ở xã hội – The Ori Garden, Hoàng Anh Gia Lai, Ecohome Hòa Hiệp.</li>
+</ul>
+<h2>Nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Sông Hàn – biển Mỹ Khê vẫn đắt nhất:</strong> chênh lệch với khu Nam và Liên Chiểu lên tới 2 – 4 lần. Ai mua để ở với ngân sách 3 – 4 tỷ nên nhìn về Hòa Xuân, FPT City; ai mua giữ tài sản lâu dài vẫn ưu tiên quỹ căn hộ ven sông Hàn ngày càng khan hiếm.</li>
+<li><strong>Hòa Xuân đang lên nhóm 60 – 80 triệu/m²:</strong> Cora Tower, Spana Tower cho thấy khu Nam Cẩm Lệ đã thoát mức giá "vùng ven", nhờ cầu Hòa Xuân, sông Cẩm Lệ và hạ tầng đang hoàn thiện.</li>
+<li><strong>So giá cùng nhóm, không so khác nhóm:</strong> khi xem một căn, anh chị nên đặt cạnh các dự án cùng khu vực, cùng tình trạng (mới / đã bàn giao) – mức chênh 5 – 10 triệu/m² thường do tầng, view và nội thất.</li>
+</ul>
+<p>Anh chị cần danh sách căn đang bán đúng mức giá trên, hoặc so sánh 2 – 3 dự án cụ thể, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn số liệu: bản đồ "Mặt bằng giá căn hộ Đà Nẵng" của Biggee.vn (nền tảng dữ liệu bất động sản), anh Hiệp nhận ngày 09/11/2026. Khu vực và nhận định do Hoàng Hiệp bổ sung. Biểu đồ trong bài do Hoàng Hiệp vẽ lại từ số liệu, không phải ảnh gốc.</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Mặt bằng giá căn hộ Đà Nẵng 11/2026 theo dự án',
+			'desc'      => 'Giá căn hộ Đà Nẵng từ 21 đến 145 triệu/m²: bảng hơn 20 dự án ven sông Hàn, biển Mỹ Khê, Hòa Xuân, FPT City, Liên Chiểu – tổng hợp theo Biggee.vn.',
+			'points'    => array(
+				'Giá căn hộ Đà Nẵng khoảng 21 – 145 triệu/m² tùy khu vực',
+				'Ven sông Hàn, biển Mỹ Khê: 77 – 145 triệu/m²; Hòa Xuân: 59 – 77 triệu/m²',
+				'FPT City 45 – 58 triệu/m²; Liên Chiểu, nhà ở xã hội dưới 40 triệu/m²',
+			),
+			'faq'       => array(
+				array( 'Giá căn hộ Đà Nẵng hiện bao nhiêu một m²?', 'Theo bản đồ giá Biggee.vn, khoảng 21 – 145 triệu/m²: dưới 40 triệu ở Liên Chiểu và nhà ở xã hội, 45 – 66 triệu ở khu Nam và một số dự án Sơn Trà, 77 – 145 triệu ven sông Hàn và biển Mỹ Khê.' ),
+				array( 'Dự án căn hộ nào đắt nhất Đà Nẵng?', 'Trong bảng tổng hợp, The Legend ven sông Hàn ở mức 129 – 145 triệu/m², tiếp theo là Wyndham Soleil (97 – 109) và Sun Symphony Residence (86 – 106 triệu/m²).' ),
+				array( 'Căn hộ Hòa Xuân giá bao nhiêu?', 'Cora Tower khoảng 59 – 77 triệu/m², Spana Tower khoảng 60 – 66 triệu/m² (tham khảo theo Biggee.vn).' ),
+			),
+		),
+		'sources'  => array( 'https://biggee.vn/' ),
+	);
+
 	return $posts;
 }
