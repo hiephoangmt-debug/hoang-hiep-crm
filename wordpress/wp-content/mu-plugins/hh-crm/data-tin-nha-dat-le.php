@@ -497,6 +497,57 @@ function hh_single_listing_dataset() {
 <p>Xem thêm ảnh, tiện ích và các loại biệt thự tại <a href="/du-an/fusion-resort-villas-da-nang/">trang dự án Fusion Resort &amp; Villas Đà Nẵng</a>. Hẹn xem biệt thự: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>',
 	);
 
+
+	// 09/11/2026 – bán tòa căn hộ dịch vụ – khách sạn 37 phòng đường Dương Đình Nghệ (anh Hiệp gửi). Không ghi số nhà, tên chủ.
+	$list[] = array(
+		'rev'     => 1,
+		'slug'    => 'ban-toa-khach-san-can-ho-duong-dinh-nghe-son-tra-37-phong-gan-bien-my-khe',
+		'title'   => 'Bán tòa căn hộ – khách sạn 37 phòng đường Dương Đình Nghệ, Sơn Trà – cách biển Mỹ Khê 200 m, đang cho thuê 350 triệu/tháng',
+		'excerpt' => 'Tòa căn hộ dịch vụ – khách sạn 37 phòng trên đường Dương Đình Nghệ (Sơn Trà), cách biển Mỹ Khê khoảng 200 m; đất 180 m², ngang 9 m; mới vận hành 1 năm, đang có hợp đồng thuê 350 triệu/tháng. Giá đã hạ 10 tỷ, khoảng 80 – 89 tỷ, bán gấp.',
+		'kind'    => 'khach-san',
+		'area'    => 'son-tra',
+		'image'   => 'img/nha-dat/ban-toa-khach-san-duong-dinh-nghe-son-tra-4x3.jpg',
+		'alt'     => 'Tòa căn hộ – khách sạn 37 phòng đường Dương Đình Nghệ, Sơn Trà, gần biển Mỹ Khê Đà Nẵng',
+		'meta'    => array(
+			'hh_deal'        => 'ban',
+			'hh_status'      => 'con-hang',
+			'hh_price'       => 80000,
+			'hh_price_max'   => 89000,
+			'hh_negotiable'  => '1',
+			'hh_address'     => 'Đường Dương Đình Nghệ, Sơn Trà, Đà Nẵng – cách biển Mỹ Khê khoảng 200 m (số nhà gửi khi liên hệ)',
+			'hh_map_address' => 'Dương Đình Nghệ, Sơn Trà, Đà Nẵng',
+			'hh_area'        => 180,
+			'hh_width'       => 9,
+			'hh_length'      => 20,
+			'hh_featured'    => '1',
+			'hh_features'    => "Đất 180 m², ngang 9 m, mặt tiền đường Dương Đình Nghệ\nCách biển Mỹ Khê khoảng 200 m – khu phố du lịch, nhà hàng, khách sạn sầm uất\n37 phòng căn hộ dịch vụ, mới đưa vào hoạt động khoảng 1 năm\nĐang có hợp đồng thuê nguyên tòa 350 triệu/tháng (khoảng 4,2 tỷ/năm)\nGiá đã giảm 10 tỷ, chủ cần bán gấp",
+		),
+		'content' => '<p>Bán <strong>tòa căn hộ dịch vụ – khách sạn 37 phòng</strong> trên <strong>đường Dương Đình Nghệ, Sơn Trà, Đà Nẵng</strong>, cách biển Mỹ Khê khoảng <strong>200 m</strong>. Tòa nhà mới đưa vào hoạt động khoảng 1 năm, đang có <strong>hợp đồng thuê 350 triệu/tháng</strong>. Chủ đã giảm giá 10 tỷ, cần bán gấp – giá khoảng <strong>80 – 89 tỷ</strong> (thương lượng).</p>
+<h2>Thông tin tòa nhà</h2>
+<table><tbody>
+<tr><th>Vị trí</th><td>Đường Dương Đình Nghệ, Sơn Trà – cách biển Mỹ Khê khoảng 200 m</td></tr>
+<tr><th>Diện tích đất</th><td>180 m², ngang 9 m</td></tr>
+<tr><th>Quy mô</th><td>37 phòng căn hộ dịch vụ</td></tr>
+<tr><th>Vận hành</th><td>Mới đưa vào hoạt động khoảng 1 năm</td></tr>
+<tr><th>Thu nhập hiện tại</th><td>Hợp đồng thuê 350 triệu/tháng (khoảng 4,2 tỷ/năm)</td></tr>
+<tr><th>Giá bán</th><td>Khoảng 80 – 89 tỷ, đã giảm 10 tỷ, thương lượng</td></tr>
+</tbody></table>
+<h2>Dòng tiền tham khảo</h2>
+<p>Với tiền thuê 350 triệu/tháng (khoảng 4,2 tỷ/năm), tỷ suất cho thuê trên giá bán vào khoảng <strong>4,7 – 5,3%/năm</strong> (tính trên mức giá 80 – 89 tỷ, chưa trừ thuế và chi phí của chủ sở hữu). Người mua nhận ngay dòng tiền ổn định từ hợp đồng thuê đang có, hoặc tự vận hành khi hết hợp đồng.</p>
+<h2>Phù hợp với ai?</h2>
+<ul>
+<li>Nhà đầu tư muốn sở hữu tài sản dòng tiền khu phố du lịch biển Mỹ Khê, không phải đầu tư xây dựng và chờ giấy phép.</li>
+<li>Doanh nghiệp vận hành khách sạn, căn hộ dịch vụ muốn mở rộng chuỗi tại Đà Nẵng.</li>
+<li>Khách giữ tài sản lâu dài ở vị trí sát biển, quỹ đất ngày càng hiếm.</li>
+</ul>
+<h2>Lưu ý khi giao dịch</h2>
+<ul>
+<li>Kiểm tra giấy chứng nhận quyền sử dụng đất, giấy phép xây dựng, hoàn công, phòng cháy chữa cháy và giấy phép kinh doanh lưu trú.</li>
+<li>Xem kỹ hợp đồng thuê hiện tại: thời hạn, giá thuê, điều khoản khi chuyển nhượng tài sản.</li>
+</ul>
+<p>Nhận vị trí cụ thể, hồ sơ và đặt lịch xem tòa nhà: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>',
+	);
+
 	return apply_filters( 'hh_single_listing_dataset', $list );
 }
 

@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.0** + plugin Hoàng Hiệp CRM **2.20.228**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.0** + plugin Hoàng Hiệp CRM **2.20.229**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.229 (09/11/2026)
+
+- **Tin rao mới – Bán tòa căn hộ – khách sạn 37 phòng đường Dương Đình Nghệ (Sơn Trà):** đất 180 m², ngang 9 m, cách biển Mỹ Khê ~200 m, vận hành 1 năm, đang cho thuê 350 triệu/tháng; giá khoảng 80 – 89 tỷ (đã giảm 10 tỷ, thương lượng); mục Khách sạn, khu vực Sơn Trà, tin nổi bật. Số nhà gửi khi liên hệ.
+- Cài: Nhập nhanh → upload → "Nhập / cập nhật dữ liệu" → LiteSpeed Purge All.
 
 ## Có gì mới – plugin 2.20.228 (09/11/2026)
 
