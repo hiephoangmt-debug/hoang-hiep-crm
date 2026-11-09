@@ -28,3 +28,7 @@
 | 08/11/2026 | Sun | 13:30 | (bài web mới 11:30) Gửi tiết kiệm hay mua Sun Saphia Residence cho thuê (1 ảnh dọc) | /gui-tiet-kiem-hay-mua-studio-sun-saphia-residence-cho-thue/ |
 | 08/11/2026 | Hoàng Hiệp | 18:30 | (bài web mới 16:30) Bảo trì căn hộ ven biển: hơi muối, mùa mưa bão (1 ảnh dọc, Mỹ Khê đêm) | /can-ho-ven-bien-hoi-muoi-mua-bao-sun-saphia-residence/ |
 | 09/11/2026 | Sun | 10:30 | Sự kiện bán hàng Sun Saphia Residence 05/12 – cập nhật lịch mới (1 ảnh dọc) | /chuan-bi-su-kien-ban-hang-sun-saphia-residence-28-11/ |
+| 09/11/2026 | Sun | 13:30 | (bài web mới 08:00) Chuyển nhượng hợp đồng Sun Saphia Residence trước bàn giao, thuế 2% (1 ảnh dọc) | /chuyen-nhuong-hop-dong-sun-saphia-residence-truoc-ban-giao/ |
+| 09/11/2026 | Hoàng Hiệp | 11:30 | (phiên khác, bài web mới 10:00) TOD quanh ga đường sắt Đà Nẵng – dự thảo nghị quyết | /da-nang-du-thao-nghi-quyet-tod-quanh-ga-duong-sat/ |
+| 09/11/2026 | Hoàng Hiệp | 15:30 | (bài web mới 12:00) Dải biển Trường Sa – Ngũ Hành Sơn: resort, căn hộ biển (1 ảnh dọc, bãi biển Trường Sa) | /dai-bien-truong-sa-ngu-hanh-son-resort-sun-saphia-residence/ |
+| 09/11/2026 | Sun | 20:00 | (bài web mới 16:30) Chọn căn Sun Saphia Residence: mặt biển, cánh bên, phía sau (1 ảnh dọc) | /chon-day-can-sun-saphia-residence-mat-bien-canh-ben-phia-sau/ |
