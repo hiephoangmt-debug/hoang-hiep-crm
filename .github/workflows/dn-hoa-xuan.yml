@@ -1,0 +1,26 @@
+# Ảnh vệ tinh khu Hòa Xuân (Cora, Spana, S-Light) để đặt mô hình 3D đúng vị trí. Chạy trên nhánh claude/danang-data.
+name: Ảnh vệ tinh Hòa Xuân
+on:
+  push:
+    branches: [claude/danang-data]
+    paths: ['dn-hoa-xuan/fetch.py', '.github/workflows/dn-hoa-xuan.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install pillow
+      - run: python dn-hoa-xuan/fetch.py
+      - name: Lưu ảnh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git add dn-hoa-xuan/raw
+          git commit -m "dn-hoa-xuan: ảnh vệ tinh z18 [skip ci]" || echo "không có gì mới"
+          git pull --rebase -q origin claude/danang-data && git push
