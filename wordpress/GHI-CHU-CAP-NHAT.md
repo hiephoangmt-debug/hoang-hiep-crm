@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.99** + plugin Hoàng Hiệp CRM **2.20.227**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.0** + plugin Hoàng Hiệp CRM **2.20.227**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.16.0 (09/11/2026)
+
+- **Bảng dạng thẻ trên điện thoại:** nhãn bên trái – giá trị bên phải trên cùng một dòng (không còn khoảng trống bên phải, thẻ ngắn khoảng một nửa); ghi chú dài tự xuống dòng dưới nhãn. Gói này đã gồm mọi thay đổi của 2.15.99.
+- Cài: Nhập nhanh → upload → LiteSpeed Purge All.
 
 ## Có gì mới – giao diện 2.15.99 (09/11/2026)
 
