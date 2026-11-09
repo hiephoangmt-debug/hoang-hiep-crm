@@ -29,15 +29,17 @@ function hh_posts_sun_saphia_dot_2( $posts ) {
 		'title'    => 'Giá Sun Saphia Residence bao nhiêu? Giá dự kiến studio tầng 15 từ 2,13 tỷ (cập nhật 28/10/2026)',
 		'excerpt'  => 'Giá dự kiến (rumor) Sun Saphia Residence ngày 28/10/2026: studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ (giá có vay, chưa VAT, chưa KPBT), hỗ trợ lãi suất tới 24 tháng. Cách đọc giá và so sánh căn hộ ven biển.',
 		'keyword'  => 'giá Sun Saphia Residence',
-		'keywords_extra' => array( 'Sun Saphia Residence', 'bảng giá Sun Saphia', 'giá căn hộ Sun Saphia Đà Nẵng', 'giá studio Sun Saphia' ),
+		'keywords_extra' => array( 'giá Sun Saphia Residence bao nhiêu', 'giá căn hộ Sun Saphia', 'giá studio Sun Saphia' ), // 09/11: "Sun Saphia Residence", "Sun Saphia Đà Nẵng" để trang dự án giữ.
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-22 15:00',
-		'rev'      => 4, // 28/10: giá dự kiến (rumor) studio tầng 15, chính sách hỗ trợ lãi suất 24 tháng, sự kiện bán hàng 28/11.
+		'rev'      => 5, // 09/11: thêm liên kết đầu bài về trang dự án, nhường từ khoá tên dự án cho trang dự án.
+		// rev 4 // 28/10: giá dự kiến (rumor) studio tầng 15, chính sách hỗ trợ lãi suất 24 tháng, sự kiện bán hàng 28/11.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Sun Saphia Residence', 'Giá căn hộ Đà Nẵng' ),
 		'image'    => 'plugin:img/tin-tuc/gia-sun-saphia-residence.jpg',
 		'content'  => <<<HTML
 <p><strong>Giá Sun Saphia Residence</strong> là câu hỏi Hoàng Hiệp nhận nhiều nhất từ khi dự án nhận giữ chỗ. Ngày <strong>28/10/2026</strong>, chủ đầu tư đưa ra <strong>giá dự kiến (giá "rumor") cho một số căn studio tầng 15</strong>; bảng giá chính thức từng căn sẽ có khi mở bán. Bài này cập nhật mức giá dự kiến đó, cách đọc giá cho đúng và so sánh với các dự án ven biển khác của {$saphia}.</p>
+<p>Tổng quan dự án, mặt bằng, tiến độ và bảng giá khi công bố: xem trang <a href="/du-an/sun-saphia-residence/">dự án Sun Saphia Residence Đà Nẵng</a>.</p>
 <!--hh-featured-->
 <h2>Giá dự kiến studio tầng 15 (28/10/2026)</h2>
 <table>

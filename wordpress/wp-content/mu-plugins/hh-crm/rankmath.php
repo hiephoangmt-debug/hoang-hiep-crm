@@ -10,7 +10,24 @@
 defined( 'ABSPATH' ) || exit;
 
 /** Từ khóa chính của dự án: khớp đường dẫn (slug) để đạt tiêu chí "từ khóa trong URL". */
+/**
+ * Từ khoá / tiêu đề riêng cho dự án ưu tiên, theo truy vấn thật trên Google Search Console (11/2026).
+ * Sun Saphia: trang dự án giữ "Sun Saphia Residence", "Sun Saphia Đà Nẵng"; bài /gia-sun-saphia-residence-bao-nhieu/ giữ "giá … bao nhiêu".
+ */
+function hh_rm_project_overrides() {
+	return array(
+		'sun-saphia-residence' => array(
+			'kw'    => 'Sun Saphia Residence,Sun Saphia Đà Nẵng,bảng giá Sun Saphia Residence',
+			'title' => 'Sun Saphia Residence Đà Nẵng: Giá, mặt bằng %s',
+		),
+	);
+}
+
 function hh_rm_project_keywords( $post ) {
+	$ov = hh_rm_project_overrides()[ $post->post_name ] ?? null;
+	if ( $ov ) {
+		return $ov['kw'];
+	}
 	$name = trim( preg_replace( '/\s*\([^)]*\)/u', '', html_entity_decode( $post->post_title, ENT_QUOTES, 'UTF-8' ) ) );
 	$slug = '-' . $post->post_name . '-';
 	$main = '';
@@ -97,6 +114,10 @@ function hh_rm_project_title( $post ) {
 	}
 	$name  = $name ?: trim( preg_replace( '/\s*\([^)]*\)/u', '', html_entity_decode( $post->post_title, ENT_QUOTES, 'UTF-8' ) ) );
 	$when  = wp_date( 'm/Y', (int) get_post_modified_time( 'U', true, $post ) );
+	$ov    = hh_rm_project_overrides()[ $post->post_name ] ?? null;
+	if ( $ov && ! empty( $ov['title'] ) ) {
+		return sprintf( $ov['title'], $when );
+	}
 	$brand = function_exists( 'hoanghiep_opt' ) && hoanghiep_opt( 'hh_person_name' ) ? hoanghiep_opt( 'hh_person_name' ) : 'Hoàng Hiệp';
 	// Đất nền đã bàn giao (chỉ còn chuyển nhượng): người tìm quan tâm giá đất và sổ đỏ, không phải chính sách bán hàng.
 	if ( has_term( 'dat-nen', 'loai-du-an', $post ) && function_exists( 'hh_project_is_resale' ) && hh_project_is_resale( $post->ID ) ) {
@@ -158,6 +179,11 @@ function hh_rm_fill_keywords() {
 	foreach ( $ids as $id ) {
 		$cur = (string) get_post_meta( $id, 'rank_math_focus_keyword', true );
 		// Trống, hoặc vẫn là từ khoá web tự điền theo cách cũ (anh chưa sửa tay) → điền bản mới.
+		$p_ = get_post( $id );
+		$ov = hh_rm_project_overrides()[ $p_->post_name ] ?? null;
+		if ( $ov && $cur !== $ov['kw'] && ( '' === $cur || $cur === hh_rm_project_keywords_legacy( $p_ ) || 0 === strpos( $cur, 'Sun Saphia Residence,giá ' ) ) ) {
+			$cur = ''; // Dự án có từ khoá riêng: thay bản web tự điền trước đây.
+		}
 		if ( '' === $cur || $cur === hh_rm_project_keywords_legacy( get_post( $id ) ) ) {
 			update_post_meta( $id, 'rank_math_focus_keyword', hh_rm_project_keywords( get_post( $id ) ) );
 		}
