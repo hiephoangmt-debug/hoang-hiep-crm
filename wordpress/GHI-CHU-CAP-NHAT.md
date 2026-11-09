@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.98** + plugin Hoàng Hiệp CRM **2.20.224**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.98** + plugin Hoàng Hiệp CRM **2.20.225**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.225 (09/11/2026)
+
+- **Sun Riverpolis:** thêm tổng mặt bằng toàn khu Hòa Quý (ảnh chủ đầu tư anh Hiệp gửi) vào mục tổng thể; thêm danh sách tiện ích theo chú thích bản đồ (công viên ven sông, bến du thuyền, đồi hoa, trường học các cấp…) nếu ô tiện ích còn trống.
+- **FourS Tower, Tòa F2:** thêm ảnh cắt vị trí 4 ô chung cư trên tổng mặt bằng (ngã tư Nguyễn Phước Lan – Minh Mạng); trang FourS Tower có thêm tổng mặt bằng toàn khu.
+- Cài: Nhập nhanh → upload → "Nhập / cập nhật dữ liệu" → **"Tải ảnh ngay"** → LiteSpeed Purge All.
 
 ## Có gì mới – giao diện 2.15.98 + plugin 2.20.224 (09/11/2026)
 
