@@ -234,7 +234,7 @@ function hh_seo_share_image() {
 
 function hh_seo_image() {
 	if ( is_singular() && has_post_thumbnail() ) {
-		return wp_get_attachment_image_url( get_post_thumbnail_id(), 'large' );
+		return function_exists( 'hh_share_jpg_url' ) ? hh_share_jpg_url( get_post_thumbnail_id() ) : wp_get_attachment_image_url( get_post_thumbnail_id(), 'large' );
 	}
 	if ( is_page( 'gioi-thieu' ) || is_front_page() ) {
 		return hh_seo_share_image();
@@ -1041,7 +1041,7 @@ function hh_seo_llms_txt( $wp ) {
 		'',
 		'> ' . hoanghiep_opt( 'hh_person_bio' ),
 		'',
-		'- Đơn vị đang công tác: ' . hoanghiep_opt( 'hh_person_company' ),
+		hoanghiep_opt( 'hh_person_company' ) ? '- Đơn vị đang công tác: ' . hoanghiep_opt( 'hh_person_company' ) : null,
 		'- Kinh nghiệm: ' . implode( ' → ', wp_list_pluck( hoanghiep_career(), 0 ) ),
 		'- Khu vực hoạt động: ' . ( false !== mb_stripos( hoanghiep_opt( 'hh_address' ), 'Đà Nẵng' ) ? hoanghiep_opt( 'hh_address' ) : 'Đà Nẵng (' . hoanghiep_opt( 'hh_address' ) . ')' ),
 		'- Hotline / Zalo: ' . hoanghiep_opt( 'hh_phone' ),
@@ -1109,7 +1109,7 @@ function hh_seo_llms_txt( $wp ) {
 	status_header( 200 );
 	header( 'Content-Type: text/plain; charset=utf-8' );
 	header( 'X-Robots-Tag: noindex' );
-	echo implode( "\n", $lines ) . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput -- plain text.
+	echo implode( "\n", array_filter( $lines, static fn( $l ) => null !== $l ) ) . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput -- plain text.
 	exit;
 }
 
@@ -1150,7 +1150,8 @@ foreach ( array( 'rank_math/opengraph/facebook/image', 'rank_math/opengraph/twit
 	add_filter(
 		$hh_filter,
 		static function ( $img ) {
-			return is_front_page() || is_page( 'gioi-thieu' ) || ( ! $img || preg_match( '/icon|@\d+x\d+|\.svg/i', (string) $img ) ) ? ( hh_seo_image() ?: $img ) : $img;
+			// Ảnh WebP: Zalo chưa đọc được → thay bằng bản JPG.
+			return is_front_page() || is_page( 'gioi-thieu' ) || ( ! $img || preg_match( '/icon|@\d+x\d+|\.svg|\.webp$/i', (string) $img ) ) ? ( hh_seo_image() ?: $img ) : $img;
 		},
 		99
 	);

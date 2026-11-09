@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.4** + plugin Hoàng Hiệp CRM **2.20.234**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.5** + plugin Hoàng Hiệp CRM **2.20.235**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.235 / giao diện 2.16.5 (09/11/2026): sửa nhỏ SEO
+
+- **Ảnh chia sẻ Facebook/Zalo luôn là JPG**: dự án có ảnh đại diện đã chuyển WebP (VD Cora) → web tự tạo bản JPG 1200px để Zalo hiện ảnh xem trước.
+- **Tiêu đề SEO dự án theo tháng cập nhật dữ liệu**: khi "Nhập / cập nhật dữ liệu" làm đổi giá, giỏ hàng, ảnh… của dự án, tháng trong tiêu đề ("… Bảng giá, chính sách 11/2026") đổi theo. Các dự án đã cập nhật tháng 11 (Cora, Legend, Symphony 5, FourS, Sun Riverpolis, Peninsula Private, Grand Marina, MIA, Sun Saphia) chuyển sang 11/2026.
+- llms.txt (tệp giới thiệu cho ChatGPT, Perplexity…): bỏ dòng "Đơn vị đang công tác" khi để trống.
 
 ## Có gì mới – 2.20.234 / giao diện 2.16.4 (09/11/2026): trang chủ và ảnh JPG nhẹ hơn
 

@@ -113,7 +113,7 @@ function hh_rm_project_title( $post ) {
 		}
 	}
 	$name  = $name ?: trim( preg_replace( '/\s*\([^)]*\)/u', '', html_entity_decode( $post->post_title, ENT_QUOTES, 'UTF-8' ) ) );
-	$when  = wp_date( 'm/Y', (int) get_post_modified_time( 'U', true, $post ) );
+	$when  = wp_date( 'm/Y', max( (int) get_post_modified_time( 'U', true, $post ), (int) get_post_meta( $post->ID, '_hh_data_touched', true ) ) );
 	$ov    = hh_rm_project_overrides()[ $post->post_name ] ?? null;
 	if ( $ov && ! empty( $ov['title'] ) ) {
 		return sprintf( $ov['title'], $when );
@@ -176,6 +176,16 @@ function hh_rm_fill_keywords() {
 			'fields'         => 'ids',
 		)
 	);
+	// Dự án đã cập nhật giá / giỏ hàng / tài liệu trong 11/2026 (trước khi web tự ghi mốc cập nhật).
+	if ( ! get_option( 'hh_data_touched_seed_1126' ) ) {
+		foreach ( array( 'cora-tower', 'the-legend-da-nang', 'symphony-5-sun-symphony-residence', 'fours-tower', 'fours-tower-f1-thap-tung', 'fours-tower-f2-thap-mai', 'fours-tower-f5-thap-cuc', 'sun-riverpolis', 'peninsula-private-da-nang', 'grand-marina-da-nang', 'mia-center-point-da-nang', 'sun-saphia-residence' ) as $slug ) {
+			$p_ = get_page_by_path( $slug, OBJECT, 'du-an' );
+			if ( $p_ && (int) get_post_meta( $p_->ID, '_hh_data_touched', true ) < strtotime( '2026-11-09' ) ) {
+				update_post_meta( $p_->ID, '_hh_data_touched', strtotime( '2026-11-09 12:00:00' ) );
+			}
+		}
+		update_option( 'hh_data_touched_seed_1126', 1, false );
+	}
 	foreach ( $ids as $id ) {
 		$cur = (string) get_post_meta( $id, 'rank_math_focus_keyword', true );
 		// Trống, hoặc vẫn là từ khoá web tự điền theo cách cũ (anh chưa sửa tay) → điền bản mới.

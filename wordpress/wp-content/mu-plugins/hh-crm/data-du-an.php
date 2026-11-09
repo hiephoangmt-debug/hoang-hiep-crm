@@ -717,14 +717,24 @@ function hh_import_projects() {
 			$meta['hh_p_featured'] = '1';
 		}
 		// Sửa dữ liệu cũ đã nhập sai: chỉ thay khi giá trị hiện tại vẫn đúng bằng bản cũ (không đè chỗ bạn đã tự sửa).
+		$touched = false;
 		foreach ( $p['fix_meta'] ?? array() as $key => $old ) {
-			if ( isset( $meta[ $key ] ) && in_array( (string) get_post_meta( $id, $key, true ), (array) $old, true ) ) {
+			if ( isset( $meta[ $key ] ) && in_array( (string) get_post_meta( $id, $key, true ), (array) $old, true ) && (string) get_post_meta( $id, $key, true ) !== (string) $meta[ $key ] ) {
 				update_post_meta( $id, $key, $meta[ $key ] );
+				$touched = true;
 			}
 		}
 		foreach ( $meta as $key => $value ) {
-			if ( '' === (string) get_post_meta( $id, $key, true ) ) {
+			if ( '' === (string) get_post_meta( $id, $key, true ) && '' !== (string) $value ) {
 				update_post_meta( $id, $key, $value );
+				$touched = true;
+			}
+		}
+		// Dữ liệu dự án vừa đổi (giá, giỏ hàng, ảnh…): ghi thời điểm → tiêu đề SEO "… {tháng/năm}" cập nhật theo.
+		if ( $touched && $existing ) {
+			update_post_meta( $id, '_hh_data_touched', time() );
+			if ( function_exists( 'hh_rm_sync_project_title' ) ) {
+				hh_rm_sync_project_title( get_post( $id ) );
 			}
 		}
 		update_post_meta( $id, 'hh_p_sources', implode( "\n", $p['sources'] ) );

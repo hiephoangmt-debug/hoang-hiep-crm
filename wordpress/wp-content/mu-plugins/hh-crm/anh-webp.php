@@ -239,3 +239,34 @@ function hh_hero_mobile_url( $id ) {
 	$up = wp_get_upload_dir();
 	return 0 === strpos( $out, $up['basedir'] ) ? $up['baseurl'] . substr( $out, strlen( $up['basedir'] ) ) : '';
 }
+
+/**
+ * Ảnh chia sẻ (og:image) luôn là JPG – Zalo và một số ứng dụng chưa đọc WebP.
+ * Ảnh đại diện chỉ còn cỡ WebP (PNG đã chuyển): tạo một bản JPG 1200px chất lượng 85, lưu cạnh ảnh gốc.
+ */
+function hh_share_jpg_url( $id ) {
+	$id  = (int) $id;
+	$src = $id ? wp_get_attachment_image_src( $id, 'large' ) : false;
+	$url = $src ? preg_replace( '/(\.jpe?g)\.webp$/i', '$1', (string) $src[0] ) : '';
+	if ( '' === $url || ! preg_match( '/\.webp$/i', $url ) ) {
+		return $url;
+	}
+	$file = get_attached_file( $id );
+	if ( ! $file || ! is_file( $file ) ) {
+		return $url;
+	}
+	$out = preg_replace( '/\.\w+$/', '', $file ) . '-share.jpg';
+	if ( ! is_file( $out ) ) {
+		$ed = wp_get_image_editor( $file );
+		if ( is_wp_error( $ed ) ) {
+			return $url;
+		}
+		$ed->resize( 1200, 1200, false );
+		$ed->set_quality( 85 );
+		if ( is_wp_error( $ed->save( $out, 'image/jpeg' ) ) ) {
+			return $url;
+		}
+	}
+	$up = wp_get_upload_dir();
+	return 0 === strpos( $out, $up['basedir'] ) ? $up['baseurl'] . substr( $out, strlen( $up['basedir'] ) ) : $url;
+}
