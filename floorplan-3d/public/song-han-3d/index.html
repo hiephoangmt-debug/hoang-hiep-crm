@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Sông Hàn 3D</title>
+<meta name="description" content="Mô hình 3D chi tiết trung tâm Đà Nẵng hai bờ sông Hàn: 25.000 toà nhà thật, ảnh vệ tinh, cầu Rồng, cầu Trần Thị Lý, Da Nang Downtown tháp 408 m." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg: #8a9188; --fg: #eef2ff; --panel: #0f1a2be8; --chip: #0f1a2bcc; --accent: #f2b33d; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--fg); font-family: Inter, system-ui, sans-serif; }
+  #stage { position: fixed; inset: 0; touch-action: none; }
+  .top { position: fixed; top: max(10px, env(safe-area-inset-top)); left: 10px; right: 10px; max-width: 460px; background: var(--panel); border-radius: 14px; padding: 9px 12px; pointer-events: none; }
+  .top h1 { margin: 0; font-size: 15.5px; } .top small { font-size: 12px; opacity: .8; }
+  .bar { position: fixed; left: 0; right: 0; bottom: 0; padding: 8px 10px max(10px, env(safe-area-inset-bottom)); }
+  .chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; border: 0; border-radius: 999px; padding: 8px 12px; font: 600 12.5px Inter, sans-serif; color: var(--fg); background: var(--chip); cursor: pointer; white-space: nowrap; }
+  .chip.on { background: var(--accent); color: #241600; }
+  .credit { font-size: 9.5px; color: #fff; opacity: .75; margin-top: 5px; text-shadow: 0 1px 2px #000; }
+  .pins { position: fixed; inset: 0; pointer-events: none; }
+  .pin { position: absolute; transform: translate(-50%, -100%); display: flex; flex-direction: column; align-items: center; pointer-events: auto; cursor: pointer; }
+  .pin b { font: 600 11.5px Inter; background: #fffffff0; color: #111827; padding: 3px 8px; border-radius: 999px; white-space: nowrap; box-shadow: 0 2px 6px #0006; }
+  .pin.prj b { background: #e5322d; color: #fff; }
+  .pin span { width: 2px; height: 14px; background: linear-gradient(#fff, #fff0); }
+  .loading { position: fixed; inset: 0; display: grid; place-items: center; background: #0d1420; color: #fff; font-size: 14px; transition: opacity .5s; z-index: 9; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div class="pins" id="pins"></div>
+<header class="top"><h1>Sông Hàn 3D · trung tâm Đà Nẵng</h1><small>25.000 toà nhà thật trên ảnh vệ tinh · kéo để xoay, chụm để phóng</small></header>
+<footer class="bar">
+  <div class="chips">
+    <button class="chip on" data-v="hero">🏙 Toàn cảnh</button>
+    <button class="chip" data-v="rong">🐉 Cầu Rồng</button>
+    <button class="chip" data-v="ttl">🌉 Trần Thị Lý</button>
+    <button class="chip" data-v="dt">🏗 Da Nang Downtown</button>
+    <button class="chip" data-v="top">⬇ Nhìn từ trên</button>
+    <button class="chip" id="nightBtn">🌙 Ban đêm</button>
+    <button class="chip" id="orbitBtn">🎬 Bay quanh</button>
+  </div>
+  <div class="credit">Ảnh vệ tinh © Esri, Maxar, Earthstar · Nhà: Overture Maps (Microsoft, Google Open Buildings, OpenStreetMap) · Chiều cao: OpenStreetMap, nhà còn lại ước lượng · Mô hình minh hoạ</div>
+</footer>
+<div class="loading" id="loading">Đang dựng 25.000 toà nhà…</div>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { Sky } from 'three/addons/objects/Sky.js';
+
+const $ = (id) => document.getElementById(id);
+const V3 = (x, y, z) => new THREE.Vector3(x, y, z);
+const MOBILE = Math.min(innerWidth, innerHeight) < 700;
+const [meta, bld, trees] = await Promise.all([fetch('meta.json').then((r) => r.json()), fetch('bld.bin').then((r) => r.arrayBuffer()), fetch('trees.bin').then((r) => r.arrayBuffer())]);
+const LL = (lat, lon) => [(lon - meta.origin[1]) * meta.kx, -(lat - meta.origin[0]) * meta.kz];
+const [bx0, bz0, bx1, bz1] = meta.bounds;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.5 : 2));
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+$('stage').appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(42, 1, 5, 30000);
+const controls = new OrbitControls(camera, renderer.domElement);
+Object.assign(controls, { enableDamping: true, maxPolarAngle: 1.45, minDistance: 60, maxDistance: 9000 });
+
+// ---- nền ảnh vệ tinh + đế khối ----
+const satTex = await new THREE.TextureLoader().loadAsync('sat.jpg');
+satTex.colorSpace = THREE.SRGBColorSpace; satTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+const W = bx1 - bx0, D = bz1 - bz0;
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(W, D), new THREE.MeshStandardMaterial({ map: satTex, roughness: 0.95 }));
+ground.rotation.x = -Math.PI / 2; ground.position.set((bx0 + bx1) / 2, 0, (bz0 + bz1) / 2); ground.receiveShadow = true; scene.add(ground);
+const base = new THREE.Mesh(new THREE.BoxGeometry(W, 40, D), new THREE.MeshStandardMaterial({ color: 0x6f6a60, roughness: 1 }));
+base.position.set((bx0 + bx1) / 2, -21.5, (bz0 + bz1) / 2); scene.add(base);
+
+// ---- nhà: tường + mái, màu mái theo ảnh vệ tinh, cửa sổ vẽ bằng shader ----
+const U = { uNight: { value: 0 } };
+const buildings = (() => {
+  const dv = new DataView(bld); let o = 0, nv = 0, ni = 0;
+  while (o < dv.byteLength) { const n = dv.getUint8(o); nv += n * 5; ni += n * 6 + (n - 2) * 3; o += 7 + n * 4; }
+  const pos = new Float32Array(nv * 3), nor = new Int8Array(nv * 3), col = new Uint8Array(nv * 3), wuv = new Float32Array(nv * 3), idx = new Uint32Array(ni);
+  let v = 0, k = 0; o = 0; const xs = [], zs = [];
+  const lin = (c) => Math.round(Math.pow(Math.max(0, Math.min(255, c)) / 255, 2.2) * 255);   // màu sRGB -> tuyến tính (vertex color)
+  const L3 = (a) => [lin(a[0]), lin(a[1]), lin(a[2])];
+  const WALLS = [[232, 222, 200], [214, 200, 178], [200, 212, 222], [236, 214, 188], [222, 226, 214], [238, 200, 170], [196, 206, 186]];
+  while (o < dv.byteLength) {
+    const n = dv.getUint8(o), tall = dv.getUint8(o + 1), h = dv.getUint16(o + 2, true) / 10, rr = dv.getUint8(o + 4), rg = dv.getUint8(o + 5), rb = dv.getUint8(o + 6); o += 7;
+    xs.length = zs.length = 0;
+    for (let i = 0; i < n; i++) { xs.push(dv.getInt16(o, true) / 4); zs.push(dv.getInt16(o + 2, true) / 4); o += 4; }
+    let ar = 0; for (let i = 0; i < n; i++) { const j = (i + 1) % n; ar += xs[i] * zs[j] - xs[j] * zs[i]; }
+    const seed = (xs[0] * 7.31 + zs[0] * 3.17) % 1, wp = WALLS[Math.abs(Math.floor(xs[0] + zs[0])) % WALLS.length];
+    // tường: pha màu sơn sáng với chút màu mái; nhà cao tầng hơi xanh kính
+    const wc = tall ? [110 + rr * 0.2, 140 + rg * 0.2, 170 + rb * 0.2] : [wp[0] * 0.8 + rr * 0.2, wp[1] * 0.8 + rg * 0.2, wp[2] * 0.8 + rb * 0.2];
+    let per = 0; const wcl = L3(wc);
+    for (let i = 0; i < n; i++) {
+      const j = (i + 1) % n, dx = xs[j] - xs[i], dz = zs[j] - zs[i], L = Math.hypot(dx, dz) || 1, nx = (ar > 0 ? dz : -dz) / L, nz = (ar > 0 ? -dx : dx) / L;
+      for (const [x, y, z, u, w] of [[xs[i], 0, zs[i], per, 0], [xs[j], 0, zs[j], per + L, 0], [xs[j], h, zs[j], per + L, h], [xs[i], h, zs[i], per, h]]) {
+        pos.set([x, y, z], v * 3); nor.set([nx * 127, 0, nz * 127], v * 3); col.set(wcl, v * 3); wuv.set([u, w, seed + tall * 2], v * 3); v++;
+      }
+      const b0 = v - 4; idx.set(ar > 0 ? [b0, b0 + 2, b0 + 1, b0, b0 + 3, b0 + 2] : [b0, b0 + 1, b0 + 2, b0, b0 + 2, b0 + 3], k); k += 6; per += L;
+    }
+    const r0 = v;
+    const lum = (rr + rg + rb) / 3, sat = (c) => Math.max(0, Math.min(255, (lum + (c - lum) * 1.45 - 128) * 1.12 + 118)), rc = L3([sat(rr), sat(rg), sat(rb)]);
+    for (let i = 0; i < n; i++) { pos.set([xs[i], h, zs[i]], v * 3); nor.set([0, 127, 0], v * 3); col.set(rc, v * 3); wuv.set([0, -1, 0], v * 3); v++; }
+    const tris = n === 4 ? [[0, 1, 2], [0, 2, 3]] : THREE.ShapeUtils.triangulateShape(xs.map((x, i) => new THREE.Vector2(x, zs[i])), []);
+    for (const [a, b, d] of tris) { const ny = (zs[b] - zs[a]) * (xs[d] - xs[a]) - (xs[b] - xs[a]) * (zs[d] - zs[a]); idx.set(ny > 0 ? [r0 + a, r0 + b, r0 + d] : [r0 + a, r0 + d, r0 + b], k); k += 3; }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos.subarray(0, v * 3), 3));
+  g.setAttribute('normal', new THREE.BufferAttribute(nor.subarray(0, v * 3), 3, true));
+  g.setAttribute('color', new THREE.BufferAttribute(col.subarray(0, v * 3), 3, true));
+  g.setAttribute('wuv', new THREE.BufferAttribute(wuv.subarray(0, v * 3), 3));
+  g.setIndex(new THREE.BufferAttribute(idx.subarray(0, k), 1)); g.computeBoundingSphere();
+  const m = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.75 });
+  m.onBeforeCompile = (s) => {
+    Object.assign(s.uniforms, U);
+    s.vertexShader = s.vertexShader.replace('#include <common>', '#include <common>\nattribute vec3 wuv; varying vec3 vW;').replace('#include <begin_vertex>', '#include <begin_vertex>\nvW = wuv;');
+    s.fragmentShader = s.fragmentShader.replace('#include <common>', '#include <common>\nvarying vec3 vW; uniform float uNight;')
+      .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+        if (vW.y >= 0.0) {
+          float tall = step(1.5, vW.z);
+          vec2 q = vec2(vW.x / mix(3.2, 2.6, tall), vW.y / 3.4), f = fract(q), cell = floor(q);
+          float aa = clamp(1.4 - fwidth(q.y) * 2.5, 0.0, 1.0);
+          float win = step(mix(0.22, 0.08, tall), f.x) * step(f.x, mix(0.78, 0.92, tall)) * step(0.28, f.y) * step(f.y, mix(0.8, 0.9, tall)) * step(1.0, cell.y) * aa;
+          float r = fract(sin(dot(cell + vW.z * 41.3, vec2(12.9898, 78.233))) * 43758.5453);
+          vec3 glass = mix(vec3(0.16, 0.2, 0.25), vec3(0.32, 0.48, 0.62), tall);
+          diffuseColor.rgb = mix(diffuseColor.rgb, glass, win * mix(0.7, 0.85, tall));
+          totalEmissiveRadiance += vec3(1.0, 0.78, 0.5) * uNight * 0.08;
+          diffuseColor.rgb *= 1.0 - 0.18 * step(f.y, 0.08) * step(1.0, cell.y);   // vạch sàn
+          totalEmissiveRadiance += vec3(1.0, 0.76, 0.45) * uNight * win * step(r, 0.55) * 1.6;
+        }`);
+  };
+  const mesh = new THREE.Mesh(g, m); mesh.castShadow = mesh.receiveShadow = true; scene.add(mesh);
+  return mesh;
+})();
+
+// ---- cây xanh (lấy từ điểm xanh trên ảnh vệ tinh) ----
+{
+  const dv = new DataView(trees), n = dv.byteLength / 7;
+  const geo = new THREE.IcosahedronGeometry(1, 1), p = geo.attributes.position;
+  for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i), z = p.getZ(i), k = 1 + 0.2 * Math.sin(x * 7 + y * 5) * Math.cos(z * 6); p.setXYZ(i, x * k, y * k * 0.8, z * k); }
+  geo.computeVertexNormals();
+  const im = new THREE.InstancedMesh(geo, new THREE.MeshStandardMaterial({ roughness: 0.95, flatShading: true }), n);
+  const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), c = new THREE.Color();
+  for (let i = 0; i < n; i++) {
+    const x = dv.getInt16(i * 7, true) / 4, z = dv.getInt16(i * 7 + 2, true) / 4, s = 2.2 + ((i * 7919) % 100) / 45;
+    m4.compose(V3(x, s * 0.9, z), q, V3(s, s, s)); im.setMatrixAt(i, m4);
+    c.setRGB(dv.getUint8(i * 7 + 4) / 255, dv.getUint8(i * 7 + 5) / 255, dv.getUint8(i * 7 + 6) / 255).multiplyScalar(0.9); c.convertSRGBToLinear(); im.setColorAt(i, c);
+  }
+  im.castShadow = true; scene.add(im);
+}
+
+// ---- dự án: Da Nang Downtown – tháp 408 m (khu Công viên Châu Á cũ, đang thi công) ----
+const glassP = new THREE.MeshStandardMaterial({ color: 0x7fa6c4, roughness: 0.1, metalness: 0.6, emissive: 0xffd09a, emissiveIntensity: 0 });
+const goldP = new THREE.MeshStandardMaterial({ color: 0xd8b25e, roughness: 0.3, metalness: 0.7, emissive: 0xffb84a, emissiveIntensity: 0.1 });
+const [dtx, dtz] = LL(16.0393, 108.2275);
+{
+  const g = new THREE.Group(); g.position.set(dtx, 0, dtz); scene.add(g);
+  let y = 0, w = 58;
+  for (let k = 0; k < 4; k++) { const h = 94; const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, w), glassP); m.position.y = y + h / 2; m.castShadow = true; g.add(m); y += h; w *= 0.84;
+    const band = new THREE.Mesh(new THREE.BoxGeometry(w * 1.12, 2.5, w * 1.12), goldP); band.position.y = y; g.add(band); }
+  const sp = new THREE.Mesh(new THREE.ConeGeometry(w * 0.32, 32, 8), goldP); sp.position.y = y + 16; g.add(sp);
+  const t2 = new THREE.Mesh(new THREE.BoxGeometry(40, 165, 30), glassP); t2.position.set(-110, 82, 60); t2.castShadow = true; g.add(t2);
+  const dome = new THREE.Mesh(new THREE.SphereGeometry(32, 32, 12, 0, Math.PI * 2, 0, Math.PI / 2), goldP); dome.scale.y = 0.6; dome.position.set(90, 0, -60); g.add(dome);
+}
+
+// ---- nhãn ----
+const LABELS = [
+  ['Cầu Rồng', ...LL(16.0612, 108.2270), 25, 0], ['Cầu Trần Thị Lý', ...LL(16.0504, 108.2300), 40, 0], ['Cầu Nguyễn Văn Trỗi', ...LL(16.0545, 108.2283), 20, 0],
+  ['Sông Hàn', ...LL(16.0575, 108.2290), 8, 0], ['Da Nang Downtown – tháp 408 m', dtx, dtz, 420, 1],
+  ...meta.tall.filter((t) => t.name && !/^\d+$/.test(t.name)).map((t) => [t.name, t.x, t.z, t.h + 6, 0]),
+].map(([t, x, z, y, prj]) => { const el = document.createElement('div'); el.className = 'pin' + (prj ? ' prj' : ''); el.innerHTML = '<b></b><span></span>'; el.querySelector('b').textContent = t; $('pins').appendChild(el); return { el, p: V3(x, y, z) }; });
+const pv = V3(0, 0, 0);
+function updLabels() { for (const L of LABELS) { pv.copy(L.p).project(camera); const ok = pv.z < 1 && Math.abs(pv.x) < 1.05 && Math.abs(pv.y) < 1.05; L.el.style.display = ok ? '' : 'none'; if (ok) { L.el.style.left = (pv.x + 1) / 2 * innerWidth + 'px'; L.el.style.top = (1 - pv.y) / 2 * innerHeight + 'px'; } } }
+
+// ---- trời, nắng ----
+const sky = new Sky(); sky.scale.setScalar(20000); scene.add(sky);
+sky.material.uniforms.turbidity.value = 5; sky.material.uniforms.rayleigh.value = 1.3; sky.material.uniforms.mieCoefficient.value = 0.004;
+const hemi = new THREE.HemisphereLight(0xdfeeff, 0x6b604c, 0.45); scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xfff0d6, 3); sun.castShadow = true;
+const SH = Math.max(W, D) * 0.62;
+Object.assign(sun.shadow.camera, { left: -SH, right: SH, top: SH, bottom: -SH, near: 10, far: 9000 }); sun.shadow.mapSize.set(MOBILE ? 2048 : 4096, MOBILE ? 2048 : 4096); sun.shadow.bias = -0.0008; sun.shadow.normalBias = 2.5;
+scene.add(sun, sun.target);
+const pmrem = new THREE.PMREMGenerator(renderer), envScene = new THREE.Scene(), envSky = new Sky(); envSky.scale.setScalar(1000); envScene.add(envSky); let envRT = null;
+let night = false;
+function setNight(on) {
+  night = on; $('nightBtn').classList.toggle('on', on);
+  const el = on ? -6 : 32, dir = V3().setFromSphericalCoords(1, THREE.MathUtils.degToRad(90 - Math.max(el, 4)), THREE.MathUtils.degToRad(130));
+  sky.material.uniforms.sunPosition.value.setFromSphericalCoords(1, THREE.MathUtils.degToRad(90 - el), THREE.MathUtils.degToRad(130));
+  sun.position.copy(dir).multiplyScalar(4000); sun.intensity = on ? 0.12 : 2.6; hemi.intensity = on ? 0.12 : 0.45;
+  sky.visible = !on; scene.background = on ? new THREE.Color(0x0b1430) : null;
+  scene.fog = new THREE.Fog(on ? 0x0b1430 : 0xc8d6e2, 6500, 18000);
+  envSky.material.uniforms.sunPosition.value.copy(sky.material.uniforms.sunPosition.value); envRT?.dispose(); envRT = pmrem.fromScene(envScene); scene.environment = envRT.texture;
+  scene.environmentIntensity = on ? 0.05 : 0.3;
+  U.uNight.value = on ? 1 : 0; glassP.emissiveIntensity = on ? 0.5 : 0; goldP.emissiveIntensity = on ? 1.4 : 0.1;
+  renderer.toneMappingExposure = on ? 1.15 : 0.85;
+}
+setNight(false);
+
+// ---- góc nhìn ----
+const [rx, rz] = LL(16.0612, 108.2270), [tx_, tz_] = LL(16.0504, 108.2300);
+const VIEWS = {
+  hero: [V3(-1900, 1500, 2600), V3(0, 0, 0)], rong: [V3(rx + 420, 160, rz + 300), V3(rx, 10, rz)],
+  ttl: [V3(tx_ - 450, 180, tx_ + 380), V3(tx_, 20, tz_)], dt: [V3(dtx + 700, 420, dtz + 650), V3(dtx, 160, dtz)], top: [V3(0, 4200, 1), V3(0, 0, 0)],
+};
+VIEWS.ttl = [V3(tx_ - 450, 180, tz_ + 380), V3(tx_, 20, tz_)];
+let anim = null, orbit = false;
+function go(v, instant) {
+  document.querySelectorAll('[data-v]').forEach((b) => b.classList.toggle('on', b.dataset.v === v));
+  const [p, t] = VIEWS[v]; if (instant) { camera.position.copy(p); controls.target.copy(t); return; }
+  anim = { t: 0, p0: camera.position.clone(), t0: controls.target.clone(), p1: p, t1: t };
+}
+document.querySelectorAll('[data-v]').forEach((b) => (b.onclick = () => { orbit = false; $('orbitBtn').classList.remove('on'); go(b.dataset.v); }));
+$('nightBtn').onclick = () => setNight(!night);
+$('orbitBtn').onclick = () => { orbit = !orbit; $('orbitBtn').classList.toggle('on', orbit); anim = null; };
+controls.addEventListener('start', () => { anim = null; orbit = false; $('orbitBtn').classList.remove('on'); });
+go('hero', true);
+function resize() { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.fov = camera.aspect < 0.8 ? 58 : 42; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+const clock = new THREE.Timer();
+renderer.setAnimationLoop(() => {
+  clock.update(); const dt = Math.min(clock.getDelta(), 0.1);
+  if (anim) { anim.t = Math.min(1, anim.t + dt / 1.6); const e = anim.t < 0.5 ? 4 * anim.t ** 3 : 1 - (-2 * anim.t + 2) ** 3 / 2; camera.position.lerpVectors(anim.p0, anim.p1, e); controls.target.lerpVectors(anim.t0, anim.t1, e); if (anim.t >= 1) anim = null; }
+  if (orbit) { const d = camera.position.clone().sub(controls.target); d.applyAxisAngle(V3(0, 1, 0), dt * 0.1); camera.position.copy(controls.target).add(d); }
+  sun.target.position.copy(controls.target); sun.position.copy(controls.target).add(V3().copy(sky.material.uniforms.sunPosition.value).normalize().multiplyScalar(4000));
+  controls.update(); renderer.render(scene, camera); updLabels();
+});
+$('loading').style.opacity = 0; setTimeout(() => $('loading').remove(), 500);
+window.sh = { go, setNight, camera, controls };
+</script>
+</body>
+</html>
