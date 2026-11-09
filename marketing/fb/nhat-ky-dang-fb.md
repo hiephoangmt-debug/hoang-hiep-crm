@@ -30,5 +30,6 @@
 | 09/11/2026 | Sun | 10:30 | Sự kiện bán hàng Sun Saphia Residence 05/12 – cập nhật lịch mới (1 ảnh dọc) | /chuan-bi-su-kien-ban-hang-sun-saphia-residence-28-11/ |
 | 09/11/2026 | Sun | 13:30 | (bài web mới 08:00) Chuyển nhượng hợp đồng Sun Saphia Residence trước bàn giao, thuế 2% (1 ảnh dọc) | /chuyen-nhuong-hop-dong-sun-saphia-residence-truoc-ban-giao/ |
 | 09/11/2026 | Hoàng Hiệp | 11:30 | (phiên khác, bài web mới 10:00) TOD quanh ga đường sắt Đà Nẵng – dự thảo nghị quyết | /da-nang-du-thao-nghi-quyet-tod-quanh-ga-duong-sat/ |
-| 09/11/2026 | Hoàng Hiệp | 15:30 | (bài web mới 12:00) Dải biển Trường Sa – Ngũ Hành Sơn: resort, căn hộ biển (1 ảnh dọc, bãi biển Trường Sa) | /dai-bien-truong-sa-ngu-hanh-son-resort-sun-saphia-residence/ |
+| 10/11/2026 | Hoàng Hiệp | 15:30 | (bài web 09/11 12:00, dời từ 09/11 vì trùng giãn cách) Dải biển Trường Sa – Ngũ Hành Sơn: resort, căn hộ biển (1 ảnh dọc, bãi biển Trường Sa) | /dai-bien-truong-sa-ngu-hanh-son-resort-sun-saphia-residence/ |
 | 09/11/2026 | Sun | 20:00 | (bài web mới 16:30) Chọn căn Sun Saphia Residence: mặt biển, cánh bên, phía sau (1 ảnh dọc) | /chon-day-can-sun-saphia-residence-mat-bien-canh-ben-phia-sau/ |
+| 09/11/2026 | Hoàng Hiệp | 16:30 | (phiên khác) Mặt bằng giá căn hộ Đà Nẵng 11/2026 | /mat-bang-gia-can-ho-da-nang-11-2026/ |
