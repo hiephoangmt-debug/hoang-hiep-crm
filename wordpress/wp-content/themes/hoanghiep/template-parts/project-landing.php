@@ -35,9 +35,21 @@ if ( defined( 'HH_CRM_DIR' ) ) {
 			if ( ! $set ) {
 				return $m[0];
 			}
+			// Giữ tỷ lệ khung theo width/height (không giật bố cục khi ảnh tải xong).
+			if ( preg_match( '/\swidth="(\d+)"/', $m[1] . $m[4], $wm ) && preg_match( '/\sheight="(\d+)"/', $m[1] . $m[4], $hm ) && false === stripos( $m[1] . $m[4], 'style=' ) ) {
+				$m[4] .= ' style="--ar:' . $wm[1] . '/' . $hm[1] . '"';
+			}
 			// Màn hình ≤ 900px: bản WebP 1200px; máy tính: ảnh gốc.
 			return '<picture class="hh-pic"><source media="(max-width: 900px)" type="image/webp" srcset="' . explode( ' ', $set[0] )[0] . '"><img' . $m[1] . ' src="{{HH_CRM_URL}}' . $m[2] . '.' . $m[3] . '"' . $m[4] . '></picture>';
 		},
+		$hh_body
+	);
+}
+// Nền mờ phía sau ảnh đầu trang (--bg:url(…)): ảnh đã làm mờ nên dùng bản WebP 1200px thay file gốc.
+if ( defined( 'HH_CRM_DIR' ) ) {
+	$hh_body = preg_replace_callback(
+		"#--bg:url\\('\\{\\{HH_CRM_URL\\}\\}(img/[^']+?)\\.(jpe?g|png)'\\)#i",
+		static fn( $m ) => is_file( HH_CRM_DIR . $m[1] . '.w1200.webp' ) ? "--bg:url('{{HH_CRM_URL}}" . $m[1] . ".w1200.webp')" : $m[0],
 		$hh_body
 	);
 }

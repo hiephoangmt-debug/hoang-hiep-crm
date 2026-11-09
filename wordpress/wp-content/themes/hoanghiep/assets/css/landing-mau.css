@@ -261,7 +261,7 @@ body.admin-bar header.top{top:32px}
 .hero-view::before{content:"";position:absolute;inset:-40px;background:var(--bg,none) center/cover no-repeat;filter:blur(28px) brightness(.62) saturate(1.1)}
 .hero-view img{position:relative;z-index:1;display:block;margin:0 auto;width:auto!important;max-width:100%;height:auto!important;max-height:min(82vh,820px);object-fit:contain}
 .hero-view figcaption{z-index:2}
-@media (max-width:600px){.hero-view img{width:100%!important;max-height:none;aspect-ratio:auto!important}}
+@media (max-width:600px){.hero-view img{width:100%!important;max-height:none;aspect-ratio:var(--ar,auto)!important}}
 /* Bảng trên trang dự án: điện thoại hiện đủ cột (không ẩn cột 3 như mẫu The Poet), cột cuối được xuống dòng. */
 .tbl td:last-child{white-space:normal}
 .tbl .num{white-space:nowrap}
