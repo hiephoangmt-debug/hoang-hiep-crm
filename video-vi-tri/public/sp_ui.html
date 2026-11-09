@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><title>Lớp chữ video giới thiệu Sun Saphia</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  html,body{margin:0;background:transparent;overflow:hidden}
+  #stage{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:'Be Vietnam Pro',sans-serif;color:#fff}
+  .shT{position:absolute;left:0;right:0;top:0;height:420px;background:linear-gradient(rgba(10,6,20,.62),rgba(10,6,20,0))}
+  .shB{position:absolute;left:0;right:0;top:1060px;height:860px;background:linear-gradient(rgba(10,6,20,0),rgba(10,6,20,.55) 40%,rgba(10,6,20,.78))}
+  .disc{position:absolute;right:28px;top:30px;font-weight:600;font-size:24px;color:rgba(255,255,255,.85);padding:6px 14px;border-radius:10px;background:rgba(0,0,0,.28)}
+  .brand{position:absolute;left:28px;top:24px}
+  .badge{display:inline-flex;align-items:center;gap:10px;padding:6px 18px 6px 6px;border-radius:999px;background:rgba(8,22,46,.75);border:2px solid #FF7A1A;font-weight:900;font-size:26px}
+  .badge .ph{width:34px;height:34px;border-radius:50%;background:#FF7A1A;display:grid;place-items:center}
+  .badge i{font-style:normal;font-weight:700;font-size:22px;color:#FFB547}
+  .tati{background:#fff;border-radius:14px;padding:8px 14px}.tati img{display:block;width:210px}
+  .wm{position:absolute;left:0;right:0;top:940px;text-align:center;font-weight:800;font-size:34px;letter-spacing:8px;color:rgba(255,255,255,.14)}
+  .blk{position:absolute;left:60px;right:60px;text-align:center;opacity:0}
+  .hook{top:300px}
+  .hook .a{font-weight:800;font-size:46px;line-height:1.2;text-shadow:0 6px 24px rgba(0,0,0,.7)}
+  .hook .b{font-weight:900;font-size:150px;line-height:1;color:#FFB547;margin-top:18px;text-shadow:0 8px 40px rgba(255,140,40,.55)}
+  .hook .c{font-weight:900;font-size:56px;margin-top:6px;text-shadow:0 6px 24px rgba(0,0,0,.7)}
+  .hook .d{font-weight:600;font-size:26px;color:rgba(255,255,255,.85);margin-top:10px}
+  .cap{top:190px}
+  .cap .k{display:inline-block;font-weight:800;font-size:28px;letter-spacing:6px;color:#7FF2E0;padding:6px 16px;border-radius:10px;background:rgba(0,0,0,.35)}
+  .cap .h{font-weight:900;font-size:64px;line-height:1.1;margin-top:12px;text-shadow:0 6px 26px rgba(0,0,0,.75)}
+  .cap .h em{font-style:normal;color:#FFB547}
+  .cap .s{font-weight:700;font-size:32px;margin-top:10px;color:rgba(255,255,255,.92);text-shadow:0 4px 16px rgba(0,0,0,.8)}
+  .tiles{position:absolute;left:60px;right:60px;top:200px;display:grid;gap:18px;opacity:0}
+  .tile{display:flex;align-items:center;gap:22px;padding:20px 26px;border-radius:22px;background:rgba(12,10,26,.78);border:2px solid rgba(255,181,71,.8);box-shadow:0 14px 34px rgba(0,0,0,.45)}
+  .tile b{font-weight:900;font-size:64px;color:#FFB547;min-width:250px}
+  .tile span{font-weight:700;font-size:32px;line-height:1.25}
+  .tile small{display:block;font-weight:600;font-size:24px;color:rgba(255,255,255,.7)}
+  .sub{position:absolute;left:50px;right:50px;top:1250px;text-align:center}
+  .sub span{display:inline-block;max-width:960px;padding:12px 26px;border-radius:18px;background:rgba(0,0,0,.55);font-weight:800;font-size:48px;line-height:1.22;text-shadow:0 2px 6px rgba(0,0,0,.6)}
+  .sub em{font-style:normal;color:#FFC86B}
+  .cta{position:absolute;left:0;right:0;top:250px;text-align:center;opacity:0}
+  .cta .k{font-weight:800;font-size:34px;letter-spacing:8px;color:#FFB547}
+  .cta .h{font-weight:900;font-size:104px;line-height:1.02;margin-top:8px;text-shadow:0 8px 40px rgba(0,0,0,.7)}
+  .cta .h em{font-style:normal;color:#FFB547}
+  .btn{position:absolute;left:50%;top:1420px;transform:translateX(-50%);white-space:nowrap;padding:22px 46px;border-radius:999px;background:linear-gradient(90deg,#FF7A1A,#FFB547);font-weight:900;font-size:46px;color:#1A0E05;box-shadow:0 0 0 6px rgba(255,181,71,.35),0 14px 40px rgba(255,122,26,.55);opacity:0}
+  .zalo{position:absolute;left:0;right:0;top:1538px;text-align:center;font-weight:800;font-size:36px;opacity:0;text-shadow:0 3px 12px rgba(0,0,0,.8)}
+  .arrow{position:absolute;left:50%;top:1600px;margin-left:-40px;width:80px;height:110px;opacity:0}
+</style></head><body>
+<div id="stage">
+  <div class="shT"></div><div class="shB"></div>
+  <div class="disc">Phối cảnh minh họa</div>
+  <div class="brand" id="brand"></div>
+  <div class="wm" id="wm"></div>
+  <div class="blk hook" id="hook"><div class="a">Căn hộ mặt biển đầu tiên<br>của Sun Group tại Đà Nẵng</div><div class="b">~450 TRIỆU</div><div class="c">ĐẾN KHI NHẬN NHÀ</div><div class="d">(dự kiến · Studio ~1,8 tỷ, đóng ~25%)</div></div>
+  <div class="blk cap" id="c_tower"><div class="k">SUN SAPHIA RESIDENCE</div><div class="h">Tòa tháp <em>30 tầng</em><br>ngay biển Sơn Thủy</div></div>
+  <div class="blk cap" id="c_orbit"><div class="k">VỊ TRÍ</div><div class="h">Ra biển chỉ <em>hơn 300 m</em></div><div class="s">Biển phía trước · Ngũ Hành Sơn & thành phố phía sau</div></div>
+  <div class="blk cap" id="c_infra"><div class="k">HẠ TẦNG</div><div class="h">Mở rộng <em>trục biển</em></div><div class="s">Công viên <b style="color:#7FF2A8">2,45 ha</b> (đã phê duyệt) nối thẳng ra bãi tắm</div></div>
+  <div class="blk cap" id="c_conn"><div class="k">KẾT NỐI</div><div class="h">Đường sắt đô thị<br><em>Sân bay – Hội An</em></div><div class="s">Đang đề xuất · ga dự kiến cách ~500 m</div></div>
+  <div class="tiles" id="tiles">
+    <div class="tile"><b>~1,8 tỷ</b><span>Studio dự kiến từ<small>giá dự kiến, chờ công bố chính thức</small></span></div>
+    <div class="tile"><b>~25%</b><span>Đóng đến khi nhận nhà<small>theo chính sách dự kiến</small></span></div>
+    <div class="tile"><b>70%</b><span>Vay ngân hàng<small>hỗ trợ lãi suất tới 24 tháng</small></span></div>
+  </div>
+  <div class="cta" id="cta"><div class="k">SUN SAPHIA RESIDENCE</div><div class="h">MỞ BÁN<br><em>05/12/2026</em></div></div>
+  <div class="sub" id="sub"><span></span></div>
+  <div class="btn" id="btn">Bình luận "GIÁ" để nhận bảng giá</div>
+  <div class="zalo" id="zalo"></div>
+  <svg class="arrow" id="arrow" viewBox="0 0 80 110"><path d="M40 6v80M12 62l28 30 28-30" stroke="#FFB547" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<script src="sp_time.js"></script>
+<script>
+const Q = new URLSearchParams(location.search), BR = Q.get('brand') || 'hh';
+const $ = id => document.getElementById(id), clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const PH = '<span class="ph"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="#fff"/></svg></span>';
+if (BR === 'hh') { $('brand').innerHTML = `<div class="badge">${PH}0904 567 009 <i>Hoàng Hiệp</i></div>`; $('wm').textContent = 'HOÀNG HIỆP · 0904 567 009'; $('zalo').innerHTML = 'hoặc nhắn Zalo <b style="color:#FFB547">0904 567 009</b>'; }
+else { $('zalo').textContent = 'hoặc nhắn tin để giữ suất căn view biển'; }   // bản sạch: không logo, không số điện thoại
+const S = SPT.sections, T = SPT.total;
+// phụ đề: [mục, phần trăm bắt đầu, phần trăm kết thúc, chữ]
+const SUBS = [
+  ['hook', 0, .55, 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng –'], ['hook', .55, 1, 'mà chỉ cần khoảng <em>450 triệu</em>?'],
+  ['tower', .05, .45, 'Đây là <em>Sun Saphia Residence</em> –'], ['tower', .45, .98, 'tòa tháp 30 tầng ngay bãi biển Sơn Thủy.'],
+  ['orbit', .02, .25, 'Phía trước là biển'], ['orbit', .25, .5, 'và dải resort cao cấp.'], ['orbit', .52, .78, 'Quay lại là Ngũ Hành Sơn'], ['orbit', .78, .99, 'và cả thành phố.'],
+  ['infra', .02, .45, 'Trục biển Võ Nguyên Giáp – Trường Sa sắp mở rộng,'], ['infra', .45, .72, 'công viên <em>2,45 ha</em> phía trước'], ['infra', .72, .99, 'nối thẳng ra bãi tắm.'],
+  ['connect', .02, .36, 'Tuyến đường sắt sân bay – Hội An đang được đề xuất,'], ['connect', .36, .6, 'ga cách dự án chỉ khoảng <em>500 m</em>.'], ['connect', .6, .99, 'Sân bay 15 phút, cầu Rồng 15 phút, Hội An 30 phút.'],
+  ['value', .03, .33, 'Studio dự kiến chỉ từ <em>1,8 tỷ</em>,'], ['value', .33, .62, 'đóng <em>25%</em> đến khi nhận nhà,'], ['value', .62, .97, 'vay 70% được hỗ trợ lãi tới 24 tháng.'],
+  ['cta', .03, .2, 'Mở bán ngày <em>05/12</em>.'], ['cta', .2, .5, 'Bình luận <em>"GIÁ"</em> để nhận bảng giá'], ['cta', .5, .78, 'và giữ suất căn view biển đẹp trước.'],
+].map(([k, a, b, t]) => [S[k][0] + (S[k][1] - S[k][0]) * a, S[k][0] + (S[k][1] - S[k][0]) * b, t]);
+const subEl = $('sub').firstElementChild; let cur = '';
+function fade(el, t, a, b, d = .35) { const v = Math.min(clamp((t - a) / d), clamp((b - t) / d)); el.style.opacity = v.toFixed(3); return v; }
+window.renderSig = f => {
+  const t = f / 30;
+  const hv = fade($('hook'), t, -1, S.hook[1] - .1); $('hook').style.transform = `scale(${(1.15 - .15 * Math.min(1, t / .5)).toFixed(3)})`;
+  fade($('c_tower'), t, S.tower[0] + .3, S.tower[1] - .2);
+  fade($('c_orbit'), t, S.orbit[0] + .3, S.orbit[1] - .2);
+  fade($('c_infra'), t, S.infra[0] + .3, S.infra[1] - .2);
+  fade($('c_conn'), t, S.connect[0] + .3, S.connect[1] - .2);
+  fade($('tiles'), t, S.value[0] + .3, S.value[1] - .2);
+  [...$('tiles').children].forEach((el, i) => { const k = clamp((t - S.value[0] - .4 - i * 1.6) / .4); el.style.opacity = k; el.style.transform = `translateX(${((1 - k) * 80).toFixed(1)}px)`; });
+  fade($('cta'), t, S.cta[0] + .3, T + 9);
+  const bt = clamp((t - S.cta[0] - 2.2) / .4); const pulse = 1 + .05 * Math.sin(t * 7);
+  $('btn').style.opacity = bt; $('btn').style.transform = `translateX(-50%) scale(${(pulse * (.7 + .3 * bt)).toFixed(3)})`;
+  $('btn').style.filter = `brightness(${(1 + .25 * Math.max(0, Math.sin(t * 7))).toFixed(3)})`;
+  $('zalo').style.opacity = clamp((t - S.cta[0] - 3.2) / .4);
+  $('arrow').style.opacity = clamp((t - S.cta[0] - 3.6) / .4); $('arrow').style.transform = `translateY(${(Math.abs(Math.sin(t * 4)) * 26).toFixed(1)}px)`;
+  const s = SUBS.find(x => t >= x[0] && t < x[1]);
+  // khi đang hiện nút CTA thì đưa phụ đề lên trên
+  $('sub').style.top = t > S.cta[0] + 2 ? '1250px' : '1250px';
+  if (!s) { subEl.style.opacity = 0; } else { if (s[2] !== cur) { subEl.innerHTML = s[2]; cur = s[2]; } subEl.style.opacity = Math.min(clamp((t - s[0]) / .15), clamp((s[1] - t) / .12)); }
+  return true;
+};
+document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 1 : new Promise(r => i.onload = i.onerror = r)))).then(() => { window.renderSig(0); window.READY = true; });
+</script></body></html>

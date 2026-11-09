@@ -46,7 +46,7 @@
   map.addLayer({ id: 'sand', type: 'fill', source: 'sand', paint: { 'fill-color': P.sand, 'fill-opacity': .9 } });
   map.addLayer({ id: 'water', type: 'fill', source: 'water', paint: { 'fill-color': P.water } });
   map.addLayer({ id: 'coast-glow', type: 'line', source: 'ocean', paint: { 'line-color': P.coast, 'line-width': ['interpolate', ['linear'], ['zoom'], 10, 4, 16, 26], 'line-blur': ['interpolate', ['linear'], ['zoom'], 10, 4, 16, 24], 'line-opacity': .35 } });
-  map.addLayer({ id: 'coast', type: 'line', source: 'ocean', paint: { 'line-color': '#DCE8FF', 'line-width': ['interpolate', ['linear'], ['zoom'], 10, .8, 16, 2.4], 'line-opacity': .8 } });
+  map.addLayer({ id: 'coast', type: 'line', source: 'ocean', paint: { 'line-color': P.coastLine || '#DCE8FF', 'line-width': ['interpolate', ['linear'], ['zoom'], 10, .8, 16, 2.4], 'line-opacity': .8 } });
 
   const roadW = (lo, hi) => ['interpolate', ['exponential', 1.6], ['zoom'], 10, lo, 17, hi];
   map.addLayer({ id: 'roads-minor', type: 'line', source: 'roads', filter: ['<=', ['get', 'r'], 1], minzoom: 12.5,
@@ -54,13 +54,13 @@
     paint: { 'line-color': P.roadMinor, 'line-width': roadW(.3, 5), 'line-opacity': ['interpolate', ['linear'], ['zoom'], 12.5, 0, 13.5, .55] } });
   map.addLayer({ id: 'roads-mid', type: 'line', source: 'roads', filter: ['==', ['get', 'r'], 2],
     layout: { 'line-cap': 'round', 'line-join': 'round' },
-    paint: { 'line-color': '#C9D7EE', 'line-width': roadW(.5, 9), 'line-opacity': .7 } });
+    paint: { 'line-color': P.roadMid || '#C9D7EE', 'line-width': roadW(.5, 9), 'line-opacity': .7 } });
   map.addLayer({ id: 'roads-major-glow', type: 'line', source: 'roads', filter: ['>=', ['get', 'r'], 3],
     layout: { 'line-cap': 'round', 'line-join': 'round' },
-    paint: { 'line-color': '#9CC1FF', 'line-width': roadW(4, 46), 'line-blur': roadW(4, 36), 'line-opacity': .22 } });
+    paint: { 'line-color': P.roadGlow || '#9CC1FF', 'line-width': roadW(4, 46), 'line-blur': roadW(4, 36), 'line-opacity': .22 } });
   map.addLayer({ id: 'roads-major', type: 'line', source: 'roads', filter: ['>=', ['get', 'r'], 3],
     layout: { 'line-cap': 'round', 'line-join': 'round' },
-    paint: { 'line-color': '#FFFFFF', 'line-width': roadW(.9, 14), 'line-opacity': .92 } });
+    paint: { 'line-color': P.roadMajor || '#FFFFFF', 'line-width': roadW(.9, 14), 'line-opacity': .92 } });
 
   // Ranh giới Hội An phát sáng
   map.addLayer({ id: 'hoian-fill', type: 'fill', source: 'hoian', paint: { 'fill-color': P.orange, 'fill-opacity': 0 } });
@@ -147,6 +147,7 @@
     train: '<path d="M7 3h10a3 3 0 0 1 3 3v9a3 3 0 0 1-2 2.8l1.5 2.2h-2.4L16 18H8l-1.1 2H4.5L6 17.8A3 3 0 0 1 4 15V6a3 3 0 0 1 3-3zm-1 4v4h12V7H6zm2 7.5a1.5 1.5 0 1 0 0 .01zm8 0a1.5 1.5 0 1 0 0 .01z" fill="#fff"/>',
     bridge: '<path d="M2 17h20v2H2zm2-2v-4a8 8 0 0 1 16 0v4h-2v-4a6 6 0 0 0-12 0v4z" fill="#fff"/>',
     tree: '<path d="M12 2l6 8h-3l4 6h-5v6h-4v-6H5l4-6H6z" fill="#fff"/>',
+    road: '<path d="M8 3h2l-1.6 18H6.4L8 3zm6 0h2l1.6 18h-2L14 3zm-2.6 2h1.2v3h-1.2V5zm0 5h1.2v4h-1.2v-4zm0 6h1.2v4h-1.2v-4z" fill="#fff"/>',
     star: '<path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z" fill="#fff"/>',
   };
   const el = (html, cls) => { const d = document.createElement('div'); if (cls) d.className = cls; d.innerHTML = html; d.style.opacity = 0; ui.appendChild(d); return d; };
@@ -164,8 +165,10 @@
       e._el = el(e.html, 'title'); e._el.style.top = (e.y ?? 300) + 'px';
     } else if (e.type === 'chip') {
       e._el = el(`<div class="n">${e.n}</div><div class="l">${e.text}<span>${e.sub || ''}</span></div>`, 'chip');
+    } else if (e.type === 'route' && e.head) {
+      e._head = el('<div class="hd-ring"></div><div class="hd-dot"></div>', 'head');
     } else if (e.type === 'route' && e.plane) {
-      e._plane = el(`<svg viewBox="0 0 24 24" width="86" height="86">${ICONS.plane}</svg>`); e._plane.id = 'plane';
+      e._plane = el(`<svg viewBox="0 0 24 24" width="86" height="86">${ICONS[e.icon || 'plane']}</svg>`); e._plane.id = 'plane';
     } else if (e.type === 'stats') {
       e._el = el(e.items.map(it => `<div class="st"><div class="v">${it.text ?? '0'}</div><div class="u">${it.unit}</div><div class="l">${it.label || ''}</div></div>`).join(''), 'stats');
       e._el.style.top = (e.y ?? 1180) + 'px';
@@ -241,7 +244,8 @@
         setP('hoian-glow', 'line-opacity', +(o * pulse * .9).toFixed(3));
         setP('hoian-line', 'line-opacity', +o.toFixed(3));
       } else if (e.type === 'route') {
-        const o = vis(f, e.in, e.out, 8, 14), p = E.inOut(prog(f, e.in, e.dur));
+        const o = vis(f, e.in, e.out, 8, 14); if (e.widen) setP(e._id, 'line-width', +(e.widen[0] + (e.widen[1] - e.widen[0]) * E.inOut(prog(f, e.in + e.dur, 50))).toFixed(2)); const p = e.track && window.TUYEN_KM ? clamp(window.TUYEN_KM[Math.min(f, window.TUYEN_KM.length - 1)] / window.TUYEN_KM[window.TUYEN_KM.length - 1]) : E.inOut(prog(f, e.in, e.dur));
+        e._p = p;
         setP(e._id, 'line-opacity', +o.toFixed(3));
         setP(e._id + '-glow', 'line-opacity', +(o * .5).toFixed(3));
         const key = p.toFixed(4);
@@ -306,6 +310,13 @@
         e._el.style.transform = `translateY(${y.toFixed(1)}px)`;
         const rule = e._el.querySelector('.rule');
         if (rule) rule.style.transform = `scaleX(${E.outQuint(clamp((f - e.in - 6) / 24)).toFixed(3)})`;
+      } else if (e.type === 'route' && e._head) {
+        const o = vis(f, e.in, e.out ?? 1e9, 8, 12) * (f < 1100 ? 1 : clamp((1130 - f) / 30));
+        e._head.style.opacity = o.toFixed(3);
+        if (o <= 0) continue;
+        const a = turf.along(e._line, Math.max(0.001, e._len * (e._p ?? 0))).geometry.coordinates, pa = map.project(a);
+        e._head.style.transform = `translate(${pa.x.toFixed(1)}px, ${pa.y.toFixed(1)}px)`;
+        e._head.children[0].style.transform = `scale(${(1 + (f % 30) / 30 * 1.6).toFixed(3)})`; e._head.children[0].style.opacity = (1 - (f % 30) / 30).toFixed(3);
       } else if (e.type === 'route' && e._plane) {
         const o = vis(f, e.in + 2, e.out, 6, 12) * (prog(f, e.in, e.dur) < 1 ? 1 : 0.0);
         e._plane.style.opacity = o;
