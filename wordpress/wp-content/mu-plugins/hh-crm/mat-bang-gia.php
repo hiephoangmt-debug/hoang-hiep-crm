@@ -85,7 +85,9 @@ function hh_mat_bang_gia_for( $slug, $n = 5 ) {
 	if ( ! $me ) {
 		return null;
 	}
-	$mid = ( $me[2] + $me[3] ) / 2;
+	// Không đưa vào phần so sánh: khoảng giá quá rộng (Furama Condotel 59 – 155).
+	$rows = array_values( array_filter( $rows, static fn( $r ) => $r === $me || 'ariyana-beach-resort-suites-da-nang' !== $r[0] ) );
+	$mid  = ( $me[2] + $me[3] ) / 2;
 	usort( $rows, static fn( $a, $b ) => abs( ( $a[2] + $a[3] ) / 2 - $mid ) <=> abs( ( $b[2] + $b[3] ) / 2 - $mid ) );
 	$near = array_slice( $rows, 0, $n );
 	usort( $near, static fn( $a, $b ) => ( $b[2] + $b[3] ) <=> ( $a[2] + $a[3] ) );
