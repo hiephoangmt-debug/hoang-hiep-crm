@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.98** + plugin Hoàng Hiệp CRM **2.20.225**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.98** + plugin Hoàng Hiệp CRM **2.20.226**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.226 (09/11/2026)
+
+- **Grand Marina Da Nang (trang mới, Liên Chiểu – Hải Vân):** tòa 34 tầng, 3 hầm của BNC Land trên đường Nguyễn Tất Thành; 379 căn đủ điều kiện bán (CV 17683/SXD-QLN); pháp lý (QĐ 151/QĐ-UBND 15/01/2025, QĐ 3023/QĐ-UBND 08/7/2026); 34 ảnh: 14 phối cảnh – tiện ích, 13 mặt bằng tầng, 7 mặt bằng căn 1PN – 3PN (41 – 84 m², đã cắt cột có logo đơn vị phân phối và mã căn). Giá: Liên hệ.
+- **Peninsula Private:** 33 ảnh (10 phối cảnh, 15 mặt bằng tầng đã xóa logo đơn vị phân phối, 8 ảnh tiến độ thực tế 10/2026 đã cắt logo); pháp lý theo QĐ 1476/QĐ-UBND 15/7/2026 (căn hộ dịch vụ – khách sạn kết hợp thương mại dịch vụ, không có tính chất ở; HSSDĐ 12,1; MĐXD 52,27%; 40 tầng + tum, 3 hầm); sửa ô sở hữu (trước ghi "sở hữu lâu dài, sổ hồng từng căn"); bỏ tên đơn vị phân phối khỏi mô tả, điểm nổi bật, tiến độ, bài giới thiệu, nguồn.
+- Cài: Nhập nhanh → upload → "Nhập / cập nhật dữ liệu" → **"Tải ảnh ngay"** → LiteSpeed Purge All.
 
 ## Có gì mới – plugin 2.20.225 (09/11/2026)
 
