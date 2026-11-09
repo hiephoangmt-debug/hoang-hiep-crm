@@ -1,4 +1,4 @@
-# Kiểm tra trang thật toa-f2-ads sau khi xuất bản: chữ cũ đã hết, SFT_ADS.lead đúng.
+# Kiểm tra 7 trang FourS sau khi xuất bản: chữ cũ đã hết, có ưu đãi mới; thử chatbot + bảng tính.
 name: Kiem tra trang ADS F2
 on:
   push:
@@ -8,26 +8,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          u="https://www.sun-fours-tower.com/toa-f2-ads?v=$(date +%s)"
-          curl -sSL -A "Mozilla/5.0" "$u" -o p.html -w "== %{http_code} %{size_download} bytes\n"
-          for s in "26/10" "07/11" "15,5" "tháng 10" "trong tháng 11" "25/11/2026" "Căn chính sách mới" "không cộng dồn" "k61uCK206ZAdEJO0haAD" "2026-11-25T23:59:00+07:00"; do echo "$s: $(grep -o "$s" p.html | wc -l)"; done
-          grep -o '<meta name="description"[^>]*>' p.html
+          for p in "" toa-f2 bang-tinh-f2 phap-ly gio-hang hoi-dap can-ho-bien-da-nang; do
+            curl -sSL -A "Mozilla/5.0" "https://www.sun-fours-tower.com/$p?v=$(date +%s)" -o p.html
+            echo "/$p: $(wc -c <p.html)B | 26/10=$(grep -o '26/10' p.html|wc -l) 07/11=$(grep -o '07/11' p.html|wc -l) 15,5=$(grep -o '15,5' p.html|wc -l) | 25/11/2026=$(grep -o '25/11/2026' p.html|wc -l) 'Căn chính sách mới'=$(grep -o 'Căn chính sách mới' p.html|wc -l) 2026-11-25=$(grep -o '2026-11-25T23:59' p.html|wc -l)"
+          done
       - run: |
           npm i playwright@1 >/dev/null 2>&1 && npx playwright install chromium >/dev/null 2>&1
           cat > t.js <<'JS'
-          const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await b.newPage();const err=[];p.on('pageerror',e=>err.push(e.message));
-          await p.goto('https://www.sun-fours-tower.com/toa-f2-ads',{waitUntil:'networkidle'});await p.waitForTimeout(2000);
-          console.log('SFT_ADS =',JSON.stringify(await p.evaluate(()=>typeof SFT_ADS!=='undefined'?SFT_ADS:null)));
-          console.log('days =',await p.evaluate(()=>[...document.querySelectorAll('[data-days]')].map(e=>e.textContent).join(',')));
-          console.log('topbar =',await p.evaluate(()=>document.querySelector('.topbar')?.innerText));
-          await p.route(/script\.google\.com|api\.telegram|ladipage\.(net|com)\/.*(form|lead)/i, r=>r.fulfill({status:200,body:'{}'}));
-          await p.click('#chatBtn');await p.waitForTimeout(1500);
-          for (const q of ['Có sổ đỏ không?','Chiết khấu bao nhiêu?','Căn ký ôm áp dụng chính sách nào?','Ưu đãi đến khi nào?','giá căn 2PN bao nhiêu']) {
-            const n=await p.locator('#chatBody > *').count();
-            await p.fill('#chatIn',q);await p.press('#chatIn','Enter');await p.waitForTimeout(9000);
-            const t=await p.evaluate(n=>[...document.querySelectorAll('#chatBody > *')].slice(n).map(e=>e.innerText).join(' | '),n);
-            console.log('Q:',q,'\n  A:',t.slice(0,500));
-          }
-          console.log('=== TOÀN BỘ CHAT ===\n'+await p.innerText('#chatBody'));console.log('JS errors =',err);await b.close();})();
+          const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();
+          for (const path of ['','toa-f2','hoi-dap']) { const p=await b.newPage();const err=[];p.on('pageerror',e=>err.push(e.message));
+            await p.route(/script\.google\.com/,r=>r.fulfill({status:200,body:'{}'}));
+            await p.goto('https://www.sun-fours-tower.com/'+path,{waitUntil:'networkidle'});await p.waitForTimeout(1500);
+            await p.click('#chatBtn');await p.waitForTimeout(1200);
+            await p.fill('#chatIn','Chiết khấu bao nhiêu?');await p.press('#chatIn','Enter');await p.waitForTimeout(9000);
+            const t=await p.innerText('#chatBody');console.log('/'+path,'| days:',await p.evaluate(()=>[...document.querySelectorAll('[data-days]')].map(e=>e.textContent).join(',')),'| err:',err.length?err:'0');
+            console.log('   bot:',(t.match(/Có 2 loại căn[^\n]{0,160}/)||['(không thấy câu trả lời mới)'])[0]); await p.close(); }
+          const p=await b.newPage();await p.route(/script\.google\.com/,r=>r.fulfill({status:200,body:'{}'}));
+          await p.goto('https://www.sun-fours-tower.com/bang-tinh-f2',{waitUntil:'networkidle'});await p.waitForTimeout(1500);
+          const st=()=>p.evaluate(()=>[...document.querySelectorAll('input[name=plan]')].filter(r=>r.value.startsWith('tts')).map(r=>r.disabled).join(','));
+          console.log('bang-tinh mới: tts disabled=',await st());await p.check('input[name=pol][value=cu]');await p.waitForTimeout(400);console.log('bang-tinh cũ: tts disabled=',await st());
+          await b.close();})();
           JS
           node t.js
