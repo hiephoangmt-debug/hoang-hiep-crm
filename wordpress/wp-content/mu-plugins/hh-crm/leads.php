@@ -231,7 +231,11 @@ function hh_handle_lead() {
 	if ( ! $ref_id && ! empty( $src['url'] ) ) {
 		$ref_id = hh_src_post_id( $src['url'] ); // Form không ghi dự án: lấy theo trang khách đang xem.
 	}
-	$spam = function_exists( 'hh_is_real_phone' ) && ! hh_is_real_phone( $phone );
+	// Số không phải Việt Nam (bot spam kiểu "RobertVat 8751…"): báo thành công cho bot nhưng KHÔNG lưu, không báo.
+	if ( function_exists( 'hh_is_real_phone' ) && ! hh_is_real_phone( $phone ) ) {
+		$go( 'ok' );
+	}
+	$spam = false;
 
 	$lead_id = wp_insert_post(
 		array(
@@ -346,3 +350,28 @@ function hh_lead_mail_page() {
 	</div>
 	<?php
 }
+
+/** Dọn một lần: chuyển vào thùng rác các khách spam đã lưu trước đây (số không phải Việt Nam). Khôi phục được trong Thùng rác. */
+add_action(
+	'admin_init',
+	static function () {
+		if ( get_option( 'hh_lead_spam_don_v1' ) || ! current_user_can( 'delete_others_posts' ) || ! function_exists( 'hh_is_real_phone' ) ) {
+			return;
+		}
+		$ids = get_posts(
+			array(
+				'post_type'      => 'khach-hang',
+				'post_status'    => 'any',
+				'posts_per_page' => 500,
+				'fields'         => 'ids',
+			)
+		);
+		foreach ( $ids as $id ) {
+			$phone = (string) get_post_meta( $id, 'hh_phone', true );
+			if ( get_post_meta( $id, 'hh_spam', true ) || ( '' !== $phone && ! hh_is_real_phone( $phone ) ) ) {
+				wp_trash_post( $id );
+			}
+		}
+		update_option( 'hh_lead_spam_don_v1', 1, false );
+	}
+);

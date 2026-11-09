@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.0** + plugin Hoàng Hiệp CRM **2.20.230**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.0** + plugin Hoàng Hiệp CRM **2.20.231**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.231 (09/11/2026): chặn khách spam
+
+- Form để lại thông tin: số điện thoại không phải Việt Nam (bot kiểu "RobertVat 8751…") không còn được lưu vào **Khách hàng** nữa (trước đây vẫn lưu, gắn "Không tiềm năng").
+- Lần đầu mở trang quản trị sau khi cập nhật: các khách spam cũ được chuyển vào **Thùng rác** (khôi phục được nếu cần).
 
 ## Có gì mới – plugin 2.20.230 (09/11/2026)
 
