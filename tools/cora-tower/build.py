@@ -111,7 +111,7 @@ UNIT_TYPES = [
     ("2PN", "60,6 – 71,3 m²", "66,1 – 78,0 m²", "Gia đình nhỏ, nhiều căn góc"),
     ("2PN+1 (tòa A2)", "73,1 m²", "79,3 m²", "Gia đình 4 người, có phòng linh hoạt"),
     ("3PN", "78,9 – 81,8 m²", "85,7 – 89,1 m²", "Gia đình đa thế hệ, mỗi sàn 1 căn"),
-    ("Sân vườn tầng 3", "theo loại căn", "+ sân vườn 10 – 151 m²", "Thích không gian xanh riêng"),
+    ("Sân vườn tầng 3", "theo loại căn", "theo loại căn", "Sân vườn riêng 10 – 151 m²"),
 ]
 PRICES = [  # giỏ hàng (quỹ chung) cập nhật 19/09/2026 – giá đã gồm VAT + KPBT
     ("Studio · Tòa A1", "Tầng 17 · 32,3 m²", "2,60 tỷ"),

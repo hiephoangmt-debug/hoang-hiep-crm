@@ -47,8 +47,9 @@ EXTRA_CSS = """
 .cs-frame{overflow:hidden}
 .cs-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
 .cs-track::-webkit-scrollbar{display:none}
-.cs-slide{flex:0 0 100%;scroll-snap-align:center}
-.cs-portrait .cs-slide{flex:0 0 min(340px,86%)}
+.cs-slide{flex:0 0 560px;scroll-snap-align:start}
+.cs-portrait .cs-slide{flex:0 0 340px}
+@media (max-width:640px){.cs-slide,.cs-portrait .cs-slide{flex-basis:88%}}
 .cs-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
 .cs-cap{margin:0;padding:12px 16px;display:flex;flex-wrap:wrap;gap:4px 12px;justify-content:space-between;align-items:baseline;color:var(--brand);font-size:1rem;border-bottom:1px solid var(--line)}
 .cs-cap span{color:var(--muted);font-size:.9rem}
@@ -58,6 +59,15 @@ EXTRA_CSS = """
 .cs-go{width:46px;height:46px;border-radius:50%;border:0;background:var(--brand);color:#fff;font-size:20px;cursor:pointer}
 .cs-go:hover{background:var(--brand-2)}
 .cs-hint{color:var(--muted);font-size:.9rem;text-align:center}
+.tcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:20px 0}
+.tcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.tc-title{margin:0 0 4px;color:var(--brand);font-size:1.08rem}
+.tc-row{margin:0;display:flex;justify-content:space-between;gap:12px;font-size:.95rem;border-top:1px dashed var(--line);padding-top:8px}
+.tc-row span{color:var(--muted);white-space:nowrap}
+.tc-val{text-align:right;color:var(--ink)}
+.tc-val.price{color:var(--brand-2);font-size:1.1rem}
+.btn.tc-btn{margin-top:6px;padding:10px 16px;font-size:.95rem}
+@media (max-width:900px){.tcards{grid-template-columns:1fr}}
 .plan-stack{display:grid;gap:28px;margin-top:24px}
 .plan-head{margin:32px 0 12px;color:var(--brand);font-size:1.15rem;text-align:center}
 .plan-stack h4{margin:0 0 10px;color:var(--brand);font-size:1.1rem;text-align:center}
@@ -183,6 +193,33 @@ def convert(name):
         state["s"] = state["s"].replace(m.group(0), rep, 1)
     s = state["s"].replace("</body>", CAROUSEL_JS + "\n</body>")
     s = re.sub(r'\sloading="lazy"', "", s)
+    # Wide tables (thead + 3-4 columns) squeeze into unreadable columns in LadiPage's
+    # mobile layout: turn every row into a card with label/value lines.
+    def cards(m):
+        t = m.group(1)
+        if "<thead>" not in t:
+            return m.group(0)
+        head, body = t.split("</thead>", 1)
+        labels = [re.sub(r"<[^>]+>", "", x).strip() for x in re.findall(r"<th[^>]*>(.*?)</th>", head, flags=re.S)]
+        if len(labels) < 3:
+            return m.group(0)
+        out = []
+        for row in re.findall(r"<tr[^>]*>(.*?)</tr>", body, flags=re.S):
+            cells = re.findall(r"<t([dh])([^>]*)>(.*?)</t[dh]>", row, flags=re.S)
+            if not cells:
+                continue
+            title = cells[0][2]
+            lines, btn = [], ""
+            for (tag, attrs, val), lab in zip(cells[1:], labels[1:]):
+                if not lab and "<a " in val:
+                    btn = re.sub(r"<a ", '<a class="btn tc-btn" ', val, count=1)
+                    continue
+                cls = " price" if "price" in attrs else ""
+                lines.append(f'<p class="tc-row"><span>{lab}</span><b class="tc-val{cls}">{val}</b></p>')
+            out.append('<div class="tcard"><h4 class="tc-title">' + title + "</h4>" + "".join(lines) + btn + "</div>")
+        return '<div class="tcards">' + "".join(out) + "</div>"
+    s = re.sub(r'<div class="table-wrap[^"]*">\s*<table>(.*?)</table>\s*</div>', cards, s, flags=re.S)
+    s = re.sub(r'<table>(.*?)</table>', cards, s, flags=re.S)
     # LadiPage only turns <a class="btn"> into clickable buttons (section / link actions);
     # plain text links in the menu, table of contents and footer become dead text.
     def linkify(cls):
