@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.8** + plugin Hoàng Hiệp CRM **2.20.237**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.9** + plugin Hoàng Hiệp CRM **2.20.238**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.238 / giao diện 2.16.9 (09/11/2026): đồng bộ giá & tiêu đề
+
+- Thêm khung trả lời nhanh giá bán cho **FourS F2 – Tháp Mai** (giỏ hàng tòa F2: studio từ 1,98 tỷ…) và **Sun Saphia Residence** (giá dự kiến studio tầng 15, lịch bán 05/12).
+- Trang FourS chính: câu trả lời nêu "từ 1,98 tỷ (tòa F2)", bảng F1/F5 ghi rõ tên bảng – khớp tiêu đề.
+- Tiêu đề Google trang FourS: "Giá bán FourS Tower Đà Nẵng: từ 1,98 tỷ, chính sách T11/2026" (trước: "… T10/2026").
 
 ## Có gì mới – 2.20.237 / giao diện 2.16.8 (09/11/2026): FourS F2 – thanh toán sớm cho căn đã giữ chỗ trước 26/10
 

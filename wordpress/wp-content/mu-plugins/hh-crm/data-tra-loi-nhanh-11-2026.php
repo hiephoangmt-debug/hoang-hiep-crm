@@ -43,6 +43,11 @@ add_filter(
 			if ( isset( $ans[ $p['slug'] ?? '' ] ) ) {
 				$projects[ $i ]['meta']['hh_p_answer'] = $ans[ $p['slug'] ];
 			}
+			// Tiêu đề FourS: tháng cập nhật + cụm "giá bán FourS Tower Đà Nẵng" (người tìm hay gõ).
+			if ( 'fours-tower' === ( $p['slug'] ?? '' ) ) {
+				$projects[ $i ]['meta']['rank_math_title']     = 'Giá bán FourS Tower Đà Nẵng: từ 1,98 tỷ, chính sách T11/2026';
+				$projects[ $i ]['fix_meta']['rank_math_title'] = array_values( array_unique( array_merge( (array) ( $p['fix_meta']['rank_math_title'] ?? array() ), array( 'FourS Tower Đà Nẵng: Giá & Chính sách Tòa F2 T10/2026' ) ) ) );
+			}
 			// FourS F2: căn đã giữ chỗ trước 26/10/2026 vẫn hưởng thanh toán sớm (anh Hiệp xác nhận 09/11/2026).
 			if ( 'fours-tower-f2-thap-mai' === ( $p['slug'] ?? '' ) && ! empty( $p['meta']['hh_p_policy'] ) ) {
 				$cur = (string) $p['meta']['hh_p_policy'];
