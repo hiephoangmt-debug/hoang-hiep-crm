@@ -18,6 +18,24 @@ if ( $hh_file ) {
 	get_template_part( 'template-parts/project-landing-auto' );
 	$hh_body = (string) ob_get_clean();
 }
+// Landing dựng sẵn: chèn ô "Mặt bằng giá" vào cuối mục Giá (hoặc trước mục Chính sách / Thanh toán).
+if ( $hh_file && ! get_query_var( 'hh_landing_sub' ) ) {
+	ob_start();
+	get_template_part( 'template-parts/project-mat-bang-gia' );
+	$hh_mbg = trim( (string) ob_get_clean() );
+	if ( $hh_mbg ) {
+		$hh_css = (string) @file_get_contents( get_theme_file_path( 'assets/css/landing-mau.css' ) ); // phpcs:ignore
+		$hh_css = preg_match_all( '/\.mbg[^{]*\{[^}]*\}/', $hh_css, $hh_mm ) ? implode( '', $hh_mm[0] ) : '';
+		$hh_mbg = '<style>' . $hh_css . '</style><div style="max-width:1120px;margin:0 auto;padding:0 16px">' . $hh_mbg . '</div>';
+		$hh_pos = strpos( $hh_body, 'id="bang-gia"' );
+		$hh_end = false !== $hh_pos ? strpos( $hh_body, '</section>', $hh_pos ) : false;
+		if ( false !== $hh_end ) {
+			$hh_body = substr_replace( $hh_body, $hh_mbg, $hh_end, 0 );
+		} elseif ( preg_match( '/<section[^>]*id="(chinh-sach|thanh-toan)"/', $hh_body, $hh_mm, PREG_OFFSET_CAPTURE ) ) {
+			$hh_body = substr_replace( $hh_body, '<section style="padding:24px 0">' . $hh_mbg . '</section>', $hh_mm[0][1], 0 );
+		}
+	}
+}
 // Ảnh lưu trong plugin (img/…): {{HH_CRM_URL}} → đường dẫn thư mục plugin trên web.
 $hh_body = str_replace( '{{HH_CRM_URL}}', defined( 'HH_CRM_URL' ) ? HH_CRM_URL : '', $hh_body );
 ?><!DOCTYPE html>

@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.96** + plugin Hoàng Hiệp CRM **2.20.222**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.97** + plugin Hoàng Hiệp CRM **2.20.223**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.97 + plugin 2.20.223 (09/11/2026)
+
+- **Ô "Mặt bằng giá căn hộ Đà Nẵng · 11/2026" trên trang từng dự án** (26 dự án và các tòa con như Capital Square, Newtown, FourS F1/F2/F5, Sonata, The Rio): khoảng giá triệu/m², nguồn giá (bảng hàng chủ đầu tư / giá rao / Biggee.vn), thanh so sánh với 4 dự án cùng tầm giá (có link) và link sang bài "Mặt bằng giá căn hộ Đà Nẵng 11/2026". Nằm trong mục Giá (trang landing) hoặc ngay trước mục Giá & chính sách (trang chuẩn); trang landing dựng sẵn FourS Tower, FourS F2, The Poet cũng có.
+- Số liệu sửa một chỗ: `hh-crm/mat-bang-gia.php`.
+- Cài: Nhập nhanh → upload → LiteSpeed Purge All (không cần "Nhập dữ liệu").
 
 ## Có gì mới – plugin 2.20.222 (09/11/2026)
 
