@@ -226,7 +226,12 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
 <?php if ( $hero ) : ?>
 <!-- HERO -->
 <figure class="hero-view" style="--bg:url('<?php echo esc_url( $url( $hero, 'medium' ) ?: $url( $hero, 'full' ) ); ?>')">
-  <img src="<?php echo esc_url( $url( $hero, 'full' ) ); ?>" alt="<?php echo esc_attr( $alt( $hero ) ); ?>" fetchpriority="high" decoding="async">
+  <?php
+	// Ảnh đầu trang: không tải file gốc (có file PNG > 6 MB) – dùng cỡ ≤ 1536px + srcset cho điện thoại, có width/height để không giật bố cục.
+	$hero_src = is_numeric( $hero ) ? wp_get_attachment_image_src( (int) $hero, '1536x1536' ) : false;
+	$hero_set = is_numeric( $hero ) ? wp_get_attachment_image_srcset( (int) $hero, '1536x1536' ) : '';
+	?>
+  <img src="<?php echo esc_url( $hero_src ? $hero_src[0] : $url( $hero, 'full' ) ); ?>"<?php if ( $hero_src ) : ?> width="<?php echo (int) $hero_src[1]; ?>" height="<?php echo (int) $hero_src[2]; ?>"<?php endif; ?><?php if ( $hero_set ) : ?> srcset="<?php echo esc_attr( $hero_set ); ?>" sizes="100vw"<?php endif; ?> alt="<?php echo esc_attr( $alt( $hero ) ); ?>" fetchpriority="high" decoding="async">
   <figcaption><?php echo $e( $cap( $hero ) ); ?></figcaption>
 </figure>
 <?php endif; ?>

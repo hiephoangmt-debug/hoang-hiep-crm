@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.1** + plugin Hoàng Hiệp CRM **2.20.232**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.2** + plugin Hoàng Hiệp CRM **2.20.233**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.233 / giao diện 2.16.2 (09/11/2026): tốc độ điện thoại + IndexNow
+
+- **Ảnh PNG nặng** (phối cảnh Cora 6,6 MB…): các cỡ thu nhỏ chuyển sang WebP, nhẹ hơn 10 – 20 lần. Ảnh tải lên từ nay tự làm; ảnh cũ được xử lý dần mỗi lần mở trang quản trị (vài ảnh/lần). File gốc giữ nguyên.
+- **Ảnh đầu trang dự án** (mẫu tự động): không tải file gốc nữa, dùng cỡ ≤ 1536px có srcset và kích thước cố định → điện thoại tải nhanh, trang không bị giật (Cora: 6,6 MB → vài trăm KB).
+- **Trang Sun Saphia, The Poet**: điện thoại tải bản WebP 1200px (ví dụ 684 KB → khoảng 100 KB); máy tính vẫn ảnh gốc.
+- **IndexNow**: mỗi khi đăng / sửa bài, dự án, tin nhà đất, web tự báo Bing (nguồn của ChatGPT, Copilot), Yandex…; lần đầu mở quản trị sau khi cài gửi toàn bộ đường dẫn. Google không dùng IndexNow – vẫn theo sơ đồ trang.
 
 ## Có gì mới – 2.20.232 / giao diện 2.16.1 (09/11/2026): SEO theo số liệu Google Search Console
 

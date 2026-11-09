@@ -18,6 +18,29 @@ if ( $hh_file ) {
 	get_template_part( 'template-parts/project-landing-auto' );
 	$hh_body = (string) ob_get_clean();
 }
+// Ảnh lớn trong plugin có sẵn bản WebP nhẹ (x.w1200.webp): điện thoại tải bản này.
+if ( defined( 'HH_CRM_DIR' ) ) {
+	$hh_body = preg_replace_callback(
+		'#<img\b([^>]*?)\ssrc="\{\{HH_CRM_URL\}\}(img/[^"]+?)\.(jpe?g|png)"([^>]*)>#i',
+		static function ( $m ) {
+			if ( false !== stripos( $m[1] . $m[4], 'srcset=' ) ) {
+				return $m[0];
+			}
+			$set = array();
+			foreach ( array( 1200 ) as $w ) {
+				if ( is_file( HH_CRM_DIR . $m[2] . '.w' . $w . '.webp' ) ) {
+					$set[] = '{{HH_CRM_URL}}' . $m[2] . '.w' . $w . '.webp ' . $w . 'w';
+				}
+			}
+			if ( ! $set ) {
+				return $m[0];
+			}
+			// Màn hình ≤ 900px: bản WebP 1200px; máy tính: ảnh gốc.
+			return '<picture class="hh-pic"><source media="(max-width: 900px)" type="image/webp" srcset="' . explode( ' ', $set[0] )[0] . '"><img' . $m[1] . ' src="{{HH_CRM_URL}}' . $m[2] . '.' . $m[3] . '"' . $m[4] . '></picture>';
+		},
+		$hh_body
+	);
+}
 // Ảnh lưu trong plugin (img/…): {{HH_CRM_URL}} → đường dẫn thư mục plugin trên web.
 $hh_body = str_replace( '{{HH_CRM_URL}}', defined( 'HH_CRM_URL' ) ? HH_CRM_URL : '', $hh_body );
 ?><!DOCTYPE html>
@@ -28,6 +51,7 @@ $hh_body = str_replace( '{{HH_CRM_URL}}', defined( 'HH_CRM_URL' ) ? HH_CRM_URL :
 <?php wp_head(); ?>
 <?php echo $hh_head; // phpcs:ignore WordPress.Security.EscapeOutput -- CSS của landing dựng sẵn trong giao diện. ?>
 <style id="hh-landing-mobile">
+picture.hh-pic{display:contents}
 /* Đăng nhập (có thanh quản trị WordPress): đầu trang dính ngay dưới thanh, không bị che. */
 body.admin-bar>header.top,body.admin-bar>header#hdr{top:32px}
 @media (max-width:782px){body.admin-bar>header.top,body.admin-bar>header#hdr{top:46px}}
