@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Sông Hàn 3D</title>
-<meta name="description" content="Mô hình 3D chi tiết trung tâm Đà Nẵng hai bờ sông Hàn: 25.000 toà nhà thật, ảnh vệ tinh, cầu Rồng, cầu Trần Thị Lý, Da Nang Downtown tháp 408 m." />
+<meta name="description" content="Mô hình 3D chi tiết trung tâm Đà Nẵng hai bờ sông Hàn: 25.000 toà nhà thật, ảnh vệ tinh, cầu Rồng, cầu Trần Thị Lý, Da Nang Downtown theo quy hoạch 1/500 (tháp 408 m, nhà hát, Sun Wheel), Sun Galaxy Complex." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 <style>
@@ -59,6 +59,10 @@ const MOBILE = Math.min(innerWidth, innerHeight) < 700;
 const [meta, bld, trees] = await Promise.all([fetch('meta.json').then((r) => r.json()), fetch('bld.bin').then((r) => r.arrayBuffer()), fetch('trees.bin').then((r) => r.arrayBuffer())]);
 const LL = (lat, lon) => [(lon - meta.origin[1]) * meta.kx, -(lat - meta.origin[0]) * meta.kz];
 const [bx0, bz0, bx1, bz1] = meta.bounds;
+// điểm đo trên ảnh vệ tinh khu Downtown (ảnh cắt 16.0366–16.047, lưới 0,002°) -> toạ độ
+const SP = (X, Y) => LL(16.040 - (Y - 857) * 0.002 / 245, 108.226 + (X - 823) * 0.002 / 235);
+const MAIN = [545, 1415], WHEEL = SP(1075, 780), PDL = 0.217, RIV = 0.42;   // tháp 408 m; vòng quay; hướng Phan Đăng Lưu, hướng bờ sông
+const CLEAR = [[...MAIN, 80], [...SP(1440, 1075), 40]];   // lán trại tạm trên khu đất tháp -> bỏ
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
 renderer.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.5 : 2));
@@ -93,6 +97,7 @@ const buildings = (() => {
     const n = dv.getUint8(o), tall = dv.getUint8(o + 1), h = dv.getUint16(o + 2, true) / 10, rr = dv.getUint8(o + 4), rg = dv.getUint8(o + 5), rb = dv.getUint8(o + 6); o += 7;
     xs.length = zs.length = 0;
     for (let i = 0; i < n; i++) { xs.push(dv.getInt16(o, true) / 4); zs.push(dv.getInt16(o + 2, true) / 4); o += 4; }
+    if (CLEAR.some(([cx, cz, r]) => Math.hypot(xs[0] - cx, zs[0] - cz) < r)) continue;
     let ar = 0; for (let i = 0; i < n; i++) { const j = (i + 1) % n; ar += xs[i] * zs[j] - xs[j] * zs[i]; }
     const seed = (xs[0] * 7.31 + zs[0] * 3.17) % 1, wp = WALLS[Math.abs(Math.floor(xs[0] + zs[0])) % WALLS.length];
     // tường: pha màu sơn sáng với chút màu mái; nhà cao tầng hơi xanh kính
@@ -156,24 +161,123 @@ const buildings = (() => {
   im.castShadow = true; scene.add(im);
 }
 
-// ---- dự án: Da Nang Downtown – tháp 408 m (khu Công viên Châu Á cũ, đang thi công) ----
-const glassP = new THREE.MeshStandardMaterial({ color: 0x7fa6c4, roughness: 0.1, metalness: 0.6, emissive: 0xffd09a, emissiveIntensity: 0 });
+// ---- dự án: Da Nang Downtown (76,92 ha, Công viên Châu Á cũ) – dựng theo QH 1/500 & phối cảnh sun-danangdowntown.com ----
+// Tháp 408 m (03) ở góc Phan Đăng Lưu – bờ sông; dải tháp cao tầng (01) dọc sông; nhà hát 4.000 chỗ (02) ở mũi phía Bắc;
+// khu thấp tầng (05, 06) quanh hồ cảnh quan; vòng quay Sun Wheel giữ lại. Sun Galaxy Complex 47 tầng ở bờ Đông.
+const nightMats = [];
+const facadeTex = (wall, glass, cols, rows, litP) => {
+  const mk = (lit) => {
+    const c = document.createElement('canvas'); c.width = c.height = 256; const x = c.getContext('2d');
+    x.fillStyle = lit ? '#000' : wall; x.fillRect(0, 0, 256, 256);
+    const cw = 256 / cols, rh = 256 / rows;
+    for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) {
+      const r = Math.abs(Math.sin(i * 12.9898 + j * 78.233) * 43758.5453) % 1;
+      if (lit) { if (r > litP) continue; x.fillStyle = r < litP * 0.3 ? '#ffe7c0' : '#ffbf73'; }
+      else x.fillStyle = glass;
+      x.fillRect(i * cw + cw * 0.08, j * rh + rh * 0.22, cw * 0.84, rh * 0.7);
+    }
+    const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+  };
+  const m = new THREE.MeshStandardMaterial({ map: mk(0), emissiveMap: mk(1), emissive: 0xffffff, emissiveIntensity: 0, roughness: 0.35, metalness: 0.25 });
+  nightMats.push([m, 0.9]); return m;
+};
+// 1 ô ảnh = 4 gian × 4 tầng = 24 m × 13,6 m
+const towerMat = facadeTex('#dcd6c8', '#5d7d96', 4, 4, 0.3), towerMat2 = facadeTex('#c9cfd3', '#47677f', 4, 4, 0.28);
+const lowMat = facadeTex('#efe4cf', '#6b6355', 3, 4, 0.25);
+const glassP = new THREE.MeshStandardMaterial({ color: 0xbfd2de, roughness: 0.15, metalness: 0.5, emissive: 0xffd09a, emissiveIntensity: 0 });
 const goldP = new THREE.MeshStandardMaterial({ color: 0xd8b25e, roughness: 0.3, metalness: 0.7, emissive: 0xffb84a, emissiveIntensity: 0.1 });
-const [dtx, dtz] = LL(16.0393, 108.2275);
-{
-  const g = new THREE.Group(); g.position.set(dtx, 0, dtz); scene.add(g);
-  let y = 0, w = 58;
-  for (let k = 0; k < 4; k++) { const h = 94; const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, w), glassP); m.position.y = y + h / 2; m.castShadow = true; g.add(m); y += h; w *= 0.84;
-    const band = new THREE.Mesh(new THREE.BoxGeometry(w * 1.12, 2.5, w * 1.12), goldP); band.position.y = y; g.add(band); }
-  const sp = new THREE.Mesh(new THREE.ConeGeometry(w * 0.32, 32, 8), goldP); sp.position.y = y + 16; g.add(sp);
-  const t2 = new THREE.Mesh(new THREE.BoxGeometry(40, 165, 30), glassP); t2.position.set(-110, 82, 60); t2.castShadow = true; g.add(t2);
-  const dome = new THREE.Mesh(new THREE.SphereGeometry(32, 32, 12, 0, Math.PI * 2, 0, Math.PI / 2), goldP); dome.scale.y = 0.6; dome.position.set(90, 0, -60); g.add(dome);
+nightMats.push([glassP, 0.22], [goldP, 1.4]);
+function boxUV(w, h, d) {   // hộp có UV theo mét để ô cửa sổ đúng kích thước tầng
+  const g = new THREE.BoxGeometry(w, h, d), uv = g.attributes.uv;
+  for (let f = 0; f < 6; f++) for (let i = 0; i < 4; i++) {
+    const k = f * 4 + i, span = f < 2 ? d : w;
+    if (f === 2 || f === 3) uv.setXY(k, 0.005, 0.005); else uv.setXY(k, uv.getX(k) * span / 24, uv.getY(k) * h / 13.6);
+  }
+  return g;
 }
+const dtG = new THREE.Group(); scene.add(dtG);
+const addM = (geo, mat, x, y, z, ry = 0) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.rotation.y = ry; m.castShadow = m.receiveShadow = true; dtG.add(m); return m; };
+function tower(x, z, w, d, fl, ry, mat = towerMat) {
+  const h = fl * 3.4, hb = h * 0.86;
+  addM(boxUV(w, hb, d), mat, x, hb / 2, z, ry);
+  addM(boxUV(w * 0.86, h - hb, d * 0.86), mat, x, hb + (h - hb) / 2, z, ry);
+  addM(new THREE.BoxGeometry(w * 0.9, 1.2, d * 0.9), goldP, x, hb + 0.6, z, ry);
+  addM(new THREE.BoxGeometry(w * 0.5, 7, d * 0.5), glassP, x, h + 3.5, z, ry);
+}
+// 03 – tháp 69 tầng 408 m: thân thon, chân loe, mặt cắt elip
+const [mx, mz] = MAIN;
+{
+  const pts = [];
+  for (let i = 0; i <= 60; i++) { const y = (i / 60) * 396; pts.push(new THREE.Vector2(20 + 6 * (1 - y / 396) + 32 * Math.exp(-y / 30), y)); }
+  pts.push(new THREE.Vector2(0, 396));
+  const g = new THREE.LatheGeometry(pts, 48), uv = g.attributes.uv;
+  for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * 6, uv.getY(i) * 396 / 13.6);
+  g.scale(1, 1, 0.72);
+  const t = addM(g, towerMat2, mx, 0, mz, PDL);
+  const crown = addM(new THREE.CylinderGeometry(14, 21, 10, 32), glassP, mx, 401, mz, PDL); crown.scale.z = 0.72;
+  addM(new THREE.ConeGeometry(4, 18, 12), goldP, mx, 414, mz);
+  for (let k = 1; k <= 5; k++) { const r = addM(new THREE.TorusGeometry(20 + 6 * (1 - k * 66 / 396) + 32 * Math.exp(-k * 66 / 30) + 0.6, 0.7, 6, 48), goldP, mx, k * 66, mz, PDL); r.rotation.x = Math.PI / 2; r.scale.y = 0.72; }
+  // khối đế uốn lượn (vòng elip giật cấp) ôm chân tháp, dọc Phan Đăng Lưu
+  const ring = (A, B, t, a0, a1, h) => {
+    const s = new THREE.Shape(), n = 40;
+    for (let i = 0; i <= n; i++) { const a = a0 + (a1 - a0) * i / n; s[i ? 'lineTo' : 'moveTo'](A * Math.cos(a), B * Math.sin(a)); }
+    for (let i = n; i >= 0; i--) { const a = a0 + (a1 - a0) * i / n; s.lineTo((A - t) * Math.cos(a), (B - t) * Math.sin(a)); }
+    const g = new THREE.ExtrudeGeometry(s, { depth: h, bevelEnabled: false, curveSegments: 4 }); g.rotateX(-Math.PI / 2);
+    const m = addM(g, glassP, 0, 0, 0); dtG.remove(m); return m;
+  };
+  const pod = new THREE.Group(); pod.position.set(mx - 55 * Math.cos(PDL), 0, mz + 55 * Math.sin(PDL)); pod.rotation.y = PDL; dtG.add(pod);
+  for (const [A, B, t, a0, a1, h] of [[120, 58, 20, 0.5, 4.2, 30], [92, 40, 16, 1.6, 5.2, 19], [62, 24, 14, 2.4, 6.0, 10]]) pod.add(ring(A, B, t, a0, a1, h));
+  const deck = new THREE.Mesh(new THREE.CircleGeometry(1, 48), new THREE.MeshStandardMaterial({ color: 0x8fae78, roughness: 1 })); deck.scale.set(128, 64, 1); deck.rotation.x = -Math.PI / 2; deck.position.y = 0.4; pod.add(deck);
+}
+// 03 – 2 tháp cạnh tháp 408 m (phía Nam Phan Đăng Lưu) + 12 nhà phố thương mại
+tower(...SP(1440, 1075), 44, 28, 45, PDL); tower(...SP(1300, 1098), 44, 28, 42, PDL, towerMat2);
+// 01 – dải tháp cao tầng dọc bờ sông + 2 tháp phía Bắc Phan Đăng Lưu
+[[250, 38], [370, 45], [490, 33], [610, 45], [730, 36], [850, 42]].forEach(([y, fl], i) => tower(...SP(1290 + (y - 60) * 0.45 - 70, y), 40, 26, fl, RIV, i % 2 ? towerMat2 : towerMat));
+tower(...SP(1300, 945), 40, 26, 35, PDL, towerMat2); tower(...SP(1440, 918), 40, 26, 40, PDL);
+// 05, 06 – nhà phố / biệt thự thấp tầng uốn theo các bờ hồ
+{
+  const lines = [[[1110, 300], [1180, 450], [1240, 600], [1310, 740], [1400, 850]], [[870, 690], [890, 820], [950, 930], [1030, 990]], [[960, 640], [985, 740]], [[1195, 905], [1150, 1010]]];
+  const geo = boxUV(16, 13.6, 11), im = new THREE.InstancedMesh(geo, lowMat, 400), m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), Y = V3(0, 1, 0);
+  let n = 0;
+  for (const L of lines) for (let s = 0; s < L.length - 1; s++) {
+    const [ax, az] = SP(...L[s]), [bx, bz] = SP(...L[s + 1]), len = Math.hypot(bx - ax, bz - az), ux = (bx - ax) / len, uz = (bz - az) / len, ry = Math.atan2(-uz, ux);
+    for (let t = 10; t < len; t += 19) for (const off of [-24, 24]) {
+      const x = ax + ux * t - uz * off, z = az + uz * t + ux * off;
+      if (Math.hypot(x - WHEEL[0], z - WHEEL[1]) < 70 || n >= 400) continue;
+      const sy = (n * 37 % 3 === 0) ? 1.25 : 1;
+      q.setFromAxisAngle(Y, ry); m4.compose(V3(x, 6.8 * sy, z), q, V3(1, sy, 1)); im.setMatrixAt(n++, m4);
+    }
+  }
+  im.count = n; im.castShadow = im.receiveShadow = true; dtG.add(im);
+}
+// 02 – nhà hát 4.000 chỗ (mái vòm vàng) ở mũi phía Bắc, sát sông
+const THEATRE = SP(1290, 200);
+addM(new THREE.CylinderGeometry(44, 46, 16, 64), glassP, THEATRE[0], 8, THEATRE[1]);
+{ const d = addM(new THREE.SphereGeometry(44, 48, 16, 0, Math.PI * 2, 0, Math.PI / 2), goldP, THEATRE[0], 16, THEATRE[1]); d.scale.y = 0.42; }
+// vòng quay Sun Wheel (giữ lại), cao ~115 m
+let wheelRot;
+{
+  const wm = new THREE.MeshStandardMaterial({ color: 0xf2f2f2, roughness: 0.4, metalness: 0.6, emissive: 0xff5fc8, emissiveIntensity: 0 }); nightMats.push([wm, 1.6]);
+  const g = new THREE.Group(); g.position.set(WHEEL[0], 62, WHEEL[1]); dtG.add(g); wheelRot = new THREE.Group(); g.add(wheelRot);
+  for (const zz of [-3, 3]) { const r = new THREE.Mesh(new THREE.TorusGeometry(50, 0.9, 6, 96), wm); r.position.z = zz; wheelRot.add(r); }
+  for (let i = 0; i < 16; i++) { const s = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.35, 100, 4), wm); s.rotation.z = i * Math.PI / 16; wheelRot.add(s); }
+  for (let i = 0; i < 32; i++) { const a = i * Math.PI / 16, c = new THREE.Mesh(new THREE.BoxGeometry(3.2, 3.2, 3.2), glassP); c.position.set(51 * Math.cos(a), 51 * Math.sin(a), 0); wheelRot.add(c); }
+  for (const [sx, sz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) { const l = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 1.4, 66, 6), wm); l.position.set(sx * 14, -31, sz * 6); l.rotation.set(sz * -0.09, 0, sx * -0.22); g.add(l); }
+  dtG.children.forEach((m) => (m.castShadow = true));
+}
+// Sun Galaxy Complex – bờ Đông, phía Nam đầu cầu Trần Thị Lý: tháp 47 tầng ~183 m, Moon Gate, khán đài DIFF
+const GAL = LL(16.0490, 108.2328), GR = 0.46;
+addM(boxUV(96, 16, 60), lowMat, GAL[0], 8, GAL[1], GR);
+tower(GAL[0] + 6, GAL[1] + 4, 42, 34, 47, GR, towerMat2);
+{ const mg = addM(new THREE.TorusGeometry(26, 2.6, 12, 64), goldP, GAL[0] - 34 * Math.cos(GR) + 0, 28, GAL[1] + 34 * Math.sin(GR), GR + Math.PI / 2); }
+for (let k = 0; k < 4; k++) addM(new THREE.BoxGeometry(14, 4 + k * 4, 130), glassP, GAL[0] - 70 * Math.cos(GR) - k * 9 * Math.cos(GR) - 50 * Math.sin(GR), (4 + k * 4) / 2, GAL[1] + 70 * Math.sin(GR) + k * 9 * Math.sin(GR) - 50 * Math.cos(GR), GR);
+const [dtx, dtz] = MAIN;
 
 // ---- nhãn ----
 const LABELS = [
   ['Cầu Rồng', ...LL(16.0612, 108.2270), 25, 0], ['Cầu Trần Thị Lý', ...LL(16.0504, 108.2300), 40, 0], ['Cầu Nguyễn Văn Trỗi', ...LL(16.0545, 108.2283), 20, 0],
-  ['Sông Hàn', ...LL(16.0575, 108.2290), 8, 0], ['Da Nang Downtown – tháp 408 m', dtx, dtz, 420, 1],
+  ['Sông Hàn', ...LL(16.0575, 108.2290), 8, 0], ['Da Nang Downtown – tháp 408 m', dtx, dtz, 425, 1], ['Nhà hát 4.000 chỗ', ...THEATRE, 40, 1], ['Sun Wheel', WHEEL[0], WHEEL[1], 120, 0],
+  ['Sun Galaxy Complex – 47 tầng', GAL[0], GAL[1], 190, 1],
   ...meta.tall.filter((t) => t.name && !/^\d+$/.test(t.name)).map((t) => [t.name, t.x, t.z, t.h + 6, 0]),
 ].map(([t, x, z, y, prj]) => { const el = document.createElement('div'); el.className = 'pin' + (prj ? ' prj' : ''); el.innerHTML = '<b></b><span></span>'; el.querySelector('b').textContent = t; $('pins').appendChild(el); return { el, p: V3(x, y, z) }; });
 const pv = V3(0, 0, 0);
@@ -198,7 +302,7 @@ function setNight(on) {
   scene.fog = new THREE.Fog(on ? 0x0b1430 : 0xc8d6e2, 6500, 18000);
   envSky.material.uniforms.sunPosition.value.copy(sky.material.uniforms.sunPosition.value); envRT?.dispose(); envRT = pmrem.fromScene(envScene); scene.environment = envRT.texture;
   scene.environmentIntensity = on ? 0.05 : 0.3;
-  U.uNight.value = on ? 1 : 0; glassP.emissiveIntensity = on ? 0.5 : 0; goldP.emissiveIntensity = on ? 1.4 : 0.1;
+  U.uNight.value = on ? 1 : 0; for (const [m, v] of nightMats) m.emissiveIntensity = on ? v : (m === goldP ? 0.1 : 0);
   renderer.toneMappingExposure = on ? 1.15 : 0.85;
 }
 setNight(false);
@@ -207,7 +311,7 @@ setNight(false);
 const [rx, rz] = LL(16.0612, 108.2270), [tx_, tz_] = LL(16.0504, 108.2300);
 const VIEWS = {
   hero: [V3(-1900, 1500, 2600), V3(0, 0, 0)], rong: [V3(rx + 420, 160, rz + 300), V3(rx, 10, rz)],
-  ttl: [V3(tx_ - 450, 180, tx_ + 380), V3(tx_, 20, tz_)], dt: [V3(dtx + 700, 420, dtz + 650), V3(dtx, 160, dtz)], top: [V3(0, 4200, 1), V3(0, 0, 0)],
+  ttl: [V3(tx_ - 450, 180, tx_ + 380), V3(tx_, 20, tz_)], dt: [V3(dtx + 640, 480, dtz + 520), V3(dtx - 380, 70, dtz - 430)], top: [V3(0, 4200, 1), V3(0, 0, 0)],
 };
 VIEWS.ttl = [V3(tx_ - 450, 180, tz_ + 380), V3(tx_, 20, tz_)];
 let anim = null, orbit = false;
@@ -226,6 +330,7 @@ addEventListener('resize', resize); resize();
 const clock = new THREE.Timer();
 renderer.setAnimationLoop(() => {
   clock.update(); const dt = Math.min(clock.getDelta(), 0.1);
+  wheelRot.rotation.z += dt * 0.03;
   if (anim) { anim.t = Math.min(1, anim.t + dt / 1.6); const e = anim.t < 0.5 ? 4 * anim.t ** 3 : 1 - (-2 * anim.t + 2) ** 3 / 2; camera.position.lerpVectors(anim.p0, anim.p1, e); controls.target.lerpVectors(anim.t0, anim.t1, e); if (anim.t >= 1) anim = null; }
   if (orbit) { const d = camera.position.clone().sub(controls.target); d.applyAxisAngle(V3(0, 1, 0), dt * 0.1); camera.position.copy(controls.target).add(d); }
   sun.target.position.copy(controls.target); sun.position.copy(controls.target).add(V3().copy(sky.material.uniforms.sunPosition.value).normalize().multiplyScalar(4000));
