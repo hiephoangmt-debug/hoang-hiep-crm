@@ -122,6 +122,7 @@ require HH_CRM_DIR . 'data-peninsula-11-2026.php';
 require HH_CRM_DIR . 'data-mia-center-point-11-2026.php';
 require HH_CRM_DIR . 'data-fours-11-2026.php';
 require HH_CRM_DIR . 'data-sun-riverpolis-tmb-11-2026.php';
+require HH_CRM_DIR . 'data-grand-marina-da-nang-11-2026.php';
 require HH_CRM_DIR . 'data-gia-dat-khach-san.php';
 require HH_CRM_DIR . 'data-tin-tuc-ha-tang.php';
 require HH_CRM_DIR . 'data-bai-viet-tuan-01-02.php';
