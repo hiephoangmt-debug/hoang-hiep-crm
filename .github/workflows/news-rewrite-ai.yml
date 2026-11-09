@@ -3,9 +3,9 @@
 # Cần secret: ANTHROPIC_API_KEY, WP_APP_PASSWORD (đã có), TELEGRAM_* (đã có).
 name: AI viết bài lên website
 
+# Đã tắt lịch chạy tự động 09/11/2026 theo yêu cầu anh Hiệp (chưa có ANTHROPIC_API_KEY,
+# tin hạ tầng hằng ngày đã có routine riêng). Muốn chạy tay: Actions → Run workflow.
 on:
-  schedule:
-    - cron: '35 0 * * *'    # 07:35 giờ Việt Nam
   workflow_dispatch:
     inputs:
       max_articles:
