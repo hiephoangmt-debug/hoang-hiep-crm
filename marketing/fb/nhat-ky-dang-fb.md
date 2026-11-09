@@ -27,3 +27,4 @@
 | 08/11/2026 | Sun | 20:00 | Hỗ trợ lãi suất Sun Saphia Residence – tính thử vay 1,5 tỷ (1 ảnh dọc) | /ho-tro-lai-suat-24-thang-sun-saphia-residence-tinh-thu/ |
 | 08/11/2026 | Sun | 13:30 | (bài web mới 11:30) Gửi tiết kiệm hay mua Sun Saphia Residence cho thuê (1 ảnh dọc) | /gui-tiet-kiem-hay-mua-studio-sun-saphia-residence-cho-thue/ |
 | 08/11/2026 | Hoàng Hiệp | 18:30 | (bài web mới 16:30) Bảo trì căn hộ ven biển: hơi muối, mùa mưa bão (1 ảnh dọc, Mỹ Khê đêm) | /can-ho-ven-bien-hoi-muoi-mua-bao-sun-saphia-residence/ |
+| 09/11/2026 | Sun | 10:30 | Sự kiện bán hàng Sun Saphia Residence 05/12 – cập nhật lịch mới (1 ảnh dọc) | /chuan-bi-su-kien-ban-hang-sun-saphia-residence-28-11/ |
