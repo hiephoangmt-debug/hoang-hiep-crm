@@ -115,9 +115,15 @@
       c: ['Giá bán', 'Pháp lý'], ask: 'Anh/Chị để lại Zalo, em gửi bảng giá và chính sách chính thức ạ.', strong: 1, topic: 'Đại lý chính thức'},
     {id: 'quymo', k: ['quy mo', 'bao nhieu tang', 'may tang', 'cao bao nhieu', 'bao nhieu can', 'may can', 'dien tich dat', 'tang ham', 'may toa', 'bao nhieu toa', 's1', 's2'],
       a: ['Dạ Spana Tower trên khu đất 4.165 m², gồm 2 tòa tháp S1 và S2, cao 22 tầng nổi và 2 tầng hầm, tổng 1.281 căn hộ ạ.\nTầng 1 là shophouse khối đế trần 7 m, tầng 2 tiện ích trần 6 m, tầng 3–21 căn hộ trần 3,5 m, tầng 22 penthouse trần 6 m.'], c: ['Loại căn hộ', 'Tiện ích'], topic: 'Quy mô'},
-    {id: 'loaican', k: ['loai can', 'dong can', 'can ho', 'studio', '1br', '1br+', '1pn', '1 phong ngu', '2br', '2pn', '2 phong ngu', '3br', '3pn', '3 phong ngu', 'penthouse', 'dien tich', 'bao nhieu m2', 'rong bao nhieu', 'mat bang'],
-      a: ['Dạ Spana có Studio, 1BR+, 2BR, 3BR và Penthouse ạ, căn hộ điển hình trần cao 3,5 m.\n• Studio, 1BR+: vốn nhẹ, dễ cho thuê.\n• 2BR, 3BR: hợp gia đình.\n• Penthouse tầng 22: trần 6 m, sân vườn và hồ bơi riêng trên sân thượng.\nDiện tích từng căn theo mặt bằng của chủ đầu tư.'],
-      c: ['Giá bán', 'Hướng view'], ask: 'Anh/Chị để lại Zalo, em gửi mặt bằng tầng và căn còn trống ạ.', topic: 'Loại căn'},
+    {id: 'loaican', k: ['loai can', 'dong can', 'can ho', 'studio', '1br', '1br+', '1pn', '1 phong ngu', '2br', '2pn', '2 phong ngu', '3br', '3pn', '3 phong ngu', 'dien tich', 'bao nhieu m2', 'rong bao nhieu', 'mat bang'],
+      a: ['Dạ Spana có Studio, 1BR+, 2BR, 3BR và Penthouse ạ, căn hộ điển hình trần cao 3,5 m.\n• Studio, 1BR+: vốn nhẹ, dễ cho thuê.\n• 2BR, 3BR: hợp gia đình.\n• Penthouse tầng 22: trần 6 m, sân vườn và hồ bơi riêng trên sân thượng.\nNgoài ra có Shophouse khối đế tầng 1 để kinh doanh. Diện tích từng căn theo mặt bằng của chủ đầu tư.'],
+      c: ['Penthouse', 'Shophouse'], ask: 'Anh/Chị để lại Zalo, em gửi mặt bằng tầng và căn còn trống ạ.', topic: 'Loại căn'},
+    {id: 'penthouse', k: ['penthouse', 'pen house', 'penhouse', 'can penthouse', 'tang 22', 'tang thuong', 'san thuong', 'ho boi rieng', 'san vuon rieng', 'thong tang', 'duplex'],
+      a: ['Dạ penthouse Spana nằm ở tầng 22 của hai tòa ạ: trần cao tim tường 7 m (thông thủy 6,5 m), gấp đôi căn thường. Có Studio, 1BR, 1BR+, 2BR, thông thủy khoảng 34–97 m².\nBàn giao xây thô, không ngăn tường nên Anh/Chị có thể làm duplex thêm tầng lửng: 1PN+1 thành 2PN, 2PN thành 3PN, 3PN thành 4PN, có phòng khách thông tầng. View sông Cẩm Lệ, Downtown, Ngũ Hành Sơn; sở hữu lâu dài.'],
+      c: ['Shophouse', 'Giá bán'], ask: 'Anh/Chị để lại Zalo, anh Hiệp gửi mặt bằng và giá penthouse còn trống ạ.', strong: 1, topic: 'Penthouse'},
+    {id: 'shophouse', k: ['shophouse', 'shop house', 'shop', 'khoi de', 'kinh doanh', 'mat bang kinh doanh', 'cua hang', 'mo quan', 'quan cafe', 'cafe', 'nha hang', 'showroom', 'van phong', 'tang 1', 'mat tien', 'buon ban', 'ban hang'],
+      a: ['Dạ Spana có 50 shophouse khối đế tầng 1 ạ: tòa S1 có 14 căn mặt đường Nguyễn Phước Lan và 12 căn nội khu, tòa S2 có 12 và 12. Trần cao 7 m, thông thủy khoảng 41–139 m², mặt tiền phổ biến 6,2–7,5 m; khách sẵn có là cư dân 1.281 căn hộ phía trên. Hợp làm cà phê, nhà hàng, nhà trẻ, phòng khám, spa, siêu thị mini.\nTổng giá đa phần dưới 10 tỷ, sở hữu lâu dài. Chính sách Sun Early Key: thanh toán giãn 48 tháng (70% trong 24 tháng đầu), hoặc thanh toán 25% rồi vay, hỗ trợ lãi suất 24 tháng.'],
+      c: ['Penthouse', 'Giá bán'], ask: 'Anh/Chị để lại Zalo, anh Hiệp gửi mặt bằng và giá shophouse ạ.', strong: 1, topic: 'Shophouse'},
     {id: 'o', k: ['de o', 'o lau dai', 'gia dinh', 'ca nha', 'cho con', 'bo me', 'con nho', 'vo chong tre', 'cong chuc', 'can bo'],
       a: ['Dạ Spana rất hợp gia đình trẻ, cán bộ công chức và bố mẹ mua cho con ạ: khu đô thị yên tĩnh, nhiều công viên ven sông, gần trường học, 10 phút vào trung tâm.\n2BR, 3BR là lựa chọn phổ biến cho gia đình.'], c: ['Tiện ích', 'Vay ngân hàng'], ask: 'Anh/Chị để lại Zalo, em gửi mặt bằng căn 2BR, 3BR ạ.', topic: 'Mua để ở'},
     {id: 'chothue', k: ['cho thue', 'thue', 'dong tien', 'loi nhuan', 'sinh loi', 'kinh doanh', 'airbnb', 'gia thue', 'thu nhap'],
@@ -196,7 +202,7 @@
   var NEG = / (khong|thoi|chua|de sau|khong can|khoi|no) /;
   var ALIAS = {'Studio': 'studio', '2BR': '2br', 'Để ở': 'de o', 'Cho thuê': 'cho thue', 'Tiện ích': 'tien ich', 'Bàn giao': 'ban giao', 'Pháp lý': 'phap ly', 'Chủ đầu tư': 'chu dau tu',
     'Vị trí dự án': 'vi tri', 'Loại căn hộ': 'loai can', 'Giá bán': 'gia ban', 'Quy mô dự án': 'quy mo', 'Gặp anh Hiệp': 'gap anh hiep', 'Hướng view': 'huong view',
-    'Vay ngân hàng': 'vay ngan hang', 'Thanh toán': 'thanh toan', 'Từ sân bay': 'tu san bay', 'Từ cầu Rồng': 'cau rong', 'Đi Hội An': 'di hoi an'};
+    'Vay ngân hàng': 'vay ngan hang', 'Thanh toán': 'thanh toan', 'Từ sân bay': 'tu san bay', 'Từ cầu Rồng': 'cau rong', 'Đi Hội An': 'di hoi an', 'Penthouse': 'penthouse', 'Shophouse': 'shophouse'};
 
   /* ---------- Giao diện ---------- */
   /* Ẩn chat cũ nếu trang còn mã cũ (ss-all.js #hmw, chat .cb-*) để không hiện 2 khung chat */
@@ -310,6 +316,7 @@
     {k: ['vi tri', 'cua ngo'], t: 'Anh/Chị đang xem vị trí ạ? Nhiều khách hỏi em mấy câu này:', q: ['Từ sân bay tới dự án bao xa?', 'Khu Hòa Xuân có ngập không?']},
     {k: ['diem noi bat', 'vi sao chon'], t: 'Anh/Chị muốn hiểu kỹ hơn điểm nào ạ?', q: ['Khu Hòa Xuân có ngập không?', 'Sở hữu lâu dài hay 50 năm?']},
     {k: ['thiet ke', 'loai can'], t: 'Anh/Chị đang chọn loại căn ạ? Em gợi ý nhanh:', q: ['Có những loại căn nào?', 'Mỗi hướng căn nhìn ra gì?']},
+    {k: ['penthouse', 'shophouse'], t: 'Anh/Chị quan tâm penthouse hay shophouse ạ? Em trả lời nhanh:', q: ['Penthouse làm duplex được không?', 'Shophouse kinh doanh được gì?']},
     {k: ['tien ich'], t: 'Anh/Chị đang xem tiện ích ạ? Khách hay hỏi:', q: ['Trong tòa có hồ bơi, gym không?', 'Gần trường học, bệnh viện không?']},
     {k: ['chinh sach'], t: 'Phần chính sách em giải thích nhanh được ạ:', q: ['Vay ngân hàng, hỗ trợ lãi suất thế nào?', 'Tiến độ thanh toán thế nào?']},
     {k: ['phap ly', 'tien do', 'cong truong'], t: 'Phần pháp lý, tiến độ nhiều khách hỏi kỹ lắm ạ:', q: ['Sở hữu lâu dài hay 50 năm?', 'Khi nào bàn giao?']},
@@ -370,7 +377,7 @@
   }
 
   /* ---------- Đang chat mà khách im lâu: nhắc nhẹ, gợi thêm câu hỏi (tối đa 2 lần) ---------- */
-  var IDLE_Q = ['Giá bao nhiêu?', 'Sở hữu lâu dài hay 50 năm?', 'Vay ngân hàng, hỗ trợ lãi suất thế nào?', 'Từ sân bay tới dự án bao xa?', 'Có những loại căn nào?', 'Còn căn trống không?', 'Khi nào bàn giao?'];
+  var IDLE_Q = ['Giá bao nhiêu?', 'Sở hữu lâu dài hay 50 năm?', 'Vay ngân hàng, hỗ trợ lãi suất thế nào?', 'Từ sân bay tới dự án bao xa?', 'Có những loại căn nào?', 'Có shophouse không?', 'Còn căn trống không?', 'Khi nào bàn giao?'];
   function armIdle() {
     clearTimeout(idleT);
     if (idleN >= 2 || outq.length) return;
