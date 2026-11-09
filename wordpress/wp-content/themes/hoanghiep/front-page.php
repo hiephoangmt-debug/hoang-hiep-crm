@@ -46,7 +46,15 @@ if ( $featured_projects->posts ) {
 				<?php if ( $poster ) : ?>
 					<?php ob_start(); ?><picture><source media="(max-width: 900px)" srcset="<?php echo esc_url( $poster ); ?>"><?php the_post_thumbnail( 'hh-hero', array( 'class' => 'hero__bg hero__bg--poster', 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'low', 'alt' => '' ) ); ?></picture><?php echo $hh_defer( ob_get_clean(), $i ); // phpcs:ignore ?>
 				<?php else : ?>
-					<?php echo $hh_defer( get_the_post_thumbnail( null, 'hh-hero', array( 'class' => 'hero__bg', 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'low', 'alt' => '' ) ), $i ); // phpcs:ignore ?>
+					<?php
+					// Điện thoại (khung đứng): bản cắt dọc 1080×1440 WebP – nét và nhẹ hơn ảnh ngang 1920×900.
+					$hh_m   = function_exists( 'hh_hero_mobile_url' ) ? hh_hero_mobile_url( get_post_thumbnail_id() ) : '';
+					$hh_img = get_the_post_thumbnail( null, 'hh-hero', array( 'class' => 'hero__bg', 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'low', 'alt' => '', 'sizes' => '100vw' ) );
+					if ( $hh_m ) {
+						$hh_img = '<picture><source media="(max-width: 700px)" type="image/webp" srcset="' . esc_url( $hh_m ) . '">' . $hh_img . '</picture>';
+					}
+					echo $hh_defer( $hh_img, $i ); // phpcs:ignore
+					?>
 				<?php endif; ?>
 				<div class="container hero__content<?php echo $poster ? ' hero__content--poster' : ''; ?>">
 					<?php if ( $poster ) : ?><a class="hero__poster" href="<?php the_permalink(); ?>"><?php echo $hh_defer( '<img src="' . esc_url( $poster ) . '" alt="' . esc_attr( get_the_title() ) . '" width="1100" height="1430" loading="' . ( 0 === $i ? 'eager' : 'lazy' ) . '" decoding="async">', $i ); // phpcs:ignore ?></a><?php endif; ?>

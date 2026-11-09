@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.3** + plugin Hoàng Hiệp CRM **2.20.233**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.4** + plugin Hoàng Hiệp CRM **2.20.234**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.234 / giao diện 2.16.4 (09/11/2026): trang chủ và ảnh JPG nhẹ hơn
+
+- **Ảnh trình chiếu trang chủ trên điện thoại**: dùng bản cắt dọc 1080×1440 WebP (đúng khung đứng của điện thoại) thay ảnh ngang 1920×900 – nét hơn, nhẹ hơn. Web tự tạo lần đầu khi có người mở trang chủ.
+- **Mọi ảnh JPG trên web** (thẻ dự án, tin tức, bài viết…): có thêm bản WebP chất lượng 85 cạnh từng cỡ ảnh, web tự dùng khi đã có (nhẹ hơn ~30 – 50%). Ảnh mới làm ngay khi tải lên; ảnh cũ làm dần (mỗi lần mở quản trị và mỗi giờ một lượt). Ảnh chia sẻ Facebook/Zalo (og:image) vẫn giữ JPG.
 
 ## Có gì mới – giao diện 2.16.3 (09/11/2026): ảnh đầu trang không giật, nền mờ nhẹ hơn
 
