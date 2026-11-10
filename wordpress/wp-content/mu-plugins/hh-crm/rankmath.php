@@ -17,7 +17,8 @@ defined( 'ABSPATH' ) || exit;
 function hh_rm_project_overrides() {
 	return array(
 		'sun-saphia-residence' => array(
-			'kw'    => 'Sun Saphia Residence,Sun Saphia Đà Nẵng,bảng giá Sun Saphia Residence',
+			'kw'     => 'Sun Saphia Residence,Sun Saphia Đà Nẵng,bảng giá Sun Saphia Residence,Sun Sapphire Residence',
+			'kw_old' => array( 'Sun Saphia Residence,Sun Saphia Đà Nẵng,bảng giá Sun Saphia Residence' ),
 			'title' => 'Sun Saphia Residence Đà Nẵng: Giá, mặt bằng %s',
 		),
 		'nobu-da-nang' => array(
@@ -45,8 +46,15 @@ function hh_rm_project_overrides() {
 			'title' => 'Casamia Balanca Hội An: Giá biệt thự, chính sách %s',
 		),
 		'symphony-5-sun-symphony-residence' => array(
-			'kw'    => 'Symphony 5 Đà Nẵng,Symphony 5 Sun Symphony Residence,giá Symphony 5',
-			'title' => 'Giá Symphony 5 Đà Nẵng: studio từ 2,5 tỷ (%s)',
+			'kw'     => 'Sun Symphony 5,Symphony 5 Đà Nẵng,giá Sun Symphony 5,Sun Symphony Residence 5',
+			'kw_old' => array( 'Symphony 5 Đà Nẵng,Symphony 5 Sun Symphony Residence,giá Symphony 5' ),
+			'title'  => 'Giá Sun Symphony 5 Đà Nẵng: studio từ 2,5 tỷ (%s)',
+		),
+		'fours-tower' => array(
+			'kw' => 'FourS Tower,FourS Tower Đà Nẵng,Four S Tower,giá FourS Tower',
+		),
+		'spana-tower' => array(
+			'kw' => 'Spana Tower,Spana Tower Hòa Xuân,Spana Tower Đà Nẵng,Sun Spana Tower',
 		),
 	);
 }
@@ -224,7 +232,7 @@ function hh_rm_fill_keywords() {
 		// Trống, hoặc vẫn là từ khoá web tự điền theo cách cũ (anh chưa sửa tay) → điền bản mới.
 		$p_ = get_post( $id );
 		$ov = hh_rm_project_overrides()[ $p_->post_name ] ?? null;
-		if ( $ov && $cur !== $ov['kw'] && ( '' === $cur || $cur === hh_rm_project_keywords_legacy( $p_ ) || $cur === hh_rm_project_keywords_auto( $p_ ) || 0 === strpos( $cur, 'Sun Saphia Residence,giá ' ) ) ) {
+		if ( $ov && $cur !== $ov['kw'] && ( '' === $cur || $cur === hh_rm_project_keywords_legacy( $p_ ) || $cur === hh_rm_project_keywords_auto( $p_ ) || in_array( $cur, (array) ( $ov['kw_old'] ?? array() ), true ) || 0 === strpos( $cur, 'Sun Saphia Residence,giá ' ) ) ) {
 			$cur = ''; // Dự án có từ khoá riêng: thay bản web tự điền trước đây.
 		}
 		if ( '' === $cur || $cur === hh_rm_project_keywords_legacy( get_post( $id ) ) ) {

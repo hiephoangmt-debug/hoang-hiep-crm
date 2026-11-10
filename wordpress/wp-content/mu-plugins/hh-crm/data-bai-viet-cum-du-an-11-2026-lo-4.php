@@ -257,8 +257,8 @@ HTML
 	/* ---------------- FourS – Mặt bằng ---------------- */
 	$posts[] = array(
 		'slug'     => 'mat-bang-can-ho-fours-tower',
-		'title'    => 'Mặt bằng FourS Tower: 4 tháp 20 tầng, khoảng 2.291 căn – mặt bằng tầng và layout tòa F2',
-		'excerpt'  => 'Mặt bằng FourS Tower (Sun Riverpolis, Ngũ Hành Sơn): 4 tháp Mai – Trúc – Cúc – Tùng cao 20 tầng, khoảng 2.291 căn studio đến 3PN; tầng 1 thương mại, tầng 2 tiện ích; mặt bằng tầng và layout tòa F2, diện tích từng loại căn.',
+		'title'    => 'Mặt bằng FourS Tower: 4 tháp 20 tầng, 2.394 căn – mặt bằng tầng và layout tòa F2',
+		'excerpt'  => 'Mặt bằng FourS Tower (Sun Riverpolis, Ngũ Hành Sơn): 4 tháp Mai – Trúc – Cúc – Tùng cao 20 tầng, 2.394 căn studio đến 3PN; tầng 1 thương mại, tầng 2 tiện ích; mặt bằng tầng và layout tòa F2, diện tích từng loại căn.',
 		'keyword'  => 'mặt bằng FourS Tower',
 		'keywords_extra' => array( 'layout FourS Tower', 'mặt bằng tòa F2 FourS', 'FourS Tower có bao nhiêu căn' ),
 		'project'  => 'fours-tower',
@@ -269,7 +269,7 @@ HTML
 		'image_alt' => 'Tổng mặt bằng FourS Tower ở ngã tư Nguyễn Phước Lan – Minh Mạng (tài liệu chủ đầu tư)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Mặt bằng FourS Tower:</strong> 4 tháp Mai (F2), Trúc (F3), Cúc (F5), Tùng (F1) cao 20 tầng, 2 tầng hầm, tổng khoảng <strong>2.291 căn</strong> từ studio đến 3PN, tại ngã tư Nguyễn Phước Lan – Minh Mạng (Sun Riverpolis). Tầng 1 thương mại, tầng 2 tiện ích (hồ bơi bốn mùa, gym, spa, khu trẻ em). Diện tích tham khảo: studio 30,5 – 34,9 m², 1PN 46,7 m², 1PN+ 45,2 – 53,8 m², 2PN 63,8 – 73,1 m², 3PN 92,8 – 93,2 m².</p>
+<p><strong>Mặt bằng FourS Tower:</strong> 4 tháp Mai (F2), Trúc (F3), Cúc (F5), Tùng (F1) cao 20 tầng, 2 tầng hầm, tổng khoảng <strong>2.394 căn</strong> từ studio đến 3PN, tại ngã tư Nguyễn Phước Lan – Minh Mạng (Sun Riverpolis). Tầng 1 thương mại, tầng 2 tiện ích (hồ bơi bốn mùa, gym, spa, khu trẻ em). Diện tích tham khảo: studio 30,5 – 34,9 m², 1PN 46,7 m², 1PN+ 45,2 – 53,8 m², 2PN 63,8 – 73,1 m², 3PN 92,8 – 93,2 m².</p>
 {$sign}
 </div>
 <p>Bài này tổng hợp <strong>mặt bằng {$fours}</strong>: vị trí 4 tháp, bố trí theo tầng (lấy tòa F2 – Tháp Mai làm ví dụ vì có bộ mặt bằng đầy đủ nhất) và layout từng loại căn.</p>
@@ -320,15 +320,15 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Mặt bằng FourS Tower: 4 tháp, khoảng 2.291 căn',
-			'desc'      => 'Mặt bằng FourS Tower: 4 tháp Mai – Trúc – Cúc – Tùng 20 tầng, khoảng 2.291 căn studio đến 3PN; tầng 1 thương mại, tầng 2 tiện ích; mặt bằng tầng, layout tòa F2.',
+			'seo_title' => 'Mặt bằng FourS Tower: 4 tháp, 2.394 căn',
+			'desc'      => 'Mặt bằng FourS Tower: 4 tháp Mai – Trúc – Cúc – Tùng 20 tầng, 2.394 căn studio đến 3PN; tầng 1 thương mại, tầng 2 tiện ích; mặt bằng tầng, layout tòa F2.',
 			'points'    => array(
-				'4 tháp 20 tầng, 2 tầng hầm, khoảng 2.291 căn',
+				'4 tháp 20 tầng, 2 tầng hầm, 2.394 căn',
 				'Studio 30,5 – 34,9 m² đến 3PN 92,8 – 93,2 m²',
 				'Tòa F2: tầng 8 – 19 dùng chung mặt bằng điển hình',
 			),
 			'faq'       => array(
-				array( 'FourS Tower có bao nhiêu căn?', 'Khoảng 2.291 căn trong 4 tháp Mai (F2), Trúc (F3), Cúc (F5), Tùng (F1), mỗi tháp 20 tầng.' ),
+				array( 'FourS Tower có bao nhiêu căn?', '2.394 căn trong 4 tháp Mai (F2), Trúc (F3), Cúc (F5), Tùng (F1), mỗi tháp 20 tầng.' ),
 				array( 'Diện tích căn hộ FourS Tower bao nhiêu?', 'Tham khảo tòa F1, F5: studio 30,5 – 34,9 m², 1PN 46,7 m², 1PN+ 45,2 – 53,8 m², 2PN 63,8 – 73,1 m², 3PN 92,8 – 93,2 m².' ),
 				array( 'FourS Tower bàn giao thế nào?', 'Hoàn thiện cơ bản; khách tự trang bị bếp, thiết bị vệ sinh, nội thất rời. Nhận nhà khi đã thanh toán 70%.' ),
 			),

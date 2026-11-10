@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.10** + plugin Hoàng Hiệp CRM **2.20.244**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.11** + plugin Hoàng Hiệp CRM **2.20.245**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.245 / giao diện 2.16.11 (11/11/2026)
+
+- Hỏi đáp trang dự án viết theo đúng cách khách gõ trên Google: "Nobu Đà Nẵng của ai", "Cora Tower khi nào bàn giao", "Sun Symphony 5 ở đâu", "The Legend Đà Nẵng của chủ đầu tư nào"…; thêm câu "Nobu Đà Nẵng bao nhiêu tầng", "The Legend City có phải The Legend Đà Nẵng".
+- Landing Sun Saphia thêm câu "Sun Sapphire Residence có phải Sun Saphia"; landing FourS thêm "Four S Tower và FourS Tower".
+- Từ khoá: Symphony 5 đổi sang "Sun Symphony 5" (tiêu đề "Giá Sun Symphony 5 Đà Nẵng…"); thêm "Sun Sapphire Residence", "Four S Tower", "Sun Spana Tower".
+- FourS Tower: số căn sửa thành 2.394 căn theo Văn bản 17239/SXD-QLN (trước ghi khoảng 2.291) trên trang dự án, Sun Riverpolis và 8 bài đã đăng.
 
 ## Có gì mới – 2.20.244 (10/11/2026)
 

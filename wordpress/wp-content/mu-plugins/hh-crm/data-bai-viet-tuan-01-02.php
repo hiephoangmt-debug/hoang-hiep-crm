@@ -358,14 +358,15 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'fours-tower-da-nang-tong-quan-4-thap-bon-mua',
+		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'FourS Tower Đà Nẵng: tổng quan 4 tháp Bốn Mùa Mai, Trúc, Cúc, Tùng',
-		'excerpt'  => 'FourS Tower Đà Nẵng là phân khu căn hộ đầu tiên của Sun Riverpolis: 4 tháp 20 tầng, khoảng 2.291 căn Studio – 3PN, sở hữu lâu dài tại Hòa Quý.',
+		'excerpt'  => 'FourS Tower Đà Nẵng là phân khu căn hộ đầu tiên của Sun Riverpolis: 4 tháp 20 tầng, 2.394 căn Studio – 3PN, sở hữu lâu dài tại Hòa Quý.',
 		'keyword'  => 'FourS Tower Đà Nẵng',
 		'project'  => 'fours-tower',
 		'week'     => 2,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>FourS Tower Đà Nẵng (Tháp Bốn Mùa) là phân khu căn hộ cao tầng đầu tiên của khu đô thị Sun Riverpolis do Sun Property (Sun Group) phát triển, gồm 4 tháp Mai – Trúc – Cúc – Tùng cao 20 tầng, khoảng 2.291 căn từ Studio đến 3 phòng ngủ, sở hữu lâu dài. Dự án ra mắt ngày 19/3/2026 tại ngã tư Nguyễn Phước Lan – Minh Mạng, phường Hòa Quý (cũ), Nam Đà Nẵng (cập nhật tháng 10/2026).</p>
+<p>FourS Tower Đà Nẵng (Tháp Bốn Mùa) là phân khu căn hộ cao tầng đầu tiên của khu đô thị Sun Riverpolis do Sun Property (Sun Group) phát triển, gồm 4 tháp Mai – Trúc – Cúc – Tùng cao 20 tầng, 2.394 căn từ Studio đến 3 phòng ngủ, sở hữu lâu dài. Dự án ra mắt ngày 19/3/2026 tại ngã tư Nguyễn Phước Lan – Minh Mạng, phường Hòa Quý (cũ), Nam Đà Nẵng (cập nhật tháng 10/2026).</p>
 
 <h2>Thông tin chính FourS Tower Đà Nẵng</h2>
 <table>
@@ -375,7 +376,7 @@ HTML
 <tr><td>Vị trí</td><td>Ngã tư Nguyễn Phước Lan – Minh Mạng, Hòa Quý (cũ), Ngũ Hành Sơn</td></tr>
 <tr><td>Thuộc</td><td>Khu đô thị sinh thái Sun Riverpolis</td></tr>
 <tr><td>Quy mô</td><td>4 tòa, 20 tầng nổi, 2 tầng hầm</td></tr>
-<tr><td>Số căn</td><td>Khoảng 2.291 căn hộ</td></tr>
+<tr><td>Số căn</td><td>2.394 căn hộ</td></tr>
 <tr><td>Loại căn</td><td>Studio, 1PN, 2PN, 3PN (một số nguồn nêu thêm 1PN+, 2PN+, duplex)</td></tr>
 <tr><td>Sở hữu</td><td>Lâu dài</td></tr>
 <tr><td>Ra mắt</td><td>19/3/2026</td></tr>
@@ -418,7 +419,7 @@ HTML
 <thead><tr><th>Ưu điểm</th><th>Điểm cần cân nhắc</th></tr></thead>
 <tbody>
 <tr><td>Chủ đầu tư lớn, sở hữu lâu dài</td><td>Khu vực đang phát triển, tiện ích ngoại khu chưa hoàn chỉnh</td></tr>
-<tr><td>Nhiều loại căn, dải giá rộng</td><td>Quy mô khoảng 2.291 căn, cạnh tranh khi cho thuê</td></tr>
+<tr><td>Nhiều loại căn, dải giá rộng</td><td>Quy mô 2.394 căn, cạnh tranh khi cho thuê</td></tr>
 <tr><td>Tiện ích nghỉ dưỡng ngay trong tòa</td><td>Giá và chính sách thay đổi theo từng đợt</td></tr>
 <tr><td>Kết nối Hội An, biển Sơn Thủy</td><td>Cần theo dõi tiến độ từng tòa</td></tr>
 </tbody>
@@ -433,11 +434,11 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'FourS Tower Đà Nẵng: tổng quan 4 tháp Bốn Mùa',
-			'desc'      => 'FourS Tower Đà Nẵng: 4 tháp Mai, Trúc, Cúc, Tùng 20 tầng, khoảng 2.291 căn Studio – 3PN sở hữu lâu dài. Gọi 0904 567 009 nhận tài liệu.',
-			'points'    => array( 'Phân khu căn hộ đầu tiên của Sun Riverpolis, ra mắt 19/3/2026', '4 tòa 20 tầng, 2 hầm, khoảng 2.291 căn Studio – 3PN', 'Tiện ích nghỉ dưỡng tập trung tại tầng 2' ),
+			'desc'      => 'FourS Tower Đà Nẵng: 4 tháp Mai, Trúc, Cúc, Tùng 20 tầng, 2.394 căn Studio – 3PN sở hữu lâu dài. Gọi 0904 567 009 nhận tài liệu.',
+			'points'    => array( 'Phân khu căn hộ đầu tiên của Sun Riverpolis, ra mắt 19/3/2026', '4 tòa 20 tầng, 2 hầm, 2.394 căn Studio – 3PN', 'Tiện ích nghỉ dưỡng tập trung tại tầng 2' ),
 			'faq'       => array(
 				array( 'FourS Tower Đà Nẵng nằm ở đâu?', 'Tại ngã tư Nguyễn Phước Lan – Minh Mạng, phường Hòa Quý (cũ), Ngũ Hành Sơn, trong khu đô thị Sun Riverpolis.' ),
-				array( 'FourS Tower có bao nhiêu căn hộ?', 'Khoảng 2.291 căn trong 4 tòa 20 tầng, từ Studio đến 3 phòng ngủ.' ),
+				array( 'FourS Tower có bao nhiêu căn hộ?', '2.394 căn trong 4 tòa 20 tầng, từ Studio đến 3 phòng ngủ.' ),
 				array( 'Căn hộ FourS Tower sở hữu bao lâu?', 'Theo thông tin công bố, căn hộ FourS Tower sở hữu lâu dài.' ),
 				array( 'Ai là chủ đầu tư FourS Tower?', 'Dự án thuộc Tập đoàn Sun Group, do Sun Property phát triển.' ),
 			),
@@ -451,6 +452,7 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'gia-fours-tower-2026',
+		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'Giá FourS Tower 2026: bảng giá tham khảo theo từng loại căn',
 		'excerpt'  => 'Giá FourS Tower 2026 tham khảo: Studio từ khoảng 1,7 tỷ, 1PN+ từ khoảng 2,6 tỷ, 2PN từ khoảng 3,6 tỷ. Giá chính thức thay đổi theo từng đợt.',
 		'keyword'  => 'giá FourS Tower',
@@ -495,7 +497,7 @@ HTML
 
 <h2>Giá FourS Tower phù hợp với ai?</h2>
 <p>Với mức "giá từ" khoảng 1,7 tỷ cho Studio, FourS Tower nằm trong tầm với của người mua căn hộ đầu tiên và nhà đầu tư cá nhân có vốn vừa phải. Căn 2PN từ khoảng 3,6 tỷ phù hợp gia đình trẻ muốn ở lâu dài tại khu Nam Đà Nẵng thay vì trung tâm có đơn giá cao hơn.</p>
-<p>Người mua để cho thuê nên tính kỹ: quy mô khoảng 2.291 căn đồng nghĩa nguồn cung cho thuê trong cùng khu khá lớn khi bàn giao đồng loạt. Chọn căn có view, tầng và layout tốt sẽ giúp nổi bật hơn khi khai thác.</p>
+<p>Người mua để cho thuê nên tính kỹ: quy mô 2.394 căn đồng nghĩa nguồn cung cho thuê trong cùng khu khá lớn khi bàn giao đồng loạt. Chọn căn có view, tầng và layout tốt sẽ giúp nổi bật hơn khi khai thác.</p>
 <h3>So với mặt bằng căn hộ Đà Nẵng</h3>
 <p>Khu ven sông Hàn, trung tâm Hải Châu có nhiều dự án giá cao hơn đáng kể. Nếu anh chị cần so sánh, xem danh sách tại <a href="/loai-du-an/cao-tang/">căn hộ Đà Nẵng</a> để đặt FourS Tower cạnh các lựa chọn cùng tầm tiền.</p>
 
@@ -524,6 +526,7 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'mat-bang-fours-tower-studio-3pn',
+		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'Mặt bằng FourS Tower: layout căn Studio đến 3PN và diện tích',
 		'excerpt'  => 'Mặt bằng FourS Tower: căn Studio khoảng 34,7 m², 1PN 43,7 m², 2PN 58 m², 3PN 102,8 m². Phân tích layout từng loại căn và cách chọn.',
 		'keyword'  => 'mặt bằng FourS Tower',
@@ -534,7 +537,7 @@ HTML
 <p>Mặt bằng FourS Tower gồm các loại căn Studio (khoảng 34,7 m²), 1PN (khoảng 43,7 m²), 1PN+ (khoảng 45,5 – 48,9 m²), 2PN (khoảng 58 m²), 2PN+ (khoảng 87,1 m²) và 3PN (khoảng 102,8 m²), bố trí trong 4 tòa 20 tầng. Tầng 1 dành cho thương mại, tầng 2 cho tiện ích, các tầng phía trên là căn hộ (cập nhật tháng 10/2026).</p>
 
 <h2>Tổng quan mặt bằng FourS Tower</h2>
-<p>Dự án gồm 4 tòa Mai – Trúc – Cúc – Tùng, mỗi tòa 20 tầng nổi và 2 tầng hầm, tổng khoảng 2.291 căn. Theo thông tin giới thiệu, cư dân đi thang máy là kết nối được với khu thương mại tầng 1 và tiện ích nghỉ dưỡng tầng 2.</p>
+<p>Dự án gồm 4 tòa Mai – Trúc – Cúc – Tùng, mỗi tòa 20 tầng nổi và 2 tầng hầm, tổng 2.394 căn. Theo thông tin giới thiệu, cư dân đi thang máy là kết nối được với khu thương mại tầng 1 và tiện ích nghỉ dưỡng tầng 2.</p>
 <table>
 <thead><tr><th>Tầng</th><th>Công năng</th></tr></thead>
 <tbody>

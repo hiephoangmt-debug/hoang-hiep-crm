@@ -12,6 +12,7 @@ function hh_posts_tuan_03_04( $posts ) {
 
 	$posts[] = array(
 		'slug'     => 'co-nen-mua-can-ho-fours-tower',
+		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'Có nên mua FourS Tower? Ưu – nhược điểm căn hộ Sun Group Nam Đà Nẵng',
 		'excerpt'  => 'Có nên mua FourS Tower? Phân tích vị trí, quy mô, giá tham khảo, ưu – nhược điểm và ai phù hợp xuống tiền, cập nhật tháng 10/2026.',
 		'keyword'  => 'có nên mua FourS Tower',
@@ -23,14 +24,14 @@ function hh_posts_tuan_03_04( $posts ) {
 
 <h2>FourS Tower là dự án gì?</h2>
 <p><a href="/du-an/fours-tower/">FourS Tower (Tháp Bốn Mùa)</a> là phân khu căn hộ đầu tiên của khu đô thị <a href="/du-an/sun-riverpolis/">Sun Riverpolis</a>, do Sun Property (thành viên Sun Group) phát triển. Dự án ra mắt ngày 19/3/2026, nằm tại ngã tư Nguyễn Phước Lan – Minh Mạng, phường Hòa Quý (cũ), Ngũ Hành Sơn.</p>
-<p>Dự án gồm 4 tòa Mai – Trúc – Cúc – Tùng, cao 20 tầng nổi và 2 tầng hầm, cung cấp khoảng 2.291 căn từ Studio đến 3 phòng ngủ, sở hữu lâu dài. Tên bốn tòa lấy cảm hứng từ bộ tranh tứ quý, tương ứng bốn mùa trong năm.</p>
+<p>Dự án gồm 4 tòa Mai – Trúc – Cúc – Tùng, cao 20 tầng nổi và 2 tầng hầm, cung cấp 2.394 căn từ Studio đến 3 phòng ngủ, sở hữu lâu dài. Tên bốn tòa lấy cảm hứng từ bộ tranh tứ quý, tương ứng bốn mùa trong năm.</p>
 
 <table>
 <thead><tr><th>Hạng mục</th><th>Thông tin</th></tr></thead>
 <tbody>
 <tr><td>Chủ đầu tư</td><td>Sun Group (Sun Property phát triển)</td></tr>
 <tr><td>Vị trí</td><td>Ngã tư Nguyễn Phước Lan – Minh Mạng, Hòa Quý, Ngũ Hành Sơn</td></tr>
-<tr><td>Quy mô</td><td>4 tòa, 20 tầng nổi, 2 tầng hầm, khoảng 2.291 căn</td></tr>
+<tr><td>Quy mô</td><td>4 tòa, 20 tầng nổi, 2 tầng hầm, 2.394 căn</td></tr>
 <tr><td>Loại căn</td><td>Studio, 1PN, 2PN, 3PN</td></tr>
 <tr><td>Giá tham khảo</td><td>Khoảng 50 – 60 triệu/m² (theo các trang phân phối, tham khảo)</td></tr>
 <tr><td>Bàn giao</td><td>Một số đơn vị phân phối ghi dự kiến 31/3/2028 – cần đối chiếu hợp đồng</td></tr>
@@ -51,7 +52,7 @@ function hh_posts_tuan_03_04( $posts ) {
 <h2>Nhược điểm cần cân nhắc</h2>
 <ul>
 <li><strong>Thời gian chờ:</strong> sản phẩm hình thành trong tương lai, người mua phải chờ bàn giao, chưa có dòng tiền cho thuê trong vài năm đầu.</li>
-<li><strong>Nguồn cung lớn:</strong> khoảng 2.291 căn, cộng thêm Spana Tower, S-Light Tower, Cora Tower cùng khu vực. Khi bàn giao đồng loạt, áp lực cạnh tranh cho thuê và bán lại là có thật.</li>
+<li><strong>Nguồn cung lớn:</strong> 2.394 căn, cộng thêm Spana Tower, S-Light Tower, Cora Tower cùng khu vực. Khi bàn giao đồng loạt, áp lực cạnh tranh cho thuê và bán lại là có thật.</li>
 <li><strong>Khu đô thị còn đang hình thành:</strong> mật độ dân cư, dịch vụ ngoài nội khu cần thời gian để lấp đầy.</li>
 <li><strong>Giá thông tin chưa thống nhất:</strong> các trang ghi khác nhau; bạn chỉ nên tin bảng giá và chính sách có hiệu lực tại thời điểm ký.</li>
 </ul>
@@ -78,7 +79,7 @@ HTML
 			'seo_title' => 'Có nên mua FourS Tower? Ưu – nhược điểm 2026',
 			'desc'      => 'Có nên mua FourS Tower? Phân tích vị trí, giá tham khảo, ưu – nhược điểm, ai nên mua. Gọi Hoàng Hiệp 0904 567 009 để nhận bảng giá mới.',
 			'points'    => array(
-				'FourS Tower: 4 tòa 20 tầng, khoảng 2.291 căn Studio – 3PN tại ngã tư Nguyễn Phước Lan – Minh Mạng, ra mắt 19/3/2026.',
+				'FourS Tower: 4 tòa 20 tầng, 2.394 căn Studio – 3PN tại ngã tư Nguyễn Phước Lan – Minh Mạng, ra mắt 19/3/2026.',
 				'Ưu điểm: vị trí trung tâm Nam Đà Nẵng, thương hiệu Sun Group, giá vào tham khảo từ khoảng 1,7 tỷ.',
 				'Nhược điểm: phải chờ bàn giao, nguồn cung khu vực lớn, khu đô thị còn đang hình thành.',
 			),
@@ -94,6 +95,7 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'so-sanh-fours-tower-spana-tower-s-light-tower',
+		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'So sánh căn hộ Sun Group Đà Nẵng: FourS Tower, Spana Tower, S-Light Tower',
 		'excerpt'  => 'So sánh căn hộ Sun Group Đà Nẵng: vị trí, quy mô, loại căn, bàn giao và giá tham khảo của FourS Tower, Spana Tower, S-Light Tower.',
 		'keyword'  => 'so sánh căn hộ Sun Group Đà Nẵng',
@@ -109,7 +111,7 @@ HTML
 <tbody>
 <tr><td>Khu đô thị</td><td>Sun Riverpolis (Hòa Quý)</td><td>Sun NeO City (Hòa Xuân)</td><td>Sun NeO City (Hòa Xuân)</td></tr>
 <tr><td>Vị trí</td><td>Ngã tư Nguyễn Phước Lan – Minh Mạng</td><td>Mặt tiền Nguyễn Phước Lan, chân cầu Hòa Xuân</td><td>Đường 29/3 giao Nguyễn Đình Thi</td></tr>
-<tr><td>Quy mô</td><td>4 tòa, 20 tầng, 2 hầm, khoảng 2.291 căn</td><td>2 tòa (A1.3, A1.4), 22 tầng, 2 hầm, 1.237 căn</td><td>2 tháp, 22 tầng, 3 hầm, gần 800 căn</td></tr>
+<tr><td>Quy mô</td><td>4 tòa, 20 tầng, 2 hầm, 2.394 căn</td><td>2 tòa (A1.3, A1.4), 22 tầng, 2 hầm, 1.237 căn</td><td>2 tháp, 22 tầng, 3 hầm, gần 800 căn</td></tr>
 <tr><td>Loại căn</td><td>Studio – 3PN</td><td>Studio – 3PN, Penthouse, shophouse khối đế</td><td>Studio – 3PN góc, Penthouse (33,3 – 95,1 m²)</td></tr>
 <tr><td>Bàn giao (dự kiến)</td><td>31/3/2028 (theo nguồn phân phối)</td><td>30/6/2027</td><td>6/2028 (theo nguồn phân phối)</td></tr>
 <tr><td>Giá tham khảo</td><td>Khoảng 50 – 60 triệu/m²; Studio từ khoảng 1,7 tỷ</td><td>Khoảng 60 triệu/m² (dao động theo nguồn)</td><td>Từ khoảng 2,4 tỷ/căn</td></tr>
@@ -164,14 +166,14 @@ HTML
 			'seo_title' => 'So sánh căn hộ Sun Group Đà Nẵng: FourS, Spana, S-Light',
 			'desc'      => 'So sánh căn hộ Sun Group Đà Nẵng: vị trí, quy mô, bàn giao, giá FourS Tower, Spana Tower, S-Light Tower. Gọi Hoàng Hiệp 0904 567 009.',
 			'points'    => array(
-				'FourS Tower: khoảng 2.291 căn, Sun Riverpolis, giá tham khảo khoảng 50 – 60 triệu/m².',
+				'FourS Tower: 2.394 căn, Sun Riverpolis, giá tham khảo khoảng 50 – 60 triệu/m².',
 				'Spana Tower: 1.237 căn chân cầu Hòa Xuân, bàn giao dự kiến 30/6/2027.',
 				'S-Light Tower: gần 800 căn view ba dòng sông, diện tích 33,3 – 95,1 m², ra mắt 6/2026.',
 			),
 			'faq'       => array(
 				array( 'Dự án căn hộ Sun Group nào ở Đà Nẵng bàn giao sớm nhất?', 'Trong ba dự án, Spana Tower có lịch bàn giao dự kiến sớm nhất là 30/6/2027.' ),
 				array( 'Căn hộ Sun Group nào có view sông đẹp?', 'S-Light Tower nằm tại ngã ba sông Hàn – Cẩm Lệ – Đô Toả, tầm nhìn về sông và pháo hoa DIFF.' ),
-				array( 'FourS Tower và Spana Tower khác nhau thế nào?', 'FourS Tower thuộc Sun Riverpolis (Hòa Quý), 4 tòa khoảng 2.291 căn; Spana Tower thuộc Sun NeO City, chân cầu Hòa Xuân, 2 tòa 1.237 căn, có shophouse khối đế.' ),
+				array( 'FourS Tower và Spana Tower khác nhau thế nào?', 'FourS Tower thuộc Sun Riverpolis (Hòa Quý), 4 tòa 2.394 căn; Spana Tower thuộc Sun NeO City, chân cầu Hòa Xuân, 2 tòa 1.237 căn, có shophouse khối đế.' ),
 			),
 		),
 		'sources'  => array( 'https://tuoitre.vn/bon-thap-can-ho-thuoc-du-an-sun-group-nam-da-nang-ra-mat-20260319112111814.htm', 'https://cafeland.vn/du-an/spana-tower-du-an-can-ho-tai-da-nang-5406.html', 'https://cafef.vn/sun-property-ra-mat-s-light-tower-tam-diem-vuong-khi-trung-tam-nam-da-nang-188260622082242751.chn', 'https://cafeland.vn/du-an/s-light-tower-to-hop-can-ho-thuoc-sun-neo-city-da-nang-5622.html' ),
@@ -179,6 +181,7 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'sun-riverpolis-khu-do-thi-ven-song-hoa-quy',
+		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'Sun Riverpolis: khu đô thị ven sông Hòa Quý của Sun Group tại Đà Nẵng',
 		'excerpt'  => 'Sun Riverpolis là khu đô thị ven sông của Sun Group tại Hòa Quý, Nam Đà Nẵng: vị trí, quy mô, các phân khu FourS Tower, đất nền Đầm Sen.',
 		'keyword'  => 'Sun Riverpolis',
@@ -211,7 +214,7 @@ HTML
 <table>
 <thead><tr><th>Phân khu</th><th>Loại hình</th><th>Quy mô</th><th>Thời điểm</th></tr></thead>
 <tbody>
-<tr><td>FourS Tower (Mai – Trúc – Cúc – Tùng)</td><td>Căn hộ Studio – 3PN</td><td>4 tòa 20 tầng, khoảng 2.291 căn</td><td>Ra mắt 19/3/2026</td></tr>
+<tr><td>FourS Tower (Mai – Trúc – Cúc – Tùng)</td><td>Căn hộ Studio – 3PN</td><td>4 tòa 20 tầng, 2.394 căn</td><td>Ra mắt 19/3/2026</td></tr>
 <tr><td>Đất nền Đầm Sen</td><td>Đất nền, đất biệt thự view sông</td><td>Khoảng 900 lô</td><td>Mở bán từ 9/8/2025</td></tr>
 </tbody>
 </table>
@@ -347,6 +350,7 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'bat-dong-san-nam-da-nang-ha-tang-hoa-xuan-hoa-quy-2026',
+		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'Bất động sản Nam Đà Nẵng 2026: hạ tầng Hòa Xuân – Hòa Quý và giá nhà đất',
 		'excerpt'  => 'Bất động sản Nam Đà Nẵng 2026: hạ tầng Hòa Xuân – Hòa Quý đang thay đổi ra sao và mặt bằng giá căn hộ, đất nền khu vực hiện ở mức nào.',
 		'keyword'  => 'bất động sản Nam Đà Nẵng',
@@ -389,7 +393,7 @@ HTML
 <h2>Rủi ro cần lưu ý</h2>
 <ul>
 <li><strong>Thi công kéo dài:</strong> trong giai đoạn 2026 – 2029, giao thông quanh chân cầu Hòa Xuân có thể bị ảnh hưởng.</li>
-<li><strong>Nguồn cung căn hộ lớn:</strong> FourS Tower khoảng 2.291 căn, Spana Tower 1.237 căn, S-Light Tower gần 800 căn, cộng thêm Cora Tower.</li>
+<li><strong>Nguồn cung căn hộ lớn:</strong> FourS Tower 2.394 căn, Spana Tower 1.237 căn, S-Light Tower gần 800 căn, cộng thêm Cora Tower.</li>
 <li><strong>Kỳ vọng giá đi trước hạ tầng:</strong> không nên mua bằng đòn bẩy cao chỉ dựa vào thông tin dự án hạ tầng.</li>
 </ul>
 

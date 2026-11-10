@@ -61,7 +61,7 @@ function hh_seo_keyword_map() {
 		'hop-dong-dat-coc-mua-nha-rui-ro-phong-tranh' => array( 'hợp đồng đặt cọc mua nhà', 'Hợp đồng đặt cọc mua nhà: rủi ro và cách phòng tránh', 'Hợp đồng đặt cọc mua nhà đất: Điều 328 Bộ luật Dân sự, phạt cọc, 6 rủi ro thường gặp, điều khoản cần có và cách phòng tránh. Gọi Hoàng Hiệp.' ),
 
 		// Bài gắn với dự án: từ khoá dài, trang dự án giữ "giá / bảng giá {Tên}".
-		'fours-tower-da-nang-tong-quan-4-thap-bon-mua' => array( 'tổng quan FourS Tower', 'Tổng quan FourS Tower Đà Nẵng: 4 tháp Bốn Mùa', 'Tổng quan FourS Tower Đà Nẵng: 4 tháp Mai, Trúc, Cúc, Tùng 20 tầng, khoảng 2.291 căn Studio – 3PN sở hữu lâu dài. Gọi 0904 567 009 nhận tài liệu.' ),
+		'fours-tower-da-nang-tong-quan-4-thap-bon-mua' => array( 'tổng quan FourS Tower', 'Tổng quan FourS Tower Đà Nẵng: 4 tháp Bốn Mùa', 'Tổng quan FourS Tower Đà Nẵng: 4 tháp Mai, Trúc, Cúc, Tùng 20 tầng, 2.394 căn Studio – 3PN sở hữu lâu dài. Gọi 0904 567 009 nhận tài liệu.', array( 'Tổng quan FourS Tower Đà Nẵng: 4 tháp Mai, Trúc, Cúc, Tùng 20 tầng, khoảng 2.291 căn Studio – 3PN sở hữu lâu dài. Gọi 0904 567 009 nhận tài liệu.' ) ),
 		'gia-fours-tower-2026' => array( 'giá căn hộ FourS Tower theo loại căn', 'Giá căn hộ FourS Tower theo loại căn 2026', 'Giá căn hộ FourS Tower theo loại căn 2026: Studio từ khoảng 1,7 tỷ, 2PN từ khoảng 3,6 tỷ (tham khảo). Gọi 0904 567 009 nhận bảng giá chính thức.' ),
 		'mat-bang-fours-tower-studio-3pn' => array( 'mặt bằng FourS Tower', 'Mặt bằng FourS Tower: layout Studio đến 3PN', 'Mặt bằng FourS Tower: Studio khoảng 34,7 m², 2PN 58 m², 3PN 102,8 m², phân tích layout và cách chọn căn. Gọi 0904 567 009 nhận mặt bằng từng tầng.' ),
 		'chinh-sach-fours-tower-thanh-toan-vay-ngan-hang' => array( 'chính sách bán hàng FourS Tower', 'Chính sách bán hàng FourS Tower: thanh toán, vay vốn', 'Chính sách bán hàng FourS Tower: thanh toán 70% nhận nhà, Early Bird 5%, hỗ trợ vay 70% lãi 0% có thời hạn. Gọi 0904 567 009 nhận chính sách mới.' ),
@@ -123,6 +123,9 @@ add_filter(
 				'rank_math_title'         => $seo['seo_title'] ?? '',
 				'rank_math_description'   => $seo['desc'] ?? '',
 			);
+			foreach ( (array) ( $map[ $n['slug'] ][3] ?? array() ) as $od ) {
+				$old['rank_math_description'][] = $od; // Mô tả cũ của bản đồ từ khoá (đã sửa số liệu) → cho phép thay.
+			}
 			foreach ( $prev as $key => $value ) {
 				if ( '' !== $value ) {
 					$old[ $key ] = array_merge( (array) ( $old[ $key ] ?? array() ), array( $value ) );

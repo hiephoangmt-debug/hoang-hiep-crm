@@ -646,6 +646,7 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'bat-dong-san-ngu-hanh-son-2026',
+		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'Bất động sản Ngũ Hành Sơn 2026: căn hộ biển, biệt thự, đất nền',
 		'excerpt'  => 'Bất động sản Ngũ Hành Sơn 2026: Newtown Diamond, Sun Cosmo, FPT City, Sun Riverpolis, đất nền Võ Chí Công, biệt thự Trường Sa – giá tham khảo.',
 		'keyword'  => 'bất động sản Ngũ Hành Sơn',
@@ -664,7 +665,7 @@ HTML
 <tbody>
 <tr><td>Newtown Diamond</td><td>3 tòa, 1.733 căn</td><td>Khoảng 60 – 90 triệu/m²</td><td>The Ruby đã cất nóc</td></tr>
 <tr><td>Sun Cosmo Residence</td><td>Khoảng 650 căn hộ</td><td>Khoảng 65 – 95 triệu/m²</td><td>Đang bàn giao</td></tr>
-<tr><td>FourS Tower (Sun Riverpolis)</td><td>4 tòa, khoảng 2.291 căn</td><td>Đang cập nhật theo đợt</td><td>Đang mở bán</td></tr>
+<tr><td>FourS Tower (Sun Riverpolis)</td><td>4 tòa, 2.394 căn</td><td>Đang cập nhật theo đợt</td><td>Đang mở bán</td></tr>
 <tr><td>FPT Plaza 1, 2</td><td>586 và 700 căn</td><td>Khoảng 30 – 42 triệu/m²</td><td>Đã bàn giao</td></tr>
 <tr><td>FPT Plaza 3</td><td>837 căn</td><td>1PN khoảng 1,6 – 2,5 tỷ</td><td>Đang bàn giao</td></tr>
 <tr><td>FPT Plaza 4, 5</td><td>Khoảng 1.400 và hơn 832 căn</td><td>Liên hệ</td><td>Đang / sắp mở bán</td></tr>
@@ -677,7 +678,7 @@ HTML
 <p>Khu đô thị FPT City hơn 181 ha bên sông Cổ Cò có mặt bằng căn hộ thấp nhất khu vực. Giá thuê FPT Plaza khoảng 10 – 13 triệu/tháng cho căn 2PN, phù hợp khách thuê là sinh viên, kỹ sư làm việc gần làng Đại học.</p>
 
 <h3>Sun Riverpolis và FourS Tower</h3>
-<p>Sun Riverpolis là khu đô thị sinh thái của Sun Group tại Hòa Quý (Nam Hòa Xuân), cùng Sun NeO City tạo hệ sinh thái hơn 1.000 ha phía Nam thành phố. Phân khu căn hộ đầu tiên là FourS Tower gồm 4 tòa Mai – Trúc – Cúc – Tùng cao 20 tầng, khoảng 2.291 căn từ studio đến 3PN, sở hữu lâu dài, nằm ở ngã tư Nguyễn Phước Lan – Minh Mạng. Bảng giá FourS Tower đang cập nhật theo từng đợt, liên hệ để nhận bảng giá.</p>
+<p>Sun Riverpolis là khu đô thị sinh thái của Sun Group tại Hòa Quý (Nam Hòa Xuân), cùng Sun NeO City tạo hệ sinh thái hơn 1.000 ha phía Nam thành phố. Phân khu căn hộ đầu tiên là FourS Tower gồm 4 tòa Mai – Trúc – Cúc – Tùng cao 20 tầng, 2.394 căn từ studio đến 3PN, sở hữu lâu dài, nằm ở ngã tư Nguyễn Phước Lan – Minh Mạng. Bảng giá FourS Tower đang cập nhật theo từng đợt, liên hệ để nhận bảng giá.</p>
 
 <h2>Đất nền Ngũ Hành Sơn</h2>
 <table>

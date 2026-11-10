@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
 
 function hh_autolink_targets() {
 	return array(
-		'symphony-5-sun-symphony-residence' => array( 'Symphony 5' ),
+		'symphony-5-sun-symphony-residence' => array( 'Sun Symphony 5', 'Symphony 5' ),
 		'the-legend-da-nang'                => array( 'The Legend City', 'The Legend Đà Nẵng', 'The Legend' ),
 		'nobu-da-nang'                      => array( 'Nobu Residences Đà Nẵng', 'Nobu Residences', 'Nobu Đà Nẵng' ),
 		'cora-tower'                        => array( 'Cora Tower' ),

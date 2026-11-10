@@ -267,8 +267,14 @@ function hh_project_timeline( $post_id = null ) {
 	return array( array_values( $rows ), true );
 }
 
-/** Hỏi đáp: dùng câu đã nhập, chưa có thì tự tạo từ thông tin dự án. */
+/** Hỏi đáp (đã qua bộ lọc hh_project_faq – VD đổi câu hỏi theo cách khách hay gõ trên Google). */
 function hh_project_faq( $post_id = null ) {
+	$post_id = $post_id ?: get_the_ID();
+	return (array) apply_filters( 'hh_project_faq', hh_project_faq_base( $post_id ), $post_id );
+}
+
+/** Hỏi đáp: dùng câu đã nhập, chưa có thì tự tạo từ thông tin dự án. */
+function hh_project_faq_base( $post_id = null ) {
 	$post_id = $post_id ?: get_the_ID();
 	$rows    = hh_table( 'hh_p_faq', 2, $post_id );
 	if ( $rows ) {
