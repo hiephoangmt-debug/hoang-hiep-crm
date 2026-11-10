@@ -522,6 +522,22 @@ function hh_schema_breadcrumb() {
 	return array( '@type' => 'BreadcrumbList', 'itemListElement' => $list );
 }
 
+/** Câu hỏi – trả lời trong file landing (khối <details><summary>…</summary>…</details>). */
+function hh_landing_faq_rows( $file ) {
+	$html = is_file( $file ) ? (string) file_get_contents( $file ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions
+	$rows = array();
+	if ( preg_match_all( '#<details[^>]*>\s*<summary[^>]*>(.*?)</summary>(.*?)</details>#su', $html, $m, PREG_SET_ORDER ) ) {
+		foreach ( $m as $x ) {
+			$q = trim( preg_replace( '/\s+/u', ' ', wp_strip_all_tags( html_entity_decode( $x[1], ENT_QUOTES, 'UTF-8' ) ) ) );
+			$a = trim( preg_replace( '/\s+/u', ' ', wp_strip_all_tags( html_entity_decode( $x[2], ENT_QUOTES, 'UTF-8' ) ) ) );
+			if ( '' !== $q && '' !== $a && false !== strpos( $q, '?' ) ) {
+				$rows[] = array( $q, $a );
+			}
+		}
+	}
+	return $rows;
+}
+
 function hh_schema_faq( $rows ) {
 	if ( ! $rows ) {
 		return null;
@@ -715,7 +731,9 @@ function hh_seo_schema() {
 	}
 	if ( is_singular( 'du-an' ) ) {
 		$graph[] = hh_schema_project();
-		$graph[] = hh_schema_faq( hh_project_faq() );
+		// Trang landing riêng: khai báo đúng các câu hỏi đang hiện trên trang (Google yêu cầu FAQ khai báo khớp nội dung nhìn thấy).
+		$landing = function_exists( 'hoanghiep_landing_file' ) ? hoanghiep_landing_file() : '';
+		$graph[] = hh_schema_faq( $landing ? hh_landing_faq_rows( $landing ) : hh_project_faq() );
 	} elseif ( is_singular( 'bat-dong-san' ) ) {
 		$graph[] = hh_schema_listing();
 	}
