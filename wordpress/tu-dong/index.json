@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-09T23:47:42+00:00",
+    "updated": "2026-11-10T14:29:58+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do",
@@ -418,10 +418,52 @@
             "file": "bai/nang-cap-san-bay-da-nang-1696-ty-sun-saphia-residence.txt"
         },
         {
+            "slug": "gia-symphony-5-sun-symphony-residence-bao-nhieu",
+            "title": "Giá bán Symphony 5 Đà Nẵng bao nhiêu? Studio từ 2,5 tỷ, 1PN+ đến 4,54 tỷ (11/2026)",
+            "publish": "2026-11-11 14:00",
+            "file": "bai/gia-symphony-5-sun-symphony-residence-bao-nhieu.txt"
+        },
+        {
             "slug": "can-2pn-sun-saphia-residence-60-70m2-o-hay-cho-thue",
             "title": "Căn 2PN Sun Saphia Residence 60 – 70 m²: 133 căn ở góc tòa – để ở, nghỉ dưỡng gia đình hay cho thuê?",
             "publish": "2026-11-11 16:30",
             "file": "bai/can-2pn-sun-saphia-residence-60-70m2-o-hay-cho-thue.txt"
+        },
+        {
+            "slug": "gia-the-legend-da-nang-bao-nhieu",
+            "title": "Giá bán The Legend Đà Nẵng (The Legend City) bao nhiêu? 1PN từ 7,65 tỷ, 2PN từ 8,96 tỷ",
+            "publish": "2026-11-12 09:00",
+            "file": "bai/gia-the-legend-da-nang-bao-nhieu.txt"
+        },
+        {
+            "slug": "gia-nobu-residences-da-nang-bao-nhieu",
+            "title": "Giá bán Nobu Residences Đà Nẵng bao nhiêu? Căn 1PN từ khoảng 6,63 tỷ (cập nhật 11/2026)",
+            "publish": "2026-11-12 14:00",
+            "file": "bai/gia-nobu-residences-da-nang-bao-nhieu.txt"
+        },
+        {
+            "slug": "mat-bang-can-ho-symphony-5",
+            "title": "Mặt bằng căn hộ Symphony 5: 1.228 căn studio, 1PN+, 2PN, penthouse theo từng tầng",
+            "publish": "2026-11-13 09:00",
+            "file": "bai/mat-bang-can-ho-symphony-5.txt"
+        },
+        {
+            "slug": "mat-bang-can-ho-the-legend-da-nang",
+            "title": "Mặt bằng The Legend Đà Nẵng: 2 tháp, 800 căn hộ 1PN – 3PN, cánh Legacy và Infinity",
+            "publish": "2026-11-13 14:00",
+            "file": "bai/mat-bang-can-ho-the-legend-da-nang.txt"
+        },
+        {
+            "slug": "phap-ly-symphony-5-so-huu-50-nam",
+            "title": "Pháp lý Symphony 5: sở hữu 50 năm, đất thương mại dịch vụ – người mua cần biết gì",
+            "publish": "2026-11-14 09:00",
+            "file": "bai/phap-ly-symphony-5-so-huu-50-nam.txt"
+        },
+        {
+            "slug": "tien-do-nobu-residences-da-nang",
+            "title": "Tiến độ Nobu Residences Đà Nẵng 10/2026: kết cấu đến tầng 22, lắp kính tầng 7 – 13",
+            "publish": "2026-11-14 14:00",
+            "file": "bai/tien-do-nobu-residences-da-nang.txt"
         }
     ]
 }
