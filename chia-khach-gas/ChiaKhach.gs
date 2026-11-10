@@ -481,6 +481,10 @@ function nhanKhachMoi_() {
     var cho = JSON.parse(P().getProperty('CHO_THEM') || '{}');
     moi.forEach(function (c) {
       var nc = [c.du_an, c.ghi_chu].filter(String).join(' · ');
+      /* Dự án khác: chỉ lưu trong file DATA CHẠY GOOGLE, không nhắn (muốn chia thì gõ /themkhac) */
+      if (c.nhom === 'khac') { log_('hệ thống', 'khách dự án khác – chỉ lưu data', '', che(c.sdt) + (c.du_an ? ' · ' + String(c.du_an).slice(0, 40) : '')); return; }
+      /* Cùng 1 số gửi form nhiều lần: chỉ báo 1 lần trong 3 ngày */
+      if (cho[c.sdt] && Date.now() - Number(cho[c.sdt].luc || 0) < 3 * 86400000) return;
       cho[c.sdt] = {ten: String(c.ten || '').slice(0, 60), nc: nc.slice(0, 200), nguon: String(c.utm || c.web || '').slice(0, 100), trang: String(c.trang || '').slice(0, 200), nhom: c.nhom || '', luc: Date.now()};
       baoQL_('🆕 <b>Khách mới đổ về – chưa chia</b>' + (c.nhom === 'khac' ? ' (dự án khác)' : '') + '\n👤 ' + esc(c.ten || '(không tên)') + ' · 📱 ' + esc(c.sdt) +
         (nc ? '\n📝 ' + esc(nc.slice(0, 150)) : '') + (c.trang ? '\n🌐 ' + esc(String(c.trang).slice(0, 80)) : '') +

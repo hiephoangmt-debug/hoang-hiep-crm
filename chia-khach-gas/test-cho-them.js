@@ -68,4 +68,16 @@ vm.runInContext("(function(){var sh=tab_('CauHinh');var v=sh.getRange(2,1,sh.get
 adv(120); run(); ok(k3().nguoi_giu===h3&&k3().trang_thai==='cho_nhan','DUNG_CHIA=1: quá hạn nhận vẫn không thu hồi, không giao lại');
 vm.runInContext("(function(){var sh=tab_('CauHinh');var v=sh.getRange(2,1,sh.getLastRow()-1,1).getValues();for(var i=0;i<v.length;i++)if(v[i][0]==='DUNG_CHIA')sh.getRange(i+2,2).setValue(0);})()",ctx);
 adv(1); run(); ok(k3().nguoi_giu!==h3||k3().trang_thai!=='cho_nhan','DUNG_CHIA=0: thu hồi lại như cũ');
+// Báo 1 lần dù khách gửi form nhiều lần
+const n0=to(900).filter(s=>/0905777888/.test(s.text)).length;
+adv(1); crmRow('0905777888','Anh Phú',1); run(); adv(6); kh.d.find(r=>String(r[3]).replace(/^0/,'')==='905777888')[9]=2; run();
+ok(to(900).filter(s=>/0905777888/.test(s.text)).length===n0+1,'cùng 1 số gửi 2 lần → chỉ báo 1 lần');
+// Dự án khác (DATA CHẠY GOOGLE): chỉ lưu, không nhắn
+vm.runInContext("(function(){var sh=tab_('CauHinh');var v=sh.getRange(2,1,sh.getLastRow()-1,1).getValues();for(var i=0;i<v.length;i++)if(v[i][0]==='NGUON_KHAC_SHEET_ID')sh.getRange(i+2,2).setValue('data-id');})()",ctx);
+const pen=data.insertSheet('peninsula'); pen.appendRow(['10/11/2026','Cũ','912000111','https://www.peninsula-danang.com/']);
+adv(6); run(); const m0=to(900).length;
+pen.appendRow(['10/11/2026','Quí','981365415','https://www.peninsula-danang.com/']); adv(6); run();
+ok(to(900).length===m0,'khách dự án khác mới → không nhắn quản lý');
+ok(vm.runInContext("rows_('NhatKy',T_NK).some(function(r){return /chỉ lưu data/.test(r.hanh_dong)})",ctx)&&!all().some(x=>x.sdt==='0981365415'),'chỉ ghi nhật ký, không chia');
+msg(900,'/themkhac 0981365415 Quí - Peninsula'); run(); ok(all().some(x=>x.sdt==='0981365415'&&x.nhom==='khac'),'/themkhac vẫn chia được khi cần');
 console.log(fails?'TỔNG LỖI: '+fails:'TỔNG LỖI: 0');
