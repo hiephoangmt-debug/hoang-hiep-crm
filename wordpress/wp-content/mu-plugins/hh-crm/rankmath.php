@@ -36,6 +36,14 @@ function hh_rm_project_overrides() {
 			'kw'    => 'Capital Square Đà Nẵng,Capital Square,bảng giá Capital Square',
 			'title' => 'Capital Square Đà Nẵng: Bảng giá, chính sách %s',
 		),
+		'the-poet-residence-da-nang' => array(
+			'kw'    => 'The Poet Residence Đà Nẵng,The Poet Residence,giá The Poet Residence',
+			'title' => 'The Poet Residence Đà Nẵng: Giá từ 4,94 tỷ (%s)',
+		),
+		'casamia-balanca-hoi-an' => array(
+			'kw'    => 'Casamia Balanca Hội An,Casamia Balanca,giá biệt thự Casamia Balanca',
+			'title' => 'Casamia Balanca Hội An: Giá biệt thự, chính sách %s',
+		),
 		'symphony-5-sun-symphony-residence' => array(
 			'kw'    => 'Symphony 5 Đà Nẵng,Symphony 5 Sun Symphony Residence,giá Symphony 5',
 			'title' => 'Giá Symphony 5 Đà Nẵng: studio từ 2,5 tỷ (%s)',

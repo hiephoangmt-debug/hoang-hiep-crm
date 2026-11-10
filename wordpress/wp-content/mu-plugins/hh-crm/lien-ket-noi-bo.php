@@ -2,7 +2,7 @@
 /**
  * Liên kết nội bộ tự động: lần nhắc đầu tiên tên một dự án ưu tiên trong bài viết / trang dự án
  * được gắn link về trang dự án đó (tối đa 3 link mỗi trang, không đụng tiêu đề, link có sẵn).
- * Giúp các dự án ít link trỏ về (Symphony 5, The Legend, Nobu, Cora, Capital Square) dễ được Google thu thập.
+ * Giúp các dự án ít link trỏ về (Symphony 5, The Legend, Nobu, Cora, Capital Square, The Poet, Casamia Balanca) dễ được Google thu thập.
  *
  * @package HoangHiepCRM
  */
@@ -16,6 +16,8 @@ function hh_autolink_targets() {
 		'nobu-da-nang'                      => array( 'Nobu Residences Đà Nẵng', 'Nobu Residences', 'Nobu Đà Nẵng' ),
 		'cora-tower'                        => array( 'Cora Tower' ),
 		'capital-square-da-nang'            => array( 'Capital Square Đà Nẵng', 'Capital Square' ),
+		'the-poet-residence-da-nang'        => array( 'The Poet Residence', 'The Poet Đà Nẵng' ),
+		'casamia-balanca-hoi-an'            => array( 'Casamia Balanca' ),
 	);
 }
 
