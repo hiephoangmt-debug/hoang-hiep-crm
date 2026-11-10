@@ -22,15 +22,18 @@ function hh_rm_project_overrides() {
 			'title' => 'Sun Saphia Residence Đà Nẵng: Giá, mặt bằng %s',
 		),
 		'nobu-da-nang' => array(
-			'kw'    => 'Nobu Residences Đà Nẵng,Nobu Đà Nẵng,giá Nobu Residences Đà Nẵng',
+			'kw'     => 'Nobu Residences Đà Nẵng,Nobu Đà Nẵng,bảng giá Nobu Residences Đà Nẵng',
+			'kw_old' => array( 'Nobu Residences Đà Nẵng,Nobu Đà Nẵng,giá Nobu Residences Đà Nẵng' ),
 			'title' => 'Nobu Residences Đà Nẵng: Giá bán, tiến độ %s',
 		),
 		'cora-tower' => array(
-			'kw'    => 'Cora Tower Đà Nẵng,Cora Tower,giá Cora Tower',
+			'kw'     => 'Cora Tower Đà Nẵng,Cora Tower,bảng giá Cora Tower',
+			'kw_old' => array( 'Cora Tower Đà Nẵng,Cora Tower,giá Cora Tower' ),
 			'title' => 'Cora Tower Đà Nẵng: Giá từ 2,42 tỷ, chính sách %s',
 		),
 		'the-legend-da-nang' => array(
-			'kw'    => 'The Legend Đà Nẵng,The Legend City Đà Nẵng,giá The Legend Đà Nẵng',
+			'kw'     => 'The Legend Đà Nẵng,The Legend City Đà Nẵng,bảng giá The Legend Đà Nẵng',
+			'kw_old' => array( 'The Legend Đà Nẵng,The Legend City Đà Nẵng,giá The Legend Đà Nẵng', 'The Legend Đà Nẵng,The Legend Sun Group,giá The Legend Đà Nẵng' ),
 			'title' => 'The Legend Đà Nẵng (Legend City): Giá, chính sách %s',
 		),
 		'capital-square-da-nang' => array(
@@ -46,9 +49,9 @@ function hh_rm_project_overrides() {
 			'title' => 'Casamia Balanca Hội An: Giá biệt thự, chính sách %s',
 		),
 		'symphony-5-sun-symphony-residence' => array(
-			'kw'     => 'Sun Symphony 5,Symphony 5 Đà Nẵng,giá Sun Symphony 5,Sun Symphony Residence 5',
-			'kw_old' => array( 'Symphony 5 Đà Nẵng,Symphony 5 Sun Symphony Residence,giá Symphony 5' ),
-			'title'  => 'Giá Sun Symphony 5 Đà Nẵng: studio từ 2,5 tỷ (%s)',
+			'kw'     => 'Sun Symphony 5,Symphony 5 Đà Nẵng,bảng giá Sun Symphony 5,Sun Symphony Residence 5',
+			'kw_old' => array( 'Symphony 5 Đà Nẵng,Symphony 5 Sun Symphony Residence,giá Symphony 5', 'Sun Symphony 5,Symphony 5 Đà Nẵng,giá Sun Symphony 5,Sun Symphony Residence 5' ),
+			'title'  => 'Sun Symphony 5 Đà Nẵng: Bảng giá, chính sách %s',
 		),
 		'fours-tower' => array(
 			'kw' => 'FourS Tower,FourS Tower Đà Nẵng,Four S Tower,giá FourS Tower',

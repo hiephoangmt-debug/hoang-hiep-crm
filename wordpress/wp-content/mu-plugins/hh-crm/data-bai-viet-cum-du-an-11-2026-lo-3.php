@@ -36,7 +36,7 @@ function hh_posts_cum_du_an_11_2026_lo_3( $posts ) {
 </div>
 <p>Hai dự án căn hộ Sun Group được hỏi nhiều nhất cuối năm 2026 là {$saphia} và {$s5}. Cả hai cùng thương hiệu, cùng thời hạn 50 năm, cùng nhiều studio. Bài này so sánh theo góc nhìn người mua để cho thuê.</p>
 <!--hh-featured-->
-<h2>Bảng so sánh</h2>
+<h2>Sun Saphia hay Symphony 5: bảng so sánh</h2>
 <table>
 <thead><tr><th>Tiêu chí</th><th>Sun Saphia Residence</th><th>Symphony 5</th></tr></thead>
 <tbody>
@@ -74,7 +74,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Sun Saphia hay Symphony 5: mua studio cho thuê?',
-			'desc'      => 'So sánh Sun Saphia Residence và Symphony 5 để cho thuê: studio 2,13 – 2,85 tỷ (chưa VAT) và 2,50 – 3,30 tỷ (gồm VAT), biển Sơn Thủy và sông Hàn, nhận nhà 11/2028 và 6/2028.',
+			'desc'      => 'Sun Saphia hay Symphony 5 để cho thuê: studio 2,13 – 2,85 tỷ (chưa VAT) và 2,50 – 3,30 tỷ (gồm VAT); biển Sơn Thủy hay sông Hàn, nhận nhà 2028.',
 			'points'    => array(
 				'Cùng Sun Group, cùng 50 năm, phần lớn là studio',
 				'Sun Saphia sát biển Sơn Thủy, 513 studio; Symphony 5 bên sông Hàn, 725 studio',
@@ -109,7 +109,7 @@ HTML
 </div>
 <p>Trước khi đặt chỗ {$saphia}, nhiều khách hỏi "chủ đầu tư là ai, đã làm những gì". Bài này tóm tắt thông tin về Sun Group, Sun Property và những dự án nhà ở tập đoàn đã làm ở Đà Nẵng, kèm điều cần kiểm tra trong hợp đồng.</p>
 <!--hh-featured-->
-<h2>Sun Group là ai</h2>
+<h2>Chủ đầu tư Sun Saphia Residence: Sun Group là ai</h2>
 <table>
 <tbody>
 <tr><th>Tên pháp lý</th><td>Công ty CP Tập đoàn Mặt Trời</td></tr>
@@ -153,7 +153,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Chủ đầu tư Sun Saphia Residence là ai? Sun Group',
-			'desc'      => 'Chủ đầu tư Sun Saphia Residence là Sun Group (Công ty CP Tập đoàn Mặt Trời), Sun Property phát triển; khởi nghiệp tại Đà Nẵng 2007. Dự án đã bàn giao, đang bán; cần kiểm tra gì khi ký.',
+			'desc'      => 'Chủ đầu tư Sun Saphia Residence là Sun Group (Công ty CP Tập đoàn Mặt Trời), Sun Property phát triển. Dự án đã bàn giao, đang bán, cần kiểm tra gì.',
 			'points'    => array(
 				'Sun Group (Công ty CP Tập đoàn Mặt Trời), Sun Property phát triển',
 				'Khởi nghiệp tại Đà Nẵng năm 2007; đã bàn giao Premier Village, Euro Village 2',
@@ -188,7 +188,7 @@ HTML
 </div>
 <p>Giá căn hộ {$cs} từ khoảng 4,3 tỷ nên phần lớn khách mua có vay ngân hàng. Bài này giải thích hai phương án hỗ trợ lãi suất của tòa <a href="/du-an/capital-square-hudson-place-s4/">Hudson Place S4</a> và ví dụ dòng tiền để anh chị chuẩn bị vốn.</p>
 <!--hh-featured-->
-<h2>Điều kiện vay</h2>
+<h2>Điều kiện vay mua Capital Square</h2>
 <ul>
 <li>Vay tới <strong>70% tổng giá bán</strong> (có VAT, không gồm kinh phí bảo trì).</li>
 <li>Ân hạn nợ gốc 36 tháng.</li>
@@ -230,7 +230,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Vay mua Capital Square: 70%, lãi 0% đến 36 tháng',
-			'desc'      => 'Vay mua Capital Square Đà Nẵng: vay 70% giá bán, lãi 0% đến 36 tháng, ân hạn gốc 36 tháng. Hai phương án hỗ trợ lãi suất, ví dụ căn 1PN 4,32 tỷ: vốn tự có, trả góp mỗi tháng.',
+			'desc'      => 'Vay mua Capital Square Đà Nẵng: vay 70% giá bán, lãi 0% đến 36 tháng, ân hạn gốc 36 tháng; ví dụ căn 1PN 4,32 tỷ cần khoảng 1,3 tỷ vốn tự có.',
 			'points'    => array(
 				'Vay tới 70% giá bán, ân hạn gốc 36 tháng',
 				'Phương án 1: 0% 36 tháng (phần 50%), 24 tháng (phần 20%); phương án 2 cố định 7,5%/năm sau hỗ trợ',
@@ -265,7 +265,7 @@ HTML
 </div>
 <p>Ở phân khúc căn hộ cao cấp Đà Nẵng, hai dự án được so nhiều nhất là <a href="/du-an/nobu-da-nang/">Nobu Residences Đà Nẵng</a> và <a href="/du-an/the-legend-da-nang/">The Legend Đà Nẵng</a>. Cùng ở Sơn Trà, cách nhau không xa, nhưng khác nhau về pháp lý, thương hiệu và cách khai thác.</p>
 <!--hh-featured-->
-<h2>Bảng so sánh</h2>
+<h2>So sánh hai dự án căn hộ cao cấp Đà Nẵng</h2>
 <table>
 <thead><tr><th>Tiêu chí</th><th>Nobu Residences</th><th>The Legend</th></tr></thead>
 <tbody>
@@ -308,7 +308,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Nobu hay The Legend: căn hộ cao cấp Đà Nẵng nào?',
-			'desc'      => 'So sánh Nobu Residences và The Legend Đà Nẵng: mặt biển và chân cầu Rồng, căn 1PN 6,63 – 9,06 tỷ và 7,65 – 9,59 tỷ, thương hiệu Nobu và sở hữu lâu dài, bàn giao 2027 và 3/2028.',
+			'desc'      => 'Căn hộ cao cấp Đà Nẵng: so sánh Nobu Residences (mặt biển Mỹ Khê) và The Legend (chân cầu Rồng) – giá 1PN, sở hữu, bàn giao, vận hành.',
 			'points'    => array(
 				'Nobu: căn hộ hàng hiệu mặt biển, 264 căn, bàn giao dự kiến 2027',
 				'The Legend: sở hữu lâu dài chân cầu Rồng, 800 căn, bàn giao 31/3/2028',

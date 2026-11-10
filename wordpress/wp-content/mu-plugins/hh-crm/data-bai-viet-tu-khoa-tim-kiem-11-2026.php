@@ -17,7 +17,7 @@ function hh_posts_tu_khoa_tim_kiem_11_2026( $posts ) {
 	/* ---------------- Cora, Spana, S-Light khi nào bàn giao ---------------- */
 	$posts[] = array(
 		'slug'     => 'cora-tower-spana-tower-khi-nao-ban-giao',
-		'title'    => 'Cora Tower, Spana Tower khi nào bàn giao? Tiến độ căn hộ Sun NeO City Hòa Xuân',
+		'title'    => 'Cora Tower khi nào bàn giao? Spana Tower, S-Light Tower và tiến độ Sun NeO City Hòa Xuân',
 		'excerpt'  => 'Cora Tower dự kiến bàn giao 30/07/2027, Spana Tower dự kiến 30/06/2027; tháng 11/2026 hai tòa Spana đang lên khoảng tầng 10. Nhận nhà sớm khi thanh toán 70% (Sun Early Key). S-Light Tower ở đâu, đã mở bán từ khi nào.',
 		'keyword'  => 'Cora Tower khi nào bàn giao',
 		'keywords_extra' => array( 'Spana Tower khi nào bàn giao', 'tiến độ Spana Tower', 'tiến độ Cora Tower', 'S-Light Tower ở đâu' ),
@@ -34,7 +34,7 @@ function hh_posts_tu_khoa_tim_kiem_11_2026( $posts ) {
 </div>
 <p>Ba tòa căn hộ Sun Group ở khu đô thị Sun NeO City (Hòa Xuân) là <a href="/du-an/cora-tower/">Cora Tower</a>, <a href="/du-an/spana-tower/">Spana Tower</a> và <a href="/du-an/s-light-tower/">S-Light Tower</a>. Câu khách hỏi nhiều nhất là "khi nào bàn giao" và "xây đến đâu rồi". Bài này trả lời theo tài liệu chủ đầu tư và ảnh công trường mới nhất.</p>
 <!--hh-featured-->
-<h2>Bảng mốc bàn giao</h2>
+<h2>Cora Tower khi nào bàn giao: mốc của ba tòa</h2>
 <table>
 <thead><tr><th>Tòa</th><th>Bàn giao dự kiến</th><th>Tiến độ / pháp lý</th></tr></thead>
 <tbody>
@@ -64,8 +64,8 @@ function hh_posts_tu_khoa_tim_kiem_11_2026( $posts ) {
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Cora Tower, Spana Tower khi nào bàn giao? (11/2026)',
-			'desc'      => 'Cora Tower dự kiến bàn giao 30/07/2027, Spana Tower 30/06/2027 – tháng 11/2026 Spana lên khoảng tầng 10. Nhận nhà khi thanh toán 70%. S-Light Tower ở đâu.',
+			'seo_title' => 'Cora Tower khi nào bàn giao? Spana, S-Light (11/2026)',
+			'desc'      => 'Cora Tower khi nào bàn giao: dự kiến 30/07/2027; Spana Tower 30/06/2027, tháng 11/2026 lên khoảng tầng 10. Nhận nhà khi trả 70%. S-Light ở đâu.',
 			'points'    => array(
 				'Spana Tower bàn giao dự kiến 30/06/2027; 11/2026 lên khoảng tầng 10',
 				'Cora Tower bàn giao dự kiến 30/07/2027',
@@ -100,7 +100,7 @@ HTML
 </div>
 <p>Trên Google, nhiều người gõ "Nobu Đà Nẵng của ai", "chủ đầu tư Nobu Đà Nẵng". Bài này trả lời ngắn gọn ai đứng sau <a href="/du-an/nobu-da-nang/">Nobu Residences Đà Nẵng</a>, vai trò từng bên và những điều người mua nên kiểm tra.</p>
 <!--hh-featured-->
-<h2>Ai làm gì trong dự án</h2>
+<h2>Nobu Đà Nẵng của ai: vai trò từng bên</h2>
 <table>
 <thead><tr><th>Bên</th><th>Vai trò</th></tr></thead>
 <tbody>
@@ -134,7 +134,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Nobu Đà Nẵng của ai? Chủ đầu tư VCRE và Nobu',
-			'desc'      => 'Nobu Đà Nẵng do VCRE (Bất động sản Bản Việt, thành viên Phoenix Holdings) phát triển cùng Nobu Hospitality; tháp 43 tầng ở 01 Võ Văn Kiệt, dự kiến hoàn thành 2027.',
+			'desc'      => 'Nobu Đà Nẵng của ai: VCRE (Bất động sản Bản Việt, thành viên Phoenix Holdings) phát triển cùng Nobu Hospitality; tháp 43 tầng ở 01 Võ Văn Kiệt.',
 			'points'    => array(
 				'VCRE (Bất động sản Bản Việt) phát triển cùng Phoenix Holdings',
 				'Nobu Hospitality vận hành khách sạn, nhà hàng, căn hộ hàng hiệu',
@@ -154,7 +154,7 @@ HTML
 		'slug'     => 'the-legend-da-nang-cua-chu-dau-tu-nao',
 		'title'    => 'The Legend Đà Nẵng của chủ đầu tư nào? VIPICO và dự án The Legend City đầu cầu Rồng',
 		'excerpt'  => 'The Legend Đà Nẵng (The Legend City Danang) do Công ty TNHH MTV VIPICO làm chủ đầu tư, ROX Signature phát triển, trên lô A20 Võ Văn Kiệt ngay đầu cầu Rồng. Quy mô, vốn, lịch sử pháp lý khu đất và điều người mua cần kiểm tra.',
-		'keyword'  => 'The Legend Đà Nẵng chủ đầu tư',
+		'keyword'  => 'The Legend Đà Nẵng của chủ đầu tư nào',
 		'keywords_extra' => array( 'The Legend Đà Nẵng của chủ đầu tư nào', 'chủ đầu tư The Legend City', 'VIPICO Đà Nẵng' ),
 		'project'  => 'the-legend-da-nang',
 		'schedule' => '2026-11-25 09:00',
@@ -169,7 +169,7 @@ HTML
 </div>
 <p>Từ khoá "The Legend Đà Nẵng chủ đầu tư", "của chủ đầu tư nào" được tìm nhiều vì khu đất A20 từng có lịch sử pháp lý phức tạp. Bài này tóm tắt chủ đầu tư, quá trình tháo gỡ và tình trạng hiện tại của <a href="/du-an/the-legend-da-nang/">The Legend Đà Nẵng</a>.</p>
 <!--hh-featured-->
-<h2>Thông tin chủ đầu tư</h2>
+<h2>The Legend Đà Nẵng của chủ đầu tư nào: thông tin VIPICO</h2>
 <table>
 <tbody>
 <tr><th>Chủ đầu tư</th><td>Công ty TNHH MTV VIPICO</td></tr>
@@ -204,7 +204,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'The Legend Đà Nẵng của chủ đầu tư nào? VIPICO',
-			'desc'      => 'The Legend Đà Nẵng (The Legend City) do Công ty TNHH MTV VIPICO làm chủ đầu tư, ROX Signature phát triển; lô A20 Võ Văn Kiệt đầu cầu Rồng. Lịch sử khu đất, pháp lý hiện tại.',
+			'desc'      => 'The Legend Đà Nẵng của chủ đầu tư nào: Công ty TNHH MTV VIPICO, ROX Signature phát triển; lô A20 Võ Văn Kiệt đầu cầu Rồng, pháp lý hiện tại.',
 			'points'    => array(
 				'Chủ đầu tư Công ty TNHH MTV VIPICO, ROX Signature phát triển',
 				'Lô A20 Võ Văn Kiệt, đầu cầu Rồng; khởi công 28/02/2025',
@@ -239,7 +239,7 @@ HTML
 </div>
 <p>"Sun Symphony 5 ở đâu", "Symphony 5 vị trí" là những câu khách gõ nhiều nhất trước khi xem giá. Bài này mô tả vị trí <a href="/du-an/symphony-5-sun-symphony-residence/">Sun Symphony 5</a>, khoảng cách tới các điểm chính và tiện ích trong, ngoài dự án.</p>
 <!--hh-featured-->
-<h2>Khoảng cách tới các điểm chính</h2>
+<h2>Sun Symphony 5 ở đâu: khoảng cách tới các điểm chính</h2>
 <table>
 <thead><tr><th>Điểm đến</th><th>Khoảng cách</th></tr></thead>
 <tbody>
@@ -274,7 +274,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Sun Symphony 5 ở đâu? Vị trí bên sông Hàn',
-			'desc'      => 'Sun Symphony 5 nằm trên đường Lê Văn Duyệt, Sơn Trà, bờ Đông sông Hàn: cách cầu Rồng 1,5 km, biển Mỹ Khê 2,5 km, sân bay 6 km. Tổng mặt bằng, view, tiện ích.',
+			'desc'      => 'Sun Symphony 5 ở đâu: đường Lê Văn Duyệt, Sơn Trà, bờ Đông sông Hàn; cách cầu Rồng 1,5 km, biển Mỹ Khê 2,5 km, sân bay 6 km.',
 			'points'    => array(
 				'Đường Lê Văn Duyệt, phường Sơn Trà, bờ Đông sông Hàn',
 				'Cầu Rồng 1,5 km, biển Mỹ Khê 2,5 km, sân bay 6 km',

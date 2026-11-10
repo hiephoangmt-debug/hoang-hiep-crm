@@ -40,7 +40,7 @@ function hh_posts_cum_du_an_11_2026_lo_4( $posts ) {
 </div>
 <p>Với căn hộ giá từ khoảng 7,65 tỷ, câu hỏi đầu tiên của khách là pháp lý. Bài này liệt kê các văn bản của {$legend} theo thứ tự thời gian và giải thích ý nghĩa từng văn bản với người mua.</p>
 <!--hh-featured-->
-<h2>Các văn bản pháp lý</h2>
+<h2>Các văn bản pháp lý The Legend Đà Nẵng</h2>
 <table>
 <thead><tr><th>Văn bản</th><th>Ngày</th><th>Ý nghĩa với người mua</th></tr></thead>
 <tbody>
@@ -79,7 +79,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Pháp lý The Legend Đà Nẵng: sở hữu lâu dài, 800 căn',
-			'desc'      => 'Pháp lý The Legend Đà Nẵng: đấu giá đất 2017, sổ đất 2020, quy hoạch 1/500 năm 2024, phép xây dựng phần ngầm 2025, đủ điều kiện huy động vốn, 800 căn đủ điều kiện bán.',
+			'desc'      => 'Pháp lý The Legend Đà Nẵng: đất đấu giá 2017, sổ đất 2020, quy hoạch 1/500 năm 2024, đủ điều kiện huy động vốn, 800 căn đủ điều kiện bán.',
 			'points'    => array(
 				'Căn hộ sở hữu lâu dài; khối khách sạn, căn hộ dịch vụ 50 năm',
 				'Đất đấu giá 2017, sổ đất 2020, quy hoạch 1/500 ngày 24/5/2024',
@@ -114,7 +114,7 @@ HTML
 </div>
 <p>Bài này giúp anh chị đọc <strong>mặt bằng {$cora}</strong>: vị trí hai tòa, cách bố trí từng tầng và layout các loại căn, để chọn căn trước khi xem giỏ hàng.</p>
 <!--hh-featured-->
-<h2>Tổng mặt bằng</h2>
+<h2>Tổng mặt bằng Cora Tower</h2>
 <p>Hai tòa đối xứng qua đường 29/3. Mỗi tòa có dạng thân dài cong theo trục đường, hành lang giữa, căn hộ hai bên. Đầu tòa hướng về vòng xoay Nguyễn Phước Lan; xung quanh là nhà phố, biệt thự thấp tầng của Sun NeO City nên tầng trung trở lên khá thoáng.</p>
 <h2>Bố trí theo tầng</h2>
 <table>
@@ -160,7 +160,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Mặt bằng Cora Tower: 2 tòa A1, A2, 28 căn/tầng',
-			'desc'      => 'Mặt bằng Cora Tower – Sun NeO City: hai tòa A1, A2 hai bên đường 29/3, 616 căn điển hình mỗi tòa, 28 căn/tầng; shophouse tầng 1, căn sân vườn tầng 3, penthouse tầng 25.',
+			'desc'      => 'Mặt bằng Cora Tower – Sun NeO City: 2 tòa A1, A2 hai bên đường 29/3, 616 căn điển hình mỗi tòa, 28 căn/tầng; shophouse, sân vườn, penthouse.',
 			'points'    => array(
 				'2 tòa A1, A2 hai bên đường 29/3, gần vòng xoay Nguyễn Phước Lan',
 				'Mỗi tòa 616 căn điển hình, 28 căn/tầng',
@@ -180,7 +180,7 @@ HTML
 		'slug'     => 'can-ho-hang-hieu-la-gi-nobu-da-nang',
 		'title'    => 'Căn hộ hàng hiệu là gì? Nobu Residences Đà Nẵng khác căn hộ cao cấp thường ở đâu',
 		'excerpt'  => 'Căn hộ hàng hiệu (branded residences) là căn hộ gắn thương hiệu khách sạn, được vận hành theo chuẩn thương hiệu. Lấy Nobu Residences Đà Nẵng làm ví dụ: thương hiệu, dịch vụ, chi phí, cách khai thác và điều cần hỏi trước khi mua.',
-		'keyword'  => 'căn hộ hàng hiệu Đà Nẵng',
+		'keyword'  => 'căn hộ hàng hiệu',
 		'keywords_extra' => array( 'căn hộ hàng hiệu là gì', 'branded residences Đà Nẵng', 'Nobu Residences là gì' ),
 		'project'  => 'nobu-da-nang',
 		'schedule' => '2026-11-20 14:00',
@@ -239,7 +239,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Căn hộ hàng hiệu là gì? Ví dụ Nobu Đà Nẵng',
-			'desc'      => 'Căn hộ hàng hiệu là căn hộ gắn thương hiệu khách sạn, vận hành theo chuẩn thương hiệu. Ví dụ Nobu Residences Đà Nẵng: 264 căn, Nobu Hospitality vận hành; khác gì căn hộ thường.',
+			'desc'      => 'Căn hộ hàng hiệu là căn hộ gắn thương hiệu khách sạn, vận hành theo chuẩn thương hiệu. Ví dụ Nobu Residences Đà Nẵng: 264 căn, Nobu vận hành.',
 			'points'    => array(
 				'Căn hộ hàng hiệu: thương hiệu khách sạn tham gia thiết kế và vận hành',
 				'Nobu Residences Đà Nẵng: 264 căn, cùng tòa khách sạn và nhà hàng Nobu',
@@ -274,7 +274,7 @@ HTML
 </div>
 <p>Bài này tổng hợp <strong>mặt bằng {$fours}</strong>: vị trí 4 tháp, bố trí theo tầng (lấy tòa F2 – Tháp Mai làm ví dụ vì có bộ mặt bằng đầy đủ nhất) và layout từng loại căn.</p>
 <!--hh-featured-->
-<h2>4 tháp và tình trạng bán</h2>
+<h2>Mặt bằng FourS Tower: 4 tháp và tình trạng bán</h2>
 <table>
 <thead><tr><th>Tháp</th><th>Tên</th><th>Tình trạng</th></tr></thead>
 <tbody>
@@ -356,7 +356,7 @@ HTML
 </div>
 <p>Phần lớn khách quan tâm {$saphia} hỏi về studio. Nhưng nếu mua để ở hoặc cho thuê dài hạn, căn 1PN+ là lựa chọn đáng xem vì số lượng ít và công năng linh hoạt hơn.</p>
 <!--hh-featured-->
-<h2>Thông tin căn 1PN+</h2>
+<h2>Thông tin căn 1PN+ Sun Saphia</h2>
 <table>
 <tbody>
 <tr><th>Số căn</th><td>108 căn (khoảng 14% tổng 782 căn)</td></tr>
@@ -425,7 +425,7 @@ HTML
 </div>
 <p>Bài này tổng hợp tiến độ {$cs} qua ảnh flycam công trường của chủ đầu tư và các mốc đã công bố. Nhà thầu kết cấu, xây thô một số tòa (2.4, 2.6, MAT 5, MAT 6) là Delta Group.</p>
 <!--hh-featured-->
-<h2>Các mốc tiến độ</h2>
+<h2>Các mốc tiến độ Capital Square</h2>
 <table>
 <thead><tr><th>Thời điểm</th><th>Tiến độ</th></tr></thead>
 <tbody>
@@ -455,7 +455,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Tiến độ Capital Square Đà Nẵng: bàn giao dự kiến 2027',
-			'desc'      => 'Tiến độ Capital Square Đà Nẵng: khởi công Capital Square 3 tháng 3/2025, tầng hầm 9/2025, phần đế 5/2026, S3 và S4 thi công phần thân 9/2026; bàn giao dự kiến 2027.',
+			'desc'      => 'Tiến độ Capital Square Đà Nẵng: khởi công 3/2025, tầng hầm 9/2025, phần đế 5/2026, tòa S3, S4 thi công phần thân 9/2026; bàn giao dự kiến 2027.',
 			'points'    => array(
 				'Khởi công Capital Square 3 tháng 3/2025',
 				'9/2026: tòa S4 Hudson Place, S3 Broadway Place thi công phần thân',
@@ -505,7 +505,7 @@ HTML
 <li><strong>Chung khu với khách sạn:</strong> tháp khách sạn 25 tầng (444 phòng, căn hộ dịch vụ) cùng khối đế – đông khách hơn chung cư thuần ở.</li>
 <li><strong>Chính sách theo đợt:</strong> chính sách đang dùng ban hành 17/7/2025, có thể đã điều chỉnh – hỏi bản mới nhất khi đặt căn.</li>
 </ol>
-<h2>Ai nên mua</h2>
+<h2>Có nên mua The Legend Đà Nẵng: ai hợp</h2>
 <ul>
 <li><strong>Nên:</strong> gia đình muốn ở trung tâm lâu dài; người mua giữ tài sản để lại con cháu; khách cần căn hộ cao cấp sở hữu lâu dài bên sông.</li>
 <li><strong>Cân nhắc:</strong> người mua để cho thuê ngắn ngày với ngân sách dưới 4 tỷ – xem các dự án như <a href="/gia-symphony-5-sun-symphony-residence-bao-nhieu/">Symphony 5</a>.</li>
@@ -516,7 +516,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Có nên mua The Legend Đà Nẵng? Ưu và nhược điểm',
-			'desc'      => 'Có nên mua The Legend Đà Nẵng: ưu điểm chân cầu Rồng, sở hữu lâu dài, pháp lý rõ, bàn giao cao cấp, ưu đãi đến 12%; cân nhắc giá cao, bàn giao 3/2028, chung khu khách sạn.',
+			'desc'      => 'Có nên mua The Legend Đà Nẵng: ưu điểm chân cầu Rồng, sở hữu lâu dài, pháp lý rõ, ưu đãi đến 12%; cân nhắc giá cao, bàn giao dự kiến 3/2028.',
 			'points'    => array(
 				'Chân cầu Rồng, sở hữu lâu dài, 800 căn đủ điều kiện bán',
 				'Quà nội thất đến 1,8 tỷ, chiết khấu đến 12%, vay 0% 24 tháng',
@@ -535,7 +535,7 @@ HTML
 		'slug'     => 'chi-phi-khi-mua-can-ho-moi-ngoai-gia-ban',
 		'title'    => 'Mua căn hộ mới cần trả những chi phí gì ngoài giá bán? 7 khoản người mua hay quên',
 		'excerpt'  => 'Ngoài giá bán, mua căn hộ mới từ chủ đầu tư còn các khoản: VAT, kinh phí bảo trì 2%, lệ phí trước bạ 0,5% khi làm sổ, phí quản lý hằng tháng, chi phí hoàn thiện nội thất, lãi vay sau hỗ trợ và phí làm sổ. Cách đọc giá đã gồm gì.',
-		'keyword'  => 'chi phí mua căn hộ',
+		'keyword'  => 'chi phí mua căn hộ mới',
 		'keywords_extra' => array( 'chi phí mua căn hộ chung cư', 'phí bảo trì căn hộ 2%', 'mua căn hộ mới cần bao nhiêu tiền' ),
 		'schedule' => '2026-11-23 09:00',
 		'category' => 'Kinh nghiệm mua bán',
@@ -544,12 +544,12 @@ HTML
 		'image_alt' => 'Căn hộ mẫu FourS Tower F2 (hình 3D chủ đầu tư)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Mua căn hộ mới cần trả gì ngoài giá bán?</strong> Bảy khoản thường gặp: (1) thuế VAT nếu giá chưa gồm; (2) <strong>kinh phí bảo trì 2%</strong>; (3) <strong>lệ phí trước bạ 0,5%</strong> khi làm giấy chứng nhận; (4) phí quản lý hằng tháng; (5) chi phí hoàn thiện, nội thất; (6) lãi vay sau thời gian hỗ trợ; (7) phí, lệ phí cấp giấy chứng nhận theo mức địa phương. Nhiều giỏ hàng ở Đà Nẵng đã gồm VAT và kinh phí bảo trì, nhưng không phải tất cả.</p>
+<p><strong>Mua căn hộ mới cần trả gì ngoài giá bán?</strong> Bảy khoản chi phí mua căn hộ mới thường gặp: (1) thuế VAT nếu giá chưa gồm; (2) <strong>kinh phí bảo trì 2%</strong>; (3) <strong>lệ phí trước bạ 0,5%</strong> khi làm giấy chứng nhận; (4) phí quản lý hằng tháng; (5) chi phí hoàn thiện, nội thất; (6) lãi vay sau thời gian hỗ trợ; (7) phí, lệ phí cấp giấy chứng nhận theo mức địa phương. Nhiều giỏ hàng ở Đà Nẵng đã gồm VAT và kinh phí bảo trì, nhưng không phải tất cả.</p>
 {$sign}
 </div>
 <p>Khi so giá giữa các dự án, nhiều khách chỉ nhìn con số trên giỏ hàng. Thực tế, cùng con số nhưng một dự án đã gồm VAT và phí bảo trì, dự án khác chưa gồm, nên tổng tiền chênh nhau hàng trăm triệu. Bài này liệt kê các khoản cần cộng thêm.</p>
 <!--hh-featured-->
-<h2>7 khoản ngoài giá bán</h2>
+<h2>7 khoản chi phí mua căn hộ mới ngoài giá bán</h2>
 <table>
 <thead><tr><th>Khoản</th><th>Mức thường gặp</th><th>Khi nào trả</th></tr></thead>
 <tbody>
@@ -590,8 +590,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Chi phí khi mua căn hộ mới: 7 khoản ngoài giá bán',
-			'desc'      => 'Mua căn hộ mới ngoài giá bán còn VAT, kinh phí bảo trì 2%, lệ phí trước bạ 0,5%, phí cấp sổ, phí quản lý, hoàn thiện nội thất, lãi vay. Cách đọc giá giỏ hàng đã gồm gì.',
+			'seo_title' => 'Chi phí mua căn hộ mới: 7 khoản ngoài giá bán',
+			'desc'      => 'Chi phí mua căn hộ mới ngoài giá bán: VAT, kinh phí bảo trì 2%, lệ phí trước bạ 0,5%, phí cấp sổ, phí quản lý, hoàn thiện nội thất, lãi vay.',
 			'points'    => array(
 				'Kinh phí bảo trì 2% giá bán; lệ phí trước bạ 0,5% khi làm sổ',
 				'Kiểm tra giá giỏ hàng đã gồm VAT và phí bảo trì chưa',
@@ -625,7 +625,7 @@ HTML
 </div>
 <p>Phần lớn căn hộ mới ở Đà Nẵng hiện bán khi đang xây – gọi là nhà ở hình thành trong tương lai. Bài này tóm tắt những điểm người mua cần kiểm tra để giảm rủi ro, kèm ví dụ từ các dự án đang bán.</p>
 <!--hh-featured-->
-<h2>Trước khi đặt cọc</h2>
+<h2>Trước khi đặt cọc mua căn hộ hình thành trong tương lai</h2>
 <ul>
 <li><strong>Đủ điều kiện bán:</strong> hỏi văn bản của Sở Xây dựng (ví dụ: Spana Tower có xác nhận ngày 05/5/2026; The Legend có thông báo 800 căn đủ điều kiện bán).</li>
 <li><strong>Tiền đặt cọc:</strong> theo luật, chủ đầu tư chỉ được thu tiền cọc khi dự án đủ điều kiện, và không quá 5% giá bán. Ở các dự án Sun Group hiện nay cọc 100 – 300 triệu/căn tùy loại.</li>
@@ -661,7 +661,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Mua căn hộ hình thành trong tương lai: cần xem gì?',
-			'desc'      => 'Mua căn hộ hình thành trong tương lai: văn bản đủ điều kiện bán, bảo lãnh ngân hàng, tỷ lệ thanh toán tối đa 30% – 70% – 95%, tiền cọc, điều khoản hợp đồng cần đọc kỹ.',
+			'desc'      => 'Mua căn hộ hình thành trong tương lai: kiểm tra văn bản đủ điều kiện bán, bảo lãnh ngân hàng, thanh toán tối đa 30% – 70% – 95%, điều khoản hợp đồng.',
 			'points'    => array(
 				'Kiểm tra văn bản đủ điều kiện bán và bảo lãnh ngân hàng',
 				'Thanh toán tối đa: lần đầu 30%, trước bàn giao 70%, trước khi có sổ 95%',

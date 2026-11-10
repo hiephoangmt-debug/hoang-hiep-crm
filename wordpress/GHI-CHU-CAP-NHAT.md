@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.12** + plugin Hoàng Hiệp CRM **2.20.247**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.12** + plugin Hoàng Hiệp CRM **2.20.248**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.248 (11/11/2026)
+
+- Tách từ khoá giữa trang dự án và bài "giá … bao nhiêu" để không tranh nhau trên Google: trang dự án Sun Symphony 5 đổi tiêu đề thành "Sun Symphony 5 Đà Nẵng: Bảng giá, chính sách …"; từ khoá phụ trang Symphony 5, The Legend, Nobu, Cora đổi "giá …" thành "bảng giá …" (bài viết giữ "giá … bao nhiêu").
+- 29 bài hẹn đăng 11 – 25/11: mô tả Google ≤ 155 ký tự có từ khoá, từ khoá có trong tiêu đề phụ và đoạn đầu (kiểm tra theo tiêu chí Rank Math).
 
 ## Có gì mới – 2.20.247 (11/11/2026)
 

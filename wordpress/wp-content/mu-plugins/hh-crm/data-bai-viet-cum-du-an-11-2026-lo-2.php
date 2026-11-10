@@ -19,7 +19,7 @@ function hh_posts_cum_du_an_11_2026_lo_2( $posts ) {
 	/* ---------------- Cora Tower – Giá ---------------- */
 	$posts[] = array(
 		'slug'     => 'gia-cora-tower-da-nang-bao-nhieu',
-		'title'    => 'Giá bán Cora Tower Đà Nẵng bao nhiêu? Studio từ 2,42 tỷ, 1PN+ 3,45 – 3,84 tỷ (11/2026)',
+		'title'    => 'Giá Cora Tower Đà Nẵng bao nhiêu? Studio từ 2,42 tỷ, 1PN+ 3,45 – 3,84 tỷ (11/2026)',
 		'excerpt'  => 'Giá Cora Tower – Sun NeO City (Hòa Xuân) theo giỏ hàng 11/2026: studio 32,3 m² khoảng 2,42 – 2,74 tỷ, căn 1PN+ 53,2 – 54,2 m² khoảng 3,45 – 3,84 tỷ, shop khối đế 5,17 – 9,12 tỷ. Chiết khấu, vay 70%, nhận nhà 30/07/2027.',
 		'keyword'  => 'giá Cora Tower',
 		'keywords_extra' => array( 'giá Cora Tower Đà Nẵng', 'bảng giá Cora Tower', 'Cora Tower Sun NeO City giá' ),
@@ -31,7 +31,7 @@ function hh_posts_cum_du_an_11_2026_lo_2( $posts ) {
 		'image_alt' => 'Cora Tower nhìn từ trên cao, giao lộ Nguyễn Phước Lan – đường 29/3, Sun NeO City (phối cảnh chủ đầu tư)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Giá bán Cora Tower Đà Nẵng (giỏ hàng 11/2026):</strong> căn studio 32,3 m² khoảng <strong>2,42 – 2,74 tỷ</strong>; căn 1PN+ 53,2 – 54,2 m² khoảng <strong>3,45 – 3,84 tỷ</strong>; shop khối đế tầng 1 tòa A2 khoảng 5,17 – 9,12 tỷ. Giá đã gồm VAT và phí bảo trì, chưa trừ chiết khấu. Căn hộ sở hữu lâu dài, bàn giao dự kiến 30/07/2027.</p>
+<p><strong>Giá Cora Tower Đà Nẵng (giỏ hàng 11/2026):</strong> căn studio 32,3 m² khoảng <strong>2,42 – 2,74 tỷ</strong>; căn 1PN+ 53,2 – 54,2 m² khoảng <strong>3,45 – 3,84 tỷ</strong>; shop khối đế tầng 1 tòa A2 khoảng 5,17 – 9,12 tỷ. Giá đã gồm VAT và phí bảo trì, chưa trừ chiết khấu. Căn hộ sở hữu lâu dài, bàn giao dự kiến 30/07/2027.</p>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá bán (tham khảo)</th></tr></thead>
 <tbody>
@@ -56,7 +56,7 @@ function hh_posts_cum_du_an_11_2026_lo_2( $posts ) {
 </tbody>
 </table>
 <!--hh-dimg:1v4t7lNiDJAClwLbcoTY1637kgnKRUGsC|Phối cảnh hai tòa A1, A2 Cora Tower (ảnh chủ đầu tư)-->
-<h2>Giá đã gồm gì, được trừ gì</h2>
+<h2>Giá Cora Tower đã gồm gì, được trừ gì</h2>
 <ul>
 <li><strong>Đã gồm:</strong> VAT và phí bảo trì.</li>
 <li><strong>Đặc quyền hoàn thiện nội thất 7%</strong> cho căn hộ tòa A1, A2 (CSƯĐ 06.1 từ 21/8/2026).</li>
@@ -81,8 +81,8 @@ function hh_posts_cum_du_an_11_2026_lo_2( $posts ) {
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá Cora Tower Đà Nẵng: studio từ 2,42 tỷ (11/2026)',
-			'desc'      => 'Giá bán Cora Tower – Sun NeO City 11/2026: studio 32,3 m² 2,42 – 2,74 tỷ, 1PN+ 3,45 – 3,84 tỷ, shop 5,17 – 9,12 tỷ (gồm VAT, phí bảo trì). Chiết khấu, vay 70%, bàn giao 30/07/2027.',
+			'seo_title' => 'Giá Cora Tower bao nhiêu? Studio từ 2,42 tỷ (11/2026)',
+			'desc'      => 'Giá Cora Tower giỏ hàng 11/2026: studio 32,3 m² 2,42 – 2,74 tỷ, 1PN+ 3,45 – 3,84 tỷ, shop 5,17 – 9,12 tỷ, đã gồm VAT. Chiết khấu, vay 70%.',
 			'points'    => array(
 				'Studio 32,3 m² khoảng 2,42 – 2,74 tỷ; 1PN+ khoảng 3,45 – 3,84 tỷ',
 				'Đặc quyền hoàn thiện nội thất 7%; không vay chiết khấu thêm 5%',
@@ -103,7 +103,7 @@ HTML
 		'slug'     => 'cora-spana-s-light-sun-neo-city-nen-chon-toa-nao',
 		'title'    => 'Cora, Spana hay S-Light: mua căn hộ Sun NeO City Hòa Xuân nên chọn tòa nào?',
 		'excerpt'  => 'So sánh 3 tòa căn hộ Sun Group ở Sun NeO City (Hòa Xuân, Đà Nẵng): Cora Tower, Spana Tower và S-Light Tower – vị trí, quy mô, bàn giao, chiết khấu, đặt cọc. Ai hợp tòa nào.',
-		'keyword'  => 'Sun NeO City nên mua tòa nào',
+		'keyword'  => 'căn hộ Sun NeO City',
 		'keywords_extra' => array( 'căn hộ Sun NeO City', 'so sánh Cora Spana S-Light', 'căn hộ Hòa Xuân Sun Group' ),
 		'project'  => 'cora-tower',
 		'schedule' => '2026-11-15 14:00',
@@ -113,12 +113,12 @@ HTML
 		'image_alt' => 'S-Light Tower nhìn từ trên cao, ngã ba sông Hàn – Cẩm Lệ – Đô Toả, Sun NeO City (phối cảnh chủ đầu tư)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Sun NeO City nên chọn tòa nào?</strong> Cả ba tòa đều của Sun Group, sở hữu lâu dài, nhận nhà khi thanh toán 70%. <strong>Cora Tower</strong> nằm giữa khu đô thị, có giỏ hàng công khai (studio từ khoảng 2,42 tỷ), bàn giao dự kiến 30/07/2027. <strong>Spana Tower</strong> ngay chân cầu Hòa Xuân, quy mô lớn nhất (1.237 căn), bàn giao sớm nhất (dự kiến 30/06/2027). <strong>S-Light Tower</strong> ở ngã ba sông, view sông và pháo hoa, chiết khấu thanh toán sớm cao nhất (95% được 10%).</p>
+<p><strong>Căn hộ Sun NeO City nên chọn tòa nào?</strong> Cả ba tòa đều của Sun Group, sở hữu lâu dài, nhận nhà khi thanh toán 70%. <strong>Cora Tower</strong> nằm giữa khu đô thị, có giỏ hàng công khai (studio từ khoảng 2,42 tỷ), bàn giao dự kiến 30/07/2027. <strong>Spana Tower</strong> ngay chân cầu Hòa Xuân, quy mô lớn nhất (1.237 căn), bàn giao sớm nhất (dự kiến 30/06/2027). <strong>S-Light Tower</strong> ở ngã ba sông, view sông và pháo hoa, chiết khấu thanh toán sớm cao nhất (95% được 10%).</p>
 {$sign}
 </div>
 <p>Khách tìm căn hộ Sun Group ở Hòa Xuân thường phân vân giữa ba tòa: {$cora}, <a href="/du-an/spana-tower/">Spana Tower</a> và <a href="/du-an/s-light-tower/">S-Light Tower</a>. Bài này so sánh theo những tiêu chí người mua hỏi nhiều nhất.</p>
 <!--hh-featured-->
-<h2>Bảng so sánh</h2>
+<h2>Bảng so sánh căn hộ Sun NeO City</h2>
 <table>
 <thead><tr><th>Tiêu chí</th><th>Cora Tower</th><th>Spana Tower</th><th>S-Light Tower</th></tr></thead>
 <tbody>
@@ -157,8 +157,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Cora, Spana hay S-Light: Sun NeO City chọn tòa nào?',
-			'desc'      => 'So sánh 3 tòa căn hộ Sun Group ở Sun NeO City Hòa Xuân: Cora Tower, Spana Tower, S-Light Tower – vị trí, quy mô, bàn giao, chiết khấu, đặt cọc, ai hợp tòa nào.',
+			'seo_title' => 'Căn hộ Sun NeO City: Cora, Spana hay S-Light?',
+			'desc'      => 'Căn hộ Sun NeO City Hòa Xuân: so sánh Cora Tower, Spana Tower, S-Light Tower – vị trí, quy mô, bàn giao, chiết khấu, đặt cọc, ai hợp tòa nào.',
 			'points'    => array(
 				'Cora: giỏ hàng công khai, studio từ khoảng 2,42 tỷ, bàn giao 30/07/2027',
 				'Spana: chân cầu Hòa Xuân, 1.237 căn, bàn giao sớm nhất 30/06/2027',
@@ -176,9 +176,9 @@ HTML
 	/* ---------------- Capital Square – Bảng giá ---------------- */
 	$posts[] = array(
 		'slug'     => 'bang-gia-capital-square-da-nang-theo-toa',
-		'title'    => 'Bảng giá Capital Square Đà Nẵng theo tòa (11/2026): từ 4,32 tỷ, căn 1PN đến 3PN',
+		'title'    => 'Giá Capital Square Đà Nẵng theo tòa (11/2026): từ 4,32 tỷ, căn 1PN đến 3PN',
 		'excerpt'  => 'Bảng giá Capital Square Đà Nẵng giỏ hàng 11/2026 theo tòa: S4 Hudson Place 4,32 – 13,41 tỷ, S3 Broadway 4,78 – 11,61 tỷ, C7 Victory, C6 The Kings, C1 The Times, C4 The Queens. Giá theo loại căn, ưu đãi và sở hữu.',
-		'keyword'  => 'bảng giá Capital Square',
+		'keyword'  => 'giá Capital Square Đà Nẵng',
 		'keywords_extra' => array( 'giá Capital Square Đà Nẵng', 'bảng giá Capital Square Đà Nẵng', 'giá căn hộ Capital Square' ),
 		'project'  => 'capital-square-da-nang',
 		'schedule' => '2026-11-16 09:00',
@@ -188,7 +188,7 @@ HTML
 		'image_alt' => 'Phối cảnh Capital Square Đà Nẵng – các tòa căn hộ bên bờ Đông sông Hàn (ảnh chủ đầu tư)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Bảng giá Capital Square Đà Nẵng (giỏ hàng 11/2026):</strong> căn 1PN khoảng <strong>4,3 – 5,1 tỷ</strong>, 2PN khoảng 6,2 – 10,6 tỷ, 2PN+1 khoảng 7,3 – 10,8 tỷ, 3PN khoảng 9,3 – 13,9 tỷ. Thấp nhất hiện là tòa S4 Hudson Place từ 4,32 tỷ. Giá gồm VAT và kinh phí bảo trì, chưa trừ chiết khấu. Căn hộ sở hữu lâu dài với khách Việt Nam.</p>
+<p><strong>Giá Capital Square Đà Nẵng (giỏ hàng 11/2026):</strong> căn 1PN khoảng <strong>4,3 – 5,1 tỷ</strong>, 2PN khoảng 6,2 – 10,6 tỷ, 2PN+1 khoảng 7,3 – 10,8 tỷ, 3PN khoảng 9,3 – 13,9 tỷ. Thấp nhất hiện là tòa S4 Hudson Place từ 4,32 tỷ. Giá gồm VAT và kinh phí bảo trì, chưa trừ chiết khấu. Căn hộ sở hữu lâu dài với khách Việt Nam.</p>
 <table>
 <thead><tr><th>Tòa</th><th>Diện tích</th><th>Giá (tham khảo)</th><th>Ghi chú</th></tr></thead>
 <tbody>
@@ -204,7 +204,7 @@ HTML
 </div>
 <p>{$cs} là tổ hợp 14 tòa, 3.391 căn hộ của hệ sinh thái BRG bên bờ Đông sông Hàn. Mỗi tòa có giỏ hàng và mức giá riêng, nên câu hỏi "giá Capital Square bao nhiêu" cần trả lời theo từng tòa. Bài này tổng hợp <strong>bảng giá Capital Square</strong> theo giỏ hàng tháng 11/2026.</p>
 <!--hh-featured-->
-<h2>Giá theo loại căn (toàn tổ hợp)</h2>
+<h2>Giá Capital Square Đà Nẵng theo loại căn</h2>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá (tham khảo)</th></tr></thead>
 <tbody>
@@ -248,8 +248,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Bảng giá Capital Square Đà Nẵng theo tòa (11/2026)',
-			'desc'      => 'Bảng giá Capital Square Đà Nẵng 11/2026: 1PN 4,3 – 5,1 tỷ, 2PN 6,2 – 10,6 tỷ, 3PN 9,3 – 13,9 tỷ; giá từng tòa Hudson S4, Broadway S3, Victory, Kings, Times, Queens.',
+			'seo_title' => 'Giá Capital Square Đà Nẵng theo tòa (11/2026)',
+			'desc'      => 'Giá Capital Square Đà Nẵng giỏ hàng 11/2026: 1PN 4,3 – 5,1 tỷ, 2PN 6,2 – 10,6 tỷ, 3PN 9,3 – 13,9 tỷ; giá từng tòa Hudson, Broadway, Victory.',
 			'points'    => array(
 				'1PN khoảng 4,3 – 5,1 tỷ; 2PN 6,2 – 10,6 tỷ; 3PN 9,3 – 13,9 tỷ (gồm VAT, phí bảo trì)',
 				'Thấp nhất tòa S4 Hudson Place từ 4,32 tỷ',
@@ -336,7 +336,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Hudson Place S4 và Broadway S3: nên chọn tòa nào?',
-			'desc'      => 'So sánh Hudson Place S4 và Broadway Place S3 Capital Square Đà Nẵng: giá 1PN từ 4,32 / 4,78 tỷ, 3PN từ 9,33 / 8,50 tỷ, loại căn, vị trí, chính sách 11/2026.',
+			'desc'      => 'Hudson Place S4 hay Broadway Place S3 (Capital Square Đà Nẵng): 1PN từ 4,32 / 4,78 tỷ, 3PN từ 9,33 / 8,50 tỷ, loại căn, vị trí, chính sách 11/2026.',
 			'points'    => array(
 				'S4: 1PN từ khoảng 4,32 tỷ, có 3PN dualkey, vận hành Savills, bàn giao quý III/2027',
 				'S3: 1PN từ khoảng 4,78 tỷ, 3PN từ khoảng 8,50 tỷ',
@@ -365,7 +365,7 @@ HTML
 		'image_alt' => 'Phối cảnh 4 tháp FourS Tower, Ngũ Hành Sơn, Đà Nẵng (ảnh chủ đầu tư)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Căn hộ dưới 3 tỷ ở Đà Nẵng (11/2026):</strong> hiện có 7 dự án đang bán có căn dưới 3 tỷ, chủ yếu là studio và căn 1PN. Rẻ nhất là <strong>FourS Tower F1</strong> (studio 30,5 m² từ khoảng 1,77 tỷ khi trả sớm), <strong>FourS Tower F5</strong> (studio 34,9 m² từ khoảng 1,96 tỷ) và <strong>The Camellia Sơn Trà</strong> (studio 27,8 – 31,4 m² từ khoảng 1,98 tỷ). Dự án sở hữu lâu dài chiếm 5/7.</p>
+<p><strong>Căn hộ dưới 3 tỷ Đà Nẵng (11/2026):</strong> hiện có 7 dự án đang bán có căn dưới 3 tỷ, chủ yếu là studio và căn 1PN. Rẻ nhất là <strong>FourS Tower F1</strong> (studio 30,5 m² từ khoảng 1,77 tỷ khi trả sớm), <strong>FourS Tower F5</strong> (studio 34,9 m² từ khoảng 1,96 tỷ) và <strong>The Camellia Sơn Trà</strong> (studio 27,8 – 31,4 m² từ khoảng 1,98 tỷ). Dự án sở hữu lâu dài chiếm 5/7.</p>
 <table>
 <thead><tr><th>Dự án</th><th>Khu vực</th><th>Căn dưới 3 tỷ</th><th>Giá (tham khảo)</th><th>Sở hữu</th></tr></thead>
 <tbody>
@@ -382,7 +382,7 @@ HTML
 </div>
 <p>Với ngân sách <strong>dưới 3 tỷ</strong>, người mua căn hộ ở Đà Nẵng hiện vẫn có lựa chọn từ ven biển Ngũ Hành Sơn, chân bán đảo Sơn Trà đến bên sông Hàn. Bài này gom các dự án đang bán có căn dưới 3 tỷ, kèm diện tích, pháp lý và thời gian nhận nhà để anh chị so nhanh.</p>
 <!--hh-featured-->
-<h2>Cách đọc giá trong bảng</h2>
+<h2>Cách đọc giá căn hộ dưới 3 tỷ Đà Nẵng</h2>
 <ul>
 <li><strong>FourS Tower F1, F5:</strong> giá thấp là phương án thanh toán sớm, giá cao là phương án vay (theo phiếu tính giá chủ đầu tư). Ví dụ studio F1: 2,12 tỷ khi vay, 1,77 tỷ khi trả sớm (giá tiêu chuẩn 2,01 tỷ).</li>
 <li><strong>The Camellia:</strong> giá định hướng toàn dự án, phương án vay hỗ trợ lãi suất; thanh toán sớm 95% studio còn khoảng 1,72 – 2,30 tỷ, căn 1PN+1 (1,5PN) 47 m² còn khoảng 2,85 – 3,58 tỷ.</li>
@@ -423,7 +423,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Căn hộ dưới 3 tỷ Đà Nẵng: 7 dự án đang bán (11/2026)',
-			'desc'      => 'Căn hộ dưới 3 tỷ ở Đà Nẵng 11/2026: FourS F1, F5 studio từ 1,77 – 1,96 tỷ, The Camellia từ 1,98 tỷ, FPT Plaza 4 từ 2,1 tỷ, Sun Saphia, Cora, Symphony 5. Sở hữu, bàn giao.',
+			'desc'      => 'Căn hộ dưới 3 tỷ Đà Nẵng 11/2026: FourS F1, F5 studio từ 1,77 – 1,96 tỷ, The Camellia từ 1,98 tỷ, FPT Plaza 4 từ 2,1 tỷ, Cora, Symphony 5.',
 			'points'    => array(
 				'7 dự án có căn dưới 3 tỷ, chủ yếu studio và 1PN',
 				'Rẻ nhất: FourS F1 studio từ 1,77 tỷ (trả sớm), F5 từ 1,96 tỷ, The Camellia từ 1,98 tỷ',

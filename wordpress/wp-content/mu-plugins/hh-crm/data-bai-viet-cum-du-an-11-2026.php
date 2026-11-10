@@ -30,9 +30,9 @@ function hh_posts_cum_du_an_11_2026( $posts ) {
 	/* ---------------- Symphony 5 – Giá ---------------- */
 	$posts[] = array(
 		'slug'     => 'gia-symphony-5-sun-symphony-residence-bao-nhieu',
-		'title'    => 'Giá bán Symphony 5 Đà Nẵng bao nhiêu? Studio từ 2,5 tỷ, 1PN+ đến 4,54 tỷ (11/2026)',
+		'title'    => 'Giá Sun Symphony 5 Đà Nẵng bao nhiêu? Studio từ 2,5 tỷ, 1PN+ đến 4,54 tỷ (11/2026)',
 		'excerpt'  => 'Giá Symphony 5 – Sun Symphony Residence theo giỏ hàng 11/2026: studio 30 – 33 m² khoảng 2,50 – 3,30 tỷ, 1PN khoảng 3,09 – 3,30 tỷ, 1PN+ khoảng 3,45 – 4,54 tỷ (gồm VAT, phí bảo trì). Cách tính giá sau chiết khấu, vay 70%.',
-		'keyword'  => 'giá Symphony 5',
+		'keyword'  => 'giá Sun Symphony 5',
 		'keywords_extra' => array( 'giá Symphony 5 Đà Nẵng', 'bảng giá Symphony 5', 'giá căn hộ Sun Symphony Residence' ),
 		'project'  => 'symphony-5-sun-symphony-residence',
 		'schedule' => '2026-11-11 14:00',
@@ -42,7 +42,7 @@ function hh_posts_cum_du_an_11_2026( $posts ) {
 		'image_alt' => 'Symphony 5 – Sun Symphony Residence bên sông Hàn lúc hoàng hôn (phối cảnh chủ đầu tư)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Giá bán Symphony 5 Đà Nẵng (giỏ hàng 11/2026):</strong> căn studio 30 – 33 m² khoảng <strong>2,50 – 3,30 tỷ</strong>; căn 1PN 46,4 – 47,8 m² khoảng 3,09 – 3,30 tỷ; căn 1PN+ 44 – 53 m² khoảng 3,45 – 4,54 tỷ. Giá đã gồm VAT và kinh phí bảo trì, chưa trừ chiết khấu. Căn 2PN và penthouse: liên hệ để nhận giá từng căn.</p>
+<p><strong>Giá Sun Symphony 5 Đà Nẵng (giỏ hàng 11/2026):</strong> căn studio 30 – 33 m² khoảng <strong>2,50 – 3,30 tỷ</strong>; căn 1PN 46,4 – 47,8 m² khoảng 3,09 – 3,30 tỷ; căn 1PN+ 44 – 53 m² khoảng 3,45 – 4,54 tỷ. Giá đã gồm VAT và kinh phí bảo trì, chưa trừ chiết khấu. Căn 2PN và penthouse: liên hệ để nhận giá từng căn.</p>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá bán (tham khảo)</th></tr></thead>
 <tbody>
@@ -59,7 +59,7 @@ function hh_posts_cum_du_an_11_2026( $posts ) {
 <!--hh-featured-->
 <h2>Thông tin nhanh về Symphony 5</h2>
 {$s5_facts}
-<h2>Giá theo loại căn</h2>
+<h2>Giá Sun Symphony 5 theo loại căn</h2>
 <p>Studio chiếm phần lớn tòa (725/1.228 căn) nên có nhiều lựa chọn tầng và hướng nhất. Chênh lệch trong cùng loại căn (ví dụ studio từ 2,50 đến 3,30 tỷ) chủ yếu do <strong>tầng</strong> và <strong>hướng nhìn</strong>: căn nhìn thẳng sông Hàn, cầu Thuận Phước có giá cao hơn căn nhìn về phía cảng Thọ Quang hoặc nội khu.</p>
 <!--hh-img:img/sun-symphony-5/sun-symphony-5-pc-07-tang-19-view-song-cau.jpg|Căn hộ tầng 19 Symphony 5 nhìn sông Hàn và cầu Thuận Phước (phối cảnh chủ đầu tư)-->
 <p>Căn 1PN và 1PN+ có diện tích gần nhau (44 – 53 m²). Căn 1PN+ có thêm một góc đa năng nên giá cao hơn căn 1PN. Với khách mua để cho thuê, 1PN+ dễ cho gia đình nhỏ thuê dài ngày hơn studio.</p>
@@ -97,8 +97,8 @@ function hh_posts_cum_du_an_11_2026( $posts ) {
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá Symphony 5 Đà Nẵng: studio từ 2,5 tỷ (11/2026)',
-			'desc'      => 'Giá bán Symphony 5 – Sun Symphony Residence 11/2026: studio 2,50 – 3,30 tỷ, 1PN 3,09 – 3,30 tỷ, 1PN+ 3,45 – 4,54 tỷ (gồm VAT, phí bảo trì). Ví dụ dòng tiền, vay 70%.',
+			'seo_title' => 'Giá Sun Symphony 5 bao nhiêu? Studio từ 2,5 tỷ (11/2026)',
+			'desc'      => 'Giá Sun Symphony 5 giỏ hàng 11/2026: studio 2,50 – 3,30 tỷ, 1PN 3,09 – 3,30 tỷ, 1PN+ 3,45 – 4,54 tỷ, đã gồm VAT và phí bảo trì. Vay 70%.',
 			'points'    => array(
 				'Studio 30 – 33 m² khoảng 2,50 – 3,30 tỷ; 1PN+ 44 – 53 m² khoảng 3,45 – 4,54 tỷ',
 				'Giá gồm VAT và kinh phí bảo trì; chiết khấu 5% nếu không vay',
@@ -136,7 +136,7 @@ HTML
 <!--hh-featured-->
 <h2>Tổng mặt bằng phân khu</h2>
 <p>Symphony 5 là mảnh ghép cuối của tổ hợp Sun Symphony Residence trên đường Lê Văn Duyệt. Quanh tháp có công viên thể thao khoảng 10.000 m², Central Park khoảng 5.000 m², công viên ven sông khoảng 4.000 m² và bến du thuyền. Khối đế là phố thương mại.</p>
-<h2>Cơ cấu căn hộ</h2>
+<h2>Cơ cấu căn hộ trên mặt bằng Symphony 5</h2>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích thông thủy</th><th>Số căn</th><th>Tỷ lệ</th></tr></thead>
 <tbody>
@@ -182,7 +182,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Mặt bằng Symphony 5: studio, 1PN+, 2PN theo tầng',
-			'desc'      => 'Mặt bằng Symphony 5 – Sun Symphony Residence: 31 tầng, 1.228 căn (725 studio, 331 căn 1PN+, 160 căn 2PN, 12 penthouse), mặt bằng theo nhóm tầng, layout từng căn.',
+			'desc'      => 'Mặt bằng Symphony 5 (Sun Symphony Residence): 31 tầng, 1.228 căn – 725 studio, 331 căn 1PN+, 160 căn 2PN, 12 penthouse; layout từng căn.',
 			'points'    => array(
 				'1.228 căn: 725 studio, 331 căn 1PN+, 160 căn 2PN, 12 penthouse',
 				'Mặt bằng chia theo nhóm tầng 3, 3A – 18, 12A, 19 – 21, 22 – 26, 27 – 30, 31',
@@ -217,7 +217,7 @@ HTML
 </div>
 <p>Với căn hộ trên đất thương mại dịch vụ, câu hỏi khách hỏi nhiều nhất là "sở hữu bao lâu" và "có sổ không". Bài này tóm tắt <strong>pháp lý Symphony 5</strong> theo tài liệu chủ đầu tư và những điểm cần đọc kỹ trong hợp đồng. Thông tin dự án xem tại {$s5}.</p>
 <!--hh-featured-->
-<h2>Các mốc pháp lý</h2>
+<h2>Các mốc pháp lý Symphony 5</h2>
 <table>
 <thead><tr><th>Thời điểm</th><th>Nội dung</th></tr></thead>
 <tbody>
@@ -260,7 +260,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Pháp lý Symphony 5: sở hữu 50 năm, cần biết gì',
-			'desc'      => 'Pháp lý Symphony 5: đất thương mại dịch vụ, sở hữu 50 năm; đấu giá đất 14/12/2025, chấp thuận nhà đầu tư 12/03/2026, quy hoạch 1/500 ngày 23/4/2026. Ký hợp đồng, nhận sổ.',
+			'desc'      => 'Pháp lý Symphony 5: đất thương mại dịch vụ, sở hữu 50 năm; đấu giá đất 14/12/2025, quy hoạch 1/500 ngày 23/4/2026. Ký hợp đồng gì, khi nào có sổ.',
 			'points'    => array(
 				'Đất thương mại dịch vụ, sở hữu 50 năm theo quyết định giao đất',
 				'Quy hoạch 1/500 phê duyệt 23/4/2026; đang ký hợp đồng thực hiện nguyện vọng',
@@ -290,7 +290,7 @@ HTML
 		'image_alt' => 'The Legend Đà Nẵng lúc hoàng hôn bên sông Hàn, ngay chân cầu Rồng (phối cảnh)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Giá bán The Legend Đà Nẵng (giỏ hàng chủ đầu tư, tầng 6 – 25):</strong> căn 1PN 54,4 – 60,3 m² khoảng <strong>7,65 – 9,59 tỷ</strong>; 1PN+1 góc khoảng 9,39 – 10,97 tỷ; 2PN 74,9 – 84,5 m² khoảng 8,96 – 14,60 tỷ; 3PN góc khoảng 16,83 – 18,98 tỷ; penthouse duplex từ khoảng 37 tỷ. Giá gồm VAT và kinh phí bảo trì, chưa trừ quà nội thất và chiết khấu (đến 12%).</p>
+<p><strong>Giá The Legend Đà Nẵng (giỏ hàng chủ đầu tư, tầng 6 – 25):</strong> căn 1PN 54,4 – 60,3 m² khoảng <strong>7,65 – 9,59 tỷ</strong>; 1PN+1 góc khoảng 9,39 – 10,97 tỷ; 2PN 74,9 – 84,5 m² khoảng 8,96 – 14,60 tỷ; 3PN góc khoảng 16,83 – 18,98 tỷ; penthouse duplex từ khoảng 37 tỷ. Giá gồm VAT và kinh phí bảo trì, chưa trừ quà nội thất và chiết khấu (đến 12%).</p>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá bán (tham khảo)</th></tr></thead>
 <tbody>
@@ -305,7 +305,7 @@ HTML
 </div>
 <p>{$legend} (nhiều nơi gọi là The Legend City) là căn hộ <strong>sở hữu lâu dài</strong> trên lô đất A20 Võ Văn Kiệt, ngay chân cầu Rồng. Bài này tổng hợp <strong>giá The Legend Đà Nẵng</strong> theo giỏ hàng, cách tính giá sau ưu đãi và lịch thanh toán.</p>
 <!--hh-featured-->
-<h2>Giá đã gồm gì, được trừ gì</h2>
+<h2>Giá The Legend Đà Nẵng đã gồm gì, được trừ gì</h2>
 <ul>
 <li><strong>Đã gồm:</strong> VAT và kinh phí bảo trì.</li>
 <li><strong>Quà nội thất trừ thẳng vào giá:</strong> 1PN 300 triệu, 2PN 500 triệu, 3PN 700 triệu, penthouse 1,8 tỷ.</li>
@@ -351,8 +351,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá The Legend Đà Nẵng: 1PN từ 7,65 tỷ (11/2026)',
-			'desc'      => 'Giá bán The Legend Đà Nẵng (The Legend City): 1PN 7,65 – 9,59 tỷ, 2PN 8,96 – 14,60 tỷ, 3PN góc 16,83 – 18,98 tỷ. Quà nội thất đến 1,8 tỷ, chiết khấu đến 12%, vay 70%.',
+			'seo_title' => 'Giá The Legend Đà Nẵng bao nhiêu? 1PN từ 7,65 tỷ',
+			'desc'      => 'Giá The Legend Đà Nẵng (The Legend City): 1PN 7,65 – 9,59 tỷ, 2PN 8,96 – 14,60 tỷ, 3PN 16,83 – 18,98 tỷ. Quà nội thất đến 1,8 tỷ, chiết khấu 12%.',
 			'points'    => array(
 				'1PN 7,65 – 9,59 tỷ; 2PN 8,96 – 14,60 tỷ; 3PN góc 16,83 – 18,98 tỷ (gồm VAT, phí bảo trì)',
 				'Quà nội thất 300 triệu – 1,8 tỷ trừ thẳng vào giá; chiết khấu đến 12%',
@@ -388,7 +388,7 @@ HTML
 </div>
 <p>Bài này giúp anh chị hình dung <strong>mặt bằng The Legend</strong> trước khi chọn căn: có những loại căn nào, nằm ở cánh nào và nhìn ra đâu. Giá và chính sách xem tại {$legend}.</p>
 <!--hh-featured-->
-<h2>Tổng mặt bằng</h2>
+<h2>Tổng mặt bằng The Legend Đà Nẵng</h2>
 <table>
 <thead><tr><th>Khối</th><th>Sản phẩm</th><th>Ghi chú</th></tr></thead>
 <tbody>
@@ -429,7 +429,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Mặt bằng The Legend Đà Nẵng: 800 căn, 1PN – 3PN',
-			'desc'      => 'Mặt bằng The Legend Đà Nẵng: tháp căn hộ 29 tầng, 800 căn (308 căn 1PN, 88 căn 1PN+1, 308 căn 2PN, 88 căn 3PN, 8 penthouse); cánh Legacy phía sông, Infinity phía biển.',
+			'desc'      => 'Mặt bằng The Legend Đà Nẵng: tháp căn hộ 29 tầng, 800 căn – 308 căn 1PN, 88 căn 1PN+1, 308 căn 2PN, 88 căn 3PN, 8 penthouse; Legacy, Infinity.',
 			'points'    => array(
 				'Tháp căn hộ 29 tầng, 800 căn sở hữu lâu dài; tháp khách sạn 25 tầng',
 				'308 căn 1PN, 88 căn 1PN+1, 308 căn 2PN, 88 căn 3PN, 8 penthouse duplex',
@@ -447,9 +447,9 @@ HTML
 	/* ---------------- Nobu – Giá ---------------- */
 	$posts[] = array(
 		'slug'     => 'gia-nobu-residences-da-nang-bao-nhieu',
-		'title'    => 'Giá bán Nobu Residences Đà Nẵng bao nhiêu? Căn 1PN từ khoảng 6,63 tỷ (cập nhật 11/2026)',
+		'title'    => 'Giá Nobu Đà Nẵng (Nobu Residences) bao nhiêu? Căn 1PN từ khoảng 6,63 tỷ (11/2026)',
 		'excerpt'  => 'Giá Nobu Residences Đà Nẵng tham khảo: căn 1PN 62,5 – 71,1 m² khoảng 6,63 – 9,06 tỷ; đơn giá các nguồn nêu khoảng 145 – 205 triệu/m² tùy tầng và view. Các loại căn studio đến Sky Villa, penthouse; điểm cần kiểm tra về thời hạn sở hữu.',
-		'keyword'  => 'giá Nobu Residences Đà Nẵng',
+		'keyword'  => 'giá Nobu Đà Nẵng',
 		'keywords_extra' => array( 'giá Nobu Đà Nẵng', 'bảng giá Nobu Residences', 'Nobu Danang giá' ),
 		'project'  => 'nobu-da-nang',
 		'schedule' => '2026-11-12 14:00',
@@ -459,7 +459,7 @@ HTML
 		'image_alt' => 'Phối cảnh tháp Nobu Residences Đà Nẵng bên biển Mỹ Khê (ảnh chủ đầu tư)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Giá bán Nobu Residences Đà Nẵng (tham khảo 11/2026):</strong> căn 1PN 62,5 – 71,1 m² khoảng <strong>6,63 – 9,06 tỷ</strong>. Đơn giá một số nguồn nêu khoảng 145 – 205 triệu/m² tùy tầng và hướng view. Studio, 2PN, 3PN Dual Key, Sky Villa và penthouse: liên hệ để nhận giá từng căn.</p>
+<p><strong>Giá Nobu Đà Nẵng – Nobu Residences (tham khảo 11/2026):</strong> căn 1PN 62,5 – 71,1 m² khoảng <strong>6,63 – 9,06 tỷ</strong>. Đơn giá một số nguồn nêu khoảng 145 – 205 triệu/m² tùy tầng và hướng view. Studio, 2PN, 3PN Dual Key, Sky Villa và penthouse: liên hệ để nhận giá từng căn.</p>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá bán (tham khảo)</th></tr></thead>
 <tbody>
@@ -475,7 +475,7 @@ HTML
 </div>
 <p>{$nobu} là dự án Nobu Residences đầu tiên tại Đông Nam Á, do VCRE phát triển theo giấy phép thương hiệu Nobu Hospitality. Vì là căn hộ hàng hiệu, <strong>giá Nobu Đà Nẵng</strong> cao hơn nhiều so với căn hộ ven biển thông thường. Bài này giải thích mức giá, giá gồm những gì và điều cần kiểm tra trước khi mua.</p>
 <!--hh-featured-->
-<h2>Vì sao giá Nobu cao</h2>
+<h2>Vì sao giá Nobu Đà Nẵng cao</h2>
 <ul>
 <li><strong>Thương hiệu Nobu Hospitality</strong> (Robert De Niro, đầu bếp Nobu Matsuhisa, Meir Teper) vận hành khách sạn, nhà hàng và dịch vụ cư dân.</li>
 <li><strong>Chỉ 264 căn hộ</strong> trong tháp 43 tầng (khoảng 186 m), cùng khách sạn Nobu khoảng 200 phòng (gồm 18 suite).</li>
@@ -499,8 +499,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá Nobu Residences Đà Nẵng: 1PN từ 6,63 tỷ (11/2026)',
-			'desc'      => 'Giá bán Nobu Residences Đà Nẵng tham khảo: căn 1PN 62,5 – 71,1 m² khoảng 6,63 – 9,06 tỷ. Loại căn studio đến penthouse, đơn giá/m² và điều cần kiểm tra về sở hữu.',
+			'seo_title' => 'Giá Nobu Đà Nẵng bao nhiêu? 1PN từ 6,63 tỷ (11/2026)',
+			'desc'      => 'Giá Nobu Đà Nẵng (Nobu Residences) tham khảo: căn 1PN 62,5 – 71,1 m² khoảng 6,63 – 9,06 tỷ. Loại căn, đơn giá/m², điều cần kiểm tra về sở hữu.',
 			'points'    => array(
 				'Căn 1PN 62,5 – 71,1 m² khoảng 6,63 – 9,06 tỷ (tham khảo)',
 				'Đơn giá các nguồn nêu khoảng 145 – 205 triệu/m², chênh theo tầng, view, cách tính',
@@ -535,7 +535,7 @@ HTML
 </div>
 <p>Khách quan tâm {$nobu} thường hỏi "đã xây đến đâu". Bài này tổng hợp <strong>tiến độ Nobu Đà Nẵng</strong> theo từng mốc, kèm ảnh công trường thực tế do chủ đầu tư công bố. Nhà thầu thi công là Newtecons.</p>
 <!--hh-featured-->
-<h2>Các mốc thi công</h2>
+<h2>Các mốc tiến độ Nobu Đà Nẵng</h2>
 <table>
 <thead><tr><th>Thời điểm</th><th>Tiến độ</th></tr></thead>
 <tbody>
@@ -574,7 +574,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Tiến độ Nobu Đà Nẵng 10/2026: kết cấu đến tầng 22',
-			'desc'      => 'Tiến độ Nobu Residences Đà Nẵng: khởi công quý 2/2024, tháng 10/2026 kết cấu đến tầng 22, lắp kính tầng 7 – 13, cơ điện và PCCC tới tầng 17. Ảnh công trường, bàn giao 2027.',
+			'desc'      => 'Tiến độ Nobu Đà Nẵng 10/2026: kết cấu đến tầng 22, lắp kính tầng 7 – 13, cơ điện và PCCC tới tầng 17. Khởi công quý 2/2024, bàn giao dự kiến 2027.',
 			'points'    => array(
 				'Tháng 10/2026: kết cấu đến tầng 22 của tháp 43 tầng',
 				'Lắp mặt dựng, kính tầng 7 – 13; cơ điện, PCCC tới tầng 17',
