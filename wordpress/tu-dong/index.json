@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-10T14:29:58+00:00",
+    "updated": "2026-11-10T14:42:50+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do",
@@ -464,6 +464,36 @@
             "title": "Tiến độ Nobu Residences Đà Nẵng 10/2026: kết cấu đến tầng 22, lắp kính tầng 7 – 13",
             "publish": "2026-11-14 14:00",
             "file": "bai/tien-do-nobu-residences-da-nang.txt"
+        },
+        {
+            "slug": "gia-cora-tower-da-nang-bao-nhieu",
+            "title": "Giá bán Cora Tower Đà Nẵng bao nhiêu? Studio từ 2,42 tỷ, 1PN+ 3,45 – 3,84 tỷ (11/2026)",
+            "publish": "2026-11-15 09:00",
+            "file": "bai/gia-cora-tower-da-nang-bao-nhieu.txt"
+        },
+        {
+            "slug": "cora-spana-s-light-sun-neo-city-nen-chon-toa-nao",
+            "title": "Cora, Spana hay S-Light: mua căn hộ Sun NeO City Hòa Xuân nên chọn tòa nào?",
+            "publish": "2026-11-15 14:00",
+            "file": "bai/cora-spana-s-light-sun-neo-city-nen-chon-toa-nao.txt"
+        },
+        {
+            "slug": "bang-gia-capital-square-da-nang-theo-toa",
+            "title": "Bảng giá Capital Square Đà Nẵng theo tòa (11/2026): từ 4,32 tỷ, căn 1PN đến 3PN",
+            "publish": "2026-11-16 09:00",
+            "file": "bai/bang-gia-capital-square-da-nang-theo-toa.txt"
+        },
+        {
+            "slug": "hudson-place-s4-va-broadway-place-s3-capital-square-chon-toa-nao",
+            "title": "Hudson Place S4 và Broadway Place S3 Capital Square: khác nhau thế nào, nên chọn tòa nào?",
+            "publish": "2026-11-16 14:00",
+            "file": "bai/hudson-place-s4-va-broadway-place-s3-capital-square-chon-toa-nao.txt"
+        },
+        {
+            "slug": "can-ho-duoi-3-ty-da-nang-du-an-dang-ban",
+            "title": "Căn hộ dưới 3 tỷ ở Đà Nẵng: 7 dự án đang bán, giá từng loại căn (11/2026)",
+            "publish": "2026-11-17 09:00",
+            "file": "bai/can-ho-duoi-3-ty-da-nang-du-an-dang-ban.txt"
         }
     ]
 }
