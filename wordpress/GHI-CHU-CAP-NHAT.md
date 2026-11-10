@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.10** + plugin Hoàng Hiệp CRM **2.20.240**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.10** + plugin Hoàng Hiệp CRM **2.20.241**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.241 (10/11/2026)
+
+- Tiêu đề Google đầy đủ tên + "Đà Nẵng" cho 5 dự án: Nobu Residences Đà Nẵng, Cora Tower Đà Nẵng, The Legend Đà Nẵng, Capital Square Đà Nẵng, Symphony 5 Đà Nẵng (từ khoá chính đổi theo, chỉ thay khi anh chưa sửa tay).
+- Liên kết nội bộ tự động: lần nhắc đầu tiên tên Symphony 5, The Legend, Nobu, Cora Tower, Capital Square trong bài viết/trang dự án sẽ có link về trang dự án (tối đa 3 link/trang, bỏ qua tiêu đề và link có sẵn).
 
 ## Có gì mới – 2.20.240 (10/11/2026): Nobu Residences Đà Nẵng
 

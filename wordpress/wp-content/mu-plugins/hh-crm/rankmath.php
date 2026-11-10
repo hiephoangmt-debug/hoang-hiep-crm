@@ -20,6 +20,26 @@ function hh_rm_project_overrides() {
 			'kw'    => 'Sun Saphia Residence,Sun Saphia Đà Nẵng,bảng giá Sun Saphia Residence',
 			'title' => 'Sun Saphia Residence Đà Nẵng: Giá, mặt bằng %s',
 		),
+		'nobu-da-nang' => array(
+			'kw'    => 'Nobu Residences Đà Nẵng,Nobu Đà Nẵng,giá Nobu Residences Đà Nẵng',
+			'title' => 'Nobu Residences Đà Nẵng: Giá bán, tiến độ %s',
+		),
+		'cora-tower' => array(
+			'kw'    => 'Cora Tower Đà Nẵng,Cora Tower,giá Cora Tower',
+			'title' => 'Cora Tower Đà Nẵng: Giá từ 2,42 tỷ, chính sách %s',
+		),
+		'the-legend-da-nang' => array(
+			'kw'    => 'The Legend Đà Nẵng,The Legend Sun Group,giá The Legend Đà Nẵng',
+			'title' => 'The Legend Đà Nẵng: Giá bán, chính sách %s',
+		),
+		'capital-square-da-nang' => array(
+			'kw'    => 'Capital Square Đà Nẵng,Capital Square,bảng giá Capital Square',
+			'title' => 'Capital Square Đà Nẵng: Bảng giá, chính sách %s',
+		),
+		'symphony-5-sun-symphony-residence' => array(
+			'kw'    => 'Symphony 5 Đà Nẵng,Symphony 5 Sun Symphony Residence,giá Symphony 5',
+			'title' => 'Giá Symphony 5 Đà Nẵng: studio từ 2,5 tỷ (%s)',
+		),
 	);
 }
 
@@ -28,6 +48,11 @@ function hh_rm_project_keywords( $post ) {
 	if ( $ov ) {
 		return $ov['kw'];
 	}
+	return hh_rm_project_keywords_auto( $post );
+}
+
+/** Từ khoá web tự tính (khi dự án không có từ khoá riêng). */
+function hh_rm_project_keywords_auto( $post ) {
 	$name = trim( preg_replace( '/\s*\([^)]*\)/u', '', html_entity_decode( $post->post_title, ENT_QUOTES, 'UTF-8' ) ) );
 	$slug = '-' . $post->post_name . '-';
 	$main = '';
@@ -191,7 +216,7 @@ function hh_rm_fill_keywords() {
 		// Trống, hoặc vẫn là từ khoá web tự điền theo cách cũ (anh chưa sửa tay) → điền bản mới.
 		$p_ = get_post( $id );
 		$ov = hh_rm_project_overrides()[ $p_->post_name ] ?? null;
-		if ( $ov && $cur !== $ov['kw'] && ( '' === $cur || $cur === hh_rm_project_keywords_legacy( $p_ ) || 0 === strpos( $cur, 'Sun Saphia Residence,giá ' ) ) ) {
+		if ( $ov && $cur !== $ov['kw'] && ( '' === $cur || $cur === hh_rm_project_keywords_legacy( $p_ ) || $cur === hh_rm_project_keywords_auto( $p_ ) || 0 === strpos( $cur, 'Sun Saphia Residence,giá ' ) ) ) {
 			$cur = ''; // Dự án có từ khoá riêng: thay bản web tự điền trước đây.
 		}
 		if ( '' === $cur || $cur === hh_rm_project_keywords_legacy( get_post( $id ) ) ) {
