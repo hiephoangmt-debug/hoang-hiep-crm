@@ -33,3 +33,4 @@
 | 10/11/2026 | Hoàng Hiệp | 15:30 | (bài web 09/11 12:00, dời từ 09/11 vì trùng giãn cách) Dải biển Trường Sa – Ngũ Hành Sơn: resort, căn hộ biển (1 ảnh dọc, bãi biển Trường Sa) | /dai-bien-truong-sa-ngu-hanh-son-resort-sun-saphia-residence/ |
 | 09/11/2026 | Sun | 20:00 | (bài web mới 16:30) Chọn căn Sun Saphia Residence: mặt biển, cánh bên, phía sau (1 ảnh dọc) | /chon-day-can-sun-saphia-residence-mat-bien-canh-ben-phia-sau/ |
 | 09/11/2026 | Hoàng Hiệp | 16:30 | (phiên khác) Mặt bằng giá căn hộ Đà Nẵng 11/2026 | /mat-bang-gia-can-ho-da-nang-11-2026/ |
+| 10/11/2026 | Sun | 14:30 | (bài web mới 08:00) Cho thuê Sun Saphia Residence theo mùa – công suất phòng (1 ảnh dọc, pháo hoa DIFF) | /mua-du-lich-da-nang-cong-suat-phong-cho-thue-sun-saphia/ |
