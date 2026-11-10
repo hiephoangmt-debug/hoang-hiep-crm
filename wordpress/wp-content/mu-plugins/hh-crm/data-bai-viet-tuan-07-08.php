@@ -593,13 +593,15 @@ HTML
 	$posts[] = array(
 		'slug'     => 'nobu-da-nang-can-ho-hang-hieu',
 		'title'    => 'Nobu Đà Nẵng: căn hộ hàng hiệu ven biển Mỹ Khê có gì đặc biệt',
-		'excerpt'  => 'Nobu Đà Nẵng là tháp 43 tầng với 264 căn hộ hàng hiệu Nobu và 186 phòng khách sạn bên biển Mỹ Khê, giá tham khảo khoảng 145 – 205 triệu/m².',
+		'excerpt'  => 'Nobu Đà Nẵng là tháp 43 tầng với 264 căn hộ du lịch hàng hiệu Nobu, khách sạn Nobu khoảng 200 phòng bên biển Mỹ Khê, giá tham khảo khoảng 145 – 205 triệu/m².',
 		'keyword'  => 'Nobu Đà Nẵng',
 		'project'  => 'nobu-da-nang',
 		'week'     => 8,
 		'category' => 'Dự án',
+		'rev'      => '2026-11-10a', // Sửa số phòng khách sạn (186 là chiều cao m).
+		'old_meta' => array( 'rank_math_description' => array( 'Căn hộ hàng hiệu Nobu Đà Nẵng: tháp 43 tầng, 264 căn hộ và 186 phòng khách sạn bên biển Mỹ Khê, khoảng 145 – 205 triệu/m². Gọi Hoàng Hiệp nhận giá.' ) ),
 		'content'  => <<<'HTML'
-<p><strong>Nobu Đà Nẵng</strong> (Nobu Residences Danang) là tháp 43 tầng cao khoảng 186 m tại góc Võ Văn Kiệt – Võ Nguyên Giáp, gồm 264 căn hộ hàng hiệu và 186 phòng khách sạn do Nobu Hospitality vận hành. Giá chào bán tham khảo khoảng 145 – 205 triệu/m²; căn 1PN khoảng 6,6 – 9,1 tỷ. Đây là dự án Nobu Residences đầu tiên tại Đông Nam Á – thông tin cập nhật tháng 10/2026.</p>
+<p><strong>Nobu Đà Nẵng</strong> (Nobu Residences Danang) là tháp 43 tầng cao khoảng 186 m tại góc Võ Văn Kiệt – Võ Nguyên Giáp, gồm 264 căn hộ du lịch hàng hiệu và khách sạn Nobu khoảng 200 phòng do Nobu Hospitality vận hành. Giá chào bán tham khảo khoảng 145 – 205 triệu/m²; căn 1PN khoảng 6,6 – 9,1 tỷ. Đây là dự án Nobu Residences đầu tiên tại Đông Nam Á – thông tin cập nhật tháng 10/2026.</p>
 
 <h2>Căn hộ hàng hiệu là gì và vì sao Nobu được chú ý?</h2>
 <p>Căn hộ hàng hiệu (branded residences) là căn hộ gắn với một thương hiệu khách sạn hoặc phong cách sống, được vận hành theo tiêu chuẩn của thương hiệu đó. Người mua trả thêm cho dịch vụ, chất lượng hoàn thiện và giá trị nhận diện.</p>
@@ -611,7 +613,7 @@ HTML
 <tbody>
 <tr><td>Vị trí</td><td>01 Võ Văn Kiệt (góc Võ Nguyên Giáp), Sơn Trà – mặt biển Mỹ Khê</td></tr>
 <tr><td>Quy mô</td><td>Khoảng 3.000 m² đất, 43 tầng nổi, 2 tầng hầm</td></tr>
-<tr><td>Sản phẩm</td><td>264 căn hộ hàng hiệu, 186 phòng khách sạn Nobu</td></tr>
+<tr><td>Sản phẩm</td><td>264 căn hộ du lịch hàng hiệu; khách sạn Nobu khoảng 200 phòng (gồm 18 suite)</td></tr>
 <tr><td>Studio</td><td>Khoảng 42 – 43 m² – liên hệ</td></tr>
 <tr><td>Căn 1PN</td><td>Khoảng 62,5 – 71,1 m² – khoảng 6,63 – 9,06 tỷ</td></tr>
 <tr><td>Căn 2PN</td><td>Khoảng 99,7 – 118,7 m² – liên hệ</td></tr>
@@ -652,10 +654,10 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Nobu Đà Nẵng: căn hộ hàng hiệu ven biển Mỹ Khê',
-			'desc'      => 'Nobu Đà Nẵng: tháp 43 tầng, 264 căn hộ hàng hiệu và 186 phòng khách sạn bên biển Mỹ Khê, khoảng 145 – 205 triệu/m². Gọi Hoàng Hiệp nhận giá.',
+			'desc'      => 'Nobu Đà Nẵng: tháp 43 tầng, 264 căn hộ du lịch hàng hiệu bên biển Mỹ Khê, khoảng 145 – 205 triệu/m². Gọi Hoàng Hiệp nhận giá.',
 			'points'    => array(
 				'Dự án Nobu Residences đầu tiên tại Đông Nam Á, do VCRE phát triển',
-				'Tháp 43 tầng: 264 căn hộ, 186 phòng khách sạn, 6 Sky Villa, 2 penthouse',
+				'Tháp 43 tầng: 264 căn hộ du lịch, khách sạn khoảng 200 phòng, 6 Sky Villa, 2 penthouse',
 				'Giá tham khảo khoảng 145 – 205 triệu/m², căn 1PN khoảng 6,6 – 9,1 tỷ',
 				'Thời hạn sở hữu các nguồn chưa thống nhất – cần đối chiếu hợp đồng',
 			),

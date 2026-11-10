@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.10** + plugin Hoàng Hiệp CRM **2.20.239**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.10** + plugin Hoàng Hiệp CRM **2.20.240**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,14 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.240 (10/11/2026): Nobu Residences Đà Nẵng
+
+- **24 ảnh** từ trang chính thức nobudanang.vn: phối cảnh tháp, nội thất (Japandi, trần gần 3 m, Dual-Key), tiện ích (hồ bơi nước ấm, bar Tsukimidai, nhà hàng Nobu, beach club, gym, khu trẻ em) và ảnh công trường thực tế tháng 8 và 10/2026. Ảnh chỉ có logo dự án / chủ đầu tư.
+- **Tiến độ 10/2026** (chủ đầu tư đăng 09/11/2026): kết cấu đến tầng 22, lắp mặt dựng kính tầng 7 – 13, cơ điện & PCCC tới tầng 17.
+- **Sửa số liệu sai**: "186 phòng khách sạn" → khách sạn Nobu khoảng 200 phòng (gồm 18 suite) – 186 là chiều cao tòa tháp (m); 264 căn ghi đúng là căn hộ du lịch hàng hiệu. Sửa ở trang dự án, bài "Nobu Đà Nẵng: căn hộ hàng hiệu…" và mô tả SEO.
+- Địa chỉ theo trang chính thức: 01 Võ Văn Kiệt, phường An Hải.
+- Sau khi cài: "Nhập / cập nhật dữ liệu" → "Tải ảnh ngay".
 
 ## Có gì mới – 2.20.239 (10/11/2026): chính sách Capital Square S3 – S4 tháng 11
 
