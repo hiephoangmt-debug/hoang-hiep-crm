@@ -29,8 +29,8 @@ function hh_rm_project_overrides() {
 			'title' => 'Cora Tower Đà Nẵng: Giá từ 2,42 tỷ, chính sách %s',
 		),
 		'the-legend-da-nang' => array(
-			'kw'    => 'The Legend Đà Nẵng,The Legend Sun Group,giá The Legend Đà Nẵng',
-			'title' => 'The Legend Đà Nẵng: Giá bán, chính sách %s',
+			'kw'    => 'The Legend Đà Nẵng,The Legend City Đà Nẵng,giá The Legend Đà Nẵng',
+			'title' => 'The Legend Đà Nẵng (Legend City): Giá, chính sách %s',
 		),
 		'capital-square-da-nang' => array(
 			'kw'    => 'Capital Square Đà Nẵng,Capital Square,bảng giá Capital Square',
