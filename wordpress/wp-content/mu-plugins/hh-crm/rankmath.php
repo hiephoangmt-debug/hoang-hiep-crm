@@ -55,7 +55,7 @@ function hh_rm_project_overrides() {
 		),
 		'spana-tower' => array(
 			'kw'    => 'Spana Tower,Spana Tower Hòa Xuân,Spana Tower Đà Nẵng,Sun Spana Tower',
-			'title' => 'Spana Tower Hòa Xuân Đà Nẵng: Bảng giá, bàn giao %s',
+			'title' => 'Spana Tower Hòa Xuân Đà Nẵng: Bảng giá, chính sách %s',
 		),
 		's-light-tower' => array(
 			'kw'    => 'S-Light Tower Đà Nẵng,S-Light Tower,S Light Tower Đà Nẵng,giá S-Light Tower',
