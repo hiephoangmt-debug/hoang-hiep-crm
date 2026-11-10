@@ -34,3 +34,6 @@
 | 09/11/2026 | Sun | 20:00 | (bài web mới 16:30) Chọn căn Sun Saphia Residence: mặt biển, cánh bên, phía sau (1 ảnh dọc) | /chon-day-can-sun-saphia-residence-mat-bien-canh-ben-phia-sau/ |
 | 09/11/2026 | Hoàng Hiệp | 16:30 | (phiên khác) Mặt bằng giá căn hộ Đà Nẵng 11/2026 | /mat-bang-gia-can-ho-da-nang-11-2026/ |
 | 10/11/2026 | Sun | 14:30 | (bài web mới 08:00) Cho thuê Sun Saphia Residence theo mùa – công suất phòng (1 ảnh dọc, pháo hoa DIFF) | /mua-du-lich-da-nang-cong-suat-phong-cho-thue-sun-saphia/ |
+| 10/11/2026 | Sun | 11:30 | (phiên khác, bài web mới 10:00) Công bố Quy hoạch chung 2050, Aeon Mall Hòa Xuân | /da-nang-cong-bo-quy-hoach-chung-2050-aeon-mall-hoa-xuan-thang-11/ |
+| 10/11/2026 | Hoàng Hiệp | 18:30 | (bài web mới 12:00) Khách quốc tế đến Đà Nẵng 2026 – cho thuê căn hộ khách nước ngoài (1 ảnh dọc, du thuyền sông Hàn) | /khach-quoc-te-da-nang-2026-han-quoc-trung-quoc-thue-can-ho-sun-saphia/ |
+| 10/11/2026 | Sun | 20:00 | (bài web mới 16:30) Vận hành cho thuê Sun Saphia: tự làm hay giao đơn vị (1 ảnh dọc) | /tu-cho-thue-hay-thue-don-vi-van-hanh-can-ho-sun-saphia/ |
