@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-10T14:42:50+00:00",
+    "updated": "2026-11-10T14:51:24+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do",
@@ -494,6 +494,30 @@
             "title": "Căn hộ dưới 3 tỷ ở Đà Nẵng: 7 dự án đang bán, giá từng loại căn (11/2026)",
             "publish": "2026-11-17 09:00",
             "file": "bai/can-ho-duoi-3-ty-da-nang-du-an-dang-ban.txt"
+        },
+        {
+            "slug": "sun-saphia-hay-symphony-5-mua-studio-cho-thue",
+            "title": "Sun Saphia Residence hay Symphony 5: mua studio cho thuê ở Đà Nẵng chọn dự án nào?",
+            "publish": "2026-11-17 14:00",
+            "file": "bai/sun-saphia-hay-symphony-5-mua-studio-cho-thue.txt"
+        },
+        {
+            "slug": "chu-dau-tu-sun-saphia-residence-la-ai",
+            "title": "Chủ đầu tư Sun Saphia Residence là ai? Sun Group, Sun Property và các dự án đã làm ở Đà Nẵng",
+            "publish": "2026-11-18 09:00",
+            "file": "bai/chu-dau-tu-sun-saphia-residence-la-ai.txt"
+        },
+        {
+            "slug": "vay-mua-capital-square-da-nang-tra-gop-hang-thang",
+            "title": "Vay mua Capital Square Đà Nẵng: vay 70%, 0% lãi suất đến 36 tháng, trả góp mỗi tháng bao nhiêu?",
+            "publish": "2026-11-18 14:00",
+            "file": "bai/vay-mua-capital-square-da-nang-tra-gop-hang-thang.txt"
+        },
+        {
+            "slug": "nobu-residences-hay-the-legend-can-ho-cao-cap-da-nang",
+            "title": "Nobu Residences hay The Legend: chọn căn hộ cao cấp nào ở Đà Nẵng?",
+            "publish": "2026-11-19 09:00",
+            "file": "bai/nobu-residences-hay-the-legend-can-ho-cao-cap-da-nang.txt"
         }
     ]
 }
