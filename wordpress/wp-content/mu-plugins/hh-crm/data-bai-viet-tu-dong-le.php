@@ -600,5 +600,93 @@ HTML
 		'sources'  => array( 'https://biggee.vn/' ),
 	);
 
+	/* ---------------- 11/11 18:30 – Sự kiện giới thiệu Sun Saphia Residence 15/11 ---------------- */
+	$posts[] = array(
+		'slug'     => 'su-kien-gioi-thieu-sun-saphia-residence-15-11-2026',
+		'title'    => 'Sự kiện giới thiệu Sun Saphia Residence Chủ nhật 15/11/2026 tại Sun Gallery Đà Nẵng: chương trình, quà bốc thăm, đăng ký tham dự',
+		'excerpt'  => 'Sự kiện giới thiệu dự án Sun Saphia Residence diễn ra 09:00 Chủ nhật 15/11/2026 tại Sun Gallery Đà Nẵng, 01 Phan Đăng Lưu: giới thiệu Sun Group, dự án, tư vấn chuyên sâu và bốc thăm 5 phần quà. Chương trình chi tiết và cách đăng ký.',
+		'keyword'  => 'sự kiện giới thiệu Sun Saphia Residence',
+		'keywords_extra' => array( 'Sun Saphia Residence', 'Sun Gallery Đà Nẵng', 'sự kiện Sun Saphia 15/11', 'Chất sống tinh hoa giao hòa nắng biển' ),
+		'project'  => 'sun-saphia-residence',
+		'schedule' => '2026-11-11 18:30',
+		'category' => 'Tin dự án',
+		'tags'     => array( 'Sun Saphia Residence', 'Sự kiện dự án', 'Sun Group' ),
+		'image'    => 'plugin:img/tin-tuc/su-kien-sun-saphia-15-11.jpg',
+		'content'  => <<<HTML
+<p>Chủ đầu tư tổ chức <strong>sự kiện giới thiệu Sun Saphia Residence</strong> với chủ đề <em>"Chất sống tinh hoa – Giao hòa nắng biển"</em> vào <strong>09:00 Chủ nhật 15/11/2026</strong> tại <strong>Sun Gallery Đà Nẵng, 01 Phan Đăng Lưu, Hòa Cường</strong>. Đây là buổi đầu tiên khách hàng được nghe trực tiếp giới thiệu tổng thể về {$saphia} – dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng – trước sự kiện bán hàng dự kiến ngày 05/12/2026.</p>
+<!--hh-featured-->
+<h2>Thông tin sự kiện giới thiệu Sun Saphia Residence</h2>
+<table>
+<tbody>
+<tr><th>Thời gian</th><td>08:30 – 11:00, Chủ nhật 15/11/2026 (khai mạc 09:00)</td></tr>
+<tr><th>Địa điểm</th><td>Sun Gallery Đà Nẵng – 01 Phan Đăng Lưu, Hòa Cường, Đà Nẵng</td></tr>
+<tr><th>Chủ đề</th><td>Chất sống tinh hoa – Giao hòa nắng biển</td></tr>
+<tr><th>Nội dung chính</th><td>Giới thiệu Sun Group, giới thiệu dự án, tư vấn chuyên sâu, bốc thăm trúng thưởng</td></tr>
+<tr><th>Đăng ký</th><td>Gọi/Zalo Hoàng Hiệp 0904 567 009 để giữ chỗ và nhận tài liệu trước</td></tr>
+</tbody>
+</table>
+<h2>Chương trình chi tiết</h2>
+<table>
+<thead><tr><th>Giờ</th><th>Nội dung</th></tr></thead>
+<tbody>
+<tr><td>08:30 – 09:00</td><td>Đón khách, tea break</td></tr>
+<tr><td>09:00 – 09:15</td><td>Khai mạc</td></tr>
+<tr><td>09:15 – 09:25</td><td>Giới thiệu về Tập đoàn Sun Group</td></tr>
+<tr><td>09:25 – 10:15</td><td>Giới thiệu dự án Sun Saphia Residence</td></tr>
+<tr><td>10:15 – 10:45</td><td>Tư vấn chuyên sâu</td></tr>
+<tr><td>10:45 – 11:00</td><td>Bốc thăm trúng thưởng</td></tr>
+<tr><td>11:00</td><td>Kết thúc</td></tr>
+</tbody>
+</table>
+<!--hh-img:img/sun-saphia/sun-saphia-cdt-toa-thap-ngay.jpg|Phối cảnh tòa tháp Sun Saphia Residence 30 tầng bên biển Sơn Thủy (ảnh chủ đầu tư)-->
+<h2>Quà bốc thăm may mắn cho khách tham dự</h2>
+<ul>
+<li><strong>01 giải Nhất:</strong> máy lọc không khí Sharp FP-J40E-W.</li>
+<li><strong>02 giải Nhì:</strong> máy massage cổ Philips PPM3308.</li>
+<li><strong>02 giải Ba:</strong> tai nghe Bluetooth chụp tai Sony WH-CH530.</li>
+</ul>
+<p>Quà dành cho khách tham dự sự kiện, bốc thăm lúc 10:45 – nên ở lại đến cuối chương trình.</p>
+<h2>Sun Saphia Residence có gì để nghe tại sự kiện?</h2>
+<p>Theo tài liệu chủ đầu tư đã công bố tới tháng 11/2026, đây là những thông tin chính anh chị sẽ được giới thiệu:</p>
+<ul>
+<li><strong>Vị trí:</strong> giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu bãi tắm Sơn Thủy, phường Ngũ Hành Sơn; đối diện công viên, bãi tắm 2,45 ha thành phố đang đầu tư.</li>
+<li><strong>Quy mô:</strong> 1 tòa 30 tầng, cao 114 m, 2 tầng hầm, 782 căn – 513 studio, 108 căn 1PN+, 133 căn 2PN; tầng 30 penthouse.</li>
+<li><strong>Pháp lý:</strong> căn hộ thương mại dịch vụ, thời hạn 50 năm kể từ 17/09/2026; công trình cấp I, niên hạn 100 năm.</li>
+<li><strong>Bàn giao:</strong> dự kiến 11/2028, liền tường trừ tủ bếp và thiết bị bếp; chiều cao tầng 3,5 m.</li>
+<li><strong>Tiện ích:</strong> bể bơi view biển, gym, yoga, pilates, khối đế thương mại.</li>
+<li><strong>Giá:</strong> giá dự kiến studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ tùy dãy (chưa VAT, chưa 2% bảo trì); bảng giá chính thức công bố khi mở bán.</li>
+</ul>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence: 28 căn mỗi sàn (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Nên chuẩn bị gì trước khi đi?</h2>
+<ol>
+<li><strong>Xác định mục đích mua</strong>: để ở, nghỉ dưỡng gia đình hay cho thuê – mỗi mục đích hợp loại căn và dãy căn khác nhau (xem <a href="/chon-day-can-sun-saphia-residence-mat-bien-canh-ben-phia-sau/">chọn dãy căn</a>, <a href="/tang-cao-hay-tang-thap-sun-saphia-residence-chon-tang-nao/">chọn tầng</a>).</li>
+<li><strong>Tính trước ngân sách</strong>: tổng tiền gồm VAT, 2% bảo trì, nội thất; nếu vay, hỏi trước hạn mức với ngân hàng (xem <a href="/vay-mua-sun-saphia-residence-tra-gop-hang-thang/">vay mua Sun Saphia Residence</a>).</li>
+<li><strong>Ghi sẵn câu hỏi</strong>: phí quản lý, chính sách cho thuê, tiến độ thanh toán, điều kiện hoàn tiền giữ chỗ (xem <a href="/sun-saphia-residence-hoi-dap-ban-giao-phi-quan-ly-cho-thue/">hỏi đáp Sun Saphia Residence</a>).</li>
+<li><strong>Người nước ngoài</strong> lưu ý: chủ đầu tư không bán cho trường hợp có yếu tố nước ngoài (xem <a href="/nguoi-nuoc-ngoai-viet-kieu-mua-sun-saphia-residence-duoc-khong/">bài chi tiết</a>).</li>
+</ol>
+<h2>Nhận định của Hoàng Hiệp</h2>
+<p>Sự kiện giới thiệu là dịp tốt để nghe trực tiếp chủ đầu tư và xem mô hình, tài liệu, trước khi bảng giá chính thức ra ở sự kiện bán hàng. Anh chị chưa cần quyết định ngay tại buổi này; nên ghi lại thông tin, so sánh dòng tiền và chọn trước 2 – 3 căn ưng ý. Hoàng Hiệp có mặt tại sự kiện, có thể đón và đi cùng anh chị để giải thích từng mục. Xem thêm <a href="/danh-gia-sun-saphia-residence-chi-tiet/">đánh giá chi tiết Sun Saphia Residence</a> và <a href="/chuan-bi-su-kien-ban-hang-sun-saphia-residence-28-11/">7 việc nên chuẩn bị trước sự kiện bán hàng</a>.</p>
+<p>Đăng ký tham dự, nhận tài liệu và bảng tính trước sự kiện: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: thư mời sự kiện của chủ đầu tư (thời gian, địa điểm, chương trình, quà tặng); thông tin dự án theo tài liệu và buổi giải đáp của chủ đầu tư 10 – 11/2026. Chương trình có thể thay đổi theo thông báo của ban tổ chức.</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Sự kiện giới thiệu Sun Saphia Residence 15/11/2026',
+			'desc'      => 'Sự kiện giới thiệu Sun Saphia Residence 09:00 Chủ nhật 15/11/2026 tại Sun Gallery Đà Nẵng, 01 Phan Đăng Lưu: chương trình, quà bốc thăm, cách đăng ký.',
+			'points'    => array(
+				'09:00 Chủ nhật 15/11/2026 (đón khách từ 08:30), Sun Gallery Đà Nẵng – 01 Phan Đăng Lưu',
+				'Giới thiệu Sun Group, giới thiệu dự án, tư vấn chuyên sâu',
+				'Bốc thăm 5 phần quà cho khách tham dự lúc 10:45',
+				'Sự kiện bán hàng dự kiến 05/12/2026 – bảng giá chính thức công bố khi mở bán',
+			),
+			'faq'       => array(
+				array( 'Sự kiện giới thiệu Sun Saphia Residence diễn ra khi nào, ở đâu?', '09:00 Chủ nhật 15/11/2026 (đón khách từ 08:30) tại Sun Gallery Đà Nẵng, 01 Phan Đăng Lưu, Hòa Cường, Đà Nẵng.' ),
+				array( 'Tham dự sự kiện Sun Saphia Residence có quà không?', 'Có bốc thăm trúng thưởng lúc 10:45 cho khách tham dự: 1 máy lọc không khí Sharp, 2 máy massage cổ Philips, 2 tai nghe Sony.' ),
+				array( 'Đăng ký tham dự sự kiện Sun Saphia Residence thế nào?', 'Gọi hoặc nhắn Zalo Hoàng Hiệp 0904 567 009 để giữ chỗ và nhận tài liệu dự án trước sự kiện.' ),
+			),
+		),
+		'sources'  => array(),
+	);
+
 	return $posts;
 }
