@@ -20,3 +20,6 @@ Thư mục Google Drive tài liệu bán hàng của các dự án. Đọc bằn
 
 ## Ảnh khu vực Đà Nẵng (ảnh thật)
 Xem `marketing/anh-khu-vuc/README.md`: biển Mỹ Khê, sông Hàn, cầu Rồng, du thuyền, pháo hoa DIFF. Ưu tiên các ảnh này cho bài thị trường, khu vực, cho thuê và du lịch thay cho cảnh tự vẽ.
+
+## Nội thất minh hoạ Sun Saphia (anh Hiệp chỉ 11/11/2026)
+Phối cảnh nội thất theo layout từng căn studio: `projects/sun-saphia/images/noi-that-crm/sp-30-*-{living,living2,bed,top,plus}.webp` (commit fe527406f2a378cd18fc76a70e85db106e730b3d, xem trong app chọn căn `projects/sun-saphia/chon-can/chon-can-app.html`). Dùng cho bài nội thất, cho thuê, căn mẫu Sun Saphia; ghi chú "nội thất minh hoạ theo layout CĐT, không phải gói bàn giao". Ảnh có dải chữ nhỏ ở đáy, khi cắt khung nên bỏ phần đáy.
