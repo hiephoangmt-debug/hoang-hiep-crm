@@ -3,7 +3,7 @@
  * mỗi mục là một thẻ trắng bo góc, đầu trang xanh đêm. Chỉ đổi giao diện – giữ nguyên mọi chức năng của trang dự án.
  * Tắt cho một dự án: Dự án → sửa → "Giao diện trang" = "Chuẩn của web".
  */
-body.single-du-an.du-an-moi { --lp-navy: #0e1c33; --lp-navy2: #172b4a; --lp-gold: #b98d4f; --lp-gold2: #d8b67c; --lp-sand: #f6f1e9; --lp-line: #e6ddcf; background: var(--lp-sand); }
+body.single-du-an.du-an-moi { --lp-navy: #0e1c33; --lp-navy2: #172b4a; --lp-gold: #f2551d; --lp-gold2: #ff8a3d; --lp-sand: #f6f1e9; --lp-line: #e6ddcf; background: var(--lp-sand); }
 
 /* Đầu trang dự án */
 .du-an-moi .project-hero { min-height: clamp(420px, 64vh, 620px); background: radial-gradient(1100px 560px at 78% 25%, #24406b 0%, var(--lp-navy) 62%); }

@@ -30,16 +30,16 @@
 /* latin */
 @font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/playfair-display-700-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
 
-/* Hoàng Hiệp – xanh navy & nâu, cam cho điểm cần nổi bật (đổi bảng màu: Giao diện → Tùy biến → Bảng màu) */
+/* Hoàng Hiệp – xanh navy & cam (11/2026: bỏ màu nâu, đồng bộ cam), cam đậm cho điểm cần nổi bật (đổi bảng màu: Giao diện → Tùy biến → Bảng màu) */
 :root {
 	--navy: #0b2447;
 	--navy-2: #133a6b;
 	--navy-3: #1e4f8a;
-	/* Nâu: --gold = nâu sáng (chữ, đường kẻ trên nền navy), --gold-2 = nâu đậm (nút thường, chữ nhấn trên nền trắng). */
-	--gold: #c99b70;
-	--gold-2: #8a5a36;
-	--gold-3: #6e4527;
-	--gold-soft: #f5ede5;
+	/* Màu nhấn (tên biến giữ "gold"): --gold = cam sáng (chữ, đường kẻ trên nền navy), --gold-2 = cam (nút thường, chữ nhấn trên nền trắng). */
+	--gold: #ff8a3d;
+	--gold-2: #f2551d;
+	--gold-3: #c2410c;
+	--gold-soft: #fff1e8;
 	/* Cam: chỉ cho điểm nổi bật – nút gửi thông tin, ưu đãi, con số chính. */
 	--cta: #ea580c;
 	--cta-2: #c2410c;
