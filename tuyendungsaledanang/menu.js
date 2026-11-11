@@ -19,10 +19,7 @@
     try { widget(); } catch (e) {}
     try { crm(); } catch (e) {}
     // Trang đã có sẵn thanh menu (bài viết dạng tĩnh) thì thôi
-    if (document.querySelector('.top .menu, .hm-menu')) {
-      var ex = document.querySelector('.top .menu, .hm-menu');
-      if (ex.getBoundingClientRect().height > 0) return;
-    }
+    if (document.querySelector('.top .menu, .hm-menu, #hm-tg')) return;
     var S = 'https://www.tuyendungsaledanang.com';
     var css = '#hmbar{position:fixed;top:0;left:0;right:0;z-index:2147482000;background:#1B2D6B;box-shadow:0 2px 12px rgba(0,0,0,.2);font-family:"Be Vietnam Pro",Arial,sans-serif;line-height:1.3}' +
       '#hmbar *{box-sizing:border-box}' +
@@ -38,6 +35,9 @@
       '#hmbar .r2 .in::-webkit-scrollbar{display:none}' +
       '#hmbar .r2 a{color:#dfe5f5;text-decoration:none;font-weight:600;font-size:14px;padding:10px;display:inline-block}' +
       '#hmbar .r2 a:hover{color:#fff;box-shadow:inset 0 -3px 0 #f47c20}' +
+      '#hmbar .bg{display:none;width:42px;height:38px;border:1px solid rgba(255,255,255,.35);border-radius:8px;background:transparent;color:#fff;font-size:22px;line-height:1;cursor:pointer;padding:0}' +
+      '@media(max-width:760px){#hmbar .bg{display:inline-block}#hmbar .r2{display:none;max-height:calc(100vh - 52px);overflow-y:auto}#hmbar.op .r2{display:block}' +
+      '#hmbar .r2 .in{display:block;height:auto;white-space:normal;overflow:visible;padding:4px 16px 10px}#hmbar .r2 a{display:block;padding:12px 4px;border-bottom:1px solid rgba(255,255,255,.08);font-size:15px}}' +
       '@media(max-width:520px){#hmbar .cl span{display:none}#hmbar .br{font-size:14px}}';
     var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
     var toc = document.getElementById('muc-luc') ? '<a href="#muc-luc">📑 Mục lục</a>' : '';
@@ -47,9 +47,12 @@
       '<a href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo</a>';
     var bar = document.createElement('div'); bar.id = 'hmbar';
     bar.innerHTML = '<div class="r1"><a class="br" href="' + S + '/">TUYỂN SALE <em>ĐÀ NẴNG</em></a>' +
-      '<div class="ac"><a class="cl" href="tel:0904567009">📞<span> 0904 567 009</span></a><a class="ap" href="' + S + '/#dang-ky">Ứng tuyển</a></div></div>' +
+      '<div class="ac"><a class="cl" href="tel:0904567009">📞<span> 0904 567 009</span></a><a class="ap" href="' + S + '/#dang-ky">Ứng tuyển</a><button class="bg" type="button" aria-label="Mở menu">☰</button></div></div>' +
       '<nav class="r2"><div class="in">' + links + '</div></nav>';
     b.insertBefore(bar, b.firstChild);
+    var bg = bar.querySelector('.bg');
+    bg.addEventListener('click', function () { var o = bar.classList.toggle('op'); bg.textContent = o ? '✕' : '☰'; bg.setAttribute('aria-label', o ? 'Đóng menu' : 'Mở menu'); });
+    [].forEach.call(bar.querySelectorAll('.r2 a'), function (a) { a.addEventListener('click', function () { bar.classList.remove('op'); bg.textContent = '☰'; }); });
     [].forEach.call(document.querySelectorAll('a'), function (a) {
       if (a.closest('#hmbar')) return;
       var t = (a.textContent || '').trim();
@@ -60,7 +63,7 @@
     });
     // Ẩn thanh cũ (nếu LadiPage còn giữ) và đẩy nội dung xuống dưới thanh mới
     var old = document.querySelector('.top'); if (old && old !== bar) old.style.display = 'none';
-    var pad = function () { b.style.paddingTop = bar.offsetHeight + 'px'; };
+    var pad = function () { b.style.paddingTop = bar.querySelector('.r1').offsetHeight + (window.innerWidth > 760 ? bar.querySelector('.r2').offsetHeight : 0) + 'px'; };
     pad(); window.addEventListener('resize', pad);
     var s2 = document.createElement('style');
     s2.textContent = 'html{scroll-padding-top:100px;scroll-behavior:smooth}';
