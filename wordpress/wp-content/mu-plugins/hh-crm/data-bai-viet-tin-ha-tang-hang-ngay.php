@@ -516,5 +516,88 @@ HTML
 		),
 	);
 
+	/* ---------------- 12/11 – Tái định cư Hương Trà (đường sắt tốc độ cao) và Hòa Liên – Túy Loan (cao tốc) ---------------- */
+	$posts[] = array(
+		'slug'           => 'tai-dinh-cu-huong-tra-duong-sat-toc-do-cao-hoa-lien-tuy-loan',
+		'title'          => 'Đà Nẵng duyệt thêm 2 khu tái định cư hơn 471 tỷ: Hương Trà cho đường sắt tốc độ cao, Hòa Liên – Túy Loan cho cao tốc',
+		'excerpt'        => 'Quyết định 5128/QĐ-UBND duyệt khu tái định cư hơn 365,8 tỷ đồng, khoảng 32,57 ha với 391 lô tại phường Hương Trà (Tam Kỳ cũ) phục vụ đường sắt tốc độ cao Bắc – Nam; Quyết định 5151/QĐ-UBND duyệt khu tái định cư số 3 hơn 105,3 tỷ cho cao tốc đoạn Hòa Liên – Túy Loan.',
+		'keyword'        => 'tái định cư đường sắt tốc độ cao Hương Trà',
+		'keywords_extra' => array( 'tái định cư cao tốc Hòa Liên Túy Loan', 'đường sắt tốc độ cao qua Tam Kỳ', 'Quyết định 5128/QĐ-UBND', 'bất động sản Tam Kỳ' ),
+		'project'        => 'meta-city-tam-ky',
+		'schedule'       => '2026-11-12 07:00',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Hạ tầng Đà Nẵng', 'Đường sắt tốc độ cao', 'Tái định cư' ),
+		'image'          => 'plugin:img/tin-tuc/tai-dinh-cu-huong-tra-hoa-lien-11-2026.jpg',
+		'image_alt'      => 'Hai khu tái định cư mới tại phường Hương Trà và cao tốc Hòa Liên – Túy Loan, Đà Nẵng',
+		'content'        => <<<HTML
+<p>Trong hai ngày 9 – 10/11/2026, UBND TP Đà Nẵng duyệt thêm hai dự án tái định cư phục vụ hai công trình giao thông lớn: khu <strong>tái định cư đường sắt tốc độ cao Hương Trà</strong> (Quyết định 5128/QĐ-UBND, hơn 365,8 tỷ đồng) và <strong>Khu tái định cư số 3</strong> cho cao tốc đoạn Hòa Liên – Túy Loan (Quyết định 5151/QĐ-UBND, hơn 105,3 tỷ đồng). Cộng lại, hai dự án có tổng mức đầu tư hơn 471 tỷ đồng (Hoàng Hiệp cộng từ hai quyết định).</p>
+<!--hh-featured-->
+<h2>Tái định cư đường sắt tốc độ cao Hương Trà: những con số chính</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Theo báo chí đưa tin</th></tr></thead>
+<tbody>
+<tr><td>Văn bản</td><td>Quyết định 5128/QĐ-UBND của UBND TP Đà Nẵng (Văn phòng UBND thành phố thông tin ngày 10/11/2026)</td></tr>
+<tr><td>Vị trí</td><td>Phường Hương Trà – hình thành từ phường Hòa Hương, An Sơn và xã Tam Ngọc của TP Tam Kỳ (Quảng Nam cũ)</td></tr>
+<tr><td>Tổng mức đầu tư</td><td>Hơn 365,8 tỷ đồng</td></tr>
+<tr><td>Quy mô</td><td>Khoảng 32,57 ha, 391 lô tái định cư</td></tr>
+<tr><td>Hạng mục kèm theo</td><td>6 bãi đỗ xe (khoảng 7.033 m²), công viên cây xanh, hành lang cách ly</td></tr>
+<tr><td>Đơn vị thực hiện</td><td>Ban Quản lý dự án đầu tư xây dựng các công trình giao thông và nông nghiệp TP Đà Nẵng</td></tr>
+</tbody>
+</table>
+<p>Quyết định cũng giao UBND phường Hương Trà rà soát, chuẩn hóa thông tin diện tích đất để hồ sơ dự án khớp với quy hoạch, và quản lý quy hoạch xung quanh để giữ khoảng cách an toàn môi trường với trạm xử lý nước thải.</p>
+<h2>Khu tái định cư số 3 cho cao tốc Hòa Liên – Túy Loan</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Theo báo chí đưa tin</th></tr></thead>
+<tbody>
+<tr><td>Văn bản</td><td>Quyết định 5151/QĐ-UBND ngày 09/11/2026 của Chủ tịch UBND TP Đà Nẵng</td></tr>
+<tr><td>Phục vụ</td><td>Giải tỏa dự án xây dựng đường cao tốc đoạn Hòa Liên – Túy Loan</td></tr>
+<tr><td>Tổng mức đầu tư</td><td>Hơn 105,3 tỷ đồng</td></tr>
+<tr><td>Hạ tầng</td><td>San nền, giao thông, thoát nước mưa, thoát và xử lý nước thải (trạm 150 m³/ngày đêm), chiếu sáng, hào kỹ thuật, cây xanh; 2 bãi đỗ xe tổng khoảng 957 m²</td></tr>
+<tr><td>Chủ đầu tư</td><td>Ban Quản lý các dự án đầu tư cơ sở hạ tầng ưu tiên TP Đà Nẵng</td></tr>
+<tr><td>Thời gian</td><td>2026 – 2027</td></tr>
+</tbody>
+</table>
+<!--hh-img:img/meta-city-tam-ky/meta-city-tam-ky-phoi-canh-tong-the.jpg|Phối cảnh khu đô thị Meta City ở Tây Bắc Tam Kỳ, phường Bàn Thạch – cùng khu vực Tam Kỳ cũ với phường Hương Trà (phối cảnh chủ đầu tư)-->
+<h2>Chuỗi tái định cư cho đường sắt tốc độ cao qua Đà Nẵng</h2>
+<p>Khu Hương Trà nằm trong chuỗi dự án tái định cư thành phố đang duyệt dần cho tuyến đường sắt tốc độ cao Bắc – Nam. Đầu tháng 11/2026, Đà Nẵng đã duyệt 3 khu tái định cư hơn 392 tỷ đồng tại Duy Xuyên (xem <a href="/tai-dinh-cu-duy-xuyen-duong-sat-toc-do-cao-392-ty/">bài chi tiết</a>); trước đó báo chí cũng đưa tin các khu tại Hòa Tiến, Tam Xuân, Bàn Thạch, Hòa Khánh – Liên Chiểu. Theo các báo, tuyến qua Đà Nẵng dài khoảng 116 km, từ phường Hải Vân đến xã Núi Thành; Bộ Xây dựng đặt mục tiêu khởi công tuyến vào tháng 12/2027. Ga hành khách Đà Nẵng dự kiến đặt tại Hòa Sơn – xem <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang/">ga đường sắt tốc độ cao Đà Nẵng</a>.</p>
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Tuyến đường sắt đã chạm tới Tam Kỳ cũ:</strong> sau Duy Xuyên, việc có quyết định đầu tư cụ thể ở Hương Trà cho thấy công tác chuẩn bị mặt bằng đang trải dài khắp các địa phương phía Nam thành phố. Làm tái định cư trước là bước bắt buộc trước khi thu hồi đất.</li>
+<li><strong>Kiểm tra hành lang tuyến trước khi mua đất:</strong> ở các phường, xã có tuyến đi qua như Hương Trà, Bàn Thạch, Hòa Liên, anh chị nên hỏi UBND phường, xã hoặc văn phòng đăng ký đất đai xem thửa đất có nằm trong phạm vi thu hồi, hành lang an toàn hay không trước khi đặt cọc.</li>
+<li><strong>391 lô tái định cư không phải hàng bán tự do:</strong> lô tái định cư dành để bố trí cho hộ bị thu hồi đất. Khi có người rao "suất tái định cư", cần kiểm tra quyết định giao đất, điều kiện chuyển nhượng – tránh mua giấy tờ tay.</li>
+<li><strong>Hạ tầng dân cư mới:</strong> mỗi khu tái định cư đi kèm đường, thoát nước, xử lý nước thải, bãi đỗ xe, cây xanh đồng bộ; về dài hạn giúp khu vực ven tuyến có thêm khu dân cư mới.</li>
+<li><strong>Tác động giá là dài hạn:</strong> đường sắt dự kiến khởi công cuối 2027; giá đất thường chịu ảnh hưởng rõ nhất quanh nhà ga, không phải dọc tuyến. Không nên mua đuổi theo tin tái định cư.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/meta-city-tam-ky/">Meta City Tam Kỳ</a> – khu đô thị ở phường Bàn Thạch, cùng khu vực Tam Kỳ cũ với phường Hương Trà; hạ tầng đường sắt và tái định cư làm khu vực Tây Bắc Tam Kỳ được quan tâm hơn (trang thông tin tham khảo).</li>
+<li><a href="/du-an/ecohome-hoa-hiep-da-nang/">Nhà ở xã hội Ecohome Hòa Hiệp</a> – khu Tây Bắc thành phố (phường Hải Vân), gần các công trình giao thông phía Tây như cao tốc qua Hòa Liên, tuyến đường sắt đoạn Hải Vân.</li>
+</ul>
+<p>Cần kiểm tra một thửa đất ở Tam Kỳ, Hòa Vang có nằm trong hành lang tuyến hay khu tái định cư không, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: Quyết định 5128/QĐ-UBND và 5151/QĐ-UBND của UBND TP Đà Nẵng theo báo chí đưa tin ngày 10 – 11/11/2026 (Báo Đà Nẵng, CafeF, Đại Đoàn Kết, Chuyển động Thị trường); thông tin hành chính phường Hương Trà theo Nghị quyết 1659/NQ-UBTVQH15. Bài viết theo trích yếu báo chí, chưa đọc toàn văn quyết định.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Tái định cư đường sắt tốc độ cao Hương Trà 365,8 tỷ',
+			'desc'      => 'Tái định cư đường sắt tốc độ cao Hương Trà: QĐ 5128 duyệt hơn 365,8 tỷ, 32,57 ha, 391 lô; QĐ 5151 duyệt khu TĐC số 3 cao tốc Hòa Liên – Túy Loan 105,3 tỷ.',
+			'points'    => array(
+				'QĐ 5128/QĐ-UBND: khu tái định cư phường Hương Trà hơn 365,8 tỷ, khoảng 32,57 ha, 391 lô, phục vụ đường sắt tốc độ cao',
+				'QĐ 5151/QĐ-UBND (09/11/2026): khu tái định cư số 3 hơn 105,3 tỷ cho cao tốc đoạn Hòa Liên – Túy Loan, làm 2026 – 2027',
+				'Đất trong hành lang tuyến cần kiểm tra kỹ; lô tái định cư không phải hàng bán tự do',
+			),
+			'faq'       => array(
+				array( 'Khu tái định cư đường sắt tốc độ cao ở Hương Trà lớn bao nhiêu?', 'Theo Quyết định 5128/QĐ-UBND, khoảng 32,57 ha với 391 lô tái định cư, tổng mức đầu tư hơn 365,8 tỷ đồng, kèm 6 bãi đỗ xe và công viên cây xanh.' ),
+				array( 'Phường Hương Trà ở đâu?', 'Phường Hương Trà của TP Đà Nẵng được hình thành từ phường Hòa Hương, An Sơn và xã Tam Ngọc thuộc TP Tam Kỳ (Quảng Nam cũ).' ),
+				array( 'Khu tái định cư số 3 cao tốc Hòa Liên – Túy Loan làm khi nào?', 'Theo Quyết định 5151/QĐ-UBND ngày 09/11/2026, tổng mức đầu tư hơn 105,3 tỷ đồng, thực hiện trong năm 2026 – 2027.' ),
+			),
+		),
+		'sources'        => array(
+			'https://baodanang.vn/xay-dung-khu-tai-dinh-cu-so-3-phuc-vu-cao-toc-hoa-lien-tuy-loan-tri-gia-hon-105-ty-dong-3358111.html',
+			'https://cafef.vn/da-nang-phe-duyet-loat-khu-tai-dinh-cu-phuc-vu-cao-toc-duong-sat-toc-do-cao-188261111144637121.chn',
+			'https://daidoanket.vn/da-nang-dau-tu-hon-365-ty-dong-xay-khu-tai-dinh-cu-phuc-vu-duong-sat-toc-do-cao.html',
+			'https://guland.vn/dia-danh-hanh-chinh/phuong-huong-tra-da-nang',
+		),
+	);
+
 	return $posts;
 }
