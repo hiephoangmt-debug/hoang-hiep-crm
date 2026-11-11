@@ -69,6 +69,10 @@ function hh_posts_cum_du_an_11_2026_lo_3( $posts ) {
 <li><strong>Vay nhiều:</strong> Symphony 5 hỗ trợ lãi suất dài hơn (tối đa 30 tháng so với 24 tháng).</li>
 </ul>
 <p>Xem thêm: <a href="/gia-sun-saphia-residence-bao-nhieu/">giá Sun Saphia</a>, <a href="/gia-symphony-5-sun-symphony-residence-bao-nhieu/">giá Symphony 5</a>.</p>
+<h2>Chi phí làm nội thất studio</h2>
+<p>Symphony 5 bàn giao thô, gói hoàn thiện liền tường khoảng 10,1 triệu/m² với studio (khoảng 303 triệu cho căn 30 m², Hoàng Hiệp tự tính). Sun Saphia bàn giao hoàn thiện cơ bản. Hãy cộng chi phí này khi so tổng vốn.</p>
+<h2>Pháp lý giống và khác</h2>
+<p>Cả hai đều là căn hộ có thời hạn 50 năm. Sun Saphia ghi rõ thời hạn dự án tính từ 17/09/2026 và công trình cấp I, niên hạn sử dụng 100 năm. Symphony 5 có quyết định giao đất thương mại dịch vụ 50 năm, đấu giá đất 14/12/2025, quy hoạch 1/500 phê duyệt 23/4/2026. Người mua nên đọc thời hạn ghi trong hợp đồng mua bán của từng dự án.</p>
 {$cta('Sun Saphia và Symphony 5')}
 HTML
 		,
@@ -148,6 +152,22 @@ HTML
 <li><strong>Thời hạn sở hữu</strong> ghi trong hợp đồng (50 năm từ 17/09/2026).</li>
 </ol>
 <p>Phân biệt với khu đô thị cùng tên: <a href="/sun-saphia-residence-va-khu-do-thi-saphia-khac-nhau/">Sun Saphia Residence và Khu đô thị Saphia khác nhau thế nào</a>.</p>
+<h2>Sun Group làm gì ở Đà Nẵng ngoài nhà ở</h2>
+<p>Bên cạnh nhà ở, Sun Group có mặt ở Đà Nẵng từ những dự án du lịch – vui chơi như Bà Nà Hills (pháp nhân Công ty CP Dịch vụ Cáp treo Bà Nà). Công ty TNHH Công viên Châu Á là pháp nhân của Đà Nẵng Downtown và Sun Galaxy Complex. Các dự án của tập đoàn tập trung ở Bà Nà, bán đảo Sơn Trà, hai bờ sông Hàn và vùng Hòa Xuân – Hòa Quý phía Nam thành phố.</p>
+<h2>Thông tin nhanh Sun Saphia Residence</h2>
+<table>
+<tbody>
+<tr><th>Quy mô</th><td>1 tòa 30 tầng (114 m), 2 tầng hầm, chiều cao tầng căn hộ 3,5 m</td></tr>
+<tr><th>Số căn</th><td>782 căn: 513 studio, 108 căn 1PN+, 133 căn 2PN</td></tr>
+<tr><th>Thời hạn</th><td>50 năm kể từ 17/09/2026; công trình cấp I, niên hạn 100 năm</td></tr>
+<tr><th>Bàn giao</th><td>Dự kiến 11/2028, hoàn thiện cơ bản</td></tr>
+<tr><th>Mở bán</th><td>Sự kiện bán hàng dự kiến 05/12/2026</td></tr>
+</tbody>
+</table>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-ven-bien-son-thuy.jpg|Sun Saphia Residence nhìn từ biển Sơn Thủy (ảnh chủ đầu tư)-->
+<p>Xem giá dự kiến: <a href="/gia-sun-saphia-residence-bao-nhieu/">giá Sun Saphia Residence</a>.</p>
+<h2>Sun Group bàn giao các dự án trước ra sao</h2>
+<p>Với người mua, cách đánh giá chủ đầu tư thực tế nhất là xem các dự án đã bàn giao. Ở Đà Nẵng, Premier Village và Euro Village 2 đã bàn giao; Sun Symphony Residence và Sun Cosmo Residence đang trong giai đoạn bàn giao. Anh chị có thể đến xem thực tế các dự án này để đánh giá chất lượng hoàn thiện và vận hành.</p>
 {$cta('Sun Saphia Residence')}
 HTML
 		,
@@ -225,6 +245,34 @@ HTML
 <li><strong>Trả sớm:</strong> theo tài liệu 28/9/2026, chiết khấu theo tiến độ 8%, thanh toán nhanh 100% được 12%, thanh toán sớm 95% được 18% (hỏi lại mức đang áp dụng khi đặt căn).</li>
 </ul>
 <p>Xem giá từng tòa: <a href="/bang-gia-capital-square-da-nang-theo-toa/">bảng giá Capital Square theo tòa</a>.</p>
+<h2>Lịch thanh toán khi mua Hudson Place</h2>
+<table>
+<thead><tr><th>Bước</th><th>Thời điểm</th><th>Số tiền</th></tr></thead>
+<tbody>
+<tr><td>Ký thỏa thuận đặt cọc chuyển nhượng</td><td>Trong 2 ngày từ khi nộp đủ cọc</td><td>100 triệu/căn</td></tr>
+<tr><td>Ký hợp đồng chuyển nhượng hợp đồng mua bán</td><td>Trong 15 ngày từ ký thỏa thuận đặt cọc</td><td>Theo phương án chọn</td></tr>
+<tr><td>Bàn giao căn hộ</td><td>Theo thông báo của chủ đầu tư</td><td>Kinh phí bảo trì + VAT 5% giá bán</td></tr>
+<tr><td>Nhận giấy chứng nhận</td><td>Theo thông báo của chủ đầu tư</td><td>5% giá bán</td></tr>
+</tbody>
+</table>
+<p>Hudson Place bán theo hình thức chuyển nhượng hợp đồng mua bán, ký tại văn phòng chủ đầu tư; căn hộ sở hữu lâu dài (sổ hồng từng căn), bàn giao dự kiến quý III/2027, bán hoàn thiện, vận hành bởi Savills.</p>
+<h2>Vay 70% với các loại căn</h2>
+<table>
+<thead><tr><th>Loại căn Hudson Place</th><th>Giá (giỏ hàng)</th><th>Vay 70% (ước tính)</th></tr></thead>
+<tbody>
+<tr><td>1PN 46,3 – 47,2 m²</td><td>4,32 – 4,91 tỷ</td><td>Khoảng 3,0 – 3,4 tỷ</td></tr>
+<tr><td>2PN 72,0 – 74,3 m²</td><td>6,61 – 10,58 tỷ</td><td>Khoảng 4,6 – 7,4 tỷ</td></tr>
+<tr><td>3PN, 3PN dualkey 91,3 – 101,6 m²</td><td>9,33 – 13,41 tỷ</td><td>Khoảng 6,5 – 9,4 tỷ</td></tr>
+</tbody>
+</table>
+<p><small>Ước tính theo giá niêm yết, chưa trừ chiết khấu; số vay thực tế tính trên giá có VAT, không gồm kinh phí bảo trì, và tùy hồ sơ của ngân hàng.</small></p>
+<!--hh-img:img/hudson-place/hudson-place-be-boi-resort.jpg|Bể bơi resort cạnh tòa S4 Hudson Place (phối cảnh chủ đầu tư)-->
+<h2>Hồ sơ vay cần chuẩn bị</h2>
+<ul>
+<li>Giấy tờ tùy thân, hộ khẩu hoặc xác nhận cư trú, giấy đăng ký kết hôn (nếu có).</li>
+<li>Chứng minh thu nhập: hợp đồng lao động, sao kê lương, hoặc giấy tờ kinh doanh, cho thuê tài sản.</li>
+<li>Hợp đồng mua bán / chuyển nhượng và các chứng từ đã thanh toán.</li>
+</ul>
 {$cta('Capital Square')}
 HTML
 		,
@@ -303,6 +351,25 @@ HTML
 <li><strong>Muốn nhiều ưu đãi trừ vào giá:</strong> The Legend (quà nội thất, chiết khấu thanh toán sớm).</li>
 </ul>
 <p>Xem thêm: <a href="/gia-nobu-residences-da-nang-bao-nhieu/">giá Nobu Residences</a>, <a href="/gia-the-legend-da-nang-bao-nhieu/">giá The Legend</a>.</p>
+<h2>Chi phí và ưu đãi khi mua</h2>
+<ul>
+<li><strong>The Legend:</strong> quà nội thất trừ vào giá (1PN 300 triệu, 2PN 500 triệu, 3PN 700 triệu, penthouse 1,8 tỷ); chiết khấu thanh toán sớm đến 12%; vay 70% hỗ trợ lãi suất 0% 24 tháng (MSB, Vietcombank, MB); miễn phí quản lý 24 tháng.</li>
+<li><strong>Nobu:</strong> giá tham khảo tổng hợp từ nhiều nguồn, chưa có bảng giá chính thức công khai; nên hỏi phí dịch vụ, phí thương hiệu và điều kiện chương trình cho thuê do Nobu Hospitality vận hành.</li>
+</ul>
+<h2>Vị trí: biển hay sông</h2>
+<p><strong>Nobu</strong> ở góc Võ Văn Kiệt – Võ Nguyên Giáp, khoảng 1 phút ra bãi biển Mỹ Khê, 5 phút tới cầu Rồng, 10 phút vào trung tâm Hải Châu, 15 phút ra sân bay. <strong>The Legend</strong> ở lô A20 Võ Văn Kiệt, ngay chân cầu Rồng, khoảng 1 km ra biển Mỹ Khê; cánh Legacy nhìn sông Hàn, cánh Infinity nhìn về phía biển. Hai dự án cùng trục Võ Văn Kiệt, cách nhau không xa – khác biệt chính là "mặt biển" và "mặt sông".</p>
+<!--hh-img:img/nobu-da-nang/nobu-da-nang-phoi-canh-thap-ven-bien-my-khe.jpg|Phối cảnh tháp Nobu Residences Đà Nẵng bên biển Mỹ Khê (ảnh chủ đầu tư)-->
+<h2>Tiến độ</h2>
+<ul>
+<li><strong>Nobu:</strong> khởi công quý 2/2024; tháng 10/2026 kết cấu đến tầng 22/43; dự kiến hoàn thành năm 2027.</li>
+<li><strong>The Legend:</strong> khởi công 28/02/2025; cất nóc dự kiến 31/12/2026; bàn giao căn hộ dự kiến 31/3/2028.</li>
+</ul>
+<h2>Câu hỏi nên đặt cho cả hai</h2>
+<ol>
+<li>Thời hạn sở hữu ghi trong hợp đồng là bao lâu?</li>
+<li>Phí quản lý, phí dịch vụ mỗi tháng và cách tăng hằng năm?</li>
+<li>Căn mình chọn thuộc danh sách đủ điều kiện bán và có thư bảo lãnh ngân hàng không?</li>
+</ol>
 {$cta('Nobu và The Legend')}
 HTML
 		,

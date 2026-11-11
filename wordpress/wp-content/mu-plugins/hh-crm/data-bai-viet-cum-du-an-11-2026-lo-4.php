@@ -74,6 +74,21 @@ function hh_posts_cum_du_an_11_2026_lo_4( $posts ) {
 <li>Thời hạn cấp giấy chứng nhận dự kiến sau bàn giao.</li>
 </ol>
 <p>Xem thêm: <a href="/gia-the-legend-da-nang-bao-nhieu/">giá The Legend</a>, <a href="/mat-bang-can-ho-the-legend-da-nang/">mặt bằng The Legend</a>.</p>
+<h2>Hiểu đúng từng loại giấy tờ</h2>
+<ul>
+<li><strong>Quyết định công nhận kết quả đấu giá:</strong> xác nhận chủ đầu tư có quyền với khu đất qua đấu giá.</li>
+<li><strong>Giấy chứng nhận quyền sử dụng đất của dự án:</strong> là "sổ đất" của cả khu – người mua căn hộ sẽ được cấp giấy chứng nhận riêng sau khi bàn giao.</li>
+<li><strong>Quy hoạch chi tiết 1/500:</strong> quy định số tầng, số căn, công năng từng khối.</li>
+<li><strong>Giấy phép xây dựng:</strong> phần ngầm đã cấp năm 2025; phần thân theo giấy phép tiếp theo của dự án.</li>
+<li><strong>Văn bản đủ điều kiện huy động vốn / bán nhà hình thành trong tương lai:</strong> căn cứ để chủ đầu tư được ký hợp đồng và nhận tiền của khách.</li>
+</ul>
+<h2>Lịch sử khu đất cần biết</h2>
+<p>Khu đất A20 có lịch sử pháp lý phức tạp: kết quả đấu giá được phê duyệt năm 2017, sau đó phát sinh tranh chấp giữa doanh nghiệp và chính quyền; theo báo chí, UBND TP Đà Nẵng thua kiện ở cả sơ thẩm và phúc thẩm, dự án sau đó được tháo gỡ. Đã có thời điểm Sở Xây dựng lưu ý dự án chưa đủ điều kiện bán; báo chí sau đó cho biết dự án đã đủ điều kiện mở bán. Vì vậy người mua nên đề nghị xem văn bản xác nhận mới nhất áp dụng cho căn mình chọn.</p>
+<!--hh-img:img/the-legend/the-legend-da-nang-vi-tri-chan-cau-rong-tu-tren-cao.jpg|Vị trí The Legend ngay chân cầu Rồng, nhìn từ trên cao (phối cảnh)-->
+<h2>Vốn và tiến độ đăng ký</h2>
+<p>Theo Tuổi Trẻ (3/2025), vốn xây dựng phần nhà ở là 2.352 tỷ đồng, trong đó chủ đầu tư được phép huy động 1.764 tỷ đồng; tiến độ thực hiện đăng ký kéo dài đến quý 4/2028. Chính sách bán hàng ghi bàn giao căn hộ dự kiến 31/3/2028. Mốc áp dụng cho từng căn là mốc ghi trong hợp đồng mua bán.</p>
+<h2>Thanh toán gắn với pháp lý</h2>
+<p>Lịch thanh toán của chủ đầu tư: giữ chỗ 200 triệu, hợp đồng nguyên tắc 10%, đợt 2 thêm 15%, ký hợp đồng mua bán bổ sung đủ 30%, sau đó mỗi 30 ngày 5% (7 đợt), cất nóc 5%, nhận nhà 25% cộng kinh phí bảo trì, nhận sổ 5%. Khoản 5% cuối chỉ đóng khi nhận giấy chứng nhận – đây là cơ chế bảo vệ người mua.</p>
 {$cta('The Legend')}
 HTML
 		,
@@ -176,6 +191,15 @@ HTML
 <li>Vay tối đa 70%, chủ đầu tư hỗ trợ lãi suất 24 tháng; miễn phí quản lý 1 năm.</li>
 </ul>
 <p>Xem mốc bàn giao và tiến độ ba tòa: <a href="/cora-tower-spana-tower-khi-nao-ban-giao/">Cora Tower khi nào bàn giao</a>.</p>
+<h2>Tiện ích trong khu đô thị</h2>
+<p>Cư dân Cora Tower dùng chung hạ tầng của khu đô thị Sun NeO City: hệ thống đường nội khu, nhà phố thương mại thấp tầng xung quanh và kết nối nhanh về cầu Hòa Xuân. Từ trục Nguyễn Phước Lan có thể đi về Ngũ Hành Sơn, biển và trung tâm thành phố.</p>
+<h2>Câu hỏi nên đặt khi xem mặt bằng</h2>
+<ol>
+<li>Căn mình chọn nằm ở tòa A1 hay A2, tầng nào, hướng nào?</li>
+<li>Căn có phải căn góc hai mặt thoáng không?</li>
+<li>Diện tích trong giỏ hàng là thông thủy hay tim tường?</li>
+<li>Căn còn trong giỏ hàng đợt này và áp dụng chính sách nào?</li>
+</ol>
 {$cta('Cora Tower')}
 HTML
 		,
@@ -255,6 +279,31 @@ HTML
 </ol>
 <!--hh-img:img/nobu-da-nang/nobu-da-nang-can-dual-key.jpg|Không gian căn hộ Dual-Key Nobu Đà Nẵng (phối cảnh nội thất)-->
 <p>Xem thêm: <a href="/gia-nobu-residences-da-nang-bao-nhieu/">giá Nobu Residences</a>, <a href="/nobu-residences-hay-the-legend-can-ho-cao-cap-da-nang/">Nobu hay The Legend</a>.</p>
+<h2>Ưu và nhược điểm khi mua căn hộ hàng hiệu</h2>
+<table>
+<thead><tr><th>Ưu điểm</th><th>Nhược điểm</th></tr></thead>
+<tbody>
+<tr><td>Dịch vụ, tiện ích như khách sạn cao cấp</td><td>Giá mua cao hơn căn hộ cùng khu vực</td></tr>
+<tr><td>Thương hiệu quốc tế giúp dễ cho thuê khách cao cấp</td><td>Phí dịch vụ, phí thương hiệu hằng tháng cao</td></tr>
+<tr><td>Có thể giao đơn vị vận hành khai thác</td><td>Bị ràng buộc bởi quy định của thương hiệu khi cải tạo, cho thuê</td></tr>
+<tr><td>Số căn ít, riêng tư</td><td>Thanh khoản phụ thuộc thị trường khách hạng sang</td></tr>
+</tbody>
+</table>
+<h2>Ai hợp với căn hộ hàng hiệu</h2>
+<ul>
+<li>Người mua nghỉ dưỡng, ở vài tháng mỗi năm và muốn giao lại cho đơn vị vận hành khai thác lúc vắng nhà.</li>
+<li>Người muốn tài sản gắn thương hiệu, có dịch vụ đầy đủ mà không phải tự quản lý.</li>
+<li>Không hợp người cần tối ưu dòng tiền cho thuê với ngân sách thấp – nên xem studio ở các dự án như <a href="/gia-symphony-5-sun-symphony-residence-bao-nhieu/">Symphony 5</a>.</li>
+</ul>
+<!--hh-img:img/nobu-da-nang/nobu-da-nang-ho-boi-nuoc-am-tren-cao.jpg|Hồ bơi nước ấm trên cao Nobu Đà Nẵng (phối cảnh)-->
+<h2>Nobu Đà Nẵng: các con số chính</h2>
+<ul>
+<li>Tòa tháp 43 tầng (khoảng 186 m), 2 tầng hầm, góc Võ Văn Kiệt – Võ Nguyên Giáp, mặt biển Mỹ Khê.</li>
+<li>264 căn hộ: studio khoảng 42 m², 1PN 62,5 – 71,1 m² (khoảng 6,63 – 9,06 tỷ, tham khảo), 2PN, 3PN Dual Key, 6 Sky Villa có hồ bơi riêng, 2 penthouse.</li>
+<li>Khách sạn Nobu khoảng 200 phòng (gồm 18 suite); nhà hàng Nobu tầng 42; hồ bơi vô cực nước ấm tầng 18.</li>
+<li>Tháng 10/2026 kết cấu đến tầng 22; dự kiến hoàn thành năm 2027.</li>
+</ul>
+<p>Muốn biết ai đứng sau dự án: <a href="/nobu-da-nang-cua-ai-chu-dau-tu/">Nobu Đà Nẵng của ai</a>; tiến độ thi công: <a href="/tien-do-nobu-residences-da-nang/">tiến độ Nobu Đà Nẵng</a>.</p>
 {$cta('Nobu Residences Đà Nẵng')}
 HTML
 		,
@@ -367,6 +416,9 @@ HTML
 <li>Muốn cho thuê: studio, 1PN+ tầng trung – cao; muốn ở: 2PN, 3PN hai mặt thoáng.</li>
 <li>Căn tầng thấp gần sân vườn, tiện ích tầng 2 hợp gia đình có trẻ nhỏ.</li>
 </ol>
+<h2>Tiện ích tầng 2</h2>
+<p>Trọn tầng 2 là tiện ích kiểu resort: hồ bơi bốn mùa, gym, spa, khu trẻ em; tầng 1 là thương mại. Cư dân các tầng dùng chung khu tiện ích này.</p>
+<p>Xem thêm căn hộ giá dưới 3 tỷ ở FourS và các dự án khác: <a href="/can-ho-duoi-3-ty-da-nang-du-an-dang-ban/">căn hộ dưới 3 tỷ Đà Nẵng</a>.</p>
 {$cta('FourS Tower')}
 HTML
 		,
@@ -463,6 +515,14 @@ HTML
 <li>Căn hướng biển, hướng cạnh bên hay phía sau? Xem thêm <a href="/chon-day-can-sun-saphia-residence-mat-bien-canh-ben-phia-sau/">cách chọn dãy căn Sun Saphia</a>.</li>
 <li>Giá đã gồm VAT và kinh phí bảo trì chưa (giá dự kiến 28/10 chưa gồm)?</li>
 </ol>
+<h2>Hạ tầng quanh dự án</h2>
+<ul>
+<li>Ga LRT 09 trên tuyến đường sắt đô thị nối sân bay với khu biển, cách khoảng 500 m (đang chuẩn bị đầu tư).</li>
+<li>Mở rộng đường Võ Nguyên Giáp – Trường Sa – Lạc Long Quân, vốn dự kiến 2.633 tỷ đồng.</li>
+<li>Công viên công cộng khoảng 2,45 ha phía trước dự án, thực hiện 2025 – 2027.</li>
+</ul>
+<h2>So sánh nhanh với căn 1PN+ ở dự án khác</h2>
+<p>Tham khảo cùng phân khúc Sun Group: căn 1PN+ Symphony 5 (44 – 53 m²) giỏ hàng 11/2026 khoảng 3,45 – 4,54 tỷ, đã gồm VAT và phí bảo trì; căn 1PN+ Cora Tower (53,2 – 54,2 m²) khoảng 3,45 – 3,84 tỷ. Khi Sun Saphia công bố giá 1PN+, anh chị có thể đặt cạnh hai mức này, nhớ quy về cùng điều kiện (đã hoặc chưa gồm VAT, phí bảo trì).</p>
 {$cta('căn 1PN+ Sun Saphia')}
 HTML
 		,
@@ -560,6 +620,7 @@ HTML
 <h2>Tiện ích sẽ có khi bàn giao</h2>
 <p>Theo phối cảnh chủ đầu tư: hồ bơi lớn và hồ bơi trẻ em, sân chơi nước, sân tập golf mini, sân bóng rổ mini, sân tập thể thao ngoài trời, vườn cây và lối dạo nội khu, phố đi bộ thương mại, quảng trường ánh sáng; liền kề trung tâm thương mại Vincom, cách cầu Rồng khoảng 1,5 km.</p>
 <!--hh-img:img/capital-square/capital-square-tien-ich-ho-boi-lon.jpg|Hồ bơi lớn nội khu Capital Square (phối cảnh chủ đầu tư)-->
+<p>Hoàng Hiệp cập nhật bài khi chủ đầu tư công bố ảnh tiến độ mới của từng tòa.</p>
 {$cta('Capital Square')}
 HTML
 		,
@@ -658,6 +719,9 @@ HTML
 </ul>
 <h2>Lưu ý về tiến độ đăng ký</h2>
 <p>Chính sách bán hàng ghi bàn giao căn hộ dự kiến 31/3/2028; theo báo chí, tiến độ thực hiện dự án đăng ký với thành phố kéo dài đến quý 4/2028. Mốc chính xác áp dụng cho căn của anh chị là mốc ghi trong hợp đồng mua bán.</p>
+<p>Muốn xem trước pháp lý chi tiết: <a href="/phap-ly-the-legend-da-nang-so-huu-lau-dai/">pháp lý The Legend Đà Nẵng</a>.</p>
+<h2>Shop khối đế: lựa chọn khác</h2>
+<p>Ngoài căn hộ, chủ đầu tư đang bán 19 căn shop ở khối đế (đợt 10/2026), chính sách thanh toán 50%, 70%, 95% chiết khấu 5,5%, 6,5%, 9,5%. Shop hợp người muốn kinh doanh hoặc cho thuê mặt bằng ngay chân cầu Rồng, khu đông khách du lịch.</p>
 {$cta('The Legend')}
 HTML
 		,
@@ -733,6 +797,20 @@ HTML
 <li>Hỏi gói nội thất hoặc quà nội thất trừ vào giá.</li>
 </ol>
 <p>Xem thêm: <a href="/can-ho-duoi-3-ty-da-nang-du-an-dang-ban/">căn hộ dưới 3 tỷ ở Đà Nẵng</a>.</p>
+<h2>Ví dụ: căn studio 2,5 tỷ cần chuẩn bị thêm gì</h2>
+<p>Giả sử giá trên giỏ hàng là 2,5 tỷ và <strong>đã gồm</strong> VAT, kinh phí bảo trì (như giỏ hàng Symphony 5, Cora Tower). Khi đó các khoản cần tính thêm chủ yếu là: lệ phí trước bạ 0,5% khi làm giấy chứng nhận (tính trên giá trị tính lệ phí theo quy định), phí cấp giấy chứng nhận theo mức của địa phương, phí quản lý hằng tháng sau thời gian miễn phí, và chi phí làm nội thất nếu căn bàn giao thô hoặc cơ bản.</p>
+<p>Nếu giá 2,5 tỷ <strong>chưa gồm</strong> VAT và kinh phí bảo trì (như giá dự kiến Sun Saphia ngày 28/10/2026), anh chị phải cộng thêm VAT theo cách tính của chủ đầu tư và 2% kinh phí bảo trì – tổng tiền sẽ cao hơn đáng kể so với con số trên giỏ hàng.</p>
+<h2>Các khoản thường bị bỏ quên</h2>
+<ul>
+<li><strong>Phí gửi xe</strong> ô tô, xe máy ở tầng hầm – tính hằng tháng, nhiều dự án miễn phí một thời gian đầu.</li>
+<li><strong>Bảo hiểm khoản vay, bảo hiểm cháy nổ</strong> khi vay ngân hàng.</li>
+<li><strong>Phí thẩm định, công chứng hợp đồng thế chấp</strong> khi vay.</li>
+<li><strong>Phí chuyển nhượng hợp đồng</strong> nếu bán lại trước khi nhận nhà.</li>
+<li><strong>Chi phí vận hành cho thuê:</strong> phí đơn vị vận hành, dọn dẹp, internet, điện nước khi trống khách.</li>
+</ul>
+<!--hh-img:img/fours-tower/fours-tower-f2-layout-studio.jpg|Layout căn studio FourS Tower F2 – bàn giao hoàn thiện cơ bản (tài liệu chủ đầu tư)-->
+<h2>Ưu đãi giúp giảm chi phí</h2>
+<p>Nhiều chủ đầu tư bù một phần chi phí cho người mua: miễn phí quản lý 1 – 2 năm (các dự án Sun Group, The Legend), quà nội thất trừ vào giá (The Legend 300 triệu – 1,8 tỷ; FourS F2 quà nội thất Nhà Xinh 35 – 100 triệu), hỗ trợ lãi suất 24 – 36 tháng khi vay. Khi so sánh dự án, hãy quy hết ưu đãi ra tiền và trừ vào tổng chi phí, thay vì chỉ so giá niêm yết.</p>
 {$cta('căn hộ anh chị đang xem')}
 HTML
 		,
@@ -803,6 +881,17 @@ HTML
 </ol>
 <p><small>Bài viết tóm tắt nguyên tắc chung; quy định chi tiết theo Luật Kinh doanh bất động sản 2023 và văn bản hướng dẫn – anh chị nên đối chiếu khi ký.</small></p>
 <p>Xem thêm: <a href="/chi-phi-khi-mua-can-ho-moi-ngoai-gia-ban/">chi phí khi mua căn hộ mới</a>, <a href="/giu-cho-booking-can-ho-moi-da-nang-can-biet/">giữ chỗ căn hộ mới cần biết gì</a>.</p>
+<h2>Khi muốn bán lại trước khi nhận nhà</h2>
+<p>Người mua có thể chuyển nhượng hợp đồng mua bán căn hộ hình thành trong tương lai cho người khác khi chưa nhận bàn giao, theo thủ tục của chủ đầu tư và quy định pháp luật. Cần hỏi trước: điều kiện chuyển nhượng (đã thanh toán bao nhiêu, đã ký hợp đồng mua bán chưa), phí chuyển nhượng, thời gian xác nhận và nghĩa vụ thuế thu nhập cá nhân. Một số dự án như Hudson Place bán theo hình thức chuyển nhượng hợp đồng mua bán, ký tại văn phòng chủ đầu tư.</p>
+<h2>Dấu hiệu cần dừng lại</h2>
+<ul>
+<li>Bị yêu cầu đóng tiền lớn khi dự án chưa có văn bản đủ điều kiện bán.</li>
+<li>Không có thư bảo lãnh ngân hàng, hoặc chỉ "hứa" phát hành sau.</li>
+<li>Hợp đồng không ghi rõ diện tích, thời hạn bàn giao, mức phạt chậm.</li>
+<li>Bên nhận tiền không phải pháp nhân chủ đầu tư ghi trên hồ sơ dự án.</li>
+</ul>
+<!--hh-img:img/spana-tower/spana-tower-tien-do-11-2026-toa-thap-nhin-chinh-dien.jpg|Spana Tower đang thi công – ví dụ dự án đủ điều kiện bán, có bảo lãnh ngân hàng (tiến độ 11/2026)-->
+<p>Trước khi ký, anh chị có thể nhờ người có chuyên môn pháp lý đọc hợp đồng mẫu – hợp đồng mua bán của nhiều dự án đã đăng ký mẫu với Sở Công Thương.</p>
 {$cta('dự án anh chị đang xem')}
 HTML
 		,

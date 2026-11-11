@@ -177,6 +177,29 @@ HTML
 <h2>Bàn giao</h2>
 <p>Căn hộ bàn giao thô bên trong (trần, sàn, tường), mặt ngoài, cửa nhôm kính và lô gia hoàn thiện. Khách có thể đăng ký bàn giao hoàn thiện liền tường khi ký hợp đồng mua bán.</p>
 <p>Xem giá từng loại căn: <a href="/gia-symphony-5-sun-symphony-residence-bao-nhieu/">giá bán Symphony 5</a>.</p>
+<h2>Giá theo loại căn trên mặt bằng</h2>
+<table>
+<thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá (giỏ hàng 11/2026)</th></tr></thead>
+<tbody>
+<tr><td>Studio</td><td>30 – 33 m²</td><td>Khoảng 2,50 – 3,30 tỷ</td></tr>
+<tr><td>1PN</td><td>46,4 – 47,8 m²</td><td>Khoảng 3,09 – 3,30 tỷ</td></tr>
+<tr><td>1PN+</td><td>44 – 53 m²</td><td>Khoảng 3,45 – 4,54 tỷ</td></tr>
+<tr><td>2PN, penthouse</td><td>63 – 70 m² (2PN)</td><td>Liên hệ</td></tr>
+</tbody>
+</table>
+<p>Giá đã gồm VAT và phí bảo trì, chưa trừ chiết khấu 5% khi không vay.</p>
+<h2>Tiện ích trong tòa theo tầng</h2>
+<ul>
+<li><strong>Khối đế:</strong> phố thương mại, shophouse.</li>
+<li><strong>Tầng tiện ích:</strong> bể bơi, gym, spa và sauna, kids club, club house.</li>
+<li><strong>Tầng 27:</strong> sân yoga nhìn biển.</li>
+<li><strong>Quanh tháp:</strong> công viên thể thao khoảng 10.000 m², Central Park khoảng 5.000 m², công viên ven sông khoảng 4.000 m², bến du thuyền.</li>
+</ul>
+<!--hh-img:img/sun-symphony-5/sun-symphony-5-ti-yoga-tang-27.jpg|Sân yoga tầng 27 Symphony 5 nhìn biển (phối cảnh chủ đầu tư)-->
+<h2>Bàn giao thô và tùy chọn hoàn thiện</h2>
+<p>Căn hộ bàn giao thô bên trong: trần, sàn, tường để thô; mặt ngoài, cửa nhôm kính và lô gia (sàn lát, lan can kính cường lực) hoàn thiện; cửa chính gỗ chống cháy; có đầu chờ điện, nước, internet; điều hòa khách tự lắp. Khi ký hợp đồng mua bán, khách có thể đăng ký bàn giao hoàn thiện liền tường: khoảng 10,1 triệu/m² với studio, 9,5 triệu/m² với 1PN/1PN+, 11 triệu/m² với 2PN/3PN (đã gồm VAT, tạm tính theo diện tích thông thủy). Ví dụ studio 30 m², gói hoàn thiện khoảng 303 triệu (Hoàng Hiệp tự tính).</p>
+<h2>Nhận căn sớm khi trả 70%</h2>
+<p>Theo Sun Early Key, khách thanh toán tối thiểu 70% được nhận căn sử dụng dự kiến 30/06/2028, sớm hai năm so với mốc bàn giao chính thức theo tiến độ không vay (dự kiến 30/06/2030). Với căn mua để cho thuê, chọn mặt bằng và loại căn sớm giúp có thời gian chuẩn bị nội thất trước mốc nhận căn.</p>
 {$cta('Symphony 5')}
 HTML
 		,
@@ -255,6 +278,17 @@ HTML
 <li>Quy định khai thác cho thuê (tự cho thuê hay qua đơn vị vận hành)?</li>
 </ol>
 <p>Xem thêm: <a href="/gia-symphony-5-sun-symphony-residence-bao-nhieu/">giá bán Symphony 5</a>, <a href="/mat-bang-can-ho-symphony-5/">mặt bằng Symphony 5</a>.</p>
+<h2>Chính sách tài chính gắn với hợp đồng</h2>
+<ul>
+<li><strong>Không vay:</strong> chiết khấu 5% trên giá chưa VAT và kinh phí bảo trì, giãn tiến độ đến 50 tháng.</li>
+<li><strong>Vay:</strong> tối đa 70% giá trị căn tại ngân hàng chủ đầu tư chỉ định, hỗ trợ lãi suất tối đa 30 tháng (không muộn hơn 31/03/2029), miễn phí trả nợ trước hạn trong thời gian hỗ trợ.</li>
+<li><strong>Trả sớm hơn tiến độ bằng vốn tự có:</strong> hưởng lãi 8%/năm trên số tiền và số ngày trả trước.</li>
+<li><strong>Khoản 5% ký quỹ cấp sổ:</strong> chủ đầu tư trả lãi 8%/năm đến khi có giấy chứng nhận.</li>
+<li>Miễn phí dịch vụ quản lý 1 năm; tích điểm Sun Signature 0,7% – 2% giá trị hợp đồng theo hạng.</li>
+</ul>
+<!--hh-img:img/sun-symphony-5/sun-symphony-5-tmb.jpg|Tổng mặt bằng phân khu Symphony 5 – Sun Symphony Residence (tài liệu chủ đầu tư)-->
+<h2>So sánh với căn hộ sở hữu lâu dài cùng khu</h2>
+<p>Bên bờ Đông sông Hàn, các dự án sở hữu lâu dài như The Legend có căn 1PN từ khoảng 7,65 tỷ; Capital Square có căn 1PN từ khoảng 4,3 tỷ. Symphony 5 có studio từ khoảng 2,5 tỷ nhờ là đất thương mại dịch vụ 50 năm. Lựa chọn phụ thuộc mục đích: cho thuê, nghỉ dưỡng thì tổng tiền thấp là lợi thế; để ở lâu dài, để lại con cháu thì sở hữu lâu dài phù hợp hơn.</p>
 {$cta('Symphony 5')}
 HTML
 		,
@@ -347,6 +381,10 @@ HTML
 </ul>
 <p>Nếu ngân sách dưới 4 tỷ, anh chị có thể tham khảo <a href="/gia-symphony-5-sun-symphony-residence-bao-nhieu/">giá Symphony 5</a> cùng bờ Đông sông Hàn (sở hữu 50 năm).</p>
 <p>Xem thêm: <a href="/mat-bang-can-ho-the-legend-da-nang/">mặt bằng căn hộ The Legend</a>.</p>
+<h2>Shop khối đế The Legend</h2>
+<p>Tháng 10/2026 chủ đầu tư mở bán 19 căn shop và mặt bằng thương mại dịch vụ ở khối đế hai tòa tháp, ngay cầu Rồng – sông Hàn. Chính sách theo đợt: thanh toán 50%, 70%, 95% giá trị được chiết khấu tương ứng 5,5%, 6,5%, 9,5% (theo điều kiện chương trình). Giá từng shop: liên hệ để nhận bảng giá và mặt bằng.</p>
+<h2>Đơn giá theo m²</h2>
+<p>Quy từ giỏ hàng, giá căn hộ The Legend khoảng 119 – 188 triệu/m² tùy loại căn, tầng và hướng (gồm VAT và kinh phí bảo trì, chưa trừ ưu đãi). Căn góc 1PN+1 có đơn giá cao nhất (khoảng 188 triệu/m² ở mức giá trên); căn 2PN có dải giá rộng nhất (8,96 – 14,60 tỷ) tùy tầng và hướng. Sau khi trừ quà nội thất và chiết khấu thanh toán sớm, đơn giá thực trả giảm đáng kể.</p>
 {$cta('The Legend')}
 HTML
 		,
@@ -424,6 +462,31 @@ HTML
 <p>Bàn giao hoàn thiện cao cấp, tích hợp smarthome: sàn gỗ kỹ thuật sồi châu Âu ở phòng khách và phòng ngủ, gạch nhập khẩu ở vệ sinh và bếp, cửa chính chống cháy với khóa thông minh, điều hòa âm trần nối ống gió.</p>
 <!--hh-img:img/the-legend/the-legend-da-nang-khoi-de-thuong-mai-mat-tien-vo-van-kiet.jpg|Khối đế thương mại The Legend mặt tiền Võ Văn Kiệt (phối cảnh)-->
 <p>Mặt bằng từng tầng và vị trí căn trống anh chị nhắn Hoàng Hiệp để nhận bản mới nhất. Xem giá từng loại căn: <a href="/gia-the-legend-da-nang-bao-nhieu/">giá bán The Legend Đà Nẵng</a>.</p>
+<h2>Khối đế và tiện ích</h2>
+<p>Khu đất 11.487 m² (khoảng 1,2 ha) có 4 mặt tiền Võ Văn Kiệt, Ngô Quyền, Mai Hắc Đế, Lý Nam Đế. Khối đế dùng cho thương mại, nhà hàng, tiện ích, mở cho cư dân và khách; tháng 10/2026 chủ đầu tư mở bán 19 căn shop và mặt bằng thương mại dịch vụ ở khối đế hai tòa. Ba tầng hầm dùng chung cho cả tháp căn hộ và tháp khách sạn. Trên mái có vườn, từ đây nhìn thẳng sông Hàn, cầu Rồng và về phía biển Mỹ Khê.</p>
+<!--hh-img:img/the-legend/the-legend-da-nang-khoi-de-ve-dem.jpg|Khối đế thương mại The Legend lên đèn về đêm (phối cảnh)-->
+<h2>Giá theo loại căn trên mặt bằng</h2>
+<table>
+<thead><tr><th>Loại căn</th><th>Diện tích trong giỏ hàng</th><th>Giá (gồm VAT, phí bảo trì)</th></tr></thead>
+<tbody>
+<tr><td>1PN</td><td>54,4 – 60,3 m²</td><td>Khoảng 7,65 – 9,59 tỷ</td></tr>
+<tr><td>1PN+1 (góc)</td><td>58,4 m²</td><td>Khoảng 9,39 – 10,97 tỷ</td></tr>
+<tr><td>2PN</td><td>74,9 – 84,5 m²</td><td>Khoảng 8,96 – 14,60 tỷ</td></tr>
+<tr><td>3PN (góc)</td><td>114,1 – 114,2 m²</td><td>Khoảng 16,83 – 18,98 tỷ</td></tr>
+</tbody>
+</table>
+<p>Giỏ hàng tầng 6 – 25; giá chưa trừ quà nội thất (1PN 300 triệu, 2PN 500 triệu, 3PN 700 triệu) và chiết khấu thanh toán.</p>
+<h2>Chọn căn theo nhu cầu</h2>
+<ul>
+<li><strong>Ở một mình hoặc cho thuê:</strong> 1PN – nhiều nhất (308 căn), tổng tiền thấp nhất.</li>
+<li><strong>Vợ chồng trẻ, làm việc tại nhà:</strong> 1PN+1 ở vị trí góc, có phòng đa năng.</li>
+<li><strong>Gia đình:</strong> 2PN (308 căn) hoặc 3PN góc (88 căn).</li>
+<li><strong>Ngắm pháo hoa, cầu Rồng:</strong> ưu tiên cánh Legacy phía sông, tầng cao.</li>
+<li><strong>Không gian riêng tư, sân vườn trên cao:</strong> penthouse duplex tầng 27 trở lên.</li>
+</ul>
+<p>Mọi căn hộ trong tháp căn hộ đều sở hữu lâu dài; tháp khách sạn có thời hạn 50 năm – khi chọn, hỏi rõ căn thuộc tháp nào. Xem thêm <a href="/phap-ly-the-legend-da-nang-so-huu-lau-dai/">pháp lý The Legend</a>.</p>
+<h2>Bàn giao hoàn thiện cao cấp</h2>
+<p>Mọi căn bàn giao hoàn thiện, có smarthome: sàn gỗ kỹ thuật sồi châu Âu ở phòng khách và phòng ngủ, gạch nhập khẩu khu vệ sinh và bếp, cửa chính chống cháy với khóa thông minh, điều hòa âm trần nối ống gió, cửa kính và lan can nhôm kính dán an toàn.</p>
 {$cta('The Legend')}
 HTML
 		,
@@ -495,6 +558,12 @@ HTML
 <!--hh-img:img/nobu-da-nang/nobu-da-nang-ho-boi-nuoc-am-tren-cao.jpg|Hồ bơi nước ấm trên cao Nobu Đà Nẵng (phối cảnh)-->
 <h2>So với căn hộ cao cấp khác ở Đà Nẵng</h2>
 <p>Ở phía sông Hàn, <a href="/du-an/the-legend-da-nang/">The Legend</a> (sở hữu lâu dài) có giỏ hàng khoảng 119 – 188 triệu/m². Nobu khác ở thương hiệu vận hành quốc tế và vị trí mặt biển; The Legend khác ở pháp lý sở hữu lâu dài và vị trí chân cầu Rồng.</p>
+<h2>Thiết kế và tiện ích tạo nên giá</h2>
+<p>Kiến trúc tòa tháp lấy cảm hứng từ quạt giấy Nhật Bản, nội thất phong cách Japandi. Tiện ích gồm hồ bơi vô cực nước ấm tầng 18, nhà hàng Nobu tầng 42, bar trên không, beach club, phòng tập trên không và sảnh hội nghị. Căn cao cấp nhất là 6 Sky Villa có hồ bơi riêng (khoảng 254 – 288 m²) và 2 penthouse (khoảng 372 m²).</p>
+<!--hh-img:img/nobu-da-nang/nobu-da-nang-phong-ngu-view-phao-hoa.jpg|Phòng ngủ Nobu Đà Nẵng nhìn ra sông Hàn, pháo hoa (phối cảnh nội thất)-->
+<p>Xem tiến độ: <a href="/tien-do-nobu-residences-da-nang/">tiến độ Nobu Đà Nẵng</a>; chủ đầu tư: <a href="/nobu-da-nang-cua-ai-chu-dau-tu/">Nobu Đà Nẵng của ai</a>.</p>
+<h2>Tiến độ đang ở đâu</h2>
+<p>Dự án khởi công quý 2/2024, nhà thầu Newtecons. Tháng 10/2026 kết cấu đã lên tầng 22 trên tổng 43 tầng; đang lắp mặt dựng kính tầng 7 – 13 và thi công cơ điện, phòng cháy tới tầng 17. Theo lãnh đạo VCRE, dự án dự kiến hoàn thành năm 2027; các nguồn ghi mốc bàn giao trong khoảng quý 1 – quý 3/2027.</p>
 {$cta('Nobu Residences Đà Nẵng')}
 HTML
 		,
@@ -569,6 +638,30 @@ HTML
 <li>Bàn giao dự kiến năm 2027 (các nguồn ghi quý 1 – quý 3/2027). Mốc chính xác theo hợp đồng mua bán.</li>
 </ul>
 <p>Xem giá và loại căn: <a href="/gia-nobu-residences-da-nang-bao-nhieu/">giá bán Nobu Residences Đà Nẵng</a>.</p>
+<h2>Quy mô công trình cần hoàn thành</h2>
+<p>Để hình dung khối lượng còn lại, anh chị có thể xem quy mô tổng thể: tòa tháp cao 43 tầng nổi (khoảng 186 m) và 2 tầng hầm, trên khu đất khoảng 3.000 m², tổng sàn xây dựng khoảng 48.510 m². Bên trong gồm 264 căn hộ hàng hiệu, khách sạn Nobu khoảng 200 phòng (gồm 18 suite), nhà hàng Nobu ở tầng 42, hồ bơi vô cực nước ấm ở tầng 18, cùng các tầng cao có 6 căn Sky Villa hồ bơi riêng và 2 căn penthouse.</p>
+<table>
+<thead><tr><th>Hạng mục</th><th>Tình trạng 10/2026</th></tr></thead>
+<tbody>
+<tr><td>Kết cấu thân</td><td>Đến tầng 22 / 43 tầng</td></tr>
+<tr><td>Mặt dựng, cửa kính</td><td>Tầng 7 – 13</td></tr>
+<tr><td>Cơ điện (MEP), phòng cháy</td><td>Tới tầng 17 (tầng 14 – 16 đang thi công)</td></tr>
+<tr><td>Xây tô, sơn nước khối đế</td><td>Tầng 2 – 6</td></tr>
+<tr><td>Tầng hầm B1, B2</td><td>Xây tô, sơn nước, cơ điện</td></tr>
+</tbody>
+</table>
+<h2>Nhịp thi công qua từng mốc</h2>
+<p>Sau khi hoàn thành sàn chuyển L6M vào đầu năm 2026, công trình chuyển sang thi công tầng điển hình. Từ tầng 8 (tháng 5/2026) lên tầng 22 (tháng 10/2026), mỗi tháng kết cấu tăng trung bình khoảng 2 – 3 tầng (Hoàng Hiệp tự tính từ các mốc chủ đầu tư công bố). Phần hoàn thiện được triển khai song song ở các tầng dưới, giúp rút ngắn thời gian từ cất nóc đến bàn giao. Lãnh đạo VCRE cho biết dự án dự kiến hoàn thành năm 2027.</p>
+<!--hh-img:img/nobu-da-nang/nobu-da-nang-tien-do-10-2026-tang-ham.jpg|Xây tô, sơn nước và cơ điện tầng hầm B1, B2 Nobu Đà Nẵng – tháng 10/2026 (ảnh chủ đầu tư)-->
+<h2>Người mua nên theo dõi gì</h2>
+<ol>
+<li><strong>Mốc cất nóc:</strong> khi kết cấu lên tới tầng 43, phần còn lại chủ yếu là hoàn thiện và lắp đặt thiết bị.</li>
+<li><strong>Tiến độ mặt dựng kính:</strong> cho biết khi nào các tầng căn hộ kín nước để làm nội thất.</li>
+<li><strong>Nghiệm thu phòng cháy:</strong> điều kiện bắt buộc trước khi bàn giao và vận hành khách sạn.</li>
+<li><strong>Mốc bàn giao trong hợp đồng:</strong> các nguồn ghi quý 1 – quý 3/2027; mốc áp dụng cho căn của anh chị là mốc trong hợp đồng mua bán.</li>
+</ol>
+<p>Ai đứng sau dự án: <a href="/nobu-da-nang-cua-ai-chu-dau-tu/">Nobu Đà Nẵng của ai</a>.</p>
+<p>Xem giá tham khảo từng loại căn: <a href="/gia-nobu-residences-da-nang-bao-nhieu/">giá Nobu Đà Nẵng</a>.</p>
 {$cta('Nobu Residences Đà Nẵng')}
 HTML
 		,

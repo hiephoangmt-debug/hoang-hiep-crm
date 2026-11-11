@@ -77,6 +77,25 @@ function hh_posts_cum_du_an_11_2026_lo_2( $posts ) {
 <p>Shop tầng 1 tòa A2 diện tích 43,8 – 87,3 m², giá khoảng 5,17 – 9,12 tỷ. Chính sách shop (CSƯĐ 06 từ 17/8/2026): Early Bird 3% (có thời hạn), hỗ trợ nội thất kinh doanh 4%, đặt cọc 300 triệu; nhận nhà khi thanh toán 70% (dự kiến 31/10/2027).</p>
 <h2>So với các tòa khác ở Sun NeO City</h2>
 <p>Cora Tower có giỏ hàng công khai rõ nhất trong ba tòa căn hộ Sun Group ở Hòa Xuân. Spana Tower bàn giao sớm hơn một tháng (dự kiến 30/06/2027), S-Light Tower có chiết khấu thanh toán sớm cao hơn. So sánh chi tiết: <a href="/cora-spana-s-light-sun-neo-city-nen-chon-toa-nao/">Cora, Spana hay S-Light – nên chọn tòa nào</a>.</p>
+<h2>Ví dụ: studio Cora 2,42 tỷ cần chuẩn bị bao nhiêu</h2>
+<p>Hoàng Hiệp tự tính theo chính sách tháng 11/2026 để anh chị hình dung, chưa phải phiếu tính giá của chủ đầu tư:</p>
+<ul>
+<li><strong>Đặt cọc:</strong> 100 triệu.</li>
+<li><strong>Vay tối đa 70%:</strong> khoảng 1,69 tỷ; chủ đầu tư hỗ trợ lãi suất 24 tháng (không muộn hơn 30/9/2028), ân hạn gốc cùng thời gian.</li>
+<li><strong>Vốn tự có 30%:</strong> khoảng 0,73 tỷ, đóng theo tiến độ, giãn đến 40 tháng.</li>
+<li><strong>Nhận nhà:</strong> khi đã thanh toán đủ 70% (Sun Early Key).</li>
+</ul>
+<p>Nếu không vay, anh chị được chiết khấu thêm 5% trên giá chưa VAT và phí bảo trì; nếu thanh toán sớm 95% trong đợt tháng 11/2026 thì chiết khấu thêm 7,5% (hạn 25/11).</p>
+<h2>Vị trí và quy mô</h2>
+<p>Cora Tower gồm hai tòa A1, A2 hai bên đường 29/3, sát vòng xoay giao Nguyễn Phước Lan, trung tâm khu đô thị Sun NeO City (Hòa Xuân). Mỗi tòa có 616 căn hộ điển hình, 28 căn mỗi tầng; tầng 1 shophouse, tầng 25 penthouse. Xem chi tiết <a href="/mat-bang-can-ho-cora-tower/">mặt bằng Cora Tower</a>.</p>
+<!--hh-dimg:1wnsijH2qgHtzHwhDnYpb6ELxk_aKErVa|Cora Tower nhìn từ trên cao – giao lộ Nguyễn Phước Lan, đường 29/3 (phối cảnh chủ đầu tư)-->
+<h2>Điểm thưởng và ưu đãi khác</h2>
+<ul>
+<li>Điểm thưởng hội viên Sun Signature 0,7 – 2% theo hạng.</li>
+<li>Miễn phí quản lý 1 năm.</li>
+<li>Trả trước hạn từng đợt (từ 10 ngày): hưởng 8%/năm trên số tiền trả trước.</li>
+</ul>
+<p>Xem mốc bàn giao và tiến độ: <a href="/cora-tower-spana-tower-khi-nao-ban-giao/">Cora Tower khi nào bàn giao</a>.</p>
 {$cta('Cora Tower')}
 HTML
 		,
@@ -153,6 +172,18 @@ HTML
 <p>S-Light nằm ở ngã ba sông Hàn – Cẩm Lệ – Đô Toả, tầm nhìn sông và pháo hoa DIFF. Chiết khấu thanh toán sớm 95% cao nhất (10%), giãn tiến độ dài nhất (48 tháng). Đổi lại, tiền cọc căn lớn cao hơn.</p>
 <!--hh-dimg:1PzoF4f2-geg_T48jzs58EJhAIQrEJkMI|Hai tháp S-Light Tower bên sông (phối cảnh chủ đầu tư)-->
 <p>Ba tòa đều có penthouse, xem thêm <a href="/penthouse-spana-cora-s-light-sun-neo-city/">penthouse Spana, Cora, S-Light</a>.</p>
+<h2>Pháp lý từng tòa</h2>
+<ul>
+<li><strong>Spana Tower:</strong> Sở Xây dựng xác nhận đủ điều kiện bán (VB 7111/SXD-QLN, 05/5/2026); VietinBank bảo lãnh; đất ở đô thị, 2 giấy chứng nhận riêng cho lô A1-3 và A1-4; hợp đồng mẫu đăng ký với Sở Công Thương.</li>
+<li><strong>Cora Tower, S-Light Tower:</strong> sở hữu lâu dài; anh chị nên đề nghị xem văn bản đủ điều kiện bán và thư bảo lãnh ngân hàng của tòa khi đặt căn.</li>
+</ul>
+<h2>Shophouse khối đế</h2>
+<p><strong>Spana:</strong> tầng 1 mỗi tòa là dãy shophouse mặt đường, căn điển hình mặt tiền khoảng 6,2 m, diện tích khoảng 46 – 148 m². <strong>Cora:</strong> 5 shop tầng 1 tòa A2, 43,8 – 87,3 m², khoảng 5,17 – 9,12 tỷ, giao lộ Nguyễn Phước Lan – đường 29/3. Shophouse hợp cà phê, cửa hàng tiện lợi, phòng khám phục vụ cư dân.</p>
+<!--hh-img:img/spana-tower/spana-tower-hoang-hon-khoi-de-thuong-mai.jpg|Khối đế thương mại Spana Tower lúc hoàng hôn (phối cảnh chủ đầu tư)-->
+<h2>Mốc bàn giao</h2>
+<p>Spana dự kiến 30/06/2027 (tháng 11/2026 lên khoảng tầng 10), Cora dự kiến 30/07/2027. Xem chi tiết <a href="/cora-tower-spana-tower-khi-nao-ban-giao/">Cora Tower khi nào bàn giao</a>.</p>
+<h2>Đặt cọc ở tòa nào nhẹ nhất</h2>
+<p>Cora và Spana cùng đặt cọc 100 triệu cho căn studio đến 2PN, 150 triệu cho căn 3PN. S-Light đặt cọc theo loại căn: studio 100 triệu, 1PN+ 150 triệu, 2PN – 3PN 200 triệu, penthouse 300 triệu; đổi lại S-Light cho giãn tiến độ dài nhất, đến 48 tháng.</p>
 {$cta('Sun NeO City')}
 HTML
 		,
@@ -244,6 +275,17 @@ HTML
 <li>Giá đã gồm VAT và kinh phí bảo trì, chưa trừ chiết khấu và quà.</li>
 <li>So theo tổng tiền thực trả sau ưu đãi, không chỉ theo giá niêm yết.</li>
 </ol>
+<h2>Hai phân khu, hai chủ đầu tư</h2>
+<p>Capital Square 2 do Công ty TNHH Mega Assets làm chủ đầu tư, gồm tòa 2.1 – 2.7 với 1.681 căn; Capital Square 3 do Công ty CP Bất động sản SIH làm chủ đầu tư, gồm các khối LAT 4-5, MAT 5-6, MAT 7, MAT 8-9 với 1.710 căn. Cả hai thuộc hệ sinh thái BRG. Tổ hợp nằm trên khu đất 61.368 m² giữa Trần Hưng Đạo, Ngô Quyền và Nguyễn Công Trứ, liền kề Vincom, cách cầu Rồng khoảng 1,5 km.</p>
+<!--hh-img:img/capital-square/capital-square-phoi-canh-dem-ven-song-han.jpg|Phối cảnh Capital Square về đêm bên sông Hàn (ảnh chủ đầu tư)-->
+<h2>Chiết khấu theo phương thức thanh toán</h2>
+<p>Theo tài liệu ngày 28/9/2026 cho tòa Hudson Place, ưu đãi theo phương thức thanh toán là: theo tiến độ 8%, thanh toán nhanh 100% giá chuyển nhượng hợp đồng 12%, thanh toán sớm 95% 18%. Mức đang áp dụng có thể đã thay đổi – anh chị hỏi lại khi đặt căn.</p>
+<h2>Hỏi gì khi nhận bảng giá</h2>
+<ol>
+<li>Giá đã gồm VAT và kinh phí bảo trì chưa?</li>
+<li>Căn thuộc mã tòa nào trong văn bản của Sở Xây dựng?</li>
+<li>Áp dụng chính sách nào (thưởng nóng, chiết khấu thêm 5%, Smart Home)?</li>
+</ol>
 {$cta('Capital Square')}
 HTML
 		,
@@ -331,6 +373,19 @@ HTML
 <li><strong>Vừa ở vừa cho thuê:</strong> căn 3PN dualkey của S4.</li>
 </ul>
 <p>Xem giá các tòa còn lại: <a href="/bang-gia-capital-square-da-nang-theo-toa/">bảng giá Capital Square theo tòa</a>.</p>
+<h2>Tầng điển hình Hudson Place có gì</h2>
+<p>Mỗi sàn điển hình của Hudson Place có 15 căn gồm 2 căn 1PN, 7 căn 2PN và 6 căn 3PN. Đơn giá tham khảo khoảng 92 – 146 triệu/m² thông thủy tùy tầng, hướng (gồm VAT và kinh phí bảo trì, giỏ hàng 10/2026). Căn 2PN hướng Nam nhìn sông Hàn, cầu Rồng có giá cao nhất.</p>
+<!--hh-img:img/hudson-place/hudson-place-mat-bang-tang-5-12-14-24.jpg|Mặt bằng tầng 5 – 12, 14 – 24 tòa S4 Hudson Place (tài liệu chủ đầu tư)-->
+<h2>Vay và thanh toán</h2>
+<ul>
+<li>Vay tới 70% tổng giá bán (có VAT, không gồm kinh phí bảo trì), ân hạn gốc 36 tháng.</li>
+<li>Phương án 1: 0% lãi suất 36 tháng với phần vay bằng 50% giá bán, 24 tháng với phần 20%.</li>
+<li>Phương án 2: 0% 24 tháng và 12 tháng, sau đó cố định 7,5%/năm trong 36 tháng.</li>
+<li>Chi tiết: <a href="/vay-mua-capital-square-da-nang-tra-gop-hang-thang/">vay mua Capital Square</a>.</li>
+</ul>
+<h2>Tiện ích quanh hai tòa</h2>
+<p>Hudson Place và Broadway Place cùng cụm, nhìn ra bể bơi resort phía đường Nguyễn Công Trứ. Theo phối cảnh chủ đầu tư, quanh tòa có bể bơi, café ngoài trời, sân golf mini, sân chơi trẻ em và sân vườn thư giãn; xa hơn là phố đi bộ thương mại và quảng trường của tổ hợp Capital Square.</p>
+<p>Người nước ngoài được mua căn hộ Capital Square trong hạn mức (tối đa 512 căn ở Capital Square 3), thời hạn 50 năm.</p>
 {$cta('Hudson Place S4 và Broadway Place S3')}
 HTML
 		,
@@ -418,6 +473,8 @@ HTML
 <li>Giỏ hàng giá thấp hết nhanh: nên giữ chỗ khi đã chọn được căn.</li>
 </ol>
 <p>Xem thêm: <a href="/mat-bang-gia-can-ho-da-nang-11-2026/">mặt bằng giá căn hộ Đà Nẵng tháng 11/2026</a>.</p>
+<p>Giá trong bài là giá tham khảo tại thời điểm cập nhật; giỏ hàng giá thấp thay đổi nhanh theo từng đợt mở bán.</p>
+<p>Muốn so sánh hai dự án studio 50 năm: <a href="/sun-saphia-hay-symphony-5-mua-studio-cho-thue/">Sun Saphia hay Symphony 5</a>.</p>
 {$cta('các dự án dưới 3 tỷ')}
 HTML
 		,

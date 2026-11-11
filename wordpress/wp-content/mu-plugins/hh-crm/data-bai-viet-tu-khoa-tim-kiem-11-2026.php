@@ -89,6 +89,10 @@ function hh_posts_tu_khoa_tim_kiem_11_2026( $posts ) {
 <li><strong>Muốn giỏ hàng có giá công khai:</strong> Cora Tower (studio từ khoảng 2,42 tỷ, dự kiến 30/07/2027).</li>
 <li><strong>Muốn view sông, giãn tiến độ dài:</strong> S-Light Tower (giãn đến 48 tháng).</li>
 </ul>
+<h2>Thanh toán đến lúc nhận nhà</h2>
+<p>Cả Cora và Spana: đặt cọc 100 triệu (3PN 150 triệu), giãn tiến độ đến 40 tháng (Cora) hoặc 38 tháng (Spana); vay tối đa 70%, hỗ trợ lãi suất 24 tháng. Khi đã thanh toán đủ 70% là nhận nhà sử dụng.</p>
+<h2>Mốc bàn giao có thể thay đổi không</h2>
+<p>Mốc trong bài là mốc dự kiến chủ đầu tư công bố. Mốc ràng buộc là mốc ghi trong hợp đồng mua bán, kèm điều khoản phạt khi chậm bàn giao. Anh chị nên đọc kỹ điều khoản này trước khi ký và theo dõi ảnh tiến độ định kỳ của từng tòa.</p>
 {$cta('Cora Tower, Spana Tower, S-Light Tower')}
 HTML
 		,
@@ -158,6 +162,28 @@ HTML
 <li><strong>Hợp đồng vận hành với Nobu Hospitality:</strong> phí dịch vụ, chương trình cho thuê.</li>
 </ol>
 <p>Xem thêm: <a href="/gia-nobu-residences-da-nang-bao-nhieu/">giá Nobu Đà Nẵng</a>, <a href="/can-ho-hang-hieu-la-gi-nobu-da-nang/">căn hộ hàng hiệu là gì</a>.</p>
+<h2>VCRE là ai</h2>
+<p>VCRE (Viet Capital Real Estate) là tên viết tắt của Công ty CP Bất động sản Bản Việt, thành lập năm 2007 và là thành viên của Phoenix Holdings. Doanh nghiệp theo đuổi phân khúc nhà ở và lưu trú hạng sang gắn với thương hiệu quốc tế, đã mở thêm văn phòng kinh doanh tại Hà Nội. Tổng giám đốc là ông Võ Thành Lâm. Theo VnEconomy, sau Đà Nẵng, VCRE tiếp tục hợp tác với Nobu để đưa thương hiệu này vào TP.HCM.</p>
+<h2>Nobu Hospitality là ai</h2>
+<p>Nobu Hospitality là thương hiệu khách sạn – nhà hàng quốc tế mang tên đầu bếp Nobu Matsuhisa, đồng sáng lập cùng diễn viên Robert De Niro và nhà sản xuất Meir Teper. Ở Đà Nẵng, thương hiệu này vận hành khách sạn, nhà hàng Nobu và dịch vụ cho cư dân căn hộ hàng hiệu. Nobu Đà Nẵng được giới thiệu là dự án Nobu Residences đầu tiên tại Đông Nam Á.</p>
+<!--hh-img:img/nobu-da-nang/nobu-da-nang-nha-hang-nobu.jpg|Nhà hàng Nobu (phối cảnh)-->
+<h2>Thiết kế và tiện ích</h2>
+<p>Kiến trúc tòa tháp lấy cảm hứng từ quạt giấy Nhật Bản (Sensu) và nguyên lý mượn cảnh (Shakkei); nội thất phong cách Japandi tối giản, tận dụng ánh sáng tự nhiên và hướng nhìn biển Mỹ Khê. Tiện ích theo phối cảnh chủ đầu tư gồm hồ bơi nước ấm trên cao, nhà hàng Nobu, bar trên không, beach club, quầy bar bên hồ bơi, phòng tập trên không, sảnh hội nghị và khu vui chơi trẻ em.</p>
+<h2>Các loại căn</h2>
+<table>
+<thead><tr><th>Loại căn</th><th>Diện tích (khoảng)</th></tr></thead>
+<tbody>
+<tr><td>Studio</td><td>42,2 – 43 m²</td></tr>
+<tr><td>1PN</td><td>62,5 – 71,1 m²</td></tr>
+<tr><td>2PN</td><td>99,7 – 118,7 m²</td></tr>
+<tr><td>3PN Dual Key</td><td>130,1 – 166,2 m²</td></tr>
+<tr><td>Sky Villa hồ bơi riêng (6 căn)</td><td>254 – 288 m²</td></tr>
+<tr><td>Penthouse (2 căn)</td><td>Khoảng 372 m²</td></tr>
+</tbody>
+</table>
+<p>Lưu ý số liệu: các nguồn công bố khác nhau theo thời điểm (có nguồn ghi 271 căn hộ và 2 penthouse, nguồn khác ghi khách sạn 206 phòng và 253 căn hộ). Anh chị nên lấy số liệu trong hồ sơ pháp lý và hợp đồng làm căn cứ.</p>
+<h2>Giá tham khảo</h2>
+<p>Căn 1PN 62,5 – 71,1 m² tham khảo khoảng 6,63 – 9,06 tỷ; đơn giá một số nguồn nêu khoảng 145 – 205 triệu/m² tùy tầng và hướng view. Chi tiết: <a href="/gia-nobu-residences-da-nang-bao-nhieu/">giá Nobu Đà Nẵng</a>.</p>
 {$cta('Nobu Đà Nẵng')}
 HTML
 		,
@@ -261,6 +287,13 @@ HTML
 </ul>
 <h2>Ưu đãi hiện có</h2>
 <p>Quà nội thất trừ vào giá 300 triệu – 1,8 tỷ, chiết khấu thanh toán sớm đến 12%, vay 70% hỗ trợ lãi suất 0% trong 24 tháng (MSB, Vietcombank, MB), miễn phí quản lý 24 tháng – theo chính sách ban hành 17/7/2025, có thể đã điều chỉnh theo đợt. Xem <a href="/co-nen-mua-the-legend-da-nang-uu-nhuoc-diem/">có nên mua The Legend</a>.</p>
+<h2>Câu hỏi khi làm việc với chủ đầu tư</h2>
+<ol>
+<li>Văn bản xác nhận đủ điều kiện bán áp dụng cho căn nào, số văn bản, ngày ban hành?</li>
+<li>Ngân hàng nào phát hành thư bảo lãnh?</li>
+<li>Mốc bàn giao trong hợp đồng là 31/3/2028 hay mốc khác?</li>
+</ol>
+<p>Xem giá từng loại căn: <a href="/gia-the-legend-da-nang-bao-nhieu/">giá The Legend Đà Nẵng</a>.</p>
 {$cta('The Legend')}
 HTML
 		,
@@ -356,6 +389,17 @@ HTML
 <li>Sở hữu 50 năm (đất thương mại dịch vụ). Xem <a href="/phap-ly-symphony-5-so-huu-50-nam/">pháp lý Symphony 5</a>.</li>
 <li>Thanh toán tối thiểu 70% nhận căn sử dụng dự kiến 30/06/2028 (Sun Early Key); bàn giao chính thức theo tiến độ không vay dự kiến 30/06/2030.</li>
 </ul>
+<h2>Giá và chính sách tại vị trí này</h2>
+<p>Giỏ hàng 11/2026: studio 30 – 33 m² khoảng 2,50 – 3,30 tỷ, 1PN khoảng 3,09 – 3,30 tỷ, 1PN+ khoảng 3,45 – 4,54 tỷ (gồm VAT và phí bảo trì). Vay tối đa 70%, hỗ trợ lãi suất tối đa 30 tháng; không vay chiết khấu 5%. Chi tiết: <a href="/gia-symphony-5-sun-symphony-residence-bao-nhieu/">giá Sun Symphony 5</a>.</p>
+<!--hh-img:img/sun-symphony-5/sun-symphony-5-pc-11-hoang-hon.jpg|Symphony 5 – Sun Symphony Residence bên sông Hàn lúc hoàng hôn (phối cảnh chủ đầu tư)-->
+<h2>Cách đi từ Symphony 5</h2>
+<ul>
+<li><strong>Vào trung tâm Hải Châu:</strong> qua cầu Rồng hoặc cầu sông Hàn.</li>
+<li><strong>Ra biển Mỹ Khê:</strong> đi theo trục Đông – Tây về Võ Nguyên Giáp.</li>
+<li><strong>Ra sân bay:</strong> qua sông về phía Hải Châu, khoảng 6 km.</li>
+</ul>
+<h2>Sống ở bờ Đông sông Hàn</h2>
+<p>Bờ Đông sông Hàn (Sơn Trà) là khu vực có nhiều dự án căn hộ mới của Đà Nẵng, nằm giữa trung tâm Hải Châu bên kia sông và bãi biển Mỹ Khê phía Đông. Người ở đây có thể đi bộ dọc sông, ngắm cầu Rồng, cầu Thuận Phước về đêm; mùa lễ hội pháo hoa quốc tế DIFF, khu vực ven sông là điểm xem pháo hoa quen thuộc. Với căn hộ cho thuê, vị trí này phục vụ cả khách du lịch biển lẫn khách công tác ở trung tâm.</p>
 {$cta('Sun Symphony 5')}
 HTML
 		,
