@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.21** + plugin Hoàng Hiệp CRM **2.20.253**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.22** + plugin Hoàng Hiệp CRM **2.20.253**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.16.22 (11/11/2026)
+
+- **Tất cả tiêu đề H2 trên các trang landing có tên dự án** (68 tiêu đề): trang con Sun Saphia (cho thuê, quy hoạch, tính dòng tiền), FourS Tower (trang chính, giỏ hàng, hỏi đáp, pháp lý), Tòa F2 và bảng tính F2 – VD "Hỏi đáp về cho thuê" → "Hỏi đáp về cho thuê Sun Saphia Residence", "Giá & chiết khấu" → "Giá & chiết khấu FourS Tower", "Địa chỉ dự án" → "Địa chỉ dự án FourS Tower". Giữ nguyên trang Chính sách bảo mật.
 
 ## Có gì mới – giao diện 2.16.21 (11/11/2026)
 
