@@ -1,10 +1,47 @@
-{"tag": "CHI PHÍ · TRƯỚC KHI CHO THUÊ", "title": "Nội thất studio Sun Saphia Residence", "title_size": 48,
- "sub": "Làm studio 30 m² để cho thuê hết bao nhiêu?", "xc": 0.5, "yc": 0.45,
- "stats": [["80 – 130 tr", "gói cơ bản"], ["130 – 180 tr", "gói tiêu chuẩn"], ["180 – 300 tr", "gói cao cấp"], ["~30 tr/năm", "khấu hao gói 150 tr*"]],
+{
+ "tag": "CHI PHÍ · TRƯỚC KHI CHO THUÊ",
+ "title": "Nội thất studio Sun Saphia Residence",
+ "title_size": 48,
+ "sub": "Làm studio 30 m² để cho thuê hết bao nhiêu?",
+ "xc": 0.5,
+ "yc": 0.4,
+ "stats": [
+  [
+   "80 – 130 tr",
+   "gói cơ bản"
+  ],
+  [
+   "130 – 180 tr",
+   "gói tiêu chuẩn"
+  ],
+  [
+   "180 – 300 tr",
+   "gói cao cấp"
+  ],
+  [
+   "~30 tr/năm",
+   "khấu hao gói 150 tr*"
+  ]
+ ],
  "heading": "Nội thất studio cho thuê du lịch",
- "items": [["Giường, nệm, chăn ga chuẩn khách sạn", "Hạng mục khách đánh giá nhiều nhất"],
-           ["Bếp nhỏ, tủ lạnh, máy giặt", "Lợi thế với khách ở dài ngày"],
-           ["Bàn làm việc, wifi mạnh, TV thông minh", "Cho khách công tác, làm việc từ xa"],
-           ["Rèm cản sáng, khóa cửa điện tử", "Tự nhận phòng, vật liệu chịu ẩm, chịu muối"]],
+ "items": [
+  [
+   "Giường, nệm, chăn ga chuẩn khách sạn",
+   "Hạng mục khách đánh giá nhiều nhất"
+  ],
+  [
+   "Bếp nhỏ, tủ lạnh, máy giặt",
+   "Lợi thế với khách ở dài ngày"
+  ],
+  [
+   "Bàn làm việc, wifi mạnh, TV thông minh",
+   "Cho khách công tác, làm việc từ xa"
+  ],
+  [
+   "Rèm cản sáng, khóa cửa điện tử",
+   "Tự nhận phòng, vật liệu chịu ẩm, chịu muối"
+  ]
+ ],
  "box": "Gói tiêu chuẩn 130 – 180 triệu thường là điểm cân bằng",
- "note": "*Minh hoạ dùng 5 năm · Báo giá NT Decor, Nội thất QI 2026 · Phối cảnh CĐT"}
+ "note": "*Minh hoạ dùng 5 năm · Báo giá NT Decor, Nội thất QI 2026 · Ảnh: nội thất minh hoạ theo layout CĐT"
+}
