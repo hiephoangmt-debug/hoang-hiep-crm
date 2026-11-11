@@ -91,6 +91,18 @@ $conn      = hh_project_connections( $id )[0];
 $products  = hh_project_products( $id );
 $unit_rows = hh_table( 'hh_p_unit_types', 4 );
 $price_tbl = hh_table( 'hh_p_price_table', 4 );
+// Cập nhật giá khu vực theo ngày (anh Hiệp tự nhập): bỏ mọi đường link, ngày mới nhất lên đầu, tối đa 12 dòng.
+$price_log = array();
+foreach ( hh_table( 'hh_p_price_log', 4 ) as $r ) {
+	$r = array_map( static fn( $c ) => trim( preg_replace( '#(?:https?://|www\.)\S+#iu', '', wp_strip_all_tags( (string) $c ) ) ), $r );
+	if ( '' === $r[1] && '' === $r[2] ) {
+		continue;
+	}
+	$ts          = preg_match( '#^(\d{1,2})/(\d{1,2})/(\d{4})#', $r[0], $dm ) ? mktime( 0, 0, 0, (int) $dm[2], (int) $dm[1], (int) $dm[3] ) : 0;
+	$price_log[] = array( $ts, $r );
+}
+usort( $price_log, static fn( $x, $y ) => $y[0] <=> $x[0] );
+$price_log = array_slice( wp_list_pluck( $price_log, 1 ), 0, 12 );
 $payment   = hh_table( 'hh_p_payment', 3 );
 $policy    = hh_lines( 'hh_p_policy' );
 $timeline  = hh_project_timeline( $id );
@@ -195,6 +207,7 @@ $nav = array_filter(
 		'loai-can'   => ( $units || $other_products ) ? 'Loại căn' : '',
 		'noi-that'   => $interior ? 'Nội thất' : '',
 		'bang-gia'   => ( $price_tbl || $m( 'hh_p_price_from' ) || $m( 'hh_p_resale_price' ) ) ? 'Giá' : '',
+		'gia-khu-vuc' => $price_log ? 'Giá khu vực' : '',
 		'thanh-toan' => ( $payment || $policy || $m( 'hh_p_loan' ) ) ? 'Thanh toán' : '',
 		'phap-ly'    => ( $m( 'hh_p_legal' ) || $m( 'hh_p_ownership' ) || $timeline[0] ) ? 'Pháp lý' : '',
 		'thu-vien'   => count( $gallery ) > 1 ? 'Hình ảnh' : '',
@@ -568,6 +581,25 @@ if ( ! $parent ) {
     </div>
     <?php endif; ?>
     <p class="note">Giá tham khảo, chưa trừ chiết khấu; giá và căn còn trống thay đổi theo đợt – để lại số, Hoàng Hiệp gửi bảng giá cập nhật qua Zalo.</p>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if ( isset( $nav['gia-khu-vuc'] ) ) : ?>
+<!-- CẬP NHẬT GIÁ KHU VỰC -->
+<section id="gia-khu-vuc" style="background:#fff" aria-labelledby="h-gkv">
+  <div class="container">
+    <span class="eyebrow">Cập nhật giá khu vực<?php echo '' !== $price_log[0][0] ? ' · ' . $e( $price_log[0][0] ) : ''; ?></span>
+    <h2 class="title" id="h-gkv">Giá bất động sản quanh <em><?php echo $e( $short_name ); ?></em></h2>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>Ngày</th><th>Khu vực / sản phẩm</th><th>Giá tham khảo</th><th>Ghi chú</th></tr></thead>
+      <tbody><?php foreach ( $price_log as $r ) : ?><tr><td class="num"><?php echo $e( $r[0] ); ?></td><td><?php echo $e( $r[1] ); ?></td><td class="num gia"><?php echo $e( $r[2] ); ?></td><td class="ghi-chu"><?php echo $e( $r[3] ); ?></td></tr><?php endforeach; ?></tbody>
+    </table></div>
+    <p class="note">Giá do Hoàng Hiệp tổng hợp từ thị trường để khách tham khảo, không phải chào bán căn cụ thể; giá thực tế thay đổi theo từng căn và từng ngày.</p>
+    <div class="acts" style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn btn-gold js-zalo" href="<?php echo esc_url( $zalo ); ?>" target="_blank" rel="noopener">Hỏi giá thực tế qua Zalo</a>
+      <a class="btn" href="tel:0904567009" style="border:1px solid var(--line);color:var(--navy)">Gọi <?php echo $e( $phone ); ?></a>
+    </div>
   </div>
 </section>
 <?php endif; ?>

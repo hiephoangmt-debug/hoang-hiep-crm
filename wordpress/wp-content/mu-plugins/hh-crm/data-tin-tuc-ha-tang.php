@@ -580,6 +580,14 @@ function hh_import_news() {
 				}
 			}
 		}
+		// Bài gắn dự án mà vẫn chưa có ảnh đại diện (không khai báo 'image'): dùng chung ảnh đại diện của trang dự án.
+		if ( ! empty( $n['project'] ) && ! get_post_thumbnail_id( $id ) ) {
+			$hh_proj = get_page_by_path( $n['project'], OBJECT, 'du-an' );
+			$hh_pimg = $hh_proj ? (int) get_post_thumbnail_id( $hh_proj->ID ) : 0;
+			if ( $hh_pimg ) {
+				set_post_thumbnail( $id, $hh_pimg );
+			}
+		}
 		$stored = get_post_field( 'post_content', $id );
 		if ( ( false !== strpos( $stored, '<!--hh-featured-->' ) && has_post_thumbnail( $id ) ) || false !== strpos( $stored, '<!--hh-img:' ) ) {
 			$hash_ok = md5( $stored ) === get_post_meta( $id, '_hh_news_hash', true );

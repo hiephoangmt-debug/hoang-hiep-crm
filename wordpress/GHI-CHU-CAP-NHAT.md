@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.14** + plugin Hoàng Hiệp CRM **2.20.248**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.15** + plugin Hoàng Hiệp CRM **2.20.249**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.249 + giao diện 2.16.15 (11/11/2026)
+
+- **Mục mới "Cập nhật giá khu vực" trên trang dự án**: trong trang sửa dự án → tab *Giá & chính sách* → ô **"Cập nhật giá khu vực theo ngày (tham khảo)"**. Mỗi dòng: `Ngày | Khu vực / sản phẩm | Giá tham khảo | Ghi chú`. Ngày mới nhất tự lên đầu, hiện tối đa 12 dòng, kèm nút "Hỏi giá thực tế qua Zalo" và "Gọi". Đường link dán vào tự bị bỏ (không dẫn khách đi trang bán khác). Để trống thì mục tự ẩn.
+- **Ảnh đại diện cho 70 bài cũ (tuần 01 – 14) chưa có ảnh**: bài gắn dự án lấy ảnh đại diện của trang dự án; 29 bài chung (thị trường, kinh nghiệm, pháp lý) dùng ảnh bìa tự vẽ mới. Chỉ gắn cho bài chưa có ảnh, không đè ảnh anh đã chọn. Cần bấm "Nhập / cập nhật dữ liệu" rồi "Tải ảnh ngay".
 
 ## Có gì mới – giao diện 2.16.14 (11/11/2026)
 
