@@ -314,7 +314,7 @@ def cta_block(label, title='Để lại số – <b>nhận đủ thông tin</b> 
             '<div class="cta2"><a class="btn zl" href="%s" target="_blank" rel="noopener"><span class="hm">Nhắn&nbsp;</span>Zalo %s</a><a class="btn call" href="tel:%s">Gọi ngay</a></div>'
             '<div class="trust"><div><b>Đại lý chính thức</b><span>Sun Property chứng nhận 23/10/2026</span></div><div><b>0 đồng</b><span>Đăng ký không thu bất kỳ khoản nào</span></div><div><b>Bảo mật số</b><span>Chỉ chuyên viên tư vấn liên hệ, không chia sẻ</span></div></div>'
             '</div>%s</div></div></div>'
-            '<script>(function(){var EV=[["2026-11-08T09:00:00+07:00","sự kiện 08/11 tại Hà Nội"],["2026-11-15T08:00:00+07:00","sự kiện 15/11 tại Đà Nẵng"],["2026-11-22T08:00:00+07:00","sự kiện 22/11 tại Hà Nội"],["2026-12-05T08:00:00+07:00","ngày mở bán 05/12 tại Đà Nẵng"]];'
+            '<script>(function(){var EV=[["2026-11-08T09:00:00+07:00","sự kiện 08/11 tại Hà Nội"],["2026-11-15T09:00:00+07:00","sự kiện 15/11 tại Sun Gallery Đà Nẵng"],["2026-11-22T08:00:00+07:00","sự kiện 22/11 tại Hà Nội"],["2026-12-05T08:00:00+07:00","ngày mở bán 05/12 tại Đà Nẵng"]];'
             'function z(n){return(n<10?"0":"")+n}function t(){var now=Date.now(),T=0,L="";for(var i=0;i<EV.length;i++){var x=Date.parse(EV[i][0]);if(x>now){T=x;L=EV[i][1];break}}'
             'document.querySelectorAll(".ccd").forEach(function(e){if(!T){e.style.display="none";return}var d=(T-now)/1e3,u={d:Math.floor(d/86400),h:Math.floor(d%%86400/3600),m:Math.floor(d%%3600/60),s:Math.floor(d%%60)};'
             'for(var k in u){var b=e.querySelector("[data-c="+k+"]");if(b)b.textContent=k=="d"?u[k]:z(u[k])}var c=e.querySelector(".ccdt");if(c)c.textContent="⏳ Còn lại tới "+L})}t();setInterval(t,1000)})();</script>'

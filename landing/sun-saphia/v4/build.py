@@ -761,7 +761,7 @@ def su_kien(ctx='ADS'):
     EV = [('2026-11-01', '01/11', 'Đà Nẵng', 'Sự kiện ra mắt dự án', 'Khách sạn Hilton Đà Nẵng', ''),
           ('2026-11-08', '08/11', 'Hà Nội · 9:00 CN', 'Sự kiện giới thiệu dự án', 'Sun Gallery Tây Hồ View · 58 Quảng Bá, Tây Hồ', ''),
           ('2026-11-09', '09/11', 'Đà Nẵng', 'Ra quân &amp; roadshow giới thiệu dự án', 'Roadshow tại thị trường Đà Nẵng', 'evrs'),
-          ('2026-11-15', '15/11', 'Đà Nẵng', 'Sự kiện giới thiệu dự án', 'Tại văn phòng bán hàng Đà Nẵng', ''),
+          ('2026-11-15', '15/11', 'Đà Nẵng · 9:00 CN', 'Sự kiện giới thiệu dự án “Chất sống tinh hoa – Giao hòa nắng biển” · bốc thăm quà tặng', 'Sun Gallery Da Nang · 01 Phan Đăng Lưu, Hoà Cường', ''),
           ('2026-11-22', '22/11', 'Hà Nội', 'Sự kiện giới thiệu dự án', 'Khách sạn Daewoo Hà Nội · quy mô khoảng 500 khách', ''),
           ('2026-12-05', '05/12', 'Đà Nẵng · MỞ BÁN', 'Sự kiện bán hàng của Chủ đầu tư', 'Ngày mở bán chính thức · quy mô khoảng 1.000 khách', 'evbig')]
     evs = ''.join('<li class="%s" data-end="%s"><time>%s</time><div><span class="evp">%s</span><b>%s</b><small>%s</small></div>'
@@ -1015,7 +1015,7 @@ def hero_fx():
            '.hxs b{display:block;font-size:clamp(26px,3vw,40px);line-height:1.1;color:#FF9A45;font-weight:800}.hxs span{display:block;font-size:13.5px;color:#D5E2EE;margin-top:4px}'
            '@media(max-width:900px){.hxw{grid-template-columns:1fr;gap:26px;padding:30px 16px 30px}.hxl{font-size:16px}.hxn{gap:8px}.hxn div{padding:11px 4px 10px}.hxn b{font-size:26px!important}.hxn span{font-size:12px}.hxc{font-size:13.5px;gap:6px 14px}'
            '.hxsw{grid-template-columns:repeat(2,minmax(0,1fr))}.hxs div{border-left:0;border-top:1px solid rgba(255,255,255,.12);padding:14px 6px}.hxs div:last-child{grid-column:1/-1}.hxk{margin-left:16px}}</style>')
-    js = ('<script>(function(){var EV=[["2026-11-08T09:00:00+07:00","Sự kiện 08/11"],["2026-11-09T08:00:00+07:00","Sự kiện 09/11"],["2026-11-15T08:00:00+07:00","Sự kiện 15/11"],["2026-11-22T08:00:00+07:00","Sự kiện 22/11"],["2026-12-05T08:00:00+07:00","Mở bán 05/12"]];'
+    js = ('<script>(function(){var EV=[["2026-11-08T09:00:00+07:00","Sự kiện 08/11"],["2026-11-09T08:00:00+07:00","Sự kiện 09/11"],["2026-11-15T09:00:00+07:00","Sự kiện 15/11"],["2026-11-22T08:00:00+07:00","Sự kiện 22/11"],["2026-12-05T08:00:00+07:00","Mở bán 05/12"]];'
           'var k=document.getElementById("hxk");if(!k)return;function t(){var n=Date.now();for(var i=0;i<EV.length;i++){var d=Date.parse(EV[i][0])-n;if(d>0){var D=Math.floor(d/864e5),H=Math.floor(d/36e5)%24;'
           'k.innerHTML="⏳ "+EV[i][1]+" · còn <b>"+(D?D+" ngày ":"")+H+" giờ</b>";return}}k.style.display="none"}t();setInterval(t,30000)})();</script>')
     return (css + '<section class="hx" id="dau"><div class="hxw"><div>'
