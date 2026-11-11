@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.15** + plugin Hoàng Hiệp CRM **2.20.251**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.15** + plugin Hoàng Hiệp CRM **2.20.252**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.252 (11/11/2026)
+
+- **Ảnh đại diện cho 80 trang dự án chưa có ảnh** (nhà ở xã hội, condotel, biệt thự, căn hộ tham khảo): ảnh bìa tự vẽ (tên dự án, khu vực, loại hình, nhãn Hoàng Hiệp – không dùng ảnh quảng cáo trang khác). Plugin tự gắn dần mỗi lần mở trang quản trị (5 dự án/lượt) – sau khi cài, bấm qua lại trang quản trị khoảng 16 lần (hoặc tải lại trang Bảng tin) là xong. Chỉ đặt ảnh đại diện, không đưa vào Thư viện ảnh dự án, không đè ảnh đã có; sau này anh đặt ảnh thật thì ảnh bìa tự được thay bằng ảnh của anh.
 
 ## Có gì mới – 2.20.251 (11/11/2026)
 
