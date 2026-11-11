@@ -40,7 +40,7 @@ form button{width:100%;margin-top:18px;background:#f47c20;color:#fff;border:0;bo
 <div class="box">
   <form action="#" method="post">
     <h2>Gửi hồ sơ ứng tuyển</h2>
-    <p class="note">Điền tên và số điện thoại là đủ. Có CV thì dán link.</p>
+    <p class="note">Điền tên và số điện thoại là đủ. Có CV thì tải file lên hoặc dán link.</p>
     <label for="name">Họ và tên *</label>
     <input id="name" name="name" type="text" placeholder="Nguyễn Văn A" required>
     <label for="phone">Số điện thoại / Zalo *</label>
@@ -63,7 +63,9 @@ form button{width:100%;margin-top:18px;background:#f47c20;color:#fff;border:0;bo
       <option>Sale ngành khác</option>
       <option>Đã làm Sale BĐS</option>
     </select>
-    <label for="cv">Link CV (nếu có)</label>
+    <label for="cvfile">Tải file CV (PDF, Word, ảnh – không bắt buộc)</label>
+    <input id="cvfile" name="cv_file" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+    <label for="cv">Hoặc dán link CV (Google Drive…)</label>
     <input id="cv" name="cv_link" type="url" placeholder="https://drive.google.com/...">
     <button type="submit">Gửi hồ sơ ứng tuyển →</button>
   </form>
