@@ -408,6 +408,7 @@ section[id]{scroll-margin-top:100px}html{scroll-behavior:smooth}
 .hm-tg{display:none}.hm-bg{display:none;width:42px;height:38px;border:1px solid rgba(255,255,255,.35);border-radius:8px;color:#fff;font-size:22px;line-height:36px;text-align:center;cursor:pointer;user-select:none}.hm-bg .x{display:none}
 @media(max-width:760px){.hm-bg{display:inline-block}.top .hm-menu{display:none;max-height:calc(100vh - 60px);overflow-y:auto}.hm-tg:checked~.hm-menu{display:block}.hm-tg:checked~.wrap .hm-bg .o{display:none}.hm-tg:checked~.wrap .hm-bg .x{display:inline}.top .hm-menu .wrap{display:block;white-space:normal;overflow:visible;padding-top:4px;padding-bottom:10px}.top .hm-menu a{display:block;padding:12px 4px;border-bottom:1px solid rgba(255,255,255,.08);font-size:15px}}
 @media(max-width:520px){.hm-call span{display:none}}
+.apply-cta .ab{display:block;text-align:center;border-radius:12px;padding:14px;font-weight:800;font-size:16px;text-decoration:none;margin-top:10px}.apply-cta .ab1{background:#f47c20;color:#fff}.apply-cta .ab2{background:#1B2D6B;color:#fff}.apply-cta .ab3{background:#0068FF;color:#fff}.apply-cta .ab4{background:#fff;color:#1B2D6B;border:2px solid #1B2D6B}
 </style>
 <script src="https://script.google.com/macros/s/AKfycbyMWXl47PShn-ikZKwrFONJb9z89NOmVG6yIioyjGxo55IEbLh4yP7KiREPsxgSbxBl/exec?js=1" data-key="yxt6hKlAI0dU" async></script>
 <style>
@@ -495,19 +496,15 @@ section[id]{scroll-margin-top:100px}html{scroll-behavior:smooth}
         <a class="btn btn-ghost" href="#du-an">Xem dự án</a>
       </div>
     </div>
-    <form class="form" id="dang-ky" action="#" method="post">
+    <div class="form apply-cta" id="dang-ky">
       <h2>Ứng tuyển Nhân viên KD</h2>
       <p class="note">30 giây, không cần CV. <b>Hoàng Hiệp</b> gọi lại tư vấn 1:1. Gấp? <a href="tel:0904567009">Gọi 0904 567 009</a></p>
-      <label for="name">Họ và tên *</label>
-      <input id="name" name="name" type="text" placeholder="Nguyễn Văn A" required>
-      <label for="phone">Số điện thoại / Zalo *</label>
-      <input id="phone" name="phone" type="tel" placeholder="09xx xxx xxx" required>
-      <label for="job">Bạn đang làm gì?</label>
-      <select id="job" name="job"><option value="" disabled selected>-- Chọn --</option><option>Sinh viên mới ra trường</option><option>Sale ngành khác</option><option>Công việc văn phòng</option><option>Khác</option></select>
-      <input type="hidden" name="position" value="Nhân viên kinh doanh BĐS">
-      <button class="btn full" type="submit">Ứng tuyển ngay →</button>
-      <p class="trust">✓ Miễn phí &nbsp; ✓ Trao đổi 1:1 &nbsp; ✓ Bảo mật thông tin</p>
-    </form>
+      <a class="ab ab1" href="https://www.tuyendungsaledanang.com/ung-tuyen">📄 Điền hồ sơ ứng tuyển (30 giây) →</a>
+      <a class="ab ab2" href="tel:0904567009">📞 Gọi 0904 567 009</a>
+      <a class="ab ab3" href="https://zalo.me/0904567009" target="_blank" rel="noopener">💬 Chat Zalo với Hiệp</a>
+      <a class="ab ab4" href="mailto:hiephoangmt@gmail.com?subject=CV%20%E1%BB%A9ng%20tuy%E1%BB%83n%20Sale%20%C4%90%C3%A0%20N%E1%BA%B5ng">✉️ Gửi CV qua email</a>
+      <p class="trust">✓ Miễn phí &nbsp; ✓ Không cần CV &nbsp; ✓ Bảo mật thông tin</p>
+    </div>
   </div>
 </section>
 
@@ -737,28 +734,15 @@ section[id]{scroll-margin-top:100px}html{scroll-behavior:smooth}
         <div><b>04</b> · Ký HĐLĐ & ra trận<small>BHYT, BHXH đầy đủ</small></div>
       </div>
     </div>
-    <form class="form" action="#" method="post">
+    <div class="form apply-cta">
       <h2>Gửi hồ sơ / CV</h2>
       <p class="note">Có CV thì dán link, chưa có thì để trống. Hoàng Hiệp sẽ gọi lại.</p>
-      <label for="name2">Họ và tên *</label>
-      <input id="name2" name="name" type="text" placeholder="Nguyễn Văn A" required>
-      <label for="phone2">Số điện thoại / Zalo *</label>
-      <input id="phone2" name="phone" type="tel" placeholder="09xx xxx xxx" required>
-      <label for="exp2">Bạn đã từng làm Sale chưa?</label>
-      <select id="exp2" name="experience">
-        <option value="" disabled selected>-- Chọn --</option>
-        <option>Sinh viên mới ra trường</option>
-        <option>Chưa từng</option>
-        <option>Sale ngành khác</option>
-        <option>Đã làm Sale BĐS</option>
-      </select>
-      <label for="cv2">Link CV (Google Drive, nếu có)</label>
-      <input id="cv2" name="cv_link" type="url" placeholder="https://drive.google.com/...">
-      <input type="hidden" name="position" value="Nhân viên kinh doanh BĐS">
-      <button class="btn full" type="submit">Gửi hồ sơ ứng tuyển →</button>
-      <p class="cvmail">Hoặc gửi CV qua email: <a href="mailto:hiephoangmt@gmail.com?subject=CV%20%E1%BB%A9ng%20tuy%E1%BB%83n%20Sale%20%C4%90%C3%A0%20N%E1%BA%B5ng">hiephoangmt@gmail.com</a></p>
-      <p class="trust">✓ Miễn phí &nbsp; ✓ CV không bắt buộc &nbsp; ✓ Bảo mật thông tin</p>
-    </form>
+      <a class="ab ab1" href="https://www.tuyendungsaledanang.com/ung-tuyen">📄 Gửi hồ sơ / CV ứng tuyển →</a>
+      <a class="ab ab2" href="tel:0904567009">📞 Gọi 0904 567 009</a>
+      <a class="ab ab3" href="https://zalo.me/0904567009" target="_blank" rel="noopener">💬 Chat Zalo với Hiệp</a>
+      <a class="ab ab4" href="mailto:hiephoangmt@gmail.com?subject=CV%20%E1%BB%A9ng%20tuy%E1%BB%83n%20Sale%20%C4%90%C3%A0%20N%E1%BA%B5ng">✉️ Gửi CV qua email</a>
+      <p class="trust">✓ Miễn phí &nbsp; ✓ Không cần CV &nbsp; ✓ Bảo mật thông tin</p>
+    </div>
   </div>
 </section>
 
