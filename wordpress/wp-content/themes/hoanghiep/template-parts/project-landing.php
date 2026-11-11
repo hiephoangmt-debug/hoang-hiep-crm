@@ -119,7 +119,7 @@ body.hh-landing .hhc__form button{color:var(--act-ink)}
 body.hh-landing section.cta h2 em,body.hh-landing section.cta .title em{color:#ff7a3d!important}
 body.hh-landing section.cta .advisor a{color:#ff8a3d}
 /* Chữ cam nhấn trong tiêu đề: viền trắng mảnh (anh Hiệp 11/11/2026). */
-body.hh-landing .title em,body.hh-landing h1 em,body.hh-landing h2 em{-webkit-text-stroke:.6px #fff;paint-order:stroke fill}
+body.hh-landing .title em,body.hh-landing h1 em,body.hh-landing h2 em{-webkit-text-stroke:1px #fff;paint-order:stroke fill}
 </style>
 </head>
 <body <?php body_class( 'hh-landing' ); ?>>
