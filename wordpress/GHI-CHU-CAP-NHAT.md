@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.15** + plugin Hoàng Hiệp CRM **2.20.252**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.15** + plugin Hoàng Hiệp CRM **2.20.253**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.253 (11/11/2026)
+
+- **Trang Sun Saphia Residence – sự kiện giới thiệu 15/11/2026** (09:00, Sun Gallery Đà Nẵng, 01 Phan Đăng Lưu): lịch triển khai thêm dòng 15/11/2026; đến 12:00 ngày 15/11 khung đăng ký đổi tiêu đề thành "Mời dự sự kiện giới thiệu 09:00 Chủ nhật 15/11" và thêm câu hỏi đáp về sự kiện, sau đó tự trở lại như cũ. Chỉ đổi phần hiển thị, không ghi đè ô anh đã nhập. Sau trưa 15/11 nên bấm LiteSpeed Purge All để trang cập nhật ngay.
 
 ## Có gì mới – 2.20.252 (11/11/2026)
 
