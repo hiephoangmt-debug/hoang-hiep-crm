@@ -37,3 +37,4 @@
 | 10/11/2026 | Sun | 11:30 | (phiên khác, bài web mới 10:00) Công bố Quy hoạch chung 2050, Aeon Mall Hòa Xuân | /da-nang-cong-bo-quy-hoach-chung-2050-aeon-mall-hoa-xuan-thang-11/ |
 | 10/11/2026 | Hoàng Hiệp | 18:30 | (bài web mới 12:00) Khách quốc tế đến Đà Nẵng 2026 – cho thuê căn hộ khách nước ngoài (1 ảnh dọc, du thuyền sông Hàn) | /khach-quoc-te-da-nang-2026-han-quoc-trung-quoc-thue-can-ho-sun-saphia/ |
 | 10/11/2026 | Sun | 20:00 | (bài web mới 16:30) Vận hành cho thuê Sun Saphia: tự làm hay giao đơn vị (1 ảnh dọc) | /tu-cho-thue-hay-thue-don-vi-van-hanh-can-ho-sun-saphia/ |
+| 11/11/2026 | Sun | 10:30 | (bài web mới 08:00) Nội thất studio Sun Saphia – chi phí 80–300 triệu (1 ảnh dọc) | /chi-phi-noi-that-studio-30m2-cho-thue-sun-saphia/ |
