@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.15** + plugin Hoàng Hiệp CRM **2.20.249**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.15** + plugin Hoàng Hiệp CRM **2.20.250**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.250 (11/11/2026)
+
+- **Gộp trang Cora trùng**: trang cũ `/du-an/cora-tower-da-nang/` (tiêu đề "CORA TOWER: Bảng giá, chính sách 10/2025") đang được Google lập chỉ mục song song với trang chính `/du-an/cora-tower/`. Nay trang cũ chuyển về Nháp (không xoá), đường dẫn cũ tự chuyển 301 sang trang chính, bài tin gắn trang cũ chuyển sang trang chính. Bản này gồm luôn thay đổi của 2.20.249.
 
 ## Có gì mới – 2.20.249 + giao diện 2.16.15 (11/11/2026)
 
