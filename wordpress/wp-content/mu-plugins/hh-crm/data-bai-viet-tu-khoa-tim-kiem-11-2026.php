@@ -60,6 +60,35 @@ function hh_posts_tu_khoa_tim_kiem_11_2026( $posts ) {
 <li>Vay tối đa 70%, chủ đầu tư hỗ trợ lãi suất 24 tháng.</li>
 </ul>
 <p>So sánh ba tòa: <a href="/cora-spana-s-light-sun-neo-city-nen-chon-toa-nao/">Cora, Spana hay S-Light – nên chọn tòa nào</a>.</p>
+<h2>Pháp lý Spana Tower đi kèm mốc bàn giao</h2>
+<ul>
+<li>Sở Xây dựng xác nhận nhà ở hình thành trong tương lai đủ điều kiện bán (VB 7111/SXD-QLN, 05/5/2026).</li>
+<li>VietinBank cam kết phát hành bảo lãnh cho người mua (07/5/2026); dự án không thế chấp khi ký hợp đồng mua bán.</li>
+<li>Đất ở đô thị, 2 giấy chứng nhận riêng cho lô A1-3 và A1-4; sở hữu lâu dài.</li>
+<li>Hợp đồng mua bán theo mẫu đã đăng ký với Sở Công Thương (TB 1737/TB-SCT, 09/4/2026).</li>
+</ul>
+<h2>Khi nhận nhà, anh chị nhận gì</h2>
+<ul>
+<li><strong>Cora Tower:</strong> căn hộ hoàn thiện trần, tường, sàn; chưa gồm nội thất rời.</li>
+<li><strong>Spana Tower:</strong> trọn tầng 2 là tiện ích nội khu – bể bơi, gym và spa, co-working, cafe, khu trẻ em; tầng 1 là shophouse khối đế.</li>
+<li><strong>Cả hai:</strong> miễn phí quản lý 1 năm; 5% cuối đóng khi bàn giao và được chủ đầu tư trả lãi 8%/năm đến khi có sổ.</li>
+</ul>
+<!--hh-img:img/spana-tower/spana-tower-tien-do-11-2026-nhin-tu-bo-song-cam-le.jpg|Công trường Spana Tower nhìn từ bờ sông Cẩm Lệ (tiến độ 11/2026)-->
+<h2>Checklist khi nhận bàn giao căn hộ</h2>
+<ol>
+<li>Đo lại diện tích thông thủy, so với hợp đồng.</li>
+<li>Kiểm tra trần, tường, sàn: vết nứt, thấm, độ phẳng.</li>
+<li>Thử cửa, khóa, cửa sổ, lan can lô gia.</li>
+<li>Thử điện, nước, thoát sàn vệ sinh, lô gia.</li>
+<li>Ghi biên bản các điểm cần sửa, hẹn thời hạn khắc phục.</li>
+<li>Nhận đủ giấy tờ: biên bản bàn giao, hướng dẫn sử dụng, thông tin bảo hành.</li>
+</ol>
+<h2>Nên chọn tòa nào theo mốc bàn giao</h2>
+<ul>
+<li><strong>Muốn ở hoặc cho thuê sớm nhất:</strong> Spana Tower (dự kiến 30/06/2027).</li>
+<li><strong>Muốn giỏ hàng có giá công khai:</strong> Cora Tower (studio từ khoảng 2,42 tỷ, dự kiến 30/07/2027).</li>
+<li><strong>Muốn view sông, giãn tiến độ dài:</strong> S-Light Tower (giãn đến 48 tháng).</li>
+</ul>
 {$cta('Cora Tower, Spana Tower, S-Light Tower')}
 HTML
 		,
@@ -199,6 +228,39 @@ HTML
 <li>Tên pháp nhân ký hợp đồng là Công ty TNHH MTV VIPICO.</li>
 </ol>
 <p>Xem thêm: <a href="/phap-ly-the-legend-da-nang-so-huu-lau-dai/">pháp lý The Legend</a>, <a href="/gia-the-legend-da-nang-bao-nhieu/">giá The Legend</a>.</p>
+<h2>Dự án gồm những gì</h2>
+<table>
+<tbody>
+<tr><th>Khu đất</th><td>11.487 m² (khoảng 1,2 ha), 4 mặt tiền</td></tr>
+<tr><th>Tháp căn hộ</th><td>29 tầng, 800 căn sở hữu lâu dài (1PN đến 3PN, 8 penthouse duplex)</td></tr>
+<tr><th>Tháp khách sạn</th><td>25 tầng: 222 phòng khách sạn, 222 căn hộ dịch vụ, thời hạn 50 năm</td></tr>
+<tr><th>Tầng hầm</th><td>3 tầng hầm chung</td></tr>
+<tr><th>Khối đế</th><td>Thương mại, nhà hàng, tiện ích; đang bán 19 shop (đợt 10/2026)</td></tr>
+</tbody>
+</table>
+<h2>Mốc thời gian chính</h2>
+<table>
+<thead><tr><th>Thời điểm</th><th>Sự kiện</th></tr></thead>
+<tbody>
+<tr><td>2017</td><td>Phê duyệt kết quả đấu giá quyền sử dụng đất lô A20</td></tr>
+<tr><td>Sau 2017</td><td>Tranh chấp pháp lý, sau đó được tháo gỡ</td></tr>
+<tr><td>14/02/2025</td><td>Giấy phép xây dựng phần ngầm (3 tầng hầm, giai đoạn 1)</td></tr>
+<tr><td>28/02/2025</td><td>Khởi công</td></tr>
+<tr><td>3/2025</td><td>Công bố vốn xây dựng nhà ở 2.352 tỷ đồng, được huy động 1.764 tỷ</td></tr>
+<tr><td>31/12/2026</td><td>Cất nóc (dự kiến theo chính sách bán hàng)</td></tr>
+<tr><td>31/3/2028</td><td>Bàn giao căn hộ (dự kiến theo chính sách bán hàng)</td></tr>
+<tr><td>Quý 4/2028</td><td>Mốc hoàn thành theo tiến độ đăng ký</td></tr>
+</tbody>
+</table>
+<!--hh-img:img/the-legend/the-legend-da-nang-tien-do-6-2025-flycam-cong-truong.jpg|Công trường The Legend tháng 6/2025 – flycam nhìn về sông Hàn-->
+<h2>Vì sao cần đọc kỹ hồ sơ</h2>
+<ul>
+<li>Mua lúc này là mua nhà hình thành trong tương lai – dự án khởi công 02/2025.</li>
+<li>Khu đất từng có tranh chấp (đấu giá 2017, vụ kiện sau đó); đã có thời điểm Sở Xây dựng lưu ý dự án chưa đủ điều kiện bán, sau đó báo chí cho biết dự án đủ điều kiện mở bán.</li>
+<li>Dự án có cả khối khách sạn và khối chung cư – hỏi rõ căn mình mua thuộc khối nào và thời hạn sở hữu tương ứng (lâu dài hay 50 năm).</li>
+</ul>
+<h2>Ưu đãi hiện có</h2>
+<p>Quà nội thất trừ vào giá 300 triệu – 1,8 tỷ, chiết khấu thanh toán sớm đến 12%, vay 70% hỗ trợ lãi suất 0% trong 24 tháng (MSB, Vietcombank, MB), miễn phí quản lý 24 tháng – theo chính sách ban hành 17/7/2025, có thể đã điều chỉnh theo đợt. Xem <a href="/co-nen-mua-the-legend-da-nang-uu-nhuoc-diem/">có nên mua The Legend</a>.</p>
 {$cta('The Legend')}
 HTML
 		,
@@ -269,6 +331,31 @@ HTML
 <li>Giá studio từ khoảng 2,50 tỷ (giỏ hàng 11/2026); nhận căn sử dụng dự kiến 30/06/2028.</li>
 </ul>
 <p>Xem thêm: <a href="/gia-symphony-5-sun-symphony-residence-bao-nhieu/">giá Sun Symphony 5</a>, <a href="/mat-bang-can-ho-symphony-5/">mặt bằng Symphony 5</a>.</p>
+<h2>Symphony 5 trong tổ hợp Sun Symphony Residence</h2>
+<p>Sun Symphony Residence là tổ hợp căn hộ và thấp tầng của Sun Group bên bờ Đông sông Hàn. Các phân khu trước đã và đang bàn giao (thấp tầng từ quý 2/2025, căn hộ quý 1 – 2/2026 theo kế hoạch). Symphony 5 là mảnh ghép cuối, do Công ty TNHH Mặt Trời Sông Hàn (thành viên Sun Group) làm chủ đầu tư, trên khu đất thương mại dịch vụ khoảng 11.371 m², tổng vốn hơn 3.716 tỷ đồng.</p>
+<p>Xem tổng quan tổ hợp: <a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a>.</p>
+<h2>Vị trí này hợp với ai</h2>
+<ul>
+<li><strong>Người làm việc ở trung tâm:</strong> qua cầu Rồng là vào Hải Châu, cách trung tâm hành chính khoảng 2 km.</li>
+<li><strong>Người mua để cho thuê:</strong> khách công tác, khách đi sự kiện, mùa pháo hoa DIFF; vẫn chỉ khoảng 2,5 km ra biển Mỹ Khê.</li>
+<li><strong>Người thích không gian xanh:</strong> công viên thể thao, Central Park và công viên ven sông ngay trong phân khu.</li>
+</ul>
+<!--hh-img:img/sun-symphony-5/sun-symphony-5-pc-10-ban-ngay-2.jpg|Symphony 5 và bờ Đông sông Hàn lúc bình minh (phối cảnh chủ đầu tư)-->
+<h2>So khoảng cách với các dự án Sun Group khác</h2>
+<table>
+<thead><tr><th>Dự án</th><th>Vị trí</th><th>Điểm nhấn khoảng cách</th></tr></thead>
+<tbody>
+<tr><td>Sun Symphony 5</td><td>Bờ Đông sông Hàn (Sơn Trà)</td><td>Cầu Rồng 1,5 km, biển Mỹ Khê 2,5 km</td></tr>
+<tr><td><a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a></td><td>Biển Sơn Thủy (Ngũ Hành Sơn)</td><td>Đối diện công viên bãi tắm; khoảng 4 km tới Đà Nẵng Downtown</td></tr>
+<tr><td><a href="/du-an/cora-tower/">Cora Tower</a></td><td>Sun NeO City (Hòa Xuân)</td><td>Giao lộ Nguyễn Phước Lan – đường 29/3</td></tr>
+</tbody>
+</table>
+<h2>Pháp lý và nhận nhà</h2>
+<ul>
+<li>Đấu giá quyền sử dụng đất 14/12/2025, chấp thuận nhà đầu tư 12/03/2026, quy hoạch 1/500 phê duyệt 23/4/2026.</li>
+<li>Sở hữu 50 năm (đất thương mại dịch vụ). Xem <a href="/phap-ly-symphony-5-so-huu-50-nam/">pháp lý Symphony 5</a>.</li>
+<li>Thanh toán tối thiểu 70% nhận căn sử dụng dự kiến 30/06/2028 (Sun Early Key); bàn giao chính thức theo tiến độ không vay dự kiến 30/06/2030.</li>
+</ul>
 {$cta('Sun Symphony 5')}
 HTML
 		,

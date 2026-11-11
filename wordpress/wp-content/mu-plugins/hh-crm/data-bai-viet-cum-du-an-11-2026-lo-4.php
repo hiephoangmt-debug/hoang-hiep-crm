@@ -155,6 +155,27 @@ HTML
 <li><strong>Muốn không gian rộng:</strong> penthouse tầng 25, có thể làm duplex.</li>
 </ul>
 <p>Bàn giao dự kiến 30/07/2027, hoàn thiện trần, tường, sàn. Xem giá: <a href="/gia-cora-tower-da-nang-bao-nhieu/">giá Cora Tower</a>.</p>
+<h2>Cora Tower trong khu đô thị Sun NeO City</h2>
+<p>Cora Tower là một trong ba tòa căn hộ Sun Group đang bán tại Sun NeO City (Hòa Xuân), cùng <a href="/du-an/spana-tower/">Spana Tower</a> ở chân cầu Hòa Xuân và <a href="/du-an/s-light-tower/">S-Light Tower</a> ở ngã ba sông. Vị trí Cora nằm giữa khu đô thị, sát vòng xoay Nguyễn Phước Lan, nên mặt bằng hai tòa A1, A2 mở ra trục đường 29/3 và khu nhà phố thấp tầng xung quanh.</p>
+<h2>Cách đọc mặt bằng tầng điển hình</h2>
+<ol>
+<li><strong>Xác định hướng:</strong> nhìn la bàn trên bản vẽ để biết căn hướng về sông, về vòng xoay hay về khu nhà phố.</li>
+<li><strong>Căn góc và căn giữa:</strong> căn ở hai đầu tòa thường có hai mặt thoáng; căn giữa hành lang có một mặt thoáng, giá thường mềm hơn.</li>
+<li><strong>Khoảng cách tới thang máy, phòng rác:</strong> căn sát lõi thang tiện đi lại nhưng có thể ồn hơn.</li>
+<li><strong>Lô gia, cửa sổ:</strong> kiểm tra phòng nào có cửa sổ trực tiếp ra ngoài – quan trọng với căn 1PN+1 có phòng đa năng.</li>
+</ol>
+<h2>Shophouse và penthouse</h2>
+<p><strong>Shophouse khối đế:</strong> tại giao lộ Nguyễn Phước Lan – đường 29/3, hợp cà phê, cửa hàng tiện lợi, phòng khám phục vụ cư dân. Giỏ hàng 11/2026 có 5 shop tầng 1 tòa A2, 43,8 – 87,3 m², khoảng 5,17 – 9,12 tỷ (khoảng 98 – 135 triệu/m², gồm VAT và phí bảo trì).</p>
+<p><strong>Penthouse tầng 25:</strong> tầng trên cùng của hai tòa, gồm căn 1PN, 2PN và 2PN+1, tầm nhìn sông – núi – biển. Chủ đầu tư có gợi ý thiết kế duplex làm thêm tầng lửng, với bản vẽ tầng chính và tầng lửng riêng.</p>
+<!--hh-dimg:1DeZ_Zj9gp4LwldG-D97NEifbYqsouZJr|Mặt bằng tầng 25 penthouse tòa A1 Cora Tower (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Bàn giao và nhận nhà</h2>
+<ul>
+<li>Bàn giao dự kiến 30/07/2027, hoàn thiện trần, tường, sàn (chưa gồm nội thất rời).</li>
+<li>Sun Early Key: thanh toán đủ 70% là nhận nhà sử dụng.</li>
+<li>Đặt cọc căn hộ 100 triệu (3PN 150 triệu, penthouse 300 triệu), giãn tiến độ đến 40 tháng.</li>
+<li>Vay tối đa 70%, chủ đầu tư hỗ trợ lãi suất 24 tháng; miễn phí quản lý 1 năm.</li>
+</ul>
+<p>Xem mốc bàn giao và tiến độ ba tòa: <a href="/cora-tower-spana-tower-khi-nao-ban-giao/">Cora Tower khi nào bàn giao</a>.</p>
 {$cta('Cora Tower')}
 HTML
 		,
@@ -316,6 +337,36 @@ HTML
 <h2>Bàn giao</h2>
 <p>Hoàn thiện cơ bản: trần thạch cao, sàn gạch hoặc gỗ công nghiệp phòng ngủ, cửa chính gỗ chống cháy, cửa nhôm Xingfa kính dán an toàn. Khách tự trang bị tủ bếp, thiết bị bếp, thiết bị vệ sinh, bình nóng lạnh. Nhận nhà dự kiến: F1, F5 ngày 31/3/2028; F2 ngày 31/5/2028 (khi đã thanh toán 70%).</p>
 <p>Xem giá và chính sách tại trang {$fours}.</p>
+<h2>Thông tin pháp lý gắn với mặt bằng</h2>
+<p>Theo Văn bản 17239/SXD-QLN ngày 19/09/2026 của Sở Xây dựng Đà Nẵng, 2.394 căn hộ hình thành trong tương lai thuộc 4 lô A3-3, A3-4, A3-5, A3-10 đủ điều kiện mở bán. Pháp nhân chủ đầu tư là Công ty CP Địa Cầu, đơn vị phát triển là Sun Property (Sun Group). Mỗi lô có giấy chứng nhận quyền sử dụng đất; Techcombank cam kết phát hành thư bảo lãnh cho người mua. Tổng diện tích dự án khoảng 15.406 m², mật độ xây dựng 15,8%; dự án động thổ 21/07/2026.</p>
+<h2>Vì sao FourS có nhiều mặt bằng tầng</h2>
+<p>Các tầng thấp (3, 3A, 5, 6, 7) có mặt bằng riêng vì gắn với sân vườn, khối đế và tiện ích tầng 2; từ tầng 8 đến 19 dùng chung một mặt bằng điển hình. Ngoài căn hộ thường, dự án có căn sân vườn FourS Jardin và penthouse tầng cao. Với người mua, mặt bằng tầng điển hình là nơi có nhiều căn nhất để chọn hướng, chọn tầng.</p>
+<h2>Giá theo loại căn (tòa F1, F5 – tham khảo)</h2>
+<table>
+<thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá tham khảo</th></tr></thead>
+<tbody>
+<tr><td>Studio (F1)</td><td>30,5 m²</td><td>Khoảng 1,77 – 2,58 tỷ</td></tr>
+<tr><td>Studio (F5)</td><td>34,9 m²</td><td>Khoảng 1,96 – 2,34 tỷ</td></tr>
+<tr><td>1PN (F5)</td><td>46,7 m²</td><td>Khoảng 2,91 tỷ</td></tr>
+<tr><td>1PN+ / 1PN+1</td><td>45,2 – 53,8 m²</td><td>Khoảng 2,69 – 3,62 tỷ</td></tr>
+<tr><td>2PN</td><td>63,8 – 73,1 m²</td><td>Khoảng 3,65 – 5,16 tỷ</td></tr>
+<tr><td>3PN (F5)</td><td>92,8 – 93,2 m²</td><td>Khoảng 5,51 – 6,59 tỷ</td></tr>
+</tbody>
+</table>
+<p><small>Giá thấp là phương án thanh toán sớm, giá cao là phương án vay, theo phiếu tính giá chủ đầu tư; đã gồm VAT và kinh phí bảo trì.</small></p>
+<h2>Lịch thanh toán tòa F2</h2>
+<ul>
+<li>Đặt cọc 100 triệu (3PN 150 triệu); khoảng 2 tuần sau đóng đủ 15%.</li>
+<li>Ký hợp đồng mua bán khoảng 3 tuần sau đặt cọc; đợt 3 – 7 mỗi 3 tháng 10% (từ quý 1/2027).</li>
+<li>Nhận bàn giao sử dụng khi đã thanh toán 70% (dự kiến 31/5/2028); sau đó mỗi 4 tháng 5%, đợt cuối 5% khi nhận giấy chứng nhận.</li>
+</ul>
+<!--hh-img:img/fours-tower/fours-tower-f2-mat-bang-tang-3.jpg|Mặt bằng tầng 3 tòa F2 FourS Tower (tài liệu chủ đầu tư)-->
+<h2>Mẹo chọn căn trên mặt bằng FourS</h2>
+<ol>
+<li>Xác định tòa nào hướng về sông Cổ Cò, về Ngũ Hành Sơn hay về trung tâm trước khi chọn căn.</li>
+<li>Muốn cho thuê: studio, 1PN+ tầng trung – cao; muốn ở: 2PN, 3PN hai mặt thoáng.</li>
+<li>Căn tầng thấp gần sân vườn, tiện ích tầng 2 hợp gia đình có trẻ nhỏ.</li>
+</ol>
 {$cta('FourS Tower')}
 HTML
 		,
@@ -386,6 +437,32 @@ HTML
 </tbody>
 </table>
 <p>Xem thêm: <a href="/mat-bang-can-ho-sun-saphia-residence/">mặt bằng Sun Saphia</a>, <a href="/studio-sun-saphia-residence-30-m2-bo-tri-ai-nen-mua/">studio Sun Saphia 30 m²</a>.</p>
+<h2>Vị trí căn 1PN+ trên mặt bằng</h2>
+<p>Theo mặt bằng tầng điển hình của chủ đầu tư, mỗi sàn từ tầng 3A đến 28 có 28 căn: 19 studio, 4 căn 1PN+ và 5 căn 2PN. Dãy căn phía Đông nhìn thẳng ra biển; các căn 2PN nằm ở góc tòa nên có hai mặt thoáng. Vì mỗi sàn chỉ có 4 căn 1PN+, nên chọn sớm nếu anh chị muốn đúng tầng, đúng hướng.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28.jpg|Mặt bằng tầng 3A – 28 Sun Saphia Residence (tài liệu chủ đầu tư)-->
+<h2>Ai nên mua căn 1PN+</h2>
+<ul>
+<li><strong>Vợ chồng trẻ, gia đình 3 người:</strong> phòng đa năng làm phòng cho con nhỏ.</li>
+<li><strong>Người làm việc từ xa:</strong> phòng đa năng làm phòng làm việc, tách khỏi phòng ngủ.</li>
+<li><strong>Nhà đầu tư cho thuê dài hạn:</strong> chuyên gia, người nước ngoài thuê theo tháng thường cần thêm một phòng.</li>
+<li><strong>Người mua nghỉ dưỡng:</strong> rộng hơn studio, phù hợp gia đình đi nghỉ cuối tuần.</li>
+</ul>
+<h2>Pháp lý, bàn giao và hỗ trợ vay</h2>
+<ul>
+<li>Thời hạn dự án 50 năm kể từ 17/09/2026; công trình cấp I, niên hạn sử dụng 100 năm.</li>
+<li>Bàn giao dự kiến tháng 11/2028, hoàn thiện cơ bản.</li>
+<li>Ngân hàng hỗ trợ: Vietcombank, BIDV, NCB; chính sách đợt giới thiệu hỗ trợ lãi suất lên tới 24 tháng.</li>
+<li>Sự kiện bán hàng dự kiến 05/12/2026 – giá chính thức căn 1PN+ công bố khi mở bán.</li>
+</ul>
+<h2>Tiện ích dùng chung</h2>
+<p>Bể bơi nhìn biển, yoga, gym, pilates, khối đế thương mại và 2 tầng hầm đỗ xe. Đối diện là công viên bãi tắm ven biển khoảng 2,45 ha thành phố đang đầu tư; ga LRT 09 (dự kiến) cách khoảng 500 m.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Sun Saphia Residence bên biển lúc hoàng hôn (ảnh chủ đầu tư)-->
+<h2>Câu nên hỏi khi chọn căn 1PN+</h2>
+<ol>
+<li>Phòng đa năng có cửa sổ trực tiếp ra ngoài không?</li>
+<li>Căn hướng biển, hướng cạnh bên hay phía sau? Xem thêm <a href="/chon-day-can-sun-saphia-residence-mat-bien-canh-ben-phia-sau/">cách chọn dãy căn Sun Saphia</a>.</li>
+<li>Giá đã gồm VAT và kinh phí bảo trì chưa (giá dự kiến 28/10 chưa gồm)?</li>
+</ol>
 {$cta('căn 1PN+ Sun Saphia')}
 HTML
 		,
@@ -450,6 +527,39 @@ HTML
 <li>Capital Square 3: khối MAT 5-6, MAT 7, MAT 8-9 đã có văn bản đủ điều kiện bán; khối LAT 4-5 đang cập nhật.</li>
 </ul>
 <p>Hoàng Hiệp cập nhật bài này khi có ảnh tiến độ mới. Xem giá: <a href="/bang-gia-capital-square-da-nang-theo-toa/">bảng giá Capital Square theo tòa</a>.</p>
+<h2>Capital Square gồm những tòa nào</h2>
+<p>Tổ hợp rộng 61.368 m² bên bờ Đông sông Hàn, giới hạn bởi Trần Hưng Đạo, Ngô Quyền và Nguyễn Công Trứ, chia 2 phân khu do hai pháp nhân thuộc hệ sinh thái BRG làm chủ đầu tư: Capital Square 2 (Công ty TNHH Mega Assets, 1.681 căn) và Capital Square 3 (Công ty CP Bất động sản SIH, 1.710 căn). Tổng cộng 14 tòa 24 – 29 tầng, 3.391 căn hộ.</p>
+<table>
+<thead><tr><th>Tòa / khối</th><th>Phân khu</th><th>Quy mô</th><th>Tình trạng bán</th></tr></thead>
+<tbody>
+<tr><td>Tòa 2.1, 2.2, 2.3</td><td>Capital Square 2</td><td>26 tầng, 207 căn mỗi tòa</td><td>Đang mở bán</td></tr>
+<tr><td>Tòa 2.4 (The King), 2.5, 2.6 (The Queen), 2.7</td><td>Capital Square 2</td><td>28 tầng, 265 căn mỗi tòa</td><td>Đang mở bán</td></tr>
+<tr><td>Khối LAT 4-5</td><td>Capital Square 3</td><td>26 tầng, 374 căn</td><td>Đang cập nhật</td></tr>
+<tr><td>Khối MAT 5-6</td><td>Capital Square 3</td><td>24 tầng, 586 căn</td><td>Đang mở bán</td></tr>
+<tr><td>Tòa MAT 7</td><td>Capital Square 3</td><td>29 tầng, 250 căn</td><td>Đang mở bán</td></tr>
+<tr><td>Tòa MAT 8-9</td><td>Capital Square 3</td><td>29 tầng, 500 căn</td><td>Đang mở bán</td></tr>
+</tbody>
+</table>
+<p><small>Mã tòa theo văn bản của Sở Xây dựng Đà Nẵng. Tên bán hàng (Hudson Place S4, Broadway Place S3, Victory, Kings, Queens, Times…) có thể không trùng một – một với mã tòa; khi đặt căn, hỏi rõ mã tòa trên hợp đồng.</small></p>
+<h2>Đọc ảnh tiến độ thế nào cho đúng</h2>
+<ul>
+<li><strong>Thi công tầng hầm:</strong> giai đoạn đào đất, làm tường vây, sàn hầm – chưa thấy khối nhà trên mặt đất.</li>
+<li><strong>Lên phần đế:</strong> các tầng thương mại, tiện ích đầu tiên; cẩu tháp dựng cạnh mỗi khối.</li>
+<li><strong>Phần thân:</strong> các tầng căn hộ lên dần; lưới an toàn bao quanh khối đang đổ sàn.</li>
+<li><strong>Hoàn thiện:</strong> lắp kính, xây tô, cơ điện ở các tầng dưới trong khi kết cấu vẫn lên ở các tầng trên.</li>
+</ul>
+<p>Khi so tiến độ giữa các tòa, anh chị nên hỏi tòa mình đặt mua đang ở giai đoạn nào, vì mỗi khối khởi công và có nhà thầu riêng. Delta Group là nhà thầu kết cấu, xây thô tòa 2.4, 2.6 và MAT 5, MAT 6.</p>
+<!--hh-img:img/capital-square/capital-square-tien-do-5-2026-flycam-03.jpg|Tiến độ thi công Capital Square tháng 5/2026 – ảnh flycam công trường bên sông Hàn-->
+<h2>Tiến độ ảnh hưởng gì tới người mua</h2>
+<ul>
+<li><strong>Thời điểm nhận nhà:</strong> toàn tổ hợp dự kiến bàn giao quý I/2027, có tòa đến 2028; Hudson Place dự kiến quý III/2027.</li>
+<li><strong>Vay ngân hàng:</strong> thời gian hỗ trợ lãi suất 0% (24 – 36 tháng tùy phương án) nên khớp với mốc nhận nhà để không phải trả lãi khi chưa ở hoặc chưa cho thuê được.</li>
+<li><strong>Thanh toán:</strong> với hình thức chuyển nhượng hợp đồng (Hudson Place), khoản kinh phí bảo trì và VAT 5% giá bán đóng khi bàn giao; 5% cuối đóng khi nhận giấy chứng nhận.</li>
+<li><strong>Người nước ngoài:</strong> được mua trong hạn mức – tối đa 502 căn ở Capital Square 2 và 512 căn ở Capital Square 3, sở hữu 50 năm.</li>
+</ul>
+<h2>Tiện ích sẽ có khi bàn giao</h2>
+<p>Theo phối cảnh chủ đầu tư: hồ bơi lớn và hồ bơi trẻ em, sân chơi nước, sân tập golf mini, sân bóng rổ mini, sân tập thể thao ngoài trời, vườn cây và lối dạo nội khu, phố đi bộ thương mại, quảng trường ánh sáng; liền kề trung tâm thương mại Vincom, cách cầu Rồng khoảng 1,5 km.</p>
+<!--hh-img:img/capital-square/capital-square-tien-ich-ho-boi-lon.jpg|Hồ bơi lớn nội khu Capital Square (phối cảnh chủ đầu tư)-->
 {$cta('Capital Square')}
 HTML
 		,
@@ -511,6 +621,43 @@ HTML
 <li><strong>Cân nhắc:</strong> người mua để cho thuê ngắn ngày với ngân sách dưới 4 tỷ – xem các dự án như <a href="/gia-symphony-5-sun-symphony-residence-bao-nhieu/">Symphony 5</a>.</li>
 </ul>
 <p>So sánh với dự án hạng sang khác: <a href="/nobu-residences-hay-the-legend-can-ho-cao-cap-da-nang/">Nobu hay The Legend</a>.</p>
+<h2>Giá The Legend theo loại căn</h2>
+<table>
+<thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá (giỏ hàng tầng 6 – 25)</th></tr></thead>
+<tbody>
+<tr><td>1PN</td><td>54,4 – 60,3 m²</td><td>Khoảng 7,65 – 9,59 tỷ</td></tr>
+<tr><td>1PN+1 (góc)</td><td>58,4 m²</td><td>Khoảng 9,39 – 10,97 tỷ</td></tr>
+<tr><td>2PN</td><td>74,9 – 84,5 m²</td><td>Khoảng 8,96 – 14,60 tỷ</td></tr>
+<tr><td>3PN (góc)</td><td>114,1 – 114,2 m²</td><td>Khoảng 16,83 – 18,98 tỷ</td></tr>
+<tr><td>Penthouse duplex</td><td>256 – 415 m²</td><td>Từ khoảng 37 tỷ</td></tr>
+</tbody>
+</table>
+<p><small>Gồm VAT và kinh phí bảo trì, chưa trừ quà nội thất và chiết khấu. Chi tiết: <a href="/gia-the-legend-da-nang-bao-nhieu/">giá The Legend Đà Nẵng</a>.</small></p>
+<h2>Bàn giao gồm những gì</h2>
+<p>Căn hộ bàn giao hoàn thiện cao cấp, có smarthome: sàn phòng khách, ăn, ngủ gỗ kỹ thuật sồi châu Âu dày 12 mm; gạch vệ sinh, bếp, lô gia nhập khẩu; cửa chính gỗ chống cháy EI30, khóa thông minh; điều hòa Multi âm trần nối ống gió; cửa kính, lan can nhôm kính dán an toàn. Người mua chủ yếu chỉ cần mua thêm đồ rời.</p>
+<h2>Thanh toán thế nào</h2>
+<table>
+<thead><tr><th>Mốc</th><th>Tỷ lệ</th></tr></thead>
+<tbody>
+<tr><td>Giữ chỗ</td><td>200 triệu/căn</td></tr>
+<tr><td>Hợp đồng nguyên tắc (trong 15 ngày)</td><td>10% (gồm tiền giữ chỗ)</td></tr>
+<tr><td>Đợt 2 (trong 90 ngày)</td><td>15%</td></tr>
+<tr><td>Ký hợp đồng mua bán</td><td>Bổ sung đủ 30%</td></tr>
+<tr><td>7 đợt tiếp theo, mỗi 30 ngày</td><td>5%/đợt</td></tr>
+<tr><td>Cất nóc (dự kiến 31/12/2026)</td><td>5%</td></tr>
+<tr><td>Nhận nhà (dự kiến 31/3/2028)</td><td>25% + kinh phí bảo trì</td></tr>
+<tr><td>Nhận sổ</td><td>5%</td></tr>
+</tbody>
+</table>
+<!--hh-img:img/the-legend/the-legend-da-nang-dem-phao-hoa-song-han.jpg|Đêm pháo hoa sông Hàn nhìn từ vườn mái The Legend (phối cảnh)-->
+<h2>So với các lựa chọn khác ở Đà Nẵng</h2>
+<ul>
+<li><strong>Muốn sở hữu lâu dài bên sông Hàn nhưng ngân sách thấp hơn:</strong> xem <a href="/bang-gia-capital-square-da-nang-theo-toa/">Capital Square</a> – căn 1PN từ khoảng 4,3 tỷ, sở hữu lâu dài với khách Việt Nam.</li>
+<li><strong>Muốn căn hộ hàng hiệu mặt biển:</strong> xem <a href="/nobu-residences-hay-the-legend-can-ho-cao-cap-da-nang/">Nobu hay The Legend</a>.</li>
+<li><strong>Mua để cho thuê với vốn dưới 4 tỷ:</strong> các dự án 50 năm như Symphony 5, Sun Saphia có tổng tiền thấp hơn.</li>
+</ul>
+<h2>Lưu ý về tiến độ đăng ký</h2>
+<p>Chính sách bán hàng ghi bàn giao căn hộ dự kiến 31/3/2028; theo báo chí, tiến độ thực hiện dự án đăng ký với thành phố kéo dài đến quý 4/2028. Mốc chính xác áp dụng cho căn của anh chị là mốc ghi trong hợp đồng mua bán.</p>
 {$cta('The Legend')}
 HTML
 		,
