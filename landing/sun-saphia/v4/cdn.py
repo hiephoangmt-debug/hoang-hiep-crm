@@ -49,12 +49,24 @@ EVBAR = ('<div id="evbar" class="evb" role="region" aria-label="Thư mời sự 
          '@media(prefers-reduced-motion:reduce){.evb button.go{animation:none}}</style>'
          '<div class="w"><span>🎁 <b>THƯ MỜI · 9:00 CN 15/11</b> · Sự kiện Sun Saphia tại <b>Sun Gallery Đà Nẵng</b> (01 Phan Đăng Lưu)</span>'
          '<span class="q">· Bốc thăm quà Sharp, Philips, Sony</span><span class="k" id="evk"></span>'
-         '<button type="button" class="go" data-pop data-interest="Thư mời sự kiện 15/11 – Sun Gallery Đà Nẵng">Giữ thư mời</button></div>'
+         '<button type="button" class="go" data-evreg data-interest="Dải thư mời – đăng ký thư mời sự kiện 15/11 Sun Gallery Đà Nẵng" data-ev-t="Chất sống tinh hoa – Giao hòa nắng biển" data-ev-d="9:00 CN 15/11 · Đà Nẵng" data-ev-n="Sun Gallery Da Nang · 01 Phan Đăng Lưu, Hoà Cường">Giữ thư mời</button></div>'
          '<button type="button" class="x" aria-label="Ẩn thông báo" onclick="this.parentNode.remove();try{sessionStorage.setItem(\'evx\',1)}catch(e){}">×</button>'
          '<script>(function(){var b=document.getElementById("evbar"),end=Date.parse("2026-11-15T11:00:00+07:00"),n=Date.now();'
          'try{if(sessionStorage.getItem("evx"))n=end}catch(e){}if(n>=end){b.remove();return}'
          'var d=Math.ceil((Date.parse("2026-11-15T00:00:00+07:00")-n)/864e5),k=document.getElementById("evk");'
          'k.textContent=d>1?"Còn "+d+" ngày":d===1?"Ngày mai":"Hôm nay"})();</script></div>')
+
+
+_EVREG = {}
+
+
+def _evreg(h):
+    """lấy khối popup thư mời (modal #evReg + script) từ trang có mục sự kiện"""
+    if 'v' not in _EVREG and '<div id="evReg"' in h:
+        a = h.index('<div id="evReg"')
+        i = h.index('e.target.closest("[data-evreg]")', a)
+        _EVREG['v'] = h[a:h.index('</script>', i) + 9]
+    return _EVREG.get('v')
 
 
 def finish(h):
@@ -64,6 +76,9 @@ def finish(h):
                 'https://cdn.jsdelivr.net/gh/%s/%s@%s/%s' % (m.group(1), m.group(2), m.group(3), m.group(4)), h)
     if 'id="evbar"' not in h and '</header>' in h:
         h = h.replace('</header>', '</header>' + EVBAR, 1)
+    m = _evreg(h)
+    if m and 'id="evReg"' not in h and 'id="evbar"' in h and '</body>' in h:
+        h = h.replace('</body>', m + '</body>', 1)    # trang con: thêm popup thư mời cho nút "Giữ thư mời"
     if 'jsd-fallback' not in h and '<meta charset="utf-8">' in h:
         h = h.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n' + FB, 1)
     return h
