@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.20** + plugin Hoàng Hiệp CRM **2.20.253**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.21** + plugin Hoàng Hiệp CRM **2.20.253**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.16.21 (11/11/2026)
+
+- **Tiêu đề H2 có tên dự án (SEO)**: trang Sun Saphia Residence và The Poet trước dùng tiêu đề khẩu hiệu (VD "Tiện ích nghỉ dưỡng 'may đo'", "Nơi trở về là an nhiên") – nay mỗi mục ghi tên dự án + chủ đề khách hay tìm: "Tiện ích Sun Saphia Residence – nghỉ dưỡng 'may đo'", "Vị trí…", "Mặt bằng…", "Giá…", "Pháp lý…", "Cho thuê…". Phần chữ nghiêng cam giữ ý khẩu hiệu. Trang FourS đã có tên dự án sẵn; trang dự án tự động cũng vậy.
 
 ## Có gì mới – giao diện 2.16.20 (11/11/2026)
 
