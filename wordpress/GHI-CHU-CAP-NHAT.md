@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.16** + plugin Hoàng Hiệp CRM **2.20.253**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.17** + plugin Hoàng Hiệp CRM **2.20.253**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.16.17 (11/11/2026)
+
+- Theo anh Hiệp: màu hành động trên trang dự án đổi sang **cam** (nút "Nhận bảng giá", nút gửi form, nút chat chữ trắng nền cam); chữ nghiêng trong tiêu đề khung đăng ký (VD "khi có bảng giá") và số hotline ở khung đó cũng màu cam. Bản này thay màu vàng cam của 2.16.16.
 
 ## Có gì mới – giao diện 2.16.16 (11/11/2026)
 
