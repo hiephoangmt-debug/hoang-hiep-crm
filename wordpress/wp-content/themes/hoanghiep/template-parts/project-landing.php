@@ -104,6 +104,18 @@ table.hh-cards .unit-acts{justify-content:flex-start}
 .hh-gate4d .e{color:#c0392b;font-size:13px;min-height:1em;margin:-4px 0 8px}
 .hh-gate4d small{display:block;margin-top:10px;text-align:center;font-size:13px;color:#6b7891}
 .hh-gate4d small a{color:#E96118;font-weight:700;text-decoration:none}
+/* Màu hành động (11/2026): vàng cam rực trên nền navy – nút để lại thông tin nổi nhất trang; nút chat cùng màu. Zalo xanh dương, Gọi xanh lá giữ nguyên. */
+body.hh-landing{--act:#ff9f0a;--act2:#ffc93c;--act-ink:#1a1206}
+body.hh-landing .btn-gold,body.hh-landing a.btn-gold,body.hh-landing button.btn-gold{background:linear-gradient(135deg,var(--act),var(--act2));color:var(--act-ink);font-weight:700;box-shadow:0 0 0 3px rgba(255,201,60,.28),0 12px 26px -10px rgba(255,159,10,.95);transition:transform .15s,box-shadow .15s}
+body.hh-landing .btn-gold:hover{transform:translateY(-2px);box-shadow:0 0 0 4px rgba(255,201,60,.4),0 16px 30px -10px rgba(255,159,10,1);color:var(--act-ink)}
+body.hh-landing header .btn-gold,body.hh-landing .top .btn-gold{animation:hhActPulse 2.6s ease-out infinite}
+@keyframes hhActPulse{0%{box-shadow:0 0 0 0 rgba(255,183,40,.7),0 12px 26px -10px rgba(255,159,10,.95)}70%{box-shadow:0 0 0 12px rgba(255,183,40,0),0 12px 26px -10px rgba(255,159,10,.95)}100%{box-shadow:0 0 0 0 rgba(255,183,40,0),0 12px 26px -10px rgba(255,159,10,.95)}}
+@media (prefers-reduced-motion:reduce){body.hh-landing header .btn-gold,body.hh-landing .top .btn-gold{animation:none}}
+body.hh-landing .hhc{--hhc-cta:#ff9f0a}
+body.hh-landing .hhc__fab{background:linear-gradient(135deg,var(--act),var(--act2));color:var(--act-ink)}
+body.hh-landing .hhc__chip{border-color:#e08600;color:#a85f00}
+body.hh-landing .hhc__chip:hover{background:var(--act);color:var(--act-ink)}
+body.hh-landing .hhc__form button{color:var(--act-ink)}
 </style>
 </head>
 <body <?php body_class( 'hh-landing' ); ?>>
