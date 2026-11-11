@@ -95,7 +95,9 @@ $payment   = hh_table( 'hh_p_payment', 3 );
 $policy    = hh_lines( 'hh_p_policy' );
 $timeline  = hh_project_timeline( $id );
 $faq       = hh_project_faq( $id );
-$news      = function_exists( 'hh_project_news' ) ? array_slice( (array) hh_project_news( $id, 3 ), 0, 3 ) : array();
+$news      = function_exists( 'hh_project_news' ) ? hh_project_news( $id, 3 ) : array();
+// hh_project_news() trả WP_Query (hoặc null) – lấy ID bài, không ép (array) thẳng đối tượng (ra 3 ô rỗng).
+$news      = $news instanceof WP_Query ? array_slice( wp_list_pluck( $news->posts, 'ID' ), 0, 3 ) : array_slice( array_filter( array_map( 'intval', (array) $news ) ), 0, 3 );
 $zones     = hh_table( 'hh_p_zones', 4 );
 $highl     = hh_lines( 'hh_p_highlights' );
 $excerpt   = trim( wp_strip_all_tags( get_the_excerpt() ) );

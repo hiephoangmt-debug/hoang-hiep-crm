@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.13** + plugin Hoàng Hiệp CRM **2.20.248**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.14** + plugin Hoàng Hiệp CRM **2.20.248**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.16.14 (11/11/2026)
+
+- Trang dự án (mẫu tự động, ví dụ Casamia Balanca): mục **"Tin mới về …"** hiện 3 ô trắng rỗng. Nguyên nhân: giao diện đọc sai kết quả danh sách bài liên quan. Nay hiện đúng ảnh, ngày và tiêu đề 3 bài mới nhất của dự án; dự án chưa có bài thì ẩn mục này.
 
 ## Có gì mới – giao diện 2.16.13 (11/11/2026)
 
