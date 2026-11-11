@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.22** + plugin Hoàng Hiệp CRM **2.20.253**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.22** + plugin Hoàng Hiệp CRM **2.20.254**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.254 (11/11/2026)
+
+- **Ảnh cho dự án cũ** (thư mục Drive "dự án cũ"): **Hòa Bình Green Đà Nẵng** thêm 9 ảnh thực tế (toàn cảnh đêm, hồ bơi vô cực tầng mái, sảnh tiệc, căn hộ, view cầu Thuận Phước) – đã bỏ ảnh có logo đơn vị phân phối, chữ chìm trang khác, tên nhiếp ảnh gia, ảnh người mẫu, banner. **Sun Cosmo Residence** thêm mặt bằng tổng thể gốc của chủ đầu tư (bỏ bản có chữ chào bán chèn lên). Ariyana, Mường Thanh, Soleil: thư mục chỉ có bảng giá, hợp đồng, chính sách cũ – chưa có ảnh dùng được. Cài xong bấm "Nhập / cập nhật dữ liệu" rồi "Tải ảnh ngay".
 
 ## Có gì mới – giao diện 2.16.22 (11/11/2026)
 
