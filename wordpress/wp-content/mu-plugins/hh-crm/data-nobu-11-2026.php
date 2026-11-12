@@ -5,6 +5,8 @@
  * - Tiến độ tháng 10/2026 (đăng 09/11/2026): kết cấu đến tầng 22, mặt dựng kính tầng 7 – 13, cơ điện & PCCC tầng 17.
  * - Sửa số liệu: 186 là chiều cao (m) chứ không phải số phòng khách sạn – Nobu Hotels công bố khoảng 200 phòng, gồm 18 suite.
  * - Địa chỉ theo trang chính thức: Số 01 Võ Văn Kiệt, phường An Hải.
+ * - 12/11/2026: phân bổ chức năng 43 tầng (theo tài liệu giới thiệu dự án anh Hiệp gửi) – sơ đồ tự vẽ (bai-viet/nobu-phan-bo-tang-anh.py),
+ *   không dùng ảnh gốc vì có logo đơn vị phân phối; thêm mục nội dung + vị trí tầng cho tiện ích.
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -37,6 +39,7 @@ add_filter(
 			$im( 'tien-do-10-2026-co-dien-tang-14-16', 'Thi công cơ điện MEP, PCCC tầng 14 – 16 – tháng 10/2026', 'tiến độ', 'Thực tế 10/2026' ),
 			$im( 'tien-do-10-2026-xay-to-khoi-de', 'Xây tô, sơn nước tầng 2 – 6 khối đế – tháng 10/2026', 'tiến độ', 'Thực tế 10/2026' ),
 			$im( 'tien-do-10-2026-tang-ham', 'Xây tô, sơn nước và cơ điện tầng hầm B1, B2 – tháng 10/2026', 'tiến độ', 'Thực tế 10/2026' ),
+			$im( 'phan-bo-chuc-nang-tang', 'Sơ đồ phân bổ chức năng 43 tầng Nobu Residences Đà Nẵng: khách sạn tầng 7 – 16, căn hộ tầng 19 – 36, Sky Villa tầng 38 – 40, penthouse tầng 41', 'mặt bằng', 'Phân bổ chức năng tầng' ),
 			$im( 'tien-do-8-2026-cong-truong', 'Công trường Nobu Đà Nẵng tháng 8/2026 (ảnh thực tế của chủ đầu tư)', 'tiến độ', 'Thực tế 8/2026' ),
 		);
 		$sw = array(
@@ -46,16 +49,44 @@ add_filter(
 			'264 căn hộ và 186 phòng khách sạn'               => '264 căn hộ du lịch hàng hiệu và khách sạn Nobu khoảng 200 phòng',
 		);
 		$fix = static fn( $s ) => str_replace( array_keys( $sw ), array_values( $sw ), (string) $s );
+		// 12/11/2026: vị trí tầng của tiện ích, khách sạn.
+		$sw2  = array(
+			"Khách sạn Nobu khoảng 200 phòng (gồm 18 suite)\n" => "Khách sạn Nobu khoảng 200 phòng, gồm 18 suite (tầng 7 – 16)\n",
+			'Spa, phòng gym'                                  => "Trung tâm spa & chăm sóc sức khỏe (tầng 3 – 4), phòng gym\nSảnh hội nghị (tầng 5)\nNhà hàng Taste of Asia (tầng 6)\nNhà hàng – bar trên không Tsukimidai (tầng 43)",
+		);
+		$fix2 = static fn( $s ) => str_replace( array_keys( $sw2 ), array_values( $sw2 ), (string) $s );
+		$tang = '<h2>Phân bổ chức năng các tầng Nobu Residences Đà Nẵng</h2>
+<p>Tháp Nobu Đà Nẵng cao 43 tầng được chia thành các khối rõ ràng: khối đế dịch vụ (tầng 1 – 6), khách sạn Nobu (tầng 7 – 16), căn hộ thương hiệu Nobu (tầng 19 – 36), Sky Villa và penthouse (tầng 38 – 41), trên cùng là nhà hàng Nobu và bar trên không. Tầng 17 và 37 là tầng lánh nạn, tầng 18 là tầng tiện ích.</p>
+<table>
+<tr><th>Tầng</th><th>Chức năng</th></tr>
+<tr><td>43</td><td>Nhà hàng – bar trên không Tsukimidai</td></tr>
+<tr><td>42</td><td>Nhà hàng Nobu</td></tr>
+<tr><td>41</td><td>Penthouse</td></tr>
+<tr><td>38 – 40</td><td>Biệt thự trên không (Sky Villa)</td></tr>
+<tr><td>37</td><td>Tầng lánh nạn</td></tr>
+<tr><td>19 – 36</td><td>Căn hộ thương hiệu Nobu</td></tr>
+<tr><td>18</td><td>Tầng tiện ích (hồ bơi nước ấm)</td></tr>
+<tr><td>17</td><td>Tầng lánh nạn</td></tr>
+<tr><td>7 – 16</td><td>Khách sạn Nobu</td></tr>
+<tr><td>6</td><td>Nhà hàng Taste of Asia</td></tr>
+<tr><td>5</td><td>Sảnh hội nghị</td></tr>
+<tr><td>3 – 4</td><td>Trung tâm spa &amp; chăm sóc sức khỏe</td></tr>
+<tr><td>2</td><td>Văn phòng</td></tr>
+<tr><td>1</td><td>Sảnh đón</td></tr>
+</table>
+<p>Căn hộ bắt đầu từ tầng 19, nằm trên khối khách sạn và tầng tiện ích nên tầm nhìn ra biển Mỹ Khê, sông Hàn thoáng hơn. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> để nhận mặt bằng từng tầng và danh sách căn còn trống.</p>
+';
 		foreach ( $projects as $i => $p ) {
 			if ( 'nobu-da-nang' !== ( $p['slug'] ?? '' ) ) {
 				continue;
 			}
 			foreach ( array( 'hh_p_units', 'hh_p_amenities_in', 'hh_p_highlights' ) as $k ) {
 				$cur = (string) ( $p['meta'][ $k ] ?? '' );
-				$new = $fix( $cur );
+				$v1  = $fix( $cur );
+				$new = $fix2( $v1 );
 				if ( $new !== $cur ) {
 					$p['meta'][ $k ]       = $new;
-					$p['fix_meta'][ $k ]   = array_merge( (array) ( $p['fix_meta'][ $k ] ?? array() ), array( $cur ) );
+					$p['fix_meta'][ $k ]   = array_merge( (array) ( $p['fix_meta'][ $k ] ?? array() ), array_unique( array( $cur, $v1 ) ) );
 				}
 			}
 			$upd = array(
@@ -71,18 +102,23 @@ add_filter(
 			}
 			$cur_img = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
 			$p['meta']['hh_p_image_links'] = trim( $cur_img . "\n" . implode( "\n", $imgs ) );
-			if ( '' !== $cur_img ) {
-				$p['fix_meta']['hh_p_image_links'] = array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $cur_img ) );
-			}
+			// Bản 10/11 (chưa có sơ đồ phân bổ tầng) đã nhập lên web → cho phép thay.
+			$imgs_10 = array_values( array_filter( $imgs, static fn( $l ) => false === strpos( $l, 'phan-bo-chuc-nang-tang' ) ) );
+			$p['fix_meta']['hh_p_image_links'] = array_merge(
+				(array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ),
+				array_filter( array( $cur_img, trim( $cur_img . "\n" . implode( "\n", $imgs_10 ) ) ) )
+			);
 			$old_ex = (string) ( $p['excerpt'] ?? '' );
 			if ( $fix( $old_ex ) !== $old_ex ) {
 				$p['excerpt']     = $fix( $old_ex );
 				$p['fix_excerpt'] = array_merge( (array) ( $p['fix_excerpt'] ?? array() ), array( $old_ex ) );
 			}
 			$old_ct = (string) ( $p['content'] ?? '' );
-			if ( $fix( $old_ct ) !== $old_ct ) {
-				$p['content']     = $fix( $old_ct );
-				$p['fix_content'] = array_merge( (array) ( $p['fix_content'] ?? array() ), array( $old_ct ) );
+			$ct1    = $fix( $old_ct );
+			$ct2    = false === strpos( $ct1, 'Phân bổ chức năng các tầng' ) ? str_replace( '<h2>Pháp lý &amp; tiến độ</h2>', $tang . '<h2>Pháp lý &amp; tiến độ</h2>', $ct1 ) : $ct1;
+			if ( $ct2 !== $old_ct ) {
+				$p['content']     = $ct2;
+				$p['fix_content'] = array_merge( (array) ( $p['fix_content'] ?? array() ), array_unique( array( $old_ct, $ct1 ) ) );
 			}
 			$projects[ $i ] = $p;
 		}

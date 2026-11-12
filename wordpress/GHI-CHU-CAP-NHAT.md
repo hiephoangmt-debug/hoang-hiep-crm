@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.24** + plugin Hoàng Hiệp CRM **2.20.254**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.24** + plugin Hoàng Hiệp CRM **2.20.255**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.255 (12/11/2026)
+
+- **Nobu Residences Đà Nẵng – phân bổ chức năng 43 tầng:** thêm mục "Phân bổ chức năng các tầng" (bảng tầng 1 → 43: sảnh, văn phòng, spa, hội nghị, Taste of Asia, khách sạn tầng 7 – 16, tầng tiện ích 18, căn hộ tầng 19 – 36, Sky Villa 38 – 40, penthouse 41, nhà hàng Nobu 42, bar trên không 43) và sơ đồ tự vẽ vào phần mặt bằng. Không dùng ảnh gốc vì có logo đơn vị phân phối. Danh sách tiện ích nội khu ghi rõ tầng.
+- Cài: Nhập nhanh → tải `cap-nhat-code.zip` → "Nhập / cập nhật dữ liệu" → **"Tải ảnh ngay"** (có 1 ảnh mới) → LiteSpeed Purge All.
 
 ## Có gì mới – giao diện 2.16.24 (12/11/2026)
 
