@@ -1961,14 +1961,42 @@ const API_BASE = '';
     hideChips();
     var first = !st.msgs.some(function (m) { return m.from === 'v'; });
     push({ from: 'v', text: text });
-    post('message', { text: text, first: first });
     var ph = text.match(PHONE_RE);
-    if (ph && !st.lead.phone) { gotLead('', ph[0], 'Chat trên trang (gõ số)'); return thanks(); }
     var humanRecent = st.msgs.some(function (m) { return m.human && Date.now() - m.at < 600000; });
+    var isChip = L.intents.some(function (it) { return it.label === text; });
+    // Câu tự gõ → chat AI (Claude qua Google Apps Script) nếu bật; anh Hiệp đang trả lời trực tiếp thì AI im lặng
+    if (L.ai && GAS && !isChip && !humanRecent && !(ph && !st.lead.phone)) return askAi(text, first);
+    post('message', { text: text, first: first });
+    if (ph && !st.lead.phone) { gotLead('', ph[0], 'Chat trên trang (gõ số)'); return thanks(); }
     if (humanRecent) return; // anh Hiệp đang trả lời trực tiếp qua Telegram thì bot im lặng
+    scripted(text);
+  }
+  function scripted(text) {
     var it = findIntent(text);
     if (it) return answer(it.steps);
     if (!st.fallback) { st.fallback = true; save(); say(L.fallback); }
+  }
+  // ---- Chat AI: chưa cài khoá / lỗi / quá 25 giây → quay về kịch bản soạn sẵn ----
+  function askAi(text, first) {
+    timers.forEach(clearTimeout); timers = []; typing(true);
+    var done = false;
+    function finish(d) {
+      if (done) return; done = true; typing(false);
+      if (!d || !d.reply) return scripted(text);
+      push({ from: 'a', text: String(d.reply), zalo: d.action === 'zalo', ai: true });
+      if (d.action === 'zalo') { st.zalo = true; save(); }
+      if (d.action === 'form' && !st.lead.phone) setTimeout(leadForm, 1500);
+    }
+    setTimeout(function () { finish(null); }, 25000);
+    var b = { type: 'message', ai: true, text: text, first: first, v: vid, page: location.href, utm: sget('casamia_utm') || '',
+      name: st.lead.name, phone: st.lead.phone,
+      transcript: st.msgs.slice(-8).map(function (m) { return { from: m.from === 'v' ? 'visitor' : 'agent', text: m.text, auto: !m.human, ai: !!m.ai }; }),
+      history: st.msgs.slice(-14).map(function (m) { return { from: m.from === 'v' ? 'visitor' : 'agent', text: m.text }; }) };
+    try {
+      fetch(GAS, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(b) })
+        .then(function (r) { return r.json(); }).then(finish, function () { finish(null); });
+    } catch (e) { finish(null); }
+    startPoll();
   }
   form.onsubmit = function (e) { e.preventDefault(); var t = input.value; input.value = ''; send(t); };
 
