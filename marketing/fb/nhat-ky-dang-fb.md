@@ -42,3 +42,4 @@
 | 11/11/2026 | Sun | 16:00 | (bài web mới 14:00) Giá Sun Symphony 5 – giỏ hàng 11/2026 (1 ảnh dọc) | /gia-symphony-5-sun-symphony-residence-bao-nhieu/ |
 | 11/11/2026 | Sun | 20:00 | (bài web mới 16:30) Căn 2PN Sun Saphia Residence 60–70 m² (1 ảnh dọc) | /can-2pn-sun-saphia-residence-60-70m2-o-hay-cho-thue/ |
 | 11/11/2026 | Sun | 13:00 | (anh Hiệp yêu cầu) Studio Sun Saphia – album 3 ảnh nội thất minh hoạ căn studio tầng điển hình | /studio-sun-saphia-residence-30-m2-bo-tri-ai-nen-mua/ |
+| 12/11/2026 | Sun | 12:30 | (bài web mới 11:30) Người nước ngoài, Việt kiều mua Sun Saphia Residence (1 ảnh dọc) | /nguoi-nuoc-ngoai-viet-kieu-mua-sun-saphia-residence-duoc-khong/ |
