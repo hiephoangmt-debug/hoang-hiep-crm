@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.23** + plugin Hoàng Hiệp CRM **2.20.254**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.24** + plugin Hoàng Hiệp CRM **2.20.254**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.16.24 (12/11/2026)
+
+- **Ảnh không bị cắt, không tràn**: cột tin bên phải (trang Tin tức, trang chủ) trước dùng ảnh thu nhỏ cắt vuông nên mất chữ trên ảnh bìa – nay dùng ảnh không cắt, khung 16:9, hiện trọn ảnh (nền navy lấp phần trống). Tin nổi bật, ảnh đầu bài viết, ô "Tin mới" trên trang dự án cũng hiện trọn ảnh. Thẻ dự án đổi khung 16:9 và dùng ảnh không cắt sẵn.
 
 ## Có gì mới – giao diện 2.16.23 (11/11/2026)
 

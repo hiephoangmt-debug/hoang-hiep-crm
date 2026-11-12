@@ -68,7 +68,7 @@ $rest  = 1 === $paged ? array_slice( $posts, 5 ) : $posts;
 					<li>
 						<a class="news-list__media" href="<?php the_permalink(); ?>">
 							<?php if ( has_post_thumbnail() ) : ?>
-								<?php the_post_thumbnail( 'thumbnail' ); ?>
+								<?php the_post_thumbnail( 'medium' ); ?>
 							<?php else : ?>
 								<span class="media-placeholder"><?php echo hh_icon( 'file' ); // phpcs:ignore ?></span>
 							<?php endif; ?>

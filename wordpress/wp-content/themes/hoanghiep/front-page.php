@@ -238,7 +238,7 @@ if ( $news->have_posts() ) :
 						<li>
 							<a class="news-list__media" href="<?php the_permalink(); ?>">
 								<?php if ( has_post_thumbnail() ) : ?>
-									<?php the_post_thumbnail( 'thumbnail', array( 'loading' => 'lazy' ) ); ?>
+									<?php the_post_thumbnail( 'medium', array( 'loading' => 'lazy' ) ); ?>
 								<?php else : ?>
 									<span class="media-placeholder"><?php echo hh_icon( 'file' ); // phpcs:ignore ?></span>
 								<?php endif; ?>

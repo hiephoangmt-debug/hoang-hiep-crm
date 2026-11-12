@@ -14,7 +14,7 @@ if ( $resale ) {
 <article class="project-card">
 	<a class="project-card__media" href="<?php the_permalink(); ?>">
 		<?php if ( has_post_thumbnail() ) : ?>
-			<?php the_post_thumbnail( 'hh-card', array( 'loading' => 'lazy' ) ); ?>
+			<?php the_post_thumbnail( 'medium_large', array( 'loading' => 'lazy' ) ); ?>
 		<?php else : ?>
 			<span class="media-placeholder"><?php echo hh_icon( 'building' ); // phpcs:ignore ?></span>
 		<?php endif; ?>
