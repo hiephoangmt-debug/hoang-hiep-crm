@@ -599,5 +599,79 @@ HTML
 		),
 	);
 
+
+	/* ---------------- 13/11 – VSIP làm nhà đầu tư hạ tầng vị trí số 7 Khu thương mại tự do (QĐ 5202/QĐ-UBND) ---------------- */
+	$posts[] = array(
+		'slug'           => 'vsip-vi-tri-so-7-khu-thuong-mai-tu-do-da-nang-3525-ty',
+		'title'          => 'Đà Nẵng chọn VSIP làm hạ tầng vị trí số 7 Khu thương mại tự do: 3.525 tỷ, 276 ha tại Hòa Vang',
+		'excerpt'        => 'Quyết định 5202/QĐ-UBND ngày 12/11/2026 chấp thuận VSIP là nhà đầu tư dự án hạ tầng khu chức năng vị trí số 7 Khu thương mại tự do Đà Nẵng: khoảng 276 ha tại xã Hòa Vang, vốn 3.525 tỷ đồng, xây hạ tầng từ quý 4/2027 đến quý 1/2032.',
+		'keyword'        => 'khu thương mại tự do Đà Nẵng vị trí số 7',
+		'keywords_extra' => array( 'VSIP Đà Nẵng', 'Quyết định 5202/QĐ-UBND', 'bất động sản Hòa Vang', 'khu thương mại tự do Đà Nẵng' ),
+		'project'        => 'spana-tower',
+		'schedule'       => '2026-11-13 07:00',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Hạ tầng Đà Nẵng', 'Khu thương mại tự do', 'Hòa Vang' ),
+		'image'          => 'plugin:img/tin-tuc/vsip-vi-tri-7-khu-thuong-mai-tu-do-11-2026.jpg',
+		'image_alt'      => 'VSIP làm nhà đầu tư hạ tầng vị trí số 7 Khu thương mại tự do Đà Nẵng, 3.525 tỷ đồng',
+		'content'        => <<<HTML
+<p>Ngày 12/11/2026, UBND TP Đà Nẵng ban hành <strong>Quyết định 5202/QĐ-UBND</strong>, chấp thuận Công ty Liên doanh TNHH Khu công nghiệp Việt Nam – Singapore (<strong>VSIP</strong>) là nhà đầu tư dự án đầu tư xây dựng và kinh doanh kết cấu hạ tầng khu chức năng tại <strong>vị trí số 7 – Khu thương mại tự do Đà Nẵng</strong>, xã Hòa Vang. Đây là bước tiếp theo sau khi thành phố chấp thuận chủ trương đầu tư dự án (Quyết định 4785/QĐ-UBND) hồi giữa tháng 10/2026.</p>
+<!--hh-featured-->
+<h2>Dự án hạ tầng vị trí số 7: những con số chính</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Theo báo chí đưa tin</th></tr></thead>
+<tbody>
+<tr><td>Văn bản</td><td>Quyết định 5202/QĐ-UBND ngày 12/11/2026 của UBND TP Đà Nẵng</td></tr>
+<tr><td>Nhà đầu tư</td><td>Công ty Liên doanh TNHH Khu công nghiệp Việt Nam – Singapore (VSIP)</td></tr>
+<tr><td>Vị trí</td><td>Vị trí số 7, Khu thương mại tự do Đà Nẵng – xã Hòa Vang</td></tr>
+<tr><td>Quy mô</td><td>Khoảng 276 ha (một số báo ghi khoảng 270 ha)</td></tr>
+<tr><td>Tổng vốn</td><td>3.525 tỷ đồng (khoảng 132,9 triệu USD)</td></tr>
+<tr><td>Tiến độ</td><td>San lấp mặt bằng, xây hạ tầng từ quý 4/2027 đến quý 1/2032; kinh doanh, thu hút nhà đầu tư thứ cấp từ quý 4/2028</td></tr>
+<tr><td>Thời hạn</td><td>70 năm kể từ ngày được quyết định cho thuê đất; vốn phải giải ngân hết trong 5 năm kể từ khi nhận đất</td></tr>
+<tr><td>Định hướng</td><td>Sản xuất, logistics, công nghệ số, công nghệ thông tin</td></tr>
+</tbody>
+</table>
+<h2>Khu thương mại tự do Đà Nẵng đang ở đâu?</h2>
+<p>Khu thương mại tự do Đà Nẵng được Thủ tướng quyết định thành lập năm 2025, tổng diện tích khoảng 1.881 ha chia ở 7 vị trí, gắn với cảng Liên Chiểu ở phía Tây Bắc (xem <a href="/cang-lien-chieu-khu-thuong-mai-tu-do-bat-dong-san-lien-chieu/">cảng Liên Chiểu và Khu thương mại tự do</a>). Vị trí số 7 nằm ở vùng phía Tây thành phố; theo quyết định thành lập ban đầu, vị trí này rộng khoảng 401 ha – con số 276 ha trong dự án hạ tầng lần này nhỏ hơn, báo chí chưa giải thích phần chênh lệch. Quy hoạch chung Đà Nẵng đến 2050 cũng xác định đưa 7 vị trí của Khu thương mại tự do vào hoạt động (xem <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">quy hoạch chung 2050</a>).</p>
+<!--hh-img:img/hoa-xuan/hoa-xuan-flycam-8-2025-song-cam-le-nhin-ve-trung-tam.jpg|Sông Cẩm Lệ và khu Hòa Xuân nhìn về trung tâm Đà Nẵng – khu đô thị phía Nam gần nhất với vùng phát triển phía Tây (ảnh flycam thực tế tháng 8/2025)-->
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Có nhà đầu tư hạ tầng chuyên nghiệp:</strong> VSIP là đơn vị đã làm nhiều khu công nghiệp tại Việt Nam; việc chọn được nhà đầu tư cho thấy Khu thương mại tự do bắt đầu chuyển từ quy hoạch sang triển khai thực tế ở vị trí này.</li>
+<li><strong>Tác động là dài hạn:</strong> hạ tầng làm từ cuối 2027 đến đầu 2032, doanh nghiệp thứ cấp vào sớm nhất từ cuối 2028. Nhu cầu nhà ở cho người lao động, chuyên gia sẽ tăng dần theo tiến độ lấp đầy, không phải ngay lập tức.</li>
+<li><strong>Đất Hòa Vang: kiểm tra quy hoạch trước khi mua:</strong> khu vực quanh các vị trí Khu thương mại tự do sẽ có thu hồi đất, tái định cư. Anh chị nên kiểm tra quy hoạch sử dụng đất, chỉ giới đường quy hoạch tại UBND xã hoặc văn phòng đăng ký đất đai, tránh mua theo tin "sắp lên khu công nghiệp".</li>
+<li><strong>Căn hộ khu Nam – Tây Nam hưởng lợi gián tiếp:</strong> các khu đô thị có sẵn hạ tầng như Hòa Xuân, Cẩm Lệ là nơi chuyên gia, nhân sự quản lý thường chọn ở vì gần trung tâm hơn và đủ tiện ích; nhu cầu thuê có thể tăng khi các khu chức năng đi vào hoạt động.</li>
+<li><strong>Không mua đuổi theo tin:</strong> mức hưởng lợi phụ thuộc tiến độ thực tế và tốc độ thu hút doanh nghiệp. Nên theo dõi các mốc giao đất, khởi công hạ tầng năm 2027.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/spana-tower/">Spana Tower Hòa Xuân</a> – căn hộ Sun Group ven sông Cẩm Lệ, thuộc khu đô thị phía Nam có hạ tầng sẵn; nhu cầu ở và thuê của chuyên gia, nhân sự khi vùng phía Tây phát triển là động lực dài hạn.</li>
+<li><a href="/du-an/sun-neo-city/">Sun NeO City Hòa Xuân</a> – khu đô thị Sun Group ở Hòa Xuân, cùng hướng phát triển phía Nam – Tây Nam thành phố.</li>
+<li><a href="/du-an/ecohome-hoa-hiep-da-nang/">Nhà ở xã hội Ecohome Hòa Hiệp</a> – khu Tây Bắc gần cảng Liên Chiểu và các vị trí khác của Khu thương mại tự do, phù hợp nhu cầu nhà ở của người lao động.</li>
+</ul>
+<p>Cần xem quy hoạch một thửa đất ở Hòa Vang hoặc tìm căn hộ cho thuê gần các khu công nghiệp, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: Quyết định 5202/QĐ-UBND ngày 12/11/2026 của UBND TP Đà Nẵng theo báo chí đưa tin ngày 12 – 13/11/2026 (Sài Gòn Giải Phóng, Báo Đầu tư, Doanh nghiệp Hội nhập); chủ trương đầu tư (Quyết định 4785/QĐ-UBND) theo Tuổi Trẻ, CafeF tháng 10/2026; quyết định thành lập Khu thương mại tự do theo Dân trí, VietNamNet. Bài viết theo trích yếu báo chí, chưa đọc toàn văn quyết định.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'VSIP làm hạ tầng vị trí số 7 khu thương mại tự do',
+			'desc'      => 'QĐ 5202/QĐ-UBND (12/11/2026) chọn VSIP làm hạ tầng vị trí số 7 Khu thương mại tự do Đà Nẵng: 276 ha ở Hòa Vang, vốn 3.525 tỷ, làm từ 2027 đến 2032.',
+			'points'    => array(
+				'Quyết định 5202/QĐ-UBND ngày 12/11/2026 chấp thuận VSIP là nhà đầu tư hạ tầng vị trí số 7 Khu thương mại tự do Đà Nẵng',
+				'Khoảng 276 ha tại xã Hòa Vang, vốn 3.525 tỷ đồng, hạ tầng làm từ quý 4/2027 đến quý 1/2032',
+				'Tác động bất động sản là dài hạn; đất Hòa Vang cần kiểm tra quy hoạch, thu hồi đất trước khi mua',
+			),
+			'faq'       => array(
+				array( 'Vị trí số 7 Khu thương mại tự do Đà Nẵng ở đâu?', 'Theo báo chí, dự án hạ tầng vị trí số 7 nằm tại xã Hòa Vang, TP Đà Nẵng, quy mô khoảng 276 ha.' ),
+				array( 'Ai là nhà đầu tư hạ tầng vị trí số 7?', 'Công ty Liên doanh TNHH Khu công nghiệp Việt Nam – Singapore (VSIP), được chấp thuận tại Quyết định 5202/QĐ-UBND ngày 12/11/2026.' ),
+				array( 'Khi nào dự án hạ tầng vị trí số 7 xây dựng?', 'Giai đoạn san lấp mặt bằng và xây hạ tầng dự kiến từ quý 4/2027 đến quý 1/2032; thu hút nhà đầu tư thứ cấp từ quý 4/2028.' ),
+			),
+		),
+		'sources'        => array(
+			'https://www.sggp.org.vn/chap-thuan-vsip-dau-tu-du-an-ha-tang-3525-ty-dong-tai-khu-thuong-mai-tu-do-da-nang-post881457.html',
+			'https://doanhnghiephoinhap.vn/da-nang-chap-thuan-vsip-dau-tu-ha-tang-vi-tri-so-7-khu-thuong-mai-tu-do-hon-3500-ty-dong-154119.html',
+			'https://baodautu.vn/hon-3520-ty-dong-dau-tu-vi-tri-so-7-khu-thuong-mai-tu-do-da-nang-d726715.html',
+			'https://tuoitre.vn/lo-dien-nha-dau-tu-rot-3525-ti-dong-vao-khu-thuong-mai-tu-do-da-nang-100261019115924845.htm',
+			'https://dantri.com.vn/thoi-su/quyet-dinh-7-vi-tri-lam-khu-thuong-mai-tu-do-da-nang-20250616155817749.htm',
+		),
+	);
 	return $posts;
 }
