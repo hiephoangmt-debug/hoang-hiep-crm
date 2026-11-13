@@ -1129,6 +1129,32 @@ add_action(
 	}
 );
 
+/**
+ * Một dòng danh sách sale dán vào: chấp nhận "Họ tên | SĐT | email", dòng copy từ Excel / Google Sheets (cách nhau bằng Tab),
+ * dấu phẩy, chấm phẩy, gạch ngang, hoặc chỉ "Họ tên 0905 111 222 email" như tin nhắn Zalo. Trả về [tên, sđt, email] hoặc null.
+ */
+function hh_sale_parse_line( $line ) {
+	$line = trim( preg_replace( '/^\s*(\d{1,3}[.)]\s+|[-•*+]\s+)/u', '', (string) $line ) ); // bỏ số thứ tự "1." / gạch đầu dòng
+	if ( '' === $line ) {
+		return null;
+	}
+	$email = '';
+	if ( preg_match( '/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/', $line, $m ) ) {
+		$email = $m[0];
+		$line  = str_replace( $m[0], ' ', $line );
+	}
+	if ( ! preg_match( '/(\+?84|0)[\d .\-]{8,13}\d/', $line, $m ) ) {
+		return null;
+	}
+	$phone = trim( $m[0] );
+	$name  = trim( preg_replace( '/[|\t,;:–—\-]+/u', ' ', str_replace( $m[0], ' ', $line ) ) );
+	$name  = trim( preg_replace( '/\s+/u', ' ', $name ) );
+	if ( '' === $name || preg_match( '/^(h[oọ] t[eê]n|t[eê]n|name)$/iu', $name ) ) {
+		return null;
+	}
+	return array( $name, $phone, $email );
+}
+
 /** Số điện thoại → tên đăng nhập (chỉ chữ số, đầu 0). */
 function hh_sale_phone_login( $phone ) {
 	$d = preg_replace( '/\D/', '', (string) $phone );
@@ -1158,8 +1184,8 @@ add_action(
 		$msgs = array();
 		if ( 'create' === $do ) {
 			foreach ( preg_split( '/\R/u', (string) wp_unslash( $_POST['list'] ?? '' ) ) as $line ) {
-				$p = array_map( 'trim', explode( '|', $line ) );
-				if ( count( $p ) < 2 || '' === $p[0] ) {
+				$p = hh_sale_parse_line( $line );
+				if ( ! $p ) {
 					continue;
 				}
 				$name  = sanitize_text_field( $p[0] );
@@ -1248,12 +1274,15 @@ function hh_sale_admin_page() {
 		}
 		if ( ! empty( $flash[1] ) ) {
 			$txt = '';
-			echo '<div class="notice notice-success"><p><b>Tài khoản / mật khẩu – chỉ hiện 1 lần, hãy gửi riêng cho từng sale qua Zalo:</b></p><table class="widefat striped" style="max-width:720px"><tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Mật khẩu</th></tr>';
+			echo '<div class="notice notice-success"><p><b>Tài khoản / mật khẩu – chỉ hiện 1 lần, hãy gửi riêng cho từng sale qua Zalo:</b></p><table class="widefat striped" style="max-width:860px"><tr><th>Họ tên</th><th>Tên đăng nhập</th><th>Mật khẩu</th><th></th></tr>';
+			echo '<style>.hh-cp{cursor:pointer}.hh-cp.ok{background:#16a34a!important;border-color:#16a34a!important;color:#fff!important}</style>';
 			foreach ( $flash[1] as $r ) {
-				printf( '<tr><td>%s</td><td><code>%s</code></td><td><code>%s</code></td></tr>', esc_html( $r[0] ), esc_html( $r[1] ), esc_html( $r[2] ) );
-				$txt .= $r[0] . ": vào " . hh_sale_url() . " – tài khoản " . $r[1] . " – mật khẩu " . $r[2] . "\n";
+				$one  = 'Chào ' . $r[0] . ", đây là tài khoản Khu Sale Hoàng Hiệp của bạn:\n- Trang: " . hh_sale_url() . "\n- Tên đăng nhập: " . $r[1] . "\n- Mật khẩu: " . $r[2] . "\nĐăng nhập xong vào Tổng quan bấm nối Telegram để nhận báo khách mới. Không chia sẻ tài khoản cho người khác.";
+				$txt .= $one . "\n\n";
+				printf( '<tr><td>%s</td><td><code>%s</code></td><td><code>%s</code></td><td><button type="button" class="button hh-cp" data-t="%s">Sao chép tin nhắn</button></td></tr>', esc_html( $r[0] ), esc_html( $r[1] ), esc_html( $r[2] ), esc_attr( $one ) );
 			}
-			echo '</table><p>Mẫu tin nhắn (sao chép gửi từng người):</p><textarea readonly rows="' . (int) min( 12, count( $flash[1] ) + 1 ) . '" style="width:100%;max-width:720px">' . esc_textarea( $txt ) . '</textarea></div>';
+			echo '</table><p><button type="button" class="button button-primary hh-cp" data-t="' . esc_attr( trim( $txt ) ) . '">Sao chép tất cả</button> <span class="description">Bấm "Sao chép tin nhắn" rồi dán vào Zalo của từng sale.</span></p><textarea readonly rows="' . (int) min( 14, count( $flash[1] ) * 6 + 1 ) . '" style="width:100%;max-width:720px" onclick="this.select()">' . esc_textarea( trim( $txt ) ) . '</textarea></div>';
+			echo "<script>document.querySelectorAll('.hh-cp').forEach(function(b){b.addEventListener('click',function(){var t=b.dataset.t,l=b.textContent,done=function(){b.classList.add('ok');b.textContent='Đã sao chép ✓';setTimeout(function(){b.classList.remove('ok');b.textContent=l},1800)};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done)}else{var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();done()}})})</script>";
 		}
 	}
 	// Danh sách.
@@ -1278,7 +1307,7 @@ function hh_sale_admin_page() {
 	// Tạo hàng loạt.
 	echo '<h2 style="margin-top:28px">Tạo tài khoản</h2><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
 	wp_nonce_field( 'hh_sale_admin', 'n' );
-	echo '<input type="hidden" name="action" value="hh_sale_admin"><input type="hidden" name="do" value="create"><p>Mỗi dòng 1 người: <code>Họ tên | Số điện thoại | Email (không bắt buộc)</code>. Tên đăng nhập là số điện thoại; mật khẩu tạo ngẫu nhiên, hiện 1 lần sau khi bấm Tạo. Có email thì sale nhận thư báo khi được giao khách.</p><textarea name="list" rows="10" style="width:100%;max-width:720px" placeholder="Nguyễn Văn A | 0905 111 222&#10;Trần Thị B | 0935 333 444 | b@gmail.com"></textarea><p><button class="button button-primary">Tạo tài khoản</button></p></form>';
+	echo '<input type="hidden" name="action" value="hh_sale_admin"><input type="hidden" name="do" value="create"><p>Mỗi dòng 1 người. Dán thẳng được: 2–3 cột <b>Họ tên – Số điện thoại – Email</b> copy từ Excel / Google Sheets, hoặc danh sách gõ trong Zalo kiểu <code>Nguyễn Văn A 0905 111 222</code>, <code>1. Trần Thị B - 0935333444</code>, <code>Lê C | 0914555666 | c@gmail.com</code> (dòng tiêu đề, số thứ tự tự bỏ qua). Tên đăng nhập là số điện thoại; mật khẩu tạo ngẫu nhiên, hiện 1 lần sau khi bấm Tạo. Có email thì sale nhận thư báo khi được giao khách.</p><textarea name="list" rows="10" style="width:100%;max-width:720px" placeholder="Nguyễn Văn A | 0905 111 222&#10;Trần Thị B | 0935 333 444 | b@gmail.com"></textarea><p><button class="button button-primary">Tạo tài khoản</button></p></form>';
 	// Cài đặt.
 	$auto = '1' === (string) get_option( 'hh_sale_autoassign', '0' );
 	echo '<h2 style="margin-top:28px">Chia khách</h2><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';

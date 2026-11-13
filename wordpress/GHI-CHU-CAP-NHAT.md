@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.30** + plugin Hoàng Hiệp CRM **2.20.263**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.30** + plugin Hoàng Hiệp CRM **2.20.264**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.264 (14/11/2026)
+
+- **Khu Sale – tạo tài khoản dễ hơn:** dán thẳng danh sách copy từ Excel / Google Sheets (cột Họ tên – SĐT – Email) hoặc gõ trong Zalo kiểu "Nguyễn Văn A 0905 111 222", "1. Trần B - 0935…" – tự bỏ dòng tiêu đề, số thứ tự. Sau khi tạo: nút **Sao chép tin nhắn** cho từng sale (tin nhắn có sẵn link, tên đăng nhập, mật khẩu, hướng dẫn nối Telegram) và **Sao chép tất cả**.
+- Sale đã đăng nhập không còn bị tính vào thống kê truy cập Metricool (số liệu khách thật không bị lẫn).
 
 ## Có gì mới – 2.20.263 (14/11/2026) – Khu Sale nội bộ (bước 1)
 

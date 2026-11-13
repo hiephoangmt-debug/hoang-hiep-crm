@@ -16,7 +16,7 @@ if ( ! defined( 'HH_METRICOOL_HASH' ) ) {
 add_action(
 	'wp_head',
 	static function () {
-		if ( is_admin() || current_user_can( 'edit_posts' ) || '' === HH_METRICOOL_HASH ) {
+		if ( is_admin() || current_user_can( 'edit_posts' ) || current_user_can( 'hh_sale_portal' ) || '' === HH_METRICOOL_HASH ) {
 			return;
 		}
 		$src  = 'https://tracker.metricool.com/resources/be.js';
