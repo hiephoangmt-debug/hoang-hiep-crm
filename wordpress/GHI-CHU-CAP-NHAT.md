@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.28** + plugin Hoàng Hiệp CRM **2.20.261**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.29** + plugin Hoàng Hiệp CRM **2.20.261**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -43,6 +43,7 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 ## Có gì mới – 2.20.261 (13/11/2026)
 
+- **Nobu tiếng Anh (giao diện 2.16.29):** sửa trên điện thoại ảnh nội thất / thư viện ảnh hiện khổ gốc tràn ra ngoài màn hình làm cả trang bị thu nhỏ – nay ảnh vừa khung, 1 cột trên điện thoại.
 - **Ảnh đại diện mới cho toàn bộ bài viết** (179 bài đã đăng + 28 bài đang chờ tự đăng): khổ **1200×630** – đúng khung thẻ bài trên web và khung ảnh xem trước Facebook nên không bị cắt, không viền. Nền là ảnh phối cảnh / ảnh thực tế của dự án bài viết nhắc tới (bài chung về khu vực dùng ảnh dự án trong khu đó, có ghi "Ảnh nền: …" ở góc), tiêu đề bài in bên trái, khung liên hệ Hoàng Hiệp góc phải.
 - Web tự tải ảnh từ kho code về và thay dần (mỗi lần mở trang quản trị + chạy nền 2 phút/lần); đầu trang quản trị hiện tiến độ "đã thay x/179 bài". Ảnh cũ vẫn giữ trong Thư viện. Xong thì LiteSpeed → Purge All.
 - Cài: Nhập nhanh → tải `cap-nhat-code.zip` → "Nhập / cập nhật dữ liệu" → để web tự chạy (hoặc mở vài trang quản trị cho nhanh) → LiteSpeed Purge All khi báo xong.
