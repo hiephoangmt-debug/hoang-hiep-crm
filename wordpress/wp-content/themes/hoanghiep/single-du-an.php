@@ -467,7 +467,7 @@ while ( have_posts() ) :
 				<section class="block" id="noi-that">
 					<h2 class="block__title">Nội thất căn hộ mẫu <?php echo esc_html( $title ); ?></h2>
 					<p class="prose">Phối cảnh nội thất căn hộ mẫu của chủ đầu tư. Bàn giao thực tế theo tiêu chuẩn và danh mục vật tư của từng loại căn; đồ rời, trang trí trong ảnh chỉ để minh họa.</p>
-					<?php hh_gallery( $interior, 'noi-that', 'gallery-grid gallery-grid--interior' ); ?>
+					<?php hh_fb_album( $interior, 'noi-that', array( 'label' => 'Nội thất ' . $title ) ); ?>
 				</section>
 			<?php endif; ?>
 
@@ -566,7 +566,7 @@ while ( have_posts() ) :
 						<?php endforeach; ?>
 					</ol>
 				<?php endif; ?>
-				<?php hh_gallery( hh_ids( 'hh_p_progress_gallery' ), 'tien-do' ); ?>
+				<?php hh_fb_album( hh_ids( 'hh_p_progress_gallery' ), 'tien-do', array( 'label' => 'Tiến độ ' . $title ) ); ?>
 				<?php if ( $timeline[1] && ! hh_ids( 'hh_p_progress_gallery' ) ) : ?>
 					<?php hh_pending( 'Hình ảnh và báo cáo tiến độ thi công thực tế được cập nhật định kỳ.', '' ); ?>
 				<?php endif; ?>
@@ -577,7 +577,7 @@ while ( have_posts() ) :
 				<section class="block" id="thu-vien">
 					<h2 class="block__title">Hình ảnh &amp; video <?php echo esc_html( $title ); ?></h2>
 					<?php hh_video( hh_meta( 'hh_p_video' ) ); ?>
-					<?php hh_gallery( $gallery, 'thu-vien' ); ?>
+					<?php hh_fb_album( $gallery, 'thu-vien', array( 'label' => 'Hình ảnh ' . $title ) ); ?>
 				</section>
 			<?php endif; ?>
 

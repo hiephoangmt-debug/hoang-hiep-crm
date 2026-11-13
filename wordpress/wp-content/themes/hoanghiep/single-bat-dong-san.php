@@ -56,24 +56,7 @@ while ( have_posts() ) :
 				<p class="listing-head__code">Mã tin: <strong><?php echo esc_html( hh_listing_code() ); ?></strong> · Đăng ngày <time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'd/m/Y' ) ); ?></time><?php if ( get_the_modified_date( 'Ymd' ) !== get_the_date( 'Ymd' ) ) : ?> · Cập nhật <?php echo esc_html( get_the_modified_date( 'd/m/Y' ) ); ?><?php endif; ?></p>
 			</header>
 
-			<?php if ( $photos ) : ?>
-				<div class="photo-stage">
-					<?php
-					foreach ( $photos as $i => $pid ) :
-						$full = wp_get_attachment_image_url( $pid, 'full' );
-						if ( ! $full ) {
-							continue;
-						}
-						?>
-						<a class="photo-stage__item<?php echo 0 === $i ? ' photo-stage__item--main' : ''; ?><?php echo $i > 4 ? ' is-extra' : ''; ?>" href="<?php echo esc_url( $full ); ?>" data-lightbox="nha">
-							<?php echo wp_get_attachment_image( $pid, 0 === $i ? 'large' : 'hh-card', false, array( 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'auto' ) ); ?>
-							<?php if ( 4 === $i && count( $photos ) > 5 ) : ?>
-								<span class="photo-stage__more">+<?php echo count( $photos ) - 5; ?> ảnh</span>
-							<?php endif; ?>
-						</a>
-					<?php endforeach; ?>
-				</div>
-			<?php endif; ?>
+			<?php hh_fb_album( $photos, 'nha', array( 'eager' => true, 'label' => 'Ảnh ' . get_the_title() ) ); ?>
 
 			<dl class="quick-facts">
 				<?php foreach ( $quick as $label => $value ) : ?>

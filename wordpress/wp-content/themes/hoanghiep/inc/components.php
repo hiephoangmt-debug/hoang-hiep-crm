@@ -70,6 +70,66 @@ function hh_gallery( $ids, $group, $class = 'gallery-grid' ) {
 	echo '</div>';
 }
 
+/**
+ * Album ảnh kiểu Facebook: tự chọn bố cục theo số ảnh (1, 2, 3, 4, 5, 6, 7–9, từ 10 ảnh hiện 9 ô + lớp phủ +N).
+ * Bấm ảnh mở lightbox sẵn có (data-lightbox), nút "Xem toàn bộ album" mở từ ảnh đầu. Ảnh ẩn (từ thứ 10) vẫn nằm trong nhóm lightbox.
+ *
+ * @param int[]  $ids   ID ảnh theo đúng thứ tự trong trang quản trị (kéo thả để đổi thứ tự).
+ * @param string $group Tên nhóm lightbox.
+ * @param array  $args  eager (bool) – tải ngay ảnh đầu (ảnh đầu trang); label (string) – mô tả cho trình đọc màn hình.
+ */
+function hh_fb_album( $ids, $group, $args = array() ) {
+	$items = array();
+	foreach ( array_values( array_unique( array_filter( array_map( 'intval', (array) $ids ) ) ) ) as $id ) {
+		$full = wp_get_attachment_image_url( $id, 'full' );
+		if ( $full ) {
+			$items[] = array( $id, $full );
+		}
+	}
+	$n = count( $items );
+	if ( ! $n ) {
+		return;
+	}
+	$layout = min( $n, 9 );
+	$eager  = ! empty( $args['eager'] );
+	printf(
+		'<div class="fb-album" data-layout="%d" data-count="%d" role="group" aria-label="%s">',
+		(int) $layout,
+		(int) $n,
+		esc_attr( $args['label'] ?? sprintf( 'Album %d ảnh', $n ) )
+	);
+	foreach ( $items as $i => $item ) {
+		list( $id, $full ) = $item;
+		$big  = 0 === $i || $n <= 2;
+		$size = $big ? 'large' : 'hh-card';
+		printf(
+			'<a class="fb-album__item%s" href="%s" data-lightbox="%s">%s%s</a>',
+			$i >= 9 ? ' is-hidden' : '',
+			esc_url( $full ),
+			esc_attr( $group ),
+			wp_get_attachment_image(
+				$id,
+				$size,
+				false,
+				array(
+					'loading'       => ( 0 === $i && $eager ) ? 'eager' : 'lazy',
+					'fetchpriority' => ( 0 === $i && $eager ) ? 'high' : 'auto',
+					'decoding'      => 'async',
+				)
+			),
+			( 8 === $i && $n > 9 ) ? '<span class="fb-album__more" aria-hidden="true">+' . (int) ( $n - 9 ) . '</span>' : ''
+		);
+	}
+	echo '</div>';
+	if ( $n > 1 ) {
+		printf(
+			'<button type="button" class="fb-album__all" data-album-open="%s">Xem toàn bộ album (%d ảnh)</button>',
+			esc_attr( $group ),
+			(int) $n
+		);
+	}
+}
+
 /** "16.0602, 108.2280" → array( lat, lng ) hoặc null. */
 function hh_parse_coords( $text ) {
 	if ( preg_match( '/^\s*(-?\d{1,2}(?:\.\d+)?)\s*[,;\s]\s*(-?\d{1,3}(?:\.\d+)?)\s*$/', (string) $text, $m ) && abs( (float) $m[1] ) <= 90 && abs( (float) $m[2] ) <= 180 ) {
