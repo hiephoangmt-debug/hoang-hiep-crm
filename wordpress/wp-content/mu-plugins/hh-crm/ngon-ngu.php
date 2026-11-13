@@ -88,7 +88,28 @@ function hh_translate_url( $url, $code ) {
 }
 
 /** Liên kết nút chuyển ngôn ngữ: trang chủ / trang ngoại ngữ → trang riêng; trang tiếng Việt khác → bản dịch tự động. */
+/** Trang dự án có bản tiếng Anh viết riêng (theme landing/<slug>--en.html): trả về đường dẫn bản VI / EN, rỗng nếu không có. */
+function hh_project_en_pair() {
+	if ( ! is_singular( 'du-an' ) || ! function_exists( 'get_theme_file_path' ) ) {
+		return array();
+	}
+	$slug = get_post_field( 'post_name', get_queried_object_id() );
+	if ( ! $slug || ! is_file( get_theme_file_path( 'landing/' . $slug . '--en.html' ) ) ) {
+		return array();
+	}
+	$vi = trailingslashit( get_permalink( get_queried_object_id() ) );
+	return array(
+		'vi'    => $vi,
+		'en'    => $vi . 'en/',
+		'is_en' => 'en' === get_query_var( 'hh_landing_sub' ),
+	);
+}
+
 function hh_lang_switch_url( $code ) {
+	$pair = hh_project_en_pair();
+	if ( $pair && in_array( $code, array( 'vi', 'en' ), true ) ) {
+		return $pair[ $code ];
+	}
 	if ( 'vi' === $code || 'vi' !== hh_lang() || is_front_page() ) {
 		return hh_lang_url( $code );
 	}
@@ -100,13 +121,22 @@ function hh_lang_switch_url( $code ) {
 add_filter(
 	'language_attributes',
 	static function ( $out ) {
+		$pair = hh_project_en_pair();
+		if ( $pair && $pair['is_en'] ) {
+			return 'lang="en-US"';
+		}
 		return 'vi' === hh_lang() ? $out : 'lang="' . esc_attr( str_replace( '_', '-', hh_langs()[ hh_lang() ]['locale'] ) ) . '"';
 	}
 );
-add_filter( 'rank_math/opengraph/facebook/og_locale', static fn( $l ) => 'vi' === hh_lang() ? $l : hh_langs()[ hh_lang() ]['locale'] );
+add_filter( 'rank_math/opengraph/facebook/og_locale', static fn( $l ) => ( hh_project_en_pair()['is_en'] ?? false ) ? 'en_US' : ( 'vi' === hh_lang() ? $l : hh_langs()[ hh_lang() ]['locale'] ) );
 add_action(
 	'wp_head',
 	static function () {
+		$pair = hh_project_en_pair();
+		if ( $pair ) {
+			printf( "<link rel=\"alternate\" hreflang=\"vi\" href=\"%s\">\n<link rel=\"alternate\" hreflang=\"en\" href=\"%s\">\n<link rel=\"alternate\" hreflang=\"x-default\" href=\"%s\">\n", esc_url( $pair['vi'] ), esc_url( $pair['en'] ), esc_url( $pair['vi'] ) );
+			return;
+		}
 		if ( ! is_front_page() && 'vi' === hh_lang() ) {
 			return;
 		}

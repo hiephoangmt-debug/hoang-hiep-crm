@@ -858,5 +858,188 @@ HTML
 			'https://hiephoangmt.com/du-an/fpt-plaza-3/',
 		),
 	);
+	/* ---------------- 14/11 – Bài tiếng Anh (khách nước ngoài) – Nobu Residences Đà Nẵng ---------------- */
+	$nobu_en = '<a href="/du-an/nobu-da-nang/en/">Nobu Residences Da Nang</a>';
+	$cta_en  = '<p>For floor plans, current availability and an official price sheet for <a href="/du-an/nobu-da-nang/en/">Nobu Residences Da Nang</a>, contact <strong>Hoang Hiep – +84 904 567 009</strong> (phone, WhatsApp or Zalo). Private viewings at the sales gallery in Da Nang can be arranged on request.</p>';
+	$posts[] = array(
+		'slug'     => 'nobu-residences-da-nang-buyers-guide',
+		'title'    => 'Nobu Residences Da Nang: A Buyer’s Guide to the Branded Residences on My Khe Beach',
+		'excerpt'  => 'A clear guide to Nobu Residences Da Nang – the 43-storey beachfront tower by VCRE and Nobu Hospitality: residence types and sizes, indicative pricing, floor stacking, interiors, construction progress and what to check before you reserve.',
+		'keyword'  => 'Nobu Residences Da Nang',
+		'keywords_extra' => array( 'Nobu Da Nang', 'branded residences Da Nang', 'My Khe Beach apartments', 'luxury condos Da Nang' ),
+		'project'  => 'nobu-da-nang',
+		'schedule' => '2026-11-14 19:00',
+		'category' => 'Tin dự án',
+		'tags'     => array( 'Nobu Đà Nẵng', 'English', 'Căn hộ hạng sang' ),
+		'image'    => 'plugin:img/tin-tuc/nobu-residences-da-nang-buyers-guide.jpg',
+		'image_alt' => 'Nobu Residences Da Nang buyer’s guide – key figures',
+		'content'  => <<<HTML
+<div lang="en">
+<p><strong>Nobu Residences Da Nang</strong> is the first Nobu-branded residential address in Vietnam: a 43-storey tower on the corner of Vo Van Kiet and Vo Nguyen Giap, directly facing My Khe Beach. Developed by VCRE (Viet Capital Real Estate) under licence from Nobu Hospitality – the lifestyle group founded by Robert De Niro, Chef Nobu Matsuhisa and Meir Teper – the tower combines 264 branded residences with a Nobu Hotel, the Nobu Restaurant and a rooftop sky bar. This guide sets out what is being built, what is for sale and what an international buyer should verify before committing.</p>
+<!--hh-featured-->
+<h2>The project at a glance</h2>
+<ul>
+<li><strong>Developer:</strong> VCRE, through the project company Circle Point Real Estate JSC; main contractor Newtecons.</li>
+<li><strong>Brand and operator:</strong> Nobu Hospitality.</li>
+<li><strong>Address:</strong> 01 Vo Van Kiet Street, An Hai Ward, Da Nang – one minute from the sand.</li>
+<li><strong>Scale:</strong> a site of approximately 3,000 m², around 48,510 m² of gross floor area, 43 storeys (approximately 186 m) above two basement levels.</li>
+<li><strong>Components:</strong> 264 branded residences; a Nobu Hotel of approximately 200 keys including 18 suites; Nobu Restaurant; spa, wellness, conference and dining venues.</li>
+<li><strong>Timing:</strong> construction began in Q2 2024; completion and handover are expected in 2027.</li>
+</ul>
+
+<h2>Why the location matters</h2>
+<p>Beachfront land on Vo Nguyen Giap is effectively finite. The boulevard is lined with established five-star hotels, and new freehold-style residential towers directly on the beach are rare. From the tower, the Dragon Bridge and the Han River are around five minutes away, the Hai Chau city centre about ten and Da Nang International Airport roughly fifteen. For owners who intend to spend part of the year in the city – or to place the residence in a rental programme – that combination of beach, city and airport access is the core of the proposition.</p>
+
+<h2>Residence types, sizes and indicative pricing</h2>
+<p>The collection is deliberately broad, from compact pieds-à-terre to full-floor-style homes in the sky:</p>
+<table>
+<thead><tr><th>Residence type</th><th>Indicative size</th></tr></thead>
+<tbody>
+<tr><td>Studio</td><td>approx. 42 – 43 m²</td></tr>
+<tr><td>One Bedroom</td><td>approx. 62.5 – 71.1 m²</td></tr>
+<tr><td>Two Bedroom</td><td>approx. 99.7 – 118.7 m²</td></tr>
+<tr><td>Three Bedroom Dual Key</td><td>approx. 130.1 – 166.2 m²</td></tr>
+<tr><td>Sky Villa (6 residences, private pool)</td><td>approx. 254 – 288 m²</td></tr>
+<tr><td>Penthouse (2 residences)</td><td>approx. 372 m²</td></tr>
+</tbody>
+</table>
+<p>Published figures place one-bedroom residences at approximately VND 6.6 – 9.1 billion, with a reference range of around VND 145 – 205 million per square metre depending on floor, view and layout. These numbers are indicative only; the developer issues an official price sheet for a specific residence at the time of reservation, and pricing for Sky Villas and penthouses is released privately.</p>
+<p>The <strong>Dual Key</strong> layout deserves a particular mention. A three-bedroom residence can be lived in as one home or separated into two self-contained units with their own entrances – useful for multi-generational families, or for owners who wish to occupy one part while the other is let.</p>
+
+<h2>How the tower is organised</h2>
+<p>The stacking places the private residences above the hotel, so residents enjoy the widest views and a separate address within the building:</p>
+<ul>
+<li><strong>Levels 1 – 6:</strong> arrival lobby and offices, spa and wellness (levels 3 – 4), conference (level 5) and the Taste of Asia restaurant (level 6).</li>
+<li><strong>Levels 7 – 16:</strong> Nobu Hotel.</li>
+<li><strong>Level 18:</strong> amenity floor with a heated infinity pool.</li>
+<li><strong>Levels 19 – 36:</strong> branded residences.</li>
+<li><strong>Levels 38 – 41:</strong> Sky Villas and penthouses.</li>
+<li><strong>Levels 42 – 43:</strong> Nobu Restaurant and the Tsukimidai sky bar.</li>
+</ul>
+<p>Levels 17 and 37 are refuge floors. The full floor-by-floor allocation and diagram are on the {$nobu_en} page.</p>
+
+<h2>Interiors and specification</h2>
+<p>Residences are delivered fully finished in a Japandi palette – the meeting point of Japanese restraint and Scandinavian warmth that runs through every Nobu property. According to the project’s interior presentation, the specification includes herringbone timber flooring, a Wendelbo sofa set or equivalent, Serta Simmons mattresses, headboards upholstered in washi paper, imported marble kitchen countertops, a built-in coffee machine, Kohler sanitaryware and a Smeg refrigerator. As with any off-plan purchase, the binding specification is the one attached to your Sale and Purchase Agreement, so ask to see that appendix rather than relying on brochures.</p>
+
+<h2>Construction progress</h2>
+<p>Construction started in Q2 2024. The transfer slab was completed in early 2026, and by October 2026 the structure had reached level 22, with glass façade installation under way on levels 7 – 13 and mechanical, electrical and fire-protection works progressing to level 17. On that trajectory the developer continues to guide for completion in 2027. Monthly site photographs are published on the project page.</p>
+
+<h2>Ownership and the rental programme</h2>
+<p>This is the area that requires the most care. Published sources describe long-term ownership for Vietnamese buyers and a 50-year term for foreign buyers, while other sources refer to a land-use term running to 2060 on commercial–service land. Both cannot be read as a guarantee for every residence. Before you reserve, ask for written confirmation of:</p>
+<ol>
+<li>your eligibility to buy as a foreign individual or company, and the ownership certificate you will receive;</li>
+<li>the ownership term that applies to your specific residence;</li>
+<li>the payment schedule, handover standard and annual service charges;</li>
+<li>the terms of the rental programme operated by Nobu Hospitality – revenue share, owner-use nights and exit provisions.</li>
+</ol>
+<p>Some sales materials cite an indicative rental yield of around 6% per year. Treat any such figure as an illustration until you have read the programme agreement itself. Our companion article, <a href="/branded-residences-da-nang-foreign-buyers/">Branded Residences in Da Nang: What Buyers Should Know</a>, explains the general legal framework for foreign purchasers in more detail.</p>
+
+<h2>Who Nobu Residences Da Nang suits</h2>
+<p>The project is best suited to buyers who value a globally recognised hospitality brand, a beachfront address and hotel-grade services, and who are comfortable with an off-plan timeline to 2027. Buyers seeking the lowest price per square metre in Da Nang, or immediate rental income, may find better-fitting options among completed buildings.</p>
+{$cta_en}
+<p class="src">Sources: developer project materials and interior presentation; developer construction updates to October 2026; project page at hiephoangmt.com. All figures are indicative and subject to change. This article is general information and not legal or financial advice.</p>
+</div>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Nobu Residences Da Nang: Buyer’s Guide, Prices & Floor Plans',
+			'desc'      => 'Nobu Residences Da Nang on My Khe Beach: 264 branded residences, studios to Sky Villas, indicative prices, floor stacking, interiors, progress and ownership checks.',
+			'points'    => array(
+				'43-storey beachfront tower by VCRE and Nobu Hospitality, expected completion 2027',
+				'264 residences from approx. 42 m² studios to 372 m² penthouses; six Sky Villas with private pools',
+				'Confirm ownership term, foreign eligibility and rental programme terms in the SPA before reserving',
+			),
+			'faq'       => array(
+				array( 'Where is Nobu Residences Da Nang?', 'At 01 Vo Van Kiet Street, on the corner of Vo Nguyen Giap, An Hai Ward, Da Nang – directly on My Khe Beach.' ),
+				array( 'How much is a residence at Nobu Da Nang?', 'Published figures place one-bedroom residences at approximately VND 6.6 – 9.1 billion. Prices are indicative; an official price sheet is issued for each residence at reservation.' ),
+				array( 'When will Nobu Residences Da Nang be completed?', 'Construction began in Q2 2024 and completion is expected in 2027. By October 2026 the structure had reached level 22.' ),
+			),
+		),
+		'sources'  => array(
+			'https://hiephoangmt.com/du-an/nobu-da-nang/en/',
+		),
+	);
+
+	$posts[] = array(
+		'slug'     => 'branded-residences-da-nang-foreign-buyers',
+		'title'    => 'Branded Residences in Da Nang: What International Buyers Should Know',
+		'excerpt'  => 'How foreigners can own property in Vietnam, what a branded residence offers beyond a conventional condominium, how hotel rental programmes work and the due-diligence checklist we use with international clients in Da Nang.',
+		'keyword'  => 'branded residences Da Nang',
+		'keywords_extra' => array( 'foreigners buy property Vietnam', 'Da Nang property for foreigners', 'Nobu Residences Da Nang', 'Vietnam Housing Law 2023 foreign ownership' ),
+		'project'  => 'nobu-da-nang',
+		'schedule' => '2026-11-14 21:00',
+		'category' => 'Thị trường',
+		'tags'     => array( 'English', 'Pháp lý nhà đất', 'Nobu Đà Nẵng' ),
+		'image'    => 'plugin:img/tin-tuc/branded-residences-da-nang-foreign-buyers.jpg',
+		'image_alt' => 'Branded residences in Da Nang – what international buyers should know',
+		'content'  => <<<HTML
+<div lang="en">
+<p>Da Nang has become one of Southeast Asia’s most watched coastal cities: a modern airport with direct regional connections, a 30-kilometre urban beachfront and a steady pipeline of international hotel brands. The newest chapter is the <strong>branded residence</strong> – private homes that carry the name, design language and services of a luxury hospitality group. With {$nobu_en} now rising on My Khe Beach, international buyers are asking the same questions. This article answers them in plain terms.</p>
+<!--hh-featured-->
+<h2>What is a branded residence?</h2>
+<p>A branded residence is a home developed in partnership with a hospitality or lifestyle brand. The brand licenses its name and design standards to the developer and, in most cases, its hotel company operates the building’s services – concierge, housekeeping, dining and, where offered, a rental programme. Owners pay a premium over comparable unbranded homes in exchange for three things: consistent quality, professional management and the resale appeal of a recognised name.</p>
+<p>In Da Nang, the format is still young. Most beachfront product to date has been either conventional condominiums or hotel apartments sold with a guaranteed-return scheme. A branded residence sits between the two: it is a home first, with the option to place it into a professionally managed rental pool.</p>
+
+<h2>Can foreigners buy property in Vietnam?</h2>
+<p>Yes – within limits. Under the Housing Law 2023, which took effect on 1 August 2024, foreign individuals with a valid visa and foreign-invested organisations may own housing in commercial housing projects outside areas restricted for defence and security. The key rules are:</p>
+<ul>
+<li><strong>Quota:</strong> foreigners may own no more than 30% of the apartments in a single apartment building, and no more than 250 landed houses within a ward-level administrative area.</li>
+<li><strong>Term:</strong> individual foreign owners hold title for up to 50 years from the date the ownership certificate is issued, with the possibility of one extension of up to 50 years if requested before expiry.</li>
+<li><strong>Purchase route:</strong> foreigners buy primary units from the developer or secondary units from other foreign owners; payment is made through a Vietnamese bank account.</li>
+</ul>
+<p>Two practical points follow. First, the quota is building-specific, so the developer must confirm that foreign allocation remains available for the residence you choose. Second, the rules for apartments on residential land differ from those for units built on commercial–service land, which is common for hotel-branded towers. In the latter case the ownership term is generally tied to the project’s land-use term, so it is essential to see what the project’s land documents actually say.</p>
+
+<h2>Understanding rental programmes</h2>
+<p>Many branded residences offer owners the option to place their home into a rental pool managed by the hotel operator. When it works well, the owner receives a share of net rental revenue while the operator handles marketing, guest services and maintenance. Before committing, read the programme agreement for:</p>
+<ul>
+<li>how revenue is shared and which costs are deducted before the split;</li>
+<li>the number of nights owners may use their residence each year, and blackout dates;</li>
+<li>furniture, fixtures and equipment reserves and who funds them;</li>
+<li>the term of the programme and how an owner can exit.</li>
+</ul>
+<p>Be cautious with headline yields. A figure such as “6% per year” in sales materials is an illustration, not a contract, unless it is written into the agreement you sign and backed by an identified party.</p>
+
+<h2>A due-diligence checklist</h2>
+<p>For international clients we work through the following before any reservation deposit:</p>
+<ol>
+<li><strong>Project legal status:</strong> investment approval, land-use rights, construction permit and – for off-plan sales – the provincial housing authority’s notice that the project is eligible to sell future housing.</li>
+<li><strong>Bank guarantee:</strong> for off-plan purchases, confirm the bank guarantee that protects buyers if the developer fails to deliver.</li>
+<li><strong>Foreign eligibility and quota:</strong> written confirmation for the specific residence.</li>
+<li><strong>Ownership term and certificate:</strong> what term applies and when the certificate is expected after handover.</li>
+<li><strong>Payment schedule:</strong> instalments tied to construction milestones, and the handover payment.</li>
+<li><strong>Specification:</strong> the finishes appendix attached to the Sale and Purchase Agreement.</li>
+<li><strong>Running costs:</strong> service charges, sinking fund and rental-programme deductions.</li>
+<li><strong>Exit:</strong> resale rules, including selling to foreign or Vietnamese buyers and the tax position.</li>
+</ol>
+<p>An independent Vietnamese lawyer can review the documents in English; we are happy to coordinate that process.</p>
+
+<h2>Where Nobu Residences Da Nang fits</h2>
+<p>Nobu Residences Da Nang is the clearest example of the branded-residence model in the city: 264 residences above a Nobu Hotel, with Nobu Restaurant on level 42 and a sky bar on level 43, directly on My Khe Beach. Residences range from approximately 42 m² studios to 372 m² penthouses, including six Sky Villas with private pools. Construction reached level 22 in October 2026, with completion expected in 2027. Published sources differ on the ownership term for this project, so the checklist above applies in full. Our <a href="/nobu-residences-da-nang-buyers-guide/">Nobu Residences Da Nang buyer’s guide</a> covers residence types, indicative pricing and the floor stacking in detail.</p>
+
+<h2>The bottom line</h2>
+<p>Buying in Da Nang as a foreigner is entirely possible and increasingly common. The difference between a good purchase and a disappointing one usually lies in the documents rather than the view: confirm eligibility, tenure and rental terms in writing, and buy into a project whose developer and operator you can hold to account.</p>
+{$cta_en}
+<p class="src">Sources: Vietnam Housing Law 2023 (Law No. 27/2023/QH15), effective 1 August 2024; Real Estate Business Law 2023; developer materials for Nobu Residences Da Nang. This article is general information and not legal advice; regulations may change and their application depends on each project.</p>
+</div>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Branded Residences in Da Nang: A Guide for Foreign Buyers',
+			'desc'      => 'Can foreigners buy property in Da Nang? Ownership quotas and terms under Vietnam’s Housing Law 2023, how branded-residence rental programmes work and a due-diligence checklist.',
+			'points'    => array(
+				'Foreigners may own up to 30% of apartments in a building, for up to 50 years with one possible extension',
+				'Units on commercial–service land follow the project’s land-use term – check the land documents',
+				'Read the rental programme agreement: revenue share, owner-use nights, reserves and exit terms',
+			),
+			'faq'       => array(
+				array( 'Can foreigners buy an apartment in Da Nang?', 'Yes. Under the Housing Law 2023, foreign individuals with a valid visa may buy apartments in commercial housing projects outside restricted areas, within a 30% quota per building.' ),
+				array( 'How long can a foreigner own property in Vietnam?', 'Up to 50 years from the date the ownership certificate is issued, with the possibility of one extension of up to 50 years.' ),
+				array( 'Are rental yields guaranteed at branded residences?', 'Only if a guarantee is written into the agreement you sign and backed by an identified party. Figures in sales materials are illustrations.' ),
+			),
+		),
+		'sources'  => array(
+			'https://hiephoangmt.com/du-an/nobu-da-nang/en/',
+		),
+	);
 	return $posts;
 }

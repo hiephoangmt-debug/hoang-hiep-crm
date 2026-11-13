@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.25** + plugin Hoàng Hiệp CRM **2.20.259**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.28** + plugin Hoàng Hiệp CRM **2.20.260**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.260 (13/11/2026)
+
+- **Nobu Residences Đà Nẵng:** thêm 8 ảnh (bỏ 5 ảnh trùng ảnh đã có): toàn cảnh tháp mặt tiền Võ Văn Kiệt, phòng khách – bếp view biển, Sky Villa hồ bơi riêng, bộ sưu tập The Signature, 3 ảnh nội thất có chú thích vật liệu, sky lounge hồ bơi. Tiêu chuẩn bàn giao thêm danh mục nội thất theo tài liệu giới thiệu: sàn gỗ xương cá, sofa Wendelbo (hoặc tương đương), nệm Serta Simmons, đầu giường giấy washi, mặt bếp marble nhập khẩu, chậu Kohler, tủ lạnh Smeg.
+- **Nobu – trang tiếng Anh** (giao diện 2.16.28): `/du-an/nobu-da-nang/en/` – viết riêng bằng tiếng Anh chuẩn ngôn ngữ BĐS hạng sang (tổng quan, vị trí, bảng loại căn – diện tích – giá tham khảo, nội thất, tiện ích, phân bổ 43 tầng, sở hữu cho người nước ngoài, tiến độ, FAQ, form nhận bảng giá nhận số quốc tế +…). Trang Nobu tiếng Việt có nút **EN** trên thanh đầu trang; nút ngôn ngữ chuyển thẳng VI ⇄ EN (không qua Google Dịch); thẻ `lang="en-US"`, hreflang vi/en, og:locale en_US. Khách để lại số ở trang tiếng Anh vào CRM với ghi chú "Khách nước ngoài – trang tiếng Anh".
+- **2 bài tiếng Anh** (tự đăng 14/11 19:00 và 21:00): "Nobu Residences Da Nang: A Buyer’s Guide…" và "Branded Residences in Da Nang: What International Buyers Should Know" (quy định sở hữu nhà cho người nước ngoài theo Luật Nhà ở 2023, chương trình cho thuê, danh sách kiểm tra pháp lý).
+- Cài: Nhập nhanh → tải `cap-nhat-code.zip` → "Nhập / cập nhật dữ liệu" → **"Tải ảnh ngay"** (8 ảnh) → LiteSpeed Purge All.
 
 ## Có gì mới – 2.20.259 (13/11/2026)
 
