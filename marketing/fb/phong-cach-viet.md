@@ -21,6 +21,12 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 - Không đẩy nhiều bài cùng lúc. Mỗi bài một giờ riêng; cùng trang cách nhau ≥3 tiếng, giữa 2 trang lệch nhau ≥1 tiếng; bài web cách nhau ≥2 tiếng (trình xuất bài web tự lùi bài trùng giờ).
 - Trước khi hẹn luôn getScheduledPosts cả 2 trang để né giờ đã có bài.
 
+## TikTok (anh Hiệp đồng ý 13/11/2026)
+- Tài khoản TikTok @hiephoangmt kết nối trong brand Sun (blogId 7637635) → mỗi bài trang Sun đăng thêm 1 bài TikTok riêng (providers chỉ tiktok), giờ = giờ bài FB + 15 phút.
+- Dạng bài ẢNH: dùng chính thẻ dọc / ảnh của bài FB (tối đa vài ảnh). tiktokData: title ≤ 90 ký tự (từ khoá chính), privacyOption PUBLIC_TO_EVERYONE, commercialContentOwnBrand true, autoAddMusic true.
+- Lời ngắn hơn FB: 1 câu mở có từ khoá, 3–4 gạch đầu dòng "•", 1 câu "Góc nhìn của Hiệp", kết "Zalo 0904 567 009 · chi tiết tại hiephoangmt.com" (TikTok không bấm được link trong bình luận), 4–5 hashtag có #DaNang.
+- Bài trang Hoàng Hiệp KHÔNG đăng TikTok (TikTok gắn brand Sun).
+
 ## Giọng văn
 - Như anh Hiệp nhắn cho khách quen: xưng "Hiệp"/"mình", gọi "anh chị", dùng "ạ" lịch sự (hạn chế "nha").
 - Câu mở nhẹ nhàng, ấm áp, gần đời thường; dí dỏm vừa phải.
