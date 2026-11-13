@@ -787,5 +787,76 @@ HTML
 			'https://vneconomy.vn/da-nang-lap-co-so-du-lieu-nha-o-va-thi-truong-bat-dong-san.htm',
 		),
 	);
+
+	/* ---------------- 13/11 – FPT Plaza 3 hoàn thành cấp sổ hồng 100% căn hộ (anh Hiệp gửi thông báo CĐT + 6 ảnh) ---------------- */
+	$posts[] = array(
+		'slug'     => 'fpt-plaza-3-hoan-thanh-cap-so-hong-100-can-ho',
+		'title'    => 'FPT Plaza 3 hoàn thành cấp sổ hồng cho 100% căn hộ sau khoảng 7 tháng bàn giao',
+		'excerpt'  => 'Ngày 13/11/2026, Công ty CP Đô thị FPT Đà Nẵng (FPT City) thông báo hoàn thành cấp Giấy chứng nhận quyền sở hữu cho 100% căn hộ FPT Plaza 3, khoảng 7 tháng sau khi bàn giao (17/4/2026). Căn hộ đã có sổ có thể công chứng mua bán, thế chấp vay ngân hàng.',
+		'keyword'  => 'sổ hồng FPT Plaza 3',
+		'keywords_extra' => array( 'FPT Plaza 3', 'FPT City Đà Nẵng', 'căn hộ có sổ hồng Đà Nẵng', 'mua lại căn hộ FPT Plaza 3' ),
+		'project'  => 'fpt-plaza-3',
+		'schedule' => '2026-11-13 21:00',
+		'category' => 'Tin dự án',
+		'tags'     => array( 'FPT Plaza 3', 'FPT City', 'Pháp lý nhà đất' ),
+		'image'    => 'plugin:img/tin-tuc/fpt-plaza-3-100-can-co-so-hong-11-2026.jpg',
+		'image_alt' => 'FPT Plaza 3 hoàn thành cấp sổ hồng cho 100% căn hộ ngày 13/11/2026',
+		'content'  => <<<HTML
+<p>Ngày 13/11/2026, Công ty Cổ phần Đô thị FPT Đà Nẵng (FPT City) thông báo đã <strong>hoàn thành cấp Giấy chứng nhận quyền sở hữu cho 100% căn hộ FPT Plaza 3</strong>, khoảng 7 tháng sau khi dự án khánh thành và bàn giao căn hộ (17/4/2026). Với người đã mua, đây là mốc pháp lý cuối cùng: căn hộ đã có sổ riêng, đứng tên chủ sở hữu.</p>
+<!--hh-featured-->
+<!--hh-img:img/fpt-plaza-3/fpt-plaza-3-trao-so-11-2026-gia-dinh-3.jpg|Cư dân FPT Plaza 3 nhận Giấy chứng nhận quyền sở hữu căn hộ ngày 13/11/2026 (ảnh thực tế)-->
+<h2>Các mốc pháp lý của FPT Plaza 3</h2>
+<table>
+<thead><tr><th>Thời gian</th><th>Mốc</th></tr></thead>
+<tbody>
+<tr><td>25/09/2024</td><td>Sở Xây dựng Đà Nẵng có Thông báo 7190/SXD-QLN: nhà ở hình thành trong tương lai đủ điều kiện được bán</td></tr>
+<tr><td>17/4/2026</td><td>Khánh thành và bàn giao căn hộ</td></tr>
+<tr><td>13/11/2026</td><td>Chủ đầu tư thông báo hoàn thành cấp Giấy chứng nhận quyền sở hữu cho 100% căn hộ</td></tr>
+</tbody>
+</table>
+<p>FPT Plaza 3 gồm 2 tháp W và E cao 25 tầng nổi, khoảng 837 căn hộ và shophouse khối đế, nằm ở trung tâm Khu đô thị FPT City (Ngũ Hành Sơn), cạnh quảng trường – công viên trung tâm. Khách Việt Nam được sở hữu lâu dài.</p>
+<!--hh-img:img/fpt-plaza-3/fpt-plaza-3-trao-so-11-2026-thu-tuc-2.jpg|Quầy làm thủ tục trao Giấy chứng nhận cho cư dân FPT Plaza 3 tại văn phòng FPT City (ảnh thực tế 13/11/2026)-->
+<h2>Căn hộ đã có sổ hồng thì người mua được gì?</h2>
+<ul>
+<li><strong>Mua bán, chuyển nhượng qua công chứng:</strong> giao dịch thực hiện bằng hợp đồng công chứng và sang tên tại văn phòng đăng ký đất đai, không còn phải chuyển nhượng hợp đồng mua bán qua chủ đầu tư.</li>
+<li><strong>Thế chấp vay ngân hàng bằng chính căn hộ:</strong> người mua lại có thể vay theo hạn mức ngân hàng định giá; chủ nhà cũng có thể dùng sổ để vay vốn.</li>
+<li><strong>Cho thuê, đăng ký cư trú thuận lợi hơn:</strong> có giấy tờ sở hữu rõ ràng khi ký hợp đồng thuê, đăng ký tạm trú cho người thuê.</li>
+<li><strong>Giảm rủi ro pháp lý:</strong> nhiều dự án tại Đà Nẵng phải chờ nhiều năm mới có sổ; với căn hộ đã có sổ, người mua kiểm tra được ngay thông tin trên giấy chứng nhận.</li>
+</ul>
+<h2>Nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Tiến độ sổ nhanh là điểm cộng lớn:</strong> khoảng 7 tháng từ bàn giao đến cấp sổ cho toàn bộ căn hộ là mốc tốt so với mặt bằng chung, giúp củng cố niềm tin với các dự án tiếp theo cùng chủ đầu tư tại FPT City.</li>
+<li><strong>Thị trường mua lại FPT Plaza 3 sẽ minh bạch hơn:</strong> khi đã có sổ, giao dịch thứ cấp làm thủ tục như căn hộ hoàn thiện pháp lý; người mua nên kiểm tra sổ gốc, tình trạng thế chấp và nghĩa vụ tài chính còn lại trước khi đặt cọc.</li>
+<li><strong>Phù hợp người mua để ở và cho thuê dài hạn:</strong> khu FPT City gần Đại học FPT, trường quốc tế, khu công nghệ – nhu cầu thuê từ sinh viên, chuyên gia, gia đình trẻ khá ổn định.</li>
+</ul>
+<h2>Dự án liên quan</h2>
+<ul>
+<li><a href="/du-an/fpt-plaza-3/">FPT Plaza 3</a> – xem pháp lý, mặt bằng, ảnh thực tế căn hộ bàn giao.</li>
+<li><a href="/du-an/fpt-plaza-4/">FPT Plaza 4</a> – dự án căn hộ tiếp theo của FPT City.</li>
+<li><a href="/du-an/fpt-city-da-nang/">Khu đô thị FPT City Đà Nẵng</a> – tổng quan khu đô thị.</li>
+</ul>
+<p>Xem thêm: <a href="/tra-cuu-du-an-ma-dinh-danh-bat-dong-san-thongtinbds-moc-gov-vn/">cách tra cứu dự án, mã định danh bất động sản trên cổng của Bộ Xây dựng</a> và <a href="/kiem-tra-phap-ly-quy-hoach-nha-dat-da-nang/">kiểm tra pháp lý nhà đất Đà Nẵng</a>.</p>
+<p>Anh chị cần tìm căn FPT Plaza 3 đã có sổ để mua ở hoặc cho thuê, hoặc cần định giá căn đang sở hữu, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: thông báo của Công ty Cổ phần Đô thị FPT Đà Nẵng – FPT City ngày 13/11/2026 và ảnh sự kiện trao Giấy chứng nhận cho cư dân; Thông báo 7190/SXD-QLN ngày 25/09/2024 của Sở Xây dựng Đà Nẵng; thông tin dự án từ tài liệu chủ đầu tư.</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'FPT Plaza 3 đã cấp sổ hồng cho 100% căn hộ',
+			'desc'      => 'Ngày 13/11/2026 FPT City hoàn thành cấp Giấy chứng nhận quyền sở hữu cho 100% căn hộ FPT Plaza 3, khoảng 7 tháng sau bàn giao. Ý nghĩa với người mua.',
+			'points'    => array(
+				'13/11/2026: FPT City hoàn thành cấp sổ hồng cho 100% căn hộ FPT Plaza 3',
+				'Khoảng 7 tháng sau khánh thành, bàn giao (17/4/2026)',
+				'Căn hộ có sổ: mua bán qua công chứng, thế chấp vay ngân hàng, sở hữu lâu dài với khách Việt Nam',
+			),
+			'faq'       => array(
+				array( 'FPT Plaza 3 đã có sổ hồng chưa?', 'Có. Ngày 13/11/2026, chủ đầu tư FPT City thông báo đã hoàn thành cấp Giấy chứng nhận quyền sở hữu cho 100% căn hộ FPT Plaza 3.' ),
+				array( 'FPT Plaza 3 bàn giao khi nào?', 'Dự án khánh thành và bàn giao căn hộ ngày 17/4/2026; sổ hồng được cấp xong khoảng 7 tháng sau.' ),
+				array( 'Mua lại căn FPT Plaza 3 đã có sổ cần lưu ý gì?', 'Kiểm tra sổ gốc, tình trạng thế chấp, nghĩa vụ tài chính và phí quản lý còn nợ; giao dịch bằng hợp đồng công chứng và sang tên tại văn phòng đăng ký đất đai.' ),
+			),
+		),
+		'sources'  => array(
+			'https://hiephoangmt.com/du-an/fpt-plaza-3/',
+		),
+	);
 	return $posts;
 }
