@@ -29,6 +29,12 @@ foreach ( $posts as $n ) {
 		continue;
 	}
 	$img = $n['image'] ?? '';
+	// Ảnh đại diện khổ 1200×630 có sẵn (tu-dong/bia-bai/<slug>.jpg, bai-viet/anh-dai-dien-1200x630.py): dùng thay ảnh khai báo.
+	$bia = $out . '/bia-bai/' . $n['slug'] . '.jpg';
+	if ( is_file( $bia ) ) {
+		$n['image'] = array( 'name' => $n['slug'] . '-anh-dai-dien', 'alt' => $n['image_alt'] ?? $n['title'], 'caption' => '', 'data' => base64_encode( file_get_contents( $bia ) ) );
+		$img        = null;
+	}
 	if ( is_string( $img ) && 0 === strpos( $img, 'plugin:' ) ) {
 		$path = $plug . substr( $img, 7 );
 		if ( ! is_file( $path ) ) {
