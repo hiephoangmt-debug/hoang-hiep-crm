@@ -673,5 +673,82 @@ HTML
 			'https://dantri.com.vn/thoi-su/quyet-dinh-7-vi-tri-lam-khu-thuong-mai-tu-do-da-nang-20250616155817749.htm',
 		),
 	);
+	/* ---------------- 14/11 – Đà Nẵng rà soát nhà ở xã hội (buổi làm việc 10/11): 8 dự án, khoảng 4.575 căn sắp khởi công ---------------- */
+	$posts[] = array(
+		'slug'           => 'da-nang-khoi-cong-8-du-an-nha-o-xa-hoi-4575-can-cuoi-2026',
+		'title'          => 'Đà Nẵng sắp khởi công 8 dự án nhà ở xã hội, khoảng 4.575 căn trong 2 tháng cuối năm 2026',
+		'excerpt'        => 'Tại buổi làm việc ngày 10/11/2026, Đà Nẵng cho biết từ đầu năm đã giao chủ đầu tư 10 dự án nhà ở xã hội (9.916 căn), đã khởi công 4 dự án, mở bán 4 dự án và dự kiến khởi công thêm 8 dự án với khoảng 4.575 căn trong 2 tháng cuối năm. Danh mục 113 khu đất khoảng 390 ha là quỹ đất cho giai đoạn 2026 – 2030.',
+		'keyword'        => 'nhà ở xã hội Đà Nẵng',
+		'keywords_extra' => array( 'nhà ở xã hội Đà Nẵng 2026', '113 khu đất nhà ở xã hội Đà Nẵng', 'mua nhà ở xã hội Đà Nẵng', 'Quyết định 2259/QĐ-UBND' ),
+		'project'        => '',
+		'schedule'       => '2026-11-14 07:00',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Nhà ở xã hội', 'Chính sách nhà ở', 'Hạ tầng Đà Nẵng' ),
+		'image'          => 'plugin:img/tin-tuc/da-nang-khoi-cong-8-du-an-nha-o-xa-hoi-4575-can-cuoi-2026.jpg',
+		'image_alt'      => 'Đà Nẵng sắp khởi công 8 dự án nhà ở xã hội, khoảng 4.575 căn trong 2 tháng cuối năm 2026',
+		'content'        => <<<HTML
+<p>Ngày 10/11/2026, tại buổi làm việc về tình hình phát triển <strong>nhà ở xã hội</strong> (Chủ tịch HĐND thành phố Nguyễn Đức Dũng chủ trì, theo VnExpress), Sở Xây dựng Đà Nẵng báo cáo: từ đầu năm 2026 thành phố đã chấp thuận chủ trương đầu tư, giao chủ đầu tư <strong>10 dự án với khoảng 9.916 căn</strong>; trong 2 tháng cuối năm dự kiến <strong>khởi công thêm 8 dự án, khoảng 4.575 căn</strong>. Đây là nguồn cung đáng chú ý cho người thu nhập thấp, công nhân, cán bộ – công chức đang tìm nhà ở Đà Nẵng.</p>
+<!--hh-featured-->
+<h2>Nhà ở xã hội Đà Nẵng 2026: các con số chính</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Theo báo chí đưa tin</th></tr></thead>
+<tbody>
+<tr><td>Đã giao chủ đầu tư từ đầu năm 2026</td><td>10 dự án, khoảng 9.916 căn</td></tr>
+<tr><td>Đã khởi công</td><td>4 dự án, khoảng 2.232 căn</td></tr>
+<tr><td>Đã mở bán</td><td>4 dự án, khoảng 2.685 căn</td></tr>
+<tr><td>Dự kiến khởi công 2 tháng cuối năm</td><td>8 dự án, khoảng 4.575 căn</td></tr>
+<tr><td>Chỉ tiêu giai đoạn 2026 – 2030</td><td>26.279 căn (Nghị quyết 303/NQ-CP ngày 30/9/2026 của Chính phủ, theo báo chí)</td></tr>
+<tr><td>Quỹ đất đã duyệt</td><td>113 khu đất, khoảng 390 ha (Quyết định 2259/QĐ-UBND ngày 22/5/2026): 24 khu đang triển khai dự án, 89 khu dự kiến triển khai giai đoạn tiếp theo</td></tr>
+</tbody>
+</table>
+<h2>Quỹ đất 113 khu: những khu lớn nhất</h2>
+<p>Theo Quyết định 2259/QĐ-UBND, các khu đất có quy mô lớn trong danh mục gồm: Khu đô thị Tam Hòa – Tam Tiến khoảng 20,3 ha; Điểm dân cư số 1 tại xã Hòa Tiến khoảng 20,2 ha; Khu đô thị Chu Lai (xã Núi Thành) khoảng 17,4 ha; Khu nhà ở xã hội Vạn Phúc – Hội An (phường Hội An Tây) khoảng 12,41 ha. Quỹ đất trải ra cả khu vực Đà Nẵng cũ lẫn vùng Quảng Nam cũ sau hợp nhất – từ các xã phía Tây, phía Nam đến Hội An, Chu Lai.</p>
+<!--hh-img:img/hoa-xuan/hoa-xuan-flycam-8-2025-toan-canh-ven-song-cam-le.jpg|Khu đô thị ven sông Cẩm Lệ – Hòa Xuân, nơi có các dự án nhà ở xã hội Lê Kim Lăng và Hòa Phước (ảnh flycam thực tế tháng 8/2025)-->
+<h2>Điều gì còn làm chậm tiến độ?</h2>
+<p>Theo Sở Xây dựng, tiến độ nhiều dự án còn phụ thuộc vào việc điều chỉnh quy hoạch, giải phóng mặt bằng và đầu tư hạ tầng kỹ thuật kết nối; nguồn cung nhà ở xã hội <strong>cho thuê</strong> cũng còn thiếu so với chỉ tiêu. Các con số 4.575 căn hay 26.279 căn vì vậy là kế hoạch, chưa phải kết quả – người mua nên theo dõi thông báo mở bán chính thức của từng dự án.</p>
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Cơ hội cho người mua nhà đầu tiên:</strong> nguồn cung nhà ở xã hội tăng mạnh từ cuối 2026 – 2027. Người đủ điều kiện (theo Luật Nhà ở 2023 và các văn bản hướng dẫn về đối tượng, thu nhập, nhà ở hiện có) nên chuẩn bị hồ sơ xác nhận sớm để kịp đợt nhận hồ sơ của từng dự án.</li>
+<li><strong>Giá căn hộ thương mại bình dân bị cạnh tranh:</strong> phân khúc căn hộ thương mại giá thấp ở vùng ven (Liên Chiểu, Hòa Vang, Cẩm Lệ) sẽ chịu cạnh tranh trực tiếp từ nhà ở xã hội có giá thấp hơn và được vay ưu đãi.</li>
+<li><strong>Hạ tầng đi kèm:</strong> các khu nhà ở xã hội lớn thường kéo theo đường, trường, chợ – khu vực xung quanh (đặc biệt Hòa Tiến, Tam Hòa – Tam Tiến, Chu Lai) sẽ đông dân hơn, có lợi cho nhà phố kinh doanh, dịch vụ quanh đó về dài hạn.</li>
+<li><strong>Không mua suất nhà ở xã hội qua trung gian:</strong> hồ sơ mua nhà ở xã hội nộp trực tiếp cho chủ đầu tư và được xét theo điều kiện; tránh các lời mời "giữ suất", "mua lại suất" có thu tiền.</li>
+<li><strong>Không đủ điều kiện nhà ở xã hội:</strong> có thể tham khảo căn hộ thương mại giá vừa tại khu Nam, Hòa Xuân – nơi hạ tầng đã đồng bộ.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/loai-du-an/nha-o-xa-hoi/">Danh sách nhà ở xã hội Đà Nẵng trên web</a> – tổng hợp các dự án nhà ở xã hội, thu nhập thấp đang triển khai để anh chị so sánh vị trí, quy mô.</li>
+<li><a href="/du-an/nha-o-xa-hoi-le-kim-lang-hoa-xuan/">Nhà ở xã hội Lê Kim Lăng (Hòa Xuân)</a> và <a href="/du-an/nha-o-xa-hoi-hoa-phuoc-hoa-xuan/">Khu nhà ở xã hội Hòa Phước (Hòa Xuân)</a> – nằm trong khu đô thị Hòa Xuân, hạ tầng sẵn, thuộc nhóm dự án nhà ở xã hội khu Nam thành phố.</li>
+<li><a href="/du-an/nha-o-xa-hoi-chung-cu-so-5-nam-cau-cam-le/">Nhà ở xã hội Khu chung cư số 5 – Nam cầu Cẩm Lệ</a> – nguồn cung khu Cẩm Lệ, gần trung tâm.</li>
+<li><a href="/du-an/nha-o-xa-hoi-bac-hoa-khanh/">Nhà ở xã hội Bắc Hòa Khánh</a> – khu Liên Chiểu, gần khu công nghiệp, phù hợp công nhân và người lao động.</li>
+<li><a href="/du-an/nha-o-xa-hoi-con-tien-hoi-an/">Nhà ở xã hội Khu đô thị Cồn Tiến (Hội An)</a> và <a href="/du-an/nha-o-xa-hoi-nui-thanh-chu-lai/">Khu nhà ở xã hội Núi Thành (Chu Lai)</a> – vùng Quảng Nam cũ, nơi có các khu đất lớn trong danh mục 113 khu (Hội An Tây, Chu Lai).</li>
+</ul>
+<p>Cần kiểm tra điều kiện mua nhà ở xã hội hoặc so sánh với căn hộ thương mại giá vừa, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: buổi làm việc về nhà ở xã hội ngày 10/11/2026 theo VnExpress, CafeF, Báo Đầu tư, VietTimes, Vietbao (10 – 11/11/2026); Quyết định 2259/QĐ-UBND ngày 22/5/2026 về danh mục 113 vị trí khu đất phát triển nhà ở xã hội theo VnEconomy, Báo Xây dựng, Bộ Xây dựng (5/2026). Bài viết theo trích yếu báo chí, chưa đọc toàn văn các văn bản.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Đà Nẵng sắp khởi công 8 dự án nhà ở xã hội',
+			'desc'      => 'Đà Nẵng dự kiến khởi công 8 dự án nhà ở xã hội, khoảng 4.575 căn cuối 2026; đã giao 10 dự án 9.916 căn; quỹ 113 khu đất 390 ha. Ai nên chú ý?',
+			'points'    => array(
+				'10/11/2026: Đà Nẵng dự kiến khởi công 8 dự án nhà ở xã hội, khoảng 4.575 căn trong 2 tháng cuối năm',
+				'Từ đầu 2026: giao chủ đầu tư 10 dự án (9.916 căn), khởi công 4 dự án, mở bán 4 dự án',
+				'Quỹ 113 khu đất khoảng 390 ha (QĐ 2259/QĐ-UBND), chỉ tiêu 26.279 căn giai đoạn 2026 – 2030',
+			),
+			'faq'       => array(
+				array( 'Đà Nẵng có bao nhiêu dự án nhà ở xã hội sắp khởi công?', 'Theo báo cáo tại buổi làm việc ngày 10/11/2026, thành phố dự kiến khởi công thêm 8 dự án với khoảng 4.575 căn trong 2 tháng cuối năm 2026.' ),
+				array( 'Danh mục 113 khu đất nhà ở xã hội Đà Nẵng là gì?', 'Quyết định 2259/QĐ-UBND ngày 22/5/2026 phê duyệt 113 vị trí khu đất khoảng 390 ha để phát triển nhà ở xã hội, gồm 24 khu đang triển khai và 89 khu dự kiến triển khai giai đoạn tiếp theo.' ),
+				array( 'Mua nhà ở xã hội Đà Nẵng cần chú ý gì?', 'Kiểm tra điều kiện về đối tượng, thu nhập, nhà ở hiện có theo Luật Nhà ở 2023; nộp hồ sơ trực tiếp cho chủ đầu tư khi dự án thông báo nhận hồ sơ, không mua "suất" qua trung gian.' ),
+			),
+		),
+		'sources'        => array(
+			'https://vnexpress.net/da-nang-duyet-113-khu-dat-lam-nha-o-xa-hoi-5143099.html',
+			'https://cafef.vn/da-nang-chot-113-khu-dat-lam-nha-o-xa-hoi-188261111200430276.chn',
+			'https://baodautu.vn/da-nang-chuan-bi-khoi-cong-them-8-du-an-nha-o-xa-hoi-d664013.html',
+			'https://viettimes.vn/da-nang-chuan-bi-khoi-cong-8-du-an-nha-o-xa-hoi-bo-sung-hon-4500-can-post208239.html',
+			'https://vietbao.vn/da-nang-ra-tien-do-nha-o-xa-hoi-muc-tieu-26279-can-den-nam-2030-615377.html',
+			'https://vneconomy.vn/da-nang-phe-duyet-danh-muc-113-vi-tri-khu-dat-phat-trien-nha-o-xa-hoi.htm',
+			'https://baoxaydung.vn/da-nang-phe-duyet-danh-muc-113-khu-dat-phat-trien-nha-o-xa-hoi-192260523080124625.htm',
+		),
+	);
 	return $posts;
 }
