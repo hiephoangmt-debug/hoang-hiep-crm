@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.24** + plugin Hoàng Hiệp CRM **2.20.255**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.24** + plugin Hoàng Hiệp CRM **2.20.256**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.256 (13/11/2026)
+
+- **Kết nối web với Metricool:** chèn mã theo dõi Metricool (đúng đoạn mã của plugin chính thức, không dùng cookie) vào mọi trang của hiephoangmt.com, gắn với brand "Sun Đà Nẵng by Hoàng Hiệp". Không cần cài thêm plugin Metricool. Khi đang đăng nhập quản trị, mã không chạy để số liệu không lẫn lượt xem của chính mình.
+- Cài: Nhập nhanh → tải `cap-nhat-code.zip` → LiteSpeed Purge All → trên Metricool bấm **Verify** (nên mở thử web ở cửa sổ ẩn danh 1 lần trước khi Verify).
 
 ## Có gì mới – 2.20.255 (12/11/2026)
 
