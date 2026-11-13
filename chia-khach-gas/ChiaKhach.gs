@@ -54,6 +54,7 @@ var MAC_DINH = {
   CHIA_TAY: 'fours',          // khách có chữ này (trang / nhu cầu / nguồn) KHÔNG tự chia: bot gửi quản lý kèm nút tên sale để chọn người nhận; để trống = tự chia hết
   NHOM_RIENG: 'fours,saphia', // khách có chữ này (trang / nhu cầu / nguồn) tính lượt FourS–Saphia; còn lại là dự án khác
   DUNG_CHIA: 0,              // 1 = dừng chia khách FourS/Saphia: không tự thu hồi, không giao lại, không nhắc hạn (khách ai đang giữ người đó giữ); quản lý vẫn bấm chia / /them được
+  CHIA_KHAC: 0,              // khách dự án khác (DATA CHẠY GOOGLE) khi TU_CHIA=1: 0 = chỉ lưu data, 1 = tự chia luôn
   TU_CHIA: 0,                // 1 = khách mới từ web / DATA CHẠY GOOGLE tự chia; 0 = chỉ báo quản lý, bấm "Chia khách này" hoặc /them mới chia
   TELESALE_SHEET_ID: '',     // file báo cáo telesale (tab "Data 01", "Data 02"…): ai báo cáo hết số đang giữ thì tự cấp thêm; để trống = tắt
   TELESALE_THEM: 1,          // mỗi lần giao ngần này số (1 = chia từng số: gọi xong, báo cáo xong mới giao số tiếp)
@@ -273,7 +274,7 @@ function caiDat() {
 
 /* Danh sách lệnh hiện ra khi gõ dấu / trong Telegram: sale thấy lệnh sale, quản lý thấy lệnh quản lý */
 function datLenh_() {
-  var sale = [{command: 'khach', description: 'Khách đang giữ và giờ hạn'}, {command: 'giahan', description: 'Xin thêm 1 ngày: /giahan K12'},
+  var sale = [{command: 'khach', description: 'Khách đang giữ và giờ hạn'}, {command: 'giahan', description: 'Xin thêm 1 ngày: /giahan K12'}, {command: 'ghi', description: 'Ghi nhu cầu khách: /ghi K12 nội dung'},
     {command: 'nghi', description: 'Tạm ngưng nhận khách'}, {command: 'lam', description: 'Nhận khách trở lại'}, {command: 'dangky', description: 'Xin vào đội: /dangky Tên'}];
   var ql = [{command: 'them', description: 'Thêm khách: /them Số Tên - nhu cầu'}, {command: 'themkhac', description: 'Khách dự án khác (không tính lượt FourS/Saphia)'}, {command: 'huy', description: 'Huỷ khách thử, trả lượt: /huy K39'}, {command: 'dong', description: 'Dừng chia khách thật: /dong K38 Khách đã mua'}, {command: 'chialai', description: 'Chia lại khách sang nhánh 2, 3…: /chialai K12'}, {command: 'sale', description: 'Danh sách đội'},
     {command: 'baocao', description: 'Báo cáo hôm nay'}, {command: 'tuan', description: 'Xếp hạng 7 ngày'}, {command: 'tam', description: 'Tạm dừng sale: /tam Tên'},
@@ -496,6 +497,10 @@ function nhanKhachMoi_() {
     P().setProperty('CHO_THEM', JSON.stringify(cho));
     return;
   }
+  moi = moi.filter(function (c) {
+    if (c.nhom !== 'khac' || Number(cfg('CHIA_KHAC'))) return true;
+    log_('hệ thống', 'khách dự án khác – chỉ lưu data', '', che(c.sdt) + (c.du_an ? ' · ' + String(c.du_an).slice(0, 40) : '')); return false;
+  });
   moi.forEach(function (c) {
     dem++;
     var k = {id: 'K' + dem, luc_vao: nowD(), ten: c.ten, sdt: c.sdt, nhu_cau: [c.du_an, c.ghi_chu].filter(String).join(' · '),
@@ -667,8 +672,18 @@ function dangGiu_(chat, re, nhom) {
 /* Tin cho sale: không ghi ai giữ trước, không ghi giờ khách vào → sale không biết khách bị thu hồi từ ai */
 function tinKhach_(k, day) {
   return '🔥 <b>KHÁCH ' + esc(k.id) + '</b>' + (k.ten ? ' – ' + esc(k.ten) : '') + '\n📞 ' + (day ? '<b>' + esc(k.sdt) + '</b> · <a href="https://zalo.me/' + esc(k.sdt) + '">Mở Zalo</a>' : esc(che(k.sdt)))
-    + (k.nhu_cau ? '\n• Quan tâm: ' + esc(k.nhu_cau) : '') + (k.nguon ? '\n• Nguồn: ' + esc(k.nguon) : '') + '\n• Giao lúc: ' + fmt(k.luc_giao || k.luc_vao);
+    + (k.nhu_cau ? '\n• Quan tâm: ' + esc(k.nhu_cau) : '') + (k.nguon ? '\n• Nguồn: ' + esc(k.nguon) : '') + '\n• Giao lúc: ' + fmt(k.luc_giao || k.luc_vao)
+    + (k.ghi_chu ? '\n📒 <b>Ghi chú các lần chăm:</b>\n' + esc(String(k.ghi_chu).split('\n').slice(-8).join('\n').slice(-900)) : '');
 }
+/* Ghi chú chăm khách: mỗi dòng "[ngày Tên] nội dung", giữ lại phần mới nhất. Bạn nhận lần 2, 3… đọc được trong tin giao khách */
+function themGhiChu_(k, ten, nd) {
+  nd = String(nd || '').replace(/\s+/g, ' ').trim(); if (!nd) return;
+  var d = new Date(Date.now() + 7 * 3600000), z = function (n) { return (n < 10 ? '0' : '') + n; };
+  var dong = '[' + z(d.getUTCDate()) + '/' + z(d.getUTCMonth() + 1) + ' ' + String(ten || '').split(' ').pop() + '] ' + nd.slice(0, 300);
+  k.ghi_chu = (k.ghi_chu ? String(k.ghi_chu) + '\n' : '') + dong;
+  if (k.ghi_chu.length > 2000) k.ghi_chu = k.ghi_chu.slice(-2000).replace(/^[^\n]*\n/, '');
+}
+var HOI_GHI = '\n\n✍️ <b>Ghi nhanh nhu cầu khách</b> (dự án, loại căn, tài chính, thời điểm mua…): gõ 1 tin trả lời ngay sau tin này. Bạn sau nhận khách sẽ đọc được.';
 function nutBaoCao_(id) {
   return [[{text: '📞 ' + BC.goi, callback_data: 'b:' + id + ':goi'}, {text: '🔕 ' + BC.knm, callback_data: 'b:' + id + ':knm'}],
     [{text: '📅 ' + BC.hen, callback_data: 'b:' + id + ':hen'}, {text: '🔥 ' + BC.nong, callback_data: 'b:' + id + ':nong'}],
@@ -964,12 +979,25 @@ function lenh_(m) {
     var kd = timKhach_(choLd);
     if (kd && String(kd.nguoi_giu) === chat && kd.trang_thai === 'cho_ly_do') {
       P().deleteProperty('LYDO_' + chat);
-      kd.ly_do_dong = t.slice(0, 300); kd.trang_thai = 'cho_duyet_dong'; kd.luc_bao_cao = nowD(); save_('Khach', T_KHACH, kd); log_(kd.ten_sale, 'xin đóng khách', kd.id, kd.ly_do_dong);
+      kd.ly_do_dong = t.slice(0, 300); themGhiChu_(kd, kd.ten_sale, 'Lý do không tiềm năng: ' + kd.ly_do_dong); kd.trang_thai = 'cho_duyet_dong'; kd.luc_bao_cao = nowD(); save_('Khach', T_KHACH, kd); log_(kd.ten_sale, 'xin đóng khách', kd.id, kd.ly_do_dong);
       gui_(chat, '📝 Đã gửi lý do, chờ quản lý duyệt đóng khách ' + esc(kd.id) + '.');
       baoQL_('🚫 <b>' + esc(kd.ten_sale) + '</b> xin đóng khách ' + esc(kd.id) + ' (' + esc(che(kd.sdt)) + ').\nLý do: ' + esc(kd.ly_do_dong), [[{text: '✅ Đồng ý đóng', callback_data: 'dd:' + kd.id}, {text: '🔁 Chia lại', callback_data: 'cl:' + kd.id}]]);
       return;
     }
     P().deleteProperty('LYDO_' + chat);
+  }
+  /* Ghi chú nhu cầu: tin chữ ngay sau khi báo cáo, hoặc /ghi Mã nội dung */
+  var choGhi = P().getProperty('GHI_' + chat);
+  if (c === '/ghi' || (choGhi && c.charAt(0) !== '/')) {
+    var gm = c === '/ghi' ? arg.match(/^(K\d+|H\d+)\s+([\s\S]+)$/i) : null;
+    var kn = gm ? timKhach_(gm[1].toUpperCase()) : (c === '/ghi' ? null : timKhach_(choGhi)), nd = gm ? gm[2] : t;
+    if (c === '/ghi' && !gm) { gui_(chat, 'Gõ: <code>/ghi K12 khách cần 2PN, tài chính 3 tỷ, vay 50%, mua trong quý 1</code>'); return; }
+    P().deleteProperty('GHI_' + chat);
+    if (kn && String(kn.nguoi_giu) === chat) {
+      themGhiChu_(kn, kn.ten_sale, nd); save_('Khach', T_KHACH, kn); log_(kn.ten_sale, 'ghi chú', kn.id, String(nd).slice(0, 120));
+      gui_(chat, '📒 Đã ghi chú cho khách ' + esc(kn.id) + '. Thêm nữa thì gõ <code>/ghi ' + esc(kn.id) + ' nội dung</code>.'); return;
+    }
+    if (c === '/ghi') { gui_(chat, 'Khách này không do bạn giữ.'); return; }
   }
   if (c === '/tailieu') { taiLieu_(chat); return; }
   if (c === '/nghi') { s.trang_thai = 'nghi'; save_('Sale', T_SALE, s); log_(s.ten, 'tự nghỉ'); gui_(chat, '⏸ Đã tạm dừng nhận khách. Nhắn /lam để nhận lại.'); return; }
@@ -1056,6 +1084,7 @@ function bam_(q) {
     var code = parts[2];
     k.luc_bao_cao = nowD(); k.bao_cao = BC[code]; k.so_bao_cao = Number(k.so_bao_cao || 0) + 1;
     boNhac_(k, 'h');
+    themGhiChu_(k, k.ten_sale, BC[code]);
     if (code === 'khong') {
       k.trang_thai = 'cho_ly_do'; save_('Khach', T_KHACH, k); log_(k.ten_sale, 'báo cáo', k.id, BC[code]);
       P().setProperty('LYDO_' + chat, k.id);
@@ -1067,7 +1096,8 @@ function bam_(q) {
     else if (k.trang_thai !== 'chuyen_doi') k.trang_thai = 'dang_cham';
     save_('Khach', T_KHACH, k); log_(k.ten_sale, 'báo cáo', k.id, BC[code]);
     var xong = k.trang_thai === 'chot';
-    sua_(chat, k.msg_id, tinKhach_(k, true) + '\n\n📝 Báo cáo mới nhất: <b>' + esc(BC[code]) + '</b> (' + fmt(k.luc_bao_cao) + ')' + (xong ? '' : '\n' + dongHan_(k)), xong ? [] : nutBaoCao_(k.id));
+    if (!xong) P().setProperty('GHI_' + chat, k.id);
+    sua_(chat, k.msg_id, tinKhach_(k, true) + '\n\n📝 Báo cáo mới nhất: <b>' + esc(BC[code]) + '</b> (' + fmt(k.luc_bao_cao) + ')' + (xong ? '' : '\n' + dongHan_(k) + HOI_GHI), xong ? [] : nutBaoCao_(k.id));
     if (code === 'cd') baoQL_('🎉 <b>' + esc(k.ten_sale) + '</b> đã chốt khách ' + esc(k.id) + '.');
     return tl('Đã ghi báo cáo');
   }
