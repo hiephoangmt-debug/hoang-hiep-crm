@@ -52,6 +52,8 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 - **Quản trị → Khu Sale → Tài liệu sale:** tải file lên (lưu thư mục kín) hoặc dán link Drive, chọn dự án + nhóm.
 - **Trang sửa dự án:** khung mới "Dành cho sale (nội bộ – không hiện trên web)": điểm bán hàng, câu hỏi khách hay hỏi | cách trả lời, lưu ý khi tư vấn, link tài liệu nội bộ.
 - **Khách hàng:** thêm cột + khung "Sale phụ trách", lịch sử chăm sóc.
+- **Báo cáo** (/sale/bao-cao/, chọn kỳ 7 / 30 ngày / tháng này / 90 ngày / tất cả): tổng khách, chưa gọi, quá 30 phút chưa gọi, đã chốt, tỷ lệ chốt, thời gian gọi lại trung bình; biểu đồ khách theo ngày; bảng từng sale (khách nhận, quá hạn, chốt, tỷ lệ, gọi lại TB, lượt tải tài liệu, đăng nhập cuối); khách theo dự án. Sale chỉ thấy số liệu của mình.
+- Giao diện khu sale: banner chào + nút nhanh, thẻ số liệu có màu, thẻ dự án có ảnh, trang dự án có ảnh bìa, biểu tượng loại file.
 
 ## Có gì mới – 2.20.262 (14/11/2026)
 

@@ -103,11 +103,11 @@ add_action(
 	'init',
 	static function () {
 		add_rewrite_rule( '^sale/?$', 'index.php?hh_sale=home', 'top' );
-		add_rewrite_rule( '^sale/(du-an|tai-lieu|khach-hang)/?$', 'index.php?hh_sale=$matches[1]', 'top' );
+		add_rewrite_rule( '^sale/(du-an|tai-lieu|khach-hang|bao-cao)/?$', 'index.php?hh_sale=$matches[1]', 'top' );
 		add_rewrite_rule( '^sale/du-an/([^/]+)/?$', 'index.php?hh_sale=du-an&hh_sale_id=$matches[1]', 'top' );
 		add_rewrite_rule( '^sale/tai/([0-9]+)/?$', 'index.php?hh_sale=tai&hh_sale_id=$matches[1]', 'top' );
-		if ( '1' !== get_option( 'hh_sale_rules_v' ) ) {
-			update_option( 'hh_sale_rules_v', '1', true );
+		if ( '2' !== get_option( 'hh_sale_rules_v' ) ) {
+			update_option( 'hh_sale_rules_v', '2', true );
 			flush_rewrite_rules( false );
 		}
 	},
@@ -152,6 +152,9 @@ add_action(
 		} elseif ( 'tai-lieu' === $view ) {
 			$title = 'Tài liệu';
 			hh_sale_view_docs();
+		} elseif ( 'bao-cao' === $view ) {
+			$title = 'Báo cáo';
+			hh_sale_view_report();
 		} elseif ( 'khach-hang' === $view ) {
 			$title = 'Khách của tôi';
 			hh_sale_view_leads();
@@ -197,6 +200,18 @@ input,select,textarea{font:inherit;padding:8px 10px;border:1.5px solid #d3dbe6;b
 .note{font-size:13px;color:var(--mut)}.warn{background:#fff7e6;border-color:#f5d38a}
 .lead-row form{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.lead-row textarea{width:100%;min-height:44px}
 .log{font-size:13px;color:var(--mut);margin-top:6px}.log p{margin:2px 0}
+.hero{position:relative;margin:18px 0 6px;border-radius:18px;overflow:hidden;background:linear-gradient(120deg,#0e223a 0%,#16304f 55%,#1f3d63 100%);color:#fff;padding:26px 24px}
+.hero:after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(255,138,61,.45),rgba(255,138,61,0) 70%)}
+.hero h1{margin:0 0 4px;color:#fff;font-size:26px}.hero p{margin:0;color:#c9d6e6;position:relative;z-index:1}.hero .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;position:relative;z-index:1}
+.hero .acts a{background:rgba(255,255,255,.12);color:#fff;text-decoration:none;border-radius:999px;padding:8px 14px;font-size:14px;font-weight:600}.hero .acts a.hl{background:linear-gradient(135deg,var(--o),var(--o2))}
+.stats div{position:relative;border-left:4px solid #c9d3df;box-shadow:0 6px 18px -14px rgba(14,34,58,.45)}.stats .s-moi{border-left-color:var(--o)}.stats .s-moi b{color:var(--o)}.stats .s-da-lien-he{border-left-color:#3b82f6}.stats .s-dang-cham-soc{border-left-color:#8b5cf6}.stats .s-chot{border-left-color:#16a34a}.stats .s-chot b{color:#16a34a}.stats .s-huy{border-left-color:#94a3b8}
+.box{box-shadow:0 8px 24px -18px rgba(14,34,58,.35)}.box h2{display:flex;align-items:center;gap:8px}.box h2:before{content:"";width:4px;height:18px;border-radius:2px;background:linear-gradient(var(--o),var(--o2))}
+.card{padding:0;overflow:hidden;box-shadow:0 8px 22px -18px rgba(14,34,58,.5);transition:transform .15s,box-shadow .15s}.card:hover{transform:translateY(-2px);box-shadow:0 16px 30px -18px rgba(14,34,58,.55)}
+.card .ph{display:block;aspect-ratio:16/9;background:#dfe6ee center/cover no-repeat}.card .in{display:block;padding:12px 14px 14px}.card .in b{margin-bottom:2px}
+.cover{position:relative;margin:14px 0 6px;border-radius:18px;overflow:hidden;min-height:220px;display:flex;align-items:flex-end;background:#0e223a center/cover no-repeat;color:#fff}
+.cover:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,34,58,.05),rgba(14,34,58,.85))}.cover>div{position:relative;padding:20px 22px}.cover h1{color:#fff;margin:0 0 4px}.cover p{margin:0;color:#dbe4ef;font-size:14px}.cover a{color:#ffb38a}
+.ftype{display:inline-grid;place-items:center;min-width:42px;height:42px;border-radius:10px;font-size:11px;font-weight:800;color:#fff;background:#64748b;margin-right:10px;flex:none}.ftype.pdf{background:#dc2626}.ftype.xls{background:#16a34a}.ftype.doc{background:#2563eb}.ftype.ppt{background:#ea580c}.ftype.img{background:#7c3aed}.ftype.lnk{background:#0ea5e9}
+.dname{display:flex;align-items:center}
 @media (max-width:640px){h1{font-size:21px}.top .wrap{padding:8px 16px}.tabs{order:3;width:100%;margin:0}.kv th{width:40%}td,th{padding:7px 6px}}';
 }
 
@@ -207,6 +222,7 @@ function hh_sale_layout( $title, $view, $body ) {
 		'du-an'      => array( 'Học dự án', hh_sale_url( 'du-an' ) ),
 		'tai-lieu'   => array( 'Tài liệu', hh_sale_url( 'tai-lieu' ) ),
 		'khach-hang' => array( hh_sale_is_admin() ? 'Khách hàng' : 'Khách của tôi', hh_sale_url( 'khach-hang' ) ),
+		'bao-cao'    => array( 'Báo cáo', hh_sale_url( 'bao-cao' ) ),
 	);
 	?><!DOCTYPE html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
@@ -275,10 +291,13 @@ function hh_sale_view_home() {
 			++$count[ $s ];
 		}
 	}
-	echo '<h1>Chào ' . esc_html( $u->display_name ) . '</h1><p class="note">' . ( hh_sale_is_admin() ? 'Bạn đang xem với quyền quản trị (thấy khách của tất cả sale).' : 'Khách được giao cho bạn và tài liệu dự án đang bán.' ) . '</p>';
+	$hour = (int) wp_date( 'G' );
+	$hi   = $hour < 11 ? 'Chào buổi sáng' : ( $hour < 14 ? 'Chào buổi trưa' : ( $hour < 18 ? 'Chào buổi chiều' : 'Chào buổi tối' ) );
+	echo '<section class="hero"><h1>' . esc_html( $hi . ', ' . $u->display_name ) . ' 👋</h1><p>' . ( hh_sale_is_admin() ? 'Bạn đang xem với quyền quản trị – thấy khách của tất cả sale.' : ( $count['moi'] ? 'Bạn có <b>' . (int) $count['moi'] . ' khách mới</b> đang chờ gọi – gọi sớm trong 15 phút để chốt cao hơn.' : 'Chưa có khách mới chờ gọi. Dành thời gian học dự án và chuẩn bị tài liệu nhé.' ) ) . '</p>'
+		. '<div class="acts"><a class="hl" href="' . esc_url( hh_sale_url( 'khach-hang' ) ) . '">Khách của tôi</a><a href="' . esc_url( hh_sale_url( 'du-an' ) ) . '">Học dự án</a><a href="' . esc_url( hh_sale_url( 'tai-lieu' ) ) . '">Tài liệu</a></div></section>';
 	echo '<div class="stats">';
 	foreach ( HH_LEAD_STATUSES as $k => $label ) {
-		printf( '<div><b>%d</b><span>%s</span></div>', (int) $count[ $k ], esc_html( $label ) );
+		printf( '<div class="s-%s"><b>%d</b><span>%s</span></div>', esc_attr( $k ), (int) $count[ $k ], esc_html( $label ) );
 	}
 	echo '</div>';
 	if ( ! hh_sale_is_admin() || current_user_can( 'hh_sale_portal' ) ) {
@@ -320,10 +339,12 @@ function hh_sale_project_card( $p ) {
 	$dl   = $m( 'hh_p_offer_deadline' );
 	$has  = $m( '_hh_sale_usp' ) || $m( '_hh_sale_faq' );
 	$docs = hh_sale_docs_for( $p->ID );
+	$thumb = get_the_post_thumbnail_url( $p, 'medium_large' ) ?: get_the_post_thumbnail_url( $p, 'large' );
 	printf(
-		'<a class="card" href="%s" data-s="%s"><b>%s</b><span>%s%s</span><br>%s%s%s</a>',
+		'<a class="card" href="%s" data-s="%s"><span class="ph"%s></span><span class="in"><b>%s</b><span>%s%s</span><br>%s%s%s</span></a>',
 		esc_url( hh_sale_url( 'du-an/' . $p->post_name ) ),
 		esc_attr( mb_strtolower( get_the_title( $p ) . ' ' . $m( 'hh_p_developer' ) . ' ' . $m( 'hh_p_address' ) ) ),
+		$thumb ? ' style="background-image:url(\'' . esc_url( $thumb ) . '\')"' : '',
 		esc_html( get_the_title( $p ) ),
 		esc_html( $m( 'hh_p_developer' ) ),
 		$m( 'hh_p_price_m2' ) ? ' · ' . esc_html( $m( 'hh_p_price_m2' ) ) : '',
@@ -413,7 +434,8 @@ function hh_sale_view_project( $slug ) {
 	$title = get_the_title( $p );
 
 	echo '<p style="margin:16px 0 0"><a href="' . esc_url( hh_sale_url( 'du-an' ) ) . '">← Danh sách dự án</a></p>';
-	echo '<h1>' . esc_html( $title ) . '</h1><p class="note">' . ( $st ? '<span class="pill">' . esc_html( $st ) . '</span> ' : '' ) . 'Cập nhật ' . esc_html( get_the_modified_date( 'd/m/Y', $p ) ) . ' · <a href="' . esc_url( get_permalink( $p ) ) . '" target="_blank" rel="noopener">Trang khách xem</a></p>';
+	$cov = get_the_post_thumbnail_url( $p, '1536x1536' ) ?: get_the_post_thumbnail_url( $p, 'large' );
+	echo '<section class="cover"' . ( $cov ? ' style="background-image:url(\'' . esc_url( $cov ) . '\')"' : '' ) . '><div><h1>' . esc_html( $title ) . '</h1><p>' . ( $st ? '<span class="pill o">' . esc_html( $st ) . '</span> ' : '' ) . ( $m( 'hh_p_developer' ) ? esc_html( $m( 'hh_p_developer' ) ) . ' · ' : '' ) . 'Cập nhật ' . esc_html( get_the_modified_date( 'd/m/Y', $p ) ) . ' · <a href="' . esc_url( get_permalink( $p ) ) . '" target="_blank" rel="noopener">Trang khách xem ↗</a></p></div></section>';
 
 	// 1. Điểm bán hàng.
 	$usp = array_filter( array_map( 'trim', preg_split( '/\R/u', $m( '_hh_sale_usp' ) ) ) ) ?: $lines( 'hh_p_highlights' );
@@ -720,6 +742,13 @@ function hh_sale_docs_for( $project_id = null ) {
 	return array_values( array_filter( $all, static fn( $d ) => (int) get_post_meta( $d->ID, '_hh_doc_project', true ) === (int) $project_id ) );
 }
 
+function hh_sale_ftype( $name ) {
+	$ext = strtolower( pathinfo( $name, PATHINFO_EXTENSION ) );
+	$map = array( 'pdf' => 'pdf', 'xlsx' => 'xls', 'xls' => 'xls', 'csv' => 'xls', 'docx' => 'doc', 'doc' => 'doc', 'pptx' => 'ppt', 'ppt' => 'ppt', 'jpg' => 'img', 'jpeg' => 'img', 'png' => 'img', 'webp' => 'img', 'mp4' => 'img' );
+	$cls = '' === $name ? 'lnk' : ( $map[ $ext ] ?? '' );
+	return '<span class="ftype ' . esc_attr( $cls ) . '">' . esc_html( '' === $name ? 'LINK' : strtoupper( $ext ?: 'FILE' ) ) . '</span>';
+}
+
 function hh_sale_docs_list( $docs ) {
 	if ( ! $docs ) {
 		return;
@@ -730,7 +759,8 @@ function hh_sale_docs_list( $docs ) {
 		$file = (string) get_post_meta( $d->ID, '_hh_doc_file', true );
 		$url  = $file ? hh_sale_url( 'tai/' . $d->ID ) : $link;
 		printf(
-			'<tr><td><b>%s</b>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>',
+			'<tr><td><div class="dname">%s<div><b>%s</b>%s</div></div></td><td>%s</td><td>%s</td><td>%s</td></tr>',
+			hh_sale_ftype( $file ? (string) get_post_meta( $d->ID, '_hh_doc_name', true ) : '' ),
 			esc_html( get_the_title( $d ) ),
 			$file ? '<br><span class="note">' . esc_html( (string) get_post_meta( $d->ID, '_hh_doc_name', true ) ) . '</span>' : '',
 			esc_html( (string) get_post_meta( $d->ID, '_hh_doc_group', true ) ),
@@ -1013,6 +1043,12 @@ add_action(
 		$note = sanitize_textarea_field( wp_unslash( $_POST['note'] ?? '' ) );
 		if ( '' !== trim( $note ) ) {
 			hh_sale_log( $id, mb_substr( $note, 0, 1000 ) );
+		}
+		if ( ! get_post_meta( $id, 'hh_sale_first_touch', true ) && (int) get_post_meta( $id, 'hh_sale_owner', true ) === get_current_user_id() && ( '' !== trim( $note ) || $st !== $old ) ) {
+			update_post_meta( $id, 'hh_sale_first_touch', time() ); // Lần đầu sale xử lý khách (tính thời gian phản hồi).
+		}
+		if ( 'chot' === $st && 'chot' !== $old ) {
+			update_post_meta( $id, 'hh_sale_won_at', time() );
 		}
 		if ( $admin && isset( $_POST['owner'] ) ) {
 			$o = absint( $_POST['owner'] );
@@ -1369,3 +1405,167 @@ add_action(
 		exit;
 	}
 );
+
+
+/* =========================================================================
+ * Báo cáo: theo sale, theo ngày, theo dự án, lượt tải tài liệu
+ * ====================================================================== */
+
+function hh_sale_fmt_dur( $sec ) {
+	if ( $sec <= 0 ) {
+		return '—';
+	}
+	if ( $sec < HOUR_IN_SECONDS ) {
+		return max( 1, (int) round( $sec / 60 ) ) . ' phút';
+	}
+	if ( $sec < DAY_IN_SECONDS ) {
+		return round( $sec / HOUR_IN_SECONDS, 1 ) . ' giờ';
+	}
+	return round( $sec / DAY_IN_SECONDS, 1 ) . ' ngày';
+}
+
+function hh_sale_view_report() {
+	$admin  = hh_sale_is_admin();
+	$period = sanitize_key( $_GET['ky'] ?? '30' ); // phpcs:ignore WordPress.Security.NonceVerification
+	$opts   = array( '7' => '7 ngày', '30' => '30 ngày', 'thang' => 'Tháng này', '90' => '90 ngày', 'all' => 'Tất cả' );
+	$period = isset( $opts[ $period ] ) ? $period : '30';
+	$now    = time();
+	$from   = 'all' === $period ? 0 : ( 'thang' === $period ? strtotime( wp_date( 'Y-m-01 00:00:00' ) . ' ' . wp_timezone_string() ) : $now - (int) $period * DAY_IN_SECONDS );
+	$args   = array(
+		'post_type'   => 'khach-hang',
+		'post_status' => array( 'private', 'publish', 'draft', 'pending' ),
+		'numberposts' => -1,
+		'meta_query'  => array( array( 'key' => 'hh_spam', 'compare' => 'NOT EXISTS' ) ), // phpcs:ignore WordPress.DB.SlowDBQuery
+	);
+	if ( $from ) {
+		$args['date_query'] = array( array( 'after' => gmdate( 'Y-m-d H:i:s', $from ), 'column' => 'post_date_gmt' ) );
+	}
+	if ( ! $admin ) {
+		$args['meta_query'][] = array( 'key' => 'hh_sale_owner', 'value' => get_current_user_id() );
+	}
+	$leads = get_posts( $args );
+
+	echo '<h1>Báo cáo</h1><form method="get" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0 4px"><select name="ky" onchange="this.form.submit()">';
+	foreach ( $opts as $k => $l ) {
+		printf( '<option value="%s"%s>%s</option>', esc_attr( $k ), selected( $period, $k, false ), esc_html( $l ) );
+	}
+	echo '</select><span class="note">' . ( $admin ? 'Toàn team' : 'Số liệu của bạn' ) . ' · khách tính theo ngày vào hệ thống</span></form>';
+
+	// Tổng hợp theo sale.
+	$rows  = array();
+	$tot   = array( 'n' => 0, 'moi' => 0, 'touch' => 0, 'chot' => 0, 'huy' => 0, 'late' => 0, 'rt' => array() );
+	$days  = array();
+	$projs = array();
+	foreach ( $leads as $l ) {
+		$o  = (int) get_post_meta( $l->ID, 'hh_sale_owner', true );
+		$st = get_post_meta( $l->ID, 'hh_lead_status', true ) ?: 'moi';
+		$as = (int) get_post_meta( $l->ID, 'hh_sale_assigned_at', true );
+		$ft = (int) get_post_meta( $l->ID, 'hh_sale_first_touch', true );
+		if ( ! isset( $rows[ $o ] ) ) {
+			$rows[ $o ] = array( 'n' => 0, 'moi' => 0, 'touch' => 0, 'chot' => 0, 'huy' => 0, 'late' => 0, 'rt' => array() );
+		}
+		foreach ( array( &$rows[ $o ], &$tot ) as &$r ) {
+			++$r['n'];
+			if ( 'moi' === $st ) {
+				++$r['moi'];
+				if ( $o && $as && $now - $as > 30 * MINUTE_IN_SECONDS ) {
+					++$r['late'];
+				}
+			} else {
+				++$r['touch'];
+			}
+			if ( 'chot' === $st ) {
+				++$r['chot'];
+			}
+			if ( 'huy' === $st ) {
+				++$r['huy'];
+			}
+			if ( $as && $ft && $ft >= $as ) {
+				$r['rt'][] = $ft - $as;
+			}
+		}
+		unset( $r );
+		$d          = get_the_date( 'Y-m-d', $l );
+		$days[ $d ] = ( $days[ $d ] ?? 0 ) + 1;
+		$ref        = (int) get_post_meta( $l->ID, 'hh_property_id', true );
+		$key        = $ref ? get_the_title( $ref ) : 'Không rõ dự án';
+		if ( ! isset( $projs[ $key ] ) ) {
+			$projs[ $key ] = array( 0, 0 );
+		}
+		++$projs[ $key ][0];
+		if ( 'chot' === $st ) {
+			++$projs[ $key ][1];
+		}
+	}
+	$avg  = static fn( $a ) => $a ? (int) ( array_sum( $a ) / count( $a ) ) : 0;
+	$rate = static fn( $r ) => $r['n'] ? round( 100 * $r['chot'] / $r['n'], 1 ) . '%' : '—';
+
+	echo '<div class="stats" style="margin-top:12px">';
+	foreach ( array( array( 'Khách', $tot['n'], '' ), array( 'Chưa gọi', $tot['moi'], 's-moi' ), array( 'Quá 30 phút chưa gọi', $tot['late'], 's-moi' ), array( 'Đã chốt', $tot['chot'], 's-chot' ), array( 'Tỷ lệ chốt', $rate( $tot ), 's-chot' ), array( 'Gọi lại trung bình', hh_sale_fmt_dur( $avg( $tot['rt'] ) ), 's-da-lien-he' ) ) as $c ) {
+		printf( '<div class="%s"><b>%s</b><span>%s</span></div>', esc_attr( $c[2] ), esc_html( (string) $c[1] ), esc_html( $c[0] ) );
+	}
+	echo '</div>';
+
+	// Biểu đồ khách theo ngày (30 ngày gần nhất trong kỳ).
+	$span = 'all' === $period ? 30 : min( 31, max( 7, (int) ceil( ( $now - $from ) / DAY_IN_SECONDS ) ) );
+	$bars = array();
+	for ( $i = $span - 1; $i >= 0; $i-- ) {
+		$d          = wp_date( 'Y-m-d', $now - $i * DAY_IN_SECONDS );
+		$bars[ $d ] = $days[ $d ] ?? 0;
+	}
+	$max = max( 1, max( $bars ) );
+	echo '<div class="box"><h2>Khách mới theo ngày</h2><div style="display:flex;align-items:flex-end;gap:3px;height:150px;padding-top:10px">';
+	foreach ( $bars as $d => $v ) {
+		printf( '<div title="%s: %d khách" style="flex:1;min-width:4px;height:%d%%;background:%s;border-radius:4px 4px 0 0;position:relative">%s</div>', esc_attr( wp_date( 'd/m', strtotime( $d ) ) ), (int) $v, max( 2, (int) round( 100 * $v / $max ) ), $v ? 'linear-gradient(var(--o2),var(--o))' : '#e3e8ef', $v ? '<span style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:11px;color:#5d6b7c">' . (int) $v . '</span>' : '' );
+	}
+	echo '</div><div style="display:flex;justify-content:space-between;font-size:12px;color:#5d6b7c;margin-top:4px"><span>' . esc_html( wp_date( 'd/m', strtotime( array_key_first( $bars ) ) ) ) . '</span><span>Hôm nay</span></div></div>';
+
+	// Theo sale (quản trị).
+	if ( $admin ) {
+		$sales = get_users( array( 'role' => HH_SALE_ROLE, 'orderby' => 'display_name' ) );
+		$dl    = array();
+		foreach ( hh_sale_docs_for() as $doc ) {
+			foreach ( (array) get_post_meta( $doc->ID, '_hh_doc_log', true ) as $r ) {
+				if ( is_array( $r ) && ( ! $from || (int) $r[0] >= $from ) ) {
+					$dl[ (int) $r[1] ] = ( $dl[ (int) $r[1] ] ?? 0 ) + 1;
+				}
+			}
+		}
+		echo '<div class="box"><h2>Theo từng sale</h2><div class="scroll"><table><tr><th>Sale</th><th>Khách nhận</th><th>Chưa gọi</th><th>Quá hạn</th><th>Đã xử lý</th><th>Chốt</th><th>Tỷ lệ chốt</th><th>Gọi lại TB</th><th>Tải tài liệu</th><th>Đăng nhập cuối</th></tr>';
+		usort( $sales, static fn( $a, $b ) => ( $rows[ $b->ID ]['chot'] ?? 0 ) <=> ( $rows[ $a->ID ]['chot'] ?? 0 ) ?: ( $rows[ $b->ID ]['n'] ?? 0 ) <=> ( $rows[ $a->ID ]['n'] ?? 0 ) );
+		foreach ( $sales as $u ) {
+			$r    = $rows[ $u->ID ] ?? array( 'n' => 0, 'moi' => 0, 'touch' => 0, 'chot' => 0, 'huy' => 0, 'late' => 0, 'rt' => array() );
+			$last = (int) get_user_meta( $u->ID, 'hh_sale_last_login', true );
+			printf(
+				'<tr><td><a href="%s"><b>%s</b></a>%s</td><td>%d</td><td>%d</td><td>%s</td><td>%d</td><td>%d</td><td>%s</td><td>%s</td><td>%d</td><td>%s</td></tr>',
+				esc_url( add_query_arg( 'sale', $u->ID, hh_sale_url( 'khach-hang' ) ) ),
+				esc_html( $u->display_name ),
+				get_user_meta( $u->ID, 'hh_sale_locked', true ) ? ' <span class="pill">khóa</span>' : '',
+				(int) $r['n'],
+				(int) $r['moi'],
+				$r['late'] ? '<span class="pill o">' . (int) $r['late'] . '</span>' : '0',
+				(int) $r['touch'],
+				(int) $r['chot'],
+				esc_html( $rate( $r ) ),
+				esc_html( hh_sale_fmt_dur( $avg( $r['rt'] ) ) ),
+				(int) ( $dl[ $u->ID ] ?? 0 ),
+				$last ? esc_html( wp_date( 'd/m H:i', $last ) ) : 'Chưa'
+			);
+		}
+		if ( ! empty( $rows[0]['n'] ) ) {
+			printf( '<tr><td><b>Chưa giao</b></td><td>%d</td><td>%d</td><td>—</td><td>%d</td><td>%d</td><td>—</td><td>—</td><td>—</td><td></td></tr>', (int) $rows[0]['n'], (int) $rows[0]['moi'], (int) $rows[0]['touch'], (int) $rows[0]['chot'] );
+		}
+		echo '</table></div><p class="note">Quá hạn: khách ở trạng thái "Mới" hơn 30 phút sau khi giao. Gọi lại TB: từ lúc giao đến lần đầu sale cập nhật trạng thái / ghi chú. Bấm tên sale để xem danh sách khách.</p></div>';
+	}
+
+	// Theo dự án.
+	if ( $projs ) {
+		uasort( $projs, static fn( $a, $b ) => $b[0] <=> $a[0] );
+		echo '<div class="box"><h2>Khách theo dự án</h2><div class="scroll"><table><tr><th>Dự án</th><th>Khách</th><th>Chốt</th><th style="width:40%"></th></tr>';
+		$pm = max( 1, max( array_column( $projs, 0 ) ) );
+		foreach ( array_slice( $projs, 0, 15, true ) as $name => $v ) {
+			printf( '<tr><td>%s</td><td>%d</td><td>%d</td><td><div style="height:10px;border-radius:5px;background:linear-gradient(90deg,var(--o),var(--o2));width:%d%%"></div></td></tr>', esc_html( $name ), (int) $v[0], (int) $v[1], max( 3, (int) round( 100 * $v[0] / $pm ) ) );
+		}
+		echo '</table></div></div>';
+	}
+}
