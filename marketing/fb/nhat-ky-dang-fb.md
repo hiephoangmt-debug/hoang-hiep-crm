@@ -48,3 +48,4 @@
 | 12/11/2026 | Hoàng Hiệp | 13:30 | (bài web mới 09:00) Giá The Legend Đà Nẵng – giỏ hàng CĐT (1 ảnh dọc) | /gia-the-legend-da-nang-bao-nhieu/ |
 | 12/11/2026 | Sun | 20:00 | (bài web mới 16:30) Đứng tên mua Sun Saphia Residence (1 ảnh dọc, nội thất studio) | /dung-ten-mua-sun-saphia-residence-vo-chong-doanh-nghiep/ |
 | CHỜ | Hoàng Hiệp | 13/11 | (bài web 12/11 14:00, chưa xếp được vì trang đủ 3 bài) Giá Nobu Residences Đà Nẵng | gia-nobu-residences-da-nang (chờ) |
+| 13/11/2026 | Sun | 11:00 | (bài web mới 09:00) Mặt bằng Symphony 5 (1 ảnh dọc) | /mat-bang-can-ho-symphony-5/ |
