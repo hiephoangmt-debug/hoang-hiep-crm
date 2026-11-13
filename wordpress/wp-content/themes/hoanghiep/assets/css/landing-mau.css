@@ -354,3 +354,11 @@ body.admin-bar header.top{top:32px}
 /* Màn 701 – 980px (máy tính bảng): nút chat có chữ "Hỏi em nhé" bên phải → thanh bám đáy thu gọn bên trái */
 @media (min-width:701px) and (max-width:980px){.stick-cta{left:16px;right:auto;bottom:20px;max-width:min(440px,calc(100vw - 340px))}}
 .mbg{margin:22px 0 6px;padding:18px 20px;border:1px solid rgba(216,182,124,.55);border-radius:16px;background:#fffaf2;color:#13232e}.mbg__tag{margin:0;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#b07a2a;font-weight:700}.mbg__num{margin:6px 0 2px;font-size:15px}.mbg__num b{font-size:30px;line-height:1.1;color:#b3001b;margin-right:4px}.mbg__src{margin:0 0 12px;font-size:13.5px;color:#5b6b75}.mbg__sub{margin:0 0 8px;font-size:13px;font-weight:700;color:#13232e}.mbg__bars{list-style:none;margin:0;padding:0}.mbg__bars li{display:grid;grid-template-columns:minmax(110px,34%) 1fr auto;align-items:center;gap:10px;padding:5px 0;font-size:14px}.mbg__bars li.is-me{font-weight:700}.mbg__name a{color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,.25)}.mbg__track{position:relative;height:10px;border-radius:6px;background:#efe6d6}.mbg__track i{position:absolute;top:0;bottom:0;border-radius:6px;background:#e8a45c}.is-me .mbg__track i{background:#b3001b}.mbg__val{font-variant-numeric:tabular-nums;white-space:nowrap;font-size:13.5px}.mbg__more{margin:12px 0 0;font-size:14px}.mbg__more a{color:#b3001b;font-weight:700}
+
+/* Thanh đầu trang: menu nhiều mục không đè nút "Nhận bảng giá" / tên dự án (13/11/2026) */
+.top .brand{flex:none;max-width:240px}
+.top .brand b{overflow:hidden;text-overflow:ellipsis}
+.top .nav{flex:1 1 auto;min-width:0;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);padding-right:24px}
+.top .btn{flex:none;white-space:nowrap}
+@media (min-width:981px) and (max-width:1500px){.top .nav a{padding:8px 8px;font-size:13px}.top .brand b{font-size:17px}}
+@media (min-width:981px) and (max-width:1180px){.top .nav a{padding:7px 6px;font-size:12.5px}.top .container{gap:8px}}

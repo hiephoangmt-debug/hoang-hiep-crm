@@ -228,7 +228,7 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
 <header class="top">
   <div class="container">
     <a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="Về trang chủ Hoàng Hiệp" title="Về trang chủ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></a>
-    <a class="brand" href="#top"><b><?php echo $e( mb_strtoupper( mb_strlen( $brand_top ) > 22 ? implode( ' ', array_slice( preg_split( '/\s+/u', $brand_top ), 0, 3 ) ) : $brand_top ) ); ?></b><small><?php echo $e( $brand_sub ); ?></small></a>
+    <a class="brand" href="#top"><b><?php echo $e( mb_strtoupper( mb_strlen( $brand_top ) > 22 ? preg_replace( '/[\s\-–—:|,.]+$/u', '', implode( ' ', array_slice( preg_split( '/\s+/u', $brand_top ), 0, 3 ) ) ) : $brand_top ) ); ?></b><small><?php echo $e( $brand_sub ); ?></small></a>
     <nav class="nav" aria-label="Mục lục">
       <?php foreach ( $nav as $k => $lb ) : ?><a href="#<?php echo esc_attr( $k ); ?>"><?php echo $e( $lb ); ?></a><?php endforeach; ?>
       <a class="nav-out" href="<?php echo esc_url( home_url( '/' ) ); ?>">← Trang chủ</a><a class="nav-out" href="<?php echo esc_url( home_url( '/du-an/' ) ); ?>">Tất cả dự án</a>
