@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.30** + plugin Hoàng Hiệp CRM **2.20.262**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.30** + plugin Hoàng Hiệp CRM **2.20.263**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,18 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.263 (14/11/2026) – Khu Sale nội bộ (bước 1)
+
+- **Trang cho sale: hiephoangmt.com/sale/** – đăng nhập bằng số điện thoại + mật khẩu; không lưu bộ nhớ đệm, Google không lập chỉ mục; sale không vào được trang quản trị WordPress.
+  - **Học dự án:** mỗi dự án 1 trang tóm tắt tự lấy từ dữ liệu web (thông tin nhanh, điểm bán hàng, loại căn – giá tham khảo, chính sách hiện hành, lịch thanh toán, vay, tiến độ) + phần riêng cho sale.
+  - **Tài liệu:** kho file kín theo dự án; mỗi lượt tải ghi lại ai tải lúc nào; ảnh JPG/PNG tải về có in tên + số của sale.
+  - **Khách của tôi:** sale chỉ thấy khách được giao, có nút gọi / Zalo, đổi trạng thái, ghi chú chăm sóc (lưu lịch sử).
+  - **Báo khách mới:** qua Telegram (sale tự nối 1 lần ở trang Tổng quan, dùng chung bot Telegram của web) và email (nếu tài khoản có email).
+- **Quản trị → Khu Sale:** tạo tài khoản hàng loạt (dán danh sách `Họ tên | Số điện thoại | Email`), mật khẩu tạo ngẫu nhiên hiện 1 lần kèm mẫu tin nhắn gửi Zalo; khóa (đăng xuất ngay, khách đang giữ trả về chưa giao) / mở khóa / tạm ngưng nhận khách / cấp lại mật khẩu; xem số khách đang giữ, lần đăng nhập cuối, đã nối Telegram chưa. Bật "Tự chia khách" để khách mới từ web chia lần lượt cho sale.
+- **Quản trị → Khu Sale → Tài liệu sale:** tải file lên (lưu thư mục kín) hoặc dán link Drive, chọn dự án + nhóm.
+- **Trang sửa dự án:** khung mới "Dành cho sale (nội bộ – không hiện trên web)": điểm bán hàng, câu hỏi khách hay hỏi | cách trả lời, lưu ý khi tư vấn, link tài liệu nội bộ.
+- **Khách hàng:** thêm cột + khung "Sale phụ trách", lịch sử chăm sóc.
 
 ## Có gì mới – 2.20.262 (14/11/2026)
 
