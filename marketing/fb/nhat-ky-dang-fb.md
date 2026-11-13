@@ -47,5 +47,9 @@
 | 12/11/2026 | Hoàng Hiệp | 16:30 | (phiên khác, bài web mới 07:00) Tái định cư Hương Trà, Hòa Liên – Túy Loan | /tai-dinh-cu-huong-tra-duong-sat-toc-do-cao-hoa-lien-tuy-loan/ |
 | 12/11/2026 | Hoàng Hiệp | 13:30 | (bài web mới 09:00) Giá The Legend Đà Nẵng – giỏ hàng CĐT (1 ảnh dọc) | /gia-the-legend-da-nang-bao-nhieu/ |
 | 12/11/2026 | Sun | 20:00 | (bài web mới 16:30) Đứng tên mua Sun Saphia Residence (1 ảnh dọc, nội thất studio) | /dung-ten-mua-sun-saphia-residence-vo-chong-doanh-nghiep/ |
-| CHỜ | Hoàng Hiệp | 13/11 | (bài web 12/11 14:00, chưa xếp được vì trang đủ 3 bài) Giá Nobu Residences Đà Nẵng | gia-nobu-residences-da-nang (chờ) |
+| 13/11/2026 | Hoàng Hiệp | 13:15 | (bài web 12/11 14:00) Giá Nobu Đà Nẵng – Nobu Residences (1 ảnh dọc) | /gia-nobu-residences-da-nang-bao-nhieu/ |
 | 13/11/2026 | Sun | 11:00 | (bài web mới 09:00) Mặt bằng Symphony 5 (1 ảnh dọc) | /mat-bang-can-ho-symphony-5/ |
+| 13/11/2026 | Sun | 14:15 | (bài web mới 11:30) Phí quản lý Sun Saphia Residence (1 ảnh dọc, nội thất studio) | /phi-quan-ly-sun-saphia-residence-moi-thang-bao-nhieu/ |
+| 13/11/2026 | Sun | 20:00 | (bài web mới 16:30) Ngũ Hành Sơn gần Sun Saphia Residence (1 ảnh dọc, flycam NHS) | /danh-thang-ngu-hanh-son-gan-sun-saphia-residence/ |
+| 13/11/2026 | Hoàng Hiệp | 16:30 | (phiên khác, bài web mới 07:00) VSIP vị trí số 7 khu thương mại tự do | /vsip-vi-tri-so-7-khu-thuong-mai-tu-do-da-nang-3525-ty/ |
+| CHỜ | Hoàng Hiệp | 14/11 | (bài web 13/11 14:00, trang đủ 3 bài) Mặt bằng The Legend Đà Nẵng | mat-bang-can-ho-the-legend-da-nang (chờ) |
