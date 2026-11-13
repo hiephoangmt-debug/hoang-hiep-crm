@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.25** + plugin Hoàng Hiệp CRM **2.20.257**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.25** + plugin Hoàng Hiệp CRM **2.20.258**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.258 (13/11/2026)
+
+- **Sửa tải ảnh Vinhomes Hải Vân Bay:** lượt tải trước dừng ở ảnh thứ 18 của phân khu Đảo Ngọc (thiếu vườn cờ và 8 ảnh Công viên Nắng Biển). Bản này tự xoá đánh dấu lỗi của các ảnh chưa tải và đưa lại vào hàng chờ khi anh mở trang quản trị.
+- Cài: Nhập nhanh → tải `cap-nhat-code.zip` → mở trang Nhập dữ liệu → **"Tải ảnh ngay"** (9 ảnh) → LiteSpeed Purge All.
 
 ## Có gì mới – 2.20.257 (13/11/2026)
 
