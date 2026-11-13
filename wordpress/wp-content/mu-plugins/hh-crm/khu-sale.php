@@ -1285,6 +1285,8 @@ function hh_sale_admin_page() {
 			echo "<script>document.querySelectorAll('.hh-cp').forEach(function(b){b.addEventListener('click',function(){var t=b.dataset.t,l=b.textContent,done=function(){b.classList.add('ok');b.textContent='Đã sao chép ✓';setTimeout(function(){b.classList.remove('ok');b.textContent=l},1800)};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done)}else{var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();done()}})})</script>";
 		}
 	}
+	$myp = (string) get_user_meta( get_current_user_id(), 'hh_login_phone', true );
+	echo '<div style="background:#fff;border:1px solid #dcdcde;border-left:4px solid #f2551d;padding:10px 14px;max-width:860px;margin:12px 0"><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">' . wp_nonce_field( 'hh_sale_myphone', 'n', true, false ) . '<input type="hidden" name="action" value="hh_sale_myphone"><b>Tài khoản của anh vào khu sale:</b> đăng nhập bằng số <input type="text" name="phone" value="' . esc_attr( $myp ) . '" placeholder="0904567009" style="width:140px"> + mật khẩu quản trị hiện tại (hoặc tên đăng nhập <code>' . esc_html( wp_get_current_user()->user_login ) . '</code>). <button class="button">Lưu</button></form></div>';
 	// Danh sách.
 	echo '<h2>Đang có ' . count( $users ) . ' tài khoản</h2><table class="widefat striped"><thead><tr><th>Họ tên</th><th>Đăng nhập</th><th>Khách đang giữ</th><th>Đăng nhập gần nhất</th><th>Báo Telegram</th><th>Trạng thái</th><th></th></tr></thead><tbody>';
 	foreach ( $users as $u ) {
@@ -1598,3 +1600,72 @@ function hh_sale_view_report() {
 		echo '</table></div></div>';
 	}
 }
+
+/* =========================================================================
+ * Đăng nhập bằng số điện thoại cho tài khoản quản trị (anh Hiệp 14/11/2026: 0904 567 009)
+ * Số lưu ở user meta hh_login_phone; tự gắn số hotline của web cho quản trị viên đầu tiên mở trang quản trị
+ * nếu chưa ai dùng số đó. Đổi / bỏ ở Quản trị → Khu Sale.
+ * ====================================================================== */
+
+const HH_SALE_OWNER_PHONE = '0904567009';
+
+function hh_sale_user_by_phone( $phone ) {
+	$d = hh_sale_phone_login( $phone );
+	if ( strlen( $d ) < 9 ) {
+		return null;
+	}
+	$u = get_users( array( 'meta_key' => 'hh_login_phone', 'meta_value' => $d, 'number' => 1 ) ); // phpcs:ignore WordPress.DB.SlowDBQuery
+	return $u ? $u[0] : null;
+}
+
+add_filter(
+	'authenticate',
+	static function ( $user, $username, $password ) {
+		if ( $user instanceof WP_User || '' === (string) $username || '' === (string) $password ) {
+			return $user;
+		}
+		if ( ! preg_match( '/^\+?[\d .\-]{9,15}$/', trim( (string) $username ) ) || username_exists( $username ) ) {
+			return $user;
+		}
+		$u = hh_sale_user_by_phone( $username );
+		return $u ? wp_authenticate_username_password( null, $u->user_login, $password ) : $user;
+	},
+	15,
+	3
+);
+
+add_action(
+	'admin_init',
+	static function () {
+		if ( wp_doing_ajax() || ! current_user_can( 'manage_options' ) || get_option( 'hh_owner_phone_set' ) ) {
+			return;
+		}
+		if ( ! hh_sale_user_by_phone( HH_SALE_OWNER_PHONE ) && ! username_exists( HH_SALE_OWNER_PHONE ) ) {
+			update_user_meta( get_current_user_id(), 'hh_login_phone', HH_SALE_OWNER_PHONE );
+		}
+		update_option( 'hh_owner_phone_set', 1, false );
+	}
+);
+
+add_action(
+	'admin_post_hh_sale_myphone',
+	static function () {
+		if ( ! current_user_can( 'manage_options' ) || ! isset( $_POST['n'] ) || ! wp_verify_nonce( sanitize_key( $_POST['n'] ), 'hh_sale_myphone' ) ) {
+			wp_die( 'Không có quyền.' );
+		}
+		$d   = hh_sale_phone_login( sanitize_text_field( wp_unslash( $_POST['phone'] ?? '' ) ) );
+		$own = $d ? hh_sale_user_by_phone( $d ) : null;
+		if ( '' === $d ) {
+			delete_user_meta( get_current_user_id(), 'hh_login_phone' );
+			$msg = 'Đã bỏ đăng nhập bằng số điện thoại.';
+		} elseif ( strlen( $d ) < 9 || ( $own && $own->ID !== get_current_user_id() ) || username_exists( $d ) ) {
+			$msg = 'Số ' . $d . ' không hợp lệ hoặc đã thuộc tài khoản khác.';
+		} else {
+			update_user_meta( get_current_user_id(), 'hh_login_phone', $d );
+			$msg = 'Đã lưu: đăng nhập bằng số ' . $d . ' + mật khẩu quản trị.';
+		}
+		set_transient( 'hh_sale_admin_msg_' . get_current_user_id(), array( array( $msg ), array() ), 10 * MINUTE_IN_SECONDS );
+		wp_safe_redirect( admin_url( 'admin.php?page=hh-khu-sale' ) );
+		exit;
+	}
+);
