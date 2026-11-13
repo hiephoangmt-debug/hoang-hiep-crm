@@ -1940,7 +1940,7 @@ const API_BASE = "";
     if (name) st.lead.name = name.slice(0, 80);
     st.lead.phone = phone.replace(/[\s.-]/g, ''); save();
     post('lead', { form: src, name: st.lead.name, phone: st.lead.phone });
-    try { sset('casamia_lead_sent', '1'); if (window.fbq) fbq('track', 'Lead'); } catch (e) {}
+    try { sset('casamia_lead_sent', '1'); if (window.fbq) fbq('track', 'Lead'); if (window.gtag) gtag('event', 'generate_lead'); if (window.casamiaConv) casamiaConv('lead'); } catch (e) {}
   }
   function thanks() {
     if (st.zalo) return say([L.leadThanks]);

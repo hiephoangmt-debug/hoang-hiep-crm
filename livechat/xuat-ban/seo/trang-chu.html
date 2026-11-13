@@ -412,10 +412,42 @@ html:not([data-kv=hn]) .kv-hn,html:not([data-kv=dn]) .kv-dn,html[data-kv] .kv-de
  .scroll{display:none}
  .hero h1 small{letter-spacing:2px}.hero .eye{font-size:10.5px;letter-spacing:2px}.hero .btns .btn{flex:1 1 100%}.chips span:nth-child(n+3){display:none}.chips{margin-top:18px}
  .fabz{display:none}
- .mbar{display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);box-shadow:0 -6px 20px rgba(11,42,91,.12)}
+ .mbar{display:grid;grid-template-columns:1fr 1fr 1fr 1.6fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);box-shadow:0 -6px 20px rgba(11,42,91,.12)}
  .mbar a,.mbar button{border:0;border-radius:12px;padding:13px 6px;text-align:center;font:700 15px var(--sans);text-decoration:none;cursor:pointer}
- .mbar a:nth-child(1){background:#eef2f8;color:var(--navy)}.mbar a:nth-child(2){background:var(--navy);color:#fff}.mbar button{background:var(--orange);color:#fff}
+ .mbar a:nth-child(1),.mbar a:nth-child(3){background:#eef2f8;color:var(--navy)}.mbar a:nth-child(2){background:var(--navy);color:#fff}.mbar button{background:var(--orange);color:#fff}
 }
+  .lchat-sec{padding:34px 0 10px;background:#fff}
+  .lchat-sec .wrap{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:center}
+  .lchat-intro h2{font-family:var(--serif);font-size:34px;line-height:1.2;margin:8px 0 12px;color:var(--navy)}
+  .lchat-intro p{color:var(--muted);margin:0 0 10px;font-size:16px}
+  .lchat{border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 18px 40px rgba(11,42,91,.10);display:flex;flex-direction:column;overflow:hidden;height:470px}
+  .lchat-h{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--navy);color:#fff}
+  .lchat-av{width:42px;height:42px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;font-weight:800;position:relative;flex:none}
+  .lchat-av i{position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;background:#22c55e;border:2px solid var(--navy)}
+  .lchat-h b{display:block;font-size:15px}.lchat-h small{opacity:.8;font-size:12.5px}
+  .lchat-x{margin-left:auto;background:transparent;border:0;color:#fff;font-size:28px;line-height:1;cursor:pointer;display:none}
+  .lchat-b{flex:1;overflow-y:auto;padding:16px 14px;background:var(--soft);display:flex;flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch}
+  .lc-m{max-width:86%;padding:10px 13px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}
+  .lc-a{background:#fff;border:1px solid var(--line);color:var(--ink);align-self:flex-start;border-top-left-radius:4px}
+  .lc-v{background:var(--navy);color:#fff;align-self:flex-end;border-top-right-radius:4px}
+  .lc-zalo{display:block;margin-top:10px;background:var(--orange);color:#fff!important;text-align:center;border-radius:10px;padding:10px;font-weight:700;text-decoration:none}
+  .lc-typing{align-self:flex-start;color:var(--muted);font-size:13px;font-style:italic;padding:2px 4px}
+  .lc-chips{display:flex;flex-wrap:wrap;gap:6px}
+  .lc-chips button{border:1px solid var(--navy);background:#fff;color:var(--navy);border-radius:999px;padding:7px 12px;font:inherit;font-size:13.5px;cursor:pointer}
+  .lc-chips button:hover{background:var(--navy);color:#fff}
+  .lc-lead{align-self:stretch;background:#fff;border:1px solid var(--orange);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px}
+  .lc-lead p{margin:0;font-weight:700;color:var(--navy);font-size:14px}
+  .lc-lead input{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;font-size:15px}
+  .lc-lead button{background:var(--orange);color:#fff;border:0;border-radius:10px;padding:11px;font:inherit;font-weight:700;cursor:pointer}
+  .lc-lead .e{color:#c2410c;font-size:12.5px;min-height:0}
+  .lchat-f{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:#fff}
+  .lchat-f input{flex:1;min-width:0;border:1px solid var(--line);border-radius:999px;padding:11px 16px;font:inherit;font-size:16px;outline:none}
+  .lchat-f input:focus{border-color:var(--navy)}
+  .lchat-f button{flex:none;width:46px;height:46px;border-radius:50%;border:0;background:var(--orange);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .lchat.full{position:fixed;inset:0;z-index:2147483600;border-radius:0;height:auto;box-shadow:none;border:0}
+  .lchat.full .lchat-x{display:block}
+  @media(max-width:960px){.lchat-sec .wrap{grid-template-columns:1fr;gap:16px}.lchat-intro h2{font-size:26px}.lchat{height:440px}}
+.lchat-eye{display:inline-block;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange)}
 </style>
 <script>
 (function(){try{var q=new URLSearchParams(location.search),k=(q.get('kv')||'').toLowerCase(),hs=location.hash;
@@ -803,6 +835,22 @@ if(k==='hn'||k==='dn')document.documentElement.setAttribute('data-kv',k);}catch(
   </div>
 </section>
 
+<section class="lchat-sec" id="hoi-ngay">
+  <div class="wrap">
+    <div class="lchat-intro">
+      <span class="lchat-eye">Hỏi nhanh</span>
+      <h2>Có điều gì anh/chị muốn biết thêm?</h2>
+      <p>Giá từng căn, lịch thanh toán, vị trí hay lịch xem nhà mẫu: anh/chị cứ nhắn, em trả lời ngay tại đây.</p>
+      <p style="font-size:14px">Hoàng Hiệp · Tư vấn dự án · <a href="tel:0904567009" style="color:var(--orange);font-weight:700">0904 567 009</a></p>
+    </div>
+    <div class="lchat" id="lchat" aria-label="Chat với tư vấn viên">
+      <div class="lchat-h"><div class="lchat-av">HH<i></i></div><div><b>Hoàng Hiệp</b><small>Tư vấn dự án · thường trả lời trong vài phút</small></div><button class="lchat-x" type="button" aria-label="Đóng">×</button></div>
+      <div class="lchat-b" role="log" aria-live="polite"></div>
+      <form class="lchat-f" autocomplete="off"><input type="text" placeholder="Nhập câu hỏi của anh/chị…" maxlength="1000" aria-label="Nhập tin nhắn"><button type="submit" aria-label="Gửi"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></button></form>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="hoi-dap">
   <div class="wrap">
     <div class="center"><span class="eye rv">Hỏi đáp</span><h2 class="rv">Câu hỏi thường gặp về <em>Casamia Balanca</em></h2></div>
@@ -854,7 +902,7 @@ if(k==='hn'||k==='dn')document.documentElement.setAttribute('data-kv',k);}catch(
 </div>
 <button class="fabc js-open" data-title="Nhận bảng giá &amp; căn còn trống" data-need="Bảng giá (nút nổi)">🔥 Nhận bảng giá</button>
 <a class="fabz" href="https://zalo.me/0904567009" target="_blank" rel="noopener" aria-label="Chat Zalo">Zalo</a>
-<nav class="mbar" aria-label="Liên hệ nhanh"><a href="tel:0904567009">Gọi</a><a href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo</a><button type="button" class="js-open" data-title="Nhận bảng giá &amp; căn đẹp tháng 10/2026" data-need="Bảng giá (thanh dưới)">Nhận bảng giá</button></nav>
+<nav class="mbar" aria-label="Liên hệ nhanh"><a href="tel:0904567009">Gọi</a><a href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo</a><a href="#hoi-ngay" onclick="if(window.CasamiaChat){CasamiaChat.open();return false}">Chat</a><button type="button" class="js-open" data-title="Nhận bảng giá &amp; căn đẹp tháng 10/2026" data-need="Bảng giá (thanh dưới)">Nhận bảng giá</button></nav>
 
 <script>
 (function(){
@@ -910,5 +958,190 @@ function show(i){k=(i+list.length)%list.length;var f=list[k];im.src=f.querySelec
 document.addEventListener('click',function(e){var f=e.target.closest('.realg .rf');if(f){list=[].slice.call(f.parentNode.querySelectorAll('.rf'));show(list.indexOf(f));return;}
 if(!L.classList.contains('on'))return;if(e.target.closest('.lp'))show(k-1);else if(e.target.closest('.ln'))show(k+1);else if(e.target===L||e.target.closest('.lx'))L.classList.remove('on');});
 document.addEventListener('keydown',function(e){if(!L.classList.contains('on'))return;if(e.key==='Escape')L.classList.remove('on');if(e.key==='ArrowLeft')show(k-1);if(e.key==='ArrowRight')show(k+1);});})();</script>
+<script>window.CASAMIA_CHAT_CONFIG = {"project":{"name":"Casamia Balanca","agentName":"Hoàng Hiệp","agentTitle":"Chuyên viên tư vấn dự án","hotline":"0904 567 009","zalo":"0904567009","primaryColor":"#0b2a5b","accentColor":"#f47c20"},"welcome":"Dạ em chào {name}. Em là Hiệp, phụ trách tư vấn dự án {project}. Anh/chị cứ thong thả tham khảo, cần thông tin nào em gửi ngay ạ.","zaloTransfer":"Mấy tài liệu như bảng giá từng căn hay mặt bằng chi tiết, anh/chị xem qua Zalo sẽ rõ hơn. Lúc nào tiện, mình nhắn em ở Zalo {zalo} nhé.","leadThanks":"Dạ em cảm ơn {name}. Em sẽ liên hệ qua số {phone} trong ít phút; nếu mình đang bận, em gửi trước tài liệu để anh/chị xem lúc rảnh ạ.","fallback":["Dạ câu này em xin phép kiểm tra lại cho thật chính xác rồi trả lời anh/chị ngay ạ.","Nếu tiện, anh/chị để lại số, em gọi lại nói kỹ hơn vài phút."],"proactive":{"enabled":true,"dwellSeconds":12,"maxPerVisit":1,"quietSeconds":60},"gas":"https://script.google.com/macros/s/AKfycbyZzODGVmY-_ooB6cOSvs5CQXpQ2CuUo8ERJQsDHZo89_ozx_TFLgnhqeqRaXLePpNVCw/exec","ai":true,"intents":[{"label":"Chính sách & giá","keywords":["giá","gia","bao nhiêu","chính sách","chiết khấu","ưu đãi","thanh toán","tiền","thuê lại","cam kết thuê","cho thuê"],"steps":["Dạ, để anh/chị dễ hình dung: Parkhome nhận thô từ khoảng 10,4 tỷ (đã trừ chiết khấu 3,5 tỷ); Forestside ven rừng dừa thì giá chênh nhiều theo vị trí từng căn. Hiện cọc 300 triệu, ngân hàng hỗ trợ 70% với 0% lãi trong 24 tháng.","Anh/chị đang để ý biệt thự ven rừng dừa hay biệt thự sân vườn ạ? Em lọc vài căn hợp ý gửi mình xem."],"browse":{"keywords":["giá","bảng giá","giá bán","chính sách","thanh toán","ưu đãi","chiết khấu"],"question":"Nếu {name} cần, em gửi riêng bảng tính theo từng căn, đã trừ chiết khấu và chia sẵn từng đợt thanh toán, để mình xem cho dễ ạ."}},{"label":"Mặt bằng các căn","keywords":["mặt bằng","diện tích","loại","căn","phòng ngủ","pn","biệt thự","shophouse","nhà phố","layout"],"steps":["Dạ, bên em có hai dòng chính: Forestside ven sông, giữa rừng dừa, rất riêng tư; và Parkhome có sân vườn, gần công viên, hợp nhà có trẻ nhỏ và ông bà.","Gia đình mình thường về mấy người ạ? Em chọn căn có số phòng vừa vặn để anh/chị xem layout."],"browse":{"keywords":["mặt bằng","sản phẩm","loại hình","diện tích","thiết kế","biệt thự","layout","căn hộ"],"question":"Mặt bằng chính thức và layout từng tầng em có bản đầy đủ. {name} quan tâm dòng nào, em gửi riêng mình tham khảo ạ."}},{"label":"Vị trí & tiện ích","keywords":["vị trí","ở đâu","đường","tiện ích","gần","trường","chợ","biển","bản đồ","clubhouse","hồ bơi"],"steps":["Dạ, dự án nằm ngay rừng dừa Bảy Mẫu, ra phố cổ khoảng 10 phút, ra biển An Bàng khoảng 5 km. Trong khu yên tĩnh, cần đi đâu cũng gần.","Anh/chị đang ở Đà Nẵng hay ở xa ạ? Em gửi thời gian di chuyển cụ thể cho mình."],"browse":{"keywords":["vị trí","tiện ích","kết nối","bản đồ","liên kết vùng","ngoại khu","nội khu"],"question":"Em có bản đồ khoảng cách thực tế từ từng phân khu ra phố cổ và biển, {name} cần em gửi riêng không ạ?"}},{"label":"Pháp lý & bàn giao","keywords":["pháp lý","sổ","giấy tờ","tiến độ","bàn giao","xây","chủ đầu tư","cđt","đạt phương"],"steps":["Dạ, phần này anh/chị hỏi rất đúng. Chủ đầu tư là Đạt Phương; em có đủ hồ sơ pháp lý, ảnh tiến độ mới nhất và mẫu hợp đồng để mình tự xem.","Anh/chị muốn xem trước phần sổ hay tiến độ bàn giao ạ?"],"browse":{"keywords":["pháp lý","tiến độ","chủ đầu tư","sổ hồng","bàn giao","giấy phép","minh bạch"],"question":"Bộ hồ sơ pháp lý và hình ảnh thi công mới nhất em có đủ, {name} muốn xem trước phần nào em gửi riêng ạ."}},{"label":"Hẹn xem nhà mẫu","keywords":["tham quan","xem nhà","nhà mẫu","lịch","đi xem","gặp","đón"],"steps":["Dạ được ạ. Em đón anh/chị ở Đà Nẵng hoặc Hội An, đi xem nhà mẫu và từng phân khu, không ràng buộc gì.","Mình tiện ngày thường hay cuối tuần ạ?"],"browse":{"keywords":["tham quan","đăng ký","nhận thông tin","nhà mẫu","tận nơi"],"question":"Nếu {name} muốn xem thực tế, em sắp xếp đón mình vào thời gian thuận tiện, không ràng buộc gì ạ."}},{"label":"Phương án vay","keywords":["vay","ngân hàng","lãi suất","trả góp","góp"],"steps":["Dạ, ngân hàng hỗ trợ tới 70%, 24 tháng đầu lãi 0% và chưa phải trả gốc. Anh/chị chủ động khoảng 30% theo tiến độ là được.","Em lập thử dòng tiền theo một căn cụ thể cho mình xem nhé, anh/chị dự kiến vay khoảng bao nhiêu ạ?"],"browse":{"keywords":["vay","ngân hàng","lãi suất","trả góp","hỗ trợ tài chính"],"question":"Em có thể lập bảng dòng tiền theo đúng số anh/chị dự kiến vay, xem trước số tiền từng tháng cho yên tâm ạ."}}]};</script>
+<script>
+// ===== Chat ngay trên trang: kịch bản khéo + gửi về Google Sheet/Telegram + nhận trả lời từ Telegram =====
+(function () {
+  var L = window.CASAMIA_CHAT_CONFIG, root = document.getElementById('lchat');
+  if (!L || !root) { var sec = document.getElementById('hoi-ngay'); if (sec) sec.style.display = 'none'; return; }
+  var GAS = (typeof GAS_URL !== 'undefined' && GAS_URL) || L.gas || '';
+  var P = L.project, ZALO = String(P.zalo || '').replace(/\D/g, '');
+  var body = root.querySelector('.lchat-b'), form = root.querySelector('.lchat-f'), input = form.querySelector('input');
+  var KEY = 'casamia_lchat', PHONE_RE = /(?:\+?84|0)(?:[\s.-]?\d){9}/;
+  function sget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function sset(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  var vid = sget('casamia_chat_id');
+  if (!vid) { vid = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2); sset('casamia_chat_id', vid); }
+  var st; try { st = JSON.parse(sget(KEY) || 'null'); } catch (e) { st = null; }
+  st = st || { msgs: [], lead: { name: '', phone: '' }, answered: 0, zalo: false, form: false, fallback: false, lastReply: 0 };
+  function save() { sset(KEY, JSON.stringify(st)); }
+
+  function fill(t) {
+    var name = st.lead.name || 'anh/chị';
+    var out = String(t).replace(/\{name\}/g, name).replace(/\{zalo\}/g, P.zalo).replace(/\{hotline\}/g, P.hotline).replace(/\{project\}/g, P.name).replace(/\{phone\}/g, st.lead.phone || '');
+    return out.replace(/(^|[.!?]\s+)([a-zà-ỹđ])/g, function (m, a, c) { return a + c.toUpperCase(); });
+  }
+  function norm(t) { return ' ' + String(t).toLowerCase().replace(/[.,!?;:()"'\/\-–]+/g, ' ').replace(/\s+/g, ' ') + ' '; }
+  function findIntent(text) {
+    for (var i = 0; i < L.intents.length; i++) if (L.intents[i].label === text) return L.intents[i];
+    var t = norm(text), best = null, hits = 0;
+    L.intents.forEach(function (it) {
+      var n = (it.keywords || []).filter(function (k) { return t.indexOf(' ' + k.toLowerCase() + ' ') >= 0; }).length;
+      if (n > hits) { best = it; hits = n; }
+    });
+    return best;
+  }
+
+  // ---- Giao diện ----
+  var chips = null, typingEl = null;
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function scroll() { body.scrollTop = body.scrollHeight; }
+  function render(m) {
+    var b = el('div', 'lc-m ' + (m.from === 'v' ? 'lc-v' : 'lc-a'), m.text);
+    if (m.zalo && ZALO) { var a = el('a', 'lc-zalo', 'Nhắn Zalo cho em'); a.href = 'https://zalo.me/' + ZALO; a.target = '_blank'; a.rel = 'noopener'; a.className += ' js-zalo'; b.appendChild(a); }
+    body.insertBefore(b, chips && chips.parentNode === body ? chips : null);
+    scroll();
+  }
+  function push(m) { m.at = Date.now(); st.msgs.push(m); if (st.msgs.length > 60) st.msgs = st.msgs.slice(-60); save(); render(m); return m; }
+  function typing(on) {
+    if (on && !typingEl) { typingEl = el('div', 'lc-typing', P.agentName + ' đang soạn tin…'); body.appendChild(typingEl); scroll(); }
+    if (!on && typingEl) { typingEl.remove(); typingEl = null; }
+  }
+  var timers = [];
+  function say(texts, zaloLast) {
+    timers.forEach(clearTimeout); timers = [];
+    texts.forEach(function (t, i) {
+      timers.push(setTimeout(function () { typing(true); }, i * 1700 + 250));
+      timers.push(setTimeout(function () { typing(false); push({ from: 'a', text: fill(t), zalo: zaloLast && i === texts.length - 1 }); }, i * 1700 + 1250));
+    });
+  }
+  function showChips() {
+    chips = el('div', 'lc-chips');
+    L.intents.forEach(function (it) { var b = el('button', '', it.label); b.type = 'button'; b.onclick = function () { send(it.label); }; chips.appendChild(b); });
+    body.appendChild(chips); scroll();
+  }
+  function hideChips() { if (chips) { chips.remove(); chips = null; } }
+  function leadForm() {
+    if (st.form || st.lead.phone) return; st.form = true; save();
+    var f = el('form', 'lc-lead');
+    f.innerHTML = '<p>Để em gửi riêng tài liệu cho anh/chị</p><input name="n" placeholder="Anh/chị tên gì ạ?" maxlength="80"><input name="p" type="tel" inputmode="tel" placeholder="Số điện thoại / Zalo"><span class="e"></span><button type="submit">Gửi cho tôi</button>';
+    f.onsubmit = function (e) {
+      e.preventDefault();
+      var ph = (f.p.value.match(PHONE_RE) || [])[0];
+      if (!ph) { f.querySelector('.e').textContent = 'Số điện thoại chưa đúng, anh/chị kiểm tra lại giúp em ạ.'; return; }
+      f.remove(); gotLead(f.n.value.trim(), ph, 'Chat trên trang (form)');
+      push({ from: 'v', text: 'Thông tin liên hệ: ' + (st.lead.name ? st.lead.name + ' – ' : '') + st.lead.phone });
+      thanks();
+    };
+    body.appendChild(f); scroll();
+  }
+
+  // ---- Gửi về Google (Sheet + Telegram) ----
+  function post(type, extra) {
+    if (!GAS) return;
+    var b = { type: type, v: vid, page: location.href, utm: sget('casamia_utm') || '', name: st.lead.name, phone: st.lead.phone,
+      transcript: st.msgs.slice(-8).map(function (m) { return { from: m.from === 'v' ? 'visitor' : 'agent', text: m.text, auto: !m.human }; }) };
+    for (var k in extra) b[k] = extra[k];
+    try { fetch(GAS, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(b) }).catch(function () {}); } catch (e) {}
+    startPoll();
+  }
+  var pollT = null, lastAct = 0;
+  function startPoll() { if (!GAS) return; lastAct = Date.now(); if (!pollT) pollT = setTimeout(poll, 3000); }
+  function poll() {
+    var idle = Date.now() - lastAct; if (idle > 3600000) { pollT = null; return; }
+    var next = idle > 300000 ? 15000 : 4000;
+    if (document.hidden) { pollT = setTimeout(poll, next); return; }
+    fetch(GAS + (GAS.indexOf('?') < 0 ? '?' : '&') + 'action=replies&v=' + encodeURIComponent(vid) + '&after=' + (st.lastReply || 0))
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        (d.replies || []).forEach(function (r) {
+          if (r.at <= (st.lastReply || 0)) return;
+          st.lastReply = r.at; save(); timers.forEach(clearTimeout); typing(false);
+          push({ from: 'a', text: r.text, zalo: r.action === 'zalo', human: true }); lastAct = Date.now();
+        });
+      }).catch(function () {}).then(function () { pollT = setTimeout(poll, next); });
+  }
+  function gotLead(name, phone, src) {
+    if (name) st.lead.name = name.slice(0, 80);
+    st.lead.phone = phone.replace(/[\s.-]/g, ''); save();
+    post('lead', { form: src, name: st.lead.name, phone: st.lead.phone });
+    try { sset('casamia_lead_sent', '1'); if (window.fbq) fbq('track', 'Lead'); if (window.gtag) gtag('event', 'generate_lead'); if (window.casamiaConv) casamiaConv('lead'); } catch (e) {}
+  }
+  function thanks() {
+    if (st.zalo) return say([L.leadThanks]);
+    st.zalo = true; save(); say([L.leadThanks, L.zaloTransfer], true);
+  }
+
+  // ---- Kịch bản: câu 1 trả lời + hỏi nhẹ; câu 2 trả lời + mời Zalo (1 lần); từ câu 3 trả lời + form xin số (1 lần) ----
+  function answer(steps) {
+    if (st.lead.phone) return say([steps[0]]);
+    st.answered++; save();
+    if (st.answered === 1) return say([steps[0], steps[1]]);
+    if (!st.zalo) { st.zalo = true; save(); return say([steps[0], L.zaloTransfer], true); }
+    say([steps[0]]);
+    if (!st.form) setTimeout(leadForm, 2600);
+  }
+  function send(text) {
+    text = String(text || '').trim().slice(0, 1000); if (!text) return;
+    hideChips();
+    var first = !st.msgs.some(function (m) { return m.from === 'v'; });
+    push({ from: 'v', text: text });
+    var ph = text.match(PHONE_RE);
+    var humanRecent = st.msgs.some(function (m) { return m.human && Date.now() - m.at < 600000; });
+    var isChip = L.intents.some(function (it) { return it.label === text; });
+    // Câu tự gõ → chat AI (Claude qua Google Apps Script) nếu bật; anh Hiệp đang trả lời trực tiếp thì AI im lặng
+    if (L.ai && GAS && !isChip && !humanRecent && !(ph && !st.lead.phone)) return askAi(text, first);
+    post('message', { text: text, first: first });
+    if (ph && !st.lead.phone) { gotLead('', ph[0], 'Chat trên trang (gõ số)'); return thanks(); }
+    if (humanRecent) return; // anh Hiệp đang trả lời trực tiếp qua Telegram thì bot im lặng
+    scripted(text);
+  }
+  function scripted(text) {
+    var it = findIntent(text);
+    if (it) return answer(it.steps);
+    if (!st.fallback) { st.fallback = true; save(); say(L.fallback); }
+  }
+  // ---- Chat AI: chưa cài khoá / lỗi / quá 25 giây → quay về kịch bản soạn sẵn ----
+  function askAi(text, first) {
+    timers.forEach(clearTimeout); timers = []; typing(true);
+    var done = false;
+    function finish(d) {
+      if (done) return; done = true; typing(false);
+      if (!d || !d.reply) return scripted(text);
+      push({ from: 'a', text: String(d.reply), zalo: d.action === 'zalo', ai: true });
+      if (d.action === 'zalo') { st.zalo = true; save(); }
+      if (d.action === 'form' && !st.lead.phone) setTimeout(leadForm, 1500);
+    }
+    setTimeout(function () { finish(null); }, 25000);
+    var b = { type: 'message', ai: true, text: text, first: first, v: vid, page: location.href, utm: sget('casamia_utm') || '',
+      name: st.lead.name, phone: st.lead.phone,
+      transcript: st.msgs.slice(-8).map(function (m) { return { from: m.from === 'v' ? 'visitor' : 'agent', text: m.text, auto: !m.human, ai: !!m.ai }; }),
+      history: st.msgs.slice(-14).map(function (m) { return { from: m.from === 'v' ? 'visitor' : 'agent', text: m.text }; }) };
+    try {
+      fetch(GAS, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(b) })
+        .then(function (r) { return r.json(); }).then(finish, function () { finish(null); });
+    } catch (e) { finish(null); }
+    startPoll();
+  }
+  form.onsubmit = function (e) { e.preventDefault(); var t = input.value; input.value = ''; send(t); };
+
+  // ---- Khởi động ----
+  if (!st.msgs.length) { var w = { from: 'a', text: fill(L.welcome) }; render(w); }
+  else st.msgs.forEach(render);
+  if (!st.msgs.some(function (m) { return m.from === 'v'; })) showChips();
+  if (st.msgs.length && (st.lead.phone || Date.now() - st.msgs[st.msgs.length - 1].at < 86400000)) startPoll();
+
+  // Mở toàn màn hình (nút Chat ở thanh dưới, "Hỏi ngay" ở các mục)
+  var x = root.querySelector('.lchat-x');
+  function open(full) {
+    if (full === false || window.innerWidth > 960) { document.getElementById('hoi-ngay').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    else { root.classList.add('full'); document.documentElement.style.overflow = 'hidden'; }
+    setTimeout(function () { scroll(); }, 50);
+  }
+  function close() { root.classList.remove('full'); document.documentElement.style.overflow = ''; }
+  x.onclick = close;
+  window.CasamiaChat = { open: open, close: close, ask: function (t) { open(); if (t) setTimeout(function () { send(t); }, 350); } };
+})();
+</script>
 </body>
 </html>
