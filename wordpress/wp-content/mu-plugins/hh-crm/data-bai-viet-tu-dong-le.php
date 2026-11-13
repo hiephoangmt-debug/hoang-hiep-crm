@@ -688,5 +688,104 @@ HTML
 		'sources'  => array(),
 	);
 
+
+	/* ---------------- 13/11 – Tra cứu thông tin dự án, mã định danh trên Hệ thống thông tin nhà ở và thị trường BĐS (Bộ Xây dựng) – anh Hiệp gửi nguồn ---------------- */
+	$posts[] = array(
+		'slug'     => 'tra-cuu-du-an-ma-dinh-danh-bat-dong-san-thongtinbds-moc-gov-vn',
+		'title'    => 'Cách tra cứu dự án, mã định danh bất động sản trên cổng thông tin của Bộ Xây dựng trước khi đặt cọc',
+		'excerpt'  => 'Hệ thống thông tin về nhà ở và thị trường bất động sản của Bộ Xây dựng (thongtinbds.moc.gov.vn) cho tra cứu mã định danh bất động sản, dự án được chủ đầu tư công khai trước khi kinh doanh, tổ chức dịch vụ và môi giới có chứng chỉ. Quý II/2026 hệ thống ghi nhận 1.938 dự án, 131 dự án đủ điều kiện bán nhà ở hình thành trong tương lai.',
+		'keyword'  => 'tra cứu mã định danh bất động sản',
+		'keywords_extra' => array( 'thongtinbds.moc.gov.vn', 'hệ thống thông tin nhà ở và thị trường bất động sản', 'kiểm tra dự án đủ điều kiện bán', 'Nghị định 357/2025/NĐ-CP', 'tra cứu chứng chỉ môi giới bất động sản' ),
+		'project'  => 'sun-saphia-residence',
+		'schedule' => '2026-11-13 19:00',
+		'category' => 'Pháp lý nhà đất',
+		'tags'     => array( 'Pháp lý nhà đất', 'Mã định danh bất động sản', 'Kinh nghiệm mua nhà' ),
+		'image'    => 'plugin:img/tin-tuc/tra-cuu-thong-tin-bds-bo-xay-dung.jpg',
+		'image_alt' => 'Tra cứu dự án, mã định danh bất động sản trên Hệ thống thông tin nhà ở và thị trường bất động sản của Bộ Xây dựng',
+		'content'  => <<<HTML
+<p>Trước khi đặt cọc một căn hộ, nhiều anh chị hỏi Hoàng Hiệp: <em>"Làm sao biết dự án này đã được phép bán chưa?"</em>. Ngoài việc xem giấy tờ chủ đầu tư cung cấp, hiện nay người mua có thêm một kênh chính thức để đối chiếu: <strong>Hệ thống thông tin về nhà ở và thị trường bất động sản</strong> của Bộ Xây dựng tại địa chỉ <strong>thongtinbds.moc.gov.vn</strong>. Bài viết dưới đây giải thích hệ thống này là gì, tra cứu được những gì và nên dùng thế nào khi mua nhà ở Đà Nẵng.</p>
+<!--hh-featured-->
+<h2>Hệ thống thông tin về nhà ở và thị trường bất động sản là gì?</h2>
+<p>Đây là hệ thống do Bộ Xây dựng quản lý, theo báo chí đưa tin được đưa vào vận hành từ ngày 30/7/2026 theo <strong>Nghị định 357/2025/NĐ-CP</strong> ngày 31/12/2025 (hiệu lực từ 01/3/2026), thay cho hệ thống cũ theo Nghị định 94/2024/NĐ-CP. Hệ thống dùng để công khai thông tin dự án bất động sản, bất động sản đủ điều kiện đưa vào kinh doanh, giao dịch bất động sản, thông tin về tổ chức, cá nhân hoạt động trong lĩnh vực này, và cấp <strong>mã định danh điện tử</strong> cho bất động sản. Hệ thống cũng kết nối dữ liệu với các cơ sở dữ liệu đất đai, công chứng, xây dựng.</p>
+<p>Theo các trang pháp luật tóm tắt Nghị định 357/2025/NĐ-CP, mã định danh là chuỗi ký tự số và chữ, tối đa 40 ký tự, cấp cho từng nhà ở hoặc phần diện tích sàn xây dựng; với nhà ở, mã được tạo tự động trên hệ thống.</p>
+<h2>Số liệu tổng quan trên hệ thống (quý II/2026, toàn quốc)</h2>
+<table>
+<thead><tr><th>Chỉ tiêu</th><th>Số liệu hiển thị trên trang chủ</th></tr></thead>
+<tbody>
+<tr><td>Tổng số dự án bất động sản</td><td>1.938 dự án</td></tr>
+<tr><td>Bất động sản hình thành trong tương lai đủ điều kiện</td><td>59.073 bất động sản</td></tr>
+<tr><td>Số lượng giao dịch bất động sản</td><td>100.005 giao dịch</td></tr>
+<tr><td>Dự án nhà ở thương mại / nhà ở xã hội / du lịch, nghỉ dưỡng</td><td>1.580 / 875 / 63 dự án</td></tr>
+<tr><td>Nhà ở thương mại: dự án đang triển khai xây dựng</td><td>1.297 dự án</td></tr>
+<tr><td>Nhà ở thương mại: đủ điều kiện bán nhà ở hình thành trong tương lai</td><td>131 dự án</td></tr>
+<tr><td>Nhà ở thương mại: số lượng bất động sản</td><td>867.583 căn/lô (388.863 nhà ở riêng lẻ, 478.720 căn chung cư)</td></tr>
+</tbody>
+</table>
+<p>Một số ô (tổng mức đầu tư, giá trị giao dịch) hiện để trống trên hệ thống. Số liệu là tổng toàn quốc, phụ thuộc mức độ các địa phương và chủ đầu tư cập nhật; các tỉnh, thành vẫn đang được yêu cầu chuẩn hóa dữ liệu, nên chưa phản ánh đầy đủ thị trường.</p>
+<h2>Tra cứu được những gì?</h2>
+<table>
+<thead><tr><th>Mục trên cổng</th><th>Dùng để làm gì</th></tr></thead>
+<tbody>
+<tr><td>Mã định danh điện tử</td><td>Danh sách tài sản đã được xác thực và gán mã định danh. Tra theo loại hình và khu vực; kết quả gồm mã dự án/công trình, mã thửa đất, loại hình, khu vực, chủ đầu tư</td></tr>
+<tr><td>Bất động sản thương mại</td><td>Danh sách dự án bất động sản thương mại được chủ đầu tư công khai trước khi đưa vào kinh doanh</td></tr>
+<tr><td>Nhà ở xã hội</td><td>Danh sách dự án nhà ở xã hội được chủ đầu tư công khai trước khi đưa vào kinh doanh</td></tr>
+<tr><td>Tổ chức kinh doanh dịch vụ bất động sản</td><td>Lọc theo tỉnh/thành phố, loại hình, tình trạng – kiểm tra sàn giao dịch, công ty môi giới</td></tr>
+<tr><td>Chứng chỉ hành nghề môi giới</td><td>Kiểm tra cá nhân môi giới có chứng chỉ hành nghề</td></tr>
+<tr><td>Cá nhân được thụ hưởng chính sách hỗ trợ nhà ở</td><td>Tra cứu liên quan đối tượng mua, thuê nhà ở xã hội</td></tr>
+<tr><td>Văn bản quy phạm pháp luật</td><td>Luật, nghị định, thông tư, quyết định liên quan nhà ở và kinh doanh bất động sản</td></tr>
+</tbody>
+</table>
+<!--hh-img:img/da-nang/song-han-cau-quay-trung-tam-ve-dem.jpg|Sông Hàn và trung tâm Đà Nẵng về đêm – người mua căn hộ nên tra cứu dự án trên hệ thống của Bộ Xây dựng trước khi đặt cọc (ảnh thực tế)-->
+<h2>Cách dùng khi mua nhà ở Đà Nẵng: 5 bước Hoàng Hiệp hay làm</h2>
+<ol>
+<li><strong>Vào đúng địa chỉ:</strong> gõ trực tiếp thongtinbds.moc.gov.vn (tên miền .gov.vn của Bộ Xây dựng). Không bấm link lạ gửi qua tin nhắn.</li>
+<li><strong>Tra dự án:</strong> vào mục "Bất động sản thương mại" (hoặc "Nhà ở xã hội"), chọn khu vực Đà Nẵng, tìm theo tên dự án hoặc chủ đầu tư. Dự án được công khai trước khi kinh doanh là tín hiệu tốt; chưa thấy thì hỏi lại chủ đầu tư, không vội kết luận vì dữ liệu còn đang cập nhật.</li>
+<li><strong>Đối chiếu với văn bản đủ điều kiện bán:</strong> với nhà ở hình thành trong tương lai, cần thêm văn bản của Sở Xây dựng thông báo nhà ở đủ điều kiện được bán – Sở Xây dựng Đà Nẵng cũng công bố danh sách này định kỳ.</li>
+<li><strong>Kiểm tra người tư vấn:</strong> tra tên công ty dịch vụ bất động sản và chứng chỉ hành nghề môi giới của người đang tư vấn cho mình.</li>
+<li><strong>Giữ lại kết quả tra cứu:</strong> chụp màn hình kèm ngày tra cứu, lưu cùng hồ sơ cọc để đối chiếu khi ký hợp đồng.</li>
+</ol>
+<h2>Lưu ý quan trọng</h2>
+<ul>
+<li><strong>Kết quả tra cứu không thay hồ sơ pháp lý:</strong> vẫn cần xem quyết định chủ trương đầu tư, giấy phép xây dựng, văn bản đủ điều kiện bán, bảo lãnh ngân hàng (với nhà hình thành trong tương lai) và hợp đồng mẫu.</li>
+<li><strong>Căn hộ thương mại dịch vụ, condotel</strong> như Sun Saphia Residence không phải "nhà ở" theo Luật Nhà ở, nên thủ tục và danh sách công khai có thể khác căn hộ chung cư – xem thêm <a href="/phap-ly-sun-saphia-residence-so-huu-bao-lau/">pháp lý Sun Saphia Residence</a>.</li>
+<li><strong>Quy định bắt buộc dùng mã định danh trong mọi giao dịch</strong> theo một số báo vẫn đang nằm trong dự thảo Luật Kinh doanh bất động sản sửa đổi, chưa phải quy định đã áp dụng cho mọi giao dịch nhà đất.</li>
+<li><strong>Dữ liệu đang được cập nhật:</strong> TP Đà Nẵng đã có văn bản triển khai cơ sở dữ liệu nhà ở và thị trường bất động sản; theo báo chí, Sở Xây dựng đã cấp hơn 300 tài khoản cho cơ quan, đơn vị cập nhật dữ liệu.</li>
+</ul>
+<p>Xem thêm: <a href="/kiem-tra-phap-ly-quy-hoach-nha-dat-da-nang/">cách kiểm tra pháp lý, quy hoạch nhà đất Đà Nẵng</a>.</p>
+<h2>Dự án Hoàng Hiệp hỗ trợ kiểm tra hồ sơ</h2>
+<ul>
+<li><a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a> – căn hộ thương mại dịch vụ mặt biển của Sun Group, sắp giới thiệu chính thức.</li>
+<li><a href="/du-an/spana-tower/">Spana Tower Hòa Xuân</a> và <a href="/du-an/cora-tower/">Cora Tower</a> – căn hộ Sun Group ở Hòa Xuân, Hải Châu.</li>
+<li><a href="/du-an/nobu-da-nang/">Nobu Residences Đà Nẵng</a> – căn hộ hàng hiệu ven biển Mỹ Khê.</li>
+</ul>
+<p>Anh chị cần Hiệp tra cứu giúp một dự án, đối chiếu văn bản đủ điều kiện bán hoặc kiểm tra hồ sơ trước khi đặt cọc, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: Hệ thống thông tin về nhà ở và thị trường bất động sản – Bộ Xây dựng (thongtinbds.moc.gov.vn, số liệu trang chủ "Tổng quan thị trường quý II 2026", xem ngày 13/11/2026); Nghị định 357/2025/NĐ-CP theo tóm tắt của Thư viện Pháp luật, LuatVietnam, Cổng thông tin Chính phủ; thông tin vận hành hệ thống theo Tiền Phong, Báo Xây dựng; Đà Nẵng triển khai cơ sở dữ liệu theo VnEconomy.</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Tra cứu mã định danh bất động sản trên cổng Bộ Xây dựng',
+			'desc'      => 'Cách tra cứu dự án công khai, mã định danh bất động sản, môi giới có chứng chỉ trên thongtinbds.moc.gov.vn trước khi đặt cọc mua nhà ở Đà Nẵng.',
+			'points'    => array(
+				'thongtinbds.moc.gov.vn là Hệ thống thông tin về nhà ở và thị trường bất động sản của Bộ Xây dựng, vận hành theo Nghị định 357/2025/NĐ-CP',
+				'Tra cứu được mã định danh bất động sản, dự án thương mại và nhà ở xã hội công khai trước khi kinh doanh, tổ chức dịch vụ, chứng chỉ môi giới',
+				'Quý II/2026: 1.938 dự án, 131 dự án đủ điều kiện bán nhà ở hình thành trong tương lai, 100.005 giao dịch (toàn quốc)',
+				'Kết quả tra cứu không thay hồ sơ pháp lý; vẫn cần văn bản đủ điều kiện bán của Sở Xây dựng',
+			),
+			'faq'       => array(
+				array( 'Tra cứu mã định danh bất động sản ở đâu?', 'Trên Hệ thống thông tin về nhà ở và thị trường bất động sản của Bộ Xây dựng tại thongtinbds.moc.gov.vn, mục "Mã định danh điện tử", lọc theo loại hình và khu vực.' ),
+				array( 'Làm sao biết dự án đã được phép bán?', 'Tra danh sách dự án được chủ đầu tư công khai trước khi kinh doanh trên thongtinbds.moc.gov.vn và đối chiếu văn bản thông báo đủ điều kiện bán nhà ở hình thành trong tương lai của Sở Xây dựng.' ),
+				array( 'Mã định danh bất động sản là gì?', 'Theo Nghị định 357/2025/NĐ-CP, là chuỗi ký tự số và chữ tối đa 40 ký tự cấp cho từng nhà ở hoặc phần diện tích sàn xây dựng; với nhà ở, mã được tạo tự động trên hệ thống.' ),
+				array( 'Có kiểm tra được môi giới bất động sản không?', 'Có. Cổng có mục tra cứu tổ chức kinh doanh dịch vụ bất động sản và danh sách cá nhân có chứng chỉ hành nghề môi giới.' ),
+			),
+		),
+		'sources'  => array(
+			'https://thongtinbds.moc.gov.vn/',
+			'https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/tom-tat-nghi-dinh-357-ve-dinh-danh-bat-dong-san-tu-01-03-2026-nghi-dinh-357-2025-nd-cp-18049.html',
+			'https://xaydungchinhsach.chinhphu.vn/tu-2026-gan-ma-dinh-danh-dien-tu-cho-bat-dong-san-119260120154236385.htm',
+			'https://tienphong.vn/tiep-nhan-120-du-an-900-ho-so-bat-dong-san-tren-he-thong-moi-post1876224.tpo',
+			'https://batdongsan.baoxaydung.vn/tung-buoc-hoan-thien-he-thong-du-lieu-nha-o-va-thi-truong-bat-dong-san-192260913200230575.htm',
+			'https://vneconomy.vn/da-nang-lap-co-so-du-lieu-nha-o-va-thi-truong-bat-dong-san.htm',
+		),
+	);
 	return $posts;
 }
