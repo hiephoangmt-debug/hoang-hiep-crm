@@ -60,6 +60,10 @@ add_action(
 		$title   = $id ? hh_chat_title( $id ) : '';
 		$greet   = trim( (string) hh_chat_opt( 'greeting' ) );
 		$lang    = function_exists( 'hh_lang' ) ? hh_lang() : 'vi';
+		if ( function_exists( 'hh_project_en_pair' ) && ( hh_project_en_pair()['is_en'] ?? false ) ) {
+			$lang = 'en'; // Trang dự án bản tiếng Anh viết riêng (vd /du-an/nobu-da-nang/en/): chat tiếng Anh.
+			$title = str_replace( array( 'Đà Nẵng', 'Hội An' ), array( 'Da Nang', 'Hoi An' ), (string) $title );
+		}
 		$ui      = hh_chat_ui( $lang, $name, $title );
 		wp_localize_script(
 			'hh-chat',
