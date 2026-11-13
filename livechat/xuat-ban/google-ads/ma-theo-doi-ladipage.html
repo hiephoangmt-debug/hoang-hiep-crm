@@ -1,0 +1,27 @@
+<!-- Dán vào LadiPage → Cài đặt trang → Mã HTML/Javascript (head). Giữ nguyên dòng tải thư viện. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-872503827"></script>
+<script>
+  // ===== Google Ads – Casamia Balanca =====
+  var ADS_ID = 'AW-872503827';
+  var ADS_LABEL_LEAD    = 'DAN_NHAN_GUI_FORM_VAO_DAY';   // hành động "Casamia – Gửi form"
+  var ADS_LABEL_CONTACT = 'DAN_NHAN_GOI_ZALO_VAO_DAY';   // hành động "Casamia – Bấm Gọi/Zalo"
+  window.dataLayer = window.dataLayer || [];
+  // gtag.js chỉ đọc lệnh dạng "arguments" → dùng hàm phụ này để gửi chuyển đổi
+  function adsPush() { dataLayer.push(arguments); }
+  function gtag() {
+    dataLayer.push(arguments);
+    var a = arguments;
+    if (a[0] !== 'event') return;
+    if (a[1] === 'generate_lead' && ADS_LABEL_LEAD && ADS_LABEL_LEAD.indexOf('DAN_NHAN') !== 0) {
+      adsPush('event', 'conversion', { send_to: ADS_ID + '/' + ADS_LABEL_LEAD, value: 500000, currency: 'VND' });
+    }
+    if (a[1] === 'contact' && ADS_LABEL_CONTACT && ADS_LABEL_CONTACT.indexOf('DAN_NHAN') !== 0) {
+      try { if (sessionStorage.getItem('casamia_contact_sent')) return;
+            sessionStorage.setItem('casamia_contact_sent', '1'); } catch (e) {}
+      adsPush('event', 'conversion', { send_to: ADS_ID + '/' + ADS_LABEL_CONTACT, value: 100000, currency: 'VND' });
+    }
+  }
+  gtag('js', new Date());
+  gtag('config', ADS_ID);
+  // ĐÃ BỎ dòng conversion chạy khi tải trang (k61uCK206ZAdEJO0haAD)
+</script>
