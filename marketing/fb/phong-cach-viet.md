@@ -27,6 +27,12 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 - Lời ngắn hơn FB: 1 câu mở có từ khoá, 3–4 gạch đầu dòng "•", 1 câu "Góc nhìn của Hiệp", kết "Zalo 0904 567 009 · chi tiết tại hiephoangmt.com" (TikTok không bấm được link trong bình luận), 4–5 hashtag có #DaNang.
 - Bài trang Hoàng Hiệp KHÔNG đăng TikTok (TikTok gắn brand Sun).
 
+## Trang Casamia Balanca (kết nối 13/11/2026, anh Hiệp chọn 2 bài/ngày)
+- Metricool blogId 8074284, chỉ nội dung Casamia Balanca (Đạt Phương, Cẩm Thanh – Hội An); có thể nhắc Casamia Hội An, Casamia Calm khi so sánh.
+- 2 bài/ngày: 08:30 và 21:00. Xoay vòng góc, không lặp trong 7 ngày: tổng quan; tiện ích sống; nội thất; tiến độ thực tế (flycam); pháp lý sổ hồng; loại biệt thự (đơn lập, song lập, shophouse); vị trí – kết nối Hội An, Đà Nẵng; bài toán dòng tiền 5–10 năm; so sánh biệt thự Hội An; sự kiện khách hàng; sống chậm ven sông Cổ Cò.
+- Ảnh: hh-crm/img/casamia-balanca/ (45 ảnh: flycam, phối cảnh, lifestyle, nội thất, sự kiện). Không đăng ảnh so-do-mat-bang làm ảnh đầu, không đăng so-hong-lo-sl3 (có mã lô). Album 3–4 ảnh không chữ, hoặc 1 thẻ dọc khi có số liệu.
+- Nguồn số liệu: data-du-an.php (slug casamia-balanca-hoi-an), data-bai-viet-casamia-dong-tien.php. Link: https://hiephoangmt.com/du-an/casamia-balanca-hoi-an/ hoặc bài web Casamia.
+
 ## Giọng văn
 - Như anh Hiệp nhắn cho khách quen: xưng "Hiệp"/"mình", gọi "anh chị", dùng "ạ" lịch sự (hạn chế "nha").
 - Câu mở nhẹ nhàng, ấm áp, gần đời thường; dí dỏm vừa phải.
