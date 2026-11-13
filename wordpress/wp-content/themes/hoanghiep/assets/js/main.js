@@ -757,6 +757,56 @@
 				} );
 			}
 		} );
+		// Album kiểu Facebook: nút "Xem toàn bộ album" mở lightbox từ ảnh đầu của nhóm.
+		document.addEventListener( 'click', ( e ) => {
+			const btn = e.target.closest( '[data-album-open]' );
+			if ( ! btn ) {
+				return;
+			}
+			const first = $( 'a[data-lightbox="' + btn.dataset.albumOpen + '"]' );
+			if ( first ) {
+				first.click();
+			}
+		} );
+		// Gallery WordPress trong bài viết (từ 2 ảnh) → album kiểu Facebook, giữ nguyên ảnh và thứ tự.
+		$$( '.entry-content .wp-block-gallery, .entry-content .gallery' ).forEach( ( gal, gi ) => {
+			const imgs = $$( 'img', gal );
+			if ( imgs.length < 2 ) {
+				return;
+			}
+			const group = 'bai-viet-' + gi;
+			const album = document.createElement( 'div' );
+			album.className = 'fb-album';
+			album.dataset.layout = Math.min( imgs.length, 9 );
+			album.dataset.count = imgs.length;
+			imgs.forEach( ( im, i ) => {
+				const link = im.closest( 'a' );
+				const isImg = link && /\.(jpe?g|png|webp|gif|avif)(\?|$)/i.test( link.href );
+				const a = document.createElement( 'a' );
+				a.className = 'fb-album__item' + ( i >= 9 ? ' is-hidden' : '' );
+				a.href = isImg ? link.href : ( im.dataset.fullUrl || im.currentSrc || im.src );
+				a.dataset.lightbox = group;
+				const fig = im.closest( 'figure' );
+				const cap = fig ? $( 'figcaption', fig ) : null;
+				if ( cap ) {
+					a.title = cap.textContent.trim();
+				}
+				a.appendChild( im.cloneNode( true ) );
+				if ( 8 === i && imgs.length > 9 ) {
+					const more = document.createElement( 'span' );
+					more.className = 'fb-album__more';
+					more.textContent = '+' + ( imgs.length - 9 );
+					a.appendChild( more );
+				}
+				album.appendChild( a );
+			} );
+			const btn = document.createElement( 'button' );
+			btn.type = 'button';
+			btn.className = 'fb-album__all';
+			btn.dataset.albumOpen = group;
+			btn.textContent = 'Xem toàn bộ album (' + imgs.length + ' ảnh)';
+			gal.replaceWith( album, btn );
+		} );
 		document.addEventListener( 'keydown', ( e ) => {
 			if ( box.hidden ) {
 				return;

@@ -692,10 +692,31 @@ if ( ! $parent ) {
   <div class="container">
     <span class="eyebrow">Thư viện ảnh</span>
     <h2 class="title" id="h-tv"><?php echo $e( $short_name ); ?> <em>qua hình ảnh</em></h2>
-    <?php $gn = count( $gallery ) >= 9 ? 9 : ( count( $gallery ) >= 5 ? 5 : count( $gallery ) ); ?>
-    <div class="gallery">
-      <?php foreach ( array_slice( $gallery, 0, $gn ) as $i => $img ) { echo $card( $img, '', 0 === $i ); } // phpcs:ignore ?>
+    <?php
+    // Album kiểu Facebook: bố cục tự theo số ảnh (1–9), từ 10 ảnh hiện 9 ô + "+N"; ảnh còn lại xem trong lightbox.
+    $g_html = array();
+    foreach ( array_values( $gallery ) as $img ) {
+      $c = $card( $img, '', empty( $g_html ) );
+      if ( '' !== $c ) {
+        $g_html[] = $c;
+      }
+    }
+    $gt = count( $g_html );
+    foreach ( $g_html as $i => $c ) {
+      $cls = 'card-img fb-album__item' . ( $i >= 9 ? ' is-hidden' : '' );
+      $c   = str_replace( '<a class="card-img"', '<a class="' . $cls . '" data-lightbox="thu-vien"', $c );
+      if ( 8 === $i && $gt > 9 ) {
+        $c = str_replace( '</a>', '<span class="fb-album__more">+' . ( $gt - 9 ) . '</span></a>', $c );
+      }
+      $g_html[ $i ] = $c;
+    }
+    ?>
+    <div class="gallery fb-album" data-layout="<?php echo (int) min( $gt, 9 ); ?>" data-count="<?php echo (int) $gt; ?>" role="group" aria-label="<?php echo esc_attr( 'Thư viện ảnh ' . $short_name ); ?>">
+      <?php echo implode( '', $g_html ); // phpcs:ignore ?>
     </div>
+    <?php if ( $gt > 1 ) : ?>
+    <button type="button" class="fb-album__all" data-album-open="thu-vien">Xem toàn bộ album (<?php echo (int) $gt; ?> ảnh)</button>
+    <?php endif; ?>
     <p class="note">Ảnh phối cảnh, minh họa của chủ đầu tư; ảnh thực tế có ghi chú riêng.</p>
   </div>
 </section>
@@ -846,10 +867,16 @@ addEventListener('keydown',function(e){if('Escape'===e.key)close(true);});})();
     sec.querySelectorAll('.tab[data-toa]').forEach(function(t){var on=t.dataset.toa===b.dataset.toa;t.hidden=!on;if(on&&!first)first=t;});
     if(first)first.click();
   });});
-  var lb=document.getElementById('lb'),li=lb.querySelector('img');
-  document.addEventListener('click',function(e){var a=e.target.closest('a.card-img,a.pic,a.plan');if(!a)return;e.preventDefault();li.src=a.getAttribute('href');li.alt=(a.querySelector('img')||{}).alt||'';lb.classList.add('on');});
-  lb.addEventListener('click',function(e){if(e.target!==li){lb.classList.remove('on');}});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('on');});
+  // Lightbox: ảnh trong album (data-lightbox) có nút trước/sau, số thứ tự, phím ← → và vuốt trên điện thoại.
+  var lb=document.getElementById('lb'),li=lb.querySelector('img'),set=[],at=0,tx=null;
+  var nav=document.createElement('div');nav.className='lb-nav';nav.innerHTML='<button type="button" class="lb-prev" aria-label="Ảnh trước">‹</button><span class="lb-count"></span><button type="button" class="lb-next" aria-label="Ảnh sau">›</button>';lb.appendChild(nav);
+  function show(i){if(!set.length)return;at=(i+set.length)%set.length;var a=set[at];li.src=a.getAttribute('href');li.alt=(a.querySelector('img')||{}).alt||'';nav.querySelector('.lb-count').textContent=(at+1)+' / '+set.length;}
+  function openA(a){var g=a.dataset.lightbox;set=g?[].slice.call(document.querySelectorAll('a[data-lightbox="'+g+'"]')):[a];nav.hidden=set.length<2;show(Math.max(0,set.indexOf(a)));lb.classList.add('on');}
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-album-open]');if(b){var f=document.querySelector('a[data-lightbox="'+b.dataset.albumOpen+'"]');if(f)openA(f);return;}var a=e.target.closest('a.card-img,a.pic,a.plan');if(!a)return;e.preventDefault();openA(a);});
+  lb.addEventListener('click',function(e){if(e.target.closest('.lb-prev')){show(at-1);return;}if(e.target.closest('.lb-next')){show(at+1);return;}if(e.target!==li&&!e.target.closest('.lb-nav')){lb.classList.remove('on');}});
+  lb.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  lb.addEventListener('touchend',function(e){if(null===tx||set.length<2)return;var d=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(d)>40)show(at+(d<0?1:-1));},{passive:true});
+  document.addEventListener('keydown',function(e){if(!lb.classList.contains('on'))return;if(e.key==='Escape')lb.classList.remove('on');else if(e.key==='ArrowLeft')show(at-1);else if(e.key==='ArrowRight')show(at+1);});
   document.querySelectorAll('[data-type]').forEach(function(a){a.addEventListener('click',function(){var s=document.getElementById('f-type');if(s){for(var i=0;i<s.options.length;i++){if(s.options[i].text===a.dataset.type){s.selectedIndex=i;}}}});});
   document.querySelectorAll('.lead-form').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();if(!f.checkValidity()){f.reportValidity();return;}var m=f.querySelector('.ok-msg');if(m)m.style.display='block';f.querySelector('button[type=submit]').disabled=true;});});
   var links=[].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
