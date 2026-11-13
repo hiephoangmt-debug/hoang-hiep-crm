@@ -55,3 +55,4 @@
 | CHỜ | Hoàng Hiệp | 14/11 | (bài web 13/11 14:00, trang đủ 3 bài) Mặt bằng The Legend Đà Nẵng | mat-bang-can-ho-the-legend-da-nang (chờ) |
 | 13/11/2026 | TikTok (@hiephoangmt, brand Sun) | 14:30 | Phí quản lý Sun Saphia – bài ảnh (thẻ dọc) | /phi-quan-ly-sun-saphia-residence-moi-thang-bao-nhieu/ |
 | 13/11/2026 | TikTok (@hiephoangmt, brand Sun) | 20:15 | Ngũ Hành Sơn gần Sun Saphia – bài ảnh (thẻ dọc) | /danh-thang-ngu-hanh-son-gan-sun-saphia-residence/ |
+| 13/11/2026 | Casamia (blogId 8074284) | 18:00 | Bài mở đầu trang Casamia Balanca – tổng quan dự án (album 4 ảnh: flycam thực tế + phối cảnh) | /du-an/casamia-balanca-hoi-an/ |
