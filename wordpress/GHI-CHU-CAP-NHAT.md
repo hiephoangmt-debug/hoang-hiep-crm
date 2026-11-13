@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.25** + plugin Hoàng Hiệp CRM **2.20.256**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.25** + plugin Hoàng Hiệp CRM **2.20.257**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,15 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.257 (13/11/2026)
+
+- **Vinhomes Hải Vân Bay – bổ sung từ bộ tài liệu dự án anh gửi:**
+  - Phân khu **Đảo Ngọc**: 27 ảnh – TMB tiện ích Khu Đảo Ngọc, 4 phối cảnh tổng thể, biệt thự Đảo Ngọc / Hidden Valley, phố đi bộ biển Emerald Boulevard, Công viên Đảo Ngọc (Pearl Park), Công viên Nắng Biển (Sunlight Park). Tiện ích nội khu thêm số liệu theo TMB: VinWonders Hải Vân ~24,8 ha, Botanica Park ~8 ha, Pearl Park ~0,65 ha, Emerald Boulevard ~1,3 km, Sunlight Park ~0,48 ha, resort 5 sao ~4,6 ha.
+  - Trang tổng: TMB định vị kiến trúc 4 phân khu + TMB tiện ích Đảo Ngọc + 2 phối cảnh.
+  - Bạch Vân: phối cảnh phố liền kề mẫu Shanghai.
+  - Không đăng: tờ rơi đại lý, file đào tạo nội bộ.
+- Cài: Nhập nhanh → tải `cap-nhat-code.zip` → "Nhập / cập nhật dữ liệu" → **"Tải ảnh ngay"** (29 ảnh mới, mỗi lần tối đa 15 ảnh – bấm 2–3 lần đến khi báo hết) → LiteSpeed Purge All.
 
 ## Có gì mới – giao diện 2.16.25 (13/11/2026)
 
