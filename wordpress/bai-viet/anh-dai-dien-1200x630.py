@@ -22,6 +22,8 @@ for s in json.load(open(J)):
     for x in range(W):
         a = 228 if x < 560 else int(228 * max(0, 1 - (x - 560) / 420))
         g.line([x, 0, x, H], fill=(8, 20, 34, a))
+    im = Image.alpha_composite(im, ov)
+    ov = Image.new('RGBA', (W, H), (0, 0, 0, 0)); g = ImageDraw.Draw(ov)  # lớp riêng: tối dần phía dưới (không đè lớp bên trái)
     for y in range(H - 200, H):
         g.line([0, y, W, y], fill=(8, 20, 34, int(120 * ((y - H + 200) / 200) ** 2)))
     im = Image.alpha_composite(im, ov).convert('RGB'); d = ImageDraw.Draw(im)
