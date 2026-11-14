@@ -23,6 +23,10 @@ function hh_mbbd_plans() {
 			'width_m' => $w * 0.88 / 3, // ≈ 865 m: đo theo Đường số 6 (204 m), số 7 (164 m), số 8 (204 m), số 4 (471 m).
 			'bearing' => 35.7,          // Hướng phía trên ảnh so với Bắc thật (theo mũi tên Bắc trên bản vẽ).
 			'center'  => array( 16.02494, 108.23030 ), // Plus Code 26FJ+X4F (đường Giáng Hương 6, trong Euro Village 2) – admin kéo cho khớp rồi Lưu.
+			'anchors' => array(
+				array( 'Tâm vòng tròn trong công viên', 0.6151, 0.4996 ),
+				array( 'Góc Đông Nam: Đường số 4 giao Đường số 9', 0.8015, 0.8068 ),
+			),
 			'labels'  => array(
 				$l( 'B2-8', '104 lô · 39.083 m²', 1620, 726 ),
 				$l( 'B2-11', '61 lô · 20.403 m²', 1467, 1144 ),
@@ -85,6 +89,7 @@ add_action(
 			'bearing' => $p['bearing'],
 			'center'  => $p['center'],
 			'labels'  => $p['labels'],
+			'anchors' => $p['anchors'] ?? array(),
 			'saved'   => is_array( $saved ) ? $saved : null,
 			'admin'   => $admin,
 			'ajax'    => admin_url( 'admin-ajax.php' ),
@@ -101,7 +106,10 @@ add_action(
 	<span style="flex-basis:100%;color:#8a4b1c"><b>Admin:</b> kéo chấm đỏ để dời sơ đồ, xoay / co giãn cho khớp đường trên ảnh vệ tinh rồi bấm Lưu. Khách chỉ thấy bản đồ sau khi Lưu.</span>
 	<button type="button" data-k="r-1">⟲ 1°</button><button type="button" data-k="r-.2">⟲ 0,2°</button><button type="button" data-k="r.2">⟳ 0,2°</button><button type="button" data-k="r1">⟳ 1°</button>
 	<button type="button" data-k="s-1">− 1%</button><button type="button" data-k="s1">+ 1%</button>
-	<input type="text" data-k="ll" placeholder="Dán tọa độ Google Maps, VD 16.0249, 108.2303" style="min-width:260px;padding:5px 8px"><button type="button" data-k="go">Dời tâm tới</button>
+	<span style="flex-basis:100%;margin-top:4px"><b>Căn nhanh bằng 2 điểm</b> (tự tính vị trí, góc xoay, tỷ lệ): mở Google Maps chế độ vệ tinh → bấm chuột phải đúng điểm → bấm dòng tọa độ để sao chép → dán vào ô.</span>
+	<label style="flex-basis:100%">① <?php echo esc_html( $p['anchors'][0][0] ?? '' ); ?>: <input type="text" data-k="a1" placeholder="VD 16.02494, 108.23030" style="min-width:240px;padding:5px 8px"></label>
+	<label style="flex-basis:100%">② <?php echo esc_html( $p['anchors'][1][0] ?? '' ); ?>: <input type="text" data-k="a2" placeholder="(bỏ trống nếu chỉ dời vị trí)" style="min-width:240px;padding:5px 8px"></label>
+	<button type="button" data-k="go" style="background:#c99234;color:#fff;border:0">Căn theo điểm</button>
 	<button type="button" data-k="save" style="background:#532516;color:#fff;border:0;border-radius:6px;padding:6px 14px">Lưu vị trí</button>
 	<button type="button" data-k="reset">Bỏ vị trí đã lưu</button>
 	<span data-k="st" style="color:#555"></span>
@@ -164,15 +172,35 @@ add_action(
 	var msg = bar.querySelector('[data-k=st]');
 	function show() { msg.textContent = st.lat.toFixed(6) + ', ' + st.lng.toFixed(6) + ' · xoay ' + st.rot.toFixed(1) + '° · tỷ lệ ' + Math.round(st.sc * 100) + '%'; }
 	var pin = L.marker([st.lat, st.lng], { draggable: true, zIndexOffset: 1000, icon: L.divIcon({ className: '', html: '<div style="width:22px;height:22px;border-radius:50%;background:#d33;border:3px solid #fff;box-shadow:0 0 6px #000;transform:translate(-50%,-50%)"></div>', iconSize: null }) }).addTo(map);
+	var anc = L.layerGroup().addTo(map);
+	function drawAnchors() { anc.clearLayers(); (C.anchors || []).forEach(function (k, i) { L.marker(ll(k[1], k[2]), { interactive: false, icon: L.divIcon({ className: '', html: '<div style="transform:translate(-50%,-50%);width:24px;height:24px;border-radius:50%;background:#1d4ed8;color:#fff;font:700 13px/24px sans-serif;text-align:center;border:2px solid #fff;box-shadow:0 0 5px #000">' + (i + 1) + '</div>', iconSize: null }) }).addTo(anc); }); }
+	drawAnchors();
+	map.on('zoomend', drawAnchors);
 	pin.on('drag', function (ev) { var p = ev.target.getLatLng(); st.lat = p.lat; st.lng = p.lng; place(); show(); });
-	pin.on('dragend', function () { drawLabels(); });
+	pin.on('dragend', function () { drawLabels(); drawAnchors(); });
 	bar.querySelectorAll('button[data-k]').forEach(function (b) {
 		b.addEventListener('click', function () {
 			var k = b.getAttribute('data-k');
 			if (k === 'go') {
-				var v = (bar.querySelector('[data-k=ll]').value.match(/-?\d+(?:\.\d+)?/g) || []).map(parseFloat);
-				if (v.length < 2) { msg.textContent = 'Chưa đọc được tọa độ.'; return; }
-				st.lat = v[0]; st.lng = v[1]; pin.setLatLng([st.lat, st.lng]); map.setView([st.lat, st.lng]); place(); drawLabels(); show(); return;
+				var rd = function (n) { var v = (bar.querySelector('[data-k=' + n + ']').value.match(/-?\d+(?:\.\d+)?/g) || []).map(parseFloat); return v.length >= 2 ? L.latLng(v[0], v[1]) : null; };
+				var A1 = rd('a1'), A2 = rd('a2'), K = C.anchors;
+				if (!A1 || !K[0]) { msg.textContent = 'Chưa đọc được tọa độ điểm ①.'; return; }
+				var cosl = Math.cos(A1.lat * Math.PI / 180), M = 111320;
+				if (A2 && K[1]) {
+					var w = C.width, h = w * C.ratio;
+					var ix = (K[1][1] - K[0][1]) * w, iy = (K[0][2] - K[1][2]) * h;
+					var gE = (A2.lng - A1.lng) * M * cosl, gN = (A2.lat - A1.lat) * M;
+					var li = Math.sqrt(ix * ix + iy * iy), lg = Math.sqrt(gE * gE + gN * gN);
+					st.sc = lg / li;
+					st.rot = (Math.atan2(iy, ix) - Math.atan2(gN, gE)) * 180 / Math.PI;
+					st.rot = ((st.rot % 360) + 540) % 360 - 180;
+				}
+				st.lat = A1.lat; st.lng = A1.lng;
+				var q = ll(K[0][1], K[0][2]);
+				st.lat -= q.lat - A1.lat; st.lng -= q.lng - A1.lng;
+				pin.setLatLng([st.lat, st.lng]); map.fitBounds(L.latLngBounds([ll(0, 0), ll(1, 0), ll(0, 1), ll(1, 1)])); place(); drawLabels(); drawAnchors(); show();
+				if (A2 && (st.sc < .8 || st.sc > 1.25)) { msg.textContent += ' – tỷ lệ lệch nhiều, kiểm tra lại 2 điểm đã dán đúng chỗ chưa.'; }
+				return;
 			}
 			if (k !== 'save' && k !== 'reset') {
 				if (k.charAt(0) === 'r') { st.rot += parseFloat(k.slice(1)); } else { st.sc *= 1 + parseFloat(k.slice(1)) / 100; }
@@ -187,7 +215,7 @@ add_action(
 				});
 				return;
 			}
-			place(); drawLabels(); show();
+			place(); drawLabels(); drawAnchors(); show();
 		});
 	});
 	show();

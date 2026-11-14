@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.31** + plugin Hoàng Hiệp CRM **2.20.273**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.31** + plugin Hoàng Hiệp CRM **2.20.274**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.274 (14/11/2026)
+
+- **Euro Village 2 – sơ đồ có chia lô:** vẽ lại ranh từng lô theo vị trí lô trên tổng mặt bằng (các dãy B2-12, B2-13, B2-15, B2-16 kẻ thẳng; dãy cong B2-8, B2-11 theo đường cong). Dải ven sông, ven kênh tô xanh (cây xanh), B2-17 để nền trơn (bản vẽ chưa chia lô). Vẫn là sơ đồ minh họa.
+- **Gắn lên bản đồ bằng 2 điểm (admin):** dán tọa độ Google Maps của ① tâm vòng tròn trong công viên và ② góc Đường số 4 giao Đường số 9 → bấm **Căn theo điểm**: tự tính vị trí, góc xoay và tỷ lệ; 2 chấm xanh ①② hiện trên sơ đồ để đối chiếu → **Lưu vị trí**.
 
 ## Có gì mới – 2.20.273 (14/11/2026)
 
