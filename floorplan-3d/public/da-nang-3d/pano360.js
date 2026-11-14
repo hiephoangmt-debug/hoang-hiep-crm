@@ -19,8 +19,12 @@ const CSS = `
 .p360 .lb.rs b { background: #0e7490; } .p360 .lb.mart b { background: #7c3aed; } .p360 .lb.bv b { background: #fff; color: #b91c1c; }
 .p360 .lb.ph b { background: none; box-shadow: none; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; text-shadow: 0 1px 3px #000, 0 0 8px #000; }
 .p360 .lb.ph span { background: none; }
+@media (max-width: 640px) { .p360 .lb b { font-size: 11px; padding: 3px 7px; } .p360 .lb.big b, .p360 .lb.site b { font-size: 12px; } .p360 .lb small { display: none; } }
 .p360 .hd { position: absolute; top: 0; left: 0; right: 0; padding: max(10px, env(safe-area-inset-top)) 56px 14px 16px; background: linear-gradient(#000a, transparent); font: 13px Inter, sans-serif; pointer-events: none; }
 .p360 .hd h2 { margin: 0 0 2px; font-size: 16px; }
+.p360 .logo { display: inline-block; background: #fffffff2; border-radius: 8px; padding: 5px 10px; margin-bottom: 6px; box-shadow: 0 2px 10px #0004; line-height: 0; }
+.p360 .logo img { height: 22px; width: auto; }
+@media (max-width: 640px) { .p360 .logo img { height: 18px; } }
 .p360 .hd small { opacity: .85; }
 .p360 .x { position: absolute; top: max(10px, env(safe-area-inset-top)); right: 12px; border: 0; background: #ffffff2b; color: #fff; border-radius: 999px; width: 34px; height: 34px; font-size: 15px; cursor: pointer; }
 .p360 .ft { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 16px max(12px, env(safe-area-inset-bottom)); background: linear-gradient(transparent, #000b); }
@@ -54,11 +58,12 @@ function makeViewer(ctx) {
   const st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
   const root = document.createElement('div'); root.className = 'p360'; root.hidden = true;
   root.innerHTML = `<div class="lbls"></div>
-    <div class="hd"><h2></h2><small></small></div>
+    <div class="hd"><div class="logo"><img alt="TATI Property" /></div><h2></h2><small></small></div>
     <button class="x" aria-label="Đóng">✕</button>
     <div class="ft"><div class="cmp"></div><div class="chips"></div></div>`;
   document.body.appendChild(root);
   const $ = (s) => root.querySelector(s);
+  $('.logo img').src = new URL('../brand/tati-property.png', import.meta.url).href;   // logo đơn vị phân phối
   const lblBox = $('.lbls'), cmp = $('.cmp'), chips = $('.chips');
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -75,7 +80,7 @@ function makeViewer(ctx) {
 
   // hướng nhìn: yaw = góc so với Bắc (độ, theo chiều kim đồng hồ), pitch = ngẩng (+) / cúi (−)
   const view = { yaw: 0, pitch: -15, fov: 75 };
-  let cur = null, P = null, labels = [], open = false, raf = 0, showLbl = true;
+  let cur = null, P = null, labels = [], open = false, raf = 0, showLbl = true, lblGroup = 'all';
   const loader = new THREE.TextureLoader();
   const texCache = new Map();
   const loadTex = (url) => {
@@ -94,14 +99,20 @@ function makeViewer(ctx) {
     return { v: new THREE.Vector3(dx, y - C.y - (0.87 * h * h) / (2 * 6371000), dz), dist: h };
   }
 
+  // không hiện trên ảnh 360° (theo yêu cầu)
+  const HIDE = new Set(['Times Square Đà Nẵng']);
   function buildLabels(C) {
     lblBox.textContent = ''; labels = [];
+    // tên gọn để đỡ chồng chéo
+    const SHORT = { 'Da Nang Downtown – tháp 408 m': 'Da Nang Downtown', 'Bán đảo Sơn Trà (696 m)': 'Bán đảo Sơn Trà', 'Tượng Phật Quan Âm – chùa Linh Ứng': 'Chùa Linh Ứng',
+      'Sun Wheel – Công viên Châu Á': 'Công viên Châu Á', 'Cầu Sông Hàn (cầu quay)': 'Cầu Sông Hàn', 'Sân bay quốc tế Đà Nẵng': 'Sân bay Đà Nẵng', 'Cầu Tình Yêu – Cá chép hóa rồng': 'Cầu Tình Yêu' };
     const add = (name, v, dist, cls, prio) => {
+      name = name.replace(/^(🏢 |🏖 )?(.*)$/, (m, i, n) => (i || '') + (SHORT[n] || n));
       const el = document.createElement('div'); el.className = 'lb ' + cls;
       el.innerHTML = '<b></b><span></span>'; el.querySelector('b').textContent = name;
       if (dist > 400) { const s = document.createElement('small'); s.textContent = fmtKm(dist); el.querySelector('b').appendChild(s); }
       lblBox.appendChild(el);
-      labels.push({ el, dir: v.clone().normalize(), prio, w: 0, h: 0, site: cls === 'site' });
+      labels.push({ el, dir: v.clone().normalize(), prio, w: 0, h: 0, site: cls === 'site', g: cls === 'site' ? 'site' : cls === 'big' ? 'prj' : cls === 'rs' ? 'rs' : 'dd' });
     };
     // khu đất của chính dự án: nhãn đỏ ở tâm khu đất
     const S = siteCenter();
@@ -109,6 +120,7 @@ function makeViewer(ctx) {
     const seen = new Set();
     for (const p of ctx.PLACES) {
       if (p.lotEdge || p.lot || p.prj === P || p.pano) continue;
+      if (HIDE.has(p.name.replace(/^🏢\s*/, ''))) continue;
       const name = p.name.replace(/^🏢\s*/, '');
       if (seen.has(name)) continue; seen.add(name);
       const r = rel(C, p.pos.x, p.prj ? ctx.groundY(p.pos.x, p.pos.z) + (p.pos.y - ctx.groundY(p.pos.x, p.pos.z)) * 0.5 : p.pos.y, p.pos.z);
@@ -117,11 +129,11 @@ function makeViewer(ctx) {
       add((p.prj ? '🏢 ' : '') + name, r.v, r.dist, cls, (p.prj ? 50 : p.big ? 20 : 0) - r.dist / 1000);
     }
     // điểm mốc thêm (poi.js): resort, siêu thị, bệnh viện, phường…
-    const ICON = { rs: '🏖 ', mart: '🛒 ', bv: '🏥 ', dd: '', ph: '' }, PRIO = { dd: 18, rs: 15, mart: 12, bv: 12, ph: 8 };
+    const ICON = { rs: '🏖 ', mart: '🛒 ', bv: '🏥 ', dd: '', ph: '' }, PRIO = { dd: 18, rs: 30, mart: 12, bv: 12, ph: 8 };
     for (const q of ctx.POI || []) {
       if (seen.has(q.n)) continue; seen.add(q.n);
-      const [x, z] = ctx.LL(q.lat, q.lon), r = rel(C, x, ctx.groundY(x, z) + (q.k === 'ph' ? 0 : 8), z);
-      if (r.dist > 20000 || r.dist < 150) continue;
+      const [x, z] = ctx.LL(q.lat, q.lon), r = rel(C, x, ctx.groundY(x, z) + (q.h ?? (q.k === 'ph' ? 0 : 8)), z);
+      if (r.dist > 20000 || r.dist < 100) continue;
       add(ICON[q.k] + q.n, r.v, q.k === 'ph' ? 0 : r.dist, q.k, PRIO[q.k] - r.dist / 1000);
     }
     labels.sort((a, b) => b.prio - a.prio);
@@ -221,8 +233,11 @@ function makeViewer(ctx) {
     const site = document.createElement('button'); site.className = 'chip'; site.textContent = '⬇ Nhìn khu đất';
     site.onclick = () => { const S = siteCenter(); if (!S) return; const r = rel(C, S[0], ctx.groundY(S[0], S[1]), S[1]); view.yaw = (THREE.MathUtils.radToDeg(Math.atan2(r.v.x, -r.v.z)) + 360) % 360; view.pitch = Math.max(-80, THREE.MathUtils.radToDeg(Math.atan2(r.v.y, r.dist)) + 12); view.fov = 80; };
     chips.appendChild(site);
-    const lb = document.createElement('button'); lb.className = 'chip' + (showLbl ? ' active' : ''); lb.textContent = '🏷 Nhãn';
-    lb.onclick = () => { showLbl = !showLbl; lb.classList.toggle('active', showLbl); overlay.visible = showLbl && floor < 0; planGroup.children.forEach((m) => { if (m.name !== 'plan') m.visible = showLbl; }); }; chips.appendChild(lb);
+    // lọc nhãn theo nhóm cho đỡ rối
+    const lb = document.createElement('select'); lb.className = 'chip' + (showLbl ? ' active' : ''); lb.setAttribute('aria-label', 'Lọc nhãn');
+    lb.innerHTML = [['all', '🏷 Nhãn: tất cả'], ['dd', '🏷 Địa danh'], ['rs', '🏷 Resort'], ['prj', '🏷 Dự án'], ['off', '🏷 Tắt nhãn']].map(([v, t]) => `<option value="${v}">${t}</option>`).join('');
+    lb.value = showLbl ? lblGroup : 'off';
+    lb.onchange = () => { showLbl = lb.value !== 'off'; if (showLbl) lblGroup = lb.value; lb.classList.toggle('active', showLbl); overlay.visible = showLbl && floor < 0; planGroup.children.forEach((m) => { if (m.name !== 'plan') m.visible = showLbl; }); }; chips.appendChild(lb);
     const map = document.createElement('a'); map.className = 'chip'; map.target = '_blank'; map.rel = 'noopener';
     map.href = `https://www.google.com/maps/search/?api=1&query=${cur.lat},${cur.lon}`; map.textContent = '📍 Google Maps'; chips.appendChild(map);
     const back = document.createElement('button'); back.className = 'chip'; back.textContent = '↩ Về bản đồ 3D'; back.onclick = close; chips.appendChild(back);
@@ -281,18 +296,19 @@ function makeViewer(ctx) {
     const placed = [];
     for (const L of labels) {
       tmp.copy(L.dir).multiplyScalar(100).project(camera);
-      let vis = showLbl && !(L.site && floor >= 0) && tmp.z < 1 && Math.abs(tmp.x) < 1.1 && Math.abs(tmp.y) < 1.1;
+      let vis = showLbl && (lblGroup === 'all' || L.g === lblGroup || L.g === 'site') && !(L.site && floor >= 0) && tmp.z < 1 && Math.abs(tmp.x) < 1.1 && Math.abs(tmp.y) < 1.1;
       if (vis) {
         const x = ((tmp.x + 1) / 2) * innerWidth, y = ((1 - tmp.y) / 2) * innerHeight;
-        if (!L.w) { L.el.style.display = ''; L.w = L.el.offsetWidth || 80; L.stem = L.el.querySelector('span'); }
-        // chồng nhau thì nâng nhãn lên từng nấc (cọc dài hơn), tối đa 4 nấc
+        if (!L.w) { L.el.style.display = ''; L.w = L.el.offsetWidth || 80; L.h = L.el.firstChild.offsetHeight || 22; L.stem = L.el.querySelector('span'); }
+        // chồng nhau thì nâng nhãn lên 1–2 nấc; vẫn chồng thì ẩn nhãn ít quan trọng hơn
+        const step = L.h + 4, maxK = innerWidth < 640 ? 2 : 3, stem = 14;
         let k = 0, box;
-        for (; k < 5; k++) {
-          box = [x - L.w / 2, y - 40 - k * 27, x + L.w / 2, y - 16 - k * 27];
-          if (!placed.some((q) => box[0] < q[2] + 4 && box[2] > q[0] - 4 && box[1] < q[3] + 2 && box[3] > q[1] - 2)) break;
+        for (; k < maxK; k++) {
+          box = [x - L.w / 2, y - stem - L.h - k * step, x + L.w / 2, y - stem - k * step];
+          if (!placed.some((q) => box[0] < q[2] + 6 && box[2] > q[0] - 6 && box[1] < q[3] + 3 && box[3] > q[1] - 3)) break;
         }
-        if (k === 5) vis = false;
-        else { placed.push(box); L.el.style.left = x + 'px'; L.el.style.top = y + 'px'; if (L.k !== k) { L.k = k; L.stem.style.height = 16 + k * 27 + 'px'; } }
+        if (k === maxK) vis = false;
+        else { placed.push(box); L.el.style.left = x + 'px'; L.el.style.top = y + 'px'; if (L.k !== k) { L.k = k; L.stem.style.height = stem + k * step + 'px'; } }
       }
       L.el.style.display = vis ? '' : 'none';
     }
