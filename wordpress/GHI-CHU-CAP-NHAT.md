@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.31** + plugin Hoàng Hiệp CRM **2.20.276**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.31** + plugin Hoàng Hiệp CRM **2.20.277**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.277 (14/11/2026)
+
+- **Euro Village 2 – mặt bằng chia lô vẽ từ file CAD (Hoa XUan 2019.dwg):** 369 lô đúng ranh, đúng kích thước bản vẽ; **bấm vào lô nào hiện diện tích, chiều rộng mặt tiền, chiều sâu** (tham khảo). Nhãn block lấy từ bản vẽ (B2-8 103 lô · 39.083 m², B2-15 51 lô…).
+- **Ghim vị trí 1 lần (admin):** file CAD không ghi hệ tọa độ dùng được, nên dán tọa độ Google Maps của **tâm vòng tròn trong công viên** → *Căn theo điểm* → *Lưu vị trí*. Hướng Bắc, tỷ lệ đã đúng theo bản vẽ. Vẫn ẩn với khách tới khi bấm *Cho khách xem*.
 
 ## Có gì mới – 2.20.276 (14/11/2026)
 
