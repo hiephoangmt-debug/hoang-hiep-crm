@@ -203,7 +203,7 @@ $nav = array_filter(
 		'vi-tri'     => 'Vị trí',
 		'tien-ich'   => ( $amen_in || $amen_img || $amen_plan ) ? 'Tiện ích' : '',
 		'xem-4d'     => ( $m( 'hh_p_tour_4d' ) || $m( 'hh_p_tour_360' ) ) ? 'Xem 4D' : '',
-		'mat-bang'   => ( $master || $floors ) ? 'Mặt bằng' : '',
+		'mat-bang'   => ( $master || $floors || apply_filters( 'hh_project_has_map_plan', false, get_the_ID() ) ) ? 'Mặt bằng' : '',
 		'loai-can'   => ( $units || $other_products ) ? 'Loại căn' : '',
 		'noi-that'   => $interior ? 'Nội thất' : '',
 		'bang-gia'   => ( $price_tbl || $m( 'hh_p_price_from' ) || $m( 'hh_p_resale_price' ) ) ? 'Giá' : '',
@@ -442,6 +442,7 @@ if ( ! $parent ) {
       <figcaption class="plan-cap"><?php echo $e( $cap( $img ) ); ?></figcaption></figure>
     <?php endforeach; ?>
     </div><?php endif; ?>
+    <?php do_action( 'hh_project_map_plan', get_the_ID() ); // Sơ đồ vẽ lại đúng tỷ lệ đặt trên bản đồ vệ tinh (plugin). ?>
     <?php if ( $floors ) : ?>
       <?php
       // Chia theo tòa: "… tòa S1 …" / "S1 · Tầng 3"; ảnh không ghi tòa thuộc tòa của ảnh liền trước. Nhãn gọn: "Tầng 17, 19, 21".

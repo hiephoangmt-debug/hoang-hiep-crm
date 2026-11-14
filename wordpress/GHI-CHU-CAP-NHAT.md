@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.30** + plugin Hoàng Hiệp CRM **2.20.270**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.31** + plugin Hoàng Hiệp CRM **2.20.271**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.271 (14/11/2026)
+
+- **Euro Village 2 – sơ đồ phân khu B2 vẽ lại đúng tỷ lệ, đặt trên bản đồ vệ tinh** (mục Mặt bằng trên trang dự án). Tỷ lệ đo từ chiều dài đường ghi trên tổng mặt bằng (Đường số 4, 6, 7, 8), hướng theo mũi tên Bắc của bản vẽ. Có 10 block, số lô, diện tích, công viên, trường mẫu giáo. Không dùng ảnh có logo sàn khác.
+- **Căn vị trí 1 lần (admin):** đăng nhập → mở trang Euro Village 2 → mục Mặt bằng: kéo **chấm đỏ** cho sơ đồ trùng đường thật trên ảnh vệ tinh (kéo thanh Độ đậm xuống để nhìn rõ), chỉnh xoay / ± 1% nếu cần → **Lưu vị trí**. Trước khi Lưu, khách chỉ thấy ảnh sơ đồ.
 
 ## Có gì mới – 2.20.270 (14/11/2026)
 

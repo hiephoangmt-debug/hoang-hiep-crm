@@ -393,7 +393,7 @@ while ( have_posts() ) :
 
 			<section class="block" id="mat-bang">
 				<h2 class="block__title">Mặt bằng <?php echo esc_html( $title ); ?></h2>
-				<?php $has_plan = hh_ids( 'hh_p_masterplan_img' ) || hh_meta( 'hh_p_design_desc' ) || $floor_plans; ?>
+				<?php $has_plan = hh_ids( 'hh_p_masterplan_img' ) || hh_meta( 'hh_p_design_desc' ) || $floor_plans || apply_filters( 'hh_project_has_map_plan', false, get_the_ID() ); ?>
 				<?php if ( hh_ids( 'hh_p_masterplan_img' ) ) : ?>
 					<h3 class="block__sub">Mặt bằng tổng thể <?php echo esc_html( $title ); ?></h3>
 					<?php
@@ -406,6 +406,7 @@ while ( have_posts() ) :
 						<?php hh_gallery( array_slice( $mp_ids, 1 ), 'mat-bang-tong', 'gallery-grid' ); ?>
 					<?php endif; ?>
 				<?php endif; ?>
+				<?php do_action( 'hh_project_map_plan', get_the_ID() ); ?>
 				<?php if ( hh_meta( 'hh_p_design_desc' ) ) : ?>
 					<p class="prose"><?php echo nl2br( esc_html( hh_meta( 'hh_p_design_desc' ) ) ); ?></p>
 				<?php endif; ?>
