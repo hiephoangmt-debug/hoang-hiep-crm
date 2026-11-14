@@ -101,7 +101,7 @@ function makeViewer(ctx) {
       el.innerHTML = '<b></b><span></span>'; el.querySelector('b').textContent = name;
       if (dist > 400) { const s = document.createElement('small'); s.textContent = fmtKm(dist); el.querySelector('b').appendChild(s); }
       lblBox.appendChild(el);
-      labels.push({ el, dir: v.clone().normalize(), prio, w: 0, h: 0 });
+      labels.push({ el, dir: v.clone().normalize(), prio, w: 0, h: 0, site: cls === 'site' });
     };
     // khu đất của chính dự án: nhãn đỏ ở tâm khu đất
     const S = siteCenter();
@@ -158,7 +158,7 @@ function makeViewer(ctx) {
 
   // mặt bằng trên đất + tên đường: các mặt phẳng nằm trên mặt đất, vẽ đè lên ảnh
   const planGroup = new THREE.Group(); scene.add(planGroup); let floor = 0;   // floor: chỉ số tầng đang đặt trên đất, -1 = tắt
-  const planMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.9, depthTest: false, depthWrite: false, side: THREE.DoubleSide });
+  const planMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: 1, depthTest: false, depthWrite: false, side: THREE.DoubleSide });
   function textTex(t) {
     const c = document.createElement('canvas'), g = c.getContext('2d'), f = '700 64px Inter, sans-serif';
     g.font = f; const w = Math.ceil(g.measureText(t).width) + 40; c.width = w; c.height = 96;
@@ -281,7 +281,7 @@ function makeViewer(ctx) {
     const placed = [];
     for (const L of labels) {
       tmp.copy(L.dir).multiplyScalar(100).project(camera);
-      let vis = showLbl && tmp.z < 1 && Math.abs(tmp.x) < 1.1 && Math.abs(tmp.y) < 1.1;
+      let vis = showLbl && !(L.site && floor >= 0) && tmp.z < 1 && Math.abs(tmp.x) < 1.1 && Math.abs(tmp.y) < 1.1;
       if (vis) {
         const x = ((tmp.x + 1) / 2) * innerWidth, y = ((1 - tmp.y) / 2) * innerHeight;
         if (!L.w) { L.el.style.display = ''; L.w = L.el.offsetWidth || 80; L.stem = L.el.querySelector('span'); }
