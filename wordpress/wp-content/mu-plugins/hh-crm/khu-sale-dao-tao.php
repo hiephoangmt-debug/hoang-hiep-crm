@@ -640,7 +640,7 @@ function hh_sale_view_training( $slug = '' ) {
 			update_user_meta( get_current_user_id(), 'hh_sale_lessons_read', $done );
 		}
 		echo '<p style="margin:16px 0 0"><a href="' . esc_url( hh_sale_url( 'dao-tao' ) ) . '">← Tất cả bài học</a></p>';
-		echo '<section class="hero" style="padding:20px 22px"><p style="color:#ffb38a;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase">' . esc_html( $group ) . '</p><h1 style="margin-top:4px">' . esc_html( $title ) . '</h1></section>';
+		echo '<section class="hero" style="padding:20px 22px"><p style="color:#ffb38a;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase">' . esc_html( $group ) . '</p><h1 style="margin-top:4px">' . esc_html( $title ) . '</h1>' . ( function_exists( 'hh_sale_slide' ) ? '<div class="acts"><a class="hl" href="' . esc_url( hh_sale_url( 'slide/bai-' . $slug ) ) . '" target="_blank" rel="noopener">▶ Trình chiếu bài này</a></div>' : '' ) . '</section>';
 		echo '<div class="box lesson">' . wp_kses_post( $body ) . '</div>';
 		echo '<div class="box" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><b>Đọc xong?</b> <a class="btn" href="' . esc_url( hh_sale_url( 'kiem-tra' ) ) . '">Làm bài kiểm tra 10 câu</a> <a class="btn g" href="' . esc_url( hh_sale_url( 'dao-tao' ) ) . '">Bài khác</a></div>';
 		return $title;

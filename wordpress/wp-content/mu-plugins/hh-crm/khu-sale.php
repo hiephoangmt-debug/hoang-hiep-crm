@@ -107,8 +107,9 @@ add_action(
 		add_rewrite_rule( '^sale/du-an/([^/]+)/?$', 'index.php?hh_sale=du-an&hh_sale_id=$matches[1]', 'top' );
 		add_rewrite_rule( '^sale/dao-tao/([^/]+)/?$', 'index.php?hh_sale=dao-tao&hh_sale_id=$matches[1]', 'top' );
 		add_rewrite_rule( '^sale/tai/([0-9]+)/?$', 'index.php?hh_sale=tai&hh_sale_id=$matches[1]', 'top' );
-		if ( '3' !== get_option( 'hh_sale_rules_v' ) ) {
-			update_option( 'hh_sale_rules_v', '3', true );
+		add_rewrite_rule( '^sale/slide/([^/]+)/?$', 'index.php?hh_sale=slide&hh_sale_id=$matches[1]', 'top' );
+		if ( '4' !== get_option( 'hh_sale_rules_v' ) ) {
+			update_option( 'hh_sale_rules_v', '4', true );
 			flush_rewrite_rules( false );
 		}
 	},
@@ -144,6 +145,10 @@ add_action(
 		$id = sanitize_title( (string) get_query_var( 'hh_sale_id' ) );
 		if ( 'tai' === $view ) {
 			hh_sale_download( (int) $id );
+			exit;
+		}
+		if ( 'slide' === $view && function_exists( 'hh_sale_slide' ) ) {
+			hh_sale_slide( $id );
 			exit;
 		}
 		ob_start();
@@ -712,7 +717,7 @@ function hh_sale_view_project( $slug ) {
 	// Khung trang.
 	echo '<p style="margin:16px 0 0"><a href="' . esc_url( hh_sale_url( 'du-an' ) ) . '">← Danh sách dự án</a></p>';
 	$cov = get_the_post_thumbnail_url( $p, '1536x1536' ) ?: get_the_post_thumbnail_url( $p, 'large' );
-	echo '<section class="cover"' . ( $cov ? ' style="background-image:url(\'' . esc_url( $cov ) . '\')"' : '' ) . '><div><h1>' . esc_html( $title ) . '</h1><p>' . ( $st ? '<span class="pill o">' . esc_html( $st ) . '</span> ' : '' ) . ( $m( 'hh_p_developer' ) ? esc_html( $m( 'hh_p_developer' ) ) . ' · ' : '' ) . 'Cập nhật ' . esc_html( get_the_modified_date( 'd/m/Y', $p ) ) . ' · <a href="' . esc_url( get_permalink( $p ) ) . '" target="_blank" rel="noopener">Trang khách xem ↗</a></p></div></section>';
+	echo '<section class="cover"' . ( $cov ? ' style="background-image:url(\'' . esc_url( $cov ) . '\')"' : '' ) . '><div><h1>' . esc_html( $title ) . '</h1><p>' . ( $st ? '<span class="pill o">' . esc_html( $st ) . '</span> ' : '' ) . ( $m( 'hh_p_developer' ) ? esc_html( $m( 'hh_p_developer' ) ) . ' · ' : '' ) . 'Cập nhật ' . esc_html( get_the_modified_date( 'd/m/Y', $p ) ) . ' · <a href="' . esc_url( get_permalink( $p ) ) . '" target="_blank" rel="noopener">Trang khách xem ↗</a></p>' . ( function_exists( 'hh_sale_slide' ) ? '<p style="margin-top:12px"><a class="btn" style="color:#fff" href="' . esc_url( hh_sale_url( 'slide/' . $p->post_name ) ) . '" target="_blank" rel="noopener">▶ Trình chiếu đào tạo</a></p>' : '' ) . '</div></section>';
 	echo '<nav class="toc">';
 	foreach ( $sec as $i => $s ) {
 		echo '<a href="#' . esc_attr( $s[0] ) . '">' . (int) ( $i + 1 ) . '. ' . esc_html( $s[1] ) . '</a>';

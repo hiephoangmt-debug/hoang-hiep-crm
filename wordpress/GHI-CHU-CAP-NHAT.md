@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.31** + plugin Hoàng Hiệp CRM **2.20.271**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.31** + plugin Hoàng Hiệp CRM **2.20.272**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.272 (14/11/2026)
+
+- **Khu Sale – slide đào tạo tự dựng:** mỗi dự án (Học dự án → mở dự án → **▶ Trình chiếu đào tạo**) và mỗi bài đào tạo (**▶ Trình chiếu bài này**) có bộ slide 16:9 dựng từ dữ liệu trên web – sửa dữ liệu dự án / khung "Dành cho sale" là slide đổi theo.
+  - Dự án: bìa → thị trường → chủ đầu tư → key bán hàng → tổng quan → vị trí, liên kết vùng → tiện ích → mặt bằng, loại căn, layout → tư vấn chọn căn → giá, chính sách, thanh toán, vay → tiến độ → khách hay hỏi (bấm mới hiện câu trả lời) → lưu ý → 5 câu kiểm tra (đổi mỗi lần mở) → kết.
+  - Điều khiển: ← → / Space / bấm / vuốt; phím F toàn màn hình; nút **In / Lưu PDF** (mỗi slide 1 trang). Chữ dài tự thu nhỏ, slide ít chữ tự phóng to.
+  - Chỉ tài khoản Khu Sale xem được; không đưa tài liệu riêng tư vào slide.
 
 ## Có gì mới – 2.20.271 (14/11/2026)
 
