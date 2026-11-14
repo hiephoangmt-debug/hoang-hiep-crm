@@ -313,8 +313,14 @@ function makeViewer(ctx) {
     for (let s = 4; s < Ls; s += 9) { const tr = new THREE.Mesh(new THREE.IcosahedronGeometry(2.2, 0), treeM); tr.position.copy(at(s, 1.2, 4)); lowGroup.add(tr); }
     lowGroup.visible = showLow;
   }
+  // phía trước: quy hoạch đã được "in" sẵn vào ảnh 360° theo đúng phối cảnh, viền mờ, khớp tông màu (scripts bake)
+  const BAKE = ['', 'qh', 'sach', 'resort'];
+  const panoUrl = () => (frontMode && cur.bake ? cur.src.replace('.jpg', '-' + BAKE[frontMode] + '.jpg') : cur.src);
   function setFront(mode) {
-    frontMode = mode; showZone = mode > 0; zoneGroup.visible = showZone; resortGroup.visible = mode === 3;
+    frontMode = mode; showZone = mode > 0; resortGroup.visible = false;
+    zoneGroup.visible = !cur?.bake && showZone;   // ảnh chưa có bản in sẵn thì dùng lớp phủ phẳng như cũ
+    if (cur?.bake && sphMat.map) { const want = cur; loadTex(panoUrl()).then((t) => { if (want === cur && frontMode === mode) { sphMat.map = t; sphMat.needsUpdate = true; } }).catch(() => {}); }
+    if (cur?.bake) return;
     const m0 = stripMesh.m; if (!m0) return;
     m0.visible = false; if (stripMesh.r) stripMesh.r.visible = false; if (mode < 2) return;
     const m = mode === 3 && stripMesh.r ? stripMesh.r : m0;
@@ -376,11 +382,11 @@ function makeViewer(ctx) {
     if (!open) { open = true; root.hidden = false; ctx.onOpen?.(); resize(); raf = requestAnimationFrame(loop); }
     const want = cur;
     try {
-      const t = await loadTex(night && cur.night ? cur.night : cur.src);
+      const t = await loadTex(night && cur.night ? cur.night : panoUrl());
       if (want !== cur) return;
       sphMat.map = t; sphMat.color.set(0xffffff); sphMat.needsUpdate = true;
       // máy đủ mạnh: thay bằng ảnh nét 8K
-      if (!night && cur.hd && renderer.capabilities.maxTextureSize >= 8192 && Math.max(innerWidth, innerHeight) * devicePixelRatio > 1400) {
+      if (!night && !frontMode && cur.hd && renderer.capabilities.maxTextureSize >= 8192 && Math.max(innerWidth, innerHeight) * devicePixelRatio > 1400) {
         const hd = await loadTex(cur.hd).catch(() => null);
         if (hd && want === cur) { sphMat.map = hd; sphMat.needsUpdate = true; }
       }

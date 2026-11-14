@@ -175,11 +175,12 @@ function parkTex(plaza) {
 const zoneGroup = new THREE.Group(); scene.add(zoneGroup); let showZone = true, parkT = null, frontMode = 1, showLow = true;
 const frontMesh = {};
 const flatQuad = (pts, order) => { const m = new THREE.Mesh(quad(pts.map((v) => new THREE.Vector3(...v))), new THREE.MeshBasicMaterial({ transparent: true, depthTest: false, depthWrite: false, side: THREE.DoubleSide })); m.renderOrder = order; m.visible = false; return m; };
+const BAKE = ['', 'qh', 'sach', 'resort'];   // quy hoạch đã in sẵn vào ảnh 360° theo đúng phối cảnh
+const panoUrl = () => (frontMode ? PANOS[cur].src.replace('.jpg', '-' + BAKE[frontMode] + '.jpg') : PANOS[cur].src);
 function setFront(mode) {
-  frontMode = mode; showZone = mode > 0; zoneGroup.visible = showZone;
-  for (const k of ['clean', 'resort']) if (frontMesh[k]) frontMesh[k].visible = false;
-  const key = mode === 2 ? 'clean' : mode === 3 ? 'resort' : null; if (!key) return;
-  load(key === 'clean' ? '../mat-bang/sun-saphia/phia-truoc-lam-sach.webp' : '../mat-bang/sun-saphia/cong-vien-phia-truoc.webp').then((t) => { if (frontMode !== mode) return; frontMesh[key].material.map = t; frontMesh[key].material.needsUpdate = true; frontMesh[key].visible = true; });
+  frontMode = mode; showZone = mode > 0; zoneGroup.visible = false;
+  if (!mat.map) return; const want = cur;
+  load(panoUrl()).then((t) => { if (want === cur && frontMode === mode) { mat.map = t; mat.needsUpdate = true; } });
 }
 // ===== nhà thấp tầng 3D minh hoạ trên dải đất trống phía Nam =====
 scene.add(new THREE.HemisphereLight(0xffffff, 0x8f9f7a, 1.5));
@@ -231,7 +232,7 @@ async function show(i, keepView) {
   if (!keepView) { view.yaw = q.heading; view.pitch = -18; view.fov = innerWidth < innerHeight ? 85 : 72; }
   $('meta').textContent = `${q.lat.toFixed(6)}, ${q.lon.toFixed(6)} · flycam cao ${q.alt.toFixed(0)} m · ${q.time}`;
   buildLabels(q); buildOverlay(q); buildPlan(q); buildZone(q); buildResortNote(q); applyNight(); chips();
-  try { const t = await load(night ? q.src.replace('.jpg', '-dem.jpg') : q.src); if (cur !== i) return; mat.map = t; mat.color.set(0xffffff); mat.needsUpdate = true; $('loading').hidden = true; }
+  try { const t = await load(panoUrl()); if (cur !== i) return; mat.map = t; mat.color.set(0xffffff); mat.needsUpdate = true; $('loading').hidden = true; }
   catch { $('loading').textContent = 'Không tải được ảnh 360°'; }
 }
 function chip(text, on, fn, active) { const b = document.createElement(fn ? 'button' : 'a'); b.className = 'chip' + (active ? ' active' : ''); b.textContent = text; if (fn) b.onclick = fn; else { b.href = on; b.target = '_blank'; b.rel = 'noopener'; } $('chips').appendChild(b); return b; }
