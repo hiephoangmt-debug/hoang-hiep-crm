@@ -103,11 +103,12 @@ add_action(
 	'init',
 	static function () {
 		add_rewrite_rule( '^sale/?$', 'index.php?hh_sale=home', 'top' );
-		add_rewrite_rule( '^sale/(du-an|tai-lieu|khach-hang|bao-cao)/?$', 'index.php?hh_sale=$matches[1]', 'top' );
+		add_rewrite_rule( '^sale/(du-an|tai-lieu|khach-hang|bao-cao|dao-tao|kiem-tra)/?$', 'index.php?hh_sale=$matches[1]', 'top' );
 		add_rewrite_rule( '^sale/du-an/([^/]+)/?$', 'index.php?hh_sale=du-an&hh_sale_id=$matches[1]', 'top' );
+		add_rewrite_rule( '^sale/dao-tao/([^/]+)/?$', 'index.php?hh_sale=dao-tao&hh_sale_id=$matches[1]', 'top' );
 		add_rewrite_rule( '^sale/tai/([0-9]+)/?$', 'index.php?hh_sale=tai&hh_sale_id=$matches[1]', 'top' );
-		if ( '2' !== get_option( 'hh_sale_rules_v' ) ) {
-			update_option( 'hh_sale_rules_v', '2', true );
+		if ( '3' !== get_option( 'hh_sale_rules_v' ) ) {
+			update_option( 'hh_sale_rules_v', '3', true );
 			flush_rewrite_rules( false );
 		}
 	},
@@ -155,6 +156,11 @@ add_action(
 		} elseif ( 'tai-lieu' === $view ) {
 			$title = 'Tài liệu';
 			hh_sale_view_docs();
+		} elseif ( 'dao-tao' === $view && function_exists( 'hh_sale_view_training' ) ) {
+			$title = hh_sale_view_training( $id );
+		} elseif ( 'kiem-tra' === $view && function_exists( 'hh_sale_view_quiz' ) ) {
+			$title = 'Kiểm tra kiến thức';
+			hh_sale_view_quiz();
 		} elseif ( 'bao-cao' === $view ) {
 			$title = 'Báo cáo';
 			hh_sale_view_report();
@@ -215,6 +221,7 @@ input,select,textarea{font:inherit;padding:8px 10px;border:1.5px solid #d3dbe6;b
 .cover:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,34,58,.05),rgba(14,34,58,.85))}.cover>div{position:relative;padding:20px 22px}.cover h1{color:#fff;margin:0 0 4px}.cover p{margin:0;color:#dbe4ef;font-size:14px}.cover a{color:#ffb38a}
 .ftype{display:inline-grid;place-items:center;min-width:42px;height:42px;border-radius:10px;font-size:11px;font-weight:800;color:#fff;background:#64748b;margin-right:10px;flex:none}.ftype.pdf{background:#dc2626}.ftype.xls{background:#16a34a}.ftype.doc{background:#2563eb}.ftype.ppt{background:#ea580c}.ftype.img{background:#7c3aed}.ftype.lnk{background:#0ea5e9}
 .dname{display:flex;align-items:center}
+.lesson h3{font-size:17px;margin:18px 0 6px;color:var(--n)}.lesson ol,.lesson ul{padding-left:22px}.lesson li{margin:4px 0}.lesson table{margin:8px 0}
 @media (max-width:640px){h1{font-size:21px}.top .wrap{padding:8px 16px}.tabs{order:3;width:100%;margin:0}.kv th{width:40%}td,th{padding:7px 6px}}';
 }
 
@@ -225,6 +232,8 @@ function hh_sale_layout( $title, $view, $body ) {
 		'du-an'      => array( 'Học dự án', hh_sale_url( 'du-an' ) ),
 		'tai-lieu'   => array( 'Tài liệu', hh_sale_url( 'tai-lieu' ) ),
 		'khach-hang' => array( hh_sale_is_admin() ? 'Khách hàng' : 'Khách của tôi', hh_sale_url( 'khach-hang' ) ),
+		'dao-tao'    => array( 'Đào tạo', hh_sale_url( 'dao-tao' ) ),
+		'kiem-tra'   => array( 'Kiểm tra', hh_sale_url( 'kiem-tra' ) ),
 		'bao-cao'    => array( 'Báo cáo', hh_sale_url( 'bao-cao' ) ),
 	);
 	?><!DOCTYPE html>
@@ -318,6 +327,9 @@ function hh_sale_view_home() {
 	if ( ! hh_sale_is_admin() || current_user_can( 'hh_sale_portal' ) ) {
 		echo '<div id="tg"></div>';
 		hh_sale_tg_box();
+	}
+	if ( function_exists( 'hh_sale_daily_box' ) ) {
+		hh_sale_daily_box();
 	}
 	echo '<div class="box"><h2>Khách mới nhất</h2>';
 	$recent = array_slice( $leads, 0, 6 );
@@ -557,6 +569,7 @@ function hh_sale_view_project( $slug ) {
 		}
 		echo '</div>';
 	}
+	do_action( 'hh_sale_project_bottom', $p->post_name );
 	return $title;
 }
 
@@ -1577,13 +1590,13 @@ function hh_sale_view_report() {
 				}
 			}
 		}
-		echo '<div class="box"><h2>Theo từng sale</h2><div class="scroll"><table><tr><th>Sale</th><th>Khách nhận</th><th>Chưa gọi</th><th>Quá hạn</th><th>Đã xử lý</th><th>Chốt</th><th>Tỷ lệ chốt</th><th>Gọi lại TB</th><th>Tải tài liệu</th><th>Đăng nhập cuối</th></tr>';
+		echo '<div class="box"><h2>Theo từng sale</h2><div class="scroll"><table><tr><th>Sale</th><th>Khách nhận</th><th>Chưa gọi</th><th>Quá hạn</th><th>Đã xử lý</th><th>Chốt</th><th>Tỷ lệ chốt</th><th>Gọi lại TB</th><th>Tải tài liệu</th><th>Điểm kiểm tra</th><th>Đăng nhập cuối</th></tr>';
 		usort( $sales, static fn( $a, $b ) => ( $rows[ $b->ID ]['chot'] ?? 0 ) <=> ( $rows[ $a->ID ]['chot'] ?? 0 ) ?: ( $rows[ $b->ID ]['n'] ?? 0 ) <=> ( $rows[ $a->ID ]['n'] ?? 0 ) );
 		foreach ( $sales as $u ) {
 			$r    = $rows[ $u->ID ] ?? array( 'n' => 0, 'moi' => 0, 'touch' => 0, 'chot' => 0, 'huy' => 0, 'late' => 0, 'rt' => array() );
 			$last = (int) get_user_meta( $u->ID, 'hh_sale_last_login', true );
 			printf(
-				'<tr><td><a href="%s"><b>%s</b></a>%s</td><td>%d</td><td>%d</td><td>%s</td><td>%d</td><td>%d</td><td>%s</td><td>%s</td><td>%d</td><td>%s</td></tr>',
+				'<tr><td><a href="%s"><b>%s</b></a>%s</td><td>%d</td><td>%d</td><td>%s</td><td>%d</td><td>%d</td><td>%s</td><td>%s</td><td>%d</td><td>%s</td><td>%s</td></tr>',
 				esc_url( add_query_arg( 'sale', $u->ID, hh_sale_url( 'khach-hang' ) ) ),
 				esc_html( $u->display_name ),
 				get_user_meta( $u->ID, 'hh_sale_locked', true ) ? ' <span class="pill">khóa</span>' : '',
@@ -1595,11 +1608,12 @@ function hh_sale_view_report() {
 				esc_html( $rate( $r ) ),
 				esc_html( hh_sale_fmt_dur( $avg( $r['rt'] ) ) ),
 				(int) ( $dl[ $u->ID ] ?? 0 ),
+				function_exists( 'hh_sale_quiz_summary' ) ? esc_html( hh_sale_quiz_summary( $u->ID, $from ) ) : '—',
 				$last ? esc_html( wp_date( 'd/m H:i', $last ) ) : 'Chưa'
 			);
 		}
 		if ( ! empty( $rows[0]['n'] ) ) {
-			printf( '<tr><td><b>Chưa giao</b></td><td>%d</td><td>%d</td><td>—</td><td>%d</td><td>%d</td><td>—</td><td>—</td><td>—</td><td></td></tr>', (int) $rows[0]['n'], (int) $rows[0]['moi'], (int) $rows[0]['touch'], (int) $rows[0]['chot'] );
+			printf( '<tr><td><b>Chưa giao</b></td><td>%d</td><td>%d</td><td>—</td><td>%d</td><td>%d</td><td>—</td><td>—</td><td>—</td><td>—</td><td></td></tr>', (int) $rows[0]['n'], (int) $rows[0]['moi'], (int) $rows[0]['touch'], (int) $rows[0]['chot'] );
 		}
 		echo '</table></div><p class="note">Quá hạn: khách ở trạng thái "Mới" hơn 30 phút sau khi giao. Gọi lại TB: từ lúc giao đến lần đầu sale cập nhật trạng thái / ghi chú. Bấm tên sale để xem danh sách khách.</p></div>';
 	}

@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.30** + plugin Hoàng Hiệp CRM **2.20.266**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.30** + plugin Hoàng Hiệp CRM **2.20.267**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.267 (14/11/2026) – Khu Sale: Đào tạo & Kiểm tra
+
+- **Tab Đào tạo (/sale/dao-tao/):** 8 bài học viết sẵn, chia nhóm, có đánh dấu đã đọc / chưa đọc: Quy trình chăm sóc khách 6 bước · Dùng khu Sale và web · Pháp lý nhà hình thành trong tương lai (cọc 5%, lần đầu 30%, 70% trước bàn giao, 95% trước sổ, bảo lãnh ngân hàng) · Khách nước ngoài, Việt kiều, căn hộ TMDV · Thuế phí mua bán · Tính vốn tự có & trả góp · Xử lý 6 câu từ chối · Marketing cá nhân. Anh thêm bài riêng ở Quản trị → Khu Sale → **Bài học sale**.
+- **Tab Kiểm tra (/sale/kiem-tra/):** mỗi lượt 10 câu bốc ngẫu nhiên – không lượt nào giống lượt nào: câu tự sinh từ dữ liệu dự án trên web (chủ đầu tư, vị trí, bàn giao, sở hữu, đơn giá, số căn, ưu đãi, "khách hay hỏi"; dữ liệu đổi thì câu hỏi đổi theo) + 35 câu kiến thức chung + câu anh tự thêm (Quản trị → Khu Sale → **Câu hỏi kiểm tra**: mỗi dòng 1 đáp án, dấu * trước đáp án đúng). Nộp bài là chấm ngay, câu sai có giải thích + link ôn lại. Mỗi trang Học dự án có nút **Kiểm tra dự án này**.
+- **Tổng quan:** "Câu hỏi hôm nay" – mỗi ngày, mỗi sale một câu khác, bấm chọn là biết đúng sai.
+- **Báo cáo:** thêm cột **Điểm kiểm tra** từng sale (điểm trung bình, số lượt, lượt gần nhất).
 
 ## Có gì mới – 2.20.266 (14/11/2026)
 
