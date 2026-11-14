@@ -58,7 +58,7 @@ EVBAR = ('<div id="evbar" class="evb" role="region" aria-label="Thư mời sự 
          'k.textContent=d>1?"Còn "+d+" ngày":d===1?"Ngày mai":"Hôm nay"})();</script></div>')
 
 
-X360_SHA = 'df158904bdc6f62420d63dc5656463a6a17ffe2f'
+X360_SHA = 'c6587432e3bc13fd47d9eeefc9c1c50e57d24401'
 X360 = ('<section class="sec" id="xem-360" style="background:linear-gradient(160deg,#0B2447,#1d4a7a);color:#fff"><div class="wrap">'
         '<style>#xem-360 .x3{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:26px;align-items:center}'
         '#xem-360 .x3p{position:relative;display:block;width:100%;border:0;padding:0;border-radius:16px;overflow:hidden;cursor:pointer;background:#123;box-shadow:0 18px 40px -18px rgba(0,0,0,.6);aspect-ratio:16/9}'
