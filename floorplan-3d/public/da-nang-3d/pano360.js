@@ -84,7 +84,7 @@ function makeViewer(ctx) {
 
   // hướng nhìn: yaw = góc so với Bắc (độ, theo chiều kim đồng hồ), pitch = ngẩng (+) / cúi (−)
   const view = { yaw: 0, pitch: -15, fov: 75 };
-  let cur = null, P = null, labels = [], open = false, raf = 0, showLbl = true, lblGroup = 'all';
+  let cur = null, P = null, labels = [], open = false, raf = 0, showLbl = true, lblGroup = 'all', night = false;
   const loader = new THREE.TextureLoader();
   const texCache = new Map();
   const loadTex = (url) => {
@@ -104,7 +104,7 @@ function makeViewer(ctx) {
   }
 
   // không hiện trên ảnh 360° (theo yêu cầu)
-  const HIDE = new Set(['Times Square Đà Nẵng']);
+  const HIDE = new Set(['Times Square Đà Nẵng', '123']);
   function buildLabels(C) {
     lblBox.textContent = ''; labels = [];
     // tên gọn để đỡ chồng chéo
@@ -329,14 +329,19 @@ function makeViewer(ctx) {
     loadTex(want).then((t) => { if (floor === i) { planMat.map = t; planMat.needsUpdate = true; } }).catch(() => {});
   }
 
-  async function show(Pr, idx) {
+  // buổi tối: lớp phủ (mặt bằng, công viên) tối đi cho hợp ảnh đêm
+  function applyNight() {
+    const c = night ? 0x7a7f9a : 0xffffff;
+    scene.traverse((o) => { if (o.isMesh && o !== sphere && o.material?.color && o.material.map && !o.material.isMeshLambertMaterial) o.material.color.set(c); });
+  }
+  async function show(Pr, idx, keep) {
     P = Pr; cur = P.pano360[idx];
     const C = camPos(cur);
     sphere.rotation.y = THREE.MathUtils.degToRad(270 - cur.heading);
-    view.yaw = cur.heading; view.pitch = -18; view.fov = innerWidth < innerHeight ? 85 : 72;
+    if (!keep) { view.yaw = cur.heading; view.pitch = -18; view.fov = innerWidth < innerHeight ? 85 : 72; }
     $('h2').textContent = '🛸 360° ' + P.name;
     $('.hd small').textContent = `${cur.lat.toFixed(6)}, ${cur.lon.toFixed(6)} · cao ${Math.round(cur.alt)} m · ${cur.time}`;
-    buildLabels(C); buildOverlay(C); buildPlan(C); buildZones(C); buildLowrise(C);
+    buildLabels(C); buildOverlay(C); buildPlan(C); buildZones(C); buildLowrise(C); applyNight();
     chips.textContent = '';
     P.pano360.forEach((q, i) => {
       const b = document.createElement('button'); b.className = 'chip' + (i === idx ? ' active' : '');
@@ -355,6 +360,8 @@ function makeViewer(ctx) {
     }
     if (P.lowrise) { const lw = document.createElement('button'); lw.className = 'chip' + (showLow ? ' active' : ''); lw.textContent = '🏘 Nhà thấp tầng';
       lw.onclick = () => { showLow = !showLow; lw.classList.toggle('active', showLow); lowGroup.visible = showLow; }; chips.appendChild(lw); }
+    if (cur.night) { const nb = document.createElement('button'); nb.className = 'chip' + (night ? ' active' : ''); nb.textContent = night ? '☀️ Ban ngày' : '🌙 Buổi tối';
+      nb.onclick = () => { night = !night; applyNight(); show(P, P.pano360.indexOf(cur), true); }; chips.appendChild(nb); }
     const site = document.createElement('button'); site.className = 'chip'; site.textContent = '⬇ Nhìn khu đất';
     site.onclick = () => { const S = siteCenter(); if (!S) return; const r = rel(C, S[0], ctx.groundY(S[0], S[1]), S[1]); view.yaw = (THREE.MathUtils.radToDeg(Math.atan2(r.v.x, -r.v.z)) + 360) % 360; view.pitch = Math.max(-80, THREE.MathUtils.radToDeg(Math.atan2(r.v.y, r.dist)) + 12); view.fov = 80; };
     chips.appendChild(site);
@@ -369,11 +376,11 @@ function makeViewer(ctx) {
     if (!open) { open = true; root.hidden = false; ctx.onOpen?.(); resize(); raf = requestAnimationFrame(loop); }
     const want = cur;
     try {
-      const t = await loadTex(cur.src);
+      const t = await loadTex(night && cur.night ? cur.night : cur.src);
       if (want !== cur) return;
       sphMat.map = t; sphMat.color.set(0xffffff); sphMat.needsUpdate = true;
       // máy đủ mạnh: thay bằng ảnh nét 8K
-      if (cur.hd && renderer.capabilities.maxTextureSize >= 8192 && Math.max(innerWidth, innerHeight) * devicePixelRatio > 1400) {
+      if (!night && cur.hd && renderer.capabilities.maxTextureSize >= 8192 && Math.max(innerWidth, innerHeight) * devicePixelRatio > 1400) {
         const hd = await loadTex(cur.hd).catch(() => null);
         if (hd && want === cur) { sphMat.map = hd; sphMat.needsUpdate = true; }
       }
