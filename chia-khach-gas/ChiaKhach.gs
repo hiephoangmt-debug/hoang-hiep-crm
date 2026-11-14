@@ -60,7 +60,9 @@ var MAC_DINH = {
   TELESALE_THEM: 1,          // mỗi lần giao ngần này số (1 = chia từng số: gọi xong, báo cáo xong mới giao số tiếp)
   TELESALE_GIO_HAN: 17,      // hạn báo cáo: giờ này trong ngày được giao (giao sát giờ cộng 30–60 phút; sau giờ này / Chủ nhật thì sang ngày làm việc sau)
   SLIDE_CDT: 'https://www.sun-saphia-residence.com/trinh-chieu',    // lệnh /tailieu – slide dự án theo tài liệu chủ đầu tư (gửi khách được)
-  SLIDE_NOI_BO: 'https://www.sun-saphia-residence.com/dao-tao-sale' // lệnh /tailieu – slide nội bộ đào tạo sale (không gửi khách)
+  SLIDE_NOI_BO: 'https://www.sun-saphia-residence.com/dao-tao-sale', // lệnh /tailieu – slide nội bộ đào tạo sale (không gửi khách)
+  DRIVE_TAI_LIEU: 'https://drive.google.com/drive/folders/1sMzOCcPfnrBO7X6M0hAA0HjKcHD5y8_c', // lệnh /tailieu – thư mục tài liệu dự án (nội bộ); để trống = ẩn nút
+  DRIVE_FLYCAM: 'https://drive.google.com/drive/folders/1OeG08WyTXbnjyQAvLwXouYCUG0AU7nao'     // lệnh /tailieu – flycam thực tế khu vực (nội bộ); để trống = ẩn nút
 };
 
 var BC = {  // nút báo cáo của sale
@@ -215,9 +217,13 @@ function taiLieu_(chat) {
   var cdt = cfg('SLIDE_CDT'), nb = cfg('SLIDE_NOI_BO'), nut = [];
   if (cdt) nut.push([{text: '📊 Slide chủ đầu tư (gửi khách)', url: cdt}]);
   if (nb) nut.push([{text: '🔒 Slide nội bộ (đào tạo sale)', url: nb}]);
+  var dr = cfg('DRIVE_TAI_LIEU'), fc = cfg('DRIVE_FLYCAM');
+  if (dr) nut.push([{text: '📁 Thư mục tài liệu dự án (Drive)', url: dr}]);
+  if (fc) nut.push([{text: '🚁 Flycam thực tế khu vực (Drive)', url: fc}]);
   gui_(chat, '<b>📁 Tài liệu Sun Saphia</b>\n\n'
     + '📊 <b>Slide chủ đầu tư</b> – thị trường, sản phẩm, giá tham khảo, dòng tiền, bản đồ giá thuê. Gửi link cho khách được.\n\n'
     + '🔒 <b>Slide nội bộ</b> – kịch bản tư vấn, 3 khách mẫu, xử lý từ chối, tin nhắn Zalo mẫu. <b>Không gửi khách.</b> Lần đầu mở: nhập tên và số Zalo của bạn.\n\n'
+    + (dr || fc ? '📁 <b>Thư mục Drive</b> – layout tầng, layout căn, căn 3D, phim dự án, KV brand, ảnh phối cảnh, Q&amp;A, flycam thực tế. Dùng nội bộ, tải về rồi mới gửi khách từng ảnh/clip phù hợp.\n\n' : '')
     + 'Trong trang: bấm ▶ Trình chiếu để chiếu toàn màn hình, ⬇ Tải về để lưu PDF.', nut.length ? nut : null);
 }
 function coNhac_(k, f) { return String(k.nhac || '').split(',').indexOf(f) > -1; }

@@ -87,6 +87,7 @@ ok(Number(k1.nhanh)===3&&!String(k1.da_qua).split(',').includes(k1.nguoi_giu),'n
 // /tailieu: sale và quản lý đều nhận 2 nút Slide chủ đầu tư + Slide nội bộ; người lạ thì không
 msg(3,'/tailieu');run(); let tl=lastTo(3); const btn=JSON.stringify(tl.reply_markup||{});
 ok(/Slide chủ đầu tư/.test(tl.text)&&btn.includes('/trinh-chieu')&&btn.includes('/dao-tao-sale'),'/tailieu (sale): gửi 2 nút Slide chủ đầu tư + Slide nội bộ');
+ok(btn.includes('1sMzOCcPfnrBO7X6M0hAA0HjKcHD5y8_c')&&btn.includes('1OeG08WyTXbnjyQAvLwXouYCUG0AU7nao'),'/tailieu: có nút thư mục tài liệu Drive + flycam');
 msg(900,'/tailieu');run(); ok(JSON.stringify(lastTo(900).reply_markup||{}).includes('/dao-tao-sale'),'/tailieu (quản lý) cũng nhận');
 msg(777,'/tailieu');run(); ok(!/trinh-chieu|dao-tao/.test(JSON.stringify(lastTo(777))),'người chưa vào đội gõ /tailieu: không nhận link');
 console.log('\nTỔNG LỖI: '+fails);process.exit(fails?1:0);
