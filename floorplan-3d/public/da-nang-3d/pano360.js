@@ -19,6 +19,7 @@ const CSS = `
 .p360 .lb.rs b { background: #0e7490; } .p360 .lb.mart b { background: #7c3aed; } .p360 .lb.bv b { background: #fff; color: #b91c1c; }
 .p360 .lb.ph b { background: none; box-shadow: none; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; text-shadow: 0 1px 3px #000, 0 0 8px #000; }
 .p360 .lb.ph span { background: none; }
+.p360 .lb.duong b { background: #1d4ed8; border: 1.5px solid #fff; border-radius: 3px; }
 .p360 .lb.zone { pointer-events: auto; cursor: pointer; }
 .p360 .lb.zone b { background: #15803d; font-size: 13px; text-align: center; line-height: 1.35; }
 .p360 .lb.zone b i { display: block; font-style: normal; font-weight: 400; font-size: 11px; opacity: .95; }
@@ -115,7 +116,7 @@ function makeViewer(ctx) {
       el.innerHTML = '<b></b><span></span>'; el.querySelector('b').textContent = name;
       if (dist > 400) { const s = document.createElement('small'); s.textContent = fmtKm(dist); el.querySelector('b').appendChild(s); }
       lblBox.appendChild(el);
-      labels.push({ el, dir: v.clone().normalize(), prio, w: 0, h: 0, site: cls === 'site', g: cls === 'site' ? 'site' : cls === 'big' ? 'prj' : cls === 'rs' ? 'rs' : 'dd' });
+      labels.push({ el, dir: v.clone().normalize(), prio, w: 0, h: 0, site: cls === 'site', g: cls === 'site' ? 'site' : cls === 'big' ? 'prj' : cls === 'rs' ? 'rs' : cls === 'duong' ? 'duong' : 'dd' });
     };
     // khu đất của chính dự án: nhãn đỏ ở tâm khu đất
     const S = siteCenter();
@@ -149,7 +150,7 @@ function makeViewer(ctx) {
       add((p.prj ? '🏢 ' : '') + name, r.v, r.dist, cls, (p.prj ? 50 : p.big ? 20 : 0) - r.dist / 1000);
     }
     // điểm mốc thêm (poi.js): resort, siêu thị, bệnh viện, phường…
-    const ICON = { rs: '🏖 ', mart: '🛒 ', bv: '🏥 ', dd: '', ph: '' }, PRIO = { dd: 18, rs: 30, mart: 12, bv: 12, ph: 8 };
+    const ICON = { rs: '🏖 ', mart: '🛒 ', bv: '🏥 ', dd: '', ph: '', duong: '🛣 ' }, PRIO = { dd: 18, rs: 30, mart: 12, bv: 12, ph: 8, duong: 26 };
     for (const q of ctx.POI || []) {
       if (seen.has(q.n)) continue; seen.add(q.n);
       const [x, z] = ctx.LL(q.lat, q.lon), r = rel(C, x, ctx.groundY(x, z) + (q.h ?? (q.k === 'ph' ? 0 : 8)), z);
@@ -359,7 +360,7 @@ function makeViewer(ctx) {
     chips.appendChild(site);
     // lọc nhãn theo nhóm cho đỡ rối
     const lb = document.createElement('select'); lb.className = 'chip' + (showLbl ? ' active' : ''); lb.setAttribute('aria-label', 'Lọc nhãn');
-    lb.innerHTML = [['all', '🏷 Nhãn: tất cả'], ['dd', '🏷 Địa danh'], ['rs', '🏷 Resort'], ['prj', '🏷 Dự án'], ['off', '🏷 Tắt nhãn']].map(([v, t]) => `<option value="${v}">${t}</option>`).join('');
+    lb.innerHTML = [['all', '🏷 Nhãn: tất cả'], ['dd', '🏷 Địa danh'], ['rs', '🏷 Resort'], ['duong', '🏷 Tên đường'], ['prj', '🏷 Dự án'], ['off', '🏷 Tắt nhãn']].map(([v, t]) => `<option value="${v}">${t}</option>`).join('');
     lb.value = showLbl ? lblGroup : 'off';
     lb.onchange = () => { showLbl = lb.value !== 'off'; if (showLbl) lblGroup = lb.value; lb.classList.toggle('active', showLbl); overlay.visible = showLbl && floor < 0; planGroup.children.forEach((m) => { if (m.name !== 'plan') m.visible = showLbl; }); }; chips.appendChild(lb);
     const map = document.createElement('a'); map.className = 'chip'; map.target = '_blank'; map.rel = 'noopener';
