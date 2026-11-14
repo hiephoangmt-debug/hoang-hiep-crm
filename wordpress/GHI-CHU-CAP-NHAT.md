@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.31** + plugin Hoàng Hiệp CRM **2.20.281**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.31** + plugin Hoàng Hiệp CRM **2.20.282**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.282 (14/11/2026)
+
+- **Chat – sửa chào sai dự án:** trước đây mở Casamia vẫn hiện lời chào Nobu (lời chào cũ lưu trong trình duyệt). Nay chưa hỏi gì thì luôn chào đúng dự án đang xem; đang hỏi dở mà sang dự án khác thì trợ lý báo "em chuyển sang tư vấn dự án này".
+- **Chat – hỏi đúng mục khách đang xem:** khách dừng khoảng 8 giây ở mục nào (tổng quan, vị trí, tiện ích, loại căn, mặt bằng, giá, thanh toán, pháp lý, nội thất, tiến độ, hình ảnh…) thì bong bóng chat bật ra hỏi đúng mục đó, đúng tên dự án; sang mục khác dừng lâu lại hỏi tiếp (mỗi mục 1 lần, cách nhau ≥ 20 giây, không chen khi đang mở chat). Câu hỏi theo loại dự án: biệt thự / shophouse / đất nền / căn hộ. Thêm câu hỏi cho trang dự án dạng landing (Giá, Loại căn, Thanh toán, Pháp lý, Nội thất, Giá khu vực, Phân khu, Xem 4D).
+- **Trợ lý AI biết khách đang đọc mục nào** – câu hỏi ngắn như "bao nhiêu?" hiểu theo mục đó; tin Telegram "Khách đang chat" ghi kèm mục.
 
 ## Có gì mới – 2.20.281 (14/11/2026)
 

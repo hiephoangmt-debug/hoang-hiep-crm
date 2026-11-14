@@ -71,6 +71,8 @@ add_action(
 			array(
 				'ajax'    => admin_url( 'admin-ajax.php' ),
 				'page'    => $id,
+				'title'   => $title,
+				'switched' => $title ? ( 'vi' === $lang ? 'Anh/chị đang xem ' . $title . ' – em chuyển sang tư vấn dự án này nhé. Cần bảng giá, chính sách hay tính vốn cho căn nào ạ?' : 'You are now viewing ' . $title . ' – happy to help with prices, payment plans or a viewing.' ) : '',
 				'name'    => $name,
 				'avatar'  => function_exists( 'hoanghiep_photo' ) ? hoanghiep_photo( 'avatar' ) : '',
 				'phone'   => $phone,
@@ -97,23 +99,43 @@ add_action(
  */
 function hh_chat_nudges( $id ) {
 	if ( $id && 'du-an' === get_post_type( $id ) ) {
-		$t   = hh_chat_title( $id );
-		$dl  = trim( (string) hh_meta( 'hh_p_offer_deadline', $id ) );
-		$off = trim( (string) hh_meta( 'hh_p_offer_title', $id ) );
+		$t    = hh_chat_title( $id );
+		$dl   = trim( (string) hh_meta( 'hh_p_offer_deadline', $id ) );
+		$off  = trim( (string) hh_meta( 'hh_p_offer_title', $id ) );
+		$kind = mb_strtolower( (string) hh_meta( 'hh_p_type', $id ) . ' ' . implode( ' ', wp_get_post_terms( $id, get_object_taxonomies( 'du-an' ), array( 'fields' => 'names' ) ) ) );
+		$low  = preg_match( '/biệt thự|nhà phố|shophouse|nhà vườn|đất nền|villa/u', $kind ) && false === mb_strpos( $kind, 'căn hộ' );
+		$land = false !== mb_strpos( $kind, 'đất nền' ) && ! preg_match( '/biệt thự|nhà phố|căn hộ/u', $kind );
+		$unit = $land ? 'lô' : ( $low ? 'căn' : 'căn' );
+		$who  = function_exists( 'hoanghiep_opt' ) ? ( hoanghiep_opt( 'hh_person_name' ) ?: 'Hiệp' ) : 'Hiệp';
+		$pick = $land
+			? array( 'Anh/chị cần lô diện tích khoảng bao nhiêu ạ? Em lọc lô đẹp còn trống ở ' . $t . ', kèm vị trí trên mặt bằng.', array( 'Lô dưới 150 m²', 'Lô góc / mặt tiền lớn' ) )
+			: ( $low
+				? array( 'Anh/chị quan tâm loại nào ở ' . $t . ' ạ – biệt thự đơn lập, song lập hay shophouse? Em gửi căn đẹp còn trống kèm vị trí trên mặt bằng.', array( 'Biệt thự view sông / view đẹp', 'Shophouse kinh doanh' ) )
+				: array( 'Anh/chị đang cân nhắc căn mấy phòng ngủ ở ' . $t . ' ạ? Em lọc căn đẹp còn trống đúng loại đó, kèm mặt bằng căn.', array( 'Căn 2 phòng ngủ', 'Căn 3 phòng ngủ' ) ) );
+		$price = array( 'Anh/chị muốn nhận bảng giá chi tiết và phiếu tính giá ' . $unit . ' cụ thể ở ' . $t . ' không ạ?', array( 'Gửi bảng giá mới nhất', $low ? 'Căn nào giá tốt nhất?' : 'Căn 2PN giá bao nhiêu?' ) );
+		$pay   = array( ( $off ? $off . '. ' : '' ) . 'Anh/chị dự định vay ngân hàng hay thanh toán sớm ạ? Em tính phương án có lợi nhất cho ' . $unit . ' anh/chị chọn ở ' . $t . ( $dl ? ' (ưu đãi hạn ' . $dl . ').' : '.' ), array( 'Vay ngân hàng', 'Thanh toán sớm' ) );
 		return array(
-			'gioi-thieu' => array( 'Anh/chị tìm hiểu ' . $t . ' để ở hay đầu tư ạ? Em gửi bản tóm tắt 1 trang cho dễ so sánh nhé.', array( 'Mua để ở', 'Đầu tư cho thuê' ) ),
-			'tong-quan'  => array( 'Anh/chị muốn xem mặt bằng tổng thể và các tòa / phân khu đang mở bán của ' . $t . ' không ạ?', array( 'Gửi mặt bằng tổng thể', 'Phân khu nào đang bán?' ) ),
-			'vi-tri'     => array( 'Anh/chị làm việc hay cho con học ở khu nào ạ? Em tính giúp thời gian di chuyển từ ' . $t . '.', array( 'Gửi bản đồ vị trí', 'Gần trường, bệnh viện nào?' ) ),
-			'lien-ket'   => array( 'Anh/chị cần đi lại thường xuyên tới đâu ạ – trung tâm, sân bay hay biển? Em gửi thời gian di chuyển thực tế.', array( 'Ra sân bay bao lâu?', 'Ra biển bao lâu?' ) ),
-			'tien-ich'   => array( 'Tiện ích nào anh/chị quan tâm nhất ạ – hồ bơi, trường học hay khu vui chơi cho bé? Em gửi ảnh thực tế.', array( 'Gửi ảnh tiện ích', 'Có trường học gần không?' ) ),
-			'mat-bang'   => array( 'Anh/chị đang cân nhắc căn mấy phòng ngủ ạ? Em lọc căn đẹp còn trống đúng loại đó, kèm mặt bằng căn.', array( 'Căn 2 phòng ngủ', 'Căn 3 phòng ngủ' ) ),
-			'san-pham'   => array( 'Anh/chị đang cân nhắc loại căn nào ạ? Em gửi giá và căn đẹp còn trống đúng loại đó.', array( 'Giá căn 2PN?', 'Giá căn 3PN?' ) ),
-			'gio-hang'   => array( 'Anh/chị thích căn nào trong giỏ hàng ạ? Em gửi giá và phiếu tính giá căn đó ngay.', array( 'Nhận giá các căn này', 'Còn căn nào khác?' ) ),
-			'chinh-sach' => array( ( $off ? $off . '. ' : '' ) . 'Anh/chị dự định vay ngân hàng hay thanh toán sớm ạ? Em tính phương án có lợi nhất cho căn anh/chị chọn' . ( $dl ? ' (ưu đãi hạn ' . $dl . ').' : '.' ), array( 'Vay ngân hàng', 'Thanh toán sớm' ) ),
-			'tai-chinh'  => array( 'Anh/chị muốn em tính khoản vay và số tiền trả hằng tháng cho căn cụ thể không ạ?', array( 'Vốn tự có bao nhiêu?', 'Trả hằng tháng bao nhiêu?' ) ),
-			'tien-do'    => array( 'Anh/chị cần nhận nhà khoảng thời gian nào ạ? Em gửi tiến độ thi công mới nhất kèm ảnh công trường.', array( 'Khi nào bàn giao?', 'Gửi ảnh tiến độ' ) ),
-			'thu-vien'   => array( 'Anh/chị muốn đi xem nhà mẫu / dự án thực tế không ạ? ' . ( function_exists( 'hoanghiep_opt' ) ? hoanghiep_opt( 'hh_person_name' ) : 'Hiệp' ) . ' đưa đi miễn phí.', array( 'Đặt lịch xem nhà', 'Gửi thêm ảnh thực tế' ) ),
-			'hoi-dap'    => array( 'Anh/chị còn băn khoăn điều gì về ' . $t . ' không ạ? Em trả lời ngay.', array( 'Pháp lý thế nào?', 'Giá có tăng không?' ) ),
+			'gioi-thieu'  => array( 'Anh/chị tìm hiểu ' . $t . ' để ở hay đầu tư ạ? Em gửi bản tóm tắt 1 trang cho dễ so sánh nhé.', array( 'Mua để ở', 'Đầu tư cho thuê' ) ),
+			'tong-quan'   => array( 'Anh/chị tìm hiểu ' . $t . ' để ở hay đầu tư ạ? Em gửi bản tóm tắt dự án và ' . $unit . ' đang mở bán nhé.', array( 'Mua để ở', 'Đầu tư cho thuê' ) ),
+			'to-hop'      => array( 'Anh/chị quan tâm phân khu / tòa nào của ' . $t . ' ạ? Em gửi ' . $unit . ' còn trống ở phân khu đó.', array( 'Phân khu nào đang bán?', 'Phân khu nào giá tốt?' ) ),
+			'vi-tri'      => array( 'Anh/chị làm việc hay cho con học ở khu nào ạ? Em tính giúp thời gian di chuyển từ ' . $t . '.', array( 'Gửi bản đồ vị trí', 'Gần trường, bệnh viện nào?' ) ),
+			'lien-ket'    => array( 'Anh/chị cần đi lại thường xuyên tới đâu ạ – trung tâm, sân bay hay biển? Em gửi thời gian di chuyển thực tế từ ' . $t . '.', array( 'Ra sân bay bao lâu?', 'Ra biển bao lâu?' ) ),
+			'tien-ich'    => array( 'Tiện ích nào ở ' . $t . ' anh/chị quan tâm nhất ạ – hồ bơi, trường học hay khu vui chơi cho bé? Em gửi ảnh thực tế.', array( 'Gửi ảnh tiện ích', 'Có trường học gần không?' ) ),
+			'xem-4d'      => array( 'Anh/chị muốn đi xem thực tế ' . $t . ' không ạ? ' . $who . ' đưa đi miễn phí, xem cả ' . $unit . ' mẫu.', array( 'Đặt lịch xem thực tế', 'Gửi video dự án' ) ),
+			'mat-bang'    => $pick,
+			'loai-can'    => $pick,
+			'san-pham'    => $pick,
+			'noi-that'    => array( 'Anh/chị muốn xem thêm nội thất / ' . $unit . ' mẫu thực tế của ' . $t . ' không ạ? Em gửi ảnh và tiêu chuẩn bàn giao.', array( 'Tiêu chuẩn bàn giao?', 'Gửi thêm ảnh nội thất' ) ),
+			'gio-hang'    => array( 'Anh/chị thích ' . $unit . ' nào trong giỏ hàng ' . $t . ' ạ? Em gửi giá và phiếu tính giá ' . $unit . ' đó ngay.', array( 'Nhận giá các ' . $unit . ' này', 'Còn ' . $unit . ' nào khác?' ) ),
+			'bang-gia'    => $price,
+			'gia-khu-vuc' => array( 'Anh/chị muốn so sánh giá ' . $t . ' với các dự án cùng khu không ạ? Em gửi bảng so sánh giá tham khảo.', array( 'So sánh giá khu vực', 'Giá có còn tăng không?' ) ),
+			'chinh-sach'  => $pay,
+			'thanh-toan'  => $pay,
+			'tai-chinh'   => array( 'Anh/chị muốn em tính khoản vay và số tiền trả hằng tháng cho ' . $unit . ' cụ thể ở ' . $t . ' không ạ?', array( 'Vốn tự có bao nhiêu?', 'Trả hằng tháng bao nhiêu?' ) ),
+			'phap-ly'     => array( 'Anh/chị cần em gửi bản tóm tắt pháp lý ' . $t . ' (sổ, thời hạn sở hữu, điều kiện bán) không ạ?', array( 'Có sổ riêng không?', 'Sở hữu lâu dài không?' ) ),
+			'tien-do'     => array( 'Anh/chị cần nhận nhà khoảng thời gian nào ạ? Em gửi tiến độ thi công mới nhất ' . $t . ' kèm ảnh công trường.', array( 'Khi nào bàn giao?', 'Gửi ảnh tiến độ' ) ),
+			'thu-vien'    => array( 'Anh/chị muốn đi xem ' . $t . ' thực tế không ạ? ' . $who . ' đưa đi miễn phí.', array( 'Đặt lịch xem nhà', 'Gửi thêm ảnh thực tế' ) ),
+			'hoi-dap'     => array( 'Anh/chị còn băn khoăn điều gì về ' . $t . ' không ạ? Em trả lời ngay.', array( 'Pháp lý thế nào?', 'Giá có tăng không?' ) ),
 		);
 	}
 	if ( $id && 'bat-dong-san' === get_post_type( $id ) ) {
@@ -152,6 +174,10 @@ function hh_chat_handle() {
 	if ( $page && ! in_array( get_post_type( $page ), array( 'du-an', 'bat-dong-san' ), true ) ) {
 		$page = 0;
 	}
+	// Mục khách đang đọc trên trang dự án (giá, mặt bằng, pháp lý…) – để trợ lý trả lời đúng chỗ khách đang xem.
+	$sec_labels = array( 'gioi-thieu' => 'Giới thiệu', 'tong-quan' => 'Tổng quan', 'to-hop' => 'Tổ hợp / phân khu', 'vi-tri' => 'Vị trí', 'lien-ket' => 'Liên kết vùng', 'tien-ich' => 'Tiện ích', 'xem-4d' => 'Xem 4D / thực tế ảo', 'mat-bang' => 'Mặt bằng', 'loai-can' => 'Loại căn', 'san-pham' => 'Sản phẩm', 'noi-that' => 'Nội thất', 'gio-hang' => 'Giỏ hàng', 'bang-gia' => 'Bảng giá', 'gia-khu-vuc' => 'Giá khu vực', 'chinh-sach' => 'Chính sách bán hàng', 'thanh-toan' => 'Thanh toán', 'tai-chinh' => 'Tính vốn / vay', 'phap-ly' => 'Pháp lý', 'tien-do' => 'Tiến độ', 'thu-vien' => 'Hình ảnh', 'hoi-dap' => 'Hỏi đáp' );
+	$sec = sanitize_key( (string) wp_unslash( $_POST['sec'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification
+	$GLOBALS['hh_chat_sec'] = $page && isset( $sec_labels[ $sec ] ) ? $sec_labels[ $sec ] : '';
 	$src = function_exists( 'hh_src_from_request' ) ? hh_src_from_request() : array();
 	$raw  = json_decode( (string) wp_unslash( $_POST['messages'] ?? '[]' ), true ); // phpcs:ignore WordPress.Security.NonceVerification
 	$msgs = array();
@@ -186,7 +212,7 @@ function hh_chat_handle() {
 	// Báo Telegram khi khách bắt đầu chat (1 lần mỗi cuộc chat), chưa cần số điện thoại.
 	if ( ! $lead_id && function_exists( 'hh_tg_send' ) && '0' !== (string) hh_chat_opt( 'tg_start', '1' ) && ! get_transient( 'hh_chat_tg_' . $conv ) ) {
 		set_transient( 'hh_chat_tg_' . $conv, 1, DAY_IN_SECONDS );
-		hh_tg_send( '💬 Khách đang chat' . ( $page ? ' – ' . hh_chat_title( $page ) : '' ) . " (chưa để số)\n" . ( function_exists( 'hh_src_lines' ) ? hh_src_lines( $src, $page ) : ( $page ? 'Đang xem: ' . hh_chat_title( $page ) . ' – ' . get_permalink( $page ) . "\n" : '' ) ) . 'Khách hỏi: ' . $last . "\n\nKhi khách để lại số, tin nhắn có số điện thoại sẽ về đây." );
+		hh_tg_send( '💬 Khách đang chat' . ( $page ? ' – ' . hh_chat_title( $page ) : '' ) . ( $GLOBALS['hh_chat_sec'] ? ' · mục ' . $GLOBALS['hh_chat_sec'] : '' ) . " (chưa để số)\n" . ( function_exists( 'hh_src_lines' ) ? hh_src_lines( $src, $page ) : ( $page ? 'Đang xem: ' . hh_chat_title( $page ) . ' – ' . get_permalink( $page ) . "\n" : '' ) ) . 'Khách hỏi: ' . $last . "\n\nKhi khách để lại số, tin nhắn có số điện thoại sẽ về đây." );
 	}
 
 	$reply = '';
@@ -560,6 +586,9 @@ function hh_chat_ai_reply( $msgs, $page, $lead_phone ) {
 		}
 	} else {
 		$context .= 'Khách đang ở trang chung (chưa xem dự án cụ thể). Dự án nổi bật: ' . implode( '; ', hh_chat_featured_projects() ) . "\n";
+	}
+	if ( ! empty( $GLOBALS['hh_chat_sec'] ) ) {
+		$context .= "Khách đang đọc mục: " . $GLOBALS['hh_chat_sec'] . " của trang này – câu hỏi ngắn / mơ hồ thì hiểu theo mục đó.\n";
 	}
 	$context .= $lead_phone ? "\nKhách ĐÃ để lại số: {$lead_phone}. Không xin số nữa.\n" : "\nKhách CHƯA để lại số điện thoại.\n";
 

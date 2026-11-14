@@ -22,7 +22,7 @@
 	function save() {
 		state.at = Date.now();
 		try {
-			localStorage.setItem( KEY, JSON.stringify( { conv: state.conv, msgs: state.msgs.slice( -40 ), lead: state.lead, at: state.at } ) );
+			localStorage.setItem( KEY, JSON.stringify( { conv: state.conv, msgs: state.msgs.slice( -40 ), lead: state.lead, at: state.at, page: state.page || 0 } ) );
 		} catch ( e ) {}
 	}
 	function el( tag, cls, text ) {
@@ -122,6 +122,15 @@
 		bubble.hidden = true;
 		root.classList.add( 'is-open' );
 		if ( ! log.childElementCount ) {
+			// Lời chào theo trang đang xem: chưa hỏi gì thì bỏ lời chào cũ (của dự án xem trước); đang hỏi dở mà sang dự án khác thì báo đổi dự án.
+			var asked = state.msgs.some( function ( m ) { return 'user' === m.role; } );
+			if ( ! asked ) {
+				state.msgs = [];
+			} else if ( C.page && C.title && ( state.page || 0 ) !== C.page && C.switched ) {
+				state.msgs.push( { role: 'assistant', text: C.switched } );
+			}
+			state.page = C.page || 0;
+			save();
 			state.msgs.forEach( function ( m ) {
 				( 'assistant' === m.role ? String( m.text ).split( /\n\s*\n/ ) : [ m.text ] ).forEach( function ( x ) {
 					if ( x.trim() ) {
@@ -194,6 +203,7 @@
 		body.append( 'action', 'hh_chat' );
 		body.append( 'conv', state.conv );
 		body.append( 'page', C.page || 0 );
+		body.append( 'sec', typeof readingSec === 'string' ? readingSec : '' );
 		body.append( 'lang', C.lang || 'vi' );
 		body.append( 'messages', JSON.stringify( state.msgs.slice( -14 ) ) );
 		var src = window.HH_SRC || {};
@@ -269,6 +279,7 @@
 
 	// Hỏi chủ động theo mục khách đang dừng đọc (~8 giây ở cùng một mục).
 	var nudges = C.nudges || {};
+	var readingSec = ''; // Mục khách đang / vừa đọc – gửi kèm tin nhắn để trợ lý trả lời đúng chỗ.
 	var hasNudges = Object.keys( nudges ).length > 0;
 	function sget( k ) { try { return sessionStorage.getItem( k ); } catch ( e ) { return null; } }
 	function sset( k, v ) { try { sessionStorage.setItem( k, v ); } catch ( e ) {} }
@@ -279,13 +290,13 @@
 		var n = nudges[ key ];
 		var count = parseInt( sget( 'hh_nudge_n' ) || '0', 10 );
 		var last = parseInt( sget( 'hh_nudge_at' ) || '0', 10 );
-		var done = ( sget( 'hh_nudge_done' ) || '' ).split( ',' );
-		if ( ! n || count >= 2 || Date.now() - last < 30e3 || done.indexOf( key ) > -1 || ! panel.hidden || chatted() || document.body.classList.contains( 'has-pop' ) ) {
-			return;
+		var done = ( sget( 'hh_nudge_done' ) || '' ).split( ',' ), dkey = ( C.page || 0 ) + ':' + key;
+		if ( ! n || count >= 8 || Date.now() - last < 20e3 || done.indexOf( dkey ) > -1 || ! panel.hidden || document.body.classList.contains( 'has-pop' ) ) {
+			return false;
 		}
 		sset( 'hh_nudge_n', String( count + 1 ) );
 		sset( 'hh_nudge_at', String( Date.now() ) );
-		sset( 'hh_nudge_done', done.concat( key ).join( ',' ) );
+		sset( 'hh_nudge_done', done.concat( dkey ).join( ',' ) );
 		sset( 'hh_chat_seen', '1' );
 		bubble.querySelector( 'p' ).textContent = n[ 0 ];
 		bubble.dataset.q = n[ 0 ];
@@ -303,30 +314,47 @@
 			box.appendChild( b );
 		} );
 		bubble.hidden = false;
+		return true;
 	}
-	if ( hasNudges && 'IntersectionObserver' in window ) {
+	if ( hasNudges ) {
 		var current = null, since = 0, t0 = Date.now();
 		var targets = Object.keys( nudges ).map( function ( k ) { return document.getElementById( k ); } ).filter( Boolean );
-		var io = new IntersectionObserver( function ( entries ) {
-			entries.forEach( function ( en ) {
-				if ( en.isIntersecting ) {
-					if ( current !== en.target.id ) {
-						current = en.target.id;
-						since = Date.now();
-					}
-				} else if ( current === en.target.id ) {
-					current = null;
+		// Mục khách đang đọc = mục chứa giữa màn hình; không có thì mục chiếm nhiều diện tích màn hình nhất (mục ngắn cuối trang).
+		function reading() {
+			var vh = window.innerHeight, mid = vh * 0.45, best = null, bestA = 0;
+			for ( var k = 0; k < targets.length; k++ ) {
+				var r = targets[ k ].getBoundingClientRect();
+				if ( r.bottom <= 0 || r.top >= vh || r.height < 40 ) {
+					continue;
 				}
-			} );
-		}, { rootMargin: '-45% 0px -45% 0px' } ); // Mục nằm ở giữa màn hình = đang đọc.
-		targets.forEach( function ( t ) { io.observe( t ); } );
+				if ( r.top <= mid && r.bottom >= mid ) {
+					return targets[ k ].id;
+				}
+				var a = Math.min( r.bottom, vh ) - Math.max( r.top, 0 );
+				if ( a > bestA ) {
+					bestA = a;
+					best = targets[ k ].id;
+				}
+			}
+			return bestA >= vh * 0.3 ? best : null;
+		}
 		setInterval( function () {
 			if ( document.hidden || Date.now() - t0 < 6000 ) {
 				return;
 			}
+			var now = reading();
+			if ( now !== current ) {
+				current = now;
+				since = Date.now();
+			}
+			if ( current && Date.now() - since >= 3000 ) {
+				readingSec = current;
+			}
 			if ( current && Date.now() - since >= 8000 ) {
-				showNudge( current );
-				since = Infinity;
+				var nk = ( C.page || 0 ) + ':' + current;
+				if ( showNudge( current ) || ( sget( 'hh_nudge_done' ) || '' ).split( ',' ).indexOf( nk ) > -1 ) {
+					since = Infinity; // Đã hỏi mục này – chờ khách sang mục khác.
+				}
 			}
 			if ( nudges.page && Date.now() - t0 >= 30000 ) {
 				showNudge( 'page' );
