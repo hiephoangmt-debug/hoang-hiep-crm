@@ -66,3 +66,4 @@
 | CHỜ | Hoàng Hiệp | sau | (bài web tiếng Anh 14/11 19:00, ưu tiên thấp) Nobu Residences Da Nang buyer’s guide | nobu-residences-da-nang-buyers-guide (chờ) |
 | CHỜ | Hoàng Hiệp | sau | (bài web tiếng Anh 14/11 21:00, ưu tiên thấp) Branded residences Da Nang – foreign buyers | branded-residences-da-nang-foreign-buyers (chờ) |
 | 14/11/2026 | Sun | 14:15 | (bài web mới 11:30) Sun Saphia Residence đi Hội An – đường ven biển, lịch trình (1 ảnh dọc) | /tu-sun-saphia-residence-di-hoi-an-bao-xa-lich-trinh/ |
+| 14/11/2026 | TikTok (@hiephoangmt, brand Sun) | 14:30 | Sun Saphia đi Hội An – bài ảnh (thẻ dọc) | /tu-sun-saphia-residence-di-hoi-an-bao-xa-lich-trinh/ |
