@@ -57,3 +57,9 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 - KHÔNG dùng nhiều thẻ chữ khung ngang trong một album: Facebook cắt ảnh thành ô vuông, chữ sát mép sẽ mất. Nếu bắt buộc có chữ trên ảnh phụ, đặt chữ trong vùng giữa (cách mép trái/phải ≥ 20% chiều rộng).
 - Không dùng ảnh mặt bằng có in mã căn; không đặt mặt bằng làm ảnh đầu.
 - Trước khi hẹn: ghép thử album thành lưới như Facebook hiển thị và mở ra xem lại.
+
+## Mẫu thiết kế ảnh (anh Hiệp chọn 14/11/2026: MẪU B – "Sang")
+- Thẻ dọc 1080×1350 dùng mẫu B: `python3 wordpress/bai-viet/fb-the-doc-v2.py sang <cau-hinh.json> <anh-dai-dien.jpg> <anh-nen.jpg> marketing/fb/<slug>-b.jpg` (cùng file cấu hình JSON như mẫu cũ; font Be Vietnam Pro + Playfair trong wordpress/bai-viet/fonts/).
+- Nền ngà, ảnh bo góc phía trên, tiêu đề chữ có chân, 4 con số vàng đồng, 4 ý chia 2 cột, dòng chốt nền xanh đậm, chân ảnh đại diện.
+- Tiêu đề dài quá 2 dòng thì rút gọn; xem ảnh trước khi đăng (script báo "TRAN CHU" nếu chữ tràn).
+- Áp dụng cho cả trang Sun, Hoàng Hiệp, Casamia (khi dùng thẻ có số liệu) và bài TikTok. Mẫu cũ fb-the-doc-anh-tren.py không dùng nữa.
