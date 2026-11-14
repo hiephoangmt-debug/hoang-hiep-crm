@@ -13,6 +13,14 @@ window.PROJECTS_DATA = [
     scale: '1 tháp 30 tầng ~114 m, 782 căn (Studio, 1PN+1, 2PN)', price: 'Studio từ ~1,8 tỷ (dự kiến)',
     headline: 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, ~400 m ra bãi tắm Sơn Thủy',
     url: 'https://www.sun-saphia-residence.com',
+    // Ảnh 360° flycam (DJI Air 3S) chụp ngay trên khu đất: toạ độ & độ cao lấy từ EXIF/XMP của ảnh gốc,
+    // heading = hướng (độ, so với Bắc) của tâm ảnh – căn theo vị trí mặt trời lúc chụp.
+    // ranh khu đất (bãi cát đang thi công) đo trên ảnh flycam 150 m chiếu thẳng đứng, ~6500 m²
+    site: [[16.0212086, 108.2573346], [16.0213261, 108.2574561], [16.0213804, 108.2576431], [16.0214165, 108.2578301], [16.0213804, 108.2579422], [16.0213442, 108.2579983], [16.0211814, 108.2580918], [16.0210006, 108.2581385], [16.0208017, 108.2581666], [16.0206842, 108.2581666], [16.0204400, 108.2576992], [16.0204581, 108.2576618], [16.0206209, 108.2575870], [16.0208559, 108.2574748], [16.0210549, 108.2573814]],
+    pano360: [
+      { id: 'sun-saphia-150m', src: '../pano/sun-saphia-150m.jpg', hd: '../pano/sun-saphia-150m-8k.jpg', lat: 16.020964444, lon: 108.257773967, alt: 150.5, heading: 343.7, time: '21/10/2026 08:06' },
+      { id: 'sun-saphia-120m', src: '../pano/sun-saphia-120m.jpg', hd: '../pano/sun-saphia-120m-8k.jpg', lat: 16.020978376, lon: 108.257753928, alt: 119.7, heading: 333.4, time: '21/10/2026 08:07' },
+    ],
     model: { plot: [62, 60], podiums: [[0, 4, 56, 44, 12]], towers: [[0, 6, 40, 22, 26, 3.4, 12.8, 1]], pools: [[-16, -24, 18, 6]], trees: 16 } },
   { name: 'Da Nang Downtown – tháp 408 m', lat: 16.03866, lon: 108.23323, area: 'Hải Châu', h: 140,
     address: 'Khu Công viên Châu Á cũ (đường 2/9 – Phan Đăng Lưu – bờ sông Hàn), P. Hòa Cường; tháp 408 m ở góc Phan Đăng Lưu – bờ sông', developer: 'Sun Group (Sun Property)',

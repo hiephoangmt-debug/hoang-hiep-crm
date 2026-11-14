@@ -64,6 +64,13 @@ Các căn mẫu (1PN+, 1PN, 2PN căn góc, 2PN 2WC, 3PN) được dựng sẵn t
 
 Để nhẹ máy: chỉ cảnh đang hiển thị mới được vẽ. Bộ render path tracing chỉ tải khi bấm “📸 Render ảnh thật”. Trang tòa nhà có tuỳ chọn **Chế độ nhẹ** (ít cây/nhà, tắt bóng đổ, giảm độ phân giải), mặc định bật trên điện thoại và máy ít nhân.
 
+## Ảnh 360° flycam gắn toạ độ (`public/da-nang-3d/`)
+
+Trên bản đồ Đà Nẵng 3D, dự án có `pano360` trong `projects.js` sẽ có ghim 🛸 đúng vị trí và độ cao chụp, và nút **Flycam 360°** trong bảng thông tin dự án. Trong ảnh 360°, nhãn địa danh / dự án / cầu / toà cao tầng (kèm khoảng cách) và ranh khu đất (`site`) được tự đặt theo toạ độ thật; có la bàn, nút *Nhìn khu đất*, link Google Maps.
+
+- Link mở thẳng: `da-nang-3d/?pano=sun-saphia-150m` (hoặc `?go=360`).
+- Thêm ảnh mới: chép ảnh (2:1) vào `public/pano/` (bản 4K + bản 8K tuỳ chọn), thêm `{ id, src, hd, lat, lon, alt, heading, time }` vào `pano360` của dự án. `lat/lon/alt` lấy từ EXIF ảnh DJI (`GpsLatitude`, `GpsLongitude`, `RelativeAltitude`); `heading` là hướng (độ so với Bắc) của tâm ảnh – căn bằng vị trí mặt trời lúc chụp hoặc chỉnh tay đến khi nhãn khớp.
+
 ## Đưa lên web (GitHub Pages)
 
 Repo đã có sẵn workflow `.github/workflows/deploy-floorplan-3d.yml`: mỗi lần thay đổi trong `floorplan-3d/` được merge vào `main`, GitHub tự build và đăng lên Pages.
