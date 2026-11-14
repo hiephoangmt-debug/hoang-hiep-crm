@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.31** + plugin Hoàng Hiệp CRM **2.20.280**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.31** + plugin Hoàng Hiệp CRM **2.20.281**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.281 (14/11/2026)
+
+- **Casamia Hội An – thêm 22 ảnh thực tế** (anh gửi 14/11): flycam toàn cảnh (làm ảnh đại diện), sông nội khu, hồ bơi vô cực, biệt thự hồ bơi riêng, sân vườn, đường nội khu, công viên, sân chơi trẻ em, phòng gym, shophouse. Bỏ ảnh có biển hiệu homestay của chủ nhà khác và ảnh chân dung người mẫu. Bấm "Nhập / cập nhật dữ liệu" để ảnh vào thư viện.
 
 ## Có gì mới – 2.20.280 (14/11/2026)
 
