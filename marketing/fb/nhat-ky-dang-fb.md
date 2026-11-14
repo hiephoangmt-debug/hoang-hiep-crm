@@ -52,7 +52,7 @@
 | 13/11/2026 | Sun | 14:15 | (bài web mới 11:30) Phí quản lý Sun Saphia Residence (1 ảnh dọc, nội thất studio) | /phi-quan-ly-sun-saphia-residence-moi-thang-bao-nhieu/ |
 | 13/11/2026 | Sun | 20:00 | (bài web mới 16:30) Ngũ Hành Sơn gần Sun Saphia Residence (1 ảnh dọc, flycam NHS) | /danh-thang-ngu-hanh-son-gan-sun-saphia-residence/ |
 | 13/11/2026 | Hoàng Hiệp | 16:30 | (phiên khác, bài web mới 07:00) VSIP vị trí số 7 khu thương mại tự do | /vsip-vi-tri-so-7-khu-thuong-mai-tu-do-da-nang-3525-ty/ |
-| CHỜ | Hoàng Hiệp | 14/11 | (bài web 13/11 14:00, trang đủ 3 bài) Mặt bằng The Legend Đà Nẵng | mat-bang-can-ho-the-legend-da-nang (chờ) |
+| 14/11/2026 | Hoàng Hiệp | 13:00 | (bài web 13/11 14:00, đã chờ 1 ngày) Mặt bằng The Legend Đà Nẵng (1 ảnh dọc, sông Hàn – cầu Rồng) | /mat-bang-can-ho-the-legend-da-nang/ |
 | 13/11/2026 | TikTok (@hiephoangmt, brand Sun) | 14:30 | Phí quản lý Sun Saphia – bài ảnh (thẻ dọc) | /phi-quan-ly-sun-saphia-residence-moi-thang-bao-nhieu/ |
 | 13/11/2026 | TikTok (@hiephoangmt, brand Sun) | 20:15 | Ngũ Hành Sơn gần Sun Saphia – bài ảnh (thẻ dọc) | /danh-thang-ngu-hanh-son-gan-sun-saphia-residence/ |
 | 13/11/2026 | Casamia (blogId 8074284) | 18:00 | Bài mở đầu trang Casamia Balanca – tổng quan dự án (album 4 ảnh: flycam thực tế + phối cảnh) | /du-an/casamia-balanca-hoi-an/ |
@@ -60,3 +60,8 @@
 | 14/11/2026 | Casamia (blogId 8074284) | 08:30 | Nội thất biệt thự Casamia Balanca – album 4 ảnh (phòng khách, bếp, phòng ngủ, phòng tắm) | /du-an/casamia-balanca-hoi-an/ |
 | 14/11/2026 | Sun | 11:00 | (bài web mới 09:00) Pháp lý Symphony 5 – sở hữu 50 năm (1 ảnh dọc) | /phap-ly-symphony-5-so-huu-50-nam/ |
 | 14/11/2026 | TikTok (@hiephoangmt, brand Sun) | 11:15 | Pháp lý Symphony 5 – bài ảnh (thẻ dọc) | /phap-ly-symphony-5-so-huu-50-nam/ |
+| CHỜ | Hoàng Hiệp | 15/11 | (bài web 13/11 19:00, trang 14/11 đủ 3 bài) Tra cứu dự án, mã định danh BĐS thongtinbds | tra-cuu-du-an-ma-dinh-danh-bat-dong-san-thongtinbds-moc-gov-vn (chờ) |
+| CHỜ | Hoàng Hiệp | 15/11 | (bài web 13/11 21:00) FPT Plaza 3 hoàn thành cấp sổ hồng | fpt-plaza-3-hoan-thanh-cap-so-hong-100-can-ho (chờ) |
+| CHỜ | Hoàng Hiệp | 16/11 | (bài web 14/11 14:00) Tiến độ Nobu Residences Đà Nẵng | tien-do-nobu-residences-da-nang (chờ) |
+| CHỜ | Hoàng Hiệp | sau | (bài web tiếng Anh 14/11 19:00, ưu tiên thấp) Nobu Residences Da Nang buyer’s guide | nobu-residences-da-nang-buyers-guide (chờ) |
+| CHỜ | Hoàng Hiệp | sau | (bài web tiếng Anh 14/11 21:00, ưu tiên thấp) Branded residences Da Nang – foreign buyers | branded-residences-da-nang-foreign-buyers (chờ) |
