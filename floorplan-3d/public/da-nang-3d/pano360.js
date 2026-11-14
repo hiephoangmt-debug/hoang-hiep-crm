@@ -239,8 +239,9 @@ function makeViewer(ctx) {
       const q = Z.corners.map(([la, lo]) => { const [x, z] = ctx.LL(la, lo); return new THREE.Vector3(x - C.x, ctx.groundY(x, z) + 0.5 - C.y, z - C.z); });
       const g = new THREE.BufferGeometry().setFromPoints([q[0], q[1], q[2], q[0], q[2], q[3]]);
       g.setAttribute('uv', new THREE.Float32BufferAttribute([0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0], 2));
-      const m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ map: (Z.tex ||= parkTex(Z.plaza ?? 0.5)), transparent: true, opacity: 0.88, depthTest: false, depthWrite: false, side: THREE.DoubleSide }));
+      const m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ map: (Z.tex ||= parkTex(Z.plaza ?? 0.5)), transparent: true, opacity: 0.92, depthTest: false, depthWrite: false, side: THREE.DoubleSide }));
       m.renderOrder = 1; zoneGroup.add(m);
+      if (Z.img) loadTex(Z.img).then((t) => { m.material.map = t; m.material.needsUpdate = true; }).catch(() => {});   // ảnh quy hoạch thật thay hình vẽ minh hoạ
     }
     zoneGroup.visible = showZone;
   }

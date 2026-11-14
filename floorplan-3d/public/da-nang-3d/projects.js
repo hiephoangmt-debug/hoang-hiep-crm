@@ -41,6 +41,7 @@ window.PROJECTS_DATA = [
     // Vùng quy hoạch phía trước (giữa đường Trường Sa và bãi biển): phủ mặt công viên đã làm sạch cỏ (minh hoạ, vẽ bằng code)
     // + ghi chú; chạm ghi chú mở ảnh phối cảnh. corners: góc phía biển-bắc, biển-nam, đường-nam, đường-bắc (đo trên ảnh flycam).
     zones: [{ name: '🌴 Công viên & bãi tắm Sơn Thủy', note: 'Quy hoạch mới · làm sạch cỏ như phối cảnh', plaza: 0.502,
+      img: '../mat-bang/sun-saphia/cong-vien-phia-truoc.webp',   // mặt bằng công viên cắt từ ảnh bán hàng (xoay: phía biển ở trên)
       corners: [[16.0242473, 108.2598368], [16.0201026, 108.2616558], [16.0191028, 108.2592206], [16.0232475, 108.2574016]], gallery: 'Phối cảnh' }],
     pano360: [
       { id: 'sun-saphia-150m', src: '../pano/sun-saphia-150m.jpg', hd: '../pano/sun-saphia-150m-8k.jpg', lat: 16.020964444, lon: 108.257773967, alt: 150.5, heading: 343.7, time: '21/10/2026 08:06' },
