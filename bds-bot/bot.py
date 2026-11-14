@@ -2079,11 +2079,12 @@ HELP_STAFF = """📋 LỆNH NHÂN VIÊN
 📝 /viec – việc của tôi · /viec <mã|-> <mai 9h> <nội dung> · /xong <số>
 /moc <mã> <ngày> <việc> · /damua <mã> <căn> · /danhgia <mã>
 /soan <tin khách> · /dich <tin> · /ketban <mã> · /xemduan
+🔗 /duan360 – link dự án gửi khách (360°, mặt bằng)
 🖥 /crm – trang quản lý khách của tôi"""
 
 STAFF_CMDS = {"/hd", "/help", "/khach", "/nong", "/nhiet", "/giaidoan", "/goi", "/ketqua", "/khachmoi", "/tl",
               "/tat", "/bat", "/viec", "/xong", "/moc", "/xoamoc", "/damua", "/danhgia", "/soan", "/dich",
-              "/ketban", "/xemduan", "/crm"}
+              "/ketban", "/xemduan", "/crm", "/duan360"}
 CID_CMDS = {"/khach", "/goi", "/ketqua", "/tl", "/tat", "/bat", "/moc", "/xoamoc", "/damua", "/danhgia",
             "/ketban", "/xoakhach", "/giao"}
 
@@ -2134,6 +2135,7 @@ Bot tự: chăm khách mới 1–3 ngày → đánh giá lại ngày 3 & 7 → n
 /chucmung <dịp> – soạn lời chúc riêng từng khách (20/10, 8/3, Trung thu, Tết…) → /xem, /gui
 /chamsoc – xem tình hình · /chamsoc tat · /chamsoc bat
 /xemduan – xem thông tin dự án bot đang dùng
+/duan360 – link 360°, mặt bằng dự án để gửi khách
 
 /id – xem chat_id"""
 
@@ -2461,6 +2463,9 @@ def handle_admin(text, who=None) -> bool:
         for f in files:
             f.unlink()
         reply(("🗑 Đã xóa: " + ", ".join(f.name for f in files)) if files else "Không thấy file bảng hàng " + arg1)
+    elif cmd == "/duan360":
+        reply("🔗 LINK DỰ ÁN GỬI KHÁCH:\n" + "\n\n".join(f"• {t}\n{u}" for t, u in PROJECT_LINKS)
+              + "\n\nGửi thẳng cho khách: /tl <mã khách> <link>")
     elif cmd == "/xemduan":
         info = re.sub(r"<!--.*?-->", "", read_info(), flags=re.S).strip()
         reply(info[:3900] + ("\n…(còn nữa, xem file du_an.md)" if len(info) > 3900 else ""))
@@ -3152,6 +3157,12 @@ def crm_api(who, method, path, q, body):
     return 400, {"ok": False, "msg": "Yêu cầu không hợp lệ"}
 
 
+PROJECT_LINKS = [
+    ("Sun Saphia Residence · flycam 360°, mặt bằng trên đất, quy hoạch", "https://hiephoangmt-debug.github.io/hoang-hiep-crm/sun-saphia-360/"),
+    ("Sun Saphia · mặt bằng tầng & layout căn", "https://hiephoangmt-debug.github.io/hoang-hiep-crm/sun-saphia-360/#mat-bang"),
+    ("Đà Nẵng 3D · các dự án", "https://hiephoangmt-debug.github.io/hoang-hiep-crm/da-nang-3d/?go=du-an"),
+]
+
 CRM_HTML = r"""<!doctype html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CRM BĐS</title>
@@ -3240,7 +3251,7 @@ function moi(){main.innerHTML='<div class="card"><b>Thêm khách từ cuộc g�
 function openK(id){var box=$("#box");$("#sheet").style.display="block";box.innerHTML='<div class="empty">Đang tải…</div>';
  api("/api/khach1?id="+encodeURIComponent(id)).then(function(d){var r=d.row,hs=d.ho_so||{};
  var h='<button class="x" id="cx">×</button><div class="row">'+heat(r.nhiet)+'<div class="grow"><div class="ttl">'+esc(r.ten)+'</div><div class="mute">'+esc(r.gd_ten)+" · "+esc(r.kenh)+" · 👤 "+esc(r.nv)+"</div></div></div>";
- h+='<div class="btns">'+(r.sdt?'<a class="btn" href="tel:'+esc(r.sdt)+'">📞 Gọi '+esc(r.sdt)+"</a>":"")+'<button class="btn y" id="kgoi">🗒 Kịch bản gọi</button><button class="btn sec" id="kkq">✍️ Ghi kết quả gọi</button>'+(d.nhan_duoc?'<button class="btn sec" id="ktl">💬 Nhắn khách</button>':"")+'<button class="btn sec" id="kvi">📝 Thêm việc</button></div><div id="kact"></div>';
+ h+='<div class="btns">'+(r.sdt?'<a class="btn" href="tel:'+esc(r.sdt)+'">📞 Gọi '+esc(r.sdt)+"</a>":"")+'<button class="btn y" id="kgoi">🗒 Kịch bản gọi</button><button class="btn sec" id="kkq">✍️ Ghi kết quả gọi</button>'+(d.nhan_duoc?'<button class="btn sec" id="ktl">💬 Nhắn khách</button><button class="btn sec" id="klk">🔗 Gửi link dự án</button>':"")+'<button class="btn sec" id="kvi">📝 Thêm việc</button></div><div id="kact"></div>';
  if(ME.admin)h+='<div class="row" style="margin:6px 0"><span class="mute">Giao cho</span><select id="kgiao">'+ME.nv.map(function(n){return '<option value="'+esc(n.id)+'"'+(n.ten==r.nv?" selected":"")+">"+esc(n.ten)+"</option>"}).join("")+"</select></div>";
  if(r.ly_do)h+='<div class="mute">🌡 '+esc(r.ly_do)+"</div>";
  if(d.chien_luoc)h+='<div class="card"><b>🤖 Chiến lược chăm sóc</b><div>'+esc(d.chien_luoc)+"</div></div>";
@@ -3255,6 +3266,9 @@ function openK(id){var box=$("#box");$("#sheet").style.display="block";box.inner
  function out(p,b){act('<div class="out">⏳ Đang xử lý…</div>');api(p,b).then(function(x){act('<div class="out">'+esc(x.msg)+"</div>")})}
  $("#kgoi").onclick=function(){out("/api/goi",{id:id})};
  $("#kkq").onclick=function(){act('<textarea id="kt" placeholder="Khách nói gì, hẹn gì, băn khoăn gì… (viết tắt cũng được)"></textarea><div class="btns"><button class="btn" id="ks">Lưu kết quả</button></div>');$("#ks").onclick=function(){out("/api/ketqua",{id:id,text:$("#kt").value})}};
+ if($("#klk"))$("#klk").onclick=function(){act('<select id="kls">'+LINKS.map(function(l,i){return '<option value="'+i+'">'+esc(l[0])+"</option>"}).join("")+'</select><textarea id="kt" style="margin-top:8px"></textarea><div class="btns"><button class="btn" id="ks">Gửi qua bot</button></div>');
+  var fill=function(){var l=LINKS[+$("#kls").value];$("#kt").value="Dạ em gửi anh/chị link xem "+l[0]+" ("+l[1].toLowerCase()+"):\n"+l[2]+"\nAnh/chị xem thử, cần tư vấn căn nào em báo chi tiết ạ."};fill();$("#kls").onchange=fill;
+  $("#ks").onclick=function(){out("/api/tl",{id:id,text:$("#kt").value})}};
  if($("#ktl"))$("#ktl").onclick=function(){act('<textarea id="kt" placeholder="Nội dung gửi khách"></textarea><div class="btns"><button class="btn" id="ks">Gửi qua bot</button></div>');$("#ks").onclick=function(){out("/api/tl",{id:id,text:$("#kt").value})}};
  $("#kvi").onclick=function(){act('<input id="kh2" placeholder="Thời gian: mai 9h / 26/10 14:30" style="margin-bottom:8px"><input id="kn" placeholder="Nội dung việc"><div class="btns"><button class="btn" id="ks">Thêm việc</button></div>');$("#ks").onclick=function(){out("/api/viec",{id:id,han:$("#kh2").value,noi_dung:$("#kn").value})}};
  if($("#kgiao"))$("#kgiao").onchange=function(){out("/api/giao",{id:id,nv:$("#kgiao").value})};
