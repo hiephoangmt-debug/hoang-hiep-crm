@@ -221,6 +221,8 @@ input,select,textarea{font:inherit;padding:8px 10px;border:1.5px solid #d3dbe6;b
 .cover:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,34,58,.05),rgba(14,34,58,.85))}.cover>div{position:relative;padding:20px 22px}.cover h1{color:#fff;margin:0 0 4px}.cover p{margin:0;color:#dbe4ef;font-size:14px}.cover a{color:#ffb38a}
 .ftype{display:inline-grid;place-items:center;min-width:42px;height:42px;border-radius:10px;font-size:11px;font-weight:800;color:#fff;background:#64748b;margin-right:10px;flex:none}.ftype.pdf{background:#dc2626}.ftype.xls{background:#16a34a}.ftype.doc{background:#2563eb}.ftype.ppt{background:#ea580c}.ftype.img{background:#7c3aed}.ftype.lnk{background:#0ea5e9}
 .dname{display:flex;align-items:center}
+.toc{position:sticky;top:58px;z-index:10;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;background:var(--bg);padding:10px 0;margin:6px 0}.toc::-webkit-scrollbar{display:none}.toc a{white-space:nowrap;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);text-decoration:none;color:var(--n);font-size:13.5px;font-weight:600}.toc a.hl{background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border:0}
+.chap{scroll-margin-top:120px}.chap h2 .num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--n);color:#fff;font-size:14px;margin-right:2px}.chap h2:before{display:none}.chap h3{font-size:16px;margin:16px 0 6px;color:var(--n)}
 .lesson h3{font-size:17px;margin:18px 0 6px;color:var(--n)}.lesson ol,.lesson ul{padding-left:22px}.lesson li{margin:4px 0}.lesson table{margin:8px 0}
 @media (max-width:640px){h1{font-size:21px}.top .wrap{padding:8px 16px}.tabs{order:3;width:100%;margin:0}.kv th{width:40%}td,th{padding:7px 6px}}';
 }
@@ -457,120 +459,285 @@ function hh_sale_view_project( $slug ) {
 	$m     = static fn( $k ) => trim( (string) get_post_meta( $id, $k, true ) );
 	$lines = static fn( $k ) => function_exists( 'hh_lines' ) ? hh_lines( $k, $id ) : array();
 	$tbl   = static fn( $k, $n ) => function_exists( 'hh_table' ) ? hh_table( $k, $n, $id ) : array();
+	$own   = static fn( $k ) => array_values( array_filter( array_map( 'trim', preg_split( '/\R/u', $m( $k ) ) ) ) );
 	$st    = function_exists( 'hh_project_schema' ) ? hh_option_label( hh_project_schema(), 'hh_p_status', $m( 'hh_p_status' ) ) : '';
 	$title = get_the_title( $p );
-
-	echo '<p style="margin:16px 0 0"><a href="' . esc_url( hh_sale_url( 'du-an' ) ) . '">← Danh sách dự án</a></p>';
-	$cov = get_the_post_thumbnail_url( $p, '1536x1536' ) ?: get_the_post_thumbnail_url( $p, 'large' );
-	echo '<section class="cover"' . ( $cov ? ' style="background-image:url(\'' . esc_url( $cov ) . '\')"' : '' ) . '><div><h1>' . esc_html( $title ) . '</h1><p>' . ( $st ? '<span class="pill o">' . esc_html( $st ) . '</span> ' : '' ) . ( $m( 'hh_p_developer' ) ? esc_html( $m( 'hh_p_developer' ) ) . ' · ' : '' ) . 'Cập nhật ' . esc_html( get_the_modified_date( 'd/m/Y', $p ) ) . ' · <a href="' . esc_url( get_permalink( $p ) ) . '" target="_blank" rel="noopener">Trang khách xem ↗</a></p></div></section>';
-
-	// 1. Điểm bán hàng.
-	$usp = array_filter( array_map( 'trim', preg_split( '/\R/u', $m( '_hh_sale_usp' ) ) ) ) ?: $lines( 'hh_p_highlights' );
-	if ( $usp ) {
-		echo '<div class="box"><h2>Điểm bán hàng chính</h2><ul class="l">';
-		foreach ( $usp as $l ) {
-			echo '<li>' . esc_html( $l ) . '</li>';
+	$imgs  = static function ( $ids, $size = 'large' ) {
+		$out = '';
+		foreach ( (array) $ids as $aid ) {
+			$u = is_numeric( $aid ) ? wp_get_attachment_image_url( (int) $aid, $size ) : '';
+			if ( $u ) {
+				$full = wp_get_attachment_image_url( (int) $aid, 'full' ) ?: $u;
+				$cap  = wp_get_attachment_caption( (int) $aid ) ?: get_the_title( (int) $aid );
+				$out .= '<figure style="margin:0"><a href="' . esc_url( $full ) . '" target="_blank" rel="noopener"><img src="' . esc_url( $u ) . '" alt="' . esc_attr( $cap ) . '" loading="lazy" style="width:100%;border-radius:10px;display:block"></a><figcaption class="note">' . esc_html( $cap ) . '</figcaption></figure>';
+			}
 		}
-		echo '</ul>' . ( $m( '_hh_sale_usp' ) ? '' : '<p class="note">(Lấy từ "Điểm nổi bật" của trang dự án – anh Hiệp có thể viết riêng cho sale trong khung "Dành cho sale".)</p>' ) . '</div>';
+		return $out ? '<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">' . $out . '</div>' : '';
+	};
+	$list = static function ( $items ) {
+		if ( ! $items ) {
+			return '';
+		}
+		$h = '<ul class="l">';
+		foreach ( $items as $l ) {
+			$h .= '<li>' . esc_html( $l ) . '</li>';
+		}
+		return $h . '</ul>';
+	};
+	$sec = array(); // [anchor, tên, html]
+
+	// 1. Thị trường.
+	ob_start();
+	if ( $own( '_hh_sale_market' ) ) {
+		echo '<h3>Nhận định của anh Hiệp</h3>' . $list( $own( '_hh_sale_market' ) ); // phpcs:ignore
 	}
-	// 2. Thông tin nhanh.
-	echo '<div class="box"><h2>Thông tin nhanh</h2>';
+	hh_sale_kv( array( 'Giá chuyển nhượng tham khảo' => $m( 'hh_p_resale_price' ), 'Giá thuê tham khảo' => $m( 'hh_p_rent_price' ), 'Nhận định thị trường thứ cấp' => $m( 'hh_p_resale_note' ) ) );
+	$log = array_slice( $tbl( 'hh_p_price_log', 4 ), 0, 8 );
+	if ( $log ) {
+		echo '<h3>Giá khu vực cập nhật theo ngày</h3>';
+		hh_sale_table( array( 'Ngày', 'Khu vực / sản phẩm', 'Giá tham khảo', 'Ghi chú' ), $log );
+	}
+	$area = $m( 'hh_p_address' );
+	$peer = array();
+	if ( $area ) {
+		$kw = preg_split( '/[,–-]/u', $area );
+		$kw = trim( (string) end( $kw ) ) ?: $area;
+		foreach ( get_posts( array( 'post_type' => 'du-an', 'post_status' => 'publish', 'numberposts' => 60, 'exclude' => array( $id ) ) ) as $o ) {
+			$oa = (string) get_post_meta( $o->ID, 'hh_p_address', true );
+			$pm = (string) get_post_meta( $o->ID, 'hh_p_price_m2', true );
+			$wd = preg_split( '/[,–-]/u', $area );
+			$hit = false;
+			foreach ( $wd as $w ) {
+				$w = trim( $w );
+				if ( mb_strlen( $w ) > 5 && false !== mb_stripos( $oa, $w ) && ! preg_match( '/đà nẵng/iu', $w ) ) {
+					$hit = true;
+				}
+			}
+			if ( $hit && $pm ) {
+				$peer[] = array( $o->post_title, (string) get_post_meta( $o->ID, 'hh_p_developer', true ), $pm );
+			}
+		}
+	}
+	if ( $peer ) {
+		echo '<h3>Dự án cùng khu vực để so sánh</h3>';
+		hh_sale_table( array( 'Dự án', 'Chủ đầu tư', 'Đơn giá tham khảo' ), array_slice( array_merge( array( array( $title . ' (dự án này)', $m( 'hh_p_developer' ), $m( 'hh_p_price_m2' ) ) ), $peer ), 0, 8 ) );
+	}
+	$h = trim( ob_get_clean() );
+	$sec[] = array( 'thi-truong', 'Thị trường', $h ?: '<p class="note">Chưa có dữ liệu thị trường – anh Hiệp bổ sung ở khung "Dành cho sale" (ô Thị trường).</p>' );
+
+	// 2. Chủ đầu tư.
+	ob_start();
+	hh_sale_kv( array( 'Chủ đầu tư' => $m( 'hh_p_developer' ), 'Nhà thầu thi công' => $m( 'hh_p_builder' ), 'Đơn vị thiết kế' => $m( 'hh_p_designer' ), 'Quản lý vận hành' => $m( 'hh_p_manager' ) ) );
+	if ( $own( '_hh_sale_developer' ) ) {
+		echo '<h3>Điểm cần nói về chủ đầu tư</h3>' . $list( $own( '_hh_sale_developer' ) ); // phpcs:ignore
+	}
+	if ( function_exists( 'hh_cdt_match' ) ) {
+		foreach ( array_slice( hh_cdt_match( $m( 'hh_p_developer' ) ), 0, 2 ) as $cs ) {
+			$d = hh_cdt_all()[ $cs ] ?? array();
+			if ( ! $d ) {
+				continue;
+			}
+			echo '<h3>' . esc_html( $d['name'] ) . ( ! empty( $d['full_name'] ) ? ' – ' . esc_html( $d['full_name'] ) : '' ) . '</h3>';
+			if ( ! empty( $d['facts'] ) ) {
+				hh_sale_kv( array_column( array_map( static fn( $r ) => array( (string) ( $r[0] ?? '' ), wp_strip_all_tags( (string) ( $r[1] ?? '' ) ) ), (array) $d['facts'] ), 1, 0 ) );
+			}
+			if ( ! empty( $d['intro'] ) ) {
+				echo '<p>' . wp_kses_post( (string) ( (array) $d['intro'] )[0] ) . '</p>';
+			}
+			$others = array();
+			foreach ( hh_cdt_projects( $cs ) as $oid ) {
+				if ( $oid !== $id ) {
+					$others[] = '<a href="' . esc_url( hh_sale_url( 'du-an/' . get_post_field( 'post_name', $oid ) ) ) . '">' . esc_html( get_the_title( $oid ) ) . '</a>';
+				}
+			}
+			if ( $others ) {
+				echo '<p><b>Dự án khác trên web:</b> ' . implode( ', ', array_slice( $others, 0, 15 ) ) . '</p>'; // phpcs:ignore
+			}
+			if ( ! empty( $d['buyer_notes'] ) ) {
+				echo '<p><b>Người mua cần lưu ý:</b></p>' . $list( array_map( 'wp_strip_all_tags', (array) $d['buyer_notes'] ) ); // phpcs:ignore
+			}
+			if ( function_exists( 'hh_cdt_url' ) ) {
+				echo '<p><a href="' . esc_url( hh_cdt_url( $cs ) ) . '" target="_blank" rel="noopener">Hồ sơ đầy đủ trên web ↗</a></p>';
+			}
+		}
+	}
+	$sec[] = array( 'chu-dau-tu', 'Chủ đầu tư', trim( ob_get_clean() ) );
+
+	// 3. Sản phẩm: tổng quan, key, vị trí, tiện ích, liên kết vùng.
+	ob_start();
+	$usp = $own( '_hh_sale_usp' ) ?: $lines( 'hh_p_highlights' );
+	if ( $usp ) {
+		echo '<h3>Key – điểm bán hàng chính</h3>' . $list( $usp ); // phpcs:ignore
+	}
+	echo '<h3>Tổng quan</h3>';
 	hh_sale_kv(
 		array(
-			'Chủ đầu tư'          => $m( 'hh_p_developer' ),
-			'Vị trí'              => $m( 'hh_p_address' ),
+			'Tên thương mại'      => $m( 'hh_p_name' ),
 			'Loại hình'           => $m( 'hh_p_type' ),
 			'Quy mô'              => $m( 'hh_p_scale' ),
+			'Mật độ xây dựng'     => $m( 'hh_p_density' ),
 			'Số tòa / số tầng'    => trim( $m( 'hh_p_blocks' ) . ( $m( 'hh_p_floors' ) ? ' · ' . $m( 'hh_p_floors' ) : '' ), ' ·' ),
 			'Tổng sản phẩm'       => $m( 'hh_p_units' ),
 			'Diện tích sản phẩm'  => $m( 'hh_p_unit_area' ),
-			'Đơn giá tham khảo'   => $m( 'hh_p_price_m2' ),
 			'Pháp lý'             => $m( 'hh_p_legal' ),
 			'Hình thức sở hữu'    => $m( 'hh_p_ownership' ),
 			'Khởi công'           => $m( 'hh_p_start' ),
 			'Bàn giao'            => $m( 'hh_p_handover' ),
 			'Tiêu chuẩn bàn giao' => $m( 'hh_p_handover_std' ),
-			'Nhà thầu'            => $m( 'hh_p_builder' ),
-			'Quản lý vận hành'    => $m( 'hh_p_manager' ),
 		)
 	);
-	echo '</div>';
-	// 3. Loại căn & giá.
-	ob_start();
-	$a = hh_sale_table( array( 'Loại căn', 'Diện tích', 'Phòng ngủ', 'Giá tham khảo' ), $tbl( 'hh_p_unit_types', 4 ) );
-	$b = hh_sale_table( array( 'Sản phẩm', 'Diện tích', 'Giá bán', 'Ghi chú' ), $tbl( 'hh_p_price_table', 4 ) );
-	$c = $m( 'hh_p_resale_price' ) || $m( 'hh_p_rent_price' );
-	if ( $c ) {
-		hh_sale_kv( array( 'Giá chuyển nhượng' => $m( 'hh_p_resale_price' ), 'Giá thuê' => $m( 'hh_p_rent_price' ) ) );
+	echo '<h3>Vị trí</h3>';
+	hh_sale_kv( array( 'Địa chỉ' => $m( 'hh_p_address' ), 'Mô tả vị trí' => wp_strip_all_tags( $m( 'hh_p_location_desc' ) ) ) );
+	if ( is_numeric( $m( 'hh_p_location_img' ) ) ) {
+		echo $imgs( array( (int) $m( 'hh_p_location_img' ) ) ); // phpcs:ignore
 	}
-	$html = ob_get_clean();
-	if ( $a || $b || $c ) {
-		echo '<div class="box"><h2>Sản phẩm & giá tham khảo</h2>' . $html . '</div>'; // phpcs:ignore
-	}
-	// 4. Chính sách hiện hành.
-	ob_start();
-	hh_sale_kv( array( 'Ưu đãi nổi bật' => $m( 'hh_p_offer_title' ), 'Áp dụng từ' => $m( 'hh_p_offer_start' ), 'Hạn ưu đãi' => $m( 'hh_p_offer_deadline' ), 'Ghi chú' => $m( 'hh_p_offer_note' ) ) );
-	$pol = $lines( 'hh_p_policy' );
-	if ( $pol ) {
-		echo '<ul class="l">';
-		foreach ( $pol as $l ) {
-			echo '<li>' . esc_html( $l ) . '</li>';
+	$conn = function_exists( 'hh_project_connections' ) ? hh_project_connections( $id ) : array( $tbl( 'hh_p_connections', 2 ), false );
+	if ( $conn[0] ) {
+		echo '<h3>Liên kết vùng</h3>';
+		hh_sale_table( array( 'Thời gian / khoảng cách', 'Địa điểm' ), $conn[0] );
+		if ( $conn[1] ) {
+			echo '<p class="note">Có mốc tham khảo theo khu vực – kiểm tra lại bằng Google Maps trước khi nói với khách.</p>';
 		}
-		echo '</ul>';
 	}
+	$ain = $lines( 'hh_p_amenities_in' );
+	$aout = function_exists( 'hh_project_nearby' ) ? hh_project_nearby( $id )[0] : $lines( 'hh_p_amenities_out' );
+	if ( $ain || $aout ) {
+		echo '<h3>Tiện ích</h3><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">' . ( $ain ? '<div><b>Nội khu</b>' . $list( $ain ) . '</div>' : '' ) . ( $aout ? '<div><b>Ngoại khu</b>' . $list( $aout ) . '</div>' : '' ) . '</div>'; // phpcs:ignore
+	}
+	echo $imgs( array_slice( function_exists( 'hh_ids' ) ? hh_ids( 'hh_p_amenities_img', $id ) : array(), 0, 6 ), 'medium_large' ); // phpcs:ignore
+	$sec[] = array( 'san-pham', 'Sản phẩm', trim( ob_get_clean() ) );
+
+	// 4. Mặt bằng.
+	ob_start();
+	if ( is_numeric( $m( 'hh_p_masterplan_img' ) ) ) {
+		echo '<h3>Mặt bằng tổng thể</h3>' . $imgs( array( (int) $m( 'hh_p_masterplan_img' ) ) ); // phpcs:ignore
+	}
+	$fp = function_exists( 'hh_ids' ) ? hh_ids( 'hh_p_floorplans', $id ) : array();
+	if ( $fp ) {
+		echo '<h3>Mặt bằng tầng</h3>' . $imgs( array_slice( $fp, 0, 12 ) ); // phpcs:ignore
+	}
+	if ( $m( 'hh_p_design_desc' ) ) {
+		echo '<p>' . esc_html( wp_strip_all_tags( $m( 'hh_p_design_desc' ) ) ) . '</p>';
+	}
+	if ( $tbl( 'hh_p_unit_types', 4 ) ) {
+		echo '<h3>Các loại căn</h3>';
+		hh_sale_table( array( 'Loại căn', 'Diện tích', 'Phòng ngủ', 'Giá tham khảo' ), $tbl( 'hh_p_unit_types', 4 ) );
+	}
+	$ul = function_exists( 'hh_ids' ) ? hh_ids( 'hh_p_unit_layouts', $id ) : array();
+	if ( $ul ) {
+		echo '<h3>Layout căn</h3>' . $imgs( array_slice( $ul, 0, 12 ), 'medium_large' ); // phpcs:ignore
+	}
+	if ( $own( '_hh_sale_floor_read' ) ) {
+		echo '<h3>Đọc mặt bằng dự án này</h3>' . $list( $own( '_hh_sale_floor_read' ) ); // phpcs:ignore
+	}
+	if ( $own( '_hh_sale_best_price' ) ) {
+		echo '<h3>Căn / loại căn giá tốt</h3>' . $list( $own( '_hh_sale_best_price' ) ); // phpcs:ignore
+	}
+	if ( $own( '_hh_sale_invest' ) ) {
+		echo '<h3>Căn có khả năng đầu tư tốt</h3>' . $list( $own( '_hh_sale_invest' ) ); // phpcs:ignore
+	}
+	echo '<details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Cách đọc mặt bằng (áp dụng mọi dự án)</summary>' . hh_sale_floor_guide() . '</details>'; // phpcs:ignore
+	$sec[] = array( 'mat-bang', 'Mặt bằng', trim( ob_get_clean() ) );
+
+	// 5. Giá & chính sách.
+	ob_start();
+	$b = hh_sale_table( array( 'Sản phẩm', 'Diện tích', 'Giá bán', 'Ghi chú' ), $tbl( 'hh_p_price_table', 4 ) );
+	if ( $m( 'hh_p_price_example' ) ) {
+		echo '<p class="note">' . esc_html( $m( 'hh_p_price_example' ) ) . '</p>';
+	}
+	hh_sale_kv( array( 'Đơn giá tham khảo' => $m( 'hh_p_price_m2' ), 'Ưu đãi nổi bật' => $m( 'hh_p_offer_title' ), 'Áp dụng từ' => $m( 'hh_p_offer_start' ), 'Hạn ưu đãi' => $m( 'hh_p_offer_deadline' ), 'Ghi chú' => $m( 'hh_p_offer_note' ) ) );
+	echo $list( $lines( 'hh_p_policy' ) ); // phpcs:ignore
 	hh_sale_table( array( 'Phương án', 'Hạn thanh toán', 'Chiết khấu', 'Cách tính' ), $tbl( 'hh_p_discount_table', 4 ) );
-	hh_sale_table( array( 'Đợt', 'Thời điểm', 'Tỷ lệ' ), $tbl( 'hh_p_payment', 3 ) );
+	if ( $tbl( 'hh_p_payment', 3 ) ) {
+		echo '<h3>Lịch thanh toán</h3>';
+		hh_sale_table( array( 'Đợt', 'Thời điểm', 'Tỷ lệ' ), $tbl( 'hh_p_payment', 3 ) );
+	}
+	if ( $tbl( 'hh_p_capital_table', 3 ) ) {
+		echo '<h3>Vốn tự có theo loại căn</h3>';
+		hh_sale_table( array( 'Loại căn', 'Vốn tự có', 'Ghi chú' ), $tbl( 'hh_p_capital_table', 3 ) );
+	}
 	if ( $m( 'hh_p_loan' ) || $m( 'hh_p_loan_bank' ) ) {
-		hh_sale_kv( array( 'Hỗ trợ vay' => $m( 'hh_p_loan' ), 'Ngân hàng' => $m( 'hh_p_loan_bank' ), 'Tỷ lệ vay tối đa' => $m( 'hh_p_loan_ratio' ) ? $m( 'hh_p_loan_ratio' ) . '%' : '', 'Hỗ trợ lãi 0%' => $m( 'hh_p_loan_zero_months' ) ? $m( 'hh_p_loan_zero_months' ) . ' tháng' : '' ) );
+		echo '<h3>Vay ngân hàng</h3>';
+		hh_sale_kv( array( 'Hỗ trợ vay' => $m( 'hh_p_loan' ), 'Ngân hàng' => $m( 'hh_p_loan_bank' ), 'Tỷ lệ vay tối đa' => $m( 'hh_p_loan_ratio' ) ? $m( 'hh_p_loan_ratio' ) . '%' : '', 'Thời hạn vay' => $m( 'hh_p_loan_years' ) ? $m( 'hh_p_loan_years' ) . ' năm' : '', 'Hỗ trợ lãi 0%' => $m( 'hh_p_loan_zero_months' ) ? $m( 'hh_p_loan_zero_months' ) . ' tháng' : '', 'Ân hạn nợ gốc' => $m( 'hh_p_loan_grace' ) ? $m( 'hh_p_loan_grace' ) . ' tháng' : '' ) );
 	}
 	if ( $m( 'hh_p_rental' ) ) {
-		hh_sale_kv( array( 'Chương trình cho thuê' => $m( 'hh_p_rental' ) ) );
+		echo '<h3>Chương trình cho thuê</h3><p>' . esc_html( wp_strip_all_tags( $m( 'hh_p_rental' ) ) ) . '</p>';
 	}
-	$html = trim( ob_get_clean() );
-	if ( $html ) {
-		echo '<div class="box"><h2>Chính sách bán hàng hiện hành</h2>' . $html . '<p class="note">Đối chiếu văn bản chính sách mới nhất của chủ đầu tư trước khi báo khách.</p></div>'; // phpcs:ignore
-	}
-	// 5. Câu hỏi khách hay hỏi.
+	$h = trim( ob_get_clean() );
+	$sec[] = array( 'chinh-sach', 'Giá & chính sách', $h ? $h . '<p class="note">Đối chiếu văn bản chính sách / phiếu tính giá mới nhất của chủ đầu tư trước khi báo khách.</p>' : '' );
+
+	// 6. Tiến độ.
+	ob_start();
+	$prog = array_slice( array_reverse( $tbl( 'hh_p_progress', 2 ) ), 0, 8 );
+	hh_sale_table( array( 'Thời gian', 'Nội dung' ), $prog );
+	echo $imgs( array_slice( function_exists( 'hh_ids' ) ? array_reverse( hh_ids( 'hh_p_progress_gallery', $id ) ) : array(), 0, 6 ), 'medium_large' ); // phpcs:ignore
+	$sec[] = array( 'tien-do', 'Tiến độ', trim( ob_get_clean() ) );
+
+	// 7. Q&A.
+	ob_start();
 	$faq = hh_sale_pairs( $m( '_hh_sale_faq' ) );
 	if ( $faq ) {
-		echo '<div class="box"><h2>Khách hay hỏi – cách trả lời</h2><dl class="faq">';
+		echo '<dl class="faq">';
 		foreach ( $faq as $q ) {
 			echo '<dt>' . esc_html( $q[0] ) . '</dt><dd>' . esc_html( $q[1] ) . '</dd>';
 		}
-		echo '</dl></div>';
+		echo '</dl>';
 	}
-	// 6. Lưu ý khi tư vấn.
 	if ( $m( '_hh_sale_notes' ) ) {
-		echo '<div class="box warn"><h2>Lưu ý khi tư vấn</h2>' . wpautop( esc_html( $m( '_hh_sale_notes' ) ) ) . '</div>'; // phpcs:ignore
+		echo '<div class="box warn" style="margin-top:12px"><b>Lưu ý khi tư vấn</b>' . wpautop( esc_html( $m( '_hh_sale_notes' ) ) ) . '</div>'; // phpcs:ignore
 	}
-	// 7. Tiến độ.
-	$prog = array_slice( array_reverse( $tbl( 'hh_p_progress', 2 ) ), 0, 6 );
-	if ( $prog ) {
-		echo '<div class="box"><h2>Tiến độ mới nhất</h2>';
-		hh_sale_table( array( 'Thời gian', 'Nội dung' ), $prog );
-		echo '</div>';
-	}
+	$h = trim( ob_get_clean() );
+	$sec[] = array( 'hoi-dap', 'Q&A khách hay hỏi', $h ?: '<p class="note">Chưa có Q&A – anh Hiệp thêm ở khung "Dành cho sale" (mỗi dòng: Câu hỏi | Trả lời).</p>' );
+
 	// 8. Tài liệu.
+	ob_start();
 	$docs  = hh_sale_docs_for( $id );
 	$links = hh_sale_pairs( $m( '_hh_sale_links' ) );
-	if ( $docs || $links || $m( 'hh_p_pricelist_url' ) ) {
-		echo '<div class="box"><h2>Tài liệu dự án</h2>';
-		hh_sale_docs_list( $docs );
-		if ( $links || $m( 'hh_p_pricelist_url' ) ) {
-			echo '<ul class="l">';
-			foreach ( $links as $l ) {
-				$url = $l[1] ?: $l[0];
-				printf( '<li><a href="%s" target="_blank" rel="noopener">%s</a></li>', esc_url( $url ), esc_html( $l[1] ? $l[0] : $url ) );
-			}
-			if ( $m( 'hh_p_pricelist_url' ) ) {
-				printf( '<li><a href="%s" target="_blank" rel="noopener">Bảng giá / brochure (link trên trang dự án)</a></li>', esc_url( $m( 'hh_p_pricelist_url' ) ) );
-			}
-			echo '</ul>';
+	hh_sale_docs_list( $docs );
+	if ( $links || $m( 'hh_p_pricelist_url' ) ) {
+		echo '<ul class="l">';
+		foreach ( $links as $l ) {
+			$url = $l[1] ?: $l[0];
+			printf( '<li><a href="%s" target="_blank" rel="noopener">%s</a></li>', esc_url( $url ), esc_html( $l[1] ? $l[0] : $url ) );
 		}
-		echo '</div>';
+		if ( $m( 'hh_p_pricelist_url' ) ) {
+			printf( '<li><a href="%s" target="_blank" rel="noopener">Bảng giá / brochure (link trên trang dự án)</a></li>', esc_url( $m( 'hh_p_pricelist_url' ) ) );
+		}
+		echo '</ul>';
 	}
+	$sec[] = array( 'tai-lieu', 'Tài liệu', trim( ob_get_clean() ) );
+
+	$sec = array_values( array_filter( $sec, static fn( $s ) => '' !== $s[2] ) );
+
+	// Khung trang.
+	echo '<p style="margin:16px 0 0"><a href="' . esc_url( hh_sale_url( 'du-an' ) ) . '">← Danh sách dự án</a></p>';
+	$cov = get_the_post_thumbnail_url( $p, '1536x1536' ) ?: get_the_post_thumbnail_url( $p, 'large' );
+	echo '<section class="cover"' . ( $cov ? ' style="background-image:url(\'' . esc_url( $cov ) . '\')"' : '' ) . '><div><h1>' . esc_html( $title ) . '</h1><p>' . ( $st ? '<span class="pill o">' . esc_html( $st ) . '</span> ' : '' ) . ( $m( 'hh_p_developer' ) ? esc_html( $m( 'hh_p_developer' ) ) . ' · ' : '' ) . 'Cập nhật ' . esc_html( get_the_modified_date( 'd/m/Y', $p ) ) . ' · <a href="' . esc_url( get_permalink( $p ) ) . '" target="_blank" rel="noopener">Trang khách xem ↗</a></p></div></section>';
+	echo '<nav class="toc">';
+	foreach ( $sec as $i => $s ) {
+		echo '<a href="#' . esc_attr( $s[0] ) . '">' . (int) ( $i + 1 ) . '. ' . esc_html( $s[1] ) . '</a>';
+	}
+	echo '<a href="#kiem-tra" class="hl">' . (int) ( count( $sec ) + 1 ) . '. Câu hỏi kiểm tra</a></nav>';
+	foreach ( $sec as $i => $s ) {
+		echo '<div class="box chap" id="' . esc_attr( $s[0] ) . '"><h2><span class="num">' . (int) ( $i + 1 ) . '</span>' . esc_html( $s[1] ) . '</h2>' . $s[2] . '</div>'; // phpcs:ignore
+	}
+	echo '<div id="kiem-tra"></div>';
 	do_action( 'hh_sale_project_bottom', $p->post_name );
 	return $title;
+}
+
+/** Hướng dẫn đọc mặt bằng – dùng chung mọi dự án. */
+function hh_sale_floor_guide() {
+	return '<ol class="l" style="margin-top:8px">'
+		. '<li><b>Tìm hướng Bắc và hướng view</b> trên bản vẽ: căn hướng biển / sông / công viên thường giá cao hơn căn nhìn vào tòa khác. Ở Đà Nẵng, hướng Đông – Đông Nam đón gió biển, mát; hướng Tây nắng chiều.</li>'
+		. '<li><b>Căn góc</b> có 2 mặt thoáng, nhiều ánh sáng, view rộng → thường giá cao hơn và dễ bán lại / cho thuê hơn.</li>'
+		. '<li><b>Vị trí so với lõi thang</b>: căn sát thang máy, phòng rác, phòng kỹ thuật dễ ồn; căn cuối hành lang yên tĩnh hơn.</li>'
+		. '<li><b>Diện tích thông thủy</b> (ghi trong hợp đồng, sổ) nhỏ hơn diện tích tim tường – so giá theo cùng một loại diện tích.</li>'
+		. '<li><b>Công năng</b>: phòng ngủ có cửa sổ trực tiếp, ít diện tích hành lang, bếp – vệ sinh thông thoáng, ban công / logia đủ phơi đồ.</li>'
+		. '<li><b>Tầng</b>: tầng cao view xa, yên tĩnh, giá cao hơn; tầng thấp – trung giá mềm, đi lại nhanh, hợp gia đình có người già, trẻ nhỏ. Tầng cao nhất cần hỏi chống nóng, chống thấm.</li>'
+		. '<li><b>Căn đầu tư cho thuê</b>: ưu tiên diện tích nhỏ (studio, 1PN) – tổng tiền thấp, dễ cho thuê; view đẹp và gần tiện ích giúp giá thuê cao hơn.</li>'
+		. '<li><b>Căn giá tốt</b>: so đơn giá/m² giữa các căn cùng loại – căn tầng thấp, view phụ, chính sách chiết khấu cao thường có đơn giá thấp nhất; báo khách cả ưu và nhược điểm.</li>'
+		. '</ol>';
 }
 
 /* =========================================================================
@@ -586,8 +753,13 @@ add_action(
 			static function ( $post ) {
 				wp_nonce_field( 'hh_sale_box', 'hh_sale_box_nonce' );
 				$f = array(
-					'_hh_sale_usp'   => array( 'Điểm bán hàng chính (mỗi dòng 1 ý)', 'Vị trí mặt biển, 300 m ra bãi tắm…' ),
-					'_hh_sale_faq'   => array( 'Khách hay hỏi – cách trả lời (mỗi dòng: Câu hỏi | Trả lời)', "Có sổ hồng không? | Sở hữu lâu dài với khách Việt Nam, cấp sổ sau bàn giao…\nVay được bao nhiêu? | Ngân hàng … cho vay tới 70%…" ),
+					'_hh_sale_market'     => array( '1. Thị trường – nhận định, đối thủ cạnh tranh, giá khu vực (mỗi dòng 1 ý)', 'Giá căn hộ ven biển Ngũ Hành Sơn 2026 khoảng …; dự án cạnh tranh: … – mình hơn ở …' ),
+					'_hh_sale_developer'  => array( '2. Chủ đầu tư – điểm cần nói với khách (mỗi dòng 1 ý)', 'Đã bàn giao … dự án tại Đà Nẵng đúng hẹn…' ),
+					'_hh_sale_usp'   => array( '3. Key – điểm bán hàng chính (mỗi dòng 1 ý)', 'Vị trí mặt biển, 300 m ra bãi tắm…' ),
+					'_hh_sale_floor_read' => array( '4a. Đọc mặt bằng dự án này (mỗi dòng 1 ý)', 'Trục căn 01, 08 là căn góc view biển; trục 05 sát thang…' ),
+					'_hh_sale_best_price' => array( '4b. Căn / loại căn giá tốt (mỗi dòng 1 ý)', 'Căn 1PN tầng 5 – 9 view nội khu đơn giá thấp nhất…' ),
+					'_hh_sale_invest'     => array( '4c. Căn có khả năng đầu tư tốt (mỗi dòng 1 ý, kèm lý do)', 'Studio hướng biển: tổng tiền thấp, dễ cho thuê ngắn ngày…' ),
+					'_hh_sale_faq'   => array( '7. Q&A – khách hay hỏi, cách trả lời (mỗi dòng: Câu hỏi | Trả lời) – tự thành câu hỏi kiểm tra', "Có sổ hồng không? | Sở hữu lâu dài với khách Việt Nam, cấp sổ sau bàn giao…\nVay được bao nhiêu? | Ngân hàng … cho vay tới 70%…" ),
 					'_hh_sale_notes' => array( 'Lưu ý khi tư vấn (điều không được nói, cách xử lý từ chối…)', '' ),
 					'_hh_sale_links' => array( 'Link tài liệu nội bộ (mỗi dòng: Tên | link Google Drive…)', 'Bảng hàng tháng 11 | https://drive.google.com/…' ),
 				);
@@ -608,7 +780,7 @@ add_action(
 		if ( ! isset( $_POST['hh_sale_box_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['hh_sale_box_nonce'] ), 'hh_sale_box' ) || ! current_user_can( 'edit_post', $post_id ) || wp_is_post_revision( $post_id ) ) {
 			return;
 		}
-		foreach ( array( '_hh_sale_usp', '_hh_sale_faq', '_hh_sale_notes', '_hh_sale_links' ) as $k ) {
+		foreach ( array( '_hh_sale_market', '_hh_sale_developer', '_hh_sale_usp', '_hh_sale_floor_read', '_hh_sale_best_price', '_hh_sale_invest', '_hh_sale_faq', '_hh_sale_notes', '_hh_sale_links' ) as $k ) {
 			update_post_meta( $post_id, $k, sanitize_textarea_field( wp_unslash( $_POST[ $k ] ?? '' ) ) );
 		}
 	}

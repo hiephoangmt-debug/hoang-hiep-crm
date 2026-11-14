@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.30** + plugin Hoàng Hiệp CRM **2.20.267**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.30** + plugin Hoàng Hiệp CRM **2.20.268**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.268 (14/11/2026) – Học dự án theo giáo trình
+
+- **Trang Học dự án** chia thành các phần có mục lục bấm nhảy nhanh: 1. **Thị trường** (nhận định anh Hiệp, giá chuyển nhượng / thuê, giá khu vực theo ngày, dự án cùng khu để so sánh đơn giá) · 2. **Chủ đầu tư** (nhà thầu, thiết kế, vận hành, hồ sơ chủ đầu tư trên web: thông tin, giới thiệu, dự án khác, lưu ý cho người mua) · 3. **Sản phẩm** (key – điểm bán hàng, tổng quan, vị trí, liên kết vùng, tiện ích nội – ngoại khu, ảnh) · 4. **Mặt bằng** (tổng thể, tầng, loại căn, layout, đọc mặt bằng dự án, căn giá tốt, căn đầu tư tốt, hướng dẫn đọc mặt bằng chung) · 5. **Giá & chính sách** · 6. **Tiến độ** · 7. **Q&A** · 8. **Tài liệu** · 9. **Câu hỏi kiểm tra**.
+- **Khung "Dành cho sale"** trong trang sửa dự án thêm ô: Thị trường, Chủ đầu tư, Đọc mặt bằng dự án này, Căn giá tốt, Căn đầu tư tốt.
+- **Câu hỏi kiểm tra** thêm loại mới tự sinh: thời gian di chuyển (liên kết vùng), tiện ích nội khu, diện tích từng loại căn, nhà thầu, hỏi đáp về chủ đầu tư (từ hồ sơ chủ đầu tư); đáp án nhiễu trùng nghĩa tự loại.
+- Bài học mới: **Học một dự án theo 7 phần**, **Đọc mặt bằng và chọn căn giá tốt, đầu tư tốt** + 6 câu kiểm tra về đọc mặt bằng.
 
 ## Có gì mới – 2.20.267 (14/11/2026) – Khu Sale: Đào tạo & Kiểm tra
 

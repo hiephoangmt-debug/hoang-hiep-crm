@@ -145,6 +145,28 @@ HTML
 <p class="note">Mẫu bài, ảnh: xem tab Tài liệu → nhóm "Mẫu bài đăng".</p>
 HTML
 		),
+		'hoc-mot-du-an' => array(
+			'Học một dự án theo 7 phần',
+			'Bắt đầu từ đây',
+			<<<HTML
+<p>Mỗi dự án trong tab <b>Học dự án</b> được trình bày theo đúng thứ tự một buổi tư vấn – học hết 7 phần là đủ tự tin nói chuyện với khách.</p>
+<ol>
+<li><b>Thị trường</b> – giá khu vực, giá chuyển nhượng / cho thuê, dự án cạnh tranh cùng khu, nhận định của anh Hiệp. Mục tiêu: trả lời được "Giá này đắt hay rẻ so với xung quanh?".</li>
+<li><b>Chủ đầu tư</b> – là ai, đã làm gì ở Đà Nẵng, nhà thầu, đơn vị vận hành, điều người mua cần lưu ý. Mục tiêu: tạo niềm tin.</li>
+<li><b>Sản phẩm</b> – key (điểm bán hàng), tổng quan, vị trí, liên kết vùng, tiện ích nội – ngoại khu. Mục tiêu: nói được 3 lý do nên mua trong 30 giây.</li>
+<li><b>Mặt bằng</b> – mặt bằng tổng thể, tầng, layout căn, cách đọc mặt bằng, căn giá tốt, căn đầu tư tốt. Mục tiêu: chọn đúng căn cho đúng khách.</li>
+<li><b>Giá & chính sách</b> – bảng giá tham khảo, ưu đãi, chiết khấu, lịch thanh toán, vốn tự có, vay ngân hàng. Mục tiêu: báo được tổng tiền và số tiền trả hằng tháng.</li>
+<li><b>Tiến độ</b> – mốc thi công mới nhất, ảnh công trường.</li>
+<li><b>Q&A</b> – câu khách hay hỏi và cách trả lời, lưu ý khi tư vấn.</li>
+</ol>
+<p>Học xong bấm <b>Kiểm tra dự án này</b> ở cuối trang: câu hỏi lấy từ chính 7 phần trên, đổi mỗi lượt.</p>
+HTML
+		),
+		'doc-mat-bang-chon-can' => array(
+			'Đọc mặt bằng và chọn căn giá tốt, đầu tư tốt',
+			'Kỹ năng bán hàng',
+			'<p>Mặt bằng là "bản đồ" của dự án. Đọc đúng giúp chọn căn hợp nhu cầu và giải thích được vì sao căn này đắt / rẻ hơn căn kia.</p>' . ( function_exists( 'hh_sale_floor_guide' ) ? hh_sale_floor_guide() : '' ) . '<h3>Ghép căn theo nhu cầu khách</h3><table><tr><th>Khách</th><th>Gợi ý</th></tr><tr><td>Gia đình ở lâu dài</td><td>2PN – 3PN, căn góc / hướng mát, tầng trung, gần tiện ích trẻ em</td></tr><tr><td>Đầu tư cho thuê</td><td>Studio, 1PN, view đẹp, tổng tiền thấp, gần biển / trung tâm</td></tr><tr><td>Đầu tư lướt sóng</td><td>Căn có đơn giá thấp nhất cùng loại, chiết khấu thanh toán sớm cao, dự án đang thi công tốt</td></tr><tr><td>Mua để nghỉ dưỡng</td><td>View biển / sông trực diện, tầng cao, căn góc</td></tr></table><p class="note">Mỗi dự án có thêm mục "Đọc mặt bằng dự án này", "Căn giá tốt", "Căn đầu tư tốt" do anh Hiệp cập nhật trong phần Mặt bằng.</p>',
+		),
 		'dung-khu-sale-va-web' => array(
 			'Dùng khu Sale và website hiệu quả',
 			'Bắt đầu từ đây',
@@ -199,6 +221,12 @@ function hh_sale_core_questions() {
 		array( 'Căn hộ thương mại dịch vụ (TMDV) khác chung cư ở điểm nào?', 'Xây trên đất thương mại dịch vụ, thời hạn theo dự án (thường 50 năm)', array( 'Luôn sở hữu lâu dài', 'Không được cấp sổ', 'Chỉ dành cho người nước ngoài' ), 'Căn hộ TMDV / du lịch xây trên đất thương mại dịch vụ; thời hạn theo dự án.', $n ),
 		array( 'Sun Saphia Residence có bán cho người nước ngoài không?', 'Không', array( 'Có, không giới hạn', 'Có, tối đa 30%', 'Chỉ bán cho người nước ngoài' ), 'Sun Saphia Residence là căn hộ TMDV và không bán cho người nước ngoài.', $n ),
 		array( 'Khách nước ngoài thanh toán mua nhà thế nào?', 'Qua tài khoản tại ngân hàng được phép hoạt động ở Việt Nam', array( 'Tiền mặt ngoại tệ', 'Chuyển khoản cho cá nhân môi giới', 'Ví điện tử nước ngoài' ), 'Giao dịch mua nhà của người nước ngoài thực hiện qua tổ chức tín dụng tại Việt Nam.', $n ),
+		array( 'Căn góc trên mặt bằng thường có ưu điểm gì?', 'Hai mặt thoáng, nhiều ánh sáng, view rộng', array( 'Luôn rẻ nhất tầng', 'Gần thang máy nhất', 'Diện tích thông thủy lớn gấp đôi' ), 'Căn góc có 2 mặt thoáng nên thường giá cao hơn và dễ bán lại, cho thuê.', 'doc-mat-bang-chon-can' ),
+		array( 'Ở Đà Nẵng, hướng căn nào thường được ưa chuộng vì mát, đón gió biển?', 'Đông – Đông Nam', array( 'Tây', 'Tây Bắc', 'Hướng nào cũng như nhau' ), 'Hướng Đông – Đông Nam đón gió biển; hướng Tây nắng chiều.', 'doc-mat-bang-chon-can' ),
+		array( 'Khách đầu tư cho thuê, nên ưu tiên loại căn nào?', 'Studio, 1PN – tổng tiền thấp, dễ cho thuê', array( 'Penthouse lớn nhất', 'Căn 4PN tầng thấp', 'Căn sát phòng rác cho rẻ' ), 'Căn nhỏ, view đẹp, gần tiện ích cho tỷ suất cho thuê tốt.', 'doc-mat-bang-chon-can' ),
+		array( 'Muốn biết căn nào "giá tốt" trong cùng loại, so sánh theo chỉ số nào?', 'Đơn giá/m² cùng loại diện tích (thông thủy)', array( 'Tổng tiền bất kể diện tích', 'Số tầng', 'Màu sắc nội thất' ), 'So đơn giá/m² trên cùng loại diện tích mới công bằng; báo khách cả ưu, nhược điểm.', 'doc-mat-bang-chon-can' ),
+		array( 'Căn sát thang máy, phòng rác thường có nhược điểm gì?', 'Dễ ồn, nhiều người qua lại', array( 'Không có cửa sổ', 'Không được cấp sổ', 'Không vay được ngân hàng' ), 'Căn cuối hành lang yên tĩnh hơn – nhắc khách khi chọn căn.', 'doc-mat-bang-chon-can' ),
+		array( 'Thứ tự học một dự án trong khu Sale là gì?', 'Thị trường → Chủ đầu tư → Sản phẩm → Mặt bằng → Chính sách → Tiến độ → Q&A', array( 'Chính sách → Q&A → hết', 'Chỉ cần đọc bảng giá', 'Tiến độ → Tài liệu → Thị trường' ), 'Học theo thứ tự một buổi tư vấn, cuối cùng làm bài Kiểm tra dự án này.', 'hoc-mot-du-an' ),
 		array( 'Khách mới để lại số trên web, nên gọi trong bao lâu?', 'Trong 15 phút', array( 'Cuối ngày gọi một lượt', 'Sau 24 giờ cho khách suy nghĩ', 'Chờ khách nhắn trước' ), 'Gọi càng nhanh tỷ lệ chốt càng cao – quy chuẩn của đội là 15 phút.', $q ),
 		array( 'Câu hỏi nhu cầu nào nên hỏi đầu tiên?', 'Mua để ở hay đầu tư / cho thuê', array( 'Anh/chị làm nghề gì', 'Anh/chị đã xem dự án nào khác', 'Anh/chị có quen ai ở chủ đầu tư' ), 'Mục đích mua quyết định loại căn, vị trí và cách tư vấn.', $q ),
 		array( 'Khi khách hỏi, nên gửi bao nhiêu lựa chọn căn?', '1–2 lựa chọn hợp nhất', array( 'Toàn bộ giỏ hàng', 'Không gửi, chờ khách xuống dự án', '10 căn rẻ nhất' ), 'Gửi ít nhưng trúng nhu cầu để khách dễ quyết định.', $q ),
@@ -341,7 +369,21 @@ function hh_sale_project_facts() {
 			'floors'    => $cut( $g( 'hh_p_floors' ), 50 ),
 			'offer'     => $cut( $g( 'hh_p_offer_title' ), 100 ),
 			'faq'       => function_exists( 'hh_sale_pairs' ) ? hh_sale_pairs( (string) get_post_meta( $id, '_hh_sale_faq', true ) ) : array(),
+			'builder'   => $cut( $g( 'hh_p_builder' ), 70 ),
+			'conn'      => function_exists( 'hh_project_connections' ) ? array_values( array_filter( hh_project_connections( $id )[0], static fn( $r ) => '' !== $r[0] && '' !== $r[1] ) ) : array(),
+			'amen'      => function_exists( 'hh_lines' ) ? array_map( static fn( $x ) => $cut( $x, 80 ), hh_lines( 'hh_p_amenities_in', $id ) ) : array(),
+			'types'     => function_exists( 'hh_table' ) ? array_values( array_filter( hh_table( 'hh_p_unit_types', 4, $id ), static fn( $r ) => '' !== $r[0] && '' !== $r[1] ) ) : array(),
+			'cdt_faq'   => array(),
 		);
+		if ( function_exists( 'hh_cdt_match' ) ) {
+			foreach ( hh_cdt_match( (string) get_post_meta( $id, 'hh_p_developer', true ) ) as $cs ) {
+				foreach ( (array) ( hh_cdt_all()[ $cs ]['faq'] ?? array() ) as $fq ) {
+					if ( ! empty( $fq[0] ) && ! empty( $fq[1] ) ) {
+						$f['cdt_faq'][] = array( wp_strip_all_tags( $fq[0] ), $cut( wp_strip_all_tags( $fq[1] ), 160 ), hh_cdt_all()[ $cs ]['name'] );
+					}
+				}
+			}
+		}
 		$facts[ $id ] = $f;
 	}
 	return $facts;
@@ -358,8 +400,24 @@ function hh_sale_same( $a, $b ) {
 	return $a === $b || false !== strpos( $a, $b ) || false !== strpos( $b, $a );
 }
 
+/** Bỏ các đáp án nhiễu trùng nghĩa nhau (giữ cái đầu). */
+function hh_sale_distinct( $list ) {
+	$out = array();
+	foreach ( $list as $v ) {
+		$dup = false;
+		foreach ( $out as $o ) {
+			$dup = $dup || hh_sale_same( $o, $v );
+		}
+		if ( ! $dup ) {
+			$out[] = $v;
+		}
+	}
+	return $out;
+}
+
 /** Một câu tự sinh cho dự án $f, loại $kind. Trả về null nếu không đủ dữ liệu / không đủ đáp án nhiễu. */
 function hh_sale_gen_question( $f, $kind, $facts ) {
+	$link = hh_sale_url( 'du-an/' . $f['slug'] );
 	$labels = array(
 		'developer' => array( 'Chủ đầu tư của dự án %s là ai?', 'Chủ đầu tư' ),
 		'address'   => array( 'Dự án %s nằm ở đâu?', 'Địa chỉ' ),
@@ -369,8 +427,80 @@ function hh_sale_gen_question( $f, $kind, $facts ) {
 		'units'     => array( 'Dự án %s có tổng bao nhiêu sản phẩm?', 'Tổng sản phẩm' ),
 		'floors'    => array( 'Dự án %s cao bao nhiêu tầng?', 'Số tầng' ),
 		'offer'     => array( 'Ưu đãi nổi bật hiện tại của %s là gì?', 'Ưu đãi nổi bật' ),
+		'builder'   => array( 'Nhà thầu thi công của %s là ai?', 'Nhà thầu thi công' ),
 	);
-	$link = hh_sale_url( 'du-an/' . $f['slug'] );
+	$pickfrom = static function ( $all, $right, $n = 3 ) {
+		$all = array_values( array_unique( array_filter( $all, static fn( $v ) => '' !== $v && ! hh_sale_same( $v, $right ) ) ) );
+		shuffle( $all );
+		$all = hh_sale_distinct( $all );
+		return count( $all ) >= $n ? array_slice( $all, 0, $n ) : null;
+	};
+	if ( 'conn' === $kind && $f['conn'] ) {
+		$r     = $f['conn'][ array_rand( $f['conn'] ) ];
+		$other = array();
+		foreach ( $facts as $o ) {
+			foreach ( $o['conn'] as $x ) {
+				$other[] = $x[0];
+			}
+		}
+		$w = $pickfrom( $other, $r[0] );
+		return $w ? array( 'Từ ' . $f['title'] . ' đến ' . $r[1] . ' mất khoảng bao lâu / bao xa?', $r[0], $w, 'Liên kết vùng của ' . $f['title'] . ': ' . $r[0] . ' tới ' . $r[1] . '.', $link . '#san-pham', $f['title'] ) : null;
+	}
+	if ( 'amen' === $kind && count( $f['amen'] ) >= 2 ) {
+		$r     = $f['amen'][ array_rand( $f['amen'] ) ];
+		$other = array();
+		foreach ( $facts as $o ) {
+			if ( $o['id'] === $f['id'] ) {
+				continue;
+			}
+			foreach ( $o['amen'] as $x ) {
+				$in = false;
+				foreach ( $f['amen'] as $mine ) {
+					$in = $in || hh_sale_same( $mine, $x );
+				}
+				if ( ! $in ) {
+					$other[] = $x;
+				}
+			}
+		}
+		$w = $pickfrom( $other, $r );
+		return $w ? array( 'Tiện ích nội khu nào dưới đây CÓ ở ' . $f['title'] . '?', $r, $w, 'Tiện ích nội khu của ' . $f['title'] . ' gồm: ' . implode( '; ', array_slice( $f['amen'], 0, 6 ) ) . '.', $link . '#san-pham', $f['title'] ) : null;
+	}
+	if ( 'types' === $kind && $f['types'] ) {
+		$r     = $f['types'][ array_rand( $f['types'] ) ];
+		$other = array();
+		foreach ( $facts as $o ) {
+			foreach ( $o['types'] as $x ) {
+				$other[] = $x[1];
+			}
+		}
+		$w = $pickfrom( $other, $r[1] );
+		return $w ? array( 'Loại căn "' . $r[0] . '" của ' . $f['title'] . ' có diện tích khoảng bao nhiêu?', $r[1], $w, $f['title'] . ' – ' . $r[0] . ': ' . $r[1] . ( $r[3] ? ', giá tham khảo ' . $r[3] : '' ) . '.', $link . '#mat-bang', $f['title'] ) : null;
+	}
+	if ( 'cdt_faq' === $kind && $f['cdt_faq'] ) {
+		$r     = $f['cdt_faq'][ array_rand( $f['cdt_faq'] ) ];
+		$same  = array();
+		$other = array();
+		foreach ( $f['cdt_faq'] as $x ) {
+			if ( $x[0] !== $r[0] && $x[2] === $r[2] ) {
+				$same[] = $x[1];
+			}
+		}
+		foreach ( $facts as $o ) {
+			foreach ( $o['cdt_faq'] as $x ) {
+				if ( $x[2] !== $r[2] ) {
+					$other[] = $x[1];
+				}
+			}
+		}
+		shuffle( $same );
+		shuffle( $other );
+		$w = $pickfrom( array_merge( $same, $other ), $r[1] );
+		if ( $w && $same ) {
+			$w = array_slice( hh_sale_distinct( array_merge( array_filter( $same, static fn( $v ) => ! hh_sale_same( $v, $r[1] ) ), $w ) ), 0, 3 );
+		}
+		return $w ? array( 'Khách hỏi về chủ đầu tư ' . $r[2] . ': "' . $r[0] . '" – trả lời đúng là?', $r[1], $w, 'Theo hồ sơ chủ đầu tư ' . $r[2] . ' trên web.', $link . '#chu-dau-tu', 'Chủ đầu tư ' . $r[2] ) : null;
+	}
 	if ( 'faq' === $kind ) {
 		if ( ! $f['faq'] ) {
 			return null;
@@ -419,11 +549,13 @@ function hh_sale_gen_question( $f, $kind, $facts ) {
 		}
 	}
 	$wrong = array_keys( $wrong );
+	shuffle( $wrong );
+	$wrong = hh_sale_distinct( $wrong );
 	if ( count( $wrong ) < 3 ) {
 		return null;
 	}
-	shuffle( $wrong );
-	return array( sprintf( $labels[ $kind ][0], $f['title'] ), $f[ $kind ], array_slice( $wrong, 0, 3 ), $labels[ $kind ][1] . ' của ' . $f['title'] . ': ' . $f[ $kind ] . '.', $link, $f['title'] );
+	$anc = array( 'developer' => '#chu-dau-tu', 'builder' => '#chu-dau-tu', 'price_m2' => '#chinh-sach', 'offer' => '#chinh-sach' );
+	return array( sprintf( $labels[ $kind ][0], $f['title'] ), $f[ $kind ], array_slice( $wrong, 0, 3 ), $labels[ $kind ][1] . ' của ' . $f['title'] . ': ' . $f[ $kind ] . '.', $link . ( $anc[ $kind ] ?? '#san-pham' ), $f['title'] );
 }
 
 /**
@@ -432,7 +564,7 @@ function hh_sale_gen_question( $f, $kind, $facts ) {
  */
 function hh_sale_build_quiz( $n = 10, $project_id = 0 ) {
 	$facts = hh_sale_project_facts();
-	$kinds = array( 'developer', 'address', 'handover', 'ownership', 'price_m2', 'units', 'floors', 'offer', 'faq', 'faq', 'reverse' );
+	$kinds = array( 'developer', 'address', 'handover', 'ownership', 'price_m2', 'units', 'floors', 'offer', 'faq', 'faq', 'reverse', 'builder', 'conn', 'conn', 'amen', 'amen', 'types', 'types', 'cdt_faq' );
 	$pool  = array();
 	$core  = array();
 	foreach ( hh_sale_core_questions() as $q ) {
