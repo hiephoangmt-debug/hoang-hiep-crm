@@ -195,7 +195,7 @@ function makeViewer(ctx) {
   // giữ bóng đổ/sáng tối của mặt đất thật lên bản vẽ, viền mờ theo kênh alpha, chỉnh tông theo ảnh.
   const makeGroundMat = (sphereMesh) => new THREE.ShaderMaterial({
     transparent: true, depthTest: false, depthWrite: false, side: THREE.DoubleSide,
-    uniforms: { map: { value: null }, pano: { value: null }, rot: { value: 0 }, strength: { value: 0.88 } },
+    uniforms: { map: { value: null }, pano: { value: null }, rot: { value: 0 }, strength: { value: 1.0 } },
     vertexShader: `varying vec2 vUv; varying vec3 vDir;
       void main() { vUv = uv; vec4 w = modelMatrix * vec4(position, 1.0); vDir = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`,
     fragmentShader: `uniform sampler2D map; uniform sampler2D pano; uniform float rot; uniform float strength;
@@ -207,10 +207,7 @@ function makeViewer(ctx) {
         vec3 l = vec3(c * d.x - s * d.z, d.y, s * d.x + c * d.z);          // bỏ phép xoay của mặt cầu ảnh
         float phi = atan(l.z, l.x); float u = fract(phi / 6.2831853); float v = 1.0 - acos(clamp(l.y, -1.0, 1.0)) / 3.1415927;
         vec3 photo = texture2D(pano, vec2(u, v)).rgb;
-        float L = dot(photo, vec3(0.299, 0.587, 0.114));
-        vec3 plan = p.rgb * mix(1.0, clamp(L / 0.42, 0.55, 1.25), 0.45);   // bóng cây, nắng của mặt đất thật in lên bản vẽ
-        plan = mix(plan, plan * (photo / max(L, 0.05)) * 0.5 + plan * 0.5, 0.35); // ám màu nắng sáng
-        gl_FragColor = vec4(mix(photo, plan, p.a * strength), 1.0);
+        gl_FragColor = vec4(mix(photo, p.rgb, p.a * strength), 1.0);   // đặc, rõ nét: che hẳn đất bên dưới
         #include <colorspace_fragment>
       }`,
   });
