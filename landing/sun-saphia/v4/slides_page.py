@@ -171,6 +171,6 @@ def dao_tao(head, header, tail, FAV, OG, LOGO):
              '<span style="font-size:13px;color:#557585">Layout tầng, layout căn, căn 3D, phim dự án, slide, KV brand, ảnh phối cảnh, Q&amp;A, kế hoạch MKT · flycam quay 17/10/2026 · cập nhật 14/11</span></p>'
              '<script>(function(){var a=document.getElementById("spDrive");if(a)a.href=atob("' + __import__('base64').b64encode(b'https://drive.google.com/drive/folders/1sMzOCcPfnrBO7X6M0hAA0HjKcHD5y8_c').decode() + '");'
              'var b=document.getElementById("spFly");if(b)b.href=atob("' + __import__('base64').b64encode(b'https://drive.google.com/drive/folders/1OeG08WyTXbnjyQAvLwXouYCUG0AU7nao').decode() + '");'
-             'var c=document.getElementById("spV360");if(c)c.href=atob("' + __import__('base64').b64encode(b'https://claude.ai/artifact/4eoABYgfEwwA5ZwR5cSa8W').decode() + '")})();</script></div>'
+             'var c=document.getElementById("spV360");if(c)c.href="https://www.sun-saphia-residence.com/#xem-360"})();</script></div>'
              + viewer(slides, 'dao-tao', notes=True) + D4 + '</section></main>\n' + tail(True) + GATE_JS + '</body>\n</html>\n')
     return html.replace('>Nhận bảng giá</a></div></header>', '>Nhắn Zalo</a></div></header>')

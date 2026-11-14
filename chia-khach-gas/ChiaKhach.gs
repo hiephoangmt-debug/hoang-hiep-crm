@@ -63,7 +63,7 @@ var MAC_DINH = {
   SLIDE_NOI_BO: 'https://www.sun-saphia-residence.com/dao-tao-sale', // lệnh /tailieu – slide nội bộ đào tạo sale (không gửi khách)
   DRIVE_TAI_LIEU: 'https://drive.google.com/drive/folders/1sMzOCcPfnrBO7X6M0hAA0HjKcHD5y8_c', // lệnh /tailieu – thư mục tài liệu dự án (nội bộ); để trống = ẩn nút
   DRIVE_FLYCAM: 'https://drive.google.com/drive/folders/1OeG08WyTXbnjyQAvLwXouYCUG0AU7nao',    // lệnh /tailieu – flycam thực tế khu vực (nội bộ); để trống = ẩn nút
-  XEM_360: 'https://claude.ai/artifact/4eoABYgfEwwA5ZwR5cSa8W'                                  // lệnh /tailieu – 360° flycam khu đất + mặt bằng + layout căn 3D; để trống = ẩn nút
+  XEM_360: 'https://www.sun-saphia-residence.com/#xem-360'                                  // lệnh /tailieu – 360° flycam khu đất + mặt bằng + layout căn 3D; để trống = ẩn nút
 };
 
 var BC = {  // nút báo cáo của sale
