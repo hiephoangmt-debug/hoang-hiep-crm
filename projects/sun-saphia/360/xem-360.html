@@ -26,7 +26,8 @@ html, body { height: 100%; margin: 0; overflow: hidden; background: var(--bg); c
 .lb.zone b { background: #15803d; font-size: 13px; text-align: center; line-height: 1.35; }
 .lb.zone b i { display: block; font-style: normal; font-weight: 400; font-size: 11px; opacity: .95; }
 @media (max-width: 640px) { .lb b { font-size: 11px; padding: 3px 7px; } .lb.big b, .lb.site b { font-size: 12px; } .lb small { display: none; } }
-.ct { display: flex; gap: 6px; margin-bottom: 6px; pointer-events: auto; }
+.ct { display: flex; justify-content: center; gap: 8px; margin-top: 10px; pointer-events: auto; }
+.ct a { flex: 1 1 0; max-width: 220px; justify-content: center; }
 .ct a { display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 999px; font: 700 13px var(--font); text-decoration: none; color: var(--accent-fg); background: var(--accent); box-shadow: 0 2px 10px #0004; }
 .ct a.zl { background: #0068ff; color: #fff; }
 @media (max-width: 640px) { .ct a { font-size: 12px; min-height: 30px; padding: 0 10px; } }
@@ -70,8 +71,8 @@ select.chip option { color: var(--ink); background: var(--sheet); }
 <div id="stage"></div>
 <div class="lbls" id="lbls"></div>
 <div class="loading" id="loading">Đang tải ảnh 360°…</div>
-<header class="hd" style="padding-right:64px"><div class="ct"><a href="tel:0904567009" aria-label="Gọi 0904 567 009">📞 0904 567 009</a><a class="zl" href="https://zalo.me/0904567009" target="_blank" rel="noopener" aria-label="Nhắn Zalo 0904 567 009">💬 Zalo</a></div><h1>🛸 360° Sun Saphia Residence</h1><small id="meta"></small></header>
-<footer class="ft"><div class="cmp" id="cmp"></div><div class="chips" id="chips"></div></footer>
+<header class="hd" style="padding-right:64px"><h1>🛸 360° Sun Saphia Residence</h1><small id="meta"></small></header>
+<footer class="ft"><div class="cmp" id="cmp"></div><div class="chips" id="chips"></div><div class="ct"><a href="tel:0904567009" aria-label="Gọi 0904 567 009">📞 0904 567 009</a><a class="zl" href="https://zalo.me/0904567009" target="_blank" rel="noopener" aria-label="Nhắn Zalo 0904 567 009">💬 Zalo</a></div></footer>
 
 <div class="mb" id="mb" hidden>
   <div class="top"><h2>📐 Mặt bằng · Sun Saphia Residence</h2><button class="x" id="mbX" aria-label="Đóng mặt bằng">✕</button></div>
@@ -187,7 +188,7 @@ function parkTex(plaza) {
   for (let i = 0; i < 140; i++) { const x = rnd() * W, y = 70 + rnd() * (H - 90); if (Math.abs(x - px) > 170) palm(x, y, 9 + rnd() * 7); }
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return t;
 }
-const zoneGroup = new THREE.Group(); scene.add(zoneGroup); let showZone = true, parkT = null, frontMode = 1, showLow = true;
+const zoneGroup = new THREE.Group(); scene.add(zoneGroup); let showZone = true, parkT = null, frontMode = 3, showLow = true;
 const frontMesh = {};
 const flatQuad = (pts, order) => { const m = new THREE.Mesh(quad(pts.map((v) => new THREE.Vector3(...v))), new THREE.MeshBasicMaterial({ transparent: true, depthTest: false, depthWrite: false, side: THREE.DoubleSide })); m.renderOrder = order; m.visible = false; return m; };
 const BAKE = ['', 'qh', 'sach', 'resort'];   // quy hoạch đã in sẵn vào ảnh 360° theo đúng phối cảnh
