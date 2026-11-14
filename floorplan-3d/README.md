@@ -69,6 +69,7 @@ Các căn mẫu (1PN+, 1PN, 2PN căn góc, 2PN 2WC, 3PN) được dựng sẵn t
 Trên bản đồ Đà Nẵng 3D, dự án có `pano360` trong `projects.js` sẽ có ghim 🛸 đúng vị trí và độ cao chụp, và nút **Flycam 360°** trong bảng thông tin dự án. Trong ảnh 360°, nhãn địa danh / dự án / cầu / toà cao tầng (kèm khoảng cách) và ranh khu đất (`site`) được tự đặt theo toạ độ thật; có la bàn, nút *Nhìn khu đất*, link Google Maps.
 
 - Link mở thẳng: `da-nang-3d/?pano=sun-saphia-150m` (hoặc `?go=360`).
+- **📐 Mặt bằng tầng & căn**: dự án có `plans` (ảnh trong `public/mat-bang/<dự án>/`, kèm ảnh nhỏ `-nho.webp`) có nút mở thư viện mặt bằng ở bảng dự án và trong ảnh 360°; xem lớn phóng to / kéo / chuyển ảnh. Link: `da-nang-3d/?go=mat-bang`.
 - Thêm ảnh mới: chép ảnh (2:1) vào `public/pano/` (bản 4K + bản 8K tuỳ chọn), thêm `{ id, src, hd, lat, lon, alt, heading, time }` vào `pano360` của dự án. `lat/lon/alt` lấy từ EXIF ảnh DJI (`GpsLatitude`, `GpsLongitude`, `RelativeAltitude`); `heading` là hướng (độ so với Bắc) của tâm ảnh – căn bằng vị trí mặt trời lúc chụp hoặc chỉnh tay đến khi nhãn khớp.
 
 ## Đưa lên web (GitHub Pages)

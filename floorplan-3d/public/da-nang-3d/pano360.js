@@ -156,6 +156,7 @@ function makeViewer(ctx) {
       const b = document.createElement('button'); b.className = 'chip' + (i === idx ? ' active' : '');
       b.textContent = `🛸 ${Math.round(q.alt)} m`; b.onclick = () => show(P, i); chips.appendChild(b);
     });
+    if (P.plans && ctx.openPlans) { const mb = document.createElement('button'); mb.className = 'chip'; mb.textContent = '📐 Mặt bằng'; mb.onclick = () => ctx.openPlans(P); chips.appendChild(mb); }
     const site = document.createElement('button'); site.className = 'chip'; site.textContent = '⬇ Nhìn khu đất';
     site.onclick = () => { const S = siteCenter(); if (!S) return; const r = rel(C, S[0], ctx.groundY(S[0], S[1]), S[1]); view.yaw = (THREE.MathUtils.radToDeg(Math.atan2(r.v.x, -r.v.z)) + 360) % 360; view.pitch = Math.max(-80, THREE.MathUtils.radToDeg(Math.atan2(r.v.y, r.dist)) + 12); view.fov = 80; };
     chips.appendChild(site);

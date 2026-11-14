@@ -99,6 +99,7 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { openPano } from './pano360.js';
+import { openPlans } from './matbang.js';
 
 const $ = (id) => document.getElementById(id);
 const say = (t) => { const l = $('loading'); if (l) l.textContent = t; };
@@ -1538,13 +1539,14 @@ const PROJECTS = window.PROJECTS_DATA || [];
     for (const [k, v] of [['Vị trí', P.address], ['Chủ đầu tư', P.developer], ['Quy mô', P.scale], ['Giá', P.price]]) if (v) { const tr = tb.insertRow(); tr.insertCell().textContent = k; tr.insertCell().textContent = v; }
     const pl = $('unitPlans'); pl.textContent = '';
     if (P.url) { const a = document.createElement('a'); a.className = 'chip active'; a.href = P.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = '🌐 Xem trang dự án'; pl.appendChild(a); }
+    if (P.plans) { const b = document.createElement('button'); b.className = 'chip active'; b.textContent = '📐 Mặt bằng tầng & căn'; b.onclick = () => openPlans(P); pl.appendChild(b); }
     for (const [i, q] of (P.pano360 || []).entries()) { const b = document.createElement('button'); b.className = 'chip active'; b.textContent = `🛸 Flycam 360° · ${Math.round(q.alt)} m`; b.onclick = () => openP(P, i); pl.appendChild(b); }
     if (P.page3d) { const a = document.createElement('a'); a.className = 'chip'; a.href = P.page3d; a.target = '_blank'; a.textContent = '🎥 Phối cảnh 3D chi tiết'; pl.appendChild(a); }
     $('unit').hidden = false; setTour(false);
   }
   window.showProject = showProject;
   // ===== Ảnh 360° flycam: ghim tại đúng toạ độ + độ cao chụp, chạm để mở =====
-  const P360 = { LL, groundY, PLACES, onOpen: () => { window.__p360 = true; $('unit').hidden = true; }, onClose: () => { window.__p360 = false; timer.update(); } };
+  const P360 = { LL, groundY, PLACES, openPlans, onOpen: () => { window.__p360 = true; $('unit').hidden = true; }, onClose: () => { window.__p360 = false; timer.update(); } };
   function openP(P, i) { setTour(false); openPano(P, i, P360); }
   for (const P of PROJECTS) (P.pano360 || []).forEach((q, i) => {
     const [x, z] = LL(q.lat, q.lon);
@@ -1566,6 +1568,7 @@ const PROJECTS = window.PROJECTS_DATA || [];
 // mở thẳng một dự án qua link: ?go=casamia | lot | hoian | hvb | 360 (ảnh 360° đầu tiên) · ?pano=<id ảnh 360°>
 { const Q = new URLSearchParams(location.search), PANO = Q.get('pano');
   if (PANO || Q.get('go') === '360') setTimeout(() => window.openPano360(PANO), 600);
+  if (Q.get('go') === 'mat-bang') setTimeout(() => { const P = PROJECTS.find((P) => P.plans); if (P) openPlans(P); }, 600);
   const GO = Q.get('go');
   if (GO) setTimeout(() => { if (GO === 'du-an') $('prjBtn').click(); else if (GO === 'casamia') $('caBtn').click(); else if (GO === 'lot') $('lotBtn').click(); else if (GO === 'hoian') $('haBtn').click();
     else if (GO === 'hvb' && hvbPos) flyTo(hvbPos.clone(), V3(hvbPos.x + 1200, 1500, hvbPos.z + 2600)); }, 900); }
