@@ -55,7 +55,8 @@ function hh_mbbd_for( $post_id ) {
 add_filter(
 	'hh_project_has_map_plan',
 	static function ( $has, $post_id ) {
-		return $has || null !== hh_mbbd_for( $post_id );
+		$f = hh_mbbd_for( $post_id );
+		return $has || ( $f && ( current_user_can( 'manage_options' ) || get_option( 'hh_mbbd_duyet_' . $f[0] ) ) );
 	},
 	10,
 	2
@@ -69,6 +70,9 @@ add_action(
 			return;
 		}
 		list( $slug, $p ) = $found;
+		if ( ! current_user_can( 'manage_options' ) && ! get_option( 'hh_mbbd_duyet_' . $slug ) ) {
+			return; // Chưa được anh Hiệp duyệt: khách không thấy sơ đồ.
+		}
 		$saved = get_option( 'hh_mbbd_' . $slug );
 		if ( is_array( $saved ) && abs( (float) $saved['lat'] - 16.0176 ) < 0.0005 && abs( (float) $saved['lng'] - 108.2282 ) < 0.0005 ) {
 			$saved = false; // Vị trí lưu nhầm theo điểm gợi ý cũ (sai chỗ) – bỏ, dùng tọa độ mới.
@@ -103,7 +107,7 @@ add_action(
 <div class="hh-mbbd-bar" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px;font-size:.9rem">
 	<label>Độ đậm <input type="range" min="0" max="100" value="80" data-k="op" style="vertical-align:middle"></label>
 	<?php if ( $admin ) : ?>
-	<span style="flex-basis:100%;color:#8a4b1c"><b>Admin:</b> kéo chấm đỏ để dời sơ đồ, xoay / co giãn cho khớp đường trên ảnh vệ tinh rồi bấm Lưu. Khách chỉ thấy bản đồ sau khi Lưu.</span>
+	<span style="flex-basis:100%;color:#8a4b1c"><b>Admin:</b> kéo chấm đỏ để dời sơ đồ, xoay / co giãn cho khớp đường trên ảnh vệ tinh rồi bấm Lưu. Khách chỉ thấy sơ đồ khi anh bấm nút cho khách xem.</span>
 	<button type="button" data-k="r-1">⟲ 1°</button><button type="button" data-k="r-.2">⟲ 0,2°</button><button type="button" data-k="r.2">⟳ 0,2°</button><button type="button" data-k="r1">⟳ 1°</button>
 	<button type="button" data-k="s-1">− 1%</button><button type="button" data-k="s1">+ 1%</button>
 	<span style="flex-basis:100%;margin-top:4px"><b>Căn nhanh bằng 2 điểm</b> (tự tính vị trí, góc xoay, tỷ lệ): mở Google Maps chế độ vệ tinh → bấm chuột phải đúng điểm → bấm dòng tọa độ để sao chép → dán vào ô.</span>
@@ -111,7 +115,7 @@ add_action(
 	<label style="flex-basis:100%">② <?php echo esc_html( $p['anchors'][1][0] ?? '' ); ?>: <input type="text" data-k="a2" placeholder="(bỏ trống nếu chỉ dời vị trí)" style="min-width:240px;padding:5px 8px"></label>
 	<button type="button" data-k="go" style="background:#c99234;color:#fff;border:0">Căn theo điểm</button>
 	<button type="button" data-k="save" style="background:#532516;color:#fff;border:0;border-radius:6px;padding:6px 14px">Lưu vị trí</button>
-	<button type="button" data-k="reset">Bỏ vị trí đã lưu</button>
+	<button type="button" data-k="reset">Bỏ vị trí đã lưu</button> <?php $duyet = (bool) get_option( 'hh_mbbd_duyet_' . $slug ); ?><button type="button" data-k="pub" data-v="<?php echo $duyet ? '0' : '1'; ?>" style="background:<?php echo $duyet ? '#fff' : '#167a3e'; ?>;color:<?php echo $duyet ? '#167a3e' : '#fff'; ?>"><?php echo $duyet ? 'Đang hiện cho khách – bấm để ẩn' : 'Đang ẩn với khách – bấm để cho khách xem'; ?></button>
 	<span data-k="st" style="color:#555"></span>
 	<?php endif; ?>
 </div>
@@ -202,6 +206,11 @@ add_action(
 				if (A2 && (st.sc < .8 || st.sc > 1.25)) { msg.textContent += ' – tỷ lệ lệch nhiều, kiểm tra lại 2 điểm đã dán đúng chỗ chưa.'; }
 				return;
 			}
+			if (k === 'pub') {
+				var f2 = new FormData(); f2.append('action', 'hh_mbbd_save'); f2.append('slug', C.slug); f2.append('_wpnonce', C.nonce); f2.append('pub', b.getAttribute('data-v'));
+				fetch(C.ajax, { method: 'POST', body: f2, credentials: 'same-origin' }).then(function () { location.reload(); });
+				return;
+			}
 			if (k !== 'save' && k !== 'reset') {
 				if (k.charAt(0) === 'r') { st.rot += parseFloat(k.slice(1)); } else { st.sc *= 1 + parseFloat(k.slice(1)) / 100; }
 			} else {
@@ -211,7 +220,7 @@ add_action(
 				else { fd.append('reset', '1'); }
 				msg.textContent = 'Đang lưu…';
 				fetch(C.ajax, { method: 'POST', body: fd, credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (j) {
-					msg.textContent = j && j.success ? (k === 'save' ? 'Đã lưu – khách đã thấy bản đồ này.' : 'Đã bỏ vị trí – khách chỉ thấy ảnh sơ đồ.') : 'Lưu lỗi, thử lại.';
+					msg.textContent = j && j.success ? (k === 'save' ? 'Đã lưu vị trí.' : 'Đã bỏ vị trí đã lưu.') : 'Lưu lỗi, thử lại.';
 				});
 				return;
 			}
@@ -231,6 +240,11 @@ add_action(
 		$slug = sanitize_key( wp_unslash( $_POST['slug'] ?? '' ) );
 		if ( ! current_user_can( 'manage_options' ) || ! isset( hh_mbbd_plans()[ $slug ] ) || ! check_ajax_referer( 'hh_mbbd_' . $slug, '_wpnonce', false ) ) {
 			wp_send_json_error( null, 403 );
+		}
+		if ( isset( $_POST['pub'] ) ) {
+			update_option( 'hh_mbbd_duyet_' . $slug, '1' === $_POST['pub'] ? 1 : 0, false );
+			do_action( 'litespeed_purge_all' );
+			wp_send_json_success();
 		}
 		if ( ! empty( $_POST['reset'] ) ) {
 			delete_option( 'hh_mbbd_' . $slug );

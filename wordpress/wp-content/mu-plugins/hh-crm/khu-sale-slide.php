@@ -162,7 +162,7 @@ function hh_slide_project( $p ) {
 
 	// Mặt bằng.
 	$mp = hh_slide_img_url( $m( 'hh_p_masterplan_img' ), 'full' );
-	if ( function_exists( 'hh_mbbd_plans' ) && isset( hh_mbbd_plans()[ $p->post_name ] ) ) {
+	if ( function_exists( 'hh_mbbd_plans' ) && isset( hh_mbbd_plans()[ $p->post_name ] ) && get_option( 'hh_mbbd_duyet_' . $p->post_name ) ) {
 		$mp = HH_CRM_URL . hh_mbbd_plans()[ $p->post_name ]['image'];
 	}
 	if ( $mp ) {
