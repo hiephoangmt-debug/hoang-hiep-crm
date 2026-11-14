@@ -169,7 +169,7 @@ function makeViewer(ctx) {
     planGroup.clear();
     const gy = (x, z) => ctx.groundY(x, z) + 0.8 - C.y;
     if (P.overlay) {
-      const q = P.overlay.corners.map(([la, lo]) => { const [x, z] = ctx.LL(la, lo); return new THREE.Vector3(x - C.x, gy(x, z), z - C.z); });
+      const q = (P.overlay.cornersBy?.[cur.id] || P.overlay.corners).map(([la, lo]) => { const [x, z] = ctx.LL(la, lo); return new THREE.Vector3(x - C.x, gy(x, z), z - C.z); });
       const g = new THREE.BufferGeometry().setFromPoints([q[0], q[1], q[2], q[0], q[2], q[3]]);
       g.setAttribute('uv', new THREE.Float32BufferAttribute([0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0], 2));
       const m = new THREE.Mesh(g, planMat); m.renderOrder = 4; m.name = 'plan'; planGroup.add(m);

@@ -23,10 +23,13 @@ window.PROJECTS_DATA = [
       ['Layout căn', [['c-stu-a', 'Studio A · 30 m²'], ['c-stu-b', 'Studio B · 40,03 m²'], ['c-1br-plus', '1PN+ · 51,11 m²'], ['c-2br-c', '2PN C · 61,14 m²'], ['c-2br-a', '2PN A · 67,69 m²'], ['c-2br-b', '2PN B · 70,21 m²']]],
       ['Layout căn 3D', [['d-stu-01-9000', 'Studio · 30 m² (dài 9,0 m)'], ['d-stu-01-9200', 'Studio · 30 m² (dài 9,2 m)'], ['d-stu-02', 'Studio · 40,03 m²'], ['d-1br-9000', '1PN+ · 48,98 m²'], ['d-1br-9200', '1PN+ · 51,11 m²'], ['d-2br-01', '2PN · 61,14 m²'], ['d-2br-03', '2PN · 67,69 m²'], ['d-2br-02', '2PN · 70,21 m²']]],
     ] },
-    // Mặt bằng các tầng đặt lên khu đất trong ảnh 360° (nền trắng đã làm trong suốt), phủ vừa ranh lô ~94 × 68 m
+    // Mặt bằng các tầng đặt lên khu đất trong ảnh 360° (nền trắng đã làm trong suốt), 4 góc khối đế khớp 4 góc hàng rào lô
     // đo trên ảnh flycam nhìn thẳng xuống; "Hướng biển" của bản vẽ quay về hướng 67° (ra đường ven biển).
     // corners: góc trên-trái, trên-phải, dưới-phải, dưới-trái của ảnh; mọi tầng dùng chung khung bản vẽ.
-    overlay: { dir: '../mat-bang/sun-saphia/', corners: [[16.0215046, 108.2579218], [16.0206964, 108.2582765], [16.0204477, 108.2576707], [16.0212559, 108.2573161]],
+    overlay: { dir: '../mat-bang/sun-saphia/', corners: [[16.0214985, 108.2579234], [16.0206946, 108.2582622], [16.020425, 108.2576817], [16.0212075, 108.2573317]],
+      // mỗi ảnh 360° có sai số GPS vài mét -> góc riêng cho từng ảnh, đo theo 4 cạnh hàng rào lô trên chính ảnh đó
+      cornersBy: { 'sun-saphia-150m': [[16.0214985, 108.2579234], [16.0206946, 108.2582622], [16.020425, 108.2576817], [16.0212075, 108.2573317]],
+        'sun-saphia-120m': [[16.0215385, 108.2579173], [16.0207277, 108.2582674], [16.0204503, 108.2576894], [16.0212217, 108.2573305]] },
       floors: [['t-2', 'Tầng 2 · hồ bơi'], ['t-3', 'Tầng 3'], ['t-3a-28', 'Tầng 3A – 28'], ['t-25d', 'Tầng 3A – 28 · nội thất'], ['t-29', 'Tầng 29'], ['t-30', 'Tầng 30']] },
     // tên đường viết nằm trên mặt đường trong ảnh 360°: a → b là hướng con đường
     roads: [
