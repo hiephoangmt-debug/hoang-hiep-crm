@@ -19,6 +19,9 @@ const CSS = `
 .p360 .lb.rs b { background: #0e7490; } .p360 .lb.mart b { background: #7c3aed; } .p360 .lb.bv b { background: #fff; color: #b91c1c; }
 .p360 .lb.ph b { background: none; box-shadow: none; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; text-shadow: 0 1px 3px #000, 0 0 8px #000; }
 .p360 .lb.ph span { background: none; }
+.p360 .lb.zone { pointer-events: auto; cursor: pointer; }
+.p360 .lb.zone b { background: #15803d; font-size: 13px; text-align: center; line-height: 1.35; }
+.p360 .lb.zone b i { display: block; font-style: normal; font-weight: 400; font-size: 11px; opacity: .95; }
 @media (max-width: 640px) { .p360 .lb b { font-size: 11px; padding: 3px 7px; } .p360 .lb.big b, .p360 .lb.site b { font-size: 12px; } .p360 .lb small { display: none; } }
 .p360 .hd { position: absolute; top: 0; left: 0; right: 0; padding: max(10px, env(safe-area-inset-top)) 56px 14px 16px; background: linear-gradient(#000a, transparent); font: 13px Inter, sans-serif; pointer-events: none; }
 .p360 .hd h2 { margin: 0 0 2px; font-size: 16px; }
@@ -117,6 +120,12 @@ function makeViewer(ctx) {
     // khu đất của chính dự án: nhãn đỏ ở tâm khu đất
     const S = siteCenter();
     if (S) { const r = rel(C, S[0], ctx.groundY(S[0], S[1]) + 2, S[1]); add('📍 Khu đất ' + P.name, r.v, r.dist, 'site', 100); }
+    for (const Z of P.zones || []) {   // ghi chú vùng quy hoạch phía trước
+      const pts = Z.corners.map(([la, lo]) => ctx.LL(la, lo)), zx = pts.reduce((a, p) => a + p[0], 0) / 4, zz = pts.reduce((a, p) => a + p[1], 0) / 4;
+      const r = rel(C, zx, ctx.groundY(zx, zz) + 3, zz); add(Z.name, r.v, 0, 'zone', 90);
+      const L = labels[labels.length - 1], i = document.createElement('i'); i.textContent = Z.note + ' · xem phối cảnh ›'; L.el.firstChild.appendChild(i); L.g = 'zone';
+      L.el.onclick = () => { const g = P.plans?.groups.findIndex(([n]) => n === Z.gallery); if (g >= 0 && ctx.openPlans) ctx.openPlans(P, g); };
+    }
     const seen = new Set();
     for (const p of ctx.PLACES) {
       if (p.lotEdge || p.lot || p.prj === P || p.pano) continue;
@@ -203,6 +212,38 @@ function makeViewer(ctx) {
     }
   }
 
+  // mặt công viên minh hoạ: cỏ cắt sọc, quảng trường đối diện dự án, lối đi uốn lượn, cây dừa, lối gỗ ven biển
+  function parkTex(plaza) {
+    const W = 1600, H = 910, c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
+    let sd = 11; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+    for (let x = 0; x < W; x += 24) { g.fillStyle = (x / 24) % 2 ? '#6fae4c' : '#79b955'; g.fillRect(x, 0, 24, H); }
+    g.fillStyle = '#b98b5a'; g.fillRect(0, 0, W, 26);                                  // lối gỗ ven biển
+    const px = plaza * W;
+    g.fillStyle = '#e8e0d0'; g.fillRect(px - 120, 26, 240, H - 26);                      // trục quảng trường ra biển
+    g.strokeStyle = '#d2c5ab'; g.lineWidth = 2; for (let y = 60; y < H; y += 40) { g.beginPath(); g.moveTo(px - 120, y); g.lineTo(px + 120, y); g.stroke(); }
+    g.beginPath(); g.arc(px, H * 0.5, 70, 0, 7); g.strokeStyle = '#b9a98a'; g.lineWidth = 6; g.stroke();
+    g.strokeStyle = '#ddd2bb'; g.lineWidth = 22; g.lineCap = 'round';                    // lối đi uốn lượn
+    for (const s of [-1, 1]) for (const k of [0.33, 0.7]) { g.beginPath(); g.moveTo(px + s * 120, H * k);
+      g.bezierCurveTo(px + s * 380, H * (k - 0.25), px + s * 560, H * (k + 0.2), px + s * 760, H * (k - 0.1)); g.stroke(); }
+    for (const s of [-1, 1]) for (let i = 0; i < 3; i++) { g.beginPath(); g.ellipse(px + s * (330 + i * 190), H * (0.48 + (i % 2) * 0.14), 52, 30, 0, 0, 7); g.fillStyle = '#4cc6d6'; g.fill(); }
+    const palm = (x, y, r) => { g.fillStyle = '#2f6b2a'; for (let k = 0; k < 7; k++) { const a = (k / 7) * 6.283; g.beginPath(); g.ellipse(x + Math.cos(a) * r * 0.55, y + Math.sin(a) * r * 0.55, r * 0.6, r * 0.22, a, 0, 7); g.fill(); } g.fillStyle = '#3f8a35'; g.beginPath(); g.arc(x, y, r * 0.3, 0, 7); g.fill(); };
+    for (let x = 30; x < W; x += 58) palm(x, 48, 16);                                    // hàng dừa ven biển
+    for (let y = 70; y < H; y += 62) { palm(px - 140, y, 14); palm(px + 140, y, 14); }  // hàng dừa hai bên quảng trường
+    for (let i = 0; i < 140; i++) { const x = rnd() * W, y = 70 + rnd() * (H - 90); if (Math.abs(x - px) > 170) palm(x, y, 9 + rnd() * 7); }
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return t;
+  }
+  const zoneGroup = new THREE.Group(); scene.add(zoneGroup); let showZone = true;
+  function buildZones(C) {
+    zoneGroup.clear();
+    for (const Z of P.zones || []) {
+      const q = Z.corners.map(([la, lo]) => { const [x, z] = ctx.LL(la, lo); return new THREE.Vector3(x - C.x, ctx.groundY(x, z) + 0.5 - C.y, z - C.z); });
+      const g = new THREE.BufferGeometry().setFromPoints([q[0], q[1], q[2], q[0], q[2], q[3]]);
+      g.setAttribute('uv', new THREE.Float32BufferAttribute([0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0], 2));
+      const m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ map: (Z.tex ||= parkTex(Z.plaza ?? 0.5)), transparent: true, opacity: 0.88, depthTest: false, depthWrite: false, side: THREE.DoubleSide }));
+      m.renderOrder = 1; zoneGroup.add(m);
+    }
+    zoneGroup.visible = showZone;
+  }
   function setFloor(i) {
     floor = i; const m = planGroup.getObjectByName('plan'); if (!m) return;
     m.visible = i >= 0; overlay.visible = showLbl && i < 0;   // đang đặt mặt bằng thì ẩn viền ranh đất
@@ -218,7 +259,7 @@ function makeViewer(ctx) {
     view.yaw = cur.heading; view.pitch = -18; view.fov = innerWidth < innerHeight ? 85 : 72;
     $('h2').textContent = '🛸 360° ' + P.name;
     $('.hd small').textContent = `${cur.lat.toFixed(6)}, ${cur.lon.toFixed(6)} · cao ${Math.round(cur.alt)} m · ${cur.time}`;
-    buildLabels(C); buildOverlay(C); buildPlan(C);
+    buildLabels(C); buildOverlay(C); buildPlan(C); buildZones(C);
     chips.textContent = '';
     P.pano360.forEach((q, i) => {
       const b = document.createElement('button'); b.className = 'chip' + (i === idx ? ' active' : '');
@@ -230,6 +271,8 @@ function makeViewer(ctx) {
       sel.innerHTML = '<option value="-1">🏗 Mặt bằng: tắt</option>' + P.overlay.floors.map(([, n], i) => `<option value="${i}">🏗 ${n}</option>`).join('');
       sel.value = floor; sel.onchange = () => { setFloor(+sel.value); sel.classList.toggle('active', floor >= 0); }; chips.appendChild(sel);
     }
+    if (P.zones?.length) { const zb = document.createElement('button'); zb.className = 'chip' + (showZone ? ' active' : ''); zb.textContent = '🌴 Quy hoạch phía trước';
+      zb.onclick = () => { showZone = !showZone; zb.classList.toggle('active', showZone); zoneGroup.visible = showZone; }; chips.appendChild(zb); }
     const site = document.createElement('button'); site.className = 'chip'; site.textContent = '⬇ Nhìn khu đất';
     site.onclick = () => { const S = siteCenter(); if (!S) return; const r = rel(C, S[0], ctx.groundY(S[0], S[1]), S[1]); view.yaw = (THREE.MathUtils.radToDeg(Math.atan2(r.v.x, -r.v.z)) + 360) % 360; view.pitch = Math.max(-80, THREE.MathUtils.radToDeg(Math.atan2(r.v.y, r.dist)) + 12); view.fov = 80; };
     chips.appendChild(site);
@@ -296,7 +339,7 @@ function makeViewer(ctx) {
     const placed = [];
     for (const L of labels) {
       tmp.copy(L.dir).multiplyScalar(100).project(camera);
-      let vis = showLbl && (lblGroup === 'all' || L.g === lblGroup || L.g === 'site') && !(L.site && floor >= 0) && tmp.z < 1 && Math.abs(tmp.x) < 1.1 && Math.abs(tmp.y) < 1.1;
+      let vis = showLbl && !(L.g === 'zone' && !showZone) && (lblGroup === 'all' || L.g === 'zone' || L.g === lblGroup || L.g === 'site') && !(L.site && floor >= 0) && tmp.z < 1 && Math.abs(tmp.x) < 1.1 && Math.abs(tmp.y) < 1.1;
       if (vis) {
         const x = ((tmp.x + 1) / 2) * innerWidth, y = ((1 - tmp.y) / 2) * innerHeight;
         if (!L.w) { L.el.style.display = ''; L.w = L.el.offsetWidth || 80; L.h = L.el.firstChild.offsetHeight || 22; L.stem = L.el.querySelector('span'); }

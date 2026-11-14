@@ -19,7 +19,6 @@ window.POI_DATA = [
   { n: 'Sheraton Grand Danang', lat: 16.0018, lon: 108.2683, k: 'rs' },
   { n: 'Naman Retreat', lat: 15.9718, lon: 108.2838, k: 'rs' },
   { n: 'InterContinental Sun Peninsula', lat: 16.1197, lon: 108.3055, k: 'rs' },
-  { n: 'Premier Village Danang', lat: 16.1000, lon: 108.2995, k: 'rs' },
   // phường (sau sắp xếp 2025) – nhãn đặt khoảng giữa phường
   { n: 'P. Ngũ Hành Sơn', lat: 16.0150, lon: 108.2530, k: 'ph' },
   { n: 'P. Hòa Xuân', lat: 16.0090, lon: 108.2250, k: 'ph' },
