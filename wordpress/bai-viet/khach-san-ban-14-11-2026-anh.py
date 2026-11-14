@@ -1,11 +1,13 @@
-"""Ảnh thẻ tin tự vẽ (3:2) cho 17 tin bán khách sạn / tòa căn hộ – khách sạn ven biển Đà Nẵng (14/11/2026) – không dùng ảnh tin rao của bên khác."""
+"""Ảnh thẻ tin tự vẽ (3:2) cho 17 tin bán khách sạn / tòa căn hộ – khách sạn ven biển Đà Nẵng (14/11/2026).
+Tông kem – nâu – vàng kim (anh Hiệp chọn 14/11/2026): nền kem, chữ nâu, giá chữ vàng kim chuyển sắc, chân nâu."""
 import sys, os
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 OUT = sys.argv[1]
-F = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
-FB = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
-f = lambda s, b=False: ImageFont.truetype(FB if b else F, s)
-GOLD, CREAM, NAVY, SEA = '#d8b16a', '#f7f1e3', '#0f2240', '#1f6f8b'
+FD = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fonts')
+XB, SB, MD = FD + '/BeVietnamPro-ExtraBold.ttf', FD + '/BeVietnamPro-SemiBold.ttf', FD + '/BeVietnamPro-Medium.ttf'
+f = lambda p, s: ImageFont.truetype(p, s)
+CREAM, CREAM2, BROWN, DARK, CARAMEL, TAUPE = (246, 241, 231), (235, 226, 209), (83, 37, 22), (65, 34, 32), (138, 75, 28), (150, 122, 104)
+GOLDS = [(150, 98, 24), (201, 146, 52), (246, 210, 98), (214, 160, 60), (160, 104, 26)]
 CARDS = [
  [
   "ks-1411-01-goc-9-tang-bien-son-thuy-45-phong",
@@ -263,40 +265,62 @@ CARDS = [
   False
  ]
 ]
+def gold_text(im, xy, txt, font):
+    W, H = im.size
+    mask = Image.new('L', (W, H), 0)
+    ImageDraw.Draw(mask).text(xy, txt, font=font, fill=255)
+    x0, y0, x1, y1 = mask.getbbox()
+    grad = Image.new('RGB', (W, H))
+    gd = ImageDraw.Draw(grad)
+    for y in range(y0, y1 + 1):
+        t = (y - y0) / max(1, y1 - y0)
+        seg = t * (len(GOLDS) - 1)
+        i = min(int(seg), len(GOLDS) - 2)
+        u = seg - i
+        gd.line([x0, y, x1, y], fill=tuple(int(GOLDS[i][k] * (1 - u) + GOLDS[i + 1][k] * u) for k in range(3)))
+    sh = mask.filter(ImageFilter.GaussianBlur(4)).point(lambda v: int(v * 0.35))
+    im.paste((120, 70, 20), (3, 4), sh) if False else None
+    shadow = Image.new('RGB', (W, H), (150, 110, 60))
+    im.paste(shadow, (0, 0), Image.eval(mask.filter(ImageFilter.GaussianBlur(5)), lambda v: int(v * 0.3)).transform((W, H), Image.AFFINE, (1, 0, -3, 0, 1, -4)))
+    im.paste(grad, (0, 0), mask)
+
 for name, area, street, head, rows, gia, note, floors, pool in CARDS:
     rows = [r.split(' – ')[0] for r in rows if 'tầng' not in r] or rows
     rows = [r if len(r) <= 34 else r[:33].rsplit(' ', 1)[0] for r in rows][:3]
     W, H = 1500, 1000
-    im = Image.new('RGB', (W, H), NAVY)
+    im = Image.new('RGB', (W, H), CREAM)
     dr = ImageDraw.Draw(im)
-    # Tòa nhà minh họa bên phải: số tầng theo tin, chân là biển.
-    bx, bw, base = 1080, 300, 830
-    fh = min(44, int(640 / floors))
+    for y in range(H):  # nền kem chuyển nhẹ
+        t = y / H
+        dr.line([0, y, W, y], fill=tuple(int(CREAM[k] * (1 - t) + CREAM2[k] * t) for k in range(3)))
+    # Tòa nhà minh họa: thân kem trắng, cửa nâu, điểm vàng, chân là bãi cát + biển nhạt.
+    bx, bw, base = 1060, 300, 840
+    fh = min(44, int(620 / floors))
     top = base - floors * fh
-    dr.rectangle([940, base, 1460, base + 30], fill=SEA)
-    for k in range(6):
-        dr.arc([950 + k * 84, base - 6, 1016 + k * 84, base + 14], 0, 180, fill='#7cc3d6', width=3)
-    dr.rectangle([bx, top, bx + bw, base], fill='#1b3560')
-    dr.rectangle([bx - 10, top - 14, bx + bw + 10, top], fill=GOLD)
+    dr.rectangle([900, base, 1500, base + 34], fill=(225, 210, 180))
+    dr.rectangle([900, base + 34, 1500, base + 60], fill=(190, 205, 200))
+    dr.rectangle([bx + 8, top + 8, bx + bw + 8, base], fill=(215, 200, 175))
+    dr.rectangle([bx, top, bx + bw, base], fill=(255, 252, 245), outline=(200, 180, 150), width=2)
+    dr.rectangle([bx - 12, top - 16, bx + bw + 12, top], fill=BROWN)
     for r in range(floors):
         for c in range(4):
             y0 = top + 8 + r * fh
-            dr.rectangle([bx + 20 + c * 70, y0, bx + 70 + c * 70, y0 + fh - 14], fill=GOLD if (r * 4 + c) % 5 == 2 else '#2b4a7c')
-    if pool:
-        dr.rounded_rectangle([bx + 30, top - 34, bx + bw - 30, top - 18], radius=6, fill='#4fb3d1')
-    # Chữ: chừa góc trái trên cho nhãn "Bán" của thẻ tin.
-    dr.text((260, 58), area, font=f(30, True), fill=GOLD)
-    dr.text((80, 140), street, font=f(72 if len(street) < 20 else 60, True), fill=CREAM)
-    dr.text((80, 250), head, font=f(50, True), fill=CREAM)
-    y = 345
+            dr.rectangle([bx + 22 + c * 68, y0, bx + 68 + c * 68, y0 + fh - 14], fill=(214, 168, 80) if (r * 4 + c) % 5 == 2 else (120, 84, 60))
+    # Chữ (chừa góc trái trên cho nhãn "Bán" của thẻ tin).
+    dr.text((250, 56), area, font=f(SB, 28), fill=CARAMEL)
+    dr.text((80, 120), street, font=f(XB, 70 if len(street) < 20 else 58), fill=DARK)
+    dr.text((80, 225), head, font=f(SB, 46), fill=CARAMEL)
+    y = 315
     for t in rows:
-        dr.ellipse([84, y + 13, 104, y + 33], fill=GOLD)
-        dr.text((124, y), t, font=f(40), fill=CREAM)
-        y += 66
-    dr.rounded_rectangle([80, 585, 600, 705], radius=24, fill=GOLD)
-    dr.text((112, 603), gia, font=f(70, True), fill=NAVY)
-    dr.text((80, 735), note, font=f(34), fill=CREAM)
-    dr.rectangle([60, 870, W - 60, 879], fill=GOLD)
-    dr.text((80, 902), 'Hoàng Hiệp · Zalo 0904 567 009 · hiephoangmt.com', font=f(38, True), fill=GOLD)
-    im.save(os.path.join(OUT, name + '.jpg'), quality=86, optimize=True, progressive=True)
+        dr.ellipse([84, y + 14, 100, y + 30], fill=(201, 146, 52))
+        dr.text((118, y), t, font=f(MD, 38), fill=DARK)
+        y += 62
+    gold_text(im, (76, 520), gia, f(XB, 130))
+    dr = ImageDraw.Draw(im)
+    dr.rectangle([82, 700, 300, 705], fill=BROWN)
+    dr.text((80, 728), note, font=f(MD, 32), fill=TAUPE)
+    dr.rectangle([0, 900, W, H], fill=BROWN)
+    t = 'HOÀNG HIỆP  ·  Zalo 0904 567 009  ·  hiephoangmt.com'
+    dr.text(((W - dr.textlength(t, font=f(SB, 36))) / 2, 928), t, font=f(SB, 36), fill=(246, 222, 160))
+    im.save(os.path.join(OUT, name + '.jpg'), quality=88, optimize=True, progressive=True)
 print('ok', len(CARDS))

@@ -387,7 +387,7 @@ add_filter(
 				$tbl .= '<tr><th>' . esc_html( $th ) . '</th><td>' . esc_html( $td ) . '</td></tr>';
 			}
 			$list[] = array(
-				'rev'     => 2,
+				'rev'     => 3, // 14/11: ảnh thẻ đổi sang tông kem – nâu – vàng kim.
 				'slug'    => $k['slug'],
 				'title'   => $k['title'],
 				'excerpt' => wp_strip_all_tags( 'Bán ' . $k['lead'] ) . ' Giá ' . $gia . '.',
