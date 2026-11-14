@@ -58,6 +58,55 @@ EVBAR = ('<div id="evbar" class="evb" role="region" aria-label="Thư mời sự 
          'k.textContent=d>1?"Còn "+d+" ngày":d===1?"Ngày mai":"Hôm nay"})();</script></div>')
 
 
+X360_SHA = 'df158904bdc6f62420d63dc5656463a6a17ffe2f'
+X360 = ('<section class="sec" id="xem-360" style="background:linear-gradient(160deg,#0B2447,#1d4a7a);color:#fff"><div class="wrap">'
+        '<style>#xem-360 .x3{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:26px;align-items:center}'
+        '#xem-360 .x3p{position:relative;display:block;width:100%;border:0;padding:0;border-radius:16px;overflow:hidden;cursor:pointer;background:#123;box-shadow:0 18px 40px -18px rgba(0,0,0,.6);aspect-ratio:16/9}'
+        '#xem-360 .x3p img{width:100%;height:100%;object-fit:cover;display:block}'
+        '#xem-360 .x3p b{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#E96118;color:#fff;font-weight:800;font-size:17px;padding:14px 22px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.35);white-space:nowrap}'
+        '#xem-360 .x3p i{position:absolute;left:12px;bottom:10px;font-style:normal;font-size:12px;background:rgba(0,0,0,.45);padding:3px 9px;border-radius:999px}'
+        '#xem-360 .ey{color:#FFAA01}#xem-360 h2{color:#fff;margin:6px 0 10px}#xem-360 p,#xem-360 li{color:#d6e2f0;text-align:left!important}#xem-360 ul{margin:0 0 16px;padding-left:18px;line-height:1.7}'
+        '#xem-360 .x3b{border:0;border-radius:999px;background:#E96118;color:#fff;font:800 16px/1 inherit;padding:14px 22px;cursor:pointer}'
+        '@media(max-width:820px){#xem-360 .x3{grid-template-columns:1fr}#xem-360 .x3p b{font-size:15px;padding:12px 18px}}'
+        '#x360{position:fixed;inset:0;z-index:2147483600;background:#0b1220}#x360[hidden]{display:none}#x360 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}'
+        '#x360 .xx{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));right:10px;z-index:2;border:0;background:#E96118;color:#fff;font:800 14px/1 inherit;padding:10px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.3);cursor:pointer}'
+        '#x360 .xl{position:absolute;inset:0;display:grid;place-items:center;color:#c7d3e3;font-size:14px}html.x360-on,html.x360-on body{overflow:hidden!important}</style>'
+        '<div class="x3"><button type="button" class="x3p" data-x360 aria-label="Mở xem 360° khu đất Sun Saphia">'
+        '<img loading="lazy" alt="Ảnh flycam thực tế khu đất Sun Saphia Residence trên trục biển Võ Nguyên Giáp – Trường Sa" src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/' + X360_SHA + '/projects/sun-saphia/360/xem-360-poster.webp">'
+        '<b>🛸 Xoay 360° khu đất</b><i>Ảnh flycam thực tế · 21/10/2026</i></button>'
+        '<div><span class="ey">360° khu đất thực tế</span><h2 class="dp">Đứng giữa khu đất, <b>nhìn trọn 360°</b></h2>'
+        '<ul><li>Flycam thực tế ở độ cao 150 m và 120 m, kéo để xoay mọi hướng</li><li>Nhãn địa danh kèm khoảng cách: biển Sơn Thủy, Ngũ Hành Sơn, cầu Rồng, sân bay, Sơn Trà, Hội An</li>'
+        '<li>Bật quy hoạch công viên phía trước, đặt mặt bằng tầng lên khu đất</li><li>Mặt bằng tầng, layout căn và layout căn 3D xem ngay trong khung</li></ul>'
+        '<button type="button" class="x3b" data-x360>▶ Mở 360° khu đất</button></div></div></div>'
+        '<div id="x360" hidden role="dialog" aria-label="360° khu đất Sun Saphia"><div class="xl">Đang tải ảnh 360°…</div><button type="button" class="xx">✕ Đóng</button></div>'
+        '<script>(function(){var P="hiephoangmt-debug/hoang-hiep-crm",S="' + X360_SHA + '",D="/projects/sun-saphia/360/",'
+        'B=["https://cdn.jsdelivr.net/gh/"+P+"@"+S+D,"https://raw.githubusercontent.com/"+P+"/"+S+D],M=document.getElementById("x360"),f=null,R=document.documentElement;'
+        'function get(i){return fetch(B[i]+"xem-360.html").then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){return [B[i],t]})}'
+        'function load(){if(f)return;f=document.createElement("iframe");f.title="360° khu đất Sun Saphia";f.setAttribute("allow","fullscreen;gyroscope;accelerometer");'
+        'get(0).catch(function(){return get(1)}).then(function(a){f.srcdoc="<!doctype html><html lang=\\"vi\\"><head><meta charset=\\"utf-8\\"><meta name=\\"viewport\\" content=\\"width=device-width,initial-scale=1,viewport-fit=cover\\"><base href=\\""+a[0]+"\\"><style>[hidden]{display:none!important}</style></head><body>"+a[1]+"</body></html>";M.appendChild(f)})'
+        '.catch(function(){M.querySelector(".xl").textContent="Chưa tải được 360°, anh/chị thử lại sau ít phút."})}'
+        'function op(){load();M.hidden=false;R.classList.add("x360-on");try{if(window.gtag)gtag("event","xem_360_open")}catch(e){}}'
+        'function cl(){M.hidden=true;R.classList.remove("x360-on")}'
+        'document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-x360]");if(b){e.preventDefault();op()}});'
+        'M.querySelector(".xx").onclick=cl;document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!M.hidden)cl()});'
+        'if(/#xem-360\\b|[?&]xem=360/.test(location.hash+" "+location.search))setTimeout(op,500)})();</script></section>')
+
+
+def _x360(h):
+    """chèn khối 360° sau mục Vị trí (hoặc trước mục Công viên ở trang Quy hoạch)"""
+    if 'id="xem-360"' in h:
+        return h
+    i = h.find('id="vi-tri"')
+    if i > -1:
+        j = h.find('</section>', i)
+        if j > -1:
+            return h[:j + 10] + X360 + h[j + 10:]
+    i = h.find('<section class="sec alt" id="cong-vien"')
+    if i > -1:
+        return h[:i] + X360 + h[i:]
+    return h
+
+
 _EVREG = {}
 
 
@@ -77,6 +126,8 @@ def finish(h):
                 'https://cdn.jsdelivr.net/gh/%s/%s@%s/%s' % (m.group(1), m.group(2), m.group(3), m.group(4)), h)
     if 'id="evbar"' not in h and '</header>' in h:
         h = h.replace('</header>', '</header>' + EVBAR, 1)
+    if '</header>' in h and 'dao-tao' not in h[:3000] and 'trinh-chieu' not in h[:3000]:
+        h = _x360(h)
     m = _evreg(h)
     if m and 'id="evReg"' not in h and 'id="evbar"' in h and '</body>' in h:
         h = h.replace('</body>', m + '</body>', 1)    # trang con: thêm popup thư mời cho nút "Giữ thư mời"
