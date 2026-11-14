@@ -3189,7 +3189,7 @@ textarea{min-height:80px;resize:vertical}
 a{color:var(--brand)}a.btn{text-decoration:none;display:inline-block}
 </style></head><body>
 <header><b>🏠 CRM BĐS</b><small id="me"></small></header>
-<nav id="tabs"><button data-t="tq" class="on">Tổng quan</button><button data-t="kh">Khách hàng</button><button data-t="vi">Việc cần làm</button><button data-t="moi">+ Thêm khách</button></nav>
+<nav id="tabs"><button data-t="tq" class="on">Tổng quan</button><button data-t="kh">Khách hàng</button><button data-t="vi">Việc cần làm</button><button data-t="moi">+ Thêm khách</button><button data-t="lk">🔗 Link dự án</button></nav>
 <main id="main"><div class="empty">Đang tải…</div></main>
 <div id="sheet"><div class="box" id="box"></div></div>
 <script>
@@ -3205,7 +3205,7 @@ var LB={ho_ten:"Họ tên",sdt:"SĐT",ngan_sach:"Ngân sách",khu_vuc:"Khu vực
 function heat(n){return '<span class="heat '+(n>=70?"h":n>=40?"w":"")+'">'+n+"</span>"}
 function rowHtml(r){return '<div class="card row" data-id="'+esc(r.id)+'"><div>'+heat(r.nhiet)+'</div><div class="grow"><div class="ttl">'+esc(r.ten)+(r.sdt?' · <span class="mute">'+esc(r.sdt)+"</span>":"")+'</div><div class="mute">'+esc(r.gd_ten)+(r.du_an?" · "+esc(r.du_an):"")+(r.nhu_cau?" · "+esc(r.nhu_cau):"")+'</div><div class="mute">'+(r.ly_do?esc(r.ly_do)+" · ":"")+"nhắn "+esc((r.lan_cuoi||"").slice(5))+(r.lich?" · 📅 "+esc(r.lich.slice(5)):"")+(r.viec?" · 📝 "+r.viec:"")+(ME.admin?" · 👤 "+esc(r.nv):"")+"</div></div></div>"}
 function bindRows(){main.querySelectorAll("[data-id]").forEach(function(el){el.onclick=function(){openK(el.getAttribute("data-id"))}})}
-function tab(t){document.querySelectorAll("#tabs button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-t")==t)});({tq:tq,kh:kh,vi:vi,moi:moi})[t]()}
+function tab(t){document.querySelectorAll("#tabs button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-t")==t)});({tq:tq,kh:kh,vi:vi,moi:moi,lk:lk})[t]()}
 document.querySelectorAll("#tabs button").forEach(function(b){b.onclick=function(){tab(b.getAttribute("data-t"))}});
 function tq(){api("/api/tongquan").then(function(d){
  var order=["moi","danh_gia","hen","nuoi","da_mua","ngung"],h='<div class="stats"><div class="stat" data-gd="nong"><span class="mute">🔥 Khách nóng</span><b>'+d.nong.length+'</b></div>';
@@ -3216,6 +3216,15 @@ function tq(){api("/api/tongquan").then(function(d){
  if(d.doi)h+='<h3>👥 Đội sale</h3><div class="card out">'+esc(d.doi)+"</div>";
  main.innerHTML=h;bindRows();bindTasks();
  main.querySelectorAll("[data-gd]").forEach(function(el){el.onclick=function(){tab("kh");setTimeout(function(){kh(el.getAttribute("data-gd"))},0)}})}).catch(fail)}
+// Link dự án gửi khách tham khảo (trang công khai, không cần đăng nhập)
+var LINKS=[
+ ["Sun Saphia Residence · flycam 360°","Ảnh 360° khu đất, địa danh, mặt bằng tầng đặt trên đất, quy hoạch công viên biển","https://hiephoangmt-debug.github.io/hoang-hiep-crm/sun-saphia-360/"],
+ ["Sun Saphia · ảnh 360° độ cao 120 m","Mở thẳng ảnh chụp thấp hơn","https://hiephoangmt-debug.github.io/hoang-hiep-crm/sun-saphia-360/#120"],
+ ["Sun Saphia · mặt bằng tầng & layout căn","Mở thẳng thư viện mặt bằng, quy hoạch, phối cảnh","https://hiephoangmt-debug.github.io/hoang-hiep-crm/sun-saphia-360/#mat-bang"],
+ ["Đà Nẵng 3D · các dự án","Bản đồ 3D Đà Nẵng, chọn dự án để xem","https://hiephoangmt-debug.github.io/hoang-hiep-crm/da-nang-3d/?go=du-an"]];
+function lk(){main.innerHTML='<h3>🔗 Link dự án gửi khách</h3><div class="mute">Bấm "Sao chép" rồi dán vào Zalo / Messenger cho khách.</div>'+LINKS.map(function(l,i){return '<div class="card"><b>'+esc(l[0])+'</b><div class="mute">'+esc(l[1])+'</div><div class="mute" style="word-break:break-all">'+esc(l[2])+'</div><div class="btns"><a class="btn" target="_blank" rel="noopener" href="'+esc(l[2])+'">Mở xem</a> <button class="btn sec" data-cp="'+i+'">Sao chép</button></div></div>'}).join("");
+ main.querySelectorAll("[data-cp]").forEach(function(b){b.onclick=function(){var u=LINKS[+b.getAttribute("data-cp")][2];
+  (navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(function(){b.textContent="Đã chép ✓"},function(){window.prompt("Sao chép link:",u)})}})}
 var GD="",Q="";
 function kh(gd){if(gd!==undefined)GD=gd;var chips=[["","Tất cả"],["nong","🔥 Nóng"],["moi","🆕 Mới"],["danh_gia","🩺 Đánh giá"],["hen","📅 Hẹn"],["nuoi","🌱 Nuôi"],["da_mua","🏠 Đã mua"]];
  main.innerHTML='<input id="q" placeholder="Tìm tên, SĐT, dự án…" value="'+esc(Q)+'"><div class="btns">'+chips.map(function(c){return '<button class="chip'+(c[0]==GD?" on":"")+'" data-c="'+c[0]+'">'+c[1]+"</button>"}).join("")+'</div><div id="list" class="empty">Đang tải…</div>';

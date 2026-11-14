@@ -63,3 +63,10 @@ Dòng nằm giữa dấu <!-- và --> là ghi chú, bot vẫn đọc được n�
 ## Điều bot không được tự trả lời (luôn chuyển chuyên viên)
 - Giữ căn, đặt cọc, chiết khấu riêng ngoài CSBH
 - Pháp lý chi tiết của một căn cụ thể
+
+## Dự án: Sun Saphia Residence (Sun Group, Đà Nẵng)
+- Vị trí: giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, P. Ngũ Hành Sơn; ~400 m ra bãi tắm Sơn Thủy; đối diện công viên – quảng trường biển (QH điều chỉnh, 88 × 272 m, đầu đường Minh Mạng)
+- Quy mô: 1 tháp 30 tầng ~114 m, 782 căn (Studio 30–40 m², 1PN+ 49–51 m², 2PN 61–70 m²)
+- Link gửi khách xem 360° khu đất, mặt bằng tầng, layout căn, quy hoạch: https://hiephoangmt-debug.github.io/hoang-hiep-crm/sun-saphia-360/
+- Link mặt bằng tầng & layout căn: https://hiephoangmt-debug.github.io/hoang-hiep-crm/sun-saphia-360/#mat-bang
+- Giá, CSBH: [điền bảng giá chính thức]

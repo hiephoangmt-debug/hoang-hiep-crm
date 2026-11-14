@@ -54,10 +54,6 @@ window.PROJECTS_DATA = [
       resort: '../mat-bang/sun-saphia/cong-vien-phia-truoc.webp',
       resortCorners: [[16.0242473, 108.2598368], [16.0201026, 108.2616558], [16.0191028, 108.2592206], [16.0232475, 108.2574016]],
       resortNote: ['🏝 Quy hoạch resort – công viên ven biển', 'Minh hoạ theo phối cảnh bán hàng · chưa phải bản vẽ chính thức'] },
-    // Dải đất trống phía Nam dự án (giữa Trường Sa và đường nội bộ, tới ngã tư Minh Mạng): nhà thấp tầng 3D minh hoạ.
-    // corners: đầu phía dự án–Trường Sa, đầu ngã tư–Trường Sa, đầu ngã tư–đường nội bộ, đầu phía dự án–đường nội bộ (đo trên ảnh flycam).
-    lowrise: { corners: [[16.0206654, 108.2584333], [16.0185514, 108.259361], [16.0183395, 108.2588447], [16.0204535, 108.257917]],
-      note: ['🏘 Nhà phố – biệt thự thấp tầng', 'Minh hoạ 3D · chưa phải quy hoạch chính thức'] },
     pano360: [
       { id: 'sun-saphia-150m', src: '../pano/sun-saphia-150m.jpg', hd: '../pano/sun-saphia-150m-8k.jpg', lat: 16.020964444, lon: 108.257773967, alt: 150.5, heading: 343.7, time: '21/10/2026 08:06' },
       { id: 'sun-saphia-120m', src: '../pano/sun-saphia-120m.jpg', hd: '../pano/sun-saphia-120m-8k.jpg', lat: 16.020978376, lon: 108.257753928, alt: 119.7, heading: 333.4, time: '21/10/2026 08:07' },
