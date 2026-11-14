@@ -251,7 +251,6 @@ function chips() {
   lb.value = showLbl ? lblGroup : 'off';
   lb.onchange = () => { showLbl = lb.value !== 'off'; if (showLbl) lblGroup = lb.value; lb.classList.toggle('active', showLbl); overlay.visible = showLbl && floor < 0; planGroup.children.forEach((m) => { if (m.name !== 'plan') m.visible = showLbl; }); };
   $('chips').appendChild(lb);
-  const nb = chip(night ? '☀️ Ban ngày' : '🌙 Buổi tối', null, () => { night = !night; applyNight(); show(cur, true); }, night);
   chip('📍 Google Maps', `https://www.google.com/maps/search/?api=1&query=${q.lat},${q.lon}`);
 }
 
