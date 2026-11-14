@@ -123,8 +123,19 @@ function makeViewer(ctx) {
     for (const Z of P.zones || []) {   // ghi chú vùng quy hoạch phía trước
       const pts = Z.corners.map(([la, lo]) => ctx.LL(la, lo)), zx = pts.reduce((a, p) => a + p[0], 0) / 4, zz = pts.reduce((a, p) => a + p[1], 0) / 4;
       const r = rel(C, zx, ctx.groundY(zx, zz) + 3, zz); add(Z.name, r.v, 0, 'zone', 90);
-      const L = labels[labels.length - 1], i = document.createElement('i'); i.textContent = Z.note + ' · xem phối cảnh ›'; L.el.firstChild.appendChild(i); L.g = 'zone';
+      const L = labels[labels.length - 1], i = document.createElement('i'); i.textContent = Z.note + ' · xem bản vẽ ›'; L.el.firstChild.appendChild(i); L.g = 'zone';
       L.el.onclick = () => { const g = P.plans?.groups.findIndex(([n]) => n === Z.gallery); if (g >= 0 && ctx.openPlans) ctx.openPlans(P, g); };
+    }
+    if (P.lowrise?.note) {
+      const pts = P.lowrise.corners.map(([la, lo]) => ctx.LL(la, lo)), zx = pts.reduce((a, p) => a + p[0], 0) / 4, zz = pts.reduce((a, p) => a + p[1], 0) / 4;
+      const r = rel(C, zx, ctx.groundY(zx, zz) + 22, zz); add(P.lowrise.note[0], r.v, 0, 'zone', 88);
+      const L = labels[labels.length - 1], i = document.createElement('i'); i.textContent = P.lowrise.note[1]; L.el.firstChild.appendChild(i); L.g = 'lownote';
+    }
+    if (P.front?.resortNote) {
+      const [x0, z0] = ctx.LL(...P.front.resortCorners[0]), [x2, z2] = ctx.LL(...P.front.resortCorners[2]);
+      const zx = (x0 + x2) / 2 - 60 * Math.sign(x2 - x0), zz = (z0 + z2) / 2, r = rel(C, zx, ctx.groundY(zx, zz) + 3, zz);
+      add(P.front.resortNote[0], r.v, 0, 'zone', 89);
+      const L = labels[labels.length - 1], i = document.createElement('i'); i.textContent = P.front.resortNote[1]; L.el.firstChild.appendChild(i); L.g = 'resortnote';
     }
     const seen = new Set();
     for (const p of ctx.PLACES) {
@@ -232,18 +243,82 @@ function makeViewer(ctx) {
     for (let i = 0; i < 140; i++) { const x = rnd() * W, y = 70 + rnd() * (H - 90); if (Math.abs(x - px) > 170) palm(x, y, 9 + rnd() * 7); }
     const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return t;
   }
-  const zoneGroup = new THREE.Group(); scene.add(zoneGroup); let showZone = true;
+  const zoneGroup = new THREE.Group(); scene.add(zoneGroup); let showZone = true, frontMode = 1;   // 0 hiện trạng, 1 quy hoạch công viên, 2 + làm sạch, 3 + kiểu resort
+  const stripMesh = { m: null };
   function buildZones(C) {
     zoneGroup.clear();
     for (const Z of P.zones || []) {
       const q = Z.corners.map(([la, lo]) => { const [x, z] = ctx.LL(la, lo); return new THREE.Vector3(x - C.x, ctx.groundY(x, z) + 0.5 - C.y, z - C.z); });
       const g = new THREE.BufferGeometry().setFromPoints([q[0], q[1], q[2], q[0], q[2], q[3]]);
       g.setAttribute('uv', new THREE.Float32BufferAttribute([0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0], 2));
-      const m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ map: (Z.tex ||= parkTex(Z.plaza ?? 0.5)), transparent: true, opacity: 0.92, depthTest: false, depthWrite: false, side: THREE.DoubleSide }));
+      const m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ map: (Z.tex ||= parkTex(Z.plaza ?? 0.5)), transparent: true, opacity: 0.9, depthTest: false, depthWrite: false, side: THREE.DoubleSide }));
       m.renderOrder = 1; zoneGroup.add(m);
-      if (Z.img) loadTex(Z.img).then((t) => { m.material.map = t; m.material.needsUpdate = true; }).catch(() => {});   // ảnh quy hoạch thật thay hình vẽ minh hoạ
+      if (Z.img) { m.visible = false; loadTex(Z.img).then((t) => { m.material.map = t; m.material.needsUpdate = true; m.visible = true; }).catch(() => {}); }   // ảnh quy hoạch thật thay hình vẽ minh hoạ
     }
-    zoneGroup.visible = showZone;
+    // dải đất phía trước (ngoài lô công viên): ảnh làm sạch / kiểu resort dựng từ chính ảnh flycam
+    const F = P.front; stripMesh.m = null;
+    if (F) {
+      const q = F.corners.map(([la, lo]) => { const [x, z] = ctx.LL(la, lo); return new THREE.Vector3(x - C.x, ctx.groundY(x, z) + 0.3 - C.y, z - C.z); });
+      const g = new THREE.BufferGeometry().setFromPoints([q[0], q[1], q[2], q[0], q[2], q[3]]);
+      g.setAttribute('uv', new THREE.Float32BufferAttribute([0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0], 2));
+      const m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ transparent: true, depthTest: false, depthWrite: false, side: THREE.DoubleSide }));
+      m.renderOrder = 0.5; zoneGroup.add(m); stripMesh.m = m;
+      if (F.resortCorners) {   // kiểu quy hoạch resort phủ cả dải (nằm dưới lô công viên)
+        const q2 = F.resortCorners.map(([la, lo]) => { const [x, z] = ctx.LL(la, lo); return new THREE.Vector3(x - C.x, ctx.groundY(x, z) + 0.2 - C.y, z - C.z); });
+        const g2 = new THREE.BufferGeometry().setFromPoints([q2[0], q2[1], q2[2], q2[0], q2[2], q2[3]]);
+        g2.setAttribute('uv', new THREE.Float32BufferAttribute([0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0], 2));
+        stripMesh.r = new THREE.Mesh(g2, new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.95, depthTest: false, depthWrite: false, side: THREE.DoubleSide }));
+        stripMesh.r.renderOrder = 0.4; stripMesh.r.visible = false; zoneGroup.add(stripMesh.r);
+      }
+    }
+    setFront(frontMode);
+  }
+  const resortGroup = { visible: false };
+  // ===== nhà thấp tầng 3D trên dải đất trống =====
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x8f9f7a, 1.5));
+  const sunL = new THREE.DirectionalLight(0xfff1dc, 2.4); sunL.position.set(0.83, 0.55, 0.38); scene.add(sunL);   // nắng ~8h sáng từ hướng Đông
+  const winTex = (wall, glass) => { const c = document.createElement('canvas'); c.width = 64; c.height = 64; const g = c.getContext('2d');
+    g.fillStyle = wall; g.fillRect(0, 0, 64, 64); g.fillStyle = glass; g.fillRect(8, 14, 20, 30); g.fillRect(36, 14, 20, 30);
+    g.fillStyle = '#ffffff55'; g.fillRect(8, 44, 48, 3); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.colorSpace = THREE.SRGBColorSpace; return t; };
+  const WALLS = ['#f3efe6', '#ece4d4', '#f6f4ef', '#e9e1cf'], ROOFS = [0xb5523b, 0x9c4632, 0x6f6a66, 0xc0613f];
+  const lowGroup = new THREE.Group(); scene.add(lowGroup); let showLow = true;
+  function buildLowrise(C) {
+    lowGroup.clear(); const F = P.lowrise; if (!F) return;
+    const c = F.corners.map(([la, lo]) => { const [x, z] = ctx.LL(la, lo); return new THREE.Vector3(x - C.x, ctx.groundY(x, z) - C.y, z - C.z); });
+    const S = c[1].clone().sub(c[0]), Ls = S.length(); S.normalize();
+    const T = c[3].clone().sub(c[0]), Lt = T.length(); T.normalize();
+    const yaw = Math.atan2(-S.z, S.x); let sd = 5; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+    const at = (s, t, y) => c[0].clone().addScaledVector(S, s).addScaledVector(T, t).add(new THREE.Vector3(0, y, 0));
+    const lawnG = new THREE.BufferGeometry().setFromPoints([c[0], c[1], c[2], c[0], c[2], c[3]].map((v) => v.clone().add(new THREE.Vector3(0, 0.3, 0))));
+    lowGroup.add(new THREE.Mesh(lawnG, new THREE.MeshLambertMaterial({ color: 0x86ad5f, side: THREE.DoubleSide })));
+    const house = (s, t, w, d, floors, villa) => {
+      const h = floors * 3.5, wall = WALLS[Math.floor(rnd() * 4)], tex = winTex(wall, '#3e5566'); tex.repeat.set(Math.max(1, Math.round(w / 4)), floors);
+      const side = new THREE.MeshLambertMaterial({ map: tex }), top = new THREE.MeshLambertMaterial({ color: wall });
+      const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), [side, side, top, top, side, side]);
+      b.position.copy(at(s, t, h / 2 + 0.3)); b.rotation.y = yaw; lowGroup.add(b);
+      if (villa) {   // mái dốc 4 mái ngói
+        const r = new THREE.Mesh(new THREE.ConeGeometry(Math.SQRT1_2, 1, 4, 1), new THREE.MeshLambertMaterial({ color: ROOFS[Math.floor(rnd() * 4)], flatShading: true }));
+        r.rotation.y = Math.PI / 4; const grp = new THREE.Group(); grp.add(r); grp.scale.set(w * 1.12, 3.2, d * 1.12);
+        grp.rotation.y = yaw; grp.position.copy(at(s, t, h + 1.9)); lowGroup.add(grp);
+      } else {       // mái bằng + tum thang
+        const tm = new THREE.Mesh(new THREE.BoxGeometry(w * 0.6, 2.6, d * 0.3), top);
+        tm.position.copy(at(s, t + d * 0.2, h + 1.6)); tm.rotation.y = yaw; lowGroup.add(tm);
+      }
+    };
+    // nhà phố mặt tiền Trường Sa (5 × 18 m, 4–5 tầng) và biệt thự mặt đường nội bộ (10 × 14 m, 3 tầng)
+    for (let s = 6; s + 5 < Ls - 6; s += 5.4) house(s + 2.5, 12, 5, 18, 4 + (rnd() < 0.35 ? 1 : 0), false);
+    for (let s = 8; s + 10 < Ls - 6; s += 15) house(s + 5, Lt - 11, 10, 14, 3, true);
+    const treeM = new THREE.MeshLambertMaterial({ color: 0x3f7a35, flatShading: true });
+    for (let s = 4; s < Ls; s += 9) { const tr = new THREE.Mesh(new THREE.IcosahedronGeometry(2.2, 0), treeM); tr.position.copy(at(s, 1.2, 4)); lowGroup.add(tr); }
+    lowGroup.visible = showLow;
+  }
+  function setFront(mode) {
+    frontMode = mode; showZone = mode > 0; zoneGroup.visible = showZone; resortGroup.visible = mode === 3;
+    const m0 = stripMesh.m; if (!m0) return;
+    m0.visible = false; if (stripMesh.r) stripMesh.r.visible = false; if (mode < 2) return;
+    const m = mode === 3 && stripMesh.r ? stripMesh.r : m0;
+    const url = mode === 2 ? P.front.clean : P.front.resort;
+    loadTex(url).then((t) => { if (frontMode !== mode) return; m.material.map = t; m.material.needsUpdate = true; m.visible = true; }).catch(() => {});
   }
   function setFloor(i) {
     floor = i; const m = planGroup.getObjectByName('plan'); if (!m) return;
@@ -260,7 +335,7 @@ function makeViewer(ctx) {
     view.yaw = cur.heading; view.pitch = -18; view.fov = innerWidth < innerHeight ? 85 : 72;
     $('h2').textContent = '🛸 360° ' + P.name;
     $('.hd small').textContent = `${cur.lat.toFixed(6)}, ${cur.lon.toFixed(6)} · cao ${Math.round(cur.alt)} m · ${cur.time}`;
-    buildLabels(C); buildOverlay(C); buildPlan(C); buildZones(C);
+    buildLabels(C); buildOverlay(C); buildPlan(C); buildZones(C); buildLowrise(C);
     chips.textContent = '';
     P.pano360.forEach((q, i) => {
       const b = document.createElement('button'); b.className = 'chip' + (i === idx ? ' active' : '');
@@ -272,8 +347,13 @@ function makeViewer(ctx) {
       sel.innerHTML = '<option value="-1">🏗 Mặt bằng: tắt</option>' + P.overlay.floors.map(([, n], i) => `<option value="${i}">🏗 ${n}</option>`).join('');
       sel.value = floor; sel.onchange = () => { setFloor(+sel.value); sel.classList.toggle('active', floor >= 0); }; chips.appendChild(sel);
     }
-    if (P.zones?.length) { const zb = document.createElement('button'); zb.className = 'chip' + (showZone ? ' active' : ''); zb.textContent = '🌴 Quy hoạch phía trước';
-      zb.onclick = () => { showZone = !showZone; zb.classList.toggle('active', showZone); zoneGroup.visible = showZone; }; chips.appendChild(zb); }
+    if (P.zones?.length) {   // phía trước: hiện trạng / quy hoạch / làm sạch / kiểu resort
+      const zb = document.createElement('select'); zb.className = 'chip' + (frontMode ? ' active' : ''); zb.setAttribute('aria-label', 'Khu đất phía trước');
+      zb.innerHTML = [[0, '🌴 Phía trước: hiện trạng'], [1, '🌴 Quy hoạch công viên'], ...(P.front ? [[2, '🌴 QH + làm sạch'], [3, '🏝 Quy hoạch resort']] : [])].map(([v, t]) => `<option value="${v}">${t}</option>`).join('');
+      zb.value = frontMode; zb.onchange = () => { setFront(+zb.value); zb.classList.toggle('active', frontMode > 0); }; chips.appendChild(zb);
+    }
+    if (P.lowrise) { const lw = document.createElement('button'); lw.className = 'chip' + (showLow ? ' active' : ''); lw.textContent = '🏘 Nhà thấp tầng';
+      lw.onclick = () => { showLow = !showLow; lw.classList.toggle('active', showLow); lowGroup.visible = showLow; }; chips.appendChild(lw); }
     const site = document.createElement('button'); site.className = 'chip'; site.textContent = '⬇ Nhìn khu đất';
     site.onclick = () => { const S = siteCenter(); if (!S) return; const r = rel(C, S[0], ctx.groundY(S[0], S[1]), S[1]); view.yaw = (THREE.MathUtils.radToDeg(Math.atan2(r.v.x, -r.v.z)) + 360) % 360; view.pitch = Math.max(-80, THREE.MathUtils.radToDeg(Math.atan2(r.v.y, r.dist)) + 12); view.fov = 80; };
     chips.appendChild(site);
@@ -284,7 +364,6 @@ function makeViewer(ctx) {
     lb.onchange = () => { showLbl = lb.value !== 'off'; if (showLbl) lblGroup = lb.value; lb.classList.toggle('active', showLbl); overlay.visible = showLbl && floor < 0; planGroup.children.forEach((m) => { if (m.name !== 'plan') m.visible = showLbl; }); }; chips.appendChild(lb);
     const map = document.createElement('a'); map.className = 'chip'; map.target = '_blank'; map.rel = 'noopener';
     map.href = `https://www.google.com/maps/search/?api=1&query=${cur.lat},${cur.lon}`; map.textContent = '📍 Google Maps'; chips.appendChild(map);
-    const back = document.createElement('button'); back.className = 'chip'; back.textContent = '↩ Về bản đồ 3D'; back.onclick = close; chips.appendChild(back);
 
     if (!open) { open = true; root.hidden = false; ctx.onOpen?.(); resize(); raf = requestAnimationFrame(loop); }
     const want = cur;
@@ -340,7 +419,7 @@ function makeViewer(ctx) {
     const placed = [];
     for (const L of labels) {
       tmp.copy(L.dir).multiplyScalar(100).project(camera);
-      let vis = showLbl && !(L.g === 'zone' && !showZone) && (lblGroup === 'all' || L.g === 'zone' || L.g === lblGroup || L.g === 'site') && !(L.site && floor >= 0) && tmp.z < 1 && Math.abs(tmp.x) < 1.1 && Math.abs(tmp.y) < 1.1;
+      let vis = showLbl && !(L.g === 'zone' && !showZone) && !(L.g === 'resortnote' && frontMode !== 3) && !(L.g === 'lownote' && !showLow) && (lblGroup === 'all' || L.g === 'zone' || L.g === 'resortnote' || L.g === 'lownote' || L.g === lblGroup || L.g === 'site') && !(L.site && floor >= 0) && tmp.z < 1 && Math.abs(tmp.x) < 1.1 && Math.abs(tmp.y) < 1.1;
       if (vis) {
         const x = ((tmp.x + 1) / 2) * innerWidth, y = ((1 - tmp.y) / 2) * innerHeight;
         if (!L.w) { L.el.style.display = ''; L.w = L.el.offsetWidth || 80; L.h = L.el.firstChild.offsetHeight || 22; L.stem = L.el.querySelector('span'); }

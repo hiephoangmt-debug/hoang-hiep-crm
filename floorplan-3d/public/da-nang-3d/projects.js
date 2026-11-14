@@ -21,7 +21,8 @@ window.PROJECTS_DATA = [
     plans: { dir: '../mat-bang/sun-saphia/', groups: [
       ['Mặt bằng tầng', [['t-2', 'Tầng 2 · hồ bơi, tiện ích'], ['t-3', 'Tầng 3'], ['t-3a-28', 'Tầng 3A – 28 (điển hình)'], ['t-25d', 'Tầng 3A – 28 · nội thất'], ['t-29', 'Tầng 29'], ['t-30', 'Tầng 30']]],
       ['Layout căn', [['c-stu-a', 'Studio A · 30 m²'], ['c-stu-b', 'Studio B · 40,03 m²'], ['c-1br-plus', '1PN+ · 51,11 m²'], ['c-2br-c', '2PN C · 61,14 m²'], ['c-2br-a', '2PN A · 67,69 m²'], ['c-2br-b', '2PN B · 70,21 m²']]],
-      ['Phối cảnh', [['pc-toa-thap', 'Phối cảnh toà Sun Saphia'], ['pc-bai-tam', 'Phối cảnh quảng trường – bãi tắm (tham khảo)']]],
+      ['Quy hoạch', [['qh-phuong-an', 'Công viên biển – phương án điều chỉnh'], ['qh-cong-vien', 'Công viên biển 88 × 272 m (cắt trong ranh)'], ['qh-vi-tri', 'Vị trí quy hoạch & phối cảnh quảng trường']]],
+      ['Phối cảnh', [['pc-toa-thap', 'Phối cảnh toà Sun Saphia'], ['pc-hoang-hon', 'Phối cảnh hoàng hôn'], ['pc-poster', 'Vị trí: Võ Nguyên Giáp – Nguyễn Đức Thuận – bãi tắm Sơn Thủy'], ['pc-bai-tam', 'Phối cảnh quảng trường – bãi tắm (tham khảo)']]],
       ['Layout căn 3D', [['d-stu-01-9000', 'Studio · 30 m² (dài 9,0 m)'], ['d-stu-01-9200', 'Studio · 30 m² (dài 9,2 m)'], ['d-stu-02', 'Studio · 40,03 m²'], ['d-1br-9000', '1PN+ · 48,98 m²'], ['d-1br-9200', '1PN+ · 51,11 m²'], ['d-2br-01', '2PN · 61,14 m²'], ['d-2br-03', '2PN · 67,69 m²'], ['d-2br-02', '2PN · 70,21 m²']]],
     ] },
     // Mặt bằng các tầng đặt lên khu đất trong ảnh 360° (nền trắng đã làm trong suốt), 4 góc khối đế khớp 4 góc hàng rào lô
@@ -38,11 +39,25 @@ window.PROJECTS_DATA = [
       { n: 'Đ. Trường Sa', a: [16.0209192, 108.2583535], b: [16.0204039, 108.2585966] },
       { n: 'Đ. Nguyễn Đức Thuận', a: [16.0214165, 108.2574468], b: [16.0211272, 108.2567457] },
     ],
-    // Vùng quy hoạch phía trước (giữa đường Trường Sa và bãi biển): phủ mặt công viên đã làm sạch cỏ (minh hoạ, vẽ bằng code)
-    // + ghi chú; chạm ghi chú mở ảnh phối cảnh. corners: góc phía biển-bắc, biển-nam, đường-nam, đường-bắc (đo trên ảnh flycam).
-    zones: [{ name: '🌴 Công viên & bãi tắm Sơn Thủy', note: 'Quy hoạch mới · làm sạch cỏ như phối cảnh', plaza: 0.502,
-      img: '../mat-bang/sun-saphia/cong-vien-phia-truoc.webp',   // mặt bằng công viên cắt từ ảnh bán hàng (xoay: phía biển ở trên)
-      corners: [[16.0242473, 108.2598368], [16.0201026, 108.2616558], [16.0191028, 108.2592206], [16.0232475, 108.2574016]], gallery: 'Phối cảnh' }],
+    // Công viên – quảng trường biển (QH điều chỉnh, UBND TP Đà Nẵng): lô 88 × 272 m từ đường Trường Sa ra biển,
+    // đối diện đầu đường Minh Mạng, giáp lối xuống biển KDL The Song (phía Nam) và dự án Hòn Ngọc Á Châu (phía Bắc).
+    // Vị trí đo trên ảnh flycam 150 m; ảnh bản vẽ cắt đúng trong ranh, viền mờ dần cho bám đất.
+    // corners: góc phía biển-bắc, biển-nam, đường-nam, đường-bắc.
+    zones: [{ name: '🌴 Công viên – quảng trường biển', note: 'QH điều chỉnh · 88 × 272 m · đối diện đường Minh Mạng',
+      img: '../mat-bang/sun-saphia/cong-vien-qh.webp',
+      corners: [[16.0203858, 108.2614604], [16.0196534, 108.2617818], [16.0186924, 108.2594413], [16.0194248, 108.2591199]], gallery: 'Quy hoạch' }],
+    // Dải đất hoang phía trước (giữa Ariyana và công viên): 2 kiểu minh hoạ dựng từ chính ảnh flycam 150 m
+    // clean = phát quang, giữ cụm cây, phần còn lại thành bãi cỏ; resort = thêm cụm biệt thự The Song + hồ bơi.
+    front: { corners: [[16.0241631, 108.259823], [16.0204594, 108.2614484], [16.0194985, 108.2591079], [16.0232022, 108.2574825]],
+      clean: '../mat-bang/sun-saphia/phia-truoc-lam-sach.webp',
+      // kiểu "quy hoạch resort" (minh hoạ): mặt bằng công viên – resort từ ảnh bán hàng phủ cả dải đất trước dự án
+      resort: '../mat-bang/sun-saphia/cong-vien-phia-truoc.webp',
+      resortCorners: [[16.0242473, 108.2598368], [16.0201026, 108.2616558], [16.0191028, 108.2592206], [16.0232475, 108.2574016]],
+      resortNote: ['🏝 Quy hoạch resort – công viên ven biển', 'Minh hoạ theo phối cảnh bán hàng · chưa phải bản vẽ chính thức'] },
+    // Dải đất trống phía Nam dự án (giữa Trường Sa và đường nội bộ, tới ngã tư Minh Mạng): nhà thấp tầng 3D minh hoạ.
+    // corners: đầu phía dự án–Trường Sa, đầu ngã tư–Trường Sa, đầu ngã tư–đường nội bộ, đầu phía dự án–đường nội bộ (đo trên ảnh flycam).
+    lowrise: { corners: [[16.0206654, 108.2584333], [16.0185514, 108.259361], [16.0183395, 108.2588447], [16.0204535, 108.257917]],
+      note: ['🏘 Nhà phố – biệt thự thấp tầng', 'Minh hoạ 3D · chưa phải quy hoạch chính thức'] },
     pano360: [
       { id: 'sun-saphia-150m', src: '../pano/sun-saphia-150m.jpg', hd: '../pano/sun-saphia-150m-8k.jpg', lat: 16.020964444, lon: 108.257773967, alt: 150.5, heading: 343.7, time: '21/10/2026 08:06' },
       { id: 'sun-saphia-120m', src: '../pano/sun-saphia-120m.jpg', hd: '../pano/sun-saphia-120m-8k.jpg', lat: 16.020978376, lon: 108.257753928, alt: 119.7, heading: 333.4, time: '21/10/2026 08:07' },
