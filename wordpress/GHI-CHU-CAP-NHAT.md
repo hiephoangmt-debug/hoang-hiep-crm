@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.31** + plugin Hoàng Hiệp CRM **2.20.272**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.31** + plugin Hoàng Hiệp CRM **2.20.273**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.273 (14/11/2026)
+
+- **Euro Village 2 – sửa vị trí sơ đồ trên bản đồ:** điểm gợi ý cũ lệch khoảng 800 m; nay đặt theo Plus Code 26FJ+X4F (đường Giáng Hương 6, trong dự án). Vị trí đã lưu theo điểm cũ tự bỏ. Thêm ô **dán tọa độ Google Maps → Dời tâm tới** (admin) để căn nhanh, sau đó xoay / kéo nhẹ và **Lưu vị trí**.
 
 ## Có gì mới – 2.20.272 (14/11/2026)
 

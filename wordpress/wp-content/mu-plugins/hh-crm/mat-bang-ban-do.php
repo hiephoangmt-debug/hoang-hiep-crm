@@ -22,7 +22,7 @@ function hh_mbbd_plans() {
 			'ratio'   => $h / $w,
 			'width_m' => $w * 0.88 / 3, // ≈ 865 m: đo theo Đường số 6 (204 m), số 7 (164 m), số 8 (204 m), số 4 (471 m).
 			'bearing' => 35.7,          // Hướng phía trên ảnh so với Bắc thật (theo mũi tên Bắc trên bản vẽ).
-			'center'  => array( 16.0176, 108.2282 ), // Vị trí gợi ý ban đầu – admin kéo cho khớp rồi Lưu.
+			'center'  => array( 16.02494, 108.23030 ), // Plus Code 26FJ+X4F (đường Giáng Hương 6, trong Euro Village 2) – admin kéo cho khớp rồi Lưu.
 			'labels'  => array(
 				$l( 'B2-8', '104 lô · 39.083 m²', 1620, 726 ),
 				$l( 'B2-11', '61 lô · 20.403 m²', 1467, 1144 ),
@@ -66,6 +66,9 @@ add_action(
 		}
 		list( $slug, $p ) = $found;
 		$saved = get_option( 'hh_mbbd_' . $slug );
+		if ( is_array( $saved ) && abs( (float) $saved['lat'] - 16.0176 ) < 0.0005 && abs( (float) $saved['lng'] - 108.2282 ) < 0.0005 ) {
+			$saved = false; // Vị trí lưu nhầm theo điểm gợi ý cũ (sai chỗ) – bỏ, dùng tọa độ mới.
+		}
 		$admin = current_user_can( 'manage_options' );
 		$img   = HH_CRM_URL . $p['image'] . '?v=' . HH_CRM_VERSION;
 		echo '<div class="hh-mbbd" style="margin:28px 0 8px">';
@@ -98,6 +101,7 @@ add_action(
 	<span style="flex-basis:100%;color:#8a4b1c"><b>Admin:</b> kéo chấm đỏ để dời sơ đồ, xoay / co giãn cho khớp đường trên ảnh vệ tinh rồi bấm Lưu. Khách chỉ thấy bản đồ sau khi Lưu.</span>
 	<button type="button" data-k="r-1">⟲ 1°</button><button type="button" data-k="r-.2">⟲ 0,2°</button><button type="button" data-k="r.2">⟳ 0,2°</button><button type="button" data-k="r1">⟳ 1°</button>
 	<button type="button" data-k="s-1">− 1%</button><button type="button" data-k="s1">+ 1%</button>
+	<input type="text" data-k="ll" placeholder="Dán tọa độ Google Maps, VD 16.0249, 108.2303" style="min-width:260px;padding:5px 8px"><button type="button" data-k="go">Dời tâm tới</button>
 	<button type="button" data-k="save" style="background:#532516;color:#fff;border:0;border-radius:6px;padding:6px 14px">Lưu vị trí</button>
 	<button type="button" data-k="reset">Bỏ vị trí đã lưu</button>
 	<span data-k="st" style="color:#555"></span>
@@ -165,6 +169,11 @@ add_action(
 	bar.querySelectorAll('button[data-k]').forEach(function (b) {
 		b.addEventListener('click', function () {
 			var k = b.getAttribute('data-k');
+			if (k === 'go') {
+				var v = (bar.querySelector('[data-k=ll]').value.match(/-?\d+(?:\.\d+)?/g) || []).map(parseFloat);
+				if (v.length < 2) { msg.textContent = 'Chưa đọc được tọa độ.'; return; }
+				st.lat = v[0]; st.lng = v[1]; pin.setLatLng([st.lat, st.lng]); map.setView([st.lat, st.lng]); place(); drawLabels(); show(); return;
+			}
 			if (k !== 'save' && k !== 'reset') {
 				if (k.charAt(0) === 'r') { st.rot += parseFloat(k.slice(1)); } else { st.sc *= 1 + parseFloat(k.slice(1)) / 100; }
 			} else {
