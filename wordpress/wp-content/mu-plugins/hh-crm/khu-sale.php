@@ -133,6 +133,9 @@ add_action(
 		nocache_headers();
 		do_action( 'litespeed_control_set_nocache', 'khu sale nội bộ' );
 		header( 'X-Robots-Tag: noindex, nofollow', true );
+		if ( isset( $_GET['ml'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification -- link đăng nhập 1 lần qua email.
+			hh_sale_maillink_consume( sanitize_text_field( wp_unslash( $_GET['ml'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification
+		}
 		if ( ! hh_sale_can() ) {
 			hh_sale_page_login();
 			exit;
@@ -237,8 +240,14 @@ function hh_sale_layout( $title, $view, $body ) {
 }
 
 function hh_sale_page_login() {
-	$redirect = home_url( add_query_arg( array() ) );
+	$redirect = remove_query_arg( array( 'login', 'ml', 'mls' ), home_url( add_query_arg( array() ) ) );
 	$err      = isset( $_GET['login'] ) ? 'Sai tài khoản hoặc mật khẩu.' : ''; // phpcs:ignore WordPress.Security.NonceVerification
+	$mls      = sanitize_key( $_GET['mls'] ?? '' ); // phpcs:ignore WordPress.Security.NonceVerification
+	$mlmsg    = array(
+		'sent' => array( 'g', 'Nếu email này có tài khoản, link đăng nhập đã được gửi tới hộp thư (xem cả mục Thư rác / Quảng cáo). Link dùng 1 lần, hết hạn sau 15 phút.' ),
+		'bad'  => array( 'r', 'Link đăng nhập không đúng hoặc đã hết hạn. Gửi lại link mới bên dưới.' ),
+		'wait' => array( 'r', 'Bạn vừa yêu cầu link – đợi 1 phút rồi thử lại.' ),
+	);
 	$locked   = is_user_logged_in() && ! hh_sale_can();
 	?><!DOCTYPE html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Đăng nhập – Khu Sale Hoàng Hiệp</title>
@@ -247,20 +256,26 @@ function hh_sale_page_login() {
 	<?php if ( $locked ) : ?>
 		<p class="note">Tài khoản này không có quyền vào khu sale hoặc đã bị khóa. Liên hệ anh Hiệp – 0904 567 009.</p><p><a href="<?php echo esc_url( wp_logout_url( hh_sale_url() ) ); ?>">Đăng xuất</a></p>
 	<?php else : ?>
-		<p class="note">Đăng nhập bằng số điện thoại và mật khẩu anh Hiệp cấp.</p>
-		<?php if ( $err ) : ?><p style="color:#b42318;font-size:14px"><?php echo esc_html( $err ); ?></p><?php endif; ?>
+		<p class="note">Đăng nhập bằng số điện thoại (hoặc email) và mật khẩu – hoặc nhận link đăng nhập qua email ở cuối trang.</p>
+		<?php if ( isset( $mlmsg[ $mls ] ) ) : ?><p style="font-size:14px;padding:10px 12px;border-radius:10px;<?php echo 'g' === $mlmsg[ $mls ][0] ? 'background:#e8f7ee;color:#14532d' : 'background:#fdecea;color:#b42318'; ?>"><?php echo esc_html( $mlmsg[ $mls ][1] ); ?></p><?php elseif ( $err ) : ?><p style="color:#b42318;font-size:14px"><?php echo esc_html( $err ); ?></p><?php endif; ?>
 		<?php
 		wp_login_form(
 			array(
 				'redirect'       => $redirect,
-				'label_username' => 'Số điện thoại',
+				'label_username' => 'Số điện thoại hoặc email',
 				'label_password' => 'Mật khẩu',
 				'label_remember' => 'Ghi nhớ trên máy này',
 				'label_log_in'   => 'Đăng nhập',
 			)
 		);
 		?>
-		<p class="note">Quên mật khẩu: nhắn anh Hiệp để được cấp lại.</p>
+		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" style="margin-top:20px;padding-top:16px;border-top:1px solid #e3e8ef">
+			<input type="hidden" name="action" value="hh_sale_maillink">
+			<label for="hhml" style="margin-top:0">Hoặc nhận link đăng nhập qua email</label>
+			<input id="hhml" type="email" name="email" autocomplete="email" required placeholder="email@gmail.com" style="width:100%;padding:11px 12px">
+			<button class="button" type="submit" style="background:#0e223a">Gửi link đăng nhập</button>
+		</form>
+		<p class="note">Không cần nhớ mật khẩu: gõ đúng email của tài khoản, mở hộp thư, bấm link là vào. Quên mật khẩu / chưa có email: nhắn anh Hiệp.</p>
 	<?php endif; ?>
 </div></body></html>
 	<?php
@@ -1669,3 +1684,70 @@ add_action(
 		exit;
 	}
 );
+
+
+/* =========================================================================
+ * Đăng nhập bằng link gửi qua email (anh Hiệp 14/11/2026: "gõ đúng email là vào được")
+ * Gõ email → web gửi link 1 lần, hết hạn 15 phút → bấm link là đăng nhập. Không lộ email nào có tài khoản;
+ * giới hạn 5 lần/giờ mỗi địa chỉ IP và 1 lần/phút mỗi tài khoản. Chỉ tài khoản được vào khu sale (sale chưa khóa, quản trị).
+ * ====================================================================== */
+
+function hh_sale_maillink_send( $email ) {
+	$u = get_user_by( 'email', $email );
+	if ( ! $u || ( ! $u->has_cap( 'manage_options' ) && ( ! $u->has_cap( 'hh_sale_portal' ) || get_user_meta( $u->ID, 'hh_sale_locked', true ) ) ) ) {
+		return 'sent';
+	}
+	if ( (int) get_user_meta( $u->ID, 'hh_sale_ml_at', true ) > time() - MINUTE_IN_SECONDS ) {
+		return 'wait';
+	}
+	$token = wp_generate_password( 40, false );
+	update_user_meta( $u->ID, 'hh_sale_ml', array( wp_hash_password( $token ), time() + 15 * MINUTE_IN_SECONDS ) );
+	update_user_meta( $u->ID, 'hh_sale_ml_at', time() );
+	$link = add_query_arg( 'ml', $u->ID . '.' . $token, hh_sale_url() );
+	wp_mail(
+		$u->user_email,
+		'Link đăng nhập Khu Sale Hoàng Hiệp',
+		'Chào ' . $u->display_name . ",\n\nBấm link dưới đây để đăng nhập Khu Sale Hoàng Hiệp (dùng 1 lần, hết hạn sau 15 phút):\n\n" . $link . "\n\nNếu bạn không yêu cầu, hãy bỏ qua email này.\n\nHoàng Hiệp – 0904 567 009"
+	);
+	return 'sent';
+}
+
+add_action( 'admin_post_nopriv_hh_sale_maillink', 'hh_sale_maillink_handle' );
+add_action( 'admin_post_hh_sale_maillink', 'hh_sale_maillink_handle' );
+function hh_sale_maillink_handle() {
+	$ip  = 'hh_sale_ml_ip_' . md5( sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ?? '' ) ) );
+	$cnt = (int) get_transient( $ip );
+	$r   = 'sent';
+	if ( $cnt >= 5 ) {
+		$r = 'wait';
+	} else {
+		set_transient( $ip, $cnt + 1, HOUR_IN_SECONDS );
+		$email = sanitize_email( wp_unslash( $_POST['email'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification -- form công khai, chống lạm dụng bằng giới hạn lượt.
+		if ( is_email( $email ) ) {
+			$r = hh_sale_maillink_send( $email );
+		}
+	}
+	wp_safe_redirect( add_query_arg( 'mls', $r, hh_sale_url() ) );
+	exit;
+}
+
+function hh_sale_maillink_consume( $raw ) {
+	$parts = explode( '.', $raw, 2 );
+	$uid   = (int) ( $parts[0] ?? 0 );
+	$token = (string) ( $parts[1] ?? '' );
+	$data  = $uid ? (array) get_user_meta( $uid, 'hh_sale_ml', true ) : array();
+	$ok    = $token && 2 === count( $data ) && (int) $data[1] >= time() && wp_check_password( $token, (string) $data[0], $uid );
+	if ( $uid ) {
+		delete_user_meta( $uid, 'hh_sale_ml' ); // Link chỉ dùng 1 lần (kể cả khi sai).
+	}
+	$u = $ok ? get_userdata( $uid ) : null;
+	if ( ! $u || get_user_meta( $uid, 'hh_sale_locked', true ) || ( ! $u->has_cap( 'manage_options' ) && ! $u->has_cap( 'hh_sale_portal' ) ) ) {
+		wp_safe_redirect( add_query_arg( 'mls', 'bad', hh_sale_url() ) );
+		exit;
+	}
+	wp_set_current_user( $uid );
+	wp_set_auth_cookie( $uid, true, is_ssl() );
+	do_action( 'wp_login', $u->user_login, $u );
+	wp_safe_redirect( hh_sale_url() );
+	exit;
+}
