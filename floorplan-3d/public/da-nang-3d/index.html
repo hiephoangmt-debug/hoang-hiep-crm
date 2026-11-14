@@ -84,6 +84,7 @@
 <div class="loading" id="loading">Đang tải dữ liệu Đà Nẵng…</div>
 
 <script src="projects.js"></script>
+<script src="poi.js"></script>
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
@@ -1546,7 +1547,7 @@ const PROJECTS = window.PROJECTS_DATA || [];
   }
   window.showProject = showProject;
   // ===== Ảnh 360° flycam: ghim tại đúng toạ độ + độ cao chụp, chạm để mở =====
-  const P360 = { LL, groundY, PLACES, openPlans, onOpen: () => { window.__p360 = true; $('unit').hidden = true; }, onClose: () => { window.__p360 = false; timer.update(); } };
+  const P360 = { LL, groundY, PLACES, openPlans, POI: window.POI_DATA || [], onOpen: () => { window.__p360 = true; $('unit').hidden = true; }, onClose: () => { window.__p360 = false; timer.update(); } };
   function openP(P, i) { setTour(false); openPano(P, i, P360); }
   for (const P of PROJECTS) (P.pano360 || []).forEach((q, i) => {
     const [x, z] = LL(q.lat, q.lon);

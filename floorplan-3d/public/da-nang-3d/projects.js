@@ -23,6 +23,18 @@ window.PROJECTS_DATA = [
       ['Layout căn', [['c-stu-a', 'Studio A · 30 m²'], ['c-stu-b', 'Studio B · 40,03 m²'], ['c-1br-plus', '1PN+ · 51,11 m²'], ['c-2br-c', '2PN C · 61,14 m²'], ['c-2br-a', '2PN A · 67,69 m²'], ['c-2br-b', '2PN B · 70,21 m²']]],
       ['Layout căn 3D', [['d-stu-01-9000', 'Studio · 30 m² (dài 9,0 m)'], ['d-stu-01-9200', 'Studio · 30 m² (dài 9,2 m)'], ['d-stu-02', 'Studio · 40,03 m²'], ['d-1br-9000', '1PN+ · 48,98 m²'], ['d-1br-9200', '1PN+ · 51,11 m²'], ['d-2br-01', '2PN · 61,14 m²'], ['d-2br-03', '2PN · 67,69 m²'], ['d-2br-02', '2PN · 70,21 m²']]],
     ] },
+    // Mặt bằng các tầng đặt lên khu đất trong ảnh 360° (nền trắng đã làm trong suốt), đúng tỷ lệ:
+    // khối đế ~57 × 52 m (đo theo căn studio dài 9 m trên bản vẽ), "Hướng biển" của bản vẽ quay về hướng 67°,
+    // đặt giữa ranh đất ~94 × 68 m (vị trí trong lô là giả định – chỉnh corners nếu có bản vẽ tổng mặt bằng).
+    // corners: góc trên-trái, trên-phải, dưới-phải, dưới-trái của ảnh; mọi tầng dùng chung khung bản vẽ.
+    overlay: { dir: '../mat-bang/sun-saphia/', corners: [[16.02132, 108.2579295], [16.0208299, 108.2581446], [16.0206388, 108.257679], [16.0211289, 108.257464]],
+      floors: [['t-2', 'Tầng 2 · hồ bơi'], ['t-3', 'Tầng 3'], ['t-3a-28', 'Tầng 3A – 28'], ['t-25d', 'Tầng 3A – 28 · nội thất'], ['t-29', 'Tầng 29'], ['t-30', 'Tầng 30']] },
+    // tên đường viết nằm trên mặt đường trong ảnh 360°: a → b là hướng con đường
+    roads: [
+      { n: 'Đ. Võ Nguyên Giáp', a: [16.0222303, 108.257774], b: [16.0216697, 108.2578488] },
+      { n: 'Đ. Trường Sa', a: [16.0209192, 108.2583535], b: [16.0204039, 108.2585966] },
+      { n: 'Đ. Nguyễn Đức Thuận', a: [16.0214165, 108.2574468], b: [16.0211272, 108.2567457] },
+    ],
     pano360: [
       { id: 'sun-saphia-150m', src: '../pano/sun-saphia-150m.jpg', hd: '../pano/sun-saphia-150m-8k.jpg', lat: 16.020964444, lon: 108.257773967, alt: 150.5, heading: 343.7, time: '21/10/2026 08:06' },
       { id: 'sun-saphia-120m', src: '../pano/sun-saphia-120m.jpg', hd: '../pano/sun-saphia-120m-8k.jpg', lat: 16.020978376, lon: 108.257753928, alt: 119.7, heading: 333.4, time: '21/10/2026 08:07' },
