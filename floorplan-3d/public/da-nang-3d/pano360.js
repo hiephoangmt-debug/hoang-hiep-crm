@@ -191,7 +191,30 @@ function makeViewer(ctx) {
 
   // mặt bằng trên đất + tên đường: các mặt phẳng nằm trên mặt đất, vẽ đè lên ảnh
   const planGroup = new THREE.Group(); scene.add(planGroup); let floor = 0;   // floor: chỉ số tầng đang đặt trên đất, -1 = tắt
-  const planMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: 1, depthTest: false, depthWrite: false, side: THREE.DoubleSide });
+  // Vật liệu "in xuống đất": hoà bản vẽ vào ảnh 360° tại chỗ — lấy màu ảnh flycam đúng hướng nhìn,
+  // giữ bóng đổ/sáng tối của mặt đất thật lên bản vẽ, viền mờ theo kênh alpha, chỉnh tông theo ảnh.
+  const makeGroundMat = (sphereMesh) => new THREE.ShaderMaterial({
+    transparent: true, depthTest: false, depthWrite: false, side: THREE.DoubleSide,
+    uniforms: { map: { value: null }, pano: { value: null }, rot: { value: 0 }, strength: { value: 0.88 } },
+    vertexShader: `varying vec2 vUv; varying vec3 vDir;
+      void main() { vUv = uv; vec4 w = modelMatrix * vec4(position, 1.0); vDir = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`,
+    fragmentShader: `uniform sampler2D map; uniform sampler2D pano; uniform float rot; uniform float strength;
+      varying vec2 vUv; varying vec3 vDir;
+      void main() {
+        vec4 p = texture2D(map, vUv);
+        if (p.a < 0.004) discard;
+        vec3 d = normalize(vDir); float c = cos(rot), s = sin(rot);
+        vec3 l = vec3(c * d.x - s * d.z, d.y, s * d.x + c * d.z);          // bỏ phép xoay của mặt cầu ảnh
+        float phi = atan(l.z, l.x); float u = fract(phi / 6.2831853); float v = 1.0 - acos(clamp(l.y, -1.0, 1.0)) / 3.1415927;
+        vec3 photo = texture2D(pano, vec2(u, v)).rgb;
+        float L = dot(photo, vec3(0.299, 0.587, 0.114));
+        vec3 plan = p.rgb * mix(1.0, clamp(L / 0.42, 0.55, 1.25), 0.45);   // bóng cây, nắng của mặt đất thật in lên bản vẽ
+        plan = mix(plan, plan * (photo / max(L, 0.05)) * 0.5 + plan * 0.5, 0.35); // ám màu nắng sáng
+        gl_FragColor = vec4(mix(photo, plan, p.a * strength), 1.0);
+        #include <colorspace_fragment>
+      }`,
+  });
+  const planMat = makeGroundMat();
   function textTex(t) {
     const c = document.createElement('canvas'), g = c.getContext('2d'), f = '700 64px Inter, sans-serif';
     g.font = f; const w = Math.ceil(g.measureText(t).width) + 40; c.width = w; c.height = 96;
@@ -332,7 +355,7 @@ function makeViewer(ctx) {
     m.visible = i >= 0; overlay.visible = showLbl && i < 0;   // đang đặt mặt bằng thì ẩn viền ranh đất
     if (i < 0) return;
     const want = P.overlay.dir + P.overlay.floors[i][0] + '-tren-dat.webp';
-    loadTex(want).then((t) => { if (floor === i) { planMat.map = t; planMat.needsUpdate = true; } }).catch(() => {});
+    loadTex(want).then((t) => { if (floor === i) { planMat.uniforms.map.value = t; } }).catch(() => {});
   }
 
   // buổi tối: lớp phủ (mặt bằng, công viên) tối đi cho hợp ảnh đêm
@@ -427,6 +450,7 @@ function makeViewer(ctx) {
     camera.fov = view.fov; camera.updateProjectionMatrix();
     camera.rotation.y = -THREE.MathUtils.degToRad(view.yaw);
     camera.rotation.x = THREE.MathUtils.degToRad(view.pitch);
+    planMat.uniforms.pano.value = sphMat.map; planMat.uniforms.rot.value = sphere.rotation.y;
     renderer.render(scene, camera);
     camera.updateMatrixWorld();
     // nhãn: chiếu lên màn hình, bỏ nhãn ưu tiên thấp nếu chồng lên nhãn đã đặt

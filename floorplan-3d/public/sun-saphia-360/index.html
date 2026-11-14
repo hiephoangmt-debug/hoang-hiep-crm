@@ -110,7 +110,30 @@ const mat = new THREE.MeshBasicMaterial({ color: 0x222222 });
 const sphere = new THREE.Mesh(geo, mat); scene.add(sphere);
 const overlay = new THREE.Group(); scene.add(overlay);
 const planGroup = new THREE.Group(); scene.add(planGroup); let floor = 0;
-const planMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: 1, depthTest: false, depthWrite: false, side: THREE.DoubleSide });
+// Vật liệu "in xuống đất": hoà bản vẽ vào ảnh 360° tại chỗ — lấy màu ảnh flycam đúng hướng nhìn,
+// giữ bóng đổ/sáng tối của mặt đất thật lên bản vẽ, viền mờ theo kênh alpha, chỉnh tông theo ảnh.
+const makeGroundMat = (sphereMesh) => new THREE.ShaderMaterial({
+  transparent: true, depthTest: false, depthWrite: false, side: THREE.DoubleSide,
+  uniforms: { map: { value: null }, pano: { value: null }, rot: { value: 0 }, strength: { value: 0.88 } },
+  vertexShader: `varying vec2 vUv; varying vec3 vDir;
+    void main() { vUv = uv; vec4 w = modelMatrix * vec4(position, 1.0); vDir = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`,
+  fragmentShader: `uniform sampler2D map; uniform sampler2D pano; uniform float rot; uniform float strength;
+    varying vec2 vUv; varying vec3 vDir;
+    void main() {
+      vec4 p = texture2D(map, vUv);
+      if (p.a < 0.004) discard;
+      vec3 d = normalize(vDir); float c = cos(rot), s = sin(rot);
+      vec3 l = vec3(c * d.x - s * d.z, d.y, s * d.x + c * d.z);          // bỏ phép xoay của mặt cầu ảnh
+      float phi = atan(l.z, l.x); float u = fract(phi / 6.2831853); float v = 1.0 - acos(clamp(l.y, -1.0, 1.0)) / 3.1415927;
+      vec3 photo = texture2D(pano, vec2(u, v)).rgb;
+      float L = dot(photo, vec3(0.299, 0.587, 0.114));
+      vec3 plan = p.rgb * mix(1.0, clamp(L / 0.42, 0.55, 1.25), 0.45);   // bóng cây, nắng của mặt đất thật in lên bản vẽ
+      plan = mix(plan, plan * (photo / max(L, 0.05)) * 0.5 + plan * 0.5, 0.35); // ám màu nắng sáng
+      gl_FragColor = vec4(mix(photo, plan, p.a * strength), 1.0);
+      #include <colorspace_fragment>
+    }`,
+});
+const planMat = makeGroundMat();
 const view = { yaw: 0, pitch: -18, fov: 75 };
 let cur = 0, labels = [], showLbl = true, lblGroup = 'all', night = false;
 const SHORT = { 'Da Nang Downtown – tháp 408 m': 'Da Nang Downtown', 'Bán đảo Sơn Trà (696 m)': 'Bán đảo Sơn Trà', 'Tượng Phật Quan Âm – chùa Linh Ứng': 'Chùa Linh Ứng',
@@ -209,7 +232,7 @@ function buildZone(q) {
 function setFloor(i) {
   floor = i; const m = planGroup.getObjectByName('plan'); if (!m) return;
   m.visible = i >= 0; overlay.visible = showLbl && i < 0;
-  if (i >= 0) load('../mat-bang/sun-saphia/' + FLOORS[i][0] + '-tren-dat.webp').then((t) => { if (floor === i) { planMat.map = t; planMat.needsUpdate = true; } }).catch(() => {});
+  if (i >= 0) load('../mat-bang/sun-saphia/' + FLOORS[i][0] + '-tren-dat.webp').then((t) => { if (floor === i) { planMat.uniforms.map.value = t; } }).catch(() => {});
 }
 function buildLabels(q) {
   const box = $('lbls'); box.textContent = ''; labels = [];
@@ -273,6 +296,7 @@ function loop() {
   if ($('mb').hidden) {
     camera.fov = view.fov; camera.updateProjectionMatrix();
     camera.rotation.y = -THREE.MathUtils.degToRad(view.yaw); camera.rotation.x = THREE.MathUtils.degToRad(view.pitch);
+    planMat.uniforms.pano.value = mat.map; planMat.uniforms.rot.value = sphere.rotation.y;
     renderer.render(scene, camera); camera.updateMatrixWorld();
     const placed = [];
     for (const L of labels) {
