@@ -69,3 +69,6 @@
 | 14/11/2026 | TikTok (@hiephoangmt, brand Sun) | 14:30 | Sun Saphia đi Hội An – bài ảnh (thẻ dọc) | /tu-sun-saphia-residence-di-hoi-an-bao-xa-lich-trinh/ |
 | 14/11/2026 | Sun | 18:30 | (bài web mới 16:30) Cho thuê dài hạn Sun Saphia Residence – giá thuê tháng, tỷ suất (1 ảnh dọc, nội thất studio) | /cho-thue-dai-han-sun-saphia-residence-chuyen-gia-gia-dinh/ |
 | 14/11/2026 | TikTok (@hiephoangmt, brand Sun) | 18:45 | Cho thuê dài hạn Sun Saphia – bài ảnh (thẻ dọc) | /cho-thue-dai-han-sun-saphia-residence-chuyen-gia-gia-dinh/ |
+| 14/11/2026 | TikTok (@hiephoangmt, brand Sun) | 08:45 | Nội thất biệt thự Casamia Balanca – album 4 ảnh (anh Hiệp: TikTok đăng Sun + Casamia) | /du-an/casamia-balanca-hoi-an/ |
+| 14/11/2026 | Casamia (blogId 8074284) | 21:00 | Sống chậm ven sông Cổ Cò – album 4 ảnh (hoàng hôn sông, biệt thự ven kênh, đường dạo, ban công) | /du-an/casamia-balanca-hoi-an/ |
+| 14/11/2026 | TikTok (@hiephoangmt, brand Sun) | 21:15 | Sống chậm ven sông Cổ Cò – Casamia, album 4 ảnh | /du-an/casamia-balanca-hoi-an/ |

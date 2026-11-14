@@ -25,7 +25,7 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 - Tài khoản TikTok @hiephoangmt kết nối trong brand Sun (blogId 7637635) → mỗi bài trang Sun đăng thêm 1 bài TikTok riêng (providers chỉ tiktok), giờ = giờ bài FB + 15 phút.
 - Dạng bài ẢNH: dùng chính thẻ dọc / ảnh của bài FB (tối đa vài ảnh). tiktokData: title ≤ 90 ký tự (từ khoá chính), privacyOption PUBLIC_TO_EVERYONE, commercialContentOwnBrand true, autoAddMusic true.
 - Lời ngắn hơn FB: 1 câu mở có từ khoá, 3–4 gạch đầu dòng "•", 1 câu "Góc nhìn của Hiệp", kết "Zalo 0904 567 009 · chi tiết tại hiephoangmt.com" (TikTok không bấm được link trong bình luận), 4–5 hashtag có #DaNang.
-- Bài trang Hoàng Hiệp KHÔNG đăng TikTok (TikTok gắn brand Sun).
+- TikTok CHỈ đăng nội dung Sun và Casamia (anh Hiệp 14/11/2026). Bài trang Casamia cũng tạo bài TikTok riêng qua brand Sun (blogId 7637635), giờ = bài FB Casamia + 15 phút, dùng chính album ảnh. Bài trang Hoàng Hiệp KHÔNG đăng TikTok.
 
 ## Trang Casamia Balanca (kết nối 13/11/2026, anh Hiệp chọn 2 bài/ngày)
 - Metricool blogId 8074284, chỉ nội dung Casamia Balanca (Đạt Phương, Cẩm Thanh – Hội An); có thể nhắc Casamia Hội An, Casamia Calm khi so sánh.
