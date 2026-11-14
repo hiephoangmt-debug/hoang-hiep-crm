@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.30** + plugin Hoàng Hiệp CRM **2.20.268**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.30** + plugin Hoàng Hiệp CRM **2.20.269**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.269 (14/11/2026)
+
+- **17 tin bán khách sạn / tòa căn hộ – khách sạn ven biển Đà Nẵng** (danh sách anh gửi 14/11): Sơn Thủy, Hồ Xuân Hương (3 tòa), Dương Đình Nghệ (2), Phạm Văn Đồng (3), Hồ Nghinh (2), An Thượng 29, Phan Tôn, Trần Bạch Đằng (2), Võ Văn Kiệt, Hà Bổng – giá 68 – 250 tỷ. Vào mục Mua bán → Khách sạn. Không ghi tên / số điện thoại người đăng, không ghi "chính chủ"; doanh thu, giá thuê khoán ghi "theo tin rao"; ảnh thẻ tự vẽ, liên hệ Hoàng Hiệp.
+- Cài: Nhập nhanh → tải `cap-nhat-code.zip` → **"Nhập / cập nhật dữ liệu"** (tạo 17 tin) → LiteSpeed Purge All.
 
 ## Có gì mới – 2.20.268 (14/11/2026) – Học dự án theo giáo trình
 
