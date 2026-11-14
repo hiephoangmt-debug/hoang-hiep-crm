@@ -110,7 +110,7 @@ Nếu báo lỗi, đọc dòng đỏ:
 | Sale | `/khach` | Xem khách đang giữ |
 | Sale | `/giahan K4` | Xin thêm 1 ngày cho hạn chuyển đổi (1 lần mỗi khách) |
 | Sale | `/nghi` · `/lam` | Tạm dừng / bật lại nhận khách (nghỉ phép, bận) |
-| Sale, quản lý | `/tailieu` | Mở 2 bộ slide và thư mục tài liệu: **Slide chủ đầu tư** (gửi khách được, `/trinh-chieu`) và **Slide nội bộ** (đào tạo sale, `/dao-tao-sale`, nhập tên + số Zalo để xem/tải PDF). Kèm 2 nút thư mục Drive nội bộ (tài liệu dự án, flycam thực tế). Đổi link ở dòng `SLIDE_CDT`, `SLIDE_NOI_BO`, `DRIVE_TAI_LIEU`, `DRIVE_FLYCAM` trong tab CauHinh (để trống = ẩn nút) |
+| Sale, quản lý | `/tailieu` | Mở 2 bộ slide và thư mục tài liệu: **Slide chủ đầu tư** (gửi khách được, `/trinh-chieu`) và **Slide nội bộ** (đào tạo sale, `/dao-tao-sale`, nhập tên + số Zalo để xem/tải PDF). Kèm nút 360° khu đất (mặt bằng, căn 3D) và 2 nút thư mục Drive nội bộ (tài liệu dự án, flycam thực tế). Đổi link ở dòng `SLIDE_CDT`, `SLIDE_NOI_BO`, `XEM_360`, `DRIVE_TAI_LIEU`, `DRIVE_FLYCAM` trong tab CauHinh (để trống = ẩn nút) |
 | Quản lý | `/them 0905123456 Tên - nhu cầu` | Thêm khách bằng tay (khách giới thiệu, Facebook, gọi hotline…), bot chia ngay. Nhiều khách: mỗi khách 1 dòng dưới chữ /them |
 | Quản lý | `/themkhac 0905123456 Tên - Downtown` | Thêm khách dự án khác: chia theo vòng riêng, không tính lượt FourS/Saphia |
 | Quản lý | `/chialai K12` | Chia lại khách sang nhánh 2, 3… (vòng riêng, không mất lượt khách mới). Nhiều khách: `/chialai K12 K15` |

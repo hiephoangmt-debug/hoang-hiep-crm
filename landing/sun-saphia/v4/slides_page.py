@@ -166,9 +166,11 @@ def dao_tao(head, header, tail, FAV, OG, LOGO):
              + '<section class="sec" id="sp-main" style="display:none;padding-top:28px"><div class="wrap" style="max-width:1240px"><span class="ey">Đào tạo sale · 33 slide</span>'
              '<h1 class="dp" style="margin:6px 0 12px">Sun Saphia – <b>tài liệu đào tạo</b></h1>'
              '<p style="margin:0 0 18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center"><a class="btn sm" id="spDrive" href="#" target="_blank" rel="noopener">📁 Thư mục tài liệu dự án (Google Drive)</a>'
+             '<a class="btn sm ghost" id="spV360" href="#" target="_blank" rel="noopener">🛸 360° khu đất + mặt bằng + căn 3D</a>'
              '<a class="btn sm ghost" id="spFly" href="#" target="_blank" rel="noopener">🚁 Flycam thực tế khu vực (Drive)</a>'
              '<span style="font-size:13px;color:#557585">Layout tầng, layout căn, căn 3D, phim dự án, slide, KV brand, ảnh phối cảnh, Q&amp;A, kế hoạch MKT · flycam quay 17/10/2026 · cập nhật 14/11</span></p>'
              '<script>(function(){var a=document.getElementById("spDrive");if(a)a.href=atob("' + __import__('base64').b64encode(b'https://drive.google.com/drive/folders/1sMzOCcPfnrBO7X6M0hAA0HjKcHD5y8_c').decode() + '");'
-             'var b=document.getElementById("spFly");if(b)b.href=atob("' + __import__('base64').b64encode(b'https://drive.google.com/drive/folders/1OeG08WyTXbnjyQAvLwXouYCUG0AU7nao').decode() + '")})();</script></div>'
+             'var b=document.getElementById("spFly");if(b)b.href=atob("' + __import__('base64').b64encode(b'https://drive.google.com/drive/folders/1OeG08WyTXbnjyQAvLwXouYCUG0AU7nao').decode() + '");'
+             'var c=document.getElementById("spV360");if(c)c.href=atob("' + __import__('base64').b64encode(b'https://claude.ai/artifact/4eoABYgfEwwA5ZwR5cSa8W').decode() + '")})();</script></div>'
              + viewer(slides, 'dao-tao', notes=True) + D4 + '</section></main>\n' + tail(True) + GATE_JS + '</body>\n</html>\n')
     return html.replace('>Nhận bảng giá</a></div></header>', '>Nhắn Zalo</a></div></header>')

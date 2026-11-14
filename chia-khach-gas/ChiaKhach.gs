@@ -62,7 +62,8 @@ var MAC_DINH = {
   SLIDE_CDT: 'https://www.sun-saphia-residence.com/trinh-chieu',    // lệnh /tailieu – slide dự án theo tài liệu chủ đầu tư (gửi khách được)
   SLIDE_NOI_BO: 'https://www.sun-saphia-residence.com/dao-tao-sale', // lệnh /tailieu – slide nội bộ đào tạo sale (không gửi khách)
   DRIVE_TAI_LIEU: 'https://drive.google.com/drive/folders/1sMzOCcPfnrBO7X6M0hAA0HjKcHD5y8_c', // lệnh /tailieu – thư mục tài liệu dự án (nội bộ); để trống = ẩn nút
-  DRIVE_FLYCAM: 'https://drive.google.com/drive/folders/1OeG08WyTXbnjyQAvLwXouYCUG0AU7nao'     // lệnh /tailieu – flycam thực tế khu vực (nội bộ); để trống = ẩn nút
+  DRIVE_FLYCAM: 'https://drive.google.com/drive/folders/1OeG08WyTXbnjyQAvLwXouYCUG0AU7nao',    // lệnh /tailieu – flycam thực tế khu vực (nội bộ); để trống = ẩn nút
+  XEM_360: 'https://claude.ai/artifact/4eoABYgfEwwA5ZwR5cSa8W'                                  // lệnh /tailieu – 360° flycam khu đất + mặt bằng + layout căn 3D; để trống = ẩn nút
 };
 
 var BC = {  // nút báo cáo của sale
@@ -220,9 +221,12 @@ function taiLieu_(chat) {
   var dr = cfg('DRIVE_TAI_LIEU'), fc = cfg('DRIVE_FLYCAM');
   if (dr) nut.push([{text: '📁 Thư mục tài liệu dự án (Drive)', url: dr}]);
   if (fc) nut.push([{text: '🚁 Flycam thực tế khu vực (Drive)', url: fc}]);
+  var v360 = cfg('XEM_360');
+  if (v360) nut.push([{text: '🛸 360° khu đất + mặt bằng + căn 3D', url: v360}]);
   gui_(chat, '<b>📁 Tài liệu Sun Saphia</b>\n\n'
     + '📊 <b>Slide chủ đầu tư</b> – thị trường, sản phẩm, giá tham khảo, dòng tiền, bản đồ giá thuê. Gửi link cho khách được.\n\n'
     + '🔒 <b>Slide nội bộ</b> – kịch bản tư vấn, 3 khách mẫu, xử lý từ chối, tin nhắn Zalo mẫu. <b>Không gửi khách.</b> Lần đầu mở: nhập tên và số Zalo của bạn.\n\n'
+    + (v360 ? '🛸 <b>360° khu đất</b> – xoay 360° từ flycam 150 m/120 m, nhãn địa danh và khoảng cách, quy hoạch công viên phía trước, mặt bằng tầng, layout căn và căn 3D.\n\n' : '')
     + (dr || fc ? '📁 <b>Thư mục Drive</b> – layout tầng, layout căn, căn 3D, phim dự án, KV brand, ảnh phối cảnh, Q&amp;A, flycam thực tế. Dùng nội bộ, tải về rồi mới gửi khách từng ảnh/clip phù hợp.\n\n' : '')
     + 'Trong trang: bấm ▶ Trình chiếu để chiếu toàn màn hình, ⬇ Tải về để lưu PDF.', nut.length ? nut : null);
 }
