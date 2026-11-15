@@ -3,6 +3,7 @@
 // Nhãn địa danh, dự án, cầu, toà nhà cao… và ranh khu đất dự án được tự đặt lên ảnh
 // bằng cách tính hướng + góc nhìn xuống từ vị trí flycam tới toạ độ của từng điểm.
 import * as THREE from 'three';
+import { buildTower } from './toa-nha-4d.js';
 
 const CSS = `
 .p360 { position: fixed; inset: 0; z-index: 8; background: #000; touch-action: none; user-select: none; -webkit-user-select: none; }
@@ -190,11 +191,11 @@ function makeViewer(ctx) {
   }
 
   // mặt bằng trên đất + tên đường: các mặt phẳng nằm trên mặt đất, vẽ đè lên ảnh
-  const planGroup = new THREE.Group(); scene.add(planGroup); let floor = 0;   // floor: chỉ số tầng đang đặt trên đất, -1 = tắt
+  const planGroup = new THREE.Group(); scene.add(planGroup); let floor = -1;   // floor: chỉ số tầng đang đặt trên đất, -1 = tắt
   // Vật liệu "in xuống đất": hoà bản vẽ vào ảnh 360° tại chỗ — lấy màu ảnh flycam đúng hướng nhìn,
   // giữ bóng đổ/sáng tối của mặt đất thật lên bản vẽ, viền mờ theo kênh alpha, chỉnh tông theo ảnh.
   const makeGroundMat = (sphereMesh) => new THREE.ShaderMaterial({
-    transparent: true, depthTest: false, depthWrite: false, side: THREE.DoubleSide,
+    transparent: true, depthTest: true, depthWrite: false, side: THREE.DoubleSide,
     uniforms: { map: { value: null }, pano: { value: null }, rot: { value: 0 }, strength: { value: 1.0 } },
     vertexShader: `varying vec2 vUv; varying vec3 vDir;
       void main() { vUv = uv; vec4 w = modelMatrix * vec4(position, 1.0); vDir = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`,
@@ -240,7 +241,7 @@ function makeViewer(ctx) {
       const c = (s, t) => o.clone().addScaledVector(U, s * w / 2).addScaledVector(N, t * h / 2);
       const g = new THREE.BufferGeometry().setFromPoints([c(-1, 1), c(1, 1), c(1, -1), c(-1, 1), c(1, -1), c(-1, -1)]);
       g.setAttribute('uv', new THREE.Float32BufferAttribute([0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0], 2));
-      const m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ map: tx, transparent: true, depthTest: false, depthWrite: false, side: THREE.DoubleSide })); m.renderOrder = 6; planGroup.add(m);
+      const m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ map: tx, transparent: true, depthTest: true, depthWrite: false, side: THREE.DoubleSide })); m.renderOrder = 6; planGroup.add(m);
     }
   }
 
@@ -296,8 +297,8 @@ function makeViewer(ctx) {
   }
   const resortGroup = { visible: false };
   // ===== nhà thấp tầng 3D trên dải đất trống =====
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x8f9f7a, 1.5));
-  const sunL = new THREE.DirectionalLight(0xfff1dc, 2.4); sunL.position.set(0.83, 0.55, 0.38); scene.add(sunL);   // nắng ~8h sáng từ hướng Đông
+  scene.add(new THREE.HemisphereLight(0xdfe9ff, 0x7d8a6a, 0.75));
+  const sunL = new THREE.DirectionalLight(0xfff1dc, 0); sunL.position.set(0.83, 0.55, 0.38); scene.add(sunL);   // nắng ~8h sáng từ hướng Đông
   const winTex = (wall, glass) => { const c = document.createElement('canvas'); c.width = 64; c.height = 64; const g = c.getContext('2d');
     g.fillStyle = wall; g.fillRect(0, 0, 64, 64); g.fillStyle = glass; g.fillRect(8, 14, 20, 30); g.fillRect(36, 14, 20, 30);
     g.fillStyle = '#ffffff55'; g.fillRect(8, 44, 48, 3); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.colorSpace = THREE.SRGBColorSpace; return t; };
@@ -349,7 +350,7 @@ function makeViewer(ctx) {
   }
   function setFloor(i) {
     floor = i; const m = planGroup.getObjectByName('plan'); if (!m) return;
-    m.visible = i >= 0; overlay.visible = showLbl && i < 0;   // đang đặt mặt bằng thì ẩn viền ranh đất
+    m.visible = i >= 0; overlay.visible = showLbl && i < 0 && !(showTower && P?.tower4d);   // đang đặt mặt bằng thì ẩn viền ranh đất
     if (i < 0) return;
     const want = P.overlay.dir + P.overlay.floors[i][0] + '-tren-dat.webp';
     loadTex(want).then((t) => { if (floor === i) { planMat.uniforms.map.value = t; } }).catch(() => {});
@@ -358,7 +359,31 @@ function makeViewer(ctx) {
   // buổi tối: lớp phủ (mặt bằng, công viên) tối đi cho hợp ảnh đêm
   function applyNight() {
     const c = night ? 0x7a7f9a : 0xffffff;
-    scene.traverse((o) => { if (o.isMesh && o !== sphere && o.material?.color && o.material.map && !o.material.isMeshLambertMaterial) o.material.color.set(c); });
+    scene.traverse((o) => { if (o.isMesh && !o.userData.keep && o !== sphere && o.material?.color && o.material.map && !o.material.isMeshLambertMaterial) o.material.color.set(c); });
+  }
+  // ===== toà tháp 3D từ trang 4D, đặt lên lô đất, có bóng đổ theo nắng lúc chụp =====
+  let towerObj = null, showTower = true;
+  const towerGroup = new THREE.Group(); scene.add(towerGroup);
+  const shadowGround = new THREE.Mesh(new THREE.PlaneGeometry(600, 600), new THREE.ShadowMaterial({ opacity: 0.38, depthWrite: false }));
+  shadowGround.rotation.x = -Math.PI / 2; shadowGround.receiveShadow = true; shadowGround.renderOrder = 9; towerGroup.add(shadowGround);
+  const sunT = new THREE.DirectionalLight(0xfff0d8, 1.9); sunT.castShadow = true; sunT.shadow.mapSize.set(2048, 2048);
+  Object.assign(sunT.shadow.camera, { left: -180, right: 180, top: 180, bottom: -180, near: 10, far: 900 }); sunT.shadow.bias = -0.0005;
+  towerGroup.add(sunT, sunT.target);
+  function buildTower4d(C) {
+    const F = P.tower4d; towerGroup.visible = false; if (!F) return;
+    if (!towerObj) {
+      towerObj = buildTower(THREE);
+      towerObj.traverse((o) => { if (o.isMesh) { o.renderOrder = 10; o.castShadow = true; o.userData.keep = true; if (o.material?.metalness > 0.3) { o.material = o.material.clone(); o.material.metalness = 0.15; o.material.roughness = 0.25; } } });
+      towerGroup.add(towerObj); renderer.shadowMap.enabled = true;
+    }
+    const [la, lo] = F.at[cur.id] || Object.values(F.at)[0], [x, z] = ctx.LL(la, lo), gy = ctx.groundY(x, z) - C.y;
+    towerObj.position.set(x - C.x, gy + 0.3, z - C.z); towerObj.rotation.y = THREE.MathUtils.degToRad(F.rot); towerObj.scale.set(F.scale?.[0] || 1, 1, F.scale?.[1] || 1);
+    shadowGround.position.set(x - C.x, gy + 0.35, z - C.z);
+    // nắng 08:06 ngày 21/10: phương vị 114°, cao 33° → hướng tới mặt trời trong cảnh (x Đông, z Nam)
+    const az = THREE.MathUtils.degToRad(114), al = THREE.MathUtils.degToRad(33);
+    sunT.position.set(x - C.x + Math.sin(az) * Math.cos(al) * 400, gy + Math.sin(al) * 400, z - C.z - Math.cos(az) * Math.cos(al) * 400);
+    sunT.target.position.set(x - C.x, gy, z - C.z);
+    towerGroup.visible = showTower; setFloor(floor);
   }
   async function show(Pr, idx, keep) {
     P = Pr; cur = P.pano360[idx];
@@ -367,7 +392,7 @@ function makeViewer(ctx) {
     if (!keep) { view.yaw = cur.heading; view.pitch = -18; view.fov = innerWidth < innerHeight ? 85 : 72; }
     $('h2').textContent = '🛸 360° ' + P.name;
     $('.hd small').textContent = `${cur.lat.toFixed(6)}, ${cur.lon.toFixed(6)} · cao ${Math.round(cur.alt)} m · ${cur.time}`;
-    buildLabels(C); buildOverlay(C); buildPlan(C); buildZones(C); buildLowrise(C); applyNight();
+    buildLabels(C); buildOverlay(C); buildPlan(C); buildZones(C); buildLowrise(C); buildTower4d(C); applyNight();
     chips.textContent = '';
     P.pano360.forEach((q, i) => {
       const b = document.createElement('button'); b.className = 'chip' + (i === idx ? ' active' : '');
@@ -388,6 +413,8 @@ function makeViewer(ctx) {
       lw.onclick = () => { showLow = !showLow; lw.classList.toggle('active', showLow); lowGroup.visible = showLow; }; chips.appendChild(lw); }
     if (cur.night) { const nb = document.createElement('button'); nb.className = 'chip' + (night ? ' active' : ''); nb.textContent = night ? '☀️ Ban ngày' : '🌙 Buổi tối';
       nb.onclick = () => { night = !night; applyNight(); show(P, P.pano360.indexOf(cur), true); }; chips.appendChild(nb); }
+    if (P.tower4d) { const tw = document.createElement('button'); tw.className = 'chip' + (showTower ? ' active' : ''); tw.textContent = '🏢 Toà nhà 3D';
+      tw.onclick = () => { showTower = !showTower; tw.classList.toggle('active', showTower); towerGroup.visible = showTower; setFloor(floor); }; chips.appendChild(tw); }
     const site = document.createElement('button'); site.className = 'chip'; site.textContent = '⬇ Nhìn khu đất';
     site.onclick = () => { const S = siteCenter(); if (!S) return; const r = rel(C, S[0], ctx.groundY(S[0], S[1]), S[1]); view.yaw = (THREE.MathUtils.radToDeg(Math.atan2(r.v.x, -r.v.z)) + 360) % 360; view.pitch = Math.max(-80, THREE.MathUtils.radToDeg(Math.atan2(r.v.y, r.dist)) + 12); view.fov = 80; };
     chips.appendChild(site);
@@ -454,7 +481,7 @@ function makeViewer(ctx) {
     const placed = [];
     for (const L of labels) {
       tmp.copy(L.dir).multiplyScalar(100).project(camera);
-      let vis = showLbl && !(L.g === 'zone' && !showZone) && !(L.g === 'resortnote' && frontMode !== 3) && !(L.g === 'lownote' && !showLow) && (lblGroup === 'all' || L.g === 'zone' || L.g === 'resortnote' || L.g === 'lownote' || L.g === lblGroup || L.g === 'site') && !(L.site && floor >= 0) && tmp.z < 1 && Math.abs(tmp.x) < 1.1 && Math.abs(tmp.y) < 1.1;
+      let vis = showLbl && !(L.g === 'zone' && !showZone) && !(L.g === 'resortnote' && frontMode !== 3) && !(L.g === 'lownote' && !showLow) && (lblGroup === 'all' || L.g === 'zone' || L.g === 'resortnote' || L.g === 'lownote' || L.g === lblGroup || L.g === 'site') && !(L.site && (floor >= 0 || (showTower && P?.tower4d))) && tmp.z < 1 && Math.abs(tmp.x) < 1.1 && Math.abs(tmp.y) < 1.1;
       if (vis) {
         const x = ((tmp.x + 1) / 2) * innerWidth, y = ((1 - tmp.y) / 2) * innerHeight;
         if (!L.w) { L.el.style.display = ''; L.w = L.el.offsetWidth || 80; L.h = L.el.firstChild.offsetHeight || 22; L.stem = L.el.querySelector('span'); }
