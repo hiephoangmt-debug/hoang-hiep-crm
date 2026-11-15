@@ -9,7 +9,7 @@
  *  SEO cơ bản: từ khoá trong tiêu đề SEO ✔, trong mô tả ✔, trong URL ✔, ở 10% đầu bài ✔, trong nội dung ✔, bài ≥ 800 từ ✔ (Rank Math cần ≥ 600).
  *  Bổ sung: từ khoá trong H2/H3 ✔, trong alt ảnh ✔, mật độ 1 – 2,5% ✔, URL ≤ 75 ký tự ✔, ≥ 1 liên kết ngoài dofollow ✔, ≥ 2 liên kết nội bộ ✔,
  *           từ khoá chính chưa dùng ở bài khác ✔.
- *  Tiêu đề: từ khoá ở nửa đầu tiêu đề SEO ✔, tiêu đề có con số ✔, ≤ 60 ký tự ✔. (Từ "power word"/"cảm xúc" của Rank Math chỉ có danh sách tiếng Anh – xem ghi chú.)
+ *  Tiêu đề: từ khoá ở nửa đầu tiêu đề SEO ✔, tiêu đề có con số ✔, ≤ 60 ký tự ✔. (Rank Math tiếng Việt không chấm power word / cảm xúc.)
  *  Dễ đọc: mỗi đoạn ≤ 120 từ ✔, có ảnh ✔.
  */
 define( 'ABSPATH', __DIR__ . '/' );
@@ -102,7 +102,7 @@ foreach ( $posts as $n ) {
 	$dup = array_diff( (array) ( $used[ $kw ] ?? array() ), array() );
 	$r[] = $t( count( $dup ) <= 1, 'từ khoá chính đã dùng ở: ' . implode( ', ', array_unique( $dup ) ) );
 	$pos = mb_strpos( lc( $title ), $kw );
-	$r[] = $t( false !== $pos && $pos <= mb_strlen( $title ) / 2, 'từ khoá nên ở nửa đầu tiêu đề SEO' );
+	$r[] = $t( false !== $pos && $pos <= 2, 'từ khoá phải ở ĐẦU tiêu đề SEO' );
 	$r[] = $t( (bool) preg_match( '/\d/', $title ), 'tiêu đề SEO nên có con số (năm, số liệu)' );
 	$r[] = $t( mb_strlen( $title ) <= 60, 'tiêu đề SEO dài ' . mb_strlen( $title ) . ' ký tự – cần ≤ 60' );
 	$longp = 0;
@@ -120,5 +120,5 @@ foreach ( $posts as $n ) {
 	}
 }
 echo "\nĐã chấm $n_checked bài, $fail bài chưa đạt.\n";
-echo "Ghi chú: Rank Math còn chấm \"power word\" và \"từ cảm xúc\" trong tiêu đề bằng danh sách tiếng Anh – tiêu đề tiếng Việt thường không được 2 điểm này.\n";
+
 exit( $fail ? 1 : 0 );

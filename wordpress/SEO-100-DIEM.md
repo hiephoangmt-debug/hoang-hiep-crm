@@ -29,6 +29,9 @@ Bộ chấm trả mã lỗi nếu còn bài trượt. Sửa bài, chấm lại t
 
 Khi bài lên web, `seo-bai-viet.php` tự: đưa từ khoá vào tiêu đề / mô tả nếu thiếu, khung "Điểm chính về {từ khoá}", mục "Đọc thêm về {từ khoá}" (liên kết nội bộ + H2 có từ khoá), alt ảnh có từ khoá, tách đoạn văn dài, bỏ nofollow với nguồn uy tín.
 
-## Giới hạn không vượt được
+## Ghi chú theo bảng chấm thật của anh Hiệp (15/11/2026)
 
-Rank Math chấm thêm "power word" và "từ cảm xúc" trong tiêu đề bằng **danh sách từ tiếng Anh**. Tiêu đề tiếng Việt thường không đạt 2 tiêu chí này. Nếu làm đủ mọi mục trên, bài thường đạt khoảng 90 – 100 điểm tuỳ cách Rank Math nhận diện.
+- Rank Math tiếng Việt chỉ chấm 2 mục "Khả năng đọc tiêu đề": **từ khoá ở đầu tiêu đề SEO** và **có con số** – không chấm "power word" / "cảm xúc", nên **100/100 làm được**.
+- Mật độ = số lần từ khoá (cả từ khoá phụ) / tổng số từ × 100. Bài 508 từ, 5 lần → 0,98% là **trượt** – cần ≥ 1%.
+- Độ dài URL tính **cả** `https://hiephoangmt.com/` (24 ký tự) + slug + `/` → slug ≤ 50 ký tự.
+- "Từ khoá trong nội dung" phải khớp **nguyên văn** cụm từ khoá (VD từ khoá "khách du lịch Đà Nẵng 2026" mà bài chỉ viết "khách du lịch Đà Nẵng 9 tháng 2026" là trượt).
