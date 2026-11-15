@@ -47,7 +47,7 @@ function hh_posts_tuan_03_04( $posts ) {
 <h3>3. Giá vào còn mềm so với căn hộ ven sông Hàn, ven biển</h3>
 <p>Theo các trang phân phối, giá tham khảo từ khoảng 1,7 tỷ cho Studio, khoảng 2,6 tỷ cho 1PN+ và khoảng 3,6 tỷ cho 2PN. Mức này thấp hơn đáng kể so với nhiều dự án <a href="/loai-du-an/cao-tang/">căn hộ Đà Nẵng</a> ở trung tâm Hải Châu, Sơn Trà.</p>
 <h3>4. Hạ tầng phía Nam đang được đầu tư</h3>
-<p>Cụm nút giao cầu Hòa Xuân hơn 1.378 tỷ đồng, thực hiện 2026 – 2029, sẽ cải thiện kết nối về trung tâm. Xem phân tích chi tiết tại bài <a href="/bat-dong-san-nam-da-nang-ha-tang-hoa-xuan-hoa-quy-2026/">hạ tầng Hòa Xuân – Hòa Quý và bất động sản Nam Đà Nẵng</a>.</p>
+<p>Cụm nút giao cầu Hòa Xuân hơn 1.378 tỷ đồng, thực hiện 2026 – 2029, sẽ cải thiện kết nối về trung tâm. Xem phân tích chi tiết tại bài <a href="/bat-dong-san-nam-da-nang-ha-tang-2026/">hạ tầng Hòa Xuân – Hòa Quý và bất động sản Nam Đà Nẵng</a>.</p>
 
 <h2>Nhược điểm cần cân nhắc</h2>
 <ul>
@@ -77,7 +77,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Có nên mua FourS Tower? Ưu – nhược điểm 2026',
-			'desc'      => 'Có nên mua FourS Tower? Phân tích vị trí, giá tham khảo, ưu – nhược điểm, ai nên mua. Gọi Hoàng Hiệp 0904 567 009 để nhận bảng giá mới.',
+			'desc'      => 'Có nên mua FourS Tower? Phân tích vị trí, giá tham khảo, ưu – nhược điểm và ai nên mua, ai nên cân nhắc. Gọi Hoàng Hiệp 0904 567 009 nhận bảng giá.',
 			'points'    => array(
 				'FourS Tower: 4 tòa 20 tầng, 2.394 căn Studio – 3PN tại ngã tư Nguyễn Phước Lan – Minh Mạng, ra mắt 19/3/2026.',
 				'Ưu điểm: vị trí trung tâm Nam Đà Nẵng, thương hiệu Sun Group, giá vào tham khảo từ khoảng 1,7 tỷ.',
@@ -148,7 +148,7 @@ HTML
 
 <h2>Hạ tầng chung: cả ba dự án cùng hưởng lợi</h2>
 <p>Ba dự án đều nằm trên trục Nguyễn Phước Lan – đường 29/3 – Minh Mạng, kết nối về trung tâm qua cầu Hòa Xuân. Cụm nút giao cầu Hòa Xuân hơn 1.378 tỷ đồng (thực hiện 2026 – 2029) bổ sung một cầu mới phía hạ lưu, giúp giảm ùn tắc giờ cao điểm.</p>
-<p>Spana Tower và S-Light Tower gần cầu hơn nên hưởng lợi trực tiếp; FourS Tower ở sâu hơn về phía Nam nhưng gần biển và sông Cổ Cò. Xem phân tích tại bài <a href="/bat-dong-san-nam-da-nang-ha-tang-hoa-xuan-hoa-quy-2026/">bất động sản Nam Đà Nẵng 2026</a>.</p>
+<p>Spana Tower và S-Light Tower gần cầu hơn nên hưởng lợi trực tiếp; FourS Tower ở sâu hơn về phía Nam nhưng gần biển và sông Cổ Cò. Xem phân tích tại bài <a href="/bat-dong-san-nam-da-nang-ha-tang-2026/">bất động sản Nam Đà Nẵng 2026</a>.</p>
 
 <h2>Câu hỏi nên đặt ra trước khi chọn</h2>
 <ul>
@@ -233,7 +233,7 @@ HTML
 
 <h2>Lưu ý trước khi mua</h2>
 <p>Sun Riverpolis là khu đô thị quy mô lớn đang hình thành, tiện ích ngoại khu và mật độ dân cư cần thời gian để hoàn thiện. Quy mô và số liệu giữa các nguồn chưa hoàn toàn thống nhất, vì vậy bạn nên đối chiếu thông tin trong hợp đồng và văn bản của chủ đầu tư.</p>
-<p>Xem thêm bức tranh chung khu vực tại bài <a href="/bat-dong-san-nam-da-nang-ha-tang-hoa-xuan-hoa-quy-2026/">hạ tầng Hòa Xuân – Hòa Quý và bất động sản Nam Đà Nẵng</a>, hoặc các dự án khác tại <a href="/khu-vuc/ngu-hanh-son/">khu vực Ngũ Hành Sơn</a>.</p>
+<p>Xem thêm bức tranh chung khu vực tại bài <a href="/bat-dong-san-nam-da-nang-ha-tang-2026/">hạ tầng Hòa Xuân – Hòa Quý và bất động sản Nam Đà Nẵng</a>, hoặc các dự án khác tại <a href="/khu-vuc/ngu-hanh-son/">khu vực Ngũ Hành Sơn</a>.</p>
 
 <h2>Sun Riverpolis so với Sun NeO City</h2>
 <table>
@@ -316,7 +316,7 @@ HTML
 <p>Quỹ đất biệt thự gần cầu Trung Lương khoảng 68 – 92 lô và dãy đối diện Sunneva Island khoảng 24 lô, phù hợp khách tìm không gian sống rộng. Giá từng lô đang cập nhật theo đợt, liên hệ để nhận danh sách.</p>
 
 <h2>So với đất nền lân cận</h2>
-<p>Nếu ngân sách thấp hơn, bạn có thể tham khảo <a href="/du-an/dat-nen-con-dau-hoa-xuan/">đất nền Cồn Dầu Hòa Xuân</a> hoặc <a href="/du-an/dat-nen-vo-chi-cong/">đất nền Võ Chí Công</a>. Danh sách lô đang bán có tại trang <a href="/mua-ban/dat-nen/">mua bán đất nền Đà Nẵng</a>. Muốn hiểu tác động hạ tầng, đọc bài <a href="/bat-dong-san-nam-da-nang-ha-tang-hoa-xuan-hoa-quy-2026/">bất động sản Nam Đà Nẵng 2026</a>.</p>
+<p>Nếu ngân sách thấp hơn, bạn có thể tham khảo <a href="/du-an/dat-nen-con-dau-hoa-xuan/">đất nền Cồn Dầu Hòa Xuân</a> hoặc <a href="/du-an/dat-nen-vo-chi-cong/">đất nền Võ Chí Công</a>. Danh sách lô đang bán có tại trang <a href="/mua-ban/dat-nen/">mua bán đất nền Đà Nẵng</a>. Muốn hiểu tác động hạ tầng, đọc bài <a href="/bat-dong-san-nam-da-nang-ha-tang-2026/">bất động sản Nam Đà Nẵng 2026</a>.</p>
 
 <h2>Quy trình mua đất nền Đầm Sen</h2>
 <ol>
@@ -349,7 +349,8 @@ HTML
 	);
 
 	$posts[] = array(
-		'slug'     => 'bat-dong-san-nam-da-nang-ha-tang-hoa-xuan-hoa-quy-2026',
+		'slug'     => 'bat-dong-san-nam-da-nang-ha-tang-2026',
+		'old_slug' => array( 'bat-dong-san-nam-da-nang-ha-tang-hoa-xuan-hoa-quy-2026' ),
 		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'Bất động sản Nam Đà Nẵng 2026: hạ tầng Hòa Xuân – Hòa Quý và giá nhà đất',
 		'excerpt'  => 'Bất động sản Nam Đà Nẵng 2026: hạ tầng Hòa Xuân – Hòa Quý đang thay đổi ra sao và mặt bằng giá căn hộ, đất nền khu vực hiện ở mức nào.',

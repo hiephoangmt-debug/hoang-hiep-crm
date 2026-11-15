@@ -18,10 +18,12 @@ function hh_posts_sun_saphia_dot_9( $posts ) {
 
 	/* ---------------- 16/11 18:30 – Khu thương mại tự do ---------------- */
 	$posts[] = array(
-		'slug'     => 'khu-thuong-mai-tu-do-da-nang-sun-saphia-residence',
+		'slug'     => 'ftz-da-nang-tac-dong-can-ho-ven-bien-2026',
+		'old_slug' => array( 'khu-thuong-mai-tu-do-da-nang-sun-saphia-residence' ),
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá.
 		'title'    => 'Khu thương mại tự do Đà Nẵng tiến tới đâu và tác động gì tới căn hộ ven biển như Sun Saphia Residence',
 		'excerpt'  => 'Khu thương mại tự do Đà Nẵng đã có quy hoạch khoảng 1.881 ha, các vị trí số 2, 3 và mới nhất là số 7 đã có nhà đầu tư. Tóm tắt tiến độ năm 2026 và nhu cầu lưu trú, thuê ở mà dòng chuyên gia, doanh nhân có thể tạo ra cho căn hộ ven biển.',
-		'keyword'  => 'khu thương mại tự do Đà Nẵng và Sun Saphia Residence',
+		'keyword'  => 'FTZ Đà Nẵng',
 		'keywords_extra' => array( 'khu thương mại tự do Đà Nẵng', 'FTZ Đà Nẵng', 'căn hộ ven biển Đà Nẵng', 'Sun Saphia Residence' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-16 18:30',
@@ -29,17 +31,17 @@ function hh_posts_sun_saphia_dot_9( $posts ) {
 		'tags'     => array( 'Sun Saphia Residence', 'Khu thương mại tự do', 'Hạ tầng Đà Nẵng' ),
 		'image'    => 'plugin:img/tin-tuc/khu-thuong-mai-tu-do-sun-saphia.jpg',
 		'content'  => <<<HTML
-<p>Nói về <strong>khu thương mại tự do Đà Nẵng và Sun Saphia Residence</strong>, cần tách bạch: khu thương mại tự do (FTZ) là động lực kinh tế dài hạn của thành phố, còn {$saphia} là một tòa căn hộ thương mại dịch vụ ven biển. FTZ không nằm cạnh dự án, nhưng có thể tạo thêm một nhóm khách thuê – chuyên gia, doanh nhân, nhân sự dự án – cho căn hộ ven biển trong những năm tới. Bài này tóm tắt FTZ đang ở đâu trong năm 2026 và nên kỳ vọng ở mức nào.</p>
+<p><strong>FTZ Đà Nẵng</strong> (khu thương mại tự do Đà Nẵng) và {$saphia} cần được nhìn tách bạch: FTZ Đà Nẵng là động lực kinh tế dài hạn của thành phố, còn Sun Saphia Residence là một tòa căn hộ thương mại dịch vụ ven biển. FTZ không nằm cạnh dự án, nhưng có thể tạo thêm một nhóm khách thuê – chuyên gia, doanh nhân, nhân sự dự án – cho căn hộ ven biển trong những năm tới. Bài này tóm tắt FTZ đang ở đâu trong năm 2026 và nên kỳ vọng ở mức nào.</p>
 <!--hh-featured-->
-<h2>Khu thương mại tự do Đà Nẵng năm 2026: đã làm được gì?</h2>
+<h2>FTZ Đà Nẵng năm 2026: đã làm được gì?</h2>
 <ul>
 <li><strong>Quy hoạch:</strong> thành phố đã hoàn thành điều chỉnh quy hoạch tổng thể khoảng <strong>1.881 ha</strong>, chia thành nhiều vị trí chức năng (FTZ1 – FTZ7) và đang nghiên cứu mở rộng về phía Nam.</li>
 <li><strong>Nhà đầu tư:</strong> đầu tháng 6/2026 vị trí số 2 được giao cho một doanh nghiệp đầu tư hạ tầng; ngày 11/6/2026 UBND thành phố ban hành Quyết định 2578/QĐ-UBND chấp thuận chủ trương và nhà đầu tư cho vị trí số 3. Báo chí đưa tin 3 doanh nghiệp đăng ký hơn <strong>15.000 tỷ đồng</strong> vào các vị trí đầu tiên.</li>
-<li><strong>Vị trí số 6, số 7:</strong> ngày 14/8/2026 có đề xuất hạ tầng khu chức năng tại vị trí số 6; ngày 12/11/2026 Quyết định 5202/QĐ-UBND chấp thuận nhà đầu tư hạ tầng vị trí số 7 – khoảng 276 ha tại Hòa Vang, vốn 3.525 tỷ đồng, xây dựng từ quý 4/2027 (xem bài <a href="/vsip-vi-tri-so-7-khu-thuong-mai-tu-do-da-nang-3525-ty/">vị trí số 7 Khu thương mại tự do</a>).</li>
+<li><strong>Vị trí số 6, số 7:</strong> ngày 14/8/2026 có đề xuất hạ tầng khu chức năng tại vị trí số 6; ngày 12/11/2026 Quyết định 5202/QĐ-UBND chấp thuận nhà đầu tư hạ tầng vị trí số 7 – khoảng 276 ha tại Hòa Vang, vốn 3.525 tỷ đồng, xây dựng từ quý 4/2027 (xem bài <a href="/vsip-vi-tri-so-7-khu-thuong-mai-tu-do-da-nang-3525-ty/">vị trí số 7 Khu thương mại tự do</a> và tin của <a href="https://tuoitre.vn/lo-dien-nha-dau-tu-rot-3525-ti-dong-vao-khu-thuong-mai-tu-do-da-nang-100261019115924845.htm">Tuổi Trẻ</a>).</li>
 <li><strong>Mốc tiếp theo:</strong> thành phố đặt mục tiêu khởi công vị trí số 2 trong nửa cuối năm 2026. Hoàng Hiệp chưa thấy thông tin xác nhận tiến độ thi công thực tế ở thời điểm viết bài.</li>
 </ul>
-<!--hh-img:img/sun-saphia/sun-saphia-ban-do-ket-noi.jpg|Sun Saphia Residence trên trục ven biển Trường Sa – kết nối sân bay, trung tâm và Hội An (sơ đồ chủ đầu tư)-->
-<h2>Khu thương mại tự do tác động thế nào tới căn hộ ven biển?</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-ban-do-ket-noi.jpg|FTZ Đà Nẵng và Sun Saphia Residence – vị trí dự án trên trục ven biển Trường Sa, kết nối sân bay, trung tâm và Hội An (sơ đồ chủ đầu tư)-->
+<h2>FTZ Đà Nẵng tác động thế nào tới căn hộ ven biển?</h2>
 <p>Hoàng Hiệp nhìn theo 3 tầng, từ chắc chắn đến ít chắc chắn:</p>
 <ol>
 <li><strong>Nhu cầu lưu trú công tác:</strong> giai đoạn xây dựng hạ tầng kéo theo kỹ sư, chuyên gia và đoàn khảo sát. Nhóm này thường thuê theo tuần, theo tháng – phù hợp với studio, 1PN+ có dịch vụ quản lý như Sun Saphia Residence (xem bài <a href="/cho-thue-dai-han-sun-saphia-residence-chuyen-gia-gia-dinh/">cho thuê dài hạn Sun Saphia Residence</a>).</li>
@@ -54,17 +56,24 @@ function hh_posts_sun_saphia_dot_9( $posts ) {
 <tr><td>Thương hiệu thành phố quốc tế</td><td>Hỗ trợ giá trị dài hạn</td><td>Khó định lượng</td></tr>
 </tbody>
 </table>
-<h2>Đừng mua chỉ vì "tin FTZ"</h2>
-<p>Thông tin hạ tầng lớn dễ bị dùng để thổi giá. Với Sun Saphia Residence, nên đánh giá dự án bằng các yếu tố hiện hữu: vị trí đối diện công viên biển, sản phẩm studio – 1PN+ phù hợp cho thuê, pháp lý căn hộ thương mại dịch vụ 50 năm, và dòng khách du lịch đang có (xem bài <a href="/mua-du-lich-da-nang-cong-suat-phong-cho-thue-sun-saphia/">mùa du lịch và công suất phòng</a>). FTZ nên được xem là "điểm cộng thêm", không phải lý do chính.</p>
+<h2>FTZ Đà Nẵng có phải lý do để mua căn hộ?</h2>
+<p>Thông tin hạ tầng lớn dễ bị dùng để thổi giá. Với Sun Saphia Residence, nên đánh giá dự án bằng các yếu tố hiện hữu: vị trí đối diện công viên biển, sản phẩm studio – 1PN+ phù hợp cho thuê, pháp lý căn hộ thương mại dịch vụ 50 năm, và dòng khách du lịch đang có (xem bài <a href="/mua-du-lich-da-nang-cong-suat-phong-cho-thue-sun-saphia/">mùa du lịch và công suất phòng</a>). FTZ Đà Nẵng nên được xem là "điểm cộng thêm", không phải lý do chính.</p>
+<h2>Cách theo dõi tin FTZ Đà Nẵng cho đúng</h2>
+<p>Tin về FTZ Đà Nẵng xuất hiện dày trên báo chí và mạng xã hội, nhưng không phải tin nào cũng có giá trị như nhau. Hoàng Hiệp thường chia làm 3 mức.</p>
+<p>Mức thấp nhất là <strong>đề xuất, nghiên cứu</strong>: doanh nghiệp xin khảo sát, thành phố "nghiên cứu mở rộng" – chưa có gì ràng buộc. Mức giữa là <strong>quyết định chấp thuận chủ trương và nhà đầu tư</strong> như Quyết định 2578/QĐ-UBND (vị trí số 3) hay 5202/QĐ-UBND (vị trí số 7) – đã có pháp lý, nhưng chưa có công trình. Mức cao nhất là <strong>khởi công và có doanh nghiệp thuê đất, tuyển lao động</strong> – lúc đó nhu cầu lưu trú mới thật sự xuất hiện.</p>
+<p>Với người đang cân nhắc căn hộ ven biển, chỉ mức thứ ba mới nên đưa vào bảng tính dòng tiền. Hai mức đầu là thông tin nền để hiểu hướng phát triển của thành phố. Khi đọc một tin mới về FTZ Đà Nẵng, anh chị nên hỏi ba câu: văn bản số mấy, ai ký, và mốc thi công là khi nào. Thiếu một trong ba, nên coi là tin tham khảo.</p>
+<h2>Ví dụ: một căn studio ven biển nhìn từ góc FTZ Đà Nẵng</h2>
+<p>Giả sử anh chị có một căn studio ở Sun Saphia Residence, bàn giao dự kiến 11/2028. Mốc này gần với giai đoạn các vị trí FTZ Đà Nẵng đầu tiên thi công hạ tầng (vị trí số 7 dự kiến xây dựng từ quý 4/2027). Khi đó, nhóm khách có khả năng xuất hiện sớm nhất là kỹ sư, chuyên gia thuê theo tháng. Họ cần căn gọn, có bàn làm việc, internet ổn định và dịch vụ dọn phòng định kỳ – đúng thế mạnh của studio, 1PN+ có đơn vị quản lý.</p>
+<p>Tuy nhiên, khoảng cách từ trục ven biển Trường Sa tới các vị trí FTZ ở Hòa Vang, Liên Chiểu khá xa, nên không phải chuyên gia nào cũng chọn ở ven biển. Nhóm chọn ven biển thường là người ở dài ngày, muốn sống gần biển và trung tâm sau giờ làm. Vì vậy, Hoàng Hiệp chỉ xem khách FTZ Đà Nẵng là nguồn khách bổ sung cho mùa thấp điểm, không phải nguồn khách chính.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Khu thương mại tự do là câu chuyện 5 – 10 năm của Đà Nẵng. Người mua căn hộ ven biển để cho thuê có thể hưởng lợi gián tiếp qua nhóm khách công tác, nhưng nên tính dòng tiền bằng khách du lịch trước. Tổng quan dự án xem bài {$review}.</p>
+<p>FTZ Đà Nẵng là câu chuyện 5 – 10 năm của thành phố. Người mua căn hộ ven biển để cho thuê có thể hưởng lợi gián tiếp qua nhóm khách công tác, nhưng nên tính dòng tiền bằng khách du lịch trước. Tổng quan dự án xem bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: Nhân Dân, VnEconomy, Báo Đầu tư, Báo Pháp luật, Nhà Đầu tư (6 – 8/2026) về quy hoạch, nhà đầu tư và vốn đăng ký các vị trí FTZ Đà Nẵng; Quyết định 2578/QĐ-UBND ngày 11/6/2026, Quyết định 5202/QĐ-UBND ngày 12/11/2026. Số liệu báo chí, tham khảo.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Khu thương mại tự do Đà Nẵng và Sun Saphia Residence',
-			'desc'      => 'Khu thương mại tự do Đà Nẵng quy hoạch 1.881 ha, nhiều vị trí đã có nhà đầu tư. Tác động thực tế tới căn hộ ven biển Sun Saphia Residence.',
+			'seo_title' => 'FTZ Đà Nẵng 2026: tiến độ và tác động tới căn hộ ven biển',
+			'desc'      => 'FTZ Đà Nẵng quy hoạch khoảng 1.881 ha, vị trí 2, 3, 7 đã có nhà đầu tư năm 2026. Tác động thực tế tới căn hộ ven biển như Sun Saphia Residence.',
 			'points'    => array(
 				'FTZ Đà Nẵng quy hoạch khoảng 1.881 ha, chia nhiều vị trí chức năng',
 				'Vị trí 2, 3 có nhà đầu tư từ 6/2026; vị trí 7 được chấp thuận 12/11/2026',
@@ -72,20 +81,25 @@ HTML
 				'Không nên mua căn hộ chỉ vì tin hạ tầng',
 			),
 			'faq'       => array(
-				array( 'Khu thương mại tự do Đà Nẵng rộng bao nhiêu?', 'Theo quy hoạch điều chỉnh, khoảng 1.881 ha, chia thành các vị trí chức năng FTZ1 – FTZ7; thành phố đang nghiên cứu mở rộng về phía Nam.' ),
+				array( 'FTZ Đà Nẵng rộng bao nhiêu?', 'Theo quy hoạch điều chỉnh, FTZ Đà Nẵng rộng khoảng 1.881 ha, chia thành các vị trí chức năng FTZ1 – FTZ7; thành phố đang nghiên cứu mở rộng về phía Nam.' ),
 				array( 'Khu thương mại tự do có gần Sun Saphia Residence không?', 'Không nằm cạnh dự án. Tác động tới Sun Saphia Residence là gián tiếp, qua nhóm khách công tác, chuyên gia thuê căn hộ ven biển.' ),
-				array( 'Có nên mua căn hộ vì khu thương mại tự do?', 'Nên xem là điểm cộng dài hạn. Dòng tiền cho thuê nên tính chủ yếu từ khách du lịch hiện có.' ),
+				array( 'Có nên mua căn hộ vì FTZ Đà Nẵng?', 'Nên xem FTZ Đà Nẵng là điểm cộng dài hạn. Dòng tiền cho thuê nên tính chủ yếu từ khách du lịch hiện có.' ),
+				array( 'Khi nào FTZ Đà Nẵng tạo ra khách thuê thật?', 'Khi các vị trí khởi công hạ tầng và doanh nghiệp vào hoạt động. Vị trí số 7 dự kiến xây dựng từ quý 4/2027; trước mốc đó, tác động tới căn hộ ven biển chủ yếu là kỳ vọng.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://tuoitre.vn/lo-dien-nha-dau-tu-rot-3525-ti-dong-vao-khu-thuong-mai-tu-do-da-nang-100261019115924845.htm',
+		),
 	);
 
 	/* ---------------- 16/11 11:30 – Nhận bàn giao ---------------- */
 	$posts[] = array(
-		'slug'     => 'nhan-ban-giao-can-ho-sun-saphia-residence-kiem-tra-gi',
+		'slug'     => 'ban-giao-sun-saphia-residence-kiem-tra-gi',
+		'old_slug' => array( 'nhan-ban-giao-can-ho-sun-saphia-residence-kiem-tra-gi' ),
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá.
 		'title'    => 'Nhận bàn giao căn hộ Sun Saphia Residence: kiểm tra gì, mang theo gì, ghi biên bản ra sao',
 		'excerpt'  => 'Sun Saphia Residence dự kiến bàn giao 11/2028, liền tường trừ tủ bếp, thiết bị bếp và hút mùi. Checklist kiểm tra trần, tường, sàn, cửa, điện nước, điều hòa, vệ sinh và cách ghi lỗi vào biên bản để chủ đầu tư sửa.',
-		'keyword'  => 'nhận bàn giao căn hộ Sun Saphia Residence',
+		'keyword'  => 'bàn giao Sun Saphia Residence',
 		'keywords_extra' => array( 'kiểm tra căn hộ khi nhận bàn giao', 'biên bản bàn giao căn hộ', 'Sun Saphia Residence', 'bàn giao Sun Saphia' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-16 11:30',
@@ -93,16 +107,17 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Bàn giao căn hộ', 'Kinh nghiệm mua nhà' ),
 		'image'    => 'plugin:img/tin-tuc/nhan-ban-giao-sun-saphia.jpg',
 		'content'  => <<<HTML
-<p><strong>Nhận bàn giao căn hộ Sun Saphia Residence</strong> còn khoảng hai năm nữa – chủ đầu tư dự kiến bàn giao tháng 11/2028 – nhưng biết trước cần kiểm tra gì giúp anh chị đọc kỹ phụ lục hợp đồng ngay từ bây giờ. Theo chủ đầu tư, căn hộ {$saphia} bàn giao <strong>liền tường, trừ tủ bếp, thiết bị bếp và hút mùi</strong>; trần, tường, sàn, thiết bị vệ sinh, điều hòa, bình nóng lạnh đã hoàn thiện.</p>
+<p>Ngày <strong>bàn giao Sun Saphia Residence</strong> còn khoảng hai năm nữa – chủ đầu tư dự kiến bàn giao tháng 11/2028 – nhưng biết trước cần kiểm tra gì giúp anh chị đọc kỹ phụ lục hợp đồng ngay từ bây giờ. Theo chủ đầu tư, căn hộ {$saphia} bàn giao <strong>liền tường, trừ tủ bếp, thiết bị bếp và hút mùi</strong>; trần, tường, sàn, thiết bị vệ sinh, điều hòa, bình nóng lạnh đã hoàn thiện.</p>
 <!--hh-featured-->
-<h2>Trước ngày nhận bàn giao: chuẩn bị gì?</h2>
+<h2>Trước ngày bàn giao Sun Saphia Residence: chuẩn bị gì?</h2>
 <ul>
 <li><strong>Giấy tờ:</strong> hợp đồng mua bán và phụ lục danh mục vật liệu, căn cước, thông báo bàn giao, chứng từ đã thanh toán đến đợt bàn giao.</li>
 <li><strong>Dụng cụ:</strong> đèn pin, thước dây, bút đánh dấu, băng dính giấy, ổ cắm thử điện (hoặc sạc điện thoại), điện thoại để chụp ảnh, quay video.</li>
 <li><strong>Thời gian:</strong> nên đi ban ngày và dành ít nhất 1 – 2 giờ; căn mặt biển nên xem thêm cửa kính khi có gió.</li>
 <li><strong>Người đi cùng:</strong> nếu không rành kỹ thuật, nhờ người làm xây dựng hoặc dịch vụ nghiệm thu độc lập.</li>
 </ul>
-<h2>Checklist kiểm tra căn hộ</h2>
+<h2>Checklist kiểm tra căn hộ khi bàn giao Sun Saphia Residence</h2>
+<p>Bảng dưới gom các hạng mục mà Hoàng Hiệp thấy người mua hay bỏ sót. Mỗi hạng mục nên chụp ảnh trước khi ký, kể cả khi không thấy lỗi – ảnh hiện trạng ngày bàn giao Sun Saphia Residence là bằng chứng hữu ích nếu sau này phát sinh thấm, nứt trong thời gian bảo hành.</p>
 <table>
 <thead><tr><th>Hạng mục</th><th>Kiểm tra gì</th></tr></thead>
 <tbody>
@@ -116,7 +131,7 @@ HTML
 <tr><td>Bếp (phần thô)</td><td>Vị trí chờ điện, cấp – thoát nước, ống hút mùi để lắp tủ bếp sau</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Mặt bằng căn studio 30 m² Sun Saphia Residence – dùng để đối chiếu vị trí ổ điện, cấp thoát nước khi nhận bàn giao (tài liệu chủ đầu tư)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Mặt bằng studio 30 m² dùng khi bàn giao Sun Saphia Residence – đối chiếu vị trí ổ điện, cấp thoát nước (tài liệu chủ đầu tư)-->
 <h2>Ghi biên bản thế nào cho chủ đầu tư sửa?</h2>
 <ol>
 <li>Ghi từng lỗi kèm <strong>vị trí cụ thể</strong> (VD "tường phòng ngủ, cạnh cửa sổ, vết nứt dài khoảng 20 cm") và chụp ảnh có đánh dấu băng dính.</li>
@@ -124,30 +139,37 @@ HTML
 <li>Lỗi lớn (thấm, nứt kết cấu, sai diện tích) có thể chưa ký nhận bàn giao cho đến khi xử lý xong – xem điều khoản trong hợp đồng.</li>
 <li>Giữ bản sao biên bản; sau khi sửa, kiểm tra lại và ký xác nhận.</li>
 </ol>
+<h2>Căn mặt biển cần xem kỹ thêm gì?</h2>
+<p>Tòa tháp nằm sát biển Sơn Thủy, nên căn hướng Đông chịu gió và hơi muối nhiều hơn căn phía sau. Khi bàn giao Sun Saphia Residence, với căn mặt biển anh chị nên kiểm tra thêm ba điểm: gioăng cao su và ray cửa kính ban công (thử đóng mở nhiều lần, xem có rít, hở sáng không), vị trí thoát nước sàn ban công (đổ thử một xô nước xem nước có chảy hết về phễu thu), và các chi tiết kim loại như tay nắm, bản lề (xem có điểm gỉ sớm không). Đây là các lỗi nhỏ lúc nhận nhà nhưng dễ thành chuyện lớn sau một mùa mưa bão.</p>
+<h2>Bàn giao Sun Saphia Residence để cho thuê: thêm vài lưu ý</h2>
+<p>Phần lớn người mua studio, 1PN+ tại dự án tính chuyện cho thuê. Nếu vậy, sau khi bàn giao Sun Saphia Residence, thời gian từ lúc nhận nhà đến lúc đón khách đầu tiên phụ thuộc chủ yếu vào việc làm tủ bếp và nội thất. Nên đặt đơn vị nội thất đo đạc ngay trong tuần nhận nhà, gửi họ bản vẽ mặt bằng và ảnh các vị trí chờ điện nước đã chụp. Đồng thời ghi lại số đồng hồ điện, nước ngày nhận để tách chi phí với giai đoạn thi công nội thất.</p>
 <h2>Sau bàn giao: những việc tiếp theo</h2>
 <p>Đóng phí quản lý từ ngày bàn giao (dự kiến 15.000 – 20.000 đ/m²/tháng, xem bài <a href="/phi-quan-ly-sun-saphia-residence-moi-thang-bao-nhieu/">phí quản lý Sun Saphia Residence</a>), làm tủ bếp và nội thất (tham khảo bài <a href="/chi-phi-noi-that-studio-30m2-cho-thue-sun-saphia/">chi phí nội thất studio 30 m²</a>), theo dõi thời hạn bảo hành ghi trong hợp đồng và thủ tục cấp giấy chứng nhận.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Bàn giao liền tường giúp tiết kiệm thời gian hoàn thiện, nhưng cũng có nghĩa là lỗi hoàn thiện cần được phát hiện ngay ngày nhận nhà. Ngay từ khi ký hợp đồng, anh chị nên yêu cầu phụ lục vật liệu chi tiết – đó là căn cứ để kiểm tra sau này. Xem thêm bài {$review}.</p>
+<p>Bàn giao liền tường giúp tiết kiệm thời gian hoàn thiện, nhưng cũng có nghĩa là lỗi hoàn thiện cần được phát hiện ngay ngày bàn giao Sun Saphia Residence. Quyền và nghĩa vụ khi bàn giao nhà hình thành trong tương lai được quy định trong <a href="https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx">Luật Kinh doanh bất động sản 2023</a> và hợp đồng mua bán. Ngay từ khi ký hợp đồng, anh chị nên yêu cầu phụ lục vật liệu chi tiết – đó là căn cứ để kiểm tra sau này. Xem thêm bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: tiêu chuẩn bàn giao, thời điểm bàn giao dự kiến, phí quản lý theo buổi giải đáp của chủ đầu tư (11/2026). Checklist là kinh nghiệm chung khi nhận bàn giao căn hộ, tham khảo.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Nhận bàn giao căn hộ Sun Saphia Residence: checklist',
-			'desc'      => 'Nhận bàn giao căn hộ Sun Saphia Residence: bàn giao liền tường trừ bếp, dự kiến 11/2028. Checklist trần, tường, sàn, điện nước và cách ghi biên bản lỗi.',
+			'seo_title' => 'Bàn giao Sun Saphia Residence 11/2028: checklist kiểm tra',
+			'desc'      => 'Bàn giao Sun Saphia Residence dự kiến 11/2028, liền tường trừ bếp. Checklist trần, tường, sàn, điện nước, cửa kính căn mặt biển và cách ghi biên bản lỗi.',
 			'points'    => array(
-				'Dự kiến bàn giao 11/2028, liền tường trừ tủ bếp, thiết bị bếp, hút mùi',
+				'Bàn giao Sun Saphia Residence dự kiến 11/2028, liền tường trừ tủ bếp, thiết bị bếp, hút mùi',
 				'Chuẩn bị hợp đồng, phụ lục vật liệu, đèn pin, thước, ổ cắm thử',
 				'Ghi từng lỗi kèm vị trí, ảnh và thời hạn khắc phục',
 				'Đóng phí quản lý tính từ ngày bàn giao',
 			),
 			'faq'       => array(
-				array( 'Sun Saphia Residence khi nào bàn giao?', 'Theo chủ đầu tư, dự kiến tháng 11/2028; ngày cụ thể theo thông báo bàn giao và hợp đồng mua bán.' ),
+				array( 'Khi nào bàn giao Sun Saphia Residence?', 'Theo chủ đầu tư, bàn giao Sun Saphia Residence dự kiến tháng 11/2028; ngày cụ thể theo thông báo bàn giao và hợp đồng mua bán.' ),
 				array( 'Nhận bàn giao Sun Saphia Residence cần mang gì?', 'Hợp đồng, phụ lục vật liệu, căn cước, chứng từ thanh toán; đèn pin, thước dây, băng dính giấy, ổ cắm thử điện và điện thoại để chụp ảnh.' ),
 				array( 'Phát hiện lỗi khi nhận bàn giao thì làm gì?', 'Ghi vào biên bản từng lỗi với vị trí, ảnh và thời hạn sửa; lỗi lớn có thể chưa ký nhận cho đến khi khắc phục, theo điều khoản hợp đồng.' ),
+				array( 'Bàn giao Sun Saphia Residence có kèm nội thất không?', 'Không có nội thất rời. Theo chủ đầu tư, căn hộ bàn giao liền tường: trần, tường, sàn, thiết bị vệ sinh, điều hòa, bình nóng lạnh đã hoàn thiện; tủ bếp, thiết bị bếp và hút mùi chủ nhà tự làm.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx',
+		),
 	);
 
 	/* ---------------- 16/11 16:30 – Làm việc từ xa ---------------- */

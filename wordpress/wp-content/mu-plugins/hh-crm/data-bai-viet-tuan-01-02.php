@@ -60,7 +60,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Hoàng Hiệp bất động sản: dự án đang tư vấn 2026',
-			'desc'      => 'Hoàng Hiệp bất động sản tổng hợp các dự án đang tư vấn tại Đà Nẵng 2026 theo khu vực, loại hình. Gọi 0904 567 009 để nhận bảng giá mới.',
+			'desc'      => 'Hoàng Hiệp bất động sản: danh sách dự án đang tư vấn tại Đà Nẵng 2026 theo khu vực, loại hình, giá tham khảo. Gọi 0904 567 009 nhận bảng giá mới.',
 			'points'    => array( 'Dự án chia theo nhu cầu: ở, cho thuê, tích lũy đất, nghỉ dưỡng', 'Căn hộ tập trung ven sông Hàn, Sơn Trà và Nam Đà Nẵng', 'Giá và chính sách cập nhật theo từng đợt mở bán' ),
 			'faq'       => array(
 				array( 'Hoàng Hiệp tư vấn những loại bất động sản nào?', 'Căn hộ sở hữu lâu dài, căn hộ dịch vụ, đất nền và biệt thự nghỉ dưỡng tại Đà Nẵng, Hội An và Điện Bàn.' ),
@@ -426,7 +426,7 @@ HTML
 </table>
 
 <h2>FourS Tower phù hợp với ai?</h2>
-<p>Studio và 1PN phù hợp người trẻ, cặp vợ chồng mới cưới hoặc nhà đầu tư cho thuê. Căn 2PN và 3PN hướng đến gia đình cần không gian ở lâu dài tại Nam Đà Nẵng. Giá tham khảo từng loại căn xem trong bài <a href="/gia-fours-tower-2026/">giá FourS Tower 2026</a>, layout xem tại <a href="/mat-bang-fours-tower-studio-3pn/">mặt bằng FourS Tower</a>.</p>
+<p>Studio và 1PN phù hợp người trẻ, cặp vợ chồng mới cưới hoặc nhà đầu tư cho thuê. Căn 2PN và 3PN hướng đến gia đình cần không gian ở lâu dài tại Nam Đà Nẵng. Giá tham khảo từng loại căn xem trong bài <a href="/gia-can-ho-fours-tower-2026/">giá FourS Tower 2026</a>, layout xem tại <a href="/dien-tich-can-ho-fours-tower/">mặt bằng FourS Tower</a>.</p>
 <p>Thông tin đầy đủ của dự án có tại trang <a href="/du-an/fours-tower/">FourS Tower (Tháp Bốn Mùa)</a> và trang tổ hợp <a href="/du-an/sun-riverpolis/">Sun Riverpolis Nam Hòa Xuân</a>.</p>
 
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận tài liệu FourS Tower, bảng giá đợt hiện hành và lịch tham quan nhà mẫu.</p>
@@ -451,7 +451,8 @@ HTML
 	);
 
 	$posts[] = array(
-		'slug'     => 'gia-fours-tower-2026',
+		'slug'     => 'gia-can-ho-fours-tower-2026',
+		'old_slug' => array( 'gia-fours-tower-2026' ),
 		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'Giá FourS Tower 2026: bảng giá tham khảo theo từng loại căn',
 		'excerpt'  => 'Giá FourS Tower 2026 tham khảo: Studio từ khoảng 1,7 tỷ, 1PN+ từ khoảng 2,6 tỷ, 2PN từ khoảng 3,6 tỷ. Giá chính thức thay đổi theo từng đợt.',
@@ -525,7 +526,8 @@ HTML
 	);
 
 	$posts[] = array(
-		'slug'     => 'mat-bang-fours-tower-studio-3pn',
+		'slug'     => 'dien-tich-can-ho-fours-tower',
+		'old_slug' => array( 'mat-bang-fours-tower-studio-3pn' ),
 		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'Mặt bằng FourS Tower: layout căn Studio đến 3PN và diện tích',
 		'excerpt'  => 'Mặt bằng FourS Tower: căn Studio khoảng 34,7 m², 1PN 43,7 m², 2PN 58 m², 3PN 102,8 m². Phân tích layout từng loại căn và cách chọn.',
@@ -593,7 +595,7 @@ HTML
 <li>Diện tích thông thủy và tim tường khác nhau, cần hỏi rõ.</li>
 </ul>
 <p>Khi nhận bản vẽ, anh chị nên đối chiếu mặt bằng căn với mặt bằng tầng để biết căn nằm ở vị trí nào, nhìn ra hướng nào và có bị che khuất bởi tòa bên cạnh hay không.</p>
-<p>Giá tham khảo từng loại căn xem tại bài <a href="/gia-fours-tower-2026/">giá FourS Tower 2026</a>, tổng quan dự án tại <a href="/fours-tower-da-nang-tong-quan-4-thap-bon-mua/">FourS Tower Đà Nẵng: 4 tháp Bốn Mùa</a> và trang <a href="/du-an/fours-tower/">dự án FourS Tower</a>. Anh chị cũng có thể so sánh với các dự án khác tại <a href="/loai-du-an/can-ho-so-huu-lau-dai/">căn hộ sở hữu lâu dài</a>.</p>
+<p>Giá tham khảo từng loại căn xem tại bài <a href="/gia-can-ho-fours-tower-2026/">giá FourS Tower 2026</a>, tổng quan dự án tại <a href="/fours-tower-da-nang-tong-quan-4-thap-bon-mua/">FourS Tower Đà Nẵng: 4 tháp Bốn Mùa</a> và trang <a href="/du-an/fours-tower/">dự án FourS Tower</a>. Anh chị cũng có thể so sánh với các dự án khác tại <a href="/loai-du-an/can-ho-so-huu-lau-dai/">căn hộ sở hữu lâu dài</a>.</p>
 
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận mặt bằng tầng chính thức và danh sách căn còn trống theo loại căn anh chị quan tâm.</p>
 HTML
@@ -646,7 +648,7 @@ HTML
 
 <h2>Chiết khấu</h2>
 <p>Ngoài Early Bird 5%, chủ đầu tư thường có các khoản chiết khấu theo phương án thanh toán và ưu đãi theo từng sự kiện mở bán. Mức chiết khấu cụ thể, thời hạn áp dụng và điều kiện cộng dồn chỉ chính xác khi có văn bản chính sách đi kèm bảng giá.</p>
-<p>Khi so sánh, anh chị nên quy về "giá sau chiết khấu, đã gồm VAT và phí bảo trì" để tránh nhầm lẫn giữa các phương án. Giá tham khảo xem bài <a href="/gia-fours-tower-2026/">giá FourS Tower 2026</a>.</p>
+<p>Khi so sánh, anh chị nên quy về "giá sau chiết khấu, đã gồm VAT và phí bảo trì" để tránh nhầm lẫn giữa các phương án. Giá tham khảo xem bài <a href="/gia-can-ho-fours-tower-2026/">giá FourS Tower 2026</a>.</p>
 
 <h2>Vay ngân hàng</h2>
 <p>Chương trình được rao bán là hỗ trợ vay đến 70% giá trị căn, lãi suất 0% và ân hạn gốc trong khoảng 30 tháng, miễn phí trả nợ trước hạn trong thời gian hỗ trợ. Sau giai đoạn này, lãi suất thả nổi theo ngân hàng.</p>
@@ -729,7 +731,7 @@ HTML
 <h3>"Resort truyền đời" và căn hộ sân vườn</h3>
 <p>F2 được giới thiệu với khái niệm căn hộ sở hữu lâu dài đi kèm trải nghiệm nghỉ dưỡng ngay dưới chân nhà: toàn bộ tầng 2 dành cho tiện ích, tầng 1 là thương mại. Dòng căn sân vườn với khoảng xanh riêng tiếp tục được nhấn mạnh.</p>
 <h3>Chính sách theo đợt</h3>
-<p>Mỗi tòa có bảng giá và chính sách riêng theo thời điểm. Các chính sách được nêu cho F2 gồm Early Bird 5% và Sun Early Key (thanh toán 70% nhận nhà). Chi tiết xem bài <a href="/chinh-sach-fours-tower-thanh-toan-vay-ngan-hang/">chính sách FourS Tower</a> và <a href="/gia-fours-tower-2026/">giá FourS Tower 2026</a>.</p>
+<p>Mỗi tòa có bảng giá và chính sách riêng theo thời điểm. Các chính sách được nêu cho F2 gồm Early Bird 5% và Sun Early Key (thanh toán 70% nhận nhà). Chi tiết xem bài <a href="/chinh-sach-fours-tower-thanh-toan-vay-ngan-hang/">chính sách FourS Tower</a> và <a href="/gia-can-ho-fours-tower-2026/">giá FourS Tower 2026</a>.</p>
 
 <h2>Điểm giống nhau giữa các tháp</h2>
 <ul>

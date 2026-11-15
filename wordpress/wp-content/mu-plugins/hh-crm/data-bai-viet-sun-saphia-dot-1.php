@@ -15,7 +15,7 @@ function hh_posts_sun_saphia_dot_1( $posts ) {
 	/* ---------------- 20/10 – Studio ven biển ---------------- */
 	$posts[] = array(
 		'slug'     => 'studio-ven-bien-da-nang-gia-mua-gia-thue-2026',
-		'rev'     => 3, // 05/11: chèn ảnh dự án.
+		'rev'     => 4, // 15/11: chuẩn SEO 100 – thêm nhu cầu thuê, checklist chọn căn, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Studio ven biển Đà Nẵng 2026: giá mua, giá thuê, dòng tiền và 513 studio Sun Saphia Residence',
 		'excerpt'  => 'Studio ven biển Đà Nẵng 2026: căn 30 – 38 m² gần biển Mỹ Khê, Sơn Thủy giá khoảng 2,3 – 3,7 tỷ; cách tính lợi suất cho thuê và những dự án đang có studio như Sun Saphia, Sun Costa, Wyndham Soleil.',
 		'keyword'  => 'studio ven biển Đà Nẵng',
@@ -32,14 +32,14 @@ function hh_posts_sun_saphia_dot_1( $posts ) {
 <table>
 <thead><tr><th>Dự án</th><th>Vị trí</th><th>Diện tích studio</th><th>Giá tham khảo</th></tr></thead>
 <tbody>
-<tr><td>{$saphia}</td><td>Trường Sa, khu Sơn Thủy, Ngũ Hành Sơn</td><td>30 – 31 m² (513 căn)</td><td>Chưa công bố – đang nhận giữ chỗ</td></tr>
+<tr><td>{$saphia}</td><td>Trường Sa, khu Sơn Thủy, Ngũ Hành Sơn</td><td>30 – 31 m² (513 căn)</td><td>Giá dự kiến studio tầng 15 khoảng 2,13 – 2,85 tỷ (28/10/2026, có vay, chưa VAT)</td></tr>
 <tr><td><a href="/du-an/sun-costa-residence/">Sun Costa Residence</a></td><td>Vương Thừa Vũ, cách biển Mỹ Khê 200 – 300 m</td><td>Khoảng 31 – 37 m²</td><td>Giá bán 2025 khoảng 2,45 – 2,95 tỷ (chưa VAT)</td></tr>
 <tr><td><a href="/du-an/wyndham-soleil-da-nang/">Wyndham Soleil</a></td><td>02 Phạm Văn Đồng, Sơn Trà</td><td>27,9 – 38,2 m²</td><td>Khoảng 2,95 – 3,69 tỷ (chính sách 1/2026); tòa D chuyển nhượng khoảng 2,4 – 3,8 tỷ</td></tr>
 <tr><td><a href="/du-an/sun-cosmo-residence/">Sun Cosmo Residence</a></td><td>Trần Thị Lý, ven sông Hàn</td><td>–</td><td>Chuyển nhượng khoảng 1,8 – 2,5 tỷ (tin rao)</td></tr>
 </tbody>
 </table>
 <p>Giá trong bảng là giá chính sách hoặc giá rao chuyển nhượng, chưa phải giá chốt từng căn.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Layout căn Studio 30 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Studio ven biển Đà Nẵng: layout căn Studio 30 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Giá thuê studio ven biển và lợi suất</h2>
 <p>Theo báo cáo quý 3/2026 của Batdongsan.com.vn, căn hộ cho thuê ở Đà Nẵng mang lại lợi suất khoảng <strong>4,5%/năm</strong> trên giá mua. Studio gần biển thường cho thuê theo ngày, theo tháng cho khách du lịch và người làm việc từ xa; giá thuê dao động mạnh theo mùa (cao điểm tháng 4 – 8, các dịp pháo hoa, lễ Tết).</p>
 <h3>Cách tự tính dòng tiền một căn studio</h3>
@@ -52,15 +52,29 @@ function hh_posts_sun_saphia_dot_1( $posts ) {
 <!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Phối cảnh Sun Saphia Residence bên biển Sơn Thủy lúc hoàng hôn (ảnh chủ đầu tư)-->
 <h2>Vì sao các dự án mới nhiều studio?</h2>
 <p>Tổng tiền thấp giúp nhiều người mua được căn biển đầu tiên, và studio dễ cho thuê ngắn ngày. Đổi lại, nguồn cung studio lớn (riêng Sun Saphia có 513 căn, Sun Costa khoảng 80% là studio) khiến cạnh tranh cho thuê cao – căn tầng cao, view biển, có đơn vị vận hành tốt sẽ có lợi thế.</p>
+<h2>Nhu cầu thuê studio ven biển Đà Nẵng đến từ đâu?</h2>
+<p>Nguồn khách chính của studio ven biển Đà Nẵng là khách du lịch lưu trú. Theo số liệu UBND TP Đà Nẵng được <a href="https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp">VietnamPlus</a> đưa tin, 9 tháng 2026 các cơ sở lưu trú trong thành phố phục vụ khoảng 15,86 triệu lượt khách, tăng 26,4% so với cùng kỳ; khách quốc tế khoảng 7,73 triệu lượt. Bên cạnh đó là người làm việc từ xa, chuyên gia thuê theo tháng và gia đình đi nghỉ ngắn ngày.</p>
+<p>Mỗi nhóm khách cần một kiểu căn khác nhau: khách du lịch ưu tiên view biển và bãi tắm đi bộ được, người thuê theo tháng ưu tiên bếp, chỗ làm việc và giá ổn định. Vì vậy, trước khi xuống tiền mua studio ven biển Đà Nẵng, nên xác định rõ mình sẽ cho nhóm khách nào thuê rồi mới chọn dự án, tầng và hướng.</p>
+<h2>Checklist chọn studio ven biển Đà Nẵng để cho thuê</h2>
+<ol>
+<li><strong>Khoảng cách tới bãi tắm</strong>: đi bộ được hay phải đi xe – khách du lịch thường lọc theo tiêu chí này đầu tiên trên ứng dụng đặt phòng.</li>
+<li><strong>Hướng nhìn</strong>: căn nhìn biển thường cho thuê được giá cao hơn căn nhìn phố hoặc nhìn núi trong cùng tòa.</li>
+<li><strong>Quy chế tòa nhà</strong>: có cho phép cho thuê ngắn ngày không, quản lý khách ra vào thế nào – xem <a href="/cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue/">pháp lý cho thuê ngắn ngày</a>.</li>
+<li><strong>Đơn vị vận hành</strong>: phí tính theo bao nhiêu phần trăm doanh thu, báo cáo doanh thu hằng tháng ra sao.</li>
+<li><strong>Tổng tiền thật</strong>: giá căn cộng VAT, 2% kinh phí bảo trì và nội thất – không chỉ con số trên bảng giá.</li>
+</ol>
+<h2>Studio Sun Saphia so với mặt bằng studio ven biển Đà Nẵng</h2>
+<p>Theo thông tin chủ đầu tư ngày 28/10/2026, studio 30 m² tầng 15 của Sun Saphia Residence có giá dự kiến khoảng 2,13 – 2,85 tỷ (phương án có vay, chưa VAT và 2% phí bảo trì) – thuộc nhóm tổng tiền thấp của studio ven biển Đà Nẵng trong bảng trên, chủ yếu vì diện tích nhỏ. Điểm cần tính là bàn giao dự kiến 11/2028, nên trước thời điểm đó chưa có tiền thuê. Chi tiết ở bài <a href="/gia-sun-saphia-residence-bao-nhieu/">giá dự kiến Sun Saphia Residence</a>.</p>
+<p>Nhận định của Hoàng Hiệp: studio ven biển Đà Nẵng hợp với người muốn sở hữu căn biển đầu tiên với tổng tiền vừa phải và chấp nhận lợi suất cho thuê ở mức mặt bằng chung. Nếu cần dòng tiền ngay, căn đã bàn giao ở Mỹ Khê có lợi thế; nếu chờ được, dự án mới ở Sơn Thủy cho thời gian thanh toán dài hơn.</p>
 <p>Xem thêm: <a href="/condotel-can-ho-dich-vu-da-nang-tong-hop-gia-2026/">tổng hợp condotel, căn hộ dịch vụ Đà Nẵng 2026</a>, <a href="/thue-can-ho-bien-my-khe-gia-theo-du-an/">giá thuê căn hộ biển Mỹ Khê theo dự án</a>.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Studio ven biển Đà Nẵng: giá, dòng tiền, studio Sun Saphia',
+			'seo_title' => 'Studio ven biển Đà Nẵng 2026: giá mua, giá thuê, dòng tiền',
 			'desc'      => 'Studio ven biển Đà Nẵng 2026: căn 30 – 38 m² khoảng 2,3 – 3,7 tỷ, cách tính lợi suất cho thuê, 513 studio Sun Saphia Residence đang nhận giữ chỗ.',
 			'points'    => array(
-				'Studio 30 – 38 m² gần biển giá khoảng 2,3 – 3,7 tỷ (tham khảo 10/2026)',
+				'Studio ven biển Đà Nẵng 30 – 38 m² giá khoảng 2,3 – 3,7 tỷ (tham khảo 10/2026)',
 				'Lợi suất cho thuê căn hộ Đà Nẵng khoảng 4,5%/năm (Batdongsan.com.vn, quý 3/2026)',
 				'Sun Saphia Residence có 513 studio 30 – 31 m², đang nhận giữ chỗ',
 			),
