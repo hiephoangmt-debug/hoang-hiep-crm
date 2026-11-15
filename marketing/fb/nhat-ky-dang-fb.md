@@ -73,3 +73,4 @@
 | 14/11/2026 | Casamia (blogId 8074284) | 21:00 | Sống chậm ven sông Cổ Cò – album 4 ảnh (hoàng hôn sông, biệt thự ven kênh, đường dạo, ban công) | /du-an/casamia-balanca-hoi-an/ |
 | 14/11/2026 | TikTok (@hiephoangmt, brand Sun) | 21:15 | Sống chậm ven sông Cổ Cò – Casamia, album 4 ảnh | /du-an/casamia-balanca-hoi-an/ |
 | 15/11/2026 | Casamia (blogId 8074284) | 08:30 | Vị trí – kết nối Casamia Balanca – album 4 ảnh (đường nội khu, flycam thực tế, toàn cảnh, xe điện) | /du-an/casamia-balanca-hoi-an/ |
+| 15/11/2026 | TikTok (@hiephoangmt, brand Sun) | 08:45 | Vị trí Casamia Balanca – album 4 ảnh | /du-an/casamia-balanca-hoi-an/ |
