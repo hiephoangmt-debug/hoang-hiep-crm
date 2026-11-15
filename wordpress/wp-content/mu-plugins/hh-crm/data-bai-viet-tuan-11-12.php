@@ -360,7 +360,7 @@ HTML
 			),
 			'faq'       => array(
 				array( 'Thuê căn hộ biển Mỹ Khê giá bao nhiêu?', 'Tham khảo tháng 10/2026: căn 2PN cách biển khoảng 1 km từ 15 – 25 triệu/tháng; căn mặt biển có nội thất khoảng 25 – 45 triệu/tháng.' ),
-				array( 'Dự án nào gần biển Mỹ Khê có giá thuê mềm?', 'Hiyori Garden Tower cách biển khoảng 1 km, căn 2PN phổ biến 18 – 21 triệu/tháng.' ),
+				array( 'Dự án nào gần biển Mỹ Khê có giá thuê mềm?', 'Muốn thuê căn hộ biển Mỹ Khê giá mềm, có thể xem Hiyori Garden Tower: cách biển khoảng 1 km, căn 2PN phổ biến 18 – 21 triệu/tháng.' ),
 				array( 'Có thể thuê căn hộ biển Mỹ Khê ngắn ngày không?', 'Có thể thuê căn hộ biển Mỹ Khê theo đêm hoặc theo tuần, nhưng phụ thuộc nội quy từng tòa nhà; giá ngắn ngày khác mặt bằng dài hạn và thường tăng vào mùa hè, dịp lễ hội pháo hoa.' ),
 				array( 'Thuê căn hộ khách sạn ven biển cần lưu ý gì?', 'Hỏi rõ phí dịch vụ, phí quản lý đi kèm và nội quy lưu trú, vì mô hình căn hộ khách sạn thường có thêm các khoản này.' ),
 			),

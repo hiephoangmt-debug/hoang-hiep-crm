@@ -252,7 +252,7 @@ HTML
 <table>
 <thead><tr><th>Hạng mục</th><th>Thông tin</th></tr></thead>
 <tbody>
-<tr><td>Diện tích khu đất</td><td>1.795 m²</td></tr>
+<tr><td>Diện tích khu đất 16 Bạch Đằng Đà Nẵng</td><td>1.795 m²</td></tr>
 <tr><td>Quy mô</td><td>25 tầng nổi, 4 tầng hầm, cao 99 m</td></tr>
 <tr><td>Tổng diện tích sàn xây dựng</td><td>30.430,56 m²</td></tr>
 <tr><td>Chức năng</td><td>Thương mại dịch vụ, văn phòng, khách sạn, căn hộ du lịch</td></tr>
@@ -260,7 +260,7 @@ HTML
 </tbody>
 </table>
 <p>Sở Xây dựng hướng dẫn, quản lý quy hoạch theo hồ sơ được chấp thuận; UBND phường Hải Châu công bố công khai quy hoạch và giám sát triển khai. Doanh nghiệp tiếp tục làm các thủ tục đầu tư, xây dựng theo quy định – chưa có thông tin về thời điểm khởi công hay mở bán (<a href="https://baodanang.vn/chap-thuan-quy-hoach-to-hop-thuong-mai-dich-vu-khach-san-va-can-ho-du-lich-cao-cap-3357465.html">Báo Đà Nẵng</a>).</p>
-<p>Một vài con số giúp hình dung quy mô: tổng sàn 30.430,56 m² trên khu đất 1.795 m² tương ứng hệ số sử dụng đất khoảng 17 lần (Hoàng Hiệp tính từ hai số liệu trên, tính cả sàn hầm). Với giá trúng đấu giá hơn 359,6 tỷ đồng, mỗi m² đất tại 16 Bạch Đằng Đà Nẵng có giá khoảng 200 triệu đồng – cho thấy mức giá đất trung tâm ven sông Hàn hiện nay.</p>
+<p>Một vài con số giúp hình dung quy mô: tổng sàn 30.430,56 m² trên khu đất 1.795 m² tương ứng khoảng 17 m² sàn trên mỗi m² đất (Hoàng Hiệp chia từ hai số liệu trên, chưa tách phần sàn hầm). Với giá trúng đấu giá hơn 359,6 tỷ đồng, mỗi m² đất tại 16 Bạch Đằng Đà Nẵng có giá khoảng 200 triệu đồng – cho thấy mức giá đất trung tâm ven sông Hàn hiện nay.</p>
 <!--hh-img:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg|Sông Hàn và cầu Rồng nhìn từ trên cao, tháng 11/2026 – khu vực trung tâm có khu đất 16 Bạch Đằng Đà Nẵng ở bờ Tây (ảnh flycam thực tế)-->
 <h2>3 tiêu chí tài chính khi gỡ dự án tồn đọng</h2>
 <p>Ngày 5/11/2026, Phó Chủ tịch UBND thành phố Trần Nam Hưng ký công văn triển khai kết luận cuộc họp ngày 27/10 về tháo gỡ các dự án tồn đọng, kéo dài. Theo báo chí đưa tin:</p>
@@ -271,12 +271,12 @@ HTML
 <li>Sở Xây dựng hướng dẫn chủ đầu tư thuê tư vấn xác định khối lượng đã đầu tư thực tế; Sở Tài chính làm đầu mối rà soát phương án xử lý.</li>
 </ul>
 <p>Một hiệp hội doanh nghiệp góp ý rằng dùng báo cáo tài chính gần nhất để đánh giá năng lực là chưa phù hợp với dự án đã bị "đóng băng" lâu, và kiến nghị cho nhà đầu tư chứng minh bằng phương án tài chính tái khởi động dự án.</p>
-<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<h2>Tác động / nhận định của Hoàng Hiệp về 16 Bạch Đằng Đà Nẵng</h2>
 <p>Quỹ đất trung tâm ven sông Hàn gần như không còn, nên mỗi khu đất như 16 Bạch Đằng Đà Nẵng được đấu giá và lên quy hoạch cao tầng đều củng cố mặt bằng giá của dải căn hộ, khách sạn quanh trục Bạch Đằng – Trần Hưng Đạo. Tuy nhiên dự án mới chỉ ở bước chấp thuận tổng mặt bằng; người mua nên theo dõi pháp lý từng bước trước khi quan tâm sản phẩm.</p>
 <p>Với dự án tồn đọng, tiêu chí tài chính rõ ràng giúp phân loại nhanh dự án nào đủ sức tái khởi động, dự án nào phải thu hồi hoặc chuyển nhượng. Người đang góp vốn, đặt cọc ở dự án chậm triển khai nên hỏi chủ đầu tư đã nộp hồ sơ rà soát chưa và thuộc phương án nào.</p>
 <h2>Người quan tâm 16 Bạch Đằng Đà Nẵng nên theo dõi gì?</h2>
 <ol>
-<li><strong>Thủ tục tiếp theo:</strong> giấy phép xây dựng, thẩm định thiết kế – chỉ khi có các bước này mới có mốc khởi công.</li>
+<li><strong>Thủ tục tiếp theo của 16 Bạch Đằng Đà Nẵng:</strong> giấy phép xây dựng, thẩm định thiết kế – chỉ khi có các bước này mới có mốc khởi công.</li>
 <li><strong>Loại sản phẩm:</strong> căn hộ du lịch là bất động sản du lịch, pháp lý và thời hạn sở hữu khác căn hộ chung cư để ở.</li>
 <li><strong>Điều kiện bán:</strong> căn hộ hình thành trong tương lai chỉ được bán khi đủ điều kiện theo luật; không nên đặt cọc theo lời mời "giữ chỗ sớm" khi dự án mới chấp thuận tổng mặt bằng.</li>
 </ol>
@@ -300,8 +300,9 @@ HTML
 				'Nợ nghĩa vụ tài chính: có phương án nộp dần tối đa 12 tháng.',
 			),
 			'faq'       => array(
-				array( 'Dự án 16 Bạch Đằng Đà Nẵng cao bao nhiêu tầng?', '25 tầng nổi, 4 tầng hầm, cao 99 m, tổng diện tích sàn 30.430,56 m² trên khu đất 1.795 m², theo QĐ 5050/QĐ-UBND ngày 3/11/2026.' ),
+				array( 'Dự án 16 Bạch Đằng Đà Nẵng cao bao nhiêu tầng?', 'Tổ hợp 16 Bạch Đằng Đà Nẵng có 25 tầng nổi, 4 tầng hầm, cao 99 m, tổng diện tích sàn 30.430,56 m² trên khu đất 1.795 m², theo QĐ 5050/QĐ-UBND ngày 3/11/2026.' ),
 				array( 'Ai thực hiện dự án 16 Bạch Đằng Đà Nẵng?', 'Công ty CP Dịch vụ Phúc Tín, đơn vị trúng đấu giá khu đất với giá hơn 359,6 tỷ đồng.' ),
+				array( 'Khi nào mở bán căn hộ du lịch 16 Bạch Đằng Đà Nẵng?', 'Chưa có thông tin. Dự án mới được chấp thuận quy hoạch tổng mặt bằng; doanh nghiệp còn phải làm các thủ tục đầu tư, xây dựng và chỉ được bán khi đủ điều kiện theo luật.' ),
 				array( 'Đà Nẵng đánh giá năng lực nhà đầu tư dự án tồn đọng thế nào?', 'Theo 3 tiêu chí: vốn chủ sở hữu; tỷ lệ dư nợ tín dụng và trái phiếu trên vốn chủ sở hữu; khả năng huy động vốn.' ),
 			),
 		),
