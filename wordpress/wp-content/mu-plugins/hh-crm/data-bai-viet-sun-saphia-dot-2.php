@@ -253,7 +253,7 @@ HTML
 <ul>
 <li><a href="/mo-rong-duong-truong-sa-vo-nguyen-giap-2633-ty/">Mở rộng đường Võ Nguyên Giáp – Trường Sa</a>, vốn dự kiến 2.633 tỷ đồng.</li>
 <li><a href="/duong-sat-do-thi-da-nang-san-bay-my-khe-hoi-an/">Đường sắt đô thị sân bay – Mỹ Khê – Hội An</a>: theo tài liệu chủ đầu tư, dự án cách <strong>ga LRT 09 khoảng 500 m</strong>.</li>
-<li><a href="/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do/">Cao tốc nội thị Đà Nẵng – Chu Lai</a> đi theo đường Lê Văn Hiến, song song đường Trường Sa.</li>
+<li><a href="/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen/">Cao tốc nội thị Đà Nẵng – Chu Lai</a> đi theo đường Lê Văn Hiến, song song đường Trường Sa.</li>
 </ul>
 <h2>Sun Saphia Residence ở đâu so với Mỹ Khê và Non Nước?</h2>
 <p>Đoạn biển Sơn Thủy nằm giữa hai khu quen thuộc: phía Bắc là biển Mỹ Khê sôi động, nhiều khách sạn và nhà hàng; phía Nam là Non Nước với các resort lớn, yên tĩnh hơn. Hiểu Sun Saphia Residence ở đâu trên dải biển này giúp hình dung kiểu khách thuê: gần phố hơn khu resort, nhưng chưa đông đúc như Mỹ Khê. So sánh chi tiết ba khu: <a href="/can-ho-ven-bien-da-nang-my-khe-son-thuy-non-nuoc/">căn hộ ven biển Đà Nẵng: Mỹ Khê, Sơn Thủy hay Non Nước</a>.</p>
@@ -562,7 +562,7 @@ HTML
 <ul>
 <li>Công viên bãi tắm Sơn Thủy khoảng 2,45 ha: thực hiện giai đoạn 2025 – 2027.</li>
 <li>Mở rộng đường Võ Nguyên Giáp – Trường Sa: đang ưu tiên thủ tục, chưa công bố ngày khởi công.</li>
-<li>Cao tốc nội thị Đà Nẵng – Chu Lai: dự kiến khởi công 10/2027 (<a href="/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do/">chi tiết</a>).</li>
+<li>Cao tốc nội thị Đà Nẵng – Chu Lai: dự kiến khởi công 10/2027 (<a href="/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen/">chi tiết</a>).</li>
 </ul>
 <p>Nếu tiến độ Sun Saphia Residence đúng kế hoạch, khi dự án bàn giao cuối 2028 thì công viên phía trước đã hoàn thành – lợi thế cho người nhận nhà đợt đầu.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->

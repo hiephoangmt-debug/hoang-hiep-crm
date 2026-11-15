@@ -213,7 +213,7 @@ HTML
 </table>
 <p>Trả góp = gốc + lãi chia đều 240 tháng. Lãi suất ngân hàng thay đổi theo thời điểm; xem số mới nhất ở trang <a href="/thong-ke-dau-tu/">Thống kê đầu tư</a>.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
-<h2>Đọc kết quả thế nào?</h2>
+<h2>Đọc kết quả hỗ trợ lãi suất Sun Saphia thế nào?</h2>
 <ul>
 <li><strong>24 tháng gần trùng thời gian xây dựng</strong>: nếu hỗ trợ toàn bộ lãi, người mua gần như không trả lãi trước khi nhận nhà – áp lực dòng tiền giai đoạn chưa cho thuê được giảm rõ.</li>
 <li><strong>Tháng 25 là mốc cần chuẩn bị</strong>: khoản trả mỗi tháng có thể 15 – 20 triệu. Nếu cho thuê studio, tiền thuê ròng nhiều khả năng chưa đủ bù toàn bộ – xem <a href="/dau-tu-sun-saphia-residence-cho-thue-dong-tien/">3 kịch bản dòng tiền</a>.</li>
@@ -243,7 +243,7 @@ HTML
 				'Hỏi rõ hỗ trợ toàn bộ hay một phần lãi, tỷ lệ vay và phí trả trước hạn',
 			),
 			'faq'       => array(
-				array( 'Sun Saphia Residence hỗ trợ lãi suất bao lâu?', 'Theo thông tin chủ đầu tư ngày 28/10/2026, hỗ trợ lãi suất lên tới 24 tháng; chi tiết mức hỗ trợ chưa công bố.' ),
+				array( 'Sun Saphia Residence hỗ trợ lãi suất bao lâu?', 'Theo thông tin chủ đầu tư ngày 28/10/2026, hỗ trợ lãi suất Sun Saphia lên tới 24 tháng; chi tiết mức hỗ trợ chưa công bố.' ),
 				array( 'Hỗ trợ lãi suất Sun Saphia có lợi hơn chiết khấu khi không vay không?', 'Tùy mức chiết khấu chủ đầu tư áp dụng khi không vay. Nên so khoản lãi được hỗ trợ (ví dụ khoảng 311 – 327 triệu) với mức chiết khấu, sau khi tính chi phí cơ hội của tiền tự có.' ),
 				array( 'Hết hỗ trợ lãi suất Sun Saphia thì trả bao nhiêu?', 'Ví dụ vay 1,425 tỷ (50% studio 2,85 tỷ), trả góp đều 20 năm từ tháng 25: khoảng 14,6 – 18,8 triệu/tháng với lãi 10,9 – 15%/năm (minh hoạ).' ),
 				array( 'Vay 1,5 tỷ mua Sun Saphia mỗi tháng trả bao nhiêu?', 'Ví dụ minh hoạ: trả góp đều 20 năm, khoảng 15,4 triệu/tháng nếu lãi 10,9%/năm, 17,6 triệu nếu 13% và 19,8 triệu nếu 15%.' ),
@@ -259,10 +259,10 @@ HTML
 	$posts[] = array(
 		'slug'     => 'gui-tiet-kiem-hay-mua-studio-sun-saphia',
 		'old_slug' => array( 'gui-tiet-kiem-hay-mua-studio-sun-saphia-residence-cho-thue' ),
-		'rev'     => 3, // 05/11: chèn ảnh dự án.
+		'rev'     => 4, // 15/11: chuẩn SEO 100 – rút gọn URL, trường hợp có vay, kết hợp tiết kiệm và mua, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Gửi tiết kiệm hay mua studio Sun Saphia Residence cho thuê? So sánh với lãi suất 5,4 – 6,7%/năm',
 		'excerpt'  => 'Cùng khoảng 3,19 tỷ (studio 2,85 tỷ cộng VAT và 2% bảo trì): gửi tiết kiệm 12 tháng 5,4 – 6,7%/năm cho khoảng 172 – 214 triệu; cho thuê lợi suất ròng 3,5 – 5,5% cho khoảng 112 – 176 triệu. Phần chênh nằm ở tăng giá và rủi ro.',
-		'keyword'  => 'gửi tiết kiệm hay mua Sun Saphia Residence',
+		'keyword'  => 'gửi tiết kiệm hay mua studio',
 		'keywords_extra' => array( 'gửi tiết kiệm hay mua căn hộ cho thuê', 'Sun Saphia Residence', 'đầu tư studio Đà Nẵng', 'lãi suất tiết kiệm 2026', 'lợi suất cho thuê căn hộ Đà Nẵng' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-08 11:30',
@@ -270,9 +270,9 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Đầu tư cho thuê' ),
 		'image'    => 'plugin:img/tin-tuc/tiet-kiem-hay-studio-sun-saphia.jpg',
 		'content'  => <<<HTML
-<p>Câu hỏi hay gặp khi cân nhắc {$saphia}: để tiền trong ngân hàng hay mua một căn studio cho thuê? Bài đặt hai lựa chọn cạnh nhau với cùng số tiền, dùng lãi suất tiết kiệm thực tế cuối tháng 10/2026 và lợi suất cho thuê căn hộ Đà Nẵng theo báo cáo thị trường. Các con số là minh hoạ.</p>
+<p>Gửi tiết kiệm hay mua studio cho thuê là câu hỏi hay gặp khi cân nhắc {$saphia}: để tiền trong ngân hàng hay mua một căn studio? Bài đặt hai lựa chọn gửi tiết kiệm hay mua studio cạnh nhau với cùng số tiền, dùng lãi suất tiết kiệm thực tế cuối tháng 10/2026 và lợi suất cho thuê căn hộ Đà Nẵng theo báo cáo thị trường. Các con số là minh hoạ.</p>
 <!--hh-featured-->
-<h2>Cùng số tiền: khoảng 3,19 tỷ</h2>
+<h2>Gửi tiết kiệm hay mua studio: cùng khoảng 3,19 tỷ</h2>
 <p>Studio tầng 15 dãy mặt biển giá dự kiến 2,85 tỷ (chưa VAT, chưa kinh phí bảo trì), cộng VAT tối đa 10% và 2% bảo trì là khoảng <strong>3,19 tỷ</strong>, chưa gồm nội thất (<a href="/gia-sun-saphia-residence-bao-nhieu/">giá dự kiến</a>, <a href="/chi-phi-mua-sun-saphia-residence-ngoai-gia-ban/">chi phí ngoài giá</a>).</p>
 <table>
 <thead><tr><th>Lựa chọn</th><th>Tỷ lệ/năm</th><th>Tiền thu mỗi năm</th></tr></thead>
@@ -285,41 +285,53 @@ HTML
 </tbody>
 </table>
 <p>Lãi suất tiết kiệm: CafeBiz 20/10/2026, 24hMoney 29/10/2026 (tổng hợp ở trang <a href="/thong-ke-dau-tu/">Thống kê đầu tư</a>). Lợi suất 4,5%/năm: Batdongsan.com.vn, quý 3/2026. Lợi suất cho thuê tính trên tổng tiền, đã trừ chi phí vận hành.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Layout căn Studio 30 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
-<h2>Chênh lệch nằm ở đâu?</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Gửi tiết kiệm hay mua studio Sun Saphia Residence 30 m² – layout căn (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Gửi tiết kiệm hay mua studio: chênh lệch nằm ở đâu?</h2>
 <ul>
 <li><strong>Thu nhập đều</strong>: tiết kiệm nhỉnh hơn hoặc tương đương, gần như không rủi ro, rút được khi cần.</li>
-<li><strong>Tăng giá tài sản</strong>: căn hộ có thể tăng giá – giá rao bán chung cư Đà Nẵng từ 46 triệu/m² quý 1/2024 lên 67 triệu/m² quý 3/2026 (Batdongsan.com.vn). Quá khứ không bảo đảm tương lai; căn có thời hạn 50 năm cũng cần tính khi bán lại.</li>
+<li><strong>Tăng giá tài sản</strong>: căn hộ có thể tăng giá – giá rao bán chung cư Đà Nẵng từ 46 triệu/m² quý 1/2024 lên 67 triệu/m² quý 3/2026 (Batdongsan.com.vn). Quá khứ không bảo đảm tương lai: báo cáo DKRA quý III/2026 (<a href="https://cafef.vn/nguon-cung-so-cap-can-ho-tai-da-nang-giam-14-trong-quy-iii-2026-188261025063317834.chn">CafeF</a> trích dẫn) ghi giá sơ cấp neo cao nhưng giá thứ cấp được dự báo tiếp tục giảm; căn có thời hạn 50 năm cũng cần tính khi bán lại.</li>
 <li><strong>Thời gian chờ</strong>: studio Sun Saphia bàn giao dự kiến 11/2028 – hơn 2 năm chưa có tiền thuê, trong khi tiền trả theo tiến độ.</li>
 <li><strong>Công sức và rủi ro</strong>: tìm khách, mùa thấp điểm, 513 studio cùng tòa cạnh tranh – xem <a href="/dau-tu-sun-saphia-residence-cho-thue-dong-tien/">rủi ro khi đầu tư cho thuê</a>.</li>
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Phối cảnh Sun Saphia Residence bên biển Sơn Thủy lúc hoàng hôn (ảnh chủ đầu tư)-->
-<h2>Khi nào mua studio hợp lý hơn gửi tiết kiệm?</h2>
+<h2>Gửi tiết kiệm hay mua studio: khi nào mua hợp lý hơn?</h2>
 <ul>
 <li>Tin rằng giá căn hộ ven biển còn tăng trong 5 – 10 năm và không cần dùng khoản tiền này.</li>
 <li>Muốn có căn nghỉ dưỡng cho gia đình vài lần mỗi năm, lúc không ở thì cho thuê.</li>
 <li>Chấp nhận thu nhập thấp hơn tiết kiệm trong vài năm đầu để đổi lấy tài sản.</li>
 </ul>
-<p>Nếu chỉ cần thu nhập đều và an toàn, gửi tiết kiệm vẫn là lựa chọn đơn giản hơn.</p>
+<p>Nếu chỉ cần thu nhập đều và an toàn, giữa gửi tiết kiệm hay mua studio, tiết kiệm vẫn là lựa chọn đơn giản hơn.</p>
+<h2>Gửi tiết kiệm hay mua studio khi phải vay?</h2>
+<p>Nhiều người không có đủ 3,19 tỷ mà vay một phần. Ví dụ minh hoạ: vay 50% giá căn 2,85 tỷ (khoảng 1,425 tỷ) với lãi 10%/năm, tiền lãi năm đầu khoảng 142,5 triệu – gần bằng toàn bộ tiền thuê ròng ở kịch bản mặt bằng 4,5% (khoảng 144 triệu). Nghĩa là khi vay, tiền thuê chủ yếu dùng để trả lãi; lợi nhuận phải trông vào tăng giá. Chính sách hỗ trợ lãi suất tới 24 tháng giúp nhẹ giai đoạn xây dựng – xem <a href="/ho-tro-lai-suat-24-thang-sun-saphia/">tính thử hỗ trợ lãi suất</a>.</p>
+<h2>Không nhất thiết chọn một: kết hợp cả hai</h2>
+<ul>
+<li>Giữ một khoản tiết kiệm dự phòng bằng 6 – 12 tháng tiền trả góp trước khi mua căn.</li>
+<li>Thanh toán theo tiến độ: phần tiền chưa đến đợt có thể tiếp tục gửi kỳ hạn ngắn.</li>
+<li>Chỉ dùng tiền nhàn rỗi dài hạn cho căn hộ; tiền có thể cần trong 2 – 3 năm nên để tiết kiệm.</li>
+</ul>
+<p>Nhận định của Hoàng Hiệp: câu hỏi gửi tiết kiệm hay mua studio không có đáp án chung. Tiết kiệm thắng về thu nhập đều và an toàn; studio có thêm cơ hội tăng giá và giá trị sử dụng nhưng đi kèm thời gian chờ, công vận hành và rủi ro cho thuê. Chọn theo mục tiêu của khoản tiền, không theo lời mời chào.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Tiết kiệm hay mua studio Sun Saphia Residence cho thuê?',
-			'desc'      => 'Cùng 3,19 tỷ: gửi tiết kiệm 12 tháng 5,4 – 6,7% thu khoảng 172 – 214 triệu/năm; studio Sun Saphia cho thuê lợi suất 3,5 – 5,5% thu 112 – 176 triệu.',
+			'seo_title' => 'Gửi tiết kiệm hay mua studio 2026: so lãi 5,4 – 6,7%/năm',
+			'desc'      => 'Gửi tiết kiệm hay mua studio Sun Saphia cho thuê? Cùng 3,19 tỷ: tiết kiệm 5,4 – 6,7% thu 172 – 214 triệu/năm; cho thuê 3,5 – 5,5% thu 112 – 176 triệu.',
 			'points'    => array(
-				'Tiết kiệm 12 tháng 5,4 – 6,7%/năm: khoảng 172 – 214 triệu trên 3,19 tỷ',
+				'Gửi tiết kiệm hay mua studio: tiết kiệm 12 tháng 5,4 – 6,7%/năm cho khoảng 172 – 214 triệu trên 3,19 tỷ',
 				'Studio cho thuê lợi suất ròng 3,5 – 5,5%: khoảng 112 – 176 triệu/năm',
 				'Studio có thêm khả năng tăng giá nhưng chờ bàn giao 11/2028 và có rủi ro cho thuê',
 			),
 			'faq'       => array(
 				array( 'Gửi tiết kiệm 3 tỷ một năm được bao nhiêu?', 'Với lãi suất 12 tháng 5,4 – 6,7%/năm (cuối 10/2026), 3,19 tỷ cho khoảng 172 – 214 triệu tiền lãi mỗi năm.' ),
+				array( 'Gửi tiết kiệm hay mua studio thì lợi hơn?', 'Với lãi suất cuối 10/2026, tiết kiệm cho thu nhập đều cao hơn hoặc tương đương tiền thuê ròng; studio có thêm khả năng tăng giá nhưng phải chờ bàn giao 11/2028 và chịu rủi ro cho thuê.' ),
+				array( 'Gửi tiết kiệm hay mua studio khi phải vay ngân hàng?', 'Khi vay 50% với lãi 10%/năm, tiền lãi năm đầu gần bằng tiền thuê ròng ở mức 4,5%; lợi nhuận phải trông vào tăng giá, nên cần nguồn trả nợ ổn định ngoài tiền thuê.' ),
 				array( 'Cho thuê căn hộ Đà Nẵng lợi suất bao nhiêu?', 'Theo Batdongsan.com.vn quý 3/2026, lợi suất cho thuê căn hộ Đà Nẵng khoảng 4,5%/năm.' ),
 			),
 		),
 		'sources'  => array(
 			'https://hiephoangmt-debug.github.io/hoang-hiep-crm/dau-tu/',
 			'https://wiki.batdongsan.com.vn/tin-tuc/thi-truong-bat-dong-san-quy-32026-gia-ha-nhiet-chung-cu-tiep-tuc-dan-dat-nhu-cau-857618',
+			'https://cafef.vn/nguon-cung-so-cap-can-ho-tai-da-nang-giam-14-trong-quy-iii-2026-188261025063317834.chn',
 		),
 	);
 
@@ -327,10 +339,10 @@ HTML
 	$posts[] = array(
 		'slug'     => 'bao-tri-can-ho-ven-bien-hoi-muoi-mua-bao',
 		'old_slug' => array( 'can-ho-ven-bien-hoi-muoi-mua-bao-sun-saphia-residence' ),
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 15/11: chuẩn SEO 100 – rút gọn URL, phân vai chủ nhà – ban quản trị, lịch bảo trì, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Căn hộ ven biển như Sun Saphia Residence: hơi muối, mùa mưa bão và những gì cần kiểm tra, bảo trì',
 		'excerpt'  => 'Sống sát biển Đà Nẵng có cái giá riêng: hơi muối làm gỉ kim loại, ẩm, thấm; mùa mưa bão gió mạnh, sóng lớn. Chọn vật liệu nội thất, kiểm tra khi nhận nhà và bảo trì căn hộ ven biển như Sun Saphia Residence.',
-		'keyword'  => 'bảo trì căn hộ Sun Saphia Residence',
+		'keyword'  => 'bảo trì căn hộ ven biển',
 		'keywords_extra' => array( 'căn hộ ven biển hơi muối', 'Sun Saphia Residence', 'bảo trì căn hộ ven biển', 'căn hộ biển Đà Nẵng mùa mưa bão', 'nội thất căn hộ biển' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-08 16:30',
@@ -338,9 +350,9 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Căn hộ biển Đà Nẵng' ),
 		'image'    => 'plugin:img/tin-tuc/can-ho-ven-bien-hoi-muoi-sun-saphia.jpg',
 		'content'  => <<<HTML
-<p>Căn hộ sát biển như {$saphia} (đường Trường Sa, đối diện công viên bãi tắm Sơn Thủy) có view và không khí mà căn trong phố không có. Đổi lại, môi trường biển làm đồ đạc xuống cấp nhanh hơn và mùa mưa bão cần chuẩn bị riêng. Bài tổng hợp những điểm nên biết trước khi mua, khi làm nội thất và khi sử dụng.</p>
+<p>Bảo trì căn hộ ven biển là việc nên tính ngay từ khi mua: căn sát biển như {$saphia} (đường Trường Sa, đối diện công viên bãi tắm Sơn Thủy – <a href="https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp">VietnamPlus</a>) có view và không khí mà căn trong phố không có, nhưng môi trường biển làm đồ đạc xuống cấp nhanh hơn và mùa mưa bão cần chuẩn bị riêng. Bài tổng hợp những điểm nên biết trước khi mua, khi làm nội thất và khi sử dụng.</p>
 <!--hh-featured-->
-<h2>Hơi muối ảnh hưởng gì?</h2>
+<h2>Hơi muối ảnh hưởng gì tới bảo trì căn hộ ven biển?</h2>
 <p>Không khí biển chứa ion clorua – tác nhân gây ăn mòn kim loại và cốt thép trong bê tông; các nghiên cứu về bảo trì công trình ven biển khuyến nghị lập quy trình bảo trì ngay từ khi đưa công trình vào sử dụng. Với căn hộ, chỗ dễ thấy nhất:</p>
 <ul>
 <li>Bản lề, tay nắm, ốc vít, lan can kim loại gỉ nhanh.</li>
@@ -348,14 +360,14 @@ HTML
 <li>Tường ẩm, sơn phồng, nấm mốc ở góc khuất nếu ít thông gió; một số nhà gần biển gặp nứt, thấm do độ ẩm và hơi muối cao.</li>
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
-<h2>Chọn nội thất cho căn hộ biển</h2>
+<h2>Chọn nội thất để giảm bảo trì căn hộ ven biển</h2>
 <ul>
 <li>Phụ kiện kim loại: ưu tiên loại chịu ăn mòn tốt (inox chất lượng cao, nhôm sơn tĩnh điện), hỏi rõ nhà cung cấp về môi trường biển.</li>
 <li>Điều hòa: hỏi loại dàn nóng có lớp phủ chống ăn mòn.</li>
 <li>Gỗ công nghiệp: chọn loại chống ẩm cho tủ bếp, tủ vệ sinh.</li>
 <li>Rèm, sofa: vải dễ tháo giặt – căn cho thuê ngắn ngày càng cần.</li>
 </ul>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Bảo trì căn hộ ven biển như Sun Saphia Residence – tòa tháp 30 tầng về đêm (ảnh chủ đầu tư)-->
 <h2>Mùa mưa bão: chuẩn bị gì?</h2>
 <p>Đà Nẵng thường mưa nhiều và có bão từ khoảng tháng 9 đến tháng 12. Theo báo chí, bờ biển phía Đông thành phố (Sơn Trà, Ngũ Hành Sơn) nhiều năm bị xâm thực, sạt lở vào mùa mưa bão. Với căn hộ trên cao:</p>
 <ul>
@@ -363,32 +375,52 @@ HTML
 <li>Dọn đồ ngoài ban công, khóa cửa kính khi có cảnh báo bão.</li>
 <li>Căn cho thuê: thống nhất với đơn vị quản lý cách xử lý khi có bão, hủy phòng của khách.</li>
 </ul>
-<h2>Khi nhận nhà nên kiểm tra kỹ</h2>
+<h2>Khi nhận nhà: kiểm tra để giảm bảo trì căn hộ ven biển về sau</h2>
 <ol>
 <li>Cửa kính, gioăng, độ kín nước (thử xịt nước nếu được).</li>
 <li>Thoát nước sàn ban công, độ dốc về phễu thu.</li>
 <li>Vị trí đặt dàn nóng, có mái che hay không.</li>
 <li>Vết thấm, ẩm trên trần, tường giáp ban công.</li>
 </ol>
-<h2>Bảo trì định kỳ</h2>
+<h2>Lịch bảo trì căn hộ ven biển định kỳ</h2>
+<table>
+<thead><tr><th>Tần suất</th><th>Việc nên làm</th></tr></thead>
+<tbody>
+<tr><td>Hằng tháng</td><td>Lau phụ kiện kim loại, ray cửa; mở cửa thông gió, chạy chế độ hút ẩm khi trời nồm</td></tr>
+<tr><td>Trước mùa mưa (khoảng tháng 8 – 9)</td><td>Vệ sinh dàn nóng điều hòa, kiểm tra silicon, gioăng cửa kính, phễu thu nước ban công</td></tr>
+<tr><td>Sau mùa bão</td><td>Kiểm tra vết thấm trần, tường giáp ban công; sơn lại chỗ phồng rộp</td></tr>
+<tr><td>Vài năm một lần</td><td>Thay gioăng, bản lề, phụ kiện đã gỉ; đánh giá lại thiết bị điện tử đặt gần cửa</td></tr>
+</tbody>
+</table>
 <p>Vệ sinh dàn nóng điều hòa, lau phụ kiện kim loại, kiểm tra silicon, gioăng cửa – nên làm trước mùa mưa hằng năm. Chi phí này nên tính vào dòng tiền nếu mua để cho thuê (<a href="/dau-tu-sun-saphia-residence-cho-thue-dong-tien/">xem dòng tiền</a>). Phần kết cấu, mặt ngoài tòa nhà do ban quản trị dùng quỹ bảo trì 2% thực hiện.</p>
+<h2>Bảo trì căn hộ ven biển: phần chủ nhà và phần tòa nhà</h2>
+<ul>
+<li><strong>Chủ nhà tự lo</strong>: nội thất, thiết bị trong căn, cửa và gioăng thuộc phần sở hữu riêng (theo quy chế tòa nhà), dàn nóng điều hòa của căn.</li>
+<li><strong>Tòa nhà lo bằng quỹ bảo trì</strong>: kết cấu, mặt ngoài, mái, hệ thống kỹ thuật chung, thang máy – từ kinh phí bảo trì 2% người mua nộp khi mua căn.</li>
+<li><strong>Cần hỏi rõ khi nhận nhà</strong>: cửa kính mặt ngoài, lan can ban công thuộc phần riêng hay phần chung – mỗi tòa quy định khác nhau.</li>
+</ul>
+<p>Nhận định của Hoàng Hiệp: bảo trì căn hộ ven biển không tốn kém nếu làm đều và đúng lúc; tốn kém là khi để gỉ, thấm lan rộng mới xử lý. Với căn cho thuê, nên đưa lịch bảo trì vào hợp đồng với đơn vị vận hành ngay từ đầu.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Căn hộ ven biển Sun Saphia: hơi muối, mùa bão, bảo trì',
-			'desc'      => 'Căn hộ ven biển như Sun Saphia Residence: hơi muối làm gỉ kim loại, ẩm, thấm; mùa mưa bão tháng 9 – 12. Chọn nội thất, kiểm tra khi nhận nhà và bảo trì.',
+			'seo_title' => 'Bảo trì căn hộ ven biển 2026: hơi muối, mùa bão, Sun Saphia',
+			'desc'      => 'Bảo trì căn hộ ven biển như Sun Saphia Residence: hơi muối làm gỉ kim loại, ẩm, thấm; mùa mưa bão tháng 9 – 12. Chọn nội thất, kiểm tra khi nhận nhà.',
 			'points'    => array(
+				'Bảo trì căn hộ ven biển cần tính từ khi mua: hơi muối, độ ẩm và mùa mưa bão làm đồ đạc xuống cấp nhanh',
 				'Ion clorua trong không khí biển gây ăn mòn kim loại, cốt thép',
 				'Chọn phụ kiện, điều hòa, gỗ chống ẩm phù hợp môi trường biển',
 				'Kiểm tra cửa kính, gioăng, thoát nước ban công trước mùa mưa bão',
 			),
 			'faq'       => array(
-				array( 'Ở căn hộ sát biển có bị gỉ đồ không?', 'Có. Hơi muối (ion clorua) làm kim loại, dàn nóng điều hòa xuống cấp nhanh hơn; nên chọn vật liệu chịu ăn mòn và bảo trì định kỳ.' ),
+				array( 'Ở căn hộ sát biển có bị gỉ đồ không?', 'Có. Hơi muối (ion clorua) làm kim loại, dàn nóng điều hòa xuống cấp nhanh hơn; nên chọn vật liệu chịu ăn mòn; bảo trì căn hộ ven biển định kỳ giúp kéo dài tuổi thọ đồ đạc.' ),
 				array( 'Mùa mưa bão Đà Nẵng vào tháng mấy?', 'Thường từ khoảng tháng 9 đến tháng 12.' ),
+				array( 'Bảo trì căn hộ ven biển nên làm khi nào?', 'Lau phụ kiện kim loại hằng tháng; vệ sinh dàn nóng, kiểm tra gioăng cửa, thoát nước ban công trước mùa mưa; kiểm tra vết thấm sau mùa bão.' ),
+				array( 'Quỹ bảo trì 2% có trả cho bảo trì căn hộ ven biển của tôi không?', 'Không cho phần riêng trong căn. Quỹ 2% dùng cho phần sở hữu chung của tòa nhà (kết cấu, mặt ngoài, hệ thống kỹ thuật chung); nội thất, thiết bị trong căn do chủ nhà tự lo.' ),
 			),
 		),
 		'sources'  => array(
+			'https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp',
 			'https://www.sggp.org.vn/bai-bien-da-nang-bi-xam-thuc-nghiem-trong-post775700.html',
 			'https://vjol.info.vn/amc/article/download/81715/69619/',
 		),
@@ -398,10 +430,10 @@ HTML
 	$posts[] = array(
 		'slug'     => 'chuyen-nhuong-hop-dong-sun-saphia-residence',
 		'old_slug' => array( 'chuyen-nhuong-hop-dong-sun-saphia-residence-truoc-ban-giao' ),
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 15/11: chuẩn SEO 100 – rút gọn URL, Luật Thuế TNCN 2025 (hiệu lực 1/7/2026), chi phí và rủi ro, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Bán lại Sun Saphia Residence trước khi nhận nhà: chuyển nhượng hợp đồng thế nào, thuế 2% ai nộp?',
 		'excerpt'  => 'Mua Sun Saphia Residence rồi muốn bán lại trước bàn giao: Luật Kinh doanh BĐS 2023 cho chuyển nhượng hợp đồng mua bán nhà ở hình thành trong tương lai, lập văn bản, chủ đầu tư xác nhận; thuế thu nhập cá nhân 2% giá chuyển nhượng.',
-		'keyword'  => 'chuyển nhượng hợp đồng Sun Saphia Residence',
+		'keyword'  => 'chuyển nhượng hợp đồng Sun Saphia',
 		'keywords_extra' => array( 'chuyển nhượng hợp đồng mua bán căn hộ', 'Sun Saphia Residence', 'bán lại Sun Saphia', 'chuyển nhượng căn hộ hình thành trong tương lai', 'thuế chuyển nhượng căn hộ 2%' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-09 08:00',
@@ -409,17 +441,17 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Pháp lý bất động sản' ),
 		'image'    => 'plugin:img/tin-tuc/chuyen-nhuong-hop-dong-sun-saphia.jpg',
 		'content'  => <<<HTML
-<p>{$saphia} bàn giao dự kiến 11/2028. Trong hơn 2 năm đó, người mua có thể cần bán lại vì đổi kế hoạch tài chính hoặc muốn chốt lời. Căn hộ chưa có sổ nên không bán theo kiểu sang tên sổ hồng, mà <strong>chuyển nhượng hợp đồng mua bán</strong> với chủ đầu tư. Bài tóm tắt cách làm theo Luật Kinh doanh bất động sản 2023.</p>
+<p>Chuyển nhượng hợp đồng Sun Saphia Residence là cách bán lại căn trước khi nhận nhà: {$saphia} bàn giao dự kiến 11/2028, và trong hơn 2 năm đó, người mua có thể cần bán lại vì đổi kế hoạch tài chính hoặc muốn chốt lời. Căn hộ chưa có sổ nên không bán theo kiểu sang tên sổ hồng, mà <strong>chuyển nhượng hợp đồng mua bán</strong> với chủ đầu tư. Bài tóm tắt cách làm theo Luật Kinh doanh bất động sản 2023.</p>
 <!--hh-featured-->
-<h2>Khi nào được chuyển nhượng hợp đồng?</h2>
+<h2>Khi nào được chuyển nhượng hợp đồng Sun Saphia?</h2>
 <ul>
 <li>Đã ký <strong>hợp đồng mua bán</strong> với chủ đầu tư (không phải chỉ phiếu giữ chỗ hay thỏa thuận đặt cọc).</li>
 <li>Chuyển nhượng trước khi nộp hồ sơ đề nghị cấp giấy chứng nhận cho căn đó.</li>
 <li>Chuyển nhượng toàn bộ hợp đồng; người nhận chuyển nhượng tiếp tục quyền và nghĩa vụ của người mua với chủ đầu tư.</li>
 </ul>
-<p>Các quy định chi tiết nằm ở các điều về chuyển nhượng hợp đồng kinh doanh bất động sản (Điều 49 – 51) của Luật số 29/2023/QH15; nên đọc văn bản gốc hoặc hỏi luật sư trước khi giao dịch.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Phối cảnh Sun Saphia Residence bên biển Sơn Thủy lúc hoàng hôn (ảnh chủ đầu tư)-->
-<h2>Các bước thường gặp</h2>
+<p>Các quy định chi tiết nằm ở các điều về chuyển nhượng hợp đồng kinh doanh bất động sản (Điều 49 – 51) của Luật số 29/2023/QH15 (giải đáp trên <a href="https://thuvienphapluat.vn/phap-luat-nha-dat/hop-dong-mua-ban-nha-o-hinh-thanh-trong-tuong-lai-co-duoc-chuyen-nhuong-khong-10106.html">Thư Viện Pháp Luật</a>); nên đọc văn bản gốc hoặc hỏi luật sư trước khi giao dịch.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Chuyển nhượng hợp đồng Sun Saphia Residence trước bàn giao – phối cảnh bên biển Sơn Thủy (ảnh chủ đầu tư)-->
+<h2>Các bước chuyển nhượng hợp đồng Sun Saphia</h2>
 <ol>
 <li>Hai bên thỏa thuận giá, lập văn bản chuyển nhượng hợp đồng theo mẫu; công chứng hoặc chứng thực khi bên chuyển nhượng là cá nhân.</li>
 <li>Nộp thuế thu nhập cá nhân và lệ phí liên quan.</li>
@@ -427,34 +459,47 @@ HTML
 <li>Bàn giao bản gốc hợp đồng, hóa đơn, chứng từ đã thanh toán cho người mua mới.</li>
 </ol>
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
-<h2>Thuế: 2% trên giá chuyển nhượng</h2>
-<p>Thuế thu nhập cá nhân khi chuyển nhượng bất động sản là <strong>2% giá chuyển nhượng</strong>; Luật Thuế thu nhập cá nhân sửa đổi thông qua cuối năm 2025 vẫn giữ mức này. Ví dụ minh hoạ: chuyển nhượng hợp đồng với giá 3 tỷ thì thuế khoảng 60 triệu. Ai trả thuế do hai bên thỏa thuận và nên ghi rõ trong văn bản. Khai giá thấp hơn thực tế để giảm thuế là rủi ro pháp lý cho cả hai bên.</p>
-<h2>Người mua lại cần kiểm tra gì?</h2>
+<h2>Thuế khi chuyển nhượng hợp đồng Sun Saphia: 2% giá chuyển nhượng</h2>
+<p>Thuế thu nhập cá nhân khi chuyển nhượng bất động sản là <strong>2% giá chuyển nhượng</strong>; Luật Thuế thu nhập cá nhân 2025, hiệu lực từ 1/7/2026, vẫn giữ cách tính 2% trên giá chuyển nhượng từng lần với cá nhân cư trú (tóm tắt trên <a href="https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/thue-tncn-tu-chuyen-nhuong-bat-dong-san-tu-01-7-2026-21973.html">Thư Viện Pháp Luật</a>). Ví dụ minh hoạ: chuyển nhượng hợp đồng với giá 3 tỷ thì thuế khoảng 60 triệu. Ai trả thuế do hai bên thỏa thuận và nên ghi rõ trong văn bản. Khai giá thấp hơn thực tế để giảm thuế là rủi ro pháp lý cho cả hai bên.</p>
+<h2>Mua lại qua chuyển nhượng hợp đồng Sun Saphia: kiểm tra gì?</h2>
 <ul>
 <li>Hợp đồng gốc với chủ đầu tư, phụ lục, thư bảo lãnh ngân hàng của căn.</li>
 <li>Số tiền đã trả theo từng đợt, khớp với chứng từ và xác nhận của chủ đầu tư.</li>
 <li>Căn có đang thế chấp ngân hàng không – nếu có, cần ngân hàng đồng ý và tất toán hoặc chuyển khoản vay.</li>
 <li>Các mốc thanh toán còn lại – xem <a href="/tien-do-thanh-toan-sun-saphia-residence/">mức 30%, 70%, 95%</a>.</li>
 </ul>
+<h2>Chi phí và rủi ro khi chuyển nhượng hợp đồng Sun Saphia</h2>
+<ul>
+<li><strong>Chi phí</strong>: thuế TNCN 2% giá chuyển nhượng, phí công chứng văn bản chuyển nhượng, phí thủ tục xác nhận của chủ đầu tư (nếu có – hỏi trước).</li>
+<li><strong>Mua bán khi chưa có hợp đồng mua bán</strong>: chỉ có phiếu giữ chỗ hoặc thỏa thuận đặt cọc thì chưa thuộc diện chuyển nhượng hợp đồng theo luật – rủi ro tranh chấp cao.</li>
+<li><strong>Khai giá thấp</strong> để giảm thuế: rủi ro bị truy thu, phạt và bất lợi khi có tranh chấp.</li>
+<li><strong>Căn đang thế chấp</strong>: phải có ngân hàng đồng ý; người mua lại nên yêu cầu tất toán hoặc chuyển khoản vay trước khi trả phần lớn tiền.</li>
+</ul>
+<p>Nhận định của Hoàng Hiệp: chuyển nhượng hợp đồng Sun Saphia an toàn nhất khi đi đủ ba bước – văn bản chuyển nhượng có công chứng, nộp thuế đúng giá và chủ đầu tư xác nhận. Thiếu bước xác nhận, người mua lại chưa được chủ đầu tư công nhận là bên mua mới.</p>
 <p>Sau khi bàn giao và có sổ, giao dịch chuyển sang mua bán căn hộ thông thường – xem <a href="/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/">mua căn hộ chuyển nhượng Đà Nẵng: quy trình, giấy tờ</a>.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Bán lại Sun Saphia Residence trước bàn giao: thủ tục, thuế',
-			'desc'      => 'Bán lại Sun Saphia Residence trước khi nhận nhà: chuyển nhượng hợp đồng theo Luật KDBĐS 2023, chủ đầu tư xác nhận, thuế TNCN 2% giá chuyển nhượng.',
+			'seo_title' => 'Chuyển nhượng hợp đồng Sun Saphia 2026: thủ tục, thuế 2%',
+			'desc'      => 'Chuyển nhượng hợp đồng Sun Saphia Residence trước khi nhận nhà: điều kiện theo Luật KDBĐS 2023, chủ đầu tư xác nhận, thuế TNCN 2% giá chuyển nhượng.',
 			'points'    => array(
+				'Chuyển nhượng hợp đồng Sun Saphia là cách bán lại căn trước khi nhận nhà (bàn giao dự kiến 11/2028)',
 				'Chỉ chuyển nhượng được khi đã ký hợp đồng mua bán, trước khi nộp hồ sơ cấp sổ',
 				'Lập văn bản chuyển nhượng, chủ đầu tư xác nhận',
 				'Thuế thu nhập cá nhân 2% giá chuyển nhượng',
 			),
 			'faq'       => array(
-				array( 'Có bán lại được căn Sun Saphia khi chưa nhận nhà không?', 'Được, bằng cách chuyển nhượng hợp đồng mua bán với chủ đầu tư theo Luật Kinh doanh bất động sản 2023, trước khi nộp hồ sơ cấp giấy chứng nhận; chủ đầu tư phải xác nhận văn bản chuyển nhượng.' ),
-				array( 'Chuyển nhượng hợp đồng mua căn hộ chịu thuế bao nhiêu?', 'Thuế thu nhập cá nhân 2% trên giá chuyển nhượng; ai nộp do hai bên thỏa thuận.' ),
+				array( 'Có bán lại được căn Sun Saphia khi chưa nhận nhà không?', 'Được, bằng cách chuyển nhượng hợp đồng Sun Saphia (hợp đồng mua bán đã ký với chủ đầu tư) theo Luật Kinh doanh bất động sản 2023, trước khi nộp hồ sơ cấp giấy chứng nhận; chủ đầu tư phải xác nhận văn bản chuyển nhượng.' ),
+				array( 'Chuyển nhượng hợp đồng mua căn hộ chịu thuế bao nhiêu?', 'Thuế thu nhập cá nhân 2% trên giá chuyển nhượng (giữ nguyên theo Luật Thuế TNCN 2025, hiệu lực 1/7/2026); ai nộp do hai bên thỏa thuận.' ),
+				array( 'Chỉ có phiếu giữ chỗ có chuyển nhượng hợp đồng Sun Saphia được không?', 'Không theo nghĩa chuyển nhượng hợp đồng của luật: phải ký hợp đồng mua bán với chủ đầu tư rồi mới chuyển nhượng được. Trước đó, đổi người đứng tên phiếu giữ chỗ phụ thuộc quy định của chủ đầu tư.' ),
+				array( 'Chuyển nhượng hợp đồng Sun Saphia cần chủ đầu tư làm gì?', 'Chủ đầu tư xác nhận vào văn bản chuyển nhượng; từ đó người mua mới tiếp tục quyền và nghĩa vụ với chủ đầu tư.' ),
 			),
 		),
 		'sources'  => array(
 			'https://thuvienphapluat.vn/phap-luat-nha-dat/ban-nha-o-hinh-thanh-trong-tuong-lai-co-phai-nop-thue-thu-nhap-ca-nhan-khong-10292.html',
+			'https://thuvienphapluat.vn/phap-luat-nha-dat/hop-dong-mua-ban-nha-o-hinh-thanh-trong-tuong-lai-co-duoc-chuyen-nhuong-khong-10106.html',
+			'https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/thue-tncn-tu-chuyen-nhuong-bat-dong-san-tu-01-7-2026-21973.html',
 			'https://hethongphapluat.com/luat-kinh-doanh-bat-dong-san-2023/dieu-51',
 			'https://www.abs.vn/wp-content/uploads/2025/12/Weekly_Highlights_251212.pdf',
 		),
@@ -464,10 +509,10 @@ HTML
 	$posts[] = array(
 		'slug'     => 'dai-bien-truong-sa-ngu-hanh-son-sun-saphia',
 		'old_slug' => array( 'dai-bien-truong-sa-ngu-hanh-son-resort-sun-saphia-residence' ),
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 15/11: chuẩn SEO 100 – rút gọn URL, từ khoá dải biển Trường Sa, resort và căn hộ, lưu ý khi mua, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Dải biển Trường Sa – Ngũ Hành Sơn: resort, khách sạn quốc tế và vị trí của Sun Saphia Residence',
 		'excerpt'  => 'Đường Trường Sa (Ngũ Hành Sơn) là dải biển tập trung nhiều resort, khách sạn quốc tế của Đà Nẵng và đang có thêm dự án nghỉ dưỡng mới. Sun Saphia Residence nằm ở đầu dải biển này, cạnh bãi tắm Sơn Thủy.',
-		'keyword'  => 'resort quanh Sun Saphia Residence',
+		'keyword'  => 'dải biển Trường Sa',
 		'keywords_extra' => array( 'dải biển Trường Sa Ngũ Hành Sơn', 'Sun Saphia Residence', 'resort đường Trường Sa Đà Nẵng', 'bất động sản ven biển Ngũ Hành Sơn', 'căn hộ biển Ngũ Hành Sơn' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-09 11:30',
@@ -475,23 +520,23 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Ngũ Hành Sơn' ),
 		'image'    => 'plugin:img/tin-tuc/dai-bien-truong-sa-sun-saphia.jpg',
 		'content'  => <<<HTML
-<p>Từ giao lộ Võ Nguyên Giáp – Trường Sa đi về phía Hội An là dải biển <a href="/khu-vuc/ngu-hanh-son/">Ngũ Hành Sơn</a> – nơi tập trung nhiều resort, khách sạn quốc tế của Đà Nẵng. {$saphia} nằm ở đầu dải biển này, cạnh bãi tắm Sơn Thủy. Bài nhìn lại dải biển này đang có gì và vì sao vị trí đó ảnh hưởng tới giá và khả năng cho thuê.</p>
+<p>Dải biển Trường Sa – từ giao lộ Võ Nguyên Giáp – Trường Sa đi về phía Hội An, thuộc khu <a href="/khu-vuc/ngu-hanh-son/">Ngũ Hành Sơn</a> – là nơi tập trung nhiều resort, khách sạn quốc tế của Đà Nẵng. {$saphia} nằm ở đầu dải biển này, cạnh bãi tắm Sơn Thủy. Bài nhìn lại dải biển này đang có gì và vì sao vị trí đó ảnh hưởng tới giá và khả năng cho thuê.</p>
 <!--hh-featured-->
-<h2>Dải biển này đang có gì?</h2>
+<h2>Dải biển Trường Sa đang có gì?</h2>
 <ul>
 <li><strong>Resort, khách sạn quốc tế</strong>: dọc Trường Sa có nhiều thương hiệu như Hyatt Regency, Sheraton Grand, Naman Retreat, Fusion Resort &amp; Villas – nhóm khách lưu trú chi tiêu cao.</li>
-<li><strong>Bãi tắm công cộng</strong>: Sơn Thủy và chuỗi công viên bãi tắm thành phố đang đầu tư, gồm công viên khoảng 2,45 ha đối diện Sun Saphia (<a href="/tien-ich-sun-saphia-residence-noi-khu-xung-quanh/">xem tiện ích</a>).</li>
+<li><strong>Bãi tắm công cộng</strong>: Sơn Thủy và chuỗi công viên bãi tắm thành phố đang đầu tư, gồm công viên khoảng 2,45 ha đối diện Sun Saphia (<a href="https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp">VietnamPlus</a>, <a href="/tien-ich-sun-saphia-residence-noi-khu-xung-quanh/">xem tiện ích</a>).</li>
 <li><strong>Danh thắng Ngũ Hành Sơn</strong>, làng đá Non Nước phía trong.</li>
 <li><strong>Dự án nghỉ dưỡng mới</strong>: cuối tháng 10/2026, một dự án khu du lịch, dịch vụ sinh thái ven biển nằm giữa Fusion Resort và Naman Retreat đã dọn mặt bằng; theo quy hoạch 1/500 được chia sẻ, dự án có tháp khách sạn 5 sao 30 tầng và 2 tháp căn hộ du lịch 15 tầng (thông tin đang chờ xác nhận chính thức).</li>
 </ul>
-<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
-<h2>Hạ tầng đang làm quanh dải biển</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Sun Saphia Residence ở đầu dải biển Trường Sa: mặt bằng tổng thể cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Hạ tầng đang làm quanh dải biển Trường Sa</h2>
 <ul>
 <li>Mở rộng trục Võ Nguyên Giáp – Trường Sa – Lạc Long Quân – xem <a href="/mo-rong-duong-truong-sa-vo-nguyen-giap-2633-ty/">dự án 2.633 tỷ</a>.</li>
 <li>Đường sắt đô thị sân bay – Mỹ Khê – Hội An dự kiến, ga LRT 09 cách Sun Saphia khoảng 500 m – xem <a href="/duong-sat-do-thi-da-nang-san-bay-my-khe-hoi-an/">tiến độ</a>.</li>
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
-<h2>Vị trí Sun Saphia trong dải biển</h2>
+<h2>Vị trí Sun Saphia trên dải biển Trường Sa</h2>
 <table>
 <thead><tr><th>Yếu tố</th><th>Sun Saphia Residence</th></tr></thead>
 <tbody>
@@ -507,24 +552,43 @@ HTML
 <li><strong>Nguồn cung lưu trú cũng tăng</strong>: thêm khách sạn, căn hộ du lịch mới nghĩa là cạnh tranh giá thuê; căn có view biển, vận hành tốt mới giữ được công suất.</li>
 <li><strong>Đầu dải biển, gần phố</strong>: so với resort sâu phía Nam, Sun Saphia gần Mỹ Khê và trung tâm hơn – lợi cho người ở thật và khách thuê theo tháng.</li>
 </ul>
+<h2>Resort hay căn hộ trên dải biển Trường Sa?</h2>
+<table>
+<thead><tr><th></th><th>Biệt thự, căn hộ trong resort</th><th>Căn hộ như Sun Saphia Residence</th></tr></thead>
+<tbody>
+<tr><td>Vận hành</td><td>Thường do thương hiệu khách sạn vận hành tập trung</td><td>Chủ nhà tự ở, tự cho thuê hoặc thuê đơn vị vận hành</td></tr>
+<tr><td>Tổng tiền mỗi căn</td><td>Thường cao</td><td>Studio giá dự kiến tầng 15 khoảng 2,13 – 2,85 tỷ (28/10/2026, chưa VAT)</td></tr>
+<tr><td>Chủ động sử dụng</td><td>Phụ thuộc quy định của khu nghỉ dưỡng</td><td>Chủ động hơn, theo quy chế tòa nhà</td></tr>
+</tbody>
+</table>
+<h2>Lưu ý khi mua bất động sản trên dải biển Trường Sa</h2>
+<ol>
+<li>Thông tin dự án nghỉ dưỡng mới cần chờ văn bản chính thức trước khi đưa vào bài toán giá.</li>
+<li>Với đất, nhà mặt tiền: kiểm tra phạm vi mở rộng lộ giới của trục ven biển trước khi đặt cọc.</li>
+<li>Thời hạn sử dụng đất: nhiều sản phẩm ven biển có thời hạn (Sun Saphia 50 năm kể từ 17/09/2026).</li>
+<li>Môi trường biển: tính chi phí bảo trì do hơi muối, mùa mưa bão – xem <a href="/bao-tri-can-ho-ven-bien-hoi-muoi-mua-bao/">bảo trì căn hộ ven biển</a>.</li>
+</ol>
+<p>Nhận định tổng quát: dải biển Trường Sa có lợi thế hiếm là chuỗi thương hiệu nghỉ dưỡng lâu năm và bãi tắm công cộng đang được đầu tư. Với người mua căn hộ, điều quan trọng là chọn vị trí đi bộ ra biển được, đúng loại pháp lý và giá vào hợp lý so với các căn đã bàn giao quanh đó.</p>
 <p>So sánh thêm các khu biển: <a href="/can-ho-ven-bien-da-nang-my-khe-son-thuy-non-nuoc/">Mỹ Khê, Sơn Thủy hay Non Nước</a>; vị trí chi tiết: <a href="/sun-saphia-residence-o-dau-vi-tri/">Sun Saphia Residence ở đâu</a>.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Dải biển Trường Sa – Ngũ Hành Sơn và Sun Saphia Residence',
+			'seo_title' => 'Dải biển Trường Sa 2026: resort, khách sạn và Sun Saphia',
 			'desc'      => 'Dải biển Trường Sa (Ngũ Hành Sơn) tập trung resort, khách sạn quốc tế, có thêm dự án nghỉ dưỡng mới. Sun Saphia Residence nằm ở đầu dải biển này.',
 			'points'    => array(
-				'Dọc Trường Sa có nhiều resort, khách sạn quốc tế: Hyatt Regency, Sheraton Grand, Naman Retreat, Fusion',
+				'Dải biển Trường Sa có nhiều resort, khách sạn quốc tế: Hyatt Regency, Sheraton Grand, Naman Retreat, Fusion',
 				'Dự án nghỉ dưỡng mới giữa Fusion và Naman đã dọn mặt bằng (thông tin quy mô chờ xác nhận)',
 				'Sun Saphia ở đầu dải biển, giao lộ Võ Nguyên Giáp – Trường Sa, cạnh bãi tắm Sơn Thủy',
 			),
 			'faq'       => array(
 				array( 'Đường Trường Sa Đà Nẵng có những resort nào?', 'Dọc Trường Sa (phường Ngũ Hành Sơn) có nhiều resort, khách sạn quốc tế như Hyatt Regency, Sheraton Grand, Naman Retreat, Fusion Resort & Villas.' ),
+				array( 'Dải biển Trường Sa có bãi tắm công cộng không?', 'Có. Bãi tắm Sơn Thủy và chuỗi công viên bãi tắm thành phố đang đầu tư, gồm công viên khoảng 2,45 ha đối diện Sun Saphia Residence (thực hiện 2025 – 2027).' ),
+				array( 'Mua căn hộ trên dải biển Trường Sa cần lưu ý gì?', 'Kiểm tra thời hạn sử dụng đất, khoảng cách đi bộ ra biển, phạm vi mở rộng đường ven biển và chi phí bảo trì do hơi muối, mùa mưa bão.' ),
 				array( 'Sun Saphia Residence nằm ở đâu trên dải biển Trường Sa?', 'Ở giao lộ Võ Nguyên Giáp – Trường Sa, đầu dải biển Ngũ Hành Sơn, cạnh bãi tắm Sơn Thủy và đối diện công viên ven biển.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp' ),
 	);
 
 	return $posts;

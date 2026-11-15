@@ -37,7 +37,7 @@ function hh_posts_sun_saphia_dot_9( $posts ) {
 <ul>
 <li><strong>Quy hoạch:</strong> thành phố đã hoàn thành điều chỉnh quy hoạch tổng thể khoảng <strong>1.881 ha</strong>, chia thành nhiều vị trí chức năng (FTZ1 – FTZ7) và đang nghiên cứu mở rộng về phía Nam.</li>
 <li><strong>Nhà đầu tư:</strong> đầu tháng 6/2026 vị trí số 2 được giao cho một doanh nghiệp đầu tư hạ tầng; ngày 11/6/2026 UBND thành phố ban hành Quyết định 2578/QĐ-UBND chấp thuận chủ trương và nhà đầu tư cho vị trí số 3. Báo chí đưa tin 3 doanh nghiệp đăng ký hơn <strong>15.000 tỷ đồng</strong> vào các vị trí đầu tiên.</li>
-<li><strong>Vị trí số 6, số 7:</strong> ngày 14/8/2026 có đề xuất hạ tầng khu chức năng tại vị trí số 6; ngày 12/11/2026 Quyết định 5202/QĐ-UBND chấp thuận nhà đầu tư hạ tầng vị trí số 7 – khoảng 276 ha tại Hòa Vang, vốn 3.525 tỷ đồng, xây dựng từ quý 4/2027 (xem bài <a href="/vsip-vi-tri-so-7-khu-thuong-mai-tu-do-da-nang-3525-ty/">vị trí số 7 Khu thương mại tự do</a> và tin của <a href="https://tuoitre.vn/lo-dien-nha-dau-tu-rot-3525-ti-dong-vao-khu-thuong-mai-tu-do-da-nang-100261019115924845.htm">Tuổi Trẻ</a>).</li>
+<li><strong>Vị trí số 6, số 7:</strong> ngày 14/8/2026 có đề xuất hạ tầng khu chức năng tại vị trí số 6; ngày 12/11/2026 Quyết định 5202/QĐ-UBND chấp thuận nhà đầu tư hạ tầng vị trí số 7 – khoảng 276 ha tại Hòa Vang, vốn 3.525 tỷ đồng, xây dựng từ quý 4/2027 (xem bài <a href="/vsip-ha-tang-vi-tri-so-7-khu-thuong-mai-tu-do/">vị trí số 7 Khu thương mại tự do</a> và tin của <a href="https://tuoitre.vn/lo-dien-nha-dau-tu-rot-3525-ti-dong-vao-khu-thuong-mai-tu-do-da-nang-100261019115924845.htm">Tuổi Trẻ</a>).</li>
 <li><strong>Mốc tiếp theo:</strong> thành phố đặt mục tiêu khởi công vị trí số 2 trong nửa cuối năm 2026. Hoàng Hiệp chưa thấy thông tin xác nhận tiến độ thi công thực tế ở thời điểm viết bài.</li>
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-ban-do-ket-noi.jpg|FTZ Đà Nẵng và Sun Saphia Residence – vị trí dự án trên trục ven biển Trường Sa, kết nối sân bay, trung tâm và Hội An (sơ đồ chủ đầu tư)-->
@@ -584,7 +584,7 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Thuế nhà đất', 'Pháp lý căn hộ' ),
 		'image'    => 'plugin:img/tin-tuc/ban-lai-sun-saphia-sau-so.jpg',
 		'content'  => <<<HTML
-<p>Có hai thời điểm <strong>bán lại Sun Saphia Residence</strong>: <strong>trước bàn giao</strong> (chuyển nhượng hợp đồng mua bán, đã có bài <a href="/chuyen-nhuong-hop-dong-sun-saphia-residence-truoc-ban-giao/">chuyển nhượng hợp đồng Sun Saphia Residence</a>) và <strong>sau khi có giấy chứng nhận</strong>. Bài này nói về trường hợp thứ hai – bán lại Sun Saphia Residence sau khi có sổ: thuế phí bao nhiêu, ai nộp, các bước sang tên và lưu ý riêng của căn hộ thương mại dịch vụ {$saphia}.</p>
+<p>Có hai thời điểm <strong>bán lại Sun Saphia Residence</strong>: <strong>trước bàn giao</strong> (chuyển nhượng hợp đồng mua bán, đã có bài <a href="/chuyen-nhuong-hop-dong-sun-saphia-residence/">chuyển nhượng hợp đồng Sun Saphia Residence</a>) và <strong>sau khi có giấy chứng nhận</strong>. Bài này nói về trường hợp thứ hai – bán lại Sun Saphia Residence sau khi có sổ: thuế phí bao nhiêu, ai nộp, các bước sang tên và lưu ý riêng của căn hộ thương mại dịch vụ {$saphia}.</p>
 <!--hh-featured-->
 <h2>Bán lại Sun Saphia Residence: các khoản thuế, phí</h2>
 <table>
@@ -624,7 +624,7 @@ HTML
 <li><strong>Hợp đồng cho thuê đang chạy:</strong> thỏa thuận rõ bên mua có tiếp tục hợp đồng với khách thuê hoặc đơn vị vận hành không.</li>
 </ul>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Chi phí giao dịch khoảng 2,5% giá trị căn là khoản nên tính ngay từ đầu nếu anh chị dự định mua rồi bán lại Sun Saphia Residence. Khi bán lại Sun Saphia Residence, hãy khai đúng giá giao dịch trên hợp đồng – khai thấp để giảm thuế có thể bị truy thu và xử phạt. Xem thêm bài <a href="/chi-phi-mua-can-ho-sun-saphia-residence-ngoai-gia-ban/">chi phí mua căn hộ Sun Saphia Residence</a> và bài {$review}.</p>
+<p>Chi phí giao dịch khoảng 2,5% giá trị căn là khoản nên tính ngay từ đầu nếu anh chị dự định mua rồi bán lại Sun Saphia Residence. Khi bán lại Sun Saphia Residence, hãy khai đúng giá giao dịch trên hợp đồng – khai thấp để giảm thuế có thể bị truy thu và xử phạt. Xem thêm bài <a href="/chi-phi-mua-sun-saphia-residence-ngoai-gia-ban/">chi phí mua căn hộ Sun Saphia Residence</a> và bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: tổng hợp quy định thuế TNCN 2% khi chuyển nhượng bất động sản, lệ phí trước bạ 0,5% (tối đa 500 triệu đồng) và Nghị quyết 66.22/2026/NQ-CP về giảm 10% lệ phí trước bạ (Thư viện Pháp luật, VCCI, Thời báo Tài chính, 2026); thời hạn và giá tham khảo theo tài liệu chủ đầu tư. Bài tham khảo, không thay tư vấn thuế cho từng giao dịch.</p>
 HTML
@@ -681,7 +681,7 @@ HTML
 <tbody>
 <tr><td>Y tế</td><td>Các bệnh viện lớn như Bệnh viện Đà Nẵng, Vinmec Đà Nẵng nằm ở khu trung tâm; nên kiểm tra thời gian đi lại và mua bảo hiểm sức khỏe phù hợp</td></tr>
 <tr><td>Sống chung với khách lưu trú</td><td>Tòa có nhiều khách ngắn ngày; chọn tầng, dãy ít ồn hơn</td></tr>
-<tr><td>Gió biển, hơi muối</td><td>Cửa, thiết bị cần bảo dưỡng định kỳ (xem bài <a href="/can-ho-ven-bien-hoi-muoi-mua-bao-sun-saphia-residence/">hơi muối, mùa bão</a>)</td></tr>
+<tr><td>Gió biển, hơi muối</td><td>Cửa, thiết bị cần bảo dưỡng định kỳ (xem bài <a href="/bao-tri-can-ho-ven-bien-hoi-muoi-mua-bao/">hơi muối, mùa bão</a>)</td></tr>
 <tr><td>Thời hạn 50 năm</td><td>Hợp mục đích sử dụng và cho thuê lâu dài; muốn để lại tài sản thì tìm hiểu kỹ thừa kế, gia hạn (xem bài <a href="/phap-ly-sun-saphia-residence-so-huu-bao-lau/">pháp lý</a>)</td></tr>
 <tr><td>Bàn giao 11/2028</td><td>Cần chờ khoảng hai năm; trong thời gian này thanh toán theo tiến độ</td></tr>
 </tbody>

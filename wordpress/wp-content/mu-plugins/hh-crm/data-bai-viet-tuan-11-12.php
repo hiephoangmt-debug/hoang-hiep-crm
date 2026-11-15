@@ -649,7 +649,7 @@ HTML
 <p>Nếu căn chưa có sổ, giao dịch là chuyển nhượng hợp đồng mua bán: công chứng văn bản chuyển nhượng và nộp chủ đầu tư xác nhận. Xem chi tiết tại bài <a href="/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/">mua căn hộ chuyển nhượng Đà Nẵng</a>.</p>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Sun Ponte phù hợp người cần căn nhỏ ở vị trí trung tâm để ở hoặc cho thuê. Vì giá chuyển nhượng Sun Ponte Residence thuộc nhóm cao, anh chị nên lập bảng dòng tiền với giá thuê ở mức giữa khoảng tham khảo, trừ phí quản lý, nội thất và thời gian trống phòng trước khi quyết định. Nếu đang cân nhắc giữa các dự án ven sông, xem bài <a href="/so-sanh-can-ho-ven-song-han-sun-symphony-sun-ponte-peninsula/">so sánh Sun Symphony, Sun Ponte, Peninsula</a>; nếu cho khách nước ngoài thuê, lưu ý quy định khai báo tạm trú tại bài <a href="/cho-thue-can-ho-da-nang-hop-dong-thue-tam-tru/">cho thuê căn hộ Đà Nẵng</a>.</p>
+<p>Sun Ponte phù hợp người cần căn nhỏ ở vị trí trung tâm để ở hoặc cho thuê. Vì giá chuyển nhượng Sun Ponte Residence thuộc nhóm cao, anh chị nên lập bảng dòng tiền với giá thuê ở mức giữa khoảng tham khảo, trừ phí quản lý, nội thất và thời gian trống phòng trước khi quyết định. Nếu đang cân nhắc giữa các dự án ven sông, xem bài <a href="/so-sanh-can-ho-ven-song-han/">so sánh Sun Symphony, Sun Ponte, Peninsula</a>; nếu cho khách nước ngoài thuê, lưu ý quy định khai báo tạm trú tại bài <a href="/cho-thue-can-ho-da-nang-hop-dong-thue-tam-tru/">cho thuê căn hộ Đà Nẵng</a>.</p>
 <p>Xem trang dự án <a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn Sun Ponte đang chuyển nhượng và cho thuê thật, kèm giá chuyển nhượng Sun Ponte Residence cập nhật.</p>
 HTML
 		,

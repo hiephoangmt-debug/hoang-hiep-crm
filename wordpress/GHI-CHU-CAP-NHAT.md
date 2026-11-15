@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.293**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.294**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,14 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.294 (15/11/2026) – đợt 2: TOÀN BỘ bài đạt chuẩn SEO 100/100
+
+- **211/211 bài** (tin hạ tầng, bài tuần 1 – 14, cụm dự án, Sun Saphia đợt 1 – 9, bài tự đăng) qua bộ chấm `scripts/kiem-tra-seo-bai.php`: từ khoá 3 – 6 chữ không trùng, tiêu đề SEO mở đầu bằng từ khoá và có con số, mô tả 120 – 160 ký tự, ≥ 800 từ, mật độ 1 – 2,5%, H2 và chú thích ảnh có từ khoá, ≥ 2 liên kết nội bộ, liên kết ngoài tới nguồn uy tín, đoạn ≤ 120 từ.
+- **80 đường dẫn dài được rút gọn** (URL ≤ 75 ký tự); đường dẫn cũ tự chuyển hướng 301 sang bài mới. Ảnh bìa, thẻ bài, liên kết nội bộ đã đổi theo đường dẫn mới.
+- Bài đã đăng tự cập nhật nội dung (tăng 'rev' / dữ liệu tin hạ tầng); web chạy lại bước tự sửa SEO cho mọi bài (phiên bản 3).
+- Sửa lỗi: ô `old_meta` ghi dạng chuỗi không còn gây lỗi khi có từ khoá bổ sung; bỏ qua khoá ghi chú "_..." trong `seo-tu-khoa-bo-sung/*.json`.
+- Sửa nội dung: ngưỡng thuế cho thuê 1 tỷ/năm (Nghị định 141/2026), ngày sự kiện Sun Saphia 05/12/2026, bỏ câu nêu tên đơn vị phân phối ở bài Naman.
 
 ## Có gì mới – 2.20.293 (15/11/2026) – đợt 1 viết lại bài chuẩn SEO 100/100
 

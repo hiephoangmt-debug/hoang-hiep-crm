@@ -58,7 +58,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 </tbody>
 </table>
 <p><strong>Công viên biển 2,45 ha ngay phía trước</strong>: thành phố thu hồi khoảng 2,45 ha từ dự án resort Hòn Ngọc Á Châu bỏ hoang nhiều năm để làm công viên công cộng, vốn khoảng 47 tỷ đồng, thi công đến 2027 – có bãi đỗ xe, đường chạy bộ, sân chơi trẻ em, quảng trường và lối xuống biển công cộng (theo <a href="https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp">VietnamPlus</a>, <a href="https://tienphong.vn/da-nang-rot-47-ty-dong-danh-thuc-khu-dat-vang-bo-hoang-post1767479.html">Tiền Phong</a>). Cảnh quan phía trước tòa tháp vì vậy được giữ thoáng.</p>
-<p><strong>Hạ tầng sắp tới</strong>: mở rộng trục Võ Nguyên Giáp – Trường Sa – Lạc Long Quân (vốn dự kiến 2.633 tỷ, nhóm ưu tiên "luồng xanh"); tuyến <a href="/duong-sat-do-thi-san-bay-my-khe-hoi-an-bat-dong-san-huong-loi/">đường sắt đô thị sân bay – Hội An</a> dự kiến khởi công giai đoạn 1 tháng 2/2027; phía Bắc có đề xuất <a href="/kinh-te-dem-bien-my-khe-da-nang-2026/">tổ hợp kinh tế đêm Mỹ Khê</a> tại 268 Võ Nguyên Giáp. Các dự án này đang ở giai đoạn quy hoạch, đề xuất – tiến độ có thể thay đổi.</p>
+<p><strong>Hạ tầng sắp tới</strong>: mở rộng trục Võ Nguyên Giáp – Trường Sa – Lạc Long Quân (vốn dự kiến 2.633 tỷ, nhóm ưu tiên "luồng xanh"); tuyến <a href="/duong-sat-do-thi-da-nang-san-bay-my-khe-hoi-an/">đường sắt đô thị sân bay – Hội An</a> dự kiến khởi công giai đoạn 1 tháng 2/2027; phía Bắc có đề xuất <a href="/kinh-te-dem-bien-my-khe-da-nang-2026/">tổ hợp kinh tế đêm Mỹ Khê</a> tại 268 Võ Nguyên Giáp. Các dự án này đang ở giai đoạn quy hoạch, đề xuất – tiến độ có thể thay đổi.</p>
 <p><em>Đánh giá Sun Saphia Residence – vị trí:</em> mạnh nhất của dự án. Đi bộ ra biển, gần phố du lịch nhưng không nằm trong khu ồn ào, kết nối thuận cả về trung tâm lẫn Hội An.</p>
 
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
@@ -85,7 +85,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 <tr><td>2PN (133 căn)</td><td>60 – 70 m² · 7,25 × 9,9 m</td><td>2 phòng ngủ; có căn góc bo tròn</td><td>Gia đình, căn nghỉ dưỡng thứ hai</td></tr>
 </tbody>
 </table>
-<p>Studio có bếp – điểm khác với phòng khách sạn thông thường: hợp khách gia đình, khách ở dài ngày, chuyên gia, và giúp mùa thấp điểm chuyển sang cho thuê theo tuần, theo tháng. Xem thêm <a href="/studio-sun-saphia-residence-30-m2-bo-tri-ai-nen-mua/">studio Sun Saphia 30 m²</a>.</p>
+<p>Studio có bếp – điểm khác với phòng khách sạn thông thường: hợp khách gia đình, khách ở dài ngày, chuyên gia, và giúp mùa thấp điểm chuyển sang cho thuê theo tuần, theo tháng. Xem thêm <a href="/studio-sun-saphia-residence-30-m2-ai-nen-mua/">studio Sun Saphia 30 m²</a>.</p>
 <p><em>Đánh giá Sun Saphia Residence – sản phẩm:</em> cơ cấu nghiêng hẳn về studio (513/782 căn, khoảng 66%) cho thấy dự án được thiết kế cho mô hình lưu trú, cho thuê. Người mua để ở lâu dài nên nhìn vào 1PN+ và 2PN – số lượng ít hơn, nên chọn sớm nếu cần căn góc hoặc hướng cụ thể.</p>
 <p>Tiện ích trong tòa theo giới thiệu: bể bơi view biển, gym, yoga, pilates, khối đế thương mại (shop, café, nhà hàng) – <a href="/tien-ich-sun-saphia-residence-noi-khu-xung-quanh/">xem tiện ích</a>.</p>
 
@@ -99,7 +99,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 <tr><td>Dãy phía sau – nhìn về thành phố</td><td>2,13 tỷ</td><td>Khoảng 71 triệu</td></tr>
 </tbody>
 </table>
-<p>Giá áp dụng khi mua có vay, chưa gồm VAT và 2% kinh phí bảo trì, chưa trừ chiết khấu; chính sách có hỗ trợ lãi suất tới 24 tháng. Cột giá/m² do Hoàng Hiệp tự tính. Chi tiết và so sánh: <a href="/gia-sun-saphia-residence-bao-nhieu/">giá Sun Saphia Residence</a>; chi phí cộng thêm: <a href="/chi-phi-mua-can-ho-sun-saphia-residence-ngoai-gia-ban/">chi phí ngoài giá bán</a>.</p>
+<p>Giá áp dụng khi mua có vay, chưa gồm VAT và 2% kinh phí bảo trì, chưa trừ chiết khấu; chính sách có hỗ trợ lãi suất tới 24 tháng. Cột giá/m² do Hoàng Hiệp tự tính. Chi tiết và so sánh: <a href="/gia-sun-saphia-residence-bao-nhieu/">giá Sun Saphia Residence</a>; chi phí cộng thêm: <a href="/chi-phi-mua-sun-saphia-residence-ngoai-gia-ban/">chi phí ngoài giá bán</a>.</p>
 <p><em>Đánh giá Sun Saphia Residence – giá:</em> tổng tiền thấp nhất trong nhóm căn hộ sát biển Đà Nẵng nhờ diện tích nhỏ; tính trên m² thì căn mặt biển không rẻ. Chênh khoảng 0,7 tỷ giữa căn mặt biển và căn phía sau cho thấy view là yếu tố quyết định giá.</p>
 
 <h2>5. Đánh giá Sun Saphia Residence về khả năng cho thuê</h2>
@@ -166,7 +166,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 <tr><td>Hạ tầng quanh dự án đang được đầu tư</td><td>Đường sắt, mở rộng đường còn ở giai đoạn quy hoạch, đề xuất</td></tr>
 </tbody>
 </table>
-<p><strong>Kết luận đánh giá Sun Saphia Residence của Hoàng Hiệp</strong>: dự án hợp người muốn có một căn biển thương hiệu lớn với vốn khoảng 2 – 3 tỷ, để nghỉ dưỡng kết hợp cho thuê, chấp nhận thời hạn 50 năm. Người cần tài sản để lại lâu dài nên cân nhắc thêm căn hộ sở hữu lâu dài. Phân tích ưu nhược điểm đầy đủ: <a href="/co-nen-mua-sun-saphia-residence-uu-nhuoc-diem/">có nên mua Sun Saphia Residence</a>; tránh nhầm tên: <a href="/sun-saphia-residence-va-khu-do-thi-saphia-khac-nhau/">Sun Saphia Residence và khu đô thị Saphia</a>.</p>
+<p><strong>Kết luận đánh giá Sun Saphia Residence của Hoàng Hiệp</strong>: dự án hợp người muốn có một căn biển thương hiệu lớn với vốn khoảng 2 – 3 tỷ, để nghỉ dưỡng kết hợp cho thuê, chấp nhận thời hạn 50 năm. Người cần tài sản để lại lâu dài nên cân nhắc thêm căn hộ sở hữu lâu dài. Phân tích ưu nhược điểm đầy đủ: <a href="/co-nen-mua-sun-saphia-residence-uu-nhuoc-diem/">có nên mua Sun Saphia Residence</a>; tránh nhầm tên: <a href="/sun-saphia-residence-va-khu-do-thi-saphia/">Sun Saphia Residence và khu đô thị Saphia</a>.</p>
 <p class="src">Nguồn: thông tin chủ đầu tư công bố tại kick-off 23/10/2026 và cuối tháng 10/2026; giá phòng tham khảo trên các trang đặt phòng (10/2026); Avison Young, CoStar (thị trường khách sạn); Batdongsan.com.vn (lợi suất cho thuê, quý 3/2026); báo chí về công viên biển, hạ tầng. Mô hình view 3D, ví dụ dòng tiền và cột giá/m² do Hoàng Hiệp thực hiện, chỉ để tham khảo.</p>
 {$cta}
 HTML

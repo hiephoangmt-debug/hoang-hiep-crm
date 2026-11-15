@@ -284,7 +284,7 @@ HTML
 <p>Đất nền gắn với khu đô thị có hạ tầng hoàn chỉnh, pháp lý rõ ràng vẫn được quan tâm, đặc biệt khu Nam Hòa Xuân. Anh chị xem các lô đang chào bán tại <a href="/mua-ban/dat-nen/">mua bán đất nền Đà Nẵng</a>.</p>
 
 <h2>Hạ tầng và sáp nhập: động lực trung – dài hạn</h2>
-<p>Sau khi hợp nhất với Quảng Nam, Đà Nẵng có không gian phát triển rộng hơn, cùng các dự án như Trung tâm tài chính quốc tế, Khu thương mại tự do, cảng Liên Chiểu và mở rộng sân bay. Phân tích chi tiết từng công trình có trong bài <a href="/toan-canh-ha-tang-da-nang-2026-tac-dong-bat-dong-san/">toàn cảnh hạ tầng Đà Nẵng 2026</a>.</p>
+<p>Sau khi hợp nhất với Quảng Nam, Đà Nẵng có không gian phát triển rộng hơn, cùng các dự án như Trung tâm tài chính quốc tế, Khu thương mại tự do, cảng Liên Chiểu và mở rộng sân bay. Phân tích chi tiết từng công trình có trong bài <a href="/toan-canh-ha-tang-da-nang-2026/">toàn cảnh hạ tầng Đà Nẵng 2026</a>.</p>
 <p>Hạ tầng là động lực dài hạn của thị trường bất động sản Đà Nẵng, nhưng tác động lên giá thường diễn ra theo tiến độ thực tế. Người mua nên ưu tiên dự án gần công trình đã khởi công hơn là chỉ dựa vào quy hoạch.</p>
 
 <h2>Xu hướng thị trường bất động sản Đà Nẵng cuối 2026</h2>

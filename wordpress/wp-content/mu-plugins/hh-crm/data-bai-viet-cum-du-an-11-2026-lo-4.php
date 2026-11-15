@@ -510,7 +510,7 @@ HTML
 <tr><td>2PN</td><td>133</td><td>60 – 70 m²</td><td>Gia đình nhỏ, nghỉ dưỡng</td></tr>
 </tbody>
 </table>
-<p>Xem thêm: <a href="/mat-bang-can-ho-sun-saphia-residence/">mặt bằng Sun Saphia</a>, <a href="/studio-sun-saphia-residence-30-m2-bo-tri-ai-nen-mua/">studio Sun Saphia 30 m²</a>.</p>
+<p>Xem thêm: <a href="/mat-bang-can-ho-sun-saphia-residence/">mặt bằng Sun Saphia</a>, <a href="/studio-sun-saphia-residence-30-m2-ai-nen-mua/">studio Sun Saphia 30 m²</a>.</p>
 <h2>Vị trí căn 1PN+ Sun Saphia trên mặt bằng</h2>
 <p>Theo mặt bằng tầng điển hình của chủ đầu tư, mỗi sàn từ tầng 3A đến 28 có 28 căn: 19 studio, 4 căn 1PN+ và 5 căn 2PN. Dãy căn phía Đông nhìn thẳng ra biển; các căn 2PN nằm ở góc tòa nên có hai mặt thoáng. Vì mỗi sàn chỉ có 4 căn 1PN+, nên chọn sớm nếu anh chị muốn đúng tầng, đúng hướng.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28.jpg|Mặt bằng tầng 3A – 28 Sun Saphia Residence (tài liệu chủ đầu tư)-->
@@ -534,7 +534,7 @@ HTML
 <h2>Câu nên hỏi khi chọn căn 1PN+ Sun Saphia</h2>
 <ol>
 <li>Phòng đa năng có cửa sổ trực tiếp ra ngoài không?</li>
-<li>Căn hướng biển, hướng cạnh bên hay phía sau? Xem thêm <a href="/chon-day-can-sun-saphia-residence-mat-bien-canh-ben-phia-sau/">cách chọn dãy căn Sun Saphia</a>.</li>
+<li>Căn hướng biển, hướng cạnh bên hay phía sau? Xem thêm <a href="/chon-can-sun-saphia-residence-day-mat-bien/">cách chọn dãy căn Sun Saphia</a>.</li>
 <li>Giá đã gồm VAT và kinh phí bảo trì chưa (giá dự kiến 28/10 chưa gồm)?</li>
 </ol>
 <h2>Hạ tầng quanh dự án</h2>

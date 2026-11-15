@@ -255,7 +255,7 @@ HTML
 <p>Do quy mô chỉ 34 căn, villa Naman Residences ít khi có nhiều lựa chọn cùng lúc. Khi có căn phù hợp, anh chị nên chuẩn bị sẵn phương án tài chính để chủ động đàm phán và rút ngắn thời gian kiểm tra hồ sơ.</p>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Villa Naman Residences phù hợp khách muốn biệt thự đất rộng trên trục Trường Sa với mức vốn khởi điểm thấp hơn nhiều khu resort cùng trục. Shilla Monogram là điểm tham chiếu về chất lượng vận hành ở dải biển Điện Ngọc; nếu xuất hiện căn chuyển nhượng, cần thẩm định pháp lý rất kỹ vì chưa có thông tin bán lẻ công khai. Với khu vực Điện Ngọc, tham khảo thêm bài <a href="/hop-nhat-da-nang-quang-nam-bat-dong-san-vung-giap-ranh/">vùng giáp ranh sau hợp nhất Đà Nẵng – Quảng Nam</a>.</p>
+<p>Villa Naman Residences phù hợp khách muốn biệt thự đất rộng trên trục Trường Sa với mức vốn khởi điểm thấp hơn nhiều khu resort cùng trục. Shilla Monogram là điểm tham chiếu về chất lượng vận hành ở dải biển Điện Ngọc; nếu xuất hiện căn chuyển nhượng, cần thẩm định pháp lý rất kỹ vì chưa có thông tin bán lẻ công khai. Với khu vực Điện Ngọc, tham khảo thêm bài <a href="/hop-nhat-da-nang-quang-nam-vung-giap-ranh/">vùng giáp ranh sau hợp nhất Đà Nẵng – Quảng Nam</a>.</p>
 <p>So sánh thêm tại trang <a href="/du-an/naman-residences/">Naman Residences</a> hoặc bài <a href="/so-sanh-villa-ven-bien-da-nang-co-so/">so sánh villa ven biển Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách biệt thự Naman đang chuyển nhượng và hỗ trợ kiểm tra pháp lý từng căn.</p>
 HTML
 		,
@@ -462,7 +462,7 @@ HTML
 </ul>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Nếu cần nhận nhà sớm, ưu tiên The King và The Queen vì được công bố bàn giao trước. Nếu muốn nhiều lựa chọn tầng, hướng, có thể xem các tòa Capital Square mở bán sau như 2.2, 2.3. Khách đầu tư cho thuê nên lưu ý nguồn cung căn hộ ven sông Hàn giai đoạn 2027 – 2028 khá lớn, tính dòng tiền thận trọng. So sánh thêm trong bài <a href="/so-sanh-can-ho-ven-song-han-sun-symphony-sun-ponte-peninsula/">so sánh căn hộ ven sông Hàn</a> và <a href="/bat-dong-san-son-tra-2026/">bất động sản Sơn Trà 2026</a>.</p>
+<p>Nếu cần nhận nhà sớm, ưu tiên The King và The Queen vì được công bố bàn giao trước. Nếu muốn nhiều lựa chọn tầng, hướng, có thể xem các tòa Capital Square mở bán sau như 2.2, 2.3. Khách đầu tư cho thuê nên lưu ý nguồn cung căn hộ ven sông Hàn giai đoạn 2027 – 2028 khá lớn, tính dòng tiền thận trọng. So sánh thêm trong bài <a href="/so-sanh-can-ho-ven-song-han/">so sánh căn hộ ven sông Hàn</a> và <a href="/bat-dong-san-son-tra-2026/">bất động sản Sơn Trà 2026</a>.</p>
 <p>Xem tổng quan tại trang <a href="/du-an/capital-square-da-nang/">Capital Square Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận mặt bằng, bảng giá và quỹ căn chuyển nhượng theo từng tòa Capital Square.</p>
 HTML
 		,
@@ -657,7 +657,7 @@ HTML
 
 <h2>Nhận định của Hoàng Hiệp</h2>
 <p>Với ngân sách khoảng 2 – 3 tỷ, căn hộ Sun NeO City là lựa chọn dễ tiếp cận để vào khu Hòa Xuân. Ngân sách 4 – 6 tỷ có thể cân nhắc một lô đất Cồn Dầu hoặc Nam Hòa Xuân để xây nhà ở. Khách ưu tiên dòng tiền nên so sánh thêm với căn hộ ven sông Hàn đã bàn giao, nơi giá thuê đã có số liệu kiểm chứng. Nhìn chung, bất động sản Cẩm Lệ năm 2026 phù hợp người mua có kế hoạch nắm giữ trung – dài hạn, chờ hạ tầng cầu Hòa Xuân hoàn thiện.</p>
-<p>Xem thêm bài <a href="/bat-dong-san-nam-da-nang-ha-tang-hoa-xuan-hoa-quy-2026/">bất động sản Nam Đà Nẵng 2026</a> và trang <a href="/du-an/sun-neo-city/">Sun NeO City</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được lọc căn hộ, lô đất Cẩm Lệ đúng ngân sách và nhận bảng giá mới nhất.</p>
+<p>Xem thêm bài <a href="/bat-dong-san-nam-da-nang-ha-tang-2026/">bất động sản Nam Đà Nẵng 2026</a> và trang <a href="/du-an/sun-neo-city/">Sun NeO City</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được lọc căn hộ, lô đất Cẩm Lệ đúng ngân sách và nhận bảng giá mới nhất.</p>
 HTML
 		,
 		'seo'      => array(
@@ -707,7 +707,7 @@ HTML
 <tr><td>Xã Tân Hiệp</td><td>Giữ nguyên (Cù Lao Chàm)</td></tr>
 </tbody>
 </table>
-<p>Khi giao dịch bất động sản Hội An, giấy tờ cũ vẫn ghi địa chỉ theo đơn vị hành chính trước sắp xếp; người mua nên đối chiếu địa chỉ mới khi làm thủ tục sang tên (có thể tra trên <a href="https://thuvienphapluat.vn/phap-luat/phuong-cam-an-tp-hoi-an-tinh-quang-nam-cu-doi-ten-thanh-gi-sau-sap-xep-don-vi-hanh-chinh-phuong-cam-276656-234782.html">Thư Viện Pháp Luật</a>). Tổng quan tác động của hợp nhất có trong bài <a href="/hop-nhat-da-nang-quang-nam-bat-dong-san-vung-giap-ranh/">hợp nhất Đà Nẵng – Quảng Nam và vùng giáp ranh</a>.</p>
+<p>Khi giao dịch bất động sản Hội An, giấy tờ cũ vẫn ghi địa chỉ theo đơn vị hành chính trước sắp xếp; người mua nên đối chiếu địa chỉ mới khi làm thủ tục sang tên (có thể tra trên <a href="https://thuvienphapluat.vn/phap-luat/phuong-cam-an-tp-hoi-an-tinh-quang-nam-cu-doi-ten-thanh-gi-sau-sap-xep-don-vi-hanh-chinh-phuong-cam-276656-234782.html">Thư Viện Pháp Luật</a>). Tổng quan tác động của hợp nhất có trong bài <a href="/hop-nhat-da-nang-quang-nam-vung-giap-ranh/">hợp nhất Đà Nẵng – Quảng Nam và vùng giáp ranh</a>.</p>
 
 <h2>Mặt bằng giá bất động sản Hội An tham khảo 10/2026</h2>
 <table>
@@ -733,7 +733,7 @@ HTML
 
 <h2>Hạ tầng kết nối bất động sản Hội An</h2>
 <!--hh-img:img/da-nang/duy-xuyen-flycam-song-thu-bon-cau-cua-dai-hoi-an.jpg|Sông Thu Bồn và cầu Cửa Đại – trục phát triển bất động sản Hội An phía Nam (flycam)-->
-<p>Đường ven biển 129 (Võ Chí Công) dài khoảng 26,5 km được mở rộng lên 6 làn, rút ngắn kết nối giữa Ngũ Hành Sơn và Hội An. Chi tiết trong bài <a href="/duong-ven-bien-129-vo-chi-cong-bat-dong-san-ven-bien-hoi-an/">đường ven biển 129 và bất động sản ven biển Hội An</a>.</p>
+<p>Đường ven biển 129 (Võ Chí Công) dài khoảng 26,5 km được mở rộng lên 6 làn, rút ngắn kết nối giữa Ngũ Hành Sơn và Hội An. Chi tiết trong bài <a href="/duong-ven-bien-vo-chi-cong-hoi-an/">đường ven biển 129 và bất động sản ven biển Hội An</a>.</p>
 
 <h2>Chọn bất động sản Hội An theo mục đích</h2>
 <table>

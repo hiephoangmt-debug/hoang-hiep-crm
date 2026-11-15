@@ -215,7 +215,7 @@ add_filter(
 <ul>
 <li><strong>Ga LRT 09 cách khoảng 500 m</strong> trên tuyến đường sắt đô thị nối sân bay với khu biển – thuận tiện cho khách du lịch và cho thuê (tuyến đang chuẩn bị đầu tư, doanh nghiệp lập hồ sơ cho biết dự kiến khởi công 2/2027).</li>
 <li><strong>Mở rộng đường Võ Nguyên Giáp – Trường Sa – Lạc Long Quân</strong>: vốn dự kiến 2.633 tỷ đồng, nhóm dự án ưu tiên "luồng xanh" (Tuổi Trẻ, 10/2026).</li>
-<li><strong>Cao tốc nội thị Đà Nẵng – Chu Lai</strong> đi theo đường Lê Văn Hiến, song song đường biển: <a href="/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do/">hướng tuyến và tiến độ</a>.</li>
+<li><strong>Cao tốc nội thị Đà Nẵng – Chu Lai</strong> đi theo đường Lê Văn Hiến, song song đường biển: <a href="/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen/">hướng tuyến và tiến độ</a>.</li>
 </ul>
 <h2>Thiết kế và tiện ích</h2>
 <p>Kiến trúc lấy cảm hứng từ nghệ thuật điêu khắc Chăm Pa và hình tượng vũ nữ <strong>Apsara</strong>, thể hiện bằng ngôn ngữ đương đại. Tiện ích nội khu theo giới thiệu: bể bơi view biển, yoga, gym, pilates; ngoài khu là bãi biển với các môn thể thao kayak, SUP, dù lượn, jetski.</p>

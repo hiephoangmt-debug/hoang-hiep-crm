@@ -15,7 +15,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const HH_SEO_POST_FIX_V = 2; // 2: thêm alt ảnh có từ khoá, tách đoạn văn dài > 120 từ.
+const HH_SEO_POST_FIX_V = 3; // 3: chạy lại sau khi viết lại toàn bộ bài chuẩn 100/100 (đợt 2).
 
 /** Nguồn uy tín được để dofollow: cổng nhà nước, báo chí lớn, văn bản pháp luật, chủ đầu tư. */
 function hh_seo_trusted_host( $host ) {

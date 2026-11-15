@@ -107,7 +107,7 @@ HTML,
 
 <h2>Khu thương mại tự do gắn với cảng Liên Chiểu</h2>
 <p>Quốc hội đã cho phép thành lập Khu thương mại tự do Đà Nẵng gắn với cảng Liên Chiểu, áp dụng cơ chế đặc thù để thu hút đầu tư tài chính, thương mại, du lịch và dịch vụ chất lượng cao. Khu có quy mô khoảng 1.881 ha tại 7 vị trí không liền kề, gồm các phân khu sản xuất, logistics, thương mại – dịch vụ, công nghiệp số, công nghệ thông tin và đổi mới sáng tạo. Thành phố cũng đầu tư hơn 518 tỷ đồng cải tạo tuyến đường kết nối cảng với khu thương mại tự do.</p>
-<p>Ngày 12/11/2026, UBND thành phố chấp thuận VSIP làm nhà đầu tư hạ tầng vị trí số 7 của khu thương mại tự do (Quyết định 5202/QĐ-UBND): khoảng 276 ha tại xã Hòa Vang, vốn 3.525 tỷ đồng, xây dựng hạ tầng từ quý 4/2027 đến quý 1/2032. Xem <a href="/vsip-vi-tri-so-7-khu-thuong-mai-tu-do-da-nang-3525-ty/">VSIP và vị trí số 7 khu thương mại tự do</a>.</p>
+<p>Ngày 12/11/2026, UBND thành phố chấp thuận VSIP làm nhà đầu tư hạ tầng vị trí số 7 của khu thương mại tự do (Quyết định 5202/QĐ-UBND): khoảng 276 ha tại xã Hòa Vang, vốn 3.525 tỷ đồng, xây dựng hạ tầng từ quý 4/2027 đến quý 1/2032. Xem <a href="/vsip-ha-tang-vi-tri-so-7-khu-thuong-mai-tu-do/">VSIP và vị trí số 7 khu thương mại tự do</a>.</p>
 
 <h2>Cảng Liên Chiểu trong quy hoạch chung đến 2050</h2>
 <p>Theo <a href="/quy-hoach-chung-da-nang-2050/">quy hoạch chung Đà Nẵng 2050</a> (Quyết định 2016/QĐ-TTg ngày 21/10/2026), cảng Liên Chiểu là cửa ngõ quốc tế của thành phố, kết nối Khu thương mại tự do và Khu công nghệ cao. Quy hoạch nghiên cứu khoảng 450 ha lấn biển tại khu cảng Liên Chiểu và mở rộng Khu công nghệ cao Đà Nẵng tại Liên Chiểu, Bà Nà lên khoảng 1.710 ha. Đây là định hướng dài hạn, chưa phải dự án đã giao đất để mua bán.</p>
@@ -269,7 +269,7 @@ HTML,
 
 <h2>Đường ven biển Võ Chí Công trong quy hoạch chung đến 2050</h2>
 <p>Theo <a href="/quy-hoach-chung-da-nang-2050/">quy hoạch chung Đà Nẵng 2050</a>, đường ven biển thuộc trục phát triển Bắc – Nam phía Đông, cùng Quốc lộ 1, cao tốc Bắc – Nam, đường sắt và đường sắt tốc độ cao. Dải ven biển này đi qua cả ba cực phát triển của thành phố: cực phía Bắc (Đà Nẵng hiện hữu, Điện Bàn, Hội An), cực liên kết Nam Hội An (Duy Xuyên, Thăng Bình, Quế Sơn) và cực phía Nam (Chu Lai, Tam Kỳ, Núi Thành).</p>
-<p>Quy hoạch cũng định hướng nâng cấp, mở rộng Cảng hàng không quốc tế Chu Lai gắn với trung tâm logistics hàng không, và xác định Khu kinh tế mở Chu Lai khoảng 27.040 ha. Ở đầu phía Nam, thành phố đã ấn định thời hạn khởi công 3 khu đô thị tại Chu Lai với tổng vốn hơn 40.400 tỷ đồng (xem <a href="/da-nang-an-dinh-thoi-han-khoi-cong-3-khu-do-thi-chu-lai/">3 khu đô thị Chu Lai</a>).</p>
+<p>Quy hoạch cũng định hướng nâng cấp, mở rộng Cảng hàng không quốc tế Chu Lai gắn với trung tâm logistics hàng không, và xác định Khu kinh tế mở Chu Lai khoảng 27.040 ha. Ở đầu phía Nam, thành phố đã ấn định thời hạn khởi công 3 khu đô thị tại Chu Lai với tổng vốn hơn 40.400 tỷ đồng (xem <a href="/khoi-cong-3-khu-do-thi-chu-lai-40400-ty/">3 khu đô thị Chu Lai</a>).</p>
 
 <h2>Tác động của đường ven biển Võ Chí Công đến bất động sản</h2>
 <p>Đường rộng, thông suốt giúp rút ngắn thời gian từ trung tâm Đà Nẵng, sân bay đến các khu nghỉ dưỡng phía Nam – yếu tố then chốt với biệt thự nghỉ dưỡng, khách sạn và nhà phố thương mại ven biển. Khu vực hưởng lợi gồm:</p>
@@ -324,7 +324,7 @@ HTML,
 <li>Theo Quyết định 222/QĐ-BXD ngày 12/2/2026, sân bay Đà Nẵng là cảng cấp 4E, công suất khoảng 20 triệu hành khách và 100.000 tấn hàng hóa/năm giai đoạn 2021 – 2030 (<a href="https://vnexpress.net/quy-hoach-san-bay-da-nang-cong-suat-20-trieu-khach-moi-nam-5047111.html">VnExpress</a>).</li>
 <li>Trong đó nhà ga T1 mở rộng về phía Nam lên 14 triệu khách/năm, nhà ga T2 sân bay Đà Nẵng 6 triệu khách/năm.</li>
 <li>Năm 2025, sân bay phục vụ khoảng 15,1 triệu lượt khách, gần 89.800 chuyến bay.</li>
-<li>Song song, Bộ Xây dựng phê duyệt dự án cải tạo đường cất hạ cánh, đường lăn khoảng 1.696 tỷ đồng (Quyết định 1417/QĐ-BXD ngày 12/8/2026), thực hiện 2026 – 2028 – xem <a href="/nang-cap-san-bay-da-nang-1696-ty-sun-saphia-residence/">dự án cải tạo đường cất hạ cánh</a>.</li>
+<li>Song song, Bộ Xây dựng phê duyệt dự án cải tạo đường cất hạ cánh, đường lăn khoảng 1.696 tỷ đồng (Quyết định 1417/QĐ-BXD ngày 12/8/2026), thực hiện 2026 – 2028 – xem <a href="/nang-cap-san-bay-da-nang-1696-ty-sun-saphia/">dự án cải tạo đường cất hạ cánh</a>.</li>
 </ul>
 
 <h2>Lượng khách đến Đà Nẵng đang tăng ra sao?</h2>

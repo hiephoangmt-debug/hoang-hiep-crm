@@ -54,7 +54,7 @@ function hh_posts_tin_ha_tang_hang_ngay( $posts ) {
 <li><a href="/du-an/nam-hoi-an-city/">Nam Hội An City</a>: thuộc hành lang ven biển phía Nam, cùng được nhắc đến khi trục Đà Nẵng – Chu Lai phát triển.</li>
 <li>Khu vực Bàn Thạch – Tam Kỳ (nơi có khu đô thị ven sông Trường Giang) cũng có thêm động lực; xem thông tin tham khảo tại trang <a href="/du-an/meta-city-tam-ky/">Meta City Tam Kỳ</a>.</li>
 </ul>
-<p>Xem thêm: <a href="/mat-cat-cao-toc-noi-thi-da-nang-quy-dat-tod/">mặt cắt và quỹ đất dọc cao tốc nội thị</a>, <a href="/chinh-sach-moi-anh-huong-bat-dong-san-da-nang-11-2026/">chính sách mới ảnh hưởng bất động sản Đà Nẵng 11/2026</a>.</p>
+<p>Xem thêm: <a href="/mat-cat-cao-toc-noi-thi-da-nang-quy-dat-tod/">mặt cắt và quỹ đất dọc cao tốc nội thị</a>, <a href="/chinh-sach-bat-dong-san-da-nang-11-2026/">chính sách mới ảnh hưởng bất động sản Đà Nẵng 11/2026</a>.</p>
 {$cta}
 <p class="src">Nguồn: Tuổi Trẻ, Báo Đầu tư, Tiền Phong, Dân trí, CafeF (4/11/2026). Thông tin tham khảo.</p>
 HTML
@@ -190,7 +190,7 @@ HTML
 <tr><td>Đơn vị tổ chức lập</td><td>UBND xã Thăng Điền chủ trì, phối hợp các sở, ngành</td></tr>
 </tbody>
 </table>
-<p>Theo quy hoạch chung thành phố, Thăng Điền là một trong 7 đô thị mới dự kiến hình thành đến năm 2050, cùng Duy Nghĩa, Thăng An, Thăng Trường, Tây Hồ, Vu Gia và Hoàng Sa. Đến năm 2050, toàn thành phố có khoảng 30 đô thị (23 đô thị hiện hữu và 7 đô thị mới). Bối cảnh chung xem thêm tại <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">quy hoạch chung Đà Nẵng đến 2050</a> (toàn văn <a href="https://thuvienphapluat.vn/van-ban/Xay-dung-Do-thi/Quyet-dinh-2016-QD-TTg-2026-phe-duyet-Quy-hoach-chung-Da-Nang-den-2050-729960.aspx">Quyết định 2016/QĐ-TTg trên Thư viện Pháp luật</a>).</p>
+<p>Theo quy hoạch chung thành phố, Thăng Điền là một trong 7 đô thị mới dự kiến hình thành đến năm 2050, cùng Duy Nghĩa, Thăng An, Thăng Trường, Tây Hồ, Vu Gia và Hoàng Sa. Đến năm 2050, toàn thành phố có khoảng 30 đô thị (23 đô thị hiện hữu và 7 đô thị mới). Bối cảnh chung xem thêm tại <a href="/quy-hoach-chung-da-nang-2050/">quy hoạch chung Đà Nẵng đến 2050</a> (toàn văn <a href="https://thuvienphapluat.vn/van-ban/Xay-dung-Do-thi/Quyet-dinh-2016-QD-TTg-2026-phe-duyet-Quy-hoach-chung-Da-Nang-den-2050-729960.aspx">Quyết định 2016/QĐ-TTg trên Thư viện Pháp luật</a>).</p>
 <h2>Nhiệm vụ quy hoạch đô thị Thăng Điền khác đồ án quy hoạch thế nào?</h2>
 <p>Nhiều người đọc tin "duyệt quy hoạch" dễ hiểu nhầm là đã có bản đồ phân khu. Thực tế, quy hoạch đô thị thường đi qua hai bước: <strong>nhiệm vụ quy hoạch</strong> xác định phạm vi, mục tiêu, quy mô dân số và yêu cầu nghiên cứu; sau đó mới đến <strong>đồ án quy hoạch chung</strong> với bản đồ sử dụng đất, mạng lưới giao thông, chỉ tiêu từng khu. Đô thị Thăng Điền hiện mới ở bước thứ nhất.</p>
 <p>Theo trình tự thông thường, sau khi có nhiệm vụ, đơn vị tư vấn lập đồ án, lấy ý kiến cộng đồng dân cư, trình thẩm định và phê duyệt. Người có đất trong xã nên theo dõi đợt lấy ý kiến đồ án, vì đó là lúc ranh giới các khu chức năng của đô thị Thăng Điền được công bố lần đầu.</p>
@@ -352,7 +352,7 @@ HTML
 <ul>
 <li>Tuyến dài khoảng 1.541 km, sơ bộ tổng mức đầu tư khoảng 67,34 tỷ USD, gồm 23 ga hành khách và 5 ga hàng hóa.</li>
 <li>Bộ Xây dựng đặt mục tiêu nỗ lực <strong>khởi công vào tháng 12/2027</strong>; gói thầu tư vấn khảo sát, lập báo cáo nghiên cứu khả thi (TV-02) đã mở thầu.</li>
-<li>Ga Đà Nẵng của tuyến dự kiến đặt tại Hòa Sơn – xem thêm <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang/">ga đường sắt tốc độ cao Đà Nẵng tại Hòa Sơn</a>.</li>
+<li>Ga Đà Nẵng của tuyến dự kiến đặt tại Hòa Sơn – xem thêm <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son/">ga đường sắt tốc độ cao Đà Nẵng tại Hòa Sơn</a>.</li>
 </ul>
 <h2>Hộ dân trong diện tái định cư Duy Xuyên cần biết gì?</h2>
 <p>Với các hộ có đất bị thu hồi, khu tái định cư Duy Xuyên là nơi được bố trí đất ở mới. Thông thường, hộ dân cần theo dõi thông báo thu hồi đất, kiểm đếm, phương án bồi thường – hỗ trợ – tái định cư do UBND xã niêm yết; kiểm tra diện tích, loại đất được ghi nhận; và hỏi rõ vị trí, giá giao lô tái định cư cùng nghĩa vụ tài chính. Nếu chưa đồng ý với số liệu kiểm đếm, nên có ý kiến bằng văn bản trong thời gian niêm yết công khai.</p>
@@ -431,8 +431,8 @@ HTML
 <p>Hệ số sử dụng đất là tỷ lệ giữa tổng diện tích sàn xây dựng và diện tích lô đất. Ví dụ minh họa: một lô 1.000 m² có hệ số tối đa 5 lần theo quy chuẩn được xây khoảng 5.000 m² sàn; nếu nằm trong khu TOD quanh ga đường sắt và được áp mức tăng 1,5 lần, hệ số tối đa có thể lên 7,5 lần – tức khoảng 7.500 m² sàn. Phần sàn tăng thêm thường đi kèm nghĩa vụ tài chính và yêu cầu dành không gian công cộng, nên không phải lô đất nào cũng tự động được hưởng.</p>
 <h2>Những nhà ga nào có thể có TOD quanh ga đường sắt?</h2>
 <ul>
-<li><strong>Đường sắt tốc độ cao Bắc – Nam:</strong> ga Đà Nẵng dự kiến đặt tại Hòa Sơn – xem <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang/">ga đường sắt tốc độ cao Đà Nẵng tại Hòa Sơn</a>.</li>
-<li><strong>Đường sắt đô thị (metro/LRT):</strong> <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">quy hoạch chung Đà Nẵng đến 2050</a> định hướng phát triển các khu đô thị TOD quanh nhà ga; tiến độ các tuyến còn phụ thuộc nguồn vốn.</li>
+<li><strong>Đường sắt tốc độ cao Bắc – Nam:</strong> ga Đà Nẵng dự kiến đặt tại Hòa Sơn – xem <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son/">ga đường sắt tốc độ cao Đà Nẵng tại Hòa Sơn</a>.</li>
+<li><strong>Đường sắt đô thị (metro/LRT):</strong> <a href="/quy-hoach-chung-da-nang-2050/">quy hoạch chung Đà Nẵng đến 2050</a> định hướng phát triển các khu đô thị TOD quanh nhà ga; tiến độ các tuyến còn phụ thuộc nguồn vốn.</li>
 </ul>
 <!--hh-img:img/da-nang/song-han-cau-quay-trung-tam-ve-dem.jpg|Ảnh thực tế: cầu sông Hàn và trung tâm Đà Nẵng về đêm-->
 <h2>Tác động của TOD quanh ga đường sắt – nhận định của Hoàng Hiệp</h2>
@@ -500,7 +500,7 @@ HTML
 <tr><td>Bên lề</td><td>Dự kiến khai trương VSAP Lab, khởi công dự án ô tô Volkswagen; triển lãm quy hoạch</td></tr>
 </tbody>
 </table>
-<p>Theo Báo Đầu tư, thành phố cũng đã phê duyệt dự án <strong>Luồng Cửa Lở</strong> với tổng vốn khoảng <strong>7.585 tỷ đồng</strong>. Quy hoạch chung được Phó Thủ tướng ký phê duyệt tại <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">Quyết định 2016/QĐ-TTg ngày 21/10/2026</a>.</p>
+<p>Theo Báo Đầu tư, thành phố cũng đã phê duyệt dự án <strong>Luồng Cửa Lở</strong> với tổng vốn khoảng <strong>7.585 tỷ đồng</strong>. Quy hoạch chung được Phó Thủ tướng ký phê duyệt tại <a href="/quy-hoach-chung-da-nang-2050/">Quyết định 2016/QĐ-TTg ngày 21/10/2026</a>.</p>
 <h2>Công bố quy hoạch chung 2050 có ý nghĩa gì?</h2>
 <p>Quy hoạch chung đã được Thủ tướng phê duyệt; việc công bố quy hoạch chung 2050 là bước đưa đồ án ra công khai để người dân, doanh nghiệp biết và thực hiện. Sau công bố, các quy hoạch phân khu, quy hoạch chi tiết và kế hoạch sử dụng đất sẽ lần lượt được rà soát cho phù hợp. Với người mua nhà đất, đây là thời điểm nên đối chiếu thửa đất mình quan tâm với bản đồ định hướng: khu vực nào là đô thị mới, trục giao thông nào được mở, đâu là đất cây xanh, công cộng.</p>
 <p>Hội nghị đi kèm xúc tiến đầu tư cũng cho biết thành phố đang ưu tiên kêu gọi lĩnh vực nào. Danh mục dự án được giới thiệu tại hội nghị công bố quy hoạch chung 2050 thường là tín hiệu sớm về những khu vực sắp có vốn và hạ tầng.</p>
@@ -602,7 +602,7 @@ HTML
 <!--hh-img:img/meta-city-tam-ky/meta-city-tam-ky-phoi-canh-tong-the.jpg|Phối cảnh khu đô thị Meta City ở Tây Bắc Tam Kỳ, phường Bàn Thạch – cùng khu vực Tam Kỳ cũ với khu tái định cư Hương Trà (phối cảnh chủ đầu tư)-->
 <h2>Tái định cư Hương Trà trong chuỗi dự án cho đường sắt tốc độ cao</h2>
 <p>Khu tái định cư Hương Trà nằm trong chuỗi dự án tái định cư thành phố đang duyệt dần cho tuyến đường sắt tốc độ cao Bắc – Nam. Đầu tháng 11/2026, Đà Nẵng đã duyệt 3 khu tái định cư hơn 392 tỷ đồng tại Duy Xuyên (xem <a href="/tai-dinh-cu-duy-xuyen-duong-sat-toc-do-cao-392-ty/">bài chi tiết</a>); trước đó báo chí cũng đưa tin các khu tại Hòa Tiến, Tam Xuân, Bàn Thạch, Hòa Khánh – Liên Chiểu.</p>
-<p>Theo các báo (<a href="https://cafef.vn/da-nang-phe-duyet-loat-khu-tai-dinh-cu-phuc-vu-cao-toc-duong-sat-toc-do-cao-188261111144637121.chn">CafeF</a>), tuyến qua Đà Nẵng dài khoảng 116 km, từ phường Hải Vân đến xã Núi Thành; Bộ Xây dựng đặt mục tiêu khởi công tuyến vào tháng 12/2027. Ga hành khách Đà Nẵng dự kiến đặt tại Hòa Sơn – xem <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang/">ga đường sắt tốc độ cao Đà Nẵng</a>.</p>
+<p>Theo các báo (<a href="https://cafef.vn/da-nang-phe-duyet-loat-khu-tai-dinh-cu-phuc-vu-cao-toc-duong-sat-toc-do-cao-188261111144637121.chn">CafeF</a>), tuyến qua Đà Nẵng dài khoảng 116 km, từ phường Hải Vân đến xã Núi Thành; Bộ Xây dựng đặt mục tiêu khởi công tuyến vào tháng 12/2027. Ga hành khách Đà Nẵng dự kiến đặt tại Hòa Sơn – xem <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son/">ga đường sắt tốc độ cao Đà Nẵng</a>.</p>
 <h2>Tác động / nhận định của Hoàng Hiệp</h2>
 <ul>
 <li><strong>Tuyến đường sắt đã chạm tới Tam Kỳ cũ:</strong> sau Duy Xuyên, việc dự án tái định cư Hương Trà có quyết định đầu tư cụ thể cho thấy công tác chuẩn bị mặt bằng đang trải dài khắp các địa phương phía Nam thành phố. Làm tái định cư trước là bước bắt buộc trước khi thu hồi đất.</li>
@@ -677,8 +677,8 @@ HTML
 </tbody>
 </table>
 <h2>Khu thương mại tự do Đà Nẵng đang ở đâu?</h2>
-<p>Khu thương mại tự do Đà Nẵng được Thủ tướng quyết định thành lập năm 2025, tổng diện tích khoảng 1.881 ha chia ở 7 vị trí, gắn với cảng Liên Chiểu ở phía Tây Bắc (xem <a href="/cang-lien-chieu-khu-thuong-mai-tu-do-bat-dong-san-lien-chieu/">cảng Liên Chiểu và Khu thương mại tự do</a>; <a href="https://dantri.com.vn/thoi-su/quyet-dinh-7-vi-tri-lam-khu-thuong-mai-tu-do-da-nang-20250616155817749.htm">Dân trí</a>).</p>
-<p>Vị trí số 7 nằm ở vùng phía Tây thành phố; theo quyết định thành lập ban đầu, vị trí này rộng khoảng 401 ha – con số 276 ha trong dự án hạ tầng vị trí số 7 lần này nhỏ hơn, báo chí chưa giải thích phần chênh lệch. Quy hoạch chung Đà Nẵng đến 2050 cũng xác định đưa 7 vị trí của Khu thương mại tự do vào hoạt động (xem <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">quy hoạch chung 2050</a>).</p>
+<p>Khu thương mại tự do Đà Nẵng được Thủ tướng quyết định thành lập năm 2025, tổng diện tích khoảng 1.881 ha chia ở 7 vị trí, gắn với cảng Liên Chiểu ở phía Tây Bắc (xem <a href="/cang-lien-chieu-khu-thuong-mai-tu-do/">cảng Liên Chiểu và Khu thương mại tự do</a>; <a href="https://dantri.com.vn/thoi-su/quyet-dinh-7-vi-tri-lam-khu-thuong-mai-tu-do-da-nang-20250616155817749.htm">Dân trí</a>).</p>
+<p>Vị trí số 7 nằm ở vùng phía Tây thành phố; theo quyết định thành lập ban đầu, vị trí này rộng khoảng 401 ha – con số 276 ha trong dự án hạ tầng vị trí số 7 lần này nhỏ hơn, báo chí chưa giải thích phần chênh lệch. Quy hoạch chung Đà Nẵng đến 2050 cũng xác định đưa 7 vị trí của Khu thương mại tự do vào hoạt động (xem <a href="/quy-hoach-chung-da-nang-2050/">quy hoạch chung 2050</a>).</p>
 <!--hh-img:img/hoa-xuan/hoa-xuan-flycam-8-2025-song-cam-le-nhin-ve-trung-tam.jpg|Sông Cẩm Lệ và khu Hòa Xuân nhìn về trung tâm Đà Nẵng – khu đô thị phía Nam gần nhất với vùng phát triển phía Tây (ảnh flycam thực tế tháng 8/2025)-->
 <h2>Lộ trình hạ tầng vị trí số 7 đến 2032</h2>
 <ul>

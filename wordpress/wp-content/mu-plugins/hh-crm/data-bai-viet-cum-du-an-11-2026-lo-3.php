@@ -163,7 +163,7 @@ HTML
 <li><strong>Bảo lãnh ngân hàng</strong> cho nghĩa vụ bàn giao (hỏi ngân hàng bảo lãnh).</li>
 <li><strong>Thời hạn sở hữu</strong> ghi trong hợp đồng (50 năm từ 17/09/2026).</li>
 </ol>
-<p>Phân biệt với khu đô thị cùng tên: <a href="/sun-saphia-residence-va-khu-do-thi-saphia-khac-nhau/">Sun Saphia Residence và Khu đô thị Saphia khác nhau thế nào</a>.</p>
+<p>Phân biệt với khu đô thị cùng tên: <a href="/sun-saphia-residence-va-khu-do-thi-saphia/">Sun Saphia Residence và Khu đô thị Saphia khác nhau thế nào</a>.</p>
 <h2>Chủ đầu tư Sun Saphia Residence làm gì ở Đà Nẵng ngoài nhà ở</h2>
 <p>Bên cạnh nhà ở, Sun Group có mặt ở Đà Nẵng từ những dự án du lịch – vui chơi như Bà Nà Hills (pháp nhân Công ty CP Dịch vụ Cáp treo Bà Nà). Công ty TNHH Công viên Châu Á là pháp nhân của Đà Nẵng Downtown và Sun Galaxy Complex. Các dự án của tập đoàn tập trung ở Bà Nà, bán đảo Sơn Trà, hai bờ sông Hàn và vùng Hòa Xuân – Hòa Quý phía Nam thành phố.</p>
 <h2>Thông tin nhanh Sun Saphia Residence</h2>

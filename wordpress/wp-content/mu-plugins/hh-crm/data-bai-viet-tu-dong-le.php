@@ -69,7 +69,7 @@ function hh_posts_tu_dong_le( $posts ) {
 <li>Cẩn thận tin rao "sát cao tốc" dùng để đẩy giá khi chưa có quyết định đầu tư.</li>
 </ul>
 <p>Thông tin chính thức về cao tốc nội thị Đà Nẵng được <a href="https://tuoitre.vn/cao-toc-noi-thi-tu-trung-tam-da-nang-den-chu-lai-se-di-qua-17-xa-phuong-20260506190504808.htm">Tuổi Trẻ</a> và <a href="https://thanhnien.vn/cao-toc-noi-thi-dai-90-km-ma-da-nang-sap-dau-tu-co-gi-dac-biet-185260313105559431.htm">Thanh Niên</a> đăng tải; Hoàng Hiệp sẽ cập nhật khi báo cáo nghiên cứu khả thi được phê duyệt.</p>
-<p>Xem thêm: <a href="/gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/">giá đất ven biển Đà Nẵng</a>, <a href="/duong-tranh-nam-hai-van-6-lan-bat-dong-san-lien-chieu/">đường tránh Nam Hải Vân 6 làn</a>.</p>
+<p>Xem thêm: <a href="/gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/">giá đất ven biển Đà Nẵng</a>, <a href="/duong-tranh-nam-hai-van-6-lan-lien-chieu/">đường tránh Nam Hải Vân 6 làn</a>.</p>
 {$cta}
 HTML
 		,
@@ -720,16 +720,16 @@ HTML
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence: 28 căn mỗi sàn (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Nên chuẩn bị gì trước sự kiện giới thiệu Sun Saphia Residence?</h2>
 <ol>
-<li><strong>Xác định mục đích mua</strong>: để ở, nghỉ dưỡng gia đình hay cho thuê – mỗi mục đích hợp loại căn và dãy căn khác nhau (xem <a href="/chon-day-can-sun-saphia-residence-mat-bien-canh-ben-phia-sau/">chọn dãy căn</a>, <a href="/tang-cao-hay-tang-thap-sun-saphia-residence-chon-tang-nao/">chọn tầng</a>).</li>
+<li><strong>Xác định mục đích mua</strong>: để ở, nghỉ dưỡng gia đình hay cho thuê – mỗi mục đích hợp loại căn và dãy căn khác nhau (xem <a href="/chon-can-sun-saphia-residence-day-mat-bien/">chọn dãy căn</a>, <a href="/tang-cao-hay-tang-thap-sun-saphia-residence/">chọn tầng</a>).</li>
 <li><strong>Tính trước ngân sách</strong>: tổng tiền gồm VAT, 2% bảo trì, nội thất; nếu vay, hỏi trước hạn mức với ngân hàng (xem <a href="/vay-mua-sun-saphia-residence-tra-gop-hang-thang/">vay mua Sun Saphia Residence</a>).</li>
-<li><strong>Ghi sẵn câu hỏi</strong>: phí quản lý, chính sách cho thuê, tiến độ thanh toán, điều kiện hoàn tiền giữ chỗ (xem <a href="/sun-saphia-residence-hoi-dap-ban-giao-phi-quan-ly-cho-thue/">hỏi đáp Sun Saphia Residence</a>).</li>
-<li><strong>Người nước ngoài</strong> lưu ý: chủ đầu tư không bán cho trường hợp có yếu tố nước ngoài (xem <a href="/nguoi-nuoc-ngoai-viet-kieu-mua-sun-saphia-residence-duoc-khong/">bài chi tiết</a>).</li>
+<li><strong>Ghi sẵn câu hỏi</strong>: phí quản lý, chính sách cho thuê, tiến độ thanh toán, điều kiện hoàn tiền giữ chỗ (xem <a href="/hoi-dap-sun-saphia-residence-ban-giao-cho-thue/">hỏi đáp Sun Saphia Residence</a>).</li>
+<li><strong>Người nước ngoài</strong> lưu ý: chủ đầu tư không bán cho trường hợp có yếu tố nước ngoài (xem <a href="/nguoi-nuoc-ngoai-mua-can-ho-sun-saphia/">bài chi tiết</a>).</li>
 <li><strong>Tra cứu thông tin dự án</strong> trên <a href="https://thongtinbds.moc.gov.vn/">hệ thống thông tin bất động sản của Bộ Xây dựng</a> và hỏi chủ đầu tư về các văn bản pháp lý đã có (xem <a href="/tra-cuu-ma-dinh-danh-bat-dong-san/">cách tra cứu</a>).</li>
 </ol>
 <h2>Sự kiện giới thiệu khác sự kiện bán hàng thế nào?</h2>
 <p>Sự kiện giới thiệu Sun Saphia Residence ngày 15/11 tập trung vào thông tin tổng thể: thương hiệu chủ đầu tư, vị trí, quy mô, thiết kế, tiện ích và pháp lý dự kiến. Bảng giá chính thức, chính sách thanh toán và giỏ căn cụ thể thường chỉ được công bố tại sự kiện bán hàng (dự kiến 05/12/2026). Vì vậy, buổi 15/11 là lúc phù hợp để đặt câu hỏi, xem mặt bằng và khoanh vùng loại căn; còn quyết định chọn căn nên để sau khi có bảng giá và chính sách chính thức.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Sự kiện giới thiệu Sun Saphia Residence là dịp tốt để nghe trực tiếp chủ đầu tư và xem mô hình, tài liệu, trước khi bảng giá chính thức ra ở sự kiện bán hàng. Anh chị chưa cần quyết định ngay tại buổi này; nên ghi lại thông tin, so sánh dòng tiền và chọn trước 2 – 3 căn ưng ý. Hoàng Hiệp có mặt tại sự kiện, có thể đón và đi cùng anh chị để giải thích từng mục. Xem thêm <a href="/danh-gia-sun-saphia-residence-chi-tiet/">đánh giá chi tiết Sun Saphia Residence</a> và <a href="/chuan-bi-su-kien-ban-hang-sun-saphia-residence-28-11/">7 việc nên chuẩn bị trước sự kiện bán hàng</a>.</p>
+<p>Sự kiện giới thiệu Sun Saphia Residence là dịp tốt để nghe trực tiếp chủ đầu tư và xem mô hình, tài liệu, trước khi bảng giá chính thức ra ở sự kiện bán hàng. Anh chị chưa cần quyết định ngay tại buổi này; nên ghi lại thông tin, so sánh dòng tiền và chọn trước 2 – 3 căn ưng ý. Hoàng Hiệp có mặt tại sự kiện, có thể đón và đi cùng anh chị để giải thích từng mục. Xem thêm <a href="/danh-gia-sun-saphia-residence-chi-tiet/">đánh giá chi tiết Sun Saphia Residence</a> và <a href="/chuan-bi-su-kien-ban-hang-sun-saphia/">7 việc nên chuẩn bị trước sự kiện bán hàng</a>.</p>
 <p>Đăng ký tham dự, nhận tài liệu và bảng tính trước sự kiện: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: thư mời sự kiện của chủ đầu tư (thời gian, địa điểm, chương trình, quà tặng); thông tin dự án theo tài liệu và buổi giải đáp của chủ đầu tư 10 – 11/2026. Chương trình có thể thay đổi theo thông báo của ban tổ chức.</p>
 HTML

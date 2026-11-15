@@ -134,7 +134,7 @@ HTML
 <ul>
 <li><strong>Tài sản chung không đổi vì chỉ một người đứng tên.</strong> Mua bằng tiền chung trong thời kỳ hôn nhân thì vẫn là tài sản chung, dù giấy tờ ghi một tên. Khi bán, thế chấp, chuyển nhượng hợp đồng, ngân hàng và công chứng thường yêu cầu chữ ký hoặc văn bản đồng ý của người còn lại.</li>
 <li><strong>Muốn là tài sản riêng</strong> (ví dụ tiền được tặng cho riêng, tiền có trước hôn nhân), nên có văn bản thỏa thuận tài sản riêng được công chứng và giữ chứng từ nguồn tiền.</li>
-<li><strong>Một người ở xa</strong> (làm việc ở Hà Nội, TP.HCM hay nước ngoài) có thể <strong>ủy quyền công chứng</strong> cho người kia ký – không cần đổi người đứng tên. Xem thêm <a href="/mua-can-ho-da-nang-tu-ha-noi-tp-hcm-kinh-nghiem/">mua căn hộ Đà Nẵng từ xa</a>.</li>
+<li><strong>Một người ở xa</strong> (làm việc ở Hà Nội, TP.HCM hay nước ngoài) có thể <strong>ủy quyền công chứng</strong> cho người kia ký – không cần đổi người đứng tên. Xem thêm <a href="/mua-can-ho-da-nang-tu-xa-kinh-nghiem/">mua căn hộ Đà Nẵng từ xa</a>.</li>
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Đứng tên mua căn hộ studio 30 m² Sun Saphia Residence – loại căn nhiều người mua đứng tên cá nhân để cho thuê (bản vẽ chủ đầu tư)-->
 <h2>Đứng tên mua căn hộ và vay ngân hàng</h2>
@@ -145,7 +145,7 @@ HTML
 <h2>Đổi người đứng tên sau khi đã ký</h2>
 <ul>
 <li><strong>Trước hợp đồng mua bán:</strong> chủ đầu tư cho biết có thể chuyển nhượng, đổi tên ở giai đoạn thỏa thuận nguyên tắc – hỏi rõ phí và thủ tục khi giữ chỗ.</li>
-<li><strong>Sau hợp đồng mua bán, trước bàn giao:</strong> làm thủ tục chuyển nhượng hợp đồng theo Luật Kinh doanh bất động sản 2023, có chủ đầu tư xác nhận; thuế thu nhập cá nhân 2% giá chuyển nhượng (xem <a href="https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx">Luật Kinh doanh bất động sản 2023</a>). Chi tiết xem <a href="/chuyen-nhuong-hop-dong-sun-saphia-residence-truoc-ban-giao/">chuyển nhượng hợp đồng trước bàn giao</a>.</li>
+<li><strong>Sau hợp đồng mua bán, trước bàn giao:</strong> làm thủ tục chuyển nhượng hợp đồng theo Luật Kinh doanh bất động sản 2023, có chủ đầu tư xác nhận; thuế thu nhập cá nhân 2% giá chuyển nhượng (xem <a href="https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx">Luật Kinh doanh bất động sản 2023</a>). Chi tiết xem <a href="/chuyen-nhuong-hop-dong-sun-saphia-residence/">chuyển nhượng hợp đồng trước bàn giao</a>.</li>
 <li><strong>Giữa vợ và chồng, cha mẹ và con:</strong> một số trường hợp tặng cho giữa người thân được miễn thuế thu nhập cá nhân khi đã có giấy chứng nhận – cần kiểm tra quy định tại thời điểm làm.</li>
 </ul>
 <h2>Lỗi đứng tên mua căn hộ hay gặp</h2>
@@ -226,7 +226,7 @@ HTML
 <tr><td>Ví dụ studio 2,13 tỷ</td><td>5,4 – 7,2 triệu/năm</td><td>khoảng 42,6 triệu, đóng một lần</td></tr>
 </tbody>
 </table>
-<p>Giá dự kiến 2,13 tỷ là studio 30 m² tầng 15 dãy phía sau (28/10/2026), chưa VAT và chưa gồm 2% bảo trì. Các khoản khác khi mua xem <a href="/chi-phi-mua-can-ho-sun-saphia-residence-ngoai-gia-ban/">chi phí mua Sun Saphia Residence ngoài giá bán</a>.</p>
+<p>Giá dự kiến 2,13 tỷ là studio 30 m² tầng 15 dãy phía sau (28/10/2026), chưa VAT và chưa gồm 2% bảo trì. Các khoản khác khi mua xem <a href="/chi-phi-mua-sun-saphia-residence-ngoai-gia-ban/">chi phí mua Sun Saphia Residence ngoài giá bán</a>.</p>
 <h2>Phí quản lý Sun Saphia Residence chiếm bao nhiêu trong doanh thu cho thuê?</h2>
 <p>Lấy mức giá thuê tham khảo chủ đầu tư khảo sát ở căn hộ mặt biển (chưa vào mùa cao điểm): studio 2,2 – 2,9 triệu/đêm. Giả định studio cho thuê ngắn ngày được 15 đêm/tháng với giá 2,2 triệu, doanh thu khoảng 33 triệu/tháng – phí quản lý 450.000 – 600.000 đ chỉ khoảng 1,4 – 1,8%. Nếu cho thuê dài hạn khoảng 8 triệu/tháng (mức tham khảo căn hộ nhỏ khu Ngũ Hành Sơn), phí quản lý chiếm khoảng 5,6 – 7,5% tiền thuê. Đây là ví dụ minh họa, không phải cam kết doanh thu.</p>
 <p>Ý nghĩa: với cho thuê dài hạn, phí quản lý là khoản đáng kể; nên thỏa thuận rõ trong hợp đồng thuê ai trả phí quản lý, điện nước. Xem thêm <a href="/cho-thue-dai-han-sun-saphia-residence/">cho thuê dài hạn Sun Saphia Residence</a>.</p>
@@ -310,7 +310,7 @@ HTML
 <li><strong>Đề tài để làm nội dung quảng bá</strong>: ảnh, hướng dẫn lịch trình "1 ngày Ngũ Hành Sơn – Sơn Thủy" giúp tin đăng trên kênh đặt phòng hấp dẫn hơn.</li>
 </ul>
 <h2>Điểm cộng cho người mua để ở</h2>
-<p>Không gian quanh danh thắng Ngũ Hành Sơn được quy hoạch bảo vệ, nên công trình cao tầng ở sát núi bị hạn chế. Người ở có thêm một điểm đi bộ, leo núi buổi sáng ngoài bãi biển. Làng đá Non Nước, các quán hải sản ven biển, resort quốc tế trên trục Trường Sa – Lạc Long Quân tạo nên môi trường sống kiểu nghỉ dưỡng hơn là đô thị đông đúc (xem bài <a href="/dai-bien-truong-sa-ngu-hanh-son-resort-sun-saphia-residence/">dải biển Trường Sa – Ngũ Hành Sơn</a>).</p>
+<p>Không gian quanh danh thắng Ngũ Hành Sơn được quy hoạch bảo vệ, nên công trình cao tầng ở sát núi bị hạn chế. Người ở có thêm một điểm đi bộ, leo núi buổi sáng ngoài bãi biển. Làng đá Non Nước, các quán hải sản ven biển, resort quốc tế trên trục Trường Sa – Lạc Long Quân tạo nên môi trường sống kiểu nghỉ dưỡng hơn là đô thị đông đúc (xem bài <a href="/dai-bien-truong-sa-ngu-hanh-son-sun-saphia/">dải biển Trường Sa – Ngũ Hành Sơn</a>).</p>
 <h2>Cần cân nhắc</h2>
 <ul>
 <li><strong>Căn có nhìn được Ngũ Hành Sơn hay không</strong> phụ thuộc hướng căn và tầng. Theo chủ đầu tư, phía Nam dự án quy hoạch 26 – 30 tầng và mặt Nam không có căn nhìn trực diện – cần xem mặt bằng cụ thể khi chọn căn (xem <a href="/chon-can-sun-saphia-residence-day-mat-bien/">chọn dãy căn</a>).</li>
@@ -394,8 +394,8 @@ function hh_posts_sun_saphia_dot_8b( $posts, $saphia, $review, $cta ) {
 <p>Thông tin điểm đến, lễ hội ở Hội An và Đà Nẵng có thể tra trên cổng du lịch chính thức <a href="https://danangfantasticity.com/">Danang Fantasticity</a>. Từ ngày 01/7/2025, sau sắp xếp đơn vị hành chính, Hội An thuộc thành phố Đà Nẵng mới. Điều này giúp việc quy hoạch, đầu tư hạ tầng ven biển nối hai khu được tính chung một thành phố.</p>
 <h2>Hạ tầng sắp tới trên trục Đà Nẵng – Hội An</h2>
 <ul>
-<li><strong>Mở rộng đường Võ Nguyên Giáp – Trường Sa – Lạc Long Quân</strong>, vốn dự kiến 2.633 tỷ đồng – xem <a href="/mo-rong-duong-vo-nguyen-giap-truong-sa-lac-long-quan-2633-ty/">bài chi tiết</a>.</li>
-<li><strong>Đường sắt đô thị sân bay – Mỹ Khê – Hội An</strong>: giai đoạn đầu là tuyến LRT nối sân bay với biển; theo tài liệu chủ đầu tư, ga LRT 09 cách dự án khoảng 500 m – xem <a href="/duong-sat-do-thi-san-bay-my-khe-hoi-an-bat-dong-san-huong-loi/">tiến độ tuyến đường sắt</a>.</li>
+<li><strong>Mở rộng đường Võ Nguyên Giáp – Trường Sa – Lạc Long Quân</strong>, vốn dự kiến 2.633 tỷ đồng – xem <a href="/mo-rong-duong-truong-sa-vo-nguyen-giap-2633-ty/">bài chi tiết</a>.</li>
+<li><strong>Đường sắt đô thị sân bay – Mỹ Khê – Hội An</strong>: giai đoạn đầu là tuyến LRT nối sân bay với biển; theo tài liệu chủ đầu tư, ga LRT 09 cách dự án khoảng 500 m – xem <a href="/duong-sat-do-thi-da-nang-san-bay-my-khe-hoi-an/">tiến độ tuyến đường sắt</a>.</li>
 </ul>
 <p>Các dự án này đang ở bước chuẩn bị đầu tư; tiến độ thực tế có thể thay đổi.</p>
 <h2>Lịch trình mẫu: một ngày từ Sun Saphia Residence đi Hội An</h2>
@@ -589,7 +589,7 @@ HTML
 <h2>Ưu nhược điểm tầng cao (khoảng 21 – 28) và căn đặc biệt</h2>
 <ul>
 <li><strong>Ưu:</strong> tầm nhìn xa nhất, riêng tư hơn; căn tầng 29 có sân vườn và penthouse tầng 30 cao 6,5 m là sản phẩm hiếm, hợp người mua giữ tài sản.</li>
-<li><strong>Nhược:</strong> gió biển mạnh, hơi muối nhiều hơn – ban công, cửa, điều hòa cần bảo dưỡng kỹ (xem <a href="/can-ho-ven-bien-hoi-muoi-mua-bao-sun-saphia-residence/">căn hộ ven biển và hơi muối</a>); thời gian chờ thang dài hơn giờ cao điểm.</li>
+<li><strong>Nhược:</strong> gió biển mạnh, hơi muối nhiều hơn – ban công, cửa, điều hòa cần bảo dưỡng kỹ (xem <a href="/bao-tri-can-ho-ven-bien-hoi-muoi-mua-bao/">căn hộ ven biển và hơi muối</a>); thời gian chờ thang dài hơn giờ cao điểm.</li>
 </ul>
 <h2>Thang máy: 7 thang cho 28 căn mỗi sàn</h2>
 <p>Thang máy là yếu tố hay bị quên khi chọn tầng cao hay tầng thấp. Tòa có <strong>7 thang máy chia 2 sảnh thang</strong>. Chủ đầu tư cho biết số thang tính theo quy chuẩn dân số (căn 25 – 45 m² tính 1 người) và tham khảo tiêu chuẩn CIBSE với thời gian chờ thang 45 – 60 giây. Với căn hộ cho thuê nhiều khách du lịch, giờ trả phòng – nhận phòng có thể đông hơn; tầng cao chịu ảnh hưởng nhiều hơn tầng thấp.</p>

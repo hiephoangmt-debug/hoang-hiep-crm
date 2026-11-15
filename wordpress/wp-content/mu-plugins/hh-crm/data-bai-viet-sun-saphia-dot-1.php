@@ -209,7 +209,7 @@ HTML
 <li>Nếu tuyến chậm nhiều năm, căn hộ vẫn hợp lý với mục đích của mình không?</li>
 </ol>
 <p>Nguồn tiến độ: <a href="https://tuoitre.vn/tuyen-duong-sat-do-thi-da-nang-se-khoi-cong-vao-thang-2-2027-20260420182515178.htm">Tuổi Trẻ (4/2026)</a>, <a href="https://tuoitre.vn/da-nang-uu-tien-lam-tuyen-duong-sat-do-thi-noi-tu-san-bay-voi-hoi-an-20251024131105174.htm">Tuổi Trẻ (10/2025)</a>, Nhà Đầu Tư. Nhận định của Hoàng Hiệp: đường sắt đô thị Đà Nẵng là động lực dài hạn rõ ràng cho dải ven biển phía Nam, nhưng quyết định mua nên dựa trên những gì đã có hôm nay.</p>
-<p>Xem thêm: <a href="/mo-rong-duong-truong-sa-vo-nguyen-giap-2633-ty/">mở rộng đường Võ Nguyên Giáp – Trường Sa</a>, <a href="/mo-rong-nha-ga-t2-san-bay-da-nang-bat-dong-san-cho-thue/">mở rộng nhà ga T2 sân bay Đà Nẵng</a>.</p>
+<p>Xem thêm: <a href="/mo-rong-duong-truong-sa-vo-nguyen-giap-2633-ty/">mở rộng đường Võ Nguyên Giáp – Trường Sa</a>, <a href="/mo-rong-nha-ga-t2-san-bay-da-nang/">mở rộng nhà ga T2 sân bay Đà Nẵng</a>.</p>
 {$cta}
 HTML
 		,
@@ -344,7 +344,7 @@ HTML
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>6 điều cần kiểm tra trước khi giữ chỗ căn hộ</h2>
 <ol>
-<li>Ai nhận tiền: chủ đầu tư, công ty phân phối hay cá nhân? Chuyển khoản vào tài khoản công ty, có phiếu thu.</li>
+<li>Ai nhận tiền: chủ đầu tư, công ty môi giới hay cá nhân? Chuyển khoản vào tài khoản công ty, có phiếu thu.</li>
 <li>Phiếu giữ chỗ ghi rõ: số tiền, thời hạn, điều kiện và thời gian hoàn tiền.</li>
 <li>Dự án đã có văn bản đủ điều kiện bán của Sở Xây dựng chưa – nếu chưa, không ký thỏa thuận đặt cọc hay hợp đồng có giá trị lớn.</li>
 <li>Giá bán dự kiến, chính sách thanh toán và chiết khấu áp dụng cho khách giữ chỗ.</li>
@@ -432,7 +432,7 @@ HTML
 <h2>Căn hộ ven biển Đà Nẵng theo ngân sách – gợi ý của Hoàng Hiệp</h2>
 <p>Với tầm tiền khoảng 2 – 3 tỷ, lựa chọn căn hộ ven biển Đà Nẵng chủ yếu là studio: căn chuyển nhượng đã bàn giao ở khu Mỹ Khê, hoặc studio dự án mới như Sun Saphia Residence ở Sơn Thủy (giá dự kiến studio tầng 15 khoảng 2,13 – 2,85 tỷ theo thông tin chủ đầu tư ngày 28/10/2026, chưa VAT). Tầm tiền cao hơn mở ra căn 1 – 2 phòng ngủ hoặc căn hộ hàng hiệu sát biển Mỹ Khê, Non Nước.</p>
 <p>Lời khuyên chung: chốt mục đích trước (ở, nghỉ dưỡng hay cho thuê), sau đó chọn khu biển, cuối cùng mới chọn dự án. Ngược thứ tự này dễ dẫn đến mua căn đẹp nhưng không hợp nhu cầu.</p>
-<p>Xem thêm: <a href="/can-ho-view-bien-da-nang-my-khe/">căn hộ view biển Mỹ Khê</a>, <a href="/cong-vien-cau-lac-bo-the-thao-bien-bai-tam-son-thuy/">công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy</a>.</p>
+<p>Xem thêm: <a href="/can-ho-view-bien-da-nang-my-khe/">căn hộ view biển Mỹ Khê</a>, <a href="/bai-tam-son-thuy-cong-vien-the-thao-bien/">công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy</a>.</p>
 {$cta}
 HTML
 		,

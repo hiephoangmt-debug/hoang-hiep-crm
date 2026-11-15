@@ -9,21 +9,21 @@ defined( 'ABSPATH' ) || exit;
 /** slug bài => thẻ riêng (cộng thêm thẻ chung theo chuyên mục). */
 function hh_news_tags_map() {
 	return array(
-		'toan-canh-ha-tang-da-nang-2026-tac-dong-bat-dong-san'          => array( 'Quy hoạch Đà Nẵng', 'Cầu Hòa Xuân', 'Quốc lộ 14D', 'Liên Chiểu', 'Cảng Liên Chiểu' ),
-		'cang-lien-chieu-khu-thuong-mai-tu-do-bat-dong-san-lien-chieu'  => array( 'Liên Chiểu', 'Cảng Liên Chiểu', 'Khu thương mại tự do' ),
-		'trung-tam-tai-chinh-quoc-te-da-nang-tac-dong-bat-dong-san'     => array( 'Trung tâm tài chính quốc tế', 'Sông Hàn', 'Sơn Trà' ),
+		'toan-canh-ha-tang-da-nang-2026'          => array( 'Quy hoạch Đà Nẵng', 'Cầu Hòa Xuân', 'Quốc lộ 14D', 'Liên Chiểu', 'Cảng Liên Chiểu' ),
+		'cang-lien-chieu-khu-thuong-mai-tu-do'  => array( 'Liên Chiểu', 'Cảng Liên Chiểu', 'Khu thương mại tự do' ),
+		'trung-tam-tai-chinh-quoc-te-da-nang'     => array( 'Trung tâm tài chính quốc tế', 'Sông Hàn', 'Sơn Trà' ),
 		'cum-nut-giao-cau-hoa-xuan-bat-dong-san-nam-da-nang'            => array( 'Cầu Hòa Xuân', 'Hòa Xuân', 'Cẩm Lệ' ),
-		'duong-ven-bien-129-vo-chi-cong-bat-dong-san-ven-bien-hoi-an'   => array( 'Đường ven biển Võ Chí Công', 'Hội An' ),
-		'mo-rong-nha-ga-t2-san-bay-da-nang-bat-dong-san-cho-thue'       => array( 'Sân bay Đà Nẵng', 'Căn hộ cho thuê' ),
-		'ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang' => array( 'Đường sắt tốc độ cao', 'Hòa Vang', 'Quy hoạch Đà Nẵng' ),
-		'hop-nhat-da-nang-quang-nam-bat-dong-san-vung-giap-ranh'        => array( 'Hợp nhất Đà Nẵng Quảng Nam', 'Quy hoạch Đà Nẵng', 'Hội An' ),
+		'duong-ven-bien-vo-chi-cong-hoi-an'   => array( 'Đường ven biển Võ Chí Công', 'Hội An' ),
+		'mo-rong-nha-ga-t2-san-bay-da-nang'       => array( 'Sân bay Đà Nẵng', 'Căn hộ cho thuê' ),
+		'ga-duong-sat-toc-do-cao-da-nang-hoa-son' => array( 'Đường sắt tốc độ cao', 'Hòa Vang', 'Quy hoạch Đà Nẵng' ),
+		'hop-nhat-da-nang-quang-nam-vung-giap-ranh'        => array( 'Hợp nhất Đà Nẵng Quảng Nam', 'Quy hoạch Đà Nẵng', 'Hội An' ),
 		'da-nang-de-xuat-xay-cau-moi-qua-song-han'                      => array( 'Sông Hàn', 'Cầu qua sông Hàn', 'Hầm chui qua sông Hàn', 'Quy hoạch Đà Nẵng', 'Đầu tư công Đà Nẵng', 'Hải Châu', 'Sơn Trà' ),
 		'bang-gia-dat-da-nang-sua-doi-2026'                             => array( 'Bảng giá đất Đà Nẵng', 'Pháp lý nhà đất', 'HĐND Đà Nẵng', 'Quy hoạch Đà Nẵng' ),
-		'duong-tranh-nam-hai-van-6-lan-bat-dong-san-lien-chieu'         => array( 'Đường tránh Nam Hải Vân', 'Liên Chiểu', 'Cảng Liên Chiểu' ),
+		'duong-tranh-nam-hai-van-6-lan-lien-chieu'         => array( 'Đường tránh Nam Hải Vân', 'Liên Chiểu', 'Cảng Liên Chiểu' ),
 		'tin-ha-tang-da-nang-thang-10-2026'                             => array( 'Cầu Hòa Xuân', 'Quốc lộ 14D', 'Liên Chiểu', 'Đầu tư công Đà Nẵng', 'HĐND Đà Nẵng', 'Hợp nhất Đà Nẵng Quảng Nam' ),
-		'chinh-sach-moi-anh-huong-bat-dong-san-da-nang-11-2026'          => array( 'Chính sách bất động sản', 'Pháp lý nhà đất', 'Quy hoạch Đà Nẵng', 'Bảng giá đất Đà Nẵng', 'Nhà ở xã hội' ),
+		'chinh-sach-bat-dong-san-da-nang-11-2026'          => array( 'Chính sách bất động sản', 'Pháp lý nhà đất', 'Quy hoạch Đà Nẵng', 'Bảng giá đất Đà Nẵng', 'Nhà ở xã hội' ),
 		'quy-hoach-chung-do-thi-hoa-tien-da-nang-2050'                  => array( 'Quy hoạch Đà Nẵng', 'Hòa Vang', 'Đường sắt tốc độ cao' ),
-		'cong-vien-cau-lac-bo-the-thao-bien-bai-tam-son-thuy'           => array( 'Ngũ Hành Sơn', 'Biển Đà Nẵng', 'Bất động sản Đà Nẵng' ),
+		'bai-tam-son-thuy-cong-vien-the-thao-bien'           => array( 'Ngũ Hành Sơn', 'Biển Đà Nẵng', 'Bất động sản Đà Nẵng' ),
 	);
 }
 

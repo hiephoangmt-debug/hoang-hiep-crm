@@ -139,7 +139,7 @@ HTML
 <li><strong>Mùa mưa nên cho thuê dài hơn</strong>: thuê theo tuần, theo tháng cho người làm việc từ xa, chuyên gia – giảm trống phòng.</li>
 <li><strong>Nguồn cung tăng</strong>: báo chí dẫn số liệu khoảng 18 dự án khách sạn đang xây, thêm khoảng 6.835 phòng – cạnh tranh sẽ gắt hơn, căn có view và tiện ích tốt sẽ giữ giá tốt hơn.</li>
 </ul>
-<p>Xem thêm <a href="/khach-du-lich-da-nang-2026-nhu-cau-thue-can-ho-ven-bien/">lượng khách du lịch Đà Nẵng 2026</a>, <a href="/gia-phong-khach-san-ven-bien-da-nang-2026/">giá phòng khách sạn ven biển</a> và bài {$review}.</p>
+<p>Xem thêm <a href="/khach-du-lich-da-nang-2026-thue-can-ho-ven-bien/">lượng khách du lịch Đà Nẵng 2026</a>, <a href="/gia-phong-khach-san-ven-bien-da-nang-2026/">giá phòng khách sạn ven biển</a> và bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: Báo Văn hóa (hè 2025); SGGP, Tạp chí Công Thương (DIFF 2026, Sở VH-TT-DL Đà Nẵng, Hội Khách sạn Đà Nẵng); CoStar qua báo chí (12 tháng đến 6/2026); TheLEADER (nguồn cung phòng mới). Ví dụ tính lấp đầy theo mùa do Hoàng Hiệp minh hoạ.</p>
 HTML
@@ -367,7 +367,7 @@ HTML
 <li><strong>Bếp nhỏ, tủ lạnh, lò vi sóng, máy giặt</strong> – lợi thế so với phòng khách sạn với khách ở dài ngày.</li>
 <li><strong>Bàn làm việc, wifi mạnh, TV thông minh</strong> – cho khách công tác, làm việc từ xa.</li>
 <li><strong>Rèm cản sáng, điều hòa, khóa cửa điện tử</strong> – giúp tự nhận phòng, giảm chi phí vận hành.</li>
-<li><strong>Vật liệu chịu ẩm, chịu muối</strong> – căn ven biển, xem bài <a href="/can-ho-ven-bien-hoi-muoi-mua-bao-sun-saphia-residence/">hơi muối, mùa mưa bão và bảo trì</a>.</li>
+<li><strong>Vật liệu chịu ẩm, chịu muối</strong> – căn ven biển, xem bài <a href="/bao-tri-can-ho-ven-bien-hoi-muoi-mua-bao/">hơi muối, mùa mưa bão và bảo trì</a>.</li>
 </ul>
 <h2>Bố trí studio 3,8 × 9 m sao cho gọn?</h2>
 <p>Căn studio có mặt tiền khoảng 3,8 m, sâu khoảng 9 m – dạng căn hẹp và dài. Với nội thất studio Sun Saphia Residence, Hoàng Hiệp gợi ý chia theo chiều sâu: khu vệ sinh và bếp nhỏ sát cửa vào, khu ngủ ở giữa, khu ngồi – bàn làm việc sát logia để tận dụng ánh sáng và view. Tránh vách ngăn kín giữa các khu vì làm căn tối và chật; nếu cần tách, dùng rèm hoặc kệ thấp. Tủ âm tường dọc một bên giúp có chỗ cất đồ mà không chiếm lối đi.</p>
@@ -381,7 +381,7 @@ HTML
 <li>Nếu giao đơn vị vận hành, hỏi trước họ có tiêu chuẩn nội thất studio Sun Saphia Residence bắt buộc không để tránh làm hai lần.</li>
 <li>Ngoài nội thất, chủ căn cho thuê ngắn ngày cần làm đúng thủ tục đăng ký hoạt động lưu trú và kê khai thuế – báo chí đã đưa tin về yêu cầu này (<a href="https://vnexpress.net/cho-thue-can-ho-ngan-ngay-trong-chung-cu-phai-dang-ky-hoat-dong-5062683.html">VnExpress</a>).</li>
 </ul>
-<p>Xem thêm <a href="/chi-phi-mua-can-ho-sun-saphia-residence-ngoai-gia-ban/">chi phí ngoài giá bán khi mua Sun Saphia</a> và bài {$review}.</p>
+<p>Xem thêm <a href="/chi-phi-mua-sun-saphia-residence-ngoai-gia-ban/">chi phí ngoài giá bán khi mua Sun Saphia</a> và bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: báo giá nội thất 2026 do NT Decor, Nội thất QI công bố trên website; bài toán cho thuê tham khảo theo tài liệu chủ đầu tư; ví dụ khấu hao do Hoàng Hiệp minh hoạ.</p>
 HTML
@@ -444,7 +444,7 @@ HTML
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-ban-do-ket-noi.jpg|Nâng cấp sân bay Đà Nẵng và bản đồ kết nối Sun Saphia Residence: bãi tắm Sơn Thủy, Ngũ Hành Sơn, sân bay (tài liệu chủ đầu tư)-->
 <h2>Từ sân bay đến Sun Saphia</h2>
-<p>Sân bay nằm ngay trong nội đô; biển Mỹ Khê cách sân bay khoảng 6,5 km. Sun Saphia ở khu Sơn Thủy, phía Nam Mỹ Khê – khoảng 9 – 10 km đường xe, thường dưới 25 phút (ước tính theo bản đồ, tùy giờ). Trong tương lai, tuyến đường sắt đô thị sân bay – biển dự kiến có ga cách dự án khoảng 500 m – xem bài <a href="/duong-sat-do-thi-san-bay-my-khe-hoi-an-bat-dong-san-huong-loi/">đường sắt đô thị sân bay – Mỹ Khê – Hội An</a>.</p>
+<p>Sân bay nằm ngay trong nội đô; biển Mỹ Khê cách sân bay khoảng 6,5 km. Sun Saphia ở khu Sơn Thủy, phía Nam Mỹ Khê – khoảng 9 – 10 km đường xe, thường dưới 25 phút (ước tính theo bản đồ, tùy giờ). Trong tương lai, tuyến đường sắt đô thị sân bay – biển dự kiến có ga cách dự án khoảng 500 m – xem bài <a href="/duong-sat-do-thi-da-nang-san-bay-my-khe-hoi-an/">đường sắt đô thị sân bay – Mỹ Khê – Hội An</a>.</p>
 <h2>Nâng cấp sân bay Đà Nẵng tác động đến khách lưu trú thế nào?</h2>
 <p>Tác động rõ nhất của việc nâng cấp sân bay Đà Nẵng nằm ở <strong>loại tàu bay</strong>: đường băng đạt chuẩn đón tàu bay thân rộng (Code E) giúp các hãng mở chặng bay dài hơn, chở nhiều khách hơn mỗi chuyến. Khách từ các thị trường xa thường ở lâu hơn khách bay chặng ngắn, phù hợp với căn hộ có bếp, máy giặt hơn là phòng khách sạn nhỏ.</p>
 <p>Tác động thứ hai là <strong>sức chứa</strong>: khi nhà ga T1, T2 mở rộng đúng quy hoạch, sân bay có dư địa từ 15,1 triệu khách (2025) lên khoảng 20 triệu khách/năm. Tuy vậy, sân bay chỉ là điều kiện cần – khách có đến hay không còn phụ thuộc đường bay, chính sách thị thực và sức hút điểm đến. Vì vậy Hoàng Hiệp xem nâng cấp sân bay Đà Nẵng là yếu tố hỗ trợ dài hạn, không phải lý do để tăng giả định giá thuê ngay.</p>

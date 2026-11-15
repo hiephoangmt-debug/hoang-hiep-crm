@@ -32,7 +32,7 @@ function hh_hub_pages() {
 				array( 'Căn hộ ven sông Hàn có sở hữu lâu dài không?', 'Tùy dự án: căn hộ chung cư trên đất ở thường sở hữu lâu dài; căn hộ khách sạn, condotel trên đất thương mại dịch vụ có thời hạn. Thông tin ghi trên hợp đồng và giấy chứng nhận.' ),
 				array( 'Có dự án căn hộ ven sông Hàn mới sắp mở bán không?', 'Có – một số dự án đã được duyệt chủ trương hoặc đang chờ đủ điều kiện bán. Các dự án này ghi trạng thái "Sắp mở bán" trong bảng; liên hệ để được báo khi có văn bản cho phép bán.' ),
 			),
-			'posts'   => array( 'so-sanh-can-ho-ven-song-han-sun-symphony-sun-ponte-peninsula', 'gia-chuyen-nhuong-can-ho-da-nang-2026-theo-du-an' ),
+			'posts'   => array( 'so-sanh-can-ho-ven-song-han', 'gia-chuyen-nhuong-can-ho-da-nang-2026-theo-du-an' ),
 		),
 		'du-an-can-ho-moi-da-nang'         => array(
 			'keyword' => 'dự án căn hộ mới Đà Nẵng',
@@ -52,7 +52,7 @@ function hh_hub_pages() {
 				array( 'Căn hộ mới Đà Nẵng có vay ngân hàng được không?', 'Phần lớn dự án thương mại có ngân hàng hỗ trợ vay một phần giá trị căn, một số có hỗ trợ lãi suất có thời hạn; nhà ở xã hội có gói vay ưu đãi theo quy định. Mức cụ thể theo chính sách từng dự án.' ),
 				array( 'Dự án sắp mở bán là sao?', 'Là dự án đã được duyệt chủ trương, đang xây hoặc chuẩn bị nhận hồ sơ nhưng chưa ký hợp đồng mua bán. Có thể đăng ký nhận thông tin để được báo khi dự án đủ điều kiện bán.' ),
 			),
-			'posts'   => array( 'bat-dong-san-nam-da-nang-ha-tang-hoa-xuan-hoa-quy-2026' ),
+			'posts'   => array( 'bat-dong-san-nam-da-nang-ha-tang-2026' ),
 		),
 		'can-ho-khach-san-condotel-da-nang' => array(
 			'keyword' => 'căn hộ khách sạn condotel Đà Nẵng',
@@ -91,7 +91,7 @@ function hh_hub_pages() {
 				array( 'Mua căn hộ Sun Group có được vay ngân hàng không?', 'Có. Các đợt mở bán thường có ngân hàng bảo lãnh, hỗ trợ vay một phần giá trị căn và chính sách hỗ trợ lãi suất có thời hạn. Mức cụ thể theo chính sách từng đợt – liên hệ để nhận bản mới nhất.' ),
 				array( 'Nên chọn căn hộ Sun Group ven sông Hàn hay phía Nam?', 'Cần ở ngay hoặc cho thuê ở trung tâm: ưu tiên căn chuyển nhượng ven sông Hàn. Vốn vừa phải, chấp nhận chờ bàn giao, muốn thanh toán giãn: các dự án phía Nam phù hợp hơn.' ),
 			),
-			'posts'   => array( 'so-sanh-fours-tower-spana-tower-s-light-tower', 'co-nen-mua-can-ho-fours-tower', 'so-sanh-can-ho-ven-song-han-sun-symphony-sun-ponte-peninsula', 'bat-dong-san-nam-da-nang-ha-tang-hoa-xuan-hoa-quy-2026', 'spana-tower-hoa-xuan-gia-mat-bang', 'cora-tower-sun-neo-city' ),
+			'posts'   => array( 'so-sanh-fours-tower-spana-tower-s-light-tower', 'co-nen-mua-can-ho-fours-tower', 'so-sanh-can-ho-ven-song-han', 'bat-dong-san-nam-da-nang-ha-tang-2026', 'spana-tower-hoa-xuan-gia-mat-bang', 'can-ho-cora-tower-hoa-xuan' ),
 		),
 		'biet-thu-hoi-an'          => array(
 			'keyword' => 'biệt thự Hội An',
@@ -110,7 +110,7 @@ function hh_hub_pages() {
 				array( 'Biệt thự Hội An giá bao nhiêu?', 'Tuỳ dự án và vị trí: biệt thự ven sông trong khu đô thị thường thấp hơn biệt thự biển trong quần thể nghỉ dưỡng hạng sang. Giá tham khảo từng dự án ghi trên thẻ dự án và trang dự án.' ),
 				array( 'Hội An sau hợp nhất thuộc Đà Nẵng có ảnh hưởng gì?', 'Từ 1/7/2025 Hội An thuộc thành phố Đà Nẵng; đơn vị hành chính đổi tên (ví dụ phường Hội An Đông). Khi mua cần kiểm tra địa chỉ mới trên giấy tờ và quy hoạch cập nhật.' ),
 			),
-			'posts'   => array( 'bat-dong-san-hoi-an-2026-sau-hop-nhat', 'casamia-balanca-so-sanh-biet-thu-hoi-an', 'phap-ly-so-hong-casamia-balanca', 'shantira-hoi-an-biet-thu-can-ho-gia-tham-khao', 'biet-thu-vinpearl-da-nang-hoi-an-gia-chuyen-nhuong', 'duong-ven-bien-129-vo-chi-cong-bat-dong-san-ven-bien-hoi-an' ),
+			'posts'   => array( 'bat-dong-san-hoi-an-2026-sau-hop-nhat', 'casamia-balanca-so-sanh-biet-thu-hoi-an', 'phap-ly-so-hong-casamia-balanca', 'shantira-hoi-an-biet-thu-can-ho-gia-tham-khao', 'biet-thu-vinpearl-da-nang-hoi-an-gia-chuyen-nhuong', 'duong-ven-bien-vo-chi-cong-hoi-an' ),
 		),
 		'can-ho-chuyen-nhuong-da-nang' => array(
 			'keyword' => 'căn hộ chuyển nhượng Đà Nẵng',
@@ -150,7 +150,7 @@ function hh_hub_pages() {
 				array( 'Cầu Hòa Xuân ảnh hưởng gì đến giá đất?', 'Cụm nút giao cầu Hòa Xuân giúp lưu thông thuận tiện hơn, là yếu tố hỗ trợ giá trị khu vực về dài hạn; nên mua theo nhu cầu thật và không mua theo tin đồn.' ),
 				array( 'Mua đất nền Hòa Xuân cần bao nhiêu vốn?', 'Tuỳ khu và diện tích lô; giá tham khảo từng khu có ở bài giá đất nền Hòa Xuân và trên các tin bán. Liên hệ để nhận bảng hàng theo ngân sách.' ),
 			),
-			'posts'   => array( 'dat-nen-hoa-xuan-2026-gia-theo-khu', 'cum-nut-giao-cau-hoa-xuan-bat-dong-san-nam-da-nang', 'bat-dong-san-cam-le-2026', 'bat-dong-san-nam-da-nang-ha-tang-hoa-xuan-hoa-quy-2026', 'kiem-tra-phap-ly-quy-hoach-nha-dat-da-nang', 'hop-dong-dat-coc-mua-nha-rui-ro-phong-tranh' ),
+			'posts'   => array( 'dat-nen-hoa-xuan-2026-gia-theo-khu', 'cum-nut-giao-cau-hoa-xuan-bat-dong-san-nam-da-nang', 'bat-dong-san-cam-le-2026', 'bat-dong-san-nam-da-nang-ha-tang-2026', 'kiem-tra-phap-ly-quy-hoach-nha-dat-da-nang', 'hop-dong-dat-coc-mua-nha-rui-ro-phong-tranh' ),
 		),
 	);
 }

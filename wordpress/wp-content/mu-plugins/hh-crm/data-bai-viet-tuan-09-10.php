@@ -237,7 +237,7 @@ HTML
 <h3>Đoạn Thanh Khê – Hải Châu</h3>
 <p>Quy cách phổ biến nhất là lô 125 m² (5 × 25 m), rao khoảng 13,8 – 21,5 tỷ (110 – 172 triệu/m²): lô đối diện bãi tắm Thanh Khê khoảng 15 tỷ, lô có đường sau 5 m khoảng 14,75 tỷ. Lô lớn 250 – 500 m² khoảng 80 – 180 triệu/m²: 250 m² ngang 10 m khoảng 35 tỷ, cặp lô 273 m² rao 49 tỷ, 400 m² ngang 15 m khoảng 32,9 tỷ; phía Hải Châu có lô góc 3 mặt tiền khoảng 436 m² hợp khách sạn, nhà hàng.</p>
 <h3>Đoạn nối dài Liên Chiểu</h3>
-<p>Đây là nơi giá đất ven biển Đà Nẵng nội thành thấp nhất: lô nhỏ 100 – 120 m² khoảng 47 – 58 triệu/m² (105 m² Hòa Hiệp Nam rao 4,95 tỷ), lô lớn 375 – 900 m² khoảng 65 – 135 triệu/m². Khu vực hưởng lợi từ <a href="/cang-lien-chieu-khu-thuong-mai-tu-do-bat-dong-san-lien-chieu/">cảng Liên Chiểu</a> và đường tránh Nam Hải Vân. Lưu ý đất song song Nguyễn Tất Thành (đường Xuân Thiều, khoảng 38 triệu/m²) không phải mặt biển.</p>
+<p>Đây là nơi giá đất ven biển Đà Nẵng nội thành thấp nhất: lô nhỏ 100 – 120 m² khoảng 47 – 58 triệu/m² (105 m² Hòa Hiệp Nam rao 4,95 tỷ), lô lớn 375 – 900 m² khoảng 65 – 135 triệu/m². Khu vực hưởng lợi từ <a href="/cang-lien-chieu-khu-thuong-mai-tu-do/">cảng Liên Chiểu</a> và đường tránh Nam Hải Vân. Lưu ý đất song song Nguyễn Tất Thành (đường Xuân Thiều, khoảng 38 triệu/m²) không phải mặt biển.</p>
 
 <h2>Giá đất ven biển Đà Nẵng tuyến Trường Sa (Ngũ Hành Sơn)</h2>
 <p>Trường Sa có giá đất ven biển Đà Nẵng mềm hơn trục phía Bắc: lô 300 m² ngang 8 m rao khoảng 99,9 triệu/m²; lô lớn 500 – 1.000 m² khoảng 60 – 130 triệu/m² (lô góc 2 mặt tiền 500 m² rao 64,6 tỷ, lô 998 m² ngang 25 m khoảng 60 tỷ). Trường Sa gần biển Tân Trà, các resort lớn và tổ hợp <a href="/du-an/newtown-diamond-da-nang/">Newtown Diamond</a>, hợp nhà đầu tư dài hạn.</p>
@@ -529,7 +529,7 @@ HTML
 <p><strong>Bất động sản Sơn Trà</strong> năm 2026 là khu vực sôi động nhất Đà Nẵng, với hai trục chính: căn hộ ven sông Hàn (Trần Hưng Đạo, Lê Văn Duyệt) và căn hộ, khách sạn mặt biển Mỹ Khê (Võ Nguyên Giáp, Phạm Văn Đồng). Mặt bằng căn hộ phổ biến khoảng 50 – 125 triệu/m², căn hàng hiệu mặt biển cao hơn. Bài viết cập nhật tháng 10/2026.</p>
 
 <h2>Vì sao bất động sản Sơn Trà được quan tâm?</h2>
-<p>Sơn Trà có cả sông Hàn và biển Mỹ Khê, gần cầu Rồng và trung tâm Hải Châu, là nơi tập trung khách sạn và khách du lịch. Trung tâm tài chính quốc tế Đà Nẵng có các lô đất trên đường Võ Văn Kiệt, tạo thêm kỳ vọng cho nhu cầu thuê căn hộ cao cấp – xem bài <a href="/trung-tam-tai-chinh-quoc-te-da-nang-tac-dong-bat-dong-san/">trung tâm tài chính quốc tế Đà Nẵng</a>.</p>
+<p>Sơn Trà có cả sông Hàn và biển Mỹ Khê, gần cầu Rồng và trung tâm Hải Châu, là nơi tập trung khách sạn và khách du lịch. Trung tâm tài chính quốc tế Đà Nẵng có các lô đất trên đường Võ Văn Kiệt, tạo thêm kỳ vọng cho nhu cầu thuê căn hộ cao cấp – xem bài <a href="/trung-tam-tai-chinh-quoc-te-da-nang/">trung tâm tài chính quốc tế Đà Nẵng</a>.</p>
 <!--hh-img:img/sun-ponte/sun-ponte-toan-canh-ban-dao-son-tra.jpg|Bán đảo Sơn Trà và sông Hàn – khu vực tập trung bất động sản Sơn Trà ven sông, ven biển-->
 <p>Một điểm khác biệt của bất động sản Sơn Trà là nhu cầu thuê đến từ cả khách du lịch, người nước ngoài sinh sống lẫn người làm việc ở trung tâm, nên căn hộ ở đây dễ khai thác hơn nhiều khu vực khác. Báo chí gần đây cũng nhìn nhận Sơn Trà đang trở thành trục an cư và tích sản mới của thành phố (xem <a href="https://cafef.vn/son-tra-xac-lap-vi-the-truc-an-cu-va-tich-san-moi-tai-da-nang-188260829104316245.chn">CafeF</a>).</p>
 
@@ -792,7 +792,7 @@ HTML
 
 <h2>Cảng Liên Chiểu, khu thương mại tự do và bất động sản Liên Chiểu</h2>
 <p>Cảng Liên Chiểu là cảng biển lớn nhất của Đà Nẵng, kỳ vọng thay thế dần cảng Tiên Sa trong vận tải hàng hóa. Cùng ngày công bố hoàn thành hạ tầng dùng chung, dự án bến container Liên Chiểu vốn hơn 2 tỷ USD được khởi động (theo <a href="https://baochinhphu.vn/khoi-dong-du-an-sieu-cang-lien-chieu-da-nang-102260328105015423.htm">Báo Điện tử Chính phủ</a>). Thành phố đầu tư hơn 518 tỷ đồng cải tạo tuyến đường nối cảng với khu thương mại tự do.</p>
-<p>Khu thương mại tự do gồm khoảng 1.881 ha tại 7 vị trí, có các phân khu sản xuất, logistics, thương mại – dịch vụ và công nghệ. Chi tiết xem bài <a href="/cang-lien-chieu-khu-thuong-mai-tu-do-bat-dong-san-lien-chieu/">cảng Liên Chiểu và khu thương mại tự do</a>.</p>
+<p>Khu thương mại tự do gồm khoảng 1.881 ha tại 7 vị trí, có các phân khu sản xuất, logistics, thương mại – dịch vụ và công nghệ. Chi tiết xem bài <a href="/cang-lien-chieu-khu-thuong-mai-tu-do/">cảng Liên Chiểu và khu thương mại tự do</a>.</p>
 <!--hh-img:img/vinhomes-hai-van-bay/vhvb-dao-ngoc-tong-the-2.jpg|Vinhomes Hải Vân Bay tại vịnh Nam Chơn – dự án lớn nhất của bất động sản Liên Chiểu (hình minh họa của chủ đầu tư)-->
 
 <h2>Dự án bất động sản Liên Chiểu</h2>
