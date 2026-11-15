@@ -103,21 +103,32 @@ HTML
 		'old_slug' => array( 'chuan-bi-su-kien-ban-hang-sun-saphia-residence-28-11' ),
 		'title'    => 'Sự kiện bán hàng Sun Saphia Residence 05/12/2026: 7 việc nên chuẩn bị trước để chọn được căn ưng ý',
 		'excerpt'  => 'Sự kiện bán hàng Sun Saphia Residence dự kiến 05/12/2026. Chuẩn bị gì trước: chọn sẵn 3 căn, tính tổng tiền gồm VAT và 2% bảo trì, hồ sơ vay, câu hỏi về giá, chính sách và giấy tờ dự án.',
-		'keyword'  => 'sự kiện bán hàng Sun Saphia Residence',
-		'keywords_extra' => array( 'Sun Saphia Residence', 'mở bán Sun Saphia', 'Sun Saphia 28/11', 'chọn căn Sun Saphia' ),
+		'keyword'  => 'sự kiện bán hàng Sun Saphia',
+		'keywords_extra' => array( 'Sun Saphia Residence', 'mở bán Sun Saphia', 'Sun Saphia 05/12', 'chọn căn Sun Saphia' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-07 08:00',
-		'rev'      => 3, // 01/11: ngân hàng hỗ trợ Vietcombank, BIDV, NCB.
+		'rev'      => 4, // 15/11: chuẩn SEO 100 – rút gọn URL, sửa tiêu đề SEO 05/12, lịch sự kiện, việc trong và sau ngày bán hàng, hỏi đáp. 01/11: ngân hàng hỗ trợ Vietcombank, BIDV, NCB.
 		'image_replace' => true, // Ảnh cũ ghi VietinBank.
 		'category' => 'Kinh nghiệm',
 		'tags'     => array( 'Sun Saphia Residence', 'Kinh nghiệm mua nhà' ),
 		'image'    => 'plugin:img/tin-tuc/su-kien-ban-hang-sun-saphia-residence.jpg',
 		'content'  => <<<HTML
-<p>Theo lịch triển khai cập nhật ngày 06/11/2026, {$saphia} có chuỗi sự kiện giới thiệu từ 08/11 đến 02/12 (Đà Nẵng 09/11 và 15/11, Hà Nội 08/11 và 22/11) và <strong>sự kiện bán hàng của chủ đầu tư tại Đà Nẵng dự kiến ngày 05/12/2026</strong>, quy mô khoảng 1.000 khách. Ở các đợt mở bán căn hộ ven biển, căn đẹp thường được chọn trong những giờ đầu – người chuẩn bị trước có lợi thế. Dưới đây là 7 việc nên làm trước ngày đó.</p>
+<p>Sự kiện bán hàng Sun Saphia Residence của chủ đầu tư tại Đà Nẵng <strong>dự kiến ngày 05/12/2026</strong>, quy mô khoảng 1.000 khách, theo lịch triển khai cập nhật ngày 06/11/2026. Trước đó, {$saphia} có chuỗi sự kiện giới thiệu từ 08/11 đến 02/12 (Đà Nẵng 09/11 và 15/11, Hà Nội 08/11 và 22/11). Ở các đợt mở bán căn hộ ven biển, căn đẹp thường được chọn trong những giờ đầu – người chuẩn bị trước có lợi thế. Dưới đây là 7 việc nên làm trước ngày đó.</p>
 <!--hh-featured-->
-<h2>1. Chọn sẵn 3 căn theo thứ tự ưu tiên</h2>
+<h2>Lịch sự kiện bán hàng Sun Saphia (cập nhật 06/11/2026)</h2>
+<table>
+<thead><tr><th>Ngày</th><th>Nội dung</th></tr></thead>
+<tbody>
+<tr><td>08/11 và 22/11/2026</td><td>Sự kiện giới thiệu dự án tại Hà Nội</td></tr>
+<tr><td>09/11 và 15/11/2026</td><td>Sự kiện giới thiệu dự án tại Đà Nẵng</td></tr>
+<tr><td>02/12/2026</td><td>Kết thúc chuỗi sự kiện giới thiệu</td></tr>
+<tr><td>05/12/2026 (dự kiến)</td><td>Sự kiện bán hàng của chủ đầu tư tại Đà Nẵng, khoảng 1.000 khách</td></tr>
+</tbody>
+</table>
+<p>Lịch do chủ đầu tư điều chỉnh; trước đó sự kiện bán hàng từng dự kiến 28/11/2026. Hoàng Hiệp cập nhật bài khi có thông báo chính thức.</p>
+<h2>1. Trước sự kiện bán hàng Sun Saphia: chọn sẵn 3 căn</h2>
 <p>Mỗi sàn tầng 3A – 28 có 28 căn: 19 studio, 4 căn 1PN+, 5 căn 2PN (<a href="/mat-bang-can-ho-sun-saphia-residence/">xem mặt bằng</a>). Chọn 1 căn chính và 2 căn dự phòng khác tầng hoặc khác dãy để không bị động khi căn đầu tiên đã có người chọn.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-toa-thap-30-tang.jpg|Phối cảnh tòa tháp 30 tầng Sun Saphia Residence (ảnh chủ đầu tư)-->
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-toa-thap-30-tang.jpg|Sự kiện bán hàng Sun Saphia Residence dự kiến 05/12/2026 – phối cảnh tòa tháp 30 tầng (ảnh chủ đầu tư)-->
 <h2>2. Tính tổng tiền, không chỉ giá căn</h2>
 <p>Giá dự kiến studio tầng 15 từ 2,13 đến 2,85 tỷ là giá có vay, <strong>chưa gồm VAT và 2% kinh phí bảo trì</strong> (<a href="/gia-sun-saphia-residence-bao-nhieu/">chi tiết giá</a>). Cộng thêm lệ phí trước bạ, nội thất – xem <a href="/chi-phi-mua-sun-saphia-residence-ngoai-gia-ban/">chi phí ngoài giá bán</a>.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
@@ -125,7 +136,7 @@ HTML
 <p>Nếu vay, nên hỏi trước ngân hàng hỗ trợ dự án (Vietcombank, BIDV, NCB theo tài liệu chủ đầu tư) về hạn mức và hồ sơ thu nhập. Chính sách dự án có hỗ trợ lãi suất tới 24 tháng – tính thử ở bài <a href="/vay-mua-sun-saphia-residence-tra-gop-hang-thang/">vay mua Sun Saphia trả góp</a>.</p>
 <h2>4. Mang đủ giấy tờ cá nhân</h2>
 <p>Căn cước công dân của người đứng tên (và vợ/chồng nếu tài sản chung), thông tin tài khoản để chuyển tiền. Ở xa không đến được, hỏi trước cách ký và chuyển tiền từ xa – xem <a href="/mua-can-ho-da-nang-tu-xa-kinh-nghiem/">mua căn hộ Đà Nẵng từ xa</a>.</p>
-<h2>5. Chuẩn bị câu hỏi về giá và chính sách</h2>
+<h2>5. Chuẩn bị câu hỏi về giá cho sự kiện bán hàng Sun Saphia</h2>
 <ul>
 <li>Giá chính thức từng căn đã gồm VAT, kinh phí bảo trì chưa? Diện tích tính giá là thông thủy hay tim tường?</li>
 <li>Chiết khấu cho khách giữ chỗ sớm, thanh toán nhanh là bao nhiêu, áp dụng tới khi nào?</li>
@@ -133,26 +144,36 @@ HTML
 </ul>
 <h2>6. Hỏi giấy tờ dự án</h2>
 <p>Văn bản đủ điều kiện bán nhà ở hình thành trong tương lai, bảo lãnh ngân hàng, hợp đồng mẫu. Mức cọc, các mốc thanh toán theo luật: xem bài <a href="/tien-do-thanh-toan-sun-saphia-residence/">mức cọc 5%, 30%, 70%, 95%</a>. Thời hạn sở hữu: <a href="/phap-ly-sun-saphia-residence-so-huu-bao-lau/">pháp lý Sun Saphia</a>.</p>
-<h2>7. Đặt mức giá tối đa cho mình</h2>
+<h2>7. Đặt mức giá tối đa trước sự kiện bán hàng Sun Saphia</h2>
 <p>Không khí sự kiện dễ khiến người mua chọn căn vượt ngân sách. Viết ra giá tối đa chấp nhận được cho từng căn ưu tiên và giữ đúng mức đó.</p>
-<p>Lịch sự kiện có thể thay đổi theo chủ đầu tư; Hoàng Hiệp sẽ cập nhật khi có thông báo chính thức.</p>
+<h2>Trong ngày sự kiện bán hàng Sun Saphia nên làm gì?</h2>
+<ul>
+<li>Đến sớm, xác nhận lại căn ưu tiên còn trên bảng hàng trước giờ mở bán.</li>
+<li>Đọc kỹ mọi phiếu, thỏa thuận trước khi ký – không ký giấy tờ để trống số tiền, mã căn.</li>
+<li>Chỉ chuyển khoản vào tài khoản ghi trên chứng từ chính thức của chủ đầu tư, giữ lại biên nhận.</li>
+<li>Chụp lại bảng giá, chính sách áp dụng cho căn đã chọn để đối chiếu khi ký hợp đồng.</li>
+</ul>
+<h2>Sau sự kiện bán hàng Sun Saphia</h2>
+<p>Theo Luật Kinh doanh bất động sản 2023, chủ đầu tư chỉ được thu tiền cọc không quá 5% giá bán khi dự án đã đủ điều kiện đưa vào kinh doanh (tóm tắt trên <a href="https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html">LuatVietnam</a>). Vì vậy sau sự kiện, hãy hỏi rõ khoản tiền mình vừa nộp là giữ chỗ hay đặt cọc, khi nào ký thỏa thuận đặt cọc và hợp đồng mua bán, và điều kiện hoàn tiền nếu đổi ý.</p>
+<p>Nhận định của Hoàng Hiệp: người chọn được căn ưng ý ở sự kiện bán hàng Sun Saphia thường là người đã chuẩn bị sẵn ba thứ – danh sách căn, tổng tiền tối đa và phương án tài chính. Lịch sự kiện có thể thay đổi theo chủ đầu tư; Hoàng Hiệp sẽ cập nhật khi có thông báo chính thức.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Sự kiện bán hàng Sun Saphia Residence 28/11: chuẩn bị gì',
+			'seo_title' => 'Sự kiện bán hàng Sun Saphia 05/12/2026: 7 việc cần chuẩn bị',
 			'desc'      => 'Sự kiện bán hàng Sun Saphia Residence dự kiến 05/12/2026: chọn sẵn 3 căn, tính tổng tiền gồm VAT và 2% bảo trì, hồ sơ vay, câu hỏi về giá và giấy tờ dự án.',
 			'points'    => array(
-				'Sự kiện bán hàng dự kiến 05/12/2026 tại Đà Nẵng; giới thiệu dự án từ 08/11 đến 02/12',
+				'Sự kiện bán hàng Sun Saphia dự kiến 05/12/2026 tại Đà Nẵng; giới thiệu dự án từ 08/11 đến 02/12',
 				'Chọn 1 căn chính và 2 căn dự phòng, tính tổng tiền gồm VAT và 2% bảo trì',
 				'Hỏi rõ chiết khấu, hỗ trợ lãi suất 24 tháng và văn bản đủ điều kiện bán',
 			),
 			'faq'       => array(
-				array( 'Khi nào Sun Saphia Residence mở bán?', 'Theo lịch cập nhật ngày 06/11/2026, sự kiện bán hàng của chủ đầu tư dự kiến ngày 05/12/2026 tại Đà Nẵng; lịch có thể thay đổi.' ),
+				array( 'Khi nào Sun Saphia Residence mở bán?', 'Theo lịch cập nhật ngày 06/11/2026, sự kiện bán hàng Sun Saphia của chủ đầu tư dự kiến ngày 05/12/2026 tại Đà Nẵng; lịch có thể thay đổi.' ),
+				array( 'Tiền nộp tại sự kiện bán hàng Sun Saphia là giữ chỗ hay đặt cọc?', 'Cần hỏi rõ trên chứng từ. Theo Luật Kinh doanh bất động sản 2023, tiền cọc chỉ được thu khi dự án đủ điều kiện kinh doanh và không quá 5% giá bán; trước đó là tiền giữ chỗ, nên ghi rõ điều kiện hoàn lại.' ),
 				array( 'Đi sự kiện bán hàng Sun Saphia cần mang gì?', 'Căn cước công dân của người đứng tên (và vợ/chồng nếu tài sản chung), phương án tài chính, danh sách căn ưu tiên và các câu hỏi về giá, chính sách.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html' ),
 	);
 
 	/* ---------------- 08/11 – Hỗ trợ lãi suất 24 tháng ---------------- */
