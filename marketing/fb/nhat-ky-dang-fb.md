@@ -87,3 +87,5 @@
 | 15/11/2026 | (ghi chú) | 12:22 | Anh Hiệp chốt NỀN XANH: đổi ảnh 7 bài chưa đăng hôm nay sang *-x.jpg (poster-xanh); bài Sun 13:00 dùng nền flycam thực tế | — |
 | 16/11/2026 | Sun (Reels) | 20:00 | Video flycam thực tế Sun Saphia 17/10/2026 – "Vì sao Sun Group chọn dải biển này?" (video dọc 21s, có logo) | /du-an/sun-saphia-residence/ |
 | 16/11/2026 | TikTok (@hiephoangmt, brand Sun) | 20:15 | Video flycam Sun Saphia (video dọc 21s, chưa có nhạc – TikTok không cho tự thêm nhạc với video) | /du-an/sun-saphia-residence/ |
+| 17/11/2026 | Sun (Reels) | 20:00 | Video phân tích #01 "Vì sao Sơn Thủy là tọa độ mới ven biển Đà Nẵng?" – avatar HeyGen + bản đồ navy v5, 72s, ghi chú nội dung AI (Metricool 428780189) | /du-an/sun-saphia-residence/ |
+| 17/11/2026 | TikTok (@hiephoangmt, brand Sun) | 20:15 | Video phân tích #01 (isAigc = true, nội dung thương hiệu) (Metricool 428780287) | /du-an/sun-saphia-residence/ |
