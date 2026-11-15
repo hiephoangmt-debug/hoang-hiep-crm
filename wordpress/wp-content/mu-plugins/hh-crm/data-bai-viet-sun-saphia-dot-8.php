@@ -185,7 +185,9 @@ HTML
 
 	/* ---------------- 13/11 11:30 – Phí quản lý ---------------- */
 	$posts[] = array(
-		'slug'     => 'phi-quan-ly-sun-saphia-residence-moi-thang-bao-nhieu',
+		'slug'     => 'phi-quan-ly-sun-saphia-residence-bao-nhieu',
+		'old_slug' => array( 'phi-quan-ly-sun-saphia-residence-moi-thang-bao-nhieu' ),
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá.
 		'title'    => 'Phí quản lý Sun Saphia Residence 15.000 – 20.000 đ/m²: studio, 1PN+, 2PN mỗi tháng trả bao nhiêu?',
 		'excerpt'  => 'Phí quản lý Sun Saphia Residence dự kiến 15.000 – 20.000 đ/m²/tháng. Tính sẵn số tiền mỗi tháng, mỗi năm cho studio 30 m², 1PN+ 50 m², 2PN 60 – 70 m², phân biệt với 2% kinh phí bảo trì và các chi phí khác khi cho thuê.',
 		'keyword'  => 'phí quản lý Sun Saphia Residence',
@@ -210,11 +212,11 @@ HTML
 </tbody>
 </table>
 <p>Hoàng Hiệp tính theo diện tích thông thủy trong tài liệu chủ đầu tư; diện tích tính phí thực tế ghi trong hợp đồng mua bán. Mức phí chưa gồm điện, nước, internet, gửi xe.</p>
-<h2>Phí quản lý trả cho những gì?</h2>
-<p>Phí quản lý vận hành nhà chung cư thường dùng cho: bảo vệ 24/7, vệ sinh khu vực chung, vận hành thang máy, bể bơi, hệ thống PCCC, điện chiếu sáng chung, chăm sóc cảnh quan và chi phí của ban quản lý. Với Sun Saphia Residence, tòa nhà có <strong>7 thang máy, 2 sảnh thang</strong>, bể bơi dài nhất 27 m, gym, yoga – quy mô tiện ích này nằm trong phần phí quản lý.</p>
-<p>Đơn vị quản lý theo chủ đầu tư là <strong>Sun Paradise Land</strong>, giống dự án Sun Symphony. Theo quy định, khoảng 1 năm sau bàn giao cư dân họp hội nghị nhà chung cư, bầu Ban quản trị và có thể quyết lại mức phí, đơn vị quản lý.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence: diện tích từng căn là cơ sở tính phí quản lý (bản vẽ chủ đầu tư, tham khảo)-->
-<h2>Đừng nhầm với 2% kinh phí bảo trì</h2>
+<h2>Phí quản lý Sun Saphia Residence trả cho những gì?</h2>
+<p>Phí quản lý vận hành nhà chung cư thường dùng cho: bảo vệ 24/7, vệ sinh khu vực chung, vận hành thang máy, bể bơi, hệ thống PCCC, điện chiếu sáng chung, chăm sóc cảnh quan và chi phí của ban quản lý. Với Sun Saphia Residence, tòa nhà có <strong>7 thang máy, 2 sảnh thang</strong>, bể bơi dài nhất 27 m, gym, yoga – quy mô tiện ích này nằm trong phần phí quản lý Sun Saphia Residence.</p>
+<p>Đơn vị quản lý theo chủ đầu tư là <strong>Sun Paradise Land</strong>, giống dự án Sun Symphony. Theo quy định về quản lý vận hành nhà chung cư trong <a href="https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Nha-o-2023-27-2023-QH15-528669.aspx">Luật Nhà ở 2023</a>, khoảng 1 năm sau bàn giao cư dân họp hội nghị nhà chung cư, bầu Ban quản trị và có thể quyết lại mức phí, đơn vị quản lý.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Phí quản lý Sun Saphia Residence tính theo diện tích – mặt bằng tầng điển hình 3A – 28 (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Đừng nhầm phí quản lý Sun Saphia Residence với 2% kinh phí bảo trì</h2>
 <table>
 <thead><tr><th></th><th>Phí quản lý</th><th>Kinh phí bảo trì</th></tr></thead>
 <tbody>
@@ -225,28 +227,30 @@ HTML
 </tbody>
 </table>
 <p>Giá dự kiến 2,13 tỷ là studio 30 m² tầng 15 dãy phía sau (28/10/2026), chưa VAT và chưa gồm 2% bảo trì. Các khoản khác khi mua xem <a href="/chi-phi-mua-can-ho-sun-saphia-residence-ngoai-gia-ban/">chi phí mua Sun Saphia Residence ngoài giá bán</a>.</p>
-<h2>Phí quản lý chiếm bao nhiêu trong doanh thu cho thuê?</h2>
+<h2>Phí quản lý Sun Saphia Residence chiếm bao nhiêu trong doanh thu cho thuê?</h2>
 <p>Lấy mức giá thuê tham khảo chủ đầu tư khảo sát ở căn hộ mặt biển (chưa vào mùa cao điểm): studio 2,2 – 2,9 triệu/đêm. Giả định studio cho thuê ngắn ngày được 15 đêm/tháng với giá 2,2 triệu, doanh thu khoảng 33 triệu/tháng – phí quản lý 450.000 – 600.000 đ chỉ khoảng 1,4 – 1,8%. Nếu cho thuê dài hạn khoảng 8 triệu/tháng (mức tham khảo căn hộ nhỏ khu Ngũ Hành Sơn), phí quản lý chiếm khoảng 5,6 – 7,5% tiền thuê. Đây là ví dụ minh họa, không phải cam kết doanh thu.</p>
-<p>Ý nghĩa: với cho thuê dài hạn, phí quản lý là khoản đáng kể; nên thỏa thuận rõ trong hợp đồng thuê ai trả phí quản lý, điện nước. Xem thêm <a href="/cho-thue-dai-han-sun-saphia-residence-chuyen-gia-gia-dinh/">cho thuê dài hạn Sun Saphia Residence</a>.</p>
+<p>Ý nghĩa: với cho thuê dài hạn, phí quản lý là khoản đáng kể; nên thỏa thuận rõ trong hợp đồng thuê ai trả phí quản lý, điện nước. Xem thêm <a href="/cho-thue-dai-han-sun-saphia-residence/">cho thuê dài hạn Sun Saphia Residence</a>.</p>
+<h2>Phí quản lý Sun Saphia Residence có thể thay đổi không?</h2>
+<p>Có thể. Mức 15.000 – 20.000 đ/m² là mức dự kiến ghi trong hợp đồng mua bán cho giai đoạn đầu. Sau khi Ban quản trị được bầu, cư dân có quyền thương lượng lại mức phí và lựa chọn đơn vị quản lý. Phí cũng có thể điều chỉnh khi chi phí vận hành (lương, điện chung, vật tư) tăng. Khi tính dòng tiền dài hạn, Hoàng Hiệp thường lấy mức trần 20.000 đ/m² và cộng thêm biên an toàn, thay vì dùng mức thấp nhất.</p>
 <h2>Chi phí cố định khác của chủ căn hộ cho thuê</h2>
 <ul>
 <li><strong>Điện, nước, internet</strong> cho căn trống giữa các lượt khách.</li>
-<li><strong>Phí đơn vị vận hành</strong> nếu thuê ngoài: mô hình phổ biến chia 85/15 hoặc phí 15 – 50% tùy dịch vụ (xem <a href="/tu-cho-thue-hay-thue-don-vi-van-hanh-can-ho-sun-saphia/">tự cho thuê hay thuê vận hành</a>).</li>
+<li><strong>Phí đơn vị vận hành</strong> nếu thuê ngoài: mô hình phổ biến chia 85/15 hoặc phí 15 – 50% tùy dịch vụ (xem <a href="/don-vi-van-hanh-cho-thue-can-ho-sun-saphia/">đơn vị vận hành cho thuê</a>) – khoản này tách riêng, không nằm trong phí quản lý Sun Saphia Residence.</li>
 <li><strong>Hoa hồng kênh đặt phòng</strong> (Booking, Agoda, Airbnb).</li>
 <li><strong>Bảo dưỡng</strong> điều hòa, bình nóng lạnh – căn ven biển chịu hơi muối nên cần kiểm tra định kỳ.</li>
 <li><strong>Thuế cho thuê</strong> khi doanh thu vượt ngưỡng.</li>
 </ul>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Mức 15.000 – 20.000 đ/m² là mức thường thấy ở căn hộ cao cấp có bể bơi, nhiều thang máy tại Đà Nẵng. Khi so sánh các dự án, nên so tổng chi phí cố định mỗi năm thay vì chỉ nhìn giá bán. Mức phí chính thức nằm trong hợp đồng mua bán – Hoàng Hiệp sẽ cập nhật khi có. Xem thêm bài {$review}.</p>
+<p>Phí quản lý Sun Saphia Residence ở mức 15.000 – 20.000 đ/m² là mức thường thấy ở căn hộ cao cấp có bể bơi, nhiều thang máy tại Đà Nẵng. Khi so sánh các dự án, nên so tổng chi phí cố định mỗi năm thay vì chỉ nhìn giá bán. Mức phí chính thức nằm trong hợp đồng mua bán – Hoàng Hiệp sẽ cập nhật khi có. Xem thêm bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: phí quản lý dự kiến, đơn vị quản lý, thang máy, bể bơi, giá thuê tham khảo theo buổi giải đáp của chủ đầu tư 04/11/2026; giá dự kiến theo chủ đầu tư 28/10/2026. Bảng tính của Hoàng Hiệp, mang tính minh họa.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Phí quản lý Sun Saphia Residence mỗi tháng bao nhiêu?',
+			'seo_title' => 'Phí quản lý Sun Saphia Residence: 15.000 – 20.000 đ/m²',
 			'desc'      => 'Phí quản lý Sun Saphia Residence dự kiến 15.000 – 20.000 đ/m²/tháng: studio 30 m² 450 – 600 nghìn, 2PN 70 m² 1,05 – 1,4 triệu. Khác gì 2% phí bảo trì.',
 			'points'    => array(
-				'Phí quản lý dự kiến 15.000 – 20.000 đ/m²/tháng, ghi trong hợp đồng mua bán',
+				'Phí quản lý Sun Saphia Residence dự kiến 15.000 – 20.000 đ/m²/tháng, ghi trong hợp đồng mua bán',
 				'Studio 30 m² khoảng 450.000 – 600.000 đ/tháng, 5,4 – 7,2 triệu/năm',
 				'Kinh phí bảo trì 2% đóng một lần, khác phí quản lý hằng tháng',
 				'Đơn vị quản lý dự kiến Sun Paradise Land',
@@ -255,17 +259,21 @@ HTML
 				array( 'Phí quản lý Sun Saphia Residence bao nhiêu?', 'Theo chủ đầu tư (04/11/2026), phí quản lý dự kiến ghi trong hợp đồng mua bán là 15.000 – 20.000 đ/m²/tháng.' ),
 				array( 'Studio Sun Saphia Residence mỗi tháng đóng phí quản lý bao nhiêu?', 'Với studio 30 m², khoảng 450.000 – 600.000 đ/tháng, tức 5,4 – 7,2 triệu đồng/năm, chưa gồm điện nước, internet.' ),
 				array( 'Ai quản lý tòa nhà Sun Saphia Residence?', 'Chủ đầu tư cho biết đơn vị quản lý là Sun Paradise Land; sau khoảng 1 năm bàn giao, hội nghị nhà chung cư có thể quyết lại đơn vị và mức phí.' ),
+				array( 'Phí quản lý Sun Saphia Residence có tăng không?', 'Có thể điều chỉnh khi Ban quản trị cư dân thương lượng lại hoặc chi phí vận hành tăng; khi tính dòng tiền nên lấy mức trần 20.000 đ/m².' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Nha-o-2023-27-2023-QH15-528669.aspx',
+		),
 	);
 
 	/* ---------------- 13/11 16:30 – Ngũ Hành Sơn ---------------- */
 	$posts[] = array(
 		'slug'     => 'danh-thang-ngu-hanh-son-gan-sun-saphia-residence',
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100.
 		'title'    => 'Danh thắng Ngũ Hành Sơn đón khoảng 2,2 triệu lượt khách mỗi năm: điểm cộng gì cho căn hộ Sun Saphia Residence?',
 		'excerpt'  => 'Ngũ Hành Sơn – di tích quốc gia đặc biệt – đón khoảng 2,2 triệu lượt khách năm 2025, hơn 1,5 triệu khách quốc tế. Khu danh thắng, làng đá Non Nước và biển Sơn Thủy tạo nên nhu cầu lưu trú quanh Sun Saphia Residence ra sao.',
-		'keyword'  => 'Ngũ Hành Sơn gần Sun Saphia Residence',
+		'keyword'  => 'danh thắng Ngũ Hành Sơn',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'danh thắng Ngũ Hành Sơn', 'làng đá Non Nước', 'du lịch Ngũ Hành Sơn' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-13 16:30',
@@ -273,24 +281,27 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Ngũ Hành Sơn', 'Du lịch Đà Nẵng' ),
 		'image'    => 'plugin:img/tin-tuc/ngu-hanh-son-sun-saphia.jpg',
 		'content'  => <<<HTML
-<p>Khi nói về vị trí {$saphia}, người ta thường nhắc biển Sơn Thủy trước mặt. Nhưng phía Nam dự án còn một "nam châm" hút khách lâu đời của Đà Nẵng: <strong>danh thắng Ngũ Hành Sơn</strong>. Bài này xem Ngũ Hành Sơn gần Sun Saphia Residence mang lại gì cho người ở và người cho thuê – với số liệu khách du lịch mới nhất.</p>
+<p>Khi nói về vị trí {$saphia}, người ta thường nhắc biển Sơn Thủy trước mặt. Nhưng phía Nam dự án còn một "nam châm" hút khách lâu đời của Đà Nẵng: <strong>danh thắng Ngũ Hành Sơn</strong>. Bài này xem danh thắng Ngũ Hành Sơn mang lại gì cho người ở và người cho thuê ở Sun Saphia Residence – với số liệu khách du lịch mới nhất.</p>
 <!--hh-featured-->
-<h2>Ngũ Hành Sơn là gì?</h2>
+<h2>Danh thắng Ngũ Hành Sơn là gì?</h2>
 <p>Ngũ Hành Sơn là cụm 5 ngọn núi đá vôi – Kim Sơn, Mộc Sơn, Thủy Sơn, Hỏa Sơn, Thổ Sơn – nằm giữa vùng cát ven biển phía Đông Nam Đà Nẵng. Nơi đây có hệ thống hang động, chùa chiền (chùa Tam Thai, chùa Linh Ứng, động Huyền Không…), và được xếp hạng <strong>di tích quốc gia đặc biệt</strong>. Thủy Sơn là ngọn lớn nhất, nơi tập trung phần lớn điểm tham quan. Dưới chân núi là <strong>làng nghề đá mỹ nghệ Non Nước</strong> với hàng trăm năm tuổi nghề.</p>
-<h2>Khách đến Ngũ Hành Sơn đông cỡ nào?</h2>
+<h2>Khách đến danh thắng Ngũ Hành Sơn đông cỡ nào?</h2>
 <table>
 <thead><tr><th>Chỉ số</th><th>Số liệu</th><th>Nguồn</th></tr></thead>
 <tbody>
 <tr><td>Lượt khách tham quan năm 2025</td><td>khoảng 2,2 triệu</td><td>Báo Văn hóa</td></tr>
 <tr><td>Trong đó khách quốc tế</td><td>hơn 1,5 triệu</td><td>Báo Văn hóa</td></tr>
 <tr><td>Dịp Tết 2026</td><td>tăng 15 – 20% so với cùng kỳ</td><td>Báo chí địa phương</td></tr>
-<tr><td>Khách lưu trú Đà Nẵng 9 tháng 2026</td><td>15,86 triệu lượt, tăng 26,4%</td><td>VietnamPlus</td></tr>
+<tr><td>Khách lưu trú Đà Nẵng 9 tháng 2026</td><td>15,86 triệu lượt, tăng 26,4%</td><td><a href="https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp">VietnamPlus</a></td></tr>
 </tbody>
 </table>
-<p>Tỷ lệ khách quốc tế ở Ngũ Hành Sơn (khoảng 2/3) cao hơn nhiều so với mặt bằng chung, cho thấy đây là điểm "phải đến" trong lịch trình của khách nước ngoài tới Đà Nẵng – Hội An.</p>
+<p>Tỷ lệ khách quốc tế ở danh thắng Ngũ Hành Sơn (khoảng 2/3) cao hơn nhiều so với mặt bằng chung, cho thấy đây là điểm "phải đến" trong lịch trình của khách nước ngoài tới Đà Nẵng – Hội An.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-ban-do-ket-noi.jpg|Bản đồ kết nối Sun Saphia Residence với bãi tắm Sơn Thủy, danh thắng Ngũ Hành Sơn và sân bay Đà Nẵng (tài liệu chủ đầu tư)-->
-<h2>Ngũ Hành Sơn gần Sun Saphia Residence đến mức nào?</h2>
-<p>Sun Saphia Residence nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu bãi tắm Sơn Thủy, phường Ngũ Hành Sơn. Đi theo trục ven biển Trường Sa về phía Nam rồi rẽ vào đường Huyền Trân Công Chúa, quãng đường tới khu Thủy Sơn ước khoảng 3 – 4 km (Hoàng Hiệp đo trên bản đồ, chưa phải số liệu chủ đầu tư), đi xe máy, taxi khoảng 10 phút. Bản đồ kết nối của chủ đầu tư cũng đặt Ngũ Hành Sơn là một trong các điểm gần dự án.</p>
+<h2>Danh thắng Ngũ Hành Sơn cách Sun Saphia Residence bao xa?</h2>
+<p>Sun Saphia Residence nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu bãi tắm Sơn Thủy, phường Ngũ Hành Sơn. Đi theo trục ven biển Trường Sa về phía Nam rồi rẽ vào đường Huyền Trân Công Chúa, quãng đường tới khu Thủy Sơn ước khoảng 3 – 4 km (Hoàng Hiệp đo trên bản đồ, chưa phải số liệu chủ đầu tư), đi xe máy, taxi khoảng 10 phút. Bản đồ kết nối của chủ đầu tư cũng đặt danh thắng Ngũ Hành Sơn là một trong các điểm gần dự án.</p>
+<h2>Gợi ý lịch tham quan danh thắng Ngũ Hành Sơn cho khách thuê</h2>
+<p>Chủ căn có thể soạn sẵn một lịch nửa ngày cho khách: đi sớm khoảng 7 – 8 giờ để tránh nắng, lên Thủy Sơn bằng lối bậc đá hoặc thang máy, tham quan chùa Tam Thai, chùa Linh Ứng, động Huyền Không, rồi xuống làng đá Non Nước xem thợ chế tác. Buổi trưa quay về căn hộ nghỉ, chiều tắm biển Sơn Thủy. Lịch này tận dụng đúng lợi thế "biển và núi trong 10 phút" mà danh thắng Ngũ Hành Sơn mang lại cho khu vực.</p>
+<p>Nên nhắc khách mang giày đế bám, nước uống và trang phục lịch sự khi vào chùa. Những chi tiết nhỏ như vậy giúp khách có trải nghiệm tốt và để lại đánh giá tích cực cho căn hộ.</p>
 <h2>Điểm cộng cho người cho thuê</h2>
 <ul>
 <li><strong>Khách đi theo lịch trình kết hợp:</strong> buổi sáng tắm biển Sơn Thủy, chiều leo Ngũ Hành Sơn, tối đi Hội An hoặc trung tâm. Căn hộ ở giữa các điểm này tiện cho khách lưu trú 3 – 4 đêm.</li>
@@ -299,35 +310,38 @@ HTML
 <li><strong>Đề tài để làm nội dung quảng bá</strong>: ảnh, hướng dẫn lịch trình "1 ngày Ngũ Hành Sơn – Sơn Thủy" giúp tin đăng trên kênh đặt phòng hấp dẫn hơn.</li>
 </ul>
 <h2>Điểm cộng cho người mua để ở</h2>
-<p>Không gian quanh Ngũ Hành Sơn được quy hoạch là khu danh thắng, nên công trình cao tầng ở sát núi bị hạn chế. Người ở có thêm một điểm đi bộ, leo núi buổi sáng ngoài bãi biển. Làng đá Non Nước, các quán hải sản ven biển, resort quốc tế trên trục Trường Sa – Lạc Long Quân tạo nên môi trường sống kiểu nghỉ dưỡng hơn là đô thị đông đúc (xem bài <a href="/dai-bien-truong-sa-ngu-hanh-son-resort-sun-saphia-residence/">dải biển Trường Sa – Ngũ Hành Sơn</a>).</p>
+<p>Không gian quanh danh thắng Ngũ Hành Sơn được quy hoạch bảo vệ, nên công trình cao tầng ở sát núi bị hạn chế. Người ở có thêm một điểm đi bộ, leo núi buổi sáng ngoài bãi biển. Làng đá Non Nước, các quán hải sản ven biển, resort quốc tế trên trục Trường Sa – Lạc Long Quân tạo nên môi trường sống kiểu nghỉ dưỡng hơn là đô thị đông đúc (xem bài <a href="/dai-bien-truong-sa-ngu-hanh-son-resort-sun-saphia-residence/">dải biển Trường Sa – Ngũ Hành Sơn</a>).</p>
 <h2>Cần cân nhắc</h2>
 <ul>
-<li><strong>Căn có nhìn được Ngũ Hành Sơn hay không</strong> phụ thuộc hướng căn và tầng. Theo chủ đầu tư, phía Nam dự án quy hoạch 26 – 30 tầng và mặt Nam không có căn nhìn trực diện – cần xem mặt bằng cụ thể khi chọn căn (xem <a href="/chon-day-can-sun-saphia-residence-mat-bien-canh-ben-phia-sau/">chọn dãy căn</a>).</li>
+<li><strong>Căn có nhìn được Ngũ Hành Sơn hay không</strong> phụ thuộc hướng căn và tầng. Theo chủ đầu tư, phía Nam dự án quy hoạch 26 – 30 tầng và mặt Nam không có căn nhìn trực diện – cần xem mặt bằng cụ thể khi chọn căn (xem <a href="/chon-can-sun-saphia-residence-day-mat-bien/">chọn dãy căn</a>).</li>
 <li><strong>Lượt khách tham quan không đồng nghĩa với khách lưu trú</strong>: nhiều khách đi tour trong ngày từ trung tâm hoặc Hội An. Khi tính lấp đầy nên dùng số khách lưu trú của thành phố và tính theo mùa.</li>
 <li><strong>Mùa mưa bão</strong> (khoảng tháng 9 – 12) khách tham quan giảm.</li>
 </ul>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Ngũ Hành Sơn là lợi thế vị trí khó sao chép: di tích quốc gia đặc biệt, đông khách quốc tế, lại không bị lấn át bởi nhà cao tầng. Với Sun Saphia Residence, giá trị này cộng thêm vào biển Sơn Thủy và công viên 2,45 ha phía trước, giúp căn hộ có câu chuyện riêng khi cho thuê. Xem thêm <a href="/sun-saphia-residence-o-dau-vi-tri/">Sun Saphia Residence ở đâu</a> và bài {$review}.</p>
+<p>Danh thắng Ngũ Hành Sơn là lợi thế vị trí khó sao chép: di tích quốc gia đặc biệt, đông khách quốc tế, lại không bị lấn át bởi nhà cao tầng. Với Sun Saphia Residence, giá trị này cộng thêm vào biển Sơn Thủy và công viên 2,45 ha phía trước, giúp căn hộ có câu chuyện riêng khi cho thuê. Xem thêm <a href="/sun-saphia-residence-o-dau-vi-tri/">Sun Saphia Residence ở đâu</a> và bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: lượt khách Ngũ Hành Sơn năm 2025 theo Báo Văn hóa; khách lưu trú Đà Nẵng 9 tháng 2026 theo VietnamPlus; vị trí, quy hoạch xung quanh theo chủ đầu tư (04/11/2026). Khoảng cách do Hoàng Hiệp ước tính trên bản đồ.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Ngũ Hành Sơn gần Sun Saphia Residence: lợi gì?',
-			'desc'      => 'Ngũ Hành Sơn gần Sun Saphia Residence: danh thắng đón khoảng 2,2 triệu lượt khách năm 2025, hơn 1,5 triệu khách quốc tế. Điểm cộng cho ở và cho thuê.',
+			'seo_title' => 'Danh thắng Ngũ Hành Sơn: 2,2 triệu lượt khách năm 2025',
+			'desc'      => 'Danh thắng Ngũ Hành Sơn đón khoảng 2,2 triệu lượt khách năm 2025, hơn 1,5 triệu khách quốc tế. Điểm cộng gì cho ở và cho thuê căn hộ Sun Saphia Residence.',
 			'points'    => array(
-				'Ngũ Hành Sơn là di tích quốc gia đặc biệt, đón khoảng 2,2 triệu lượt khách năm 2025',
+				'Danh thắng Ngũ Hành Sơn là di tích quốc gia đặc biệt, đón khoảng 2,2 triệu lượt khách năm 2025',
 				'Hơn 1,5 triệu lượt là khách quốc tế',
 				'Từ dự án tới khu Thủy Sơn ước khoảng 3 – 4 km',
 				'Mặt Nam dự án không có căn nhìn trực diện – cần xem mặt bằng khi chọn căn',
 			),
 			'faq'       => array(
-				array( 'Sun Saphia Residence cách Ngũ Hành Sơn bao xa?', 'Ước khoảng 3 – 4 km theo đường Trường Sa và Huyền Trân Công Chúa (Hoàng Hiệp đo trên bản đồ), khoảng 10 phút đi xe.' ),
-				array( 'Ngũ Hành Sơn mỗi năm đón bao nhiêu khách?', 'Theo Báo Văn hóa, năm 2025 danh thắng Ngũ Hành Sơn đón khoảng 2,2 triệu lượt khách, trong đó hơn 1,5 triệu lượt khách quốc tế.' ),
+				array( 'Sun Saphia Residence cách danh thắng Ngũ Hành Sơn bao xa?', 'Ước khoảng 3 – 4 km theo đường Trường Sa và Huyền Trân Công Chúa (Hoàng Hiệp đo trên bản đồ), khoảng 10 phút đi xe.' ),
+				array( 'Danh thắng Ngũ Hành Sơn mỗi năm đón bao nhiêu khách?', 'Theo Báo Văn hóa, năm 2025 danh thắng Ngũ Hành Sơn đón khoảng 2,2 triệu lượt khách, trong đó hơn 1,5 triệu lượt khách quốc tế.' ),
 				array( 'Căn hộ Sun Saphia Residence có nhìn thấy Ngũ Hành Sơn không?', 'Tùy hướng căn và tầng. Theo chủ đầu tư, phía Nam dự án quy hoạch 26 – 30 tầng và mặt Nam không có căn nhìn trực diện; cần xem mặt bằng cụ thể.' ),
+				array( 'Nên tham quan danh thắng Ngũ Hành Sơn vào giờ nào?', 'Nên đi sớm khoảng 7 – 8 giờ sáng để tránh nắng và đông khách, mang giày đế bám, nước uống và trang phục lịch sự khi vào chùa.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp',
+		),
 	);
 
 	return hh_posts_sun_saphia_dot_8b( $posts, $saphia, $review, $cta );
