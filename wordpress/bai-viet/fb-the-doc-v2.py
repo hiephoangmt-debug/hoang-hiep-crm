@@ -124,6 +124,21 @@ elif STYLE in ('poster', 'poster-xanh'):
 .pos.xanh .st b{color:#d0621c}
 .pos.xanh .st span{color:#3a4d66}
 .pos.xanh .st+.st{border-left-color:rgba(20,35,63,.2)}
+/* Cỡ chữ lớn hơn cho dễ đọc trên điện thoại (anh Hiệp 15/11/2026) */
+.pos .brand{font-size:24px;letter-spacing:.26em}
+.pos .tag{font-size:31px;margin-top:12px}
+.pos .plain{font-size:66px}
+.pos .sub{font-size:35px;font-weight:600;margin-top:20px}
+.pos .stats{margin-top:30px}
+.pos .st{padding:0 34px}
+.pos .st b{font-size:58px}
+.pos .st span{font-size:24px;font-weight:600;margin-top:6px}
+.pos .foot b{font-size:36px}.pos .foot span{font-size:26px}
+.pos .ava{width:104px;height:104px}
+.pos .note{font-size:18px;max-width:440px}
+.pos.xanh .big{background-image:linear-gradient(180deg,#ee8a35 0%,#d9601a 50%,#b84a12 100%)}
+.pos.xanh .script{background-image:linear-gradient(180deg,#e88a3c,#c4561a)}
+.pos.xanh .l{filter:drop-shadow(0 1px 0 rgba(255,255,255,.9)) drop-shadow(0 2px 4px rgba(20,35,63,.18))}
 .pos .bar{position:absolute;left:36px;right:36px;bottom:32px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 22px;border-radius:22px;background:rgba(20,30,52,.72);backdrop-filter:blur(8px)}
 .pos .foot b{color:#fff}.pos .foot span{color:#f0cf9a}
 .pos .note{font:400 15px/1.35 BVP;color:#c9cfdb;text-align:right;max-width:420px}"""
