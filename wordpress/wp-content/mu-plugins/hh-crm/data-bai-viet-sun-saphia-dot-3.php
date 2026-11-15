@@ -457,10 +457,10 @@ HTML
 	/* ---------------- 04/11 – Pháp lý cho thuê ngắn ngày ---------------- */
 	$posts[] = array(
 		'slug'     => 'cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue',
-		'rev'     => 3, // 05/11: chèn ảnh dự án.
+		'rev'     => 4, // 15/11: chuẩn SEO 100 – sửa ngưỡng thuế cho thuê 1 tỷ/năm (NĐ 141/2026), Thông tư 87/2026 khai báo tạm trú, so sánh ngắn – dài hạn, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Cho thuê ngắn ngày căn hộ Sun Saphia Residence: pháp lý, khai báo lưu trú và thuế cần biết',
-		'excerpt'  => 'Trước khi mua Sun Saphia Residence để cho thuê theo ngày, cần biết: căn hộ phải dùng đúng công năng, đăng ký cơ sở lưu trú nếu kinh doanh du lịch, khai báo lưu trú cho khách và kê khai thuế.',
-		'keyword'  => 'cho thuê ngắn ngày căn hộ Đà Nẵng',
+		'excerpt'  => 'Trước khi mua Sun Saphia Residence để cho thuê căn hộ ngắn ngày, cần biết: dùng đúng công năng, đăng ký cơ sở lưu trú nếu kinh doanh du lịch, khai báo tạm trú cho khách và khai báo, nộp thuế theo ngưỡng doanh thu 1 tỷ đồng/năm.',
+		'keyword'  => 'cho thuê căn hộ ngắn ngày',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'cho thuê căn hộ theo ngày', 'khai báo lưu trú khách thuê', 'thuế cho thuê căn hộ' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-04 08:00',
@@ -468,19 +468,21 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Pháp lý cho thuê' ),
 		'image'    => 'plugin:img/tin-tuc/cho-thue-ngan-ngay-sun-saphia-residence.jpg',
 		'content'  => <<<HTML
-<p>Phần lớn người hỏi mua <strong>Sun Saphia Residence</strong> có ý định cho thuê ngắn ngày (theo đêm). Năm 2026, cơ quan quản lý ở nhiều địa phương siết chặt việc cho thuê căn hộ theo ngày. Bài này tóm tắt những điểm pháp lý chung cần biết trước khi tính dòng tiền.</p>
+<p>Cho thuê căn hộ ngắn ngày (theo đêm) là ý định của phần lớn người hỏi mua <strong>Sun Saphia Residence</strong>. Năm 2026, cơ quan quản lý ở nhiều địa phương siết chặt việc cho thuê căn hộ theo ngày. Bài này tóm tắt những điểm pháp lý chung cần biết trước khi tính dòng tiền.</p>
 <!--hh-featured-->
 <h2>1. Căn hộ phải dùng đúng công năng</h2>
 <p>Luật Nhà ở 2023 không cho tự ý chuyển công năng căn hộ để ở sang mục đích khác. Vì vậy, điều đầu tiên cần xem là <strong>công năng ghi trong hợp đồng và giấy tờ dự án</strong>: căn hộ để ở hay căn hộ kinh doanh dịch vụ, lưu trú. Tài liệu chủ đầu tư ghi Sun Saphia Residence có thời hạn dự án 50 năm kể từ 17/09/2026 – khi ký hợp đồng, hãy hỏi rõ công năng căn hộ và việc cho thuê theo ngày có được phép trong quy chế tòa nhà không.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
-<h2>2. Đăng ký cơ sở lưu trú nếu kinh doanh du lịch</h2>
-<p>Cho khách du lịch thuê theo đêm là hoạt động kinh doanh lưu trú. Theo hướng quản lý hiện nay (ví dụ quy định mới của TP.HCM năm 2026), chủ căn hộ khai thác căn hộ du lịch phải <strong>đăng ký cơ sở lưu trú</strong> và đáp ứng điều kiện an ninh trật tự, phòng cháy. Báo chí cũng ghi nhận mức phạt tới hàng trăm triệu đồng với việc biến căn hộ thành cơ sở lưu trú trái phép. Đà Nẵng có thể áp dụng quy định riêng – cần hỏi phường và cơ quan du lịch thành phố.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Cho thuê căn hộ ngắn ngày ở Sun Saphia Residence – tòa tháp ven biển về đêm (ảnh chủ đầu tư)-->
+<h2>2. Cho thuê căn hộ ngắn ngày cho khách du lịch: đăng ký cơ sở lưu trú</h2>
+<p>Cho khách du lịch thuê theo đêm là hoạt động kinh doanh lưu trú. Theo hướng quản lý hiện nay (ví dụ quy định mới của TP.HCM năm 2026), chủ căn hộ khai thác căn hộ du lịch phải <strong>đăng ký cơ sở lưu trú</strong> và đáp ứng điều kiện an ninh trật tự, phòng cháy. Báo chí (<a href="https://vnexpress.net/cho-thue-can-ho-ngan-ngay-trong-chung-cu-phai-dang-ky-hoat-dong-5062683.html">VnExpress</a>, <a href="https://tuoitre.vn/cho-thue-chung-cu-theo-ngay-coi-chung-bi-phat-tram-trieu-vi-dung-nha-sai-muc-dich-10026091112545148.htm">Tuổi Trẻ</a>) cũng ghi nhận mức phạt tới hàng trăm triệu đồng với việc biến căn hộ thành cơ sở lưu trú trái phép. Đà Nẵng có thể áp dụng quy định riêng – cần hỏi phường và cơ quan du lịch thành phố.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-layout-1pn-plus-51m2.jpg|Layout căn 1PN+ 51 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>3. Khai báo lưu trú cho mọi khách</h2>
-<p>Mọi khách thuê, nhất là khách nước ngoài, phải được khai báo lưu trú với công an theo Luật Cư trú. Căn hộ tự nhận phòng bằng mật khẩu vẫn phải khai báo – đây là lỗi nhiều chủ nhà hay bỏ sót.</p>
-<h2>4. Kê khai thuế</h2>
+<p>Mọi khách thuê phải được khai báo lưu trú với công an theo Luật Cư trú. Căn hộ tự nhận phòng bằng mật khẩu vẫn phải khai báo – đây là lỗi nhiều chủ nhà hay bỏ sót.</p>
+<p>Với khách nước ngoài, Thông tư 87/2026/TT-BCA (hiệu lực từ 24/7/2026) yêu cầu cơ sở lưu trú, gồm cả nhà ở cho người nước ngoài thuê, khai báo tạm trú <strong>ngay khi khách đến</strong>, qua hệ thống khai báo tạm trú điện tử của Bộ Công an hoặc phiếu khai báo (tóm tắt trên <a href="https://luatvietnam.vn/tin-van-ban-moi/tu-24-7-2026-co-so-luu-tru-phai-khai-bao-tam-tru-ngay-khi-nguoi-nuoc-ngoai-den-luu-tru-883-110512-article.html">LuatVietnam</a>). Khi cho thuê căn hộ ngắn ngày, nên đăng ký tài khoản khai báo trước khi đón khách đầu tiên.</p>
+<h2>4. Thuế khi cho thuê căn hộ ngắn ngày</h2>
 <ul>
-<li>Cá nhân có doanh thu cho thuê trên <strong>100 triệu đồng/năm</strong> phải kê khai, nộp thuế giá trị gia tăng và thuế thu nhập cá nhân.</li>
+<li>Theo cách tính thuế cho thuê bất động sản năm 2026 (Nghị định 141/2026, tóm tắt trên <a href="https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/cach-tinh-thue-cho-thue-bat-dong-san-moi-nhat-2026-theo-nghi-dinh-141-va-nghi-dinh-68-20777.html">Thư Viện Pháp Luật</a>), cá nhân cho thuê tài sản có doanh thu <strong>từ 1 tỷ đồng/năm trở xuống</strong> không phải nộp thuế GTGT và thuế TNCN, nhưng vẫn phải khai báo doanh thu; trên 1 tỷ đồng, thuế GTGT 5% tổng doanh thu và thuế TNCN 5% phần doanh thu vượt 1 tỷ.</li>
+<li>Chủ sở hữu nhiều căn cộng doanh thu tất cả các căn để xác định ngưỡng.</li>
 <li>Tỷ lệ thuế khác nhau giữa <strong>cho thuê tài sản</strong> và <strong>kinh doanh dịch vụ lưu trú</strong> (có dọn phòng, đón khách) – hỏi cơ quan thuế để biết căn của mình thuộc nhóm nào.</li>
 <li>Khi thuê đơn vị vận hành, hợp đồng cần ghi rõ bên nào kê khai, nộp thuế.</li>
 </ul>
@@ -490,27 +492,43 @@ HTML
 <li>Hỏi chủ đầu tư về mô hình cho thuê do chủ đầu tư hoặc đơn vị chuyên nghiệp vận hành.</li>
 <li>Tính thêm kịch bản cho thuê dài hạn (theo tháng) để không phụ thuộc hoàn toàn vào khách theo đêm.</li>
 </ol>
+<h2>Cho thuê căn hộ ngắn ngày hay dài hạn?</h2>
+<table>
+<thead><tr><th></th><th>Ngắn ngày (theo đêm)</th><th>Dài hạn (theo tháng, năm)</th></tr></thead>
+<tbody>
+<tr><td>Doanh thu</td><td>Có thể cao hơn vào mùa du lịch, biến động mạnh theo mùa</td><td>Thấp hơn nhưng ổn định</td></tr>
+<tr><td>Công vận hành</td><td>Đón khách, dọn phòng, giặt là, khai báo từng lượt khách</td><td>Ít, chủ yếu ký hợp đồng và thu tiền</td></tr>
+<tr><td>Pháp lý</td><td>Phụ thuộc công năng căn, quy chế tòa nhà, đăng ký cơ sở lưu trú</td><td>Hợp đồng thuê nhà, đăng ký tạm trú cho người thuê</td></tr>
+<tr><td>Hao mòn nội thất</td><td>Nhanh</td><td>Chậm hơn</td></tr>
+</tbody>
+</table>
+<p>Nhận định của Hoàng Hiệp: cho thuê căn hộ ngắn ngày chỉ nên là kế hoạch chính khi quy chế tòa nhà cho phép rõ ràng và có đơn vị vận hành chuyên nghiệp. Với căn mua để cho thuê ở Sun Saphia Residence, nên có sẵn phương án cho thuê theo tháng để không phụ thuộc hoàn toàn vào khách theo đêm.</p>
 <p>Bài toán dòng tiền các kịch bản: xem <a href="/dau-tu-sun-saphia-residence-cho-thue-dong-tien/">đầu tư Sun Saphia Residence cho thuê</a>.</p>
 <p><em>Bài viết tổng hợp để tham khảo, không thay cho tư vấn pháp lý, thuế; quy định có thể thay đổi và khác nhau giữa các địa phương.</em></p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Cho thuê ngắn ngày Sun Saphia Residence: pháp lý, thuế',
-			'desc'      => 'Cho thuê ngắn ngày Sun Saphia Residence: đúng công năng, đăng ký cơ sở lưu trú, khai báo lưu trú cho khách, nộp thuế khi doanh thu trên 100 triệu/năm.',
+			'seo_title' => 'Cho thuê căn hộ ngắn ngày 2026: pháp lý, lưu trú, thuế',
+			'desc'      => 'Cho thuê căn hộ ngắn ngày ở Sun Saphia Residence: đúng công năng, đăng ký cơ sở lưu trú, khai báo tạm trú cho khách, thuế theo ngưỡng 1 tỷ đồng/năm.',
 			'points'    => array(
+				'Cho thuê căn hộ ngắn ngày cần xem công năng căn, quy chế tòa nhà và đăng ký cơ sở lưu trú',
 				'Căn hộ phải dùng đúng công năng ghi trong hợp đồng (Luật Nhà ở 2023)',
-				'Kinh doanh lưu trú du lịch cần đăng ký cơ sở lưu trú',
-				'Doanh thu cho thuê trên 100 triệu/năm phải kê khai thuế',
+				'Khách nước ngoài phải được khai báo tạm trú ngay khi đến (Thông tư 87/2026/TT-BCA)',
+				'Doanh thu cho thuê tài sản từ 1 tỷ đồng/năm trở xuống không phải nộp thuế GTGT, TNCN nhưng vẫn khai báo (2026)',
 			),
 			'faq'       => array(
 				array( 'Có được cho thuê căn hộ Sun Saphia Residence theo ngày không?', 'Phụ thuộc công năng căn hộ ghi trong hợp đồng, quy chế tòa nhà và quy định của Đà Nẵng về cơ sở lưu trú – cần hỏi rõ chủ đầu tư khi ký.' ),
-				array( 'Cho thuê căn hộ phải nộp thuế khi nào?', 'Cá nhân có doanh thu cho thuê trên 100 triệu đồng/năm phải kê khai, nộp thuế GTGT và thuế TNCN; tỷ lệ tùy cho thuê tài sản hay kinh doanh lưu trú.' ),
+				array( 'Cho thuê căn hộ phải nộp thuế khi nào?', 'Theo cách tính năm 2026 (Nghị định 141/2026), cá nhân cho thuê tài sản có doanh thu từ 1 tỷ đồng/năm trở xuống không phải nộp thuế GTGT, TNCN nhưng vẫn khai báo doanh thu; trên 1 tỷ thì GTGT 5% doanh thu, TNCN 5% phần vượt 1 tỷ. Kinh doanh dịch vụ lưu trú có thể khác – hỏi cơ quan thuế.' ),
+				array( 'Cho thuê căn hộ ngắn ngày cho khách nước ngoài cần làm gì?', 'Khai báo tạm trú ngay khi khách đến qua hệ thống khai báo điện tử của Bộ Công an hoặc phiếu khai báo, theo Thông tư 87/2026/TT-BCA có hiệu lực từ 24/7/2026.' ),
+				array( 'Cho thuê căn hộ ngắn ngày hay dài hạn tốt hơn?', 'Ngắn ngày có thể cho doanh thu cao hơn mùa du lịch nhưng tốn công vận hành và phụ thuộc quy chế tòa nhà; dài hạn ổn định, ít hao mòn nội thất. Nên có sẵn cả hai phương án.' ),
 			),
 		),
 		'sources'  => array(
 			'https://vnexpress.net/cho-thue-can-ho-ngan-ngay-trong-chung-cu-phai-dang-ky-hoat-dong-5062683.html',
 			'https://tuoitre.vn/cho-thue-chung-cu-theo-ngay-coi-chung-bi-phat-tram-trieu-vi-dung-nha-sai-muc-dich-10026091112545148.htm',
+			'https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/cach-tinh-thue-cho-thue-bat-dong-san-moi-nhat-2026-theo-nghi-dinh-141-va-nghi-dinh-68-20777.html',
+			'https://luatvietnam.vn/tin-van-ban-moi/tu-24-7-2026-co-so-luu-tru-phai-khai-bao-tam-tru-ngay-khi-nguoi-nuoc-ngoai-den-luu-tru-883-110512-article.html',
 		),
 	);
 

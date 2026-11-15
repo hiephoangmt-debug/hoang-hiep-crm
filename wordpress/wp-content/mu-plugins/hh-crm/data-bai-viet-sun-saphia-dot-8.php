@@ -351,7 +351,9 @@ function hh_posts_sun_saphia_dot_8b( $posts, $saphia, $review, $cta ) {
 
 	/* ---------------- 14/11 11:30 – Đi Hội An ---------------- */
 	$posts[] = array(
-		'slug'     => 'tu-sun-saphia-residence-di-hoi-an-bao-xa-lich-trinh',
+		'slug'     => 'sun-saphia-residence-di-hoi-an-bao-xa',
+		'old_slug' => array( 'tu-sun-saphia-residence-di-hoi-an-bao-xa-lich-trinh' ),
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá.
 		'title'    => 'Từ Sun Saphia Residence đi Hội An bao xa? Đường ven biển, xe buýt và lịch trình cho khách thuê',
 		'excerpt'  => 'Sun Saphia Residence nằm trên trục ven biển Võ Nguyên Giáp – Trường Sa nối thẳng tới Hội An. Quãng đường, thời gian, xe buýt, các điểm di sản trên đường và vì sao kết nối Hội An quan trọng với căn hộ cho thuê.',
 		'keyword'  => 'Sun Saphia Residence đi Hội An',
@@ -364,7 +366,7 @@ function hh_posts_sun_saphia_dot_8b( $posts, $saphia, $review, $cta ) {
 		'content'  => <<<HTML
 <p>Khách du lịch đến Đà Nẵng hầu như đều dành ít nhất một buổi cho phố cổ Hội An. Vì vậy câu hỏi <strong>Sun Saphia Residence đi Hội An</strong> mất bao lâu không chỉ là chuyện đi chơi – nó quyết định căn hộ có hợp với khách lưu trú nhiều ngày hay không. {$saphia} nằm ngay trên trục ven biển nối Đà Nẵng với Hội An, nên đây là một lợi thế đáng phân tích.</p>
 <!--hh-featured-->
-<h2>Quãng đường và thời gian</h2>
+<h2>Sun Saphia Residence đi Hội An: quãng đường và thời gian</h2>
 <table>
 <thead><tr><th>Tuyến</th><th>Quãng đường</th><th>Thời gian</th></tr></thead>
 <tbody>
@@ -374,29 +376,37 @@ function hh_posts_sun_saphia_dot_8b( $posts, $saphia, $review, $cta ) {
 </tbody>
 </table>
 <p>Số liệu trung tâm – Hội An và Sơn Thủy – sân bay theo các trang hướng dẫn du lịch, hãng bay; quãng Sơn Thủy – Hội An do Hoàng Hiệp ước tính trên bản đồ, thời gian thực tế phụ thuộc giờ cao điểm.</p>
-<h2>Đi bằng gì?</h2>
+<h2>Từ Sun Saphia Residence đi Hội An bằng gì?</h2>
 <ul>
 <li><strong>Taxi, xe công nghệ:</strong> nhanh và tiện nhất cho nhóm 2 – 4 người, đi thẳng đường Trường Sa – Lạc Long Quân.</li>
 <li><strong>Xe máy:</strong> phổ biến với khách trẻ, khách Hàn Quốc thuê dài ngày; đường ven biển rộng, nhiều đoạn có dải phân cách.</li>
 <li><strong>Xe buýt:</strong> tuyến buýt Đà Nẵng – Hội An chạy dọc trục Võ Nguyên Giáp – Trường Sa, đi ngang khu Sơn Thủy – lựa chọn tiết kiệm cho khách đi một mình.</li>
 <li><strong>Tour ghép:</strong> nhiều tour Hội An buổi chiều – tối đón khách tại khách sạn, căn hộ trong khu biển.</li>
 </ul>
-<!--hh-img:img/sun-saphia/sun-saphia-so-do-vi-tri.jpg|Sơ đồ vị trí Sun Saphia Residence trên trục ven biển Trường Sa, hướng về Hội An (tài liệu chủ đầu tư)-->
+<!--hh-img:img/sun-saphia/sun-saphia-so-do-vi-tri.jpg|Sun Saphia Residence đi Hội An theo trục ven biển Trường Sa – sơ đồ vị trí dự án (tài liệu chủ đầu tư)-->
 <h2>Những gì nằm trên đường từ Sun Saphia Residence đi Hội An</h2>
 <ul>
-<li><strong>Danh thắng Ngũ Hành Sơn và làng đá Non Nước</strong> – ngay đầu hành trình (xem <a href="/danh-thang-ngu-hanh-son-gan-sun-saphia-residence/">Ngũ Hành Sơn gần Sun Saphia Residence</a>).</li>
+<li><strong>Danh thắng Ngũ Hành Sơn và làng đá Non Nước</strong> – ngay đầu hành trình (xem <a href="/danh-thang-ngu-hanh-son-gan-sun-saphia-residence/">danh thắng Ngũ Hành Sơn</a>).</li>
 <li><strong>Dải resort ven biển</strong> trên đường Trường Sa – Lạc Long Quân: nhiều thương hiệu khách sạn quốc tế, sân golf.</li>
 <li><strong>Bãi biển An Bàng, Cửa Đại</strong> ở phía Hội An.</li>
 <li><strong>Phố cổ Hội An</strong> – di sản văn hóa thế giới UNESCO công nhận năm 1999; xa hơn là <strong>Thánh địa Mỹ Sơn</strong> (di sản thế giới 1999) và <strong>Cù Lao Chàm</strong> (khu dự trữ sinh quyển thế giới 2009).</li>
 </ul>
-<p>Từ ngày 01/7/2025, sau sắp xếp đơn vị hành chính, Hội An thuộc thành phố Đà Nẵng mới. Điều này giúp việc quy hoạch, đầu tư hạ tầng ven biển nối hai khu được tính chung một thành phố.</p>
+<p>Thông tin điểm đến, lễ hội ở Hội An và Đà Nẵng có thể tra trên cổng du lịch chính thức <a href="https://danangfantasticity.com/">Danang Fantasticity</a>. Từ ngày 01/7/2025, sau sắp xếp đơn vị hành chính, Hội An thuộc thành phố Đà Nẵng mới. Điều này giúp việc quy hoạch, đầu tư hạ tầng ven biển nối hai khu được tính chung một thành phố.</p>
 <h2>Hạ tầng sắp tới trên trục Đà Nẵng – Hội An</h2>
 <ul>
 <li><strong>Mở rộng đường Võ Nguyên Giáp – Trường Sa – Lạc Long Quân</strong>, vốn dự kiến 2.633 tỷ đồng – xem <a href="/mo-rong-duong-vo-nguyen-giap-truong-sa-lac-long-quan-2633-ty/">bài chi tiết</a>.</li>
 <li><strong>Đường sắt đô thị sân bay – Mỹ Khê – Hội An</strong>: giai đoạn đầu là tuyến LRT nối sân bay với biển; theo tài liệu chủ đầu tư, ga LRT 09 cách dự án khoảng 500 m – xem <a href="/duong-sat-do-thi-san-bay-my-khe-hoi-an-bat-dong-san-huong-loi/">tiến độ tuyến đường sắt</a>.</li>
 </ul>
 <p>Các dự án này đang ở bước chuẩn bị đầu tư; tiến độ thực tế có thể thay đổi.</p>
-<h2>Vì sao kết nối Hội An quan trọng với căn hộ cho thuê?</h2>
+<h2>Lịch trình mẫu: một ngày từ Sun Saphia Residence đi Hội An</h2>
+<ul>
+<li><strong>Sáng:</strong> tắm biển Sơn Thủy, ăn sáng gần nhà.</li>
+<li><strong>Trưa – chiều:</strong> ghé Ngũ Hành Sơn, làng đá Non Nước, rồi theo đường Trường Sa – Lạc Long Quân vào Hội An; có thể dừng biển An Bàng.</li>
+<li><strong>Chiều tối:</strong> dạo phố cổ khi lên đèn lồng, ăn tối với cao lầu, cơm gà.</li>
+<li><strong>Tối:</strong> quay về căn hộ khoảng 35 – 45 phút taxi.</li>
+</ul>
+<p>Lịch này cho thấy lợi thế của việc ở khu Sơn Thủy: khách không cần đổi chỗ ở, vẫn đi được cả Đà Nẵng và Hội An trong ngày. Chủ căn có thể in lịch trình Sun Saphia Residence đi Hội An thành tờ hướng dẫn, kèm số điện thoại taxi và giờ xe buýt.</p>
+<h2>Vì sao tuyến Sun Saphia Residence đi Hội An quan trọng với căn hộ cho thuê?</h2>
 <ol>
 <li><strong>Khách ở lâu hơn:</strong> khách muốn đi cả Đà Nẵng và Hội An thường chọn một chỗ ở giữa để khỏi đổi khách sạn – căn hộ khu Sơn Thủy đáp ứng đúng nhu cầu này.</li>
 <li><strong>Giá phòng Hội An mùa cao điểm cao</strong>, khách có thể chọn ở biển Đà Nẵng rồi đi Hội An buổi tối.</li>
@@ -404,39 +414,44 @@ function hh_posts_sun_saphia_dot_8b( $posts, $saphia, $review, $cta ) {
 </ol>
 <h2>Cần cân nhắc</h2>
 <ul>
-<li>Khách chỉ muốn ở ngay phố cổ sẽ không chọn Đà Nẵng; Sun Saphia Residence phục vụ tốt nhóm khách "biển là chính, Hội An là một buổi".</li>
+<li>Khách chỉ muốn ở ngay phố cổ sẽ không chọn ở Sun Saphia Residence đi Hội An mỗi ngày; Sun Saphia Residence phục vụ tốt nhóm khách "biển là chính, Hội An là một buổi".</li>
 <li>Giờ cao điểm, mùa lễ hội, đường ven biển có thể đông; thời gian nêu trên chỉ là tham khảo.</li>
 </ul>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Nằm giữa sân bay, Ngũ Hành Sơn và Hội An là điểm mạnh vị trí của Sun Saphia Residence so với các dự án sâu trong trung tâm. Khi làm tin đăng cho thuê, nên đưa lịch trình gợi ý Đà Nẵng – Hội An để tăng tỷ lệ khách đặt nhiều đêm. Xem thêm <a href="/sun-saphia-residence-o-dau-vi-tri/">vị trí Sun Saphia Residence</a> và bài {$review}.</p>
+<p>Nằm giữa sân bay, Ngũ Hành Sơn và Hội An là điểm mạnh vị trí của Sun Saphia Residence so với các dự án sâu trong trung tâm. Khi làm tin đăng cho thuê, nên đưa lịch trình gợi ý Sun Saphia Residence đi Hội An để tăng tỷ lệ khách đặt nhiều đêm. Xem thêm <a href="/sun-saphia-residence-o-dau-vi-tri/">vị trí Sun Saphia Residence</a> và bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: quãng đường Đà Nẵng – Hội An, sân bay – Sơn Thủy theo các trang hướng dẫn du lịch, hãng bay (tra cứu 11/11/2026); di sản theo UNESCO; hạ tầng theo báo chí và tài liệu chủ đầu tư. Quãng Sơn Thủy – Hội An do Hoàng Hiệp ước tính.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Sun Saphia Residence đi Hội An bao xa, mất bao lâu?',
+			'seo_title' => 'Sun Saphia Residence đi Hội An: 22 – 25 km, 35 – 45 phút',
 			'desc'      => 'Sun Saphia Residence đi Hội An ước 22 – 25 km theo đường ven biển, khoảng 35 – 45 phút; sân bay 9 – 14 km. Xe buýt, lịch trình và lợi thế cho thuê.',
 			'points'    => array(
 				'Trung tâm Đà Nẵng – Hội An khoảng 30 km, 40 – 60 phút',
-				'Khu Sơn Thủy – Hội An ước 22 – 25 km, khoảng 35 – 45 phút',
+				'Sun Saphia Residence đi Hội An ước 22 – 25 km, khoảng 35 – 45 phút',
 				'Tuyến buýt Đà Nẵng – Hội An chạy dọc trục Võ Nguyên Giáp – Trường Sa',
 				'Từ 01/7/2025 Hội An thuộc thành phố Đà Nẵng',
 			),
 			'faq'       => array(
 				array( 'Từ Sun Saphia Residence đi Hội An mất bao lâu?', 'Ước khoảng 35 – 45 phút đi taxi theo đường ven biển Trường Sa – Lạc Long Quân (quãng đường ước 22 – 25 km), tùy giờ cao điểm.' ),
-				array( 'Có xe buýt từ khu Sơn Thủy đi Hội An không?', 'Có tuyến buýt Đà Nẵng – Hội An chạy dọc trục Võ Nguyên Giáp – Trường Sa, đi ngang khu Sơn Thủy.' ),
+				array( 'Có xe buýt từ Sun Saphia Residence đi Hội An không?', 'Có tuyến buýt Đà Nẵng – Hội An chạy dọc trục Võ Nguyên Giáp – Trường Sa, đi ngang khu Sơn Thủy.' ),
 				array( 'Sun Saphia Residence cách sân bay Đà Nẵng bao xa?', 'Khu biển Sơn Thủy cách sân bay khoảng 9 – 14 km, khoảng 20 phút đi taxi.' ),
+				array( 'Nên đi từ Sun Saphia Residence đi Hội An vào giờ nào?', 'Nên đi chiều muộn để dạo phố cổ khi lên đèn và tránh nắng trưa; tránh giờ cao điểm, mùa lễ hội vì đường ven biển có thể đông.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://danangfantasticity.com/',
+		),
 	);
 
 	/* ---------------- 14/11 16:30 – Cho thuê dài hạn ---------------- */
 	$posts[] = array(
-		'slug'     => 'cho-thue-dai-han-sun-saphia-residence-chuyen-gia-gia-dinh',
+		'slug'     => 'cho-thue-dai-han-sun-saphia-residence',
+		'old_slug' => array( 'cho-thue-dai-han-sun-saphia-residence-chuyen-gia-gia-dinh' ),
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá.
 		'title'    => 'Cho thuê dài hạn Sun Saphia Residence: giá thuê tháng khu Ngũ Hành Sơn, tỷ suất và so với cho thuê ngắn ngày',
 		'excerpt'  => 'Không phải ai cũng muốn vận hành cho thuê theo đêm. Cho thuê dài hạn Sun Saphia Residence: giá thuê căn hộ nhỏ khu Ngũ Hành Sơn khoảng 4 – 12 triệu/tháng, tính thử tỷ suất trên giá dự kiến và so sánh với cho thuê ngắn ngày.',
-		'keyword'  => 'cho thuê dài hạn Sun Saphia Residence',
+		'keyword'  => 'thuê dài hạn Sun Saphia Residence',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'cho thuê căn hộ dài hạn Đà Nẵng', 'giá thuê studio Ngũ Hành Sơn', 'tỷ suất cho thuê căn hộ' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-14 16:30',
@@ -444,7 +459,7 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Cho thuê căn hộ', 'Đầu tư căn hộ' ),
 		'image'    => 'plugin:img/tin-tuc/cho-thue-dai-han-sun-saphia.jpg',
 		'content'  => <<<HTML
-<p>Phần lớn bài viết về {$saphia} nói tới cho thuê theo đêm. Nhưng nhiều anh chị ở xa, không có thời gian vận hành, lại hỏi về <strong>cho thuê dài hạn Sun Saphia Residence</strong>: thuê theo tháng, theo năm cho chuyên gia, người làm việc từ xa, gia đình nhỏ. Bài này dùng giá thuê đang chào trên thị trường khu Ngũ Hành Sơn để tính thử và so sánh hai cách.</p>
+<p>Cho <strong>thuê dài hạn Sun Saphia Residence</strong> là lựa chọn ít được nhắc tới, vì phần lớn bài viết về {$saphia} nói tới cho thuê theo đêm. Nhưng nhiều anh chị ở xa, không có thời gian vận hành, lại hỏi về cho thuê dài hạn Sun Saphia Residence: thuê theo tháng, theo năm cho chuyên gia, người làm việc từ xa, gia đình nhỏ. Bài này dùng giá thuê đang chào trên thị trường khu Ngũ Hành Sơn để tính thử và so sánh hai cách.</p>
 <!--hh-featured-->
 <h2>Giá thuê tháng khu Ngũ Hành Sơn hiện nay</h2>
 <p>Theo các tin chào thuê studio, căn hộ nhỏ khu Ngũ Hành Sơn trên các trang rao vặt (tra cứu 11/11/2026), mức giá phổ biến khoảng <strong>4 – 12 triệu đồng/tháng</strong>. Khoảng giá rộng vì gồm cả phòng studio trong nhà dân, căn hộ dịch vụ và căn hộ cao tầng có bể bơi. Căn hộ mới, view biển, có tiện ích như Sun Saphia Residence nhiều khả năng nằm ở nửa trên của khoảng này – nhưng đây là nhận định, chưa có giá thuê thực tế vì dự án dự kiến bàn giao 11/2028.</p>
@@ -458,8 +473,8 @@ HTML
 </tbody>
 </table>
 <p>Cách tính của Hoàng Hiệp: giá dự kiến studio 30 m² tầng 15 là 2,13 tỷ (dãy phía sau) và 2,85 tỷ (dãy mặt biển) theo chủ đầu tư 28/10/2026, chưa VAT, 2% bảo trì và nội thất; phí quản lý lấy giữa khoảng 15.000 – 20.000 đ/m² cho 30 m². Nếu cộng các chi phí này vào vốn, tỷ suất thực sẽ thấp hơn bảng trên. Giả định 12 tháng kín khách, chưa trừ thuế cho thuê.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Layout studio 30 m² Sun Saphia Residence – loại căn hợp cho người đi làm thuê dài hạn (bản vẽ chủ đầu tư)-->
-<h2>So với cho thuê ngắn ngày</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Thuê dài hạn Sun Saphia Residence – layout studio 30 m² hợp người đi làm (bản vẽ chủ đầu tư)-->
+<h2>Cho thuê dài hạn Sun Saphia Residence so với cho thuê ngắn ngày</h2>
 <table>
 <thead><tr><th></th><th>Cho thuê dài hạn</th><th>Cho thuê ngắn ngày</th></tr></thead>
 <tbody>
@@ -471,17 +486,17 @@ HTML
 <tr><td>Thủ tục</td><td>Hợp đồng thuê, khai báo tạm trú</td><td>Khai báo lưu trú từng lượt khách, có thể cần đăng ký kinh doanh lưu trú</td></tr>
 </tbody>
 </table>
-<p>Ví dụ đối chiếu: studio cho thuê ngắn ngày 2,2 triệu/đêm, 12 đêm/tháng, doanh thu 26,4 triệu; trừ 35% chi phí còn khoảng 17,2 triệu/tháng – cao hơn nhiều so với 9 triệu cho thuê dài hạn. Nhưng chỉ cần một tháng mùa mưa còn 4 – 5 đêm, con số này giảm mạnh. Cách tính theo mùa xem <a href="/mua-du-lich-da-nang-cong-suat-phong-cho-thue-sun-saphia/">mùa du lịch và lấp đầy</a>.</p>
-<h2>Ai thuê dài hạn căn hộ ven biển?</h2>
+<p>Ví dụ đối chiếu: studio cho thuê ngắn ngày 2,2 triệu/đêm, 12 đêm/tháng, doanh thu 26,4 triệu; trừ 35% chi phí còn khoảng 17,2 triệu/tháng – cao hơn nhiều so với 9 triệu cho thuê dài hạn. Nhưng chỉ cần một tháng mùa mưa còn 4 – 5 đêm, con số này giảm mạnh. Cách tính theo mùa xem <a href="/cong-suat-phong-da-nang-mua-du-lich-sun-saphia/">mùa du lịch và lấp đầy</a>.</p>
+<h2>Ai sẽ thuê dài hạn Sun Saphia Residence?</h2>
 <ul>
-<li><strong>Chuyên gia, người nước ngoài làm việc tại Đà Nẵng</strong> – người nước ngoài không mua được Sun Saphia Residence nhưng được thuê (xem <a href="/nguoi-nuoc-ngoai-viet-kieu-mua-sun-saphia-residence-duoc-khong/">bài về người nước ngoài</a>).</li>
-<li><strong>Người làm việc từ xa</strong> ở 1 – 3 tháng, thích gần biển.</li>
+<li><strong>Chuyên gia, người nước ngoài làm việc tại Đà Nẵng</strong> – người nước ngoài không mua được Sun Saphia Residence nhưng được thuê (xem <a href="/nguoi-nuoc-ngoai-mua-can-ho-sun-saphia/">bài về người nước ngoài</a>).</li>
+<li><strong>Người làm việc từ xa</strong> ở 1 – 3 tháng, thích gần biển (xem <a href="/digital-nomad-da-nang-thue-can-ho-sun-saphia/">digital nomad Đà Nẵng</a>).</li>
 <li><strong>Gia đình nhỏ</strong> thuê căn 1PN+ hoặc 2PN trong thời gian chờ nhà riêng.</li>
 <li><strong>Nhân sự resort, khách sạn</strong> trên dải Trường Sa – Lạc Long Quân.</li>
 </ul>
-<h2>Kết hợp hai cách</h2>
+<h2>Kết hợp thuê dài hạn Sun Saphia Residence và cho thuê theo đêm</h2>
 <p>Một cách nhiều chủ nhà ở Đà Nẵng áp dụng: <strong>cho thuê theo tháng vào mùa thấp điểm</strong> (khoảng tháng 9 – 1, mùa mưa) và <strong>theo đêm vào mùa cao điểm</strong> (tháng 4 – 8, dịp pháo hoa). Cách này cần chủ nhà linh hoạt, và hợp đồng thuê tháng nên ghi rõ thời hạn để không vướng mùa cao điểm. Sun Saphia Residence cho chủ căn <strong>tự quyết để ở hay cho thuê</strong>, không bắt buộc ký gửi lại chủ đầu tư, nên có thể chọn được cách này.</p>
-<h2>Hợp đồng thuê dài hạn cần ghi gì?</h2>
+<h2>Hợp đồng thuê dài hạn Sun Saphia Residence cần ghi gì?</h2>
 <ol>
 <li>Ai trả phí quản lý, điện, nước, internet, gửi xe.</li>
 <li>Tiền cọc (thường 1 – 2 tháng), kỳ thanh toán.</li>
@@ -489,28 +504,32 @@ HTML
 <li>Điều kiện chấm dứt sớm, báo trước bao lâu.</li>
 <li>Trách nhiệm khai báo tạm trú theo Luật Cư trú.</li>
 </ol>
+<p>Thu nhập từ cho thuê dài hạn Sun Saphia Residence cũng phải kê khai thuế khi doanh thu vượt ngưỡng; cách tính thuế cho thuê bất động sản 2026 xem <a href="https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/cach-tinh-thue-cho-thue-bat-dong-san-moi-nhat-2026-theo-nghi-dinh-141-va-nghi-dinh-68-20777.html">Thư viện Pháp luật</a>.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Cho thuê dài hạn cho tỷ suất thấp hơn nhưng ổn định, ít tốn công – hợp người mua ở xa hoặc mua để giữ tài sản. Người muốn tối ưu dòng tiền vẫn nên cho thuê ngắn ngày hoặc kết hợp theo mùa. Đừng dùng các con số trên như cam kết: giá thuê năm 2028 – 2029 còn phụ thuộc nguồn cung căn hộ mới quanh khu biển. Xem thêm <a href="/dau-tu-sun-saphia-residence-cho-thue-dong-tien/">3 kịch bản dòng tiền</a> và bài {$review}.</p>
+<p>Cho thuê dài hạn Sun Saphia Residence cho tỷ suất thấp hơn nhưng ổn định, ít tốn công – hợp người mua ở xa hoặc mua để giữ tài sản. Người muốn tối ưu dòng tiền vẫn nên cho thuê ngắn ngày hoặc kết hợp theo mùa. Đừng dùng các con số trên như cam kết: giá thuê năm 2028 – 2029 còn phụ thuộc nguồn cung căn hộ mới quanh khu biển. Xem thêm <a href="/dau-tu-sun-saphia-residence-cho-thue-dong-tien/">3 kịch bản dòng tiền</a> và bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: giá chào thuê căn hộ nhỏ khu Ngũ Hành Sơn trên các trang rao vặt (tra cứu 11/11/2026, giá chào, chưa phải giá giao dịch); giá dự kiến, phí quản lý, giá thuê theo đêm và chi phí vận hành theo chủ đầu tư (28/10 và 04/11/2026). Bảng tính của Hoàng Hiệp, mang tính minh họa.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Cho thuê dài hạn Sun Saphia Residence: giá, tỷ suất',
+			'seo_title' => 'Thuê dài hạn Sun Saphia Residence: 4 – 12 triệu/tháng',
 			'desc'      => 'Cho thuê dài hạn Sun Saphia Residence: giá thuê căn hộ nhỏ khu Ngũ Hành Sơn 4 – 12 triệu/tháng, tỷ suất ước 2,7 – 5,9%, so với cho thuê theo đêm.',
 			'points'    => array(
-				'Giá chào thuê căn hộ nhỏ khu Ngũ Hành Sơn khoảng 4 – 12 triệu/tháng',
+				'Thuê dài hạn Sun Saphia Residence: giá chào thuê căn hộ nhỏ khu Ngũ Hành Sơn khoảng 4 – 12 triệu/tháng',
 				'Tỷ suất ước 2,7 – 5,9%/năm tùy giá thuê và dãy căn (minh họa)',
 				'Cho thuê ngắn ngày doanh thu cao hơn nhưng dao động theo mùa',
 				'Có thể kết hợp: thuê tháng mùa thấp điểm, thuê đêm mùa cao điểm',
 			),
 			'faq'       => array(
 				array( 'Cho thuê dài hạn studio Sun Saphia Residence được bao nhiêu?', 'Chưa có giá thực tế vì dự án dự kiến bàn giao 11/2028. Giá chào thuê căn hộ nhỏ khu Ngũ Hành Sơn hiện khoảng 4 – 12 triệu/tháng để tham khảo.' ),
-				array( 'Cho thuê dài hạn hay ngắn ngày lợi hơn?', 'Ngắn ngày doanh thu cao hơn nhưng tốn chi phí vận hành (khoảng 35% doanh thu theo chủ đầu tư) và dao động theo mùa; dài hạn ổn định, ít công sức.' ),
-				array( 'Mua Sun Saphia Residence có bắt buộc ký gửi cho thuê không?', 'Không. Chủ căn hộ tự quyết để ở hay cho thuê, tự vận hành hoặc thuê đơn vị bên ngoài.' ),
+				array( 'Cho thuê dài hạn Sun Saphia Residence hay ngắn ngày lợi hơn?', 'Ngắn ngày doanh thu cao hơn nhưng tốn chi phí vận hành (khoảng 35% doanh thu theo chủ đầu tư) và dao động theo mùa; dài hạn ổn định, ít công sức.' ),
+				array( 'Mua Sun Saphia Residence có bắt buộc ký gửi cho thuê không?', 'Không. Chủ căn hộ tự quyết để ở hay cho thuê dài hạn, tự vận hành hoặc thuê đơn vị bên ngoài.' ),
+				array( 'Ai thường thuê dài hạn Sun Saphia Residence?', 'Dự kiến là chuyên gia, người nước ngoài làm việc tại Đà Nẵng, người làm việc từ xa, gia đình nhỏ và nhân sự resort, khách sạn trên dải Trường Sa.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/cach-tinh-thue-cho-thue-bat-dong-san-moi-nhat-2026-theo-nghi-dinh-141-va-nghi-dinh-68-20777.html',
+		),
 	);
 
 	/* ---------------- 15/11 11:30 – Tầng cao hay tầng thấp ---------------- */
