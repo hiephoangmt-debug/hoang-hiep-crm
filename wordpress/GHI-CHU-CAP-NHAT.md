@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.285**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.286**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.286 (15/11/2026) – tháp Aurora Đà Nẵng Downtown
+
+- Trang **Đà Nẵng Downtown** thêm mục **"Tháp Aurora 408 m: phân tầng chức năng"**: bảng 13 khối tầng (504 căn hộ cao cấp tầng 11 – 22 và 28 – 42, 396 phòng lưu trú tầng 43 – 67, 2 penthouse tầng 68 – 69, TTTM, nhà hàng, hội nghị, rạp phim) + sơ đồ phân tầng tự vẽ (ảnh anh gửi có chữ chìm trang khác nên không đăng nguyên ảnh).
+- Thêm vào Điểm nổi bật, Phân khu, Số tầng. Ghi rõ "theo tài liệu giới thiệu, tham khảo".
+- Sau khi cài: **Nhập / cập nhật dữ liệu** → LiteSpeed **Purge All**.
 
 ## Có gì mới – 2.20.285 (15/11/2026) – ảnh tin tức đổi sang mẫu thống nhất
 
