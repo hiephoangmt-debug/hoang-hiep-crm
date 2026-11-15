@@ -27,7 +27,7 @@ def b64(p):
 
 
 faces = ''
-for fam, key, weights in (('BVP', 'be-vietnam-pro', (400, 500, 600, 700)), ('PF', 'playfair-display', (700,))):
+for fam, key, weights in (('BVP', 'be-vietnam-pro', (400, 500, 600, 700)), ('PF', 'playfair-display', (700,)), ('GV', 'great-vibes', (400,)), ('CG', 'cormorant-garamond', (500, 600, 700)), ('CSC', 'cormorant-sc', (500, 600, 700))):
     for w in weights:
         for sub, rng in R.items():
             f = os.path.join(FD, '%s-%d-%s.woff2' % (key, w, sub))
@@ -78,22 +78,23 @@ else:
     body = '''<div class="card lux">
 <div class="ph" style="background-image:url(%s);background-position:%s"><div class="tag">%s</div></div>
 <div class="in">
- <h1>%s</h1><p class="sub">%s</p>
+ %s<h1>%s</h1><p class="sub">%s</p>
  <div class="stats">%s</div>
  <ul>%s</ul>
  <div class="box">%s</div>
  <div class="bt">%s<p class="note">%s</p></div>
-</div></div>''' % (bg, pos, e(c['tag']), e(c['title']), e(c['sub']), st, it, e(c.get('box', '')), foot, e(c.get('note', '')))
+</div></div>''' % (bg, pos, e(c['tag']), ('<div class="scr">%s</div>' % e(c['script'])) if c.get('script') else '', e(c['title']), e(c['sub']), st, it, e(c.get('box', '')), foot, e(c.get('note', '')))
     css = '''
+.lux .scr{font:400 66px/1 GV;margin:0 0 -8px -4px;background:linear-gradient(180deg,#d29a5f,#8e5222);-webkit-background-clip:text;color:transparent;padding:6px 10px 10px 4px}
 .lux{background:#f7f2e8;color:#14233f}
 .lux .ph{position:absolute;left:36px;right:36px;top:36px;height:560px;border-radius:28px;background-size:cover;box-shadow:0 18px 40px rgba(20,35,63,.18)}
 .lux .tag{position:absolute;left:26px;top:26px;font:600 20px BVP;letter-spacing:.14em;text-transform:uppercase;padding:11px 20px;border-radius:999px;background:rgba(247,242,232,.92);color:#8a6a2b}
 .lux .in{position:absolute;left:64px;right:64px;top:630px;bottom:36px;display:flex;flex-direction:column}
-.lux h1{font:700 60px/1.1 PF;margin:0 0 10px;color:#14233f}
+.lux h1{font:700 64px/1.02 CSC;margin:0 0 12px;letter-spacing:.01em;background:linear-gradient(180deg,#b97a45 0%,#7a3f18 55%,#a8693a 100%);-webkit-background-clip:text;color:transparent;padding-bottom:4px}
 .lux .sub{font:500 27px/1.35 BVP;color:#9a7433;margin:0 0 24px}
 .lux .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1.5px solid #d9c9a6;border-bottom:1.5px solid #d9c9a6;margin-bottom:22px}
 .lux .st{padding:18px 8px;text-align:center}.lux .st+.st{border-left:1px solid #e3d6b9}
-.lux .st b{display:block;font:700 32px/1.1 BVP;color:#a57a2c;white-space:nowrap}
+.lux .st b{display:block;font:700 36px/1.1 CG;color:#9a5a28;white-space:nowrap;font-variant-numeric:lining-nums}
 .lux .st span{display:block;font:500 17px/1.3 BVP;color:#5d6b84;margin-top:8px}
 .lux ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:16px 28px}
 .lux li{display:flex;gap:14px}
