@@ -100,7 +100,7 @@ elif STYLE == 'poster':
 .pos h1{margin:26px 0 4px;display:flex;flex-direction:column;align-items:center}
 .pos .ln{display:flex;align-items:baseline;justify-content:center;gap:18px;white-space:nowrap;position:relative}
 .pos .ln.over{margin-top:-26px;z-index:2}
-.pos .l{display:inline-block;white-space:nowrap;filter:drop-shadow(0 1px 0 rgba(255,255,255,.7)) drop-shadow(0 3px 6px rgba(120,60,20,.18));-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(180deg,#d39a5c 0%,#8a4a1c 55%,#b8783f 100%);font-variant-numeric:lining-nums}
+.pos .l{display:inline-block;white-space:nowrap;padding:.28em .08em .22em !important;margin:-.28em -.08em -.22em !important;filter:drop-shadow(0 1px 0 rgba(255,255,255,.7)) drop-shadow(0 3px 6px rgba(120,60,20,.18));-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(180deg,#d39a5c 0%,#8a4a1c 55%,#b8783f 100%);font-variant-numeric:lining-nums}
 .pos .script{font:400 96px/1.1 GV;padding:4px 18px 16px 10px;margin:0 -10px -10px 0}
 .pos .cap{font:600 62px/1 CSC;letter-spacing:.05em}
 .pos .plain{font:500 58px/1.1 CG;letter-spacing:.03em;padding-bottom:4px;background-image:linear-gradient(180deg,#a8693a,#6e3510)}

@@ -73,3 +73,4 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
   3. Dòng dưới: chữ nghiêng Great Vibes ngắn (kiểu "script"), lệch phải (dx 160–240) và chạm nhẹ góc dưới chữ to ("over": true), ví dụ "Đà Nẵng", "Residence", "100% căn hộ". Không quá ~16 ký tự để không tràn mép.
   Ví dụ: [{"segs":[["Mặt bằng căn hộ","plain"]]},{"segs":[["THE LEGEND","big"]]},{"segs":[["Đà Nẵng","script"]],"dx":230,"over":true}]
 - Xem ảnh trước khi đăng: chữ không tràn mép, dòng nghiêng không đè che chữ to.
+- KIỂM TRA DẤU TIẾNG VIỆT trên ảnh (15/11/2026 lỗi "BÂT ĐÔNG SÁN"): chữ in hoa có dấu chồng (Ấ, Ầ, Ẩ, Ộ, Ợ…) phải hiện đủ dấu; xem phóng to phần tiêu đề trước khi hẹn bài.
