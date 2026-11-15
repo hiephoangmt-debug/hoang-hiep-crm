@@ -172,7 +172,7 @@ HTML,
 		'image'     => 'plugin:img/tin-tuc/tin-ha-tang-da-nang-thang-10-2026.jpg',
 		'image_alt' => 'Tin hạ tầng Đà Nẵng tháng 10/2026 – các công trình đang triển khai',
 		'content'   => <<<'HTML'
-<p>Bản <strong>tin hạ tầng Đà Nẵng</strong> đầu tháng 10/2026 tổng hợp các công trình giao thông đang thi công, sắp thi công và các quyết định mới của thành phố – kèm nhận định ngắn về khu vực bất động sản chịu tác động. Thông tin lấy từ báo chí chính thống; mục nào còn ở dạng kế hoạch, đề xuất được ghi rõ.</p>
+<p>Bản <strong>tin hạ tầng Đà Nẵng</strong> đầu tháng 10/2026 tổng hợp các công trình giao thông đang thi công, sắp thi công và các quyết định mới của thành phố – kèm nhận định ngắn về khu vực bất động sản chịu tác động. Thông tin trong tin hạ tầng Đà Nẵng lấy từ báo chí chính thống; mục nào còn ở dạng kế hoạch, đề xuất được ghi rõ.</p>
 <p>Cách đọc bản tin hạ tầng Đà Nẵng: công trình đã khởi công có tác động rõ nhất tới khu vực xung quanh; công trình mới phê duyệt hoặc đề xuất cần theo dõi thêm. Mỗi mục có liên kết tới bài phân tích chi tiết.</p>
 
 <h2>Tin hạ tầng Đà Nẵng tháng 10/2026: bảng tóm tắt</h2>
@@ -207,7 +207,7 @@ HTML,
 
 <h2>Đọc tin hạ tầng Đà Nẵng: nhận định cho người mua bất động sản</h2>
 <ul>
-<li><strong>Ưu tiên hạ tầng đã khởi công:</strong> cầu Hòa Xuân, Quốc lộ 14D đã thi công thật; tác động đến khu vực xung quanh rõ ràng hơn các dự án còn ở dạng đề xuất.</li>
+<li><strong>Ưu tiên hạ tầng đã khởi công:</strong> trong tin hạ tầng Đà Nẵng tháng này, cầu Hòa Xuân, Quốc lộ 14D đã thi công thật; tác động đến khu vực xung quanh rõ ràng hơn các dự án còn ở dạng đề xuất.</li>
 <li><strong>Tính thời gian:</strong> các công trình trong tin hạ tầng Đà Nẵng kỳ này phần lớn hoàn thành giai đoạn 2027 – 2029; nên chọn tài sản ở hoặc cho thuê được ngay, coi hạ tầng là điểm cộng.</li>
 <li><strong>Kiểm tra pháp lý, quy hoạch:</strong> nhất là lô đất gần nút giao, tuyến mở rộng. Xem <a href="/kiem-tra-phap-ly-quy-hoach-nha-dat-da-nang/">cách kiểm tra quy hoạch nhà đất Đà Nẵng</a>.</li>
 </ul>
@@ -226,7 +226,7 @@ HTML,
 				array( 'Tin hạ tầng Đà Nẵng tháng 10/2026 có gì đáng chú ý nhất?', 'Điểm đáng chú ý nhất trong tin hạ tầng Đà Nẵng tháng 10/2026 là các công trình đã thi công thật: cụm nút giao cầu Hòa Xuân (khởi công 25/8/2026) và Quốc lộ 14D (khởi công 26/6/2026); cùng với đó là việc HĐND điều chỉnh kế hoạch đầu tư công 2026 – 2030 ngày 6/10/2026.' ),
 				array( 'Cầu Hòa Xuân khởi công chưa?', 'Đã khởi công ngày 25/8/2026, gồm hầm chui Cách Mạng Tháng Tám, hầm chui Thăng Long, mở rộng Lê Thanh Nghị và cầu mới phía hạ lưu; thi công dự kiến 730 ngày.' ),
 				array( 'Đường vành đai phía Bắc Quảng Nam bao giờ xong?', 'UBND TP Đà Nẵng yêu cầu thi công trong tháng 10/2026 ở phần đã có mặt bằng và phấn đấu hoàn thành toàn bộ vào tháng 5/2027.' ),
-				array( 'Hạ tầng nào ảnh hưởng nhiều nhất đến bất động sản Đà Nẵng cuối 2026?', 'Các công trình đã khởi công như cụm nút giao cầu Hòa Xuân (phía Nam) và hạ tầng kết nối cảng Liên Chiểu (phía Tây Bắc) có tác động rõ nhất đến khu vực xung quanh.' ),
+				array( 'Hạ tầng nào ảnh hưởng nhiều nhất đến bất động sản Đà Nẵng cuối 2026?', 'Theo tin hạ tầng Đà Nẵng cuối 2026, các công trình đã khởi công như cụm nút giao cầu Hòa Xuân (phía Nam) và hạ tầng kết nối cảng Liên Chiểu (phía Tây Bắc) có tác động rõ nhất đến khu vực xung quanh.' ),
 			),
 		),
 		'sources'   => array(
