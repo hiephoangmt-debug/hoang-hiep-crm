@@ -23,3 +23,8 @@ Xem `marketing/anh-khu-vuc/README.md`: biển Mỹ Khê, sông Hàn, cầu Rồn
 
 ## Nội thất minh hoạ Sun Saphia (anh Hiệp chỉ 11/11/2026)
 Phối cảnh nội thất theo layout từng căn: `projects/sun-saphia/images/noi-that-crm/`. Mã ảnh: `sp-t-XX-*` = căn tầng điển hình 3A – 28 (mã chỉ có living/living2/top là STUDIO: t-01, 02, 05–09, 12, 12a, 15, 16, 20–27; mã có bed/plus là 1PN+ hoặc 2PN); `sp-30-XX-*` = căn tầng 30 có phòng ngủ (KHÔNG phải studio); `sp-g2/g3-*` = căn sân vườn tầng 2, 3; `sp3010-lux-*` = căn 30-10 bản luxury. Ảnh `*-top` có ghi mã căn – không đăng (commit fe527406f2a378cd18fc76a70e85db106e730b3d, xem trong app chọn căn `projects/sun-saphia/chon-can/chon-can-app.html`). Dùng cho bài nội thất, cho thuê, căn mẫu Sun Saphia; ghi chú "nội thất minh hoạ theo layout CĐT, không phải gói bàn giao". Ảnh có dải chữ nhỏ ở đáy, khi cắt khung nên bỏ phần đáy.
+
+## Sun Saphia – flycam THỰC TẾ 17/10/2026 (ưu tiên dùng, anh Hiệp gửi 15/11/2026)
+- 12 ảnh đã chỉnh màu: `marketing/anh-thuc-te/sun-saphia-flycam-17-10-2026/flycam-00xx.jpg` (nhánh metricool, raw URL theo mã commit). Dùng làm nền mẫu poster hoặc album 3–4 ảnh cho bài Sun Saphia (vị trí, tiến độ, view biển).
+- Video dọc 21s có tiêu đề: `marketing/video/sun-saphia-flycam-reel-17-10-2026.mp4` – đăng Reels trang Sun + TikTok (chưa có nhạc).
+- Ghi: "📷 Ảnh flycam thực tế khu vực dự án, 17/10/2026".
