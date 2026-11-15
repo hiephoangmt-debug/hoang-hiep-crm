@@ -144,7 +144,7 @@ HTML
 </ul>
 <h2>Giá phòng khách sạn ven biển theo mùa</h2>
 <p>Bảng giá trên là thời điểm tháng 10/2026 – đầu mùa mưa, giá thường ở mức thấp hoặc trung bình của năm. Vào mùa hè và mùa pháo hoa, giá phòng khách sạn ven biển tăng mạnh, nhất là các đêm cuối tuần; vào tháng 10 – 12, nhiều khách sạn giảm giá, tặng kèm dịch vụ để giữ công suất. Khi so sánh, anh chị nên lấy giá cùng thời điểm trong năm, tránh so giá mùa hè của khách sạn này với giá mùa mưa của khách sạn khác.</p>
-<p>Ví dụ dòng tiền theo mùa cho studio Sun Saphia: xem bài {$review} và bài <a href="/mua-du-lich-da-nang-cong-suat-phong-cho-thue-sun-saphia/">mùa du lịch và công suất phòng</a>.</p>
+<p>Ví dụ dòng tiền theo mùa cho studio Sun Saphia: xem bài {$review} và bài <a href="/cong-suat-phong-da-nang-mua-du-lich-sun-saphia/">mùa du lịch và công suất phòng</a>.</p>
 {$cta}
 HTML
 		,
@@ -280,7 +280,7 @@ HTML
 <li><strong>Vốn lưu động năm đầu:</strong> khách sạn mới chưa có đánh giá trên các kênh đặt phòng, công suất thường thấp trong 6 – 12 tháng đầu; cần dự phòng tiền lương, điện nước trong giai đoạn này.</li>
 <li><strong>Cải tạo định kỳ:</strong> nội thất phòng, thảm, rèm, thiết bị cần thay theo chu kỳ để giữ hạng; khách sạn mua lại thường phải cải tạo ngay.</li>
 <li><strong>Nhân sự:</strong> lễ tân, buồng phòng, bảo vệ, kỹ thuật – nhân sự giỏi trong mùa cao điểm rất khó tuyển.</li>
-<li><strong>Phí kênh bán phòng:</strong> hoa hồng các nền tảng chiếm phần đáng kể doanh thu (xem bài <a href="/phi-booking-agoda-airbnb-cho-thue-can-ho-sun-saphia/">phí Booking, Agoda, Airbnb</a>).</li>
+<li><strong>Phí kênh bán phòng:</strong> hoa hồng các nền tảng chiếm phần đáng kể doanh thu (xem bài <a href="/phi-booking-agoda-airbnb-cho-thue-can-ho/">phí Booking, Agoda, Airbnb</a>).</li>
 </ul>
 <p>Những khoản này không xuất hiện trong báo giá xây dựng, nhưng quyết định khoản đầu tư khách sạn Đà Nẵng có lãi hay không trong vài năm đầu.</p>
 <h2>Khi nào căn lưu trú hợp hơn?</h2>

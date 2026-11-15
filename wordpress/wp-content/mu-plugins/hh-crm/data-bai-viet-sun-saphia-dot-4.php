@@ -19,10 +19,10 @@ function hh_posts_sun_saphia_dot_4( $posts ) {
 	$posts[] = array(
 		'slug'     => 'tien-do-thanh-toan-sun-saphia-residence',
 		'old_slug' => array( 'thanh-toan-can-ho-hinh-thanh-tuong-lai-sun-saphia-residence' ),
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 15/11: chuẩn SEO 100 – rút gọn URL, ví dụ căn 2,13 tỷ, thanh toán khi vay, checklist hợp đồng, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Mua Sun Saphia Residence trả tiền thế nào? Mức cọc 5%, 30%, 70%, 95% theo Luật Kinh doanh BĐS 2023',
 		'excerpt'  => 'Căn hộ hình thành trong tương lai như Sun Saphia Residence: cọc tối đa 5% khi dự án đủ điều kiện bán, lần đầu không quá 30%, trước bàn giao không quá 70%, chưa có sổ không quá 95%. Người mua cần biết gì.',
-		'keyword'  => 'thanh toán căn hộ hình thành trong tương lai',
+		'keyword'  => 'tiến độ thanh toán Sun Saphia',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'tiến độ thanh toán Sun Saphia', 'đặt cọc 5% nhà ở hình thành trong tương lai', 'Luật Kinh doanh bất động sản 2023' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-06 08:00',
@@ -30,9 +30,9 @@ function hh_posts_sun_saphia_dot_4( $posts ) {
 		'tags'     => array( 'Sun Saphia Residence', 'Pháp lý bất động sản' ),
 		'image'    => 'plugin:img/tin-tuc/thanh-toan-sun-saphia-residence.jpg',
 		'content'  => <<<HTML
-<p>{$saphia} đang ở giai đoạn giữ chỗ, sự kiện bán hàng của chủ đầu tư dự kiến 05/12/2026, bàn giao dự kiến 11/2028. Đây là <strong>căn hộ hình thành trong tương lai</strong> – mua khi tòa nhà chưa xây xong – nên tiền trả cho chủ đầu tư bị Luật Kinh doanh bất động sản 2023 giới hạn theo từng mốc. Bài tóm tắt các mốc đó để người mua đối chiếu với phương án thanh toán khi có hợp đồng.</p>
+<p>Tiến độ thanh toán Sun Saphia Residence sẽ được chủ đầu tư công bố cùng bảng giá chính thức; trong lúc chờ, người mua đã có thể biết khung pháp lý. {$saphia} đang ở giai đoạn giữ chỗ, sự kiện bán hàng của chủ đầu tư dự kiến 05/12/2026, bàn giao dự kiến 11/2028. Đây là <strong>căn hộ hình thành trong tương lai</strong> – mua khi tòa nhà chưa xây xong – nên tiền trả cho chủ đầu tư bị Luật Kinh doanh bất động sản 2023 giới hạn theo từng mốc. Bài tóm tắt các mốc đó để người mua đối chiếu với tiến độ thanh toán Sun Saphia khi có hợp đồng.</p>
 <!--hh-featured-->
-<h2>4 mốc tiền theo Luật Kinh doanh bất động sản 2023</h2>
+<h2>Tiến độ thanh toán Sun Saphia theo luật: 4 mốc tiền</h2>
 <table>
 <thead><tr><th>Mốc</th><th>Giới hạn</th><th>Ghi chú</th></tr></thead>
 <tbody>
@@ -42,29 +42,42 @@ function hh_posts_sun_saphia_dot_4( $posts ) {
 <tr><td>Chưa có giấy chứng nhận</td><td>Tổng không quá 95%</td><td>5% còn lại trả khi được cấp giấy chứng nhận</td></tr>
 </tbody>
 </table>
-<p>Luật số 29/2023/QH15 có hiệu lực từ 01/8/2024. Nội dung trên theo các trang pháp luật và báo chí trích dẫn luật (nguồn cuối bài); khi ký hợp đồng, nên đọc lại điều khoản thanh toán cùng luật sư hoặc người tư vấn.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Phối cảnh Sun Saphia Residence bên biển Sơn Thủy lúc hoàng hôn (ảnh chủ đầu tư)-->
-<h2>Giữ chỗ khác đặt cọc</h2>
+<p>Luật số 29/2023/QH15 có hiệu lực từ 01/8/2024. Nội dung trên theo các trang pháp luật và báo chí trích dẫn luật (ví dụ <a href="https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html">LuatVietnam</a>, nguồn cuối bài); khi ký hợp đồng, nên đọc lại điều khoản thanh toán cùng luật sư hoặc người tư vấn.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Tiến độ thanh toán Sun Saphia Residence theo mốc xây dựng – phối cảnh bên biển Sơn Thủy (ảnh chủ đầu tư)-->
+<h2>Giữ chỗ chưa phải bước đầu của tiến độ thanh toán Sun Saphia</h2>
 <p>Khoản giữ chỗ (booking) hiện nay chỉ là thỏa thuận ưu tiên chọn căn, chưa phải tiền cọc theo luật. Trước khi chuyển tiền, nên yêu cầu ghi rõ: số tiền, thời hạn, trường hợp được hoàn lại và hoàn trong bao lâu. Chi tiết ở bài <a href="/giu-cho-booking-can-ho-moi-da-nang-can-biet/">giữ chỗ căn hộ mới cần biết</a>.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
-<h2>Bảo lãnh ngân hàng – lớp bảo vệ người mua</h2>
+<h2>Bảo lãnh ngân hàng – lớp bảo vệ trong tiến độ thanh toán Sun Saphia</h2>
 <p>Với nhà ở hình thành trong tương lai, chủ đầu tư phải có ngân hàng bảo lãnh nghĩa vụ tài chính: nếu không bàn giao đúng cam kết, người mua có cơ sở yêu cầu ngân hàng hoàn tiền đã trả. Khi ký hợp đồng mua bán, nên xin <strong>thư bảo lãnh cho đúng căn của mình</strong> và giữ bản gốc. Ngân hàng hỗ trợ cho vay dự án theo tài liệu chủ đầu tư: Vietcombank, BIDV, NCB.</p>
-<h2>Áp vào Sun Saphia: tự tính trước</h2>
-<p>Ví dụ minh hoạ với studio tầng 15 dãy mặt biển giá dự kiến 2,85 tỷ (giá có vay, chưa VAT, chưa kinh phí bảo trì – <a href="/gia-sun-saphia-residence-bao-nhieu/">xem giá dự kiến</a>):</p>
+<h2>Tiến độ thanh toán Sun Saphia: tự tính trước</h2>
+<p>Ví dụ minh hoạ tiến độ thanh toán Sun Saphia với studio tầng 15 dãy mặt biển giá dự kiến 2,85 tỷ (giá có vay, chưa VAT, chưa kinh phí bảo trì – <a href="/gia-sun-saphia-residence-bao-nhieu/">xem giá dự kiến</a>):</p>
 <ul>
 <li>Tiền cọc tối đa 5%: khoảng 142,5 triệu.</li>
 <li>Lần đầu tối đa 30%: khoảng 855 triệu (đã gồm cọc).</li>
 <li>Trước bàn giao tối đa 70%: khoảng 1,995 tỷ.</li>
 <li>Giữ lại tối thiểu 5% đến khi có sổ: khoảng 142,5 triệu.</li>
 </ul>
-<p>Phương án thanh toán thật của chủ đầu tư (số đợt, tỷ lệ, chiết khấu trả nhanh) chưa công bố. Khi có, đối chiếu với 4 mốc trên; phương án vay sẽ thay phần lớn các đợt giữa bằng tiền ngân hàng giải ngân. Tính thêm chi phí ngoài giá ở bài <a href="/chi-phi-mua-sun-saphia-residence-ngoai-gia-ban/">chi phí mua Sun Saphia ngoài giá bán</a>.</p>
+<p>Với studio tầng 15 dãy phía sau giá dự kiến 2,13 tỷ, các mốc tương ứng: cọc tối đa khoảng 106,5 triệu; lần đầu tối đa khoảng 639 triệu; trước bàn giao tối đa khoảng 1,491 tỷ; giữ lại tối thiểu khoảng 106,5 triệu đến khi có sổ. Đây là giới hạn trần theo luật, chủ đầu tư có thể chia đợt nhỏ hơn.</p>
+<p>Tiến độ thanh toán Sun Saphia thật của chủ đầu tư (số đợt, tỷ lệ, chiết khấu trả nhanh) chưa công bố. Khi có, đối chiếu với 4 mốc trên; phương án vay sẽ thay phần lớn các đợt giữa bằng tiền ngân hàng giải ngân. Tính thêm chi phí ngoài giá ở bài <a href="/chi-phi-mua-sun-saphia-residence-ngoai-gia-ban/">chi phí mua Sun Saphia ngoài giá bán</a>.</p>
+<h2>Tiến độ thanh toán Sun Saphia khi vay ngân hàng</h2>
+<p>Giá dự kiến 2,13 – 2,85 tỷ là giá áp dụng cho phương án có vay, kèm hỗ trợ lãi suất tới 24 tháng. Khi vay, người mua thường tự trả phần vốn đối ứng ở các đợt đầu, phần còn lại ngân hàng giải ngân thẳng cho chủ đầu tư theo từng đợt của hợp đồng. Ngân hàng hỗ trợ cho vay dự án theo tài liệu chủ đầu tư: Vietcombank, BIDV, NCB. Tính trả góp: <a href="/vay-mua-sun-saphia-residence-tra-gop-hang-thang/">vay mua Sun Saphia Residence</a>.</p>
+<h2>Checklist đọc điều khoản thanh toán trong hợp đồng</h2>
+<ol>
+<li>Mỗi đợt thanh toán gắn với mốc xây dựng nào (xong móng, cất nóc…), có biên bản xác nhận không?</li>
+<li>Tổng tiền thu trước bàn giao có vượt 70% giá trị hợp đồng không?</li>
+<li>Phạt chậm thanh toán của người mua và phạt chậm bàn giao của chủ đầu tư có tương xứng không?</li>
+<li>5% cuối được giữ đến khi nhận giấy chứng nhận có ghi rõ không?</li>
+<li>Thư bảo lãnh ngân hàng có ghi đúng mã căn, số hợp đồng của mình không?</li>
+</ol>
+<p>Nhận định của Hoàng Hiệp: tiến độ thanh toán Sun Saphia càng giãn theo mốc xây dựng thì càng an toàn cho người mua. Khi nhận phương án chính thức, hãy đặt nó cạnh 4 mốc luật định ở trên – mọi đợt thu vượt khung đều cần hỏi lại trước khi ký.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Mua Sun Saphia Residence trả tiền theo mốc nào?',
-			'desc'      => 'Căn hộ hình thành trong tương lai như Sun Saphia Residence: cọc tối đa 5%, lần đầu ≤30%, trước bàn giao ≤70%, chưa có sổ ≤95%. Ví dụ studio 2,85 tỷ.',
+			'seo_title' => 'Tiến độ thanh toán Sun Saphia: cọc 5%, 30%, 70%, 95% (2026)',
+			'desc'      => 'Tiến độ thanh toán Sun Saphia Residence theo Luật KDBĐS 2023: cọc tối đa 5%, lần đầu ≤30%, trước bàn giao ≤70%, chưa có sổ ≤95%. Ví dụ studio 2,85 tỷ.',
 			'points'    => array(
+				'Tiến độ thanh toán Sun Saphia chưa công bố; khung luật: cọc ≤5%, lần đầu ≤30%, trước bàn giao ≤70%, chưa có sổ ≤95%',
 				'Cọc không quá 5% và chỉ khi dự án đủ điều kiện kinh doanh',
 				'Lần đầu không quá 30%, trước bàn giao không quá 70%, chưa có sổ không quá 95%',
 				'Xin thư bảo lãnh ngân hàng cho đúng căn khi ký hợp đồng',
@@ -72,6 +85,8 @@ HTML
 			'faq'       => array(
 				array( 'Mua căn hộ hình thành trong tương lai được cọc bao nhiêu?', 'Theo Luật Kinh doanh bất động sản 2023, chủ đầu tư chỉ được thu tiền đặt cọc không quá 5% giá bán khi dự án đã đủ điều kiện đưa vào kinh doanh.' ),
 				array( 'Trước khi nhận nhà phải trả bao nhiêu phần trăm?', 'Thanh toán lần đầu không quá 30% giá trị hợp đồng (gồm cọc); các lần sau theo tiến độ xây dựng, tổng không quá 70% khi chưa bàn giao; chưa có giấy chứng nhận thì không quá 95%.' ),
+				array( 'Tiến độ thanh toán Sun Saphia đã có chưa?', 'Chưa. Phương án thanh toán chính thức (số đợt, tỷ lệ, chiết khấu) sẽ công bố cùng bảng giá; người mua đối chiếu với khung luật cọc ≤5%, lần đầu ≤30%, trước bàn giao ≤70%, chưa có sổ ≤95%.' ),
+				array( 'Tiến độ thanh toán Sun Saphia studio 2,85 tỷ tối đa bao nhiêu trước khi nhận nhà?', 'Theo giới hạn luật, tổng không quá 70% giá trị hợp đồng trước bàn giao, tức khoảng 1,995 tỷ (ví dụ minh hoạ, chưa tính VAT).' ),
 				array( 'Tiền giữ chỗ Sun Saphia có phải tiền cọc không?', 'Không. Giữ chỗ là thỏa thuận ưu tiên chọn căn; nên yêu cầu ghi rõ điều kiện hoàn tiền.' ),
 			),
 		),

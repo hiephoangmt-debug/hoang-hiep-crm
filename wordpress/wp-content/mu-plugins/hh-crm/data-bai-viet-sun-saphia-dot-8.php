@@ -56,7 +56,7 @@ function hh_posts_sun_saphia_dot_8( $posts ) {
 <li><strong>Vợ hoặc chồng là người nước ngoài</strong>: căn hộ mua trong thời kỳ hôn nhân thường là tài sản chung, nên dễ rơi vào "có yếu tố nước ngoài". Cần hỏi chủ đầu tư và luật sư trước, không tự suy luận.</li>
 </ul>
 <h2>Người nước ngoài mua căn hộ qua "nhờ người đứng tên": không nên</h2>
-<p>Một số người tính nhờ người thân trong nước đứng tên mua căn hộ hộ mình. Cách này có rủi ro lớn: về pháp luật, người đứng tên là chủ sở hữu, có quyền bán, thế chấp; nếu người đó gặp tranh chấp, nợ nần, ly hôn hoặc qua đời, căn hộ có thể bị liên quan. Giấy tờ thỏa thuận "đứng tên hộ" rất khó bảo vệ người bỏ tiền. Hoàng Hiệp không khuyến khích cách làm này. Chi tiết các cách đứng tên hợp lệ xem bài <a href="/dung-ten-mua-sun-saphia-residence-vo-chong-doanh-nghiep/">đứng tên mua Sun Saphia Residence</a>.</p>
+<p>Một số người tính nhờ người thân trong nước đứng tên mua căn hộ hộ mình. Cách này có rủi ro lớn: về pháp luật, người đứng tên là chủ sở hữu, có quyền bán, thế chấp; nếu người đó gặp tranh chấp, nợ nần, ly hôn hoặc qua đời, căn hộ có thể bị liên quan. Giấy tờ thỏa thuận "đứng tên hộ" rất khó bảo vệ người bỏ tiền. Hoàng Hiệp không khuyến khích cách làm này. Chi tiết các cách đứng tên hợp lệ xem bài <a href="/dung-ten-mua-can-ho-sun-saphia/">đứng tên mua Sun Saphia Residence</a>.</p>
 <h2>Không được người nước ngoài mua căn hộ, nhưng vẫn có thể ở Sun Saphia Residence</h2>
 <p>Không mua được không có nghĩa là không ở được. Người nước ngoài có thể <strong>thuê</strong> căn hộ Sun Saphia Residence ngắn ngày hoặc dài hạn; chủ căn hộ phải khai báo lưu trú cho khách theo Luật Cư trú. Đây cũng là nhóm khách thuê quan trọng của dự án – khách Hàn Quốc chiếm hơn 20% khách quốc tế đến Đà Nẵng 6 tháng đầu 2026 (xem bài <a href="/khach-quoc-te-thue-can-ho-da-nang-2026/">khách quốc tế thuê căn hộ</a>).</p>
 <p>Người nước ngoài mua căn hộ để sở hữu thì nên tìm dự án <strong>chung cư nhà ở thương mại</strong> còn trong hạn mức 30% – Đà Nẵng định kỳ công bố danh sách dự án được bán cho người nước ngoài (ví dụ tin của <a href="https://baodautu.vn/da-nang-cong-bo-hai-du-an-bat-dong-san-tiep-theo-duoc-ban-cho-nguoi-nuoc-ngoai-d572248.html">Báo Đầu tư</a>).</p>
@@ -461,7 +461,7 @@ HTML
 		'content'  => <<<HTML
 <p>Cho <strong>thuê dài hạn Sun Saphia Residence</strong> là lựa chọn ít được nhắc tới, vì phần lớn bài viết về {$saphia} nói tới cho thuê theo đêm. Nhưng nhiều anh chị ở xa, không có thời gian vận hành, lại hỏi về cho thuê dài hạn Sun Saphia Residence: thuê theo tháng, theo năm cho chuyên gia, người làm việc từ xa, gia đình nhỏ. Bài này dùng giá thuê đang chào trên thị trường khu Ngũ Hành Sơn để tính thử và so sánh hai cách.</p>
 <!--hh-featured-->
-<h2>Giá thuê tháng khu Ngũ Hành Sơn hiện nay</h2>
+<h2>Giá thuê dài hạn Sun Saphia Residence có thể ở mức nào?</h2>
 <p>Theo các tin chào thuê studio, căn hộ nhỏ khu Ngũ Hành Sơn trên các trang rao vặt (tra cứu 11/11/2026), mức giá phổ biến khoảng <strong>4 – 12 triệu đồng/tháng</strong>. Khoảng giá rộng vì gồm cả phòng studio trong nhà dân, căn hộ dịch vụ và căn hộ cao tầng có bể bơi. Căn hộ mới, view biển, có tiện ích như Sun Saphia Residence nhiều khả năng nằm ở nửa trên của khoảng này – nhưng đây là nhận định, chưa có giá thuê thực tế vì dự án dự kiến bàn giao 11/2028.</p>
 <h2>Tính thử tỷ suất cho thuê dài hạn Sun Saphia Residence (studio)</h2>
 <table>
@@ -534,10 +534,12 @@ HTML
 
 	/* ---------------- 15/11 11:30 – Tầng cao hay tầng thấp ---------------- */
 	$posts[] = array(
-		'slug'     => 'tang-cao-hay-tang-thap-sun-saphia-residence-chon-tang-nao',
+		'slug'     => 'tang-cao-hay-tang-thap-sun-saphia-residence',
+		'old_slug' => array( 'tang-cao-hay-tang-thap-sun-saphia-residence-chon-tang-nao' ),
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá.
 		'title'    => 'Tầng cao hay tầng thấp Sun Saphia Residence? Cấu trúc 30 tầng, view 4 hướng và 7 thang máy',
 		'excerpt'  => 'Sun Saphia Residence cao 30 tầng (114 m): tầng 1 shophouse, tầng 2 tiện ích, tầng 3A – 28 căn hộ điển hình, tầng 29 căn sân vườn, tầng 30 penthouse. Phân tích chọn tầng theo view, quy hoạch xung quanh, gió biển và thang máy.',
-		'keyword'  => 'tầng cao hay tầng thấp Sun Saphia Residence',
+		'keyword'  => 'tầng cao hay tầng thấp',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'chọn tầng căn hộ', 'căn hộ tầng cao view biển', 'penthouse Sun Saphia' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-15 11:30',
@@ -545,9 +547,9 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Kinh nghiệm chọn căn', 'Căn hộ ven biển' ),
 		'image'    => 'plugin:img/tin-tuc/tang-cao-tang-thap-sun-saphia.jpg',
 		'content'  => <<<HTML
-<p>Sau khi chọn dãy căn (mặt biển, cánh bên hay phía sau), câu hỏi tiếp theo là chọn <strong>tầng cao hay tầng thấp Sun Saphia Residence</strong>. Tòa {$saphia} cao 30 tầng, 114 m, nên khác biệt giữa tầng 5 và tầng 25 khá lớn – về view, gió, thời gian chờ thang và giá. Bài này dựa trên thông tin chủ đầu tư công bố tới 11/2026.</p>
+<p>Chọn <strong>tầng cao hay tầng thấp</strong> là câu hỏi tiếp theo sau khi chọn dãy căn (mặt biển, cánh bên hay phía sau) ở Sun Saphia Residence. Tòa {$saphia} cao 30 tầng, 114 m, nên khác biệt giữa tầng 5 và tầng 25 khá lớn – về view, gió, thời gian chờ thang và giá. Bài này dựa trên thông tin chủ đầu tư công bố tới 11/2026.</p>
 <!--hh-featured-->
-<h2>Cấu trúc tòa tháp theo tầng</h2>
+<h2>Tầng cao hay tầng thấp: cấu trúc tòa tháp theo tầng</h2>
 <table>
 <thead><tr><th>Tầng</th><th>Công năng</th><th>Ghi chú</th></tr></thead>
 <tbody>
@@ -561,9 +563,9 @@ HTML
 </tbody>
 </table>
 <p>Tầng điển hình được đánh số 3A – 28 nên số tầng ghi trên giấy có thể không trùng số tầng đếm thực tế. Khi chọn căn, nên hỏi rõ cao độ sàn của căn đó.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence: 28 căn mỗi sàn (bản vẽ chủ đầu tư)-->
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28.jpg|Tầng cao hay tầng thấp Sun Saphia Residence – mặt bằng tầng điển hình 3A – 28, 28 căn mỗi sàn (bản vẽ chủ đầu tư)-->
 <h2>View theo hướng và quy hoạch xung quanh</h2>
-<p>Chọn tầng chỉ có ý nghĩa khi biết trước mặt căn sẽ có gì. Theo chủ đầu tư (04/11/2026):</p>
+<p>Chọn tầng cao hay tầng thấp chỉ có ý nghĩa khi biết trước mặt căn sẽ có gì. Theo chủ đầu tư (04/11/2026):</p>
 <table>
 <thead><tr><th>Hướng</th><th>Quy hoạch xung quanh</th><th>Ảnh hưởng tới chọn tầng</th></tr></thead>
 <tbody>
@@ -573,8 +575,8 @@ HTML
 <tr><td>Bắc</td><td>Khu sân bay Nước Mặn, chưa có thông tin điều chỉnh</td><td>Quy hoạch có thể thay đổi – cần theo dõi</td></tr>
 </tbody>
 </table>
-<p>Cột cuối là nhận định của Hoàng Hiệp từ quy hoạch chủ đầu tư nêu, không phải cam kết view.</p>
-<h2>Ưu nhược điểm tầng thấp (khoảng 3A – 10)</h2>
+<p>Cột cuối là nhận định của Hoàng Hiệp từ quy hoạch chủ đầu tư nêu, không phải cam kết view. Phía Đông, khoảng 2,45 ha đất thu hồi được làm công viên công cộng (<a href="https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp">VietnamPlus</a>), nên với dãy mặt biển, khác biệt tầng cao hay tầng thấp chủ yếu nằm ở độ xa của tầm nhìn chứ không phải bị che hay không.</p>
+<h2>Tầng cao hay tầng thấp: ưu nhược điểm tầng thấp (khoảng 3A – 10)</h2>
 <ul>
 <li><strong>Ưu:</strong> gần khu tiện ích tầng 2, đi thang nhanh, ít chịu gió mạnh; giá thường mềm hơn tầng cao trong cùng dãy (hệ số tầng chính thức chờ bảng giá).</li>
 <li><strong>Nhược:</strong> view phía Tây có thể bị công trình tối đa 7 tầng che; gần mặt đường Trường Sa nên nghe tiếng xe nhiều hơn.</li>
@@ -590,8 +592,9 @@ HTML
 <li><strong>Nhược:</strong> gió biển mạnh, hơi muối nhiều hơn – ban công, cửa, điều hòa cần bảo dưỡng kỹ (xem <a href="/can-ho-ven-bien-hoi-muoi-mua-bao-sun-saphia-residence/">căn hộ ven biển và hơi muối</a>); thời gian chờ thang dài hơn giờ cao điểm.</li>
 </ul>
 <h2>Thang máy: 7 thang cho 28 căn mỗi sàn</h2>
-<p>Tòa có <strong>7 thang máy chia 2 sảnh thang</strong>. Chủ đầu tư cho biết số thang tính theo quy chuẩn dân số (căn 25 – 45 m² tính 1 người) và tham khảo tiêu chuẩn CIBSE với thời gian chờ thang 45 – 60 giây. Với căn hộ cho thuê nhiều khách du lịch, giờ trả phòng – nhận phòng có thể đông hơn; tầng cao chịu ảnh hưởng nhiều hơn tầng thấp.</p>
+<p>Thang máy là yếu tố hay bị quên khi chọn tầng cao hay tầng thấp. Tòa có <strong>7 thang máy chia 2 sảnh thang</strong>. Chủ đầu tư cho biết số thang tính theo quy chuẩn dân số (căn 25 – 45 m² tính 1 người) và tham khảo tiêu chuẩn CIBSE với thời gian chờ thang 45 – 60 giây. Với căn hộ cho thuê nhiều khách du lịch, giờ trả phòng – nhận phòng có thể đông hơn; tầng cao chịu ảnh hưởng nhiều hơn tầng thấp.</p>
 <h2>Tầng cao hay tầng thấp Sun Saphia Residence: chọn theo mục đích</h2>
+<p>Không có câu trả lời chung cho chuyện tầng cao hay tầng thấp – mục đích mua quyết định lựa chọn:</p>
 <table>
 <thead><tr><th>Mục đích</th><th>Gợi ý</th></tr></thead>
 <tbody>
@@ -601,32 +604,36 @@ HTML
 </tbody>
 </table>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Giá chênh giữa các tầng sẽ có trong bảng giá chính thức tại sự kiện bán hàng. Trước đó, nên xác định mục đích mua và hướng căn trước, rồi mới chọn tầng – vì với Sun Saphia Residence, hướng (Đông, Tây, Bắc) ảnh hưởng tới view nhiều hơn số tầng. Xem thêm <a href="/chon-day-can-sun-saphia-residence-mat-bien-canh-ben-phia-sau/">chọn dãy căn</a>, <a href="/mat-bang-can-ho-sun-saphia-residence/">mặt bằng Sun Saphia Residence</a> và bài {$review}.</p>
+<p>Giá chênh giữa tầng cao hay tầng thấp sẽ có trong bảng giá chính thức tại sự kiện bán hàng. Trước đó, nên xác định mục đích mua và hướng căn trước, rồi mới chọn tầng – vì với Sun Saphia Residence, hướng (Đông, Tây, Bắc) ảnh hưởng tới view nhiều hơn số tầng. Xem thêm <a href="/chon-can-sun-saphia-residence-day-mat-bien/">chọn dãy căn</a>, <a href="/mat-bang-can-ho-sun-saphia-residence/">mặt bằng Sun Saphia Residence</a> và bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: cấu trúc tầng, chiều cao, thang máy, quy hoạch 4 hướng theo buổi giải đáp của chủ đầu tư 04/11/2026; mặt bằng tầng điển hình theo tài liệu chủ đầu tư 10/2026; giá dự kiến 28/10/2026. Gợi ý chọn tầng là nhận định của Hoàng Hiệp.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Tầng cao hay tầng thấp Sun Saphia Residence?',
+			'seo_title' => 'Tầng cao hay tầng thấp: chọn tầng ở tòa 30 tầng Sun Saphia',
 			'desc'      => 'Tầng cao hay tầng thấp Sun Saphia Residence: tòa 30 tầng 114 m, tầng 3A – 28 điển hình, penthouse tầng 30. Chọn theo view 4 hướng, gió biển, thang máy.',
 			'points'    => array(
-				'Tòa 30 tầng cao 114 m; tầng 3A – 28 là căn hộ điển hình, 28 căn/sàn',
+				'Tầng cao hay tầng thấp: tòa 30 tầng cao 114 m, tầng 3A – 28 là căn hộ điển hình, 28 căn/sàn',
 				'Tầng 29 có 2 căn sân vườn, tầng 30 penthouse cao 6,5 m',
 				'Phía Tây tối đa 7 tầng, phía Nam quy hoạch 26 – 30 tầng',
 				'7 thang máy, 2 sảnh thang, chờ thang 45 – 60 giây theo chủ đầu tư',
 			),
 			'faq'       => array(
 				array( 'Sun Saphia Residence có bao nhiêu tầng?', '30 tầng, cao 114 m, 2 tầng hầm; tầng 1 shophouse, tầng 2 tiện ích, tầng 3A – 28 căn hộ điển hình, tầng 30 penthouse.' ),
-				array( 'Nên chọn tầng nào ở Sun Saphia Residence?', 'Cho thuê ngắn ngày nên cân nhắc tầng trung dãy mặt biển hoặc cánh bên; cho thuê dài hạn chọn tầng thấp – trung dãy phía sau; nghỉ dưỡng, giữ tài sản chọn tầng cao hoặc căn đặc biệt.' ),
+				array( 'Nên chọn tầng cao hay tầng thấp ở Sun Saphia Residence?', 'Cho thuê ngắn ngày nên cân nhắc tầng trung dãy mặt biển hoặc cánh bên; cho thuê dài hạn chọn tầng thấp – trung dãy phía sau; nghỉ dưỡng, giữ tài sản chọn tầng cao hoặc căn đặc biệt.' ),
 				array( 'Sun Saphia Residence có mấy thang máy?', 'Theo chủ đầu tư, 7 thang máy chia 2 sảnh thang cho 28 căn mỗi sàn, thời gian chờ thang tham khảo 45 – 60 giây.' ),
+				array( 'Tầng cao hay tầng thấp chịu gió biển nhiều hơn?', 'Tầng cao chịu gió và hơi muối nhiều hơn; ban công, cửa, điều hòa cần bảo dưỡng kỹ hơn tầng thấp.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp',
+		),
 	);
 
 	/* ---------------- 15/11 16:30 – Mua để ở ---------------- */
 	$posts[] = array(
 		'slug'     => 'mua-sun-saphia-residence-de-o-duoc-khong-can-biet',
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100.
 		'title'    => 'Mua Sun Saphia Residence để ở được không? Tạm trú, bàn giao, chi phí sống và những điều khác chung cư thường',
 		'excerpt'  => 'Sun Saphia Residence là căn hộ thương mại dịch vụ, phần lớn là studio cho thuê – vậy mua để ở có hợp không? Tạm trú, tiêu chuẩn bàn giao, tiện ích, chi phí hằng tháng và cuộc sống chung tòa với khách du lịch.',
 		'keyword'  => 'mua Sun Saphia Residence để ở',
@@ -639,8 +646,8 @@ HTML
 		'content'  => <<<HTML
 <p>Với 513 trên 782 căn là studio, {$saphia} thường được nói tới như sản phẩm cho thuê. Nhưng không ít khách hỏi <strong>mua Sun Saphia Residence để ở</strong> có được không – người về hưu muốn sống cạnh biển, gia đình ở Hà Nội, TP.HCM muốn có căn nghỉ dài ngày, hay người trẻ làm việc ở Đà Nẵng. Câu trả lời là được, nhưng có vài khác biệt so với chung cư thường cần biết trước.</p>
 <!--hh-featured-->
-<h2>Căn hộ thương mại dịch vụ có ở được không?</h2>
-<p>Được. Sun Saphia Residence nằm trên đất thương mại dịch vụ, thời hạn 50 năm từ 17/09/2026. Chủ đầu tư cho biết căn hộ thương mại dịch vụ <strong>vẫn đăng ký tạm trú được</strong>. Với nhu cầu đăng ký thường trú (ví dụ chuyển hộ khẩu, xin học cho con theo nơi cư trú), anh chị nên hỏi trước công an phường về điều kiện với loại hình này – không nên giả định giống chung cư nhà ở.</p>
+<h2>Mua Sun Saphia Residence để ở: căn hộ thương mại dịch vụ có ở được không?</h2>
+<p>Được. Sun Saphia Residence nằm trên đất thương mại dịch vụ, thời hạn 50 năm từ 17/09/2026. Chủ đầu tư cho biết căn hộ thương mại dịch vụ <strong>vẫn đăng ký tạm trú được</strong> – thủ tục có thể nộp trực tuyến qua <a href="https://dichvucong.gov.vn/">Cổng dịch vụ công quốc gia</a>. Với nhu cầu đăng ký thường trú (ví dụ chuyển hộ khẩu, xin học cho con theo nơi cư trú), anh chị nên hỏi trước công an phường về điều kiện với loại hình này – không nên giả định giống chung cư nhà ở.</p>
 <table>
 <thead><tr><th>Khác biệt</th><th>Chung cư nhà ở</th><th>Sun Saphia Residence</th></tr></thead>
 <tbody>
@@ -654,19 +661,19 @@ HTML
 <ul>
 <li><strong>Studio 30 – 31 m²</strong> (căn góc 40 m²): hợp người độc thân, người về hưu ở một mình, hoặc căn "nghỉ dài ngày" của gia đình ở xa. Mặt tiền 3,8 m, sâu 9 m.</li>
 <li><strong>1PN+ khoảng 50 m²</strong>: có thêm phòng đa năng – làm phòng làm việc, phòng cho con nhỏ.</li>
-<li><strong>2PN 60 – 70 m²</strong> ở góc tòa: hợp gia đình 3 – 4 người; chỉ 133 căn (xem <a href="/can-2pn-sun-saphia-residence-60-70m2-o-hay-cho-thue/">căn 2PN</a>).</li>
+<li><strong>2PN 60 – 70 m²</strong> ở góc tòa: hợp gia đình 3 – 4 người; chỉ 133 căn (xem <a href="/can-2pn-sun-saphia-residence-60-70m2/">căn 2PN</a>).</li>
 </ul>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-2pn-70m2.jpg|Layout căn 2PN 70 m² Sun Saphia Residence – lựa chọn cho gia đình mua để ở (bản vẽ chủ đầu tư)-->
-<h2>Bàn giao gì, phải làm thêm gì?</h2>
-<p>Theo chủ đầu tư, căn hộ bàn giao <strong>liền tường, trừ tủ bếp, thiết bị bếp và hút mùi</strong>: đã có hoàn thiện trần, tường, sàn, thiết bị vệ sinh, bình nóng lạnh, điều hòa, cửa, khóa, đèn, ổ cắm, PCCC. Người mua để ở cần làm thêm bếp, tủ, giường, rèm. Chiều cao tầng 3,5 m (sàn – sàn) cho phép làm trần thoáng; ban công rộng 1 m, lan can thép mạ kẽm sơn tĩnh điện. Chi phí tham khảo xem <a href="/chi-phi-noi-that-studio-30m2-cho-thue-sun-saphia/">nội thất studio 30 m²</a>.</p>
-<h2>Tiện ích cho người ở</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-layout-2pn-70m2.jpg|Mua Sun Saphia Residence để ở – layout căn 2PN 70 m² cho gia đình (bản vẽ chủ đầu tư)-->
+<h2>Mua Sun Saphia Residence để ở: bàn giao gì, phải làm thêm gì?</h2>
+<p>Theo chủ đầu tư, căn hộ bàn giao <strong>liền tường, trừ tủ bếp, thiết bị bếp và hút mùi</strong>: đã có hoàn thiện trần, tường, sàn, thiết bị vệ sinh, bình nóng lạnh, điều hòa, cửa, khóa, đèn, ổ cắm, PCCC. Người mua để ở cần làm thêm bếp, tủ, giường, rèm. Chiều cao tầng 3,5 m (sàn – sàn) cho phép làm trần thoáng; ban công rộng 1 m, lan can thép mạ kẽm sơn tĩnh điện. Chi phí tham khảo xem <a href="/noi-that-studio-sun-saphia-residence-30m2/">nội thất studio 30 m²</a>.</p>
+<h2>Tiện ích khi mua Sun Saphia Residence để ở</h2>
 <ul>
 <li>Bể bơi view biển (dài nhất 27 m), yoga, gym, pilates; tầng 2 tiện ích cao 5,5 m.</li>
 <li>Khối đế thương mại, tầng 1 shophouse cao 7 m.</li>
-<li>Ngay trước mặt là công viên, bãi tắm Sơn Thủy 2,45 ha thành phố đang đầu tư (xem <a href="/cong-vien-bien-truong-sa-2-45-ha-truoc-sun-saphia-residence/">công viên biển</a>).</li>
-<li>Gần danh thắng Ngũ Hành Sơn, dải resort ven biển và đường đi Hội An (xem <a href="/tu-sun-saphia-residence-di-hoi-an-bao-xa-lich-trinh/">Sun Saphia Residence đi Hội An</a>).</li>
+<li>Ngay trước mặt là công viên, bãi tắm Sơn Thủy 2,45 ha thành phố đang đầu tư (xem <a href="/cong-vien-bien-truong-sa-2-45-ha-sun-saphia/">công viên biển</a>).</li>
+<li>Gần danh thắng Ngũ Hành Sơn, dải resort ven biển và đường đi Hội An (xem <a href="/sun-saphia-residence-di-hoi-an-bao-xa/">Sun Saphia Residence đi Hội An</a>).</li>
 </ul>
-<h2>Chi phí sống hằng tháng</h2>
+<h2>Chi phí hằng tháng khi mua Sun Saphia Residence để ở</h2>
 <table>
 <thead><tr><th>Khoản</th><th>Studio 30 m²</th><th>2PN 70 m²</th></tr></thead>
 <tbody>
@@ -674,7 +681,7 @@ HTML
 <tr><td>Điện, nước, internet, gửi xe</td><td colspan="2">Theo mức dùng thực tế</td></tr>
 </tbody>
 </table>
-<p>Phí quản lý dự kiến theo chủ đầu tư, ghi trong hợp đồng mua bán; chi tiết xem <a href="/phi-quan-ly-sun-saphia-residence-moi-thang-bao-nhieu/">phí quản lý Sun Saphia Residence</a>.</p>
+<p>Phí quản lý dự kiến theo chủ đầu tư, ghi trong hợp đồng mua bán; chi tiết xem <a href="/phi-quan-ly-sun-saphia-residence-bao-nhieu/">phí quản lý Sun Saphia Residence</a>.</p>
 <h2>Sống chung tòa với khách du lịch: cần lưu ý</h2>
 <ul>
 <li><strong>Ra vào nhiều:</strong> mùa cao điểm có nhiều khách nhận – trả phòng, thang máy và sảnh đông hơn chung cư thường. Tòa có 7 thang máy, 2 sảnh thang.</li>
@@ -682,7 +689,7 @@ HTML
 <li><strong>Chọn vị trí căn:</strong> người ở lâu dài có thể ưu tiên căn xa sảnh thang, căn góc ít người qua lại.</li>
 </ul>
 <h2>Kết hợp ở và cho thuê</h2>
-<p>Chủ căn tự quyết để ở hay cho thuê, không bắt buộc ký gửi. Nhiều gia đình ở xa dùng căn vài tuần mỗi năm, thời gian còn lại cho thuê theo tháng hoặc theo đêm. Xem <a href="/cho-thue-dai-han-sun-saphia-residence-chuyen-gia-gia-dinh/">cho thuê dài hạn</a> và <a href="/tu-cho-thue-hay-thue-don-vi-van-hanh-can-ho-sun-saphia/">tự cho thuê hay thuê vận hành</a>.</p>
+<p>Chủ căn tự quyết để ở hay cho thuê, không bắt buộc ký gửi. Nhiều gia đình ở xa dùng căn vài tuần mỗi năm, thời gian còn lại cho thuê theo tháng hoặc theo đêm. Với người mua Sun Saphia Residence để ở một phần thời gian, đây là cách giảm chi phí nắm giữ. Xem <a href="/cho-thue-dai-han-sun-saphia-residence/">cho thuê dài hạn</a> và <a href="/don-vi-van-hanh-cho-thue-can-ho-sun-saphia/">đơn vị vận hành cho thuê</a>.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
 <p>Mua Sun Saphia Residence để ở hợp với người muốn sống kiểu nghỉ dưỡng cạnh biển, chấp nhận thời hạn 50 năm và hàng xóm là khách lưu trú. Người cần thường trú, ổn định cho con đi học lâu dài nên cân nhắc thêm chung cư nhà ở. Xem thêm <a href="/co-nen-mua-sun-saphia-residence-uu-nhuoc-diem/">có nên mua Sun Saphia Residence</a> và bài {$review}.</p>
 {$cta}
@@ -690,10 +697,10 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Mua Sun Saphia Residence để ở được không?',
+			'seo_title' => 'Mua Sun Saphia Residence để ở: 50 năm, tạm trú được',
 			'desc'      => 'Mua Sun Saphia Residence để ở: căn hộ thương mại dịch vụ vẫn đăng ký tạm trú, bàn giao liền tường trừ bếp, phí quản lý 15.000 – 20.000 đ/m². Điều cần biết.',
 			'points'    => array(
-				'Căn hộ thương mại dịch vụ, thời hạn 50 năm, vẫn đăng ký tạm trú được',
+				'Mua Sun Saphia Residence để ở: căn hộ thương mại dịch vụ 50 năm, vẫn đăng ký tạm trú được',
 				'Bàn giao liền tường trừ tủ bếp, thiết bị bếp và hút mùi',
 				'Bể bơi, gym, yoga, công viên biển 2,45 ha trước mặt',
 				'Sống chung tòa với nhiều khách lưu trú ngắn ngày',
@@ -701,10 +708,13 @@ HTML
 			'faq'       => array(
 				array( 'Sun Saphia Residence có đăng ký tạm trú được không?', 'Có. Chủ đầu tư cho biết căn hộ thương mại dịch vụ vẫn đăng ký tạm trú được; nhu cầu thường trú nên hỏi trước công an phường.' ),
 				array( 'Mua Sun Saphia Residence để ở nên chọn căn nào?', 'Người độc thân, về hưu chọn studio; cần phòng làm việc chọn 1PN+ khoảng 50 m²; gia đình 3 – 4 người chọn 2PN 60 – 70 m² ở góc tòa.' ),
-				array( 'Sun Saphia Residence bàn giao có bếp không?', 'Không. Bàn giao liền tường trừ tủ bếp, thiết bị bếp và hút mùi; các hạng mục trần, tường, sàn, vệ sinh, điều hòa, bình nóng lạnh đã hoàn thiện.' ),
+				array( 'Sun Saphia Residence bàn giao có bếp không?', 'Không. Bàn giao liền tường trừ tủ bếp, thiết bị bếp và hút mùi; người mua Sun Saphia Residence để ở cần làm thêm bếp, tủ, giường, rèm.' ),
+				array( 'Ai không nên mua Sun Saphia Residence để ở?', 'Người cần đăng ký thường trú, ổn định cho con đi học lâu dài hoặc muốn tài sản sở hữu lâu dài nên cân nhắc thêm chung cư nhà ở.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://dichvucong.gov.vn/',
+		),
 	);
 
 	return $posts;

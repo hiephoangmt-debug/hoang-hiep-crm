@@ -21,13 +21,14 @@ function hh_posts_thang_10_2026( $posts ) {
 		'image_alt' => 'Bảng giá đất Đà Nẵng sửa đổi 2026 – các điểm mới chính',
 		'content'   => <<<'HTML'
 <p><strong>Bảng giá đất Đà Nẵng</strong> đang được điều chỉnh chỉ vài tháng sau khi áp dụng. Tại kỳ họp thứ 6 (chuyên đề) ngày 6/10/2026, HĐND TP Đà Nẵng khóa XI xem xét sửa đổi, bổ sung Nghị quyết 28/2026/NQ-HĐND quy định giá đất và bảng giá các loại đất. Lý do: qua rà soát, <strong>37/94 xã, phường</strong> đề nghị điều chỉnh, bổ sung giá đất.</p>
-<p>Bảng giá đất không phải giá mua bán ngoài thị trường, nhưng là căn cứ tính tiền sử dụng đất, thuế, phí trước bạ, bồi thường khi thu hồi đất. Vì vậy, người đang mua bán, chuyển mục đích hay làm sổ ở Đà Nẵng nên nắm những thay đổi dưới đây.</p>
+<p>Bảng giá đất Đà Nẵng không phải giá mua bán ngoài thị trường, nhưng là căn cứ tính tiền sử dụng đất, thuế, phí trước bạ, bồi thường khi thu hồi đất. Vì vậy, người đang mua bán, chuyển mục đích hay làm sổ ở Đà Nẵng nên nắm những thay đổi dưới đây.</p>
 
 <h2>Bảng giá đất Đà Nẵng hiện hành là gì?</h2>
 <p>Nghị quyết 28/2026/NQ-HĐND của HĐND TP Đà Nẵng quy định giá đất và bảng giá các loại đất trên địa bàn thành phố sau hợp nhất, có hiệu lực từ ngày 10/6/2026. Đây là bảng giá áp dụng chung cho cả khu vực Đà Nẵng cũ và Quảng Nam cũ.</p>
-<p>Sau khi triển khai, nhiều địa phương phát hiện các vị trí, tuyến đường, đoạn đường <strong>chưa có giá</strong> trong phụ lục, hoặc tên đường, mức giá cần chỉnh lại. Đó là lý do bảng giá được đưa ra sửa đổi ngay trong năm.</p>
+<p>Sau khi triển khai, nhiều địa phương phát hiện các vị trí, tuyến đường, đoạn đường <strong>chưa có giá</strong> trong phụ lục, hoặc tên đường, mức giá cần chỉnh lại. Đó là lý do bảng giá đất Đà Nẵng được đưa ra sửa đổi ngay trong năm.</p>
+<p>Bảng giá đất Đà Nẵng được dùng cùng hệ số điều chỉnh giá đất năm 2026 (Quyết định 101/2026/QĐ-UBND) để tính một số khoản tài chính đất đai – xem tổng hợp <a href="/chinh-sach-bat-dong-san-da-nang-11-2026/">chính sách bất động sản Đà Nẵng 11/2026</a>.</p>
 
-<h2>Những điểm mới trong lần sửa đổi</h2>
+<h2>Bảng giá đất Đà Nẵng sửa đổi: những điểm mới</h2>
 <p>Theo thông tin báo chí về nội dung trình kỳ họp, lần sửa đổi tập trung vào:</p>
 <table>
 <thead><tr><th>Nội dung</th><th>Điểm mới</th></tr></thead>
@@ -41,32 +42,32 @@ function hh_posts_thang_10_2026( $posts ) {
 </table>
 <p>Cùng kỳ họp, HĐND cũng xem xét bổ sung danh mục dự án thu hồi đất năm 2026 tại các xã, phường.</p>
 
-<h2>Đã thông qua chưa?</h2>
+<h2>Bảng giá đất Đà Nẵng sửa đổi đã thông qua chưa?</h2>
 <p>Kỳ họp ngày 6/10/2026 đã thông qua 22 nghị quyết. Một số báo (như CafeLand) đưa tin HĐND đã thông qua nghị quyết sửa đổi bảng giá đất; các báo khác mô tả nội dung ở bước trình và thảo luận. Mức giá cụ thể từng tuyến đường chỉ chắc chắn khi nghị quyết sửa đổi được công bố toàn văn kèm phụ lục. <em>Hoàng Hiệp sẽ cập nhật số hiệu nghị quyết và ngày hiệu lực khi có văn bản chính thức.</em></p>
 
-<h2>Ảnh hưởng gì đến người mua bán nhà đất?</h2>
+<h2>Bảng giá đất Đà Nẵng ảnh hưởng gì đến người mua bán nhà đất?</h2>
 <ul>
 <li><strong>Nhà đất trên tuyến đường mới, chưa có giá:</strong> trước đây khó xác định nghĩa vụ tài chính khi sang tên, chuyển mục đích. Khi tuyến được bổ sung giá, thủ tục sẽ rõ ràng hơn.</li>
 <li><strong>Lô đất góc, lô đất sâu, nằm qua nhiều vị trí:</strong> cách tính bình quân gia quyền giúp giá tính thuế, phí sát với thực tế hơn, tránh tính toàn bộ diện tích theo vị trí giá cao nhất.</li>
 <li><strong>Người chuẩn bị chuyển mục đích sang đất ở:</strong> nên chờ phụ lục chính thức để tính tiền sử dụng đất chính xác, tránh tính sai dòng tiền.</li>
 <li><strong>Người có đất trong danh mục thu hồi 2026:</strong> bảng giá đất là một căn cứ quan trọng khi tính bồi thường – kiểm tra kỹ danh mục và phương án.</li>
 </ul>
-<p>Lưu ý: bảng giá đất tăng hay giảm không làm giá giao dịch thay đổi ngay, nhưng ảnh hưởng trực tiếp đến chi phí thuế, phí của người mua bán.</p>
+<p>Lưu ý: bảng giá đất Đà Nẵng tăng hay giảm không làm giá giao dịch thay đổi ngay, nhưng ảnh hưởng trực tiếp đến chi phí thuế, phí của người mua bán.</p>
 
-<h2>Cách tra giá đất và kiểm tra pháp lý trước khi mua</h2>
+<h2>Cách tra bảng giá đất Đà Nẵng và kiểm tra pháp lý trước khi mua</h2>
 <ol>
 <li>Tra tuyến đường, vị trí thửa đất trong phụ lục Nghị quyết 28/2026 và nghị quyết sửa đổi (khi được công bố).</li>
 <li>Kiểm tra quy hoạch sử dụng đất, thông tin thửa đất tại UBND xã, phường hoặc văn phòng đăng ký đất đai.</li>
 <li>Tính trước thuế thu nhập cá nhân, lệ phí trước bạ, tiền sử dụng đất (nếu chuyển mục đích) để không bị bất ngờ.</li>
 </ol>
-<p>Xem thêm hướng dẫn <a href="/kiem-tra-phap-ly-quy-hoach-nha-dat-da-nang/">kiểm tra pháp lý, quy hoạch nhà đất Đà Nẵng</a>, bài <a href="/toan-canh-ha-tang-da-nang-2026-tac-dong-bat-dong-san/">toàn cảnh hạ tầng Đà Nẵng 2026</a>, hoặc danh sách <a href="/mua-ban/dat-nen/">đất nền đang bán</a>.</p>
+<p>Xem thêm hướng dẫn <a href="/kiem-tra-phap-ly-quy-hoach-nha-dat-da-nang/">kiểm tra pháp lý, quy hoạch nhà đất Đà Nẵng</a>, bài <a href="/toan-canh-ha-tang-da-nang-2026/">toàn cảnh hạ tầng Đà Nẵng 2026</a>, hoặc danh sách <a href="/mua-ban/dat-nen/">đất nền đang bán</a>.</p>
 <p>Anh chị cần tính nhanh chi phí sang tên hoặc kiểm tra một lô đất cụ thể, gọi/Zalo <strong>Hoàng Hiệp – 0904 567 009</strong>.</p>
 HTML,
 		'seo'       => array(
 			'seo_title' => 'Bảng giá đất Đà Nẵng sửa đổi 2026: điểm mới cần biết',
 			'desc'      => 'Bảng giá đất Đà Nẵng sửa đổi tại kỳ họp HĐND 6/10/2026: bổ sung giá tuyến đường chưa có giá, thửa nhiều vị trí tính bình quân gia quyền. Ảnh hưởng gì?',
 			'points'    => array(
-				'HĐND TP Đà Nẵng xem xét sửa đổi Nghị quyết 28/2026 về bảng giá đất tại kỳ họp ngày 6/10/2026.',
+				'Bảng giá đất Đà Nẵng (Nghị quyết 28/2026) được HĐND TP xem xét sửa đổi tại kỳ họp ngày 6/10/2026.',
 				'37/94 xã, phường đề nghị điều chỉnh, bổ sung giá đất.',
 				'Bổ sung giá cho tuyến đường chưa có giá; thửa đất nằm ở nhiều vị trí tính theo bình quân gia quyền.',
 				'Mức giá từng tuyến chỉ chắc chắn khi nghị quyết sửa đổi được công bố toàn văn.',
@@ -87,7 +88,8 @@ HTML,
 	);
 
 	$posts[] = array(
-		'slug'      => 'duong-tranh-nam-hai-van-6-lan-bat-dong-san-lien-chieu',
+		'slug'      => 'duong-tranh-nam-hai-van-6-lan-lien-chieu',
+		'old_slug'  => array( 'duong-tranh-nam-hai-van-6-lan-bat-dong-san-lien-chieu' ),
 		'title'     => 'Đường tránh Nam Hải Vân mở rộng 6 làn hơn 1.951 tỷ: Liên Chiểu thêm trục kết nối cảng',
 		'excerpt'   => 'Đà Nẵng phê duyệt dự án nâng cấp, mở rộng đường tránh Nam Hải Vân đoạn Hòa Liên – đường ven biển nối cảng Liên Chiểu, khoảng 5,36 km, 6 làn xe, tổng mức hơn 1.951 tỷ đồng. Ý nghĩa với khu vực Liên Chiểu – Hải Vân.',
 		'keyword'   => 'đường tránh Nam Hải Vân',
@@ -97,9 +99,9 @@ HTML,
 		'image'     => 'plugin:img/tin-tuc/duong-tranh-nam-hai-van-6-lan.jpg',
 		'image_alt' => 'Thông tin dự án mở rộng đường tránh Nam Hải Vân 6 làn, Liên Chiểu, Đà Nẵng',
 		'content'   => <<<'HTML'
-<p><strong>Đường tránh Nam Hải Vân</strong> – trục nối hầm Hải Vân với cao tốc và khu Liên Chiểu – sẽ được nâng cấp lên 6 làn xe. UBND TP Đà Nẵng đã phê duyệt dự án đoạn từ nút giao Hòa Liên đến nút giao với đường ven biển nối cảng Liên Chiểu, tổng mức đầu tư hơn 1.951 tỷ đồng (Quyết định 2839/QĐ-UBND). Đây là một mảnh ghép quan trọng để hàng hóa ra vào cảng Liên Chiểu không phải đi xuyên khu dân cư.</p>
+<p><strong>Đường tránh Nam Hải Vân</strong> – trục nối hầm Hải Vân với cao tốc và khu Liên Chiểu – sẽ được nâng cấp lên 6 làn xe. UBND TP Đà Nẵng đã phê duyệt dự án đoạn từ nút giao Hòa Liên đến nút giao với đường ven biển nối cảng Liên Chiểu, tổng mức đầu tư hơn 1.951 tỷ đồng (Quyết định 2839/QĐ-UBND). Mở rộng đường tránh Nam Hải Vân là một mảnh ghép quan trọng để hàng hóa ra vào cảng Liên Chiểu không phải đi xuyên khu dân cư.</p>
 
-<h2>Thông tin chính về dự án</h2>
+<h2>Đường tránh Nam Hải Vân 6 làn: thông tin chính</h2>
 <table>
 <thead><tr><th>Hạng mục</th><th>Thông tin</th></tr></thead>
 <tbody>
@@ -114,7 +116,7 @@ HTML,
 </table>
 
 <h2>Vì sao phải mở rộng đường tránh Nam Hải Vân?</h2>
-<p>Cảng Liên Chiểu đã hoàn thành phần hạ tầng dùng chung giai đoạn 1 (hơn 3.426 tỷ đồng) và đang triển khai bến container theo quy hoạch dài hạn đến năm 2036. Khi cảng vận hành, lượng xe container tăng mạnh. Tuyến đường tránh hiện hữu hẹp, nhiều đoạn giao cắt, khó đáp ứng. Mở rộng 6 làn giúp:</p>
+<p>Cảng Liên Chiểu đã hoàn thành phần hạ tầng dùng chung giai đoạn 1 (hơn 3.426 tỷ đồng) và đang triển khai bến container theo quy hoạch dài hạn đến năm 2036. Khi cảng vận hành, lượng xe container tăng mạnh. Tuyến đường tránh hiện hữu hẹp, nhiều đoạn giao cắt, khó đáp ứng. Mở rộng đường tránh Nam Hải Vân lên 6 làn giúp:</p>
 <ul>
 <li>Kết nối thẳng cảng Liên Chiểu với cao tốc và hầm Hải Vân, giảm xe tải đi vào nội đô.</li>
 <li>Phục vụ khu thương mại tự do Đà Nẵng và các khu công nghiệp phía Tây Bắc.</li>
@@ -122,14 +124,17 @@ HTML,
 </ul>
 <p>Theo Dân Việt, HĐND thành phố cũng đã thông qua việc chuyển mục đích hơn 32 ha đất rừng để thực hiện dự án nâng cấp Quốc lộ 14D và mở rộng đường tránh Nam Hải Vân – điều kiện cần để triển khai mặt bằng.</p>
 
+<h2>Đường tránh Nam Hải Vân trong mạng lưới giao thông phía Tây Bắc</h2>
+<p>Đường tránh Nam Hải Vân là trục nối hầm Hải Vân với cao tốc và khu Liên Chiểu; đoạn được mở rộng kết nối với tuyến đường ven biển nối cảng Liên Chiểu. Theo <a href="https://danviet.vn/da-nang-hon-32ha-dat-rung-duoc-chuyen-doi-mo-duong-ket-noi-cua-khau-quoc-te-va-cang-lien-chieu-d1465075.html">Dân Việt</a>, việc chuyển mục đích đất rừng phục vụ đồng thời Quốc lộ 14D và đường tránh – hai dự án được nhắc đến như các tuyến mở đường kết nối cửa khẩu quốc tế với cảng Liên Chiểu. Khi hoàn thành, xe container có lộ trình riêng từ cao tốc vào cảng, giảm áp lực cho các tuyến trong khu dân cư.</p>
+
 <h2>Bất động sản Liên Chiểu – Hải Vân được gì?</h2>
 <p>Liên Chiểu đang là khu vực có nhiều hạ tầng lớn nhất Đà Nẵng: cảng Liên Chiểu, khu thương mại tự do, đường ven biển nối cảng, nay thêm đường tránh 6 làn. Với người mua nhà đất, có thể chia thành hai nhóm:</p>
 <ul>
 <li><strong>Nhà ở cho chuyên gia, người lao động:</strong> căn hộ, nhà phố gần khu công nghiệp, cảng có nhu cầu thuê ổn định khi cảng và khu thương mại tự do đi vào hoạt động.</li>
 <li><strong>Đô thị nghỉ dưỡng phía Hải Vân:</strong> các dự án như <a href="/du-an/vinhomes-hai-van-bay/">Vinhomes Hải Vân Bay</a> (khu Làng Vân) hưởng lợi khi kết nối về trung tâm và sân bay nhanh, ít xe tải hơn.</li>
 </ul>
-<p>Lưu ý: dự án làm đến năm 2029, thời gian thi công sẽ có phân luồng, bụi, tiếng ồn. Lô đất sát tuyến cần kiểm tra mốc giới, phạm vi mở rộng trước khi mua.</p>
-<p>Xem thêm: <a href="/cang-lien-chieu-khu-thuong-mai-tu-do-bat-dong-san-lien-chieu/">cảng Liên Chiểu và khu thương mại tự do</a>, <a href="/khu-vuc/lien-chieu/">dự án khu vực Liên Chiểu</a>, <a href="/mua-ban/lien-chieu/">nhà đất Liên Chiểu đang bán</a>.</p>
+<p>Lưu ý: dự án đường tránh Nam Hải Vân làm đến năm 2029, thời gian thi công sẽ có phân luồng, bụi, tiếng ồn. Lô đất sát tuyến cần kiểm tra mốc giới, phạm vi mở rộng trước khi mua.</p>
+<p>Xem thêm: <a href="/cang-lien-chieu-khu-thuong-mai-tu-do/">cảng Liên Chiểu và khu thương mại tự do</a>, <a href="/khu-vuc/lien-chieu/">dự án khu vực Liên Chiểu</a>, <a href="/mua-ban/lien-chieu/">nhà đất Liên Chiểu đang bán</a>.</p>
 <p>Anh chị quan tâm nhà đất Liên Chiểu – Hải Vân, gọi/Zalo <strong>Hoàng Hiệp – 0904 567 009</strong> để được gửi thông tin pháp lý, giá tham khảo.</p>
 HTML,
 		'seo'       => array(
@@ -168,8 +173,9 @@ HTML,
 		'image_alt' => 'Tin hạ tầng Đà Nẵng tháng 10/2026 – các công trình đang triển khai',
 		'content'   => <<<'HTML'
 <p>Bản <strong>tin hạ tầng Đà Nẵng</strong> đầu tháng 10/2026 tổng hợp các công trình giao thông đang thi công, sắp thi công và các quyết định mới của thành phố – kèm nhận định ngắn về khu vực bất động sản chịu tác động. Thông tin lấy từ báo chí chính thống; mục nào còn ở dạng kế hoạch, đề xuất được ghi rõ.</p>
+<p>Cách đọc bản tin hạ tầng Đà Nẵng: công trình đã khởi công có tác động rõ nhất tới khu vực xung quanh; công trình mới phê duyệt hoặc đề xuất cần theo dõi thêm. Mỗi mục có liên kết tới bài phân tích chi tiết.</p>
 
-<h2>Bảng tóm tắt</h2>
+<h2>Tin hạ tầng Đà Nẵng tháng 10/2026: bảng tóm tắt</h2>
 <table>
 <thead><tr><th>Công trình</th><th>Tình trạng (đầu 10/2026)</th><th>Khu vực BĐS liên quan</th></tr></thead>
 <tbody>
@@ -186,37 +192,38 @@ HTML,
 <p><strong>Với người mua nhà:</strong> các dự án phía Nam như <a href="/du-an/sun-neo-city/">Sun NeO City</a>, <a href="/du-an/sun-riverpolis/">Sun Riverpolis</a> sẽ kết nối trung tâm tốt hơn khi nút giao hoàn thành; trong thời gian thi công, giờ cao điểm qua cầu sẽ chậm hơn.</p>
 
 <h2>2. Quốc lộ 14D đang thi công</h2>
-<p>Dự án cải tạo, nâng cấp Quốc lộ 14D dài 65,37 km, tổng mức đầu tư 4.518 tỷ đồng, đã khởi công ngày 26/6/2026, nối đường Hồ Chí Minh với khu vực cửa khẩu quốc tế Nam Giang. Đây là trục giao thương phía Tây của thành phố sau hợp nhất, tác động chủ yếu đến kinh tế vùng biên, logistics hơn là nhà ở đô thị.</p>
+<p>Dự án cải tạo, nâng cấp Quốc lộ 14D dài 65,37 km, tổng mức đầu tư 4.518 tỷ đồng, đã khởi công ngày 26/6/2026, nối đường Hồ Chí Minh với khu vực cửa khẩu quốc tế Nam Giang. Trong các tin hạ tầng Đà Nẵng tháng này, đây là trục giao thương phía Tây của thành phố sau hợp nhất, tác động chủ yếu đến kinh tế vùng biên, logistics hơn là nhà ở đô thị.</p>
 
 <h2>3. Đường vành đai phía Bắc Quảng Nam được yêu cầu thi công trong tháng 10</h2>
-<p>Tuyến dài hơn 4,6 km, tổng mức gần 500 tỷ đồng, đi từ cầu Quảng Đà ra biển Điện Ngọc. Dự án từng khởi công năm 2024 nhưng chậm do vướng mặt bằng và vật liệu đắp. Chủ tịch UBND TP Đà Nẵng yêu cầu thi công trong tháng 10/2026 ở phần đã giải phóng mặt bằng, phấn đấu hoàn thành toàn bộ vào tháng 5/2027. Đến thời điểm viết bài, chưa có thông tin xác nhận đã thi công lại.</p>
-<p><strong>Với người mua nhà:</strong> trục này nối Điện Ngọc, Điện Bàn Bắc với Đà Nẵng qua cầu Quảng Đà – đáng theo dõi với đất nền vùng giáp ranh. Xem <a href="/hop-nhat-da-nang-quang-nam-bat-dong-san-vung-giap-ranh/">bất động sản vùng giáp ranh sau hợp nhất</a>.</p>
+<p>Tuyến dài hơn 4,6 km, tổng mức gần 500 tỷ đồng, đi từ cầu Quảng Đà ra biển Điện Ngọc. Dự án từng khởi công năm 2024 nhưng chậm do vướng mặt bằng và vật liệu đắp. Chủ tịch UBND TP Đà Nẵng yêu cầu thi công trong tháng 10/2026 ở phần đã giải phóng mặt bằng, phấn đấu hoàn thành toàn bộ vào tháng 5/2027. Đến thời điểm viết bản tin hạ tầng Đà Nẵng này, chưa có thông tin xác nhận đã thi công lại.</p>
+<p><strong>Với người mua nhà:</strong> trục này nối Điện Ngọc, Điện Bàn Bắc với Đà Nẵng qua cầu Quảng Đà – đáng theo dõi với đất nền vùng giáp ranh. Xem <a href="/hop-nhat-da-nang-quang-nam-vung-giap-ranh/">bất động sản vùng giáp ranh sau hợp nhất</a>.</p>
 
 <h2>4. Đường tránh Nam Hải Vân mở rộng 6 làn</h2>
-<p>Đoạn Hòa Liên – đường ven biển nối cảng Liên Chiểu dài khoảng 5,36 km, mở rộng 6 làn, tổng mức hơn 1.951 tỷ đồng, thực hiện 2025 – 2029. Chi tiết: <a href="/duong-tranh-nam-hai-van-6-lan-bat-dong-san-lien-chieu/">đường tránh Nam Hải Vân 6 làn và bất động sản Liên Chiểu</a>.</p>
+<p>Đoạn Hòa Liên – đường ven biển nối cảng Liên Chiểu dài khoảng 5,36 km, mở rộng 6 làn, tổng mức hơn 1.951 tỷ đồng, thực hiện 2025 – 2029. Chi tiết: <a href="/duong-tranh-nam-hai-van-6-lan-lien-chieu/">đường tránh Nam Hải Vân 6 làn và bất động sản Liên Chiểu</a>.</p>
 
 <h2>5. HĐND điều chỉnh kế hoạch đầu tư công, sửa bảng giá đất</h2>
 <p>Ngày 6/10/2026, kỳ họp thứ 6 (chuyên đề) HĐND TP Đà Nẵng khóa XI thông qua 22 nghị quyết, trong đó có điều chỉnh, bổ sung kế hoạch vốn đầu tư công trung hạn 2026 – 2030; đồng thời xem xét sửa đổi bảng giá đất theo Nghị quyết 28/2026. Xem: <a href="/bang-gia-dat-da-nang-sua-doi-2026/">bảng giá đất Đà Nẵng sửa đổi 2026</a>.</p>
-<p>Trước đó, ngày 11/9/2026, Sở Xây dựng đề xuất nghiên cứu một cầu mới qua sông Hàn, phấn đấu khởi công trước năm 2030 – hiện vẫn ở giai đoạn đề xuất, chưa có quyết định đầu tư.</p>
+<p>Trước đó, ngày 11/9/2026, Sở Xây dựng đề xuất nghiên cứu một cầu mới qua sông Hàn, phấn đấu khởi công trước năm 2030 – hiện vẫn ở giai đoạn đề xuất, chưa có quyết định đầu tư. Xem <a href="/da-nang-de-xuat-xay-cau-moi-qua-song-han/">đề xuất cầu mới qua sông Hàn</a>.</p>
 
-<h2>Nhận định cho người mua bất động sản</h2>
+<h2>Đọc tin hạ tầng Đà Nẵng: nhận định cho người mua bất động sản</h2>
 <ul>
 <li><strong>Ưu tiên hạ tầng đã khởi công:</strong> cầu Hòa Xuân, Quốc lộ 14D đã thi công thật; tác động đến khu vực xung quanh rõ ràng hơn các dự án còn ở dạng đề xuất.</li>
-<li><strong>Tính thời gian:</strong> các công trình phần lớn hoàn thành giai đoạn 2027 – 2029; nên chọn tài sản ở hoặc cho thuê được ngay, coi hạ tầng là điểm cộng.</li>
+<li><strong>Tính thời gian:</strong> các công trình trong tin hạ tầng Đà Nẵng kỳ này phần lớn hoàn thành giai đoạn 2027 – 2029; nên chọn tài sản ở hoặc cho thuê được ngay, coi hạ tầng là điểm cộng.</li>
 <li><strong>Kiểm tra pháp lý, quy hoạch:</strong> nhất là lô đất gần nút giao, tuyến mở rộng. Xem <a href="/kiem-tra-phap-ly-quy-hoach-nha-dat-da-nang/">cách kiểm tra quy hoạch nhà đất Đà Nẵng</a>.</li>
 </ul>
-<p>Tổng quan cả năm: <a href="/toan-canh-ha-tang-da-nang-2026-tac-dong-bat-dong-san/">toàn cảnh hạ tầng Đà Nẵng 2026</a>. Cần tư vấn dự án theo khu vực, gọi/Zalo <strong>Hoàng Hiệp – 0904 567 009</strong>.</p>
+<p>Hoàng Hiệp cập nhật tin hạ tầng Đà Nẵng hằng tháng; tổng quan cả năm xem tại <a href="/toan-canh-ha-tang-da-nang-2026/">toàn cảnh hạ tầng Đà Nẵng 2026</a>. Cần tư vấn dự án theo khu vực, gọi/Zalo <strong>Hoàng Hiệp – 0904 567 009</strong>.</p>
 HTML,
 		'seo'       => array(
 			'seo_title' => 'Tin hạ tầng Đà Nẵng tháng 10/2026: công trình và BĐS',
 			'desc'      => 'Tin hạ tầng Đà Nẵng tháng 10/2026: cầu Hòa Xuân đã khởi công, Quốc lộ 14D thi công, vành đai phía Bắc Quảng Nam, đường tránh Nam Hải Vân và tác động BĐS.',
 			'points'    => array(
-				'Cụm nút giao cầu Hòa Xuân đã khởi công ngày 25/8/2026, thi công dự kiến 730 ngày.',
+				'Tin hạ tầng Đà Nẵng tháng 10/2026: cụm nút giao cầu Hòa Xuân đã khởi công ngày 25/8/2026, thi công dự kiến 730 ngày.',
 				'Quốc lộ 14D (4.518 tỷ đồng, 65,37 km) đã khởi công ngày 26/6/2026.',
 				'Vành đai phía Bắc Quảng Nam: thành phố yêu cầu thi công trong tháng 10/2026, xong tháng 5/2027.',
 				'HĐND ngày 6/10/2026 điều chỉnh kế hoạch đầu tư công 2026 – 2030, xem xét sửa bảng giá đất.',
 			),
 			'faq'       => array(
+				array( 'Tin hạ tầng Đà Nẵng tháng 10/2026 có gì đáng chú ý nhất?', 'Điểm đáng chú ý nhất trong tin hạ tầng Đà Nẵng tháng 10/2026 là các công trình đã thi công thật: cụm nút giao cầu Hòa Xuân (khởi công 25/8/2026) và Quốc lộ 14D (khởi công 26/6/2026); cùng với đó là việc HĐND điều chỉnh kế hoạch đầu tư công 2026 – 2030 ngày 6/10/2026.' ),
 				array( 'Cầu Hòa Xuân khởi công chưa?', 'Đã khởi công ngày 25/8/2026, gồm hầm chui Cách Mạng Tháng Tám, hầm chui Thăng Long, mở rộng Lê Thanh Nghị và cầu mới phía hạ lưu; thi công dự kiến 730 ngày.' ),
 				array( 'Đường vành đai phía Bắc Quảng Nam bao giờ xong?', 'UBND TP Đà Nẵng yêu cầu thi công trong tháng 10/2026 ở phần đã có mặt bằng và phấn đấu hoàn thành toàn bộ vào tháng 5/2027.' ),
 				array( 'Hạ tầng nào ảnh hưởng nhiều nhất đến bất động sản Đà Nẵng cuối 2026?', 'Các công trình đã khởi công như cụm nút giao cầu Hòa Xuân (phía Nam) và hạ tầng kết nối cảng Liên Chiểu (phía Tây Bắc) có tác động rõ nhất đến khu vực xung quanh.' ),

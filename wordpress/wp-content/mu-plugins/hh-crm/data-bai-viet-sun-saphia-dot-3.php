@@ -470,13 +470,13 @@ HTML
 		'content'  => <<<HTML
 <p>Cho thuê căn hộ ngắn ngày (theo đêm) là ý định của phần lớn người hỏi mua <strong>Sun Saphia Residence</strong>. Năm 2026, cơ quan quản lý ở nhiều địa phương siết chặt việc cho thuê căn hộ theo ngày. Bài này tóm tắt những điểm pháp lý chung cần biết trước khi tính dòng tiền.</p>
 <!--hh-featured-->
-<h2>1. Căn hộ phải dùng đúng công năng</h2>
-<p>Luật Nhà ở 2023 không cho tự ý chuyển công năng căn hộ để ở sang mục đích khác. Vì vậy, điều đầu tiên cần xem là <strong>công năng ghi trong hợp đồng và giấy tờ dự án</strong>: căn hộ để ở hay căn hộ kinh doanh dịch vụ, lưu trú. Tài liệu chủ đầu tư ghi Sun Saphia Residence có thời hạn dự án 50 năm kể từ 17/09/2026 – khi ký hợp đồng, hãy hỏi rõ công năng căn hộ và việc cho thuê theo ngày có được phép trong quy chế tòa nhà không.</p>
+<h2>1. Cho thuê căn hộ ngắn ngày phải đúng công năng</h2>
+<p>Luật Nhà ở 2023 không cho tự ý chuyển công năng căn hộ để ở sang mục đích khác. Vì vậy, điều đầu tiên cần xem là <strong>công năng ghi trong hợp đồng và giấy tờ dự án</strong>: căn hộ để ở hay căn hộ kinh doanh dịch vụ, lưu trú. Tài liệu chủ đầu tư ghi Sun Saphia Residence có thời hạn dự án 50 năm kể từ 17/09/2026 – khi ký hợp đồng, hãy hỏi rõ công năng căn hộ và việc cho thuê căn hộ ngắn ngày có được phép trong quy chế tòa nhà không.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Cho thuê căn hộ ngắn ngày ở Sun Saphia Residence – tòa tháp ven biển về đêm (ảnh chủ đầu tư)-->
 <h2>2. Cho thuê căn hộ ngắn ngày cho khách du lịch: đăng ký cơ sở lưu trú</h2>
 <p>Cho khách du lịch thuê theo đêm là hoạt động kinh doanh lưu trú. Theo hướng quản lý hiện nay (ví dụ quy định mới của TP.HCM năm 2026), chủ căn hộ khai thác căn hộ du lịch phải <strong>đăng ký cơ sở lưu trú</strong> và đáp ứng điều kiện an ninh trật tự, phòng cháy. Báo chí (<a href="https://vnexpress.net/cho-thue-can-ho-ngan-ngay-trong-chung-cu-phai-dang-ky-hoat-dong-5062683.html">VnExpress</a>, <a href="https://tuoitre.vn/cho-thue-chung-cu-theo-ngay-coi-chung-bi-phat-tram-trieu-vi-dung-nha-sai-muc-dich-10026091112545148.htm">Tuổi Trẻ</a>) cũng ghi nhận mức phạt tới hàng trăm triệu đồng với việc biến căn hộ thành cơ sở lưu trú trái phép. Đà Nẵng có thể áp dụng quy định riêng – cần hỏi phường và cơ quan du lịch thành phố.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-layout-1pn-plus-51m2.jpg|Layout căn 1PN+ 51 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
-<h2>3. Khai báo lưu trú cho mọi khách</h2>
+<h2>3. Cho thuê căn hộ ngắn ngày: khai báo lưu trú cho mọi khách</h2>
 <p>Mọi khách thuê phải được khai báo lưu trú với công an theo Luật Cư trú. Căn hộ tự nhận phòng bằng mật khẩu vẫn phải khai báo – đây là lỗi nhiều chủ nhà hay bỏ sót.</p>
 <p>Với khách nước ngoài, Thông tư 87/2026/TT-BCA (hiệu lực từ 24/7/2026) yêu cầu cơ sở lưu trú, gồm cả nhà ở cho người nước ngoài thuê, khai báo tạm trú <strong>ngay khi khách đến</strong>, qua hệ thống khai báo tạm trú điện tử của Bộ Công an hoặc phiếu khai báo (tóm tắt trên <a href="https://luatvietnam.vn/tin-van-ban-moi/tu-24-7-2026-co-so-luu-tru-phai-khai-bao-tam-tru-ngay-khi-nguoi-nuoc-ngoai-den-luu-tru-883-110512-article.html">LuatVietnam</a>). Khi cho thuê căn hộ ngắn ngày, nên đăng ký tài khoản khai báo trước khi đón khách đầu tiên.</p>
 <h2>4. Thuế khi cho thuê căn hộ ngắn ngày</h2>
@@ -486,7 +486,7 @@ HTML
 <li>Tỷ lệ thuế khác nhau giữa <strong>cho thuê tài sản</strong> và <strong>kinh doanh dịch vụ lưu trú</strong> (có dọn phòng, đón khách) – hỏi cơ quan thuế để biết căn của mình thuộc nhóm nào.</li>
 <li>Khi thuê đơn vị vận hành, hợp đồng cần ghi rõ bên nào kê khai, nộp thuế.</li>
 </ul>
-<h2>5. Cách giảm rủi ro</h2>
+<h2>5. Giảm rủi ro khi cho thuê căn hộ ngắn ngày</h2>
 <ol>
 <li>Đọc quy chế quản lý tòa nhà trước khi ký – quy định cho thuê ngắn ngày, khách ra vào, thẻ thang máy.</li>
 <li>Hỏi chủ đầu tư về mô hình cho thuê do chủ đầu tư hoặc đơn vị chuyên nghiệp vận hành.</li>
@@ -536,10 +536,10 @@ HTML
 	$posts[] = array(
 		'slug'     => 'thi-truong-can-ho-da-nang-quy-iii-2026',
 		'old_slug' => array( 'thi-truong-can-ho-da-nang-quy-3-2026-sun-saphia-residence' ),
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 15/11: chuẩn SEO 100 – rút gọn URL, phân tích hấp thụ theo hạng, nên chờ hay mua, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Thị trường căn hộ Đà Nẵng quý III/2026: nguồn cung giảm 14%, Sun Saphia Residence ra hàng lúc nào là hợp lý?',
 		'excerpt'  => 'Quý III/2026 Đà Nẵng có 4.385 căn hộ sơ cấp từ 20 dự án (-14%), tiêu thụ 2.099 căn, tập trung Ngũ Hành Sơn, Hải Châu, Sơn Trà. Giá sơ cấp neo cao – Sun Saphia Residence nằm ở đâu trong bức tranh này.',
-		'keyword'  => 'thị trường căn hộ Đà Nẵng quý III 2026',
+		'keyword'  => 'căn hộ Đà Nẵng quý III',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'nguồn cung căn hộ Đà Nẵng', 'giá căn hộ Đà Nẵng 2026', 'căn hộ Ngũ Hành Sơn' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-05 08:00',
@@ -547,9 +547,9 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Thị trường căn hộ Đà Nẵng' ),
 		'image'    => 'plugin:img/tin-tuc/thi-truong-can-ho-da-nang-quy-3-2026.jpg',
 		'content'  => <<<HTML
-<p>Báo cáo quý III/2026 của DKRA Consulting (báo chí trích dẫn) cho thấy <strong>thị trường căn hộ Đà Nẵng</strong> giảm cả nguồn cung lẫn giao dịch, nhưng giá sơ cấp vẫn neo cao. Bài này tóm tắt các con số chính và đặt <strong>Sun Saphia Residence</strong> – dự án đang nhận giữ chỗ ở Ngũ Hành Sơn – vào bức tranh chung.</p>
+<p>Thị trường căn hộ Đà Nẵng quý III/2026 giảm cả nguồn cung lẫn giao dịch nhưng giá sơ cấp vẫn neo cao, theo báo cáo của DKRA Consulting được <a href="https://cafef.vn/nguon-cung-so-cap-can-ho-tai-da-nang-giam-14-trong-quy-iii-2026-188261025063317834.chn">CafeF</a> và <a href="https://baodautu.vn/thi-truong-dat-nen-can-ho-da-nang-quy-iii2026-dong-tien-chon-loc-d729484.html">Báo Đầu tư</a> trích dẫn. Bài này tóm tắt các con số chính và đặt <strong>Sun Saphia Residence</strong> – dự án đang nhận giữ chỗ ở Ngũ Hành Sơn – vào bức tranh chung.</p>
 <!--hh-featured-->
-<h2>Con số chính quý III/2026</h2>
+<h2>Căn hộ Đà Nẵng quý III/2026: con số chính</h2>
 <table>
 <thead><tr><th>Chỉ tiêu</th><th>Quý III/2026</th><th>Biến động</th></tr></thead>
 <tbody>
@@ -560,29 +560,40 @@ HTML
 <tr><td>Dự báo quý IV/2026</td><td>500 – 1.000 căn mới</td><td>Tập trung Ngũ Hành Sơn, Hải Châu, Sơn Trà</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-ven-bien-son-thuy.jpg|Sun Saphia Residence nhìn từ biển Sơn Thủy, Ngũ Hành Sơn (ảnh chủ đầu tư)-->
-<h2>Đọc số liệu thế nào?</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-ven-bien-son-thuy.jpg|Căn hộ Đà Nẵng quý III/2026: Sun Saphia Residence ở Ngũ Hành Sơn, một trong ba khu tập trung nguồn cung (ảnh chủ đầu tư)-->
+<h2>Đọc số liệu căn hộ Đà Nẵng quý III thế nào?</h2>
 <ul>
 <li><strong>Giá sơ cấp neo cao</strong> do chi phí đầu vào tăng; ngược lại giá thứ cấp được dự báo tiếp tục giảm vì lãi suất cao – người mua có thêm lựa chọn ở thị trường chuyển nhượng.</li>
 <li><strong>Ngũ Hành Sơn là một trong ba khu tập trung nguồn cung</strong>: cạnh tranh trực tiếp với các dự án ven biển khác cùng khu vực.</li>
 <li><strong>Hạng B dẫn dắt thanh khoản</strong>: sản phẩm tổng tiền vừa phải bán nhanh hơn – phù hợp với cơ cấu nhiều studio của Sun Saphia Residence (513/782 căn).</li>
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Hạng B bán tốt hơn hẳn các phân khúc khác</h2>
+<p>Từ tỷ lệ báo chí trích dẫn, Hoàng Hiệp tự tính: hạng B chiếm 46% nguồn cung (khoảng 2.017 căn) và 68% lượng tiêu thụ (khoảng 1.427 căn), tức tỷ lệ hấp thụ của hạng B khoảng 71%. Các phân khúc còn lại có khoảng 2.368 căn chào bán nhưng chỉ tiêu thụ khoảng 672 căn – tỷ lệ hấp thụ khoảng 28%. Nói cách khác, thị trường căn hộ Đà Nẵng quý III chọn lọc rõ: sản phẩm tổng tiền vừa phải đi nhanh, sản phẩm cao cấp đi chậm.</p>
+<h2>Căn hộ Đà Nẵng quý III và quý IV/2026: nên chờ hay mua?</h2>
+<ul>
+<li><strong>Người mua để ở</strong>: nguồn cung mới quý IV dự báo chỉ 500 – 1.000 căn, lựa chọn không nhiều; nếu đã tìm được căn đúng nhu cầu và tài chính, chờ thêm không chắc có lợi.</li>
+<li><strong>Người mua đầu tư</strong>: giá thứ cấp được dự báo tiếp tục giảm do lãi suất cao – có thể so thêm căn chuyển nhượng đã bàn giao trước khi xuống tiền cho dự án mới.</li>
+<li><strong>Người cần vay</strong>: tính kỹ khoản trả góp sau thời gian ưu đãi; chính sách hỗ trợ lãi suất của chủ đầu tư là yếu tố quan trọng khi so sánh.</li>
+</ul>
 <h2>Sun Saphia Residence trong bức tranh này</h2>
-<p>Sun Saphia Residence chưa công bố bảng giá chính thức. Khi có giá, nên so với ba mốc: giá sơ cấp các dự án ven biển cùng khu, giá chuyển nhượng căn hộ đã bàn giao gần biển, và chi phí vốn khi vay (lãi vay mua nhà đang khoảng 9 – 10,5%/năm thời gian ưu đãi). Tham khảo: <a href="/gia-sun-saphia-residence-bao-nhieu/">giá Sun Saphia Residence</a>, <a href="/vay-mua-sun-saphia-residence-tra-gop-hang-thang/">bảng tính trả góp</a>.</p>
+<p>Sun Saphia Residence chưa công bố bảng giá chính thức từng căn. Sau quý III, ngày 28/10/2026 chủ đầu tư đưa ra giá dự kiến studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ (có vay, chưa VAT và 2% bảo trì) – nhóm tổng tiền vừa phải, gần với phân khúc đang dẫn dắt thanh khoản. Khi có giá chính thức, nên so với ba mốc: giá sơ cấp các dự án ven biển cùng khu, giá chuyển nhượng căn hộ đã bàn giao gần biển, và chi phí vốn khi vay (lãi vay mua nhà đang khoảng 9 – 10,5%/năm thời gian ưu đãi). Tham khảo: <a href="/gia-sun-saphia-residence-bao-nhieu/">giá Sun Saphia Residence</a>, <a href="/vay-mua-sun-saphia-residence-tra-gop-hang-thang/">bảng tính trả góp</a>.</p>
+<p>Nhận định của Hoàng Hiệp: số liệu căn hộ Đà Nẵng quý III cho thấy người mua đang thận trọng và chọn lọc, không phải thị trường đóng băng. Ở giai đoạn này, lợi thế thuộc về người đã chuẩn bị sẵn tài chính, biết rõ mình cần loại căn nào và chịu khó so sánh cả sơ cấp lẫn thứ cấp.</p>
 <p>Lưu ý: số liệu thị trường là của đơn vị nghiên cứu, báo chí trích dẫn, có thể khác giữa các nguồn; nên xem báo cáo gốc khi cần con số chính xác.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Thị trường căn hộ Đà Nẵng quý III/2026 và Sun Saphia',
-			'desc'      => 'Quý III/2026: căn hộ sơ cấp Đà Nẵng 4.385 căn (-14%), tiêu thụ 2.099 căn, hạng B dẫn dắt, giá sơ cấp neo cao. Sun Saphia Residence so với thị trường.',
+			'seo_title' => 'Căn hộ Đà Nẵng quý III/2026: nguồn cung giảm 14%',
+			'desc'      => 'Căn hộ Đà Nẵng quý III/2026: 4.385 căn sơ cấp (-14%), tiêu thụ 2.099 căn, hạng B dẫn dắt, giá sơ cấp neo cao. Sun Saphia Residence so với thị trường.',
 			'points'    => array(
-				'Nguồn cung sơ cấp 4.385 căn từ 20 dự án, giảm 14%',
+				'Căn hộ Đà Nẵng quý III/2026: nguồn cung sơ cấp 4.385 căn từ 20 dự án, giảm 14%',
 				'Tiêu thụ 2.099 căn, giảm 25% so với quý II',
 				'Quý IV/2026 dự kiến 500 – 1.000 căn mới, tập trung Ngũ Hành Sơn, Hải Châu, Sơn Trà',
 			),
 			'faq'       => array(
+				array( 'Căn hộ Đà Nẵng quý III/2026 phân khúc nào bán tốt nhất?', 'Hạng B: chiếm 46% nguồn cung nhưng 68% lượng tiêu thụ; Hoàng Hiệp tự tính tỷ lệ hấp thụ hạng B khoảng 71%, các phân khúc khác khoảng 28%.' ),
+				array( 'Giá căn hộ Đà Nẵng quý III/2026 có giảm không?', 'Theo báo chí trích DKRA, giá sơ cấp neo cao do chi phí đầu vào tăng; giá thứ cấp được dự báo tiếp tục giảm vì lãi suất cao.' ),
 				array( 'Nguồn cung căn hộ Đà Nẵng quý III/2026 là bao nhiêu?', 'Theo DKRA (báo chí trích dẫn), khoảng 4.385 căn sơ cấp từ 20 dự án, giảm 14% so với quý II; tiêu thụ khoảng 2.099 căn.' ),
 			),
 		),

@@ -25,6 +25,7 @@ function hh_posts_cum_du_an_11_2026_lo_2( $posts ) {
 		'keywords_extra' => array( 'giá Cora Tower Đà Nẵng', 'bảng giá Cora Tower', 'Cora Tower Sun NeO City giá' ),
 		'project'  => 'cora-tower',
 		'schedule' => '2026-11-15 09:00',
+		'rev'      => 2,
 		'category' => 'Thị trường',
 		'tags'     => array( 'Cora Tower', 'Sun NeO City', 'Giá căn hộ Đà Nẵng' ),
 		'image'    => 'plugin:img/tin-tuc/gia-cora-tower-sun-neo-city.jpg',
@@ -136,6 +137,7 @@ HTML
 		'keywords_extra' => array( 'căn hộ Sun NeO City', 'so sánh Cora Spana S-Light', 'căn hộ Hòa Xuân Sun Group' ),
 		'project'  => 'cora-tower',
 		'schedule' => '2026-11-15 14:00',
+		'rev'      => 2,
 		'category' => 'Kinh nghiệm',
 		'tags'     => array( 'Sun NeO City', 'Cora Tower', 'Spana Tower', 'S-Light Tower' ),
 		'image'    => 'plugin:img/tin-tuc/chon-toa-sun-neo-city-hoa-xuan.jpg',
@@ -233,6 +235,7 @@ HTML
 		'keywords_extra' => array( 'giá Capital Square Đà Nẵng', 'bảng giá Capital Square Đà Nẵng', 'giá căn hộ Capital Square' ),
 		'project'  => 'capital-square-da-nang',
 		'schedule' => '2026-11-16 09:00',
+		'rev'      => 2,
 		'category' => 'Thị trường',
 		'tags'     => array( 'Capital Square Đà Nẵng', 'Căn hộ sông Hàn', 'Giá căn hộ Đà Nẵng' ),
 		'image'    => 'plugin:img/capital-square/capital-square-phoi-canh-toan-canh-ban-ngay.jpg',
@@ -290,7 +293,7 @@ HTML
 <li>Quà Smart Home: 1PN 100 triệu, 2PN 200 triệu, 3PN 300 triệu.</li>
 <li>Tặng chuyến du lịch châu Âu trị giá 100 triệu.</li>
 </ul>
-<p>So sánh chi tiết hai tòa này: <a href="/hudson-place-s4-va-broadway-place-s3-capital-square-chon-toa-nao/">Hudson Place S4 và Broadway Place S3</a>.</p>
+<p>So sánh chi tiết hai tòa này: <a href="/hudson-place-hay-broadway-place-capital-square/">Hudson Place S4 và Broadway Place S3</a>.</p>
 <h2>Sở hữu và bàn giao</h2>
 <ul>
 <li>Sở hữu lâu dài với khách Việt Nam; 50 năm với khách nước ngoài (trong hạn mức được phép: tối đa 502 căn ở Capital Square 2 và 512 căn ở Capital Square 3).</li>
@@ -348,6 +351,7 @@ HTML
 		'keywords_extra' => array( 'Hudson Place S4', 'Broadway Place S3', 'Hudson Place Capital Square', 'Capital Square 3 nên mua tòa nào' ),
 		'project'  => 'capital-square-hudson-place-s4',
 		'schedule' => '2026-11-16 14:00',
+		'rev'      => 2,
 		'category' => 'Kinh nghiệm',
 		'tags'     => array( 'Capital Square Đà Nẵng', 'Hudson Place', 'Căn hộ sông Hàn' ),
 		'image'    => 'plugin:img/hudson-place/hudson-place-phoi-canh-toa-s4-ven-song-han.jpg',
@@ -456,6 +460,7 @@ HTML
 		'keyword'  => 'căn hộ dưới 3 tỷ',
 		'keywords_extra' => array( 'căn hộ Đà Nẵng giá rẻ', 'căn hộ Đà Nẵng 2 tỷ', 'mua căn hộ Đà Nẵng dưới 3 tỷ' ),
 		'schedule' => '2026-11-17 09:00',
+		'rev'      => 2,
 		'category' => 'Thị trường',
 		'tags'     => array( 'Căn hộ Đà Nẵng', 'Giá căn hộ Đà Nẵng' ),
 		'image'    => 'plugin:img/fours-tower/fours-tower-phoi-canh-4-thap.jpg',
@@ -499,7 +504,7 @@ HTML
 </tbody>
 </table>
 <!--hh-img:img/the-camellia/the-camellia-phoi-canh-hoang-hon-ban-dao.jpg|Căn hộ dưới 3 tỷ ở Sơn Trà: The Camellia lúc hoàng hôn, chân bán đảo Sơn Trà (phối cảnh chủ đầu tư)-->
-<h2>Sở hữu lâu dài hay 50 năm</h2>
+<h2>Căn hộ dưới 3 tỷ: sở hữu lâu dài hay 50 năm</h2>
 <p>Năm dự án (FourS F1, F5, The Camellia, FPT Plaza 4, Cora Tower) là căn hộ sở hữu lâu dài. Sun Saphia Residence và Symphony 5 nằm trên đất thương mại dịch vụ, thời hạn 50 năm, đổi lại có vị trí sát biển hoặc sát sông. Mua để ở lâu dài nên ưu tiên nhóm sở hữu lâu dài; mua cho thuê ngắn ngày thì nhóm 50 năm có lợi thế vị trí. Đọc thêm: <a href="/phap-ly-symphony-5-so-huu-50-nam/">sở hữu 50 năm nghĩa là gì</a>.</p>
 <h2>Căn hộ dưới 3 tỷ: studio hay 1PN</h2>
 <ul>

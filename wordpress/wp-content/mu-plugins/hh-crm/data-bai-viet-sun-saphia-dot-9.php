@@ -44,7 +44,7 @@ function hh_posts_sun_saphia_dot_9( $posts ) {
 <h2>FTZ Đà Nẵng tác động thế nào tới căn hộ ven biển?</h2>
 <p>Hoàng Hiệp nhìn theo 3 tầng, từ chắc chắn đến ít chắc chắn:</p>
 <ol>
-<li><strong>Nhu cầu lưu trú công tác:</strong> giai đoạn xây dựng hạ tầng kéo theo kỹ sư, chuyên gia và đoàn khảo sát. Nhóm này thường thuê theo tuần, theo tháng – phù hợp với studio, 1PN+ có dịch vụ quản lý như Sun Saphia Residence (xem bài <a href="/cho-thue-dai-han-sun-saphia-residence-chuyen-gia-gia-dinh/">cho thuê dài hạn Sun Saphia Residence</a>).</li>
+<li><strong>Nhu cầu lưu trú công tác:</strong> giai đoạn xây dựng hạ tầng kéo theo kỹ sư, chuyên gia và đoàn khảo sát. Nhóm này thường thuê theo tuần, theo tháng – phù hợp với studio, 1PN+ có dịch vụ quản lý như Sun Saphia Residence (xem bài <a href="/cho-thue-dai-han-sun-saphia-residence/">cho thuê dài hạn Sun Saphia Residence</a>).</li>
 <li><strong>Doanh nghiệp, sự kiện:</strong> khi các khu chức năng đi vào hoạt động, hội nghị, hội chợ, đoàn doanh nghiệp tăng thêm khách lưu trú ngoài mùa du lịch – giúp bớt phụ thuộc vào mùa hè.</li>
 <li><strong>Giá trị dài hạn:</strong> phụ thuộc FTZ thu hút được bao nhiêu doanh nghiệp thật sự hoạt động. Đây là kỳ vọng nhiều năm, không nên dùng để tính giá bán lại ngắn hạn.</li>
 </ol>
@@ -57,7 +57,7 @@ function hh_posts_sun_saphia_dot_9( $posts ) {
 </tbody>
 </table>
 <h2>FTZ Đà Nẵng có phải lý do để mua căn hộ?</h2>
-<p>Thông tin hạ tầng lớn dễ bị dùng để thổi giá. Với Sun Saphia Residence, nên đánh giá dự án bằng các yếu tố hiện hữu: vị trí đối diện công viên biển, sản phẩm studio – 1PN+ phù hợp cho thuê, pháp lý căn hộ thương mại dịch vụ 50 năm, và dòng khách du lịch đang có (xem bài <a href="/mua-du-lich-da-nang-cong-suat-phong-cho-thue-sun-saphia/">mùa du lịch và công suất phòng</a>). FTZ Đà Nẵng nên được xem là "điểm cộng thêm", không phải lý do chính.</p>
+<p>Thông tin hạ tầng lớn dễ bị dùng để thổi giá. Với Sun Saphia Residence, nên đánh giá dự án bằng các yếu tố hiện hữu: vị trí đối diện công viên biển, sản phẩm studio – 1PN+ phù hợp cho thuê, pháp lý căn hộ thương mại dịch vụ 50 năm, và dòng khách du lịch đang có (xem bài <a href="/cong-suat-phong-da-nang-mua-du-lich-sun-saphia/">mùa du lịch và công suất phòng</a>). FTZ Đà Nẵng nên được xem là "điểm cộng thêm", không phải lý do chính.</p>
 <h2>Cách theo dõi tin FTZ Đà Nẵng cho đúng</h2>
 <p>Tin về FTZ Đà Nẵng xuất hiện dày trên báo chí và mạng xã hội, nhưng không phải tin nào cũng có giá trị như nhau. Hoàng Hiệp thường chia làm 3 mức.</p>
 <p>Mức thấp nhất là <strong>đề xuất, nghiên cứu</strong>: doanh nghiệp xin khảo sát, thành phố "nghiên cứu mở rộng" – chưa có gì ràng buộc. Mức giữa là <strong>quyết định chấp thuận chủ trương và nhà đầu tư</strong> như Quyết định 2578/QĐ-UBND (vị trí số 3) hay 5202/QĐ-UBND (vị trí số 7) – đã có pháp lý, nhưng chưa có công trình. Mức cao nhất là <strong>khởi công và có doanh nghiệp thuê đất, tuyển lao động</strong> – lúc đó nhu cầu lưu trú mới thật sự xuất hiện.</p>
@@ -144,7 +144,7 @@ HTML
 <h2>Bàn giao Sun Saphia Residence để cho thuê: thêm vài lưu ý</h2>
 <p>Phần lớn người mua studio, 1PN+ tại dự án tính chuyện cho thuê. Nếu vậy, sau khi bàn giao Sun Saphia Residence, thời gian từ lúc nhận nhà đến lúc đón khách đầu tiên phụ thuộc chủ yếu vào việc làm tủ bếp và nội thất. Nên đặt đơn vị nội thất đo đạc ngay trong tuần nhận nhà, gửi họ bản vẽ mặt bằng và ảnh các vị trí chờ điện nước đã chụp. Đồng thời ghi lại số đồng hồ điện, nước ngày nhận để tách chi phí với giai đoạn thi công nội thất.</p>
 <h2>Sau bàn giao: những việc tiếp theo</h2>
-<p>Đóng phí quản lý từ ngày bàn giao (dự kiến 15.000 – 20.000 đ/m²/tháng, xem bài <a href="/phi-quan-ly-sun-saphia-residence-moi-thang-bao-nhieu/">phí quản lý Sun Saphia Residence</a>), làm tủ bếp và nội thất (tham khảo bài <a href="/chi-phi-noi-that-studio-30m2-cho-thue-sun-saphia/">chi phí nội thất studio 30 m²</a>), theo dõi thời hạn bảo hành ghi trong hợp đồng và thủ tục cấp giấy chứng nhận.</p>
+<p>Đóng phí quản lý từ ngày bàn giao (dự kiến 15.000 – 20.000 đ/m²/tháng, xem bài <a href="/phi-quan-ly-sun-saphia-residence-bao-nhieu/">phí quản lý Sun Saphia Residence</a>), làm tủ bếp và nội thất (tham khảo bài <a href="/noi-that-studio-sun-saphia-residence-30m2/">chi phí nội thất studio 30 m²</a>), theo dõi thời hạn bảo hành ghi trong hợp đồng và thủ tục cấp giấy chứng nhận.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
 <p>Bàn giao liền tường giúp tiết kiệm thời gian hoàn thiện, nhưng cũng có nghĩa là lỗi hoàn thiện cần được phát hiện ngay ngày bàn giao Sun Saphia Residence. Quyền và nghĩa vụ khi bàn giao nhà hình thành trong tương lai được quy định trong <a href="https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx">Luật Kinh doanh bất động sản 2023</a> và hợp đồng mua bán. Ngay từ khi ký hợp đồng, anh chị nên yêu cầu phụ lục vật liệu chi tiết – đó là căn cứ để kiểm tra sau này. Xem thêm bài {$review}.</p>
 {$cta}
@@ -213,7 +213,7 @@ HTML
 <li><strong>Studio 30 m²:</strong> hợp người đi một mình, ngân sách vừa phải; cần bố trí khéo để có bàn làm việc riêng tách khỏi giường.</li>
 <li><strong>1PN+ khoảng 50 m²:</strong> phòng "+" làm phòng làm việc – điều mà khách ở 2 – 3 tháng sẵn sàng trả thêm; cũng hợp cặp đôi cùng làm việc từ xa.</li>
 </ul>
-<p>Với digital nomad Đà Nẵng, công suất cao và ổn định hơn cho thuê theo đêm, chi phí dọn phòng thấp hơn, nhưng giá mỗi đêm quy đổi thấp hơn. Nhiều chủ căn kết hợp: mùa cao điểm hè cho thuê theo đêm, mùa thấp điểm cho thuê theo tháng (xem bài <a href="/cho-thue-dai-han-sun-saphia-residence-chuyen-gia-gia-dinh/">cho thuê dài hạn</a> và bài <a href="/khach-quoc-te-da-nang-2026-han-quoc-trung-quoc-thue-can-ho-sun-saphia/">khách quốc tế thuê căn hộ</a>).</p>
+<p>Với digital nomad Đà Nẵng, công suất cao và ổn định hơn cho thuê theo đêm, chi phí dọn phòng thấp hơn, nhưng giá mỗi đêm quy đổi thấp hơn. Nhiều chủ căn kết hợp: mùa cao điểm hè cho thuê theo đêm, mùa thấp điểm cho thuê theo tháng (xem bài <a href="/cho-thue-dai-han-sun-saphia-residence/">cho thuê dài hạn</a> và bài <a href="/khach-quoc-te-thue-can-ho-da-nang-2026/">khách quốc tế thuê căn hộ</a>).</p>
 <h2>Ví dụ: một tháng thấp điểm cho digital nomad Đà Nẵng thuê</h2>
 <p>Hoàng Hiệp lấy ví dụ định tính, không dùng số giả định: tháng 10 – 11 là mùa mưa, cho thuê theo đêm thường lẻ ngày, mỗi lượt khách lại tốn một lần dọn phòng, giặt ga, phí nền tảng đặt phòng. Nếu cùng căn đó cho một digital nomad Đà Nẵng thuê trọn tháng, chủ nhà chỉ dọn định kỳ theo thỏa thuận, gần như không mất phí nền tảng nếu khách liên hệ trực tiếp, và căn không bị trống giữa các lượt. Doanh thu mỗi đêm quy đổi thấp hơn, nhưng doanh thu thực nhận của tháng thấp điểm có thể ổn định hơn.</p>
 <p>Ngược lại, vào tháng 6 – 7 (mùa hè, mùa pháo hoa), giá theo đêm cao, nên khóa căn cho khách thuê tháng có thể thiệt. Vì vậy cách phổ biến là mở lịch thuê tháng từ khoảng tháng 9 đến tháng 3, còn mùa hè ưu tiên khách ngắn ngày.</p>
@@ -295,7 +295,7 @@ HTML
 <li><strong>Mở lịch sớm 3 – 4 tháng</strong> khi ban tổ chức công bố lịch thi; đặt giá đêm thi cao hơn ngày thường.</li>
 <li><strong>Yêu cầu tối thiểu 2 đêm</strong> vào cuối tuần có đêm thi, tránh căn bị lẻ ngày.</li>
 <li><strong>Thông tin đi lại:</strong> ghi sẵn trong tin đăng thời gian taxi lên khán đài, gợi ý đi sớm để tránh kẹt.</li>
-<li><strong>Không đặt kỳ vọng cả năm vào 6 tuần:</strong> mùa pháo hoa là đỉnh, nên tính dòng tiền cả năm theo mùa (xem bài <a href="/mua-du-lich-da-nang-cong-suat-phong-cho-thue-sun-saphia/">mùa du lịch Đà Nẵng và công suất phòng</a>).</li>
+<li><strong>Không đặt kỳ vọng cả năm vào 6 tuần:</strong> mùa pháo hoa là đỉnh, nên tính dòng tiền cả năm theo mùa (xem bài <a href="/cong-suat-phong-da-nang-mua-du-lich-sun-saphia/">mùa du lịch Đà Nẵng và công suất phòng</a>).</li>
 </ol>
 <h2>Những rủi ro khi cho thuê mùa pháo hoa DIFF</h2>
 <ul>
@@ -308,7 +308,7 @@ HTML
 <p>Cho thuê mùa pháo hoa DIFF chỉ là một đoạn trong năm. Theo số liệu UBND thành phố công bố, 9 tháng năm 2026 Đà Nẵng đón khoảng 15,86 triệu lượt khách lưu trú, tăng 26,4% so với cùng kỳ (<a href="https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp">VietnamPlus</a>). Nghĩa là nhu cầu lưu trú không chỉ dồn vào 6 tuần lễ hội. Một căn hộ cho thuê tốt cần kế hoạch cho cả mùa thấp điểm (tháng 9 – 12), không chỉ trông vào cho thuê mùa pháo hoa DIFF: giảm giá hợp lý, nhận khách thuê theo tuần, theo tháng.</p>
 <p>Lưu ý: Sun Saphia Residence dự kiến bàn giao 11/2028, nên mùa DIFF đầu tiên mà căn hộ có thể cho thuê sớm nhất là mùa hè 2029, nếu lễ hội tiếp tục được tổ chức.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>DIFF 2026 cho thấy sức chứa lưu trú của Đà Nẵng vẫn căng vào mùa hè, và cho thuê mùa pháo hoa DIFF vẫn là đỉnh doanh thu trong năm, nhất là quanh trung tâm và Võ Nguyên Giáp. Căn hộ ven biển có quản lý chuyên nghiệp là lựa chọn thay thế hợp lý cho khách đặt muộn. Phí nền tảng đặt phòng nên tính trước – xem bài <a href="/phi-booking-agoda-airbnb-cho-thue-can-ho-sun-saphia/">phí Booking, Agoda, Airbnb</a> và bài {$review}.</p>
+<p>DIFF 2026 cho thấy sức chứa lưu trú của Đà Nẵng vẫn căng vào mùa hè, và cho thuê mùa pháo hoa DIFF vẫn là đỉnh doanh thu trong năm, nhất là quanh trung tâm và Võ Nguyên Giáp. Căn hộ ven biển có quản lý chuyên nghiệp là lựa chọn thay thế hợp lý cho khách đặt muộn. Phí nền tảng đặt phòng nên tính trước – xem bài <a href="/phi-booking-agoda-airbnb-cho-thue-can-ho/">phí Booking, Agoda, Airbnb</a> và bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: Tiền Phong (dẫn Sở Văn hóa, Thể thao và Du lịch Đà Nẵng), Báo Văn hóa, Nhân Dân, Thanh tra (6 – 7/2026) về lượt khách, công suất phòng mùa DIFF 2026. Các nguồn có chênh lệch về công suất phòng toàn thành phố; số liệu tham khảo.</p>
 HTML
@@ -359,7 +359,7 @@ HTML
 <tr><td>Bà Nà Hills Golf Club</td><td>Chân núi Bà Nà, phía Tây thành phố</td><td>Sân trong thung lũng, khác hẳn sân ven biển</td></tr>
 </tbody>
 </table>
-<p>Thời gian di chuyển phụ thuộc giờ đi và điểm xuất phát; anh chị nên kiểm tra bản đồ trực tiếp. Điểm đáng chú ý là ba sân đầu nằm trên hoặc gần <strong>trục Võ Nguyên Giáp – Trường Sa – Lạc Long Quân</strong>, nên ở khu Sơn Thủy đi các sân golf gần Sun Saphia Residence rất thuận (xem bài <a href="/tu-sun-saphia-residence-di-hoi-an-bao-xa-lich-trinh/">từ Sun Saphia Residence đi Hội An</a>).</p>
+<p>Thời gian di chuyển phụ thuộc giờ đi và điểm xuất phát; anh chị nên kiểm tra bản đồ trực tiếp. Điểm đáng chú ý là ba sân đầu nằm trên hoặc gần <strong>trục Võ Nguyên Giáp – Trường Sa – Lạc Long Quân</strong>, nên ở khu Sơn Thủy đi các sân golf gần Sun Saphia Residence rất thuận (xem bài <a href="/sun-saphia-residence-di-hoi-an-bao-xa/">từ Sun Saphia Residence đi Hội An</a>).</p>
 <!--hh-img:img/sun-saphia/sun-saphia-so-do-vi-tri.jpg|Sân golf gần Sun Saphia Residence – vị trí dự án trên trục ven biển Trường Sa, hướng về các sân phía Nam (sơ đồ chủ đầu tư)-->
 <h2>Mỗi sân golf gần Sun Saphia Residence hợp với ai?</h2>
 <p><strong>Montgomerie Links</strong> là sân links ven biển, gió biển là một phần thử thách – hợp golfer có kinh nghiệm muốn trải nghiệm kiểu sân ven biển (thông tin về khu sân và biệt thự quanh sân từng được <a href="https://vnexpress.net/biet-thu-san-golf-montgomerie-link-2696231.html">VnExpress</a> giới thiệu). <strong>BRG Đà Nẵng Golf Resort</strong> nằm ngay trên đường Trường Sa, là sân golf gần Sun Saphia Residence thuận đi lại nhất cho người muốn chơi buổi sáng sớm rồi quay về nghỉ, tắm biển buổi chiều.</p>
@@ -368,7 +368,7 @@ HTML
 <ul>
 <li><strong>Mùa golf lệch mùa biển:</strong> khách golf, nhất là khách Hàn Quốc, Nhật Bản, đến nhiều vào mùa thu – đông và đầu xuân, khi trời mát hơn – đúng lúc khách tắm biển giảm.</li>
 <li><strong>Ở theo nhóm, nhiều đêm:</strong> nhóm 2 – 4 người chơi 3 – 5 ngày; căn 2PN hoặc 2 studio liền kề phù hợp.</li>
-<li><strong>Cần dịch vụ:</strong> xe đưa đón sân, chỗ để túi gậy, giờ ăn sáng sớm – điểm mà đơn vị vận hành chuyên nghiệp làm tốt hơn tự cho thuê (xem bài <a href="/tu-cho-thue-hay-thue-don-vi-van-hanh-can-ho-sun-saphia/">tự cho thuê hay thuê đơn vị vận hành</a>).</li>
+<li><strong>Cần dịch vụ:</strong> xe đưa đón sân, chỗ để túi gậy, giờ ăn sáng sớm – điểm mà đơn vị vận hành chuyên nghiệp làm tốt hơn tự cho thuê (xem bài <a href="/don-vi-van-hanh-cho-thue-can-ho-sun-saphia/">tự cho thuê hay thuê đơn vị vận hành</a>).</li>
 </ul>
 <h2>Gợi ý cho chủ căn muốn đón khách golf</h2>
 <ol>
@@ -380,7 +380,7 @@ HTML
 </ol>
 <p>Một lưu ý thực tế: khách golf thường dậy rất sớm và về phòng giữa trưa, nên giờ dọn phòng cần linh hoạt. Nếu thuê đơn vị vận hành, nên thống nhất trước để nhân viên không vào phòng lúc khách đang nghỉ trưa sau vòng chơi.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Sân golf gần Sun Saphia Residence không phải lý do chính để mua căn hộ, nhưng là một nguồn khách giúp lấp mùa thấp điểm của căn hộ ven biển. Kết hợp với khách du lịch hè và khách công tác, căn hộ có thể giữ công suất đều hơn trong năm. Xem bài <a href="/khach-quoc-te-da-nang-2026-han-quoc-trung-quoc-thue-can-ho-sun-saphia/">khách quốc tế thuê căn hộ</a> và bài {$review}.</p>
+<p>Sân golf gần Sun Saphia Residence không phải lý do chính để mua căn hộ, nhưng là một nguồn khách giúp lấp mùa thấp điểm của căn hộ ven biển. Kết hợp với khách du lịch hè và khách công tác, căn hộ có thể giữ công suất đều hơn trong năm. Xem bài <a href="/khach-quoc-te-thue-can-ho-da-nang-2026/">khách quốc tế thuê căn hộ</a> và bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: cổng thông tin du lịch Đà Nẵng (danangfantasticity.com) về Montgomerie Links và các sân golf Đà Nẵng; địa chỉ BRG Đà Nẵng Golf Resort theo thông tin công bố của sân. Bài không nêu khoảng cách chính xác – vui lòng kiểm tra bản đồ.</p>
 HTML
@@ -432,7 +432,7 @@ HTML
 </ul>
 <p>Cách phân bổ chi phí ở Sun Saphia Residence – căn hộ thương mại dịch vụ – sẽ theo quy chế quản lý tòa nhà do chủ đầu tư công bố; anh chị nên hỏi rõ khi nhận bàn giao.</p>
 <h2>Lớp 2: Bảo hiểm căn hộ cho thuê cho tài sản bên trong</h2>
-<p>Bảo hiểm cháy nổ bắt buộc chủ yếu bảo vệ phần kết cấu, không phải đồ đạc bạn tự mua – đây là khoảng trống mà bảo hiểm căn hộ cho thuê cần lấp. Với căn cho thuê, nội thất là khoản đáng kể (xem bài <a href="/chi-phi-noi-that-studio-30m2-cho-thue-sun-saphia/">chi phí nội thất studio 30 m²</a>), nên cân nhắc gói bảo hiểm nhà tư nhân mở rộng cho:</p>
+<p>Bảo hiểm cháy nổ bắt buộc chủ yếu bảo vệ phần kết cấu, không phải đồ đạc bạn tự mua – đây là khoảng trống mà bảo hiểm căn hộ cho thuê cần lấp. Với căn cho thuê, nội thất là khoản đáng kể (xem bài <a href="/noi-that-studio-sun-saphia-residence-30m2/">chi phí nội thất studio 30 m²</a>), nên cân nhắc gói bảo hiểm nhà tư nhân mở rộng cho:</p>
 <ul>
 <li>Nội thất, thiết bị điện tử, tủ bếp tự lắp;</li>
 <li>Rủi ro nước: vỡ ống, tràn nước từ căn khác;</li>
@@ -522,7 +522,7 @@ HTML
 <li><strong>Bánh tráng cuốn thịt heo</strong> – món khách miền Bắc, khách Hàn Quốc thường thích.</li>
 <li><strong>Bún chả cá</strong> – món sáng phổ biến của người Đà Nẵng.</li>
 <li><strong>Hải sản nướng, hấp</strong> – điểm nhấn khi ở ven biển.</li>
-<li><strong>Cao lầu</strong> – nếu khách đi Hội An (xem bài <a href="/tu-sun-saphia-residence-di-hoi-an-bao-xa-lich-trinh/">từ Sun Saphia Residence đi Hội An</a>).</li>
+<li><strong>Cao lầu</strong> – nếu khách đi Hội An (xem bài <a href="/sun-saphia-residence-di-hoi-an-bao-xa/">từ Sun Saphia Residence đi Hội An</a>).</li>
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-cdt-khoi-de-pho-bien.jpg|Ăn uống quanh Sun Saphia Residence – khối đế thương mại hướng ra phố biển, nơi bố trí dịch vụ (phối cảnh chủ đầu tư)-->
 <h2>Lịch ăn uống quanh Sun Saphia Residence trong một ngày</h2>
@@ -620,7 +620,7 @@ HTML
 <ul>
 <li><strong>Thời hạn sử dụng còn lại:</strong> giấy chứng nhận ghi thời hạn 50 năm kể từ 17/09/2026; người mua sau nhận phần thời hạn còn lại (xem bài <a href="/phap-ly-sun-saphia-residence-so-huu-bao-lau/">pháp lý Sun Saphia Residence</a>).</li>
 <li><strong>Miễn thuế nhà ở duy nhất:</strong> quy định miễn thuế TNCN cho người chỉ có một nhà ở duy nhất áp dụng với nhà ở; căn hộ thương mại dịch vụ không phải nhà ở nên khó áp dụng – cần hỏi cơ quan thuế.</li>
-<li><strong>Đối tượng người mua:</strong> chủ đầu tư không bán cho người có yếu tố nước ngoài ở giao dịch sơ cấp; khi bán lại cũng nên kiểm tra kỹ (xem bài <a href="/nguoi-nuoc-ngoai-viet-kieu-mua-sun-saphia-residence-duoc-khong/">người nước ngoài mua Sun Saphia Residence</a>).</li>
+<li><strong>Đối tượng người mua:</strong> chủ đầu tư không bán cho người có yếu tố nước ngoài ở giao dịch sơ cấp; khi bán lại cũng nên kiểm tra kỹ (xem bài <a href="/nguoi-nuoc-ngoai-mua-can-ho-sun-saphia/">người nước ngoài mua Sun Saphia Residence</a>).</li>
 <li><strong>Hợp đồng cho thuê đang chạy:</strong> thỏa thuận rõ bên mua có tiếp tục hợp đồng với khách thuê hoặc đơn vị vận hành không.</li>
 </ul>
 <h2>Nhận định của Hoàng Hiệp</h2>
@@ -669,7 +669,7 @@ HTML
 <!--hh-featured-->
 <h2>Căn hộ cho người nghỉ hưu: Sun Saphia Residence hợp ở điểm nào?</h2>
 <ul>
-<li><strong>Biển và công viên ngay trước mặt:</strong> đối diện công viên biển Sơn Thủy 2,45 ha – đi bộ buổi sáng, tắm biển không cần xe (xem bài <a href="/cong-vien-bien-truong-sa-2-45-ha-truoc-sun-saphia-residence/">công viên biển trước Sun Saphia Residence</a>).</li>
+<li><strong>Biển và công viên ngay trước mặt:</strong> đối diện công viên biển Sơn Thủy 2,45 ha – đi bộ buổi sáng, tắm biển không cần xe (xem bài <a href="/cong-vien-bien-truong-sa-2-45-ha-sun-saphia/">công viên biển trước Sun Saphia Residence</a>).</li>
 <li><strong>Tiện ích trong tòa:</strong> bể bơi view biển, yoga, gym, pilates theo công bố của chủ đầu tư; 7 thang máy cho tòa 30 tầng.</li>
 <li><strong>Có quản lý tòa nhà:</strong> an ninh, vệ sinh, bảo trì chuyên nghiệp – nhẹ việc hơn nhà phố.</li>
 <li><strong>Đăng ký tạm trú được</strong> (theo chủ đầu tư), dù là căn hộ thương mại dịch vụ; thủ tục có thể làm trực tuyến trên <a href="https://dichvucong.gov.vn/">Cổng dịch vụ công quốc gia</a>.</li>
@@ -692,12 +692,12 @@ HTML
 <li><strong>Vợ chồng ở 2 người, ít khách:</strong> căn hộ cho người nghỉ hưu hợp nhất là 1PN+ khoảng 50 m² – phòng phụ làm phòng đọc sách hoặc phòng cho khách ngủ lại.</li>
 <li><strong>Con cháu hay đến chơi:</strong> 2PN 60 – 70 m², ưu tiên căn góc thoáng.</li>
 <li><strong>Chỉ ở vài tuần mỗi năm, còn lại cho thuê:</strong> studio 30 m² dễ cho thuê nhất, chi phí thấp nhất.</li>
-<li><strong>Tầng:</strong> tầng trung giúp đi thang máy nhanh, vẫn có view; xem bài <a href="/tang-cao-hay-tang-thap-sun-saphia-residence-chon-tang-nao/">tầng cao hay tầng thấp</a>.</li>
+<li><strong>Tầng:</strong> tầng trung giúp đi thang máy nhanh, vẫn có view; xem bài <a href="/tang-cao-hay-tang-thap-sun-saphia-residence/">tầng cao hay tầng thấp</a>.</li>
 </ul>
 <h2>Hoàn thiện nội thất cho người lớn tuổi</h2>
 <p>Căn bàn giao liền tường nhưng chưa có tủ bếp, nên chủ căn có cơ hội làm nội thất phù hợp người lớn tuổi ngay từ đầu. Một căn hộ cho người nghỉ hưu nên ưu tiên: tay vịn và sàn chống trơn trong nhà vệ sinh, đèn ngủ cảm biến dọc lối đi từ giường ra phòng tắm, tủ bếp bậc dưới có ngăn kéo thay vì cánh mở (đỡ phải cúi), giường cao vừa phải, công tắc và ổ cắm ở độ cao dễ với. Các chi tiết này không tốn nhiều nhưng giúp sinh hoạt an toàn hơn, và vẫn không ảnh hưởng khi cho khách du lịch thuê.</p>
 <h2>Chi phí hằng tháng và cho thuê khi đi vắng</h2>
-<p>Phí quản lý dự kiến 15.000 – 20.000 đ/m²/tháng – căn 50 m² khoảng 750.000 – 1.000.000 đồng/tháng (xem bài <a href="/phi-quan-ly-sun-saphia-residence-moi-thang-bao-nhieu/">phí quản lý</a>), cộng điện nước theo sử dụng. Những tháng không ở, chủ căn hộ cho người nghỉ hưu có thể giao cho đơn vị vận hành cho thuê; nên khóa riêng một tủ đồ cá nhân và thống nhất lịch "chủ ở" từ đầu năm, ví dụ ở tháng 12 – 3 khi miền Bắc lạnh, cho thuê mùa hè khi khách du lịch đông.</p>
+<p>Phí quản lý dự kiến 15.000 – 20.000 đ/m²/tháng – căn 50 m² khoảng 750.000 – 1.000.000 đồng/tháng (xem bài <a href="/phi-quan-ly-sun-saphia-residence-bao-nhieu/">phí quản lý</a>), cộng điện nước theo sử dụng. Những tháng không ở, chủ căn hộ cho người nghỉ hưu có thể giao cho đơn vị vận hành cho thuê; nên khóa riêng một tủ đồ cá nhân và thống nhất lịch "chủ ở" từ đầu năm, ví dụ ở tháng 12 – 3 khi miền Bắc lạnh, cho thuê mùa hè khi khách du lịch đông.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
 <p>Xét như một căn hộ cho người nghỉ hưu, Sun Saphia Residence hợp mô hình "ở theo mùa, cho thuê phần còn lại" hơn là ở quanh năm. Lợi thế lớn nhất là biển, công viên và dịch vụ quản lý; điều cần cân nhắc là y tế ở xa trung tâm và việc sống chung với khách lưu trú. Xem bài <a href="/mua-sun-saphia-residence-de-o-duoc-khong-can-biet/">mua Sun Saphia Residence để ở</a> và bài {$review}.</p>
 {$cta}

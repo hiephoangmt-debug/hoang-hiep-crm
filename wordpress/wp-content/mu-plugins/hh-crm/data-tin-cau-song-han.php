@@ -96,7 +96,7 @@ function hh_posts_cau_song_han( $posts ) {
 <p>Mỗi bước đều có thể làm thay đổi vị trí, kết cấu hoặc thời gian. Mốc "trước năm 2030" của cầu mới qua sông Hàn vì thế nên được hiểu là mục tiêu, chưa phải cam kết.</p>
 
 <h2>Hạ tầng giao thông Đà Nẵng: bức tranh rộng hơn</h2>
-<p>Đề xuất cầu mới qua sông Hàn nằm trong làn sóng đầu tư hạ tầng giao thông Đà Nẵng sau khi hợp nhất với Quảng Nam. Thành phố đang triển khai <a href="/cum-nut-giao-cau-hoa-xuan-bat-dong-san-nam-da-nang/">cụm nút giao và cầu Hòa Xuân</a> ở phía Nam, mở rộng nhà ga sân bay, phát triển <a href="/trung-tam-tai-chinh-quoc-te-da-nang-tac-dong-bat-dong-san/">trung tâm tài chính quốc tế</a> ở khu vực ven sông, cửa sông. Xem tổng quan tại bài <a href="/toan-canh-ha-tang-da-nang-2026-tac-dong-bat-dong-san/">toàn cảnh hạ tầng Đà Nẵng 2026</a>.</p>
+<p>Đề xuất cầu mới qua sông Hàn nằm trong làn sóng đầu tư hạ tầng giao thông Đà Nẵng sau khi hợp nhất với Quảng Nam. Thành phố đang triển khai <a href="/cum-nut-giao-cau-hoa-xuan-bat-dong-san-nam-da-nang/">cụm nút giao và cầu Hòa Xuân</a> ở phía Nam, mở rộng nhà ga sân bay, phát triển <a href="/trung-tam-tai-chinh-quoc-te-da-nang/">trung tâm tài chính quốc tế</a> ở khu vực ven sông, cửa sông. Xem tổng quan tại bài <a href="/toan-canh-ha-tang-da-nang-2026/">toàn cảnh hạ tầng Đà Nẵng 2026</a>.</p>
 <p>Nhìn chung, quy hoạch Đà Nẵng ưu tiên kết nối hai bờ sông Hàn và mở rộng không gian đô thị về phía Bắc (cửa sông, Thuận Phước) và phía Nam (Hòa Xuân, Ngũ Hành Sơn). Một cầu mới qua sông Hàn ở đoạn phía Bắc trung tâm, nếu thành hiện thực, sẽ ăn khớp với định hướng đó.</p>
 
 <h2>Bất động sản Đà Nẵng: đọc tin cầu mới qua sông Hàn thế nào cho đúng?</h2>
@@ -152,7 +152,7 @@ function hh_news_article_slugs() {
 	return array(
 		'da-nang-de-xuat-xay-cau-moi-qua-song-han',
 		'bang-gia-dat-da-nang-sua-doi-2026',
-		'duong-tranh-nam-hai-van-6-lan-bat-dong-san-lien-chieu',
+		'duong-tranh-nam-hai-van-6-lan-lien-chieu',
 		'tin-ha-tang-da-nang-thang-10-2026',
 	);
 }
