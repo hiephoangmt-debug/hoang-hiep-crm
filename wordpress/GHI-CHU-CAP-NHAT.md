@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.290**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.291**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.291 (15/11/2026) – chặn cài nhầm gói cũ
+
+- Ngày 15/11 lúc 21:07 web bị cài lại một gói **cũ** (plugin 2.20.233, giao diện 2.16.3) → mất các bản 2.20.234 – 2.20.290 (gồm chuẩn SEO Rank Math, ảnh tin mới, Aurora, tốc độ…). Bản này gồm **đầy đủ** mọi thay đổi tới nay.
+- Từ bản này, **Nhập nhanh từ chối gói cũ hơn bản đang chạy** và báo rõ số phiên bản – không lo chọn nhầm file nữa.
+- Sau khi cài: **Nhập / cập nhật dữ liệu** → mở trang quản trị vài lần (web tự chuẩn SEO bài viết, thay ảnh đại diện) → LiteSpeed **Purge All**.
 
 ## Có gì mới – 2.20.290 (15/11/2026) – bài viết chuẩn SEO Rank Math
 

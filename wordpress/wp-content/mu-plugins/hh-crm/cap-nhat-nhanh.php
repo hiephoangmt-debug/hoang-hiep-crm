@@ -39,6 +39,14 @@ function hh_quick_patch_apply( $zip ) {
 		return new WP_Error( 'zip', 'Gói không đúng – zip chỉ được chứa thư mục hoang-hiep-crm/ và/hoặc hoanghiep/.' );
 	}
 
+	// Chặn cài nhầm gói CŨ đè lên bản mới (anh Hiệp 15/11/2026 chọn nhầm file zip cũ → web lùi về 2.20.233).
+	if ( in_array( 'hoang-hiep-crm', $found, true ) && is_file( "$tmp/hoang-hiep-crm/hoang-hiep-crm.php" ) ) {
+		$zv = get_file_data( "$tmp/hoang-hiep-crm/hoang-hiep-crm.php", array( 'v' => 'Version' ) )['v'] ?? '';
+		if ( $zv && version_compare( $zv, HH_CRM_VERSION, '<' ) ) {
+			$wp_filesystem->delete( $tmp, true );
+			return new WP_Error( 'old', 'Gói này là bản CŨ (' . $zv . '), web đang chạy bản ' . HH_CRM_VERSION . ' – không cài để tránh mất tính năng. Chọn file zip mới nhất (tên có số phiên bản lớn nhất).' );
+		}
+	}
 	$lines = array();
 	foreach ( $found as $name ) {
 		$dest = $targets[ $name ];
