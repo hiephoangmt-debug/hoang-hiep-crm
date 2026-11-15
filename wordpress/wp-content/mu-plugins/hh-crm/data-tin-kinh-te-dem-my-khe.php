@@ -24,9 +24,9 @@ function hh_posts_kinh_te_dem_my_khe( $posts ) {
 		),
 		'content'   => <<<'HTML'
 <p><strong>Kinh tế đêm Đà Nẵng</strong> có thêm một bước tiến: sáng 27/10/2026, Phó Chủ tịch UBND TP Đà Nẵng Nguyễn Thị Anh Thi làm việc với các sở, ngành về việc <strong>khai thác dịch vụ đêm tại bãi biển phía Đông đường Võ Nguyên Giáp (biển Mỹ Khê)</strong>. Thành phố thống nhất chủ trương phát triển dịch vụ đêm chất lượng cao tại đây và đánh giá cao đề xuất tổ hợp kinh tế đêm của Công ty Cổ phần MBLand Đà Nẵng, xem là phù hợp với định hướng kinh tế ban đêm và giúp đa dạng dịch vụ du lịch.</p>
-<p>Lưu ý quan trọng: đây là <strong>chủ trương và đề xuất</strong>. Theo báo chí, doanh nghiệp vẫn phải làm thủ tục chấp thuận đầu tư, cấp phép xây dựng theo quy định; chưa phải dự án đã được cấp phép.</p>
+<p>Lưu ý quan trọng: với kinh tế đêm Đà Nẵng ở Mỹ Khê, đây mới là <strong>chủ trương và đề xuất</strong>. Theo báo chí, doanh nghiệp vẫn phải làm thủ tục chấp thuận đầu tư, cấp phép xây dựng theo quy định; chưa phải dự án đã được cấp phép.</p>
 
-<h2>Đề xuất tổ hợp kinh tế đêm tại 268 Võ Nguyên Giáp</h2>
+<h2>Đề xuất tổ hợp kinh tế đêm Đà Nẵng tại 268 Võ Nguyên Giáp</h2>
 <p>Đề xuất được doanh nghiệp nêu tại hội nghị đối thoại giữa lãnh đạo thành phố và doanh nghiệp du lịch ngày 14/10/2026. Theo các báo đưa tin:</p>
 <table>
 <thead><tr><th>Hạng mục</th><th>Nội dung đề xuất</th></tr></thead>
@@ -54,14 +54,14 @@ function hh_posts_kinh_te_dem_my_khe( $posts ) {
 <p>Điểm yếu lâu nay là nhiều hoạt động tập trung ở trung tâm hai bờ sông Hàn, trong khi dải biển phía Đông – nơi có nhiều khách sạn, căn hộ du lịch – lại thiếu không gian đêm có quy mô. Chủ trương ở Mỹ Khê và việc đấu giá khai thác dịch vụ bãi biển dọc tuyến Hoàng Sa – Võ Nguyên Giáp – Trường Sa hướng tới lấp khoảng trống đó. Tuy vậy, số liệu trên là ước tính tại cơ sở lưu trú, có thể điều chỉnh khi có số chính thức.</p>
 
 <h2>Kinh tế đêm Đà Nẵng tác động tới bất động sản – nhận định của Hoàng Hiệp</h2>
-<p>Phần dưới là ý kiến cá nhân, không phải nội dung chủ trương của thành phố.</p>
+<p>Phần dưới là ý kiến cá nhân, không phải nội dung chủ trương phát triển kinh tế đêm Đà Nẵng của thành phố.</p>
 <ul>
 <li><strong>Căn hộ cho thuê ven biển Mỹ Khê – An Thượng:</strong> khách du lịch có thêm lý do ở lại buổi tối, có lợi cho căn hộ, homestay cho thuê ngắn ngày quanh An Thượng – Võ Nguyên Giáp. Xem các dự án <a href="/khu-vuc/ngu-hanh-son/">khu Ngũ Hành Sơn</a> và <a href="/khu-vuc/son-tra/">Sơn Trà</a>.</li>
 <li><strong>Dải ven biển phía Nam Võ Nguyên Giáp – Trường Sa:</strong> việc đấu giá khai thác dịch vụ bãi biển dọc toàn tuyến giúp kinh tế đêm Đà Nẵng lan dọc bờ biển; các dự án căn hộ mặt biển như <a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a> (giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận) nằm trên cùng trục.</li>
 <li><strong>Cần thận trọng:</strong> dự án mới ở bước chủ trương – đề xuất; tiến độ thực tế phụ thuộc thủ tục đầu tư, đất đai. Không nên trả giá cao chỉ vì "sắp có phố đêm" khi chưa có giấy phép.</li>
 </ul>
 <h2>Ảnh hưởng đến Sun Saphia Residence</h2>
-<p><a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a> nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, cùng trục biển với khu đề xuất ở 268 Võ Nguyên Giáp. Theo nhận định của Hoàng Hiệp:</p>
+<p><a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a> nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, cùng trục biển với khu đề xuất ở 268 Võ Nguyên Giáp. Theo nhận định của Hoàng Hiệp về tác động của kinh tế đêm Đà Nẵng tới dự án:</p>
 <table>
 <thead><tr><th>Yếu tố</th><th>Tác động tới Sun Saphia</th></tr></thead>
 <tbody>
@@ -81,14 +81,14 @@ HTML,
 			'points'    => array(
 				'Kinh tế đêm Đà Nẵng: ngày 27/10/2026, UBND TP thống nhất chủ trương khai thác dịch vụ đêm tại bãi biển phía Đông Võ Nguyên Giáp (Mỹ Khê).',
 				'Đề xuất tổ hợp kinh tế đêm tại 268 Võ Nguyên Giáp: khu đất khoảng 11.465 m², khu kinh tế đêm khoảng 8.000 m², khách sạn – văn phòng 10 tầng, vốn khoảng 5.000 tỷ đồng.',
-				'Thành phố yêu cầu đấu giá khai thác dịch vụ bãi biển tuyến Hoàng Sa – Võ Nguyên Giáp – Trường Sa và hoàn thành đề cương Đề án kinh tế ban đêm trong 11/2026.',
+				'Thành phố yêu cầu đấu giá khai thác dịch vụ bãi biển tuyến Hoàng Sa – Võ Nguyên Giáp – Trường Sa và hoàn thành đề cương Đề án phát triển kinh tế ban đêm (khung cho kinh tế đêm Đà Nẵng) trong 11/2026.',
 				'Dự án mới ở bước chủ trương, đề xuất; doanh nghiệp còn phải làm thủ tục đầu tư, cấp phép.',
 			),
 			'faq'       => array(
 				array( 'Kinh tế đêm Đà Nẵng hiện có những không gian nào?', 'Kinh tế đêm Đà Nẵng hiện dựa vào phố đi bộ Bạch Đằng, biển đêm Mỹ An, chợ đêm Sơn Trà; năm 2026 thành phố thí điểm biểu diễn ánh sáng ven biển và đồng ý chủ trương phát triển dịch vụ đêm chất lượng cao tại biển Mỹ Khê.' ),
 				array( 'Khu kinh tế đêm biển Mỹ Khê nằm ở đâu?', 'Theo đề xuất, tổ hợp nằm tại 268 Võ Nguyên Giáp, phường Ngũ Hành Sơn, đối diện biển Mỹ Khê, sát khu phố du lịch An Thượng; có đường nội khu nối Trần Bạch Đằng ra Võ Nguyên Giáp.' ),
 				array( 'Khu kinh tế đêm Mỹ Khê đã được cấp phép chưa?', 'Chưa. Ngày 27/10/2026 thành phố mới thống nhất chủ trương và đánh giá cao đề xuất; doanh nghiệp còn phải thực hiện thủ tục chấp thuận đầu tư, cấp phép xây dựng.' ),
-				array( 'Bao giờ khu kinh tế đêm Mỹ Khê hoạt động?', 'Theo kế hoạch doanh nghiệp đưa ra, khu kinh tế đêm khởi công tháng 11/2026 và đón khách từ tháng 4/2027; mốc thực tế phụ thuộc thủ tục đầu tư.' ),
+				array( 'Bao giờ khu kinh tế đêm Mỹ Khê hoạt động?', 'Theo kế hoạch doanh nghiệp đưa ra, khu kinh tế đêm khởi công tháng 11/2026 và đón khách từ tháng 4/2027; mốc thực tế phụ thuộc thủ tục đầu tư. Trong lúc chờ, kinh tế đêm Đà Nẵng vẫn tập trung ở khu trung tâm và các chợ đêm hiện có.' ),
 				array( 'Kinh tế đêm Mỹ Khê ảnh hưởng gì đến Sun Saphia Residence?', 'Sun Saphia cùng trục biển Võ Nguyên Giáp, cách khu An Thượng khoảng 5–10 phút đi ô tô (theo tài liệu dự án). Thêm điểm vui chơi buổi tối và dịch vụ bãi biển là điểm cộng cho ở và cho thuê ngắn ngày; tuy nhiên tổ hợp kinh tế đêm mới là đề xuất, chưa cấp phép.' ),
 			),
 		),

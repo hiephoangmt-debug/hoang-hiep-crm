@@ -47,8 +47,10 @@ function hh_posts_tu_khoa_tim_kiem_11_2026( $posts ) {
 <p>Ảnh flycam tháng 11/2026 cho thấy hai tòa S1, S2 hai bên đường dẫn cầu Hòa Xuân đang thi công phần thân, lên khoảng tầng 10, cẩu tháp hoạt động, lưới an toàn phủ kín. Mỗi tòa cao 22 tầng và tum.</p>
 <!--hh-img:img/spana-tower/spana-tower-tien-do-11-2026-toa-thap-nhin-chinh-dien.jpg|Tòa tháp Spana Tower đang lên khoảng tầng 10 (tiến độ 11/2026)-->
 <!--hh-img:img/spana-tower/spana-tower-tien-do-11-2026-nhin-tu-tren-cao.jpg|Flycam từ trên cao: hai tòa Spana Tower hai bên đường dẫn cầu Hòa Xuân (tiến độ 11/2026)-->
-<h2>Cora Tower: mốc bàn giao</h2>
+<h2>Cora Tower khi nào bàn giao: căn hộ và shop khối đế</h2>
+<!--hh-img:img/tin-tuc/mat-bang-cora-tower.jpg|Mặt bằng hai tòa A1, A2 bên đường 29/3 – Cora Tower khi nào bàn giao: căn hộ dự kiến 30/07/2027-->
 <p>Chủ đầu tư công bố bàn giao căn hộ Cora Tower dự kiến <strong>30/07/2027</strong>, hoàn thiện trần, tường, sàn (chưa gồm nội thất rời). Khách thanh toán đủ 70% được nhận nhà sử dụng theo Sun Early Key. Xem thêm <a href="/gia-cora-tower-da-nang-bao-nhieu/">giá Cora Tower</a>.</p>
+<p>Hỏi "Cora Tower khi nào bàn giao" cũng cần phân biệt căn hộ và shop khối đế: shop nhận nhà khi thanh toán 70%, dự kiến 31/10/2027 – muộn hơn căn hộ khoảng 3 tháng. Thông tin tổng quan dự án có trên <a href="https://cafeland.vn/du-an/sun-cora-tower-du-an-can-ho-tai-da-nang-4728.html">CafeLand</a>.</p>
 <!--hh-dimg:1wnsijH2qgHtzHwhDnYpb6ELxk_aKErVa|Cora Tower nhìn từ trên cao – giao lộ Nguyễn Phước Lan, đường 29/3 (phối cảnh chủ đầu tư)-->
 <h2>S-Light Tower ở đâu</h2>
 <p>S-Light Tower nằm ở đường 29/3 giao Nguyễn Đình Thi, trong Sun NeO City, nơi giao ba dòng sông Hàn – Cẩm Lệ – Đô Toả. Cặp tháp 22 tầng, 3 tầng hầm, gần 800 căn từ 33,3 đến 95,1 m², sở hữu lâu dài. Sun Property ra mắt dự án tháng 6/2026.</p>
@@ -83,16 +85,16 @@ function hh_posts_tu_khoa_tim_kiem_11_2026( $posts ) {
 <li>Ghi biên bản các điểm cần sửa, hẹn thời hạn khắc phục.</li>
 <li>Nhận đủ giấy tờ: biên bản bàn giao, hướng dẫn sử dụng, thông tin bảo hành.</li>
 </ol>
-<h2>Nên chọn tòa nào theo mốc bàn giao</h2>
+<h2>Cora Tower khi nào bàn giao so với Spana, S-Light: chọn tòa nào</h2>
 <ul>
 <li><strong>Muốn ở hoặc cho thuê sớm nhất:</strong> Spana Tower (dự kiến 30/06/2027).</li>
 <li><strong>Muốn giỏ hàng có giá công khai:</strong> Cora Tower (studio từ khoảng 2,42 tỷ, dự kiến 30/07/2027).</li>
 <li><strong>Muốn view sông, giãn tiến độ dài:</strong> S-Light Tower (giãn đến 48 tháng).</li>
 </ul>
 <h2>Thanh toán đến lúc nhận nhà</h2>
-<p>Cả Cora và Spana: đặt cọc 100 triệu (3PN 150 triệu), giãn tiến độ đến 40 tháng (Cora) hoặc 38 tháng (Spana); vay tối đa 70%, hỗ trợ lãi suất 24 tháng. Khi đã thanh toán đủ 70% là nhận nhà sử dụng.</p>
-<h2>Mốc bàn giao có thể thay đổi không</h2>
-<p>Mốc trong bài là mốc dự kiến chủ đầu tư công bố. Mốc ràng buộc là mốc ghi trong hợp đồng mua bán, kèm điều khoản phạt khi chậm bàn giao. Anh chị nên đọc kỹ điều khoản này trước khi ký và theo dõi ảnh tiến độ định kỳ của từng tòa.</p>
+<p>Cả Cora và Spana: đặt cọc 100 triệu (3PN 150 triệu), giãn tiến độ đến 40 tháng (Cora) hoặc 38 tháng (Spana); vay tối đa 70%, hỗ trợ lãi suất 24 tháng. Khi đã thanh toán đủ 70% là nhận nhà sử dụng. Với câu hỏi Cora Tower khi nào bàn giao, mốc nhận nhà thực tế của từng khách còn phụ thuộc thời điểm thanh toán đủ 70%.</p>
+<h2>Cora Tower khi nào bàn giao nếu tiến độ thay đổi?</h2>
+<p>Câu trả lời cho "Cora Tower khi nào bàn giao" trong bài là mốc dự kiến chủ đầu tư công bố. Mốc ràng buộc là mốc ghi trong hợp đồng mua bán, kèm điều khoản phạt khi chậm bàn giao. Anh chị nên đọc kỹ điều khoản này trước khi ký và theo dõi ảnh tiến độ định kỳ của từng tòa.</p>
 {$cta('Cora Tower, Spana Tower, S-Light Tower')}
 HTML
 		,
@@ -101,16 +103,18 @@ HTML
 			'desc'      => 'Cora Tower khi nào bàn giao: dự kiến 30/07/2027; Spana Tower 30/06/2027, tháng 11/2026 lên khoảng tầng 10. Nhận nhà khi trả 70%. S-Light ở đâu.',
 			'points'    => array(
 				'Spana Tower bàn giao dự kiến 30/06/2027; 11/2026 lên khoảng tầng 10',
-				'Cora Tower bàn giao dự kiến 30/07/2027',
+				'Cora Tower khi nào bàn giao: dự kiến 30/07/2027 (căn hộ)',
 				'Sun Early Key: thanh toán đủ 70% là nhận nhà sử dụng',
 			),
 			'faq'       => array(
-				array( 'Cora Tower khi nào bàn giao?', 'Dự kiến 30/07/2027, bàn giao hoàn thiện trần, tường, sàn; thanh toán đủ 70% là nhận nhà sử dụng (Sun Early Key).' ),
+				array( 'Cora Tower khi nào bàn giao?', 'Cora Tower khi nào bàn giao: dự kiến 30/07/2027, bàn giao hoàn thiện trần, tường, sàn; thanh toán đủ 70% là nhận nhà sử dụng (Sun Early Key).' ),
 				array( 'Spana Tower khi nào bàn giao?', 'Dự kiến 30/06/2027. Tháng 11/2026 hai tòa S1, S2 đang thi công phần thân, lên khoảng tầng 10.' ),
+				array( 'Cora Tower khi nào bàn giao shop khối đế?', 'Shop khối đế A1, A2 nhận nhà khi thanh toán 70%, dự kiến 31/10/2027 – sau mốc căn hộ khoảng 3 tháng.' ),
+				array( 'Mua bây giờ thì Cora Tower khi nào bàn giao cho tôi?', 'Mốc chung dự kiến 30/07/2027; khách thanh toán đủ 70% được nhận nhà sử dụng theo Sun Early Key. Mốc ràng buộc là mốc ghi trong hợp đồng mua bán của từng căn.' ),
 				array( 'S-Light Tower ở đâu?', 'Đường 29/3 giao Nguyễn Đình Thi, khu đô thị Sun NeO City (Hòa Xuân, Đà Nẵng), nơi giao ba dòng sông Hàn – Cẩm Lệ – Đô Toả.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://cafeland.vn/du-an/sun-cora-tower-du-an-can-ho-tai-da-nang-4728.html', 'https://cafeland.vn/du-an/spana-tower-du-an-can-ho-tai-da-nang-5406.html', 'https://cafef.vn/sun-property-ra-mat-s-light-tower-tam-diem-vuong-khi-trung-tam-nam-da-nang-188260622082242751.chn' ),
 	);
 
 	/* ---------------- Nobu Đà Nẵng của ai ---------------- */
@@ -143,7 +147,7 @@ HTML
 <tr><td>Newtecons</td><td>Nhà thầu thi công (khởi công quý 2/2024)</td></tr>
 </tbody>
 </table>
-<p>Hồ sơ chủ đầu tư chi tiết: <a href="/chu-dau-tu/vcre/">VCRE (Bất động sản Bản Việt)</a>.</p>
+<p>Muốn tìm hiểu sâu hơn Nobu Đà Nẵng của ai, xem hồ sơ chủ đầu tư: <a href="/chu-dau-tu/vcre/">VCRE (Bất động sản Bản Việt)</a>.</p>
 <h2>Nobu Đà Nẵng ở đâu, bao nhiêu tầng</h2>
 <ul>
 <li><strong>Địa chỉ:</strong> 01 Võ Văn Kiệt, góc Võ Nguyên Giáp, phường An Hải (Phước Mỹ, Sơn Trà cũ), Đà Nẵng – mặt biển Mỹ Khê.</li>
@@ -151,24 +155,25 @@ HTML
 <li><strong>Sản phẩm:</strong> 264 căn hộ hàng hiệu và khách sạn Nobu khoảng 200 phòng (gồm 18 suite), nhà hàng Nobu tầng 42.</li>
 </ul>
 <p><small>Số căn, số phòng các nguồn công bố khác nhau theo thời điểm; người mua lấy số liệu trong hồ sơ pháp lý và hợp đồng làm căn cứ.</small></p>
-<!--hh-img:img/nobu-da-nang/nobu-da-nang-khoi-de-sanh-don.jpg|Khối đế và sảnh đón Nobu Đà Nẵng trên đường Võ Nguyên Giáp (phối cảnh)-->
+<!--hh-img:img/nobu-da-nang/nobu-da-nang-khoi-de-sanh-don.jpg|Nobu Đà Nẵng của ai: tòa tháp do VCRE phát triển cùng Nobu Hospitality – khối đế và sảnh đón trên đường Võ Nguyên Giáp (phối cảnh)-->
 <h2>Tiến độ</h2>
 <p>Tháng 10/2026 kết cấu đã lên tầng 22; đang lắp mặt dựng kính tầng 7 – 13, thi công cơ điện và PCCC tới tầng 17. Lãnh đạo VCRE cho biết dự án dự kiến hoàn thành năm 2027. Chi tiết: <a href="/tien-do-nobu-residences-da-nang/">tiến độ Nobu Đà Nẵng</a>.</p>
 <!--hh-img:img/nobu-da-nang/nobu-da-nang-tien-do-10-2026-toan-canh.jpg|Công trường Nobu Đà Nẵng tháng 10/2026 – kết cấu đến tầng 22 (ảnh thực tế của chủ đầu tư)-->
 <h2>Người mua nên kiểm tra gì</h2>
+<p>Biết Nobu Đà Nẵng của ai mới là bước đầu; người mua còn cần đối chiếu hồ sơ:</p>
 <ol>
 <li><strong>Tên pháp nhân ký hợp đồng:</strong> đối chiếu tên chủ đầu tư trên hợp đồng mua bán và giấy phép xây dựng.</li>
 <li><strong>Thời hạn sở hữu:</strong> các nguồn chưa thống nhất (lâu dài cho người Việt hay đến 2060 theo đất thương mại dịch vụ).</li>
 <li><strong>Hợp đồng vận hành với Nobu Hospitality:</strong> phí dịch vụ, chương trình cho thuê.</li>
 </ol>
 <p>Xem thêm: <a href="/gia-nobu-residences-da-nang-bao-nhieu/">giá Nobu Đà Nẵng</a>, <a href="/can-ho-hang-hieu-la-gi-nobu-da-nang/">căn hộ hàng hiệu là gì</a>.</p>
-<h2>VCRE là ai</h2>
-<p>VCRE (Viet Capital Real Estate) là tên viết tắt của Công ty CP Bất động sản Bản Việt, thành lập năm 2007 và là thành viên của Phoenix Holdings. Doanh nghiệp theo đuổi phân khúc nhà ở và lưu trú hạng sang gắn với thương hiệu quốc tế, đã mở thêm văn phòng kinh doanh tại Hà Nội. Tổng giám đốc là ông Võ Thành Lâm. Theo VnEconomy, sau Đà Nẵng, VCRE tiếp tục hợp tác với Nobu để đưa thương hiệu này vào TP.HCM.</p>
-<h2>Nobu Hospitality là ai</h2>
+<h2>Nobu Đà Nẵng của ai: VCRE là doanh nghiệp nào</h2>
+<p>VCRE (Viet Capital Real Estate) là tên viết tắt của Công ty CP Bất động sản Bản Việt, thành lập năm 2007 và là thành viên của Phoenix Holdings. Doanh nghiệp theo đuổi phân khúc nhà ở và lưu trú hạng sang gắn với thương hiệu quốc tế, đã mở thêm văn phòng kinh doanh tại Hà Nội. Tổng giám đốc là ông Võ Thành Lâm. Theo <a href="https://vneconomy.vn/nobu-danang-san-sang-chao-don-nhung-chu-nhan-tinh-hoa-moi.htm">VnEconomy</a>, sau Đà Nẵng, VCRE tiếp tục hợp tác với Nobu để đưa thương hiệu này vào TP.HCM. <a href="https://vnexpress.net/vcre-cung-nobu-hospitality-kien-tao-bieu-tuong-phong-cach-song-tai-da-nang-4598075.html">VnExpress</a> cũng có bài về việc VCRE cùng Nobu Hospitality phát triển dự án tại Đà Nẵng – nguồn tham khảo tốt khi tìm hiểu Nobu Đà Nẵng của ai.</p>
+<h2>Nobu Đà Nẵng của ai: vai trò của Nobu Hospitality</h2>
 <p>Nobu Hospitality là thương hiệu khách sạn – nhà hàng quốc tế mang tên đầu bếp Nobu Matsuhisa, đồng sáng lập cùng diễn viên Robert De Niro và nhà sản xuất Meir Teper. Ở Đà Nẵng, thương hiệu này vận hành khách sạn, nhà hàng Nobu và dịch vụ cho cư dân căn hộ hàng hiệu. Nobu Đà Nẵng được giới thiệu là dự án Nobu Residences đầu tiên tại Đông Nam Á.</p>
 <!--hh-img:img/nobu-da-nang/nobu-da-nang-nha-hang-nobu.jpg|Nhà hàng Nobu (phối cảnh)-->
 <h2>Thiết kế và tiện ích</h2>
-<p>Kiến trúc tòa tháp lấy cảm hứng từ quạt giấy Nhật Bản (Sensu) và nguyên lý mượn cảnh (Shakkei); nội thất phong cách Japandi tối giản, tận dụng ánh sáng tự nhiên và hướng nhìn biển Mỹ Khê. Tiện ích theo phối cảnh chủ đầu tư gồm hồ bơi nước ấm trên cao, nhà hàng Nobu, bar trên không, beach club, quầy bar bên hồ bơi, phòng tập trên không, sảnh hội nghị và khu vui chơi trẻ em.</p>
+<p>Ngoài câu hỏi Nobu Đà Nẵng của ai, khách thường hỏi về thiết kế. Kiến trúc tòa tháp lấy cảm hứng từ quạt giấy Nhật Bản (Sensu) và nguyên lý mượn cảnh (Shakkei); nội thất phong cách Japandi tối giản, tận dụng ánh sáng tự nhiên và hướng nhìn biển Mỹ Khê. Tiện ích theo phối cảnh chủ đầu tư gồm hồ bơi nước ấm trên cao, nhà hàng Nobu, bar trên không, beach club, quầy bar bên hồ bơi, phòng tập trên không, sảnh hội nghị và khu vui chơi trẻ em.</p>
 <h2>Các loại căn</h2>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích (khoảng)</th></tr></thead>
@@ -188,20 +193,21 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Nobu Đà Nẵng của ai? Chủ đầu tư VCRE và Nobu',
+			'seo_title' => 'Nobu Đà Nẵng của ai? Chủ đầu tư VCRE, tháp 43 tầng',
 			'desc'      => 'Nobu Đà Nẵng của ai: VCRE (Bất động sản Bản Việt, thành viên Phoenix Holdings) phát triển cùng Nobu Hospitality; tháp 43 tầng ở 01 Võ Văn Kiệt.',
 			'points'    => array(
-				'VCRE (Bất động sản Bản Việt) phát triển cùng Phoenix Holdings',
+				'Nobu Đà Nẵng của ai: VCRE (Bất động sản Bản Việt) phát triển cùng Phoenix Holdings',
 				'Nobu Hospitality vận hành khách sạn, nhà hàng, căn hộ hàng hiệu',
 				'Tháp 43 tầng ở 01 Võ Văn Kiệt; 10/2026 kết cấu đến tầng 22',
 			),
 			'faq'       => array(
-				array( 'Nobu Đà Nẵng của ai?', 'Dự án do VCRE (Công ty CP Bất động sản Bản Việt, thành viên Phoenix Holdings) phát triển cùng Công ty TNHH Phoenix Holdings và thương hiệu Nobu Hospitality.' ),
+				array( 'Nobu Đà Nẵng của ai?', 'Nobu Đà Nẵng của ai: dự án do VCRE (Công ty CP Bất động sản Bản Việt, thành viên Phoenix Holdings) phát triển cùng Công ty TNHH Phoenix Holdings và thương hiệu Nobu Hospitality.' ),
+				array( 'Nobu Đà Nẵng của ai vận hành?', 'Thương hiệu Nobu Hospitality vận hành khách sạn, nhà hàng Nobu và dịch vụ cho cư dân; VCRE là đơn vị phát triển dự án.' ),
 				array( 'Nobu Đà Nẵng bao nhiêu tầng?', '43 tầng nổi (khoảng 186 m) và 2 tầng hầm.' ),
 				array( 'Nobu Đà Nẵng ở đâu?', 'Số 01 Võ Văn Kiệt, góc Võ Nguyên Giáp, phường An Hải (Sơn Trà cũ), Đà Nẵng – nhìn ra biển Mỹ Khê.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://vnexpress.net/vcre-cung-nobu-hospitality-kien-tao-bieu-tuong-phong-cach-song-tai-da-nang-4598075.html', 'https://vneconomy.vn/nobu-danang-san-sang-chao-don-nhung-chu-nhan-tinh-hoa-moi.htm', 'https://cafeland.vn/du-an/to-hop-can-ho-khach-san-nobu-residences-da-nang-4356.html' ),
 	);
 
 	/* ---------------- The Legend của chủ đầu tư nào ---------------- */
@@ -209,7 +215,7 @@ HTML
 		'slug'     => 'the-legend-da-nang-cua-chu-dau-tu-nao',
 		'title'    => 'The Legend Đà Nẵng của chủ đầu tư nào? VIPICO và dự án The Legend City đầu cầu Rồng',
 		'excerpt'  => 'The Legend Đà Nẵng (The Legend City Danang) do Công ty TNHH MTV VIPICO làm chủ đầu tư, ROX Signature phát triển, trên lô A20 Võ Văn Kiệt ngay đầu cầu Rồng. Quy mô, vốn, lịch sử pháp lý khu đất và điều người mua cần kiểm tra.',
-		'keyword'  => 'The Legend Đà Nẵng của chủ đầu tư nào',
+		'keyword'  => 'chủ đầu tư The Legend',
 		'keywords_extra' => array( 'The Legend Đà Nẵng của chủ đầu tư nào', 'chủ đầu tư The Legend City', 'VIPICO Đà Nẵng' ),
 		'project'  => 'the-legend-da-nang',
 		'schedule' => '2026-11-25 09:00',
@@ -219,12 +225,12 @@ HTML
 		'image_alt' => 'Tòa tháp The Legend nhìn từ góc đường (phối cảnh)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>The Legend Đà Nẵng của chủ đầu tư nào?</strong> Chủ đầu tư là <strong>Công ty TNHH MTV VIPICO</strong>; đơn vị phát triển là Công ty CP ROX Signature. Dự án có tên đầy đủ là The Legend City Danang (Thành phố huyền thoại – Đà Nẵng), nằm trên lô A20 Võ Văn Kiệt, ngay đầu cầu Rồng phía Sơn Trà, gồm tháp căn hộ (800 căn sở hữu lâu dài) và tháp khách sạn.</p>
+<p><strong>The Legend Đà Nẵng của chủ đầu tư nào?</strong> Chủ đầu tư The Legend là <strong>Công ty TNHH MTV VIPICO</strong>; đơn vị phát triển là Công ty CP ROX Signature. Dự án có tên đầy đủ là The Legend City Danang (Thành phố huyền thoại – Đà Nẵng), nằm trên lô A20 Võ Văn Kiệt, ngay đầu cầu Rồng phía Sơn Trà, gồm tháp căn hộ (800 căn sở hữu lâu dài) và tháp khách sạn.</p>
 {$sign}
 </div>
-<p>Từ khoá "The Legend Đà Nẵng chủ đầu tư", "của chủ đầu tư nào" được tìm nhiều vì khu đất A20 từng có lịch sử pháp lý phức tạp. Bài này tóm tắt chủ đầu tư, quá trình tháo gỡ và tình trạng hiện tại của <a href="/du-an/the-legend-da-nang/">The Legend Đà Nẵng</a>.</p>
+<p>Từ khoá "The Legend Đà Nẵng chủ đầu tư", "của chủ đầu tư nào" được tìm nhiều vì khu đất A20 từng có lịch sử pháp lý phức tạp. Bài này tóm tắt chủ đầu tư The Legend, quá trình tháo gỡ và tình trạng hiện tại của <a href="/du-an/the-legend-da-nang/">The Legend Đà Nẵng</a>.</p>
 <!--hh-featured-->
-<h2>The Legend Đà Nẵng của chủ đầu tư nào: thông tin VIPICO</h2>
+<h2>Chủ đầu tư The Legend Đà Nẵng: thông tin VIPICO</h2>
 <table>
 <tbody>
 <tr><th>Chủ đầu tư</th><td>Công ty TNHH MTV VIPICO</td></tr>
@@ -234,7 +240,7 @@ HTML
 <tr><th>Khởi công</th><td>28/02/2025</td></tr>
 </tbody>
 </table>
-<p>Hồ sơ chi tiết: <a href="/chu-dau-tu/vipico/">chủ đầu tư VIPICO</a>.</p>
+<p>Hồ sơ chi tiết chủ đầu tư The Legend: <a href="/chu-dau-tu/vipico/">VIPICO</a>.</p>
 <h2>Lịch sử khu đất A20</h2>
 <ul>
 <li><strong>28/7/2017:</strong> Quyết định 4105/QĐ-UBND công nhận kết quả đấu giá khu đất A20 Võ Văn Kiệt.</li>
@@ -244,6 +250,7 @@ HTML
 <li><strong>14/02/2025:</strong> giấy phép xây dựng phần ngầm (3 tầng hầm); khởi công 28/02/2025.</li>
 <li><strong>19/3/2025:</strong> Sở Xây dựng xác nhận đủ điều kiện huy động vốn; khoảng 1/2026 thông báo 800 căn đủ điều kiện bán.</li>
 </ul>
+<p>Quá trình trên giải thích vì sao nhiều người muốn biết rõ chủ đầu tư The Legend trước khi xuống tiền. Báo <a href="https://baodautu.vn/batdongsan/chu-dau-tu-the-legend-danang-day-nhanh-tien-do-thi-cong-du-an-d433621.html">Đầu tư</a> có bài về việc chủ đầu tư The Legend Danang đẩy nhanh tiến độ thi công; <a href="https://dantri.com.vn/bat-dong-san/tien-do-du-an-the-legend-danang-20251114105051807.htm">Dân trí</a> cũng cập nhật tiến độ dự án tháng 11/2025.</p>
 <!--hh-img:img/the-legend/the-legend-da-nang-vi-tri-chan-cau-rong-tu-tren-cao.jpg|Vị trí The Legend ngay chân cầu Rồng, nhìn từ trên cao (phối cảnh)-->
 <h2>The Legend ở đâu</h2>
 <p>Lô A20 Võ Văn Kiệt, An Hải Tây (Sơn Trà cũ) – khu đất 4 mặt tiền Võ Văn Kiệt, Ngô Quyền, Lý Nam Đế, Mai Hắc Đế, ngay đầu cầu Rồng, khoảng 1 km ra biển Mỹ Khê.</p>
@@ -251,7 +258,7 @@ HTML
 <ol>
 <li>Văn bản Sở Xây dựng xác nhận căn mình mua thuộc danh sách đủ điều kiện bán.</li>
 <li>Thư bảo lãnh ngân hàng cho nghĩa vụ bàn giao.</li>
-<li>Tên pháp nhân ký hợp đồng là Công ty TNHH MTV VIPICO.</li>
+<li>Tên pháp nhân ký hợp đồng trùng với chủ đầu tư The Legend – Công ty TNHH MTV VIPICO.</li>
 </ol>
 <p>Xem thêm: <a href="/phap-ly-the-legend-da-nang-so-huu-lau-dai/">pháp lý The Legend</a>, <a href="/gia-the-legend-da-nang-bao-nhieu/">giá The Legend</a>.</p>
 <h2>Dự án gồm những gì</h2>
@@ -278,7 +285,7 @@ HTML
 <tr><td>Quý 4/2028</td><td>Mốc hoàn thành theo tiến độ đăng ký</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/the-legend/the-legend-da-nang-tien-do-6-2025-flycam-cong-truong.jpg|Công trường The Legend tháng 6/2025 – flycam nhìn về sông Hàn-->
+<!--hh-img:img/the-legend/the-legend-da-nang-tien-do-6-2025-flycam-cong-truong.jpg|Công trường của chủ đầu tư The Legend tháng 6/2025 – flycam nhìn về sông Hàn-->
 <h2>Vì sao cần đọc kỹ hồ sơ</h2>
 <ul>
 <li>Mua lúc này là mua nhà hình thành trong tương lai – dự án khởi công 02/2025.</li>
@@ -286,8 +293,8 @@ HTML
 <li>Dự án có cả khối khách sạn và khối chung cư – hỏi rõ căn mình mua thuộc khối nào và thời hạn sở hữu tương ứng (lâu dài hay 50 năm).</li>
 </ul>
 <h2>Ưu đãi hiện có</h2>
-<p>Quà nội thất trừ vào giá 300 triệu – 1,8 tỷ, chiết khấu thanh toán sớm đến 12%, vay 70% hỗ trợ lãi suất 0% trong 24 tháng (MSB, Vietcombank, MB), miễn phí quản lý 24 tháng – theo chính sách ban hành 17/7/2025, có thể đã điều chỉnh theo đợt. Xem <a href="/co-nen-mua-the-legend-da-nang-uu-nhuoc-diem/">có nên mua The Legend</a>.</p>
-<h2>Câu hỏi khi làm việc với chủ đầu tư</h2>
+<p>Quà nội thất trừ vào giá 300 triệu – 1,8 tỷ, chiết khấu thanh toán sớm đến 12%, vay 70% hỗ trợ lãi suất 0% trong 24 tháng (MSB, Vietcombank, MB), miễn phí quản lý 24 tháng – theo chính sách của chủ đầu tư The Legend ban hành 17/7/2025, có thể đã điều chỉnh theo đợt. Xem <a href="/co-nen-mua-the-legend-da-nang-uu-nhuoc-diem/">có nên mua The Legend</a>.</p>
+<h2>Câu hỏi khi làm việc với chủ đầu tư The Legend</h2>
 <ol>
 <li>Văn bản xác nhận đủ điều kiện bán áp dụng cho căn nào, số văn bản, ngày ban hành?</li>
 <li>Ngân hàng nào phát hành thư bảo lãnh?</li>
@@ -298,20 +305,21 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'The Legend Đà Nẵng của chủ đầu tư nào? VIPICO',
-			'desc'      => 'The Legend Đà Nẵng của chủ đầu tư nào: Công ty TNHH MTV VIPICO, ROX Signature phát triển; lô A20 Võ Văn Kiệt đầu cầu Rồng, pháp lý hiện tại.',
+			'seo_title' => 'Chủ đầu tư The Legend Đà Nẵng: VIPICO, khởi công 2025',
+			'desc'      => 'Chủ đầu tư The Legend Đà Nẵng là Công ty TNHH MTV VIPICO, ROX Signature phát triển; lô A20 Võ Văn Kiệt đầu cầu Rồng, khởi công 28/02/2025.',
 			'points'    => array(
-				'Chủ đầu tư Công ty TNHH MTV VIPICO, ROX Signature phát triển',
+				'Chủ đầu tư The Legend là Công ty TNHH MTV VIPICO, ROX Signature phát triển',
 				'Lô A20 Võ Văn Kiệt, đầu cầu Rồng; khởi công 28/02/2025',
 				'Khu đất từng tranh chấp, đã tháo gỡ; 800 căn đủ điều kiện bán',
 			),
 			'faq'       => array(
-				array( 'The Legend Đà Nẵng của chủ đầu tư nào?', 'Công ty TNHH MTV VIPICO là chủ đầu tư; Công ty CP ROX Signature là đơn vị phát triển.' ),
+				array( 'The Legend Đà Nẵng của chủ đầu tư nào?', 'Công ty TNHH MTV VIPICO là chủ đầu tư The Legend; Công ty CP ROX Signature là đơn vị phát triển.' ),
+				array( 'Chủ đầu tư The Legend đã được xác nhận đủ điều kiện huy động vốn chưa?', 'Theo thông tin dự án, ngày 19/3/2025 Sở Xây dựng xác nhận đủ điều kiện huy động vốn; khoảng 1/2026 thông báo 800 căn đủ điều kiện bán. Người mua nên đề nghị chủ đầu tư The Legend cung cấp văn bản áp dụng cho đúng căn.' ),
 				array( 'The Legend City và The Legend Đà Nẵng có phải một dự án?', 'Đúng, The Legend City Danang (Thành phố huyền thoại – Đà Nẵng) là tên đầy đủ của dự án trên lô A20 Võ Văn Kiệt.' ),
 				array( 'The Legend Đà Nẵng ở đâu?', 'Lô A20 Võ Văn Kiệt, An Hải Tây (Sơn Trà cũ), ngay đầu cầu Rồng, 4 mặt tiền Võ Văn Kiệt – Ngô Quyền – Lý Nam Đế – Mai Hắc Đế.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://baodautu.vn/batdongsan/chu-dau-tu-the-legend-danang-day-nhanh-tien-do-thi-cong-du-an-d433621.html', 'https://dantri.com.vn/bat-dong-san/tien-do-du-an-the-legend-danang-20251114105051807.htm' ),
 	);
 
 	/* ---------------- Sun Symphony 5 ở đâu ---------------- */
@@ -346,8 +354,8 @@ HTML
 </tbody>
 </table>
 <h2>Tổng mặt bằng phân khu</h2>
-<p>Symphony 5 là tháp 31 tầng trên khoảng 11.371 m² đất thương mại dịch vụ. Xung quanh tháp có công viên thể thao khoảng 10.000 m², Central Park khoảng 5.000 m², công viên ven sông khoảng 4.000 m², bến du thuyền và đường dạo bộ ven sông Hàn.</p>
-<!--hh-img:img/sun-symphony-5/sun-symphony-5-tmb.jpg|Tổng mặt bằng phân khu Symphony 5 – Sun Symphony Residence (tài liệu chủ đầu tư)-->
+<p>Trả lời kỹ hơn câu hỏi Sun Symphony 5 ở đâu trong tổ hợp: Symphony 5 là tháp 31 tầng trên khoảng 11.371 m² đất thương mại dịch vụ. Xung quanh tháp có công viên thể thao khoảng 10.000 m², Central Park khoảng 5.000 m², công viên ven sông khoảng 4.000 m², bến du thuyền và đường dạo bộ ven sông Hàn.</p>
+<!--hh-img:img/sun-symphony-5/sun-symphony-5-tmb.jpg|Sun Symphony 5 ở đâu: tổng mặt bằng phân khu bên bờ Đông sông Hàn (tài liệu chủ đầu tư)-->
 <h2>View từ căn hộ</h2>
 <ul>
 <li><strong>Sông Hàn, cầu Thuận Phước:</strong> hướng được hỏi nhiều nhất, xem pháo hoa DIFF.</li>
@@ -357,7 +365,7 @@ HTML
 <!--hh-img:img/sun-symphony-5/sun-symphony-5-pc-03-view-cau-thuan-phuoc.jpg|Ban công Symphony 5 nhìn cầu Thuận Phước về đêm (phối cảnh chủ đầu tư)-->
 <h2>Tiện ích trong tòa</h2>
 <p>Bể bơi, gym, sân yoga tầng 27 nhìn biển, spa và sauna, kids club, club house, phố thương mại khối đế.</p>
-<h2>Thông tin nhanh</h2>
+<h2>Thông tin nhanh ngoài câu hỏi Sun Symphony 5 ở đâu</h2>
 <ul>
 <li>Chủ đầu tư: Công ty TNHH Mặt Trời Sông Hàn (thành viên Sun Group).</li>
 <li>1.228 căn: 725 studio, 331 căn 1PN+, 160 căn 2PN, 12 penthouse; sở hữu 50 năm.</li>
@@ -366,8 +374,9 @@ HTML
 <p>Xem thêm: <a href="/gia-symphony-5-sun-symphony-residence-bao-nhieu/">giá Sun Symphony 5</a>, <a href="/mat-bang-can-ho-symphony-5/">mặt bằng Symphony 5</a>.</p>
 <h2>Symphony 5 trong tổ hợp Sun Symphony Residence</h2>
 <p>Sun Symphony Residence là tổ hợp căn hộ và thấp tầng của Sun Group bên bờ Đông sông Hàn. Các phân khu trước đã và đang bàn giao (thấp tầng từ quý 2/2025, căn hộ quý 1 – 2/2026 theo kế hoạch). Symphony 5 là mảnh ghép cuối, do Công ty TNHH Mặt Trời Sông Hàn (thành viên Sun Group) làm chủ đầu tư, trên khu đất thương mại dịch vụ khoảng 11.371 m², tổng vốn hơn 3.716 tỷ đồng.</p>
+<p>Vì vậy, khi hỏi Sun Symphony 5 ở đâu, cần phân biệt tháp này với các phân khu đã bàn giao trước của tổ hợp. Tổng quan tổ hợp có trên <a href="https://cafeland.vn/du-an/du-an-sun-symphony-residence-da-nang-4336.html">CafeLand</a>; <a href="https://vnexpress.net/tiem-nang-thuong-mai-tai-thuong-cang-sun-symphony-residence-da-nang-4776875.html">VnExpress</a> từng có bài về tiềm năng thương mại tại thương cảng Sun Symphony Residence.</p>
 <p>Xem tổng quan tổ hợp: <a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a>.</p>
-<h2>Vị trí này hợp với ai</h2>
+<h2>Sun Symphony 5 ở đâu và hợp với ai</h2>
 <ul>
 <li><strong>Người làm việc ở trung tâm:</strong> qua cầu Rồng là vào Hải Châu, cách trung tâm hành chính khoảng 2 km.</li>
 <li><strong>Người mua để cho thuê:</strong> khách công tác, khách đi sự kiện, mùa pháo hoa DIFF; vẫn chỉ khoảng 2,5 km ra biển Mỹ Khê.</li>
@@ -383,6 +392,7 @@ HTML
 <tr><td><a href="/du-an/cora-tower/">Cora Tower</a></td><td>Sun NeO City (Hòa Xuân)</td><td>Giao lộ Nguyễn Phước Lan – đường 29/3</td></tr>
 </tbody>
 </table>
+<p>Bảng trên giúp trả lời Sun Symphony 5 ở đâu so với các dự án Sun Group khác: gần trung tâm và cầu Rồng hơn, nhưng không sát biển như Sun Saphia Residence.</p>
 <h2>Pháp lý và nhận nhà</h2>
 <ul>
 <li>Đấu giá quyền sử dụng đất 14/12/2025, chấp thuận nhà đầu tư 12/03/2026, quy hoạch 1/500 phê duyệt 23/4/2026.</li>
@@ -399,7 +409,7 @@ HTML
 <li><strong>Ra sân bay:</strong> qua sông về phía Hải Châu, khoảng 6 km.</li>
 </ul>
 <h2>Sống ở bờ Đông sông Hàn</h2>
-<p>Bờ Đông sông Hàn (Sơn Trà) là khu vực có nhiều dự án căn hộ mới của Đà Nẵng, nằm giữa trung tâm Hải Châu bên kia sông và bãi biển Mỹ Khê phía Đông. Người ở đây có thể đi bộ dọc sông, ngắm cầu Rồng, cầu Thuận Phước về đêm; mùa lễ hội pháo hoa quốc tế DIFF, khu vực ven sông là điểm xem pháo hoa quen thuộc. Với căn hộ cho thuê, vị trí này phục vụ cả khách du lịch biển lẫn khách công tác ở trung tâm.</p>
+<p>Bờ Đông sông Hàn (Sơn Trà) là khu vực có nhiều dự án căn hộ mới của Đà Nẵng, nằm giữa trung tâm Hải Châu bên kia sông và bãi biển Mỹ Khê phía Đông. Người ở đây có thể đi bộ dọc sông, ngắm cầu Rồng, cầu Thuận Phước về đêm; mùa lễ hội pháo hoa quốc tế DIFF, khu vực ven sông là điểm xem pháo hoa quen thuộc. Với căn hộ cho thuê, vị trí này phục vụ cả khách du lịch biển lẫn khách công tác ở trung tâm. Đó cũng là câu trả lời đầy đủ nhất cho câu hỏi Sun Symphony 5 ở đâu: giữa trung tâm Hải Châu và biển Mỹ Khê.</p>
 {$cta('Sun Symphony 5')}
 HTML
 		,
@@ -407,16 +417,17 @@ HTML
 			'seo_title' => 'Sun Symphony 5 ở đâu? Vị trí bên sông Hàn',
 			'desc'      => 'Sun Symphony 5 ở đâu: đường Lê Văn Duyệt, Sơn Trà, bờ Đông sông Hàn; cách cầu Rồng 1,5 km, biển Mỹ Khê 2,5 km, sân bay 6 km.',
 			'points'    => array(
-				'Đường Lê Văn Duyệt, phường Sơn Trà, bờ Đông sông Hàn',
+				'Sun Symphony 5 ở đâu: đường Lê Văn Duyệt, phường Sơn Trà, bờ Đông sông Hàn',
 				'Cầu Rồng 1,5 km, biển Mỹ Khê 2,5 km, sân bay 6 km',
 				'Công viên thể thao 10.000 m², Central Park 5.000 m², bến du thuyền',
 			),
 			'faq'       => array(
-				array( 'Sun Symphony 5 ở đâu?', 'Đường Lê Văn Duyệt, phường Sơn Trà (Nại Hiên Đông cũ), bờ Đông sông Hàn, Đà Nẵng – thuộc tổ hợp Sun Symphony Residence.' ),
+				array( 'Sun Symphony 5 ở đâu?', 'Sun Symphony 5 ở đâu: đường Lê Văn Duyệt, phường Sơn Trà (Nại Hiên Đông cũ), bờ Đông sông Hàn, Đà Nẵng – thuộc tổ hợp Sun Symphony Residence.' ),
+				array( 'Sun Symphony 5 ở đâu trong tổ hợp Sun Symphony Residence?', 'Symphony 5 là mảnh ghép cuối của tổ hợp, tháp 31 tầng trên khu đất thương mại dịch vụ khoảng 11.371 m², bao quanh là công viên thể thao, Central Park và công viên ven sông.' ),
 				array( 'Sun Symphony 5 cách biển bao xa?', 'Khoảng 2,5 km tới biển Mỹ Khê; cách cầu Rồng 1,5 km và sân bay 6 km.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://cafeland.vn/du-an/du-an-sun-symphony-residence-da-nang-4336.html', 'https://vnexpress.net/tiem-nang-thuong-mai-tai-thuong-cang-sun-symphony-residence-da-nang-4776875.html' ),
 	);
 
 	return $posts;

@@ -9,7 +9,8 @@ defined( 'ABSPATH' ) || exit;
 add_filter( 'hh_news_posts', 'hh_posts_nhip_song' );
 function hh_posts_nhip_song( $posts ) {
 	$posts[] = array(
-		'slug'     => 'cong-vien-cau-lac-bo-the-thao-bien-bai-tam-son-thuy',
+		'slug'     => 'bai-tam-son-thuy-cong-vien-the-thao-bien',
+		'old_slug' => array( 'cong-vien-cau-lac-bo-the-thao-bien-bai-tam-son-thuy' ),
 		'title'    => 'Bãi tắm Sơn Thủy: Đà Nẵng chuẩn bị đầu tư công viên và câu lạc bộ thể thao biển',
 		'excerpt'  => 'Đà Nẵng chuẩn bị các bước đầu tư gói thầu Công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy tại phường Ngũ Hành Sơn. Phối cảnh, các bước tiếp theo và ý nghĩa với cư dân, du lịch, bất động sản ven biển.',
 		'keyword'  => 'bãi tắm Sơn Thủy',
@@ -44,29 +45,33 @@ function hh_posts_nhip_song( $posts ) {
 <p><em>Ảnh phối cảnh: Danang 35K Feet. Phối cảnh có thể điều chỉnh trong quá trình thẩm định, phê duyệt.</em></p>
 
 <h2>"Chuẩn bị đầu tư" nghĩa là gì, bao giờ thi công?</h2>
-<p>Với công trình công cộng sử dụng vốn nhà nước, giai đoạn chuẩn bị đầu tư thường gồm: hoàn thiện hồ sơ thiết kế – dự toán, thẩm định và phê duyệt, lập kế hoạch lựa chọn nhà thầu, tổ chức đấu thầu; sau đó mới khởi công. Vì vậy, thời điểm thi công và hoàn thành của bãi tắm Sơn Thủy còn phụ thuộc tiến độ phê duyệt của thành phố. Hoàng Hiệp sẽ cập nhật ngay khi có quyết định phê duyệt hoặc kết quả lựa chọn nhà thầu.</p>
+<p>Với công trình công cộng sử dụng vốn nhà nước, giai đoạn chuẩn bị đầu tư thường gồm: hoàn thiện hồ sơ thiết kế – dự toán, thẩm định và phê duyệt, lập kế hoạch lựa chọn nhà thầu, tổ chức đấu thầu; sau đó mới khởi công. Vì vậy, thời điểm thi công và hoàn thành của bãi tắm Sơn Thủy còn phụ thuộc tiến độ phê duyệt của thành phố. Hoàng Hiệp sẽ cập nhật tiến độ bãi tắm Sơn Thủy ngay khi có quyết định phê duyệt hoặc kết quả lựa chọn nhà thầu.</p>
 
 <h2>Ý nghĩa với cư dân và du khách</h2>
 <ul>
 <li><strong>Thêm không gian công cộng miễn phí:</strong> chỗ tập thể dục buổi sáng, chơi thể thao bãi biển, dạo bộ buổi chiều cho cư dân Ngũ Hành Sơn.</li>
-<li><strong>Bãi tắm sạch, có tổ chức:</strong> công viên và câu lạc bộ đi kèm giúp quản lý vệ sinh, an toàn bãi tắm tốt hơn.</li>
+<li><strong>Bãi tắm sạch, có tổ chức:</strong> công viên và câu lạc bộ đi kèm giúp quản lý vệ sinh, an toàn bãi tắm Sơn Thủy tốt hơn.</li>
 <li><strong>Điểm đến mới cho du lịch:</strong> khu vực vốn gần danh thắng Ngũ Hành Sơn và các khu nghỉ dưỡng ven biển; thêm một công viên biển giúp du khách có lý do ở lại lâu hơn.</li>
 </ul>
 
-<h2>Tác động đến bất động sản ven biển Ngũ Hành Sơn</h2>
+<h2>Bãi tắm Sơn Thủy trong bức tranh dải biển phía Đông</h2>
+<p>Dự án nằm trên trục biển Hoàng Sa – Võ Nguyên Giáp – Trường Sa. Tuyến đường ven biển này đang được nghiên cứu mở rộng; lãnh đạo thành phố đã cơ bản thống nhất phương án hướng tuyến và giao lập thiết kế cảnh quan (<a href="https://cafeland.vn/tin-tuc/da-nang-nghien-cuu-mo-rong-duong-ven-bien-hoang-sa-vo-nguyen-giap-truong-sa-hoi-an-va-duong-nguyen-tat-thanh-149544.html">CafeLand</a>, 3/2026). Ngày 27/10/2026, thành phố cũng yêu cầu hoàn thành đấu giá quyền khai thác dịch vụ tại các bãi biển dọc tuyến này (<a href="https://baodanang.vn/dong-y-chu-truong-khai-thac-dich-vu-dem-tai-bai-bien-my-khe-3356594.html">Báo Đà Nẵng</a>) – xem thêm <a href="/kinh-te-dem-bien-my-khe-da-nang-2026/">kinh tế đêm biển Mỹ Khê</a>.</p>
+<p>Khi công viên bãi tắm Sơn Thủy, đường ven biển và dịch vụ bãi biển cùng được đầu tư, đoạn biển Ngũ Hành Sơn sẽ có thêm tiện ích công cộng cho cả ban ngày lẫn buổi tối. Cùng dải biển Trường Sa còn có dự án <a href="/khu-du-lich-sinh-thai-ven-bien-ngu-hanh-son/">khu du lịch sinh thái Ngũ Hành Sơn</a> đang triển khai hạng mục đầu tiên.</p>
+
+<h2>Tác động của bãi tắm Sơn Thủy đến bất động sản ven biển Ngũ Hành Sơn</h2>
 <p>Kinh nghiệm ở các bãi biển đã được đầu tư công viên (như dọc biển Mỹ Khê) cho thấy tiện ích công cộng ven biển giúp khu vực xung quanh sôi động hơn, tăng nhu cầu ở và thuê ngắn hạn. Với Ngũ Hành Sơn, người mua nên để ý:</p>
 <ul>
 <li><strong>Căn hộ, biệt thự gần biển:</strong> thêm tiện ích đi bộ ra biển là điểm cộng khi ở lâu dài hoặc cho thuê du lịch.</li>
 <li><strong>Nhà phố, đất ở các tuyến kết nối ra biển:</strong> có thể hưởng lợi khi lượng khách đến khu vực tăng.</li>
 <li><strong>Đừng mua theo tin đồn:</strong> dự án mới ở giai đoạn chuẩn bị đầu tư; giá trị thật đến khi công trình hoàn thành. Nên chọn sản phẩm có pháp lý rõ ràng và tính dòng tiền thận trọng.</li>
 </ul>
-<p>Tham khảo các dự án tại <a href="/khu-vuc/ngu-hanh-son/">khu vực Ngũ Hành Sơn</a>, biệt thự biển <a href="/du-an/the-ocean-villas-da-nang/">The Ocean Villas</a>, <a href="/du-an/vinpearl-luxury-da-nang-villa/">Vinpearl Luxury Đà Nẵng</a>, hoặc bài <a href="/toan-canh-ha-tang-da-nang-2026-tac-dong-bat-dong-san/">toàn cảnh hạ tầng Đà Nẵng 2026</a>. Xem thêm: <a href="/bat-dong-san-ngu-hanh-son-2026/">Bất động sản Ngũ Hành Sơn 2026</a> · <a href="/gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/">Giá đất ven biển Đà Nẵng</a>.</p>
+<p>Tham khảo các dự án tại <a href="/khu-vuc/ngu-hanh-son/">khu vực Ngũ Hành Sơn</a>, biệt thự biển <a href="/du-an/the-ocean-villas-da-nang/">The Ocean Villas</a>, <a href="/du-an/vinpearl-luxury-da-nang-villa/">Vinpearl Luxury Đà Nẵng</a>, hoặc bài <a href="/toan-canh-ha-tang-da-nang-2026/">toàn cảnh hạ tầng Đà Nẵng 2026</a>. Xem thêm: <a href="/bat-dong-san-ngu-hanh-son-2026/">Bất động sản Ngũ Hành Sơn 2026</a> · <a href="/gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/">Giá đất ven biển Đà Nẵng</a>.</p>
 
 <p>Anh chị đang tìm căn hộ, biệt thự hoặc nhà phố gần biển Ngũ Hành Sơn? Gọi/Zalo <strong>Hoàng Hiệp – 0904 567 009</strong> để nhận danh sách căn phù hợp, giá và pháp lý mới nhất.</p>
 HTML,
 		'seo'      => array(
-			'seo_title' => 'Bãi tắm Sơn Thủy: công viên, CLB thể thao biển Ngũ Hành Sơn',
-			'desc'      => 'Đà Nẵng chuẩn bị đầu tư công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy (Ngũ Hành Sơn): phối cảnh, các bước tiếp theo, tác động đến bất động sản ven biển.',
+			'seo_title' => 'Bãi tắm Sơn Thủy 2026: công viên, CLB thể thao biển',
+			'desc'      => 'Bãi tắm Sơn Thủy (Ngũ Hành Sơn): Đà Nẵng chuẩn bị đầu tư công viên, câu lạc bộ thể thao biển – phối cảnh, các bước tiếp theo, tác động bất động sản.',
 			'points'    => array(
 				'Gói thầu: Công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy, phường Ngũ Hành Sơn.',
 				'Hồ sơ phối cảnh ký ngày 10/8/2026; đang chuẩn bị các bước đầu tư.',
@@ -82,10 +87,13 @@ HTML,
 		),
 		'old_title' => array( 'Chuẩn bị đầu tư công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy' ),
 		'old_meta' => array(
-			'rank_math_title'       => 'Công viên, CLB thể thao biển và bãi tắm Sơn Thủy, Ngũ Hành Sơn',
-			'rank_math_description' => 'Đà Nẵng chuẩn bị đầu tư gói thầu Công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy (phường Ngũ Hành Sơn). Xem phối cảnh và ý nghĩa với khu vực.',
+			'rank_math_title'       => array( 'Công viên, CLB thể thao biển và bãi tắm Sơn Thủy, Ngũ Hành Sơn', 'Bãi tắm Sơn Thủy: công viên, CLB thể thao biển Ngũ Hành Sơn' ),
+			'rank_math_description' => array( 'Đà Nẵng chuẩn bị đầu tư gói thầu Công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy (phường Ngũ Hành Sơn). Xem phối cảnh và ý nghĩa với khu vực.', 'Đà Nẵng chuẩn bị đầu tư công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy (Ngũ Hành Sơn): phối cảnh, các bước tiếp theo, tác động đến bất động sản ven biển.' ),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://cafeland.vn/tin-tuc/da-nang-nghien-cuu-mo-rong-duong-ven-bien-hoang-sa-vo-nguyen-giap-truong-sa-hoi-an-va-duong-nguyen-tat-thanh-149544.html',
+			'https://baodanang.vn/dong-y-chu-truong-khai-thac-dich-vu-dem-tai-bai-bien-my-khe-3356594.html',
+		),
 	);
 	return $posts;
 }

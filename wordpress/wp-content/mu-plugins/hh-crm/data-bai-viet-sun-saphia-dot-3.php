@@ -234,17 +234,17 @@ HTML
 </tbody>
 </table>
 <p>Với căn dãy phía sau giá dự kiến 2,13 tỷ, cách tính tương tự cho tổng chi phí mua Sun Saphia Residence khoảng 2,4 tỷ trước nội thất. Đây là ví dụ minh hoạ, mức VAT thực tế thường thấp hơn mức tối đa vì được trừ tiền đất.</p>
-<h2>Chi phí sau khi nhận nhà</h2>
+<h2>Chi phí mua Sun Saphia Residence phát sinh sau khi nhận nhà</h2>
 <ul>
 <li><strong>Phí quản lý vận hành</strong> hằng tháng theo m² – chưa công bố mức dự kiến.</li>
 <li><strong>Điện, nước, internet</strong> và phí gửi xe ở tầng hầm.</li>
 <li><strong>Bảo trì nội thất</strong>: căn sát biển chịu hơi muối, phụ kiện kim loại, dàn nóng điều hòa cần vệ sinh, thay thế sớm hơn căn trong phố.</li>
 <li><strong>Phí vận hành cho thuê</strong> (nếu thuê đơn vị quản lý) thường tính theo phần trăm doanh thu.</li>
 </ul>
-<h2>Chi phí khi vay ngân hàng</h2>
+<h2>Chi phí mua Sun Saphia Residence khi vay ngân hàng</h2>
 <p>Chính sách dự án có hỗ trợ lãi suất tới 24 tháng; sau đó người vay tự trả lãi theo lãi suất thả nổi. Ngoài tiền lãi, nên hỏi phí trả nợ trước hạn, phí định giá tài sản và bảo hiểm khoản vay (nếu có). Tính thử: <a href="/vay-mua-sun-saphia-residence-tra-gop-hang-thang/">vay mua Sun Saphia Residence trả góp</a>, <a href="/ho-tro-lai-suat-24-thang-sun-saphia/">hỗ trợ lãi suất 24 tháng</a>.</p>
 <p>Nhận định của Hoàng Hiệp: khi lập ngân sách, nên cộng thêm khoảng 12% vào giá căn (VAT tối đa, 2% bảo trì, trước bạ) rồi mới tính nội thất – cách này giúp không bị thiếu tiền ở đợt nhận nhà. Chi phí mua Sun Saphia Residence chính xác sẽ theo bảng giá và hợp đồng chính thức.</p>
-<h2>4 câu cần hỏi khi nhận bảng giá</h2>
+<h2>4 câu hỏi về chi phí mua Sun Saphia Residence khi nhận bảng giá</h2>
 <ol>
 <li>Giá đã gồm VAT và 2% kinh phí bảo trì chưa?</li>
 <li>Diện tích tính giá là thông thủy hay tim tường? (tài liệu chủ đầu tư ghi diện tích thông thủy)</li>
@@ -286,18 +286,18 @@ HTML
 		'keywords_extra' => array( 'Sun Saphia Residence', 'trả góp căn hộ Sun Saphia', 'lãi suất vay mua nhà 2026', 'vay mua căn hộ Đà Nẵng' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-02 08:00',
-		'rev'      => 3, // 01/11: ngân hàng hỗ trợ Vietcombank, BIDV, NCB.
+		'rev'      => 4, // 15/11: chuẩn SEO 100 – tính theo giá dự kiến 28/10, hỗ trợ lãi suất 24 tháng, hồ sơ vay, hỏi đáp. 01/11: ngân hàng hỗ trợ Vietcombank, BIDV, NCB.
 		'image_replace' => true, // Ảnh cũ ghi VietinBank.
 		'category' => 'Kinh nghiệm',
 		'tags'     => array( 'Sun Saphia Residence', 'Vay mua nhà' ),
 		'image'    => 'plugin:img/tin-tuc/vay-mua-sun-saphia-residence.jpg',
 		'content'  => <<<HTML
-<p>Theo tài liệu chủ đầu tư tháng 10/2026, <strong>Sun Saphia Residence</strong> có ngân hàng hỗ trợ cho vay là <strong>Vietcombank, BIDV và NCB</strong>. Bài này tính thử số tiền trả mỗi tháng khi vay mua studio và căn 1PN, với mức lãi suất đang phổ biến trên thị trường.</p>
+<p>Vay mua Sun Saphia Residence: theo tài liệu chủ đầu tư tháng 10/2026, dự án có ngân hàng hỗ trợ cho vay là <strong>Vietcombank, BIDV và NCB</strong>. Bài này tính thử số tiền trả mỗi tháng khi vay mua studio và căn 1PN, với mức lãi suất đang phổ biến trên thị trường.</p>
 <!--hh-featured-->
-<h2>Lãi suất vay mua nhà đang ở mức nào?</h2>
-<p>Khảo sát của báo chí cuối tháng 9/2026 ghi lãi vay mua nhà tại BIDV khoảng 9,5 – 10,5%/năm và Vietcombank khoảng 9 – 10,5%/năm trong thời gian ưu đãi; sau ưu đãi, lãi thả nổi thường cao hơn. Lãi suất áp dụng thực tế tùy gói vay, hồ sơ và chính sách hỗ trợ của chủ đầu tư khi mở bán – cần hỏi trực tiếp ngân hàng.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Phối cảnh Sun Saphia Residence bên biển Sơn Thủy lúc hoàng hôn (ảnh chủ đầu tư)-->
-<h2>Bảng tính trả góp (giả định)</h2>
+<h2>Vay mua Sun Saphia Residence: lãi suất đang ở mức nào?</h2>
+<p>Khảo sát của báo chí cuối tháng 9/2026 ghi lãi vay mua nhà tại BIDV khoảng 9,5 – 10,5%/năm và Vietcombank khoảng 9 – 10,5%/năm trong thời gian ưu đãi; sau ưu đãi, lãi thả nổi thường cao hơn (xem thêm tổng hợp lãi vay mua nhà tháng 9/2026 trên <a href="https://dantri.com.vn/bat-dong-san/thang-9-cac-ngan-hang-dang-cho-vay-mua-nha-lai-suat-bao-nhieu-20260903083127075.htm">Dân trí</a>). Lãi suất áp dụng thực tế tùy gói vay, hồ sơ và chính sách hỗ trợ của chủ đầu tư khi mở bán – cần hỏi trực tiếp ngân hàng.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Vay mua Sun Saphia Residence – phối cảnh tòa tháp bên biển Sơn Thủy lúc hoàng hôn (ảnh chủ đầu tư)-->
+<h2>Bảng tính trả góp khi vay mua Sun Saphia Residence (giả định)</h2>
 <p>Giá căn theo bài toán tham khảo của chủ đầu tư: studio 30 m² khoảng 3 tỷ, căn 1PN 50 m² khoảng 4,5 tỷ. Trả góp đều (gốc + lãi bằng nhau mỗi tháng):</p>
 <table>
 <thead><tr><th>Khoản vay</th><th>Thời hạn</th><th>Lãi 10%/năm</th><th>Lãi 12%/năm</th></tr></thead>
@@ -310,13 +310,32 @@ HTML
 </table>
 <p>Nếu ngân hàng tính theo <strong>gốc trả đều, lãi theo dư nợ giảm dần</strong>, tháng đầu trả cao hơn: vay 1,5 tỷ trong 20 năm, lãi 10% thì tháng đầu khoảng 18,8 triệu, sau đó giảm dần.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
-<h2>So với tiền cho thuê</h2>
+<h2>Vay mua Sun Saphia Residence: so trả góp với tiền cho thuê</h2>
 <ul>
 <li>Bài toán của chủ đầu tư (cho thuê ngắn ngày, lấp đầy 60%): studio lợi nhuận khoảng 351 triệu/năm, tức khoảng 29 triệu/tháng – đây là giả định bán hàng, không phải cam kết.</li>
 <li>Kịch bản thận trọng trong bài <a href="/dau-tu-sun-saphia-residence-cho-thue-dong-tien/">đầu tư Sun Saphia Residence cho thuê</a>: khoảng 105 triệu/năm, tức gần 9 triệu/tháng – không đủ trả góp, cần nguồn thu khác bù.</li>
 </ul>
 <p>Nguyên tắc an toàn: tiền trả góp không nên vượt khoảng 40% thu nhập ổn định hằng tháng, không tính tiền cho thuê dự kiến.</p>
-<h2>Hỏi gì khi làm hồ sơ vay?</h2>
+<h2>Tính lại theo giá dự kiến 28/10/2026</h2>
+<p>Ngày 28/10/2026, chủ đầu tư đưa ra giá dự kiến studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ – đây là giá áp dụng khi mua theo phương án có vay, chưa VAT và 2% bảo trì. Vay 50% giá căn, trả góp đều 20 năm:</p>
+<table>
+<thead><tr><th>Studio tầng 15</th><th>Khoản vay 50%</th><th>Lãi 10%/năm</th><th>Lãi 12%/năm</th></tr></thead>
+<tbody>
+<tr><td>Dãy mặt biển 2,85 tỷ</td><td>Khoảng 1,425 tỷ</td><td>Khoảng 13,8 triệu/tháng</td><td>Khoảng 15,7 triệu/tháng</td></tr>
+<tr><td>Dãy phía sau 2,13 tỷ</td><td>Khoảng 1,065 tỷ</td><td>Khoảng 10,3 triệu/tháng</td><td>Khoảng 11,7 triệu/tháng</td></tr>
+</tbody>
+</table>
+<p>Hoàng Hiệp tự tính bằng công thức trả góp đều, chỉ để minh hoạ; ngân hàng có thể tính theo dư nợ giảm dần và tỷ lệ cho vay khác 50%.</p>
+<h2>Vay mua Sun Saphia Residence với hỗ trợ lãi suất 24 tháng</h2>
+<p>Chính sách đợt giới thiệu có hỗ trợ lãi suất lên tới 24 tháng; mức hỗ trợ cụ thể (toàn bộ hay một phần lãi, trên tỷ lệ vay bao nhiêu) chưa công bố. Nếu được hỗ trợ toàn bộ lãi, giai đoạn xây dựng gần như không phải trả lãi; từ tháng 25 bắt đầu trả gốc và lãi theo lãi suất thả nổi. Bài tính thử chi tiết: <a href="/ho-tro-lai-suat-24-thang-sun-saphia/">hỗ trợ lãi suất 24 tháng Sun Saphia</a>.</p>
+<h2>Hồ sơ vay thường cần chuẩn bị</h2>
+<ul>
+<li>Căn cước công dân, giấy tờ tình trạng hôn nhân của người vay (và vợ/chồng nếu tài sản chung).</li>
+<li>Chứng minh thu nhập: hợp đồng lao động, sao kê lương, hoặc giấy tờ kinh doanh, cho thuê tài sản.</li>
+<li>Hợp đồng mua bán căn hộ, chứng từ các đợt đã thanh toán cho chủ đầu tư.</li>
+</ul>
+<p>Nhận định của Hoàng Hiệp: vay mua Sun Saphia Residence hợp lý khi khoản trả góp sau hỗ trợ nằm trong khả năng trả bằng thu nhập ổn định. Đừng tính tiền cho thuê vào khả năng trả nợ ở năm đầu sau bàn giao – lúc đó căn còn cần thời gian để có khách đều.</p>
+<h2>Hỏi gì khi làm hồ sơ vay mua Sun Saphia Residence?</h2>
 <ol>
 <li>Lãi ưu đãi bao lâu, lãi sau ưu đãi tính theo công thức nào (lãi cơ sở + biên độ bao nhiêu)?</li>
 <li>Chủ đầu tư có hỗ trợ lãi suất, ân hạn nợ gốc đến khi nhận nhà không?</li>
@@ -327,20 +346,23 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Vay mua Sun Saphia Residence: trả góp mỗi tháng',
+			'seo_title' => 'Vay mua Sun Saphia Residence 2026: trả góp mỗi tháng',
 			'desc'      => 'Vay mua Sun Saphia Residence: studio 3 tỷ vay 1,5 tỷ trả khoảng 14,5 – 18,8 triệu/tháng (20 năm, lãi 10 – 12%). Ngân hàng hỗ trợ Vietcombank, BIDV, NCB.',
 			'points'    => array(
-				'Ngân hàng hỗ trợ: Vietcombank, BIDV, NCB (tài liệu chủ đầu tư 10/2026)',
+				'Vay mua Sun Saphia Residence: ngân hàng hỗ trợ Vietcombank, BIDV, NCB (tài liệu chủ đầu tư 10/2026)',
 				'Studio vay 1,5 tỷ, 20 năm: khoảng 14,5 – 16,5 triệu/tháng',
 				'Lãi vay mua nhà cuối 9/2026 khoảng 9 – 10,5%/năm thời gian ưu đãi',
 			),
 			'faq'       => array(
 				array( 'Ngân hàng nào cho vay mua Sun Saphia Residence?', 'Tài liệu chủ đầu tư tháng 10/2026 ghi ngân hàng hỗ trợ là Vietcombank, BIDV và NCB.' ),
+				array( 'Vay mua Sun Saphia Residence studio 2,85 tỷ trả mỗi tháng bao nhiêu?', 'Ví dụ vay 50% (khoảng 1,425 tỷ), trả góp đều 20 năm: khoảng 13,8 triệu/tháng với lãi 10%/năm, khoảng 15,7 triệu/tháng với lãi 12%/năm (minh hoạ).' ),
+				array( 'Vay mua Sun Saphia Residence có được hỗ trợ lãi suất không?', 'Có, chính sách đợt giới thiệu hỗ trợ lãi suất lên tới 24 tháng; mức hỗ trợ cụ thể chưa công bố.' ),
 				array( 'Vay 1,5 tỷ mua căn hộ trả mỗi tháng bao nhiêu?', 'Trả góp đều 20 năm: khoảng 14,5 triệu/tháng với lãi 10%/năm, khoảng 16,5 triệu/tháng với lãi 12%/năm.' ),
 			),
 		),
 		'sources'  => array(
 			'https://fili.vn/2026/09/lai-vay-mua-nha-tren-10nam-giam-lai-co-du-de-nguoi-dan-mua-nha-757-1493561.htm',
+			'https://dantri.com.vn/bat-dong-san/thang-9-cac-ngan-hang-dang-cho-vay-mua-nha-lai-suat-bao-nhieu-20260903083127075.htm',
 		),
 	);
 
@@ -348,7 +370,7 @@ HTML
 	$posts[] = array(
 		'slug'     => 'khach-du-lich-da-nang-2026-thue-can-ho-ven-bien',
 		'old_slug' => array( 'khach-du-lich-da-nang-2026-nhu-cau-thue-can-ho-ven-bien' ),
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 15/11: chuẩn SEO 100 – rút gọn URL, đọc tỷ lệ khách, nhu cầu theo loại căn, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Đà Nẵng đón 15,86 triệu khách lưu trú 9 tháng 2026: tín hiệu gì cho căn hộ ven biển như Sun Saphia Residence?',
 		'excerpt'  => '9 tháng 2026, Đà Nẵng đón khoảng 15,86 triệu lượt khách lưu trú (+26,4%), khách quốc tế 7,73 triệu (+28,7%). Nhu cầu thuê căn hộ ven biển và điều nhà đầu tư Sun Saphia Residence cần lưu ý.',
 		'keyword'  => 'khách du lịch Đà Nẵng 2026',
@@ -359,9 +381,9 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Du lịch Đà Nẵng' ),
 		'image'    => 'plugin:img/tin-tuc/khach-du-lich-da-nang-9-thang-2026.jpg',
 		'content'  => <<<HTML
-<p>Theo số liệu UBND TP Đà Nẵng công bố tại họp báo quý III (23/10/2026), các cơ sở lưu trú trong thành phố phục vụ khoảng <strong>15,86 triệu lượt khách trong 9 tháng 2026</strong>, tăng 26,4% so với cùng kỳ. Với người đang cân nhắc căn hộ ven biển để cho thuê như <strong>Sun Saphia Residence</strong>, đây là số liệu đáng xem kỹ.</p>
+<p>Khách du lịch Đà Nẵng 2026 tăng mạnh: theo số liệu UBND TP Đà Nẵng công bố tại họp báo quý III (23/10/2026), các cơ sở lưu trú trong thành phố phục vụ khoảng <strong>15,86 triệu lượt khách trong 9 tháng 2026</strong>, tăng 26,4% so với cùng kỳ. Với người đang cân nhắc căn hộ ven biển để cho thuê như <strong>Sun Saphia Residence</strong>, đây là số liệu đáng xem kỹ.</p>
 <!--hh-featured-->
-<h2>Số liệu du lịch 9 tháng 2026</h2>
+<h2>Số liệu khách du lịch Đà Nẵng 2026 (9 tháng)</h2>
 <table>
 <thead><tr><th>Chỉ tiêu</th><th>9 tháng 2026</th><th>So cùng kỳ</th></tr></thead>
 <tbody>
@@ -372,30 +394,57 @@ HTML
 <tr><td>Doanh thu lưu trú, ăn uống</td><td>Khoảng 52.945 tỷ đồng</td><td>+26,2%</td></tr>
 </tbody>
 </table>
-<p>Số liệu là ước tính, chỉ tính khách tại cơ sở lưu trú, có thể điều chỉnh khi có số chính thức.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
-<h2>Ý nghĩa với căn hộ ven biển</h2>
+<p>Số liệu là ước tính, chỉ tính khách tại cơ sở lưu trú, có thể điều chỉnh khi có số chính thức (nguồn: <a href="https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp">VietnamPlus</a>, <a href="https://baodanang.vn/da-nang-don-gan-15-9-trieu-luot-khach-luu-tru-trong-9-thang-3354453.html">Báo Đà Nẵng</a>).</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Khách du lịch Đà Nẵng 2026 và khu biển Sơn Thủy: mặt bằng tổng thể Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Khách du lịch Đà Nẵng 2026: ý nghĩa với căn hộ ven biển</h2>
 <ul>
 <li><strong>Khách quốc tế tăng nhanh hơn khách nội địa</strong>: nhóm này ở dài ngày hơn và hay chọn căn hộ có bếp, gần biển.</li>
 <li><strong>Khách ngủ qua đêm tăng gần 30%</strong>: nhu cầu chỗ ở thật, không chỉ khách tham quan trong ngày.</li>
 <li><strong>Cạnh tranh cũng tăng</strong>: nguồn phòng khách sạn, căn hộ cho thuê ven biển Mỹ Khê – Sơn Thủy – Non Nước rất lớn; căn nào view đẹp, vận hành tốt mới giữ được giá thuê.</li>
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
+<h2>Đọc các tỷ lệ trong số liệu khách du lịch Đà Nẵng 2026</h2>
+<p>Từ bảng trên, Hoàng Hiệp tự tính thêm ba tỷ lệ để dễ hình dung:</p>
+<ul>
+<li><strong>Khách quốc tế chiếm gần một nửa</strong>: khoảng 7,73 / 15,86 triệu lượt, tức khoảng 49% khách lưu trú.</li>
+<li><strong>Khoảng 91% khách có ngủ qua đêm</strong> (14,43 / 15,86 triệu lượt) – nhu cầu chỗ ở là thật.</li>
+<li><strong>Doanh thu lưu trú, ăn uống bình quân khoảng 3,3 triệu đồng mỗi lượt khách</strong> (52.945 tỷ / 15,86 triệu lượt) – con số chung cho mọi loại hình, không phải giá phòng.</li>
+</ul>
+<p>Ba tỷ lệ này cho thấy khách du lịch Đà Nẵng 2026 không chỉ đông hơn mà còn có tỷ trọng khách quốc tế cao – nhóm thường chọn căn hộ có bếp, ở dài ngày hơn khách đi tour.</p>
+<h2>Khách du lịch Đà Nẵng 2026 thuê loại căn nào?</h2>
+<table>
+<thead><tr><th>Nhóm khách</th><th>Loại căn phù hợp</th><th>Điều khách quan tâm</th></tr></thead>
+<tbody>
+<tr><td>Cặp đôi, khách đi một mình</td><td>Studio</td><td>Giá hợp lý, view biển, gần bãi tắm</td></tr>
+<tr><td>Gia đình có trẻ nhỏ</td><td>1PN+, 2PN</td><td>Bếp, bể bơi, an toàn, chỗ đỗ xe</td></tr>
+<tr><td>Nhóm bạn</td><td>2PN</td><td>Chia tiền phòng, gần khu ăn uống</td></tr>
+<tr><td>Khách ở dài ngày, làm việc từ xa</td><td>Studio, 1PN+</td><td>Giá theo tháng, internet, chỗ làm việc</td></tr>
+</tbody>
+</table>
 <h2>Đặt vào bài toán Sun Saphia Residence</h2>
 <p>Tài liệu chủ đầu tư dùng giả định studio 2,5 triệu/đêm, lấp đầy 60%. Lượng khách tăng là điều kiện cần, nhưng tỷ lệ lấp đầy của từng căn còn phụ thuộc mùa (Đà Nẵng đông khách từ tháng 4 đến tháng 9), giá cạnh tranh và đơn vị vận hành. So sánh các khu ven biển: xem <a href="/can-ho-ven-bien-da-nang-my-khe-son-thuy-non-nuoc/">căn hộ ven biển Mỹ Khê – Sơn Thủy – Non Nước</a>.</p>
-<p>Lưu ý: số liệu du lịch là bức tranh chung của thành phố, không phải cam kết doanh thu cho bất kỳ căn hộ nào.</p>
+<h2>Dùng số liệu khách du lịch Đà Nẵng 2026 khi tính dòng tiền</h2>
+<ol>
+<li>Không lấy mức tăng 26,4% của cả thành phố áp thẳng vào công suất của một căn.</li>
+<li>Tính ít nhất một kịch bản thận trọng cho mùa thấp điểm (cuối năm mưa bão).</li>
+<li>So giá thuê với các căn cùng khu, cùng loại đang cho thuê trên ứng dụng đặt phòng.</li>
+<li>Trừ đủ chi phí vận hành, phí quản lý, thuế cho thuê trước khi tính lợi suất – xem <a href="/dau-tu-sun-saphia-residence-cho-thue-dong-tien/">3 kịch bản dòng tiền</a>.</li>
+</ol>
+<p>Lưu ý: số liệu du lịch là bức tranh chung của thành phố, không phải cam kết doanh thu cho bất kỳ căn hộ nào. Nhận định của Hoàng Hiệp: khách du lịch Đà Nẵng 2026 tăng là nền tảng tốt cho căn hộ ven biển, nhưng lợi thế sẽ thuộc về căn có view, giá và cách vận hành tốt hơn mặt bằng chung.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Khách du lịch Đà Nẵng 9 tháng 2026 và căn hộ ven biển',
-			'desc'      => '9 tháng 2026 Đà Nẵng đón khoảng 15,86 triệu khách lưu trú (+26,4%), quốc tế 7,73 triệu. Tín hiệu cho căn hộ ven biển cho thuê như Sun Saphia Residence.',
+			'seo_title' => 'Khách du lịch Đà Nẵng 2026: 15,86 triệu lượt và căn hộ biển',
+			'desc'      => 'Khách du lịch Đà Nẵng 2026: 9 tháng đón khoảng 15,86 triệu lượt khách lưu trú (+26,4%), quốc tế 7,73 triệu. Tín hiệu cho căn hộ ven biển cho thuê.',
 			'points'    => array(
-				'15,86 triệu lượt khách lưu trú 9 tháng 2026, tăng 26,4%',
+				'Khách du lịch Đà Nẵng 2026: 15,86 triệu lượt khách lưu trú 9 tháng, tăng 26,4%',
 				'Khách quốc tế khoảng 7,73 triệu lượt, tăng 28,7%',
 				'Khách tăng nhưng cạnh tranh nguồn phòng ven biển cũng lớn',
 			),
 			'faq'       => array(
+				array( 'Khách du lịch Đà Nẵng 2026 có bao nhiêu khách quốc tế?', 'Khoảng 7,73 triệu lượt khách quốc tế lưu trú trong 9 tháng 2026, tăng 28,7% so với cùng kỳ – gần một nửa tổng lượt khách lưu trú.' ),
+				array( 'Khách du lịch Đà Nẵng 2026 tăng có làm căn hộ cho thuê lãi hơn không?', 'Lượng khách tăng là điều kiện thuận lợi, nhưng lợi nhuận từng căn còn phụ thuộc mùa, view, giá cạnh tranh và đơn vị vận hành; số liệu thành phố không phải cam kết doanh thu.' ),
 				array( 'Đà Nẵng đón bao nhiêu khách 9 tháng 2026?', 'Khoảng 15,86 triệu lượt khách lưu trú, tăng 26,4% so với cùng kỳ; khách quốc tế khoảng 7,73 triệu lượt (số liệu UBND TP công bố 23/10/2026).' ),
 			),
 		),
