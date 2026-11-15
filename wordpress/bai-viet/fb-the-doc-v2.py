@@ -103,6 +103,7 @@ elif STYLE == 'poster':
 .pos .l{display:inline-block;white-space:nowrap;filter:drop-shadow(0 1px 0 rgba(255,255,255,.7)) drop-shadow(0 3px 6px rgba(120,60,20,.18));-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(180deg,#d39a5c 0%,#8a4a1c 55%,#b8783f 100%);font-variant-numeric:lining-nums}
 .pos .script{font:400 96px/1.1 GV;padding:4px 18px 16px 10px;margin:0 -10px -10px 0}
 .pos .cap{font:600 62px/1 CSC;letter-spacing:.05em}
+.pos .plain{font:500 58px/1.1 CG;letter-spacing:.03em;padding-bottom:4px;background-image:linear-gradient(180deg,#a8693a,#6e3510)}
 .pos .big{font:700 138px/.9 CSC;letter-spacing:.02em;background-image:linear-gradient(180deg,#e0aa6c 0%,#9a5524 45%,#6e3510 70%,#b97d45 100%)}
 .pos .sub{margin:16px 0 0;font:500 26px/1.35 BVP;color:#6b4a2a}
 .pos .stats{margin-top:26px;display:flex;justify-content:center}
