@@ -11,10 +11,10 @@ defined( 'ABSPATH' ) || exit;
 add_filter(
 	'hh_project_dataset',
 	static function ( $projects ) {
-		$img  = 'plugin:img/da-nang-downtown/da-nang-downtown-thap-aurora-dang-toa-2.jpg | Sơ đồ phân tầng tháp Aurora 408 m – Đà Nẵng Downtown: căn hộ cao cấp tầng 11 – 22 và 28 – 42, phòng lưu trú tầng 43 – 67, penthouse tầng 68 – 69 (theo tài liệu giới thiệu, tham khảo) | mặt bằng | Phân tầng tháp Aurora';
+		$img  = 'plugin:img/da-nang-downtown/da-nang-downtown-thap-aurora-dang-toa-3.jpg | Sơ đồ phân tầng tháp Aurora 408 m – Đà Nẵng Downtown: căn hộ cao cấp tầng 11 – 22 và 28 – 42, phòng lưu trú tầng 43 – 67, penthouse tầng 68 – 69 (theo tài liệu giới thiệu, tham khảo) | mặt bằng | Phân tầng tháp Aurora';
 		$sec  = '<h2>Tháp Aurora 408 m: phân tầng chức năng</h2>
 <p>Theo tài liệu giới thiệu dự án, tòa tháp biểu tượng của Đà Nẵng Downtown có tên <strong>Aurora</strong>, cao 408 m với 69 tầng và tầng mái kỹ thuật, gồm <strong>504 căn hộ cao cấp</strong>, <strong>396 phòng lưu trú du lịch</strong> và <strong>2 căn penthouse</strong>. Số liệu dưới đây để tham khảo, chủ đầu tư sẽ công bố chính thức khi mở bán.</p>
-<!--hh-img:img/da-nang-downtown/da-nang-downtown-thap-aurora-dang-toa-2.jpg|Tháp Aurora – Đà Nẵng Downtown: phân tầng chức năng theo dáng tòa tháp (đồ hoạ Hoàng Hiệp vẽ lại theo tài liệu giới thiệu)-->
+<!--hh-img:img/da-nang-downtown/da-nang-downtown-thap-aurora-dang-toa-3.jpg|Tháp Aurora – Đà Nẵng Downtown: phân tầng chức năng theo dáng tòa tháp (đồ hoạ Hoàng Hiệp vẽ lại theo tài liệu giới thiệu)-->
 <table>
 <tr><th>Tầng</th><th>Chức năng</th><th>Số lượng</th></tr>
 <tr><td>Mái</td><td>Bể nước, phòng kỹ thuật</td><td>–</td></tr>
@@ -35,12 +35,13 @@ add_filter(
 ';
 		$hl   = 'Tháp Aurora 408 m: 504 căn hộ cao cấp (tầng 11 – 22, 28 – 42), 396 phòng lưu trú du lịch, 2 penthouse tầng 68 – 69 (theo tài liệu giới thiệu)';
 		$zone = "Tháp Aurora 69 tầng | 504 căn hộ cao cấp, 396 phòng lưu trú, 2 penthouse, TTTM, nhà hàng, hội nghị, rạp phim | 408 m | Đang thi công";
-		// Các bản trước đã có thể nhập lên web: 2.20.286 (sơ đồ cột, ...-phan-tang.jpg), 2.20.287 (...-dang-toa.jpg).
+		// Các bản trước đã có thể nhập lên web: 2.20.286 (sơ đồ cột, ...-phan-tang.jpg), 2.20.287 (...-dang-toa.jpg), 2.20.288 (...-dang-toa-2.jpg). Bản 2.20.289: khổ dọc theo bố cục tài liệu gốc (...-dang-toa-3.jpg).
 		$c286 = 'Sơ đồ phân tầng tháp Aurora – Đà Nẵng Downtown (đồ hoạ Hoàng Hiệp vẽ lại theo tài liệu giới thiệu)';
 		$c287 = 'Tháp Aurora – Đà Nẵng Downtown: phân tầng chức năng theo dáng tòa tháp (đồ hoạ Hoàng Hiệp vẽ lại theo tài liệu giới thiệu)';
 		$olds = static fn( $x ) => array(
-			str_replace( array( 'thap-aurora-dang-toa-2.jpg', $c287 ), array( 'thap-aurora-phan-tang.jpg', $c286 ), $x ),
-			str_replace( 'thap-aurora-dang-toa-2.jpg', 'thap-aurora-dang-toa.jpg', $x ),
+			str_replace( array( 'thap-aurora-dang-toa-3.jpg', $c287 ), array( 'thap-aurora-phan-tang.jpg', $c286 ), $x ),
+			str_replace( 'thap-aurora-dang-toa-3.jpg', 'thap-aurora-dang-toa.jpg', $x ),
+			str_replace( 'thap-aurora-dang-toa-3.jpg', 'thap-aurora-dang-toa-2.jpg', $x ),
 		);
 		foreach ( $projects as $i => $p ) {
 			if ( 'da-nang-downtown' !== ( $p['slug'] ?? '' ) ) {

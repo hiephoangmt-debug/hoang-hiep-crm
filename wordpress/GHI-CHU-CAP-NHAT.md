@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.288**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.289**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.289 (15/11/2026) – sơ đồ tháp Aurora theo đúng bố cục tài liệu gốc
+
+- Vẽ lại khổ dọc 1080×1620 như tài liệu anh gửi: tháp lớn bên trái (khung đỉnh có vòm, thân kính phủ màu từng khối tầng, tà cong trắng từ tầng 22 xuống chân, khối đế mái cong ven sông, hàng dừa), nhãn tầng có đường chỉ nét đứt, tiêu đề AURORA ĐÀ NẴNG – SƠ ĐỒ PHÂN TẦNG TIỆN ÍCH, bảng 3 cột, hàng tổng 504 · 396 · 2, dải "Tháp biểu tượng Aurora – cao 408 m", nền hoàng hôn, núi, sông Hàn.
+- Sau khi cài: **Nhập / cập nhật dữ liệu** → LiteSpeed **Purge All**.
 
 ## Có gì mới – 2.20.288 (15/11/2026) – tháp Aurora giống tòa thật hơn
 
