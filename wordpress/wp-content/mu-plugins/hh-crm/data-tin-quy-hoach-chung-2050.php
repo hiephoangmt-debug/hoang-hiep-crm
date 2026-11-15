@@ -9,7 +9,8 @@ defined( 'ABSPATH' ) || exit;
 add_filter( 'hh_news_posts', 'hh_posts_quy_hoach_chung_2050' );
 function hh_posts_quy_hoach_chung_2050( $posts ) {
 	$posts[] = array(
-		'slug'      => 'quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg',
+		'slug'      => 'quy-hoach-chung-da-nang-2050',
+		'old_slug'  => array( 'quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg' ),
 		'title'     => 'Quy hoạch chung Đà Nẵng đến 2050 (Quyết định 2016/QĐ-TTg): những điểm chính và tác động bất động sản',
 		'excerpt'   => 'Ngày 21/10/2026, Thủ tướng phê duyệt Quy hoạch chung TP Đà Nẵng đến 2050, tầm nhìn 2075: mô hình 3 vùng – 3 cực – 2 trục – 4 hành lang, khoảng 30 đô thị, 2.050 ha lấn biển, dân số trên 6,5 triệu người năm 2050. Người mua nhà đất cần lưu ý gì?',
 		'keyword'   => 'quy hoạch chung Đà Nẵng 2050',
@@ -17,19 +18,23 @@ function hh_posts_quy_hoach_chung_2050( $posts ) {
 		'category'  => 'Hạ tầng & quy hoạch',
 		'date'      => '2026-10-28 07:00:00',
 		'image'     => 'plugin:img/tin-tuc/quy-hoach-chung-da-nang-2050.jpg',
-		'image_alt' => 'Quy hoạch chung Đà Nẵng đến 2050 – các con số chính của Quyết định 2016/QĐ-TTg',
+		'image_alt' => 'Quy hoạch chung Đà Nẵng 2050 – các con số chính của Quyết định 2016/QĐ-TTg',
+		'old_meta'  => array(
+			'rank_math_description' => array( 'Quy hoạch chung Đà Nẵng đến 2050, tầm nhìn 2075 (QĐ 2016/QĐ-TTg ngày 21/10/2026): 3 vùng – 3 cực, 30 đô thị, 2.050 ha lấn biển, dân số 6,5 triệu và tác động BĐS.' ),
+		),
 		'content'   => <<<'HTML'
-<p>Ngày 21/10/2026, Phó Thủ tướng Thường trực Phạm Gia Túc ký <strong>Quyết định số 2016/QĐ-TTg</strong> phê duyệt <strong>Quy hoạch chung thành phố Đà Nẵng đến năm 2050, tầm nhìn đến năm 2075</strong>. Đây là bản quy hoạch chung đầu tiên cho Đà Nẵng sau khi hợp nhất với Quảng Nam (từ 1/7/2025), và là khung để các quy hoạch phân khu, quy hoạch chi tiết, dự án nhà ở về sau phải bám theo.</p>
-<p>Bài này tóm tắt các con số chính theo nội dung Cổng thông tin điện tử TP Đà Nẵng công bố, sau đó là nhận định của Hoàng Hiệp về tác động tới thị trường nhà đất. Phần nhận định là ý kiến cá nhân, không phải nội dung quyết định.</p>
+<p><strong>Quy hoạch chung Đà Nẵng 2050</strong> đã được phê duyệt: ngày 21/10/2026, Phó Thủ tướng Thường trực Phạm Gia Túc ký <strong>Quyết định số 2016/QĐ-TTg</strong> phê duyệt <strong>Quy hoạch chung thành phố Đà Nẵng đến năm 2050, tầm nhìn đến năm 2075</strong>. Đây là bản quy hoạch chung đầu tiên cho Đà Nẵng sau khi hợp nhất với Quảng Nam (từ 1/7/2025), và là khung để các quy hoạch phân khu, quy hoạch chi tiết, dự án nhà ở về sau phải bám theo.</p>
+<p>Bài này tóm tắt các con số chính của quy hoạch chung Đà Nẵng 2050 theo nội dung <a href="https://danang.gov.vn/en/w/phe-duyet-quy-hoach-chung-thanh-pho-da-nang-den-nam-2050-tam-nhin-den-nam-2075">Cổng thông tin điện tử TP Đà Nẵng</a> công bố, sau đó là nhận định của Hoàng Hiệp về tác động tới thị trường nhà đất. Phần nhận định là ý kiến cá nhân, không phải nội dung quyết định.</p>
+<!--hh-featured-->
 
-<h2>Phạm vi và thời hạn quy hoạch</h2>
+<h2>Quy hoạch chung Đà Nẵng 2050: phạm vi và thời hạn</h2>
 <ul>
 <li><strong>Phạm vi:</strong> toàn bộ địa giới hành chính thành phố, gồm đặc khu Hoàng Sa và vùng biển theo quy định.</li>
 <li><strong>Diện tích tự nhiên:</strong> khoảng 11.870,34 km².</li>
 <li><strong>Thời hạn:</strong> ngắn hạn đến 2040, dài hạn đến 2050, tầm nhìn đến 2075.</li>
 </ul>
 
-<h2>Dân số dự báo</h2>
+<h2>Dân số dự báo theo quy hoạch chung Đà Nẵng 2050</h2>
 <table>
 <thead><tr><th>Chỉ tiêu</th><th>Năm 2040</th><th>Năm 2050</th></tr></thead>
 <tbody>
@@ -40,6 +45,7 @@ function hh_posts_quy_hoach_chung_2050( $posts ) {
 </table>
 
 <h2>Mô hình 3 vùng – 3 cực – 2 trục – 4 hành lang</h2>
+<p>Đây là "bộ khung" không gian của quy hoạch chung Đà Nẵng 2050 cho toàn thành phố sau hợp nhất.</p>
 <p><strong>3 vùng:</strong> vùng ven biển phía Đông (công nghiệp, dịch vụ, đô thị); vùng trung du, miền núi phía Tây (sinh thái, nông nghiệp, di sản); vùng biển phía Đông cùng quần đảo Hoàng Sa và các hải đảo.</p>
 <p><strong>3 cực phát triển:</strong></p>
 <ul>
@@ -51,7 +57,7 @@ function hh_posts_quy_hoach_chung_2050( $posts ) {
 <p><strong>4 hành lang Đông – Tây:</strong> Quốc lộ 40B; Quốc lộ 14E, 14H và đường Hồ Chí Minh qua Khâm Đức; Quốc lộ 14D (cửa khẩu Nam Giang); Quốc lộ 14G – nay là ĐT604 (cửa khẩu Tây Giang).</p>
 
 <h2>Mạng lưới khoảng 30 đô thị đến 2050</h2>
-<p>Thành phố định hướng khoảng 30 đô thị, gồm 23 đô thị hiện hữu và 7 đô thị mới. Bốn đô thị loại II:</p>
+<p>Quy hoạch chung Đà Nẵng 2050 định hướng khoảng 30 đô thị, gồm 23 đô thị hiện hữu và 7 đô thị mới. Bốn đô thị loại II:</p>
 <table>
 <thead><tr><th>Đô thị</th><th>Diện tích</th><th>Dân số dự báo</th></tr></thead>
 <tbody>
@@ -77,9 +83,9 @@ function hh_posts_quy_hoach_chung_2050( $posts ) {
 <tr><td>Khu thương mại tự do Đà Nẵng</td><td>đưa 7 vị trí đã có quyết định thành lập vào hoạt động; nghiên cứu thêm vị trí ở phía Nam</td></tr>
 </tbody>
 </table>
-<p>Ba khu du lịch quốc gia tiềm năng được xác định: <strong>Sơn Trà, Cù Lao Chàm, Bà Nà</strong>.</p>
+<p>Ba khu du lịch quốc gia tiềm năng được quy hoạch chung Đà Nẵng 2050 xác định: <strong>Sơn Trà, Cù Lao Chàm, Bà Nà</strong>.</p>
 
-<h2>Cảng, sân bay, đường sắt</h2>
+<h2>Cảng, sân bay, đường sắt trong quy hoạch chung Đà Nẵng 2050</h2>
 <ul>
 <li><strong>Cảng Liên Chiểu</strong> là cửa ngõ quốc tế, kết nối Khu thương mại tự do và Khu công nghệ cao; cảng Chu Lai là cửa ngõ phía Nam.</li>
 <li><strong>Sân bay:</strong> Cảng hàng không quốc tế Đà Nẵng ở cửa ngõ phía Bắc; nâng cấp, mở rộng Cảng hàng không quốc tế Chu Lai gắn với trung tâm logistics hàng không.</li>
@@ -87,7 +93,7 @@ function hh_posts_quy_hoach_chung_2050( $posts ) {
 <li><strong>Logistics:</strong> Trung tâm logistics quốc gia Chu Lai tại Núi Thành.</li>
 </ul>
 
-<h2>Phân kỳ thực hiện</h2>
+<h2>Phân kỳ thực hiện quy hoạch chung Đà Nẵng 2050</h2>
 <table>
 <thead><tr><th>Giai đoạn</th><th>Trọng tâm</th></tr></thead>
 <tbody>
@@ -97,34 +103,42 @@ function hh_posts_quy_hoach_chung_2050( $posts ) {
 <tr><td>Sau 2050</td><td>Cân bằng đô thị – nông thôn, tăng trưởng – bảo tồn tài nguyên, di sản</td></tr>
 </tbody>
 </table>
-<p>Các chương trình ưu tiên được nêu gồm metro/LRT, đường sắt tốc độ cao, cảng Liên Chiểu, Cảng hàng không Chu Lai, Trung tâm tài chính quốc tế, các Quốc lộ 14B, 14D, 14E và hạ tầng ứng phó biến đổi khí hậu. Danh mục sẽ còn được rà soát, phân kỳ theo khả năng huy động vốn.</p>
+<p>Các chương trình ưu tiên của quy hoạch chung Đà Nẵng 2050 gồm metro/LRT, đường sắt tốc độ cao, cảng Liên Chiểu, Cảng hàng không Chu Lai, Trung tâm tài chính quốc tế, các Quốc lộ 14B, 14D, 14E và hạ tầng ứng phó biến đổi khí hậu. Danh mục sẽ còn được rà soát, phân kỳ theo khả năng huy động vốn.</p>
 
-<h2>Tác động tới bất động sản – nhận định của Hoàng Hiệp</h2>
-<p>Quy hoạch chung chưa phải là quy hoạch chi tiết từng lô đất, nên chưa thể dựa vào đó để kết luận một khu cụ thể sẽ tăng giá. Tuy vậy, có vài hướng đáng theo dõi:</p>
+<h2>Quy hoạch chung Đà Nẵng 2050 tác động tới bất động sản – nhận định của Hoàng Hiệp</h2>
+<p>Quy hoạch chung Đà Nẵng 2050 chưa phải là quy hoạch chi tiết từng lô đất, nên chưa thể dựa vào đó để kết luận một khu cụ thể sẽ tăng giá. Tuy vậy, có vài hướng đáng theo dõi:</p>
 <ul>
 <li><strong>Ven biển Sơn Trà – Ngũ Hành Sơn – Hội An:</strong> nằm trong cực phía Bắc, gắn với lượng khách du lịch lưu trú dự báo 130 – 135 triệu lượt năm 2050 – có lợi cho căn hộ ven biển, căn hộ cho thuê. Xem các dự án <a href="/khu-vuc/ngu-hanh-son/">khu Ngũ Hành Sơn</a>, <a href="/khu-vuc/son-tra/">Sơn Trà</a>, <a href="/khu-vuc/hoi-an/">Hội An</a>.</li>
-<li><strong>Điện Bàn:</strong> được định hướng là đô thị loại II, dân số khoảng 605.000 người – quy mô lớn thứ hai sau lõi Đà Nẵng. Khu đất nền Điện Ngọc, Điện Nam – Điện Ngọc nằm trong vùng này; xem ví dụ <a href="/du-an/khu-do-thi-1a-1b-dien-ngoc/">Khu đô thị 1A – 1B Điện Ngọc</a>.</li>
-<li><strong>Liên Chiểu – Hòa Vang:</strong> cảng Liên Chiểu, Khu thương mại tự do, khu công nghệ cao mở rộng và đô thị Hòa Vang, Hòa Tiến mở rộng tạo nhu cầu nhà ở cho người lao động, chuyên gia. Xem <a href="/khu-vuc/lien-chieu/">dự án Liên Chiểu</a> và bài <a href="/cang-lien-chieu-khu-thuong-mai-tu-do-bat-dong-san-lien-chieu/">cảng Liên Chiểu &amp; khu thương mại tự do</a>.</li>
+<li><strong>Điện Bàn:</strong> được quy hoạch chung Đà Nẵng 2050 định hướng là đô thị loại II, dân số khoảng 605.000 người – quy mô lớn thứ hai sau lõi Đà Nẵng. Khu đất nền Điện Ngọc, Điện Nam – Điện Ngọc nằm trong vùng này; xem ví dụ <a href="/du-an/khu-do-thi-1a-1b-dien-ngoc/">Khu đô thị 1A – 1B Điện Ngọc</a>.</li>
+<li><strong>Liên Chiểu – Hòa Vang:</strong> cảng Liên Chiểu, Khu thương mại tự do, khu công nghệ cao mở rộng và đô thị Hòa Vang, Hòa Tiến mở rộng tạo nhu cầu nhà ở cho người lao động, chuyên gia. Xem <a href="/khu-vuc/lien-chieu/">dự án Liên Chiểu</a> và bài <a href="/cang-lien-chieu-khu-thuong-mai-tu-do/">cảng Liên Chiểu &amp; khu thương mại tự do</a>.</li>
 <li><strong>Quanh ga đường sắt đô thị:</strong> quy hoạch nêu rõ mô hình TOD quanh nhà ga – các dự án gần tuyến metro/LRT có lợi thế dài hạn, nhưng tiến độ đường sắt đô thị còn phụ thuộc vốn.</li>
-<li><strong>Sun Saphia Residence:</strong> nằm trên trục biển Võ Nguyên Giáp – Trường Sa thuộc cực phía Bắc, cách nhà ga đường sắt đô thị số 09 khoảng 500 m theo quy hoạch và ngay trước công viên công cộng 2,45 ha – hưởng lợi từ hướng du lịch ven biển và mô hình TOD quanh nhà ga, nhưng đường sắt đô thị còn phụ thuộc tiến độ vốn. Xem <a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a>.</li>
-<li><strong>Khu lấn biển:</strong> 2.050 ha lấn biển mới ở mức <em>nghiên cứu</em>; đây là nguồn cung đất dài hạn, chưa có dự án cụ thể để mua bán. Cần cảnh giác với lời chào bán "đất lấn biển" ở thời điểm này.</li>
+<li><strong>Sun Saphia Residence:</strong> nằm trên trục biển Võ Nguyên Giáp – Trường Sa thuộc cực phía Bắc của quy hoạch chung Đà Nẵng 2050, cách nhà ga đường sắt đô thị số 09 khoảng 500 m theo quy hoạch và ngay trước công viên công cộng 2,45 ha – hưởng lợi từ hướng du lịch ven biển và mô hình TOD quanh nhà ga, nhưng đường sắt đô thị còn phụ thuộc tiến độ vốn. Xem <a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a>.</li>
+<li><strong>Khu lấn biển:</strong> 2.050 ha lấn biển trong quy hoạch chung Đà Nẵng 2050 mới ở mức <em>nghiên cứu</em>; đây là nguồn cung đất dài hạn, chưa có dự án cụ thể để mua bán. Cần cảnh giác với lời chào bán "đất lấn biển" ở thời điểm này.</li>
 </ul>
-<p>Trước khi xuống tiền ở bất kỳ khu nào, anh/chị nên kiểm tra quy hoạch phân khu, quy hoạch chi tiết 1/500 và tình trạng pháp lý của chính dự án (sổ, thế chấp, điều kiện bán nhà ở hình thành trong tương lai), cùng hồ sơ <a href="/chu-dau-tu/">chủ đầu tư</a>. Cần đối chiếu một dự án cụ thể với quy hoạch mới, nhắn Zalo Hoàng Hiệp 0904 567 009.</p>
+<h2>Cách tra cứu khi đọc quy hoạch chung Đà Nẵng 2050</h2>
+<ol>
+<li>Xác định khu đất thuộc cực, vùng nào trong quy hoạch chung Đà Nẵng 2050 (cực phía Bắc, cực phía Nam hay cực liên kết Nam Hội An).</li>
+<li>Hỏi UBND xã, phường hoặc văn phòng đăng ký đất đai về quy hoạch phân khu, quy hoạch chi tiết áp dụng cho thửa đất.</li>
+<li>Đối chiếu kế hoạch sử dụng đất hằng năm để biết thửa đất có nằm trong danh mục thu hồi hay không.</li>
+<li>Với dự án, kiểm tra quyết định chủ trương đầu tư, giấy phép xây dựng và điều kiện bán nhà ở hình thành trong tương lai.</li>
+</ol>
+<p>Trước khi xuống tiền ở bất kỳ khu nào, ngoài quy hoạch chung, anh/chị nên kiểm tra quy hoạch phân khu, quy hoạch chi tiết 1/500 và tình trạng pháp lý của chính dự án (sổ, thế chấp, điều kiện bán nhà ở hình thành trong tương lai), cùng hồ sơ <a href="/chu-dau-tu/">chủ đầu tư</a>. Cần đối chiếu một dự án cụ thể với quy hoạch mới, nhắn Zalo Hoàng Hiệp 0904 567 009.</p>
 <p class="src">Nguồn: Cổng thông tin điện tử TP Đà Nẵng – "Phê duyệt Quy hoạch chung thành phố Đà Nẵng đến năm 2050, tầm nhìn đến năm 2075"; văn bản gốc Quyết định 2016/QĐ-TTg đăng trên Cổng TTĐT Chính phủ.</p>
 HTML,
 		'seo'       => array(
 			'seo_title' => 'Quy hoạch chung Đà Nẵng 2050 – QĐ 2016/QĐ-TTg: điểm chính',
-			'desc'      => 'Quy hoạch chung Đà Nẵng đến 2050, tầm nhìn 2075 (QĐ 2016/QĐ-TTg ngày 21/10/2026): 3 vùng – 3 cực, 30 đô thị, 2.050 ha lấn biển, dân số 6,5 triệu và tác động BĐS.',
+			'desc'      => 'Quy hoạch chung Đà Nẵng 2050 (QĐ 2016/QĐ-TTg, 21/10/2026): 3 vùng – 3 cực, khoảng 30 đô thị, 2.050 ha lấn biển, dân số trên 6,5 triệu và tác động BĐS.',
 			'points'    => array(
-				'Quyết định 2016/QĐ-TTg ký ngày 21/10/2026, phạm vi khoảng 11.870,34 km² gồm đặc khu Hoàng Sa.',
+				'Quy hoạch chung Đà Nẵng 2050 được phê duyệt theo Quyết định 2016/QĐ-TTg ký ngày 21/10/2026, phạm vi khoảng 11.870,34 km² gồm đặc khu Hoàng Sa.',
 				'Dân số toàn thành phố khoảng 5,5 triệu người năm 2040, trên 6,5 triệu người năm 2050.',
 				'Mô hình 3 vùng – 3 cực – 2 trục – 4 hành lang; khoảng 30 đô thị, 4 đô thị loại II: Đà Nẵng, Điện Bàn, Tam Kỳ, Hội An.',
 				'Lõi Đà Nẵng khoảng 67.773 ha, trong đó khoảng 2.050 ha lấn biển (vịnh Đà Nẵng, Liên Chiểu, Nam Sơn Trà – đang nghiên cứu).',
 			),
 			'faq'       => array(
-				array( 'Quy hoạch chung Đà Nẵng đến 2050 được phê duyệt khi nào?', 'Ngày 21/10/2026, theo Quyết định số 2016/QĐ-TTg do Phó Thủ tướng Thường trực Phạm Gia Túc ký.' ),
-				array( 'Đà Nẵng sẽ lấn biển bao nhiêu?', 'Đô thị lõi Đà Nẵng có khoảng 2.050 ha lấn biển; các khu đang nghiên cứu gồm vịnh Đà Nẵng khoảng 1.500 ha, khu cảng Liên Chiểu khoảng 450 ha và phía Nam Sơn Trà khoảng 100 ha.' ),
-				array( 'Điện Bàn trong quy hoạch chung mới thế nào?', 'Điện Bàn là một trong 4 đô thị loại II, diện tích khoảng 21.626 ha, dân số dự báo khoảng 605.000 người, thuộc cực phát triển phía Bắc cùng Đà Nẵng và Hội An.' ),
+				array( 'Quy hoạch chung Đà Nẵng 2050 được phê duyệt khi nào?', 'Ngày 21/10/2026, theo Quyết định số 2016/QĐ-TTg do Phó Thủ tướng Thường trực Phạm Gia Túc ký.' ),
+				array( 'Đà Nẵng sẽ lấn biển bao nhiêu?', 'Theo quy hoạch chung Đà Nẵng 2050, đô thị lõi Đà Nẵng có khoảng 2.050 ha lấn biển; các khu đang nghiên cứu gồm vịnh Đà Nẵng khoảng 1.500 ha, khu cảng Liên Chiểu khoảng 450 ha và phía Nam Sơn Trà khoảng 100 ha.' ),
+				array( 'Điện Bàn trong quy hoạch chung Đà Nẵng 2050 thế nào?', 'Điện Bàn là một trong 4 đô thị loại II, diện tích khoảng 21.626 ha, dân số dự báo khoảng 605.000 người, thuộc cực phát triển phía Bắc cùng Đà Nẵng và Hội An.' ),
+				array( 'Quy hoạch chung Đà Nẵng 2050 khác gì quy hoạch phân khu, quy hoạch chi tiết?', 'Quy hoạch chung Đà Nẵng 2050 là khung định hướng cho toàn thành phố (cấu trúc đô thị, hạ tầng khung, dân số). Quy hoạch phân khu và quy hoạch chi tiết 1/500 mới xác định chức năng từng ô đất, lô đất – căn cứ để cấp phép dự án, xây dựng.' ),
 				array( 'Có nên mua đất "lấn biển" ngay bây giờ?', 'Các khu lấn biển mới ở mức nghiên cứu trong quy hoạch chung, chưa có dự án cụ thể được giao; không nên đặt cọc cho lời chào bán đất lấn biển ở thời điểm này.' ),
 			),
 		),

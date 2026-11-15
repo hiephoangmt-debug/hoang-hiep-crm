@@ -277,7 +277,7 @@ HTML
 			'https://batdongsan.com.vn/du-an-khu-nghi-duong-sinh-thai-ngu-hanh-son-ddn/naman-residences-pj2179',
 			'https://meeyproject.com/project/naman-residences-1688357557583',
 			'https://batdongsan.com.vn/tags/ban/ban-biet-thu-du-an-naman-residences',
-			'https://vn.savills.com.vn/insight-and-opinion/savills-news/138323-0/savills-tr%E1%BB%9F-thanh-%C4%91%E1%BA%A1i-l%C3%BD-phan-ph%E1%BB%91i-%C4%91%E1%BB%99c-quy%E1%BB%81n-naman-residences-t%E1%BA%A1i-%C4%91a-n%E1%BA%B5ng',
+			'https://baodautu.vn/batdongsan/chinh-thuc-dua-khu-nghi-duong-naman-retreat-vao-hoat-dong-d10966.html',
 			'https://thanhcong.vn/tin-tuc/shilla-monogram-quangnam-danang-danh-dau-mot-nam-van-hanh.html',
 			'https://www.ivivu.com/blog/2023/10/shilla-monogram-quang-nam-da-nang-khu-nghi-duong-bien-sang-trong-mang-phong-cach-han-quoc/',
 			'https://haphong.com/portfolio/shilla-monogram-quang-nam/',

@@ -38,7 +38,7 @@ function hh_posts_cum_du_an_11_2026_lo_4( $posts ) {
 <p><strong>Pháp lý The Legend Đà Nẵng:</strong> căn hộ <strong>sở hữu lâu dài</strong> trên lô đất đấu giá A20 Võ Văn Kiệt. Dự án có quyết định công nhận kết quả đấu giá (2017), giấy chứng nhận quyền sử dụng đất (2020), quy hoạch 1/500 (2024), giấy phép xây dựng phần ngầm (2025), văn bản đủ điều kiện huy động vốn (3/2025) và thông báo 800 căn hộ đủ điều kiện bán nhà ở hình thành trong tương lai (khoảng 1/2026). Khối khách sạn, căn hộ dịch vụ thời hạn 50 năm.</p>
 {$sign}
 </div>
-<p>Với căn hộ giá từ khoảng 7,65 tỷ, câu hỏi đầu tiên của khách là pháp lý. Bài này liệt kê các văn bản của {$legend} theo thứ tự thời gian và giải thích ý nghĩa từng văn bản với người mua.</p>
+<p>Với căn hộ giá từ khoảng 7,65 tỷ, câu hỏi đầu tiên của khách là pháp lý. Bài này liệt kê các văn bản của {$legend} theo thứ tự thời gian và giải thích ý nghĩa từng văn bản với người mua khi tìm hiểu pháp lý The Legend Đà Nẵng.</p>
 <!--hh-featured-->
 <h2>Các văn bản pháp lý The Legend Đà Nẵng</h2>
 <table>
@@ -54,27 +54,27 @@ function hh_posts_cum_du_an_11_2026_lo_4( $posts ) {
 </tbody>
 </table>
 <p><small>Theo tài liệu chủ đầu tư và thông tin công bố. Khi ký, anh chị đề nghị xem bản sao các văn bản trên.</small></p>
-<h2>Sở hữu lâu dài và 50 năm trong cùng dự án</h2>
+<h2>Pháp lý The Legend Đà Nẵng: sở hữu lâu dài và 50 năm trong cùng dự án</h2>
 <ul>
 <li><strong>800 căn hộ</strong> trong tháp căn hộ 29 tầng: sở hữu lâu dài.</li>
 <li><strong>Tháp khách sạn 25 tầng</strong> (222 phòng khách sạn, 222 căn hộ dịch vụ): thời hạn 50 năm.</li>
 </ul>
 <p>Khi chọn căn, hỏi rõ căn thuộc tháp nào để biết thời hạn sở hữu.</p>
-<!--hh-img:img/the-legend/the-legend-da-nang-tien-do-6-2025-thi-cong-tang-ham.jpg|Thi công tầng hầm The Legend tháng 6/2025, mặt tiền Võ Văn Kiệt-->
+<!--hh-img:img/the-legend/the-legend-da-nang-tien-do-6-2025-thi-cong-tang-ham.jpg|Pháp lý The Legend Đà Nẵng gắn với tiến độ: thi công tầng hầm tháng 6/2025, mặt tiền Võ Văn Kiệt-->
 <h2>Tiến độ gắn với pháp lý</h2>
 <ul>
 <li>Khởi công 28/2/2025; tháng 10/2025 hoàn thành khoảng 70% dầm, sàn, cột, vách hầm B2, thi công đào hầm B3.</li>
 <li>Cất nóc dự kiến 31/12/2026; bàn giao căn hộ dự kiến 31/3/2028.</li>
 <li>Giấy chứng nhận cấp sau bàn giao; 5% giá trị cuối đóng khi nhận sổ.</li>
 </ul>
-<h2>Câu nên hỏi trước khi ký</h2>
+<h2>Câu về pháp lý The Legend Đà Nẵng nên hỏi trước khi ký</h2>
 <ol>
 <li>Căn thuộc danh sách 800 căn đủ điều kiện bán không?</li>
 <li>Ngân hàng nào bảo lãnh nghĩa vụ bàn giao? Không lấy bảo lãnh được chiết khấu thêm 1% – cân nhắc kỹ.</li>
 <li>Thời hạn cấp giấy chứng nhận dự kiến sau bàn giao.</li>
 </ol>
 <p>Xem thêm: <a href="/gia-the-legend-da-nang-bao-nhieu/">giá The Legend</a>, <a href="/mat-bang-can-ho-the-legend-da-nang/">mặt bằng The Legend</a>.</p>
-<h2>Hiểu đúng từng loại giấy tờ</h2>
+<h2>Hiểu đúng từng loại giấy tờ pháp lý The Legend Đà Nẵng</h2>
 <ul>
 <li><strong>Quyết định công nhận kết quả đấu giá:</strong> xác nhận chủ đầu tư có quyền với khu đất qua đấu giá.</li>
 <li><strong>Giấy chứng nhận quyền sử dụng đất của dự án:</strong> là "sổ đất" của cả khu – người mua căn hộ sẽ được cấp giấy chứng nhận riêng sau khi bàn giao.</li>
@@ -82,13 +82,21 @@ function hh_posts_cum_du_an_11_2026_lo_4( $posts ) {
 <li><strong>Giấy phép xây dựng:</strong> phần ngầm đã cấp năm 2025; phần thân theo giấy phép tiếp theo của dự án.</li>
 <li><strong>Văn bản đủ điều kiện huy động vốn / bán nhà hình thành trong tương lai:</strong> căn cứ để chủ đầu tư được ký hợp đồng và nhận tiền của khách.</li>
 </ul>
-<h2>Lịch sử khu đất cần biết</h2>
+<h2>Lịch sử khu đất trong hồ sơ pháp lý The Legend Đà Nẵng</h2>
 <p>Khu đất A20 có lịch sử pháp lý phức tạp: kết quả đấu giá được phê duyệt năm 2017, sau đó phát sinh tranh chấp giữa doanh nghiệp và chính quyền; theo báo chí, UBND TP Đà Nẵng thua kiện ở cả sơ thẩm và phúc thẩm, dự án sau đó được tháo gỡ. Đã có thời điểm Sở Xây dựng lưu ý dự án chưa đủ điều kiện bán; báo chí sau đó cho biết dự án đã đủ điều kiện mở bán. Vì vậy người mua nên đề nghị xem văn bản xác nhận mới nhất áp dụng cho căn mình chọn.</p>
 <!--hh-img:img/the-legend/the-legend-da-nang-vi-tri-chan-cau-rong-tu-tren-cao.jpg|Vị trí The Legend ngay chân cầu Rồng, nhìn từ trên cao (phối cảnh)-->
 <h2>Vốn và tiến độ đăng ký</h2>
 <p>Theo Tuổi Trẻ (3/2025), vốn xây dựng phần nhà ở là 2.352 tỷ đồng, trong đó chủ đầu tư được phép huy động 1.764 tỷ đồng; tiến độ thực hiện đăng ký kéo dài đến quý 4/2028. Chính sách bán hàng ghi bàn giao căn hộ dự kiến 31/3/2028. Mốc áp dụng cho từng căn là mốc ghi trong hợp đồng mua bán.</p>
 <h2>Thanh toán gắn với pháp lý</h2>
 <p>Lịch thanh toán của chủ đầu tư: giữ chỗ 200 triệu, hợp đồng nguyên tắc 10%, đợt 2 thêm 15%, ký hợp đồng mua bán bổ sung đủ 30%, sau đó mỗi 30 ngày 5% (7 đợt), cất nóc 5%, nhận nhà 25% cộng kinh phí bảo trì, nhận sổ 5%. Khoản 5% cuối chỉ đóng khi nhận giấy chứng nhận – đây là cơ chế bảo vệ người mua.</p>
+<h2>Pháp lý The Legend Đà Nẵng đối chiếu Luật Kinh doanh bất động sản 2023</h2>
+<p><a href="https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx">Luật Kinh doanh bất động sản 2023</a> (tra cứu trên Thư viện Pháp luật) giới hạn số tiền chủ đầu tư được thu với nhà hình thành trong tương lai: lần đầu không quá 30% giá trị hợp đồng (gồm tiền cọc), trước bàn giao không quá 70%, trước khi có giấy chứng nhận không quá 95%. Cộng dồn lịch thanh toán của The Legend (Hoàng Hiệp tự tính):</p>
+<ul>
+<li>Đến khi ký hợp đồng mua bán: 30%.</li>
+<li>Sau 7 đợt 5% và đợt cất nóc: 70% – trước mốc nhận nhà.</li>
+<li>Khi nhận nhà: thêm 25%, tổng 95%; 5% còn lại khi nhận sổ.</li>
+</ul>
+<p>Các mốc này khớp với ngưỡng luật cho phép. Điểm cần cân nhắc là phương án không lấy bảo lãnh ngân hàng để được chiết khấu thêm 1%: khi đó người mua mất lớp bảo vệ nếu bàn giao chậm. Tiến độ thi công dự án được <a href="https://dantri.com.vn/bat-dong-san/tien-do-du-an-the-legend-danang-20251114105051807.htm">Dân trí</a> và <a href="https://baodautu.vn/batdongsan/chu-dau-tu-the-legend-danang-day-nhanh-tien-do-thi-cong-du-an-d433621.html">Báo Đầu tư</a> cập nhật – nên đọc cùng hồ sơ pháp lý The Legend Đà Nẵng để thấy dự án đang ở giai đoạn nào.</p>
 {$cta('The Legend')}
 HTML
 		,
@@ -96,7 +104,7 @@ HTML
 			'seo_title' => 'Pháp lý The Legend Đà Nẵng: sở hữu lâu dài, 800 căn',
 			'desc'      => 'Pháp lý The Legend Đà Nẵng: đất đấu giá 2017, sổ đất 2020, quy hoạch 1/500 năm 2024, đủ điều kiện huy động vốn, 800 căn đủ điều kiện bán.',
 			'points'    => array(
-				'Căn hộ sở hữu lâu dài; khối khách sạn, căn hộ dịch vụ 50 năm',
+				'Pháp lý The Legend Đà Nẵng: căn hộ sở hữu lâu dài; khối khách sạn, căn hộ dịch vụ 50 năm',
 				'Đất đấu giá 2017, sổ đất 2020, quy hoạch 1/500 ngày 24/5/2024',
 				'Đủ điều kiện huy động vốn 3/2025; 800 căn đủ điều kiện bán khoảng 1/2026',
 			),
@@ -104,9 +112,11 @@ HTML
 				array( 'The Legend Đà Nẵng sở hữu bao lâu?', '800 căn hộ trong tháp căn hộ sở hữu lâu dài; tháp khách sạn và căn hộ dịch vụ thời hạn 50 năm.' ),
 				array( 'The Legend đã đủ điều kiện bán chưa?', 'Theo thông tin công bố, Sở Xây dựng Đà Nẵng thông báo 800 căn hộ đủ điều kiện bán nhà ở hình thành trong tương lai khoảng tháng 1/2026; trước đó có Công văn 674/SXD-QLN (19/3/2025) đủ điều kiện huy động vốn.' ),
 				array( 'The Legend có sổ đất chưa?', 'Có. Giấy chứng nhận quyền sử dụng đất do UBND TP Đà Nẵng cấp ngày 25/9/2020.' ),
+				array( 'Pháp lý The Legend Đà Nẵng gồm những văn bản nào?', 'Quyết định công nhận kết quả đấu giá (28/7/2017), giấy chứng nhận quyền sử dụng đất (25/9/2020), quy hoạch 1/500 (24/5/2024), giấy chứng nhận đăng ký đầu tư điều chỉnh (15/7/2024), giấy phép xây dựng phần ngầm (14/02/2025), văn bản đủ điều kiện huy động vốn (19/3/2025) và thông báo 800 căn đủ điều kiện bán (khoảng 1/2026).' ),
+				array( 'Kiểm tra pháp lý The Legend Đà Nẵng thế nào?', 'Đề nghị chủ đầu tư cho xem bản sao các văn bản trên, kiểm tra căn mình chọn có trong danh sách đủ điều kiện bán và hỏi ngân hàng bảo lãnh nghĩa vụ bàn giao.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx', 'https://dantri.com.vn/bat-dong-san/tien-do-du-an-the-legend-danang-20251114105051807.htm', 'https://baodautu.vn/batdongsan/chu-dau-tu-the-legend-danang-day-nhanh-tien-do-thi-cong-du-an-d433621.html' ),
 	);
 
 	/* ---------------- Cora – Mặt bằng ---------------- */
@@ -114,24 +124,24 @@ HTML
 		'slug'     => 'mat-bang-can-ho-cora-tower',
 		'title'    => 'Mặt bằng Cora Tower: 2 tòa A1, A2 hai bên đường 29/3, 28 căn mỗi tầng, layout studio đến 3PN',
 		'excerpt'  => 'Mặt bằng Cora Tower – Sun NeO City: hai tòa A1, A2 hai bên đường 29/3 gần vòng xoay Nguyễn Phước Lan; mỗi tòa 616 căn điển hình, 28 căn/tầng; tầng 1 shophouse, tầng 3 căn sân vườn, tầng 25 penthouse.',
-		'keyword'  => 'mặt bằng Cora Tower',
+		'keyword'  => 'mặt bằng căn hộ Cora Tower',
 		'keywords_extra' => array( 'layout Cora Tower', 'Cora Tower có bao nhiêu căn', 'mặt bằng tầng Cora Tower' ),
 		'project'  => 'cora-tower',
 		'schedule' => '2026-11-20 09:00',
 		'category' => 'Kinh nghiệm',
 		'tags'     => array( 'Cora Tower', 'Sun NeO City', 'Mặt bằng căn hộ' ),
 		'image'    => 'plugin:img/tin-tuc/mat-bang-cora-tower.jpg',
-		'image_alt' => 'Tổng mặt bằng Cora Tower – hai tòa A1, A2 hai bên đường 29/3 (bản vẽ chủ đầu tư, tham khảo)',
+		'image_alt' => 'Tổng mặt bằng căn hộ Cora Tower – hai tòa A1, A2 hai bên đường 29/3 (bản vẽ chủ đầu tư, tham khảo)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Mặt bằng Cora Tower:</strong> 2 tòa A1, A2 nằm hai bên đường 29/3, sát vòng xoay giao Nguyễn Phước Lan (Sun NeO City, Hòa Xuân). Mỗi tòa có <strong>616 căn hộ điển hình, 28 căn/tầng</strong>. Tầng 1 là shophouse khối đế, tầng 3 tòa A2 có căn hộ sân vườn, tầng 25 là penthouse. Loại căn: studio 32,3 m², 1PN+ 53,2 – 54,2 m², 2PN, 3PN.</p>
+<p><strong>Mặt bằng căn hộ Cora Tower:</strong> 2 tòa A1, A2 nằm hai bên đường 29/3, sát vòng xoay giao Nguyễn Phước Lan (Sun NeO City, Hòa Xuân). Mỗi tòa có <strong>616 căn hộ điển hình, 28 căn/tầng</strong>. Tầng 1 là shophouse khối đế, tầng 3 tòa A2 có căn hộ sân vườn, tầng 25 là penthouse. Loại căn: studio 32,3 m², 1PN+ 53,2 – 54,2 m², 2PN, 3PN.</p>
 {$sign}
 </div>
-<p>Bài này giúp anh chị đọc <strong>mặt bằng {$cora}</strong>: vị trí hai tòa, cách bố trí từng tầng và layout các loại căn, để chọn căn trước khi xem giỏ hàng.</p>
+<p>Bài này giúp anh chị đọc <strong>mặt bằng căn hộ Cora Tower</strong>: vị trí hai tòa, cách bố trí từng tầng và layout các loại căn, để chọn căn trước khi xem giỏ hàng. Thông tin chung về dự án xem tại {$cora}.</p>
 <!--hh-featured-->
-<h2>Tổng mặt bằng Cora Tower</h2>
+<h2>Tổng mặt bằng căn hộ Cora Tower</h2>
 <p>Hai tòa đối xứng qua đường 29/3. Mỗi tòa có dạng thân dài cong theo trục đường, hành lang giữa, căn hộ hai bên. Đầu tòa hướng về vòng xoay Nguyễn Phước Lan; xung quanh là nhà phố, biệt thự thấp tầng của Sun NeO City nên tầng trung trở lên khá thoáng.</p>
-<h2>Bố trí theo tầng</h2>
+<h2>Mặt bằng căn hộ Cora Tower bố trí theo tầng</h2>
 <table>
 <thead><tr><th>Tầng</th><th>Công năng</th></tr></thead>
 <tbody>
@@ -143,7 +153,7 @@ HTML
 </tbody>
 </table>
 <!--hh-dimg:1SQWmknWQHDgcDTxY7_qnSrGWoO1hba3K|Mặt bằng tầng 3A – 24 tòa A2 Cora Tower (bản vẽ chủ đầu tư)-->
-<h2>Loại căn và giá</h2>
+<h2>Loại căn trên mặt bằng căn hộ Cora Tower</h2>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá (giỏ hàng 11/2026)</th></tr></thead>
 <tbody>
@@ -162,7 +172,7 @@ HTML
 <p>Căn 2PN có ba mẫu chung và một mẫu riêng tòa A2.</p>
 <!--hh-dimg:12UPCJwFZ3Dql4m0rzc2DydnQizlt0CQz|Layout căn 2PN Cora Tower – mẫu 1 (bản vẽ chủ đầu tư)-->
 <!--hh-dimg:1sjByRXmKwwTqQ07Eog-yykM0BoaM_cZo|Layout căn 3PN Cora Tower (bản vẽ chủ đầu tư)-->
-<h2>Gợi ý chọn căn</h2>
+<h2>Gợi ý chọn căn trên mặt bằng căn hộ Cora Tower</h2>
 <ul>
 <li><strong>Cho thuê:</strong> studio tầng trung – cao, tổng tiền thấp.</li>
 <li><strong>Gia đình trẻ:</strong> 1PN+1 hoặc 2PN.</li>
@@ -171,8 +181,8 @@ HTML
 </ul>
 <p>Bàn giao dự kiến 30/07/2027, hoàn thiện trần, tường, sàn. Xem giá: <a href="/gia-cora-tower-da-nang-bao-nhieu/">giá Cora Tower</a>.</p>
 <h2>Cora Tower trong khu đô thị Sun NeO City</h2>
-<p>Cora Tower là một trong ba tòa căn hộ Sun Group đang bán tại Sun NeO City (Hòa Xuân), cùng <a href="/du-an/spana-tower/">Spana Tower</a> ở chân cầu Hòa Xuân và <a href="/du-an/s-light-tower/">S-Light Tower</a> ở ngã ba sông. Vị trí Cora nằm giữa khu đô thị, sát vòng xoay Nguyễn Phước Lan, nên mặt bằng hai tòa A1, A2 mở ra trục đường 29/3 và khu nhà phố thấp tầng xung quanh.</p>
-<h2>Cách đọc mặt bằng tầng điển hình</h2>
+<p>Cora Tower là một trong ba tòa căn hộ Sun Group đang bán tại Sun NeO City (Hòa Xuân), cùng <a href="/du-an/spana-tower/">Spana Tower</a> ở chân cầu Hòa Xuân và <a href="/du-an/s-light-tower/">S-Light Tower</a> ở ngã ba sông. Vị trí Cora nằm giữa khu đô thị, sát vòng xoay Nguyễn Phước Lan, nên mặt bằng căn hộ Cora Tower ở hai tòa A1, A2 mở ra trục đường 29/3 và khu nhà phố thấp tầng xung quanh.</p>
+<h2>Cách đọc mặt bằng căn hộ Cora Tower tầng điển hình</h2>
 <ol>
 <li><strong>Xác định hướng:</strong> nhìn la bàn trên bản vẽ để biết căn hướng về sông, về vòng xoay hay về khu nhà phố.</li>
 <li><strong>Căn góc và căn giữa:</strong> căn ở hai đầu tòa thường có hai mặt thoáng; căn giữa hành lang có một mặt thoáng, giá thường mềm hơn.</li>
@@ -181,7 +191,7 @@ HTML
 </ol>
 <h2>Shophouse và penthouse</h2>
 <p><strong>Shophouse khối đế:</strong> tại giao lộ Nguyễn Phước Lan – đường 29/3, hợp cà phê, cửa hàng tiện lợi, phòng khám phục vụ cư dân. Giỏ hàng 11/2026 có 5 shop tầng 1 tòa A2, 43,8 – 87,3 m², khoảng 5,17 – 9,12 tỷ (khoảng 98 – 135 triệu/m², gồm VAT và phí bảo trì).</p>
-<p><strong>Penthouse tầng 25:</strong> tầng trên cùng của hai tòa, gồm căn 1PN, 2PN và 2PN+1, tầm nhìn sông – núi – biển. Chủ đầu tư có gợi ý thiết kế duplex làm thêm tầng lửng, với bản vẽ tầng chính và tầng lửng riêng.</p>
+<p><strong>Penthouse tầng 25:</strong> tầng trên cùng của hai tòa, gồm căn 1PN, 2PN và 2PN+1, tầm nhìn sông – núi – biển. Chủ đầu tư có gợi ý thiết kế duplex làm thêm tầng lửng, với bản vẽ tầng chính và tầng lửng riêng. Việc Sun Property ra mắt dòng penthouse và shophouse khối đế phiên bản giới hạn ở khu Nam trung tâm Đà Nẵng từng được <a href="https://dantri.com.vn/bat-dong-san/sun-property-ra-mat-dong-penthouse-shophouse-khoi-de-gioi-han-tai-nam-trung-tam-da-nang-20260811094649419.htm">Dân trí</a> đưa tin; tổng quan dự án có trên <a href="https://cafeland.vn/du-an/sun-cora-tower-du-an-can-ho-tai-da-nang-4728.html">CafeLand</a>.</p>
 <!--hh-dimg:1DeZ_Zj9gp4LwldG-D97NEifbYqsouZJr|Mặt bằng tầng 25 penthouse tòa A1 Cora Tower (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Bàn giao và nhận nhà</h2>
 <ul>
@@ -193,7 +203,7 @@ HTML
 <p>Xem mốc bàn giao và tiến độ ba tòa: <a href="/cora-tower-spana-tower-khi-nao-ban-giao/">Cora Tower khi nào bàn giao</a>.</p>
 <h2>Tiện ích trong khu đô thị</h2>
 <p>Cư dân Cora Tower dùng chung hạ tầng của khu đô thị Sun NeO City: hệ thống đường nội khu, nhà phố thương mại thấp tầng xung quanh và kết nối nhanh về cầu Hòa Xuân. Từ trục Nguyễn Phước Lan có thể đi về Ngũ Hành Sơn, biển và trung tâm thành phố.</p>
-<h2>Câu hỏi nên đặt khi xem mặt bằng</h2>
+<h2>Câu hỏi nên đặt khi xem mặt bằng căn hộ Cora Tower</h2>
 <ol>
 <li>Căn mình chọn nằm ở tòa A1 hay A2, tầng nào, hướng nào?</li>
 <li>Căn có phải căn góc hai mặt thoáng không?</li>
@@ -204,10 +214,10 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Mặt bằng Cora Tower: 2 tòa A1, A2, 28 căn/tầng',
-			'desc'      => 'Mặt bằng Cora Tower – Sun NeO City: 2 tòa A1, A2 hai bên đường 29/3, 616 căn điển hình mỗi tòa, 28 căn/tầng; shophouse, sân vườn, penthouse.',
+			'seo_title' => 'Mặt bằng căn hộ Cora Tower: 2 tòa, 28 căn/tầng',
+			'desc'      => 'Mặt bằng căn hộ Cora Tower – Sun NeO City: 2 tòa A1, A2 hai bên đường 29/3, 616 căn điển hình mỗi tòa, 28 căn/tầng; shophouse, penthouse.',
 			'points'    => array(
-				'2 tòa A1, A2 hai bên đường 29/3, gần vòng xoay Nguyễn Phước Lan',
+				'Mặt bằng căn hộ Cora Tower: 2 tòa A1, A2 hai bên đường 29/3, gần vòng xoay Nguyễn Phước Lan',
 				'Mỗi tòa 616 căn điển hình, 28 căn/tầng',
 				'Studio 32,3 m², 1PN+ 53,2 – 54,2 m²; penthouse tầng 25',
 			),
@@ -215,9 +225,11 @@ HTML
 				array( 'Cora Tower có bao nhiêu căn?', 'Mỗi tòa A1, A2 có 616 căn hộ điển hình, 28 căn/tầng, chưa kể shophouse và penthouse.' ),
 				array( 'Căn studio Cora Tower rộng bao nhiêu?', '32,3 m²; căn 1PN+ 53,2 – 54,2 m².' ),
 				array( 'Cora Tower có penthouse không?', 'Có, ở tầng 25 mỗi tòa, chủ đầu tư có gợi ý thiết kế duplex.' ),
+				array( 'Mặt bằng căn hộ Cora Tower có bao nhiêu căn mỗi tầng?', 'Tầng điển hình 3A – 24 có 28 căn mỗi tầng; tầng 1 là shophouse, tầng 3 tòa A2 có căn sân vườn, tầng 25 là penthouse.' ),
+				array( 'Xin mặt bằng căn hộ Cora Tower từng tầng ở đâu?', 'Anh chị nhắn Hoàng Hiệp (0904 567 009) để nhận bản vẽ từng tầng của tòa A1, A2 kèm danh sách căn còn trong giỏ hàng.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://cafeland.vn/du-an/sun-cora-tower-du-an-can-ho-tai-da-nang-4728.html', 'https://dantri.com.vn/bat-dong-san/sun-property-ra-mat-dong-penthouse-shophouse-khoi-de-gioi-han-tai-nam-trung-tam-da-nang-20260811094649419.htm' ),
 	);
 
 	/* ---------------- Căn hộ hàng hiệu – Nobu ---------------- */
@@ -258,7 +270,7 @@ HTML
 <tr><th>Điểm nhấn</th><td>Dự án Nobu Residences đầu tiên tại Đông Nam Á</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/nobu-da-nang/nobu-da-nang-nha-hang-nobu.jpg|Nhà hàng Nobu (phối cảnh)-->
+<!--hh-img:img/nobu-da-nang/nobu-da-nang-nha-hang-nobu.jpg|Nhà hàng Nobu – dịch vụ đặc trưng của căn hộ hàng hiệu (phối cảnh)-->
 <h2>Khác căn hộ cao cấp thường ở đâu</h2>
 <table>
 <thead><tr><th>Tiêu chí</th><th>Căn hộ hàng hiệu</th><th>Căn hộ cao cấp thường</th></tr></thead>
@@ -279,6 +291,7 @@ HTML
 </ol>
 <!--hh-img:img/nobu-da-nang/nobu-da-nang-can-dual-key.jpg|Không gian căn hộ Dual-Key Nobu Đà Nẵng (phối cảnh nội thất)-->
 <p>Xem thêm: <a href="/gia-nobu-residences-da-nang-bao-nhieu/">giá Nobu Residences</a>, <a href="/nobu-residences-hay-the-legend-can-ho-cao-cap-da-nang/">Nobu hay The Legend</a>.</p>
+<p>Việc thương hiệu Nobu đến Đà Nẵng từng được <a href="https://vnexpress.net/huyen-thoai-hollywood-dua-thuong-hieu-nobu-den-da-nang-4761311.html">VnExpress</a> đưa tin; thông tin về giai đoạn chuẩn bị đón cư dân có trên <a href="https://vneconomy.vn/nobu-danang-san-sang-chao-don-nhung-chu-nhan-tinh-hoa-moi.htm">VnEconomy</a>. Đây là các nguồn nên đọc thêm để hiểu cách một căn hộ hàng hiệu được giới thiệu và vận hành.</p>
 <h2>Ưu và nhược điểm khi mua căn hộ hàng hiệu</h2>
 <table>
 <thead><tr><th>Ưu điểm</th><th>Nhược điểm</th></tr></thead>
@@ -308,7 +321,7 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Căn hộ hàng hiệu là gì? Ví dụ Nobu Đà Nẵng',
+			'seo_title' => 'Căn hộ hàng hiệu là gì? Ví dụ Nobu Đà Nẵng 264 căn',
 			'desc'      => 'Căn hộ hàng hiệu là căn hộ gắn thương hiệu khách sạn, vận hành theo chuẩn thương hiệu. Ví dụ Nobu Residences Đà Nẵng: 264 căn, Nobu vận hành.',
 			'points'    => array(
 				'Căn hộ hàng hiệu: thương hiệu khách sạn tham gia thiết kế và vận hành',
@@ -319,9 +332,10 @@ HTML
 				array( 'Căn hộ hàng hiệu là gì?', 'Là căn hộ gắn thương hiệu một tập đoàn khách sạn (hoặc thương hiệu khác), được thiết kế, hoàn thiện và vận hành theo tiêu chuẩn của thương hiệu đó, thường có dịch vụ như khách sạn.' ),
 				array( 'Đà Nẵng có căn hộ hàng hiệu nào?', 'Ví dụ tiêu biểu là Nobu Residences Đà Nẵng – 264 căn hộ do Nobu Hospitality vận hành, dự án Nobu Residences đầu tiên tại Đông Nam Á.' ),
 				array( 'Mua căn hộ hàng hiệu cần lưu ý gì?', 'Hỏi rõ thời hạn sở hữu, phí dịch vụ và phí thương hiệu hằng tháng, điều kiện chương trình cho thuê và thời hạn hợp đồng thương hiệu.' ),
+				array( 'Căn hộ hàng hiệu khác condotel thế nào?', 'Condotel là căn hộ du lịch trong khối khách sạn, thường giao đơn vị vận hành khai thác. Căn hộ hàng hiệu nhấn vào việc một thương hiệu tham gia thiết kế, vận hành và cung cấp dịch vụ cư dân. Một dự án có thể vừa là căn hộ hàng hiệu vừa là căn hộ du lịch, nên cần xem loại đất và thời hạn sở hữu trong hợp đồng.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://vnexpress.net/huyen-thoai-hollywood-dua-thuong-hieu-nobu-den-da-nang-4761311.html', 'https://vneconomy.vn/nobu-danang-san-sang-chao-don-nhung-chu-nhan-tinh-hoa-moi.htm' ),
 	);
 
 	/* ---------------- FourS – Mặt bằng ---------------- */
@@ -329,7 +343,7 @@ HTML
 		'slug'     => 'mat-bang-can-ho-fours-tower',
 		'title'    => 'Mặt bằng FourS Tower: 4 tháp 20 tầng, 2.394 căn – mặt bằng tầng và layout tòa F2',
 		'excerpt'  => 'Mặt bằng FourS Tower (Sun Riverpolis, Ngũ Hành Sơn): 4 tháp Mai – Trúc – Cúc – Tùng cao 20 tầng, 2.394 căn studio đến 3PN; tầng 1 thương mại, tầng 2 tiện ích; mặt bằng tầng và layout tòa F2, diện tích từng loại căn.',
-		'keyword'  => 'mặt bằng FourS Tower',
+		'keyword'  => 'mặt bằng căn hộ FourS Tower',
 		'keywords_extra' => array( 'layout FourS Tower', 'mặt bằng tòa F2 FourS', 'FourS Tower có bao nhiêu căn' ),
 		'project'  => 'fours-tower',
 		'schedule' => '2026-11-21 09:00',
@@ -339,12 +353,12 @@ HTML
 		'image_alt' => 'Tổng mặt bằng FourS Tower ở ngã tư Nguyễn Phước Lan – Minh Mạng (tài liệu chủ đầu tư)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Mặt bằng FourS Tower:</strong> 4 tháp Mai (F2), Trúc (F3), Cúc (F5), Tùng (F1) cao 20 tầng, 2 tầng hầm, tổng khoảng <strong>2.394 căn</strong> từ studio đến 3PN, tại ngã tư Nguyễn Phước Lan – Minh Mạng (Sun Riverpolis). Tầng 1 thương mại, tầng 2 tiện ích (hồ bơi bốn mùa, gym, spa, khu trẻ em). Diện tích tham khảo: studio 30,5 – 34,9 m², 1PN 46,7 m², 1PN+ 45,2 – 53,8 m², 2PN 63,8 – 73,1 m², 3PN 92,8 – 93,2 m².</p>
+<p><strong>Mặt bằng căn hộ FourS Tower:</strong> 4 tháp Mai (F2), Trúc (F3), Cúc (F5), Tùng (F1) cao 20 tầng, 2 tầng hầm, tổng khoảng <strong>2.394 căn</strong> từ studio đến 3PN, tại ngã tư Nguyễn Phước Lan – Minh Mạng (Sun Riverpolis). Tầng 1 thương mại, tầng 2 tiện ích (hồ bơi bốn mùa, gym, spa, khu trẻ em). Diện tích tham khảo: studio 30,5 – 34,9 m², 1PN 46,7 m², 1PN+ 45,2 – 53,8 m², 2PN 63,8 – 73,1 m², 3PN 92,8 – 93,2 m².</p>
 {$sign}
 </div>
-<p>Bài này tổng hợp <strong>mặt bằng {$fours}</strong>: vị trí 4 tháp, bố trí theo tầng (lấy tòa F2 – Tháp Mai làm ví dụ vì có bộ mặt bằng đầy đủ nhất) và layout từng loại căn.</p>
+<p>Bài này tổng hợp <strong>mặt bằng căn hộ FourS Tower</strong> ({$fours}): vị trí 4 tháp, bố trí theo tầng (lấy tòa F2 – Tháp Mai làm ví dụ vì có bộ mặt bằng đầy đủ nhất) và layout từng loại căn.</p>
 <!--hh-featured-->
-<h2>Mặt bằng FourS Tower: 4 tháp và tình trạng bán</h2>
+<h2>Mặt bằng căn hộ FourS Tower: 4 tháp và tình trạng bán</h2>
 <table>
 <thead><tr><th>Tháp</th><th>Tên</th><th>Tình trạng</th></tr></thead>
 <tbody>
@@ -354,14 +368,14 @@ HTML
 <tr><td>F5</td><td>Tháp Cúc (Mùa Thu)</td><td>Đang bán (từ 3/2026)</td></tr>
 </tbody>
 </table>
-<h2>Bố trí theo tầng (tòa F2)</h2>
+<h2>Mặt bằng căn hộ FourS Tower theo tầng (tòa F2)</h2>
 <ul>
 <li><strong>Tầng 1:</strong> thương mại, sảnh.</li>
 <li><strong>Tầng 2:</strong> tiện ích trọn tầng.</li>
 <li><strong>Tầng 3, 3A, 5, 6, 7:</strong> mỗi tầng một mặt bằng riêng.</li>
 <li><strong>Tầng 8 – 19:</strong> tầng điển hình dùng chung một mặt bằng.</li>
 </ul>
-<!--hh-img:img/fours-tower/fours-tower-f2-mat-bang-tang-8-19.jpg|Mặt bằng tầng 8 – 19 tòa F2 FourS Tower (tài liệu chủ đầu tư)-->
+<!--hh-img:img/fours-tower/fours-tower-f2-mat-bang-tang-8-19.jpg|Mặt bằng căn hộ FourS Tower tòa F2, tầng 8 – 19 (tài liệu chủ đầu tư)-->
 <h2>Diện tích từng loại căn</h2>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích (tham khảo F1, F5)</th></tr></thead>
@@ -386,7 +400,7 @@ HTML
 <h2>Bàn giao</h2>
 <p>Hoàn thiện cơ bản: trần thạch cao, sàn gạch hoặc gỗ công nghiệp phòng ngủ, cửa chính gỗ chống cháy, cửa nhôm Xingfa kính dán an toàn. Khách tự trang bị tủ bếp, thiết bị bếp, thiết bị vệ sinh, bình nóng lạnh. Nhận nhà dự kiến: F1, F5 ngày 31/3/2028; F2 ngày 31/5/2028 (khi đã thanh toán 70%).</p>
 <p>Xem giá và chính sách tại trang {$fours}.</p>
-<h2>Thông tin pháp lý gắn với mặt bằng</h2>
+<h2>Thông tin pháp lý gắn với mặt bằng căn hộ FourS Tower</h2>
 <p>Theo Văn bản 17239/SXD-QLN ngày 19/09/2026 của Sở Xây dựng Đà Nẵng, 2.394 căn hộ hình thành trong tương lai thuộc 4 lô A3-3, A3-4, A3-5, A3-10 đủ điều kiện mở bán. Pháp nhân chủ đầu tư là Công ty CP Địa Cầu, đơn vị phát triển là Sun Property (Sun Group). Mỗi lô có giấy chứng nhận quyền sử dụng đất; Techcombank cam kết phát hành thư bảo lãnh cho người mua. Tổng diện tích dự án khoảng 15.406 m², mật độ xây dựng 15,8%; dự án động thổ 21/07/2026.</p>
 <h2>Vì sao FourS có nhiều mặt bằng tầng</h2>
 <p>Các tầng thấp (3, 3A, 5, 6, 7) có mặt bằng riêng vì gắn với sân vườn, khối đế và tiện ích tầng 2; từ tầng 8 đến 19 dùng chung một mặt bằng điển hình. Ngoài căn hộ thường, dự án có căn sân vườn FourS Jardin và penthouse tầng cao. Với người mua, mặt bằng tầng điển hình là nơi có nhiều căn nhất để chọn hướng, chọn tầng.</p>
@@ -409,24 +423,25 @@ HTML
 <li>Ký hợp đồng mua bán khoảng 3 tuần sau đặt cọc; đợt 3 – 7 mỗi 3 tháng 10% (từ quý 1/2027).</li>
 <li>Nhận bàn giao sử dụng khi đã thanh toán 70% (dự kiến 31/5/2028); sau đó mỗi 4 tháng 5%, đợt cuối 5% khi nhận giấy chứng nhận.</li>
 </ul>
-<!--hh-img:img/fours-tower/fours-tower-f2-mat-bang-tang-3.jpg|Mặt bằng tầng 3 tòa F2 FourS Tower (tài liệu chủ đầu tư)-->
-<h2>Mẹo chọn căn trên mặt bằng FourS</h2>
+<!--hh-img:img/fours-tower/fours-tower-f2-mat-bang-tang-3.jpg|Mặt bằng căn hộ FourS Tower tòa F2, tầng 3 (tài liệu chủ đầu tư)-->
+<h2>Mẹo chọn căn trên mặt bằng căn hộ FourS Tower</h2>
 <ol>
 <li>Xác định tòa nào hướng về sông Cổ Cò, về Ngũ Hành Sơn hay về trung tâm trước khi chọn căn.</li>
 <li>Muốn cho thuê: studio, 1PN+ tầng trung – cao; muốn ở: 2PN, 3PN hai mặt thoáng.</li>
 <li>Căn tầng thấp gần sân vườn, tiện ích tầng 2 hợp gia đình có trẻ nhỏ.</li>
 </ol>
-<h2>Tiện ích tầng 2</h2>
+<h2>Tiện ích tầng 2 trên mặt bằng căn hộ FourS Tower</h2>
 <p>Trọn tầng 2 là tiện ích kiểu resort: hồ bơi bốn mùa, gym, spa, khu trẻ em; tầng 1 là thương mại. Cư dân các tầng dùng chung khu tiện ích này.</p>
+<p>Việc Sun Group ra mắt khu căn hộ FourS Tower tại Nam Đà Nẵng từng được <a href="https://vnexpress.net/sun-group-ra-mat-khu-can-ho-fours-tower-tai-nam-da-nang-5052323.html">VnExpress</a> và <a href="https://tuoitre.vn/fours-tower-an-cu-dau-tu-tai-trung-tam-nam-da-nang-20260410181212744.htm">Tuổi Trẻ</a> đưa tin – có thể đọc thêm để đối chiếu với mặt bằng căn hộ FourS Tower trong bài.</p>
 <p>Xem thêm căn hộ giá dưới 3 tỷ ở FourS và các dự án khác: <a href="/can-ho-duoi-3-ty-da-nang-du-an-dang-ban/">căn hộ dưới 3 tỷ Đà Nẵng</a>.</p>
 {$cta('FourS Tower')}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Mặt bằng FourS Tower: 4 tháp, 2.394 căn',
-			'desc'      => 'Mặt bằng FourS Tower: 4 tháp Mai – Trúc – Cúc – Tùng 20 tầng, 2.394 căn studio đến 3PN; tầng 1 thương mại, tầng 2 tiện ích; mặt bằng tầng, layout tòa F2.',
+			'seo_title' => 'Mặt bằng căn hộ FourS Tower: 4 tháp, 2.394 căn',
+			'desc'      => 'Mặt bằng căn hộ FourS Tower: 4 tháp Mai – Trúc – Cúc – Tùng 20 tầng, 2.394 căn studio đến 3PN; tầng 1 thương mại, tầng 2 tiện ích; layout tòa F2.',
 			'points'    => array(
-				'4 tháp 20 tầng, 2 tầng hầm, 2.394 căn',
+				'Mặt bằng căn hộ FourS Tower: 4 tháp 20 tầng, 2 tầng hầm, 2.394 căn',
 				'Studio 30,5 – 34,9 m² đến 3PN 92,8 – 93,2 m²',
 				'Tòa F2: tầng 8 – 19 dùng chung mặt bằng điển hình',
 			),
@@ -434,9 +449,11 @@ HTML
 				array( 'FourS Tower có bao nhiêu căn?', '2.394 căn trong 4 tháp Mai (F2), Trúc (F3), Cúc (F5), Tùng (F1), mỗi tháp 20 tầng.' ),
 				array( 'Diện tích căn hộ FourS Tower bao nhiêu?', 'Tham khảo tòa F1, F5: studio 30,5 – 34,9 m², 1PN 46,7 m², 1PN+ 45,2 – 53,8 m², 2PN 63,8 – 73,1 m², 3PN 92,8 – 93,2 m².' ),
 				array( 'FourS Tower bàn giao thế nào?', 'Hoàn thiện cơ bản; khách tự trang bị bếp, thiết bị vệ sinh, nội thất rời. Nhận nhà khi đã thanh toán 70%.' ),
+				array( 'Mặt bằng căn hộ FourS Tower tòa F2 có mấy mẫu tầng?', 'Tầng 1 thương mại, tầng 2 tiện ích; tầng 3, 3A, 5, 6, 7 mỗi tầng một mặt bằng riêng; tầng 8 – 19 dùng chung một mặt bằng điển hình.' ),
+				array( 'Xin mặt bằng căn hộ FourS Tower ở đâu?', 'Anh chị nhắn Hoàng Hiệp (0904 567 009) để nhận bản vẽ từng tầng, layout căn và danh sách căn còn trống của tòa đang bán.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://vnexpress.net/sun-group-ra-mat-khu-can-ho-fours-tower-tai-nam-da-nang-5052323.html', 'https://tuoitre.vn/fours-tower-an-cu-dau-tu-tai-trung-tam-nam-da-nang-20260410181212744.htm' ),
 	);
 
 	/* ---------------- Sun Saphia – 1PN+ ---------------- */
