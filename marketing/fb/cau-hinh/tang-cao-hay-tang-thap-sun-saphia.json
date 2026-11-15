@@ -41,5 +41,22 @@
   ]
  ],
  "box": "Hỏi rõ cao độ sàn: tầng ghi 3A – 28 có thể khác tầng đếm thực tế",
- "note": "Theo chủ đầu tư, cập nhật 11/2026; view là nhận định, không phải cam kết · Ảnh: phối cảnh dự án"
+ "note": "Theo chủ đầu tư, cập nhật 11/2026; view là nhận định, không phải cam kết · Ảnh: phối cảnh dự án",
+ "headline": [
+  [
+   "Tầng cao",
+   "big",
+   0
+  ],
+  [
+   "hay tầng thấp",
+   "script",
+   300
+  ],
+  [
+   "Sun Saphia Residence",
+   "cap",
+   120
+  ]
+ ]
 }

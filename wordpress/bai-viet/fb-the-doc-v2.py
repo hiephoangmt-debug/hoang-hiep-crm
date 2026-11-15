@@ -72,19 +72,64 @@ if STYLE == 'tap-chi':
 .mag .box{flex:1;font:500 22px/1.4 BVP;color:#f3d9a4;text-align:right}
 .mag .foot b{color:#fff}.mag .foot span{color:#e8c88c}
 .mag .note{font:400 17px BVP;color:#8f99ad;margin:18px 0 0;text-align:right}'''
+elif STYLE == 'poster':
+    # Kiểu poster (theo mẫu anh Hiệp gửi 15/11/2026): nền ngà có vệt sáng, tiêu đề so le căn giữa
+    # (chữ nghiêng Great Vibes + chữ in Cormorant SC màu đồng, chữ nhấn to đậm), 3 con số, ảnh tràn nửa dưới mờ dần lên.
+    hl = c.get('headline') or [[c['title'], 'cap', 0]]
+    head = ''.join('<span class="l %s" style="transform:translateX(%dpx)">%s</span>' % (k, int(dx), e(t)) for t, k, dx in hl)
+    st = ''.join('<div class="st"><b>%s</b><span>%s</span></div>' % (e(a), e(b)) for a, b in stats[:3])
+    body = """<div class="card pos">
+<div class="beam"></div>
+<div class="ph" style="background-image:url(%s);background-position:%s"></div>
+<div class="top"><div class="brand">HOÀNG HIỆP · BẤT ĐỘNG SẢN ĐÀ NẴNG</div><div class="tag">%s</div>
+<h1 aria-label="%s">%s</h1><p class="sub">%s</p><div class="stats">%s</div></div>
+<div class="bar">%s<div class="note">%s</div></div></div>""" % (bg, pos, e(c['tag']), e(c['title']), head, e(c['sub']), st, foot, e(c.get('note', '')))
+    css = """
+.pos{background:radial-gradient(120% 70% at 50% 0%,#fbf4e8 0%,#f3e5cd 55%,#e9d3b2 100%);color:#3a2412}
+.pos .beam{position:absolute;inset:0;background:linear-gradient(115deg,transparent 52%,rgba(255,255,255,.55) 62%,transparent 72%);pointer-events:none}
+.pos .ph{position:absolute;left:0;right:0;bottom:0;height:660px;background-size:cover;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 30%);mask-image:linear-gradient(180deg,transparent 0%,#000 30%)}
+.pos .top{position:absolute;left:60px;right:60px;top:54px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.pos .brand{font:600 19px BVP;letter-spacing:.32em;color:#9a6a3a}
+.pos .tag{margin-top:14px;font:600 24px CSC;letter-spacing:.12em;color:#5a3a1e}
+.pos h1{margin:18px 0 6px;display:flex;flex-direction:column;align-items:center}
+.pos .l{display:block;white-space:nowrap;-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(180deg,#d39a5c 0%,#8a4a1c 55%,#b8783f 100%);font-variant-numeric:lining-nums}
+.pos .script{font:400 92px/1 GV;padding:6px 16px 14px;margin:0 0 -22px}
+.pos .cap{font:600 56px/1.05 CSC;letter-spacing:.04em}
+.pos .big{font:700 112px/.95 CSC;letter-spacing:.01em}
+.pos .sub{margin:16px 0 0;font:500 26px/1.35 BVP;color:#6b4a2a}
+.pos .stats{margin-top:26px;display:flex;justify-content:center}
+.pos .st{padding:0 30px;text-align:center}.pos .st+.st{border-left:1.5px solid rgba(138,74,28,.35)}
+.pos .st b{display:block;font:700 44px/1.05 CG;color:#8a4a1c;white-space:nowrap;font-variant-numeric:lining-nums}
+.pos .st span{display:block;font:500 18px/1.3 BVP;color:#6b4a2a;margin-top:4px}
+.pos .bar{position:absolute;left:36px;right:36px;bottom:32px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 22px;border-radius:22px;background:rgba(20,30,52,.72);backdrop-filter:blur(8px)}
+.pos .foot b{color:#fff}.pos .foot span{color:#f0cf9a}
+.pos .note{font:400 15px/1.35 BVP;color:#c9cfdb;text-align:right;max-width:420px}"""
 else:
+    if c.get('headline'):
+        # Tiêu đề so le kiểu poster: mỗi dòng [chữ, kiểu script|cap|big, lệch ngang px]; ghép lại đọc thành từ khoá chính.
+        head = '<h1 class="hl" aria-label="%s">%s</h1>' % (e(c['title']), ''.join(
+            '<span class="l %s" style="margin-left:%dpx">%s</span>' % (k, int(dx), e(t)) for t, k, dx in c['headline']))
+    else:
+        head = (('<div class="scr">%s</div>' % e(c['script'])) if c.get('script') else '') + '<h1>%s</h1>' % e(c['title'])
     st = ''.join('<div class="st"><b>%s</b><span>%s</span></div>' % (e(a), e(b)) for a, b in stats[:4])
     it = ''.join('<li><i>%d</i><div><b>%s</b><span>%s</span></div></li>' % (k + 1, e(a), e(b)) for k, (a, b) in enumerate(items[:4]))
-    body = '''<div class="card lux">
+    body = '''<div class="card lux%s">
 <div class="ph" style="background-image:url(%s);background-position:%s"><div class="tag">%s</div></div>
 <div class="in">
- %s<h1>%s</h1><p class="sub">%s</p>
+ %s<p class="sub">%s</p>
  <div class="stats">%s</div>
  <ul>%s</ul>
  <div class="box">%s</div>
  <div class="bt">%s<p class="note">%s</p></div>
-</div></div>''' % (bg, pos, e(c['tag']), ('<div class="scr">%s</div>' % e(c['script'])) if c.get('script') else '', e(c['title']), e(c['sub']), st, it, e(c.get('box', '')), foot, e(c.get('note', '')))
+</div></div>''' % (' has-hl' if c.get('headline') else '', bg, pos, e(c['tag']), head, e(c['sub']), st, it, e(c.get('box', '')), foot, e(c.get('note', '')))
     css = '''
+.lux.has-hl .ph{height:470px}
+.lux.has-hl .in{top:532px}
+.lux h1.hl{display:flex;flex-direction:column;align-items:flex-start;background:none;-webkit-background-clip:initial;color:inherit;margin:-6px 0 10px;padding:0}
+.lux .hl .l{display:block;white-space:nowrap;-webkit-background-clip:text;color:transparent;background-image:linear-gradient(180deg,#c98d4e 0%,#7a3f18 60%,#a8693a 100%)}
+.lux .hl .script{font:400 74px/1 GV;padding:4px 12px 8px 4px;margin-bottom:-14px;background-image:linear-gradient(180deg,#d6a066,#8e5222)}
+.lux .hl .cap{font:600 50px/1.05 CSC;letter-spacing:.02em}
+.lux .hl .big{font:700 92px/.98 CSC;letter-spacing:.01em}
 .lux .scr{font:400 66px/1 GV;margin:0 0 -8px -4px;background:linear-gradient(180deg,#d29a5f,#8e5222);-webkit-background-clip:text;color:transparent;padding:6px 10px 10px 4px}
 .lux{background:#f7f2e8;color:#14233f}
 .lux .ph{position:absolute;left:36px;right:36px;top:36px;height:560px;border-radius:28px;background-size:cover;box-shadow:0 18px 40px rgba(20,35,63,.18)}
@@ -120,7 +165,7 @@ tmp.write(page)
 tmp.close()
 js = '''const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1080,height:1350},deviceScaleFactor:2});
 await p.goto('file://'+process.argv[2]);await p.evaluate(()=>document.fonts.ready);await p.waitForTimeout(300);
-const o=await p.evaluate(()=>[...document.querySelectorAll('h1,.sub,.st b,li b,li span,.box')].filter(e=>e.scrollWidth>e.clientWidth+1||e.getBoundingClientRect().right>1080).map(e=>e.textContent));
+const o=await p.evaluate(()=>[...document.querySelectorAll('.lux h1:not(.hl),.sub,.st b,li b,li span,.box')].filter(e=>e.scrollWidth>e.clientWidth+1||e.getBoundingClientRect().right>1080).map(e=>e.textContent));
 if(o.length)console.error('TRAN CHU:',JSON.stringify(o));
 await p.screenshot({path:process.argv[3],type:'jpeg',quality:92});await b.close();})();'''
 jsf = tmp.name + '.js'
