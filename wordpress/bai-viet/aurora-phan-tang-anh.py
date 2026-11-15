@@ -56,67 +56,100 @@ for y in range(H * S):
 mt = [(0, 900)] + [(x, 900 - 70 * math.sin(x / 210) ** 2 - 30 * math.sin(x / 57 + 1) ** 2) for x in range(0, 760, 8)] + [(760, 1040), (0, 1040)]
 d.polygon([P(x, y) for x, y in mt], fill=(176, 186, 204))
 
-# ---- tháp
-CX, BASE, TOPF = 300, 1010, 140          # tâm tháp, chân tháp, mép trên tầng 70
+# ---- tháp (dáng theo phối cảnh: thân mảnh thon dần, khung đỉnh có vòm sáng, vạt cong trắng ở chân, khối đế kính ven sông)
+def bez(p0, p1, p2, p3, n=80):
+    return [tuple((1 - t) ** 3 * p0[i] + 3 * (1 - t) ** 2 * t * p1[i] + 3 * (1 - t) * t ** 2 * p2[i] + t ** 3 * p3[i] for i in range(2)) for t in (j / n for j in range(n + 1))]
+CX, BASE, TOPF = 300, 1010, 128          # tâm tháp, chân tháp, mép trên tầng 70
 NF = 70
 fh = (BASE - TOPF) / NF
 yof = lambda fl: BASE - fl * fh          # mép trên tầng fl
-wid = lambda y: 205 - 50 * ((BASE - y) / (BASE - TOPF)) ** 1.1   # thân thon dần
-tower = Image.new('RGBA', im.size, (0, 0, 0, 0)); g = ImageDraw.Draw(tower)
+hw = lambda y: 90 - 18 * ((BASE - y) / (BASE - TOPF))   # nửa bề rộng thân: 90 ở chân, 72 ở đỉnh
+wid = lambda y: 2 * hw(y)
+# cao ốc nền bên phải (sau khối đế)
+bg = Image.new('RGBA', im.size, (0, 0, 0, 0)); gb = ImageDraw.Draw(bg)
+for x0, x1, top in ((470, 540, 800), (548, 612, 840), (420, 462, 880)):
+    gb.rectangle(P(x0, top, x1, BASE), fill=(150, 112, 92, 255))
+    for yy in range(top + 10, BASE - 6, 14):
+        for xx in range(x0 + 6, x1 - 6, 12):
+            if (xx * 7 + yy * 3) % 5:
+                gb.rectangle(P(xx, yy, xx + 6, yy + 6), fill=(255, 214, 150, 200))
+    gb.rectangle(P(x0, top - 8, x1, top), fill=(96, 120, 80, 255))
+im.paste(bg, (0, 0), bg)
+# màu theo tầng
+colmap = {}
 for lo, hi, _, _, _, col in G:
-    y0, y1 = yof(hi), yof(lo - 1)
-    for yy in range(int(y0 * S), int(y1 * S)):
-        y = yy / S; w = wid(y)
-        # dải màu, sáng ở giữa (kính phản chiếu)
-        L, R = (CX - w / 2) * S, (CX + w / 2) * S
-        steps = 24
-        for k in range(steps):
-            u = (k + 0.5) / steps; sh = 1 - 0.35 * abs(u - 0.42) * 2
-            cc = tuple(min(255, int(col[i] * (0.72 + 0.4 * sh) + 30 * sh)) for i in range(3))
-            g.line([(L + (R - L) * k / steps, yy), (L + (R - L) * (k + 1) / steps, yy)], fill=cc + (255,))
-    # vạch sàn
-    for fl in range(lo - 1, hi):
-        y = yof(fl); w = wid(y)
-        g.line([P(CX - w / 2, y), P(CX + w / 2, y)], fill=(255, 255, 255, 70), width=S)
-    # mép khối
-    y = yof(hi); w = wid(y)
-    g.line([P(CX - w / 2, y), P(CX + w / 2, y)], fill=(255, 255, 255, 200), width=2 * S)
-# đố kính dọc
-for k in range(1, 11):
-    u = k / 11
-    pts = [P(CX - wid(y) / 2 + wid(y) * u, y) for y in range(int(TOPF), BASE + 1, 6)]
-    g.line(pts, fill=(255, 255, 255, 46), width=S)
-# vòm đỉnh
-wt = wid(TOPF); top_y = TOPF - 56
-g.polygon([P(CX - wt / 2, TOPF), P(CX - wt / 2 + 6, top_y), P(CX + wt / 2 - 8, top_y), P(CX + wt / 2, TOPF)], fill=(70, 118, 190, 255))
-g.arc(P(CX - wt / 2 + 22, top_y + 12, CX + wt / 2 - 22, TOPF + 110), 180, 360, fill=(255, 236, 190, 255), width=8 * S)
-for k in range(1, 9):
-    x = CX - wt / 2 + 8 + (wt - 16) * k / 9
-    g.line([P(x, top_y), P(x, TOPF)], fill=(255, 255, 255, 60), width=S)
-g.rectangle(P(CX - wt / 2 + 8, top_y - 6, CX + wt / 2 - 8, top_y), fill=(230, 236, 246, 255))
-# viền thân
-L = [P(CX - wid(y) / 2, y) for y in range(int(TOPF), BASE + 1, 4)]
-R = [P(CX + wid(y) / 2, y) for y in range(int(TOPF), BASE + 1, 4)]
-g.line(L, fill=(255, 255, 255, 220), width=2 * S); g.line(R, fill=(255, 255, 255, 220), width=2 * S)
-# cánh cong trắng ở chân (như vạt áo)
-def bez(p0, p1, p2, p3, n=60):
-    return [tuple((1 - t) ** 3 * p0[i] + 3 * (1 - t) ** 2 * t * p1[i] + 3 * (1 - t) * t ** 2 * p2[i] + t ** 3 * p3[i] for i in range(2)) for t in (j / n for j in range(n + 1))]
-yT = yof(24)
-c1 = bez((CX - 125, BASE), (CX - 80, 880), (CX - 10, 740), (CX + wid(yT) / 2 - 6, yT))
-c2 = bez((CX - 104, BASE), (CX - 58, 888), (CX + 12, 756), (CX + wid(yT) / 2 - 6, yT))
-g.polygon([P(*p) for p in c1 + c2[::-1]], fill=(250, 250, 252, 235))
-c3 = bez((CX + 130, BASE), (CX + 112, 920), (CX + 100, 830), (CX + wid(yof(16)) / 2, yof(16)))
-g.line([P(*p) for p in c3], fill=(250, 250, 252, 220), width=7 * S)
-# khối đế cong ven sông
-pod = bez((CX + 90, BASE - 56), (CX + 170, BASE - 86), (CX + 260, BASE - 64), (CX + 315, BASE))
-g.polygon([P(*p) for p in pod] + [P(CX + 90, BASE)], fill=(236, 112, 70, 255))
+    for fl in range(lo, hi + 1):
+        colmap[fl] = col
+tower = Image.new('RGBA', im.size, (0, 0, 0, 0)); g = ImageDraw.Draw(tower)
+for yy in range(int(TOPF * S), int(BASE * S)):
+    y = yy / S; fl = min(NF, int((BASE - y) / fh) + 1); col = colmap[fl]
+    L, R = (CX - hw(y)) * S, (CX + hw(y)) * S
+    steps = 30
+    for k in range(steps):
+        u = (k + 0.5) / steps
+        sh = math.exp(-((u - 0.38) / 0.22) ** 2)          # dải sáng phản chiếu
+        edge = 1 - 0.28 * abs(u - 0.5) * 2                 # tối dần ra 2 mép (thân tròn góc)
+        cc = tuple(min(255, int(col[i] * (0.62 + 0.3 * edge) + 95 * sh)) for i in range(3))
+        g.line([(L + (R - L) * k / steps, yy), (L + (R - L) * (k + 1) / steps, yy)], fill=cc + (255,))
+# vạch sàn + đố kính
+for fl in range(0, NF):
+    y = yof(fl); g.line([P(CX - hw(y), y), P(CX + hw(y), y)], fill=(255, 255, 255, 60), width=S)
 for k in range(1, 14):
-    x = CX + 90 + 220 * k / 14
-    g.line([P(x, BASE - 4), P(x, BASE - 50 + 30 * (k / 14) ** 2)], fill=(255, 220, 190, 120), width=S)
-g.line([P(*p) for p in pod], fill=(255, 255, 255, 230), width=3 * S)
+    u = k / 14
+    pts = [P(CX - hw(y) + 2 * hw(y) * u, y) for y in range(int(TOPF), BASE + 1, 6)]
+    g.line(pts, fill=(255, 255, 255, 40), width=S)
+for lo, hi, *_ in G:
+    y = yof(hi); g.line([P(CX - hw(y), y), P(CX + hw(y), y)], fill=(255, 255, 255, 170), width=2 * S)
+# khung đỉnh: mái phẳng + vòm sáng lớn trong khung (tầng 64 – 70)
+wt = hw(TOPF)
+g.polygon([P(CX - wt, TOPF), P(CX - wt + 4, TOPF - 34), P(CX + wt - 4, TOPF - 34), P(CX + wt, TOPF)], fill=(60, 96, 156, 255))
+for k in range(1, 12):
+    x = CX - wt + 4 + (2 * wt - 8) * k / 12
+    g.line([P(x, TOPF - 34), P(x, TOPF)], fill=(255, 255, 255, 50), width=S)
+g.rectangle(P(CX - wt + 2, TOPF - 40, CX + wt - 2, TOPF - 34), fill=(226, 232, 242, 255))
+ay0, ay1 = TOPF - 26, yof(63)
+aw = wt - 14
+glow = Image.new('RGBA', im.size, (0, 0, 0, 0)); gg = ImageDraw.Draw(glow)
+gg.rounded_rectangle(P(CX - aw, ay0, CX + aw, ay1), int(aw * S), fill=(255, 226, 160, 70))
+glow = glow.filter(ImageFilter.GaussianBlur(5 * S)); tower.alpha_composite(glow); g = ImageDraw.Draw(tower)
+g.arc(P(CX - aw, ay0, CX + aw, ay0 + 2 * aw), 180, 360, fill=(255, 240, 205, 255), width=6 * S)
+g.line([P(CX - aw, ay0 + aw), P(CX - aw, ay1)], fill=(255, 240, 205, 255), width=6 * S)
+g.line([P(CX + aw, ay0 + aw), P(CX + aw, ay1)], fill=(255, 240, 205, 255), width=6 * S)
+# viền thân
+g.line([P(CX - hw(y), y) for y in range(int(TOPF), BASE + 1, 4)], fill=(255, 255, 255, 200), width=2 * S)
+g.line([P(CX + hw(y), y) for y in range(int(TOPF), BASE + 1, 4)], fill=(255, 255, 255, 200), width=2 * S)
+# vạt cong ở chân: phần kính loe ra bên trái + dải trắng cong (như tà áo dài)
+yT = yof(24)
+outer = bez((CX - 175, BASE), (CX - 120, 900), (CX - 30, 760), (CX + hw(yT) - 4, yT))
+inner = bez((CX - 150, BASE), (CX - 96, 906), (CX - 8, 772), (CX + hw(yT) - 4, yT))
+skirt = [P(*q) for q in outer] + [P(CX - hw(BASE), BASE)]
+g.polygon(skirt, fill=(150, 196, 230, 150))
+g.polygon([P(*q) for q in outer + inner[::-1]], fill=(252, 252, 254, 245))
+r_out = bez((CX + 150, BASE), (CX + 128, 930), (CX + hw(yof(14)) + 6, 900), (CX + hw(yof(18)), yof(18)))
+g.polygon([P(*q) for q in r_out] + [P(CX + hw(BASE), BASE)], fill=(150, 196, 230, 140))
+g.line([P(*q) for q in r_out], fill=(252, 252, 254, 240), width=6 * S)
+# khối đế kính cong ven sông
+pod_top = bez((CX + 70, BASE - 70), (CX + 180, BASE - 104), (CX + 300, BASE - 70), (CX + 330, BASE))
+podg = Image.new('RGBA', im.size, (0, 0, 0, 0)); gp = ImageDraw.Draw(podg)
+gp.polygon([P(*q) for q in pod_top] + [P(CX + 70, BASE)], fill=(240, 160, 96, 255))
+for k in range(1, 22):
+    x = CX + 70 + 260 * k / 22
+    gp.line([P(x, BASE - 2), P(x, BASE - 100)], fill=(255, 232, 196, 120), width=S)
+for yy in (BASE - 24, BASE - 48):
+    gp.line([P(CX + 70, yy), P(CX + 330, yy)], fill=(255, 236, 206, 140), width=S)
+m = Image.new('L', im.size, 0); ImageDraw.Draw(m).polygon([P(*q) for q in pod_top] + [P(CX + 70, BASE)], fill=255)
+podg.putalpha(Image.composite(podg.split()[3], Image.new('L', im.size, 0), m))
+tower.alpha_composite(podg); g = ImageDraw.Draw(tower)
+g.line([P(*q) for q in pod_top], fill=(255, 255, 255, 240), width=4 * S)
+# hàng dừa
+for x in range(CX + 90, CX + 330, 34):
+    g.line([P(x, BASE), P(x + 2, BASE - 34)], fill=(70, 60, 40, 255), width=2 * S)
+    for ang in range(0, 360, 45):
+        r = math.radians(ang)
+        g.line([P(x + 2, BASE - 34), P(x + 2 + 14 * math.cos(r), BASE - 34 + 7 * math.sin(r) + 4)], fill=(40, 96, 56, 255), width=2 * S)
 im.paste(tower, (0, 0), tower)
 # phản chiếu dưới nước
-refl = tower.crop(P(0, BASE - 260, W, BASE)).transpose(Image.FLIP_TOP_BOTTOM)
+refl = tower.crop(P(0, BASE - 260, 620, BASE)).transpose(Image.FLIP_TOP_BOTTOM)
 a = refl.split()[3].point(lambda v: int(v * 0.28)); refl.putalpha(a)
 refl = refl.filter(ImageFilter.GaussianBlur(3 * S))
 im.paste(refl, P(0, BASE + 30), refl)
@@ -127,7 +160,7 @@ lf = sans(14, 'ExtraBold')
 for lo, hi, lab, _, _, col in G:
     yc = (yof(hi) + yof(lo - 1)) / 2
     t = 'MÁI' if lo == 70 else (f'{lo}' if lo == hi else f'{lo}–{hi}')
-    x0 = CX - wid(yc) / 2 - 14
+    x0 = CX - hw(yc) - 14 - (60 if lo <= 10 else 0)
     if lo in (4, 23, 67):
         continue
     d.ellipse(P(x0 - 7, yc - 5, x0 + 3, yc + 5), fill=col)
@@ -165,6 +198,6 @@ y += 104
 d.rounded_rectangle(P(X - 10, y, W - 50, y + 44), 10 * S, fill=(28, 52, 92))
 d.text(P((X - 10 + W - 50) / 2, y + 22), 'THÁP AURORA – CAO 408 M · 69 TẦNG + MÁI · THEO TÀI LIỆU GIỚI THIỆU, THAM KHẢO', font=sans(16, 'ExtraBold'), fill='white', anchor='mm')
 # (ghi chú tham khảo nằm trong dải trên – tránh bị nhãn liên hệ che)
-p = f'{O}/da-nang-downtown-thap-aurora-dang-toa.jpg'
+p = f'{O}/da-nang-downtown-thap-aurora-dang-toa-2.jpg'
 im.resize((W, H), Image.LANCZOS).save(p, quality=90)
 print(p, dd.stamp(p, tile=False))

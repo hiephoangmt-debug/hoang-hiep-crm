@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.287**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.288**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.288 (15/11/2026) – tháp Aurora giống tòa thật hơn
+
+- Vẽ lại tháp Aurora sát phối cảnh: thân mảnh thon dần, mặt kính bóng có dải sáng phản chiếu, khung đỉnh với vòm sáng lớn (tầng 63 – 70), vạt cong trắng như tà áo dài ở chân, khối đế kính mái cong ven sông có hàng dừa, cao ốc nền phía sau. Thay ảnh của bản 2.20.287.
+- Sau khi cài: **Nhập / cập nhật dữ liệu** → LiteSpeed **Purge All**.
 
 ## Có gì mới – 2.20.287 (15/11/2026) – sơ đồ tháp Aurora vẽ theo dáng tòa
 
