@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-13T23:47:54+00:00",
+    "updated": "2026-11-15T01:53:38+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do",
@@ -352,14 +352,14 @@
         {
             "slug": "chuyen-nhuong-hop-dong-sun-saphia-residence-truoc-ban-giao",
             "title": "Bán lại Sun Saphia Residence trước khi nhận nhà: chuyển nhượng hợp đồng thế nào, thuế 2% ai nộp?",
-            "publish": "2026-11-09 10:00",
+            "publish": "2026-11-09 08:00",
             "file": "bai/chuyen-nhuong-hop-dong-sun-saphia-residence-truoc-ban-giao.txt",
             "rev": 2
         },
         {
             "slug": "da-nang-du-thao-nghi-quyet-tod-quanh-ga-duong-sat",
             "title": "Đà Nẵng lấy ý kiến dự thảo nghị quyết TOD: tăng hệ số sử dụng đất tối đa 1,5 lần quanh ga đường sắt",
-            "publish": "2026-11-09 10:00",
+            "publish": "2026-11-09 08:00",
             "file": "bai/da-nang-du-thao-nghi-quyet-tod-quanh-ga-duong-sat.txt"
         },
         {
@@ -390,13 +390,13 @@
         {
             "slug": "da-nang-cong-bo-quy-hoach-chung-2050-aeon-mall-hoa-xuan-thang-11",
             "title": "Đà Nẵng chuẩn bị công bố Quy hoạch chung 2050 cuối tháng 11: dự kiến khởi công Aeon Mall Hòa Xuân, tái khởi động Đa Phước",
-            "publish": "2026-11-10 10:00",
+            "publish": "2026-11-10 08:00",
             "file": "bai/da-nang-cong-bo-quy-hoach-chung-2050-aeon-mall-hoa-xuan-thang-11.txt"
         },
         {
             "slug": "khach-quoc-te-da-nang-2026-han-quoc-trung-quoc-thue-can-ho-sun-saphia",
             "title": "Khách Hàn Quốc chiếm hơn 20% khách quốc tế đến Đà Nẵng: ai sẽ thuê studio Sun Saphia Residence?",
-            "publish": "2026-11-10 12:00",
+            "publish": "2026-11-10 11:30",
             "file": "bai/khach-quoc-te-da-nang-2026-han-quoc-trung-quoc-thue-can-ho-sun-saphia.txt"
         },
         {
@@ -580,10 +580,28 @@
             "file": "bai/bang-gia-capital-square-da-nang-theo-toa.txt"
         },
         {
+            "slug": "nhan-ban-giao-can-ho-sun-saphia-residence-kiem-tra-gi",
+            "title": "Nhận bàn giao căn hộ Sun Saphia Residence: kiểm tra gì, mang theo gì, ghi biên bản ra sao",
+            "publish": "2026-11-16 11:30",
+            "file": "bai/nhan-ban-giao-can-ho-sun-saphia-residence-kiem-tra-gi.txt"
+        },
+        {
             "slug": "hudson-place-s4-va-broadway-place-s3-capital-square-chon-toa-nao",
             "title": "Hudson Place S4 và Broadway Place S3 Capital Square: khác nhau thế nào, nên chọn tòa nào?",
             "publish": "2026-11-16 14:00",
             "file": "bai/hudson-place-s4-va-broadway-place-s3-capital-square-chon-toa-nao.txt"
+        },
+        {
+            "slug": "sun-saphia-residence-cho-nguoi-lam-viec-tu-xa-digital-nomad",
+            "title": "Sun Saphia Residence cho người làm việc từ xa: Đà Nẵng hút \"dân du mục số\", studio ven biển cho thuê theo tháng",
+            "publish": "2026-11-16 16:30",
+            "file": "bai/sun-saphia-residence-cho-nguoi-lam-viec-tu-xa-digital-nomad.txt"
+        },
+        {
+            "slug": "khu-thuong-mai-tu-do-da-nang-sun-saphia-residence",
+            "title": "Khu thương mại tự do Đà Nẵng tiến tới đâu và tác động gì tới căn hộ ven biển như Sun Saphia Residence",
+            "publish": "2026-11-16 18:30",
+            "file": "bai/khu-thuong-mai-tu-do-da-nang-sun-saphia-residence.txt"
         },
         {
             "slug": "can-ho-duoi-3-ty-da-nang-du-an-dang-ban",
@@ -592,10 +610,28 @@
             "file": "bai/can-ho-duoi-3-ty-da-nang-du-an-dang-ban.txt"
         },
         {
+            "slug": "san-golf-gan-sun-saphia-residence-da-nang-hoi-an",
+            "title": "Sân golf gần Sun Saphia Residence: Montgomerie Links, BRG Đà Nẵng và các sân ven biển Đà Nẵng – Hội An",
+            "publish": "2026-11-17 11:30",
+            "file": "bai/san-golf-gan-sun-saphia-residence-da-nang-hoi-an.txt"
+        },
+        {
             "slug": "sun-saphia-hay-symphony-5-mua-studio-cho-thue",
             "title": "Sun Saphia Residence hay Symphony 5: mua studio cho thuê ở Đà Nẵng chọn dự án nào?",
             "publish": "2026-11-17 14:00",
             "file": "bai/sun-saphia-hay-symphony-5-mua-studio-cho-thue.txt"
+        },
+        {
+            "slug": "bao-hiem-can-ho-sun-saphia-residence-chay-no-tai-san-cho-thue",
+            "title": "Bảo hiểm căn hộ Sun Saphia Residence: cháy nổ bắt buộc, tài sản bên trong và rủi ro khi cho thuê",
+            "publish": "2026-11-17 16:30",
+            "file": "bai/bao-hiem-can-ho-sun-saphia-residence-chay-no-tai-san-cho-thue.txt"
+        },
+        {
+            "slug": "sun-saphia-residence-mua-phao-hoa-diff-cho-thue",
+            "title": "Sun Saphia Residence mùa pháo hoa DIFF: 2,7 triệu lượt khách năm 2026 nói gì về cho thuê căn hộ ven biển",
+            "publish": "2026-11-17 18:30",
+            "file": "bai/sun-saphia-residence-mua-phao-hoa-diff-cho-thue.txt"
         },
         {
             "slug": "chu-dau-tu-sun-saphia-residence-la-ai",
@@ -604,10 +640,28 @@
             "file": "bai/chu-dau-tu-sun-saphia-residence-la-ai.txt"
         },
         {
+            "slug": "ban-lai-sun-saphia-residence-sau-khi-co-so-thue-phi",
+            "title": "Bán lại Sun Saphia Residence sau khi có sổ: thuế 2%, lệ phí trước bạ 0,5% và các bước sang tên",
+            "publish": "2026-11-18 11:30",
+            "file": "bai/ban-lai-sun-saphia-residence-sau-khi-co-so-thue-phi.txt"
+        },
+        {
             "slug": "vay-mua-capital-square-da-nang-tra-gop-hang-thang",
             "title": "Vay mua Capital Square Đà Nẵng: vay 70%, 0% lãi suất đến 36 tháng, trả góp mỗi tháng bao nhiêu?",
             "publish": "2026-11-18 14:00",
             "file": "bai/vay-mua-capital-square-da-nang-tra-gop-hang-thang.txt"
+        },
+        {
+            "slug": "sun-saphia-residence-cho-nguoi-nghi-huu-song-ven-bien",
+            "title": "Sun Saphia Residence cho người nghỉ hưu: sống ven biển Đà Nẵng, chọn căn nào, cần tính gì",
+            "publish": "2026-11-18 16:30",
+            "file": "bai/sun-saphia-residence-cho-nguoi-nghi-huu-song-ven-bien.txt"
+        },
+        {
+            "slug": "an-uong-quanh-sun-saphia-residence-hai-san-cho-pho-am-thuc",
+            "title": "Ăn uống quanh Sun Saphia Residence: hải sản ven biển, chợ địa phương, phố ẩm thực An Thượng",
+            "publish": "2026-11-18 18:30",
+            "file": "bai/an-uong-quanh-sun-saphia-residence-hai-san-cho-pho-am-thuc.txt"
         },
         {
             "slug": "nobu-residences-hay-the-legend-can-ho-cao-cap-da-nang",
