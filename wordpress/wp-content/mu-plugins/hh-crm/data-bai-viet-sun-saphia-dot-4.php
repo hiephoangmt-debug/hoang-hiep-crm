@@ -180,10 +180,10 @@ HTML
 	$posts[] = array(
 		'slug'     => 'ho-tro-lai-suat-24-thang-sun-saphia',
 		'old_slug' => array( 'ho-tro-lai-suat-24-thang-sun-saphia-residence-tinh-thu' ),
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 15/11: chuẩn SEO 100 – rút gọn URL, ví dụ studio 2,85 tỷ vay 50%, hỗ trợ lãi hay chiết khấu, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Hỗ trợ lãi suất 24 tháng khi mua Sun Saphia Residence: tính thử tiết kiệm bao nhiêu và trả bao nhiêu từ tháng 25',
 		'excerpt'  => 'Sun Saphia Residence có chính sách hỗ trợ lãi suất tới 24 tháng. Ví dụ vay 1,5 tỷ: lãi 24 tháng ở mức 10,9%/năm khoảng 327 triệu; từ tháng 25 nếu lãi thả nổi 13 – 15%, trả góp 20 năm khoảng 17,6 – 19,8 triệu/tháng.',
-		'keyword'  => 'hỗ trợ lãi suất Sun Saphia Residence',
+		'keyword'  => 'hỗ trợ lãi suất Sun Saphia',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'vay mua Sun Saphia', 'hỗ trợ lãi suất 24 tháng', 'lãi suất vay mua nhà 2026' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-08 08:00',
@@ -191,17 +191,17 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Vay mua nhà' ),
 		'image'    => 'plugin:img/tin-tuc/ho-tro-lai-suat-sun-saphia-residence.jpg',
 		'content'  => <<<HTML
-<p>Chính sách {$saphia} được chủ đầu tư đưa ra ngày 28/10/2026 có <strong>hỗ trợ lãi suất lên tới 24 tháng</strong>; bàn giao dự kiến 11/2028. Chi tiết (hỗ trợ toàn bộ hay một phần lãi, trên tỷ lệ vay bao nhiêu) chưa công bố. Bài tính thử hai con số người vay cần biết: khoản lãi được đỡ trong 24 tháng và số tiền phải trả mỗi tháng khi hết hỗ trợ.</p>
+<p>Hỗ trợ lãi suất Sun Saphia Residence <strong>lên tới 24 tháng</strong> là điểm chính trong chính sách {$saphia} được chủ đầu tư đưa ra ngày 28/10/2026; bàn giao dự kiến 11/2028. Chi tiết (hỗ trợ toàn bộ hay một phần lãi, trên tỷ lệ vay bao nhiêu) chưa công bố. Bài tính thử hai con số người vay cần biết: khoản lãi được đỡ trong 24 tháng và số tiền phải trả mỗi tháng khi hết hỗ trợ.</p>
 <!--hh-featured-->
-<h2>Giả định để tính</h2>
+<h2>Giả định khi tính hỗ trợ lãi suất Sun Saphia</h2>
 <ul>
 <li>Khoản vay: 1,5 tỷ (khoảng một nửa giá studio).</li>
 <li>Lãi suất trong 24 tháng nếu không được hỗ trợ: 10,9%/năm – bình quân lãi cố định 12 – 24 tháng của 11 ngân hàng (DKRA, 9/2026).</li>
-<li>Sau ưu đãi, lãi thả nổi khoảng 13 – 15%/năm (VARS, 9/2026).</li>
+<li>Sau ưu đãi, lãi thả nổi khoảng 13 – 15%/năm (VARS, 9/2026); xem thêm tổng hợp lãi vay mua nhà tháng 9/2026 trên <a href="https://dantri.com.vn/bat-dong-san/thang-9-cac-ngan-hang-dang-cho-vay-mua-nha-lai-suat-bao-nhieu-20260903083127075.htm">Dân trí</a>.</li>
 <li>Giải ngân hết từ đầu, trả góp đều 20 năm từ tháng 25. Thực tế ngân hàng giải ngân theo tiến độ nên lãi giai đoạn đầu thường thấp hơn.</li>
 </ul>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Phối cảnh Sun Saphia Residence bên biển Sơn Thủy lúc hoàng hôn (ảnh chủ đầu tư)-->
-<h2>Kết quả tính thử</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Hỗ trợ lãi suất Sun Saphia Residence 24 tháng – phối cảnh bên biển Sơn Thủy (ảnh chủ đầu tư)-->
+<h2>Hỗ trợ lãi suất Sun Saphia: kết quả tính thử</h2>
 <table>
 <thead><tr><th>Chỉ tiêu</th><th>Kết quả (minh hoạ)</th></tr></thead>
 <tbody>
@@ -219,7 +219,12 @@ HTML
 <li><strong>Tháng 25 là mốc cần chuẩn bị</strong>: khoản trả mỗi tháng có thể 15 – 20 triệu. Nếu cho thuê studio, tiền thuê ròng nhiều khả năng chưa đủ bù toàn bộ – xem <a href="/dau-tu-sun-saphia-residence-cho-thue-dong-tien/">3 kịch bản dòng tiền</a>.</li>
 <li><strong>Hỗ trợ lãi thường đi kèm giá</strong>: giá dự kiến 2,13 – 2,85 tỷ là giá áp dụng khi mua có vay; nên hỏi giá khi không vay (thường có chiết khấu) để so cho đúng.</li>
 </ul>
-<h2>Câu hỏi nên hỏi về chính sách</h2>
+<h2>Ví dụ theo giá dự kiến: studio 2,85 tỷ vay 50%</h2>
+<p>Với studio tầng 15 dãy mặt biển giá dự kiến 2,85 tỷ, vay 50% là khoảng 1,425 tỷ. Cùng giả định trên: lãi 24 tháng ở 10,9%/năm khoảng 311 triệu – mức hỗ trợ tối đa nếu chủ đầu tư trả toàn bộ lãi; từ tháng 25, trả góp đều 20 năm khoảng 14,6 triệu/tháng (lãi 10,9%), 16,7 triệu (13%) hoặc 18,8 triệu (15%). Hoàng Hiệp tự tính, chỉ để minh hoạ.</p>
+<h2>Hỗ trợ lãi suất Sun Saphia hay chiết khấu khi không vay?</h2>
+<p>Giá dự kiến 2,13 – 2,85 tỷ là giá theo phương án có vay. Người có sẵn tiền nên hỏi giá khi không vay hoặc thanh toán nhanh, rồi so hai con số: khoản lãi được hỗ trợ (tối đa khoảng 311 – 327 triệu trong các ví dụ trên) và mức chiết khấu nếu không vay. Bên nào lớn hơn, sau khi trừ chi phí cơ hội của tiền tự có, là phương án lợi hơn cho mình.</p>
+<p>Nhận định của Hoàng Hiệp: hỗ trợ lãi suất Sun Saphia giúp nhẹ gánh trong thời gian xây dựng, nhưng quyết định vay nên dựa trên khoản trả góp từ tháng 25 – con số người vay phải tự gánh lâu dài.</p>
+<h2>Câu hỏi nên hỏi về hỗ trợ lãi suất Sun Saphia</h2>
 <ol>
 <li>Hỗ trợ 100% lãi hay hỗ trợ một phần (ví dụ giữ lãi suất ở mức cố định)?</li>
 <li>Tỷ lệ vay tối đa được hỗ trợ, ân hạn nợ gốc bao lâu?</li>
@@ -230,20 +235,23 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Hỗ trợ lãi suất 24 tháng Sun Saphia Residence: tính thử',
-			'desc'      => 'Hỗ trợ lãi suất 24 tháng Sun Saphia Residence: vay 1,5 tỷ, lãi 24 tháng khoảng 327 triệu; từ tháng 25 trả góp khoảng 15,4 – 19,8 triệu/tháng.',
+			'seo_title' => 'Hỗ trợ lãi suất Sun Saphia 24 tháng: tính thử từ tháng 25',
+			'desc'      => 'Hỗ trợ lãi suất Sun Saphia Residence 24 tháng: vay 1,5 tỷ, lãi 24 tháng khoảng 327 triệu; từ tháng 25 trả góp khoảng 15,4 – 19,8 triệu/tháng.',
 			'points'    => array(
-				'Vay 1,5 tỷ ở 10,9%/năm: lãi 24 tháng khoảng 327 triệu',
+				'Hỗ trợ lãi suất Sun Saphia tới 24 tháng: vay 1,5 tỷ ở 10,9%/năm, lãi 24 tháng khoảng 327 triệu',
 				'Từ tháng 25, trả góp 20 năm khoảng 15,4 – 19,8 triệu/tháng tùy lãi 10,9 – 15%',
 				'Hỏi rõ hỗ trợ toàn bộ hay một phần lãi, tỷ lệ vay và phí trả trước hạn',
 			),
 			'faq'       => array(
 				array( 'Sun Saphia Residence hỗ trợ lãi suất bao lâu?', 'Theo thông tin chủ đầu tư ngày 28/10/2026, hỗ trợ lãi suất lên tới 24 tháng; chi tiết mức hỗ trợ chưa công bố.' ),
+				array( 'Hỗ trợ lãi suất Sun Saphia có lợi hơn chiết khấu khi không vay không?', 'Tùy mức chiết khấu chủ đầu tư áp dụng khi không vay. Nên so khoản lãi được hỗ trợ (ví dụ khoảng 311 – 327 triệu) với mức chiết khấu, sau khi tính chi phí cơ hội của tiền tự có.' ),
+				array( 'Hết hỗ trợ lãi suất Sun Saphia thì trả bao nhiêu?', 'Ví dụ vay 1,425 tỷ (50% studio 2,85 tỷ), trả góp đều 20 năm từ tháng 25: khoảng 14,6 – 18,8 triệu/tháng với lãi 10,9 – 15%/năm (minh hoạ).' ),
 				array( 'Vay 1,5 tỷ mua Sun Saphia mỗi tháng trả bao nhiêu?', 'Ví dụ minh hoạ: trả góp đều 20 năm, khoảng 15,4 triệu/tháng nếu lãi 10,9%/năm, 17,6 triệu nếu 13% và 19,8 triệu nếu 15%.' ),
 			),
 		),
 		'sources'  => array(
 			'https://hiephoangmt-debug.github.io/hoang-hiep-crm/dau-tu/',
+			'https://dantri.com.vn/bat-dong-san/thang-9-cac-ngan-hang-dang-cho-vay-mua-nha-lai-suat-bao-nhieu-20260903083127075.htm',
 		),
 	);
 
