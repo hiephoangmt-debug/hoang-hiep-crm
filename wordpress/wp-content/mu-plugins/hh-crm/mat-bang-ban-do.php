@@ -2,8 +2,8 @@
 /**
  * Mặt bằng chia lô trên bản đồ vệ tinh (dạng vector, bấm từng lô xem diện tích – rộng – sâu).
  * Dữ liệu lô lấy từ file CAD quy hoạch anh Hiệp gửi (Hoa XUan 2019.dwg): ranh lô, mép đường đúng kích thước thật,
- * hướng Bắc theo lưới bản vẽ. File CAD không ghi hệ tọa độ dùng được, nên vị trí trên bản đồ do admin ghim 1 lần
- * (dán tọa độ Google Maps của điểm mốc → Căn theo điểm → Lưu). Khách chỉ thấy khi anh Hiệp bấm "Cho khách xem".
+ * hướng Bắc theo lưới bản vẽ. Tọa độ trong file CAD lệch khoảng 6 km so với thực địa, nên vị trí căn theo 2 điểm mốc
+ * có tọa độ Google Maps thật ('pins' trong hh_mbbd_plans, hoặc admin dán 2 tọa độ → Căn theo 2 điểm → Lưu). Khách chỉ thấy khi anh Hiệp bấm "Cho khách xem".
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -16,9 +16,12 @@ function hh_mbbd_plans() {
 			'data'    => 'img/mat-bang-ban-do/euro-village-2-lo.json',
 			'image'   => 'img/mat-bang-ban-do/euro-village-2-b2-so-do.jpg',
 			'center'  => array( 16.02494, 108.23030 ), // Gợi ý ban đầu (Plus Code 26FJ+X4F, đường Giáng Hương 6) – admin ghim lại cho đúng.
+			// 2 điểm mốc (mét theo bản vẽ). 'pins' = tọa độ Google Maps thật của 2 điểm này (anh Hiệp gửi) → web tự căn vị trí, góc xoay, tỉ lệ.
 			'anchors' => array(
-				array( 'Tâm vòng tròn trong công viên', 86.12, 30.74 ),
+				array( 'Ngã tư góc Tây Bắc khu B2-15 (dưới trường mẫu giáo)', 90.5, 159.4 ),
+				array( 'Ngã tư Đường số 4 – Đường số 9 (góc Đông Nam)', 273.9, -167.6 ),
 			),
+			'pins'    => null,
 		),
 	);
 }
@@ -51,12 +54,13 @@ add_action(
 		if ( ! $admin && ! get_option( 'hh_mbbd_duyet_' . $slug ) ) {
 			return; // Chưa được anh Hiệp duyệt: khách không thấy sơ đồ.
 		}
-		$saved = get_option( 'hh_mbbd2_' . $slug );
+		$saved = get_option( 'hh_mbbd3_' . $slug ); // v3: sơ đồ vẽ lại từ CAD (15/11/2026) – bỏ vị trí ghim theo sơ đồ cũ.
 		$cfg   = array(
 			'data'    => HH_CRM_URL . $p['data'] . '?v=' . HH_CRM_VERSION,
 			'center'  => $p['center'],
 			'anchors' => $p['anchors'],
 			'saved'   => is_array( $saved ) ? $saved : null,
+			'pins'    => $p['pins'] ?? null,
 			'admin'   => $admin,
 			'ajax'    => admin_url( 'admin-ajax.php' ),
 			'nonce'   => $admin ? wp_create_nonce( 'hh_mbbd_' . $slug ) : '',
@@ -67,14 +71,15 @@ add_action(
 		?>
 <div class="hh-mbbd" style="margin:28px 0 8px">
 <h3 style="margin:0 0 6px;font-size:1.15rem">Mặt bằng chia lô <?php echo esc_html( $p['title'] ); ?></h3>
-<p style="font-size:.9rem;color:#6b5b4b;margin:0 0 10px">Bấm vào từng lô để xem <b>diện tích, chiều rộng, chiều sâu</b>. Kéo thanh <b>Độ đậm</b> để so với ảnh vệ tinh hiện trạng.</p>
+<p style="font-size:.9rem;color:#6b5b4b;margin:0 0 10px">Bấm vào từng lô để xem <b>mã lô, diện tích, chiều rộng, chiều sâu</b>; phóng to để thấy mã lô trên sơ đồ. Kéo thanh <b>Độ đậm</b> để so với ảnh vệ tinh hiện trạng.</p>
 <div id="<?php echo esc_attr( $id ); ?>" style="height:min(78vh,640px);border-radius:12px;overflow:hidden;background:#dfe9ef"></div>
 <div class="hh-mbbd-bar" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px;font-size:.9rem">
 	<label>Độ đậm <input type="range" min="0" max="100" value="85" data-k="op" style="vertical-align:middle"></label>
 	<?php if ( $admin ) : ?>
-	<span style="flex-basis:100%;color:#8a4b1c"><b>Admin – ghim vị trí 1 lần:</b> mở Google Maps (vệ tinh) → bấm chuột phải đúng <b>tâm vòng tròn trong công viên</b> (chấm xanh ①) → bấm dòng tọa độ để sao chép → dán vào ô → <b>Căn theo điểm</b> → kiểm tra khớp → <b>Lưu vị trí</b>. Có thể kéo chấm đỏ / xoay để chỉnh tinh.</span>
-	<label style="flex-basis:100%">① Tâm vòng tròn công viên: <input type="text" data-k="a1" placeholder="VD 16.02494, 108.23030" style="min-width:240px;padding:5px 8px"></label>
-	<button type="button" data-k="go" style="background:#c99234;color:#fff;border:0">Căn theo điểm</button>
+	<span style="flex-basis:100%;color:#8a4b1c"><b>Admin – căn vị trí 1 lần:</b> mở Google Maps (vệ tinh) → bấm chuột phải đúng <b>2 ngã tư</b> có chấm xanh ① ② trên sơ đồ → bấm dòng tọa độ để sao chép → dán vào 2 ô → <b>Căn theo 2 điểm</b> (tự đúng vị trí, góc xoay, tỉ lệ) → kiểm tra khớp → <b>Lưu vị trí</b>.</span>
+	<label style="flex-basis:100%">① <?php echo esc_html( $p['anchors'][0][0] ); ?>: <input type="text" data-k="a1" placeholder="VD 16.02494, 108.23030" style="min-width:240px;padding:5px 8px"></label>
+	<label style="flex-basis:100%">② <?php echo esc_html( $p['anchors'][1][0] ); ?>: <input type="text" data-k="a2" placeholder="VD 16.02210, 108.23250" style="min-width:240px;padding:5px 8px"></label>
+	<button type="button" data-k="go" style="background:#c99234;color:#fff;border:0">Căn theo 2 điểm</button>
 	<button type="button" data-k="r-1">⟲ 1°</button><button type="button" data-k="r-.2">⟲ 0,2°</button><button type="button" data-k="r.2">⟳ 0,2°</button><button type="button" data-k="r1">⟳ 1°</button>
 	<button type="button" data-k="save" style="background:#532516;color:#fff;border:0;border-radius:6px;padding:6px 14px">Lưu vị trí</button>
 	<button type="button" data-k="reset">Bỏ vị trí đã lưu</button>
@@ -92,7 +97,18 @@ add_action(
 	var el = document.getElementById(<?php echo wp_json_encode( $id ); ?>);
 	if (!window.L || !el) { return; }
 	var bar = el.nextElementSibling;
-	var st = C.saved ? { lat: +C.saved.lat, lng: +C.saved.lng, rot: +C.saved.rot, sc: +C.saved.sc } : { lat: C.center[0], lng: C.center[1], rot: 0, sc: 1 };
+	var st = C.saved ? { lat: +C.saved.lat, lng: +C.saved.lng, rot: +C.saved.rot, sc: +C.saved.sc || 1 } : { lat: C.center[0], lng: C.center[1], rot: 0, sc: 1 };
+	// Căn theo 2 điểm: điểm mốc trên bản vẽ (mét) ↔ tọa độ thật → vị trí, góc xoay, tỉ lệ.
+	function fit2(g1, g2) {
+		var A = C.anchors[0], B = C.anchors[1], k = 111320 * Math.cos(g1[0] * Math.PI / 180);
+		var de = B[1] - A[1], dn = B[2] - A[2], ge = (g2[1] - g1[1]) * k, gn = (g2[0] - g1[0]) * 111320;
+		var sc = Math.hypot(ge, gn) / Math.hypot(de, dn);
+		if (!(sc > 0.9 && sc < 1.1)) { return false; }
+		st.sc = sc; st.rot = (Math.atan2(dn, de) - Math.atan2(gn, ge)) * 180 / Math.PI; st.lat = g1[0]; st.lng = g1[1];
+		var q = m2ll(A[1], A[2]); st.lat -= q.lat - g1[0]; st.lng -= q.lng - g1[1];
+		return true;
+	}
+	if (C.pins && C.pins.length === 2 && !C.saved) { fit2(C.pins[0], C.pins[1]); }
 	var map = L.map(el, { scrollWheelZoom: false, maxZoom: 21, zoomSnap: 0.5 }).setView([st.lat, st.lng], 17);
 	var sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 21, maxNativeZoom: 19, attribution: 'Ảnh vệ tinh © Esri, Maxar' }).addTo(map);
 	var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 21, maxNativeZoom: 19, attribution: '© OpenStreetMap' });
@@ -108,15 +124,18 @@ add_action(
 	function draw() {
 		if (!D) { return; }
 		grp.clearLayers(); lbl.clearLayers();
+		var z = map.getZoom(), ZC = { park: '#9bd27a', school: '#f4a6c8' };
+		(D.zones || []).forEach(function (q) { L.polygon(q[1].map(function (p) { return m2ll(p[0], p[1]); }), { color: '#5d6b5d', weight: 1, fillColor: ZC[q[0]] || '#ddd', fillOpacity: op * .85, opacity: op, interactive: false }).addTo(grp); });
 		D.roads.forEach(function (r) { L.polyline(r.map(function (p) { return m2ll(p[0], p[1]); }), { color: '#ffffff', weight: 1.2, opacity: Math.min(1, op + .1), interactive: false }).addTo(grp); });
 		D.lots.forEach(function (l) {
-			var pg = L.polygon(l[4].map(function (p) { return m2ll(p[0], p[1]); }), { color: '#7a4a22', weight: 1, fillColor: '#f6e7cc', fillOpacity: op * .75, opacity: op });
-			pg.bindPopup('<b>Lô thuộc block ' + l[0] + '</b><br>Diện tích ≈ <b>' + fmt(l[1], 0) + ' m²</b><br>Rộng (mặt tiền) ≈ <b>' + fmt(l[2], 1) + ' m</b> · Sâu ≈ <b>' + fmt(l[3], 1) + ' m</b><br><small>Đo từ bản vẽ quy hoạch, tham khảo. Liên hệ Hoàng Hiệp 0904 567 009 để nhận thông tin lô.</small>');
+			var pg = L.polygon(l[4].map(function (p) { return m2ll(p[0], p[1]); }), { color: '#8c4614', weight: 1, fillColor: '#ffd68c', fillOpacity: op * .85, opacity: op });
+			pg.bindPopup('<b>Lô ' + (l[5] || l[0]) + '</b> <small>(block ' + l[0] + ')</small><br>Diện tích ≈ <b>' + fmt(l[1], 0) + ' m²</b><br>Rộng (mặt tiền) ≈ <b>' + fmt(l[2], 1) + ' m</b> · Sâu ≈ <b>' + fmt(l[3], 1) + ' m</b><br><small>Mã lô, kích thước đo từ bản vẽ quy hoạch – tham khảo, đối chiếu hồ sơ từng lô. Liên hệ Hoàng Hiệp 0904 567 009.</small>');
 			pg.on('mouseover', function () { pg.setStyle({ fillColor: '#f2a65a' }); });
-			pg.on('mouseout', function () { pg.setStyle({ fillColor: '#f6e7cc' }); });
+			pg.on('mouseout', function () { pg.setStyle({ fillColor: '#ffd68c' }); });
+			if (z >= 18.5 && l[5]) { pg.bindTooltip(l[5].split('-').pop(), { permanent: true, direction: 'center', className: 'hh-mbbd-ma' }); }
 			pg.addTo(grp);
 		});
-		var big = map.getZoom() >= 17.5;
+		var big = z >= 17.5;
 		D.labels.forEach(function (a) {
 			L.marker(m2ll(a[1], a[2]), { interactive: false, icon: L.divIcon({ className: 'hh-mbbd-lb', html: '<b>' + a[0] + '</b>' + (big && a[3] ? '<br><small>' + a[3] + '</small>' : ''), iconSize: null }) }).addTo(lbl);
 		});
@@ -135,25 +154,28 @@ add_action(
 	});
 	map.on('zoomend', draw);
 	var css = document.createElement('style');
-	css.textContent = '.hh-mbbd-lb{background:rgba(255,255,255,.92);border:2px solid #c99234;border-radius:8px;padding:2px 7px;color:#532516;font:600 12px/1.25 "Be Vietnam Pro",sans-serif;text-align:center;white-space:nowrap;transform:translate(-50%,-50%);width:auto!important;height:auto!important}.hh-mbbd-lb small{color:#6b5040;font-weight:500}.hh-mbbd-bar button{border:1px solid #c99234;background:#fff;border-radius:6px;padding:5px 10px;cursor:pointer}';
+	css.textContent = '.hh-mbbd-ma{background:none;border:0;box-shadow:none;padding:0;color:#5a2a08;font:600 10px/1 sans-serif}.hh-mbbd-ma:before{display:none}.hh-mbbd-lb{background:rgba(255,255,255,.92);border:2px solid #c99234;border-radius:8px;padding:2px 7px;color:#532516;font:600 12px/1.25 "Be Vietnam Pro",sans-serif;text-align:center;white-space:nowrap;transform:translate(-50%,-50%);width:auto!important;height:auto!important}.hh-mbbd-lb small{color:#6b5040;font-weight:500}.hh-mbbd-bar button{border:1px solid #c99234;background:#fff;border-radius:6px;padding:5px 10px;cursor:pointer}';
 	document.head.appendChild(css);
 	bar.querySelector('[data-k=op]').addEventListener('input', function () { op = this.value / 100; draw(); });
 	if (!C.admin) { return; }
 	var msg = bar.querySelector('[data-k=st]');
-	function show() { msg.textContent = st.lat.toFixed(6) + ', ' + st.lng.toFixed(6) + ' · xoay ' + st.rot.toFixed(1) + '°'; }
+	function show() { msg.textContent = st.lat.toFixed(6) + ', ' + st.lng.toFixed(6) + ' · xoay ' + st.rot.toFixed(2) + '° · tỉ lệ ' + st.sc.toFixed(3); }
 	var pin = L.marker([st.lat, st.lng], { draggable: true, zIndexOffset: 1000, icon: L.divIcon({ className: '', html: '<div style="width:22px;height:22px;border-radius:50%;background:#d33;border:3px solid #fff;box-shadow:0 0 6px #000;transform:translate(-50%,-50%)"></div>', iconSize: null }) }).addTo(map);
 	pin.on('dragend', function (ev) { var q = ev.target.getLatLng(); st.lat = q.lat; st.lng = q.lng; draw(); show(); });
 	bar.querySelectorAll('button[data-k]').forEach(function (b) {
 		b.addEventListener('click', function () {
 			var k = b.getAttribute('data-k');
 			if (k === 'go') {
-				var v = (bar.querySelector('[data-k=a1]').value.match(/-?\d+(?:\.\d+)?/g) || []).map(parseFloat);
-				if (v.length < 2) { msg.textContent = 'Chưa đọc được tọa độ.'; return; }
-				var K = C.anchors[0];
-				st.lat = v[0]; st.lng = v[1];
-				var q = m2ll(K[1], K[2]);
-				st.lat -= q.lat - v[0]; st.lng -= q.lng - v[1];
-				pin.setLatLng([st.lat, st.lng]); map.setView([v[0], v[1]], 17.5); draw(); show();
+				var rd = function (n) { return (bar.querySelector('[data-k=' + n + ']').value.match(/-?\d+(?:\.\d+)?/g) || []).map(parseFloat); };
+				var v1 = rd('a1'), v2 = rd('a2');
+				if (v1.length < 2) { msg.textContent = 'Chưa đọc được tọa độ ①.'; return; }
+				if (v2.length >= 2) {
+					if (!fit2([v1[0], v1[1]], [v2[0], v2[1]])) { msg.textContent = 'Hai điểm lệch tỉ lệ quá nhiều – kiểm tra lại đúng 2 ngã tư ① ②.'; return; }
+				} else {
+					var K = C.anchors[0]; st.lat = v1[0]; st.lng = v1[1];
+					var q = m2ll(K[1], K[2]); st.lat -= q.lat - v1[0]; st.lng -= q.lng - v1[1];
+				}
+				pin.setLatLng([st.lat, st.lng]); map.setView([v1[0], v1[1]], 17.5); draw(); show();
 				return;
 			}
 			if (k === 'pub' || k === 'save' || k === 'reset') {
@@ -193,19 +215,22 @@ add_action(
 			wp_send_json_success();
 		}
 		if ( ! empty( $_POST['reset'] ) ) {
-			delete_option( 'hh_mbbd2_' . $slug );
+			delete_option( 'hh_mbbd3_' . $slug );
 			wp_send_json_success();
 		}
 		$v = array(
 			'lat' => (float) wp_unslash( $_POST['lat'] ?? 0 ),
 			'lng' => (float) wp_unslash( $_POST['lng'] ?? 0 ),
 			'rot' => (float) wp_unslash( $_POST['rot'] ?? 0 ),
-			'sc'  => 1.0,
+			'sc'  => (float) wp_unslash( $_POST['sc'] ?? 1 ),
 		);
+		if ( $v['sc'] < 0.9 || $v['sc'] > 1.1 ) {
+			$v['sc'] = 1.0;
+		}
 		if ( abs( $v['lat'] - 16 ) > 1 || abs( $v['lng'] - 108.2 ) > 1 ) {
 			wp_send_json_error( null, 400 );
 		}
-		update_option( 'hh_mbbd2_' . $slug, $v, false );
+		update_option( 'hh_mbbd3_' . $slug, $v, false );
 		do_action( 'litespeed_purge_all' );
 		wp_send_json_success();
 	}

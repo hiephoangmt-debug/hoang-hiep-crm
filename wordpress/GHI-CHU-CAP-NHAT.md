@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.294**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.295**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,14 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.295 (15/11/2026) – Euro Village 2: sơ đồ vẽ lại từ CAD, có mã lô
+
+- **Ranh lô dựng lại trực tiếp từ bản CAD** (đường chia lô + ranh block), không còn lô chồng, lô lấn đường; block B2-15 đủ 2 dãy. Số lô từng block gần khớp số liệu ghi trên bản vẽ (nhãn block ghi số lô, diện tích theo bản vẽ).
+- **Mã lô** dạng B2-15-07: phóng to bản đồ thấy số lô trên từng lô; bấm lô hiện mã, diện tích, mặt tiền, chiều sâu (tham khảo).
+- **Màu như bản đồ quy hoạch:** đất ở vàng cam, công viên xanh lá, trường mẫu giáo hồng.
+- **Căn vị trí theo 2 điểm** (2 ngã tư ① ②): dán 2 tọa độ Google Maps → tự đúng vị trí, góc xoay và tỉ lệ → Lưu vị trí. Vị trí ghim theo sơ đồ cũ tự bỏ. Tọa độ trong file CAD lệch khoảng 6 km nên không dùng trực tiếp được.
+- Ảnh sơ đồ tĩnh (khi chưa căn vị trí) vẽ lại theo dữ liệu mới.
 
 ## Có gì mới – 2.20.294 (15/11/2026) – đợt 2: TOÀN BỘ bài đạt chuẩn SEO 100/100
 
