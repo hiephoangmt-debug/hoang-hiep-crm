@@ -83,3 +83,4 @@
 | 15/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:30 | Mua Sun Saphia để ở – bài ảnh | /mua-sun-saphia-residence-de-o-duoc-khong-can-biet/ |
 | 15/11/2026 | Casamia (blogId 8074284) | 21:00 | Loại biệt thự Casamia Balanca – đơn lập, song lập, shophouse (album 4 ảnh) | /du-an/casamia-balanca-hoi-an/ |
 | 15/11/2026 | TikTok (@hiephoangmt, brand Sun) | 21:15 | Loại biệt thự Casamia Balanca – album 4 ảnh | /du-an/casamia-balanca-hoi-an/ |
+| 15/11/2026 | (ghi chú) | 09:12 | Anh Hiệp duyệt mẫu POSTER: đã đổi ảnh 8 bài chưa đăng hôm nay (HH 10:00, 14:15; Sun 13:00, 16:15, 19:15; TikTok 13:15, 16:30, 19:30) sang ảnh *-p.jpg; FB và TikTok dùng cùng ảnh | — |
