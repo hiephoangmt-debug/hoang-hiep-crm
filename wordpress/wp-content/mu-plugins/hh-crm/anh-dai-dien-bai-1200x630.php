@@ -3,6 +3,7 @@
  * Ảnh đại diện mới cho các bài đã đăng (anh Hiệp 13/11/2026): khổ 1200×630 – đúng khung thẻ bài trên web và ảnh xem trước
  * Facebook nên không bị cắt; nền là ảnh phối cảnh / ảnh thực tế của dự án, chữ tiêu đề bên trái (bai-viet/anh-dai-dien-1200x630.py).
  * Ảnh nằm trong kho code (wordpress/tu-dong/bia-bai/<slug>.jpg) – web tự tải về từng ảnh, gói cài không nặng.
+ * Bản 2 (anh Hiệp 15/11/2026): đổi toàn bộ sang mẫu thẻ tin thống nhất (bai-viet/the-tin-tuc.py) – chạy lại cho mọi bài.
  * Chạy dần: mỗi lần mở trang quản trị ~12 giây + nền (WP-Cron) mỗi 2 phút cho tới khi xong. Ảnh cũ vẫn giữ trong Thư viện.
  */
 
@@ -189,12 +190,50 @@ function hh_bia_bai_slugs() {
 		'mo-rong-nha-ga-t2-san-bay-da-nang-bat-dong-san-cho-thue',
 		'ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang',
 		'hop-nhat-da-nang-quang-nam-bat-dong-san-vung-giap-ranh',
+		'gia-cora-tower-da-nang-bao-nhieu',
+		'cora-spana-s-light-sun-neo-city-nen-chon-toa-nao',
+		'bang-gia-capital-square-da-nang-theo-toa',
+		'hudson-place-s4-va-broadway-place-s3-capital-square-chon-toa-nao',
+		'can-ho-duoi-3-ty-da-nang-du-an-dang-ban',
+		'sun-saphia-hay-symphony-5-mua-studio-cho-thue',
+		'chu-dau-tu-sun-saphia-residence-la-ai',
+		'vay-mua-capital-square-da-nang-tra-gop-hang-thang',
+		'nobu-residences-hay-the-legend-can-ho-cao-cap-da-nang',
+		'phap-ly-the-legend-da-nang-so-huu-lau-dai',
+		'mat-bang-can-ho-cora-tower',
+		'can-ho-hang-hieu-la-gi-nobu-da-nang',
+		'mat-bang-can-ho-fours-tower',
+		'can-1pn-plus-sun-saphia-residence-49-51m2',
+		'tien-do-capital-square-da-nang',
+		'co-nen-mua-the-legend-da-nang-uu-nhuoc-diem',
+		'chi-phi-khi-mua-can-ho-moi-ngoai-gia-ban',
+		'hop-dong-mua-can-ho-hinh-thanh-trong-tuong-lai-can-xem-gi',
+		'phap-ly-symphony-5-so-huu-50-nam',
+		'tien-do-nobu-residences-da-nang',
+		'tu-sun-saphia-residence-di-hoi-an-bao-xa-lich-trinh',
+		'cho-thue-dai-han-sun-saphia-residence-chuyen-gia-gia-dinh',
+		'tang-cao-hay-tang-thap-sun-saphia-residence-chon-tang-nao',
+		'mua-sun-saphia-residence-de-o-duoc-khong-can-biet',
+		'cora-tower-spana-tower-khi-nao-ban-giao',
+		'nobu-da-nang-cua-ai-chu-dau-tu',
+		'the-legend-da-nang-cua-chu-dau-tu-nao',
+		'sun-symphony-5-o-dau-vi-tri',
+		'da-nang-khoi-cong-8-du-an-nha-o-xa-hoi-4575-can-cuoi-2026',
+		'nhan-ban-giao-can-ho-sun-saphia-residence-kiem-tra-gi',
+		'sun-saphia-residence-cho-nguoi-lam-viec-tu-xa-digital-nomad',
+		'khu-thuong-mai-tu-do-da-nang-sun-saphia-residence',
+		'san-golf-gan-sun-saphia-residence-da-nang-hoi-an',
+		'bao-hiem-can-ho-sun-saphia-residence-chay-no-tai-san-cho-thue',
+		'sun-saphia-residence-mua-phao-hoa-diff-cho-thue',
+		'ban-lai-sun-saphia-residence-sau-khi-co-so-thue-phi',
+		'sun-saphia-residence-cho-nguoi-nghi-huu-song-ven-bien',
+		'an-uong-quanh-sun-saphia-residence-hai-san-cho-pho-am-thuc',
 	);
 }
 
 /** Số bài còn chờ thay ảnh. */
 function hh_bia_bai_pending() {
-	$done = (array) get_option( 'hh_bia_bai_done', array() );
+	$done = (array) get_option( 'hh_bia_bai_done_v2', array() );
 	return count( array_diff( hh_bia_bai_slugs(), array_keys( $done ) ) );
 }
 
@@ -206,8 +245,8 @@ function hh_bia_bai_run( $seconds = 12 ) {
 	require_once ABSPATH . 'wp-admin/includes/file.php';
 	require_once ABSPATH . 'wp-admin/includes/media.php';
 	require_once ABSPATH . 'wp-admin/includes/image.php';
-	$done  = (array) get_option( 'hh_bia_bai_done', array() );
-	$tries = (array) get_option( 'hh_bia_bai_tries', array() );
+	$done  = (array) get_option( 'hh_bia_bai_done_v2', array() );
+	$tries = (array) get_option( 'hh_bia_bai_tries_v2', array() );
 	$start = microtime( true );
 	foreach ( hh_bia_bai_slugs() as $slug ) {
 		if ( isset( $done[ $slug ] ) ) {
@@ -222,7 +261,7 @@ function hh_bia_bai_run( $seconds = 12 ) {
 			continue;
 		}
 		$cur = (int) get_post_thumbnail_id( $post->ID );
-		if ( $cur && 'bia-bai:' . $slug === get_post_meta( $cur, '_hh_img_src', true ) ) {
+		if ( $cur && 'bia-bai-v2:' . $slug === get_post_meta( $cur, '_hh_img_src', true ) ) {
 			$done[ $slug ] = $cur;
 			continue;
 		}
@@ -249,14 +288,14 @@ function hh_bia_bai_run( $seconds = 12 ) {
 			continue;
 		}
 		update_post_meta( $att, '_wp_attachment_image_alt', $alt );
-		update_post_meta( $att, '_hh_img_src', 'bia-bai:' . $slug );
+		update_post_meta( $att, '_hh_img_src', 'bia-bai-v2:' . $slug );
 		set_post_thumbnail( $post->ID, $att );
 		clean_post_cache( $post->ID );
 		do_action( 'litespeed_purge_post', $post->ID );
 		$done[ $slug ] = $att;
 	}
-	update_option( 'hh_bia_bai_done', $done, false );
-	update_option( 'hh_bia_bai_tries', $tries, false );
+	update_option( 'hh_bia_bai_done_v2', $done, false );
+	update_option( 'hh_bia_bai_tries_v2', $tries, false );
 	delete_transient( 'hh_bia_bai_lock' );
 }
 
@@ -290,7 +329,7 @@ add_action(
 		if ( $left ) {
 			printf( '<div class="notice notice-info"><p><strong>Ảnh đại diện mới cho bài viết (1200×630):</strong> đã thay %d/%d bài – web đang tự làm tiếp (mỗi lần mở trang quản trị và chạy nền mỗi 2 phút).</p></div>', (int) ( $all - $left ), (int) $all );
 		} elseif ( ! get_option( 'hh_bia_bai_notice_off' ) ) {
-			$failed = count( array_keys( (array) get_option( 'hh_bia_bai_done', array() ), 'failed', true ) );
+			$failed = count( array_keys( (array) get_option( 'hh_bia_bai_done_v2', array() ), 'failed', true ) );
 			printf( '<div class="notice notice-success is-dismissible"><p><strong>Đã thay xong ảnh đại diện mới cho %d bài viết.</strong>%s Vào LiteSpeed Cache → Purge All để trang chủ, mục tin tức và Facebook nhận ảnh mới.</p></div>', (int) ( $all - $failed ), $failed ? ' ' . (int) $failed . ' bài tải ảnh lỗi (giữ ảnh cũ).' : '' );
 			update_option( 'hh_bia_bai_notice_off', 1, false );
 		}

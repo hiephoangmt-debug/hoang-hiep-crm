@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.284**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.285**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.285 (15/11/2026) – ảnh tin tức đổi sang mẫu thống nhất
+
+- **Toàn bộ 217 ảnh đại diện bài viết** đổi sang mẫu thẻ tin anh Hiệp gửi (giống thẻ "Hoàn thành sổ hồng FPT Plaza 3"): dòng HOÀNG HIỆP · BẤT ĐỘNG SẢN ĐÀ NẴNG, chữ có chân, tên dự án màu cam cỡ lớn, dòng viết tay, câu tóm tắt đậm, hàng số liệu, ảnh dự án mờ dần, thẻ liên hệ có ảnh chân dung + Zalo ở đáy.
+- Bài đã đăng: web **tự thay ảnh đại diện dần** (mỗi lần anh mở trang quản trị và chạy nền mỗi 2 phút) – không cần làm gì. Ảnh cũ vẫn giữ trong Thư viện.
+- Bài chờ đăng: đăng lên là có ảnh mẫu mới.
+- Sau khi cài: LiteSpeed → **Purge All** (làm lại sau vài giờ khi ảnh đã thay xong).
 
 ## Có gì mới – 2.20.284 (15/11/2026) – web mở nhanh hơn, bấm là thấy phản hồi ngay
 
