@@ -78,3 +78,4 @@
 | 15/11/2026 | TikTok (@hiephoangmt, brand Sun) | 13:15 | Tầng cao hay tầng thấp Sun Saphia – bài ảnh | /tang-cao-hay-tang-thap-sun-saphia-residence-chon-tang-nao/ |
 | CHỜ | Sun | sau | (bài web 15/11 09:00; chưa có ảnh Cora Tower nào trong kho, cần ảnh thật/phối cảnh Cora) Giá Cora Tower Đà Nẵng | gia-cora-tower-da-nang-bao-nhieu (chờ ảnh) |
 | 15/11/2026 | Sun | 16:15 | (bài web mới 14:00) Căn hộ Sun NeO City – so sánh Cora, Spana, S-Light (1 ảnh dọc mẫu B, ảnh thật tiến độ Spana) | /cora-spana-s-light-sun-neo-city-nen-chon-toa-nao/ |
+| 15/11/2026 | TikTok (@hiephoangmt, brand Sun) | 16:30 | Căn hộ Sun NeO City – bài ảnh | /cora-spana-s-light-sun-neo-city-nen-chon-toa-nao/ |
