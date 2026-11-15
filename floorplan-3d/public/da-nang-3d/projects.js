@@ -56,7 +56,7 @@ window.PROJECTS_DATA = [
       resortNote: ['🏝 Quy hoạch resort – công viên ven biển', 'Minh hoạ theo phối cảnh bán hàng · chưa phải bản vẽ chính thức'] },
     // Toà tháp 3D (tách từ trang 4D, toa-nha-4d.js) đặt lên lô đất: at = vị trí gốc toạ độ tháp theo từng ảnh (bù sai số GPS),
     // rot = góc xoay (độ) để mặt tháp hướng biển song song đường Trường Sa.
-    tower4d: { rot: 23, scale: [1.297, 1.654],   // giãn khối đế theo 2 chiều ngang cho vừa lô đất (~66 × 92 m), giữ nguyên chiều cao
+    tower4d: { link4d: 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/fdd062e8758aa9102d772f4c305f24f53d9f11db/projects/sun-saphia/4d/sun-saphia-4d.html?crm', rot: 23, scale: [1.297, 1.654],   // giãn khối đế theo 2 chiều ngang cho vừa lô đất (~66 × 92 m), giữ nguyên chiều cao
       at: { 'sun-saphia-150m': [16.0209659, 108.2578041], 'sun-saphia-120m': [16.0209867, 108.2578117] } },
     pano360: [
       { id: 'sun-saphia-150m', src: '../pano/sun-saphia-150m.jpg', bake: true, hd: '../pano/sun-saphia-150m-8k.jpg', lat: 16.020964444, lon: 108.257773967, alt: 150.5, heading: 343.7, time: '21/10/2026 08:06' },

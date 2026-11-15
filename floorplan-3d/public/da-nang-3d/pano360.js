@@ -4,6 +4,7 @@
 // bằng cách tính hướng + góc nhìn xuống từ vị trí flycam tới toạ độ của từng điểm.
 import * as THREE from 'three';
 import { buildTower } from './toa-nha-4d.js';
+import { showUnitCard, hideUnitCard } from './the-can.js';
 
 const CSS = `
 .p360 { position: fixed; inset: 0; z-index: 8; background: #000; touch-action: none; user-select: none; -webkit-user-select: none; }
@@ -352,6 +353,7 @@ function makeViewer(ctx) {
   function setFloor(i) {
     floor = i; const m = planGroup.getObjectByName('plan'); if (!m) return;
     const onTower = !!(showTower && P?.tower4d && towerObj);   // có toà tháp: cắt ngang tháp và đặt mặt bằng 4D lên tầng đang chọn
+    hideUnitCard();
     if (towerObj) towerObj.userData.setPlan(onTower && i >= 0 ? FLOOR_NO[i] ?? 22 : null, new URL('../mat-bang/sun-saphia/4d/', import.meta.url).href, renderer);
     m.visible = i >= 0 && !onTower; overlay.visible = showLbl && i < 0 && !(showTower && P?.tower4d);   // đang đặt mặt bằng thì ẩn viền ranh đất
     if (i < 0 || onTower) return;
@@ -444,6 +446,7 @@ function makeViewer(ctx) {
   }
 
   function close() {
+    hideUnitCard();
     open = false; root.hidden = true; cancelAnimationFrame(raf); ctx.onClose?.();
   }
   $('.x').onclick = close;
@@ -466,6 +469,15 @@ function makeViewer(ctx) {
     if (ptr.size === 2) { const [a, b] = [...ptr.values()]; const d = Math.hypot(a[0] - b[0], a[1] - b[1]); if (pinch0) view.fov = THREE.MathUtils.clamp(fov0 * pinch0 / d, 20, 100); return; }
     const k = view.fov / innerHeight;
     view.yaw -= (e.clientX - px) * k; view.pitch = THREE.MathUtils.clamp(view.pitch + (e.clientY - py) * k, -89, 89);
+  });
+  // chạm (không kéo) vào căn trên mặt bằng tầng của toà tháp → thẻ thông tin căn
+  let tap = null; const rcU = new THREE.Raycaster(), ndcU = new THREE.Vector2();
+  cv.addEventListener('pointerdown', (e) => { tap = [e.clientX, e.clientY]; });
+  cv.addEventListener('pointerup', (e) => {
+    if (!tap || Math.hypot(e.clientX - tap[0], e.clientY - tap[1]) > 7 || !towerObj || !towerGroup.visible) return; tap = null;
+    const r = cv.getBoundingClientRect(); ndcU.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
+    rcU.setFromCamera(ndcU, camera); const u = towerObj.userData.pickUnit(rcU);
+    if (u) showUnitCard(u, { layoutDir: new URL('../mat-bang/sun-saphia/', import.meta.url).href, link4d: P.tower4d?.link4d, onClose: () => towerObj.userData.clearUnit() }); else hideUnitCard();
   });
   const up = (e) => { ptr.delete(e.pointerId); if (ptr.size < 2) pinch0 = 0; };
   cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);

@@ -150,20 +150,55 @@ boxP(A,4.5,.7,12,X1+6.5,FL[2]+.6,(Z0+ZM-SL)/2,white);
 // ===== mặt bằng tầng đặt lên tháp (như nút "Mặt bằng tầng" của 4D): cắt ngang tháp tại tầng đang chọn =====
 // ảnh: trái→phải = Bắc→Nam, trên = biển; tầng 3A–29 dùng chung, tầng 30 / 3 / 2 có ảnh riêng
 var PLAN_F={a:'mat-bang-tang-4d.webp',30:'mat-bang-tang-30-4d.webp',3:'mat-bang-tang-3-4d.webp',2:'mat-bang-tang-2-4d.webp'}, PLAN_H={a:49.6,30:49.6,3:53.4,2:53.4};
-var clipP=new THREE.Plane(new THREE.Vector3(0,-1,0),0), clipped=false, planMesh=null, planTx={}, ldr=new THREE.TextureLoader();
+var curF=22, clipP=new THREE.Plane(new THREE.Vector3(0,-1,0),0), clipped=false, planMesh=null, planTx={}, ldr=new THREE.TextureLoader();
 A.userData.setPlan=function(f, base, renderer){
-  if(!clipped){ A.traverse(function(o){ if(o.isMesh&&o!==planMesh){ o.material=Array.isArray(o.material)?o.material.map(function(m){return m.clone();}):o.material.clone(); } }); clipped=true; }
+  if(!clipped){ A.traverse(function(o){ if(o.isMesh&&o!==planMesh&&!o.userData.noClip){ o.material=Array.isArray(o.material)?o.material.map(function(m){return m.clone();}):o.material.clone(); } }); clipped=true; }
   var on=f!=null;
-  A.traverse(function(o){ if(!o.isMesh||o===planMesh) return; (Array.isArray(o.material)?o.material:[o.material]).forEach(function(m){ m.clippingPlanes=on?[clipP]:[]; m.clipShadows=true; m.needsUpdate=true; }); });
+  A.traverse(function(o){ if(!o.isMesh||o===planMesh||o.userData.noClip) return; (Array.isArray(o.material)?o.material:[o.material]).forEach(function(m){ m.clippingPlanes=on?[clipP]:[]; m.clipShadows=true; m.needsUpdate=true; }); });
   if(renderer) renderer.localClippingEnabled=true;
   if(!planMesh){ var g=new THREE.PlaneGeometry(55.6,49.6); g.rotateX(-Math.PI/2); g.rotateY(-Math.PI/2);
     planMesh=new THREE.Mesh(g,new THREE.MeshBasicMaterial({transparent:true,alphaTest:.04,toneMapped:false,side:THREE.DoubleSide})); planMesh.renderOrder=11; planMesh.userData.keep=true; planMesh.visible=false; A.add(planMesh); }
-  planMesh.visible=on; if(!on) return;
-  f=Math.max(2,Math.min(30,f)); var k=f>=30?30:f===3?3:f===2?2:'a', y=FL[f];
+  planMesh.visible=on; if(!on){ uHi.visible=false; return; }
+  f=Math.max(2,Math.min(30,f)); curF=f; uHi.visible=false; var k=f>=30?30:f===3?3:f===2?2:'a', y=FL[f];
   if(!planTx[k]){ var t=ldr.load(base+PLAN_F[k]); t.colorSpace=THREE.SRGBColorSpace; t.anisotropy=8; planTx[k]=t; }
   planMesh.material.map=planTx[k]; planMesh.material.needsUpdate=true;
   planMesh.scale.x=PLAN_H[k]/49.6; planMesh.position.set(X1-(PLAN_H[k]/2-9.9), y+.4, Z0+27.8);
   A.updateMatrixWorld(true); clipP.constant=A.localToWorld(new THREE.Vector3(0,y+.5,0)).y;
 };
+// ===== chạm vào căn trên mặt bằng: dữ liệu căn theo 4D (u: Bắc→Nam dọc Trường Sa, v: từ mặt biển vào, mét) =====
+var UNITS=[['11','2PN',0,11.1,0,8.1,'E'],['12','STU',11.19,14.99,0,9.1,'E'],['12A','STU',14.99,18.8,0,9.1,'E'],['12B','1PN',18.8,25.02,0,9.1,'E'],['15','STU',25.02,28.82,0,9.1,'E'],['16','STU',28.82,32.64,0,9.1,'E'],['17','1PN',32.64,38.91,0,9.1,'E'],
+ ['18','2PN',38.4,46.95,-8.6,1.32,'E'],['19','2PN',47.0,55.55,-8.6,1.32,'E'],['10','1PN',0,9.3,7.0,13.24,'N'],['09','STU',0,9.3,13.24,17.01,'N'],['08','STU',0,9.3,17.01,20.79,'N'],['07','STU',0,9.3,20.79,24.6,'N'],['06','STU',0,9.3,24.6,28.42,'N'],['05','STU',0,9.3,28.42,32.21,'N'],
+ ['03A','2PN',0,10.11,32.21,39.45,'W'],['03','2PN',10.11,19.9,32.21,39.45,'W'],['01','STU',11.1,19.9,24.6,28.38,'S'],['02','STU',11.1,19.9,28.38,32.21,'S'],
+ ['28','1PN',18.81,25.02,10.9,19.9,'W'],['27','STU',25.02,28.83,10.9,19.9,'W'],['26','STU',28.83,32.64,10.9,19.9,'W'],['25','STU',32.64,36.45,10.9,19.9,'W'],['24','STU',36.45,40.26,10.9,19.9,'W'],['23','STU',40.26,44.07,10.9,19.9,'W'],['22','STU',44.07,47.89,10.9,19.9,'W'],['21','STU',47.89,51.7,10.9,19.9,'W'],
+ ['20','STUL',51.7,55.5,8.95,19.9,'W']];
+var UINFO={'1BR':['1PN','tầng 30 · căn rộng'],'1PN+':['1PN+1','tầng 30'],'2PN30':['2PN','tầng 30 · căn lớn nhất tầng'],STU:['Studio','3,8 × 9 m'],STUL:['Studio lớn đầu hồi','2 mặt thoáng'],'1PN':['1PN+1','6,2 × 9 m'],'2PN':['2PN góc bo','căn góc, 2 phòng ngủ']};
+var UAREA={'11':[70.21,77.35],'12':[31,34.58],'12A':[30,34.58],'12B':[51.11,56.42],'15':[30,34.58],'16':[30,34.58],'17':[50.18,56.38],'18':[67.68,75.5],'19':[67.69,76.36],
+ '10':[50.28,56.42],'09':[30,34.58],'08':[30,34.58],'07':[31,35.03],'06':[30,34.13],'05':[30,34.58],'03A':[61.14,68.67],'03':[60.30,68.32],'01':[30,33.88],'02':[30,33.88],
+ '28':[48.98,55.27],'27':[30,33.88],'26':[30,33.88],'25':[30,33.88],'24':[30,33.88],'23':[30,33.88],'22':[30,33.88],'21':[30,33.88],'20':[40.03,46.38]};
+var UVIEW={E:['Biển Đông'],W:['Sông Hàn · trung tâm TP'],N:['Sơn Trà (Bắc)'],S:['Đô thị phía Nam']};
+var UNITS30=[['07','1PN+',0,11.16,0,6.96,'E'],['08','1BR',11.16,18.8,0,9.1,'E'],['09','1PN+',18.8,24.99,0,9.1,'E'],['10','1BR',24.99,32.63,0,9.1,'E'],['11','1PN+',32.63,38.88,0,9.1,'E'],
+ ['06','2PN30',0,9.24,6.96,16.98,'N'],['05','1BR',0,9.24,16.98,24.61,'N'],['03A','1BR',0,9.24,24.61,32.22,'N'],['03','1PN+',0,10.05,32.22,39.45,'W'],['02','1PN+',10.05,19.88,32.22,39.45,'W'],['01','1BR',11.1,19.88,24.61,32.22,'S'],
+ ['16','1PN+',18.78,24.99,10.9,19.9,'W'],['15','1BR',24.99,32.62,10.9,19.9,'W'],['12B','1BR',32.62,40.23,10.9,19.9,'W'],['12A','1BR',40.23,47.86,10.9,19.9,'W'],['12','1BR',47.86,55.47,8.95,19.9,'W']];
+var UA30={'07':[71.29,77.32],'08':[64.63,69.16],'09':[52.20,56.42],'10':[64.37,69.16],'11':[51.18,56.42],'06':[83.97,91.15],'05':[64.41,69.27],'03A':[64.08,69.27],
+ '03':[63.73,68.71],'02':[63.34,68.23],'01':[63.02,67.64],'16':[49.99,55.18],'15':[63.02,67.64],'12B':[63.02,67.64],'12A':[62.97,67.64],'12':[73.71,80.97]};
+var ONLY2=['01','02','03A','03','05','06','07','08','09','10','18','19'], UA2={'10':[50.42,56.56],'19':[71.41,79.65]};
+var UBAL3={'01':18.94,'02':18.95,'03A':29.59,'03':84.29,'28':29.00,'27':29.20,'26':29.20,'25':39.96,'24':53.71,'23':53.71,'22':53.71,'21':53.71,'20':55.32};
+
+function unitAt(u,v){ var hit=null; UNITS.forEach(function(r){ if(r[1]==='STUL') return; if(u>=r[2]&&u<=r[3]&&v>=r[4]&&v<=r[5]) hit=r; });
+  if(!hit&&u>=48.75&&u<=55.5&&v>=8.95&&v<=19.9&&!(u<51.7&&v>10.9)) hit=UNITS[UNITS.length-1]; return hit; }
+function unitAt30(u,v){ var hit=null; UNITS30.forEach(function(r){ if(u>=r[2]&&u<=r[3]&&v>=r[4]&&v<=r[5]) hit=r; }); return hit; }
+var uHi=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({color:0xff6a2b,transparent:true,opacity:.45,depthWrite:false,toneMapped:false,side:THREE.DoubleSide}));
+uHi.rotation.x=-Math.PI/2; uHi.visible=false; uHi.renderOrder=12; uHi.userData.keep=true; uHi.userData.noClip=true; A.add(uHi);
+// trả về thông tin căn tại điểm chạm (toạ độ thế giới) trên mặt bằng đang hiện, hoặc null
+A.userData.pickUnit=function(raycaster){
+  if(!planMesh||!planMesh.visible) return null;
+  var hit=raycaster.intersectObject(planMesh)[0]; if(!hit) return null;
+  var lp=A.worldToLocal(hit.point.clone()), u=lp.z-Z0, v=X1-lp.x, f=curF, r=f>=30?unitAt30(u,v):unitAt(u,v);
+  if(!r||(f===2&&ONLY2.indexOf(r[0])<0)||(f===29&&(r[0]==='18'||r[0]==='19'))) { uHi.visible=false; return null; }
+  uHi.scale.set(r[5]-r[4],r[3]-r[2],1); uHi.position.set(X1-(r[4]+r[5])/2,FL[f]+.6,Z0+(r[2]+r[3])/2); uHi.renderOrder=13; uHi.visible=true;
+  var inf=f>=30?(UINFO[r[1]]||[r[1],'']):UINFO[r[1]], AR=f>=30?UA30[r[0]]:(f===2&&UA2[r[0]])||UAREA[r[0]], bal=(f===3||f===2)&&UBAL3[r[0]];
+  return { id:r[0], floor:f, code:'SP'+(f<10?'0':'')+f+r[0], type:r[1], name:inf[0], note:inf[1], area:AR, balcony:bal||0, view:UVIEW[r[6]][0] };
+};
+A.userData.clearUnit=function(){ uHi.visible=false; };
 return A;
 }
