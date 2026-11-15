@@ -6,6 +6,7 @@
  *  2. Mô tả SEO chưa có từ khoá → "{Từ khoá}: {mô tả}" (≤ 160 ký tự).
  *  3. Từ khoá chưa có ở đầu nội dung → khung "Điểm chính" đổi thành "Điểm chính về {từ khoá}" (bài không có khung: thêm từ khoá in đậm vào đầu đoạn đầu).
  *  4. Cuối bài thêm mục "Đọc thêm về {từ khoá}": 5 bài cùng dự án / chuyên mục (liên kết nội bộ, tiêu đề phụ có từ khoá, bài đủ dài hơn).
+ *  6. (v2) Ảnh đầu tiên trong bài chưa có alt chứa từ khoá → alt "{Từ khoá} – {alt cũ}"; đoạn văn > 120 từ được tách đôi ở dấu chấm câu.
  *  5. Liên kết nguồn báo chí / cơ quan nhà nước / chủ đầu tư bỏ nofollow (Rank Math: cần ít nhất 1 liên kết ra ngoài dofollow);
  *     trang dự án thêm mục "Nguồn tham khảo" (chỉ nguồn uy tín, không đưa trang đơn vị phân phối).
  * Chỉ sửa bài web tự tạo chưa bị sửa tay (nội dung khớp _hh_news_hash); ô SEO chỉ sửa khi đang thiếu từ khoá. Chạy dần cho bài cũ,
@@ -14,7 +15,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const HH_SEO_POST_FIX_V = 1;
+const HH_SEO_POST_FIX_V = 2; // 2: thêm alt ảnh có từ khoá, tách đoạn văn dài > 120 từ.
 
 /** Nguồn uy tín được để dofollow: cổng nhà nước, báo chí lớn, văn bản pháp luật, chủ đầu tư. */
 function hh_seo_trusted_host( $host ) {
@@ -204,6 +205,34 @@ function hh_seo_post_fix( $id ) {
 				$nc = preg_replace( '/<p>/', '<p><strong>' . esc_html( hh_seo_ucfirst( $kw_raw ) ) . '</strong>: ', $nc, 1 );
 			}
 			$done[] = 'intro';
+		}
+		// Alt ảnh có từ khoá.
+		if ( preg_match_all( '/<img\b[^>]*>/i', $nc, $im ) && ! array_filter( $im[0], static fn( $tag ) => preg_match( '/\balt="([^"]*)"/i', $tag, $am ) && hh_seo_has( $am[1], $kw ) ) ) {
+			$first = $im[0][0];
+			$repl  = preg_match( '/\balt="([^"]*)"/i', $first ) ? preg_replace( '/\balt="([^"]*)"/i', 'alt="' . esc_attr( hh_seo_ucfirst( $kw_raw ) ) . ' – $1"', $first, 1 ) : str_replace( '<img', '<img alt="' . esc_attr( hh_seo_ucfirst( $kw_raw ) ) . '"', $first );
+			$nc     = preg_replace( '/' . preg_quote( $first, '/' ) . '/', str_replace( array( '\\', '$' ), array( '\\\\', '\\$' ), $repl ), $nc, 1 );
+			$done[] = 'alt';
+		}
+		// Tách đoạn văn dài.
+		$nc2 = preg_replace_callback(
+			'/<p>((?:(?!<\/?p\b).)*)<\/p>/su',
+			static function ( $m ) {
+				$plain = trim( wp_strip_all_tags( $m[1] ) );
+				if ( count( preg_split( '/\s+/u', $plain ) ) <= 120 ) {
+					return $m[0];
+				}
+				$sent = preg_split( '/(?<=[.!?])\s+(?=[A-ZÀ-Ỹ<])/u', $m[1] );
+				if ( count( $sent ) < 2 ) {
+					return $m[0];
+				}
+				$half = (int) ceil( count( $sent ) / 2 );
+				return '<p>' . implode( ' ', array_slice( $sent, 0, $half ) ) . '</p>' . "\n" . '<p>' . implode( ' ', array_slice( $sent, $half ) ) . '</p>';
+			},
+			$nc
+		);
+		if ( $nc2 !== $nc ) {
+			$nc     = $nc2;
+			$done[] = 'split';
 		}
 		$f = hh_seo_follow_trusted( $nc );
 		if ( $f !== $nc ) {
