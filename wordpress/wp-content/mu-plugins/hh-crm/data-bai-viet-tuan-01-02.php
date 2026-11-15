@@ -619,14 +619,14 @@ HTML
 		'slug'     => 'dien-tich-can-ho-fours-tower',
 		'old_slug' => array( 'mat-bang-fours-tower-studio-3pn' ),
 		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
-		'title'    => 'Mặt bằng FourS Tower: layout căn Studio đến 3PN và diện tích',
-		'excerpt'  => 'Mặt bằng FourS Tower: căn Studio khoảng 34,7 m², 1PN 43,7 m², 2PN 58 m², 3PN 102,8 m². Phân tích layout từng loại căn và cách chọn.',
+		'title'    => 'Diện tích căn hộ FourS Tower: layout Studio đến 3PN và cách chọn căn',
+		'excerpt'  => 'Diện tích căn hộ FourS Tower: căn Studio khoảng 34,7 m², 1PN 43,7 m², 2PN 58 m², 3PN 102,8 m². Phân tích layout từng loại căn và cách chọn.',
 		'keyword'  => 'diện tích căn hộ FourS Tower',
 		'project'  => 'fours-tower',
 		'week'     => 2,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>Mặt bằng FourS Tower gồm các loại căn Studio (khoảng 34,7 m²), 1PN (khoảng 43,7 m²), 1PN+ (khoảng 45,5 – 48,9 m²), 2PN (khoảng 58 m²), 2PN+ (khoảng 87,1 m²) và 3PN (khoảng 102,8 m²), bố trí trong 4 tòa 20 tầng. Tầng 1 dành cho thương mại, tầng 2 cho tiện ích, các tầng phía trên là căn hộ (cập nhật tháng 10/2026).</p>
+<p>Diện tích căn hộ FourS Tower trải từ Studio (khoảng 34,7 m²), 1PN (khoảng 43,7 m²), 1PN+ (khoảng 45,5 – 48,9 m²), 2PN (khoảng 58 m²), 2PN+ (khoảng 87,1 m²) và 3PN (khoảng 102,8 m²), bố trí trong 4 tòa 20 tầng. Tầng 1 dành cho thương mại, tầng 2 cho tiện ích, các tầng phía trên là căn hộ (cập nhật tháng 10/2026).</p>
 
 <h2>Tổng quan mặt bằng FourS Tower</h2>
 <p>Dự án gồm 4 tòa Mai – Trúc – Cúc – Tùng, mỗi tòa 20 tầng nổi và 2 tầng hầm, tổng 2.394 căn. Theo thông tin giới thiệu, cư dân đi thang máy là kết nối được với khu thương mại tầng 1 và tiện ích nghỉ dưỡng tầng 2.</p>
@@ -639,9 +639,9 @@ HTML
 <tr><td>Tầng 3 trở lên</td><td>Căn hộ Studio – 3PN, căn sân vườn</td></tr>
 </tbody>
 </table>
-<p>Bố trí chi tiết từng tầng và số căn mỗi sàn khác nhau giữa các tòa; anh chị nên xem mặt bằng tầng chính thức của tòa đang mở bán.</p>
+<p>Bố trí chi tiết từng tầng và số căn mỗi sàn khác nhau giữa các tòa; anh chị nên xem mặt bằng tầng chính thức của tòa đang mở bán. Bản vẽ từng tầng của tòa F2 được tổng hợp trong bài <a href="/mat-bang-can-ho-fours-tower/">mặt bằng FourS Tower</a>; bài này tập trung vào diện tích căn hộ FourS Tower và cách chọn loại căn.</p>
 
-<h2>Diện tích các loại căn</h2>
+<h2>Diện tích căn hộ FourS Tower theo loại căn</h2>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích tham khảo</th><th>Phù hợp</th></tr></thead>
 <tbody>
@@ -654,8 +654,10 @@ HTML
 </tbody>
 </table>
 <p>Diện tích tổng hợp từ trang phân phối, có thể khác giữa các tòa. Một số nguồn còn nêu căn duplex khoảng 200 m² ở tầng cao.</p>
+<!--hh-img:img/fours-tower/fours-tower-f2-layout-studio.jpg|Layout căn Studio tòa F2 – dòng có diện tích căn hộ FourS Tower nhỏ nhất (bản vẽ chủ đầu tư, tham khảo)-->
+<p>Nhìn bảng trên, diện tích căn hộ FourS Tower tăng theo từng nấc khá đều: từ Studio lên 1PN thêm khoảng 9 m², từ 1PN lên 2PN thêm khoảng 14 m², nhưng từ 2PN lên 2PN+ thêm tới khoảng 29 m². Bước nhảy lớn này cho thấy 2PN+ được thiết kế như một căn gia đình thực thụ chứ không chỉ là 2PN có thêm góc nhỏ.</p>
 
-<h2>Phân tích layout từng loại căn</h2>
+<h2>Phân tích layout và diện tích căn hộ FourS Tower</h2>
 <h3>Studio</h3>
 <p>Studio gộp ngủ, sinh hoạt và bếp trong một không gian, phù hợp cho thuê. Theo một số trang phân phối, Studio tại FourS Tower được thiết kế bề ngang rộng, giúp đặt giường và sofa thoải mái hơn studio dạng hộp dài.</p>
 <h3>1PN và 1PN+</h3>
@@ -675,7 +677,11 @@ HTML
 <tr><td>Gia đình nhiều thế hệ</td><td>3PN, căn sân vườn</td><td>Không gian rộng, có khoảng xanh riêng</td></tr>
 </tbody>
 </table>
-<p>Báo chí cho biết dự án hướng đến cả cộng đồng chuyên gia nước ngoài đến làm việc tại Đà Nẵng. Nếu mua để cho thuê nhóm khách này, căn 1PN+ và 2PN có bố trí bàn làm việc riêng thường dễ khai thác hơn studio.</p>
+<p>Dòng căn sân vườn được <a href="https://vnexpress.net/loi-the-can-ho-san-vuon-fours-tower-tai-nam-da-nang-5069319.html">VnExpress</a> giới thiệu như điểm nhấn của dự án. Báo chí cũng cho biết dự án hướng đến cả cộng đồng chuyên gia nước ngoài đến làm việc tại Đà Nẵng. Nếu mua để cho thuê nhóm khách này, căn 1PN+ và 2PN có bố trí bàn làm việc riêng thường dễ khai thác hơn studio.</p>
+
+<h2>Thông thủy hay tim tường: đọc đúng diện tích căn hộ FourS Tower</h2>
+<p>Các con số trên là diện tích tham khảo do trang phân phối công bố, chưa ghi rõ thông thủy hay tim tường. Diện tích tim tường tính cả phần tường bao, thường lớn hơn diện tích thông thủy là phần anh chị thực sự sử dụng. Theo quy định về nhà chung cư, diện tích sử dụng căn hộ ghi trong hợp đồng mua bán và giấy chứng nhận được tính theo thông thủy.</p>
+<p>Khi nhận bảng hàng, hãy hỏi rõ diện tích căn hộ FourS Tower ghi trong đó là loại nào, rồi quy đổi đơn giá theo cùng một chuẩn trước khi so sánh với dự án khác. Chênh lệch vài mét vuông có thể làm đơn giá thực tế khác đi đáng kể.</p>
 
 <h2>Mẹo đọc mặt bằng khi chọn căn</h2>
 <ul>
@@ -685,18 +691,19 @@ HTML
 <li>Diện tích thông thủy và tim tường khác nhau, cần hỏi rõ.</li>
 </ul>
 <p>Khi nhận bản vẽ, anh chị nên đối chiếu mặt bằng căn với mặt bằng tầng để biết căn nằm ở vị trí nào, nhìn ra hướng nào và có bị che khuất bởi tòa bên cạnh hay không.</p>
-<p>Giá tham khảo từng loại căn xem tại bài <a href="/gia-can-ho-fours-tower-2026/">giá FourS Tower 2026</a>, tổng quan dự án tại <a href="/fours-tower-da-nang-tong-quan-4-thap-bon-mua/">FourS Tower Đà Nẵng: 4 tháp Bốn Mùa</a> và trang <a href="/du-an/fours-tower/">dự án FourS Tower</a>. Anh chị cũng có thể so sánh với các dự án khác tại <a href="/loai-du-an/can-ho-so-huu-lau-dai/">căn hộ sở hữu lâu dài</a>.</p>
+<p>Sau khi chọn được diện tích căn hộ FourS Tower phù hợp, anh chị xem giá tham khảo từng loại căn tại bài <a href="/gia-can-ho-fours-tower-2026/">giá căn hộ FourS Tower 2026</a>, tổng quan dự án tại <a href="/fours-tower-da-nang-tong-quan-4-thap-bon-mua/">FourS Tower Đà Nẵng: 4 tháp Bốn Mùa</a> và trang <a href="/du-an/fours-tower/">dự án FourS Tower</a>. Anh chị cũng có thể so sánh với các dự án khác tại <a href="/loai-du-an/can-ho-so-huu-lau-dai/">căn hộ sở hữu lâu dài</a>.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận mặt bằng tầng chính thức và danh sách căn còn trống theo loại căn anh chị quan tâm.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bản vẽ, diện tích căn hộ FourS Tower chính thức và danh sách căn còn trống theo loại căn anh chị quan tâm.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Diện tích căn hộ FourS Tower: Studio 34,7 m² đến 3PN',
 			'desc'      => 'Diện tích căn hộ FourS Tower: Studio khoảng 34,7 m², 2PN 58 m², 3PN 102,8 m², phân tích layout và cách chọn căn. Gọi 0904 567 009 nhận bản vẽ.',
-			'points'    => array( 'Studio khoảng 34,7 m² đến 3PN khoảng 102,8 m²', 'Tầng 1 thương mại, tầng 2 tiện ích, căn hộ từ tầng 3', 'Có dòng căn sân vườn và căn 1PN+, 2PN+ linh hoạt' ),
+			'points'    => array( 'Diện tích căn hộ FourS Tower: Studio khoảng 34,7 m² đến 3PN khoảng 102,8 m²', 'Tầng 1 thương mại, tầng 2 tiện ích, căn hộ từ tầng 3', 'Có dòng căn sân vườn và căn 1PN+, 2PN+ linh hoạt' ),
 			'faq'       => array(
-				array( 'Căn Studio FourS Tower rộng bao nhiêu?', 'Khoảng 34,7 m² theo các trang phân phối; diện tích có thể khác giữa các tòa.' ),
+				array( 'Diện tích căn hộ FourS Tower nhỏ nhất là bao nhiêu?', 'Khoảng 34,7 m² theo các trang phân phối; diện tích có thể khác giữa các tòa.' ),
 				array( 'FourS Tower có căn 3 phòng ngủ không?', 'Có, căn 3PN diện tích khoảng 102,8 m², phù hợp gia đình nhiều thế hệ.' ),
+				array( 'Diện tích căn hộ FourS Tower là thông thủy hay tim tường?', 'Các trang phân phối thường chưa ghi rõ. Diện tích ghi trong hợp đồng mua bán và giấy chứng nhận căn hộ chung cư tính theo thông thủy, nên cần hỏi lại khi nhận bảng hàng.' ),
 				array( 'Tiện ích FourS Tower nằm ở tầng nào?', 'Theo thông tin dự án, tiện ích bố trí tại tầng 2, tầng 1 dành cho thương mại.' ),
 			),
 		),
