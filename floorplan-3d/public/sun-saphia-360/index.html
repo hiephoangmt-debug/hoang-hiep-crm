@@ -231,10 +231,13 @@ function buildZone(q) {
   el.onclick = () => openPlans(PLANS.findIndex(([n]) => n === 'Quy hoạch'));
   $('lbls').appendChild(el); labels.unshift({ el, dir: v.normalize(), w: 0, stem: el.lastChild, k: 0, g: 'zone' });
 }
+const FLOOR_NO = [2, 3, 22, 22, 29, 30];   // 3A–28 hiển thị ở tầng 22
 function setFloor(i) {
   floor = i; const m = planGroup.getObjectByName('plan'); if (!m) return;
-  m.visible = i >= 0; overlay.visible = showLbl && i < 0 && !showTower;
-  if (i >= 0) load('../mat-bang/sun-saphia/' + FLOORS[i][0] + '-tren-dat.webp').then((t) => { if (floor === i) { planMat.uniforms.map.value = t; } }).catch(() => {});
+  const onTower = !!(showTower && towerObj);   // có toà tháp: cắt ngang tháp, đặt mặt bằng 4D lên tầng đang chọn
+  if (towerObj) towerObj.userData.setPlan(onTower && i >= 0 ? FLOOR_NO[i] : null, '../mat-bang/sun-saphia/4d/', renderer);
+  m.visible = i >= 0 && !onTower; overlay.visible = showLbl && i < 0 && !showTower;
+  if (i >= 0 && !onTower) load('../mat-bang/sun-saphia/' + FLOORS[i][0] + '-tren-dat.webp').then((t) => { if (floor === i) { planMat.uniforms.map.value = t; } }).catch(() => {});
 }
 function buildLabels(q) {
   const box = $('lbls'); box.textContent = ''; labels = [];

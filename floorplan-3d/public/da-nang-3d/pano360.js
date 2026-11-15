@@ -348,10 +348,13 @@ function makeViewer(ctx) {
     const url = mode === 2 ? P.front.clean : P.front.resort;
     loadTex(url).then((t) => { if (frontMode !== mode) return; m.material.map = t; m.material.needsUpdate = true; m.visible = true; }).catch(() => {});
   }
+  const FLOOR_NO = [2, 3, 22, 22, 29, 30];   // số tầng ứng với từng mặt bằng (3A–28 hiển thị ở tầng 22)
   function setFloor(i) {
     floor = i; const m = planGroup.getObjectByName('plan'); if (!m) return;
-    m.visible = i >= 0; overlay.visible = showLbl && i < 0 && !(showTower && P?.tower4d);   // đang đặt mặt bằng thì ẩn viền ranh đất
-    if (i < 0) return;
+    const onTower = !!(showTower && P?.tower4d && towerObj);   // có toà tháp: cắt ngang tháp và đặt mặt bằng 4D lên tầng đang chọn
+    if (towerObj) towerObj.userData.setPlan(onTower && i >= 0 ? FLOOR_NO[i] ?? 22 : null, new URL('../mat-bang/sun-saphia/4d/', import.meta.url).href, renderer);
+    m.visible = i >= 0 && !onTower; overlay.visible = showLbl && i < 0 && !(showTower && P?.tower4d);   // đang đặt mặt bằng thì ẩn viền ranh đất
+    if (i < 0 || onTower) return;
     const want = P.overlay.dir + P.overlay.floors[i][0] + '-tren-dat.webp';
     loadTex(want).then((t) => { if (floor === i) { planMat.uniforms.map.value = t; } }).catch(() => {});
   }

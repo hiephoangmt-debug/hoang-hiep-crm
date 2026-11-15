@@ -147,5 +147,23 @@ slab(A,Lshape(-.3,.3,1),TOP,.5,roofW);
 // sảnh vào chính hướng Trường Sa
 boxP(A,4.5,.7,12,X1+6.5,FL[2]+.6,(Z0+ZM-SL)/2,white);
 
+// ===== mặt bằng tầng đặt lên tháp (như nút "Mặt bằng tầng" của 4D): cắt ngang tháp tại tầng đang chọn =====
+// ảnh: trái→phải = Bắc→Nam, trên = biển; tầng 3A–29 dùng chung, tầng 30 / 3 / 2 có ảnh riêng
+var PLAN_F={a:'mat-bang-tang-4d.webp',30:'mat-bang-tang-30-4d.webp',3:'mat-bang-tang-3-4d.webp',2:'mat-bang-tang-2-4d.webp'}, PLAN_H={a:49.6,30:49.6,3:53.4,2:53.4};
+var clipP=new THREE.Plane(new THREE.Vector3(0,-1,0),0), clipped=false, planMesh=null, planTx={}, ldr=new THREE.TextureLoader();
+A.userData.setPlan=function(f, base, renderer){
+  if(!clipped){ A.traverse(function(o){ if(o.isMesh&&o!==planMesh){ o.material=Array.isArray(o.material)?o.material.map(function(m){return m.clone();}):o.material.clone(); } }); clipped=true; }
+  var on=f!=null;
+  A.traverse(function(o){ if(!o.isMesh||o===planMesh) return; (Array.isArray(o.material)?o.material:[o.material]).forEach(function(m){ m.clippingPlanes=on?[clipP]:[]; m.clipShadows=true; m.needsUpdate=true; }); });
+  if(renderer) renderer.localClippingEnabled=true;
+  if(!planMesh){ var g=new THREE.PlaneGeometry(55.6,49.6); g.rotateX(-Math.PI/2); g.rotateY(-Math.PI/2);
+    planMesh=new THREE.Mesh(g,new THREE.MeshBasicMaterial({transparent:true,alphaTest:.04,toneMapped:false,side:THREE.DoubleSide})); planMesh.renderOrder=11; planMesh.userData.keep=true; planMesh.visible=false; A.add(planMesh); }
+  planMesh.visible=on; if(!on) return;
+  f=Math.max(2,Math.min(30,f)); var k=f>=30?30:f===3?3:f===2?2:'a', y=FL[f];
+  if(!planTx[k]){ var t=ldr.load(base+PLAN_F[k]); t.colorSpace=THREE.SRGBColorSpace; t.anisotropy=8; planTx[k]=t; }
+  planMesh.material.map=planTx[k]; planMesh.material.needsUpdate=true;
+  planMesh.scale.x=PLAN_H[k]/49.6; planMesh.position.set(X1-(PLAN_H[k]/2-9.9), y+.4, Z0+27.8);
+  A.updateMatrixWorld(true); clipP.constant=A.localToWorld(new THREE.Vector3(0,y+.5,0)).y;
+};
 return A;
 }
