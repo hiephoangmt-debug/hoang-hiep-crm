@@ -2,7 +2,7 @@
 /**
  * Đà Nẵng Downtown – tháp biểu tượng "Aurora" (anh Hiệp gửi sơ đồ phân tầng 15/11/2026): 69 tầng + tầng mái, cao 408 m,
  * 504 căn hộ cao cấp (tầng 11 – 22: 264 căn, tầng 28 – 42: 240 căn), 396 phòng lưu trú du lịch (tầng 43, 44 – 66, 67), 2 penthouse (tầng 68 – 69).
- * Ảnh gốc có chữ chìm của trang khác nên không dùng – sơ đồ tự vẽ (bai-viet/aurora-phan-tang-anh.py).
+ * Ảnh gốc có chữ chìm của trang khác nên không dùng – sơ đồ tự vẽ theo dáng tòa tháp (bai-viet/aurora-phan-tang-anh.py, bản 2.20.287; bản 2.20.286 là sơ đồ cột đơn giản).
  * Tên "Aurora" và số căn/phòng theo tài liệu giới thiệu, chủ đầu tư chưa công bố chính thức trên báo chí – ghi rõ tham khảo.
  */
 
@@ -11,10 +11,10 @@ defined( 'ABSPATH' ) || exit;
 add_filter(
 	'hh_project_dataset',
 	static function ( $projects ) {
-		$img  = 'plugin:img/da-nang-downtown/da-nang-downtown-thap-aurora-phan-tang.jpg | Sơ đồ phân tầng tháp Aurora 408 m – Đà Nẵng Downtown: căn hộ cao cấp tầng 11 – 22 và 28 – 42, phòng lưu trú tầng 43 – 67, penthouse tầng 68 – 69 (theo tài liệu giới thiệu, tham khảo) | mặt bằng | Phân tầng tháp Aurora';
+		$img  = 'plugin:img/da-nang-downtown/da-nang-downtown-thap-aurora-dang-toa.jpg | Sơ đồ phân tầng tháp Aurora 408 m – Đà Nẵng Downtown: căn hộ cao cấp tầng 11 – 22 và 28 – 42, phòng lưu trú tầng 43 – 67, penthouse tầng 68 – 69 (theo tài liệu giới thiệu, tham khảo) | mặt bằng | Phân tầng tháp Aurora';
 		$sec  = '<h2>Tháp Aurora 408 m: phân tầng chức năng</h2>
 <p>Theo tài liệu giới thiệu dự án, tòa tháp biểu tượng của Đà Nẵng Downtown có tên <strong>Aurora</strong>, cao 408 m với 69 tầng và tầng mái kỹ thuật, gồm <strong>504 căn hộ cao cấp</strong>, <strong>396 phòng lưu trú du lịch</strong> và <strong>2 căn penthouse</strong>. Số liệu dưới đây để tham khảo, chủ đầu tư sẽ công bố chính thức khi mở bán.</p>
-<!--hh-img:img/da-nang-downtown/da-nang-downtown-thap-aurora-phan-tang.jpg|Sơ đồ phân tầng tháp Aurora – Đà Nẵng Downtown (đồ hoạ Hoàng Hiệp vẽ lại theo tài liệu giới thiệu)-->
+<!--hh-img:img/da-nang-downtown/da-nang-downtown-thap-aurora-dang-toa.jpg|Tháp Aurora – Đà Nẵng Downtown: phân tầng chức năng theo dáng tòa tháp (đồ hoạ Hoàng Hiệp vẽ lại theo tài liệu giới thiệu)-->
 <table>
 <tr><th>Tầng</th><th>Chức năng</th><th>Số lượng</th></tr>
 <tr><td>Mái</td><td>Bể nước, phòng kỹ thuật</td><td>–</td></tr>
@@ -35,17 +35,17 @@ add_filter(
 ';
 		$hl   = 'Tháp Aurora 408 m: 504 căn hộ cao cấp (tầng 11 – 22, 28 – 42), 396 phòng lưu trú du lịch, 2 penthouse tầng 68 – 69 (theo tài liệu giới thiệu)';
 		$zone = "Tháp Aurora 69 tầng | 504 căn hộ cao cấp, 396 phòng lưu trú, 2 penthouse, TTTM, nhà hàng, hội nghị, rạp phim | 408 m | Đang thi công";
+		$old = static fn( $x ) => str_replace( array( 'thap-aurora-dang-toa.jpg', 'Tháp Aurora – Đà Nẵng Downtown: phân tầng chức năng theo dáng tòa tháp (đồ hoạ Hoàng Hiệp vẽ lại theo tài liệu giới thiệu)' ), array( 'thap-aurora-phan-tang.jpg', 'Sơ đồ phân tầng tháp Aurora – Đà Nẵng Downtown (đồ hoạ Hoàng Hiệp vẽ lại theo tài liệu giới thiệu)' ), $x );
 		foreach ( $projects as $i => $p ) {
 			if ( 'da-nang-downtown' !== ( $p['slug'] ?? '' ) ) {
 				continue;
 			}
 			// Ảnh sơ đồ.
 			$cur = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
-			if ( false === strpos( $cur, 'thap-aurora-phan-tang' ) ) {
+			if ( false === strpos( $cur, 'thap-aurora-' ) ) {
 				$p['meta']['hh_p_image_links'] = trim( $cur . "\n" . $img );
-				if ( '' !== $cur ) {
-					$p['fix_meta']['hh_p_image_links'] = array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $cur ) );
-				}
+				// Bản 2.20.286 (sơ đồ cột) đã nhập lên web → cho phép thay.
+				$p['fix_meta']['hh_p_image_links'] = array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array_filter( array( $cur, trim( $cur . "\n" . $old( $img ) ) ) ) );
 			}
 			// Điểm nổi bật, phân khu.
 			$h = (string) ( $p['meta']['hh_p_highlights'] ?? '' );
@@ -68,7 +68,7 @@ add_filter(
 					$new = $ct . "\n" . $sec;
 				}
 				$p['content']     = $new;
-				$p['fix_content'] = array_merge( (array) ( $p['fix_content'] ?? array() ), array( $ct ) );
+				$p['fix_content'] = array_merge( (array) ( $p['fix_content'] ?? array() ), array( $ct, $old( $new ) ) );
 			}
 			$projects[ $i ] = $p;
 		}
