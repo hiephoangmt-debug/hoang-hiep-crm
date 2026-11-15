@@ -98,7 +98,7 @@ HTML
 		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'So sánh căn hộ Sun Group Đà Nẵng: FourS Tower, Spana Tower, S-Light Tower',
 		'excerpt'  => 'So sánh căn hộ Sun Group Đà Nẵng: vị trí, quy mô, loại căn, bàn giao và giá tham khảo của FourS Tower, Spana Tower, S-Light Tower.',
-		'keyword'  => 'so sánh căn hộ Sun Group Đà Nẵng',
+		'keyword'  => 'so sánh FourS Tower, Spana Tower',
 		'project'  => 'fours-tower',
 		'week'     => 3,
 		'category' => 'Dự án',
@@ -163,8 +163,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'So sánh căn hộ Sun Group Đà Nẵng: FourS, Spana, S-Light',
-			'desc'      => 'So sánh căn hộ Sun Group Đà Nẵng: vị trí, quy mô, bàn giao, giá FourS Tower, Spana Tower, S-Light Tower. Gọi Hoàng Hiệp 0904 567 009.',
+			'seo_title' => 'So sánh FourS Tower, Spana Tower và S-Light 2026',
+			'desc'      => 'So sánh FourS Tower, Spana Tower và S-Light Tower của Sun Group: vị trí, quy mô, thời điểm bàn giao, giá tham khảo. Gọi Hoàng Hiệp 0904 567 009.',
 			'points'    => array(
 				'FourS Tower: 2.394 căn, Sun Riverpolis, giá tham khảo khoảng 50 – 60 triệu/m².',
 				'Spana Tower: 1.237 căn chân cầu Hòa Xuân, bàn giao dự kiến 30/6/2027.',
@@ -184,7 +184,7 @@ HTML
 		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'Sun Riverpolis: khu đô thị ven sông Hòa Quý của Sun Group tại Đà Nẵng',
 		'excerpt'  => 'Sun Riverpolis là khu đô thị ven sông của Sun Group tại Hòa Quý, Nam Đà Nẵng: vị trí, quy mô, các phân khu FourS Tower, đất nền Đầm Sen.',
-		'keyword'  => 'Sun Riverpolis',
+		'keyword'  => 'khu đô thị Sun Riverpolis',
 		'project'  => 'sun-riverpolis',
 		'week'     => 3,
 		'category' => 'Dự án',
@@ -251,8 +251,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Sun Riverpolis: khu đô thị ven sông Hòa Quý Đà Nẵng',
-			'desc'      => 'Sun Riverpolis của Sun Group tại Hòa Quý: vị trí, quy mô, phân khu FourS Tower và đất nền Đầm Sen. Gọi Hoàng Hiệp 0904 567 009 nhận bảng giá.',
+			'seo_title' => 'Khu đô thị Sun Riverpolis 2026: vị trí, phân khu',
+			'desc'      => 'Khu đô thị Sun Riverpolis của Sun Group tại Hòa Quý: vị trí, quy mô, các phân khu FourS Tower và đất nền Đầm Sen. Gọi Hoàng Hiệp nhận thông tin mới.',
 			'points'    => array(
 				'Sun Riverpolis nằm tại Hòa Quý, Ngũ Hành Sơn, ba mặt giáp sông, cách biển chưa đến 2 km.',
 				'Quy mô khoảng 482,8 ha (theo VnExpress), thuộc hệ sinh thái hơn 1.000 ha cùng Sun NeO City.',
@@ -271,7 +271,7 @@ HTML
 		'slug'     => 'dat-nen-dam-sen-sun-riverpolis-gia-phap-ly',
 		'title'    => 'Đất nền Đầm Sen Sun Riverpolis: giá bán, pháp lý và cách chọn lô',
 		'excerpt'  => 'Đất nền Đầm Sen thuộc Sun Riverpolis: khoảng 900 lô 100 – 150 m², giá tham khảo từ khoảng 4,8 tỷ/lô, sổ đỏ lâu dài. Cập nhật 10/2026.',
-		'keyword'  => 'đất nền Đầm Sen',
+		'keyword'  => 'pháp lý đất nền Đầm Sen',
 		'project'  => 'dat-nen-dam-sen-sun-riverpolis',
 		'week'     => 3,
 		'category' => 'Dự án',
@@ -332,8 +332,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Đất nền Đầm Sen Sun Riverpolis: giá, pháp lý 2026',
-			'desc'      => 'Đất nền Đầm Sen Sun Riverpolis: khoảng 900 lô 100 – 150 m², giá tham khảo từ 4,8 tỷ, sổ đỏ lâu dài. Gọi Hoàng Hiệp 0904 567 009 nhận bảng hàng.',
+			'seo_title' => 'Pháp lý đất nền Đầm Sen 2026: sổ đỏ và giá lô',
+			'desc'      => 'Pháp lý đất nền Đầm Sen Sun Riverpolis: khoảng 900 lô 100 – 150 m², sổ đỏ lâu dài theo đơn vị phân phối, giá tham khảo từ 4,8 tỷ. Gọi Hoàng Hiệp.',
 			'points'    => array(
 				'Khoảng 900 lô 100 – 150 m², mở bán từ 9/8/2025 tại Sun Riverpolis, Hòa Quý.',
 				'Giá tham khảo khi mở bán từ khoảng 4,8 tỷ/lô, khoảng 40 – 48 triệu/m².',
@@ -417,7 +417,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Bất động sản Nam Đà Nẵng 2026: hạ tầng và giá',
-			'desc'      => 'Bất động sản Nam Đà Nẵng 2026: cụm nút giao cầu Hòa Xuân, giá căn hộ, đất nền Hòa Xuân – Hòa Quý. Gọi Hoàng Hiệp 0904 567 009 để được tư vấn.',
+			'desc'      => 'Bất động sản Nam Đà Nẵng 2026: cụm nút giao cầu Hòa Xuân, giá căn hộ, đất nền Hòa Xuân – Hòa Quý và các dự án đáng chú ý. Gọi Hoàng Hiệp tư vấn.',
 			'points'    => array(
 				'Cụm nút giao cầu Hòa Xuân hơn 1.378 tỷ đồng, thực hiện 2026 – 2029, là động lực chính phía Nam.',
 				'Căn hộ mới Sun Group tham khảo khoảng 50 – 60 triệu/m²; đất nền Nam Hòa Xuân khoảng 2,2 – 4,2 tỷ/lô nội khu.',
@@ -439,7 +439,7 @@ HTML
 		'slug'     => 'casamia-balanca-hoi-an-tong-quan-du-an',
 		'title'    => 'Casamia Balanca Hội An: tổng quan khu đô thị sinh thái 31,1 ha',
 		'excerpt'  => 'Casamia Balanca Hội An là khu đô thị sinh thái 31,1 ha của Đạt Phương tại Cẩm Thanh: vị trí, quy mô, loại biệt thự, tiện ích, tiến độ.',
-		'keyword'  => 'Casamia Balanca Hội An',
+		'keyword'  => 'tổng quan Casamia Balanca',
 		'project'  => 'casamia-balanca-hoi-an',
 		'week'     => 4,
 		'category' => 'Dự án',
@@ -519,8 +519,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Casamia Balanca Hội An: tổng quan dự án 31,1 ha',
-			'desc'      => 'Casamia Balanca Hội An: khu đô thị sinh thái 31,1 ha của Đạt Phương tại Cẩm Thanh, biệt thự ven sông, đã có sổ hồng từng lô. Gọi Hoàng Hiệp 0904 567 009.',
+			'seo_title' => 'Tổng quan Casamia Balanca Hội An: khu đô thị 31,1 ha',
+			'desc'      => 'Tổng quan Casamia Balanca Hội An: khu đô thị sinh thái 31,1 ha của Đạt Phương bên sông Cổ Cò, biệt thự ven sông, đã có sổ hồng từng lô (8/2026).',
 			'points'    => array(
 				'Khu đô thị sinh thái 31,1 ha của Đạt Phương tại Cẩm Thanh, Hội An, giữa rừng dừa Bảy Mẫu.',
 				'Biệt thự Forestside, Riverside, Park Villa và shophouse The Boutique; đã cấp sổ hồng các lô tháng 8/2026.',
@@ -540,7 +540,7 @@ HTML
 		'slug'     => 'gia-biet-thu-casamia-balanca-2026',
 		'title'    => 'Giá Casamia Balanca 2026: bảng giá biệt thự tham khảo theo dòng sản phẩm',
 		'excerpt'  => 'Giá Casamia Balanca 2026 tham khảo từ khoảng 10 – 20 tỷ/căn, Forestside từ khoảng 16 tỷ. Cách tính tổng tiền và yếu tố ảnh hưởng giá.',
-		'keyword'  => 'giá Casamia Balanca',
+		'keyword'  => 'giá biệt thự Casamia Balanca',
 		'project'  => 'casamia-balanca-hoi-an',
 		'week'     => 4,
 		'category' => 'Dự án',
@@ -601,8 +601,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá Casamia Balanca 2026: bảng giá biệt thự tham khảo',
-			'desc'      => 'Giá Casamia Balanca 2026 tham khảo khoảng 10 – 20 tỷ/căn, Forestside từ 16 tỷ. Cách tính tổng chi phí. Gọi Hoàng Hiệp 0904 567 009 nhận bảng giá.',
+			'seo_title' => 'Giá biệt thự Casamia Balanca 2026 theo dòng sản phẩm',
+			'desc'      => 'Giá biệt thự Casamia Balanca 2026 tham khảo khoảng 10 – 20 tỷ/căn, Forestside từ khoảng 16 tỷ, cách tính tổng chi phí. Gọi Hoàng Hiệp nhận giá.',
 			'points'    => array(
 				'Giá tham khảo phổ biến khoảng 10 – 20 tỷ/căn; một số nguồn ghi từ khoảng 8,8 tỷ.',
 				'Forestside Villa đất khoảng 250 – 426 m², giá từ khoảng 16 tỷ (theo phân phối).',
@@ -621,7 +621,7 @@ HTML
 		'slug'     => 'chinh-sach-ban-hang-casamia-balanca',
 		'title'    => 'Chính sách Casamia Balanca: thanh toán, chiết khấu, hỗ trợ vay 2026',
 		'excerpt'  => 'Chính sách Casamia Balanca: đặt cọc, tiến độ thanh toán, chiết khấu, hỗ trợ vay đến 70% theo thông tin phân phối và lưu ý khi so sánh.',
-		'keyword'  => 'chính sách Casamia Balanca',
+		'keyword'  => 'chính sách bán hàng Casamia Balanca',
 		'project'  => 'casamia-balanca-hoi-an',
 		'week'     => 4,
 		'category' => 'Dự án',
@@ -689,8 +689,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Chính sách Casamia Balanca 2026: thanh toán, hỗ trợ vay',
-			'desc'      => 'Chính sách Casamia Balanca: cọc 100 triệu, ký HĐ 30%, chiết khấu khi không vay, hỗ trợ vay 70%. Gọi Hoàng Hiệp 0904 567 009 nhận bản mới nhất.',
+			'seo_title' => 'Chính sách bán hàng Casamia Balanca 2026',
+			'desc'      => 'Chính sách bán hàng Casamia Balanca 2026: cọc 100 triệu, ký hợp đồng 30%, chiết khấu khi không vay, hỗ trợ vay 70%. Gọi Hoàng Hiệp nhận bản mới nhất.',
 			'points'    => array(
 				'Theo phân phối: cọc khoảng 100 triệu/căn, ký HĐMB 30%, 40% theo tiến độ.',
 				'Khách không vay được chiết khấu khoảng 9%; khách vay được hỗ trợ đến 70%, ân hạn đến 24 tháng.',
@@ -709,7 +709,7 @@ HTML
 		'slug'     => 'cho-thue-biet-thu-casamia-balanca-dong-tien',
 		'title'    => 'Cho thuê Casamia Balanca: cách ước tính dòng tiền biệt thự Hội An',
 		'excerpt'  => 'Cho thuê Casamia Balanca có sinh lời không? Hướng dẫn ước tính dòng tiền biệt thự theo giá thuê villa Cẩm Thanh, công suất và chi phí.',
-		'keyword'  => 'cho thuê Casamia Balanca',
+		'keyword'  => 'cho thuê biệt thự Casamia Balanca',
 		'project'  => 'casamia-balanca-hoi-an',
 		'week'     => 4,
 		'category' => 'Kinh nghiệm mua bán',
@@ -773,8 +773,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Cho thuê Casamia Balanca: cách ước tính dòng tiền',
-			'desc'      => 'Cho thuê Casamia Balanca: giá thuê villa Cẩm Thanh, công thức ước tính dòng tiền, lưu ý gói cam kết. Gọi Hoàng Hiệp 0904 567 009 nhận bảng tính.',
+			'seo_title' => 'Cho thuê biệt thự Casamia Balanca: dòng tiền 2026',
+			'desc'      => 'Cho thuê biệt thự Casamia Balanca: giá thuê villa khu Cẩm Thanh, công thức ước tính dòng tiền, lưu ý gói cam kết thuê. Gọi Hoàng Hiệp 0904 567 009.',
 			'points'    => array(
 				'Villa nguyên căn Cẩm Thanh cho thuê phổ biến khoảng 1,5 – 4 triệu/đêm; villa nhiều phòng có hồ bơi cao hơn.',
 				'Chưa có số liệu doanh thu thực tế công khai của Casamia Balanca; cần tự ước tính theo công thức.',
@@ -858,8 +858,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Pháp lý Casamia Balanca: sổ hồng và tiến độ cấp giấy',
-			'desc'      => 'Pháp lý Casamia Balanca: đã cấp sổ hồng các lô tháng 8/2026, đất ở đô thị, thời hạn trên sổ, checklist hồ sơ. Gọi Hoàng Hiệp 0904 567 009.',
+			'seo_title' => 'Pháp lý Casamia Balanca: sổ hồng cấp tháng 8/2026',
+			'desc'      => 'Pháp lý Casamia Balanca: đã cấp sổ hồng các lô tháng 8/2026, đất ở tại đô thị, thời hạn ghi trên sổ, checklist hồ sơ khi mua. Gọi Hoàng Hiệp 0904 567 009.',
 			'points'    => array(
 				'Tháng 8/2026 đã cấp giấy chứng nhận (sổ hồng) cho các lô tại Khu đô thị Cồn Tiến, đứng tên chủ đầu tư.',
 				'Loại đất: đất ở tại đô thị; sổ chủ đầu tư ghi thời hạn đến 18/06/2069 – thời hạn khi sang tên theo quy định hiện hành.',
@@ -872,7 +872,7 @@ HTML
 			),
 		),
 		'old_meta' => array(
-			'rank_math_description' => 'Pháp lý Casamia Balanca: sở hữu lâu dài, phê duyệt giá đất, kế hoạch cấp sổ 2026, checklist hồ sơ. Gọi Hoàng Hiệp 0904 567 009 để kiểm tra.',
+			'rank_math_description' => array( 'Pháp lý Casamia Balanca: sở hữu lâu dài, phê duyệt giá đất, kế hoạch cấp sổ 2026, checklist hồ sơ. Gọi Hoàng Hiệp 0904 567 009 để kiểm tra.' ),
 			'hh_post_faq'           => "Casamia Balanca có sổ hồng chưa? | Đạt Phương cho biết đang hoàn thiện thủ tục cấp giấy chứng nhận cho các lô tại Khu đô thị Cồn Tiến, mục tiêu trong năm 2026. Cần kiểm tra tình trạng từng căn khi mua.\nCasamia Balanca sở hữu bao lâu? | Sở hữu lâu dài với người Việt Nam; người nước ngoài theo quy định pháp luật.\nMua Casamia Balanca cần kiểm tra giấy tờ gì? | Quyết định giao đất, quy hoạch 1/500, giấy phép xây dựng, thông báo đủ điều kiện bán, bảo lãnh ngân hàng và điều khoản cấp sổ trong hợp đồng.",
 		),
 		'sources'  => array( 'https://tapchicongthuong.vn/tap-doan-dat-phuong--dpg-trien-vong-tai-dinh-gia-tu-viec-mo-ban-du-an-casamia-balanca-141395.htm', 'https://nguoiquansat.vn/dat-phuong-dpg-du-an-1-400-ty-duoc-thao-go-phap-ly-303803.html', 'https://www.firhouse.vn/du-an/du-an-casamia-balanca-hoi-an.html' ),

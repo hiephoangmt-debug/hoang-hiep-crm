@@ -225,8 +225,8 @@ HTML
 </ul>
 <h2>Hạ tầng sắp tới</h2>
 <ul>
-<li><a href="/mo-rong-duong-vo-nguyen-giap-truong-sa-lac-long-quan-2633-ty/">Mở rộng đường Võ Nguyên Giáp – Trường Sa</a>, vốn dự kiến 2.633 tỷ đồng.</li>
-<li><a href="/duong-sat-do-thi-san-bay-my-khe-hoi-an-bat-dong-san-huong-loi/">Đường sắt đô thị sân bay – Mỹ Khê – Hội An</a>: theo tài liệu chủ đầu tư, dự án cách <strong>ga LRT 09 khoảng 500 m</strong>.</li>
+<li><a href="/mo-rong-duong-truong-sa-vo-nguyen-giap-2633-ty/">Mở rộng đường Võ Nguyên Giáp – Trường Sa</a>, vốn dự kiến 2.633 tỷ đồng.</li>
+<li><a href="/duong-sat-do-thi-da-nang-san-bay-my-khe-hoi-an/">Đường sắt đô thị sân bay – Mỹ Khê – Hội An</a>: theo tài liệu chủ đầu tư, dự án cách <strong>ga LRT 09 khoảng 500 m</strong>.</li>
 <li><a href="/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do/">Cao tốc nội thị Đà Nẵng – Chu Lai</a> đi theo đường Lê Văn Hiến, song song đường Trường Sa.</li>
 </ul>
 <p>Xem các dự án khác cùng khu: <a href="/khu-vuc/ngu-hanh-son/">dự án Ngũ Hành Sơn</a>.</p>
@@ -514,7 +514,8 @@ HTML
 
 	/* ---------------- 29/10 – Phân biệt Khu đô thị Saphia ---------------- */
 	$posts[] = array(
-		'slug'     => 'sun-saphia-residence-va-khu-do-thi-saphia-khac-nhau',
+		'slug'     => 'sun-saphia-residence-va-khu-do-thi-saphia',
+		'old_slug' => array( 'sun-saphia-residence-va-khu-do-thi-saphia-khac-nhau' ),
 		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Sun Saphia Residence và Khu đô thị Saphia Ngũ Hành Sơn khác nhau thế nào? Tránh nhầm khi tìm mua',
 		'excerpt'  => 'Tìm "Saphia Đà Nẵng" ra hai dự án khác nhau: Sun Saphia Residence (căn hộ 30 tầng của Sun Group trên đường Trường Sa) và Khu đô thị Saphia (đất nền, khu Khuê Mỹ cũ). Bảng phân biệt nhanh.',

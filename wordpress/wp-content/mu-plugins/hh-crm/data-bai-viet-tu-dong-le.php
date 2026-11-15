@@ -99,24 +99,27 @@ HTML
 
 	/* ---------------- 22/10 – Mặt cắt, quỹ đất cao tốc nội thị ---------------- */
 	$posts[] = array(
-		'slug'     => 'mat-cat-cao-toc-noi-thi-da-nang-chu-lai-quy-dat-tod',
+		'slug'     => 'mat-cat-cao-toc-noi-thi-da-nang-quy-dat-tod',
+		'old_slug' => array( 'mat-cat-cao-toc-noi-thi-da-nang-chu-lai-quy-dat-tod' ),
 		'title'    => 'Mặt cắt cao tốc nội thị Đà Nẵng – Chu Lai: đoạn 138 m, đoạn khoảng 170 m và quỹ đất dọc sông Trường Giang',
 		'excerpt'  => 'Hai mặt cắt điển hình cao tốc nội thị Đà Nẵng – Chu Lai: tuyến mới phía Tây sông Trường Giang giải tỏa 138 m, đoạn bám ĐT 619 mở rộng hai bên. Quỹ đất, khu TOD và lưu ý khi mua đất dọc tuyến.',
-		'keyword'  => 'mặt cắt cao tốc nội thị Đà Nẵng',
+		'keyword'  => 'mặt cắt cao tốc nội thị',
 		'keywords_extra' => array( 'cao tốc nội thị Đà Nẵng Chu Lai', 'quỹ đất cao tốc nội thị', 'TOD Đà Nẵng', 'đất dọc sông Trường Giang' ),
 		'project'  => 'vinh-an-hoa-city',
 		'schedule' => '2026-10-22 11:00',
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Hạ tầng Đà Nẵng', 'Cao tốc nội thị' ),
 		'image'    => 'plugin:img/tin-tuc/cao-toc-noi-thi-mat-cat-quy-dat.jpg',
-		'image_alt' => 'Sơ đồ hai mặt cắt điển hình cao tốc nội thị Đà Nẵng – Chu Lai: 138 m và đoạn bám ĐT 619',
+		'image_alt' => 'Sơ đồ hai mặt cắt cao tốc nội thị Đà Nẵng – Chu Lai: 138 m và đoạn bám ĐT 619',
 		'content'  => <<<HTML
-<p>Sau hướng tuyến, câu hỏi tiếp theo về <strong>cao tốc nội thị Đà Nẵng – Chu Lai</strong> là đường rộng bao nhiêu và đất hai bên sẽ ra sao. Một bản đồ mô phỏng vừa được chia sẻ trên mạng xã hội cho thấy hai mặt cắt điển hình và các khu đất được khoanh dọc tuyến. Hoàng Hiệp đối chiếu với thông tin chính thức đã công bố để tách phần chắc chắn và phần còn là mô phỏng.</p>
+<p><strong>Mặt cắt cao tốc nội thị</strong> Đà Nẵng – Chu Lai là câu hỏi tiếp theo sau hướng tuyến: đường rộng bao nhiêu và đất hai bên sẽ ra sao. Một bản đồ mô phỏng vừa được chia sẻ trên mạng xã hội cho thấy hai mặt cắt điển hình và các khu đất được khoanh dọc tuyến. Hoàng Hiệp đối chiếu với thông tin chính thức đã công bố để tách phần chắc chắn và phần còn là mô phỏng.</p>
 <!--hh-featured-->
-<h2>Mặt cắt 1: tuyến mở mới phía Tây sông Trường Giang – 138 m</h2>
+<h2>Mặt cắt cao tốc nội thị đoạn mở mới phía Tây sông Trường Giang – 138 m</h2>
 <p>Đoạn 1 (khoảng 46,9 km) đi theo đường Lê Văn Hiến đến nút Phạm Như Xương, rồi mở tuyến mới về phía Tây sông Trường Giang đến nút Bình Sa. Theo Sở Xây dựng Đà Nẵng, phương án giai đoạn 1 <strong>giải tỏa đủ 138 m mặt cắt ngang</strong>, làm trước mặt đường mỗi bên 3 làn, vốn gần 15.000 tỷ đồng. Trên bản đồ mô phỏng, khoảng cách giữa hai mép tuyến qua cánh đồng đo được 138,1 m – khớp với con số này.</p>
-<h2>Mặt cắt 2: bám ĐT 619 – mở rộng hai bên</h2>
-<p>Đoạn 2 (khoảng 41,8 km) bám ĐT 619 (đường ven biển 129) hiện trạng. Phương án đã công bố: <strong>mở rộng nền đường hai bên để dự trữ quỹ đất</strong> cho nâng cấp sau này, bố trí đường gom và dải cây xanh cách ly. Trên bản đồ mô phỏng, phạm vi đoạn qua vùng cát ven biển đo khoảng 170 m. Con số này là đo trên hình mô phỏng, chưa phải mặt cắt thiết kế chính thức.</p>
+<p>Một mặt cắt cao tốc nội thị rộng 138 m không có nghĩa toàn bộ là mặt đường. Theo cách bố trí phổ biến của đường đô thị tốc độ cao, bề rộng này thường gồm phần xe chạy chính ở giữa, dải phân cách, đường gom hai bên phục vụ dân cư, vỉa hè, dải cây xanh và hành lang kỹ thuật. Giai đoạn đầu chỉ làm mỗi bên 3 làn; phần còn lại giữ làm quỹ đất để mở rộng khi lưu lượng tăng.</p>
+<h2>Mặt cắt cao tốc nội thị đoạn bám ĐT 619 – mở rộng hai bên</h2>
+<p>Đoạn 2 (khoảng 41,8 km) bám ĐT 619 (đường ven biển 129) hiện trạng. Phương án đã công bố: <strong>mở rộng nền đường hai bên để dự trữ quỹ đất</strong> cho nâng cấp sau này, bố trí đường gom và dải cây xanh cách ly. Trên bản đồ mô phỏng, phạm vi đoạn qua vùng cát ven biển đo khoảng 170 m. Con số này là đo trên hình mô phỏng, chưa phải mặt cắt cao tốc nội thị theo thiết kế chính thức.</p>
 <table>
 <thead><tr><th></th><th>Đoạn mở mới</th><th>Đoạn bám ĐT 619</th></tr></thead>
 <tbody>
@@ -125,12 +128,15 @@ HTML
 <tr><td>Địa hình</td><td>Cánh đồng, khu dân cư phía Tây sông Trường Giang</td><td>Vùng cát ven biển, đường hiện hữu</td></tr>
 </tbody>
 </table>
+<!--hh-img:img/sun-saphia/sun-saphia-ban-do-ket-noi.jpg|Bản đồ kết nối khu biển Sơn Thủy về phía Nam – nơi bắt đầu mặt cắt cao tốc nội thị theo đường Lê Văn Hiến (tài liệu chủ đầu tư)-->
 <h2>Quỹ đất và khu TOD dọc tuyến</h2>
 <ul>
 <li>Phương án hoàn chỉnh: hai bên vệt tuyến <strong>thu hồi thêm 100 m</strong> chiều ngang, đền bù sạch – tổng mức đầu tư hơn <strong>30.800 tỷ đồng</strong>.</li>
 <li>Lãnh đạo thành phố kỳ vọng giá trị khai thác quỹ đất dọc tuyến có thể vượt tổng mức đầu tư; các khu TOD (đô thị quanh nút giao thông) sẽ tính theo địa hình và dân cư hiện trạng.</li>
 <li>Bản đồ mô phỏng khoanh nhiều khu đất dọc sông Trường Giang, quanh Thăng An, Bản Thạch đến gần Tam Hải – ranh giới cụ thể chưa có văn bản công bố.</li>
 </ul>
+<h2>Mặt cắt cao tốc nội thị ảnh hưởng thế nào tới giá đất?</h2>
+<p>Với người mua, mặt cắt cao tốc nội thị quyết định ba điều: phần đất nào bị thu hồi, phần đất nào trở thành mặt tiền đường gom và phần đất nào nằm sau dải cây xanh cách ly. Lô đất mặt tiền đường gom gần nút giao thường có giá trị kinh doanh cao nhất; lô nằm sát tuyến chính nhưng không có lối ra đường gom thì chỉ hưởng lợi gián tiếp. Vì thế, trước khi so giá, anh chị nên hỏi rõ vị trí lô so với ranh mặt cắt chứ không chỉ khoảng cách tới tuyến.</p>
 <h2>Người mua đất dọc tuyến cần lưu ý</h2>
 <ol>
 <li><strong>Đất trong phạm vi 138 m</strong> (và có thể thêm 100 m mỗi bên) có khả năng bị thu hồi theo giá bồi thường, không phải giá thị trường.</li>
@@ -140,21 +146,22 @@ HTML
 </ol>
 <h2>Dự án hưởng lợi ở hai đầu tuyến</h2>
 <p>Đầu phía Nam, <a href="/du-an/vinh-an-hoa-city/">Vịnh An Hòa City</a> ven vịnh An Hòa – sông Trường Giang, cạnh sân bay Chu Lai, và <a href="/du-an/nam-hoi-an-city/">Nam Hội An City</a> được rút ngắn đường về trung tâm. Đầu phía Bắc, tuyến bắt đầu từ Lê Văn Hiến – song song đường biển Trường Sa, gần dự án <a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a> tại khu biển Sơn Thủy.</p>
-<p>Đọc thêm: <a href="/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do/">hướng tuyến, vốn và tiến độ cao tốc nội thị Đà Nẵng – Chu Lai</a>.</p>
+<p>Đọc thêm: <a href="/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen/">hướng tuyến, vốn và tiến độ cao tốc nội thị Đà Nẵng – Chu Lai</a>. Số liệu mặt cắt cao tốc nội thị 138 m theo phương án của Sở Xây dựng được <a href="https://tienphong.vn/tuyen-cao-toc-noi-thi-4-6-lan-xe-ket-noi-trung-tam-da-nang-den-chu-lai-chay-qua-nhung-khu-vuc-nao-post1827072.tpo">Tiền Phong</a> và <a href="https://tuoitre.vn/cao-toc-noi-thi-tu-trung-tam-da-nang-den-chu-lai-se-di-qua-17-xa-phuong-20260506190504808.htm">Tuổi Trẻ</a> đưa tin.</p>
 <p>Cần kiểm tra một lô đất có nằm trong phạm vi tuyến hay không, hoặc tìm sản phẩm dọc trục Đà Nẵng – Chu Lai, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Mặt cắt cao tốc nội thị Đà Nẵng – Chu Lai: 138 m, quỹ đất',
-			'desc'      => 'Mặt cắt cao tốc nội thị Đà Nẵng – Chu Lai: tuyến mới 138 m phía Tây sông Trường Giang, đoạn ĐT 619 mở rộng hai bên. Quỹ đất, TOD, lưu ý mua đất dọc tuyến.',
+			'seo_title' => 'Mặt cắt cao tốc nội thị Đà Nẵng 138 m và quỹ đất dọc tuyến',
+			'desc'      => 'Mặt cắt cao tốc nội thị Đà Nẵng – Chu Lai: tuyến mới 138 m phía Tây sông Trường Giang, đoạn ĐT 619 mở rộng hai bên. Quỹ đất, TOD, lưu ý mua đất.',
 			'points'    => array(
-				'Đoạn mở mới phía Tây sông Trường Giang: giải tỏa 138 m (Sở Xây dựng Đà Nẵng)',
+				'Mặt cắt cao tốc nội thị đoạn mở mới phía Tây sông Trường Giang: giải tỏa 138 m (Sở Xây dựng Đà Nẵng)',
 				'Đoạn bám ĐT 619: mở rộng hai bên dự trữ đất; khoảng 170 m trên bản đồ mô phỏng',
 				'Thu hồi thêm 100 m mỗi bên để khai thác quỹ đất – tổng mức hơn 30.800 tỷ',
 			),
 			'faq'       => array(
-				array( 'Cao tốc nội thị Đà Nẵng – Chu Lai rộng bao nhiêu mét?', 'Đoạn mở mới phía Tây sông Trường Giang theo phương án giải tỏa 138 m; đoạn bám ĐT 619 mở rộng hai bên, bản đồ mô phỏng đo khoảng 170 m – chưa phải thiết kế chính thức.' ),
+				array( 'Mặt cắt cao tốc nội thị Đà Nẵng – Chu Lai rộng bao nhiêu mét?', 'Đoạn mở mới phía Tây sông Trường Giang theo phương án giải tỏa 138 m; đoạn bám ĐT 619 mở rộng hai bên, bản đồ mô phỏng đo khoảng 170 m – chưa phải thiết kế chính thức.' ),
 				array( 'Đất hai bên cao tốc nội thị có bị thu hồi không?', 'Phương án hoàn chỉnh thu hồi thêm 100 m mỗi bên để khai thác quỹ đất; ranh giới cụ thể chờ quy hoạch và quyết định thu hồi chính thức.' ),
+				array( 'Mặt cắt cao tốc nội thị đoạn Lê Văn Hiến rộng bao nhiêu?', 'Theo phương án đang được chia sẻ, đoạn Hồ Xuân Hương – Phạm Như Xương giữ mặt cắt hiện trạng khoảng 48 m; đây chưa phải số liệu từ văn bản phê duyệt.' ),
 			),
 		),
 		'sources'  => array(
@@ -170,18 +177,19 @@ HTML
 		'slug'     => 'cai-tao-canh-quan-hai-bo-song-han-29-ha',
 		'title'    => 'Cải tạo cảnh quan hai bờ sông Hàn khoảng 29,22 ha: 5 phường, các khu vực dự kiến và căn hộ ven sông hưởng lợi',
 		'excerpt'  => 'Dự án đầu tư, cải tạo cảnh quan hai bờ sông Hàn dự kiến khoảng 29,22 ha qua 5 phường Sơn Trà, An Hải, Hải Châu, Hòa Cường, Ngũ Hành Sơn: bến thủy, tuyến đi bộ, chiếu sáng. Các khu vực và tác động tới căn hộ ven sông.',
-		'keyword'  => 'cải tạo cảnh quan sông Hàn',
+		'keyword'  => 'cảnh quan hai bờ sông Hàn',
 		'keywords_extra' => array( 'cảnh quan hai bờ sông Hàn', 'căn hộ ven sông Hàn', 'bờ Đông sông Hàn', 'Capital Square Đà Nẵng' ),
 		'project'  => 'capital-square-da-nang',
 		'schedule' => '2026-10-22 10:30',
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Hạ tầng Đà Nẵng', 'Sông Hàn', 'Căn hộ ven sông Hàn' ),
 		'image'    => 'plugin:img/tin-tuc/cai-tao-canh-quan-hai-bo-song-han.jpg',
 		'image_alt' => 'Sơ đồ minh hoạ các khu vực dự kiến cải tạo cảnh quan hai bờ sông Hàn, từ cầu Thuận Phước đến cầu Tiên Sơn',
 		'content'  => <<<HTML
-<p>Đà Nẵng đang chuẩn bị dự án <strong>đầu tư, cải tạo cảnh quan hai bên bờ sông Hàn</strong>. Theo thông tin đang được chia sẻ, phạm vi dự kiến khoảng <strong>292.194 m² (khoảng 29,22 ha)</strong>, trải trên 5 phường Sơn Trà, An Hải, Hải Châu, Hòa Cường và Ngũ Hành Sơn – từ khu cầu Thuận Phước đến cầu Tiên Sơn. Hoàng Hiệp tổng hợp các khu vực dự kiến, mục tiêu dự án và tác động tới nhà ở ven sông.</p>
+<p>Dự án cải tạo <strong>cảnh quan hai bờ sông Hàn</strong> đang được Đà Nẵng chuẩn bị đầu tư. Theo thông tin đang được chia sẻ, phạm vi dự kiến khoảng <strong>292.194 m² (khoảng 29,22 ha)</strong>, trải trên 5 phường Sơn Trà, An Hải, Hải Châu, Hòa Cường và Ngũ Hành Sơn – từ khu cầu Thuận Phước đến cầu Tiên Sơn. Hoàng Hiệp tổng hợp các khu vực dự kiến, mục tiêu dự án và tác động tới nhà ở ven sông.</p>
 <!--hh-featured-->
-<h2>Dự án làm gì?</h2>
+<h2>Dự án cảnh quan hai bờ sông Hàn làm gì?</h2>
 <p>Mục tiêu được nêu: cải tạo, chỉnh trang và nâng cao chất lượng cảnh quan đô thị; liên kết với <strong>hệ thống bến thủy nội địa</strong>, <strong>tuyến đi bộ</strong> và <strong>chiếu sáng cảnh quan</strong> các công trình, cầu qua sông; tăng khả năng tiếp cận mặt nước, kết nối không gian đô thị và phát huy giá trị cảnh quan sông Hàn.</p>
 <h2>Các khu vực dự kiến</h2>
 <table>
@@ -197,10 +205,11 @@ HTML
 <tr><td>5.2, 5.3</td><td>Cầu Rồng – cầu Trần Thị Lý</td></tr>
 </tbody>
 </table>
+<!--hh-img:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg|Cảnh quan hai bờ sông Hàn quanh cầu Rồng nhìn từ flycam, tháng 11/2026 (ảnh thực tế)-->
 <p>Ranh giới và tổng mức đầu tư từng khu vực chưa được công bố trên báo chí đến ngày đăng bài – cần chờ văn bản phê duyệt chính thức.</p>
-<h2>Nằm trong chuỗi dự án ven sông Hàn</h2>
+<h2>Cảnh quan hai bờ sông Hàn trong chuỗi dự án ven sông</h2>
 <ul>
-<li><strong>Quy hoạch phân khu ven sông Hàn và bờ Đông</strong> (Quyết định 2451/QĐ-UBND, hơn 6.600 ha): bờ Đông định hướng trung tâm tài chính – thương mại mới, bờ Tây bảo tồn di sản, kết nối cộng đồng (Thanh Niên, 9/2026).</li>
+<li><strong>Quy hoạch phân khu ven sông Hàn và bờ Đông</strong> (Quyết định 2451/QĐ-UBND, hơn 6.600 ha): bờ Đông định hướng trung tâm tài chính – thương mại mới, bờ Tây bảo tồn di sản, kết nối cộng đồng (<a href="https://thanhnien.vn/dien-mao-hai-bo-song-han-5-nam-toi-185260917170837573.htm">Thanh Niên</a>, 9/2026).</li>
 <li><strong>Cải tạo cảnh quan bờ Đông dọc đường Trần Hưng Đạo</strong>: vốn hơn 425 tỷ đồng, thực hiện 2025 – 2028.</li>
 <li><strong>Chiếu sáng nghệ thuật "Dòng sông ánh sáng"</strong>: giai đoạn 1 khoảng 149 tỷ đồng, 2025 – 2027 – đèn trang trí các cầu, chiếu sáng mặt nước.</li>
 <li>Điều chỉnh dự án bến du thuyền theo hướng tăng cây xanh, mở lối đi công cộng (Tuổi Trẻ, 3/2026); hầm vượt sông Hàn nối Sơn Trà – Hải Châu, nâng cấp cầu đi bộ Nguyễn Văn Trỗi đang được thúc đẩy.</li>
@@ -208,22 +217,26 @@ HTML
 <h2>Căn hộ ven sông nào hưởng lợi?</h2>
 <p><strong>Bờ Đông, đường Trần Hưng Đạo</strong> (khu vực 5.1 – 5.3): tổ hợp <a href="/du-an/capital-square-da-nang/">Capital Square Đà Nẵng</a> với các tòa mặt đường Trần Hưng Đạo, <a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a> và <a href="/du-an/sun-cosmo-residence/">Sun Cosmo Residence</a> phía Nam. Phía Bắc bờ Đông (khu vực 6) có <a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a>, <a href="/du-an/peninsula-da-nang/">Peninsula Đà Nẵng</a>.</p>
 <p><strong>Bờ Tây</strong> (khu vực 3.2 – 4.3): <a href="/du-an/the-filmore-da-nang/">The Filmore</a>, <a href="/du-an/danang-landmark/">Danang Landmark</a> trên đường Bạch Đằng, <a href="/du-an/m-riverside-da-nang/">M Riverside</a> gần cầu Trần Thị Lý.</p>
-<p>Lợi ích trực tiếp: lối đi bộ và tiếp cận mặt nước tốt hơn, bến thủy phục vụ du lịch đường sông, cảnh quan về đêm đẹp hơn – yếu tố quan trọng với căn hộ cho thuê khách du lịch. Trong thời gian thi công, các đoạn đường ven sông có thể bị rào chắn tạm thời.</p>
+<p>Lợi ích trực tiếp khi cảnh quan hai bờ sông Hàn được chỉnh trang: lối đi bộ và tiếp cận mặt nước tốt hơn, bến thủy phục vụ du lịch đường sông, cảnh quan về đêm đẹp hơn – yếu tố quan trọng với căn hộ cho thuê khách du lịch. Trong thời gian thi công, các đoạn đường ven sông có thể bị rào chắn tạm thời.</p>
+<h2>Nhận định của Hoàng Hiệp về cảnh quan hai bờ sông Hàn</h2>
+<p>Sông Hàn là "mặt tiền" của Đà Nẵng: pháo hoa quốc tế, cầu Rồng phun lửa, du thuyền đêm đều diễn ra ở đây. Vì vậy mỗi lần cảnh quan hai bờ sông Hàn được nâng cấp, nhóm căn hộ có view sông thường được khách thuê du lịch và người mua ở thật chú ý hơn. Tuy nhiên, Hoàng Hiệp không xem đây là lý do để mua đuổi: dự án mới ở bước chuẩn bị, chưa có tổng mức đầu tư và thời gian thi công từng khu vực.</p>
+<p>Khi chọn căn hộ ven sông, anh chị nên ưu tiên ba yếu tố: tầm nhìn trực diện mặt nước không bị che bởi công trình tương lai, khoảng cách đi bộ ra tuyến ven sông và bến thủy, và tiến độ pháp lý của dự án. Những yếu tố này bền hơn mọi tin "sắp cải tạo".</p>
 <p>Xem thêm: <a href="/du-an/capital-square-hudson-place-s4/">Hudson Place S4 Capital Square</a> – tòa căn hộ cạnh cầu Sông Hàn.</p>
 <p>Cần bảng giá căn hộ ven sông Hàn hai bờ hoặc so sánh dự án, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Cải tạo cảnh quan hai bờ sông Hàn 29,22 ha: các khu vực',
+			'seo_title' => 'Cảnh quan hai bờ sông Hàn: cải tạo 29,22 ha qua 5 phường',
 			'desc'      => 'Dự án cải tạo cảnh quan hai bờ sông Hàn khoảng 29,22 ha qua 5 phường: bến thủy, tuyến đi bộ, chiếu sáng. Các khu vực dự kiến, căn hộ ven sông hưởng lợi.',
 			'points'    => array(
-				'Phạm vi dự kiến khoảng 29,22 ha, 5 phường hai bờ sông Hàn',
+				'Cải tạo cảnh quan hai bờ sông Hàn: phạm vi dự kiến khoảng 29,22 ha, 5 phường',
 				'Bến thủy nội địa, tuyến đi bộ, chiếu sáng cảnh quan công trình và cầu',
 				'Bờ Đông Trần Hưng Đạo đã có dự án cảnh quan hơn 425 tỷ (2025 – 2028)',
 			),
 			'faq'       => array(
 				array( 'Dự án cải tạo cảnh quan hai bờ sông Hàn rộng bao nhiêu?', 'Theo thông tin đang được chia sẻ, khoảng 292.194 m² (29,22 ha) thuộc các phường Sơn Trà, An Hải, Hải Châu, Hòa Cường, Ngũ Hành Sơn; chờ văn bản phê duyệt chính thức.' ),
-				array( 'Cải tạo cảnh quan sông Hàn gồm những gì?', 'Chỉnh trang cảnh quan, kết nối bến thủy nội địa, tuyến đi bộ, chiếu sáng cảnh quan công trình và cầu qua sông, tăng khả năng tiếp cận mặt nước.' ),
+				array( 'Cải tạo cảnh quan hai bờ sông Hàn gồm những gì?', 'Chỉnh trang cảnh quan, kết nối bến thủy nội địa, tuyến đi bộ, chiếu sáng cảnh quan công trình và cầu qua sông, tăng khả năng tiếp cận mặt nước.' ),
+				array( 'Căn hộ nào hưởng lợi từ cảnh quan hai bờ sông Hàn?', 'Các dự án mặt sông như Capital Square, Sun Ponte, Sun Cosmo, Sun Symphony ở bờ Đông và The Filmore, Danang Landmark, M Riverside ở bờ Tây – chủ yếu nhờ lối đi bộ, bến thủy và cảnh quan về đêm.' ),
 			),
 		),
 		'sources'  => array(
@@ -236,21 +249,23 @@ HTML
 
 	/* ---------------- 22/10 – Trường tiểu học Hòa Xuân ---------------- */
 	$posts[] = array(
-		'slug'     => 'truong-tieu-hoc-cong-lap-khu-do-thi-sinh-thai-hoa-xuan',
+		'slug'     => 'truong-tieu-hoc-cong-lap-hoa-xuan',
+		'old_slug' => array( 'truong-tieu-hoc-cong-lap-khu-do-thi-sinh-thai-hoa-xuan' ),
 		'title'    => 'Trường tiểu học công lập trong Khu đô thị sinh thái Hòa Xuân: khu đất 13.655 m², 3 mặt tiền Lê Sỹ – Cồn Dầu 18 – Đỗ Quỳ',
 		'excerpt'  => 'Đà Nẵng triển khai đầu tư Trường Tiểu học Hòa Xuân trong Khu đô thị sinh thái Hòa Xuân: khu đất 13.655 m², ba mặt tiền Lê Sỹ, Cồn Dầu 18, Đỗ Quỳ. Ý nghĩa với cư dân và đất nền khu vực.',
 		'keyword'  => 'trường tiểu học Hòa Xuân',
 		'keywords_extra' => array( 'khu đô thị sinh thái Hòa Xuân', 'đất nền Hòa Xuân', 'trường học Cẩm Lệ', 'Cồn Dầu Hòa Xuân' ),
 		'project'  => 'sun-neo-city',
 		'schedule' => '2026-10-22 17:00',
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Hạ tầng Đà Nẵng', 'Hòa Xuân', 'Trường học' ),
 		'image'    => 'plugin:img/tin-tuc/truong-tieu-hoc-hoa-xuan.jpg',
 		'image_alt' => 'Sơ đồ mặt bằng chức năng Trường Tiểu học Hòa Xuân: khối lớp học, hành chính, bể bơi, sân chào cờ, cổng phía đường Lê Sỹ',
 		'content'  => <<<HTML
-<p>Khu đô thị sinh thái Hòa Xuân sắp có thêm một <strong>trường tiểu học công lập</strong>. Theo thông tin đang được chia sẻ, dự án <strong>Trường Tiểu học Hòa Xuân</strong> được phê duyệt chủ trương đầu tư tháng 9/2026, trên khu đất <strong>13.655 m²</strong> có ba mặt tiếp giáp các đường <strong>Lê Sỹ, Cồn Dầu 18 và Đỗ Quỳ</strong>. Phương án kiến trúc giới thiệu các khối lớp học bao quanh sân trường, khu thể thao và mảng xanh lớn.</p>
+<p><strong>Trường tiểu học Hòa Xuân</strong> mới là trường công lập sắp được đầu tư trong Khu đô thị sinh thái Hòa Xuân. Theo thông tin đang được chia sẻ, dự án <strong>Trường Tiểu học Hòa Xuân</strong> được phê duyệt chủ trương đầu tư tháng 9/2026, trên khu đất <strong>13.655 m²</strong> có ba mặt tiếp giáp các đường <strong>Lê Sỹ, Cồn Dầu 18 và Đỗ Quỳ</strong>. Phương án kiến trúc giới thiệu các khối lớp học bao quanh sân trường, khu thể thao và mảng xanh lớn.</p>
 <!--hh-featured-->
-<h2>Thông tin dự án</h2>
+<h2>Thông tin dự án trường tiểu học Hòa Xuân</h2>
 <table>
 <tbody>
 <tr><th>Tên dự án</th><td>Trường Tiểu học Hòa Xuân (công lập)</td></tr>
@@ -273,21 +288,23 @@ HTML
 <h2>Vị trí trên bản đồ</h2>
 <p>Khu đất hiện là bãi đất trống trong lõi khu dân cư Cồn Dầu, được bao bởi các tuyến Lê Sỹ, Đỗ Quỳ và Cồn Dầu 18; xung quanh là các đường Cồn Dầu 12, 16, 17, 19 và Lê Quang Chi, phía Bắc có công viên cây xanh với lối dạo vòng tròn. Từ đây ra đường Hoàng Thế Thiện và sông Cẩm Lệ chỉ vài phút. Phía Tây Nam khu đất còn một phần đất trống chưa xây dựng.</p>
 <h2>Nằm trong đề án trường lớp 2026 – 2030</h2>
-<p>HĐND thành phố đã thông qua đề án đầu tư trường lớp mầm non và phổ thông công lập giai đoạn 2026 – 2030 với tổng kinh phí gần <strong>28.500 tỷ đồng</strong> (VOV), ưu tiên các khu đô thị mới đông dân. Cùng khu vực, thành phố đã phê duyệt chủ trương đầu tư <strong>hạ tầng Khu liên hợp thể dục thể thao Hòa Xuân</strong>, tổng mức hơn 233,7 tỷ đồng, thực hiện 2025 – 2029.</p>
+<p>HĐND thành phố đã thông qua đề án đầu tư trường lớp mầm non và phổ thông công lập giai đoạn 2026 – 2030 với tổng kinh phí gần <strong>28.500 tỷ đồng</strong> (<a href="https://vov.vn/xa-hoi/da-nang-dau-tu-gan-28500-ty-dong-xay-dung-nang-cap-truong-hoc-thiet-bi-day-hoc-post1320232.vov">VOV</a>), ưu tiên các khu đô thị mới đông dân. Cùng khu vực, thành phố đã phê duyệt chủ trương đầu tư <strong>hạ tầng Khu liên hợp thể dục thể thao Hòa Xuân</strong>, tổng mức hơn 233,7 tỷ đồng, thực hiện 2025 – 2029.</p>
+<h2>Phụ huynh nên theo dõi gì về trường tiểu học Hòa Xuân?</h2>
+<p>Trường tiểu học Hòa Xuân mới chỉ có chủ trương đầu tư, nên các mốc tiếp theo cần theo dõi là: quyết định phê duyệt dự án (tổng mức đầu tư, quy mô số lớp), lựa chọn nhà thầu, khởi công và thời điểm tuyển sinh khóa đầu. Tuyến tuyển sinh tiểu học thường theo nơi cư trú, nên gia đình định mua nhà để con học trường tiểu học Hòa Xuân nên hỏi Phòng Giáo dục hoặc UBND phường về phân tuyến khi trường đi vào hoạt động, thay vì chỉ dựa vào khoảng cách.</p>
 <h2>Ý nghĩa với cư dân và nhà đất Hòa Xuân</h2>
 <ul>
-<li><strong>Gia đình trẻ</strong>: trường công lập ngay trong khu giúp con đi học gần, giảm áp lực tuyển sinh ở các trường cũ.</li>
+<li><strong>Gia đình trẻ</strong>: trường tiểu học Hòa Xuân công lập ngay trong khu giúp con đi học gần, giảm áp lực tuyển sinh ở các trường cũ.</li>
 <li><strong>Nhà phố, đất nền quanh trường</strong> (các tuyến Lê Sỹ, Đỗ Quỳ, Cồn Dầu): thuận lợi ở thật và kinh doanh dịch vụ phục vụ phụ huynh, học sinh. Ngược lại, lô sát cổng trường có thể ồn và kẹt xe giờ đưa đón.</li>
 <li><strong>Tiện ích xã hội hoàn thiện dần</strong> là yếu tố giữ giá dài hạn cho khu đô thị mới, bên cạnh hạ tầng giao thông và cảnh quan ven sông Cẩm Lệ.</li>
 </ul>
 <h2>Dự án quanh khu vực</h2>
 <p>Xem thông tin <a href="/du-an/sun-neo-city/">Sun NeO City (Khu đô thị sinh thái Hòa Xuân)</a>, phân khu <a href="/du-an/dat-nen-con-dau-hoa-xuan/">đất nền Cồn Dầu Hòa Xuân</a> và <a href="/du-an/euro-village-2/">Euro Village 2</a> ven sông.</p>
-<p>Cần tìm lô đất, nhà phố gần trường hoặc kiểm tra quy hoạch một lô ở Hòa Xuân, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Cần tìm lô đất, nhà phố gần trường tiểu học Hòa Xuân hoặc kiểm tra quy hoạch một lô ở Hòa Xuân, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Trường tiểu học Hòa Xuân: 13.655 m², KĐT sinh thái',
-			'desc'      => 'Trường Tiểu học Hòa Xuân công lập trong Khu đô thị sinh thái Hòa Xuân: khu đất 13.655 m², 3 mặt tiền Lê Sỹ, Cồn Dầu 18, Đỗ Quỳ. Tác động tới nhà đất.',
+			'seo_title' => 'Trường tiểu học Hòa Xuân: khu đất 13.655 m², 3 mặt tiền',
+			'desc'      => 'Trường tiểu học Hòa Xuân công lập trong Khu đô thị sinh thái Hòa Xuân: khu đất 13.655 m², 3 mặt tiền Lê Sỹ, Cồn Dầu 18, Đỗ Quỳ. Tác động tới nhà đất.',
 			'points'    => array(
 				'Khu đất 13.655 m², ba mặt tiền Lê Sỹ – Cồn Dầu 18 – Đỗ Quỳ',
 				'Chủ trương đầu tư phê duyệt 9/2026 (theo thông tin đang chia sẻ)',
@@ -296,6 +313,7 @@ HTML
 			'faq'       => array(
 				array( 'Trường Tiểu học Hòa Xuân mới xây ở đâu?', 'Trong Khu đô thị sinh thái Hòa Xuân, trên khu đất 13.655 m² giáp ba đường Lê Sỹ, Cồn Dầu 18 và Đỗ Quỳ.' ),
 				array( 'Khi nào xây Trường Tiểu học Hòa Xuân?', 'Chủ trương đầu tư được phê duyệt tháng 9/2026 theo thông tin đang chia sẻ; thời gian thi công chờ quyết định đầu tư chính thức.' ),
+				array( 'Trường tiểu học Hòa Xuân mới có bể bơi không?', 'Theo phương án kiến trúc đang được chia sẻ, trường có bể bơi trong nhà thi đấu mái vòm, khối lớp học 4 tầng, sân chào cờ trung tâm và vườn thực nghiệm; thiết kế có thể điều chỉnh khi duyệt dự án.' ),
 			),
 		),
 		'sources'  => array(

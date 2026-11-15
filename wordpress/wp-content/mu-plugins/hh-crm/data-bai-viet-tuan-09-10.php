@@ -12,18 +12,18 @@ function hh_posts_tuan_09_10( $posts ) {
 		'slug'     => 'newtown-diamond-3-toa-va-newtown-legend',
 		'title'    => 'Newtown Diamond: 3 tòa căn hộ và phân khu thấp tầng Newtown Legend',
 		'excerpt'  => 'Newtown Diamond gồm 3 tòa The Ruby, The Sapphire, The Diamond (1.733 căn) và phân khu Newtown Legend 24 biệt thự, 36 shophouse trên trục biển Trường Sa.',
-		'keyword'  => 'Newtown Diamond',
+		'keyword'  => '3 tòa Newtown Diamond',
 		'project'  => 'newtown-diamond-da-nang',
 		'week'     => 9,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p><strong>Newtown Diamond</strong> là tổ hợp ven biển tại ngã tư Trường Sa – Nam Kỳ Khởi Nghĩa (Ngũ Hành Sơn, Đà Nẵng), gồm 3 tòa căn hộ 36 tầng The Ruby, The Sapphire, The Diamond với tổng 1.733 căn và phân khu thấp tầng Newtown Legend (24 biệt thự, 36 shophouse). Toàn bộ sản phẩm có sổ hồng sở hữu lâu dài. Bài viết cập nhật tháng 10/2026, giúp anh chị phân biệt từng tòa, từng dòng sản phẩm và mặt bằng giá tham khảo.</p>
+<p><strong>3 tòa Newtown Diamond</strong> – The Ruby, The Sapphire và The Diamond, mỗi tòa 36 tầng, tổng 1.733 căn – là phần căn hộ của tổ hợp ven biển tại ngã tư Trường Sa – Nam Kỳ Khởi Nghĩa (Ngũ Hành Sơn, Đà Nẵng), đi cùng phân khu thấp tầng Newtown Legend (24 biệt thự, 36 shophouse). Toàn bộ sản phẩm có sổ hồng sở hữu lâu dài. Bài viết cập nhật tháng 10/2026, giúp anh chị phân biệt từng tòa, từng dòng sản phẩm và mặt bằng giá tham khảo.</p>
 
 <h2>Tổng quan tổ hợp Newtown Diamond</h2>
 <p>Chủ đầu tư là Công ty TNHH Phát triển New Town; tổng thầu là Công ty CP CONINCO 3C, trong đó Hòa Bình thi công phần thân tòa The Ruby. Khu đất khoảng 1,47 ha, 3 tòa tháp 36 tầng nổi dùng chung 3 tầng hầm, diện tích căn hộ khoảng 34,74 – 131,96 m².</p>
 <p>Vị trí nằm trên trục biển Trường Sa, đối diện Sheraton Grand Đà Nẵng Resort và cạnh sân golf BRG Đà Nẵng. Từ dự án đi bộ ra biển khoảng 1 phút, đến danh thắng Ngũ Hành Sơn khoảng 5 phút, trung tâm thành phố khoảng 15 phút và phố cổ Hội An khoảng 25 phút.</p>
 
-<h2>3 tòa căn hộ: The Ruby, The Sapphire, The Diamond</h2>
+<h2>3 tòa Newtown Diamond: The Ruby, The Sapphire, The Diamond</h2>
 <table>
 <thead><tr><th>Tòa</th><th>Số căn</th><th>Loại căn</th><th>Tình trạng</th></tr></thead>
 <tbody>
@@ -32,12 +32,13 @@ function hh_posts_tuan_09_10( $posts ) {
 <tr><td>The Diamond</td><td>394 căn</td><td>1 – 3 phòng ngủ</td><td>Đang xây dựng</td></tr>
 </tbody>
 </table>
+<p>Bảng trên cho thấy 3 tòa Newtown Diamond chênh nhau rõ về quy mô: The Ruby chiếm gần một nửa tổng số căn (829/1.733), The Diamond chỉ bằng chưa tới một nửa The Ruby. Số căn mỗi tòa ảnh hưởng trực tiếp đến mật độ cư dân, thời gian chờ thang máy và mức cạnh tranh khi cho thuê sau này.</p>
 <h3>Tòa The Ruby – lớn nhất, tiến độ nhanh nhất</h3>
 <p><a href="/du-an/newtown-the-ruby/">The Ruby</a> có 829 căn, cất nóc ngày 18/4/2026. Kế hoạch công bố trước đó là bàn giao quý 3/2026; thời điểm bàn giao thực tế từng căn anh chị nên đối chiếu thông báo của chủ đầu tư.</p>
 <h3>Tòa The Sapphire và The Diamond</h3>
 <p><a href="/du-an/newtown-the-sapphire/">The Sapphire</a> có 510 căn, <a href="/du-an/newtown-the-diamond/">The Diamond</a> có 394 căn – tòa ít căn nhất, mật độ cư dân thấp hơn. Cả hai tòa đang xây dựng, phù hợp khách muốn thanh toán giãn theo tiến độ.</p>
 
-<h2>Giá căn hộ Newtown Diamond tham khảo</h2>
+<h2>Giá căn hộ 3 tòa Newtown Diamond tham khảo</h2>
 <p>Giá dưới đây tổng hợp từ bảng chào bán và tin rao chuyển nhượng năm 2026, chỉ để tham khảo. Giá thực tế chênh theo tòa, tầng, hướng view biển hay view golf.</p>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá chào bán (tham khảo)</th><th>Tin rao chuyển nhượng</th></tr></thead>
@@ -60,6 +61,16 @@ function hh_posts_tuan_09_10( $posts ) {
 </tbody>
 </table>
 
+<h2>So sánh 3 tòa Newtown Diamond theo nhu cầu</h2>
+<!--hh-img:img/du-an-bia/newtown-diamond-da-nang.jpg|3 tòa Newtown Diamond Đà Nẵng: căn hộ sở hữu lâu dài trên trục biển Trường Sa, Ngũ Hành Sơn-->
+<p>Cả 3 tòa Newtown Diamond dùng chung khối đế, tiện ích và 3 tầng hầm, nên khác biệt chủ yếu nằm ở tiến độ và số căn. Với người mua để ở, yếu tố quan trọng nhất là thời điểm nhận nhà: The Ruby đã cất nóc ngày 18/4/2026 (theo <a href="https://vnexpress.net/newtown-diamond-cat-noc-toa-can-ho-dau-tien-5065074.html">VnExpress</a>), hai tòa còn lại đang xây dựng.</p>
+<p>Với người mua để cho thuê, nên nhìn thêm tổng nguồn cung: khi cả 3 tòa Newtown Diamond bàn giao, khu vực sẽ có thêm 1.733 căn, cộng với các dự án lân cận trên trục Trường Sa. Căn có lợi thế riêng như view biển trực diện, view sân golf hoặc tầng cao thường dễ cho thuê hơn căn hướng phụ.</p>
+<ul>
+<li><strong>Ưu tiên nhận nhà sớm:</strong> The Ruby (829 căn, đã cất nóc).</li>
+<li><strong>Ưu tiên thanh toán giãn theo tiến độ:</strong> The Sapphire (510 căn) hoặc The Diamond (394 căn).</li>
+<li><strong>Ưu tiên ít căn, yên tĩnh:</strong> The Diamond – tòa nhỏ nhất trong 3 tòa.</li>
+</ul>
+
 <h2>Tiện ích dùng chung</h2>
 <ul>
 <li>Khối đế 6 tầng trung tâm thương mại, khoảng 48.000 – 50.000 m² sàn.</li>
@@ -67,23 +78,24 @@ function hh_posts_tuan_09_10( $posts ) {
 <li>Khu BBQ, yoga, vườn thiền, khu vui chơi trẻ em, nhà trẻ.</li>
 </ul>
 
-<h2>Nhận định của Hoàng Hiệp: chọn tòa nào?</h2>
+<h2>Nhận định của Hoàng Hiệp: chọn tòa nào trong 3 tòa Newtown Diamond?</h2>
 <p>Nếu cần nhận nhà sớm để ở hoặc cho thuê, The Ruby là lựa chọn đáng cân nhắc nhất vì đã cất nóc. Nếu muốn dòng tiền nhẹ hơn theo tiến độ, có thể xem The Sapphire hoặc The Diamond. Khách tài chính lớn, cần tài sản thấp tầng giữ giá dài hạn nên xem Newtown Legend, đặc biệt shophouse mặt trục Trường Sa.</p>
-<p>Anh chị có thể so sánh thêm với các dự án khác cùng khu vực trong bài <a href="/bat-dong-san-ngu-hanh-son-2026/">bất động sản Ngũ Hành Sơn 2026</a> hoặc danh sách <a href="/loai-du-an/can-ho-so-huu-lau-dai/">căn hộ sở hữu lâu dài Đà Nẵng</a>.</p>
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá từng tòa Newtown Diamond, quỹ căn đang bán và lịch xem biệt thự mẫu Newtown Legend.</p>
+<p>Anh chị có thể so sánh 3 tòa Newtown Diamond với các dự án khác cùng khu vực trong bài <a href="/bat-dong-san-ngu-hanh-son-2026/">bất động sản Ngũ Hành Sơn 2026</a> hoặc danh sách <a href="/loai-du-an/can-ho-so-huu-lau-dai/">căn hộ sở hữu lâu dài Đà Nẵng</a>.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá từng căn trong 3 tòa Newtown Diamond, quỹ căn đang bán và lịch xem biệt thự mẫu Newtown Legend.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Newtown Diamond: 3 tòa căn hộ và Newtown Legend',
 			'desc'      => 'Newtown Diamond Đà Nẵng: 3 tòa The Ruby, The Sapphire, The Diamond (1.733 căn), Newtown Legend 60 căn thấp tầng, giá tham khảo 2026. Gọi Hoàng Hiệp.',
 			'points'    => array(
-				'3 tòa 36 tầng, 1.733 căn hộ sở hữu lâu dài; The Ruby cất nóc 18/4/2026',
+				'3 tòa Newtown Diamond cao 36 tầng, 1.733 căn hộ sở hữu lâu dài; The Ruby cất nóc 18/4/2026',
 				'Căn 1PN khoảng 3,5 – 3,9 tỷ, 2PN khoảng 5,7 – 7,5 tỷ (tham khảo)',
 				'Newtown Legend: 24 biệt thự, 36 shophouse view golf, từ khoảng 20 tỷ',
 			),
 			'faq'       => array(
-				array( 'Newtown Diamond có mấy tòa?', 'Tổ hợp có 3 tòa căn hộ 36 tầng: The Ruby (829 căn), The Sapphire (510 căn) và The Diamond (394 căn), cùng phân khu thấp tầng Newtown Legend.' ),
-				array( 'Giá căn hộ Newtown Diamond bao nhiêu?', 'Tham khảo năm 2026: căn 1PN khoảng 3,5 – 3,9 tỷ, căn 2PN khoảng 5,7 – 7,5 tỷ; căn 3PN liên hệ. Giá thay đổi theo tòa, tầng và view.' ),
+				array( '3 tòa Newtown Diamond gồm những tòa nào?', '3 tòa Newtown Diamond đều cao 36 tầng: The Ruby (829 căn), The Sapphire (510 căn) và The Diamond (394 căn), đi cùng phân khu thấp tầng Newtown Legend.' ),
+				array( 'Nên mua căn ở tòa nào trong 3 tòa Newtown Diamond?', 'Cần nhận nhà sớm thì xem The Ruby vì đã cất nóc 18/4/2026; muốn thanh toán giãn theo tiến độ thì xem The Sapphire hoặc The Diamond. Giá còn phụ thuộc tầng và view biển hay view golf.' ),
+				array( 'Giá căn hộ 3 tòa Newtown Diamond bao nhiêu?', 'Tham khảo năm 2026: căn 1PN khoảng 3,5 – 3,9 tỷ, căn 2PN khoảng 5,7 – 7,5 tỷ; căn 3PN liên hệ. Giá thay đổi theo tòa, tầng và view.' ),
 				array( 'Newtown Diamond có sổ hồng lâu dài không?', 'Có. Căn hộ và sản phẩm thấp tầng Newtown Legend đều được giới thiệu là sở hữu lâu dài, sổ hồng từng căn.' ),
 				array( 'Newtown Legend có những sản phẩm nào?', 'Gồm 24 biệt thự (22 song lập, 2 đơn lập) và 36 shophouse 4 tầng, view sân golf 36 lỗ; shophouse từ khoảng 20 tỷ, biệt thự từ khoảng 42 – 50 tỷ.' ),
 			),

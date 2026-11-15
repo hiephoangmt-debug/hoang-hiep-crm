@@ -174,10 +174,12 @@ HTML
 
 	/* ---------------- 16/11 16:30 – Làm việc từ xa ---------------- */
 	$posts[] = array(
-		'slug'     => 'sun-saphia-residence-cho-nguoi-lam-viec-tu-xa-digital-nomad',
+		'slug'     => 'digital-nomad-da-nang-thue-can-ho-sun-saphia',
+		'old_slug' => array( 'sun-saphia-residence-cho-nguoi-lam-viec-tu-xa-digital-nomad' ),
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá.
 		'title'    => 'Sun Saphia Residence cho người làm việc từ xa: Đà Nẵng hút "dân du mục số", studio ven biển cho thuê theo tháng',
 		'excerpt'  => 'Đà Nẵng nằm trong nhóm điểm đến được người làm việc từ xa quan tâm tăng nhanh nhất khu vực. Nhóm khách này cần gì ở căn hộ, thuê bao lâu, và studio, 1PN+ Sun Saphia Residence nên trang bị gì để đón họ.',
-		'keyword'  => 'Sun Saphia Residence cho người làm việc từ xa',
+		'keyword'  => 'digital nomad Đà Nẵng',
 		'keywords_extra' => array( 'digital nomad Đà Nẵng', 'làm việc từ xa ở Đà Nẵng', 'thuê căn hộ theo tháng Đà Nẵng', 'Sun Saphia Residence' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-16 16:30',
@@ -185,15 +187,15 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Cho thuê căn hộ', 'Digital nomad' ),
 		'image'    => 'plugin:img/tin-tuc/lam-viec-tu-xa-sun-saphia.jpg',
 		'content'  => <<<HTML
-<p>Ngoài khách du lịch nghỉ vài đêm, Đà Nẵng có thêm một nhóm khách thuê ổn định: người làm việc từ xa (digital nomad) ở lại 1 – 3 tháng. Bài này phân tích <strong>Sun Saphia Residence cho người làm việc từ xa</strong> – nhóm khách này cần gì, thuê bao lâu, và chủ căn hộ studio, 1PN+ {$saphia} nên chuẩn bị thế nào.</p>
+<p><strong>Digital nomad Đà Nẵng</strong> – người làm việc từ xa ở lại thành phố 1 – 3 tháng – là nhóm khách thuê ổn định bên cạnh khách du lịch nghỉ vài đêm. Bài này phân tích nhóm digital nomad Đà Nẵng cần gì, thuê bao lâu, và chủ căn hộ studio, 1PN+ {$saphia} nên chuẩn bị thế nào.</p>
 <!--hh-featured-->
-<h2>Đà Nẵng và người làm việc từ xa: vài con số</h2>
+<h2>Digital nomad Đà Nẵng: vài con số</h2>
 <ul>
 <li>Báo Văn hóa dẫn Business Insider (theo dữ liệu Nomads.com) cho biết Đà Nẵng là nơi có <strong>mức tăng quan tâm nhanh nhất khu vực</strong> từ cộng đồng làm việc từ xa; thành phố cũng có sự kiện cộng đồng Nomad Fest.</li>
-<li>Việt Nam <strong>chưa có thị thực riêng</strong> cho người làm việc từ xa; phần lớn dùng <strong>e-visa tối đa 90 ngày</strong>, nên thời gian lưu trú phổ biến là 1 – 3 tháng.</li>
+<li>Việt Nam <strong>chưa có thị thực riêng</strong> cho người làm việc từ xa; phần lớn digital nomad Đà Nẵng dùng <strong>e-visa tối đa 90 ngày</strong> (cấp qua <a href="https://evisa.gov.vn/">cổng thị thực điện tử Việt Nam</a>), nên thời gian lưu trú phổ biến là 1 – 3 tháng.</li>
 <li>Các hướng dẫn cho nhóm này ước tính phí chỗ ngồi coworking khoảng 70 – 100 USD/tháng và tổng chi phí sống khoảng 1.000 – 1.500 USD/tháng (ước tính của trang hướng dẫn, không phải thống kê chính thức).</li>
 </ul>
-<h2>Người làm việc từ xa cần gì ở căn hộ?</h2>
+<h2>Digital nomad Đà Nẵng cần gì ở căn hộ?</h2>
 <table>
 <thead><tr><th>Nhu cầu</th><th>Ý nghĩa với chủ căn hộ</th></tr></thead>
 <tbody>
@@ -205,45 +207,61 @@ HTML
 <tr><td>Gym, bể bơi, biển</td><td>Tiện ích có sẵn của tòa và công viên biển trước mặt là điểm cộng</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-can-1pn-plus.jpg|Căn 1PN+ Sun Saphia Residence – phòng phụ có thể làm góc làm việc cho khách ở dài ngày (mặt bằng chủ đầu tư)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-can-1pn-plus.jpg|Căn 1PN+ Sun Saphia Residence cho digital nomad Đà Nẵng – phòng phụ làm góc làm việc cho khách ở dài ngày (mặt bằng chủ đầu tư)-->
 <h2>Studio hay 1PN+ cho nhóm khách này?</h2>
 <ul>
 <li><strong>Studio 30 m²:</strong> hợp người đi một mình, ngân sách vừa phải; cần bố trí khéo để có bàn làm việc riêng tách khỏi giường.</li>
 <li><strong>1PN+ khoảng 50 m²:</strong> phòng "+" làm phòng làm việc – điều mà khách ở 2 – 3 tháng sẵn sàng trả thêm; cũng hợp cặp đôi cùng làm việc từ xa.</li>
 </ul>
-<p>Với nhóm khách này, công suất cao và ổn định hơn cho thuê theo đêm, chi phí dọn phòng thấp hơn, nhưng giá mỗi đêm quy đổi thấp hơn. Nhiều chủ căn kết hợp: mùa cao điểm hè cho thuê theo đêm, mùa thấp điểm cho thuê theo tháng (xem bài <a href="/cho-thue-dai-han-sun-saphia-residence-chuyen-gia-gia-dinh/">cho thuê dài hạn</a> và bài <a href="/khach-quoc-te-da-nang-2026-han-quoc-trung-quoc-thue-can-ho-sun-saphia/">khách quốc tế thuê căn hộ</a>).</p>
+<p>Với digital nomad Đà Nẵng, công suất cao và ổn định hơn cho thuê theo đêm, chi phí dọn phòng thấp hơn, nhưng giá mỗi đêm quy đổi thấp hơn. Nhiều chủ căn kết hợp: mùa cao điểm hè cho thuê theo đêm, mùa thấp điểm cho thuê theo tháng (xem bài <a href="/cho-thue-dai-han-sun-saphia-residence-chuyen-gia-gia-dinh/">cho thuê dài hạn</a> và bài <a href="/khach-quoc-te-da-nang-2026-han-quoc-trung-quoc-thue-can-ho-sun-saphia/">khách quốc tế thuê căn hộ</a>).</p>
+<h2>Ví dụ: một tháng thấp điểm cho digital nomad Đà Nẵng thuê</h2>
+<p>Hoàng Hiệp lấy ví dụ định tính, không dùng số giả định: tháng 10 – 11 là mùa mưa, cho thuê theo đêm thường lẻ ngày, mỗi lượt khách lại tốn một lần dọn phòng, giặt ga, phí nền tảng đặt phòng. Nếu cùng căn đó cho một digital nomad Đà Nẵng thuê trọn tháng, chủ nhà chỉ dọn định kỳ theo thỏa thuận, gần như không mất phí nền tảng nếu khách liên hệ trực tiếp, và căn không bị trống giữa các lượt. Doanh thu mỗi đêm quy đổi thấp hơn, nhưng doanh thu thực nhận của tháng thấp điểm có thể ổn định hơn.</p>
+<p>Ngược lại, vào tháng 6 – 7 (mùa hè, mùa pháo hoa), giá theo đêm cao, nên khóa căn cho khách thuê tháng có thể thiệt. Vì vậy cách phổ biến là mở lịch thuê tháng từ khoảng tháng 9 đến tháng 3, còn mùa hè ưu tiên khách ngắn ngày.</p>
+<h2>Checklist đón digital nomad Đà Nẵng</h2>
+<ul>
+<li>Đo và ghi tốc độ internet thực tế trong tin đăng; có bộ phát 4G dự phòng.</li>
+<li>Bàn làm việc tối thiểu 1,2 m, ghế có tựa lưng, đèn bàn, ổ cắm gần bàn.</li>
+<li>Bảng giá tháng ghi rõ điện, nước, dọn phòng đã gồm hay chưa.</li>
+<li>Hợp đồng thuê ngắn gọn bằng tiếng Anh, điều khoản đặt cọc, trả phòng sớm.</li>
+<li>Hướng dẫn quanh căn hộ: quán cà phê làm việc, siêu thị, phòng gym, đường ra biển.</li>
+</ul>
 <h2>Lưu ý pháp lý khi cho người nước ngoài thuê</h2>
 <p>Chủ căn hộ phải khai báo tạm trú cho khách nước ngoài theo quy định và kê khai thuế cho thuê tài sản (xem bài <a href="/cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue/">pháp lý, thuế cho thuê ngắn ngày</a>). Nếu thuê đơn vị vận hành, hỏi rõ họ có làm thay thủ tục khai báo không.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Người làm việc từ xa không thay thế khách du lịch, nhưng giúp lấp mùa thấp điểm từ tháng 9 đến tháng 12. Căn 1PN+ tầng trung – cao, internet tốt, có bàn làm việc đúng nghĩa sẽ có lợi thế. Xem bài {$review}.</p>
+<p>Digital nomad Đà Nẵng không thay thế khách du lịch, nhưng giúp lấp mùa thấp điểm từ tháng 9 đến tháng 12. Căn 1PN+ tầng trung – cao, internet tốt, có bàn làm việc đúng nghĩa sẽ có lợi thế. Xem bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: Báo Văn hóa (dẫn Business Insider, Nomads.com) về mức quan tâm của cộng đồng làm việc từ xa với Đà Nẵng; cổng thông tin thị thực điện tử Việt Nam (e-visa tối đa 90 ngày); chi phí coworking, sinh hoạt là ước tính của các trang hướng dẫn 2026, tham khảo.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Sun Saphia Residence cho người làm việc từ xa',
-			'desc'      => 'Sun Saphia Residence cho người làm việc từ xa: Đà Nẵng hút digital nomad, e-visa 90 ngày, thuê 1 – 3 tháng. Studio, 1PN+ nên trang bị gì để cho thuê.',
+			'seo_title' => 'Digital nomad Đà Nẵng 2026: thuê căn hộ 1 – 3 tháng',
+			'desc'      => 'Digital nomad Đà Nẵng thường ở 1 – 3 tháng theo e-visa 90 ngày. Họ cần gì ở căn hộ, studio hay 1PN+ Sun Saphia Residence hợp hơn, chuẩn bị gì để cho thuê.',
 			'points'    => array(
-				'Đà Nẵng được cộng đồng làm việc từ xa quan tâm tăng nhanh',
+				'Digital nomad Đà Nẵng tăng nhanh, được cộng đồng làm việc từ xa quan tâm',
 				'E-visa tối đa 90 ngày nên khách thường thuê 1 – 3 tháng',
 				'Cần internet ổn định, bàn làm việc, yên tĩnh, bếp nhỏ',
 				'1PN+ có phòng phụ làm phòng làm việc là lợi thế',
 			),
 			'faq'       => array(
-				array( 'Người làm việc từ xa ở Đà Nẵng thường thuê bao lâu?', 'Phổ biến 1 – 3 tháng, vì phần lớn dùng e-visa tối đa 90 ngày.' ),
+				array( 'Digital nomad Đà Nẵng thường thuê bao lâu?', 'Phổ biến 1 – 3 tháng, vì phần lớn digital nomad Đà Nẵng dùng e-visa tối đa 90 ngày.' ),
 				array( 'Căn nào ở Sun Saphia Residence hợp khách làm việc từ xa?', 'Căn 1PN+ khoảng 50 m² có phòng phụ làm phòng làm việc; studio 30 m² hợp người đi một mình nếu bố trí được bàn làm việc riêng.' ),
 				array( 'Cho người nước ngoài thuê căn hộ cần thủ tục gì?', 'Khai báo tạm trú cho khách theo quy định và kê khai thuế cho thuê tài sản; đơn vị vận hành có thể làm thay nếu hợp đồng có thỏa thuận.' ),
+				array( 'Nên cho digital nomad Đà Nẵng thuê vào tháng nào?', 'Hợp nhất từ khoảng tháng 9 đến tháng 3, khi khách du lịch ngắn ngày thưa. Mùa hè và mùa pháo hoa nên ưu tiên khách theo đêm.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://evisa.gov.vn/',
+		),
 	);
 
 	/* ---------------- 17/11 18:30 – Mùa pháo hoa DIFF ---------------- */
 	$posts[] = array(
-		'slug'     => 'sun-saphia-residence-mua-phao-hoa-diff-cho-thue',
+		'slug'     => 'cho-thue-mua-phao-hoa-diff-sun-saphia',
+		'old_slug' => array( 'sun-saphia-residence-mua-phao-hoa-diff-cho-thue' ),
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá.
 		'title'    => 'Sun Saphia Residence mùa pháo hoa DIFF: 2,7 triệu lượt khách năm 2026 nói gì về cho thuê căn hộ ven biển',
 		'excerpt'  => 'Lễ hội pháo hoa quốc tế Đà Nẵng DIFF 2026 (30/5 – 11/7) đón khoảng 2,7 triệu lượt khách lưu trú, khách sạn trung tâm và ven biển gần kín phòng. Mùa pháo hoa có ý nghĩa gì với chủ căn hộ cho thuê ở Sun Saphia Residence.',
-		'keyword'  => 'Sun Saphia Residence mùa pháo hoa DIFF',
+		'keyword'  => 'cho thuê mùa pháo hoa DIFF',
 		'keywords_extra' => array( 'lễ hội pháo hoa Đà Nẵng 2026', 'DIFF 2026', 'cho thuê căn hộ mùa hè Đà Nẵng', 'Sun Saphia Residence' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-17 18:30',
@@ -251,7 +269,7 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'DIFF', 'Du lịch Đà Nẵng' ),
 		'image'    => 'plugin:img/tin-tuc/mua-phao-hoa-diff-sun-saphia.jpg',
 		'content'  => <<<HTML
-<p>Với chủ căn hộ cho thuê ở Đà Nẵng, mùa hè có một "tuần lễ vàng" kéo dài hơn một tháng: Lễ hội pháo hoa quốc tế (DIFF). Bài này nhìn lại số liệu DIFF 2026 và phân tích <strong>Sun Saphia Residence mùa pháo hoa DIFF</strong> – căn hộ ven biển Sơn Thủy hưởng lợi đến đâu, và nên đặt giá, đặt lịch thế nào khi tòa {$saphia} đi vào vận hành.</p>
+<p><strong>Cho thuê mùa pháo hoa DIFF</strong> là "tuần lễ vàng" kéo dài hơn một tháng của chủ căn hộ ở Đà Nẵng. Bài này nhìn lại số liệu DIFF 2026 và phân tích chuyện cho thuê mùa pháo hoa DIFF ở Sun Saphia Residence – căn hộ ven biển Sơn Thủy hưởng lợi đến đâu, và nên đặt giá, đặt lịch thế nào khi tòa {$saphia} đi vào vận hành.</p>
 <!--hh-featured-->
 <h2>DIFF 2026 qua các con số</h2>
 <table>
@@ -264,33 +282,42 @@ HTML
 <tr><td>Khu trung tâm, gần khán đài, Võ Nguyên Giáp</td><td>95 – 100% vào đêm thi</td></tr>
 </tbody>
 </table>
-<h2>Ven biển Sơn Thủy hưởng lợi thế nào?</h2>
+<h2>Cho thuê mùa pháo hoa DIFF: ven biển Sơn Thủy hưởng lợi thế nào?</h2>
 <p>Khán đài pháo hoa nằm bên sông Hàn, không phải ở khu Sơn Thủy. Nhưng chính vì khách sạn trung tâm và tuyến Võ Nguyên Giáp kín phòng 95 – 100% vào đêm thi, khách tràn ra các khu ven biển phía Nam – nơi vẫn tắm biển ban ngày được và đi taxi lên khán đài buổi tối. Điểm mạnh của Sun Saphia Residence trong mùa này:</p>
 <ul>
 <li><strong>Mùa hè trùng mùa biển đẹp:</strong> DIFF diễn ra đúng cao điểm du lịch biển, nên căn hộ được thuê vì biển là chính, pháo hoa là thêm.</li>
 <li><strong>Studio, 1PN+ hợp nhóm nhỏ:</strong> cặp đôi, gia đình nhỏ đi xem pháo hoa 2 – 4 đêm.</li>
 <li><strong>Đặt sớm:</strong> lịch DIFF công bố trước nhiều tháng, nên chủ căn có thể mở lịch và giá riêng cho các đêm thi.</li>
 </ul>
-<!--hh-img:img/sun-saphia/sun-saphia-cdt-dem-tren-cao-bien.jpg|Sun Saphia Residence về đêm nhìn ra biển Sơn Thủy (phối cảnh chủ đầu tư)-->
-<h2>Gợi ý đặt giá và lịch cho mùa DIFF</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-cdt-dem-tren-cao-bien.jpg|Cho thuê mùa pháo hoa DIFF – Sun Saphia Residence về đêm nhìn ra biển Sơn Thủy (phối cảnh chủ đầu tư)-->
+<h2>Gợi ý đặt giá và lịch cho thuê mùa pháo hoa DIFF</h2>
 <ol>
 <li><strong>Mở lịch sớm 3 – 4 tháng</strong> khi ban tổ chức công bố lịch thi; đặt giá đêm thi cao hơn ngày thường.</li>
 <li><strong>Yêu cầu tối thiểu 2 đêm</strong> vào cuối tuần có đêm thi, tránh căn bị lẻ ngày.</li>
 <li><strong>Thông tin đi lại:</strong> ghi sẵn trong tin đăng thời gian taxi lên khán đài, gợi ý đi sớm để tránh kẹt.</li>
 <li><strong>Không đặt kỳ vọng cả năm vào 6 tuần:</strong> mùa pháo hoa là đỉnh, nên tính dòng tiền cả năm theo mùa (xem bài <a href="/mua-du-lich-da-nang-cong-suat-phong-cho-thue-sun-saphia/">mùa du lịch Đà Nẵng và công suất phòng</a>).</li>
 </ol>
+<h2>Những rủi ro khi cho thuê mùa pháo hoa DIFF</h2>
+<ul>
+<li><strong>Hủy phòng sát ngày:</strong> khách đặt sớm theo lịch thi có thể hủy khi đổi kế hoạch; nên chọn chính sách hủy chặt hơn cho các đêm thi và nói rõ trong tin đăng.</li>
+<li><strong>Thời tiết:</strong> đêm thi có thể bị lùi lịch vì mưa giông; khách sẽ hỏi chính sách đổi ngày – nên chuẩn bị câu trả lời trước.</li>
+<li><strong>Quá tải dọn phòng:</strong> nhiều lượt nhận – trả phòng dồn vào cuối tuần có đêm thi; cần thống nhất trước với đơn vị vận hành về khung giờ dọn.</li>
+<li><strong>Đánh giá xấu vì kỳ vọng sai:</strong> nếu tin đăng ghi "xem pháo hoa từ căn hộ" trong khi khán đài ở sông Hàn, khách sẽ thất vọng. Chỉ nên ghi đúng: gần biển, đi taxi lên khán đài.</li>
+</ul>
+<h2>Đặt mùa DIFF vào bức tranh cả năm</h2>
+<p>Cho thuê mùa pháo hoa DIFF chỉ là một đoạn trong năm. Theo số liệu UBND thành phố công bố, 9 tháng năm 2026 Đà Nẵng đón khoảng 15,86 triệu lượt khách lưu trú, tăng 26,4% so với cùng kỳ (<a href="https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp">VietnamPlus</a>). Nghĩa là nhu cầu lưu trú không chỉ dồn vào 6 tuần lễ hội. Một căn hộ cho thuê tốt cần có kế hoạch cho cả mùa thấp điểm (tháng 9 – 12): giảm giá hợp lý, nhận khách thuê theo tuần, theo tháng.</p>
 <p>Lưu ý: Sun Saphia Residence dự kiến bàn giao 11/2028, nên mùa DIFF đầu tiên mà căn hộ có thể cho thuê sớm nhất là mùa hè 2029, nếu lễ hội tiếp tục được tổ chức.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>DIFF 2026 cho thấy sức chứa lưu trú của Đà Nẵng vẫn căng vào mùa hè, nhất là quanh trung tâm và Võ Nguyên Giáp. Căn hộ ven biển có quản lý chuyên nghiệp là lựa chọn thay thế hợp lý cho khách đặt muộn. Phí nền tảng đặt phòng nên tính trước – xem bài <a href="/phi-booking-agoda-airbnb-cho-thue-can-ho-sun-saphia/">phí Booking, Agoda, Airbnb</a> và bài {$review}.</p>
+<p>DIFF 2026 cho thấy sức chứa lưu trú của Đà Nẵng vẫn căng vào mùa hè, và cho thuê mùa pháo hoa DIFF vẫn là đỉnh doanh thu trong năm, nhất là quanh trung tâm và Võ Nguyên Giáp. Căn hộ ven biển có quản lý chuyên nghiệp là lựa chọn thay thế hợp lý cho khách đặt muộn. Phí nền tảng đặt phòng nên tính trước – xem bài <a href="/phi-booking-agoda-airbnb-cho-thue-can-ho-sun-saphia/">phí Booking, Agoda, Airbnb</a> và bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: Tiền Phong (dẫn Sở Văn hóa, Thể thao và Du lịch Đà Nẵng), Báo Văn hóa, Nhân Dân, Thanh tra (6 – 7/2026) về lượt khách, công suất phòng mùa DIFF 2026. Các nguồn có chênh lệch về công suất phòng toàn thành phố; số liệu tham khảo.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Sun Saphia Residence mùa pháo hoa DIFF: cho thuê ra sao',
-			'desc'      => 'DIFF 2026 đón khoảng 2,7 triệu lượt khách lưu trú, khách sạn trung tâm kín 95 – 100% đêm thi. Sun Saphia Residence mùa pháo hoa: đặt giá, lịch cho thuê.',
+			'seo_title' => 'Cho thuê mùa pháo hoa DIFF: 2,7 triệu lượt khách 2026',
+			'desc'      => 'Cho thuê mùa pháo hoa DIFF: năm 2026 đón khoảng 2,7 triệu lượt khách lưu trú, trung tâm kín 95 – 100% đêm thi. Cách đặt giá, lịch cho căn hộ ven biển.',
 			'points'    => array(
-				'DIFF 2026 kéo dài 30/5 – 11/7, khoảng 2,7 triệu lượt khách lưu trú',
+				'Cho thuê mùa pháo hoa DIFF 2026: 30/5 – 11/7, khoảng 2,7 triệu lượt khách lưu trú',
 				'Công suất toàn thành phố 65 – 70%, trung tâm 95 – 100% đêm thi',
 				'Khách tràn ra khu ven biển phía Nam khi trung tâm kín phòng',
 				'Mở lịch sớm, giá riêng đêm thi, tối thiểu 2 đêm',
@@ -298,10 +325,13 @@ HTML
 			'faq'       => array(
 				array( 'DIFF 2026 có bao nhiêu lượt khách?', 'Khoảng 2,7 triệu lượt khách lưu trú trong mùa lễ hội 30/5 – 11/7/2026, tăng gần 45% so với kỳ trước theo Sở VHTTDL Đà Nẵng.' ),
 				array( 'Sun Saphia Residence có gần khán đài pháo hoa không?', 'Không. Khán đài ở bên sông Hàn; từ khu Sơn Thủy khách đi taxi lên. Lợi thế của dự án là biển và căn hộ còn phòng khi trung tâm kín.' ),
-				array( 'Khi nào căn hộ Sun Saphia Residence cho thuê mùa DIFF được?', 'Dự án dự kiến bàn giao 11/2028, nên sớm nhất là mùa hè 2029 nếu lễ hội tiếp tục được tổ chức.' ),
+				array( 'Khi nào căn hộ Sun Saphia Residence cho thuê mùa pháo hoa DIFF được?', 'Dự án dự kiến bàn giao 11/2028, nên sớm nhất là mùa hè 2029 nếu lễ hội tiếp tục được tổ chức.' ),
+				array( 'Cho thuê mùa pháo hoa DIFF nên đặt chính sách hủy thế nào?', 'Nên chặt hơn ngày thường cho các đêm thi (VD không hoàn tiền khi hủy sát ngày) và ghi rõ trong tin đăng; đổi ngày khi lễ hội lùi lịch vì thời tiết nên thỏa thuận trước.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp',
+		),
 	);
 
 	/* ---------------- 17/11 11:30 – Sân golf ---------------- */

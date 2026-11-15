@@ -21,9 +21,10 @@ function hh_posts_tuan_01_02( $posts ) {
 		'content'  => <<<'HTML'
 <p>Hoàng Hiệp bất động sản hiện tư vấn hàng chục dự án tại Đà Nẵng và vùng Hội An – Điện Bàn, gồm căn hộ sở hữu lâu dài, căn hộ dịch vụ, đất nền và biệt thự nghỉ dưỡng. Bài viết này gom các dự án theo khu vực và loại hình để anh chị tìm nhanh trang chi tiết của từng dự án (cập nhật tháng 10/2026).</p>
 <p>Danh sách chỉ mang tính định hướng: tình trạng mở bán, giá và chính sách thay đổi theo từng đợt của chủ đầu tư, nên thông tin chính xác nhất luôn nằm ở trang dự án và bảng giá mới nhất mà Hiệp gửi trực tiếp.</p>
+<!--hh-img:img/da-nang/song-han-cau-quay-trung-tam-ve-dem.jpg|Sông Hàn về đêm – khu trung tâm nơi Hoàng Hiệp bất động sản tư vấn nhiều dự án căn hộ-->
 
 <h2>Hoàng Hiệp bất động sản tư vấn những nhóm sản phẩm nào?</h2>
-<p>Hiệp chia sản phẩm thành bốn nhóm theo nhu cầu phổ biến của khách: mua để ở, mua để cho thuê, mua đất tích lũy và mua biệt thự nghỉ dưỡng. Mỗi nhóm có khu vực "trọng tâm" khác nhau, vì vậy cách đọc danh sách dưới đây là chọn nhu cầu trước, khu vực sau.</p>
+<p>Hoàng Hiệp bất động sản chia sản phẩm thành bốn nhóm theo nhu cầu phổ biến của khách: mua để ở, mua để cho thuê, mua đất tích lũy và mua biệt thự nghỉ dưỡng. Mỗi nhóm có khu vực "trọng tâm" khác nhau, vì vậy cách đọc danh sách dưới đây là chọn nhu cầu trước, khu vực sau.</p>
 <table>
 <thead><tr><th>Nhu cầu</th><th>Loại hình phù hợp</th><th>Khu vực nên xem</th></tr></thead>
 <tbody>
@@ -35,15 +36,15 @@ function hh_posts_tuan_01_02( $posts ) {
 </table>
 
 <h2>Căn hộ ven sông Hàn và quận Sơn Trà</h2>
-<p>Đây là nhóm căn hộ có vị trí trung tâm, view sông Hàn hoặc biển Mỹ Khê, phù hợp cả để ở lẫn cho thuê. Các dự án Hiệp đang tư vấn gồm <a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a>, <a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a>, <a href="/du-an/peninsula-da-nang/">Peninsula Đà Nẵng</a>, The Legend, Times Square, Capital Square và Hiyori Garden Tower.</p>
+<p>Đây là nhóm căn hộ có vị trí trung tâm, view sông Hàn hoặc biển Mỹ Khê, phù hợp cả để ở lẫn cho thuê. Các dự án Hoàng Hiệp bất động sản đang tư vấn gồm <a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a>, <a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a>, <a href="/du-an/peninsula-da-nang/">Peninsula Đà Nẵng</a>, The Legend, Times Square, Capital Square và Hiyori Garden Tower.</p>
 <p>Phía bờ Tây sông Hàn (Hải Châu) có <a href="/du-an/danang-landmark/">Danang Landmark</a>, M Riverside, Masteri Đà Nẵng, Vista Residence, The Meridian, The Filmore và Đà Nẵng Downtown của Sun Group. Anh chị xem tổng hợp theo khu vực tại trang <a href="/khu-vuc/son-tra/">bất động sản Sơn Trà</a>.</p>
 
 <h2>Căn hộ khu Nam Đà Nẵng: Hòa Xuân, Hòa Quý</h2>
 <p>Nam Đà Nẵng là nơi tập trung nguồn cung căn hộ mới năm 2026, chủ yếu từ hệ sinh thái Sun NeO City và Sun Riverpolis của Sun Group. Nhóm này gồm <a href="/du-an/fours-tower/">FourS Tower (Tháp Bốn Mùa)</a>, Cora Tower, Spana Tower, S-Light Tower, cùng Sun Cosmo Residence, FPT Plaza và Newtown Diamond ở khu Ngũ Hành Sơn.</p>
-<p>Ưu điểm chung là mặt bằng giá thường mềm hơn khu ven sông Hàn, quỹ đất rộng và hưởng lợi từ hạ tầng phía Nam. Nhược điểm là tiện ích khu vực vẫn đang hoàn thiện, cần xem tiến độ từng phân khu.</p>
+<p>Theo kinh nghiệm của Hoàng Hiệp bất động sản, ưu điểm chung là mặt bằng giá thường mềm hơn khu ven sông Hàn, quỹ đất rộng và hưởng lợi từ hạ tầng phía Nam. Nhược điểm là tiện ích khu vực vẫn đang hoàn thiện, cần xem tiến độ từng phân khu.</p>
 
 <h2>Đất nền và khu đô thị</h2>
-<p>Với nhu cầu tích lũy, Hiệp tư vấn các khu đất nền có pháp lý rõ ràng như <a href="/du-an/dat-nen-dam-sen-sun-riverpolis/">đất nền Đầm Sen – Sun Riverpolis</a>, đất nền Võ Chí Công, Khu đô thị sinh thái Hòa Xuân, FPT City Đà Nẵng, Dragon Smart City và One World Regency (Điện Bàn). Danh sách lô đang chào bán xem tại <a href="/mua-ban/dat-nen/">mua bán đất nền Đà Nẵng</a>.</p>
+<p>Với nhu cầu tích lũy, Hoàng Hiệp bất động sản tư vấn các khu đất nền có pháp lý rõ ràng như <a href="/du-an/dat-nen-dam-sen-sun-riverpolis/">đất nền Đầm Sen – Sun Riverpolis</a>, đất nền Võ Chí Công, Khu đô thị sinh thái Hòa Xuân, FPT City Đà Nẵng, Dragon Smart City và One World Regency (Điện Bàn). Danh sách lô đang chào bán xem tại <a href="/mua-ban/dat-nen/">mua bán đất nền Đà Nẵng</a>.</p>
 
 <h2>Biệt thự biển và nghỉ dưỡng</h2>
 <p>Nhóm biệt thự gồm The Ocean Villas, Furama Villas, Premier Village, Fusion Resort Villas ở ven biển Ngũ Hành Sơn – Sơn Trà, và các dự án vùng Hội An như Hoiana Resort &amp; Golf, Casamia Hội An, Nam Hội An City. Phía Tây Bắc có Vinhomes Hải Vân Bay. Anh chị lọc theo loại hình tại trang <a href="/loai-du-an/biet-thu/">biệt thự Đà Nẵng</a>.</p>
@@ -55,27 +56,40 @@ function hh_posts_tuan_01_02( $posts ) {
 <p>Mỗi trang dự án trên web đều ghi nguồn tham khảo. Trước khi xuống tiền, Hiệp gửi kèm bảng giá, chính sách và hồ sơ pháp lý của đợt hiện hành để anh chị đối chiếu. Quy trình đầy đủ được trình bày trong bài <a href="/quy-trinh-mua-can-ho-hoang-hiep-da-nang/">quy trình mua căn hộ Đà Nẵng cùng Hoàng Hiệp</a>.</p>
 <p>Toàn bộ danh mục dự án được cập nhật tại trang <a href="/du-an/">dự án bất động sản Đà Nẵng</a>.</p>
 
+<h2>Hoàng Hiệp bất động sản cập nhật thông tin dự án thế nào?</h2>
+<p>Mỗi trang dự án trên web được Hoàng Hiệp bất động sản tổng hợp từ ba nhóm nguồn: tài liệu bán hàng của chủ đầu tư theo từng đợt, thông tin báo chí và văn bản của cơ quan nhà nước. Khi các nguồn ghi khác nhau (số căn, tiến độ, đơn giá), bài viết nêu rõ con số theo từng nguồn thay vì chọn con số đẹp nhất.</p>
+<p>Với thông tin quy hoạch quanh dự án, anh chị có thể tự tra trên <a href="https://thongtinquyhoachxaydung.danang.gov.vn/">Cổng thông tin quy hoạch xây dựng Đà Nẵng</a> trước khi đi xem thực tế. Hoàng Hiệp bất động sản khuyến khích cách làm này vì nó giúp anh chị chủ động kiểm tra lộ giới, chức năng đất và các công trình hạ tầng dự kiến xung quanh.</p>
+<h3>Ba việc nên làm trước khi chọn dự án</h3>
+<ul>
+<li>Ghi rõ ngân sách tối đa và số vốn tự có, kể cả khoản dự phòng cho thuế, phí.</li>
+<li>Chọn tối đa hai khu vực ưu tiên để so sánh cùng mặt bằng giá.</li>
+<li>Hỏi bảng giá và chính sách bằng văn bản của đợt đang áp dụng, không dựa vào giá rao.</li>
+</ul>
+<p>Danh mục mà Hoàng Hiệp bất động sản giới thiệu ở trên không phải là lời khuyên đầu tư. Mỗi dự án đều có ưu điểm và điểm cần cân nhắc riêng, được phân tích trong bài chi tiết của từng dự án.</p>
+
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách dự án phù hợp với ngân sách và bảng giá mới nhất của từng dự án.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Hoàng Hiệp bất động sản: dự án đang tư vấn 2026',
 			'desc'      => 'Hoàng Hiệp bất động sản: danh sách dự án đang tư vấn tại Đà Nẵng 2026 theo khu vực, loại hình, giá tham khảo. Gọi 0904 567 009 nhận bảng giá mới.',
-			'points'    => array( 'Dự án chia theo nhu cầu: ở, cho thuê, tích lũy đất, nghỉ dưỡng', 'Căn hộ tập trung ven sông Hàn, Sơn Trà và Nam Đà Nẵng', 'Giá và chính sách cập nhật theo từng đợt mở bán' ),
+			'points'    => array( 'Hoàng Hiệp bất động sản chia dự án theo nhu cầu: ở, cho thuê, tích lũy đất, nghỉ dưỡng', 'Căn hộ tập trung ven sông Hàn, Sơn Trà và Nam Đà Nẵng', 'Giá và chính sách cập nhật theo từng đợt mở bán' ),
 			'faq'       => array(
-				array( 'Hoàng Hiệp tư vấn những loại bất động sản nào?', 'Căn hộ sở hữu lâu dài, căn hộ dịch vụ, đất nền và biệt thự nghỉ dưỡng tại Đà Nẵng, Hội An và Điện Bàn.' ),
+				array( 'Hoàng Hiệp bất động sản tư vấn những loại sản phẩm nào?', 'Hoàng Hiệp bất động sản tư vấn căn hộ sở hữu lâu dài, căn hộ dịch vụ, đất nền và biệt thự nghỉ dưỡng tại Đà Nẵng, Hội An và Điện Bàn.' ),
 				array( 'Khu vực nào đang có nhiều căn hộ mới năm 2026?', 'Nam Đà Nẵng (Hòa Xuân, Hòa Quý) với các phân khu của Sun NeO City và Sun Riverpolis như FourS Tower, Spana Tower, S-Light Tower.' ),
 				array( 'Giá trên web có phải giá chính thức?', 'Giá trên web là tham khảo từ nguồn công khai. Bảng giá chính thức thay đổi theo từng đợt, Hoàng Hiệp gửi trực tiếp khi anh chị liên hệ.' ),
+				array( 'Hoàng Hiệp bất động sản lấy thông tin dự án từ đâu?', 'Từ tài liệu bán hàng của chủ đầu tư theo từng đợt, báo chí và văn bản của cơ quan nhà nước; khi các nguồn khác nhau, bài viết ghi rõ số liệu theo từng nguồn.' ),
+				array( 'Làm sao nhận danh sách dự án từ Hoàng Hiệp bất động sản?', 'Gọi hoặc nhắn Zalo 0904 567 009, cho biết ngân sách, khu vực và mục đích mua; Hiệp gửi 2–3 dự án phù hợp kèm bảng giá đợt hiện hành.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://thongtinquyhoachxaydung.danang.gov.vn/' ),
 	);
 
 	$posts[] = array(
 		'slug'     => 'quy-trinh-mua-can-ho-hoang-hiep-da-nang',
 		'title'    => 'Hoàng Hiệp Đà Nẵng: quy trình mua căn hộ 6 bước từ tư vấn đến bàn giao',
 		'excerpt'  => 'Quy trình mua căn hộ cùng Hoàng Hiệp Đà Nẵng gồm 6 bước: tư vấn nhu cầu, chọn dự án, xem thực tế, kiểm tra pháp lý, đặt cọc/HĐMB, vay và bàn giao.',
-		'keyword'  => 'Hoàng Hiệp Đà Nẵng',
+		'keyword'  => 'quy trình mua căn hộ Đà Nẵng',
 		'project'  => '',
 		'week'     => 1,
 		'category' => 'Về Hoàng Hiệp',
@@ -127,8 +141,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Hoàng Hiệp Đà Nẵng: quy trình mua căn hộ 6 bước',
-			'desc'      => 'Quy trình mua căn hộ cùng Hoàng Hiệp Đà Nẵng: 6 bước từ tư vấn, chọn dự án, pháp lý, đặt cọc đến vay và bàn giao. Gọi 0904 567 009.',
+			'seo_title' => 'Quy trình mua căn hộ Đà Nẵng 6 bước cùng Hoàng Hiệp',
+			'desc'      => 'Quy trình mua căn hộ Đà Nẵng 6 bước cùng Hoàng Hiệp: tư vấn nhu cầu, chọn dự án, kiểm tra pháp lý, đặt cọc, vay ngân hàng và nhận bàn giao nhà.',
 			'points'    => array( 'Xác định nhu cầu và ngân sách trước khi chọn dự án', 'Kiểm tra pháp lý, hợp đồng mẫu trước khi đặt cọc', 'So sánh gói vay ngân hàng và kiểm tra kỹ khi bàn giao' ),
 			'faq'       => array(
 				array( 'Mua căn hộ qua Hoàng Hiệp mất bao lâu?', 'Tùy dự án và lịch mở bán. Từ tư vấn đến ký hợp đồng có thể vài ngày đến vài tuần; bàn giao phụ thuộc tiến độ xây dựng.' ),
@@ -195,8 +209,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Môi giới bất động sản Đà Nẵng: 8 câu nên hỏi',
-			'desc'      => 'Chọn môi giới bất động sản Đà Nẵng an toàn với 8 câu hỏi về pháp lý, giá, phí và hậu mãi. Gọi 0904 567 009 để được giải đáp trực tiếp.',
+			'seo_title' => 'Môi giới bất động sản Đà Nẵng: 8 câu nên hỏi trước',
+			'desc'      => 'Môi giới bất động sản Đà Nẵng: 8 câu hỏi về pháp lý, giá, phí, hậu mãi giúp bạn chọn người tư vấn an toàn. Gọi 0904 567 009 để hỏi trực tiếp.',
 			'points'    => array( 'Hỏi rõ tư cách phân phối và pháp lý dự án', 'Yêu cầu bảng giá, tổng chi phí bằng văn bản', 'Cẩn trọng với cam kết lợi nhuận và chuyển tiền vào tài khoản cá nhân' ),
 			'faq'       => array(
 				array( 'Có nên chuyển tiền giữ chỗ cho môi giới?', 'Nên chuyển vào tài khoản của chủ đầu tư hoặc đơn vị phân phối chính thức, có văn bản ghi rõ điều kiện hoàn tiền.' ),
@@ -211,7 +225,7 @@ HTML
 		'slug'     => 'thi-truong-bat-dong-san-da-nang-2026',
 		'title'    => 'Bất động sản Đà Nẵng 2026: giá, nguồn cung và xu hướng thị trường',
 		'excerpt'  => 'Bất động sản Đà Nẵng 2026: giá căn hộ sơ cấp khoảng 83 triệu/m², giao dịch quý 2 tăng 54%, đất nền phục hồi chậm. Tổng hợp từ CBRE, DKRA.',
-		'keyword'  => 'bất động sản Đà Nẵng 2026',
+		'keyword'  => 'thị trường bất động sản Đà Nẵng',
 		'project'  => '',
 		'week'     => 1,
 		'category' => 'Thị trường',
@@ -260,8 +274,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Bất động sản Đà Nẵng 2026: giá, nguồn cung, xu hướng',
-			'desc'      => 'Bất động sản Đà Nẵng 2026: giá căn hộ sơ cấp khoảng 83 triệu/m², giao dịch quý 2 tăng 54%, đất nền chậm lại. Gọi 0904 567 009 để được tư vấn.',
+			'seo_title' => 'Thị trường bất động sản Đà Nẵng 2026: giá, nguồn cung',
+			'desc'      => 'Thị trường bất động sản Đà Nẵng 2026: giá căn hộ sơ cấp khoảng 83 triệu/m², giao dịch quý 2 tăng 54%, đất nền chậm lại – xu hướng và lời khuyên.',
 			'points'    => array( 'Giá căn hộ sơ cấp trung bình khoảng 83 triệu/m² (CBRE quý 1/2026)', 'Quý 2/2026: khoảng 2.793 căn giao dịch, tăng 54% (DKRA)', 'Đất nền phục hồi chậm, biên độ tăng giá được dự báo thu hẹp' ),
 			'faq'       => array(
 				array( 'Giá căn hộ Đà Nẵng 2026 khoảng bao nhiêu?', 'Theo CBRE, giá sơ cấp trung bình khoảng 83 triệu đồng/m² trong quý 1/2026; dự án hạng sang ven sông Hàn khoảng 130–200 triệu/m².' ),
@@ -342,8 +356,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Ký gửi căn hộ Đà Nẵng: quy trình, giấy tờ, lưu ý',
-			'desc'      => 'Ký gửi căn hộ Đà Nẵng để bán hoặc cho thuê: quy trình 5 bước, giấy tờ cần có, cách định giá. Gọi 0904 567 009 để ký gửi ngay.',
+			'seo_title' => 'Ký gửi căn hộ Đà Nẵng 2026: quy trình 5 bước, phí',
+			'desc'      => 'Ký gửi căn hộ Đà Nẵng để bán hoặc cho thuê: quy trình 5 bước, giấy tờ cần chuẩn bị, cách định giá sát thị trường. Gọi 0904 567 009 để ký gửi.',
 			'points'    => array( 'Quy trình 5 bước: tiếp nhận, kiểm tra, định giá, tiếp thị, giao dịch', 'Chuẩn bị giấy tờ sở hữu, tình trạng thế chấp, danh sách nội thất', 'Thống nhất phí, thời hạn, quyền giữ chìa khóa bằng văn bản' ),
 			'faq'       => array(
 				array( 'Căn hộ chưa có sổ có ký gửi bán được không?', 'Có thể, qua hình thức chuyển nhượng hợp đồng mua bán với chủ đầu tư; cần hợp đồng, biên lai thanh toán và thủ tục theo quy định của chủ đầu tư.' ),
@@ -361,7 +375,7 @@ HTML
 		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'FourS Tower Đà Nẵng: tổng quan 4 tháp Bốn Mùa Mai, Trúc, Cúc, Tùng',
 		'excerpt'  => 'FourS Tower Đà Nẵng là phân khu căn hộ đầu tiên của Sun Riverpolis: 4 tháp 20 tầng, 2.394 căn Studio – 3PN, sở hữu lâu dài tại Hòa Quý.',
-		'keyword'  => 'FourS Tower Đà Nẵng',
+		'keyword'  => 'tổng quan FourS Tower',
 		'project'  => 'fours-tower',
 		'week'     => 2,
 		'category' => 'Dự án',
@@ -433,8 +447,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'FourS Tower Đà Nẵng: tổng quan 4 tháp Bốn Mùa',
-			'desc'      => 'FourS Tower Đà Nẵng: 4 tháp Mai, Trúc, Cúc, Tùng 20 tầng, 2.394 căn Studio – 3PN sở hữu lâu dài. Gọi 0904 567 009 nhận tài liệu.',
+			'seo_title' => 'Tổng quan FourS Tower Đà Nẵng: 4 tháp Bốn Mùa',
+			'desc'      => 'Tổng quan FourS Tower Đà Nẵng: 4 tháp Mai, Trúc, Cúc, Tùng 20 tầng, 2.394 căn Studio – 3PN sở hữu lâu dài. Gọi 0904 567 009 nhận tài liệu.',
 			'points'    => array( 'Phân khu căn hộ đầu tiên của Sun Riverpolis, ra mắt 19/3/2026', '4 tòa 20 tầng, 2 hầm, 2.394 căn Studio – 3PN', 'Tiện ích nghỉ dưỡng tập trung tại tầng 2' ),
 			'faq'       => array(
 				array( 'FourS Tower Đà Nẵng nằm ở đâu?', 'Tại ngã tư Nguyễn Phước Lan – Minh Mạng, phường Hòa Quý (cũ), Ngũ Hành Sơn, trong khu đô thị Sun Riverpolis.' ),
@@ -456,7 +470,7 @@ HTML
 		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'Giá FourS Tower 2026: bảng giá tham khảo theo từng loại căn',
 		'excerpt'  => 'Giá FourS Tower 2026 tham khảo: Studio từ khoảng 1,7 tỷ, 1PN+ từ khoảng 2,6 tỷ, 2PN từ khoảng 3,6 tỷ. Giá chính thức thay đổi theo từng đợt.',
-		'keyword'  => 'giá FourS Tower',
+		'keyword'  => 'giá căn hộ FourS Tower 2026',
 		'project'  => 'fours-tower',
 		'week'     => 2,
 		'category' => 'Dự án',
@@ -509,8 +523,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá FourS Tower 2026: bảng giá theo loại căn',
-			'desc'      => 'Giá FourS Tower 2026 tham khảo: Studio từ khoảng 1,7 tỷ, 2PN từ khoảng 3,6 tỷ. Gọi 0904 567 009 để nhận bảng giá chính thức đợt hiện hành.',
+			'seo_title' => 'Giá căn hộ FourS Tower 2026: bảng giá theo loại căn',
+			'desc'      => 'Giá căn hộ FourS Tower 2026 tham khảo: Studio từ khoảng 1,7 tỷ, 1PN+ khoảng 2,6 tỷ, 2PN từ khoảng 3,6 tỷ. Gọi 0904 567 009 nhận bảng giá chính thức.',
 			'points'    => array( 'Studio từ khoảng 1,7 tỷ, 1PN+ khoảng 2,6 tỷ, 2PN khoảng 3,6 tỷ (tham khảo)', 'Đơn giá đợt đầu được rao khoảng 52–59 triệu/m²', 'Giá thay đổi theo tòa, tầng, view và phương án thanh toán' ),
 			'faq'       => array(
 				array( 'Giá FourS Tower bao nhiêu một căn?', 'Theo nguồn phân phối, Studio từ khoảng 1,7 tỷ, 1PN+ từ khoảng 2,6 tỷ, 2PN từ khoảng 3,6 tỷ (tham khảo, thay đổi theo đợt).' ),
@@ -531,7 +545,7 @@ HTML
 		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
 		'title'    => 'Mặt bằng FourS Tower: layout căn Studio đến 3PN và diện tích',
 		'excerpt'  => 'Mặt bằng FourS Tower: căn Studio khoảng 34,7 m², 1PN 43,7 m², 2PN 58 m², 3PN 102,8 m². Phân tích layout từng loại căn và cách chọn.',
-		'keyword'  => 'mặt bằng FourS Tower',
+		'keyword'  => 'diện tích căn hộ FourS Tower',
 		'project'  => 'fours-tower',
 		'week'     => 2,
 		'category' => 'Dự án',
@@ -601,8 +615,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Mặt bằng FourS Tower: layout Studio – 3PN',
-			'desc'      => 'Mặt bằng FourS Tower: Studio khoảng 34,7 m², 2PN 58 m², 3PN 102,8 m². Phân tích layout và cách chọn căn. Gọi 0904 567 009 nhận mặt bằng tầng.',
+			'seo_title' => 'Diện tích căn hộ FourS Tower: Studio 34,7 m² đến 3PN',
+			'desc'      => 'Diện tích căn hộ FourS Tower: Studio khoảng 34,7 m², 2PN 58 m², 3PN 102,8 m², phân tích layout và cách chọn căn. Gọi 0904 567 009 nhận bản vẽ.',
 			'points'    => array( 'Studio khoảng 34,7 m² đến 3PN khoảng 102,8 m²', 'Tầng 1 thương mại, tầng 2 tiện ích, căn hộ từ tầng 3', 'Có dòng căn sân vườn và căn 1PN+, 2PN+ linh hoạt' ),
 			'faq'       => array(
 				array( 'Căn Studio FourS Tower rộng bao nhiêu?', 'Khoảng 34,7 m² theo các trang phân phối; diện tích có thể khác giữa các tòa.' ),
@@ -621,7 +635,7 @@ HTML
 		'slug'     => 'chinh-sach-fours-tower-thanh-toan-vay-ngan-hang',
 		'title'    => 'Chính sách FourS Tower: thanh toán, chiết khấu và vay ngân hàng',
 		'excerpt'  => 'Chính sách FourS Tower được công bố: thanh toán 70% nhận nhà, giãn phần còn lại, chiết khấu Early Bird 5%, hỗ trợ vay 70% với lãi suất 0% có thời hạn.',
-		'keyword'  => 'chính sách FourS Tower',
+		'keyword'  => 'chính sách thanh toán FourS Tower',
 		'project'  => 'fours-tower',
 		'week'     => 2,
 		'category' => 'Dự án',
@@ -680,8 +694,8 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Chính sách FourS Tower: thanh toán, vay ngân hàng',
-			'desc'      => 'Chính sách FourS Tower: thanh toán 70% nhận nhà, Early Bird 5%, hỗ trợ vay 70% lãi suất 0% có thời hạn. Gọi 0904 567 009 nhận chính sách đợt mới.',
+			'seo_title' => 'Chính sách thanh toán FourS Tower: 70% nhận nhà, vay',
+			'desc'      => 'Chính sách thanh toán FourS Tower: 70% nhận nhà, Early Bird 5%, hỗ trợ vay 70% lãi suất 0% có thời hạn. Gọi 0904 567 009 nhận chính sách đợt mới.',
 			'points'    => array( 'Thanh toán 70% nhận nhà, 30% giãn đến khoảng 24 tháng sau bàn giao', 'Chiết khấu Early Bird 5%, ưu đãi cao hơn khi thanh toán sớm', 'Hỗ trợ vay đến 70%, lãi suất 0% đến khoảng 30 tháng' ),
 			'faq'       => array(
 				array( 'Mua FourS Tower cần thanh toán bao nhiêu để nhận nhà?', 'Theo chính sách được công bố, khách thanh toán 70% là nhận nhà, 30% còn lại giãn sau bàn giao.' ),
@@ -700,7 +714,7 @@ HTML
 		'slug'     => 'fours-tower-f2-thap-mai-mua-xuan',
 		'title'    => 'FourS Tower F2 Tháp Mai – Mùa Xuân có gì khác 3 tháp còn lại?',
 		'excerpt'  => 'FourS Tower F2 (Tháp Mai – Mùa Xuân) ra mắt ngày 26/9 với 1.369 lượt đặt chỗ, định hướng an cư đa thế hệ và căn hộ sân vườn. So sánh với F1, F3, Tháp Cúc.',
-		'keyword'  => 'FourS Tower F2',
+		'keyword'  => 'FourS Tower F2 Tháp Mai',
 		'project'  => 'fours-tower',
 		'week'     => 2,
 		'category' => 'Dự án',
@@ -758,7 +772,7 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'FourS Tower F2 Tháp Mai: khác gì 3 tháp còn lại?',
-			'desc'      => 'FourS Tower F2 – Tháp Mai Mùa Xuân ra mắt 26/9 với 1.369 lượt đặt chỗ, định hướng an cư đa thế hệ. Gọi 0904 567 009 nhận bảng giá F2.',
+			'desc'      => 'FourS Tower F2 Tháp Mai (Mùa Xuân) ra mắt 26/9 với 1.369 lượt đặt chỗ, định hướng an cư đa thế hệ. So sánh với 3 tháp còn lại, gọi nhận bảng giá F2.',
 			'points'    => array( 'F2 là Tháp Mai – Mùa Xuân, tòa thứ ba được giới thiệu', 'Ra mắt 26/9/2026 với 1.369 lượt đặt chỗ thành công', 'Định hướng an cư đa thế hệ, căn hộ sân vườn, tiện ích tầng 2' ),
 			'faq'       => array(
 				array( 'FourS Tower F2 là tháp nào?', 'F2 là Tháp Mai – Mùa Xuân, một trong 4 tháp Mai, Trúc, Cúc, Tùng của FourS Tower.' ),

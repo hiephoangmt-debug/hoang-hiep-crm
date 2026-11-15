@@ -81,14 +81,17 @@ HTML
 			'faq'       => array(
 				array( 'Studio ven biển Đà Nẵng giá bao nhiêu?', 'Tham khảo 10/2026: studio 30 – 38 m² gần biển Mỹ Khê khoảng 2,3 – 3,7 tỷ tùy dự án, tầng và view; Sun Saphia Residence chưa công bố giá.' ),
 				array( 'Cho thuê studio ở Đà Nẵng lãi bao nhiêu?', 'Mặt bằng chung khoảng 4,5%/năm trên giá mua theo Batdongsan.com.vn quý 3/2026; từng căn khác nhau theo vị trí, mùa du lịch và đơn vị vận hành.' ),
+				array( 'Mua studio ven biển Đà Nẵng nên chọn tầng nào, hướng nào?', 'Nếu mua để cho thuê, studio ven biển Đà Nẵng ở tầng cao, nhìn biển, đi bộ ra bãi tắm được thường dễ cho thuê và giữ giá tốt hơn; căn nhìn phố hợp người ở dài hạn với tổng tiền thấp hơn.' ),
+				array( 'Studio Sun Saphia Residence giá dự kiến bao nhiêu?', 'Theo thông tin chủ đầu tư ngày 28/10/2026, studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ (phương án có vay, chưa VAT và 2% phí bảo trì); bảng giá chính thức công bố khi mở bán.' ),
 			),
 		),
-		'sources'  => array( 'https://batdongsan.com.vn/ban-condotel-wyndham-soleil-da-nang' ),
+		'sources'  => array( 'https://batdongsan.com.vn/ban-condotel-wyndham-soleil-da-nang', 'https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp' ),
 	);
 
 	/* ---------------- 21/10 – Mở rộng đường ven biển ---------------- */
 	$posts[] = array(
-		'slug'     => 'mo-rong-duong-vo-nguyen-giap-truong-sa-lac-long-quan-2633-ty',
+		'slug'     => 'mo-rong-duong-truong-sa-vo-nguyen-giap-2633-ty',
+		'old_slug' => array( 'mo-rong-duong-vo-nguyen-giap-truong-sa-lac-long-quan-2633-ty' ),
 		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Mở rộng đường Võ Nguyên Giáp – Trường Sa 2.633 tỷ: Sun Saphia Residence và bất động sản ven biển hưởng lợi gì?',
 		'excerpt'  => 'Đà Nẵng đưa dự án mở rộng đường ven biển Võ Nguyên Giáp – Trường Sa – Lạc Long Quân, vốn dự kiến 2.633 tỷ đồng, vào nhóm "luồng xanh". Tác động tới căn hộ, khách sạn, đất ven biển Ngũ Hành Sơn.',
@@ -144,7 +147,8 @@ HTML
 
 	/* ---------------- 22/10 – Đường sắt đô thị ---------------- */
 	$posts[] = array(
-		'slug'     => 'duong-sat-do-thi-san-bay-my-khe-hoi-an-bat-dong-san-huong-loi',
+		'slug'     => 'duong-sat-do-thi-da-nang-san-bay-my-khe-hoi-an',
+		'old_slug' => array( 'duong-sat-do-thi-san-bay-my-khe-hoi-an-bat-dong-san-huong-loi' ),
 		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Đường sắt đô thị sân bay – Mỹ Khê – Hội An: tiến độ mới nhất, căn hộ ven biển như Sun Saphia Residence hưởng lợi',
 		'excerpt'  => 'Tuyến đường sắt đô thị nối sân bay Đà Nẵng – biển Mỹ Khê – Hội An được ưu tiên nghiên cứu, doanh nghiệp lập hồ sơ cho biết dự kiến khởi công 2/2027. Tác động tới căn hộ ven biển, ven sông.',
@@ -178,7 +182,7 @@ HTML
 <li>Đường sắt đô thị thường mất nhiều năm từ khởi công đến vận hành – nên xem là yếu tố cộng thêm dài hạn.</li>
 <li>Giá trị căn hộ vẫn quyết định bởi pháp lý, chất lượng xây dựng, đơn vị vận hành và giá mua hợp lý.</li>
 </ul>
-<p>Xem thêm: <a href="/mo-rong-duong-vo-nguyen-giap-truong-sa-lac-long-quan-2633-ty/">mở rộng đường Võ Nguyên Giáp – Trường Sa</a>, <a href="/mo-rong-nha-ga-t2-san-bay-da-nang-bat-dong-san-cho-thue/">mở rộng nhà ga T2 sân bay Đà Nẵng</a>.</p>
+<p>Xem thêm: <a href="/mo-rong-duong-truong-sa-vo-nguyen-giap-2633-ty/">mở rộng đường Võ Nguyên Giáp – Trường Sa</a>, <a href="/mo-rong-nha-ga-t2-san-bay-da-nang-bat-dong-san-cho-thue/">mở rộng nhà ga T2 sân bay Đà Nẵng</a>.</p>
 {$cta}
 HTML
 		,
@@ -325,7 +329,8 @@ HTML
 
 	/* ---------------- 25/10 – So sánh khu biển ---------------- */
 	$posts[] = array(
-		'slug'     => 'can-ho-ven-bien-my-khe-son-thuy-non-nuoc-so-sanh',
+		'slug'     => 'can-ho-ven-bien-da-nang-my-khe-son-thuy-non-nuoc',
+		'old_slug' => array( 'can-ho-ven-bien-my-khe-son-thuy-non-nuoc-so-sanh' ),
 		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Mua căn hộ ven biển Đà Nẵng: Mỹ Khê, Sơn Thủy (Sun Saphia Residence) hay Non Nước?',
 		'excerpt'  => 'So sánh ba khu biển của Đà Nẵng để mua căn hộ: Mỹ Khê (Sơn Trà) sôi động, giá cao; Sơn Thủy (Ngũ Hành Sơn) đang hình thành công viên biển; Non Nước gần resort, yên tĩnh.',
@@ -384,7 +389,8 @@ HTML
 
 	/* ---------------- 26/10 – Mua từ xa ---------------- */
 	$posts[] = array(
-		'slug'     => 'mua-can-ho-da-nang-tu-ha-noi-tp-hcm-kinh-nghiem',
+		'slug'     => 'mua-can-ho-da-nang-tu-xa-kinh-nghiem',
+		'old_slug' => array( 'mua-can-ho-da-nang-tu-ha-noi-tp-hcm-kinh-nghiem' ),
 		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Ở Hà Nội, TP.HCM mua căn hộ Đà Nẵng từ xa: kinh nghiệm an toàn, ví dụ Sun Saphia Residence',
 		'excerpt'  => 'Kinh nghiệm cho khách ở Hà Nội, TP.HCM, nước ngoài mua căn hộ Đà Nẵng mà không cần bay vào nhiều lần: xem nhà qua video, kiểm tra pháp lý từ xa, ủy quyền công chứng, thanh toán và giao căn cho thuê.',

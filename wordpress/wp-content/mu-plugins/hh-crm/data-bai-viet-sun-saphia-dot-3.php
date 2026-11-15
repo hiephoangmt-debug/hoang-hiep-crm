@@ -15,7 +15,8 @@ function hh_posts_sun_saphia_dot_3( $posts ) {
 
 	/* ---------------- 30/10 – Studio ---------------- */
 	$posts[] = array(
-		'slug'     => 'studio-sun-saphia-residence-30-m2-bo-tri-ai-nen-mua',
+		'slug'     => 'studio-sun-saphia-residence-30-m2-ai-nen-mua',
+		'old_slug' => array( 'studio-sun-saphia-residence-30-m2-bo-tri-ai-nen-mua' ),
 		'rev'     => 3, // 05/11: chèn ảnh dự án.
 		'title'    => 'Studio Sun Saphia Residence 30 m²: bố trí, công năng và ai nên mua',
 		'excerpt'  => 'Studio chiếm 513/782 căn Sun Saphia Residence: thông thủy 30 – 31 m², mặt tiền 3,8 m, trần 3,5 m, 19 căn mỗi sàn. Bố trí thế nào, hợp với ai, chọn căn ra sao.',
@@ -112,7 +113,7 @@ HTML
 <tr><td>Sun Galaxy, Đà Nẵng Downtown</td><td>Khoảng 4 km</td><td>Theo bản đồ kết nối của chủ đầu tư</td></tr>
 </tbody>
 </table>
-<p>Dọc tuyến biển có chuỗi 3 công viên bãi tắm: Sơn Thủy, công viên đối diện dự án và công viên bãi tắm Huyền Trân Công Chúa. Thông tin tuyến đường sắt đô thị: xem bài <a href="/duong-sat-do-thi-san-bay-my-khe-hoi-an-bat-dong-san-huong-loi/">đường sắt đô thị sân bay – Mỹ Khê – Hội An</a>.</p>
+<p>Dọc tuyến biển có chuỗi 3 công viên bãi tắm: Sơn Thủy, công viên đối diện dự án và công viên bãi tắm Huyền Trân Công Chúa. Thông tin tuyến đường sắt đô thị: xem bài <a href="/duong-sat-do-thi-da-nang-san-bay-my-khe-hoi-an/">đường sắt đô thị sân bay – Mỹ Khê – Hội An</a>.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
 <h2>Tiện ích nào ảnh hưởng giá thuê?</h2>
 <ul>
@@ -142,7 +143,8 @@ HTML
 
 	/* ---------------- 01/11 – Chi phí ngoài giá bán ---------------- */
 	$posts[] = array(
-		'slug'     => 'chi-phi-mua-can-ho-sun-saphia-residence-ngoai-gia-ban',
+		'slug'     => 'chi-phi-mua-sun-saphia-residence-ngoai-gia-ban',
+		'old_slug' => array( 'chi-phi-mua-can-ho-sun-saphia-residence-ngoai-gia-ban' ),
 		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Mua Sun Saphia Residence cần thêm bao nhiêu ngoài giá bán? VAT, phí bảo trì, lệ phí trước bạ',
 		'excerpt'  => 'Ngoài giá bán, người mua Sun Saphia Residence cần tính VAT, kinh phí bảo trì 2%, lệ phí trước bạ 0,5%, nội thất và phí quản lý. Bảng ước tính cho studio giá tham khảo 3 tỷ.',
@@ -281,7 +283,8 @@ HTML
 
 	/* ---------------- 03/11 – Khách du lịch ---------------- */
 	$posts[] = array(
-		'slug'     => 'khach-du-lich-da-nang-2026-nhu-cau-thue-can-ho-ven-bien',
+		'slug'     => 'khach-du-lich-da-nang-2026-thue-can-ho-ven-bien',
+		'old_slug' => array( 'khach-du-lich-da-nang-2026-nhu-cau-thue-can-ho-ven-bien' ),
 		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Đà Nẵng đón 15,86 triệu khách lưu trú 9 tháng 2026: tín hiệu gì cho căn hộ ven biển như Sun Saphia Residence?',
 		'excerpt'  => '9 tháng 2026, Đà Nẵng đón khoảng 15,86 triệu lượt khách lưu trú (+26,4%), khách quốc tế 7,73 triệu (+28,7%). Nhu cầu thuê căn hộ ven biển và điều nhà đầu tư Sun Saphia Residence cần lưu ý.',
@@ -316,7 +319,7 @@ HTML
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
 <h2>Đặt vào bài toán Sun Saphia Residence</h2>
-<p>Tài liệu chủ đầu tư dùng giả định studio 2,5 triệu/đêm, lấp đầy 60%. Lượng khách tăng là điều kiện cần, nhưng tỷ lệ lấp đầy của từng căn còn phụ thuộc mùa (Đà Nẵng đông khách từ tháng 4 đến tháng 9), giá cạnh tranh và đơn vị vận hành. So sánh các khu ven biển: xem <a href="/can-ho-ven-bien-my-khe-son-thuy-non-nuoc-so-sanh/">căn hộ ven biển Mỹ Khê – Sơn Thủy – Non Nước</a>.</p>
+<p>Tài liệu chủ đầu tư dùng giả định studio 2,5 triệu/đêm, lấp đầy 60%. Lượng khách tăng là điều kiện cần, nhưng tỷ lệ lấp đầy của từng căn còn phụ thuộc mùa (Đà Nẵng đông khách từ tháng 4 đến tháng 9), giá cạnh tranh và đơn vị vận hành. So sánh các khu ven biển: xem <a href="/can-ho-ven-bien-da-nang-my-khe-son-thuy-non-nuoc/">căn hộ ven biển Mỹ Khê – Sơn Thủy – Non Nước</a>.</p>
 <p>Lưu ý: số liệu du lịch là bức tranh chung của thành phố, không phải cam kết doanh thu cho bất kỳ căn hộ nào.</p>
 {$cta}
 HTML
@@ -401,7 +404,8 @@ HTML
 
 	/* ---------------- 05/11 – Thị trường quý III ---------------- */
 	$posts[] = array(
-		'slug'     => 'thi-truong-can-ho-da-nang-quy-3-2026-sun-saphia-residence',
+		'slug'     => 'thi-truong-can-ho-da-nang-quy-iii-2026',
+		'old_slug' => array( 'thi-truong-can-ho-da-nang-quy-3-2026-sun-saphia-residence' ),
 		'rev'     => 2, // 05/11: chèn ảnh dự án.
 		'title'    => 'Thị trường căn hộ Đà Nẵng quý III/2026: nguồn cung giảm 14%, Sun Saphia Residence ra hàng lúc nào là hợp lý?',
 		'excerpt'  => 'Quý III/2026 Đà Nẵng có 4.385 căn hộ sơ cấp từ 20 dự án (-14%), tiêu thụ 2.099 căn, tập trung Ngũ Hành Sơn, Hải Châu, Sơn Trà. Giá sơ cấp neo cao – Sun Saphia Residence nằm ở đâu trong bức tranh này.',
