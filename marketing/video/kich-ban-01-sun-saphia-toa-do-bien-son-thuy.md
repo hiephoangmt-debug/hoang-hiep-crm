@@ -8,7 +8,9 @@
 ---
 
 ## Đoạn 1 – Mở (avatar, 0–9s)
-> Ở Đà Nẵng, quỹ đất sát biển còn lại không nhiều. Và dải biển Sơn Thủy, dưới chân Ngũ Hành Sơn, đang là nơi được nhắc đến nhiều nhất cuối năm nay.
+> Ở Đà Nẵng, quỹ đất sát biển còn lại không nhiều. Ngay bãi tắm Sơn Thủy, đối diện là các resort năm sao, đang hình thành một tọa độ mới đáng chú ý.
+
+- Hình: avatar + tiêu đề → bản đồ bãi tắm Sơn Thủy → bản đồ resort 5 sao quanh dự án (Furama, Crowne Plaza, Hyatt Regency, Marriott) → avatar. Không nói "dưới chân Ngũ Hành Sơn" (anh Hiệp dặn).
 
 - Hình: avatar nửa người. Chữ trên màn hình: **"TỌA ĐỘ MỚI"** · *ven biển Đà Nẵng*.
 
