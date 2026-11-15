@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.32** + plugin Hoàng Hiệp CRM **2.20.283**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.284**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.284 (15/11/2026) – web mở nhanh hơn, bấm là thấy phản hồi ngay
+
+- **Trang chủ và mọi trang dự án dùng giao diện Hoàng Hiệp** không còn tải 11 file CSS của Elementor và 2 bộ font Google (Roboto, Jost) không dùng tới → chữ và ảnh đầu trang hiện sớm hơn trên điện thoại.
+- **Bấm vào link là hiện ngay thanh tải màu cam trên đầu màn hình** – khách biết trang đang mở, không tưởng web bị đơ.
+- **iPhone / Safari**: chạm vào link là web tải trước trang đó trong lúc ngón tay còn đặt trên màn hình (Chrome/Android đã có sẵn tính năng tải trước từ bản cũ).
+- Sau khi cài: LiteSpeed → **Purge All**.
 
 ## Có gì mới – 2.20.283 (15/11/2026) – đẩy Sun Saphia lên top Google
 

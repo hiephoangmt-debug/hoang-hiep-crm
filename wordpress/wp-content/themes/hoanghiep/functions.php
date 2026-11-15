@@ -252,18 +252,36 @@ function hoanghiep_override_builder_template( $template ) {
  * tắt mã emoji của WordPress (trình duyệt đã có sẵn emoji).
  */
 function hoanghiep_drop_builder_assets() {
-	if ( empty( $GLOBALS['hh_builder_override'] ) ) {
+	if ( empty( $GLOBALS['hh_builder_override'] ) && empty( $GLOBALS['hh_theme_tpl'] ) ) {
 		return;
 	}
 	foreach ( array( wp_scripts(), wp_styles() ) as $deps ) {
 		foreach ( (array) $deps->queue as $h ) {
 			$src = (string) ( $deps->registered[ $h ]->src ?? '' );
-			if ( preg_match( '/^(elementor|e-|swiper|jquery-numerator|font-awesome)/', $h ) || false !== strpos( $src, '/plugins/elementor' ) || false !== strpos( $src, '/uploads/elementor/' ) ) {
+			if ( preg_match( '/^(elementor|e-|swiper|jquery-numerator|font-awesome)/', $h ) || false !== strpos( $src, '/plugins/elementor' ) || false !== strpos( $src, '/uploads/elementor/' )
+				// Font Google của bộ Elementor cũ (Roboto, Roboto Slab, Jost) – giao diện đã có font riêng, bỏ 3 file chặn hiển thị.
+				|| ( false !== strpos( $src, 'fonts.googleapis.com' ) && preg_match( '/family=(Roboto|Jost)/', $src ) ) ) {
 				$deps->dequeue( $h );
 			}
 		}
 	}
 }
+
+/**
+ * Trang hiển thị bằng mẫu của giao diện Hoàng Hiệp (trang chủ, dự án, bài viết, danh mục…) không cần CSS/JS Elementor,
+ * kể cả khi Elementor tự nạp file chung (kit, mẫu đầu/cuối trang). Chừa trang thường dựng bằng Elementor còn hiển thị nội dung Elementor.
+ */
+add_filter(
+	'template_include',
+	static function ( $template ) {
+		$t = wp_normalize_path( (string) $template );
+		if ( false !== strpos( $t, '/themes/hoanghiep/' ) && ! ( is_page() && empty( $GLOBALS['hh_builder_override'] ) && 'builder' === get_post_meta( get_queried_object_id(), '_elementor_edit_mode', true ) ) ) {
+			$GLOBALS['hh_theme_tpl'] = true;
+		}
+		return $template;
+	},
+	1000
+);
 add_action( 'wp_print_styles', 'hoanghiep_drop_builder_assets', 100 );
 add_action( 'wp_print_scripts', 'hoanghiep_drop_builder_assets', 100 );
 add_action( 'wp_print_footer_scripts', 'hoanghiep_drop_builder_assets', 1 );
