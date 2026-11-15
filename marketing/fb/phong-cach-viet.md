@@ -75,3 +75,7 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 - Xem ảnh trước khi đăng: chữ không tràn mép, dòng nghiêng không đè che chữ to.
 - KIỂM TRA DẤU TIẾNG VIỆT trên ảnh (15/11/2026 lỗi "BÂT ĐÔNG SÁN"): chữ in hoa có dấu chồng (Ấ, Ầ, Ẩ, Ộ, Ợ…) phải hiện đủ dấu; xem phóng to phần tiêu đề trước khi hẹn bài.
 - CỠ CHỮ MẪU POSTER (anh Hiệp 15/11: chữ phải đọc rõ trên điện thoại): dòng phụ "sub" ≤ 36 ký tự (1 dòng); nhãn dưới con số ≤ 16 ký tự; con số ≤ 9 ký tự. Không để chữ xuống dòng lẻ 1 từ.
+
+## TÔNG NỀN XANH (anh Hiệp chốt 15/11/2026) – mặc định cho MỌI ảnh có chữ, cả 3 trang và TikTok
+- Lệnh: `python3 wordpress/bai-viet/fb-the-doc-v2.py poster-xanh <cau-hinh.json> <anh-dai-dien.jpg> <anh-nen.jpg> marketing/fb/<slug>-x.jpg` (bố cục poster ở mục trên, nền xanh trời nhạt – trắng, chữ cam đồng + navy, chữ cỡ lớn).
+- Ảnh nền Sun Saphia: ưu tiên flycam thực tế đã chỉnh màu trong marketing/anh-thuc-te/sun-saphia-flycam-17-10-2026/.
