@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.31** + plugin Hoàng Hiệp CRM **2.20.282**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.32** + plugin Hoàng Hiệp CRM **2.20.283**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.283 (15/11/2026) – đẩy Sun Saphia lên top Google
+
+- **Trang chủ có link tới Sun Saphia:** trước đây Sun Saphia (sắp mở bán) bị đẩy khỏi trang chủ vì trang chủ ưu tiên dự án đang mở bán và chỉ hiện 5–6 dự án → trang mạnh nhất web không trỏ về trang đang cần lên top. Nay dự án có poster trang chủ luôn đứng đầu slide và đầu nhóm dự án cao tầng.
+- **Liên kết nội bộ tự động thêm Sun Saphia** và bài "Giá Sun Saphia bao nhiêu", cùng Spana, S-Light, FourS, Sun Ponte, Sun Symphony: bài nào nhắc tên mà chưa có link thì lần nhắc đầu tự gắn link (tối đa 3 link/bài).
+- **Trang mẫu giao diện cũ** (/with-content-top/, /with-content-bottom/, /feature/…) trả mã 410 "đã xoá vĩnh viễn" để Google gỡ khỏi kết quả nhanh hơn.
 
 ## Có gì mới – 2.20.282 (14/11/2026)
 

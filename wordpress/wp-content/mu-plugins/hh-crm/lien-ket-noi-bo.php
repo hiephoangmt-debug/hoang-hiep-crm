@@ -10,7 +10,15 @@
 defined( 'ABSPATH' ) || exit;
 
 function hh_autolink_targets() {
+	// Thứ tự = ưu tiên (tối đa 3 link mỗi trang). Khóa "post:<slug>" = bài viết (VD bài giá), còn lại là trang dự án.
 	return array(
+		'sun-saphia-residence'              => array( 'Sun Saphia Residence', 'Sun Saphia' ),
+		'post:gia-sun-saphia-residence-bao-nhieu' => array( 'giá Sun Saphia Residence', 'giá Sun Saphia', 'bảng giá Sun Saphia' ),
+		'spana-tower'                       => array( 'Spana Tower' ),
+		's-light-tower'                     => array( 'S-Light Tower', "Sun's Light", 'S-Light' ),
+		'fours-tower'                       => array( 'FourS Tower' ),
+		'sun-ponte-residence'               => array( 'Sun Ponte Residence', 'Sun Ponte' ),
+		'sun-symphony-residence'            => array( 'Sun Symphony Residence' ),
 		'symphony-5-sun-symphony-residence' => array( 'Sun Symphony 5', 'Symphony 5' ),
 		'the-legend-da-nang'                => array( 'The Legend City', 'The Legend Đà Nẵng', 'The Legend' ),
 		'nobu-da-nang'                      => array( 'Nobu Residences Đà Nẵng', 'Nobu Residences', 'Nobu Đà Nẵng' ),
@@ -29,15 +37,17 @@ function hh_autolink_projects( $html ) {
 	$self  = get_post_field( 'post_name', get_the_ID() );
 	$todo  = array();
 	foreach ( hh_autolink_targets() as $slug => $names ) {
-		if ( $slug === $self || 0 === strpos( $self, $slug . '-' ) ) {
+		$type = 0 === strpos( $slug, 'post:' ) ? 'post' : 'du-an';
+		$path = 'post' === $type ? substr( $slug, 5 ) : $slug;
+		if ( $path === $self || ( 'du-an' === $type && 0 === strpos( $self, $slug . '-' ) ) ) {
 			continue;
 		}
-		$p = get_page_by_path( $slug, OBJECT, 'du-an' );
+		$p = get_page_by_path( $path, OBJECT, $type );
 		if ( ! $p || 'publish' !== $p->post_status ) {
 			continue;
 		}
 		$url = get_permalink( $p );
-		if ( false !== strpos( $html, '/du-an/' . $slug . '/' ) || false !== strpos( $html, $url ) ) {
+		if ( false !== strpos( $html, ( 'post' === $type ? '/' : '/du-an/' ) . $path . '/' ) || false !== strpos( $html, $url ) ) {
 			continue; // Bài đã có link tới dự án này.
 		}
 		$todo[ $slug ] = array( $url, $names );

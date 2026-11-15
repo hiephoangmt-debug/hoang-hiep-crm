@@ -4,10 +4,14 @@ get_header();
 $featured_projects = new WP_Query(
 	array(
 		'post_type'      => 'du-an',
-		'posts_per_page' => 5,
+		'posts_per_page' => 5, // Dự án có poster (tâm điểm) được xếp đầu ngay trong truy vấn (thu-tu-du-an.php), không bị rơi khỏi 5 slide.
 		'meta_query'     => array(
 			array( 'key' => 'hh_p_featured', 'value' => '1' ),
-			array( 'key' => '_thumbnail_id', 'compare' => 'EXISTS' ),
+			array(
+				'relation' => 'OR',
+				array( 'key' => '_thumbnail_id', 'compare' => 'EXISTS' ),
+				array( 'key' => 'hh_p_home_poster', 'value' => '', 'compare' => '!=' ),
+			),
 		),
 	)
 );
@@ -44,7 +48,7 @@ if ( $featured_projects->posts ) {
 			<?php $poster = $hh_poster( get_the_ID() ); ?>
 			<div class="hero__slide<?php echo 0 === $i ? ' is-active' : ''; ?><?php echo $poster ? ' hero__slide--poster' : ''; ?>">
 				<?php if ( $poster ) : ?>
-					<?php ob_start(); ?><picture><source media="(max-width: 900px)" srcset="<?php echo esc_url( $poster ); ?>"><?php the_post_thumbnail( 'hh-hero', array( 'class' => 'hero__bg hero__bg--poster', 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'low', 'alt' => '' ) ); ?></picture><?php echo $hh_defer( ob_get_clean(), $i ); // phpcs:ignore ?>
+					<?php ob_start(); ?><picture><source media="(max-width: 900px)" srcset="<?php echo esc_url( $poster ); ?>"><?php if ( has_post_thumbnail() ) { the_post_thumbnail( 'hh-hero', array( 'class' => 'hero__bg hero__bg--poster', 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'low', 'alt' => '' ) ); } else { echo '<img class="hero__bg hero__bg--poster" src="' . esc_url( $poster ) . '" alt="" loading="' . ( 0 === $i ? 'eager' : 'lazy' ) . '">'; } ?></picture><?php echo $hh_defer( ob_get_clean(), $i ); // phpcs:ignore ?>
 				<?php else : ?>
 					<?php
 					// Điện thoại (khung đứng): bản cắt dọc 1080×1440 WebP – nét và nhẹ hơn ảnh ngang 1920×900.

@@ -12,6 +12,9 @@ function hh_project_rank( $id ) {
 	if ( hh_meta( 'hh_p_sold_out', $id ) ) {
 		return 3;
 	}
+	if ( '' !== trim( (string) hh_meta( 'hh_p_home_poster', $id ) ) ) {
+		return -1; // Dự án tâm điểm có poster trang chủ (VD Sun Saphia): luôn đứng đầu – trang chủ phải có link tới dự án đang đẩy SEO.
+	}
 	return array( 'dang-mo-ban' => 0, 'sap-mo-ban' => 1, 'dang-ban-giao' => 2, 'da-ban-giao' => 3 )[ (string) hh_meta( 'hh_p_status', $id ) ] ?? 2;
 }
 
@@ -39,6 +42,7 @@ add_filter(
 		$p    = $wpdb->posts;
 		$m    = $wpdb->postmeta;
 		$rank = "(CASE WHEN EXISTS (SELECT 1 FROM $m hr1 WHERE hr1.post_id = $p.ID AND hr1.meta_key = 'hh_p_sold_out' AND hr1.meta_value = '1') THEN 3"
+			. " WHEN EXISTS (SELECT 1 FROM $m hr0 WHERE hr0.post_id = $p.ID AND hr0.meta_key = 'hh_p_home_poster' AND hr0.meta_value <> '') THEN -1"
 			. " ELSE COALESCE((SELECT CASE hr2.meta_value WHEN 'dang-mo-ban' THEN 0 WHEN 'sap-mo-ban' THEN 1 WHEN 'dang-ban-giao' THEN 2 WHEN 'da-ban-giao' THEN 3 ELSE 2 END"
 			. " FROM $m hr2 WHERE hr2.post_id = $p.ID AND hr2.meta_key = 'hh_p_status' LIMIT 1), 2) END)";
 		$clauses['orderby'] = $rank . ' ASC' . ( '' !== trim( (string) $clauses['orderby'] ) ? ', ' . $clauses['orderby'] : '' );

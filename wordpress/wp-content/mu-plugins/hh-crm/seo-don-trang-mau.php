@@ -61,3 +61,19 @@ add_filter(
 		return $robots;
 	}
 );
+
+/** Trang mẫu đã gỡ / đường dẫn rác của giao diện cũ (/feature/…): trả 410 "đã xoá vĩnh viễn" để Google gỡ khỏi kết quả nhanh hơn 404. */
+add_action(
+	'template_redirect',
+	static function () {
+		if ( ! is_404() ) {
+			return;
+		}
+		$path = trim( (string) wp_parse_url( (string) ( $_SERVER['REQUEST_URI'] ?? '' ), PHP_URL_PATH ), '/' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		if ( in_array( $path, hh_demo_page_slugs(), true ) || preg_match( '#^(feature|property_type|property_status|property_city|property_area|property_label|houzez_agent|agent|agency)(/|$)#', $path ) ) {
+			status_header( 410 );
+			nocache_headers();
+		}
+	},
+	1
+);
