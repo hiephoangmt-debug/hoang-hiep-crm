@@ -74,3 +74,4 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
   Ví dụ: [{"segs":[["Mặt bằng căn hộ","plain"]]},{"segs":[["THE LEGEND","big"]]},{"segs":[["Đà Nẵng","script"]],"dx":230,"over":true}]
 - Xem ảnh trước khi đăng: chữ không tràn mép, dòng nghiêng không đè che chữ to.
 - KIỂM TRA DẤU TIẾNG VIỆT trên ảnh (15/11/2026 lỗi "BÂT ĐÔNG SÁN"): chữ in hoa có dấu chồng (Ấ, Ầ, Ẩ, Ộ, Ợ…) phải hiện đủ dấu; xem phóng to phần tiêu đề trước khi hẹn bài.
+- CỠ CHỮ MẪU POSTER (anh Hiệp 15/11: chữ phải đọc rõ trên điện thoại): dòng phụ "sub" ≤ 36 ký tự (1 dòng); nhãn dưới con số ≤ 16 ký tự; con số ≤ 9 ký tự. Không để chữ xuống dòng lẻ 1 từ.

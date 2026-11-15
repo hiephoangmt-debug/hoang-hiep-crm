@@ -139,6 +139,19 @@ elif STYLE in ('poster', 'poster-xanh'):
 .pos.xanh .big{background-image:linear-gradient(180deg,#ee8a35 0%,#d9601a 50%,#b84a12 100%)}
 .pos.xanh .script{background-image:linear-gradient(180deg,#e88a3c,#c4561a)}
 .pos.xanh .l{filter:drop-shadow(0 1px 0 rgba(255,255,255,.9)) drop-shadow(0 2px 4px rgba(20,35,63,.18))}
+/* Nấc 2 (anh Hiệp: vẫn chưa đọc được) */
+.pos .top{left:40px;right:40px;top:46px}
+.pos .brand{font-size:30px;letter-spacing:.2em;font-weight:700}
+.pos .tag{font-size:38px;font-weight:700}
+.pos .plain{font-size:72px}
+.pos .sub{font-size:43px;line-height:1.25;font-weight:700;text-wrap:balance}
+.pos .st{padding:0 26px;max-width:340px}
+.pos .st b{font-size:72px}
+.pos .st span{font-size:30px;line-height:1.2;white-space:nowrap}
+.pos .bar{padding:18px 24px}
+.pos .foot b{font-size:44px}.pos .foot span{font-size:32px;font-weight:600}
+.pos .ava{width:118px;height:118px}
+.pos .note{font-size:20px;max-width:380px}
 .pos .bar{position:absolute;left:36px;right:36px;bottom:32px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 22px;border-radius:22px;background:rgba(20,30,52,.72);backdrop-filter:blur(8px)}
 .pos .foot b{color:#fff}.pos .foot span{color:#f0cf9a}
 .pos .note{font:400 15px/1.35 BVP;color:#c9cfdb;text-align:right;max-width:420px}"""
