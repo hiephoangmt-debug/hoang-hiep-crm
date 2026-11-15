@@ -659,13 +659,13 @@ HTML
 
 <h2>Phân tích layout và diện tích căn hộ FourS Tower</h2>
 <h3>Studio</h3>
-<p>Studio gộp ngủ, sinh hoạt và bếp trong một không gian, phù hợp cho thuê. Theo một số trang phân phối, Studio tại FourS Tower được thiết kế bề ngang rộng, giúp đặt giường và sofa thoải mái hơn studio dạng hộp dài.</p>
+<p>Studio có diện tích căn hộ FourS Tower nhỏ nhất, gộp ngủ, sinh hoạt và bếp trong một không gian, phù hợp cho thuê. Theo một số trang phân phối, Studio tại FourS Tower được thiết kế bề ngang rộng, giúp đặt giường và sofa thoải mái hơn studio dạng hộp dài.</p>
 <h3>1PN và 1PN+</h3>
 <p>Căn 1PN tách phòng ngủ riêng, phòng khách liền bếp. Bản 1PN+ có thêm một góc nhỏ có thể làm phòng làm việc, phòng trẻ nhỏ hoặc phòng khách, phù hợp làm việc tại nhà.</p>
 <h3>2PN và 2PN+</h3>
-<p>Căn 2PN khoảng 58 m² là lựa chọn phổ biến cho gia đình trẻ. Bản 2PN+ rộng hơn đáng kể, thêm không gian linh hoạt cho gia đình đông người.</p>
+<p>Căn 2PN khoảng 58 m² là mức diện tích căn hộ FourS Tower phổ biến nhất với gia đình trẻ. Bản 2PN+ rộng hơn đáng kể, thêm không gian linh hoạt cho gia đình đông người.</p>
 <h3>3PN và căn sân vườn</h3>
-<p>Căn 3PN khoảng 102,8 m² hướng đến gia đình nhiều thế hệ. Dòng căn sân vườn có khoảng xanh riêng, được báo chí giới thiệu như điểm nhấn của dự án.</p>
+<p>Căn 3PN khoảng 102,8 m² là diện tích căn hộ FourS Tower lớn nhất trong nhóm căn tiêu chuẩn, hướng đến gia đình nhiều thế hệ. Dòng căn sân vườn có khoảng xanh riêng, được báo chí giới thiệu như điểm nhấn của dự án.</p>
 
 <h2>Chọn loại căn theo mục đích</h2>
 <table>
@@ -716,16 +716,18 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'chinh-sach-fours-tower-thanh-toan-vay-ngan-hang',
-		'title'    => 'Chính sách FourS Tower: thanh toán, chiết khấu và vay ngân hàng',
+		'title'    => 'Chính sách thanh toán FourS Tower: 70% nhận nhà, chiết khấu và vay ngân hàng',
 		'excerpt'  => 'Chính sách FourS Tower được công bố: thanh toán 70% nhận nhà, giãn phần còn lại, chiết khấu Early Bird 5%, hỗ trợ vay 70% với lãi suất 0% có thời hạn.',
 		'keyword'  => 'chính sách thanh toán FourS Tower',
 		'project'  => 'fours-tower',
 		'week'     => 2,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>Chính sách FourS Tower theo các thông tin đã công bố gồm: thanh toán 70% để nhận nhà, 30% còn lại giãn đến khoảng 24 tháng sau bàn giao (tổng thời gian thanh toán có thể đến khoảng 4 năm), chiết khấu Early Bird 5% cho khách giữ chỗ sớm, và hỗ trợ vay đến 70% giá trị căn với lãi suất 0% trong thời gian nhất định. Chính sách thay đổi theo từng đợt, anh chị cần đối chiếu văn bản chính thức (cập nhật tháng 10/2026).</p>
+<p>Chính sách thanh toán FourS Tower theo các thông tin đã công bố gồm: thanh toán 70% để nhận nhà, 30% còn lại giãn đến khoảng 24 tháng sau bàn giao (tổng thời gian thanh toán có thể đến khoảng 4 năm), chiết khấu Early Bird 5% cho khách giữ chỗ sớm, và hỗ trợ vay đến 70% giá trị căn với lãi suất 0% trong thời gian nhất định. Chính sách thay đổi theo từng đợt, anh chị cần đối chiếu văn bản chính thức (cập nhật tháng 10/2026).</p>
 
-<h2>Tóm tắt chính sách FourS Tower</h2>
+<!--hh-img:img/fours-tower/fours-tower-f2-kien-truc-toa-f2.jpg|Tòa F2 Tháp Mai – chính sách thanh toán FourS Tower áp dụng theo từng tòa, từng đợt mở bán (ảnh chủ đầu tư)-->
+
+<h2>Tóm tắt chính sách thanh toán FourS Tower</h2>
 <table>
 <thead><tr><th>Nội dung</th><th>Thông tin được công bố / rao bán</th></tr></thead>
 <tbody>
@@ -737,18 +739,18 @@ HTML
 </tbody>
 </table>
 
-<h2>Phương án thanh toán</h2>
+<h2>Các phương án trong chính sách thanh toán FourS Tower</h2>
 <h3>Thanh toán 70% nhận nhà</h3>
-<p>Đây là điểm được nhắc nhiều nhất trong chính sách FourS Tower. Khách thanh toán 70% theo tiến độ là có thể nhận bàn giao và khai thác căn hộ, phần 30% còn lại giãn sau bàn giao. Phương án này giảm áp lực tài chính cho người mua để ở và cho thuê.</p>
+<p>Đây là điểm được nhắc nhiều nhất trong chính sách thanh toán FourS Tower. Khách thanh toán 70% theo tiến độ là có thể nhận bàn giao và khai thác căn hộ, phần 30% còn lại giãn sau bàn giao. Phương án này giảm áp lực tài chính cho người mua để ở và cho thuê.</p>
 <h3>Thanh toán sớm</h3>
 <p>Khách thanh toán sớm phần lớn giá trị thường được hưởng chiết khấu cao hơn. Một số tin rao của đại lý nêu tổng ưu đãi có thể lên đến khoảng 27,5% khi thanh toán 95%, khoảng 19% khi thanh toán 70%; đây là thông tin từ tin rao, cần đối chiếu với chính sách bằng văn bản của đợt hiện hành.</p>
 
 <h2>Chiết khấu</h2>
-<p>Ngoài Early Bird 5%, chủ đầu tư thường có các khoản chiết khấu theo phương án thanh toán và ưu đãi theo từng sự kiện mở bán. Mức chiết khấu cụ thể, thời hạn áp dụng và điều kiện cộng dồn chỉ chính xác khi có văn bản chính sách đi kèm bảng giá.</p>
+<p>Theo bài giới thiệu tòa F2 trên <a href="https://cafef.vn/loi-the-mua-can-ho-tang-resort-truyen-doi-cua-f2-fours-tower-nam-da-nang-188260916110117254.chn">CafeF</a>, chính sách thanh toán FourS Tower đi kèm chiết khấu Early Bird 5%. Ngoài Early Bird 5%, chủ đầu tư thường có các khoản chiết khấu theo phương án thanh toán và ưu đãi theo từng sự kiện mở bán. Mức chiết khấu cụ thể, thời hạn áp dụng và điều kiện cộng dồn chỉ chính xác khi có văn bản chính sách đi kèm bảng giá.</p>
 <p>Khi so sánh, anh chị nên quy về "giá sau chiết khấu, đã gồm VAT và phí bảo trì" để tránh nhầm lẫn giữa các phương án. Giá tham khảo xem bài <a href="/gia-can-ho-fours-tower-2026/">giá FourS Tower 2026</a>.</p>
 
 <h2>Vay ngân hàng</h2>
-<p>Chương trình được rao bán là hỗ trợ vay đến 70% giá trị căn, lãi suất 0% và ân hạn gốc trong khoảng 30 tháng, miễn phí trả nợ trước hạn trong thời gian hỗ trợ. Sau giai đoạn này, lãi suất thả nổi theo ngân hàng.</p>
+<p>Phần vay là cấu phần thứ ba của chính sách thanh toán FourS Tower. Chương trình được rao bán là hỗ trợ vay đến 70% giá trị căn, lãi suất 0% và ân hạn gốc trong khoảng 30 tháng, miễn phí trả nợ trước hạn trong thời gian hỗ trợ. Sau giai đoạn này, lãi suất thả nổi theo ngân hàng.</p>
 <h3>Những điểm cần hỏi kỹ khi vay</h3>
 <ul>
 <li>Ngân hàng nào tham gia, lãi suất thả nổi tính theo công thức nào.</li>
@@ -757,8 +759,12 @@ HTML
 <li>Khả năng trả nợ hàng tháng sau khi hết hỗ trợ.</li>
 </ul>
 
+<h2>Chính sách thanh toán FourS Tower và giới hạn luật định</h2>
+<p>Căn hộ FourS Tower là nhà ở hình thành trong tương lai, nên lịch thu tiền phải nằm trong giới hạn của Luật Kinh doanh bất động sản 2023: đặt cọc không quá 5% giá bán, lần đầu không quá 30% giá trị hợp đồng (kể cả tiền cọc), trước khi bàn giao không quá 70% và khi chưa cấp giấy chứng nhận không quá 95%. Mốc "70% nhận nhà" trong chính sách thanh toán FourS Tower trùng với giới hạn trước bàn giao này.</p>
+<p>Quy định về tiền đặt cọc được <a href="https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html">LuatVietnam</a> tóm tắt. Khi nhận lịch thanh toán chính thức, anh chị đối chiếu từng đợt với các mốc trên.</p>
+
 <h2>Ví dụ minh họa dòng tiền</h2>
-<p>Giả sử một căn có giá sau chiết khấu là 2 tỷ đồng (số liệu minh họa, không phải giá căn cụ thể). Với phương án 70% nhận nhà, dòng tiền chia như sau:</p>
+<p>Giả sử một căn có giá sau chiết khấu là 2 tỷ đồng (số liệu minh họa, không phải giá căn cụ thể). Với phương án 70% nhận nhà trong chính sách thanh toán FourS Tower, dòng tiền chia như sau:</p>
 <table>
 <thead><tr><th>Giai đoạn</th><th>Tỷ lệ</th><th>Số tiền minh họa</th></tr></thead>
 <tbody>
@@ -769,20 +775,21 @@ HTML
 </table>
 <p>Nếu dùng vay ngân hàng trong phần 70%, số vốn tự có trước nhận nhà sẽ thấp hơn, đổi lại phải tính lãi sau thời gian hỗ trợ. Hiệp sẽ thay số theo căn thực tế và lịch thanh toán chính thức.</p>
 
-<h2>Gợi ý chọn phương án</h2>
+<h2>Gợi ý chọn phương án trong chính sách thanh toán FourS Tower</h2>
 <p>Người mua để ở với vốn tự có vừa phải có thể cân nhắc phương án 70% nhận nhà hoặc vay có hỗ trợ lãi suất. Nhà đầu tư có vốn sẵn có thể so sánh phương án thanh toán sớm để tối đa chiết khấu. Hiệp sẽ lập bảng so sánh dòng tiền cho từng phương án để anh chị chọn.</p>
 <p>Thông tin dự án xem tại trang <a href="/du-an/fours-tower/">FourS Tower Đà Nẵng</a>; quy trình đặt cọc, ký hợp đồng xem bài <a href="/quy-trinh-mua-can-ho-hoang-hiep-da-nang/">quy trình mua căn hộ 6 bước</a>.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận văn bản chính sách FourS Tower đợt hiện hành và bảng so sánh dòng tiền theo từng phương án.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận văn bản chính sách thanh toán FourS Tower đợt hiện hành và bảng so sánh dòng tiền theo từng phương án.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Chính sách thanh toán FourS Tower: 70% nhận nhà, vay',
 			'desc'      => 'Chính sách thanh toán FourS Tower: 70% nhận nhà, Early Bird 5%, hỗ trợ vay 70% lãi suất 0% có thời hạn. Gọi 0904 567 009 nhận chính sách đợt mới.',
-			'points'    => array( 'Thanh toán 70% nhận nhà, 30% giãn đến khoảng 24 tháng sau bàn giao', 'Chiết khấu Early Bird 5%, ưu đãi cao hơn khi thanh toán sớm', 'Hỗ trợ vay đến 70%, lãi suất 0% đến khoảng 30 tháng' ),
+			'points'    => array( 'Chính sách thanh toán FourS Tower: 70% nhận nhà, 30% giãn đến khoảng 24 tháng sau bàn giao', 'Chiết khấu Early Bird 5%, ưu đãi cao hơn khi thanh toán sớm', 'Hỗ trợ vay đến 70%, lãi suất 0% đến khoảng 30 tháng' ),
 			'faq'       => array(
-				array( 'Mua FourS Tower cần thanh toán bao nhiêu để nhận nhà?', 'Theo chính sách được công bố, khách thanh toán 70% là nhận nhà, 30% còn lại giãn sau bàn giao.' ),
+				array( 'Mua FourS Tower cần thanh toán bao nhiêu để nhận nhà?', 'Theo chính sách thanh toán FourS Tower được công bố, khách thanh toán 70% là nhận nhà, 30% còn lại giãn sau bàn giao.' ),
 				array( 'FourS Tower có hỗ trợ vay ngân hàng không?', 'Có, chương trình được rao là vay đến 70%, hỗ trợ lãi suất 0% và ân hạn gốc khoảng 30 tháng; cần đối chiếu văn bản chính thức.' ),
+				array( 'Chính sách thanh toán FourS Tower có giống nhau giữa các tòa?', 'Không hẳn. Mỗi tòa, mỗi đợt mở bán có văn bản chính sách riêng; F2 được nêu với Early Bird 5% và Sun Early Key. Cần đối chiếu văn bản của đợt anh chị mua.' ),
 				array( 'Chiết khấu FourS Tower tối đa bao nhiêu?', 'Early Bird 5% được báo chí nêu; mức tổng ưu đãi cao hơn trong tin rao phụ thuộc phương án thanh toán và từng đợt, cần xem văn bản chính sách.' ),
 			),
 		),
@@ -802,9 +809,11 @@ HTML
 		'week'     => 2,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>FourS Tower F2 là Tháp Mai – Mùa Xuân, tòa thứ ba được Sun Property giới thiệu trong bộ sưu tập Bốn Mùa, ra mắt sáng 26/9/2026 tại Royal Lotus Đà Nẵng với 1.369 lượt đặt chỗ thành công (gần 1.400 theo VnExpress). Điểm khác của F2 nằm ở định hướng an cư đa thế hệ, cảm hứng hoa mai và cách truyền thông "mua căn hộ, tặng resort truyền đời" (cập nhật tháng 10/2026).</p>
+<p>FourS Tower F2 Tháp Mai (Mùa Xuân) là tòa thứ ba được Sun Property giới thiệu trong bộ sưu tập Bốn Mùa, ra mắt sáng 26/9/2026 tại Royal Lotus Đà Nẵng với 1.369 lượt đặt chỗ thành công (gần 1.400 theo VnExpress). Điểm khác của F2 nằm ở định hướng an cư đa thế hệ, cảm hứng hoa mai và cách truyền thông "mua căn hộ, tặng resort truyền đời" (cập nhật tháng 10/2026).</p>
 
-<h2>FourS Tower F2 trong bộ sưu tập Bốn Mùa</h2>
+<!--hh-img:img/fours-tower/fours-tower-f2-kien-truc-toa-f2-goc-2.jpg|Kiến trúc FourS Tower F2 Tháp Mai lấy cảm hứng hoa mai mùa xuân (phối cảnh chủ đầu tư)-->
+
+<h2>FourS Tower F2 Tháp Mai trong bộ sưu tập Bốn Mùa</h2>
 <table>
 <thead><tr><th>Tháp</th><th>Mùa</th><th>Thời điểm giới thiệu (theo nguồn công khai)</th></tr></thead>
 <tbody>
@@ -816,15 +825,15 @@ HTML
 </table>
 <p>Mã tòa và thứ tự được tổng hợp từ báo chí và trang phân phối, có chỗ chưa thống nhất. Anh chị nên đối chiếu với tài liệu bán hàng chính thức.</p>
 
-<h2>Kết quả ra mắt FourS Tower F2</h2>
-<p>Theo VnExpress, sự kiện giới thiệu Tháp Mùa Xuân ghi nhận 1.369 lượt đặt chỗ thành công. Báo chí cũng đưa tin phí giữ chỗ F2 khoảng 50 triệu đồng/căn, giúp người mua chủ động dòng tiền ở giai đoạn đầu.</p>
+<h2>Kết quả ra mắt FourS Tower F2 Tháp Mai</h2>
+<p>Theo <a href="https://vnexpress.net/thap-f2-fours-tower-ghi-nhan-gan-1-400-luot-dat-cho-5125919.html">VnExpress</a>, sự kiện giới thiệu FourS Tower F2 Tháp Mai ghi nhận 1.369 lượt đặt chỗ thành công. Báo chí cũng đưa tin phí giữ chỗ F2 khoảng 50 triệu đồng/căn, giúp người mua chủ động dòng tiền ở giai đoạn đầu.</p>
 <p>Lượt đặt chỗ là chỉ số quan tâm, chưa phải số căn đã ký hợp đồng mua bán. Đây là thông tin tham khảo về sức hút, không phải cam kết về thanh khoản hay giá bán lại.</p>
 
-<h2>F2 có gì khác 3 tháp còn lại?</h2>
+<h2>FourS Tower F2 Tháp Mai có gì khác 3 tháp còn lại?</h2>
 <h3>Định hướng an cư đa thế hệ</h3>
-<p>Truyền thông về Tháp Mùa Xuân nhấn mạnh việc đáp ứng nhu cầu của mọi thành viên trong gia đình. Cơ cấu sản phẩm vẫn từ Studio đến 3PN, nhưng thông điệp hướng nhiều hơn đến gia đình ở thực so với đợt đầu.</p>
+<p>Truyền thông về FourS Tower F2 Tháp Mai nhấn mạnh việc đáp ứng nhu cầu của mọi thành viên trong gia đình. Cơ cấu sản phẩm vẫn từ Studio đến 3PN, nhưng thông điệp hướng nhiều hơn đến gia đình ở thực so với đợt đầu.</p>
 <h3>Cảm hứng hoa mai và "khởi đầu mới"</h3>
-<p>Kiến trúc F2 lấy cảm hứng từ hoa mai, biểu tượng mùa xuân, khởi đầu và may mắn. Đây là khác biệt về ý tưởng thiết kế và nhận diện, còn hệ tiện ích dùng chung toàn khu.</p>
+<p>Kiến trúc FourS Tower F2 Tháp Mai lấy cảm hứng từ hoa mai, biểu tượng mùa xuân, khởi đầu và may mắn. Đây là khác biệt về ý tưởng thiết kế và nhận diện, còn hệ tiện ích dùng chung toàn khu.</p>
 <h3>"Resort truyền đời" và căn hộ sân vườn</h3>
 <p>F2 được giới thiệu với khái niệm căn hộ sở hữu lâu dài đi kèm trải nghiệm nghỉ dưỡng ngay dưới chân nhà: toàn bộ tầng 2 dành cho tiện ích, tầng 1 là thương mại. Dòng căn sân vườn với khoảng xanh riêng tiếp tục được nhấn mạnh.</p>
 <h3>Chính sách theo đợt</h3>
@@ -838,7 +847,7 @@ HTML
 <li>Dùng chung hệ tiện ích và kết nối hạ tầng khu Nam Đà Nẵng.</li>
 </ul>
 
-<h2>Lưu ý khi đặt chỗ FourS Tower F2</h2>
+<h2>Lưu ý khi đặt chỗ FourS Tower F2 Tháp Mai</h2>
 <ul>
 <li>Phí giữ chỗ chuyển vào tài khoản của chủ đầu tư hoặc đơn vị phân phối chính thức, có phiếu xác nhận.</li>
 <li>Hỏi rõ điều kiện hoàn tiền nếu không chọn được căn mong muốn trong ngày ráp căn.</li>
@@ -848,19 +857,20 @@ HTML
 <p>Với lượng đặt chỗ lớn như sự kiện ngày 26/9, các căn tầng đẹp, view sông thường được chọn sớm. Việc chuẩn bị danh sách căn ưu tiên giúp anh chị có lựa chọn tốt hơn.</p>
 
 <h2>Nên chọn F2 hay tòa khác?</h2>
-<p>Nếu ưu tiên chọn căn đẹp ở đợt mới với chính sách hiện hành, F2 là lựa chọn đáng xem. Nếu cần nhận nhà sớm hơn, anh chị nên so sánh tiến độ dự kiến của tòa đợt đầu với F2. Tổng quan cả 4 tháp có trong bài <a href="/fours-tower-da-nang-tong-quan-4-thap-bon-mua/">FourS Tower Đà Nẵng: 4 tháp Bốn Mùa</a>; F2 chưa có trang riêng, thông tin chung xem tại <a href="/du-an/fours-tower/">dự án FourS Tower</a>.</p>
+<p>Nếu ưu tiên chọn căn đẹp ở đợt mới với chính sách hiện hành, FourS Tower F2 Tháp Mai là lựa chọn đáng xem. Nếu cần nhận nhà sớm hơn, anh chị nên so sánh tiến độ dự kiến của tòa đợt đầu với F2. Tổng quan cả 4 tháp có trong bài <a href="/fours-tower-da-nang-tong-quan-4-thap-bon-mua/">FourS Tower Đà Nẵng: 4 tháp Bốn Mùa</a>; F2 chưa có trang riêng, thông tin chung xem tại <a href="/du-an/fours-tower/">dự án FourS Tower</a>.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá, quỹ căn FourS Tower F2 và so sánh với các tòa còn lại.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá, quỹ căn FourS Tower F2 Tháp Mai và so sánh với các tòa còn lại.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'FourS Tower F2 Tháp Mai: khác gì 3 tháp còn lại?',
 			'desc'      => 'FourS Tower F2 Tháp Mai (Mùa Xuân) ra mắt 26/9 với 1.369 lượt đặt chỗ, định hướng an cư đa thế hệ. So sánh với 3 tháp còn lại, gọi nhận bảng giá F2.',
-			'points'    => array( 'F2 là Tháp Mai – Mùa Xuân, tòa thứ ba được giới thiệu', 'Ra mắt 26/9/2026 với 1.369 lượt đặt chỗ thành công', 'Định hướng an cư đa thế hệ, căn hộ sân vườn, tiện ích tầng 2' ),
+			'points'    => array( 'FourS Tower F2 Tháp Mai (Mùa Xuân) là tòa thứ ba được giới thiệu', 'Ra mắt 26/9/2026 với 1.369 lượt đặt chỗ thành công', 'Định hướng an cư đa thế hệ, căn hộ sân vườn, tiện ích tầng 2' ),
 			'faq'       => array(
-				array( 'FourS Tower F2 là tháp nào?', 'F2 là Tháp Mai – Mùa Xuân, một trong 4 tháp Mai, Trúc, Cúc, Tùng của FourS Tower.' ),
+				array( 'FourS Tower F2 là tháp nào?', 'FourS Tower F2 Tháp Mai tượng trưng mùa xuân, một trong 4 tháp Mai, Trúc, Cúc, Tùng của FourS Tower.' ),
 				array( 'F2 ra mắt có bao nhiêu lượt đặt chỗ?', 'Theo VnExpress, sự kiện ngày 26/9 ghi nhận 1.369 lượt đặt chỗ thành công.' ),
 				array( 'Phí giữ chỗ FourS Tower F2 là bao nhiêu?', 'Báo chí đưa tin khoảng 50 triệu đồng/căn; anh chị nên xác nhận lại theo văn bản của đợt mở bán.' ),
+				array( 'FourS Tower F2 Tháp Mai phù hợp với ai?', 'Phù hợp gia đình mua để ở lâu dài, đặc biệt gia đình nhiều thế hệ quan tâm căn 2PN – 3PN và căn sân vườn; người đầu tư nên tính kỹ nguồn cung cho thuê trong khu.' ),
 				array( 'Giá F2 có khác các tòa trước?', 'Mỗi tòa có bảng giá riêng theo đợt; giá F2 đang cập nhật, liên hệ để nhận bảng giá chính thức.' ),
 			),
 		),

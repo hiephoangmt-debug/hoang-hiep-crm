@@ -348,7 +348,7 @@ HTML
 		'slug'     => 'gia-the-legend-da-nang-bao-nhieu',
 		'title'    => 'Giá bán The Legend Đà Nẵng (The Legend City) bao nhiêu? 1PN từ 7,65 tỷ, 2PN từ 8,96 tỷ',
 		'excerpt'  => 'Giá The Legend Đà Nẵng theo giỏ hàng chủ đầu tư: 1PN 7,65 – 9,59 tỷ, 1PN+1 góc 9,39 – 10,97 tỷ, 2PN 8,96 – 14,60 tỷ, 3PN góc 16,83 – 18,98 tỷ, penthouse từ khoảng 37 tỷ. Giá sau quà nội thất, chiết khấu đến 12%.',
-		'keyword'  => 'giá The Legend Đà Nẵng',
+		'keyword'  => 'giá The Legend bao nhiêu',
 		'keywords_extra' => array( 'giá The Legend City Đà Nẵng', 'bảng giá The Legend', 'giá căn hộ The Legend cầu Rồng' ),
 		'project'  => 'the-legend-da-nang',
 		'schedule' => '2026-11-12 09:00',
@@ -358,7 +358,7 @@ HTML
 		'image_alt' => 'The Legend Đà Nẵng lúc hoàng hôn bên sông Hàn, ngay chân cầu Rồng (phối cảnh)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Giá The Legend Đà Nẵng (giỏ hàng chủ đầu tư, tầng 6 – 25):</strong> căn 1PN 54,4 – 60,3 m² khoảng <strong>7,65 – 9,59 tỷ</strong>; 1PN+1 góc khoảng 9,39 – 10,97 tỷ; 2PN 74,9 – 84,5 m² khoảng 8,96 – 14,60 tỷ; 3PN góc khoảng 16,83 – 18,98 tỷ; penthouse duplex từ khoảng 37 tỷ. Giá gồm VAT và kinh phí bảo trì, chưa trừ quà nội thất và chiết khấu (đến 12%).</p>
+<p><strong>Giá The Legend bao nhiêu?</strong> Theo giỏ hàng chủ đầu tư (tầng 6 – 25), căn 1PN 54,4 – 60,3 m² khoảng <strong>7,65 – 9,59 tỷ</strong>; 1PN+1 góc khoảng 9,39 – 10,97 tỷ; 2PN 74,9 – 84,5 m² khoảng 8,96 – 14,60 tỷ; 3PN góc khoảng 16,83 – 18,98 tỷ; penthouse duplex từ khoảng 37 tỷ. Giá gồm VAT và kinh phí bảo trì, chưa trừ quà nội thất và chiết khấu (đến 12%).</p>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá bán (tham khảo)</th></tr></thead>
 <tbody>
@@ -371,17 +371,17 @@ HTML
 </table>
 {$sign}
 </div>
-<p>{$legend} (nhiều nơi gọi là The Legend City) là căn hộ <strong>sở hữu lâu dài</strong> trên lô đất A20 Võ Văn Kiệt, ngay chân cầu Rồng. Bài này tổng hợp <strong>giá The Legend Đà Nẵng</strong> theo giỏ hàng, cách tính giá sau ưu đãi và lịch thanh toán.</p>
+<p>{$legend} (nhiều nơi gọi là The Legend City) là căn hộ <strong>sở hữu lâu dài</strong> trên lô đất A20 Võ Văn Kiệt, ngay chân cầu Rồng. Bài này trả lời câu hỏi <strong>giá The Legend bao nhiêu</strong> theo giỏ hàng, cách tính giá sau ưu đãi và lịch thanh toán.</p>
 <!--hh-featured-->
-<h2>Giá The Legend Đà Nẵng đã gồm gì, được trừ gì</h2>
+<h2>Giá The Legend bao nhiêu: đã gồm gì, được trừ gì</h2>
 <ul>
 <li><strong>Đã gồm:</strong> VAT và kinh phí bảo trì.</li>
 <li><strong>Quà nội thất trừ thẳng vào giá:</strong> 1PN 300 triệu, 2PN 500 triệu, 3PN 700 triệu, penthouse 1,8 tỷ.</li>
 <li><strong>Chiết khấu theo cách thanh toán:</strong> theo tiến độ 3%; sớm 50% được 6%; sớm 70% được 8%; sớm 95% linh hoạt 9%; sớm 95% được 12%.</li>
 <li>Không yêu cầu bảo lãnh ngân hàng: chiết khấu thêm 1%.</li>
 </ul>
-<p>Chính sách chủ đầu tư ban hành 17/7/2025, có thể đã điều chỉnh theo đợt mở bán.</p>
-<h2>Ví dụ: căn 2PN 84,5 m² tầng cao</h2>
+<p>Chính sách chủ đầu tư ban hành 17/7/2025, có thể đã điều chỉnh theo đợt mở bán, nên giá The Legend bao nhiêu ở thời điểm anh chị mua cần đối chiếu bảng mới nhất.</p>
+<h2>Ví dụ giá The Legend bao nhiêu với căn 2PN 84,5 m² tầng cao</h2>
 <table>
 <thead><tr><th>Khoản</th><th>Số tiền</th></tr></thead>
 <tbody>
@@ -390,7 +390,7 @@ HTML
 </tbody>
 </table>
 <p>Nếu thanh toán sớm 95%, chiết khấu lên đến 12%, giá thực trả còn thấp hơn.</p>
-<!--hh-img:img/the-legend/the-legend-da-nang-ban-cong-nhin-cau-rong-song-han.jpg|Ban công căn hộ The Legend nhìn thẳng cầu Rồng và sông Hàn (phối cảnh)-->
+<!--hh-img:img/the-legend/the-legend-da-nang-ban-cong-nhin-cau-rong-song-han.jpg|Giá The Legend bao nhiêu còn tùy hướng: ban công nhìn thẳng cầu Rồng và sông Hàn (phối cảnh)-->
 <h2>Lịch thanh toán</h2>
 <table>
 <thead><tr><th>Mốc</th><th>Tỷ lệ</th><th>Thời điểm</th></tr></thead>
@@ -406,7 +406,7 @@ HTML
 </tbody>
 </table>
 <h2>Vay ngân hàng</h2>
-<p>Vay đến 70% giá trị căn tại MSB, Vietcombank hoặc MB. Chủ đầu tư hỗ trợ lãi suất 0% trong 24 tháng; ân hạn nợ gốc 36 tháng (MSB) hoặc 24 tháng (Vietcombank, MB). Khách cần thanh toán tối thiểu 25% bằng vốn tự có trước khi ngân hàng giải ngân.</p>
+<p>Sau khi biết giá The Legend bao nhiêu, bước tiếp theo là tính phần vay: vay đến 70% giá trị căn tại MSB, Vietcombank hoặc MB. Chủ đầu tư hỗ trợ lãi suất 0% trong 24 tháng; ân hạn nợ gốc 36 tháng (MSB) hoặc 24 tháng (Vietcombank, MB). Khách cần thanh toán tối thiểu 25% bằng vốn tự có trước khi ngân hàng giải ngân.</p>
 <h2>Vì sao giá The Legend cao hơn mặt bằng chung</h2>
 <ul>
 <li><strong>Sở hữu lâu dài</strong> ngay bên sông Hàn, hiếm ở trung tâm Đà Nẵng.</li>
@@ -416,28 +416,39 @@ HTML
 <p>Nếu ngân sách dưới 4 tỷ, anh chị có thể tham khảo <a href="/gia-symphony-5-sun-symphony-residence-bao-nhieu/">giá Symphony 5</a> cùng bờ Đông sông Hàn (sở hữu 50 năm).</p>
 <p>Xem thêm: <a href="/mat-bang-can-ho-the-legend-da-nang/">mặt bằng căn hộ The Legend</a>.</p>
 <h2>Shop khối đế The Legend</h2>
-<p>Tháng 10/2026 chủ đầu tư mở bán 19 căn shop và mặt bằng thương mại dịch vụ ở khối đế hai tòa tháp, ngay cầu Rồng – sông Hàn. Chính sách theo đợt: thanh toán 50%, 70%, 95% giá trị được chiết khấu tương ứng 5,5%, 6,5%, 9,5% (theo điều kiện chương trình). Giá từng shop: liên hệ để nhận bảng giá và mặt bằng.</p>
-<h2>Đơn giá theo m²</h2>
+<p>Câu hỏi giá The Legend bao nhiêu với shop khối đế cần xem riêng: tháng 10/2026 chủ đầu tư mở bán 19 căn shop và mặt bằng thương mại dịch vụ ở khối đế hai tòa tháp, ngay cầu Rồng – sông Hàn. Chính sách theo đợt: thanh toán 50%, 70%, 95% giá trị được chiết khấu tương ứng 5,5%, 6,5%, 9,5% (theo điều kiện chương trình). Giá từng shop: liên hệ để nhận bảng giá và mặt bằng.</p>
+<h2>Giá The Legend bao nhiêu một m²</h2>
 <p>Quy từ giỏ hàng, giá căn hộ The Legend khoảng 119 – 188 triệu/m² tùy loại căn, tầng và hướng (gồm VAT và kinh phí bảo trì, chưa trừ ưu đãi). Căn góc 1PN+1 có đơn giá cao nhất (khoảng 188 triệu/m² ở mức giá trên); căn 2PN có dải giá rộng nhất (8,96 – 14,60 tỷ) tùy tầng và hướng. Sau khi trừ quà nội thất và chiết khấu thanh toán sớm, đơn giá thực trả giảm đáng kể.</p>
+<h2>Giá The Legend bao nhiêu sau ưu đãi: 3 lựa chọn quyết định</h2>
+<p>Với cùng một căn, giá The Legend bao nhiêu khi ký hợp đồng phụ thuộc vào ba lựa chọn của người mua:</p>
+<ol>
+<li><strong>Loại căn:</strong> quyết định mức quà nội thất trừ thẳng vào giá (1PN 300 triệu, 2PN 500 triệu, 3PN 700 triệu, penthouse 1,8 tỷ).</li>
+<li><strong>Cách thanh toán:</strong> theo tiến độ được 3%; thanh toán sớm 50%, 70%, 95% được 6%, 8%, 12% (phương án 95% linh hoạt là 9%).</li>
+<li><strong>Bảo lãnh ngân hàng:</strong> không yêu cầu bảo lãnh được chiết khấu thêm 1%, nhưng người mua mất một lớp bảo vệ – Hoàng Hiệp khuyên cân nhắc kỹ.</li>
+</ol>
+<p>Ví dụ ở trên cho thấy căn 2PN 84,5 m² niêm yết 14,59 tỷ còn khoảng 13,61 tỷ khi thanh toán theo tiến độ. Nếu chọn thanh toán sớm, khoảng cách giữa giá niêm yết và giá thực trả còn lớn hơn. Vì vậy, khi hỏi giá The Legend bao nhiêu, anh chị nên xin phiếu tính giá theo đúng phương án thanh toán dự định.</p>
+<p>Tiến độ thi công – yếu tố gắn với các đợt thanh toán – được báo <a href="https://dantri.com.vn/bat-dong-san/tien-do-du-an-the-legend-danang-20251114105051807.htm">Dân trí</a> và <a href="https://baodautu.vn/batdongsan/chu-dau-tu-the-legend-danang-day-nhanh-tien-do-thi-cong-du-an-d433621.html">Báo Đầu tư</a> cập nhật.</p>
 {$cta('The Legend')}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá The Legend Đà Nẵng bao nhiêu? 1PN từ 7,65 tỷ',
-			'desc'      => 'Giá The Legend Đà Nẵng (The Legend City): 1PN 7,65 – 9,59 tỷ, 2PN 8,96 – 14,60 tỷ, 3PN 16,83 – 18,98 tỷ. Quà nội thất đến 1,8 tỷ, chiết khấu 12%.',
+			'seo_title' => 'Giá The Legend bao nhiêu? 1PN từ 7,65 tỷ (11/2026)',
+			'desc'      => 'Giá The Legend bao nhiêu? Giỏ hàng The Legend Đà Nẵng: 1PN 7,65 – 9,59 tỷ, 2PN 8,96 – 14,60 tỷ, 3PN 16,83 – 18,98 tỷ; quà nội thất đến 1,8 tỷ.',
 			'points'    => array(
-				'1PN 7,65 – 9,59 tỷ; 2PN 8,96 – 14,60 tỷ; 3PN góc 16,83 – 18,98 tỷ (gồm VAT, phí bảo trì)',
+				'Giá The Legend bao nhiêu: 1PN 7,65 – 9,59 tỷ; 2PN 8,96 – 14,60 tỷ; 3PN góc 16,83 – 18,98 tỷ (gồm VAT, phí bảo trì)',
 				'Quà nội thất 300 triệu – 1,8 tỷ trừ thẳng vào giá; chiết khấu đến 12%',
 				'Vay 70%, hỗ trợ lãi suất 0% trong 24 tháng; nhận nhà dự kiến 31/3/2028',
 			),
 			'faq'       => array(
-				array( 'Giá bán The Legend Đà Nẵng bao nhiêu?', 'Theo giỏ hàng chủ đầu tư tầng 6 – 25: 1PN khoảng 7,65 – 9,59 tỷ, 1PN+1 góc 9,39 – 10,97 tỷ, 2PN 8,96 – 14,60 tỷ, 3PN góc 16,83 – 18,98 tỷ; penthouse từ khoảng 37 tỷ. Giá gồm VAT và kinh phí bảo trì.' ),
+				array( 'Giá The Legend bao nhiêu theo giỏ hàng?', 'Theo giỏ hàng chủ đầu tư tầng 6 – 25: 1PN khoảng 7,65 – 9,59 tỷ, 1PN+1 góc 9,39 – 10,97 tỷ, 2PN 8,96 – 14,60 tỷ, 3PN góc 16,83 – 18,98 tỷ; penthouse từ khoảng 37 tỷ. Giá gồm VAT và kinh phí bảo trì.' ),
 				array( 'The Legend City và The Legend Đà Nẵng có phải một dự án không?', 'Đúng, cùng là dự án trên lô A20 Võ Văn Kiệt, chân cầu Rồng, chủ đầu tư Công ty TNHH MTV VIPICO.' ),
 				array( 'Mua The Legend được chiết khấu bao nhiêu?', 'Từ 3% (thanh toán theo tiến độ) đến 12% (thanh toán sớm 95%), cộng quà nội thất trừ vào giá 300 triệu – 1,8 tỷ tùy loại căn, theo chính sách 17/7/2025.' ),
 				array( 'The Legend Đà Nẵng khi nào bàn giao?', 'Dự kiến bàn giao căn hộ 31/3/2028; cất nóc dự kiến 31/12/2026.' ),
+				array( 'Giá The Legend bao nhiêu sau quà nội thất và chiết khấu?', 'Tùy loại căn và cách thanh toán: quà nội thất 300 triệu – 1,8 tỷ trừ thẳng vào giá, chiết khấu 3% – 12%. Ví dụ căn 2PN niêm yết 14,59 tỷ còn khoảng 13,61 tỷ khi thanh toán theo tiến độ.' ),
+				array( 'Giá The Legend bao nhiêu một m²?', 'Quy từ giỏ hàng khoảng 119 – 188 triệu/m² tùy loại căn, tầng và hướng (gồm VAT và kinh phí bảo trì, chưa trừ ưu đãi).' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://dantri.com.vn/bat-dong-san/tien-do-du-an-the-legend-danang-20251114105051807.htm', 'https://baodautu.vn/batdongsan/chu-dau-tu-the-legend-danang-day-nhanh-tien-do-thi-cong-du-an-d433621.html' ),
 	);
 
 	/* ---------------- The Legend – Mặt bằng ---------------- */
@@ -458,7 +469,7 @@ HTML
 <p><strong>Mặt bằng The Legend Đà Nẵng:</strong> khu đất 11.487 m², 4 mặt tiền, gồm <strong>tháp căn hộ 29 tầng</strong> với 800 căn sở hữu lâu dài và <strong>tháp khách sạn 25 tầng</strong> (222 phòng khách sạn, 222 căn hộ dịch vụ, thời hạn 50 năm), chung 3 tầng hầm. Tháp căn hộ chia 2 cánh: <strong>Legacy</strong> phía sông Hàn và <strong>Infinity</strong> phía biển Mỹ Khê.</p>
 {$sign}
 </div>
-<p>Bài này giúp anh chị hình dung <strong>mặt bằng The Legend</strong> trước khi chọn căn: có những loại căn nào, nằm ở cánh nào và nhìn ra đâu. Giá và chính sách xem tại {$legend}.</p>
+<p>Bài này giúp anh chị hình dung <strong>mặt bằng The Legend Đà Nẵng</strong> trước khi chọn căn: có những loại căn nào, nằm ở cánh nào và nhìn ra đâu. Giá và chính sách xem tại {$legend}.</p>
 <!--hh-featured-->
 <h2>Tổng mặt bằng The Legend Đà Nẵng</h2>
 <table>
@@ -471,8 +482,8 @@ HTML
 <tr><td>Khối đế</td><td>Thương mại, nhà hàng, tiện ích</td><td>4 mặt tiền; đang mở bán 19 shop</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/the-legend/the-legend-da-nang-hai-toa-thap-ben-cau-rong.jpg|Hai tòa tháp The Legend bên cầu Rồng, nhìn dọc sông Hàn (phối cảnh)-->
-<h2>Cơ cấu 800 căn hộ</h2>
+<!--hh-img:img/the-legend/the-legend-da-nang-hai-toa-thap-ben-cau-rong.jpg|Mặt bằng The Legend Đà Nẵng gồm hai tòa tháp bên cầu Rồng, nhìn dọc sông Hàn (phối cảnh)-->
+<h2>Cơ cấu 800 căn hộ trên mặt bằng The Legend Đà Nẵng</h2>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích</th><th>Số căn</th></tr></thead>
 <tbody>
@@ -484,7 +495,7 @@ HTML
 </tbody>
 </table>
 <p>1PN và 2PN chiếm phần lớn (616/800 căn). 3PN và 1PN+1 ít hơn, thường ở vị trí góc.</p>
-<h2>Cánh Legacy hay Infinity</h2>
+<h2>Cánh Legacy hay Infinity trên mặt bằng The Legend Đà Nẵng</h2>
 <ul>
 <li><strong>Legacy – phía sông Hàn:</strong> nhìn cầu Rồng, sông Hàn và trung tâm Hải Châu, xem pháo hoa DIFF và rồng phun lửa cuối tuần.</li>
 <li><strong>Infinity – phía biển:</strong> nhìn về biển Mỹ Khê, bán đảo Sơn Trà; buổi sáng có nắng sớm.</li>
@@ -495,11 +506,11 @@ HTML
 <h2>Tiêu chuẩn bàn giao</h2>
 <p>Bàn giao hoàn thiện cao cấp, tích hợp smarthome: sàn gỗ kỹ thuật sồi châu Âu ở phòng khách và phòng ngủ, gạch nhập khẩu ở vệ sinh và bếp, cửa chính chống cháy với khóa thông minh, điều hòa âm trần nối ống gió.</p>
 <!--hh-img:img/the-legend/the-legend-da-nang-khoi-de-thuong-mai-mat-tien-vo-van-kiet.jpg|Khối đế thương mại The Legend mặt tiền Võ Văn Kiệt (phối cảnh)-->
-<p>Mặt bằng từng tầng và vị trí căn trống anh chị nhắn Hoàng Hiệp để nhận bản mới nhất. Xem giá từng loại căn: <a href="/gia-the-legend-da-nang-bao-nhieu/">giá bán The Legend Đà Nẵng</a>.</p>
-<h2>Khối đế và tiện ích</h2>
+<p>Mặt bằng The Legend Đà Nẵng theo từng tầng và vị trí căn trống anh chị nhắn Hoàng Hiệp để nhận bản mới nhất. Xem giá từng loại căn: <a href="/gia-the-legend-da-nang-bao-nhieu/">giá bán The Legend Đà Nẵng</a>.</p>
+<h2>Khối đế và tiện ích trong mặt bằng The Legend Đà Nẵng</h2>
 <p>Khu đất 11.487 m² (khoảng 1,2 ha) có 4 mặt tiền Võ Văn Kiệt, Ngô Quyền, Mai Hắc Đế, Lý Nam Đế. Khối đế dùng cho thương mại, nhà hàng, tiện ích, mở cho cư dân và khách; tháng 10/2026 chủ đầu tư mở bán 19 căn shop và mặt bằng thương mại dịch vụ ở khối đế hai tòa. Ba tầng hầm dùng chung cho cả tháp căn hộ và tháp khách sạn. Trên mái có vườn, từ đây nhìn thẳng sông Hàn, cầu Rồng và về phía biển Mỹ Khê.</p>
 <!--hh-img:img/the-legend/the-legend-da-nang-khoi-de-ve-dem.jpg|Khối đế thương mại The Legend lên đèn về đêm (phối cảnh)-->
-<h2>Giá theo loại căn trên mặt bằng</h2>
+<h2>Giá theo loại căn trên mặt bằng The Legend Đà Nẵng</h2>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích trong giỏ hàng</th><th>Giá (gồm VAT, phí bảo trì)</th></tr></thead>
 <tbody>
@@ -510,7 +521,7 @@ HTML
 </tbody>
 </table>
 <p>Giỏ hàng tầng 6 – 25; giá chưa trừ quà nội thất (1PN 300 triệu, 2PN 500 triệu, 3PN 700 triệu) và chiết khấu thanh toán.</p>
-<h2>Chọn căn theo nhu cầu</h2>
+<h2>Chọn căn trên mặt bằng The Legend Đà Nẵng theo nhu cầu</h2>
 <ul>
 <li><strong>Ở một mình hoặc cho thuê:</strong> 1PN – nhiều nhất (308 căn), tổng tiền thấp nhất.</li>
 <li><strong>Vợ chồng trẻ, làm việc tại nhà:</strong> 1PN+1 ở vị trí góc, có phòng đa năng.</li>
@@ -519,6 +530,14 @@ HTML
 <li><strong>Không gian riêng tư, sân vườn trên cao:</strong> penthouse duplex tầng 27 trở lên.</li>
 </ul>
 <p>Mọi căn hộ trong tháp căn hộ đều sở hữu lâu dài; tháp khách sạn có thời hạn 50 năm – khi chọn, hỏi rõ căn thuộc tháp nào. Xem thêm <a href="/phap-ly-the-legend-da-nang-so-huu-lau-dai/">pháp lý The Legend</a>.</p>
+<h2>Cách đọc mặt bằng The Legend Đà Nẵng trước khi chọn căn</h2>
+<ol>
+<li><strong>Xác định tháp:</strong> tháp căn hộ 29 tầng (800 căn sở hữu lâu dài) và tháp khách sạn 25 tầng (thời hạn 50 năm) dùng chung khối đế và 3 tầng hầm, nên trên mặt bằng The Legend Đà Nẵng cần nhìn đúng khối.</li>
+<li><strong>Xác định cánh:</strong> Legacy phía sông Hàn – cầu Rồng; Infinity phía biển Mỹ Khê – Sơn Trà.</li>
+<li><strong>Căn góc hay căn giữa:</strong> 3PN và 1PN+1 thường nằm ở góc, có hai mặt thoáng; 1PN, 2PN chiếm phần lớn (616/800 căn) nên nhiều lựa chọn tầng hơn.</li>
+<li><strong>Tầng:</strong> căn hộ từ tầng 5 đến 26; penthouse duplex từ tầng 27 trở lên.</li>
+</ol>
+<p>Hai căn cùng loại, cùng diện tích nhưng khác cánh, khác tầng có thể chênh giá đáng kể – giỏ hàng 2PN trải từ khoảng 8,96 đến 14,60 tỷ. Đọc kỹ mặt bằng The Legend Đà Nẵng giúp anh chị khoanh vùng căn phù hợp trước khi xem phiếu tính giá. Về tiến độ, <a href="https://baodautu.vn/batdongsan/chu-dau-tu-the-legend-danang-day-nhanh-tien-do-thi-cong-du-an-d433621.html">Báo Đầu tư</a> đã đưa tin chủ đầu tư đẩy nhanh thi công dự án.</p>
 <h2>Bàn giao hoàn thiện cao cấp</h2>
 <p>Mọi căn bàn giao hoàn thiện, có smarthome: sàn gỗ kỹ thuật sồi châu Âu ở phòng khách và phòng ngủ, gạch nhập khẩu khu vệ sinh và bếp, cửa chính chống cháy với khóa thông minh, điều hòa âm trần nối ống gió, cửa kính và lan can nhôm kính dán an toàn.</p>
 {$cta('The Legend')}
@@ -528,7 +547,7 @@ HTML
 			'seo_title' => 'Mặt bằng The Legend Đà Nẵng: 800 căn, 1PN – 3PN',
 			'desc'      => 'Mặt bằng The Legend Đà Nẵng: tháp căn hộ 29 tầng, 800 căn – 308 căn 1PN, 88 căn 1PN+1, 308 căn 2PN, 88 căn 3PN, 8 penthouse; Legacy, Infinity.',
 			'points'    => array(
-				'Tháp căn hộ 29 tầng, 800 căn sở hữu lâu dài; tháp khách sạn 25 tầng',
+				'Mặt bằng The Legend Đà Nẵng: tháp căn hộ 29 tầng, 800 căn sở hữu lâu dài; tháp khách sạn 25 tầng',
 				'308 căn 1PN, 88 căn 1PN+1, 308 căn 2PN, 88 căn 3PN, 8 penthouse duplex',
 				'Cánh Legacy nhìn sông Hàn, cánh Infinity nhìn biển Mỹ Khê',
 			),
@@ -536,9 +555,11 @@ HTML
 				array( 'The Legend Đà Nẵng có bao nhiêu căn hộ?', '800 căn hộ sở hữu lâu dài trong tháp 29 tầng: 308 căn 1PN, 88 căn 1PN+1, 308 căn 2PN, 88 căn 3PN và 8 penthouse duplex. Tháp khách sạn 25 tầng có 222 phòng khách sạn và 222 căn hộ dịch vụ.' ),
 				array( 'Diện tích căn hộ The Legend bao nhiêu?', '1PN 40 – 60 m², 1PN+1 58 – 63 m², 2PN 73 – 85 m², 3PN 112 – 117 m², penthouse 256 – 415 m².' ),
 				array( 'Cánh Legacy và Infinity khác nhau thế nào?', 'Legacy nằm phía sông Hàn, nhìn cầu Rồng; Infinity nằm phía biển, nhìn về Mỹ Khê và bán đảo Sơn Trà. Cả hai cánh đều có căn 1PN đến 3PN từ tầng 5 đến 26.' ),
+				array( 'Mặt bằng The Legend Đà Nẵng có tháp khách sạn không?', 'Có. Ngoài tháp căn hộ 29 tầng (800 căn sở hữu lâu dài) còn tháp khách sạn 25 tầng với 222 phòng khách sạn và 222 căn hộ dịch vụ, thời hạn 50 năm, chung 3 tầng hầm.' ),
+				array( 'Xin mặt bằng The Legend Đà Nẵng từng tầng ở đâu?', 'Anh chị nhắn Hoàng Hiệp (0904 567 009) để nhận mặt bằng tầng và danh sách căn còn trống theo giỏ hàng mới nhất.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://baodautu.vn/batdongsan/chu-dau-tu-the-legend-danang-day-nhanh-tien-do-thi-cong-du-an-d433621.html', 'https://dantri.com.vn/bat-dong-san/tien-do-du-an-the-legend-danang-20251114105051807.htm' ),
 	);
 
 	/* ---------------- Nobu – Giá ---------------- */
@@ -546,7 +567,7 @@ HTML
 		'slug'     => 'gia-nobu-residences-da-nang-bao-nhieu',
 		'title'    => 'Giá Nobu Đà Nẵng (Nobu Residences) bao nhiêu? Căn 1PN từ khoảng 6,63 tỷ (11/2026)',
 		'excerpt'  => 'Giá Nobu Residences Đà Nẵng tham khảo: căn 1PN 62,5 – 71,1 m² khoảng 6,63 – 9,06 tỷ; đơn giá các nguồn nêu khoảng 145 – 205 triệu/m² tùy tầng và view. Các loại căn studio đến Sky Villa, penthouse; điểm cần kiểm tra về thời hạn sở hữu.',
-		'keyword'  => 'giá Nobu Đà Nẵng',
+		'keyword'  => 'giá Nobu Residences bao nhiêu',
 		'keywords_extra' => array( 'giá Nobu Đà Nẵng', 'bảng giá Nobu Residences', 'Nobu Danang giá' ),
 		'project'  => 'nobu-da-nang',
 		'schedule' => '2026-11-12 14:00',
@@ -556,7 +577,7 @@ HTML
 		'image_alt' => 'Phối cảnh tháp Nobu Residences Đà Nẵng bên biển Mỹ Khê (ảnh chủ đầu tư)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Giá Nobu Đà Nẵng – Nobu Residences (tham khảo 11/2026):</strong> căn 1PN 62,5 – 71,1 m² khoảng <strong>6,63 – 9,06 tỷ</strong>. Đơn giá một số nguồn nêu khoảng 145 – 205 triệu/m² tùy tầng và hướng view. Studio, 2PN, 3PN Dual Key, Sky Villa và penthouse: liên hệ để nhận giá từng căn.</p>
+<p><strong>Giá Nobu Residences bao nhiêu?</strong> Theo tham khảo 11/2026, căn 1PN 62,5 – 71,1 m² khoảng <strong>6,63 – 9,06 tỷ</strong>. Đơn giá một số nguồn nêu khoảng 145 – 205 triệu/m² tùy tầng và hướng view. Studio, 2PN, 3PN Dual Key, Sky Villa và penthouse: liên hệ để nhận giá từng căn.</p>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá bán (tham khảo)</th></tr></thead>
 <tbody>
@@ -570,19 +591,19 @@ HTML
 </table>
 <p><small>Tổng hợp: Hoàng Hiệp – môi giới bất động sản Đà Nẵng hơn 15 năm · cập nhật 10/11/2026. Giá tham khảo tổng hợp từ nhiều nguồn, chưa phải bảng giá chính thức của chủ đầu tư.</small></p>
 </div>
-<p>{$nobu} là dự án Nobu Residences đầu tiên tại Đông Nam Á, do VCRE phát triển theo giấy phép thương hiệu Nobu Hospitality. Vì là căn hộ hàng hiệu, <strong>giá Nobu Đà Nẵng</strong> cao hơn nhiều so với căn hộ ven biển thông thường. Bài này giải thích mức giá, giá gồm những gì và điều cần kiểm tra trước khi mua.</p>
+<p>{$nobu} là dự án Nobu Residences đầu tiên tại Đông Nam Á, do VCRE phát triển theo giấy phép thương hiệu Nobu Hospitality. Vì là căn hộ hàng hiệu, câu trả lời cho <strong>giá Nobu Residences bao nhiêu</strong> luôn cao hơn nhiều so với căn hộ ven biển thông thường. Bài này giải thích mức giá, giá gồm những gì và điều cần kiểm tra trước khi mua.</p>
 <!--hh-featured-->
-<h2>Vì sao giá Nobu Đà Nẵng cao</h2>
+<h2>Giá Nobu Residences bao nhiêu và vì sao ở mức cao</h2>
 <ul>
 <li><strong>Thương hiệu Nobu Hospitality</strong> (Robert De Niro, đầu bếp Nobu Matsuhisa, Meir Teper) vận hành khách sạn, nhà hàng và dịch vụ cư dân.</li>
 <li><strong>Chỉ 264 căn hộ</strong> trong tháp 43 tầng (khoảng 186 m), cùng khách sạn Nobu khoảng 200 phòng (gồm 18 suite).</li>
 <li><strong>Mặt tiền biển Mỹ Khê,</strong> góc Võ Văn Kiệt – Võ Nguyên Giáp.</li>
 <li><strong>Hoàn thiện nội thất</strong> theo tiêu chuẩn Nobu, phong cách Japandi.</li>
 </ul>
-<!--hh-img:img/nobu-da-nang/nobu-da-nang-phong-khach-tran-cao-3m.jpg|Phòng khách trần cao gần 3 m nhìn biển (phối cảnh nội thất Nobu Đà Nẵng)-->
-<h2>Đơn giá theo m²: vì sao các nguồn chênh nhau</h2>
+<!--hh-img:img/nobu-da-nang/nobu-da-nang-phong-khach-tran-cao-3m.jpg|Giá Nobu Residences bao nhiêu gắn với tiêu chuẩn hoàn thiện: phòng khách trần cao gần 3 m nhìn biển (phối cảnh nội thất)-->
+<h2>Giá Nobu Residences bao nhiêu một m²: vì sao các nguồn chênh nhau</h2>
 <p>Quy từ giá căn 1PN tham khảo (6,63 – 9,06 tỷ cho 62,5 – 71,1 m²), đơn giá khoảng <strong>106 – 127 triệu/m²</strong> (Hoàng Hiệp tự tính), thấp hơn mức 145 – 205 triệu/m² một số nguồn nêu. Chênh lệch có thể do tầng, hướng view, cách tính diện tích (thông thủy hay tim tường) và giá đã gồm VAT hay chưa. Vì vậy anh chị nên so sánh theo <strong>tổng tiền từng căn</strong> trên phiếu tính giá, không chỉ theo đơn giá/m².</p>
-<h2>Cần kiểm tra gì trước khi mua</h2>
+<h2>Ngoài giá Nobu Residences bao nhiêu, cần kiểm tra gì</h2>
 <ol>
 <li><strong>Thời hạn sở hữu:</strong> các nguồn chưa thống nhất. Một số ghi sở hữu lâu dài cho người Việt và 50 năm cho người nước ngoài; nguồn khác ghi thời hạn đến năm 2060 theo đất thương mại dịch vụ. Anh chị cần đối chiếu hợp đồng mua bán.</li>
 <li><strong>Chương trình cho thuê:</strong> căn hộ có thể tham gia chương trình cho thuê do Nobu Hospitality vận hành. Mức lợi nhuận một số nơi nêu (khoảng 6%/năm) cần kiểm tra điều kiện cụ thể trong hợp đồng.</li>
@@ -590,32 +611,43 @@ HTML
 <li><strong>Tiến độ:</strong> tháng 10/2026 kết cấu đã đến tầng 22, bàn giao dự kiến năm 2027 (xem <a href="/tien-do-nobu-residences-da-nang/">tiến độ Nobu Đà Nẵng</a>).</li>
 </ol>
 <!--hh-img:img/nobu-da-nang/nobu-da-nang-ho-boi-nuoc-am-tren-cao.jpg|Hồ bơi nước ấm trên cao Nobu Đà Nẵng (phối cảnh)-->
-<h2>So với căn hộ cao cấp khác ở Đà Nẵng</h2>
-<p>Ở phía sông Hàn, <a href="/du-an/the-legend-da-nang/">The Legend</a> (sở hữu lâu dài) có giỏ hàng khoảng 119 – 188 triệu/m². Nobu khác ở thương hiệu vận hành quốc tế và vị trí mặt biển; The Legend khác ở pháp lý sở hữu lâu dài và vị trí chân cầu Rồng.</p>
+<h2>Giá Nobu Residences bao nhiêu so với căn hộ cao cấp khác</h2>
+<p>Ở phía sông Hàn, <a href="/du-an/the-legend-da-nang/">The Legend</a> (sở hữu lâu dài) có giỏ hàng khoảng 119 – 188 triệu/m². Nobu khác ở thương hiệu vận hành quốc tế và vị trí mặt biển; The Legend khác ở pháp lý sở hữu lâu dài và vị trí chân cầu Rồng. Nói cách khác, giá Nobu Residences bao nhiêu cần được so trong cùng điều kiện thời hạn sở hữu và mức dịch vụ.</p>
 <h2>Thiết kế và tiện ích tạo nên giá</h2>
-<p>Kiến trúc tòa tháp lấy cảm hứng từ quạt giấy Nhật Bản, nội thất phong cách Japandi. Tiện ích gồm hồ bơi vô cực nước ấm tầng 18, nhà hàng Nobu tầng 42, bar trên không, beach club, phòng tập trên không và sảnh hội nghị. Căn cao cấp nhất là 6 Sky Villa có hồ bơi riêng (khoảng 254 – 288 m²) và 2 penthouse (khoảng 372 m²).</p>
+<p>Kiến trúc tòa tháp lấy cảm hứng từ quạt giấy Nhật Bản, nội thất phong cách Japandi. Tiện ích gồm hồ bơi vô cực nước ấm tầng 18, nhà hàng Nobu tầng 42, bar trên không, beach club, phòng tập trên không và sảnh hội nghị. Căn cao cấp nhất là 6 Sky Villa có hồ bơi riêng (khoảng 254 – 288 m²) và 2 penthouse (khoảng 372 m²). Những hạng mục này là lý do khi hỏi giá Nobu Residences bao nhiêu, con số luôn thuộc nhóm cao nhất thị trường Đà Nẵng.</p>
 <!--hh-img:img/nobu-da-nang/nobu-da-nang-phong-ngu-view-phao-hoa.jpg|Phòng ngủ Nobu Đà Nẵng nhìn ra sông Hàn, pháo hoa (phối cảnh nội thất)-->
 <p>Xem tiến độ: <a href="/tien-do-nobu-residences-da-nang/">tiến độ Nobu Đà Nẵng</a>; chủ đầu tư: <a href="/nobu-da-nang-cua-ai-chu-dau-tu/">Nobu Đà Nẵng của ai</a>.</p>
 <h2>Tiến độ đang ở đâu</h2>
 <p>Dự án khởi công quý 2/2024, nhà thầu Newtecons. Tháng 10/2026 kết cấu đã lên tầng 22 trên tổng 43 tầng; đang lắp mặt dựng kính tầng 7 – 13 và thi công cơ điện, phòng cháy tới tầng 17. Theo lãnh đạo VCRE, dự án dự kiến hoàn thành năm 2027; các nguồn ghi mốc bàn giao trong khoảng quý 1 – quý 3/2027.</p>
+<h2>Giá Nobu Residences bao nhiêu mới đủ để so sánh: 4 con số cần xin</h2>
+<p>Vì chưa có bảng giá chính thức công khai, khi hỏi giá Nobu Residences bao nhiêu, anh chị nên xin đủ bốn con số cho từng căn cụ thể:</p>
+<ol>
+<li><strong>Tổng giá trên phiếu tính giá</strong>, kèm thông tin giá đã gồm VAT, kinh phí bảo trì hay chưa.</li>
+<li><strong>Diện tích tính giá</strong> – thông thủy hay tim tường – để quy đổi đơn giá/m² cho đúng.</li>
+<li><strong>Phí quản lý, phí thương hiệu</strong> mỗi tháng – khoản chi cố định suốt thời gian sở hữu.</li>
+<li><strong>Điều kiện chương trình cho thuê</strong> nếu tham gia: tỷ lệ chia doanh thu, số đêm chủ nhà được ở.</li>
+</ol>
+<p>Có đủ bốn con số này, việc so Nobu với các căn hộ cao cấp khác mới công bằng, thay vì chỉ so đơn giá/m² trên tin rao. Thông tin về thương hiệu Nobu tại Đà Nẵng đã được <a href="https://vnexpress.net/huyen-thoai-hollywood-dua-thuong-hieu-nobu-den-da-nang-4761311.html">VnExpress</a> và <a href="https://vneconomy.vn/nobu-danang-san-sang-chao-don-nhung-chu-nhan-tinh-hoa-moi.htm">VnEconomy</a> đưa tin.</p>
 {$cta('Nobu Residences Đà Nẵng')}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá Nobu Đà Nẵng bao nhiêu? 1PN từ 6,63 tỷ (11/2026)',
-			'desc'      => 'Giá Nobu Đà Nẵng (Nobu Residences) tham khảo: căn 1PN 62,5 – 71,1 m² khoảng 6,63 – 9,06 tỷ. Loại căn, đơn giá/m², điều cần kiểm tra về sở hữu.',
+			'seo_title' => 'Giá Nobu Residences bao nhiêu? 1PN từ 6,63 tỷ (11/2026)',
+			'desc'      => 'Giá Nobu Residences bao nhiêu? Tham khảo 11/2026: căn 1PN 62,5 – 71,1 m² khoảng 6,63 – 9,06 tỷ. Đơn giá/m², loại căn, điều cần kiểm tra về sở hữu.',
 			'points'    => array(
-				'Căn 1PN 62,5 – 71,1 m² khoảng 6,63 – 9,06 tỷ (tham khảo)',
+				'Giá Nobu Residences bao nhiêu: căn 1PN 62,5 – 71,1 m² khoảng 6,63 – 9,06 tỷ (tham khảo)',
 				'Đơn giá các nguồn nêu khoảng 145 – 205 triệu/m², chênh theo tầng, view, cách tính',
 				'Thời hạn sở hữu các nguồn chưa thống nhất – cần đối chiếu hợp đồng',
 			),
 			'faq'       => array(
-				array( 'Giá Nobu Residences Đà Nẵng bao nhiêu?', 'Căn 1PN 62,5 – 71,1 m² tham khảo khoảng 6,63 – 9,06 tỷ; đơn giá một số nguồn nêu khoảng 145 – 205 triệu/m² tùy tầng và hướng view. Đây là giá tổng hợp từ nhiều nguồn, chưa phải bảng giá chính thức.' ),
+				array( 'Giá Nobu Residences bao nhiêu theo tham khảo mới nhất?', 'Căn 1PN 62,5 – 71,1 m² tham khảo khoảng 6,63 – 9,06 tỷ; đơn giá một số nguồn nêu khoảng 145 – 205 triệu/m² tùy tầng và hướng view. Đây là giá tổng hợp từ nhiều nguồn, chưa phải bảng giá chính thức.' ),
 				array( 'Nobu Đà Nẵng có bao nhiêu căn hộ?', '264 căn hộ du lịch hàng hiệu, cùng khách sạn Nobu khoảng 200 phòng (gồm 18 suite), trong tháp 43 tầng.' ),
 				array( 'Nobu Residences Đà Nẵng sở hữu bao lâu?', 'Các nguồn chưa thống nhất: có nguồn ghi sở hữu lâu dài cho người Việt và 50 năm cho người nước ngoài, nguồn khác ghi đến năm 2060 theo đất thương mại dịch vụ. Người mua nên đối chiếu hợp đồng mua bán.' ),
+				array( 'Giá Nobu Residences bao nhiêu một m²?', 'Một số nguồn nêu khoảng 145 – 205 triệu/m²; quy từ giá căn 1PN tham khảo thì khoảng 106 – 127 triệu/m² (Hoàng Hiệp tự tính). Chênh lệch do tầng, view và cách tính diện tích.' ),
+				array( 'Giá Nobu Residences bao nhiêu với Sky Villa, penthouse?', 'Chưa có giá công khai cho 6 căn Sky Villa (khoảng 254 – 288 m²) và 2 căn penthouse (khoảng 372 m²). Anh chị liên hệ Hoàng Hiệp để nhận thông tin từng căn.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://vnexpress.net/huyen-thoai-hollywood-dua-thuong-hieu-nobu-den-da-nang-4761311.html', 'https://vneconomy.vn/nobu-danang-san-sang-chao-don-nhung-chu-nhan-tinh-hoa-moi.htm' ),
 	);
 
 	/* ---------------- Nobu – Tiến độ ---------------- */
@@ -633,7 +665,7 @@ HTML
 		'image_alt' => 'Công trường Nobu Đà Nẵng tháng 10/2026 – kết cấu đến tầng 22 (ảnh thực tế của chủ đầu tư)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Tiến độ Nobu Residences Đà Nẵng (cập nhật 10/2026):</strong> kết cấu đã lên đến <strong>tầng 22</strong> (tháp 43 tầng); đang lắp mặt dựng, kính từ tầng 7 đến 13; thi công cơ điện và PCCC tới tầng 17; xây tô, sơn nước khối đế tầng 2 – 6 và tầng hầm. Dự án khởi công quý 2/2024, bàn giao dự kiến năm 2027.</p>
+<p><strong>Tiến độ Nobu Đà Nẵng (cập nhật 10/2026):</strong> kết cấu đã lên đến <strong>tầng 22</strong> (tháp 43 tầng); đang lắp mặt dựng, kính từ tầng 7 đến 13; thi công cơ điện và PCCC tới tầng 17; xây tô, sơn nước khối đế tầng 2 – 6 và tầng hầm. Dự án khởi công quý 2/2024, bàn giao dự kiến năm 2027.</p>
 <p><small>Tổng hợp: Hoàng Hiệp từ cập nhật tiến độ và ảnh công trường của chủ đầu tư (09/11/2026).</small></p>
 </div>
 <p>Khách quan tâm {$nobu} thường hỏi "đã xây đến đâu". Bài này tổng hợp <strong>tiến độ Nobu Đà Nẵng</strong> theo từng mốc, kèm ảnh công trường thực tế do chủ đầu tư công bố. Nhà thầu thi công là Newtecons.</p>
@@ -651,10 +683,10 @@ HTML
 <tr><td>2027</td><td>Dự kiến hoàn thiện, bàn giao và vận hành</td></tr>
 </tbody>
 </table>
-<h2>Tháng 10/2026: công trường làm gì</h2>
+<h2>Tiến độ Nobu Đà Nẵng tháng 10/2026: công trường làm gì</h2>
 <h3>Phần kết cấu</h3>
 <p>Thi công cốp pha, cốt thép và đổ bê tông sàn tầng 22. Từ tháng 5 (tầng 8) đến tháng 10 (tầng 22), kết cấu lên thêm khoảng 14 tầng trong 5 tháng.</p>
-<!--hh-img:img/nobu-da-nang/nobu-da-nang-tien-do-10-2026-do-san-tang-22.jpg|Thi công cốp pha, cốt thép, đổ bê tông sàn tầng 22 – tháng 10/2026 (ảnh chủ đầu tư)-->
+<!--hh-img:img/nobu-da-nang/nobu-da-nang-tien-do-10-2026-do-san-tang-22.jpg|Tiến độ Nobu Đà Nẵng tháng 10/2026: cốp pha, cốt thép, đổ bê tông sàn tầng 22 (ảnh chủ đầu tư)-->
 <h3>Mặt dựng và cửa kính</h3>
 <p>Lắp khung cửa kính lùa, lan can kính ở các tầng 7 – 12, mặt dựng kính tới tầng 13.</p>
 <!--hh-img:img/nobu-da-nang/nobu-da-nang-tien-do-10-2026-lap-cua-kinh.jpg|Lắp khung cửa kính lùa, lan can kính tầng 7 – 12 – tháng 10/2026 (ảnh chủ đầu tư)-->
@@ -664,9 +696,9 @@ HTML
 <h3>Khối đế và tầng hầm</h3>
 <p>Xây tô, sơn nước tầng 2 – 6 của khối đế; xây tô, sơn nước và cơ điện tầng hầm B1, B2.</p>
 <!--hh-img:img/nobu-da-nang/nobu-da-nang-tien-do-10-2026-xay-to-khoi-de.jpg|Xây tô, sơn nước tầng 2 – 6 khối đế – tháng 10/2026 (ảnh chủ đầu tư)-->
-<h2>Còn bao nhiêu tầng nữa</h2>
+<h2>Tiến độ Nobu Đà Nẵng: còn bao nhiêu tầng nữa</h2>
 <p>Tháp cao 43 tầng nổi, tháng 10/2026 kết cấu ở tầng 22, tức còn khoảng 21 tầng phần thân. Hoàng Hiệp sẽ cập nhật bài này mỗi khi chủ đầu tư công bố tiến độ mới.</p>
-<h2>Ý nghĩa với người mua</h2>
+<h2>Tiến độ Nobu Đà Nẵng có ý nghĩa gì với người mua</h2>
 <ul>
 <li>Phần thân đang lên đều, hoàn thiện (kính, cơ điện, xây tô) chạy song song ở các tầng dưới.</li>
 <li>Bàn giao dự kiến năm 2027 (các nguồn ghi quý 1 – quý 3/2027). Mốc chính xác theo hợp đồng mua bán.</li>
@@ -684,7 +716,7 @@ HTML
 <tr><td>Tầng hầm B1, B2</td><td>Xây tô, sơn nước, cơ điện</td></tr>
 </tbody>
 </table>
-<h2>Nhịp thi công qua từng mốc</h2>
+<h2>Nhịp tiến độ Nobu Đà Nẵng qua từng mốc</h2>
 <p>Sau khi hoàn thành sàn chuyển L6M vào đầu năm 2026, công trình chuyển sang thi công tầng điển hình. Từ tầng 8 (tháng 5/2026) lên tầng 22 (tháng 10/2026), mỗi tháng kết cấu tăng trung bình khoảng 2 – 3 tầng (Hoàng Hiệp tự tính từ các mốc chủ đầu tư công bố). Phần hoàn thiện được triển khai song song ở các tầng dưới, giúp rút ngắn thời gian từ cất nóc đến bàn giao. Lãnh đạo VCRE cho biết dự án dự kiến hoàn thành năm 2027.</p>
 <!--hh-img:img/nobu-da-nang/nobu-da-nang-tien-do-10-2026-tang-ham.jpg|Xây tô, sơn nước và cơ điện tầng hầm B1, B2 Nobu Đà Nẵng – tháng 10/2026 (ảnh chủ đầu tư)-->
 <h2>Người mua nên theo dõi gì</h2>
@@ -694,6 +726,9 @@ HTML
 <li><strong>Nghiệm thu phòng cháy:</strong> điều kiện bắt buộc trước khi bàn giao và vận hành khách sạn.</li>
 <li><strong>Mốc bàn giao trong hợp đồng:</strong> các nguồn ghi quý 1 – quý 3/2027; mốc áp dụng cho căn của anh chị là mốc trong hợp đồng mua bán.</li>
 </ol>
+<h2>Tiến độ Nobu Đà Nẵng so với mốc bàn giao 2027</h2>
+<p>Nếu giữ nhịp khoảng 2 – 3 tầng mỗi tháng như giai đoạn 5 – 10/2026, phần kết cấu còn khoảng 21 tầng sẽ cần thêm chừng 7 – 11 tháng để chạm tầng 43 (Hoàng Hiệp tự ước tính, không phải cam kết của chủ đầu tư). Sau cất nóc còn phần hoàn thiện, lắp thiết bị và nghiệm thu phòng cháy cho cả khối căn hộ lẫn khách sạn. Vì vậy, theo dõi tiến độ Nobu Đà Nẵng từng tháng giúp người mua tự đánh giá mốc bàn giao 2027 sát thực tế đến đâu.</p>
+<p>Mối hợp tác giữa VCRE và Nobu Hospitality để phát triển dự án từng được <a href="https://vnexpress.net/vcre-cung-nobu-hospitality-kien-tao-bieu-tuong-phong-cach-song-tai-da-nang-4598075.html">VnExpress</a> đưa tin; thông tin về giai đoạn chuẩn bị đón cư dân có trên <a href="https://vneconomy.vn/nobu-danang-san-sang-chao-don-nhung-chu-nhan-tinh-hoa-moi.htm">VnEconomy</a>.</p>
 <p>Ai đứng sau dự án: <a href="/nobu-da-nang-cua-ai-chu-dau-tu/">Nobu Đà Nẵng của ai</a>.</p>
 <p>Xem giá tham khảo từng loại căn: <a href="/gia-nobu-residences-da-nang-bao-nhieu/">giá Nobu Đà Nẵng</a>.</p>
 {$cta('Nobu Residences Đà Nẵng')}
@@ -703,17 +738,19 @@ HTML
 			'seo_title' => 'Tiến độ Nobu Đà Nẵng 10/2026: kết cấu đến tầng 22',
 			'desc'      => 'Tiến độ Nobu Đà Nẵng 10/2026: kết cấu đến tầng 22, lắp kính tầng 7 – 13, cơ điện và PCCC tới tầng 17. Khởi công quý 2/2024, bàn giao dự kiến 2027.',
 			'points'    => array(
-				'Tháng 10/2026: kết cấu đến tầng 22 của tháp 43 tầng',
+				'Tiến độ Nobu Đà Nẵng tháng 10/2026: kết cấu đến tầng 22 của tháp 43 tầng',
 				'Lắp mặt dựng, kính tầng 7 – 13; cơ điện, PCCC tới tầng 17',
 				'Nhà thầu Newtecons; bàn giao dự kiến năm 2027',
 			),
 			'faq'       => array(
-				array( 'Nobu Đà Nẵng đã xây đến tầng mấy?', 'Theo cập nhật của chủ đầu tư, tháng 10/2026 kết cấu đã đến tầng 22 trong tổng số 43 tầng nổi.' ),
-				array( 'Nobu Residences Đà Nẵng khi nào bàn giao?', 'Dự kiến năm 2027 (các nguồn ghi quý 1 – quý 3/2027). Mốc chính xác theo hợp đồng mua bán.' ),
+				array( 'Tiến độ Nobu Đà Nẵng hiện đến tầng mấy?', 'Theo cập nhật của chủ đầu tư, tháng 10/2026 kết cấu đã đến tầng 22 trong tổng số 43 tầng nổi.' ),
+				array( 'Nobu Residences Đà Nẵng khi nào bàn giao?', 'Theo tiến độ Nobu Đà Nẵng hiện tại, dự kiến năm 2027 (các nguồn ghi quý 1 – quý 3/2027). Mốc chính xác theo hợp đồng mua bán.' ),
 				array( 'Ai thi công Nobu Đà Nẵng?', 'Nhà thầu Newtecons, khởi công quý 2/2024.' ),
+				array( 'Tiến độ Nobu Đà Nẵng có đúng kế hoạch không?', 'Chủ đầu tư công bố các mốc đều đặn: từ tầng 8 (5/2026) lên tầng 22 (10/2026), khoảng 2 – 3 tầng mỗi tháng, và vẫn giữ mục tiêu hoàn thành năm 2027. Mốc ràng buộc với người mua là mốc trong hợp đồng mua bán.' ),
+				array( 'Xem cập nhật tiến độ Nobu Đà Nẵng ở đâu?', 'Chủ đầu tư công bố cập nhật kèm ảnh công trường trên trang dự án; Hoàng Hiệp tổng hợp lại trong bài này mỗi khi có mốc mới.' ),
 			),
 		),
-		'sources'  => array( 'https://nobudanang.vn/constructions/cap-nhat-tien-do-xay-dung-thang-05-2026/' ),
+		'sources'  => array( 'https://nobudanang.vn/constructions/cap-nhat-tien-do-xay-dung-thang-05-2026/', 'https://vnexpress.net/vcre-cung-nobu-hospitality-kien-tao-bieu-tuong-phong-cach-song-tai-da-nang-4598075.html', 'https://vneconomy.vn/nobu-danang-san-sang-chao-don-nhung-chu-nhan-tinh-hoa-moi.htm' ),
 	);
 
 	return $posts;

@@ -170,8 +170,9 @@ HTML
 
 	/* ---------------- 04/11 – So sánh loại hình đầu tư cho thuê ---------------- */
 	$posts[] = array(
-		'slug'     => 'dau-tu-cho-thue-da-nang-can-ho-luu-tru-biet-thu-nha-pho-shophouse',
-		'rev'     => 3, // 05/11: chèn ảnh dự án.
+		'slug'     => 'dau-tu-cho-thue-da-nang-so-sanh-loai-hinh',
+		'old_slug' => array( 'dau-tu-cho-thue-da-nang-can-ho-luu-tru-biet-thu-nha-pho-shophouse' ),
+		'rev'     => 4, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá. 05/11: chèn ảnh dự án.
 		'title'    => 'Đầu tư cho thuê ở Đà Nẵng: căn hộ lưu trú như Sun Saphia Residence, biệt thự biển, nhà phố hay shophouse?',
 		'excerpt'  => 'So sánh 4 loại hình cho thuê ở Đà Nẵng: shophouse mặt tiền (lợi suất khoảng 2 – 3%), nhà phố trung tâm (1,4 – 1,8%), biệt thự biển (3,6 – 5,5%) và căn hộ lưu trú vốn nhỏ như studio Sun Saphia Residence.',
 		'keyword'  => 'đầu tư cho thuê Đà Nẵng',
@@ -182,9 +183,9 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Đầu tư cho thuê' ),
 		'image'    => 'plugin:img/tin-tuc/so-sanh-loai-hinh-cho-thue-da-nang.jpg',
 		'content'  => <<<HTML
-<p>Cùng là bất động sản cho thuê ở Đà Nẵng, mỗi loại hình có một bài toán rất khác: vốn vào, cách khai thác, lợi suất và rủi ro. Bài so sánh 4 loại hình phổ biến để nhà đầu tư chọn đúng theo mục tiêu – dòng tiền hay giữ tài sản. Số liệu là tham khảo 2026, lợi suất = tiền thuê năm ÷ giá mua.</p>
+<p><strong>Đầu tư cho thuê Đà Nẵng</strong> có nhiều lựa chọn, và mỗi loại hình có một bài toán rất khác: vốn vào, cách khai thác, lợi suất và rủi ro. Bài so sánh 4 loại hình đầu tư cho thuê Đà Nẵng phổ biến để nhà đầu tư chọn đúng theo mục tiêu – dòng tiền hay giữ tài sản. Số liệu là tham khảo 2026, lợi suất = tiền thuê năm ÷ giá mua.</p>
 <!--hh-featured-->
-<h2>Bảng so sánh</h2>
+<h2>Đầu tư cho thuê Đà Nẵng: bảng so sánh 4 loại hình</h2>
 <table>
 <thead><tr><th>Loại hình</th><th>Vốn vào</th><th>Cách khai thác</th><th>Lợi suất tham khảo</th><th>Lưu ý</th></tr></thead>
 <tbody>
@@ -195,39 +196,55 @@ HTML
 </tbody>
 </table>
 <p>Giá shophouse, biệt thự là giá rao 2026 (báo chí, trang tin bất động sản); giá thuê nhà phố, biệt thự theo khảo sát thực tế của Hoàng Hiệp. Lợi suất biệt thự đã trừ khoảng 35% chi phí vận hành.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Đầu tư cho thuê Đà Nẵng với căn hộ lưu trú – Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
 <h2>Vì sao căn hộ lưu trú cho lợi suất cao hơn?</h2>
 <p>Giá thuê theo đêm của một studio view biển (khoảng 2,2 – 2,9 triệu ngoài cao điểm theo giả định của chủ đầu tư) gần bằng giá thuê tính theo mỗi phòng ngủ của biệt thự biển, nhưng vốn vào nhỏ hơn hàng chục lần. Ví dụ theo mùa (180 đêm thấp điểm, 180 đêm cao điểm, chủ nhà nhận 65%): studio có thể mang về khoảng 261 – 328 triệu/năm trước thuế, phí và khấu hao – chi tiết ở bài {$review}. Đổi lại, dòng tiền này phụ thuộc lấp đầy và chất lượng vận hành, không ổn định như hợp đồng thuê dài hạn.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-layout-1pn-plus-51m2.jpg|Layout căn 1PN+ 51 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
-<h2>Chọn theo mục tiêu</h2>
+<h2>Chi phí ẩn khi đầu tư cho thuê Đà Nẵng</h2>
+<p>Lợi suất trong bảng so sánh đầu tư cho thuê Đà Nẵng là con số "trên giấy". Khi đầu tư cho thuê Đà Nẵng thực tế, mỗi loại hình có những khoản chi khiến lợi suất ròng thấp hơn:</p>
+<ul>
+<li><strong>Shophouse, nhà phố:</strong> thời gian trống giữa hai khách thuê (có khi vài tháng), chi phí sửa chữa khi đổi khách, môi giới tìm khách thuê.</li>
+<li><strong>Biệt thự biển:</strong> lương quản gia, bảo trì hồ bơi, sân vườn; phí kênh bán phòng nếu cho thuê theo đêm.</li>
+<li><strong>Căn hộ lưu trú:</strong> phí quản lý tòa nhà, phần chia cho đơn vị vận hành, phí nền tảng đặt phòng, khấu hao nội thất và khấu hao thời hạn 50 năm.</li>
+<li><strong>Thuế:</strong> mọi loại hình đều phải kê khai thuế cho thuê tài sản khi doanh thu vượt ngưỡng (xem cách tính thuế cho thuê bất động sản 2026 trên <a href="https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/cach-tinh-thue-cho-thue-bat-dong-san-moi-nhat-2026-theo-nghi-dinh-141-va-nghi-dinh-68-20777.html">Thư viện Pháp luật</a>).</li>
+</ul>
+<h2>Ví dụ: chia 10 tỷ theo hai cách</h2>
+<p>Với 10 tỷ, anh chị có thể mua một nhà phố trung tâm đường nhỏ cho thuê nguyên căn 12 – 15 triệu/tháng (khoảng 144 – 180 triệu/năm, lợi suất 1,4 – 1,8%), hoặc chia vốn mua khoảng 3 – 4 studio căn hộ lưu trú ven biển. Cách thứ hai có thể cho dòng tiền cao hơn nhiều theo các ví dụ trong bài, nhưng phụ thuộc lấp đầy, chịu khấu hao thời hạn và không có đất. Cách thứ nhất dòng tiền thấp nhưng giữ được đất sở hữu lâu dài. Không có đáp án chung – mục tiêu quyết định lựa chọn đầu tư cho thuê Đà Nẵng của từng người.</p>
+<h2>Đầu tư cho thuê Đà Nẵng: chọn theo mục tiêu</h2>
 <ul>
 <li><strong>Cần dòng tiền với vốn 2 – 3 tỷ</strong>: căn hộ lưu trú ven biển; chia vốn mua 2 – 3 căn ở vị trí khác nhau để giảm rủi ro.</li>
 <li><strong>Giữ tài sản, đất lâu dài</strong>: biệt thự, nhà phố, shophouse – lợi suất thấp nhưng có đất, nhiều căn sổ lâu dài.</li>
 <li><strong>Cho thuê ổn định, ít công quản lý</strong>: căn hộ để ở cho thuê dài hạn (lợi suất căn hộ Đà Nẵng khoảng 4,5%/năm theo Batdongsan.com.vn quý 3/2026).</li>
 </ul>
+<p>Nhu cầu thuê lưu trú vẫn đang tăng – 9 tháng năm 2026 Đà Nẵng đón khoảng 15,86 triệu lượt khách lưu trú (<a href="https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp">VietnamPlus</a>) – nhưng nguồn cung phòng cũng tăng. Đầu tư cho thuê Đà Nẵng vì vậy nên tính kịch bản thận trọng trước. Xem thêm bài {$review} và bài <a href="/dau-tu-sun-saphia-residence-cho-thue-dong-tien/">dòng tiền cho thuê Sun Saphia Residence</a>.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Đầu tư cho thuê Đà Nẵng: căn hộ, biệt thự hay nhà phố?',
+			'seo_title' => 'Đầu tư cho thuê Đà Nẵng 2026: so sánh 4 loại hình',
 			'desc'      => 'So sánh đầu tư cho thuê Đà Nẵng 2026: shophouse lợi suất 2 – 3%, nhà phố 1,4 – 1,8%, biệt thự biển 3,6 – 5,5%, căn hộ lưu trú như Sun Saphia Residence.',
 			'points'    => array(
-				'Shophouse mặt tiền khoảng 200 triệu/m², lợi suất khoảng 2 – 3%',
+				'Đầu tư cho thuê Đà Nẵng: shophouse mặt tiền khoảng 200 triệu/m², lợi suất khoảng 2 – 3%',
 				'Nhà phố trung tâm 10 tỷ cho thuê 12 – 15 triệu/tháng, lợi suất 1,4 – 1,8%',
 				'Biệt thự biển 30 – 60 tỷ, lợi suất 3,6 – 5,5%; căn hộ lưu trú vốn nhỏ, lợi suất phụ thuộc lấp đầy',
 			),
 			'faq'       => array(
-				array( 'Đầu tư cho thuê ở Đà Nẵng loại hình nào lợi suất cao nhất?', 'Căn hộ lưu trú cho thuê theo đêm thường cho lợi suất cao nhất trên vốn bỏ ra nhưng phụ thuộc lấp đầy và vận hành; biệt thự biển khoảng 3,6 – 5,5%, shophouse 2 – 3%, nhà phố trung tâm 1,4 – 1,8% (tham khảo 2026).' ),
+				array( 'Đầu tư cho thuê Đà Nẵng loại hình nào lợi suất cao nhất?', 'Căn hộ lưu trú cho thuê theo đêm thường cho lợi suất cao nhất trên vốn bỏ ra nhưng phụ thuộc lấp đầy và vận hành; biệt thự biển khoảng 3,6 – 5,5%, shophouse 2 – 3%, nhà phố trung tâm 1,4 – 1,8% (tham khảo 2026).' ),
 				array( 'Biệt thự biển Đà Nẵng cho thuê được bao nhiêu?', 'Ví dụ Furama Villas: giá mua khoảng 30 – 60 tỷ, cho thuê khoảng 6 triệu/đêm thấp điểm, 12 – 15 triệu cao điểm; lợi suất ròng khoảng 3,6 – 5,5%.' ),
+				array( 'Đầu tư cho thuê Đà Nẵng cần tính những chi phí ẩn nào?', 'Thời gian trống, sửa chữa, phí quản lý, phí vận hành và nền tảng đặt phòng, khấu hao nội thất, thuế cho thuê tài sản; với căn hộ 50 năm còn khấu hao thời hạn.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/cach-tinh-thue-cho-thue-bat-dong-san-moi-nhat-2026-theo-nghi-dinh-141-va-nghi-dinh-68-20777.html',
+			'https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp',
+		),
 	);
 
 	/* ---------------- 05/11 – Xây, mua khách sạn hay mua căn lưu trú ---------------- */
 	$posts[] = array(
-		'slug'     => 'dau-tu-khach-san-da-nang-xay-moi-mua-lai-hay-mua-can-luu-tru',
-		'rev'     => 3, // 05/11: chèn ảnh dự án.
+		'slug'     => 'dau-tu-khach-san-da-nang-xay-moi-hay-mua-lai',
+		'old_slug' => array( 'dau-tu-khach-san-da-nang-xay-moi-mua-lai-hay-mua-can-luu-tru' ),
+		'rev'     => 4, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá. 05/11: chèn ảnh dự án.
 		'title'    => 'Đầu tư khách sạn ở Đà Nẵng: xây mới, mua lại hay mua căn lưu trú như Sun Saphia Residence?',
 		'excerpt'  => 'Muốn có khách sạn ở Đà Nẵng: xây mới 3 sao 30 – 50 phòng tốn khoảng 15 – 30 tỷ chưa gồm đất, mất 2 – 3 năm; khách sạn 3 sao 50 phòng rao khoảng 67 tỷ; hoặc mua một căn lưu trú mặt biển như Sun Saphia Residence từ khoảng 2,1 tỷ.',
 		'keyword'  => 'đầu tư khách sạn Đà Nẵng',
@@ -238,9 +255,9 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Đầu tư khách sạn' ),
 		'image'    => 'plugin:img/tin-tuc/dau-tu-khach-san-da-nang.jpg',
 		'content'  => <<<HTML
-<p>Du lịch Đà Nẵng tăng mạnh năm 2026 khiến nhiều nhà đầu tư tính chuyện có "một khách sạn của riêng mình". Có ba con đường: tự xây, mua lại khách sạn đang chạy, hoặc mua căn lưu trú trong một tòa có đơn vị vận hành như {$saphia}. Bài so sánh vốn, thời gian, thủ tục và rủi ro của từng cách. Số liệu là giá rao, báo giá tham khảo 2026.</p>
+<p><strong>Đầu tư khách sạn Đà Nẵng</strong> được nhiều người tính tới khi du lịch thành phố tăng mạnh năm 2026 – 9 tháng đầu năm đón khoảng 15,86 triệu lượt khách lưu trú, tăng 26,4% (<a href="https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp">VietnamPlus</a>). Muốn có "một khách sạn của riêng mình", có ba con đường: tự xây, mua lại khách sạn đang chạy, hoặc mua căn lưu trú trong một tòa có đơn vị vận hành như {$saphia}. Bài so sánh vốn, thời gian, thủ tục và rủi ro của từng cách. Số liệu là giá rao, báo giá tham khảo 2026.</p>
 <!--hh-featured-->
-<h2>Bảng so sánh ba con đường</h2>
+<h2>Đầu tư khách sạn Đà Nẵng: bảng so sánh ba con đường</h2>
 <table>
 <thead><tr><th>Tiêu chí</th><th>Xây khách sạn mới</th><th>Mua lại khách sạn</th><th>Mua căn lưu trú</th></tr></thead>
 <tbody>
@@ -251,37 +268,50 @@ HTML
 <tr><td>Rủi ro chính</td><td>Vượt vốn, chậm tiến độ, thiếu kinh nghiệm</td><td>Xuống cấp, cạnh tranh gần 7.000 phòng mới</td><td>Lấp đầy theo mùa, phí vận hành, thời hạn 50 năm</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
-<h2>Khi nào nên tự xây hoặc mua lại?</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Đầu tư khách sạn Đà Nẵng hay mua căn lưu trú – Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
+<h2>Khi nào nên đầu tư khách sạn Đà Nẵng theo cách tự xây hoặc mua lại?</h2>
 <ul>
 <li>Có vốn lớn, có đất hoặc tìm được khách sạn giá hợp lý, và có kinh nghiệm (hoặc đối tác) vận hành.</li>
 <li>Muốn toàn quyền thương hiệu, giá phòng, và sở hữu đất – tài sản giữ được lâu dài.</li>
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-layout-1pn-plus-51m2.jpg|Layout căn 1PN+ 51 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Đầu tư khách sạn Đà Nẵng: những khoản hay bị đánh giá thấp</h2>
+<ul>
+<li><strong>Vốn lưu động năm đầu:</strong> khách sạn mới chưa có đánh giá trên các kênh đặt phòng, công suất thường thấp trong 6 – 12 tháng đầu; cần dự phòng tiền lương, điện nước trong giai đoạn này.</li>
+<li><strong>Cải tạo định kỳ:</strong> nội thất phòng, thảm, rèm, thiết bị cần thay theo chu kỳ để giữ hạng; khách sạn mua lại thường phải cải tạo ngay.</li>
+<li><strong>Nhân sự:</strong> lễ tân, buồng phòng, bảo vệ, kỹ thuật – nhân sự giỏi trong mùa cao điểm rất khó tuyển.</li>
+<li><strong>Phí kênh bán phòng:</strong> hoa hồng các nền tảng chiếm phần đáng kể doanh thu (xem bài <a href="/phi-booking-agoda-airbnb-cho-thue-can-ho-sun-saphia/">phí Booking, Agoda, Airbnb</a>).</li>
+</ul>
+<p>Những khoản này không xuất hiện trong báo giá xây dựng, nhưng quyết định khoản đầu tư khách sạn Đà Nẵng có lãi hay không trong vài năm đầu.</p>
 <h2>Khi nào căn lưu trú hợp hơn?</h2>
 <ul>
 <li>Vốn 2 – 3 tỷ, muốn "sở hữu một phòng khách sạn mặt biển" mà không tự xin phép, tự vận hành.</li>
 <li>Chấp nhận chia doanh thu cho đơn vị vận hành và phụ thuộc vào chất lượng vận hành của họ.</li>
 <li>Muốn chia nhỏ vốn: cùng 30 tỷ có thể mua nhiều căn ở các vị trí khác nhau thay vì một khách sạn nhỏ.</li>
 </ul>
+<h2>Nhận định của Hoàng Hiệp</h2>
+<p>Đầu tư khách sạn Đà Nẵng theo kiểu tự xây hay mua lại là một công việc kinh doanh toàn thời gian, không chỉ là mua tài sản. Người có vốn 2 – 3 tỷ, không có kinh nghiệm vận hành thì căn lưu trú trong một tòa có đơn vị quản lý là cách tiếp cận nhẹ hơn – đổi lại phải chia doanh thu và chấp nhận thời hạn 50 năm. Người có vốn lớn, có đội ngũ thì khách sạn riêng giữ được đất và toàn quyền kinh doanh.</p>
 <p>Lưu ý: giá khách sạn trên là giá rao, không phải giá giao dịch; chi phí xây dựng theo báo giá các đơn vị thiết kế – thi công 2026, thay đổi theo tiêu chuẩn. Ví dụ dòng tiền một căn studio: xem bài {$review}.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Đầu tư khách sạn Đà Nẵng: xây, mua lại hay mua căn lưu trú',
+			'seo_title' => 'Đầu tư khách sạn Đà Nẵng 2026: xây, mua lại hay căn lưu trú',
 			'desc'      => 'Đầu tư khách sạn Đà Nẵng: xây 3 sao 30 – 50 phòng khoảng 15 – 30 tỷ chưa gồm đất, mua lại 3 sao rao 67 tỷ, hay căn lưu trú Sun Saphia từ khoảng 2,1 tỷ.',
 			'points'    => array(
-				'Xây khách sạn 3 sao 30 – 50 phòng khoảng 15 – 30 tỷ chưa gồm đất, mất 2 – 3 năm',
+				'Đầu tư khách sạn Đà Nẵng: xây 3 sao 30 – 50 phòng khoảng 15 – 30 tỷ chưa gồm đất, mất 2 – 3 năm',
 				'Khách sạn 3 sao 50 phòng ở Hải Châu rao khoảng 67 tỷ',
 				'Căn lưu trú Sun Saphia dự kiến 2,13 – 2,85 tỷ, có đơn vị vận hành',
 			),
 			'faq'       => array(
-				array( 'Xây khách sạn 3 sao ở Đà Nẵng tốn bao nhiêu?', 'Tham khảo báo giá 2026: khách sạn 2 – 3 sao 30 – 50 phòng khoảng 15 – 30 tỷ, chưa gồm tiền đất; mất khoảng 2 – 3 năm từ thủ tục đến khi đón khách.' ),
+				array( 'Xây khách sạn 3 sao ở Đà Nẵng tốn bao nhiêu?', 'Khi đầu tư khách sạn Đà Nẵng, tham khảo báo giá 2026: khách sạn 2 – 3 sao 30 – 50 phòng khoảng 15 – 30 tỷ, chưa gồm tiền đất; mất khoảng 2 – 3 năm từ thủ tục đến khi đón khách.' ),
 				array( 'Kinh doanh khách sạn cần những thủ tục gì?', 'Giấy phép xây dựng, thẩm duyệt và nghiệm thu phòng cháy chữa cháy, giấy chứng nhận đủ điều kiện an ninh trật tự, đăng ký kinh doanh dịch vụ lưu trú và xếp hạng sao theo TCVN 4391:2015.' ),
+				array( 'Đầu tư khách sạn Đà Nẵng hay mua căn lưu trú?', 'Có vốn lớn, đội ngũ vận hành thì đầu tư khách sạn Đà Nẵng giữ được đất và toàn quyền kinh doanh; vốn 2 – 3 tỷ, không muốn tự vận hành thì căn lưu trú có đơn vị quản lý nhẹ hơn.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp',
+		),
 	);
 
 	/* ---------------- 06/11 – Phí kênh bán phòng ---------------- */

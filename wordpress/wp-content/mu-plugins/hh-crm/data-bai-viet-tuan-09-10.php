@@ -877,48 +877,62 @@ HTML
 </table>
 
 <h2>Căn hộ sở hữu lâu dài – dễ bắt đầu nhất</h2>
-<p>Căn hộ có mức vốn đa dạng: từ The Ori Garden (1PN khoảng 1,31 – 1,94 tỷ), FPT Plaza (2PN khoảng 2,25 – 3,4 tỷ) đến căn ven sông Hàn khoảng 50 – 125 triệu/m². Đây là loại hình dễ vay ngân hàng và dễ bán lại nhất.</p>
+<p>Căn hộ có mức vốn đa dạng: từ The Ori Garden (1PN khoảng 1,31 – 1,94 tỷ), FPT Plaza (2PN khoảng 2,25 – 3,4 tỷ) đến căn ven sông Hàn khoảng 50 – 125 triệu/m². Với người mới đầu tư bất động sản Đà Nẵng, đây là loại hình dễ vay ngân hàng và dễ bán lại nhất.</p>
 <p>Ví dụ minh họa từ số liệu tin rao: căn 2PN Sun Cosmo giá khoảng 5 tỷ, cho thuê khoảng 30 triệu/tháng, tương đương khoảng 7%/năm trước chi phí. Căn 2PN FPT Plaza khoảng 3 tỷ, cho thuê khoảng 12 triệu/tháng, tương đương khoảng 4,8%/năm. Đây chỉ là phép tính thô, chưa trừ phí quản lý, thời gian trống phòng, thuế. Xem danh sách tại <a href="/mua-ban/can-ho-chung-cu/">căn hộ chung cư đang bán</a>.</p>
 
 <h2>Căn hộ dịch vụ, căn hộ khách sạn</h2>
-<p>Các dự án như Wyndham Soleil (từ khoảng 2,95 tỷ, thời hạn 50 năm) hay M Riverside có ưu điểm là có đơn vị vận hành, phù hợp người không có thời gian tự cho thuê. Nhược điểm: thời hạn sở hữu thường 50 năm, doanh thu phụ thuộc mùa du lịch và năng lực đơn vị vận hành. Cần đọc kỹ hợp đồng chia sẻ doanh thu, phí quản lý và quyền tự sử dụng.</p>
+<p>Trong danh mục đầu tư bất động sản Đà Nẵng, các dự án căn hộ dịch vụ như Wyndham Soleil (từ khoảng 2,95 tỷ, thời hạn 50 năm) hay M Riverside có ưu điểm là có đơn vị vận hành, phù hợp người không có thời gian tự cho thuê. Nhược điểm: thời hạn sở hữu thường 50 năm, doanh thu phụ thuộc mùa du lịch và năng lực đơn vị vận hành. Cần đọc kỹ hợp đồng chia sẻ doanh thu, phí quản lý và quyền tự sử dụng.</p>
 
 <h2>Biệt thự – giữ tài sản, ít dòng tiền</h2>
 <p>Biệt thự ven biển Đà Nẵng có giá từ khoảng 10 tỷ (song lập dự án mới) đến hơn 80 tỷ (resort trục Trường Sa). Dòng tiền cho thuê thường thấp so với vốn, thanh khoản chậm vì ít người đủ tài chính. Đổi lại, biệt thự sở hữu lâu dài trên quỹ đất hiếm có khả năng giữ giá tốt. Tham khảo bảng giá trong bài <a href="/biet-thu-ven-bien-da-nang-hoi-an-bang-gia/">biệt thự ven biển Đà Nẵng – Hội An</a>.</p>
 
 <h2>Đất nền – đi theo hạ tầng</h2>
-<p>Đất nền dự án như Võ Chí Công (khoảng 45 – 90 triệu/m²), Đầm Sen – Sun Riverpolis (khoảng 40 – 48 triệu/m²), Cồn Dầu Hòa Xuân (khoảng 42 – 55 triệu/m²) có sổ từng lô, phù hợp tích lũy trung – dài hạn. Rủi ro lớn nhất là kỳ vọng hạ tầng chưa thành hiện thực và thanh khoản giảm khi thị trường trầm lắng. Xem <a href="/mua-ban/dat-nen/">đất nền Đà Nẵng đang bán</a>.</p>
+<p>Đất nền dự án như Võ Chí Công (khoảng 45 – 90 triệu/m²), Đầm Sen – Sun Riverpolis (khoảng 40 – 48 triệu/m²), Cồn Dầu Hòa Xuân (khoảng 42 – 55 triệu/m²) có sổ từng lô, phù hợp tích lũy trung – dài hạn. Rủi ro lớn nhất khi đầu tư bất động sản Đà Nẵng dạng đất nền là kỳ vọng hạ tầng chưa thành hiện thực và thanh khoản giảm khi thị trường trầm lắng. Xem <a href="/mua-ban/dat-nen/">đất nền Đà Nẵng đang bán</a>.</p>
 
 <h2>Shop khối đế – dòng tiền cao nhưng kén vị trí</h2>
 <p>Shop khối đế (ví dụ 77 shop tại Sun Symphony, 10 shop tại The Camellia Sơn Trà) có thể cho thuê giá cao nếu nằm ở mặt đường đông khách. Nhưng nếu tòa nhà ít cư dân hoặc mặt tiền khuất, shop dễ bị trống lâu. Cần kiểm tra thời hạn sở hữu, lối tiếp cận và lượng cư dân thực tế. Xem thêm tại <a href="/san-pham/shop-khoi-de/">shop khối đế Đà Nẵng</a>.</p>
 
-<h2>Gợi ý theo ngân sách</h2>
+<h2>Gợi ý đầu tư bất động sản Đà Nẵng theo ngân sách</h2>
 <ul>
 <li>Dưới 3 tỷ: căn hộ The Ori Garden, FPT Plaza, studio các dự án Sơn Trà, Ngũ Hành Sơn.</li>
 <li>3 – 7 tỷ: căn hộ ven sông Hàn, căn hộ biển, hoặc một lô đất nền dự án.</li>
 <li>Trên 10 tỷ: biệt thự, shophouse, shop khối đế vị trí tốt.</li>
 </ul>
-<p>Dù chọn loại hình nào, anh chị nên giữ tỷ lệ vay vừa phải, tính dòng tiền khi hết thời gian hỗ trợ lãi suất và ưu tiên pháp lý rõ ràng.</p>
+<p>Dù đầu tư bất động sản Đà Nẵng theo loại hình nào, anh chị nên giữ tỷ lệ vay vừa phải, tính dòng tiền khi hết thời gian hỗ trợ lãi suất và ưu tiên pháp lý rõ ràng.</p>
 
-<p>Tham khảo toàn bộ <a href="/du-an/">dự án bất động sản Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được tư vấn chọn loại hình đầu tư phù hợp với vốn và mục tiêu của anh chị.</p>
+<h2>Sai lầm thường gặp khi đầu tư bất động sản Đà Nẵng</h2>
+<!--hh-img:img/da-nang/song-han-du-thuyen-cau-rong-ve-dem.jpg|Sông Hàn và cầu Rồng về đêm – trục căn hộ ven sông được nhiều người chọn khi đầu tư bất động sản Đà Nẵng-->
+<p>Thị trường năm 2026 phân hóa rõ giữa các khu vực và loại hình (xem nhận định trên <a href="https://cafef.vn/bds-da-nang-2026-phan-hoa-manh-de-thanh-loc-thi-truong-188260615112835053.chn">CafeF</a>), nên cùng một số vốn có thể cho kết quả rất khác nhau. Những sai lầm Hoàng Hiệp hay gặp khi khách đầu tư bất động sản Đà Nẵng:</p>
+<ul>
+<li><strong>Lấy giá thuê cao nhất trên tin rao để tính lợi suất:</strong> nên lấy mức giữa và trừ thời gian trống phòng.</li>
+<li><strong>Quên chi phí sở hữu:</strong> thuế phí giao dịch, nội thất, phí quản lý làm lợi suất thực nhận thấp hơn đáng kể so với phép tính thô.</li>
+<li><strong>Vay quá tay:</strong> chỉ tính khoản trả trong thời gian ân hạn, không tính khi lãi suất thả nổi.</li>
+<li><strong>Mua theo tin quy hoạch:</strong> chưa kiểm tra công trình đã khởi công hay mới ở giai đoạn đề xuất.</li>
+<li><strong>Không đọc kỹ thời hạn sở hữu:</strong> căn hộ dịch vụ 50 năm và căn hộ sở hữu lâu dài khác nhau về vay vốn và bán lại.</li>
+</ul>
+
+<p>Tham khảo toàn bộ <a href="/du-an/">dự án bất động sản Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được tư vấn chọn loại hình đầu tư bất động sản Đà Nẵng phù hợp với vốn và mục tiêu của anh chị.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Đầu tư bất động sản Đà Nẵng: chọn loại hình nào?',
 			'desc'      => 'Đầu tư bất động sản Đà Nẵng: so sánh căn hộ, căn hộ dịch vụ, biệt thự, đất nền, shop khối đế theo vốn, dòng tiền, rủi ro. Gọi Hoàng Hiệp để tư vấn.',
 			'points'    => array(
-				'Căn hộ sở hữu lâu dài: vốn thấp, thanh khoản tốt nhất, dòng tiền đều',
+				'Đầu tư bất động sản Đà Nẵng bằng căn hộ sở hữu lâu dài: vốn thấp, thanh khoản tốt nhất, dòng tiền đều',
 				'Căn hộ dịch vụ: có vận hành nhưng thường thời hạn 50 năm',
 				'Biệt thự, đất nền giữ tài sản dài hạn; shop khối đế kén vị trí',
 			),
 			'faq'       => array(
 				array( 'Đầu tư bất động sản Đà Nẵng nên bắt đầu từ loại hình nào?', 'Với vốn vừa phải, căn hộ sở hữu lâu dài là lựa chọn dễ bắt đầu nhất vì dễ vay, dễ cho thuê và dễ bán lại.' ),
+				array( 'Đầu tư bất động sản Đà Nẵng cần bao nhiêu vốn?', 'Tham khảo 2026: có thể bắt đầu đầu tư bất động sản Đà Nẵng từ khoảng 1,3 – 2 tỷ với căn hộ sở hữu lâu dài; căn hộ dịch vụ từ khoảng 2,95 tỷ; đất nền dự án từ khoảng 4,8 tỷ/lô; biệt thự từ khoảng 10 tỷ.' ),
 				array( 'Căn hộ dịch vụ khác căn hộ chung cư thế nào?', 'Căn hộ dịch vụ, căn hộ khách sạn thường do đơn vị chuyên nghiệp vận hành và có thời hạn sở hữu 50 năm; căn hộ chung cư thông thường sở hữu lâu dài.' ),
-				array( 'Đất nền Đà Nẵng có nên đầu tư không?', 'Phù hợp tích lũy trung – dài hạn nếu chọn lô pháp lý rõ, gần hạ tầng đã khởi công; đất nền gần như không tạo dòng tiền trong thời gian nắm giữ.' ),
+				array( 'Đất nền Đà Nẵng có nên đầu tư không?', 'Trong đầu tư bất động sản Đà Nẵng, đất nền phù hợp tích lũy trung – dài hạn nếu chọn lô pháp lý rõ, gần hạ tầng đã khởi công; đất nền gần như không tạo dòng tiền trong thời gian nắm giữ.' ),
 				array( 'Shop khối đế có rủi ro gì?', 'Rủi ro lớn nhất là mặt bằng trống lâu nếu tòa nhà ít cư dân hoặc vị trí khuất; cần kiểm tra lượng khách, lối tiếp cận và thời hạn sở hữu.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://cafef.vn/bds-da-nang-2026-phan-hoa-manh-de-thanh-loc-thi-truong-188260615112835053.chn',
+		),
 	);
 
 	return $posts;

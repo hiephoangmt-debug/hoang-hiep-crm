@@ -867,36 +867,46 @@ HTML
 		'keywords_extra' => array( 'FPT Plaza 3', 'FPT City Đà Nẵng', 'căn hộ có sổ hồng Đà Nẵng', 'mua lại căn hộ FPT Plaza 3' ),
 		'project'  => 'fpt-plaza-3',
 		'schedule' => '2026-11-13 21:00',
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100.
 		'category' => 'Tin dự án',
 		'tags'     => array( 'FPT Plaza 3', 'FPT City', 'Pháp lý nhà đất' ),
 		'image'    => 'plugin:img/tin-tuc/fpt-plaza-3-100-can-co-so-hong-11-2026.jpg',
-		'image_alt' => 'FPT Plaza 3 hoàn thành cấp sổ hồng cho 100% căn hộ ngày 13/11/2026',
+		'image_alt' => 'Sổ hồng FPT Plaza 3: hoàn thành cấp cho 100% căn hộ ngày 13/11/2026',
 		'content'  => <<<HTML
-<p>Ngày 13/11/2026, Công ty Cổ phần Đô thị FPT Đà Nẵng (FPT City) thông báo đã <strong>hoàn thành cấp Giấy chứng nhận quyền sở hữu cho 100% căn hộ FPT Plaza 3</strong>, khoảng 7 tháng sau khi dự án khánh thành và bàn giao căn hộ (17/4/2026). Với người đã mua, đây là mốc pháp lý cuối cùng: căn hộ đã có sổ riêng, đứng tên chủ sở hữu.</p>
+<p><strong>Sổ hồng FPT Plaza 3</strong> đã được cấp xong: ngày 13/11/2026, Công ty Cổ phần Đô thị FPT Đà Nẵng (FPT City) thông báo đã hoàn thành cấp Giấy chứng nhận quyền sở hữu cho 100% căn hộ FPT Plaza 3, khoảng 7 tháng sau khi dự án khánh thành và bàn giao căn hộ (17/4/2026). Với người đã mua, đây là mốc pháp lý cuối cùng: căn hộ đã có sổ riêng, đứng tên chủ sở hữu.</p>
 <!--hh-featured-->
 <!--hh-img:img/fpt-plaza-3/fpt-plaza-3-trao-so-11-2026-gia-dinh-3.jpg|Cư dân FPT Plaza 3 nhận Giấy chứng nhận quyền sở hữu căn hộ ngày 13/11/2026 (ảnh thực tế)-->
-<h2>Các mốc pháp lý của FPT Plaza 3</h2>
+<h2>Các mốc pháp lý dẫn tới sổ hồng FPT Plaza 3</h2>
 <table>
 <thead><tr><th>Thời gian</th><th>Mốc</th></tr></thead>
 <tbody>
 <tr><td>25/09/2024</td><td>Sở Xây dựng Đà Nẵng có Thông báo 7190/SXD-QLN: nhà ở hình thành trong tương lai đủ điều kiện được bán</td></tr>
 <tr><td>17/4/2026</td><td>Khánh thành và bàn giao căn hộ</td></tr>
-<tr><td>13/11/2026</td><td>Chủ đầu tư thông báo hoàn thành cấp Giấy chứng nhận quyền sở hữu cho 100% căn hộ</td></tr>
+<tr><td>13/11/2026</td><td>Chủ đầu tư thông báo hoàn thành cấp sổ hồng FPT Plaza 3 (Giấy chứng nhận quyền sở hữu) cho 100% căn hộ</td></tr>
 </tbody>
 </table>
 <p>FPT Plaza 3 gồm 2 tháp W và E cao 25 tầng nổi, khoảng 837 căn hộ và shophouse khối đế, nằm ở trung tâm Khu đô thị FPT City (Ngũ Hành Sơn), cạnh quảng trường – công viên trung tâm. Khách Việt Nam được sở hữu lâu dài.</p>
 <!--hh-img:img/fpt-plaza-3/fpt-plaza-3-trao-so-11-2026-thu-tuc-2.jpg|Quầy làm thủ tục trao Giấy chứng nhận cho cư dân FPT Plaza 3 tại văn phòng FPT City (ảnh thực tế 13/11/2026)-->
-<h2>Căn hộ đã có sổ hồng thì người mua được gì?</h2>
+<h2>Có sổ hồng FPT Plaza 3, người mua được gì?</h2>
 <ul>
 <li><strong>Mua bán, chuyển nhượng qua công chứng:</strong> giao dịch thực hiện bằng hợp đồng công chứng và sang tên tại văn phòng đăng ký đất đai, không còn phải chuyển nhượng hợp đồng mua bán qua chủ đầu tư.</li>
 <li><strong>Thế chấp vay ngân hàng bằng chính căn hộ:</strong> người mua lại có thể vay theo hạn mức ngân hàng định giá; chủ nhà cũng có thể dùng sổ để vay vốn.</li>
 <li><strong>Cho thuê, đăng ký cư trú thuận lợi hơn:</strong> có giấy tờ sở hữu rõ ràng khi ký hợp đồng thuê, đăng ký tạm trú cho người thuê.</li>
 <li><strong>Giảm rủi ro pháp lý:</strong> nhiều dự án tại Đà Nẵng phải chờ nhiều năm mới có sổ; với căn hộ đã có sổ, người mua kiểm tra được ngay thông tin trên giấy chứng nhận.</li>
 </ul>
+<h2>Kiểm tra sổ hồng FPT Plaza 3 khi mua lại</h2>
+<p>Khi mua lại một căn đã có sổ hồng FPT Plaza 3, Hoàng Hiệp thường kiểm tra theo thứ tự sau:</p>
+<ol>
+<li><strong>Bản gốc giấy chứng nhận:</strong> đúng tên chủ sở hữu, số căn, diện tích, thời hạn sở hữu; đối chiếu với căn thực tế.</li>
+<li><strong>Tình trạng thế chấp:</strong> nếu căn đang thế chấp ngân hàng, cần phương án giải chấp rõ ràng trước khi công chứng.</li>
+<li><strong>Nghĩa vụ còn lại:</strong> phí quản lý, phí bảo trì, điện nước còn nợ; xác nhận của ban quản lý tòa nhà.</li>
+<li><strong>Thuế, phí chuyển nhượng:</strong> thỏa thuận rõ bên nào nộp thuế thu nhập cá nhân, lệ phí trước bạ, phí công chứng.</li>
+</ol>
+<p>Theo <a href="https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx">Luật Kinh doanh bất động sản 2023</a>, chủ đầu tư có trách nhiệm làm thủ tục để cơ quan nhà nước cấp giấy chứng nhận cho người mua nhà trong dự án. Vì thế, tiến độ sổ hồng FPT Plaza 3 là thước đo khá rõ về năng lực hoàn thiện pháp lý của chủ đầu tư.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
 <ul>
-<li><strong>Tiến độ sổ nhanh là điểm cộng lớn:</strong> khoảng 7 tháng từ bàn giao đến cấp sổ cho toàn bộ căn hộ là mốc tốt so với mặt bằng chung, giúp củng cố niềm tin với các dự án tiếp theo cùng chủ đầu tư tại FPT City.</li>
-<li><strong>Thị trường mua lại FPT Plaza 3 sẽ minh bạch hơn:</strong> khi đã có sổ, giao dịch thứ cấp làm thủ tục như căn hộ hoàn thiện pháp lý; người mua nên kiểm tra sổ gốc, tình trạng thế chấp và nghĩa vụ tài chính còn lại trước khi đặt cọc.</li>
+<li><strong>Tiến độ sổ hồng FPT Plaza 3 nhanh là điểm cộng lớn:</strong> khoảng 7 tháng từ bàn giao đến cấp sổ cho toàn bộ căn hộ là mốc tốt so với mặt bằng chung, giúp củng cố niềm tin với các dự án tiếp theo cùng chủ đầu tư tại FPT City.</li>
+<li><strong>Thị trường mua lại FPT Plaza 3 sẽ minh bạch hơn:</strong> khi đã có sổ hồng FPT Plaza 3, giao dịch thứ cấp làm thủ tục như căn hộ hoàn thiện pháp lý; người mua nên kiểm tra sổ gốc, tình trạng thế chấp và nghĩa vụ tài chính còn lại trước khi đặt cọc.</li>
 <li><strong>Phù hợp người mua để ở và cho thuê dài hạn:</strong> khu FPT City gần Đại học FPT, trường quốc tế, khu công nghệ – nhu cầu thuê từ sinh viên, chuyên gia, gia đình trẻ khá ổn định.</li>
 </ul>
 <h2>Dự án liên quan</h2>
@@ -905,27 +915,29 @@ HTML
 <li><a href="/du-an/fpt-plaza-4/">FPT Plaza 4</a> – dự án căn hộ tiếp theo của FPT City.</li>
 <li><a href="/du-an/fpt-city-da-nang/">Khu đô thị FPT City Đà Nẵng</a> – tổng quan khu đô thị.</li>
 </ul>
-<p>Xem thêm: <a href="/tra-cuu-du-an-ma-dinh-danh-bat-dong-san-thongtinbds-moc-gov-vn/">cách tra cứu dự án, mã định danh bất động sản trên cổng của Bộ Xây dựng</a> và <a href="/kiem-tra-phap-ly-quy-hoach-nha-dat-da-nang/">kiểm tra pháp lý nhà đất Đà Nẵng</a>.</p>
+<p>Xem thêm: <a href="/tra-cuu-ma-dinh-danh-bat-dong-san/">cách tra cứu dự án, mã định danh bất động sản trên cổng của Bộ Xây dựng</a> và <a href="/kiem-tra-phap-ly-quy-hoach-nha-dat-da-nang/">kiểm tra pháp lý nhà đất Đà Nẵng</a>.</p>
 <p>Anh chị cần tìm căn FPT Plaza 3 đã có sổ để mua ở hoặc cho thuê, hoặc cần định giá căn đang sở hữu, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: thông báo của Công ty Cổ phần Đô thị FPT Đà Nẵng – FPT City ngày 13/11/2026 và ảnh sự kiện trao Giấy chứng nhận cho cư dân; Thông báo 7190/SXD-QLN ngày 25/09/2024 của Sở Xây dựng Đà Nẵng; thông tin dự án từ tài liệu chủ đầu tư.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'FPT Plaza 3 đã cấp sổ hồng cho 100% căn hộ',
-			'desc'      => 'Ngày 13/11/2026 FPT City hoàn thành cấp Giấy chứng nhận quyền sở hữu cho 100% căn hộ FPT Plaza 3, khoảng 7 tháng sau bàn giao. Ý nghĩa với người mua.',
+			'seo_title' => 'Sổ hồng FPT Plaza 3: đã cấp cho 100% căn hộ (13/11/2026)',
+			'desc'      => 'Sổ hồng FPT Plaza 3 đã cấp cho 100% căn hộ ngày 13/11/2026, khoảng 7 tháng sau bàn giao. Người mua được gì, cần kiểm tra gì khi mua lại căn có sổ.',
 			'points'    => array(
-				'13/11/2026: FPT City hoàn thành cấp sổ hồng cho 100% căn hộ FPT Plaza 3',
+				'13/11/2026: FPT City hoàn thành cấp sổ hồng FPT Plaza 3 cho 100% căn hộ',
 				'Khoảng 7 tháng sau khánh thành, bàn giao (17/4/2026)',
 				'Căn hộ có sổ: mua bán qua công chứng, thế chấp vay ngân hàng, sở hữu lâu dài với khách Việt Nam',
 			),
 			'faq'       => array(
 				array( 'FPT Plaza 3 đã có sổ hồng chưa?', 'Có. Ngày 13/11/2026, chủ đầu tư FPT City thông báo đã hoàn thành cấp Giấy chứng nhận quyền sở hữu cho 100% căn hộ FPT Plaza 3.' ),
-				array( 'FPT Plaza 3 bàn giao khi nào?', 'Dự án khánh thành và bàn giao căn hộ ngày 17/4/2026; sổ hồng được cấp xong khoảng 7 tháng sau.' ),
+				array( 'FPT Plaza 3 bàn giao khi nào?', 'Dự án khánh thành và bàn giao căn hộ ngày 17/4/2026; sổ hồng FPT Plaza 3 được cấp xong khoảng 7 tháng sau.' ),
+				array( 'Có sổ hồng FPT Plaza 3 thì vay ngân hàng được không?', 'Được. Căn hộ đã có giấy chứng nhận có thể thế chấp vay vốn theo hạn mức ngân hàng định giá, cả với chủ nhà hiện tại lẫn người mua lại.' ),
 				array( 'Mua lại căn FPT Plaza 3 đã có sổ cần lưu ý gì?', 'Kiểm tra sổ gốc, tình trạng thế chấp, nghĩa vụ tài chính và phí quản lý còn nợ; giao dịch bằng hợp đồng công chứng và sang tên tại văn phòng đăng ký đất đai.' ),
 			),
 		),
 		'sources'  => array(
 			'https://hiephoangmt.com/du-an/fpt-plaza-3/',
+			'https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx',
 		),
 	);
 	/* ---------------- 14/11 – Bài tiếng Anh (khách nước ngoài) – Nobu Residences Đà Nẵng ---------------- */
@@ -935,19 +947,20 @@ HTML
 		'slug'     => 'nobu-residences-da-nang-buyers-guide',
 		'title'    => 'Nobu Residences Da Nang: A Buyer’s Guide to the Branded Residences on My Khe Beach',
 		'excerpt'  => 'A clear guide to Nobu Residences Da Nang – the 43-storey beachfront tower by VCRE and Nobu Hospitality: residence types and sizes, indicative pricing, floor stacking, interiors, construction progress and what to check before you reserve.',
-		'keyword'  => 'Nobu Residences Da Nang',
-		'keywords_extra' => array( 'Nobu Da Nang', 'branded residences Da Nang', 'My Khe Beach apartments', 'luxury condos Da Nang' ),
+		'keyword'  => 'Nobu Residences Da Nang guide',
+		'keywords_extra' => array( 'Nobu Residences Da Nang', 'Nobu Da Nang', 'branded residences Da Nang', 'My Khe Beach apartments', 'luxury condos Da Nang' ),
 		'project'  => 'nobu-da-nang',
 		'schedule' => '2026-11-14 19:00',
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100.
 		'category' => 'Tin dự án',
 		'tags'     => array( 'Nobu Đà Nẵng', 'English', 'Căn hộ hạng sang' ),
 		'image'    => 'plugin:img/tin-tuc/nobu-residences-da-nang-buyers-guide.jpg',
-		'image_alt' => 'Nobu Residences Da Nang buyer’s guide – key figures',
+		'image_alt' => 'Nobu Residences Da Nang guide – key figures for buyers',
 		'content'  => <<<HTML
 <div lang="en">
-<p><strong>Nobu Residences Da Nang</strong> is the first Nobu-branded residential address in Vietnam: a 43-storey tower on the corner of Vo Van Kiet and Vo Nguyen Giap, directly facing My Khe Beach. Developed by VCRE (Viet Capital Real Estate) under licence from Nobu Hospitality – the lifestyle group founded by Robert De Niro, Chef Nobu Matsuhisa and Meir Teper – the tower combines 264 branded residences with a Nobu Hotel, the Nobu Restaurant and a rooftop sky bar. This guide sets out what is being built, what is for sale and what an international buyer should verify before committing.</p>
+<p><strong>Nobu Residences Da Nang</strong> is the first Nobu-branded residential address in Vietnam: a 43-storey tower on the corner of Vo Van Kiet and Vo Nguyen Giap, directly facing My Khe Beach. Developed by VCRE (Viet Capital Real Estate) under licence from Nobu Hospitality – the lifestyle group founded by Robert De Niro, Chef Nobu Matsuhisa and Meir Teper – the tower combines 264 branded residences with a Nobu Hotel, the Nobu Restaurant and a rooftop sky bar. This Nobu Residences Da Nang guide sets out what is being built, what is for sale and what an international buyer should verify before committing.</p>
 <!--hh-featured-->
-<h2>The project at a glance</h2>
+<h2>Nobu Residences Da Nang guide: the project at a glance</h2>
 <ul>
 <li><strong>Developer:</strong> VCRE, through the project company Circle Point Real Estate JSC; main contractor Newtecons.</li>
 <li><strong>Brand and operator:</strong> Nobu Hospitality.</li>
@@ -960,7 +973,7 @@ HTML
 <h2>Why the location matters</h2>
 <p>Beachfront land on Vo Nguyen Giap is effectively finite. The boulevard is lined with established five-star hotels, and new freehold-style residential towers directly on the beach are rare. From the tower, the Dragon Bridge and the Han River are around five minutes away, the Hai Chau city centre about ten and Da Nang International Airport roughly fifteen. For owners who intend to spend part of the year in the city – or to place the residence in a rental programme – that combination of beach, city and airport access is the core of the proposition.</p>
 
-<h2>Residence types, sizes and indicative pricing</h2>
+<h2>Nobu Residences Da Nang guide to residence types, sizes and pricing</h2>
 <p>The collection is deliberately broad, from compact pieds-à-terre to full-floor-style homes in the sky:</p>
 <table>
 <thead><tr><th>Residence type</th><th>Indicative size</th></tr></thead>
@@ -976,7 +989,7 @@ HTML
 <p>Published figures place one-bedroom residences at approximately VND 6.6 – 9.1 billion, with a reference range of around VND 145 – 205 million per square metre depending on floor, view and layout. These numbers are indicative only; the developer issues an official price sheet for a specific residence at the time of reservation, and pricing for Sky Villas and penthouses is released privately.</p>
 <p>The <strong>Dual Key</strong> layout deserves a particular mention. A three-bedroom residence can be lived in as one home or separated into two self-contained units with their own entrances – useful for multi-generational families, or for owners who wish to occupy one part while the other is let.</p>
 
-<h2>How the tower is organised</h2>
+<h2>Nobu Residences Da Nang guide to the tower layout</h2>
 <p>The stacking places the private residences above the hotel, so residents enjoy the widest views and a separate address within the building:</p>
 <ul>
 <li><strong>Levels 1 – 6:</strong> arrival lobby and offices, spa and wellness (levels 3 – 4), conference (level 5) and the Taste of Asia restaurant (level 6).</li>
@@ -988,45 +1001,57 @@ HTML
 </ul>
 <p>Levels 17 and 37 are refuge floors. The full floor-by-floor allocation and diagram are on the {$nobu_en} page.</p>
 
-<h2>Interiors and specification</h2>
+<h2>Nobu Residences Da Nang guide: interiors and specification</h2>
 <p>Residences are delivered fully finished in a Japandi palette – the meeting point of Japanese restraint and Scandinavian warmth that runs through every Nobu property. According to the project’s interior presentation, the specification includes herringbone timber flooring, a Wendelbo sofa set or equivalent, Serta Simmons mattresses, headboards upholstered in washi paper, imported marble kitchen countertops, a built-in coffee machine, Kohler sanitaryware and a Smeg refrigerator. As with any off-plan purchase, the binding specification is the one attached to your Sale and Purchase Agreement, so ask to see that appendix rather than relying on brochures.</p>
 
-<h2>Construction progress</h2>
+<h2>Nobu Residences Da Nang guide: construction progress</h2>
 <p>Construction started in Q2 2024. The transfer slab was completed in early 2026, and by October 2026 the structure had reached level 22, with glass façade installation under way on levels 7 – 13 and mechanical, electrical and fire-protection works progressing to level 17. On that trajectory the developer continues to guide for completion in 2027. Monthly site photographs are published on the project page.</p>
 
 <h2>Ownership and the rental programme</h2>
-<p>This is the area that requires the most care. Published sources describe long-term ownership for Vietnamese buyers and a 50-year term for foreign buyers, while other sources refer to a land-use term running to 2060 on commercial–service land. Both cannot be read as a guarantee for every residence. Before you reserve, ask for written confirmation of:</p>
+<p>This is the part of any Nobu Residences Da Nang guide that requires the most care. Published sources describe long-term ownership for Vietnamese buyers and a 50-year term for foreign buyers, while other sources refer to a land-use term running to 2060 on commercial–service land. Both cannot be read as a guarantee for every residence. Before you reserve, ask for written confirmation of:</p>
 <ol>
 <li>your eligibility to buy as a foreign individual or company, and the ownership certificate you will receive;</li>
 <li>the ownership term that applies to your specific residence;</li>
 <li>the payment schedule, handover standard and annual service charges;</li>
 <li>the terms of the rental programme operated by Nobu Hospitality – revenue share, owner-use nights and exit provisions.</li>
 </ol>
+<p>For the general rules, the English translation of <a href="https://thuvienphapluat.vn/van-ban/EN/Bat-dong-san/Law-27-2023-QH15-Housing/597446/tieng-anh.aspx">Vietnam’s Housing Law 2023</a> is published by Thu Vien Phap Luat; background on the brand’s arrival in the city was reported by <a href="https://vnexpress.net/huyen-thoai-hollywood-dua-thuong-hieu-nobu-den-da-nang-4761311.html">VnExpress</a>.</p>
 <p>Some sales materials cite an indicative rental yield of around 6% per year. Treat any such figure as an illustration until you have read the programme agreement itself. Our companion article, <a href="/branded-residences-da-nang-foreign-buyers/">Branded Residences in Da Nang: What Buyers Should Know</a>, explains the general legal framework for foreign purchasers in more detail.</p>
 
+<h2>A reservation checklist from this Nobu Residences Da Nang guide</h2>
+<ul>
+<li><strong>Choose the stack before the price:</strong> residences on levels 19 – 36 differ mainly by view (direct sea, city and river, or corner), so shortlist two or three positions first.</li>
+<li><strong>Ask for the official price sheet:</strong> figures in this Nobu Residences Da Nang guide are indicative; only the developer’s sheet for a named residence is binding.</li>
+<li><strong>Read the payment schedule against progress:</strong> instalments should follow construction milestones, with the largest payment at handover.</li>
+<li><strong>Get the rental programme in writing:</strong> revenue share, owner-use nights and exit terms belong in a signed agreement, not a brochure.</li>
+</ul>
 <h2>Who Nobu Residences Da Nang suits</h2>
 <p>The project is best suited to buyers who value a globally recognised hospitality brand, a beachfront address and hotel-grade services, and who are comfortable with an off-plan timeline to 2027. Buyers seeking the lowest price per square metre in Da Nang, or immediate rental income, may find better-fitting options among completed buildings.</p>
 {$cta_en}
+<p>We update this Nobu Residences Da Nang guide as new construction milestones and official price sheets are released.</p>
 <p class="src">Sources: developer project materials and interior presentation; developer construction updates to October 2026; project page at hiephoangmt.com. All figures are indicative and subject to change. This article is general information and not legal or financial advice.</p>
 </div>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Nobu Residences Da Nang: Buyer’s Guide, Prices & Floor Plans',
-			'desc'      => 'Nobu Residences Da Nang on My Khe Beach: 264 branded residences, studios to Sky Villas, indicative prices, floor stacking, interiors, progress and ownership checks.',
+			'seo_title' => 'Nobu Residences Da Nang Guide 2026: Prices & Floor Plans',
+			'desc'      => 'Nobu Residences Da Nang guide: 264 branded residences on My Khe Beach, studios to Sky Villas, indicative prices, floor stacking, progress, ownership.',
 			'points'    => array(
-				'43-storey beachfront tower by VCRE and Nobu Hospitality, expected completion 2027',
+				'Nobu Residences Da Nang guide: a 43-storey beachfront tower by VCRE and Nobu Hospitality, expected completion 2027',
 				'264 residences from approx. 42 m² studios to 372 m² penthouses; six Sky Villas with private pools',
-				'Confirm ownership term, foreign eligibility and rental programme terms in the SPA before reserving',
+				'Key Nobu Residences Da Nang guide advice: confirm ownership term, foreign eligibility and rental programme terms in the SPA before reserving',
 			),
 			'faq'       => array(
-				array( 'Where is Nobu Residences Da Nang?', 'At 01 Vo Van Kiet Street, on the corner of Vo Nguyen Giap, An Hai Ward, Da Nang – directly on My Khe Beach.' ),
-				array( 'How much is a residence at Nobu Da Nang?', 'Published figures place one-bedroom residences at approximately VND 6.6 – 9.1 billion. Prices are indicative; an official price sheet is issued for each residence at reservation.' ),
+				array( 'Where is Nobu Residences Da Nang?', 'As this Nobu Residences Da Nang guide explains, the tower stands at 01 Vo Van Kiet Street, on the corner of Vo Nguyen Giap, An Hai Ward, Da Nang – directly on My Khe Beach.' ),
+				array( 'How much is a residence at Nobu Da Nang?', 'In this Nobu Residences Da Nang guide, published figures place one-bedroom residences at approximately VND 6.6 – 9.1 billion. Prices are indicative; an official price sheet is issued for each residence at reservation.' ),
 				array( 'When will Nobu Residences Da Nang be completed?', 'Construction began in Q2 2024 and completion is expected in 2027. By October 2026 the structure had reached level 22.' ),
+				array( 'Can foreigners buy at Nobu Residences Da Nang?', 'Foreign buyers may purchase within the quota allowed by the Housing Law 2023, but eligibility, quota availability and the ownership term must be confirmed in writing for the specific residence – the key point of this Nobu Residences Da Nang guide.' ),
 			),
 		),
 		'sources'  => array(
 			'https://hiephoangmt.com/du-an/nobu-da-nang/en/',
+			'https://vnexpress.net/huyen-thoai-hollywood-dua-thuong-hieu-nobu-den-da-nang-4761311.html',
+			'https://thuvienphapluat.vn/van-ban/EN/Bat-dong-san/Law-27-2023-QH15-Housing/597446/tieng-anh.aspx',
 		),
 	);
 
