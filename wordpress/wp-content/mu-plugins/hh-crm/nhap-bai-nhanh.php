@@ -133,6 +133,7 @@ function hh_quick_post_create( $n ) {
 	}
 	update_post_meta( $id, '_hh_news_article', 1 ); // Schema NewsArticle.
 	update_post_meta( $id, '_hh_quick_post', current_time( 'mysql' ) );
+	do_action( 'hh_quick_post_created', $id ); // seo-bai-viet.php: chuẩn SEO Rank Math.
 	return $id;
 }
 

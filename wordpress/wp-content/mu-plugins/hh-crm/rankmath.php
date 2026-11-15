@@ -297,7 +297,7 @@ function hh_rm_enqueue( $hook ) {
 		return;
 	}
 	wp_enqueue_script( 'hh-rankmath', HH_CRM_URL . 'rankmath.js', array( 'wp-hooks' ), HH_CRM_VERSION, true );
-	wp_localize_script( 'hh-rankmath', 'hhRankMath', array( 'content' => hh_rm_project_text( get_the_ID() ) ) );
+	wp_localize_script( 'hh-rankmath', 'hhRankMath', array( 'content' => hh_rm_project_text( get_the_ID() ) . ( function_exists( 'hh_project_sources_html' ) ? hh_project_sources_html( get_the_ID() ) : '' ) ) );
 }
 
 /** Giao diện Hoàng Hiệp tự tạo mục lục bài viết → báo cho Rank Math để không chấm lỗi "không dùng Table of Contents plugin". */

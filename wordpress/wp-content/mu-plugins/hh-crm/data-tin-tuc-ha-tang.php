@@ -624,6 +624,7 @@ function hh_import_news() {
 			}
 		}
 		update_post_meta( $id, '_hh_news_meta_hash', $auto );
+		do_action( 'hh_quick_post_created', $id ); // seo-bai-viet.php: chuẩn SEO Rank Math.
 	}
 	return $created;
 }

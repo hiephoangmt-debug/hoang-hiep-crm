@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.289**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.290**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,18 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.290 (15/11/2026) – bài viết chuẩn SEO Rank Math
+
+- **Tất cả bài viết** (bài đã đăng và bài tự đăng sau này) được web tự chỉnh theo bộ chấm Rank Math, dựa trên từ khoá chính của bài:
+  - Tiêu đề SEO chưa có từ khoá → đưa từ khoá lên đầu, ≤ 60 ký tự (VD "Khách du lịch Đà Nẵng 2026: 9 tháng 2026 và căn hộ ven biển").
+  - Mô tả SEO chưa có từ khoá → thêm từ khoá ở đầu, ≤ 160 ký tự.
+  - Từ khoá chưa ở đầu bài → khung "Điểm chính" đổi thành "Điểm chính về {từ khoá}".
+  - Cuối bài thêm mục **"Đọc thêm về {từ khoá}"**: link trang dự án + 5 bài liên quan (liên kết nội bộ, bài dài hơn).
+  - Liên kết nguồn báo chí, cổng nhà nước, chủ đầu tư bỏ "nofollow" (Rank Math cần ít nhất 1 liên kết ngoài dofollow).
+- **Trang dự án**: thêm mục "Nguồn tham khảo về {dự án}" (chỉ nguồn báo chí / nhà nước / chủ đầu tư, dofollow) – sửa lỗi "liên kết ra ngoài đều nofollow".
+- Chỉ sửa bài web tự tạo chưa bị anh sửa tay; ô SEO chỉ sửa khi đang thiếu từ khoá. Web chạy dần mỗi lần mở trang quản trị + chạy nền.
+- Sau khi cài: mở trang quản trị vài lần (hoặc chờ ~10 phút) → LiteSpeed **Purge All**.
 
 ## Có gì mới – 2.20.289 (15/11/2026) – sơ đồ tháp Aurora theo đúng bố cục tài liệu gốc
 
