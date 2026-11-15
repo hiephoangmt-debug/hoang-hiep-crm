@@ -11,6 +11,25 @@ defined( 'ABSPATH' ) || exit;
 
 /** slug bài => [ từ khoá chính, tiêu đề SEO, mô tả SEO ]. */
 function hh_seo_keyword_map() {
+	static $map = null;
+	if ( null !== $map ) {
+		return $map;
+	}
+	$map = hh_seo_keyword_map_base();
+	// Bổ sung / thay theo chuẩn 100/100 Rank Math (15/11/2026): seo-tu-khoa-bo-sung/*.json = { slug: [từ khoá, tiêu đề SEO, mô tả] }.
+	foreach ( glob( __DIR__ . '/seo-tu-khoa-bo-sung/*.json' ) ?: array() as $f ) {
+		foreach ( (array) json_decode( (string) file_get_contents( $f ), true ) as $slug => $row ) {
+			if ( is_array( $row ) && 3 <= count( $row ) ) {
+				$old            = $map[ $slug ] ?? null;
+				$map[ $slug ]   = array_values( $row );
+				$map[ $slug ][3] = array_merge( (array) ( $row[3] ?? array() ), $old ? array( $old[2] ) : array() ); // mô tả cũ → cho phép thay.
+			}
+		}
+	}
+	return $map;
+}
+
+function hh_seo_keyword_map_base() {
 	return array(
 		// Hạ tầng & quy hoạch.
 		'toan-canh-ha-tang-da-nang-2026-tac-dong-bat-dong-san' => array( 'hạ tầng Đà Nẵng 2026', 'Hạ tầng Đà Nẵng 2026: công trình trọng điểm và tác động BĐS', 'Hạ tầng Đà Nẵng 2026: cảng Liên Chiểu, trung tâm tài chính, cầu Hòa Xuân, nhà ga T2, Quốc lộ 14D và các khu vực bất động sản được hưởng lợi rõ nhất.' ),

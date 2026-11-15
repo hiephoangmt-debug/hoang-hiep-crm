@@ -133,6 +133,17 @@ function hh_auto_posts_run( $force = false ) {
 		if ( ! $slug || ! $at || ! preg_match( '#^[a-z0-9/_.-]+\.txt$#', $file ) || $at->getTimestamp() > time() ) {
 			continue;
 		}
+		if ( ! isset( $done[ $slug ] ) ) {
+			foreach ( (array) ( $item['old_slug'] ?? array() ) as $os ) { // Bài đổi đường dẫn: tiếp tục theo dõi bài đã đăng.
+				$os = sanitize_title( (string) $os );
+				if ( isset( $done[ $os ] ) ) {
+					$done[ $slug ] = $done[ $os ];
+					$revs[ $slug ] = $revs[ $os ] ?? 1;
+					unset( $done[ $os ], $revs[ $os ] );
+					break;
+				}
+			}
+		}
 		if ( isset( $done[ $slug ] ) ) {
 			// Bài đã đăng có bản sửa mới (rev tăng): cập nhật nếu chưa ai sửa tay.
 			if ( ! is_int( $done[ $slug ] ) || $rev <= (int) ( $revs[ $slug ] ?? 1 ) ) {
@@ -231,8 +242,12 @@ function hh_auto_post_update( $id, $n ) {
 	if ( get_post_meta( $id, '_hh_news_hash', true ) !== md5( $post->post_content ) ) {
 		return new WP_Error( 'edited', 'bài đã được sửa tay (giữ nguyên).' );
 	}
-	if ( ! empty( $n['kind'] ) || $n['slug'] !== $post->post_name ) {
+	if ( ! empty( $n['kind'] ) || ( $n['slug'] !== $post->post_name && ! in_array( $post->post_name, (array) ( $n['old_slug'] ?? array() ), true ) ) ) {
 		return new WP_Error( 'kind', 'gói không khớp bài.' );
+	}
+	if ( $n['slug'] !== $post->post_name ) {
+		hh_post_rename_slug( $id, $n['slug'] ); // Rút gọn URL – link cũ tự chuyển hướng 301.
+		$post = get_post( $id );
 	}
 	$n['content'] = wp_kses_post( (string) $n['content'] );
 	$keep         = array( 'post_status' => $post->post_status, 'post_date' => $post->post_date, 'post_date_gmt' => $post->post_date_gmt );

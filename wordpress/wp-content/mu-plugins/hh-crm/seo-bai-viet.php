@@ -73,6 +73,24 @@ add_filter(
 	60
 );
 
+/** Đổi đường dẫn bài, giữ chuyển hướng 301 từ link cũ (_wp_old_slug – WordPress tự chuyển hướng). */
+function hh_post_rename_slug( $id, $new ) {
+	$post = get_post( $id );
+	if ( ! $post || $post->post_name === $new ) {
+		return;
+	}
+	add_post_meta( $id, '_wp_old_slug', $post->post_name );
+	wp_update_post( array( 'ID' => $id, 'post_name' => $new ) );
+	clean_post_cache( $id );
+}
+
+/** Ghi nhận ô SEO do web tự điền (không phải anh sửa tay) – lần Nhập dữ liệu sau vẫn được thay bằng bản tốt hơn. */
+function hh_seo_mark_auto( $id, $key, $value ) {
+	$auto         = (array) get_post_meta( $id, '_hh_news_meta_hash', true );
+	$auto[ $key ] = md5( (string) $value );
+	update_post_meta( $id, '_hh_news_meta_hash', $auto );
+}
+
 function hh_seo_lc( $s ) {
 	return mb_strtolower( html_entity_decode( wp_strip_all_tags( (string) $s ), ENT_QUOTES, 'UTF-8' ) );
 }
@@ -179,6 +197,7 @@ function hh_seo_post_fix( $id ) {
 	if ( ! hh_seo_has( '' !== $t ? $t : $post->post_title, $kw ) || ( '' !== $t && 0 !== mb_strpos( hh_seo_lc( $t ), $kw ) && mb_strlen( $t ) > 60 ) ) {
 		$new = hh_seo_title_with_kw( '' !== $t ? $t : $post->post_title, $kw_raw );
 		update_post_meta( $id, 'rank_math_title', $new );
+		hh_seo_mark_auto( $id, 'rank_math_title', $new );
 		$done[] = 'title';
 	}
 	// 2. Mô tả SEO.
@@ -187,7 +206,9 @@ function hh_seo_post_fix( $id ) {
 		$desc = wp_strip_all_tags( $post->post_excerpt );
 	}
 	if ( ! hh_seo_has( $desc, $kw ) ) {
-		update_post_meta( $id, 'rank_math_description', hh_seo_cut( hh_seo_ucfirst( $kw_raw ) . ': ' . $desc, 160, '…' ) );
+		$nd = hh_seo_cut( hh_seo_ucfirst( $kw_raw ) . ': ' . $desc, 160, '…' );
+		update_post_meta( $id, 'rank_math_description', $nd );
+		hh_seo_mark_auto( $id, 'rank_math_description', $nd );
 		$done[] = 'desc';
 	}
 	// 3 – 4. Nội dung: chỉ bài web tự tạo, chưa sửa tay.

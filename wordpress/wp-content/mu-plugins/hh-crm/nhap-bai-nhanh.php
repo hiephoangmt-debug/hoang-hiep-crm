@@ -78,6 +78,16 @@ function hh_quick_post_image( $post_id, $img ) {
 /** Tạo (hoặc cập nhật bản nháp cùng đường dẫn) từ gói bài. Trả về ID bài hoặc WP_Error. */
 function hh_quick_post_create( $n ) {
 	$old = get_posts( array( 'name' => $n['slug'], 'post_type' => 'post', 'post_status' => array( 'publish', 'future', 'draft', 'pending', 'private' ), 'numberposts' => 1 ) )[0] ?? null;
+	if ( ! $old ) {
+		foreach ( (array) ( $n['old_slug'] ?? array() ) as $os ) {
+			$old = get_posts( array( 'name' => $os, 'post_type' => 'post', 'post_status' => array( 'publish', 'future', 'draft', 'pending', 'private' ), 'numberposts' => 1 ) )[0] ?? null;
+			if ( $old ) {
+				hh_post_rename_slug( $old->ID, $n['slug'] );
+				$old = get_post( $old->ID );
+				break;
+			}
+		}
+	}
 	if ( $old && 'draft' !== $old->post_status ) {
 		return new WP_Error( 'exists', 'Đã có bài đang đăng với đường dẫn /' . $n['slug'] . '/ – không ghi đè. Muốn thay, chuyển bài cũ về Bản nháp rồi dán lại.' );
 	}

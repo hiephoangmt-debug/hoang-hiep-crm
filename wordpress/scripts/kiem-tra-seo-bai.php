@@ -14,8 +14,10 @@
  */
 define( 'ABSPATH', __DIR__ . '/' );
 $GLOBALS['hh_cb'] = array();
-function add_filter( $hook, $cb ) { if ( 'hh_news_posts' === $hook ) { $GLOBALS['hh_cb'][] = $cb; } }
+function add_filter( $hook, $cb ) { if ( 'hh_news_posts' === $hook ) { $GLOBALS['hh_cb'][] = $cb; } if ( 'hh_news_items' === $hook ) { $GLOBALS['hh_items_cb'][] = $cb; } }
+$GLOBALS['hh_items_cb'] = array();
 function add_action() {}
+function wp_timezone_string() { return 'Asia/Ho_Chi_Minh'; }
 function esc_html( $s ) { return htmlspecialchars( (string) $s, ENT_QUOTES, 'UTF-8' ); }
 
 $files = array(); $only = array(); $all = false;
@@ -27,6 +29,10 @@ foreach ( array_slice( $argv, 1 ) as $a ) {
 foreach ( $files as $f ) { require $f; }
 $posts = array();
 foreach ( $GLOBALS['hh_cb'] as $cb ) { $posts = $cb( $posts ); }
+// Như lúc web nhập: bài hạ tầng cố định + bản đồ từ khoá SEO (seo-tu-khoa.php ghi đè từ khoá / tiêu đề / mô tả theo slug).
+if ( function_exists( 'hh_news_dataset' ) ) { $posts = array_merge( hh_news_dataset(), $posts ); }
+require_once dirname( __DIR__ ) . '/wp-content/mu-plugins/hh-crm/seo-tu-khoa.php';
+foreach ( $GLOBALS['hh_items_cb'] as $cb ) { $posts = $cb( $posts ); }
 
 // Từ khoá chính đã dùng ở toàn bộ dữ liệu (để kiểm tra trùng).
 $root = dirname( __DIR__ );
@@ -54,7 +60,7 @@ foreach ( $posts as $n ) {
 		continue;
 	}
 	$n_checked++;
-	$seo = $n['seo'] ?? array();
+	$seo = $n['seo'] ?? ( function_exists( 'hh_news_seo' ) ? ( hh_news_seo()[ $slug ] ?? array() ) : array() );
 	$kwr = trim( (string) ( $n['keyword'] ?? '' ) );
 	$kw  = mb_strtolower( $kwr );
 	// Nội dung như trên web: điểm chính + thân bài + hỏi đáp (giống hh_news_build_content).

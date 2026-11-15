@@ -47,7 +47,17 @@ foreach ( $posts as $n ) {
 	unset( $n['schedule'], $n['week'] );
 	$file = 'bai/' . $n['slug'] . '.txt';
 	file_put_contents( $out . '/' . $file, chunk_split( 'HHBAI1:' . base64_encode( json_encode( $n, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ), 1000, "\n" ) );
-	$by[ $n['slug'] ] = array( 'slug' => $n['slug'], 'title' => $n['title'], 'publish' => $pub, 'file' => $file ) + ( empty( $n['rev'] ) ? array() : array( 'rev' => (int) $n['rev'] ) ); // rev tăng → web cập nhật bài đã đăng (nếu chưa sửa tay).
+	// 'old_slug': bài đổi đường dẫn (rút gọn URL cho chuẩn SEO) – web đổi tên bài cũ, WordPress tự chuyển hướng 301 từ link cũ.
+	foreach ( (array) ( $n['old_slug'] ?? array() ) as $os ) {
+		if ( isset( $by[ $os ] ) ) {
+			$pub = $by[ $os ]['publish']; // giữ giờ đăng cũ
+			if ( is_file( $out . '/' . $by[ $os ]['file'] ) && $by[ $os ]['file'] !== $file ) {
+				unlink( $out . '/' . $by[ $os ]['file'] );
+			}
+			unset( $by[ $os ] );
+		}
+	}
+	$by[ $n['slug'] ] = array( 'slug' => $n['slug'], 'title' => $n['title'], 'publish' => $pub, 'file' => $file ) + ( empty( $n['rev'] ) ? array() : array( 'rev' => (int) $n['rev'] ) ) + ( empty( $n['old_slug'] ) ? array() : array( 'old_slug' => array_values( (array) $n['old_slug'] ) ) ); // rev tăng → web cập nhật bài đã đăng (nếu chưa sửa tay).
 	echo "$pub  {$n['slug']}\n";
 }
 uasort( $by, static fn( $a, $b ) => strcmp( $a['publish'], $b['publish'] ) );

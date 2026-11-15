@@ -483,6 +483,16 @@ function hh_import_news() {
 		}
 		$content = hh_news_build_content( $n, $seo );
 		$post    = get_posts( array( 'name' => $n['slug'], 'post_type' => 'post', 'post_status' => array( 'publish', 'future', 'draft', 'pending', 'private' ), 'numberposts' => 1 ) )[0] ?? null;
+		if ( ! $post ) {
+			foreach ( (array) ( $n['old_slug'] ?? array() ) as $os ) { // Bài đổi đường dẫn (rút gọn URL): đổi tên bài cũ, link cũ chuyển hướng 301.
+				$post = get_posts( array( 'name' => $os, 'post_type' => 'post', 'post_status' => array( 'publish', 'future', 'draft', 'pending', 'private' ), 'numberposts' => 1 ) )[0] ?? null;
+				if ( $post ) {
+					hh_post_rename_slug( $post->ID, $n['slug'] );
+					$post = get_post( $post->ID );
+					break;
+				}
+			}
+		}
 		if ( $post ) {
 			$id   = $post->ID;
 			$content = hh_news_featured_in_content( $content, $id, $n );
