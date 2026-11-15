@@ -72,7 +72,7 @@ if STYLE == 'tap-chi':
 .mag .box{flex:1;font:500 22px/1.4 BVP;color:#f3d9a4;text-align:right}
 .mag .foot b{color:#fff}.mag .foot span{color:#e8c88c}
 .mag .note{font:400 17px BVP;color:#8f99ad;margin:18px 0 0;text-align:right}'''
-elif STYLE == 'poster':
+elif STYLE in ('poster', 'poster-xanh'):
     # Kiểu poster (theo mẫu anh Hiệp gửi 15/11/2026): nền ngà có vệt sáng, tiêu đề so le căn giữa
     # (chữ nghiêng Great Vibes + chữ in Cormorant SC màu đồng, chữ nhấn to đậm), 3 con số, ảnh tràn nửa dưới mờ dần lên.
     # headline_poster: các dòng; mỗi dòng {"segs": [[chữ, script|cap|big], ...], "dx": lệch ngang px, "over": đè lên dòng trên}
@@ -83,12 +83,12 @@ elif STYLE == 'poster':
         ' over' if ln.get('over') else '', int(ln.get('dx', 0)),
         ''.join('<span class="l %s">%s</span>' % (k, e(t)) for t, k in ln['segs'])) for ln in hl)
     st = ''.join('<div class="st"><b>%s</b><span>%s</span></div>' % (e(a), e(b)) for a, b in stats[:3])
-    body = """<div class="card pos">
+    body = """<div class="card pos%s">
 <div class="beam"></div>
 <div class="ph" style="background-image:url(%s);background-position:%s"></div>
 <div class="top"><div class="brand">HOÀNG HIỆP · BẤT ĐỘNG SẢN ĐÀ NẴNG</div><div class="tag">%s</div>
 <h1 aria-label="%s">%s</h1><p class="sub">%s</p><div class="stats">%s</div></div>
-<div class="bar">%s<div class="note">%s</div></div></div>""" % (bg, pos, e(c['tag']), e(c['title']), head, e(c['sub']), st, foot, e(c.get('note', '')))
+<div class="bar">%s<div class="note">%s</div></div></div>""" % (' xanh' if STYLE == 'poster-xanh' else '', bg, pos, e(c['tag']), e(c['title']), head, e(c['sub']), st, foot, e(c.get('note', '')))
     css = """
 .pos{background:radial-gradient(120% 70% at 50% 0%,#fbf4e8 0%,#f3e5cd 55%,#e9d3b2 100%);color:#3a2412}
 .pos .beam{position:absolute;inset:0;background:linear-gradient(115deg,transparent 52%,rgba(255,255,255,.55) 62%,transparent 72%);pointer-events:none}
@@ -110,6 +110,20 @@ elif STYLE == 'poster':
 .pos .st{padding:0 30px;text-align:center}.pos .st+.st{border-left:1.5px solid rgba(138,74,28,.35)}
 .pos .st b{display:block;font:700 44px/1.05 CG;color:#8a4a1c;white-space:nowrap;font-variant-numeric:lining-nums}
 .pos .st span{display:block;font:500 18px/1.3 BVP;color:#6b4a2a;margin-top:4px}
+/* Tông nền xanh sáng (anh Hiệp gửi mẫu 15/11/2026): trời xanh nhạt – trắng, chữ cam đồng + xanh navy */
+.pos.xanh{background:linear-gradient(180deg,#d9ecf8 0%,#eef6fc 38%,#ffffff 70%);color:#14233f}
+.pos.xanh .beam{background:linear-gradient(115deg,transparent 52%,rgba(255,255,255,.7) 62%,transparent 72%)}
+.pos.xanh .ph:after{background:linear-gradient(180deg,rgba(238,246,252,.95) 0%,rgba(238,246,252,.5) 45%,rgba(238,246,252,0) 100%)}
+.pos.xanh .brand{color:#1d4f7a}
+.pos.xanh .tag{color:#14233f}
+.pos.xanh .plain{background-image:linear-gradient(180deg,#1f4a74,#14233f)}
+.pos.xanh .big{background-image:linear-gradient(180deg,#f39a4a 0%,#e0701f 50%,#c4561a 100%)}
+.pos.xanh .script{background-image:linear-gradient(180deg,#f2a25a,#d0621c)}
+.pos.xanh .l{filter:drop-shadow(0 1px 0 rgba(255,255,255,.8)) drop-shadow(0 3px 8px rgba(20,35,63,.12))}
+.pos.xanh .sub{color:#14233f}
+.pos.xanh .st b{color:#d0621c}
+.pos.xanh .st span{color:#3a4d66}
+.pos.xanh .st+.st{border-left-color:rgba(20,35,63,.2)}
 .pos .bar{position:absolute;left:36px;right:36px;bottom:32px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 22px;border-radius:22px;background:rgba(20,30,52,.72);backdrop-filter:blur(8px)}
 .pos .foot b{color:#fff}.pos .foot span{color:#f0cf9a}
 .pos .note{font:400 15px/1.35 BVP;color:#c9cfdb;text-align:right;max-width:420px}"""
