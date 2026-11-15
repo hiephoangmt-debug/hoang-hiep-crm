@@ -637,7 +637,7 @@ HTML
 <li><strong>So cùng loại giá:</strong> giá chủ đầu tư (chưa chiết khấu) nên so với giá chủ đầu tư; giá rao chuyển nhượng so với giá rao. Chênh 10 – 20 triệu/m² trong cùng dự án thường do tầng, view, nội thất.</li>
 <li><strong>Kiểm tra dự án trước khi xuống tiền:</strong> dù mặt bằng giá căn hộ Đà Nẵng hấp dẫn đến đâu, anh chị nên tra cứu dự án trên <a href="https://thongtinbds.moc.gov.vn/">Hệ thống thông tin nhà ở và thị trường bất động sản của Bộ Xây dựng</a> và xem văn bản đủ điều kiện bán (xem <a href="/tra-cuu-ma-dinh-danh-bat-dong-san/">cách tra cứu</a>).</li>
 </ul>
-<p>Anh chị cần bảng hàng chi tiết đúng tầm giá, hoặc so sánh 2 – 3 dự án cụ thể, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Hoàng Hiệp cập nhật mặt bằng giá căn hộ Đà Nẵng định kỳ khi có bảng hàng mới. Anh chị cần bảng hàng chi tiết đúng tầm giá, hoặc so sánh 2 – 3 dự án cụ thể, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: bảng hàng chủ đầu tư The Legend, Capital Square, Newtown Diamond (cập nhật 09/2026), bảng hàng / bảng giá các dự án Sun Group, The Poet, Times Square, Peninsula, MIA Center Point mà Hoàng Hiệp đang theo dõi; giá rao thứ cấp trên Batdongsan, Guland, Muaban, Cafeland, Thư viện Pháp luật (7 – 10/2026); bản đồ mặt bằng giá căn hộ Đà Nẵng của Biggee.vn (nhận 09/11/2026). Biểu đồ do Hoàng Hiệp vẽ.</p>
 HTML
 		,
@@ -668,9 +668,11 @@ HTML
 		'keywords_extra' => array( 'Sun Saphia Residence', 'Sun Gallery Đà Nẵng', 'sự kiện Sun Saphia 15/11', 'Chất sống tinh hoa giao hòa nắng biển' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-11 18:30',
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100.
 		'category' => 'Tin dự án',
 		'tags'     => array( 'Sun Saphia Residence', 'Sự kiện dự án', 'Sun Group' ),
 		'image'    => 'plugin:img/tin-tuc/su-kien-sun-saphia-15-11.jpg',
+		'image_alt' => 'Thư mời sự kiện giới thiệu Sun Saphia Residence 15/11/2026 tại Sun Gallery Đà Nẵng',
 		'content'  => <<<HTML
 <p>Chủ đầu tư tổ chức <strong>sự kiện giới thiệu Sun Saphia Residence</strong> với chủ đề <em>"Chất sống tinh hoa – Giao hòa nắng biển"</em> vào <strong>09:00 Chủ nhật 15/11/2026</strong> tại <strong>Sun Gallery Đà Nẵng, 01 Phan Đăng Lưu, Hòa Cường</strong>. Đây là buổi đầu tiên khách hàng được nghe trực tiếp giới thiệu tổng thể về {$saphia} – dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng – trước sự kiện bán hàng dự kiến ngày 05/12/2026.</p>
 <!--hh-featured-->
@@ -697,15 +699,15 @@ HTML
 <tr><td>11:00</td><td>Kết thúc</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/sun-saphia/sun-saphia-cdt-toa-thap-ngay.jpg|Phối cảnh tòa tháp Sun Saphia Residence 30 tầng bên biển Sơn Thủy (ảnh chủ đầu tư)-->
-<h2>Quà bốc thăm may mắn cho khách tham dự</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-cdt-toa-thap-ngay.jpg|Phối cảnh tòa tháp 30 tầng được trình bày tại sự kiện giới thiệu Sun Saphia Residence, bên biển Sơn Thủy (ảnh chủ đầu tư)-->
+<h2>Quà bốc thăm tại sự kiện giới thiệu Sun Saphia Residence</h2>
 <ul>
 <li><strong>01 giải Nhất:</strong> máy lọc không khí Sharp FP-J40E-W.</li>
 <li><strong>02 giải Nhì:</strong> máy massage cổ Philips PPM3308.</li>
 <li><strong>02 giải Ba:</strong> tai nghe Bluetooth chụp tai Sony WH-CH530.</li>
 </ul>
-<p>Quà dành cho khách tham dự sự kiện, bốc thăm lúc 10:45 – nên ở lại đến cuối chương trình.</p>
-<h2>Sun Saphia Residence có gì để nghe tại sự kiện?</h2>
+<p>Quà dành cho khách tham dự sự kiện giới thiệu Sun Saphia Residence, bốc thăm lúc 10:45 – nên ở lại đến cuối chương trình.</p>
+<h2>Nội dung dự án được trình bày tại sự kiện giới thiệu Sun Saphia Residence</h2>
 <p>Theo tài liệu chủ đầu tư đã công bố tới tháng 11/2026, đây là những thông tin chính anh chị sẽ được giới thiệu:</p>
 <ul>
 <li><strong>Vị trí:</strong> giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu bãi tắm Sơn Thủy, phường Ngũ Hành Sơn; đối diện công viên, bãi tắm 2,45 ha thành phố đang đầu tư.</li>
@@ -716,15 +718,18 @@ HTML
 <li><strong>Giá:</strong> giá dự kiến studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ tùy dãy (chưa VAT, chưa 2% bảo trì); bảng giá chính thức công bố khi mở bán.</li>
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence: 28 căn mỗi sàn (bản vẽ chủ đầu tư, tham khảo)-->
-<h2>Nên chuẩn bị gì trước khi đi?</h2>
+<h2>Nên chuẩn bị gì trước sự kiện giới thiệu Sun Saphia Residence?</h2>
 <ol>
 <li><strong>Xác định mục đích mua</strong>: để ở, nghỉ dưỡng gia đình hay cho thuê – mỗi mục đích hợp loại căn và dãy căn khác nhau (xem <a href="/chon-day-can-sun-saphia-residence-mat-bien-canh-ben-phia-sau/">chọn dãy căn</a>, <a href="/tang-cao-hay-tang-thap-sun-saphia-residence-chon-tang-nao/">chọn tầng</a>).</li>
 <li><strong>Tính trước ngân sách</strong>: tổng tiền gồm VAT, 2% bảo trì, nội thất; nếu vay, hỏi trước hạn mức với ngân hàng (xem <a href="/vay-mua-sun-saphia-residence-tra-gop-hang-thang/">vay mua Sun Saphia Residence</a>).</li>
 <li><strong>Ghi sẵn câu hỏi</strong>: phí quản lý, chính sách cho thuê, tiến độ thanh toán, điều kiện hoàn tiền giữ chỗ (xem <a href="/sun-saphia-residence-hoi-dap-ban-giao-phi-quan-ly-cho-thue/">hỏi đáp Sun Saphia Residence</a>).</li>
 <li><strong>Người nước ngoài</strong> lưu ý: chủ đầu tư không bán cho trường hợp có yếu tố nước ngoài (xem <a href="/nguoi-nuoc-ngoai-viet-kieu-mua-sun-saphia-residence-duoc-khong/">bài chi tiết</a>).</li>
+<li><strong>Tra cứu thông tin dự án</strong> trên <a href="https://thongtinbds.moc.gov.vn/">hệ thống thông tin bất động sản của Bộ Xây dựng</a> và hỏi chủ đầu tư về các văn bản pháp lý đã có (xem <a href="/tra-cuu-ma-dinh-danh-bat-dong-san/">cách tra cứu</a>).</li>
 </ol>
+<h2>Sự kiện giới thiệu khác sự kiện bán hàng thế nào?</h2>
+<p>Sự kiện giới thiệu Sun Saphia Residence ngày 15/11 tập trung vào thông tin tổng thể: thương hiệu chủ đầu tư, vị trí, quy mô, thiết kế, tiện ích và pháp lý dự kiến. Bảng giá chính thức, chính sách thanh toán và giỏ căn cụ thể thường chỉ được công bố tại sự kiện bán hàng (dự kiến 05/12/2026). Vì vậy, buổi 15/11 là lúc phù hợp để đặt câu hỏi, xem mặt bằng và khoanh vùng loại căn; còn quyết định chọn căn nên để sau khi có bảng giá và chính sách chính thức.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Sự kiện giới thiệu là dịp tốt để nghe trực tiếp chủ đầu tư và xem mô hình, tài liệu, trước khi bảng giá chính thức ra ở sự kiện bán hàng. Anh chị chưa cần quyết định ngay tại buổi này; nên ghi lại thông tin, so sánh dòng tiền và chọn trước 2 – 3 căn ưng ý. Hoàng Hiệp có mặt tại sự kiện, có thể đón và đi cùng anh chị để giải thích từng mục. Xem thêm <a href="/danh-gia-sun-saphia-residence-chi-tiet/">đánh giá chi tiết Sun Saphia Residence</a> và <a href="/chuan-bi-su-kien-ban-hang-sun-saphia-residence-28-11/">7 việc nên chuẩn bị trước sự kiện bán hàng</a>.</p>
+<p>Sự kiện giới thiệu Sun Saphia Residence là dịp tốt để nghe trực tiếp chủ đầu tư và xem mô hình, tài liệu, trước khi bảng giá chính thức ra ở sự kiện bán hàng. Anh chị chưa cần quyết định ngay tại buổi này; nên ghi lại thông tin, so sánh dòng tiền và chọn trước 2 – 3 căn ưng ý. Hoàng Hiệp có mặt tại sự kiện, có thể đón và đi cùng anh chị để giải thích từng mục. Xem thêm <a href="/danh-gia-sun-saphia-residence-chi-tiet/">đánh giá chi tiết Sun Saphia Residence</a> và <a href="/chuan-bi-su-kien-ban-hang-sun-saphia-residence-28-11/">7 việc nên chuẩn bị trước sự kiện bán hàng</a>.</p>
 <p>Đăng ký tham dự, nhận tài liệu và bảng tính trước sự kiện: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: thư mời sự kiện của chủ đầu tư (thời gian, địa điểm, chương trình, quà tặng); thông tin dự án theo tài liệu và buổi giải đáp của chủ đầu tư 10 – 11/2026. Chương trình có thể thay đổi theo thông báo của ban tổ chức.</p>
 HTML
@@ -733,40 +738,42 @@ HTML
 			'seo_title' => 'Sự kiện giới thiệu Sun Saphia Residence 15/11/2026',
 			'desc'      => 'Sự kiện giới thiệu Sun Saphia Residence 09:00 Chủ nhật 15/11/2026 tại Sun Gallery Đà Nẵng, 01 Phan Đăng Lưu: chương trình, quà bốc thăm, cách đăng ký.',
 			'points'    => array(
-				'09:00 Chủ nhật 15/11/2026 (đón khách từ 08:30), Sun Gallery Đà Nẵng – 01 Phan Đăng Lưu',
+				'Sự kiện giới thiệu Sun Saphia Residence: 09:00 Chủ nhật 15/11/2026 (đón khách từ 08:30), Sun Gallery Đà Nẵng – 01 Phan Đăng Lưu',
 				'Giới thiệu Sun Group, giới thiệu dự án, tư vấn chuyên sâu',
 				'Bốc thăm 5 phần quà cho khách tham dự lúc 10:45',
 				'Sự kiện bán hàng dự kiến 05/12/2026 – bảng giá chính thức công bố khi mở bán',
 			),
 			'faq'       => array(
 				array( 'Sự kiện giới thiệu Sun Saphia Residence diễn ra khi nào, ở đâu?', '09:00 Chủ nhật 15/11/2026 (đón khách từ 08:30) tại Sun Gallery Đà Nẵng, 01 Phan Đăng Lưu, Hòa Cường, Đà Nẵng.' ),
-				array( 'Tham dự sự kiện Sun Saphia Residence có quà không?', 'Có bốc thăm trúng thưởng lúc 10:45 cho khách tham dự: 1 máy lọc không khí Sharp, 2 máy massage cổ Philips, 2 tai nghe Sony.' ),
-				array( 'Đăng ký tham dự sự kiện Sun Saphia Residence thế nào?', 'Gọi hoặc nhắn Zalo Hoàng Hiệp 0904 567 009 để giữ chỗ và nhận tài liệu dự án trước sự kiện.' ),
+				array( 'Tham dự sự kiện giới thiệu Sun Saphia Residence có quà không?', 'Có bốc thăm trúng thưởng lúc 10:45 cho khách tham dự: 1 máy lọc không khí Sharp, 2 máy massage cổ Philips, 2 tai nghe Sony.' ),
+				array( 'Đăng ký tham dự sự kiện giới thiệu Sun Saphia Residence thế nào?', 'Gọi hoặc nhắn Zalo Hoàng Hiệp 0904 567 009 để giữ chỗ và nhận tài liệu dự án trước sự kiện.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://thongtinbds.moc.gov.vn/' ),
 	);
 
 
 	/* ---------------- 13/11 – Tra cứu thông tin dự án, mã định danh trên Hệ thống thông tin nhà ở và thị trường BĐS (Bộ Xây dựng) – anh Hiệp gửi nguồn ---------------- */
 	$posts[] = array(
-		'slug'     => 'tra-cuu-du-an-ma-dinh-danh-bat-dong-san-thongtinbds-moc-gov-vn',
+		'slug'     => 'tra-cuu-ma-dinh-danh-bat-dong-san',
+		'old_slug' => array( 'tra-cuu-du-an-ma-dinh-danh-bat-dong-san-thongtinbds-moc-gov-vn' ),
 		'title'    => 'Cách tra cứu dự án, mã định danh bất động sản trên cổng thông tin của Bộ Xây dựng trước khi đặt cọc',
 		'excerpt'  => 'Hệ thống thông tin về nhà ở và thị trường bất động sản của Bộ Xây dựng (thongtinbds.moc.gov.vn) cho tra cứu mã định danh bất động sản, dự án được chủ đầu tư công khai trước khi kinh doanh, tổ chức dịch vụ và môi giới có chứng chỉ. Quý II/2026 hệ thống ghi nhận 1.938 dự án, 131 dự án đủ điều kiện bán nhà ở hình thành trong tương lai.',
 		'keyword'  => 'tra cứu mã định danh bất động sản',
 		'keywords_extra' => array( 'thongtinbds.moc.gov.vn', 'hệ thống thông tin nhà ở và thị trường bất động sản', 'kiểm tra dự án đủ điều kiện bán', 'Nghị định 357/2025/NĐ-CP', 'tra cứu chứng chỉ môi giới bất động sản' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-13 19:00',
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100.
 		'category' => 'Pháp lý nhà đất',
 		'tags'     => array( 'Pháp lý nhà đất', 'Mã định danh bất động sản', 'Kinh nghiệm mua nhà' ),
 		'image'    => 'plugin:img/tin-tuc/tra-cuu-thong-tin-bds-bo-xay-dung.jpg',
-		'image_alt' => 'Tra cứu dự án, mã định danh bất động sản trên Hệ thống thông tin nhà ở và thị trường bất động sản của Bộ Xây dựng',
+		'image_alt' => 'Tra cứu mã định danh bất động sản và dự án trên Hệ thống thông tin nhà ở và thị trường bất động sản của Bộ Xây dựng',
 		'content'  => <<<HTML
-<p>Trước khi đặt cọc một căn hộ, nhiều anh chị hỏi Hoàng Hiệp: <em>"Làm sao biết dự án này đã được phép bán chưa?"</em>. Ngoài việc xem giấy tờ chủ đầu tư cung cấp, hiện nay người mua có thêm một kênh chính thức để đối chiếu: <strong>Hệ thống thông tin về nhà ở và thị trường bất động sản</strong> của Bộ Xây dựng tại địa chỉ <strong>thongtinbds.moc.gov.vn</strong>. Bài viết dưới đây giải thích hệ thống này là gì, tra cứu được những gì và nên dùng thế nào khi mua nhà ở Đà Nẵng.</p>
+<p><strong>Tra cứu mã định danh bất động sản</strong> và thông tin dự án là bước nên làm trước khi đặt cọc. Nhiều anh chị hỏi Hoàng Hiệp: <em>"Làm sao biết dự án này đã được phép bán chưa?"</em>. Ngoài việc xem giấy tờ chủ đầu tư cung cấp, hiện nay người mua có thêm một kênh chính thức để đối chiếu: <strong>Hệ thống thông tin về nhà ở và thị trường bất động sản</strong> của Bộ Xây dựng tại địa chỉ <strong>thongtinbds.moc.gov.vn</strong>. Bài viết dưới đây giải thích hệ thống này là gì, cách tra cứu mã định danh bất động sản, dự án, môi giới và nên dùng thế nào khi mua nhà ở Đà Nẵng.</p>
 <!--hh-featured-->
 <h2>Hệ thống thông tin về nhà ở và thị trường bất động sản là gì?</h2>
 <p>Đây là hệ thống do Bộ Xây dựng quản lý, theo báo chí đưa tin được đưa vào vận hành từ ngày 30/7/2026 theo <strong>Nghị định 357/2025/NĐ-CP</strong> ngày 31/12/2025 (hiệu lực từ 01/3/2026), thay cho hệ thống cũ theo Nghị định 94/2024/NĐ-CP. Hệ thống dùng để công khai thông tin dự án bất động sản, bất động sản đủ điều kiện đưa vào kinh doanh, giao dịch bất động sản, thông tin về tổ chức, cá nhân hoạt động trong lĩnh vực này, và cấp <strong>mã định danh điện tử</strong> cho bất động sản. Hệ thống cũng kết nối dữ liệu với các cơ sở dữ liệu đất đai, công chứng, xây dựng.</p>
-<p>Theo các trang pháp luật tóm tắt Nghị định 357/2025/NĐ-CP, mã định danh là chuỗi ký tự số và chữ, tối đa 40 ký tự, cấp cho từng nhà ở hoặc phần diện tích sàn xây dựng; với nhà ở, mã được tạo tự động trên hệ thống.</p>
+<p>Theo các trang pháp luật tóm tắt Nghị định 357/2025/NĐ-CP (<a href="https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/tom-tat-nghi-dinh-357-ve-dinh-danh-bat-dong-san-tu-01-03-2026-nghi-dinh-357-2025-nd-cp-18049.html">Thư viện Pháp luật</a>), mã định danh là chuỗi ký tự số và chữ, tối đa 40 ký tự, cấp cho từng nhà ở hoặc phần diện tích sàn xây dựng; với nhà ở, mã được tạo tự động trên hệ thống. Nhờ đó, việc tra cứu mã định danh bất động sản giúp người mua biết tài sản đã được xác thực trên dữ liệu quốc gia hay chưa.</p>
 <h2>Số liệu tổng quan trên hệ thống (quý II/2026, toàn quốc)</h2>
 <table>
 <thead><tr><th>Chỉ tiêu</th><th>Số liệu hiển thị trên trang chủ</th></tr></thead>
@@ -781,11 +788,11 @@ HTML
 </tbody>
 </table>
 <p>Một số ô (tổng mức đầu tư, giá trị giao dịch) hiện để trống trên hệ thống. Số liệu là tổng toàn quốc, phụ thuộc mức độ các địa phương và chủ đầu tư cập nhật; các tỉnh, thành vẫn đang được yêu cầu chuẩn hóa dữ liệu, nên chưa phản ánh đầy đủ thị trường.</p>
-<h2>Tra cứu được những gì?</h2>
+<h2>Tra cứu mã định danh bất động sản và những mục khác trên cổng</h2>
 <table>
 <thead><tr><th>Mục trên cổng</th><th>Dùng để làm gì</th></tr></thead>
 <tbody>
-<tr><td>Mã định danh điện tử</td><td>Danh sách tài sản đã được xác thực và gán mã định danh. Tra theo loại hình và khu vực; kết quả gồm mã dự án/công trình, mã thửa đất, loại hình, khu vực, chủ đầu tư</td></tr>
+<tr><td>Mã định danh điện tử</td><td>Tra cứu mã định danh bất động sản: danh sách tài sản đã được xác thực và gán mã định danh. Tra theo loại hình và khu vực; kết quả gồm mã dự án/công trình, mã thửa đất, loại hình, khu vực, chủ đầu tư</td></tr>
 <tr><td>Bất động sản thương mại</td><td>Danh sách dự án bất động sản thương mại được chủ đầu tư công khai trước khi đưa vào kinh doanh</td></tr>
 <tr><td>Nhà ở xã hội</td><td>Danh sách dự án nhà ở xã hội được chủ đầu tư công khai trước khi đưa vào kinh doanh</td></tr>
 <tr><td>Tổ chức kinh doanh dịch vụ bất động sản</td><td>Lọc theo tỉnh/thành phố, loại hình, tình trạng – kiểm tra sàn giao dịch, công ty môi giới</td></tr>
@@ -794,20 +801,23 @@ HTML
 <tr><td>Văn bản quy phạm pháp luật</td><td>Luật, nghị định, thông tư, quyết định liên quan nhà ở và kinh doanh bất động sản</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/da-nang/song-han-cau-quay-trung-tam-ve-dem.jpg|Sông Hàn và trung tâm Đà Nẵng về đêm – người mua căn hộ nên tra cứu dự án trên hệ thống của Bộ Xây dựng trước khi đặt cọc (ảnh thực tế)-->
-<h2>Cách dùng khi mua nhà ở Đà Nẵng: 5 bước Hoàng Hiệp hay làm</h2>
+<!--hh-img:img/da-nang/song-han-cau-quay-trung-tam-ve-dem.jpg|Sông Hàn và trung tâm Đà Nẵng về đêm – người mua căn hộ nên tra cứu mã định danh bất động sản và dự án trên hệ thống của Bộ Xây dựng trước khi đặt cọc (ảnh thực tế)-->
+<h2>Tra cứu mã định danh bất động sản khi mua nhà ở Đà Nẵng: 5 bước Hoàng Hiệp hay làm</h2>
 <ol>
-<li><strong>Vào đúng địa chỉ:</strong> gõ trực tiếp thongtinbds.moc.gov.vn (tên miền .gov.vn của Bộ Xây dựng). Không bấm link lạ gửi qua tin nhắn.</li>
+<li><strong>Vào đúng địa chỉ:</strong> để tra cứu mã định danh bất động sản, gõ trực tiếp <a href="https://thongtinbds.moc.gov.vn/">thongtinbds.moc.gov.vn</a> (tên miền .gov.vn của Bộ Xây dựng). Không bấm link lạ gửi qua tin nhắn.</li>
 <li><strong>Tra dự án:</strong> vào mục "Bất động sản thương mại" (hoặc "Nhà ở xã hội"), chọn khu vực Đà Nẵng, tìm theo tên dự án hoặc chủ đầu tư. Dự án được công khai trước khi kinh doanh là tín hiệu tốt; chưa thấy thì hỏi lại chủ đầu tư, không vội kết luận vì dữ liệu còn đang cập nhật.</li>
 <li><strong>Đối chiếu với văn bản đủ điều kiện bán:</strong> với nhà ở hình thành trong tương lai, cần thêm văn bản của Sở Xây dựng thông báo nhà ở đủ điều kiện được bán – Sở Xây dựng Đà Nẵng cũng công bố danh sách này định kỳ.</li>
 <li><strong>Kiểm tra người tư vấn:</strong> tra tên công ty dịch vụ bất động sản và chứng chỉ hành nghề môi giới của người đang tư vấn cho mình.</li>
 <li><strong>Giữ lại kết quả tra cứu:</strong> chụp màn hình kèm ngày tra cứu, lưu cùng hồ sơ cọc để đối chiếu khi ký hợp đồng.</li>
 </ol>
-<h2>Lưu ý quan trọng</h2>
+<h2>Cách tra cứu mã định danh bất động sản trên cổng</h2>
+<p>Để tra cứu mã định danh bất động sản, anh chị vào mục "Mã định danh điện tử" trên trang chủ, chọn loại hình (nhà ở riêng lẻ, căn hộ chung cư, công trình…) và khu vực (tỉnh/thành, phường/xã), rồi xem danh sách tài sản đã được xác thực. Mỗi dòng kết quả cho biết mã dự án hoặc công trình, mã thửa đất, loại hình, khu vực và chủ đầu tư. Nếu căn hộ anh chị định mua thuộc một dự án đã có trong danh sách, đó là dữ liệu tốt để đối chiếu với hợp đồng.</p>
+<p>Khi tra cứu mã định danh bất động sản không ra kết quả, chưa nên kết luận dự án có vấn đề: hệ thống mới vận hành từ 30/7/2026, nhiều địa phương và chủ đầu tư vẫn đang nhập dữ liệu. Khi đó, hãy hỏi chủ đầu tư dự án đã được cập nhật lên hệ thống chưa, và yêu cầu xem bản gốc các văn bản pháp lý.</p>
+<h2>Lưu ý quan trọng khi tra cứu mã định danh bất động sản</h2>
 <ul>
-<li><strong>Kết quả tra cứu không thay hồ sơ pháp lý:</strong> vẫn cần xem quyết định chủ trương đầu tư, giấy phép xây dựng, văn bản đủ điều kiện bán, bảo lãnh ngân hàng (với nhà hình thành trong tương lai) và hợp đồng mẫu.</li>
+<li><strong>Kết quả tra cứu mã định danh bất động sản không thay hồ sơ pháp lý:</strong> vẫn cần xem quyết định chủ trương đầu tư, giấy phép xây dựng, văn bản đủ điều kiện bán, bảo lãnh ngân hàng (với nhà hình thành trong tương lai) và hợp đồng mẫu.</li>
 <li><strong>Căn hộ thương mại dịch vụ, condotel</strong> như Sun Saphia Residence không phải "nhà ở" theo Luật Nhà ở, nên thủ tục và danh sách công khai có thể khác căn hộ chung cư – xem thêm <a href="/phap-ly-sun-saphia-residence-so-huu-bao-lau/">pháp lý Sun Saphia Residence</a>.</li>
-<li><strong>Quy định bắt buộc dùng mã định danh trong mọi giao dịch</strong> theo một số báo vẫn đang nằm trong dự thảo Luật Kinh doanh bất động sản sửa đổi, chưa phải quy định đã áp dụng cho mọi giao dịch nhà đất.</li>
+<li><strong>Quy định bắt buộc dùng mã định danh trong mọi giao dịch</strong> (thay vì chỉ khuyến khích tra cứu mã định danh bất động sản) theo một số báo vẫn đang nằm trong dự thảo Luật Kinh doanh bất động sản sửa đổi, chưa phải quy định đã áp dụng cho mọi giao dịch nhà đất.</li>
 <li><strong>Dữ liệu đang được cập nhật:</strong> TP Đà Nẵng đã có văn bản triển khai cơ sở dữ liệu nhà ở và thị trường bất động sản; theo báo chí, Sở Xây dựng đã cấp hơn 300 tài khoản cho cơ quan, đơn vị cập nhật dữ liệu.</li>
 </ul>
 <p>Xem thêm: <a href="/kiem-tra-phap-ly-quy-hoach-nha-dat-da-nang/">cách kiểm tra pháp lý, quy hoạch nhà đất Đà Nẵng</a>.</p>
@@ -817,22 +827,23 @@ HTML
 <li><a href="/du-an/spana-tower/">Spana Tower Hòa Xuân</a> và <a href="/du-an/cora-tower/">Cora Tower</a> – căn hộ Sun Group ở Hòa Xuân, Hải Châu.</li>
 <li><a href="/du-an/nobu-da-nang/">Nobu Residences Đà Nẵng</a> – căn hộ hàng hiệu ven biển Mỹ Khê.</li>
 </ul>
-<p>Anh chị cần Hiệp tra cứu giúp một dự án, đối chiếu văn bản đủ điều kiện bán hoặc kiểm tra hồ sơ trước khi đặt cọc, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Anh chị cần Hiệp tra cứu mã định danh bất động sản giúp, tra một dự án, đối chiếu văn bản đủ điều kiện bán hoặc kiểm tra hồ sơ trước khi đặt cọc, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: Hệ thống thông tin về nhà ở và thị trường bất động sản – Bộ Xây dựng (thongtinbds.moc.gov.vn, số liệu trang chủ "Tổng quan thị trường quý II 2026", xem ngày 13/11/2026); Nghị định 357/2025/NĐ-CP theo tóm tắt của Thư viện Pháp luật, LuatVietnam, Cổng thông tin Chính phủ; thông tin vận hành hệ thống theo Tiền Phong, Báo Xây dựng; Đà Nẵng triển khai cơ sở dữ liệu theo VnEconomy.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Tra cứu mã định danh bất động sản trên cổng Bộ Xây dựng',
-			'desc'      => 'Cách tra cứu dự án công khai, mã định danh bất động sản, môi giới có chứng chỉ trên thongtinbds.moc.gov.vn trước khi đặt cọc mua nhà ở Đà Nẵng.',
+			'seo_title' => 'Tra cứu mã định danh bất động sản 2026: cách làm 5 bước',
+			'desc'      => 'Cách tra cứu mã định danh bất động sản, dự án công khai, môi giới có chứng chỉ trên thongtinbds.moc.gov.vn trước khi đặt cọc mua nhà ở Đà Nẵng.',
 			'points'    => array(
-				'thongtinbds.moc.gov.vn là Hệ thống thông tin về nhà ở và thị trường bất động sản của Bộ Xây dựng, vận hành theo Nghị định 357/2025/NĐ-CP',
-				'Tra cứu được mã định danh bất động sản, dự án thương mại và nhà ở xã hội công khai trước khi kinh doanh, tổ chức dịch vụ, chứng chỉ môi giới',
+				'Tra cứu mã định danh bất động sản trên thongtinbds.moc.gov.vn – Hệ thống Hệ thống thông tin về nhà ở và thị trường bất động sản của Bộ Xây dựng, vận hành theo Nghị định 357/2025/NĐ-CP',
+				'Ngoài tra cứu mã định danh bất động sản, cổng cho xem dự án thương mại và nhà ở xã hội công khai trước khi kinh doanh, tổ chức dịch vụ, chứng chỉ môi giới',
 				'Quý II/2026: 1.938 dự án, 131 dự án đủ điều kiện bán nhà ở hình thành trong tương lai, 100.005 giao dịch (toàn quốc)',
 				'Kết quả tra cứu không thay hồ sơ pháp lý; vẫn cần văn bản đủ điều kiện bán của Sở Xây dựng',
 			),
 			'faq'       => array(
-				array( 'Tra cứu mã định danh bất động sản ở đâu?', 'Trên Hệ thống thông tin về nhà ở và thị trường bất động sản của Bộ Xây dựng tại thongtinbds.moc.gov.vn, mục "Mã định danh điện tử", lọc theo loại hình và khu vực.' ),
+				array( 'Tra cứu mã định danh bất động sản ở đâu?', 'Tra cứu mã định danh bất động sản trên Hệ thống thông tin về nhà ở và thị trường bất động sản của Bộ Xây dựng tại thongtinbds.moc.gov.vn, mục "Mã định danh điện tử", lọc theo loại hình và khu vực.' ),
 				array( 'Làm sao biết dự án đã được phép bán?', 'Tra danh sách dự án được chủ đầu tư công khai trước khi kinh doanh trên thongtinbds.moc.gov.vn và đối chiếu văn bản thông báo đủ điều kiện bán nhà ở hình thành trong tương lai của Sở Xây dựng.' ),
+				array( 'Tra cứu mã định danh bất động sản không ra kết quả thì sao?', 'Dữ liệu đang được các địa phương và chủ đầu tư cập nhật, nên chưa có kết quả không có nghĩa dự án sai phạm. Hãy hỏi chủ đầu tư và xem bản gốc văn bản pháp lý, văn bản đủ điều kiện bán của Sở Xây dựng.' ),
 				array( 'Mã định danh bất động sản là gì?', 'Theo Nghị định 357/2025/NĐ-CP, là chuỗi ký tự số và chữ tối đa 40 ký tự cấp cho từng nhà ở hoặc phần diện tích sàn xây dựng; với nhà ở, mã được tạo tự động trên hệ thống.' ),
 				array( 'Có kiểm tra được môi giới bất động sản không?', 'Có. Cổng có mục tra cứu tổ chức kinh doanh dịch vụ bất động sản và danh sách cá nhân có chứng chỉ hành nghề môi giới.' ),
 			),

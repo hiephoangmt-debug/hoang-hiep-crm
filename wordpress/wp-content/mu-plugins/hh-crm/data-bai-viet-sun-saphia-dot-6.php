@@ -17,11 +17,12 @@ function hh_posts_sun_saphia_dot_6( $posts ) {
 
 	/* ---------------- 02/11 – Công viên biển 2,45 ha ---------------- */
 	$posts[] = array(
-		'slug'     => 'cong-vien-bien-truong-sa-2-45-ha-truoc-sun-saphia-residence',
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'slug'     => 'cong-vien-bien-truong-sa-2-45-ha-sun-saphia',
+		'old_slug' => array( 'cong-vien-bien-truong-sa-2-45-ha-truoc-sun-saphia-residence' ),
+		'rev'     => 3, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá. 05/11: chèn ảnh dự án.
 		'title'    => 'Công viên biển 2,45 ha trên đường Trường Sa: đất dự án bỏ hoang thành công viên trước Sun Saphia Residence',
 		'excerpt'  => 'Đà Nẵng thu hồi khoảng 2,45 ha từ dự án resort Hòn Ngọc Á Châu bỏ hoang để làm công viên công cộng ven biển trên đường Trường Sa, vốn khoảng 47 tỷ, làm đến 2027 – ngay phía trước Sun Saphia Residence.',
-		'keyword'  => 'công viên biển Trường Sa Đà Nẵng',
+		'keyword'  => 'công viên biển Trường Sa',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'Hòn Ngọc Á Châu thu hồi', 'công viên bãi tắm Sơn Thủy', 'công viên ven biển Ngũ Hành Sơn' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-02 15:00',
@@ -29,9 +30,9 @@ function hh_posts_sun_saphia_dot_6( $posts ) {
 		'tags'     => array( 'Sun Saphia Residence', 'Ngũ Hành Sơn', 'Hạ tầng Đà Nẵng' ),
 		'image'    => 'plugin:img/tin-tuc/cong-vien-bien-truong-sa-sun-saphia.jpg',
 		'content'  => <<<HTML
-<p>Trên đường Trường Sa (phường Ngũ Hành Sơn), khu đất phía Nam dự án resort <strong>Hòn Ngọc Á Châu</strong> – khởi công năm 2010 trên khoảng 12 ha rồi bỏ hoang nhiều năm – đang được chuyển thành <strong>công viên công cộng ven biển khoảng 2,45 ha</strong>. Đây cũng là khoảng đất ngay phía trước {$saphia}, tòa căn hộ 30 tầng của Sun Group tại giao lộ Võ Nguyên Giáp – Trường Sa.</p>
+<p><strong>Công viên biển Trường Sa</strong> là tên gọi quen của khu công viên công cộng mới trên đường Trường Sa (phường Ngũ Hành Sơn): khu đất phía Nam dự án resort <strong>Hòn Ngọc Á Châu</strong> – khởi công năm 2010 trên khoảng 12 ha rồi bỏ hoang nhiều năm – đang được chuyển thành <strong>công viên công cộng ven biển khoảng 2,45 ha</strong>. Đây cũng là khoảng đất ngay phía trước {$saphia}, tòa căn hộ 30 tầng của Sun Group tại giao lộ Võ Nguyên Giáp – Trường Sa.</p>
 <!--hh-featured-->
-<h2>Công viên có gì?</h2>
+<h2>Công viên biển Trường Sa có gì?</h2>
 <table>
 <tbody>
 <tr><th>Diện tích</th><td>Khoảng 2,45 ha, mặt tiền đường Trường Sa</td></tr>
@@ -41,8 +42,12 @@ function hh_posts_sun_saphia_dot_6( $posts ) {
 <tr><th>Hạng mục</th><td>Bãi đỗ xe, đường đi bộ – chạy bộ, sân chơi trẻ em, quảng trường tổ chức sự kiện, cây xanh, nhà vệ sinh, khu tắm nước ngọt, lối xuống biển công cộng</td></tr>
 </tbody>
 </table>
-<p>Gần đó còn dự án riêng "Công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy", nối thành chuỗi công viên bãi tắm dọc tuyến biển: bãi tắm Sơn Thủy – công viên đối diện Sun Saphia – công viên bãi tắm cuối đường Huyền Trân Công Chúa.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
+<p>Thông tin về công viên biển Trường Sa được <a href="https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp">VietnamPlus</a> và <a href="https://tienphong.vn/da-nang-rot-47-ty-dong-danh-thuc-khu-dat-vang-bo-hoang-post1767479.html">Tiền Phong</a> đưa tin khi thành phố quyết định đầu tư.</p>
+<p>Gần đó còn dự án riêng "Công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy", nối thành chuỗi công viên bãi tắm dọc tuyến biển: bãi tắm Sơn Thủy – công viên biển Trường Sa đối diện Sun Saphia – công viên bãi tắm cuối đường Huyền Trân Công Chúa.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Công viên biển Trường Sa – mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Công viên biển Trường Sa: từ khu đất bỏ hoang đến không gian công cộng</h2>
+<p>Dự án Hòn Ngọc Á Châu khởi công từ năm 2010 nhưng chậm triển khai suốt nhiều năm, để lại một khu đất rào chắn ngay trên tuyến biển. Việc thành phố thu hồi một phần để làm công viên biển Trường Sa có ý nghĩa vượt ra ngoài 2,45 ha: nó cho thấy cách Đà Nẵng xử lý các dự án ven biển chậm tiến độ – thu hồi và trả lại không gian biển cho cộng đồng, thay vì tiếp tục để trống.</p>
+<p>Với người mua bất động sản quanh khu vực, đây là tín hiệu tích cực về quản lý quy hoạch: một khoảng đất có thể từng bị xây cao tầng nay trở thành cây xanh, quảng trường. Tuy nhiên, phần còn lại của khu đất dự án cũ sẽ được xử lý thế nào thì Hoàng Hiệp chưa thấy thông tin chính thức – anh chị nên theo dõi thêm.</p>
 <h2>Ý nghĩa với người dân và du khách</h2>
 <ul>
 <li>Thêm lối xuống biển công cộng, chỗ đỗ xe – đoạn biển này trước đây bị rào chắn bởi khu đất bỏ hoang.</li>
@@ -50,40 +55,49 @@ function hh_posts_sun_saphia_dot_6( $posts ) {
 <li>Xử lý một "vết sẹo" đô thị tồn tại hơn 10 năm trên tuyến biển đẹp nhất thành phố.</li>
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
-<h2>Tác động tới Sun Saphia Residence – nhận định của Hoàng Hiệp</h2>
+<h2>Công viên biển Trường Sa tác động tới Sun Saphia Residence ra sao?</h2>
 <ul>
 <li><strong>Cảnh quan phía trước được giữ thoáng</strong>: thay vì một công trình cao tầng chắn view, phía trước là công viên – có lợi cho các căn hướng biển.</li>
 <li><strong>Ra biển thuận tiện</strong>: từ dự án đi qua công viên khoảng 400 m là tới bãi tắm Sơn Thủy.</li>
 <li><strong>Cho thuê</strong>: khách du lịch, gia đình có trẻ nhỏ đánh giá cao chỗ ở có công viên, lối biển công cộng ngay trước nhà.</li>
 <li><strong>Lưu ý</strong>: trong thời gian thi công đến 2027 có thể ảnh hưởng đi lại; tiến độ công trình công phụ thuộc giải ngân vốn.</li>
 </ul>
+<h2>Mốc thời gian nên theo dõi</h2>
+<p>Công viên biển Trường Sa được thực hiện đến năm 2027, còn Sun Saphia Residence dự kiến bàn giao tháng 11/2028. Nếu hai mốc này đúng kế hoạch, cư dân và khách thuê đầu tiên của tòa tháp sẽ nhận nhà khi công viên đã hoàn thành – không phải sống cạnh công trường. Ngược lại, nếu công viên chậm tiến độ, năm đầu vận hành có thể chịu ảnh hưởng về cảnh quan và đi lại. Hoàng Hiệp sẽ cập nhật khi có thông tin thi công mới.</p>
+<h2>Nhận định của Hoàng Hiệp</h2>
+<p>Công viên biển Trường Sa là một trong những yếu tố "cứng" nhất của vị trí dự án: đất công, vốn công, quy hoạch rõ. Khác với các thông tin hạ tầng còn ở giai đoạn đề xuất, khoảng xanh phía trước tòa tháp ít khả năng bị thay đổi, và điều đó có lợi lâu dài cho các căn hướng biển.</p>
 <p>Xem toàn bộ vị trí, view, giá và dòng tiền ở bài {$review}.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Công viên biển 2,45 ha Trường Sa trước Sun Saphia',
-			'desc'      => 'Đà Nẵng thu hồi 2,45 ha đất dự án Hòn Ngọc Á Châu bỏ hoang làm công viên ven biển trên đường Trường Sa, vốn khoảng 47 tỷ, làm đến 2027.',
+			'seo_title' => 'Công viên biển Trường Sa 2,45 ha trước Sun Saphia',
+			'desc'      => 'Công viên biển Trường Sa: Đà Nẵng thu hồi 2,45 ha đất dự án Hòn Ngọc Á Châu bỏ hoang làm công viên công cộng, vốn khoảng 47 tỷ, làm đến 2027.',
 			'points'    => array(
-				'Khoảng 2,45 ha thu hồi từ dự án resort Hòn Ngọc Á Châu bỏ hoang',
+				'Công viên biển Trường Sa khoảng 2,45 ha, thu hồi từ dự án resort Hòn Ngọc Á Châu bỏ hoang',
 				'Vốn khoảng 47 tỷ, thực hiện đến 2027; có bãi đỗ xe, sân chơi, quảng trường, lối xuống biển',
 				'Ngay phía trước Sun Saphia Residence, giữ thoáng view biển',
 			),
 			'faq'       => array(
-				array( 'Công viên biển trên đường Trường Sa rộng bao nhiêu?', 'Khoảng 2,45 ha, trên phần đất thu hồi từ phía Nam dự án resort Hòn Ngọc Á Châu, vốn khoảng 47 tỷ đồng, thực hiện đến 2027.' ),
+				array( 'Công viên biển Trường Sa rộng bao nhiêu?', 'Công viên biển Trường Sa rộng khoảng 2,45 ha, trên phần đất thu hồi từ phía Nam dự án resort Hòn Ngọc Á Châu, vốn khoảng 47 tỷ đồng, thực hiện đến 2027.' ),
 				array( 'Công viên biển Trường Sa ở đâu?', 'Trên đường Trường Sa, phường Ngũ Hành Sơn, ngay phía trước dự án Sun Saphia Residence, gần bãi tắm Sơn Thủy.' ),
+				array( 'Khi nào công viên biển Trường Sa hoàn thành?', 'Theo kế hoạch thực hiện đến năm 2027, trước mốc bàn giao dự kiến 11/2028 của Sun Saphia Residence; tiến độ phụ thuộc giải ngân vốn đầu tư công.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp',
+			'https://tienphong.vn/da-nang-rot-47-ty-dong-danh-thuc-khu-dat-vang-bo-hoang-post1767479.html',
+		),
 	);
 
 	/* ---------------- 03/11 – Thị trường khách sạn ---------------- */
 	$posts[] = array(
-		'slug'     => 'gia-phong-khach-san-ven-bien-da-nang-2026-sun-saphia',
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'slug'     => 'gia-phong-khach-san-ven-bien-da-nang-2026',
+		'old_slug' => array( 'gia-phong-khach-san-ven-bien-da-nang-2026-sun-saphia' ),
+		'rev'     => 3, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá. 05/11: chèn ảnh dự án.
 		'title'    => 'Giá phòng khách sạn ven biển Đà Nẵng 2026: 5 sao, 4 sao, phố trong – căn studio Sun Saphia Residence đứng ở đâu?',
 		'excerpt'  => 'Giá phòng tham khảo 10/2026: resort 5 sao mặt biển khoảng 3,7 – 3,9 triệu/đêm, 4 sao mặt biển 1,25 – 3,13 triệu, 2 – 3 sao phố trong 0,4 – 0,9 triệu. Khách sạn 4 – 5 sao lấp đầy 88 – 90% quý III/2026.',
-		'keyword'  => 'giá phòng khách sạn ven biển Đà Nẵng',
+		'keyword'  => 'giá phòng khách sạn ven biển',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'công suất phòng khách sạn Đà Nẵng 2026', 'giá thuê căn hộ theo đêm Đà Nẵng', 'thị trường khách sạn Đà Nẵng' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-03 15:00',
@@ -91,9 +105,9 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Thị trường lưu trú' ),
 		'image'    => 'plugin:img/tin-tuc/gia-phong-khach-san-da-nang-2026.jpg',
 		'content'  => <<<HTML
-<p>Người mua căn hộ ven biển để cho thuê theo đêm cần một mốc so sánh: <strong>khách sạn quanh đó đang bán phòng giá bao nhiêu</strong>. Bài tổng hợp giá phòng tham khảo khu vực Mỹ Khê – Sơn Thủy – An Thượng tháng 10/2026, số liệu công suất thị trường và đặt studio {$saphia} vào bức tranh này.</p>
+<p><strong>Giá phòng khách sạn ven biển</strong> là mốc so sánh đầu tiên cho người mua căn hộ ven biển để cho thuê theo đêm: khách sạn quanh đó đang bán phòng bao nhiêu. Bài tổng hợp giá phòng khách sạn ven biển khu vực Mỹ Khê – Sơn Thủy – An Thượng tháng 10/2026, số liệu công suất thị trường và đặt studio {$saphia} vào bức tranh này.</p>
 <!--hh-featured-->
-<h2>Bảng giá phòng tham khảo (10/2026)</h2>
+<h2>Giá phòng khách sạn ven biển Đà Nẵng tham khảo (10/2026)</h2>
 <table>
 <thead><tr><th>Nhóm</th><th>Ví dụ</th><th>Giá/đêm</th></tr></thead>
 <tbody>
@@ -107,16 +121,20 @@ HTML
 </tbody>
 </table>
 <p>Giá lấy trên các trang đặt phòng, thay đổi theo ngày, hạng phòng và mùa; chỉ để tham khảo.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Vì sao giá phòng khách sạn ven biển chênh nhau nhiều?</h2>
+<p>Cùng một đoạn biển, giá phòng khách sạn ven biển có thể chênh gấp 3 – 4 lần. Hoàng Hiệp thấy có bốn yếu tố chính. Thứ nhất là <strong>vị trí so với bãi biển</strong>: khách sạn nằm ngay mặt biển, bước ra là cát, luôn cao hơn khách sạn phải băng qua đường lớn. Thứ hai là <strong>thương hiệu và hạng sao</strong>: thương hiệu quốc tế có tệp khách trung thành và hệ thống đặt phòng riêng. Thứ ba là <strong>tầm nhìn của từng phòng</strong>: phòng view biển trực diện thường cao hơn phòng view phố trong cùng khách sạn. Thứ tư là <strong>tiện ích</strong>: bể bơi, nhà hàng, spa, dịch vụ trẻ em.</p>
+<p>Với căn hộ cho thuê, hai yếu tố đầu khó thay đổi, nhưng tầm nhìn (chọn căn) và chất lượng vận hành (dọn phòng, phản hồi khách) thì chủ căn kiểm soát được. Đó là lý do cùng một tòa, hai căn có thể đạt giá thuê rất khác nhau.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Giá phòng khách sạn ven biển quanh Sun Saphia Residence – mặt bằng tổng thể cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Công suất phòng: khách sạn cao cấp đang đầy</h2>
 <ul>
 <li>Khách sạn 4 – 5 sao Đà Nẵng lấp đầy khoảng <strong>88 – 90%</strong> trong quý III/2026 (Avison Young).</li>
 <li>Tính chung toàn thành phố 12 tháng đến 6/2026: công suất khoảng <strong>66%</strong>, giá phòng bình quân khoảng <strong>116 USD</strong> (CoStar).</li>
 <li>Khách sạn của Sun Group tại miền Trung đạt công suất khoảng 81,3% năm 2026 (theo chủ đầu tư).</li>
-<li>Áp lực: gần <strong>7.000 phòng mới</strong> sắp vào thị trường, có thể kéo giá phòng xuống ở phân khúc trung cấp.</li>
+<li>Áp lực: gần <strong>7.000 phòng mới</strong> sắp vào thị trường, có thể kéo giá phòng khách sạn ven biển xuống ở phân khúc trung cấp.</li>
+<li>Nhu cầu: 9 tháng năm 2026 Đà Nẵng đón khoảng 15,86 triệu lượt khách lưu trú, tăng 26,4% (<a href="https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp">VietnamPlus</a>).</li>
 </ul>
 <!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
-<h2>Studio Sun Saphia Residence nằm ở đâu?</h2>
+<h2>So với giá phòng khách sạn ven biển, studio Sun Saphia Residence nằm ở đâu?</h2>
 <p>Bài toán của chủ đầu tư giả định studio 30 m² view biển cho thuê khoảng <strong>2,2 – 2,9 triệu/đêm</strong> ngoài mùa cao điểm – ngang nhóm 4 sao mặt biển, thấp hơn resort 5 sao, cao hơn khách sạn phố trong không có view biển trực diện. Điểm cộng: tòa 30 tầng mặt dài hướng biển, có bếp, bể bơi, gym; điểm trừ: chưa vận hành, chưa có đánh giá thực tế trên các kênh đặt phòng.</p>
 <h2>Đọc số liệu thế nào khi tính dòng tiền?</h2>
 <ul>
@@ -124,24 +142,30 @@ HTML
 <li>Giá cao điểm (hè, lễ, pháo hoa) cao hơn nhiều giá bình quân năm – tính theo mùa thay vì một giá cố định.</li>
 <li>Trừ phí kênh bán phòng, vận hành, thuế trước khi so với lãi vay.</li>
 </ul>
-<p>Ví dụ dòng tiền theo mùa cho studio Sun Saphia: xem bài {$review}.</p>
+<h2>Giá phòng khách sạn ven biển theo mùa</h2>
+<p>Bảng giá trên là thời điểm tháng 10/2026 – đầu mùa mưa, giá thường ở mức thấp hoặc trung bình của năm. Vào mùa hè và mùa pháo hoa, giá phòng khách sạn ven biển tăng mạnh, nhất là các đêm cuối tuần; vào tháng 10 – 12, nhiều khách sạn giảm giá, tặng kèm dịch vụ để giữ công suất. Khi so sánh, anh chị nên lấy giá cùng thời điểm trong năm, tránh so giá mùa hè của khách sạn này với giá mùa mưa của khách sạn khác.</p>
+<p>Ví dụ dòng tiền theo mùa cho studio Sun Saphia: xem bài {$review} và bài <a href="/mua-du-lich-da-nang-cong-suat-phong-cho-thue-sun-saphia/">mùa du lịch và công suất phòng</a>.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá phòng khách sạn ven biển Đà Nẵng 2026 và Sun Saphia',
-			'desc'      => 'Giá phòng 10/2026: resort 5 sao mặt biển khoảng 3,7 – 3,9 triệu/đêm, 4 sao 1,25 – 3,13 triệu; 4 – 5 sao lấp đầy 88 – 90% quý III/2026.',
+			'seo_title' => 'Giá phòng khách sạn ven biển Đà Nẵng 2026: 5 sao, 4 sao',
+			'desc'      => 'Giá phòng khách sạn ven biển Đà Nẵng 10/2026: resort 5 sao khoảng 3,7 – 3,9 triệu/đêm, 4 sao 1,25 – 3,13 triệu; 4 – 5 sao lấp đầy 88 – 90% quý III.',
 			'points'    => array(
+				'Giá phòng khách sạn ven biển Đà Nẵng chênh 3 – 4 lần theo vị trí, thương hiệu, view',
 				'Resort 5 sao mặt biển khoảng 3,7 – 3,9 triệu/đêm; 4 sao mặt biển 1,25 – 3,13 triệu',
 				'Khách sạn 4 – 5 sao lấp đầy 88 – 90% quý III/2026 (Avison Young)',
 				'Studio Sun Saphia giả định 2,2 – 2,9 triệu/đêm – ngang nhóm 4 sao mặt biển',
 			),
 			'faq'       => array(
-				array( 'Giá phòng khách sạn 4 sao ven biển Đà Nẵng bao nhiêu?', 'Tham khảo 10/2026: khoảng 1,25 – 3,13 triệu/đêm tùy khách sạn, hạng phòng và mùa (ví dụ Wyndham Soleil 2,28 – 3,13 triệu, Radisson 1,7 – 2,8 triệu).' ),
+				array( 'Giá phòng khách sạn ven biển 4 sao ở Đà Nẵng bao nhiêu?', 'Giá phòng khách sạn ven biển 4 sao tham khảo 10/2026: khoảng 1,25 – 3,13 triệu/đêm tùy khách sạn, hạng phòng và mùa (ví dụ Wyndham Soleil 2,28 – 3,13 triệu, Radisson 1,7 – 2,8 triệu).' ),
 				array( 'Công suất phòng khách sạn Đà Nẵng 2026 là bao nhiêu?', 'Khách sạn 4 – 5 sao lấp đầy khoảng 88 – 90% quý III/2026 (Avison Young); toàn thành phố 12 tháng đến 6/2026 khoảng 66% (CoStar).' ),
+				array( 'Giá phòng khách sạn ven biển mùa nào cao nhất?', 'Mùa hè và mùa pháo hoa, nhất là cuối tuần; tháng 10 – 12 mùa mưa giá thường thấp hơn, nhiều nơi có khuyến mãi.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp',
+		),
 	);
 
 	/* ---------------- 04/11 – So sánh loại hình đầu tư cho thuê ---------------- */

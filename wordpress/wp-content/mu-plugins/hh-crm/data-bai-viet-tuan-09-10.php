@@ -530,8 +530,10 @@ HTML
 
 <h2>Vì sao bất động sản Sơn Trà được quan tâm?</h2>
 <p>Sơn Trà có cả sông Hàn và biển Mỹ Khê, gần cầu Rồng và trung tâm Hải Châu, là nơi tập trung khách sạn và khách du lịch. Trung tâm tài chính quốc tế Đà Nẵng có các lô đất trên đường Võ Văn Kiệt, tạo thêm kỳ vọng cho nhu cầu thuê căn hộ cao cấp – xem bài <a href="/trung-tam-tai-chinh-quoc-te-da-nang-tac-dong-bat-dong-san/">trung tâm tài chính quốc tế Đà Nẵng</a>.</p>
+<!--hh-img:img/sun-ponte/sun-ponte-toan-canh-ban-dao-son-tra.jpg|Bán đảo Sơn Trà và sông Hàn – khu vực tập trung bất động sản Sơn Trà ven sông, ven biển-->
+<p>Một điểm khác biệt của bất động sản Sơn Trà là nhu cầu thuê đến từ cả khách du lịch, người nước ngoài sinh sống lẫn người làm việc ở trung tâm, nên căn hộ ở đây dễ khai thác hơn nhiều khu vực khác. Báo chí gần đây cũng nhìn nhận Sơn Trà đang trở thành trục an cư và tích sản mới của thành phố (xem <a href="https://cafef.vn/son-tra-xac-lap-vi-the-truc-an-cu-va-tich-san-moi-tai-da-nang-188260829104316245.chn">CafeF</a>).</p>
 
-<h2>Dự án căn hộ ven sông Hàn</h2>
+<h2>Bất động sản Sơn Trà ven sông Hàn: dự án căn hộ</h2>
 <table>
 <thead><tr><th>Dự án</th><th>Quy mô</th><th>Giá tham khảo</th><th>Tình trạng</th></tr></thead>
 <tbody>
@@ -547,7 +549,7 @@ HTML
 </table>
 <p>Nhóm Sun Group có thêm phân khu thấp tầng The Sonata (Sun Symphony) và The Rio (Sun Ponte) cho khách cần nhà phố, biệt thự ven sông.</p>
 
-<h2>Dự án mặt biển Mỹ Khê</h2>
+<h2>Bất động sản Sơn Trà mặt biển Mỹ Khê</h2>
 <ul>
 <li><a href="/du-an/times-square-da-nang/">Times Square Đà Nẵng</a>: 560 căn hộ trên Võ Nguyên Giáp, studio/1PN khoảng 6,5 – 8,5 tỷ, 2PN khoảng 12 – 14 tỷ.</li>
 <li><a href="/du-an/nobu-da-nang/">Nobu Residences Đà Nẵng</a>: tháp 43 tầng, 264 căn hàng hiệu, khoảng 145 – 205 triệu/m²; pháp lý sở hữu cần đối chiếu hợp đồng.</li>
@@ -556,7 +558,7 @@ HTML
 <li>Premier Village: biệt thự resort trên biển Mỹ Khê, khoảng 39 – 47 tỷ trở lên.</li>
 </ul>
 
-<h2>Đất và khách sạn Sơn Trà</h2>
+<h2>Đất và khách sạn – phân khúc vốn lớn của bất động sản Sơn Trà</h2>
 <p>Đất mặt biển Võ Nguyên Giáp chào khoảng 130 – 390 triệu/m², Hoàng Sa khoảng 170 – 415 triệu/m² (lô nhỏ 200 – 330 m² đắt nhất), Võ Văn Kiệt khoảng 310 – 400 triệu/m², Phạm Văn Đồng khoảng 190 – 280 triệu/m². Khách sạn nhỏ ở An Thượng, Hồ Nghinh rao khoảng 28 – 125 tỷ. Chi tiết có trong bài <a href="/gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/">giá đất ven biển Đà Nẵng</a>.</p>
 
 <h2>Giá thuê căn hộ Sơn Trà</h2>
@@ -569,12 +571,13 @@ HTML
 <tr><td>Capital Square</td><td>1PN 18 – 25 triệu; 2PN 25 – 35 triệu/tháng (ước tính)</td></tr>
 </tbody>
 </table>
+<p>Với khách mua để cho thuê, giá thuê là thước đo thực tế nhất của bất động sản Sơn Trà. Ví dụ căn 2PN Peninsula chuyển nhượng khoảng 3 – 5 tỷ, cho thuê khoảng 23 – 30 triệu/tháng: lấy mức giữa (4 tỷ, 26,5 triệu) thì doanh thu năm khoảng 318 triệu, tương đương gần 8% giá mua trước chi phí. Sau khi trừ phí quản lý, nội thất và tháng trống phòng, con số thực nhận sẽ thấp hơn.</p>
 
-<h2>Rủi ro cần lưu ý khi mua ở Sơn Trà</h2>
+<h2>Rủi ro cần lưu ý khi mua bất động sản Sơn Trà</h2>
 <p>Nguồn cung căn hộ ven sông Hàn trong 2026 – 2028 khá lớn, đặc biệt các dự án quy mô hàng nghìn căn như Capital Square, Sun Symphony. Khi nhiều căn bàn giao cùng lúc, giá thuê có thể bị cạnh tranh, nên khách đầu tư cần tính dòng tiền thận trọng.</p>
 <p>Với căn hộ khách sạn mặt biển, cần đọc kỹ thời hạn sở hữu: Wyndham Soleil là căn hộ khách sạn 50 năm; thông tin sở hữu của Nobu giữa các nguồn chưa thống nhất. Đây là yếu tố ảnh hưởng trực tiếp đến khả năng vay vốn và bán lại.</p>
 
-<h2>Nên mua gì ở Sơn Trà?</h2>
+<h2>Nên mua bất động sản Sơn Trà loại nào?</h2>
 <p>Khách ở thật nên xem căn hộ ven sông Hàn sở hữu lâu dài, đã hoặc sắp bàn giao. Khách đầu tư cho thuê ngắn ngày nên cân nhắc căn gần biển Mỹ Khê. Khách vốn lớn có thể xem đất hoặc khách sạn trên các trục biển, chấp nhận thanh khoản chậm hơn.</p>
 
 <p>Xem toàn bộ dự án tại trang <a href="/khu-vuc/son-tra/">bất động sản Sơn Trà</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được so sánh dự án Sơn Trà theo ngân sách và mục đích mua của anh chị.</p>
@@ -584,13 +587,14 @@ HTML
 			'seo_title' => 'Bất động sản Sơn Trà 2026: dự án và giá tham khảo',
 			'desc'      => 'Bất động sản Sơn Trà 2026: căn hộ ven sông Hàn, căn hộ biển Mỹ Khê, đất, khách sạn Võ Nguyên Giáp – giá tham khảo, giá thuê. Gọi Hoàng Hiệp tư vấn.',
 			'points'    => array(
-				'Căn hộ ven sông Hàn phổ biến khoảng 50 – 125 triệu/m²',
+				'Bất động sản Sơn Trà ven sông Hàn: căn hộ phổ biến khoảng 50 – 125 triệu/m²',
 				'Căn hộ mặt biển Mỹ Khê: Times Square, Nobu, Wyndham Soleil, Alizé',
 				'Đất mặt biển Võ Nguyên Giáp khoảng 130 – 390 triệu/m² (tin rao 10/2026)',
 			),
 			'faq'       => array(
 				array( 'Căn hộ Sơn Trà giá bao nhiêu?', 'Năm 2026 căn hộ ven sông Hàn phổ biến khoảng 50 – 125 triệu/m²; The Camellia Sơn Trà có studio từ khoảng 1,98 tỷ, căn hàng hiệu mặt biển như Nobu khoảng 145 – 205 triệu/m².' ),
 				array( 'Dự án nào ở Sơn Trà đã bàn giao?', 'Hiyori Garden Tower đã bàn giao; Sun Symphony Residence đang bàn giao. Các dự án như HIYORI Aqua Tower, The Camellia dự kiến bàn giao 2027 – 2028.' ),
+				array( 'Bất động sản Sơn Trà hợp mua để ở hay đầu tư?', 'Cả hai. Khách ở thật nên chọn căn hộ ven sông Hàn sở hữu lâu dài đã bàn giao; khách đầu tư bất động sản Sơn Trà nên ưu tiên căn dễ cho thuê gần biển Mỹ Khê, cầu Rồng và tính dòng tiền với giá thuê ở mức giữa.' ),
 				array( 'Thuê căn hộ Sơn Trà bao nhiêu tiền?', 'Tham khảo: 1PN khoảng 18 – 30 triệu/tháng, 2PN khoảng 18 – 40 triệu/tháng tùy dự án, nội thất và view.' ),
 			),
 		),
@@ -598,6 +602,7 @@ HTML
 			'https://batdongsan.com.vn/ban-can-ho-chung-cu-sun-ponte-residence-da-nang',
 			'https://batdongsan.com.vn/ban-can-ho-chung-cu-peninsula-da-nang',
 			'https://batdongsan.com.vn/ban-dat-duong-hoang-sa-49',
+			'https://cafef.vn/son-tra-xac-lap-vi-the-truc-an-cu-va-tich-san-moi-tai-da-nang-188260829104316245.chn',
 		),
 	);
 
@@ -614,9 +619,10 @@ HTML
 <p><strong>Bất động sản Hải Châu</strong> năm 2026 xoay quanh các tòa căn hộ ven sông Hàn và khu Hòa Cường, với mặt bằng giá khoảng 50 – 150 triệu/m² tùy dự án. Hải Châu cũng là nơi có đất đắt nhất thành phố: bảng giá nhà nước 2026 đoạn Bạch Đằng khoảng 341 triệu/m². Bài viết tổng hợp các dự án đang bán, cập nhật tháng 10/2026.</p>
 
 <h2>Đặc điểm bất động sản Hải Châu</h2>
-<p>Hải Châu là trung tâm hành chính, thương mại của Đà Nẵng, gần sân bay, cầu Rồng và công viên APEC. Quỹ đất trống gần như không còn, nên dự án mới chủ yếu là tòa căn hộ trên lô đất nhỏ, số căn ít, giá cao. Nhu cầu thuê từ người làm việc ở trung tâm và khách du lịch ổn định quanh năm.</p>
+<p>Hải Châu là trung tâm hành chính, thương mại của Đà Nẵng, gần sân bay, cầu Rồng và công viên APEC. Quỹ đất trống gần như không còn, nên bất động sản Hải Châu mới chủ yếu là tòa căn hộ trên lô đất nhỏ, số căn ít, giá cao. Nhu cầu thuê từ người làm việc ở trung tâm và khách du lịch ổn định quanh năm.</p>
+<!--hh-img:img/da-nang/song-han-cau-quay-trung-tam-ve-dem.jpg|Sông Hàn về đêm – bất động sản Hải Châu tập trung dọc bờ Tây sông Hàn, trung tâm Đà Nẵng-->
 
-<h2>Danh sách dự án căn hộ Hải Châu</h2>
+<h2>Danh sách dự án bất động sản Hải Châu đang bán</h2>
 <table>
 <thead><tr><th>Dự án</th><th>Quy mô</th><th>Giá tham khảo</th><th>Bàn giao</th></tr></thead>
 <tbody>
@@ -630,11 +636,11 @@ HTML
 </tbody>
 </table>
 
-<h2>Phân nhóm theo nhu cầu</h2>
+<h2>Phân nhóm bất động sản Hải Châu theo nhu cầu</h2>
 <h3>Căn hộ hạng sang ven sông Hàn</h3>
 <p><a href="/du-an/the-filmore-da-nang/">The Filmore</a>, Danang Landmark và M Riverside nằm sát sông Hàn, giá cao nhất khu vực. The Filmore có lợi thế đã hoàn thiện; Danang Landmark thuộc danh sách dự án được bán cho người nước ngoài.</p>
 <h3>Căn hộ khu Hòa Cường – Quy Mỹ</h3>
-<p><a href="/du-an/masteri-da-nang/">Masteri Rivera Danang</a> và <a href="/du-an/the-meridian-da-nang/">The Meridian</a> có quy mô lớn hơn, tiện ích nội khu nhiều, giá vừa phải hơn. Phù hợp gia đình trẻ và khách đầu tư cho thuê dài hạn.</p>
+<p><a href="/du-an/masteri-da-nang/">Masteri Rivera Danang</a> và <a href="/du-an/the-meridian-da-nang/">The Meridian</a> có quy mô lớn hơn, tiện ích nội khu nhiều, giá vừa phải hơn. Phù hợp gia đình trẻ và khách đầu tư cho thuê dài hạn. Masteri là dự án căn hộ đầu tiên của Masterise Homes tại Đà Nẵng (xem <a href="https://vnexpress.net/masterise-homes-ra-mat-du-an-can-ho-dau-tien-tai-da-nang-4888365.html">VnExpress</a>); thông tin ra mắt The Meridian có trên <a href="https://thanhnien.vn/the-meridian-ra-mat-tai-da-nang-sieu-du-thuyen-kien-truc-chinh-thuc-ha-thuy-song-han-185260112084502674.htm">Thanh Niên</a>.</p>
 <h3>Căn hộ giá mềm, nhận nhà ngay</h3>
 <p>Vista Residence có căn 2PN khoảng 4,5 – 5,56 tỷ, 3PN khoảng 6,8 – 7,56 tỷ, đã bàn giao – phù hợp khách cần ở ngay.</p>
 
@@ -650,11 +656,12 @@ HTML
 <tr><td>Masteri Rivera Danang</td><td>1PN+ 18 – 25 triệu; 2PN 20 – 25 triệu/tháng (ước tính khu vực)</td></tr>
 </tbody>
 </table>
+<p>Với bất động sản Hải Châu, tỷ suất cho thuê thường thấp hơn các khu vực giá mềm vì giá mua cao. Ví dụ căn 2PN The Filmore chuyển nhượng khoảng 8,3 – 9,3 tỷ, cho thuê khoảng 35 – 40 triệu/tháng: doanh thu năm khoảng 450 triệu, tương đương khoảng 5% giá mua trước chi phí. Đổi lại, tài sản ở vị trí trung tâm thường giữ giá tốt và dễ bán lại.</p>
 
-<h2>Đất và dự án lớn tại Hải Châu</h2>
+<h2>Đất và dự án lớn của bất động sản Hải Châu</h2>
 <p>Đất mặt tiền Bạch Đằng rao khoảng 300 triệu/m², trục Nguyễn Văn Linh khoảng 250 – 400 triệu/m². Dự án lớn sắp tới là Đà Nẵng Downtown của Sun Group trên khu Asia Park cũ, quy mô 76,92 ha, tổng vốn khoảng 79.790 tỷ đồng, có tòa tháp 69 tầng cao 408 m; dự án đang ở giai đoạn sắp mở bán.</p>
 
-<h2>Lưu ý khi mua ở Hải Châu</h2>
+<h2>Lưu ý khi mua bất động sản Hải Châu</h2>
 <ul>
 <li>Giá/m² cao, nên so sánh tổng giá căn thay vì chỉ nhìn đơn giá.</li>
 <li>Kiểm tra loại hình sở hữu: một số dự án là căn hộ dịch vụ thương mại, cần đọc kỹ hợp đồng.</li>
@@ -668,13 +675,14 @@ HTML
 			'seo_title' => 'Bất động sản Hải Châu 2026: dự án và giá căn hộ',
 			'desc'      => 'Bất động sản Hải Châu 2026: The Filmore, Danang Landmark, Masteri, The Meridian, Vista Residence – giá tham khảo, giá thuê. Gọi Hoàng Hiệp tư vấn.',
 			'points'    => array(
-				'Căn hộ Hải Châu khoảng 50 – 150 triệu/m² tùy dự án',
+				'Bất động sản Hải Châu: căn hộ khoảng 50 – 150 triệu/m² tùy dự án',
 				'The Filmore và Vista Residence đã có nhà; Danang Landmark, The Meridian bàn giao 2027',
 				'Bảng giá đất nhà nước 2026 đoạn Bạch Đằng khoảng 341 triệu/m², cao nhất thành phố',
 			),
 			'faq'       => array(
 				array( 'Căn hộ Hải Châu giá bao nhiêu?', 'Năm 2026 khoảng 50 – 150 triệu/m²: Vista Residence khoảng 50 – 55 triệu/m², Masteri và The Meridian khoảng 70 – 95 triệu/m², The Filmore khoảng 130 – 150 triệu/m² (tham khảo).' ),
 				array( 'Dự án Hải Châu nào nhận nhà ngay?', 'The Filmore đã hoàn thiện và Vista Residence bàn giao từ tháng 8/2026.' ),
+				array( 'Bất động sản Hải Châu có dự án nào bán cho người nước ngoài?', 'Trong các dự án bất động sản Hải Châu, Danang Landmark thuộc danh sách dự án được bán cho người nước ngoài; thời hạn và số căn được mua theo Luật Nhà ở 2023, cần hỏi chủ đầu tư số căn còn lại.' ),
 				array( 'Đà Nẵng Downtown ở đâu?', 'Dự án của Sun Group trên khu Asia Park cũ, số 01 Phan Đăng Lưu, Hải Châu, quy mô 76,92 ha, đang ở giai đoạn sắp mở bán.' ),
 			),
 		),
@@ -698,9 +706,10 @@ HTML
 <p><strong>Bất động sản Ngũ Hành Sơn</strong> năm 2026 có đủ mọi phân khúc: căn hộ biển Trường Sa, căn hộ FPT City giá mềm, đất nền Võ Chí Công và Nam Hòa Xuân, cùng biệt thự resort ven biển. Mặt bằng căn hộ khoảng 30 – 95 triệu/m², đất nền dự án khoảng 40 – 90 triệu/m². Bài viết tổng hợp dự án theo từng nhóm, cập nhật tháng 10/2026.</p>
 
 <h2>Bất động sản Ngũ Hành Sơn có gì nổi bật?</h2>
-<p>Ngũ Hành Sơn trải dài từ cầu Trần Thị Lý xuống giáp Điện Bàn, có biển Non Nước – Mỹ Khê, sông Cổ Cò và trục Võ Chí Công nối Hội An. Đây là khu vực còn nhiều quỹ đất lớn, nơi Sun Group, FPT và các tập đoàn khác phát triển đô thị mới.</p>
+<p>Ngũ Hành Sơn trải dài từ cầu Trần Thị Lý xuống giáp Điện Bàn, có biển Non Nước – Mỹ Khê, sông Cổ Cò và trục Võ Chí Công nối Hội An. Đây là khu vực còn nhiều quỹ đất lớn, nơi Sun Group, FPT và các tập đoàn khác phát triển đô thị mới. Nhờ vậy, bất động sản Ngũ Hành Sơn có nguồn cung mới đều đặn hơn Hải Châu hay Sơn Trà, giá đầu vào cũng đa dạng hơn.</p>
+<!--hh-img:img/fusion/fusion-phoi-canh-tong-the-tu-truong-sa.jpg|Trục biển Trường Sa – nơi tập trung biệt thự, căn hộ biển của bất động sản Ngũ Hành Sơn-->
 
-<h2>Căn hộ Ngũ Hành Sơn</h2>
+<h2>Căn hộ – phân khúc sôi động nhất của bất động sản Ngũ Hành Sơn</h2>
 <table>
 <thead><tr><th>Dự án</th><th>Quy mô</th><th>Giá tham khảo</th><th>Tình trạng</th></tr></thead>
 <tbody>
@@ -714,14 +723,14 @@ HTML
 </tbody>
 </table>
 <h3>Căn hộ biển: Newtown Diamond</h3>
-<p><a href="/du-an/newtown-diamond-da-nang/">Newtown Diamond</a> trên trục Trường Sa có căn 1PN khoảng 3,5 – 3,9 tỷ, 2PN khoảng 5,7 – 7,5 tỷ (tham khảo). Chi tiết từng tòa có trong bài <a href="/newtown-diamond-3-toa-va-newtown-legend/">Newtown Diamond: 3 tòa và Newtown Legend</a>.</p>
+<p><a href="/du-an/newtown-diamond-da-nang/">Newtown Diamond</a> trên trục Trường Sa có căn 1PN khoảng 3,5 – 3,9 tỷ, 2PN khoảng 5,7 – 7,5 tỷ (tham khảo); tòa The Ruby đã cất nóc ngày 18/4/2026 (theo <a href="https://vnexpress.net/newtown-diamond-cat-noc-toa-can-ho-dau-tien-5065074.html">VnExpress</a>). Chi tiết từng tòa có trong bài <a href="/newtown-diamond-3-toa-va-newtown-legend/">Newtown Diamond: 3 tòa và Newtown Legend</a>.</p>
 <h3>Căn hộ giá mềm: FPT City</h3>
 <p>Khu đô thị FPT City hơn 181 ha bên sông Cổ Cò có mặt bằng căn hộ thấp nhất khu vực. Giá thuê FPT Plaza khoảng 10 – 13 triệu/tháng cho căn 2PN, phù hợp khách thuê là sinh viên, kỹ sư làm việc gần làng Đại học.</p>
 
 <h3>Sun Riverpolis và FourS Tower</h3>
 <p>Sun Riverpolis là khu đô thị sinh thái của Sun Group tại Hòa Quý (Nam Hòa Xuân), cùng Sun NeO City tạo hệ sinh thái hơn 1.000 ha phía Nam thành phố. Phân khu căn hộ đầu tiên là FourS Tower gồm 4 tòa Mai – Trúc – Cúc – Tùng cao 20 tầng, 2.394 căn từ studio đến 3PN, sở hữu lâu dài, nằm ở ngã tư Nguyễn Phước Lan – Minh Mạng. Bảng giá FourS Tower đang cập nhật theo từng đợt, liên hệ để nhận bảng giá.</p>
 
-<h2>Đất nền Ngũ Hành Sơn</h2>
+<h2>Đất nền trong bất động sản Ngũ Hành Sơn</h2>
 <table>
 <thead><tr><th>Dự án</th><th>Quy mô</th><th>Giá tham khảo</th></tr></thead>
 <tbody>
@@ -734,30 +743,31 @@ HTML
 <h2>Biệt thự ven biển Ngũ Hành Sơn</h2>
 <p>Trục Trường Sa – Võ Nguyên Giáp tập trung các khu biệt thự resort: Furama Villas (khoảng 21 – 40 tỷ), The Ocean Villas (khoảng 28,5 – 70 tỷ), Fusion (khoảng 32 – 54 tỷ), Hyatt Regency, The Ocean Estates (từ khoảng 52 tỷ), Naman Residences và Newtown Legend. Bảng giá chi tiết xem tại bài <a href="/biet-thu-ven-bien-da-nang-hoi-an-bang-gia/">biệt thự ven biển Đà Nẵng – Hội An</a>.</p>
 
-<h2>Hạ tầng tác động</h2>
+<h2>Hạ tầng tác động đến bất động sản Ngũ Hành Sơn</h2>
 <p>Đường ven biển 129 (Võ Chí Công) được mở rộng lên 6 làn, cụm nút giao cầu Hòa Xuân được đầu tư giai đoạn 2026 – 2029, giúp kết nối khu Nam Hòa Xuân và Võ Chí Công với trung tâm tốt hơn. Dự án Sun Galaxy Complex trên đường Chương Dương khởi công ngày 25/7/2026 cũng bổ sung tiện ích lễ hội – giải trí cho khu Mỹ An.</p>
 
-<h2>Gợi ý chọn sản phẩm</h2>
+<h2>Gợi ý chọn bất động sản Ngũ Hành Sơn theo ngân sách</h2>
 <ul>
 <li>Ngân sách dưới 3 tỷ: căn hộ FPT Plaza, studio Sun Cosmo.</li>
 <li>Ngân sách 3 – 8 tỷ: căn hộ Newtown Diamond, Sun Cosmo, hoặc đất nền Đầm Sen, Võ Chí Công.</li>
 <li>Trên 20 tỷ: shophouse, biệt thự Newtown Legend hoặc biệt thự resort trục Trường Sa.</li>
 </ul>
 
-<p>Xem toàn bộ dự án tại trang <a href="/khu-vuc/ngu-hanh-son/">bất động sản Ngũ Hành Sơn</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được lọc dự án Ngũ Hành Sơn đúng ngân sách và nhận bảng giá mới nhất.</p>
+<p>Xem toàn bộ dự án tại trang <a href="/khu-vuc/ngu-hanh-son/">bất động sản Ngũ Hành Sơn</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được lọc bất động sản Ngũ Hành Sơn đúng ngân sách và nhận bảng giá mới nhất.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Bất động sản Ngũ Hành Sơn 2026: dự án và giá',
 			'desc'      => 'Bất động sản Ngũ Hành Sơn 2026: căn hộ Newtown Diamond, Sun Cosmo, FPT City, đất nền Võ Chí Công, biệt thự Trường Sa – giá tham khảo. Gọi Hoàng Hiệp.',
 			'points'    => array(
-				'Căn hộ khoảng 30 – 95 triệu/m²: từ FPT Plaza đến Newtown Diamond, Sun Cosmo',
+				'Bất động sản Ngũ Hành Sơn: căn hộ khoảng 30 – 95 triệu/m², từ FPT Plaza đến Newtown Diamond, Sun Cosmo',
 				'Đất nền Võ Chí Công khoảng 45 – 90 triệu/m²; Đầm Sen khoảng 40 – 48 triệu/m²',
 				'Biệt thự resort trục Trường Sa khoảng 21 – 83 tỷ (tin rao)',
 			),
 			'faq'       => array(
 				array( 'Căn hộ Ngũ Hành Sơn giá bao nhiêu?', 'Tham khảo 2026: FPT Plaza khoảng 30 – 42 triệu/m², Sun Cosmo khoảng 65 – 95 triệu/m², Newtown Diamond khoảng 60 – 90 triệu/m².' ),
 				array( 'Đất nền Ngũ Hành Sơn ở dự án nào?', 'Đất nền Võ Chí Công (709 lô), đất nền Đầm Sen – Sun Riverpolis (khoảng 900 lô) và các phân khu FPT City.' ),
+				array( 'Bất động sản Ngũ Hành Sơn hợp với ngân sách nào?', 'Bất động sản Ngũ Hành Sơn có đủ tầm tiền: dưới 3 tỷ xem FPT Plaza, studio Sun Cosmo; 3 – 8 tỷ xem Newtown Diamond, Sun Cosmo hoặc đất nền Đầm Sen, Võ Chí Công; trên 20 tỷ xem biệt thự, shophouse trục Trường Sa.' ),
 				array( 'Ngũ Hành Sơn có những khu biệt thự biển nào?', 'Furama Villas, The Ocean Villas, Fusion, Hyatt Regency, The Ocean Estates, Naman Residences và Newtown Legend.' ),
 			),
 		),
@@ -765,6 +775,7 @@ HTML
 			'https://batdongsan.com.vn/ban-can-ho-chung-cu-sun-cosmo-residence',
 			'https://batdongsan.com.vn/ban-can-ho-chung-cu-newtown-diamond-da-nang',
 			'https://furamavietnam.com/furama-villas/',
+			'https://vnexpress.net/newtown-diamond-cat-noc-toa-can-ho-dau-tien-5065074.html',
 		),
 	);
 
@@ -779,9 +790,10 @@ HTML
 		'content'  => <<<'HTML'
 <p><strong>Bất động sản Liên Chiểu</strong> năm 2026 được chú ý nhờ cảng Liên Chiểu (hạ tầng dùng chung hoàn thành ngày 28/3/2026) và khu thương mại tự do Đà Nẵng khoảng 1.881 ha. Mặt bằng giá ở đây vẫn thấp hơn nhiều so với Sơn Trà, Ngũ Hành Sơn: căn hộ The Ori Garden khoảng 37 – 42 triệu/m², đất mặt biển Nguyễn Tất Thành khoảng 65 – 135 triệu/m². Bài viết cập nhật tháng 10/2026.</p>
 
-<h2>Cảng Liên Chiểu và khu thương mại tự do</h2>
-<p>Cảng Liên Chiểu là cảng biển lớn nhất của Đà Nẵng, kỳ vọng thay thế dần cảng Tiên Sa trong vận tải hàng hóa. Cùng ngày công bố hoàn thành hạ tầng dùng chung, dự án bến container Liên Chiểu vốn hơn 2 tỷ USD được khởi động. Thành phố đầu tư hơn 518 tỷ đồng cải tạo tuyến đường nối cảng với khu thương mại tự do.</p>
+<h2>Cảng Liên Chiểu, khu thương mại tự do và bất động sản Liên Chiểu</h2>
+<p>Cảng Liên Chiểu là cảng biển lớn nhất của Đà Nẵng, kỳ vọng thay thế dần cảng Tiên Sa trong vận tải hàng hóa. Cùng ngày công bố hoàn thành hạ tầng dùng chung, dự án bến container Liên Chiểu vốn hơn 2 tỷ USD được khởi động (theo <a href="https://baochinhphu.vn/khoi-dong-du-an-sieu-cang-lien-chieu-da-nang-102260328105015423.htm">Báo Điện tử Chính phủ</a>). Thành phố đầu tư hơn 518 tỷ đồng cải tạo tuyến đường nối cảng với khu thương mại tự do.</p>
 <p>Khu thương mại tự do gồm khoảng 1.881 ha tại 7 vị trí, có các phân khu sản xuất, logistics, thương mại – dịch vụ và công nghệ. Chi tiết xem bài <a href="/cang-lien-chieu-khu-thuong-mai-tu-do-bat-dong-san-lien-chieu/">cảng Liên Chiểu và khu thương mại tự do</a>.</p>
+<!--hh-img:img/vinhomes-hai-van-bay/vhvb-dao-ngoc-tong-the-2.jpg|Vinhomes Hải Vân Bay tại vịnh Nam Chơn – dự án lớn nhất của bất động sản Liên Chiểu (hình minh họa của chủ đầu tư)-->
 
 <h2>Dự án bất động sản Liên Chiểu</h2>
 <table>
@@ -801,12 +813,12 @@ HTML
 <h3>Đất nền Dragon Smart City, Lakeside Palace</h3>
 <p>Hai khu đô thị đã hình thành hạ tầng, phù hợp khách mua đất xây nhà ở hoặc cho thuê trọ, nhà nguyên căn phục vụ lao động khu công nghiệp, cảng. Giá giao dịch thay đổi theo từng lô, liên hệ để nhận bảng giá.</p>
 
-<h2>Đất mặt biển Nguyễn Tất Thành</h2>
+<h2>Bất động sản Liên Chiểu mặt biển: đất Nguyễn Tất Thành</h2>
 <p>Tin rao năm 2026 cho thấy đất mặt biển Nguyễn Tất Thành phía Liên Chiểu khoảng 47 – 58 triệu/m² với lô 100 – 120 m² và 65 – 135 triệu/m² với lô lớn: lô 375 m² khoảng 30 tỷ, lô 479 m² mặt biển khoảng 65 tỷ. So với trục Võ Nguyên Giáp (130 – 390 triệu/m²), đây là mặt bằng thấp hơn rõ – xem bảng so sánh tại bài <a href="/gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/">giá đất ven biển Đà Nẵng</a>.</p>
 
 <h2>Ai nên mua bất động sản Liên Chiểu?</h2>
 <p>Khách ngân sách thấp cần căn hộ để ở gần các trường đại học, khu công nghiệp phía Tây Bắc có thể xem The Ori Garden. Khách muốn nhà đất có sổ để xây nhà cho thuê có thể xem lô ở Dragon Smart City, Lakeside Palace. Khách tài chính khá, muốn sản phẩm nghỉ dưỡng sở hữu lâu dài và chấp nhận chờ hạ tầng, có thể cân nhắc Vinhomes Hải Vân Bay.</p>
-<p>Điểm chung là Liên Chiểu phù hợp tầm nhìn trung – dài hạn hơn là lướt sóng, vì động lực chính từ cảng và khu thương mại tự do cần nhiều năm để hình thành đầy đủ.</p>
+<p>Điểm chung là bất động sản Liên Chiểu phù hợp tầm nhìn trung – dài hạn hơn là lướt sóng, vì động lực chính từ cảng và khu thương mại tự do cần nhiều năm để hình thành đầy đủ.</p>
 
 <h2>Lưu ý khi đầu tư bất động sản Liên Chiểu</h2>
 <ul>
@@ -816,20 +828,21 @@ HTML
 <li>Tính dòng tiền theo kịch bản thận trọng, không kỳ vọng tăng giá ngắn hạn.</li>
 </ul>
 
-<p>Xem toàn bộ dự án tại trang <a href="/khu-vuc/lien-chieu/">bất động sản Liên Chiểu</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được tư vấn chọn sản phẩm Liên Chiểu phù hợp và nhận bảng giá mới nhất.</p>
+<p>Xem toàn bộ dự án tại trang <a href="/khu-vuc/lien-chieu/">bất động sản Liên Chiểu</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được tư vấn chọn bất động sản Liên Chiểu phù hợp và nhận bảng giá mới nhất.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Bất động sản Liên Chiểu 2026 và cảng Liên Chiểu',
 			'desc'      => 'Bất động sản Liên Chiểu 2026: tác động cảng Liên Chiểu, khu thương mại tự do; dự án Vinhomes Hải Vân Bay, The Ori Garden, giá đất. Gọi Hoàng Hiệp.',
 			'points'    => array(
-				'Hạ tầng dùng chung cảng Liên Chiểu hoàn thành 28/3/2026; khu thương mại tự do khoảng 1.881 ha',
+				'Bất động sản Liên Chiểu hưởng lợi từ cảng: hạ tầng dùng chung cảng Liên Chiểu hoàn thành 28/3/2026; khu thương mại tự do khoảng 1.881 ha',
 				'Vinhomes Hải Vân Bay 512 ha, liền kề từ khoảng 5,2 tỷ',
 				'The Ori Garden khoảng 37 – 42 triệu/m²; đất Nguyễn Tất Thành khoảng 65 – 135 triệu/m²',
 			),
 			'faq'       => array(
 				array( 'Cảng Liên Chiểu tác động gì đến bất động sản?', 'Cảng, logistics và khu thương mại tự do kéo theo lao động, chuyên gia, làm tăng nhu cầu nhà ở và căn hộ cho thuê tại Liên Chiểu, Hòa Khánh, Hòa Hiệp.' ),
 				array( 'Liên Chiểu có dự án nào đang bán?', 'Vinhomes Hải Vân Bay và The Ori Garden đang mở bán; Dragon Smart City, Lakeside Palace đã bàn giao, giao dịch thứ cấp.' ),
+				array( 'Mua bất động sản Liên Chiểu cần lưu ý gì?', 'Bất động sản Liên Chiểu phù hợp tầm nhìn trung – dài hạn vì cảng và khu thương mại tự do triển khai nhiều giai đoạn; nên ưu tiên sản phẩm đã có pháp lý, hạ tầng hoàn thiện và tính dòng tiền theo kịch bản thận trọng.' ),
 				array( 'Giá đất Liên Chiểu có rẻ hơn Sơn Trà không?', 'Có. Đất mặt biển Nguyễn Tất Thành phía Liên Chiểu khoảng 47 – 135 triệu/m² tùy lô, thấp hơn nhiều so với Võ Nguyên Giáp (130 – 390 triệu/m²) theo tin rao 10/2026.' ),
 			),
 		),

@@ -63,7 +63,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>2. Đánh giá Sun Saphia Residence về view: tầng 15 nhìn thấy gì?</h2>
-<p>Hoàng Hiệp dựng mô hình 3D từ mặt đứng tầng 15 để hình dung tầm nhìn (minh hoạ, không phải ảnh chụp thật; công trình xung quanh là ước lượng):</p>
+<p>Để đánh giá Sun Saphia Residence về view, Hoàng Hiệp dựng mô hình 3D từ mặt đứng tầng 15 để hình dung tầm nhìn (minh hoạ, không phải ảnh chụp thật; công trình xung quanh là ước lượng):</p>
 <table>
 <thead><tr><th>Hướng</th><th>Nhìn thấy</th><th>Phù hợp</th></tr></thead>
 <tbody>
@@ -90,7 +90,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 <p>Tiện ích trong tòa theo giới thiệu: bể bơi view biển, gym, yoga, pilates, khối đế thương mại (shop, café, nhà hàng) – <a href="/tien-ich-sun-saphia-residence-noi-khu-xung-quanh/">xem tiện ích</a>.</p>
 
 <h2>4. Đánh giá Sun Saphia Residence về giá: studio tầng 15 từ 2,13 tỷ</h2>
-<p>Chủ đầu tư chưa ban hành bảng giá chính thức. Giá dự kiến được đưa ra cuối tháng 10/2026 cho 3 vị trí studio 30 m² tầng 15:</p>
+<p>Chủ đầu tư chưa ban hành bảng giá chính thức, nên phần đánh giá Sun Saphia Residence về giá dựa trên giá dự kiến. Giá dự kiến được đưa ra cuối tháng 10/2026 cho 3 vị trí studio 30 m² tầng 15:</p>
 <table>
 <thead><tr><th>Vị trí studio tầng 15</th><th>Giá dự kiến</th><th>Quy ra/m² thông thủy</th></tr></thead>
 <tbody>
@@ -120,7 +120,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 <p><em>Đánh giá Sun Saphia Residence – cho thuê:</em> giả định 2,2 – 2,9 triệu/đêm của chủ đầu tư nằm giữa nhóm 4 sao mặt biển, hợp lý cho căn view biển vận hành tốt; căn phía sau, nhìn thành phố, nên tính thấp hơn.</p>
 
 <h2>6. Đánh giá Sun Saphia Residence về dòng tiền và lợi suất sau khấu hao</h2>
-<p>Hoàng Hiệp tính theo mùa, sát thực tế hơn một mức giá thuê cố định. Giả định: 180 đêm thấp điểm (khoảng 1,2 triệu/đêm), 180 đêm cao điểm; chủ nhà nhận 65% doanh thu (35% cho kênh bán phòng, vận hành, buồng phòng). Đây là ví dụ minh hoạ, không phải cam kết.</p>
+<p>Để đánh giá Sun Saphia Residence về dòng tiền, Hoàng Hiệp tính theo mùa, sát thực tế hơn một mức giá thuê cố định. Giả định: 180 đêm thấp điểm (khoảng 1,2 triệu/đêm), 180 đêm cao điểm; chủ nhà nhận 65% doanh thu (35% cho kênh bán phòng, vận hành, buồng phòng). Đây là ví dụ minh hoạ, không phải cam kết.</p>
 <table>
 <thead><tr><th>Kịch bản</th><th>Thấp điểm</th><th>Cao điểm</th><th>Chủ nhà nhận/năm</th><th>Lợi suất căn 2,13 tỷ</th><th>Lợi suất căn 2,85 tỷ</th></tr></thead>
 <tbody>
@@ -153,7 +153,7 @@ function hh_posts_sun_saphia_dot_5( $posts ) {
 <tr><td>11/2028</td><td>Bàn giao dự kiến</td></tr>
 </tbody>
 </table>
-<p>Lịch có thể thay đổi theo thông báo của chủ đầu tư.</p>
+<p>Lịch có thể thay đổi theo thông báo của chủ đầu tư; Hoàng Hiệp sẽ cập nhật bài đánh giá Sun Saphia Residence khi có bảng giá chính thức.</p>
 
 <h2>Đánh giá Sun Saphia Residence: ưu điểm và điểm cần cân nhắc</h2>
 <table>
@@ -182,12 +182,12 @@ HTML
 				'Sự kiện bán hàng dự kiến 05/12/2026, bàn giao dự kiến 11/2028',
 			),
 			'faq'       => array(
-				array( 'Sun Saphia Residence có đáng mua không?', 'Hợp người muốn căn biển thương hiệu Sun Group với vốn khoảng 2 – 3 tỷ để nghỉ dưỡng kết hợp cho thuê và chấp nhận thời hạn 50 năm. Cần cân nhắc cạnh tranh cho thuê (513 studio cùng tòa) và hơn 2 năm chờ bàn giao.' ),
+				array( 'Đánh giá Sun Saphia Residence: có đáng mua không?', 'Theo đánh giá Sun Saphia Residence của Hoàng Hiệp, dự án hợp người muốn căn biển thương hiệu Sun Group với vốn khoảng 2 – 3 tỷ để nghỉ dưỡng kết hợp cho thuê và chấp nhận thời hạn 50 năm. Cần cân nhắc cạnh tranh cho thuê (513 studio cùng tòa) và hơn 2 năm chờ bàn giao.' ),
 				array( 'Đánh giá Sun Saphia Residence về vị trí: cách biển bao xa?', 'Khoảng 400 m tới bãi tắm Sơn Thủy, đi qua công viên ven biển khoảng 2,45 ha ngay trước dự án.' ),
-				array( 'Căn hộ Sun Saphia view hướng nào đẹp nhất?', 'Hướng Đông nhìn thẳng biển Mỹ Khê – Sơn Thủy, giá cao nhất; hướng Nam thấy Ngũ Hành Sơn; hướng Bắc thấy Sơn Trà và các cầu sông Hàn; hướng Tây nhìn thành phố, giá vào thấp hơn.' ),
-				array( 'Giá studio Sun Saphia Residence bao nhiêu?', 'Giá dự kiến studio 30 m² tầng 15 từ 2,13 tỷ (dãy phía sau) đến 2,85 tỷ (dãy mặt biển), áp dụng khi mua có vay, chưa VAT và 2% bảo trì; bảng giá chính thức công bố khi mở bán.' ),
+				array( 'Đánh giá Sun Saphia Residence về view: hướng nào đẹp nhất?', 'Hướng Đông nhìn thẳng biển Mỹ Khê – Sơn Thủy, giá cao nhất; hướng Nam thấy Ngũ Hành Sơn; hướng Bắc thấy Sơn Trà và các cầu sông Hàn; hướng Tây nhìn thành phố, giá vào thấp hơn.' ),
+				array( 'Đánh giá Sun Saphia Residence về giá: studio bao nhiêu?', 'Giá dự kiến studio 30 m² tầng 15 từ 2,13 tỷ (dãy phía sau) đến 2,85 tỷ (dãy mặt biển), áp dụng khi mua có vay, chưa VAT và 2% bảo trì; bảng giá chính thức công bố khi mở bán.' ),
 				array( 'Đánh giá Sun Saphia Residence về cho thuê: studio thu được bao nhiêu?', 'Ví dụ theo mùa (180 đêm thấp điểm, 180 đêm cao điểm, chủ nhà nhận 65%): khoảng 261 – 328 triệu/năm trước thuế, phí và khấu hao. Đây là giả định minh hoạ, không phải cam kết.' ),
-				array( 'Khi nào Sun Saphia Residence mở bán?', 'Sự kiện bán hàng của chủ đầu tư dự kiến ngày 05/12/2026; bàn giao dự kiến tháng 11/2028.' ),
+				array( 'Khi nào Sun Saphia Residence mở bán?', 'Tại thời điểm đánh giá Sun Saphia Residence (11/2026), sự kiện bán hàng của chủ đầu tư dự kiến ngày 05/12/2026; bàn giao dự kiến tháng 11/2028.' ),
 			),
 		),
 		'sources'  => array(

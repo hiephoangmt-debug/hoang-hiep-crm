@@ -388,7 +388,7 @@ HTML
 	$posts[] = array(
 		'slug'     => 'can-ho-ven-bien-da-nang-my-khe-son-thuy-non-nuoc',
 		'old_slug' => array( 'can-ho-ven-bien-my-khe-son-thuy-non-nuoc-so-sanh' ),
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 15/11: chuẩn SEO 100 – rút gọn URL, tiêu chí so sánh ngoài giá, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Mua căn hộ ven biển Đà Nẵng: Mỹ Khê, Sơn Thủy (Sun Saphia Residence) hay Non Nước?',
 		'excerpt'  => 'So sánh ba khu biển của Đà Nẵng để mua căn hộ: Mỹ Khê (Sơn Trà) sôi động, giá cao; Sơn Thủy (Ngũ Hành Sơn) đang hình thành công viên biển; Non Nước gần resort, yên tĩnh.',
 		'keyword'  => 'căn hộ ven biển Đà Nẵng',
@@ -411,30 +411,43 @@ HTML
 <tr><td>Hợp với</td><td>Cho thuê ngắn ngày, khách thích phố biển</td><td>Đầu tư đón hạ tầng, nghỉ dưỡng cuối tuần</td><td>Nghỉ dưỡng dài ngày, khách quốc tế</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
-<h2>Sơn Thủy: khu biển đang thay đổi nhanh</h2>
-<p>Đối diện bãi tắm Sơn Thủy, thành phố thu hồi khoảng 2,45 ha đất phía Nam dự án Hòn Ngọc Á Châu (bỏ hoang nhiều năm) để làm công viên công cộng, tổng mức đầu tư hơn 47 tỷ đồng, thực hiện 2025 – 2027. Cùng với kế hoạch mở rộng đường Võ Nguyên Giáp – Trường Sa – Lạc Long Quân (vốn dự kiến 2.633 tỷ), khu biển này đang có thêm sản phẩm căn hộ đầu tiên của Sun Group tại Đà Nẵng: {$saphia}, 30 tầng, 782 căn, bàn giao dự kiến 11/2028.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Căn hộ ven biển Đà Nẵng khu Sơn Thủy: mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Căn hộ ven biển Đà Nẵng ở Sơn Thủy: khu biển đang thay đổi nhanh</h2>
+<p>Đối diện bãi tắm Sơn Thủy, thành phố thu hồi khoảng 2,45 ha đất phía Nam dự án Hòn Ngọc Á Châu (bỏ hoang nhiều năm) để làm công viên công cộng, tổng mức đầu tư hơn 47 tỷ đồng, thực hiện 2025 – 2027 (<a href="https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp">VietnamPlus</a>). Cùng với kế hoạch mở rộng đường Võ Nguyên Giáp – Trường Sa – Lạc Long Quân (vốn dự kiến 2.633 tỷ), khu biển này đang có thêm sản phẩm căn hộ đầu tiên của Sun Group tại Đà Nẵng: {$saphia}, 30 tầng, 782 căn, bàn giao dự kiến 11/2028.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
-<h2>Chọn khu nào?</h2>
+<h2>Chọn căn hộ ven biển Đà Nẵng ở khu nào?</h2>
 <ul>
 <li><strong>Cần dòng tiền cho thuê ngay</strong>: Mỹ Khê vẫn đông khách nhất, nhưng giá mua cao và cạnh tranh nhiều.</li>
 <li><strong>Đón hạ tầng, giá vào thấp hơn</strong>: Sơn Thủy – chấp nhận chờ công viên, đường ven biển hoàn thiện.</li>
 <li><strong>Nghỉ dưỡng yên tĩnh</strong>: Non Nước, gần resort và sân golf ven biển.</li>
 </ul>
+<h2>So sánh căn hộ ven biển Đà Nẵng: 5 tiêu chí ngoài giá</h2>
+<ol>
+<li><strong>Đi bộ ra biển được không</strong>: căn hộ ven biển Đà Nẵng sát bãi tắm công cộng dễ cho thuê hơn căn phải băng qua nhiều tuyến đường lớn.</li>
+<li><strong>Thời hạn sở hữu</strong>: nhiều sản phẩm sát biển là căn hộ có thời hạn (thường 50 năm); căn sở hữu lâu dài thường nằm lùi vào trong. So giá phải so cùng loại pháp lý.</li>
+<li><strong>Nguồn cung cho thuê xung quanh</strong>: khu càng nhiều khách sạn, căn hộ du lịch thì cạnh tranh giá thuê càng cao vào mùa thấp điểm.</li>
+<li><strong>Môi trường biển</strong>: hơi muối, gió mạnh mùa mưa bão làm đồ kim loại, cửa kính xuống cấp nhanh – cần tính chi phí bảo trì.</li>
+<li><strong>Hạ tầng đang làm</strong>: công viên, đường ven biển, đường sắt đô thị – phân biệt rõ cái đã có với cái đang ở bước chuẩn bị đầu tư.</li>
+</ol>
+<h2>Căn hộ ven biển Đà Nẵng theo ngân sách – gợi ý của Hoàng Hiệp</h2>
+<p>Với tầm tiền khoảng 2 – 3 tỷ, lựa chọn căn hộ ven biển Đà Nẵng chủ yếu là studio: căn chuyển nhượng đã bàn giao ở khu Mỹ Khê, hoặc studio dự án mới như Sun Saphia Residence ở Sơn Thủy (giá dự kiến studio tầng 15 khoảng 2,13 – 2,85 tỷ theo thông tin chủ đầu tư ngày 28/10/2026, chưa VAT). Tầm tiền cao hơn mở ra căn 1 – 2 phòng ngủ hoặc căn hộ hàng hiệu sát biển Mỹ Khê, Non Nước.</p>
+<p>Lời khuyên chung: chốt mục đích trước (ở, nghỉ dưỡng hay cho thuê), sau đó chọn khu biển, cuối cùng mới chọn dự án. Ngược thứ tự này dễ dẫn đến mua căn đẹp nhưng không hợp nhu cầu.</p>
 <p>Xem thêm: <a href="/can-ho-view-bien-da-nang-my-khe/">căn hộ view biển Mỹ Khê</a>, <a href="/cong-vien-cau-lac-bo-the-thao-bien-bai-tam-son-thuy/">công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy</a>.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Căn hộ ven biển Đà Nẵng: Mỹ Khê hay Sơn Thủy – Sun Saphia',
+			'seo_title' => 'Căn hộ ven biển Đà Nẵng 2026: Mỹ Khê, Sơn Thủy hay Non Nước',
 			'desc'      => 'Căn hộ ven biển Đà Nẵng: Mỹ Khê sôi động giá cao, Sơn Thủy có công viên biển và Sun Saphia Residence, Non Nước yên tĩnh gần resort.',
 			'points'    => array(
-				'Mỹ Khê: đông khách thuê nhất, giá đất mặt tiền 130 – 390 triệu/m² (tin rao)',
+				'Căn hộ ven biển Đà Nẵng khu Mỹ Khê: đông khách thuê nhất, giá đất mặt tiền 130 – 390 triệu/m² (tin rao)',
 				'Sơn Thủy: công viên công cộng 2,45 ha, đường ven biển dự kiến mở rộng, có Sun Saphia',
 				'Non Nước: yên tĩnh, gần resort, hợp nghỉ dưỡng dài ngày',
 			),
 			'faq'       => array(
 				array( 'Nên mua căn hộ biển Mỹ Khê hay Sơn Thủy?', 'Mỹ Khê hợp cho thuê ngắn ngày ngay, giá cao; Sơn Thủy giá vào thấp hơn, đang hình thành công viên biển và đón hạ tầng đường ven biển.' ),
+				array( 'Mua căn hộ ven biển Đà Nẵng cần lưu ý gì?', 'Ngoài giá, cần xem khoảng cách đi bộ ra biển, thời hạn sở hữu, nguồn cung cho thuê xung quanh, chi phí bảo trì do hơi muối và tiến độ thật của hạ tầng đang làm.' ),
+				array( 'Căn hộ ven biển Đà Nẵng 2 – 3 tỷ mua được loại nào?', 'Chủ yếu là studio: căn chuyển nhượng ở khu Mỹ Khê hoặc studio dự án mới như Sun Saphia Residence (giá dự kiến studio tầng 15 khoảng 2,13 – 2,85 tỷ, chưa VAT, theo thông tin chủ đầu tư 28/10/2026).' ),
 				array( 'Khu Sơn Thủy có dự án căn hộ nào?', 'Sun Saphia Residence của Sun Group trên đường Trường Sa: 30 tầng, 782 căn, bàn giao dự kiến 11/2028.' ),
 			),
 		),
@@ -448,10 +461,10 @@ HTML
 	$posts[] = array(
 		'slug'     => 'mua-can-ho-da-nang-tu-xa-kinh-nghiem',
 		'old_slug' => array( 'mua-can-ho-da-nang-tu-ha-noi-tp-hcm-kinh-nghiem' ),
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 15/11: chuẩn SEO 100 – rút gọn URL, giấy tờ cần chuẩn bị, lưu ý người ở nước ngoài, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Ở Hà Nội, TP.HCM mua căn hộ Đà Nẵng từ xa: kinh nghiệm an toàn, ví dụ Sun Saphia Residence',
-		'excerpt'  => 'Kinh nghiệm cho khách ở Hà Nội, TP.HCM, nước ngoài mua căn hộ Đà Nẵng mà không cần bay vào nhiều lần: xem nhà qua video, kiểm tra pháp lý từ xa, ủy quyền công chứng, thanh toán và giao căn cho thuê.',
-		'keyword'  => 'mua căn hộ Đà Nẵng từ xa',
+		'excerpt'  => 'Kinh nghiệm cho khách ở Hà Nội, TP.HCM, người Việt ở nước ngoài mua căn hộ Đà Nẵng mà không cần bay vào nhiều lần: xem nhà qua video, kiểm tra pháp lý từ xa, ủy quyền công chứng, thanh toán và giao căn cho thuê.',
+		'keyword'  => 'mua căn hộ từ xa',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'mua nhà Đà Nẵng cho người Hà Nội', 'mua căn hộ Đà Nẵng online', 'ủy quyền mua nhà' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-26',
@@ -459,18 +472,18 @@ HTML
 		'tags'     => array( 'Kinh nghiệm mua nhà', 'Căn hộ Đà Nẵng', 'Sun Saphia Residence' ),
 		'image'    => 'plugin:img/tin-tuc/mua-can-ho-da-nang-tu-xa.jpg',
 		'content'  => <<<HTML
-<p>Nhiều khách mua căn hộ Đà Nẵng đang sống ở Hà Nội, TP.HCM hay nước ngoài. <strong>Mua căn hộ Đà Nẵng từ xa</strong> hoàn toàn làm được nếu đi đúng các bước: xem kỹ trước qua video, kiểm tra pháp lý bằng giấy tờ, chỉ bay vào khi cần ký hoặc nhận nhà. Bài lấy ví dụ dự án mới {$saphia} (bàn giao dự kiến 11/2028).</p>
+<p>Nhiều khách mua căn hộ Đà Nẵng đang sống ở Hà Nội, TP.HCM hay nước ngoài. <strong>Mua căn hộ từ xa</strong> ở Đà Nẵng hoàn toàn làm được nếu đi đúng các bước: xem kỹ trước qua video, kiểm tra pháp lý bằng giấy tờ, chỉ bay vào khi cần ký hoặc nhận nhà. Bài lấy ví dụ dự án mới {$saphia} (bàn giao dự kiến 11/2028).</p>
 <!--hh-featured-->
-<h2>5 bước mua căn hộ Đà Nẵng từ xa</h2>
+<h2>5 bước mua căn hộ từ xa ở Đà Nẵng</h2>
 <ol>
 <li><strong>Chốt nhu cầu và tầm tiền</strong>: mua để ở nghỉ dưỡng, cho thuê hay giữ tài sản; khu biển hay khu sông Hàn.</li>
 <li><strong>Xem nhà qua video trực tiếp</strong>: căn thật, view thật, hành lang, tiện ích – yêu cầu quay cả giờ cao điểm và buổi tối.</li>
 <li><strong>Kiểm tra pháp lý qua bản chụp</strong>: văn bản đủ điều kiện bán (dự án mới), hợp đồng mua bán, sổ hồng (căn chuyển nhượng), xác nhận của chủ đầu tư về số tiền đã thanh toán.</li>
-<li><strong>Ký và thanh toán</strong>: chuyển khoản vào tài khoản chủ đầu tư hoặc theo hợp đồng công chứng; có thể ủy quyền công chứng cho người thân ký thay nếu không vào được.</li>
+<li><strong>Ký và thanh toán</strong>: chuyển khoản vào tài khoản chủ đầu tư hoặc theo hợp đồng công chứng; có thể ủy quyền công chứng cho người thân ký thay nếu không vào được (phí công chứng tham khảo trên <a href="https://thuvienphapluat.vn/phap-luat-nha-dat/cap-nhat-muc-phi-cong-chung-hop-dong-mua-nha-ban-dat-moi-nhat-nam-2026-6028.html">Thư Viện Pháp Luật</a>).</li>
 <li><strong>Nhận nhà và cho thuê</strong>: giao cho đơn vị vận hành hoặc người quản lý tin cậy, nhận báo cáo doanh thu hằng tháng.</li>
 </ol>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-ven-bien-son-thuy.jpg|Sun Saphia Residence nhìn từ biển Sơn Thủy, Ngũ Hành Sơn (ảnh chủ đầu tư)-->
-<h2>Những rủi ro thường gặp khi mua từ xa</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-ven-bien-son-thuy.jpg|Mua căn hộ từ xa ở Đà Nẵng – ví dụ Sun Saphia Residence nhìn từ biển Sơn Thủy (ảnh chủ đầu tư)-->
+<h2>Những rủi ro thường gặp khi mua căn hộ từ xa</h2>
 <ul>
 <li>Chuyển tiền cọc cho cá nhân không rõ ràng – luôn yêu cầu tài khoản công ty hoặc hợp đồng công chứng.</li>
 <li>Ảnh, video không đúng căn – yêu cầu gọi video trực tiếp, quay số căn trên cửa.</li>
@@ -479,24 +492,36 @@ HTML
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Dự án mới: lợi thế cho người mua ở xa</h2>
 <p>Với căn hộ hình thành trong tương lai như {$saphia} (bàn giao dự kiến 11/2028), người mua ở xa có thời gian thanh toán theo tiến độ, theo dõi xây dựng qua ảnh, video định kỳ và chỉ cần vào nhận nhà. Đổi lại, cần kiểm tra kỹ văn bản đủ điều kiện bán và bảo lãnh ngân hàng trước khi ký.</p>
+<h2>Giấy tờ nên chuẩn bị khi mua căn hộ từ xa</h2>
+<ul>
+<li>Căn cước công dân của người đứng tên; nếu là tài sản chung vợ chồng, giấy tờ của cả hai người.</li>
+<li>Giấy ủy quyền có công chứng nếu nhờ người thân ở Đà Nẵng ký hoặc nhận nhà thay – ghi rõ phạm vi: ký hợp đồng, nộp tiền, nhận bàn giao.</li>
+<li>Tài khoản ngân hàng đứng tên mình để chuyển tiền và nhận hoàn tiền (nếu có), lưu lại toàn bộ chứng từ.</li>
+<li>Bản chụp các văn bản pháp lý dự án, hợp đồng mẫu để đọc trước, đánh dấu chỗ cần hỏi.</li>
+</ul>
+<p>Mẹo nhỏ: lập một thư mục chung trên điện thoại cho toàn bộ ảnh, video căn, giấy tờ và chứng từ chuyển khoản. Khi mua căn hộ từ xa, chính thư mục này là "hồ sơ" để đối chiếu với chủ đầu tư hoặc người bán khi cần.</p>
+<h2>Người Việt ở nước ngoài mua căn hộ từ xa cần biết</h2>
+<p>Người Việt đang sống ở nước ngoài vẫn mua căn hộ từ xa theo các bước trên, nhưng cần hỏi kỹ điều kiện đứng tên theo quy định hiện hành và cách chuyển tiền hợp lệ. Riêng {$saphia} là căn hộ thương mại dịch vụ, <strong>không bán cho người nước ngoài</strong>. Nhận định của Hoàng Hiệp: phần lớn rủi ro khi mua căn hộ từ xa đến từ việc chuyển tiền vội và không kiểm tra người nhận – chậm một ngày để xác minh luôn rẻ hơn mất một khoản cọc.</p>
 <p>Xem thêm: <a href="/giu-cho-booking-can-ho-moi-da-nang-can-biet/">giữ chỗ căn hộ mới cần biết gì</a>, <a href="/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/">quy trình mua căn hộ chuyển nhượng</a>.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Mua căn hộ Đà Nẵng từ xa: kinh nghiệm, ví dụ Sun Saphia',
-			'desc'      => 'Mua căn hộ Đà Nẵng từ xa an toàn: xem nhà qua video, kiểm tra pháp lý, ủy quyền công chứng, thanh toán đúng tài khoản – ví dụ dự án Sun Saphia Residence.',
+			'seo_title' => 'Mua căn hộ từ xa 2026: 5 bước an toàn khi mua ở Đà Nẵng',
+			'desc'      => 'Mua căn hộ từ xa ở Đà Nẵng an toàn: xem nhà qua video, kiểm tra pháp lý, ủy quyền công chứng, thanh toán đúng tài khoản – ví dụ dự án Sun Saphia Residence.',
 			'points'    => array(
-				'Xem căn qua video trực tiếp, kiểm tra pháp lý qua bản chụp trước khi bay vào',
+				'Mua căn hộ từ xa: xem căn qua video trực tiếp, kiểm tra pháp lý qua bản chụp trước khi bay vào',
 				'Thanh toán vào tài khoản công ty hoặc theo hợp đồng công chứng',
 				'Căn hình thành trong tương lai như Sun Saphia hợp người ở xa: thanh toán theo tiến độ',
 			),
 			'faq'       => array(
 				array( 'Ở xa có mua được căn hộ Đà Nẵng không?', 'Được: xem căn qua video, kiểm tra pháp lý qua giấy tờ, ký hợp đồng khi vào hoặc ủy quyền công chứng cho người thân, thanh toán chuyển khoản theo hợp đồng.' ),
-				array( 'Mua từ xa cần bay vào Đà Nẵng mấy lần?', 'Thường một lần để ký hợp đồng hoặc công chứng (nếu không ủy quyền) và một lần nhận nhà; các bước xem căn, kiểm tra pháp lý làm từ xa.' ),
+				array( 'Mua căn hộ từ xa có cần ủy quyền không?', 'Không bắt buộc. Nếu không vào Đà Nẵng ký được, có thể ủy quyền công chứng cho người thân ký hợp đồng, nộp tiền hoặc nhận nhà thay; giấy ủy quyền cần ghi rõ phạm vi.' ),
+				array( 'Người nước ngoài có mua được Sun Saphia Residence không?', 'Không. Sun Saphia Residence là căn hộ thương mại dịch vụ, không bán cho người nước ngoài; người Việt ở nước ngoài cần hỏi rõ điều kiện đứng tên trước khi giữ chỗ.' ),
+				array( 'Mua căn hộ từ xa cần bay vào Đà Nẵng mấy lần?', 'Thường một lần để ký hợp đồng hoặc công chứng (nếu không ủy quyền) và một lần nhận nhà; các bước xem căn, kiểm tra pháp lý làm từ xa.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://thuvienphapluat.vn/phap-luat-nha-dat/cap-nhat-muc-phi-cong-chung-hop-dong-mua-nha-ban-dat-moi-nhat-nam-2026-6028.html' ),
 	);
 
 	return $posts;

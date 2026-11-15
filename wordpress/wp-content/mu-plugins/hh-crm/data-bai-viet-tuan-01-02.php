@@ -243,7 +243,7 @@ HTML
 				array( 'Mua qua môi giới có đắt hơn mua trực tiếp chủ đầu tư?', 'Với dự án sơ cấp, giá và chính sách thường theo bảng giá chung của chủ đầu tư; anh chị nên đối chiếu bảng giá bằng văn bản.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html' ),
 	);
 
 	$posts[] = array(
@@ -346,7 +346,9 @@ HTML
 <h2>Khi nào nên ký gửi căn hộ Đà Nẵng?</h2>
 <p>Ký gửi phù hợp khi anh chị không ở Đà Nẵng thường xuyên, không có thời gian dẫn khách hoặc muốn tiếp cận nhiều khách hơn. Với căn hộ cho thuê, ký gửi còn giúp giảm thời gian trống phòng nhờ có người theo dõi nhu cầu thuê liên tục.</p>
 
-<h2>Quy trình ký gửi 5 bước</h2>
+<!--hh-img:img/the-legend/the-legend-da-nang-ban-cong-nhin-cau-rong-song-han.jpg|Ban công căn hộ nhìn ra sông Hàn – nhóm căn được hỏi nhiều khi ký gửi căn hộ Đà Nẵng để cho thuê-->
+
+<h2>Quy trình ký gửi căn hộ Đà Nẵng 5 bước</h2>
 <table>
 <thead><tr><th>Bước</th><th>Ký gửi bán</th><th>Ký gửi cho thuê</th></tr></thead>
 <tbody>
@@ -374,10 +376,10 @@ HTML
 </ul>
 
 <h2>Định giá: bước quyết định tốc độ giao dịch</h2>
-<p>Căn hộ đặt giá quá cao thường nằm lâu trên thị trường, sau đó phải giảm sâu. Cách làm hợp lý là so sánh với các căn cùng tòa, cùng diện tích, cùng hướng đã giao dịch gần đây, rồi điều chỉnh theo tầng, view và nội thất.</p>
+<p>Khi ký gửi căn hộ Đà Nẵng, căn đặt giá quá cao thường nằm lâu trên thị trường, sau đó phải giảm sâu. Cách làm hợp lý là so sánh với các căn cùng tòa, cùng diện tích, cùng hướng đã giao dịch gần đây, rồi điều chỉnh theo tầng, view và nội thất.</p>
 <p>Với cho thuê, cần tính cả mùa du lịch: căn hộ gần biển, gần sân bay thường có nhu cầu thuê ngắn hạn cao hơn vào mùa hè và dịp lễ hội. Tham khảo thêm bài <a href="/thi-truong-bat-dong-san-da-nang-2026/">thị trường bất động sản Đà Nẵng 2026</a> để nắm mặt bằng giá chung.</p>
 
-<h2>Lưu ý khi ký hợp đồng ký gửi</h2>
+<h2>Lưu ý khi ký hợp đồng ký gửi căn hộ Đà Nẵng</h2>
 <ul>
 <li><strong>Phí môi giới:</strong> ghi rõ mức phí, thời điểm thanh toán và điều kiện được hưởng. Trên thị trường, phí bán thường tính theo phần trăm giá trị giao dịch, phí cho thuê thường tính theo số tháng tiền thuê; mức cụ thể do hai bên thỏa thuận.</li>
 <li><strong>Thời hạn và độc quyền:</strong> ký gửi độc quyền hay không, kéo dài bao lâu, điều kiện chấm dứt.</li>
@@ -386,10 +388,14 @@ HTML
 <li><strong>Báo cáo:</strong> tần suất cập nhật số khách xem, phản hồi về giá.</li>
 </ul>
 
-<h2>Chủ nhà ở xa cần lưu ý gì?</h2>
-<p>Nếu không ở Đà Nẵng, anh chị nên thống nhất cách nhận báo cáo định kỳ, cách xác nhận khách đặt cọc và cách ký giấy tờ (ủy quyền công chứng hoặc ra ký trực tiếp). Tiền cọc, tiền thuê nên chuyển thẳng vào tài khoản chủ nhà để minh bạch.</p>
+<h2>Thuế, công chứng khi ký gửi căn hộ Đà Nẵng</h2>
+<p>Ký gửi căn hộ Đà Nẵng để bán dẫn đến hợp đồng chuyển nhượng phải công chứng, kèm thuế thu nhập cá nhân, lệ phí trước bạ và phí công chứng; hai bên nên thống nhất sớm ai chịu khoản nào để tránh vướng ở phút cuối. Mức phí công chứng hiện hành được <a href="https://thuvienphapluat.vn/phap-luat-nha-dat/cap-nhat-muc-phi-cong-chung-hop-dong-mua-nha-ban-dat-moi-nhat-nam-2026-6028.html">Thư Viện Pháp Luật</a> cập nhật theo năm.</p>
+<p>Với ký gửi cho thuê, hợp đồng thuê nhà ở theo Luật Nhà ở 2023 không bắt buộc công chứng, trừ khi các bên có nhu cầu. Tuy vậy, chủ nhà vẫn cần kê khai thuế với thu nhập cho thuê; cách tính được hướng dẫn trong bài <a href="https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/cach-tinh-thue-cho-thue-bat-dong-san-moi-nhat-2026-theo-nghi-dinh-141-va-nghi-dinh-68-20777.html">cách tính thuế cho thuê bất động sản 2026</a>. Hoàng Hiệp nhắc các mốc này ngay khi nhận ký gửi căn hộ Đà Nẵng để chủ nhà tính đúng số tiền thực nhận.</p>
 
-<h2>Mẹo giúp căn hộ ký gửi nhanh có khách</h2>
+<h2>Chủ nhà ở xa cần lưu ý gì?</h2>
+<p>Nếu không ở Đà Nẵng, khi ký gửi căn hộ Đà Nẵng anh chị nên thống nhất cách nhận báo cáo định kỳ, cách xác nhận khách đặt cọc và cách ký giấy tờ (ủy quyền công chứng hoặc ra ký trực tiếp). Tiền cọc, tiền thuê nên chuyển thẳng vào tài khoản chủ nhà để minh bạch.</p>
+
+<h2>Mẹo giúp ký gửi căn hộ Đà Nẵng nhanh có khách</h2>
 <p>Dọn dẹp, sửa các lỗi nhỏ và chụp ảnh vào giờ có ánh sáng tự nhiên giúp tin đăng nổi bật hơn. Với căn cho thuê, nội thất cơ bản đầy đủ và giá điện nước minh bạch là điều khách quan tâm nhất.</p>
 <p>Anh chị có thể xem các căn đang chào bán tại <a href="/mua-ban/can-ho-chung-cu/">mua bán căn hộ chung cư Đà Nẵng</a> và căn cho thuê tại <a href="/cho-thue/">cho thuê bất động sản Đà Nẵng</a> để tham khảo cách trình bày tin.</p>
 
@@ -399,14 +405,16 @@ HTML
 		'seo'      => array(
 			'seo_title' => 'Ký gửi căn hộ Đà Nẵng 2026: quy trình 5 bước, phí',
 			'desc'      => 'Ký gửi căn hộ Đà Nẵng để bán hoặc cho thuê: quy trình 5 bước, giấy tờ cần chuẩn bị, cách định giá sát thị trường. Gọi 0904 567 009 để ký gửi.',
-			'points'    => array( 'Quy trình 5 bước: tiếp nhận, kiểm tra, định giá, tiếp thị, giao dịch', 'Chuẩn bị giấy tờ sở hữu, tình trạng thế chấp, danh sách nội thất', 'Thống nhất phí, thời hạn, quyền giữ chìa khóa bằng văn bản' ),
+			'points'    => array( 'Ký gửi căn hộ Đà Nẵng theo 5 bước: tiếp nhận, kiểm tra, định giá, tiếp thị, giao dịch', 'Chuẩn bị giấy tờ sở hữu, tình trạng thế chấp, danh sách nội thất', 'Thống nhất phí, thời hạn, quyền giữ chìa khóa bằng văn bản' ),
 			'faq'       => array(
 				array( 'Căn hộ chưa có sổ có ký gửi bán được không?', 'Có thể, qua hình thức chuyển nhượng hợp đồng mua bán với chủ đầu tư; cần hợp đồng, biên lai thanh toán và thủ tục theo quy định của chủ đầu tư.' ),
 				array( 'Phí ký gửi căn hộ Đà Nẵng là bao nhiêu?', 'Phí do hai bên thỏa thuận; thường bán tính theo phần trăm giá trị giao dịch, cho thuê tính theo số tháng tiền thuê. Nên ghi rõ trong hợp đồng.' ),
+				array( 'Ký gửi căn hộ Đà Nẵng cho thuê có cần công chứng hợp đồng thuê?', 'Theo Luật Nhà ở 2023, hợp đồng thuê nhà ở không bắt buộc công chứng, trừ khi các bên có nhu cầu. Chủ nhà vẫn cần kê khai thuế với thu nhập cho thuê.' ),
+				array( 'Ký gửi căn hộ Đà Nẵng bao lâu thì bán được?', 'Phụ thuộc giá chào so với các căn cùng tòa, tình trạng căn và pháp lý. Căn định giá sát thị trường, giấy tờ đầy đủ thường có khách nhanh hơn rõ rệt.' ),
 				array( 'Có nên ký gửi độc quyền?', 'Độc quyền giúp môi giới đầu tư tiếp thị nhiều hơn, nhưng nên giới hạn thời hạn và ghi rõ điều kiện chấm dứt.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://thuvienphapluat.vn/phap-luat-nha-dat/cap-nhat-muc-phi-cong-chung-hop-dong-mua-nha-ban-dat-moi-nhat-nam-2026-6028.html', 'https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/cach-tinh-thue-cho-thue-bat-dong-san-moi-nhat-2026-theo-nghi-dinh-141-va-nghi-dinh-68-20777.html' ),
 	);
 
 	/* ================= TUẦN 2 – FourS Tower ================= */
@@ -421,9 +429,11 @@ HTML
 		'week'     => 2,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>FourS Tower Đà Nẵng (Tháp Bốn Mùa) là phân khu căn hộ cao tầng đầu tiên của khu đô thị Sun Riverpolis do Sun Property (Sun Group) phát triển, gồm 4 tháp Mai – Trúc – Cúc – Tùng cao 20 tầng, 2.394 căn từ Studio đến 3 phòng ngủ, sở hữu lâu dài. Dự án ra mắt ngày 19/3/2026 tại ngã tư Nguyễn Phước Lan – Minh Mạng, phường Hòa Quý (cũ), Nam Đà Nẵng (cập nhật tháng 10/2026).</p>
+<p>Tổng quan FourS Tower Đà Nẵng (Tháp Bốn Mùa): đây là phân khu căn hộ cao tầng đầu tiên của khu đô thị Sun Riverpolis do Sun Property (Sun Group) phát triển, gồm 4 tháp Mai – Trúc – Cúc – Tùng cao 20 tầng, 2.394 căn từ Studio đến 3 phòng ngủ, sở hữu lâu dài. Dự án ra mắt ngày 19/3/2026 tại ngã tư Nguyễn Phước Lan – Minh Mạng, phường Hòa Quý (cũ), Nam Đà Nẵng (cập nhật tháng 10/2026).</p>
+<!--hh-img:img/fours-tower/fours-tower-phoi-canh-4-thap.jpg|Phối cảnh 4 tháp Mai, Trúc, Cúc, Tùng – tổng quan FourS Tower tại Sun Riverpolis (ảnh chủ đầu tư)-->
+<p>Bài viết đi lần lượt qua thông tin pháp lý cơ bản, ý tưởng bốn tòa tháp, vị trí, tiện ích và nhóm khách phù hợp, để anh chị có một bản tổng quan FourS Tower đủ dùng trước khi xem bảng giá chi tiết.</p>
 
-<h2>Thông tin chính FourS Tower Đà Nẵng</h2>
+<h2>Bảng tổng quan FourS Tower Đà Nẵng</h2>
 <table>
 <thead><tr><th>Hạng mục</th><th>Thông tin</th></tr></thead>
 <tbody>
@@ -439,7 +449,7 @@ HTML
 </table>
 
 <h2>Ý tưởng "Bốn Mùa": 4 tháp Mai, Trúc, Cúc, Tùng</h2>
-<p>Bốn tòa tháp được đặt tên theo bộ tranh tứ bình truyền thống, mỗi loài cây gắn với một mùa trong năm. Tên gọi FourS (Four Seasons) xuất phát từ ý tưởng này.</p>
+<p>Một điểm dễ nhớ trong tổng quan FourS Tower là cách đặt tên. Bốn tòa tháp được đặt tên theo bộ tranh tứ bình truyền thống, mỗi loài cây gắn với một mùa trong năm. Tên gọi FourS (Four Seasons) xuất phát từ ý tưởng này.</p>
 <table>
 <thead><tr><th>Mã tòa</th><th>Tên tháp</th><th>Mùa</th></tr></thead>
 <tbody>
@@ -452,11 +462,11 @@ HTML
 <p>Dự án không dùng số 4 khi đặt mã tòa, vì vậy tòa thứ tư là F5 (Tháp Cúc): bốn tòa gồm F1 Tùng, F2 Mai, F3 Trúc và F5 Cúc. Theo báo chí, Tháp Mùa Xuân F2 là tòa thứ ba được giới thiệu trong bộ sưu tập.</p>
 
 <h2>Vị trí và kết nối</h2>
-<p>FourS Tower nằm ở trung tâm Sun Riverpolis, khu vực được bao quanh bởi sông nước ở phía Nam Đà Nẵng. Từ dự án có thể kết nối cầu Hòa Xuân, cầu Đồng Nò 2 và các trục giao thông chính đến biển Sơn Thủy, Ngũ Hành Sơn, Hội An.</p>
+<p>Về vị trí, tổng quan FourS Tower cho thấy dự án nằm ở trung tâm Sun Riverpolis, khu vực được bao quanh bởi sông nước ở phía Nam Đà Nẵng. Lễ ra mắt ngày 19/3/2026 được <a href="https://tuoitre.vn/bon-thap-can-ho-thuoc-du-an-sun-group-nam-da-nang-ra-mat-20260319112111814.htm">Tuổi Trẻ</a> và VnExpress đưa tin. Từ dự án có thể kết nối cầu Hòa Xuân, cầu Đồng Nò 2 và các trục giao thông chính đến biển Sơn Thủy, Ngũ Hành Sơn, Hội An.</p>
 <p>Khu vực này hưởng lợi từ cụm hạ tầng phía Nam, phân tích chi tiết trong bài <a href="/cum-nut-giao-cau-hoa-xuan-bat-dong-san-nam-da-nang/">cụm nút giao cầu Hòa Xuân và bất động sản Nam Đà Nẵng</a>.</p>
 
 <h2>Tiện ích nội khu</h2>
-<p>Theo thông tin dự án, toàn bộ tầng 2 được dành cho tiện ích theo phong cách nghỉ dưỡng, tầng 1 bố trí thương mại. Các tiện ích được giới thiệu gồm:</p>
+<p>Tiện ích là phần được nhắc nhiều trong tổng quan FourS Tower. Theo thông tin dự án, toàn bộ tầng 2 được dành cho tiện ích theo phong cách nghỉ dưỡng, tầng 1 bố trí thương mại. Các tiện ích được giới thiệu gồm:</p>
 <ul>
 <li>Hồ bơi bốn mùa.</li>
 <li>Gym, yoga, spa.</li>
@@ -467,7 +477,16 @@ HTML
 
 <h2>FourS Tower trong hệ sinh thái Sun Riverpolis</h2>
 <p>Sun Riverpolis là khu đô thị sinh thái của Sun Group tại Hòa Quý, cùng Sun NeO City (Hòa Xuân) tạo thành hệ sinh thái hơn 1.000 ha ở phía Nam Đà Nẵng. Bên cạnh FourS Tower, Sun Riverpolis còn có phân khu đất nền và biệt thự view sông Đầm Sen, mở bán từ tháng 8/2025.</p>
-<p>Việc có cả căn hộ, đất nền và biệt thự trong cùng một khu giúp hình thành cộng đồng cư dân đa dạng. Tuy vậy, đây vẫn là khu đô thị đang hình thành, tiện ích ngoại khu như trường học, chợ, bệnh viện cần thời gian để hoàn thiện. Anh chị xem thêm phân khu đất tại trang <a href="/du-an/dat-nen-dam-sen-sun-riverpolis/">đất nền Đầm Sen</a>.</p>
+<p>Đặt trong tổng quan FourS Tower, việc có cả căn hộ, đất nền và biệt thự trong cùng một khu giúp hình thành cộng đồng cư dân đa dạng. Tuy vậy, đây vẫn là khu đô thị đang hình thành, tiện ích ngoại khu như trường học, chợ, bệnh viện cần thời gian để hoàn thiện. Anh chị xem thêm phân khu đất tại trang <a href="/du-an/dat-nen-dam-sen-sun-riverpolis/">đất nền Đầm Sen</a>.</p>
+
+<h2>Tổng quan FourS Tower qua các con số</h2>
+<ul>
+<li><strong>4 tòa, 20 tầng nổi, 2 tầng hầm:</strong> tổng 2.394 căn, bình quân khoảng 600 căn mỗi tòa.</li>
+<li><strong>Diện tích căn:</strong> từ Studio khoảng 34,7 m² đến 3PN khoảng 102,8 m² theo các trang phân phối.</li>
+<li><strong>Giá tham khảo:</strong> Studio từ khoảng 1,7 tỷ, 2PN từ khoảng 3,6 tỷ (theo đợt, chưa phải giá chính thức).</li>
+<li><strong>Thanh toán:</strong> chính sách được công bố cho phép thanh toán 70% để nhận nhà.</li>
+</ul>
+<p>Những con số trong phần tổng quan FourS Tower này chỉ để định hướng; số căn mỗi tòa, diện tích và giá cụ thể cần đối chiếu bảng hàng của đợt đang mở bán.</p>
 
 <h2>Ưu điểm và điểm cần cân nhắc</h2>
 <table>
@@ -481,20 +500,22 @@ HTML
 </table>
 
 <h2>FourS Tower phù hợp với ai?</h2>
-<p>Studio và 1PN phù hợp người trẻ, cặp vợ chồng mới cưới hoặc nhà đầu tư cho thuê. Căn 2PN và 3PN hướng đến gia đình cần không gian ở lâu dài tại Nam Đà Nẵng. Giá tham khảo từng loại căn xem trong bài <a href="/gia-can-ho-fours-tower-2026/">giá FourS Tower 2026</a>, layout xem tại <a href="/dien-tich-can-ho-fours-tower/">mặt bằng FourS Tower</a>.</p>
+<p>Từ bức tranh tổng quan FourS Tower ở trên, Studio và 1PN phù hợp người trẻ, cặp vợ chồng mới cưới hoặc nhà đầu tư cho thuê. Căn 2PN và 3PN hướng đến gia đình cần không gian ở lâu dài tại Nam Đà Nẵng. Giá tham khảo từng loại căn xem trong bài <a href="/gia-can-ho-fours-tower-2026/">giá FourS Tower 2026</a>, layout xem tại <a href="/dien-tich-can-ho-fours-tower/">mặt bằng FourS Tower</a>.</p>
 <p>Thông tin đầy đủ của dự án có tại trang <a href="/du-an/fours-tower/">FourS Tower (Tháp Bốn Mùa)</a> và trang tổ hợp <a href="/du-an/sun-riverpolis/">Sun Riverpolis Nam Hòa Xuân</a>.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận tài liệu FourS Tower, bảng giá đợt hiện hành và lịch tham quan nhà mẫu.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận tài liệu tổng quan FourS Tower, bảng giá đợt hiện hành và lịch tham quan nhà mẫu.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Tổng quan FourS Tower Đà Nẵng: 4 tháp Bốn Mùa',
 			'desc'      => 'Tổng quan FourS Tower Đà Nẵng: 4 tháp Mai, Trúc, Cúc, Tùng 20 tầng, 2.394 căn Studio – 3PN sở hữu lâu dài. Gọi 0904 567 009 nhận tài liệu.',
-			'points'    => array( 'Phân khu căn hộ đầu tiên của Sun Riverpolis, ra mắt 19/3/2026', '4 tòa 20 tầng, 2 hầm, 2.394 căn Studio – 3PN', 'Tiện ích nghỉ dưỡng tập trung tại tầng 2' ),
+			'points'    => array( 'Tổng quan FourS Tower: phân khu căn hộ đầu tiên của Sun Riverpolis, ra mắt 19/3/2026', '4 tòa 20 tầng, 2 hầm, 2.394 căn Studio – 3PN', 'Tiện ích nghỉ dưỡng tập trung tại tầng 2' ),
 			'faq'       => array(
 				array( 'FourS Tower Đà Nẵng nằm ở đâu?', 'Tại ngã tư Nguyễn Phước Lan – Minh Mạng, phường Hòa Quý (cũ), Ngũ Hành Sơn, trong khu đô thị Sun Riverpolis.' ),
 				array( 'FourS Tower có bao nhiêu căn hộ?', '2.394 căn trong 4 tòa 20 tầng, từ Studio đến 3 phòng ngủ.' ),
 				array( 'Căn hộ FourS Tower sở hữu bao lâu?', 'Theo thông tin công bố, căn hộ FourS Tower sở hữu lâu dài.' ),
+				array( 'Tổng quan FourS Tower có những loại căn nào?', 'Studio, 1PN, 1PN+, 2PN, 2PN+ và 3PN, cùng dòng căn sân vườn; diện tích từ khoảng 34,7 m² đến 102,8 m² theo các trang phân phối.' ),
+				array( 'Đọc tổng quan FourS Tower xong nên xem gì tiếp?', 'Nên xem bảng giá theo loại căn, chính sách thanh toán của đợt hiện hành và mặt bằng tầng của tòa đang mở bán trước khi chọn căn.' ),
 				array( 'Ai là chủ đầu tư FourS Tower?', 'Dự án thuộc Tập đoàn Sun Group, do Sun Property phát triển.' ),
 			),
 		),
@@ -509,16 +530,18 @@ HTML
 		'slug'     => 'gia-can-ho-fours-tower-2026',
 		'old_slug' => array( 'gia-fours-tower-2026' ),
 		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
-		'title'    => 'Giá FourS Tower 2026: bảng giá tham khảo theo từng loại căn',
+		'title'    => 'Giá căn hộ FourS Tower 2026: bảng giá tham khảo theo từng loại căn',
 		'excerpt'  => 'Giá FourS Tower 2026 tham khảo: Studio từ khoảng 1,7 tỷ, 1PN+ từ khoảng 2,6 tỷ, 2PN từ khoảng 3,6 tỷ. Giá chính thức thay đổi theo từng đợt.',
 		'keyword'  => 'giá căn hộ FourS Tower 2026',
 		'project'  => 'fours-tower',
 		'week'     => 2,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>Giá FourS Tower 2026 theo các nguồn phân phối công khai: căn Studio từ khoảng 1,7 tỷ đồng, 1PN+ từ khoảng 2,6 tỷ đồng, 2PN từ khoảng 3,6 tỷ đồng (tham khảo). Đơn giá được rao ở khoảng 52–59 triệu đồng/m² cho đợt đầu; giá chính thức do Sun Property công bố theo từng tòa, từng đợt và có thể thay đổi (cập nhật tháng 10/2026).</p>
+<p>Giá căn hộ FourS Tower 2026 theo các nguồn phân phối công khai: căn Studio từ khoảng 1,7 tỷ đồng, 1PN+ từ khoảng 2,6 tỷ đồng, 2PN từ khoảng 3,6 tỷ đồng (tham khảo). Đơn giá được rao ở khoảng 52–59 triệu đồng/m² cho đợt đầu; giá chính thức do Sun Property công bố theo từng tòa, từng đợt và có thể thay đổi (cập nhật tháng 10/2026).</p>
 
-<h2>Bảng giá FourS Tower tham khảo theo loại căn</h2>
+<!--hh-img:img/fours-tower/fours-tower-toan-canh-hoang-hon.jpg|Toàn cảnh FourS Tower lúc hoàng hôn – giá căn hộ FourS Tower 2026 thay đổi theo tòa, tầng và view (ảnh chủ đầu tư)-->
+
+<h2>Bảng giá căn hộ FourS Tower 2026 theo loại căn</h2>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích tham khảo</th><th>Giá từ (tham khảo)</th></tr></thead>
 <tbody>
@@ -531,17 +554,29 @@ HTML
 </table>
 <p>Số liệu tổng hợp từ trang phân phối và tin rao, chưa phải bảng giá chính thức của chủ đầu tư. Giá thực tế phụ thuộc tòa, tầng, hướng, view và phương án thanh toán.</p>
 
-<h2>Đơn giá giá FourS Tower theo m²</h2>
-<p>Khi mở bán đợt đầu (tòa F1 và F5), một số trang phân phối nêu đơn giá khoảng 52–59 triệu đồng/m². Có nguồn khác ghi khoảng 35,8–59 triệu đồng/m² đã gồm VAT và phí bảo trì, khả năng là sau khi trừ chiết khấu tối đa.</p>
+<h2>Đơn giá căn hộ FourS Tower theo m²</h2>
+<p>Để hiểu giá căn hộ FourS Tower 2026, nên bắt đầu từ đơn giá. Khi mở bán đợt đầu (tòa F1 và F5), một số trang phân phối nêu đơn giá khoảng 52–59 triệu đồng/m². Có nguồn khác ghi khoảng 35,8–59 triệu đồng/m² đã gồm VAT và phí bảo trì, khả năng là sau khi trừ chiết khấu tối đa.</p>
 <p>Để so sánh, CBRE ghi nhận giá căn hộ sơ cấp trung bình toàn Đà Nẵng khoảng 83 triệu đồng/m² trong quý 1/2026. Như vậy FourS Tower nằm ở nhóm giá mềm hơn mặt bằng chung, phù hợp với vị trí khu Nam Đà Nẵng. Xem thêm bài <a href="/thi-truong-bat-dong-san-da-nang-2026/">thị trường bất động sản Đà Nẵng 2026</a>.</p>
 
-<h2>Yếu tố ảnh hưởng đến giá từng căn</h2>
+<h2>Yếu tố ảnh hưởng đến giá căn hộ FourS Tower 2026</h2>
 <h3>Tòa và đợt mở bán</h3>
 <p>Mỗi tòa được giới thiệu theo đợt riêng (F1, F5, sau đó F2 Tháp Mùa Xuân). Đợt sau có thể có giá và chính sách khác đợt trước. Điểm khác biệt của F2 được phân tích trong bài <a href="/fours-tower-f2-thap-mai-mua-xuan/">FourS Tower F2 – Tháp Mai</a>.</p>
 <h3>Tầng, hướng và view</h3>
 <p>Căn tầng cao, view sông hoặc hướng mát thường có giá cao hơn căn tầng thấp, view nội khu. Căn sân vườn là dòng sản phẩm đặc biệt, giá thường được báo riêng.</p>
 <h3>Phương án thanh toán</h3>
 <p>Mức chiết khấu khác nhau giữa thanh toán chuẩn, thanh toán sớm hay vay ngân hàng, nên cùng một căn có thể có nhiều mức giá sau chiết khấu. Chi tiết xem bài <a href="/chinh-sach-fours-tower-thanh-toan-vay-ngan-hang/">chính sách FourS Tower</a>.</p>
+
+<h2>Ví dụ: chiết khấu tác động đến giá căn hộ FourS Tower 2026</h2>
+<p>Chính sách được công bố có chiết khấu Early Bird 5% cho khách giữ chỗ sớm. Áp vào mức "giá từ" tham khảo, khoản chênh lệch là đáng kể (số liệu minh họa, chưa gồm các ưu đãi khác):</p>
+<table>
+<thead><tr><th>Loại căn</th><th>Giá từ (tham khảo)</th><th>5% tương ứng</th></tr></thead>
+<tbody>
+<tr><td>Studio</td><td>Khoảng 1,7 tỷ</td><td>Khoảng 85 triệu</td></tr>
+<tr><td>1PN+</td><td>Khoảng 2,6 tỷ</td><td>Khoảng 130 triệu</td></tr>
+<tr><td>2PN</td><td>Khoảng 3,6 tỷ</td><td>Khoảng 180 triệu</td></tr>
+</tbody>
+</table>
+<p>Vì vậy, khi so sánh giá căn hộ FourS Tower 2026 giữa các nguồn, anh chị cần hỏi rõ con số đã trừ chiết khấu nào, đã gồm VAT và kinh phí bảo trì chưa.</p>
 
 <h2>Tổng chi phí cần tính khi mua</h2>
 <ul>
@@ -551,25 +586,25 @@ HTML
 <li>Chi phí nội thất nếu bàn giao cơ bản.</li>
 </ul>
 
-<h2>Giá FourS Tower phù hợp với ai?</h2>
+<h2>Giá căn hộ FourS Tower 2026 phù hợp với ai?</h2>
 <p>Với mức "giá từ" khoảng 1,7 tỷ cho Studio, FourS Tower nằm trong tầm với của người mua căn hộ đầu tiên và nhà đầu tư cá nhân có vốn vừa phải. Căn 2PN từ khoảng 3,6 tỷ phù hợp gia đình trẻ muốn ở lâu dài tại khu Nam Đà Nẵng thay vì trung tâm có đơn giá cao hơn.</p>
 <p>Người mua để cho thuê nên tính kỹ: quy mô 2.394 căn đồng nghĩa nguồn cung cho thuê trong cùng khu khá lớn khi bàn giao đồng loạt. Chọn căn có view, tầng và layout tốt sẽ giúp nổi bật hơn khi khai thác.</p>
 <h3>So với mặt bằng căn hộ Đà Nẵng</h3>
 <p>Khu ven sông Hàn, trung tâm Hải Châu có nhiều dự án giá cao hơn đáng kể. Nếu anh chị cần so sánh, xem danh sách tại <a href="/loai-du-an/cao-tang/">căn hộ Đà Nẵng</a> để đặt FourS Tower cạnh các lựa chọn cùng tầm tiền.</p>
 
 <h2>Cách nhận bảng giá chính xác</h2>
-<p>Bảng giá FourS Tower được chủ đầu tư phát hành theo từng đợt, kèm quỹ căn còn lại. Hiệp gửi bảng giá bằng văn bản, kèm bảng tính tổng tiền theo phương án anh chị chọn để so sánh công bằng. Thông tin dự án xem tại trang <a href="/du-an/fours-tower/">FourS Tower Đà Nẵng</a>.</p>
+<p>Bảng giá căn hộ FourS Tower 2026 được chủ đầu tư phát hành theo từng đợt, kèm quỹ căn còn lại. Hiệp gửi bảng giá bằng văn bản, kèm bảng tính tổng tiền theo phương án anh chị chọn để so sánh công bằng. Thông tin dự án xem tại trang <a href="/du-an/fours-tower/">FourS Tower Đà Nẵng</a>.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá FourS Tower đợt hiện hành và danh sách căn còn trống theo ngân sách.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá căn hộ FourS Tower 2026 đợt hiện hành và danh sách căn còn trống theo ngân sách.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Giá căn hộ FourS Tower 2026: bảng giá theo loại căn',
 			'desc'      => 'Giá căn hộ FourS Tower 2026 tham khảo: Studio từ khoảng 1,7 tỷ, 1PN+ khoảng 2,6 tỷ, 2PN từ khoảng 3,6 tỷ. Gọi 0904 567 009 nhận bảng giá chính thức.',
-			'points'    => array( 'Studio từ khoảng 1,7 tỷ, 1PN+ khoảng 2,6 tỷ, 2PN khoảng 3,6 tỷ (tham khảo)', 'Đơn giá đợt đầu được rao khoảng 52–59 triệu/m²', 'Giá thay đổi theo tòa, tầng, view và phương án thanh toán' ),
+			'points'    => array( 'Giá căn hộ FourS Tower 2026: Studio từ khoảng 1,7 tỷ, 1PN+ khoảng 2,6 tỷ, 2PN khoảng 3,6 tỷ (tham khảo)', 'Đơn giá đợt đầu được rao khoảng 52–59 triệu/m²', 'Giá thay đổi theo tòa, tầng, view và phương án thanh toán' ),
 			'faq'       => array(
-				array( 'Giá FourS Tower bao nhiêu một căn?', 'Theo nguồn phân phối, Studio từ khoảng 1,7 tỷ, 1PN+ từ khoảng 2,6 tỷ, 2PN từ khoảng 3,6 tỷ (tham khảo, thay đổi theo đợt).' ),
-				array( 'Giá FourS Tower bao nhiêu một m²?', 'Đợt đầu được rao khoảng 52–59 triệu đồng/m²; giá sau chiết khấu thấp hơn tùy phương án thanh toán.' ),
+				array( 'Giá căn hộ FourS Tower 2026 bao nhiêu một căn?', 'Theo nguồn phân phối, giá căn hộ FourS Tower 2026 với Studio từ khoảng 1,7 tỷ, 1PN+ từ khoảng 2,6 tỷ, 2PN từ khoảng 3,6 tỷ (tham khảo, thay đổi theo đợt).' ),
+				array( 'Giá căn hộ FourS Tower 2026 bao nhiêu một m²?', 'Đợt đầu được rao khoảng 52–59 triệu đồng/m²; giá sau chiết khấu thấp hơn tùy phương án thanh toán.' ),
 				array( 'Giá căn 3PN FourS Tower là bao nhiêu?', 'Chưa có số liệu công khai đáng tin cậy; giá đang cập nhật theo đợt, liên hệ để nhận bảng giá.' ),
 			),
 		),
