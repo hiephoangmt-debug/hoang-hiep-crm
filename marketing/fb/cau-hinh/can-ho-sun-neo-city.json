@@ -58,5 +58,33 @@
    "script",
    340
   ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Căn hộ nên chọn tòa nào",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "SUN NEO CITY",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Hòa Xuân",
+     "script"
+    ]
+   ],
+   "dx": 230,
+   "over": true
+  }
  ]
 }

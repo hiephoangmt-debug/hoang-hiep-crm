@@ -1,7 +1,7 @@
 {
  "tag": "PHÁP LÝ · FPT CITY ĐÀ NẴNG",
  "title": "Sổ hồng FPT Plaza 3",
- "sub": "Hoàn thành cấp sổ cho 100% căn hộ",
+ "sub": "Khoảng 7 tháng sau bàn giao, cư dân đã nhận sổ",
  "xc": 0.5,
  "yc": 0.38,
  "stats": [
@@ -53,5 +53,33 @@
    "big",
    90
   ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Hoàn thành sổ hồng",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "FPT PLAZA 3",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "100% căn hộ",
+     "script"
+    ]
+   ],
+   "dx": 200,
+   "over": true
+  }
  ]
 }

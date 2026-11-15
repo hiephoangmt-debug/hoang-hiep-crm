@@ -58,5 +58,33 @@
    "cap",
    120
   ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Tầng cao hay tầng thấp",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "SUN SAPHIA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Residence",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
  ]
 }

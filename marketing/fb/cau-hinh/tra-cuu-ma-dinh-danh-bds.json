@@ -58,5 +58,33 @@
    "script",
    380
   ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Tra cứu mã định danh",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "BẤT ĐỘNG SẢN",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "trước khi đặt cọc",
+     "script"
+    ]
+   ],
+   "dx": 170,
+   "over": true
+  }
  ]
 }

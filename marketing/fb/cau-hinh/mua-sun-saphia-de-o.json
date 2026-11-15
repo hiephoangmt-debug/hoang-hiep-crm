@@ -58,5 +58,33 @@
    "script",
    360
   ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Mua để ở có được không",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "SUN SAPHIA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Residence",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
  ]
 }

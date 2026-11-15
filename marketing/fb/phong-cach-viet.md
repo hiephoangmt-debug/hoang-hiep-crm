@@ -63,3 +63,13 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 - Nền ngà, ảnh bo góc phía trên, tiêu đề chữ có chân, 4 con số vàng đồng, 4 ý chia 2 cột, dòng chốt nền xanh đậm, chân ảnh đại diện.
 - Tiêu đề dài quá 2 dòng thì rút gọn; xem ảnh trước khi đăng (script báo "TRAN CHU" nếu chữ tràn).
 - Áp dụng cho cả trang Sun, Hoàng Hiệp, Casamia (khi dùng thẻ có số liệu) và bài TikTok. Mẫu cũ fb-the-doc-anh-tren.py không dùng nữa.
+
+## Mẫu POSTER (anh Hiệp duyệt 15/11/2026 – thay mẫu B, dùng cho MỌI ảnh có chữ, Facebook 3 trang và TikTok giống nhau)
+- Lệnh: `python3 wordpress/bai-viet/fb-the-doc-v2.py poster <cau-hinh.json> <anh-dai-dien.jpg> <anh-nen.jpg> marketing/fb/<slug>-p.jpg`. TikTok dùng CHÍNH ảnh này (không làm ảnh riêng).
+- Bố cục: nền ngà có vệt sáng; trên cùng "HOÀNG HIỆP · BẤT ĐỘNG SẢN ĐÀ NẴNG" + tag; tiêu đề 3 dòng căn giữa; 1 dòng phụ (sub); 3 con số (stats 3 đầu); ảnh tràn nửa dưới, mờ dần đều lên nền; thanh ảnh đại diện + Zalo ở đáy. Không có danh sách ý trên ảnh (đưa vào lời bài).
+- Tiêu đề = "headline_poster" trong cấu hình, 3 dòng, ghép lại đọc thành từ khoá chính:
+  1. Dòng trên: chữ THƯỜNG có chân, KHÔNG nghiêng (kiểu "plain"), ví dụ "Mặt bằng căn hộ", "Tầng cao hay tầng thấp".
+  2. Dòng giữa: chữ NHẤN (tên dự án / ý chính) IN HOA rất to, đậm, màu đồng (kiểu "big"), ví dụ "THE LEGEND", "SUN SAPHIA".
+  3. Dòng dưới: chữ nghiêng Great Vibes ngắn (kiểu "script"), lệch phải (dx 160–240) và chạm nhẹ góc dưới chữ to ("over": true), ví dụ "Đà Nẵng", "Residence", "100% căn hộ". Không quá ~16 ký tự để không tràn mép.
+  Ví dụ: [{"segs":[["Mặt bằng căn hộ","plain"]]},{"segs":[["THE LEGEND","big"]]},{"segs":[["Đà Nẵng","script"]],"dx":230,"over":true}]
+- Xem ảnh trước khi đăng: chữ không tràn mép, dòng nghiêng không đè che chữ to.
