@@ -17,7 +17,7 @@ function hh_posts_sun_saphia_dot_3( $posts ) {
 	$posts[] = array(
 		'slug'     => 'studio-sun-saphia-residence-30-m2-ai-nen-mua',
 		'old_slug' => array( 'studio-sun-saphia-residence-30-m2-bo-tri-ai-nen-mua' ),
-		'rev'     => 3, // 05/11: chèn ảnh dự án.
+		'rev'     => 4, // 15/11: chuẩn SEO 100 – rút gọn URL, giá dự kiến theo dãy, gợi ý nội thất, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Studio Sun Saphia Residence 30 m²: bố trí, công năng và ai nên mua',
 		'excerpt'  => 'Studio chiếm 513/782 căn Sun Saphia Residence: thông thủy 30 – 31 m², mặt tiền 3,8 m, trần 3,5 m, 19 căn mỗi sàn. Bố trí thế nào, hợp với ai, chọn căn ra sao.',
 		'keyword'  => 'studio Sun Saphia Residence',
@@ -30,7 +30,7 @@ function hh_posts_sun_saphia_dot_3( $posts ) {
 		'content'  => <<<HTML
 <p><strong>Studio Sun Saphia Residence</strong> là sản phẩm chủ lực của dự án: <strong>513 trên 782 căn</strong> (khoảng 66%) là studio. Bài này tóm tắt studio được bố trí ra sao theo tài liệu chủ đầu tư tháng 10/2026, studio hợp với ai và cách chọn căn.</p>
 <!--hh-featured-->
-<h2>Thông số căn studio</h2>
+<h2>Thông số studio Sun Saphia Residence</h2>
 <table>
 <tbody>
 <tr><th>Diện tích</th><td>Thông thủy 30 – 31 m²; căn studio ở góc khoảng 40 m²</td></tr>
@@ -40,14 +40,14 @@ function hh_posts_sun_saphia_dot_3( $posts ) {
 <tr><th>Bàn giao</th><td>Hoàn thiện cơ bản, dự kiến 11/2028</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Layout căn Studio 30 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)-->
+<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Layout studio Sun Saphia Residence 30 m² (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Bố trí bên trong</h2>
 <p>Căn mặt tiền hẹp, sâu nên thường xếp theo một trục: cửa vào – bếp và vệ sinh – khu ngủ, sinh hoạt sát cửa kính. Trần 3,5 m giúp căn nhỏ thoáng hơn căn hộ thông thường, có chỗ cho kệ cao hoặc giường gác thấp. Vì bàn giao hoàn thiện cơ bản, chủ nhà tự chọn nội thất theo mục đích ở hay cho thuê.</p>
 <p>Xem toàn bộ loại căn và cách chia sàn ở bài <a href="/mat-bang-can-ho-sun-saphia-residence/">mặt bằng Sun Saphia Residence</a>.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Phối cảnh Sun Saphia Residence bên biển Sơn Thủy lúc hoàng hôn (ảnh chủ đầu tư)-->
-<h2>Studio hợp với ai?</h2>
+<h2>Studio Sun Saphia Residence hợp với ai?</h2>
 <ul>
-<li><strong>Mua cho thuê</strong>: tổng tiền mỗi căn thấp nhất dự án, dễ cho khách du lịch, chuyên gia, người làm việc ngắn hạn thuê.</li>
+<li><strong>Mua cho thuê</strong>: tổng tiền mỗi căn thấp nhất dự án, dễ cho khách du lịch, chuyên gia, người làm việc ngắn hạn thuê – 9 tháng 2026 Đà Nẵng phục vụ khoảng 15,86 triệu lượt khách lưu trú, tăng 26,4% (<a href="https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp">VietnamPlus</a>).</li>
 <li><strong>Căn nghỉ dưỡng thứ hai</strong> cho gia đình ở Hà Nội, TP.HCM ra biển vài lần mỗi năm, lúc không ở thì cho thuê.</li>
 <li><strong>Người trẻ ở một mình</strong> hoặc cặp đôi chưa có con, cần chỗ ở gần biển và đường sắt đô thị dự kiến (khoảng 500 m tới ga LRT 09).</li>
 </ul>
@@ -58,6 +58,24 @@ function hh_posts_sun_saphia_dot_3( $posts ) {
 <li><strong>Tầng</strong>: tầng cao hơn nhìn rộng, ít ồn từ đường Trường Sa – Võ Nguyên Giáp.</li>
 <li><strong>Vị trí trên sàn</strong>: căn góc khoảng 40 m² rộng hơn hẳn, nên hỏi giá riêng; căn gần thang máy, phòng rác cần xem kỹ.</li>
 </ol>
+<h2>Giá dự kiến studio Sun Saphia Residence theo dãy căn</h2>
+<table>
+<thead><tr><th>Studio tầng 15</th><th>Thông thủy</th><th>Giá dự kiến (28/10/2026)</th></tr></thead>
+<tbody>
+<tr><td>Dãy mặt biển</td><td>30 m²</td><td>Khoảng 2,85 tỷ</td></tr>
+<tr><td>Cánh bên</td><td>30 m²</td><td>Khoảng 2,37 tỷ</td></tr>
+<tr><td>Dãy phía sau</td><td>30 m²</td><td>Khoảng 2,13 tỷ</td></tr>
+</tbody>
+</table>
+<p>Giá dự kiến theo phương án có vay, chưa gồm VAT và 2% kinh phí bảo trì, chưa trừ chiết khấu; bảng giá chính thức từng căn công bố khi mở bán. Chênh khoảng 0,7 tỷ giữa dãy mặt biển và dãy phía sau cho thấy hướng nhìn là yếu tố quyết định giá của studio Sun Saphia Residence. Chi tiết: <a href="/gia-sun-saphia-residence-bao-nhieu/">Sun Saphia giá bao nhiêu</a>.</p>
+<h2>Gợi ý nội thất cho studio 30 m²</h2>
+<ul>
+<li><strong>Giường kết hợp tủ</strong> hoặc sofa giường để giải phóng khoảng sàn ban ngày.</li>
+<li><strong>Bếp gọn một hàng</strong> sát tường, tủ trên cao tận dụng trần 3,5 m.</li>
+<li><strong>Vật liệu chịu ẩm, chịu hơi muối</strong> cho tủ bếp, phụ kiện kim loại – căn sát biển xuống cấp nhanh hơn căn trong phố (xem <a href="/bao-tri-can-ho-ven-bien-hoi-muoi-mua-bao/">bảo trì căn hộ ven biển</a>).</li>
+<li><strong>Bàn làm việc nhỏ cạnh cửa kính</strong> – điểm cộng với khách thuê theo tháng làm việc từ xa.</li>
+</ul>
+<p>Nhận định của Hoàng Hiệp: studio Sun Saphia Residence hợp nhất với người mua cho thuê và người cần căn biển thứ hai với tổng tiền vừa phải. Vì có tới 513 căn cùng loại, chọn đúng dãy, đúng tầng và làm nội thất gọn, bền quan trọng hơn chọn nội thất đắt tiền.</p>
 <p>So sánh giá mua, giá thuê studio ở các dự án ven biển khác: xem <a href="/studio-ven-bien-da-nang-gia-mua-gia-thue-2026/">studio ven biển Đà Nẵng: giá mua, giá thuê 2026</a>.</p>
 {$cta}
 HTML
@@ -66,22 +84,24 @@ HTML
 			'seo_title' => 'Studio Sun Saphia Residence 30 m²: bố trí, ai nên mua',
 			'desc'      => 'Studio Sun Saphia Residence: 513/782 căn, thông thủy 30 – 31 m², mặt tiền 3,8 m, trần 3,5 m. Bố trí bên trong, hợp với ai và 3 điểm cần xem khi chọn căn.',
 			'points'    => array(
-				'513 studio trên tổng 782 căn (khoảng 66%)',
+				'Studio Sun Saphia Residence: 513 căn trên tổng 782 căn (khoảng 66%)',
 				'Thông thủy 30 – 31 m², mặt tiền 3,8 m, sâu 9 m, trần 3,5 m',
 				'Hợp mua cho thuê, căn nghỉ dưỡng thứ hai, người ở một mình',
 			),
 			'faq'       => array(
 				array( 'Studio Sun Saphia Residence rộng bao nhiêu?', 'Theo tài liệu chủ đầu tư 10/2026, studio thông thủy 30 – 31 m², mặt tiền khoảng 3,8 m, sâu khoảng 9 m; căn studio góc khoảng 40 m².' ),
+				array( 'Studio Sun Saphia Residence giá dự kiến bao nhiêu?', 'Theo thông tin chủ đầu tư ngày 28/10/2026, studio 30 m² tầng 15 khoảng 2,13 tỷ (dãy phía sau), 2,37 tỷ (cánh bên), 2,85 tỷ (dãy mặt biển) – phương án có vay, chưa VAT và 2% bảo trì.' ),
+				array( 'Studio Sun Saphia Residence bàn giao thế nào?', 'Bàn giao hoàn thiện cơ bản, dự kiến tháng 11/2028; chủ nhà tự làm nội thất theo mục đích ở hay cho thuê.' ),
 				array( 'Sun Saphia Residence có bao nhiêu căn studio?', '513 studio trên tổng 782 căn; tầng điển hình 3A – 28 có 19 studio trong 28 căn mỗi sàn.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://www.vietnamplus.vn/da-nang-don-gan-16-trieu-luot-khach-luu-tru-trong-9-thang-nam-2026-post1140183.vnp' ),
 	);
 
 	/* ---------------- 31/10 – Tiện ích ---------------- */
 	$posts[] = array(
 		'slug'     => 'tien-ich-sun-saphia-residence-noi-khu-xung-quanh',
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 15/11: chuẩn SEO 100 – tiện ích theo nhóm cư dân, câu hỏi phí dịch vụ, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Tiện ích Sun Saphia Residence: trong tòa và quanh dự án ven biển Sơn Thủy',
 		'excerpt'  => 'Tiện ích Sun Saphia Residence gồm bể bơi view biển, gym, yoga, khối đế thương mại, 2 tầng hầm; quanh dự án có chuỗi công viên bãi tắm, ga LRT 09 dự kiến, danh thắng Ngũ Hành Sơn.',
 		'keyword'  => 'tiện ích Sun Saphia Residence',
@@ -94,61 +114,78 @@ HTML
 		'content'  => <<<HTML
 <p><strong>Tiện ích Sun Saphia Residence</strong> chia làm hai lớp: tiện ích trong tòa căn hộ 30 tầng và tiện ích công cộng quanh khu bãi tắm Sơn Thủy. Dưới đây là danh sách theo tài liệu chủ đầu tư tháng 10/2026 và các dự án hạ tầng thành phố đã công bố.</p>
 <!--hh-featured-->
-<h2>Tiện ích trong tòa</h2>
+<h2>Tiện ích Sun Saphia Residence trong tòa</h2>
 <ul>
 <li><strong>Bể bơi view biển</strong>, khu yoga.</li>
 <li><strong>Phòng gym, pilates</strong>.</li>
 <li><strong>Khối đế thương mại</strong> phục vụ cư dân và khách thuê.</li>
 <li><strong>2 tầng hầm</strong> đỗ xe.</li>
 </ul>
-<p>Chủ đầu tư chưa công bố chi tiết diện tích từng tiện ích và phí sử dụng. Khi nhận hồ sơ, nên hỏi tiện ích nào miễn phí, tiện ích nào thu phí riêng, giờ mở cửa và quy định cho khách thuê ngắn ngày.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
-<h2>Tiện ích quanh dự án</h2>
+<p>Chủ đầu tư chưa công bố chi tiết diện tích từng tiện ích Sun Saphia Residence và phí sử dụng. Khi nhận hồ sơ, nên hỏi tiện ích nào miễn phí, tiện ích nào thu phí riêng, giờ mở cửa và quy định cho khách thuê ngắn ngày.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Tiện ích Sun Saphia Residence: mặt bằng tổng thể cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Tiện ích Sun Saphia Residence quanh dự án</h2>
 <table>
 <thead><tr><th>Tiện ích</th><th>Khoảng cách</th><th>Ghi chú</th></tr></thead>
 <tbody>
-<tr><td>Công viên bãi tắm ven biển</td><td>Đối diện</td><td>Khoảng 2,45 ha, thành phố đang đầu tư</td></tr>
+<tr><td>Công viên bãi tắm ven biển</td><td>Đối diện</td><td>Khoảng 2,45 ha, thành phố đang đầu tư giai đoạn 2025 – 2027 (<a href="https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp">VietnamPlus</a>)</td></tr>
 <tr><td>Bãi tắm Sơn Thủy</td><td>Đi bộ</td><td>Thể thao biển: kayak, SUP, dù lượn, jetski</td></tr>
 <tr><td>Ga LRT 09</td><td>Khoảng 500 m</td><td>Đường sắt đô thị sân bay – biển (dự kiến)</td></tr>
 <tr><td>Sun Galaxy, Đà Nẵng Downtown</td><td>Khoảng 4 km</td><td>Theo bản đồ kết nối của chủ đầu tư</td></tr>
+<tr><td>Danh thắng Ngũ Hành Sơn, resort ven biển, sân golf</td><td>Trong khu vực</td><td>Theo tài liệu chủ đầu tư; khu vực cũng có trường học, siêu thị, bệnh viện</td></tr>
 </tbody>
 </table>
 <p>Dọc tuyến biển có chuỗi 3 công viên bãi tắm: Sơn Thủy, công viên đối diện dự án và công viên bãi tắm Huyền Trân Công Chúa. Thông tin tuyến đường sắt đô thị: xem bài <a href="/duong-sat-do-thi-da-nang-san-bay-my-khe-hoi-an/">đường sắt đô thị sân bay – Mỹ Khê – Hội An</a>.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-dem-toa-thap-ven-bien.jpg|Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)-->
-<h2>Tiện ích nào ảnh hưởng giá thuê?</h2>
+<h2>Tiện ích Sun Saphia Residence nào ảnh hưởng giá thuê?</h2>
 <ul>
 <li><strong>Bể bơi, view biển</strong>: khách du lịch thường lọc theo hai tiêu chí này trên các ứng dụng đặt phòng.</li>
 <li><strong>Bãi tắm đi bộ được</strong>: lợi thế so với căn hộ trong phố phải đi xe ra biển.</li>
 <li><strong>Kết nối giao thông</strong>: ga LRT khi vận hành giúp đi sân bay, trung tâm dễ hơn – nhưng chưa có mốc khai thác chính thức, không nên tính vào giá thuê ngay.</li>
 </ul>
+<h2>Tiện ích Sun Saphia Residence theo từng nhóm cư dân</h2>
+<ul>
+<li><strong>Gia đình ở nghỉ dưỡng</strong>: bể bơi, bãi tắm đi bộ được và công viên phía trước là ba điểm dùng nhiều nhất; khu vui chơi trẻ em nằm trong phương án công viên của thành phố.</li>
+<li><strong>Khách thuê ngắn ngày</strong>: bể bơi view biển, thể thao biển (kayak, SUP) và khối đế thương mại dưới chân tòa giúp khách ít phải đi xa.</li>
+<li><strong>Người thuê theo tháng, làm việc từ xa</strong>: gym, yoga, pilates cho sinh hoạt hằng ngày; ga LRT 09 dự kiến khoảng 500 m nếu tuyến được triển khai.</li>
+</ul>
+<h2>Hỏi gì về phí và quy định sử dụng tiện ích?</h2>
+<ol>
+<li>Tiện ích nào nằm trong phí quản lý, tiện ích nào thu phí riêng theo lượt hoặc theo tháng?</li>
+<li>Khách thuê ngắn ngày có được dùng bể bơi, gym không, có cần đăng ký thẻ cư dân tạm thời?</li>
+<li>Chỗ đỗ ô tô, xe máy ở 2 tầng hầm tính phí thế nào, có đủ cho mỗi căn không?</li>
+<li>Khối đế thương mại do ai vận hành, giờ hoạt động ra sao – có ảnh hưởng tiếng ồn tới các tầng thấp không?</li>
+</ol>
+<p>Nhận định của Hoàng Hiệp: tiện ích Sun Saphia Residence mạnh nhất không nằm trong tòa mà ở ngay trước cửa – bãi tắm Sơn Thủy và công viên ven biển. Tiện ích trong tòa ở mức đủ dùng cho căn hộ ven biển; người mua cho thuê nên hỏi kỹ quy định cho khách ngắn ngày trước khi tính giá thuê.</p>
 <p>Xem thêm vị trí chi tiết ở bài <a href="/sun-saphia-residence-o-dau-vi-tri/">Sun Saphia Residence ở đâu?</a></p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Tiện ích Sun Saphia Residence: trong tòa và xung quanh',
+			'seo_title' => 'Tiện ích Sun Saphia Residence 2026: trong tòa và xung quanh',
 			'desc'      => 'Tiện ích Sun Saphia Residence: bể bơi view biển, gym, yoga, thương mại, 2 tầng hầm; đối diện công viên bãi tắm 2,45 ha, cách ga LRT 09 khoảng 500 m.',
 			'points'    => array(
-				'Trong tòa: bể bơi view biển, yoga, gym, pilates, khối đế thương mại, 2 tầng hầm',
+				'Tiện ích Sun Saphia Residence trong tòa: bể bơi view biển, yoga, gym, pilates, khối đế thương mại, 2 tầng hầm',
 				'Đối diện công viên bãi tắm khoảng 2,45 ha',
 				'Khoảng 500 m tới ga LRT 09 (dự kiến)',
 			),
 			'faq'       => array(
 				array( 'Sun Saphia Residence có bể bơi không?', 'Có. Theo tài liệu chủ đầu tư 10/2026, tòa có bể bơi view biển, khu yoga, gym, pilates và khối đế thương mại.' ),
+				array( 'Tiện ích Sun Saphia Residence có thu phí riêng không?', 'Chủ đầu tư chưa công bố chi tiết phí sử dụng từng tiện ích; khi nhận hồ sơ nên hỏi tiện ích nào nằm trong phí quản lý, tiện ích nào thu riêng.' ),
+				array( 'Tiện ích Sun Saphia Residence quanh dự án gồm những gì?', 'Đối diện công viên bãi tắm khoảng 2,45 ha, bãi tắm Sơn Thủy với thể thao biển, ga LRT 09 dự kiến khoảng 500 m, danh thắng Ngũ Hành Sơn, resort và sân golf ven biển.' ),
 				array( 'Từ Sun Saphia Residence ra biển bao xa?', 'Dự án nằm trên đường Trường Sa, đối diện công viên bãi tắm ven biển; bãi tắm Sơn Thủy đi bộ được.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp' ),
 	);
 
 	/* ---------------- 01/11 – Chi phí ngoài giá bán ---------------- */
 	$posts[] = array(
 		'slug'     => 'chi-phi-mua-sun-saphia-residence-ngoai-gia-ban',
 		'old_slug' => array( 'chi-phi-mua-can-ho-sun-saphia-residence-ngoai-gia-ban' ),
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 15/11: chuẩn SEO 100 – rút gọn URL, ví dụ theo giá dự kiến 2,85 tỷ, chi phí sau nhận nhà, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Mua Sun Saphia Residence cần thêm bao nhiêu ngoài giá bán? VAT, phí bảo trì, lệ phí trước bạ',
 		'excerpt'  => 'Ngoài giá bán, người mua Sun Saphia Residence cần tính VAT, kinh phí bảo trì 2%, lệ phí trước bạ 0,5%, nội thất và phí quản lý. Bảng ước tính cho studio giá tham khảo 3 tỷ.',
-		'keyword'  => 'chi phí mua căn hộ Sun Saphia Residence',
+		'keyword'  => 'chi phí mua Sun Saphia Residence',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'phí bảo trì căn hộ 2%', 'lệ phí trước bạ căn hộ', 'chi phí mua căn hộ Đà Nẵng' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-01 08:00',
@@ -156,21 +193,21 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Kinh nghiệm mua nhà' ),
 		'image'    => 'plugin:img/tin-tuc/chi-phi-mua-sun-saphia-residence.jpg',
 		'content'  => <<<HTML
-<p>Khi so giá <strong>Sun Saphia Residence</strong>, nhiều người chỉ nhìn con số trên bảng giá. Thực tế, tổng tiền bỏ ra còn gồm thuế, phí và nội thất. Bài này liệt kê từng khoản theo quy định hiện hành và ví dụ cho một căn studio dùng <strong>giá tham khảo 3 tỷ</strong> trong tài liệu chủ đầu tư.</p>
+<p>Chi phí mua Sun Saphia Residence không chỉ là con số trên bảng giá: tổng tiền bỏ ra còn gồm thuế, phí và nội thất. Bài này liệt kê từng khoản theo quy định hiện hành và ví dụ cho một căn studio dùng <strong>giá tham khảo 3 tỷ</strong> trong tài liệu chủ đầu tư.</p>
 <!--hh-featured-->
-<h2>Các khoản ngoài giá căn</h2>
+<h2>Chi phí mua Sun Saphia Residence ngoài giá căn</h2>
 <table>
 <thead><tr><th>Khoản</th><th>Mức</th><th>Căn cứ</th></tr></thead>
 <tbody>
 <tr><td>Thuế GTGT (VAT)</td><td>10%</td><td>Tính trên giá bán trừ phần tiền đất được khấu trừ – thường đã ghi gộp trong bảng giá "đã gồm VAT"</td></tr>
 <tr><td>Kinh phí bảo trì phần sở hữu chung</td><td>2% giá bán (trước thuế)</td><td>Luật Nhà ở 2023; nộp khi nhận bàn giao hoặc theo hợp đồng</td></tr>
-<tr><td>Lệ phí trước bạ</td><td>0,5%</td><td>Nghị định 10/2022/NĐ-CP (đã sửa đổi); tính trên giá cao hơn giữa giá hợp đồng và bảng giá địa phương</td></tr>
+<tr><td>Lệ phí trước bạ</td><td>0,5%</td><td>Nghị định 10/2022/NĐ-CP (đã sửa đổi, xem <a href="https://thuvienphapluat.vn/phap-luat-nha-dat/le-phi-truoc-ba-nha-dat-nam-2026-hien-nay-la-bao-nhieu-14934.html">Thư Viện Pháp Luật</a>); tính trên giá cao hơn giữa giá hợp đồng và bảng giá địa phương</td></tr>
 <tr><td>Phí quản lý vận hành</td><td>Chưa công bố</td><td>Thu hằng tháng theo m²; hỏi mức dự kiến khi ký</td></tr>
 <tr><td>Nội thất</td><td>Tùy chọn</td><td>Bàn giao hoàn thiện cơ bản – cần tự làm nội thất</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Phối cảnh Sun Saphia Residence bên biển Sơn Thủy lúc hoàng hôn (ảnh chủ đầu tư)-->
-<h2>Ví dụ: studio giá tham khảo 3 tỷ</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Chi phí mua Sun Saphia Residence ngoài giá bán – phối cảnh bên biển Sơn Thủy (ảnh chủ đầu tư)-->
+<h2>Chi phí mua Sun Saphia Residence: ví dụ studio 3 tỷ</h2>
 <p>Giả định 3 tỷ là giá chưa gồm VAT và kinh phí bảo trì (cách ghi giá cụ thể sẽ theo bảng giá chính thức):</p>
 <table>
 <thead><tr><th>Khoản</th><th>Số tiền ước tính</th></tr></thead>
@@ -184,6 +221,29 @@ HTML
 </table>
 <p>Như vậy, ngoài nội thất, các khoản bắt buộc có thể lên tới khoảng <strong>375 triệu</strong> nếu bảng giá chưa gồm VAT. Nếu bảng giá ghi "đã gồm VAT", phần cộng thêm chủ yếu là 2% bảo trì và lệ phí trước bạ.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
+<h2>Cập nhật theo giá dự kiến 28/10/2026</h2>
+<p>Ngày 28/10/2026, chủ đầu tư đưa ra giá dự kiến studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ (phương án có vay, chưa VAT và 2% kinh phí bảo trì). Tính lại cho căn dãy mặt biển 2,85 tỷ:</p>
+<table>
+<thead><tr><th>Khoản</th><th>Số tiền ước tính</th></tr></thead>
+<tbody>
+<tr><td>Giá căn (dự kiến)</td><td>2,85 tỷ</td></tr>
+<tr><td>VAT 10% (mức tối đa)</td><td>Tới 285 triệu</td></tr>
+<tr><td>Kinh phí bảo trì 2%</td><td>57 triệu</td></tr>
+<tr><td>Lệ phí trước bạ 0,5%</td><td>Khoảng 14 triệu</td></tr>
+<tr><td>Cộng (chưa nội thất)</td><td>Khoảng 3,2 tỷ</td></tr>
+</tbody>
+</table>
+<p>Với căn dãy phía sau giá dự kiến 2,13 tỷ, cách tính tương tự cho tổng chi phí mua Sun Saphia Residence khoảng 2,4 tỷ trước nội thất. Đây là ví dụ minh hoạ, mức VAT thực tế thường thấp hơn mức tối đa vì được trừ tiền đất.</p>
+<h2>Chi phí sau khi nhận nhà</h2>
+<ul>
+<li><strong>Phí quản lý vận hành</strong> hằng tháng theo m² – chưa công bố mức dự kiến.</li>
+<li><strong>Điện, nước, internet</strong> và phí gửi xe ở tầng hầm.</li>
+<li><strong>Bảo trì nội thất</strong>: căn sát biển chịu hơi muối, phụ kiện kim loại, dàn nóng điều hòa cần vệ sinh, thay thế sớm hơn căn trong phố.</li>
+<li><strong>Phí vận hành cho thuê</strong> (nếu thuê đơn vị quản lý) thường tính theo phần trăm doanh thu.</li>
+</ul>
+<h2>Chi phí khi vay ngân hàng</h2>
+<p>Chính sách dự án có hỗ trợ lãi suất tới 24 tháng; sau đó người vay tự trả lãi theo lãi suất thả nổi. Ngoài tiền lãi, nên hỏi phí trả nợ trước hạn, phí định giá tài sản và bảo hiểm khoản vay (nếu có). Tính thử: <a href="/vay-mua-sun-saphia-residence-tra-gop-hang-thang/">vay mua Sun Saphia Residence trả góp</a>, <a href="/ho-tro-lai-suat-24-thang-sun-saphia/">hỗ trợ lãi suất 24 tháng</a>.</p>
+<p>Nhận định của Hoàng Hiệp: khi lập ngân sách, nên cộng thêm khoảng 12% vào giá căn (VAT tối đa, 2% bảo trì, trước bạ) rồi mới tính nội thất – cách này giúp không bị thiếu tiền ở đợt nhận nhà. Chi phí mua Sun Saphia Residence chính xác sẽ theo bảng giá và hợp đồng chính thức.</p>
 <h2>4 câu cần hỏi khi nhận bảng giá</h2>
 <ol>
 <li>Giá đã gồm VAT và 2% kinh phí bảo trì chưa?</li>
@@ -197,15 +257,18 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Chi phí mua Sun Saphia Residence ngoài giá bán',
-			'desc'      => 'Mua Sun Saphia Residence cần tính thêm VAT, kinh phí bảo trì 2%, lệ phí trước bạ 0,5%, phí quản lý, nội thất. Ví dụ studio giá tham khảo 3 tỷ.',
+			'seo_title' => 'Chi phí mua Sun Saphia Residence: VAT, 2% bảo trì, trước bạ',
+			'desc'      => 'Chi phí mua Sun Saphia Residence ngoài giá bán: VAT, kinh phí bảo trì 2%, lệ phí trước bạ 0,5%, phí quản lý, nội thất. Ví dụ studio 3 tỷ và 2,85 tỷ.',
 			'points'    => array(
+				'Chi phí mua Sun Saphia Residence ngoài giá căn: VAT, 2% bảo trì, lệ phí trước bạ 0,5%, phí quản lý, nội thất',
 				'Kinh phí bảo trì 2% giá bán trước thuế (Luật Nhà ở 2023)',
 				'Lệ phí trước bạ 0,5% (Nghị định 10/2022/NĐ-CP)',
 				'Studio 3 tỷ: các khoản bắt buộc tới khoảng 375 triệu nếu giá chưa gồm VAT',
 			),
 			'faq'       => array(
 				array( 'Mua căn hộ phải đóng phí bảo trì bao nhiêu?', 'Kinh phí bảo trì phần sở hữu chung nhà chung cư bằng 2% giá bán (trước thuế) theo Luật Nhà ở 2023.' ),
+				array( 'Chi phí mua Sun Saphia Residence studio 2,85 tỷ tổng cộng bao nhiêu?', 'Ví dụ minh hoạ: cộng VAT tối đa 10%, 2% bảo trì và lệ phí trước bạ 0,5%, tổng khoảng 3,2 tỷ, chưa gồm nội thất; số chính xác theo bảng giá chính thức.' ),
+				array( 'Ngoài giá bán, chi phí mua Sun Saphia Residence sau khi nhận nhà gồm gì?', 'Phí quản lý hằng tháng, điện nước, gửi xe, bảo trì nội thất do môi trường biển và phí vận hành nếu thuê đơn vị quản lý cho thuê.' ),
 				array( 'Lệ phí trước bạ căn hộ là bao nhiêu?', '0,5% trên giá tính lệ phí – giá cao hơn giữa giá hợp đồng và bảng giá do UBND địa phương ban hành (Nghị định 10/2022/NĐ-CP, đã sửa đổi).' ),
 			),
 		),

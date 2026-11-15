@@ -18,10 +18,12 @@ function hh_posts_sun_saphia_dot_8( $posts ) {
 
 	/* ---------------- 12/11 11:30 – Người nước ngoài, Việt kiều ---------------- */
 	$posts[] = array(
-		'slug'     => 'nguoi-nuoc-ngoai-viet-kieu-mua-sun-saphia-residence-duoc-khong',
+		'slug'     => 'nguoi-nuoc-ngoai-mua-can-ho-sun-saphia',
+		'old_slug' => array( 'nguoi-nuoc-ngoai-viet-kieu-mua-sun-saphia-residence-duoc-khong' ),
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá.
 		'title'    => 'Người nước ngoài, Việt kiều mua Sun Saphia Residence được không? Vì sao căn hộ thương mại dịch vụ khác chung cư',
 		'excerpt'  => 'Chủ đầu tư cho biết căn hộ thương mại dịch vụ Sun Saphia Residence không bán cho người nước ngoài và các trường hợp có yếu tố nước ngoài. Giải thích lý do, khác biệt với quy định 30% căn hộ nhà ở, và Việt kiều cần hỏi gì trước khi giữ chỗ.',
-		'keyword'  => 'người nước ngoài mua Sun Saphia Residence',
+		'keyword'  => 'người nước ngoài mua căn hộ',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'Việt kiều mua căn hộ Đà Nẵng', 'người nước ngoài mua căn hộ Đà Nẵng', 'căn hộ thương mại dịch vụ' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-12 11:30',
@@ -29,10 +31,10 @@ function hh_posts_sun_saphia_dot_8( $posts ) {
 		'tags'     => array( 'Sun Saphia Residence', 'Pháp lý căn hộ', 'Người nước ngoài mua nhà' ),
 		'image'    => 'plugin:img/tin-tuc/nguoi-nuoc-ngoai-mua-sun-saphia.jpg',
 		'content'  => <<<HTML
-<p>Câu hỏi <strong>người nước ngoài mua Sun Saphia Residence</strong> được không đến nhiều từ khách Hàn Quốc, khách châu Âu đang sống ở Đà Nẵng và từ các gia đình Việt kiều. Câu trả lời ngắn: theo buổi giải đáp của chủ đầu tư ngày 04/11/2026, {$saphia} là <strong>căn hộ thương mại dịch vụ</strong> và <strong>không bán cho người nước ngoài cũng như các trường hợp có yếu tố nước ngoài</strong>. Bài này giải thích vì sao, khác gì với chung cư nhà ở, và những trường hợp cần hỏi kỹ trước khi giữ chỗ.</p>
+<p>Câu hỏi <strong>người nước ngoài mua căn hộ</strong> Sun Saphia Residence được không đến nhiều từ khách Hàn Quốc, khách châu Âu đang sống ở Đà Nẵng và từ các gia đình Việt kiều. Câu trả lời ngắn: theo buổi giải đáp của chủ đầu tư ngày 04/11/2026, {$saphia} là <strong>căn hộ thương mại dịch vụ</strong> và <strong>không bán cho người nước ngoài cũng như các trường hợp có yếu tố nước ngoài</strong>. Bài này giải thích vì sao, khác gì với chung cư nhà ở, và những trường hợp cần hỏi kỹ trước khi giữ chỗ.</p>
 <!--hh-featured-->
-<h2>Vì sao người nước ngoài mua Sun Saphia Residence không được?</h2>
-<p>Ở Việt Nam, quyền mua căn hộ của người nước ngoài được quy định trong <strong>Luật Nhà ở 2023</strong>, và luật này áp dụng cho <strong>nhà ở</strong> – tức căn hộ chung cư xây trên đất ở. Sun Saphia Residence thì khác: dự án nằm trên <strong>đất thương mại dịch vụ thuê có thời hạn</strong>, căn hộ được cấp giấy chứng nhận thời hạn 50 năm kể từ 17/09/2026. Đây là loại hình lưu trú, không phải nhà ở, nên không thuộc diện người nước ngoài được mua theo Luật Nhà ở.</p>
+<h2>Người nước ngoài mua căn hộ Sun Saphia Residence: vì sao không được?</h2>
+<p>Ở Việt Nam, việc người nước ngoài mua căn hộ được quy định trong <strong>Luật Nhà ở 2023</strong>, và luật này áp dụng cho <strong>nhà ở</strong> – tức căn hộ chung cư xây trên đất ở. Sun Saphia Residence thì khác: dự án nằm trên <strong>đất thương mại dịch vụ thuê có thời hạn</strong>, căn hộ được cấp giấy chứng nhận thời hạn 50 năm kể từ 17/09/2026. Đây là loại hình lưu trú, không phải nhà ở, nên quy định cho người nước ngoài mua căn hộ theo Luật Nhà ở không áp dụng.</p>
 <p>Chủ đầu tư cũng nói rõ phạm vi rộng hơn: không chỉ cá nhân nước ngoài, mà <strong>các trường hợp có yếu tố nước ngoài</strong> cũng không thuộc đối tượng bán. Vì vậy người mua cần xác nhận tình trạng của mình trước, không nên giữ chỗ rồi mới hỏi.</p>
 <table>
 <thead><tr><th></th><th>Căn hộ nhà ở (chung cư)</th><th>Căn hộ thương mại dịch vụ (Sun Saphia)</th></tr></thead>
@@ -44,8 +46,8 @@ function hh_posts_sun_saphia_dot_8( $posts ) {
 <tr><td>Cư trú</td><td>Đăng ký thường trú, tạm trú</td><td>Vẫn đăng ký tạm trú được (theo chủ đầu tư)</td></tr>
 </tbody>
 </table>
-<p>Để dễ hình dung: nếu Sun Saphia Residence là chung cư nhà ở, mức trần 30% của tòa 782 căn sẽ vào khoảng 234 căn cho người nước ngoài (Hoàng Hiệp tính theo Điều 19 Luật Nhà ở 2023). Nhưng vì là căn hộ thương mại dịch vụ, mức này <strong>không áp dụng</strong> – số căn bán cho người nước ngoài là 0.</p>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-toa-thap-30-tang.jpg|Sun Saphia Residence – tòa căn hộ thương mại dịch vụ 30 tầng của Sun Group trên đường Trường Sa (phối cảnh chủ đầu tư)-->
+<p>Để dễ hình dung hạn mức người nước ngoài mua căn hộ: nếu Sun Saphia Residence là chung cư nhà ở, mức trần 30% của tòa 782 căn sẽ vào khoảng 234 căn cho người nước ngoài (Hoàng Hiệp tính theo Điều 19 Luật Nhà ở 2023). Nhưng vì là căn hộ thương mại dịch vụ, mức này <strong>không áp dụng</strong> – số căn bán cho người nước ngoài là 0.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-toa-thap-30-tang.jpg|Người nước ngoài mua căn hộ Sun Saphia Residence không được – tòa căn hộ thương mại dịch vụ 30 tầng trên đường Trường Sa (phối cảnh chủ đầu tư)-->
 <h2>Việt kiều mua Sun Saphia Residence: cần hỏi gì?</h2>
 <p>"Việt kiều" là cách gọi chung cho nhiều tình trạng pháp lý khác nhau, và mỗi tình trạng được nhìn khác nhau:</p>
 <ul>
@@ -53,11 +55,16 @@ function hh_posts_sun_saphia_dot_8( $posts ) {
 <li><strong>Người gốc Việt không còn quốc tịch Việt Nam</strong>: về pháp lý được xem là người nước ngoài khi mua căn hộ thương mại dịch vụ, nên theo thông tin hiện tại không thuộc đối tượng bán.</li>
 <li><strong>Vợ hoặc chồng là người nước ngoài</strong>: căn hộ mua trong thời kỳ hôn nhân thường là tài sản chung, nên dễ rơi vào "có yếu tố nước ngoài". Cần hỏi chủ đầu tư và luật sư trước, không tự suy luận.</li>
 </ul>
-<h2>Không nên "nhờ người đứng tên"</h2>
-<p>Một số người tính nhờ người thân trong nước đứng tên hộ. Cách này có rủi ro lớn: về pháp luật, người đứng tên là chủ sở hữu, có quyền bán, thế chấp; nếu người đó gặp tranh chấp, nợ nần, ly hôn hoặc qua đời, căn hộ có thể bị liên quan. Giấy tờ thỏa thuận "đứng tên hộ" rất khó bảo vệ người bỏ tiền. Hoàng Hiệp không khuyến khích cách làm này. Chi tiết các cách đứng tên hợp lệ xem bài <a href="/dung-ten-mua-sun-saphia-residence-vo-chong-doanh-nghiep/">đứng tên mua Sun Saphia Residence</a>.</p>
-<h2>Người nước ngoài vẫn có thể ở Sun Saphia Residence</h2>
-<p>Không mua được không có nghĩa là không ở được. Người nước ngoài có thể <strong>thuê</strong> căn hộ Sun Saphia Residence ngắn ngày hoặc dài hạn; chủ căn hộ phải khai báo lưu trú cho khách theo Luật Cư trú. Đây cũng là nhóm khách thuê quan trọng của dự án – khách Hàn Quốc chiếm hơn 20% khách quốc tế đến Đà Nẵng 6 tháng đầu 2026 (xem bài <a href="/khach-quoc-te-da-nang-2026-han-quoc-trung-quoc-thue-can-ho-sun-saphia/">khách quốc tế thuê căn hộ</a>). Người nước ngoài muốn sở hữu thì nên tìm dự án <strong>chung cư nhà ở thương mại</strong> còn trong hạn mức 30%.</p>
+<h2>Người nước ngoài mua căn hộ qua "nhờ người đứng tên": không nên</h2>
+<p>Một số người tính nhờ người thân trong nước đứng tên mua căn hộ hộ mình. Cách này có rủi ro lớn: về pháp luật, người đứng tên là chủ sở hữu, có quyền bán, thế chấp; nếu người đó gặp tranh chấp, nợ nần, ly hôn hoặc qua đời, căn hộ có thể bị liên quan. Giấy tờ thỏa thuận "đứng tên hộ" rất khó bảo vệ người bỏ tiền. Hoàng Hiệp không khuyến khích cách làm này. Chi tiết các cách đứng tên hợp lệ xem bài <a href="/dung-ten-mua-sun-saphia-residence-vo-chong-doanh-nghiep/">đứng tên mua Sun Saphia Residence</a>.</p>
+<h2>Không được người nước ngoài mua căn hộ, nhưng vẫn có thể ở Sun Saphia Residence</h2>
+<p>Không mua được không có nghĩa là không ở được. Người nước ngoài có thể <strong>thuê</strong> căn hộ Sun Saphia Residence ngắn ngày hoặc dài hạn; chủ căn hộ phải khai báo lưu trú cho khách theo Luật Cư trú. Đây cũng là nhóm khách thuê quan trọng của dự án – khách Hàn Quốc chiếm hơn 20% khách quốc tế đến Đà Nẵng 6 tháng đầu 2026 (xem bài <a href="/khach-quoc-te-thue-can-ho-da-nang-2026/">khách quốc tế thuê căn hộ</a>).</p>
+<p>Người nước ngoài mua căn hộ để sở hữu thì nên tìm dự án <strong>chung cư nhà ở thương mại</strong> còn trong hạn mức 30% – Đà Nẵng định kỳ công bố danh sách dự án được bán cho người nước ngoài (ví dụ tin của <a href="https://baodautu.vn/da-nang-cong-bo-hai-du-an-bat-dong-san-tiep-theo-duoc-ban-cho-nguoi-nuoc-ngoai-d572248.html">Báo Đầu tư</a>).</p>
+<h2>Người nước ngoài mua căn hộ ở Đà Nẵng: nên tìm loại dự án nào?</h2>
+<p>Nếu anh chị là người nước ngoài, hoặc tư vấn cho bạn bè nước ngoài, có ba điều kiện cần kiểm tra cùng lúc: dự án là <strong>nhà ở thương mại</strong> (không phải căn hộ thương mại dịch vụ, condotel); dự án <strong>không nằm trong khu vực bảo đảm quốc phòng, an ninh</strong>; và tòa nhà <strong>còn trong hạn mức 30%</strong> số căn cho người nước ngoài. Thời hạn sở hữu của người nước ngoài mua căn hộ nhà ở tối đa 50 năm kể từ ngày cấp giấy chứng nhận, có thể gia hạn theo quy định.</p>
+<p>Như vậy, ngay cả khi người nước ngoài mua căn hộ ở dự án nhà ở, thời hạn cũng có giới hạn – điểm khác là họ được mua. Với Sun Saphia Residence, người nước ngoài phù hợp vai trò khách thuê hơn là chủ sở hữu.</p>
 <h2>Checklist trước khi giữ chỗ nếu anh chị có yếu tố nước ngoài</h2>
+<p>Quy định về người nước ngoài mua căn hộ không chỉ liên quan tới quốc tịch người ký, mà cả hoàn cảnh gia đình. Trước khi giữ chỗ:</p>
 <ol>
 <li>Xác định rõ quốc tịch của mình và của vợ/chồng; chuẩn bị hộ chiếu, căn cước Việt Nam nếu có.</li>
 <li>Gửi câu hỏi cho chủ đầu tư (qua người tư vấn) và đề nghị trả lời bằng văn bản hoặc email.</li>
@@ -66,35 +73,41 @@ function hh_posts_sun_saphia_dot_8( $posts ) {
 <li>Không chuyển tiền qua tài khoản cá nhân; chỉ chuyển vào tài khoản chủ đầu tư ghi trên văn bản.</li>
 </ol>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Sun Saphia Residence được thiết kế cho người Việt mua để nghỉ dưỡng, cho thuê. Điểm khác biệt về loại hình (thương mại dịch vụ, 50 năm, không bảo lãnh ngân hàng) cần được hiểu đúng ngay từ đầu, kể cả với người mua trong nước. Pháp lý chung của dự án xem bài <a href="/phap-ly-sun-saphia-residence-so-huu-bao-lau/">pháp lý Sun Saphia Residence</a> và bài {$review}.</p>
+<p>Sun Saphia Residence được thiết kế cho người Việt mua để nghỉ dưỡng, cho thuê; câu chuyện người nước ngoài mua căn hộ ở đây dừng ở vai trò khách thuê. Điểm khác biệt về loại hình (thương mại dịch vụ, 50 năm, không bảo lãnh ngân hàng) cần được hiểu đúng ngay từ đầu, kể cả với người mua trong nước. Pháp lý chung của dự án xem bài <a href="/phap-ly-sun-saphia-residence-so-huu-bao-lau/">pháp lý Sun Saphia Residence</a> và bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: buổi giải đáp của chủ đầu tư 04/11/2026 (loại hình, thời hạn, đối tượng bán); Luật Nhà ở 2023 (Điều 17 – 20 về người nước ngoài sở hữu nhà ở), Luật Đất đai 2024. Bài mang tính tham khảo, không thay cho tư vấn pháp lý cho từng hồ sơ.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Người nước ngoài mua Sun Saphia Residence được không?',
-			'desc'      => 'Người nước ngoài mua Sun Saphia Residence được không? Chủ đầu tư không bán căn hộ thương mại dịch vụ cho người có yếu tố nước ngoài. Việt kiều cần hỏi gì.',
+			'seo_title' => 'Người nước ngoài mua căn hộ Sun Saphia 2026 được không?',
+			'desc'      => 'Người nước ngoài mua căn hộ Sun Saphia Residence được không? Chủ đầu tư không bán căn hộ thương mại dịch vụ cho người có yếu tố nước ngoài. Việt kiều hỏi gì?',
 			'points'    => array(
+				'Người nước ngoài mua căn hộ chỉ được với chung cư nhà ở thương mại, tối đa 30% mỗi tòa',
 				'Sun Saphia Residence là căn hộ thương mại dịch vụ, không phải nhà ở',
 				'Chủ đầu tư không bán cho người nước ngoài và trường hợp có yếu tố nước ngoài',
 				'Mức 30% căn hộ cho người nước ngoài chỉ áp dụng với chung cư nhà ở',
 				'Việt kiều còn quốc tịch Việt Nam nên hỏi chủ đầu tư bằng văn bản trước khi giữ chỗ',
 			),
 			'faq'       => array(
-				array( 'Người nước ngoài có được mua Sun Saphia Residence không?', 'Không. Theo chủ đầu tư (04/11/2026), căn hộ thương mại dịch vụ của dự án không bán cho người nước ngoài và các trường hợp có yếu tố nước ngoài.' ),
-				array( 'Việt kiều có mua được Sun Saphia Residence không?', 'Người còn quốc tịch Việt Nam nên hỏi chủ đầu tư bằng văn bản cho hồ sơ cụ thể; người gốc Việt không còn quốc tịch Việt Nam không thuộc đối tượng bán theo thông tin hiện tại.' ),
+				array( 'Người nước ngoài mua căn hộ Sun Saphia Residence được không?', 'Không. Theo chủ đầu tư (04/11/2026), căn hộ thương mại dịch vụ của dự án không bán cho người nước ngoài và các trường hợp có yếu tố nước ngoài.' ),
+				array( 'Việt kiều có mua được Sun Saphia Residence không?', 'Việt kiều không phải lúc nào cũng được xem là người nước ngoài mua căn hộ. Người còn quốc tịch Việt Nam nên hỏi chủ đầu tư bằng văn bản cho hồ sơ cụ thể; người gốc Việt không còn quốc tịch Việt Nam không thuộc đối tượng bán theo thông tin hiện tại.' ),
 				array( 'Người nước ngoài có thuê được căn hộ Sun Saphia Residence không?', 'Được. Chủ căn hộ cho thuê ngắn ngày hoặc dài hạn và phải khai báo lưu trú cho khách theo Luật Cư trú.' ),
+				array( 'Người nước ngoài mua căn hộ ở Đà Nẵng cần điều kiện gì?', 'Dự án phải là nhà ở thương mại, ngoài khu vực bảo đảm quốc phòng, an ninh và tòa nhà còn trong hạn mức 30% số căn; thời hạn sở hữu tối đa 50 năm, có thể gia hạn.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://baodautu.vn/da-nang-cong-bo-hai-du-an-bat-dong-san-tiep-theo-duoc-ban-cho-nguoi-nuoc-ngoai-d572248.html',
+		),
 	);
 
 	/* ---------------- 12/11 16:30 – Đứng tên hợp đồng ---------------- */
 	$posts[] = array(
-		'slug'     => 'dung-ten-mua-sun-saphia-residence-vo-chong-doanh-nghiep',
+		'slug'     => 'dung-ten-mua-can-ho-sun-saphia',
+		'old_slug' => array( 'dung-ten-mua-sun-saphia-residence-vo-chong-doanh-nghiep' ),
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá.
 		'title'    => 'Đứng tên mua Sun Saphia Residence: một người, cả hai vợ chồng hay doanh nghiệp – chọn thế nào cho đúng?',
 		'excerpt'  => 'Mua Sun Saphia Residence nên để một người, cả hai vợ chồng hay doanh nghiệp đứng tên? So sánh hồ sơ, vay ngân hàng, thuế cho thuê, chuyển nhượng hợp đồng và những lỗi đứng tên hay gặp.',
-		'keyword'  => 'đứng tên mua Sun Saphia Residence',
+		'keyword'  => 'đứng tên mua căn hộ',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'đứng tên hợp đồng mua căn hộ', 'vợ chồng đứng tên sổ hồng', 'doanh nghiệp mua căn hộ' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-11-12 16:30',
@@ -102,11 +115,11 @@ HTML
 		'tags'     => array( 'Sun Saphia Residence', 'Pháp lý căn hộ', 'Kinh nghiệm mua bán' ),
 		'image'    => 'plugin:img/tin-tuc/dung-ten-mua-sun-saphia.jpg',
 		'content'  => <<<HTML
-<p>Trước khi ký giấy tờ đầu tiên, nhiều anh chị hỏi nên <strong>đứng tên mua Sun Saphia Residence</strong> thế nào: một mình, cả hai vợ chồng, hay để công ty đứng tên. Người đứng tên ảnh hưởng tới hồ sơ vay, cách khai thuế khi cho thuê, thủ tục bán lại và cả việc phân chia tài sản sau này. Bài này tổng hợp các lựa chọn phổ biến với {$saphia} – căn hộ thương mại dịch vụ, thời hạn 50 năm từ 17/09/2026.</p>
+<p><strong>Đứng tên mua căn hộ</strong> thế nào là câu nhiều anh chị hỏi trước khi ký giấy tờ đầu tiên ở Sun Saphia Residence: một mình, cả hai vợ chồng, hay để công ty đứng tên. Người đứng tên ảnh hưởng tới hồ sơ vay, cách khai thuế khi cho thuê, thủ tục bán lại và cả việc phân chia tài sản sau này. Bài này tổng hợp các lựa chọn phổ biến với {$saphia} – căn hộ thương mại dịch vụ, thời hạn 50 năm từ 17/09/2026.</p>
 <!--hh-featured-->
-<h2>Quy trình giấy tờ: tên ghi ở đâu?</h2>
+<h2>Đứng tên mua căn hộ Sun Saphia: tên ghi ở đâu?</h2>
 <p>Theo chủ đầu tư, Sun Saphia Residence ký <strong>hợp đồng thỏa thuận nguyên tắc trước, hợp đồng mua bán sau</strong>. Thứ tự này cho khách thời gian chuẩn bị hồ sơ vay, và có thể <strong>chuyển nhượng, đổi tên trước khi ký hợp đồng mua bán</strong>. Tên trên hợp đồng mua bán sẽ là tên trên giấy chứng nhận sau này. Vì vậy giai đoạn giữ chỗ – thỏa thuận nguyên tắc là lúc nên quyết định xong người đứng tên.</p>
-<h2>4 cách đứng tên mua Sun Saphia Residence</h2>
+<h2>4 cách đứng tên mua căn hộ Sun Saphia Residence</h2>
 <table>
 <thead><tr><th>Cách đứng tên</th><th>Phù hợp</th><th>Lưu ý</th></tr></thead>
 <tbody>
@@ -116,54 +129,58 @@ HTML
 <tr><td>Doanh nghiệp</td><td>Công ty kinh doanh lưu trú, cần hạch toán chi phí</td><td>Thủ tục, thuế phức tạp hơn; cần kế toán tư vấn</td></tr>
 </tbody>
 </table>
-<h2>Vợ chồng: đứng tên một người hay hai người?</h2>
+<h2>Vợ chồng đứng tên mua căn hộ: một người hay hai người?</h2>
 <p>Đây là câu hỏi hay gặp nhất. Một số điểm cần biết:</p>
 <ul>
 <li><strong>Tài sản chung không đổi vì chỉ một người đứng tên.</strong> Mua bằng tiền chung trong thời kỳ hôn nhân thì vẫn là tài sản chung, dù giấy tờ ghi một tên. Khi bán, thế chấp, chuyển nhượng hợp đồng, ngân hàng và công chứng thường yêu cầu chữ ký hoặc văn bản đồng ý của người còn lại.</li>
 <li><strong>Muốn là tài sản riêng</strong> (ví dụ tiền được tặng cho riêng, tiền có trước hôn nhân), nên có văn bản thỏa thuận tài sản riêng được công chứng và giữ chứng từ nguồn tiền.</li>
 <li><strong>Một người ở xa</strong> (làm việc ở Hà Nội, TP.HCM hay nước ngoài) có thể <strong>ủy quyền công chứng</strong> cho người kia ký – không cần đổi người đứng tên. Xem thêm <a href="/mua-can-ho-da-nang-tu-ha-noi-tp-hcm-kinh-nghiem/">mua căn hộ Đà Nẵng từ xa</a>.</li>
 </ul>
-<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Layout studio 30 m² Sun Saphia Residence – loại căn nhiều người mua đứng tên cá nhân để cho thuê (bản vẽ chủ đầu tư)-->
-<h2>Đứng tên và vay ngân hàng</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-layout-studio-30m2.jpg|Đứng tên mua căn hộ studio 30 m² Sun Saphia Residence – loại căn nhiều người mua đứng tên cá nhân để cho thuê (bản vẽ chủ đầu tư)-->
+<h2>Đứng tên mua căn hộ và vay ngân hàng</h2>
 <p>Theo tài liệu dự án, Vietcombank, BIDV và NCB hỗ trợ vay mua Sun Saphia Residence. Ngân hàng xét thu nhập của <strong>người vay</strong>, và với người đã kết hôn thường yêu cầu cả hai vợ chồng cùng ký hợp đồng vay, thế chấp. Nếu thu nhập chính nằm ở người không đứng tên, nên hỏi ngân hàng trước cách ghi tên để hồ sơ vay thuận lợi. Bài toán trả góp xem <a href="/vay-mua-sun-saphia-residence-tra-gop-hang-thang/">vay mua Sun Saphia Residence</a>.</p>
-<h2>Doanh nghiệp đứng tên: khi nào hợp lý?</h2>
+<h2>Doanh nghiệp đứng tên mua căn hộ: khi nào hợp lý?</h2>
 <p>Doanh nghiệp đứng tên phù hợp khi công ty <strong>thực sự kinh doanh lưu trú</strong> – nhiều căn, có đơn vị vận hành, có nhu cầu hạch toán. Khi đó công ty có thể khấu hao tài sản, tính chi phí nội thất, phí quản lý vào chi phí kinh doanh, và thuế GTGT đầu vào có thể được khấu trừ nếu hóa đơn, mục đích sử dụng hợp lệ – điều này cần kế toán xác nhận theo từng trường hợp. Nhược điểm: phải có sổ sách, khai thuế thường xuyên; khi bán, lợi nhuận tính vào thu nhập doanh nghiệp; muốn chuyển về tên cá nhân lại là một giao dịch mua bán mới.</p>
 <p>Với người chỉ mua 1 – 2 căn studio để cho thuê, đứng tên cá nhân thường đơn giản hơn. Cá nhân cho thuê có doanh thu trên ngưỡng phải nộp thuế thì khai thuế cho thuê tài sản – xem <a href="/cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue/">cho thuê ngắn ngày: pháp lý và thuế</a>.</p>
 <h2>Đổi người đứng tên sau khi đã ký</h2>
 <ul>
 <li><strong>Trước hợp đồng mua bán:</strong> chủ đầu tư cho biết có thể chuyển nhượng, đổi tên ở giai đoạn thỏa thuận nguyên tắc – hỏi rõ phí và thủ tục khi giữ chỗ.</li>
-<li><strong>Sau hợp đồng mua bán, trước bàn giao:</strong> làm thủ tục chuyển nhượng hợp đồng theo Luật Kinh doanh bất động sản 2023, có chủ đầu tư xác nhận; thuế thu nhập cá nhân 2% giá chuyển nhượng. Chi tiết xem <a href="/chuyen-nhuong-hop-dong-sun-saphia-residence-truoc-ban-giao/">chuyển nhượng hợp đồng trước bàn giao</a>.</li>
+<li><strong>Sau hợp đồng mua bán, trước bàn giao:</strong> làm thủ tục chuyển nhượng hợp đồng theo Luật Kinh doanh bất động sản 2023, có chủ đầu tư xác nhận; thuế thu nhập cá nhân 2% giá chuyển nhượng (xem <a href="https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx">Luật Kinh doanh bất động sản 2023</a>). Chi tiết xem <a href="/chuyen-nhuong-hop-dong-sun-saphia-residence-truoc-ban-giao/">chuyển nhượng hợp đồng trước bàn giao</a>.</li>
 <li><strong>Giữa vợ và chồng, cha mẹ và con:</strong> một số trường hợp tặng cho giữa người thân được miễn thuế thu nhập cá nhân khi đã có giấy chứng nhận – cần kiểm tra quy định tại thời điểm làm.</li>
 </ul>
-<h2>Lỗi đứng tên hay gặp</h2>
+<h2>Lỗi đứng tên mua căn hộ hay gặp</h2>
 <ol>
-<li><strong>Nhờ người khác đứng tên hộ</strong> – rủi ro cao, người đứng tên mới là chủ sở hữu trên giấy tờ.</li>
+<li><strong>Nhờ người khác đứng tên mua căn hộ hộ</strong> – rủi ro cao, người đứng tên mới là chủ sở hữu trên giấy tờ.</li>
 <li><strong>Ghi tên con chưa đủ 18 tuổi</strong> mà không tính tới việc bán, thế chấp sau này phải qua người giám hộ.</li>
 <li><strong>Thông tin trên căn cước, giấy đăng ký kết hôn không khớp</strong> (đổi địa chỉ, cấp lại căn cước) làm chậm công chứng, vay vốn.</li>
 <li><strong>Chuyển tiền từ tài khoản người khác</strong> mà không có giải trình – khó chứng minh nguồn tiền khi cần.</li>
 </ol>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Với phần lớn khách mua studio hoặc 1PN+ để cho thuê, đứng tên cá nhân hoặc cả hai vợ chồng là đơn giản nhất. Doanh nghiệp chỉ nên đứng tên khi đã có hoạt động kinh doanh lưu trú thật. Dù chọn cách nào, nên chốt người đứng tên ở giai đoạn thỏa thuận nguyên tắc để tránh phí đổi tên. Xem thêm bài {$review}.</p>
+<p>Với phần lớn khách mua studio hoặc 1PN+ để cho thuê, đứng tên mua căn hộ theo cá nhân hoặc cả hai vợ chồng là đơn giản nhất. Doanh nghiệp chỉ nên đứng tên khi đã có hoạt động kinh doanh lưu trú thật. Dù chọn cách đứng tên mua căn hộ nào, nên chốt người đứng tên ở giai đoạn thỏa thuận nguyên tắc để tránh phí đổi tên. Xem thêm bài {$review}.</p>
 {$cta}
 <p class="src">Nguồn: thông tin ký kết, ngân hàng hỗ trợ theo chủ đầu tư (10 – 11/2026); Luật Hôn nhân và gia đình 2014, Luật Kinh doanh bất động sản 2023. Bài tham khảo, không thay cho tư vấn pháp lý, thuế cho từng hồ sơ.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Đứng tên mua Sun Saphia Residence: vợ chồng hay công ty?',
-			'desc'      => 'Đứng tên mua Sun Saphia Residence: một người, cả hai vợ chồng hay doanh nghiệp? So sánh hồ sơ vay, thuế cho thuê, đổi tên và lỗi hay gặp.',
+			'seo_title' => 'Đứng tên mua căn hộ Sun Saphia: 4 cách, vợ chồng hay công ty',
+			'desc'      => 'Đứng tên mua căn hộ Sun Saphia Residence: một người, cả hai vợ chồng hay doanh nghiệp? So sánh hồ sơ vay, thuế cho thuê, đổi tên và lỗi hay gặp.',
 			'points'    => array(
+				'Đứng tên mua căn hộ ảnh hưởng hồ sơ vay, thuế cho thuê và bán lại',
 				'Ký thỏa thuận nguyên tắc trước, hợp đồng mua bán sau – nên chốt người đứng tên sớm',
 				'Mua bằng tiền chung thì vẫn là tài sản chung dù chỉ một người đứng tên',
 				'Doanh nghiệp đứng tên hợp lý khi thật sự kinh doanh lưu trú',
 				'Không nên nhờ người khác đứng tên hộ',
 			),
 			'faq'       => array(
-				array( 'Vợ chồng mua Sun Saphia Residence có phải đứng tên cả hai?', 'Theo Luật Hôn nhân và gia đình 2014, giấy chứng nhận tài sản chung ghi tên cả hai vợ chồng, trừ khi có thỏa thuận khác. Một người đứng tên thì bán, thế chấp vẫn cần người kia đồng ý.' ),
+				array( 'Vợ chồng đứng tên mua căn hộ có phải ghi cả hai?', 'Theo Luật Hôn nhân và gia đình 2014, giấy chứng nhận tài sản chung ghi tên cả hai vợ chồng, trừ khi có thỏa thuận khác. Một người đứng tên thì bán, thế chấp vẫn cần người kia đồng ý.' ),
 				array( 'Có đổi người đứng tên Sun Saphia Residence được không?', 'Theo chủ đầu tư, có thể chuyển nhượng, đổi tên ở giai đoạn thỏa thuận nguyên tắc; sau hợp đồng mua bán thì làm thủ tục chuyển nhượng hợp đồng, thuế thu nhập cá nhân 2%.' ),
 				array( 'Doanh nghiệp có mua được Sun Saphia Residence không?', 'Doanh nghiệp trong nước có thể mua để kinh doanh lưu trú; nên hỏi kế toán về khấu hao, thuế GTGT và thủ tục trước khi ký.' ),
+				array( 'Có nên nhờ người khác đứng tên mua căn hộ hộ mình?', 'Không nên. Người đứng tên mua căn hộ là chủ sở hữu trên giấy tờ, có quyền bán, thế chấp; thỏa thuận đứng tên hộ rất khó bảo vệ người bỏ tiền.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx',
+		),
 	);
 
 	/* ---------------- 13/11 11:30 – Phí quản lý ---------------- */

@@ -55,7 +55,7 @@ function hh_posts_penthouse_spana_cora_s_light( $posts ) {
 		'slug'          => 'penthouse-spana-cora-s-light-sun-neo-city',
 		'title'         => 'Penthouse Spana, Cora, S-Light: tầng đỉnh giới hạn của Sun Group tại Hòa Xuân',
 		'excerpt'       => 'Sun Property giới thiệu dòng penthouse tầng trên cùng của ba dự án Spana Tower (tầng 22), Cora Tower (tầng 25) và S-Light Tower (tầng 22) tại Sun NeO City, Đà Nẵng – số căn ít, tầm nhìn sông thoáng nhất, có gợi ý thiết kế duplex tầng lửng.',
-		'keyword'       => 'penthouse Spana Cora S-Light',
+		'keyword'       => 'penthouse Sun NeO City',
 		'project'       => 'spana-tower',
 		'category'      => 'Dự án',
 		'date'          => '2026-11-04 17:00:00',
@@ -63,10 +63,11 @@ function hh_posts_penthouse_spana_cora_s_light( $posts ) {
 		'image_alt'     => 'Penthouse tầng đỉnh Spana Tower, Cora Tower, S-Light Tower – Sun Group Đà Nẵng',
 		'image_caption' => 'Penthouse ba dự án Spana, Cora, S-Light (Hoàng Hiệp tổng hợp).',
 		'content'       => <<<'HTML'
-<p>Sun Property vừa gửi bộ layout <strong>penthouse</strong> của ba dự án căn hộ tại khu đô thị Sun NeO City (Hòa Xuân, Đà Nẵng): <a href="/du-an/spana-tower/">Spana Tower</a>, <a href="/du-an/cora-tower/">Cora Tower</a> và <a href="/du-an/s-light-tower/">S-Light Tower</a>. Điểm chung: penthouse nằm ở <strong>tầng trên cùng</strong> mỗi tòa, số căn rất ít, tầm nhìn thoáng nhất dự án – dòng sản phẩm thuộc đợt mở bán penthouse và shophouse khối đế giới hạn Sun Property công bố từ tháng 8/2026.</p>
+<p><strong>Penthouse Sun NeO City</strong> là dòng căn tầng trên cùng của ba dự án căn hộ Sun Group tại Hòa Xuân, Đà Nẵng: <a href="/du-an/spana-tower/">Spana Tower</a>, <a href="/du-an/cora-tower/">Cora Tower</a> và <a href="/du-an/s-light-tower/">S-Light Tower</a>. Sun Property vừa gửi bộ layout penthouse của cả ba dự án. Điểm chung: penthouse nằm ở <strong>tầng trên cùng</strong> mỗi tòa, số căn rất ít, tầm nhìn thoáng nhất dự án – dòng sản phẩm thuộc đợt mở bán penthouse và shophouse khối đế giới hạn Sun Property công bố từ tháng 8/2026.</p>
 <!--hh-featured-->
 
-<h2>Penthouse ba dự án khác nhau thế nào?</h2>
+<h2>Penthouse Sun NeO City: ba dự án khác nhau thế nào?</h2>
+<!--hh-img:img/spana-tower/spana-tower-phoi-canh-tren-cao-ven-song.jpg|Phối cảnh Spana Tower ven sông Cẩm Lệ – một trong ba dự án có penthouse Sun NeO City-->
 <table>
 <thead><tr><th>Dự án</th><th>Tầng penthouse</th><th>Loại căn</th><th>Điểm nhấn</th></tr></thead>
 <tbody>
@@ -76,24 +77,37 @@ function hh_posts_penthouse_spana_cora_s_light( $posts ) {
 </tbody>
 </table>
 
-<h2>Gợi ý duplex: thêm tầng lửng trong căn</h2>
+<h2>Gợi ý duplex cho penthouse Sun NeO City: thêm tầng lửng trong căn</h2>
 <p>Với Spana và Cora, chủ đầu tư đưa kèm bản <strong>gợi ý thiết kế duplex</strong>: mỗi căn penthouse có mặt bằng tầng chính và mặt bằng tầng lửng riêng. Làm thêm tầng lửng giúp tăng diện tích sử dụng – tách khu ngủ với khu sinh hoạt, hoặc thêm phòng làm việc, phòng cho thuê. Diện tích tầng lửng, chiều cao thông thủy và điều kiện thi công từng căn cần xem bản vẽ và quy định của chủ đầu tư trước khi chọn căn.</p>
 
-<h2>Penthouse hợp với ai?</h2>
+<h2>Penthouse Sun NeO City hợp với ai?</h2>
 <ul>
 <li><strong>Người mua để ở lâu dài</strong> muốn tầm nhìn sông thoáng, ít bị che chắn, ít căn chung tầng.</li>
 <li><strong>Người đầu tư dài hạn</strong>: số lượng căn tầng đỉnh có hạn, khó tạo nguồn cung mới cùng vị trí.</li>
 <li><strong>Gia đình cần thêm không gian</strong> nhờ phương án duplex tầng lửng.</li>
 </ul>
-<p>Lưu ý: penthouse thường có giá cao hơn căn tầng điển hình cùng loại; nên so tổng giá, diện tích sử dụng thực tế (gồm tầng lửng nếu làm) và tiến độ thanh toán trước khi quyết định. Xem thêm <a href="/du-an/spana-tower/">tiến độ Spana Tower tháng 11/2026</a>.</p>
+<p>Lưu ý: penthouse Sun NeO City thường có giá cao hơn căn tầng điển hình cùng loại; nên so tổng giá, diện tích sử dụng thực tế (gồm tầng lửng nếu làm) và tiến độ thanh toán trước khi quyết định. Xem thêm <a href="/du-an/spana-tower/">tiến độ Spana Tower tháng 11/2026</a>.</p>
+
+<h2>Thanh toán khi mua penthouse Sun NeO City</h2>
+<p>Theo chính sách bán hàng tháng 11/2026, penthouse Cora Tower đặt cọc 300 triệu; penthouse S-Light Tower áp dụng CSBH 01/SL (từ 17/8/2026), cũng đặt cọc 300 triệu. Cả ba dự án đều có phương án vay tối đa 70% với hỗ trợ lãi suất 24 tháng và Sun Early Key – thanh toán đủ 70% là nhận nhà sử dụng. Mức chiết khấu thanh toán sớm khác nhau theo từng dự án và thay đổi theo tháng.</p>
+<p>Chi tiết từng dự án: <a href="/chinh-sach-ban-hang-spana-tower-thang-11-2026/">chính sách Spana Tower</a>, <a href="/chinh-sach-ban-hang-cora-tower-thang-11-2026/">chính sách Cora Tower</a>, <a href="/chinh-sach-ban-hang-s-light-tower-thang-11-2026/">chính sách S-Light Tower</a> tháng 11/2026. Báo <a href="https://dantri.com.vn/bat-dong-san/sun-property-ra-mat-dong-penthouse-shophouse-khoi-de-gioi-han-tai-nam-trung-tam-da-nang-20260811094649419.htm">Dân trí</a> đã đưa tin Sun Property ra mắt dòng penthouse, shophouse khối đế giới hạn từ tháng 8/2026.</p>
+
+<h2>Câu hỏi nên hỏi khi chọn penthouse Sun NeO City</h2>
+<ol>
+<li>Diện tích thông thủy tầng chính là bao nhiêu, nếu làm tầng lửng thì tăng thêm bao nhiêu m² sử dụng?</li>
+<li>Chiều cao thông thủy có đủ để làm duplex, ai thi công tầng lửng và chi phí tính thế nào?</li>
+<li>Căn nhìn về hướng nào: sông Cẩm Lệ, cầu Hòa Xuân hay ngã ba sông Hàn – Cẩm Lệ – Đô Tỏa?</li>
+<li>Phí quản lý, bảo trì của căn tầng đỉnh có khác căn tầng điển hình không?</li>
+</ol>
+<p>Vì số căn penthouse Sun NeO City rất ít, mỗi căn có vị trí và layout riêng; nên xem bản vẽ từng căn thay vì so sánh theo loại phòng ngủ.</p>
 <p>Nhận layout từng căn penthouse Spana, Cora, S-Light, giá và chính sách mới nhất: nhắn Zalo Hoàng Hiệp 0904 567 009.</p>
 <p class="src">Nguồn: bộ layout penthouse của chủ đầu tư (11/2026); thông báo mở bán penthouse – shophouse khối đế giới hạn của Sun Property (8/2026). Thông tin tham khảo, thông số chính thức theo văn bản ký kết.</p>
 HTML,
 		'seo'           => array(
-			'seo_title' => 'Penthouse Spana, Cora, S-Light – tầng đỉnh Sun NeO City',
-			'desc'      => 'Penthouse tầng đỉnh Spana Tower (tầng 22), Cora Tower (tầng 25), S-Light Tower (tầng 22) của Sun Group tại Hòa Xuân, Đà Nẵng: loại căn, gợi ý duplex tầng lửng.',
+			'seo_title' => 'Penthouse Sun NeO City 2026: Spana, Cora, S-Light',
+			'desc'      => 'Penthouse Sun NeO City: tầng đỉnh Spana Tower (tầng 22), Cora Tower (tầng 25), S-Light Tower (tầng 22) tại Hòa Xuân, Đà Nẵng – loại căn, gợi ý duplex.',
 			'points'    => array(
-				'Spana Tower: penthouse tầng 22 tòa S1, S2 – căn 1PN+, 2PN, 3PN, có gợi ý duplex tầng lửng.',
+				'Penthouse Sun NeO City – Spana Tower: tầng 22 tòa S1, S2, căn 1PN+, 2PN, 3PN, có gợi ý duplex tầng lửng.',
 				'Cora Tower: penthouse tầng 25 tòa A1, A2 – căn 1PN, 2PN, 2PN+1, có gợi ý duplex tầng lửng.',
 				'S-Light Tower: penthouse tầng 22 tòa SL1, SL2 – view sông Hàn, Cẩm Lệ, Đô Tỏa.',
 				'Thuộc đợt mở bán penthouse – shophouse khối đế giới hạn của Sun Property (từ 8/2026).',
@@ -102,6 +116,8 @@ HTML,
 				array( 'Penthouse Spana Tower nằm ở tầng mấy?', 'Tầng 22 – tầng trên cùng của hai tòa S1, S2, gồm căn 1PN+, 2PN và 3PN.' ),
 				array( 'Penthouse Cora Tower nằm ở tầng mấy?', 'Tầng 25 – tầng trên cùng của hai tòa A1, A2, gồm căn 1PN, 2PN và 2PN+1.' ),
 				array( 'Penthouse S-Light Tower nằm ở tầng mấy?', 'Tầng 22 của hai tòa SL1, SL2, tầm nhìn sông Hàn, sông Cẩm Lệ và sông Đô Tỏa.' ),
+				array( 'Penthouse Sun NeO City gồm những dự án nào?', 'Ba dự án Spana Tower (tầng 22), Cora Tower (tầng 25) và S-Light Tower (tầng 22) – dòng penthouse Sun NeO City thuộc đợt mở bán giới hạn của Sun Property từ 8/2026.' ),
+				array( 'Đặt cọc penthouse bao nhiêu?', 'Theo chính sách tháng 11/2026, penthouse Cora Tower và S-Light Tower đặt cọc 300 triệu; vay tối đa 70%, hỗ trợ lãi suất 24 tháng.' ),
 				array( 'Gợi ý duplex penthouse là gì?', 'Chủ đầu tư đưa phương án làm thêm tầng lửng trong căn penthouse (Spana, Cora), có mặt bằng tầng chính và tầng lửng riêng để tăng diện tích sử dụng.' ),
 			),
 		),

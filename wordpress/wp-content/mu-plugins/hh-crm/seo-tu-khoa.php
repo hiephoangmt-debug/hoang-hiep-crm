@@ -137,6 +137,9 @@ add_filter(
 			list( $kw, $title, $desc ) = $map[ $n['slug'] ];
 			$seo  = $n['seo'] ?? ( $seo_all[ $n['slug'] ] ?? array() );
 			$old  = (array) ( $n['old_meta'] ?? array() );
+			foreach ( $old as $ok => $ov ) {
+				$old[ $ok ] = (array) $ov; // old_meta có thể ghi dạng chuỗi → chuẩn hoá thành mảng.
+			}
 			$prev = array(
 				'rank_math_focus_keyword' => $n['keyword'] ?? '',
 				'rank_math_title'         => $seo['seo_title'] ?? '',

@@ -89,7 +89,7 @@ HTML
 			'faq'       => array(
 				array( 'Căn hộ Đà Nẵng 2026 giá bao nhiêu?', 'Giá tham khảo từ khoảng 2 tỷ cho studio ở Sơn Trà, Hòa Xuân đến trên 10 tỷ cho căn 3PN ven sông, ven biển. Giá sơ cấp phổ biến khoảng 80 – 90 triệu/m².' ),
 				array( 'Khu vực nào có nhiều căn hộ mới nhất?', 'Nguồn cung mới tập trung ở Ngũ Hành Sơn (FPT City, Hòa Quý) và Hòa Xuân với các dự án Cora Tower, Spana Tower, S-Light Tower, FourS Tower.' ),
-				array( 'Dự án nào bàn giao sớm nhất?', 'Sun Ponte Residence, Masteri Rivera Danang và Newtown Diamond đều dự kiến bàn giao quý 3/2026; Sun Symphony, Sun Cosmo, The Filmore đã và đang bàn giao.' ),
+				array( 'Dự án căn hộ Đà Nẵng 2026 nào bàn giao sớm nhất?', 'Sun Ponte Residence, Masteri Rivera Danang và Newtown Diamond đều dự kiến bàn giao quý 3/2026; Sun Symphony, Sun Cosmo, The Filmore đã và đang bàn giao.' ),
 				array( 'Mua căn hộ Đà Nẵng 2026 cần kiểm tra gì?', 'Kiểm tra văn bản đủ điều kiện bán, bảo lãnh ngân hàng, thời hạn sở hữu, tiến độ thi công và so sánh giá với thị trường chuyển nhượng.' ),
 				array( 'Căn hộ Đà Nẵng 2026 dưới 3 tỷ có không?', 'Có, chủ yếu là studio, 1PN hoặc căn sang nhượng hợp đồng: studio The Camellia Sơn Trà từ khoảng 1,98 tỷ, Spana Tower sang nhượng từ khoảng 1,9 tỷ, 1PN Peninsula Đà Nẵng khoảng 2,2 – 2,7 tỷ (tham khảo).' ),
 				array( 'Nên mua căn hộ Đà Nẵng 2026 đang xây hay đã bàn giao?', 'Căn đang xây thường có lịch thanh toán giãn và chính sách ưu đãi nhưng phải chờ nhận nhà; căn đã bàn giao như Sun Symphony, Sun Cosmo, The Filmore nhận nhà ngay, giá đã phản ánh tiến độ. Chọn theo nhu cầu ở và dòng tiền.' ),
@@ -362,9 +362,9 @@ HTML
 		'seo'      => array(
 			'seo_title' => 'Căn hộ Đà Nẵng 2 tỷ – 3 tỷ: 10 dự án nên xem 2026',
 			'desc'      => 'Căn hộ Đà Nẵng 2 tỷ – 3 tỷ: 10 dự án có căn trong tầm giá ở FPT City, Hòa Xuân, Sơn Trà, cách tính tổng chi phí. Gọi Hoàng Hiệp nhận căn thật.',
-			'points'    => array( '10 dự án có căn hộ Đà Nẵng 2 tỷ – 3 tỷ (giá tham khảo)', 'Ba hướng chọn: 2PN ngoại vi, studio trung tâm, sang nhượng hợp đồng', 'Vay đến 70% giúp giảm vốn tự có ban đầu' ),
+			'points'    => array( '10 dự án có căn hộ Đà Nẵng 2 tỷ – 3 tỷ (giá tham khảo)', 'Ba hướng chọn căn hộ Đà Nẵng 2 tỷ: 2PN ngoại vi, studio trung tâm, sang nhượng hợp đồng', 'Vay đến 70% giúp giảm vốn tự có ban đầu' ),
 			'faq'       => array(
-				array( 'Có 2 tỷ mua được căn hộ Đà Nẵng nào?', 'Có thể xem 1PN, 2PN The Ori Garden, 1PN FPT Plaza 3, studio Sun Cosmo hoặc The Camellia (giá tham khảo khoảng 1,3 – 2,6 tỷ).' ),
+				array( 'Căn hộ Đà Nẵng 2 tỷ có những lựa chọn nào?', 'Có thể xem 1PN, 2PN The Ori Garden, 1PN FPT Plaza 3, studio Sun Cosmo hoặc The Camellia (giá tham khảo khoảng 1,3 – 2,6 tỷ).' ),
 				array( 'Căn 2PN dưới 3 tỷ ở đâu?', 'Chủ yếu ở FPT City (FPT Plaza 1, 2, 3) và The Ori Garden (Liên Chiểu), giá tham khảo khoảng 1,96 – 3,15 tỷ.' ),
 				array( 'Có nên mua sang nhượng hợp đồng không?', 'Có thể, nếu xác minh được hợp đồng gốc, số tiền đã đóng và chủ đầu tư xác nhận thủ tục chuyển nhượng.' ),
 				array( 'Căn hộ Đà Nẵng 2 tỷ có view sông, view biển không?', 'Có nhưng thường là căn nhỏ: studio Sun Cosmo ven sông Hàn khoảng 1,8 – 2,5 tỷ, studio The Camellia gần biển khoảng 1,98 – 2,64 tỷ (tham khảo). Căn 2PN view sông, biển thường vượt 3 tỷ.' ),
@@ -383,7 +383,7 @@ HTML
 		'week'     => 5,
 		'category' => 'Kinh nghiệm mua bán',
 		'content'  => <<<'HTML'
-<p>Kinh nghiệm mua căn hộ Đà Nẵng quan trọng nhất là kiểm tra kỹ pháp lý, tiến độ thanh toán, thời hạn sở hữu và giá thị trường trước khi đặt cọc. Dưới đây là 10 điều Hoàng Hiệp luôn rà soát cùng khách hàng, áp dụng cho cả căn mới và căn chuyển nhượng, cập nhật tháng 10/2026.</p>
+<p>Kinh nghiệm mua căn hộ Đà Nẵng quan trọng nhất là kiểm tra kỹ pháp lý, tiến độ thanh toán, thời hạn sở hữu và giá thị trường trước khi đặt cọc. Dưới đây là 10 điều kinh nghiệm mua căn hộ mà Hoàng Hiệp luôn rà soát cùng khách hàng, áp dụng cho cả căn mới và căn chuyển nhượng, cập nhật tháng 10/2026.</p>
 <!--hh-img:img/fpt-plaza-4/fpt-plaza-4-noi-that-can-mau-2pn-phong-khach.jpg|Kinh nghiệm mua căn hộ: xem căn mẫu để hình dung công năng, nhưng đối chiếu tiêu chuẩn bàn giao ghi trong hợp đồng (căn mẫu 2PN FPT Plaza 4)-->
 
 <h2>Kinh nghiệm mua căn hộ Đà Nẵng: 10 điều cần kiểm tra</h2>
@@ -453,9 +453,9 @@ HTML
 		'seo'      => array(
 			'seo_title' => 'Kinh nghiệm mua căn hộ Đà Nẵng: 10 điều cần kiểm tra',
 			'desc'      => 'Kinh nghiệm mua căn hộ Đà Nẵng: 10 điều cần kiểm tra về pháp lý, bảo lãnh, thanh toán, sở hữu, giá và căn chuyển nhượng. Gọi Hoàng Hiệp rà soát.',
-			'points'    => array( 'Kinh nghiệm mua căn hộ: kiểm tra văn bản đủ điều kiện bán và bảo lãnh ngân hàng', 'Cọc ≤ 5%, lần đầu ≤ 30%, trước bàn giao ≤ 70% theo Luật KDBĐS 2023', 'So sánh giá sơ cấp với giá chuyển nhượng thực tế' ),
+			'points'    => array( 'Kinh nghiệm mua căn hộ: kiểm tra văn bản đủ điều kiện bán và bảo lãnh ngân hàng', 'Cọc ≤ 5%, lần đầu ≤ 30%, trước bàn giao ≤ 70% theo Luật KDBĐS 2023', 'Kinh nghiệm mua căn hộ đã bàn giao: so sánh giá sơ cấp với giá chuyển nhượng thực tế' ),
 			'faq'       => array(
-				array( 'Mua căn hộ hình thành trong tương lai cần giấy tờ gì?', 'Cần văn bản đủ điều kiện bán của Sở Xây dựng, giấy phép xây dựng và bảo lãnh ngân hàng cho nghĩa vụ bàn giao.' ),
+				array( 'Mua căn hộ hình thành trong tương lai cần giấy tờ gì?', 'Theo kinh nghiệm mua căn hộ hình thành trong tương lai, cần văn bản đủ điều kiện bán của Sở Xây dựng, giấy phép xây dựng và bảo lãnh ngân hàng cho nghĩa vụ bàn giao.' ),
 				array( 'Đặt cọc căn hộ tối đa bao nhiêu?', 'Theo Luật Kinh doanh bất động sản 2023, tiền đặt cọc không quá 5% giá bán nhà ở hình thành trong tương lai.' ),
 				array( 'Mua căn chuyển nhượng hợp đồng cần lưu ý gì?', 'Xem hợp đồng gốc, phiếu thu các đợt đã đóng và thủ tục xác nhận chuyển nhượng của chủ đầu tư.' ),
 				array( 'Có nên mua căn hộ khách sạn để ở?', 'Có thể, nhưng cần hiểu rõ thời hạn sử dụng theo đất thương mại dịch vụ và quy định vận hành của dự án.' ),
@@ -698,13 +698,13 @@ HTML
 <h3>Căn hộ dịch vụ 50 năm</h3>
 <p>Ưu điểm là vị trí đẹp, có đơn vị vận hành chuyên nghiệp, phù hợp khai thác du lịch. Nhược điểm là thời hạn có giới hạn, doanh thu phụ thuộc du lịch, và cam kết lợi nhuận cần xem rất kỹ.</p>
 
-<h2>Trường hợp đặc biệt cần đọc kỹ hợp đồng</h2>
+<h2>Chưa rõ sở hữu lâu dài hay 50 năm: đọc kỹ hợp đồng</h2>
 <p>Một số dự án có mô hình riêng. <a href="/du-an/m-riverside-da-nang/">M Riverside</a> là căn hộ dịch vụ thương mại, chủ đầu tư công bố đất sử dụng lâu dài và cấp giấy chứng nhận khi đủ điều kiện. Với mô hình lai như vậy, hãy đọc kỹ điều khoản về loại đất và thời hạn trong hợp đồng mua bán.</p>
 
 <h2>Sở hữu lâu dài hay 50 năm: giá và khả năng cho thuê</h2>
 <p>Căn hộ khách sạn mặt biển thường có giá vào thấp hơn căn sở hữu lâu dài cùng vị trí. Ví dụ, studio Wyndham Soleil chuyển nhượng khoảng 2,3 – 2,6 tỷ, trong khi studio/1PN Times Square sở hữu lâu dài khoảng 6,5 – 8,5 tỷ (tham khảo).</p>
 <p>Về cho thuê, Wyndham Soleil có thể ủy thác cho Wyndham vận hành, các chương trình chia lợi nhuận đã giới thiệu ở từng giai đoạn cần xác nhận lại. Căn sở hữu lâu dài như Sun Cosmo có giá thuê tham khảo 2PN khoảng 30 – 35 triệu/tháng, chủ nhà tự quyết cách khai thác.</p>
-<p>Chênh lệch giá phản ánh khác biệt thời hạn và quyền sử dụng. Đừng chỉ so giá mỗi m², hãy so cả giá trị còn lại theo thời gian.</p>
+<p>Chênh lệch giá phản ánh khác biệt sở hữu lâu dài hay 50 năm và quyền sử dụng. Đừng chỉ so giá mỗi m², hãy so cả giá trị còn lại theo thời gian.</p>
 
 <h2>Thời hạn ảnh hưởng giá trị căn hộ theo thời gian ra sao?</h2>
 <p>Khác biệt sở hữu lâu dài hay 50 năm thể hiện rõ nhất khi bán lại. Căn sở hữu lâu dài giữ nguyên thời hạn cho người mua sau, còn căn có thời hạn chỉ chuyển cho người mua sau phần thời gian còn lại. Một căn hộ khách sạn mua vào năm thứ 10 của dự án 50 năm chỉ còn khoảng 40 năm sử dụng, và người mua sau thường tính điều này vào giá.</p>
@@ -730,12 +730,13 @@ HTML
 		'seo'      => array(
 			'seo_title' => 'Sở hữu lâu dài hay 50 năm: chọn căn hộ nào ở Đà Nẵng?',
 			'desc'      => 'Sở hữu lâu dài hay 50 năm: so sánh căn hộ chung cư và căn hộ dịch vụ, khách sạn tại Đà Nẵng về loại đất, thời hạn, vay, cho thuê. Gọi Hoàng Hiệp.',
-			'points'    => array( 'Sở hữu lâu dài hay 50 năm: căn hộ chung cư trên đất ở, căn hộ dịch vụ trên đất thương mại dịch vụ', 'Căn hộ khách sạn thời hạn theo dự án, phổ biến 50 năm', 'Mua để ở chọn sở hữu lâu dài; khai thác du lịch cân nhắc căn hộ khách sạn' ),
+			'points'    => array( 'Sở hữu lâu dài hay 50 năm: căn hộ chung cư trên đất ở, căn hộ dịch vụ trên đất thương mại dịch vụ', 'Căn hộ khách sạn thời hạn theo dự án, phổ biến 50 năm', 'Sở hữu lâu dài hay 50 năm: mua để ở chọn sở hữu lâu dài, khai thác du lịch cân nhắc căn hộ khách sạn' ),
 			'faq'       => array(
 				array( 'Căn hộ dịch vụ 50 năm hết hạn thì sao?', 'Khi hết thời hạn sử dụng đất, việc gia hạn theo quy định pháp luật đất đai tại thời điểm đó; người mua cần đọc kỹ điều khoản trong hợp đồng.' ),
 				array( 'Căn hộ khách sạn có được cấp sổ không?', 'Luật Đất đai 2024 và văn bản hướng dẫn đã tạo cơ sở cấp giấy chứng nhận cho căn hộ du lịch, với thời hạn theo thời hạn sử dụng đất của dự án.' ),
 				array( 'Dự án nào ở Đà Nẵng là căn hộ sở hữu lâu dài?', 'Ví dụ Sun Ponte Residence, Newtown Diamond, Masteri Rivera Danang, The Camellia Sơn Trà, HIYORI Aqua Tower, Cora Tower, Spana Tower.' ),
 				array( 'Sở hữu lâu dài hay 50 năm, loại nào dễ vay ngân hàng hơn?', 'Căn hộ sở hữu lâu dài trên đất ở thường được ngân hàng thẩm định dễ hơn; căn hộ dịch vụ, căn hộ khách sạn vẫn có thể vay nhưng ngân hàng xem kỹ thời hạn còn lại và pháp lý.' ),
+				array( 'Làm sao biết căn hộ sở hữu lâu dài hay 50 năm?', 'Xem loại đất và thời hạn sử dụng đất ghi trong giấy chứng nhận của dự án và hợp đồng mua bán; khi cần xác định sở hữu lâu dài hay 50 năm, hãy yêu cầu chủ đầu tư cung cấp văn bản pháp lý.' ),
 				array( 'Mua để ở nên chọn sở hữu lâu dài hay 50 năm?', 'Mua để ở và tích sản lâu dài nên ưu tiên căn hộ sở hữu lâu dài; căn hộ dịch vụ 50 năm phù hợp hơn khi mục tiêu chính là khai thác du lịch qua đơn vị vận hành.' ),
 			),
 		),

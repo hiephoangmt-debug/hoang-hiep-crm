@@ -492,9 +492,11 @@ HTML
 		'week'     => 4,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>Casamia Balanca Hội An (Khu đô thị Cồn Tiến) là khu đô thị sinh thái ven sông rộng 31,1 ha của Tập đoàn Đạt Phương tại xã Cẩm Thanh, Hội An, nằm giữa rừng dừa Bảy Mẫu. Dự án ra mắt tháng 6/2025, cung cấp biệt thự, shophouse sở hữu lâu dài, giá tham khảo từ khoảng 10 – 20 tỷ/căn. Thông tin cập nhật tháng 10/2026.</p>
+<p>Tổng quan Casamia Balanca Hội An (Khu đô thị Cồn Tiến): đây là khu đô thị sinh thái ven sông rộng 31,1 ha của Tập đoàn Đạt Phương tại xã Cẩm Thanh, Hội An, nằm giữa rừng dừa Bảy Mẫu. Dự án ra mắt tháng 6/2025, cung cấp biệt thự, shophouse sở hữu lâu dài, giá tham khảo từ khoảng 10 – 20 tỷ/căn. Thông tin cập nhật tháng 10/2026.</p>
 
-<h2>Thông tin tổng quan Casamia Balanca Hội An</h2>
+<!--hh-img:img/casamia-balanca/casamia-balanca-toan-canh.jpg|Phối cảnh toàn cảnh – tổng quan Casamia Balanca Hội An giữa rừng dừa và sông nội khu (ảnh chủ đầu tư)-->
+
+<h2>Bảng tổng quan Casamia Balanca Hội An</h2>
 <table>
 <thead><tr><th>Hạng mục</th><th>Thông tin</th></tr></thead>
 <tbody>
@@ -511,9 +513,9 @@ HTML
 
 <h2>Vị trí: giữa rừng dừa, bên trục Võ Chí Công</h2>
 <p><a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca</a> nằm trong vùng rừng dừa Bảy Mẫu thuộc Khu dự trữ sinh quyển thế giới Cù Lao Chàm – Hội An. Dự án tiếp giáp trục đường 38 m (Võ Chí Công) nối Đà Nẵng – Hội An – sân bay Chu Lai, có dòng sông tự nhiên chảy trong nội khu.</p>
-<p>Từ dự án có thể di chuyển nhanh về phố cổ Hội An, biển An Bàng, Cửa Đại. Đây là lợi thế lớn cho cả nhu cầu ở nghỉ dưỡng lẫn khai thác du lịch.</p>
+<p>Ở góc nhìn tổng quan Casamia Balanca, vị trí là lợi thế lớn nhất: từ dự án có thể di chuyển nhanh về phố cổ Hội An, biển An Bàng, Cửa Đại. Đây là lợi thế lớn cho cả nhu cầu ở nghỉ dưỡng lẫn khai thác du lịch.</p>
 
-<h2>Các dòng sản phẩm</h2>
+<h2>Tổng quan Casamia Balanca theo dòng sản phẩm</h2>
 <p>Theo các đơn vị phân phối, dự án gồm các dòng The Boutique, Park Home, Park Villa, Forestside Villa và Riverside (Waterside) Villa. Cơ cấu được giới thiệu gồm khoảng 173 biệt thự đơn lập, 116 biệt thự song lập và 74 shophouse.</p>
 <table>
 <thead><tr><th>Dòng sản phẩm</th><th>Đặc điểm</th></tr></thead>
@@ -526,13 +528,15 @@ HTML
 </table>
 
 <h2>Tiện ích nội khu</h2>
+<p>Phần tiện ích trong tổng quan Casamia Balanca được giới thiệu gồm:</p>
 <ul>
 <li>Bến du thuyền, clubhouse, nhà hàng, spa, phòng gym, sân thể thao.</li>
 <li>Khu vui chơi trẻ em, công viên cây xanh, bungalow.</li>
 <li>Trung tâm thương mại, trung tâm hội nghị, trường mầm non quốc tế, khách sạn.</li>
 </ul>
 
-<h2>Tiến độ dự án</h2>
+<h2>Tiến độ trong tổng quan Casamia Balanca</h2>
+<p>Dự án được kick-off vào giữa năm 2025, sự kiện được <a href="https://baodautu.vn/tap-doan-dat-phuong-kick-off-du-an-casamia-balanca-hoi-an-d300612.html">Báo Đầu tư</a> đưa tin. Các mốc chính:</p>
 <table>
 <thead><tr><th>Thời gian</th><th>Mốc</th></tr></thead>
 <tbody>
@@ -544,7 +548,7 @@ HTML
 </table>
 
 <h2>Casamia Balanca phù hợp với ai?</h2>
-<p>Dự án phù hợp với khách mua biệt thự nghỉ dưỡng để ở dài ngày, gia đình muốn sống trong môi trường sinh thái gần phố cổ, hoặc nhà đầu tư chấp nhận vốn lớn, nắm giữ dài hạn. Nếu cần sản phẩm nhỏ hơn, bạn có thể tham khảo <a href="/du-an/casamia-calm-hoi-an/">Casamia Calm</a> hoặc <a href="/du-an/casamia-hoi-an/">Casamia Hội An</a> cùng chủ đầu tư.</p>
+<p>Từ tổng quan Casamia Balanca ở trên, dự án phù hợp với khách mua biệt thự nghỉ dưỡng để ở dài ngày, gia đình muốn sống trong môi trường sinh thái gần phố cổ, hoặc nhà đầu tư chấp nhận vốn lớn, nắm giữ dài hạn. Nếu cần sản phẩm nhỏ hơn, bạn có thể tham khảo <a href="/du-an/casamia-calm-hoi-an/">Casamia Calm</a> hoặc <a href="/du-an/casamia-hoi-an/">Casamia Hội An</a> cùng chủ đầu tư.</p>
 <p>Đọc tiếp các bài trong cụm: <a href="/gia-biet-thu-casamia-balanca-2026/">giá biệt thự Casamia Balanca 2026</a>, <a href="/chinh-sach-ban-hang-casamia-balanca/">chính sách bán hàng</a> và <a href="/phap-ly-so-hong-casamia-balanca/">pháp lý, sổ hồng Casamia Balanca</a>.</p>
 
 <h2>Ưu điểm và điểm cần cân nhắc</h2>
@@ -561,41 +565,48 @@ HTML
 <li>Mùa mưa cuối năm ở Hội An ảnh hưởng đến khai thác du lịch.</li>
 </ul>
 
+<h2>Quy hoạch và giải thưởng trong tổng quan Casamia Balanca</h2>
+<p>Trước khi mở bán, quy hoạch dự án đã nhận giải Bạc hạng mục quy hoạch khu đô thị tại giải thưởng Quy hoạch đô thị Quốc gia 2022, theo <a href="https://baodautu.vn/casamia-balanca-hoi-an-nhan-giai-bac-quy-hoach-do-thi-quoc-gia-2022-d198882.html">Báo Đầu tư</a>. Giải thưởng phản ánh chất lượng ý tưởng quy hoạch, không thay thế cho việc kiểm tra pháp lý và tiến độ từng lô.</p>
+<p>Điểm đáng chú ý khi đọc tổng quan Casamia Balanca là các nguồn chưa thống nhất về cơ cấu sản phẩm và tên đơn vị hành chính (xã Cẩm Thanh cũ, nay thuộc phường Hội An Đông). Anh chị nên lấy số liệu trong hợp đồng và tài liệu chính thức của chủ đầu tư làm chuẩn.</p>
+
 <p>Trước khi tham quan, bạn nên chuẩn bị ngân sách tổng, mục đích sử dụng (ở, nghỉ dưỡng hay cho thuê) và thời gian nắm giữ dự kiến để chọn đúng dòng sản phẩm.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận mặt bằng phân khu, quỹ căn Casamia Balanca Hội An đang mở và lịch tham quan nhà mẫu.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận tài liệu tổng quan Casamia Balanca, mặt bằng phân khu, quỹ căn đang mở và lịch tham quan nhà mẫu.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Tổng quan Casamia Balanca Hội An: khu đô thị 31,1 ha',
 			'desc'      => 'Tổng quan Casamia Balanca Hội An: khu đô thị sinh thái 31,1 ha của Đạt Phương bên sông Cổ Cò, biệt thự ven sông, đã có sổ hồng từng lô (8/2026).',
 			'points'    => array(
-				'Khu đô thị sinh thái 31,1 ha của Đạt Phương tại Cẩm Thanh, Hội An, giữa rừng dừa Bảy Mẫu.',
+				'Tổng quan Casamia Balanca: khu đô thị sinh thái 31,1 ha của Đạt Phương tại Cẩm Thanh, Hội An, giữa rừng dừa Bảy Mẫu.',
 				'Biệt thự Forestside, Riverside, Park Villa và shophouse The Boutique; đã cấp sổ hồng các lô tháng 8/2026.',
 				'Ra mắt 6/2025; kế hoạch bàn giao khoảng 100 căn trong tháng 11 – 12/2026.',
 			),
 			'faq'       => array(
-				array( 'Casamia Balanca Hội An ở đâu?', 'Tại xã Cẩm Thanh, Hội An, trong vùng rừng dừa Bảy Mẫu, tiếp giáp trục Võ Chí Công.' ),
+				array( 'Casamia Balanca Hội An ở đâu?', 'Theo tổng quan Casamia Balanca, dự án nằm tại xã Cẩm Thanh (cũ), Hội An, trong vùng rừng dừa Bảy Mẫu, tiếp giáp trục Võ Chí Công.' ),
 				array( 'Chủ đầu tư Casamia Balanca là ai?', 'Tập đoàn Đạt Phương, cũng là chủ đầu tư Casamia Hội An và Casamia Calm.' ),
 				array( 'Casamia Balanca có bao nhiêu căn?', 'Dự án có tổng 363 sản phẩm thấp tầng: 173 biệt thự đơn lập, 116 biệt thự song lập và 74 shophouse.' ),
+				array( 'Tổng quan Casamia Balanca có điểm gì nổi bật?', 'Quy mô 31,1 ha với mật độ xây dựng khoảng 38%, sông chảy trong nội khu, nằm giữa rừng dừa Bảy Mẫu và gần phố cổ; các lô đã được cấp sổ hồng tháng 8/2026.' ),
 				array( 'Khi nào Casamia Balanca bàn giao?', 'Theo ĐHĐCĐ 2026 của Đạt Phương, kế hoạch bàn giao khoảng 100 căn trong tháng 11 – 12/2026.' ),
 			),
 		),
-		'sources'  => array( 'https://tapchicongthuong.vn/tap-doan-dat-phuong--dpg--cho-doi--cu-hich--tu-du-an-casamia-balanca-127046.htm', 'https://tapchicongthuong.vn/tap-doan-dat-phuong--dpg-trien-vong-tai-dinh-gia-tu-viec-mo-ban-du-an-casamia-balanca-141395.htm', 'https://diendandoanhnghiep.vn/casamia-balanca-hoi-an-chuan-song-toan-cau-giua-long-di-san-10159413.html', 'https://casamiabalanca.com/' ),
+		'sources'  => array( 'https://baodautu.vn/tap-doan-dat-phuong-kick-off-du-an-casamia-balanca-hoi-an-d300612.html', 'https://baodautu.vn/casamia-balanca-hoi-an-nhan-giai-bac-quy-hoach-do-thi-quoc-gia-2022-d198882.html', 'https://tapchicongthuong.vn/tap-doan-dat-phuong--dpg--cho-doi--cu-hich--tu-du-an-casamia-balanca-127046.htm', 'https://tapchicongthuong.vn/tap-doan-dat-phuong--dpg-trien-vong-tai-dinh-gia-tu-viec-mo-ban-du-an-casamia-balanca-141395.htm', 'https://diendandoanhnghiep.vn/casamia-balanca-hoi-an-chuan-song-toan-cau-giua-long-di-san-10159413.html', 'https://casamiabalanca.com/' ),
 	);
 
 	$posts[] = array(
 		'slug'     => 'gia-biet-thu-casamia-balanca-2026',
-		'title'    => 'Giá Casamia Balanca 2026: bảng giá biệt thự tham khảo theo dòng sản phẩm',
+		'title'    => 'Giá biệt thự Casamia Balanca 2026: bảng giá tham khảo theo dòng sản phẩm',
 		'excerpt'  => 'Giá Casamia Balanca 2026 tham khảo từ khoảng 10 – 20 tỷ/căn, Forestside từ khoảng 16 tỷ. Cách tính tổng tiền và yếu tố ảnh hưởng giá.',
 		'keyword'  => 'giá biệt thự Casamia Balanca',
 		'project'  => 'casamia-balanca-hoi-an',
 		'week'     => 4,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>Giá Casamia Balanca năm 2026 tham khảo phổ biến từ khoảng 10 – 20 tỷ/căn tùy dòng sản phẩm và vị trí; biệt thự Forestside được giới thiệu từ khoảng 16 tỷ. Một số trang phân phối ghi mức thấp nhất từ khoảng 8,8 tỷ/căn. Đây là giá tham khảo tổng hợp, cập nhật tháng 10/2026 – giá chính thức thay đổi theo từng đợt mở bán.</p>
+<p>Giá biệt thự Casamia Balanca năm 2026 tham khảo phổ biến từ khoảng 10 – 20 tỷ/căn tùy dòng sản phẩm và vị trí; biệt thự Forestside được giới thiệu từ khoảng 16 tỷ. Một số trang phân phối ghi mức thấp nhất từ khoảng 8,8 tỷ/căn. Đây là giá tham khảo tổng hợp, cập nhật tháng 10/2026 – giá chính thức thay đổi theo từng đợt mở bán.</p>
 
-<h2>Bảng giá Casamia Balanca tham khảo</h2>
+<!--hh-img:img/casamia-balanca/casamia-balanca-biet-thu-ho-boi-ven-song.jpg|Biệt thự có hồ bơi ven sông – vị trí ven sông là yếu tố đẩy giá biệt thự Casamia Balanca lên cao hơn (phối cảnh chủ đầu tư)-->
+
+<h2>Bảng giá biệt thự Casamia Balanca tham khảo</h2>
 <table>
 <thead><tr><th>Dòng sản phẩm</th><th>Diện tích đất</th><th>Giá tham khảo</th><th>Nguồn</th></tr></thead>
 <tbody>
@@ -607,9 +618,9 @@ HTML
 <tr><td>Shophouse The Boutique</td><td>–</td><td>Đang cập nhật theo đợt</td><td>Liên hệ</td></tr>
 </tbody>
 </table>
-<p>Theo Tạp chí Công Thương, giá khởi điểm của biệt thự đơn lập Casamia Balanca khoảng 55 triệu/m² đất (thời điểm 12/2024). Với lô 250 m², tổng giá trị khoảng 13,75 tỷ đồng. Đây là cách ước tính hữu ích để so sánh các căn có diện tích khác nhau.</p>
+<p>Theo Tạp chí Công Thương, giá khởi điểm của biệt thự đơn lập Casamia Balanca khoảng 55 triệu/m² đất (thời điểm 12/2024). Quy đổi về đơn giá đất là cách dễ nhất để so giá biệt thự Casamia Balanca giữa các lô. Với lô 250 m², tổng giá trị khoảng 13,75 tỷ đồng. Đây là cách ước tính hữu ích để so sánh các căn có diện tích khác nhau.</p>
 
-<h2>Yếu tố ảnh hưởng đến giá Casamia Balanca</h2>
+<h2>Yếu tố ảnh hưởng đến giá biệt thự Casamia Balanca</h2>
 <h3>Vị trí trong dự án</h3>
 <p>Căn ven sông, có bến thuyền riêng hoặc view rừng dừa thường có giá cao hơn căn nằm sâu trong nội khu. Căn góc, căn gần clubhouse, công viên cũng được định giá cao hơn.</p>
 <h3>Loại hình và diện tích</h3>
@@ -619,7 +630,8 @@ HTML
 <h3>Chính sách thanh toán</h3>
 <p>Giá thực trả phụ thuộc chiết khấu thanh toán nhanh, hỗ trợ lãi suất. Xem chi tiết tại bài <a href="/chinh-sach-ban-hang-casamia-balanca/">chính sách bán hàng Casamia Balanca</a>.</p>
 
-<h2>Cách tính tổng chi phí sở hữu</h2>
+<h2>Cách tính tổng chi phí sở hữu ngoài giá biệt thự Casamia Balanca</h2>
+<p>Giá biệt thự Casamia Balanca trên hợp đồng chưa phải toàn bộ số tiền cần chuẩn bị. Lệ phí trước bạ khi cấp giấy chứng nhận tính theo quy định hiện hành (xem tổng hợp của <a href="https://thuvienphapluat.vn/phap-luat-nha-dat/le-phi-truoc-ba-nha-dat-nam-2026-hien-nay-la-bao-nhieu-14934.html">Thư Viện Pháp Luật</a>), cùng các khoản dưới đây:</p>
 <table>
 <thead><tr><th>Khoản mục</th><th>Ghi chú</th></tr></thead>
 <tbody>
@@ -635,48 +647,50 @@ HTML
 <p>Trong phân khúc <a href="/loai-du-an/biet-thu/">biệt thự</a> Hội An – Nam Đà Nẵng, Casamia Balanca có lợi thế là khu đô thị sinh thái quy mô lớn, đã có sổ hồng từng lô (cấp tháng 8/2026). Bạn có thể đối chiếu với <a href="/du-an/casamia-calm-hoi-an/">Casamia Calm</a> và các sản phẩm tại trang <a href="/mua-ban/biet-thu/">mua bán biệt thự</a> hoặc <a href="/khu-vuc/hoi-an/">khu vực Hội An</a>.</p>
 
 <h2>Lời khuyên của Hoàng Hiệp</h2>
-<p>Đừng chọn căn chỉ vì giá thấp nhất trong bảng hàng. Hãy so sánh đơn giá/m² đất, hướng, khoảng cách tới sông và tiện ích, sau đó tính tổng chi phí sở hữu. Nếu mua để khai thác cho thuê, đọc thêm bài <a href="/cho-thue-biet-thu-casamia-balanca-dong-tien/">dòng tiền cho thuê biệt thự Casamia Balanca</a>.</p>
+<p>Đừng chọn căn chỉ vì giá biệt thự Casamia Balanca thấp nhất trong bảng hàng. Hãy so sánh đơn giá/m² đất, hướng, khoảng cách tới sông và tiện ích, sau đó tính tổng chi phí sở hữu. Nếu mua để khai thác cho thuê, đọc thêm bài <a href="/cho-thue-biet-thu-casamia-balanca-dong-tien/">dòng tiền cho thuê biệt thự Casamia Balanca</a>.</p>
 
 <h2>Vì sao giá giữa các nguồn chênh nhau?</h2>
-<p>Bạn sẽ thấy nhiều mức giá khác nhau trên mạng: từ 8,8 tỷ, từ 10 tỷ, từ 16 tỷ. Nguyên nhân là mỗi nguồn nói về một dòng sản phẩm, một đợt bán hoặc một thời điểm khác nhau; có nguồn tính giá trước chiết khấu, có nguồn tính sau.</p>
+<p>Bạn sẽ thấy nhiều mức giá biệt thự Casamia Balanca khác nhau trên mạng: từ 8,8 tỷ, từ 10 tỷ, từ 16 tỷ. Nguyên nhân là mỗi nguồn nói về một dòng sản phẩm, một đợt bán hoặc một thời điểm khác nhau; có nguồn tính giá trước chiết khấu, có nguồn tính sau.</p>
 <p>Cách đọc đúng: hỏi rõ mã căn, diện tích đất, diện tích xây dựng, giá trước và sau chiết khấu, đã gồm VAT hay chưa. Chỉ khi cùng tiêu chí, việc so sánh mới có ý nghĩa.</p>
 <h3>Giá thứ cấp</h3>
-<p>Khi dự án bàn giao và có giấy chứng nhận, thị trường chuyển nhượng sẽ hình thành rõ hơn. Hiện mức giá chuyển nhượng lại đang cập nhật theo từng giao dịch, liên hệ để nhận thông tin căn cụ thể.</p>
+<p>Khi dự án bàn giao và các lô đã có giấy chứng nhận (cấp tháng 8/2026), thị trường chuyển nhượng sẽ quyết định giá biệt thự Casamia Balanca thứ cấp. Khi đó thị trường chuyển nhượng sẽ hình thành rõ hơn. Hiện mức giá chuyển nhượng lại đang cập nhật theo từng giao dịch, liên hệ để nhận thông tin căn cụ thể.</p>
 
 <p>Một lưu ý nữa: với tài sản giá trị lớn, hãy để dành dự phòng tài chính cho ít nhất vài kỳ thanh toán, tránh bị động khi tiến độ hoặc lãi suất thay đổi.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá Casamia Balanca đợt hiện hành theo từng căn và bảng tính tổng chi phí sở hữu.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá biệt thự Casamia Balanca đợt hiện hành theo từng căn và bảng tính tổng chi phí sở hữu.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Giá biệt thự Casamia Balanca 2026 theo dòng sản phẩm',
 			'desc'      => 'Giá biệt thự Casamia Balanca 2026 tham khảo khoảng 10 – 20 tỷ/căn, Forestside từ khoảng 16 tỷ, cách tính tổng chi phí. Gọi Hoàng Hiệp nhận giá.',
 			'points'    => array(
-				'Giá tham khảo phổ biến khoảng 10 – 20 tỷ/căn; một số nguồn ghi từ khoảng 8,8 tỷ.',
+				'Giá biệt thự Casamia Balanca tham khảo phổ biến khoảng 10 – 20 tỷ/căn; một số nguồn ghi từ khoảng 8,8 tỷ.',
 				'Forestside Villa đất khoảng 250 – 426 m², giá từ khoảng 16 tỷ (theo phân phối).',
 				'Đơn giá biệt thự đơn lập khoảng 55 triệu/m² đất (12/2024, theo Tạp chí Công Thương).',
 			),
 			'faq'       => array(
-				array( 'Giá Casamia Balanca bao nhiêu?', 'Giá tham khảo phổ biến khoảng 10 – 20 tỷ/căn tùy dòng sản phẩm, vị trí; giá chính thức thay đổi theo từng đợt.' ),
+				array( 'Giá biệt thự Casamia Balanca bao nhiêu?', 'Giá biệt thự Casamia Balanca tham khảo phổ biến khoảng 10 – 20 tỷ/căn tùy dòng sản phẩm, vị trí; giá chính thức thay đổi theo từng đợt.' ),
 				array( 'Biệt thự Forestside Casamia Balanca giá bao nhiêu?', 'Theo các trang phân phối, Forestside Villa có giá từ khoảng 16 tỷ, diện tích đất khoảng 250 – 426 m².' ),
-				array( 'Giá Casamia Balanca đã gồm VAT chưa?', 'Tùy từng bảng giá và đợt bán; cần hỏi rõ giá đã gồm VAT, phí bảo trì và tiêu chuẩn bàn giao hay chưa.' ),
+				array( 'Giá biệt thự Casamia Balanca đã gồm VAT chưa?', 'Tùy từng bảng giá và đợt bán; cần hỏi rõ giá đã gồm VAT, phí bảo trì và tiêu chuẩn bàn giao hay chưa.' ),
 			),
 		),
-		'sources'  => array( 'https://tapchicongthuong.vn/tap-doan-dat-phuong--dpg-trien-vong-tai-dinh-gia-tu-viec-mo-ban-du-an-casamia-balanca-141395.htm', 'https://estuaryresidental.com/du-an/khu-do-thi-casamia-balanca-hoi-an-chinh-sach-bang-hang-va-gia-ban/', 'https://duanbdsdanang.com/du-an/casamia-balanca-hoi-an/' ),
+		'sources'  => array( 'https://tapchicongthuong.vn/tap-doan-dat-phuong--dpg-trien-vong-tai-dinh-gia-tu-viec-mo-ban-du-an-casamia-balanca-141395.htm', 'https://thuvienphapluat.vn/phap-luat-nha-dat/le-phi-truoc-ba-nha-dat-nam-2026-hien-nay-la-bao-nhieu-14934.html', 'https://estuaryresidental.com/du-an/khu-do-thi-casamia-balanca-hoi-an-chinh-sach-bang-hang-va-gia-ban/', 'https://duanbdsdanang.com/du-an/casamia-balanca-hoi-an/' ),
 	);
 
 	$posts[] = array(
 		'slug'     => 'chinh-sach-ban-hang-casamia-balanca',
-		'title'    => 'Chính sách Casamia Balanca: thanh toán, chiết khấu, hỗ trợ vay 2026',
+		'title'    => 'Chính sách bán hàng Casamia Balanca 2026: thanh toán, chiết khấu, hỗ trợ vay',
 		'excerpt'  => 'Chính sách Casamia Balanca: đặt cọc, tiến độ thanh toán, chiết khấu, hỗ trợ vay đến 70% theo thông tin phân phối và lưu ý khi so sánh.',
 		'keyword'  => 'chính sách bán hàng Casamia Balanca',
 		'project'  => 'casamia-balanca-hoi-an',
 		'week'     => 4,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>Chính sách Casamia Balanca được các đơn vị phân phối giới thiệu gồm: đặt cọc khoảng 100 triệu/căn, ký hợp đồng thanh toán 30%, phần còn lại theo tiến độ; khách không vay được chiết khấu khi thanh toán đúng tiến độ; khách vay được hỗ trợ đến 70% giá trị hợp đồng kèm ân hạn gốc, lãi. Thông tin tổng hợp, cập nhật tháng 10/2026 – chính sách có hiệu lực theo từng đợt và cần xác nhận lại trước khi ký.</p>
+<p>Chính sách bán hàng Casamia Balanca được các đơn vị phân phối giới thiệu gồm: đặt cọc khoảng 100 triệu/căn, ký hợp đồng thanh toán 30%, phần còn lại theo tiến độ; khách không vay được chiết khấu khi thanh toán đúng tiến độ; khách vay được hỗ trợ đến 70% giá trị hợp đồng kèm ân hạn gốc, lãi. Thông tin tổng hợp, cập nhật tháng 10/2026 – chính sách có hiệu lực theo từng đợt và cần xác nhận lại trước khi ký.</p>
 
-<h2>Tóm tắt chính sách Casamia Balanca (theo phân phối)</h2>
+<!--hh-img:img/casamia-balanca/casamia-balanca-su-kien-tu-van.jpg|Khách tìm hiểu tài liệu tại sự kiện dự án – nên yêu cầu văn bản chính sách bán hàng Casamia Balanca trước khi đặt cọc-->
+
+<h2>Tóm tắt chính sách bán hàng Casamia Balanca (theo phân phối)</h2>
 <table>
 <thead><tr><th>Hạng mục</th><th>Nội dung được giới thiệu</th></tr></thead>
 <tbody>
@@ -692,14 +706,14 @@ HTML
 </table>
 <p>Lưu ý: các nội dung trên được tổng hợp từ trang của đơn vị phân phối, chưa phải văn bản chính thức của chủ đầu tư. Thời hạn áp dụng, điều kiện và mức chiết khấu cụ thể đang cập nhật theo từng đợt, liên hệ để nhận bản chính sách mới nhất.</p>
 
-<h2>Phương án thanh toán: chọn thế nào?</h2>
+<h2>Phương án thanh toán trong chính sách bán hàng Casamia Balanca</h2>
 <h3>Thanh toán theo tiến độ, không vay</h3>
-<p>Phù hợp khách có sẵn dòng tiền. Ưu điểm là được chiết khấu, không chịu chi phí lãi vay; nhược điểm là vốn bị khóa lớn ngay từ đầu.</p>
+<p>Phù hợp khách có sẵn dòng tiền. Theo chính sách bán hàng Casamia Balanca được giới thiệu, ưu điểm là được chiết khấu, không chịu chi phí lãi vay; nhược điểm là vốn bị khóa lớn ngay từ đầu.</p>
 <h3>Vay ngân hàng có ân hạn</h3>
 <p>Phù hợp khách muốn giữ vốn lưu động. Trong thời gian ân hạn, áp lực trả nợ thấp; nhưng cần tính trước khả năng trả gốc lãi khi hết ân hạn theo lãi suất thả nổi.</p>
 
 <h2>Ví dụ cách so sánh hai phương án</h2>
-<p>Giả sử căn biệt thự có giá trên hợp đồng là G. Phương án A: chiết khấu 9%, số tiền thực trả là 0,91 x G. Phương án B: không chiết khấu, vay 70% G, được ân hạn 24 tháng, sau đó tự trả lãi theo lãi suất thả nổi.</p>
+<p>Để so sánh hai nhánh của chính sách bán hàng Casamia Balanca, giả sử căn biệt thự có giá trên hợp đồng là G. Phương án A: chiết khấu 9%, số tiền thực trả là 0,91 x G. Phương án B: không chiết khấu, vay 70% G, được ân hạn 24 tháng, sau đó tự trả lãi theo lãi suất thả nổi.</p>
 <table>
 <thead><tr><th>Tiêu chí</th><th>A – Không vay</th><th>B – Vay 70%</th></tr></thead>
 <tbody>
@@ -709,7 +723,10 @@ HTML
 <tr><td>Phù hợp</td><td>Có sẵn tiền, mua ở</td><td>Cần giữ vốn, có thu nhập ổn định</td></tr>
 </tbody>
 </table>
-<p>Chênh lệch 9% giá trị căn là con số lớn với sản phẩm 10 – 20 tỷ. Vì vậy hãy tính chi phí cơ hội của vốn và lãi suất sau ân hạn trước khi chọn.</p>
+<p>Chênh lệch 9% giá trị căn là con số lớn với sản phẩm 10 – 20 tỷ: với căn 13,75 tỷ (ví dụ lô 250 m² ở mức 55 triệu/m²), 9% tương đương khoảng 1,24 tỷ đồng. Vì vậy hãy tính chi phí cơ hội của vốn và lãi suất sau ân hạn trước khi chọn.</p>
+
+<h2>Chính sách bán hàng Casamia Balanca và quy định về đặt cọc</h2>
+<p>Mức cọc khoảng 100 triệu/căn trong chính sách bán hàng Casamia Balanca thấp so với giá trị biệt thự. Với nhà ở hình thành trong tương lai, Luật Kinh doanh bất động sản 2023 giới hạn tiền đặt cọc không quá 5% giá bán và chỉ được thu khi dự án đủ điều kiện kinh doanh (tóm tắt trên <a href="https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html">LuatVietnam</a>). Lần thanh toán đầu khi ký hợp đồng không quá 30% giá trị hợp đồng, kể cả tiền cọc – khớp với mốc 30% được giới thiệu.</p>
 
 <h2>Checklist trước khi đặt cọc</h2>
 <ul>
@@ -721,9 +738,9 @@ HTML
 </ul>
 
 <h2>Đọc thêm</h2>
-<p>Xem tổng quan <a href="/casamia-balanca-hoi-an-tong-quan-du-an/">Casamia Balanca Hội An</a>, bảng <a href="/gia-biet-thu-casamia-balanca-2026/">giá Casamia Balanca 2026</a> hoặc trang dự án <a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca</a>. Các biệt thự khác tại Hội An có trong mục <a href="/mua-ban/biet-thu/">mua bán biệt thự</a>.</p>
+<p>Ngoài chính sách bán hàng Casamia Balanca, anh chị có thể xem tổng quan <a href="/casamia-balanca-hoi-an-tong-quan-du-an/">Casamia Balanca Hội An</a>, bảng <a href="/gia-biet-thu-casamia-balanca-2026/">giá Casamia Balanca 2026</a> hoặc trang dự án <a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca</a>. Các biệt thự khác tại Hội An có trong mục <a href="/mua-ban/biet-thu/">mua bán biệt thự</a>.</p>
 
-<h2>Những điểm dễ hiểu nhầm trong chính sách</h2>
+<h2>Những điểm dễ hiểu nhầm trong chính sách bán hàng Casamia Balanca</h2>
 <ul>
 <li><strong>Lãi suất 0%:</strong> thường chỉ áp dụng trong thời gian ân hạn; hết ân hạn sẽ áp lãi suất thả nổi của ngân hàng.</li>
 <li><strong>Chiết khấu cộng dồn:</strong> không phải ưu đãi nào cũng cộng dồn được; hỏi rõ ưu đãi nào loại trừ nhau.</li>
@@ -731,40 +748,43 @@ HTML
 <li><strong>Thời hạn ưu đãi:</strong> chỉ áp dụng với hợp đồng ký trong khung thời gian nhất định.</li>
 </ul>
 
-<p>Hoàng Hiệp tư vấn, phân phối dự án nên sẽ gửi bạn bản chính sách đang áp dụng, đồng thời chỉ ra các điều khoản cần hỏi lại trước khi đặt cọc.</p>
+<p>Hoàng Hiệp tư vấn, phân phối dự án nên sẽ gửi bạn bản chính sách bán hàng Casamia Balanca đang áp dụng, đồng thời chỉ ra các điều khoản cần hỏi lại trước khi đặt cọc.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bản chính sách Casamia Balanca đang áp dụng và bảng tính so sánh phương án thanh toán theo căn bạn quan tâm.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bản chính sách bán hàng Casamia Balanca đang áp dụng và bảng tính so sánh phương án thanh toán theo căn bạn quan tâm.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Chính sách bán hàng Casamia Balanca 2026',
 			'desc'      => 'Chính sách bán hàng Casamia Balanca 2026: cọc 100 triệu, ký hợp đồng 30%, chiết khấu khi không vay, hỗ trợ vay 70%. Gọi Hoàng Hiệp nhận bản mới nhất.',
 			'points'    => array(
-				'Theo phân phối: cọc khoảng 100 triệu/căn, ký HĐMB 30%, 40% theo tiến độ.',
+				'Chính sách bán hàng Casamia Balanca theo phân phối: cọc khoảng 100 triệu/căn, ký HĐMB 30%, 40% theo tiến độ.',
 				'Khách không vay được chiết khấu khoảng 9%; khách vay được hỗ trợ đến 70%, ân hạn đến 24 tháng.',
 				'Chính sách thay đổi theo đợt, cần văn bản chính thức của chủ đầu tư trước khi ký.',
 			),
 			'faq'       => array(
 				array( 'Đặt cọc Casamia Balanca bao nhiêu?', 'Theo các đơn vị phân phối, đặt cọc khoảng 100 triệu/căn; mức cụ thể theo đợt bán.' ),
 				array( 'Casamia Balanca hỗ trợ vay bao nhiêu?', 'Được giới thiệu hỗ trợ vay tối đa 70% giá trị hợp đồng, ân hạn gốc lãi đến 24 tháng, thời hạn đến 35 năm.' ),
+				array( 'Chính sách bán hàng Casamia Balanca có thay đổi theo đợt không?', 'Có. Mức chiết khấu, thời hạn ân hạn và quà tặng phí quản lý áp dụng theo từng đợt; cần văn bản có hiệu lực tại thời điểm ký để đối chiếu.' ),
 				array( 'Không vay có được chiết khấu không?', 'Theo thông tin phân phối, khách không vay thanh toán đúng tiến độ được chiết khấu khoảng 9%.' ),
 			),
 		),
-		'sources'  => array( 'https://estuaryresidental.com/du-an/khu-do-thi-casamia-balanca-hoi-an-chinh-sach-bang-hang-va-gia-ban/', 'https://duanbdsdanang.com/du-an/casamia-balanca-hoi-an/', 'https://quangminhproperty.com/du-an/casamia-balanca-hoi-an/' ),
+		'sources'  => array( 'https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html', 'https://estuaryresidental.com/du-an/khu-do-thi-casamia-balanca-hoi-an-chinh-sach-bang-hang-va-gia-ban/', 'https://duanbdsdanang.com/du-an/casamia-balanca-hoi-an/', 'https://quangminhproperty.com/du-an/casamia-balanca-hoi-an/' ),
 	);
 
 	$posts[] = array(
 		'slug'     => 'cho-thue-biet-thu-casamia-balanca-dong-tien',
-		'title'    => 'Cho thuê Casamia Balanca: cách ước tính dòng tiền biệt thự Hội An',
+		'title'    => 'Cho thuê biệt thự Casamia Balanca: cách ước tính dòng tiền biệt thự Hội An',
 		'excerpt'  => 'Cho thuê Casamia Balanca có sinh lời không? Hướng dẫn ước tính dòng tiền biệt thự theo giá thuê villa Cẩm Thanh, công suất và chi phí.',
 		'keyword'  => 'cho thuê biệt thự Casamia Balanca',
 		'project'  => 'casamia-balanca-hoi-an',
 		'week'     => 4,
 		'category' => 'Kinh nghiệm mua bán',
 		'content'  => <<<'HTML'
-<p>Cho thuê Casamia Balanca theo mô hình villa nghỉ dưỡng là hướng khai thác khả thi vì dự án nằm ở Cẩm Thanh, gần phố cổ Hội An – nơi villa nguyên căn đang cho thuê phổ biến khoảng 1,5 – 4 triệu đồng/đêm. Tuy nhiên, đến tháng 10/2026 dự án mới bắt đầu bàn giao, <strong>chưa có số liệu doanh thu thực tế công khai</strong>. Bài viết hướng dẫn cách tự ước tính dòng tiền, thay vì đưa ra con số lợi nhuận hứa hẹn.</p>
+<p>Cho thuê biệt thự Casamia Balanca theo mô hình villa nghỉ dưỡng là hướng khai thác khả thi vì dự án nằm ở Cẩm Thanh, gần phố cổ Hội An – nơi villa nguyên căn đang cho thuê phổ biến khoảng 1,5 – 4 triệu đồng/đêm. Tuy nhiên, đến tháng 10/2026 dự án mới bắt đầu bàn giao, <strong>chưa có số liệu doanh thu thực tế công khai</strong>. Bài viết hướng dẫn cách tự ước tính dòng tiền, thay vì đưa ra con số lợi nhuận hứa hẹn.</p>
 
-<h2>Giá thuê villa khu Cẩm Thanh hiện nay</h2>
+<!--hh-img:img/casamia-balanca/casamia-balanca-don-khach-biet-thu.jpg|Đón khách tại biệt thự – dịch vụ vận hành quyết định hiệu quả cho thuê biệt thự Casamia Balanca (ảnh chủ đầu tư)-->
+
+<h2>Giá thuê villa khu Cẩm Thanh – mốc tham chiếu khi cho thuê biệt thự Casamia Balanca</h2>
 <table>
 <thead><tr><th>Loại villa</th><th>Giá thuê tham khảo</th><th>Nguồn</th></tr></thead>
 <tbody>
@@ -775,7 +795,7 @@ HTML
 </table>
 <p>Giá thuê thay đổi rất mạnh theo mùa du lịch, số phòng ngủ, hồ bơi riêng và chất lượng vận hành. Đây là giá các villa đang hoạt động, không phải giá của Casamia Balanca.</p>
 
-<h2>Công thức ước tính dòng tiền cho thuê</h2>
+<h2>Công thức ước tính dòng tiền cho thuê biệt thự Casamia Balanca</h2>
 <p>Doanh thu năm = Giá thuê trung bình/đêm x 365 x Công suất phòng.</p>
 <p>Dòng tiền ròng = Doanh thu – Phí OTA/hoa hồng – Chi phí vận hành (nhân sự, điện nước, giặt là, bảo trì hồ bơi) – Phí quản lý khu đô thị – Thuế cho thuê – Khấu hao nội thất.</p>
 <p>Tỷ suất = Dòng tiền ròng / Tổng vốn đầu tư (giá căn + nội thất + chi phí khác).</p>
@@ -790,12 +810,16 @@ HTML
 <tr><td>60%</td><td>Khoảng 767 triệu</td><td>Khoảng 5,6%</td></tr>
 </tbody>
 </table>
-<p>Đây là doanh thu <strong>trước chi phí</strong>. Sau khi trừ hoa hồng nền tảng đặt phòng, vận hành, thuế, dòng tiền ròng sẽ thấp hơn đáng kể. Hãy thay số theo căn và giá thuê bạn khảo sát được.</p>
+<p>Đây là doanh thu <strong>trước chi phí</strong> khi cho thuê biệt thự Casamia Balanca. Sau khi trừ hoa hồng nền tảng đặt phòng, vận hành, thuế, dòng tiền ròng sẽ thấp hơn đáng kể. Hãy thay số theo căn và giá thuê bạn khảo sát được.</p>
 
 <h2>Về các gói cam kết khai thác</h2>
 <p>Một số trang phân phối giới thiệu gói hợp tác khai thác chia khoảng 45% doanh thu thuần, kèm mức tối thiểu khoảng 30 triệu/tháng. Hoàng Hiệp chưa thấy văn bản chính thức của chủ đầu tư về gói này. Nếu được chào, hãy yêu cầu hợp đồng cụ thể: bên vận hành là ai, thời hạn, cách tính doanh thu thuần, ai chịu chi phí, điều kiện chấm dứt.</p>
 
-<h2>Yếu tố giúp biệt thự cho thuê tốt</h2>
+<h2>Thuế khi cho thuê biệt thự Casamia Balanca</h2>
+<p>Thu nhập từ cho thuê nhà là thu nhập chịu thuế. Chủ nhà cá nhân cần kê khai và nộp thuế giá trị gia tăng, thuế thu nhập cá nhân theo quy định hiện hành; cách tính được hướng dẫn trong bài <a href="https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/cach-tinh-thue-cho-thue-bat-dong-san-moi-nhat-2026-theo-nghi-dinh-141-va-nghi-dinh-68-20777.html">cách tính thuế cho thuê bất động sản 2026</a> trên Thư Viện Pháp Luật. Khoản thuế này cần trừ vào dòng tiền ròng khi tính hiệu quả cho thuê biệt thự Casamia Balanca.</p>
+<p>Nếu cho khách lưu trú ngắn ngày, chủ nhà còn phải đáp ứng quy định về khai báo lưu trú cho khách, đặc biệt với khách nước ngoài.</p>
+
+<h2>Yếu tố giúp cho thuê biệt thự Casamia Balanca tốt</h2>
 <ul>
 <li><strong>Vị trí:</strong> căn ven sông, view rừng dừa, gần bến thuyền dễ bán phòng hơn.</li>
 <li><strong>Thiết kế:</strong> 3 – 4 phòng ngủ có phòng tắm riêng, hồ bơi riêng phù hợp nhóm gia đình.</li>
@@ -804,7 +828,7 @@ HTML
 </ul>
 
 <h2>Lời khuyên</h2>
-<p>Biệt thự Casamia Balanca nên được xem là tài sản tích lũy dài hạn kết hợp khai thác, không phải sản phẩm dòng tiền cao. Nếu ưu tiên dòng tiền, bạn có thể so sánh với căn hộ, khách sạn tại trang <a href="/cho-thue/">cho thuê</a> hoặc <a href="/mua-ban/khach-san/">mua bán khách sạn</a>. Thông tin dự án xem tại <a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca</a> và bảng <a href="/gia-biet-thu-casamia-balanca-2026/">giá Casamia Balanca 2026</a>.</p>
+<p>Với số liệu hiện có, cho thuê biệt thự Casamia Balanca nên được xem là cách khai thác thêm cho một tài sản tích lũy dài hạn, không phải sản phẩm dòng tiền cao. Nếu ưu tiên dòng tiền, bạn có thể so sánh với căn hộ, khách sạn tại trang <a href="/cho-thue/">cho thuê</a> hoặc <a href="/mua-ban/khach-san/">mua bán khách sạn</a>. Thông tin dự án xem tại <a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca</a> và bảng <a href="/gia-biet-thu-casamia-balanca-2026/">giá Casamia Balanca 2026</a>.</p>
 
 <h2>Tự vận hành hay thuê đơn vị quản lý?</h2>
 <table>
@@ -817,7 +841,7 @@ HTML
 </table>
 <p>Dù chọn cách nào, hãy yêu cầu báo cáo doanh thu, chi phí hằng tháng để theo dõi hiệu quả thực.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng tính dòng tiền cho thuê theo từng căn Casamia Balanca, với số liệu bạn tự điều chỉnh.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng tính dòng tiền cho thuê biệt thự Casamia Balanca theo từng căn, với số liệu bạn tự điều chỉnh.</p>
 HTML
 		,
 		'seo'      => array(
@@ -825,16 +849,17 @@ HTML
 			'desc'      => 'Cho thuê biệt thự Casamia Balanca: giá thuê villa khu Cẩm Thanh, công thức ước tính dòng tiền, lưu ý gói cam kết thuê. Gọi Hoàng Hiệp 0904 567 009.',
 			'points'    => array(
 				'Villa nguyên căn Cẩm Thanh cho thuê phổ biến khoảng 1,5 – 4 triệu/đêm; villa nhiều phòng có hồ bơi cao hơn.',
-				'Chưa có số liệu doanh thu thực tế công khai của Casamia Balanca; cần tự ước tính theo công thức.',
+				'Cho thuê biệt thự Casamia Balanca chưa có số liệu doanh thu thực tế công khai; cần tự ước tính theo công thức.',
 				'Gói chia doanh thu do phân phối giới thiệu cần kiểm tra hợp đồng vận hành cụ thể.',
 			),
 			'faq'       => array(
-				array( 'Cho thuê biệt thự Casamia Balanca được bao nhiêu?', 'Chưa có số liệu doanh thu thực tế công khai. Có thể tham khảo giá thuê villa Cẩm Thanh khoảng 1,5 – 4 triệu/đêm và tự tính theo công suất giả định.' ),
+				array( 'Cho thuê biệt thự Casamia Balanca được bao nhiêu?', 'Cho thuê biệt thự Casamia Balanca hiện chưa có số liệu doanh thu thực tế công khai. Có thể tham khảo giá thuê villa Cẩm Thanh khoảng 1,5 – 4 triệu/đêm và tự tính theo công suất giả định.' ),
 				array( 'Casamia Balanca có cam kết lợi nhuận không?', 'Một số phân phối giới thiệu gói chia doanh thu; chưa thấy văn bản chính thức của chủ đầu tư, cần kiểm tra hợp đồng trước khi tin.' ),
+				array( 'Cho thuê biệt thự Casamia Balanca phải nộp thuế gì?', 'Thu nhập cho thuê nhà là thu nhập chịu thuế; chủ nhà cá nhân kê khai thuế giá trị gia tăng và thuế thu nhập cá nhân theo quy định hiện hành.' ),
 				array( 'Cách tính dòng tiền cho thuê biệt thự?', 'Doanh thu = giá thuê/đêm x 365 x công suất; trừ hoa hồng, vận hành, phí quản lý, thuế để ra dòng tiền ròng.' ),
 			),
 		),
-		'sources'  => array( 'https://vinwondersnamhoian.com/Du-lich-Hoi-An/Villa-Cam-Thanh-Hoi-An', 'https://namo-hoian.com/', 'https://tapchicongthuong.vn/tap-doan-dat-phuong--dpg-trien-vong-tai-dinh-gia-tu-viec-mo-ban-du-an-casamia-balanca-141395.htm', 'https://www.xn--bitthcasamiabalancahoian-rg2nk9a.vn/' ),
+		'sources'  => array( 'https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/cach-tinh-thue-cho-thue-bat-dong-san-moi-nhat-2026-theo-nghi-dinh-141-va-nghi-dinh-68-20777.html', 'https://vinwondersnamhoian.com/Du-lich-Hoi-An/Villa-Cam-Thanh-Hoi-An', 'https://namo-hoian.com/', 'https://tapchicongthuong.vn/tap-doan-dat-phuong--dpg-trien-vong-tai-dinh-gia-tu-viec-mo-ban-du-an-casamia-balanca-141395.htm', 'https://www.xn--bitthcasamiabalancahoian-rg2nk9a.vn/' ),
 	);
 
 	$posts[] = array(
@@ -848,7 +873,7 @@ HTML
 		'content'  => <<<'HTML'
 <p>Pháp lý Casamia Balanca có bước tiến quan trọng: <strong>tháng 8/2026, Sở Nông nghiệp và Môi trường thành phố Đà Nẵng đã cấp giấy chứng nhận quyền sử dụng đất (sổ hồng) cho các lô tại Khu đô thị Cồn Tiến</strong>, đứng tên chủ đầu tư Công ty CP Đạt Phương Hội An. Trước đó, việc phê duyệt giá đất đã tháo gỡ vướng mắc, và tại ĐHĐCĐ ngày 25/4/2026 Đạt Phương cam kết hoàn thiện thủ tục cấp sổ trong năm 2026. Thông tin cập nhật tháng 10/2026.</p>
 
-<figure><img src="/wp-content/plugins/hoang-hiep-crm/hh-crm/img/casamia-balanca/casamia-balanca-so-hong-lo-sl3.jpg" alt="Giấy chứng nhận quyền sử dụng đất lô 16 khu SL3, Khu đô thị Cồn Tiến – Casamia Balanca Hội An" width="752" height="1082" loading="lazy"><figcaption>Giấy chứng nhận lô 16 khu SL3 (178 m², đất ở tại đô thị), cấp tháng 8/2026. Số phát hành đã được che.</figcaption></figure>
+<figure><img src="/wp-content/plugins/hoang-hiep-crm/hh-crm/img/casamia-balanca/casamia-balanca-so-hong-lo-sl3.jpg" alt="Pháp lý Casamia Balanca: giấy chứng nhận quyền sử dụng đất lô 16 khu SL3, Khu đô thị Cồn Tiến" width="752" height="1082" loading="lazy"><figcaption>Giấy chứng nhận lô 16 khu SL3 (178 m², đất ở tại đô thị), cấp tháng 8/2026. Số phát hành đã được che.</figcaption></figure>
 
 <h2>Tóm tắt pháp lý Casamia Balanca</h2>
 <table>
@@ -865,17 +890,17 @@ HTML
 </table>
 
 <h2>Sổ hồng hay sổ đỏ?</h2>
-<p>Với biệt thự, nhà ở gắn liền với đất, giấy tờ hiện nay là <strong>giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất</strong> – thường được gọi chung là sổ hồng hoặc sổ đỏ. Điều quan trọng là thời điểm sổ được cấp cho từng căn và thông tin trên sổ đúng với hợp đồng.</p>
+<p>Khi nói về pháp lý Casamia Balanca, nhiều người hỏi đây là sổ hồng hay sổ đỏ. Với biệt thự, nhà ở gắn liền với đất, giấy tờ hiện nay là <strong>giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất</strong> – thường được gọi chung là sổ hồng hoặc sổ đỏ. Điều quan trọng là thời điểm sổ được cấp cho từng căn và thông tin trên sổ đúng với hợp đồng.</p>
 
-<h2>Diễn biến pháp lý đáng chú ý</h2>
+<h2>Diễn biến pháp lý Casamia Balanca đáng chú ý</h2>
 <h3>Phê duyệt giá đất</h3>
-<p>Báo chí cho biết việc phê duyệt giá đất là bước quan trọng giúp tháo gỡ vướng mắc tại Casamia Balanca, tạo cơ sở để chủ đầu tư hoàn thành nghĩa vụ tài chính và tiếp tục thủ tục cấp sổ.</p>
+<p>Báo chí cho biết việc phê duyệt giá đất là bước quan trọng trong hồ sơ pháp lý Casamia Balanca, giúp tháo gỡ vướng mắc, tạo cơ sở để chủ đầu tư hoàn thành nghĩa vụ tài chính và tiếp tục thủ tục cấp sổ.</p>
 <h3>Kế hoạch 2026 của Đạt Phương</h3>
 <p>Tại ĐHĐCĐ thường niên 2026, ban lãnh đạo Đạt Phương cho biết sẽ hoàn thiện thủ tục cấp giấy chứng nhận cho các lô đất tại Khu đô thị Cồn Tiến trong năm. Doanh nghiệp đặt mục tiêu doanh thu hơn 1.361 tỷ đồng, tập trung bán hàng Casamia Balanca và bàn giao khoảng 100 căn cuối năm.</p>
 <h3>Tháng 8/2026: đã cấp giấy chứng nhận</h3>
-<p>Kế hoạch đã thành hiện thực: các lô được cấp giấy chứng nhận đứng tên chủ đầu tư. Bước tiếp theo là thủ tục sang tên cho người mua sau khi hoàn tất thanh toán và bàn giao. Khi mua, anh chị nên yêu cầu xem bản sao giấy chứng nhận của <strong>đúng lô mình chọn</strong> và ghi rõ thời hạn sang tên trong hợp đồng.</p>
+<p>Kế hoạch đã thành hiện thực và là mốc lớn nhất của pháp lý Casamia Balanca: các lô được cấp giấy chứng nhận đứng tên chủ đầu tư. Bước tiếp theo là thủ tục sang tên cho người mua sau khi hoàn tất thanh toán và bàn giao. Khi mua, anh chị nên yêu cầu xem bản sao giấy chứng nhận của <strong>đúng lô mình chọn</strong> và ghi rõ thời hạn sang tên trong hợp đồng.</p>
 
-<h2>Checklist hồ sơ pháp lý khi mua</h2>
+<h2>Checklist hồ sơ pháp lý Casamia Balanca khi mua</h2>
 <table>
 <thead><tr><th>Giấy tờ</th><th>Vì sao cần kiểm tra</th></tr></thead>
 <tbody>
@@ -888,10 +913,10 @@ HTML
 </tbody>
 </table>
 
-<h2>Rủi ro pháp lý và cách giảm thiểu</h2>
+<h2>Rủi ro pháp lý Casamia Balanca và cách giảm thiểu</h2>
 <ul>
 <li><strong>Chậm sang tên:</strong> sổ đã cấp cho chủ đầu tư, nhưng sổ đứng tên người mua còn phụ thuộc thủ tục; nên có điều khoản thời hạn sang tên và giữ lại một phần thanh toán đến khi nhận sổ nếu thương lượng được.</li>
-<li><strong>Mua lại hợp đồng:</strong> kiểm tra văn bản chuyển nhượng hợp đồng được chủ đầu tư xác nhận.</li>
+<li><strong>Mua lại hợp đồng:</strong> kiểm tra văn bản chuyển nhượng hợp đồng được chủ đầu tư xác nhận; điều kiện chuyển nhượng hợp đồng mua bán nhà ở hình thành trong tương lai được <a href="https://thuvienphapluat.vn/phap-luat-nha-dat/hop-dong-mua-ban-nha-o-hinh-thanh-trong-tuong-lai-co-duoc-chuyen-nhuong-khong-10106.html">Thư Viện Pháp Luật</a> giải đáp.</li>
 <li><strong>Thông tin trên mạng không thống nhất:</strong> chỉ dựa vào văn bản có dấu của chủ đầu tư và cơ quan nhà nước.</li>
 </ul>
 
@@ -899,8 +924,8 @@ HTML
 <p>Xem <a href="/casamia-balanca-hoi-an-tong-quan-du-an/">tổng quan Casamia Balanca Hội An</a>, <a href="/chinh-sach-ban-hang-casamia-balanca/">chính sách bán hàng Casamia Balanca</a> hoặc trang dự án <a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca</a>. Các dự án khác tại Hội An có ở <a href="/khu-vuc/hoi-an/">khu vực Hội An</a>.</p>
 
 <h2>Mua trước hay sau khi có sổ?</h2>
-<p>Mua trước khi có sổ, người mua thường được giá và chính sách tốt hơn nhưng chấp nhận thời gian chờ. Mua sau khi có sổ an toàn hơn về pháp lý, giao dịch nhanh, nhưng giá có thể cao hơn.</p>
-<p>Với khách mua ở hoặc dùng vốn vay, Hoàng Hiệp khuyên ưu tiên sự chắc chắn: chọn căn đã đủ điều kiện bán, có bảo lãnh ngân hàng và điều khoản cấp sổ rõ ràng.</p>
+<p>Sau khi các lô đã được cấp giấy chứng nhận, câu hỏi pháp lý Casamia Balanca chuyển sang thời điểm sang tên. Nói chung, mua trước khi có sổ, người mua thường được giá và chính sách tốt hơn nhưng chấp nhận thời gian chờ. Mua sau khi có sổ an toàn hơn về pháp lý, giao dịch nhanh, nhưng giá có thể cao hơn.</p>
+<p>Với khách mua ở hoặc dùng vốn vay, Hoàng Hiệp khuyên ưu tiên sự chắc chắn về pháp lý Casamia Balanca của đúng căn mình chọn: chọn căn đã đủ điều kiện bán, có bảo lãnh ngân hàng và điều khoản cấp sổ rõ ràng.</p>
 
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được hỗ trợ kiểm tra hồ sơ pháp lý Casamia Balanca theo căn cụ thể và cập nhật tiến độ cấp giấy chứng nhận.</p>
 HTML
@@ -909,13 +934,14 @@ HTML
 			'seo_title' => 'Pháp lý Casamia Balanca: sổ hồng cấp tháng 8/2026',
 			'desc'      => 'Pháp lý Casamia Balanca: đã cấp sổ hồng các lô tháng 8/2026, đất ở tại đô thị, thời hạn ghi trên sổ, checklist hồ sơ khi mua. Gọi Hoàng Hiệp 0904 567 009.',
 			'points'    => array(
-				'Tháng 8/2026 đã cấp giấy chứng nhận (sổ hồng) cho các lô tại Khu đô thị Cồn Tiến, đứng tên chủ đầu tư.',
+				'Pháp lý Casamia Balanca: tháng 8/2026 đã cấp giấy chứng nhận (sổ hồng) cho các lô tại Khu đô thị Cồn Tiến, đứng tên chủ đầu tư.',
 				'Loại đất: đất ở tại đô thị; sổ chủ đầu tư ghi thời hạn đến 18/06/2069 – thời hạn khi sang tên theo quy định hiện hành.',
 				'Người mua cần kiểm tra quy hoạch 1/500, bảo lãnh ngân hàng, thời hạn cấp sổ trong hợp đồng.',
 			),
 			'faq'       => array(
-				array( 'Casamia Balanca có sổ hồng chưa?', 'Có. Tháng 8/2026 Sở Nông nghiệp và Môi trường Đà Nẵng đã cấp giấy chứng nhận cho các lô tại Khu đô thị Cồn Tiến, đứng tên chủ đầu tư; người mua được sang tên sau khi hoàn tất thanh toán, bàn giao.' ),
+				array( 'Casamia Balanca có sổ hồng chưa?', 'Có. Về pháp lý Casamia Balanca, tháng 8/2026 Sở Nông nghiệp và Môi trường Đà Nẵng đã cấp giấy chứng nhận cho các lô tại Khu đô thị Cồn Tiến, đứng tên chủ đầu tư; người mua được sang tên sau khi hoàn tất thanh toán, bàn giao.' ),
 				array( 'Casamia Balanca sở hữu bao lâu?', 'Sổ cấp cho chủ đầu tư ghi đất ở tại đô thị, thời hạn đến 18/06/2069. Thời hạn trên sổ sang tên cho người mua theo quy định pháp luật hiện hành – nên đối chiếu cùng Hoàng Hiệp trước khi ký.' ),
+				array( 'Pháp lý Casamia Balanca đã hoàn chỉnh để sang tên chưa?', 'Các lô đã có giấy chứng nhận đứng tên chủ đầu tư từ tháng 8/2026; việc sang tên cho người mua thực hiện sau khi hoàn tất thanh toán và bàn giao, nên cần ghi rõ thời hạn sang tên trong hợp đồng.' ),
 				array( 'Mua Casamia Balanca cần kiểm tra giấy tờ gì?', 'Quyết định giao đất, quy hoạch 1/500, giấy phép xây dựng, thông báo đủ điều kiện bán, bảo lãnh ngân hàng và điều khoản cấp sổ trong hợp đồng.' ),
 			),
 		),
@@ -923,7 +949,7 @@ HTML
 			'rank_math_description' => array( 'Pháp lý Casamia Balanca: sở hữu lâu dài, phê duyệt giá đất, kế hoạch cấp sổ 2026, checklist hồ sơ. Gọi Hoàng Hiệp 0904 567 009 để kiểm tra.' ),
 			'hh_post_faq'           => "Casamia Balanca có sổ hồng chưa? | Đạt Phương cho biết đang hoàn thiện thủ tục cấp giấy chứng nhận cho các lô tại Khu đô thị Cồn Tiến, mục tiêu trong năm 2026. Cần kiểm tra tình trạng từng căn khi mua.\nCasamia Balanca sở hữu bao lâu? | Sở hữu lâu dài với người Việt Nam; người nước ngoài theo quy định pháp luật.\nMua Casamia Balanca cần kiểm tra giấy tờ gì? | Quyết định giao đất, quy hoạch 1/500, giấy phép xây dựng, thông báo đủ điều kiện bán, bảo lãnh ngân hàng và điều khoản cấp sổ trong hợp đồng.",
 		),
-		'sources'  => array( 'https://tapchicongthuong.vn/tap-doan-dat-phuong--dpg-trien-vong-tai-dinh-gia-tu-viec-mo-ban-du-an-casamia-balanca-141395.htm', 'https://nguoiquansat.vn/dat-phuong-dpg-du-an-1-400-ty-duoc-thao-go-phap-ly-303803.html', 'https://www.firhouse.vn/du-an/du-an-casamia-balanca-hoi-an.html' ),
+		'sources'  => array( 'https://tapchicongthuong.vn/tap-doan-dat-phuong--dpg-trien-vong-tai-dinh-gia-tu-viec-mo-ban-du-an-casamia-balanca-141395.htm', 'https://thuvienphapluat.vn/phap-luat-nha-dat/hop-dong-mua-ban-nha-o-hinh-thanh-trong-tuong-lai-co-duoc-chuyen-nhuong-khong-10106.html', 'https://nguoiquansat.vn/dat-phuong-dpg-du-an-1-400-ty-duoc-thao-go-phap-ly-303803.html', 'https://www.firhouse.vn/du-an/du-an-casamia-balanca-hoi-an.html' ),
 	);
 
 	return $posts;

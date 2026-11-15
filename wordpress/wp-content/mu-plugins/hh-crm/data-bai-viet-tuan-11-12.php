@@ -408,17 +408,22 @@ HTML
 <tr><td>Masteri Đà Nẵng</td><td>Sông Hàn</td><td>Chuyển nhượng HĐMB 2PN khoảng 4,9 tỷ</td><td>–</td></tr>
 </tbody>
 </table>
-<p>Nguồn: tổng hợp tin rao bán công khai tháng 10/2026. Khoảng giá rộng vì phụ thuộc tầng, hướng view, nội thất, tình trạng pháp lý (đã có sổ hay chuyển nhượng hợp đồng). Giá rao thường còn biên độ thương lượng.</p>
+<!--hh-img:img/sun-ponte/sun-ponte-nhin-tu-song-han.jpg|Sun Ponte Residence nhìn từ sông Hàn – nhóm ven sông có giá chuyển nhượng căn hộ Đà Nẵng khoảng 70 – 112 triệu/m²-->
+<p>Nguồn: tổng hợp tin rao bán công khai tháng 10/2026. Giá chuyển nhượng căn hộ Đà Nẵng trong bảng có khoảng rộng vì phụ thuộc tầng, hướng view, nội thất, tình trạng pháp lý (đã có sổ hay chuyển nhượng hợp đồng). Giá rao thường còn biên độ thương lượng.</p>
 
-<h2>Ba phân khúc giá chuyển nhượng</h2>
+<h2>Ba phân khúc giá chuyển nhượng căn hộ Đà Nẵng</h2>
 <h3>Dưới 50 triệu/m²: Liên Chiểu, FPT City</h3>
 <p>The Ori Garden và các tòa FPT Plaza có tổng giá căn 2PN quanh 2 – 4 tỷ, phù hợp người mua ở thực ngân sách vừa phải. Xem thêm bài <a href="/mua-can-ho-da-nang-2-ty-3-ty/">mua căn hộ Đà Nẵng 2 – 3 tỷ</a>.</p>
 <h3>50 – 100 triệu/m²: ven sông Hàn, trục Trường Sa</h3>
-<p>Nhóm đông giao dịch nhất năm 2026 vì nhiều dự án vừa bàn giao: Sun Cosmo, Sun Ponte, Sun Symphony, Peninsula, Newtown Diamond, Capital Square. Chi tiết từng dự án xem các bài <a href="/sun-cosmo-residence-gia-chuyen-nhuong-cho-thue/">Sun Cosmo Residence</a>, <a href="/sun-ponte-residence-gia-chuyen-nhuong-cho-thue/">Sun Ponte Residence</a>, <a href="/peninsula-da-nang-gia-chuyen-nhuong-cho-thue/">Peninsula Đà Nẵng</a>.</p>
+<p>Đây là nhóm giá chuyển nhượng căn hộ Đà Nẵng đông giao dịch nhất năm 2026 vì nhiều dự án vừa bàn giao: Sun Cosmo, Sun Ponte, Sun Symphony, Peninsula, Newtown Diamond, Capital Square. Chi tiết từng dự án xem các bài <a href="/sun-cosmo-residence-gia-chuyen-nhuong-cho-thue/">Sun Cosmo Residence</a>, <a href="/sun-ponte-residence-gia-chuyen-nhuong-cho-thue/">Sun Ponte Residence</a>, <a href="/peninsula-da-nang-gia-chuyen-nhuong-cho-thue/">Peninsula Đà Nẵng</a>.</p>
 <h3>Trên 100 triệu/m²: hạng sang mặt sông, mặt biển</h3>
-<p>The Filmore và Times Square nằm ở nhóm cao nhất, quỹ căn ít, giá giữ tốt nhờ vị trí khó thay thế. Xem bài <a href="/the-filmore-da-nang-gia-chuyen-nhuong-cho-thue/">The Filmore Đà Nẵng</a>.</p>
+<p>The Filmore và Times Square nằm ở nhóm giá chuyển nhượng căn hộ Đà Nẵng cao nhất, quỹ căn ít, giá giữ tốt nhờ vị trí khó thay thế. Xem bài <a href="/the-filmore-da-nang-gia-chuyen-nhuong-cho-thue/">The Filmore Đà Nẵng</a>.</p>
 
-<h2>Cách đọc giá chuyển nhượng cho đúng</h2>
+<h2>Giá chuyển nhượng căn hộ Đà Nẵng so với giá bán mới</h2>
+<p>Không phải lúc nào căn chuyển nhượng cũng đắt hơn giá gốc. Ở một số dự án, giá chuyển nhượng căn hộ Đà Nẵng đang thấp hơn giá chào của chủ đầu tư: The Filmore chuyển nhượng quanh 110 triệu/m² trong khi giá chủ đầu tư khoảng 130 – 150 triệu/m²; căn 1PN Newtown Diamond rao chuyển nhượng từ khoảng 2,8 tỷ, thấp hơn khoảng giá chào bán 3,5 – 3,9 tỷ. Ngược lại, căn đã bàn giao, có nội thất và đang cho thuê thường được chào cao hơn.</p>
+<p>Thị trường năm 2026 phân hóa mạnh giữa các khu vực và dòng sản phẩm (xem nhận định trên <a href="https://cafef.vn/bds-da-nang-2026-phan-hoa-manh-de-thanh-loc-thi-truong-188260615112835053.chn">CafeF</a>), nên khi so sánh, anh chị nên đặt căn chuyển nhượng cạnh giá chủ đầu tư hiện hành, chính sách chiết khấu và thời gian chờ nhận nhà.</p>
+
+<h2>Cách đọc giá chuyển nhượng căn hộ Đà Nẵng cho đúng</h2>
 <ul>
 <li><strong>Quy về đơn giá/m² thông thủy</strong> để so giữa các căn khác diện tích.</li>
 <li><strong>Tách giá nội thất:</strong> căn full nội thất cao cấp có thể chênh vài trăm triệu so với căn bàn giao cơ bản.</li>
@@ -427,7 +432,7 @@ HTML
 </ul>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Bảng giá tin rao giúp định vị mặt bằng, nhưng giá giao dịch thật của từng căn chỉ rõ khi đã kiểm tra tầng, view, nội thất và pháp lý. Khi chọn giữa hai dự án cùng tầm tiền, anh chị nên so thêm giá thuê thực tế để biết khả năng khai thác, và thời gian còn lại đến khi nhận sổ. Quy trình giao dịch an toàn xem bài <a href="/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/">mua căn hộ chuyển nhượng Đà Nẵng</a>.</p>
+<p>Bảng giá chuyển nhượng căn hộ Đà Nẵng từ tin rao giúp định vị mặt bằng, nhưng giá giao dịch thật của từng căn chỉ rõ khi đã kiểm tra tầng, view, nội thất và pháp lý. Khi chọn giữa hai dự án cùng tầm tiền, anh chị nên so thêm giá thuê thực tế để biết khả năng khai thác, và thời gian còn lại đến khi nhận sổ. Quy trình giao dịch an toàn xem bài <a href="/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/">mua căn hộ chuyển nhượng Đà Nẵng</a>.</p>
 <p>Xem thêm danh sách <a href="/mua-ban/can-ho-chung-cu/">căn hộ đang bán tại Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn chuyển nhượng đang giao dịch thật theo ngân sách của anh chị.</p>
 HTML
 		,
@@ -435,13 +440,14 @@ HTML
 			'seo_title' => 'Giá chuyển nhượng căn hộ Đà Nẵng 2026 theo dự án',
 			'desc'      => 'Giá chuyển nhượng căn hộ Đà Nẵng 10/2026 theo 15 dự án: The Ori Garden, FPT Plaza, Sun Cosmo, Sun Ponte, Peninsula, Filmore, Times Square. Gọi Hoàng Hiệp.',
 			'points'    => array(
-				'Liên Chiểu, FPT City khoảng 30 – 42 triệu/m² (tham khảo tin rao)',
+				'Giá chuyển nhượng căn hộ Đà Nẵng ở Liên Chiểu, FPT City khoảng 30 – 42 triệu/m² (tham khảo tin rao)',
 				'Ven sông Hàn, trục Trường Sa khoảng 50 – 125 triệu/m²',
 				'Hạng sang: The Filmore khoảng 110 triệu/m², Times Square khoảng 150 triệu/m²',
 			),
 			'faq'       => array(
 				array( 'Giá chuyển nhượng căn hộ Đà Nẵng 2026 bao nhiêu?', 'Tham khảo tin rao tháng 10/2026: khoảng 30 – 42 triệu/m² ở FPT City, Liên Chiểu; 50 – 125 triệu/m² ở dự án ven sông Hàn; trên 100 triệu/m² ở nhóm hạng sang.' ),
-				array( 'Căn hộ chuyển nhượng nào dưới 3 tỷ?', 'Theo tin rao, The Ori Garden, FPT Plaza và một số căn 1PN Peninsula, studio Sun Cosmo có mức dưới 3 tỷ; cần kiểm tra từng căn cụ thể.' ),
+				array( 'Căn hộ chuyển nhượng nào dưới 3 tỷ?', 'Theo tin rao, nhóm có giá chuyển nhượng căn hộ Đà Nẵng dưới 3 tỷ gồm The Ori Garden, FPT Plaza và một số căn 1PN Peninsula, studio Sun Cosmo; cần kiểm tra từng căn cụ thể.' ),
+				array( 'Giá chuyển nhượng căn hộ Đà Nẵng có thấp hơn giá chủ đầu tư không?', 'Tùy dự án. Theo tin rao 10/2026, giá chuyển nhượng căn hộ Đà Nẵng ở The Filmore (khoảng 110 triệu/m²) thấp hơn giá chủ đầu tư (khoảng 130 – 150 triệu/m²); căn đã bàn giao có nội thất thường được chào cao hơn.' ),
 				array( 'Giá rao chuyển nhượng có phải giá chốt không?', 'Không. Đây là giá chào, thường còn biên độ thương lượng và chênh theo tầng, view, nội thất, pháp lý.' ),
 			),
 		),
@@ -453,6 +459,7 @@ HTML
 			'https://batdongsan.com.vn/ban-can-ho-chung-cu-the-ori-garden',
 			'https://batdongsan.com.vn/ban-can-ho-chung-cu-da-nang-times-square',
 			'https://batdongsan.com.vn/ban-can-ho-chung-cu-fpt-plaza-2',
+			'https://cafef.vn/bds-da-nang-2026-phan-hoa-manh-de-thanh-loc-thi-truong-188260615112835053.chn',
 		),
 	);
 
@@ -466,7 +473,7 @@ HTML
 		'week'     => 12,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p><strong>Sun Cosmo Residence</strong> là tổ hợp căn hộ, nhà phố, biệt thự của Sun Group sát chân cầu Trần Thị Lý, bờ Đông sông Hàn (Ngũ Hành Sơn, Đà Nẵng). Dự án đã bước vào giai đoạn bàn giao nên giao dịch hiện chủ yếu là chuyển nhượng và cho thuê. Giá chuyển nhượng tham khảo khoảng 65 – 95 triệu/m², căn 2PN cho thuê khoảng 30 – 35 triệu/tháng, cập nhật tháng 10/2026.</p>
+<p><strong>Giá chuyển nhượng Sun Cosmo Residence</strong> tháng 10/2026 tham khảo khoảng 65 – 95 triệu/m², căn 2PN cho thuê khoảng 30 – 35 triệu/tháng. Sun Cosmo Residence là tổ hợp căn hộ, nhà phố, biệt thự của Sun Group sát chân cầu Trần Thị Lý, bờ Đông sông Hàn (Ngũ Hành Sơn, Đà Nẵng); dự án đã bước vào giai đoạn bàn giao nên giao dịch hiện chủ yếu là chuyển nhượng và cho thuê.</p>
 
 <h2>Thông tin nhanh Sun Cosmo Residence</h2>
 <table>
@@ -492,6 +499,7 @@ HTML
 </ul>
 
 <h2>Giá chuyển nhượng Sun Cosmo Residence</h2>
+<p>Bảng giá chuyển nhượng Sun Cosmo Residence dưới đây tổng hợp theo loại căn từ tin rao công khai, chưa phải giá chốt.</p>
 <table>
 <thead><tr><th>Loại căn</th><th>Giá chuyển nhượng tham khảo (10/2026)</th></tr></thead>
 <tbody>
@@ -501,7 +509,11 @@ HTML
 <tr><td>3 phòng ngủ</td><td>Khoảng 6 – 9,5 tỷ</td></tr>
 </tbody>
 </table>
-<p>Quy đổi khoảng 65 – 95 triệu/m². Biên độ rộng vì khác biệt giữa tòa A và B, tầng, view sông Hàn hay hướng phố, và nội thất. Căn view sông tầng cao thường nằm ở nhóm trên.</p>
+<p>Quy đổi, giá chuyển nhượng Sun Cosmo Residence khoảng 65 – 95 triệu/m². Biên độ rộng vì khác biệt giữa tòa A và B, tầng, view sông Hàn hay hướng phố, và nội thất. Căn view sông tầng cao thường nằm ở nhóm trên.</p>
+<!--hh-img:img/sun-cosmo/sun-cosmo-mat-bang-tong-the.jpg|Mặt bằng tổng thể Sun Cosmo – vị trí tòa, hướng view ảnh hưởng trực tiếp đến giá chuyển nhượng Sun Cosmo Residence-->
+
+<h2>Giá chuyển nhượng Sun Cosmo Residence so với dự án ven sông khác</h2>
+<p>Theo tin rao tháng 10/2026, giá chuyển nhượng Sun Cosmo Residence (khoảng 65 – 95 triệu/m²) thấp hơn Sun Ponte (khoảng 70 – 112 triệu/m²) và Sun Symphony (khoảng 69 – 125 triệu/m²), nhưng cao hơn Peninsula (khoảng 50 – 83 triệu/m²). Lấy mức giữa căn 2PN (khoảng 5,2 tỷ) và giá thuê giữa (khoảng 32,5 triệu/tháng), doanh thu cho thuê khoảng 390 triệu/năm, tương đương khoảng 7,5% giá mua trước phí quản lý, nội thất và thời gian trống phòng. Thông tin tổng quan dự án có tại <a href="https://vnexpress.net/bat-dong-san/du-an/detail/sun-cosmo-residence-da-nang-527">VnExpress</a>.</p>
 
 <h2>Giá cho thuê Sun Cosmo Residence</h2>
 <table>
@@ -522,13 +534,15 @@ HTML
 <h3>Sun Cosmo Residence nằm ở đâu?</h3>
 <p>Dự án nằm tại giao lộ Trần Hưng Đạo – Chương Dương – Nguyễn Văn Thoại, sát chân cầu Trần Thị Lý, bờ Đông sông Hàn, cách biển Mỹ Khê khoảng 2 km.</p>
 <h3>Nên chọn căn nào để cho thuê?</h3>
-<p>Studio và 1PN có vốn thấp, dễ tìm khách đi làm hoặc lưu trú dài ngày; 2PN phù hợp gia đình chuyên gia. Hãy kiểm tra nội quy tòa nhà về lưu trú ngắn ngày trước khi chọn mô hình cho thuê.</p>
+<p>Studio và 1PN có vốn thấp, dễ tìm khách đi làm hoặc lưu trú dài ngày; 2PN phù hợp gia đình chuyên gia. Với studio, giá chuyển nhượng Sun Cosmo Residence khoảng 1,8 – 2,5 tỷ là mức vốn thấp nhất dự án. Hãy kiểm tra nội quy tòa nhà về lưu trú ngắn ngày trước khi chọn mô hình cho thuê.</p>
+<h3>Giá chuyển nhượng Sun Cosmo Residence có còn thương lượng được không?</h3>
+<p>Đây là giá chào trên tin rao nên thường còn biên độ thương lượng. Mức chốt của giá chuyển nhượng Sun Cosmo Residence phụ thuộc tòa, tầng, view, nội thất và căn đã có sổ hay đang chuyển nhượng hợp đồng.</p>
 <h3>Mua căn Sun Cosmo cần chuẩn bị chi phí gì ngoài giá căn?</h3>
 <p>Thuế, phí giao dịch, phí quản lý và nội thất. Cách tính xem bài <a href="/thue-phi-mua-ban-nha-dat-da-nang-2026/">thuế, phí mua bán nhà đất 2026</a>.</p>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Sun Cosmo có lợi thế giá đầu vào mềm hơn Sun Symphony và Sun Ponte trong khi vẫn ở bờ Đông sông Hàn, gần cầu Trần Thị Lý. Nếu mua để cho thuê, hãy tính tỷ suất trên tổng chi phí gồm nội thất và phí quản lý, và lấy giá thuê ở mức giữa khoảng tham khảo. Nếu mua căn chuyển nhượng hợp đồng (chưa có sổ), cần xác nhận của chủ đầu tư về số tiền đã thanh toán – xem bài <a href="/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/">mua căn hộ chuyển nhượng Đà Nẵng</a>. So sánh với các dự án khác tại bài <a href="/gia-chuyen-nhuong-can-ho-da-nang-2026-theo-du-an/">giá chuyển nhượng căn hộ Đà Nẵng 2026</a>.</p>
-<p>Xem trang dự án <a href="/du-an/sun-cosmo-residence/">Sun Cosmo Residence</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn Sun Cosmo đang chuyển nhượng và cho thuê thật, kèm giá cập nhật.</p>
+<p>Giá chuyển nhượng Sun Cosmo Residence mềm hơn Sun Symphony và Sun Ponte trong khi dự án vẫn ở bờ Đông sông Hàn, gần cầu Trần Thị Lý. Nếu mua để cho thuê, hãy tính tỷ suất trên tổng chi phí gồm nội thất và phí quản lý, và lấy giá thuê ở mức giữa khoảng tham khảo. Nếu mua căn chuyển nhượng hợp đồng (chưa có sổ), cần xác nhận của chủ đầu tư về số tiền đã thanh toán – xem bài <a href="/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/">mua căn hộ chuyển nhượng Đà Nẵng</a>. So sánh với các dự án khác tại bài <a href="/gia-chuyen-nhuong-can-ho-da-nang-2026-theo-du-an/">giá chuyển nhượng căn hộ Đà Nẵng 2026</a>.</p>
+<p>Xem trang dự án <a href="/du-an/sun-cosmo-residence/">Sun Cosmo Residence</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn Sun Cosmo đang chuyển nhượng và cho thuê thật, kèm giá chuyển nhượng Sun Cosmo Residence cập nhật.</p>
 HTML
 		,
 		'seo'      => array(
@@ -536,11 +550,11 @@ HTML
 			'desc'      => 'Sun Cosmo Residence Đà Nẵng: khoảng 650 căn studio – 3PN, chuyển nhượng 65 – 95 triệu/m², thuê 2PN 30 – 35 triệu/tháng (tham khảo). Gọi Hoàng Hiệp.',
 			'points'    => array(
 				'Sun Group, sát chân cầu Trần Thị Lý; tòa A 27 tầng, tòa B 33 tầng, khoảng 650 căn hộ',
-				'Chuyển nhượng: studio 1,8 – 2,5 tỷ, 2PN 3,6 – 6,8 tỷ (tham khảo 10/2026)',
+				'Giá chuyển nhượng Sun Cosmo Residence: studio 1,8 – 2,5 tỷ, 2PN 3,6 – 6,8 tỷ (tham khảo 10/2026)',
 				'Cho thuê: studio từ 16 triệu, 2PN khoảng 30 – 35 triệu/tháng',
 			),
 			'faq'       => array(
-				array( 'Giá chuyển nhượng Sun Cosmo Residence bao nhiêu?', 'Tham khảo tháng 10/2026: studio khoảng 1,8 – 2,5 tỷ, 1PN 2,8 – 5,3 tỷ, 2PN 3,6 – 6,8 tỷ, 3PN 6 – 9,5 tỷ.' ),
+				array( 'Giá chuyển nhượng Sun Cosmo Residence bao nhiêu?', 'Giá chuyển nhượng Sun Cosmo Residence tham khảo tháng 10/2026: studio khoảng 1,8 – 2,5 tỷ, 1PN 2,8 – 5,3 tỷ, 2PN 3,6 – 6,8 tỷ, 3PN 6 – 9,5 tỷ.' ),
 				array( 'Thuê căn hộ Sun Cosmo giá bao nhiêu?', 'Studio từ khoảng 16 triệu/tháng, 1PN khoảng 23 – 24 triệu, 2PN khoảng 30 – 35 triệu, 3PN khoảng 30 – 40 triệu (tin rao, chủ yếu căn có nội thất).' ),
 				array( 'Sun Cosmo Residence có bao nhiêu căn hộ?', 'Khoảng 650 căn hộ trong tòa A (27 tầng) và tòa B (33 tầng), cùng 38 shop khối đế, 101 nhà phố và 45 biệt thự.' ),
 				array( 'Sun Cosmo có sổ hồng lâu dài không?', 'Dự án được giới thiệu là sở hữu lâu dài; tiến độ cấp sổ từng căn theo thông báo của chủ đầu tư.' ),
@@ -566,7 +580,7 @@ HTML
 		'week'     => 12,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p><strong>Sun Ponte Residence</strong> là tòa tháp 26 tầng của Sun Group trên đường Trần Hưng Đạo (Sơn Trà), nằm giữa cầu Rồng và cầu Trần Thị Lý, mặt tiền sông Hàn. Căn hộ bắt đầu bàn giao từ tháng 3/2026, nên thị trường đã hình thành giá chuyển nhượng và giá thuê. Giá chuyển nhượng tham khảo tháng 10/2026 khoảng 70 – 112 triệu/m²; giá thuê theo bảng căn cho thuê tháng 11/2026: studio 11 – 17 triệu, 2PN 25 – 38 triệu/tháng (full nội thất).</p>
+<p><strong>Giá chuyển nhượng Sun Ponte Residence</strong> tham khảo tháng 10/2026 khoảng 70 – 112 triệu/m²; giá thuê theo bảng căn cho thuê tháng 11/2026: studio 11 – 17 triệu, 2PN 25 – 38 triệu/tháng (full nội thất). Sun Ponte Residence là tòa tháp 26 tầng của Sun Group trên đường Trần Hưng Đạo (Sơn Trà), nằm giữa cầu Rồng và cầu Trần Thị Lý, mặt tiền sông Hàn; căn hộ bắt đầu bàn giao từ tháng 3/2026 nên thị trường đã hình thành giá chuyển nhượng và giá thuê.</p>
 
 <h2>Thông tin nhanh Sun Ponte Residence</h2>
 <table>
@@ -584,13 +598,14 @@ HTML
 
 <h2>Các loại căn Sun Ponte</h2>
 <ul>
-<li><strong>Studio, 1PN, 1PN+:</strong> nhóm vốn thấp, được nhà đầu tư cho thuê quan tâm nhờ vị trí sát cầu Rồng.</li>
+<li><strong>Studio, 1PN, 1PN+:</strong> nhóm vốn thấp, được nhà đầu tư cho thuê quan tâm nhờ vị trí sát cầu Rồng; giá chuyển nhượng Sun Ponte Residence cho studio/1PN khoảng 2,96 – 4,49 tỷ.</li>
 <li><strong>2PN, 3PN:</strong> phù hợp gia đình, khách thuê chuyên gia.</li>
 <li><strong>Penthouse:</strong> 7 căn trên các tầng cao – liên hệ để nhận thông tin từng căn.</li>
 <li><strong>Shophouse khối đế:</strong> 26 căn, diện tích 40 – 150 m² (căn mặt tiền Trần Hưng Đạo đến khoảng 308 m²), tầng 1 cao 7 m.</li>
 </ul>
 
 <h2>Giá chuyển nhượng Sun Ponte Residence</h2>
+<p>Bảng giá chuyển nhượng Sun Ponte Residence dưới đây tổng hợp theo loại căn từ tin rao công khai, chưa phải giá chốt.</p>
 <table>
 <thead><tr><th>Loại căn</th><th>Giá chuyển nhượng tham khảo (10/2026)</th></tr></thead>
 <tbody>
@@ -601,7 +616,11 @@ HTML
 <tr><td>Shophouse khối đế</td><td>Khoảng 4,6 tỷ (40,7 m²) đến 13 – 64,6 tỷ (mặt tiền Trần Hưng Đạo) – giá chào bán tham khảo</td></tr>
 </tbody>
 </table>
-<p>Quy đổi căn hộ khoảng 70 – 112 triệu/m². Căn trực diện sông Hàn, nhìn cầu Rồng và khu vực pháo hoa thường ở nhóm giá trên.</p>
+<p>Quy đổi, giá chuyển nhượng Sun Ponte Residence phần căn hộ khoảng 70 – 112 triệu/m². Căn trực diện sông Hàn, nhìn cầu Rồng và khu vực pháo hoa thường ở nhóm giá trên.</p>
+<!--hh-img:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg|Sun Ponte thực tế 11/2026 bên cầu Rồng – vị trí sát cầu giữ giá chuyển nhượng Sun Ponte Residence ở nhóm cao-->
+
+<h2>Giá chuyển nhượng Sun Ponte Residence so với giá thuê</h2>
+<p>Với căn 2PN, lấy mức giữa giá chuyển nhượng Sun Ponte Residence (khoảng 5,6 tỷ) và mức giữa giá thuê căn 68 – 78 m² (khoảng 31,5 triệu/tháng), doanh thu cho thuê khoảng 378 triệu/năm, tương đương khoảng 6,7% giá mua trước phí quản lý, thuế và thời gian trống phòng. Căn studio có vốn thấp hơn nhưng giá thuê cũng dao động rộng (11 – 17 triệu/tháng), nên cần xem kỹ tầng và view. Quá trình hoàn thiện tòa tháp sau 2 năm thi công từng được <a href="https://vnexpress.net/to-hop-sun-ponte-residence-mat-song-han-sau-2-nam-thi-cong-5078528.html">VnExpress</a> ghi nhận.</p>
 
 <h2>Giá cho thuê Sun Ponte Residence</h2>
 <table>
@@ -617,19 +636,21 @@ HTML
 <p>Theo bảng căn cho thuê tháng 11/2026 (khoảng 40 căn): tất cả bàn giao full nội thất, không nuôi thú cưng, thuê tối thiểu 3 tháng (một số studio nhận thuê từ 1 tháng); khoảng 1/3 số căn trong bảng đã có khách thuê. Căn 3PN 102 m² và căn Dual 105 m² liên hệ giá. Giá thay đổi theo tầng, view và thời điểm – đây là giá chào thuê, chưa phải lợi suất bảo đảm.</p>
 
 <h2>Phân khu The Rio</h2>
-<p><a href="/du-an/the-rio-sun-ponte/">The Rio</a> là phân khu thấp tầng giới hạn của Sun Ponte, ra mắt tháng 7/2025, gồm 41 nhà phố 6,5 tầng và 16 biệt thự đơn lập, song lập do Aedas thiết kế, dùng chung tiện ích với tòa tháp. Giá The Rio giao dịch theo từng căn – liên hệ để nhận thông tin.</p>
+<p><a href="/du-an/the-rio-sun-ponte/">The Rio</a> là phân khu thấp tầng giới hạn của Sun Ponte, ra mắt tháng 7/2025, gồm 41 nhà phố 6,5 tầng và 16 biệt thự đơn lập, song lập do Aedas thiết kế, dùng chung tiện ích với tòa tháp. Giá The Rio giao dịch theo từng căn, tách biệt với giá chuyển nhượng Sun Ponte Residence phần căn hộ – liên hệ để nhận thông tin.</p>
 
 <h2>Câu hỏi thường gặp</h2>
 <h3>Sun Ponte Residence khác Sun Symphony thế nào?</h3>
 <p>Sun Ponte là 1 tòa 26 tầng với 495 căn hộ, sát cầu Rồng; Sun Symphony là tổ hợp 8 ha, 3 tòa với 1.313 căn hộ và nhiều tiện ích nội khu hơn.</p>
 <h3>Shophouse khối đế Sun Ponte có đặc điểm gì?</h3>
 <p>26 căn, diện tích 40 – 150 m² (căn mặt tiền Trần Hưng Đạo đến khoảng 308 m²), tầng 1 cao 7 m, tầng 2 cao 4,5 m, bàn giao thô, sở hữu lâu dài.</p>
+<h3>Giá chuyển nhượng Sun Ponte Residence có còn thương lượng được không?</h3>
+<p>Đây là giá chào trên tin rao nên thường còn biên độ thương lượng. Mức chốt của giá chuyển nhượng Sun Ponte Residence phụ thuộc tầng, hướng sông Hàn hay hướng phố, nội thất và căn đã có sổ hay đang chuyển nhượng hợp đồng.</p>
 <h3>Căn Sun Ponte đang bàn giao mua chuyển nhượng thế nào?</h3>
 <p>Nếu căn chưa có sổ, giao dịch là chuyển nhượng hợp đồng mua bán: công chứng văn bản chuyển nhượng và nộp chủ đầu tư xác nhận. Xem chi tiết tại bài <a href="/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/">mua căn hộ chuyển nhượng Đà Nẵng</a>.</p>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Sun Ponte phù hợp người cần căn nhỏ ở vị trí trung tâm để ở hoặc cho thuê. Vì giá mua vào cũng cao, anh chị nên lập bảng dòng tiền với giá thuê ở mức giữa khoảng tham khảo, trừ phí quản lý, nội thất và thời gian trống phòng trước khi quyết định. Nếu đang cân nhắc giữa các dự án ven sông, xem bài <a href="/so-sanh-can-ho-ven-song-han-sun-symphony-sun-ponte-peninsula/">so sánh Sun Symphony, Sun Ponte, Peninsula</a>; nếu cho khách nước ngoài thuê, lưu ý quy định khai báo tạm trú tại bài <a href="/cho-thue-can-ho-da-nang-hop-dong-thue-tam-tru/">cho thuê căn hộ Đà Nẵng</a>.</p>
-<p>Xem trang dự án <a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn Sun Ponte đang chuyển nhượng và cho thuê thật, kèm giá cập nhật.</p>
+<p>Sun Ponte phù hợp người cần căn nhỏ ở vị trí trung tâm để ở hoặc cho thuê. Vì giá chuyển nhượng Sun Ponte Residence thuộc nhóm cao, anh chị nên lập bảng dòng tiền với giá thuê ở mức giữa khoảng tham khảo, trừ phí quản lý, nội thất và thời gian trống phòng trước khi quyết định. Nếu đang cân nhắc giữa các dự án ven sông, xem bài <a href="/so-sanh-can-ho-ven-song-han-sun-symphony-sun-ponte-peninsula/">so sánh Sun Symphony, Sun Ponte, Peninsula</a>; nếu cho khách nước ngoài thuê, lưu ý quy định khai báo tạm trú tại bài <a href="/cho-thue-can-ho-da-nang-hop-dong-thue-tam-tru/">cho thuê căn hộ Đà Nẵng</a>.</p>
+<p>Xem trang dự án <a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn Sun Ponte đang chuyển nhượng và cho thuê thật, kèm giá chuyển nhượng Sun Ponte Residence cập nhật.</p>
 HTML
 		,
 		'seo'      => array(
@@ -637,11 +658,11 @@ HTML
 			'desc'      => 'Sun Ponte Residence cạnh cầu Rồng: 495 căn hộ, chuyển nhượng 70 – 112 triệu/m², thuê studio 11 – 17 triệu, 2PN 25 – 38 triệu/tháng (11/2026). Gọi Hoàng Hiệp.',
 			'points'    => array(
 				'Tòa 26 tầng, 495 căn hộ, 7 penthouse, 26 shophouse; bàn giao từ 3/2026',
-				'Chuyển nhượng: studio/1PN 2,96 – 4,49 tỷ, 2PN 4,3 – 6,9 tỷ (tham khảo)',
+				'Giá chuyển nhượng Sun Ponte Residence: studio/1PN 2,96 – 4,49 tỷ, 2PN 4,3 – 6,9 tỷ (tham khảo)',
 				'Cho thuê full nội thất (11/2026): studio 11 – 17 triệu, 1PN+ 18 – 27 triệu, 2PN 25 – 38 triệu/tháng',
 			),
 			'faq'       => array(
-				array( 'Giá chuyển nhượng Sun Ponte Residence bao nhiêu?', 'Tham khảo tháng 10/2026: studio/1PN khoảng 2,96 – 4,49 tỷ, 1PN+ 3,6 – 4,9 tỷ, 2PN 4,3 – 6,9 tỷ, 3PN 5,6 – 10 tỷ.' ),
+				array( 'Giá chuyển nhượng Sun Ponte Residence bao nhiêu?', 'Giá chuyển nhượng Sun Ponte Residence tham khảo tháng 10/2026: studio/1PN khoảng 2,96 – 4,49 tỷ, 1PN+ 3,6 – 4,9 tỷ, 2PN 4,3 – 6,9 tỷ, 3PN 5,6 – 10 tỷ.' ),
 				array( 'Thuê căn hộ Sun Ponte giá bao nhiêu?', 'Theo bảng căn cho thuê tháng 11/2026 (full nội thất): studio 11 – 17 triệu/tháng, 1PN+ 18 – 27 triệu, 2PN 68 – 78 m² 25 – 38 triệu, 2PN 91 m² 45 – 50 triệu, 3PN 91 m² khoảng 48 triệu.' ),
 				array( 'Sun Ponte Residence đã bàn giao chưa?', 'Căn hộ bắt đầu bàn giao từ tháng 3/2026, hoàn tất dự kiến quý 3/2026 theo kế hoạch công bố.' ),
 				array( 'The Rio thuộc dự án nào?', 'The Rio là phân khu thấp tầng của Sun Ponte Residence, gồm 41 nhà phố và 16 biệt thự cạnh cầu Rồng.' ),
@@ -666,7 +687,7 @@ HTML
 		'week'     => 12,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p><strong>Peninsula Đà Nẵng</strong> là tòa căn hộ 30 tầng của Tập đoàn Đông Đô trên đường Lê Văn Duyệt (Sơn Trà), khu đất có 4 mặt tiền và 3 mặt hướng sông Hàn. Trong nhóm căn hộ ven sông Hàn, Peninsula có mặt bằng giá chuyển nhượng dễ tiếp cận nhất, khoảng 50 – 83 triệu/m² (tham khảo tháng 10/2026). Bài viết tổng hợp giá chuyển nhượng, giá thuê và các loại căn.</p>
+<p><strong>Giá chuyển nhượng Peninsula Đà Nẵng</strong> tham khảo tháng 10/2026 khoảng 50 – 83 triệu/m² – mặt bằng dễ tiếp cận nhất trong nhóm căn hộ ven sông Hàn. Peninsula Đà Nẵng là tòa căn hộ 30 tầng của Tập đoàn Đông Đô trên đường Lê Văn Duyệt (Sơn Trà), khu đất có 4 mặt tiền và 3 mặt hướng sông Hàn. Bài viết tổng hợp giá chuyển nhượng, giá thuê và các loại căn.</p>
 
 <h2>Thông tin nhanh Peninsula Đà Nẵng</h2>
 <table>
@@ -692,6 +713,7 @@ HTML
 </ul>
 
 <h2>Giá chuyển nhượng Peninsula Đà Nẵng</h2>
+<p>Bảng giá chuyển nhượng Peninsula Đà Nẵng dưới đây tổng hợp theo loại căn từ tin rao công khai, chưa phải giá chốt.</p>
 <table>
 <thead><tr><th>Loại căn</th><th>Giá chuyển nhượng tham khảo (10/2026)</th></tr></thead>
 <tbody>
@@ -700,7 +722,8 @@ HTML
 <tr><td>3 phòng ngủ</td><td>Khoảng 5,5 – 6,5 tỷ</td></tr>
 </tbody>
 </table>
-<p>Quy đổi khoảng 50 – 83 triệu/m². Vì dự án chưa hoàn tất bàn giao, phần lớn giao dịch là chuyển nhượng hợp đồng mua bán: người mua cần cộng phần tiền còn phải thanh toán cho chủ đầu tư vào tổng giá.</p>
+<!--hh-img:img/peninsula/peninsula-da-nang-tien-do-10-2026-cua-kinh-view-song.jpg|Peninsula Đà Nẵng tiến độ 10/2026, cửa kính nhìn ra sông Hàn – hướng view quyết định giá chuyển nhượng Peninsula Đà Nẵng-->
+<p>Quy đổi, giá chuyển nhượng Peninsula Đà Nẵng khoảng 50 – 83 triệu/m². Vì dự án chưa hoàn tất bàn giao, phần lớn giao dịch là chuyển nhượng hợp đồng mua bán: người mua cần cộng phần tiền còn phải thanh toán cho chủ đầu tư vào tổng giá.</p>
 
 <h2>Giá cho thuê Peninsula Đà Nẵng</h2>
 <table>
@@ -712,20 +735,23 @@ HTML
 </table>
 <p>Số tin cho thuê còn ít do dự án đang trong giai đoạn hoàn thiện; mặt bằng giá thuê sẽ rõ hơn khi nhiều căn được bàn giao và hoàn thiện nội thất.</p>
 
-<h2>So với các dự án ven sông Hàn khác</h2>
-<p>So với Sun Ponte (khoảng 70 – 112 triệu/m²) và Sun Symphony (khoảng 69 – 125 triệu/m²), Peninsula có đơn giá thấp hơn rõ, phù hợp người mua để ở với ngân sách 3 – 5 tỷ vẫn muốn view sông Hàn. Đổi lại là thời gian chờ nhận nhà và quy mô tiện ích gọn trong một tòa. Chi tiết xem bài <a href="/sun-ponte-residence-gia-chuyen-nhuong-cho-thue/">Sun Ponte Residence</a> và <a href="/gia-chuyen-nhuong-can-ho-da-nang-2026-theo-du-an/">bảng giá chuyển nhượng căn hộ Đà Nẵng 2026</a>.</p>
+<h2>Giá chuyển nhượng Peninsula Đà Nẵng so với dự án ven sông Hàn khác</h2>
+<p>So với Sun Ponte (khoảng 70 – 112 triệu/m²) và Sun Symphony (khoảng 69 – 125 triệu/m²), Peninsula có đơn giá thấp hơn rõ, phù hợp người mua để ở với ngân sách 3 – 5 tỷ vẫn muốn view sông Hàn. Đổi lại là thời gian chờ nhận nhà và quy mô tiện ích gọn trong một tòa.</p>
+<p>Lấy mức giữa căn 2PN (khoảng 4 tỷ) và giá thuê giữa (khoảng 26,5 triệu/tháng), doanh thu cho thuê khoảng 318 triệu/năm, gần 8% giá chuyển nhượng Peninsula Đà Nẵng trước chi phí – nhưng số tin cho thuê còn ít nên cần kiểm chứng khi dự án bàn giao nhiều hơn. Thông tin tổng quan dự án có trên <a href="https://cafeland.vn/du-an/du-an-can-ho-peninsula-da-nang-4522.html">CafeLand</a>. Chi tiết xem bài <a href="/sun-ponte-residence-gia-chuyen-nhuong-cho-thue/">Sun Ponte Residence</a> và <a href="/gia-chuyen-nhuong-can-ho-da-nang-2026-theo-du-an/">bảng giá chuyển nhượng căn hộ Đà Nẵng 2026</a>.</p>
 
 <h2>Câu hỏi thường gặp</h2>
 <h3>Peninsula Đà Nẵng có hồ bơi không?</h3>
 <p>Có. Dự án có hồ bơi vô cực ở tầng 30, cùng gym, yoga, spa, thư viện, kid zone, sân vườn và café.</p>
 <h3>Mua chuyển nhượng Peninsula phải nộp thuế gì?</h3>
 <p>Bên bán phát sinh thuế thu nhập cá nhân 2% trên giá chuyển nhượng; các khoản khác như phí công chứng, lệ phí trước bạ khi cấp sổ do các bên thỏa thuận. Xem bài <a href="/thue-phi-mua-ban-nha-dat-da-nang-2026/">thuế, phí mua bán nhà đất 2026</a>.</p>
+<h3>Giá chuyển nhượng Peninsula Đà Nẵng có còn thương lượng được không?</h3>
+<p>Đây là giá chào trên tin rao nên thường còn biên độ thương lượng. Mức chốt của giá chuyển nhượng Peninsula Đà Nẵng phụ thuộc tầng, hướng sông hay hướng phố, phần tiền còn phải nộp chủ đầu tư và tình trạng thế chấp của căn.</p>
 <h3>Shophouse Peninsula có bao nhiêu căn?</h3>
 <p>10 shophouse khối đế 2 tầng, hai mặt tiền, tổng diện tích 199 – 269 m², giá chào từ khoảng 79 triệu/m² (tham khảo).</p>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Peninsula là điểm vào hợp lý cho khách muốn sống ven sông Hàn với tổng tiền vừa phải. Với căn chuyển nhượng hợp đồng, anh chị cần xác nhận của chủ đầu tư về số tiền đã nộp, kiểm tra căn có đang thế chấp không và đọc kỹ điều khoản bàn giao trong hợp đồng gốc. Hướng căn cũng quan trọng: căn nhìn trực diện sông và cầu sẽ giữ giá tốt hơn căn hướng phố. Quy trình chi tiết xem bài <a href="/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/">mua căn hộ chuyển nhượng Đà Nẵng</a>.</p>
-<p>Xem trang dự án <a href="/du-an/peninsula-da-nang/">Peninsula Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn Peninsula đang chuyển nhượng, kèm hướng view và giá cập nhật.</p>
+<p>Với giá chuyển nhượng Peninsula Đà Nẵng ở mức mềm nhất nhóm ven sông, đây là điểm vào hợp lý cho khách muốn sống ven sông Hàn với tổng tiền vừa phải. Với căn chuyển nhượng hợp đồng, anh chị cần xác nhận của chủ đầu tư về số tiền đã nộp, kiểm tra căn có đang thế chấp không và đọc kỹ điều khoản bàn giao trong hợp đồng gốc. Hướng căn cũng quan trọng: căn nhìn trực diện sông và cầu sẽ giữ giá tốt hơn căn hướng phố. Quy trình chi tiết xem bài <a href="/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/">mua căn hộ chuyển nhượng Đà Nẵng</a>.</p>
+<p>Xem trang dự án <a href="/du-an/peninsula-da-nang/">Peninsula Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn Peninsula đang chuyển nhượng, kèm hướng view và giá chuyển nhượng Peninsula Đà Nẵng cập nhật.</p>
 HTML
 		,
 		'seo'      => array(
@@ -733,11 +759,11 @@ HTML
 			'desc'      => 'Peninsula Đà Nẵng: khoảng 941 căn ven sông Hàn, chuyển nhượng 50 – 83 triệu/m², thuê 2PN 23 – 30 triệu/tháng (tham khảo 10/2026). Gọi Hoàng Hiệp.',
 			'points'    => array(
 				'Tòa 30 tầng, khoảng 941 căn 46 – 109 m², 4 mặt tiền, 3 mặt hướng sông Hàn',
-				'Chuyển nhượng: 1PN 2,2 – 2,7 tỷ, 2PN 3 – 5 tỷ, 3PN 5,5 – 6,5 tỷ (tham khảo)',
+				'Giá chuyển nhượng Peninsula Đà Nẵng: 1PN 2,2 – 2,7 tỷ, 2PN 3 – 5 tỷ, 3PN 5,5 – 6,5 tỷ (tham khảo)',
 				'Cho thuê 2PN khoảng 23 – 30 triệu/tháng; mặt bằng giá mềm nhất nhóm ven sông',
 			),
 			'faq'       => array(
-				array( 'Giá chuyển nhượng Peninsula Đà Nẵng bao nhiêu?', 'Tham khảo tháng 10/2026: 1PN khoảng 2,2 – 2,7 tỷ, 2PN 3 – 5 tỷ, 3PN 5,5 – 6,5 tỷ, tương đương khoảng 50 – 83 triệu/m².' ),
+				array( 'Giá chuyển nhượng Peninsula Đà Nẵng bao nhiêu?', 'Giá chuyển nhượng Peninsula Đà Nẵng tham khảo tháng 10/2026: 1PN khoảng 2,2 – 2,7 tỷ, 2PN 3 – 5 tỷ, 3PN 5,5 – 6,5 tỷ, tương đương khoảng 50 – 83 triệu/m².' ),
 				array( 'Thuê căn hộ Peninsula giá bao nhiêu?', 'Căn 2PN khoảng 23 – 30 triệu/tháng; mặt bằng chung khoảng 20 – 45 triệu tùy diện tích và view sông Hàn.' ),
 				array( 'Peninsula Đà Nẵng khi nào bàn giao?', 'Các nguồn công bố mốc khác nhau, từ quý 4/2026 đến quý 1/2027; anh chị nên đối chiếu thông báo chính thức của chủ đầu tư.' ),
 				array( 'Peninsula Đà Nẵng có bao nhiêu căn?', 'Khoảng 941 căn hộ trong tòa 30 tầng, 3 tầng hầm, cùng 10 shophouse khối đế.' ),
@@ -762,9 +788,9 @@ HTML
 		'week'     => 12,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p><strong>Hiyori Đà Nẵng</strong> là tên gọi chung hai dự án căn hộ chuẩn Nhật Bản của Sun Frontier tại Sơn Trà: <strong>Hiyori Garden Tower</strong> đã bàn giao từ cuối năm 2019 và <strong>HIYORI Aqua Tower</strong> cất nóc tháng 9/2026, dự kiến bàn giao quý 2/2027. Bài viết so sánh hai tòa về loại căn, giá chuyển nhượng, giá bán và giá thuê tham khảo, cập nhật tháng 10/2026.</p>
+<p><strong>Hiyori Đà Nẵng</strong> là tên gọi chung hai dự án căn hộ chuẩn Nhật Bản của Sun Frontier tại Sơn Trà: <strong>Hiyori Garden Tower</strong> đã bàn giao từ cuối năm 2019 và <strong>HIYORI Aqua Tower</strong> cất nóc tháng 9/2026, dự kiến bàn giao quý 2/2027. Bài viết so sánh hai tòa Hiyori Đà Nẵng về loại căn, giá chuyển nhượng, giá bán và giá thuê tham khảo, cập nhật tháng 10/2026.</p>
 
-<h2>So sánh nhanh hai dự án Hiyori</h2>
+<h2>So sánh nhanh hai dự án Hiyori Đà Nẵng</h2>
 <table>
 <thead><tr><th>Tiêu chí</th><th>Hiyori Garden Tower</th><th>HIYORI Aqua Tower</th></tr></thead>
 <tbody>
@@ -778,6 +804,7 @@ HTML
 </table>
 
 <h2>Hiyori Garden Tower: căn 2PN đã có sổ</h2>
+<!--hh-img:img/du-an-bia/hiyori-garden-tower.jpg|Hiyori Garden Tower – dự án đầu tiên trong cụm căn hộ Hiyori Đà Nẵng tại Sơn Trà-->
 <p>Hiyori Garden Tower là dự án căn hộ phong cách Nhật đầu tiên của Sun Frontier tại Đà Nẵng, khởi công tháng 5/2017 và bàn giao tháng 12/2019. Gần như toàn bộ là căn 2 phòng ngủ, tiện ích gồm hồ bơi, gym, nhà trẻ tiêu chuẩn Nhật, công viên, khu sinh hoạt cộng đồng, cửa hàng tiện ích.</p>
 <h3>Giá chuyển nhượng và cho thuê Hiyori Garden Tower</h3>
 <table>
@@ -789,7 +816,7 @@ HTML
 <p>Vì đã có sổ, giao dịch tại Hiyori Garden Tower là mua bán căn hộ thông thường, thủ tục đơn giản hơn chuyển nhượng hợp đồng. Khách thuê chủ yếu là gia đình, chuyên gia muốn ở gần biển với chi phí vừa phải.</p>
 
 <h2>HIYORI Aqua Tower: dự án mới, đang thi công</h2>
-<p>HIYORI Aqua Tower (Chung cư Tháp Đại Dương) do Công ty TNHH Aqua Tower làm chủ đầu tư, Sun Frontier Đà Nẵng phát triển; DINCO thi công, Artelia Việt Nam giám sát thi công, ASAI KEN giám sát thiết kế. Tầng trệt bố trí thương mại như siêu thị mini, cà phê; tiện ích gồm hồ bơi, gym, spa, vườn trên cao, vườn thiền, nhà trẻ, phòng sinh hoạt cộng đồng.</p>
+<p>HIYORI Aqua Tower (Chung cư Tháp Đại Dương; xem giới thiệu trên <a href="https://thanhnien.vn/hiyori-aqua-tower-can-ho-phong-cach-nhat-ban-tai-ban-dao-son-tra-185260214160905684.htm">Thanh Niên</a>) do Công ty TNHH Aqua Tower làm chủ đầu tư, Sun Frontier Đà Nẵng phát triển; DINCO thi công, Artelia Việt Nam giám sát thi công, ASAI KEN giám sát thiết kế. Tầng trệt bố trí thương mại như siêu thị mini, cà phê; tiện ích gồm hồ bơi, gym, spa, vườn trên cao, vườn thiền, nhà trẻ, phòng sinh hoạt cộng đồng.</p>
 <h3>Giá bán HIYORI Aqua Tower</h3>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá tham khảo</th></tr></thead>
@@ -801,7 +828,11 @@ HTML
 </table>
 <p>Mặt bằng giá chào bán khoảng 55 – 75 triệu/m² tùy tầng và view (tham khảo). Dự án chưa bàn giao nên chưa có mặt bằng giá thuê. Lưu ý các trang phân phối nêu dải diện tích khác nhau, cần đối chiếu mặt bằng chính thức.</p>
 
-<h2>Chọn Hiyori Garden hay HIYORI Aqua?</h2>
+<h2>Giá Hiyori Đà Nẵng: căn đã có sổ và căn mới</h2>
+<p>Điểm đáng chú ý khi so giá Hiyori Đà Nẵng: căn 2PN mới của HIYORI Aqua Tower (khoảng 4,5 tỷ cho căn 68 m²) có tổng giá thấp hơn căn 2PN Hiyori Garden Tower đã có sổ (khoảng 5 – 6,7 tỷ). Đổi lại, người mua Aqua phải chờ đến quý 2/2027 mới nhận nhà, cần thêm chi phí nội thất và chưa có lịch sử cho thuê để kiểm chứng.</p>
+<p>Với Hiyori Garden Tower, lấy mức giữa giá chuyển nhượng (khoảng 5,85 tỷ) và giá thuê phổ biến (khoảng 19,5 triệu/tháng), doanh thu cho thuê khoảng 234 triệu/năm, tương đương khoảng 4% giá mua trước chi phí. Đây là mức phù hợp với người mua để ở hoặc giữ tài sản hơn là tối ưu dòng tiền.</p>
+
+<h2>Hiyori Đà Nẵng: chọn Hiyori Garden hay HIYORI Aqua?</h2>
 <ul>
 <li><strong>Cần ở hoặc cho thuê ngay, ưu tiên pháp lý hoàn chỉnh:</strong> Hiyori Garden Tower – đã có sổ, có lịch sử cho thuê để kiểm chứng.</li>
 <li><strong>Muốn sản phẩm mới, gần biển hơn, chấp nhận chờ đến 2027:</strong> HIYORI Aqua Tower, có thêm lựa chọn căn 1PN vốn thấp.</li>
@@ -811,26 +842,29 @@ HTML
 <h2>Câu hỏi thường gặp</h2>
 <h3>Hiyori Garden Tower có căn 1 phòng ngủ không?</h3>
 <p>Hầu như không. Tòa có 306 căn, trong đó 300 căn 2PN và 6 căn 3PN. Nếu cần căn 1PN, HIYORI Aqua Tower có 22 căn khoảng 45 m².</p>
+<h3>Hiyori Đà Nẵng cách biển bao xa?</h3>
+<p>Hiyori Garden Tower trên đường Võ Văn Kiệt cách biển Mỹ Khê khoảng 1 km; HIYORI Aqua Tower ở góc Lê Đức Thọ – Ngô Cao Lãng, khoảng 5 phút đi bộ ra biển. Cả hai dự án Hiyori Đà Nẵng đều thuộc Sơn Trà, gần biển nhưng không nằm trên trục du lịch đông đúc.</p>
 <h3>HIYORI Aqua Tower ai thi công?</h3>
 <p>Công ty TNHH Kỹ thuật Xây dựng DINCO thi công, Artelia Việt Nam giám sát thi công, ASAI KEN Architecture Research giám sát thiết kế.</p>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Hai tòa Hiyori phù hợp khách thích phong cách sống yên tĩnh, quy mô nhỏ, gần biển nhưng không nằm trên trục du lịch đông đúc. Với Hiyori Garden Tower, nên kiểm tra kỹ hiện trạng nội thất và thiết bị vì tòa nhà đã vận hành từ 2019. Với HIYORI Aqua Tower, cần đọc kỹ tiến độ thanh toán và điều khoản bàn giao trong hợp đồng. Giá thuê khu gần biển xem bài <a href="/thue-can-ho-bien-my-khe-gia-theo-du-an/">thuê căn hộ biển Mỹ Khê</a>.</p>
-<p>Xem trang dự án <a href="/du-an/hiyori-garden-tower/">Hiyori Garden Tower</a> và <a href="/du-an/hiyori-aqua-tower/">HIYORI Aqua Tower</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn Hiyori đang bán, cho thuê và bảng giá HIYORI Aqua Tower mới nhất.</p>
+<p>Hai tòa Hiyori Đà Nẵng phù hợp khách thích phong cách sống yên tĩnh, quy mô nhỏ, gần biển nhưng không nằm trên trục du lịch đông đúc. Với Hiyori Garden Tower, nên kiểm tra kỹ hiện trạng nội thất và thiết bị vì tòa nhà đã vận hành từ 2019. Với HIYORI Aqua Tower, cần đọc kỹ tiến độ thanh toán và điều khoản bàn giao trong hợp đồng. Giá thuê khu gần biển xem bài <a href="/thue-can-ho-bien-my-khe-gia-theo-du-an/">thuê căn hộ biển Mỹ Khê</a>.</p>
+<p>Xem trang dự án <a href="/du-an/hiyori-garden-tower/">Hiyori Garden Tower</a> và <a href="/du-an/hiyori-aqua-tower/">HIYORI Aqua Tower</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn Hiyori Đà Nẵng đang bán, cho thuê và bảng giá HIYORI Aqua Tower mới nhất.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Hiyori Đà Nẵng: Garden Tower và Aqua Tower – giá 2026',
 			'desc'      => 'Hiyori Đà Nẵng: Hiyori Garden Tower 2PN 5 – 6,7 tỷ, thuê 15 – 25 triệu; HIYORI Aqua Tower 202 căn, 2PN khoảng 4,5 tỷ (tham khảo). Gọi Hoàng Hiệp.',
 			'points'    => array(
-				'Hiyori Garden Tower: 306 căn, bàn giao 12/2019, đã có sổ; 2PN khoảng 5 – 6,7 tỷ',
+				'Hiyori Đà Nẵng – Hiyori Garden Tower: 306 căn, bàn giao 12/2019, đã có sổ; 2PN khoảng 5 – 6,7 tỷ',
 				'Cho thuê Hiyori Garden 2PN khoảng 15 – 25 triệu/tháng (tham khảo)',
 				'HIYORI Aqua Tower: 25 tầng, 202 căn, cất nóc 9/2026, dự kiến bàn giao quý 2/2027',
 			),
 			'faq'       => array(
-				array( 'Hiyori Đà Nẵng gồm những dự án nào?', 'Gồm Hiyori Garden Tower (Võ Văn Kiệt, đã bàn giao 2019) và HIYORI Aqua Tower (Lê Đức Thọ – Ngô Cao Lãng, dự kiến bàn giao quý 2/2027), đều do Sun Frontier phát triển.' ),
+				array( 'Hiyori Đà Nẵng gồm những dự án nào?', 'Hiyori Đà Nẵng gồm Hiyori Garden Tower (Võ Văn Kiệt, đã bàn giao 2019) và HIYORI Aqua Tower (Lê Đức Thọ – Ngô Cao Lãng, dự kiến bàn giao quý 2/2027), đều do Sun Frontier phát triển.' ),
 				array( 'Giá căn hộ Hiyori Garden Tower bao nhiêu?', 'Tham khảo tháng 10/2026, căn 2PN 63 – 71 m² chuyển nhượng khoảng 5 – 6,7 tỷ.' ),
 				array( 'Thuê căn hộ Hiyori Garden Tower giá bao nhiêu?', 'Căn 2PN khoảng 15 – 25 triệu/tháng, phổ biến 18 – 21 triệu; căn view đẹp đến khoảng 28 triệu.' ),
+				array( 'Mua Hiyori Đà Nẵng để cho thuê có hợp lý không?', 'Hiyori Đà Nẵng hợp với người ở hoặc giữ tài sản hơn tối ưu dòng tiền: căn 2PN Hiyori Garden Tower cho thuê phổ biến 18 – 21 triệu/tháng, tương đương khoảng 4%/năm trên giá mua trước chi phí (tham khảo).' ),
 				array( 'HIYORI Aqua Tower giá bao nhiêu?', 'Mặt bằng chào bán khoảng 55 – 75 triệu/m²; căn 2PN 68 m² khoảng 4,5 tỷ (tham khảo). Căn 1PN và 3PN liên hệ.' ),
 			),
 		),
@@ -841,6 +875,7 @@ HTML
 			'https://homedy.com/news/review-chi-tiet-chung-cu-hiyori-da-nang-ne6550',
 			'https://giagocchudautu.com/hiyori-garden-tower/',
 			'https://pmcweb.vn/project/hiyori-garden-tower/',
+			'https://thanhnien.vn/hiyori-aqua-tower-can-ho-phong-cach-nhat-ban-tai-ban-dao-son-tra-185260214160905684.htm',
 		),
 	);
 
@@ -853,7 +888,7 @@ HTML
 		'week'     => 12,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p><strong>The Filmore Đà Nẵng</strong> là tòa căn hộ hạng sang 25 tầng trên đường Bạch Đằng (Hải Châu), mặt tiền sông Hàn, chỉ 206 căn, mỗi tầng 9 căn. Tòa nhà đã hoàn thiện năm 2025, người mua nhận nhà ngay. Tham khảo tháng 10/2026: chuyển nhượng khoảng 110 triệu/m², thuê 1PN khoảng 22 – 27 triệu/tháng, 2PN khoảng 35 – 40 triệu/tháng.</p>
+<p><strong>Giá chuyển nhượng The Filmore</strong> tham khảo tháng 10/2026 khoảng 110 triệu/m²; giá thuê 1PN khoảng 22 – 27 triệu/tháng, 2PN khoảng 35 – 40 triệu/tháng. The Filmore Đà Nẵng là tòa căn hộ hạng sang 25 tầng trên đường Bạch Đằng (Hải Châu), mặt tiền sông Hàn, chỉ 206 căn, mỗi tầng 9 căn; tòa nhà đã hoàn thiện năm 2025, người mua nhận nhà ngay.</p>
 
 <h2>Thông tin nhanh The Filmore</h2>
 <table>
@@ -882,9 +917,10 @@ HTML
 <tr><td>Penthouse</td><td>–</td><td>Khoảng 206 m²</td><td>Từ khoảng 44,9 tỷ</td></tr>
 </tbody>
 </table>
-<p>Căn Dual Key chia thành hai không gian độc lập trong một căn, thuận tiện vừa ở vừa cho thuê hoặc cho thuê tách hai phần.</p>
+<p>Căn Dual Key chia thành hai không gian độc lập trong một căn, thuận tiện vừa ở vừa cho thuê hoặc cho thuê tách hai phần. Giá chủ đầu tư ở bảng trên là mốc để đối chiếu với giá chuyển nhượng The Filmore ở phần dưới.</p>
 
 <h2>Giá chuyển nhượng The Filmore</h2>
+<p>Bảng giá chuyển nhượng The Filmore dưới đây tổng hợp theo loại căn từ tin rao công khai, chưa phải giá chốt.</p>
 <table>
 <thead><tr><th>Loại căn</th><th>Giá chuyển nhượng tham khảo (10/2026)</th></tr></thead>
 <tbody>
@@ -892,7 +928,12 @@ HTML
 <tr><td>2PN (71 – 81 m²)</td><td>Khoảng 8,3 – 9,3 tỷ</td></tr>
 </tbody>
 </table>
-<p>Quy đổi khoảng 110 triệu/m², trong khi giá chào của chủ đầu tư khoảng 130 – 150 triệu/m². Khoảng giá chuyển nhượng rộng phụ thuộc tầng, hướng nhìn sông Hàn – cầu Rồng hay hướng phố.</p>
+<p>Quy đổi, giá chuyển nhượng The Filmore khoảng 110 triệu/m², trong khi giá chào của chủ đầu tư khoảng 130 – 150 triệu/m². Khoảng giá chuyển nhượng rộng phụ thuộc tầng, hướng nhìn sông Hàn – cầu Rồng hay hướng phố.</p>
+<!--hh-img:img/du-an-bia/the-filmore-da-nang.jpg|The Filmore Đà Nẵng bên sông Hàn – giá chuyển nhượng The Filmore tham khảo khoảng 110 triệu/m² (10/2026)-->
+
+<h2>Giá chuyển nhượng The Filmore so với giá chủ đầu tư</h2>
+<p>Theo tin rao, giá chuyển nhượng The Filmore cho căn 1PN dao động khoảng 4,5 – 7,6 tỷ, bao trùm khoảng giá chủ đầu tư 5,5 – 6 tỷ; căn 2PN chuyển nhượng khoảng 8,3 – 9,3 tỷ, gần như trùng giá chủ đầu tư 8,2 – 9,3 tỷ. Vì vậy, lợi thế của căn chuyển nhượng chủ yếu nằm ở việc chọn đúng tầng, hướng và nội thất đang có, không phải chênh lệch giá lớn.</p>
+<p>Về dòng tiền, lấy mức giữa căn 2PN (khoảng 8,8 tỷ) và giá thuê giữa (khoảng 37,5 triệu/tháng), doanh thu cho thuê khoảng 450 triệu/năm, tương đương khoảng 5% giá mua trước chi phí. Thông tin tổng quan dự án có trên <a href="https://cafeland.vn/du-an/can-ho-the-filmore-da-nang-3101.html">CafeLand</a>.</p>
 
 <h2>Giá cho thuê The Filmore</h2>
 <table>
@@ -910,12 +951,15 @@ HTML
 <p>Là căn 70,27 m² chia thành hai không gian độc lập trong cùng một căn, có thể ở một phần và cho thuê phần còn lại, hoặc cho thuê tách hai phần. Dự án có 12 căn loại này.</p>
 <h3>Người nước ngoài có mua được The Filmore không?</h3>
 <p>Dự án được giới thiệu sở hữu lâu dài cho người Việt Nam. Với người nước ngoài, thời hạn và điều kiện sở hữu theo Luật Nhà ở 2023 – cần hỏi chủ đầu tư về số căn còn trong giới hạn cho người nước ngoài.</p>
+<h3>Giá chuyển nhượng The Filmore có còn thương lượng được không?</h3>
+<p>Đây là giá chào trên tin rao nên thường còn biên độ thương lượng. Mức chốt của giá chuyển nhượng The Filmore phụ thuộc tầng, hướng sông Hàn – cầu Rồng hay hướng phố và danh mục nội thất đi kèm.</p>
 <h3>Mua căn The Filmore chuyển nhượng cần lưu ý gì?</h3>
 <p>Kiểm tra sổ hoặc hợp đồng gốc, danh mục nội thất bàn giao và phí quản lý. Quy trình xem bài <a href="/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/">mua căn hộ chuyển nhượng Đà Nẵng</a>.</p>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>The Filmore phù hợp khách mua để ở lâu dài hoặc giữ tài sản ở vị trí trung tâm, nơi quỹ đất ven sông Hàn cho dự án căn hộ mới gần như không còn. Vì đơn giá thuộc nhóm cao nhất Đà Nẵng, lợi suất cho thuê tính trên giá mua sẽ không lớn; anh chị nên xem đây là tài sản giữ giá hơn là sản phẩm tối ưu dòng tiền. Khi mua chuyển nhượng, nên so sánh với giá chào trực tiếp từ chủ đầu tư cho cùng loại căn trước khi quyết định. Đối chiếu với các dự án khác tại bài <a href="/gia-chuyen-nhuong-can-ho-da-nang-2026-theo-du-an/">giá chuyển nhượng căn hộ Đà Nẵng 2026</a> hoặc <a href="/can-ho-view-song-han-du-an-va-gia/">căn hộ view sông Hàn</a>.</p>
-<p>Xem trang dự án <a href="/du-an/the-filmore-da-nang/">The Filmore Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn The Filmore đang chuyển nhượng, cho thuê và bảng giá chủ đầu tư mới nhất.</p>
+<p>The Filmore phù hợp khách mua để ở lâu dài hoặc giữ tài sản ở vị trí trung tâm, nơi quỹ đất ven sông Hàn cho dự án căn hộ mới gần như không còn. Vì đơn giá thuộc nhóm cao nhất Đà Nẵng, lợi suất cho thuê tính trên giá mua sẽ không lớn; anh chị nên xem đây là tài sản giữ giá hơn là sản phẩm tối ưu dòng tiền.</p>
+<p>Khi xem giá chuyển nhượng The Filmore, nên so sánh với giá chào trực tiếp từ chủ đầu tư cho cùng loại căn trước khi quyết định. Đối chiếu với các dự án khác tại bài <a href="/gia-chuyen-nhuong-can-ho-da-nang-2026-theo-du-an/">giá chuyển nhượng căn hộ Đà Nẵng 2026</a> hoặc <a href="/can-ho-view-song-han-du-an-va-gia/">căn hộ view sông Hàn</a>.</p>
+<p>Xem trang dự án <a href="/du-an/the-filmore-da-nang/">The Filmore Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn The Filmore đang chuyển nhượng, cho thuê, kèm giá chuyển nhượng The Filmore cập nhật và bảng giá chủ đầu tư mới nhất.</p>
 HTML
 		,
 		'seo'      => array(
@@ -923,11 +967,11 @@ HTML
 			'desc'      => 'The Filmore Đà Nẵng: 206 căn hạng sang ven sông Hàn, chuyển nhượng 1PN 4,5 – 7,6 tỷ, thuê 2PN 35 – 40 triệu/tháng (tham khảo 10/2026). Gọi Hoàng Hiệp.',
 			'points'    => array(
 				'25 tầng, 206 căn, 9 căn/tầng; Delta thi công, CBRE vận hành; hoàn thiện 2025',
-				'Chuyển nhượng 1PN khoảng 4,5 – 7,6 tỷ, 2PN 8,3 – 9,3 tỷ (≈ 110 triệu/m²)',
+				'Giá chuyển nhượng The Filmore: 1PN khoảng 4,5 – 7,6 tỷ, 2PN 8,3 – 9,3 tỷ (≈ 110 triệu/m²)',
 				'Cho thuê 1PN 22 – 27 triệu, 2PN 35 – 40 triệu, 3PN view sông đến 95 triệu/tháng',
 			),
 			'faq'       => array(
-				array( 'Giá chuyển nhượng The Filmore Đà Nẵng bao nhiêu?', 'Tham khảo tháng 10/2026: 1PN khoảng 4,5 – 7,6 tỷ, 2PN 8,3 – 9,3 tỷ, tương đương khoảng 110 triệu/m².' ),
+				array( 'Giá chuyển nhượng The Filmore Đà Nẵng bao nhiêu?', 'Giá chuyển nhượng The Filmore tham khảo tháng 10/2026: 1PN khoảng 4,5 – 7,6 tỷ, 2PN 8,3 – 9,3 tỷ, tương đương khoảng 110 triệu/m².' ),
 				array( 'Thuê căn hộ The Filmore giá bao nhiêu?', '1PN khoảng 22 – 27 triệu/tháng, 2PN 35 – 40 triệu, căn 3PN view sông Hàn đến khoảng 95 triệu theo tin rao.' ),
 				array( 'The Filmore có bao nhiêu căn hộ?', '206 căn gồm 75 căn 1PN, 106 căn 2PN, 12 căn Dual Key, 9 căn Sky Terrace, 4 căn Loft 3PN và penthouse.' ),
 				array( 'The Filmore đã bàn giao chưa?', 'Tòa nhà hoàn thiện năm 2025, sẵn sàng bàn giao, người mua nhận nhà ở ngay.' ),

@@ -319,21 +319,21 @@ HTML
 	/* ---------------- 07/11 – 3 khu tái định cư Duy Xuyên phục vụ đường sắt tốc độ cao ---------------- */
 	$posts[] = array(
 		'slug'           => 'tai-dinh-cu-duy-xuyen-duong-sat-toc-do-cao-392-ty',
-		'rev'            => 2,
+		'rev'            => 3, // 15/11: chuẩn SEO 100/100.
 		'title'          => 'Đà Nẵng duyệt 3 khu tái định cư hơn 392 tỷ tại Duy Xuyên cho đường sắt tốc độ cao Bắc – Nam',
 		'excerpt'        => 'UBND TP Đà Nẵng ban hành Quyết định 5082/QĐ-UBND phê duyệt 3 khu tái định cư Duy Trung, Duy Sơn, Duy Trinh – Duy Sơn (khoảng 31 ha, hơn 392 tỷ đồng, 2026 – 2029) phục vụ giải phóng mặt bằng đường sắt tốc độ cao Bắc – Nam.',
-		'keyword'        => 'tái định cư đường sắt tốc độ cao Duy Xuyên',
-		'keywords_extra' => array( 'đường sắt tốc độ cao qua Đà Nẵng', 'tái định cư Duy Xuyên', 'Quyết định 5082/QĐ-UBND', 'bất động sản Duy Xuyên' ),
+		'keyword'        => 'tái định cư Duy Xuyên',
+		'keywords_extra' => array( 'đường sắt tốc độ cao qua Đà Nẵng', 'tái định cư đường sắt tốc độ cao Duy Xuyên', 'Quyết định 5082/QĐ-UBND', 'bất động sản Duy Xuyên' ),
 		'project'        => 'nam-hoi-an-city',
 		'schedule'       => '2026-11-07 08:00',
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'Đường sắt tốc độ cao', 'Duy Xuyên', 'Tái định cư' ),
 		'image'          => 'plugin:img/tin-tuc/tai-dinh-cu-duy-xuyen-duong-sat-toc-do-cao.jpg',
-		'image_alt'      => 'Sơ đồ minh hoạ 3 khu tái định cư Duy Trung, Duy Sơn, Duy Trinh – Duy Sơn tại xã Duy Xuyên phục vụ đường sắt tốc độ cao Bắc – Nam',
+		'image_alt'      => 'Sơ đồ minh hoạ 3 khu tái định cư Duy Xuyên (Duy Trung, Duy Sơn, Duy Trinh – Duy Sơn) phục vụ đường sắt tốc độ cao Bắc – Nam',
 		'content'        => <<<HTML
-<p>UBND thành phố Đà Nẵng vừa ban hành <strong>Quyết định số 5082/QĐ-UBND</strong> phê duyệt Dự án thành phần 11 – xây dựng <strong>3 khu tái định cư tại xã Duy Xuyên</strong> phục vụ giải phóng mặt bằng tuyến <strong>đường sắt tốc độ cao Bắc – Nam</strong>, tổng mức đầu tư hơn 392 tỷ đồng.</p>
+<p>Ba khu <strong>tái định cư Duy Xuyên</strong> vừa được duyệt: UBND thành phố Đà Nẵng ban hành <strong>Quyết định số 5082/QĐ-UBND</strong> phê duyệt Dự án thành phần 11 – xây dựng 3 khu tái định cư tại xã Duy Xuyên phục vụ giải phóng mặt bằng tuyến <strong>đường sắt tốc độ cao Bắc – Nam</strong>, tổng mức đầu tư hơn 392 tỷ đồng.</p>
 <!--hh-featured-->
-<h2>Những con số chính</h2>
+<h2>Tái định cư Duy Xuyên: những con số chính</h2>
 <table>
 <thead><tr><th>Nội dung</th><th>Theo báo chí đưa tin</th></tr></thead>
 <tbody>
@@ -347,20 +347,23 @@ HTML
 <tr><td>Thời gian thực hiện</td><td>2026 – 2029</td></tr>
 </tbody>
 </table>
-<p>Mục đích là tạo quỹ đất bố trí chỗ ở cho các hộ dân phải di dời khi Nhà nước thu hồi đất làm tuyến đường sắt. Theo VietnamPlus, tổng mức đầu tư giải phóng mặt bằng tuyến đường sắt tốc độ cao qua Đà Nẵng dự kiến hơn 19.551 tỷ đồng.</p>
+<p>Mục đích của các khu tái định cư Duy Xuyên là tạo quỹ đất bố trí chỗ ở cho các hộ dân phải di dời khi Nhà nước thu hồi đất làm tuyến đường sắt. Theo <a href="https://www.vietnamplus.vn/da-nang-trien-khai-tai-dinh-cu-phuc-vu-du-an-duong-sat-toc-do-cao-bac-nam-post1143554.vnp">VietnamPlus</a>, tổng mức đầu tư giải phóng mặt bằng tuyến đường sắt tốc độ cao qua Đà Nẵng dự kiến hơn 19.551 tỷ đồng.</p>
 <h2>Đường sắt tốc độ cao Bắc – Nam đang ở bước nào?</h2>
 <ul>
 <li>Tuyến dài khoảng 1.541 km, sơ bộ tổng mức đầu tư khoảng 67,34 tỷ USD, gồm 23 ga hành khách và 5 ga hàng hóa.</li>
 <li>Bộ Xây dựng đặt mục tiêu nỗ lực <strong>khởi công vào tháng 12/2027</strong>; gói thầu tư vấn khảo sát, lập báo cáo nghiên cứu khả thi (TV-02) đã mở thầu.</li>
 <li>Ga Đà Nẵng của tuyến dự kiến đặt tại Hòa Sơn – xem thêm <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang/">ga đường sắt tốc độ cao Đà Nẵng tại Hòa Sơn</a>.</li>
 </ul>
-<!--hh-img:img/da-nang/duy-xuyen-flycam-song-thu-bon-cau-cua-dai-hoi-an.jpg|Ảnh thực tế flycam: từ bờ Duy Xuyên nhìn về cầu Cửa Đại, sông Thu Bồn và Hội An-->
+<h2>Hộ dân trong diện tái định cư Duy Xuyên cần biết gì?</h2>
+<p>Với các hộ có đất bị thu hồi, khu tái định cư Duy Xuyên là nơi được bố trí đất ở mới. Thông thường, hộ dân cần theo dõi thông báo thu hồi đất, kiểm đếm, phương án bồi thường – hỗ trợ – tái định cư do UBND xã niêm yết; kiểm tra diện tích, loại đất được ghi nhận; và hỏi rõ vị trí, giá giao lô tái định cư cùng nghĩa vụ tài chính. Nếu chưa đồng ý với số liệu kiểm đếm, nên có ý kiến bằng văn bản trong thời gian niêm yết công khai.</p>
+<!--hh-img:img/da-nang/duy-xuyen-flycam-song-thu-bon-cau-cua-dai-hoi-an.jpg|Ảnh thực tế flycam: từ bờ Duy Xuyên – nơi có 3 khu tái định cư Duy Xuyên – nhìn về cầu Cửa Đại, sông Thu Bồn và Hội An-->
 <h2>Tác động / nhận định của Hoàng Hiệp</h2>
 <ul>
-<li><strong>Tín hiệu tuyến đi vào thực tế:</strong> làm tái định cư trước là bước bắt buộc để giải phóng mặt bằng. Việc Duy Xuyên có quyết định đầu tư cụ thể cho thấy hướng tuyến qua khu vực này đã được xác định ở mức đủ để lập dự án.</li>
+<li><strong>Tín hiệu tuyến đi vào thực tế:</strong> làm tái định cư trước là bước bắt buộc để giải phóng mặt bằng. Việc dự án tái định cư Duy Xuyên có quyết định đầu tư cụ thể cho thấy hướng tuyến qua khu vực này đã được xác định ở mức đủ để lập dự án.</li>
 <li><strong>Đất nằm trong hành lang tuyến cần cẩn trọng:</strong> trước khi mua đất ở Duy Xuyên, Điện Bàn hay các xã giáp ranh, anh chị nên hỏi UBND xã hoặc văn phòng đăng ký đất đai xem thửa đất có nằm trong phạm vi thu hồi của tuyến hay khu tái định cư không.</li>
+<li><strong>Lô tái định cư Duy Xuyên không phải hàng bán tự do:</strong> lô được giao cho hộ bị thu hồi đất; khi có người rao "suất tái định cư", cần kiểm tra quyết định giao đất và điều kiện chuyển nhượng.</li>
 <li><strong>Không nên kỳ vọng tăng giá ngắn hạn:</strong> tuyến dự kiến khởi công cuối 2027 và hoàn thành khoảng 2035; tác động lên giá đất chủ yếu là dài hạn, tập trung quanh ga chứ không phải dọc tuyến.</li>
-<li><strong>Hạ tầng dân cư mới:</strong> 3 khu tái định cư có đường, điện, nước, cây xanh đồng bộ – góp phần làm dày dân cư phía Nam Hội An trong vài năm tới.</li>
+<li><strong>Hạ tầng dân cư mới:</strong> 3 khu tái định cư Duy Xuyên có đường, điện, nước, cây xanh đồng bộ – góp phần làm dày dân cư phía Nam Hội An trong vài năm tới.</li>
 </ul>
 <h2>Dự án chịu ảnh hưởng</h2>
 <ul>
@@ -373,16 +376,16 @@ HTML
 HTML
 		,
 		'seo'            => array(
-			'seo_title' => 'Tái định cư Duy Xuyên cho đường sắt tốc độ cao',
-			'desc'      => 'Đà Nẵng duyệt 3 khu tái định cư Duy Trung, Duy Sơn, Duy Trinh – Duy Sơn (~31 ha, hơn 392 tỷ, 2026 – 2029) phục vụ đường sắt tốc độ cao Bắc – Nam.',
+			'seo_title' => 'Tái định cư Duy Xuyên 392 tỷ cho đường sắt tốc độ cao',
+			'desc'      => 'Đà Nẵng duyệt 3 khu tái định cư Duy Xuyên (Duy Trung, Duy Sơn, Duy Trinh – Duy Sơn), khoảng 31 ha, hơn 392 tỷ, 2026 – 2029, phục vụ đường sắt tốc độ cao.',
 			'points'    => array(
-				'QĐ 5082/QĐ-UBND duyệt Dự án thành phần 11: 3 khu tái định cư tại xã Duy Xuyên, hơn 392 tỷ đồng',
+				'Tái định cư Duy Xuyên – QĐ 5082/QĐ-UBND duyệt Dự án thành phần 11: 3 khu tái định cư tại xã Duy Xuyên, hơn 392 tỷ đồng',
 				'Khoảng 31 ha: Duy Trung 5,27 ha, Duy Sơn 10,99 ha, Duy Trinh – Duy Sơn 14,74 ha; thực hiện 2026 – 2029',
 				'Đường sắt tốc độ cao Bắc – Nam ~1.541 km, mục tiêu khởi công 12/2027; đất trong hành lang tuyến cần kiểm tra kỹ',
 			),
 			'faq'       => array(
-				array( '3 khu tái định cư đường sắt tốc độ cao ở Duy Xuyên nằm đâu?', 'Khu Duy Trung (thôn Hòa Lâm, hơn 5,27 ha), khu Duy Sơn (thôn Chiêm Sơn, khoảng 10,99 ha) và khu Duy Trinh – Duy Sơn (hơn 14,74 ha), đều thuộc xã Duy Xuyên, TP Đà Nẵng.' ),
-				array( 'Tổng vốn và thời gian làm các khu tái định cư?', 'Tổng mức đầu tư hơn 392 tỷ đồng theo Quyết định 5082/QĐ-UBND, dự kiến thực hiện giai đoạn 2026 – 2029.' ),
+				array( '3 khu tái định cư Duy Xuyên nằm đâu?', 'Các khu tái định cư Duy Xuyên gồm khu Duy Trung (thôn Hòa Lâm, hơn 5,27 ha), khu Duy Sơn (thôn Chiêm Sơn, khoảng 10,99 ha) và khu Duy Trinh – Duy Sơn (hơn 14,74 ha), đều thuộc xã Duy Xuyên, TP Đà Nẵng.' ),
+				array( 'Tổng vốn và thời gian làm các khu tái định cư Duy Xuyên?', 'Tổng mức đầu tư hơn 392 tỷ đồng theo Quyết định 5082/QĐ-UBND, dự kiến thực hiện giai đoạn 2026 – 2029.' ),
 				array( 'Đường sắt tốc độ cao Bắc – Nam khi nào khởi công?', 'Bộ Xây dựng đặt mục tiêu nỗ lực khởi công vào tháng 12/2027; dự án dự kiến cơ bản hoàn thành khoảng năm 2035.' ),
 			),
 		),
@@ -399,18 +402,19 @@ HTML
 		'slug'           => 'da-nang-du-thao-nghi-quyet-tod-quanh-ga-duong-sat',
 		'title'          => 'Đà Nẵng lấy ý kiến dự thảo nghị quyết TOD: tăng hệ số sử dụng đất tối đa 1,5 lần quanh ga đường sắt',
 		'excerpt'        => 'Sở Xây dựng Đà Nẵng lấy ý kiến dự thảo nghị quyết HĐND về phát triển đô thị theo mô hình TOD: hệ số sử dụng đất tối đa có thể tăng đến 1,5 lần so với quy chuẩn trong khoảng 1 km quanh nhà ga; dự kiến trình HĐND kỳ họp cuối năm 2026.',
-		'keyword'        => 'TOD quanh ga đường sắt Đà Nẵng',
+		'keyword'        => 'TOD quanh ga đường sắt',
 		'keywords_extra' => array( 'dự thảo nghị quyết TOD Đà Nẵng', 'hệ số sử dụng đất quanh nhà ga', 'đô thị TOD Đà Nẵng', 'đường sắt đô thị Đà Nẵng' ),
 		'project'        => 'sun-saphia-residence',
 		'schedule'       => '2026-11-09 08:00',
+		'rev'            => 2, // 15/11: chuẩn SEO 100/100.
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'TOD', 'Đường sắt', 'Quy hoạch' ),
 		'image'          => 'plugin:img/tin-tuc/tod-quanh-ga-duong-sat-da-nang-du-thao-nghi-quyet.jpg',
-		'image_alt'      => 'Hình minh hoạ đô thị TOD: hệ số sử dụng đất cao dần về phía nhà ga trong bán kính khoảng 1 km',
+		'image_alt'      => 'Hình minh hoạ đô thị TOD quanh ga đường sắt: hệ số sử dụng đất cao dần về phía nhà ga trong bán kính khoảng 1 km',
 		'content'        => <<<HTML
-<p>Sở Xây dựng Đà Nẵng đã ra công văn ngày <strong>23/10/2026</strong> lấy ý kiến <strong>dự thảo nghị quyết của HĐND thành phố</strong> về phát triển đô thị theo mô hình <strong>TOD</strong> (Transit Oriented Development – phát triển đô thị gắn với giao thông công cộng) quanh các nhà ga đường sắt. Điểm đáng chú ý nhất với thị trường: <strong>hệ số sử dụng đất tối đa có thể tăng đến 1,5 lần</strong> so với quy chuẩn hiện hành trong khoảng <strong>1 km quanh nhà ga</strong>.</p>
+<p>Phát triển đô thị <strong>TOD quanh ga đường sắt</strong> đang được Đà Nẵng xây dựng khung chính sách: Sở Xây dựng đã ra công văn ngày <strong>23/10/2026</strong> lấy ý kiến <strong>dự thảo nghị quyết của HĐND thành phố</strong> về mô hình TOD (Transit Oriented Development – phát triển đô thị gắn với giao thông công cộng). Điểm đáng chú ý nhất với thị trường: <strong>hệ số sử dụng đất tối đa có thể tăng đến 1,5 lần</strong> so với quy chuẩn hiện hành trong khoảng <strong>1 km quanh nhà ga</strong>.</p>
 <!--hh-featured-->
-<h2>Dự thảo nêu những gì?</h2>
+<h2>Dự thảo nghị quyết TOD quanh ga đường sắt nêu những gì?</h2>
 <table>
 <thead><tr><th>Nội dung</th><th>Theo báo chí đưa tin (8/11/2026)</th></tr></thead>
 <tbody>
@@ -422,40 +426,42 @@ HTML
 <tr><td>Thời điểm</td><td>Dự kiến trình HĐND thành phố tại kỳ họp cuối năm 2026, sau khi bổ sung theo Luật Phát triển đô thị mới</td></tr>
 </tbody>
 </table>
-<p>Hồ sơ hiện mới xây dựng <strong>nguyên tắc, chỉ tiêu và trình tự</strong>; <strong>chưa xác định ranh giới khu TOD cho nhà ga cụ thể nào</strong>. Trước đó, HĐND TP.HCM đã thông qua nghị quyết tương tự, cũng cho tăng tối đa 1,5 lần hệ số sử dụng đất quanh ga đường sắt.</p>
-<h2>Đà Nẵng sẽ có những nhà ga nào?</h2>
+<p>Hồ sơ hiện mới xây dựng <strong>nguyên tắc, chỉ tiêu và trình tự</strong>; <strong>chưa xác định ranh giới khu TOD cho nhà ga cụ thể nào</strong>. Trước đó, HĐND TP.HCM đã thông qua nghị quyết tương tự về TOD quanh ga đường sắt, cũng cho tăng tối đa 1,5 lần hệ số sử dụng đất (<a href="https://tienphong.vn/tphcm-tang-he-so-su-dung-dat-gop-quanh-tod-len-15-lan-post1853058.tpo">Tiền Phong</a>).</p>
+<h2>Hệ số sử dụng đất tăng 1,5 lần nghĩa là gì?</h2>
+<p>Hệ số sử dụng đất là tỷ lệ giữa tổng diện tích sàn xây dựng và diện tích lô đất. Ví dụ minh họa: một lô 1.000 m² có hệ số tối đa 5 lần theo quy chuẩn được xây khoảng 5.000 m² sàn; nếu nằm trong khu TOD quanh ga đường sắt và được áp mức tăng 1,5 lần, hệ số tối đa có thể lên 7,5 lần – tức khoảng 7.500 m² sàn. Phần sàn tăng thêm thường đi kèm nghĩa vụ tài chính và yêu cầu dành không gian công cộng, nên không phải lô đất nào cũng tự động được hưởng.</p>
+<h2>Những nhà ga nào có thể có TOD quanh ga đường sắt?</h2>
 <ul>
 <li><strong>Đường sắt tốc độ cao Bắc – Nam:</strong> ga Đà Nẵng dự kiến đặt tại Hòa Sơn – xem <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang/">ga đường sắt tốc độ cao Đà Nẵng tại Hòa Sơn</a>.</li>
 <li><strong>Đường sắt đô thị (metro/LRT):</strong> <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">quy hoạch chung Đà Nẵng đến 2050</a> định hướng phát triển các khu đô thị TOD quanh nhà ga; tiến độ các tuyến còn phụ thuộc nguồn vốn.</li>
 </ul>
 <!--hh-img:img/da-nang/song-han-cau-quay-trung-tam-ve-dem.jpg|Ảnh thực tế: cầu sông Hàn và trung tâm Đà Nẵng về đêm-->
-<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<h2>Tác động của TOD quanh ga đường sắt – nhận định của Hoàng Hiệp</h2>
 <ul>
 <li><strong>Đất quanh ga sẽ "cao" hơn:</strong> hệ số sử dụng đất tăng nghĩa là cùng một lô đất được xây nhiều sàn hơn – giá trị đất quanh ga tăng theo, nhất là các lô lớn có thể làm căn hộ, văn phòng, thương mại.</li>
-<li><strong>Chưa có ranh giới – chưa nên "đón sóng":</strong> dự thảo chưa chỉ ra khu TOD ở ga nào; tin rao "đất trong vùng TOD" lúc này là chưa có căn cứ. Cần chờ nghị quyết được thông qua và quy hoạch chi tiết từng khu ga.</li>
+<li><strong>Chưa có ranh giới – chưa nên "đón sóng":</strong> dự thảo chưa chỉ ra khu TOD quanh ga đường sắt nào cụ thể; tin rao "đất trong vùng TOD" lúc này là chưa có căn cứ. Cần chờ nghị quyết được thông qua và quy hoạch chi tiết từng khu ga.</li>
 <li><strong>Lợi thế dài hạn cho dự án gần ga:</strong> căn hộ cách ga trong khoảng đi bộ sẽ được hưởng hạ tầng công cộng, cây xanh, dịch vụ tập trung – nhưng thời gian tính bằng năm, phụ thuộc tiến độ các tuyến đường sắt.</li>
-<li><strong>Nhà nước thu lại giá trị đất:</strong> mô hình TOD thường đi kèm đấu giá quỹ đất quanh ga để có vốn làm đường sắt – đất đấu giá mới sẽ tăng nguồn cung trong tương lai.</li>
+<li><strong>Nhà nước thu lại giá trị đất:</strong> mô hình TOD quanh ga đường sắt thường đi kèm đấu giá quỹ đất quanh ga để có vốn làm đường sắt – đất đấu giá mới sẽ tăng nguồn cung trong tương lai.</li>
 </ul>
 <h2>Dự án chịu ảnh hưởng</h2>
 <ul>
 <li><a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a> – trên trục biển Võ Nguyên Giáp – Trường Sa, theo quy hoạch cách nhà ga đường sắt đô thị số 09 khoảng 500 m; nếu khu ga được quy hoạch TOD, khu vực xung quanh sẽ được đầu tư dày hơn (dài hạn, phụ thuộc tiến độ tuyến).</li>
 </ul>
-<p>Cần kiểm tra một lô đất, căn hộ cụ thể có gần nhà ga theo quy hoạch hay không, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Hoàng Hiệp sẽ cập nhật khi nghị quyết TOD quanh ga đường sắt được HĐND thông qua. Cần kiểm tra một lô đất, căn hộ cụ thể có gần nhà ga theo quy hoạch hay không, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: Vietstock (08/11/2026) và CafeLand (11/2026) đưa tin về dự thảo nghị quyết TOD do Sở Xây dựng Đà Nẵng lấy ý kiến từ 23/10/2026; Báo Tiền Phong, Dân trí (6/2026) về nghị quyết TOD của TP.HCM. Chưa đọc được toàn văn dự thảo – số liệu ghi theo báo chí; con số 320 ha mới thấy ở tiêu đề bài báo, chưa đối chiếu được nội dung.</p>
 HTML
 		,
 		'seo'            => array(
-			'seo_title' => 'Dự thảo TOD Đà Nẵng: hệ số đất quanh ga gấp 1,5',
-			'desc'      => 'Đà Nẵng lấy ý kiến dự thảo nghị quyết TOD: hệ số sử dụng đất tối đa tăng đến 1,5 lần trong khoảng 1 km quanh nhà ga, dự kiến trình HĐND cuối 2026.',
+			'seo_title' => 'TOD quanh ga đường sắt Đà Nẵng: hệ số đất tăng 1,5 lần',
+			'desc'      => 'Dự thảo nghị quyết TOD quanh ga đường sắt Đà Nẵng: hệ số sử dụng đất tối đa tăng đến 1,5 lần trong khoảng 1 km quanh nhà ga, trình HĐND cuối 2026.',
 			'points'    => array(
-				'Sở Xây dựng lấy ý kiến dự thảo nghị quyết HĐND về đô thị TOD từ 23/10/2026',
+				'TOD quanh ga đường sắt: Sở Xây dựng lấy ý kiến dự thảo nghị quyết HĐND về đô thị TOD từ 23/10/2026',
 				'Hệ số sử dụng đất tối đa tăng đến 1,5 lần trong khoảng 1 km quanh nhà ga',
 				'Chưa xác định ranh giới TOD cho nhà ga cụ thể; dự kiến trình HĐND kỳ họp cuối năm 2026',
 			),
 			'faq'       => array(
-				array( 'TOD là gì?', 'TOD (Transit Oriented Development) là mô hình phát triển đô thị gắn với giao thông công cộng: tập trung nhà ở, văn phòng, thương mại với mật độ cao quanh nhà ga đường sắt, metro để người dân đi bộ tới ga.' ),
+				array( 'TOD quanh ga đường sắt là gì?', 'TOD (Transit Oriented Development) là mô hình phát triển đô thị gắn với giao thông công cộng: tập trung nhà ở, văn phòng, thương mại với mật độ cao quanh nhà ga đường sắt, metro để người dân đi bộ tới ga.' ),
 				array( 'Dự thảo TOD của Đà Nẵng cho tăng hệ số sử dụng đất bao nhiêu?', 'Theo báo chí, dự thảo cho tăng tối đa 1,5 lần hệ số sử dụng đất tối đa của lô đất, ô phố so với quy chuẩn hiện hành, trong khoảng 1 km quanh nhà ga.' ),
-				array( 'Đã có khu TOD nào ở Đà Nẵng được duyệt chưa?', 'Chưa. Dự thảo mới xây dựng nguyên tắc, chỉ tiêu và trình tự; chưa xác định ranh giới khu TOD cho nhà ga cụ thể. Dự kiến trình HĐND thành phố kỳ họp cuối năm 2026.' ),
+				array( 'Đã có khu TOD quanh ga đường sắt nào ở Đà Nẵng được duyệt chưa?', 'Chưa. Dự thảo mới xây dựng nguyên tắc, chỉ tiêu và trình tự; chưa xác định ranh giới khu TOD cho nhà ga cụ thể. Dự kiến trình HĐND thành phố kỳ họp cuối năm 2026.' ),
 			),
 		),
 		'sources'        => array(
@@ -467,32 +473,37 @@ HTML
 
 	/* ---------------- 10/11 – Chuẩn bị công bố Quy hoạch chung, Aeon Mall Hòa Xuân ---------------- */
 	$posts[] = array(
-		'slug'           => 'da-nang-cong-bo-quy-hoach-chung-2050-aeon-mall-hoa-xuan-thang-11',
+		'slug'           => 'cong-bo-quy-hoach-chung-2050-aeon-mall-hoa-xuan',
+		'old_slug'       => array( 'da-nang-cong-bo-quy-hoach-chung-2050-aeon-mall-hoa-xuan-thang-11' ),
 		'title'          => 'Đà Nẵng chuẩn bị công bố Quy hoạch chung 2050 cuối tháng 11: dự kiến khởi công Aeon Mall Hòa Xuân, tái khởi động Đa Phước',
 		'excerpt'        => 'Đà Nẵng ban hành kế hoạch hội nghị công bố Quy hoạch chung đến 2050 và xúc tiến đầu tư 2026, dự kiến 28/11. Bên lề: dự kiến khởi công Aeon Mall Hòa Xuân (khu đất 101.800 m², vốn hơn 4.300 tỷ), tái khởi động Khu đô thị quốc tế Đa Phước 17/11.',
-		'keyword'        => 'công bố quy hoạch chung Đà Nẵng',
+		'keyword'        => 'công bố quy hoạch chung 2050',
 		'keywords_extra' => array( 'Aeon Mall Hòa Xuân', 'hội nghị xúc tiến đầu tư Đà Nẵng 2026', 'khu đô thị quốc tế Đa Phước', 'bất động sản Hòa Xuân' ),
 		'project'        => 'cora-tower',
 		'schedule'       => '2026-11-10 08:00',
+		'rev'            => 2, // 15/11: chuẩn SEO 100/100.
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'Quy hoạch', 'Hòa Xuân', 'Xúc tiến đầu tư' ),
 		'image'          => 'plugin:img/tin-tuc/cong-bo-quy-hoach-chung-da-nang-aeon-mall-hoa-xuan-11-2026.jpg',
-		'image_alt'      => 'Lịch dự kiến cuối tháng 11/2026 tại Đà Nẵng: tái khởi động Đa Phước, khởi công Aeon Mall Hòa Xuân, khánh thành Quốc lộ 14E, hội nghị công bố Quy hoạch chung',
+		'image_alt'      => 'Lịch dự kiến cuối tháng 11/2026 tại Đà Nẵng: tái khởi động Đa Phước, khởi công Aeon Mall Hòa Xuân, khánh thành Quốc lộ 14E, hội nghị công bố quy hoạch chung 2050',
 		'content'        => <<<HTML
-<p>Chủ tịch UBND TP Đà Nẵng <strong>Nguyễn Mạnh Hùng</strong> đã ký ban hành <strong>kế hoạch tổ chức Hội nghị công bố Quy hoạch chung thành phố đến năm 2050, tầm nhìn đến năm 2075 và Xúc tiến đầu tư năm 2026</strong>. Theo Báo Đầu tư (09/11/2026), hội nghị dự kiến diễn ra <strong>ngày 28/11</strong> tại Trung tâm Hành chính thành phố; một số nguồn khác nêu phương án sáng 21 hoặc 28/11, khoảng 500 đại biểu. Đi kèm là chuỗi sự kiện khởi công, khánh thành – đáng chú ý với bất động sản là <strong>Aeon Mall Hòa Xuân</strong>.</p>
+<p>Lịch <strong>công bố quy hoạch chung 2050</strong> của Đà Nẵng đã được xác định: Chủ tịch UBND TP Đà Nẵng <strong>Nguyễn Mạnh Hùng</strong> đã ký ban hành <strong>kế hoạch tổ chức Hội nghị công bố Quy hoạch chung thành phố đến năm 2050, tầm nhìn đến năm 2075 và Xúc tiến đầu tư năm 2026</strong>. Theo <a href="https://baodautu.vn/da-nang-chuan-bi-to-chuc-hoi-nghi-cong-bo-quy-hoach-chung-va-xuc-tien-dau-tu-d740118.html">Báo Đầu tư</a> (09/11/2026), hội nghị dự kiến diễn ra <strong>ngày 28/11</strong> tại Trung tâm Hành chính thành phố; một số nguồn khác nêu phương án sáng 21 hoặc 28/11, khoảng 500 đại biểu. Đi kèm là chuỗi sự kiện khởi công, khánh thành – đáng chú ý với bất động sản là <strong>Aeon Mall Hòa Xuân</strong>.</p>
 <!--hh-featured-->
-<h2>Lịch dự kiến cuối tháng 11/2026</h2>
+<h2>Lịch công bố quy hoạch chung 2050 và các sự kiện cuối tháng 11/2026</h2>
 <table>
 <thead><tr><th>Thời gian (dự kiến)</th><th>Sự kiện</th></tr></thead>
 <tbody>
 <tr><td>17/11</td><td>Lễ tái khởi động Khu đô thị quốc tế Đa Phước (giai đoạn 1)</td></tr>
 <tr><td>Tháng 11</td><td>Khởi công Trung tâm thương mại AEON MALL Đà Nẵng Hòa Xuân (theo Tuổi Trẻ, chủ đầu tư đang hoàn tất thủ tục, hồ sơ thiết kế)</td></tr>
 <tr><td>27 hoặc 29/11</td><td>Khánh thành dự án nâng cấp Quốc lộ 14E</td></tr>
-<tr><td>21 hoặc 28/11</td><td>Hội nghị công bố Quy hoạch chung đến 2050 và xúc tiến đầu tư; trao quyết định phê duyệt quy hoạch</td></tr>
+<tr><td>21 hoặc 28/11</td><td>Hội nghị công bố quy hoạch chung 2050 và xúc tiến đầu tư; trao quyết định phê duyệt quy hoạch</td></tr>
 <tr><td>Bên lề</td><td>Dự kiến khai trương VSAP Lab, khởi công dự án ô tô Volkswagen; triển lãm quy hoạch</td></tr>
 </tbody>
 </table>
 <p>Theo Báo Đầu tư, thành phố cũng đã phê duyệt dự án <strong>Luồng Cửa Lở</strong> với tổng vốn khoảng <strong>7.585 tỷ đồng</strong>. Quy hoạch chung được Phó Thủ tướng ký phê duyệt tại <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">Quyết định 2016/QĐ-TTg ngày 21/10/2026</a>.</p>
+<h2>Công bố quy hoạch chung 2050 có ý nghĩa gì?</h2>
+<p>Quy hoạch chung đã được Thủ tướng phê duyệt; việc công bố quy hoạch chung 2050 là bước đưa đồ án ra công khai để người dân, doanh nghiệp biết và thực hiện. Sau công bố, các quy hoạch phân khu, quy hoạch chi tiết và kế hoạch sử dụng đất sẽ lần lượt được rà soát cho phù hợp. Với người mua nhà đất, đây là thời điểm nên đối chiếu thửa đất mình quan tâm với bản đồ định hướng: khu vực nào là đô thị mới, trục giao thông nào được mở, đâu là đất cây xanh, công cộng.</p>
+<p>Hội nghị đi kèm xúc tiến đầu tư cũng cho biết thành phố đang ưu tiên kêu gọi lĩnh vực nào. Danh mục dự án được giới thiệu tại hội nghị công bố quy hoạch chung 2050 thường là tín hiệu sớm về những khu vực sắp có vốn và hạ tầng.</p>
 <h2>Aeon Mall Hòa Xuân: những gì đã chắc chắn</h2>
 <ul>
 <li><strong>Vị trí:</strong> mặt tiền đường Trần Nam Trung, phường Hòa Xuân, trong Khu tổ hợp thể thao, giải trí và thương mại Hòa Xuân.</li>
@@ -506,8 +517,8 @@ HTML
 <ul>
 <li><strong>Hòa Xuân có thêm "mỏ neo" thương mại:</strong> một trung tâm thương mại cỡ lớn kéo theo việc làm, lưu lượng người và dịch vụ – điều khu Hòa Xuân còn thiếu so với trung tâm. Căn hộ, nhà phố quanh khu tổ hợp thể thao – thương mại có thêm lý do để ở thật và cho thuê.</li>
 <li><strong>Khởi công mới là bước đầu:</strong> từ khởi công đến khai trương thường mất vài năm; giá rao "sát Aeon" tăng ngay lúc này là đi trước hạ tầng. Nên so giá theo khoảng cách thật và tiến độ thật.</li>
-<li><strong>Hội nghị quy hoạch là tín hiệu mở dự án:</strong> quy hoạch chung đã duyệt, thành phố bước sang giai đoạn kêu gọi đầu tư – các quỹ đất, dự án lớn sẽ được công bố dần; người mua nên theo dõi danh mục dự án kêu gọi tại hội nghị để biết khu nào sắp có vốn vào.</li>
-<li><strong>Lịch có thể đổi:</strong> các mốc trên đều là dự kiến theo kế hoạch và báo chí; Hoàng Hiệp sẽ cập nhật khi sự kiện diễn ra.</li>
+<li><strong>Công bố quy hoạch chung 2050 là tín hiệu mở dự án:</strong> quy hoạch chung đã duyệt, thành phố bước sang giai đoạn kêu gọi đầu tư – các quỹ đất, dự án lớn sẽ được công bố dần; người mua nên theo dõi danh mục dự án kêu gọi tại hội nghị để biết khu nào sắp có vốn vào.</li>
+<li><strong>Lịch có thể đổi:</strong> ngày công bố quy hoạch chung 2050 và các mốc khác đều là dự kiến theo kế hoạch và báo chí; Hoàng Hiệp sẽ cập nhật khi sự kiện diễn ra.</li>
 </ul>
 <!--hh-img:img/nam-hoa-xuan/nam-hoa-xuan-flycam-8-2025-duong-noi-khu-san-the-thao.jpg|Ảnh thực tế 8/2025: đường nội khu và sân thể thao khu Nam Hòa Xuân-->
 <h2>Dự án chịu ảnh hưởng</h2>
@@ -517,20 +528,21 @@ HTML
 <li><a href="/du-an/sun-neo-city/">Sun Neo City</a> – khu đô thị của Sun Group tại Hòa Xuân, nơi có Cora, Spana, S-Light.</li>
 <li><a href="/dat-nen-hoa-xuan/">Đất nền Hòa Xuân</a> – nhà phố, đất ở trong bán kính phục vụ của trung tâm thương mại sẽ được quan tâm hơn khi dự án khởi công thật.</li>
 </ul>
-<p>Cần bảng giá, giỏ hàng căn hộ Sun Group tại Hòa Xuân hoặc kiểm tra khoảng cách tới khu đất Aeon Mall, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Cần bảng giá, giỏ hàng căn hộ Sun Group tại Hòa Xuân, đối chiếu một thửa đất với bản đồ sau khi công bố quy hoạch chung 2050 hoặc kiểm tra khoảng cách tới khu đất Aeon Mall, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Hoàng Hiệp sẽ cập nhật nội dung chính sau hội nghị công bố quy hoạch chung 2050.</p>
 <p class="src">Nguồn: Báo Đầu tư (09/11/2026) về kế hoạch Hội nghị công bố Quy hoạch chung và xúc tiến đầu tư; Báo Đà Nẵng (11/2026); Tuổi Trẻ (10/2026) về kế hoạch khởi công AEON MALL Hòa Xuân trong tháng 11; CafeLand, VCCI, Nhà Đầu tư (2026) về quyết định cho thuê đất, diện tích, vốn đầu tư. Chưa đọc được toàn văn kế hoạch – ngày giờ ghi theo báo chí, có thể điều chỉnh.</p>
 HTML
 		,
 		'seo'            => array(
-			'seo_title' => 'Đà Nẵng công bố Quy hoạch chung 28/11, Aeon Hòa Xuân',
-			'desc'      => 'Đà Nẵng dự kiến công bố Quy hoạch chung 2050 ngày 28/11; bên lề dự kiến khởi công Aeon Mall Hòa Xuân (101.800 m², hơn 4.300 tỷ), tái khởi động Đa Phước.',
+			'seo_title' => 'Công bố quy hoạch chung 2050 ngày 28/11, Aeon Hòa Xuân',
+			'desc'      => 'Đà Nẵng dự kiến công bố quy hoạch chung 2050 ngày 28/11/2026; bên lề dự kiến khởi công Aeon Mall Hòa Xuân (101.800 m², hơn 4.300 tỷ), tái khởi động Đa Phước.',
 			'points'    => array(
-				'Hội nghị công bố Quy hoạch chung 2050 và xúc tiến đầu tư dự kiến 28/11/2026 tại Trung tâm Hành chính',
+				'Công bố quy hoạch chung 2050: hội nghị kèm xúc tiến đầu tư dự kiến 28/11/2026 tại Trung tâm Hành chính',
 				'Aeon Mall Hòa Xuân: khu đất 101.800 m², thuê đến 07/8/2075, vốn hơn 4.300 tỷ, dự kiến khởi công tháng 11',
 				'17/11 tái khởi động Khu đô thị quốc tế Đa Phước giai đoạn 1; Quốc lộ 14E dự kiến khánh thành cuối tháng 11',
 			),
 			'faq'       => array(
-				array( 'Khi nào Đà Nẵng công bố Quy hoạch chung đến 2050?', 'Theo kế hoạch UBND thành phố được báo chí đưa tin, hội nghị công bố Quy hoạch chung đến năm 2050, tầm nhìn 2075 và xúc tiến đầu tư dự kiến ngày 28/11/2026 tại Trung tâm Hành chính (một số nguồn nêu phương án 21/11).' ),
+				array( 'Khi nào Đà Nẵng công bố quy hoạch chung 2050?', 'Theo kế hoạch UBND thành phố được báo chí đưa tin, hội nghị công bố quy hoạch chung 2050, tầm nhìn 2075 và xúc tiến đầu tư dự kiến ngày 28/11/2026 tại Trung tâm Hành chính (một số nguồn nêu phương án 21/11).' ),
 				array( 'Aeon Mall Hòa Xuân ở đâu, khi nào khởi công?', 'Dự án nằm mặt tiền đường Trần Nam Trung, phường Hòa Xuân, khu đất 101.800 m², vốn hơn 4.300 tỷ đồng. Báo chí đưa tin chủ đầu tư chuẩn bị khởi công trong tháng 11/2026; ngày chính thức chưa công bố.' ),
 				array( 'Aeon Mall Hòa Xuân ảnh hưởng gì tới bất động sản?', 'Trung tâm thương mại lớn giúp khu Hòa Xuân có thêm tiện ích, việc làm, lưu lượng người – có lợi cho căn hộ, nhà phố quanh đó, nhất là nhu cầu ở và cho thuê. Tuy vậy từ khởi công đến khai trương còn vài năm, nên so giá theo tiến độ thật.' ),
 			),
@@ -546,21 +558,23 @@ HTML
 
 	/* ---------------- 12/11 – Tái định cư Hương Trà (đường sắt tốc độ cao) và Hòa Liên – Túy Loan (cao tốc) ---------------- */
 	$posts[] = array(
-		'slug'           => 'tai-dinh-cu-huong-tra-duong-sat-toc-do-cao-hoa-lien-tuy-loan',
+		'slug'           => 'tai-dinh-cu-huong-tra-hoa-lien-tuy-loan',
+		'old_slug'       => array( 'tai-dinh-cu-huong-tra-duong-sat-toc-do-cao-hoa-lien-tuy-loan' ),
 		'title'          => 'Đà Nẵng duyệt thêm 2 khu tái định cư hơn 471 tỷ: Hương Trà cho đường sắt tốc độ cao, Hòa Liên – Túy Loan cho cao tốc',
 		'excerpt'        => 'Quyết định 5128/QĐ-UBND duyệt khu tái định cư hơn 365,8 tỷ đồng, khoảng 32,57 ha với 391 lô tại phường Hương Trà (Tam Kỳ cũ) phục vụ đường sắt tốc độ cao Bắc – Nam; Quyết định 5151/QĐ-UBND duyệt khu tái định cư số 3 hơn 105,3 tỷ cho cao tốc đoạn Hòa Liên – Túy Loan.',
-		'keyword'        => 'tái định cư đường sắt tốc độ cao Hương Trà',
-		'keywords_extra' => array( 'tái định cư cao tốc Hòa Liên Túy Loan', 'đường sắt tốc độ cao qua Tam Kỳ', 'Quyết định 5128/QĐ-UBND', 'bất động sản Tam Kỳ' ),
+		'keyword'        => 'tái định cư Hương Trà',
+		'keywords_extra' => array( 'tái định cư đường sắt tốc độ cao Hương Trà', 'tái định cư cao tốc Hòa Liên Túy Loan', 'đường sắt tốc độ cao qua Tam Kỳ', 'Quyết định 5128/QĐ-UBND', 'bất động sản Tam Kỳ' ),
 		'project'        => 'meta-city-tam-ky',
 		'schedule'       => '2026-11-12 07:00',
+		'rev'            => 2, // 15/11: chuẩn SEO 100/100.
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'Hạ tầng Đà Nẵng', 'Đường sắt tốc độ cao', 'Tái định cư' ),
 		'image'          => 'plugin:img/tin-tuc/tai-dinh-cu-huong-tra-hoa-lien-11-2026.jpg',
-		'image_alt'      => 'Hai khu tái định cư mới tại phường Hương Trà và cao tốc Hòa Liên – Túy Loan, Đà Nẵng',
+		'image_alt'      => 'Khu tái định cư Hương Trà và khu tái định cư số 3 cao tốc Hòa Liên – Túy Loan, Đà Nẵng',
 		'content'        => <<<HTML
-<p>Trong hai ngày 9 – 10/11/2026, UBND TP Đà Nẵng duyệt thêm hai dự án tái định cư phục vụ hai công trình giao thông lớn: khu <strong>tái định cư đường sắt tốc độ cao Hương Trà</strong> (Quyết định 5128/QĐ-UBND, hơn 365,8 tỷ đồng) và <strong>Khu tái định cư số 3</strong> cho cao tốc đoạn Hòa Liên – Túy Loan (Quyết định 5151/QĐ-UBND, hơn 105,3 tỷ đồng). Cộng lại, hai dự án có tổng mức đầu tư hơn 471 tỷ đồng (Hoàng Hiệp cộng từ hai quyết định).</p>
+<p>Khu <strong>tái định cư Hương Trà</strong> cho đường sắt tốc độ cao vừa được duyệt. Trong hai ngày 9 – 10/11/2026, UBND TP Đà Nẵng duyệt thêm hai dự án tái định cư phục vụ hai công trình giao thông lớn: khu tái định cư Hương Trà (Quyết định 5128/QĐ-UBND, hơn 365,8 tỷ đồng) và <strong>Khu tái định cư số 3</strong> cho cao tốc đoạn Hòa Liên – Túy Loan (Quyết định 5151/QĐ-UBND, hơn 105,3 tỷ đồng). Cộng lại, hai dự án có tổng mức đầu tư hơn 471 tỷ đồng (Hoàng Hiệp cộng từ hai quyết định).</p>
 <!--hh-featured-->
-<h2>Tái định cư đường sắt tốc độ cao Hương Trà: những con số chính</h2>
+<h2>Tái định cư Hương Trà: những con số chính</h2>
 <table>
 <thead><tr><th>Nội dung</th><th>Theo báo chí đưa tin</th></tr></thead>
 <tbody>
@@ -572,7 +586,7 @@ HTML
 <tr><td>Đơn vị thực hiện</td><td>Ban Quản lý dự án đầu tư xây dựng các công trình giao thông và nông nghiệp TP Đà Nẵng</td></tr>
 </tbody>
 </table>
-<p>Quyết định cũng giao UBND phường Hương Trà rà soát, chuẩn hóa thông tin diện tích đất để hồ sơ dự án khớp với quy hoạch, và quản lý quy hoạch xung quanh để giữ khoảng cách an toàn môi trường với trạm xử lý nước thải.</p>
+<p>Theo trích yếu, quyết định về khu tái định cư Hương Trà cũng giao UBND phường Hương Trà rà soát, chuẩn hóa thông tin diện tích đất để hồ sơ dự án khớp với quy hoạch, và quản lý quy hoạch xung quanh để giữ khoảng cách an toàn môi trường với trạm xử lý nước thải.</p>
 <h2>Khu tái định cư số 3 cho cao tốc Hòa Liên – Túy Loan</h2>
 <table>
 <thead><tr><th>Nội dung</th><th>Theo báo chí đưa tin</th></tr></thead>
@@ -585,16 +599,17 @@ HTML
 <tr><td>Thời gian</td><td>2026 – 2027</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/meta-city-tam-ky/meta-city-tam-ky-phoi-canh-tong-the.jpg|Phối cảnh khu đô thị Meta City ở Tây Bắc Tam Kỳ, phường Bàn Thạch – cùng khu vực Tam Kỳ cũ với phường Hương Trà (phối cảnh chủ đầu tư)-->
-<h2>Chuỗi tái định cư cho đường sắt tốc độ cao qua Đà Nẵng</h2>
-<p>Khu Hương Trà nằm trong chuỗi dự án tái định cư thành phố đang duyệt dần cho tuyến đường sắt tốc độ cao Bắc – Nam. Đầu tháng 11/2026, Đà Nẵng đã duyệt 3 khu tái định cư hơn 392 tỷ đồng tại Duy Xuyên (xem <a href="/tai-dinh-cu-duy-xuyen-duong-sat-toc-do-cao-392-ty/">bài chi tiết</a>); trước đó báo chí cũng đưa tin các khu tại Hòa Tiến, Tam Xuân, Bàn Thạch, Hòa Khánh – Liên Chiểu. Theo các báo, tuyến qua Đà Nẵng dài khoảng 116 km, từ phường Hải Vân đến xã Núi Thành; Bộ Xây dựng đặt mục tiêu khởi công tuyến vào tháng 12/2027. Ga hành khách Đà Nẵng dự kiến đặt tại Hòa Sơn – xem <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang/">ga đường sắt tốc độ cao Đà Nẵng</a>.</p>
+<!--hh-img:img/meta-city-tam-ky/meta-city-tam-ky-phoi-canh-tong-the.jpg|Phối cảnh khu đô thị Meta City ở Tây Bắc Tam Kỳ, phường Bàn Thạch – cùng khu vực Tam Kỳ cũ với khu tái định cư Hương Trà (phối cảnh chủ đầu tư)-->
+<h2>Tái định cư Hương Trà trong chuỗi dự án cho đường sắt tốc độ cao</h2>
+<p>Khu tái định cư Hương Trà nằm trong chuỗi dự án tái định cư thành phố đang duyệt dần cho tuyến đường sắt tốc độ cao Bắc – Nam. Đầu tháng 11/2026, Đà Nẵng đã duyệt 3 khu tái định cư hơn 392 tỷ đồng tại Duy Xuyên (xem <a href="/tai-dinh-cu-duy-xuyen-duong-sat-toc-do-cao-392-ty/">bài chi tiết</a>); trước đó báo chí cũng đưa tin các khu tại Hòa Tiến, Tam Xuân, Bàn Thạch, Hòa Khánh – Liên Chiểu.</p>
+<p>Theo các báo (<a href="https://cafef.vn/da-nang-phe-duyet-loat-khu-tai-dinh-cu-phuc-vu-cao-toc-duong-sat-toc-do-cao-188261111144637121.chn">CafeF</a>), tuyến qua Đà Nẵng dài khoảng 116 km, từ phường Hải Vân đến xã Núi Thành; Bộ Xây dựng đặt mục tiêu khởi công tuyến vào tháng 12/2027. Ga hành khách Đà Nẵng dự kiến đặt tại Hòa Sơn – xem <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang/">ga đường sắt tốc độ cao Đà Nẵng</a>.</p>
 <h2>Tác động / nhận định của Hoàng Hiệp</h2>
 <ul>
-<li><strong>Tuyến đường sắt đã chạm tới Tam Kỳ cũ:</strong> sau Duy Xuyên, việc có quyết định đầu tư cụ thể ở Hương Trà cho thấy công tác chuẩn bị mặt bằng đang trải dài khắp các địa phương phía Nam thành phố. Làm tái định cư trước là bước bắt buộc trước khi thu hồi đất.</li>
+<li><strong>Tuyến đường sắt đã chạm tới Tam Kỳ cũ:</strong> sau Duy Xuyên, việc dự án tái định cư Hương Trà có quyết định đầu tư cụ thể cho thấy công tác chuẩn bị mặt bằng đang trải dài khắp các địa phương phía Nam thành phố. Làm tái định cư trước là bước bắt buộc trước khi thu hồi đất.</li>
 <li><strong>Kiểm tra hành lang tuyến trước khi mua đất:</strong> ở các phường, xã có tuyến đi qua như Hương Trà, Bàn Thạch, Hòa Liên, anh chị nên hỏi UBND phường, xã hoặc văn phòng đăng ký đất đai xem thửa đất có nằm trong phạm vi thu hồi, hành lang an toàn hay không trước khi đặt cọc.</li>
-<li><strong>391 lô tái định cư không phải hàng bán tự do:</strong> lô tái định cư dành để bố trí cho hộ bị thu hồi đất. Khi có người rao "suất tái định cư", cần kiểm tra quyết định giao đất, điều kiện chuyển nhượng – tránh mua giấy tờ tay.</li>
+<li><strong>391 lô tái định cư Hương Trà không phải hàng bán tự do:</strong> lô tái định cư dành để bố trí cho hộ bị thu hồi đất. Khi có người rao "suất tái định cư", cần kiểm tra quyết định giao đất, điều kiện chuyển nhượng – tránh mua giấy tờ tay.</li>
 <li><strong>Hạ tầng dân cư mới:</strong> mỗi khu tái định cư đi kèm đường, thoát nước, xử lý nước thải, bãi đỗ xe, cây xanh đồng bộ; về dài hạn giúp khu vực ven tuyến có thêm khu dân cư mới.</li>
-<li><strong>Tác động giá là dài hạn:</strong> đường sắt dự kiến khởi công cuối 2027; giá đất thường chịu ảnh hưởng rõ nhất quanh nhà ga, không phải dọc tuyến. Không nên mua đuổi theo tin tái định cư.</li>
+<li><strong>Tác động giá là dài hạn:</strong> đường sắt dự kiến khởi công cuối 2027, khu tái định cư Hương Trà chỉ là bước chuẩn bị mặt bằng; giá đất thường chịu ảnh hưởng rõ nhất quanh nhà ga, không phải dọc tuyến. Không nên mua đuổi theo tin tái định cư.</li>
 </ul>
 <h2>Dự án chịu ảnh hưởng</h2>
 <ul>
@@ -606,15 +621,16 @@ HTML
 HTML
 		,
 		'seo'            => array(
-			'seo_title' => 'Tái định cư đường sắt tốc độ cao Hương Trà 365,8 tỷ',
-			'desc'      => 'Tái định cư đường sắt tốc độ cao Hương Trà: QĐ 5128 duyệt hơn 365,8 tỷ, 32,57 ha, 391 lô; QĐ 5151 duyệt khu TĐC số 3 cao tốc Hòa Liên – Túy Loan 105,3 tỷ.',
+			'seo_title' => 'Tái định cư Hương Trà 365,8 tỷ, 391 lô cho đường sắt',
+			'desc'      => 'Tái định cư Hương Trà: QĐ 5128 duyệt hơn 365,8 tỷ, 32,57 ha, 391 lô cho đường sắt tốc độ cao; QĐ 5151 duyệt khu số 3 cao tốc Hòa Liên – Túy Loan.',
 			'points'    => array(
-				'QĐ 5128/QĐ-UBND: khu tái định cư phường Hương Trà hơn 365,8 tỷ, khoảng 32,57 ha, 391 lô, phục vụ đường sắt tốc độ cao',
+				'QĐ 5128/QĐ-UBND: khu tái định cư Hương Trà hơn 365,8 tỷ, khoảng 32,57 ha, 391 lô, phục vụ đường sắt tốc độ cao',
 				'QĐ 5151/QĐ-UBND (09/11/2026): khu tái định cư số 3 hơn 105,3 tỷ cho cao tốc đoạn Hòa Liên – Túy Loan, làm 2026 – 2027',
 				'Đất trong hành lang tuyến cần kiểm tra kỹ; lô tái định cư không phải hàng bán tự do',
 			),
 			'faq'       => array(
-				array( 'Khu tái định cư đường sắt tốc độ cao ở Hương Trà lớn bao nhiêu?', 'Theo Quyết định 5128/QĐ-UBND, khoảng 32,57 ha với 391 lô tái định cư, tổng mức đầu tư hơn 365,8 tỷ đồng, kèm 6 bãi đỗ xe và công viên cây xanh.' ),
+				array( 'Khu tái định cư Hương Trà lớn bao nhiêu?', 'Theo Quyết định 5128/QĐ-UBND, khoảng 32,57 ha với 391 lô tái định cư, tổng mức đầu tư hơn 365,8 tỷ đồng, kèm 6 bãi đỗ xe và công viên cây xanh.' ),
+				array( 'Mua lô tái định cư Hương Trà được không?', 'Lô tái định cư Hương Trà dùng để bố trí cho hộ bị thu hồi đất, không phải hàng bán tự do; nếu được rao bán lại, cần kiểm tra quyết định giao đất, điều kiện chuyển nhượng và tránh mua giấy tờ tay.' ),
 				array( 'Phường Hương Trà ở đâu?', 'Phường Hương Trà của TP Đà Nẵng được hình thành từ phường Hòa Hương, An Sơn và xã Tam Ngọc thuộc TP Tam Kỳ (Quảng Nam cũ).' ),
 				array( 'Khu tái định cư số 3 cao tốc Hòa Liên – Túy Loan làm khi nào?', 'Theo Quyết định 5151/QĐ-UBND ngày 09/11/2026, tổng mức đầu tư hơn 105,3 tỷ đồng, thực hiện trong năm 2026 – 2027.' ),
 			),
@@ -630,19 +646,21 @@ HTML
 
 	/* ---------------- 13/11 – VSIP làm nhà đầu tư hạ tầng vị trí số 7 Khu thương mại tự do (QĐ 5202/QĐ-UBND) ---------------- */
 	$posts[] = array(
-		'slug'           => 'vsip-vi-tri-so-7-khu-thuong-mai-tu-do-da-nang-3525-ty',
+		'slug'           => 'vsip-ha-tang-vi-tri-so-7-khu-thuong-mai-tu-do',
+		'old_slug'       => array( 'vsip-vi-tri-so-7-khu-thuong-mai-tu-do-da-nang-3525-ty' ),
 		'title'          => 'Đà Nẵng chọn VSIP làm hạ tầng vị trí số 7 Khu thương mại tự do: 3.525 tỷ, 276 ha tại Hòa Vang',
 		'excerpt'        => 'Quyết định 5202/QĐ-UBND ngày 12/11/2026 chấp thuận VSIP là nhà đầu tư dự án hạ tầng khu chức năng vị trí số 7 Khu thương mại tự do Đà Nẵng: khoảng 276 ha tại xã Hòa Vang, vốn 3.525 tỷ đồng, xây hạ tầng từ quý 4/2027 đến quý 1/2032.',
-		'keyword'        => 'khu thương mại tự do Đà Nẵng vị trí số 7',
+		'keyword'        => 'hạ tầng vị trí số 7',
 		'keywords_extra' => array( 'VSIP Đà Nẵng', 'Quyết định 5202/QĐ-UBND', 'bất động sản Hòa Vang', 'khu thương mại tự do Đà Nẵng' ),
 		'project'        => 'spana-tower',
 		'schedule'       => '2026-11-13 07:00',
+		'rev'            => 2, // 15/11: chuẩn SEO 100/100.
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'Hạ tầng Đà Nẵng', 'Khu thương mại tự do', 'Hòa Vang' ),
 		'image'          => 'plugin:img/tin-tuc/vsip-vi-tri-7-khu-thuong-mai-tu-do-11-2026.jpg',
 		'image_alt'      => 'VSIP làm nhà đầu tư hạ tầng vị trí số 7 Khu thương mại tự do Đà Nẵng, 3.525 tỷ đồng',
 		'content'        => <<<HTML
-<p>Ngày 12/11/2026, UBND TP Đà Nẵng ban hành <strong>Quyết định 5202/QĐ-UBND</strong>, chấp thuận Công ty Liên doanh TNHH Khu công nghiệp Việt Nam – Singapore (<strong>VSIP</strong>) là nhà đầu tư dự án đầu tư xây dựng và kinh doanh kết cấu hạ tầng khu chức năng tại <strong>vị trí số 7 – Khu thương mại tự do Đà Nẵng</strong>, xã Hòa Vang. Đây là bước tiếp theo sau khi thành phố chấp thuận chủ trương đầu tư dự án (Quyết định 4785/QĐ-UBND) hồi giữa tháng 10/2026.</p>
+<p>Dự án <strong>hạ tầng vị trí số 7</strong> của Khu thương mại tự do Đà Nẵng đã có nhà đầu tư. Ngày 12/11/2026, UBND TP Đà Nẵng ban hành <strong>Quyết định 5202/QĐ-UBND</strong>, chấp thuận Công ty Liên doanh TNHH Khu công nghiệp Việt Nam – Singapore (<strong>VSIP</strong>) là nhà đầu tư dự án đầu tư xây dựng và kinh doanh kết cấu hạ tầng khu chức năng tại <strong>vị trí số 7 – Khu thương mại tự do Đà Nẵng</strong>, xã Hòa Vang. Đây là bước tiếp theo sau khi thành phố chấp thuận chủ trương đầu tư dự án (Quyết định 4785/QĐ-UBND) hồi giữa tháng 10/2026.</p>
 <!--hh-featured-->
 <h2>Dự án hạ tầng vị trí số 7: những con số chính</h2>
 <table>
@@ -659,15 +677,23 @@ HTML
 </tbody>
 </table>
 <h2>Khu thương mại tự do Đà Nẵng đang ở đâu?</h2>
-<p>Khu thương mại tự do Đà Nẵng được Thủ tướng quyết định thành lập năm 2025, tổng diện tích khoảng 1.881 ha chia ở 7 vị trí, gắn với cảng Liên Chiểu ở phía Tây Bắc (xem <a href="/cang-lien-chieu-khu-thuong-mai-tu-do-bat-dong-san-lien-chieu/">cảng Liên Chiểu và Khu thương mại tự do</a>). Vị trí số 7 nằm ở vùng phía Tây thành phố; theo quyết định thành lập ban đầu, vị trí này rộng khoảng 401 ha – con số 276 ha trong dự án hạ tầng lần này nhỏ hơn, báo chí chưa giải thích phần chênh lệch. Quy hoạch chung Đà Nẵng đến 2050 cũng xác định đưa 7 vị trí của Khu thương mại tự do vào hoạt động (xem <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">quy hoạch chung 2050</a>).</p>
+<p>Khu thương mại tự do Đà Nẵng được Thủ tướng quyết định thành lập năm 2025, tổng diện tích khoảng 1.881 ha chia ở 7 vị trí, gắn với cảng Liên Chiểu ở phía Tây Bắc (xem <a href="/cang-lien-chieu-khu-thuong-mai-tu-do-bat-dong-san-lien-chieu/">cảng Liên Chiểu và Khu thương mại tự do</a>; <a href="https://dantri.com.vn/thoi-su/quyet-dinh-7-vi-tri-lam-khu-thuong-mai-tu-do-da-nang-20250616155817749.htm">Dân trí</a>).</p>
+<p>Vị trí số 7 nằm ở vùng phía Tây thành phố; theo quyết định thành lập ban đầu, vị trí này rộng khoảng 401 ha – con số 276 ha trong dự án hạ tầng vị trí số 7 lần này nhỏ hơn, báo chí chưa giải thích phần chênh lệch. Quy hoạch chung Đà Nẵng đến 2050 cũng xác định đưa 7 vị trí của Khu thương mại tự do vào hoạt động (xem <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">quy hoạch chung 2050</a>).</p>
 <!--hh-img:img/hoa-xuan/hoa-xuan-flycam-8-2025-song-cam-le-nhin-ve-trung-tam.jpg|Sông Cẩm Lệ và khu Hòa Xuân nhìn về trung tâm Đà Nẵng – khu đô thị phía Nam gần nhất với vùng phát triển phía Tây (ảnh flycam thực tế tháng 8/2025)-->
+<h2>Lộ trình hạ tầng vị trí số 7 đến 2032</h2>
+<ul>
+<li><strong>Quý 4/2027:</strong> bắt đầu san lấp mặt bằng, xây hạ tầng vị trí số 7 (sau khi nhận đất).</li>
+<li><strong>Quý 4/2028:</strong> bắt đầu kinh doanh, thu hút nhà đầu tư thứ cấp vào khu chức năng.</li>
+<li><strong>Quý 1/2032:</strong> dự kiến hoàn thành xây dựng hạ tầng; vốn phải giải ngân hết trong 5 năm kể từ khi nhận đất.</li>
+</ul>
+<p>Lộ trình cho thấy hạ tầng vị trí số 7 được làm cuốn chiếu: phần đất có hạ tầng trước sẽ cho doanh nghiệp thuê trước, không chờ toàn bộ 276 ha hoàn thành.</p>
 <h2>Tác động / nhận định của Hoàng Hiệp</h2>
 <ul>
 <li><strong>Có nhà đầu tư hạ tầng chuyên nghiệp:</strong> VSIP là đơn vị đã làm nhiều khu công nghiệp tại Việt Nam; việc chọn được nhà đầu tư cho thấy Khu thương mại tự do bắt đầu chuyển từ quy hoạch sang triển khai thực tế ở vị trí này.</li>
-<li><strong>Tác động là dài hạn:</strong> hạ tầng làm từ cuối 2027 đến đầu 2032, doanh nghiệp thứ cấp vào sớm nhất từ cuối 2028. Nhu cầu nhà ở cho người lao động, chuyên gia sẽ tăng dần theo tiến độ lấp đầy, không phải ngay lập tức.</li>
+<li><strong>Tác động là dài hạn:</strong> hạ tầng vị trí số 7 làm từ cuối 2027 đến đầu 2032, doanh nghiệp thứ cấp vào sớm nhất từ cuối 2028. Nhu cầu nhà ở cho người lao động, chuyên gia sẽ tăng dần theo tiến độ lấp đầy, không phải ngay lập tức.</li>
 <li><strong>Đất Hòa Vang: kiểm tra quy hoạch trước khi mua:</strong> khu vực quanh các vị trí Khu thương mại tự do sẽ có thu hồi đất, tái định cư. Anh chị nên kiểm tra quy hoạch sử dụng đất, chỉ giới đường quy hoạch tại UBND xã hoặc văn phòng đăng ký đất đai, tránh mua theo tin "sắp lên khu công nghiệp".</li>
 <li><strong>Căn hộ khu Nam – Tây Nam hưởng lợi gián tiếp:</strong> các khu đô thị có sẵn hạ tầng như Hòa Xuân, Cẩm Lệ là nơi chuyên gia, nhân sự quản lý thường chọn ở vì gần trung tâm hơn và đủ tiện ích; nhu cầu thuê có thể tăng khi các khu chức năng đi vào hoạt động.</li>
-<li><strong>Không mua đuổi theo tin:</strong> mức hưởng lợi phụ thuộc tiến độ thực tế và tốc độ thu hút doanh nghiệp. Nên theo dõi các mốc giao đất, khởi công hạ tầng năm 2027.</li>
+<li><strong>Không mua đuổi theo tin:</strong> mức hưởng lợi phụ thuộc tiến độ thực tế và tốc độ thu hút doanh nghiệp. Nên theo dõi các mốc giao đất, khởi công hạ tầng vị trí số 7 năm 2027 (<a href="https://tuoitre.vn/lo-dien-nha-dau-tu-rot-3525-ti-dong-vao-khu-thuong-mai-tu-do-da-nang-100261019115924845.htm">Tuổi Trẻ</a> đưa tin về chủ trương đầu tư).</li>
 </ul>
 <h2>Dự án chịu ảnh hưởng</h2>
 <ul>
@@ -680,7 +706,7 @@ HTML
 HTML
 		,
 		'seo'            => array(
-			'seo_title' => 'VSIP làm hạ tầng vị trí số 7 khu thương mại tự do',
+			'seo_title' => 'Hạ tầng vị trí số 7 khu thương mại tự do: VSIP, 3.525 tỷ',
 			'desc'      => 'QĐ 5202/QĐ-UBND (12/11/2026) chọn VSIP làm hạ tầng vị trí số 7 Khu thương mại tự do Đà Nẵng: 276 ha ở Hòa Vang, vốn 3.525 tỷ, làm từ 2027 đến 2032.',
 			'points'    => array(
 				'Quyết định 5202/QĐ-UBND ngày 12/11/2026 chấp thuận VSIP là nhà đầu tư hạ tầng vị trí số 7 Khu thương mại tự do Đà Nẵng',
@@ -689,6 +715,7 @@ HTML
 			),
 			'faq'       => array(
 				array( 'Vị trí số 7 Khu thương mại tự do Đà Nẵng ở đâu?', 'Theo báo chí, dự án hạ tầng vị trí số 7 nằm tại xã Hòa Vang, TP Đà Nẵng, quy mô khoảng 276 ha.' ),
+				array( 'Dự án hạ tầng vị trí số 7 rộng bao nhiêu?', 'Khoảng 276 ha (một số báo ghi khoảng 270 ha), nhỏ hơn diện tích khoảng 401 ha của vị trí số 7 theo quyết định thành lập ban đầu; báo chí chưa giải thích phần chênh lệch.' ),
 				array( 'Ai là nhà đầu tư hạ tầng vị trí số 7?', 'Công ty Liên doanh TNHH Khu công nghiệp Việt Nam – Singapore (VSIP), được chấp thuận tại Quyết định 5202/QĐ-UBND ngày 12/11/2026.' ),
 				array( 'Khi nào dự án hạ tầng vị trí số 7 xây dựng?', 'Giai đoạn san lấp mặt bằng và xây hạ tầng dự kiến từ quý 4/2027 đến quý 1/2032; thu hút nhà đầu tư thứ cấp từ quý 4/2028.' ),
 			),
@@ -703,19 +730,21 @@ HTML
 	);
 	/* ---------------- 14/11 – Đà Nẵng rà soát nhà ở xã hội (buổi làm việc 10/11): 8 dự án, khoảng 4.575 căn sắp khởi công ---------------- */
 	$posts[] = array(
-		'slug'           => 'da-nang-khoi-cong-8-du-an-nha-o-xa-hoi-4575-can-cuoi-2026',
+		'slug'           => 'khoi-cong-8-du-an-nha-o-xa-hoi-da-nang-2026',
+		'old_slug'       => array( 'da-nang-khoi-cong-8-du-an-nha-o-xa-hoi-4575-can-cuoi-2026' ),
 		'title'          => 'Đà Nẵng sắp khởi công 8 dự án nhà ở xã hội, khoảng 4.575 căn trong 2 tháng cuối năm 2026',
 		'excerpt'        => 'Tại buổi làm việc ngày 10/11/2026, Đà Nẵng cho biết từ đầu năm đã giao chủ đầu tư 10 dự án nhà ở xã hội (9.916 căn), đã khởi công 4 dự án, mở bán 4 dự án và dự kiến khởi công thêm 8 dự án với khoảng 4.575 căn trong 2 tháng cuối năm. Danh mục 113 khu đất khoảng 390 ha là quỹ đất cho giai đoạn 2026 – 2030.',
 		'keyword'        => 'nhà ở xã hội Đà Nẵng',
 		'keywords_extra' => array( 'nhà ở xã hội Đà Nẵng 2026', '113 khu đất nhà ở xã hội Đà Nẵng', 'mua nhà ở xã hội Đà Nẵng', 'Quyết định 2259/QĐ-UBND' ),
 		'project'        => '',
 		'schedule'       => '2026-11-14 07:00',
+		'rev'            => 2, // 15/11: chuẩn SEO 100/100.
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'Nhà ở xã hội', 'Chính sách nhà ở', 'Hạ tầng Đà Nẵng' ),
 		'image'          => 'plugin:img/tin-tuc/da-nang-khoi-cong-8-du-an-nha-o-xa-hoi-4575-can-cuoi-2026.jpg',
-		'image_alt'      => 'Đà Nẵng sắp khởi công 8 dự án nhà ở xã hội, khoảng 4.575 căn trong 2 tháng cuối năm 2026',
+		'image_alt'      => 'Nhà ở xã hội Đà Nẵng: sắp khởi công 8 dự án, khoảng 4.575 căn trong 2 tháng cuối năm 2026',
 		'content'        => <<<HTML
-<p>Ngày 10/11/2026, tại buổi làm việc về tình hình phát triển <strong>nhà ở xã hội</strong> (Chủ tịch HĐND thành phố Nguyễn Đức Dũng chủ trì, theo VnExpress), Sở Xây dựng Đà Nẵng báo cáo: từ đầu năm 2026 thành phố đã chấp thuận chủ trương đầu tư, giao chủ đầu tư <strong>10 dự án với khoảng 9.916 căn</strong>; trong 2 tháng cuối năm dự kiến <strong>khởi công thêm 8 dự án, khoảng 4.575 căn</strong>. Đây là nguồn cung đáng chú ý cho người thu nhập thấp, công nhân, cán bộ – công chức đang tìm nhà ở Đà Nẵng.</p>
+<p><strong>Nhà ở xã hội Đà Nẵng</strong> sắp có thêm nguồn cung lớn. Ngày 10/11/2026, tại buổi làm việc về tình hình phát triển nhà ở xã hội (Chủ tịch HĐND thành phố Nguyễn Đức Dũng chủ trì, theo <a href="https://vnexpress.net/da-nang-duyet-113-khu-dat-lam-nha-o-xa-hoi-5143099.html">VnExpress</a>), Sở Xây dựng Đà Nẵng báo cáo: từ đầu năm 2026 thành phố đã chấp thuận chủ trương đầu tư, giao chủ đầu tư <strong>10 dự án với khoảng 9.916 căn</strong>; trong 2 tháng cuối năm dự kiến <strong>khởi công thêm 8 dự án, khoảng 4.575 căn</strong>. Đây là nguồn cung đáng chú ý cho người thu nhập thấp, công nhân, cán bộ – công chức đang tìm nhà ở Đà Nẵng.</p>
 <!--hh-featured-->
 <h2>Nhà ở xã hội Đà Nẵng 2026: các con số chính</h2>
 <table>
@@ -729,14 +758,16 @@ HTML
 <tr><td>Quỹ đất đã duyệt</td><td>113 khu đất, khoảng 390 ha (Quyết định 2259/QĐ-UBND ngày 22/5/2026): 24 khu đang triển khai dự án, 89 khu dự kiến triển khai giai đoạn tiếp theo</td></tr>
 </tbody>
 </table>
-<h2>Quỹ đất 113 khu: những khu lớn nhất</h2>
+<h2>Quỹ đất nhà ở xã hội Đà Nẵng: 113 khu, những khu lớn nhất</h2>
 <p>Theo Quyết định 2259/QĐ-UBND, các khu đất có quy mô lớn trong danh mục gồm: Khu đô thị Tam Hòa – Tam Tiến khoảng 20,3 ha; Điểm dân cư số 1 tại xã Hòa Tiến khoảng 20,2 ha; Khu đô thị Chu Lai (xã Núi Thành) khoảng 17,4 ha; Khu nhà ở xã hội Vạn Phúc – Hội An (phường Hội An Tây) khoảng 12,41 ha. Quỹ đất trải ra cả khu vực Đà Nẵng cũ lẫn vùng Quảng Nam cũ sau hợp nhất – từ các xã phía Tây, phía Nam đến Hội An, Chu Lai.</p>
 <!--hh-img:img/hoa-xuan/hoa-xuan-flycam-8-2025-toan-canh-ven-song-cam-le.jpg|Khu đô thị ven sông Cẩm Lệ – Hòa Xuân, nơi có các dự án nhà ở xã hội Lê Kim Lăng và Hòa Phước (ảnh flycam thực tế tháng 8/2025)-->
-<h2>Điều gì còn làm chậm tiến độ?</h2>
-<p>Theo Sở Xây dựng, tiến độ nhiều dự án còn phụ thuộc vào việc điều chỉnh quy hoạch, giải phóng mặt bằng và đầu tư hạ tầng kỹ thuật kết nối; nguồn cung nhà ở xã hội <strong>cho thuê</strong> cũng còn thiếu so với chỉ tiêu. Các con số 4.575 căn hay 26.279 căn vì vậy là kế hoạch, chưa phải kết quả – người mua nên theo dõi thông báo mở bán chính thức của từng dự án.</p>
-<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<h2>Điều gì còn làm chậm tiến độ nhà ở xã hội Đà Nẵng?</h2>
+<p>Theo Sở Xây dựng, tiến độ nhiều dự án nhà ở xã hội Đà Nẵng còn phụ thuộc vào việc điều chỉnh quy hoạch, giải phóng mặt bằng và đầu tư hạ tầng kỹ thuật kết nối; nguồn cung nhà ở xã hội <strong>cho thuê</strong> cũng còn thiếu so với chỉ tiêu. Các con số 4.575 căn hay 26.279 căn vì vậy là kế hoạch, chưa phải kết quả – người mua nên theo dõi thông báo mở bán chính thức của từng dự án.</p>
+<h2>Ai được mua nhà ở xã hội Đà Nẵng?</h2>
+<p>Theo Luật Nhà ở 2023 (<a href="https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Nha-o-2023-27-2023-QH15-528669.aspx">toàn văn trên Thư viện Pháp luật</a>), đối tượng được mua nhà ở xã hội gồm nhiều nhóm như người thu nhập thấp ở đô thị, công nhân, người lao động trong doanh nghiệp, cán bộ – công chức – viên chức, lực lượng vũ trang… kèm điều kiện về nhà ở hiện có và thu nhập theo văn bản hướng dẫn. Người mua nhà ở xã hội Đà Nẵng nên chuẩn bị trước giấy xác nhận đối tượng, xác nhận thực trạng nhà ở và thu nhập, vì mỗi dự án chỉ nhận hồ sơ trong một khoảng thời gian nhất định.</p>
+<h2>Tác động / nhận định của Hoàng Hiệp về nhà ở xã hội Đà Nẵng</h2>
 <ul>
-<li><strong>Cơ hội cho người mua nhà đầu tiên:</strong> nguồn cung nhà ở xã hội tăng mạnh từ cuối 2026 – 2027. Người đủ điều kiện (theo Luật Nhà ở 2023 và các văn bản hướng dẫn về đối tượng, thu nhập, nhà ở hiện có) nên chuẩn bị hồ sơ xác nhận sớm để kịp đợt nhận hồ sơ của từng dự án.</li>
+<li><strong>Cơ hội cho người mua nhà đầu tiên:</strong> nguồn cung nhà ở xã hội Đà Nẵng tăng mạnh từ cuối 2026 – 2027. Người đủ điều kiện (theo Luật Nhà ở 2023 và các văn bản hướng dẫn về đối tượng, thu nhập, nhà ở hiện có) nên chuẩn bị hồ sơ xác nhận sớm để kịp đợt nhận hồ sơ của từng dự án.</li>
 <li><strong>Giá căn hộ thương mại bình dân bị cạnh tranh:</strong> phân khúc căn hộ thương mại giá thấp ở vùng ven (Liên Chiểu, Hòa Vang, Cẩm Lệ) sẽ chịu cạnh tranh trực tiếp từ nhà ở xã hội có giá thấp hơn và được vay ưu đãi.</li>
 <li><strong>Hạ tầng đi kèm:</strong> các khu nhà ở xã hội lớn thường kéo theo đường, trường, chợ – khu vực xung quanh (đặc biệt Hòa Tiến, Tam Hòa – Tam Tiến, Chu Lai) sẽ đông dân hơn, có lợi cho nhà phố kinh doanh, dịch vụ quanh đó về dài hạn.</li>
 <li><strong>Không mua suất nhà ở xã hội qua trung gian:</strong> hồ sơ mua nhà ở xã hội nộp trực tiếp cho chủ đầu tư và được xét theo điều kiện; tránh các lời mời "giữ suất", "mua lại suất" có thu tiền.</li>
@@ -750,21 +781,22 @@ HTML
 <li><a href="/du-an/nha-o-xa-hoi-bac-hoa-khanh/">Nhà ở xã hội Bắc Hòa Khánh</a> – khu Liên Chiểu, gần khu công nghiệp, phù hợp công nhân và người lao động.</li>
 <li><a href="/du-an/nha-o-xa-hoi-con-tien-hoi-an/">Nhà ở xã hội Khu đô thị Cồn Tiến (Hội An)</a> và <a href="/du-an/nha-o-xa-hoi-nui-thanh-chu-lai/">Khu nhà ở xã hội Núi Thành (Chu Lai)</a> – vùng Quảng Nam cũ, nơi có các khu đất lớn trong danh mục 113 khu (Hội An Tây, Chu Lai).</li>
 </ul>
-<p>Cần kiểm tra điều kiện mua nhà ở xã hội hoặc so sánh với căn hộ thương mại giá vừa, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Cần kiểm tra điều kiện mua nhà ở xã hội Đà Nẵng hoặc so sánh với căn hộ thương mại giá vừa, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: buổi làm việc về nhà ở xã hội ngày 10/11/2026 theo VnExpress, CafeF, Báo Đầu tư, VietTimes, Vietbao (10 – 11/11/2026); Quyết định 2259/QĐ-UBND ngày 22/5/2026 về danh mục 113 vị trí khu đất phát triển nhà ở xã hội theo VnEconomy, Báo Xây dựng, Bộ Xây dựng (5/2026). Bài viết theo trích yếu báo chí, chưa đọc toàn văn các văn bản.</p>
 HTML
 		,
 		'seo'            => array(
-			'seo_title' => 'Đà Nẵng sắp khởi công 8 dự án nhà ở xã hội',
-			'desc'      => 'Đà Nẵng dự kiến khởi công 8 dự án nhà ở xã hội, khoảng 4.575 căn cuối 2026; đã giao 10 dự án 9.916 căn; quỹ 113 khu đất 390 ha. Ai nên chú ý?',
+			'seo_title' => 'Nhà ở xã hội Đà Nẵng: sắp khởi công 8 dự án, 4.575 căn',
+			'desc'      => 'Nhà ở xã hội Đà Nẵng: dự kiến khởi công 8 dự án, khoảng 4.575 căn cuối 2026; đã giao 10 dự án 9.916 căn; quỹ 113 khu đất 390 ha. Ai nên chú ý?',
 			'points'    => array(
-				'10/11/2026: Đà Nẵng dự kiến khởi công 8 dự án nhà ở xã hội, khoảng 4.575 căn trong 2 tháng cuối năm',
+				'Nhà ở xã hội Đà Nẵng: ngày 10/11/2026 thành phố dự kiến khởi công 8 dự án, khoảng 4.575 căn trong 2 tháng cuối năm',
 				'Từ đầu 2026: giao chủ đầu tư 10 dự án (9.916 căn), khởi công 4 dự án, mở bán 4 dự án',
 				'Quỹ 113 khu đất khoảng 390 ha (QĐ 2259/QĐ-UBND), chỉ tiêu 26.279 căn giai đoạn 2026 – 2030',
 			),
 			'faq'       => array(
 				array( 'Đà Nẵng có bao nhiêu dự án nhà ở xã hội sắp khởi công?', 'Theo báo cáo tại buổi làm việc ngày 10/11/2026, thành phố dự kiến khởi công thêm 8 dự án với khoảng 4.575 căn trong 2 tháng cuối năm 2026.' ),
 				array( 'Danh mục 113 khu đất nhà ở xã hội Đà Nẵng là gì?', 'Quyết định 2259/QĐ-UBND ngày 22/5/2026 phê duyệt 113 vị trí khu đất khoảng 390 ha để phát triển nhà ở xã hội, gồm 24 khu đang triển khai và 89 khu dự kiến triển khai giai đoạn tiếp theo.' ),
+				array( 'Nhà ở xã hội Đà Nẵng mục tiêu bao nhiêu căn đến 2030?', 'Chỉ tiêu giai đoạn 2026 – 2030 là 26.279 căn theo Nghị quyết 303/NQ-CP được báo chí dẫn; đây là kế hoạch, tiến độ còn phụ thuộc quy hoạch, giải phóng mặt bằng và hạ tầng.' ),
 				array( 'Mua nhà ở xã hội Đà Nẵng cần chú ý gì?', 'Kiểm tra điều kiện về đối tượng, thu nhập, nhà ở hiện có theo Luật Nhà ở 2023; nộp hồ sơ trực tiếp cho chủ đầu tư khi dự án thông báo nhận hồ sơ, không mua "suất" qua trung gian.' ),
 			),
 		),
@@ -776,6 +808,7 @@ HTML
 			'https://vietbao.vn/da-nang-ra-tien-do-nha-o-xa-hoi-muc-tieu-26279-can-den-nam-2030-615377.html',
 			'https://vneconomy.vn/da-nang-phe-duyet-danh-muc-113-vi-tri-khu-dat-phat-trien-nha-o-xa-hoi.htm',
 			'https://baoxaydung.vn/da-nang-phe-duyet-danh-muc-113-khu-dat-phat-trien-nha-o-xa-hoi-192260523080124625.htm',
+			'https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Nha-o-2023-27-2023-QH15-528669.aspx',
 		),
 	);
 	return $posts;
