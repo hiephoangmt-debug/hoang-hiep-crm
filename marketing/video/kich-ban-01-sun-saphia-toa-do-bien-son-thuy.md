@@ -13,9 +13,9 @@
 - Hình: avatar nửa người. Chữ trên màn hình: **"TỌA ĐỘ MỚI"** · *ven biển Đà Nẵng*.
 
 ## Đoạn 2 – Vị trí (B-roll + giọng, 9–24s)
-> Từ đây, đi sân bay khoảng hai mươi phút. Theo đường ven biển, tới phố cổ Hội An chừng hai mươi hai đến hai mươi lăm cây số. Phía sau là trung tâm thành phố, phía trước là biển.
+> Từ đây, đi sân bay khoảng mười phút. Theo đường ven biển, tới phố cổ Hội An chừng hai mươi hai đến hai mươi lăm cây số. Phía sau là trung tâm thành phố, phía trước là biển.
 
-- Hình: flycam dải biển Sơn Thủy – Non Nước → bản đồ kết nối có ghim Sân bay ~20 phút, Hội An 22–25 km (ước tính trên bản đồ).
+- Hình: flycam dải biển Sơn Thủy – Non Nước → bản đồ kết nối có ghim Sân bay ~10 phút (~7 km), Hội An 22–25 km (ước tính trên bản đồ).
 
 ## Đoạn 3 – Hạ tầng (B-roll + giọng, 24–38s)
 > Trục Võ Nguyên Giáp – Trường Sa đang được chuẩn bị mở rộng, vốn dự kiến hai nghìn sáu trăm ba mươi ba tỷ đồng. Theo chủ đầu tư, ga đường sắt đô thị số chín cách dự án khoảng năm trăm mét. Các dự án này còn ở bước chuẩn bị, nên tiến độ có thể thay đổi.
