@@ -14,18 +14,19 @@ function hh_posts_tuan_05_06( $posts ) {
 		'slug'     => 'can-ho-da-nang-2026-du-an-dang-mo-ban',
 		'title'    => 'Căn hộ Đà Nẵng 2026: các dự án đang mở bán, giá và thời điểm bàn giao',
 		'excerpt'  => 'Tổng hợp căn hộ Đà Nẵng 2026 đang mở bán: khu vực, giá tham khảo, thời điểm bàn giao của từng dự án để anh chị so sánh nhanh.',
-		'keyword'  => 'căn hộ Đà Nẵng',
+		'keyword'  => 'căn hộ Đà Nẵng 2026',
 		'project'  => '',
 		'week'     => 5,
 		'category' => 'Thị trường',
 		'content'  => <<<'HTML'
-<p>Căn hộ Đà Nẵng năm 2026 có nguồn cung khá đa dạng: từ dòng căn hộ ven sông Hàn, ven biển Mỹ Khê đến các tòa tháp mới ở Hòa Xuân, FPT City. Giá tham khảo phổ biến từ khoảng 2 tỷ cho studio ở khu phía Nam đến trên 10 tỷ cho căn 3 phòng ngủ ven sông, ven biển. Bài viết được Hoàng Hiệp tổng hợp từ dữ liệu dự án, cập nhật tháng 10/2026.</p>
+<p>Căn hộ Đà Nẵng 2026 có nguồn cung khá đa dạng: từ dòng căn hộ ven sông Hàn, ven biển Mỹ Khê đến các tòa tháp mới ở Hòa Xuân, FPT City. Giá tham khảo phổ biến từ khoảng 2 tỷ cho studio ở khu phía Nam đến trên 10 tỷ cho căn 3 phòng ngủ ven sông, ven biển. Bài viết được Hoàng Hiệp tổng hợp từ dữ liệu dự án, cập nhật tháng 10/2026.</p>
 
 <h2>Bức tranh chung thị trường căn hộ Đà Nẵng 2026</h2>
-<p>Theo các báo cáo thị trường được báo chí dẫn lại, mặt bằng giá sơ cấp căn hộ Đà Nẵng đã lên khoảng 80 – 90 triệu/m², tăng mạnh so với cùng kỳ. Nguồn cung mới tập trung nhiều ở khu Ngũ Hành Sơn và Hòa Xuân, nơi còn quỹ đất cho dự án quy mô lớn.</p>
+<!--hh-img:img/sun-ponte/sun-ponte-toan-canh-cau-rong.jpg|Căn hộ Đà Nẵng 2026 ven sông Hàn: Sun Ponte Residence bên cầu Rồng (phối cảnh chủ đầu tư)-->
+<p>Theo các báo cáo thị trường được báo chí dẫn lại (xem <a href="https://vnexpress.net/chung-cu-moi-o-da-nang-ngay-cang-dat-do-5067793.html">VnExpress</a>), mặt bằng giá sơ cấp căn hộ Đà Nẵng 2026 đã lên khoảng 80 – 90 triệu/m², tăng mạnh so với cùng kỳ. Nguồn cung mới tập trung nhiều ở khu Ngũ Hành Sơn và Hòa Xuân, nơi còn quỹ đất cho dự án quy mô lớn.</p>
 <p>Điều đó có nghĩa là người mua có nhiều lựa chọn hơn, nhưng chênh lệch giá giữa các khu vực cũng lớn hơn. Chọn đúng khu vực và đúng thời điểm bàn giao quan trọng không kém chọn đúng dự án.</p>
 
-<h2>Bảng dự án căn hộ Đà Nẵng đang mở bán</h2>
+<h2>Bảng dự án căn hộ Đà Nẵng 2026 đang mở bán</h2>
 <table>
 <thead><tr><th>Dự án</th><th>Khu vực</th><th>Giá tham khảo</th><th>Bàn giao</th></tr></thead>
 <tbody>
@@ -55,7 +56,7 @@ function hh_posts_tuan_05_06( $posts ) {
 <h3>Đã và đang bàn giao</h3>
 <p>Nếu cần nhận nhà ngay, có thể xem <a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a>, <a href="/du-an/sun-cosmo-residence/">Sun Cosmo Residence</a>, <a href="/du-an/the-filmore-da-nang/">The Filmore</a> hay <a href="/du-an/vista-residence-da-nang/">Vista Residence</a>. Giao dịch ở nhóm này chủ yếu là chuyển nhượng thứ cấp, giá đã phản ánh tiến độ hoàn thiện.</p>
 
-<h2>Chọn căn hộ Đà Nẵng theo nhu cầu</h2>
+<h2>Chọn căn hộ Đà Nẵng 2026 theo nhu cầu</h2>
 <ul>
 <li><strong>Ở thực, ngân sách vừa phải:</strong> khu Hòa Xuân, FPT City có mức giá dễ tiếp cận hơn, tiện ích nội khu đầy đủ.</li>
 <li><strong>Cho thuê, khai thác khách du lịch – chuyên gia:</strong> ưu tiên trục sông Hàn và ven biển, nơi giá thuê cao hơn mặt bằng chung.</li>
@@ -63,22 +64,35 @@ function hh_posts_tuan_05_06( $posts ) {
 </ul>
 <p>Anh chị muốn xem theo từng nhóm có thể đọc thêm <a href="/can-ho-view-song-han-du-an-va-gia/">căn hộ view sông Hàn</a>, <a href="/can-ho-view-bien-da-nang-my-khe/">căn hộ view biển Mỹ Khê</a> hoặc <a href="/mua-can-ho-da-nang-2-ty-3-ty/">căn hộ 2 – 3 tỷ</a>. Danh sách đầy đủ có tại trang <a href="/loai-du-an/cao-tang/">căn hộ Đà Nẵng</a>.</p>
 
+<h2>Đọc bảng giá căn hộ Đà Nẵng 2026 thế nào cho đúng?</h2>
+<p>Cùng là căn hộ Đà Nẵng 2026, nhưng con số trong bảng đến từ hai nguồn khác nhau: bảng giá chủ đầu tư công bố cho căn mới và giá chuyển nhượng ở dự án đã có giao dịch thứ cấp. Ví dụ Spana Tower ghi khoảng 1,9 – 4,14 tỷ là giá sang nhượng hợp đồng, còn The Camellia Sơn Trà ghi studio từ khoảng 1,98 tỷ là giá chào bán. Khi so sánh, anh chị nên đặt các căn trên cùng một điều kiện: đã gồm VAT hay chưa, đã trừ chiết khấu hay chưa, tiến độ thanh toán ra sao.</p>
+<p>Với mặt bằng sơ cấp khoảng 80 – 90 triệu/m², một căn 2PN khoảng 70 m² ở dự án mới thường rơi vào khoảng 5,6 – 6,3 tỷ. Đó là lý do căn hộ Đà Nẵng 2026 dưới 3 tỷ chủ yếu là studio, 1PN hoặc căn ở FPT City, Hòa Xuân, Liên Chiểu.</p>
+<h3>Ba nhóm ngân sách thường gặp</h3>
+<ul>
+<li><strong>Dưới 3 tỷ:</strong> studio The Camellia Sơn Trà, sang nhượng hợp đồng Spana Tower, 1PN Peninsula Đà Nẵng.</li>
+<li><strong>3 – 6 tỷ:</strong> 1PN – 2PN Peninsula Đà Nẵng, Capital Square, HIYORI Aqua Tower, Newtown Diamond, The Meridian.</li>
+<li><strong>Trên 6 tỷ:</strong> 3PN Masteri Rivera Danang, 2PN lớn Capital Square, Newtown Diamond và các căn view trực diện sông Hàn.</li>
+</ul>
+<p>Danh sách căn hộ Đà Nẵng 2026 trong bài sẽ được Hoàng Hiệp cập nhật khi chủ đầu tư công bố bảng giá đợt mới.</p>
+
 <h2>Lưu ý trước khi chọn dự án</h2>
 <p>Với căn hộ hình thành trong tương lai, cần kiểm tra văn bản đủ điều kiện bán, bảo lãnh ngân hàng và tiến độ thi công thực tế. Mốc bàn giao trong bảng đều là dự kiến, có thể thay đổi.</p>
 <p>Giá chào bán và giá chuyển nhượng có thể chênh nhau đáng kể, nhất là ở dự án sắp bàn giao. Hãy so sánh cả hai trước khi quyết định.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá căn hộ Đà Nẵng cập nhật theo từng dự án và danh sách căn đang giao dịch thật.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá căn hộ Đà Nẵng 2026 cập nhật theo từng dự án và danh sách căn đang giao dịch thật.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Căn hộ Đà Nẵng 2026: dự án đang mở bán, giá, bàn giao',
-			'desc'      => 'Căn hộ Đà Nẵng 2026: bảng dự án đang mở bán theo khu vực, giá tham khảo và thời điểm bàn giao. Liên hệ Hoàng Hiệp để nhận bảng giá mới.',
-			'points'    => array( 'Giá sơ cấp căn hộ Đà Nẵng khoảng 80 – 90 triệu/m² theo báo cáo thị trường', 'Bảng hơn 15 dự án đang mở bán: khu vực, giá tham khảo, bàn giao', 'Chọn khu vực theo nhu cầu ở thực, cho thuê hay tích sản' ),
+			'desc'      => 'Căn hộ Đà Nẵng 2026 đang mở bán: hơn 15 dự án theo khu vực, giá tham khảo, thời điểm bàn giao, chính sách. Gọi Hoàng Hiệp nhận bảng giá mới.',
+			'points'    => array( 'Căn hộ Đà Nẵng 2026: giá sơ cấp khoảng 80 – 90 triệu/m² theo báo cáo thị trường', 'Bảng hơn 15 dự án căn hộ Đà Nẵng 2026: khu vực, giá tham khảo, bàn giao', 'Chọn khu vực theo nhu cầu ở thực, cho thuê hay tích sản' ),
 			'faq'       => array(
 				array( 'Căn hộ Đà Nẵng 2026 giá bao nhiêu?', 'Giá tham khảo từ khoảng 2 tỷ cho studio ở Sơn Trà, Hòa Xuân đến trên 10 tỷ cho căn 3PN ven sông, ven biển. Giá sơ cấp phổ biến khoảng 80 – 90 triệu/m².' ),
 				array( 'Khu vực nào có nhiều căn hộ mới nhất?', 'Nguồn cung mới tập trung ở Ngũ Hành Sơn (FPT City, Hòa Quý) và Hòa Xuân với các dự án Cora Tower, Spana Tower, S-Light Tower, FourS Tower.' ),
 				array( 'Dự án nào bàn giao sớm nhất?', 'Sun Ponte Residence, Masteri Rivera Danang và Newtown Diamond đều dự kiến bàn giao quý 3/2026; Sun Symphony, Sun Cosmo, The Filmore đã và đang bàn giao.' ),
-				array( 'Mua căn hộ Đà Nẵng cần kiểm tra gì?', 'Kiểm tra văn bản đủ điều kiện bán, bảo lãnh ngân hàng, thời hạn sở hữu, tiến độ thi công và so sánh giá với thị trường chuyển nhượng.' ),
+				array( 'Mua căn hộ Đà Nẵng 2026 cần kiểm tra gì?', 'Kiểm tra văn bản đủ điều kiện bán, bảo lãnh ngân hàng, thời hạn sở hữu, tiến độ thi công và so sánh giá với thị trường chuyển nhượng.' ),
+				array( 'Căn hộ Đà Nẵng 2026 dưới 3 tỷ có không?', 'Có, chủ yếu là studio, 1PN hoặc căn sang nhượng hợp đồng: studio The Camellia Sơn Trà từ khoảng 1,98 tỷ, Spana Tower sang nhượng từ khoảng 1,9 tỷ, 1PN Peninsula Đà Nẵng khoảng 2,2 – 2,7 tỷ (tham khảo).' ),
+				array( 'Nên mua căn hộ Đà Nẵng 2026 đang xây hay đã bàn giao?', 'Căn đang xây thường có lịch thanh toán giãn và chính sách ưu đãi nhưng phải chờ nhận nhà; căn đã bàn giao như Sun Symphony, Sun Cosmo, The Filmore nhận nhà ngay, giá đã phản ánh tiến độ. Chọn theo nhu cầu ở và dòng tiền.' ),
 			),
 		),
 		'sources'  => array( 'https://vietnamfinance.vn/can-ho-da-nang-vao-chu-ky-gia-cao-cau-dau-tu-dan-dat-ap-luc-an-cu-gia-tang-d144155.html', 'https://thitruongtaichinhtiente.vn/ty-le-hap-thu-can-ho-da-nang-khiem-ton-chi-30-40-77144.html', 'https://vnexpress.net/chung-cu-moi-o-da-nang-ngay-cang-dat-do-5067793.html' ),
@@ -152,13 +166,13 @@ HTML
 </table>
 <p>Giá là khoảng tham khảo từ bảng giá công bố và tin chuyển nhượng công khai. Căn tầng cao, view sông trực diện thường nằm ở mức trên của khoảng giá.</p>
 
-<h2>Bờ Đông hay bờ Tây sông Hàn?</h2>
+<h2>Căn hộ view sông Hàn bờ Đông hay bờ Tây?</h2>
 <h3>Bờ Đông – Sơn Trà</h3>
 <p>Bờ Đông có nhiều dự án quy mô lớn, nhìn sang trung tâm Hải Châu, gần biển Mỹ Khê. Nguồn hàng đa dạng từ studio đến penthouse, phù hợp cả ở thực và cho thuê.</p>
 <h3>Bờ Tây – Hải Châu</h3>
 <p>Bờ Tây là lõi hành chính, thương mại với công viên APEC, chợ Hàn, phố đi bộ ven sông. Số căn ít hơn, giá mỗi m² thường cao hơn, phù hợp khách tìm căn hạng sang hoặc căn cho thuê chuyên gia.</p>
 
-<h2>Kinh nghiệm chọn căn view sông Hàn</h2>
+<h2>Kinh nghiệm chọn căn hộ view sông Hàn</h2>
 <ul>
 <li><strong>Xác định view thật:</strong> view trực diện, view chéo hay view một phần khác nhau rất nhiều về giá và khả năng cho thuê.</li>
 <li><strong>Chú ý tầng:</strong> tầng thấp có thể bị che bởi công trình xung quanh trong tương lai.</li>
@@ -167,7 +181,13 @@ HTML
 </ul>
 <p>Nếu anh chị quan tâm thêm dòng căn ven biển, xem bài <a href="/can-ho-view-bien-da-nang-my-khe/">căn hộ view biển Đà Nẵng</a>. Danh sách đầy đủ dự án cao tầng có tại trang <a href="/loai-du-an/cao-tang/">căn hộ Đà Nẵng</a> và <a href="/khu-vuc/son-tra/">khu vực Sơn Trà</a>.</p>
 
-<h2>Mức giá thuê tham khảo của căn view sông</h2>
+<h2>Ngân sách nào mua được căn hộ view sông Hàn?</h2>
+<p>Từ bảng giá rao 10/2026 có thể chia căn hộ view sông Hàn thành ba nhóm ngân sách. Nhóm dưới 50 triệu/m² gồm các chung cư lâu năm phía cầu Thuận Phước như Hòa Bình Green, Blooming Tower, Blue House, Vicoland – phù hợp người cần view sông với tổng tiền thấp, chấp nhận tiện ích cũ hơn.</p>
+<p>Nhóm khoảng 65 – 125 triệu/m² là phổ biến nhất, gồm Sun Cosmo, Capital Square, The Peninsula, Sun Ponte, Sun Symphony. Ở nhóm này, studio căn hộ view sông Hàn có giá tham khảo từ khoảng 1,8 – 3,2 tỷ, căn 2PN phổ biến 4 – 8 tỷ. Nhóm trên 118 triệu/m² là căn hộ view sông Hàn hạng sang quanh cầu Rồng – cầu Sông Hàn như M Landmark, The Filmore, The Legend, Landmark Tower.</p>
+<h3>Ví dụ quy đổi giá theo diện tích</h3>
+<p>Một căn hộ view sông Hàn 2PN khoảng 70 m² ở mức 90 triệu/m² có tổng giá khoảng 6,3 tỷ; cùng diện tích ở mức 40 triệu/m² chỉ khoảng 2,8 tỷ. Chênh lệch đến từ tuổi công trình, tiện ích và mức độ view trực diện, nên cần so sánh trên cùng loại căn và cùng hướng nhìn.</p>
+
+<h2>Giá thuê tham khảo của căn hộ view sông Hàn</h2>
 <p>View sông Hàn không chỉ đẹp mà còn giúp căn hộ cho thuê tốt hơn. Theo tin cho thuê công khai, căn 1PN tại The Filmore khoảng 22 – 27 triệu/tháng, căn 3PN view sông có thể đến 95 triệu/tháng.</p>
 <p>Ở bờ Đông, 2PN Sun Ponte Residence khoảng 32 – 40 triệu/tháng, Peninsula Đà Nẵng khoảng 20 – 45 triệu/tháng tùy diện tích và view. Đây là các khoảng giá tham khảo, phụ thuộc nhiều vào nội thất.</p>
 <p>Khi so sánh, anh chị nên lấy giá thuê chia giá mua để có tỷ suất gộp, thay vì chỉ nhìn giá thuê tuyệt đối. Chi tiết xem bài <a href="/gia-thue-can-ho-da-nang-moi-thang/">giá thuê căn hộ Đà Nẵng</a>.</p>
@@ -176,14 +196,16 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Căn hộ view sông Hàn: dự án và giá tham khảo 2026',
-			'desc'      => 'Căn hộ view sông Hàn hai bờ Sơn Trà, Hải Châu: bảng dự án, giá tham khảo, tình trạng bàn giao. Gọi Hoàng Hiệp để nhận căn view đẹp.',
+			'seo_title' => 'Căn hộ view sông Hàn: bảng giá 21 dự án 10/2026',
+			'desc'      => 'Căn hộ view sông Hàn 10/2026: bảng giá rao 21 dự án hai bờ, từ 35 – 40 đến 208 – 228 triệu/m², kèm bản đồ vị trí. Gọi Hoàng Hiệp chọn căn view đẹp.',
 			'points'    => array( 'Bảng giá rao 21 dự án căn hộ view sông Hàn, kèm bản đồ vị trí', 'Cao nhất M Landmark 208 – 228, The Filmore 174 – 212 triệu/m²; thấp nhất Hòa Bình Green 35 – 40 triệu/m²', 'Nhóm Sun Group bờ Đông khoảng 86 – 124 triệu/m²', 'Phân biệt view trực diện, view chéo khi chọn căn' ),
 			'faq'       => array(
 				array( 'Căn hộ view sông Hàn giá bao nhiêu?', 'Giá rao tháng 10/2026 khoảng 35 – 228 triệu/m² tùy dự án, phổ biến 65 – 125 triệu/m²; studio từ khoảng 1,8 – 3,2 tỷ, căn 2PN phổ biến 4 – 8 tỷ.' ),
 				array( 'Căn hộ view sông Hàn nào giá mềm nhất?', 'Các chung cư lâu năm phía cầu Thuận Phước như Hòa Bình Green (35 – 40), Blooming Tower (39 – 41), Blue House (42 – 44), Vicoland (44 – 46 triệu/m²).' ),
 				array( 'Dự án view sông Hàn nào đã bàn giao?', 'Sun Symphony Residence, Sun Cosmo Residence và The Filmore đã và đang bàn giao, có thể nhận nhà sớm.' ),
 				array( 'Nên mua bờ Đông hay bờ Tây sông Hàn?', 'Bờ Đông nhiều lựa chọn, giá đa dạng, gần biển; bờ Tây ít căn hơn, giá cao hơn nhưng nằm ngay lõi trung tâm Hải Châu.' ),
+				array( 'Mua căn hộ view sông Hàn để cho thuê có tốt không?', 'Căn hộ view sông Hàn thường dễ cho thuê cho khách du lịch, chuyên gia; ví dụ 1PN The Filmore khoảng 22 – 27 triệu/tháng, 2PN Sun Ponte khoảng 32 – 40 triệu/tháng (tham khảo). Hiệu quả thực tế cần tính trên giá mua vào.' ),
+				array( 'Căn hộ view sông Hàn tầng nào đẹp nhất?', 'Tầng trung trở lên thường ít bị che view hơn; căn hộ view sông Hàn trực diện ở tầng cao thường nằm ở mức trên của khoảng giá.' ),
 			),
 		),
 		'sources'  => array( 'https://biggee.vn/', 'https://batdongsan.com.vn/ban-can-ho-chung-cu-sun-symphony-residence', 'https://batdongsan.com.vn/ban-can-ho-chung-cu-the-filmore-da-nang', 'https://baodautu.vn/danang-landmark-du-dieu-kien-mo-ban-bo-sung-454-can-ho-tai-thi-truong-da-nang-d538777.html' ),
@@ -199,6 +221,7 @@ HTML
 		'category' => 'Thị trường',
 		'content'  => <<<'HTML'
 <p>Căn hộ view biển Đà Nẵng tập trung dọc trục Võ Nguyên Giáp – Trường Sa, nhìn ra biển Mỹ Khê. Nhóm dự án đáng chú ý gồm Times Square, Nobu Residences, Wyndham Soleil, Newtown Diamond và các tòa tháp gần biển ở bán đảo Sơn Trà. Giá tham khảo dao động rộng, từ khoảng 2,3 tỷ cho studio căn hộ khách sạn đến hơn 12 tỷ cho căn 2PN mặt biển, cập nhật tháng 10/2026.</p>
+<!--hh-img:img/nobu-da-nang/nobu-da-nang-phoi-canh-thap-ven-bien-my-khe.jpg|Căn hộ view biển Đà Nẵng: phối cảnh tháp Nobu Residences bên biển Mỹ Khê (ảnh chủ đầu tư)-->
 
 <h2>Đặc điểm căn hộ view biển Đà Nẵng</h2>
 <p>Bãi biển Mỹ Khê là điểm đến hút khách du lịch quanh năm, nên căn hộ mặt biển có lợi thế lớn khi cho thuê. Tuy vậy, nhóm này có nhiều loại hình khác nhau: căn hộ sở hữu lâu dài, căn hộ khách sạn, căn hộ hàng hiệu.</p>
@@ -219,7 +242,7 @@ HTML
 </table>
 <p>Giá là khoảng tham khảo theo bảng giá công bố hoặc tin chuyển nhượng công khai. Không phải căn nào trong dự án cũng có view biển trực diện, cần kiểm tra mặt bằng từng tầng.</p>
 
-<h2>Từng nhóm dự án ven biển</h2>
+<h2>Từng nhóm căn hộ view biển Đà Nẵng</h2>
 <h3>Mặt biển Mỹ Khê – Sơn Trà</h3>
 <p>Times Square có khoảng 80% căn hộ nhìn ra biển, khối đế đã có thương hiệu F&amp;B hoạt động. Nobu Residences cao 43 tầng, gồm 264 căn hộ hàng hiệu, dự kiến hoàn thiện năm 2027. Wyndham Soleil là căn hộ khách sạn có thể ủy thác vận hành cho thuê.</p>
 <h3>Trục Trường Sa – Ngũ Hành Sơn</h3>
@@ -235,7 +258,13 @@ HTML
 </ul>
 <p>Xem thêm so sánh <a href="/can-ho-so-huu-lau-dai-hay-can-ho-dich-vu-50-nam/">căn hộ sở hữu lâu dài và căn hộ dịch vụ 50 năm</a>, hoặc toàn bộ dự án tại <a href="/loai-du-an/cao-tang/">căn hộ Đà Nẵng</a> và <a href="/khu-vuc/ngu-hanh-son/">khu vực Ngũ Hành Sơn</a>.</p>
 
-<h2>Giá thuê căn hộ ven biển tham khảo</h2>
+<h2>Chọn căn hộ view biển Đà Nẵng theo ngân sách</h2>
+<p>Dưới 3 tỷ, lựa chọn căn hộ view biển Đà Nẵng chủ yếu là căn gần biển hoặc căn hộ khách sạn: studio The Camellia Sơn Trà từ khoảng 1,98 tỷ, studio Wyndham Soleil chuyển nhượng khoảng 2,3 – 2,6 tỷ. Lưu ý Wyndham Soleil là căn hộ khách sạn thời hạn 50 năm, khác căn sở hữu lâu dài.</p>
+<p>Từ khoảng 3,5 – 7,5 tỷ có thể xem Newtown Diamond (1PN khoảng 3,5 – 3,9 tỷ, 2PN khoảng 5,7 – 7,5 tỷ) hoặc 2PN HIYORI Aqua Tower khoảng 4,5 tỷ. Từ khoảng 6,5 tỷ trở lên là nhóm căn hộ view biển Đà Nẵng mặt tiền Võ Nguyên Giáp như Times Square, Nobu Residences.</p>
+<h3>Kiểm tra view biển thật trước khi đặt cọc</h3>
+<p>Trong cùng một dự án, không phải căn nào cũng là căn hộ view biển Đà Nẵng trực diện. Anh chị nên xin mặt bằng tầng, xác định hướng ban công và hỏi về công trình có thể xây phía trước. Căn view chéo hoặc view một phần thường có giá thấp hơn, phù hợp nếu ưu tiên tổng ngân sách.</p>
+
+<h2>Giá thuê căn hộ view biển Đà Nẵng tham khảo</h2>
 <p>Căn hộ ven biển hướng tới khách du lịch, chuyên gia nước ngoài nên giá thuê thường cao hơn mặt bằng chung. Theo tin cho thuê công khai, Times Square cho thuê dài hạn khoảng 25 – 40 triệu/tháng.</p>
 <p>Wyndham Soleil có studio cho thuê khoảng 20 triệu/tháng, căn lớn view biển khoảng 25 – 45 triệu/tháng. Với căn hộ khách sạn, chủ căn có thể ủy thác cho đơn vị vận hành thay vì tự cho thuê.</p>
 <p>Khi tính hiệu quả, hãy trừ mùa thấp điểm, phí quản lý và chi phí thay mới nội thất do môi trường biển. Một căn view biển trực diện có giá thuê tốt nhưng giá mua cũng cao, nên tỷ suất chưa chắc vượt căn gần biển giá mềm hơn.</p>
@@ -245,12 +274,14 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Căn hộ view biển Đà Nẵng: dự án Mỹ Khê và giá 2026',
-			'desc'      => 'Căn hộ view biển Đà Nẵng dọc Mỹ Khê, Trường Sa: bảng dự án, loại hình, giá tham khảo. Liên hệ Hoàng Hiệp để nhận căn view biển trực diện.',
-			'points'    => array( 'Các dự án mặt biển Mỹ Khê và trục Trường Sa', 'Phân biệt căn hộ sở hữu lâu dài, căn hộ khách sạn, căn hộ hàng hiệu', 'Giá tham khảo từ khoảng 2 tỷ đến hơn 12 tỷ' ),
+			'desc'      => 'Căn hộ view biển Đà Nẵng dọc Mỹ Khê, Trường Sa: danh sách dự án, loại hình, giá tham khảo 2026. Gọi Hoàng Hiệp nhận căn view biển trực diện.',
+			'points'    => array( 'Căn hộ view biển Đà Nẵng: các dự án mặt biển Mỹ Khê và trục Trường Sa', 'Phân biệt căn hộ sở hữu lâu dài, căn hộ khách sạn, căn hộ hàng hiệu', 'Giá tham khảo từ khoảng 2 tỷ đến hơn 12 tỷ' ),
 			'faq'       => array(
 				array( 'Căn hộ view biển Đà Nẵng nào sở hữu lâu dài?', 'Times Square, Newtown Diamond, HIYORI Aqua Tower và The Camellia Sơn Trà được công bố là căn hộ sở hữu lâu dài.' ),
 				array( 'Căn hộ mặt biển Mỹ Khê giá bao nhiêu?', 'Times Square khoảng 150 triệu/m² theo tin chuyển nhượng; Nobu 1PN khoảng 6,63 – 9,06 tỷ (tham khảo).' ),
 				array( 'Có căn hộ gần biển giá dưới 3 tỷ không?', 'Có, ví dụ studio The Camellia từ khoảng 1,98 tỷ hoặc studio Wyndham Soleil chuyển nhượng khoảng 2,3 – 2,6 tỷ (căn hộ khách sạn 50 năm).' ),
+				array( 'Căn hộ view biển Đà Nẵng nào sắp bàn giao?', 'Theo thông tin dự án, tòa The Ruby thuộc Newtown Diamond dự kiến bàn giao quý 3/2026; Nobu Residences dự kiến hoàn thiện năm 2027. Mốc thực tế cần đối chiếu thông báo của chủ đầu tư.' ),
+				array( 'Mua căn hộ view biển Đà Nẵng để cho thuê cần lưu ý gì?', 'Tính cả mùa thấp điểm, phí quản lý và chi phí bảo trì do gió muối; với căn hộ khách sạn cần đọc kỹ điều kiện ủy thác vận hành.' ),
 			),
 		),
 		'sources'  => array( 'https://batdongsan.com.vn/ban-can-ho-chung-cu-da-nang-times-square', 'https://cafeland.vn/du-an/to-hop-can-ho-khach-san-nobu-residences-da-nang-4356.html', 'https://vnexpress.net/newtown-diamond-cat-noc-toa-can-ho-dau-tien-5065074.html' ),
@@ -260,17 +291,18 @@ HTML
 		'slug'     => 'mua-can-ho-da-nang-2-ty-3-ty',
 		'title'    => 'Mua căn hộ Đà Nẵng 2 tỷ – 3 tỷ: chọn dự án nào hợp túi tiền?',
 		'excerpt'  => 'Mua căn hộ Đà Nẵng 2 tỷ – 3 tỷ vẫn có lựa chọn ở FPT City, Hòa Xuân, Sơn Trà. Bảng dự án, loại căn và giá tham khảo cập nhật 10/2026.',
-		'keyword'  => 'mua căn hộ Đà Nẵng 2 tỷ',
+		'keyword'  => 'căn hộ Đà Nẵng 2 tỷ',
 		'project'  => '',
 		'week'     => 5,
 		'category' => 'Kinh nghiệm mua bán',
 		'content'  => <<<'HTML'
 <p>Mua căn hộ Đà Nẵng 2 tỷ đến 3 tỷ vẫn khả thi trong năm 2026, chủ yếu với căn studio, 1 phòng ngủ ở Sơn Trà, Hòa Xuân hoặc căn 2 phòng ngủ ở FPT City, Liên Chiểu. Hoàng Hiệp tổng hợp các dự án có giá tham khảo trong tầm này dựa trên bảng giá và tin chuyển nhượng công khai, cập nhật tháng 10/2026.</p>
+<!--hh-img:img/fpt-plaza-4/fpt-plaza-4-phoi-canh-quang-truong-ban-ngay.jpg|FPT City – khu vực có nhiều lựa chọn căn hộ Đà Nẵng 2 tỷ – 3 tỷ (phối cảnh FPT Plaza 4, ảnh chủ đầu tư)-->
 
 <h2>Mua căn hộ Đà Nẵng 2 tỷ: thực tế thị trường</h2>
 <p>Mặt bằng giá căn hộ mới tại Đà Nẵng đã tăng mạnh, nên với 2 – 3 tỷ, anh chị cần chấp nhận một trong ba điều: diện tích nhỏ, vị trí xa trung tâm hơn, hoặc mua lại căn đã bàn giao. Hiểu rõ đánh đổi này giúp chọn nhanh và đúng hơn.</p>
 
-<h2>Bảng dự án có căn trong tầm 2 – 3 tỷ</h2>
+<h2>Bảng dự án căn hộ Đà Nẵng 2 tỷ – 3 tỷ</h2>
 <table>
 <thead><tr><th>Dự án</th><th>Khu vực</th><th>Loại căn phù hợp</th><th>Giá tham khảo</th></tr></thead>
 <tbody>
@@ -288,7 +320,7 @@ HTML
 </table>
 <p>Giá chỉ là khoảng tham khảo, thay đổi theo tầng, view, nội thất và từng đợt bán. The Ori Garden có cả căn nhà ở xã hội và thương mại, căn nhà ở xã hội có điều kiện mua riêng.</p>
 
-<h2>Ba hướng chọn với ngân sách 2 – 3 tỷ</h2>
+<h2>Ba hướng chọn căn hộ Đà Nẵng 2 tỷ – 3 tỷ</h2>
 <h3>1. Căn 2PN ở thực tại FPT City hoặc Liên Chiểu</h3>
 <p>FPT Plaza 1, 2, 3 và The Ori Garden cho phép mua căn 2 phòng ngủ trong tầm 2 – 3 tỷ. Phù hợp gia đình trẻ cần không gian, ưu tiên trường học và tiện ích khu đô thị.</p>
 <h3>2. Studio, 1PN ở vị trí trung tâm</h3>
@@ -300,7 +332,7 @@ HTML
 <p>Nhiều dự án có ngân hàng hỗ trợ vay đến 70% giá trị căn. Với căn 3 tỷ, vốn tự có khoảng 0,9 – 1 tỷ là có thể bắt đầu, nhưng cần tính kỹ khoản trả hằng tháng sau thời gian ưu đãi.</p>
 <p>Chi tiết lãi suất, ân hạn xem tại bài <a href="/vay-mua-can-ho-da-nang-2026-lai-suat/">vay mua căn hộ Đà Nẵng 2026</a>. Danh sách căn đang rao bán có tại trang <a href="/mua-ban/can-ho-chung-cu/">mua bán căn hộ chung cư</a>.</p>
 
-<h2>Lưu ý khi mua căn hộ giá mềm</h2>
+<h2>Lưu ý khi mua căn hộ Đà Nẵng 2 tỷ</h2>
 <ul>
 <li>Kiểm tra căn là nhà ở thương mại hay nhà ở xã hội.</li>
 <li>Với căn chuyển nhượng, xác minh hợp đồng, tiến độ đã đóng và xác nhận của chủ đầu tư.</li>
@@ -308,22 +340,35 @@ HTML
 </ul>
 <p>Xem thêm <a href="/kinh-nghiem-mua-can-ho-da-nang/">10 điều cần kiểm tra khi mua căn hộ Đà Nẵng</a>.</p>
 
+<h2>Tính tổng chi phí khi mua căn hộ Đà Nẵng 2 tỷ</h2>
+<p>Giá trên bảng chưa phải toàn bộ số tiền cần chuẩn bị. Với căn hộ Đà Nẵng 2 tỷ mua mới từ chủ đầu tư, phí bảo trì 2% tương đương khoảng 40 triệu; cộng thêm nội thất, phí quản lý những tháng đầu và chi phí vay nếu có. Với căn chuyển nhượng, cần tính thêm thuế, phí sang tên và khoản chênh trả cho người bán.</p>
+<p>Ví dụ minh hoạ: căn hộ Đà Nẵng 2 tỷ vay 70% thì vốn tự có ban đầu khoảng 600 triệu, khoản vay khoảng 1,4 tỷ. Vay 1,4 tỷ trong 20 năm, lãi 10%/năm, trả gốc đều thì tháng đầu trả khoảng 17,5 triệu (gốc khoảng 5,8 triệu, lãi khoảng 11,7 triệu) và giảm dần theo dư nợ.</p>
+<h3>Checklist chọn căn trong tầm 2 – 3 tỷ</h3>
+<ul>
+<li>Xác định ưu tiên: diện tích (2PN ngoại vi) hay vị trí (studio trung tâm).</li>
+<li>So giá mỗi m² thông thủy giữa các dự án, không chỉ giá tổng.</li>
+<li>Hỏi rõ căn hộ Đà Nẵng 2 tỷ đó đã gồm VAT, phí bảo trì và nội thất hay chưa.</li>
+<li>Với căn hình thành trong tương lai, kiểm tra mốc bàn giao và bảo lãnh ngân hàng.</li>
+</ul>
+
 <h2>Mua để ở hay để cho thuê?</h2>
 <p>Nếu mua để ở, nên ưu tiên căn 2PN ở khu đô thị có trường học, công viên như FPT City, dù xa trung tâm hơn. Không gian sống và tiện ích nội khu quan trọng hơn view.</p>
 <p>Nếu mua để cho thuê, căn nhỏ ở vị trí trung tâm thường cho tỷ suất tốt hơn. Ví dụ giá thuê tham khảo: căn 2PN FPT Plaza khoảng 10 – 13 triệu/tháng, studio Sun Cosmo từ khoảng 16 triệu/tháng, trong khi 2PN The Ori Garden khoảng 4 – 6 triệu/tháng.</p>
 <p>Với cùng 2 – 3 tỷ, chênh lệch dòng tiền cho thuê giữa các khu vực là đáng kể. Hãy xác định mục tiêu chính trước khi chọn dự án.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn hộ Đà Nẵng 2 – 3 tỷ đang có hàng thật và phương án tài chính phù hợp.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn hộ Đà Nẵng 2 tỷ – 3 tỷ đang có hàng thật và phương án tài chính phù hợp.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Mua căn hộ Đà Nẵng 2 tỷ – 3 tỷ: chọn dự án nào?',
-			'desc'      => 'Mua căn hộ Đà Nẵng 2 tỷ – 3 tỷ: bảng 10 dự án có căn trong tầm giá ở FPT City, Hòa Xuân, Sơn Trà. Gọi Hoàng Hiệp nhận danh sách căn thật.',
-			'points'    => array( '10 dự án có căn tham khảo trong tầm 2 – 3 tỷ', 'Ba hướng chọn: 2PN ngoại vi, studio trung tâm, sang nhượng hợp đồng', 'Vay đến 70% giúp giảm vốn tự có ban đầu' ),
+			'seo_title' => 'Căn hộ Đà Nẵng 2 tỷ – 3 tỷ: 10 dự án nên xem 2026',
+			'desc'      => 'Căn hộ Đà Nẵng 2 tỷ – 3 tỷ: 10 dự án có căn trong tầm giá ở FPT City, Hòa Xuân, Sơn Trà, cách tính tổng chi phí. Gọi Hoàng Hiệp nhận căn thật.',
+			'points'    => array( '10 dự án có căn hộ Đà Nẵng 2 tỷ – 3 tỷ (giá tham khảo)', 'Ba hướng chọn: 2PN ngoại vi, studio trung tâm, sang nhượng hợp đồng', 'Vay đến 70% giúp giảm vốn tự có ban đầu' ),
 			'faq'       => array(
 				array( 'Có 2 tỷ mua được căn hộ Đà Nẵng nào?', 'Có thể xem 1PN, 2PN The Ori Garden, 1PN FPT Plaza 3, studio Sun Cosmo hoặc The Camellia (giá tham khảo khoảng 1,3 – 2,6 tỷ).' ),
 				array( 'Căn 2PN dưới 3 tỷ ở đâu?', 'Chủ yếu ở FPT City (FPT Plaza 1, 2, 3) và The Ori Garden (Liên Chiểu), giá tham khảo khoảng 1,96 – 3,15 tỷ.' ),
 				array( 'Có nên mua sang nhượng hợp đồng không?', 'Có thể, nếu xác minh được hợp đồng gốc, số tiền đã đóng và chủ đầu tư xác nhận thủ tục chuyển nhượng.' ),
+				array( 'Căn hộ Đà Nẵng 2 tỷ có view sông, view biển không?', 'Có nhưng thường là căn nhỏ: studio Sun Cosmo ven sông Hàn khoảng 1,8 – 2,5 tỷ, studio The Camellia gần biển khoảng 1,98 – 2,64 tỷ (tham khảo). Căn 2PN view sông, biển thường vượt 3 tỷ.' ),
+				array( 'Mua căn hộ Đà Nẵng 2 tỷ cần vốn tự có bao nhiêu?', 'Nếu ngân hàng hỗ trợ vay đến 70%, vốn tự có khoảng 600 triệu, chưa kể phí bảo trì 2%, nội thất và chi phí giao dịch.' ),
 			),
 		),
 		'sources'  => array( 'https://batdongsan.com.vn/ban-can-ho-chung-cu-the-ori-garden', 'https://batdongsan.com.vn/ban-can-ho-chung-cu-fpt-plaza-2', 'https://batdongsan.com.vn/ban-can-ho-chung-cu-spana-tower', 'https://cafeland.vn/du-an/the-camellia-son-tra-du-an-can-ho-tai-da-nang-5777.html' ),
@@ -333,12 +378,13 @@ HTML
 		'slug'     => 'kinh-nghiem-mua-can-ho-da-nang',
 		'title'    => 'Kinh nghiệm mua căn hộ Đà Nẵng: 10 điều cần kiểm tra trước khi xuống tiền',
 		'excerpt'  => 'Kinh nghiệm mua căn hộ Đà Nẵng: 10 điều cần kiểm tra về pháp lý, tiến độ, thanh toán, thời hạn sở hữu, giá và khả năng cho thuê.',
-		'keyword'  => 'kinh nghiệm mua căn hộ Đà Nẵng',
+		'keyword'  => 'kinh nghiệm mua căn hộ',
 		'project'  => '',
 		'week'     => 5,
 		'category' => 'Kinh nghiệm mua bán',
 		'content'  => <<<'HTML'
 <p>Kinh nghiệm mua căn hộ Đà Nẵng quan trọng nhất là kiểm tra kỹ pháp lý, tiến độ thanh toán, thời hạn sở hữu và giá thị trường trước khi đặt cọc. Dưới đây là 10 điều Hoàng Hiệp luôn rà soát cùng khách hàng, áp dụng cho cả căn mới và căn chuyển nhượng, cập nhật tháng 10/2026.</p>
+<!--hh-img:img/fpt-plaza-4/fpt-plaza-4-noi-that-can-mau-2pn-phong-khach.jpg|Kinh nghiệm mua căn hộ: xem căn mẫu để hình dung công năng, nhưng đối chiếu tiêu chuẩn bàn giao ghi trong hợp đồng (căn mẫu 2PN FPT Plaza 4)-->
 
 <h2>Kinh nghiệm mua căn hộ Đà Nẵng: 10 điều cần kiểm tra</h2>
 
@@ -372,7 +418,7 @@ HTML
 <h3>10. Khả năng cho thuê và thanh khoản</h3>
 <p>Kể cả mua để ở, khả năng cho thuê và bán lại là tấm đệm an toàn. Tham khảo bài <a href="/gia-thue-can-ho-da-nang-moi-thang/">giá thuê căn hộ Đà Nẵng</a> để ước tính dòng tiền.</p>
 
-<h2>Bảng kiểm nhanh trước khi đặt cọc</h2>
+<h2>Bảng kiểm nhanh kinh nghiệm mua căn hộ trước khi đặt cọc</h2>
 <table>
 <thead><tr><th>Hạng mục</th><th>Tài liệu cần xem</th><th>Ghi chú</th></tr></thead>
 <tbody>
@@ -384,7 +430,7 @@ HTML
 </tbody>
 </table>
 
-<h2>Những sai lầm thường gặp khi mua căn hộ</h2>
+<h2>Kinh nghiệm mua căn hộ: những sai lầm thường gặp</h2>
 <ul>
 <li><strong>Đặt cọc vì sợ hết hàng:</strong> nhiều đợt mở bán tạo cảm giác khan hiếm, nhưng cần đủ thời gian đọc hợp đồng.</li>
 <li><strong>Chỉ nhìn giá tổng:</strong> nên quy ra giá mỗi m² thông thủy để so sánh công bằng giữa các dự án.</li>
@@ -392,21 +438,29 @@ HTML
 <li><strong>Tin vào cam kết miệng:</strong> mọi ưu đãi, quà tặng, chiết khấu cần được ghi trong văn bản.</li>
 </ul>
 
-<h2>Lời khuyên từ Hoàng Hiệp</h2>
-<p>Hãy so sánh ít nhất 2 – 3 dự án cùng phân khúc trước khi quyết định. Đọc thêm tổng quan <a href="/can-ho-da-nang-2026-du-an-dang-mo-ban/">căn hộ Đà Nẵng 2026 đang mở bán</a> hoặc xem trang <a href="/loai-du-an/cao-tang/">căn hộ Đà Nẵng</a>.</p>
+<h2>Kinh nghiệm mua căn hộ chuyển nhượng</h2>
+<p>Với căn đã bàn giao hoặc căn sang nhượng hợp đồng, kinh nghiệm mua căn hộ quan trọng nhất là xác minh đúng người bán và đúng số tiền đã đóng. Hãy đối chiếu hợp đồng gốc, phiếu thu từng đợt và yêu cầu chủ đầu tư xác nhận thủ tục chuyển nhượng trước khi thanh toán phần lớn.</p>
+<p>Tiếp theo, so giá người bán đưa ra với bảng giá hiện hành của chủ đầu tư và các tin chuyển nhượng cùng dự án. Giá thấp bất thường có thể do căn tầng thấp, hướng kém, còn nợ nhiều đợt thanh toán hoặc vướng thủ tục, nên cần hỏi rõ lý do trước khi đặt cọc.</p>
+<h3>Kinh nghiệm mua căn hộ để cho thuê</h3>
+<p>Nếu mục tiêu là cho thuê, hãy tính tỷ suất gộp bằng tiền thuê cả năm chia giá mua, rồi trừ phí quản lý, thời gian trống phòng và nội thất. Căn nhỏ ở vị trí trung tâm thường dễ cho thuê hơn, nhưng giá mỗi m² cũng cao hơn.</p>
+
+<h2>Kinh nghiệm mua căn hộ từ Hoàng Hiệp</h2>
+<p>Kinh nghiệm mua căn hộ của Hoàng Hiệp là luôn so sánh ít nhất 2 – 3 dự án cùng phân khúc trước khi quyết định. Đọc thêm tổng quan <a href="/can-ho-da-nang-2026-du-an-dang-mo-ban/">căn hộ Đà Nẵng 2026 đang mở bán</a> hoặc xem trang <a href="/loai-du-an/cao-tang/">căn hộ Đà Nẵng</a>.</p>
 
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được rà soát pháp lý, hợp đồng và so sánh giá trước khi xuống tiền mua căn hộ Đà Nẵng.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Kinh nghiệm mua căn hộ Đà Nẵng: 10 điều cần kiểm tra',
-			'desc'      => 'Kinh nghiệm mua căn hộ Đà Nẵng: 10 điều cần kiểm tra về pháp lý, bảo lãnh, thanh toán, sở hữu, giá. Gọi Hoàng Hiệp để được rà soát miễn phí.',
-			'points'    => array( 'Kiểm tra văn bản đủ điều kiện bán và bảo lãnh ngân hàng', 'Cọc ≤ 5%, lần đầu ≤ 30%, trước bàn giao ≤ 70% theo Luật KDBĐS 2023', 'So sánh giá sơ cấp với giá chuyển nhượng thực tế' ),
+			'desc'      => 'Kinh nghiệm mua căn hộ Đà Nẵng: 10 điều cần kiểm tra về pháp lý, bảo lãnh, thanh toán, sở hữu, giá và căn chuyển nhượng. Gọi Hoàng Hiệp rà soát.',
+			'points'    => array( 'Kinh nghiệm mua căn hộ: kiểm tra văn bản đủ điều kiện bán và bảo lãnh ngân hàng', 'Cọc ≤ 5%, lần đầu ≤ 30%, trước bàn giao ≤ 70% theo Luật KDBĐS 2023', 'So sánh giá sơ cấp với giá chuyển nhượng thực tế' ),
 			'faq'       => array(
 				array( 'Mua căn hộ hình thành trong tương lai cần giấy tờ gì?', 'Cần văn bản đủ điều kiện bán của Sở Xây dựng, giấy phép xây dựng và bảo lãnh ngân hàng cho nghĩa vụ bàn giao.' ),
 				array( 'Đặt cọc căn hộ tối đa bao nhiêu?', 'Theo Luật Kinh doanh bất động sản 2023, tiền đặt cọc không quá 5% giá bán nhà ở hình thành trong tương lai.' ),
 				array( 'Mua căn chuyển nhượng hợp đồng cần lưu ý gì?', 'Xem hợp đồng gốc, phiếu thu các đợt đã đóng và thủ tục xác nhận chuyển nhượng của chủ đầu tư.' ),
 				array( 'Có nên mua căn hộ khách sạn để ở?', 'Có thể, nhưng cần hiểu rõ thời hạn sử dụng theo đất thương mại dịch vụ và quy định vận hành của dự án.' ),
+				array( 'Kinh nghiệm mua căn hộ lần đầu nên bắt đầu từ đâu?', 'Xác định ngân sách tổng (gồm phí bảo trì 2%, nội thất, chi phí vay), mục đích ở hay cho thuê, rồi so sánh 2 – 3 dự án cùng phân khúc trước khi kiểm tra pháp lý từng căn.' ),
+				array( 'Kinh nghiệm mua căn hộ chuyển nhượng an toàn là gì?', 'Đối chiếu hợp đồng gốc, phiếu thu các đợt đã đóng, xác nhận của chủ đầu tư và chỉ thanh toán phần lớn khi thủ tục chuyển nhượng được xác nhận.' ),
 			),
 		),
 		'sources'  => array( 'https://baodautu.vn/danang-landmark-du-dieu-kien-mo-ban-bo-sung-454-can-ho-tai-thi-truong-da-nang-d538777.html' ),
@@ -424,9 +478,10 @@ HTML
 		'category' => 'Kinh nghiệm mua bán',
 		'content'  => <<<'HTML'
 <p>Vay mua căn hộ Đà Nẵng năm 2026 có lãi suất ưu đãi kỳ đầu phổ biến khoảng 8 – 10%/năm, nhưng sau ưu đãi có thể lên trên 13%/năm tùy ngân hàng. Nhiều dự án hỗ trợ vay đến 70% giá trị căn, kèm ân hạn gốc hoặc hỗ trợ lãi suất có thời hạn. Số liệu dưới đây là tham khảo, cập nhật tháng 10/2026.</p>
+<!--hh-img:img/the-camellia/the-camellia-phoi-canh-mat-tien-le-van-luong.jpg|Vay mua căn hộ Đà Nẵng: The Camellia Sơn Trà công bố hỗ trợ vay đến 70% (phối cảnh chủ đầu tư)-->
 
 <h2>Lãi suất vay mua căn hộ Đà Nẵng tại các ngân hàng</h2>
-<p>Theo các bài tổng hợp trên báo chí tháng 9/2026, lãi suất vay mua nhà bình quân khoảng 10,9%/năm với khoản vay cố định 12 – 24 tháng. Mức dưới 10% vẫn còn nhưng không nhiều.</p>
+<p>Theo các bài tổng hợp trên báo chí tháng 9/2026 (như <a href="https://dantri.com.vn/bat-dong-san/thang-9-cac-ngan-hang-dang-cho-vay-mua-nha-lai-suat-bao-nhieu-20260903083127075.htm">Dân trí</a>), lãi suất vay mua nhà bình quân khoảng 10,9%/năm với khoản vay cố định 12 – 24 tháng. Mức dưới 10% vẫn còn nhưng không nhiều.</p>
 <table>
 <thead><tr><th>Ngân hàng</th><th>Ưu đãi kỳ đầu (tham khảo)</th><th>Ghi chú</th></tr></thead>
 <tbody>
@@ -441,7 +496,7 @@ HTML
 </table>
 <p>Lãi suất thay đổi thường xuyên và phụ thuộc hồ sơ từng khách. Hãy xác nhận trực tiếp với ngân hàng, đặc biệt là biên độ cộng thêm sau thời gian ưu đãi.</p>
 
-<h2>Chính sách vay và ân hạn tại một số dự án</h2>
+<h2>Chính sách vay mua căn hộ Đà Nẵng tại một số dự án</h2>
 <ul>
 <li><a href="/du-an/the-camellia-son-tra/">The Camellia Sơn Trà</a>: hỗ trợ vay đến 70%, tối đa 18 tháng không trả gốc và lãi hoặc ân hạn nợ gốc dài hạn (các nguồn nêu 3 – 5 năm).</li>
 <li><a href="/du-an/peninsula-private-da-nang/">Peninsula Private</a>: theo trang phân phối, ngân hàng hỗ trợ vay đến 70%, có gói 0% lãi suất trong 24 tháng.</li>
@@ -456,7 +511,7 @@ HTML
 <h3>Hỗ trợ lãi suất 0%</h3>
 <p>Chủ đầu tư trả thay phần lãi trong một thời gian nhất định. Đây là ưu đãi thật, nhưng thường đi kèm giá bán không chiết khấu thêm, cần so với phương án thanh toán nhanh.</p>
 
-<h2>Ví dụ tính tiền trả hằng tháng</h2>
+<h2>Ví dụ tính tiền trả khi vay mua căn hộ Đà Nẵng</h2>
 <p>Giả sử vay 3 tỷ trong 20 năm, lãi suất 10%/năm, trả gốc đều. Gốc mỗi tháng khoảng 12,5 triệu, lãi tháng đầu khoảng 25 triệu, tổng tháng đầu khoảng 37,5 triệu và giảm dần theo dư nợ.</p>
 <table>
 <thead><tr><th>Kịch bản</th><th>Trả tháng đầu (ước tính)</th></tr></thead>
@@ -468,7 +523,7 @@ HTML
 </table>
 <p>Quy tắc an toàn: tổng tiền trả nợ không nên vượt 40 – 50% thu nhập ổn định hằng tháng. Với căn cho thuê, hãy so tiền trả nợ với <a href="/gia-thue-can-ho-da-nang-moi-thang/">giá thuê căn hộ Đà Nẵng</a> thực tế.</p>
 
-<h2>Vay theo tiến độ hay vay khi nhận nhà?</h2>
+<h2>Vay mua căn hộ Đà Nẵng theo tiến độ hay khi nhận nhà?</h2>
 <p>Với căn hộ hình thành trong tương lai, ngân hàng thường giải ngân theo từng đợt thanh toán. Cách này giúp người mua chỉ trả lãi trên phần đã giải ngân, nhưng hồ sơ phải được duyệt ngay từ đầu.</p>
 <p>Với căn đã bàn giao hoặc chuyển nhượng, khoản vay thường giải ngân một lần và tài sản đảm bảo là chính căn hộ. Lãi suất và hạn mức có thể khác so với gói liên kết dự án.</p>
 <h3>Mẹo giảm chi phí vay</h3>
@@ -478,7 +533,17 @@ HTML
 <li>Cân nhắc phương án thanh toán nhanh để hưởng chiết khấu nếu dòng tiền cho phép.</li>
 </ul>
 
-<h2>Hồ sơ vay cần chuẩn bị</h2>
+<h2>Vay mua căn hộ Đà Nẵng bao nhiêu là vừa sức?</h2>
+<p>Áp quy tắc tiền trả nợ không vượt 40 – 50% thu nhập ổn định: với khoản vay mua căn hộ Đà Nẵng 3 tỷ, 20 năm, lãi 10%/năm, tháng đầu trả khoảng 37,5 triệu, tức gia đình nên có thu nhập ổn định khoảng 75 – 94 triệu/tháng. Nếu thu nhập khoảng 40 triệu/tháng, mức trả an toàn khoảng 16 – 20 triệu, tương ứng khoản vay khoảng 1,3 – 1,6 tỷ với cùng điều kiện.</p>
+<p>Khi vay mua căn hộ Đà Nẵng hình thành trong tương lai, hãy tính thêm kịch bản lãi suất sau ưu đãi. Trong bảng ví dụ, cùng khoản vay 3 tỷ nhưng lãi 13%/năm thì tháng đầu khoảng 45 triệu, cao hơn khoảng 7,5 triệu so với mức 10%/năm.</p>
+<h3>Checklist trước khi ký hợp đồng tín dụng</h3>
+<ul>
+<li>Lãi suất ưu đãi áp dụng bao lâu, biên độ cộng sau ưu đãi là bao nhiêu.</li>
+<li>Phí trả nợ trước hạn theo từng năm.</li>
+<li>Điều kiện duy trì hỗ trợ lãi suất của chủ đầu tư, nhất là khi chuyển nhượng hợp đồng.</li>
+</ul>
+
+<h2>Hồ sơ vay mua căn hộ Đà Nẵng cần chuẩn bị</h2>
 <ul>
 <li>Giấy tờ nhân thân, tình trạng hôn nhân, nơi cư trú.</li>
 <li>Chứng minh thu nhập: sao kê lương, hợp đồng lao động, giấy tờ kinh doanh hoặc hợp đồng cho thuê.</li>
@@ -490,13 +555,15 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Vay mua căn hộ Đà Nẵng 2026: lãi suất, ân hạn',
-			'desc'      => 'Vay mua căn hộ Đà Nẵng 2026: bảng lãi suất ưu đãi các ngân hàng, chính sách ân hạn dự án, ví dụ tính tiền trả. Gọi Hoàng Hiệp để tính phương án.',
-			'points'    => array( 'Lãi suất ưu đãi kỳ đầu phổ biến khoảng 8 – 10%/năm (tham khảo 9/2026)', 'Nhiều dự án hỗ trợ vay đến 70%, có ân hạn gốc hoặc hỗ trợ lãi 0%', 'Vay 3 tỷ, 20 năm, lãi 10%: tháng đầu khoảng 37,5 triệu' ),
+			'seo_title' => 'Vay mua căn hộ Đà Nẵng 2026: lãi suất, ân hạn nợ gốc',
+			'desc'      => 'Vay mua căn hộ Đà Nẵng 2026: lãi suất ưu đãi các ngân hàng, chính sách ân hạn của dự án, ví dụ số tiền trả hằng tháng. Gọi Hoàng Hiệp tính phương án.',
+			'points'    => array( 'Vay mua căn hộ Đà Nẵng: ưu đãi kỳ đầu phổ biến khoảng 8 – 10%/năm (tham khảo 9/2026)', 'Nhiều dự án hỗ trợ vay đến 70%, có ân hạn gốc hoặc hỗ trợ lãi 0%', 'Vay 3 tỷ, 20 năm, lãi 10%: tháng đầu khoảng 37,5 triệu' ),
 			'faq'       => array(
 				array( 'Lãi suất vay mua căn hộ Đà Nẵng hiện bao nhiêu?', 'Theo tổng hợp tháng 9/2026, ưu đãi kỳ đầu khoảng 8 – 10%/năm, bình quân khoảng 10,9%/năm với khoản vay cố định 12 – 24 tháng (tham khảo).' ),
 				array( 'Được vay tối đa bao nhiêu phần trăm giá trị căn hộ?', 'Nhiều dự án tại Đà Nẵng có ngân hàng hỗ trợ vay đến 70% giá trị căn, tùy hồ sơ thu nhập.' ),
 				array( 'Ân hạn nợ gốc có lợi không?', 'Ân hạn giúp giảm áp lực trả hằng tháng giai đoạn đầu, nhưng tổng lãi không giảm; cần tính kỹ khoản trả sau khi hết ân hạn.' ),
+				array( 'Vay mua căn hộ Đà Nẵng cần thu nhập bao nhiêu?', 'Theo quy tắc tiền trả nợ không vượt 40 – 50% thu nhập: vay 3 tỷ, 20 năm, lãi 10%/năm thì tháng đầu trả khoảng 37,5 triệu, cần thu nhập ổn định khoảng 75 – 94 triệu/tháng (ước tính).' ),
+				array( 'Vay mua căn hộ Đà Nẵng đang xây có được không?', 'Được, ngân hàng liên kết dự án thường giải ngân theo từng đợt thanh toán; người mua chỉ trả lãi trên phần đã giải ngân, nhưng hồ sơ cần được duyệt từ đầu.' ),
 			),
 		),
 		'sources'  => array( 'https://dantri.com.vn/bat-dong-san/thang-9-cac-ngan-hang-dang-cho-vay-mua-nha-lai-suat-bao-nhieu-20260903083127075.htm', 'https://nguoiquansat.vn/lai-suat-vay-mua-nha-thang-9-muc-duoi-10-khong-con-nhieu-313957.html', 'https://www.24h.com.vn/kinh-doanh/lai-suat-vay-mua-nha-thang-9-ngan-hang-nao-con-duoi-10-c161a1792123.html' ),
@@ -512,6 +579,7 @@ HTML
 		'category' => 'Thị trường',
 		'content'  => <<<'HTML'
 <p>Giá thuê căn hộ Đà Nẵng hiện dao động rất rộng: khoảng 3 – 8 triệu/tháng ở khu Liên Chiểu, 6,5 – 17 triệu/tháng ở FPT City và 20 – 40 triệu/tháng cho căn ven sông Hàn, ven biển có nội thất. Căn view đẹp ở dự án hạng sang có thể đến 95 triệu/tháng. Bảng dưới đây tổng hợp từ tin cho thuê công khai, cập nhật tháng 10/2026.</p>
+<!--hh-img:img/sun-ponte/sun-ponte-hoang-hon-song-han.jpg|Giá thuê căn hộ Đà Nẵng ven sông Hàn thường cao hơn khu ngoại vi – Sun Ponte Residence lúc hoàng hôn (phối cảnh chủ đầu tư)-->
 
 <h2>Bảng giá thuê căn hộ Đà Nẵng theo dự án</h2>
 <table>
@@ -541,11 +609,11 @@ HTML
 <h3>Thuê dài hạn hay ngắn hạn</h3>
 <p>Thuê ngắn hạn có thể cho doanh thu cao hơn mùa cao điểm, nhưng tốn công vận hành và phụ thuộc quy định của tòa nhà. Thuê dài hạn ổn định hơn, ít rủi ro trống phòng.</p>
 
-<h2>Cách ước tính tỷ suất cho thuê</h2>
+<h2>Từ giá thuê căn hộ Đà Nẵng đến tỷ suất cho thuê</h2>
 <p>Tỷ suất gộp = tiền thuê cả năm chia giá mua. Ví dụ căn 2PN mua khoảng 5 tỷ, cho thuê 25 triệu/tháng thì thu khoảng 300 triệu/năm, tỷ suất gộp khoảng 6%/năm.</p>
 <p>Sau khi trừ phí quản lý, thời gian trống phòng, bảo trì và thuế, tỷ suất ròng sẽ thấp hơn. Nếu có vay, cần so dòng tiền thuê với tiền trả nợ, xem thêm bài <a href="/vay-mua-can-ho-da-nang-2026-lai-suat/">vay mua căn hộ Đà Nẵng 2026</a>.</p>
 
-<h2>Chi phí cần trừ khi cho thuê</h2>
+<h2>Chi phí cần trừ khỏi giá thuê căn hộ Đà Nẵng</h2>
 <table>
 <thead><tr><th>Khoản chi</th><th>Ghi chú</th></tr></thead>
 <tbody>
@@ -557,6 +625,13 @@ HTML
 </tbody>
 </table>
 <p>Lập bảng dòng tiền đầy đủ giúp anh chị so sánh trung thực giữa các dự án, thay vì chỉ nhìn giá thuê đăng trên tin rao.</p>
+<p>Về nghĩa vụ thuế khi cá nhân cho thuê nhà, anh chị có thể tham khảo phân tích trên <a href="https://cafef.vn/chuyen-gia-cho-thue-bat-dong-san-doanh-thu-duoi-1-ty-dong-duoc-mien-ca-thue-gtgt-va-thue-tncn-188260505143140765.chn">CafeF</a>; về hình thức hợp đồng thuê nhà ở theo Luật Nhà ở 2023, xem giải đáp trên <a href="https://thuvienphapluat.vn/chinh-sach-phap-luat-moi/vn/ho-tro-phap-luat/tu-van-phap-luat/71831/theo-luat-nha-o-2023-thi-hop-dong-cho-thue-nha-o-co-phai-cong-chung-chung-thuc-hay-khong">Thư viện Pháp luật</a>. Nên xác nhận lại với cơ quan thuế tại thời điểm ký hợp đồng.</p>
+
+<h2>Giá thuê căn hộ Đà Nẵng theo loại căn</h2>
+<p>Gom dữ liệu trong bảng theo loại căn, giá thuê căn hộ Đà Nẵng có thể hình dung như sau (triệu/tháng, tham khảo): studio khoảng 13 – 20 ở các dự án ven sông như Sun Ponte, Sun Cosmo; 1PN từ 3 – 4,5 ở Liên Chiểu, từ 6,5 ở FPT City đến 20 – 30 ở ven sông Hàn; 2PN từ 4 – 6 (Liên Chiểu), 10 – 13 (FPT City) đến 30 – 40 ở Sun Ponte, Sun Cosmo, The Filmore.</p>
+<p>Căn 3PN biến động mạnh nhất: 5 – 8 triệu ở The Ori Garden, 15,5 – 17 triệu ở FPT City, 30 – 40 triệu ở Vista Residence và có thể đến 95 triệu ở căn view sông hạng sang The Filmore. Khi đọc giá thuê căn hộ Đà Nẵng trên tin rao, cần phân biệt căn có nội thất và căn trống.</p>
+<h3>Mùa vụ ảnh hưởng thế nào?</h3>
+<p>Với thuê ngắn ngày, giá thuê căn hộ Đà Nẵng ven biển, ven sông thường tăng vào mùa du lịch hè và mùa pháo hoa, giảm vào mùa mưa cuối năm. Khi lập kế hoạch dòng tiền, nên lấy giá thuê dài hạn làm mức cơ sở, phần tăng thêm mùa cao điểm chỉ là dư địa.</p>
 
 <h2>Nên mua căn nào để cho thuê?</h2>
 <ul>
@@ -566,32 +641,35 @@ HTML
 </ul>
 <p>Anh chị có thể xem căn đang cho thuê tại trang <a href="/cho-thue/">cho thuê bất động sản Đà Nẵng</a> hoặc tham khảo <a href="/can-ho-view-song-han-du-an-va-gia/">căn hộ view sông Hàn</a>.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được ước tính dòng tiền cho thuê theo từng căn cụ thể hoặc ký gửi căn hộ cho thuê.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được ước tính giá thuê căn hộ Đà Nẵng và dòng tiền theo từng căn cụ thể hoặc ký gửi căn hộ cho thuê.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá thuê căn hộ Đà Nẵng: thu bao nhiêu mỗi tháng?',
-			'desc'      => 'Giá thuê căn hộ Đà Nẵng theo 12 dự án: studio đến 3PN, ven sông, ven biển, FPT City. Cách tính tỷ suất cho thuê. Gọi Hoàng Hiệp để được tư vấn.',
-			'points'    => array( 'Giá thuê từ 3 – 8 triệu (Liên Chiểu) đến 20 – 40 triệu (ven sông, biển)', 'Căn hạng sang view sông Hàn có thể đến 95 triệu/tháng', 'Ví dụ: căn 5 tỷ thuê 25 triệu/tháng cho tỷ suất gộp khoảng 6%/năm' ),
+			'seo_title' => 'Giá thuê căn hộ Đà Nẵng 2026: bao nhiêu mỗi tháng?',
+			'desc'      => 'Giá thuê căn hộ Đà Nẵng theo 12 dự án: studio đến 3PN, ven sông, ven biển, FPT City; cách tính tỷ suất cho thuê. Gọi Hoàng Hiệp để được tư vấn.',
+			'points'    => array( 'Giá thuê căn hộ Đà Nẵng từ 3 – 8 triệu (Liên Chiểu) đến 20 – 40 triệu (ven sông, biển)', 'Căn hạng sang view sông Hàn có thể đến 95 triệu/tháng', 'Ví dụ: căn 5 tỷ thuê 25 triệu/tháng cho tỷ suất gộp khoảng 6%/năm' ),
 			'faq'       => array(
 				array( 'Giá thuê căn hộ Đà Nẵng 2PN bao nhiêu?', 'Tham khảo khoảng 4 – 6 triệu ở Liên Chiểu, 10 – 13 triệu ở FPT City và 20 – 40 triệu ở dự án ven sông Hàn, ven biển có nội thất.' ),
 				array( 'Cho thuê căn hộ Đà Nẵng lãi bao nhiêu phần trăm?', 'Tùy giá mua và giá thuê; ví dụ căn 5 tỷ cho thuê 25 triệu/tháng có tỷ suất gộp khoảng 6%/năm, tỷ suất ròng thấp hơn sau chi phí.' ),
 				array( 'Thuê ngắn hạn hay dài hạn tốt hơn?', 'Ngắn hạn có thể thu cao hơn mùa du lịch nhưng tốn công vận hành; dài hạn ổn định, ít trống phòng hơn.' ),
+				array( 'Giá thuê căn hộ Đà Nẵng studio bao nhiêu?', 'Tham khảo khoảng 13 – 20 triệu/tháng cho studio có nội thất ở dự án ven sông Hàn như Sun Ponte, Sun Cosmo; studio Wyndham Soleil ven biển khoảng 20 triệu/tháng.' ),
+				array( 'Giá thuê căn hộ Đà Nẵng có thay đổi theo mùa không?', 'Với thuê ngắn ngày, giá thường cao hơn vào mùa du lịch hè và mùa pháo hoa; thuê dài hạn ổn định hơn và nên dùng làm mức cơ sở khi tính dòng tiền.' ),
 			),
 		),
-		'sources'  => array( 'https://batdongsan.com.vn/cho-thue-can-ho-chung-cu-sun-cosmo-residence', 'https://batdongsan.com.vn/cho-thue-can-ho-chung-cu-the-filmore-da-nang', 'https://thuecanho123.com/cho-thue-can-ho-chung-cu-fpt-plaza.html', 'https://vietnamnet.vn/vista-residence-da-nang-tao-suc-hut-tren-thi-truong-can-ho-cho-thue-2560810.html' ),
+		'sources'  => array( 'https://batdongsan.com.vn/cho-thue-can-ho-chung-cu-sun-cosmo-residence', 'https://batdongsan.com.vn/cho-thue-can-ho-chung-cu-the-filmore-da-nang', 'https://thuecanho123.com/cho-thue-can-ho-chung-cu-fpt-plaza.html', 'https://vietnamnet.vn/vista-residence-da-nang-tao-suc-hut-tren-thi-truong-can-ho-cho-thue-2560810.html', 'https://cafef.vn/chuyen-gia-cho-thue-bat-dong-san-doanh-thu-duoi-1-ty-dong-duoc-mien-ca-thue-gtgt-va-thue-tncn-188260505143140765.chn', 'https://thuvienphapluat.vn/chinh-sach-phap-luat-moi/vn/ho-tro-phap-luat/tu-van-phap-luat/71831/theo-luat-nha-o-2023-thi-hop-dong-cho-thue-nha-o-co-phai-cong-chung-chung-thuc-hay-khong' ),
 	);
 
 	$posts[] = array(
 		'slug'     => 'can-ho-so-huu-lau-dai-hay-can-ho-dich-vu-50-nam',
 		'title'    => 'Căn hộ sở hữu lâu dài Đà Nẵng hay căn hộ dịch vụ 50 năm: chọn loại nào?',
 		'excerpt'  => 'So sánh căn hộ sở hữu lâu dài Đà Nẵng với căn hộ dịch vụ, căn hộ khách sạn 50 năm: pháp lý, giá, khai thác cho thuê và dự án tiêu biểu.',
-		'keyword'  => 'căn hộ sở hữu lâu dài Đà Nẵng',
+		'keyword'  => 'sở hữu lâu dài hay 50 năm',
 		'project'  => '',
 		'week'     => 6,
 		'category' => 'Kinh nghiệm mua bán',
 		'content'  => <<<'HTML'
-<p>Căn hộ sở hữu lâu dài Đà Nẵng phù hợp người mua để ở và tích sản qua nhiều thế hệ, còn căn hộ dịch vụ, căn hộ khách sạn thời hạn khoảng 50 năm phù hợp người ưu tiên khai thác cho thuê, có đơn vị vận hành. Khác biệt cốt lõi nằm ở loại đất, thời hạn sử dụng và cách vận hành. Bài viết do Hoàng Hiệp tổng hợp, cập nhật tháng 10/2026.</p>
+<p>Sở hữu lâu dài hay 50 năm là câu hỏi đầu tiên khi chọn căn hộ ở Đà Nẵng: căn hộ sở hữu lâu dài phù hợp người mua để ở và tích sản qua nhiều thế hệ, còn căn hộ dịch vụ, căn hộ khách sạn thời hạn khoảng 50 năm phù hợp người ưu tiên khai thác cho thuê, có đơn vị vận hành. Khác biệt cốt lõi nằm ở loại đất, thời hạn sử dụng và cách vận hành. Bài viết do Hoàng Hiệp tổng hợp, cập nhật tháng 10/2026.</p>
+<!--hh-img:img/the-camellia/the-camellia-phoi-canh-binh-minh.jpg|Sở hữu lâu dài hay 50 năm: The Camellia Sơn Trà thuộc nhóm căn hộ sở hữu lâu dài (phối cảnh chủ đầu tư)-->
 
 <h2>Căn hộ sở hữu lâu dài Đà Nẵng là gì?</h2>
 <p>Đây là căn hộ chung cư xây trên đất ở, người Việt Nam được cấp giấy chứng nhận với thời hạn sử dụng lâu dài. Người nước ngoài, nếu dự án được phép bán, thường sở hữu có thời hạn 50 năm theo quy định.</p>
@@ -601,7 +679,7 @@ HTML
 <p>Nhóm này thường xây trên đất thương mại dịch vụ, thời hạn sử dụng theo dự án, phổ biến 50 năm. Luật Đất đai 2024 và các văn bản hướng dẫn đã tạo cơ sở cấp giấy chứng nhận cho căn hộ du lịch, nhưng thời hạn vẫn theo thời hạn sử dụng đất.</p>
 <p>Ví dụ: <a href="/du-an/wyndham-soleil-da-nang/">Wyndham Soleil Đà Nẵng</a> là căn hộ khách sạn thời hạn 50 năm theo thời hạn đất dự án; <a href="/du-an/hoiana-residences/">Hoiana Residences</a> là căn hộ khách sạn trong quần thể Hoiana. Với <a href="/du-an/nobu-da-nang/">Nobu Residences</a>, các nguồn chưa thống nhất về thời hạn, cần đối chiếu hợp đồng.</p>
 
-<h2>Bảng so sánh hai loại căn hộ</h2>
+<h2>Sở hữu lâu dài hay 50 năm: bảng so sánh</h2>
 <table>
 <thead><tr><th>Tiêu chí</th><th>Căn hộ sở hữu lâu dài</th><th>Căn hộ dịch vụ / khách sạn</th></tr></thead>
 <tbody>
@@ -614,7 +692,7 @@ HTML
 </tbody>
 </table>
 
-<h2>Ưu và nhược điểm từng loại</h2>
+<h2>Ưu và nhược điểm: sở hữu lâu dài hay 50 năm</h2>
 <h3>Căn hộ sở hữu lâu dài</h3>
 <p>Ưu điểm là tài sản có thể để lại lâu dài, thanh khoản tốt, dễ vay. Nhược điểm là ít dự án mặt biển, và người mua phải tự lo khai thác nếu cho thuê.</p>
 <h3>Căn hộ dịch vụ 50 năm</h3>
@@ -623,12 +701,22 @@ HTML
 <h2>Trường hợp đặc biệt cần đọc kỹ hợp đồng</h2>
 <p>Một số dự án có mô hình riêng. <a href="/du-an/m-riverside-da-nang/">M Riverside</a> là căn hộ dịch vụ thương mại, chủ đầu tư công bố đất sử dụng lâu dài và cấp giấy chứng nhận khi đủ điều kiện. Với mô hình lai như vậy, hãy đọc kỹ điều khoản về loại đất và thời hạn trong hợp đồng mua bán.</p>
 
-<h2>Giá và khả năng cho thuê: so sánh thực tế</h2>
+<h2>Sở hữu lâu dài hay 50 năm: giá và khả năng cho thuê</h2>
 <p>Căn hộ khách sạn mặt biển thường có giá vào thấp hơn căn sở hữu lâu dài cùng vị trí. Ví dụ, studio Wyndham Soleil chuyển nhượng khoảng 2,3 – 2,6 tỷ, trong khi studio/1PN Times Square sở hữu lâu dài khoảng 6,5 – 8,5 tỷ (tham khảo).</p>
 <p>Về cho thuê, Wyndham Soleil có thể ủy thác cho Wyndham vận hành, các chương trình chia lợi nhuận đã giới thiệu ở từng giai đoạn cần xác nhận lại. Căn sở hữu lâu dài như Sun Cosmo có giá thuê tham khảo 2PN khoảng 30 – 35 triệu/tháng, chủ nhà tự quyết cách khai thác.</p>
 <p>Chênh lệch giá phản ánh khác biệt thời hạn và quyền sử dụng. Đừng chỉ so giá mỗi m², hãy so cả giá trị còn lại theo thời gian.</p>
 
-<h2>Nên chọn loại nào?</h2>
+<h2>Thời hạn ảnh hưởng giá trị căn hộ theo thời gian ra sao?</h2>
+<p>Khác biệt sở hữu lâu dài hay 50 năm thể hiện rõ nhất khi bán lại. Căn sở hữu lâu dài giữ nguyên thời hạn cho người mua sau, còn căn có thời hạn chỉ chuyển cho người mua sau phần thời gian còn lại. Một căn hộ khách sạn mua vào năm thứ 10 của dự án 50 năm chỉ còn khoảng 40 năm sử dụng, và người mua sau thường tính điều này vào giá.</p>
+<p>Khi vay ngân hàng, thời hạn còn lại cũng ảnh hưởng đến cách ngân hàng thẩm định tài sản đảm bảo. Vì vậy, khi cân nhắc sở hữu lâu dài hay 50 năm với cùng một ngân sách, hãy hỏi rõ thời hạn ghi trên giấy chứng nhận hoặc hợp đồng, không chỉ con số "50 năm" trong tài liệu giới thiệu.</p>
+<h3>Câu hỏi nên đặt ra với chủ đầu tư</h3>
+<ul>
+<li>Dự án xây trên đất ở hay đất thương mại dịch vụ, thời hạn sử dụng đất đến năm nào?</li>
+<li>Căn hộ đã hoặc sẽ được cấp giấy chứng nhận riêng chưa?</li>
+<li>Có bắt buộc tham gia chương trình cho thuê của đơn vị vận hành không?</li>
+</ul>
+
+<h2>Nên chọn sở hữu lâu dài hay 50 năm?</h2>
 <ul>
 <li><strong>Mua để ở, tích sản lâu dài:</strong> ưu tiên căn hộ sở hữu lâu dài.</li>
 <li><strong>Đầu tư khai thác du lịch, không có thời gian vận hành:</strong> cân nhắc căn hộ khách sạn có thương hiệu.</li>
@@ -636,17 +724,19 @@ HTML
 </ul>
 <p>Xem danh sách tại trang <a href="/loai-du-an/can-ho-so-huu-lau-dai/">căn hộ sở hữu lâu dài</a> và <a href="/loai-du-an/can-ho-dich-vu/">căn hộ dịch vụ</a>, hoặc bài <a href="/can-ho-view-bien-da-nang-my-khe/">căn hộ view biển Đà Nẵng</a>.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được đối chiếu pháp lý, thời hạn sở hữu và chọn loại căn hộ phù hợp mục tiêu của anh chị.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được đối chiếu pháp lý và tư vấn nên chọn sở hữu lâu dài hay 50 năm phù hợp mục tiêu của anh chị.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Căn hộ sở hữu lâu dài Đà Nẵng hay căn hộ dịch vụ 50 năm',
-			'desc'      => 'So sánh căn hộ sở hữu lâu dài Đà Nẵng và căn hộ dịch vụ 50 năm: loại đất, thời hạn, vay, cho thuê. Liên hệ Hoàng Hiệp để được đối chiếu pháp lý.',
-			'points'    => array( 'Sở hữu lâu dài xây trên đất ở; căn hộ dịch vụ trên đất thương mại dịch vụ', 'Căn hộ khách sạn thời hạn theo dự án, phổ biến 50 năm', 'Mua để ở chọn sở hữu lâu dài; khai thác du lịch cân nhắc căn hộ khách sạn' ),
+			'seo_title' => 'Sở hữu lâu dài hay 50 năm: chọn căn hộ nào ở Đà Nẵng?',
+			'desc'      => 'Sở hữu lâu dài hay 50 năm: so sánh căn hộ chung cư và căn hộ dịch vụ, khách sạn tại Đà Nẵng về loại đất, thời hạn, vay, cho thuê. Gọi Hoàng Hiệp.',
+			'points'    => array( 'Sở hữu lâu dài hay 50 năm: căn hộ chung cư trên đất ở, căn hộ dịch vụ trên đất thương mại dịch vụ', 'Căn hộ khách sạn thời hạn theo dự án, phổ biến 50 năm', 'Mua để ở chọn sở hữu lâu dài; khai thác du lịch cân nhắc căn hộ khách sạn' ),
 			'faq'       => array(
 				array( 'Căn hộ dịch vụ 50 năm hết hạn thì sao?', 'Khi hết thời hạn sử dụng đất, việc gia hạn theo quy định pháp luật đất đai tại thời điểm đó; người mua cần đọc kỹ điều khoản trong hợp đồng.' ),
 				array( 'Căn hộ khách sạn có được cấp sổ không?', 'Luật Đất đai 2024 và văn bản hướng dẫn đã tạo cơ sở cấp giấy chứng nhận cho căn hộ du lịch, với thời hạn theo thời hạn sử dụng đất của dự án.' ),
 				array( 'Dự án nào ở Đà Nẵng là căn hộ sở hữu lâu dài?', 'Ví dụ Sun Ponte Residence, Newtown Diamond, Masteri Rivera Danang, The Camellia Sơn Trà, HIYORI Aqua Tower, Cora Tower, Spana Tower.' ),
+				array( 'Sở hữu lâu dài hay 50 năm, loại nào dễ vay ngân hàng hơn?', 'Căn hộ sở hữu lâu dài trên đất ở thường được ngân hàng thẩm định dễ hơn; căn hộ dịch vụ, căn hộ khách sạn vẫn có thể vay nhưng ngân hàng xem kỹ thời hạn còn lại và pháp lý.' ),
+				array( 'Mua để ở nên chọn sở hữu lâu dài hay 50 năm?', 'Mua để ở và tích sản lâu dài nên ưu tiên căn hộ sở hữu lâu dài; căn hộ dịch vụ 50 năm phù hợp hơn khi mục tiêu chính là khai thác du lịch qua đơn vị vận hành.' ),
 			),
 		),
 		'sources'  => array( 'https://thanhnien.vn/tuong-lai-nao-cho-can-ho-du-lich-185260902161933623.htm', 'https://plo.vn/chinh-thuc-cap-so-hong-cho-condotel-resort-villa-post727415.html', 'https://lsvn.vn/gioi-han-quyen-so-huu-doi-voi-condotel-va-nhung-van-de-phap-ly-dat-ra-trong-cap-giay-chung-nhan-theo-phap-luat-viet-nam-a172126.html' ),
@@ -662,6 +752,7 @@ HTML
 		'category' => 'Thị trường',
 		'content'  => <<<'HTML'
 <p>Penthouse Đà Nẵng là dòng sản phẩm rất hiếm, mỗi dự án thường chỉ có 2 – 8 căn trên các tầng cao nhất. Giá tham khảo hiện từ khoảng 14 – 17,8 tỷ (The Meridian) đến từ khoảng 37 tỷ (The Legend) và 44,9 tỷ (The Filmore). Hoàng Hiệp tổng hợp các dự án có penthouse đang giao dịch, cập nhật tháng 10/2026.</p>
+<!--hh-img:img/the-legend/the-legend-da-nang-vuon-mai-nhin-ve-bien-my-khe.jpg|Penthouse Đà Nẵng: vườn mái The Legend nhìn về biển Mỹ Khê (ảnh dự án)-->
 
 <h2>Bảng penthouse Đà Nẵng theo dự án</h2>
 <table>
@@ -679,7 +770,7 @@ HTML
 </table>
 <p>Giá là mức chào bán tham khảo từ trang phân phối và tin rao công khai. Penthouse thường được bán theo thỏa thuận, giá thực tế cần đối chiếu bảng giá chủ đầu tư từng đợt.</p>
 
-<h2>Penthouse ven sông Hàn</h2>
+<h2>Penthouse Đà Nẵng ven sông Hàn</h2>
 <h3>The Legend Đà Nẵng</h3>
 <p>The Legend nằm ngay đầu cầu Rồng, có 8 căn penthouse thiết kế duplex thông tầng với hồ bơi riêng và vườn trên mái. Đây là nhóm có diện tích lớn nhất trong danh sách, đến khoảng 415 m².</p>
 <h3>The Filmore và Danang Landmark</h3>
@@ -687,7 +778,7 @@ HTML
 <h3>The Meridian</h3>
 <p>Penthouse The Meridian rộng đến khoảng 198 m², trang phân phối ghi giá khoảng 85 – 90 triệu/m². Mức giá này dễ tiếp cận hơn so với nhóm penthouse ven sông hạng sang khác.</p>
 
-<h2>Penthouse ven biển Mỹ Khê</h2>
+<h2>Penthouse Đà Nẵng ven biển Mỹ Khê</h2>
 <p>Times Square có 2 căn penthouse 3 phòng ngủ tại tầng 30 tòa CT7. Nobu Residences cao 43 tầng, tầng cao có 2 căn penthouse và 6 căn Sky Villa sở hữu hồ bơi riêng, nhìn toàn cảnh biển Mỹ Khê và bán đảo Sơn Trà.</p>
 
 <h2>Penthouse khu Nam Đà Nẵng</h2>
@@ -699,7 +790,17 @@ HTML
 <p>Duplex là căn hai tầng nối bằng cầu thang nội bộ, có thể nằm ở nhiều vị trí trong tòa. Penthouse The Legend kết hợp cả hai: vừa ở tầng cao nhất, vừa thiết kế thông tầng.</p>
 <p>Với người mua, sự khác biệt này ảnh hưởng đến công năng, chi phí vận hành và giá bán lại. Hãy xem kỹ mặt bằng thực tế trước khi so giá.</p>
 
-<h2>Lưu ý khi mua penthouse</h2>
+<h2>So sánh đơn giá penthouse Đà Nẵng</h2>
+<p>Quy đổi từ số liệu tham khảo trong bảng: penthouse The Filmore khoảng 206 m² giá từ khoảng 44,9 tỷ, tương đương khoảng 218 triệu/m²; penthouse The Meridian khoảng 85 – 90 triệu/m² theo trang phân phối. Penthouse The Legend từ khoảng 37 tỷ với diện tích 256 – 415 m², nên đơn giá thực tế phụ thuộc căn cụ thể.</p>
+<p>Như vậy, cùng là penthouse Đà Nẵng nhưng đơn giá có thể chênh hơn hai lần. Mức chênh đến từ vị trí (sát cầu Rồng hay khu Hòa Cường Nam), tình trạng (đã hoàn thiện hay đang xây) và phần diện tích sân thượng, hồ bơi riêng có được tính vào diện tích bán hay không.</p>
+<h3>Ai nên mua penthouse Đà Nẵng?</h3>
+<ul>
+<li>Gia đình nhiều thế hệ cần diện tích lớn ở trung tâm, thay cho nhà phố hoặc biệt thự.</li>
+<li>Khách muốn tài sản khan hiếm, chấp nhận thanh khoản chậm hơn căn thường.</li>
+<li>Người cần nhận nhà sớm có thể ưu tiên căn đã hoàn thiện như The Filmore.</li>
+</ul>
+
+<h2>Lưu ý khi mua penthouse Đà Nẵng</h2>
 <ul>
 <li><strong>Thời hạn sở hữu:</strong> kiểm tra căn thuộc dự án sở hữu lâu dài hay đất thương mại dịch vụ.</li>
 <li><strong>Quyền sử dụng sân thượng, mái:</strong> phần diện tích này phải ghi rõ trong hợp đồng.</li>
@@ -713,12 +814,14 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Penthouse Đà Nẵng: dự án và giá tham khảo 2026',
-			'desc'      => 'Penthouse Đà Nẵng ven sông Hàn, biển Mỹ Khê: The Legend, The Filmore, The Meridian, Nobu, Times Square – diện tích, giá. Gọi Hoàng Hiệp xem căn.',
-			'points'    => array( 'Mỗi dự án chỉ có khoảng 2 – 8 căn penthouse', 'Giá tham khảo từ khoảng 14 tỷ đến trên 44,9 tỷ', 'Kiểm tra thời hạn sở hữu, quyền sử dụng sân thượng, phí quản lý' ),
+			'desc'      => 'Penthouse Đà Nẵng ven sông Hàn, biển Mỹ Khê: The Legend, The Filmore, The Meridian, Nobu, Times Square – diện tích, giá tham khảo. Gọi Hoàng Hiệp.',
+			'points'    => array( 'Penthouse Đà Nẵng: mỗi dự án chỉ có khoảng 2 – 8 căn', 'Giá tham khảo từ khoảng 14 tỷ đến trên 44,9 tỷ', 'Kiểm tra thời hạn sở hữu, quyền sử dụng sân thượng, phí quản lý' ),
 			'faq'       => array(
 				array( 'Penthouse Đà Nẵng giá bao nhiêu?', 'Tham khảo: The Meridian khoảng 14 – 17,8 tỷ, The Legend từ khoảng 37 tỷ, The Filmore từ khoảng 44,9 tỷ; nhiều dự án bán theo thỏa thuận.' ),
 				array( 'Penthouse nào ở Đà Nẵng đã sẵn sàng bàn giao?', 'Penthouse The Filmore khoảng 206 m² được chào bán trực tiếp từ chủ đầu tư, sẵn sàng bàn giao.' ),
 				array( 'Penthouse view biển Mỹ Khê có ở dự án nào?', 'Times Square (2 căn tầng 30 tòa CT7) và Nobu Residences (2 penthouse, 6 Sky Villa có hồ bơi riêng).' ),
+				array( 'Penthouse Đà Nẵng nào có hồ bơi riêng?', 'Penthouse The Legend thiết kế duplex có hồ bơi riêng và vườn trên mái; Nobu Residences có 6 Sky Villa sở hữu hồ bơi riêng.' ),
+				array( 'Mua penthouse Đà Nẵng cần lưu ý gì?', 'Kiểm tra thời hạn sở hữu, quyền sử dụng sân thượng và mái ghi trong hợp đồng, phí quản lý hằng tháng và khả năng bán lại vì tệp khách nhỏ.' ),
 			),
 		),
 		'sources'  => array( 'https://thelegendanang.com.vn/tu-39m2-den-penthouse-415m2-the-legend/', 'https://batdongsan.com.vn/ban-can-ho-chung-cu-the-filmore-da-nang-phuong-hoa-cuong-tp-da-nang/duy-nhat-penthouse-mua-truc-tiep-cdt-206m2-gia-tu-45-ty-san-sang-ban-giao-pr45059382', 'https://the-meridian.com.vn/bang-gia-the-meridian-da-nang/', 'https://dantri.com.vn/bat-dong-san/sun-property-ra-mat-dong-penthouse-shophouse-khoi-de-gioi-han-tai-nam-trung-tam-da-nang-20260811094649419.htm' ),
@@ -734,6 +837,7 @@ HTML
 		'category' => 'Kinh nghiệm mua bán',
 		'content'  => <<<'HTML'
 <p>Shop khối đế Đà Nẵng đáng cân nhắc khi dự án có lượng cư dân lớn, mặt tiền đường chính và đã hoặc sắp bàn giao. Giá tham khảo hiện từ khoảng 4 tỷ (shop 2 tầng Sun Symphony) đến hàng chục tỷ cho shop mặt tiền lớn ven sông Hàn. Hoàng Hiệp phân tích ưu nhược điểm và các dự án đáng xem, cập nhật tháng 10/2026.</p>
+<!--hh-img:img/sun-ponte/sun-ponte-shophouse-khoi-de-ve-dem.jpg|Shop khối đế Đà Nẵng: dãy shophouse khối đế Sun Ponte Residence về đêm (phối cảnh chủ đầu tư)-->
 
 <h2>Shop khối đế là gì?</h2>
 <p>Shop khối đế là các căn thương mại ở tầng 1 – 2 (đôi khi đến tầng 3) của tòa căn hộ, thường bàn giao thô để chủ sở hữu tự hoàn thiện. Khách hàng chính là cư dân trong tòa và người qua lại trên tuyến đường mặt tiền.</p>
@@ -778,6 +882,12 @@ HTML
 <li><strong>Thời hạn và pháp lý:</strong> xác nhận sở hữu lâu dài hay có thời hạn, có được cấp giấy chứng nhận riêng không.</li>
 </ul>
 
+<h2>Ví dụ tính dòng tiền shop khối đế Đà Nẵng</h2>
+<p>Vì chưa có đủ dữ liệu công khai về giá thuê shop, cách an toàn là tính ngược: shop khối đế Đà Nẵng cần cho thuê bao nhiêu để đạt tỷ suất mong muốn. Ví dụ shop Sun Ponte 40,7 m² giá khoảng 4,6 tỷ: muốn tỷ suất gộp 5%/năm thì tiền thuê cần khoảng 230 triệu/năm, tức khoảng 19 triệu/tháng.</p>
+<p>Sau đó, đối chiếu con số này với giá thuê mặt bằng thực tế quanh dự án và trừ chi phí hoàn thiện, phí quản lý, thời gian trống. Nếu mức thuê cần thiết cao hơn mặt bằng khu vực, nên chọn shop nhỏ hơn hoặc chờ dự án lấp đầy cư dân rồi mới quyết định.</p>
+<h3>Shop khối đế Đà Nẵng mới ra mắt ở Hòa Xuân</h3>
+<p>Tháng 8/2026, Sun Property giới thiệu dòng shophouse khối đế số lượng giới hạn tại Cora Tower, Spana Tower và S-Light Tower, theo <a href="https://dantri.com.vn/bat-dong-san/sun-property-ra-mat-dong-penthouse-shophouse-khoi-de-gioi-han-tai-nam-trung-tam-da-nang-20260811094649419.htm">Dân trí</a>. Theo <a href="https://cafef.vn/lo-dien-gan-300-san-pham-phien-ban-gioi-han-tai-cac-to-hop-can-ho-sun-group-nam-trung-tam-da-nang-188260811154747855.chn">CafeF</a>, đợt này có 150 căn shophouse khối đế cho ba tòa. Đây là nhóm shop khối đế Đà Nẵng trong khu đô thị đang hình thành, giá và diện tích cập nhật theo từng đợt.</p>
+
 <h2>Có nên đầu tư shop khối đế Đà Nẵng?</h2>
 <p>Nên cân nhắc nếu anh chị có vốn dài hạn, chọn dự án quy mô lớn, mặt tiền đường chính và chấp nhận 1 – 2 năm đầu dòng tiền chưa tối ưu. Không phù hợp nếu cần dòng tiền ngay hoặc vay tỷ lệ cao.</p>
 <p>Nếu muốn so sánh với nhà phố, xem thêm trang <a href="/mua-ban/">mua bán bất động sản Đà Nẵng</a>. Danh sách shop đang có hàng có tại trang <a href="/san-pham/shop-khoi-de/">shop khối đế Đà Nẵng</a>; tham khảo thêm <a href="/gia-thue-can-ho-da-nang-moi-thang/">giá thuê căn hộ Đà Nẵng</a> để ước tính lượng cư dân thuê ở.</p>
@@ -786,16 +896,18 @@ HTML
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Shop khối đế Đà Nẵng: có nên đầu tư, dự án nào?',
+			'seo_title' => 'Shop khối đế Đà Nẵng 2026: có nên đầu tư, dự án nào?',
 			'desc'      => 'Shop khối đế Đà Nẵng: giá tham khảo Sun Symphony, Sun Ponte, Peninsula, Times Square; ưu nhược điểm, rủi ro. Gọi Hoàng Hiệp nhận danh sách shop.',
-			'points'    => array( 'Shop 2 tầng Sun Symphony từ khoảng 4 tỷ; Sun Ponte khoảng 4,6 – 64,6 tỷ', 'Lợi thế: khách hàng cư dân sẵn có, nhiều dự án sở hữu lâu dài', 'Rủi ro: phụ thuộc tỷ lệ lấp đầy, vốn lớn, chi phí hoàn thiện' ),
+			'points'    => array( 'Shop khối đế Đà Nẵng: Sun Symphony từ khoảng 4 tỷ; Sun Ponte khoảng 4,6 – 64,6 tỷ', 'Lợi thế: khách hàng cư dân sẵn có, nhiều dự án sở hữu lâu dài', 'Rủi ro: phụ thuộc tỷ lệ lấp đầy, vốn lớn, chi phí hoàn thiện' ),
 			'faq'       => array(
 				array( 'Shop khối đế Đà Nẵng giá bao nhiêu?', 'Tham khảo: Sun Symphony từ khoảng 4 tỷ; Sun Ponte khoảng 4,6 – 5,5 tỷ cho shop nhỏ, 13 – 64,6 tỷ cho shop mặt tiền; Peninsula từ khoảng 79 triệu/m².' ),
 				array( 'Shop khối đế có được sở hữu lâu dài không?', 'Tùy dự án; shop Sun Ponte và Times Square được công bố sở hữu lâu dài, cần đối chiếu hợp đồng từng căn.' ),
 				array( 'Đầu tư shop khối đế có rủi ro gì?', 'Rủi ro chính là cư dân chưa lấp đầy, vị trí shop kém, vốn lớn và chi phí hoàn thiện do shop thường bàn giao thô.' ),
+				array( 'Shop khối đế Đà Nẵng cho thuê bao nhiêu?', 'Hiện chưa có đủ dữ liệu công khai về giá thuê shop từng dự án; nên khảo sát mặt bằng quanh dự án và tính ngược tiền thuê cần để đạt tỷ suất mong muốn.' ),
+				array( 'Shop khối đế Đà Nẵng ở Hòa Xuân có gì mới?', 'Tháng 8/2026, Sun Property ra mắt shophouse khối đế giới hạn tại Cora Tower, Spana Tower và S-Light Tower; giá, diện tích cập nhật theo từng đợt.' ),
 			),
 		),
-		'sources'  => array( 'https://newstarland.com/bang-gia-sun-symphony-residence-da-nang/', 'https://sunponte.vn/shophouse-khoi-de-sun-ponte-residence/', 'https://thoibaonganhang.vn/shophouse-peninsula-da-nang-tung-chinh-sach-uu-dai-voi-gia-ban-chi-tu-79-trieum2-169394.html', 'https://smartland.vn/can-ho-da-nang-times-square/' ),
+		'sources'  => array( 'https://newstarland.com/bang-gia-sun-symphony-residence-da-nang/', 'https://sunponte.vn/shophouse-khoi-de-sun-ponte-residence/', 'https://thoibaonganhang.vn/shophouse-peninsula-da-nang-tung-chinh-sach-uu-dai-voi-gia-ban-chi-tu-79-trieum2-169394.html', 'https://smartland.vn/can-ho-da-nang-times-square/', 'https://dantri.com.vn/bat-dong-san/sun-property-ra-mat-dong-penthouse-shophouse-khoi-de-gioi-han-tai-nam-trung-tam-da-nang-20260811094649419.htm', 'https://cafef.vn/lo-dien-gan-300-san-pham-phien-ban-gioi-han-tai-cac-to-hop-can-ho-sun-group-nam-trung-tam-da-nang-188260811154747855.chn' ),
 	);
 
 	return $posts;

@@ -11,15 +11,16 @@ function hh_posts_casamia_dong_tien( $posts ) {
 		'slug'     => 'dau-tu-biet-thu-casamia-balanca-bai-toan-dong-tien',
 		'title'    => 'Đầu tư biệt thự Casamia Balanca: bài toán dòng tiền 5–10 năm',
 		'excerpt'  => 'Dòng tiền Casamia Balanca theo 3 kịch bản: trả đủ tự cho thuê, vay 50–70%, giao đơn vị vận hành. Bảng tính công suất 40/55/70% và điểm hòa vốn.',
-		'keyword'  => 'dòng tiền Casamia Balanca',
+		'keyword'  => 'đầu tư biệt thự Casamia Balanca',
 		'project'  => 'casamia-balanca-hoi-an',
 		'week'     => 3,
 		'category' => 'Kinh nghiệm mua bán',
 		'content'  => <<<'HTML'
-<p>Dòng tiền Casamia Balanca từ cho thuê nghỉ dưỡng, với giả định thận trọng, chỉ đạt khoảng 1,5 – 3%/năm trên tổng vốn khi mua bằng tiền mặt. Khi vay ngân hàng 50 – 70%, tiền thuê không đủ trả lãi sau thời gian ân hạn. Vì vậy biệt thự ở đây nên được xem là tài sản tích lũy dài hạn, không phải sản phẩm dòng tiền. Bài viết cập nhật tháng 10/2026, mọi con số đều ghi rõ nguồn hoặc đánh dấu "giả định".</p>
+<p>Khi đầu tư biệt thự Casamia Balanca để cho thuê nghỉ dưỡng, dòng tiền với giả định thận trọng chỉ đạt khoảng 1,5 – 3%/năm trên tổng vốn khi mua bằng tiền mặt. Khi vay ngân hàng 50 – 70%, tiền thuê không đủ trả lãi sau thời gian ân hạn. Vì vậy biệt thự ở đây nên được xem là tài sản tích lũy dài hạn, không phải sản phẩm dòng tiền. Bài viết cập nhật tháng 10/2026, mọi con số đều ghi rõ nguồn hoặc đánh dấu "giả định".</p>
 
-<h2>Dữ liệu đầu vào và các giả định</h2>
-<p>Dự án mới bắt đầu bàn giao (kế hoạch khoảng 100 căn trong tháng 11 – 12/2026), nên <strong>chưa có doanh thu thực tế công khai</strong>. Hiệp dùng một căn mẫu để minh họa.</p>
+<h2>Dữ liệu đầu vào khi đầu tư biệt thự Casamia Balanca</h2>
+<!--hh-img:img/casamia-balanca/casamia-balanca-biet-thu-ho-boi-ven-song.jpg|Biệt thự hồ bơi ven sông – căn mẫu để tính bài toán đầu tư biệt thự Casamia Balanca-->
+<p>Dự án mới bắt đầu bàn giao (kế hoạch khoảng 100 căn trong tháng 11 – 12/2026), nên <strong>chưa có doanh thu thực tế công khai</strong>. Hiệp dùng một căn mẫu để minh họa bài toán đầu tư biệt thự Casamia Balanca. Thông tin tổng quan dự án 31,1 ha của Tập đoàn Đạt Phương có thể xem thêm trên <a href="https://baodautu.vn/tap-doan-dat-phuong-kick-off-du-an-casamia-balanca-hoi-an-d300612.html">Báo Đầu tư</a>.</p>
 <table>
 <thead><tr><th>Thông số</th><th>Giá trị dùng trong bài</th><th>Nguồn / tính chất</th></tr></thead>
 <tbody>
@@ -34,7 +35,7 @@ function hh_posts_casamia_dong_tien( $posts ) {
 </table>
 <p>Doanh thu gộp năm = 3,5 triệu x 365 đêm x công suất. Tương ứng khoảng 511 triệu (40%), 703 triệu (55%) và 894 triệu (70%).</p>
 
-<h2>Kịch bản A: thanh toán đủ, tự cho thuê homestay – nghỉ dưỡng</h2>
+<h2>Kịch bản A: đầu tư biệt thự Casamia Balanca bằng tiền mặt, tự cho thuê</h2>
 <table>
 <thead><tr><th>Công suất (giả định)</th><th>Doanh thu gộp/năm</th><th>Chi phí vận hành 45%</th><th>Chi phí cố định</th><th>Dòng tiền ròng/năm</th><th>Lợi suất trên 14,5 tỷ</th></tr></thead>
 <tbody>
@@ -45,7 +46,7 @@ function hh_posts_casamia_dong_tien( $posts ) {
 </table>
 <p>Cộng dồn 5 năm ở công suất 55%, dòng tiền ròng khoảng 1,6 tỷ; 10 năm khoảng 3,3 tỷ, tức chưa tới một phần tư vốn bỏ ra. Theo đơn vị phân phối, khách không vay được chiết khấu khoảng 9%; khi đó giá căn mẫu còn khoảng 12,5 tỷ và lợi suất ở mức 55% nhích lên khoảng 2,5%.</p>
 
-<h2>Kịch bản B: vay ngân hàng 50 – 70%</h2>
+<h2>Kịch bản B: đầu tư biệt thự Casamia Balanca có vay ngân hàng 50 – 70%</h2>
 <p>Các đơn vị phân phối giới thiệu hỗ trợ vay tối đa 70% giá trị hợp đồng, ân hạn gốc và lãi suất 0% đến 24 tháng. Đây là thông tin phân phối, chưa phải văn bản của chủ đầu tư. Sau ân hạn, Hiệp <strong>giả định lãi suất 10%/năm</strong> (thả nổi) và chỉ tính tiền lãi, chưa tính trả gốc.</p>
 <table>
 <thead><tr><th>Mức vay</th><th>Lãi vay/năm (giả định 10%)</th><th>Dòng tiền ròng 40%</th><th>Dòng tiền ròng 55%</th><th>Dòng tiền ròng 70%</th></tr></thead>
@@ -55,7 +56,7 @@ function hh_posts_casamia_dong_tien( $posts ) {
 </tbody>
 </table>
 <p>Trong 24 tháng ân hạn, vốn tự có khi vay 70% chỉ khoảng 4,9 tỷ nên lợi suất trên vốn tự có đạt khoảng 4,5 – 8,9%. Nhưng ân hạn có thể trôi qua một phần trước khi căn đi vào khai thác.</p>
-<p>Với kịch bản vay 70%, sau 10 năm (2 năm ân hạn, 8 năm trả lãi) ở công suất 55%, tổng dòng tiền âm khoảng 4,4 tỷ.</p>
+<p>Với kịch bản vay 70%, sau 10 năm (2 năm ân hạn, 8 năm trả lãi) ở công suất 55%, tổng dòng tiền âm khoảng 4,4 tỷ. Đây là khoản người đầu tư biệt thự Casamia Balanca bằng vốn vay phải bù từ thu nhập khác, chưa kể trả gốc.</p>
 
 <h2>Kịch bản C: giao đơn vị vận hành, chia doanh thu</h2>
 <p>Một số trang phân phối giới thiệu gói chia cho chủ khoảng 45% doanh thu thuần, kèm mức tối thiểu khoảng 30 triệu/tháng. Hiệp chưa thấy văn bản chính thức của chủ đầu tư về gói này. Bảng dưới <strong>giả định</strong> doanh thu thuần bằng 85% doanh thu gộp, chủ nhà tự chịu khoảng 30 triệu/năm chi phí cố định.</p>
@@ -67,7 +68,7 @@ function hh_posts_casamia_dong_tien( $posts ) {
 <tr><td>70%</td><td>Khoảng 342 triệu</td><td>Khoảng 312 triệu</td><td>Khoảng 2,2%</td><td>Khoảng 330 triệu (2,3%)</td></tr>
 </tbody>
 </table>
-<p>Ở cả ba mức công suất, mức sàn đều cao hơn phần chia thực. Nghĩa là bên vận hành phải bù tiền, nên năng lực tài chính và điều khoản ràng buộc của họ quan trọng hơn con số cam kết.</p>
+<p>Ở cả ba mức công suất, mức sàn đều cao hơn phần chia thực. Nghĩa là bên vận hành phải bù tiền, nên năng lực tài chính và điều khoản ràng buộc của họ quan trọng hơn con số cam kết. Nếu đầu tư biệt thự Casamia Balanca theo kịch bản này, hãy yêu cầu văn bản ghi rõ bên cam kết, thời hạn và cơ chế xử lý khi bên vận hành không chi trả đủ.</p>
 
 <h2>Điểm hòa vốn của dòng tiền Casamia Balanca</h2>
 <ul>
@@ -76,7 +77,7 @@ function hh_posts_casamia_dong_tien( $posts ) {
 <li><strong>Thu hồi vốn chỉ bằng tiền thuê:</strong> khoảng 34 – 66 năm theo kịch bản A. Phần còn lại phụ thuộc giá bán lại, Hiệp không dự báo.</li>
 </ul>
 
-<h2>Rủi ro cần tính</h2>
+<h2>Rủi ro cần tính khi đầu tư biệt thự Casamia Balanca</h2>
 <h3>Mùa thấp điểm</h3>
 <p>Hội An có mùa mưa cuối năm, công suất giảm mạnh. Hãy tính công suất bình quân cả năm.</p>
 <h3>Ngập lụt khu vực Cẩm Thanh</h3>
@@ -84,10 +85,19 @@ function hh_posts_casamia_dong_tien( $posts ) {
 <h3>Pháp lý sổ hồng</h3>
 <p>Chủ đầu tư đặt mục tiêu hoàn thiện thủ tục cấp giấy chứng nhận từng lô trong năm 2026. Xem chi tiết tại bài <a href="/phap-ly-so-hong-casamia-balanca/">pháp lý sổ hồng Casamia Balanca</a>.</p>
 <h3>Thanh khoản</h3>
-<p>Biệt thự 10 – 20 tỷ có tệp khách mua lại hẹp; biệt thự Vinpearl Nam Hội An hiện được rao thấp hơn giá bán gốc là ví dụ cần lưu ý.</p>
+<p>Biệt thự 10 – 20 tỷ có tệp khách mua lại hẹp, nên người đầu tư biệt thự Casamia Balanca cần tính thời gian nắm giữ dài; biệt thự Vinpearl Nam Hội An hiện được rao thấp hơn giá bán gốc là ví dụ cần lưu ý.</p>
 
-<h2>Hiệp tư vấn chọn kịch bản nào?</h2>
-<p>Nếu có sẵn vốn và muốn vừa nghỉ dưỡng vừa khai thác, kịch bản A (kèm chiết khấu thanh toán) an toàn nhất. Nếu vay, chỉ nên vay ở mức bạn trả được lãi bằng thu nhập chính, không trông vào tiền thuê. Kịch bản C hợp với chủ ở xa, nhưng phải đọc kỹ hợp đồng vận hành.</p>
+<h2>Đầu tư biệt thự Casamia Balanca: chọn kịch bản nào?</h2>
+<p>Nếu có sẵn vốn và muốn vừa nghỉ dưỡng vừa khai thác khi đầu tư biệt thự Casamia Balanca, kịch bản A (kèm chiết khấu thanh toán) an toàn nhất. Nếu vay, chỉ nên vay ở mức bạn trả được lãi bằng thu nhập chính, không trông vào tiền thuê. Kịch bản C hợp với chủ ở xa, nhưng phải đọc kỹ hợp đồng vận hành.</p>
+<h3>5 câu hỏi trước khi đầu tư biệt thự Casamia Balanca</h3>
+<ol>
+<li>Nếu công suất chỉ đạt 40% trong 2 năm đầu, tôi có trả được lãi vay bằng thu nhập chính không?</li>
+<li>Giá căn tôi chọn đã gồm chiết khấu thanh toán (khoảng 9% khi không vay, theo phân phối) hay chưa?</li>
+<li>Gói ân hạn, hỗ trợ lãi suất có văn bản của chủ đầu tư, áp dụng cho đúng căn và đúng đợt không?</li>
+<li>Căn có giấy chứng nhận riêng chưa, cao độ nền và thoát nước khu vực ra sao?</li>
+<li>Nếu cần bán lại sau 5 năm, mức giá nào tôi chấp nhận được?</li>
+</ol>
+<p>Trả lời được 5 câu hỏi này, anh chị sẽ biết việc đầu tư biệt thự Casamia Balanca phù hợp với mục tiêu tích lũy tài sản hay đang kỳ vọng quá nhiều vào dòng tiền cho thuê.</p>
 <p>Đọc thêm: <a href="/du-an/casamia-balanca-hoi-an/">trang dự án Casamia Balanca</a>, <a href="/gia-biet-thu-casamia-balanca-2026/">giá biệt thự Casamia Balanca 2026</a>, <a href="/chinh-sach-ban-hang-casamia-balanca/">chính sách bán hàng</a>, <a href="/cho-thue-biet-thu-casamia-balanca-dong-tien/">cách ước tính dòng tiền cho thuê</a> và danh mục <a href="/loai-du-an/biet-thu/">dự án biệt thự</a>.</p>
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) hoặc qua trang <a href="/lien-he/">liên hệ</a> để nhận file tính dòng tiền theo đúng căn, giá và mức vay của bạn.</p>
 HTML
@@ -96,14 +106,16 @@ HTML
 			'seo_title' => 'Dòng tiền Casamia Balanca: 3 kịch bản đầu tư 5–10 năm',
 			'desc'      => 'Dòng tiền Casamia Balanca: trả đủ, vay 50–70%, chia doanh thu; bảng công suất 40/55/70%, điểm hòa vốn. Gọi Hoàng Hiệp 0904 567 009 nhận file tính.',
 			'points'    => array(
-				'Mua bằng tiền mặt, tự cho thuê: lợi suất ròng giả định khoảng 1,5 – 3%/năm trên tổng vốn.',
-				'Vay 50 – 70% với lãi giả định 10%/năm: tiền thuê không đủ trả lãi sau ân hạn.',
+				'Đầu tư biệt thự Casamia Balanca bằng tiền mặt, tự cho thuê: lợi suất ròng giả định khoảng 1,5 – 3%/năm trên tổng vốn.',
+				'Vay 50 – 70% khi đầu tư biệt thự Casamia Balanca, lãi giả định 10%/năm: tiền thuê không đủ trả lãi sau ân hạn.',
 				'Gói chia doanh thu do phân phối giới thiệu chưa có văn bản chủ đầu tư; mức sàn phụ thuộc năng lực bên vận hành.',
 			),
 			'faq'       => array(
 				array( 'Đầu tư biệt thự Casamia Balanca cho thuê lời bao nhiêu?', 'Chưa có doanh thu thực tế công khai. Với giá thuê 3,5 triệu/đêm và giả định chi phí 45%, lợi suất ròng khoảng 1,5 – 3%/năm trên tổng vốn khi không vay.' ),
-				array( 'Vay 70% mua Casamia Balanca có trả được lãi bằng tiền thuê không?', 'Với lãi suất giả định 10%/năm, giá thuê cần khoảng 7,3 triệu/đêm ở công suất 70% mới đủ trả lãi – cao hơn mặt bằng villa Cẩm Thanh.' ),
-				array( 'Casamia Balanca có ân hạn lãi vay không?', 'Theo đơn vị phân phối, khách vay được ân hạn gốc, lãi suất 0% đến 24 tháng; cần xác nhận bằng văn bản theo từng đợt.' ),
+				array( 'Vay 70% đầu tư biệt thự Casamia Balanca có trả được lãi bằng tiền thuê không?', 'Với lãi suất giả định 10%/năm, giá thuê cần khoảng 7,3 triệu/đêm ở công suất 70% mới đủ trả lãi – cao hơn mặt bằng villa Cẩm Thanh.' ),
+				array( 'Đầu tư biệt thự Casamia Balanca có được ân hạn lãi vay không?', 'Theo đơn vị phân phối, khách vay được ân hạn gốc, lãi suất 0% đến 24 tháng; cần xác nhận bằng văn bản theo từng đợt.' ),
+				array( 'Đầu tư biệt thự Casamia Balanca bao lâu thì thu hồi vốn?', 'Nếu chỉ tính tiền thuê theo kịch bản A, thời gian thu hồi vốn khoảng 34 – 66 năm; phần còn lại phụ thuộc giá bán lại, Hoàng Hiệp không dự báo con số này.' ),
+				array( 'Đầu tư biệt thự Casamia Balanca có nên vay ngân hàng?', 'Chỉ nên vay ở mức trả được lãi bằng thu nhập chính. Với giả định lãi 10%/năm, tiền thuê ở mặt bằng villa Cẩm Thanh không đủ trả lãi khi vay 50 – 70%.' ),
 				array( 'Có nên chọn gói chia doanh thu?', 'Phù hợp chủ ở xa, nhưng cần kiểm tra bên vận hành, cách tính doanh thu thuần, mức sàn và điều kiện chấm dứt hợp đồng.' ),
 			),
 		),
@@ -114,14 +126,15 @@ HTML
 		'slug'     => 'casamia-balanca-so-sanh-biet-thu-hoi-an',
 		'title'    => 'So sánh Casamia Balanca với biệt thự nghỉ dưỡng khác ở Hội An – Đà Nẵng',
 		'excerpt'  => 'Casamia Balanca có nên mua? So sánh vị trí, sở hữu, giá, hình thức khai thác với Hoiana Beach Villas, Vinpearl Nam Hội An, The Ocean Villas, Casamia Hội An.',
-		'keyword'  => 'Casamia Balanca có nên mua',
+		'keyword'  => 'so sánh biệt thự Hội An',
 		'project'  => 'casamia-balanca-hoi-an',
 		'week'     => 3,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>Casamia Balanca có nên mua? Câu trả lời phụ thuộc vào mục đích. Đây là lựa chọn hợp lý nếu bạn muốn biệt thự sinh thái ven sông, đã có sổ hồng từng lô, gần phố cổ, với mức giá tham khảo khoảng 10 – 20 tỷ/căn. Nếu ưu tiên mặt biển, thương hiệu resort hoặc nhà đã vận hành, các dự án như Hoiana Beach Villas, Vinpearl Nam Hội An hay The Ocean Villas sẽ phù hợp hơn. Thông tin cập nhật tháng 10/2026.</p>
+<p>Casamia Balanca có nên mua? Bài so sánh biệt thự Hội An dưới đây cho thấy câu trả lời phụ thuộc vào mục đích. Đây là lựa chọn hợp lý nếu bạn muốn biệt thự sinh thái ven sông, đã có sổ hồng từng lô, gần phố cổ, với mức giá tham khảo khoảng 10 – 20 tỷ/căn. Nếu ưu tiên mặt biển, thương hiệu resort hoặc nhà đã vận hành, các dự án như Hoiana Beach Villas, Vinpearl Nam Hội An hay The Ocean Villas sẽ phù hợp hơn. Thông tin cập nhật tháng 10/2026.</p>
 
-<h2>Bảng so sánh biệt thự nghỉ dưỡng Hội An – Đà Nẵng</h2>
+<h2>Bảng so sánh biệt thự Hội An và Đà Nẵng</h2>
+<!--hh-img:img/casamia-balanca/casamia-balanca-biet-thu-ven-kenh.jpg|Biệt thự ven kênh Casamia Balanca – một lựa chọn khi so sánh biệt thự Hội An sinh thái ven sông-->
 <table>
 <thead><tr><th>Dự án</th><th>Vị trí</th><th>Sở hữu</th><th>Giá tham khảo</th><th>Hình thức</th><th>Tình trạng</th></tr></thead>
 <tbody>
@@ -134,7 +147,7 @@ HTML
 <tr><td>The Ocean Villas</td><td>Trường Sa, Ngũ Hành Sơn, Đà Nẵng – sát biển</td><td>Cần kiểm tra theo từng căn</td><td>Chuyển nhượng khoảng 28,5 – 70 tỷ (tin rao)</td><td>Biệt thự đơn lập 2 – 8 phòng ngủ, hồ bơi riêng, trong khu resort</td><td>Đã bàn giao, chuyển nhượng</td></tr>
 </tbody>
 </table>
-<p>Giá trong bảng là mức tham khảo tổng hợp từ báo chí, trang phân phối và tin rao chuyển nhượng; giá thật phụ thuộc vị trí, diện tích và đợt bán.</p>
+<p>Giá trong bảng so sánh biệt thự Hội An là mức tham khảo tổng hợp từ báo chí, trang phân phối và tin rao chuyển nhượng; giá thật phụ thuộc vị trí, diện tích và đợt bán.</p>
 
 <h2>Điểm mạnh và điểm yếu của Casamia Balanca</h2>
 <h3>Điểm mạnh</h3>
@@ -146,18 +159,29 @@ HTML
 </ul>
 <h3>Điểm cần cân nhắc</h3>
 <ul>
-<li>Không có mặt biển trực tiếp như Hoiana Beach Villas hay The Ocean Villas.</li>
+<li>Trong bảng so sánh biệt thự Hội An, đây là dự án không có mặt biển trực tiếp như Hoiana Beach Villas hay The Ocean Villas.</li>
 <li>Giấy chứng nhận từng lô đang được hoàn thiện theo kế hoạch 2026, chưa phải sổ có sẵn.</li>
 <li>Chưa có thương hiệu khách sạn quốc tế vận hành, chưa có doanh thu cho thuê thực tế công khai.</li>
 </ul>
 
-<h2>So sánh theo từng nhóm đối thủ</h2>
+<h2>So sánh biệt thự Hội An theo từng nhóm</h2>
 <h3>Với Casamia Hội An và Casamia Calm</h3>
 <p>Cùng chủ đầu tư, cùng phong cách sinh thái ven sông. <a href="/du-an/casamia-hoi-an/">Casamia Hội An</a> (15,6 ha, 216 căn) và <a href="/du-an/casamia-calm-hoi-an/">Casamia Calm</a> (6,4 ha, 112 biệt thự) đã bàn giao, có thể xem nhà thật và cộng đồng cư dân. Casamia Balanca quy mô lớn hơn, có shophouse và khách sạn, nhưng còn đang hoàn thiện.</p>
 <h3>Với biệt thự biển trong quần thể resort</h3>
-<p><a href="/du-an/hoiana-beach-villas/">Hoiana Beach Villas</a> có mặt biển, hồ bơi riêng từng căn và hệ tiện ích golf, spa; đổi lại bàn giao dự kiến tới quý 1/2028. <a href="/du-an/vinpearl-nam-hoi-an-villa/">Biệt thự Vinpearl Nam Hội An</a> đã vận hành từ 2018 và có giá chuyển nhượng khoảng 9 – 16 tỷ, ngang vùng giá Casamia Balanca. Tuy vậy, mức giá này thấp hơn giá gốc, cho thấy rủi ro thanh khoản của biệt thự nghỉ dưỡng.</p>
+<p>Khi so sánh biệt thự Hội An có mặt biển, <a href="/du-an/hoiana-beach-villas/">Hoiana Beach Villas</a> có mặt biển, hồ bơi riêng từng căn và hệ tiện ích golf, spa; đổi lại bàn giao dự kiến tới quý 1/2028. <a href="/du-an/vinpearl-nam-hoi-an-villa/">Biệt thự Vinpearl Nam Hội An</a> đã vận hành từ 2018 và có giá chuyển nhượng khoảng 9 – 16 tỷ, ngang vùng giá Casamia Balanca. Tuy vậy, mức giá này thấp hơn giá gốc, cho thấy rủi ro thanh khoản của biệt thự nghỉ dưỡng. Tổng quan quần thể Vinpearl Nam Hội An có trong bài của <a href="https://vneconomy.vn/tat-ca-trong-mot-o-vinpearl-nam-hoi-an-resort-villas.htm">VnEconomy</a>.</p>
 <h3>Với biệt thự biển Đà Nẵng</h3>
-<p><a href="/du-an/the-ocean-villas-da-nang/">The Ocean Villas</a> ở Ngũ Hành Sơn nằm sát biển, sát trung tâm, giá chuyển nhượng khoảng 28,5 – 70 tỷ. Với cùng ngân sách, Casamia Balanca cho diện tích, không gian xanh lớn hơn; Đà Nẵng cho vị trí và tính thanh khoản tốt hơn.</p>
+<p><a href="/du-an/the-ocean-villas-da-nang/">The Ocean Villas</a> ở Ngũ Hành Sơn nằm sát biển, sát trung tâm, giá chuyển nhượng khoảng 28,5 – 70 tỷ. Khi so sánh biệt thự Hội An với Đà Nẵng ở cùng ngân sách, Casamia Balanca cho diện tích, không gian xanh lớn hơn; Đà Nẵng cho vị trí và tính thanh khoản tốt hơn.</p>
+
+<h2>Tiêu chí so sánh biệt thự Hội An nên dùng</h2>
+<ul>
+<li><strong>Loại đất và thời hạn:</strong> đất ở lâu dài hay đất thương mại – dịch vụ có thời hạn; ghi trên sổ từng căn.</li>
+<li><strong>Tình trạng:</strong> đã bàn giao, đang vận hành hay còn đang xây – ảnh hưởng tới việc xem nhà thật và thời gian chờ.</li>
+<li><strong>Vị trí:</strong> mặt biển, ven sông hay sân golf; khoảng cách tới phố cổ và sân bay Đà Nẵng.</li>
+<li><strong>Hình thức khai thác:</strong> tự ở, tự cho thuê hay giao đơn vị vận hành; số liệu doanh thu có kiểm chứng không.</li>
+<li><strong>Thanh khoản:</strong> giá chuyển nhượng hiện tại so với giá gốc của chính dự án.</li>
+</ul>
+<p>Khi so sánh biệt thự Hội An bằng 5 tiêu chí trên, các dự án có mức giá gần nhau như Casamia Balanca và Vinpearl Nam Hội An lại khác hẳn về bản chất: một bên là biệt thự sinh thái ven sông đang bàn giao, một bên là biệt thự biển đã vận hành nhiều năm. Thông tin về lễ kick-off dự án Casamia Balanca có trên <a href="https://baodautu.vn/tap-doan-dat-phuong-kick-off-du-an-casamia-balanca-hoi-an-d300612.html">Báo Đầu tư</a>.</p>
+<p>Việc so sánh biệt thự Hội An cũng nên dựa trên cùng một thời điểm giá. Bảng trong bài dùng mặt bằng tham khảo 10/2026; khi nhận báo giá mới, anh chị nên cập nhật lại toàn bộ các dự án thay vì chỉ một dự án.</p>
 
 <h2>Casamia Balanca có nên mua? Kết luận theo nhu cầu</h2>
 <table>
@@ -169,23 +193,25 @@ HTML
 <tr><td>Ưu tiên dòng tiền cho thuê ổn định</td><td>Cân nhắc kỹ mọi lựa chọn; xem bài tính dòng tiền bên dưới</td></tr>
 </tbody>
 </table>
-<p>Nếu mua để đầu tư, hãy đọc bài <a href="/dau-tu-biet-thu-casamia-balanca-bai-toan-dong-tien/">bài toán dòng tiền Casamia Balanca 5 – 10 năm</a> trước khi quyết định. Danh sách đầy đủ có tại mục <a href="/loai-du-an/biet-thu/">dự án biệt thự</a> và trang <a href="/du-an/casamia-balanca-hoi-an/">dự án Casamia Balanca</a>.</p>
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) hoặc qua trang <a href="/lien-he/">liên hệ</a> để nhận bảng so sánh căn cụ thể giữa Casamia Balanca và các dự án biệt thự Hội An – Đà Nẵng đang có hàng.</p>
+<p>Nếu so sánh biệt thự Hội An để đầu tư, hãy đọc bài <a href="/dau-tu-biet-thu-casamia-balanca-bai-toan-dong-tien/">bài toán dòng tiền Casamia Balanca 5 – 10 năm</a> trước khi quyết định. Danh sách đầy đủ có tại mục <a href="/loai-du-an/biet-thu/">dự án biệt thự</a> và trang <a href="/du-an/casamia-balanca-hoi-an/">dự án Casamia Balanca</a>.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) hoặc qua trang <a href="/lien-he/">liên hệ</a> để nhận bảng so sánh biệt thự Hội An theo căn cụ thể giữa Casamia Balanca và các dự án biệt thự Hội An – Đà Nẵng đang có hàng.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Casamia Balanca có nên mua? So sánh biệt thự Hội An',
 			'desc'      => 'Casamia Balanca có nên mua? So sánh vị trí, sở hữu, giá với Hoiana Beach Villas, Vinpearl Nam Hội An, The Ocean Villas. Gọi Hoàng Hiệp 0904 567 009.',
 			'points'    => array(
-				'Casamia Balanca: biệt thự sinh thái ven sông, đã có sổ hồng từng lô, giá tham khảo khoảng 10 – 20 tỷ.',
+				'So sánh biệt thự Hội An: Casamia Balanca là biệt thự sinh thái ven sông, đã có sổ hồng từng lô, giá tham khảo khoảng 10 – 20 tỷ.',
 				'Hoiana Beach Villas có mặt biển nhưng bàn giao dự kiến quý 1/2028; Vinpearl Nam Hội An chuyển nhượng khoảng 9 – 16 tỷ.',
 				'The Ocean Villas Đà Nẵng sát biển, giá chuyển nhượng khoảng 28,5 – 70 tỷ.',
 			),
 			'faq'       => array(
 				array( 'Casamia Balanca có nên mua không?', 'Nên cân nhắc nếu bạn cần biệt thự sinh thái ven sông, đã có sổ hồng từng lô, gần phố cổ Hội An và nắm giữ dài hạn; nếu cần mặt biển hoặc nhà đã vận hành, hãy so sánh thêm Hoiana, Vinpearl Nam Hội An.' ),
+				array( 'So sánh biệt thự Hội An nên bắt đầu từ tiêu chí nào?', 'Nên bắt đầu từ loại đất và thời hạn trên sổ, sau đó đến tình trạng bàn giao, vị trí, hình thức khai thác và thanh khoản. Khi so sánh biệt thự Hội An, hãy dùng giá cùng một thời điểm.' ),
+				array( 'Trong bảng so sánh biệt thự Hội An, dự án nào đã vận hành?', 'Biệt thự Vinpearl Nam Hội An đã vận hành từ 2018; Casamia Hội An và Casamia Calm đã bàn giao. Casamia Balanca và Hoiana Beach Villas đang mở bán.' ),
 				array( 'Casamia Balanca khác Casamia Hội An thế nào?', 'Cùng chủ đầu tư Đạt Phương; Casamia Hội An 15,6 ha đã bàn giao từ 2020, còn Casamia Balanca 31,1 ha đang mở bán, có thêm shophouse và khách sạn.' ),
-				array( 'Biệt thự nào gần Hội An có mặt biển?', 'Hoiana Beach Villas (Duy Xuyên, khoảng 700 m bờ biển) và biệt thự Vinpearl Nam Hội An (Thăng Bình cũ).' ),
-				array( 'Giá Casamia Balanca so với biệt thự biển Đà Nẵng ra sao?', 'Casamia Balanca khoảng 10 – 20 tỷ, trong khi The Ocean Villas chuyển nhượng khoảng 28,5 – 70 tỷ (tham khảo).' ),
+				array( 'Biệt thự nào gần Hội An có mặt biển?', 'Hoiana Beach Villas (Duy Xuyên, khoảng 700 m bờ biển) và biệt thự Vinpearl Nam Hội An (Thăng Bình cũ) – hai lựa chọn mặt biển trong bảng so sánh biệt thự Hội An.' ),
+				array( 'So sánh biệt thự Hội An và biệt thự biển Đà Nẵng về giá ra sao?', 'Casamia Balanca khoảng 10 – 20 tỷ, trong khi The Ocean Villas chuyển nhượng khoảng 28,5 – 70 tỷ (tham khảo).' ),
 			),
 		),
 		'sources'  => array( 'https://casamiabalanca.com/', 'https://www.hoiana.com/hoiana-beach-villas', 'https://namhoianvillas.com/chinh-sach-dau-tu-vinpearl-nam-hoi-an/', 'https://alonhadat.com.vn/du-an-khu-biet-thu-the-ocean-villas-pj938' ),

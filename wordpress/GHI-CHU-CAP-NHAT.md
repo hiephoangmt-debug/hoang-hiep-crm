@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.292**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.293**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.293 (15/11/2026) – đợt 1 viết lại bài chuẩn SEO 100/100
+
+- Khoảng 65 bài đã viết bổ sung đạt đủ tiêu chí Rank Math (≥ 800 từ, mật độ từ khoá ≥ 1%, H2 + ảnh có từ khoá, tiêu đề bắt đầu bằng từ khoá và có số, link nguồn uy tín…); nhiều bài khác đã sửa một phần. Phần còn lại ở bản sau.
+- **Rút gọn đường dẫn** 41 bài (URL ≤ 75 ký tự): web tự đổi đường dẫn và **chuyển hướng 301** từ link cũ – link đã chia sẻ vẫn vào được.
+- Bài tự đăng: web tự cập nhật dần (mỗi lượt 3 bài). Bài khác: bấm **Nhập / cập nhật dữ liệu**.
+- Sau khi cài: **Nhập / cập nhật dữ liệu** → mở trang quản trị vài lần → LiteSpeed **Purge All**.
 
 ## Có gì mới – 2.20.292 (15/11/2026) – hướng tới 100/100 Rank Math cho mọi bài
 

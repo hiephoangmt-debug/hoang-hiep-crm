@@ -12,14 +12,14 @@ function hh_posts_tuan_11_12( $posts ) {
 		'slug'     => 'mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to',
 		'title'    => 'Mua căn hộ chuyển nhượng Đà Nẵng: quy trình, giấy tờ và cách kiểm tra căn',
 		'excerpt'  => 'Mua căn hộ chuyển nhượng Đà Nẵng: phân biệt căn đã có sổ và căn chuyển nhượng hợp đồng mua bán, quy trình 6 bước, giấy tờ cần có và checklist kiểm tra căn.',
-		'keyword'  => 'mua căn hộ chuyển nhượng Đà Nẵng',
+		'keyword'  => 'mua căn hộ chuyển nhượng',
 		'project'  => '',
 		'week'     => 11,
 		'category' => 'Kinh nghiệm mua bán',
 		'content'  => <<<'HTML'
 <p><strong>Mua căn hộ chuyển nhượng Đà Nẵng</strong> (mua lại từ chủ nhà, không mua trực tiếp từ chủ đầu tư) giúp anh chị chọn được căn cụ thể đã thấy tận mắt, nhiều căn đã bàn giao, có thể ở hoặc cho thuê ngay. Đổi lại, thủ tục và rủi ro khác hẳn mua dự án mới. Bài viết tóm tắt quy trình, giấy tờ cần có và cách kiểm tra căn trước khi đặt cọc, cập nhật tháng 10/2026.</p>
 
-<h2>Hai dạng căn hộ chuyển nhượng phổ biến</h2>
+<h2>Hai dạng thường gặp khi mua căn hộ chuyển nhượng</h2>
 <table>
 <thead><tr><th>Tiêu chí</th><th>Căn đã có sổ hồng</th><th>Căn chuyển nhượng hợp đồng mua bán (HĐMB)</th></tr></thead>
 <tbody>
@@ -29,13 +29,13 @@ function hh_posts_tuan_11_12( $posts ) {
 <tr><td>Ví dụ ở Đà Nẵng</td><td>Hiyori Garden Tower (cư dân đã nhận sổ), tòa CT3 The Ori Garden</td><td>Các dự án đang bàn giao hoặc chưa cấp sổ</td></tr>
 </tbody>
 </table>
-<p>Theo Luật Kinh doanh bất động sản 2023, hợp đồng mua bán nhà ở hình thành trong tương lai được phép chuyển nhượng khi chưa nộp hồ sơ đề nghị cấp giấy chứng nhận, hợp đồng không có tranh chấp, căn hộ không bị kê biên hoặc thế chấp (trừ khi bên nhận thế chấp đồng ý). Quy định chuyển nhượng hợp đồng này không áp dụng với nhà ở xã hội.</p>
+<p>Theo Luật Kinh doanh bất động sản 2023 (tóm tắt trên <a href="https://thuvienphapluat.vn/phap-luat-nha-dat/hop-dong-mua-ban-nha-o-hinh-thanh-trong-tuong-lai-co-duoc-chuyen-nhuong-khong-10106.html">Thư viện Pháp luật</a>), hợp đồng mua bán nhà ở hình thành trong tương lai được phép chuyển nhượng khi chưa nộp hồ sơ đề nghị cấp giấy chứng nhận, hợp đồng không có tranh chấp, căn hộ không bị kê biên hoặc thế chấp (trừ khi bên nhận thế chấp đồng ý). Quy định chuyển nhượng hợp đồng này không áp dụng với nhà ở xã hội.</p>
 
 <h2>Quy trình mua căn hộ chuyển nhượng 6 bước</h2>
 <h3>Bước 1: Xác định ngân sách và tổng chi phí</h3>
-<p>Ngoài giá căn, cần tính thuế, phí công chứng, lệ phí trước bạ, phí quản lý và chi phí sửa sang nội thất. Chi tiết từng khoản xem bài <a href="/thue-phi-mua-ban-nha-dat-da-nang-2026/">thuế, phí khi mua bán nhà đất Đà Nẵng 2026</a>. Nếu dùng vốn vay, nên làm việc với ngân hàng từ sớm vì căn chuyển nhượng HĐMB thường cần thêm thủ tục với chủ đầu tư.</p>
+<p>Khi mua căn hộ chuyển nhượng, ngoài giá căn cần tính thuế, phí công chứng, lệ phí trước bạ, phí quản lý và chi phí sửa sang nội thất. Chi tiết từng khoản xem bài <a href="/thue-phi-mua-ban-nha-dat-da-nang-2026/">thuế, phí khi mua bán nhà đất Đà Nẵng 2026</a>. Nếu dùng vốn vay, nên làm việc với ngân hàng từ sớm vì căn chuyển nhượng HĐMB thường cần thêm thủ tục với chủ đầu tư.</p>
 <h3>Bước 2: Kiểm tra pháp lý căn hộ</h3>
-<p>Đối chiếu bản gốc sổ hồng hoặc HĐMB, phụ lục, các phiếu thu đã nộp cho chủ đầu tư. Hỏi rõ căn có đang thế chấp ngân hàng không và số tiền còn phải thanh toán.</p>
+<p>Bước quan trọng nhất khi mua căn hộ chuyển nhượng là đối chiếu bản gốc sổ hồng hoặc HĐMB, phụ lục, các phiếu thu đã nộp cho chủ đầu tư. Hỏi rõ căn có đang thế chấp ngân hàng không và số tiền còn phải thanh toán.</p>
 <h3>Bước 3: Xem căn thực tế</h3>
 <p>Kiểm tra theo checklist ở phần dưới, nên xem vào hai khung giờ khác nhau để đánh giá nắng, gió và tiếng ồn.</p>
 <h3>Bước 4: Đặt cọc</h3>
@@ -45,14 +45,14 @@ function hh_posts_tuan_11_12( $posts ) {
 <h3>Bước 6: Kê khai thuế, sang tên, bàn giao</h3>
 <p>Nộp hồ sơ kê khai thuế, lệ phí; đăng ký biến động (căn có sổ). Khi nhận căn, lập biên bản bàn giao kèm chỉ số điện nước, thẻ cư dân, chìa khóa và xác nhận đã thanh toán phí quản lý đến ngày bàn giao.</p>
 
-<h2>Giấy tờ cần chuẩn bị</h2>
+<h2>Giấy tờ cần chuẩn bị khi mua căn hộ chuyển nhượng</h2>
 <ul>
 <li><strong>Bên bán:</strong> sổ hồng hoặc HĐMB bản chính cùng phụ lục, phiếu thu; căn cước; giấy tờ hôn nhân (đăng ký kết hôn hoặc xác nhận độc thân) – nếu là tài sản chung vợ chồng thì cả hai cùng ký.</li>
 <li><strong>Bên mua:</strong> căn cước, giấy tờ tình trạng hôn nhân.</li>
 <li><strong>Căn chưa có sổ:</strong> thêm văn bản xác nhận của chủ đầu tư về tình trạng căn và số tiền đã nộp; nếu đang thế chấp, cần văn bản đồng ý của ngân hàng.</li>
 </ul>
 
-<h2>Checklist kiểm tra căn trước khi đặt cọc</h2>
+<h2>Checklist kiểm tra trước khi đặt cọc mua căn hộ chuyển nhượng</h2>
 <table>
 <thead><tr><th>Hạng mục</th><th>Cần kiểm tra</th></tr></thead>
 <tbody>
@@ -65,25 +65,31 @@ function hh_posts_tuan_11_12( $posts ) {
 </tbody>
 </table>
 
+<h2>Vay ngân hàng khi mua căn hộ chuyển nhượng</h2>
+<!--hh-img:img/peninsula/peninsula-da-nang-tien-do-10-2026-hoan-thien-can-ho.jpg|Căn hộ đang hoàn thiện ở dự án chưa bàn giao xong – trường hợp mua căn hộ chuyển nhượng dạng hợp đồng mua bán-->
+<p>Với căn đã có sổ, ngân hàng thường nhận thế chấp chính căn hộ đó, thủ tục tương tự mua nhà có sổ thông thường. Với căn chuyển nhượng HĐMB, khoản vay phụ thuộc việc ngân hàng có liên kết với dự án hay không và cần chủ đầu tư xác nhận; nếu căn đang thế chấp cho khoản vay của người bán, phải tất toán hoặc được ngân hàng đồng ý chuyển nhượng trước khi công chứng.</p>
+<p>Vì vậy, nếu định vay để mua căn hộ chuyển nhượng, anh chị nên hỏi ngân hàng trước khi đặt cọc và ghi điều khoản xử lý cọc nếu hồ sơ vay không được duyệt. Lãi suất và cách tính khoản trả hằng tháng xem bài <a href="/vay-mua-can-ho-da-nang-2026-lai-suat/">vay mua căn hộ Đà Nẵng 2026</a>.</p>
+
 <h2>Người nước ngoài mua căn hộ chuyển nhượng</h2>
 <p>Theo Luật Nhà ở 2023, cá nhân nước ngoài được mua căn hộ trong dự án thương mại không thuộc khu vực hạn chế, thời hạn sở hữu tối đa 50 năm (có thể gia hạn) và trong giới hạn số căn được phép bán cho người nước ngoài mỗi tòa. Trước khi đặt cọc, cần hỏi chủ đầu tư căn đó còn nằm trong quota cho người nước ngoài hay không.</p>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Với căn chuyển nhượng HĐMB, rủi ro lớn nhất thường nằm ở khoản tiền còn nợ chủ đầu tư và tình trạng thế chấp, nên anh chị cần văn bản xác nhận của chủ đầu tư trước khi đặt cọc, không chỉ dựa vào lời người bán. Với căn đã có sổ, hãy dành thời gian kiểm tra hiện trạng và công nợ phí quản lý. Giá chuyển nhượng các dự án tham khảo tại bài <a href="/gia-chuyen-nhuong-can-ho-da-nang-2026-theo-du-an/">giá chuyển nhượng căn hộ Đà Nẵng 2026</a>; kinh nghiệm chung xem thêm bài <a href="/kinh-nghiem-mua-can-ho-da-nang/">kinh nghiệm mua căn hộ Đà Nẵng</a>.</p>
-<p>Xem căn đang giao dịch tại <a href="/mua-ban/can-ho-chung-cu/">mua bán căn hộ chung cư Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được kiểm tra pháp lý căn cụ thể và nhận danh sách căn chuyển nhượng đang bán thật.</p>
+<p>Khi mua căn hộ chuyển nhượng dạng HĐMB, rủi ro lớn nhất thường nằm ở khoản tiền còn nợ chủ đầu tư và tình trạng thế chấp, nên anh chị cần văn bản xác nhận của chủ đầu tư trước khi đặt cọc, không chỉ dựa vào lời người bán. Với căn đã có sổ, hãy dành thời gian kiểm tra hiện trạng và công nợ phí quản lý. Giá chuyển nhượng các dự án tham khảo tại bài <a href="/gia-chuyen-nhuong-can-ho-da-nang-2026-theo-du-an/">giá chuyển nhượng căn hộ Đà Nẵng 2026</a>; kinh nghiệm chung xem thêm bài <a href="/kinh-nghiem-mua-can-ho-da-nang/">kinh nghiệm mua căn hộ Đà Nẵng</a>.</p>
+<p>Xem căn đang giao dịch tại <a href="/mua-ban/can-ho-chung-cu/">mua bán căn hộ chung cư Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được kiểm tra pháp lý căn cụ thể trước khi mua căn hộ chuyển nhượng và nhận danh sách căn đang bán thật.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Mua căn hộ chuyển nhượng Đà Nẵng: quy trình, giấy tờ',
 			'desc'      => 'Mua căn hộ chuyển nhượng Đà Nẵng: căn có sổ và căn chuyển nhượng HĐMB, quy trình 6 bước, giấy tờ, checklist kiểm tra căn. Gọi Hoàng Hiệp để được hỗ trợ.',
 			'points'    => array(
-				'Hai dạng: căn đã có sổ hồng và căn chuyển nhượng hợp đồng mua bán',
+				'Mua căn hộ chuyển nhượng có hai dạng: căn đã có sổ hồng và căn chuyển nhượng hợp đồng mua bán',
 				'Chuyển nhượng HĐMB phải công chứng và được chủ đầu tư xác nhận',
 				'Kiểm tra diện tích thông thủy, thế chấp, công nợ, hợp đồng thuê đang chạy',
 			),
 			'faq'       => array(
-				array( 'Căn hộ chưa có sổ có mua chuyển nhượng được không?', 'Được, nếu chưa nộp hồ sơ đề nghị cấp giấy chứng nhận, hợp đồng không tranh chấp, căn không bị kê biên hoặc thế chấp (trừ khi bên nhận thế chấp đồng ý). Văn bản chuyển nhượng phải công chứng và được chủ đầu tư xác nhận.' ),
+				array( 'Căn hộ chưa có sổ có mua chuyển nhượng được không?', 'Vẫn có thể mua căn hộ chuyển nhượng dạng hợp đồng nếu chưa nộp hồ sơ đề nghị cấp giấy chứng nhận, hợp đồng không tranh chấp, căn không bị kê biên hoặc thế chấp (trừ khi bên nhận thế chấp đồng ý). Văn bản chuyển nhượng phải công chứng và được chủ đầu tư xác nhận.' ),
 				array( 'Mua căn hộ chuyển nhượng cần giấy tờ gì?', 'Bên bán cần sổ hồng hoặc HĐMB bản chính, phiếu thu, căn cước, giấy tờ hôn nhân; bên mua cần căn cước và giấy tờ hôn nhân. Căn chưa có sổ cần thêm xác nhận của chủ đầu tư.' ),
+				array( 'Mua căn hộ chuyển nhượng có vay ngân hàng được không?', 'Được. Căn đã có sổ thường thế chấp chính căn hộ; căn chuyển nhượng HĐMB cần ngân hàng liên kết dự án và xác nhận của chủ đầu tư. Nên hỏi ngân hàng trước khi đặt cọc mua căn hộ chuyển nhượng.' ),
 				array( 'Có nên đặt cọc trước khi kiểm tra pháp lý?', 'Không nên. Hãy đối chiếu bản gốc giấy tờ, tình trạng thế chấp và số tiền còn nợ chủ đầu tư trước khi đặt cọc.' ),
 				array( 'Người nước ngoài có mua căn hộ chuyển nhượng được không?', 'Được trong dự án thương mại không thuộc khu vực hạn chế, thời hạn sở hữu tối đa 50 năm và trong giới hạn số căn cho người nước ngoài của từng tòa.' ),
 			),
@@ -118,7 +124,7 @@ HTML
 </table>
 
 <h2>Thuế thu nhập cá nhân 2% – thay đổi gì từ 1/7/2026?</h2>
-<p>Luật Thuế thu nhập cá nhân 2025 có hiệu lực từ 1/7/2026. Với cá nhân cư trú, thuế từ chuyển nhượng bất động sản vẫn tính bằng <strong>giá chuyển nhượng × 2%</strong> cho từng lần giao dịch, không đổi so với trước. Luật bổ sung quy định thời điểm xác định thu nhập tính thuế là thời điểm hợp đồng chuyển nhượng có hiệu lực hoặc thời điểm đăng ký quyền sở hữu, quyền sử dụng.</p>
+<p>Luật Thuế thu nhập cá nhân 2025 có hiệu lực từ 1/7/2026. Với cá nhân cư trú, thuế từ chuyển nhượng bất động sản vẫn tính bằng <strong>giá chuyển nhượng × 2%</strong> cho từng lần giao dịch, không đổi so với trước (tóm tắt trên <a href="https://thuvienphapluat.vn/phap-luat-doanh-nghiep/bai-viet/thue-tncn-tu-chuyen-nhuong-bat-dong-san-tu-01-7-2026-21973.html">Thư viện Pháp luật</a>). Luật bổ sung quy định thời điểm xác định thu nhập tính thuế là thời điểm hợp đồng chuyển nhượng có hiệu lực hoặc thời điểm đăng ký quyền sở hữu, quyền sử dụng.</p>
 <h3>Trường hợp được miễn thuế TNCN</h3>
 <ul>
 <li>Chuyển nhượng giữa những người có quan hệ hôn nhân, huyết thống, nuôi dưỡng theo luật định.</li>
@@ -126,10 +132,10 @@ HTML
 </ul>
 <p>Lưu ý: khai đúng giá giao dịch thực tế trên hợp đồng. Khai thấp giá để giảm thuế có thể gây rủi ro cho cả hai bên khi phát sinh tranh chấp hoặc khi bên mua bán lại sau này.</p>
 
-<h2>Lệ phí trước bạ 0,5%</h2>
+<h2>Lệ phí trước bạ 0,5% trong thuế phí mua bán nhà đất</h2>
 <p>Lệ phí trước bạ nhà đất năm 2026 là 0,5% giá tính lệ phí trước bạ. Với giao dịch chuyển nhượng, giá tính thường là giá ghi trên hợp đồng nếu cao hơn giá do UBND thành phố ban hành. Bên mua nộp khoản này khi đăng ký sang tên. Một số trường hợp được miễn lệ phí trước bạ, ví dụ chuyển giao giữa vợ chồng, cha mẹ và con theo quy định.</p>
 
-<h2>Phí công chứng hợp đồng mua bán</h2>
+<h2>Phí công chứng – khoản nhỏ nhất trong thuế phí mua bán nhà đất</h2>
 <table>
 <thead><tr><th>Giá trị tài sản / hợp đồng</th><th>Mức phí</th></tr></thead>
 <tbody>
@@ -145,7 +151,7 @@ HTML
 </table>
 <p>Ngoài phí công chứng, tổ chức công chứng có thể thu thêm thù lao soạn thảo, sao y, công chứng ngoài trụ sở – nên hỏi trước.</p>
 
-<h2>Ví dụ: căn hộ chuyển nhượng giá 4 tỷ</h2>
+<h2>Ví dụ tính thuế phí mua bán nhà đất cho căn hộ 4 tỷ</h2>
 <table>
 <thead><tr><th>Khoản</th><th>Cách tính</th><th>Số tiền</th></tr></thead>
 <tbody>
@@ -155,27 +161,32 @@ HTML
 <tr><td><strong>Tổng ba khoản chính</strong></td><td></td><td><strong>Khoảng 102,7 triệu</strong></td></tr>
 </tbody>
 </table>
-<p>Chưa gồm phí thẩm định hồ sơ, lệ phí cấp giấy chứng nhận và thù lao công chứng.</p>
+<p>Tổng thuế phí mua bán nhà đất ở ví dụ trên chưa gồm phí thẩm định hồ sơ, lệ phí cấp giấy chứng nhận và thù lao công chứng.</p>
 
-<h2>Ai trả khoản nào?</h2>
-<p>Theo luật, bên bán là người có thu nhập nên nộp thuế TNCN; bên mua là người đăng ký sở hữu nên nộp lệ phí trước bạ. Tuy nhiên, các bên được thỏa thuận khác, ví dụ "giá bán đã bao gồm thuế phí" hoặc "bên mua chịu toàn bộ". Thỏa thuận này phải ghi rõ trong hợp đồng đặt cọc và hợp đồng mua bán để tránh tranh cãi khi đến bước kê khai.</p>
-<p>Với căn hộ chuyển nhượng hợp đồng mua bán (chưa có sổ), bên bán cũng phát sinh nghĩa vụ thuế TNCN trên giá chuyển nhượng; lệ phí trước bạ được nộp khi người mua làm thủ tục cấp sổ. Quy trình chi tiết xem bài <a href="/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/">mua căn hộ chuyển nhượng Đà Nẵng</a>.</p>
+<h2>Thuế phí mua bán nhà đất với đất ở, nhà phố</h2>
+<!--hh-img:img/hoa-xuan/hoa-xuan-flycam-8-2025-day-pho-ven-song-nhin-ve-cau-rong.jpg|Dãy nhà phố ven sông ở Đà Nẵng – thuế phí mua bán nhà đất áp dụng cho cả nhà phố, đất ở và căn hộ-->
+<p>Mức thuế TNCN 2% và lệ phí trước bạ 0,5% áp dụng chung cho căn hộ, nhà phố và đất ở. Điểm khác là với đất ở, nhà phố, cơ quan thuế còn đối chiếu giá trên hợp đồng với bảng giá đất của thành phố. Từ 10/6/2026, Đà Nẵng áp dụng bảng giá đất theo <a href="https://danang.gov.vn/vi/web/dng/w/quy-dinh-ve-gia-dat-va-bang-gia-cac-loai-dat-tren-dia-ban-thanh-pho">Nghị quyết 28/2026/NQ-HĐND</a> (Cổng thông tin TP Đà Nẵng), nên khi ước tính thuế phí mua bán nhà đất cho một lô đất cụ thể, anh chị cần tra đúng tuyến đường, vị trí thửa. Điểm mới của bảng giá xem bài <a href="/bang-gia-dat-da-nang-sua-doi-2026/">bảng giá đất Đà Nẵng sửa đổi 2026</a>.</p>
+
+<h2>Thuế phí mua bán nhà đất: ai trả khoản nào?</h2>
+<p>Theo luật, bên bán là người có thu nhập nên nộp thuế TNCN; bên mua là người đăng ký sở hữu nên nộp lệ phí trước bạ. Tuy nhiên, các bên được thỏa thuận khác, ví dụ "giá bán đã bao gồm thuế phí" hoặc "bên mua chịu toàn bộ". Thỏa thuận về thuế phí mua bán nhà đất phải ghi rõ trong hợp đồng đặt cọc và hợp đồng mua bán để tránh tranh cãi khi đến bước kê khai.</p>
+<p>Với căn hộ chuyển nhượng hợp đồng mua bán (chưa có sổ), thuế phí mua bán nhà đất vẫn phát sinh: bên bán có nghĩa vụ thuế TNCN trên giá chuyển nhượng; lệ phí trước bạ được nộp khi người mua làm thủ tục cấp sổ. Quy trình chi tiết xem bài <a href="/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/">mua căn hộ chuyển nhượng Đà Nẵng</a>.</p>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Khi so giá giữa các căn, anh chị nên quy về cùng một điều kiện: giá đã gồm hay chưa gồm thuế phí, đã gồm nội thất hay chưa. Hai căn chênh nhau vài chục triệu trên tin rao có thể bằng nhau khi tính đủ chi phí. Nếu dùng vốn vay, đừng quên khoản phí liên quan đến thế chấp, tham khảo bài <a href="/vay-mua-can-ho-da-nang-2026-lai-suat/">vay mua căn hộ Đà Nẵng 2026</a>.</p>
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được ước tính tổng chi phí giao dịch cho căn cụ thể trước khi đặt cọc.</p>
+<p>Khi so giá giữa các căn, anh chị nên quy về cùng một điều kiện: giá đã gồm hay chưa gồm thuế phí mua bán nhà đất, đã gồm nội thất hay chưa. Hai căn chênh nhau vài chục triệu trên tin rao có thể bằng nhau khi tính đủ chi phí. Nếu dùng vốn vay, đừng quên khoản phí liên quan đến thế chấp, tham khảo bài <a href="/vay-mua-can-ho-da-nang-2026-lai-suat/">vay mua căn hộ Đà Nẵng 2026</a>.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được ước tính thuế phí mua bán nhà đất và tổng chi phí giao dịch cho căn cụ thể trước khi đặt cọc.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Thuế phí mua bán nhà đất Đà Nẵng 2026: ai trả?',
 			'desc'      => 'Thuế phí mua bán nhà đất 2026: thuế TNCN 2%, lệ phí trước bạ 0,5%, phí công chứng theo biểu, ai trả, ví dụ căn hộ 4 tỷ. Gọi Hoàng Hiệp để được ước tính.',
 			'points'    => array(
-				'Thuế TNCN 2% giá chuyển nhượng, giữ nguyên theo Luật Thuế TNCN 2025 (từ 1/7/2026)',
+				'Thuế phí mua bán nhà đất 2026: thuế TNCN 2% giá chuyển nhượng, giữ nguyên theo Luật Thuế TNCN 2025 (từ 1/7/2026)',
 				'Lệ phí trước bạ 0,5%; phí công chứng theo biểu lũy tiến, tối đa 70 triệu',
 				'Miễn thuế nhà ở duy nhất: sở hữu tối thiểu 183 ngày (Nghị định 253/2026)',
 				'Căn 4 tỷ: ba khoản chính khoảng 102,7 triệu',
 			),
 			'faq'       => array(
+				array( 'Thuế phí mua bán nhà đất 2026 gồm những khoản nào?', 'Thuế phí mua bán nhà đất 2026 gồm thuế TNCN 2% giá chuyển nhượng (bên bán), lệ phí trước bạ 0,5% (bên mua), phí công chứng theo biểu lũy tiến tối đa 70 triệu, cùng phí thẩm định hồ sơ và lệ phí cấp giấy chứng nhận.' ),
 				array( 'Thuế TNCN khi bán nhà năm 2026 là bao nhiêu?', 'Với cá nhân cư trú, thuế bằng 2% giá chuyển nhượng từng lần, giữ nguyên theo Luật Thuế TNCN 2025 có hiệu lực từ 1/7/2026.' ),
 				array( 'Lệ phí trước bạ nhà đất là bao nhiêu?', 'Mức thu là 0,5% giá tính lệ phí trước bạ, do bên mua nộp khi đăng ký sang tên (trừ khi các bên thỏa thuận khác).' ),
 				array( 'Bán nhà duy nhất có phải nộp thuế không?', 'Được miễn thuế TNCN nếu là nhà ở, đất ở duy nhất và sở hữu tối thiểu 183 ngày tính đến thời điểm chuyển nhượng; không áp dụng với nhà ở hình thành trong tương lai.' ),
@@ -189,6 +200,7 @@ HTML
 			'https://thuvienphapluat.vn/ma-so-thue/phap-luat-thue/muc-thu-le-phi-truoc-ba-khi-chuyen-nhuong-nha-dat-nam-2026-la-bao-nhieu-260838-218256.html',
 			'https://thuvienphapluat.vn/phap-luat-nha-dat/cap-nhat-muc-phi-cong-chung-hop-dong-mua-nha-ban-dat-moi-nhat-nam-2026-6028.html',
 			'https://congchungnguyenhue.com/van-ban-phap-luat/thong-tu-257-2016-tt-btc-ve-muc-thu-phi-cong-chung-190-125954.html',
+			'https://danang.gov.vn/vi/web/dng/w/quy-dinh-ve-gia-dat-va-bang-gia-cac-loai-dat-tren-dia-ban-thanh-pho',
 		),
 	);
 
@@ -203,7 +215,7 @@ HTML
 		'content'  => <<<'HTML'
 <p><strong>Cho thuê căn hộ Đà Nẵng</strong> là nguồn thu đều cho nhiều chủ nhà nhờ lượng khách du lịch, chuyên gia và người nước ngoài sinh sống tại thành phố. Năm 2026 có ba điểm chủ nhà cần nắm: hợp đồng thuê lập thành văn bản, ngưỡng doanh thu không chịu thuế đã nâng lên 1 tỷ đồng/năm, và quy định mới về khai báo tạm trú cho người nước ngoài từ 24/7/2026. Bài viết cập nhật tháng 10/2026.</p>
 
-<h2>Hợp đồng cho thuê căn hộ</h2>
+<h2>Hợp đồng cho thuê căn hộ Đà Nẵng</h2>
 <p>Theo Luật Nhà ở 2023, hợp đồng thuê nhà ở phải lập thành văn bản nhưng <strong>không bắt buộc công chứng, chứng thực</strong>, trừ khi các bên có nhu cầu. Thời điểm có hiệu lực do các bên thỏa thuận; nếu không thỏa thuận thì là thời điểm ký.</p>
 <h3>Nội dung nên có trong hợp đồng</h3>
 <table>
@@ -219,7 +231,7 @@ HTML
 </tbody>
 </table>
 
-<h2>Thuế cho thuê nhà năm 2026</h2>
+<h2>Thuế khi cho thuê căn hộ Đà Nẵng năm 2026</h2>
 <p>Theo Nghị định 141/2026/NĐ-CP, cá nhân cho thuê bất động sản có tổng doanh thu <strong>từ 1 tỷ đồng/năm trở xuống</strong> không phải chịu thuế giá trị gia tăng và không phải nộp thuế thu nhập cá nhân cho hoạt động này; ngưỡng được nâng từ 500 triệu lên 1 tỷ, áp dụng từ 1/1/2026.</p>
 <table>
 <thead><tr><th>Doanh thu cho thuê/năm</th><th>Thuế GTGT</th><th>Thuế TNCN</th></tr></thead>
@@ -228,35 +240,47 @@ HTML
 <tr><td>Trên 1 tỷ</td><td>5% × tổng doanh thu</td><td>5% × (doanh thu – 1 tỷ)</td></tr>
 </tbody>
 </table>
-<p>Dù không phải nộp thuế, chủ nhà vẫn có nghĩa vụ tự khai báo doanh thu cho thuê trong năm và thông báo tài khoản ngân hàng, ví điện tử dùng để nhận tiền thuê. Ví dụ một căn 2 phòng ngủ cho thuê 25 triệu/tháng có doanh thu 300 triệu/năm, thấp hơn ngưỡng 1 tỷ. Chủ sở hữu nhiều căn thì cộng doanh thu tất cả các căn. Cách khai cụ thể anh chị nên hỏi chi cục thuế nơi có căn hộ.</p>
+<p>Dù không phải nộp thuế, chủ nhà vẫn có nghĩa vụ tự khai báo doanh thu cho thuê trong năm và thông báo tài khoản ngân hàng, ví điện tử dùng để nhận tiền thuê. Ví dụ cho thuê căn hộ Đà Nẵng loại 2 phòng ngủ giá 25 triệu/tháng thì doanh thu 300 triệu/năm, thấp hơn ngưỡng 1 tỷ. Chủ sở hữu nhiều căn thì cộng doanh thu tất cả các căn. Cách khai cụ thể anh chị nên hỏi chi cục thuế nơi có căn hộ.</p>
 
 <h2>Khai báo tạm trú cho khách</h2>
 <h3>Khách là người nước ngoài</h3>
-<p>Thông tư 87/2026/TT-BCA ban hành ngày 9/6/2026, có hiệu lực từ 24/7/2026, thay thế Thông tư 53/2016/TT-BCA. Theo đó, cơ sở lưu trú (bao gồm nhà ở cho người nước ngoài thuê) phải khai báo tạm trú <strong>ngay khi người nước ngoài đến lưu trú</strong>, không chờ đến cuối ngày. Hình thức: khai báo qua Hệ thống khai báo tạm trú điện tử của Bộ Công an bằng tài khoản được cấp, hoặc bằng Phiếu khai báo tạm trú.</p>
-<p>Chủ nhà nên đăng ký tài khoản khai báo trước khi đón khách, giữ bản chụp hộ chiếu và thị thực của khách, và ghi trách nhiệm cung cấp giấy tờ vào hợp đồng thuê.</p>
+<p>Thông tư 87/2026/TT-BCA ban hành ngày 9/6/2026, có hiệu lực từ 24/7/2026, thay thế Thông tư 53/2016/TT-BCA. Theo đó, cơ sở lưu trú (bao gồm nhà ở cho người nước ngoài thuê) phải khai báo tạm trú <strong>ngay khi người nước ngoài đến lưu trú</strong>, không chờ đến cuối ngày. Hình thức: khai báo qua Hệ thống khai báo tạm trú điện tử của Bộ Công an bằng tài khoản được cấp, hoặc bằng Phiếu khai báo tạm trú (tóm tắt trên <a href="https://luatvietnam.vn/tin-van-ban-moi/tu-24-7-2026-co-so-luu-tru-phai-khai-bao-tam-tru-ngay-khi-nguoi-nuoc-ngoai-den-luu-tru-883-110512-article.html">LuatVietnam</a>).</p>
+<p>Chủ nhà cho thuê căn hộ Đà Nẵng nên đăng ký tài khoản khai báo trước khi đón khách, giữ bản chụp hộ chiếu và thị thực của khách, và ghi trách nhiệm cung cấp giấy tờ vào hợp đồng thuê.</p>
 <h3>Khách là người Việt Nam</h3>
 <p>Người thuê ở dài ngày thực hiện đăng ký tạm trú theo Luật Cư trú; chủ nhà hỗ trợ bằng cách cung cấp hợp đồng thuê và đồng ý cho đăng ký tại căn hộ.</p>
 
-<h2>Cho thuê ngắn ngày hay dài hạn?</h2>
-<p>Thuê ngắn ngày theo đêm có thể cho doanh thu cao hơn vào mùa du lịch nhưng tốn công vận hành và phụ thuộc nội quy từng tòa nhà – một số tòa hạn chế lưu trú ngắn ngày. Thuê dài hạn ổn định hơn, ít hao mòn nội thất. Giá thuê theo dự án gần biển xem bài <a href="/thue-can-ho-bien-my-khe-gia-theo-du-an/">thuê căn hộ biển Mỹ Khê</a>, mặt bằng chung toàn thành phố xem bài <a href="/gia-thue-can-ho-da-nang-moi-thang/">giá thuê căn hộ Đà Nẵng</a>.</p>
+<h2>Cho thuê căn hộ Đà Nẵng ngắn ngày hay dài hạn?</h2>
+<p>Thuê ngắn ngày theo đêm có thể cho doanh thu cao hơn vào mùa du lịch nhưng tốn công vận hành và phụ thuộc nội quy từng tòa nhà – một số tòa hạn chế lưu trú ngắn ngày. Cho thuê căn hộ ngắn ngày trong chung cư còn phải đăng ký hoạt động theo quy định (xem <a href="https://vnexpress.net/cho-thue-can-ho-ngan-ngay-trong-chung-cu-phai-dang-ky-hoat-dong-5062683.html">VnExpress</a>). Thuê dài hạn ổn định hơn, ít hao mòn nội thất. Giá thuê theo dự án gần biển xem bài <a href="/thue-can-ho-bien-my-khe-gia-theo-du-an/">thuê căn hộ biển Mỹ Khê</a>, mặt bằng chung toàn thành phố xem bài <a href="/gia-thue-can-ho-da-nang-moi-thang/">giá thuê căn hộ Đà Nẵng</a>.</p>
+
+<h2>Checklist trước khi cho thuê căn hộ Đà Nẵng</h2>
+<!--hh-img:img/peninsula/peninsula-da-nang-noi-that-2pn-phong-khach-view-son-tra.jpg|Phòng khách căn 2PN có nội thất (ảnh mẫu Peninsula Đà Nẵng) – khi cho thuê căn hộ Đà Nẵng nên lập danh mục nội thất kèm hợp đồng-->
+<p>Trước khi đăng tin cho thuê căn hộ Đà Nẵng, chủ nhà nên chuẩn bị đủ các bước dưới đây để hạn chế tranh chấp và đáp ứng quy định mới:</p>
+<ul>
+<li><strong>Ảnh và danh mục hiện trạng:</strong> chụp từng phòng, ghi tình trạng thiết bị, đính kèm hợp đồng.</li>
+<li><strong>Nội quy tòa nhà:</strong> hỏi ban quản lý về lưu trú ngắn ngày, thú cưng, thẻ cư dân cho người thuê.</li>
+<li><strong>Tài khoản khai báo tạm trú:</strong> đăng ký trước nếu dự kiến đón khách nước ngoài.</li>
+<li><strong>Theo dõi doanh thu:</strong> cộng doanh thu tất cả các căn trong năm để biết đã vượt ngưỡng 1 tỷ đồng hay chưa.</li>
+<li><strong>Định giá thuê:</strong> so với căn cùng dự án, cùng loại, cùng mức nội thất.</li>
+</ul>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Phần lớn chủ nhà có một vài căn sẽ nằm dưới ngưỡng 1 tỷ đồng/năm, nhưng vẫn nên khai báo đầy đủ để hồ sơ minh bạch khi cần vay vốn hoặc bán lại. Với khách nước ngoài, việc khai báo tạm trú ngay khi khách đến cần trở thành thói quen. Nếu không có thời gian tự vận hành, anh chị có thể tham khảo dịch vụ <a href="/ky-gui-can-ho-da-nang-ban-cho-thue/">ký gửi căn hộ cho thuê</a>.</p>
-<p>Xem thêm căn đang cho thuê tại <a href="/cho-thue/">cho thuê bất động sản Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được tư vấn giá thuê phù hợp và tìm khách thuê cho căn hộ của anh chị.</p>
+<p>Phần lớn chủ nhà cho thuê căn hộ Đà Nẵng với một vài căn sẽ nằm dưới ngưỡng 1 tỷ đồng/năm, nhưng vẫn nên khai báo đầy đủ để hồ sơ minh bạch khi cần vay vốn hoặc bán lại. Với khách nước ngoài, việc khai báo tạm trú ngay khi khách đến cần trở thành thói quen. Nếu không có thời gian tự vận hành, anh chị có thể tham khảo dịch vụ <a href="/ky-gui-can-ho-da-nang-ban-cho-thue/">ký gửi căn hộ cho thuê</a>.</p>
+<p>Xem thêm căn đang cho thuê tại <a href="/cho-thue/">cho thuê bất động sản Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được tư vấn giá cho thuê căn hộ Đà Nẵng phù hợp và tìm khách thuê cho căn hộ của anh chị.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Cho thuê căn hộ Đà Nẵng: hợp đồng, thuế, tạm trú',
 			'desc'      => 'Cho thuê căn hộ Đà Nẵng 2026: hợp đồng thuê, ngưỡng doanh thu 1 tỷ/năm không chịu thuế, khai báo tạm trú khách nước ngoài theo Thông tư 87/2026.',
 			'points'    => array(
-				'Hợp đồng thuê nhà lập văn bản, không bắt buộc công chứng (Luật Nhà ở 2023)',
+				'Cho thuê căn hộ Đà Nẵng: hợp đồng thuê lập văn bản, không bắt buộc công chứng (Luật Nhà ở 2023)',
 				'Doanh thu cho thuê từ 1 tỷ/năm trở xuống không chịu GTGT, TNCN (Nghị định 141/2026)',
 				'Từ 24/7/2026 khai báo tạm trú người nước ngoài ngay khi khách đến (Thông tư 87/2026)',
 			),
 			'faq'       => array(
-				array( 'Hợp đồng cho thuê căn hộ có phải công chứng không?', 'Không bắt buộc. Theo Luật Nhà ở 2023, hợp đồng thuê nhà ở phải lập thành văn bản nhưng chỉ công chứng, chứng thực khi các bên có nhu cầu.' ),
-				array( 'Cho thuê căn hộ phải nộp thuế bao nhiêu?', 'Theo Nghị định 141/2026, doanh thu cho thuê từ 1 tỷ đồng/năm trở xuống không phải nộp thuế GTGT và TNCN; vượt ngưỡng thì GTGT 5% tổng doanh thu và TNCN 5% phần vượt 1 tỷ.' ),
+				array( 'Hợp đồng cho thuê căn hộ Đà Nẵng có phải công chứng không?', 'Không bắt buộc. Theo Luật Nhà ở 2023, hợp đồng thuê nhà ở phải lập thành văn bản nhưng chỉ công chứng, chứng thực khi các bên có nhu cầu.' ),
+				array( 'Cho thuê căn hộ Đà Nẵng phải nộp thuế bao nhiêu?', 'Theo Nghị định 141/2026, doanh thu cho thuê từ 1 tỷ đồng/năm trở xuống không phải nộp thuế GTGT và TNCN; vượt ngưỡng thì GTGT 5% tổng doanh thu và TNCN 5% phần vượt 1 tỷ.' ),
 				array( 'Khai báo tạm trú cho khách nước ngoài trong bao lâu?', 'Từ 24/7/2026, theo Thông tư 87/2026/TT-BCA, phải khai báo ngay khi người nước ngoài đến lưu trú, qua hệ thống điện tử hoặc phiếu khai báo.' ),
+				array( 'Cho thuê căn hộ Đà Nẵng cho người nước ngoài cần làm gì?', 'Khi cho thuê căn hộ Đà Nẵng cho người nước ngoài, từ 24/7/2026 chủ nhà phải khai báo tạm trú ngay khi khách đến, qua hệ thống điện tử của Bộ Công an hoặc phiếu khai báo; nên giữ bản chụp hộ chiếu, thị thực của khách.' ),
 				array( 'Doanh thu dưới ngưỡng có cần khai báo không?', 'Có. Chủ nhà vẫn phải tự khai báo doanh thu cho thuê và thông báo tài khoản nhận tiền dù không phải nộp thuế.' ),
 			),
 		),
@@ -267,6 +291,7 @@ HTML
 			'https://cafef.vn/chuyen-gia-cho-thue-bat-dong-san-doanh-thu-duoi-1-ty-dong-duoc-mien-ca-thue-gtgt-va-thue-tncn-188260505143140765.chn',
 			'https://congan.angiang.gov.vn/thong-tu-so-872026tt-bca-ngay-0962026-cua-bo-cong-an-quy-dinh-cach-thuc-thuc-hien-khai-bao-tiep-nhan-thong-tin-tam-tru-cua-nguoi-nuoc-ngoai-tai-viet-nam',
 			'https://luatvietnam.vn/tin-van-ban-moi/tu-24-7-2026-co-so-luu-tru-phai-khai-bao-tam-tru-ngay-khi-nguoi-nuoc-ngoai-den-luu-tru-883-110512-article.html',
+			'https://vnexpress.net/cho-thue-can-ho-ngan-ngay-trong-chung-cu-phai-dang-ky-hoat-dong-5062683.html',
 		),
 	);
 
@@ -281,7 +306,7 @@ HTML
 		'content'  => <<<'HTML'
 <p>Nhu cầu <strong>thuê căn hộ biển Mỹ Khê</strong> đến từ khách du lịch dài ngày, người nước ngoài sinh sống và làm việc từ xa, gia đình chuyên gia. Mặt bằng giá thuê dài hạn năm 2026 tham khảo từ khoảng 15 triệu/tháng cho căn 2 phòng ngủ cách biển khoảng 1 km, đến 25 – 45 triệu/tháng cho căn mặt biển có nội thất. Số liệu tổng hợp từ tin cho thuê công khai, cập nhật tháng 10/2026.</p>
 
-<h2>Bảng giá thuê căn hộ gần biển Mỹ Khê theo dự án</h2>
+<h2>Bảng giá thuê căn hộ biển Mỹ Khê theo dự án</h2>
 <table>
 <thead><tr><th>Dự án</th><th>Khoảng cách đến biển</th><th>Giá thuê tham khảo (10/2026)</th></tr></thead>
 <tbody>
@@ -293,9 +318,9 @@ HTML
 <tr><td><a href="/du-an/sun-cosmo-residence/">Sun Cosmo Residence</a></td><td>Khoảng 2 km</td><td>Studio từ 16; 1PN 23 – 24; 2PN 30 – 35 triệu/tháng</td></tr>
 </tbody>
 </table>
-<p>Đây là khoảng giá tổng hợp từ tin rao, không phải giá chốt hợp đồng. Giá thực tế chênh theo tầng, hướng view, nội thất và thời hạn thuê; thuê ngắn ngày theo đêm có mặt bằng khác.</p>
+<p>Đây là khoảng giá thuê căn hộ biển Mỹ Khê tổng hợp từ tin rao, không phải giá chốt hợp đồng. Giá thực tế chênh theo tầng, hướng view, nội thất và thời hạn thuê; thuê ngắn ngày theo đêm có mặt bằng khác.</p>
 
-<h2>Nhóm mặt biển: Times Square, Wyndham Soleil</h2>
+<h2>Thuê căn hộ biển Mỹ Khê nhóm mặt biển: Times Square, Wyndham Soleil</h2>
 <p>Times Square nằm trên trục Võ Nguyên Giáp, nhiều căn nhìn trực diện biển, khối đế đã có các thương hiệu F&amp;B hoạt động. Căn view trực diện biển được rao thuê khoảng 25 triệu/tháng, mặt bằng dài hạn khoảng 25 – 40 triệu/tháng.</p>
 <p>Wyndham Soleil là căn hộ khách sạn, studio rao thuê khoảng 20 triệu/tháng, căn lớn view biển khoảng 25 – 45 triệu/tháng. Người thuê dài hạn nên hỏi rõ phí dịch vụ đi kèm vì mô hình căn hộ khách sạn thường có thêm các khoản này.</p>
 
@@ -304,32 +329,39 @@ HTML
 <p>Dự án cùng chủ phát triển là HIYORI Aqua Tower (góc Lê Đức Thọ – Ngô Cao Lãng, khoảng 5 phút đi bộ ra biển) dự kiến bàn giao quý 2/2027, nên chưa có mặt bằng giá thuê. Xem bài <a href="/hiyori-garden-tower-hiyori-aqua-tower-da-nang/">Hiyori Garden Tower và Hiyori Aqua Tower</a>.</p>
 
 <h2>Nhóm ven sông Hàn, cách biển vài phút</h2>
+<!--hh-img:img/peninsula/peninsula-da-nang-noi-that-2pn-phong-khach-view-my-khe.jpg|Phòng khách căn 2PN nhìn về phía biển Mỹ Khê (nội thất mẫu Peninsula Đà Nẵng) – lựa chọn thuê căn hộ biển Mỹ Khê giá mềm hơn căn mặt biển-->
 <p>Nhiều người thuê chọn căn bờ Đông sông Hàn như Sun Ponte, Peninsula: vừa gần biển Mỹ Khê, vừa gần cầu Rồng và trung tâm. Sun Ponte có giá thuê cao trong nhóm nhờ vị trí sát cầu Rồng; Peninsula có mặt bằng giá mua thấp hơn nên chủ nhà thường linh hoạt giá thuê.</p>
 
-<h2>Kinh nghiệm thuê căn hộ gần biển</h2>
+<h2>Chi phí thực tế khi thuê căn hộ biển Mỹ Khê</h2>
+<p>Giá thuê trên tin rao thường chưa gồm toàn bộ chi phí. Khi thuê căn hộ biển Mỹ Khê, tổng tiền mỗi tháng gồm giá thuê, điện nước (tính theo giá điện sinh hoạt hay giá kinh doanh), internet, gửi xe và phí quản lý nếu hợp đồng ghi người thuê trả. Với căn hộ khách sạn, có thể có thêm phí dịch vụ.</p>
+<p>Chênh lệch giữa nhóm mặt biển và nhóm cách biển khoảng 1 km khá lớn: cùng loại 2PN, Hiyori Garden Tower phổ biến 18 – 21 triệu/tháng, trong khi Times Square dài hạn khoảng 25 – 40 triệu/tháng – tức chênh khoảng 48 – 264 triệu đồng mỗi năm. Nếu không cần nhìn biển trực diện, đây là khoản tiết kiệm đáng kể.</p>
+
+<h2>Kinh nghiệm thuê căn hộ biển Mỹ Khê</h2>
 <ul>
 <li><strong>Kiểm tra độ ẩm, gỉ sét:</strong> căn gần biển dễ xuống cấp thiết bị kim loại, điều hòa; nên xem kỹ trước khi ký.</li>
 <li><strong>Hỏi rõ chi phí ngoài giá thuê:</strong> phí quản lý, gửi xe, internet, điện nước tính theo giá nào.</li>
 <li><strong>Thời điểm thuê:</strong> mùa du lịch hè và dịp lễ hội pháo hoa, căn ngắn ngày tăng giá; hợp đồng dài hạn ký từ trước giúp giữ giá ổn định.</li>
 <li><strong>Giấy tờ:</strong> người nước ngoài cần cung cấp hộ chiếu, thị thực để chủ nhà khai báo tạm trú – xem bài <a href="/cho-thue-can-ho-da-nang-hop-dong-thue-tam-tru/">cho thuê căn hộ Đà Nẵng: hợp đồng, thuế, tạm trú</a>.</li>
+<li><strong>Thuê ngắn ngày trong chung cư:</strong> hỏi rõ tòa nhà có cho phép không, vì cho thuê căn hộ ngắn ngày trong chung cư phải đăng ký hoạt động theo quy định (xem <a href="https://vnexpress.net/cho-thue-can-ho-ngan-ngay-trong-chung-cu-phai-dang-ky-hoat-dong-5062683.html">VnExpress</a>).</li>
 </ul>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Với người thuê ở dài hạn, căn cách biển 1 – 2 km thường cho mức giá hợp lý hơn đáng kể mà vẫn thuận tiện đi biển hằng ngày. Với chủ nhà đang cân nhắc mua để cho thuê, hãy lấy giá thuê ở mức giữa của khoảng giá, không lấy mức cao nhất trên tin rao, khi tính lợi suất. Danh mục căn mặt biển để mua xem bài <a href="/can-ho-view-bien-da-nang-my-khe/">căn hộ view biển Đà Nẵng</a>.</p>
-<p>Xem căn đang cho thuê tại <a href="/cho-thue/">cho thuê bất động sản Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn hộ gần biển Mỹ Khê đang cho thuê thật, kèm giá và ảnh thực tế.</p>
+<p>Với người thuê căn hộ biển Mỹ Khê để ở dài hạn, căn cách biển 1 – 2 km thường cho mức giá hợp lý hơn đáng kể mà vẫn thuận tiện đi biển hằng ngày. Với chủ nhà đang cân nhắc mua để cho thuê, hãy lấy giá thuê ở mức giữa của khoảng giá, không lấy mức cao nhất trên tin rao, khi tính lợi suất. Danh mục căn mặt biển để mua xem bài <a href="/can-ho-view-bien-da-nang-my-khe/">căn hộ view biển Đà Nẵng</a>.</p>
+<p>Xem căn đang cho thuê tại <a href="/cho-thue/">cho thuê bất động sản Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để thuê căn hộ biển Mỹ Khê đúng ngân sách: nhận danh sách căn đang cho thuê thật, kèm giá và ảnh thực tế.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Thuê căn hộ biển Mỹ Khê: giá thuê theo dự án 2026',
 			'desc'      => 'Thuê căn hộ biển Mỹ Khê 2026: Times Square 25 – 40 triệu, Wyndham Soleil, Hiyori Garden 2PN 15 – 25 triệu/tháng (tham khảo). Gọi Hoàng Hiệp để xem căn.',
 			'points'    => array(
-				'Mặt biển: Times Square khoảng 25 – 40 triệu/tháng, Wyndham Soleil studio khoảng 20 triệu',
+				'Thuê căn hộ biển Mỹ Khê loại mặt biển: Times Square khoảng 25 – 40 triệu/tháng, Wyndham Soleil studio khoảng 20 triệu',
 				'Gần biển: Hiyori Garden Tower 2PN khoảng 15 – 25 triệu/tháng',
 				'Ven sông Hàn gần biển: Sun Ponte 2PN 32 – 40 triệu, Peninsula 2PN 23 – 30 triệu',
 			),
 			'faq'       => array(
-				array( 'Thuê căn hộ gần biển Mỹ Khê giá bao nhiêu?', 'Tham khảo tháng 10/2026: căn 2PN cách biển khoảng 1 km từ 15 – 25 triệu/tháng; căn mặt biển có nội thất khoảng 25 – 45 triệu/tháng.' ),
+				array( 'Thuê căn hộ biển Mỹ Khê giá bao nhiêu?', 'Tham khảo tháng 10/2026: căn 2PN cách biển khoảng 1 km từ 15 – 25 triệu/tháng; căn mặt biển có nội thất khoảng 25 – 45 triệu/tháng.' ),
 				array( 'Dự án nào gần biển Mỹ Khê có giá thuê mềm?', 'Hiyori Garden Tower cách biển khoảng 1 km, căn 2PN phổ biến 18 – 21 triệu/tháng.' ),
+				array( 'Có thể thuê căn hộ biển Mỹ Khê ngắn ngày không?', 'Có thể thuê căn hộ biển Mỹ Khê theo đêm hoặc theo tuần, nhưng phụ thuộc nội quy từng tòa nhà; giá ngắn ngày khác mặt bằng dài hạn và thường tăng vào mùa hè, dịp lễ hội pháo hoa.' ),
 				array( 'Thuê căn hộ khách sạn ven biển cần lưu ý gì?', 'Hỏi rõ phí dịch vụ, phí quản lý đi kèm và nội quy lưu trú, vì mô hình căn hộ khách sạn thường có thêm các khoản này.' ),
 			),
 		),
@@ -340,6 +372,7 @@ HTML
 			'https://www.nhatot.com/thue-can-ho-chung-cu--hiyori-garden-tower-quan-son-tra-pj1871336036',
 			'https://batdongsan.com.vn/cho-thue-can-ho-chung-cu-peninsula-da-nang',
 			'https://batdongsan.com.vn/cho-thue-can-ho-chung-cu-sun-cosmo-residence',
+			'https://vnexpress.net/cho-thue-can-ho-ngan-ngay-trong-chung-cu-phai-dang-ky-hoat-dong-5062683.html',
 		),
 	);
 

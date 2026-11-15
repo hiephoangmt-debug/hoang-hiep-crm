@@ -12,22 +12,24 @@ function hh_posts_tin_ha_tang_hang_ngay( $posts ) {
 
 	/* ---------------- 05/11 – Thời hạn khởi công 3 khu đô thị tại Chu Lai ---------------- */
 	$posts[] = array(
-		'slug'           => 'da-nang-an-dinh-thoi-han-khoi-cong-3-khu-do-thi-chu-lai',
+		'slug'           => 'khoi-cong-3-khu-do-thi-chu-lai-40400-ty',
+		'old_slug'       => array( 'da-nang-an-dinh-thoi-han-khoi-cong-3-khu-do-thi-chu-lai' ),
 		'title'          => 'Đà Nẵng ấn định thời hạn khởi công 3 khu đô thị hơn 40.400 tỷ tại Chu Lai',
 		'excerpt'        => 'Ba dự án khu đô thị tại Khu kinh tế mở Chu Lai với tổng vốn hơn 40.400 tỷ đồng được yêu cầu khởi công chậm nhất 29/3/2027 và trước 30/4/2027. Quy mô từng dự án và tác động tới đất nền phía Nam Đà Nẵng.',
 		'keyword'        => 'khu đô thị Chu Lai',
 		'keywords_extra' => array( 'Khu kinh tế mở Chu Lai', 'khu đô thị ven sông Trường Giang', 'bất động sản Núi Thành', 'hạ tầng Đà Nẵng 2026' ),
 		'project'        => 'vinh-an-hoa-city',
 		'schedule'       => '2026-11-05 08:00',
+		'rev'            => 2, // 15/11: chuẩn SEO 100/100.
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'Hạ tầng Đà Nẵng', 'Chu Lai', 'Quy hoạch' ),
 		'image'          => 'plugin:img/tin-tuc/khoi-cong-3-khu-do-thi-chu-lai-11-2026.jpg',
-		'image_alt'      => 'Thời hạn khởi công 3 khu đô thị tại Khu kinh tế mở Chu Lai, Đà Nẵng',
+		'image_alt'      => 'Thời hạn khởi công 3 khu đô thị Chu Lai tại Khu kinh tế mở Chu Lai, Đà Nẵng',
 		'image_caption'  => 'Tóm tắt 3 dự án và thời hạn khởi công (Hoàng Hiệp vẽ, sơ đồ không theo tỷ lệ).',
 		'content'        => <<<HTML
-<p>Ngày 4/11/2026, tại buổi làm việc với Ban Quản lý Khu kinh tế mở Chu Lai, Phó Chủ tịch UBND TP Đà Nẵng Phan Thái Bình yêu cầu các nhà đầu tư <strong>khởi công 3 dự án khu đô thị</strong> tại Chu Lai đúng thời hạn. Tổng vốn đầu tư của 3 dự án hơn <strong>40.400 tỷ đồng</strong> (Tuổi Trẻ, Báo Đầu tư, 4/11/2026).</p>
+<p>Ba dự án <strong>khu đô thị Chu Lai</strong> vừa được Đà Nẵng ấn định thời hạn khởi công. Ngày 4/11/2026, tại buổi làm việc với Ban Quản lý Khu kinh tế mở Chu Lai, Phó Chủ tịch UBND TP Đà Nẵng Phan Thái Bình yêu cầu các nhà đầu tư khởi công đúng hạn. Tổng vốn đầu tư của 3 dự án hơn <strong>40.400 tỷ đồng</strong> (<a href="https://tuoitre.vn/sap-khoi-cong-3-du-an-tong-von-hon-40460-ti-tai-chu-lai-100261104104348024.htm">Tuổi Trẻ</a>, <a href="https://baodautu.vn/da-nang-an-dinh-thoi-diem-khoi-cong-3-du-an-do-thi-hon-40400-ty-dong-d737415.html">Báo Đầu tư</a>, 4/11/2026).</p>
 <!--hh-featured-->
-<h2>3 dự án và thời hạn khởi công</h2>
+<h2>3 dự án khu đô thị Chu Lai và thời hạn khởi công</h2>
 <table>
 <thead><tr><th>Dự án</th><th>Quy mô – vốn (theo báo chí)</th><th>Thời hạn khởi công</th></tr></thead>
 <tbody>
@@ -36,29 +38,32 @@ function hh_posts_tin_ha_tang_hang_ngay( $posts ) {
 <tr><td>Khu đô thị hỗn hợp phía Nam trục Nguyễn Tất Thành</td><td>Phần còn lại của tổng vốn hơn 40.400 tỷ</td><td>Trước 30/4/2027</td></tr>
 </tbody>
 </table>
-<p>Với dự án Khu đô thị Chu Lai, việc ký hợp đồng dự án được báo chí nêu dự kiến vào ngày 9/11/2026. Các mốc trên là yêu cầu của thành phố; tiến độ thực tế còn phụ thuộc giải phóng mặt bằng và thủ tục của từng dự án.</p>
-<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<p>Với dự án lớn nhất – khu đô thị Chu Lai tại xã Núi Thành – việc ký hợp đồng dự án được báo chí nêu dự kiến vào ngày 9/11/2026. Các mốc trên là yêu cầu của thành phố; tiến độ thực tế còn phụ thuộc giải phóng mặt bằng và thủ tục của từng dự án.</p>
+<h2>Vì sao khu đô thị Chu Lai được chú ý?</h2>
+<p>Chu Lai là vùng có sân bay, cảng biển và các khu công nghiệp lớn ở phía Nam thành phố, nhưng phần đô thị – nhà ở, thương mại, dịch vụ – phát triển chậm hơn công nghiệp. Ba dự án khu đô thị Chu Lai lần này nếu triển khai đúng hạn sẽ bổ sung quỹ nhà ở cho người lao động, chuyên gia và gia đình đang làm việc trong khu kinh tế. Riêng khu đô thị Chu Lai tại Núi Thành có khoảng 17,4 ha nằm trong danh mục quỹ đất phát triển nhà ở xã hội của thành phố (xem <a href="/khoi-cong-8-du-an-nha-o-xa-hoi-da-nang-2026/">nhà ở xã hội Đà Nẵng</a>).</p>
+<p>Điểm cần theo dõi là các mốc sau khởi công: giải phóng mặt bằng, đầu tư hạ tầng kỹ thuật, kết nối với Quốc lộ 1 và tuyến cao tốc nội thị đang chuẩn bị. Khi những mốc này có thật, giá trị khu vực mới được định hình rõ.</p>
+<h2>Tác động / nhận định của Hoàng Hiệp về khu đô thị Chu Lai</h2>
 <ul>
 <li><strong>Chu Lai – Núi Thành có thêm nguồn cung đô thị lớn</strong>: gần 263 ha của hai dự án đã công bố quy mô, cạnh sân bay Chu Lai và các khu công nghiệp. Khi khởi công thật, hạ tầng nội khu và đường kết nối sẽ làm rõ giá trị khu vực.</li>
 <li><strong>Nguồn cung nhiều cũng là rủi ro</strong>: đất nền phía Nam sẽ cạnh tranh mạnh trong 3 – 5 năm tới. Nên ưu tiên dự án đã có hạ tầng, pháp lý rõ, thay vì mua theo tin "sắp khởi công".</li>
-<li><strong>Trục Đà Nẵng – Chu Lai</strong> đang được chú ý cùng với <a href="/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do/">cao tốc nội thị Đà Nẵng – Chu Lai</a>; khi tuyến này triển khai, thời gian từ Chu Lai về trung tâm Đà Nẵng sẽ được rút ngắn.</li>
+<li><strong>Trục Đà Nẵng – Chu Lai</strong> đang được chú ý cùng với <a href="/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen/">cao tốc nội thị Đà Nẵng – Chu Lai</a>; khi tuyến này triển khai, thời gian từ Chu Lai về trung tâm Đà Nẵng sẽ được rút ngắn.</li>
 </ul>
 <h2>Dự án chịu ảnh hưởng</h2>
 <ul>
-<li><a href="/du-an/vinh-an-hoa-city/">Vịnh An Hòa City</a> (Núi Thành, cạnh sân bay Chu Lai): hưởng lợi trực tiếp nhất khi khu vực có thêm khu đô thị và dân cư mới, nhưng cũng chịu cạnh tranh nguồn cung.</li>
+<li><a href="/du-an/vinh-an-hoa-city/">Vịnh An Hòa City</a> (Núi Thành, cạnh sân bay Chu Lai): hưởng lợi trực tiếp nhất khi khu đô thị Chu Lai và dân cư mới hình thành, nhưng cũng chịu cạnh tranh nguồn cung.</li>
 <li><a href="/du-an/nam-hoi-an-city/">Nam Hội An City</a>: thuộc hành lang ven biển phía Nam, cùng được nhắc đến khi trục Đà Nẵng – Chu Lai phát triển.</li>
 <li>Khu vực Bàn Thạch – Tam Kỳ (nơi có khu đô thị ven sông Trường Giang) cũng có thêm động lực; xem thông tin tham khảo tại trang <a href="/du-an/meta-city-tam-ky/">Meta City Tam Kỳ</a>.</li>
 </ul>
-<p>Xem thêm: <a href="/mat-cat-cao-toc-noi-thi-da-nang-chu-lai-quy-dat-tod/">mặt cắt và quỹ đất dọc cao tốc nội thị</a>, <a href="/chinh-sach-moi-anh-huong-bat-dong-san-da-nang-11-2026/">chính sách mới ảnh hưởng bất động sản Đà Nẵng 11/2026</a>.</p>
+<p>Xem thêm: <a href="/mat-cat-cao-toc-noi-thi-da-nang-quy-dat-tod/">mặt cắt và quỹ đất dọc cao tốc nội thị</a>, <a href="/chinh-sach-moi-anh-huong-bat-dong-san-da-nang-11-2026/">chính sách mới ảnh hưởng bất động sản Đà Nẵng 11/2026</a>.</p>
 {$cta}
 <p class="src">Nguồn: Tuổi Trẻ, Báo Đầu tư, Tiền Phong, Dân trí, CafeF (4/11/2026). Thông tin tham khảo.</p>
 HTML
 		,
 		'seo'            => array(
-			'seo_title' => 'Thời hạn khởi công 3 khu đô thị 40.400 tỷ tại Chu Lai',
-			'desc'      => 'Đà Nẵng yêu cầu khởi công 3 khu đô thị hơn 40.400 tỷ tại Chu Lai chậm nhất 29/3/2027 và trước 30/4/2027. Quy mô dự án và tác động tới đất nền phía Nam.',
+			'seo_title' => 'Khu đô thị Chu Lai: 3 dự án 40.400 tỷ, hạn khởi công 2027',
+			'desc'      => 'Đà Nẵng yêu cầu khởi công 3 dự án khu đô thị Chu Lai hơn 40.400 tỷ chậm nhất 29/3/2027 và trước 30/4/2027. Quy mô dự án, tác động tới đất nền phía Nam.',
 			'points'    => array(
-				'Khu đô thị Chu Lai khoảng 188,56 ha, hơn 18.854 tỷ, khởi công chậm nhất 29/3/2027.',
+				'Khu đô thị Chu Lai (Núi Thành) khoảng 188,56 ha, hơn 18.854 tỷ, khởi công chậm nhất 29/3/2027.',
 				'Khu đô thị ven sông Trường Giang 74,05 ha, hơn 3.069 tỷ, khởi công trước 30/4/2027.',
 				'Khu đô thị hỗn hợp phía Nam trục Nguyễn Tất Thành khởi công trước 30/4/2027.',
 				'Tổng vốn 3 dự án hơn 40.400 tỷ đồng.',
@@ -67,6 +72,7 @@ HTML
 				array( 'Khi nào khởi công Khu đô thị Chu Lai?', 'Thành phố yêu cầu phấn đấu khởi công tháng 12/2026, chậm nhất ngày 29/3/2027 (báo chí 4/11/2026).' ),
 				array( 'Khu đô thị ven sông Trường Giang ở đâu?', 'Tại khu vực Quảng Phú và Bàn Thạch, quy mô 74,05 ha, vốn hơn 3.069 tỷ đồng, yêu cầu khởi công trước 30/4/2027.' ),
 				array( '3 dự án khu đô thị tại Chu Lai có tổng vốn bao nhiêu?', 'Hơn 40.400 tỷ đồng theo báo chí đưa tin ngày 4/11/2026.' ),
+				array( 'Có nên mua đất gần khu đô thị Chu Lai lúc này?', 'Nên chờ các mốc thật như khởi công, giải phóng mặt bằng, hạ tầng kết nối; ưu tiên sản phẩm đã có hạ tầng và pháp lý rõ, kiểm tra quy hoạch thửa đất trước khi đặt cọc.' ),
 			),
 		),
 		'sources'        => array(
@@ -77,21 +83,23 @@ HTML
 
 	/* ---------------- 06/11 – Chính sách bán hàng các dự án Sun Group Đà Nẵng tháng 11/2026 ---------------- */
 	$posts[] = array(
-		'slug'           => 'chinh-sach-ban-hang-du-an-sun-group-da-nang-thang-11-2026',
+		'slug'           => 'chinh-sach-ban-hang-sun-group-da-nang-11-2026',
+		'old_slug'       => array( 'chinh-sach-ban-hang-du-an-sun-group-da-nang-thang-11-2026' ),
 		'title'          => 'Chính sách bán hàng các dự án Sun Group Đà Nẵng tháng 11/2026: Spana, Cora, S-Light, FourS',
 		'excerpt'        => 'Tổng hợp chính sách bán hàng tháng 11/2026 của Spana, Cora, S-Light, FourS: chiết khấu không vay 3 – 5%, thanh toán sớm 95% chiết khấu 6 – 10% (hạn 25/11), vay tối đa 70% hỗ trợ lãi suất 24 tháng, Sun Early Key trả 70% nhận nhà.',
-		'keyword'        => 'chính sách bán hàng Sun Group Đà Nẵng',
+		'keyword'        => 'chính sách bán hàng Sun Group',
 		'keywords_extra' => array( 'chính sách Spana Tower', 'chính sách Cora Tower', 'chính sách S-Light Tower', 'chính sách FourS Tower' ),
 		'project'        => 'sun-neo-city',
 		'schedule'       => '2026-11-06 15:30',
+		'rev'            => 2, // 15/11: chuẩn SEO 100/100.
 		'category'       => 'Dự án',
 		'tags'           => array( 'Sun Group', 'Chính sách bán hàng', 'Căn hộ Đà Nẵng' ),
 		'image'          => 'plugin:img/tin-tuc/chinh-sach-ban-hang-sun-da-nang-11-2026.jpg',
 		'image_alt'      => 'Bảng tóm tắt chính sách bán hàng các dự án Sun Group Đà Nẵng tháng 11/2026',
 		'content'        => <<<HTML
-<p>Hoàng Hiệp tổng hợp chính sách bán hàng đang áp dụng tháng 11/2026 của các dự án căn hộ Sun Group tại Đà Nẵng: <a href="/du-an/spana-tower/">Spana Tower</a>, <a href="/du-an/cora-tower/">Cora Tower</a>, <a href="/du-an/s-light-tower/">S-Light Tower</a> (khu Sun NeO City, Hòa Xuân) và FourS Tower (Sun Riverpolis). Mức chiết khấu thanh toán sớm thay đổi theo tháng – bảng dưới là mức có hạn đến <strong>25/11/2026</strong>.</p>
+<p><strong>Chính sách bán hàng Sun Group</strong> tháng 11/2026 tại Đà Nẵng được Hoàng Hiệp tổng hợp cho các dự án căn hộ: <a href="/du-an/spana-tower/">Spana Tower</a>, <a href="/du-an/cora-tower/">Cora Tower</a>, <a href="/du-an/s-light-tower/">S-Light Tower</a> (khu Sun NeO City, Hòa Xuân) và FourS Tower (Sun Riverpolis). Mức chiết khấu thanh toán sớm thay đổi theo tháng – bảng dưới là mức có hạn đến <strong>25/11/2026</strong>.</p>
 <!--hh-featured-->
-<h2>Bảng so sánh nhanh</h2>
+<h2>Bảng so sánh nhanh chính sách bán hàng Sun Group tháng 11/2026</h2>
 <table>
 <thead><tr><th>Dự án</th><th>Ưu đãi riêng</th><th>Không vay</th><th>TT sớm 95% / 70%</th><th>Hỗ trợ lãi suất</th><th>Giãn tiến độ</th></tr></thead>
 <tbody>
@@ -103,9 +111,9 @@ HTML
 <tr><td>FourS F2</td><td>Quà nội thất 35 – 100 triệu</td><td>3%</td><td>Liên hệ (mức tháng 11 chưa công bố)</td><td>24 tháng (đến 31/1/2029)</td><td>45 tháng</td></tr>
 </tbody>
 </table>
-<p>Chiết khấu tính trên giá chưa VAT và phí bảo trì. Gói thanh toán sớm không áp dụng cùng gói vay.</p>
-<!--hh-img:img/spana-tower/spana-tower-tien-do-11-2026-2-toa-ven-song-cau-hoa-xuan.jpg|Spana Tower thực tế tháng 11/2026 – hai tòa bên sông Cẩm Lệ, chân cầu Hòa Xuân (ảnh flycam)-->
-<h2>Điểm chung của các dự án</h2>
+<p>Trong chính sách bán hàng Sun Group, chiết khấu tính trên giá chưa VAT và phí bảo trì. Gói thanh toán sớm không áp dụng cùng gói vay.</p>
+<!--hh-img:img/spana-tower/spana-tower-tien-do-11-2026-2-toa-ven-song-cau-hoa-xuan.jpg|Spana Tower – một trong các dự án áp dụng chính sách bán hàng Sun Group tháng 11/2026, hai tòa – hai tòa bên sông Cẩm Lệ, chân cầu Hòa Xuân (ảnh flycam)-->
+<h2>Điểm chung trong chính sách bán hàng Sun Group</h2>
 <ul>
 <li><strong>Hình thức ký:</strong> ký hợp đồng thực hiện nguyện vọng trước, hợp đồng mua bán sau.</li>
 <li><strong>Vay ngân hàng</strong> tối đa 70%, chủ đầu tư hỗ trợ lãi suất và ân hạn nợ gốc cùng thời gian; trong thời gian hỗ trợ được trả nợ trước hạn miễn phí.</li>
@@ -125,46 +133,52 @@ HTML
 </tbody>
 </table>
 <!--hh-img:img/spana-tower/spana-tower-tien-do-11-2026-nhin-tu-cau-hoa-xuan.jpg|Spana Tower nhìn từ cầu Hòa Xuân, tháng 11/2026 (ảnh flycam thực tế)-->
-<h2>Nhận định của Hoàng Hiệp</h2>
+<h2>Các mốc 70% – 95% theo luật</h2>
+<p>Hai mốc lặp lại trong chính sách bán hàng Sun Group – trả 70% để nhận nhà và thanh toán sớm 95% – bám theo giới hạn của <a href="https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx">Luật Kinh doanh bất động sản 2023</a> với nhà ở hình thành trong tương lai: trước khi bàn giao, chủ đầu tư không thu quá 70% giá trị hợp đồng; trước khi người mua được cấp giấy chứng nhận, không thu quá 95%. Đó là lý do các gói thanh toán sớm trong chính sách bán hàng Sun Group dừng ở mức 95%.</p>
+<h2>Ví dụ đọc chính sách bán hàng Sun Group cho một căn 3 tỷ</h2>
+<p>Giả sử một căn có giá chưa VAT và phí bảo trì là 3 tỷ đồng (số tròn để minh họa, không phải giá căn cụ thể). Ở dự án chiết khấu không vay 5%, người mua theo tiến độ chuẩn được giảm khoảng 150 triệu. Nếu chọn thanh toán sớm 95% ở dự án có mức 10%, phần giảm thêm tính trên giá còn lại sau các ưu đãi trước – tổng tiết kiệm có thể vài trăm triệu. Đổi lại, người mua phải trả gần hết tiền sớm, nên cần so với lãi tiền gửi trong thời gian chờ nhận nhà. Phiếu tính giá của chủ đầu tư cho từng căn mới là con số chính xác.</p>
+<h2>Nhận định của Hoàng Hiệp về chính sách bán hàng Sun Group</h2>
 <p>Nếu có sẵn vốn, gói thanh toán sớm 95% tháng này cao nhất ở S-Light (10%) và FourS F1, F5 (9%) – nhưng cần so với lãi tiền gửi trong thời gian chờ nhận nhà. Nếu cần đòn bẩy, cả 4 dự án đều hỗ trợ lãi suất 24 tháng, nên chọn theo mốc nhận nhà sớm (Spana 6/2027, Cora 10/2027) để sớm cho thuê. Chính sách đổi theo từng đợt; nên lấy phiếu tính giá căn cụ thể trước khi quyết định.</p>
-<p>Nhận phiếu tính giá, so sánh dòng tiền vay và thanh toán sớm từng dự án: liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Nhận phiếu tính giá theo chính sách bán hàng Sun Group mới nhất, so sánh dòng tiền vay và thanh toán sớm từng dự án: liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: chính sách bán hàng chủ đầu tư (CSƯĐ 03 Spana 06/2026, CSƯĐ 06/06.1 Cora 08/2026, CSBH 01 S-Light 07 – 08/2026, CSBH 04 và 4.2 FourS 08 – 09/2026) và mức thanh toán sớm tháng 11/2026. Thông tin tham khảo, có thể thay đổi.</p>
 HTML
 		,
 		'seo'            => array(
 			'seo_title' => 'Chính sách bán hàng Sun Group Đà Nẵng tháng 11/2026',
-			'desc'      => 'Chính sách tháng 11/2026 Spana, Cora, S-Light, FourS: không vay chiết khấu 3 – 5%, TT sớm 95% chiết khấu 6 – 10%, hỗ trợ lãi suất 24 tháng, trả 70% nhận nhà.',
+			'desc'      => 'Chính sách bán hàng Sun Group 11/2026 (Spana, Cora, S-Light, FourS): không vay chiết khấu 3 – 5%, TT sớm 95% chiết khấu 6 – 10%, trả 70% nhận nhà.',
 			'points'    => array(
-				'Không vay ngân hàng: chiết khấu 5% (Spana, Cora, FourS F1/F5), 3% (S-Light, FourS F2).',
+				'Chính sách bán hàng Sun Group 11/2026 – không vay ngân hàng: chiết khấu 5% (Spana, Cora, FourS F1/F5), 3% (S-Light, FourS F2).',
 				'Thanh toán sớm 95% tháng 11 (hạn 25/11): Spana 6%, Cora 7,5%, FourS F1/F5 9%, S-Light 10%.',
 				'Vay tối đa 70%, hỗ trợ lãi suất 24 tháng, ân hạn gốc cùng thời gian.',
 				'Sun Early Key: thanh toán 70% là nhận nhà sử dụng.',
 			),
 			'faq'       => array(
 				array( 'Mua Spana, Cora, S-Light không vay được chiết khấu bao nhiêu?', 'Spana và Cora chiết khấu 5%, S-Light 3% trên giá chưa VAT và phí bảo trì (chính sách 11/2026).' ),
-				array( 'Thanh toán sớm 95% được chiết khấu bao nhiêu?', 'Mức tháng 11/2026 (hạn 25/11): Spana 6%, Cora 7,5%, FourS F1/F5 9%, S-Light 10%; FourS F2 liên hệ để cập nhật.' ),
+				array( 'Thanh toán sớm 95% được chiết khấu bao nhiêu?', 'Theo chính sách bán hàng Sun Group, mức tháng 11/2026 (hạn 25/11): Spana 6%, Cora 7,5%, FourS F1/F5 9%, S-Light 10%; FourS F2 liên hệ để cập nhật.' ),
+				array( 'Chính sách bán hàng Sun Group có cho nhận nhà sớm không?', 'Có. Theo chương trình Sun Early Key, khách thanh toán đủ 70% giá trị (gồm VAT) được nhận nhà sử dụng; mốc nhận nhà dự kiến khác nhau theo từng dự án.' ),
 				array( 'Dự án Sun Đà Nẵng hỗ trợ lãi suất bao lâu?', 'Spana, Cora, S-Light, FourS hỗ trợ lãi suất 24 tháng trên khoản vay tối đa 70%, ân hạn nợ gốc cùng thời gian.' ),
 			),
 		),
-		'sources'        => array(),
+		'sources'        => array( 'https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx' ),
 	);
 	/* ---------------- 06/11 – Quy hoạch chung đô thị Thăng Điền đến 2050 ---------------- */
 	$posts[] = array(
 		'slug'           => 'quy-hoach-chung-do-thi-thang-dien-den-2050',
 		'title'          => 'Đà Nẵng duyệt nhiệm vụ quy hoạch chung đô thị Thăng Điền đến 2050: hơn 6.158 ha, gần 96.500 dân',
 		'excerpt'        => 'Ngày 5/11/2026, Đà Nẵng phê duyệt nhiệm vụ quy hoạch chung đô thị Thăng Điền đến năm 2050 (QĐ 5047/QĐ-UBND): khoảng 6.158,71 ha, dân số dự báo khoảng 96.498 người, định hướng dịch vụ, logistics, công nghiệp sạch.',
-		'keyword'        => 'quy hoạch đô thị Thăng Điền',
-		'keywords_extra' => array( 'đô thị Thăng Điền', 'xã Thăng Điền Đà Nẵng', 'quy hoạch phía Nam Đà Nẵng', 'Thăng Bình cũ' ),
+		'keyword'        => 'đô thị Thăng Điền',
+		'keywords_extra' => array( 'quy hoạch đô thị Thăng Điền', 'xã Thăng Điền Đà Nẵng', 'quy hoạch phía Nam Đà Nẵng', 'Thăng Bình cũ' ),
 		'project'        => 'hoiana-resort-golf',
 		'schedule'       => '2026-11-06 08:00',
+		'rev'            => 2, // 15/11: chuẩn SEO 100/100.
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'Quy hoạch Đà Nẵng', 'Thăng Điền', 'Đô thị mới' ),
 		'image'          => 'plugin:img/tin-tuc/quy-hoach-chung-do-thi-thang-dien-2050.jpg',
 		'image_alt'      => 'Sơ đồ minh hoạ đô thị Thăng Điền giữa Quốc lộ 1, các trục Đông – Tây và biển, quy hoạch chung đến năm 2050',
 		'content'        => <<<HTML
-<p>Ngày 5/11/2026, UBND thành phố Đà Nẵng cho biết đã ban hành <strong>Quyết định số 5047/QĐ-UBND</strong> phê duyệt nhiệm vụ <strong>quy hoạch chung đô thị Thăng Điền đến năm 2050</strong>. Đây là bước đầu để định hướng không gian đô thị và thúc đẩy kinh tế khu vực phía Nam thành phố.</p>
+<p><strong>Đô thị Thăng Điền</strong> chính thức có nhiệm vụ quy hoạch chung: ngày 5/11/2026, UBND thành phố Đà Nẵng cho biết đã ban hành <strong>Quyết định số 5047/QĐ-UBND</strong> phê duyệt nhiệm vụ <strong>quy hoạch chung đô thị Thăng Điền đến năm 2050</strong>. Đây là bước đầu để định hướng không gian đô thị và thúc đẩy kinh tế khu vực phía Nam thành phố.</p>
 <!--hh-featured-->
-<h2>Những con số chính</h2>
+<h2>Những con số chính của đô thị Thăng Điền</h2>
 <table>
 <thead><tr><th>Nội dung</th><th>Theo nhiệm vụ quy hoạch</th></tr></thead>
 <tbody>
@@ -176,15 +190,18 @@ HTML
 <tr><td>Đơn vị tổ chức lập</td><td>UBND xã Thăng Điền chủ trì, phối hợp các sở, ngành</td></tr>
 </tbody>
 </table>
-<p>Theo quy hoạch chung thành phố, Thăng Điền là một trong 7 đô thị mới dự kiến hình thành đến năm 2050, cùng Duy Nghĩa, Thăng An, Thăng Trường, Tây Hồ, Vu Gia và Hoàng Sa. Đến năm 2050, toàn thành phố có khoảng 30 đô thị (23 đô thị hiện hữu và 7 đô thị mới). Bối cảnh chung xem thêm tại <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">quy hoạch chung Đà Nẵng đến 2050</a>.</p>
-<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<p>Theo quy hoạch chung thành phố, Thăng Điền là một trong 7 đô thị mới dự kiến hình thành đến năm 2050, cùng Duy Nghĩa, Thăng An, Thăng Trường, Tây Hồ, Vu Gia và Hoàng Sa. Đến năm 2050, toàn thành phố có khoảng 30 đô thị (23 đô thị hiện hữu và 7 đô thị mới). Bối cảnh chung xem thêm tại <a href="/quy-hoach-chung-da-nang-2050-quyet-dinh-2016-qd-ttg/">quy hoạch chung Đà Nẵng đến 2050</a> (toàn văn <a href="https://thuvienphapluat.vn/van-ban/Xay-dung-Do-thi/Quyet-dinh-2016-QD-TTg-2026-phe-duyet-Quy-hoach-chung-Da-Nang-den-2050-729960.aspx">Quyết định 2016/QĐ-TTg trên Thư viện Pháp luật</a>).</p>
+<h2>Nhiệm vụ quy hoạch đô thị Thăng Điền khác đồ án quy hoạch thế nào?</h2>
+<p>Nhiều người đọc tin "duyệt quy hoạch" dễ hiểu nhầm là đã có bản đồ phân khu. Thực tế, quy hoạch đô thị thường đi qua hai bước: <strong>nhiệm vụ quy hoạch</strong> xác định phạm vi, mục tiêu, quy mô dân số và yêu cầu nghiên cứu; sau đó mới đến <strong>đồ án quy hoạch chung</strong> với bản đồ sử dụng đất, mạng lưới giao thông, chỉ tiêu từng khu. Đô thị Thăng Điền hiện mới ở bước thứ nhất.</p>
+<p>Theo trình tự thông thường, sau khi có nhiệm vụ, đơn vị tư vấn lập đồ án, lấy ý kiến cộng đồng dân cư, trình thẩm định và phê duyệt. Người có đất trong xã nên theo dõi đợt lấy ý kiến đồ án, vì đó là lúc ranh giới các khu chức năng của đô thị Thăng Điền được công bố lần đầu.</p>
+<h2>Tác động / nhận định của Hoàng Hiệp về đô thị Thăng Điền</h2>
 <ul>
-<li><strong>Mới là nhiệm vụ quy hoạch:</strong> đây là bước xác định phạm vi, mục tiêu để lập đồ án. Ranh giới khu chức năng, đường quy hoạch và chỉ tiêu sử dụng đất từng khu vực chỉ rõ khi đồ án quy hoạch chung được phê duyệt.</li>
+<li><strong>Đô thị Thăng Điền mới có nhiệm vụ quy hoạch:</strong> đây là bước xác định phạm vi, mục tiêu để lập đồ án. Ranh giới khu chức năng, đường quy hoạch và chỉ tiêu sử dụng đất từng khu vực chỉ rõ khi đồ án quy hoạch chung được phê duyệt.</li>
 <li><strong>Đất quanh trục Quốc lộ 1 và các tuyến Đông – Tây</strong> được nhắc tới là khung không gian chính, nên thường được quan tâm sớm. Tuy nhiên, khi chưa có đồ án, anh chị nên kiểm tra quy hoạch sử dụng đất hiện hành của từng thửa trước khi giao dịch.</li>
-<li><strong>Định hướng logistics, công nghiệp sạch</strong> có thể kéo theo nhu cầu nhà ở cho người lao động và dịch vụ đi kèm trong dài hạn; tiến độ phụ thuộc vào việc lập đồ án và thu hút đầu tư.</li>
+<li><strong>Định hướng logistics, công nghiệp sạch</strong> của đô thị Thăng Điền có thể kéo theo nhu cầu nhà ở cho người lao động và dịch vụ đi kèm trong dài hạn; tiến độ phụ thuộc vào việc lập đồ án và thu hút đầu tư.</li>
 </ul>
 <h2>Dự án chịu ảnh hưởng</h2>
-<p>Hiện Hoàng Hiệp chưa có dự án phân phối nằm trong xã Thăng Điền. Các dự án cùng hành lang ven biển phía Nam đang có trên web:</p>
+<p>Hiện Hoàng Hiệp chưa có dự án nằm trong phạm vi đô thị Thăng Điền. Các dự án cùng hành lang ven biển phía Nam đang có trên web:</p>
 <ul>
 <li><a href="/du-an/hoiana-resort-golf/">Hoiana Resort &amp; Golf</a> – quần thể nghỉ dưỡng ven biển phía Bắc khu vực, cùng hưởng lợi khi hạ tầng và dân cư phía Nam thành phố phát triển.</li>
 <li><a href="/du-an/vinh-an-hoa-city/">Vịnh An Hòa City</a> – khu đô thị phía Nam, gần Khu kinh tế mở Chu Lai, cùng nằm trong vùng định hướng công nghiệp – logistics.</li>
@@ -194,7 +211,7 @@ HTML
 HTML
 		,
 		'seo'            => array(
-			'seo_title' => 'Quy hoạch đô thị Thăng Điền đến 2050: 6.158 ha',
+			'seo_title' => 'Đô thị Thăng Điền đến 2050: 6.158 ha, gần 96.500 dân',
 			'desc'      => 'Đà Nẵng duyệt nhiệm vụ quy hoạch chung đô thị Thăng Điền đến 2050 (QĐ 5047/QĐ-UBND, 5/11/2026): khoảng 6.158,71 ha, dân số dự báo 96.498 người.',
 			'points'    => array(
 				'QĐ 5047/QĐ-UBND ngày 5/11/2026 phê duyệt nhiệm vụ quy hoạch chung đô thị Thăng Điền đến 2050',
@@ -202,32 +219,35 @@ HTML
 				'Định hướng dịch vụ, logistics, công nghiệp sạch, nông nghiệp công nghệ cao; Quốc lộ 1 và trục Đông – Tây là khung chính',
 			),
 			'faq'       => array(
+				array( 'Đô thị Thăng Điền có phải đô thị mới của Đà Nẵng không?', 'Có. Theo quy hoạch chung thành phố đến 2050, Thăng Điền là một trong 7 đô thị mới dự kiến hình thành, cùng Duy Nghĩa, Thăng An, Thăng Trường, Tây Hồ, Vu Gia và Hoàng Sa.' ),
 				array( 'Đô thị Thăng Điền ở đâu?', 'Là xã Thăng Điền thuộc TP Đà Nẵng, hình thành từ việc hợp nhất 3 xã Bình Tú, Bình Trung, Bình An (huyện Thăng Bình cũ), diện tích khoảng 6.158,71 ha.' ),
 				array( 'Quy hoạch Thăng Điền đã có bản đồ chi tiết chưa?', 'Chưa. Ngày 5/11/2026 mới phê duyệt nhiệm vụ quy hoạch; ranh giới các khu chức năng chỉ rõ khi đồ án quy hoạch chung được phê duyệt.' ),
 				array( 'Thăng Điền được định hướng phát triển gì?', 'Trung tâm dịch vụ, logistics, công nghiệp sạch và nông nghiệp công nghệ cao ở phía Nam Đà Nẵng.' ),
 			),
 		),
-		'sources'        => array( 'https://doanhnghiephoinhap.vn/da-nang-quy-hoach-do-thi-thang-dien-hon-6100ha-dan-so-gan-100000-nguoi-153582.html' ),
+		'sources'        => array( 'https://doanhnghiephoinhap.vn/da-nang-quy-hoach-do-thi-thang-dien-hon-6100ha-dan-so-gan-100000-nguoi-153582.html', 'https://thuvienphapluat.vn/van-ban/Xay-dung-Do-thi/Quyet-dinh-2016-QD-TTg-2026-phe-duyet-Quy-hoach-chung-Da-Nang-den-2050-729960.aspx' ),
 	);
 
 
 	/* ---------------- 06/11 – Tổ hợp 25 tầng 16 Bạch Đằng + tiêu chí gỡ dự án tồn đọng ---------------- */
 	$posts[] = array(
-		'slug'           => 'da-nang-chap-thuan-to-hop-25-tang-16-bach-dang-go-du-an-ton-dong',
+		'slug'           => 'to-hop-25-tang-16-bach-dang-da-nang',
+		'old_slug'       => array( 'da-nang-chap-thuan-to-hop-25-tang-16-bach-dang-go-du-an-ton-dong' ),
 		'title'          => 'Đà Nẵng chấp thuận tổ hợp khách sạn – căn hộ du lịch 25 tầng tại 16 Bạch Đằng, đặt 3 tiêu chí tài chính để gỡ dự án tồn đọng',
 		'excerpt'        => 'UBND TP Đà Nẵng chấp thuận quy hoạch tổng mặt bằng tổ hợp 25 tầng nổi, 4 tầng hầm tại 16 Bạch Đằng (QĐ 5050/QĐ-UBND ngày 3/11/2026); công văn ngày 5/11 nêu 3 tiêu chí đánh giá năng lực tài chính nhà đầu tư khi tháo gỡ dự án tồn đọng.',
 		'keyword'        => '16 Bạch Đằng Đà Nẵng',
 		'keywords_extra' => array( 'tổ hợp khách sạn 16 Bạch Đằng', 'dự án tồn đọng Đà Nẵng', 'căn hộ du lịch Đà Nẵng', 'ven sông Hàn' ),
 		'project'        => 'sun-ponte-residence',
 		'schedule'       => '2026-11-06 08:00',
+		'rev'            => 2, // 15/11: chuẩn SEO 100/100.
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'Quy hoạch Đà Nẵng', 'Sông Hàn', 'Dự án tồn đọng' ),
 		'image'          => 'plugin:img/tin-tuc/to-hop-16-bach-dang-du-an-ton-dong-11-2026.jpg',
-		'image_alt'      => 'Tổ hợp 25 tầng tại 16 Bạch Đằng, Đà Nẵng và 3 tiêu chí tài chính gỡ dự án tồn đọng – hình minh hoạ',
+		'image_alt'      => 'Tổ hợp 25 tầng tại 16 Bạch Đằng Đà Nẵng và 3 tiêu chí tài chính gỡ dự án tồn đọng – hình minh hoạ',
 		'content'        => <<<HTML
-<p>Đầu tháng 11/2026, Đà Nẵng có hai văn bản đáng chú ý với thị trường bất động sản: chấp thuận quy hoạch một tổ hợp cao tầng trên khu "đất vàng" ven sông Hàn, và đặt tiêu chí cụ thể để tháo gỡ các dự án tồn đọng, kéo dài.</p>
+<p>Khu đất <strong>16 Bạch Đằng Đà Nẵng</strong> vừa được chấp thuận quy hoạch tổ hợp 25 tầng. Đầu tháng 11/2026, thành phố có hai văn bản đáng chú ý với thị trường bất động sản: chấp thuận quy hoạch tổ hợp cao tầng trên khu "đất vàng" ven sông Hàn này, và đặt tiêu chí cụ thể để tháo gỡ các dự án tồn đọng, kéo dài.</p>
 <!--hh-featured-->
-<h2>Tổ hợp 25 tầng tại 16 Bạch Đằng</h2>
+<h2>Tổ hợp 25 tầng tại 16 Bạch Đằng Đà Nẵng</h2>
 <p>UBND thành phố ban hành <strong>Quyết định 5050/QĐ-UBND ngày 3/11/2026</strong> chấp thuận quy hoạch tổng mặt bằng tổ hợp thương mại dịch vụ, văn phòng kết hợp khách sạn và căn hộ du lịch cao cấp tại <strong>số 16 Bạch Đằng, phường Hải Châu</strong>.</p>
 <table>
 <thead><tr><th>Hạng mục</th><th>Thông tin</th></tr></thead>
@@ -239,8 +259,9 @@ HTML
 <tr><td>Đơn vị thực hiện</td><td>Công ty CP Dịch vụ Phúc Tín – trúng đấu giá khu đất với giá hơn 359,6 tỷ đồng</td></tr>
 </tbody>
 </table>
-<p>Sở Xây dựng hướng dẫn, quản lý quy hoạch theo hồ sơ được chấp thuận; UBND phường Hải Châu công bố công khai quy hoạch và giám sát triển khai. Doanh nghiệp tiếp tục làm các thủ tục đầu tư, xây dựng theo quy định – chưa có thông tin về thời điểm khởi công hay mở bán.</p>
-<!--hh-img:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg|Sông Hàn và cầu Rồng nhìn từ trên cao, tháng 11/2026 (ảnh flycam thực tế)-->
+<p>Sở Xây dựng hướng dẫn, quản lý quy hoạch theo hồ sơ được chấp thuận; UBND phường Hải Châu công bố công khai quy hoạch và giám sát triển khai. Doanh nghiệp tiếp tục làm các thủ tục đầu tư, xây dựng theo quy định – chưa có thông tin về thời điểm khởi công hay mở bán (<a href="https://baodanang.vn/chap-thuan-quy-hoach-to-hop-thuong-mai-dich-vu-khach-san-va-can-ho-du-lich-cao-cap-3357465.html">Báo Đà Nẵng</a>).</p>
+<p>Một vài con số giúp hình dung quy mô: tổng sàn 30.430,56 m² trên khu đất 1.795 m² tương ứng hệ số sử dụng đất khoảng 17 lần (Hoàng Hiệp tính từ hai số liệu trên, tính cả sàn hầm). Với giá trúng đấu giá hơn 359,6 tỷ đồng, mỗi m² đất tại 16 Bạch Đằng Đà Nẵng có giá khoảng 200 triệu đồng – cho thấy mức giá đất trung tâm ven sông Hàn hiện nay.</p>
+<!--hh-img:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg|Sông Hàn và cầu Rồng nhìn từ trên cao, tháng 11/2026 – khu vực trung tâm có khu đất 16 Bạch Đằng Đà Nẵng ở bờ Tây (ảnh flycam thực tế)-->
 <h2>3 tiêu chí tài chính khi gỡ dự án tồn đọng</h2>
 <p>Ngày 5/11/2026, Phó Chủ tịch UBND thành phố Trần Nam Hưng ký công văn triển khai kết luận cuộc họp ngày 27/10 về tháo gỡ các dự án tồn đọng, kéo dài. Theo báo chí đưa tin:</p>
 <ul>
@@ -251,8 +272,14 @@ HTML
 </ul>
 <p>Một hiệp hội doanh nghiệp góp ý rằng dùng báo cáo tài chính gần nhất để đánh giá năng lực là chưa phù hợp với dự án đã bị "đóng băng" lâu, và kiến nghị cho nhà đầu tư chứng minh bằng phương án tài chính tái khởi động dự án.</p>
 <h2>Tác động / nhận định của Hoàng Hiệp</h2>
-<p>Quỹ đất trung tâm ven sông Hàn gần như không còn, nên mỗi khu đất như 16 Bạch Đằng được đấu giá và lên quy hoạch cao tầng đều củng cố mặt bằng giá của dải căn hộ, khách sạn quanh trục Bạch Đằng – Trần Hưng Đạo. Tuy nhiên dự án mới chỉ ở bước chấp thuận tổng mặt bằng; người mua nên theo dõi pháp lý từng bước trước khi quan tâm sản phẩm.</p>
+<p>Quỹ đất trung tâm ven sông Hàn gần như không còn, nên mỗi khu đất như 16 Bạch Đằng Đà Nẵng được đấu giá và lên quy hoạch cao tầng đều củng cố mặt bằng giá của dải căn hộ, khách sạn quanh trục Bạch Đằng – Trần Hưng Đạo. Tuy nhiên dự án mới chỉ ở bước chấp thuận tổng mặt bằng; người mua nên theo dõi pháp lý từng bước trước khi quan tâm sản phẩm.</p>
 <p>Với dự án tồn đọng, tiêu chí tài chính rõ ràng giúp phân loại nhanh dự án nào đủ sức tái khởi động, dự án nào phải thu hồi hoặc chuyển nhượng. Người đang góp vốn, đặt cọc ở dự án chậm triển khai nên hỏi chủ đầu tư đã nộp hồ sơ rà soát chưa và thuộc phương án nào.</p>
+<h2>Người quan tâm 16 Bạch Đằng Đà Nẵng nên theo dõi gì?</h2>
+<ol>
+<li><strong>Thủ tục tiếp theo:</strong> giấy phép xây dựng, thẩm định thiết kế – chỉ khi có các bước này mới có mốc khởi công.</li>
+<li><strong>Loại sản phẩm:</strong> căn hộ du lịch là bất động sản du lịch, pháp lý và thời hạn sở hữu khác căn hộ chung cư để ở.</li>
+<li><strong>Điều kiện bán:</strong> căn hộ hình thành trong tương lai chỉ được bán khi đủ điều kiện theo luật; không nên đặt cọc theo lời mời "giữ chỗ sớm" khi dự án mới chấp thuận tổng mặt bằng.</li>
+</ol>
 <h2>Dự án chịu ảnh hưởng</h2>
 <ul>
 <li><a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a> – bờ Đông sông Hàn, cạnh cầu Rồng: cùng nhóm căn hộ ven sông Hàn, nguồn cung trung tâm hạn chế giúp giữ giá cho thuê, chuyển nhượng.</li>
@@ -264,17 +291,17 @@ HTML
 HTML
 		,
 		'seo'            => array(
-			'seo_title' => 'Tổ hợp 25 tầng 16 Bạch Đằng, gỡ dự án tồn đọng',
-			'desc'      => 'Đà Nẵng chấp thuận quy hoạch tổ hợp 25 tầng tại 16 Bạch Đằng (QĐ 5050 ngày 3/11/2026) và đặt 3 tiêu chí tài chính để tháo gỡ dự án tồn đọng.',
+			'seo_title' => '16 Bạch Đằng Đà Nẵng: tổ hợp 25 tầng, gỡ dự án tồn đọng',
+			'desc'      => '16 Bạch Đằng Đà Nẵng được chấp thuận quy hoạch tổ hợp 25 tầng (QĐ 5050 ngày 3/11/2026); thành phố đặt 3 tiêu chí tài chính gỡ dự án tồn đọng.',
 			'points'    => array(
-				'16 Bạch Đằng: khu đất 1.795 m², 25 tầng nổi, 4 hầm, cao 99 m, sàn 30.430,56 m².',
+				'16 Bạch Đằng Đà Nẵng: khu đất 1.795 m², 25 tầng nổi, 4 hầm, cao 99 m, sàn 30.430,56 m².',
 				'Chức năng thương mại, văn phòng, khách sạn, căn hộ du lịch; Phúc Tín trúng đấu giá hơn 359,6 tỷ.',
 				'Dự án tồn đọng: rà soát vốn chủ sở hữu, tỷ lệ dư nợ/vốn chủ, khả năng huy động vốn.',
 				'Nợ nghĩa vụ tài chính: có phương án nộp dần tối đa 12 tháng.',
 			),
 			'faq'       => array(
 				array( 'Dự án 16 Bạch Đằng Đà Nẵng cao bao nhiêu tầng?', '25 tầng nổi, 4 tầng hầm, cao 99 m, tổng diện tích sàn 30.430,56 m² trên khu đất 1.795 m², theo QĐ 5050/QĐ-UBND ngày 3/11/2026.' ),
-				array( 'Ai thực hiện dự án 16 Bạch Đằng?', 'Công ty CP Dịch vụ Phúc Tín, đơn vị trúng đấu giá khu đất với giá hơn 359,6 tỷ đồng.' ),
+				array( 'Ai thực hiện dự án 16 Bạch Đằng Đà Nẵng?', 'Công ty CP Dịch vụ Phúc Tín, đơn vị trúng đấu giá khu đất với giá hơn 359,6 tỷ đồng.' ),
 				array( 'Đà Nẵng đánh giá năng lực nhà đầu tư dự án tồn đọng thế nào?', 'Theo 3 tiêu chí: vốn chủ sở hữu; tỷ lệ dư nợ tín dụng và trái phiếu trên vốn chủ sở hữu; khả năng huy động vốn.' ),
 			),
 		),

@@ -166,6 +166,7 @@ HTML
 				'"Có sổ" cần kiểm tra loại đất và thời hạn từng căn, không áp chung cả khu',
 			),
 			'faq'       => array(
+				array( 'Villa ven biển Đà Nẵng nào gần trung tâm nhất?', 'Trong 4 khu so sánh, Premier Village trên đường Võ Nguyên Giáp (Sơn Trà) gần cầu Rồng và khu phố du lịch nhất; các villa ven biển Đà Nẵng còn lại nằm trên trục Trường Sa, Ngũ Hành Sơn.' ),
 				array( 'Villa ven biển Đà Nẵng nào giá mềm nhất?', 'Trong 4 khu so sánh, Furama Villas có mức vốn thấp nhất, khoảng 21 – 25 tỷ cho căn 3 phòng ngủ theo tin rao 2026.' ),
 				array( 'Premier Village Đà Nẵng có sổ hồng không?', 'Các trang giới thiệu nêu biệt thự Premier Village được cấp sổ hồng sở hữu lâu dài; người mua nên kiểm tra bản gốc sổ từng căn.' ),
 				array( 'Mua villa ven biển Đà Nẵng có vay ngân hàng được không?', 'Tùy loại đất và thời hạn ghi trên sổ: villa trên đất ở lâu dài thường dễ thế chấp hơn villa trên đất thương mại – dịch vụ có thời hạn. Cần hỏi trước ngân hàng với từng căn cụ thể.' ),
@@ -370,6 +371,7 @@ HTML
 				'Căn hộ du lịch 50 năm; chủ căn nhận 45% doanh thu thuần theo chính sách bán hàng',
 			),
 			'faq'       => array(
+				array( 'Biệt thự Shantira Hội An có hồ bơi riêng không?', 'Có. Theo thông tin dự án, mỗi biệt thự Shantira Hội An (LegaSea) cao 2 tầng, 2 – 3 phòng ngủ và có hồ bơi riêng.' ),
 				array( 'Shantira Hội An nằm ở đâu?', 'Trên đường Lạc Long Quân, Điện Dương (Điện Bàn cũ), nay thuộc TP. Đà Nẵng, sát bãi biển An Bàng, cách phố cổ Hội An khoảng 5 phút.' ),
 				array( 'Giá biệt thự Shantira Hội An bao nhiêu?', 'Giá gốc theo nguồn phân phối: 2PN khoảng 20 – 25 tỷ (chưa VAT), 3PN khoảng 22 – 42 tỷ; tin rao chuyển nhượng khoảng 21,5 – 33 tỷ (tham khảo 10/2026).' ),
 				array( 'Mua lại biệt thự Shantira Hội An cần kiểm tra gì?', 'Sổ bản gốc (mục đích, thời hạn sử dụng đất, thế chấp), hợp đồng hợp tác cho thuê còn hiệu lực và số đêm tự sử dụng, phí quản lý hằng năm.' ),
@@ -474,6 +476,7 @@ HTML
 			),
 			'faq'       => array(
 				array( 'Các tòa Capital Square gồm những tòa nào?', 'Tổ hợp có 14 tòa, 3.391 căn, chia thành Capital Square 2 (tòa 2.1 – 2.7) và Capital Square 3 (khối LAT 4-5, MAT 5-6, MAT 7, MAT 8-9).' ),
+				array( 'Nên chọn căn ở các tòa Capital Square nào để nhận nhà sớm?', 'The King (tòa 2.4) và The Queen (tòa 2.6) được công bố bàn giao trước, từ quý I/2027; các tòa Capital Square còn lại bàn giao theo hợp đồng từng tòa.' ),
 				array( 'Giá căn hộ Capital Square bao nhiêu?', 'Tham khảo 10/2026: 1PN khoảng 3,3 – 4,5 tỷ, 2PN khoảng 4,7 – 7,8 tỷ, 3PN khoảng 9,5 – 12,6 tỷ, tương đương khoảng 74 – 90 triệu/m².' ),
 				array( 'Mua chuyển nhượng hợp đồng ở các tòa Capital Square cần gì?', 'Cần hợp đồng mua bán gốc, chứng từ các đợt đã thanh toán và xác nhận chuyển nhượng của chủ đầu tư; khoản chênh nên ghi rõ trong văn bản và thanh toán qua ngân hàng.' ),
 				array( 'Capital Square khi nào bàn giao?', 'Các trang phân phối nêu mục tiêu bàn giao từ quý I/2027, bắt đầu với tòa The King (2.4) và The Queen (2.6); tiến độ thực tế theo hợp đồng từng tòa.' ),
@@ -564,6 +567,7 @@ HTML
 			),
 			'faq'       => array(
 				array( 'Giá đất nền Hòa Xuân 2026 bao nhiêu?', 'Tham khảo 10/2026: Cồn Dầu khoảng 42 – 55 triệu/m², Nam Hòa Xuân lô từ khoảng 3,5 – 5 tỷ, Euro Village 2 lô biệt thự 300 m² tin rao khoảng 85 – 113 triệu/m².' ),
+				array( 'Đất nền Hòa Xuân 2026 khu nào vốn thấp nhất?', 'Theo bảng tham khảo 10/2026, Nam Hòa Xuân có lô thấp nhất khoảng 3,5 – 4 tỷ; đất nền Hòa Xuân 2026 ở Cồn Dầu lô 100 m² khoảng 4,2 – 5,5 tỷ.' ),
 				array( 'Đất nền Cồn Dầu có sổ đỏ không?', 'Theo thông tin dự án, đất nền Cồn Dầu là đất ở lâu dài, sổ đỏ từng lô; người mua nên kiểm tra sổ bản gốc.' ),
 				array( 'Có nên mua đất nền Hòa Xuân 2026 khi cầu Hòa Xuân đang thi công?', 'Cụm nút giao cầu Hòa Xuân thực hiện 2026 – 2029, nên phù hợp với người mua có kế hoạch nắm giữ đủ dài; cần chấp nhận việc đi lại bị phân luồng trong thời gian thi công.' ),
 				array( 'Vì sao giá Euro Village 2 chênh lệch lớn?', 'Do khác biệt giữa lô đất trống và lô đã xây biệt thự, vị trí view sông hay kênh, diện tích và hướng. Cần thẩm định từng lô thay vì dựa vào giá chào chung.' ),
@@ -665,6 +669,7 @@ HTML
 				'Nhà đất Cẩm Lệ khoảng 46 – 100 triệu/m²; Hòa Xuân trung bình khoảng 61,5 triệu/m² (9/2026)',
 			),
 			'faq'       => array(
+				array( 'Bất động sản Cẩm Lệ gồm những khu nào?', 'Theo cách gọi của thị trường, bất động sản Cẩm Lệ là khu quận Cẩm Lệ cũ, nay thuộc 3 phường Cẩm Lệ, Hòa Xuân và An Khê; Hòa Xuân là nơi tập trung nhiều dự án mới.' ),
 				array( 'Quận Cẩm Lệ nay là phường nào?', 'Từ 1/7/2025, địa bàn Cẩm Lệ cũ thành 3 phường: Cẩm Lệ (Hòa Thọ Tây, Hòa Thọ Đông, Khuê Trung), Hòa Xuân (Hòa Xuân, Hòa Châu, Hòa Phước) và An Khê (Hòa An, Hòa Phát, An Khê).' ),
 				array( 'Căn hộ Cẩm Lệ giá bao nhiêu?', 'Tham khảo 10/2026: Cora Tower khoảng 45 – 55 triệu/m², từ khoảng 1,7 tỷ; Spana Tower từ khoảng 1,9 – 2,4 tỷ; S-Light Tower từ khoảng 2 – 2,4 tỷ (nguồn phân phối).' ),
 				array( 'Bất động sản Cẩm Lệ có phù hợp để mua cho thuê không?', 'Căn hộ Sun NeO City có mức vốn từ khoảng 1,7 – 2,4 tỷ, nhưng các tòa bàn giao cùng giai đoạn 2027 nên giá thuê có thể cạnh tranh; nên tính dòng tiền thận trọng và chọn căn có lợi thế view, tầng.' ),
@@ -764,6 +769,7 @@ HTML
 				'Khách sạn An Bàng – Tân Thành khoảng 50 – 91 tỷ; villa, homestay khoảng 5,45 – 22 tỷ (tin rao)',
 			),
 			'faq'       => array(
+				array( 'Bất động sản Hội An loại nào có sổ lâu dài?', 'Biệt thự dự án trên đất ở như Casamia Balanca là một ví dụ; với bất động sản Hội An dạng căn hộ du lịch như Shantira, thời hạn thường là 50 năm. Luôn kiểm tra sổ của từng căn.' ),
 				array( 'Hội An sau sáp nhập gồm những phường nào?', 'Phường Hội An, phường Hội An Đông, phường Hội An Tây và xã Tân Hiệp (Cù Lao Chàm), thuộc TP. Đà Nẵng từ 1/7/2025.' ),
 				array( 'Giá biệt thự Hội An 2026 bao nhiêu?', 'Tham khảo 10/2026: Casamia Balanca khoảng 10 – 20 tỷ, Vinpearl Nam Hội An khoảng 9 – 16 tỷ, Shantira khoảng 21,5 – 33 tỷ theo tin rao.' ),
 				array( 'Bất động sản Hội An sau hợp nhất có tăng giá không?', 'Hoàng Hiệp không dự báo giá. Hợp nhất tạo kỳ vọng về hạ tầng, nhưng giá trị bền vững vẫn phụ thuộc pháp lý, vị trí và khả năng khai thác thực tế của từng tài sản.' ),
@@ -865,6 +871,7 @@ HTML
 			),
 			'faq'       => array(
 				array( 'Kiểm tra quy hoạch Đà Nẵng ở đâu?', 'Có thể kiểm tra quy hoạch Đà Nẵng trên cổng thông tin quy hoạch xây dựng của Sở Xây dựng Đà Nẵng (thongtinquyhoachxaydung.danang.gov.vn), cổng gisportal.danang.gov.vn/sxd hoặc ứng dụng TTQH Đà Nẵng.' ),
+				array( 'Kiểm tra quy hoạch Đà Nẵng trên mạng đã đủ để đặt cọc chưa?', 'Thông tin trực tuyến chỉ để tham khảo; với giao dịch lớn, sau khi kiểm tra quy hoạch Đà Nẵng trên cổng thông tin nên đề nghị cơ quan có thẩm quyền cung cấp thông tin quy hoạch bằng văn bản.' ),
 				array( 'Đất thế nào thì đủ điều kiện chuyển nhượng?', 'Theo Luật Đất đai 2024: có giấy chứng nhận, không tranh chấp hoặc tranh chấp đã giải quyết, không bị kê biên bảo đảm thi hành án và còn thời hạn sử dụng đất.' ),
 				array( 'Mua căn hộ dự án cần kiểm tra giấy tờ gì?', 'Văn bản đủ điều kiện kinh doanh của Sở Xây dựng, bảo lãnh ngân hàng, tình trạng thế chấp dự án và hợp đồng mua bán mẫu.' ),
 			),
@@ -963,6 +970,7 @@ HTML
 			),
 			'faq'       => array(
 				array( 'Hợp đồng đặt cọc mua nhà có bắt buộc công chứng không?', 'Pháp luật không bắt buộc công chứng hợp đồng đặt cọc, nhưng nên lập văn bản rõ ràng và có thể công chứng với giao dịch lớn. Hợp đồng chuyển nhượng quyền sử dụng đất thì bắt buộc công chứng hoặc chứng thực.' ),
+				array( 'Hợp đồng đặt cọc viết tay có giá trị không?', 'Pháp luật không bắt buộc công chứng hợp đồng đặt cọc; văn bản viết tay vẫn có thể có giá trị nếu đủ nội dung và chữ ký các bên. Với giao dịch lớn, nên lập hợp đồng đặt cọc rõ ràng, có người làm chứng hoặc công chứng.' ),
 				array( 'Người bán đổi ý không bán thì xử lý thế nào?', 'Theo Điều 328 Bộ luật Dân sự 2015, bên nhận cọc từ chối giao kết phải trả lại tiền cọc và một khoản tương đương giá trị tiền cọc, trừ khi các bên thỏa thuận khác.' ),
 				array( 'Hợp đồng đặt cọc nên ghi mức cọc bao nhiêu?', 'Pháp luật không quy định mức cọc với nhà đất thổ cư; nên ở mức vừa đủ ràng buộc và kèm thời hạn công chứng ngắn. Với nhà ở hình thành trong tương lai, cọc không quá 5% giá bán theo Luật Kinh doanh bất động sản 2023.' ),
 				array( 'Có nên đưa tiền cọc cho môi giới?', 'Môi giới không mặc nhiên có quyền nhận cọc thay chủ nhà. Nên chuyển khoản trực tiếp vào tài khoản người đứng tên sổ, trừ khi có văn bản ủy quyền hợp lệ.' ),

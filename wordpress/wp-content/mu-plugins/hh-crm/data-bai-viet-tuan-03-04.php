@@ -22,9 +22,11 @@ function hh_posts_tuan_03_04( $posts ) {
 		'content'  => <<<'HTML'
 <p>Có nên mua FourS Tower? Câu trả lời ngắn của Hoàng Hiệp: <strong>nên cân nhắc nếu bạn mua để ở lâu dài hoặc đầu tư trung – dài hạn</strong> ở phía Nam Đà Nẵng, chấp nhận chờ bàn giao và không cần dòng tiền ngay. Nếu cần nhà ở ngay hoặc muốn lướt sóng ngắn, bạn nên cân nhắc kỹ hơn. Bài viết cập nhật tháng 10/2026, tổng hợp từ thông tin công bố của chủ đầu tư, báo chí và các đơn vị phân phối.</p>
 
+<!--hh-img:img/fours-tower/fours-tower-ve-dem-huong-song.jpg|FourS Tower về đêm hướng sông – có nên mua FourS Tower phụ thuộc mục đích ở hay đầu tư (phối cảnh chủ đầu tư)-->
+
 <h2>FourS Tower là dự án gì?</h2>
 <p><a href="/du-an/fours-tower/">FourS Tower (Tháp Bốn Mùa)</a> là phân khu căn hộ đầu tiên của khu đô thị <a href="/du-an/sun-riverpolis/">Sun Riverpolis</a>, do Sun Property (thành viên Sun Group) phát triển. Dự án ra mắt ngày 19/3/2026, nằm tại ngã tư Nguyễn Phước Lan – Minh Mạng, phường Hòa Quý (cũ), Ngũ Hành Sơn.</p>
-<p>Dự án gồm 4 tòa Mai – Trúc – Cúc – Tùng, cao 20 tầng nổi và 2 tầng hầm, cung cấp 2.394 căn từ Studio đến 3 phòng ngủ, sở hữu lâu dài. Tên bốn tòa lấy cảm hứng từ bộ tranh tứ quý, tương ứng bốn mùa trong năm.</p>
+<p>Muốn trả lời câu hỏi có nên mua FourS Tower, trước hết cần nắm quy mô. Dự án gồm 4 tòa Mai – Trúc – Cúc – Tùng, cao 20 tầng nổi và 2 tầng hầm, cung cấp 2.394 căn từ Studio đến 3 phòng ngủ, sở hữu lâu dài. Tên bốn tòa lấy cảm hứng từ bộ tranh tứ quý, tương ứng bốn mùa trong năm.</p>
 
 <table>
 <thead><tr><th>Hạng mục</th><th>Thông tin</th></tr></thead>
@@ -39,7 +41,7 @@ function hh_posts_tuan_03_04( $posts ) {
 </tbody>
 </table>
 
-<h2>Ưu điểm khi mua FourS Tower</h2>
+<h2>Có nên mua FourS Tower: 4 ưu điểm chính</h2>
 <h3>1. Vị trí trung tâm khu đô thị phía Nam</h3>
 <p>Ngã tư Nguyễn Phước Lan – Minh Mạng là trục chính của khu Nam Hòa Xuân, gần sông Cổ Cò, cách biển chỉ vài phút và nhìn về Ngũ Hành Sơn. Khu vực nằm trong hệ sinh thái hơn 1.000 ha của Sun Group cùng <a href="/du-an/sun-neo-city/">Sun NeO City</a>.</p>
 <h3>2. Thương hiệu chủ đầu tư và hệ tiện ích</h3>
@@ -49,7 +51,7 @@ function hh_posts_tuan_03_04( $posts ) {
 <h3>4. Hạ tầng phía Nam đang được đầu tư</h3>
 <p>Cụm nút giao cầu Hòa Xuân hơn 1.378 tỷ đồng, thực hiện 2026 – 2029, sẽ cải thiện kết nối về trung tâm. Xem phân tích chi tiết tại bài <a href="/bat-dong-san-nam-da-nang-ha-tang-2026/">hạ tầng Hòa Xuân – Hòa Quý và bất động sản Nam Đà Nẵng</a>.</p>
 
-<h2>Nhược điểm cần cân nhắc</h2>
+<h2>Nhược điểm cần cân nhắc trước khi quyết định có nên mua FourS Tower</h2>
 <ul>
 <li><strong>Thời gian chờ:</strong> sản phẩm hình thành trong tương lai, người mua phải chờ bàn giao, chưa có dòng tiền cho thuê trong vài năm đầu.</li>
 <li><strong>Nguồn cung lớn:</strong> 2.394 căn, cộng thêm Spana Tower, S-Light Tower, Cora Tower cùng khu vực. Khi bàn giao đồng loạt, áp lực cạnh tranh cho thuê và bán lại là có thật.</li>
@@ -57,7 +59,8 @@ function hh_posts_tuan_03_04( $posts ) {
 <li><strong>Giá thông tin chưa thống nhất:</strong> các trang ghi khác nhau; bạn chỉ nên tin bảng giá và chính sách có hiệu lực tại thời điểm ký.</li>
 </ul>
 
-<h2>Ai nên mua FourS Tower?</h2>
+<h2>Ai nên mua, ai chưa nên mua FourS Tower?</h2>
+<p>Câu hỏi có nên mua FourS Tower không có một đáp án chung cho mọi người. Bảng dưới đây gợi ý theo nhu cầu phổ biến mà Hoàng Hiệp thường gặp:</p>
 <table>
 <thead><tr><th>Nhu cầu</th><th>Mức phù hợp</th><th>Ghi chú</th></tr></thead>
 <tbody>
@@ -68,25 +71,30 @@ function hh_posts_tuan_03_04( $posts ) {
 </tbody>
 </table>
 
-<h2>Kinh nghiệm chọn căn của Hoàng Hiệp</h2>
-<p>Trước khi đặt chỗ, hãy so sánh FourS Tower với các tòa cùng hệ sinh thái Sun Group – xem bài <a href="/so-sanh-fours-tower-spana-tower-s-light-tower/">so sánh FourS Tower, Spana Tower và S-Light Tower</a>. Kiểm tra kỹ hướng căn, khoảng cách tới tiện ích tầng 2, lịch thanh toán và điều khoản bàn giao trong hợp đồng.</p>
-<p>Với khách đầu tư, nên tính trước kịch bản giữ tối thiểu 3 – 5 năm. Với khách mua ở, nên ưu tiên căn có công năng tốt hơn là chạy theo căn giá thấp nhất.</p>
+<h2>Kiểm tra tài chính trước khi chốt có nên mua FourS Tower</h2>
+<p>Một bài toán đơn giản giúp trả lời có nên mua FourS Tower với ngân sách của anh chị: lấy giá căn dự kiến, trừ phần vốn tự có, phần còn lại là khoản vay. Sau đó tính số tiền trả hằng tháng khi hết thời gian hỗ trợ lãi suất theo lãi suất thả nổi ngân hàng đang công bố. Nếu khoản này vượt khoảng một phần ba thu nhập ổn định của gia đình, nên chọn căn nhỏ hơn hoặc tăng vốn tự có.</p>
+<p>Chính sách được công bố cho phép thanh toán 70% để nhận nhà và hỗ trợ vay có thời hạn (chi tiết tại bài <a href="/chinh-sach-fours-tower-thanh-toan-vay-ngan-hang/">chính sách thanh toán FourS Tower</a>). Ưu đãi giúp giảm áp lực ban đầu, nhưng quyết định có nên mua FourS Tower vẫn nên dựa trên khả năng trả nợ sau ưu đãi.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá FourS Tower đợt hiện hành, quỹ căn còn lại và tư vấn chọn căn theo nhu cầu ở hay đầu tư.</p>
+<h2>Kinh nghiệm chọn căn của Hoàng Hiệp</h2>
+<p>Trước khi đặt chỗ, để trả lời chắc chắn có nên mua FourS Tower hay không, hãy so sánh dự án với các tòa cùng hệ sinh thái Sun Group – xem bài <a href="/so-sanh-fours-tower-spana-tower-s-light-tower/">so sánh FourS Tower, Spana Tower và S-Light Tower</a>. Kiểm tra kỹ hướng căn, khoảng cách tới tiện ích tầng 2, lịch thanh toán và điều khoản bàn giao trong hợp đồng.</p>
+<p>Định hướng an cư – đầu tư của dự án cũng được <a href="https://tuoitre.vn/fours-tower-an-cu-dau-tu-tai-trung-tam-nam-da-nang-20260410181212744.htm">Tuổi Trẻ</a> phân tích. Với khách đầu tư đang cân nhắc có nên mua FourS Tower, nên tính trước kịch bản giữ tối thiểu 3 – 5 năm. Với khách mua ở, nên ưu tiên căn có công năng tốt hơn là chạy theo căn giá thấp nhất.</p>
+
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá FourS Tower đợt hiện hành, quỹ căn còn lại và cùng trả lời câu hỏi có nên mua FourS Tower theo nhu cầu ở hay đầu tư của anh chị.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Có nên mua FourS Tower? Ưu – nhược điểm 2026',
 			'desc'      => 'Có nên mua FourS Tower? Phân tích vị trí, giá tham khảo, ưu – nhược điểm và ai nên mua, ai nên cân nhắc. Gọi Hoàng Hiệp 0904 567 009 nhận bảng giá.',
 			'points'    => array(
-				'FourS Tower: 4 tòa 20 tầng, 2.394 căn Studio – 3PN tại ngã tư Nguyễn Phước Lan – Minh Mạng, ra mắt 19/3/2026.',
+				'Có nên mua FourS Tower: 4 tòa 20 tầng, 2.394 căn Studio – 3PN tại ngã tư Nguyễn Phước Lan – Minh Mạng, ra mắt 19/3/2026.',
 				'Ưu điểm: vị trí trung tâm Nam Đà Nẵng, thương hiệu Sun Group, giá vào tham khảo từ khoảng 1,7 tỷ.',
 				'Nhược điểm: phải chờ bàn giao, nguồn cung khu vực lớn, khu đô thị còn đang hình thành.',
 			),
 			'faq'       => array(
-				array( 'Có nên mua FourS Tower để ở không?', 'Phù hợp với gia đình mua ở lâu dài, chấp nhận chờ bàn giao. Nên chọn căn 2PN – 3PN có công năng tốt.' ),
+				array( 'Có nên mua FourS Tower để ở không?', 'Có nên mua FourS Tower để ở thì câu trả lời là phù hợp với gia đình mua ở lâu dài, chấp nhận chờ bàn giao. Nên chọn căn 2PN – 3PN có công năng tốt.' ),
 				array( 'FourS Tower giá bao nhiêu?', 'Theo các trang phân phối, giá tham khảo khoảng 50 – 60 triệu/m², Studio từ khoảng 1,7 tỷ. Giá chính thức thay đổi theo từng đợt bán.' ),
 				array( 'FourS Tower có sở hữu lâu dài không?', 'Có, căn hộ FourS Tower là sở hữu lâu dài theo thông tin công bố.' ),
+				array( 'Có nên mua FourS Tower để cho thuê?', 'Khá phù hợp nếu chọn Studio, 1PN+ có view và vị trí tốt, chấp nhận chờ bàn giao và cạnh tranh nguồn cung khi các tòa trong khu bàn giao gần nhau.' ),
 				array( 'Nhược điểm lớn nhất của FourS Tower là gì?', 'Thời gian chờ bàn giao và nguồn cung căn hộ lớn ở khu vực Nam Hòa Xuân khi các tòa bàn giao gần nhau.' ),
 			),
 		),
@@ -96,16 +104,18 @@ HTML
 	$posts[] = array(
 		'slug'     => 'so-sanh-fours-tower-spana-tower-s-light-tower',
 		'rev'      => '2026-11-11a', // Số căn FourS Tower 2.394 theo Văn bản 17239/SXD-QLN.
-		'title'    => 'So sánh căn hộ Sun Group Đà Nẵng: FourS Tower, Spana Tower, S-Light Tower',
-		'excerpt'  => 'So sánh căn hộ Sun Group Đà Nẵng: vị trí, quy mô, loại căn, bàn giao và giá tham khảo của FourS Tower, Spana Tower, S-Light Tower.',
+		'title'    => 'So sánh FourS Tower, Spana Tower và S-Light Tower: căn hộ Sun Group Nam Đà Nẵng',
+		'excerpt'  => 'So sánh FourS Tower, Spana Tower và S-Light Tower – căn hộ Sun Group Đà Nẵng: vị trí, quy mô, loại căn, bàn giao và giá tham khảo của FourS Tower, Spana Tower, S-Light Tower.',
 		'keyword'  => 'so sánh FourS Tower, Spana Tower',
 		'project'  => 'fours-tower',
 		'week'     => 3,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>So sánh căn hộ Sun Group Đà Nẵng ở phía Nam, ba cái tên được hỏi nhiều nhất là FourS Tower, Spana Tower và S-Light Tower. Tóm tắt nhanh: <strong>Spana Tower</strong> bàn giao sớm nhất (dự kiến giữa 2027), <strong>S-Light Tower</strong> có lợi thế view ba dòng sông, còn <strong>FourS Tower</strong> có quy mô lớn nhất và giá vào tham khảo mềm. Thông tin cập nhật tháng 10/2026.</p>
+<p>Khi so sánh FourS Tower, Spana Tower và S-Light Tower – ba dự án căn hộ Sun Group được hỏi nhiều nhất ở phía Nam Đà Nẵng – điểm khác biệt nằm ở vị trí, quy mô và thời điểm bàn giao. Tóm tắt nhanh: <strong>Spana Tower</strong> bàn giao sớm nhất (dự kiến giữa 2027), <strong>S-Light Tower</strong> có lợi thế view ba dòng sông, còn <strong>FourS Tower</strong> có quy mô lớn nhất và giá vào tham khảo mềm. Thông tin cập nhật tháng 10/2026.</p>
 
-<h2>Bảng so sánh căn hộ Sun Group Đà Nẵng</h2>
+<!--hh-img:img/spana-tower/spana-tower-toan-canh-ven-song-cau-hoa-xuan.jpg|Spana Tower bên sông, chân cầu Hòa Xuân – một trong ba dự án khi so sánh FourS Tower, Spana Tower và S-Light Tower (phối cảnh chủ đầu tư)-->
+
+<h2>Bảng so sánh FourS Tower, Spana Tower và S-Light Tower</h2>
 <table>
 <thead><tr><th>Tiêu chí</th><th>FourS Tower</th><th>Spana Tower</th><th>S-Light Tower</th></tr></thead>
 <tbody>
@@ -117,17 +127,18 @@ HTML
 <tr><td>Giá tham khảo</td><td>Khoảng 50 – 60 triệu/m²; Studio từ khoảng 1,7 tỷ</td><td>Khoảng 60 triệu/m² (dao động theo nguồn)</td><td>Từ khoảng 2,4 tỷ/căn</td></tr>
 </tbody>
 </table>
-<p>Giá trên là mức tham khảo tổng hợp từ các trang phân phối và báo chí, chưa phải bảng giá chính thức. Giá thực tế thay đổi theo tầng, hướng, đợt bán và chính sách thanh toán.</p>
+<p>Khi so sánh FourS Tower, Spana Tower và S-Light Tower theo bảng trên, lưu ý giá là mức tham khảo tổng hợp từ các trang phân phối và báo chí, chưa phải bảng giá chính thức. Giá thực tế thay đổi theo tầng, hướng, đợt bán và chính sách thanh toán.</p>
 
 <h2>Điểm mạnh riêng của từng dự án</h2>
+<p>Bảng số liệu chỉ là bước đầu; để so sánh FourS Tower, Spana Tower và S-Light Tower đầy đủ, cần nhìn vào lợi thế riêng của mỗi dự án.</p>
 <h3>FourS Tower – quy mô lớn, trung tâm Nam Hòa Xuân</h3>
 <p><a href="/du-an/fours-tower/">FourS Tower</a> là phân khu căn hộ đầu tiên của Sun Riverpolis, ra mắt 19/3/2026. Tiện ích tầng 2 gồm hồ bơi bốn mùa, gym, yoga, spa, khu trẻ em và phòng khám. Quy mô lớn giúp cộng đồng cư dân đông, nhưng cũng đồng nghĩa nguồn cung cho thuê nhiều.</p>
 <h3>Spana Tower – sát cầu Hòa Xuân, bàn giao sớm</h3>
 <p><a href="/du-an/spana-tower/">Spana Tower</a> nằm ngay chân cầu Hòa Xuân, gần trung tâm nhất trong ba dự án. Tầng 1 – 2 là shophouse khối đế và tiện ích. Lịch bàn giao dự kiến 30/6/2027 giúp người mua sớm có nhà ở hoặc khai thác cho thuê.</p>
 <h3>S-Light Tower – view ba dòng sông</h3>
-<p><a href="/du-an/s-light-tower/">S-Light Tower</a> ra mắt tháng 6/2026, nằm ở ngã ba sông Hàn – Cẩm Lệ – Đô Toả, tầm nhìn về pháo hoa DIFF. Dự án công bố 100% căn đón nắng gió tự nhiên, diện tích từ 33,3 đến 95,1 m², bàn giao hoàn thiện trần, tường, sàn.</p>
+<p><a href="/du-an/s-light-tower/">S-Light Tower</a> ra mắt tháng 6/2026 (theo <a href="https://cafef.vn/sun-property-ra-mat-s-light-tower-tam-diem-vuong-khi-trung-tam-nam-da-nang-188260622082242751.chn">CafeF</a>), nằm ở ngã ba sông Hàn – Cẩm Lệ – Đô Toả, tầm nhìn về pháo hoa DIFF. Dự án công bố 100% căn đón nắng gió tự nhiên, diện tích từ 33,3 đến 95,1 m², bàn giao hoàn thiện trần, tường, sàn.</p>
 
-<h2>Nên chọn dự án nào?</h2>
+<h2>So sánh FourS Tower, Spana Tower theo nhu cầu: nên chọn dự án nào?</h2>
 <table>
 <thead><tr><th>Nhu cầu</th><th>Gợi ý</th><th>Lý do</th></tr></thead>
 <tbody>
@@ -138,7 +149,7 @@ HTML
 </tbody>
 </table>
 
-<h2>Lưu ý chung khi so sánh căn hộ Sun Group</h2>
+<h2>Lưu ý chung khi so sánh FourS Tower, Spana Tower và S-Light Tower</h2>
 <ul>
 <li>Cả ba dự án đều là căn hộ sở hữu lâu dài thuộc hệ sinh thái hơn 1.000 ha của Sun Group phía Nam Đà Nẵng.</li>
 <li>Ngoài ba tòa trên, khu vực còn có <a href="/du-an/cora-tower/">Cora Tower</a> (giao lộ Nguyễn Phước Lan – 29/3, bàn giao dự kiến 30/7/2027).</li>
@@ -147,7 +158,7 @@ HTML
 <p>Nếu còn phân vân về FourS Tower, bạn có thể đọc thêm bài <a href="/co-nen-mua-can-ho-fours-tower/">có nên mua FourS Tower</a>. Danh sách đầy đủ các dự án khu vực có tại trang <a href="/du-an/">dự án BĐS Đà Nẵng</a>.</p>
 
 <h2>Hạ tầng chung: cả ba dự án cùng hưởng lợi</h2>
-<p>Ba dự án đều nằm trên trục Nguyễn Phước Lan – đường 29/3 – Minh Mạng, kết nối về trung tâm qua cầu Hòa Xuân. Cụm nút giao cầu Hòa Xuân hơn 1.378 tỷ đồng (thực hiện 2026 – 2029) bổ sung một cầu mới phía hạ lưu, giúp giảm ùn tắc giờ cao điểm.</p>
+<p>Một điểm chung khi so sánh FourS Tower, Spana Tower và S-Light Tower: ba dự án đều nằm trên trục Nguyễn Phước Lan – đường 29/3 – Minh Mạng, kết nối về trung tâm qua cầu Hòa Xuân. Cụm nút giao cầu Hòa Xuân hơn 1.378 tỷ đồng (thực hiện 2026 – 2029) bổ sung một cầu mới phía hạ lưu, giúp giảm ùn tắc giờ cao điểm.</p>
 <p>Spana Tower và S-Light Tower gần cầu hơn nên hưởng lợi trực tiếp; FourS Tower ở sâu hơn về phía Nam nhưng gần biển và sông Cổ Cò. Xem phân tích tại bài <a href="/bat-dong-san-nam-da-nang-ha-tang-2026/">bất động sản Nam Đà Nẵng 2026</a>.</p>
 
 <h2>Câu hỏi nên đặt ra trước khi chọn</h2>
@@ -159,21 +170,25 @@ HTML
 </ul>
 <p>Trả lời rõ bốn câu hỏi này thường giúp loại nhanh một hoặc hai lựa chọn, thay vì so sánh dàn trải.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá ba dự án theo cùng thời điểm và được so sánh căn cụ thể theo ngân sách của bạn.</p>
+<h2>Ví dụ so sánh FourS Tower, Spana Tower theo tổng tiền</h2>
+<p>Giả sử ngân sách khoảng 2,5 tỷ đồng. Với mức giá tham khảo hiện có, FourS Tower cho phép chọn Studio (từ khoảng 1,7 tỷ) và còn dư cho nội thất; S-Light Tower có giá từ khoảng 2,4 tỷ/căn nên chỉ vừa căn nhỏ nhất; Spana Tower tính theo đơn giá khoảng 60 triệu/m², cần đối chiếu diện tích căn cụ thể trong bảng hàng. Đây là phép so sánh FourS Tower, Spana Tower và S-Light Tower ở mức "giá từ", chưa tính chiết khấu và VAT.</p>
+<p>Nếu ưu tiên nhận nhà sớm để cho thuê, mốc bàn giao dự kiến 30/6/2027 của Spana Tower có lợi thế khoảng một năm so với hai dự án còn lại. Khi so sánh FourS Tower, Spana Tower về dòng tiền, khoảng thời gian chờ này cũng là chi phí cơ hội cần tính.</p>
+
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá ba dự án theo cùng thời điểm và được so sánh FourS Tower, Spana Tower, S-Light Tower theo căn cụ thể và ngân sách của bạn.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'So sánh FourS Tower, Spana Tower và S-Light 2026',
 			'desc'      => 'So sánh FourS Tower, Spana Tower và S-Light Tower của Sun Group: vị trí, quy mô, thời điểm bàn giao, giá tham khảo. Gọi Hoàng Hiệp 0904 567 009.',
 			'points'    => array(
-				'FourS Tower: 2.394 căn, Sun Riverpolis, giá tham khảo khoảng 50 – 60 triệu/m².',
+				'So sánh FourS Tower, Spana Tower: FourS Tower 2.394 căn tại Sun Riverpolis, giá tham khảo khoảng 50 – 60 triệu/m².',
 				'Spana Tower: 1.237 căn chân cầu Hòa Xuân, bàn giao dự kiến 30/6/2027.',
 				'S-Light Tower: gần 800 căn view ba dòng sông, diện tích 33,3 – 95,1 m², ra mắt 6/2026.',
 			),
 			'faq'       => array(
 				array( 'Dự án căn hộ Sun Group nào ở Đà Nẵng bàn giao sớm nhất?', 'Trong ba dự án, Spana Tower có lịch bàn giao dự kiến sớm nhất là 30/6/2027.' ),
 				array( 'Căn hộ Sun Group nào có view sông đẹp?', 'S-Light Tower nằm tại ngã ba sông Hàn – Cẩm Lệ – Đô Toả, tầm nhìn về sông và pháo hoa DIFF.' ),
-				array( 'FourS Tower và Spana Tower khác nhau thế nào?', 'FourS Tower thuộc Sun Riverpolis (Hòa Quý), 4 tòa 2.394 căn; Spana Tower thuộc Sun NeO City, chân cầu Hòa Xuân, 2 tòa 1.237 căn, có shophouse khối đế.' ),
+				array( 'So sánh FourS Tower, Spana Tower khác nhau thế nào?', 'Khi so sánh FourS Tower, Spana Tower: FourS Tower thuộc Sun Riverpolis (Hòa Quý), 4 tòa 2.394 căn; Spana Tower thuộc Sun NeO City, chân cầu Hòa Xuân, 2 tòa 1.237 căn, có shophouse khối đế.' ),
 			),
 		),
 		'sources'  => array( 'https://tuoitre.vn/bon-thap-can-ho-thuoc-du-an-sun-group-nam-da-nang-ra-mat-20260319112111814.htm', 'https://cafeland.vn/du-an/spana-tower-du-an-can-ho-tai-da-nang-5406.html', 'https://cafef.vn/sun-property-ra-mat-s-light-tower-tam-diem-vuong-khi-trung-tam-nam-da-nang-188260622082242751.chn', 'https://cafeland.vn/du-an/s-light-tower-to-hop-can-ho-thuoc-sun-neo-city-da-nang-5622.html' ),
@@ -189,9 +204,11 @@ HTML
 		'week'     => 3,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>Sun Riverpolis là khu đô thị ven sông của Sun Group tại phường Hòa Quý (cũ), quận Ngũ Hành Sơn, phía Nam Đà Nẵng – được bao quanh bởi sông nước, cách biển chưa đến 2 km. Đến tháng 10/2026, dự án đã có hai sản phẩm chính trên thị trường: phân khu đất nền Đầm Sen (mở bán từ 8/2025) và tổ hợp căn hộ FourS Tower (ra mắt 3/2026).</p>
+<p>Khu đô thị Sun Riverpolis là dự án ven sông của Sun Group tại phường Hòa Quý (cũ), quận Ngũ Hành Sơn, phía Nam Đà Nẵng – được bao quanh bởi sông nước, cách biển chưa đến 2 km. Đến tháng 10/2026, dự án đã có hai sản phẩm chính trên thị trường: phân khu đất nền Đầm Sen (mở bán từ 8/2025) và tổ hợp căn hộ FourS Tower (ra mắt 3/2026).</p>
 
-<h2>Tổng quan Sun Riverpolis</h2>
+<!--hh-img:img/sun-riverpolis/sun-riverpolis-tong-mat-bang-toan-khu-hoa-quy.jpg|Tổng mặt bằng khu đô thị Sun Riverpolis tại Hòa Quý, ba mặt giáp sông (tài liệu chủ đầu tư)-->
+
+<h2>Tổng quan khu đô thị Sun Riverpolis</h2>
 <table>
 <thead><tr><th>Hạng mục</th><th>Thông tin</th></tr></thead>
 <tbody>
@@ -203,14 +220,14 @@ HTML
 </tbody>
 </table>
 
-<h2>Vị trí Sun Riverpolis: ven sông, gần biển</h2>
+<h2>Vị trí khu đô thị Sun Riverpolis: ven sông, gần biển</h2>
 <p><a href="/du-an/sun-riverpolis/">Sun Riverpolis</a> nằm trên khu vực ba mặt giáp sông của Hòa Quý, cách trung tâm thành phố khoảng 10 km. Trục giao thông chính là Nguyễn Phước Lan và Minh Mạng; khu vực kết nối với trung tâm qua cầu Hòa Xuân, cầu Trung Lương và với biển qua các tuyến về phía Võ Chí Công.</p>
 <p>Đây là một trong ba cấu phần của chuỗi đô thị Sun Group ở Đông Nam Đà Nẵng, bên cạnh Sunneva Island và các khu thương mại lân cận. Phía Bắc là <a href="/du-an/sun-neo-city/">Sun NeO City</a> với các tòa Cora, Spana, S-Light.</p>
 
 <h3>Điểm nhấn cảnh quan</h3>
-<p>Theo VnExpress, công viên ven sông là điểm nhấn của Sun Riverpolis với quy mô khoảng 50 ha. Thiết kế tận dụng mặt nước tự nhiên giúp khu đô thị có không khí thoáng, phù hợp gia đình trẻ và người lớn tuổi.</p>
+<p>Theo <a href="https://vnexpress.net/sun-riverpolis-khu-do-thi-ven-song-tai-da-nang-4504158.html">VnExpress</a>, công viên ven sông là điểm nhấn của khu đô thị Sun Riverpolis với quy mô khoảng 50 ha. Thiết kế tận dụng mặt nước tự nhiên giúp khu đô thị có không khí thoáng, phù hợp gia đình trẻ và người lớn tuổi.</p>
 
-<h2>Các phân khu đang mở bán</h2>
+<h2>Các phân khu đang mở bán trong khu đô thị Sun Riverpolis</h2>
 <table>
 <thead><tr><th>Phân khu</th><th>Loại hình</th><th>Quy mô</th><th>Thời điểm</th></tr></thead>
 <tbody>
@@ -224,7 +241,7 @@ HTML
 <h3>Đất nền Đầm Sen</h3>
 <p>Phân khu <a href="/du-an/dat-nen-dam-sen-sun-riverpolis/">đất nền Đầm Sen</a> gồm các lô 100 – 150 m², lô mặt tiền Nguyễn Phước Lan, Minh Mạng khoảng 200 m² và quỹ đất biệt thự view sông. Giá tham khảo khi mở bán từ khoảng 4,8 tỷ/lô. Chi tiết tại bài <a href="/dat-nen-dam-sen-sun-riverpolis-gia-phap-ly/">giá và pháp lý đất nền Đầm Sen</a>.</p>
 
-<h2>Sun Riverpolis phù hợp với ai?</h2>
+<h2>Khu đô thị Sun Riverpolis phù hợp với ai?</h2>
 <ul>
 <li><strong>Gia đình mua để ở:</strong> căn hộ FourS Tower với tiện ích nội khu, môi trường ven sông.</li>
 <li><strong>Người muốn tự xây nhà:</strong> đất nền Đầm Sen có sổ đỏ lâu dài, diện tích phổ biến 100 – 125 m².</li>
@@ -232,10 +249,23 @@ HTML
 </ul>
 
 <h2>Lưu ý trước khi mua</h2>
-<p>Sun Riverpolis là khu đô thị quy mô lớn đang hình thành, tiện ích ngoại khu và mật độ dân cư cần thời gian để hoàn thiện. Quy mô và số liệu giữa các nguồn chưa hoàn toàn thống nhất, vì vậy bạn nên đối chiếu thông tin trong hợp đồng và văn bản của chủ đầu tư.</p>
+<p>Khu đô thị Sun Riverpolis có quy mô lớn và đang hình thành, tiện ích ngoại khu và mật độ dân cư cần thời gian để hoàn thiện. Quy mô và số liệu giữa các nguồn chưa hoàn toàn thống nhất, vì vậy bạn nên đối chiếu thông tin trong hợp đồng và văn bản của chủ đầu tư.</p>
 <p>Xem thêm bức tranh chung khu vực tại bài <a href="/bat-dong-san-nam-da-nang-ha-tang-2026/">hạ tầng Hòa Xuân – Hòa Quý và bất động sản Nam Đà Nẵng</a>, hoặc các dự án khác tại <a href="/khu-vuc/ngu-hanh-son/">khu vực Ngũ Hành Sơn</a>.</p>
 
-<h2>Sun Riverpolis so với Sun NeO City</h2>
+<h2>Mua trong khu đô thị Sun Riverpolis: căn hộ hay đất nền?</h2>
+<p>Hai sản phẩm chính hiện nay của khu đô thị Sun Riverpolis phục vụ hai nhu cầu khác nhau. Căn hộ FourS Tower có tổng tiền vào thấp hơn (Studio tham khảo từ khoảng 1,7 tỷ), có tiện ích nội khu ngay trong tòa, nhưng là sản phẩm hình thành trong tương lai và phải chờ bàn giao. Đất nền Đầm Sen có tổng tiền cao hơn (từ khoảng 4,8 tỷ/lô khi mở bán), đổi lại được sổ đỏ lâu dài theo đơn vị phân phối và chủ động thời điểm xây nhà.</p>
+<table>
+<thead><tr><th>Tiêu chí</th><th>Căn hộ FourS Tower</th><th>Đất nền Đầm Sen</th></tr></thead>
+<tbody>
+<tr><td>Tổng tiền tham khảo</td><td>Từ khoảng 1,7 tỷ</td><td>Từ khoảng 4,8 tỷ/lô</td></tr>
+<tr><td>Pháp lý</td><td>Sở hữu lâu dài, nhận sổ sau bàn giao</td><td>Sổ đỏ lâu dài (theo phân phối)</td></tr>
+<tr><td>Chi phí thêm</td><td>Nội thất, phí quản lý</td><td>Chi phí xây nhà</td></tr>
+<tr><td>Phù hợp</td><td>Ở ngay sau bàn giao, cho thuê</td><td>Tự xây, tích lũy dài hạn</td></tr>
+</tbody>
+</table>
+<p>Trong cùng khu đô thị Sun Riverpolis, lựa chọn đúng phụ thuộc vốn tự có và thời gian anh chị muốn nhận nhà.</p>
+
+<h2>Khu đô thị Sun Riverpolis so với Sun NeO City</h2>
 <table>
 <thead><tr><th>Tiêu chí</th><th>Sun Riverpolis</th><th>Sun NeO City</th></tr></thead>
 <tbody>
@@ -247,20 +277,20 @@ HTML
 </table>
 <p>Hai khu đô thị bổ trợ nhau: Sun NeO City thuận tiện về trung tâm, Sun Riverpolis yên tĩnh và gần biển hơn. Nếu đang phân vân giữa các tòa căn hộ, xem bài <a href="/so-sanh-fours-tower-spana-tower-s-light-tower/">so sánh FourS Tower, Spana Tower, S-Light Tower</a>.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận sơ đồ phân khu, bảng giá căn hộ FourS Tower và quỹ lô đất nền Đầm Sen đang có tại Sun Riverpolis.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận sơ đồ phân khu, bảng giá căn hộ FourS Tower và quỹ lô đất nền Đầm Sen đang có tại khu đô thị Sun Riverpolis.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Khu đô thị Sun Riverpolis 2026: vị trí, phân khu',
 			'desc'      => 'Khu đô thị Sun Riverpolis của Sun Group tại Hòa Quý: vị trí, quy mô, các phân khu FourS Tower và đất nền Đầm Sen. Gọi Hoàng Hiệp nhận thông tin mới.',
 			'points'    => array(
-				'Sun Riverpolis nằm tại Hòa Quý, Ngũ Hành Sơn, ba mặt giáp sông, cách biển chưa đến 2 km.',
+				'Khu đô thị Sun Riverpolis nằm tại Hòa Quý, Ngũ Hành Sơn, ba mặt giáp sông, cách biển chưa đến 2 km.',
 				'Quy mô khoảng 482,8 ha (theo VnExpress), thuộc hệ sinh thái hơn 1.000 ha cùng Sun NeO City.',
 				'Hai sản phẩm chính: đất nền Đầm Sen (từ 8/2025) và căn hộ FourS Tower (từ 3/2026).',
 			),
 			'faq'       => array(
-				array( 'Sun Riverpolis ở đâu?', 'Tại phường Hòa Quý (cũ), quận Ngũ Hành Sơn, phía Nam Đà Nẵng, thuộc khu đô thị Nam Hòa Xuân.' ),
-				array( 'Sun Riverpolis có những sản phẩm gì?', 'Hiện có căn hộ FourS Tower và đất nền Đầm Sen, cùng quỹ đất nhà phố, biệt thự ven sông.' ),
+				array( 'Khu đô thị Sun Riverpolis ở đâu?', 'Khu đô thị Sun Riverpolis nằm tại phường Hòa Quý (cũ), quận Ngũ Hành Sơn, phía Nam Đà Nẵng, thuộc khu đô thị Nam Hòa Xuân.' ),
+				array( 'Khu đô thị Sun Riverpolis có những sản phẩm gì?', 'Hiện có căn hộ FourS Tower và đất nền Đầm Sen, cùng quỹ đất nhà phố, biệt thự ven sông.' ),
 				array( 'Sun Riverpolis và Sun NeO City khác nhau thế nào?', 'Sun NeO City ở Hòa Xuân với các tòa Cora, Spana, S-Light; Sun Riverpolis ở Hòa Quý với FourS Tower và đất nền Đầm Sen. Hai khu cùng thuộc hệ sinh thái hơn 1.000 ha của Sun Group.' ),
 			),
 		),
@@ -269,17 +299,18 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'dat-nen-dam-sen-sun-riverpolis-gia-phap-ly',
-		'title'    => 'Đất nền Đầm Sen Sun Riverpolis: giá bán, pháp lý và cách chọn lô',
+		'title'    => 'Pháp lý đất nền Đầm Sen Sun Riverpolis: sổ đỏ, giá bán và cách chọn lô',
 		'excerpt'  => 'Đất nền Đầm Sen thuộc Sun Riverpolis: khoảng 900 lô 100 – 150 m², giá tham khảo từ khoảng 4,8 tỷ/lô, sổ đỏ lâu dài. Cập nhật 10/2026.',
 		'keyword'  => 'pháp lý đất nền Đầm Sen',
 		'project'  => 'dat-nen-dam-sen-sun-riverpolis',
 		'week'     => 3,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>Đất nền Đầm Sen là phân khu đất nền của Sun Riverpolis (Hòa Quý, Nam Đà Nẵng) do Sun Group mở bán từ ngày 9/8/2025, gồm khoảng 900 lô diện tích 100 – 150 m². Giá tham khảo khi mở bán từ khoảng 4,8 tỷ/lô, tương đương khoảng 40 – 48 triệu/m²; pháp lý sổ đỏ lâu dài theo các đơn vị phân phối. Thông tin cập nhật tháng 10/2026.</p>
+<p>Pháp lý đất nền Đầm Sen là câu hỏi đầu tiên của người mua phân khu đất nền thuộc Sun Riverpolis (Hòa Quý, Nam Đà Nẵng) do Sun Group mở bán từ ngày 9/8/2025, gồm khoảng 900 lô diện tích 100 – 150 m². Giá tham khảo khi mở bán từ khoảng 4,8 tỷ/lô, tương đương khoảng 40 – 48 triệu/m²; pháp lý sổ đỏ lâu dài theo các đơn vị phân phối. Thông tin cập nhật tháng 10/2026.</p>
 
 <h2>Tổng quan đất nền Đầm Sen</h2>
 <p><a href="/du-an/dat-nen-dam-sen-sun-riverpolis/">Đất nền Đầm Sen</a> nằm trong khu đô thị <a href="/du-an/sun-riverpolis/">Sun Riverpolis</a>, phường Hòa Quý (cũ), Ngũ Hành Sơn. Phân khu được mô tả có bốn mặt giáp sông, các lô mặt tiền Nguyễn Phước Lan, Minh Mạng và dãy đất biệt thự view sông gần cầu Trung Lương, đối diện Sunneva Island.</p>
+<!--hh-img:img/dam-sen/dam-sen-mat-bang-phan-khu-dam-sen.jpg|Mặt bằng phân khu Đầm Sen – kiểm tra pháp lý đất nền Đầm Sen theo đúng số thửa, vị trí lô trên bản đồ (tài liệu chủ đầu tư)-->
 <p>Kích thước lô phổ biến: 100 m² (5 x 20 m), 125 m² (5 x 25 m), 150 m² (7,5 x 25 m); lô mặt tiền trục chính khoảng 200 m².</p>
 
 <h2>Giá đất nền Đầm Sen tham khảo</h2>
@@ -296,10 +327,10 @@ HTML
 <tr><td>Mặt tiền Nguyễn Phước Lan, Minh Mạng</td><td>Khoảng 200 m²</td><td>Trục chính</td><td>Liên hệ</td></tr>
 </tbody>
 </table>
-<p>Bảng trên là giá tham khảo thời điểm mở bán, tổng hợp từ các sàn phân phối. Trên thị trường thứ cấp năm 2026, các sàn ghi nhận lô 100 m² khoảng 4 – 5,5 tỷ, lô lớn 200 – 210 m² có thể lên khoảng 8 – 13,8 tỷ tùy vị trí, hướng. Giá chính xác phụ thuộc từng lô, hãy yêu cầu bảng hàng cập nhật trước khi quyết định.</p>
+<p>Giá chỉ có ý nghĩa khi đi cùng pháp lý đất nền Đầm Sen rõ ràng cho từng lô. Bảng trên là giá tham khảo thời điểm mở bán, tổng hợp từ các sàn phân phối. Trên thị trường thứ cấp năm 2026, các sàn ghi nhận lô 100 m² khoảng 4 – 5,5 tỷ, lô lớn 200 – 210 m² có thể lên khoảng 8 – 13,8 tỷ tùy vị trí, hướng. Giá chính xác phụ thuộc từng lô, hãy yêu cầu bảng hàng cập nhật trước khi quyết định.</p>
 
-<h2>Pháp lý đất nền Đầm Sen</h2>
-<p>Theo thông tin từ các đơn vị phân phối, đất nền Đầm Sen có <strong>sổ đỏ lâu dài</strong>, có thể sang tên. Dù vậy, người mua vẫn nên tự kiểm tra:</p>
+<h2>Pháp lý đất nền Đầm Sen: sổ đỏ và những gì cần kiểm tra</h2>
+<p>Theo thông tin từ các đơn vị phân phối, pháp lý đất nền Đầm Sen là <strong>sổ đỏ lâu dài</strong>, có thể sang tên. Dù vậy, người mua vẫn nên tự kiểm tra:</p>
 <ul>
 <li>Bản gốc giấy chứng nhận quyền sử dụng đất, đúng số thửa, tờ bản đồ, diện tích.</li>
 <li>Thông tin quy hoạch lô: mật độ xây dựng, số tầng, chỉ giới xây dựng.</li>
@@ -307,11 +338,15 @@ HTML
 <li>Với hàng chuyển nhượng lại, kiểm tra người bán đúng là chủ sở hữu trên sổ.</li>
 </ul>
 
+<h2>Thuế, phí khi sang tên: phần thường bị quên trong pháp lý đất nền Đầm Sen</h2>
+<p>Với lô mua lại trên thị trường thứ cấp, hoàn tất pháp lý đất nền Đầm Sen đồng nghĩa với hợp đồng chuyển nhượng công chứng, nộp thuế thu nhập cá nhân, lệ phí trước bạ và đăng ký biến động. Mức lệ phí trước bạ nhà đất năm 2026 được <a href="https://thuvienphapluat.vn/phap-luat-nha-dat/le-phi-truoc-ba-nha-dat-nam-2026-hien-nay-la-bao-nhieu-14934.html">Thư Viện Pháp Luật</a> tổng hợp; phí công chứng tính theo giá trị hợp đồng.</p>
+<p>Hai bên nên ghi rõ trong hợp đồng đặt cọc ai chịu khoản nào. Với lô giá vài tỷ đồng, chênh lệch thuế phí đủ lớn để ảnh hưởng quyết định, nên Hoàng Hiệp luôn tính vào bảng tổng chi phí khi tư vấn pháp lý đất nền Đầm Sen.</p>
+
 <h2>Cách chọn lô đất nền Đầm Sen</h2>
 <h3>Mua để xây nhà ở</h3>
 <p>Ưu tiên lô 100 – 125 m² đường 7,5 m, gần công viên, trường học nội khu, hướng Đông Nam hoặc Nam. Lô nhỏ giúp tổng tiền vừa sức, dễ xây nhà phố 3 – 4 tầng.</p>
 <h3>Mua để đầu tư</h3>
-<p>Lô mặt tiền trục chính hoặc lô view sông có tính thanh khoản và khả năng kinh doanh tốt hơn, nhưng tổng tiền lớn. Nên giữ trung – dài hạn để hưởng lợi từ hạ tầng như cụm nút giao cầu Hòa Xuân (2026 – 2029).</p>
+<p>Lô mặt tiền trục chính hoặc lô view sông có tính thanh khoản và khả năng kinh doanh tốt hơn nhưng tổng tiền lớn; việc kiểm tra pháp lý đất nền Đầm Sen với các lô này cần kỹ như lô nội khu. Nên giữ trung – dài hạn để hưởng lợi từ hạ tầng như cụm nút giao cầu Hòa Xuân (2026 – 2029).</p>
 <h3>Biệt thự view sông</h3>
 <p>Quỹ đất biệt thự gần cầu Trung Lương khoảng 68 – 92 lô và dãy đối diện Sunneva Island khoảng 24 lô, phù hợp khách tìm không gian sống rộng. Giá từng lô đang cập nhật theo đợt, liên hệ để nhận danh sách.</p>
 
@@ -321,31 +356,32 @@ HTML
 <h2>Quy trình mua đất nền Đầm Sen</h2>
 <ol>
 <li><strong>Chọn lô:</strong> xem sơ đồ phân lô, đối chiếu hướng, lộ giới, khoảng cách tới sông và tiện ích.</li>
-<li><strong>Kiểm tra pháp lý:</strong> bản gốc sổ, thông tin quy hoạch, tình trạng thế chấp.</li>
+<li><strong>Kiểm tra pháp lý đất nền Đầm Sen:</strong> bản gốc sổ, thông tin quy hoạch, tình trạng thế chấp.</li>
 <li><strong>Đặt cọc:</strong> hợp đồng đặt cọc ghi rõ số tiền, thời hạn công chứng, điều kiện hoàn cọc.</li>
 <li><strong>Công chứng chuyển nhượng:</strong> thanh toán theo thỏa thuận, nộp thuế, phí.</li>
 <li><strong>Sang tên:</strong> nộp hồ sơ đăng ký biến động tại cơ quan đất đai và nhận sổ mang tên mình.</li>
 </ol>
-<p>Với lô mua từ chủ đầu tư, quy trình có thể khác (hợp đồng mua bán, tiến độ thanh toán), cần đọc kỹ chính sách từng đợt.</p>
+<p>Với lô mua từ chủ đầu tư, quy trình có thể khác (hợp đồng mua bán, tiến độ thanh toán), cần đọc kỹ chính sách từng đợt và hỏi rõ thời điểm sổ được sang tên – đây là điểm mấu chốt của pháp lý đất nền Đầm Sen khi mua sơ cấp.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng hàng đất nền Đầm Sen theo block, kiểm tra pháp lý từng lô và tư vấn chọn lô theo ngân sách.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng hàng đất nền Đầm Sen theo block, kiểm tra pháp lý đất nền Đầm Sen từng lô và tư vấn chọn lô theo ngân sách.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Pháp lý đất nền Đầm Sen 2026: sổ đỏ và giá lô',
 			'desc'      => 'Pháp lý đất nền Đầm Sen Sun Riverpolis: khoảng 900 lô 100 – 150 m², sổ đỏ lâu dài theo đơn vị phân phối, giá tham khảo từ 4,8 tỷ. Gọi Hoàng Hiệp.',
 			'points'    => array(
-				'Khoảng 900 lô 100 – 150 m², mở bán từ 9/8/2025 tại Sun Riverpolis, Hòa Quý.',
+				'Pháp lý đất nền Đầm Sen: sổ đỏ lâu dài theo đơn vị phân phối; khoảng 900 lô 100 – 150 m², mở bán từ 9/8/2025.',
 				'Giá tham khảo khi mở bán từ khoảng 4,8 tỷ/lô, khoảng 40 – 48 triệu/m².',
 				'Pháp lý sổ đỏ lâu dài theo đơn vị phân phối; cần kiểm tra sổ, quy hoạch từng lô.',
 			),
 			'faq'       => array(
 				array( 'Đất nền Đầm Sen giá bao nhiêu?', 'Giá tham khảo khi mở bán từ khoảng 4,8 tỷ/lô 100 m²; một số block khoảng 5,2 – 8 tỷ. Giá thay đổi theo vị trí và thời điểm.' ),
-				array( 'Đất nền Đầm Sen có sổ đỏ chưa?', 'Theo các đơn vị phân phối, đất nền Đầm Sen có sổ đỏ lâu dài. Người mua nên kiểm tra bản gốc và hồ sơ quy hoạch từng lô.' ),
+				array( 'Pháp lý đất nền Đầm Sen thế nào, đã có sổ đỏ chưa?', 'Theo các đơn vị phân phối, pháp lý đất nền Đầm Sen là sổ đỏ lâu dài. Người mua nên kiểm tra bản gốc và hồ sơ quy hoạch từng lô.' ),
+				array( 'Mua lại lô Đầm Sen cần làm thủ tục pháp lý gì?', 'Kiểm tra bản gốc sổ và quy hoạch lô, ký hợp đồng chuyển nhượng có công chứng, nộp thuế thu nhập cá nhân, lệ phí trước bạ, rồi đăng ký biến động để nhận sổ mang tên mình.' ),
 				array( 'Diện tích lô đất nền Đầm Sen là bao nhiêu?', 'Phổ biến 100 m² (5 x 20), 125 m² (5 x 25), 150 m² (7,5 x 25); lô mặt tiền trục chính khoảng 200 m².' ),
 			),
 		),
-		'sources'  => array( 'https://datnenhoaxuan.com/mo-ban-riverpolis-dam-sen', 'https://kingreal.com/to-hop-sun-riverpolis-da-nang/', 'https://datnenhoaxuan.com/mo-ban-111-116-122-157-dam-sen-nam-hoa-xuan', 'https://batdongsan.com.vn/ban-dat-phuong-hoa-quy-prj-han-river-village-nam-hoa-xuan/sun-group-mo-ban-900-lo-nen-khu-dam-sen-gia-goc-pr43762102' ),
+		'sources'  => array( 'https://thuvienphapluat.vn/phap-luat-nha-dat/le-phi-truoc-ba-nha-dat-nam-2026-hien-nay-la-bao-nhieu-14934.html', 'https://datnenhoaxuan.com/mo-ban-riverpolis-dam-sen', 'https://kingreal.com/to-hop-sun-riverpolis-da-nang/', 'https://datnenhoaxuan.com/mo-ban-111-116-122-157-dam-sen-nam-hoa-xuan', 'https://batdongsan.com.vn/ban-dat-phuong-hoa-quy-prj-han-river-village-nam-hoa-xuan/sun-group-mo-ban-900-lo-nen-khu-dam-sen-gia-goc-pr43762102' ),
 	);
 
 	$posts[] = array(
@@ -361,11 +397,14 @@ HTML
 		'content'  => <<<'HTML'
 <p>Bất động sản Nam Đà Nẵng năm 2026 được dẫn dắt bởi hai yếu tố: hạ tầng giao thông Hòa Xuân – Hòa Quý được nâng cấp và nguồn cung lớn từ các khu đô thị Sun Group. Mặt bằng giá căn hộ mới khu vực tham khảo khoảng 50 – 60 triệu/m², đất nền Nam Hòa Xuân phổ biến khoảng 2,2 – 4,2 tỷ/lô nội khu. Bài viết cập nhật tháng 10/2026.</p>
 
-<h2>Hạ tầng Hòa Xuân – Hòa Quý 2026</h2>
+<!--hh-img:img/nam-hoa-xuan/nam-hoa-xuan-flycam-8-2025-toan-canh-nhin-ra-bien.jpg|Khu Nam Hòa Xuân nhìn ra biển (flycam 8/2025) – trục phát triển chính của bất động sản Nam Đà Nẵng-->
+<p>Sức hút của khu vực này được <a href="https://tuoitre.vn/tai-sao-nam-da-nang-thanh-diem-nong-hut-gioi-dau-tu-dia-oc-20260430213905157.htm">Tuổi Trẻ</a> phân tích từ góc độ quỹ đất, hạ tầng và các khu đô thị lớn. Dưới đây là các yếu tố chính đang định hình bất động sản Nam Đà Nẵng.</p>
+
+<h2>Hạ tầng Hòa Xuân – Hòa Quý 2026: nền tảng của bất động sản Nam Đà Nẵng</h2>
 <h3>Cụm nút giao cầu Hòa Xuân hơn 1.378 tỷ đồng</h3>
 <p>Đây là dự án quan trọng nhất với phía Nam: giữ cầu Hòa Xuân hiện hữu, xây thêm cầu mới phía hạ lưu dài khoảng 303,5 m, rộng 14 m, kết hợp nút giao Lê Thanh Nghị – Cách Mạng Tháng Tám – Thăng Long với cầu vượt, hầm chui. Dự án thực hiện giai đoạn 2026 – 2029. Phân tích chi tiết tại bài <a href="/cum-nut-giao-cau-hoa-xuan-bat-dong-san-nam-da-nang/">cụm nút giao cầu Hòa Xuân và bất động sản Nam Đà Nẵng</a>.</p>
 <h3>Mạng lưới cầu và trục chính</h3>
-<p>Khu vực đã có các cầu Cẩm Lệ, Nguyễn Tri Phương, Hòa Xuân, Trung Lương kết nối về trung tâm, cùng các trục Nguyễn Phước Lan, Minh Mạng, đường 29/3. Phía Đông là trục Võ Chí Công nối ra biển và về Hội An.</p>
+<p>Bất động sản Nam Đà Nẵng đã có các cầu Cẩm Lệ, Nguyễn Tri Phương, Hòa Xuân, Trung Lương kết nối về trung tâm, cùng các trục Nguyễn Phước Lan, Minh Mạng, đường 29/3. Phía Đông là trục Võ Chí Công nối ra biển và về Hội An.</p>
 <h3>Lợi thế sau hợp nhất Đà Nẵng – Quảng Nam</h3>
 <p>Từ 1/7/2025, Hòa Xuân, Hòa Quý không còn là vùng giáp ranh mà nằm giữa trục phát triển Đà Nẵng – Điện Bàn – Hội An, thuận lợi cho đầu tư hạ tầng liền mạch.</p>
 
@@ -387,19 +426,19 @@ HTML
 <h3>Căn hộ trục Nguyễn Phước Lan – 29/3</h3>
 <p>Các tòa thuộc <a href="/du-an/sun-neo-city/">Sun NeO City</a> gần cầu Hòa Xuân hưởng lợi trực tiếp khi nút giao hoàn thành, thời gian về Hải Châu rút ngắn và ổn định hơn.</p>
 <h3>Đất nền có sổ, đã có hạ tầng</h3>
-<p>Đất nền Nam Hòa Xuân, Đầm Sen phù hợp người muốn tự xây nhà. Phân khúc này thường đi trước căn hộ khi hạ tầng có thông tin mới.</p>
+<p>Đất nền Nam Hòa Xuân, Đầm Sen là phân khúc lâu đời nhất của bất động sản Nam Đà Nẵng, phù hợp người muốn tự xây nhà. Phân khúc này thường đi trước căn hộ khi hạ tầng có thông tin mới.</p>
 <h3>Biệt thự, nhà phố ven sông</h3>
 <p>Quỹ đất ven sông Cổ Cò, sông Cẩm Lệ có giới hạn, phù hợp người mua để ở lâu dài, ít chịu áp lực bán.</p>
 
-<h2>Rủi ro cần lưu ý</h2>
+<h2>Rủi ro cần lưu ý khi mua bất động sản Nam Đà Nẵng</h2>
 <ul>
-<li><strong>Thi công kéo dài:</strong> trong giai đoạn 2026 – 2029, giao thông quanh chân cầu Hòa Xuân có thể bị ảnh hưởng.</li>
+<li><strong>Thi công kéo dài:</strong> trong giai đoạn 2026 – 2029, giao thông quanh chân cầu Hòa Xuân có thể bị ảnh hưởng; phương án phân luồng được <a href="https://thanhnien.vn/phan-luong-giao-thong-qua-cau-hoa-xuan-da-nang-nhung-xe-nao-bi-cam-185261028123729445.htm">Thanh Niên</a> đưa tin.</li>
 <li><strong>Nguồn cung căn hộ lớn:</strong> FourS Tower 2.394 căn, Spana Tower 1.237 căn, S-Light Tower gần 800 căn, cộng thêm Cora Tower.</li>
 <li><strong>Kỳ vọng giá đi trước hạ tầng:</strong> không nên mua bằng đòn bẩy cao chỉ dựa vào thông tin dự án hạ tầng.</li>
 </ul>
 
 <h2>Góc nhìn của Hoàng Hiệp</h2>
-<p>Nam Đà Nẵng là khu vực có câu chuyện tăng trưởng rõ ràng, nhưng nên xuống tiền theo nhu cầu thật. Người mua ở có thể chọn căn hộ bàn giao sớm hoặc đất nền đã có sổ; nhà đầu tư nên xác định thời gian nắm giữ tối thiểu 3 – 5 năm. Xem toàn bộ dự án khu vực tại <a href="/khu-vuc/cam-le/">khu vực Cẩm Lệ</a> và <a href="/khu-vuc/ngu-hanh-son/">Ngũ Hành Sơn</a>.</p>
+<p>Bất động sản Nam Đà Nẵng có câu chuyện tăng trưởng rõ ràng, nhưng nên xuống tiền theo nhu cầu thật. Người mua ở có thể chọn căn hộ bàn giao sớm hoặc đất nền đã có sổ; nhà đầu tư nên xác định thời gian nắm giữ tối thiểu 3 – 5 năm. Xem toàn bộ dự án khu vực tại <a href="/khu-vuc/cam-le/">khu vực Cẩm Lệ</a> và <a href="/khu-vuc/ngu-hanh-son/">Ngũ Hành Sơn</a>.</p>
 
 <h2>Nên chọn sản phẩm nào theo ngân sách?</h2>
 <table>
@@ -412,7 +451,16 @@ HTML
 </table>
 <p>Ngân sách trên là gợi ý theo giá tham khảo, chưa tính thuế phí và chi phí hoàn thiện.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được tư vấn chọn căn hộ, đất nền Nam Đà Nẵng phù hợp ngân sách và mục tiêu nắm giữ.</p>
+<h2>Checklist trước khi xuống tiền bất động sản Nam Đà Nẵng</h2>
+<ul>
+<li>Xác định sản phẩm đã có sổ hay hình thành trong tương lai; với căn hộ đang xây, đối chiếu tiến độ thanh toán với mốc bàn giao.</li>
+<li>Đi thực tế giờ cao điểm qua cầu Hòa Xuân để cảm nhận thời gian di chuyển trong giai đoạn thi công nút giao.</li>
+<li>So sánh giá chào bán với giá giao dịch thực của sản phẩm tương tự trong cùng khu, không chỉ so với tin rao.</li>
+<li>Tính kịch bản giữ tài sản 3 – 5 năm nếu thị trường đi ngang.</li>
+</ul>
+<p>Checklist này áp dụng cho cả căn hộ và đất nền bất động sản Nam Đà Nẵng, giúp tách quyết định khỏi kỳ vọng ngắn hạn.</p>
+
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được tư vấn chọn căn hộ, đất nền trong nhóm bất động sản Nam Đà Nẵng phù hợp ngân sách và mục tiêu nắm giữ.</p>
 HTML
 		,
 		'seo'      => array(
@@ -430,7 +478,7 @@ HTML
 				array( 'Có nên đầu tư bất động sản Nam Đà Nẵng lúc này?', 'Phù hợp nếu nắm giữ trung – dài hạn và không dùng đòn bẩy cao; nên ưu tiên sản phẩm pháp lý rõ, bàn giao sớm.' ),
 			),
 		),
-		'sources'  => array( 'https://tuoitre.vn/tai-sao-nam-da-nang-thanh-diem-nong-hut-gioi-dau-tu-dia-oc-20260430213905157.htm', 'https://plo.vn/da-nang-duyet-du-an-cum-nut-giao-cau-hoa-xuan-hon-1378-ti-dong-post899700.html', 'https://www.nhatot.com/tags/gia-dat-nam-hoa-xuan' ),
+		'sources'  => array( 'https://tuoitre.vn/tai-sao-nam-da-nang-thanh-diem-nong-hut-gioi-dau-tu-dia-oc-20260430213905157.htm', 'https://thanhnien.vn/phan-luong-giao-thong-qua-cau-hoa-xuan-da-nang-nhung-xe-nao-bi-cam-185261028123729445.htm', 'https://plo.vn/da-nang-duyet-du-an-cum-nut-giao-cau-hoa-xuan-hon-1378-ti-dong-post899700.html', 'https://www.nhatot.com/tags/gia-dat-nam-hoa-xuan' ),
 	);
 
 	/* ======================= TUẦN 4 ======================= */
