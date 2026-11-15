@@ -75,8 +75,13 @@ if STYLE == 'tap-chi':
 elif STYLE == 'poster':
     # Kiểu poster (theo mẫu anh Hiệp gửi 15/11/2026): nền ngà có vệt sáng, tiêu đề so le căn giữa
     # (chữ nghiêng Great Vibes + chữ in Cormorant SC màu đồng, chữ nhấn to đậm), 3 con số, ảnh tràn nửa dưới mờ dần lên.
-    hl = c.get('headline') or [[c['title'], 'cap', 0]]
-    head = ''.join('<span class="l %s" style="transform:translateX(%dpx)">%s</span>' % (k, int(dx), e(t)) for t, k, dx in hl)
+    # headline_poster: các dòng; mỗi dòng {"segs": [[chữ, script|cap|big], ...], "dx": lệch ngang px, "over": đè lên dòng trên}
+    # Ví dụ mẫu Noble Palace: [{"segs":[["Bình ổn","script"],["LÃI SUẤT","cap"]]}, {"segs":[["AN TÂM","big"]]},
+    #                          {"segs":[["Tích sản","script"]],"dx":200,"over":true}]
+    hl = c.get('headline_poster') or [{'segs': [[c['title'], 'cap']]}]
+    head = ''.join('<span class="ln%s" style="transform:translateX(%dpx)">%s</span>' % (
+        ' over' if ln.get('over') else '', int(ln.get('dx', 0)),
+        ''.join('<span class="l %s">%s</span>' % (k, e(t)) for t, k in ln['segs'])) for ln in hl)
     st = ''.join('<div class="st"><b>%s</b><span>%s</span></div>' % (e(a), e(b)) for a, b in stats[:3])
     body = """<div class="card pos">
 <div class="beam"></div>
@@ -87,15 +92,18 @@ elif STYLE == 'poster':
     css = """
 .pos{background:radial-gradient(120% 70% at 50% 0%,#fbf4e8 0%,#f3e5cd 55%,#e9d3b2 100%);color:#3a2412}
 .pos .beam{position:absolute;inset:0;background:linear-gradient(115deg,transparent 52%,rgba(255,255,255,.55) 62%,transparent 72%);pointer-events:none}
-.pos .ph{position:absolute;left:0;right:0;bottom:0;height:660px;background-size:cover;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 30%);mask-image:linear-gradient(180deg,transparent 0%,#000 30%)}
+.pos .ph{position:absolute;left:0;right:0;bottom:0;height:820px;background-size:cover;-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.04) 8%,rgba(0,0,0,.12) 16%,rgba(0,0,0,.26) 24%,rgba(0,0,0,.45) 32%,rgba(0,0,0,.66) 40%,rgba(0,0,0,.84) 48%,rgba(0,0,0,.95) 56%,#000 64%);mask-image:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.04) 8%,rgba(0,0,0,.12) 16%,rgba(0,0,0,.26) 24%,rgba(0,0,0,.45) 32%,rgba(0,0,0,.66) 40%,rgba(0,0,0,.84) 48%,rgba(0,0,0,.95) 56%,#000 64%)}
+.pos .ph:after{content:'';position:absolute;left:0;right:0;top:0;height:55%;background:linear-gradient(180deg,rgba(243,229,205,.9) 0%,rgba(243,229,205,.45) 45%,rgba(243,229,205,0) 100%)}
 .pos .top{position:absolute;left:60px;right:60px;top:54px;text-align:center;display:flex;flex-direction:column;align-items:center}
 .pos .brand{font:600 19px BVP;letter-spacing:.32em;color:#9a6a3a}
 .pos .tag{margin-top:14px;font:600 24px CSC;letter-spacing:.12em;color:#5a3a1e}
-.pos h1{margin:18px 0 6px;display:flex;flex-direction:column;align-items:center}
-.pos .l{display:block;white-space:nowrap;-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(180deg,#d39a5c 0%,#8a4a1c 55%,#b8783f 100%);font-variant-numeric:lining-nums}
-.pos .script{font:400 92px/1 GV;padding:6px 16px 14px;margin:0 0 -22px}
-.pos .cap{font:600 56px/1.05 CSC;letter-spacing:.04em}
-.pos .big{font:700 112px/.95 CSC;letter-spacing:.01em}
+.pos h1{margin:26px 0 4px;display:flex;flex-direction:column;align-items:center}
+.pos .ln{display:flex;align-items:baseline;justify-content:center;gap:18px;white-space:nowrap;position:relative}
+.pos .ln.over{margin-top:-26px;z-index:2}
+.pos .l{display:inline-block;white-space:nowrap;filter:drop-shadow(0 1px 0 rgba(255,255,255,.7)) drop-shadow(0 3px 6px rgba(120,60,20,.18));-webkit-background-clip:text;background-clip:text;color:transparent;background-image:linear-gradient(180deg,#d39a5c 0%,#8a4a1c 55%,#b8783f 100%);font-variant-numeric:lining-nums}
+.pos .script{font:400 96px/1.1 GV;padding:4px 18px 16px 10px;margin:0 -10px -10px 0}
+.pos .cap{font:600 62px/1 CSC;letter-spacing:.05em}
+.pos .big{font:700 138px/.9 CSC;letter-spacing:.02em;background-image:linear-gradient(180deg,#e0aa6c 0%,#9a5524 45%,#6e3510 70%,#b97d45 100%)}
 .pos .sub{margin:16px 0 0;font:500 26px/1.35 BVP;color:#6b4a2a}
 .pos .stats{margin-top:26px;display:flex;justify-content:center}
 .pos .st{padding:0 30px;text-align:center}.pos .st+.st{border-left:1.5px solid rgba(138,74,28,.35)}
@@ -165,6 +173,7 @@ tmp.write(page)
 tmp.close()
 js = '''const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1080,height:1350},deviceScaleFactor:2});
 await p.goto('file://'+process.argv[2]);await p.evaluate(()=>document.fonts.ready);await p.waitForTimeout(300);
+await p.evaluate(()=>document.querySelectorAll('.pos .ln').forEach(l=>{const w=l.scrollWidth;if(w>960){const k=960/w;l.querySelectorAll('.l').forEach(x=>{x.style.fontSize=(parseFloat(getComputedStyle(x).fontSize)*k)+'px';});}}));
 const o=await p.evaluate(()=>[...document.querySelectorAll('.lux h1:not(.hl),.sub,.st b,li b,li span,.box')].filter(e=>e.scrollWidth>e.clientWidth+1||e.getBoundingClientRect().right>1080).map(e=>e.textContent));
 if(o.length)console.error('TRAN CHU:',JSON.stringify(o));
 await p.screenshot({path:process.argv[3],type:'jpeg',quality:92});await b.close();})();'''
