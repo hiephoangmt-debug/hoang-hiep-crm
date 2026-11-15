@@ -32,7 +32,7 @@ function hh_posts_cum_du_an_11_2026( $posts ) {
 		'slug'     => 'gia-symphony-5-sun-symphony-residence-bao-nhieu',
 		'title'    => 'Giá Sun Symphony 5 Đà Nẵng bao nhiêu? Studio từ 2,5 tỷ, 1PN+ đến 4,54 tỷ (11/2026)',
 		'excerpt'  => 'Giá Symphony 5 – Sun Symphony Residence theo giỏ hàng 11/2026: studio 30 – 33 m² khoảng 2,50 – 3,30 tỷ, 1PN khoảng 3,09 – 3,30 tỷ, 1PN+ khoảng 3,45 – 4,54 tỷ (gồm VAT, phí bảo trì). Cách tính giá sau chiết khấu, vay 70%.',
-		'keyword'  => 'giá Sun Symphony 5',
+		'keyword'  => 'giá Symphony 5 bao nhiêu',
 		'keywords_extra' => array( 'giá Symphony 5 Đà Nẵng', 'bảng giá Symphony 5', 'giá căn hộ Sun Symphony Residence' ),
 		'project'  => 'symphony-5-sun-symphony-residence',
 		'schedule' => '2026-11-11 14:00',
@@ -42,7 +42,7 @@ function hh_posts_cum_du_an_11_2026( $posts ) {
 		'image_alt' => 'Symphony 5 – Sun Symphony Residence bên sông Hàn lúc hoàng hôn (phối cảnh chủ đầu tư)',
 		'content'  => <<<HTML
 <div class="hh-answer">
-<p><strong>Giá Sun Symphony 5 Đà Nẵng (giỏ hàng 11/2026):</strong> căn studio 30 – 33 m² khoảng <strong>2,50 – 3,30 tỷ</strong>; căn 1PN 46,4 – 47,8 m² khoảng 3,09 – 3,30 tỷ; căn 1PN+ 44 – 53 m² khoảng 3,45 – 4,54 tỷ. Giá đã gồm VAT và kinh phí bảo trì, chưa trừ chiết khấu. Căn 2PN và penthouse: liên hệ để nhận giá từng căn.</p>
+<p><strong>Giá Symphony 5 bao nhiêu?</strong> Theo giỏ hàng 11/2026, căn studio 30 – 33 m² khoảng <strong>2,50 – 3,30 tỷ</strong>; căn 1PN 46,4 – 47,8 m² khoảng 3,09 – 3,30 tỷ; căn 1PN+ 44 – 53 m² khoảng 3,45 – 4,54 tỷ. Giá đã gồm VAT và kinh phí bảo trì, chưa trừ chiết khấu. Căn 2PN và penthouse: liên hệ để nhận giá từng căn.</p>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá bán (tham khảo)</th></tr></thead>
 <tbody>
@@ -55,15 +55,15 @@ function hh_posts_cum_du_an_11_2026( $posts ) {
 </table>
 {$sign}
 </div>
-<p><strong>Giá Symphony 5</strong> là câu hỏi đầu tiên của hầu hết khách đang so sánh căn hộ bên sông Hàn. Bài này tổng hợp giá theo giỏ hàng tháng 11/2026 của {$s5}, giải thích giá đã gồm những gì và cách tính số tiền thực trả theo từng phương án thanh toán.</p>
+<p><strong>Giá Symphony 5 bao nhiêu</strong> là câu hỏi đầu tiên của hầu hết khách đang so sánh căn hộ bên sông Hàn. Bài này tổng hợp giá theo giỏ hàng tháng 11/2026 của {$s5}, giải thích giá đã gồm những gì và cách tính số tiền thực trả theo từng phương án thanh toán.</p>
 <!--hh-featured-->
 <h2>Thông tin nhanh về Symphony 5</h2>
 {$s5_facts}
-<h2>Giá Sun Symphony 5 theo loại căn</h2>
-<p>Studio chiếm phần lớn tòa (725/1.228 căn) nên có nhiều lựa chọn tầng và hướng nhất. Chênh lệch trong cùng loại căn (ví dụ studio từ 2,50 đến 3,30 tỷ) chủ yếu do <strong>tầng</strong> và <strong>hướng nhìn</strong>: căn nhìn thẳng sông Hàn, cầu Thuận Phước có giá cao hơn căn nhìn về phía cảng Thọ Quang hoặc nội khu.</p>
-<!--hh-img:img/sun-symphony-5/sun-symphony-5-pc-07-tang-19-view-song-cau.jpg|Căn hộ tầng 19 Symphony 5 nhìn sông Hàn và cầu Thuận Phước (phối cảnh chủ đầu tư)-->
+<h2>Giá Symphony 5 bao nhiêu theo từng loại căn</h2>
+<p>Khi hỏi giá Symphony 5 bao nhiêu, cần bắt đầu từ loại căn. Studio chiếm phần lớn tòa (725/1.228 căn) nên có nhiều lựa chọn tầng và hướng nhất. Chênh lệch trong cùng loại căn (ví dụ studio từ 2,50 đến 3,30 tỷ) chủ yếu do <strong>tầng</strong> và <strong>hướng nhìn</strong>: căn nhìn thẳng sông Hàn, cầu Thuận Phước có giá cao hơn căn nhìn về phía cảng Thọ Quang hoặc nội khu.</p>
+<!--hh-img:img/sun-symphony-5/sun-symphony-5-pc-07-tang-19-view-song-cau.jpg|Giá Symphony 5 bao nhiêu tùy nhiều vào tầng và hướng: căn tầng 19 nhìn sông Hàn, cầu Thuận Phước (phối cảnh chủ đầu tư)-->
 <p>Căn 1PN và 1PN+ có diện tích gần nhau (44 – 53 m²). Căn 1PN+ có thêm một góc đa năng nên giá cao hơn căn 1PN. Với khách mua để cho thuê, 1PN+ dễ cho gia đình nhỏ thuê dài ngày hơn studio.</p>
-<h2>Giá đã gồm và chưa gồm gì</h2>
+<h2>Giá Symphony 5 bao nhiêu: đã gồm và chưa gồm gì</h2>
 <ul>
 <li><strong>Đã gồm:</strong> thuế VAT và kinh phí bảo trì (theo giỏ hàng 11/2026).</li>
 <li><strong>Chưa trừ:</strong> chiết khấu 5% khi không vay (tính trên giá chưa VAT và kinh phí bảo trì), lãi 8%/năm khi thanh toán sớm hơn tiến độ.</li>
@@ -89,29 +89,43 @@ function hh_posts_cum_du_an_11_2026( $posts ) {
 <li><strong>Vay tối đa 70%:</strong> hỗ trợ lãi suất tối đa 30 tháng, miễn phí trả nợ trước hạn trong thời gian hỗ trợ.</li>
 <li>Miễn phí dịch vụ quản lý 1 năm từ ngày bàn giao chính thức.</li>
 </ul>
-<p>Chính sách theo CSBH 02/S5, áp dụng từ 20/07/2026 đến khi có chính sách mới. Xem đầy đủ tại trang dự án {$s5}.</p>
-<h2>So với các dự án cùng khu</h2>
-<p>Symphony 5 có tổng tiền thấp nhất trong nhóm căn hộ sát sông Hàn hiện nay. Các dự án sở hữu lâu dài ngay bên sông như <a href="/du-an/the-legend-da-nang/">The Legend</a> có căn 1PN từ khoảng 7,65 tỷ. Đổi lại, Symphony 5 là đất thương mại dịch vụ, sở hữu 50 năm (xem <a href="/phap-ly-symphony-5-so-huu-50-nam/">pháp lý Symphony 5</a>).</p>
+<p>Các ưu đãi này làm thay đổi trực tiếp câu trả lời giá Symphony 5 bao nhiêu với từng khách. Chính sách theo CSBH 02/S5, áp dụng từ 20/07/2026 đến khi có chính sách mới. Xem đầy đủ tại trang dự án {$s5}.</p>
+<h2>Giá Symphony 5 bao nhiêu so với các dự án cùng khu</h2>
+<p>Symphony 5 có tổng tiền thấp nhất trong nhóm căn hộ sát sông Hàn hiện nay. Các dự án sở hữu lâu dài ngay bên sông như <a href="/du-an/the-legend-da-nang/">The Legend</a> có căn 1PN từ khoảng 7,65 tỷ, <a href="/du-an/capital-square-da-nang/">Capital Square</a> có căn 1PN từ khoảng 4,3 tỷ. Đổi lại, Symphony 5 là đất thương mại dịch vụ, sở hữu 50 năm (xem <a href="/phap-ly-symphony-5-so-huu-50-nam/">pháp lý Symphony 5</a>).</p>
+<p>Khoảng chênh này đến từ hai yếu tố: thời hạn sở hữu (50 năm so với lâu dài) và diện tích căn nhỏ hơn. Vì vậy, khi đánh giá giá Symphony 5 bao nhiêu là hợp lý, anh chị nên đặt cạnh mục đích mua: cho thuê, nghỉ dưỡng thì lợi thế tổng tiền thấp rất rõ; để ở lâu dài, để lại con cháu thì cần tính thêm yếu tố thời hạn.</p>
+<p>Về tổng thể khu Sun Symphony Residence, báo <a href="https://vnexpress.net/tiem-nang-thuong-mai-tai-thuong-cang-sun-symphony-residence-da-nang-4776875.html">VnExpress</a> từng giới thiệu tiềm năng thương mại của thương cảng trong tổ hợp – yếu tố hỗ trợ nhu cầu thuê quanh dự án.</p>
+<h2>Giá Symphony 5 bao nhiêu sau ưu đãi: 5 bước tự tính</h2>
+<p>Con số trên giỏ hàng mới là điểm xuất phát. Để biết giá Symphony 5 bao nhiêu với đúng căn mình chọn, Hoàng Hiệp thường cùng khách đi qua 5 bước:</p>
+<ol>
+<li><strong>Lấy giá giỏ hàng</strong> của căn (đã gồm VAT và kinh phí bảo trì).</li>
+<li><strong>Tách VAT và kinh phí bảo trì</strong> theo phiếu tính giá, vì chiết khấu 5% khi không vay chỉ tính trên phần giá còn lại.</li>
+<li><strong>Chọn cách thanh toán:</strong> không vay để hưởng chiết khấu 5%, hoặc vay tối đa 70% để được hỗ trợ lãi suất tối đa 30 tháng.</li>
+<li><strong>Cộng gói hoàn thiện</strong> nếu không muốn nhận căn thô (studio 30 m² khoảng 303 triệu theo đơn giá 10,1 triệu/m²).</li>
+<li><strong>Trừ phần lãi 8%/năm</strong> nếu thanh toán sớm hơn tiến độ bằng vốn tự có.</li>
+</ol>
+<p>Vì mỗi bước phụ thuộc căn cụ thể, cùng là studio nhưng câu trả lời cho giá Symphony 5 bao nhiêu có thể chênh vài trăm triệu giữa hai căn khác tầng, khác hướng. Anh chị nên xin phiếu tính giá của đúng căn trước khi quyết định.</p>
 <p>Xem thêm: <a href="/mat-bang-can-ho-symphony-5/">mặt bằng căn hộ Symphony 5</a>.</p>
 {$cta('Symphony 5')}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá Sun Symphony 5 bao nhiêu? Studio từ 2,5 tỷ (11/2026)',
-			'desc'      => 'Giá Sun Symphony 5 giỏ hàng 11/2026: studio 2,50 – 3,30 tỷ, 1PN 3,09 – 3,30 tỷ, 1PN+ 3,45 – 4,54 tỷ, đã gồm VAT và phí bảo trì. Vay 70%.',
+			'seo_title' => 'Giá Symphony 5 bao nhiêu? Studio từ 2,5 tỷ (11/2026)',
+			'desc'      => 'Giá Symphony 5 bao nhiêu? Giỏ hàng 11/2026: studio 2,50 – 3,30 tỷ, 1PN 3,09 – 3,30 tỷ, 1PN+ 3,45 – 4,54 tỷ, đã gồm VAT và phí bảo trì.',
 			'points'    => array(
-				'Studio 30 – 33 m² khoảng 2,50 – 3,30 tỷ; 1PN+ 44 – 53 m² khoảng 3,45 – 4,54 tỷ',
+				'Giá Symphony 5 bao nhiêu: studio 30 – 33 m² khoảng 2,50 – 3,30 tỷ; 1PN+ 44 – 53 m² khoảng 3,45 – 4,54 tỷ',
 				'Giá gồm VAT và kinh phí bảo trì; chiết khấu 5% nếu không vay',
 				'Thanh toán 70% nhận căn sử dụng, dự kiến 30/06/2028',
 			),
 			'faq'       => array(
-				array( 'Giá bán Symphony 5 Đà Nẵng bao nhiêu?', 'Theo giỏ hàng 11/2026: studio 30 – 33 m² khoảng 2,50 – 3,30 tỷ, căn 1PN khoảng 3,09 – 3,30 tỷ, căn 1PN+ khoảng 3,45 – 4,54 tỷ. Giá đã gồm VAT và kinh phí bảo trì, chưa trừ chiết khấu.' ),
-				array( 'Studio Symphony 5 giá bao nhiêu?', 'Khoảng 2,50 – 3,30 tỷ cho căn 30 – 33 m², tùy tầng và hướng nhìn (giỏ hàng 11/2026).' ),
+				array( 'Giá Symphony 5 bao nhiêu theo giỏ hàng mới nhất?', 'Theo giỏ hàng 11/2026: studio 30 – 33 m² khoảng 2,50 – 3,30 tỷ, căn 1PN khoảng 3,09 – 3,30 tỷ, căn 1PN+ khoảng 3,45 – 4,54 tỷ. Giá đã gồm VAT và kinh phí bảo trì, chưa trừ chiết khấu.' ),
+				array( 'Giá Symphony 5 bao nhiêu với căn studio?', 'Khoảng 2,50 – 3,30 tỷ cho căn 30 – 33 m², tùy tầng và hướng nhìn (giỏ hàng 11/2026).' ),
 				array( 'Mua Symphony 5 cần trả trước bao nhiêu?', 'Khoảng 15% giá trị căn trong 10 ngày đầu (gồm 100 triệu khi ký hợp đồng thực hiện nguyện vọng). Nếu vay, ngân hàng cho vay tối đa 70%, chủ đầu tư hỗ trợ lãi suất tối đa 30 tháng.' ),
 				array( 'Symphony 5 khi nào nhận nhà?', 'Thanh toán tối thiểu 70% được nhận căn sử dụng dự kiến 30/06/2028 (Sun Early Key); bàn giao chính thức theo tiến độ không vay dự kiến 30/06/2030.' ),
+				array( 'Giá Symphony 5 bao nhiêu nếu không vay ngân hàng?', 'Vẫn lấy giá giỏ hàng làm gốc, sau đó được chiết khấu 5% tính trên giá chưa VAT và kinh phí bảo trì, giãn tiến độ đến 50 tháng (CSBH 02). Số tiền cụ thể theo phiếu tính giá của từng căn.' ),
+				array( 'Giá Symphony 5 bao nhiêu với căn 2PN và penthouse?', 'Giỏ hàng 11/2026 chưa công khai giá căn 2PN (63 – 70 m²) và 12 căn penthouse. Anh chị liên hệ Hoàng Hiệp để nhận giá từng căn còn trống.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://vnexpress.net/tiem-nang-thuong-mai-tai-thuong-cang-sun-symphony-residence-da-nang-4776875.html', 'https://cafeland.vn/du-an/du-an-sun-symphony-residence-da-nang-4336.html' ),
 	);
 
 	/* ---------------- Symphony 5 – Mặt bằng ---------------- */
@@ -134,7 +148,7 @@ HTML
 </div>
 <p>Bài này giúp anh chị đọc <strong>mặt bằng Symphony 5</strong> trước khi chọn căn: tòa có những loại căn nào, mỗi nhóm tầng khác nhau ra sao và nên chọn hướng nào theo mục đích ở hay cho thuê. Thông tin chung về dự án xem tại {$s5}.</p>
 <!--hh-featured-->
-<h2>Tổng mặt bằng phân khu</h2>
+<h2>Mặt bằng Symphony 5 trong tổng thể phân khu</h2>
 <p>Symphony 5 là mảnh ghép cuối của tổ hợp Sun Symphony Residence trên đường Lê Văn Duyệt. Quanh tháp có công viên thể thao khoảng 10.000 m², Central Park khoảng 5.000 m², công viên ven sông khoảng 4.000 m² và bến du thuyền. Khối đế là phố thương mại.</p>
 <h2>Cơ cấu căn hộ trên mặt bằng Symphony 5</h2>
 <table>
@@ -147,7 +161,7 @@ HTML
 </tbody>
 </table>
 <p><small>Tỷ lệ do Hoàng Hiệp tính từ số căn chủ đầu tư công bố.</small></p>
-<h2>Mặt bằng theo nhóm tầng</h2>
+<h2>Mặt bằng Symphony 5 theo nhóm tầng</h2>
 <ul>
 <li><strong>Tầng 3:</strong> tầng đầu tiên có căn hộ, nhiều căn có ban công sân vườn.</li>
 <li><strong>Tầng 3A – 18:</strong> nhóm tầng dùng chung một mặt bằng, chiếm số căn lớn nhất.</li>
@@ -155,9 +169,9 @@ HTML
 <li><strong>Tầng 19 – 21, 22 – 26, 27 – 30:</strong> các nhóm tầng cao, mỗi nhóm một mặt bằng riêng. Tầng 27 có sân yoga nhìn biển.</li>
 <li><strong>Tầng 31:</strong> tầng trên cùng.</li>
 </ul>
-<!--hh-img:img/sun-symphony-5/sun-symphony-5-mb-tang-3a-18.jpg|Mặt bằng tầng 3A – 18 tòa Symphony 5 (tài liệu chủ đầu tư)-->
-<!--hh-img:img/sun-symphony-5/sun-symphony-5-mb-tang-22-26.jpg|Mặt bằng tầng 22 – 26 tòa Symphony 5 (tài liệu chủ đầu tư)-->
-<h2>Layout từng loại căn</h2>
+<!--hh-img:img/sun-symphony-5/sun-symphony-5-mb-tang-3a-18.jpg|Mặt bằng Symphony 5 tầng 3A – 18, nhóm tầng có nhiều căn nhất (tài liệu chủ đầu tư)-->
+<!--hh-img:img/sun-symphony-5/sun-symphony-5-mb-tang-22-26.jpg|Mặt bằng Symphony 5 tầng 22 – 26 (tài liệu chủ đầu tư)-->
+<h2>Layout từng loại căn trên mặt bằng Symphony 5</h2>
 <h3>Studio 30,1 m²</h3>
 <p>Phòng ở liền khối bếp, một vệ sinh, ban công. Hợp người ở một mình hoặc cho khách du lịch thuê ngắn ngày.</p>
 <!--hh-img:img/sun-symphony-5/sun-symphony-5-lo-studio.jpg|Layout căn Studio Symphony 5 – 30,1 m² (tài liệu chủ đầu tư)-->
@@ -177,7 +191,7 @@ HTML
 <h2>Bàn giao</h2>
 <p>Căn hộ bàn giao thô bên trong (trần, sàn, tường), mặt ngoài, cửa nhôm kính và lô gia hoàn thiện. Khách có thể đăng ký bàn giao hoàn thiện liền tường khi ký hợp đồng mua bán.</p>
 <p>Xem giá từng loại căn: <a href="/gia-symphony-5-sun-symphony-residence-bao-nhieu/">giá bán Symphony 5</a>.</p>
-<h2>Giá theo loại căn trên mặt bằng</h2>
+<h2>Giá theo loại căn trên mặt bằng Symphony 5</h2>
 <table>
 <thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá (giỏ hàng 11/2026)</th></tr></thead>
 <tbody>
@@ -200,6 +214,14 @@ HTML
 <p>Căn hộ bàn giao thô bên trong: trần, sàn, tường để thô; mặt ngoài, cửa nhôm kính và lô gia (sàn lát, lan can kính cường lực) hoàn thiện; cửa chính gỗ chống cháy; có đầu chờ điện, nước, internet; điều hòa khách tự lắp. Khi ký hợp đồng mua bán, khách có thể đăng ký bàn giao hoàn thiện liền tường: khoảng 10,1 triệu/m² với studio, 9,5 triệu/m² với 1PN/1PN+, 11 triệu/m² với 2PN/3PN (đã gồm VAT, tạm tính theo diện tích thông thủy). Ví dụ studio 30 m², gói hoàn thiện khoảng 303 triệu (Hoàng Hiệp tự tính).</p>
 <h2>Nhận căn sớm khi trả 70%</h2>
 <p>Theo Sun Early Key, khách thanh toán tối thiểu 70% được nhận căn sử dụng dự kiến 30/06/2028, sớm hai năm so với mốc bàn giao chính thức theo tiến độ không vay (dự kiến 30/06/2030). Với căn mua để cho thuê, chọn mặt bằng và loại căn sớm giúp có thời gian chuẩn bị nội thất trước mốc nhận căn.</p>
+<h2>Đọc mặt bằng Symphony 5: 4 điều nên kiểm tra</h2>
+<ol>
+<li><strong>Nhóm tầng của căn:</strong> mỗi nhóm tầng (3, 3A – 18, 12A, 19 – 21, 22 – 26, 27 – 30, 31) có một bản vẽ riêng, nên hãy xem đúng mặt bằng Symphony 5 của nhóm tầng chứa căn mình chọn.</li>
+<li><strong>Hướng nhìn:</strong> xác định căn nhìn sông Hàn – cầu Thuận Phước, nhìn cảng Thọ Quang – Sơn Trà hay nhìn nội khu; giá trong cùng loại căn chênh chủ yếu vì yếu tố này.</li>
+<li><strong>Vị trí so với lõi thang:</strong> căn sát thang máy tiện đi lại nhưng có thể ồn hơn; căn cuối hành lang yên tĩnh hơn.</li>
+<li><strong>Diện tích thông thủy:</strong> giá và gói hoàn thiện tính theo diện tích thông thủy, nên đối chiếu con số trên mặt bằng Symphony 5 với phiếu tính giá.</li>
+</ol>
+<p>Với 725 studio, nhiều căn có cùng diện tích và cùng hướng. Nếu mua để cho thuê, chọn căn có điểm khác biệt (tầng cao, nhìn sông) giúp dễ cạnh tranh hơn khi cả tòa cùng nhận nhà. Thông tin chung về tổ hợp Sun Symphony Residence có thể xem thêm trên <a href="https://cafeland.vn/du-an/du-an-sun-symphony-residence-da-nang-4336.html">CafeLand</a>.</p>
 {$cta('Symphony 5')}
 HTML
 		,
@@ -207,7 +229,7 @@ HTML
 			'seo_title' => 'Mặt bằng Symphony 5: studio, 1PN+, 2PN theo tầng',
 			'desc'      => 'Mặt bằng Symphony 5 (Sun Symphony Residence): 31 tầng, 1.228 căn – 725 studio, 331 căn 1PN+, 160 căn 2PN, 12 penthouse; layout từng căn.',
 			'points'    => array(
-				'1.228 căn: 725 studio, 331 căn 1PN+, 160 căn 2PN, 12 penthouse',
+				'Mặt bằng Symphony 5 gồm 1.228 căn: 725 studio, 331 căn 1PN+, 160 căn 2PN, 12 penthouse',
 				'Mặt bằng chia theo nhóm tầng 3, 3A – 18, 12A, 19 – 21, 22 – 26, 27 – 30, 31',
 				'Bàn giao thô, có tùy chọn hoàn thiện liền tường',
 			),
@@ -215,9 +237,11 @@ HTML
 				array( 'Symphony 5 có bao nhiêu căn hộ?', '1.228 căn: 725 studio, 331 căn 1PN+, 160 căn 2PN và 12 penthouse, trong 1 tháp 31 tầng nổi.' ),
 				array( 'Diện tích căn hộ Symphony 5 bao nhiêu?', 'Studio 30 – 33 m², 1PN+ 44 – 53 m², 2PN 63 – 70 m² (thông thủy).' ),
 				array( 'Symphony 5 bàn giao thô hay hoàn thiện?', 'Bàn giao thô bên trong căn; khách có thể đăng ký hoàn thiện liền tường khi ký hợp đồng mua bán, chi phí khoảng 9,5 – 11 triệu/m² tùy loại căn.' ),
+				array( 'Mặt bằng Symphony 5 chia theo những nhóm tầng nào?', 'Tầng 3, tầng 3A – 18, tầng 12A, tầng 19 – 21, 22 – 26, 27 – 30 và tầng 31; mỗi nhóm tầng có một bản vẽ riêng.' ),
+				array( 'Xin mặt bằng Symphony 5 từng tầng ở đâu?', 'Anh chị nhắn Hoàng Hiệp (0904 567 009) để nhận bản mặt bằng Symphony 5 theo tầng kèm danh sách căn còn trống của đợt bán hiện tại.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://cafeland.vn/du-an/du-an-sun-symphony-residence-da-nang-4336.html', 'https://vnexpress.net/tiem-nang-thuong-mai-tai-thuong-cang-sun-symphony-residence-da-nang-4776875.html' ),
 	);
 
 	/* ---------------- Symphony 5 – Pháp lý ---------------- */
@@ -252,10 +276,10 @@ HTML
 <tr><td>20/7/2026</td><td>Áp dụng CSBH 02 – ký hợp đồng thực hiện nguyện vọng</td></tr>
 </tbody>
 </table>
-<h2>Sở hữu 50 năm nghĩa là gì</h2>
+<h2>Pháp lý Symphony 5: sở hữu 50 năm nghĩa là gì</h2>
 <p>Symphony 5 là căn hộ nghỉ dưỡng trên đất thương mại dịch vụ, nên thời hạn sở hữu theo thời hạn giao đất của dự án (50 năm), khác với căn hộ chung cư trên đất ở sở hữu lâu dài. Người mua vẫn được cấp giấy chứng nhận, được bán lại, cho thuê, thế chấp vay ngân hàng trong thời hạn sở hữu.</p>
-<p>Khi hết thời hạn, việc gia hạn thực hiện theo quy định pháp luật đất đai tại thời điểm đó. Anh chị nên hỏi rõ điều khoản này trong hợp đồng mua bán.</p>
-<h2>Ký hợp đồng gì, khi nào</h2>
+<p>Khi hết thời hạn, việc gia hạn thực hiện theo quy định pháp luật đất đai tại thời điểm đó – điểm hay bị bỏ qua khi tìm hiểu pháp lý Symphony 5. Anh chị nên hỏi rõ điều khoản này trong hợp đồng mua bán.</p>
+<h2>Pháp lý Symphony 5: ký hợp đồng gì, khi nào</h2>
 <ol>
 <li><strong>Hợp đồng thực hiện nguyện vọng:</strong> ký khi đặt 100 triệu (theo CSBH 02).</li>
 <li><strong>Đợt 2:</strong> ngày thứ 10, nộp đủ 15%.</li>
@@ -269,7 +293,7 @@ HTML
 <li><strong>Hợp:</strong> mua để cho thuê, nghỉ dưỡng, đầu tư trung hạn. Tổng tiền thấp hơn căn hộ sở hữu lâu dài cùng khu (studio từ khoảng 2,5 tỷ).</li>
 <li><strong>Cân nhắc kỹ:</strong> mua để ở lâu dài và để lại cho con cháu. Khi đó nên so với căn hộ sở hữu lâu dài như <a href="/du-an/the-legend-da-nang/">The Legend</a>.</li>
 </ul>
-<h2>5 câu nên hỏi trước khi ký</h2>
+<h2>5 câu về pháp lý Symphony 5 nên hỏi trước khi ký</h2>
 <ol>
 <li>Thời hạn sở hữu ghi trong hợp đồng tính từ ngày nào?</li>
 <li>Loại giấy chứng nhận được cấp và thời gian cấp dự kiến?</li>
@@ -286,9 +310,17 @@ HTML
 <li><strong>Khoản 5% ký quỹ cấp sổ:</strong> chủ đầu tư trả lãi 8%/năm đến khi có giấy chứng nhận.</li>
 <li>Miễn phí dịch vụ quản lý 1 năm; tích điểm Sun Signature 0,7% – 2% giá trị hợp đồng theo hạng.</li>
 </ul>
-<!--hh-img:img/sun-symphony-5/sun-symphony-5-tmb.jpg|Tổng mặt bằng phân khu Symphony 5 – Sun Symphony Residence (tài liệu chủ đầu tư)-->
+<!--hh-img:img/sun-symphony-5/sun-symphony-5-tmb.jpg|Tổng mặt bằng phân khu Symphony 5 – khi tìm hiểu pháp lý Symphony 5, nên đối chiếu với quy hoạch 1/500 đã duyệt (tài liệu chủ đầu tư)-->
 <h2>So sánh với căn hộ sở hữu lâu dài cùng khu</h2>
 <p>Bên bờ Đông sông Hàn, các dự án sở hữu lâu dài như The Legend có căn 1PN từ khoảng 7,65 tỷ; Capital Square có căn 1PN từ khoảng 4,3 tỷ. Symphony 5 có studio từ khoảng 2,5 tỷ nhờ là đất thương mại dịch vụ 50 năm. Lựa chọn phụ thuộc mục đích: cho thuê, nghỉ dưỡng thì tổng tiền thấp là lợi thế; để ở lâu dài, để lại con cháu thì sở hữu lâu dài phù hợp hơn.</p>
+<h2>Pháp lý Symphony 5 đối chiếu Luật Kinh doanh bất động sản 2023</h2>
+<p>Ngoài hồ sơ riêng của dự án, pháp lý Symphony 5 còn cần đặt trong khung chung của <a href="https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx">Luật Kinh doanh bất động sản 2023</a> (tra cứu trên Thư viện Pháp luật). Với nhà hình thành trong tương lai, luật đặt ra các nguyên tắc người mua nên nhớ:</p>
+<ul>
+<li>Trước khi ký hợp đồng mua bán, dự án cần có văn bản của Sở Xây dựng xác nhận đủ điều kiện bán.</li>
+<li>Lần thanh toán đầu không quá 30% giá trị hợp đồng (gồm tiền cọc); trước bàn giao không quá 70%; trước khi có giấy chứng nhận không quá 95%.</li>
+<li>Chủ đầu tư cần có ngân hàng bảo lãnh nghĩa vụ bàn giao.</li>
+</ul>
+<p>Đối chiếu với lịch thanh toán CSBH 02: khoảng 15% trong 10 ngày đầu, nhận căn khi đủ 70%, 5% cuối ký quỹ đến khi có giấy chứng nhận – các mốc này nằm trong ngưỡng luật cho phép. Khi chuẩn bị ký hợp đồng mua bán, anh chị nên đề nghị xem bản sao văn bản đủ điều kiện bán và thư bảo lãnh để hoàn tất phần kiểm tra pháp lý Symphony 5 của mình.</p>
 {$cta('Symphony 5')}
 HTML
 		,
@@ -296,17 +328,19 @@ HTML
 			'seo_title' => 'Pháp lý Symphony 5: sở hữu 50 năm, cần biết gì',
 			'desc'      => 'Pháp lý Symphony 5: đất thương mại dịch vụ, sở hữu 50 năm; đấu giá đất 14/12/2025, quy hoạch 1/500 ngày 23/4/2026. Ký hợp đồng gì, khi nào có sổ.',
 			'points'    => array(
-				'Đất thương mại dịch vụ, sở hữu 50 năm theo quyết định giao đất',
+				'Pháp lý Symphony 5: đất thương mại dịch vụ, sở hữu 50 năm theo quyết định giao đất',
 				'Quy hoạch 1/500 phê duyệt 23/4/2026; đang ký hợp đồng thực hiện nguyện vọng',
 				'5% cuối nộp ký quỹ khi bàn giao, chủ đầu tư trả lãi 8%/năm đến khi có sổ',
 			),
 			'faq'       => array(
-				array( 'Symphony 5 sở hữu bao lâu?', '50 năm, vì dự án nằm trên đất thương mại dịch vụ có quyết định giao đất thời hạn 50 năm.' ),
-				array( 'Symphony 5 có sổ hồng không?', 'Người mua được cấp giấy chứng nhận theo thời hạn sử dụng đất của dự án. 5% giá trị cuối cùng nộp ký quỹ khi bàn giao và chủ đầu tư trả lãi 8%/năm trên khoản này đến khi cấp giấy chứng nhận.' ),
+				array( 'Symphony 5 sở hữu bao lâu?', 'Theo pháp lý Symphony 5 hiện có, thời hạn là 50 năm, vì dự án nằm trên đất thương mại dịch vụ có quyết định giao đất thời hạn 50 năm.' ),
+				array( 'Symphony 5 có sổ hồng không?', 'Theo pháp lý Symphony 5, người mua được cấp giấy chứng nhận theo thời hạn sử dụng đất của dự án. 5% giá trị cuối cùng nộp ký quỹ khi bàn giao và chủ đầu tư trả lãi 8%/năm trên khoản này đến khi cấp giấy chứng nhận.' ),
 				array( 'Mua Symphony 5 ký hợp đồng gì?', 'Theo CSBH 02 từ 20/7/2026: ký hợp đồng thực hiện nguyện vọng khi đặt 100 triệu, sau đó ký hợp đồng mua bán (dự kiến ngày 7 sau hạn đợt 2).' ),
+				array( 'Pháp lý Symphony 5 hiện đã có những gì?', 'Theo tài liệu chủ đầu tư: đấu giá quyền sử dụng đất 14/12/2025, chấp thuận nhà đầu tư 12/03/2026, quyết định giao đất thời hạn 50 năm và quy hoạch chi tiết 1/500 phê duyệt 23/4/2026.' ),
+				array( 'Kiểm tra pháp lý Symphony 5 cần xem giấy tờ gì?', 'Quyết định giao đất, quy hoạch 1/500, văn bản đủ điều kiện bán của Sở Xây dựng, thư bảo lãnh ngân hàng và thời hạn sở hữu ghi trong hợp đồng mua bán.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx', 'https://vnexpress.net/tiem-nang-thuong-mai-tai-thuong-cang-sun-symphony-residence-da-nang-4776875.html' ),
 	);
 
 	/* ---------------- The Legend – Giá ---------------- */

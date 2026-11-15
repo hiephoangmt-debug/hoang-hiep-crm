@@ -92,10 +92,10 @@ HTML
 	$posts[] = array(
 		'slug'     => 'mo-rong-duong-truong-sa-vo-nguyen-giap-2633-ty',
 		'old_slug' => array( 'mo-rong-duong-vo-nguyen-giap-truong-sa-lac-long-quan-2633-ty' ),
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 15/11: chuẩn SEO 100 – rút gọn URL, thêm mốc thời gian, tác động giá thuê, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Mở rộng đường Võ Nguyên Giáp – Trường Sa 2.633 tỷ: Sun Saphia Residence và bất động sản ven biển hưởng lợi gì?',
 		'excerpt'  => 'Đà Nẵng đưa dự án mở rộng đường ven biển Võ Nguyên Giáp – Trường Sa – Lạc Long Quân, vốn dự kiến 2.633 tỷ đồng, vào nhóm "luồng xanh". Tác động tới căn hộ, khách sạn, đất ven biển Ngũ Hành Sơn.',
-		'keyword'  => 'mở rộng đường Võ Nguyên Giáp Trường Sa',
+		'keyword'  => 'mở rộng đường Trường Sa',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'đường ven biển Đà Nẵng', 'đường Trường Sa mở rộng', 'bất động sản ven biển Ngũ Hành Sơn' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-21',
@@ -103,15 +103,25 @@ HTML
 		'tags'     => array( 'Hạ tầng Đà Nẵng', 'Đường Trường Sa', 'Sun Saphia Residence' ),
 		'image'    => 'plugin:img/tin-tuc/mo-rong-duong-ven-bien-vo-nguyen-giap-truong-sa.jpg',
 		'content'  => <<<HTML
-<p>Dự án <strong>mở rộng đường Võ Nguyên Giáp – Trường Sa – Lạc Long Quân</strong>, trục ven biển nối trung tâm Đà Nẵng với Hội An, được thành phố đưa vào nhóm dự án đầu tư công ưu tiên giải quyết thủ tục theo cơ chế "luồng xanh", với vốn dự kiến <strong>2.633 tỷ đồng</strong> (Tuổi Trẻ, 10/2026). Tuyến đi ngang khu biển Sơn Thủy, nơi Sun Group đang ra mắt {$saphia}.</p>
+<p>Dự án mở rộng đường Trường Sa cùng hai đoạn nối <strong>Võ Nguyên Giáp – Lạc Long Quân</strong>, trục ven biển nối trung tâm Đà Nẵng với Hội An, được thành phố đưa vào nhóm dự án đầu tư công ưu tiên giải quyết thủ tục theo cơ chế "luồng xanh", với vốn dự kiến <strong>2.633 tỷ đồng</strong> (Tuổi Trẻ, 10/2026). Tuyến đi ngang khu biển Sơn Thủy, nơi Sun Group đang ra mắt {$saphia}.</p>
 <!--hh-featured-->
-<h2>Dự án mở rộng đường Võ Nguyên Giáp – Trường Sa gồm những gì?</h2>
+<h2>Dự án mở rộng đường Trường Sa gồm những gì?</h2>
 <ul>
 <li>Tuyến ven biển Hoàng Sa – Võ Nguyên Giáp – Trường Sa – Lạc Long Quân đi Hội An; lãnh đạo thành phố đã cơ bản thống nhất phương án hướng tuyến và giao lập thiết kế cảnh quan (Tuổi Trẻ, Cafeland, 3/2026).</li>
 <li>Phương án nghiên cứu nâng tuyến từ 4 làn xe (15 m) lên 6 làn xe (21 m); có đề xuất hầm chui hoặc cầu vượt cho người đi bộ ra biển.</li>
 <li>Vốn dự kiến 2.633 tỷ đồng – con số có thể thay đổi khi dự án được phê duyệt chính thức; chưa công bố thời điểm khởi công.</li>
 </ul>
-<!--hh-img:img/sun-saphia/sun-saphia-so-do-vi-tri.jpg|Sơ đồ vị trí Sun Saphia Residence – biển Sơn Thủy, đường Trường Sa (Hoàng Hiệp vẽ minh hoạ)-->
+<!--hh-img:img/sun-saphia/sun-saphia-so-do-vi-tri.jpg|Sơ đồ vị trí Sun Saphia Residence trên tuyến mở rộng đường Trường Sa, biển Sơn Thủy (Hoàng Hiệp vẽ minh hoạ)-->
+<h2>Mở rộng đường Trường Sa: các mốc đã công bố</h2>
+<table>
+<thead><tr><th>Thời điểm</th><th>Nội dung</th><th>Nguồn</th></tr></thead>
+<tbody>
+<tr><td>3/2026</td><td>Lãnh đạo thành phố cơ bản thống nhất phương án hướng tuyến ven biển, giao lập thiết kế cảnh quan; nghiên cứu nâng từ 4 làn lên 6 làn xe</td><td><a href="https://tuoitre.vn/da-nang-nghien-cuu-mo-rong-tuyen-duong-bien-nguyen-tat-thanh-vo-nguyen-giap-20260313110801128.htm">Tuổi Trẻ</a>, Cafeland</td></tr>
+<tr><td>10/2026</td><td>Dự án được đưa vào nhóm đầu tư công ưu tiên thủ tục "luồng xanh", vốn dự kiến 2.633 tỷ đồng</td><td><a href="https://tuoitre.vn/da-nang-mo-luong-xanh-cho-loat-du-an-dau-tu-cong-100261007145100694.htm">Tuổi Trẻ</a></td></tr>
+<tr><td>Chưa công bố</td><td>Phê duyệt dự án, thời điểm khởi công, phạm vi giải phóng mặt bằng từng đoạn</td><td>–</td></tr>
+</tbody>
+</table>
+<p>Như vậy, đến giữa tháng 11/2026 việc mở rộng đường Trường Sa mới ở bước chuẩn bị đầu tư. Người mua nên coi đây là yếu tố hạ tầng trung hạn, theo dõi tiếp quyết định phê duyệt trước khi đưa vào bài toán giá.</p>
 <h2>Bất động sản nào hưởng lợi?</h2>
 <p><strong>Khách sạn và căn hộ mặt tiền ven biển</strong>: đường rộng hơn, lối qua đường an toàn hơn giúp khách lưu trú dễ ra biển – lợi thế cho các khu đang hình thành như bãi tắm Sơn Thủy, nơi thành phố đầu tư công viên công cộng khoảng 2,45 ha và Sun Group phát triển tòa căn hộ 30 tầng {$saphia}.</p>
 <p><strong>Đất ven biển Trường Sa</strong>: mặt bằng rao bán hiện khoảng 100 triệu/m² với lô 300 m² và 60 – 130 triệu/m² với lô lớn (giá rao tham khảo, xem <a href="/gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/">giá đất ven biển Đà Nẵng</a>). Khi dự án chưa khởi công, cần thận trọng với tin "sắp mở đường" dùng để đẩy giá.</p>
@@ -122,20 +132,26 @@ HTML
 <li>Thời gian thi công kéo dài có thể ảnh hưởng tạm thời tới kinh doanh, cho thuê mặt tiền.</li>
 <li>Căn hộ nhìn ra biển phía Đông tuyến đường hưởng lợi rõ nhất về tầm nhìn và lối ra biển.</li>
 </ul>
+<h2>Mở rộng đường Trường Sa tác động thế nào tới giá thuê?</h2>
+<p>Với căn hộ cho thuê, điều khách du lịch quan tâm là ra biển có dễ không, đi sân bay, trung tâm mất bao lâu. Khi mở rộng đường Trường Sa lên 6 làn và có lối qua đường cho người đi bộ như phương án đang nghiên cứu, khu Sơn Thủy – Non Nước sẽ bớt cảm giác "xa phố", khách thuê dài ngày dễ chấp nhận hơn. Tuy vậy, giá thuê vẫn do view, chất lượng căn và đơn vị vận hành quyết định; con đường chỉ giúp mở rộng tệp khách.</p>
+<p>Giai đoạn thi công thì ngược lại: rào chắn, bụi, tiếng ồn có thể làm giảm trải nghiệm của khách ở các căn sát mặt đường. Nếu dự án khởi công trong lúc anh chị đang cho thuê, nên tính trước một giai đoạn giá thuê thấp hơn bình thường.</p>
+<h2>Mở rộng đường Trường Sa và Sun Saphia Residence</h2>
+<p>Sun Saphia Residence nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, bàn giao dự kiến 11/2028. Vì chưa có ngày khởi công, chưa thể nói việc mở rộng đường Trường Sa sẽ xong trước hay sau khi dự án bàn giao. Điều chắc chắn hơn là công viên công cộng khoảng 2,45 ha phía trước dự án đang được thành phố làm giai đoạn 2025 – 2027. Hoàng Hiệp sẽ cập nhật bài khi có quyết định phê duyệt; xem thêm <a href="/sun-saphia-residence-o-dau-vi-tri/">Sun Saphia Residence ở đâu</a>.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Mở rộng đường Võ Nguyên Giáp Trường Sa: lợi cho Sun Saphia',
-			'desc'      => 'Mở rộng đường Võ Nguyên Giáp – Trường Sa vốn dự kiến 2.633 tỷ, 4 lên 6 làn: tác động tới Sun Saphia Residence, khách sạn, đất ven biển Ngũ Hành Sơn.',
+			'seo_title' => 'Mở rộng đường Trường Sa 2.633 tỷ: tác động BĐS ven biển',
+			'desc'      => 'Mở rộng đường Trường Sa – Võ Nguyên Giáp vốn dự kiến 2.633 tỷ, nghiên cứu nâng 4 lên 6 làn: tác động tới Sun Saphia Residence, khách sạn, đất ven biển.',
 			'points'    => array(
-				'Vốn dự kiến 2.633 tỷ đồng, thuộc nhóm "luồng xanh" ưu tiên thủ tục (Tuổi Trẻ, 10/2026)',
+				'Mở rộng đường Trường Sa – Võ Nguyên Giáp vốn dự kiến 2.633 tỷ đồng, thuộc nhóm "luồng xanh" (Tuổi Trẻ, 10/2026)',
 				'Phương án nghiên cứu nâng từ 4 làn (15 m) lên 6 làn (21 m)',
 				'Hưởng lợi rõ nhất: khách sạn, căn hộ mặt tiền ven biển như khu Sơn Thủy',
 			),
 			'faq'       => array(
 				array( 'Đường Võ Nguyên Giáp – Trường Sa mở rộng bao nhiêu làn?', 'Phương án nghiên cứu nâng từ 4 làn xe (15 m) lên 6 làn xe (21 m); thiết kế chính thức theo quyết định phê duyệt dự án.' ),
-				array( 'Khi nào khởi công mở rộng đường ven biển Đà Nẵng?', 'Đến 10/2026 chưa công bố thời điểm khởi công; dự án đang được ưu tiên giải quyết thủ tục theo cơ chế luồng xanh.' ),
+				array( 'Khi nào khởi công mở rộng đường Trường Sa?', 'Đến 11/2026 chưa công bố thời điểm khởi công; dự án mở rộng đường Trường Sa – Võ Nguyên Giáp đang được ưu tiên giải quyết thủ tục theo cơ chế luồng xanh.' ),
+				array( 'Mở rộng đường Trường Sa có ảnh hưởng tới căn hộ mặt tiền không?', 'Có hai mặt: về lâu dài đường rộng hơn, ra biển an toàn hơn; trong lúc thi công có thể ồn, bụi. Trước khi mua đất, nhà mặt tiền cần kiểm tra lô có nằm trong phạm vi mở rộng lộ giới không.' ),
 			),
 		),
 		'sources'  => array(
@@ -149,7 +165,7 @@ HTML
 	$posts[] = array(
 		'slug'     => 'duong-sat-do-thi-da-nang-san-bay-my-khe-hoi-an',
 		'old_slug' => array( 'duong-sat-do-thi-san-bay-my-khe-hoi-an-bat-dong-san-huong-loi' ),
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 15/11: chuẩn SEO 100 – rút gọn URL, thêm ga LRT 09, câu hỏi nên đặt, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Đường sắt đô thị sân bay – Mỹ Khê – Hội An: tiến độ mới nhất, căn hộ ven biển như Sun Saphia Residence hưởng lợi',
 		'excerpt'  => 'Tuyến đường sắt đô thị nối sân bay Đà Nẵng – biển Mỹ Khê – Hội An được ưu tiên nghiên cứu, doanh nghiệp lập hồ sơ cho biết dự kiến khởi công 2/2027. Tác động tới căn hộ ven biển, ven sông.',
 		'keyword'  => 'đường sắt đô thị Đà Nẵng',
@@ -172,8 +188,8 @@ HTML
 <tr><td>Khởi công</td><td>Thaco cho biết dự kiến khởi công tháng 2/2027 sau khi được phê duyệt dự án và kết quả lựa chọn nhà đầu tư (Tuổi Trẻ, 4/2026)</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/sun-saphia/sun-saphia-so-do-vi-tri.jpg|Sơ đồ vị trí Sun Saphia Residence – biển Sơn Thủy, đường Trường Sa (Hoàng Hiệp vẽ minh hoạ)-->
-<h2>Căn hộ nào hưởng lợi từ đường sắt đô thị?</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-so-do-vi-tri.jpg|Đường sắt đô thị Đà Nẵng và Sun Saphia Residence: sơ đồ vị trí khu biển Sơn Thủy, đường Trường Sa (Hoàng Hiệp vẽ minh hoạ)-->
+<h2>Căn hộ nào hưởng lợi từ đường sắt đô thị Đà Nẵng?</h2>
 <p>Thành phố định hướng phát triển đô thị theo mô hình TOD (lấy giao thông công cộng làm trung tâm) dọc tuyến. Hưởng lợi nhiều nhất là căn hộ cho thuê gần các ga khu biển Mỹ Khê – Ngũ Hành Sơn: khách du lịch đi từ sân bay về biển nhanh hơn, ít phụ thuộc taxi. Khu ven biển phía Nam như bãi tắm Sơn Thủy – nơi có {$saphia} – nằm trên hướng kéo dài về Hội An.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-ban-do-ket-noi.jpg|Bản đồ kết nối Sun Saphia Residence với trung tâm Đà Nẵng, sân bay, Hội An (tài liệu chủ đầu tư)-->
 <h2>Đừng mua chỉ vì "sắp có metro"</h2>
@@ -182,20 +198,32 @@ HTML
 <li>Đường sắt đô thị thường mất nhiều năm từ khởi công đến vận hành – nên xem là yếu tố cộng thêm dài hạn.</li>
 <li>Giá trị căn hộ vẫn quyết định bởi pháp lý, chất lượng xây dựng, đơn vị vận hành và giá mua hợp lý.</li>
 </ul>
+<h2>Đường sắt đô thị Đà Nẵng và ga LRT 09 gần Sun Saphia</h2>
+<p>Tài liệu giới thiệu của chủ đầu tư ghi Sun Saphia Residence cách <strong>ga LRT 09 khoảng 500 m</strong>. Đây là thông tin theo phương án tuyến đang nghiên cứu; cơ quan nhà nước chưa công bố vị trí ga chính thức. Nếu tuyến đường sắt đô thị Đà Nẵng được duyệt và vận hành đúng hướng này, khách ở khu Sơn Thủy có thêm lựa chọn đi sân bay, biển Mỹ Khê mà không phụ thuộc taxi.</p>
+<p>Với người mua, nên tách hai lớp giá trị: lớp đã có (bãi tắm Sơn Thủy, công viên ven biển khoảng 2,45 ha đang đầu tư, khoảng cách tới trung tâm) và lớp kỳ vọng (ga đường sắt, mở rộng đường ven biển). Giá mua hợp lý là giá trả cho lớp đã có; lớp kỳ vọng chỉ nên xem là phần cộng thêm.</p>
+<h2>4 câu nên hỏi khi nghe quảng cáo "gần ga đường sắt đô thị Đà Nẵng"</h2>
+<ol>
+<li>Thông tin vị trí ga lấy từ văn bản nào – quy hoạch được phê duyệt, hồ sơ đề xuất của nhà đầu tư hay chỉ là tài liệu bán hàng?</li>
+<li>Khoảng cách tính theo đường chim bay hay đường đi bộ thực tế?</li>
+<li>Tuyến thuộc giai đoạn nào – giai đoạn 1 đến 2030 hay giai đoạn sau?</li>
+<li>Nếu tuyến chậm nhiều năm, căn hộ vẫn hợp lý với mục đích của mình không?</li>
+</ol>
+<p>Nguồn tiến độ: <a href="https://tuoitre.vn/tuyen-duong-sat-do-thi-da-nang-se-khoi-cong-vao-thang-2-2027-20260420182515178.htm">Tuổi Trẻ (4/2026)</a>, <a href="https://tuoitre.vn/da-nang-uu-tien-lam-tuyen-duong-sat-do-thi-noi-tu-san-bay-voi-hoi-an-20251024131105174.htm">Tuổi Trẻ (10/2025)</a>, Nhà Đầu Tư. Nhận định của Hoàng Hiệp: đường sắt đô thị Đà Nẵng là động lực dài hạn rõ ràng cho dải ven biển phía Nam, nhưng quyết định mua nên dựa trên những gì đã có hôm nay.</p>
 <p>Xem thêm: <a href="/mo-rong-duong-truong-sa-vo-nguyen-giap-2633-ty/">mở rộng đường Võ Nguyên Giáp – Trường Sa</a>, <a href="/mo-rong-nha-ga-t2-san-bay-da-nang-bat-dong-san-cho-thue/">mở rộng nhà ga T2 sân bay Đà Nẵng</a>.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Đường sắt đô thị Đà Nẵng: tiến độ và căn hộ như Sun Saphia',
+			'seo_title' => 'Đường sắt đô thị Đà Nẵng 2026: tiến độ, căn hộ hưởng lợi',
 			'desc'      => 'Đường sắt đô thị Đà Nẵng sân bay – Mỹ Khê – Hội An: 17 trục 204 km, LRT giai đoạn 1, dự kiến khởi công 2/2027; căn hộ ven biển như Sun Saphia hưởng lợi.',
 			'points'    => array(
-				'Tuyến sân bay – Hội An được ưu tiên số 1 trong 17 trục đường sắt đô thị',
+				'Tuyến sân bay – Hội An được ưu tiên số 1 trong 17 trục đường sắt đô thị Đà Nẵng',
 				'Giai đoạn 1: LRT sân bay – biển Mỹ Khê hơn 7 km',
 				'Doanh nghiệp lập hồ sơ cho biết dự kiến khởi công 2/2027 nếu được phê duyệt',
 			),
 			'faq'       => array(
 				array( 'Khi nào Đà Nẵng làm đường sắt đô thị?', 'Theo Tuổi Trẻ (4/2026), Thaco cho biết dự kiến khởi công tháng 2/2027 sau khi được phê duyệt dự án và kết quả lựa chọn nhà đầu tư.' ),
+				array( 'Sun Saphia Residence cách ga đường sắt đô thị Đà Nẵng bao xa?', 'Theo tài liệu chủ đầu tư, dự án cách ga LRT 09 khoảng 500 m; vị trí ga chính thức chưa được cơ quan nhà nước công bố.' ),
 				array( 'Đường sắt đô thị Đà Nẵng đi qua đâu?', 'Tuyến ưu tiên nối sân bay Đà Nẵng – biển Mỹ Khê, kéo dài về Hội An – Tam Kỳ – Chu Lai; vị trí ga cụ thể chưa công bố.' ),
 			),
 		),
@@ -211,18 +239,18 @@ HTML
 		'slug'     => 'du-an-can-ho-sun-group-da-nang-2026',
 		'title'    => 'Các dự án căn hộ Sun Group ở Đà Nẵng 2026: từ Sun Symphony đến Sun Saphia Residence – vị trí, bàn giao, giá',
 		'excerpt'  => 'Tổng hợp dự án căn hộ Sun Group tại Đà Nẵng: Sun Symphony, Sun Ponte, Sun Cosmo đang bàn giao; Sun Costa, Sun Solar, Spana, Cora, S-Light, FourS đang bán; Sun Galaxy, Sun Saphia sắp mở bán.',
-		'keyword'  => 'dự án căn hộ Sun Group Đà Nẵng',
+		'keyword'  => 'dự án Sun Group Đà Nẵng',
 		'keywords_extra' => array( 'Sun Saphia Residence', 'căn hộ Sun Group Đà Nẵng', 'Sun Property Đà Nẵng' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-23',
-		'rev'      => 3, // 23/10: số căn 2PN 133, thời hạn 50 năm theo tài liệu chủ đầu tư.
+		'rev'      => 4, // 15/11: chuẩn SEO 100 – chọn dự án theo mục đích, lưu ý pháp lý, hỏi đáp. 23/10: số căn 2PN 133, thời hạn 50 năm theo tài liệu chủ đầu tư.
 		'category' => 'Dự án',
 		'tags'     => array( 'Sun Group', 'Căn hộ Đà Nẵng', 'Sun Saphia Residence' ),
 		'image'    => 'plugin:img/tin-tuc/du-an-can-ho-sun-group-da-nang-2026.jpg',
 		'content'  => <<<HTML
-<p>Sun Group (Sun Property phát triển) hiện là chủ đầu tư có nhiều <strong>dự án căn hộ</strong> nhất ở Đà Nẵng: từ ven sông Hàn, khu Nam Hòa Xuân đến ven biển Mỹ Khê, Sơn Thủy. Bài tổng hợp theo trạng thái: đang bàn giao, đang bán và sắp mở bán (10/2026) – mới nhất là {$saphia}, dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng.</p>
+<p>Các dự án Sun Group Đà Nẵng hiện trải từ ven sông Hàn, khu Nam Hòa Xuân đến ven biển Mỹ Khê, Sơn Thủy – Sun Group (Sun Property phát triển) là chủ đầu tư có nhiều <strong>dự án căn hộ</strong> nhất ở thành phố. Bài tổng hợp theo trạng thái: đang bàn giao, đang bán và sắp mở bán (10/2026) – mới nhất là {$saphia}, dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng.</p>
 <!--hh-featured-->
-<h2>Dự án căn hộ Sun Group Đà Nẵng đang bàn giao</h2>
+<h2>Dự án Sun Group Đà Nẵng đang bàn giao</h2>
 <table>
 <thead><tr><th>Dự án</th><th>Vị trí</th><th>Quy mô · bàn giao</th><th>Giá chuyển nhượng tham khảo</th></tr></thead>
 <tbody>
@@ -231,8 +259,8 @@ HTML
 <tr><td><a href="/du-an/sun-cosmo-residence/">Sun Cosmo Residence</a></td><td>Trần Thị Lý, Ngũ Hành Sơn</td><td>Khoảng 650 căn hộ · cuối 2025 – đầu 2026</td><td>Studio khoảng 1,8 – 2,5 tỷ; 2PN khoảng 3,6 – 6,8 tỷ</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-ven-bien-son-thuy.jpg|Sun Saphia Residence nhìn từ biển Sơn Thủy, Ngũ Hành Sơn (ảnh chủ đầu tư)-->
-<h2>Dự án Sun Group đang bán</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-ven-bien-son-thuy.jpg|Sun Saphia Residence – dự án Sun Group Đà Nẵng mới nhất, nhìn từ biển Sơn Thủy (ảnh chủ đầu tư)-->
+<h2>Dự án Sun Group Đà Nẵng đang bán</h2>
 <table>
 <thead><tr><th>Dự án</th><th>Vị trí</th><th>Quy mô · bàn giao dự kiến</th><th>Pháp lý</th></tr></thead>
 <tbody>
@@ -245,23 +273,39 @@ HTML
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tong-the-cong-vien-bai-tam.jpg|Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>Sắp mở bán: Sun Galaxy Complex và Sun Saphia Residence</h2>
 <ul>
-<li><a href="/du-an/sun-galaxy-complex/">Sun Galaxy Complex</a> (Chương Dương, ven sông Hàn): khởi công 25/7/2026, khán đài pháo hoa gần 20.000 chỗ, khoảng 1.400 phòng lưu trú; chưa có bảng giá chính thức.</li>
+<li><a href="/du-an/sun-galaxy-complex/">Sun Galaxy Complex</a> (Chương Dương, ven sông Hàn): khởi công 25/7/2026 (<a href="https://cafeland.vn/tin-tuc/khoi-cong-du-an-gan-10750-ty-dong-tai-da-nang-153588.html">Cafeland</a>), khán đài pháo hoa gần 20.000 chỗ, khoảng 1.400 phòng lưu trú; chưa có bảng giá chính thức.</li>
 <li>{$saphia} (Trường Sa, khu Sơn Thủy): tòa 30 tầng (114 m), 782 căn gồm 513 studio, 108 căn 1PN+, 133 căn 2PN; thời hạn 50 năm kể từ 17/09/2026; bàn giao dự kiến 11/2028. Chủ đầu tư giới thiệu đây là dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng; đang nhận giữ chỗ.</li>
 </ul>
 <p>Các con số trên lấy từ dữ liệu dự án trên web và tin rao; bàn giao theo hợp đồng từng dự án.</p>
+<h2>Chọn dự án Sun Group Đà Nẵng theo mục đích</h2>
+<table>
+<thead><tr><th>Mục đích</th><th>Nhóm dự án nên xem</th><th>Lý do</th></tr></thead>
+<tbody>
+<tr><td>Nhận nhà ngay, cho thuê ngay</td><td>Sun Symphony, Sun Ponte, Sun Cosmo (căn chuyển nhượng)</td><td>Đang bàn giao, xem được căn thật, biết được giá thuê thực tế</td></tr>
+<tr><td>Ở lâu dài, để lại con cháu</td><td>Spana, Cora, S-Light (Sun NeO City), FourS (Sun Riverpolis)</td><td>Sở hữu lâu dài theo dữ liệu dự án</td></tr>
+<tr><td>Căn biển cho thuê du lịch</td><td>Sun Costa, Sun Saphia Residence</td><td>Gần biển Mỹ Khê, Sơn Thủy; nhiều studio tổng tiền vừa phải</td></tr>
+<tr><td>Vị trí trung tâm Hải Châu</td><td>Sun Solar Residence</td><td>9 Lê Duẩn, quy mô nhỏ khoảng 256 căn</td></tr>
+</tbody>
+</table>
+<p>Mỗi nhóm có ưu, nhược riêng: căn đang bàn giao cho dòng tiền sớm nhưng giá chuyển nhượng đã phản ánh phần lớn tiện ích; căn mới mở bán có thời gian thanh toán dài nhưng phải chờ xây dựng. Khi so sánh các dự án Sun Group Đà Nẵng, nên quy về cùng một thước đo: tổng tiền đã gồm VAT và phí bảo trì, thời hạn sở hữu, thời điểm nhận nhà.</p>
+<h2>Lưu ý pháp lý khi so sánh dự án Sun Group Đà Nẵng</h2>
+<p>Không phải dự án nào cùng thương hiệu cũng cùng loại pháp lý. Ví dụ, Sun Saphia Residence có thời hạn dự án 50 năm kể từ 17/09/2026 (công trình cấp I, niên hạn 100 năm) và là căn hộ thương mại dịch vụ, trong khi các tòa ở Sun NeO City, Sun Riverpolis được ghi sở hữu lâu dài. Hai loại này không nên so giá/m² trực tiếp với nhau. Chi tiết: <a href="/phap-ly-sun-saphia-residence-so-huu-bao-lau/">pháp lý Sun Saphia Residence</a>, <a href="/can-ho-sun-group-da-nang/">tổng hợp căn hộ Sun Group Đà Nẵng</a>.</p>
+<p>Nhận định của Hoàng Hiệp: với người mua lần đầu, nên bắt đầu từ mục đích và tầm tiền, sau đó mới chọn trong danh sách dự án Sun Group Đà Nẵng – thay vì chọn theo dự án đang được quảng cáo nhiều nhất.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Dự án căn hộ Sun Group Đà Nẵng 2026: đến Sun Saphia',
-			'desc'      => 'Dự án căn hộ Sun Group Đà Nẵng 2026: Sun Symphony, Sun Ponte, Sun Cosmo bàn giao; Sun Costa, Spana, FourS đang bán; Sun Saphia Residence sắp bán.',
+			'seo_title' => 'Dự án Sun Group Đà Nẵng 2026: từ Sun Symphony đến Saphia',
+			'desc'      => 'Dự án Sun Group Đà Nẵng 2026: Sun Symphony, Sun Ponte, Sun Cosmo bàn giao; Sun Costa, Spana, FourS đang bán; Sun Saphia Residence sắp bán.',
 			'points'    => array(
-				'Đang bàn giao: Sun Symphony, Sun Ponte, Sun Cosmo – giá chuyển nhượng từ khoảng 1,8 tỷ',
+				'Dự án Sun Group Đà Nẵng đang bàn giao: Sun Symphony, Sun Ponte, Sun Cosmo – giá chuyển nhượng từ khoảng 1,8 tỷ',
 				'Đang bán: Sun Costa, Sun Solar, Spana, Cora, S-Light, FourS',
 				'Sắp mở bán: Sun Galaxy Complex, Sun Saphia Residence (782 căn, bàn giao 11/2028)',
 			),
 			'faq'       => array(
-				array( 'Sun Group có những dự án căn hộ nào ở Đà Nẵng?', 'Sun Symphony, Sun Ponte, Sun Cosmo (đang bàn giao); Sun Costa, Sun Solar, Spana, Cora, S-Light, FourS (đang bán); Sun Galaxy Complex, Sun Saphia Residence (sắp mở bán).' ),
+				array( 'Sun Group có những dự án căn hộ nào ở Đà Nẵng?', 'Các dự án Sun Group Đà Nẵng gồm Sun Symphony, Sun Ponte, Sun Cosmo (đang bàn giao); Sun Costa, Sun Solar, Spana, Cora, S-Light, FourS (đang bán); Sun Galaxy Complex, Sun Saphia Residence (sắp mở bán).' ),
+				array( 'Dự án Sun Group Đà Nẵng nào sở hữu lâu dài?', 'Theo dữ liệu dự án, Spana, Cora, S-Light (Sun NeO City) và FourS (Sun Riverpolis) ghi sở hữu lâu dài; Sun Saphia Residence có thời hạn dự án 50 năm kể từ 17/09/2026.' ),
+				array( 'Nên chọn dự án Sun Group Đà Nẵng nào để cho thuê?', 'Muốn có tiền thuê sớm, xem căn chuyển nhượng ở Sun Symphony, Sun Ponte, Sun Cosmo; muốn căn biển tổng tiền vừa phải và chờ được, xem Sun Costa, Sun Saphia Residence.' ),
 				array( 'Dự án căn hộ mặt biển của Sun Group ở Đà Nẵng là dự án nào?', 'Sun Saphia Residence trên đường Trường Sa, khu Sơn Thủy – chủ đầu tư giới thiệu là dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng.' ),
 			),
 		),
@@ -271,7 +315,7 @@ HTML
 	/* ---------------- 24/10 – Giữ chỗ, đặt cọc ---------------- */
 	$posts[] = array(
 		'slug'     => 'giu-cho-booking-can-ho-moi-da-nang-can-biet',
-		'rev'     => 2, // 05/11: chèn ảnh dự án.
+		'rev'     => 3, // 15/11: chuẩn SEO 100 – quy trình giữ chỗ, khi nào nên giữ chỗ, nguồn luật, hỏi đáp. 05/11: chèn ảnh dự án.
 		'title'    => 'Giữ chỗ (booking) căn hộ mới như Sun Saphia Residence: khác gì đặt cọc, có lấy lại tiền được không?',
 		'excerpt'  => 'Booking, giữ chỗ căn hộ mới trước khi mở bán khác đặt cọc thế nào; Luật Kinh doanh bất động sản 2023 chỉ cho thu cọc tối đa 5% khi dự án đủ điều kiện; 6 điều cần kiểm tra trước khi giữ chỗ.',
 		'keyword'  => 'giữ chỗ căn hộ',
@@ -282,7 +326,7 @@ HTML
 		'tags'     => array( 'Kinh nghiệm mua nhà', 'Đặt cọc', 'Sun Saphia Residence' ),
 		'image'    => 'plugin:img/tin-tuc/giu-cho-booking-can-ho-moi.jpg',
 		'content'  => <<<HTML
-<p>Trước khi mở bán, nhiều dự án căn hộ ở Đà Nẵng nhận <strong>giữ chỗ căn hộ</strong> (booking) – khách nộp một khoản tiền để được ưu tiên chọn căn. Ví dụ, đơn vị phân phối {$saphia} thông báo nhận giữ chỗ khoảng 50 triệu đồng, có hoàn lại (10/2026). Giữ chỗ khác đặt cọc ở đâu và người mua cần lưu ý gì?</p>
+<p>Trước khi mở bán, nhiều dự án căn hộ ở Đà Nẵng nhận <strong>giữ chỗ căn hộ</strong> (booking) – khách nộp một khoản tiền để được ưu tiên chọn căn. Ví dụ, ở đợt giới thiệu tháng 10/2026, {$saphia} nhận giữ chỗ khoảng 50 triệu đồng mỗi căn, có hoàn lại. Giữ chỗ khác đặt cọc ở đâu và người mua cần lưu ý gì?</p>
 <!--hh-featured-->
 <h2>Giữ chỗ căn hộ khác đặt cọc thế nào?</h2>
 <table>
@@ -294,9 +338,9 @@ HTML
 <tr><td>Hoàn tiền</td><td>Thường hoàn lại nếu không chọn được căn hoặc không mua – phải ghi rõ trên phiếu</td><td>Theo thỏa thuận đặt cọc; bỏ cọc có thể mất tiền</td></tr>
 </tbody>
 </table>
-<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Phối cảnh Sun Saphia Residence bên biển Sơn Thủy lúc hoàng hôn (ảnh chủ đầu tư)-->
+<!--hh-img:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg|Giữ chỗ căn hộ Sun Saphia Residence trước mở bán – phối cảnh bên biển Sơn Thủy (ảnh chủ đầu tư)-->
 <h2>Luật nói gì về thu tiền giữ chỗ căn hộ?</h2>
-<p>Theo Luật Kinh doanh bất động sản 2023 (hiệu lực từ 1/8/2024), chủ đầu tư chỉ được thu tiền đặt cọc <strong>không quá 5% giá bán</strong> khi nhà ở hình thành trong tương lai đã đủ điều kiện đưa vào kinh doanh, và thỏa thuận đặt cọc phải ghi rõ giá bán, diện tích. Vì vậy trước thời điểm đó, khoản giữ chỗ chỉ nên coi là tiền thiện chí, cần được ghi rõ quyền hoàn lại.</p>
+<p>Theo Luật Kinh doanh bất động sản 2023 (hiệu lực từ 1/8/2024, xem tóm tắt trên <a href="https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html">LuatVietnam</a>), chủ đầu tư chỉ được thu tiền đặt cọc <strong>không quá 5% giá bán</strong> khi nhà ở hình thành trong tương lai đã đủ điều kiện đưa vào kinh doanh, và thỏa thuận đặt cọc phải ghi rõ giá bán, diện tích. Vì vậy trước thời điểm đó, khoản giữ chỗ chỉ nên coi là tiền thiện chí, cần được ghi rõ quyền hoàn lại.</p>
 <!--hh-img:img/sun-saphia/sun-saphia-mat-bang-tang-3a-28-dien-tich.jpg|Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)-->
 <h2>6 điều cần kiểm tra trước khi giữ chỗ căn hộ</h2>
 <ol>
@@ -307,24 +351,37 @@ HTML
 <li>Loại hình pháp lý: căn hộ sở hữu lâu dài hay căn hộ có thời hạn.</li>
 <li>Không chuyển thêm tiền "giữ căn đẹp" ngoài phiếu chính thức.</li>
 </ol>
+<h2>Quy trình giữ chỗ căn hộ thường gặp</h2>
+<ol>
+<li><strong>Đăng ký nhu cầu</strong>: loại căn, tầng, hướng mong muốn và tầm tiền.</li>
+<li><strong>Nộp tiền giữ chỗ căn hộ</strong> theo phiếu: nhận phiếu có số thứ tự ưu tiên, ghi rõ điều kiện hoàn tiền.</li>
+<li><strong>Nhận thông tin mở bán</strong>: giá chính thức từng căn, chính sách thanh toán, ngày sự kiện chọn căn.</li>
+<li><strong>Chọn căn hoặc rút</strong>: chọn được căn thì chuyển sang thỏa thuận đặt cọc (khi dự án đủ điều kiện); không ưng thì làm thủ tục hoàn tiền theo phiếu.</li>
+</ol>
+<p>Ở bước 4, tiền giữ chỗ thường được trừ vào tiền cọc. Hãy hỏi trước thời gian hoàn tiền (bao nhiêu ngày làm việc) và hoàn vào tài khoản nào, để không bị động nếu đổi ý.</p>
+<h2>Khi nào nên giữ chỗ căn hộ, khi nào chưa nên?</h2>
+<p><strong>Nên</strong> giữ chỗ căn hộ khi anh chị đã chắc về khu vực, loại căn và có sẵn phương án tài chính – lúc đó số thứ tự ưu tiên giúp chọn được tầng, hướng đẹp trong ngày mở bán. <strong>Chưa nên</strong> khi mới tìm hiểu, chưa biết tầm giá, hoặc phiếu không ghi rõ quyền hoàn tiền. Giữ chỗ nhiều dự án cùng lúc chỉ nên làm khi tất cả đều hoàn lại được.</p>
+<p>Nhận định của Hoàng Hiệp: tiền giữ chỗ căn hộ nhỏ so với giá căn, nhưng là bước đầu tiên của một giao dịch lớn. Đọc kỹ phiếu, chuyển khoản đúng người nhận và lưu lại chứng từ là đủ để giảm phần lớn rủi ro.</p>
 <p>Xem thêm: <a href="/hop-dong-dat-coc-mua-nha-rui-ro-phong-tranh/">hợp đồng đặt cọc mua nhà – rủi ro và cách phòng tránh</a>, <a href="/kinh-nghiem-mua-can-ho-da-nang/">kinh nghiệm mua căn hộ Đà Nẵng</a>.</p>
 {$cta}
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giữ chỗ căn hộ Sun Saphia: khác đặt cọc, có hoàn tiền?',
+			'seo_title' => 'Giữ chỗ căn hộ 2026: khác đặt cọc 5% thế nào, có hoàn tiền?',
 			'desc'      => 'Giữ chỗ căn hộ (booking) như Sun Saphia Residence khác đặt cọc thế nào; luật chỉ cho cọc tối đa 5% khi dự án đủ điều kiện; 6 điều cần kiểm tra.',
 			'points'    => array(
-				'Giữ chỗ là tiền ưu tiên chọn căn trước khi dự án đủ điều kiện bán',
+				'Giữ chỗ căn hộ là tiền ưu tiên chọn căn trước khi dự án đủ điều kiện bán',
 				'Đặt cọc tối đa 5% giá bán, chỉ khi dự án đủ điều kiện kinh doanh (Luật KDBĐS 2023)',
 				'Phiếu giữ chỗ phải ghi rõ quyền hoàn tiền, người nhận tiền là công ty',
 			),
 			'faq'       => array(
 				array( 'Tiền giữ chỗ căn hộ có được hoàn lại không?', 'Tùy phiếu giữ chỗ; phần lớn dự án ghi hoàn lại nếu khách không chọn được căn hoặc không mua. Cần yêu cầu ghi rõ điều kiện và thời hạn hoàn tiền.' ),
+				array( 'Tiền giữ chỗ căn hộ có được trừ vào tiền cọc không?', 'Thường có: khi khách chọn được căn và ký thỏa thuận đặt cọc, tiền giữ chỗ căn hộ được trừ vào tiền cọc. Cách tính cụ thể ghi trên phiếu giữ chỗ của từng dự án.' ),
+				array( 'Giữ chỗ căn hộ Sun Saphia Residence bao nhiêu tiền?', 'Ở đợt giới thiệu tháng 10/2026, dự án nhận giữ chỗ khoảng 50 triệu đồng mỗi căn, có hoàn lại; điều kiện cụ thể theo phiếu giữ chỗ.' ),
 				array( 'Chủ đầu tư được thu cọc bao nhiêu?', 'Theo Luật Kinh doanh bất động sản 2023, không quá 5% giá bán và chỉ khi nhà ở hình thành trong tương lai đã đủ điều kiện đưa vào kinh doanh.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html' ),
 	);
 
 	/* ---------------- 25/10 – So sánh khu biển ---------------- */

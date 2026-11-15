@@ -137,40 +137,47 @@ HTML
 </tbody>
 </table>
 
-<h2>Trục Võ Nguyên Giáp – Trường Sa: biệt thự resort đã vận hành</h2>
-<p>Đây là nhóm có giá cao nhất vì nằm trong các khu nghỉ dưỡng thương hiệu: <a href="/du-an/furama-villas-da-nang/">Furama Villas</a>, <a href="/du-an/the-ocean-villas-da-nang/">The Ocean Villas</a>, Fusion, Hyatt Regency, The Ocean Estates. Ưu điểm là đã hoàn thiện, có dịch vụ vận hành và lịch sử cho thuê để kiểm chứng.</p>
+<h2>Biệt thự ven biển Đà Nẵng trục Võ Nguyên Giáp – Trường Sa: resort đã vận hành</h2>
+<p>Đây là nhóm biệt thự ven biển Đà Nẵng có giá cao nhất vì nằm trong các khu nghỉ dưỡng thương hiệu: <a href="/du-an/furama-villas-da-nang/">Furama Villas</a>, <a href="/du-an/the-ocean-villas-da-nang/">The Ocean Villas</a>, Fusion, Hyatt Regency, The Ocean Estates. Ưu điểm là đã hoàn thiện, có dịch vụ vận hành và lịch sử cho thuê để kiểm chứng.</p>
 <p>Điểm cần kiểm tra là hợp đồng vận hành với khu nghỉ dưỡng, thời hạn sử dụng đất của từng căn và chi phí bảo trì hằng năm. Giá chênh mạnh giữa căn mặt biển, căn view golf và căn phía trong.</p>
 
-<h2>Biệt thự dự án mới: Newtown Legend và Vinhomes Hải Vân Bay</h2>
-<p><a href="/du-an/newtown-legend/">Newtown Legend</a> có lợi thế sở hữu lâu dài ngay trên trục Trường Sa, quỹ căn rất ít. <a href="/du-an/vinhomes-hai-van-bay/">Vinhomes Hải Vân Bay</a> ở vịnh Nam Chơn có giá đầu vào thấp hơn nhiều, biệt thự song lập Bạch Vân khoảng 9,9 – 16,8 tỷ, kèm chính sách thanh toán theo tiến độ – phù hợp khách muốn tích lũy dài hạn và chấp nhận chờ hạ tầng phía Bắc hoàn thiện.</p>
+<h2>Biệt thự ven biển Đà Nẵng dự án mới: Newtown Legend, Vinhomes Hải Vân Bay</h2>
+<p><a href="/du-an/newtown-legend/">Newtown Legend</a> có lợi thế sở hữu lâu dài ngay trên trục Trường Sa, quỹ căn rất ít. <a href="/du-an/vinhomes-hai-van-bay/">Vinhomes Hải Vân Bay</a> ở vịnh Nam Chơn có giá đầu vào thấp hơn nhiều, biệt thự song lập Bạch Vân khoảng 9,9 – 16,8 tỷ, kèm chính sách thanh toán theo tiến độ – phù hợp khách muốn tích lũy dài hạn và chấp nhận chờ hạ tầng phía Bắc hoàn thiện. Sau Bạch Vân, dự án tiếp tục ra mắt phân khu biệt thự Đảo Ngọc vào tháng 5/2026 (theo <a href="https://vnexpress.net/ra-mat-khu-dao-ngoc-du-an-vinhomes-hai-van-bay-5070332.html">VnExpress</a>).</p>
 
 <h2>Biệt thự biển Hội An – Điện Bàn</h2>
 <p>Phía Nam, thị trường có Hoiana Beach Villas (198 biệt thự biển 3 – 9 phòng ngủ trên 36,6 ha, dự kiến bàn giao quý 1/2028), Hoiana Shores Golf Villas (88 biệt thự sân golf, đất 710 – 1.500 m²), Four Seasons The Nam Hai (40 biệt thự sở hữu có hồ bơi riêng) và Shilla Monogram (34 biệt thự 3 tầng hướng biển). Phần lớn các dự án này chưa công bố giá công khai hoặc chỉ giao dịch theo từng căn – liên hệ để nhận bảng giá.</p>
 
-<h2>Kinh nghiệm chọn biệt thự ven biển</h2>
+<h2>Tổng chi phí khi mua biệt thự ven biển Đà Nẵng</h2>
+<!--hh-img:img/fusion/fusion-day-biet-thu-ven-bien.jpg|Dãy biệt thự Fusion trên trục Trường Sa – một dự án biệt thự ven biển Đà Nẵng đã vận hành-->
+<p>Giá trong bảng chỉ là giá căn. Khi lập ngân sách mua biệt thự ven biển Đà Nẵng, anh chị nên cộng thêm thuế, phí giao dịch, chi phí nội thất và chi phí vận hành hằng năm. Với căn chuyển nhượng, thuế thu nhập cá nhân 2% giá chuyển nhượng (bên bán nộp theo luật) và lệ phí trước bạ 0,5% (bên mua nộp) là hai khoản lớn nhất – ví dụ căn 30 tỷ thì lệ phí trước bạ khoảng 150 triệu đồng, thuế TNCN khoảng 600 triệu đồng nếu hai bên thỏa thuận người mua chịu.</p>
+<p>Biệt thự trong khu nghỉ dưỡng còn có phí quản lý, phí bảo trì hồ bơi, cảnh quan và phần chia sẻ doanh thu nếu tham gia chương trình cho thuê. Hãy yêu cầu bảng chi phí vận hành 12 tháng gần nhất trước khi tính lợi suất. Cách tính từng khoản thuế phí có trong bài <a href="/thue-phi-mua-ban-nha-dat-da-nang-2026/">thuế phí mua bán nhà đất 2026</a>.</p>
+
+<h2>Kinh nghiệm chọn biệt thự ven biển Đà Nẵng</h2>
 <h3>Xác định mục đích trước khi xem giá</h3>
 <p>Mua để nghỉ dưỡng gia đình nên ưu tiên căn đã hoàn thiện, có dịch vụ quản lý. Mua để giữ tài sản nên ưu tiên pháp lý sở hữu lâu dài và quỹ đất hiếm. Mua để cho thuê cần xem số liệu doanh thu thực tế, không chỉ cam kết trên giấy.</p>
 <h3>Kiểm tra pháp lý từng căn</h3>
 <p>Biệt thự trong khu nghỉ dưỡng có thể là đất ở lâu dài hoặc đất thương mại dịch vụ có thời hạn. Hai loại này khác nhau rất lớn về giá trị thế chấp và thanh khoản khi bán lại.</p>
 
-<p>Xem thêm danh sách <a href="/mua-ban/biet-thu/">biệt thự đang bán tại Đà Nẵng</a> và các <a href="/loai-du-an/biet-thu/">dự án biệt thự Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách biệt thự ven biển đang bán thật, kèm pháp lý và giá chốt gần nhất.</p>
+<p>Xem thêm danh sách <a href="/mua-ban/biet-thu/">biệt thự đang bán tại Đà Nẵng</a> và các <a href="/loai-du-an/biet-thu/">dự án biệt thự Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách biệt thự ven biển Đà Nẵng đang bán thật, kèm pháp lý và giá chốt gần nhất.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Biệt thự ven biển Đà Nẵng: bảng giá theo dự án 2026',
 			'desc'      => 'Biệt thự ven biển Đà Nẵng – Hội An 2026: bảng giá Furama Villas, The Ocean Villas, Newtown Legend, Vinhomes Hải Vân Bay… Liên hệ Hoàng Hiệp để xem căn.',
 			'points'    => array(
-				'Biệt thự resort trục Võ Nguyên Giáp – Trường Sa khoảng 21 – 83 tỷ (tin rao)',
+				'Biệt thự ven biển Đà Nẵng dạng resort trục Võ Nguyên Giáp – Trường Sa khoảng 21 – 83 tỷ (tin rao)',
 				'Dự án mới: Vinhomes Hải Vân Bay song lập 9,9 – 16,8 tỷ; Newtown Legend từ khoảng 42 tỷ',
 				'Cần kiểm tra thời hạn đất và hợp đồng vận hành trước khi mua',
 			),
 			'faq'       => array(
 				array( 'Biệt thự ven biển Đà Nẵng giá bao nhiêu?', 'Năm 2026, biệt thự resort đã vận hành trên trục Võ Nguyên Giáp – Trường Sa phổ biến khoảng 21 – 83 tỷ; biệt thự song lập dự án mới phía Bắc từ khoảng 9,9 tỷ.' ),
-				array( 'Biệt thự ven biển nào có sổ lâu dài?', 'Newtown Legend và phần lớn sản phẩm thấp tầng Vinhomes Hải Vân Bay được giới thiệu là sở hữu lâu dài. Biệt thự trong resort cần kiểm tra pháp lý từng căn.' ),
+				array( 'Biệt thự ven biển Đà Nẵng nào có sổ lâu dài?', 'Newtown Legend và phần lớn sản phẩm thấp tầng Vinhomes Hải Vân Bay được giới thiệu là sở hữu lâu dài. Biệt thự trong resort cần kiểm tra pháp lý từng căn.' ),
+				array( 'Mua biệt thự ven biển Đà Nẵng cần tính chi phí gì ngoài giá căn?', 'Ngoài giá căn, mua biệt thự ven biển Đà Nẵng cần tính lệ phí trước bạ 0,5%, thuế TNCN 2% (theo thỏa thuận ai chịu), phí công chứng, nội thất, phí quản lý và chi phí vận hành hằng năm của khu nghỉ dưỡng.' ),
 				array( 'Nên mua biệt thự đã vận hành hay dự án mới?', 'Biệt thự đã vận hành có dòng tiền và chất lượng kiểm chứng được; dự án mới có giá đầu vào thấp hơn và chính sách thanh toán giãn nhưng phải chờ hạ tầng.' ),
 			),
 		),
 		'sources'  => array(
+			'https://vnexpress.net/ra-mat-khu-dao-ngoc-du-an-vinhomes-hai-van-bay-5070332.html',
 			'https://furamavietnam.com/furama-villas/',
 			'https://alonhadat.com.vn/du-an-khu-biet-thu-the-ocean-villas-pj938',
 			'https://homedy.com/the-ocean-estates-pj97559495',
@@ -311,7 +318,7 @@ HTML
 <p>Thị trường <strong>bán khách sạn Đà Nẵng</strong> ven biển năm 2026 có giá chào từ khoảng 28 – 125 tỷ cho khách sạn nhỏ ở phố An Thượng, 48 – 90 tỷ cho boutique mặt biển Võ Nguyên Giáp, đến 650 – 1.350 tỷ cho khách sạn 4 sao quy mô lớn. Công suất phòng khách sạn 4 – 5 sao quý I/2026 đạt khoảng 85 – 88%. Bài viết cập nhật tháng 10/2026.</p>
 
 <h2>Bán khách sạn Đà Nẵng: 12 khách sạn 3 – 4 sao ven biển đang chào bán (10/2026)</h2>
-<p>Danh sách khách sạn đang vận hành gần biển Mỹ Khê, Sơn Thủy do Hoàng Hiệp đang nhận chào bán, cập nhật tháng 10/2026. Doanh thu là số chủ nhà cung cấp, sẽ được đối chiếu sổ sách khi anh chị xem hồ sơ.</p>
+<p>Danh sách bán khách sạn Đà Nẵng dưới đây gồm các khách sạn đang vận hành gần biển Mỹ Khê, Sơn Thủy do Hoàng Hiệp đang nhận chào bán, cập nhật tháng 10/2026. Doanh thu là số chủ nhà cung cấp, sẽ được đối chiếu sổ sách khi anh chị xem hồ sơ.</p>
 <table>
 <thead><tr><th>#</th><th>Vị trí</th><th>Đất</th><th>Quy mô</th><th>Doanh thu</th><th>Giá chào</th><th>Giá/m² đất</th></tr></thead>
 <tbody>
@@ -329,8 +336,8 @@ HTML
 <tr><td>12</td><td>3 sao Võ Văn Kiệt (Sơn Trà)</td><td>268 m², ngang 13,5 m</td><td>12 tầng · 53 phòng</td><td>Cho thuê khoán 220 triệu/tháng</td><td><strong>170 tỷ</strong></td><td>~634 triệu/m²</td></tr>
 </tbody>
 </table>
-<p>So sánh nhanh theo tỷ lệ doanh thu năm trên giá bán (chưa trừ chi phí vận hành): khách sạn Sơn Thủy, An Tư Công Chúa và Phạm Văn Đồng 2 mặt tiền đạt khoảng 7 – 8,5%; Phan Tôn khoảng 6,7%; Hồ Nghinh, Hồ Xuân Hương khoảng 5%. Các tòa trên Võ Văn Kiệt, Phạm Văn Đồng 4 sao giá chủ yếu nằm ở đất mặt tiền lớn. Khách sạn Hồ Nghinh 16 tầng đang để trống phù hợp nhà đầu tư muốn tự vận hành hoặc đổi thương hiệu.</p>
-<p>Hồ sơ từng khách sạn (sổ, hoàn công, PCCC, doanh thu 12 tháng) và lịch xem trực tiếp: gọi/Zalo <strong>Hoàng Hiệp – 0904 567 009</strong>.</p>
+<p>So sánh nhanh theo tỷ lệ doanh thu năm trên giá bán (chưa trừ chi phí vận hành): trong giỏ bán khách sạn Đà Nẵng này, khách sạn Sơn Thủy, An Tư Công Chúa và Phạm Văn Đồng 2 mặt tiền đạt khoảng 7 – 8,5%; Phan Tôn khoảng 6,7%; Hồ Nghinh, Hồ Xuân Hương khoảng 5%. Các tòa trên Võ Văn Kiệt, Phạm Văn Đồng 4 sao giá chủ yếu nằm ở đất mặt tiền lớn. Khách sạn Hồ Nghinh 16 tầng đang để trống phù hợp nhà đầu tư muốn tự vận hành hoặc đổi thương hiệu.</p>
+<p>Hồ sơ từng khách sạn trong danh sách bán khách sạn Đà Nẵng (sổ, hoàn công, PCCC, doanh thu 12 tháng) và lịch xem trực tiếp: gọi/Zalo <strong>Hoàng Hiệp – 0904 567 009</strong>.</p>
 
 <h2>Bảng giá bán khách sạn Đà Nẵng theo khu vực</h2>
 <table>
@@ -347,19 +354,24 @@ HTML
 <tr><td>Hội An – An Bàng, Tân Thành</td><td>650 – 1.600 m² đất, 20 – 39 phòng</td><td>Khoảng 50 – 91 tỷ</td></tr>
 </tbody>
 </table>
-<p>Bảng khu vực tổng hợp từ tin rao năm 2026 và giỏ hàng Hoàng Hiệp đang chào bán; giá chào thường còn biên độ thương lượng.</p>
+<p>Bảng khu vực tổng hợp từ tin rao bán khách sạn Đà Nẵng năm 2026 và giỏ hàng Hoàng Hiệp đang chào bán; giá chào thường còn biên độ thương lượng.</p>
 
-<h2>Công suất phòng: con số cần đọc đúng</h2>
-<p>Theo báo cáo thị trường công khai, công suất phòng khách sạn 4 – 5 sao tại Đà Nẵng quý I/2026 đạt khoảng 85 – 88%. Một số tin rao khách sạn 52 phòng trên Võ Nguyên Giáp nêu công suất mùa cao điểm khoảng 95%.</p>
-<p>Tuy nhiên, công suất mùa cao điểm khác xa công suất trung bình năm. Khi xem hồ sơ, Hoàng Hiệp khuyên anh chị yêu cầu số liệu theo từng tháng trong ít nhất 12 tháng, kèm giá phòng bình quân, để tính doanh thu thực.</p>
+<h2>Công suất phòng khi mua bán khách sạn Đà Nẵng</h2>
+<p>Theo báo cáo thị trường công khai (tổng hợp trên <a href="https://cafef.vn/bds-da-nang-2026-phan-hoa-manh-de-thanh-loc-thi-truong-188260615112835053.chn">CafeF</a>), công suất phòng khách sạn 4 – 5 sao tại Đà Nẵng quý I/2026 đạt khoảng 85 – 88%. Một số tin rao khách sạn 52 phòng trên Võ Nguyên Giáp nêu công suất mùa cao điểm khoảng 95%.</p>
+<p>Tuy nhiên, công suất mùa cao điểm khác xa công suất trung bình năm. Khi xem hồ sơ bán khách sạn Đà Nẵng, Hoàng Hiệp khuyên anh chị yêu cầu số liệu theo từng tháng trong ít nhất 12 tháng, kèm giá phòng bình quân, để tính doanh thu thực.</p>
 
-<h2>Doanh thu tham khảo từ tin rao</h2>
+<h2>Doanh thu trong tin rao bán khách sạn Đà Nẵng</h2>
 <ul>
 <li>Khách sạn 16 phòng ở An Thượng, doanh thu khoảng 300 triệu/tháng, rao khoảng 28 tỷ.</li>
 <li>Khách sạn có hồ bơi trên Hồ Nghinh, doanh thu khoảng 600 triệu/tháng, rao khoảng 99 tỷ.</li>
 <li>Khách sạn 6 tầng khu Phạm Thiều cho thuê nguyên tòa khoảng 280 triệu/tháng, rao khoảng 65 tỷ.</li>
 </ul>
-<p>Doanh thu là số do người bán công bố, chưa trừ chi phí nhân sự, điện nước, OTA, bảo trì. Cần đối chiếu sổ sách, hóa đơn và thuế trước khi định giá.</p>
+<p>Trong các tin bán khách sạn Đà Nẵng, doanh thu là số do người bán công bố, chưa trừ chi phí nhân sự, điện nước, OTA, bảo trì. Cần đối chiếu sổ sách, hóa đơn và thuế trước khi định giá.</p>
+
+<h2>Cách đọc giá khi mua bán khách sạn Đà Nẵng</h2>
+<!--hh-img:img/nha-dat/ks-1411-01-goc-9-tang-bien-son-thuy-45-phong.jpg|Bán khách sạn Đà Nẵng: khách sạn góc 9 tầng, 45 phòng gần biển Sơn Thủy, đất 343 m², giá chào 68 tỷ-->
+<p>Giá chào bán khách sạn Đà Nẵng gồm hai phần: giá trị đất và giá trị công trình đang kinh doanh. Cách nhanh nhất để so sánh là quy về giá trên m² đất (cột cuối bảng giỏ hàng) rồi đối chiếu với giá đất cùng tuyến; phần chênh lệch là phần anh chị đang trả cho công trình, nội thất và lợi thế kinh doanh.</p>
+<p>Ví dụ với khách sạn số 1: giá chào 68 tỷ, doanh thu chủ nhà công bố từ 400 triệu/tháng, tức khoảng 4,8 tỷ/năm – tương đương khoảng 7% giá bán trước chi phí. Nếu giả định chi phí vận hành chiếm khoảng một nửa doanh thu (chỉ để minh họa), dòng tiền còn khoảng 3,5%/năm. Vì vậy, khi so sánh các tin bán khách sạn Đà Nẵng, cần tính cả lợi nhuận sau chi phí chứ không chỉ doanh thu.</p>
 
 <h2>Mua khách sạn đang chạy hay mua đất tự xây?</h2>
 <h3>Mua khách sạn đang kinh doanh</h3>
@@ -368,10 +380,10 @@ HTML
 <p>Chủ động thiết kế, hạng sao, nhưng mất thời gian xin phép và xây dựng, rủi ro chi phí phát sinh. Mặt bằng giá đất các trục biển có trong bài <a href="/gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/">giá đất ven biển Đà Nẵng</a>.</p>
 
 <h2>Khu vực nào hợp với loại khách sạn nào?</h2>
-<p>Phố An Thượng phù hợp khách sạn nhỏ 16 – 40 phòng phục vụ khách quốc tế tự túc, vốn vừa phải, dễ vận hành. Trục Võ Nguyên Giáp phù hợp boutique mặt biển hoặc khách sạn 4 sao, giá phòng cao nhưng vốn lớn. Khu Mỹ An, Trần Bạch Đằng cách biển 150 – 300 m, cân bằng giữa giá mua và giá phòng.</p>
+<p>Khi chọn trong các tin bán khách sạn Đà Nẵng, phố An Thượng phù hợp khách sạn nhỏ 16 – 40 phòng phục vụ khách quốc tế tự túc, vốn vừa phải, dễ vận hành. Trục Võ Nguyên Giáp phù hợp boutique mặt biển hoặc khách sạn 4 sao, giá phòng cao nhưng vốn lớn. Khu Mỹ An, Trần Bạch Đằng cách biển 150 – 300 m, cân bằng giữa giá mua và giá phòng.</p>
 <p>Ở Hội An, khu An Bàng – Tân Thành phù hợp villa, khách sạn thấp tầng trên diện tích đất rộng, phục vụ khách lưu trú dài ngày. Anh chị có thể xem thêm thị trường <a href="/khu-vuc/hoi-an/">bất động sản Hội An</a> nếu muốn mô hình nghỉ dưỡng thay vì khách sạn phố biển.</p>
 
-<h2>Checklist khi mua khách sạn ven biển</h2>
+<h2>Checklist pháp lý khi mua bán khách sạn Đà Nẵng</h2>
 <ul>
 <li>Sổ đất, giấy phép xây dựng, hoàn công đúng số tầng thực tế.</li>
 <li>Giấy chứng nhận PCCC, giấy phép kinh doanh lưu trú, hạng sao (nếu có).</li>
@@ -380,7 +392,7 @@ HTML
 <li>Tình trạng kết cấu, thang máy, hệ thống điện nước.</li>
 </ul>
 
-<p>Anh chị có thể xem các <a href="/mua-ban/khach-san/">khách sạn đang bán tại Đà Nẵng</a> hoặc nhóm <a href="/khu-vuc/son-tra/">bất động sản Sơn Trà</a> nơi tập trung nhiều khách sạn ven biển. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách khách sạn đang bán thật, kèm số liệu vận hành để thẩm định.</p>
+<p>Anh chị có thể xem các <a href="/mua-ban/khach-san/">khách sạn đang bán tại Đà Nẵng</a> hoặc nhóm <a href="/khu-vuc/son-tra/">bất động sản Sơn Trà</a> nơi tập trung nhiều khách sạn ven biển. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách bán khách sạn Đà Nẵng cập nhật, kèm số liệu vận hành để thẩm định.</p>
 HTML
 		,
 		'seo'      => array(
@@ -390,12 +402,13 @@ HTML
 				'Boutique mặt biển Võ Nguyên Giáp khoảng 48 – 90 tỷ; An Thượng khoảng 28 – 125 tỷ',
 				'Công suất 4 – 5 sao quý I/2026 khoảng 85 – 88% (báo cáo công khai)',
 				'Thẩm định doanh thu 12 tháng, PCCC, hoàn công trước khi xuống tiền',
-				'12 khách sạn 3 – 4 sao ven biển đang chào bán 68 – 170 tỷ, 37 – 74 phòng (10/2026)',
+				'Giỏ bán khách sạn Đà Nẵng 10/2026: 12 khách sạn 3 – 4 sao ven biển 68 – 170 tỷ, 37 – 74 phòng',
 			),
 			'faq'       => array(
-				array( 'Giá khách sạn ven biển Đà Nẵng bao nhiêu?', 'Tham khảo tin rao 2026: khách sạn nhỏ phố An Thượng khoảng 28 – 125 tỷ, boutique mặt biển Võ Nguyên Giáp khoảng 48 – 90 tỷ, 4 sao quy mô lớn khoảng 650 – 1.350 tỷ.' ),
+				array( 'Giá bán khách sạn Đà Nẵng ven biển bao nhiêu?', 'Tham khảo tin rao bán khách sạn Đà Nẵng năm 2026: khách sạn nhỏ phố An Thượng khoảng 28 – 125 tỷ, boutique mặt biển Võ Nguyên Giáp khoảng 48 – 90 tỷ, 4 sao quy mô lớn khoảng 650 – 1.350 tỷ.' ),
 				array( 'Công suất phòng khách sạn Đà Nẵng hiện nay?', 'Khách sạn 4 – 5 sao quý I/2026 đạt khoảng 85 – 88% theo báo cáo thị trường; công suất trung bình năm thường thấp hơn mùa cao điểm.' ),
 				array( 'Khách sạn ven biển Đà Nẵng đang bán giá bao nhiêu?', 'Giỏ hàng tháng 10/2026 của Hoàng Hiệp có 12 khách sạn 3 – 4 sao từ 68 tỷ (căn góc 9 tầng 45 phòng biển Sơn Thủy) đến 170 tỷ (12 tầng 53 phòng Võ Văn Kiệt), doanh thu chủ nhà công bố khoảng 330 – 700 triệu/tháng.' ),
+				array( 'Muốn bán khách sạn Đà Nẵng cần chuẩn bị hồ sơ gì?', 'Chủ nhà muốn bán khách sạn Đà Nẵng nhanh nên chuẩn bị sổ, giấy phép xây dựng, hoàn công, PCCC, giấy phép kinh doanh lưu trú và doanh thu 12 tháng có hóa đơn để người mua thẩm định.' ),
 				array( 'Mua khách sạn cần kiểm tra giấy tờ gì?', 'Sổ đất, giấy phép xây dựng và hoàn công, PCCC, giấy phép kinh doanh lưu trú, sổ sách doanh thu và các hợp đồng đang hiệu lực.' ),
 			),
 		),
@@ -408,17 +421,18 @@ HTML
 	);
 
 	$posts[] = array(
-		'slug'     => 'vinhomes-hai-van-bay-cap-nhat-2026',
+		'slug'     => 'phan-khu-vinhomes-hai-van-bay-2026',
+		'old_slug' => array( 'vinhomes-hai-van-bay-cap-nhat-2026' ),
 		'title'    => 'Vinhomes Hải Vân Bay: cập nhật 2026 – phân khu, giá, tiến độ',
 		'excerpt'  => 'Vinhomes Hải Vân Bay cập nhật 2026: Bạch Vân mở bán 4/2026, Đảo Ngọc ra mắt 5/2026, Vịnh Mây 99,6 ha; giá liền kề từ khoảng 5,2 tỷ, tiến độ bàn giao.',
-		'keyword'  => 'Vinhomes Hải Vân Bay',
+		'keyword'  => 'phân khu Vinhomes Hải Vân Bay',
 		'project'  => 'vinhomes-hai-van-bay',
 		'week'     => 9,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p><strong>Vinhomes Hải Vân Bay</strong> (Làng Vân) là đô thị nghỉ dưỡng 512,2 ha tại vịnh Nam Chơn, chân đèo Hải Vân (Liên Chiểu, Đà Nẵng), do Vinpearl làm chủ đầu tư. Sau lễ ra mắt ngày 20/4/2026 với phân khu Bạch Vân, dự án đã giới thiệu tiếp Đảo Ngọc (5/2026) và Vịnh Mây (cuối tháng 9/2026). Giá liền kề tham khảo từ khoảng 5,2 tỷ; bài viết cập nhật tháng 10/2026.</p>
+<p><strong>Phân khu Vinhomes Hải Vân Bay</strong> gồm Bạch Vân, Đảo Ngọc, Vịnh Mây và Tinh Vân, nằm trong đô thị nghỉ dưỡng Làng Vân 512,2 ha tại vịnh Nam Chơn, chân đèo Hải Vân (Liên Chiểu, Đà Nẵng), do Vinpearl làm chủ đầu tư. Sau lễ ra mắt ngày 20/4/2026 với phân khu Bạch Vân, dự án đã giới thiệu tiếp Đảo Ngọc (5/2026) và Vịnh Mây (cuối tháng 9/2026). Giá liền kề tham khảo từ khoảng 5,2 tỷ; bài viết cập nhật tháng 10/2026.</p>
 
-<h2>Mốc chính của Vinhomes Hải Vân Bay</h2>
+<h2>Mốc ra mắt từng phân khu Vinhomes Hải Vân Bay</h2>
 <table>
 <thead><tr><th>Thời điểm</th><th>Sự kiện</th></tr></thead>
 <tbody>
@@ -432,7 +446,9 @@ HTML
 </tbody>
 </table>
 
-<h2>4 phân khu: Bạch Vân, Đảo Ngọc, Vịnh Mây, Tinh Vân</h2>
+<h2>4 phân khu Vinhomes Hải Vân Bay: Bạch Vân, Đảo Ngọc, Vịnh Mây, Tinh Vân</h2>
+<!--hh-img:img/vinhomes-hai-van-bay/vhvb-dao-ngoc-tong-the-1.jpg|Phối cảnh Đảo Ngọc – một phân khu Vinhomes Hải Vân Bay tại vịnh Nam Chơn (hình minh họa của chủ đầu tư)-->
+<p>Mỗi phân khu Vinhomes Hải Vân Bay có phong cách kiến trúc, quy mô và nhóm khách riêng: Bạch Vân ở cửa ngõ, nhiều liền kề và shophouse; Đảo Ngọc là đảo biệt thự giữa vịnh; Vịnh Mây trải trên sườn núi; Tinh Vân quỹ căn giới hạn. Vì vậy, so giá nên so trong cùng phân khu và cùng loại sản phẩm.</p>
 <h3>Bạch Vân – phân khu mở bán đầu tiên</h3>
 <p>Rộng khoảng 112 ha ở cửa ngõ dự án, khoảng 2.500 căn thấp tầng gồm liền kề, hơn 400 shophouse, biệt thự song lập, đơn lập và khối cao tầng dự kiến. Đây là phân khu có tiến độ thi công nhanh nhất.</p>
 <h3>Đảo Ngọc – biệt thự trên đảo giữa vịnh</h3>
@@ -442,7 +458,7 @@ HTML
 <h3>Tinh Vân</h3>
 <p>Phân khu phong cách Nhật Bản, quỹ căn giới hạn, chưa có thông tin giá công khai.</p>
 
-<h2>Bảng giá Vinhomes Hải Vân Bay tham khảo</h2>
+<h2>Bảng giá theo phân khu Vinhomes Hải Vân Bay (tham khảo)</h2>
 <table>
 <thead><tr><th>Sản phẩm</th><th>Diện tích đất</th><th>Giá tham khảo</th></tr></thead>
 <tbody>
@@ -453,27 +469,40 @@ HTML
 <tr><td>Shophouse, căn hộ cao tầng</td><td>–</td><td>Liên hệ / chưa công bố</td></tr>
 </tbody>
 </table>
-<p>Giá tổng hợp từ các đơn vị phân phối năm 2026, thay đổi theo đợt mở bán, vị trí và phương án thanh toán.</p>
+<p>Giá từng phân khu Vinhomes Hải Vân Bay tổng hợp từ các nguồn phân phối năm 2026, thay đổi theo đợt mở bán, vị trí và phương án thanh toán.</p>
 
-<h2>Chính sách và pháp lý</h2>
+<h2>So sánh nhanh các phân khu Vinhomes Hải Vân Bay</h2>
+<table>
+<thead><tr><th>Phân khu</th><th>Quy mô</th><th>Sản phẩm chính</th><th>Phù hợp</th></tr></thead>
+<tbody>
+<tr><td>Bạch Vân</td><td>Khoảng 112 ha, khoảng 2.500 căn</td><td>Liền kề, shophouse, song lập, đơn lập</td><td>Vốn đầu vào thấp, muốn nhận nhà sớm</td></tr>
+<tr><td>Đảo Ngọc</td><td>Khoảng 2.376 căn thấp tầng</td><td>Chủ yếu biệt thự trên đảo</td><td>Khách ưu tiên không gian, mặt nước</td></tr>
+<tr><td>Vịnh Mây</td><td>Khoảng 99,6 ha, khoảng 690 căn</td><td>Biệt thự, nhà phố sườn đồi</td><td>Khách tài chính mạnh, thích tầm nhìn vịnh từ trên cao</td></tr>
+<tr><td>Tinh Vân</td><td>Quỹ căn giới hạn</td><td>Phong cách Nhật Bản</td><td>Chờ thông tin giá chính thức</td></tr>
+</tbody>
+</table>
+<p>Các phân khu ra mắt nối tiếp nhau trong năm 2026, nên chính sách thanh toán và giá mỗi đợt không giống nhau. Riêng Vịnh Mây, báo chí mô tả đây là quần thể dinh thự trên sườn đồi với nhiều cao độ khác nhau (xem <a href="https://tuoitre.vn/loi-the-kho-sao-chep-cua-dinh-co-suon-doi-vinh-may-100260916180730456.htm">Tuổi Trẻ</a>).</p>
+
+<h2>Chính sách và pháp lý các phân khu Vinhomes Hải Vân Bay</h2>
 <p>Các đợt bán năm 2026 áp dụng thanh toán theo tiến độ 15 – 18 tháng, ngân hàng cho vay đến 70%, hỗ trợ lãi suất 0% khoảng 24 tháng (liền kề, shophouse) hoặc 36 tháng (biệt thự). Chính sách thay đổi theo từng đợt; nhiều chương trình ưu đãi đã kết thúc vào cuối tháng 9/2026, nên anh chị cần hỏi chính sách hiện hành trước khi tính dòng tiền.</p>
-<p>Hơn 90% sản phẩm thấp tầng nằm trên đất ở đô thị, được sở hữu lâu dài; condotel, khách sạn và shop khối đế trên đất thương mại – dịch vụ có thời hạn 50 năm.</p>
+<p>Ở các phân khu Vinhomes Hải Vân Bay, hơn 90% sản phẩm thấp tầng nằm trên đất ở đô thị, được sở hữu lâu dài; condotel, khách sạn và shop khối đế trên đất thương mại – dịch vụ có thời hạn 50 năm.</p>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Bạch Vân phù hợp khách muốn vốn đầu vào thấp và nhận nhà sớm nhất. Đảo Ngọc và Vịnh Mây hướng tới khách tài chính mạnh, ưu tiên không gian và tầm nhìn vịnh. Dự án hưởng lợi trực tiếp từ hạ tầng phía Tây Bắc như cảng Liên Chiểu – xem thêm bài <a href="/bat-dong-san-lien-chieu-cang-lien-chieu/">bất động sản Liên Chiểu và cảng Liên Chiểu</a>.</p>
-<p>Thông tin chi tiết quỹ căn có tại trang <a href="/du-an/vinhomes-hai-van-bay/">dự án Vinhomes Hải Vân Bay</a>; so sánh với các <a href="/loai-du-an/biet-thu/">dự án biệt thự Đà Nẵng</a> khác. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá, chính sách mới nhất và bảng tính dòng tiền cho từng căn Vinhomes Hải Vân Bay.</p>
+<p>Trong 4 phân khu Vinhomes Hải Vân Bay, Bạch Vân phù hợp khách muốn vốn đầu vào thấp và nhận nhà sớm nhất. Đảo Ngọc và Vịnh Mây hướng tới khách tài chính mạnh, ưu tiên không gian và tầm nhìn vịnh. Dự án hưởng lợi trực tiếp từ hạ tầng phía Tây Bắc như cảng Liên Chiểu – xem thêm bài <a href="/bat-dong-san-lien-chieu-cang-lien-chieu/">bất động sản Liên Chiểu và cảng Liên Chiểu</a>.</p>
+<p>Thông tin chi tiết quỹ căn có tại trang <a href="/du-an/vinhomes-hai-van-bay/">dự án Vinhomes Hải Vân Bay</a>; so sánh với các <a href="/loai-du-an/biet-thu/">dự án biệt thự Đà Nẵng</a> khác. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá, chính sách mới nhất và bảng tính dòng tiền cho từng căn thuộc các phân khu Vinhomes Hải Vân Bay.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Vinhomes Hải Vân Bay: cập nhật giá, phân khu 2026',
 			'desc'      => 'Vinhomes Hải Vân Bay cập nhật 10/2026: Bạch Vân, Đảo Ngọc, Vịnh Mây, giá liền kề từ khoảng 5,2 tỷ, tiến độ bàn giao. Gọi Hoàng Hiệp nhận bảng giá.',
 			'points'    => array(
-				'512,2 ha tại vịnh Nam Chơn; ra mắt 20/4/2026, Đảo Ngọc 5/2026, Vịnh Mây cuối 9/2026',
+				'4 phân khu Vinhomes Hải Vân Bay trên 512,2 ha tại vịnh Nam Chơn; ra mắt 20/4/2026, Đảo Ngọc 5/2026, Vịnh Mây cuối 9/2026',
 				'Liền kề Bạch Vân khoảng 5,2 – 10,4 tỷ; song lập 9,9 – 16,8 tỷ (tham khảo)',
 				'Hoàn thiện thô khoảng 345 căn Bạch Vân quý 4/2026, bàn giao từ 2027 (dự kiến)',
 			),
 			'faq'       => array(
-				array( 'Vinhomes Hải Vân Bay có mấy phân khu?', 'Có 4 phân khu: Bạch Vân (mở bán đầu tiên), Đảo Ngọc, Vịnh Mây và Tinh Vân.' ),
+				array( 'Vinhomes Hải Vân Bay có mấy phân khu?', 'Có 4 phân khu Vinhomes Hải Vân Bay: Bạch Vân (mở bán đầu tiên), Đảo Ngọc, Vịnh Mây và Tinh Vân.' ),
+				array( 'Phân khu Vinhomes Hải Vân Bay nào nhận nhà sớm nhất?', 'Bạch Vân là phân khu Vinhomes Hải Vân Bay có tiến độ nhanh nhất: dự kiến hoàn thiện thô khoảng 345 căn đầu tiên trong quý 4/2026 và bàn giao giai đoạn 1 từ năm 2027.' ),
 				array( 'Giá Vinhomes Hải Vân Bay hiện nay bao nhiêu?', 'Tham khảo 2026: liền kề Bạch Vân khoảng 5,2 – 10,4 tỷ, song lập Bạch Vân khoảng 9,9 – 16,8 tỷ, biệt thự Đảo Ngọc dự kiến khoảng 14,9 – 44 tỷ.' ),
 				array( 'Vịnh Mây Vinhomes Hải Vân Bay có gì?', 'Vịnh Mây rộng khoảng 99,6 ha trên sườn núi Hải Vân, khoảng 690 biệt thự và nhà phố, mật độ xây dựng khoảng 19,8%. Giá đang cập nhật theo từng đợt.' ),
 				array( 'Khi nào Vinhomes Hải Vân Bay bàn giao?', 'Dự kiến hoàn thiện thô khoảng 345 căn đầu tiên tại Bạch Vân trong quý 4/2026 và bàn giao giai đoạn 1 từ năm 2027.' ),
@@ -766,7 +795,7 @@ HTML
 </table>
 
 <h3>Vinhomes Hải Vân Bay – dự án lớn nhất khu vực</h3>
-<p><a href="/du-an/vinhomes-hai-van-bay/">Vinhomes Hải Vân Bay</a> tại vịnh Nam Chơn có 4 phân khu Bạch Vân, Đảo Ngọc, Vịnh Mây, Tinh Vân; hơn 90% sản phẩm thấp tầng sở hữu lâu dài. Cập nhật giá và tiến độ trong bài <a href="/vinhomes-hai-van-bay-cap-nhat-2026/">Vinhomes Hải Vân Bay: cập nhật 2026</a>.</p>
+<p><a href="/du-an/vinhomes-hai-van-bay/">Vinhomes Hải Vân Bay</a> tại vịnh Nam Chơn có 4 phân khu Bạch Vân, Đảo Ngọc, Vịnh Mây, Tinh Vân; hơn 90% sản phẩm thấp tầng sở hữu lâu dài. Cập nhật giá và tiến độ trong bài <a href="/phan-khu-vinhomes-hai-van-bay-2026/">phân khu Vinhomes Hải Vân Bay 2026</a>.</p>
 <h3>The Ori Garden – căn hộ giá thấp</h3>
 <p><a href="/du-an/the-ori-garden/">The Ori Garden</a> tại khu đô thị Bàu Tràm có giá căn hộ thấp nhất trong các dự án của web, giá thuê khoảng 3 – 8 triệu/tháng. Phần căn nhà ở xã hội có điều kiện mua và chuyển nhượng riêng theo quy định, cần kiểm tra loại căn trước khi giao dịch.</p>
 <h3>Đất nền Dragon Smart City, Lakeside Palace</h3>

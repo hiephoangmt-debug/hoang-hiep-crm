@@ -94,9 +94,9 @@ HTML
 		'week'     => 1,
 		'category' => 'Về Hoàng Hiệp',
 		'content'  => <<<'HTML'
-<p>Mua căn hộ cùng Hoàng Hiệp Đà Nẵng đi qua 6 bước: tư vấn nhu cầu, chọn dự án, xem thực tế, kiểm tra pháp lý, đặt cọc và ký hợp đồng mua bán, cuối cùng là vay ngân hàng và nhận bàn giao. Mỗi bước có đầu ra rõ ràng để anh chị biết mình đang ở đâu và cần chuẩn bị gì (cập nhật tháng 10/2026).</p>
+<p>Quy trình mua căn hộ Đà Nẵng cùng Hoàng Hiệp đi qua 6 bước: tư vấn nhu cầu, chọn dự án, xem thực tế, kiểm tra pháp lý, đặt cọc và ký hợp đồng mua bán, cuối cùng là vay ngân hàng và nhận bàn giao. Mỗi bước có đầu ra rõ ràng để anh chị biết mình đang ở đâu và cần chuẩn bị gì (cập nhật tháng 10/2026).</p>
 
-<h2>Tổng quan 6 bước mua căn hộ cùng Hoàng Hiệp Đà Nẵng</h2>
+<h2>Tổng quan quy trình mua căn hộ Đà Nẵng 6 bước</h2>
 <table>
 <thead><tr><th>Bước</th><th>Việc chính</th><th>Kết quả anh chị nhận được</th></tr></thead>
 <tbody>
@@ -111,12 +111,13 @@ HTML
 
 <h2>Bước 1: Tư vấn nhu cầu</h2>
 <p>Hiệp bắt đầu bằng vài câu hỏi đơn giản: mua để ở hay cho thuê, ngân sách tối đa, vốn tự có bao nhiêu phần trăm và thời điểm cần nhận nhà. Câu trả lời quyết định loại căn (Studio, 1PN, 2PN hay 3PN) và khu vực nên ưu tiên.</p>
-<p>Ở bước này anh chị chưa cần chọn dự án. Mục tiêu là có bộ tiêu chí rõ để tránh bị cuốn theo quảng cáo.</p>
+<p>Ở bước này anh chị chưa cần chọn dự án. Mục tiêu là có bộ tiêu chí rõ để tránh bị cuốn theo quảng cáo. Trong cả quy trình mua căn hộ Đà Nẵng, đây là bước rẻ nhất nhưng quyết định nhiều nhất: tiêu chí càng cụ thể, danh sách dự án ở bước 2 càng ngắn.</p>
 
 <h2>Bước 2: Chọn dự án</h2>
-<p>Từ tiêu chí, Hiệp lọc ra 2–3 dự án trong danh mục <a href="/du-an/">dự án bất động sản Đà Nẵng</a> và lập bảng so sánh giá tham khảo, tiến độ, chủ đầu tư và hình thức sở hữu. Với người mua để ở, Hiệp thường đề xuất so sánh giữa khu trung tâm và khu Nam Đà Nẵng, nơi có nhiều nguồn cung mới như <a href="/du-an/fours-tower/">FourS Tower</a>.</p>
+<p>Bước thứ hai của quy trình mua căn hộ Đà Nẵng là thu hẹp lựa chọn. Từ tiêu chí, Hiệp lọc ra 2–3 dự án trong danh mục <a href="/du-an/">dự án bất động sản Đà Nẵng</a> và lập bảng so sánh giá tham khảo, tiến độ, chủ đầu tư và hình thức sở hữu. Với người mua để ở, Hiệp thường đề xuất so sánh giữa khu trung tâm và khu Nam Đà Nẵng, nơi có nhiều nguồn cung mới như <a href="/du-an/fours-tower/">FourS Tower</a>.</p>
 
 <h2>Bước 3: Xem thực tế</h2>
+<!--hh-img:img/hoa-xuan/hoa-xuan-flycam-8-2025-song-cam-le-va-trung-tam-da-nang.jpg|Khu dân cư ven sông Cẩm Lệ nhìn về trung tâm – xem thực tế khu vực là bước 3 của quy trình mua căn hộ Đà Nẵng-->
 <p>Hiệp đưa anh chị đi xem công trường hoặc tòa đã hoàn thiện, nhà mẫu và hạ tầng xung quanh. Nên xem vào hai thời điểm khác nhau trong ngày để cảm nhận tiếng ồn, giao thông và hướng nắng.</p>
 <h3>Những điểm nên ghi lại khi xem</h3>
 <ul>
@@ -126,31 +127,47 @@ HTML
 </ul>
 
 <h2>Bước 4: Kiểm tra pháp lý</h2>
-<p>Trước khi đặt tiền, anh chị cần biết dự án đã đủ điều kiện huy động vốn hay chưa, hình thức sở hữu (lâu dài hay có thời hạn) và các điều khoản quan trọng trong hợp đồng mẫu. Hiệp gửi danh mục giấy tờ cần đối chiếu và khuyến khích anh chị nhờ thêm luật sư nếu giá trị giao dịch lớn.</p>
+<p>Trong quy trình mua căn hộ Đà Nẵng, kiểm tra pháp lý luôn đứng trước bước đặt tiền. Anh chị cần biết dự án đã đủ điều kiện huy động vốn hay chưa, hình thức sở hữu (lâu dài hay có thời hạn) và các điều khoản quan trọng trong hợp đồng mẫu. Hiệp gửi danh mục giấy tờ cần đối chiếu và khuyến khích anh chị nhờ thêm luật sư nếu giá trị giao dịch lớn.</p>
 
 <h2>Bước 5: Đặt cọc và ký hợp đồng mua bán</h2>
+<p>Đây là bước phát sinh nghĩa vụ tiền bạc đầu tiên trong quy trình mua căn hộ Đà Nẵng, nên anh chị cần đọc kỹ từng văn bản trước khi chuyển khoản.</p>
 <p>Thông thường khách giữ chỗ (booking) trước, sau đó ký thỏa thuận đặt cọc và hợp đồng mua bán theo lịch của chủ đầu tư. Hiệp giúp anh chị đọc kỹ lịch thanh toán, mức chiết khấu đang áp dụng và điều kiện hoàn tiền nếu không mua được căn mong muốn.</p>
 
 <h2>Bước 6: Vay ngân hàng và nhận bàn giao</h2>
-<p>Nếu cần vay, Hiệp kết nối anh chị với ngân hàng mà dự án liên kết để so sánh lãi suất, thời gian ân hạn và phí trả nợ trước hạn. Đến kỳ bàn giao, anh chị kiểm tra căn hộ theo biên bản, ghi lại lỗi để chủ đầu tư khắc phục, rồi theo dõi hồ sơ cấp giấy chứng nhận.</p>
+<p>Nếu cần vay, Hiệp kết nối anh chị với ngân hàng mà dự án liên kết để so sánh lãi suất, thời gian ân hạn và phí trả nợ trước hạn. Đến kỳ bàn giao, anh chị kiểm tra căn hộ theo biên bản, ghi lại lỗi để chủ đầu tư khắc phục, rồi theo dõi hồ sơ cấp giấy chứng nhận. Quy trình mua căn hộ Đà Nẵng chỉ thật sự khép lại khi giấy chứng nhận mang tên anh chị.</p>
+<h2>Mốc thanh toán luật định trong quy trình mua căn hộ Đà Nẵng</h2>
+<p>Với căn hộ hình thành trong tương lai (mua khi dự án chưa hoàn thành), Luật Kinh doanh bất động sản 2023 đặt giới hạn cho các khoản tiền chủ đầu tư được thu. Nắm các mốc này giúp anh chị đối chiếu lịch thanh toán trong hợp đồng có đúng luật hay không.</p>
+<table>
+<thead><tr><th>Mốc</th><th>Giới hạn theo luật</th></tr></thead>
+<tbody>
+<tr><td>Tiền đặt cọc</td><td>Không quá 5% giá bán, chỉ thu khi dự án đã đủ điều kiện đưa vào kinh doanh</td></tr>
+<tr><td>Thanh toán lần đầu</td><td>Không quá 30% giá trị hợp đồng, kể cả tiền đặt cọc</td></tr>
+<tr><td>Trước khi bàn giao</td><td>Tổng số tiền đã thu không quá 70% giá trị hợp đồng</td></tr>
+<tr><td>Khi chưa cấp giấy chứng nhận</td><td>Không thu quá 95% giá trị hợp đồng</td></tr>
+</tbody>
+</table>
+<p>Quy định về tiền đặt cọc được <a href="https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html">LuatVietnam</a> tóm tắt khá rõ. Chính sách "thanh toán 70% nhận nhà" mà nhiều chủ đầu tư áp dụng cũng xuất phát từ mốc trước bàn giao nói trên. Khi gặp lịch thanh toán khác thường, anh chị nên hỏi lại trước khi ký.</p>
+
 <h2>Mua căn hộ từ xa có được không?</h2>
-<p>Nhiều khách ở Hà Nội, TP.HCM hoặc nước ngoài mua căn hộ Đà Nẵng mà chỉ ra thực tế một hai lần. Khi đó, Hiệp gửi video, hình ảnh, tài liệu qua Zalo ở bước 2–3 và hẹn lịch xem trực tiếp trước khi ký hợp đồng, để anh chị vẫn kiểm soát được các quyết định quan trọng.</p>
+<p>Nhiều khách ở Hà Nội, TP.HCM hoặc nước ngoài vẫn đi trọn quy trình mua căn hộ Đà Nẵng dù chỉ ra thực tế một hai lần. Khi đó, Hiệp gửi video, hình ảnh, tài liệu qua Zalo ở bước 2–3 và hẹn lịch xem trực tiếp trước khi ký hợp đồng, để anh chị vẫn kiểm soát được các quyết định quan trọng.</p>
 <p>Nếu đang cân nhắc chọn người đồng hành, anh chị có thể tham khảo bài <a href="/chon-moi-gioi-bat-dong-san-da-nang-8-cau-hoi/">8 câu nên hỏi khi chọn môi giới bất động sản Đà Nẵng</a>. Danh sách căn đang chào bán xem tại <a href="/mua-ban/can-ho-chung-cu/">mua bán căn hộ chung cư Đà Nẵng</a>.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để bắt đầu bước 1 và nhận bảng so sánh dự án theo đúng ngân sách của anh chị.</p>
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để bắt đầu bước 1 của quy trình mua căn hộ Đà Nẵng và nhận bảng so sánh dự án theo đúng ngân sách của anh chị.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Quy trình mua căn hộ Đà Nẵng 6 bước cùng Hoàng Hiệp',
 			'desc'      => 'Quy trình mua căn hộ Đà Nẵng 6 bước cùng Hoàng Hiệp: tư vấn nhu cầu, chọn dự án, kiểm tra pháp lý, đặt cọc, vay ngân hàng và nhận bàn giao nhà.',
-			'points'    => array( 'Xác định nhu cầu và ngân sách trước khi chọn dự án', 'Kiểm tra pháp lý, hợp đồng mẫu trước khi đặt cọc', 'So sánh gói vay ngân hàng và kiểm tra kỹ khi bàn giao' ),
+			'points'    => array( 'Quy trình mua căn hộ Đà Nẵng gồm 6 bước, bắt đầu từ nhu cầu và ngân sách', 'Kiểm tra pháp lý, hợp đồng mẫu trước khi đặt cọc', 'So sánh gói vay ngân hàng và kiểm tra kỹ khi bàn giao' ),
 			'faq'       => array(
-				array( 'Mua căn hộ qua Hoàng Hiệp mất bao lâu?', 'Tùy dự án và lịch mở bán. Từ tư vấn đến ký hợp đồng có thể vài ngày đến vài tuần; bàn giao phụ thuộc tiến độ xây dựng.' ),
-				array( 'Có cần chuẩn bị giấy tờ gì để đặt cọc?', 'Thường cần CCCD và thông tin liên hệ; khi vay ngân hàng cần thêm giấy tờ chứng minh thu nhập, tình trạng hôn nhân theo yêu cầu ngân hàng.' ),
+				array( 'Quy trình mua căn hộ Đà Nẵng mất bao lâu?', 'Tùy dự án và lịch mở bán. Từ tư vấn đến ký hợp đồng có thể vài ngày đến vài tuần; bàn giao phụ thuộc tiến độ xây dựng.' ),
+				array( 'Có cần chuẩn bị giấy tờ gì để đặt cọc?', 'Ở bước đặt cọc của quy trình mua căn hộ Đà Nẵng, thường cần CCCD và thông tin liên hệ; khi vay ngân hàng cần thêm giấy tờ chứng minh thu nhập, tình trạng hôn nhân theo yêu cầu ngân hàng.' ),
+				array( 'Quy trình mua căn hộ Đà Nẵng đã bàn giao có khác căn đang xây?', 'Có. Căn đã có sổ đi theo thủ tục chuyển nhượng: đặt cọc, công chứng, nộp thuế phí và sang tên. Căn đang xây ký hợp đồng mua bán với chủ đầu tư và thanh toán theo tiến độ.' ),
+				array( 'Bước nào trong quy trình mua căn hộ Đà Nẵng dễ sai nhất?', 'Bước đặt cọc: nhiều người chuyển tiền trước khi đọc kỹ điều kiện hoàn cọc và lịch thanh toán. Hãy yêu cầu văn bản và đối chiếu các mốc luật định trước khi chuyển khoản.' ),
 				array( 'Hoàng Hiệp có hỗ trợ hồ sơ vay không?', 'Có, Hiệp kết nối ngân hàng liên kết với dự án và giúp so sánh lãi suất, thời gian ân hạn, phí trả nợ trước hạn.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array( 'https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html' ),
 	);
 
 	$posts[] = array(
@@ -166,8 +183,10 @@ HTML
 
 <h2>Vì sao cần "phỏng vấn" môi giới bất động sản Đà Nẵng?</h2>
 <p>Thị trường Đà Nẵng năm 2026 có nhiều dự án mở bán cùng lúc, nhiều đại lý cùng phân phối một dự án và thông tin chính sách thay đổi theo đợt. Người mua dễ nhận được thông tin không đồng nhất, nên việc chủ động đặt câu hỏi giúp lọc ra người tư vấn phù hợp.</p>
+<!--hh-img:img/da-nang/song-han-du-thuyen-cau-rong-ve-dem.jpg|Sông Hàn và cầu Rồng về đêm – khu trung tâm nơi môi giới bất động sản Đà Nẵng giới thiệu nhiều dự án căn hộ-->
+<p>Một môi giới bất động sản Đà Nẵng có thể cùng lúc giới thiệu cả chục dự án. Vì vậy, chất lượng câu trả lời cho từng dự án cụ thể quan trọng hơn số lượng dự án họ đang chào.</p>
 
-<h2>8 câu hỏi nên đặt ra</h2>
+<h2>8 câu hỏi nên đặt ra cho môi giới bất động sản Đà Nẵng</h2>
 <table>
 <thead><tr><th>#</th><th>Câu hỏi</th><th>Câu trả lời tốt thường có</th></tr></thead>
 <tbody>
@@ -183,15 +202,15 @@ HTML
 </table>
 
 <h3>Câu 1–2: Tư cách và pháp lý</h3>
-<p>Biết người tư vấn là ai giúp anh chị hiểu thông tin của họ đến từ đâu. Với pháp lý, đừng chấp nhận câu trả lời chung chung như "pháp lý chuẩn", hãy hỏi cụ thể giấy tờ nào đã có và giấy tờ nào đang chờ.</p>
+<p>Biết môi giới bất động sản Đà Nẵng đang làm việc với tư cách gì giúp anh chị hiểu thông tin của họ đến từ đâu. Với pháp lý, đừng chấp nhận câu trả lời chung chung như "pháp lý chuẩn", hãy hỏi cụ thể giấy tờ nào đã có và giấy tờ nào đang chờ.</p>
 <h3>Câu 3–4: Giá và tổng chi phí</h3>
-<p>Giá rao trên mạng thường là giá "từ", chưa phải giá căn anh chị chọn. Hãy yêu cầu bảng tính tổng chi phí theo phương án thanh toán cụ thể, gồm chiết khấu, VAT, phí bảo trì và chi phí vay nếu có.</p>
+<p>Giá mà môi giới bất động sản Đà Nẵng rao trên mạng thường là giá "từ", chưa phải giá căn anh chị chọn. Hãy yêu cầu bảng tính tổng chi phí theo phương án thanh toán cụ thể, gồm chiết khấu, VAT, phí bảo trì và chi phí vay nếu có.</p>
 <h3>Câu 5–6: Rủi ro và phương án thay thế</h3>
-<p>Người tư vấn có trách nhiệm sẽ chủ động nói về tiến độ, cạnh tranh nguồn cung cho thuê hay hạ tầng chưa hoàn thiện. Việc đưa ra 2–3 lựa chọn để so sánh cho thấy họ đặt nhu cầu của anh chị lên trước.</p>
+<p>Một môi giới bất động sản Đà Nẵng có trách nhiệm sẽ chủ động nói về tiến độ, cạnh tranh nguồn cung cho thuê hay hạ tầng chưa hoàn thiện. Việc đưa ra 2–3 lựa chọn để so sánh cho thấy họ đặt nhu cầu của anh chị lên trước.</p>
 <h3>Câu 7–8: Tiền giữ chỗ và hậu mãi</h3>
-<p>Tiền booking, đặt cọc luôn cần có văn bản ghi rõ điều kiện. Ngoài ra, giai đoạn từ ký hợp đồng đến bàn giao thường kéo dài, nên cần một đầu mối theo dõi lịch thanh toán và nhắc các mốc quan trọng.</p>
+<p>Tiền booking, đặt cọc luôn cần có văn bản ghi rõ điều kiện. Với nhà ở hình thành trong tương lai, Luật Kinh doanh bất động sản 2023 giới hạn tiền đặt cọc không quá 5% giá bán và chỉ được thu khi dự án đủ điều kiện kinh doanh (xem tóm tắt trên <a href="https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html">LuatVietnam</a>); môi giới bất động sản Đà Nẵng nào đề nghị khoản cọc khác thường thì anh chị nên hỏi lại. Ngoài ra, giai đoạn từ ký hợp đồng đến bàn giao thường kéo dài, nên cần một đầu mối theo dõi lịch thanh toán và nhắc các mốc quan trọng.</p>
 
-<h2>Dấu hiệu nên cẩn trọng</h2>
+<h2>Dấu hiệu nên cẩn trọng khi làm việc với môi giới bất động sản Đà Nẵng</h2>
 <ul>
 <li>Cam kết lợi nhuận hoặc giá tăng chắc chắn mà không có văn bản của chủ đầu tư.</li>
 <li>Thúc ép chuyển tiền gấp vào tài khoản cá nhân.</li>
@@ -200,7 +219,11 @@ HTML
 </ul>
 
 <h2>Ghi lại mọi thỏa thuận bằng văn bản</h2>
-<p>Dù chọn ai, anh chị nên lưu lại tin nhắn, email và văn bản liên quan đến giá, chính sách, tiền giữ chỗ. Đây là căn cứ quan trọng nếu sau này có khác biệt giữa lời tư vấn và hợp đồng thực tế.</p>
+<p>Dù chọn môi giới bất động sản Đà Nẵng nào, anh chị nên lưu lại tin nhắn, email và văn bản liên quan đến giá, chính sách, tiền giữ chỗ. Đây là căn cứ quan trọng nếu sau này có khác biệt giữa lời tư vấn và hợp đồng thực tế.</p>
+
+<h2>So sánh câu trả lời của 2–3 người tư vấn</h2>
+<p>Cách đơn giản để đánh giá một môi giới bất động sản Đà Nẵng là đặt cùng một bộ câu hỏi cho hai hoặc ba người đang tư vấn cùng dự án, rồi so sánh câu trả lời. Nếu bảng giá, chính sách và mốc thanh toán khớp nhau, thông tin có độ tin cậy cao. Nếu một người đưa ra mức chiết khấu hay cam kết khác hẳn, hãy yêu cầu văn bản chứng minh.</p>
+<p>Cách so sánh này không tốn chi phí, giúp anh chị hiểu dự án sâu hơn và nhận ra ai trả lời bằng tài liệu, ai trả lời bằng cảm tính.</p>
 
 <h2>Hoàng Hiệp làm việc với khách như thế nào?</h2>
 <p>Hoàng Hiệp tư vấn và phân phối nhiều dự án tại Đà Nẵng, không phải nhân viên của chủ đầu tư nào. Mọi câu hỏi trong danh sách trên anh chị đều có thể hỏi trực tiếp Hiệp. Quy trình làm việc chi tiết xem tại bài <a href="/quy-trinh-mua-can-ho-hoang-hiep-da-nang/">quy trình mua căn hộ 6 bước</a>, thông tin về Hiệp xem tại trang <a href="/gioi-thieu/">giới thiệu</a> và danh mục <a href="/du-an/">dự án bất động sản Đà Nẵng</a>.</p>
@@ -211,10 +234,12 @@ HTML
 		'seo'      => array(
 			'seo_title' => 'Môi giới bất động sản Đà Nẵng: 8 câu nên hỏi trước',
 			'desc'      => 'Môi giới bất động sản Đà Nẵng: 8 câu hỏi về pháp lý, giá, phí, hậu mãi giúp bạn chọn người tư vấn an toàn. Gọi 0904 567 009 để hỏi trực tiếp.',
-			'points'    => array( 'Hỏi rõ tư cách phân phối và pháp lý dự án', 'Yêu cầu bảng giá, tổng chi phí bằng văn bản', 'Cẩn trọng với cam kết lợi nhuận và chuyển tiền vào tài khoản cá nhân' ),
+			'points'    => array( 'Chọn môi giới bất động sản Đà Nẵng: hỏi rõ tư cách phân phối và pháp lý dự án', 'Yêu cầu bảng giá, tổng chi phí bằng văn bản', 'Cẩn trọng với cam kết lợi nhuận và chuyển tiền vào tài khoản cá nhân' ),
 			'faq'       => array(
-				array( 'Có nên chuyển tiền giữ chỗ cho môi giới?', 'Nên chuyển vào tài khoản của chủ đầu tư hoặc đơn vị phân phối chính thức, có văn bản ghi rõ điều kiện hoàn tiền.' ),
+				array( 'Có nên chuyển tiền giữ chỗ cho môi giới bất động sản Đà Nẵng?', 'Nên chuyển vào tài khoản của chủ đầu tư hoặc đơn vị phân phối chính thức, có văn bản ghi rõ điều kiện hoàn tiền.' ),
 				array( 'Làm sao biết thông tin pháp lý môi giới đưa ra là đúng?', 'Yêu cầu bản sao giấy tờ hoặc nguồn công bố chính thức, đối chiếu với cơ quan quản lý hoặc nhờ luật sư khi giá trị lớn.' ),
+				array( 'Môi giới bất động sản Đà Nẵng cần cung cấp những tài liệu gì?', 'Tối thiểu là bảng giá, chính sách bán hàng của đợt đang áp dụng, hợp đồng mẫu và thông tin pháp lý dự án. Môi giới bất động sản Đà Nẵng làm việc nghiêm túc sẽ gửi các tài liệu này bằng văn bản.' ),
+				array( 'Có nên làm việc với nhiều môi giới cùng lúc?', 'Có thể, để so sánh thông tin. Tuy vậy khi đã chọn căn, nên làm việc với một đầu mối để tránh trùng giữ chỗ và nhầm lẫn chính sách.' ),
 				array( 'Mua qua môi giới có đắt hơn mua trực tiếp chủ đầu tư?', 'Với dự án sơ cấp, giá và chính sách thường theo bảng giá chung của chủ đầu tư; anh chị nên đối chiếu bảng giá bằng văn bản.' ),
 			),
 		),
@@ -230,9 +255,9 @@ HTML
 		'week'     => 1,
 		'category' => 'Thị trường',
 		'content'  => <<<'HTML'
-<p>Bất động sản Đà Nẵng 2026 được dẫn dắt bởi phân khúc căn hộ: giá sơ cấp trung bình khoảng 83 triệu đồng/m² (CBRE, quý 1/2026), quý 2 có khoảng 2.793 căn giao dịch thành công, tăng 54% so với quý trước (DKRA). Đất nền phục hồi chậm hơn và biên độ tăng giá được dự báo không còn đột biến như giai đoạn 2024–2025 (cập nhật tháng 10/2026).</p>
+<p>Thị trường bất động sản Đà Nẵng năm 2026 được dẫn dắt bởi phân khúc căn hộ: giá sơ cấp trung bình khoảng 83 triệu đồng/m² (CBRE, quý 1/2026), quý 2 có khoảng 2.793 căn giao dịch thành công, tăng 54% so với quý trước (DKRA). Đất nền phục hồi chậm hơn và biên độ tăng giá được dự báo không còn đột biến như giai đoạn 2024–2025 (cập nhật tháng 10/2026).</p>
 
-<h2>Số liệu chính bất động sản Đà Nẵng 2026</h2>
+<h2>Số liệu chính thị trường bất động sản Đà Nẵng 2026</h2>
 <table>
 <thead><tr><th>Chỉ số</th><th>Số liệu (tham khảo)</th><th>Nguồn</th></tr></thead>
 <tbody>
@@ -245,6 +270,9 @@ HTML
 </tbody>
 </table>
 
+<!--hh-img:img/hoa-xuan/hoa-xuan-flycam-8-2025-song-cam-le-nhin-ve-trung-tam.jpg|Sông Cẩm Lệ nhìn về trung tâm – khu Nam là nơi tập trung nguồn cung mới của thị trường bất động sản Đà Nẵng-->
+<p>Các con số trên cho thấy thị trường bất động sản Đà Nẵng đang phục hồi theo hướng chọn lọc: nguồn cung và giao dịch căn hộ tăng, nhưng giá thứ cấp chưa đi cùng chiều với giá sơ cấp.</p>
+
 <h2>Căn hộ: nguồn cung tăng mạnh, giá thiết lập mặt bằng mới</h2>
 <p>Theo CBRE, trước năm 2024 Đà Nẵng chỉ có dưới 1.000 căn hộ mới mỗi năm, nhưng giai đoạn 2024–2025 đã có hơn 8.000 căn mở bán. Các chủ đầu tư lớn chuyển trọng tâm từ condotel sang căn hộ sở hữu lâu dài, kéo mặt bằng giá lên cao.</p>
 <p>Dự án trung tâm, ven sông Hàn ghi nhận giá khoảng 130–200 triệu đồng/m² ở phân khúc hạng sang. Ngược lại, khu Nam Đà Nẵng như Hòa Xuân, Hòa Quý có nguồn cung mới với mức giá mềm hơn, ví dụ <a href="/du-an/fours-tower/">FourS Tower</a> và các tòa của Sun NeO City.</p>
@@ -252,14 +280,14 @@ HTML
 <p>DKRA ghi nhận quý 2/2026 giá sơ cấp tăng nhẹ khoảng 2% nhưng giá thứ cấp giảm khoảng 6%. Điều này cho thấy một bộ phận nhà đầu tư chấp nhận giảm kỳ vọng lợi nhuận khi chi phí vốn cao, nên người mua để ở có thêm cơ hội thương lượng ở thị trường thứ cấp.</p>
 
 <h2>Đất nền: phục hồi chậm, phân hóa theo khu vực</h2>
-<p>Trong quý 1/2026, giá sơ cấp đất nền tăng nhẹ khoảng 2% theo quý và 7% so với cùng kỳ, trong khi giá thứ cấp tăng mạnh hơn ở một số khu vực. Tuy vậy, nhiều đánh giá cho rằng sau giai đoạn tăng nóng, biên độ tăng giá đất năm 2026 sẽ chậm lại.</p>
+<p>Đất nền là mảnh ghép phục hồi chậm hơn của thị trường bất động sản Đà Nẵng. Trong quý 1/2026, giá sơ cấp đất nền tăng nhẹ khoảng 2% theo quý và 7% so với cùng kỳ, trong khi giá thứ cấp tăng mạnh hơn ở một số khu vực. Tuy vậy, nhiều đánh giá cho rằng sau giai đoạn tăng nóng, biên độ tăng giá đất năm 2026 sẽ chậm lại.</p>
 <p>Đất nền gắn với khu đô thị có hạ tầng hoàn chỉnh, pháp lý rõ ràng vẫn được quan tâm, đặc biệt khu Nam Hòa Xuân. Anh chị xem các lô đang chào bán tại <a href="/mua-ban/dat-nen/">mua bán đất nền Đà Nẵng</a>.</p>
 
 <h2>Hạ tầng và sáp nhập: động lực trung – dài hạn</h2>
 <p>Sau khi hợp nhất với Quảng Nam, Đà Nẵng có không gian phát triển rộng hơn, cùng các dự án như Trung tâm tài chính quốc tế, Khu thương mại tự do, cảng Liên Chiểu và mở rộng sân bay. Phân tích chi tiết từng công trình có trong bài <a href="/toan-canh-ha-tang-da-nang-2026-tac-dong-bat-dong-san/">toàn cảnh hạ tầng Đà Nẵng 2026</a>.</p>
-<p>Hạ tầng là động lực dài hạn, nhưng tác động lên giá thường diễn ra theo tiến độ thực tế. Người mua nên ưu tiên dự án gần công trình đã khởi công hơn là chỉ dựa vào quy hoạch.</p>
+<p>Hạ tầng là động lực dài hạn của thị trường bất động sản Đà Nẵng, nhưng tác động lên giá thường diễn ra theo tiến độ thực tế. Người mua nên ưu tiên dự án gần công trình đã khởi công hơn là chỉ dựa vào quy hoạch.</p>
 
-<h2>Xu hướng đáng chú ý cuối 2026</h2>
+<h2>Xu hướng thị trường bất động sản Đà Nẵng cuối 2026</h2>
 <ul>
 <li>Căn hộ hạng A và B chiếm khoảng 88% nguồn cung, 93% giao dịch sơ cấp (DKRA quý 2/2026).</li>
 <li>Chính sách thanh toán giãn, hỗ trợ lãi suất trở thành công cụ bán hàng phổ biến.</li>
@@ -267,19 +295,30 @@ HTML
 <li>Nghỉ dưỡng, condotel vẫn trầm lắng so với căn hộ để ở.</li>
 </ul>
 
-<h2>Gợi ý cho người mua</h2>
-<p>Mua để ở nên so sánh giá thứ cấp với sơ cấp trong cùng khu vực. Mua để đầu tư nên tính kỹ chi phí vốn, khả năng cho thuê và tiến độ hạ tầng. Danh mục đầy đủ xem tại <a href="/du-an/">dự án bất động sản Đà Nẵng</a> và <a href="/loai-du-an/cao-tang/">căn hộ Đà Nẵng</a>.</p>
+<h2>Cách đọc số liệu thị trường bất động sản Đà Nẵng</h2>
+<p>CBRE và DKRA dùng phạm vi khảo sát, cách phân hạng và kỳ báo cáo khác nhau, nên con số của hai đơn vị không cộng hay so trực tiếp được. Khi đọc báo cáo về thị trường bất động sản Đà Nẵng, anh chị nên để ý ba điểm:</p>
+<ul>
+<li><strong>Sơ cấp hay thứ cấp:</strong> giá sơ cấp là giá chủ đầu tư bán ra, giá thứ cấp là giá chuyển nhượng lại; hai mức này có thể đi ngược chiều như quý 2/2026.</li>
+<li><strong>Giá chào hay giá giao dịch:</strong> phần lớn báo cáo dùng giá chào bán, chưa trừ chiết khấu và hỗ trợ lãi suất.</li>
+<li><strong>Trung bình toàn thị trường hay từng khu:</strong> mức trung bình bị kéo lên bởi dự án hạng sang ven sông Hàn, ven biển.</li>
+</ul>
+<p>Để theo dõi diễn biến theo quý, anh chị có thể đọc thêm phân tích trên <a href="https://cafef.vn/bds-da-nang-2026-phan-hoa-manh-de-thanh-loc-thi-truong-188260615112835053.chn">CafeF</a> và <a href="https://baodautu.vn/thi-truong-dat-nen-can-ho-da-nang-quy-iii2026-dong-tien-chon-loc-d729484.html">Báo Đầu tư</a>. Hoàng Hiệp tổng hợp lại theo từng khu vực khi tư vấn cụ thể, vì thị trường bất động sản Đà Nẵng phân hóa rõ giữa trung tâm, ven biển và khu Nam.</p>
 
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận phân tích giá theo khu vực và danh sách dự án phù hợp với kế hoạch của anh chị.</p>
+<h2>Gợi ý cho người mua</h2>
+<p>Trong bối cảnh thị trường bất động sản Đà Nẵng phân hóa, người mua để ở nên so sánh giá thứ cấp với sơ cấp trong cùng khu vực. Mua để đầu tư nên tính kỹ chi phí vốn, khả năng cho thuê và tiến độ hạ tầng. Danh mục đầy đủ xem tại <a href="/du-an/">dự án bất động sản Đà Nẵng</a> và <a href="/loai-du-an/cao-tang/">căn hộ Đà Nẵng</a>.</p>
+
+<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận phân tích thị trường bất động sản Đà Nẵng theo khu vực và danh sách dự án phù hợp với kế hoạch của anh chị.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Thị trường bất động sản Đà Nẵng 2026: giá, nguồn cung',
 			'desc'      => 'Thị trường bất động sản Đà Nẵng 2026: giá căn hộ sơ cấp khoảng 83 triệu/m², giao dịch quý 2 tăng 54%, đất nền chậm lại – xu hướng và lời khuyên.',
-			'points'    => array( 'Giá căn hộ sơ cấp trung bình khoảng 83 triệu/m² (CBRE quý 1/2026)', 'Quý 2/2026: khoảng 2.793 căn giao dịch, tăng 54% (DKRA)', 'Đất nền phục hồi chậm, biên độ tăng giá được dự báo thu hẹp' ),
+			'points'    => array( 'Thị trường bất động sản Đà Nẵng 2026: giá căn hộ sơ cấp trung bình khoảng 83 triệu/m² (CBRE quý 1/2026)', 'Quý 2/2026: khoảng 2.793 căn giao dịch, tăng 54% (DKRA)', 'Đất nền phục hồi chậm, biên độ tăng giá được dự báo thu hẹp' ),
 			'faq'       => array(
 				array( 'Giá căn hộ Đà Nẵng 2026 khoảng bao nhiêu?', 'Theo CBRE, giá sơ cấp trung bình khoảng 83 triệu đồng/m² trong quý 1/2026; dự án hạng sang ven sông Hàn khoảng 130–200 triệu/m².' ),
 				array( 'Thị trường căn hộ Đà Nẵng quý 2/2026 thế nào?', 'DKRA ghi nhận khoảng 5.090 căn sơ cấp, 2.793 căn giao dịch (tăng 54%), giá sơ cấp tăng khoảng 2% trong khi thứ cấp giảm khoảng 6%.' ),
+				array( 'Thị trường bất động sản Đà Nẵng 2026 có gì khác giai đoạn trước?', 'Nguồn cung căn hộ tăng mạnh (hơn 8.000 căn mở bán 2024–2025 theo CBRE), chủ đầu tư chuyển từ condotel sang căn hộ sở hữu lâu dài, còn đất nền và nghỉ dưỡng phục hồi chậm hơn.' ),
+				array( 'Nên theo dõi thị trường bất động sản Đà Nẵng qua nguồn nào?', 'Báo cáo định kỳ của CBRE, DKRA được báo chí trích dẫn theo quý; khi so sánh cần để ý phạm vi khảo sát và giá sơ cấp hay thứ cấp.' ),
 				array( 'Đất nền Đà Nẵng 2026 có còn tăng giá?', 'Đất nền phục hồi chậm và phân hóa; nhiều đánh giá cho rằng biên độ tăng sẽ chậm lại sau giai đoạn tăng nóng 2024–2025.' ),
 			),
 		),
@@ -288,6 +327,8 @@ HTML
 			'https://nguoiquansat.vn/dkra-giao-dich-can-ho-da-nang-tang-54-nhung-thi-truong-van-chua-phuc-hoi-dong-deu-307850.html',
 			'https://nhipsongnhadat.vn/mxh/can-ho-da-nang-chuyen-sang-cao-cap-gia-trung-binh-83-trieu-dong-m2.html',
 			'https://vnbusiness.vn/bat-dong-san-da-nang-lech-pha-trong-quy-12026-dat-nen-nong-len-nghi-duong-dong-bang.html',
+			'https://cafef.vn/bds-da-nang-2026-phan-hoa-manh-de-thanh-loc-thi-truong-188260615112835053.chn',
+			'https://baodautu.vn/thi-truong-dat-nen-can-ho-da-nang-quy-iii2026-dong-tien-chon-loc-d729484.html',
 		),
 	);
 

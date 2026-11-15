@@ -327,18 +327,19 @@ HTML
 		'slug'     => 'gia-dat-nam-viet-a-da-nang-10-2026',
 		'title'    => 'Giá đất Nam Việt Á Đà Nẵng tháng 10/2026: lô ống, biệt thự, lô góc theo từng tuyến đường',
 		'excerpt'  => 'Bảng giá đất Nam Việt Á (KĐT sinh thái Nam cầu Tuyên Sơn) 10/2026: lô ống 7,35 – 12 tỷ (77 – 120 triệu/m²), biệt thự 84 – 102 triệu/m², Chương Dương ven sông tới 193 triệu/m², lô góc 22 – 27,5 tỷ.',
-		'keyword'  => 'giá đất Nam Việt Á',
+		'keyword'  => 'giá đất Nam Việt Á 2026',
 		'keywords_extra' => array( 'đất Nam Việt Á', 'khu đô thị Nam Việt Á', 'biệt thự Nam Việt Á', 'Nam cầu Tuyên Sơn' ),
 		'project'  => 'khu-do-thi-nam-viet-a',
 		'schedule' => '2026-10-27 11:00',
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Nam Việt Á', 'Đất nền Đà Nẵng', 'Ngũ Hành Sơn' ),
 		'image'    => 'plugin:img/tin-tuc/gia-dat-nam-viet-a-10-2026.jpg',
-		'image_alt' => 'Biểu đồ giá chào bán mỗi m² đất Nam Việt Á theo lô ống, biệt thự, lô góc tháng 10/2026',
+		'image_alt' => 'Biểu đồ giá đất Nam Việt Á 2026 theo lô ống, biệt thự, lô góc (giá chào bán tháng 10/2026)',
 		'content'  => <<<HTML
-<p><strong>Giá đất Nam Việt Á</strong> tháng 10/2026 chênh nhau rất rõ theo loại lô và tuyến đường. Hoàng Hiệp tổng hợp các lô đang chào bán tại <a href="/du-an/khu-do-thi-nam-viet-a/">Khu đô thị Nam Việt Á</a> (Khu đô thị sinh thái Nam cầu Tuyên Sơn, Ngũ Hành Sơn) và tính giá mỗi m² để anh chị dễ so sánh.</p>
+<p><strong>Giá đất Nam Việt Á 2026</strong> chênh nhau rất rõ theo loại lô và tuyến đường; bài này dùng các lô chào bán tháng 10/2026. Hoàng Hiệp tổng hợp các lô đang chào bán tại <a href="/du-an/khu-do-thi-nam-viet-a/">Khu đô thị Nam Việt Á</a> (Khu đô thị sinh thái Nam cầu Tuyên Sơn, Ngũ Hành Sơn) và tính giá mỗi m² để anh chị dễ so sánh.</p>
 <!--hh-featured-->
-<h2>Tóm tắt giá đất Nam Việt Á 10/2026</h2>
+<h2>Tóm tắt giá đất Nam Việt Á 2026 (chào bán tháng 10)</h2>
 <table>
 <thead><tr><th>Loại lô</th><th>Diện tích phổ biến</th><th>Giá chào bán</th><th>Khoảng giá/m²</th></tr></thead>
 <tbody>
@@ -348,32 +349,39 @@ HTML
 <tr><td>Lô góc</td><td>170 – 257 m²</td><td>22 – 27,5 tỷ</td><td>92 – 141 triệu</td></tr>
 </tbody>
 </table>
-<h2>Lô ống: rẻ nhất Tuy Lý Vương, đắt nhất Trần Hữu Độ</h2>
+<h2>Lô ống: giá đất Nam Việt Á 2026 rẻ nhất Tuy Lý Vương, đắt nhất Trần Hữu Độ</h2>
 <p>Nhóm dưới 8,5 tỷ gồm Tuy Lý Vương 95 m² (7,35 tỷ, sát góc), Nguyễn Thế Kỷ 95 m² (7,5 tỷ), Nước Mặn 5 95 m² (7,x tỷ, đối diện dãy biệt thự), Trịnh Lỗi 100 m² (8 tỷ, gần đường điện), Trương Công Hy 105 m² (8,5 tỷ, có thương lượng). Nhóm trên 9 tỷ: Mỹ Đa Tây 4 view công viên, Đoàn Khuê, Nghiêm Xuân Yêm, Lê Hy Cát 100 m² (10,2 tỷ) và Trần Hữu Độ 100 m² (12 tỷ – khoảng 120 triệu/m²).</p>
 <h2>Đất biệt thự: Chương Dương ven sông gấp đôi trong khu</h2>
 <p>Đất biệt thự trong khu như Nước Mặn 1 (182,5 m², 16 tỷ), Nghiêm Xuân Yêm (285 m², 24 tỷ), Bùi Tá Hán (250 m², 25,5 tỷ), Anh Thơ (300 m², 29 tỷ), Trần Trọng Khiêm (334 m², 32 tỷ) dao động khoảng 84 – 102 triệu/m². Mặt tiền <strong>Chương Dương</strong> nhìn sông là hàng hiếm: 300 m² chào 58 tỷ, 600 m² chào 100 tỷ – khoảng 167 – 193 triệu/m².</p>
-<h2>Lô góc: 22 – 27,5 tỷ</h2>
+<h2>Lô góc: giá đất Nam Việt Á 2026 từ 22 – 27,5 tỷ</h2>
 <p>Góc Đoàn Khuê – Phạm Tuấn Tài 177 m² đường 11,5 m chào 25 tỷ (có thương lượng, khoảng 141 triệu/m²); góc Lê Văn Thủ – Mỹ Đa Tây 6 170 m² khoảng 22,x tỷ; góc K20 – Nước Mặn 2 241 m² 27,5 tỷ; góc Dương Tử Giang – Đa Phước 8 249 m² 23 tỷ.</p>
+<h2>Ví dụ quy đổi giá đất Nam Việt Á 2026 theo m²</h2>
+<p>Để so sánh công bằng, Hoàng Hiệp luôn quy về giá mỗi m² đất. Ví dụ với các lô trong danh sách trên: Tuy Lý Vương 95 m² chào 7,35 tỷ tương đương khoảng 77 triệu/m²; Trần Hữu Độ 100 m² chào 12 tỷ là khoảng 120 triệu/m²; biệt thự Chương Dương 600 m² chào 100 tỷ là khoảng 167 triệu/m². Như vậy cùng một khu, giá đất Nam Việt Á 2026 có thể chênh hơn hai lần giữa lô ống nội khu và biệt thự mặt sông.</p>
+<p>Chênh lệch này đến từ ba yếu tố chính: <strong>mặt tiền và lộ giới</strong> (đường 7,5 m khác đường 10,5 – 11,5 m), <strong>tầm nhìn</strong> (công viên, mặt sông dọc Chương Dương) và <strong>công năng</strong> (lô biệt thự được xây mật độ thấp, phù hợp ở hoặc làm villa cho thuê; lô ống phù hợp nhà phố kinh doanh nhỏ).</p>
+<h2>Giá đất Nam Việt Á 2026 so với bảng giá nhà nước</h2>
+<p>Giá chào bán trên thị trường khác với bảng giá đất do HĐND thành phố ban hành (xem <a href="https://luatvietnam.vn/dat-dai/nghi-quyet-28-2026-nq-hdnd-da-nang-quy-dinh-gia-dat-va-bang-gia-cac-loai-dat-437159-d2.html">Nghị quyết 28/2026/NQ-HĐND trên LuatVietnam</a>). Bảng giá nhà nước dùng để tính thuế, lệ phí trước bạ, tiền sử dụng đất và bồi thường, nên thường thấp hơn giá giao dịch. Khi đàm phán, anh chị nên dùng giá các lô cùng tuyến đã giao dịch gần nhất làm mốc, còn bảng giá nhà nước chỉ để ước tính chi phí thuế phí.</p>
 <h2>Đọc giá cho đúng</h2>
 <ul>
 <li>Đây là <strong>giá chào bán</strong>, giá chốt thường thấp hơn sau thương lượng; mặt bằng tin rao trên các sàn cùng thời điểm khoảng 93 – 138 triệu/m².</li>
 <li>Cùng tuyến nhưng khác hướng, khác chiều rộng đường hoặc gần đường điện có thể chênh vài trăm triệu tới hàng tỷ.</li>
 <li>Kiểm tra sổ, chỉ giới, mật độ xây dựng cho phép (lô biệt thự khác lô liền kề) trước khi đặt cọc.</li>
 </ul>
-<p>So sánh thêm khu ven biển cùng quận: <a href="/gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/">giá đất ven biển Đà Nẵng</a>. Cần danh sách lô kèm sổ và vị trí, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Giá đất Nam Việt Á 2026 sẽ còn thay đổi theo từng tháng; Hoàng Hiệp cập nhật khi có giao dịch mới. So sánh thêm khu ven biển cùng quận: <a href="/gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/">giá đất ven biển Đà Nẵng</a>. Cần danh sách lô kèm sổ và vị trí, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá đất Nam Việt Á 10/2026: lô ống, biệt thự, lô góc',
-			'desc'      => 'Giá đất Nam Việt Á 10/2026: lô ống 7,35 – 12 tỷ (77 – 120 triệu/m²), biệt thự 84 – 102 triệu/m², Chương Dương tới 193 triệu/m², lô góc 22 – 27,5 tỷ.',
+			'seo_title' => 'Giá đất Nam Việt Á 2026: lô ống, biệt thự, lô góc (10/2026)',
+			'desc'      => 'Giá đất Nam Việt Á 2026: lô ống 7,35 – 12 tỷ (77 – 120 triệu/m²), biệt thự 84 – 102 triệu/m², Chương Dương tới 193 triệu/m², lô góc 22 – 27,5 tỷ.',
 			'points'    => array(
-				'Lô ống 90 – 110 m²: 7,35 – 12 tỷ (77 – 120 triệu/m²)',
+				'Giá đất Nam Việt Á 2026 – lô ống 90 – 110 m²: 7,35 – 12 tỷ (77 – 120 triệu/m²)',
 				'Đất biệt thự 84 – 102 triệu/m²; mặt tiền Chương Dương 167 – 193 triệu/m²',
 				'Lô góc 170 – 257 m²: 22 – 27,5 tỷ',
 			),
 			'faq'       => array(
 				array( 'Giá đất Nam Việt Á bao nhiêu một m²?', 'Chào bán 10/2026: lô ống khoảng 77 – 120 triệu/m², đất biệt thự 84 – 102 triệu/m², mặt tiền Chương Dương ven sông 167 – 193 triệu/m², lô góc 92 – 141 triệu/m².' ),
-				array( 'Lô ống Nam Việt Á rẻ nhất bao nhiêu?', 'Trong danh sách 10/2026, Tuy Lý Vương 95 m² chào 7,35 tỷ và Nguyễn Thế Kỷ 95 m² chào 7,5 tỷ là nhóm thấp nhất.' ),
+				array( 'Lô ống Nam Việt Á rẻ nhất bao nhiêu?', 'Trong danh sách 10/2026, Tuy Lý Vương 95 m² chào 7,35 tỷ và Nguyễn Thế Kỷ 95 m² chào 7,5 tỷ là nhóm thấp nhất trong bảng giá đất Nam Việt Á 2026.' ),
+				array( 'Vì sao giá đất Nam Việt Á 2026 chênh nhau nhiều?', 'Do loại lô (lô ống, biệt thự, lô góc), chiều rộng đường, tầm nhìn công viên hoặc sông và vị trí gần đường điện; biệt thự mặt tiền Chương Dương có giá mỗi m² gấp khoảng hai lần lô ống nội khu.' ),
+				array( 'Giá chào bán có phải giá giao dịch không?', 'Không. Giá chào bán thường cao hơn giá chốt sau thương lượng; bảng giá đất nhà nước thì thấp hơn và chỉ dùng tính thuế, phí.' ),
 			),
 		),
 		'sources'  => array( 'https://guland.vn/du-an/khu-do-thi-nam-viet-a-da-nang' ),
@@ -381,21 +389,23 @@ HTML
 
 	/* ---------------- 05/11 – Chính sách FourS F2 từ 17/10/2026 (anh Hiệp gửi) ---------------- */
 	$posts[] = array(
-		'slug'     => 'chinh-sach-fours-tower-f2-17-10-2026-qua-noi-that-nha-xinh',
+		'slug'     => 'chinh-sach-fours-tower-f2-17-10-2026',
+		'old_slug' => array( 'chinh-sach-fours-tower-f2-17-10-2026-qua-noi-that-nha-xinh' ),
 		'title'    => 'Chính sách FourS Tower F2 từ 17/10/2026: tặng nội thất Nhà Xinh đến 100 triệu, chiết khấu thanh toán sớm đến 12%',
 		'excerpt'  => 'Sun FourS Tower Tòa F2 cập nhật CSBH 4.2 từ 17/10/2026: quà nội thất Nhà Xinh 35 – 100 triệu trừ vào giá bán, không vay chiết khấu 3%, thanh toán sớm 95% / 70% / 50% chiết khấu 12% / 5% / 2,5%.',
 		'keyword'  => 'chính sách FourS Tower F2',
 		'keywords_extra' => array( 'FourS Tower F2', 'Tháp Mai FourS', 'Sun FourS Tower', 'nội thất Nhà Xinh', 'CSBH 4.2 FourS' ),
 		'project'  => 'fours-tower-f2-thap-mai',
 		'schedule' => '2026-11-05 12:00',
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100.
 		'category' => 'Dự án',
 		'tags'     => array( 'FourS Tower', 'Sun Group', 'Chính sách bán hàng' ),
 		'image'    => 'plugin:img/tin-tuc/fours-f2-chinh-sach-17-10-2026.jpg',
-		'image_alt' => 'Chính sách FourS Tower Tòa F2 từ 17/10/2026: quà nội thất Nhà Xinh 35 – 100 triệu và các mức chiết khấu',
+		'image_alt' => 'Chính sách FourS Tower F2 (Tòa F2 – Tháp Mai) từ 17/10/2026: quà nội thất Nhà Xinh 35 – 100 triệu và các mức chiết khấu',
 		'content'  => <<<HTML
-<p>Sun FourS Tower <strong>Tòa F2 – Tháp Mai</strong> cập nhật chính sách bán hàng (CSBH 4.2) áp dụng từ ngày <strong>17/10/2026</strong>. Điểm mới là <strong>gói quà tặng nội thất Nhà Xinh</strong> trừ thẳng vào giá bán, cộng dồn với các chiết khấu không vay và thanh toán sớm. Hoàng Hiệp tóm tắt theo phiếu tính giá của chủ đầu tư.</p>
+<p><strong>Chính sách FourS Tower F2</strong> (Tòa F2 – Tháp Mai, CSBH 4.2) được chủ đầu tư cập nhật, áp dụng từ ngày <strong>17/10/2026</strong>. Điểm mới là <strong>gói quà tặng nội thất Nhà Xinh</strong> trừ thẳng vào giá bán, cộng dồn với các chiết khấu không vay và thanh toán sớm. Hoàng Hiệp tóm tắt theo phiếu tính giá của chủ đầu tư.</p>
 <!--hh-featured-->
-<h2>Quà tặng nội thất Nhà Xinh theo loại căn</h2>
+<h2>Chính sách FourS Tower F2: quà tặng nội thất Nhà Xinh theo loại căn</h2>
 <table>
 <thead><tr><th>Loại căn</th><th>Giá trị quà (trừ vào giá bán chưa VAT)</th></tr></thead>
 <tbody>
@@ -405,7 +415,7 @@ HTML
 <tr><td>3PN</td><td>100 triệu đồng</td></tr>
 </tbody>
 </table>
-<h2>Các mức chiết khấu cộng thêm</h2>
+<h2>Các mức chiết khấu cộng thêm trong chính sách FourS Tower F2</h2>
 <ul>
 <li><strong>Không vay ngân hàng:</strong> chiết khấu 3%.</li>
 <li><strong>Thanh toán sớm 95%:</strong> chiết khấu thêm 12%.</li>
@@ -413,7 +423,7 @@ HTML
 <li><strong>Thanh toán sớm 50%:</strong> chiết khấu thêm 2,5%.</li>
 <li><strong>Vay ngân hàng:</strong> vẫn nhận quà Nhà Xinh, không áp dụng chiết khấu không vay 3%; ngân hàng giải ngân 70% sau khi ký hợp đồng mua bán.</li>
 </ul>
-<p>Các chiết khấu áp dụng lần lượt trên giá bán chưa VAT và kinh phí bảo trì. Chiết khấu thanh toán sớm áp dụng theo mốc thời hạn chủ đầu tư công bố từng đợt – anh chị liên hệ để được xác nhận thời hạn hiện hành trước khi chọn phương án.</p>
+<p>Theo chính sách FourS Tower F2, các chiết khấu áp dụng lần lượt trên giá bán chưa VAT và kinh phí bảo trì. Chiết khấu thanh toán sớm áp dụng theo mốc thời hạn chủ đầu tư công bố từng đợt – anh chị liên hệ để được xác nhận thời hạn hiện hành trước khi chọn phương án.</p>
 <h2>Ví dụ theo phiếu tính giá của chủ đầu tư</h2>
 <p>Căn 1PN+ diện tích thông thủy 53 m², giá niêm yết khoảng 3,02 tỷ đồng (đã gồm VAT và kinh phí bảo trì):</p>
 <table>
@@ -426,57 +436,65 @@ HTML
 <tr><td>Vay ngân hàng 70%</td><td>Nhà Xinh</td><td>khoảng 2,968 tỷ</td><td>khoảng 56 triệu (1,9%)</td></tr>
 </tbody>
 </table>
-<p>Đặt cọc 100 triệu đồng (Studio, 1PN, 1PN+, 2PN) và 150 triệu đồng (3PN). Số liệu trên là ví dụ trong phiếu tính giá, giá từng căn khác nhau theo tầng, hướng và diện tích.</p>
+<p>Đặt cọc 100 triệu đồng (Studio, 1PN, 1PN+, 2PN) và 150 triệu đồng (3PN). Số liệu trên là ví dụ trong phiếu tính giá theo chính sách FourS Tower F2, giá từng căn khác nhau theo tầng, hướng và diện tích.</p>
 <p><strong>Lưu ý:</strong> chính sách 17/10/2026 áp dụng cho các căn mở bán mới. Một số căn đã được nhận từ đợt trước vẫn giữ chính sách đợt 26/9/2026 (có Early Bird 3%). Hoàng Hiệp sẽ xác nhận chính sách áp dụng cho từng căn cụ thể khi anh chị chọn căn.</p>
+<h2>Mốc 70% và 95% trong chính sách FourS Tower F2 có ý nghĩa gì?</h2>
+<p>Các mốc thanh toán 50%, 70%, 95% không phải ngẫu nhiên. Với nhà ở hình thành trong tương lai, <a href="https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx">Luật Kinh doanh bất động sản 2023</a> giới hạn số tiền chủ đầu tư được thu theo tiến độ: tổng thanh toán trước khi bàn giao nhà không quá 70% giá trị hợp đồng, và trước khi người mua được cấp giấy chứng nhận không quá 95%. Tiền đặt cọc cũng không được vượt 5% giá bán (<a href="https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html">LuatVietnam</a>).</p>
+<p>Vì vậy, phương án "thanh toán sớm 95%" thực chất là người mua chủ động trả trước gần hết giá trị (phần 5% cuối gắn với thủ tục cấp sổ) để đổi lấy chiết khấu 12%. Phương án 70% gắn với mốc nhận nhà sớm Sun Early Key. Khi so sánh, anh chị nên tính chi phí cơ hội của khoản tiền trả sớm (lãi tiết kiệm bỏ lỡ) so với số tiền được chiết khấu.</p>
 <h2>Góc nhìn của Hoàng Hiệp</h2>
-<p>So với đợt trước, quà nội thất Nhà Xinh giúp căn hộ có thể đưa vào sử dụng hoặc cho thuê sớm hơn mà không phải bỏ thêm nhiều chi phí hoàn thiện. Với người có sẵn dòng tiền, phương án thanh toán sớm vẫn là cách tiết kiệm nhiều nhất; người cần giữ tiền mặt có thể chọn vay 70% và vẫn nhận quà nội thất.</p>
+<p>So với đợt trước, quà nội thất Nhà Xinh trong chính sách FourS Tower F2 giúp căn hộ có thể đưa vào sử dụng hoặc cho thuê sớm hơn mà không phải bỏ thêm nhiều chi phí hoàn thiện. Với người có sẵn dòng tiền, phương án thanh toán sớm vẫn là cách tiết kiệm nhiều nhất; người cần giữ tiền mặt có thể chọn vay 70% và vẫn nhận quà nội thất.</p>
 <p>Xem thêm: <a href="/du-an/fours-tower-f2-thap-mai/">FourS Tower F2 – Tháp Mai</a> · <a href="/du-an/fours-tower/">tổng quan FourS Tower</a>. Cần phiếu tính giá theo đúng căn và phương án anh chị chọn, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
-<p class="src">Nguồn: phiếu tính giá CSBH 4.2 Tòa F2 của chủ đầu tư, áp dụng từ 17/10/2026.</p>
+<p class="src">Nguồn: phiếu tính giá CSBH 4.2 Tòa F2 của chủ đầu tư, áp dụng từ 17/10/2026; Luật Kinh doanh bất động sản 2023 (Thư viện Pháp luật, LuatVietnam).</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Chính sách FourS F2 từ 17/10: quà Nhà Xinh đến 100tr',
-			'desc'      => 'FourS Tower F2 CSBH 4.2 từ 17/10/2026: quà nội thất Nhà Xinh 35 – 100 triệu, không vay 3%, thanh toán sớm 95%/70%/50% chiết khấu 12%/5%/2,5%.',
+			'seo_title' => 'Chính sách FourS Tower F2 từ 17/10/2026: quà Nhà Xinh',
+			'desc'      => 'Chính sách FourS Tower F2 từ 17/10/2026: quà nội thất Nhà Xinh 35 – 100 triệu, không vay 3%, thanh toán sớm 95%/70%/50% chiết khấu 12%/5%/2,5%.',
 			'points'    => array(
-				'Quà nội thất Nhà Xinh: Studio 35 triệu, 1PN/1PN+ 50 triệu, 2PN 75 triệu, 3PN 100 triệu',
+				'Chính sách FourS Tower F2 – quà nội thất Nhà Xinh: Studio 35 triệu, 1PN/1PN+ 50 triệu, 2PN 75 triệu, 3PN 100 triệu',
 				'Không vay chiết khấu 3%; thanh toán sớm 95% / 70% / 50%: 12% / 5% / 2,5%',
 				'Ví dụ căn 1PN+ niêm yết ~3,02 tỷ: thanh toán sớm 95% còn khoảng 2,534 tỷ',
 			),
 			'faq'       => array(
 				array( 'Chính sách FourS Tower F2 từ 17/10/2026 có gì mới?', 'Tặng gói nội thất Nhà Xinh trừ vào giá bán: Studio 35 triệu, 1PN và 1PN+ 50 triệu, 2PN 75 triệu, 3PN 100 triệu; cộng dồn chiết khấu không vay 3% và thanh toán sớm.' ),
 				array( 'Căn nào áp dụng chính sách 17/10/2026?', 'Chính sách 17/10/2026 áp dụng cho các căn mở bán mới; một số căn đã nhận từ đợt trước vẫn giữ chính sách đợt 26/9/2026. Chính sách áp dụng được xác nhận theo từng căn.' ),
-				array( 'Vay ngân hàng có được quà Nhà Xinh không?', 'Có. Phương án vay vẫn nhận quà nội thất Nhà Xinh, chỉ không áp dụng chiết khấu không vay 3%.' ),
-				array( 'Thanh toán sớm FourS F2 được chiết khấu bao nhiêu?', 'Thanh toán sớm 95% chiết khấu 12%, 70% chiết khấu 5%, 50% chiết khấu 2,5%, theo thời hạn chủ đầu tư công bố từng đợt.' ),
+				array( 'Vay ngân hàng có được quà Nhà Xinh không?', 'Có. Theo chính sách FourS Tower F2, phương án vay vẫn nhận quà nội thất Nhà Xinh, chỉ không áp dụng chiết khấu không vay 3%.' ),
+				array( 'Thanh toán sớm FourS F2 được chiết khấu bao nhiêu?', 'Theo chính sách FourS Tower F2, thanh toán sớm 95% chiết khấu 12%, 70% chiết khấu 5%, 50% chiết khấu 2,5%, theo thời hạn chủ đầu tư công bố từng đợt.' ),
 			),
 		),
-		'sources'  => array(),
+		'sources'  => array(
+			'https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx',
+			'https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html',
+		),
 	);
 
 
 	/* ---------------- 06/11 – Hoiana Beach Villas (bộ tài liệu chủ đầu tư anh Hiệp gửi 05/11) ---------------- */
 	$hbv     = '<a href="/du-an/hoiana-beach-villas/">Hoiana Beach Villas</a>';
 	$posts[] = array(
-		'slug'     => 'hoiana-beach-villas-7-dong-biet-thu-dien-tich-tien-ich',
+		'slug'     => 'hoiana-beach-villas-biet-thu-bien-7-dong',
+		'old_slug' => array( 'hoiana-beach-villas-7-dong-biet-thu-dien-tich-tien-ich' ),
 		'title'    => 'Hoiana Beach Villas: 198 biệt thự biển Nam Hội An – 7 dòng biệt thự, diện tích, tiện ích và vị trí từng dòng',
 		'excerpt'  => 'Hoiana Beach Villas có 198 biệt thự biển 3 – 9 phòng ngủ trong quần thể Hoiana Resort & Golf: Shore, Dune, Azure, Pearl, Marina Villa và 2 dinh thự Patina, Veranda. Diện tích đất 350 – 3.132 m², hồ bơi riêng, bàn giao full nội thất.',
-		'keyword'  => 'Hoiana Beach Villas',
-		'keywords_extra' => array( 'biệt thự biển Hoiana', 'Hoiana Resort & Golf', 'biệt thự biển Hội An', 'Marina Villa Hoiana', 'Dune Villa Hoiana' ),
+		'keyword'  => 'biệt thự biển Hoiana',
+		'keywords_extra' => array( 'Hoiana Beach Villas', 'Hoiana Resort & Golf', 'biệt thự biển Hội An', 'Marina Villa Hoiana', 'Dune Villa Hoiana' ),
 		'project'  => 'hoiana-beach-villas',
 		'schedule' => '2026-11-06 09:30',
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100.
 		'category' => 'Dự án',
 		'tags'     => array( 'Hoiana', 'Biệt thự biển', 'Hội An' ),
 		'image_drive' => '1WFS7kd0OZyRm7Tal2kgj2mjQirYoHrr6', // Ảnh bìa: phối cảnh Marina Villa (ảnh dự án đã tải về web).
 		'image'    => 'plugin:img/tin-tuc/hoiana-beach-villas-7-dong-biet-thu.jpg', // Dự phòng khi web chưa có ảnh dự án.
-		'image_alt' => 'Phối cảnh Marina Villa – biệt thự 4 phòng ngủ trực diện biển, Hoiana Beach Villas',
+		'image_alt' => 'Phối cảnh Marina Villa – biệt thự biển Hoiana 4 phòng ngủ trực diện biển, Hoiana Beach Villas',
 		'image_caption' => 'Phối cảnh Marina Villa (loại F), Hoiana Beach Villas – ảnh chủ đầu tư',
 		'content'  => <<<HTML
-<p>{$hbv} là phân khu biệt thự biển của quần thể <a href="/du-an/hoiana-resort-golf/">Hoiana Resort &amp; Golf</a> tại Nam Hội An (Duy Xuyên, Quảng Nam cũ – nay thuộc TP. Đà Nẵng), cách phố cổ Hội An khoảng 15 phút. Phân khu gồm <strong>198 biệt thự 3 – 9 phòng ngủ</strong>, mỗi căn có hồ bơi riêng, garage riêng và bàn giao đầy đủ nội thất. Bài viết tổng hợp từ tài liệu thông tin dự án của chủ đầu tư (05/2026).</p>
+<p>Biệt thự biển Hoiana thuộc phân khu {$hbv} của quần thể <a href="/du-an/hoiana-resort-golf/">Hoiana Resort &amp; Golf</a> tại Nam Hội An (Duy Xuyên, Quảng Nam cũ – nay thuộc TP. Đà Nẵng), cách phố cổ Hội An khoảng 15 phút. Phân khu gồm <strong>198 biệt thự 3 – 9 phòng ngủ</strong>, mỗi căn có hồ bơi riêng, garage riêng và bàn giao đầy đủ nội thất. Bài viết tổng hợp từ tài liệu thông tin dự án của chủ đầu tư (05/2026).</p>
 <!--hh-featured-->
 <h2>Chủ đầu tư và quần thể Hoiana</h2>
 <p>Chủ đầu tư là <strong>Công ty TNHH Phát triển Nam Hội An (HASD)</strong>, thành lập năm 2010, 100% vốn nước ngoài, trong đó 75% cổ phần thuộc VMS Group (Hồng Kông); New World Development (Hồng Kông) là đối tác tham gia phát triển. Hoiana là khu nghỉ dưỡng tích hợp tổng vốn khoảng <strong>4 tỷ USD</strong> (đã giải ngân khoảng 1,4 tỷ USD), trải trên gần 1.000 ha với <strong>4 km bờ biển</strong>.</p>
 <p>Tiện ích đã vận hành trong quần thể: hơn 1.200 phòng khách sạn, hơn 25 nhà hàng và beach club, 5 spa, 3 hồ bơi lớn, 8 sân pickleball, sân golf Hoiana Shores 18 hố (7.004 yards, par 71, clubhouse 6.000 m²) do Robert Trent Jones Jr. thiết kế, trung tâm giải trí (KTV, bowling, bi-a, golf giả lập, khu trẻ em) mở từ 02/2026.</p>
 <!--hh-dimg:1hHYHOYbTciyVJ5pcJYsK6mUAVXdN5dOE|Phối cảnh Marina Villa (loại F) – biệt thự 4 phòng ngủ trực diện biển (ảnh chủ đầu tư)-->
-<h2>7 dòng biệt thự Hoiana Beach Villas</h2>
+<h2>7 dòng biệt thự biển Hoiana Beach Villas</h2>
 <table>
 <thead><tr><th>Dòng biệt thự</th><th>Phòng ngủ</th><th>Đất (m²)</th><th>Sàn (m²)</th><th>Vườn mở rộng (m²)</th><th>Số căn</th></tr></thead>
 <tbody>
@@ -490,7 +508,8 @@ HTML
 </tbody>
 </table>
 <p>Diện tích vườn mở rộng có thể thay đổi theo vị trí từng căn. Biệt thự cao tối đa 2 tầng.</p>
-<h2>Vị trí từng dòng biệt thự</h2>
+<p>Nhìn vào bảng, biệt thự biển Hoiana chia thành ba nhóm rõ ràng: nhóm 3 phòng ngủ (Shore, Dune – 106 căn, chiếm hơn một nửa), nhóm 4 phòng ngủ (Azure, Pearl, Marina – 90 căn) và hai dinh thự độc bản. Diện tích sàn tăng gần tương ứng diện tích đất: Marina Villa có đất 840 m² gấp 2,4 lần Shore Villa 350 m², sàn 553 m² so với 263 m².</p>
+<h2>Vị trí từng dòng biệt thự biển Hoiana</h2>
 <ul>
 <li><strong>Trực diện biển:</strong> Marina Villa, Patina Mansion và Veranda Mansion nằm dọc đường bờ biển riêng. Patina (7 phòng ngủ, gần 20 không gian chức năng, hồ bơi vô cực riêng) và Veranda (9 phòng ngủ, căn góc nhìn biển và sân golf, duy nhất có tầng mái rooftop) là hai dinh thự độc bản.</li>
 <li><strong>Lùi phía sau, giữa vườn:</strong> Dune Villa và Azure Villa – không gian yên tĩnh giữa các khu vườn riêng.</li>
@@ -499,11 +518,11 @@ HTML
 </ul>
 <!--hh-dimg:1nqByEUObXTmBT82wWzPW6030AesKSUly|Sân vườn sau và hồ bơi riêng Azure Villa (loại D) (ảnh chủ đầu tư)-->
 <!--hh-dimg:1DqIQXSNcuPYHfagIFaDg-gYumDWW2iJw|Phối cảnh Dune Villa (loại C) – biệt thự 3 phòng ngủ giữa vườn (ảnh chủ đầu tư)-->
-<h2>Thiết kế: nhiệt đới đương đại, cảm hứng Hội An</h2>
+<h2>Thiết kế biệt thự biển Hoiana: nhiệt đới đương đại, cảm hứng Hội An</h2>
 <p>Kiến trúc theo phong cách nhiệt đới đương đại, lấy cảm hứng từ di sản Hội An và Chùa Cầu: các không gian sinh hoạt nối liền, mở ra vườn và hồ bơi. Nội thất tối giản với gỗ, đá tự nhiên, bề mặt đan thủ công và bảng màu trung tính. Cảnh quan theo ý tưởng năm giác quan – vườn hương liệu, cây bản địa, mặt nước và lối dạo.</p>
 <!--hh-dimg:1TDX1HxC-PagWaNpcE67ID691Z8ZaXDtB|Phòng khách Azure Villa (loại D) (ảnh chủ đầu tư)-->
 <!--hh-dimg:16CMsBN0-9IqWtqUBkFRsQrZ_P__j-Hxz|Sảnh vào nhìn ra hồ bơi riêng – Azure Villa (loại D) (ảnh chủ đầu tư)-->
-<h2>Tiện ích riêng của phân khu</h2>
+<h2>Tiện ích riêng của phân khu biệt thự biển Hoiana</h2>
 <ul>
 <li>Hồ bơi riêng và garage riêng trong từng biệt thự.</li>
 <li>Beach club với hồ bơi vô cực dọc bờ biển, nhà hàng The Garden.</li>
@@ -512,28 +531,36 @@ HTML
 <li>Cư dân dùng toàn bộ tiện ích của Hoiana Resort &amp; Golf: sân golf, nhà hàng, giải trí, chăm sóc sức khỏe.</li>
 </ul>
 <!--hh-dimg:1Ei1XH_OJtqdO36Pc4Jc8m-R5JTQILKZM|Marina Villa (loại F) – góc phối cảnh khác (ảnh chủ đầu tư)-->
+<h2>Chọn dòng biệt thự biển Hoiana theo nhu cầu</h2>
+<ul>
+<li><strong>Gia đình 4 – 6 người nghỉ dưỡng vài tuần mỗi năm:</strong> Shore hoặc Dune Villa 3 phòng ngủ là đủ, chi phí vận hành, bảo trì hồ bơi và vườn thấp hơn.</li>
+<li><strong>Đại gia đình nhiều thế hệ hoặc nhóm bạn:</strong> Azure, Pearl Villa 4 phòng ngủ với vườn mở rộng khoảng 270 m² cho sinh hoạt ngoài trời.</li>
+<li><strong>Ưu tiên tầm nhìn biển, cho thuê phân khúc cao:</strong> Marina Villa trực diện biển; số lượng chỉ 23 căn nên quỹ căn hạn chế.</li>
+<li><strong>Khách cần không gian tổ chức sự kiện riêng:</strong> Patina hoặc Veranda Mansion – mỗi loại chỉ 1 căn, cần trao đổi trực tiếp với chủ đầu tư.</li>
+</ul>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Hoiana Beach Villas phù hợp khách mua biệt thự biển để nghỉ dưỡng và cho thuê trong một quần thể đã vận hành thật – khách sạn, golf, nhà hàng, beach club đều đang hoạt động, không phải chờ tiện ích hình thành. Số lượng chỉ 198 căn, mật độ xây dựng thấp, mỗi căn có hồ bơi và vườn riêng. Khi chọn căn, anh chị nên cân nhắc giữa nhóm trực diện biển (Marina) và nhóm giữa vườn (Dune, Azure) theo ngân sách và nhu cầu khai thác; hỏi kỹ phương án vận hành cho thuê, phí quản lý và tiến độ bàn giao trước khi xuống tiền.</p>
+<p>Biệt thự biển Hoiana phù hợp khách mua để nghỉ dưỡng và cho thuê trong một quần thể đã vận hành thật – khách sạn, golf, nhà hàng, beach club đều đang hoạt động, không phải chờ tiện ích hình thành. Số lượng chỉ 198 căn, mật độ xây dựng thấp, mỗi căn có hồ bơi và vườn riêng. Khi chọn căn, anh chị nên cân nhắc giữa nhóm trực diện biển (Marina) và nhóm giữa vườn (Dune, Azure) theo ngân sách và nhu cầu khai thác; hỏi kỹ phương án vận hành cho thuê, phí quản lý và tiến độ bàn giao trước khi xuống tiền.</p>
 <p>Xem thêm ảnh phối cảnh, bảng loại căn tại <a href="/du-an/hoiana-beach-villas/">trang dự án Hoiana Beach Villas</a>. Nhận bảng giá, chính sách và hồ sơ dự án: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Thông tin tổng quan về quần thể có thể tham khảo thêm tại <a href="https://cafeland.vn/du-an/khu-phuc-hop-hoiana-1382.html">CafeLand</a>; số liệu biệt thự biển Hoiana trong bài theo tài liệu chủ đầu tư.</p>
 <p class="src">Nguồn: tài liệu thông tin dự án Hoiana Beach Villas của chủ đầu tư (05/2026), hoiana.com. Ảnh: phối cảnh của chủ đầu tư, mang tính minh họa.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Hoiana Beach Villas: 7 dòng biệt thự biển, diện tích',
-			'desc'      => 'Hoiana Beach Villas – 198 biệt thự biển Nam Hội An, 3 – 9 phòng ngủ, đất 350 – 3.132 m², hồ bơi riêng, full nội thất. Vị trí từng dòng, tiện ích. Gọi Hoàng Hiệp.',
+			'seo_title' => 'Biệt thự biển Hoiana: 7 dòng villa, 198 căn, diện tích',
+			'desc'      => 'Biệt thự biển Hoiana (Hoiana Beach Villas): 198 căn 3 – 9 phòng ngủ, đất 350 – 3.132 m², hồ bơi riêng, full nội thất. Vị trí từng dòng, tiện ích.',
 			'points'    => array(
-				'198 biệt thự 3 – 9 phòng ngủ: Shore, Dune, Azure, Pearl, Marina Villa, Patina và Veranda Mansion',
+				'Biệt thự biển Hoiana gồm 198 căn 3 – 9 phòng ngủ: Shore, Dune, Azure, Pearl, Marina Villa, Patina và Veranda Mansion',
 				'Đất 350 – 3.132 m², mỗi căn có hồ bơi riêng, garage riêng, bàn giao full nội thất',
 				'Nằm trong Hoiana Resort & Golf gần 1.000 ha, 4 km bờ biển, cách phố cổ Hội An khoảng 15 phút',
 			),
 			'faq'       => array(
-				array( 'Hoiana Beach Villas có bao nhiêu căn?', '198 biệt thự: Shore Villa 36 căn, Dune Villa 70, Azure Villa 46, Pearl Villa 21, Marina Villa 23, Patina Mansion 1 và Veranda Mansion 1.' ),
-				array( 'Diện tích biệt thự Hoiana Beach Villas bao nhiêu?', 'Đất từ 350 m² (Shore Villa, 3 phòng ngủ) đến 840 m² (Marina Villa, 4 phòng ngủ); hai dinh thự Patina 2.208 m² và Veranda 3.132 m².' ),
-				array( 'Dòng nào trực diện biển?', 'Marina Villa, Patina Mansion và Veranda Mansion nằm dọc bờ biển; Pearl Villa kế biển, giáp sân golf.' ),
-				array( 'Ai là chủ đầu tư Hoiana Beach Villas?', 'Công ty TNHH Phát triển Nam Hội An (HASD), 100% vốn nước ngoài, 75% cổ phần thuộc VMS Group (Hồng Kông).' ),
+				array( 'Biệt thự biển Hoiana có bao nhiêu căn?', 'Hoiana Beach Villas có 198 biệt thự: Shore Villa 36 căn, Dune Villa 70, Azure Villa 46, Pearl Villa 21, Marina Villa 23, Patina Mansion 1 và Veranda Mansion 1.' ),
+				array( 'Diện tích biệt thự biển Hoiana bao nhiêu?', 'Đất từ 350 m² (Shore Villa, 3 phòng ngủ) đến 840 m² (Marina Villa, 4 phòng ngủ); hai dinh thự Patina 2.208 m² và Veranda 3.132 m².' ),
+				array( 'Dòng biệt thự biển Hoiana nào trực diện biển?', 'Marina Villa, Patina Mansion và Veranda Mansion nằm dọc bờ biển; Pearl Villa kế biển, giáp sân golf.' ),
+				array( 'Ai là chủ đầu tư biệt thự biển Hoiana?', 'Công ty TNHH Phát triển Nam Hội An (HASD), 100% vốn nước ngoài, 75% cổ phần thuộc VMS Group (Hồng Kông).' ),
 			),
 		),
-		'sources'  => array( 'https://www.hoiana.com/hoiana-beach-villas' ),
+		'sources'  => array( 'https://www.hoiana.com/hoiana-beach-villas', 'https://cafeland.vn/du-an/khu-phuc-hop-hoiana-1382.html' ),
 	);
 
 	/* ---------------- 09/11 – Mặt bằng giá căn hộ Đà Nẵng: bảng hàng CĐT + giá rao + Biggee.vn ---------------- */
@@ -544,14 +571,15 @@ HTML
 		'keyword'  => 'mặt bằng giá căn hộ Đà Nẵng',
 		'keywords_extra' => array( 'giá căn hộ Đà Nẵng 2026', 'giá căn hộ Đà Nẵng theo m2', 'bảng giá chung cư Đà Nẵng', 'căn hộ ven sông Hàn giá bao nhiêu' ),
 		'schedule' => '2026-11-09 14:00',
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100.
 		'category' => 'Thị trường',
 		'tags'     => array( 'Giá căn hộ', 'Thị trường Đà Nẵng' ),
 		'image'    => 'plugin:img/tin-tuc/mat-bang-gia-can-ho-da-nang-11-2026.jpg',
-		'image_alt' => 'Biểu đồ khoảng giá căn hộ 27 dự án Đà Nẵng theo triệu/m², tháng 11/2026',
+		'image_alt' => 'Biểu đồ mặt bằng giá căn hộ Đà Nẵng theo triệu/m², tháng 11/2026',
 		'content'  => <<<HTML
-<p>Giá căn hộ Đà Nẵng tháng 11/2026 trải từ khoảng <strong>21 triệu/m²</strong> (nhà ở xã hội Liên Chiểu) đến gần <strong>190 triệu/m²</strong> (căn hộ hạng sang ven sông Hàn). Hoàng Hiệp tổng hợp từ 3 nguồn, ưu tiên theo thứ tự: <strong>bảng hàng / bảng giá chủ đầu tư</strong> mới nhất, <strong>giá rao thứ cấp</strong> tháng 7 – 10/2026, và <strong>bản đồ giá Biggee.vn</strong> cho các dự án còn lại.</p>
+<p><strong>Mặt bằng giá căn hộ Đà Nẵng</strong> tháng 11/2026 trải từ khoảng <strong>21 triệu/m²</strong> (nhà ở xã hội Liên Chiểu) đến gần <strong>190 triệu/m²</strong> (căn hộ hạng sang ven sông Hàn). Hoàng Hiệp tổng hợp từ 3 nguồn, ưu tiên theo thứ tự: <strong>bảng hàng / bảng giá chủ đầu tư</strong> mới nhất, <strong>giá rao thứ cấp</strong> tháng 7 – 10/2026, và <strong>bản đồ giá Biggee.vn</strong> cho các dự án còn lại.</p>
 <!--hh-featured-->
-<h2>Bảng giá căn hộ Đà Nẵng theo dự án (triệu/m² thông thủy)</h2>
+<h2>Mặt bằng giá căn hộ Đà Nẵng theo dự án (triệu/m² thông thủy)</h2>
 <table>
 <thead><tr><th>Dự án</th><th>Khu vực</th><th>Giá (tr/m²)</th><th>Nguồn</th></tr></thead>
 <tbody>
@@ -589,9 +617,9 @@ HTML
 <tr><td><a href="/du-an/ecohome-hoa-hiep-da-nang/">Ecohome Hòa Hiệp</a></td><td>Liên Chiểu</td><td>21 – 35</td><td>Biggee.vn</td></tr>
 </tbody>
 </table>
-<p><strong>Cách đọc bảng:</strong> giá bảng hàng chủ đầu tư là giá niêm yết (gồm VAT, phần lớn gồm 2% kinh phí bảo trì), chưa trừ chiết khấu – giá thực trả sau chính sách thường thấp hơn. Giá rao thứ cấp là giá người bán đưa ra, chưa phải giá giao dịch. Sun Saphia Residence đang chờ chủ đầu tư công bố giá nên chưa có trong bảng.</p>
-<!--hh-img:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg|Ảnh thực tế flycam 11/2026: sông Hàn – cầu Rồng, khu vực có giá căn hộ cao nhất Đà Nẵng-->
-<h2>Giá chia theo 5 nhóm</h2>
+<p><strong>Cách đọc bảng mặt bằng giá căn hộ Đà Nẵng:</strong> giá bảng hàng chủ đầu tư là giá niêm yết (gồm VAT, phần lớn gồm 2% kinh phí bảo trì), chưa trừ chiết khấu – giá thực trả sau chính sách thường thấp hơn. Giá rao thứ cấp là giá người bán đưa ra, chưa phải giá giao dịch. Sun Saphia Residence đang chờ chủ đầu tư công bố giá nên chưa có trong bảng.</p>
+<!--hh-img:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg|Ảnh thực tế flycam 11/2026: sông Hàn – cầu Rồng, nơi mặt bằng giá căn hộ Đà Nẵng cao nhất-->
+<h2>Mặt bằng giá căn hộ Đà Nẵng chia theo 5 nhóm</h2>
 <ul>
 <li><strong>Trên 100 triệu/m²:</strong> căn hộ hạng sang ven sông Hàn và trục Võ Nguyên Giáp – The Legend, Times Square, Nobu, Sun Solar, phần căn cao cấp của Capital Square, The Poet, Sun Ponte, Sun Cosmo.</li>
 <li><strong>80 – 100 triệu/m²:</strong> phần lớn căn của Newtown Diamond, Sun Symphony, Sun Costa, Wyndham Soleil, The Meridian.</li>
@@ -599,31 +627,36 @@ HTML
 <li><strong>40 – 60 triệu/m²:</strong> FourS Tower, FPT City, MIA Center Point, một số chung cư Sơn Trà.</li>
 <li><strong>Dưới 40 triệu/m²:</strong> Liên Chiểu, Thanh Khê và nhà ở xã hội.</li>
 </ul>
-<h2>Nhận định của Hoàng Hiệp</h2>
+<h2>Vì sao mặt bằng giá căn hộ Đà Nẵng chênh lệch lớn?</h2>
+<p>Khoảng cách từ dưới 40 đến gần 190 triệu/m² phản ánh bốn yếu tố. Thứ nhất là <strong>vị trí</strong>: dải ven sông Hàn và trục biển Võ Nguyên Giáp gần như hết quỹ đất mới, nên giá cao nhất. Thứ hai là <strong>thương hiệu và tiêu chuẩn bàn giao</strong>: căn hộ hàng hiệu, bàn giao nội thất cao cấp có giá mỗi m² cao hơn nhiều. Thứ ba là <strong>loại sản phẩm</strong>: căn hộ du lịch, condotel khác căn hộ chung cư để ở. Thứ tư là <strong>nguồn giá</strong>: bảng hàng mới của chủ đầu tư thường cao hơn giá chuyển nhượng các dự án đã bàn giao lâu năm.</p>
+<p>Vì vậy, khi nói mặt bằng giá căn hộ Đà Nẵng "tăng" hay "giảm", anh chị nên hỏi đang so nhóm nào với nhóm nào. Một dự án mới ven sông Hàn mở bán giá cao không có nghĩa căn hộ Liên Chiểu cũng tăng theo cùng tốc độ.</p>
+<h2>Nhận định của Hoàng Hiệp về mặt bằng giá căn hộ Đà Nẵng</h2>
 <ul>
 <li><strong>Sun Group có hàng ở mọi tầm giá:</strong> từ FourS Tower 45 – 68 triệu/m², Hòa Xuân 58 – 83, đến Sun Ponte, Sun Cosmo, Sun Solar trên 100 triệu/m² – anh chị có thể chọn theo ngân sách mà vẫn cùng một chủ đầu tư.</li>
-<li><strong>Ven sông Hàn tiếp tục kéo giá lên:</strong> bảng hàng mới của The Legend, Capital Square đều có căn trên 140 triệu/m², cao hơn rõ so với mặt bằng rao bán 6 – 12 tháng trước.</li>
+<li><strong>Ven sông Hàn tiếp tục kéo mặt bằng giá căn hộ Đà Nẵng lên:</strong> bảng hàng mới của The Legend, Capital Square đều có căn trên 140 triệu/m², cao hơn rõ so với mặt bằng rao bán 6 – 12 tháng trước.</li>
 <li><strong>So cùng loại giá:</strong> giá chủ đầu tư (chưa chiết khấu) nên so với giá chủ đầu tư; giá rao chuyển nhượng so với giá rao. Chênh 10 – 20 triệu/m² trong cùng dự án thường do tầng, view, nội thất.</li>
+<li><strong>Kiểm tra dự án trước khi xuống tiền:</strong> dù mặt bằng giá căn hộ Đà Nẵng hấp dẫn đến đâu, anh chị nên tra cứu dự án trên <a href="https://thongtinbds.moc.gov.vn/">Hệ thống thông tin nhà ở và thị trường bất động sản của Bộ Xây dựng</a> và xem văn bản đủ điều kiện bán (xem <a href="/tra-cuu-ma-dinh-danh-bat-dong-san/">cách tra cứu</a>).</li>
 </ul>
 <p>Anh chị cần bảng hàng chi tiết đúng tầm giá, hoặc so sánh 2 – 3 dự án cụ thể, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: bảng hàng chủ đầu tư The Legend, Capital Square, Newtown Diamond (cập nhật 09/2026), bảng hàng / bảng giá các dự án Sun Group, The Poet, Times Square, Peninsula, MIA Center Point mà Hoàng Hiệp đang theo dõi; giá rao thứ cấp trên Batdongsan, Guland, Muaban, Cafeland, Thư viện Pháp luật (7 – 10/2026); bản đồ mặt bằng giá căn hộ Đà Nẵng của Biggee.vn (nhận 09/11/2026). Biểu đồ do Hoàng Hiệp vẽ.</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Mặt bằng giá căn hộ Đà Nẵng 11/2026: 30 dự án',
-			'desc'      => 'Giá căn hộ Đà Nẵng 21 – 188 triệu/m²: bảng hàng CĐT The Legend, Capital Square, Newtown Diamond, các dự án Sun Group, Hòa Xuân, FPT City, Liên Chiểu.',
+			'seo_title' => 'Mặt bằng giá căn hộ Đà Nẵng 11/2026: bảng giá 30 dự án',
+			'desc'      => 'Mặt bằng giá căn hộ Đà Nẵng 11/2026 khoảng 21 – 188 triệu/m²: bảng hàng The Legend, Capital Square, Newtown Diamond, dự án Sun Group, Hòa Xuân.',
 			'points'    => array(
-				'Giá căn hộ Đà Nẵng khoảng 21 – 188 triệu/m² tùy khu vực và nguồn giá',
+				'Mặt bằng giá căn hộ Đà Nẵng khoảng 21 – 188 triệu/m² tùy khu vực và nguồn giá',
 				'Bảng hàng CĐT 09/2026: The Legend 119 – 188, Capital Square 92 – 146, Newtown Diamond 67 – 120 triệu/m²',
 				'Dự án Sun: FourS 45 – 68, Hòa Xuân 58 – 83, Sun Ponte, Sun Cosmo 83 – 130, Sun Solar 117 – 178 triệu/m²',
 			),
 			'faq'       => array(
-				array( 'Giá căn hộ Đà Nẵng hiện bao nhiêu một m²?', 'Khoảng 21 – 188 triệu/m²: dưới 40 triệu ở Liên Chiểu và nhà ở xã hội, 45 – 83 triệu ở FourS, FPT City, Hòa Xuân, và từ 90 đến gần 190 triệu ven sông Hàn, trục Võ Nguyên Giáp.' ),
-				array( 'Dự án căn hộ nào đắt nhất Đà Nẵng?', 'Theo bảng hàng chủ đầu tư 09/2026, The Legend ven sông Hàn ở mức 119 – 188 triệu/m²; Times Square, Nobu Residences và Sun Solar cũng trên 150 triệu/m² ở nhóm căn cao nhất.' ),
+				array( 'Mặt bằng giá căn hộ Đà Nẵng hiện bao nhiêu một m²?', 'Tháng 11/2026 khoảng 21 – 188 triệu/m²: dưới 40 triệu ở Liên Chiểu và nhà ở xã hội, 45 – 83 triệu ở FourS, FPT City, Hòa Xuân, và từ 90 đến gần 190 triệu ven sông Hàn, trục Võ Nguyên Giáp.' ),
+				array( 'Dự án căn hộ nào đắt nhất Đà Nẵng?', 'Trong mặt bằng giá căn hộ Đà Nẵng, theo bảng hàng chủ đầu tư 09/2026, The Legend ven sông Hàn ở mức 119 – 188 triệu/m²; Times Square, Nobu Residences và Sun Solar cũng trên 150 triệu/m² ở nhóm căn cao nhất.' ),
 				array( 'Căn hộ Hòa Xuân giá bao nhiêu?', 'Theo bảng hàng 10/2026 (gồm VAT và phí bảo trì): Cora Tower 59 – 83, Spana Tower 65 – 73, S-Light Tower 58 – 69 triệu/m².' ),
+				array( 'Mặt bằng giá căn hộ Đà Nẵng trong bài lấy từ đâu?', 'Ưu tiên bảng hàng, bảng giá chủ đầu tư mới nhất; tiếp theo là giá rao thứ cấp tháng 7 – 10/2026 và bản đồ giá Biggee.vn cho các dự án còn lại. Đây là giá tham khảo, chưa phải giá giao dịch.' ),
 			),
 		),
-		'sources'  => array( 'https://biggee.vn/' ),
+		'sources'  => array( 'https://biggee.vn/', 'https://thongtinbds.moc.gov.vn/' ),
 	);
 
 	/* ---------------- 11/11 18:30 – Sự kiện giới thiệu Sun Saphia Residence 15/11 ---------------- */
