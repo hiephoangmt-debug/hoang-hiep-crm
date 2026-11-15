@@ -13,7 +13,7 @@ WEB = pathlib.Path(__file__).resolve().parent.parent
 OUT = WEB / 'ladipage' / 'basic'
 SITE = 'https://www.sun-danangdowntown.com'
 # Gắn theo commit để CDN lấy đúng ảnh mới (đổi ảnh thì cập nhật mã commit này)
-CDN = 'https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@95f59dcd2bd43fa99e8f3f45da5de2a47f6a6a9d/web/images/'
+CDN = 'https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@8810f10aa733572bf25c5fe8e365835c1ebb9fbe/web/images/'
 PAGES = {
     'index.html': ('da-nang-downtown.html', True),
     'sun-galaxy-complex/index.html': ('sun-galaxy-complex.html', False),
