@@ -92,8 +92,8 @@
 | 16/11/2026 | TikTok (@hiephoangmt, brand Sun) | 13:45 | Bàn giao Sun Saphia Residence – bài ảnh | /ban-giao-sun-saphia-residence-kiem-tra-gi/ |
 | 16/11/2026 | Hoàng Hiệp | 15:30 | (bài web 14/11, hết CHỜ) Tiến độ Nobu Đà Nẵng 10/2026 – kết cấu tầng 22 (1 ảnh nền xanh, ảnh công trường) | /tien-do-nobu-residences-da-nang/ |
 | 16/11/2026 | Hoàng Hiệp | 18:30 | (bài web mới 09:00) Giá Capital Square theo tòa 11/2026 (1 ảnh nền xanh, flycam công trường) | /bang-gia-capital-square-da-nang-theo-toa/ |
-| 16/11/2026 | Casamia (blogId 8074284) | 21:00 | Bài toán dòng tiền – đầu tư biệt thự Casamia Balanca 5–10 năm (1 ảnh nền xanh, số liệu giả định ghi rõ) | /du-an/casamia-balanca-hoi-an/ |
-| 16/11/2026 | TikTok (@hiephoangmt, brand Sun) | 21:15 | Đầu tư biệt thự Casamia Balanca – bài ảnh | /du-an/casamia-balanca-hoi-an/ |
+| 16/11/2026 | Casamia (blogId 8074284) | 21:00 | Giá và chính sách Casamia Balanca (CSBH CĐT 9/9/2026: Park Home ~13,86–14,01 tỷ full NT, thuê lại/ủy thác tối thiểu 50–60 tr/tháng) – 1 ảnh nền xanh; THAY bài dòng tiền (số liệu cũ) | /du-an/casamia-balanca-hoi-an/ |
+| 16/11/2026 | TikTok (@hiephoangmt, brand Sun) | 21:15 | Giá và chính sách Casamia Balanca – bài ảnh | /du-an/casamia-balanca-hoi-an/ |
 | 16/11/2026 | (ghi chú) | 07:26 | Sửa lời Reel Sun 20:00 theo anh Hiệp 15/11: sân bay ~10 phút, "ngay bãi tắm Sơn Thủy, đối diện các resort 5 sao" (bỏ "dưới chân Ngũ Hành Sơn") | — |
 | CHỜ | Hoàng Hiệp | 17/11 | (bài web 16/11 14:00) Hudson Place hay Broadway Place – Capital Square | hudson-place-hay-broadway-place-capital-square (chờ) |
 | CHỜ | Sun | 17/11 | (bài web 16/11 16:30; không đủ giãn cách hôm nay) Digital nomad Đà Nẵng thuê căn hộ Sun Saphia | digital-nomad-da-nang-thue-can-ho-sun-saphia (chờ) |
