@@ -95,6 +95,9 @@ section{padding:72px 0}
 .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
 .card-img:hover img{transform:scale(1.04)}
 .card-img span{position:absolute;left:10px;bottom:10px;background:rgba(14,28,51,.78);color:#fff;font-size:13px;padding:4px 10px;border-radius:999px}
+/* Chú thích ảnh 1 dòng, không che hình (anh Hiệp 17/11/2026): dài thì cắt "…", bấm ảnh xem đầy đủ. */
+.card-img span{max-width:calc(100% - 20px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35}
+@media (max-width:700px){.card-img span{left:6px;bottom:6px;max-width:calc(100% - 12px);font-size:11px;padding:3px 8px;background:rgba(14,28,51,.66)}}
 .list-ok{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 22px;padding:0;list-style:none;margin:18px 0 0}
 .list-ok li{padding-left:26px;position:relative}
 .list-ok li::before{content:'✓';position:absolute;left:0;top:0;color:var(--gold);font-weight:700}
