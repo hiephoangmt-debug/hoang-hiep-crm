@@ -287,6 +287,51 @@ function hh_single_listing_dataset() {
 		);
 	}
 
+	// 16/11/2026 – 6 căn 2PN FPT Plaza 2 ký gửi, đã có sổ: gộp 1 tin, chỉ hiện giá thấp nhất (anh Hiệp 16/11/2026); không ghi mã căn, tên, số điện thoại bên bán.
+	$list[] = array(
+		'rev'     => 1,
+		'slug'    => 'ban-can-ho-fpt-plaza-2-2pn-68-73m2-full-noi-that-co-so',
+		'project' => 'fpt-plaza-2',
+		'title'   => 'Bán căn hộ FPT Plaza 2 – 6 căn 2PN 68 – 73 m², view biển, full nội thất, có sổ – chỉ từ 2,8 tỷ',
+		'excerpt' => '6 căn hộ 2 phòng ngủ 68 – 73 m² FPT Plaza 2 (FPT City, Ngũ Hành Sơn): view biển – công viên – thành phố, có căn góc, full nội thất, sẵn sổ hồng công chứng ngay. Giá chỉ từ 2,8 tỷ.',
+		'kind'    => 'can-ho-chung-cu',
+		'area'    => 'ngu-hanh-son',
+		'image'   => 'img/nha-dat/fpt-plaza-2-2pn-68-73m2-4x3.jpg',
+		'alt'     => 'Bán căn hộ FPT Plaza 2 – 6 căn 2 phòng ngủ 68 – 73 m², full nội thất, có sổ, chỉ từ 2,8 tỷ',
+		'meta'    => array(
+			'hh_deal'        => 'ban',
+			'hh_status'      => 'con-hang',
+			'hh_price'       => 2800,
+			'hh_price_from'  => '1',
+			'hh_negotiable'  => '1',
+			'hh_address'     => 'FPT Plaza 2, khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng',
+			'hh_map_address' => 'FPT Plaza 2, FPT City, Ngũ Hành Sơn, Đà Nẵng',
+			'hh_area'        => 68,
+			'hh_bedrooms'    => 2,
+			'hh_furniture'   => 'day-du',
+			'hh_legal'       => 'so-hong',
+			'hh_features'    => "6 căn 2 phòng ngủ, diện tích 68 – 73 m²\nView biển, công viên hoặc thành phố; có 2 căn góc\nFull nội thất / có nội thất, dọn vào ở hoặc cho thuê ngay\nSẵn sổ hồng, công chứng ngay\nGiá chỉ từ 2,8 tỷ – liên hệ nhận giá từng căn",
+		),
+		'content' => '<p>Bán <strong>6 căn hộ 2 phòng ngủ</strong> tại <a href="/du-an/fpt-plaza-2/">FPT Plaza 2</a> – khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng: diện tích 68 – 73 m², view biển, công viên hoặc thành phố, có căn góc, phần lớn full nội thất. Tất cả đã <strong>sẵn sổ hồng, công chứng ngay</strong>. Giá <strong>chỉ từ 2,8 tỷ</strong>.</p>
+<h2>Các căn đang bán</h2>
+<table><thead><tr><th>Căn</th><th>Diện tích</th><th>Hướng – view</th><th>Nội thất</th></tr></thead><tbody>
+<tr><td>2PN</td><td>70 m²</td><td>Hướng Đông, view biển – công viên</td><td>Có nội thất</td></tr>
+<tr><td>2PN</td><td>71 m²</td><td>Hướng Bắc</td><td>Full nội thất</td></tr>
+<tr><td>2PN, tầng cao</td><td>70 m²</td><td>Hướng Đông, view biển</td><td>Full nội thất</td></tr>
+<tr><td>2PN, căn góc</td><td>68 m²</td><td>Hướng Tây Nam, view thành phố và đường Hoàng Minh Thắng</td><td>Full nội thất</td></tr>
+<tr><td>2PN</td><td>68 m²</td><td>Hướng Tây Nam, view thành phố và đường Hoàng Minh Thắng</td><td>Có nội thất</td></tr>
+<tr><td>2PN, căn góc</td><td>73 m²</td><td>Hướng Tây Bắc</td><td>Full nội thất</td></tr>
+</tbody></table>
+<p>Giá từ <strong>2,8 tỷ</strong> tùy căn, hướng và tầng – liên hệ Hoàng Hiệp để nhận giá từng căn và lịch xem nhà.</p>
+<h2>Vì sao chọn FPT Plaza 2</h2>
+<ul>
+<li>Căn 2 phòng ngủ đã có sổ, nhận nhà ở hoặc cho thuê ngay – theo chủ nhà, giá thuê tham khảo khoảng 10 – 14 triệu/tháng tùy căn và nội thất.</li>
+<li>Nằm trong khu đô thị FPT City quy hoạch đồng bộ: trường học FPT các cấp, công viên, tiện ích nội khu; gần biển Ngũ Hành Sơn.</li>
+<li>Gần Đại học FPT và FPT Complex – nguồn khách thuê là giảng viên, nhân viên công nghệ khá ổn định.</li>
+</ul>
+<p>Xem mặt bằng tầng tại <a href="/du-an/fpt-plaza-2/">trang dự án FPT Plaza 2</a> hoặc các căn đã có sổ ở <a href="/du-an/fpt-plaza-3/">FPT Plaza 3</a>. Hẹn xem nhà, nhận ảnh thực tế và giá từng căn: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>',
+	);
+
 	// 05/11/2026 – căn cho thuê Sun Ponte Residence theo bảng căn cho thuê anh Hiệp gửi (chỉ căn còn trống).
 	// Gom theo loại căn, chỉ ghi tầng thấp (3 – 8) / trung (9 – 12) / cao (12A – 24); không ghi mã căn.
 	$ponte      = '<a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a>';

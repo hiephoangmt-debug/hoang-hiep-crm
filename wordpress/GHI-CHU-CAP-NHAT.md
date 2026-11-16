@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.297**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.298**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.298 (16/11/2026) – tin bán 6 căn FPT Plaza 2
+
+- Mục Mua bán: tin "Bán căn hộ FPT Plaza 2 – 6 căn 2PN 68 – 73 m², view biển, full nội thất, có sổ – chỉ từ 2,8 tỷ" (bảng 6 căn theo diện tích, hướng, nội thất; không ghi giá từng căn, mã căn, tên/số điện thoại bên bán), ảnh thẻ 4:3, liên kết trang dự án FPT Plaza 2. Bấm "Nhập / cập nhật dữ liệu" để đăng.
 
 ## Có gì mới – 2.20.297 (16/11/2026) – Casamia: chỉ hiện giá thấp nhất
 
