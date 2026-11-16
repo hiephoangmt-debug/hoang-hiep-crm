@@ -1,0 +1,90 @@
+{
+ "tag": "CHÍNH SÁCH · CASAMIA BALANCA",
+ "title": "Giá và chính sách Casamia Balanca",
+ "sub": "Áp dụng từ 9/9/2026",
+ "xc": 0.5,
+ "yc": 0.45,
+ "stats": [
+  [
+   "~13,9 tỷ",
+   "Park Home full NT"
+  ],
+  [
+   "50–60 tr",
+   "tối thiểu/tháng"
+  ],
+  [
+   "70%",
+   "hỗ trợ vay"
+  ],
+  [
+   "0%",
+   "lãi 24 tháng"
+  ]
+ ],
+ "items": [
+  [
+   "Park Home, đất 178 m²",
+   "Full nội thất từ khoảng 13,86 tỷ"
+  ],
+  [
+   "Ủy thác cho thuê",
+   "45% doanh thu, tối thiểu 50 – 60 tr/tháng"
+  ],
+  [
+   "Thanh toán sớm 95%",
+   "Chiết khấu 2 – 5% tùy phân khu"
+  ],
+  [
+   "Vay đến 70%",
+   "Lãi 0% và ân hạn gốc 24 tháng"
+  ]
+ ],
+ "box": "Bàn giao thô 2026 hoặc nội thất 2027, tùy phân khu",
+ "note": "Theo chính sách bán hàng chủ đầu tư áp dụng từ 9/9/2026, giá gồm VAT · Ảnh phối cảnh chủ đầu tư",
+ "headline": [
+  [
+   "Giá và chính sách",
+   "big",
+   0
+  ],
+  [
+   "Casamia",
+   "script",
+   300
+  ],
+  [
+   "Balanca",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Giá và chính sách",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "CASAMIA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Balanca",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}
