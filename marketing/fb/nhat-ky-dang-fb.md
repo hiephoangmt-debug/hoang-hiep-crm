@@ -62,7 +62,6 @@
 | 14/11/2026 | TikTok (@hiephoangmt, brand Sun) | 11:15 | Pháp lý Symphony 5 – bài ảnh (thẻ dọc) | /phap-ly-symphony-5-so-huu-50-nam/ |
 | 15/11/2026 | Hoàng Hiệp | 10:00 | (bài web 13/11 19:00, đã chờ) Tra cứu mã định danh BĐS thongtinbds (1 ảnh dọc mẫu B, sông Hàn) | /tra-cuu-du-an-ma-dinh-danh-bat-dong-san-thongtinbds-moc-gov-vn/ |
 | 15/11/2026 | Hoàng Hiệp | 14:15 | (bài web 13/11 21:00, đã chờ) Sổ hồng FPT Plaza 3 – 100% căn hộ (1 ảnh dọc mẫu B, ảnh thật trao sổ) | /fpt-plaza-3-hoan-thanh-cap-so-hong-100-can-ho/ |
-| CHỜ | Hoàng Hiệp | 16/11 | (bài web 14/11 14:00) Tiến độ Nobu Residences Đà Nẵng | tien-do-nobu-residences-da-nang (chờ) |
 | CHỜ | Hoàng Hiệp | sau | (bài web tiếng Anh 14/11 19:00, ưu tiên thấp) Nobu Residences Da Nang buyer’s guide | nobu-residences-da-nang-buyers-guide (chờ) |
 | CHỜ | Hoàng Hiệp | sau | (bài web tiếng Anh 14/11 21:00, ưu tiên thấp) Branded residences Da Nang – foreign buyers | branded-residences-da-nang-foreign-buyers (chờ) |
 | 14/11/2026 | Sun | 14:15 | (bài web mới 11:30) Sun Saphia Residence đi Hội An – đường ven biển, lịch trình (1 ảnh dọc) | /tu-sun-saphia-residence-di-hoi-an-bao-xa-lich-trinh/ |
@@ -87,5 +86,17 @@
 | 15/11/2026 | (ghi chú) | 12:22 | Anh Hiệp chốt NỀN XANH: đổi ảnh 7 bài chưa đăng hôm nay sang *-x.jpg (poster-xanh); bài Sun 13:00 dùng nền flycam thực tế | — |
 | 16/11/2026 | Sun (Reels) | 20:00 | Video flycam thực tế Sun Saphia 17/10/2026 – "Vì sao Sun Group chọn dải biển này?" (video dọc 21s, có logo) | /du-an/sun-saphia-residence/ |
 | 16/11/2026 | TikTok (@hiephoangmt, brand Sun) | 20:15 | Video flycam Sun Saphia (video dọc 21s, chưa có nhạc – TikTok không cho tự thêm nhạc với video) | /du-an/sun-saphia-residence/ |
+| 16/11/2026 | Casamia (blogId 8074284) | 08:30 | Pháp lý Casamia Balanca – sổ đỏ, sở hữu lâu dài (album 4 ảnh: gia đình trước nhà, phòng khách, tư vấn, toàn cảnh) | /du-an/casamia-balanca-hoi-an/ |
+| 16/11/2026 | TikTok (@hiephoangmt, brand Sun) | 08:45 | Pháp lý Casamia Balanca – album 4 ảnh | /du-an/casamia-balanca-hoi-an/ |
+| 16/11/2026 | Sun | 13:30 | (bài web mới 11:30) Bàn giao Sun Saphia Residence – kiểm tra gì, ghi biên bản (1 ảnh nền xanh, flycam thực tế) | /ban-giao-sun-saphia-residence-kiem-tra-gi/ |
+| 16/11/2026 | TikTok (@hiephoangmt, brand Sun) | 13:45 | Bàn giao Sun Saphia Residence – bài ảnh | /ban-giao-sun-saphia-residence-kiem-tra-gi/ |
+| 16/11/2026 | Hoàng Hiệp | 15:30 | (bài web 14/11, hết CHỜ) Tiến độ Nobu Đà Nẵng 10/2026 – kết cấu tầng 22 (1 ảnh nền xanh, ảnh công trường) | /tien-do-nobu-residences-da-nang/ |
+| 16/11/2026 | Hoàng Hiệp | 18:30 | (bài web mới 09:00) Giá Capital Square theo tòa 11/2026 (1 ảnh nền xanh, flycam công trường) | /bang-gia-capital-square-da-nang-theo-toa/ |
+| 16/11/2026 | Casamia (blogId 8074284) | 21:00 | Bài toán dòng tiền – đầu tư biệt thự Casamia Balanca 5–10 năm (1 ảnh nền xanh, số liệu giả định ghi rõ) | /du-an/casamia-balanca-hoi-an/ |
+| 16/11/2026 | TikTok (@hiephoangmt, brand Sun) | 21:15 | Đầu tư biệt thự Casamia Balanca – bài ảnh | /du-an/casamia-balanca-hoi-an/ |
+| 16/11/2026 | (ghi chú) | 07:26 | Sửa lời Reel Sun 20:00 theo anh Hiệp 15/11: sân bay ~10 phút, "ngay bãi tắm Sơn Thủy, đối diện các resort 5 sao" (bỏ "dưới chân Ngũ Hành Sơn") | — |
+| CHỜ | Hoàng Hiệp | 17/11 | (bài web 16/11 14:00) Hudson Place hay Broadway Place – Capital Square | hudson-place-hay-broadway-place-capital-square (chờ) |
+| CHỜ | Sun | 17/11 | (bài web 16/11 16:30; không đủ giãn cách hôm nay) Digital nomad Đà Nẵng thuê căn hộ Sun Saphia | digital-nomad-da-nang-thue-can-ho-sun-saphia (chờ) |
+| CHỜ | Hoàng Hiệp | 17/11 | (bài web 16/11 18:30) FTZ Đà Nẵng tác động căn hộ ven biển 2026 | ftz-da-nang-tac-dong-can-ho-ven-bien-2026 (chờ) |
 | 17/11/2026 | Sun (Reels) | 20:00 | Video phân tích #01 "Vì sao Sơn Thủy là tọa độ mới ven biển Đà Nẵng?" – avatar HeyGen + bản đồ navy v5, 72s, ghi chú nội dung AI (Metricool 428780189) | /du-an/sun-saphia-residence/ |
 | 17/11/2026 | TikTok (@hiephoangmt, brand Sun) | 20:15 | Video phân tích #01 (isAigc = true, nội dung thương hiệu) (Metricool 428780287) | /du-an/sun-saphia-residence/ |
