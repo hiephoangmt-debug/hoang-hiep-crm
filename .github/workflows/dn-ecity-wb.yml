@@ -1,0 +1,25 @@
+# Ảnh vệ tinh lịch sử (Esri Wayback) có thay đổi tại Đà Nẵng, kèm ngày chụp. Chạy trên nhánh claude/danang-data.
+name: e-City ảnh vệ tinh theo năm
+on:
+  push:
+    branches: [claude/danang-data]
+    paths: ['dn-ecity/wayback.py', '.github/workflows/dn-ecity-wb.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  wb:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python dn-ecity/wayback.py
+      - name: Lưu
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git add dn-ecity/out/wayback.json
+          git commit -m "dn-ecity: ảnh vệ tinh theo năm [skip ci]" || echo "không có gì mới"
+          git pull --rebase -q origin claude/danang-data && git push
