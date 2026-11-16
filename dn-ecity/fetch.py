@@ -18,8 +18,55 @@ def area_m2(ring):
     pts = [(p[0] * kx, p[1] * kz) for p in ring]
     return abs(sum(pts[i][0] * pts[i - 1][1] - pts[i - 1][0] * pts[i][1] for i in range(len(pts)))) / 2
 
+# ---------- 0) chiều cao ước tính của Microsoft Global ML Building Footprints (có trường height cho VN) ----------
+import csv, gzip, io
+def quadkey(x, y, z):
+    q = ''
+    for i in range(z, 0, -1):
+        d = 0; m = 1 << (i - 1)
+        if x & m: d += 1
+        if y & m: d += 2
+        q += str(d)
+    return q
+def tile(lon, lat, z):
+    n = 2 ** z; return int((lon + 180) / 360 * n), int((1 - math.asinh(math.tan(math.radians(lat))) / math.pi) / 2 * n)
+need = set()
+for (w, s_, e, n_) in BOXES.values():
+    x0, y1 = tile(w, s_, 9); x1, y0 = tile(e, n_, 9)
+    for x in range(x0, x1 + 1):
+        for y in range(y0, y1 + 1): need.add(quadkey(x, y, 9))
+MS = {}   # ô lưới 0.0005° -> [(lon, lat, h)]
+try:
+    links = urllib.request.urlopen('https://minedbuildings.z5.web.core.windows.net/global-buildings/dataset-links.csv', timeout=120).read().decode()
+    rows = [r for r in csv.DictReader(io.StringIO(links)) if r['Location'] == 'Vietnam' and any(r['QuadKey'].startswith(q) or q.startswith(r['QuadKey']) for q in need)]
+    print('ms files', len(rows), flush=True)
+    for r in rows:
+        raw = gzip.decompress(urllib.request.urlopen(r['Url'], timeout=300).read()).decode()
+        for line in raw.splitlines():
+            if not line.strip(): continue
+            ft = json.loads(line); h = (ft.get('properties') or {}).get('height', -1)
+            if h is None or h <= 0: continue
+            ring = ft['geometry']['coordinates'][0]; lon = sum(q[0] for q in ring) / len(ring); lat = sum(q[1] for q in ring) / len(ring)
+            MS.setdefault((round(lon / 0.0005), round(lat / 0.0005)), []).append((lon, lat, float(h)))
+except Exception as ex: print('ms lỗi', ex, flush=True)
+print('ms có chiều cao', sum(len(v) for v in MS.values()), flush=True)
+def pip(x, y, ring):
+    c = False; j = len(ring) - 1
+    for i in range(len(ring)):
+        xi, yi = ring[i][0], ring[i][1]; xj, yj = ring[j][0], ring[j][1]
+        if (yi > y) != (yj > y) and x < (xj - xi) * (y - yi) / (yj - yi) + xi: c = not c
+        j = i
+    return c
+def ms_height(ring, clon, clat):
+    best = 0; gx, gy = round(clon / 0.0005), round(clat / 0.0005)
+    for dx in (-1, 0, 1):
+        for dy in (-1, 0, 1):
+            for lon, lat, h in MS.get((gx + dx, gy + dy), ()):
+                if h > best and pip(lon, lat, ring): best = h
+    return best
+
 # ---------- 1) nhà Overture ----------
-seq = open(os.path.join(TMP, 'b.geojsonseq'), 'w'); stat = {'n': 0, 'h': 0, 'fl': 0, 'est': 0, 'clear': 0}
+seq = open(os.path.join(TMP, 'b.geojsonseq'), 'w'); stat = {'n': 0, 'h': 0, 'fl': 0, 'ms': 0, 'est': 0, 'clear': 0}
 for name, (w, s, e, n) in BOXES.items():
     f = os.path.join(TMP, f'{name}.geojson')
     if not os.path.exists(f):
@@ -34,6 +81,7 @@ for name, (w, s, e, n) in BOXES.items():
         if ar < 12: continue
         if p.get('height'): h = float(p['height']); est = 0; stat['h'] += 1
         elif p.get('num_floors'): h = float(p['num_floors']) * 3.4 + 1; est = 0; stat['fl'] += 1
+        elif (mh := ms_height(ring, clon, clat)) > 0: h = mh; est = 2; stat['ms'] += 1
         else:
             r = rnd(f'{clat:.6f}{clon:.6f}'); est = 1; stat['est'] += 1
             fl = 1 + r * 1.5 if ar < 30 else 2 + r * 3 if ar < 160 else 3 + r * 4 if ar < 600 else 2 + r * 4
@@ -72,4 +120,33 @@ json.dump({'type': 'FeatureCollection', 'features': feats}, open(os.path.join(OU
 from collections import Counter
 print('ranh', len(feats), Counter(f['properties']['lv'] for f in feats), flush=True)
 for f in feats[:400]: print(' ', f['properties']['lv'], f['properties']['name'])
+# ---------- 3) tiện ích công cộng OSM theo nhóm ----------
+CAT = [('HC', [('amenity', 'townhall'), ('office', 'government'), ('amenity', 'courthouse'), ('office', 'diplomatic')]),
+       ('AT', [('amenity', 'police'), ('amenity', 'fire_station'), ('emergency', 'ambulance_station')]),
+       ('YT', [('amenity', 'hospital'), ('amenity', 'clinic'), ('healthcare', 'hospital')]),
+       ('GD', [('amenity', 'university'), ('amenity', 'college'), ('amenity', 'school'), ('amenity', 'kindergarten')]),
+       ('GT', [('amenity', 'bus_station'), ('railway', 'station'), ('aeroway', 'aerodrome'), ('amenity', 'ferry_terminal'), ('amenity', 'parking')]),
+       ('TM', [('amenity', 'marketplace'), ('shop', 'mall'), ('shop', 'supermarket'), ('shop', 'department_store')]),
+       ('CC', [('leisure', 'park'), ('amenity', 'library'), ('amenity', 'community_centre'), ('tourism', 'museum'), ('amenity', 'theatre'), ('leisure', 'stadium')]),
+       ('KT', [('power', 'substation'), ('man_made', 'water_works'), ('man_made', 'wastewater_plant'), ('amenity', 'waste_transfer_station')])]
+parts = ''.join(f'nwr["{k}"="{v}"](15.84,107.95,16.22,108.40);' for _, kv in CAT for k, v in kv)
+Q2 = f'[out:json][timeout:300];({parts});out center tags;'
+pd = None
+for url in ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter', 'https://overpass.private.coffee/api/interpreter']:
+    for a in range(3):
+        try:
+            pd = json.load(urllib.request.urlopen(urllib.request.Request(url, data=urllib.parse.urlencode({'data': Q2}).encode(), headers={'User-Agent': 'hoang-hiep-crm-ecity'}), timeout=400)); break
+        except Exception as ex: print('overpass poi', url, ex, flush=True); time.sleep(10)
+    if pd: break
+pf = []
+for el in (pd or {}).get('elements', []):
+    t = el.get('tags', {}); lat = el.get('lat') or (el.get('center') or {}).get('lat'); lon = el.get('lon') or (el.get('center') or {}).get('lon')
+    if lat is None: continue
+    cat = next((c for c, kv in CAT if any(t.get(k) == v for k, v in kv)), None)
+    if not cat: continue
+    nm = t.get('name:vi') or t.get('name') or ''
+    if cat == 'GT' and t.get('amenity') == 'parking' and not nm: continue
+    pf.append({'type': 'Feature', 'properties': {'c': cat, 'n': nm, 'k': next((f'{k}={t[k]}' for _, kv in CAT for k, v in kv if t.get(k) == v), '')}, 'geometry': {'type': 'Point', 'coordinates': [round(lon, 6), round(lat, 6)]}})
+json.dump({'type': 'FeatureCollection', 'features': pf}, open(os.path.join(OUT, 'poi.geojson'), 'w'), ensure_ascii=False, separators=(',', ':'))
+print('poi', len(pf), Counter(f['properties']['c'] for f in pf), flush=True)
 json.dump({'stat': stat, 'boxes': BOXES, 'time': time.strftime('%Y-%m-%d')}, open(os.path.join(OUT, 'info.json'), 'w'))
