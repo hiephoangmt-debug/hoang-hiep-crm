@@ -3,7 +3,7 @@ nền trắng xanh nhạt, dòng HOÀNG HIỆP · BẤT ĐỘNG SẢN ĐÀ NẴN
 tiêu đề chữ có chân navy, tên dự án / ý chính cỡ lớn màu cam, dòng viết tay cam, câu tóm tắt đậm,
 hàng 3 con số có vạch ngăn, ảnh thật / phối cảnh mờ dần vào nền, thẻ liên hệ có ảnh chân dung ở đáy.
 
-Hai khổ: web 1200×630 (ảnh đại diện bài, xem trước Facebook) và fb 1080×1350 (bài đăng Facebook dọc).
+Hai khổ: web 1200×630 (ảnh đại diện bài, xem trước Facebook) và fb 1080×1350 (bài đăng Facebook dọc).\nThêm khổ 4x3 (1200×900, chế độ '4x3', trường out_43) cho ảnh thẻ tin Mua bán / Cho thuê.
 Dùng: python3 bai-viet/the-tin-tuc.py spec.json <thư mục img plugin> [web|fb|ca-hai]
 spec.json: danh sách {slug, out, bg, title, tag, cap, [cat, head, big, script, lead, stats:[[số, nhãn]×≤3], src, out_fb]}.
 Thiếu head/big/script/lead thì tự tách từ tiêu đề (tên dự án trong tag → chữ cam lớn).
@@ -220,6 +220,47 @@ def fb(s):
     return im
 
 
+def t43(s):
+    """Khổ 4:3 (1200×900) cho ảnh thẻ tin Mua bán / Cho thuê – bố cục như bản dọc, chữ gọn hơn."""
+    W, H = 1200, 900
+    im = Image.new('RGBA', (W, H), BG_MID + (255,))
+    ph = load_bg(s['bg'], (W, 470), (0.5, 0.5)).convert('RGBA')
+    m = Image.new('L', ph.size, 0); g = ImageDraw.Draw(m)
+    for y in range(ph.size[1]):
+        t = min(1.0, max(0.0, (y - 20) / 200)); g.line([(0, y), (W, y)], fill=int(255 * t ** 1.2))
+    im.paste(ph, (0, H - 470), m)
+    top = Image.new('RGBA', (W, H), (0, 0, 0, 0)); g = ImageDraw.Draw(top)
+    for y in range(180): g.line([(0, y), (W, y)], fill=BG_TOP + (int(160 * (1 - y / 180)),))
+    im.alpha_composite(top)
+    d = ImageDraw.Draw(im)
+    head, big, scr, lead = parts(s)
+    C, MW = W / 2, W - 140
+    spaced(d, (C, 30), 'HOÀNG HIỆP · BẤT ĐỘNG SẢN ĐÀ NẴNG', sans(24, 'ExtraBold'), BLUE, 5, 'm')
+    tag = short_tag(s); tf = serif(28, 600)
+    while sum(d.textlength(c, font=tf) for c in tag) + 5 * len(tag) > MW and tf.size > 18: tf = serif(tf.size - 1, 600)
+    spaced(d, (C, 70), tag, tf, INK, 5, 'm')
+    y = 114
+    if head:
+        hf, HL = fit(d, head, lambda z: serif(z, 500), MW, 56, 36, 1)
+        d.text((C, y), HL[0], font=hf, fill=NAVY, anchor='ma', features=['lnum']); y += int(hf.size * 1.08)
+    bf, BL = fit(d, big, lambda z: serif(z, 600), MW, 104 if len(big) < 16 else 84, 52, 1)
+    for l in BL:
+        d.text((C + 3, y + 3), l, font=bf, fill=(255, 255, 255), anchor='ma', features=['lnum']); d.text((C, y), l, font=bf, fill=ORANGE, anchor='ma', features=['lnum']); y += int(bf.size * 0.98)
+    y += int(bf.size * 0.2)
+    if scr:
+        sf, SL = fit(d, scr, script, MW - 80, 60, 36, 1)
+        d.text((C + 120, y - int(bf.size * 0.3)), SL[0], font=sf, fill=ORANGE, anchor='ma'); y += int(sf.size * 1.1)
+    y += 6
+    if lead:
+        lf, LL = fit(d, lead, lambda z: sans(z, 'ExtraBold'), MW, 32, 22, 1)
+        for l in LL: d.text((C, y), l, font=lf, fill=INK, anchor='ma'); y += int(lf.size * 1.3)
+    st = s.get('stats') or []
+    if st:
+        stats_row(d, (70, W - 70), y + 18, st[:3], serif(56, 600), sans(22, 'Medium'), MW)
+    contact(im, (32, H - 130, W - 32, H - 28), s.get('src') or s.get('cap', ''), 1.05)
+    return im
+
+
 for s in json.load(open(J)):
     if MODE in ('web', 'ca-hai'):
         p = s['out'] if s['out'].startswith('/') else (f"{HERE}/../{s['out']}" if s['out'].startswith('tu-dong/') else f"{IMG}/{s['out']}")
@@ -228,4 +269,8 @@ for s in json.load(open(J)):
         p = s.get('out_fb') or re.sub(r'\.jpg$', '-fb.jpg', s['out'])
         p = p if p.startswith('/') else (f"{HERE}/../{p}" if p.startswith('tu-dong/') else f'{IMG}/{p}')
         fb(s).convert('RGB').save(p, quality=88, optimize=True, progressive=True)
+    if MODE == '4x3':
+        p = s.get('out_43') or re.sub(r'\.jpg$', '-4x3.jpg', s['out'])
+        p = p if p.startswith('/') else (f"{HERE}/../{p}" if p.startswith('tu-dong/') else f'{IMG}/{p}')
+        t43(s).convert('RGB').save(p, quality=86, optimize=True, progressive=True)
     print(s['slug'])

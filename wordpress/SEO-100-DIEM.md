@@ -40,3 +40,7 @@ Khi bài lên web, `seo-bai-viet.php` tự: đưa từ khoá vào tiêu đề / 
 
 - **Không đăng bảng giá đầy đủ** (giá từng căn, giá theo từng phương án vay). Chỉ đưa **con số thấp nhất**: "chỉ từ X tỷ" (ghi rõ đã gồm VAT hay chưa) để khách tò mò liên hệ; phần còn lại ghi "liên hệ Hoàng Hiệp nhận bảng giá từng căn".
 - Chiết khấu, tiến độ thanh toán, ưu đãi trong chính sách bán hàng vẫn được đăng.
+
+## Ảnh tin Mua bán / Cho thuê (anh Hiệp 16/11/2026)
+
+- Dùng **mẫu thẻ tin thống nhất** (`bai-viet/the-tin-tuc.py`, khổ `4x3` → `img/nha-dat/<tên>-4x3.jpg`; khổ `fb` cho bài Facebook). Spec lưu ở `bai-viet/the-tin-tuc-tin-rao.json`. Không dùng thẻ nền xanh navy kiểu cũ. Ô giá chỉ ghi "giá chỉ từ".
