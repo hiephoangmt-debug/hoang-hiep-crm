@@ -98,5 +98,7 @@
 | CHỜ | Hoàng Hiệp | 17/11 | (bài web 16/11 14:00) Hudson Place hay Broadway Place – Capital Square | hudson-place-hay-broadway-place-capital-square (chờ) |
 | CHỜ | Sun | 17/11 | (bài web 16/11 16:30; không đủ giãn cách hôm nay) Digital nomad Đà Nẵng thuê căn hộ Sun Saphia | digital-nomad-da-nang-thue-can-ho-sun-saphia (chờ) |
 | CHỜ | Hoàng Hiệp | 17/11 | (bài web 16/11 18:30) FTZ Đà Nẵng tác động căn hộ ven biển 2026 | ftz-da-nang-tac-dong-can-ho-ven-bien-2026 (chờ) |
+| 17/11/2026 | Sun | 10:30 | (bài web 03/11) Giá phòng khách sạn gần biển Đà Nẵng theo mùa – biểu đồ nền xanh (anh Hiệp gửi, vẽ lại, ghi chú pháp lý cho thuê) | /gia-phong-khach-san-ven-bien-da-nang-2026/ |
+| 17/11/2026 | TikTok (@hiephoangmt, brand Sun) | 10:45 | Giá phòng khách sạn ven biển theo mùa – bài ảnh | /gia-phong-khach-san-ven-bien-da-nang-2026/ |
 | 17/11/2026 | Sun (Reels) | 20:00 | Video phân tích #01 "Vì sao Sơn Thủy là tọa độ mới ven biển Đà Nẵng?" – avatar HeyGen + bản đồ navy v5, 72s, ghi chú nội dung AI (Metricool 428780189) | /du-an/sun-saphia-residence/ |
 | 17/11/2026 | TikTok (@hiephoangmt, brand Sun) | 20:15 | Video phân tích #01 (isAigc = true, nội dung thương hiệu) (Metricool 428780287) | /du-an/sun-saphia-residence/ |
