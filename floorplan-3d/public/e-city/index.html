@@ -409,7 +409,8 @@ const CUR_SAT = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imag
 async function initYears() {
   try { YI = await (await fetch('data/info.json')).json(); } catch (e) { YI = {}; }
   let WB = []; try { WB = await (await fetch('data/wayback.json')).json(); } catch (e) {}
-  WB.filter((w) => w.url).reverse().forEach((w, i) => { const o = document.createElement('option'); o.value = w.url; const d = (w.captured || w.published || '').split('-'); o.textContent = w.captured && d.length === 3 ? `Ảnh chụp ${d[2]}/${d[1]}/${d[0]}` : `Bản lưu ${(w.published || '').split('-').reverse().join('/')}`; $('ysat').appendChild(o); });
+  const seenCap = new Set(); WB = WB.filter((w) => w.url).reverse().filter((w) => { const k = w.captured || w.published; if (seenCap.has(k)) return false; seenCap.add(k); return true; });
+  WB.forEach((w, i) => { const o = document.createElement('option'); o.value = w.url; o.dataset.y = (w.captured || w.published || '').slice(0, 4); const d = (w.captured || w.published || '').split('-'); o.textContent = w.captured && d.length === 3 ? `Ảnh chụp ${d[2]}/${d[1]}/${d[0]}` : `Bản lưu ${(w.published || '').split('-').reverse().join('/')}`; $('ysat').appendChild(o); });
   if (!WB.length) { $('ysat').disabled = true; $('ysatnote').textContent = 'Đang cập nhật danh sách ảnh vệ tinh theo năm.'; }
   if (YI.dothihoa) {
     const [w, s, e, n] = YI.dothihoa.bounds;
@@ -424,7 +425,7 @@ async function initYears() {
     playT = setInterval(() => { y += 5; if (y > 2030) { clearInterval(playT); playT = null; $('yplay').textContent = '▶ Chạy 1975 → 2030'; return; } setYear(y); }, 1400);
   };
   $('ylayer').onclick = () => { const on = map.getLayoutProperty('dth', 'visibility') !== 'visible'; map.setLayoutProperty('dth', 'visibility', on ? 'visible' : 'none'); $('ylayer').classList.toggle('pri', on); $('ylegend').style.display = on ? 'block' : 'none'; };
-  $('ysat').onchange = () => setSat($('ysat').value);
+  $('ysat').onchange = () => { setSat($('ysat').value); const y = +($('ysat').selectedOptions[0].dataset.y || 0); if (y) setYear(Math.min(2025, Math.floor(y / 5) * 5)); };
   $('yab').onclick = () => { const cur = $('ysat').value, opts = [...$('ysat').options].map((o) => o.value).filter(Boolean); const tgt = cur ? abPrev : abPrev || opts[0] || ''; abPrev = cur; $('ysat').value = tgt; setSat(tgt); };
   $('ynow').onclick = () => { $('ysat').value = ''; setSat(''); $('yr').value = 2025; setYear(2025); };
 }
