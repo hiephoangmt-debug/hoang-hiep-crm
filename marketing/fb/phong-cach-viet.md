@@ -79,3 +79,12 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 ## TÔNG NỀN XANH (anh Hiệp chốt 15/11/2026) – mặc định cho MỌI ảnh có chữ, cả 3 trang và TikTok
 - Lệnh: `python3 wordpress/bai-viet/fb-the-doc-v2.py poster-xanh <cau-hinh.json> <anh-dai-dien.jpg> <anh-nen.jpg> marketing/fb/<slug>-x.jpg` (bố cục poster ở mục trên, nền xanh trời nhạt – trắng, chữ cam đồng + navy, chữ cỡ lớn).
 - Ảnh nền Sun Saphia: ưu tiên flycam thực tế đã chỉnh màu trong marketing/anh-thuc-te/sun-saphia-flycam-17-10-2026/.
+
+## PHÁP LÝ CĂN HỘ TRÊN ĐẤT THƯƠNG MẠI DỊCH VỤ (anh Hiệp 16/11/2026: "sửa lại đầy đủ nhất, theo luật")
+Áp dụng cho Sun Saphia Residence, Symphony 5, Peninsula Private, Nobu… và mọi căn hộ/condotel trên đất thương mại dịch vụ:
+- KHÔNG viết "để ở được", "câu trả lời là được", "như chung cư". Viết: "có thể dùng để sinh sống, nhưng về pháp lý không phải căn hộ chung cư nhà ở".
+- Thời hạn: "thời hạn sử dụng đất của dự án 50 năm từ …" (Luật Đất đai 2024: dự án đầu tư không quá 50 năm); gia hạn = "dự kiến, theo quy định đất đai khi hết hạn", không nói "chắc chắn gia hạn".
+- Tạm trú: luôn ghi "theo chủ đầu tư". Thường trú: "do công an phường xem xét, chưa chắc được – nên hỏi trước khi mua và xem mục đích sử dụng trên giấy chứng nhận".
+- Bảo lãnh ngân hàng: bắt buộc với nhà ở hình thành trong tương lai; với loại này "nên hỏi chủ đầu tư có bảo lãnh không".
+- Cho thuê theo đêm = kinh doanh lưu trú (Luật Du lịch 2017, thông báo lưu trú, thuế) – không viết như việc tự do; cam kết thuê/ủy thác luôn ghi "theo chính sách chủ đầu tư, không phải cam kết của Hiệp".
+- Cuối bài có yếu tố pháp lý: "Thông tin tham khảo, không thay thế tư vấn pháp lý".
