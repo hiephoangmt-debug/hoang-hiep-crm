@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>e-City Đà Nẵng</title>
 <meta name="description" content="Bản đồ số 3D Đà Nẵng: khối nhà toàn thành phố, nền địa hình, ranh phường, công trình biểu tượng và dự án bất động sản." />
-<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
@@ -60,6 +60,25 @@
   .acts a { flex: 1; text-align: center; text-decoration: none; padding: 9px 10px; border-radius: 8px; font-size: 13px; font-weight: 600; background: var(--acc); color: #fff; }
   .acts a.alt { background: #ffffff14; color: var(--fg); }
   .note { font-size: 11px; color: var(--muted); margin-top: 10px; }
+  .flood { right: 12px; top: 56px; width: min(330px, calc(100vw - 80px)); padding: 14px; display: none; max-height: calc(100vh - 100px); overflow: auto; }
+  .flood h3, .ab h3 { margin: 2px 0 10px; font-size: 18px; }
+  .flood select, .ab select { width: 100%; height: 34px; border-radius: 8px; border: 1px solid var(--line); background: #ffffff0d; color: var(--fg); padding: 0 8px; font: 13px Inter, sans-serif; }
+  .flood option, .ab option { background: #0f1a2c; }
+  .sl { margin: 12px 0 4px; font-size: 12.5px; font-weight: 600; display: flex; justify-content: space-between; } .sl b { color: var(--acc); }
+  .flood input[type=range] { width: 100%; accent-color: var(--acc); }
+  .ticks { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--muted); }
+  .warn { margin: 10px 0; padding: 8px 10px; border-radius: 8px; border: 1px solid #f0a53a66; background: #f0a53a14; color: #ffcf7a; font-size: 12px; }
+  .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 10px; } .btns button { border: 1px solid var(--line); background: #ffffff0d; border-radius: 8px; padding: 8px; cursor: pointer; font-size: 12.5px; }
+  .btns button.pri { background: #1f5fae; border-color: #2f74c8; } .btns .full { grid-column: 1 / -1; }
+  .ab { right: 12px; top: 56px; width: min(380px, calc(100vw - 80px)); padding: 14px; display: none; max-height: calc(100vh - 100px); overflow: auto; }
+  .ab table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 10px; } .ab td, .ab th { border-bottom: 1px solid var(--line); padding: 6px 4px; vertical-align: top; text-align: left; } .ab th { color: var(--muted); font-weight: 500; width: 30%; }
+  .ab .win { color: #7ee08a; font-weight: 600; }
+  .pcats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin: 8px 0; }
+  .pcats button { display: flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: #ffffff08; border-radius: 8px; padding: 6px 8px; cursor: pointer; font-size: 12px; text-align: left; }
+  .pcats button.on { border-color: var(--acc); background: #4c9cff22; } .pcats b { margin-left: auto; }
+  .tag { display: inline-grid; place-items: center; min-width: 24px; height: 18px; border-radius: 4px; font-size: 10px; font-weight: 700; border: 1px solid #ffffff40; }
+  .plist { max-height: 220px; overflow: auto; margin-top: 6px; } .plist .row { cursor: pointer; }
+  .wsearch { width: 100%; height: 32px; border-radius: 8px; border: 1px solid var(--line); background: #ffffff0d; color: var(--fg); padding: 0 10px; font: 12.5px Inter, sans-serif; margin-top: 6px; }
   .toast { position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); background: var(--panel); border: 1px solid var(--line); padding: 8px 14px; border-radius: 10px; font-size: 13px; z-index: 20; display: none; }
   .load { position: fixed; inset: 0; display: grid; place-items: center; background: var(--bg); z-index: 30; font-size: 14px; color: var(--muted); }
   .maplibregl-ctrl-scale { background: #0d1626cc; color: var(--fg); border-color: var(--fg); font-size: 10px; }
@@ -95,6 +114,8 @@
   <button data-m="khuvuc"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><span>Khu<br>vực</span></button>
   <button data-m="thamquan"><svg viewBox="0 0 24 24"><path d="M7 4l12 8-12 8z"/></svg><span>Tham<br>quan</span></button>
   <button data-m="phantich"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Phân<br>tích</span></button>
+  <button data-m="nam"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Theo<br>năm</span></button>
+  <button data-m="ab"><svg viewBox="0 0 24 24"><path d="M4 6h7v12H4zM13 6h7v12h-7z"/></svg><span>So sánh<br>A/B</span></button>
   <button data-m="dulieu"><svg viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5zM3 13l9 5 9-5M3 17.5l9 5 9-5"/></svg><span>Dữ liệu</span></button>
 </nav>
 <div id="map"></div>
@@ -112,10 +133,30 @@
 </div>
 <div class="panel tour" id="tour"><h4>Tham quan</h4></div>
 <div class="panel card" id="card"><button class="x" id="cx" aria-label="Đóng">✕</button><div id="cbody"></div></div>
+<div class="panel flood" id="years">
+  <h4>Tương lai · lịch sử đô thị</h4><h3>Đà Nẵng thay đổi qua các năm</h3>
+  <div class="sl">Đô thị hoá 3D <b id="yv">2025</b></div>
+  <input type="range" id="yr" min="1975" max="2030" step="5" value="2025" />
+  <div class="ticks"><span>1975</span><span>1990</span><span>2000</span><span>2010</span><span>2025</span><span>2030 QH</span></div>
+  <div class="btns"><button class="pri" id="yplay">▶ Chạy 1975 → 2030</button><button id="ylayer">▦ Lớp màu theo năm</button></div>
+  <div class="kpis"><div class="kpi"><span>Toà nhà đã có</span><b id="ycnt">–</b></div><div class="kpi"><span>Mới xuất hiện trong mốc</span><b id="ynew">–</b></div></div>
+  <div id="ylegend" style="display:none;margin:6px 0"></div>
+  <div class="warn" id="ynote">Năm xuất hiện tính theo ô 100 m từ dữ liệu vệ tinh GHSL (EU JRC), độ chính xác theo khu vực, không phải từng căn.</div>
+  <h4 style="margin-top:12px">Ảnh vệ tinh theo năm (ảnh thật)</h4>
+  <select id="ysat"><option value="">Ảnh mới nhất</option></select>
+  <div class="btns"><button id="yab">⇄ Trước / sau</button><button id="ynow">↺ Về hiện tại</button></div>
+  <div class="note" id="ysatnote">Ảnh lưu trữ Esri World Imagery Wayback – ngày chụp tại trung tâm Đà Nẵng.</div>
+</div>
+<div class="panel ab" id="ab">
+  <h4>Đánh giá phương án A/B</h4><h3>So sánh 2 dự án</h3>
+  <select id="abA"></select><div style="height:6px"></div><select id="abB"></select>
+  <div id="abT"></div>
+  <div class="note">Khoảng cách tính theo đường chim bay. Giá, quy mô theo thông tin tham khảo của từng dự án.</div>
+</div>
 <div class="toast" id="toast"></div>
-<footer class="status"><b id="stArea">Đà Nẵng</b><span class="zoomtxt" id="stZoom">Zoom 12</span><span>Khối nhà gần đúng · chi tiết thích nghi</span><span class="src">Copernicus/AWS Terrain · Overture · OpenStreetMap · Esri</span></footer>
+<footer class="status"><b id="stArea">Đà Nẵng</b><span class="zoomtxt" id="stZoom">Zoom 12</span><span>Khối nhà gần đúng · chi tiết thích nghi</span><span class="src">GHSL (EU JRC) · AWS Terrain · Overture · OpenStreetMap · Esri</span></footer>
 
-<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
 <script src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"></script>
 <script src="../da-nang-3d/projects.js"></script>
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/" } }</script>
@@ -153,8 +194,8 @@ const map = new maplibregl.Map({
     sources: {
       ofm: { type: 'vector', url: 'https://tiles.openfreemap.org/planet' },
       sat: { type: 'raster', tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'], tileSize: 256, maxzoom: 19, attribution: '© Esri' },
-      dem: { type: 'raster-dem', tiles: ['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'], encoding: 'terrarium', tileSize: 256, maxzoom: 14 },
-      demh: { type: 'raster-dem', tiles: ['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'], encoding: 'terrarium', tileSize: 256, maxzoom: 14 },
+      dem: { type: 'raster-dem', tiles: ['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'], encoding: 'terrarium', tileSize: 256, maxzoom: 12 },
+      demh: { type: 'raster-dem', tiles: ['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'], encoding: 'terrarium', tileSize: 256, maxzoom: 12 },
       b: { type: 'vector', url: 'pmtiles://data/buildings.pmtiles' },
       prj: { type: 'geojson', data: projectBlocks() },
     },
@@ -233,6 +274,16 @@ map.on('style.load', async () => { if (inited) return; inited = true;
     map.addLayer({ id: 'dp-lbl', type: 'symbol', source: 'dp', layout: { 'text-field': ['get', 'name'], 'text-font': ['Noto Sans Regular'], 'text-size': 12, 'text-offset': [0, -1.3], 'text-anchor': 'bottom', 'text-allow-overlap': false },
       paint: { 'text-color': '#ffd98f', 'text-halo-color': '#0b1220', 'text-halo-width': 1.8 } });
   } catch (e) { console.warn('chưa có dự án', e); }
+  try { WINFO = Object.fromEntries((await (await fetch('data/phuong-info.json')).json()).map((w) => [w.name, w])); } catch (e) {}
+  try {
+    const pj = await (await fetch('data/poi.geojson')).json();
+    POI = pj.features.map((f, i) => { const w = WARDS.find((x) => inPoly(f.geometry.coordinates, x.geometry)); return { ...f, id: i, properties: { ...f.properties, w: w ? w.properties.name : '', col: CATS[f.properties.c][1] } }; }).filter((f) => f.properties.w);
+    map.addSource('poi', { type: 'geojson', data: { type: 'FeatureCollection', features: POI } });
+    map.addLayer({ id: 'poi', type: 'circle', source: 'poi', layout: { visibility: 'none' }, paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 12, 3.5, 17, 9], 'circle-color': '#0f1a2c', 'circle-stroke-color': ['get', 'col'], 'circle-stroke-width': 2, 'circle-pitch-alignment': 'viewport' } });
+    map.addLayer({ id: 'poi-lbl', type: 'symbol', source: 'poi', layout: { visibility: 'none', 'text-field': ['step', ['zoom'], ['get', 'c'], 15.5, ['concat', ['get', 'c'], ' · ', ['get', 'n']]], 'text-font': ['Noto Sans Regular'], 'text-size': 10.5, 'text-offset': [0, 1.2], 'text-anchor': 'top', 'text-optional': true },
+      paint: { 'text-color': ['get', 'col'], 'text-halo-color': '#05080f', 'text-halo-width': 1.4 } });
+  } catch (e) { console.warn('chưa có tiện ích', e); }
+  initYears(); initAB();
   $('load').style.display = 'none';
   upd();
 });
@@ -244,21 +295,51 @@ let selW = null;
 function wardAt(ll) { return WARDS.find((f) => inPoly(ll, f.geometry)); }
 function upd() { const c = map.getCenter(), w = wardAt([c.lng, c.lat]); $('stArea').textContent = w ? w.properties.name : 'Đà Nẵng'; $('stZoom').textContent = 'Zoom ' + map.getZoom().toFixed(1); }
 map.on('moveend', upd);
+const CATS = { HC: ['Hành chính', '#6fa8ff'], AT: ['An toàn · PCCC', '#ff7a72'], YT: ['Y tế', '#ff9ec7'], GD: ['Giáo dục', '#ffd166'], GT: ['Giao thông', '#8fd3ff'], TM: ['Chợ · thương mại', '#f2a33a'], CC: ['Không gian công cộng', '#7ee08a'], KT: ['Hạ tầng kỹ thuật', '#c6a6ff'] };
+let POI = [], WINFO = {}, catOn = null;
+function wardMask(f) {   // làm tối mọi thứ ngoài phường -> phường nổi lên như một khối đảo
+  const holes = (f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates).map((p) => p[0]);
+  const data = { type: 'Feature', geometry: { type: 'Polygon', coordinates: [[[100, 10], [116, 10], [116, 22], [100, 22], [100, 10]], ...holes] } };
+  if (map.getSource('mask')) map.getSource('mask').setData(data);
+  else { map.addSource('mask', { type: 'geojson', data }); map.addLayer({ id: 'mask', type: 'fill', source: 'mask', paint: { 'fill-color': '#05080f', 'fill-opacity': 0.62 } }, 'road-minor'); }
+  map.setLayoutProperty('mask', 'visibility', 'visible');
+}
+function poiFilter(ward, cat) {
+  if (!map.getLayer('poi')) return;
+  const ids = POI.filter((p) => (!ward || p.properties.w === ward) && (!cat || p.properties.c === cat)).map((p) => p.id);
+  map.setFilter('poi', ['in', ['id'], ['literal', ids]]); map.setFilter('poi-lbl', ['in', ['id'], ['literal', ids]]);
+  map.setLayoutProperty('poi', 'visibility', 'visible'); map.setLayoutProperty('poi-lbl', 'visibility', 'visible');
+}
 function selectWard(f) {
   if (selW !== null) map.setFeatureState({ source: 'w', id: selW }, { sel: false });
-  selW = f.id; map.setFeatureState({ source: 'w', id: f.id }, { sel: true });
-  const prj = PROJ.filter((p) => inPoly(p.geometry.coordinates, f.geometry));
-  $('crumb').textContent = 'Đà Nẵng · ' + f.properties.name + ' · 3D';
-  $('cbody').innerHTML = `<h4>Địa bàn</h4><h3></h3><div class="sub">Đơn vị hành chính sau sắp xếp 2025 · ranh theo OpenStreetMap</div>
-    <div class="kpis"><div class="kpi"><span>Diện tích (đo theo ranh)</span><b>${f.properties.km2.toLocaleString('vi-VN')} km²</b></div><div class="kpi"><span>Dự án đang theo dõi</span><b>${prj.length}</b></div>
-    <div class="kpi"><span>Dân số</span><b>${f.properties.pop ? (+f.properties.pop).toLocaleString('vi-VN') : '—'}</b></div><div class="kpi"><span>Mã ĐVHC</span><b>${f.properties.ref || '—'}</b></div></div>
-    <div id="wprj"></div><div class="note">Dân số lấy từ OSM nếu có; "—" là chưa có dữ liệu.</div>`;
-  $('cbody').querySelector('h3').textContent = f.properties.name;
+  selW = f.id; map.setFeatureState({ source: 'w', id: f.id }, { sel: true }); wardMask(f); catOn = null;
+  const nm = f.properties.name, info = WINFO[nm] || {}, prj = PROJ.filter((p) => inPoly(p.geometry.coordinates, f.geometry)), mine = POI.filter((p) => p.properties.w === nm);
+  $('crumb').textContent = 'Đà Nẵng · ' + nm + ' · Địa bàn điều hành';
+  const fmt = (v) => (v || v === 0 ? (+v).toLocaleString('vi-VN') : '—');
+  $('cbody').innerHTML = `<h4>Địa bàn điều hành</h4><h3></h3><div class="sub" id="wsub"></div>
+    <div class="kpis"><div class="kpi"><span>Dân số</span><b>${fmt(info.population)}</b></div><div class="kpi"><span>Diện tích tự nhiên</span><b>${info.area_km2 ? fmt(info.area_km2) + ' km²' : f.properties.km2.toLocaleString('vi-VN') + ' km²*'}</b></div>
+    <div class="kpi"><span>Mật độ</span><b>${info.population && info.area_km2 ? fmt(Math.round(info.population / info.area_km2)) + '/km²' : '—'}</b></div><div class="kpi"><span>Y tế · giáo dục</span><b>${mine.filter((p) => p.properties.c === 'YT' || p.properties.c === 'GD').length}</b></div></div>
+    <h4 style="margin-top:12px">Hạ tầng đô thị · ${mine.length} điểm</h4><div class="pcats" id="pcats"></div>
+    <input class="wsearch" id="wq" placeholder="Tìm tên hoặc loại đối tượng" /><div class="plist" id="wlist"></div>
+    <h4 style="margin-top:12px">Công trình · dự án (${prj.length})</h4><div id="wprj"></div>
+    <div class="note" id="wnote"></div>`;
+  $('cbody').querySelector('h3').textContent = nm;
+  $('wsub').textContent = info.formed_from ? 'Sắp xếp 2025 từ: ' + info.formed_from : 'Đơn vị hành chính sau sắp xếp 2025';
+  $('wnote').textContent = (info.source ? 'Dân số, diện tích: ' + info.source + '. ' : '* Diện tích đo theo ranh OpenStreetMap (chưa có số công bố). ') + 'Hạ tầng: OpenStreetMap, có thể chưa đầy đủ.';
+  const list = (q) => { const box = $('wlist'); box.innerHTML = ''; mine.filter((p) => (!catOn || p.properties.c === catOn) && (!q || (p.properties.n + ' ' + CATS[p.properties.c][0]).toLowerCase().includes(q))).slice(0, 80).forEach((p) => {
+    const r = document.createElement('div'); r.className = 'row'; r.innerHTML = '<span></span><small></small>'; r.firstChild.textContent = p.properties.n || '(chưa có tên)'; r.lastChild.textContent = CATS[p.properties.c][0];
+    r.onclick = () => map.flyTo({ center: p.geometry.coordinates, zoom: 17, pitch: 60, duration: 1200 }); box.appendChild(r); }); };
+  Object.entries(CATS).forEach(([k, [t, col]]) => { const n = mine.filter((p) => p.properties.c === k).length; const b = document.createElement('button'); b.innerHTML = `<span class="tag" style="color:${col}">${k}</span><span></span><b>${n}</b>`; b.children[1].textContent = t;
+    b.onclick = () => { catOn = catOn === k ? null : k; document.querySelectorAll('#pcats button').forEach((x) => x.classList.toggle('on', x === b && catOn)); poiFilter(nm, catOn); list($('wq').value.trim().toLowerCase()); }; $('pcats').appendChild(b); });
+  $('wq').oninput = () => list($('wq').value.trim().toLowerCase()); list('');
   const box = $('wprj'); prj.forEach((p) => { const r = document.createElement('div'); r.className = 'row'; r.style.cursor = 'pointer'; r.innerHTML = '<span></span><small></small>'; r.firstChild.textContent = p.properties.name; r.lastChild.textContent = [p.properties.scale, p.properties.price].filter(Boolean).join(' · '); r.onclick = () => showProject(p); box.appendChild(r); });
-  $('card').style.display = 'block';
+  if (!prj.length) box.innerHTML = '<div class="row"><small>Chưa có dự án đang theo dõi</small></div>';
+  poiFilter(nm, null); panels('card');
   const b = new maplibregl.LngLatBounds(); (f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates).forEach((p) => p[0].forEach((q) => b.extend(q)));
-  map.fitBounds(b, { padding: 60, pitch: 55, duration: 1400 });
+  map.fitBounds(b, { padding: { top: 60, bottom: 60, left: 60, right: innerWidth > 640 ? 380 : 60 }, pitch: 55, duration: 1400 });
 }
+function clearWard() { if (selW !== null) map.setFeatureState({ source: 'w', id: selW }, { sel: false }); selW = null; if (map.getLayer('mask')) map.setLayoutProperty('mask', 'visibility', 'none'); ['poi', 'poi-lbl'].forEach((l) => map.getLayer(l) && map.setLayoutProperty(l, 'visibility', 'none')); $('crumb').textContent = 'Đà Nẵng · Toàn thành phố · 3D'; }
+function panels(show) { ['card', 'years', 'ab', 'tour'].forEach((id) => ($(id).style.display = id === show ? 'block' : 'none')); }
 function showProject(p) {
   const q = p.properties, [lon, lat] = p.geometry.coordinates;
   $('cbody').innerHTML = `<h4>Dự án</h4><h3></h3><div class="sub"></div><div id="prow"></div>
@@ -266,7 +347,7 @@ function showProject(p) {
   $('cbody').querySelector('h3').textContent = q.name; $('cbody').querySelector('.sub').textContent = q.area || '';
   for (const [k, v] of [['Quy mô', q.scale], ['Giá tham khảo', q.price], ['Điểm nổi bật', q.headline]]) if (v) { const r = document.createElement('div'); r.className = 'row'; r.innerHTML = '<small></small><span></span>'; r.firstChild.textContent = k; r.lastChild.textContent = v; $('prow').appendChild(r); }
   if (q.url) { const a = document.createElement('a'); a.className = 'alt'; a.href = q.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = '🌐 Trang dự án'; $('plinks').appendChild(a); }
-  $('card').style.display = 'block';
+  panels('card');
   map.flyTo({ center: [lon, lat], zoom: 16.2, pitch: 62, duration: 1600 });
 }
 map.on('click', (e) => {
@@ -274,7 +355,7 @@ map.on('click', (e) => {
   if (hit.length) { const p = PROJ.find((x) => x.properties.name === hit[0].properties.name); if (p) return showProject(p); }
   const w = wardAt([e.lngLat.lng, e.lngLat.lat]); if (w && map.getLayer('w-fill') && map.getLayoutProperty('w-fill', 'visibility') !== 'none') selectWard(w);
 });
-$('cx').onclick = () => { $('card').style.display = 'none'; };
+$('cx').onclick = () => { $('card').style.display = 'none'; clearWard(); };
 
 // ---- lọc lớp ----
 const LAYERS = { nha: ['b3d', 'blbl'], sat: ['sat'], phuong: ['w-fill', 'w-line', 'w-lbl'], duong: ['road-minor', 'road-major'], duan: ['dp-dot', 'dp-lbl', 'prj3d'], bieutuong: ['bieutuong'] };
@@ -303,12 +384,15 @@ TOUR.forEach(([t, v]) => { const b = document.createElement('button'); b.textCon
 // ---- thanh trái ----
 document.querySelectorAll('#rail button').forEach((b) => (b.onclick = () => {
   document.querySelectorAll('#rail button').forEach((x) => x.classList.toggle('on', x === b));
-  const m = b.dataset.m; $('tour').style.display = m === 'thamquan' ? 'block' : 'none';
+  const m = b.dataset.m; panels(m === 'thamquan' ? 'tour' : m === 'nam' || m === 'tuonglai' ? 'years' : m === 'ab' ? 'ab' : null); yearsMode(m === 'nam' || m === 'tuonglai');
+  if (m !== 'khuvuc') clearWard();
   if (m === 'khuvuc') { if (!WARDS.length) return toast('Đang tải ranh phường…'); toast('Bấm vào một phường trên bản đồ để xem địa bàn'); map.flyTo({ center: [108.215, 16.045], zoom: 11.6, pitch: 45, bearing: 0, duration: 1500 }); }
-  else if (m === 'dieuhanh') { $('card').style.display = 'none'; }
-  else if (m !== 'thamquan') toast('Phần này đang được xây dựng (bước tiếp theo)');
+  else if (m === 'nam' || m === 'tuonglai') { map.flyTo({ center: [108.222, 16.05], zoom: 13.2, pitch: 58, bearing: -15, duration: 1800 }); if (m === 'tuonglai') setYear(2030); }
+  else if (m === 'ab') renderAB();
+  else if (m === 'dulieu') showData();
+  else if (!['dieuhanh', 'thamquan'].includes(m)) toast('Phần này sẽ có ở bản sau');
 }));
-$('dashBtn').onclick = () => toast('Dashboard đang được xây dựng (bước tiếp theo)');
+$('dashBtn').onclick = () => showData();
 
 // ---- tìm kiếm ----
 $('q').oninput = () => {
@@ -319,7 +403,81 @@ $('q').oninput = () => {
   items.forEach(([n, k, fn]) => { const b = document.createElement('button'); b.innerHTML = '<span></span><small></small>'; b.firstChild.textContent = n; b.lastChild.textContent = k; b.onclick = () => { box.style.display = 'none'; $('q').value = ''; fn(); }; box.appendChild(b); });
   box.style.display = items.length ? 'block' : 'none';
 };
-window.ecity = { map };
+// ---- Thay đổi qua các năm ----
+let YI = null, playT = null, abPrev = '';
+const CUR_SAT = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+async function initYears() {
+  try { YI = await (await fetch('data/info.json')).json(); } catch (e) { YI = {}; }
+  (YI.wayback || []).filter((w) => w.url).forEach((w, i) => { const o = document.createElement('option'); o.value = w.url; const d = (w.captured || w.published || '').split('-'); o.textContent = d.length === 3 ? `Chụp ${d[2]}/${d[1]}/${d[0]}` : (w.captured || w.published); $('ysat').appendChild(o); });
+  if (YI.dothihoa) {
+    const [w, s, e, n] = YI.dothihoa.bounds;
+    map.addSource('dth', { type: 'image', url: 'data/do-thi-hoa.png', coordinates: [[w, n], [e, n], [e, s], [w, s]] });
+    map.addLayer({ id: 'dth', type: 'raster', source: 'dth', layout: { visibility: 'none' }, paint: { 'raster-opacity': 0.75, 'raster-resampling': 'nearest' } }, 'road-minor');
+    $('ylegend').innerHTML = Object.entries(YI.dothihoa.palette).map(([y, c]) => `<span style="display:inline-flex;align-items:center;gap:4px;margin:0 8px 4px 0;font-size:11px"><i style="width:12px;height:12px;border-radius:3px;background:${c};display:inline-block"></i>${y < 2025 ? 'đến ' + y : '2025'}</span>`).join('');
+  } else $('ylayer').disabled = true;
+  $('yr').oninput = () => setYear(+$('yr').value);
+  $('yplay').onclick = () => {
+    if (playT) { clearInterval(playT); playT = null; $('yplay').textContent = '▶ Chạy 1975 → 2030'; return; }
+    let y = 1975; setYear(y); $('yplay').textContent = '⏸ Dừng';
+    playT = setInterval(() => { y += 5; if (y > 2030) { clearInterval(playT); playT = null; $('yplay').textContent = '▶ Chạy 1975 → 2030'; return; } setYear(y); }, 1400);
+  };
+  $('ylayer').onclick = () => { const on = map.getLayoutProperty('dth', 'visibility') !== 'visible'; map.setLayoutProperty('dth', 'visibility', on ? 'visible' : 'none'); $('ylayer').classList.toggle('pri', on); $('ylegend').style.display = on ? 'block' : 'none'; };
+  $('ysat').onchange = () => setSat($('ysat').value);
+  $('yab').onclick = () => { const cur = $('ysat').value, opts = [...$('ysat').options].map((o) => o.value).filter(Boolean); const tgt = cur ? abPrev : abPrev || opts[0] || ''; abPrev = cur; $('ysat').value = tgt; setSat(tgt); };
+  $('ynow').onclick = () => { $('ysat').value = ''; setSat(''); $('yr').value = 2025; setYear(2025); };
+}
+function setSat(url) { const src = map.getSource('sat'); if (src && src.setTiles) src.setTiles([url || CUR_SAT]); const o = $('ysat').selectedOptions[0]; $('ysatnote').textContent = url ? 'Đang xem ảnh vệ tinh ' + o.textContent.toLowerCase() + ' (Esri World Imagery Wayback).' : 'Ảnh vệ tinh mới nhất (Esri World Imagery).'; if (map.getLayoutProperty('sat', 'visibility') === 'none') map.setLayoutProperty('sat', 'visibility', 'visible'); }
+function setYear(y) {
+  $('yr').value = y; $('yv').textContent = y === 2030 ? '2030 · quy hoạch' : y;
+  const Y = ['coalesce', ['get', 'y'], 2025], yy = Math.min(y, 2025);
+  map.setFilter('b3d', ['<=', Y, yy]); map.setFilter('blbl', ['all', ['has', 'n'], ['<=', Y, yy]]);
+  map.setPaintProperty('b3d', 'fill-extrusion-color', ['case', ['all', ['==', Y, yy], ['<', yy, 2025]], '#ffb347', ['has', 'n'], '#7fa6d8', ['interpolate', ['linear'], ['get', 'h'], 4, '#e8d9bf', 14, '#e9e2d4', 30, '#d9dfe8', 80, '#b9c8dc']]);
+  const fut = y >= 2030; ['prj3d', 'bieutuong'].forEach((l) => map.getLayer(l) && map.setLayoutProperty(l, 'visibility', fut || y >= 2025 ? 'visible' : 'none'));
+  if (map.getLayer('prj3d')) map.setPaintProperty('prj3d', 'fill-extrusion-opacity', fut ? 0.97 : 0.97);
+  const ys = (YI && YI.years) || {}; let c = 0; Object.entries(ys).forEach(([k, v]) => { if (+k <= yy) c += v; });
+  $('ycnt').textContent = c ? c.toLocaleString('vi-VN') : '–'; $('ynew').textContent = y >= 2030 ? 'dự án QH' : ys[yy] && yy < 2025 ? '+' + ys[yy].toLocaleString('vi-VN') : y === 2025 ? '+' + (ys[2025] || 0).toLocaleString('vi-VN') : '–';
+  $('ynote').textContent = y >= 2030 ? '2030: thêm các công trình theo quy hoạch & phối cảnh công bố (tháp 408 m, Sun Galaxy, Downtown, Cora, Spana, S-Light) – mô hình minh hoạ.' : 'Màu cam: khu vực xuất hiện trong mốc ' + y + '. Năm tính theo ô 100 m từ vệ tinh GHSL (EU JRC), chính xác theo khu vực, không phải từng căn.';
+}
+function yearsMode(on) { if (!on && map.getLayer('b3d')) { setYear(2025); } }
+
+// ---- So sánh A/B ----
+const PL = { coast: [[108.2465, 16.106], [108.2455, 16.085], [108.2465, 16.065], [108.2495, 16.045], [108.2545, 16.025], [108.2605, 16.005], [108.2695, 15.985], [108.2835, 15.955], [108.30, 15.925], [108.335, 15.89]],
+  river: [[108.2228, 16.0905], [108.2235, 16.075], [108.2265, 16.062], [108.2295, 16.05], [108.233, 16.04], [108.235, 16.03], [108.2345, 16.022], [108.226, 16.0235], [108.217, 16.021]] };
+const dkm = (a, b) => Math.hypot((a[0] - b[0]) * 106.98, (a[1] - b[1]) * 110.6);
+const dLine = (p, L) => { let m = 1e9; for (let i = 0; i < L.length - 1; i++) { const a = L[i], b = L[i + 1]; for (let t = 0; t <= 1; t += 0.05) m = Math.min(m, dkm(p, [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t])); } return m; };
+function initAB() { [['abA', 0], ['abB', 1]].forEach(([id, k]) => { PROJ.forEach((p, i) => { const o = document.createElement('option'); o.value = i; o.textContent = p.properties.name; $(id).appendChild(o); }); $(id).value = Math.min(k, PROJ.length - 1); $(id).onchange = renderAB; }); }
+function renderAB() {
+  const A = PROJ[+$('abA').value], B = PROJ[+$('abB').value]; if (!A || !B) return;
+  const m = (p) => { const c = p.geometry.coordinates; return { sea: dLine(c, PL.coast), river: dLine(c, PL.river), center: dkm(c, [108.227, 16.0612]), air: dkm(c, [108.1994, 16.0439]) }; };
+  const a = m(A), b = m(B), f = (v) => v.toFixed(1).replace('.', ',') + ' km', W = (x, y) => (x < y - 0.05 ? ['win', ''] : y < x - 0.05 ? ['', 'win'] : ['', '']);
+  const rows = [['Khu vực', A.properties.area, B.properties.area], ['Quy mô', A.properties.scale, B.properties.scale], ['Giá tham khảo', A.properties.price, B.properties.price]];
+  let h = '<table><tr><th></th><th>A</th><th>B</th></tr>';
+  h += `<tr><th>Dự án</th><td><b>${esc(A.properties.name)}</b></td><td><b>${esc(B.properties.name)}</b></td></tr>`;
+  rows.forEach(([k, x, y]) => (h += `<tr><th>${k}</th><td>${esc(x || '—')}</td><td>${esc(y || '—')}</td></tr>`));
+  [['Ra biển', 'sea'], ['Ra sông Hàn', 'river'], ['Tới cầu Rồng (trung tâm)', 'center'], ['Tới sân bay', 'air']].forEach(([k, key]) => { const [ca, cb] = W(a[key], b[key]); h += `<tr><th>${k}</th><td class="${ca}">${f(a[key])}</td><td class="${cb}">${f(b[key])}</td></tr>`; });
+  $('abT').innerHTML = h + '</table>';
+  const bb = new maplibregl.LngLatBounds(); bb.extend(A.geometry.coordinates); bb.extend(B.geometry.coordinates); map.fitBounds(bb, { padding: { top: 90, bottom: 90, left: 90, right: innerWidth > 640 ? 420 : 90 }, maxZoom: 15.5, pitch: 55, duration: 1500 });
+}
+const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+
+// ---- Dữ liệu & nguồn ----
+async function showData() {
+  let st = {}; try { st = (await (await fetch('data/info.json')).json()).stat || {}; } catch (e) {}
+  const n = (v) => (v || 0).toLocaleString('vi-VN');
+  $('cbody').innerHTML = `<h4>Dữ liệu & nguồn</h4><h3>e-City Đà Nẵng</h3><div class="sub">Bản đồ số tham khảo – dữ liệu mở, có ghi nguồn</div>
+    <div class="kpis"><div class="kpi"><span>Khối nhà 3D</span><b>${n(st.n)}</b></div><div class="kpi"><span>Phường, xã</span><b>${WARDS.length}</b></div><div class="kpi"><span>Điểm hạ tầng</span><b>${n(POI.length)}</b></div><div class="kpi"><span>Dự án</span><b>${PROJ.length}</b></div></div>
+    <div class="row"><small>Chiều cao nhà</small>Số liệu thật (OSM/Overture): ${n((st.h || 0) + (st.fl || 0))} · theo chiều cao trung bình khu vực GHSL 2018: ${n(st.ghsl_h)} · ước lượng theo diện tích: ${n(st.est)}</div>
+    <div class="row"><small>Khối nhà</small>Overture Maps Foundation (gồm OSM, Microsoft, Google Open Buildings)</div>
+    <div class="row"><small>Ranh phường, hạ tầng, đường</small>© OpenStreetMap contributors (ODbL) · OpenFreeMap</div>
+    <div class="row"><small>Nền địa hình</small>AWS Terrain Tiles (SRTM, Copernicus GLO-30…)</div>
+    <div class="row"><small>Ảnh vệ tinh</small>Esri World Imagery & Wayback (ảnh lưu trữ theo năm)</div>
+    <div class="row"><small>Đô thị hoá theo năm, chiều cao khu vực</small>GHSL – Global Human Settlement Layer R2023A (EU JRC)</div>
+    <div class="row"><small>Dân số, diện tích phường</small>Đề án sắp xếp ĐVHC TP Đà Nẵng 2025 · NQ 1659/NQ-UBTVQH15</div>
+    <div class="row"><small>Công trình biểu tượng, dự án</small>Mô hình minh hoạ theo quy hoạch & phối cảnh công bố</div>
+    <div class="acts"><a href="tel:${HOTLINE}">📞 Tư vấn dự án</a><a class="alt" href="https://zalo.me/${HOTLINE}" target="_blank" rel="noopener">Zalo</a></div>`;
+  panels('card');
+}
+window.ecity = { map, icons };
 </script>
 </body>
 </html>
