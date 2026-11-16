@@ -408,7 +408,9 @@ let YI = null, playT = null, abPrev = '';
 const CUR_SAT = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 async function initYears() {
   try { YI = await (await fetch('data/info.json')).json(); } catch (e) { YI = {}; }
-  (YI.wayback || []).filter((w) => w.url).forEach((w, i) => { const o = document.createElement('option'); o.value = w.url; const d = (w.captured || w.published || '').split('-'); o.textContent = d.length === 3 ? `Chụp ${d[2]}/${d[1]}/${d[0]}` : (w.captured || w.published); $('ysat').appendChild(o); });
+  let WB = []; try { WB = await (await fetch('data/wayback.json')).json(); } catch (e) {}
+  WB.filter((w) => w.url).reverse().forEach((w, i) => { const o = document.createElement('option'); o.value = w.url; const d = (w.captured || w.published || '').split('-'); o.textContent = w.captured && d.length === 3 ? `Ảnh chụp ${d[2]}/${d[1]}/${d[0]}` : `Bản lưu ${(w.published || '').split('-').reverse().join('/')}`; $('ysat').appendChild(o); });
+  if (!WB.length) { $('ysat').disabled = true; $('ysatnote').textContent = 'Đang cập nhật danh sách ảnh vệ tinh theo năm.'; }
   if (YI.dothihoa) {
     const [w, s, e, n] = YI.dothihoa.bounds;
     map.addSource('dth', { type: 'image', url: 'data/do-thi-hoa.png', coordinates: [[w, n], [e, n], [e, s], [w, s]] });
