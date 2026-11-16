@@ -1,27 +1,110 @@
 {
-  "du-an-hoang-hiep-bat-dong-san-dang-tu-van-2026": ["Hoàng Hiệp bất động sản", "Hoàng Hiệp bất động sản: dự án đang tư vấn 2026", "Hoàng Hiệp bất động sản: danh sách dự án đang tư vấn tại Đà Nẵng 2026 theo khu vực, loại hình, giá tham khảo. Gọi 0904 567 009 nhận bảng giá mới."],
-  "quy-trinh-mua-can-ho-hoang-hiep-da-nang": ["quy trình mua căn hộ Đà Nẵng", "Quy trình mua căn hộ Đà Nẵng 6 bước cùng Hoàng Hiệp", "Quy trình mua căn hộ Đà Nẵng 6 bước cùng Hoàng Hiệp: tư vấn nhu cầu, chọn dự án, kiểm tra pháp lý, đặt cọc, vay ngân hàng và nhận bàn giao nhà."],
-  "chon-moi-gioi-bat-dong-san-da-nang-8-cau-hoi": ["môi giới bất động sản Đà Nẵng", "Môi giới bất động sản Đà Nẵng: 8 câu nên hỏi trước", "Môi giới bất động sản Đà Nẵng: 8 câu hỏi về pháp lý, giá, phí, hậu mãi giúp bạn chọn người tư vấn an toàn. Gọi 0904 567 009 để hỏi trực tiếp."],
-  "thi-truong-bat-dong-san-da-nang-2026": ["thị trường bất động sản Đà Nẵng", "Thị trường bất động sản Đà Nẵng 2026: giá, nguồn cung", "Thị trường bất động sản Đà Nẵng 2026: giá căn hộ sơ cấp khoảng 83 triệu/m², giao dịch quý 2 tăng 54%, đất nền chậm lại – xu hướng và lời khuyên."],
-  "ky-gui-can-ho-da-nang-ban-cho-thue": ["ký gửi căn hộ Đà Nẵng", "Ký gửi căn hộ Đà Nẵng 2026: quy trình 5 bước, phí", "Ký gửi căn hộ Đà Nẵng để bán hoặc cho thuê: quy trình 5 bước, giấy tờ cần chuẩn bị, cách định giá sát thị trường. Gọi 0904 567 009 để ký gửi."],
-  "fours-tower-da-nang-tong-quan-4-thap-bon-mua": ["tổng quan FourS Tower", "Tổng quan FourS Tower Đà Nẵng: 4 tháp Bốn Mùa", "Tổng quan FourS Tower Đà Nẵng: 4 tháp Mai, Trúc, Cúc, Tùng 20 tầng, 2.394 căn Studio – 3PN sở hữu lâu dài. Gọi 0904 567 009 nhận tài liệu."],
-  "gia-can-ho-fours-tower-2026": ["giá căn hộ FourS Tower 2026", "Giá căn hộ FourS Tower 2026: bảng giá theo loại căn", "Giá căn hộ FourS Tower 2026 tham khảo: Studio từ khoảng 1,7 tỷ, 1PN+ khoảng 2,6 tỷ, 2PN từ khoảng 3,6 tỷ. Gọi 0904 567 009 nhận bảng giá chính thức."],
-  "dien-tich-can-ho-fours-tower": ["diện tích căn hộ FourS Tower", "Diện tích căn hộ FourS Tower: Studio 34,7 m² đến 3PN", "Diện tích căn hộ FourS Tower: Studio khoảng 34,7 m², 2PN 58 m², 3PN 102,8 m², phân tích layout và cách chọn căn. Gọi 0904 567 009 nhận bản vẽ."],
-  "chinh-sach-fours-tower-thanh-toan-vay-ngan-hang": ["chính sách thanh toán FourS Tower", "Chính sách thanh toán FourS Tower: 70% nhận nhà, vay", "Chính sách thanh toán FourS Tower: 70% nhận nhà, Early Bird 5%, hỗ trợ vay 70% lãi suất 0% có thời hạn. Gọi 0904 567 009 nhận chính sách đợt mới."],
-  "fours-tower-f2-thap-mai-mua-xuan": ["FourS Tower F2 Tháp Mai", "FourS Tower F2 Tháp Mai: khác gì 3 tháp còn lại?", "FourS Tower F2 Tháp Mai (Mùa Xuân) ra mắt 26/9 với 1.369 lượt đặt chỗ, định hướng an cư đa thế hệ. So sánh với 3 tháp còn lại, gọi nhận bảng giá F2."],
-  "co-nen-mua-can-ho-fours-tower": ["có nên mua FourS Tower", "Có nên mua FourS Tower? Ưu – nhược điểm 2026", "Có nên mua FourS Tower? Phân tích vị trí, giá tham khảo, ưu – nhược điểm và ai nên mua, ai nên cân nhắc. Gọi Hoàng Hiệp 0904 567 009 nhận bảng giá."],
-  "so-sanh-fours-tower-spana-tower-s-light-tower": ["so sánh FourS Tower, Spana Tower", "So sánh FourS Tower, Spana Tower và S-Light 2026", "So sánh FourS Tower, Spana Tower và S-Light Tower của Sun Group: vị trí, quy mô, thời điểm bàn giao, giá tham khảo. Gọi Hoàng Hiệp 0904 567 009."],
-  "sun-riverpolis-khu-do-thi-ven-song-hoa-quy": ["khu đô thị Sun Riverpolis", "Khu đô thị Sun Riverpolis 2026: vị trí, phân khu", "Khu đô thị Sun Riverpolis của Sun Group tại Hòa Quý: vị trí, quy mô, các phân khu FourS Tower và đất nền Đầm Sen. Gọi Hoàng Hiệp nhận thông tin mới."],
-  "dat-nen-dam-sen-sun-riverpolis-gia-phap-ly": ["pháp lý đất nền Đầm Sen", "Pháp lý đất nền Đầm Sen 2026: sổ đỏ và giá lô", "Pháp lý đất nền Đầm Sen Sun Riverpolis: khoảng 900 lô 100 – 150 m², sổ đỏ lâu dài theo đơn vị phân phối, giá tham khảo từ 4,8 tỷ. Gọi Hoàng Hiệp."],
-  "bat-dong-san-nam-da-nang-ha-tang-2026": ["bất động sản Nam Đà Nẵng", "Bất động sản Nam Đà Nẵng 2026: hạ tầng và giá", "Bất động sản Nam Đà Nẵng 2026: cụm nút giao cầu Hòa Xuân, giá căn hộ, đất nền Hòa Xuân – Hòa Quý và các dự án đáng chú ý. Gọi Hoàng Hiệp tư vấn."],
-  "casamia-balanca-hoi-an-tong-quan-du-an": ["tổng quan Casamia Balanca", "Tổng quan Casamia Balanca Hội An: khu đô thị 31,1 ha", "Tổng quan Casamia Balanca Hội An: khu đô thị sinh thái 31,1 ha của Đạt Phương bên sông Cổ Cò, biệt thự ven sông, đã có sổ hồng từng lô (8/2026)."],
-  "gia-biet-thu-casamia-balanca-2026": ["giá biệt thự Casamia Balanca", "Giá biệt thự Casamia Balanca 2026 theo dòng sản phẩm", "Giá biệt thự Casamia Balanca 2026 tham khảo khoảng 10 – 20 tỷ/căn, Forestside từ khoảng 16 tỷ, cách tính tổng chi phí. Gọi Hoàng Hiệp nhận giá."],
-  "chinh-sach-ban-hang-casamia-balanca": ["chính sách bán hàng Casamia Balanca", "Chính sách bán hàng Casamia Balanca 2026", "Chính sách bán hàng Casamia Balanca 2026: cọc 100 triệu, ký hợp đồng 30%, chiết khấu khi không vay, hỗ trợ vay 70%. Gọi Hoàng Hiệp nhận bản mới nhất."],
-  "cho-thue-biet-thu-casamia-balanca-dong-tien": ["cho thuê biệt thự Casamia Balanca", "Cho thuê biệt thự Casamia Balanca: dòng tiền 2026", "Cho thuê biệt thự Casamia Balanca: giá thuê villa khu Cẩm Thanh, công thức ước tính dòng tiền, lưu ý gói cam kết thuê. Gọi Hoàng Hiệp 0904 567 009."],
-  "phap-ly-so-hong-casamia-balanca": ["pháp lý Casamia Balanca", "Pháp lý Casamia Balanca: sổ hồng cấp tháng 8/2026", "Pháp lý Casamia Balanca: đã cấp sổ hồng các lô tháng 8/2026, đất ở tại đô thị, thời hạn ghi trên sổ, checklist hồ sơ khi mua. Gọi Hoàng Hiệp 0904 567 009."],
-  "_slug_doi": {
-    "gia-fours-tower-2026": "gia-can-ho-fours-tower-2026",
-    "mat-bang-fours-tower-studio-3pn": "dien-tich-can-ho-fours-tower",
-    "bat-dong-san-nam-da-nang-ha-tang-hoa-xuan-hoa-quy-2026": "bat-dong-san-nam-da-nang-ha-tang-2026"
-  }
+ "du-an-hoang-hiep-bat-dong-san-dang-tu-van-2026": [
+  "Hoàng Hiệp bất động sản",
+  "Hoàng Hiệp bất động sản: dự án đang tư vấn 2026",
+  "Hoàng Hiệp bất động sản: danh sách dự án đang tư vấn tại Đà Nẵng 2026 theo khu vực, loại hình, giá tham khảo. Gọi 0904 567 009 nhận bảng giá mới."
+ ],
+ "quy-trinh-mua-can-ho-hoang-hiep-da-nang": [
+  "quy trình mua căn hộ Đà Nẵng",
+  "Quy trình mua căn hộ Đà Nẵng 6 bước cùng Hoàng Hiệp",
+  "Quy trình mua căn hộ Đà Nẵng 6 bước cùng Hoàng Hiệp: tư vấn nhu cầu, chọn dự án, kiểm tra pháp lý, đặt cọc, vay ngân hàng và nhận bàn giao nhà."
+ ],
+ "chon-moi-gioi-bat-dong-san-da-nang-8-cau-hoi": [
+  "môi giới bất động sản Đà Nẵng",
+  "Môi giới bất động sản Đà Nẵng: 8 câu nên hỏi trước",
+  "Môi giới bất động sản Đà Nẵng: 8 câu hỏi về pháp lý, giá, phí, hậu mãi giúp bạn chọn người tư vấn an toàn. Gọi 0904 567 009 để hỏi trực tiếp."
+ ],
+ "thi-truong-bat-dong-san-da-nang-2026": [
+  "thị trường bất động sản Đà Nẵng",
+  "Thị trường bất động sản Đà Nẵng 2026: giá, nguồn cung",
+  "Thị trường bất động sản Đà Nẵng 2026: giá căn hộ sơ cấp khoảng 83 triệu/m², giao dịch quý 2 tăng 54%, đất nền chậm lại – xu hướng và lời khuyên."
+ ],
+ "ky-gui-can-ho-da-nang-ban-cho-thue": [
+  "ký gửi căn hộ Đà Nẵng",
+  "Ký gửi căn hộ Đà Nẵng 2026: quy trình 5 bước, phí",
+  "Ký gửi căn hộ Đà Nẵng để bán hoặc cho thuê: quy trình 5 bước, giấy tờ cần chuẩn bị, cách định giá sát thị trường. Gọi 0904 567 009 để ký gửi."
+ ],
+ "fours-tower-da-nang-tong-quan-4-thap-bon-mua": [
+  "tổng quan FourS Tower",
+  "Tổng quan FourS Tower Đà Nẵng: 4 tháp Bốn Mùa",
+  "Tổng quan FourS Tower Đà Nẵng: 4 tháp Mai, Trúc, Cúc, Tùng 20 tầng, 2.394 căn Studio – 3PN sở hữu lâu dài. Gọi 0904 567 009 nhận tài liệu."
+ ],
+ "gia-can-ho-fours-tower-2026": [
+  "giá căn hộ FourS Tower 2026",
+  "Giá căn hộ FourS Tower 2026: bảng giá theo loại căn",
+  "Giá căn hộ FourS Tower 2026 tham khảo: Studio từ khoảng 1,7 tỷ, 1PN+ khoảng 2,6 tỷ, 2PN từ khoảng 3,6 tỷ. Gọi 0904 567 009 nhận bảng giá chính thức."
+ ],
+ "dien-tich-can-ho-fours-tower": [
+  "diện tích căn hộ FourS Tower",
+  "Diện tích căn hộ FourS Tower: Studio 34,7 m² đến 3PN",
+  "Diện tích căn hộ FourS Tower: Studio khoảng 34,7 m², 2PN 58 m², 3PN 102,8 m², phân tích layout và cách chọn căn. Gọi 0904 567 009 nhận bản vẽ."
+ ],
+ "chinh-sach-fours-tower-thanh-toan-vay-ngan-hang": [
+  "chính sách thanh toán FourS Tower",
+  "Chính sách thanh toán FourS Tower: 70% nhận nhà, vay",
+  "Chính sách thanh toán FourS Tower: 70% nhận nhà, Early Bird 5%, hỗ trợ vay 70% lãi suất 0% có thời hạn. Gọi 0904 567 009 nhận chính sách đợt mới."
+ ],
+ "fours-tower-f2-thap-mai-mua-xuan": [
+  "FourS Tower F2 Tháp Mai",
+  "FourS Tower F2 Tháp Mai: khác gì 3 tháp còn lại?",
+  "FourS Tower F2 Tháp Mai (Mùa Xuân) ra mắt 26/9 với 1.369 lượt đặt chỗ, định hướng an cư đa thế hệ. So sánh với 3 tháp còn lại, gọi nhận bảng giá F2."
+ ],
+ "co-nen-mua-can-ho-fours-tower": [
+  "có nên mua FourS Tower",
+  "Có nên mua FourS Tower? Ưu – nhược điểm 2026",
+  "Có nên mua FourS Tower? Phân tích vị trí, giá tham khảo, ưu – nhược điểm và ai nên mua, ai nên cân nhắc. Gọi Hoàng Hiệp 0904 567 009 nhận bảng giá."
+ ],
+ "so-sanh-fours-tower-spana-tower-s-light-tower": [
+  "so sánh FourS Tower, Spana Tower",
+  "So sánh FourS Tower, Spana Tower và S-Light 2026",
+  "So sánh FourS Tower, Spana Tower và S-Light Tower của Sun Group: vị trí, quy mô, thời điểm bàn giao, giá tham khảo. Gọi Hoàng Hiệp 0904 567 009."
+ ],
+ "sun-riverpolis-khu-do-thi-ven-song-hoa-quy": [
+  "khu đô thị Sun Riverpolis",
+  "Khu đô thị Sun Riverpolis 2026: vị trí, phân khu",
+  "Khu đô thị Sun Riverpolis của Sun Group tại Hòa Quý: vị trí, quy mô, các phân khu FourS Tower và đất nền Đầm Sen. Gọi Hoàng Hiệp nhận thông tin mới."
+ ],
+ "dat-nen-dam-sen-sun-riverpolis-gia-phap-ly": [
+  "pháp lý đất nền Đầm Sen",
+  "Pháp lý đất nền Đầm Sen 2026: sổ đỏ và giá lô",
+  "Pháp lý đất nền Đầm Sen Sun Riverpolis: khoảng 900 lô 100 – 150 m², sổ đỏ lâu dài theo đơn vị phân phối, giá tham khảo từ 4,8 tỷ. Gọi Hoàng Hiệp."
+ ],
+ "bat-dong-san-nam-da-nang-ha-tang-2026": [
+  "bất động sản Nam Đà Nẵng",
+  "Bất động sản Nam Đà Nẵng 2026: hạ tầng và giá",
+  "Bất động sản Nam Đà Nẵng 2026: cụm nút giao cầu Hòa Xuân, giá căn hộ, đất nền Hòa Xuân – Hòa Quý và các dự án đáng chú ý. Gọi Hoàng Hiệp tư vấn."
+ ],
+ "casamia-balanca-hoi-an-tong-quan-du-an": [
+  "tổng quan Casamia Balanca",
+  "Tổng quan Casamia Balanca Hội An: khu đô thị 31,1 ha",
+  "Tổng quan Casamia Balanca Hội An: khu đô thị sinh thái 31,1 ha của Đạt Phương bên sông Cổ Cò, biệt thự ven sông, đã có sổ hồng từng lô (8/2026)."
+ ],
+ "gia-biet-thu-casamia-balanca-2026": [
+  "giá biệt thự Casamia Balanca",
+  "Giá biệt thự Casamia Balanca 2026 theo dòng sản phẩm",
+  "Giá biệt thự Casamia Balanca 2026 tham khảo khoảng 10 – 20 tỷ/căn, Forestside từ khoảng 16 tỷ, cách tính tổng chi phí. Gọi Hoàng Hiệp nhận giá."
+ ],
+ "chinh-sach-ban-hang-casamia-balanca": [
+  "chính sách bán hàng Casamia Balanca",
+  "Chính sách bán hàng Casamia Balanca 2026",
+  "Chính sách bán hàng Casamia Balanca từ 9/9/2026: cọc 300 triệu, chiết khấu 3,5 – 4 tỷ khi nhận thô, thuê lại 50 – 60 triệu/tháng, vay 70%.",
+  [
+   "Chính sách bán hàng Casamia Balanca 2026: cọc 100 triệu, ký hợp đồng 30%, chiết khấu khi không vay, hỗ trợ vay 70%. Gọi Hoàng Hiệp nhận bản mới nhất."
+  ]
+ ],
+ "cho-thue-biet-thu-casamia-balanca-dong-tien": [
+  "cho thuê biệt thự Casamia Balanca",
+  "Cho thuê biệt thự Casamia Balanca: dòng tiền 2026",
+  "Cho thuê biệt thự Casamia Balanca: giá thuê villa khu Cẩm Thanh, công thức ước tính dòng tiền, lưu ý gói cam kết thuê. Gọi Hoàng Hiệp 0904 567 009."
+ ],
+ "phap-ly-so-hong-casamia-balanca": [
+  "pháp lý Casamia Balanca",
+  "Pháp lý Casamia Balanca: sổ hồng cấp tháng 8/2026",
+  "Pháp lý Casamia Balanca: đã cấp sổ hồng các lô tháng 8/2026, đất ở tại đô thị, thời hạn ghi trên sổ, checklist hồ sơ khi mua. Gọi Hoàng Hiệp 0904 567 009."
+ ],
+ "_slug_doi": {
+  "gia-fours-tower-2026": "gia-can-ho-fours-tower-2026",
+  "mat-bang-fours-tower-studio-3pn": "dien-tich-can-ho-fours-tower",
+  "bat-dong-san-nam-da-nang-ha-tang-hoa-xuan-hoa-quy-2026": "bat-dong-san-nam-da-nang-ha-tang-2026"
+ }
 }

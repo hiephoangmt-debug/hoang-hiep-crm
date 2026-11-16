@@ -9,6 +9,7 @@ add_filter( 'hh_news_posts', 'hh_posts_casamia_dong_tien' );
 function hh_posts_casamia_dong_tien( $posts ) {
 	$posts[] = array(
 		'slug'     => 'dau-tu-biet-thu-casamia-balanca-bai-toan-dong-tien',
+		'rev'      => '2026-11-16a', // Chính sách bán hàng Casamia Balanca từ 09/09/2026.
 		'title'    => 'Đầu tư biệt thự Casamia Balanca: bài toán dòng tiền 5–10 năm',
 		'excerpt'  => 'Dòng tiền Casamia Balanca theo 3 kịch bản: trả đủ tự cho thuê, vay 50–70%, giao đơn vị vận hành. Bảng tính công suất 40/55/70% và điểm hòa vốn.',
 		'keyword'  => 'đầu tư biệt thự Casamia Balanca',
@@ -44,10 +45,10 @@ function hh_posts_casamia_dong_tien( $posts ) {
 <tr><td>70%</td><td>894 triệu</td><td>402 triệu</td><td>60 triệu</td><td>Khoảng 432 triệu</td><td>Khoảng 3,0%</td></tr>
 </tbody>
 </table>
-<p>Cộng dồn 5 năm ở công suất 55%, dòng tiền ròng khoảng 1,6 tỷ; 10 năm khoảng 3,3 tỷ, tức chưa tới một phần tư vốn bỏ ra. Theo đơn vị phân phối, khách không vay được chiết khấu khoảng 9%; khi đó giá căn mẫu còn khoảng 12,5 tỷ và lợi suất ở mức 55% nhích lên khoảng 2,5%.</p>
+<p>Cộng dồn 5 năm ở công suất 55%, dòng tiền ròng khoảng 1,6 tỷ; 10 năm khoảng 3,3 tỷ, tức chưa tới một phần tư vốn bỏ ra. Theo chính sách bán hàng của chủ đầu tư từ 09/09/2026, thanh toán sớm 95% được chiết khấu 2 – 5% tùy phân khu; mức 5% giảm khoảng 0,69 tỷ trên căn mẫu 13,75 tỷ. Chọn bàn giao thô còn được chiết khấu 3,5 – 4 tỷ nhưng phải tự làm nội thất.</p>
 
 <h2>Kịch bản B: đầu tư biệt thự Casamia Balanca có vay ngân hàng 50 – 70%</h2>
-<p>Các đơn vị phân phối giới thiệu hỗ trợ vay tối đa 70% giá trị hợp đồng, ân hạn gốc và lãi suất 0% đến 24 tháng. Đây là thông tin phân phối, chưa phải văn bản của chủ đầu tư. Sau ân hạn, Hiệp <strong>giả định lãi suất 10%/năm</strong> (thả nổi) và chỉ tính tiền lãi, chưa tính trả gốc.</p>
+<p>Chính sách bán hàng của chủ đầu tư từ 09/09/2026 hỗ trợ vay 70% giá trị hợp đồng, hỗ trợ lãi suất 0% và ân hạn nợ gốc 24 tháng; lưu ý giá bán theo phương án vay hỗ trợ lãi suất cao hơn giá không vay (Park Home 24 tháng cao hơn khoảng 8,6%). Sau ân hạn, Hiệp <strong>giả định lãi suất 10%/năm</strong> (thả nổi) và chỉ tính tiền lãi, chưa tính trả gốc.</p>
 <table>
 <thead><tr><th>Mức vay</th><th>Lãi vay/năm (giả định 10%)</th><th>Dòng tiền ròng 40%</th><th>Dòng tiền ròng 55%</th><th>Dòng tiền ròng 70%</th></tr></thead>
 <tbody>
@@ -59,16 +60,16 @@ function hh_posts_casamia_dong_tien( $posts ) {
 <p>Với kịch bản vay 70%, sau 10 năm (2 năm ân hạn, 8 năm trả lãi) ở công suất 55%, tổng dòng tiền âm khoảng 4,4 tỷ. Đây là khoản người đầu tư biệt thự Casamia Balanca bằng vốn vay phải bù từ thu nhập khác, chưa kể trả gốc.</p>
 
 <h2>Kịch bản C: giao đơn vị vận hành, chia doanh thu</h2>
-<p>Một số trang phân phối giới thiệu gói chia cho chủ khoảng 45% doanh thu thuần, kèm mức tối thiểu khoảng 30 triệu/tháng. Hiệp chưa thấy văn bản chính thức của chủ đầu tư về gói này. Bảng dưới <strong>giả định</strong> doanh thu thuần bằng 85% doanh thu gộp, chủ nhà tự chịu khoảng 30 triệu/năm chi phí cố định.</p>
+<p>Từ 09/09/2026, chủ đầu tư công bố chương trình ủy thác vận hành cho thuê với căn bàn giao nội thất (nhận nhà 2027): chủ nhà hưởng 45% doanh thu cho thuê thuần, thu nhập tối thiểu 50 triệu/tháng (Park Home, quỹ 50 căn) hoặc 60 triệu/tháng (Forestside Villa), hợp đồng 5 năm, kèm 10 đêm nghỉ miễn phí/năm. Căn bàn giao thô thì chủ đầu tư thuê lại cố định 50 – 60 triệu/tháng trong 3 năm. Xem chi tiết tại bài <a href="/chinh-sach-ban-hang-casamia-balanca/">chính sách bán hàng Casamia Balanca</a>. Bảng dưới <strong>giả định</strong> doanh thu thuần bằng 85% doanh thu gộp, chủ nhà tự chịu khoảng 30 triệu/năm chi phí cố định.</p>
 <table>
-<thead><tr><th>Công suất (giả định)</th><th>Phần chia 45%</th><th>Ròng nếu không có mức sàn</th><th>Lợi suất</th><th>Ròng nếu mức sàn 360 triệu/năm được thực hiện</th></tr></thead>
+<thead><tr><th>Công suất (giả định)</th><th>Phần chia 45%</th><th>Ròng nếu không có mức sàn</th><th>Lợi suất</th><th>Ròng nếu mức tối thiểu 600 triệu/năm (50 triệu/tháng) được thực hiện</th></tr></thead>
 <tbody>
-<tr><td>40%</td><td>Khoảng 195 triệu</td><td>Khoảng 165 triệu</td><td>Khoảng 1,1%</td><td>Khoảng 330 triệu (2,3%)</td></tr>
-<tr><td>55%</td><td>Khoảng 269 triệu</td><td>Khoảng 239 triệu</td><td>Khoảng 1,6%</td><td>Khoảng 330 triệu (2,3%)</td></tr>
-<tr><td>70%</td><td>Khoảng 342 triệu</td><td>Khoảng 312 triệu</td><td>Khoảng 2,2%</td><td>Khoảng 330 triệu (2,3%)</td></tr>
+<tr><td>40%</td><td>Khoảng 195 triệu</td><td>Khoảng 165 triệu</td><td>Khoảng 1,1%</td><td>Khoảng 570 triệu (3,9%)</td></tr>
+<tr><td>55%</td><td>Khoảng 269 triệu</td><td>Khoảng 239 triệu</td><td>Khoảng 1,6%</td><td>Khoảng 570 triệu (3,9%)</td></tr>
+<tr><td>70%</td><td>Khoảng 342 triệu</td><td>Khoảng 312 triệu</td><td>Khoảng 2,2%</td><td>Khoảng 570 triệu (3,9%)</td></tr>
 </tbody>
 </table>
-<p>Ở cả ba mức công suất, mức sàn đều cao hơn phần chia thực. Nghĩa là bên vận hành phải bù tiền, nên năng lực tài chính và điều khoản ràng buộc của họ quan trọng hơn con số cam kết. Nếu đầu tư biệt thự Casamia Balanca theo kịch bản này, hãy yêu cầu văn bản ghi rõ bên cam kết, thời hạn và cơ chế xử lý khi bên vận hành không chi trả đủ.</p>
+<p>Ở cả ba mức công suất, mức tối thiểu 50 triệu/tháng đều cao hơn phần chia thực (với Forestside 60 triệu/tháng, ròng khoảng 690 triệu, tức 4,8%). Nghĩa là bên vận hành phải bù tiền, nên năng lực tài chính và điều khoản ràng buộc của họ quan trọng hơn con số cam kết. Nếu đầu tư biệt thự Casamia Balanca theo kịch bản này, hãy yêu cầu văn bản ghi rõ bên cam kết, thời hạn và cơ chế xử lý khi bên vận hành không chi trả đủ.</p>
 
 <h2>Điểm hòa vốn của dòng tiền Casamia Balanca</h2>
 <ul>
@@ -92,7 +93,7 @@ function hh_posts_casamia_dong_tien( $posts ) {
 <h3>5 câu hỏi trước khi đầu tư biệt thự Casamia Balanca</h3>
 <ol>
 <li>Nếu công suất chỉ đạt 40% trong 2 năm đầu, tôi có trả được lãi vay bằng thu nhập chính không?</li>
-<li>Giá căn tôi chọn đã gồm chiết khấu thanh toán (khoảng 9% khi không vay, theo phân phối) hay chưa?</li>
+<li>Giá căn tôi chọn đã gồm chiết khấu thanh toán (2 – 5% khi thanh toán sớm 95%, hoặc 3,5 – 4 tỷ khi nhận bàn giao thô, theo chính sách từ 09/09/2026) hay chưa?</li>
 <li>Gói ân hạn, hỗ trợ lãi suất có văn bản của chủ đầu tư, áp dụng cho đúng căn và đúng đợt không?</li>
 <li>Căn có giấy chứng nhận riêng chưa, cao độ nền và thoát nước khu vực ra sao?</li>
 <li>Nếu cần bán lại sau 5 năm, mức giá nào tôi chấp nhận được?</li>
@@ -108,12 +109,12 @@ HTML
 			'points'    => array(
 				'Đầu tư biệt thự Casamia Balanca bằng tiền mặt, tự cho thuê: lợi suất ròng giả định khoảng 1,5 – 3%/năm trên tổng vốn.',
 				'Vay 50 – 70% khi đầu tư biệt thự Casamia Balanca, lãi giả định 10%/năm: tiền thuê không đủ trả lãi sau ân hạn.',
-				'Gói chia doanh thu do phân phối giới thiệu chưa có văn bản chủ đầu tư; mức sàn phụ thuộc năng lực bên vận hành.',
+				'Chính sách từ 09/09/2026: ủy thác 5 năm, 45% doanh thu thuần, tối thiểu 50 – 60 triệu/tháng; mức tối thiểu vượt phần chia thực nên cần đọc kỹ điều khoản cam kết.',
 			),
 			'faq'       => array(
 				array( 'Đầu tư biệt thự Casamia Balanca cho thuê lời bao nhiêu?', 'Chưa có doanh thu thực tế công khai. Với giá thuê 3,5 triệu/đêm và giả định chi phí 45%, lợi suất ròng khoảng 1,5 – 3%/năm trên tổng vốn khi không vay.' ),
 				array( 'Vay 70% đầu tư biệt thự Casamia Balanca có trả được lãi bằng tiền thuê không?', 'Với lãi suất giả định 10%/năm, giá thuê cần khoảng 7,3 triệu/đêm ở công suất 70% mới đủ trả lãi – cao hơn mặt bằng villa Cẩm Thanh.' ),
-				array( 'Đầu tư biệt thự Casamia Balanca có được ân hạn lãi vay không?', 'Theo đơn vị phân phối, khách vay được ân hạn gốc, lãi suất 0% đến 24 tháng; cần xác nhận bằng văn bản theo từng đợt.' ),
+				array( 'Đầu tư biệt thự Casamia Balanca có được ân hạn lãi vay không?', 'Có. Theo chính sách bán hàng từ 09/09/2026, khách vay được hỗ trợ 70%, hỗ trợ lãi suất 0% và ân hạn nợ gốc 24 tháng; giá theo phương án vay cao hơn giá không vay.' ),
 				array( 'Đầu tư biệt thự Casamia Balanca bao lâu thì thu hồi vốn?', 'Nếu chỉ tính tiền thuê theo kịch bản A, thời gian thu hồi vốn khoảng 34 – 66 năm; phần còn lại phụ thuộc giá bán lại, Hoàng Hiệp không dự báo con số này.' ),
 				array( 'Đầu tư biệt thự Casamia Balanca có nên vay ngân hàng?', 'Chỉ nên vay ở mức trả được lãi bằng thu nhập chính. Với giả định lãi 10%/năm, tiền thuê ở mặt bằng villa Cẩm Thanh không đủ trả lãi khi vay 50 – 70%.' ),
 				array( 'Có nên chọn gói chia doanh thu?', 'Phù hợp chủ ở xa, nhưng cần kiểm tra bên vận hành, cách tính doanh thu thuần, mức sàn và điều kiện chấm dứt hợp đồng.' ),

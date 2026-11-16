@@ -679,93 +679,108 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'chinh-sach-ban-hang-casamia-balanca',
-		'title'    => 'Chính sách bán hàng Casamia Balanca 2026: thanh toán, chiết khấu, hỗ trợ vay',
-		'excerpt'  => 'Chính sách Casamia Balanca: đặt cọc, tiến độ thanh toán, chiết khấu, hỗ trợ vay đến 70% theo thông tin phân phối và lưu ý khi so sánh.',
+		'rev'      => '2026-11-16a', // Chính sách bán hàng Casamia Balanca từ 09/09/2026.
+		'title'    => 'Chính sách bán hàng Casamia Balanca 2026: chiết khấu đến 4 tỷ, thuê lại 50 – 60 triệu/tháng',
+		'excerpt'  => 'Chính sách bán hàng Casamia Balanca từ 09/09/2026: cọc 300 triệu, chiết khấu 3,5 – 4 tỷ khi nhận thô, chủ đầu tư thuê lại 50 – 60 triệu/tháng, vay 70% HTLS 0% 24 tháng.',
 		'keyword'  => 'chính sách bán hàng Casamia Balanca',
 		'project'  => 'casamia-balanca-hoi-an',
 		'week'     => 4,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>Chính sách bán hàng Casamia Balanca được các đơn vị phân phối giới thiệu gồm: đặt cọc khoảng 100 triệu/căn, ký hợp đồng thanh toán 30%, phần còn lại theo tiến độ; khách không vay được chiết khấu khi thanh toán đúng tiến độ; khách vay được hỗ trợ đến 70% giá trị hợp đồng kèm ân hạn gốc, lãi. Thông tin tổng hợp, cập nhật tháng 10/2026 – chính sách có hiệu lực theo từng đợt và cần xác nhận lại trước khi ký.</p>
+<p>Chính sách bán hàng Casamia Balanca mới nhất được chủ đầu tư áp dụng từ <strong>09/09/2026</strong> đến khi có chính sách thay thế. Khách đặt cọc 300 triệu/căn, ký hợp đồng mua bán thanh toán 20%; mỗi phân khu Park Home và Forestside Villa có 2 lựa chọn: nhận bàn giao thô (nhận nhà 2026, chiết khấu 3,5 – 4 tỷ) hoặc bàn giao nội thất (nhận nhà 2027, ủy thác cho thuê). Chủ đầu tư thuê lại 50 – 60 triệu/tháng tùy phân khu, khách vay được hỗ trợ 70% kèm hỗ trợ lãi suất 0% trong 24 tháng.</p>
 
-<!--hh-img:img/casamia-balanca/casamia-balanca-su-kien-tu-van.jpg|Khách tìm hiểu tài liệu tại sự kiện dự án – nên yêu cầu văn bản chính sách bán hàng Casamia Balanca trước khi đặt cọc-->
+<!--hh-img:img/casamia-balanca/casamia-balanca-chinh-sach-park-home-ban-giao-tho-2026.jpg|Chính sách bán hàng Casamia Balanca phân khu Park Home – bàn giao thô, nhận nhà 2026, áp dụng từ 09/09/2026 (ảnh chủ đầu tư)-->
 
-<h2>Tóm tắt chính sách bán hàng Casamia Balanca (theo phân phối)</h2>
+<h2>Tóm tắt chính sách bán hàng Casamia Balanca từ 09/09/2026</h2>
 <table>
-<thead><tr><th>Hạng mục</th><th>Nội dung được giới thiệu</th></tr></thead>
+<thead><tr><th>Phân khu – phương án</th><th>Chiết khấu</th><th>Cho thuê / thuê lại</th></tr></thead>
 <tbody>
-<tr><td>Đặt cọc</td><td>Khoảng 100 triệu/căn</td></tr>
-<tr><td>Ký hợp đồng mua bán</td><td>Thanh toán khoảng 30% (một số nguồn ghi 20 – 30%)</td></tr>
-<tr><td>Thanh toán theo tiến độ</td><td>Khoảng 40%, chia nhiều đợt</td></tr>
-<tr><td>Khách không vay</td><td>Chiết khấu khoảng 9% khi thanh toán đúng tiến độ</td></tr>
-<tr><td>Hỗ trợ vay</td><td>Tối đa 70% giá trị hợp đồng, thời hạn đến 35 năm</td></tr>
-<tr><td>Ân hạn</td><td>Ân hạn gốc, lãi suất 0% đến 24 tháng</td></tr>
-<tr><td>Trả nợ trước hạn</td><td>Miễn phí trả nợ trước hạn 2 năm</td></tr>
-<tr><td>Phí quản lý</td><td>Tặng 2 – 3 năm đầu</td></tr>
+<tr><td>Forestside Villa – bàn giao thô, nhận nhà 2026</td><td>4 tỷ khi chọn bàn giao thô; 2% khi thanh toán sớm 95%; 1% khách hàng thân thiết</td><td>Chủ đầu tư thuê lại 60 triệu/tháng, hợp đồng 3 năm</td></tr>
+<tr><td>Forestside Villa – bàn giao nội thất, nhận nhà 2027</td><td>400 triệu khi nhận gói nội thất cơ bản; 4% khi thanh toán sớm 95%; 1% khách hàng thân thiết</td><td>Ủy thác vận hành: 45% doanh thu thuần, tối thiểu 60 triệu/tháng, 5 năm, 10 đêm nghỉ miễn phí/năm</td></tr>
+<tr><td>Park Home – bàn giao thô, nhận nhà 2026</td><td>3,5 tỷ khi nhận bàn giao thô (quỹ căn theo danh sách); 5% khi thanh toán sớm 95%</td><td>Chủ đầu tư thuê lại 50 triệu/tháng, hợp đồng 3 năm</td></tr>
+<tr><td>Park Home – bàn giao nội thất, nhận nhà 2027</td><td>300 triệu khi nhận gói nội thất cơ bản; 5% khi thanh toán sớm 95%</td><td>Ủy thác vận hành (quỹ 50 căn): 45% doanh thu thuần, tối thiểu 50 triệu/tháng, 5 năm, 10 đêm/năm</td></tr>
 </tbody>
 </table>
-<p>Lưu ý: các nội dung trên được tổng hợp từ trang của đơn vị phân phối, chưa phải văn bản chính thức của chủ đầu tư. Thời hạn áp dụng, điều kiện và mức chiết khấu cụ thể đang cập nhật theo từng đợt, liên hệ để nhận bản chính sách mới nhất.</p>
+<p>Ưu đãi chung của chính sách bán hàng Casamia Balanca cho mọi phân khu: miễn phí 2 năm phí quản lý khu đô thị và 1 năm Fitness &amp; Pool tại Clubhouse Casamia. Song song, chủ đầu tư và đơn vị khai thác công bố chương trình cam kết thuê từ 01/09/2026: biệt thự sân vườn 50 triệu/tháng (5 năm nếu mua quỹ căn full nội thất, 3 năm nếu mua thô và tự hoàn thiện theo tiêu chuẩn chủ đầu tư), biệt thự rừng dừa 60 triệu/tháng trong 3 năm kể từ khi bàn giao full nội thất.</p>
 
-<h2>Phương án thanh toán trong chính sách bán hàng Casamia Balanca</h2>
-<h3>Thanh toán theo tiến độ, không vay</h3>
-<p>Phù hợp khách có sẵn dòng tiền. Theo chính sách bán hàng Casamia Balanca được giới thiệu, ưu điểm là được chiết khấu, không chịu chi phí lãi vay; nhược điểm là vốn bị khóa lớn ngay từ đầu.</p>
-<h3>Vay ngân hàng có ân hạn</h3>
-<p>Phù hợp khách muốn giữ vốn lưu động. Trong thời gian ân hạn, áp lực trả nợ thấp; nhưng cần tính trước khả năng trả gốc lãi khi hết ân hạn theo lãi suất thả nổi.</p>
-
-<h2>Ví dụ cách so sánh hai phương án</h2>
-<p>Để so sánh hai nhánh của chính sách bán hàng Casamia Balanca, giả sử căn biệt thự có giá trên hợp đồng là G. Phương án A: chiết khấu 9%, số tiền thực trả là 0,91 x G. Phương án B: không chiết khấu, vay 70% G, được ân hạn 24 tháng, sau đó tự trả lãi theo lãi suất thả nổi.</p>
+<h2>Tiến độ thanh toán theo chính sách bán hàng Casamia Balanca</h2>
+<h3>Phương án không vay (thanh toán sớm tính lãi suất 11%/năm)</h3>
 <table>
-<thead><tr><th>Tiêu chí</th><th>A – Không vay</th><th>B – Vay 70%</th></tr></thead>
+<thead><tr><th>Phương án</th><th>Lịch thanh toán (sau cọc 300 triệu)</th></tr></thead>
 <tbody>
-<tr><td>Giá thực trả</td><td>0,91 x G</td><td>G</td></tr>
-<tr><td>Vốn tự có ban đầu</td><td>Cao</td><td>Khoảng 30% G</td></tr>
-<tr><td>Chi phí lãi</td><td>Không</td><td>Từ tháng thứ 25 (nếu chưa tất toán)</td></tr>
-<tr><td>Phù hợp</td><td>Có sẵn tiền, mua ở</td><td>Cần giữ vốn, có thu nhập ổn định</td></tr>
+<tr><td>Forestside thô 2026</td><td>20% T9/26 ký HĐMB · 25% T10/26 · 25% T11/26 · 25% T12/26 bàn giao · 5% T1/27 nhận GCN</td></tr>
+<tr><td>Forestside nội thất 2027</td><td>20% T9/26 · 10% mỗi tháng T10 – T12/26 · 5% mỗi tháng T1 – T4/27 · 25% T6/27 bàn giao · 5% nhận GCN</td></tr>
+<tr><td>Park Home thô 2026</td><td>20% T9/26 · 10% T11/26 · 20% T12/26 bàn giao · 5% mỗi tháng T1 – T9/27 · 5% T11/27 nhận GCN</td></tr>
+<tr><td>Park Home nội thất 2027</td><td>20% T9/26 · 10% T11/26 · 5% mỗi tháng T12/26 – T3/27 (bàn giao T3/27) · 10% mỗi tháng T4 – T7/27 · 5% T9/27 · 5% T11/27 nhận GCN</td></tr>
 </tbody>
 </table>
-<p>Chênh lệch 9% giá trị căn là con số lớn với sản phẩm 10 – 20 tỷ: với căn 13,75 tỷ (ví dụ lô 250 m² ở mức 55 triệu/m²), 9% tương đương khoảng 1,24 tỷ đồng. Vì vậy hãy tính chi phí cơ hội của vốn và lãi suất sau ân hạn trước khi chọn.</p>
+<p>Trong chính sách bán hàng Casamia Balanca, phương án không vay chia nhỏ các đợt sau bàn giao. Với Park Home, khách nhận nhà khi mới thanh toán khoảng 50% (thô) và vẫn trả tiếp 5 – 10% mỗi tháng đến khi nhận giấy chứng nhận. Ai có tiền nhàn rỗi có thể thanh toán sớm hơn và được tính lãi suất 11%/năm cho phần trả trước, hoặc thanh toán sớm 95% để nhận chiết khấu 2 – 5%.</p>
+<h3>Phương án vay ngân hàng (vay 70%, HTLS 0% 24 tháng, ân hạn gốc 24 tháng)</h3>
+<table>
+<thead><tr><th>Phương án</th><th>Khách thanh toán</th><th>Ngân hàng giải ngân</th></tr></thead>
+<tbody>
+<tr><td>Forestside thô 2026</td><td>Cọc · 20% T9/26 · 10% T10/26</td><td>40% T11/26 · 25% T12/26 bàn giao · 5% T1/27 nhận GCN</td></tr>
+<tr><td>Forestside nội thất 2027</td><td>Cọc · 20% T9/26 · 10% T10/26</td><td>40% T3/27 · 25% T6/27 bàn giao · 5% nhận GCN</td></tr>
+<tr><td>Park Home thô 2026</td><td>Cọc · 20% T9/26 · 10% T11/26</td><td>20% T12/26 bàn giao · 20% T1/27 · 25% T2/27 · 5% T6/27 nhận GCN</td></tr>
+<tr><td>Park Home nội thất 2027</td><td>Cọc · 20% T9/26 · 10% T11/26</td><td>10% T12/26 · 10% T3/27 bàn giao · 45% T4/27 · 5% T6/27 nhận GCN</td></tr>
+</tbody>
+</table>
 
-<h2>Chính sách bán hàng Casamia Balanca và quy định về đặt cọc</h2>
-<p>Mức cọc khoảng 100 triệu/căn trong chính sách bán hàng Casamia Balanca thấp so với giá trị biệt thự. Với nhà ở hình thành trong tương lai, Luật Kinh doanh bất động sản 2023 giới hạn tiền đặt cọc không quá 5% giá bán và chỉ được thu khi dự án đủ điều kiện kinh doanh (tóm tắt trên <a href="https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html">LuatVietnam</a>). Lần thanh toán đầu khi ký hợp đồng không quá 30% giá trị hợp đồng, kể cả tiền cọc – khớp với mốc 30% được giới thiệu.</p>
+<h2>Giá Park Home theo chính sách bán hàng Casamia Balanca</h2>
+<p>Theo chính sách bán hàng Casamia Balanca hiện hành, bảng giá tham khảo tháng 11/2026 cho nhóm Park Home đất 178 m², tổng diện tích xây dựng 316,09 m², bàn giao full nội thất, đã gồm VAT:</p>
+<table>
+<thead><tr><th>Phương án</th><th>Giá tham khảo</th></tr></thead>
+<tbody>
+<tr><td>Không vay ngân hàng</td><td>Khoảng 13,86 – 14,01 tỷ</td></tr>
+<tr><td>Vay, hỗ trợ lãi suất 12 tháng</td><td>Khoảng 14,02 – 14,19 tỷ</td></tr>
+<tr><td>Vay, hỗ trợ lãi suất 18 tháng</td><td>Khoảng 14,47 – 14,64 tỷ</td></tr>
+<tr><td>Vay, hỗ trợ lãi suất 24 tháng</td><td>Khoảng 15,05 – 15,23 tỷ</td></tr>
+</tbody>
+</table>
+<p>Cùng một căn, giá theo phương án vay hỗ trợ lãi suất 24 tháng cao hơn giá không vay khoảng 1,19 – 1,21 tỷ (khoảng 8,6%). Đó chính là "chi phí" của gói hỗ trợ lãi suất, nên khi so sánh trong chính sách bán hàng Casamia Balanca, hãy đặt hai con số này cạnh nhau thay vì chỉ nhìn lãi suất 0%. Giá Forestside Villa theo bảng hàng từng đợt, liên hệ để nhận bảng mới nhất. Xem thêm bài <a href="/gia-biet-thu-casamia-balanca-2026/">giá biệt thự Casamia Balanca 2026</a>.</p>
+
+<!--hh-img:img/casamia-balanca/casamia-balanca-cam-ket-thue-09-2026.jpg|Cam kết thuê trong chính sách bán hàng Casamia Balanca: biệt thự sân vườn 50 triệu/tháng, biệt thự rừng dừa 60 triệu/tháng (ảnh chủ đầu tư)-->
+
+<h2>Chính sách bán hàng Casamia Balanca: nên chọn bàn giao thô hay nội thất?</h2>
+<ul>
+<li><strong>Bàn giao thô (nhận nhà 2026):</strong> chiết khấu lớn 3,5 – 4 tỷ, chủ đầu tư thuê lại cố định 50 – 60 triệu/tháng trong 3 năm. Hợp khách muốn tự thiết kế nội thất, mua để ở hoặc muốn dòng tiền thuê cố định sớm.</li>
+<li><strong>Bàn giao nội thất (nhận nhà 2027):</strong> nhận nhà muộn hơn, chiết khấu thấp hơn (300 – 400 triệu) nhưng được ủy thác vận hành 5 năm: hưởng 45% doanh thu thuần với mức tối thiểu 50 – 60 triệu/tháng, kèm 10 đêm nghỉ miễn phí mỗi năm. Hợp khách đầu tư không muốn tự quản lý cho thuê – đây là điểm mới đáng chú ý của chính sách bán hàng Casamia Balanca đợt này.</li>
+</ul>
+<p>Ví dụ đơn giản: với mức tối thiểu 50 triệu/tháng, 3 năm thuê lại mang về khoảng 1,8 tỷ; 5 năm ủy thác mang về tối thiểu khoảng 3 tỷ trước thuế. Đây là con số tối thiểu theo chính sách bán hàng Casamia Balanca, chưa trừ thuế cho thuê và chi phí phát sinh; doanh thu thực tế phụ thuộc vận hành.</p>
+
+<h2>Chính sách bán hàng Casamia Balanca và quy định về đặt cọc, thanh toán</h2>
+<p>Với nhà ở hình thành trong tương lai, Luật Kinh doanh bất động sản 2023 giới hạn tiền đặt cọc không quá 5% giá bán và chỉ được thu khi dự án đủ điều kiện kinh doanh (tóm tắt trên <a href="https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html">LuatVietnam</a>). Mức cọc 300 triệu trên căn khoảng 14 tỷ tương đương khoảng 2,1%. Casamia Balanca đã có giấy chứng nhận quyền sử dụng đất từng lô từ tháng 8/2026, xem bài <a href="/phap-ly-so-hong-casamia-balanca/">pháp lý Casamia Balanca</a>.</p>
 
 <h2>Checklist trước khi đặt cọc</h2>
+<p>Trước khi xuống tiền theo chính sách bán hàng Casamia Balanca, anh chị nên kiểm tra các điểm sau:</p>
 <ul>
-<li>Yêu cầu văn bản chính sách có chữ ký, dấu và thời hạn hiệu lực.</li>
-<li>Hỏi rõ giá đã gồm VAT, phí bảo trì, tiêu chuẩn bàn giao.</li>
-<li>Ngân hàng liên kết, lãi suất sau ân hạn, điều kiện phạt trả trước.</li>
-<li>Điều khoản hoàn cọc nếu không ký được hợp đồng.</li>
-<li>Tình trạng pháp lý, tiến độ cấp giấy chứng nhận – xem bài <a href="/phap-ly-so-hong-casamia-balanca/">pháp lý Casamia Balanca</a>.</li>
+<li>Yêu cầu văn bản chính sách có hiệu lực tại ngày ký, đọc kỹ điều kiện quỹ căn được chiết khấu 3,5 – 4 tỷ và quỹ 50 căn ủy thác.</li>
+<li>Đọc hợp đồng thuê lại / ủy thác: thời điểm bắt đầu tính tiền thuê, tiêu chuẩn nội thất, trường hợp chấm dứt sớm.</li>
+<li>Hỏi rõ giá đã gồm VAT, kinh phí bảo trì, tiêu chuẩn bàn giao thô.</li>
+<li>Với phương án vay: ngân hàng liên kết, lãi suất sau 24 tháng hỗ trợ, phí trả nợ trước hạn.</li>
 </ul>
 
 <h2>Đọc thêm</h2>
-<p>Ngoài chính sách bán hàng Casamia Balanca, anh chị có thể xem tổng quan <a href="/casamia-balanca-hoi-an-tong-quan-du-an/">Casamia Balanca Hội An</a>, bảng <a href="/gia-biet-thu-casamia-balanca-2026/">giá Casamia Balanca 2026</a> hoặc trang dự án <a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca</a>. Các biệt thự khác tại Hội An có trong mục <a href="/mua-ban/biet-thu/">mua bán biệt thự</a>.</p>
+<p>Ngoài chính sách bán hàng Casamia Balanca, anh chị có thể xem tổng quan <a href="/casamia-balanca-hoi-an-tong-quan-du-an/">Casamia Balanca Hội An</a>, bài <a href="/dau-tu-biet-thu-casamia-balanca-bai-toan-dong-tien/">bài toán dòng tiền biệt thự Casamia Balanca</a> hoặc trang dự án <a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca</a>. Các biệt thự khác tại Hội An có trong mục <a href="/mua-ban/biet-thu/">mua bán biệt thự</a>.</p>
 
-<h2>Những điểm dễ hiểu nhầm trong chính sách bán hàng Casamia Balanca</h2>
-<ul>
-<li><strong>Lãi suất 0%:</strong> thường chỉ áp dụng trong thời gian ân hạn; hết ân hạn sẽ áp lãi suất thả nổi của ngân hàng.</li>
-<li><strong>Chiết khấu cộng dồn:</strong> không phải ưu đãi nào cũng cộng dồn được; hỏi rõ ưu đãi nào loại trừ nhau.</li>
-<li><strong>Tặng phí quản lý:</strong> xác định rõ số năm, mức phí sau thời gian tặng.</li>
-<li><strong>Thời hạn ưu đãi:</strong> chỉ áp dụng với hợp đồng ký trong khung thời gian nhất định.</li>
-</ul>
-
-<p>Hoàng Hiệp tư vấn, phân phối dự án nên sẽ gửi bạn bản chính sách bán hàng Casamia Balanca đang áp dụng, đồng thời chỉ ra các điều khoản cần hỏi lại trước khi đặt cọc.</p>
-
-<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bản chính sách bán hàng Casamia Balanca đang áp dụng và bảng tính so sánh phương án thanh toán theo căn bạn quan tâm.</p>
+<p>Hoàng Hiệp tư vấn, phân phối dự án nên sẽ gửi anh chị bản chính sách bán hàng Casamia Balanca đang áp dụng, bảng hàng từng phân khu và bảng tính so sánh thô – nội thất, vay – không vay theo căn anh chị quan tâm. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Chính sách bán hàng Casamia Balanca 2026',
-			'desc'      => 'Chính sách bán hàng Casamia Balanca 2026: cọc 100 triệu, ký hợp đồng 30%, chiết khấu khi không vay, hỗ trợ vay 70%. Gọi Hoàng Hiệp nhận bản mới nhất.',
+			'desc'      => 'Chính sách bán hàng Casamia Balanca từ 9/9/2026: cọc 300 triệu, chiết khấu 3,5 – 4 tỷ khi nhận thô, thuê lại 50 – 60 triệu/tháng, vay 70%.',
 			'points'    => array(
-				'Chính sách bán hàng Casamia Balanca theo phân phối: cọc khoảng 100 triệu/căn, ký HĐMB 30%, 40% theo tiến độ.',
-				'Khách không vay được chiết khấu khoảng 9%; khách vay được hỗ trợ đến 70%, ân hạn đến 24 tháng.',
-				'Chính sách thay đổi theo đợt, cần văn bản chính thức của chủ đầu tư trước khi ký.',
+				'Chính sách bán hàng Casamia Balanca áp dụng từ 09/09/2026: cọc 300 triệu/căn, ký HĐMB thanh toán 20%.',
+				'Bàn giao thô (nhận nhà 2026): chiết khấu 3,5 tỷ (Park Home) – 4 tỷ (Forestside), chủ đầu tư thuê lại 50 – 60 triệu/tháng trong 3 năm.',
+				'Bàn giao nội thất (nhận nhà 2027): ủy thác vận hành 5 năm, 45% doanh thu thuần, tối thiểu 50 – 60 triệu/tháng.',
+				'Vay 70%, hỗ trợ lãi suất 0% và ân hạn gốc 24 tháng; Park Home full nội thất tham khảo 13,86 – 14,01 tỷ (không vay).',
 			),
 			'faq'       => array(
-				array( 'Đặt cọc Casamia Balanca bao nhiêu?', 'Theo các đơn vị phân phối, đặt cọc khoảng 100 triệu/căn; mức cụ thể theo đợt bán.' ),
-				array( 'Casamia Balanca hỗ trợ vay bao nhiêu?', 'Được giới thiệu hỗ trợ vay tối đa 70% giá trị hợp đồng, ân hạn gốc lãi đến 24 tháng, thời hạn đến 35 năm.' ),
-				array( 'Chính sách bán hàng Casamia Balanca có thay đổi theo đợt không?', 'Có. Mức chiết khấu, thời hạn ân hạn và quà tặng phí quản lý áp dụng theo từng đợt; cần văn bản có hiệu lực tại thời điểm ký để đối chiếu.' ),
-				array( 'Không vay có được chiết khấu không?', 'Theo thông tin phân phối, khách không vay thanh toán đúng tiến độ được chiết khấu khoảng 9%.' ),
+				array( 'Đặt cọc Casamia Balanca bao nhiêu?', 'Theo chính sách bán hàng Casamia Balanca từ 09/09/2026, đặt cọc 300 triệu/căn, ký hợp đồng mua bán thanh toán 20%.' ),
+				array( 'Casamia Balanca chiết khấu bao nhiêu khi nhận bàn giao thô?', 'Forestside Villa chiết khấu 4 tỷ, Park Home chiết khấu 3,5 tỷ (quỹ căn theo danh sách chủ đầu tư) khi chọn bàn giao thô, nhận nhà 2026.' ),
+				array( 'Chủ đầu tư thuê lại Casamia Balanca bao nhiêu?', 'Bàn giao thô: chủ đầu tư thuê lại 60 triệu/tháng (Forestside) và 50 triệu/tháng (Park Home) trong 3 năm. Bàn giao nội thất: ủy thác 5 năm, 45% doanh thu thuần, tối thiểu 50 – 60 triệu/tháng.' ),
+				array( 'Casamia Balanca hỗ trợ vay bao nhiêu?', 'Hỗ trợ vay 70% giá trị hợp đồng, hỗ trợ lãi suất 0% trong 24 tháng và ân hạn nợ gốc 24 tháng; khách trả trước khoảng 30%.' ),
+				array( 'Chính sách bán hàng Casamia Balanca áp dụng đến khi nào?', 'Từ 09/09/2026 đến khi chủ đầu tư ban hành chính sách thay thế; quỹ căn và điều kiện có thể thay đổi theo đợt.' ),
 			),
 		),
 		'sources'  => array( 'https://luatvietnam.vn/tin-van-ban-moi/tu-2025-khong-dat-coc-mua-nha-hinh-thanh-trong-tuong-lai-qua-5-gia-ban-186-96489-article.html', 'https://estuaryresidental.com/du-an/khu-do-thi-casamia-balanca-hoi-an-chinh-sach-bang-hang-va-gia-ban/', 'https://duanbdsdanang.com/du-an/casamia-balanca-hoi-an/', 'https://quangminhproperty.com/du-an/casamia-balanca-hoi-an/' ),

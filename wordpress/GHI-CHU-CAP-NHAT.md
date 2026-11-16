@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.295**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.296**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.296 (16/11/2026) – Casamia Balanca: chính sách bán hàng từ 09/09/2026
+
+- **Trang dự án Casamia Balanca:** thêm chính sách mới (Forestside Villa / Park Home × bàn giao thô nhận nhà 2026 / bàn giao nội thất nhận nhà 2027): chiết khấu 3,5 – 4 tỷ khi nhận thô, chủ đầu tư thuê lại 50 – 60 triệu/tháng, ủy thác vận hành 45% doanh thu thuần (tối thiểu 50 – 60 triệu/tháng, 5 năm), vay 70% HTLS 0% 24 tháng, cọc 300 triệu; bảng tiến độ thanh toán 8 phương án; giá tham khảo Park Home full nội thất 13,86 – 14,01 tỷ (đã VAT, không ghi mã căn); 5 ảnh chính sách của chủ đầu tư vào Thư viện ảnh.
+- **Bài "Chính sách bán hàng Casamia Balanca 2026"** viết lại theo chính sách mới (đạt bộ chấm SEO); bài dòng tiền đầu tư biệt thự Casamia cập nhật mức tối thiểu 50 – 60 triệu/tháng.
+- Bảng giá có logo đơn vị phân phối không đưa lên web.
 
 ## Có gì mới – 2.20.295 (15/11/2026) – Euro Village 2: sơ đồ vẽ lại từ CAD, có mã lô
 
