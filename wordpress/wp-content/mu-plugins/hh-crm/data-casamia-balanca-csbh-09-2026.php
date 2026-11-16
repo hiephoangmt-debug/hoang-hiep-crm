@@ -46,11 +46,8 @@ function hh_casamia_csbh_0926_meta() {
 		'hh_p_price_table'    => implode(
 			"\n",
 			array(
-				'Park Home full nội thất – không vay | Đất 178 m², sàn 316,09 m² | 13,86 – 14,01 tỷ | Đã gồm VAT, giá tham khảo 11/2026',
-				'Park Home full nội thất – vay, HTLS 12 tháng | Đất 178 m², sàn 316,09 m² | 14,02 – 14,19 tỷ | Đã gồm VAT',
-				'Park Home full nội thất – vay, HTLS 18 tháng | Đất 178 m², sàn 316,09 m² | 14,47 – 14,64 tỷ | Đã gồm VAT',
-				'Park Home full nội thất – vay, HTLS 24 tháng | Đất 178 m², sàn 316,09 m² | 15,05 – 15,23 tỷ | Đã gồm VAT',
-				'Forestside Villa | Theo bảng hàng | Liên hệ | Chiết khấu 4 tỷ khi nhận bàn giao thô',
+				'Park Home full nội thất | Đất 178 m², sàn 316,09 m² | Chỉ từ 13,86 tỷ (đã VAT) | Liên hệ Hoàng Hiệp nhận bảng giá từng căn',
+				'Forestside Villa | Biệt thự rừng dừa | Liên hệ | Chiết khấu 4 tỷ khi nhận bàn giao thô',
 			)
 		),
 	);
@@ -75,7 +72,7 @@ function hh_casamia_csbh_0926_html() {
 <li><strong>Vay ngân hàng:</strong> hỗ trợ vay 70%, hỗ trợ lãi suất 0% trong 24 tháng, ân hạn nợ gốc 24 tháng – khách trả 30% (đặt cọc, 20% ký hợp đồng, 10%), phần còn lại ngân hàng giải ngân.</li>
 <li><strong>Tất cả phân khu:</strong> miễn phí 2 năm phí quản lý khu đô thị, 1 năm Fitness &amp; Pool tại Clubhouse Casamia.</li>
 </ul>
-<p><strong>Giá tham khảo Park Home full nội thất</strong> (đất 178 m², sàn 316,09 m², đã gồm VAT): khoảng <strong>13,86 – 14,01 tỷ</strong> nếu không vay; chọn vay kèm hỗ trợ lãi suất 12 / 18 / 24 tháng thì khoảng 14,02 – 14,19 / 14,47 – 14,64 / 15,05 – 15,23 tỷ.</p>
+<p><strong>Park Home full nội thất</strong> (đất 178 m², sàn 316,09 m²) giá <strong>chỉ từ 13,86 tỷ</strong> (đã gồm VAT). Bảng giá từng căn, giá theo phương án vay và quỹ căn được chiết khấu 3,5 – 4 tỷ: liên hệ <strong>Hoàng Hiệp 0904 567 009</strong>.</p>
 <p><em>Nhận định của Hoàng Hiệp:</em> mức thuê lại 50 – 60 triệu/tháng là cam kết theo chính sách của chủ đầu tư trong 3 – 5 năm, anh chị nên đọc kỹ điều kiện trong hợp đồng thuê / ủy thác (quỹ căn áp dụng, tiêu chuẩn nội thất, thời điểm bắt đầu tính). Khách mua để ở hoặc tự cho thuê có thể cân nhắc phương án bàn giao thô vì chiết khấu lớn (3,5 – 4 tỷ). Chính sách và quỹ căn thay đổi theo từng đợt – liên hệ <strong>Hoàng Hiệp 0904 567 009</strong> để nhận bảng hàng và bảng tính dòng tiền từng căn.</p>
 HTML;
 }
@@ -95,7 +92,7 @@ add_filter(
 					'Park Home | Nhà phố vườn ven các công viên chủ đề | Theo bảng hàng | Liên hệ nhận bảng hàng',
 				),
 				array(
-					'Park Home | Nhà phố vườn ven các công viên chủ đề – đất 178 m², sàn 316,09 m² | Full nội thất khoảng 13,86 – 14,01 tỷ (đã VAT) | CĐT thuê lại 50 triệu/tháng; chiết khấu 3,5 tỷ khi nhận thô',
+					'Park Home | Nhà phố vườn ven các công viên chủ đề – đất 178 m², sàn 316,09 m² | Full nội thất chỉ từ 13,86 tỷ (đã VAT) | CĐT thuê lại 50 triệu/tháng; chiết khấu 3,5 tỷ khi nhận thô',
 				),
 				$zones_old
 			) . "\nForestside Villa | Biệt thự rừng dừa | Theo bảng hàng | CĐT thuê lại 60 triệu/tháng; chiết khấu 4 tỷ khi nhận thô";

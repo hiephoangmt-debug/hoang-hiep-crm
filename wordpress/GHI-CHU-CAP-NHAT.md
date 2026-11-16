@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.296**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.33** + plugin Hoàng Hiệp CRM **2.20.297**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.297 (16/11/2026) – Casamia: chỉ hiện giá thấp nhất
+
+- Theo anh Hiệp: không đăng bảng giá đầy đủ. Trang dự án và bài chính sách Casamia Balanca chỉ ghi **Park Home full nội thất chỉ từ 13,86 tỷ (đã VAT)** + mời liên hệ nhận bảng giá từng căn; bỏ giá theo phương án vay. Quy tắc ghi vào SEO-100-DIEM.md cho các bài sau.
 
 ## Có gì mới – 2.20.296 (16/11/2026) – Casamia Balanca: chính sách bán hàng từ 09/09/2026
 

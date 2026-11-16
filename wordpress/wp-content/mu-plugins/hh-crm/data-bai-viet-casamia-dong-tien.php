@@ -48,7 +48,7 @@ function hh_posts_casamia_dong_tien( $posts ) {
 <p>Cộng dồn 5 năm ở công suất 55%, dòng tiền ròng khoảng 1,6 tỷ; 10 năm khoảng 3,3 tỷ, tức chưa tới một phần tư vốn bỏ ra. Theo chính sách bán hàng của chủ đầu tư từ 09/09/2026, thanh toán sớm 95% được chiết khấu 2 – 5% tùy phân khu; mức 5% giảm khoảng 0,69 tỷ trên căn mẫu 13,75 tỷ. Chọn bàn giao thô còn được chiết khấu 3,5 – 4 tỷ nhưng phải tự làm nội thất.</p>
 
 <h2>Kịch bản B: đầu tư biệt thự Casamia Balanca có vay ngân hàng 50 – 70%</h2>
-<p>Chính sách bán hàng của chủ đầu tư từ 09/09/2026 hỗ trợ vay 70% giá trị hợp đồng, hỗ trợ lãi suất 0% và ân hạn nợ gốc 24 tháng; lưu ý giá bán theo phương án vay hỗ trợ lãi suất cao hơn giá không vay (Park Home 24 tháng cao hơn khoảng 8,6%). Sau ân hạn, Hiệp <strong>giả định lãi suất 10%/năm</strong> (thả nổi) và chỉ tính tiền lãi, chưa tính trả gốc.</p>
+<p>Chính sách bán hàng của chủ đầu tư từ 09/09/2026 hỗ trợ vay 70% giá trị hợp đồng, hỗ trợ lãi suất 0% và ân hạn nợ gốc 24 tháng; lưu ý giá bán theo phương án vay hỗ trợ lãi suất cao hơn giá không vay. Sau ân hạn, Hiệp <strong>giả định lãi suất 10%/năm</strong> (thả nổi) và chỉ tính tiền lãi, chưa tính trả gốc.</p>
 <table>
 <thead><tr><th>Mức vay</th><th>Lãi vay/năm (giả định 10%)</th><th>Dòng tiền ròng 40%</th><th>Dòng tiền ròng 55%</th><th>Dòng tiền ròng 70%</th></tr></thead>
 <tbody>

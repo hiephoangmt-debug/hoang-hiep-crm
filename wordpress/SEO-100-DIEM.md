@@ -35,3 +35,8 @@ Khi bài lên web, `seo-bai-viet.php` tự: đưa từ khoá vào tiêu đề / 
 - Mật độ = số lần từ khoá (cả từ khoá phụ) / tổng số từ × 100. Bài 508 từ, 5 lần → 0,98% là **trượt** – cần ≥ 1%.
 - Độ dài URL tính **cả** `https://hiephoangmt.com/` (24 ký tự) + slug + `/` → slug ≤ 50 ký tự.
 - "Từ khoá trong nội dung" phải khớp **nguyên văn** cụm từ khoá (VD từ khoá "khách du lịch Đà Nẵng 2026" mà bài chỉ viết "khách du lịch Đà Nẵng 9 tháng 2026" là trượt).
+
+## Giá trong bài và trang dự án (anh Hiệp 16/11/2026)
+
+- **Không đăng bảng giá đầy đủ** (giá từng căn, giá theo từng phương án vay). Chỉ đưa **con số thấp nhất**: "chỉ từ X tỷ" (ghi rõ đã gồm VAT hay chưa) để khách tò mò liên hệ; phần còn lại ghi "liên hệ Hoàng Hiệp nhận bảng giá từng căn".
+- Chiết khấu, tiến độ thanh toán, ưu đãi trong chính sách bán hàng vẫn được đăng.
