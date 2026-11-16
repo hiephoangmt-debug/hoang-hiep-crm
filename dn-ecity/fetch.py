@@ -36,19 +36,26 @@ for (w, s_, e, n_) in BOXES.values():
     for x in range(x0, x1 + 1):
         for y in range(y0, y1 + 1): need.add(quadkey(x, y, 9))
 MS = {}   # ô lưới 0.0005° -> [(lon, lat, h)]
+MSDBG = {'need': sorted(need)}
 try:
     links = urllib.request.urlopen('https://minedbuildings.z5.web.core.windows.net/global-buildings/dataset-links.csv', timeout=120).read().decode()
-    rows = [r for r in csv.DictReader(io.StringIO(links)) if r['Location'] == 'Vietnam' and any(r['QuadKey'].startswith(q) or q.startswith(r['QuadKey']) for q in need)]
+    allrows = list(csv.DictReader(io.StringIO(links)))
+    MSDBG['locs'] = sorted({r['Location'] for r in allrows if 'iet' in r['Location'].lower()})
+    MSDBG['cols'] = list(allrows[0].keys()) if allrows else []
+    rows = [r for r in allrows if 'iet' in r['Location'].lower() and any(r['QuadKey'].startswith(q) or q.startswith(r['QuadKey']) for q in need)]
+    MSDBG['vn_qk_sample'] = [r['QuadKey'] for r in allrows if 'iet' in r['Location'].lower()][:10]; MSDBG['rows'] = len(rows)
     print('ms files', len(rows), flush=True)
     for r in rows:
         raw = gzip.decompress(urllib.request.urlopen(r['Url'], timeout=300).read()).decode()
         for line in raw.splitlines():
             if not line.strip(): continue
             ft = json.loads(line); h = (ft.get('properties') or {}).get('height', -1)
+            MSDBG['tot'] = MSDBG.get('tot', 0) + 1
+            if MSDBG['tot'] < 4: MSDBG.setdefault('sample', []).append(ft.get('properties'))
             if h is None or h <= 0: continue
             ring = ft['geometry']['coordinates'][0]; lon = sum(q[0] for q in ring) / len(ring); lat = sum(q[1] for q in ring) / len(ring)
             MS.setdefault((round(lon / 0.0005), round(lat / 0.0005)), []).append((lon, lat, float(h)))
-except Exception as ex: print('ms lỗi', ex, flush=True)
+except Exception as ex: print('ms lỗi', ex, flush=True); MSDBG['err'] = repr(ex)
 print('ms có chiều cao', sum(len(v) for v in MS.values()), flush=True)
 def pip(x, y, ring):
     c = False; j = len(ring) - 1
@@ -149,4 +156,4 @@ for el in (pd or {}).get('elements', []):
     pf.append({'type': 'Feature', 'properties': {'c': cat, 'n': nm, 'k': next((f'{k}={t[k]}' for _, kv in CAT for k, v in kv if t.get(k) == v), '')}, 'geometry': {'type': 'Point', 'coordinates': [round(lon, 6), round(lat, 6)]}})
 json.dump({'type': 'FeatureCollection', 'features': pf}, open(os.path.join(OUT, 'poi.geojson'), 'w'), ensure_ascii=False, separators=(',', ':'))
 print('poi', len(pf), Counter(f['properties']['c'] for f in pf), flush=True)
-json.dump({'stat': stat, 'boxes': BOXES, 'time': time.strftime('%Y-%m-%d')}, open(os.path.join(OUT, 'info.json'), 'w'))
+json.dump({'stat': stat, 'boxes': BOXES, 'time': time.strftime('%Y-%m-%d'), 'ms': MSDBG}, open(os.path.join(OUT, 'info.json'), 'w'), ensure_ascii=False)
