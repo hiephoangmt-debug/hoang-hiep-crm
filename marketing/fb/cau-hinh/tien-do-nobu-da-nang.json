@@ -1,0 +1,90 @@
+{
+ "tag": "TIẾN ĐỘ · NOBU RESIDENCES",
+ "title": "Tiến độ Nobu Đà Nẵng",
+ "sub": "Cập nhật 10/2026: kết cấu tầng 22",
+ "xc": 0.5,
+ "yc": 0.4,
+ "stats": [
+  [
+   "22/43",
+   "tầng kết cấu"
+  ],
+  [
+   "7 – 13",
+   "tầng lắp kính"
+  ],
+  [
+   "tầng 17",
+   "cơ điện, PCCC"
+  ],
+  [
+   "2027",
+   "dự kiến bàn giao"
+  ]
+ ],
+ "items": [
+  [
+   "Quý 2/2024",
+   "Khởi công, Newtecons thi công"
+  ],
+  [
+   "05/2026",
+   "Đổ bê tông sàn tầng 8"
+  ],
+  [
+   "10/2026",
+   "Kết cấu đến tầng 22"
+  ],
+  [
+   "2027",
+   "Dự kiến hoàn thiện, bàn giao"
+  ]
+ ],
+ "box": "Mốc bàn giao chính xác theo hợp đồng mua bán",
+ "note": "Theo cập nhật tiến độ của chủ đầu tư 09/11/2026 · Ảnh công trường thực tế 10/2026",
+ "headline": [
+  [
+   "Tiến độ",
+   "big",
+   0
+  ],
+  [
+   "Nobu",
+   "script",
+   300
+  ],
+  [
+   "Đà Nẵng",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Tiến độ",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "NOBU",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Đà Nẵng",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}

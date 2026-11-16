@@ -1,0 +1,90 @@
+{
+ "tag": "BẢNG GIÁ · CAPITAL SQUARE",
+ "title": "Giá Capital Square theo tòa",
+ "sub": "Giỏ hàng 11/2026, căn 1PN đến 3PN",
+ "xc": 0.5,
+ "yc": 0.4,
+ "stats": [
+  [
+   "từ 4,3 tỷ",
+   "căn 1PN"
+  ],
+  [
+   "từ 6,2 tỷ",
+   "căn 2PN"
+  ],
+  [
+   "từ 9,3 tỷ",
+   "căn 3PN"
+  ],
+  [
+   "14 tòa",
+   "3.391 căn hộ"
+  ]
+ ],
+ "items": [
+  [
+   "S4 Hudson Place",
+   "Từ 4,32 tỷ, view sông Hàn"
+  ],
+  [
+   "S3 Broadway",
+   "3PN từ khoảng 8,50 tỷ"
+  ],
+  [
+   "C6 The Kings",
+   "2PN từ 6,29 tỷ"
+  ],
+  [
+   "C4 The Queens",
+   "Tầng 22 – 26, từ 7,07 tỷ"
+  ]
+ ],
+ "box": "Giá gồm VAT và kinh phí bảo trì, chưa trừ ưu đãi",
+ "note": "Giá tham khảo giỏ hàng 11/2026, thay đổi theo đợt · Ảnh flycam công trường 5/2026",
+ "headline": [
+  [
+   "Giá theo tòa",
+   "big",
+   0
+  ],
+  [
+   "Capital",
+   "script",
+   300
+  ],
+  [
+   "Square",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Giá theo tòa",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "CAPITAL",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Square",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}

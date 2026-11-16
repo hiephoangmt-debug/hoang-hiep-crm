@@ -1,0 +1,90 @@
+{
+ "tag": "BÀN GIAO · SUN SAPHIA RESIDENCE",
+ "title": "Bàn giao Sun Saphia Residence",
+ "sub": "Kiểm tra gì, ghi biên bản ra sao?",
+ "xc": 0.5,
+ "yc": 0.35,
+ "stats": [
+  [
+   "11/2028",
+   "dự kiến bàn giao"
+  ],
+  [
+   "8",
+   "hạng mục cần soi"
+  ],
+  [
+   "1 – 2 giờ",
+   "nên dành ra"
+  ],
+  [
+   "3",
+   "điểm căn mặt biển"
+  ]
+ ],
+ "items": [
+  [
+   "Giấy tờ",
+   "Hợp đồng, phụ lục vật liệu, căn cước"
+  ],
+  [
+   "Dụng cụ",
+   "Đèn pin, thước dây, ổ cắm thử điện"
+  ],
+  [
+   "Biên bản",
+   "Ghi lỗi kèm vị trí, ảnh, thời hạn sửa"
+  ],
+  [
+   "Căn mặt biển",
+   "Soi gioăng, ray cửa kính ban công"
+  ]
+ ],
+ "box": "Bàn giao liền tường, trừ tủ bếp, thiết bị bếp và hút mùi",
+ "note": "Theo chủ đầu tư, cập nhật 11/2026 · Ảnh flycam thực tế khu vực 17/10/2026",
+ "headline": [
+  [
+   "Nhận bàn giao",
+   "big",
+   0
+  ],
+  [
+   "Sun Saphia",
+   "script",
+   300
+  ],
+  [
+   "Residence",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Nhận bàn giao",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "SUN SAPHIA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Residence",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}

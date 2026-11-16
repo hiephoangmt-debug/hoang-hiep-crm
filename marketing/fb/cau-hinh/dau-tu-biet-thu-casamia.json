@@ -1,0 +1,90 @@
+{
+ "tag": "ĐẦU TƯ · CASAMIA BALANCA",
+ "title": "Đầu tư biệt thự Casamia Balanca",
+ "sub": "Bài toán dòng tiền 5 – 10 năm",
+ "xc": 0.5,
+ "yc": 0.45,
+ "stats": [
+  [
+   "1,5 – 3%",
+   "lợi suất/năm*"
+  ],
+  [
+   "~14,5 tỷ",
+   "vốn căn mẫu*"
+  ],
+  [
+   "40 – 70%",
+   "công suất*"
+  ],
+  [
+   "3,5 tr",
+   "giá thuê/đêm*"
+  ]
+ ],
+ "items": [
+  [
+   "Tiền mặt, tự cho thuê",
+   "Khoảng 1,5 – 3%/năm trên vốn"
+  ],
+  [
+   "Vay 50 – 70%",
+   "Tiền thuê chưa đủ trả lãi sau ân hạn"
+  ],
+  [
+   "10 năm, công suất 55%",
+   "Dòng tiền ròng khoảng 3,3 tỷ"
+  ],
+  [
+   "Nên xem như",
+   "Tài sản tích lũy dài hạn"
+  ]
+ ],
+ "box": "Không phải sản phẩm dòng tiền, cân nhắc kỹ khi vay",
+ "note": "*Giả định trong bài phân tích 10/2026 của Hiệp, không phải cam kết lợi nhuận · Ảnh phối cảnh chủ đầu tư",
+ "headline": [
+  [
+   "Đầu tư biệt thự",
+   "big",
+   0
+  ],
+  [
+   "Casamia",
+   "script",
+   300
+  ],
+  [
+   "Balanca",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Đầu tư biệt thự",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "CASAMIA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Balanca",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}
