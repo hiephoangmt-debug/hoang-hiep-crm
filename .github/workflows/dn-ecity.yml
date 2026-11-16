@@ -3,7 +3,7 @@ name: Dữ liệu e-City Đà Nẵng
 on:
   push:
     branches: [claude/danang-data]
-    paths: ['dn-ecity/fetch.py', '.github/workflows/dn-ecity.yml']
+    paths: ['dn-ecity/fetch.py', 'dn-ecity/nam.py', '.github/workflows/dn-ecity.yml']
   workflow_dispatch:
 permissions:
   contents: write
@@ -15,12 +15,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
-      - run: pip install overturemaps shapely
+      - run: pip install overturemaps shapely rasterio pyproj numpy pillow
       - name: Cài tippecanoe
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq tippecanoe || (git clone -q --depth 1 https://github.com/felt/tippecanoe.git /tmp/tc && cd /tmp/tc && make -j4 >/dev/null && sudo make install >/dev/null)
           tippecanoe --version
       - run: python dn-ecity/fetch.py
+      - run: python dn-ecity/nam.py
       - name: Lưu dữ liệu
         run: |
           git config user.name "github-actions[bot]"
