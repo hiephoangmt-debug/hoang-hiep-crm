@@ -1,0 +1,48 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Giá phòng khách sạn gần biển theo mùa</title>
+<style>
+:root{--s:#fcfcfb;--ink:#0b1b2b;--mut:#5a6672;--grid:#e4e6e8;--c1:#86b6ef;--c2:#2a78d6;--c3:#104281;--or:#e8641c}
+*{box-sizing:border-box}body{margin:0;background:var(--s);font-family:"Be Vietnam Pro",Inter,Arial,sans-serif;color:var(--ink)}
+.card{width:540px;height:675px;padding:26px 26px 18px;display:flex;flex-direction:column}
+.ey{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--or);text-transform:uppercase}
+h1{font-size:23px;line-height:1.2;margin:6px 0 4px}
+.sub{font-size:12.5px;color:var(--mut);margin:0 0 14px}
+.lg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;margin-bottom:12px}.lg span{display:flex;align-items:center;gap:6px}.lg i{width:14px;height:10px;border-radius:2px;display:inline-block}
+.lg small{color:var(--mut)}
+.plot{position:relative;flex:1}
+.ax{position:absolute;left:112px;right:8px;top:0;bottom:22px}
+.gl{position:absolute;top:0;bottom:0;width:1px;background:var(--grid)}
+.tk{position:absolute;bottom:-20px;transform:translateX(-50%);font-size:11px;color:var(--mut)}
+.row{position:absolute;left:0;right:8px}
+.rn{position:absolute;left:0;width:104px;font-size:13px;font-weight:700;line-height:1.2}
+.rn small{display:block;font-weight:400;font-size:10.5px;color:var(--mut)}
+.bar{position:absolute;height:13px;border-radius:4px}
+.v{position:absolute;font-size:10.5px;color:var(--ink);white-space:nowrap;line-height:13px}
+.ft{font-size:10px;color:var(--mut);line-height:1.45;margin-top:8px}
+.cta{margin-top:8px;display:flex;justify-content:space-between;align-items:center;background:#0b2447;color:#fff;border-radius:10px;padding:8px 12px;font-size:12px}
+.cta b{color:#ffaa01}
+</style></head><body><div class="card" id="c">
+<span class="ey">Tham khảo cho người mua căn hộ cho thuê</span>
+<h1>Giá phòng khách sạn gần biển<br>Sơn Trà – Ngũ Hành Sơn theo mùa</h1>
+<p class="sub">Giá 1 đêm · phòng tiêu chuẩn 2 người · đơn vị: triệu đồng</p>
+<div class="lg"><span><i style="background:var(--c1)"></i>Thấp điểm <small>(T10–T1, mùa mưa)</small></span><span><i style="background:var(--c2)"></i>Trung bình <small>(T2–T4, T9)</small></span><span><i style="background:var(--c3)"></i>Cao điểm <small>(T5–T8, lễ, pháo hoa)</small></span></div>
+<div class="plot" id="p"></div>
+<div class="ft">Nguồn: tổng hợp giá niêm yết trên Booking.com, Vietnambooking, Eholiday, Vivutour và các trang khách sạn (tháng 11/2026). Mức theo mùa là ước tính từ khoảng giá chung, chưa gồm 10% phí dịch vụ ở một số khách sạn. Giá thực tế thay đổi theo ngày; không phải cam kết doanh thu cho thuê.</div>
+<div class="cta"><span><b>Sun Saphia Residence</b> · mặt tiền biển Võ Nguyên Giáp</span><span>Zalo 0904 567 009</span></div>
+</div>
+<script>
+const D=[["3 sao","Mỹ Khê, An Thượng",[[0.4,0.6],[0.6,0.9],[0.9,1.2]]],
+["4 sao","đường Võ Nguyên Giáp",[[1.0,1.4],[1.4,2.0],[2.0,2.7]]],
+["5 sao khách sạn","ven biển",[[2.0,2.6],[2.6,3.4],[3.4,4.5]]],
+["5 sao resort","Ngũ Hành Sơn",[[2.5,3.5],[3.5,5.0],[5.0,8.0]]]];
+const C=["var(--c1)","var(--c2)","var(--c3)"],MAX=8,p=document.getElementById('p');
+const H=p.clientHeight-22,rowH=H/D.length,W=p.clientWidth-112-8;
+const ax=document.createElement('div');ax.className='ax';p.appendChild(ax);
+for(let t=0;t<=MAX;t++){const g=document.createElement('div');g.className='gl';g.style.left=(t/MAX*100)+'%';ax.appendChild(g);
+ const k=document.createElement('div');k.className='tk';k.style.left=(t/MAX*100)+'%';k.textContent=t;ax.appendChild(k)}
+const f=x=>String(x).replace('.',',');
+D.forEach(([n,s,r],i)=>{const top=i*rowH+10;const nm=document.createElement('div');nm.className='rn';nm.style.top=(top+12)+'px';nm.innerHTML=n+'<small>'+s+'</small>';p.appendChild(nm);
+ r.forEach(([a,b],j)=>{const y=top+j*17;const x0=112+a/MAX*W,x1=112+b/MAX*W;
+  const bar=document.createElement('div');bar.className='bar';bar.style.cssText+=`left:${x0}px;width:${x1-x0}px;top:${y}px;background:${C[j]}`;p.appendChild(bar);
+  const v=document.createElement('div');v.className='v';v.textContent=f(a)+' – '+f(b);v.style.top=y+'px';
+  if(x1+70<112+W+8)v.style.left=(x1+5)+'px';else v.style.right=(p.clientWidth-x0+5)+'px';p.appendChild(v)})});
+</script></body></html>
