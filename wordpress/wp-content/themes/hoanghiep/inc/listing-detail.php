@@ -119,13 +119,22 @@ function hh_ld_project_media( $post_id ) {
 	}
 	$ok   = static fn( $id ) => $id && wp_get_attachment_image_url( $id, 'large' );
 	$cap  = static fn( $id ) => trim( (string) ( wp_get_attachment_caption( $id ) ?: get_the_title( $id ) ) );
-	$bld  = (int) get_post_thumbnail_id( $pid );
+	// Hình tòa nhà: ảnh đại diện dự án, nếu đó là mặt bằng / bản vẽ thì lấy ảnh phối cảnh đầu tiên trong thư viện dự án.
+	$plan_ids = array_map( 'intval', array_merge( hh_ids( 'hh_p_floorplans', $pid ), hh_ids( 'hh_p_unit_layouts', $pid ), array( (int) hh_meta( 'hh_p_masterplan_img', $pid ) ) ) );
+	$bld      = 0;
+	foreach ( array_merge( array( (int) get_post_thumbnail_id( $pid ) ), array_map( 'intval', hh_ids( 'hh_p_gallery', $pid ) ) ) as $cand ) {
+		if ( $ok( $cand ) && ! in_array( $cand, $plan_ids, true ) && ! hh_ld_is_plan_img( $cand ) ) {
+			$bld = $cand;
+			break;
+		}
+	}
 	$out  = array(
 		'id'       => $pid,
 		'title'    => get_the_title( $pid ),
 		'url'      => get_permalink( $pid ),
 		'building' => $ok( $bld ) ? $bld : 0,
 		'plans'    => array(),
+		'tower'    => has_term( array( 'can-ho', 'can-ho-chung-cu', 'can-ho-dich-vu', 'can-ho-so-huu-lau-dai', 'chung-cu', 'penthouse', 'duplex', 'studio', 'officetel', 'condotel' ), 'loai-bds', $post_id ) || (bool) preg_match( '/căn hộ|chung cư|studio|penthouse|duplex|\d\s*pn/iu', get_the_title( $post_id ) ),
 		'units'    => (bool) hh_meta( 'hh_p_tour_units', $pid ),
 		'tour'     => (bool) hh_meta( 'hh_p_tour_4d', $pid ),
 	);
@@ -142,7 +151,7 @@ function hh_ld_project_media( $post_id ) {
 	}
 	foreach ( array_slice( hh_ids( 'hh_p_floorplans', $pid ), 0, 4 ) as $fid ) {
 		if ( $ok( $fid ) ) {
-			$out['plans'][] = array( (int) $fid, 'Mặt bằng ' . preg_replace( '/^m[aặ]t b[aằ]ng\s*/iu', '', $cap( $fid ) ) );
+			$out['plans'][] = array( (int) $fid, preg_match( '/^m[aặ]t b[aằ]ng/iu', $cap( $fid ) ) ? $cap( $fid ) : 'Mặt bằng ' . $cap( $fid ) );
 		}
 	}
 	$mp = (int) hh_meta( 'hh_p_masterplan_img', $pid );

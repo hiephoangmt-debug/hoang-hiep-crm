@@ -178,12 +178,12 @@ while ( have_posts() ) :
 						<?php endif; ?>
 						<?php if ( $pmedia ) : ?>
 							<div class="ld-proj">
-								<h3 class="ld-proj__title">Tòa nhà và mặt bằng dự án <a href="<?php echo esc_url( $pmedia['url'] ); ?>"><?php echo esc_html( $pmedia['title'] ); ?></a></h3>
+								<h3 class="ld-proj__title"><?php echo $pmedia['tower'] ? 'Tòa nhà và mặt bằng' : 'Phối cảnh và mặt bằng'; ?> dự án <a href="<?php echo esc_url( $pmedia['url'] ); ?>"><?php echo esc_html( $pmedia['title'] ); ?></a></h3>
 								<div class="ld-plans">
 									<?php if ( $pmedia['building'] ) : ?>
 										<a class="ld-plan ld-plan--bld" href="<?php echo esc_url( wp_get_attachment_image_url( $pmedia['building'], 'full' ) ); ?>" data-lightbox="mat-bang">
-											<?php echo wp_get_attachment_image( $pmedia['building'], 'large', false, array( 'loading' => 'lazy', 'decoding' => 'async', 'alt' => 'Hình tòa nhà ' . $pmedia['title'] ) ); ?>
-											<span>Hình tòa nhà <?php echo esc_html( $pmedia['title'] ); ?></span>
+											<?php echo wp_get_attachment_image( $pmedia['building'], 'large', false, array( 'loading' => 'lazy', 'decoding' => 'async', 'alt' => ( $pmedia['tower'] ? 'Hình tòa nhà ' : 'Phối cảnh ' ) . $pmedia['title'] ) ); ?>
+											<span><?php echo esc_html( ( $pmedia['tower'] ? 'Hình tòa nhà ' : 'Phối cảnh ' ) . $pmedia['title'] ); ?></span>
 										</a>
 									<?php endif; ?>
 									<?php foreach ( $pmedia['plans'] as $pl ) : ?>
@@ -196,7 +196,7 @@ while ( have_posts() ) :
 								<?php if ( $pmedia['units'] || $pmedia['tour'] ) : ?>
 									<div class="ld-proj__cta">
 										<a class="btn btn--cta" href="<?php echo esc_url( $pmedia['url'] . '#xem-4d' ); ?>"><?php echo $pmedia['units'] ? 'Chọn căn trên mặt bằng tầng' : 'Xem mô hình 4D tòa nhà'; ?></a>
-										<small>Xem tòa nhà, chọn tầng, xem mặt bằng và hướng nhìn từng căn<?php echo $pmedia['tour'] ? ' trên mô hình 4D' : ''; ?>.</small>
+										<small><?php echo $pmedia['tower'] ? 'Xem tòa nhà, chọn tầng, xem mặt bằng và hướng nhìn từng căn' : 'Xem phối cảnh, mặt bằng và vị trí từng lô'; ?><?php echo $pmedia['tour'] ? ' trên mô hình 4D' : ''; ?>.</small>
 									</div>
 								<?php endif; ?>
 								<p class="ld-note">Ảnh của dự án, minh hoạ vị trí và thiết kế chung; căn thực tế theo mô tả của tin.</p>
