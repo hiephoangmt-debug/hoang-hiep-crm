@@ -1,0 +1,56 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Giá phòng gần biển theo mùa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Great+Vibes&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}body{background:#fff}
+.c{width:540px;height:675px;position:relative;overflow:hidden;font-family:"Be Vietnam Pro",Arial,sans-serif;color:#13253b;background:#f7f3ec}
+.hero{position:relative;height:232px}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,26,48,.7) 0%,rgba(10,26,48,.35) 45%,rgba(247,243,236,0) 70%,#f7f3ec 100%)}
+.ttl{position:absolute;top:18px;left:0;right:0;text-align:center;z-index:1;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.45)}
+.ttl .k{font-size:9px;letter-spacing:.32em;font-weight:600;opacity:.95}
+.ttl h1{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:27px;line-height:1.05;margin-top:6px}
+.ttl h2{font-family:"Cormorant Garamond",serif;font-weight:700;font-size:40px;letter-spacing:.04em;line-height:1;color:#ffcf8a}
+.ttl .s{font-family:"Great Vibes",cursive;font-size:30px;color:#fff;line-height:1}
+.mh{position:absolute;right:10px;top:160px;z-index:1;font-size:7.5px;color:#fff;background:rgba(0,0,0,.35);padding:1px 7px;border-radius:99px}
+.lg{position:relative;z-index:1;margin:-30px auto 0;width:max-content;display:flex;gap:6px;background:#fff;border-radius:99px;padding:5px 8px;box-shadow:0 6px 18px -8px rgba(10,26,48,.35);font-size:9.5px;font-weight:600}
+.lg span{display:flex;align-items:center;gap:4px;padding:2px 7px;border-radius:99px}
+.unit{text-align:center;font-size:9.5px;color:#6b7785;margin:7px 0 6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 16px}
+.card{background:#fff;border-radius:12px;padding:9px 10px 8px;box-shadow:0 8px 20px -14px rgba(10,26,48,.45);position:relative}
+.card .h{display:flex;align-items:baseline;justify-content:space-between}
+.card b.n{font-size:13px;font-weight:800}.card .st{color:#e3a01b;font-size:10px;letter-spacing:1px}
+.card small{display:block;font-size:9px;color:#6b7785;margin:1px 0 6px}
+.sea{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:6px;font-size:9.5px;margin-top:3px}
+.sea .bar{height:6px;border-radius:99px;background:#eef1f4;position:relative;overflow:hidden}.sea .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:99px}
+.sea b{font-size:11px;font-weight:800;min-width:56px;text-align:right}
+.card.hl{background:linear-gradient(160deg,#fff7ec,#fff);outline:1.5px solid #f0a050}
+.tag{position:absolute;top:-8px;right:8px;background:#e8641c;color:#fff;font-size:8px;font-weight:800;padding:2px 8px;border-radius:99px}
+.tip{margin:9px 16px 0;text-align:center;font-size:10.5px;line-height:1.45}.tip b{color:#c2541a}
+.prj{margin:9px 16px 0;background:#0e2440;border-radius:14px;color:#fff;display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:0;overflow:hidden;height:88px}
+.prj .p{position:relative;height:88px}.prj .p img{width:100%;height:100%;object-fit:cover;display:block}
+.prj .p i{position:absolute;left:5px;bottom:5px;font-style:normal;font-size:7px;background:rgba(0,0,0,.45);padding:1px 6px;border-radius:99px}
+.prj .t{padding:9px 10px;font-size:9.5px;line-height:1.45}
+.prj .t h3{font-family:"Cormorant Garamond",serif;font-size:17px;color:#ffcf8a;line-height:1;margin-bottom:4px}
+.nt{margin:7px 18px 0;font-size:7.3px;color:#7b8794;line-height:1.4;text-align:center}
+.ft{position:absolute;left:16px;right:16px;bottom:10px;border-top:1px solid #e2d9cb;padding-top:6px;display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:#0e2440}
+.ft b{color:#c2541a}
+</style></head><body><div class="c" id="c">
+<div class="hero"><img src="anh/phoi-canh.webp"><div class="ttl"><div class="k">THAM KHẢO · CĂN HỘ CHO THUÊ</div><h1>Giá phòng khách sạn</h1><h2>GẦN BIỂN ĐÀ NẴNG</h2><div class="s">theo mùa</div></div><span class="mh">Phối cảnh minh họa</span></div>
+<div class="lg"><span style="background:#e3eefb">☔ Thấp điểm · T10–T1</span><span style="background:#dbe8fb">🌤 Trung bình · T2–T4, T9</span><span style="background:#fde3d2">☀️ Cao điểm · T5–T8, lễ</span></div>
+<div class="unit">Giá 1 đêm · phòng tiêu chuẩn 2 người · triệu đồng</div>
+<div class="grid" id="g"></div>
+<div class="tip">💡 Cùng một hạng phòng, <b>mùa hè có thể gấp đôi mùa mưa</b>.<br>Sun Saphia nằm ngay cạnh dải <b>resort 5 sao</b> – hạng giá cao nhất khu vực.</div>
+<div class="prj"><div class="p"><img src="anh/bien.jpg"><i>Flycam thực tế</i></div><div class="p"><img src="anh/pc-ho-boi.webp" style="object-position:40% 85%"><i>Phối cảnh minh họa</i></div>
+<div class="t"><h3>Sun Saphia Residence</h3>🏖 Ra biển chỉ <b>hơn 300 m</b><br>🌴 Cạnh resort Ariyana, Furama<br>🏊 Hồ bơi view biển, gym, spa</div></div>
+<div class="nt">Giá niêm yết tổng hợp từ Booking.com, Vietnambooking, Eholiday, Vivutour (11/2026); mức theo mùa là ước tính. Căn hộ không phải khách sạn, giá thuê thực tế thường thấp hơn; cho thuê theo đêm phải qua đơn vị đủ điều kiện kinh doanh lưu trú. Không phải cam kết doanh thu.</div>
+<div class="ft"><span><b>Sun Saphia Residence</b> · ngay bãi tắm Sơn Thủy</span><span>Zalo 0904 567 009</span></div>
+</div>
+<script>
+const D=[["3 sao","★★★","Mỹ Khê, An Thượng",[[0.4,0.6],[0.6,0.9],[0.9,1.2]]],["4 sao","★★★★","Trục Võ Nguyên Giáp",[[1.0,1.4],[1.4,2.0],[2.0,2.7]]],
+["5 sao khách sạn","★★★★★","Ven biển",[[2.0,2.6],[2.6,3.4],[3.4,4.5]]],["Resort 5 sao","★★★★★","Ngũ Hành Sơn",[[2.5,3.5],[3.5,5.0],[5.0,8.0]],1]];
+const C=["#86b6ef","#2a78d6","#e8641c"],I=["☔","🌤","☀️"],f=x=>String(x).replace('.',',');
+const g=document.getElementById('g');
+D.forEach(([n,st,s,r,hl])=>{let h='<div class="card'+(hl?' hl':'')+'">'+(hl?'<span class="tag">📍 Cạnh Sun Saphia</span>':'')+'<div class="h"><b class="n">'+n+'</b><span class="st">'+st+'</span></div><small>'+s+'</small>';
+ r.forEach(([a,b],j)=>{h+='<div class="sea"><span>'+I[j]+'</span><div class="bar"><i style="left:'+(a/8*100)+'%;width:'+((b-a)/8*100)+'%;background:'+C[j]+'"></i></div><b style="color:'+(j==2?'#c2541a':'#13253b')+'">'+f(a)+' – '+f(b)+'</b></div>'});
+ g.innerHTML+=h+'</div>'});
+</script></body></html>
