@@ -30,6 +30,7 @@ function hh_dataset_filmore( $projects ) {
 			'hh_p_unit_area'    => '48 – 125 m² (penthouse khoảng 206 m²)',
 			'hh_p_price_m2'     => 'Khoảng 130 – 150 triệu/m² (tham khảo)',
 			'hh_p_price_from'   => 5500,
+			'hh_p_tour_360'     => 'https://filmore.com.vn/thefilmoredanang/360/', // Tour 360 trên trang chủ đầu tư (anh Hiệp gửi 17/11/2026).
 			'hh_p_ownership'    => 'Sở hữu lâu dài (người Việt Nam)',
 			'hh_p_handover'     => 'Đã hoàn thiện 2025, bàn giao ngay',
 			'hh_p_handover_std' => 'Hoàn thiện nội thất cao cấp',
