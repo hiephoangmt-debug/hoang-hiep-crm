@@ -217,13 +217,7 @@ while ( have_posts() ) :
 						<?php if ( $policy ) : ?><div class="ld-price__pol"><?php hh_check_list( $policy ); ?></div><?php endif; ?>
 					</div>
 					<?php if ( $rent_d && $rent ) : ?><?php hh_spec_list( $rent ); ?><?php endif; ?>
-					<?php $show_calc = ! $rent_d && ! hh_meta( 'hh_no_finance' ) && (float) hh_meta( 'hh_price' ) < 30000 && (float) hh_meta( 'hh_price' ) > 0; ?>
-					<?php if ( $show_calc ) : ?>
-						<div id="tai-chinh" class="ld-calc">
-							<h3>Tính khoản vay &amp; dòng tiền</h3>
-							<?php get_template_part( 'template-parts/finance', null, array( 'mode' => 'listing', 'no_rent' => has_term( array( 'dat-nen', 'mat-bang-kinh-doanh' ), 'loai-bds', $id ) ) ); ?>
-						</div>
-					<?php endif; ?>
+					<?php /* Bỏ bảng tính vay, dòng tiền, cho thuê trên trang tin rao (anh Hiệp 17/11/2026). */ ?>
 					<details class="ld-specs"><summary>Toàn bộ thông tin tin đăng</summary><?php hh_spec_list( hh_listing_specs() ); ?></details>
 				</section>
 
