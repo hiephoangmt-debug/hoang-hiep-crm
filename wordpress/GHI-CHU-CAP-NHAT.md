@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.42** + plugin Hoàng Hiệp CRM **2.20.312**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.42** + plugin Hoàng Hiệp CRM **2.20.313**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.313
+
+- The Filmore Đà Nẵng: 11 câu hỏi thường gặp theo tài liệu chủ đầu tư (thang máy, chỗ đậu ô tô, trần 3,35 m, ban công, hồ bơi, phí quản lý, sở hữu, người nước ngoài, bảo hành, chống động đất), tiện ích theo tầng, đơn vị thiết kế; bỏ giá cũ trong bài giới thiệu và bảng loft.
 
 ## Có gì mới – 2.20.312
 

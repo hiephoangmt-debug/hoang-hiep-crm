@@ -55,6 +55,45 @@ add_filter(
 			if ( '' !== $links ) {
 				$fix['hh_p_image_links'] = array_merge( (array) ( $fix['hh_p_image_links'] ?? array() ), array( $links ) );
 			}
+			// Hỏi đáp, tiện ích, đơn vị thiết kế theo bộ câu hỏi thường gặp của chủ đầu tư (anh Hiệp gửi 18/11/2026; bỏ các mục đã cũ như tiến độ 2023).
+			$upd['hh_p_designer']     = 'Kiến trúc Mercurio Lab (Ý), cảnh quan LandArch, nội thất ID Dept (Singapore), ánh sáng Lightbox (Singapore), nhận diện thương hiệu Landor (Mỹ)';
+			$upd['hh_p_amenities_in'] = "Tầng trệt: sảnh lễ tân, khu thương mại – café, khu vui chơi trẻ em ngoài trời, phòng thư tín\nTầng 2: không gian sáng tạo cho trẻ em\nRooftop tầng 25: hồ bơi nhiệt vô cực khoảng 18 × 6 m và hồ bơi trẻ em\nRooftop: ghế tắm nắng, khu ngắm cảnh ngoài trời, phòng gym\nThư viện và không gian làm việc chung trên tầng thượng\nPhòng xông hơi tia hồng ngoại, phòng thay đồ, Nucalm\nKhu tổ chức tiệc trong nhà có bếp, khu BBQ ngoài trời\nAn ninh 24/7, lễ tân, quản lý tài sản và tiện ích";
+			$upd['hh_p_duplex_table'] = 'Loft 3PN thông tầng (4 căn) | 122,6 m² | 3 | Liên hệ';
+			$upd['hh_p_faq']          = implode(
+				"\n",
+				array(
+					'Ai là chủ đầu tư The Filmore Đà Nẵng? | Công ty CP Phát triển Bất động sản Filmore (Filmore Development). Tổng thầu thi công kết cấu Delta, ngân hàng bảo lãnh MSB.',
+					'Dự án có bao nhiêu căn hộ, bao nhiêu tầng? | 1 tòa 25 tầng nổi, 3 tầng hầm, 206 căn hộ. Tầng trệt và tầng 25 dành cho tiện ích; các căn tại tầng 9 có sân vườn.',
+					'Trần căn hộ cao bao nhiêu? | Chiều cao từ sàn đến sàn căn hộ điển hình 3,35 m; căn loft 6 m.',
+					'Căn hộ có ban công không? | Tất cả các căn đều có ban công hoặc lô gia, rộng 1,4 m (một số căn hướng Bắc 0,9 m), dài 3 – 4,4 m. Kính cửa sổ dày 13,52 mm, lan can kính 20 mm.',
+					'Tòa nhà có bao nhiêu thang máy, chỗ đậu ô tô? | 4 thang máy (3 thang khách 1.000 kg, 1 thang hàng/PCCC 1.275 kg, tốc độ 2,5 m/s), 2 thang nâng ô tô, 63 chỗ đậu ô tô dưới 3 tầng hầm.',
+					'Hồ bơi rộng bao nhiêu? | Hồ bơi người lớn khoảng 18 × 6 m, sâu 1,5 m; hồ bơi trẻ em khoảng 8 × 5 m, sâu 0,85 m – trên rooftop tầng 25.',
+					'Phí quản lý bao nhiêu? | Khoảng 30.000 đồng/m²/tháng tính trên diện tích thông thủy. Điện nước do nhà cung cấp lập hóa đơn, cư dân tự thanh toán. Chính sách từ 01/11/2026 miễn phí quản lý 1 năm.',
+					'Căn hộ sở hữu lâu dài hay 50 năm? | Người Việt Nam sở hữu lâu dài. Cá nhân nước ngoài sở hữu tối đa 50 năm kể từ ngày cấp giấy chứng nhận (được gia hạn theo luật); người nước ngoài được mua tối đa 30% số căn của dự án.',
+					'Giá bán đã gồm tiền sử dụng đất chưa? | Giá bán đã gồm giá trị quyền sử dụng đất, chưa gồm VAT và 2% phí bảo trì.',
+					'Bảo hành công trình bao lâu? | 24 tháng kể từ ngày nghiệm thu bàn giao; máy lạnh, thiết bị bếp và thiết bị khác bảo hành theo nhà sản xuất.',
+					'Tòa nhà có chống động đất, máy phát điện dự phòng không? | Thiết kế chống động đất cấp VII (thang MSK-64) theo QCVN 02:2009/BXD, TCVN 9386:2012; có máy phát điện dự phòng cho khu công cộng và PCCC.',
+				)
+			);
+			foreach ( array( 'hh_p_designer', 'hh_p_amenities_in', 'hh_p_duplex_table', 'hh_p_faq' ) as $k ) {
+				if ( ! empty( $old[ $k ] ) ) {
+					$fix[ $k ] = array_merge( (array) ( $fix[ $k ] ?? array() ), array( $old[ $k ] ) );
+				}
+			}
+			// Bài giới thiệu: bỏ giá cũ (1PN 5,5 – 6 tỷ… – 1PN đã hết), chỉ giữ giá thấp nhất hiện tại.
+			$c0 = (string) ( $p['content'] ?? '' );
+			$c1 = strtr(
+				$c0,
+				array(
+					'<li>75 căn 1 phòng ngủ, 48 – 50 m², giá tham khảo khoảng 5,5 – 6 tỷ.</li>' => '<li>Căn 1 phòng ngủ 48 – 51 m² (đã bán hết trong giỏ hàng chủ đầu tư tháng 11/2026).</li>',
+					'<li>106 căn 2 phòng ngủ, 71 – 81 m², khoảng 8,2 – 9,3 tỷ.</li>' => '<li>Căn 2 phòng ngủ 66 – 80 m² – giỏ hàng tháng 11/2026 chỉ từ 9,89 tỷ (chưa VAT).</li>',
+					'Mức giá khoảng 130 – 150 triệu/m² thuộc nhóm cao nhất Đà Nẵng' => 'Đơn giá từ khoảng 131 triệu/m² (chưa VAT) thuộc nhóm cao nhất Đà Nẵng',
+				)
+			);
+			if ( $c1 !== $c0 ) {
+				$projects[ $i ]['content']     = $c1;
+				$projects[ $i ]['fix_content'] = array_merge( (array) ( $p['fix_content'] ?? array() ), array( $c0 ) );
+			}
 			$projects[ $i ]['meta']     = array_merge( $old, $upd );
 			$projects[ $i ]['fix_meta'] = $fix;
 		}
