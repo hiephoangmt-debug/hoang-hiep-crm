@@ -145,11 +145,21 @@ function hh_ld_project_media( $post_id ) {
 	if ( $re ) {
 		foreach ( hh_ids( 'hh_p_unit_layouts', $pid ) as $lid ) {
 			if ( $ok( $lid ) && preg_match( $re, $cap( $lid ) . ' ' . basename( (string) get_attached_file( $lid ) ) ) ) {
-				$out['plans'][] = array( (int) $lid, 'Layout ' . $cap( $lid ) );
+				$out['plans'][] = array( (int) $lid, preg_match( '/^layout|^m[aặ]t b[aằ]ng/iu', $cap( $lid ) ) ? $cap( $lid ) : 'Layout ' . $cap( $lid ) );
 			}
 		}
 	}
-	foreach ( array_slice( hh_ids( 'hh_p_floorplans', $pid ), 0, 4 ) as $fid ) {
+	// Mặt bằng tầng: bỏ tầng hầm, mái; tầng điển hình / tầng ở lên trước, tầng 1 – tiện ích xuống sau.
+	$floors = array();
+	foreach ( hh_ids( 'hh_p_floorplans', $pid ) as $fid ) {
+		$c = $cap( $fid );
+		if ( ! $ok( $fid ) || preg_match( '/h[aầ]m|m[aá]i\b|basement/iu', $c ) ) {
+			continue;
+		}
+		$floors[ (int) $fid ] = preg_match( '/đi[eể]n h[iì]nh|t[aầ]ng\s*\d{1,2}\s*[-–]\s*\d/iu', $c ) ? 0 : ( preg_match( '/t[aầ]ng\s*(1|2)\b|ti[eệ]n [ií]ch|th[uư]ơng m[aạ]i|shophouse|kh[oố]i đ[eế]/iu', $c ) ? 2 : 1 );
+	}
+	asort( $floors );
+	foreach ( array_slice( array_keys( $floors ), 0, 4 ) as $fid ) {
 		if ( $ok( $fid ) ) {
 			$out['plans'][] = array( (int) $fid, preg_match( '/^m[aặ]t b[aằ]ng/iu', $cap( $fid ) ) ? $cap( $fid ) : 'Mặt bằng ' . $cap( $fid ) );
 		}
