@@ -107,21 +107,49 @@ function hh_cdt_match( $text ) {
 
 /** ID dự án trên web của chủ đầu tư: theo ô "Chủ đầu tư" và theo danh sách dự án trong hồ sơ (site_slug). Dự án cha trước, con sau. */
 function hh_cdt_projects( $slug ) {
-	static $cache = array();
-	if ( isset( $cache[ $slug ] ) ) {
-		return $cache[ $slug ];
+	return hh_cdt_index()[ $slug ] ?? array();
+}
+
+/**
+ * Bảng chủ đầu tư → dự án, tính 1 lần cho mọi chủ đầu tư rồi lưu 12 giờ (anh Hiệp 17/11/2026: trang mở chậm vì menu
+ * "Chủ đầu tư" dò lại toàn bộ dự án cho từng chủ đầu tư ở mỗi lượt tải trang). Tự tính lại khi lưu / xoá dự án hoặc đổi danh sách chủ đầu tư.
+ */
+function hh_cdt_index() {
+	static $idx = null;
+	if ( null !== $idx ) {
+		return $idx;
 	}
-	$d     = hh_cdt_all()[ $slug ] ?? array();
-	$named = array_filter( array_column( (array) ( $d['projects'] ?? array() ), 'site_slug' ) );
-	$ids   = get_posts( array( 'post_type' => 'du-an', 'posts_per_page' => 400, 'fields' => 'ids', 'orderby' => 'menu_order title', 'order' => 'ASC' ) );
-	$out   = array();
-	foreach ( $ids as $id ) {
-		if ( in_array( $slug, hh_cdt_match( hh_meta( 'hh_p_developer', $id ) ), true ) || in_array( get_post_field( 'post_name', $id ), $named, true ) ) {
-			$out[] = (int) $id;
+	$file = __DIR__ . '/chu-dau-tu.json';
+	$sig  = (string) ( is_file( $file ) ? filemtime( $file ) : 0 ) . '-' . ( defined( 'HH_CRM_VERSION' ) ? HH_CRM_VERSION : '' );
+	$hit  = get_transient( 'hh_cdt_index' );
+	if ( is_array( $hit ) && ( $hit['sig'] ?? '' ) === $sig && is_array( $hit['map'] ?? null ) ) {
+		return $idx = $hit['map']; // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments
+	}
+	$named = array();
+	foreach ( hh_cdt_all() as $slug => $d ) {
+		foreach ( array_filter( array_column( (array) ( $d['projects'] ?? array() ), 'site_slug' ) ) as $ps ) {
+			$named[ $ps ][] = $slug;
 		}
 	}
-	usort( $out, static fn( $a, $b ) => ( wp_get_post_parent_id( $a ) ? 1 : 0 ) <=> ( wp_get_post_parent_id( $b ) ? 1 : 0 ) );
-	return $cache[ $slug ] = $out; // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments
+	$map = array_fill_keys( array_keys( hh_cdt_all() ), array() );
+	$ids = get_posts( array( 'post_type' => 'du-an', 'posts_per_page' => 400, 'fields' => 'ids', 'orderby' => 'menu_order title', 'order' => 'ASC' ) );
+	foreach ( $ids as $id ) {
+		$slugs = array_unique( array_merge( hh_cdt_match( hh_meta( 'hh_p_developer', $id ) ), $named[ get_post_field( 'post_name', $id ) ] ?? array() ) );
+		foreach ( $slugs as $slug ) {
+			if ( isset( $map[ $slug ] ) ) {
+				$map[ $slug ][] = (int) $id;
+			}
+		}
+	}
+	foreach ( $map as $slug => $list ) {
+		usort( $list, static fn( $a, $b ) => ( wp_get_post_parent_id( $a ) ? 1 : 0 ) <=> ( wp_get_post_parent_id( $b ) ? 1 : 0 ) );
+		$map[ $slug ] = $list;
+	}
+	set_transient( 'hh_cdt_index', array( 'sig' => $sig, 'map' => $map ), 12 * HOUR_IN_SECONDS );
+	return $idx = $map; // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments
+}
+foreach ( array( 'save_post_du-an', 'deleted_post', 'trashed_post', 'untrashed_post' ) as $hh_cdt_hook ) {
+	add_action( $hh_cdt_hook, static fn() => delete_transient( 'hh_cdt_index' ) );
 }
 
 /** Chữ "Chủ đầu tư" của dự án; tên chủ đầu tư có hồ sơ thành link sang trang hồ sơ (mỗi chủ đầu tư một link). */

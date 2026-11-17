@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.39** + plugin Hoàng Hiệp CRM **2.20.305**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.40** + plugin Hoàng Hiệp CRM **2.20.306**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.306 / giao diện 2.16.40 – trang mở nhanh hơn
+
+- Menu "Chủ đầu tư" trước đây dò lại toàn bộ ~155 dự án cho từng chủ đầu tư ở MỖI lượt tải trang (≈1,5 giây/trang khi chưa có bộ nhớ đệm). Giờ tính 1 lần, lưu 12 giờ, tự tính lại khi lưu/xoá dự án.
+- Bảng giá theo dự án ở trang Mua bán / Cho thuê lưu 6 giờ, tự tính lại khi lưu dự án hoặc tin rao.
+- Đo trên bản thử có đủ 160 dự án: trang tin rao 1,6 giây → 0,07 giây; trang chủ 1,8 → 0,3 giây; Mua bán 2,1 → 0,24 giây.
 
 ## Có gì mới – 2.20.305
 

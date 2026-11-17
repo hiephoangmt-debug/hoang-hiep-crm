@@ -9,6 +9,12 @@ $tax   = array( array( 'taxonomy' => 'loai-du-an', 'field' => 'slug', 'terms' =>
 if ( ! empty( $args['area'] ) ) {
 	$tax[] = array( 'taxonomy' => 'khu-vuc', 'field' => 'slug', 'terms' => $args['area'] );
 }
+// Bảng tính từ tin rao của từng dự án khá nặng → lưu 6 giờ, tự tính lại khi lưu dự án / tin rao (anh Hiệp 17/11/2026: trang mở chậm).
+$cache_key = 'hh_pboard_' . md5( wp_json_encode( array( $deal, $tax, defined( 'HH_CRM_VERSION' ) ? HH_CRM_VERSION : '' ) ) );
+$cached    = get_transient( $cache_key );
+if ( is_array( $cached ) && isset( $cached['rows'] ) ) {
+	list( $rows, $latest ) = array( $cached['rows'], (int) $cached['latest'] );
+} else {
 $board = new WP_Query(
 	array(
 		'post_type'      => 'du-an',
@@ -39,6 +45,13 @@ while ( $board->have_posts() ) {
 	$rows[] = array( get_the_title(), get_permalink(), $area ? $area->name : '', $price, $kind );
 }
 wp_reset_postdata();
+set_transient( $cache_key, array( 'rows' => $rows, 'latest' => $latest ), 6 * HOUR_IN_SECONDS );
+$keys = (array) get_option( 'hh_pboard_keys', array() );
+if ( ! in_array( $cache_key, $keys, true ) ) {
+	$keys[] = $cache_key;
+	update_option( 'hh_pboard_keys', array_slice( $keys, -50 ), false );
+}
+}
 if ( ! $rows ) {
 	return;
 }

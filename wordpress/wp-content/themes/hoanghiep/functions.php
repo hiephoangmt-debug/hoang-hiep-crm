@@ -690,3 +690,14 @@ add_action(
 	},
 	99
 );
+
+/** Xoá bảng giá theo dự án đã lưu (template-parts/project-price-board.php) khi dự án / tin rao thay đổi. */
+function hoanghiep_flush_price_boards() {
+	foreach ( (array) get_option( 'hh_pboard_keys', array() ) as $key ) {
+		delete_transient( $key );
+	}
+	delete_option( 'hh_pboard_keys' );
+}
+foreach ( array( 'save_post_du-an', 'save_post_bat-dong-san', 'deleted_post', 'trashed_post' ) as $hoanghiep_hook ) {
+	add_action( $hoanghiep_hook, 'hoanghiep_flush_price_boards' );
+}
