@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.34** + plugin Hoàng Hiệp CRM **2.20.299**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.35** + plugin Hoàng Hiệp CRM **2.20.300**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.300 / giao diện 2.16.35 (17/11/2026) – chọn căn Sun Saphia: mặt bằng căn căn giữa
+
+- Công cụ "Chọn căn theo view" Sun Saphia chuyển về nhánh này quản lý. Mặt bằng căn (VD SP1805) co theo tỉ lệ, nằm giữa màn hình điện thoại; căn hẹp (studio) nới khung để chữ "Hành lang · thông thủy · layout" không tràn, nhãn loại căn xuống dòng riêng. Trang landing Sun Saphia và nút "Chọn căn" trỏ sang bản mới.
 
 ## Có gì mới – 2.20.299 / giao diện 2.16.34 (17/11/2026) – chú thích ảnh không che hình
 
