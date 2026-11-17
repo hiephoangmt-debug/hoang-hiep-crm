@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.41** + plugin Hoàng Hiệp CRM **2.20.307**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.41** + plugin Hoàng Hiệp CRM **2.20.308**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.308
+
+- Times Square Đà Nẵng: giỏ hàng tháng 11/2026 (23 căn tòa CT3, CT7) – giá chỉ từ 7,24 tỷ, ưu đãi + đếm ngược đến 30/11, bảng loại căn "từ …", bảng 6 căn giá tốt có mã căn (anh Hiệp yêu cầu), đoạn "Giỏ hàng tháng 11/2026" trong bài dự án.
 
 ## Có gì mới – 2.20.307 / giao diện 2.16.41
 
