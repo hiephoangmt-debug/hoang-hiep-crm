@@ -1,0 +1,90 @@
+{
+ "tag": "HẠ TẦNG · ĐÀ NẴNG",
+ "title": "FTZ Đà Nẵng",
+ "sub": "Khu thương mại tự do đến đâu?",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "1.881 ha",
+   "quy hoạch"
+  ],
+  [
+   "7 vị trí",
+   "FTZ1 – FTZ7"
+  ],
+  [
+   "3.525 tỷ",
+   "vốn vị trí số 7"
+  ],
+  [
+   "Q4/2027",
+   "VT7 xây dựng"
+  ]
+ ],
+ "items": [
+  [
+   "Vị trí số 2",
+   "Giao nhà đầu tư hạ tầng 6/2026"
+  ],
+  [
+   "Vị trí số 3",
+   "Chấp thuận nhà đầu tư 11/6/2026"
+  ],
+  [
+   "Vị trí số 7",
+   "276 ha Hòa Vang, chấp thuận 12/11/2026"
+  ],
+  [
+   "Căn hộ ven biển",
+   "Thêm khách thuê công tác theo tháng"
+  ]
+ ],
+ "box": "Động lực dài hạn, chưa nên dùng để tính giá bán lại ngắn hạn",
+ "note": "Theo quyết định UBND TP Đà Nẵng và báo chí, cập nhật 11/2026 · Ảnh thực tế sông Hàn",
+ "headline": [
+  [
+   "Khu thương mại tự do",
+   "big",
+   0
+  ],
+  [
+   "FTZ",
+   "script",
+   300
+  ],
+  [
+   "Đà Nẵng",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Khu thương mại tự do",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "FTZ",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Đà Nẵng",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}

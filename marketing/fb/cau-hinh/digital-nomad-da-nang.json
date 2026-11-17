@@ -1,0 +1,90 @@
+{
+ "tag": "CHO THUÊ · SUN SAPHIA RESIDENCE",
+ "title": "Digital nomad Đà Nẵng",
+ "sub": "Khách thuê 1 – 3 tháng cần gì?",
+ "xc": 0.5,
+ "yc": 0.4,
+ "stats": [
+  [
+   "1–3 tháng",
+   "thời gian ở"
+  ],
+  [
+   "90 ngày",
+   "e-visa tối đa"
+  ],
+  [
+   "50 m²",
+   "1PN+ làm việc"
+  ],
+  [
+   "30 m²",
+   "studio 1 người"
+  ]
+ ],
+ "items": [
+  [
+   "Internet ổn định",
+   "Cáp quang riêng, wifi dự phòng"
+  ],
+  [
+   "Bàn làm việc thật",
+   "Bàn rộng, ghế công thái học"
+  ],
+  [
+   "Yên tĩnh",
+   "Tầng trung – cao, kính cách âm"
+  ],
+  [
+   "Thuê theo tháng",
+   "Giá rõ gồm hay không gồm điện"
+  ]
+ ],
+ "box": "Mùa thấp điểm cho thuê theo tháng giúp căn ít bị trống",
+ "note": "Tổng hợp từ bài web hiephoangmt.com 11/2026 · Ảnh flycam thực tế khu vực 17/10/2026",
+ "headline": [
+  [
+   "Digital nomad",
+   "big",
+   0
+  ],
+  [
+   "Đà Nẵng",
+   "script",
+   300
+  ],
+  [
+   "thuê căn hộ",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Digital nomad",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "ĐÀ NẴNG",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "thuê căn hộ",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}

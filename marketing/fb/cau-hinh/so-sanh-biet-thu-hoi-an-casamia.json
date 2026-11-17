@@ -1,0 +1,90 @@
+{
+ "tag": "SO SÁNH · BIỆT THỰ HỘI AN",
+ "title": "So sánh biệt thự Hội An",
+ "sub": "Casamia Balanca hợp với ai?",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "~13,9 tỷ",
+   "Park Home full NT"
+  ],
+  [
+   "31,1 ha",
+   "363 căn thấp tầng"
+  ],
+  [
+   "Sổ hồng",
+   "từng lô 8/2026"
+  ],
+  [
+   "Lâu dài",
+   "sở hữu"
+  ]
+ ],
+ "items": [
+  [
+   "Casamia Balanca",
+   "Ven sông, rừng dừa, gần phố cổ"
+  ],
+  [
+   "Hoiana Beach Villas",
+   "Biệt thự biển, giao dự kiến 2028"
+  ],
+  [
+   "Vinpearl Nam Hội An",
+   "Đã vận hành, chuyển nhượng"
+  ],
+  [
+   "The Ocean Villas",
+   "Sát biển, trong khu resort"
+  ]
+ ],
+ "box": "Ven sông yên tĩnh hay mặt biển resort: chọn theo mục đích",
+ "note": "Giá Casamia theo chính sách chủ đầu tư 9/9/2026; dự án khác tham khảo báo chí, tin rao · Ảnh phối cảnh chủ đầu tư",
+ "headline": [
+  [
+   "So sánh",
+   "big",
+   0
+  ],
+  [
+   "biệt thự",
+   "script",
+   300
+  ],
+  [
+   "Hội An",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "So sánh biệt thự",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "HỘI AN",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "và Đà Nẵng",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}

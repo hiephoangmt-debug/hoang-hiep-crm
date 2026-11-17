@@ -1,0 +1,90 @@
+{
+ "tag": "SO SÁNH · CAPITAL SQUARE 3",
+ "title": "Hudson Place hay Broadway Place",
+ "sub": "Chọn tòa S4 hay tòa S3?",
+ "xc": 0.5,
+ "yc": 0.45,
+ "stats": [
+  [
+   "4,32 tỷ",
+   "1PN S4 từ"
+  ],
+  [
+   "4,78 tỷ",
+   "1PN S3 từ"
+  ],
+  [
+   "8,50 tỷ",
+   "3PN S3 từ"
+  ],
+  [
+   "Q3/2027",
+   "S4 bàn giao"
+  ]
+ ],
+ "items": [
+  [
+   "Hudson Place S4",
+   "314 căn, có 3PN dualkey"
+  ],
+  [
+   "Broadway Place S3",
+   "3PN từ khoảng 8,50 tỷ"
+  ],
+  [
+   "Chính sách chung",
+   "Vay 5 năm không lo lãi suất"
+  ],
+  [
+   "Ưu đãi",
+   "Chiết khấu 5%, quà Smart Home"
+  ]
+ ],
+ "box": "Giá gồm VAT và kinh phí bảo trì, chưa trừ chiết khấu",
+ "note": "Giá tham khảo giỏ hàng S4 10/2026, S3 11/2026, thay đổi theo đợt · Ảnh thực tế sông Hàn",
+ "headline": [
+  [
+   "Hudson Place hay",
+   "big",
+   0
+  ],
+  [
+   "Broadway",
+   "script",
+   300
+  ],
+  [
+   "Place",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Hudson Place hay",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "BROADWAY",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Place",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}
