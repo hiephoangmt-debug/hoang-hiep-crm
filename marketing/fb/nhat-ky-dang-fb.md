@@ -112,3 +112,4 @@
 | 17/11/2026 | TikTok (@hiephoangmt, brand Sun) | 10:45 | Giá phòng khách sạn ven biển theo mùa – bài ảnh | /gia-phong-khach-san-ven-bien-da-nang-2026/ |
 | 17/11/2026 | Sun (Reels) | 20:00 | Video phân tích #01 "Vì sao Sơn Thủy là tọa độ mới ven biển Đà Nẵng?" – avatar HeyGen + bản đồ navy v5, 72s, ghi chú nội dung AI (Metricool 428780189) | /du-an/sun-saphia-residence/ |
 | 17/11/2026 | TikTok (@hiephoangmt, brand Sun) | 20:15 | Video phân tích #01 (isAigc = true, nội dung thương hiệu) (Metricool 428780287) | /du-an/sun-saphia-residence/ |
+| 18/11/2026 | TikTok (@hiephoangmt, brand Sun) | 12:15 | So sánh biệt thự Hội An – BỘ 3 ẢNH mẫu mới (tò mò / số liệu / ảnh thật), đăng lại bản mới theo anh Hiệp (Metricool 432171851) | /du-an/casamia-balanca-hoi-an/ |
