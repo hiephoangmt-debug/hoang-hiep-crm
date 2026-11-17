@@ -95,9 +95,19 @@
 | 16/11/2026 | Casamia (blogId 8074284) | 21:00 | Giá và chính sách Casamia Balanca (CSBH CĐT 9/9/2026: Park Home ~13,86–14,01 tỷ full NT, thuê lại/ủy thác tối thiểu 50–60 tr/tháng) – 1 ảnh nền xanh; THAY bài dòng tiền (số liệu cũ) | /du-an/casamia-balanca-hoi-an/ |
 | 16/11/2026 | TikTok (@hiephoangmt, brand Sun) | 21:15 | Giá và chính sách Casamia Balanca – bài ảnh | /du-an/casamia-balanca-hoi-an/ |
 | 16/11/2026 | (ghi chú) | 07:26 | Sửa lời Reel Sun 20:00 theo anh Hiệp 15/11: sân bay ~10 phút, "ngay bãi tắm Sơn Thủy, đối diện các resort 5 sao" (bỏ "dưới chân Ngũ Hành Sơn") | — |
-| CHỜ | Hoàng Hiệp | 17/11 | (bài web 16/11 14:00) Hudson Place hay Broadway Place – Capital Square | hudson-place-hay-broadway-place-capital-square (chờ) |
-| CHỜ | Sun | 17/11 | (bài web 16/11 16:30; không đủ giãn cách hôm nay) Digital nomad Đà Nẵng thuê căn hộ Sun Saphia | digital-nomad-da-nang-thue-can-ho-sun-saphia (chờ) |
-| CHỜ | Hoàng Hiệp | 17/11 | (bài web 16/11 18:30) FTZ Đà Nẵng tác động căn hộ ven biển 2026 | ftz-da-nang-tac-dong-can-ho-ven-bien-2026 (chờ) |
+| 17/11/2026 | Casamia (blogId 8074284) | 08:30 | Tiến độ Casamia Balanca cuối 2026 – album 4 ảnh (toàn cảnh, flycam thực tế, nhà vườn ven sông, xe điện) | /du-an/casamia-balanca-hoi-an/ |
+| 17/11/2026 | TikTok (@hiephoangmt, brand Sun) | 08:45 | Tiến độ Casamia Balanca – album 4 ảnh | /du-an/casamia-balanca-hoi-an/ |
+| 17/11/2026 | Sun | 13:30 | (bài web 16/11, hết CHỜ) Digital nomad Đà Nẵng thuê căn hộ Sun Saphia (1 ảnh nền xanh, flycam) | /digital-nomad-da-nang-thue-can-ho-sun-saphia/ |
+| 17/11/2026 | TikTok (@hiephoangmt, brand Sun) | 13:45 | Digital nomad Đà Nẵng – bài ảnh | /digital-nomad-da-nang-thue-can-ho-sun-saphia/ |
+| 17/11/2026 | Hoàng Hiệp | 15:30 | (bài web 16/11, hết CHỜ) Hudson Place hay Broadway Place – Capital Square 3 (1 ảnh nền xanh, sông Hàn) | /hudson-place-hay-broadway-place-capital-square/ |
+| 17/11/2026 | Hoàng Hiệp | 18:30 | (bài web 16/11, hết CHỜ) FTZ Đà Nẵng – tác động căn hộ ven biển (1 ảnh nền xanh, trung tâm hành chính) | /ftz-da-nang-tac-dong-can-ho-ven-bien-2026/ |
+| 17/11/2026 | Casamia (blogId 8074284) | 21:00 | So sánh biệt thự Hội An – Casamia Balanca hợp với ai (1 ảnh nền xanh) | /du-an/casamia-balanca-hoi-an/ |
+| 17/11/2026 | TikTok (@hiephoangmt, brand Sun) | 21:15 | So sánh biệt thự Hội An – bài ảnh | /du-an/casamia-balanca-hoi-an/ |
+| CHỜ | Hoàng Hiệp | 18/11 | (bài web 17/11 09:00) Căn hộ dưới 3 tỷ Đà Nẵng – dự án đang bán | can-ho-duoi-3-ty-da-nang-du-an-dang-ban (chờ) |
+| CHỜ | Sun | 18/11 | (bài web 17/11 11:30) Sân golf gần Sun Saphia Residence | san-golf-gan-sun-saphia-residence-da-nang-hoi-an (chờ) |
+| CHỜ | Sun | 18/11 | (bài web 17/11 14:00) Sun Saphia hay Symphony 5 – mua studio cho thuê | sun-saphia-hay-symphony-5-mua-studio-cho-thue (chờ) |
+| CHỜ | Sun | 19/11 | (bài web 17/11 16:30) Bảo hiểm căn hộ cho thuê Sun Saphia | bao-hiem-can-ho-cho-thue-sun-saphia (chờ) |
+| CHỜ | Sun | 19/11 | (bài web 17/11 18:30) Cho thuê mùa pháo hoa DIFF – Sun Saphia | cho-thue-mua-phao-hoa-diff-sun-saphia (chờ) |
 | 17/11/2026 | Sun | 10:30 | (bài web 03/11) Giá phòng khách sạn gần biển Đà Nẵng theo mùa – biểu đồ nền xanh (anh Hiệp gửi, vẽ lại, ghi chú pháp lý cho thuê) | /gia-phong-khach-san-ven-bien-da-nang-2026/ |
 | 17/11/2026 | TikTok (@hiephoangmt, brand Sun) | 10:45 | Giá phòng khách sạn ven biển theo mùa – bài ảnh | /gia-phong-khach-san-ven-bien-da-nang-2026/ |
 | 17/11/2026 | Sun (Reels) | 20:00 | Video phân tích #01 "Vì sao Sơn Thủy là tọa độ mới ven biển Đà Nẵng?" – avatar HeyGen + bản đồ navy v5, 72s, ghi chú nội dung AI (Metricool 428780189) | /du-an/sun-saphia-residence/ |
