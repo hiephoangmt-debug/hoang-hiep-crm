@@ -30,8 +30,16 @@ add_filter(
 					$fix[ $k ] = array_merge( (array) ( $fix[ $k ] ?? array() ), array( $old[ $k ] ) ); // Chỉ thay khi trên web còn giá trị cũ.
 				}
 			}
-			if ( empty( $old['hh_p_policy'] ) ) {
-				$upd['hh_p_policy'] = "Đặt cọc giữ căn 100 triệu đồng/căn\nLiên hệ Hoàng Hiệp – 0904 567 009 để nhận chính sách bán hàng và bảng giá căn đang mở bán";
+			// Chính sách mới nhất của chủ đầu tư (anh Hiệp gửi 17/11/2026).
+			$pol_v1 = "Đặt cọc giữ căn 100 triệu đồng/căn\nLiên hệ Hoàng Hiệp – 0904 567 009 để nhận chính sách bán hàng và bảng giá căn đang mở bán";
+			$upd['hh_p_policy']      = "Thanh toán nhanh: chiết khấu 6%\nVay ngân hàng VPBank: chủ đầu tư hỗ trợ lãi suất 8 tháng, tối đa 10%/năm\nMiễn phí quản lý 1 năm\nĐặt cọc giữ căn 100 triệu đồng/căn\nLiên hệ Hoàng Hiệp – 0904 567 009 để nhận bảng giá và đặt lịch xem căn hộ thực tế";
+			$upd['hh_p_offer_title'] = 'Chính sách mới: chiết khấu 6% khi thanh toán nhanh, hỗ trợ lãi suất 8 tháng khi vay VPBank, miễn phí quản lý 1 năm';
+			$upd['hh_p_highlights']  = "Căn góc 2 phòng ngủ view trực diện sông Hàn, ban công hướng sông\nKính Low-E kịch trần mở rộng tầm nhìn\nNgay phố đi bộ Bạch Đằng, kết nối tiện ích trung tâm Hải Châu\nHoàn thiện cao cấp, hệ tiện ích Wellness by Well-tech\nChỉ 206 căn – mật độ cư dân thấp; tổng thầu Delta, quản lý vận hành CBRE\nĐã hoàn thiện, nhận nhà ở ngay, sổ hồng sở hữu lâu dài";
+			$fix['hh_p_policy']      = array_merge( (array) ( $fix['hh_p_policy'] ?? array() ), array_filter( array( $pol_v1, (string) ( $old['hh_p_policy'] ?? '' ) ) ) );
+			foreach ( array( 'hh_p_offer_title', 'hh_p_highlights' ) as $k ) {
+				if ( ! empty( $old[ $k ] ) ) {
+					$fix[ $k ] = array_merge( (array) ( $fix[ $k ] ?? array() ), array( $old[ $k ] ) );
+				}
 			}
 			$links = (string) ( $old['hh_p_image_links'] ?? '' );
 			$upd['hh_p_image_links'] = trim( $links . "\nhttps://drive.google.com/file/d/1vMBLpNIEltjrT175rYie4Jmr5SDXztF9/view | Phối cảnh Lounge Pavilion trên tầng thượng The Filmore Đà Nẵng (ảnh chủ đầu tư) | thư viện" );
