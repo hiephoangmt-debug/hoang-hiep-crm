@@ -21,11 +21,18 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 - Không đẩy nhiều bài cùng lúc. Mỗi bài một giờ riêng; cùng trang cách nhau ≥3 tiếng, giữa 2 trang lệch nhau ≥1 tiếng; bài web cách nhau ≥2 tiếng (trình xuất bài web tự lùi bài trùng giờ).
 - Trước khi hẹn luôn getScheduledPosts cả 2 trang để né giờ đã có bài.
 
-## TikTok (anh Hiệp đồng ý 13/11/2026)
-- Tài khoản TikTok @hiephoangmt kết nối trong brand Sun (blogId 7637635) → mỗi bài trang Sun đăng thêm 1 bài TikTok riêng (providers chỉ tiktok), giờ = giờ bài FB + 15 phút.
-- Dạng bài ẢNH: dùng chính thẻ dọc / ảnh của bài FB (tối đa vài ảnh). tiktokData: title ≤ 90 ký tự (từ khoá chính), privacyOption PUBLIC_TO_EVERYONE, commercialContentOwnBrand true, autoAddMusic true.
-- Lời ngắn hơn FB: 1 câu mở có từ khoá, 3–4 gạch đầu dòng "•", 1 câu "Góc nhìn của Hiệp", kết "Zalo 0904 567 009 · chi tiết tại hiephoangmt.com" (TikTok không bấm được link trong bình luận), 4–5 hashtag có #DaNang.
-- TikTok CHỈ đăng nội dung Sun và Casamia (anh Hiệp 14/11/2026). Bài trang Casamia cũng tạo bài TikTok riêng qua brand Sun (blogId 7637635), giờ = bài FB Casamia + 15 phút, dùng chính album ảnh. Bài trang Hoàng Hiệp KHÔNG đăng TikTok.
+## TikTok (anh Hiệp đồng ý 13/11/2026; ĐỔI MẪU 18/11/2026)
+- Tài khoản TikTok @hiephoangmt kết nối trong brand Sun (blogId 7637635) → mỗi bài trang Sun và trang Casamia đăng thêm 1 bài TikTok riêng (providers chỉ tiktok, blogId 7637635), giờ = giờ bài FB + 15 phút. TikTok CHỈ đăng nội dung Sun và Casamia (14/11/2026); bài trang Hoàng Hiệp KHÔNG đăng TikTok.
+- MẪU MỚI (anh Hiệp 18/11/2026: "2–3 hình: hình thông điệp tò mò, hình 2 số liệu dẫn chứng câu tò mò, số liệu nhiều chút để khách hiểu; thông điệp dưới không cần viết nhiều, chỉ để tò mò và hashtag"):
+  - KHÔNG dùng lại ảnh/album FB. Làm bộ 3 ảnh dọc 1080×1920 bằng `python3 wordpress/bai-viet/tiktok-slides.py marketing/tiktok/cau-hinh/<slug>.json <anh-dai-dien.jpg> marketing/tiktok/<slug>` → `<slug>-1.jpg` (câu tò mò), `-2.jpg` (số liệu), `-3.jpg` (ảnh thật + Zalo). Mẫu cấu hình: marketing/tiktok/cau-hinh/so-sanh-biet-thu-hoi-an.json.
+  - Ảnh 1 – câu tò mò: "hook" 3 dòng (chữ thường / IN HOA to màu đồng / chữ nghiêng ngắn) + "question" 1 câu hỏi phụ có con số thật. Gợi tò mò bằng một con số hoặc một nghịch lý CÓ THẬT trong nguồn (ví dụ "Cùng là biệt thự Hội An – GẤP 7 LẦN – vì sao?"), không giật tít sai sự thật, không hứa lời.
+  - Ảnh 2 – số liệu dẫn chứng: "data_title" + 4–6 dòng "rows" [con số, nhãn, giải thích ngắn ≤ 28 ký tự] trả lời câu tò mò; "note" ghi nguồn và thời điểm. Con số ≤ 12 ký tự, chỉ dùng số có trong nguồn.
+  - Ảnh 3 – ảnh thật/phối cảnh đẹp nhất, "photo_caption" 1 câu, "cta" ngắn (ví dụ "Bảng giá: Zalo 0904 567 009").
+  - Mở xem cả 3 ảnh trước khi đăng (script báo "TRAN CHU" nếu tràn); chữ quan trọng nằm trong vùng an toàn (không sát mép phải, không ở 1/5 dưới cùng).
+  - media = [ảnh 1, ảnh 2, ảnh 3] (raw URL theo mã commit nhánh metricool), photoCoverIndex 0.
+- LỜI BÀI TIKTOK: chỉ 1–2 câu ngắn gợi tò mò (có từ khoá chính) + "Vuốt xem số liệu 👉" + 4–5 hashtag có #DaNang. KHÔNG gạch đầu dòng, KHÔNG "Góc nhìn của Hiệp", không viết dài (TikTok gộp xuống dòng thành một đoạn). Ví dụ: "Cùng là biệt thự Hội An, sao giá chênh tới 7 lần? Vuốt xem số liệu 👉 #CasamiaBalanca #BietThuHoiAn #HoiAn #DaNang".
+- tiktokData: {"title": "<từ khoá chính ≤ 90 ký tự>", "privacyOption":"PUBLIC_TO_EVERYONE", "commercialContentOwnBrand":true, "commercialContentThirdParty":false, "autoAddMusic":true, "photoCoverIndex":0}; firstCommentText rỗng. Video thì autoAddMusic false.
+- Quy tắc pháp lý (mục PHÁP LÝ…) áp dụng cả ảnh TikTok: số cho thuê/giá ghi rõ nguồn ở "note", không cam kết lợi nhuận.
 
 ## Trang Casamia Balanca (kết nối 13/11/2026, anh Hiệp chọn 2 bài/ngày)
 - Metricool blogId 8074284, chỉ nội dung Casamia Balanca (Đạt Phương, Cẩm Thanh – Hội An); có thể nhắc Casamia Hội An, Casamia Calm khi so sánh.
@@ -65,7 +72,7 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 - Áp dụng cho cả trang Sun, Hoàng Hiệp, Casamia (khi dùng thẻ có số liệu) và bài TikTok. Mẫu cũ fb-the-doc-anh-tren.py không dùng nữa.
 
 ## Mẫu POSTER (anh Hiệp duyệt 15/11/2026 – thay mẫu B, dùng cho MỌI ảnh có chữ, Facebook 3 trang và TikTok giống nhau)
-- Lệnh: `python3 wordpress/bai-viet/fb-the-doc-v2.py poster <cau-hinh.json> <anh-dai-dien.jpg> <anh-nen.jpg> marketing/fb/<slug>-p.jpg`. TikTok dùng CHÍNH ảnh này (không làm ảnh riêng).
+- Lệnh: `python3 wordpress/bai-viet/fb-the-doc-v2.py poster <cau-hinh.json> <anh-dai-dien.jpg> <anh-nen.jpg> marketing/fb/<slug>-p.jpg`. TikTok làm bộ 3 ảnh riêng theo mục TikTok (đổi 18/11/2026).
 - Bố cục: nền ngà có vệt sáng; trên cùng "HOÀNG HIỆP · BẤT ĐỘNG SẢN ĐÀ NẴNG" + tag; tiêu đề 3 dòng căn giữa; 1 dòng phụ (sub); 3 con số (stats 3 đầu); ảnh tràn nửa dưới, mờ dần đều lên nền; thanh ảnh đại diện + Zalo ở đáy. Không có danh sách ý trên ảnh (đưa vào lời bài).
 - Tiêu đề = "headline_poster" trong cấu hình, 3 dòng, ghép lại đọc thành từ khoá chính:
   1. Dòng trên: chữ THƯỜNG có chân, KHÔNG nghiêng (kiểu "plain"), ví dụ "Mặt bằng căn hộ", "Tầng cao hay tầng thấp".
