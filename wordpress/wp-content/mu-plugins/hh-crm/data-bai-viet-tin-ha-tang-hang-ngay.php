@@ -811,5 +811,79 @@ HTML
 			'https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Nha-o-2023-27-2023-QH15-528669.aspx',
 		),
 	);
+	/* ---------------- 18/11 – Khu đất VTV8 cũ (258 Bạch Đằng, 270 Trần Phú): hơn 6.200 m² làm công viên, bãi đỗ xe ngầm ---------------- */
+	$posts[] = array(
+		'slug'           => 'bai-do-xe-ngam-bach-dang-da-nang',
+		'title'          => 'Bãi đỗ xe ngầm Bạch Đằng: Đà Nẵng dành hơn 6.200 m² đất vàng gần cầu Rồng làm công viên',
+		'excerpt'        => 'Đà Nẵng thống nhất bố trí lại quỹ đất trên đường Bạch Đằng: VTV8 nhận đất 250 – 254 Bạch Đằng xây trụ sở mới, khoảng 6.284,6 m² tại 258 Bạch Đằng và 270 Trần Phú dành cho công viên cây xanh, giao thông và bãi đỗ xe ngầm.',
+		'keyword'        => 'bãi đỗ xe ngầm Bạch Đằng',
+		'keywords_extra' => array( 'đất vàng Bạch Đằng', 'trụ sở VTV8 Đà Nẵng', 'công viên ven sông Hàn', 'căn hộ ven sông Hàn' ),
+		'project'        => 'the-filmore-da-nang',
+		'schedule'       => '2026-11-18 08:00',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Hạ tầng Đà Nẵng', 'Sông Hàn', 'Hải Châu' ),
+		'image'          => 'plugin:img/da-nang/song-han-du-thuyen-cau-rong-ve-dem.jpg',
+		'image_alt'      => 'Sông Hàn và cầu Rồng về đêm – khu vực quy hoạch bãi đỗ xe ngầm Bạch Đằng, Đà Nẵng',
+		'content'        => <<<HTML
+<p>Đà Nẵng sẽ có thêm <strong>bãi đỗ xe ngầm Bạch Đằng</strong> và công viên cây xanh trên khu "đất vàng" gần cầu Rồng. Theo Trung tâm Phát triển quỹ đất TP Đà Nẵng (thông tin ngày 16/11/2026), UBND thành phố đã thống nhất phương án bố trí lại quỹ đất trên đường Bạch Đằng: Đài Phát thanh – Truyền hình khu vực Miền Trung – Tây Nguyên (VTV8) nhận đất xây trụ sở mới, phần còn lại khoảng <strong>6.284,6 m²</strong> dành cho không gian công cộng.</p>
+<!--hh-featured-->
+<h2>Phương án bãi đỗ xe ngầm Bạch Đằng gồm những gì?</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Theo báo chí đưa tin</th></tr></thead>
+<tbody>
+<tr><td>Đất giao VTV8 xây trụ sở mới</td><td>Các lô 250, 252, 254 Bạch Đằng và khoảng 1.100 m² thuộc khu đất 258 Bạch Đằng hiện nay</td></tr>
+<tr><td>Đất dành cho công cộng</td><td>Khoảng 6.284,6 m² tại 258 Bạch Đằng (trụ sở VTV8 hiện tại) và 270 Trần Phú (trụ sở UBND quận Hải Châu cũ)</td></tr>
+<tr><td>Định hướng sử dụng</td><td>Giao thông, bãi đỗ xe ngầm; mặt đất làm công viên cây xanh, kiến trúc cảnh quan</td></tr>
+<tr><td>Đơn vị chủ trì thủ tục</td><td>Sở Tài chính chủ trì sắp xếp, xử lý tài sản công tại 258 Bạch Đằng</td></tr>
+<tr><td>Trong thời gian chờ</td><td>VTV8 tiếp tục sử dụng trụ sở 258 Bạch Đằng đến khi trụ sở mới hoàn thành, đi vào hoạt động</td></tr>
+</tbody>
+</table>
+<p>Một số báo ghi "hơn 6.200 m²", số liệu chi tiết của Trung tâm Phát triển quỹ đất là 6.284,6 m². Đây mới là phương án bố trí quỹ đất và định hướng nghiên cứu; quy mô, số chỗ đỗ, thời gian khởi công <strong>bãi đỗ xe ngầm Bạch Đằng</strong> chưa được công bố (<a href="https://tuoitre.vn/da-nang-danh-hon-6200m-dat-vang-bach-dang-tran-phu-lam-cong-vien-bai-do-xe-100261116103332289.htm">Tuổi Trẻ</a>).</p>
+<h2>Vì sao khu đất này được gọi là "đất vàng"?</h2>
+<p>Khu đất nằm giữa đường Bạch Đằng ven sông Hàn và đường Trần Phú, trong lõi trung tâm Hải Châu, gần cầu Rồng – nơi tập trung khách du lịch, khách sạn, nhà hàng và các sự kiện của thành phố. Quỹ đất trống ở đây gần như không còn; mọi khu đất lớn được giải phóng đều có giá trị đặc biệt.</p>
+<p>Việc dành phần lớn diện tích cho công viên và <strong>bãi đỗ xe ngầm Bạch Đằng</strong> thay vì cho xây cao tầng thương mại phù hợp chủ trương sắp xếp lại trụ sở dôi dư sau hợp nhất hành chính: ưu tiên mục đích công cộng, giải quyết thiếu chỗ đỗ xe ở trung tâm (<a href="https://vnexpress.net/tru-so-doi-du-da-nang-danh-6-200-m2-lam-bai-xe-ngam-quang-tri-cai-tao-thanh-truong-hoc-5141841.html">VnExpress</a>).</p>
+<!--hh-img:img/da-nang/song-han-du-thuyen-cau-rong-ve-dem.jpg|Sông Hàn, du thuyền và cầu Rồng về đêm – khu trung tâm nơi Đà Nẵng định hướng bãi đỗ xe ngầm Bạch Đằng và công viên cây xanh-->
+<h2>Thiếu chỗ đỗ xe ở trung tâm – vì sao cần bãi đỗ xe ngầm Bạch Đằng</h2>
+<p>Khu ven sông Hàn từ cầu Rồng đến cầu Sông Hàn đông khách vào buổi tối và cuối tuần, đặc biệt mùa du lịch và các dịp lễ hội. Xe du lịch, ô tô cá nhân phần lớn đỗ dưới lòng đường hoặc trong các bãi tạm. Nếu được đầu tư, bãi đỗ xe ngầm Bạch Đằng ngay trên trục Bạch Đằng – Trần Phú sẽ giảm tải cho mặt đường và giải phóng vỉa hè cho người đi bộ.</p>
+<p>Phần mặt đất làm công viên cây xanh giúp nối dài không gian xanh ven sông, phù hợp định hướng phát triển đô thị ven sông Hàn trong quy hoạch chung thành phố (xem thêm <a href="/quy-hoach-chung-da-nang-2050/">quy hoạch chung Đà Nẵng đến 2050</a>).</p>
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<p>Theo Hiệp, bãi đỗ xe ngầm Bạch Đằng và công viên trên khu đất này tác động tới bất động sản trung tâm theo 4 hướng:</p>
+<ul>
+<li><strong>Thêm không gian xanh, giữ "tầm nhìn sông Hàn":</strong> khu đất không bị xây khối cao tầng thương mại mà làm công viên, nên các tòa nhà xung quanh giữ được thông thoáng và tầm nhìn về phía sông. Đây là điểm cộng cho căn hộ, khách sạn ven sông Hàn ở Hải Châu.</li>
+<li><strong>Bãi đỗ xe ngầm Bạch Đằng là "tiện ích công" cho cả khu:</strong> người ở căn hộ trung tâm, khách thuê ngắn ngày và khách đến nhà hàng – khách sạn sẽ có thêm chỗ đỗ ô tô, vốn là điểm yếu lớn nhất của khu phố cổ Bạch Đằng – Trần Phú.</li>
+<li><strong>Đây mới là định hướng:</strong> chưa có quy mô, nhà đầu tư hay thời gian thi công. Anh chị không nên mua bán theo tin "sắp có công viên, bãi xe" với giá đẩy cao; nên theo dõi các bước tiếp theo của Sở Tài chính và UBND thành phố.</li>
+<li><strong>Quỹ căn hộ ven sông Hàn rất hiếm:</strong> trục Bạch Đằng gần như không còn đất cho dự án mới; mỗi lần trung tâm được chỉnh trang, nhu cầu ở và thuê ven sông lại tăng. Với khách mua để ở lâu dài, nên ưu tiên dự án đã hoàn thiện, có sổ hồng.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/the-filmore-da-nang/">The Filmore Đà Nẵng</a> – tòa căn hộ hạng sang mặt tiền đường Bạch Đằng, cùng trục ven sông Hàn với khu đất; không gian xanh và bãi đỗ xe ngầm Bạch Đằng (khi hình thành) là lợi thế cho cư dân và khách thuê.</li>
+<li><a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a> – căn hộ Sun Group ở chân cầu Rồng bờ Đông, nhìn sang khu trung tâm Bạch Đằng; khu bờ Tây được chỉnh trang làm tăng giá trị tầm nhìn sông Hàn của dự án.</li>
+</ul>
+<p>Xem thêm các <a href="/can-ho-ven-song-han-da-nang/">căn hộ ven sông Hàn Đà Nẵng</a> đang bán và cho thuê. Cần tư vấn căn hộ trung tâm Hải Châu, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: Trung tâm Phát triển quỹ đất TP Đà Nẵng theo Tuổi Trẻ, Thanh Niên, VnExpress, VietTimes ngày 16 – 17/11/2026. Bài viết theo thông tin báo chí, chưa đọc toàn văn văn bản của UBND thành phố.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Bãi đỗ xe ngầm Bạch Đằng: hơn 6.200 m² gần cầu Rồng',
+			'desc'      => 'Đà Nẵng dành khoảng 6.284,6 m² đất 258 Bạch Đằng, 270 Trần Phú làm công viên và bãi đỗ xe ngầm Bạch Đằng; VTV8 nhận đất 250 – 254 Bạch Đằng.',
+			'points'    => array(
+				'Đà Nẵng thống nhất bố trí lại quỹ đất Bạch Đằng: VTV8 nhận đất 250, 252, 254 Bạch Đằng và khoảng 1.100 m² tại 258 Bạch Đằng xây trụ sở mới',
+				'Khoảng 6.284,6 m² tại 258 Bạch Đằng và 270 Trần Phú định hướng làm bãi đỗ xe ngầm Bạch Đằng, công viên cây xanh, giao thông',
+				'Mới là phương án quỹ đất; chưa có quy mô, nhà đầu tư, thời gian thi công',
+			),
+			'faq'       => array(
+				array( 'Bãi đỗ xe ngầm Bạch Đằng nằm ở đâu?', 'Trên khu đất khoảng 6.284,6 m² gồm 258 Bạch Đằng (trụ sở VTV8 hiện tại) và 270 Trần Phú (trụ sở UBND quận Hải Châu cũ), gần cầu Rồng, trung tâm Đà Nẵng.' ),
+				array( 'Khi nào làm bãi đỗ xe ngầm Bạch Đằng?', 'Chưa có thời gian. Đây mới là phương án bố trí lại quỹ đất; VTV8 tiếp tục dùng trụ sở 258 Bạch Đằng đến khi trụ sở mới hoàn thành.' ),
+				array( 'VTV8 chuyển trụ sở về đâu?', 'Theo phương án, VTV8 được bố trí đất tại 250, 252, 254 Bạch Đằng và khoảng 1.100 m² thuộc khu đất 258 Bạch Đằng để xây trụ sở mới.' ),
+				array( 'Bãi đỗ xe ngầm Bạch Đằng ảnh hưởng gì tới căn hộ ven sông Hàn?', 'Khu trung tâm có thêm công viên và chỗ đỗ ô tô, giữ tầm nhìn sông Hàn thông thoáng – có lợi cho căn hộ, khách sạn quanh trục Bạch Đằng – Trần Phú về dài hạn.' ),
+			),
+		),
+		'sources'        => array(
+			'https://tuoitre.vn/da-nang-danh-hon-6200m-dat-vang-bach-dang-tran-phu-lam-cong-vien-bai-do-xe-100261116103332289.htm',
+			'https://thanhnien.vn/da-nang-quy-hoach-lai-khu-dat-vang-gan-cau-rong-lam-cong-vien-bai-do-xe-18526111610593433.htm',
+			'https://vnexpress.net/tru-so-doi-du-da-nang-danh-6-200-m2-lam-bai-xe-ngam-quang-tri-cai-tao-thanh-truong-hoc-5141841.html',
+			'https://viettimes.vn/da-nang-danh-dat-vang-xay-tru-so-vtv8-phat-trien-khong-gian-cong-cong-post208479.html',
+		),
+	);
 	return $posts;
 }

@@ -19,7 +19,7 @@ add_filter(
 			$upd = array(
 				'hh_p_units'           => '206 căn hộ hạng sang (4 căn penthouse)',
 				'hh_p_unit_area'       => '1PN 48 – 51 m², 2PN 66 – 80 m², 3PN ghép 126,5 – 152,6 m², penthouse 218,8 – 269,1 m² (diện tích tim tường)',
-				'hh_p_design_desc'     => 'Theo mặt bằng tầng của chủ đầu tư: tầng 3 – 8 mỗi tầng 11 căn (1PN 47,3 – 47,8 m², 2PN 66,6 – 71,1 m² thông thủy); từ tầng 9 trở lên mỗi tầng 9 căn (1PN 45,7 – 47,1 m², 2PN 62,1 – 76,3 m² thông thủy). Tầng 14 – 20 có căn ghép 3 phòng ngủ: 1PN + 2PN 126,5 m² (thông thủy 120 m²) và 2PN + 2PN 152,6 m² (thông thủy 144,8 m²). Tầng 21 – 22 có căn loft thông tầng 122,6 m²; tầng 21 – 24 có 4 căn penthouse thông tầng 218,8 – 269,1 m² (thông thủy 206,4 – 254 m²).',
+				'hh_p_design_desc'     => 'Tòa 25 tầng, 206 căn: tầng 3 – 8 mỗi tầng 11 căn, từ tầng 9 chỉ 9 căn mỗi tầng. Có căn 1PN, 2PN, căn ghép 3PN, loft và 4 penthouse thông tầng – diện tích từng loại xem bảng bên dưới.',
 				'hh_p_unit_types'      => "Căn 2PN view vịnh – núi Sơn Trà | 75,5 m² (thông thủy 71,3 – 71,5 m²) | 2 | Chỉ từ 9,89 tỷ (chưa VAT)\nCăn góc 2PN view sông Hàn – biển | 74,8 m² (thông thủy 71,1 m²) | 2 | Liên hệ\nCăn 3PN ghép (2PN + 2PN) view sông – biển | 152,6 m² (thông thủy 144,8 m²) | 3 | Liên hệ\nPenthouse thông tầng view sông – biển | 218,8 m² (thông thủy 206,4 m²) | – | Liên hệ",
 				'hh_p_penthouse_desc'  => '4 căn penthouse thông tầng trên các tầng 21 – 24, diện tích tim tường 218,8 – 269,1 m² (thông thủy 206,4 – 254 m²), tầm nhìn toàn cảnh sông Hàn, cầu Rồng và biển Mỹ Khê.',
 				'hh_p_penthouse_table' => "Penthouse thông tầng (4 căn) | 218,8 – 269,1 m² | – | Liên hệ",
@@ -30,6 +30,7 @@ add_filter(
 			$fix = (array) ( $p['fix_meta'] ?? array() );
 			$fix['hh_p_unit_types'] = array( 'Căn 1PN | 48,1 – 51,3 m² | 1 | Chỉ từ khoảng 5,5 tỷ' . "\n" . 'Căn 2PN | 66,4 – 80,5 m² | 2 | Liên hệ' . "\n" . 'Căn 3PN ghép (1PN + 2PN) | 126,5 m² | 3 | Liên hệ' . "\n" . 'Căn 3PN ghép (2PN + 2PN) | 152,6 m² | 3 | Liên hệ' . "\n" . 'Căn loft thông tầng | 122,6 m² | – | Liên hệ' );
 			$fix['hh_p_price_from'] = array( 5500, '5500' );
+			$fix['hh_p_design_desc'] = array( 'Theo mặt bằng tầng của chủ đầu tư: tầng 3 – 8 mỗi tầng 11 căn (1PN 47,3 – 47,8 m², 2PN 66,6 – 71,1 m² thông thủy); từ tầng 9 trở lên mỗi tầng 9 căn (1PN 45,7 – 47,1 m², 2PN 62,1 – 76,3 m² thông thủy). Tầng 14 – 20 có căn ghép 3 phòng ngủ: 1PN + 2PN 126,5 m² (thông thủy 120 m²) và 2PN + 2PN 152,6 m² (thông thủy 144,8 m²). Tầng 21 – 22 có căn loft thông tầng 122,6 m²; tầng 21 – 24 có 4 căn penthouse thông tầng 218,8 – 269,1 m² (thông thủy 206,4 – 254 m²).' ); // Bản dài 2.20.310 – anh Hiệp thấy rối (18/11).
 			$fix['hh_p_unit_types'][] = str_replace( '152,6 m² | 3 |', '152,6 m² | 4 |', $fix['hh_p_unit_types'][0] ); // Bản thử nội bộ.
 			$fix['hh_p_policy']       = array( "Thanh toán nhanh: chiết khấu 6%\nVay ngân hàng VPBank: chủ đầu tư hỗ trợ lãi suất 8 tháng, tối đa 10%/năm\nMiễn phí quản lý 1 năm\nĐặt cọc giữ căn 100 triệu đồng/căn\nLiên hệ Hoàng Hiệp – 0904 567 009 để nhận bảng giá và đặt lịch xem căn hộ thực tế" ); // Bản 2.20.311.
 			$fix['hh_p_offer_title']  = array( 'Chính sách mới: chiết khấu 6% khi thanh toán nhanh, hỗ trợ lãi suất 8 tháng khi vay VPBank, miễn phí quản lý 1 năm' );
