@@ -22,6 +22,7 @@ require get_theme_file_path( 'inc/lang-strings.php' );
 require get_theme_file_path( 'inc/content-tables.php' );
 require get_theme_file_path( 'inc/project-inline-css.php' );
 require get_theme_file_path( 'inc/landing.php' );
+require get_theme_file_path( 'inc/listing-detail.php' );
 require get_theme_file_path( 'inc/seo.php' );
 
 add_action( 'after_setup_theme', 'hoanghiep_setup' );
@@ -62,6 +63,9 @@ function hoanghiep_assets() {
 	// Font Be Vietnam Pro / Playfair Display tự host trong assets/fonts (khai báo đầu main.css) – không gọi Google Fonts.
 	// Thêm thời điểm sửa file vào phiên bản để trình duyệt / cache tải bản mới ngay sau khi cập nhật.
 	wp_enqueue_style( 'hoanghiep', get_theme_file_uri( 'assets/css/main.css' ), array(), $ver . '.' . filemtime( get_theme_file_path( 'assets/css/main.css' ) ) );
+	if ( is_singular( 'bat-dong-san' ) ) { // Trang chi tiết tin rao (17/11/2026).
+		wp_enqueue_style( 'hoanghiep-tin-rao', get_theme_file_uri( 'assets/css/tin-rao.css' ), array( 'hoanghiep' ), $ver . '.' . filemtime( get_theme_file_path( 'assets/css/tin-rao.css' ) ) );
+	}
 	wp_enqueue_script( 'hoanghiep', get_theme_file_uri( 'assets/js/main.js' ), array(), $ver . '.' . filemtime( get_theme_file_path( 'assets/js/main.js' ) ), array( 'strategy' => 'defer' ) );
 	// Trang dự án: giao diện kiểu landing (mẫu The Poet) – tắt từng dự án bằng "Giao diện trang" = "Giao diện cũ".
 	if ( hoanghiep_du_an_moi() ) {

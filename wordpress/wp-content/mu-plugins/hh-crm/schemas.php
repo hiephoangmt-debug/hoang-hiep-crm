@@ -319,6 +319,8 @@ function hh_listing_schema() {
 			'fields' => array(
 				'hh_features' => array( 'type' => 'lines', 'label' => 'Đặc điểm nổi bật', 'placeholder' => "Căn góc, 2 mặt thoáng\nView sông, đón gió mát\nNội thất mới 100%" ),
 				'hh_nearby'   => array( 'type' => 'lines', 'label' => 'Tiện ích xung quanh', 'placeholder' => "Biển Mỹ Khê – 300m\nTrường tiểu học – 500m\nCông viên – 200m" ),
+				'hh_tagline'  => array( 'type' => 'text', 'label' => 'Thông điệp ngắn trên ảnh đầu tin', 'placeholder' => 'VD: Căn góc view biển, sẵn sổ – dọn vào ở ngay', 'help' => 'Một câu đúng sự thật, không bắt buộc. Để trống thì không hiện.' ),
+				'hh_policy'   => array( 'type' => 'lines', 'label' => 'Thanh toán, hỗ trợ vay, ưu đãi', 'placeholder' => "Thanh toán 2 đợt, công chứng ngay\nHỗ trợ vay ngân hàng đến 70%\nChủ nhà thương lượng cho khách thiện chí" ),
 			),
 		),
 		'media'     => array(
@@ -326,6 +328,7 @@ function hh_listing_schema() {
 			'intro'  => 'Ảnh đại diện (bên phải màn hình soạn thảo) là ảnh chính của tin.',
 			'fields' => array(
 				'hh_gallery'     => array( 'type' => 'gallery', 'label' => 'Ảnh thực tế' ),
+				'hh_plans'       => array( 'type' => 'gallery', 'label' => 'Mặt bằng, bản vẽ, sơ đồ lô (hiện riêng mục "Mặt bằng & thiết kế")' ),
 				'hh_video'       => array( 'type' => 'url', 'label' => 'Video YouTube', 'placeholder' => 'https://www.youtube.com/watch?v=…' ),
 				'hh_map_address' => array( 'type' => 'text', 'label' => 'Địa chỉ hoặc tọa độ trên bản đồ Google', 'placeholder' => 'VD: 16.0921, 108.2489 – để trống sẽ dùng địa chỉ', 'help' => 'Chính xác nhất: mở Google Maps, giữ tay (hoặc chuột phải) đúng vị trí → chép dãy số tọa độ → dán vào đây.' ),
 				'hh_3d_url'      => array( 'type' => 'url', 'label' => 'Link phối cảnh 3D (khách xoay xem ngay trên trang tin)', 'placeholder' => 'https://hiephoangmt-debug.github.io/hoang-hiep-crm/…' ),

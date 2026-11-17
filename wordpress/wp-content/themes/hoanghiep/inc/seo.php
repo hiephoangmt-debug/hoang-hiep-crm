@@ -736,6 +736,9 @@ function hh_seo_schema() {
 		$graph[] = hh_schema_faq( $landing ? hh_landing_faq_rows( $landing ) : hh_project_faq() );
 	} elseif ( is_singular( 'bat-dong-san' ) ) {
 		$graph[] = hh_schema_listing();
+		if ( function_exists( 'hh_ld_faq' ) ) {
+			$graph[] = hh_schema_faq( hh_ld_faq() ); // Khớp đúng phần Hỏi đáp hiện trên trang tin.
+		}
 	}
 	if ( is_singular( 'post' ) ) {
 		$graph[] = hh_schema_faq( hh_table( 'hh_post_faq', 2 ) );

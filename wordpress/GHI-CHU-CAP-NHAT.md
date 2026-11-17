@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.35** + plugin Hoàng Hiệp CRM **2.20.300**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.36** + plugin Hoàng Hiệp CRM **2.20.301**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.301 / giao diện 2.16.36 (17/11/2026) – trang chi tiết tin rao kiểu mới
+
+- **Bố cục mới cho mọi tin Mua bán / Cho thuê** (giữ nguyên đường dẫn, breadcrumb, schema): ảnh lớn đầu trang (giới hạn chiều cao, thẻ tin có chữ không bị cắt) + thông điệp ngắn trên ảnh (nếu nhập) → tiêu đề H1, địa chỉ, giá lớn, đơn giá/m², đoạn giới thiệu (lấy từ "Đoạn trích") → **ô thông số dạng thẻ** (giá, diện tích, đơn giá, loại hình, PN, WC, hướng, kích thước, số tầng, nội thất, pháp lý, tình trạng, năm, khu vực – ô nào trống tự ẩn) → mục lục nhanh → Mô tả chi tiết (Đặc điểm nổi bật + nội dung) → Video → **Vị trí** (bản đồ, dự án, link khu vực / loại hình) → **Tiện ích xung quanh** tự chia nhóm (biển–công viên, trường học, y tế, mua sắm, giao thông, nhà hàng–dịch vụ) → **Mặt bằng & thiết kế** (gallery riêng, phóng to; tự nhận ảnh có chữ "mặt bằng / bản vẽ / sơ đồ") + 3D → **Giá & chính sách** (khung giá, thanh toán – vay – ưu đãi, bảng tính vay, toàn bộ thông số) → **Câu hỏi thường gặp** chỉ từ dữ liệu thật (kèm schema FAQ) → **Tin liên quan** 6 tin (cùng khu vực + loại hình, cùng khoảng giá, rồi tin hot).
+- **Điện thoại:** thanh liên hệ cố định cuối màn hình (giá + Gọi ngay + Zalo + Nhắn tin); nút chat đẩy lên trên thanh, ẩn cụm Gọi/Zalo nổi trùng.
+- Ô nhập mới khi sửa tin (không bắt buộc): "Thông điệp ngắn trên ảnh đầu tin", "Thanh toán, hỗ trợ vay, ưu đãi", "Mặt bằng, bản vẽ, sơ đồ lô".
+- Đã thử: tin căn hộ (FPT Plaza 2, Newtown Diamond), nhà đất (biệt thự, đất nền) và tin thiếu dữ liệu – không lỗi, không tràn ngang, mỗi trang 1 thẻ H1.
 
 ## Có gì mới – 2.20.300 / giao diện 2.16.35 (17/11/2026) – chọn căn Sun Saphia: mặt bằng căn căn giữa
 

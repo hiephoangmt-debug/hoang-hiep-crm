@@ -1,4 +1,9 @@
 <?php
+/**
+ * Trang chi tiết tin rao (anh Hiệp 17/11/2026): ảnh → thông điệp → H1 → giới thiệu → ô thông số → mô tả →
+ * vị trí → tiện ích → mặt bằng → giá & chính sách → liên hệ → tin liên quan → hỏi đáp.
+ * Chỉ hiện dữ liệu thật của tin; mục nào không có dữ liệu thì ẩn. Giữ nguyên URL, breadcrumb, schema.
+ */
 get_header();
 
 while ( have_posts() ) :
@@ -6,26 +11,42 @@ while ( have_posts() ) :
 	$id      = get_the_ID();
 	$schema  = hh_listing_schema();
 	$deal    = hh_meta( 'hh_deal' ) ?: 'ban';
+	$rent_d  = 'thue' === $deal;
 	$status  = hh_meta( 'hh_status' );
-	$photos  = array_values( array_unique( array_filter( array_merge( array( get_post_thumbnail_id() ), hh_ids( 'hh_gallery' ) ) ) ) );
 	$project = (int) hh_meta( 'hh_project' );
-
-	$quick = array_filter(
+	list( $photos, $plans ) = hh_ld_photos( $id );
+	$facts   = hh_ld_facts( $id );
+	$areas   = get_the_terms( $id, 'khu-vuc' );
+	$types   = get_the_terms( $id, 'loai-bds' );
+	$area_t  = $areas && ! is_wp_error( $areas ) ? $areas[0] : null;
+	$type_t  = $types && ! is_wp_error( $types ) ? $types[0] : null;
+	$tagline = trim( (string) hh_meta( 'hh_tagline' ) );
+	$intro   = has_excerpt() ? get_the_excerpt() : '';
+	$price   = hh_listing_price();
+	$pm2     = $rent_d ? '' : hh_listing_price_m2();
+	$nearby  = hh_ld_nearby_groups( $id );
+	$policy  = hh_lines( 'hh_policy' );
+	$faq     = hh_ld_faq( $id );
+	$map     = hh_meta( 'hh_map_address' ) ?: hh_meta( 'hh_address' );
+	$tel     = hoanghiep_tel();
+	$zalo    = 'https://zalo.me/' . hoanghiep_tel( hoanghiep_opt( 'hh_zalo' ) );
+	$rent    = array_filter(
 		array(
-			'Giá'       => hh_listing_price(),
-			'Diện tích' => hh_meta( 'hh_area' ) ? ( function_exists( 'hh_vn_num' ) ? hh_vn_num( hh_meta( 'hh_area' ) ) : hh_meta( 'hh_area' ) ) . ' m²' : '',
-			'Phòng ngủ' => hh_meta( 'hh_bedrooms' ),
-			'Phòng tắm' => hh_meta( 'hh_bathrooms' ),
-			'Hướng'     => hh_meta( 'hh_direction' ) ? hh_option_label( $schema, 'hh_direction', hh_meta( 'hh_direction' ) ) : '',
+			'Tiền cọc'       => hh_meta( 'hh_deposit' ),
+			'Thuê tối thiểu' => hh_meta( 'hh_min_term' ),
+			'Phí quản lý'    => hh_meta( 'hh_service_fee' ),
+			'Dọn vào'        => hh_meta( 'hh_available' ),
+			'Giá đã bao gồm' => hh_meta( 'hh_rent_incl' ),
 		)
 	);
-	$rent = array_filter(
+	$sec = array_filter(
 		array(
-			'Tiền cọc'          => hh_meta( 'hh_deposit' ),
-			'Thuê tối thiểu'    => hh_meta( 'hh_min_term' ),
-			'Phí quản lý'       => hh_meta( 'hh_service_fee' ),
-			'Dọn vào'           => hh_meta( 'hh_available' ),
-			'Giá đã bao gồm'    => hh_meta( 'hh_rent_incl' ),
+			'mo-ta'    => get_the_content() || hh_lines( 'hh_features' ) ? 'Mô tả' : '',
+			'vi-tri'   => $map ? 'Vị trí' : '',
+			'tien-ich' => $nearby ? 'Tiện ích' : '',
+			'mat-bang' => $plans || ( hh_meta( 'hh_3d_url' ) && 0 === strpos( hh_meta( 'hh_3d_url' ), 'https://' ) ) ? 'Mặt bằng' : '',
+			'gia'      => 'Giá & liên hệ',
+			'hoi-dap'  => $faq ? 'Hỏi đáp' : '',
 		)
 	);
 	?>
@@ -33,155 +54,242 @@ while ( have_posts() ) :
 		<div class="container">
 			<p class="breadcrumb">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a> /
-				<a href="<?php echo esc_url( hh_deal_url( $deal ) ); ?>"><?php echo 'thue' === $deal ? 'Cho thuê' : 'Mua bán'; ?></a>
-				<?php $crumb_area = get_the_terms( $id, 'khu-vuc' ); ?>
-				<?php if ( $crumb_area && ! is_wp_error( $crumb_area ) ) : ?>
-					/ <a href="<?php echo esc_url( hh_deal_term_url( $deal, $crumb_area[0] ) ); ?>"><?php echo esc_html( $crumb_area[0]->name ); ?></a>
+				<a href="<?php echo esc_url( hh_deal_url( $deal ) ); ?>"><?php echo $rent_d ? 'Cho thuê' : 'Mua bán'; ?></a>
+				<?php if ( $area_t ) : ?>
+					/ <a href="<?php echo esc_url( hh_deal_term_url( $deal, $area_t ) ); ?>"><?php echo esc_html( $area_t->name ); ?></a>
 				<?php endif; ?>
 			</p>
 		</div>
 	</div>
 
-	<div class="container layout">
-		<article class="layout__main">
-			<header class="listing-head">
-				<div class="listing-head__pills">
-					<?php hh_pill( 'thue' === $deal ? 'Cho thuê' : 'Bán', $deal ); ?>
-					<?php hh_pill( hh_option_label( $schema, 'hh_status', $status ), $status ); ?>
-				</div>
-				<h1 class="listing-head__title"><?php the_title(); ?></h1>
-				<?php if ( hh_meta( 'hh_address' ) ) : ?>
-					<p class="meta-line"><?php echo hh_icon( 'pin' ); // phpcs:ignore ?> <?php echo esc_html( hh_meta( 'hh_address' ) ); ?></p>
+	<div class="container ld">
+		<?php /* 1. Ảnh đại diện + thông điệp */ ?>
+		<?php if ( $photos ) : ?>
+			<div class="ld-hero<?php echo $tagline ? ' ld-hero--msg' : ''; ?>">
+				<?php hh_fb_album( $photos, 'nha', array( 'eager' => true, 'label' => 'Ảnh ' . get_the_title() ) ); ?>
+				<?php if ( $tagline ) : ?><p class="ld-hero__msg"><?php echo esc_html( $tagline ); ?></p><?php endif; ?>
+			</div>
+		<?php endif; ?>
+
+		<div class="layout ld-layout">
+			<article class="layout__main">
+				<?php /* 2. Tiêu đề + 3. giới thiệu */ ?>
+				<header class="ld-head">
+					<div class="listing-head__pills">
+						<?php hh_pill( $rent_d ? 'Cho thuê' : 'Bán', $deal ); ?>
+						<?php hh_pill( hh_option_label( $schema, 'hh_status', $status ), $status ); ?>
+						<?php if ( $type_t ) : ?><a class="pill pill--type" href="<?php echo esc_url( get_term_link( $type_t ) ); ?>"><?php echo esc_html( $type_t->name ); ?></a><?php endif; ?>
+					</div>
+					<h1 class="ld-head__title"><?php the_title(); ?></h1>
+					<?php if ( hh_meta( 'hh_address' ) ) : ?>
+						<p class="meta-line"><?php echo hh_icon( 'pin' ); // phpcs:ignore ?> <?php echo esc_html( hh_meta( 'hh_address' ) ); ?></p>
+					<?php endif; ?>
+					<p class="ld-head__price"><strong><?php echo esc_html( $price ); ?></strong><?php if ( $pm2 ) : ?> <span><?php echo esc_html( $pm2 ); ?></span><?php endif; ?><?php if ( '1' === hh_meta( 'hh_negotiable' ) ) : ?> <em>Còn thương lượng</em><?php endif; ?></p>
+					<?php if ( $intro ) : ?><p class="ld-intro"><?php echo esc_html( $intro ); ?></p><?php endif; ?>
+					<p class="listing-head__code">Mã tin: <strong><?php echo esc_html( hh_listing_code() ); ?></strong> · Đăng ngày <time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'd/m/Y' ) ); ?></time><?php if ( get_the_modified_date( 'Ymd' ) !== get_the_date( 'Ymd' ) ) : ?> · Cập nhật <?php echo esc_html( get_the_modified_date( 'd/m/Y' ) ); ?><?php endif; ?></p>
+				</header>
+
+				<?php /* 4. Thông số nổi bật */ ?>
+				<?php if ( $facts ) : ?>
+					<dl class="ld-facts">
+						<?php foreach ( $facts as $f ) : ?>
+							<div class="ld-fact<?php echo $f[2] ? ' ld-fact--' . esc_attr( $f[2] ) : ''; ?>"><dt><?php echo esc_html( $f[0] ); ?></dt><dd><?php echo esc_html( $f[1] ); ?></dd></div>
+						<?php endforeach; ?>
+					</dl>
 				<?php endif; ?>
-				<p class="listing-head__code">Mã tin: <strong><?php echo esc_html( hh_listing_code() ); ?></strong> · Đăng ngày <time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'd/m/Y' ) ); ?></time><?php if ( get_the_modified_date( 'Ymd' ) !== get_the_date( 'Ymd' ) ) : ?> · Cập nhật <?php echo esc_html( get_the_modified_date( 'd/m/Y' ) ); ?><?php endif; ?></p>
-			</header>
 
-			<?php hh_fb_album( $photos, 'nha', array( 'eager' => true, 'label' => 'Ảnh ' . get_the_title() ) ); ?>
+				<?php if ( count( $sec ) > 2 ) : ?>
+					<nav class="ld-toc" aria-label="Mục trong tin">
+						<?php foreach ( $sec as $k => $label ) : ?><a href="#<?php echo esc_attr( $k ); ?>"><?php echo esc_html( $label ); ?></a><?php endforeach; ?>
+					</nav>
+				<?php endif; ?>
 
-			<dl class="quick-facts">
-				<?php foreach ( $quick as $label => $value ) : ?>
-					<div><dt><?php echo esc_html( $label ); ?></dt><dd><?php echo esc_html( $value ); ?></dd></div>
-				<?php endforeach; ?>
-			</dl>
-
-			<section class="block">
-				<h2 class="block__title">Thông tin chi tiết</h2>
-				<?php hh_spec_list( hh_listing_specs() ); ?>
-			</section>
-
-			<?php if ( get_the_content() ) : ?>
-				<section class="block">
-					<h2 class="block__title">Mô tả</h2>
-					<div class="entry-content"><?php the_content(); ?></div>
-				</section>
-			<?php endif; ?>
-
-			<?php if ( hh_lines( 'hh_features' ) || hh_lines( 'hh_nearby' ) ) : ?>
-				<section class="block">
-					<div class="two-col">
+				<?php /* 5. Mô tả chi tiết */ ?>
+				<?php if ( isset( $sec['mo-ta'] ) ) : ?>
+					<section class="block ld-sec" id="mo-ta">
+						<h2 class="block__title">Mô tả chi tiết</h2>
 						<?php if ( hh_lines( 'hh_features' ) ) : ?>
-							<div>
-								<h2 class="block__title">Đặc điểm nổi bật</h2>
+							<div class="ld-features">
+								<h3>Đặc điểm nổi bật</h3>
 								<?php hh_check_list( hh_lines( 'hh_features' ) ); ?>
 							</div>
 						<?php endif; ?>
-						<?php if ( hh_lines( 'hh_nearby' ) ) : ?>
-							<div>
-								<h2 class="block__title">Tiện ích xung quanh</h2>
-								<?php hh_check_list( hh_lines( 'hh_nearby' ) ); ?>
-							</div>
+						<?php if ( get_the_content() ) : ?><div class="entry-content"><?php echo preg_replace( array( '#<h2(\s|>)#i', '#</h2>#i' ), array( '<h3$1', '</h3>' ), apply_filters( 'the_content', get_the_content() ) ); // phpcs:ignore -- H2 trong mô tả hạ thành H3 (nằm dưới mục "Mô tả chi tiết"). ?></div><?php endif; ?>
+					</section>
+				<?php endif; ?>
+
+				<?php if ( hh_meta( 'hh_video' ) ) : ?>
+					<section class="block ld-sec">
+						<h2 class="block__title">Video thực tế</h2>
+						<?php hh_video( hh_meta( 'hh_video' ) ); ?>
+					</section>
+				<?php endif; ?>
+
+				<?php /* 6. Vị trí */ ?>
+				<?php if ( $map ) : ?>
+					<section class="block ld-sec" id="vi-tri">
+						<h2 class="block__title">Vị trí và kết nối</h2>
+						<?php if ( hh_meta( 'hh_address' ) ) : ?><p class="ld-addr"><?php echo hh_icon( 'pin' ); // phpcs:ignore ?> <?php echo esc_html( hh_meta( 'hh_address' ) ); ?></p><?php endif; ?>
+						<?php hh_map( $map, $map ); ?>
+						<?php if ( $project && 'publish' === get_post_status( $project ) ) : ?>
+							<a class="project-link" href="<?php echo esc_url( get_permalink( $project ) ); ?>">
+								<?php echo get_the_post_thumbnail( $project, 'thumbnail' ); ?>
+								<span><small>Thuộc dự án – xem vị trí, tiện ích, pháp lý dự án</small><strong><?php echo esc_html( get_the_title( $project ) ); ?></strong></span>
+								<?php echo hh_icon( 'arrow' ); // phpcs:ignore ?>
+							</a>
 						<?php endif; ?>
+						<?php if ( $area_t ) : ?>
+							<p class="ld-more">Xem thêm nhà đất <?php echo $rent_d ? 'cho thuê' : 'bán'; ?> tại <a href="<?php echo esc_url( hh_deal_term_url( $deal, $area_t ) ); ?>"><?php echo esc_html( $area_t->name ); ?></a><?php if ( $type_t ) : ?> · <a href="<?php echo esc_url( get_term_link( $type_t ) ); ?>"><?php echo esc_html( $type_t->name ); ?></a><?php endif; ?></p>
+						<?php endif; ?>
+					</section>
+				<?php endif; ?>
+
+				<?php /* 7. Tiện ích xung quanh */ ?>
+				<?php if ( $nearby ) : ?>
+					<section class="block ld-sec" id="tien-ich">
+						<h2 class="block__title">Tiện ích xung quanh</h2>
+						<div class="ld-near">
+							<?php foreach ( $nearby as $g => $items ) : ?>
+								<div class="ld-near__g"><h3><?php echo esc_html( $g ); ?></h3><?php hh_check_list( $items ); ?></div>
+							<?php endforeach; ?>
+						</div>
+					</section>
+				<?php endif; ?>
+
+				<?php /* 8. Mặt bằng & thiết kế */ ?>
+				<?php $view3d = hh_meta( 'hh_3d_url' ); ?>
+				<?php if ( isset( $sec['mat-bang'] ) ) : ?>
+					<section class="block ld-sec" id="mat-bang">
+						<h2 class="block__title">Mặt bằng và thiết kế</h2>
+						<?php if ( $plans ) : ?>
+							<div class="ld-plans">
+								<?php foreach ( $plans as $pid ) : ?>
+									<?php $full = wp_get_attachment_image_url( $pid, 'full' ); ?>
+									<?php if ( ! $full ) { continue; } ?>
+									<a class="ld-plan" href="<?php echo esc_url( $full ); ?>" data-lightbox="mat-bang">
+										<?php echo wp_get_attachment_image( $pid, 'large', false, array( 'loading' => 'lazy', 'decoding' => 'async' ) ); ?>
+										<?php $cap = wp_get_attachment_caption( $pid ) ?: get_post_meta( $pid, '_wp_attachment_image_alt', true ); ?>
+										<?php if ( $cap ) : ?><span><?php echo esc_html( $cap ); ?></span><?php endif; ?>
+									</a>
+								<?php endforeach; ?>
+							</div>
+							<p class="ld-note">Bấm vào hình để phóng to, xem toàn màn hình.</p>
+						<?php endif; ?>
+						<?php if ( $view3d && 0 === strpos( $view3d, 'https://' ) ) : ?>
+							<div class="view3d" id="phoi-canh-3d"><iframe src="<?php echo esc_url( $view3d ); ?>" title="Phối cảnh 3D <?php echo esc_attr( get_the_title() ); ?>" loading="lazy" allow="fullscreen; xr-spatial-tracking" allowfullscreen></iframe></div>
+							<p class="map-links">Kéo để xoay, chụm hai ngón để phóng to (hình minh hoạ) · <a href="<?php echo esc_url( $view3d ); ?>" target="_blank" rel="noopener">Mở toàn màn hình ↗</a></p>
+						<?php endif; ?>
+					</section>
+				<?php endif; ?>
+
+				<?php /* 9. Giá & chính sách */ ?>
+				<section class="block ld-sec" id="gia">
+					<h2 class="block__title"><?php echo $rent_d ? 'Giá thuê và điều kiện' : 'Giá bán và chính sách'; ?></h2>
+					<div class="ld-price">
+						<div class="ld-price__main"><span><?php echo $rent_d ? 'Giá thuê' : 'Giá bán'; ?></span><strong><?php echo esc_html( $price ); ?></strong><?php if ( $pm2 ) : ?><small><?php echo esc_html( $pm2 ); ?></small><?php endif; ?><?php if ( '1' === hh_meta( 'hh_negotiable' ) ) : ?><small>Còn thương lượng cho khách thiện chí</small><?php endif; ?></div>
+						<?php if ( $policy ) : ?><div class="ld-price__pol"><?php hh_check_list( $policy ); ?></div><?php endif; ?>
 					</div>
+					<?php if ( $rent_d && $rent ) : ?><?php hh_spec_list( $rent ); ?><?php endif; ?>
+					<?php $show_calc = ! $rent_d && ! hh_meta( 'hh_no_finance' ) && (float) hh_meta( 'hh_price' ) < 30000 && (float) hh_meta( 'hh_price' ) > 0; ?>
+					<?php if ( $show_calc ) : ?>
+						<div id="tai-chinh" class="ld-calc">
+							<h3>Tính khoản vay &amp; dòng tiền</h3>
+							<?php get_template_part( 'template-parts/finance', null, array( 'mode' => 'listing', 'no_rent' => has_term( array( 'dat-nen', 'mat-bang-kinh-doanh' ), 'loai-bds', $id ) ) ); ?>
+						</div>
+					<?php endif; ?>
+					<details class="ld-specs"><summary>Toàn bộ thông tin tin đăng</summary><?php hh_spec_list( hh_listing_specs() ); ?></details>
 				</section>
-			<?php endif; ?>
 
-			<?php if ( 'thue' === $deal && $rent ) : ?>
-				<section class="block">
-					<h2 class="block__title">Điều kiện thuê</h2>
-					<?php hh_spec_list( $rent ); ?>
-				</section>
-			<?php endif; ?>
+				<?php /* 12. Hỏi đáp (10. Liên hệ: cột phải trên máy tính, cuối nội dung + thanh cố định trên điện thoại) */ ?>
+				<?php if ( $faq ) : ?>
+					<section class="block ld-sec" id="hoi-dap">
+						<h2 class="block__title">Câu hỏi thường gặp</h2>
+						<div class="ld-faq">
+							<?php foreach ( $faq as $i => $q ) : ?>
+								<details<?php echo 0 === $i ? ' open' : ''; ?>><summary><?php echo esc_html( $q[0] ); ?></summary><p><?php echo esc_html( $q[1] ); ?></p></details>
+							<?php endforeach; ?>
+						</div>
+					</section>
+				<?php endif; ?>
+			</article>
 
-			<?php $view3d = hh_meta( 'hh_3d_url' ); ?>
-			<?php if ( $view3d && 0 === strpos( $view3d, 'https://' ) ) : ?>
-				<section class="block" id="phoi-canh-3d">
-					<h2 class="block__title">Phối cảnh 3D</h2>
-					<div class="view3d"><iframe src="<?php echo esc_url( $view3d ); ?>" title="Phối cảnh 3D <?php echo esc_attr( get_the_title() ); ?>" loading="lazy" allow="fullscreen; xr-spatial-tracking" allowfullscreen></iframe></div>
-					<p class="map-links">Kéo để xoay, chụm hai ngón để phóng to (hình minh hoạ) · <a href="<?php echo esc_url( $view3d ); ?>" target="_blank" rel="noopener">Mở toàn màn hình ↗</a></p>
-				</section>
-			<?php endif; ?>
-
-			<?php
-			// Bảng tính vay & dòng tiền: chỉ hợp căn hộ, nhà vài tỷ. Tin từ 30 tỷ (lô đất lớn, khách sạn…) hoặc tin bật
-			// "Ẩn bảng tính khoản vay" thì không hiện.
-			$show_calc = 'ban' === $deal && ! hh_meta( 'hh_no_finance' ) && (float) hh_meta( 'hh_price' ) < 30000;
-			?>
-			<?php if ( $show_calc ) : ?>
-				<section class="block" id="tai-chinh">
-					<h2 class="block__title">Tính khoản vay &amp; dòng tiền</h2>
-					<?php get_template_part( 'template-parts/finance', null, array( 'mode' => 'listing', 'no_rent' => has_term( array( 'dat-nen', 'mat-bang-kinh-doanh' ), 'loai-bds', $id ) ) ); // Đất, mặt bằng: không hiện bài toán cho thuê căn hộ. ?>
-				</section>
-			<?php endif; ?>
-
-			<?php if ( hh_meta( 'hh_video' ) ) : ?>
-				<section class="block">
-					<h2 class="block__title">Video</h2>
-					<?php hh_video( hh_meta( 'hh_video' ) ); ?>
-				</section>
-			<?php endif; ?>
-
-			<?php $map_addr = hh_meta( 'hh_map_address' ) ?: hh_meta( 'hh_address' ); ?>
-			<?php if ( $map_addr ) : ?>
-				<section class="block">
-					<h2 class="block__title">Vị trí</h2>
-					<?php hh_map( $map_addr, $map_addr ); // Ô bản đồ là tọa độ (16.0xx, 108.2xx) → ghim đúng điểm. ?>
-				</section>
-			<?php endif; ?>
-
-			<?php if ( $project && 'publish' === get_post_status( $project ) ) : ?>
-				<a class="project-link" href="<?php echo esc_url( get_permalink( $project ) ); ?>">
-					<?php echo get_the_post_thumbnail( $project, 'thumbnail' ); ?>
-					<span><small>Thuộc dự án</small><strong><?php echo esc_html( get_the_title( $project ) ); ?></strong></span>
-					<?php echo hh_icon( 'arrow' ); // phpcs:ignore ?>
-				</a>
-			<?php endif; ?>
-		</article>
-
-		<aside class="layout__side">
-			<div class="sticky" id="lien-he">
-				<div class="side-price">
-					<span>Giá <?php echo 'thue' === $deal ? 'thuê' : 'bán'; ?></span>
-					<strong><?php echo esc_html( hh_listing_price() ); ?></strong>
-					<?php if ( hh_listing_price_m2() ) : ?><small><?php echo esc_html( hh_listing_price_m2() ); ?></small><?php endif; ?>
-					<?php if ( '1' === hh_meta( 'hh_negotiable' ) ) : ?><small>Còn thương lượng</small><?php endif; ?>
+			<aside class="layout__side">
+				<div class="sticky" id="lien-he">
+					<div class="side-price">
+						<span>Giá <?php echo $rent_d ? 'thuê' : 'bán'; ?></span>
+						<strong><?php echo esc_html( $price ); ?></strong>
+						<?php if ( $pm2 ) : ?><small><?php echo esc_html( $pm2 ); ?></small><?php endif; ?>
+						<?php if ( '1' === hh_meta( 'hh_negotiable' ) ) : ?><small>Còn thương lượng</small><?php endif; ?>
+					</div>
+					<?php hh_agent_card( true ); ?>
+					<?php
+					echo hh_lead_form( // phpcs:ignore
+						array(
+							'ref_id' => $id,
+							'title'  => 'Đặt lịch xem nhà',
+							'need'   => 'Đặt lịch xem nhà',
+							'button' => 'Đặt lịch xem',
+						)
+					);
+					?>
 				</div>
-				<?php hh_agent_card( true ); ?>
-				<?php
-				echo hh_lead_form( // phpcs:ignore
-					array(
-						'ref_id' => $id,
-						'title'  => 'Đặt lịch xem nhà',
-						'need'   => 'Đặt lịch xem nhà',
-						'button' => 'Đặt lịch xem',
-					)
-				);
-				?>
-			</div>
-		</aside>
+			</aside>
+		</div>
+	</div>
+
+	<?php /* Thanh liên hệ cố định trên điện thoại */ ?>
+	<div class="ld-bar" role="region" aria-label="Liên hệ nhanh">
+		<div class="ld-bar__price"><small><?php echo $rent_d ? 'Giá thuê' : 'Giá bán'; ?></small><strong><?php echo esc_html( $price ); ?></strong></div>
+		<a class="ld-bar__btn ld-bar__btn--call" href="tel:<?php echo esc_attr( $tel ); ?>">Gọi ngay</a>
+		<a class="ld-bar__btn ld-bar__btn--zalo" href="<?php echo esc_url( $zalo ); ?>" target="_blank" rel="noopener">Zalo</a>
+		<a class="ld-bar__btn ld-bar__btn--msg" href="#lien-he">Nhắn tin</a>
 	</div>
 
 	<?php
-	// Phía dưới: tin hot mới cùng hình thức (bán → bán, cho thuê → cho thuê).
-	$hot = hh_hot_query( 'bat-dong-san', array( 'exclude' => array( $id ), 'limit' => 8, 'deal' => $deal ) );
-	if ( $hot->have_posts() ) :
+	/* 11. Tin liên quan: cùng hình thức, ưu tiên cùng khu vực / loại hình / khoảng giá; thiếu thì bù tin hot. */
+	$rel_ids = array();
+	$p0      = (float) hh_meta( 'hh_price' );
+	$base    = array(
+		'post_type'      => 'bat-dong-san',
+		'post_status'    => 'publish',
+		'posts_per_page' => 6,
+		'post__not_in'   => array( $id ),
+		'fields'         => 'ids',
+		'no_found_rows'  => true,
+		'meta_query'     => array( array( 'key' => 'hh_deal', 'value' => $deal ) ),
+	);
+	$tries = array();
+	if ( $area_t && $type_t ) {
+		$tries[] = array( 'tax_query' => array( array( 'taxonomy' => 'khu-vuc', 'terms' => $area_t->term_id ), array( 'taxonomy' => 'loai-bds', 'terms' => $type_t->term_id ) ) );
+	}
+	if ( $type_t && $p0 > 0 ) {
+		$tries[] = array( 'tax_query' => array( array( 'taxonomy' => 'loai-bds', 'terms' => $type_t->term_id ) ), 'meta_query' => array( array( 'key' => 'hh_deal', 'value' => $deal ), array( 'key' => 'hh_price', 'value' => array( $p0 * .6, $p0 * 1.5 ), 'type' => 'NUMERIC', 'compare' => 'BETWEEN' ) ) );
+	}
+	if ( $area_t ) {
+		$tries[] = array( 'tax_query' => array( array( 'taxonomy' => 'khu-vuc', 'terms' => $area_t->term_id ) ) );
+	}
+	foreach ( $tries as $t ) {
+		if ( count( $rel_ids ) >= 6 ) {
+			break;
+		}
+		$q       = new WP_Query( array_merge( $base, $t, array( 'post__not_in' => array_merge( array( $id ), $rel_ids ), 'posts_per_page' => 6 - count( $rel_ids ) ) ) );
+		$rel_ids = array_merge( $rel_ids, $q->posts );
+	}
+	if ( count( $rel_ids ) < 4 ) {
+		$hot     = hh_hot_query( 'bat-dong-san', array( 'exclude' => array_merge( array( $id ), $rel_ids ), 'limit' => 6 - count( $rel_ids ), 'deal' => $deal ) );
+		$rel_ids = array_merge( $rel_ids, wp_list_pluck( $hot->posts, 'ID' ) );
+	}
+	$rel_ids = array_slice( array_values( array_unique( array_map( 'intval', $rel_ids ) ) ), 0, 6 );
+	if ( $rel_ids ) :
+		$rel = new WP_Query( array( 'post_type' => 'bat-dong-san', 'post__in' => $rel_ids, 'orderby' => 'post__in', 'posts_per_page' => 6, 'no_found_rows' => true ) );
 		?>
 		<section class="section section--tint">
 			<div class="container">
-				<?php hh_section_head( 'thue' === $deal ? 'Cho thuê' : 'Mua bán', 'thue' === $deal ? 'Nhà cho thuê hot mới' : 'Nhà đất bán hot mới', hh_deal_url( $deal ) ); ?>
-				<div class="grid grid--4">
+				<?php hh_section_head( $rent_d ? 'Cho thuê' : 'Mua bán', 'Tin đăng liên quan', $area_t ? hh_deal_term_url( $deal, $area_t ) : hh_deal_url( $deal ) ); ?>
+				<div class="grid grid--3 ld-rel">
 					<?php
-					while ( $hot->have_posts() ) :
-						$hot->the_post();
+					while ( $rel->have_posts() ) :
+						$rel->the_post();
 						get_template_part( 'template-parts/listing-card' );
 					endwhile;
 					wp_reset_postdata();

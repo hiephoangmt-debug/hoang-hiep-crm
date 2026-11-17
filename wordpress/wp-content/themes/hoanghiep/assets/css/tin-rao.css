@@ -1,0 +1,106 @@
+/* Trang chi tiết tin rao (anh Hiệp 17/11/2026): ảnh lớn đầu trang, ô thông số dạng card, mục rõ ràng, thanh liên hệ cố định trên điện thoại. */
+.ld { padding-top: 18px; }
+.ld-layout { padding-top: 22px; }
+
+/* 1. Ảnh lớn + thông điệp */
+.ld-hero { position: relative; }
+.ld-hero .fb-album { border-radius: 16px; overflow: hidden; }
+.ld-hero .fb-album { max-height: min(72vh, 600px); }
+.ld-hero .fb-album__item img { object-fit: cover; max-height: min(72vh, 600px); }
+/* Ảnh đầu là thẻ tin (có chữ) hoặc chỉ 1 ảnh: giữ trọn khung, không cắt chữ */
+.ld-hero .fb-album[data-count="1"] .fb-album__item, .ld-hero .fb-album[data-count="2"] .fb-album__item { background: var(--navy); }
+.ld-hero .fb-album[data-count="1"] .fb-album__item img, .ld-hero .fb-album[data-count="2"] .fb-album__item img { object-fit: contain; width: 100%; }
+.ld-hero__msg { position: absolute; left: 18px; bottom: 18px; max-width: min(80%, 620px); margin: 0; padding: 10px 16px; border-radius: 12px; background: rgba(11, 36, 71, .78); color: #fff; font-weight: 700; font-size: clamp(.95rem, 2vw, 1.2rem); line-height: 1.4; pointer-events: none; box-shadow: 0 6px 18px rgba(0, 0, 0, .18); }
+.ld-hero .fb-album__all { margin-top: 10px; }
+
+/* 2–3. Tiêu đề, giá, giới thiệu */
+.ld-head { margin-bottom: 22px; }
+.ld-head .listing-head__pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.pill--type { text-decoration: none; background: var(--tint); color: var(--ink); }
+.ld-head__title { font-size: clamp(1.45rem, 3.2vw, 2.05rem); line-height: 1.25; margin: 0 0 8px; }
+.ld-head__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin: 10px 0 12px; }
+.ld-head__price strong { font-size: clamp(1.5rem, 3.4vw, 2rem); color: var(--cta); line-height: 1.1; }
+.ld-head__price span { color: var(--text); font-weight: 600; }
+.ld-head__price em { font-style: normal; font-size: .82rem; font-weight: 700; color: var(--ok); background: #e9f6ee; padding: 3px 10px; border-radius: 999px; }
+.ld-intro { margin: 0 0 12px; font-size: 1.04rem; line-height: 1.65; color: var(--ink); }
+
+/* 4. Ô thông số */
+.ld-facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: 10px; margin: 0 0 22px; }
+.ld-fact { padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--white); }
+.ld-fact dt { font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.ld-fact dd { margin: 4px 0 0; font-size: 1.12rem; font-weight: 800; color: var(--ink); line-height: 1.3; word-break: break-word; }
+.ld-fact--price { background: var(--gold-soft); border-color: #ffd7bf; }
+.ld-fact--price dd { color: var(--cta); font-size: 1.3rem; }
+.ld-fact--area dd { font-size: 1.3rem; }
+
+/* Mục lục nhanh */
+.ld-toc { position: sticky; top: 64px; z-index: 5; display: flex; gap: 6px; overflow-x: auto; margin: 0 0 8px; padding: 8px 0; background: rgba(255, 255, 255, .96); scrollbar-width: none; }
+.ld-toc::-webkit-scrollbar { display: none; }
+.ld-toc a { flex: 0 0 auto; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: .88rem; font-weight: 600; color: var(--ink); text-decoration: none; background: #fff; }
+.ld-toc a:hover { border-color: var(--gold-2); color: var(--gold-2); }
+.ld-sec { scroll-margin-top: 120px; }
+
+/* 5. Mô tả */
+.ld-features { padding: 16px 18px; margin-bottom: 18px; border-radius: 14px; background: var(--tint); }
+.ld-features h3, .ld-near__g h3, .ld-calc h3 { margin: 0 0 10px; font-size: 1rem; }
+.ld-sec .entry-content p { line-height: 1.75; }
+
+/* 6–7. Vị trí, tiện ích */
+.ld-addr { display: flex; gap: 6px; align-items: flex-start; margin: 0 0 12px; font-weight: 600; color: var(--ink); }
+.ld-more { margin: 12px 0 0; font-size: .92rem; }
+.ld-near { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 12px; }
+.ld-near__g { padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+
+/* 8. Mặt bằng */
+.ld-plans { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 12px; }
+.ld-plan { position: relative; display: block; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #fff; cursor: zoom-in; }
+.ld-plan img { display: block; width: 100%; height: auto; max-height: 560px; object-fit: contain; background: #fff; }
+.ld-plan span { display: block; padding: 8px 12px; font-size: .86rem; font-weight: 600; color: var(--ink); border-top: 1px solid var(--line); }
+.ld-note { margin: 8px 0 0; font-size: .84rem; color: var(--muted); }
+
+/* 9. Giá & chính sách */
+.ld-price { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 14px; align-items: start; }
+.ld-price__main { display: grid; gap: 4px; padding: 18px; border-radius: 14px; background: var(--navy); color: #fff; }
+.ld-price__main span { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; opacity: .8; }
+.ld-price__main strong { font-size: 1.7rem; color: var(--cta-light); line-height: 1.15; }
+.ld-price__main small { color: #d6e0ee; }
+.ld-price__pol { padding: 16px 18px; border: 1px solid var(--line); border-radius: 14px; }
+.ld-calc { margin-top: 18px; }
+.ld-specs { margin-top: 16px; border: 1px solid var(--line); border-radius: 14px; padding: 0 16px; }
+.ld-specs summary { cursor: pointer; padding: 12px 0; font-weight: 700; color: var(--ink); }
+
+/* 12. Hỏi đáp */
+.ld-faq details { border: 1px solid var(--line); border-radius: 12px; padding: 0 16px; margin-bottom: 8px; background: #fff; }
+.ld-faq summary { cursor: pointer; padding: 13px 0; font-weight: 700; color: var(--ink); }
+.ld-faq p { margin: 0 0 14px; line-height: 1.65; }
+
+/* Tin liên quan */
+.ld-rel { gap: 18px; }
+
+/* Thanh liên hệ cố định – chỉ điện thoại / máy tính bảng dọc */
+.ld-bar { display: none; }
+@media (max-width: 1000px) {
+	.ld-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; display: flex; align-items: center; gap: 8px; padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)); background: rgba(255, 255, 255, .98); border-top: 1px solid var(--line); box-shadow: 0 -6px 18px rgba(11, 36, 71, .10); }
+	.ld-bar__price { flex: 1 1 auto; min-width: 0; line-height: 1.15; }
+	.ld-bar__price small { display: block; font-size: .7rem; color: var(--muted); }
+	.ld-bar__price strong { display: block; font-size: 1rem; color: var(--cta); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+	.ld-bar__btn { flex: 0 0 auto; padding: 10px 12px; border-radius: 10px; font-size: .88rem; font-weight: 800; color: #fff; text-decoration: none; }
+	.ld-bar__btn--call { background: var(--ok); }
+	.ld-bar__btn--zalo { background: var(--zalo); }
+	.ld-bar__btn--msg { background: var(--cta); }
+	body.single-bat-dong-san .contact-dock { display: none; } /* thanh dưới đã có Gọi / Zalo */
+	body.single-bat-dong-san { padding-bottom: 72px; }
+	body.single-bat-dong-san .hhc__fab { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); } /* nút chat nằm trên thanh liên hệ */
+	body.single-bat-dong-san .hhc__bubble { bottom: calc(90px + env(safe-area-inset-bottom, 0px)); }
+	.ld-price { grid-template-columns: 1fr; }
+	.ld-toc { top: 56px; }
+}
+@media (max-width: 600px) {
+	.ld { padding-top: 10px; }
+	.ld-hero__msg { left: 10px; right: 10px; bottom: 10px; max-width: none; font-size: .92rem; padding: 8px 12px; }
+	.ld-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+	.ld-fact { padding: 12px; }
+	.ld-fact dd { font-size: 1rem; }
+	.ld-fact--price, .ld-fact--area { grid-column: span 1; }
+	.ld-bar__btn { padding: 10px 10px; font-size: .84rem; }
+}
