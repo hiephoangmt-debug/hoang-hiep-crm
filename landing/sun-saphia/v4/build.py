@@ -58,11 +58,11 @@ def tour360():
 
 def tam_view(d4=False):
     """Tầm view theo hướng (ảnh minh họa): hướng Đông nhìn thẳng biển, hướng Đông Nam nhìn dọc bờ biển."""
-    def one(name, w, h, tag, title, lines, alt):
-        return ('<figure class="tvf"><div class="tvi"><img src="%s%s.webp" srcset="%s%s-900.webp 900w, %s%s.webp %dw" sizes="(max-width: 760px) 100vw, 560px" width="%d" height="%d" alt="%s" loading="lazy" decoding="async">'
-                '<span class="tvt">%s</span></div><figcaption><b>%s</b>%s</figcaption></figure>') % (V4, name, V4, name, V4, name, w, w, h, alt, tag, title, ''.join('<span>%s</span>' % l for l in lines))
+    def one(name, w, h, tag, title, lines, alt, b=V4, sz='560px'):
+        return ('<figure class="tvf"><div class="tvi"><img src="%s%s.webp" srcset="%s%s-900.webp 900w, %s%s.webp %dw" sizes="(max-width: 760px) 100vw, %s" width="%d" height="%d" alt="%s" loading="lazy" decoding="async">'
+                '<span class="tvt">%s</span></div><figcaption><b>%s</b>%s</figcaption></figure>') % (b, name, b, name, b, name, w, sz, w, h, alt, tag, title, ''.join('<span>%s</span>' % l for l in lines))
     return ('<section class="sec alt" id="tam-view"><div class="wrap">' + sh('◎', 'Tầm view từ căn', 'Mở rèm ra là thấy gì? <b>View theo từng hướng</b>', 'o') +
-            '<style>#tam-view .tvg{display:grid;grid-template-columns:1fr 1fr;gap:22px}#tam-view .tvf{margin:0;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(10,37,64,.10)}'
+            '<style>#tam-view .tvg{display:grid;grid-template-columns:1fr 1fr;gap:22px}#tam-view .tvf:nth-child(3){grid-column:1/-1}#tam-view .tvf{margin:0;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(10,37,64,.10)}'
             '#tam-view .tvi{position:relative}#tam-view .tvi img{display:block;width:100%;height:auto}'
             '#tam-view .tvt{position:absolute;left:12px;top:12px;background:#E96118;color:#fff;font-weight:800;font-size:13px;padding:7px 12px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.25)}'
             '#tam-view figcaption{padding:14px 16px 16px;font-size:14.5px;line-height:1.55;color:#3D4A5C}#tam-view figcaption b{display:block;color:#0A2540;font-size:16.5px;margin-bottom:4px}'
@@ -76,6 +76,10 @@ def tam_view(d4=False):
             + one('view-huong-dong-nam', 1880, 837, '🧭 Hướng Đông Nam', 'Hướng Đông Nam · biển và dải resort',
                   ['Biển chạy dài về phía Hội An, núi Cù Lao Chàm phía xa', 'Dải resort, biệt thự ven biển và trục đường Trường Sa bên dưới', 'Logia đón gió biển, nắng sáng dịu'],
                   'Ban công hướng Đông Nam Sun Saphia (ảnh minh họa): biển chạy dài, dải resort ven biển, trục đường Trường Sa và cây xanh bên dưới')
+            + one('view-studio-t15', 1886, 834, '🏙 View thành phố', 'Studio tầng 15 · view thành phố, hướng sân bay',
+                  ['Toàn cảnh thành phố Đà Nẵng trải rộng, hướng về phía sân bay', 'Ngắm hoàng hôn buông xuống thành phố mỗi chiều', 'Cửa kính kịch trần mở ra logia, nội thất họa tiết thổ cẩm'],
+                  'Phòng ngủ căn Studio tầng 15 Sun Saphia (ảnh minh họa của chủ đầu tư): cửa kính kịch trần nhìn ra toàn cảnh thành phố Đà Nẵng lúc hoàng hôn, hướng về phía sân bay',
+                  RAW + 'c701d227f5d7800834aa3547906df9e3db53bb79/landing/sun-saphia/v4/img/', '1140px')
             + '</div><p class="tvn">Ảnh minh họa tầm nhìn từ tầng cao theo hướng; view thực tế tùy tầng, vị trí căn và công trình xung quanh. ' + ('Xem thêm ở mô hình 3D·4D, chế độ “5D · View từ căn”.' if d4 else '') + '</p>'
             '<div class="tvc"><button type="button" class="btn" data-pop data-interest="Tầm view – nhận ảnh view đúng tầng">Nhận ảnh view đúng tầng anh/chị chọn</button>'
             + ('<a class="btn ghost2" href="#ss4d" data-4d>Xem view từ căn trên mô hình 4D</a>' if d4 else '') + '</div></div></section>')
