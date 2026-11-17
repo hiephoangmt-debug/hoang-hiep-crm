@@ -104,3 +104,10 @@
 	.ld-fact--price, .ld-fact--area { grid-column: span 1; }
 	.ld-bar__btn { padding: 10px 10px; font-size: .84rem; }
 }
+
+/* Mặt bằng, hình tòa nhà, chọn căn từ dự án */
+.ld-proj { margin-top: 18px; }
+.ld-proj__title { margin: 0 0 10px; font-size: 1.05rem; }
+.ld-plan--bld img { object-fit: cover; aspect-ratio: 4 / 3; }
+.ld-proj__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 14px; padding: 14px 16px; border-radius: 14px; background: var(--tint); }
+.ld-proj__cta small { color: var(--text); }

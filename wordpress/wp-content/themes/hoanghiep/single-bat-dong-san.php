@@ -15,6 +15,7 @@ while ( have_posts() ) :
 	$status  = hh_meta( 'hh_status' );
 	$project = (int) hh_meta( 'hh_project' );
 	list( $photos, $plans ) = hh_ld_photos( $id );
+	$pmedia  = hh_ld_project_media( $id );
 	$facts   = hh_ld_facts( $id );
 	$areas   = get_the_terms( $id, 'khu-vuc' );
 	$types   = get_the_terms( $id, 'loai-bds' );
@@ -44,7 +45,7 @@ while ( have_posts() ) :
 			'mo-ta'    => get_the_content() || hh_lines( 'hh_features' ) ? 'Mô tả' : '',
 			'vi-tri'   => $map ? 'Vị trí' : '',
 			'tien-ich' => $nearby ? 'Tiện ích' : '',
-			'mat-bang' => $plans || ( hh_meta( 'hh_3d_url' ) && 0 === strpos( hh_meta( 'hh_3d_url' ), 'https://' ) ) ? 'Mặt bằng' : '',
+			'mat-bang' => $plans || $pmedia || ( hh_meta( 'hh_3d_url' ) && 0 === strpos( hh_meta( 'hh_3d_url' ), 'https://' ) ) ? 'Mặt bằng' : '',
 			'gia'      => 'Giá & liên hệ',
 			'hoi-dap'  => $faq ? 'Hỏi đáp' : '',
 		)
@@ -174,6 +175,32 @@ while ( have_posts() ) :
 								<?php endforeach; ?>
 							</div>
 							<p class="ld-note">Bấm vào hình để phóng to, xem toàn màn hình.</p>
+						<?php endif; ?>
+						<?php if ( $pmedia ) : ?>
+							<div class="ld-proj">
+								<h3 class="ld-proj__title">Tòa nhà và mặt bằng dự án <a href="<?php echo esc_url( $pmedia['url'] ); ?>"><?php echo esc_html( $pmedia['title'] ); ?></a></h3>
+								<div class="ld-plans">
+									<?php if ( $pmedia['building'] ) : ?>
+										<a class="ld-plan ld-plan--bld" href="<?php echo esc_url( wp_get_attachment_image_url( $pmedia['building'], 'full' ) ); ?>" data-lightbox="mat-bang">
+											<?php echo wp_get_attachment_image( $pmedia['building'], 'large', false, array( 'loading' => 'lazy', 'decoding' => 'async', 'alt' => 'Hình tòa nhà ' . $pmedia['title'] ) ); ?>
+											<span>Hình tòa nhà <?php echo esc_html( $pmedia['title'] ); ?></span>
+										</a>
+									<?php endif; ?>
+									<?php foreach ( $pmedia['plans'] as $pl ) : ?>
+										<a class="ld-plan" href="<?php echo esc_url( wp_get_attachment_image_url( $pl[0], 'full' ) ); ?>" data-lightbox="mat-bang">
+											<?php echo wp_get_attachment_image( $pl[0], 'large', false, array( 'loading' => 'lazy', 'decoding' => 'async', 'alt' => $pl[1] ) ); ?>
+											<span><?php echo esc_html( $pl[1] ); ?></span>
+										</a>
+									<?php endforeach; ?>
+								</div>
+								<?php if ( $pmedia['units'] || $pmedia['tour'] ) : ?>
+									<div class="ld-proj__cta">
+										<a class="btn btn--cta" href="<?php echo esc_url( $pmedia['url'] . '#xem-4d' ); ?>"><?php echo $pmedia['units'] ? 'Chọn căn trên mặt bằng tầng' : 'Xem mô hình 4D tòa nhà'; ?></a>
+										<small>Xem tòa nhà, chọn tầng, xem mặt bằng và hướng nhìn từng căn<?php echo $pmedia['tour'] ? ' trên mô hình 4D' : ''; ?>.</small>
+									</div>
+								<?php endif; ?>
+								<p class="ld-note">Ảnh của dự án, minh hoạ vị trí và thiết kế chung; căn thực tế theo mô tả của tin.</p>
+							</div>
 						<?php endif; ?>
 						<?php if ( $view3d && 0 === strpos( $view3d, 'https://' ) ) : ?>
 							<div class="view3d" id="phoi-canh-3d"><iframe src="<?php echo esc_url( $view3d ); ?>" title="Phối cảnh 3D <?php echo esc_attr( get_the_title() ); ?>" loading="lazy" allow="fullscreen; xr-spatial-tracking" allowfullscreen></iframe></div>

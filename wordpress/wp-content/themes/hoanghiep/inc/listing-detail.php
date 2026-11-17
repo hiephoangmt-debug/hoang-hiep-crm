@@ -107,3 +107,48 @@ function hh_ld_faq( $post_id = null ) {
 	$rows[] = array( 'Có thể xem nhà thực tế không?', 'Có. Liên hệ Hoàng Hiệp' . ( $phone ? ' – ' . $phone : '' ) . ' (gọi hoặc Zalo) để hẹn lịch xem ' . ( $rent ? 'nhà' : 'tận nơi' ) . ' và nhận thêm ảnh, video thực tế.' );
 	return $rows;
 }
+
+/**
+ * Mặt bằng, hình tòa nhà và công cụ chọn căn lấy từ dự án của tin (anh Hiệp 17/11/2026).
+ * Trả về array() nếu tin không gắn dự án hoặc dự án chưa có ảnh.
+ */
+function hh_ld_project_media( $post_id ) {
+	$pid = (int) hh_meta( 'hh_project', $post_id );
+	if ( ! $pid || 'publish' !== get_post_status( $pid ) ) {
+		return array();
+	}
+	$ok   = static fn( $id ) => $id && wp_get_attachment_image_url( $id, 'large' );
+	$cap  = static fn( $id ) => trim( (string) ( wp_get_attachment_caption( $id ) ?: get_the_title( $id ) ) );
+	$bld  = (int) get_post_thumbnail_id( $pid );
+	$out  = array(
+		'id'       => $pid,
+		'title'    => get_the_title( $pid ),
+		'url'      => get_permalink( $pid ),
+		'building' => $ok( $bld ) ? $bld : 0,
+		'plans'    => array(),
+		'units'    => (bool) hh_meta( 'hh_p_tour_units', $pid ),
+		'tour'     => (bool) hh_meta( 'hh_p_tour_4d', $pid ),
+	);
+	// Layout đúng loại căn của tin (theo số phòng ngủ / studio).
+	$beds = (int) hh_meta( 'hh_bedrooms', $post_id );
+	$t    = mb_strtolower( get_the_title( $post_id ) );
+	$re   = false !== strpos( $t, 'studio' ) ? '/studio/iu' : ( $beds ? '/(^|\D)' . $beds . '\s*(pn|phòng ngủ|br|bed)/iu' : '' );
+	if ( $re ) {
+		foreach ( hh_ids( 'hh_p_unit_layouts', $pid ) as $lid ) {
+			if ( $ok( $lid ) && preg_match( $re, $cap( $lid ) . ' ' . basename( (string) get_attached_file( $lid ) ) ) ) {
+				$out['plans'][] = array( (int) $lid, 'Layout ' . $cap( $lid ) );
+			}
+		}
+	}
+	foreach ( array_slice( hh_ids( 'hh_p_floorplans', $pid ), 0, 4 ) as $fid ) {
+		if ( $ok( $fid ) ) {
+			$out['plans'][] = array( (int) $fid, 'Mặt bằng ' . preg_replace( '/^m[aặ]t b[aằ]ng\s*/iu', '', $cap( $fid ) ) );
+		}
+	}
+	$mp = (int) hh_meta( 'hh_p_masterplan_img', $pid );
+	if ( $ok( $mp ) ) {
+		$out['plans'][] = array( $mp, 'Mặt bằng tổng thể ' . $out['title'] );
+	}
+	$out['plans'] = array_slice( $out['plans'], 0, 6 );
+	return ( $out['building'] || $out['plans'] || $out['units'] ) ? $out : array();
+}
