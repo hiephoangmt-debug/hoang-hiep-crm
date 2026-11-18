@@ -3,7 +3,7 @@
  * ---------------------------------------------------------------
  * Trang web gửi khách vào đây (doPost) → gửi nhóm Telegram + chia xoay vòng cho sale.
  * Sale bấm "✅ Nhận khách" trong TIMEOUT_PHUT phút, không bấm / bấm "↪ Bận" → tự chuyển người kế tiếp.
- * Hết người → báo anh Hiệp. Ngoài giờ chia (sau GIO_KET_THUC) → báo nhóm, sáng GIO_BAT_DAU chia tiếp.
+ * Hết người → báo anh Hiệp. Ngoài giờ chia (23h30 – 6h30) → báo nhóm, 6h30 sáng chia tiếp.
  *
  * CÀI ĐẶT (làm 1 lần):
  * 1. script.google.com → Dự án mới → dán toàn bộ file này.
@@ -20,8 +20,8 @@
  */
 
 var CFG = {
-  GIO_BAT_DAU: 8,      // 8:00 sáng bắt đầu chia
-  GIO_KET_THUC: 23,    // 23:00 dừng chia (khách sau giờ này để sáng chia)
+  GIO_BAT_DAU: '06:30', // 6h30 sáng bắt đầu chia
+  GIO_KET_THUC: '23:30', // 23h30 dừng chia (khách sau giờ này để sáng chia)
   TIMEOUT_PHUT: 30,    // không bấm nhận trong 30 phút → chuyển người khác
   TZ: 'Asia/Ho_Chi_Minh'
 };
@@ -31,8 +31,8 @@ function P(k) { return PropertiesService.getScriptProperties().getProperty(k) ||
 function setP(k, v) { PropertiesService.getScriptProperties().setProperty(k, String(v)); }
 function sales() { try { return JSON.parse(P('SALES') || '[]'); } catch (e) { return []; } }
 function now() { return new Date(); }
-function gio() { return Number(Utilities.formatDate(now(), CFG.TZ, 'H')); }
-function trongGio() { var h = gio(); return h >= CFG.GIO_BAT_DAU && h < CFG.GIO_KET_THUC; }
+function phut(hm) { var a = String(hm).split(':'); return Number(a[0]) * 60 + Number(a[1] || 0); }
+function trongGio() { var m = phut(Utilities.formatDate(now(), CFG.TZ, 'H:mm')); return m >= phut(CFG.GIO_BAT_DAU) && m < phut(CFG.GIO_KET_THUC); }
 function fmt(d) { return Utilities.formatDate(new Date(d), CFG.TZ, 'HH:mm dd/MM'); }
 function esc(s) { return String(s == null ? '' : s).replace(/[<>&]/g, function (c) { return {'<': '&lt;', '>': '&gt;', '&': '&amp;'}[c]; }); }
 
@@ -99,7 +99,7 @@ function doPost(e) {
     saveRow(o);
     if (trongGio()) giao(o, ''); else {
       o.trang_thai = 'cho_sang'; saveRow(o);
-      send(P('GROUP_CHAT_ID'), '🌙 <b>KHÁCH MỚI ngoài giờ</b> · ' + esc(d.phone) + '\n' + esc(o.noi_dung) + '\n⏰ Sẽ chia lúc ' + CFG.GIO_BAT_DAU + 'h sáng (anh Hiệp gọi trước nếu cần).' + nguon(d));
+      send(P('GROUP_CHAT_ID'), '🌙 <b>KHÁCH MỚI ngoài giờ</b> · ' + esc(d.phone) + '\n' + esc(o.noi_dung) + '\n⏰ Sẽ chia lúc ' + CFG.GIO_BAT_DAU + ' sáng (anh Hiệp gọi trước nếu cần).' + nguon(d));
       if (P('OWNER_CHAT_ID')) send(P('OWNER_CHAT_ID'), '🌙 Khách ngoài giờ: <b>' + esc(d.phone) + '</b>\n' + esc(o.noi_dung));
     }
   } finally { lock.releaseLock(); }
