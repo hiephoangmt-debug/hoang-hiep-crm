@@ -103,10 +103,6 @@
 | 17/11/2026 | Hoàng Hiệp | 18:30 | (bài web 16/11, hết CHỜ) FTZ Đà Nẵng – tác động căn hộ ven biển (1 ảnh nền xanh, trung tâm hành chính) | /ftz-da-nang-tac-dong-can-ho-ven-bien-2026/ |
 | 17/11/2026 | Casamia (blogId 8074284) | 21:00 | So sánh biệt thự Hội An – Casamia Balanca hợp với ai (1 ảnh nền xanh) | /du-an/casamia-balanca-hoi-an/ |
 | 17/11/2026 | TikTok (@hiephoangmt, brand Sun) | 21:15 | So sánh biệt thự Hội An – bài ảnh | /du-an/casamia-balanca-hoi-an/ |
-| CHỜ | Hoàng Hiệp | 18/11 | (bài web 17/11 09:00) Căn hộ dưới 3 tỷ Đà Nẵng – dự án đang bán | can-ho-duoi-3-ty-da-nang-du-an-dang-ban (chờ) |
-| CHỜ | Sun | 18/11 | (bài web 17/11 11:30) Sân golf gần Sun Saphia Residence | san-golf-gan-sun-saphia-residence-da-nang-hoi-an (chờ) |
-| CHỜ | Sun | 18/11 | (bài web 17/11 14:00) Sun Saphia hay Symphony 5 – mua studio cho thuê | sun-saphia-hay-symphony-5-mua-studio-cho-thue (chờ) |
-| CHỜ | Sun | 19/11 | (bài web 17/11 16:30) Bảo hiểm căn hộ cho thuê Sun Saphia | bao-hiem-can-ho-cho-thue-sun-saphia (chờ) |
 | CHỜ | Sun | 19/11 | (bài web 17/11 18:30) Cho thuê mùa pháo hoa DIFF – Sun Saphia | cho-thue-mua-phao-hoa-diff-sun-saphia (chờ) |
 | 17/11/2026 | Sun | 10:30 | (bài web 03/11) Giá phòng khách sạn gần biển Đà Nẵng theo mùa – biểu đồ nền xanh (anh Hiệp gửi, vẽ lại, ghi chú pháp lý cho thuê) | /gia-phong-khach-san-ven-bien-da-nang-2026/ |
 | 17/11/2026 | TikTok (@hiephoangmt, brand Sun) | 10:45 | Giá phòng khách sạn ven biển theo mùa – bài ảnh | /gia-phong-khach-san-ven-bien-da-nang-2026/ |
@@ -115,3 +111,18 @@
 | 18/11/2026 | TikTok (@hiephoangmt, brand Sun) | 12:15 | So sánh biệt thự Hội An – BỘ 3 ẢNH mẫu mới (tò mò / số liệu / ảnh thật), đăng lại bản mới theo anh Hiệp (Metricool 432171851) | /du-an/casamia-balanca-hoi-an/ |
 | 18/11/2026 | Casamia (blogId 8074284) | 08:30 | (bài web mới 07:30) Biệt thự compound Hội An – Casamia Balanca (album 4 ảnh: đạp xe quảng trường, xe điện, đường chạy bộ, phố đêm) | /biet-thu-compound-hoi-an-casamia-balanca/ |
 | 18/11/2026 | TikTok (@hiephoangmt, brand Sun) | 08:45 | Biệt thự compound Hội An – BỘ 3 ẢNH (31,1 ha chỉ 363 căn) | /biet-thu-compound-hoi-an-casamia-balanca/ |
+| 18/11/2026 | Sun | 11:30 | (bài web 17/11, hết CHỜ) Sân golf gần Sun Saphia Residence (1 ảnh nền xanh) | /san-golf-gan-sun-saphia-residence-da-nang-hoi-an/ |
+| 18/11/2026 | TikTok (@hiephoangmt, brand Sun) | 11:45 | Sân golf gần Sun Saphia – BỘ 3 ẢNH | /san-golf-gan-sun-saphia-residence-da-nang-hoi-an/ |
+| 18/11/2026 | Hoàng Hiệp | 13:00 | (bài web 17/11, hết CHỜ) Căn hộ dưới 3 tỷ Đà Nẵng – 7 dự án (1 ảnh nền xanh, biển Mỹ Khê) | /can-ho-duoi-3-ty-da-nang-du-an-dang-ban/ |
+| 18/11/2026 | Sun | 14:30 | (bài web 17/11, hết CHỜ) Sun Saphia hay Symphony 5 – mua studio cho thuê (1 ảnh nền xanh) | /sun-saphia-hay-symphony-5-mua-studio-cho-thue/ |
+| 18/11/2026 | TikTok (@hiephoangmt, brand Sun) | 14:45 | Sun Saphia hay Symphony 5 – BỘ 3 ẢNH | /sun-saphia-hay-symphony-5-mua-studio-cho-thue/ |
+| 18/11/2026 | Sun | 20:00 | (bài web 17/11, hết CHỜ) Bảo hiểm căn hộ cho thuê – 3 lớp (1 ảnh nền xanh) | /bao-hiem-can-ho-cho-thue-sun-saphia/ |
+| 18/11/2026 | TikTok (@hiephoangmt, brand Sun) | 20:15 | Bảo hiểm căn hộ cho thuê – BỘ 3 ẢNH | /bao-hiem-can-ho-cho-thue-sun-saphia/ |
+| 18/11/2026 | Casamia (blogId 8074284) | 21:00 | Sự kiện khách hàng Casamia Balanca – Sound of Balance 25/04/2026 (album 4 ảnh sự kiện) | /du-an/casamia-balanca-hoi-an/ |
+| 18/11/2026 | TikTok (@hiephoangmt, brand Sun) | 21:15 | Casamia Balanca cần xem gì – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
+| CHỜ | Hoàng Hiệp | 19/11 | (bài web 18/11 14:00) Vay mua Capital Square trả góp hằng tháng | vay-mua-capital-square-da-nang-tra-gop-hang-thang (chờ) |
+| CHỜ | Sun | 19/11 | (bài web 18/11 09:00) Chủ đầu tư Sun Saphia Residence là ai | chu-dau-tu-sun-saphia-residence-la-ai (chờ) |
+| CHỜ | Sun | 20/11 | (bài web 18/11 11:30) Bán lại Sun Saphia Residence sau khi có sổ | ban-lai-sun-saphia-residence-sau-khi-co-so (chờ) |
+| CHỜ | Sun | 20/11 | (bài web 18/11 16:30) Căn hộ cho người nghỉ hưu – Sun Saphia | can-ho-cho-nguoi-nghi-huu-sun-saphia (chờ) |
+| CHỜ | Sun | 21/11 | (bài web 18/11 18:30) Ăn uống quanh Sun Saphia Residence | an-uong-quanh-sun-saphia-residence (chờ) |
+| 18/11/2026 | (ghi chú) | 07:18 | Bài web bai-do-xe-ngam-bach-dang-da-nang đã có bài FB Hoàng Hiệp 16:30 do lịch hạ tầng hẹn sẵn – không làm trùng | /bai-do-xe-ngam-bach-dang-da-nang/ |
