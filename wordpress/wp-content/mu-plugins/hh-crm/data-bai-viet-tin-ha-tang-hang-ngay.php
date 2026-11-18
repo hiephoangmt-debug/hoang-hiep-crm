@@ -966,5 +966,85 @@ HTML
 			'https://cafeland.vn/du-an/viet-huong-lakeside-du-an-nha-o-xa-hoi-tai-da-nang-5282.html',
 		),
 	);
+	/* ---------------- 18/11 – NOXH khu đất A2-4 đường Ngũ Hành Sơn – đường dẫn cầu Tiên Sơn: hồ sơ quy hoạch tổng mặt bằng (anh Hiệp gửi) ---------------- */
+	$posts[] = array(
+		'slug'           => 'nha-o-xa-hoi-cau-tien-son-731-can',
+		'title'          => 'Nhà ở xã hội cầu Tiên Sơn: 2 tháp 31 tầng, 731 căn, vốn khoảng 1.225 tỷ đồng',
+		'excerpt'        => 'Dự án nhà ở xã hội tại khu đất A2-4, đường Ngũ Hành Sơn và đường dẫn lên cầu Tiên Sơn đang làm thủ tục quy hoạch tổng mặt bằng: 2 tháp 31 tầng + tum, 2 hầm, cao 123,1 m, 731 căn (175 căn giữ lại cho thuê), tổng sàn 82.945 m², vốn sơ bộ khoảng 1.225 tỷ đồng.',
+		'keyword'        => 'nhà ở xã hội cầu Tiên Sơn',
+		'keywords_extra' => array( 'nhà ở xã hội Ngũ Hành Sơn', 'nhà ở xã hội Đà Nẵng 2026', 'khu đất A2-4 đường Ngũ Hành Sơn', 'A&T Peninsula nhà ở xã hội' ),
+		'project'        => 'peninsula-da-nang',
+		'schedule'       => '2026-11-18 19:15', // Tin tức lên sớm nhất (anh Hiệp 18/11/2026).
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Nhà ở xã hội', 'Ngũ Hành Sơn', 'Cầu Tiên Sơn' ),
+		'image'          => 'plugin:img/hoa-xuan/hoa-xuan-flycam-8-2025-song-cam-le-nhin-ve-trung-tam.jpg',
+		'image_alt'      => 'Sông Cẩm Lệ – sông Hàn nhìn về trung tâm Đà Nẵng, khu vực có nhà ở xã hội cầu Tiên Sơn (ảnh flycam thực tế)',
+		'content'        => <<<HTML
+<p><strong>Nhà ở xã hội cầu Tiên Sơn</strong> – tên đầy đủ là Dự án Nhà ở xã hội tại khu đất A2-4, đường Ngũ Hành Sơn và đường dẫn lên cầu Tiên Sơn – đang làm các thủ tục về quy hoạch tổng mặt bằng sau khi được UBND TP Đà Nẵng chấp thuận chủ trương đầu tư (tháng 6/2025) và giao chủ đầu tư (tháng 7/2026). Hồ sơ mới cho thấy quy mô 2 tòa tháp 31 tầng với 731 căn hộ, ngay nút giao đường dẫn cầu Tiên Sơn và đường Ngũ Hành Sơn.</p>
+<!--hh-featured-->
+<h2>Quy mô nhà ở xã hội cầu Tiên Sơn theo hồ sơ quy hoạch</h2>
+<table>
+<thead><tr><th>Hạng mục</th><th>Thông tin</th></tr></thead>
+<tbody>
+<tr><td>Vị trí</td><td>Khu đất A2-4, nút giao đường dẫn cầu Tiên Sơn – đường Ngũ Hành Sơn, phường Ngũ Hành Sơn</td></tr>
+<tr><td>Diện tích khu đất</td><td>Khoảng 6.970 m² theo hồ sơ quy hoạch tổng mặt bằng (lúc mời đầu tư 2025 báo chí ghi khoảng 7.060 m²)</td></tr>
+<tr><td>Công trình</td><td>2 tòa tháp, mỗi tòa 31 tầng + tầng tum, 2 tầng hầm, cao 123,1 m</td></tr>
+<tr><td>Số căn hộ</td><td>731 căn, trong đó chủ đầu tư giữ lại 175 căn để cho thuê (căn hộ dịch vụ du lịch)</td></tr>
+<tr><td>Tổng diện tích sàn</td><td>82.945 m²</td></tr>
+<tr><td>Dân số thường trú</td><td>Khoảng 1.412 người</td></tr>
+<tr><td>Tổng mức đầu tư sơ bộ</td><td>Khoảng 1.225 tỷ đồng</td></tr>
+</tbody>
+</table>
+<p>Lưu ý: khi thành phố mời đầu tư năm 2025, một số báo ghi nhà ở xã hội cầu Tiên Sơn khoảng 831 căn hộ. Con số 731 căn là theo hồ sơ quy hoạch tổng mặt bằng đang lập; số căn bán theo cơ chế nhà ở xã hội chính thức sẽ theo văn bản phê duyệt và thông báo mở bán của Sở Xây dựng.</p>
+<!--hh-img:img/hoa-xuan/hoa-xuan-flycam-8-2025-song-cam-le-nhin-ve-trung-tam.jpg|Sông Cẩm Lệ – sông Hàn nhìn về trung tâm Đà Nẵng, khu vực ven sông có nhà ở xã hội cầu Tiên Sơn (ảnh flycam thực tế 8/2025)-->
+<h2>Ai làm chủ đầu tư nhà ở xã hội cầu Tiên Sơn?</h2>
+<p>Theo CafeLand (17/7/2026), UBND thành phố đã giao chủ đầu tư dự án cho liên danh gồm Công ty CP Đầu tư Phát triển đô thị A&amp;T Đà Nẵng, Công ty TNHH Peninsula Private Đà Nẵng, Công ty CP Đầu tư Phát triển đô thị A&amp;T Bình Dương và Công ty TNHH Đông Đô Peninsula Đà Nẵng; trong đó Công ty CP Đầu tư Phát triển đô thị A&amp;T Bình Dương là chủ đầu tư. Chủ trương đầu tư theo Quyết định 1942/QĐ-UBND ngày 24/6/2025. Vốn thực hiện là vốn góp của các thành viên liên danh.</p>
+<p>Đây cũng là nhóm doanh nghiệp đứng sau hai dự án căn hộ ven sông Hàn đang có trên web Hoàng Hiệp: <a href="/du-an/peninsula-da-nang/">Peninsula Đà Nẵng</a> và <a href="/du-an/peninsula-private-da-nang/">Peninsula Private</a>. Kinh nghiệm thi công cao tầng ven sông của nhóm này là điểm cộng cho tiến độ nhà ở xã hội cầu Tiên Sơn.</p>
+<!--hh-img:img/peninsula/peninsula-da-nang-tien-do-6-2026-tu-bo-tay-song-han.jpg|Peninsula Đà Nẵng – dự án của cùng nhóm nhà đầu tư nhà ở xã hội cầu Tiên Sơn, nhìn từ bờ Tây sông Hàn (ảnh thực tế 6/2026)-->
+<h2>Tiến độ nhà ở xã hội cầu Tiên Sơn</h2>
+<ul>
+<li><strong>24/6/2025:</strong> UBND TP chấp thuận chủ trương đầu tư (Quyết định 1942/QĐ-UBND).</li>
+<li><strong>7/2026:</strong> giao chủ đầu tư cho liên danh A&amp;T – Peninsula – Đông Đô.</li>
+<li><strong>Hiện nay:</strong> làm thủ tục quy hoạch tổng mặt bằng.</li>
+<li><strong>Thời gian xây dựng:</strong> theo quyết định, xây dựng cơ bản và đưa vào vận hành trong 3 năm kể từ khi được giao đất hoặc cho thuê đất; thời hạn hoạt động dự án 50 năm.</li>
+</ul>
+<p>Như vậy nhà ở xã hội cầu Tiên Sơn chưa đến bước nhận hồ sơ đăng ký mua. Giá bán, đối tượng và thời gian nhận hồ sơ sẽ có khi chủ đầu tư được Sở Xây dựng công khai thông tin theo quy định.</p>
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Vị trí hiếm cho nhà ở xã hội:</strong> nằm ngay chân cầu Tiên Sơn, sang trung tâm Hải Châu chỉ một cây cầu; hiếm dự án nhà ở xã hội nào ở vị trí trung tâm như vậy.</li>
+<li><strong>Mô hình kết hợp:</strong> phần lớn căn của nhà ở xã hội cầu Tiên Sơn bán theo cơ chế nhà ở xã hội, một phần (175 căn) giữ lại cho thuê dịch vụ du lịch – cách các chủ đầu tư bù chi phí và giữ dòng tiền vận hành.</li>
+<li><strong>Nguồn cung căn hộ khu Ngũ Hành Sơn – Sơn Trà tăng:</strong> cùng các dự án thương mại ven sông Hàn, khu vực sẽ đông dân hơn, hạ tầng dịch vụ quanh đường Ngũ Hành Sơn có thêm lực cầu.</li>
+<li><strong>Người cần nhà ở xã hội:</strong> nên chuẩn bị sớm cho nhà ở xã hội cầu Tiên Sơn: giấy xác nhận đối tượng, thu nhập và điều kiện nhà ở; dự án mới ở bước quy hoạch nên còn thời gian (xem thêm <a href="/nha-o-xa-hoi-viet-huong-lakeside-hoa-xuan/">nhà ở xã hội Việt Hương Lakeside</a> và <a href="/khoi-cong-8-du-an-nha-o-xa-hoi-da-nang-2026/">nhà ở xã hội Đà Nẵng 2026</a>).</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/peninsula-da-nang/">Peninsula Đà Nẵng</a> và <a href="/du-an/peninsula-private-da-nang/">Peninsula Private</a>: cùng nhóm nhà đầu tư; năng lực triển khai của nhóm được thể hiện qua tiến độ các dự án này.</li>
+<li><a href="/du-an/masteri-da-nang/">Masteri Rivera Danang</a>: nằm phía đầu cầu Tiên Sơn bên Hải Châu (cạnh Cung thể thao Tiên Sơn); khu vực hai đầu cầu sẽ đông dân cư hơn khi nhà ở xã hội cầu Tiên Sơn hoàn thành.</li>
+</ul>
+<p>Cần theo dõi khi nhà ở xã hội cầu Tiên Sơn mở nhận hồ sơ, hoặc tìm căn hộ thương mại khu vực này, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: hồ sơ quy hoạch tổng mặt bằng dự án do trang Danang 35K Feet đăng tải (11/2026); <a href="https://cafeland.vn/tin-tuc/doanh-nghiep-nao-thuc-hien-du-an-nha-o-xa-hoi-hon-1225-ty-dong-tai-thanh-pho-da-nang-153347.html">CafeLand</a> (17/7/2026); <a href="https://tuoitre.vn/du-an-nha-o-xa-hoi-hon-1225-ti-dong-vua-duoc-da-nang-giao-chu-dau-tu-thuc-hien-100260716175913488.htm">Tuổi Trẻ</a>. Số liệu theo hồ sơ đang lập, có thể thay đổi khi được phê duyệt.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Nhà ở xã hội cầu Tiên Sơn: 731 căn, 2 tháp 31 tầng',
+			'desc'      => 'Nhà ở xã hội cầu Tiên Sơn (khu đất A2-4, đường Ngũ Hành Sơn): 2 tháp 31 tầng, 731 căn, cao 123,1 m, vốn sơ bộ khoảng 1.225 tỷ, đang lập quy hoạch tổng mặt bằng.',
+			'points'    => array(
+				'Khu đất A2-4 khoảng 6.970 m² ở nút giao đường dẫn cầu Tiên Sơn – đường Ngũ Hành Sơn',
+				'2 tháp 31 tầng + tum, 2 hầm, cao 123,1 m; 731 căn, 175 căn giữ lại cho thuê; tổng sàn 82.945 m²',
+				'Chủ trương 24/6/2025, giao liên danh A&T – Peninsula – Đông Đô làm chủ đầu tư 7/2026; vốn sơ bộ khoảng 1.225 tỷ',
+			),
+			'faq'       => array(
+				array( 'Nhà ở xã hội cầu Tiên Sơn nằm ở đâu?', 'Khu đất A2-4 tại nút giao đường dẫn lên cầu Tiên Sơn và đường Ngũ Hành Sơn, phường Ngũ Hành Sơn, TP Đà Nẵng.' ),
+				array( 'Dự án có bao nhiêu căn?', 'Theo hồ sơ quy hoạch tổng mặt bằng: 731 căn hộ, trong đó chủ đầu tư giữ lại 175 căn để cho thuê; năm 2025 một số báo ghi khoảng 831 căn khi mời đầu tư.' ),
+				array( 'Ai là chủ đầu tư?', 'Liên danh A&T Đà Nẵng – Peninsula Private Đà Nẵng – A&T Bình Dương – Đông Đô Peninsula Đà Nẵng, trong đó Công ty CP Đầu tư Phát triển đô thị A&T Bình Dương là chủ đầu tư (theo CafeLand 17/7/2026).' ),
+				array( 'Khi nào nhận hồ sơ mua?', 'Chưa có. Dự án đang làm thủ tục quy hoạch tổng mặt bằng; thời gian nhận hồ sơ, giá bán sẽ theo thông báo của chủ đầu tư và Sở Xây dựng.' ),
+			),
+		),
+		'sources'        => array(
+			'https://cafeland.vn/tin-tuc/doanh-nghiep-nao-thuc-hien-du-an-nha-o-xa-hoi-hon-1225-ty-dong-tai-thanh-pho-da-nang-153347.html',
+			'https://tuoitre.vn/du-an-nha-o-xa-hoi-hon-1225-ti-dong-vua-duoc-da-nang-giao-chu-dau-tu-thuc-hien-100260716175913488.htm',
+			'https://vneconomy.vn/da-nang-moi-dau-tu-du-an-nha-o-xa-hoi-von-hon-1225-ty-dong-nhan-ho-so-den-109.htm',
+		),
+	);
 	return $posts;
 }
