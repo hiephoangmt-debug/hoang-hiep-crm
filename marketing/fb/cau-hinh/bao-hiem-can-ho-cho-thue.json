@@ -1,0 +1,90 @@
+{
+ "tag": "KINH NGHIỆM · SUN SAPHIA RESIDENCE",
+ "title": "Bảo hiểm căn hộ cho thuê",
+ "sub": "3 lớp bảo hiểm chủ căn nên biết",
+ "xc": 0.5,
+ "yc": 0.4,
+ "stats": [
+  [
+   "3 lớp",
+   "nên có"
+  ],
+  [
+   "≥ 5 tầng",
+   "diện bắt buộc"
+  ],
+  [
+   "1/7/2025",
+   "NĐ 105 hiệu lực"
+  ],
+  [
+   "30 tầng",
+   "Sun Saphia"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo Nghị định 67/2023, sửa đổi bởi Nghị định 105/2025 · Ảnh flycam thực tế khu vực 17/10/2026",
+ "headline": [
+  [
+   "Bảo hiểm",
+   "big",
+   0
+  ],
+  [
+   "căn hộ",
+   "script",
+   300
+  ],
+  [
+   "cho thuê",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Bảo hiểm căn hộ",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "CHO THUÊ",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "3 lớp",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}

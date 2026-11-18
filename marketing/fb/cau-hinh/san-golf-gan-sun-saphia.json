@@ -1,0 +1,90 @@
+{
+ "tag": "KHÁCH THUÊ · SUN SAPHIA RESIDENCE",
+ "title": "Sân golf gần Sun Saphia Residence",
+ "sub": "Khách golf: nhóm thuê lệch mùa biển",
+ "xc": 0.5,
+ "yc": 0.4,
+ "stats": [
+  [
+   "4 sân",
+   "gần dự án"
+  ],
+  [
+   "3–5 ngày",
+   "mỗi chuyến golf"
+  ],
+  [
+   "2–4 người",
+   "mỗi nhóm khách"
+  ],
+  [
+   "Thu – đông",
+   "mùa golf"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Tổng hợp từ bài web hiephoangmt.com 11/2026 · Ảnh flycam thực tế khu vực 17/10/2026",
+ "headline": [
+  [
+   "Sân golf gần",
+   "big",
+   0
+  ],
+  [
+   "Sun Saphia",
+   "script",
+   300
+  ],
+  [
+   "Residence",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Sân golf gần",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "SUN SAPHIA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Residence",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}

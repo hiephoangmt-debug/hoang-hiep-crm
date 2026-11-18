@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Nước tràn từ tầng trên",
+  "AI BỒI THƯỜNG?",
+  "căn cho thuê"
+ ],
+ "question": "3 lớp bảo hiểm chủ căn hộ cho thuê nên biết",
+ "hook_bg": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d18/flycam-0042.jpg",
+ "data_title": [
+  "Bảo hiểm căn hộ",
+  "CHO THUÊ"
+ ],
+ "rows": [
+  [
+   "Lớp 1",
+   "Cháy nổ bắt buộc",
+   "NĐ 67/2023 và NĐ 105/2025"
+  ],
+  [
+   "≥ 5 tầng",
+   "Thuộc diện bắt buộc",
+   "Hoặc sàn từ 1.000 m²"
+  ],
+  [
+   "Lớp 2",
+   "Tài sản bên trong",
+   "Nội thất, nước tràn, trộm"
+  ],
+  [
+   "Lớp 3",
+   "Trách nhiệm với khách",
+   "Khách bị thương trong căn"
+  ],
+  [
+   "30 tầng",
+   "Sun Saphia Residence",
+   "Thuộc diện bắt buộc"
+  ]
+ ],
+ "note": "Nghị định 105/2025/NĐ-CP hiệu lực từ 01/07/2025. Kiểm tra văn bản đang có hiệu lực khi nhận bàn giao.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d18/sun-saphia-cdt-toa-thap-dem.jpg",
+ "photo_caption": "Sun Saphia Residence – tòa tháp 30 tầng ven biển",
+ "cta": "Bảng giá: Zalo 0904 567 009"
+}

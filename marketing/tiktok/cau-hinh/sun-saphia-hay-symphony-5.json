@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Cùng studio Sun Group",
+  "BIỂN HAY SÔNG",
+  "chọn sao?"
+ ],
+ "question": "Sun Saphia hay Symphony 5 cho người mua để cho thuê?",
+ "hook_bg": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d18/sun-symphony-5-pc-11-hoang-hon.jpg",
+ "data_title": [
+  "So sánh",
+  "SAPHIA · SYMPHONY 5"
+ ],
+ "rows": [
+  [
+   "2,13–2,85 tỷ",
+   "Studio Sun Saphia",
+   "Tầng 15, chưa VAT, KPBT"
+  ],
+  [
+   "2,50–3,30 tỷ",
+   "Studio Symphony 5",
+   "Đã gồm VAT, KPBT"
+  ],
+  [
+   "513 / 725",
+   "Số căn studio",
+   "Saphia / Symphony 5"
+  ],
+  [
+   "11/2028",
+   "Saphia bàn giao",
+   "Dự kiến"
+  ],
+  [
+   "30/6/2028",
+   "Symphony 5 nhận căn",
+   "Dự kiến, khi đóng 70%"
+  ]
+ ],
+ "note": "Theo tài liệu chủ đầu tư, giỏ hàng 11/2026. Cả hai là căn hộ trên đất thương mại dịch vụ, thời hạn 50 năm.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d18/sun-symphony-5-pc-08-dem-phao-hoa.jpg",
+ "photo_caption": "Symphony 5 bên sông Hàn – ngay điểm ngắm pháo hoa",
+ "cta": "Bảng giá: Zalo 0904 567 009"
+}

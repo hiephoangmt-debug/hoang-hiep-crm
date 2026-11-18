@@ -1,0 +1,90 @@
+{
+ "tag": "SO SÁNH · CĂN HỘ SUN GROUP",
+ "title": "Sun Saphia hay Symphony 5",
+ "sub": "Mua studio cho thuê: biển hay sông?",
+ "xc": 0.5,
+ "yc": 0.4,
+ "stats": [
+  [
+   "~2,13 tỷ",
+   "studio Saphia từ*"
+  ],
+  [
+   "~2,50 tỷ",
+   "studio S5 từ*"
+  ],
+  [
+   "50 năm",
+   "cả hai dự án"
+  ],
+  [
+   "2028",
+   "nhận nhà"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "*Saphia tầng 15 chưa VAT, KPBT; Symphony 5 đã gồm VAT, KPBT · Ảnh flycam thực tế khu vực Sun Saphia",
+ "headline": [
+  [
+   "Sun Saphia hay",
+   "big",
+   0
+  ],
+  [
+   "Symphony 5",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Sun Saphia hay",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "SYMPHONY 5",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "cho thuê",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}

@@ -113,3 +113,5 @@
 | 17/11/2026 | Sun (Reels) | 20:00 | Video phân tích #01 "Vì sao Sơn Thủy là tọa độ mới ven biển Đà Nẵng?" – avatar HeyGen + bản đồ navy v5, 72s, ghi chú nội dung AI (Metricool 428780189) | /du-an/sun-saphia-residence/ |
 | 17/11/2026 | TikTok (@hiephoangmt, brand Sun) | 20:15 | Video phân tích #01 (isAigc = true, nội dung thương hiệu) (Metricool 428780287) | /du-an/sun-saphia-residence/ |
 | 18/11/2026 | TikTok (@hiephoangmt, brand Sun) | 12:15 | So sánh biệt thự Hội An – BỘ 3 ẢNH mẫu mới (tò mò / số liệu / ảnh thật), đăng lại bản mới theo anh Hiệp (Metricool 432171851) | /du-an/casamia-balanca-hoi-an/ |
+| 18/11/2026 | Casamia (blogId 8074284) | 08:30 | (bài web mới 07:30) Biệt thự compound Hội An – Casamia Balanca (album 4 ảnh: đạp xe quảng trường, xe điện, đường chạy bộ, phố đêm) | /biet-thu-compound-hoi-an-casamia-balanca/ |
+| 18/11/2026 | TikTok (@hiephoangmt, brand Sun) | 08:45 | Biệt thự compound Hội An – BỘ 3 ẢNH (31,1 ha chỉ 363 căn) | /biet-thu-compound-hoi-an-casamia-balanca/ |

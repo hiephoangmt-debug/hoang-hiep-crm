@@ -1,0 +1,90 @@
+{
+ "tag": "THỊ TRƯỜNG · CĂN HỘ ĐÀ NẴNG",
+ "title": "Căn hộ dưới 3 tỷ",
+ "sub": "7 dự án đang bán, cập nhật 11/2026",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "7 dự án",
+   "có căn dưới 3 tỷ"
+  ],
+  [
+   "~1,77 tỷ",
+   "studio F1 từ*"
+  ],
+  [
+   "5/7",
+   "sở hữu lâu dài"
+  ],
+  [
+   "30 m²",
+   "studio phổ biến"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "*FourS Tower F1, phương án thanh toán sớm · Giá tham khảo giỏ hàng 11/2026 · Ảnh thực tế biển Mỹ Khê",
+ "headline": [
+  [
+   "Căn hộ dưới",
+   "big",
+   0
+  ],
+  [
+   "3 tỷ",
+   "script",
+   300
+  ],
+  [
+   "Đà Nẵng",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Căn hộ Đà Nẵng",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "DƯỚI 3 TỶ",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "11/2026",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}
