@@ -1286,5 +1286,93 @@ HTML
 			'https://cvr.com.vn/project/casamia-balanca-hoi-an',
 		),
 	);
+	/* ---------------- 18/11 – Masteri Rivera Danang: phân tích vị trí, sản phẩm, pháp lý, cách thanh toán (anh Hiệp yêu cầu; giá chỉ ghi tham khảo – liên hệ) ---------------- */
+	$mas = '<a href="/du-an/masteri-da-nang/">Masteri Rivera Danang</a>';
+	$posts[] = array(
+		'slug'     => 'can-ho-masteri-rivera-danang-phan-tich',
+		'title'    => 'Căn hộ Masteri Rivera Danang: phân tích vị trí, sản phẩm, pháp lý và cách thanh toán',
+		'excerpt'  => 'Phân tích căn hộ Masteri Rivera Danang – dự án đầu tiên của Masterise Homes tại Đà Nẵng: vị trí Quy Mỹ nhìn sông Cẩm Lệ, 2 tháp 39 tầng, cơ cấu căn 1PN+ đến Dual Key, pháp lý và các phương án thanh toán.',
+		'keyword'  => 'căn hộ Masteri Rivera Danang',
+		'keywords_extra' => array( 'Masteri Đà Nẵng', 'Masterise Homes Đà Nẵng', 'căn hộ Hải Châu', 'căn hộ Dual Key Đà Nẵng' ),
+		'project'  => 'masteri-da-nang',
+		'schedule' => '2026-11-18 09:45',
+		'category' => 'Tin dự án',
+		'tags'     => array( 'Masteri Rivera Danang', 'Masterise Homes', 'Căn hộ Hải Châu' ),
+		'image'    => 'plugin:img/masteri-rivera-danang/masteri-rivera-danang-ho-boi-phoi-canh.jpg',
+		'image_alt' => 'Hồ bơi resort căn hộ Masteri Rivera Danang (phối cảnh Masterise Homes)',
+		'content'  => <<<HTML
+<p><strong>Căn hộ Masteri Rivera Danang</strong> là sản phẩm đầu tiên Masterise Homes đưa ra tại Đà Nẵng, sau chuỗi dự án Masteri ở Hà Nội và TP.HCM. Bài này Hoàng Hiệp phân tích theo bốn câu hỏi người mua hay đặt ra nhất: vị trí có gì, sản phẩm gồm những loại căn nào, pháp lý tới đâu và thanh toán theo cách nào. Giá bán thay đổi theo từng đợt nên chỉ ghi tham khảo – cần bảng giá đang áp dụng, anh chị liên hệ trực tiếp.</p>
+<!--hh-featured-->
+<h2>1. Vị trí căn hộ Masteri Rivera Danang: Quy Mỹ, nhìn sông Cẩm Lệ</h2>
+<p>Dự án nằm ở số 50 Quy Mỹ, khu Hòa Cường Nam (Hải Châu), có ba mặt tiền Quy Mỹ – Nguyễn An Ninh – Nguyễn Lộ Trạch. Theo phối cảnh chủ đầu tư, hai tháp A và B nhìn ra sông Cẩm Lệ, ngay cạnh Cung thể thao Tiên Sơn. Khu vực quanh căn hộ Masteri Rivera Danang là khu dân cư đã hình thành lâu, đường sá, trường học, chợ đều có sẵn – khác với nhiều dự án mới ở ven đô phải chờ hạ tầng.</p>
+<p>Từ căn hộ Masteri Rivera Danang, đi Lotte Mart và Asia Park (Sun World Đà Nẵng Wonders) chỉ vài phút; ra đường 2/9, cầu Rồng và trung tâm Hải Châu khoảng 10 phút; sân bay quốc tế Đà Nẵng cũng khoảng 10 phút (ước tính theo bản đồ, giờ bình thường). Với người làm việc ở trung tâm hoặc gia đình có con đi học trong quận Hải Châu, đây là điểm cộng lớn.</p>
+<p>Điểm cần lưu ý: hướng nhìn sông Cẩm Lệ phụ thuộc tháp và vị trí căn. Căn nhìn sông, nhìn Cung thể thao Tiên Sơn hay nhìn vào nội khu có trải nghiệm khác nhau, nên khi chọn căn nên xem mặt bằng tầng và đứng tại công trường để hình dung hướng nhìn thực tế.</p>
+<!--hh-img:img/masteri-rivera-danang/masteri-rivera-danang-ho-boi-phoi-canh.jpg|Hồ bơi resort trên tầng 4 – tiện ích nổi bật của căn hộ Masteri Rivera Danang (phối cảnh chủ đầu tư Masterise Homes)-->
+<h2>2. Quy mô và tên pháp lý của dự án</h2>
+<p>Theo thông tin công bố khi ra mắt (tháng 5/2025), dự án rộng khoảng 18.296 m², vốn đầu tư hơn 3.300 tỷ đồng, gồm 2 tòa tháp 39 tầng nổi và 2 tầng hầm, gần 1.200 căn hộ. Khối đế tầng 1 – 3 là thương mại (shophouse, trung tâm thương mại khoảng 2.500 m²), tầng 4 dành cho hồ bơi resort, vườn dạo bộ và sân chơi trẻ em, tổng cộng khoảng 31 tiện ích nội khu.</p>
+<p>Trên hồ sơ pháp lý, dự án có tên "Dự án khu chung cư cao tầng, văn phòng thương mại và nhà ở Tuyên Sơn"; pháp nhân chủ đầu tư là Công ty CP Phát triển Nhà Tuyên Sơn, còn Masteri Rivera Danang là tên thương mại do Masterise Homes phát triển. Khi đọc hợp đồng mua bán căn hộ Masteri Rivera Danang, anh chị sẽ thấy tên pháp nhân này – không phải tên thương hiệu.</p>
+<h2>3. Sản phẩm căn hộ Masteri Rivera Danang gồm những loại nào?</h2>
+<p>Cơ cấu căn trải từ nhỏ tới lớn, diện tích khoảng 47 – 113 m², phù hợp cả người mua lần đầu lẫn gia đình nhiều thế hệ:</p>
+<table>
+<thead><tr><th>Loại căn</th><th>Diện tích tham khảo</th><th>Phù hợp</th></tr></thead>
+<tbody>
+<tr><td>1PN+</td><td>Khoảng 47 m²</td><td>Người trẻ, vợ chồng mới cưới, cho thuê dài hạn</td></tr>
+<tr><td>2PN và 2PN+</td><td>Khoảng 67 – 68 m² trở lên</td><td>Gia đình 3 – 4 người, nhu cầu ở thực phổ biến nhất</td></tr>
+<tr><td>3PN</td><td>Lớn hơn 2PN+</td><td>Gia đình đông người, cần phòng làm việc riêng</td></tr>
+<tr><td>Dual Key</td><td>Khoảng 101 m² thông thủy</td><td>Ở một phần, cho thuê một phần; gia đình ở cùng ông bà</td></tr>
+</tbody>
+</table>
+<p>Trong các dòng căn hộ Masteri Rivera Danang, đáng chú ý nhất là căn Dual Key: một căn hộ có hai cửa vào riêng, chia thành hai không gian độc lập. Gia đình có thể ở phần lớn và cho thuê phần nhỏ, hoặc để bố mẹ ở riêng mà vẫn gần nhau. Đây là kiểu sản phẩm còn ít tại Đà Nẵng, nên căn hộ Masteri Rivera Danang loại Dual Key thường được hỏi nhiều.</p>
+<p>Về tiêu chuẩn bàn giao, chủ đầu tư công bố hoàn thiện sàn, trần, tường và nội thất cơ bản. Danh mục vật liệu cụ thể từng loại căn nên xin bản phụ lục kèm hợp đồng để đối chiếu khi nhận nhà.</p>
+<h2>4. Pháp lý và tiến độ xây dựng</h2>
+<ul>
+<li><strong>Đủ điều kiện bán:</strong> dự án đã có văn bản đủ điều kiện bán nhà ở hình thành trong tương lai của Sở Xây dựng Đà Nẵng trước khi mở bán.</li>
+<li><strong>Hình thức sở hữu:</strong> người Việt Nam sở hữu lâu dài; người nước ngoài sở hữu tối đa 50 năm theo Luật Nhà ở (trong giới hạn số căn được phép).</li>
+<li><strong>Tiến độ:</strong> ra mắt tháng 5/2025, tổng thầu Central (Centralcons), cất nóc 2 tòa tháp tháng 12/2025; bàn giao dự kiến quý III/2026 (một số nguồn ghi quý IV/2026).</li>
+</ul>
+<p>Người mua căn hộ Masteri Rivera Danang nên hỏi rõ thời điểm bàn giao thực tế của tháp mình chọn và lộ trình cấp sổ hồng, vì đây là hai mốc ảnh hưởng trực tiếp tới dòng tiền thanh toán đợt cuối.</p>
+<h2>5. Cách thanh toán căn hộ Masteri Rivera Danang</h2>
+<p>Qua các đợt chính sách đã áp dụng, chủ đầu tư thường cho chọn ba phương án:</p>
+<ul>
+<li><strong>Thanh toán theo tiến độ chuẩn:</strong> đặt trước, ký thỏa thuận rồi chia nhiều đợt theo tiến độ xây dựng, đợt lớn cuối cùng khi nhận nhà. Phù hợp người có dòng tiền đều.</li>
+<li><strong>Thanh toán sớm:</strong> trả phần lớn giá trị trong vài đợt đầu để nhận mức chiết khấu cao hơn. Phù hợp người có sẵn vốn và muốn giảm tổng chi phí.</li>
+<li><strong>Kết hợp vay ngân hàng:</strong> khách trả phần đầu, ngân hàng giải ngân phần còn lại, chủ đầu tư hỗ trợ lãi suất trong một thời gian nhất định. Phù hợp người mua ở thực cần đòn bẩy.</li>
+</ul>
+<p>Ngoài ra, các đợt chính sách thường có ưu đãi thêm cho khách hàng là người Đà Nẵng. Mức đặt cọc, tỷ lệ chiết khấu, tỷ lệ vay và thời gian hỗ trợ lãi suất <strong>thay đổi theo từng đợt</strong>, nên trước khi quyết định, anh chị nên yêu cầu phiếu tính giá theo đúng căn và đúng phương án mình chọn để so sánh tổng tiền thực trả.</p>
+<h2>6. Giá căn hộ Masteri Rivera Danang: tham khảo, liên hệ</h2>
+<p>Giá căn hộ Masteri Rivera Danang phụ thuộc loại căn, tầng, hướng nhìn và phương án thanh toán; mỗi đợt chính sách lại khác nhau. Vì vậy Hoàng Hiệp không ghi con số cố định trong bài này. Để có giá tham khảo đang áp dụng và giỏ hàng căn còn lại, anh chị xem trang dự án {$mas} hoặc gọi/Zalo trực tiếp. Bài <a href="/masteri-da-nang-gia-tien-do-ban-giao/">tiến độ Masteri Đà Nẵng</a> có thêm mốc xây dựng các giai đoạn trước.</p>
+<h2>7. Nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Điểm mạnh:</strong> thương hiệu chủ đầu tư lớn, vị trí trong lõi Hải Châu đã có hạ tầng, sản phẩm đa dạng có Dual Key, tiến độ xây dựng nhanh (cất nóc sau khoảng 7 tháng kể từ ra mắt).</li>
+<li><strong>Cần cân nhắc:</strong> mật độ căn hộ cao (gần 1.200 căn trên khoảng 1,8 ha) nên chọn tầng, hướng kỹ; hướng nhìn sông chỉ có ở một số căn; chi phí quản lý dự án thương hiệu thường cao hơn mặt bằng chung.</li>
+<li><strong>Hợp với ai:</strong> gia đình mua để ở trong trung tâm, người muốn căn Dual Key vừa ở vừa cho thuê, người ưu tiên thương hiệu vận hành.</li>
+</ul>
+<p>So sánh thêm với các dự án cùng khu vực tại mục <a href="/du-an/">dự án căn hộ Đà Nẵng</a>. Cần xem nhà mẫu, nhận phiếu tính giá căn hộ Masteri Rivera Danang theo phương án của mình, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: <a href="https://vnexpress.net/masterise-homes-ra-mat-du-an-can-ho-dau-tien-tai-da-nang-4888365.html">VnExpress</a>, <a href="https://cafef.vn/masterise-homes-chinh-thuc-cat-noc-du-an-masteri-rivera-danang-188251202103820178.chn">CafeF</a>, <a href="https://masterisehomes.com/masteri-rivera-danang/en/">Masterise Homes</a>, tài liệu bán hàng của chủ đầu tư. Số liệu, giá mang tính tham khảo.</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Căn hộ Masteri Rivera Danang: 4 điều cần biết',
+			'desc'      => 'Căn hộ Masteri Rivera Danang: vị trí Quy Mỹ nhìn sông Cẩm Lệ, 2 tháp 39 tầng, loại căn 1PN+ đến Dual Key, pháp lý và 3 cách thanh toán.',
+			'points'    => array(
+				'Căn hộ Masteri Rivera Danang ở 50 Quy Mỹ (Hải Châu), 2 tháp A – B nhìn sông Cẩm Lệ, cạnh Cung thể thao Tiên Sơn',
+				'Gần 1.200 căn 47 – 113 m²: 1PN+, 2PN, 2PN+, 3PN và Dual Key khoảng 101 m²',
+				'Đủ điều kiện bán, sở hữu lâu dài cho người Việt; 3 cách thanh toán: tiến độ, trả sớm, vay ngân hàng',
+			),
+			'faq'       => array(
+				array( 'Căn hộ Masteri Rivera Danang nằm ở đâu?', 'Số 50 Quy Mỹ, khu Hòa Cường Nam (Hải Châu), ba mặt tiền Quy Mỹ – Nguyễn An Ninh – Nguyễn Lộ Trạch, nhìn ra sông Cẩm Lệ, cạnh Cung thể thao Tiên Sơn.' ),
+				array( 'Chủ đầu tư Masteri Rivera Danang là ai?', 'Dự án do Masterise Homes phát triển; pháp nhân chủ đầu tư là Công ty CP Phát triển Nhà Tuyên Sơn, tên pháp lý Dự án khu chung cư cao tầng, văn phòng thương mại và nhà ở Tuyên Sơn.' ),
+				array( 'Căn Dual Key Masteri Rivera Danang rộng bao nhiêu?', 'Khoảng 101 m² thông thủy, có hai cửa vào riêng, có thể vừa ở vừa cho thuê.' ),
+				array( 'Mua căn hộ Masteri Rivera Danang thanh toán thế nào?', 'Thường có ba phương án: theo tiến độ chuẩn, thanh toán sớm nhận chiết khấu cao hơn, hoặc vay ngân hàng có hỗ trợ lãi suất; mức cụ thể thay đổi theo từng đợt chính sách.' ),
+				array( 'Giá căn hộ Masteri Rivera Danang bao nhiêu?', 'Giá thay đổi theo loại căn, tầng, hướng và phương án thanh toán; liên hệ Hoàng Hiệp 0904 567 009 để nhận giá tham khảo và phiếu tính giá đang áp dụng.' ),
+			),
+		),
+		'sources'  => array(
+			'https://vnexpress.net/masterise-homes-ra-mat-du-an-can-ho-dau-tien-tai-da-nang-4888365.html',
+			'https://cafef.vn/masterise-homes-cong-bo-masteri-rivera-danang-du-an-dau-tien-tai-da-nang-188250521110118437.chn',
+			'https://cafef.vn/masterise-homes-chinh-thuc-cat-noc-du-an-masteri-rivera-danang-188251202103820178.chn',
+			'https://masterisehomes.com/masteri-rivera-danang/en/',
+		),
+	);
 	return $posts;
 }

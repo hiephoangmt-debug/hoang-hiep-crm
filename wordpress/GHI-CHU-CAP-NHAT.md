@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.43** + plugin Hoàng Hiệp CRM **2.20.318**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.43** + plugin Hoàng Hiệp CRM **2.20.319**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.319 (18/11/2026)
+
+- **Masteri Rivera Danang:** thêm tên pháp lý (Dự án khu chung cư cao tầng, văn phòng thương mại và nhà ở Tuyên Sơn), pháp nhân chủ đầu tư (Công ty CP Phát triển Nhà Tuyên Sơn), tháp A – B, căn Dual Key khoảng 101 m², các phương thức thanh toán (không ghi giá); sửa vị trí "ven sông Hàn" thành nhìn ra sông Cẩm Lệ, cạnh Cung thể thao Tiên Sơn; thêm ảnh hồ bơi phối cảnh chủ đầu tư.
 
 ## Có gì mới – 2.20.318 (18/11/2026)
 
