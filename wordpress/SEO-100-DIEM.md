@@ -44,3 +44,8 @@ Khi bài lên web, `seo-bai-viet.php` tự: đưa từ khoá vào tiêu đề / 
 ## Ảnh tin Mua bán / Cho thuê (anh Hiệp 16/11/2026)
 
 - Dùng **mẫu thẻ tin thống nhất** (`bai-viet/the-tin-tuc.py`, khổ `4x3` → `img/nha-dat/<tên>-4x3.jpg`; khổ `fb` cho bài Facebook). Spec lưu ở `bai-viet/the-tin-tuc-tin-rao.json`. Không dùng thẻ nền xanh navy kiểu cũ. Ô giá chỉ ghi "giá chỉ từ".
+
+## Giờ đăng tin tức (anh Hiệp 18/11/2026)
+
+- Tin tức mới (bản tin hạ tầng, Sở Xây dựng, tin thị trường): **lên web sớm nhất** – đặt `'schedule'` = thời điểm hiện tại (giờ Việt Nam, làm tròn **xuống** 15 phút), không hẹn giờ cố định 08:00. Web tự đăng ở lượt kiểm tra kế tiếp (15 phút/lần).
+- Facebook: hẹn khung trống sớm nhất trong ngày (vẫn giữ cách nhau ≥ 3 tiếng, tối đa 3 bài tự động/ngày/trang).

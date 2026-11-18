@@ -819,7 +819,7 @@ HTML
 		'keyword'        => 'bãi đỗ xe ngầm Bạch Đằng',
 		'keywords_extra' => array( 'đất vàng Bạch Đằng', 'trụ sở VTV8 Đà Nẵng', 'công viên ven sông Hàn', 'căn hộ ven sông Hàn' ),
 		'project'        => 'the-filmore-da-nang',
-		'schedule'       => '2026-11-18 08:00',
+		'schedule'       => '2026-11-18 07:00', // Tin tức lên sớm nhất (anh Hiệp 18/11/2026).
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'Hạ tầng Đà Nẵng', 'Sông Hàn', 'Hải Châu' ),
 		'image'          => 'plugin:img/da-nang/song-han-du-thuyen-cau-rong-ve-dem.jpg',
