@@ -1046,5 +1046,75 @@ HTML
 			'https://vneconomy.vn/da-nang-moi-dau-tu-du-an-nha-o-xa-hoi-von-hon-1225-ty-dong-nhan-ho-so-den-109.htm',
 		),
 	);
+	/* ---------------- 18/11 – Khu đô thị quốc tế Đa Phước: phối cảnh mới, tiến độ 3 giai đoạn (anh Hiệp gửi, nguồn danang.gov.vn) ---------------- */
+	$posts[] = array(
+		'slug'           => 'khu-do-thi-quoc-te-da-phuoc-3-giai-doan',
+		'title'          => 'Khu đô thị quốc tế Đa Phước: phối cảnh mới và tiến độ 3 giai đoạn, hoàn thành quý II/2033',
+		'excerpt'        => 'Khu đô thị quốc tế Đa Phước (khoảng 170,7 ha, vốn khoảng 54.788 tỷ đồng) chia 3 giai đoạn: giai đoạn 1 khoảng 39,8 ha xong quý IV/2028, giai đoạn 2 khoảng 117,9 ha xong quý III/2032, giai đoạn 3 khoảng 13 ha (bệnh viện, khách sạn, hội nghị) xong quý II/2033.',
+		'keyword'        => 'khu đô thị quốc tế Đa Phước',
+		'keywords_extra' => array( 'Đa Phước tái khởi động', 'dự án lấn biển Đà Nẵng', 'cửa sông Hàn', 'The Sunrise Bay' ),
+		'project'        => 'peninsula-da-nang',
+		'schedule'       => '2026-11-19 06:45', // Sáng sớm nhất sau khi cài gói 2.20.323 (ảnh Đa Phước nằm trong plugin).
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Đa Phước', 'Quy hoạch Đà Nẵng', 'Sông Hàn' ),
+		'image'          => 'plugin:img/da-phuoc/da-phuoc-phoi-canh-tong-the-cua-song-han.jpg',
+		'image_alt'      => 'Phối cảnh khu đô thị quốc tế Đa Phước ở cửa sông Hàn, nhìn về bán đảo Sơn Trà',
+		'content'        => <<<HTML
+<p><strong>Khu đô thị quốc tế Đa Phước</strong> vừa có thêm bộ phối cảnh mới cùng tiến độ chi tiết theo từng giai đoạn, sau khi UBND TP Đà Nẵng chấp thuận điều chỉnh chủ trương đầu tư. Theo phương án phân kỳ công bố trên Cổng thông tin điện tử thành phố, dự án lấn biển ở cửa sông Hàn chia làm 3 giai đoạn, hoàn thành toàn bộ vào quý II/2033.</p>
+<!--hh-featured-->
+<h2>Khu đô thị quốc tế Đa Phước sau điều chỉnh chủ trương</h2>
+<p>Theo báo chí, quyết định ngày 12/8/2026 của UBND thành phố chấp thuận điều chỉnh chủ trương đầu tư dự án (chủ trương gốc theo Quyết định 1443/QĐ-UBND ngày 17/3/2017), chủ đầu tư là Công ty TNHH The Sunrise Bay, tổng vốn khoảng 54.788 tỷ đồng. Tổng diện tích ba giai đoạn của khu đô thị quốc tế Đa Phước khoảng 170,7 ha (39,8 + 117,9 + 13 ha). Chủ đầu tư phải bàn giao khoảng 13,099 ha đất do thành phố quản lý cho Trung tâm Phát triển quỹ đất.</p>
+<!--hh-img:img/da-phuoc/da-phuoc-phoi-canh-tong-the-cua-song-han.jpg|Phối cảnh khu đô thị quốc tế Đa Phước ở cửa sông Hàn, phía sau là bán đảo Sơn Trà (phối cảnh dự án)-->
+<h2>Tiến độ 3 giai đoạn của khu đô thị quốc tế Đa Phước</h2>
+<table>
+<thead><tr><th>Giai đoạn</th><th>Diện tích</th><th>Hạng mục chính</th><th>Hoàn thành dự kiến</th></tr></thead>
+<tbody>
+<tr><td>Giai đoạn 1</td><td>Khoảng 39,8 ha</td><td>Tháo gỡ vướng mắc, hoàn tất pháp lý điều chỉnh để triển khai xây dựng trong quý III/2026; nhà thấp tầng từ tháng 9/2026 đến quý II/2028; kè theo giấy phép đến quý I/2028; hạ tầng kỹ thuật đến quý IV/2028</td><td>Quý IV/2028</td></tr>
+<tr><td>Giai đoạn 2</td><td>Khoảng 117,9 ha</td><td>Phần kè biển còn lại (có khu vui chơi dịch vụ giải trí) đến quý II/2028; hạ tầng kỹ thuật còn lại đến quý IV/2029; nhà thấp tầng, trường học, dịch vụ công cộng đến quý III/2032</td><td>Quý III/2032</td></tr>
+<tr><td>Giai đoạn 3</td><td>Khoảng 13 ha</td><td>Bệnh viện; thương mại, dịch vụ, khách sạn, trung tâm hội nghị, khu vui chơi giải trí</td><td>Quý II/2033</td></tr>
+</tbody>
+</table>
+<!--hh-img:img/da-phuoc/da-phuoc-giai-doan-1-39-8-ha.jpg|Giai đoạn 1 khu đô thị quốc tế Đa Phước khoảng 39,8 ha – khu nhà thấp tầng ven biển (phối cảnh dự án)-->
+<p>Giai đoạn 1 của khu đô thị quốc tế Đa Phước là khu nhà thấp tầng sát bờ biển phía Nam dự án, gần trục giao thông hiện hữu nên triển khai trước. Thi công nhà thấp tầng của khu đô thị quốc tế Đa Phước dự kiến bắt đầu từ tháng 9/2026, tức đã nằm trong lịch tái khởi động của thành phố.</p>
+<!--hh-img:img/da-phuoc/da-phuoc-giai-doan-2-117-9-ha.jpg|Giai đoạn 2 khoảng 117,9 ha: kè biển, nhà thấp tầng ven kênh, trường học và hòn đảo dịch vụ giải trí (phối cảnh dự án)-->
+<p>Giai đoạn 2 lớn nhất, chiếm gần 70% diện tích khu đô thị quốc tế Đa Phước, gồm khu biệt thự ven kênh nội khu, kè biển và hòn đảo dịch vụ giải trí. Giai đoạn 3 là cụm đảo khoảng 13 ha với bệnh viện, khách sạn, trung tâm hội nghị – phần tạo dịch vụ cao cấp cho toàn khu.</p>
+<!--hh-img:img/da-phuoc/da-phuoc-giai-doan-3-dao-13-ha.jpg|Giai đoạn 3 khu đô thị quốc tế Đa Phước khoảng 13 ha: bệnh viện, khách sạn, trung tâm hội nghị trên đảo (phối cảnh dự án)-->
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Dự án "đắp chiếu" được tháo gỡ:</strong> sau nhiều năm đình trệ, khu đô thị quốc tế Đa Phước có lộ trình rõ theo quý – tín hiệu tích cực cho niềm tin thị trường Đà Nẵng, nhất là khu cửa sông Hàn.</li>
+<li><strong>Thêm nguồn cung thấp tầng ven biển trung tâm:</strong> giai đoạn 1 dự kiến có nhà thấp tầng hoàn thiện từ quý II/2028; các khu thấp tầng gần trung tâm hiện rất khan hiếm.</li>
+<li><strong>Bệnh viện, trường học, khách sạn, hội nghị:</strong> khi giai đoạn 2 – 3 của khu đô thị quốc tế Đa Phước hoàn thành, khu cửa sông Hàn có thêm tiện ích lớn, lợi cho các dự án căn hộ hai bờ sông Hàn và quanh cầu Thuận Phước.</li>
+<li><strong>Theo dõi sát:</strong> tiến độ thực tế ở từng mốc (kè, hạ tầng, quy hoạch 1/500) mới là thước đo – các mốc trên là kế hoạch theo phương án phân kỳ.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/peninsula-da-nang/">Peninsula Đà Nẵng</a>: bên bờ Đông sông Hàn gần cầu Thuận Phước, nhìn về phía cửa sông – hưởng lợi trực tiếp khi khu cửa sông Hàn được lấp đầy, có thêm tiện ích.</li>
+<li><a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a> và <a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a>: căn hộ ven sông Hàn của Sun Group, cùng trục cảnh quan sông Hàn – cửa biển.</li>
+</ul>
+<p>Xem thêm lịch các sự kiện lớn cuối năm tại bài <a href="/cong-bo-quy-hoach-chung-2050-aeon-mall-hoa-xuan/">công bố Quy hoạch chung 2050</a>. Cần tư vấn căn hộ ven sông Hàn hưởng lợi từ khu đô thị quốc tế Đa Phước, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: <a href="https://danang.gov.vn/vi/w/dieu-chinh-chu-truong-dau-tu-du-an-khu-do-thi-quoc-te-da-phuoc">Cổng thông tin điện tử TP Đà Nẵng</a>; <a href="https://cafeland.vn/tin-tuc/du-an-lan-bien-da-phuoc-gan-55000-ty-dong-tai-da-nang-vua-co-buoc-tien-quan-trong-154117.html">CafeLand</a>; <a href="https://nhadautu.vn/da-nang-hoi-sinh-khu-do-thi-quoc-te-da-phuoc-d106941.html">Nhà Đầu tư</a>. Phối cảnh dự án; tiến độ theo phương án phân kỳ đầu tư, có thể điều chỉnh.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Khu đô thị quốc tế Đa Phước: 3 giai đoạn, xong 2033',
+			'desc'      => 'Khu đô thị quốc tế Đa Phước khoảng 170,7 ha, vốn khoảng 54.788 tỷ: giai đoạn 1 xong quý IV/2028, giai đoạn 2 quý III/2032, giai đoạn 3 quý II/2033.',
+			'points'    => array(
+				'Giai đoạn 1 khoảng 39,8 ha: nhà thấp tầng thi công từ 9/2026, hoàn thành quý IV/2028',
+				'Giai đoạn 2 khoảng 117,9 ha: kè biển, hạ tầng, nhà thấp tầng, trường học – hoàn thành quý III/2032',
+				'Giai đoạn 3 khoảng 13 ha: bệnh viện, khách sạn, hội nghị – hoàn thành quý II/2033',
+			),
+			'faq'       => array(
+				array( 'Khu đô thị quốc tế Đa Phước rộng bao nhiêu?', 'Khoảng 170,7 ha theo ba giai đoạn (39,8 ha, 117,9 ha và 13 ha), vốn khoảng 54.788 tỷ đồng, chủ đầu tư Công ty TNHH The Sunrise Bay.' ),
+				array( 'Khi nào giai đoạn 1 hoàn thành?', 'Quý IV/2028; nhà thấp tầng thi công từ tháng 9/2026 và dự kiến xong quý II/2028.' ),
+				array( 'Giai đoạn 3 gồm những gì?', 'Bệnh viện, thương mại – dịch vụ, khách sạn, trung tâm hội nghị và khu vui chơi giải trí, hoàn thành dự kiến quý II/2033.' ),
+				array( 'Dự án ảnh hưởng gì tới căn hộ ven sông Hàn?', 'Khu cửa sông Hàn sẽ có thêm dân cư và tiện ích lớn (bệnh viện, khách sạn, hội nghị), tăng sức hút cho các dự án căn hộ hai bờ sông Hàn quanh cầu Thuận Phước.' ),
+			),
+		),
+		'sources'        => array(
+			'https://danang.gov.vn/vi/w/dieu-chinh-chu-truong-dau-tu-du-an-khu-do-thi-quoc-te-da-phuoc',
+			'https://cafeland.vn/tin-tuc/du-an-lan-bien-da-phuoc-gan-55000-ty-dong-tai-da-nang-vua-co-buoc-tien-quan-trong-154117.html',
+			'https://nhadautu.vn/da-nang-hoi-sinh-khu-do-thi-quoc-te-da-phuoc-d106941.html',
+		),
+	);
 	return $posts;
 }
