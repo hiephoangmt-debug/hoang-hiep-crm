@@ -1161,6 +1161,7 @@ HTML
 		'keywords_extra' => array( 'Casamia Balanca', 'biệt thự Hội An để ở', 'khu đô thị sinh thái Hội An', 'biệt thự ven sông Cổ Cò' ),
 		'project'  => 'casamia-balanca-hoi-an',
 		'schedule' => '2026-11-18 07:30',
+		'rev'      => 2, // 18/11: thêm phân khu, số căn, thông số xây dựng, mật độ.
 		'category' => 'Tin dự án',
 		'tags'     => array( 'Casamia Balanca', 'Biệt thự Hội An', 'Compound' ),
 		'image'    => 'plugin:img/casamia-balanca/casamia-balanca-toan-canh.jpg',
@@ -1176,7 +1177,33 @@ HTML
 <p>Theo thông tin chủ đầu tư, cả khu 31,1 ha chỉ có <strong>363 sản phẩm thấp tầng</strong>: 173 biệt thự đơn lập, 116 biệt thự song lập và 74 shophouse – bình quân khoảng 12 sản phẩm mỗi ha, dành phần lớn diện tích cho đường, kênh, công viên và tiện ích. Đây là khác biệt cốt lõi của một <strong>biệt thự compound Hội An</strong> so với dãy nhà phố chia lô: cư dân dùng chung một hệ cảnh quan rộng, không bị chèn bởi công trình cao tầng.</p>
 <p>Mô hình compound còn thể hiện ở cách vận hành: một cổng chào chính, xe điện nội khu, bảo vệ, đường dạo bộ – đạp xe chạy giữa các công viên. Với gia đình có trẻ nhỏ hoặc người lớn tuổi, việc con đi xe đạp, ông bà đi bộ quanh hồ trong khu yên tĩnh là giá trị sống khó tìm ở phố.</p>
 <!--hh-img:img/casamia-balanca/casamia-balanca-xe-dien-cong-bao-ve.jpg|Xe điện nội khu và cổng bảo vệ – vận hành khép kín của biệt thự compound Hội An Casamia Balanca-->
-<h2>3. Năm công viên và clubhouse – tiện ích biệt thự compound Hội An dùng hằng ngày</h2>
+<h2>3. Ba phân khu của biệt thự compound Hội An và số căn từng dòng</h2>
+<p>Tổng 363 sản phẩm của biệt thự compound Hội An này chia thành 3 phân khu (theo báo chí và tài liệu phân phối; một số trang ghi lệch vài căn giữa các dòng):</p>
+<table>
+<thead><tr><th>Phân khu</th><th>Số căn</th><th>Dòng sản phẩm</th><th>Vị trí trong khu</th></tr></thead>
+<tbody>
+<tr><td>La Suna Park</td><td>190</td><td>Park Home (97 căn), Park Villa và The Boutique (khoảng 46 – 47 căn mỗi dòng)</td><td>Bao quanh các công viên chủ đề, gần clubhouse</td></tr>
+<tr><td>La Palma</td><td>106</td><td>Forestside Villa – biệt thự rừng dừa</td><td>Phía rừng dừa, yên tĩnh nhất khu</td></tr>
+<tr><td>La Riva</td><td>67</td><td>Waterside Villa – biệt thự ven kênh, ven sông</td><td>Dọc kênh nội khu và sông Cổ Cò</td></tr>
+</tbody>
+</table>
+<p>Cộng 190 + 106 + 67 = 363 căn, khớp quy mô 363 sản phẩm chủ đầu tư công bố khi khởi động dự án (<a href="https://baodautu.vn/tap-doan-dat-phuong-kick-off-du-an-casamia-balanca-hoi-an-d300612.html">Báo Đầu tư</a>).</p>
+<h2>4. Thông số xây dựng biệt thự compound Hội An: lô, tầng, mật độ</h2>
+<table>
+<thead><tr><th>Hạng mục</th><th>Thông số (tham khảo)</th><th>Ghi chú</th></tr></thead>
+<tbody>
+<tr><td>Biệt thự song lập điển hình</td><td>Đất 178 m² (8 × 22,25 m)</td><td>Ví dụ lô 16 khu SL3, 178 m² trên sổ cấp tháng 8/2026</td></tr>
+<tr><td>Biệt thự đơn lập điển hình</td><td>Đất 250 – 260 m² (10 × 25 m hoặc 10 × 26 m)</td><td>Lô góc, lô ven kênh – sông rộng hơn, tới khoảng 400 m²</td></tr>
+<tr><td>Park Home</td><td>Đất 178 m², sàn 316,09 m², 3 phòng ngủ</td><td>Sân vườn quanh nhà; full nội thất chỉ từ 13,86 tỷ</td></tr>
+<tr><td>Forestside Villa (mẫu BT1)</td><td>Đất 260 m², sàn khoảng 341 m², 4 phòng ngủ, 5 WC</td><td>Theo hồ sơ thiết kế công bố</td></tr>
+<tr><td>Waterside Villa (La Riva)</td><td>Đất khoảng 178 – 424 m², sàn khoảng 300 – 330 m²</td><td>Hồ bơi riêng, bến thuyền trước nhà theo phối cảnh</td></tr>
+<tr><td>Số tầng</td><td>3 tầng + 1 tầng kỹ thuật</td><td>Đồng bộ chiều cao toàn khu, không có cao tầng xen kẽ</td></tr>
+<tr><td>Mật độ xây dựng</td><td>Phổ biến được công bố khoảng 37,5 – 38%</td><td>Các trang ghi khác nhau – nên đối chiếu quy hoạch 1/500 được duyệt</td></tr>
+<tr><td>Hiện trạng bàn giao</td><td>Thô hoàn thiện mặt ngoài, hoặc kèm nội thất cơ bản</td><td>Theo phương án khách chọn trong chính sách 09/2026</td></tr>
+</tbody>
+</table>
+<p>Với mật độ xây dựng tầm 38%, khoảng 62% diện tích còn lại dành cho đường, kênh, công viên, cây xanh – đây là nền tảng của một biệt thự compound Hội An đúng nghĩa: nhà không san sát, mỗi căn đều có sân vườn, các dãy nhà nhìn ra công viên hoặc mặt nước. Các thông số trên tổng hợp từ báo chí và hồ sơ thiết kế công bố; diện tích chính xác của từng lô theo bảng hàng và giấy chứng nhận.</p>
+<h2>5. Năm công viên và clubhouse – tiện ích biệt thự compound Hội An dùng hằng ngày</h2>
 <table>
 <thead><tr><th>Hạng mục</th><th>Có gì (theo chủ đầu tư)</th><th>Giá trị khi ở</th></tr></thead>
 <tbody>
@@ -1189,25 +1216,24 @@ HTML
 </table>
 <p>Ngoài ra, quy hoạch biệt thự compound Hội An này còn có trung tâm thương mại, trường mầm non quốc tế, bungalow ven sông, khách sạn 5 sao, sky bar, trung tâm hội nghị và bến du thuyền. Đây là các hạng mục theo quy hoạch của chủ đầu tư; anh chị nên hỏi rõ hạng mục nào đã vận hành, hạng mục nào còn đang triển khai trước khi quyết định.</p>
 <!--hh-img:img/casamia-balanca/casamia-balanca-yoga-bai-co.jpg|Yoga trên bãi cỏ trong công viên nội khu – nhịp sống cư dân Casamia Balanca (ảnh minh hoạ chủ đầu tư)-->
-<h2>4. Kiến trúc và không gian sống trong biệt thự compound Hội An</h2>
+<h2>6. Kiến trúc và không gian sống trong biệt thự compound Hội An</h2>
 <p>Dự án do VTN Architects / ENCITY thiết kế theo thông tin chủ đầu tư. Tinh thần chung là nhà mở ra sân vườn: phòng khách, bếp và phòng ăn nhìn ra vườn, ban công tầng trên đón gió sông, nhiều cây xanh quanh nhà. Với dòng Park Home, mỗi căn có <strong>đất 178 m², sàn 316,09 m²</strong> – đủ cho gia đình 3 thế hệ, có phòng làm việc riêng và sân vườn.</p>
 <p>So với căn hộ hay biệt thự nghỉ dưỡng có nội thất "kiểu khách sạn", biệt thự compound Hội An cho phép chủ nhà tự hoàn thiện theo nếp sống của mình. Chủ đầu tư có cả phương án <strong>bàn giao thô</strong> (tự làm nội thất) và <strong>bàn giao nội thất cơ bản</strong>.</p>
 <!--hh-img:img/casamia-balanca/casamia-balanca-phong-khach-view-vuon.jpg|Phòng khách nhìn ra vườn – không gian sống của biệt thự Casamia Balanca (ảnh minh hoạ chủ đầu tư)-->
-<h2>5. Từng dòng biệt thự compound Hội An: chọn theo cách sống</h2>
+<h2>7. Từng dòng biệt thự compound Hội An: chọn theo cách sống</h2>
 <table>
 <thead><tr><th>Dòng sản phẩm</th><th>Đặc điểm</th><th>Phù hợp</th></tr></thead>
 <tbody>
-<tr><td>Park Home</td><td>Nhà phố vườn ven các công viên chủ đề; đất 178 m², sàn 316,09 m²</td><td>Gia đình ở quanh năm, cần gần tiện ích chung</td></tr>
-<tr><td>Park Villa</td><td>Biệt thự vườn dọc trục đường La Riva</td><td>Gia đình muốn sân vườn rộng hơn</td></tr>
-<tr><td>La Riva</td><td>Biệt thự ven kênh, hồ bơi riêng, bến thuyền trước nhà (theo phối cảnh chủ đầu tư)</td><td>Người thích riêng tư, sống gần nước</td></tr>
-<tr><td>La Palma</td><td>Biệt thự ven sông Cổ Cò</td><td>Ngôi nhà thứ hai, view sông</td></tr>
-<tr><td>Forestside Villa</td><td>Biệt thự rừng dừa</td><td>Người tìm sự yên tĩnh, gần thiên nhiên</td></tr>
+<tr><td>Park Home (La Suna Park)</td><td>Nhà phố vườn 3 phòng ngủ ven các công viên chủ đề; đất 178 m², sàn 316,09 m²</td><td>Gia đình ở quanh năm, cần gần tiện ích chung</td></tr>
+<tr><td>Park Villa, The Boutique (La Suna Park)</td><td>Biệt thự vườn, nhà phố kinh doanh trong lõi tiện ích</td><td>Gia đình muốn sân vườn rộng hơn; kết hợp kinh doanh nhỏ</td></tr>
+<tr><td>Waterside Villa (La Riva)</td><td>Biệt thự ven kênh – sông, hồ bơi riêng, bến thuyền trước nhà (theo phối cảnh)</td><td>Người thích riêng tư, sống gần nước</td></tr>
+<tr><td>Forestside Villa (La Palma)</td><td>Biệt thự rừng dừa 4 phòng ngủ, đất từ 260 m²</td><td>Người tìm sự yên tĩnh, gần thiên nhiên, ngôi nhà thứ hai</td></tr>
 </tbody>
 </table>
 <!--hh-img:img/casamia-balanca/casamia-balanca-biet-thu-ven-kenh.jpg|Biệt thự ven kênh có hồ bơi riêng – dòng sản phẩm nổi bật của biệt thự compound Hội An Casamia Balanca (phối cảnh)-->
-<h2>6. Pháp lý biệt thự compound Hội An: đất ở đô thị, sổ hồng từng lô</h2>
+<h2>8. Pháp lý biệt thự compound Hội An: đất ở đô thị, sổ hồng từng lô</h2>
 <p>Điểm khác biệt lớn nhất so với nhiều biệt thự nghỉ dưỡng ven biển (đất thương mại dịch vụ, thời hạn 50 năm) là Casamia Balanca thuộc <strong>đất ở tại đô thị</strong>. Tháng 8/2026, giấy chứng nhận quyền sử dụng đất đã được cấp cho các lô (ví dụ lô 16 khu SL3, 178 m², đất ở tại đô thị, sử dụng riêng). Trên sổ đứng tên chủ đầu tư, thời hạn ghi đến 18/06/2069; thời hạn khi sang tên cho người mua theo quy định hiện hành – anh chị nên kiểm tra cùng luật sư hoặc cùng Hiệp trước khi ký (xem thêm <a href="/phap-ly-so-hong-casamia-balanca/">pháp lý sổ hồng Casamia Balanca</a>).</p>
-<h2>7. Chi phí sở hữu biệt thự compound Hội An và chính sách hiện hành</h2>
+<h2>9. Chi phí sở hữu biệt thự compound Hội An và chính sách hiện hành</h2>
 <ul>
 <li><strong>Giá:</strong> Park Home full nội thất chỉ từ 13,86 tỷ (đã VAT); các dòng khác theo bảng hàng từng thời điểm.</li>
 <li><strong>Chi phí sống ban đầu:</strong> miễn phí 2 năm phí quản lý khu đô thị và 1 năm Fitness &amp; Pool tại Clubhouse.</li>
@@ -1233,7 +1259,7 @@ HTML
 <li><strong>Hỏi rõ tiến độ tiện ích:</strong> khách sạn, trung tâm thương mại, trường mầm non theo quy hoạch – nên biết hạng mục nào có trước khi dọn về ở.</li>
 </ul>
 <p>Muốn đi xem thực tế khu biệt thự compound Hội An này, nhận bảng hàng từng dòng sản phẩm, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
-<p class="src">Nguồn: thông tin dự án và chính sách bán hàng của chủ đầu tư Tập đoàn Đạt Phương (<a href="https://casamiabalanca.com/">casamiabalanca.com</a>, chính sách áp dụng từ 09/09/2026); giấy chứng nhận quyền sử dụng đất cấp tháng 8/2026; UNESCO về Phố cổ Hội An. Ảnh: phối cảnh và ảnh minh hoạ của chủ đầu tư. Các hạng mục tiện ích theo quy hoạch, cần kiểm tra tiến độ thực tế.</p>
+<p class="src">Nguồn: thông tin dự án và chính sách bán hàng của chủ đầu tư Tập đoàn Đạt Phương (<a href="https://casamiabalanca.com/">casamiabalanca.com</a>, chính sách áp dụng từ 09/09/2026); giấy chứng nhận quyền sử dụng đất cấp tháng 8/2026; Báo Đầu tư, CafeLand, hồ sơ thiết kế công bố (phân khu, diện tích, mật độ – các nguồn có chênh lệch nhỏ); UNESCO về Phố cổ Hội An. Ảnh: phối cảnh và ảnh minh hoạ của chủ đầu tư. Các hạng mục tiện ích theo quy hoạch, cần kiểm tra tiến độ thực tế.</p>
 HTML
 		,
 		'seo'      => array(
@@ -1248,12 +1274,16 @@ HTML
 				array( 'Biệt thự compound Hội An Casamia Balanca có bao nhiêu sản phẩm?', '363 sản phẩm thấp tầng trên 31,1 ha: 173 biệt thự đơn lập, 116 biệt thự song lập và 74 shophouse, theo thông tin chủ đầu tư.' ),
 				array( 'Casamia Balanca là đất ở hay đất nghỉ dưỡng?', 'Đất ở tại đô thị, giấy chứng nhận cấp cho từng lô tháng 8/2026. Thời hạn khi sang tên cho người mua theo quy định hiện hành – nên kiểm tra trước khi ký.' ),
 				array( 'Tiện ích trong biệt thự compound Hội An này gồm những gì?', '5 công viên chủ đề (Wellness, Sport Park, Grand Central Park, Floral Park, Nipa Park), bể bơi tiêu chuẩn Olympic, hồ vô cực, gym, co-working, coffee; theo quy hoạch có thêm trung tâm thương mại, trường mầm non quốc tế, khách sạn 5 sao.' ),
+				array( 'Casamia Balanca có mấy phân khu, mật độ xây dựng bao nhiêu?', '3 phân khu: La Suna Park (190 căn), La Palma (106 biệt thự rừng dừa) và La Riva (67 biệt thự ven kênh – sông). Mật độ xây dựng được công bố phổ biến khoảng 37,5 – 38%, nhà cao 3 tầng + 1 tầng kỹ thuật; nên đối chiếu quy hoạch 1/500 được duyệt.' ),
 				array( 'Giá biệt thự compound Hội An Casamia Balanca từ bao nhiêu?', 'Park Home full nội thất chỉ từ 13,86 tỷ (đã VAT) theo chính sách từ 09/09/2026; các dòng khác theo bảng hàng từng thời điểm.' ),
 			),
 		),
 		'sources'  => array(
 			'https://casamiabalanca.com/',
 			'https://whc.unesco.org/en/list/948',
+			'https://baodautu.vn/tap-doan-dat-phuong-kick-off-du-an-casamia-balanca-hoi-an-d300612.html',
+			'https://cafeland.vn/du-an/casamia-balanca-hoi-an-khu-do-thi-tai-da-nang-4680.html',
+			'https://cvr.com.vn/project/casamia-balanca-hoi-an',
 		),
 	);
 	return $posts;
