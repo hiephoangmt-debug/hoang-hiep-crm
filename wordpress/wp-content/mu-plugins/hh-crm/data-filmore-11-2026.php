@@ -24,6 +24,8 @@ add_filter(
 				'hh_p_penthouse_desc'  => '4 căn penthouse thông tầng trên các tầng 21 – 24, diện tích tim tường 218,8 – 269,1 m² (thông thủy 206,4 – 254 m²), tầm nhìn toàn cảnh sông Hàn, cầu Rồng và biển Mỹ Khê.',
 				'hh_p_penthouse_table' => "Penthouse thông tầng (4 căn) | 218,8 – 269,1 m² | – | Liên hệ",
 			);
+			// 3 tour 360° Kuula anh Hiệp gửi 18/11/2026 (không logo) – tour 2, 3, 4 bên cạnh tour trên trang chủ đầu tư.
+			$upd['hh_p_tour_360_more'] = "https://kuula.co/share/collection/7X0DF?logo=0&info=1&fs=1&vr=0&sd=1&thumbs=1 | Tour 360° 2 | plugin:img/the-filmore/the-filmore-phong-khach-view-thanh-pho.jpg\nhttps://kuula.co/share/collection/7X0Db?logo=0&info=1&fs=1&vr=0&sd=1&thumbs=1 | Tour 360° 3 | plugin:img/the-filmore/the-filmore-can-loft-phong-khach.jpg\nhttps://kuula.co/share/collection/7X0DD?logo=0&info=1&fs=1&vr=0&sd=1&thumbs=1 | Tour 360° 4 | plugin:img/the-filmore/the-filmore-sanh-le-tan.jpg";
 			$upd['hh_p_tour_360_poster'] = 'plugin:img/the-filmore/the-filmore-ho-boi-vo-cuc-rooftop.jpg';
 			$upd['hh_p_price_m2']   = 'Từ khoảng 131 triệu/m² (giỏ hàng 11/2026, chưa VAT)';
 			$upd['hh_p_price_from'] = 9889; // Giỏ hàng tồn 01/11/2026: căn thấp nhất 2PN 75,5 m² – 9,89 tỷ chưa VAT (1PN đã hết).

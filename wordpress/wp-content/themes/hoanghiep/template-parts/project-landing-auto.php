@@ -413,16 +413,32 @@ if ( ! $parent ) {
     <span class="eyebrow">Tham quan trực tuyến</span>
     <h2 class="title" id="h-4d">Xem <em><?php echo $e( $short_name ); ?></em> như đang đứng tại dự án</h2>
     <div class="tours">
-      <?php foreach ( array( array( 'hh_p_tour_4d', 'hh_p_tour_poster', 'Xem mô hình 4D' ), array( 'hh_p_tour_360', 'hh_p_tour_360_poster', 'Xem 360°' ) ) as list( $k, $pk, $lb ) ) : ?>
-        <?php
-        if ( ! $m( $k ) ) {
-			continue;
+      <?php
+      $tour_list = array();
+      foreach ( array( array( 'hh_p_tour_4d', 'hh_p_tour_poster', 'Xem mô hình 4D' ), array( 'hh_p_tour_360', 'hh_p_tour_360_poster', 'Xem 360°' ) ) as list( $k, $pk, $lb ) ) {
+        if ( $m( $k ) ) {
+          $tour_list[] = array( $m( $k ), $m( $pk ), $lb );
         }
-        $poster = $m( $pk );
+      }
+      // Tour 360° thêm (mỗi dòng: link | tên nút | ảnh xem trước).
+      foreach ( preg_split( '/\r\n|\r|\n/', (string) $m( 'hh_p_tour_360_more' ) ) as $line ) {
+        $parts = array_map( 'trim', explode( '|', $line, 3 ) );
+        if ( preg_match( '#^https://[^\s|]+$#', $parts[0] ) ) {
+          $tour_list[] = array( $parts[0], (string) ( $parts[2] ?? '' ), '' !== ( $parts[1] ?? '' ) ? $parts[1] : 'Xem 360°' );
+        }
+      }
+      foreach ( $tour_list as $ti => $tv ) { // Có nhiều tour 360: tour chính đánh số 1 cho đồng bộ.
+        if ( 'Xem 360°' === $tv[2] && count( $tour_list ) > ( $m( 'hh_p_tour_4d' ) ? 2 : 1 ) ) {
+          $tour_list[ $ti ][2] = 'Tour 360° 1';
+        }
+      }
+      ?>
+      <?php foreach ( $tour_list as list( $tour_url, $poster, $lb ) ) : ?>
+        <?php
         $poster = 0 === strpos( $poster, 'plugin:' ) && defined( 'HH_CRM_URL' ) ? HH_CRM_URL . substr( $poster, 7 ) : ( ctype_digit( $poster ) ? $url( (int) $poster, 'large' ) : $poster );
         $poster = $poster ?: ( $hero ? $url( $hero, 'large' ) : '' );
         ?>
-        <a class="tour" href="<?php echo esc_url( $m( $k ) ); ?>" target="_blank" rel="noopener" data-tour="<?php echo esc_url( $m( $k ) ); ?>" data-title="<?php echo esc_attr( $lb . ' ' . $short_name ); ?>"><?php if ( $poster ) : ?><img src="<?php echo esc_url( $poster ); ?>" alt="<?php echo esc_attr( $lb . ' ' . $title ); ?>" loading="lazy" decoding="async"><?php endif; ?><span>▶ <?php echo $e( $lb ); ?></span></a>
+        <a class="tour" href="<?php echo esc_url( $tour_url ); ?>" target="_blank" rel="noopener" data-tour="<?php echo esc_url( $tour_url ); ?>" data-title="<?php echo esc_attr( $lb . ' ' . $short_name ); ?>"><?php if ( $poster ) : ?><img src="<?php echo esc_url( $poster ); ?>" alt="<?php echo esc_attr( $lb . ' ' . $title ); ?>" loading="lazy" decoding="async"><?php endif; ?><span>▶ <?php echo $e( $lb ); ?></span></a>
       <?php endforeach; ?>
     </div>
   </div>

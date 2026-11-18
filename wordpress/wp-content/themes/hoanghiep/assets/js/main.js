@@ -347,6 +347,29 @@
 	};
 
 	// Tour 360 của chủ đầu tư nhúng trong trang: bấm là mở, không hỏi số Zalo.
+	// Nhiều tour 360: nút chọn tour đổi link khung bên dưới (đang mở thì đổi luôn).
+	$$( '.tour360__tabs' ).forEach( ( tabs ) => {
+		const box = tabs.nextElementSibling;
+		if ( ! box || ! box.classList.contains( 'tour360' ) ) {
+			return;
+		}
+		tabs.querySelectorAll( '.tour360__tab' ).forEach( ( tab ) => {
+			tab.addEventListener( 'click', () => {
+				tabs.querySelectorAll( '.tour360__tab' ).forEach( ( t ) => {
+					t.classList.toggle( 'is-active', t === tab );
+					t.setAttribute( 'aria-selected', t === tab ? 'true' : 'false' );
+				} );
+				box.dataset.src = tab.dataset.src;
+				const f = box.querySelector( 'iframe' );
+				const play = box.querySelector( '.tour4d__play' );
+				if ( f ) {
+					f.src = tab.dataset.src;
+				} else if ( play ) {
+					play.click();
+				}
+			} );
+		} );
+	} );
 	$$( '.tour360' ).forEach( ( box ) => {
 		const play = box.querySelector( '.tour4d__play' );
 		if ( ! play ) {
