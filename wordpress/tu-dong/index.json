@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-18T00:17:36+00:00",
+    "updated": "2026-11-18T01:56:41+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen",
@@ -927,11 +927,29 @@
             ]
         },
         {
+            "slug": "sun-saphia-residence-co-phai-condotel",
+            "title": "Sun Saphia Residence có phải condotel? Khác căn hộ du lịch ở pháp lý, thời hạn, cách cho thuê",
+            "publish": "2026-11-19 11:30",
+            "file": "bai/sun-saphia-residence-co-phai-condotel.txt"
+        },
+        {
             "slug": "phap-ly-the-legend-da-nang-so-huu-lau-dai",
             "title": "Pháp lý The Legend Đà Nẵng: sở hữu lâu dài, đủ điều kiện bán 800 căn – các văn bản cần biết",
             "publish": "2026-11-19 14:00",
             "file": "bai/phap-ly-the-legend-da-nang-so-huu-lau-dai.txt",
             "rev": 2
+        },
+        {
+            "slug": "studio-hay-1pn-sun-saphia-residence",
+            "title": "Studio hay 1PN+ Sun Saphia Residence: 30 m² hay 50 m², mua để cho thuê hay để ở thì chọn căn nào",
+            "publish": "2026-11-19 16:30",
+            "file": "bai/studio-hay-1pn-sun-saphia-residence.txt"
+        },
+        {
+            "slug": "sun-saphia-residence-di-ba-na-hills",
+            "title": "Từ Sun Saphia Residence đi Bà Nà Hills bao xa? Đường đi, thời gian và lịch trình cho khách lưu trú",
+            "publish": "2026-11-19 18:30",
+            "file": "bai/sun-saphia-residence-di-ba-na-hills.txt"
         },
         {
             "slug": "mat-bang-can-ho-cora-tower",
@@ -941,11 +959,29 @@
             "rev": 2
         },
         {
+            "slug": "sun-saphia-residence-gan-lang-dai-hoc",
+            "title": "Sun Saphia Residence gần Làng Đại học Đà Nẵng: 110 ha ở Ngũ Hành Sơn và nhu cầu thuê của giảng viên, chuyên gia",
+            "publish": "2026-11-20 11:30",
+            "file": "bai/sun-saphia-residence-gan-lang-dai-hoc.txt"
+        },
+        {
             "slug": "can-ho-hang-hieu-la-gi-nobu-da-nang",
             "title": "Căn hộ hàng hiệu là gì? Nobu Residences Đà Nẵng khác căn hộ cao cấp thường ở đâu",
             "publish": "2026-11-20 14:00",
             "file": "bai/can-ho-hang-hieu-la-gi-nobu-da-nang.txt",
             "rev": 2
+        },
+        {
+            "slug": "studio-goc-sun-saphia-residence-40m2",
+            "title": "Studio góc Sun Saphia Residence khoảng 40 m²: rộng hơn studio thường 10 m², bố trí và ai nên chọn",
+            "publish": "2026-11-20 16:30",
+            "file": "bai/studio-goc-sun-saphia-residence-40m2.txt"
+        },
+        {
+            "slug": "sun-saphia-residence-di-trung-tam-da-nang",
+            "title": "Từ Sun Saphia Residence đi trung tâm Đà Nẵng bao xa? Cầu Rồng, sông Hàn, chợ Hàn và tuyến LRT tương lai",
+            "publish": "2026-11-20 18:30",
+            "file": "bai/sun-saphia-residence-di-trung-tam-da-nang.txt"
         },
         {
             "slug": "mat-bang-can-ho-fours-tower",
@@ -955,11 +991,23 @@
             "rev": 2
         },
         {
+            "slug": "mua-chung-sun-saphia-residence",
+            "title": "Mua chung Sun Saphia Residence với bạn bè, người thân: đứng tên thế nào, chia lợi nhuận và rút vốn ra sao",
+            "publish": "2026-11-21 11:30",
+            "file": "bai/mua-chung-sun-saphia-residence.txt"
+        },
+        {
             "slug": "can-1pn-plus-sun-saphia-residence-49-51m2",
             "title": "Căn 1PN+ Sun Saphia Residence 49 – 51 m²: chỉ 108 căn, bố trí ra sao, ai nên mua",
             "publish": "2026-11-21 14:00",
             "file": "bai/can-1pn-plus-sun-saphia-residence-49-51m2.txt",
             "rev": 2
+        },
+        {
+            "slug": "bai-bien-gan-sun-saphia-residence",
+            "title": "Bãi biển gần Sun Saphia Residence: Sơn Thủy, Mỹ Khê, Non Nước – tắm biển, thể thao và lưu ý an toàn",
+            "publish": "2026-11-21 18:30",
+            "file": "bai/bai-bien-gan-sun-saphia-residence.txt"
         },
         {
             "slug": "tien-do-capital-square-da-nang",
@@ -969,11 +1017,29 @@
             "rev": 2
         },
         {
+            "slug": "benh-vien-gan-sun-saphia-residence",
+            "title": "Bệnh viện gần Sun Saphia Residence: Phụ sản – Nhi, Vinmec, Hoàn Mỹ, Bệnh viện Đà Nẵng cách bao xa",
+            "publish": "2026-11-22 11:30",
+            "file": "bai/benh-vien-gan-sun-saphia-residence.txt"
+        },
+        {
             "slug": "co-nen-mua-the-legend-da-nang-uu-nhuoc-diem",
             "title": "Có nên mua The Legend Đà Nẵng? 5 ưu điểm, 4 điểm cần cân nhắc",
             "publish": "2026-11-22 14:00",
             "file": "bai/co-nen-mua-the-legend-da-nang-uu-nhuoc-diem.txt",
             "rev": 2
+        },
+        {
+            "slug": "sun-saphia-residence-di-son-tra",
+            "title": "Từ Sun Saphia Residence đi bán đảo Sơn Trà: chùa Linh Ứng, voọc chà vá chân nâu và lịch trình nửa ngày",
+            "publish": "2026-11-22 16:30",
+            "file": "bai/sun-saphia-residence-di-son-tra.txt"
+        },
+        {
+            "slug": "sun-saphia-residence-di-san-bay",
+            "title": "Từ Sun Saphia Residence đi sân bay Đà Nẵng mất bao lâu? Đường đi, giờ cao điểm và mẹo đón khách",
+            "publish": "2026-11-22 18:30",
+            "file": "bai/sun-saphia-residence-di-san-bay.txt"
         },
         {
             "slug": "chi-phi-khi-mua-can-ho-moi-ngoai-gia-ban",
