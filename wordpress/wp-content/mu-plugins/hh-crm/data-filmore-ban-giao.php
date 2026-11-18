@@ -56,9 +56,16 @@ add_filter(
 				'plugin:img/the-filmore/the-filmore-sanh-vao-toa-nha.jpg | Sảnh vào tòa nhà The Filmore Đà Nẵng (phối cảnh chủ đầu tư) | tiện ích',
 			);
 			$links = trim( (string) ( $old['hh_p_image_links'] ?? '' ) );
-			if ( '' !== $links && false === strpos( $links, 'the-filmore-phong-tam-master' ) ) {
+			if ( '' !== $links && false === strpos( $links, 'the-filmore-uu-dai-chiet-khau' ) ) {
+				$fix['hh_p_image_links'][] = $links . "\n" . implode( "\n", $add ); // Bản 2.20.317.
+				// Ảnh ưu đãi của chủ đầu tư (anh Hiệp gửi 18/11/2026).
+				$add[] = 'plugin:img/the-filmore/the-filmore-uu-dai-chiet-khau-6-mien-phi-quan-ly.jpg | Ưu đãi The Filmore Đà Nẵng: chiết khấu 6% khi thanh toán nhanh, miễn phí quản lý 1 năm (ảnh chủ đầu tư) | thư viện';
 				$upd['hh_p_image_links'] = $links . "\n" . implode( "\n", $add );
 			}
+
+			// Khung ưu đãi: con số nổi bật theo chính sách bán hàng từ 01/11/2026.
+			$upd['hh_p_offer_stats'] = "6% | Chiết khấu khi thanh toán nhanh\n1 năm | Miễn phí quản lý\n8 tháng | Hỗ trợ lãi suất khi vay VPBank (tối đa 10%/năm)\n100 triệu | Đặt cọc giữ căn";
+			$upd['hh_p_offer_start'] = '01/11/2026';
 
 			// Hỏi đáp: thêm câu về bàn giao.
 			$faq = trim( (string) ( $old['hh_p_faq'] ?? '' ) );
