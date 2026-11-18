@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.43** + plugin Hoàng Hiệp CRM **2.20.319**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.43** + plugin Hoàng Hiệp CRM **2.20.320**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.320 (18/11/2026)
+
+- **Trang dự án mới: Việt Hương Lakeside – nhà ở xã hội Hòa Xuân** (khu đất chung cư số 5, Khu B – KDC Nam cầu Cẩm Lệ): 4 khối 14 tầng, 1.306 căn (1.040 căn nhà ở xã hội, 266 căn thương mại), căn 36 – 77 m², giá tạm tính khoảng 20,7 triệu/m², giấy phép xây dựng, khởi công 19/12/2025, đối tượng và hồ sơ mua, mốc nhận hồ sơ – bốc thăm đợt 1; tự vào mục Nhà ở xã hội.
 
 ## Có gì mới – 2.20.319 (18/11/2026)
 

@@ -885,5 +885,86 @@ HTML
 			'https://viettimes.vn/da-nang-danh-dat-vang-xay-tru-so-vtv8-phat-trien-khong-gian-cong-cong-post208479.html',
 		),
 	);
+	/* ---------------- 18/11 – Việt Hương Lakeside: nhà ở xã hội khu đất chung cư số 5, KDC Nam cầu Cẩm Lệ (anh Hiệp chụp bảng thông tin công trường) ---------------- */
+	$vh = '<a href="/du-an/viet-huong-lakeside-hoa-xuan/">Việt Hương Lakeside</a>';
+	$posts[] = array(
+		'slug'           => 'nha-o-xa-hoi-viet-huong-lakeside-hoa-xuan',
+		'title'          => 'Nhà ở xã hội Việt Hương Lakeside Hòa Xuân: 1.306 căn, 14 tầng, giá tạm tính khoảng 20,7 triệu/m²',
+		'excerpt'        => 'Toàn cảnh nhà ở xã hội Việt Hương Lakeside tại khu đất chung cư số 5, KDC Nam cầu Cẩm Lệ (Hòa Xuân): 4 khối 14 tầng, 1.306 căn, giấy phép xây dựng 18/12/2025, khởi công 19/12/2025, giá tạm tính khoảng 20,7 triệu/m², đợt 1 đã bốc thăm 15/10/2026.',
+		'keyword'        => 'nhà ở xã hội Việt Hương Lakeside',
+		'keywords_extra' => array( 'nhà ở xã hội Hòa Xuân', 'nhà ở xã hội Đà Nẵng 2026', 'khu dân cư Nam cầu Cẩm Lệ', 'điều kiện mua nhà ở xã hội' ),
+		'project'        => 'viet-huong-lakeside-hoa-xuan',
+		'schedule'       => '2026-11-18 10:00', // Tin tức lên sớm nhất (anh Hiệp 18/11/2026).
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Nhà ở xã hội', 'Hòa Xuân', 'Cẩm Lệ' ),
+		'image'          => 'plugin:img/hoa-xuan/hoa-xuan-flycam-8-2025-toan-canh-ven-song-cam-le.jpg',
+		'image_alt'      => 'Khu vực Hòa Xuân ven sông Cẩm Lệ – nơi xây nhà ở xã hội Việt Hương Lakeside (ảnh flycam thực tế)',
+		'content'        => <<<HTML
+<p><strong>Nhà ở xã hội Việt Hương Lakeside</strong> là dự án đang thi công trên khu đất chung cư số 5 thuộc Khu B – Khu dân cư Nam cầu Cẩm Lệ, phường Hòa Xuân. Hoàng Hiệp vừa ghé công trường và ghi lại bảng thông tin dự án; bài này tổng hợp bảng công trường với thông báo của Sở Xây dựng, Cổng thông tin điện tử Đà Nẵng và báo chí để anh chị đang tìm nhà ở xã hội có bức tranh đầy đủ.</p>
+<!--hh-featured-->
+<h2>Nhà ở xã hội Việt Hương Lakeside là dự án nào?</h2>
+<p>Tên pháp lý là "Dự án Nhà ở xã hội tại khu đất chung cư số 5 thuộc Khu B – Khu dân cư Nam cầu Cẩm Lệ"; "Việt Hương Lakeside" là tên thương mại, báo chí còn gọi là nhà ở xã hội B5 Hòa Xuân. Chủ đầu tư là Công ty CP Đầu tư Phát triển Nhà ở Toàn Cầu, trụ sở trên đường Phạm Hùng, phường Hòa Xuân. Lưu ý đây là khu đất số 5; khu đất chung cư số 3 cùng Khu B là một dự án nhà ở xã hội khác của chủ đầu tư khác, khởi công cùng ngày.</p>
+<p>Khu đất nhà ở xã hội Việt Hương Lakeside nằm giữa các đường Nguyễn Kim (phía Bắc), Huỳnh Tịnh Của (phía Đông), Lê Trực (phía Tây); phía Nam giáp hồ điều tiết và cây xanh công cộng – đó là lý do dự án có chữ "Lakeside".</p>
+<!--hh-img:img/hoa-xuan/hoa-xuan-flycam-8-2025-toan-canh-ven-song-cam-le.jpg|Khu vực Hòa Xuân ven sông Cẩm Lệ, nơi có nhà ở xã hội Việt Hương Lakeside (ảnh flycam thực tế 8/2025)-->
+<h2>Thông số trên bảng công trường</h2>
+<table>
+<thead><tr><th>Hạng mục</th><th>Thông tin</th></tr></thead>
+<tbody>
+<tr><td>Diện tích khu đất</td><td>28.942,72 m²</td></tr>
+<tr><td>Diện tích xây dựng</td><td>10.418,82 m²</td></tr>
+<tr><td>Cấp công trình, số tầng</td><td>Cấp I, 14 tầng, 1 tầng hầm</td></tr>
+<tr><td>Giấy phép xây dựng</td><td>Số 11111/SXD-GPXD ngày 18/12/2025</td></tr>
+<tr><td>Khởi công – thời gian thi công</td><td>19/12/2025 – 24 tháng</td></tr>
+<tr><td>Tư vấn thiết kế</td><td>Tổng công ty Tư vấn Xây dựng Việt Nam – CTCP</td></tr>
+<tr><td>Thi công chính</td><td>Liên danh Tổng công ty 36 – CTCP và Công ty CP Đầu tư và Phát triển Đông Bắc</td></tr>
+</tbody>
+</table>
+<h2>Quy mô nhà ở xã hội Việt Hương Lakeside: 4 khối, 1.306 căn</h2>
+<p>Theo thông tin công bố, nhà ở xã hội Việt Hương Lakeside gồm 4 khối nhà 14 tầng, tổng sàn khoảng 145.000 m², vốn đầu tư khoảng 1.730 tỷ đồng. Ba khối nhà ở xã hội XH1, XH2, XH3 có 1.040 căn (lần lượt 424, 411 và 205 căn); một khối nhà ở thương mại có 266 căn. Căn 1 phòng ngủ khoảng 36 – 42 m², 2 phòng ngủ khoảng 70 m², 3 phòng ngủ khoảng 77 m².</p>
+<p>Giá tạm tính công bố khi mở bán đợt 1 của nhà ở xã hội Việt Hương Lakeside khoảng 20,7 triệu đồng/m² sử dụng, đã gồm VAT, chưa gồm phí bảo trì; giá chính thức sẽ ghi trong hợp đồng mua bán. So với căn hộ thương mại khu Hòa Xuân – Cẩm Lệ, đây là mức giá dễ tiếp cận cho người thu nhập thấp và người lao động.</p>
+<h2>Đợt 1 đã nhận hồ sơ và bốc thăm</h2>
+<ul>
+<li><strong>16/3/2026:</strong> Sở Xây dựng công khai thông tin tiếp nhận hồ sơ đăng ký mua nhà ở xã hội Việt Hương Lakeside, đợt 1 gồm 849 căn (XH1 336 căn, XH2 345 căn, XH3 168 căn).</li>
+<li><strong>16/4 – 16/5/2026:</strong> chủ đầu tư nhận hồ sơ trực tiếp, trực tuyến, qua bưu chính hoặc qua cơ quan nơi làm việc.</li>
+<li><strong>15/10/2026:</strong> bốc thăm quyền mua tại UBND phường Hòa Xuân với hơn 1.000 khách hàng tham gia, theo Báo Đà Nẵng.</li>
+</ul>
+<p>Như vậy đợt 1 của nhà ở xã hội Việt Hương Lakeside đã khép lại. Người chưa nộp hồ sơ cần chờ thông báo đợt tiếp theo (nếu còn căn), danh sách dự khuyết, hoặc cân nhắc 266 căn thương mại khi chủ đầu tư mở bán.</p>
+<h2>Ai được mua nhà ở xã hội Việt Hương Lakeside?</h2>
+<p>Người mua phải thuộc nhóm đối tượng được hưởng chính sách nhà ở xã hội theo Điều 76 Luật Nhà ở 2023 – như người thu nhập thấp tại đô thị, công nhân, cán bộ công chức viên chức, lực lượng vũ trang – và đáp ứng điều kiện về nhà ở, thu nhập. Hồ sơ gồm đơn đăng ký, giấy xác nhận đối tượng và thu nhập, giấy xác nhận điều kiện nhà ở cùng giấy tờ nhân thân theo mẫu của Bộ Xây dựng. Căn nhà ở xã hội bị hạn chế chuyển nhượng trong thời gian luật định, nên chỉ phù hợp người mua để ở.</p>
+<h2>Tiến độ và mốc bàn giao</h2>
+<p>Bảng công trường nhà ở xã hội Việt Hương Lakeside ghi thời gian thi công 24 tháng kể từ 19/12/2025. Tháng 8/2026, UBND thành phố yêu cầu các chủ đầu tư nhà ở xã hội, trong đó có dự án này, thực hiện đúng cam kết tiến độ; một số báo ghi dự kiến bàn giao cuối năm 2027. Người đã có quyền mua nên theo dõi thông báo của chủ đầu tư về lịch ký hợp đồng và các đợt thanh toán.</p>
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Thêm nguồn cung nhà ở giá vừa túi tiền ở phía Nam:</strong> nhà ở xã hội Việt Hương Lakeside cùng dự án khu đất số 3 bên cạnh bổ sung gần 2.000 căn cho khu Hòa Xuân – Cẩm Lệ, nằm trong mục tiêu phát triển nhà ở xã hội của thành phố (xem <a href="/khoi-cong-8-du-an-nha-o-xa-hoi-da-nang-2026/">nhà ở xã hội Đà Nẵng 2026</a>).</li>
+<li><strong>Vị trí thuận tiện:</strong> gần sông Cẩm Lệ, Aeon Mall Hòa Xuân và trục đi trung tâm, hạ tầng khu Nam cầu Cẩm Lệ đã hình thành.</li>
+<li><strong>Cơ hội cho người chưa trúng đợt 1:</strong> theo dõi đợt nhận hồ sơ tiếp theo và căn thương mại; chuẩn bị sẵn giấy xác nhận đối tượng, thu nhập để không lỡ hạn.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<p>Trang dự án {$vh} cập nhật thông tin, tiến độ và các đợt nhận hồ sơ. Khu Hòa Xuân còn nhiều dự án đất nền, nhà phố ven sông Cẩm Lệ – anh chị cần so sánh với nhà ở xã hội Việt Hương Lakeside, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được hướng dẫn điều kiện và hồ sơ.</p>
+<p class="src">Nguồn: <a href="https://danang.gov.vn/vi/web/dng/w/cong-khai-thong-tin-tiep-nhan-ho-so-dang-ky-mua-nha-o-xa-hoi-tai-khu-dat-chung-cu-so-5-thuoc-khu-b-khu-dan-cu-nam-cau-cam-le">Cổng thông tin điện tử TP Đà Nẵng</a>, <a href="https://hoaxuan.danang.gov.vn/ve-viec-lay-y-kien-ve-dieu-chinh-quy-hoach-chi-tiet-ty-le-1-500-du-an-nha-o-xa-hoi-tai-khu-dat-chung-cu-so-5-thuoc-khu-b-khu-dan-cu-nam-cau-cam-le/">UBND phường Hòa Xuân</a>, <a href="https://baodanang.vn/hon-1-000-khach-hang-boc-tham-du-an-nha-o-xa-hoi-b5-hoa-xuan-3355268.html">Báo Đà Nẵng</a>, CafeLand; bảng thông tin công trường (Hoàng Hiệp chụp 11/2026). Giá tạm tính, mang tính tham khảo.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Nhà ở xã hội Việt Hương Lakeside: 1.306 căn Hòa Xuân',
+			'desc'      => 'Nhà ở xã hội Việt Hương Lakeside ở Hòa Xuân: 4 khối 14 tầng, 1.306 căn 36 – 77 m², giá tạm tính khoảng 20,7 triệu/m², đợt 1 đã bốc thăm 15/10/2026.',
+			'points'    => array(
+				'Khu đất chung cư số 5, Khu B – KDC Nam cầu Cẩm Lệ (Hòa Xuân): 4 khối 14 tầng, 1.040 căn nhà ở xã hội và 266 căn thương mại',
+				'Giấy phép xây dựng 11111/SXD-GPXD ngày 18/12/2025, khởi công 19/12/2025, thi công 24 tháng',
+				'Giá tạm tính khoảng 20,7 triệu/m² (đã gồm VAT); đợt 1 849 căn đã bốc thăm ngày 15/10/2026',
+			),
+			'faq'       => array(
+				array( 'Nhà ở xã hội Việt Hương Lakeside ở đâu?', 'Khu đất chung cư số 5 thuộc Khu B – Khu dân cư Nam cầu Cẩm Lệ, phường Hòa Xuân, giữa các đường Nguyễn Kim – Huỳnh Tịnh Của – Lê Trực, phía Nam giáp hồ điều tiết.' ),
+				array( 'Giá nhà ở xã hội Việt Hương Lakeside bao nhiêu?', 'Giá tạm tính công bố khi mở bán đợt 1 khoảng 20,7 triệu đồng/m² sử dụng, đã gồm VAT, chưa gồm phí bảo trì; giá chính thức theo hợp đồng.' ),
+				array( 'Còn nộp hồ sơ mua được không?', 'Đợt 1 (849 căn) đã nhận hồ sơ 16/4 – 16/5/2026 và bốc thăm 15/10/2026. Cần chờ thông báo đợt tiếp theo hoặc danh sách dự khuyết của chủ đầu tư.' ),
+				array( 'Khi nào dự án hoàn thành?', 'Bảng công trường ghi thi công 24 tháng từ 19/12/2025; báo chí ghi dự kiến bàn giao cuối năm 2027.' ),
+			),
+		),
+		'sources'        => array(
+			'https://danang.gov.vn/vi/web/dng/w/cong-khai-thong-tin-tiep-nhan-ho-so-dang-ky-mua-nha-o-xa-hoi-tai-khu-dat-chung-cu-so-5-thuoc-khu-b-khu-dan-cu-nam-cau-cam-le',
+			'https://hoaxuan.danang.gov.vn/ve-viec-lay-y-kien-ve-dieu-chinh-quy-hoach-chi-tiet-ty-le-1-500-du-an-nha-o-xa-hoi-tai-khu-dat-chung-cu-so-5-thuoc-khu-b-khu-dan-cu-nam-cau-cam-le/',
+			'https://baodanang.vn/hon-1-000-khach-hang-boc-tham-du-an-nha-o-xa-hoi-b5-hoa-xuan-3355268.html',
+			'https://cafeland.vn/du-an/viet-huong-lakeside-du-an-nha-o-xa-hoi-tai-da-nang-5282.html',
+		),
+	);
 	return $posts;
 }
