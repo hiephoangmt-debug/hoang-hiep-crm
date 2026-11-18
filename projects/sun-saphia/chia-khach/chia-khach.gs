@@ -22,7 +22,7 @@
 var CFG = {
   GIO_BAT_DAU: 8,      // 8:00 sáng bắt đầu chia
   GIO_KET_THUC: 23,    // 23:00 dừng chia (khách sau giờ này để sáng chia)
-  TIMEOUT_PHUT: 5,     // không bấm nhận trong 5 phút → chuyển người khác
+  TIMEOUT_PHUT: 30,    // không bấm nhận trong 30 phút → chuyển người khác
   TZ: 'Asia/Ho_Chi_Minh'
 };
 
