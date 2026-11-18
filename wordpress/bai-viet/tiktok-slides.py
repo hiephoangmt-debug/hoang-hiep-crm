@@ -27,7 +27,7 @@ e = html.escape
 def b64(p):
     return 'data:image/jpeg;base64,' + base64.b64encode(open(p, 'rb').read()).decode()
 
-BASE = """*{margin:0;box-sizing:border-box}body{width:1080px;height:1920px;position:relative;overflow:hidden;font-family:BVP;color:#14233f;font-variant-numeric:lining-nums;
+BASE = """*{margin:0;box-sizing:border-box;font-variant-numeric:lining-nums!important}body{width:1080px;height:1920px;position:relative;overflow:hidden;font-family:BVP;color:#14233f;font-variant-numeric:lining-nums;
 background:linear-gradient(180deg,#d9ecf9 0%,#eef6fc 50%,#ffffff 100%)}
 .brand{position:absolute;top:120px;left:0;right:0;text-align:center;font:700 30px BVP;letter-spacing:.2em;color:#1f4f86}
 .cop{font-variant-numeric:lining-nums;background:linear-gradient(180deg,#e0701f,#b44d16);-webkit-background-clip:text;color:transparent;padding:.22em .08em .12em;margin:-.22em -.08em -.12em}
@@ -41,7 +41,7 @@ def page(css, body):
 h = c['hook']
 s1 = page("""
 .h1{position:absolute;top:250px;left:0;right:0;text-align:center;font:600 84px/1.1 CG;color:#14233f}
-.h2{position:absolute;top:360px;left:40px;right:40px;text-align:center;font:700 150px/1 CG;letter-spacing:.01em}
+.h2{position:absolute;top:360px;left:40px;right:40px;text-align:center;font:700 150px/1 CG;letter-spacing:.01em;white-space:nowrap}
 .h3{position:absolute;top:510px;left:0;right:70px;text-align:right;font:400 120px GV;color:#c4561a}
 .q{position:absolute;top:720px;left:70px;right:70px;text-align:center;font:700 60px/1.3 BVP;color:#14233f;text-wrap:balance}
 .photo{top:880px}
@@ -55,7 +55,7 @@ rows = ''.join(f'<div class="r"><div class="n"><span class="cop">{e(n)}</span></
 dt = c['data_title']
 s2 = page("""
 .d1{position:absolute;top:200px;left:0;right:0;text-align:center;font:600 72px CG;color:#14233f}
-.d2{position:absolute;top:280px;left:40px;right:40px;text-align:center;font:700 104px/1 CG}
+.d2{position:absolute;top:280px;left:40px;right:40px;text-align:center;font:700 104px/1 CG;white-space:nowrap}
 .rows{position:absolute;top:450px;left:50px;right:110px;display:flex;flex-direction:column;gap:26px}
 .r{display:flex;align-items:center;gap:26px;background:rgba(255,255,255,.92);border-radius:26px;padding:30px 28px;box-shadow:0 10px 28px rgba(20,35,63,.10)}
 .n{flex:0 0 310px;text-align:center;font:700 74px/1 CG;white-space:nowrap;font-variant-numeric:lining-nums}
@@ -82,6 +82,7 @@ tmp = OUT + '-tmp'
 os.makedirs(os.path.dirname(os.path.abspath(OUT)), exist_ok=True)
 js = """const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1080,height:1920}});
 for(let i=2;i<process.argv.length;i+=2){await p.goto('file://'+process.argv[i]);await p.evaluate(()=>document.fonts.ready);await p.waitForTimeout(250);
+await p.evaluate(()=>{for(const el of document.querySelectorAll('.h2,.d2')){let f=parseFloat(getComputedStyle(el).fontSize);while(el.scrollWidth>el.clientWidth+2&&f>40){f-=4;el.style.fontSize=f+'px';}}});
 const over=await p.evaluate(()=>[...document.querySelectorAll('.t,.q,.cap,.h2,.d2')].filter(x=>x.scrollWidth>x.clientWidth+2).length);if(over)console.log('TRAN CHU',process.argv[i]);
 await p.screenshot({path:process.argv[i+1],type:'jpeg',quality:92});}await b.close();})();"""
 args = []
