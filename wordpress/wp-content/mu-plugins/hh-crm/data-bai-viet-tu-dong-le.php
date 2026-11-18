@@ -1151,5 +1151,110 @@ HTML
 			'https://vnexpress.net/huyen-thoai-hollywood-dua-thuong-hieu-nobu-den-da-nang-4761311.html',
 		),
 	);
+	/* ---------------- 18/11 – Casamia Balanca: phân tích giá trị ở, sự khác biệt của khu biệt thự compound tại Hội An (anh Hiệp yêu cầu) ---------------- */
+	$casa = '<a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca</a>';
+	$posts[] = array(
+		'slug'     => 'biet-thu-compound-hoi-an-casamia-balanca',
+		'title'    => 'Biệt thự compound Hội An: Casamia Balanca khác biệt ở đâu khi mua để ở?',
+		'excerpt'  => 'Phân tích sâu Casamia Balanca theo từng hạng mục – vị trí sông Cổ Cò, quy hoạch compound 31,1 ha chỉ 363 sản phẩm, 5 công viên, clubhouse, kiến trúc, từng dòng biệt thự, pháp lý và chi phí – dưới góc nhìn giá trị ở cao cấp tại Hội An.',
+		'keyword'  => 'biệt thự compound Hội An',
+		'keywords_extra' => array( 'Casamia Balanca', 'biệt thự Hội An để ở', 'khu đô thị sinh thái Hội An', 'biệt thự ven sông Cổ Cò' ),
+		'project'  => 'casamia-balanca-hoi-an',
+		'schedule' => '2026-11-18 07:30',
+		'category' => 'Tin dự án',
+		'tags'     => array( 'Casamia Balanca', 'Biệt thự Hội An', 'Compound' ),
+		'image'    => 'plugin:img/casamia-balanca/casamia-balanca-toan-canh.jpg',
+		'image_alt' => 'Toàn cảnh Casamia Balanca – biệt thự compound Hội An bên sông Cổ Cò',
+		'content'  => <<<HTML
+<p>Nói tới <strong>biệt thự compound Hội An</strong>, nhiều người nghĩ ngay tới căn nghỉ dưỡng trong resort để cho thuê. {$casa} của Tập đoàn Đạt Phương đi hướng khác: một khu đô thị sinh thái khép kín 31,1 ha bên sông Cổ Cò, đất ở tại đô thị đã có sổ hồng từng lô, thiết kế cho người <strong>ở thật</strong> – gia đình sống quanh năm, người làm việc từ xa, hoặc gia đình có ngôi nhà thứ hai ở Hội An. Bài này phân tích từng hạng mục để thấy sự khác biệt nằm ở đâu, kèm những điểm cần cân nhắc.</p>
+<!--hh-featured-->
+<h2>1. Vị trí biệt thự compound Hội An: giữa sông, rừng dừa và biển</h2>
+<p>Dự án nằm ở khu Cồn Tiến, phường Hội An Đông (xã Cẩm Thanh cũ), thành phố Đà Nẵng: một mặt giáp sông Cổ Cò, hướng ra vịnh Cửa Đại, gần rừng dừa Bảy Mẫu – vùng thuộc Khu dự trữ sinh quyển Cù Lao Chàm – Hội An, và đi về phố cổ Hội An – di sản văn hóa thế giới được <a href="https://whc.unesco.org/en/list/948">UNESCO</a> công nhận. Lối vào chính là cổng chào hoa giấy từ đường Võ Chí Công, trục nối về sân bay Đà Nẵng và sân bay Chu Lai.</p>
+<p>Điểm khác biệt của vị trí biệt thự compound Hội An này so với biệt thự trong phố là <strong>cảnh quan nước và cây xanh có sẵn</strong> – sông, kênh, rừng dừa – thay vì nhà liền kề san sát. Đổi lại, đây không phải khu trung tâm: đi chợ phố cổ, bệnh viện lớn, trường phổ thông vẫn phải đi xe, anh chị nên tự chạy thử quãng đường thực tế từ dự án tới nơi làm việc, trường học của con.</p>
+<!--hh-img:img/casamia-balanca/casamia-balanca-toan-canh.jpg|Toàn cảnh Casamia Balanca – biệt thự compound Hội An bên sông Cổ Cò, hướng vịnh Cửa Đại (phối cảnh chủ đầu tư)-->
+<h2>2. Quy hoạch biệt thự compound Hội An: 31,1 ha, chỉ 363 sản phẩm</h2>
+<p>Theo thông tin chủ đầu tư, cả khu 31,1 ha chỉ có <strong>363 sản phẩm thấp tầng</strong>: 173 biệt thự đơn lập, 116 biệt thự song lập và 74 shophouse – bình quân khoảng 12 sản phẩm mỗi ha, dành phần lớn diện tích cho đường, kênh, công viên và tiện ích. Đây là khác biệt cốt lõi của một <strong>biệt thự compound Hội An</strong> so với dãy nhà phố chia lô: cư dân dùng chung một hệ cảnh quan rộng, không bị chèn bởi công trình cao tầng.</p>
+<p>Mô hình compound còn thể hiện ở cách vận hành: một cổng chào chính, xe điện nội khu, bảo vệ, đường dạo bộ – đạp xe chạy giữa các công viên. Với gia đình có trẻ nhỏ hoặc người lớn tuổi, việc con đi xe đạp, ông bà đi bộ quanh hồ trong khu yên tĩnh là giá trị sống khó tìm ở phố.</p>
+<!--hh-img:img/casamia-balanca/casamia-balanca-xe-dien-cong-bao-ve.jpg|Xe điện nội khu và cổng bảo vệ – vận hành khép kín của biệt thự compound Hội An Casamia Balanca-->
+<h2>3. Năm công viên và clubhouse – tiện ích biệt thự compound Hội An dùng hằng ngày</h2>
+<table>
+<thead><tr><th>Hạng mục</th><th>Có gì (theo chủ đầu tư)</th><th>Giá trị khi ở</th></tr></thead>
+<tbody>
+<tr><td>Grand Central Park</td><td>Quảng trường, hồ vô cực, trạm đọc, co-working, coffee &amp; bistro, gym &amp; fitness, khu trò chơi</td><td>Nơi làm việc từ xa, gặp gỡ hàng xóm ngay trong khu</td></tr>
+<tr><td>Bể bơi tiêu chuẩn Olympic</td><td>Kèm khu vui chơi trẻ em, gym ngoài trời</td><td>Trẻ học bơi, người lớn tập luyện quanh năm</td></tr>
+<tr><td>Wellness Park</td><td>Vườn yoga, đường dạo sinh thái</td><td>Thói quen sống chậm, tập buổi sáng</td></tr>
+<tr><td>Sport Park</td><td>Sân bóng rổ, hệ thống sân Pickleball</td><td>Thể thao cộng đồng cho cả gia đình</td></tr>
+<tr><td>Floral Park, Nipa Park</td><td>Công viên hoa giấy; đường dạo rừng dừa, cầu cảng, lầu vọng cảnh</td><td>Không gian dạo bộ, chụp ảnh, ngắm sông</td></tr>
+</tbody>
+</table>
+<p>Ngoài ra, quy hoạch biệt thự compound Hội An này còn có trung tâm thương mại, trường mầm non quốc tế, bungalow ven sông, khách sạn 5 sao, sky bar, trung tâm hội nghị và bến du thuyền. Đây là các hạng mục theo quy hoạch của chủ đầu tư; anh chị nên hỏi rõ hạng mục nào đã vận hành, hạng mục nào còn đang triển khai trước khi quyết định.</p>
+<!--hh-img:img/casamia-balanca/casamia-balanca-yoga-bai-co.jpg|Yoga trên bãi cỏ trong công viên nội khu – nhịp sống cư dân Casamia Balanca (ảnh minh hoạ chủ đầu tư)-->
+<h2>4. Kiến trúc và không gian sống trong biệt thự compound Hội An</h2>
+<p>Dự án do VTN Architects / ENCITY thiết kế theo thông tin chủ đầu tư. Tinh thần chung là nhà mở ra sân vườn: phòng khách, bếp và phòng ăn nhìn ra vườn, ban công tầng trên đón gió sông, nhiều cây xanh quanh nhà. Với dòng Park Home, mỗi căn có <strong>đất 178 m², sàn 316,09 m²</strong> – đủ cho gia đình 3 thế hệ, có phòng làm việc riêng và sân vườn.</p>
+<p>So với căn hộ hay biệt thự nghỉ dưỡng có nội thất "kiểu khách sạn", biệt thự compound Hội An cho phép chủ nhà tự hoàn thiện theo nếp sống của mình. Chủ đầu tư có cả phương án <strong>bàn giao thô</strong> (tự làm nội thất) và <strong>bàn giao nội thất cơ bản</strong>.</p>
+<!--hh-img:img/casamia-balanca/casamia-balanca-phong-khach-view-vuon.jpg|Phòng khách nhìn ra vườn – không gian sống của biệt thự Casamia Balanca (ảnh minh hoạ chủ đầu tư)-->
+<h2>5. Từng dòng biệt thự compound Hội An: chọn theo cách sống</h2>
+<table>
+<thead><tr><th>Dòng sản phẩm</th><th>Đặc điểm</th><th>Phù hợp</th></tr></thead>
+<tbody>
+<tr><td>Park Home</td><td>Nhà phố vườn ven các công viên chủ đề; đất 178 m², sàn 316,09 m²</td><td>Gia đình ở quanh năm, cần gần tiện ích chung</td></tr>
+<tr><td>Park Villa</td><td>Biệt thự vườn dọc trục đường La Riva</td><td>Gia đình muốn sân vườn rộng hơn</td></tr>
+<tr><td>La Riva</td><td>Biệt thự ven kênh, hồ bơi riêng, bến thuyền trước nhà (theo phối cảnh chủ đầu tư)</td><td>Người thích riêng tư, sống gần nước</td></tr>
+<tr><td>La Palma</td><td>Biệt thự ven sông Cổ Cò</td><td>Ngôi nhà thứ hai, view sông</td></tr>
+<tr><td>Forestside Villa</td><td>Biệt thự rừng dừa</td><td>Người tìm sự yên tĩnh, gần thiên nhiên</td></tr>
+</tbody>
+</table>
+<!--hh-img:img/casamia-balanca/casamia-balanca-biet-thu-ven-kenh.jpg|Biệt thự ven kênh có hồ bơi riêng – dòng sản phẩm nổi bật của biệt thự compound Hội An Casamia Balanca (phối cảnh)-->
+<h2>6. Pháp lý biệt thự compound Hội An: đất ở đô thị, sổ hồng từng lô</h2>
+<p>Điểm khác biệt lớn nhất so với nhiều biệt thự nghỉ dưỡng ven biển (đất thương mại dịch vụ, thời hạn 50 năm) là Casamia Balanca thuộc <strong>đất ở tại đô thị</strong>. Tháng 8/2026, giấy chứng nhận quyền sử dụng đất đã được cấp cho các lô (ví dụ lô 16 khu SL3, 178 m², đất ở tại đô thị, sử dụng riêng). Trên sổ đứng tên chủ đầu tư, thời hạn ghi đến 18/06/2069; thời hạn khi sang tên cho người mua theo quy định hiện hành – anh chị nên kiểm tra cùng luật sư hoặc cùng Hiệp trước khi ký (xem thêm <a href="/phap-ly-so-hong-casamia-balanca/">pháp lý sổ hồng Casamia Balanca</a>).</p>
+<h2>7. Chi phí sở hữu biệt thự compound Hội An và chính sách hiện hành</h2>
+<ul>
+<li><strong>Giá:</strong> Park Home full nội thất chỉ từ 13,86 tỷ (đã VAT); các dòng khác theo bảng hàng từng thời điểm.</li>
+<li><strong>Chi phí sống ban đầu:</strong> miễn phí 2 năm phí quản lý khu đô thị và 1 năm Fitness &amp; Pool tại Clubhouse.</li>
+<li><strong>Tài chính:</strong> phương án vay hỗ trợ 70%, hỗ trợ lãi suất 0% trong 24 tháng, ân hạn nợ gốc 24 tháng.</li>
+<li><strong>Nếu chưa ở ngay:</strong> có chương trình chủ đầu tư thuê lại hoặc ủy thác vận hành (chi tiết tại <a href="/chinh-sach-ban-hang-casamia-balanca/">chính sách bán hàng Casamia Balanca</a>).</li>
+</ul>
+<h2>Sự khác biệt so với các lựa chọn khác ở Hội An</h2>
+<table>
+<thead><tr><th>Tiêu chí</th><th>Biệt thự compound Hội An (Casamia Balanca)</th><th>Biệt thự nghỉ dưỡng trong resort</th><th>Nhà phố trong phố cổ / ven phố</th></tr></thead>
+<tbody>
+<tr><td>Mục đích chính</td><td>Ở thật, ngôi nhà thứ hai</td><td>Cho thuê, nghỉ dưỡng ngắn ngày</td><td>Ở, kinh doanh nhỏ</td></tr>
+<tr><td>Loại đất</td><td>Đất ở tại đô thị, có sổ từng lô</td><td>Thường là đất thương mại dịch vụ có thời hạn</td><td>Đất ở</td></tr>
+<tr><td>Không gian chung</td><td>5 công viên, clubhouse, kênh – sông trong khu</td><td>Tiện ích resort, ưu tiên khách lưu trú</td><td>Ít không gian xanh, phố đông</td></tr>
+<tr><td>Tự chủ khi ở</td><td>Cao – tự hoàn thiện, tự dùng quanh năm</td><td>Bị giới hạn bởi hợp đồng vận hành</td><td>Cao nhưng ồn, chật</td></tr>
+</tbody>
+</table>
+<p>Xem thêm phần so sánh chi tiết với các dự án biệt thự nghỉ dưỡng tại <a href="/casamia-balanca-so-sanh-biet-thu-hoi-an/">so sánh biệt thự Hội An</a>.</p>
+<h2>Nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Giá trị nằm ở "cách sống" hơn là "dòng tiền":</strong> nếu mục tiêu chính là cho thuê ngắn ngày, nên so sánh kỹ với biệt thự nghỉ dưỡng có thương hiệu vận hành. Nếu mục tiêu là một ngôi nhà rộng, xanh, an toàn cho gia đình tại Hội An, mô hình biệt thự compound Hội An như Casamia Balanca là lựa chọn hiếm trên thị trường hiện nay.</li>
+<li><strong>Đất ở có sổ là lợi thế dài hạn:</strong> dễ thế chấp, dễ chuyển nhượng hơn sản phẩm có thời hạn – nhưng vẫn cần kiểm tra kỹ thời hạn ghi trên sổ khi sang tên.</li>
+<li><strong>Chọn vị trí lô kỹ:</strong> trong biệt thự compound Hội An, lô ven công viên tiện sinh hoạt, lô ven kênh – rừng dừa yên tĩnh, riêng tư; nên đi xem thực tế cả ban ngày lẫn buổi tối.</li>
+<li><strong>Hỏi rõ tiến độ tiện ích:</strong> khách sạn, trung tâm thương mại, trường mầm non theo quy hoạch – nên biết hạng mục nào có trước khi dọn về ở.</li>
+</ul>
+<p>Muốn đi xem thực tế khu biệt thự compound Hội An này, nhận bảng hàng từng dòng sản phẩm, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: thông tin dự án và chính sách bán hàng của chủ đầu tư Tập đoàn Đạt Phương (<a href="https://casamiabalanca.com/">casamiabalanca.com</a>, chính sách áp dụng từ 09/09/2026); giấy chứng nhận quyền sử dụng đất cấp tháng 8/2026; UNESCO về Phố cổ Hội An. Ảnh: phối cảnh và ảnh minh hoạ của chủ đầu tư. Các hạng mục tiện ích theo quy hoạch, cần kiểm tra tiến độ thực tế.</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Biệt thự compound Hội An: Casamia Balanca 31,1 ha',
+			'desc'      => 'Biệt thự compound Hội An Casamia Balanca: 31,1 ha chỉ 363 sản phẩm, 5 công viên, clubhouse, đất ở có sổ từng lô – phân tích giá trị ở theo từng hạng mục.',
+			'points'    => array(
+				'Biệt thự compound Hội An Casamia Balanca: 31,1 ha bên sông Cổ Cò, chỉ 363 sản phẩm thấp tầng',
+				'5 công viên chủ đề, bể bơi tiêu chuẩn Olympic, clubhouse, xe điện và bảo vệ nội khu',
+				'Đất ở tại đô thị, sổ hồng từng lô cấp tháng 8/2026; Park Home full nội thất chỉ từ 13,86 tỷ',
+			),
+			'faq'       => array(
+				array( 'Biệt thự compound Hội An Casamia Balanca có bao nhiêu sản phẩm?', '363 sản phẩm thấp tầng trên 31,1 ha: 173 biệt thự đơn lập, 116 biệt thự song lập và 74 shophouse, theo thông tin chủ đầu tư.' ),
+				array( 'Casamia Balanca là đất ở hay đất nghỉ dưỡng?', 'Đất ở tại đô thị, giấy chứng nhận cấp cho từng lô tháng 8/2026. Thời hạn khi sang tên cho người mua theo quy định hiện hành – nên kiểm tra trước khi ký.' ),
+				array( 'Tiện ích trong biệt thự compound Hội An này gồm những gì?', '5 công viên chủ đề (Wellness, Sport Park, Grand Central Park, Floral Park, Nipa Park), bể bơi tiêu chuẩn Olympic, hồ vô cực, gym, co-working, coffee; theo quy hoạch có thêm trung tâm thương mại, trường mầm non quốc tế, khách sạn 5 sao.' ),
+				array( 'Giá biệt thự compound Hội An Casamia Balanca từ bao nhiêu?', 'Park Home full nội thất chỉ từ 13,86 tỷ (đã VAT) theo chính sách từ 09/09/2026; các dòng khác theo bảng hàng từng thời điểm.' ),
+			),
+		),
+		'sources'  => array(
+			'https://casamiabalanca.com/',
+			'https://whc.unesco.org/en/list/948',
+		),
+	);
 	return $posts;
 }
