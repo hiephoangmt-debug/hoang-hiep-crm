@@ -126,3 +126,4 @@
 | CHỜ | Sun | 20/11 | (bài web 18/11 16:30) Căn hộ cho người nghỉ hưu – Sun Saphia | can-ho-cho-nguoi-nghi-huu-sun-saphia (chờ) |
 | CHỜ | Sun | 21/11 | (bài web 18/11 18:30) Ăn uống quanh Sun Saphia Residence | an-uong-quanh-sun-saphia-residence (chờ) |
 | 18/11/2026 | (ghi chú) | 07:18 | Bài web bai-do-xe-ngam-bach-dang-da-nang đã có bài FB Hoàng Hiệp 16:30 do lịch hạ tầng hẹn sẵn – không làm trùng | /bai-do-xe-ngam-bach-dang-da-nang/ |
+| 18/11/2026 | (ghi chú) | 15:38 | Gỡ bài Casamia compound đăng nhầm trang Hoàng Hiệp 16:30 (chuyển bản nháp Metricool, theo anh Hiệp) | /biet-thu-compound-hoi-an-casamia-balanca/ |
