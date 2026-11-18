@@ -36,7 +36,7 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 
 ## Trang Casamia Balanca (kết nối 13/11/2026, anh Hiệp chọn 2 bài/ngày)
 - Metricool blogId 8074284, chỉ nội dung Casamia Balanca (Đạt Phương, Cẩm Thanh – Hội An); có thể nhắc Casamia Hội An, Casamia Calm khi so sánh.
-- 2 bài/ngày: 08:30 và 21:00. Xoay vòng góc, không lặp trong 7 ngày: tổng quan; tiện ích sống; nội thất; tiến độ thực tế (flycam); pháp lý sổ hồng; loại biệt thự (đơn lập, song lập, shophouse); vị trí – kết nối Hội An, Đà Nẵng; bài toán dòng tiền 5–10 năm; so sánh biệt thự Hội An; sự kiện khách hàng; sống chậm ven sông Cổ Cò.
+- 2 bài/ngày: 11:00 và 17:00 (anh Hiệp 18/11/2026, theo giờ khách online nhiều nhất trên Metricool). Xoay vòng góc, không lặp trong 7 ngày: tổng quan; tiện ích sống; nội thất; tiến độ thực tế (flycam); pháp lý sổ hồng; loại biệt thự (đơn lập, song lập, shophouse); vị trí – kết nối Hội An, Đà Nẵng; bài toán dòng tiền 5–10 năm; so sánh biệt thự Hội An; sự kiện khách hàng; sống chậm ven sông Cổ Cò.
 - Ảnh: hh-crm/img/casamia-balanca/ (45 ảnh: flycam, phối cảnh, lifestyle, nội thất, sự kiện). Không đăng ảnh so-do-mat-bang làm ảnh đầu, không đăng so-hong-lo-sl3 (có mã lô). Album 3–4 ảnh không chữ, hoặc 1 thẻ dọc khi có số liệu.
 - Nguồn số liệu: data-du-an.php (slug casamia-balanca-hoi-an), data-bai-viet-casamia-dong-tien.php. Link: https://hiephoangmt.com/du-an/casamia-balanca-hoi-an/ hoặc bài web Casamia.
 
@@ -95,3 +95,12 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 - Bảo lãnh ngân hàng: bắt buộc với nhà ở hình thành trong tương lai; với loại này "nên hỏi chủ đầu tư có bảo lãnh không".
 - Cho thuê theo đêm = kinh doanh lưu trú (Luật Du lịch 2017, thông báo lưu trú, thuế) – không viết như việc tự do; cam kết thuê/ủy thác luôn ghi "theo chính sách chủ đầu tư, không phải cam kết của Hiệp".
 - Cuối bài có yếu tố pháp lý: "Thông tin tham khảo, không thay thế tư vấn pháp lý".
+
+## LỊCH ĐĂNG (anh Hiệp 18/11/2026: mỗi trang 2 bài sáng + tối, "sắp xếp thời gian cho hiệu quả")
+Theo Metricool (giờ khách online nhiều nhất, tuần 19–25/11/2026): Facebook cao nhất 10h, rồi 12h, 11h; buổi chiều 17h – 18h; sau 19h giảm, 21h thấp. TikTok cao nhất 10h, 18h, 12h.
+| Trang | Sáng | Tối | TikTok |
+|---|---|---|---|
+| Sun | 10:00 | 18:00 | 10:15, 18:15 |
+| Casamia | 11:00 | 17:00 | 11:15, 17:15 |
+| Hoàng Hiệp | 12:00 | 19:00 | không |
+Các trang cách nhau ≥1 tiếng. Bài lịch khác đã hẹn sẵn (tuyển dụng, hạ tầng, Reel) tính vào 2 bài/ngày của trang đó; trùng gần giờ thì lùi bài của mình tới giờ trống gần nhất, vẫn cách ≥1 tiếng.
