@@ -1000,13 +1000,29 @@ qs.forEach(function(q){q.classList.add("off")});fun.classList.remove("on");bar.s
   function wasSent(ph) { return sentMem[ph] || sget('hhc_sent_' + ph) || lget('hhc_sent_' + ph); }
   function markSent(ph) { sentMem[ph] = 1; sset('hhc_sent_' + ph, '1'); lset('hhc_sent_' + ph, String(Date.now())); }
 
+  /* Lọc rác: bot bị chặn im lặng; số đáng ngờ vẫn gửi nhưng gắn nhãn ⚠️ để sale biết */
+  var T0 = Date.now(), mucDich = '', taiChinh = '';
+  function junkWhy(ph) {
+    var w = [], t = ph.slice(1);
+    try { if (navigator.webdriver) w.push('bot'); } catch (e) {}
+    if (Date.now() - T0 < 2500) w.push('bot');
+    if (/(\d)\1{5,}/.test(t)) w.push('số lặp');
+    if (/012345|123456|234567|345678|456789|987654|876543|765432|654321/.test(t)) w.push('số dãy');
+    if (/^(\d\d)\1{3,}/.test(t)) w.push('số lặp cặp');
+    return w;
+  }
   /* d: {name, phone, interest, cau_hoi, hoi_thoai, ...}. Trả về 'ok' | 'dup' | '' (số sai) */
   function lead(d) {
     d = Object.assign({}, d, src(), {time: vnTime(), source: location.href.split('#')[0].split('?')[0]});
     if (d.thong_bao) { postJSON(TG, d); return 'ok'; }
     var ph = normPhone(d.phone); if (!ph) return '';
     if (wasSent(ph)) return 'dup';
+    var jk = junkWhy(ph);
+    if (jk.indexOf('bot') >= 0) return 'ok';
     markSent(ph); d.phone = ph;
+    if (mucDich) d.muc_dich = mucDich; if (taiChinh) d.tai_chinh = taiChinh;
+    if (jk.length) { d.nghi_rac = jk.join(', '); d.interest = '⚠️ NGHI RÁC (' + d.nghi_rac + ') · ' + (d.interest || ''); }
+    else if (mucDich || taiChinh) d.interest = (d.interest || '') + ' · ' + [mucDich, taiChinh].filter(Boolean).join(' · ');
     postJSON(TG, d);
     postJSON(CRM, Object.assign({project: PROJECT, url: d.source, message: [d.interest, d.cau_hoi].filter(Boolean).join(' · ').slice(0, 500)}, d));
     postMail(Object.assign({_subject: 'Khách Sun Saphia: ' + (d.name || 'chưa rõ tên') + ' - ' + ph, _template: 'table', _captcha: 'false'}, d));
@@ -1424,7 +1440,9 @@ qs.forEach(function(q){q.classList.add("off")});fun.classList.remove("on");bar.s
     nudge && nudge.classList.remove('on'); box.classList.add('on');
     if (!started) {
       started = true; var nn = nightNote();
-      say('Dạ em chào Anh/Chị, em là trợ lý tư vấn của dự án – Giám đốc kinh doanh Sun Saphia Residence ạ.\nAnh/Chị đang quan tâm để ở, nghỉ dưỡng hay cho thuê ạ?' + (nn ? '\n(Giờ này ' + nn + '; em vẫn trả lời nhanh thông tin dự án.)' : ''), ['Vị trí dự án', 'Loại căn hộ']);
+      var evMode = /thu-moi-22-11|sukien/i.test(location.hash + ' ' + (qs.utm_campaign || sget('hhc_utm_campaign') || ''));
+      if (evMode) say('Dạ em chào Anh/Chị! Em là trợ lý của anh Hoàng Hiệp, tư vấn căn hộ biển Sun Saphia Residence, Đà Nẵng ạ.\nEm gửi Anh/Chị thư mời sự kiện Hà Nội 9:00 Chủ nhật 22/11 (Daewoo 360 Kim Mã) và bảng giá dự kiến nhé.' + (nn ? '\n(Giờ này ' + nn + '; em vẫn trả lời nhanh thông tin dự án.)' : ''), ['Nhận thư mời 22/11', 'Bảng giá dự kiến']);
+      else say('Dạ em chào Anh/Chị, em là trợ lý của anh Hoàng Hiệp, tư vấn căn hộ biển Sun Saphia Residence ạ.\nAnh/Chị đang quan tâm để ở, nghỉ dưỡng hay cho thuê ạ?' + (nn ? '\n(Giờ này ' + nn + '; em vẫn trả lời nhanh thông tin dự án.)' : ''), ['Vị trí dự án', 'Loại căn hộ']);
     }
     setTimeout(function () { try { inp.focus({preventScroll: true}); } catch (e) {} }, 250);
   }
@@ -1598,6 +1616,13 @@ qs.forEach(function(q){q.classList.add("off")});fun.classList.remove("on");bar.s
     }
     if (f && f.bad) { say(pick(['Dạ số ' + f.bad + ' hình như chưa đúng ạ, số di động cần 10 số, ví dụ 0904 567 009. Anh/Chị kiểm tra giúp em nhé.', 'Dạ em chưa nhận được số này ạ, Anh/Chị gõ lại giúp em số 10 chữ số (ví dụ 0904 567 009) nhé.'])); return; }
     lastQ = raw;
+
+    /* 1b. Kịch bản sự kiện 22/11: hỏi mục đích → tài chính → xin Zalo */
+    var ASKZ = '\nDanh sách căn view biển còn trống thay đổi theo ngày. Anh/Chị cho em xin số Zalo, em gửi ngay thư mời có mã chỗ ngồi và bảng giá dự kiến ạ.';
+    if (raw === 'Nhận thư mời 22/11') { addTopic('Thư mời 22/11'); say('Dạ sự kiện giới thiệu Sun Saphia Residence tại Hà Nội: 9:00 Chủ nhật 22/11, Daewoo 360 Kim Mã. Anh/Chị được gặp chuyên viên, xem mặt bằng từng căn và chính sách dự kiến.\nAnh/Chị quan tâm căn để ở, nghỉ dưỡng hay để cho thuê ạ?', ['Để ở, nghỉ dưỡng', 'Cho thuê, đầu tư']); return; }
+    if (raw === 'Bảng giá dự kiến') { addTopic('Bảng giá'); say('Dạ giá dự kiến từ khoảng 1,8 tỷ/căn Studio, thanh toán khoảng 25% đến khi nhận nhà, hỗ trợ vay 0% lãi suất 24 tháng (dự kiến, theo công bố chính thức của dự án).\nAnh/Chị quan tâm căn để ở, nghỉ dưỡng hay để cho thuê ạ?', ['Để ở, nghỉ dưỡng', 'Cho thuê, đầu tư']); return; }
+    if (raw === 'Để ở, nghỉ dưỡng' || raw === 'Cho thuê, đầu tư') { mucDich = raw; addTopic(raw); say(raw === 'Cho thuê, đầu tư' ? 'Dạ căn sát biển Mỹ Khê, gần phố du lịch nên dễ cho thuê quanh năm ạ. Anh/Chị dự kiến tài chính khoảng bao nhiêu để em lọc căn phù hợp ạ?' : 'Dạ căn hướng biển, sáng nào cũng thấy biển ạ. Anh/Chị dự kiến tài chính khoảng bao nhiêu để em lọc căn phù hợp ạ?', ['Khoảng 2 tỷ', 'Từ 2,5 tỷ trở lên']); return; }
+    if (raw === 'Khoảng 2 tỷ' || raw === 'Từ 2,5 tỷ trở lên') { taiChinh = raw; addTopic('Tài chính ' + raw); say((raw === 'Khoảng 2 tỷ' ? 'Dạ tầm này hợp căn Studio và 1PN+ ạ.' : 'Dạ tầm này chọn được căn 2PN view biển đẹp ạ.') + ASKZ); return; }
 
     /* 2. Báo "khách đang chat" từ tin thứ 2 khi chưa có số */
     if (!phone && turn >= 2) notifyOnce('chat', {thong_bao: 'Khách đang chat trên trang Sun Saphia (chưa để số)'});
