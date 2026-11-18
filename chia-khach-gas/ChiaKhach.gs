@@ -102,11 +102,19 @@ function ms(d) { return d instanceof Date ? d.getTime() : (d ? new Date(d).getTi
 function vnHour(t) { var d = new Date(t + 7 * 3600000); return d.getUTCHours() + d.getUTCMinutes() / 60; }
 function vnDay(t) { var d = new Date(t + 7 * 3600000); return d.getUTCFullYear() + '-' + (d.getUTCMonth() + 1) + '-' + d.getUTCDate(); }
 function fmt(t) { var d = new Date(ms(t) + 7 * 3600000); function z(n) { return (n < 10 ? '0' : '') + n; } return z(d.getUTCHours()) + ':' + z(d.getUTCMinutes()) + ' ' + z(d.getUTCDate()) + '/' + z(d.getUTCMonth() + 1); }
-function trongGio(t) { var h = vnHour(t); return h >= num('GIO_BAT_DAU') && h < num('GIO_KET_THUC'); }
+/* Giờ làm việc trong CauHinh: nhận 6.5, "6,5", "6:30", "6h30" đều là 6 giờ 30 */
+function soGio_(k) {
+  var v = cfg(k); if (typeof v === 'number') return v;
+  var m = String(v).trim().match(/^(\d{1,2})\s*(?:[:hH]\s*(\d{1,2})?|[.,](\d+))?$/);
+  if (!m) return Number(MAC_DINH[k]);
+  return Number(m[1]) + (m[2] ? Number(m[2]) / 60 : m[3] ? Number('0.' + m[3]) : 0);
+}
+function gioChu_(k) { var g = soGio_(k), h = Math.floor(g), p = Math.round((g - h) * 60); return h + 'h' + (p ? (p < 10 ? '0' : '') + p : ''); }
+function trongGio(t) { var h = vnHour(t); return h >= soGio_('GIO_BAT_DAU') && h < soGio_('GIO_KET_THUC'); }
 /* Số phút làm việc giữa 2 thời điểm (bỏ qua ngoài giờ) */
 function phutLamViec(a, b) {
   a = ms(a); b = ms(b); if (!a || b <= a) return 0;
-  var off = 7 * 3600000, gs = num('GIO_BAT_DAU') * 3600000, ge = num('GIO_KET_THUC') * 3600000, tong = 0;
+  var off = 7 * 3600000, gs = soGio_('GIO_BAT_DAU') * 3600000, ge = soGio_('GIO_KET_THUC') * 3600000, tong = 0;
   for (var day = Math.floor((a + off) / 86400000); ; day++) {
     var d0 = day * 86400000 - off; if (d0 > b) break;
     var x = Math.max(a, d0 + gs), y = Math.min(b, d0 + ge); if (y > x) tong += y - x;
@@ -115,7 +123,7 @@ function phutLamViec(a, b) {
 }
 /* Thời điểm đủ "phut" phút làm việc tính từ a (bỏ qua 21h–7h) */
 function hanLuc(a, phut) {
-  a = ms(a); var off = 7 * 3600000, gs = num('GIO_BAT_DAU') * 3600000, ge = num('GIO_KET_THUC') * 3600000, con = phut * 60000;
+  a = ms(a); var off = 7 * 3600000, gs = soGio_('GIO_BAT_DAU') * 3600000, ge = soGio_('GIO_KET_THUC') * 3600000, con = phut * 60000;
   for (var day = Math.floor((a + off) / 86400000); day < Math.floor((a + off) / 86400000) + 400; day++) {
     var d0 = day * 86400000 - off, x = Math.max(a, d0 + gs), y = d0 + ge;
     if (y > x) { if (y - x >= con) return x + con; con -= y - x; }
@@ -138,7 +146,7 @@ function dongHan_(k) { var h = han_(k); return h ? '⏱ Hạn ' + h.viec + ': <b
 function hanCD_(k) { return (num('HAN_CHUYEN_DOI_NGAY') + Number(k.gia_han || 0) * num('GIA_HAN_NGAY')) * phutMotNgay(); }
 function conGiaHan_(k) { return Number(k.gia_han || 0) < num('SO_LAN_GIA_HAN'); }
 function nutGiaHan_(k) { return conGiaHan_(k) ? [[{text: '⏳ Xin gia hạn ' + num('GIA_HAN_NGAY') + ' ngày', callback_data: 'gh:' + k.id}]] : null; }
-function phutMotNgay() { return (num('GIO_KET_THUC') - num('GIO_BAT_DAU')) * 60; }
+function phutMotNgay() { return (soGio_('GIO_KET_THUC') - soGio_('GIO_BAT_DAU')) * 60; }
 function che(sdt) { sdt = String(sdt || ''); return sdt.length >= 8 ? sdt.slice(0, 4) + ' ••• ' + sdt.slice(-3) : '•••'; }
 function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 function dsCfg_(k) { return String(cfg(k) || '').toLowerCase().split(',').map(function (x) { return x.trim(); }).filter(String); }
@@ -487,17 +495,22 @@ function nhanKhachMoi_() {
     nhac_(k, '🔁 <b>Khách ' + esc(k.id) + ' vừa để lại thông tin</b> trên web' + (c.ghi_chu ? ' (' + esc(c.ghi_chu.slice(0, 120)) + ')' : '') + '. Liên hệ ngay giúp nhé.');
     log_(k.ten_sale, 'khách quay lại', k.id, 'web'); return false;
   });
+  /* Số trang web gắn nhãn "NGHI RÁC" (chatbot nghi số ảo / spam): không tự chia, không tính lượt – báo quản lý kèm nút */
+  var rac = moi.filter(function (c) { return /NGHI\s*RÁC/i.test([c.du_an, c.ghi_chu].join(' ')); });
+  moi = moi.filter(function (c) { return rac.indexOf(c) < 0; });
   /* Không tự chia: báo quản lý từng khách kèm nút, bấm mới chia */
-  if (!Number(cfg('TU_CHIA'))) {
+  var thuCong = Number(cfg('TU_CHIA')) ? rac : rac.concat(moi);
+  if (thuCong.length) {
     var cho = JSON.parse(P().getProperty('CHO_THEM') || '{}');
-    moi.forEach(function (c) {
+    thuCong.forEach(function (c) {
       var nc = [c.du_an, c.ghi_chu].filter(String).join(' · ');
       /* Dự án khác: chỉ lưu trong file DATA CHẠY GOOGLE, không nhắn (muốn chia thì gõ /themkhac) */
       if (c.nhom === 'khac') { log_('hệ thống', 'khách dự án khác – chỉ lưu data', '', che(c.sdt) + (c.du_an ? ' · ' + String(c.du_an).slice(0, 40) : '')); return; }
       /* Cùng 1 số gửi form nhiều lần: chỉ báo 1 lần trong 3 ngày */
       if (cho[c.sdt] && Date.now() - Number(cho[c.sdt].luc || 0) < 3 * 86400000) return;
       cho[c.sdt] = {ten: String(c.ten || '').slice(0, 60), nc: nc.slice(0, 200), nguon: String(c.utm || c.web || '').slice(0, 100), trang: String(c.trang || '').slice(0, 200), nhom: c.nhom || '', luc: Date.now()};
-      baoQL_('🆕 <b>Khách mới đổ về – chưa chia</b>' + (c.nhom === 'khac' ? ' (dự án khác)' : '') + '\n👤 ' + esc(c.ten || '(không tên)') + ' · 📱 ' + esc(c.sdt) +
+      var laRac = rac.indexOf(c) > -1;
+      baoQL_((laRac ? '⚠️ <b>Số nghi rác – không tự chia, không tính lượt</b>' : '🆕 <b>Khách mới đổ về – chưa chia</b>') + (c.nhom === 'khac' ? ' (dự án khác)' : '') + '\n👤 ' + esc(c.ten || '(không tên)') + ' · 📱 ' + esc(c.sdt) +
         (nc ? '\n📝 ' + esc(nc.slice(0, 150)) : '') + (c.trang ? '\n🌐 ' + esc(String(c.trang).slice(0, 80)) : '') +
         '\nBấm nút để chia, hoặc gõ /them.', [[{text: '➕ Chia khách này', callback_data: 'tm:' + c.sdt}]]);
       log_('hệ thống', 'khách mới chờ quản lý chia', '', che(c.sdt));
@@ -505,8 +518,8 @@ function nhanKhachMoi_() {
     var ks = Object.keys(cho).sort(function (a, b) { return cho[b].luc - cho[a].luc; });
     ks.slice(40).forEach(function (k) { delete cho[k]; });
     P().setProperty('CHO_THEM', JSON.stringify(cho));
-    return;
   }
+  if (!Number(cfg('TU_CHIA'))) return;
   moi = moi.filter(function (c) {
     if (c.nhom !== 'khac' || Number(cfg('CHIA_KHAC'))) return true;
     log_('hệ thống', 'khách dự án khác – chỉ lưu data', '', che(c.sdt) + (c.du_an ? ' · ' + String(c.du_an).slice(0, 40) : '')); return false;
@@ -516,6 +529,12 @@ function nhanKhachMoi_() {
     var k = {id: 'K' + dem, luc_vao: nowD(), ten: c.ten, sdt: c.sdt, nhu_cau: [c.du_an, c.ghi_chu].filter(String).join(' · '),
       nguon: c.utm || c.web, trang: c.trang, trang_thai: 'moi', da_qua: '', so_luot: 0, so_bao_cao: 0, nhom: c.nhom || ''};
     save_('Khach', T_KHACH, k); log_('hệ thống', 'khách mới', k.id, che(k.sdt));
+    /* Ngoài giờ chia: giữ lại, báo quản lý, đầu giờ sáng tự chia */
+    if (!trongGio(Date.now())) {
+      k.trang_thai = 'cho_giao'; save_('Khach', T_KHACH, k); log_('hệ thống', 'khách ngoài giờ – chờ sáng chia', k.id, che(k.sdt));
+      baoQL_('🌙 <b>Khách mới ngoài giờ</b> – sẽ tự chia lúc ' + gioChu_('GIO_BAT_DAU') + ' sáng (anh gọi trước nếu cần):\n' + tinKhach_(k, true));
+      return;
+    }
     giao_(k);
   });
   P().setProperty('DEM', String(dem));
@@ -718,7 +737,7 @@ function giaoTay_(k, s) {
   var t = nowD(), dem = trongGio(ms(t));
   k.trang_thai = 'cho_nhan'; k.nguoi_giu = String(s.chat_id); k.ten_sale = s.ten; k.luc_giao = t; k.luc_nhan = ''; k.luc_bao_cao = ''; k.bao_cao = ''; k.nhac = ''; k.ly_do_dong = ''; k.gia_han = 0;
   k.so_luot = Number(k.so_luot || 0) + 1;
-  k.msg_id = gui_(s.chat_id, tinKhach_(k, false) + '\n• Quản lý giao trực tiếp\n\n' + dongHan_(k) + (dem ? '' : '\n(Ngoài giờ ' + num('GIO_BAT_DAU') + 'h–' + num('GIO_KET_THUC') + 'h không tính.)'),
+  k.msg_id = gui_(s.chat_id, tinKhach_(k, false) + '\n• Quản lý giao trực tiếp\n\n' + dongHan_(k) + (dem ? '' : '\n(Ngoài giờ ' + gioChu_('GIO_BAT_DAU') + '–' + gioChu_('GIO_KET_THUC') + ' không tính.)'),
     [[{text: '✅ Nhận khách', callback_data: 'n:' + k.id}]], !dem);
   save_('Khach', T_KHACH, k);
   s.luc_giao_cuoi = t; save_('Sale', T_SALE, s);
@@ -779,7 +798,7 @@ function giao_(k) {
   var t = nowD(), dem = trongGio(ms(t));
   k.trang_thai = 'cho_nhan'; k.nguoi_giu = String(s.chat_id); k.ten_sale = s.ten; k.luc_giao = t; k.luc_nhan = ''; k.luc_bao_cao = ''; k.bao_cao = ''; k.nhac = ''; k.ly_do_dong = ''; k.gia_han = 0;
   k.so_luot = Number(k.so_luot || 0) + 1;
-  k.msg_id = gui_(s.chat_id, tinKhach_(k, false) + (k._vong ? '\n• Vòng: ' + k._vong + (lai ? ' (chia lại)' : '') : '') + '\n\n' + (khac ? '📌 Data telesale: khách giao cho bạn giữ, không bị thu hồi. Bấm Nhận để xem số.' : dongHan_(k)) + (dem || khac ? '' : '\n(Ngoài giờ ' + num('GIO_BAT_DAU') + 'h–' + num('GIO_KET_THUC') + 'h không tính.)'),
+  k.msg_id = gui_(s.chat_id, tinKhach_(k, false) + (k._vong ? '\n• Vòng: ' + k._vong + (lai ? ' (chia lại)' : '') : '') + '\n\n' + (khac ? '📌 Data telesale: khách giao cho bạn giữ, không bị thu hồi. Bấm Nhận để xem số.' : dongHan_(k)) + (dem || khac ? '' : '\n(Ngoài giờ ' + gioChu_('GIO_BAT_DAU') + '–' + gioChu_('GIO_KET_THUC') + ' không tính.)'),
     [[{text: '✅ Nhận khách', callback_data: 'n:' + k.id}]], !dem);
   save_('Khach', T_KHACH, k);
   s[cot] = t; save_('Sale', T_SALE, s);
@@ -882,6 +901,7 @@ function kiemTraHan_() {
     if ((DANG_GIU.test(st) || /cho_giao|cho_quan_ly/.test(st) || (st === 'dong' && !/^Khách thử/.test(k.ly_do_dong))) && laSoThu_(k.sdt)) { huyKhachThu_(k); return; }
     if (!laKhac_(k) && Number(cfg('DUNG_CHIA'))) return;   // đang dừng chia FourS/Saphia
     if (st === 'cho_giao') {
+      if (!laKhac_(k) && !trongGio(now)) return;   // khách FourS/Saphia chờ đầu giờ sáng mới chia
       if (laKhac_(k) && khacDay) return;   // data telesale chờ nhiều: hết người rảnh thì để phút sau
       giao_(k); if (laKhac_(k) && k.trang_thai === 'cho_giao') khacDay = true; return;
     }
@@ -1087,7 +1107,7 @@ function bam_(q) {
   if (parts[0] === 'n') {
     if (k.trang_thai !== 'cho_nhan') return tl('Đã nhận rồi');
     k.trang_thai = 'da_nhan'; k.luc_nhan = nowD(); save_('Khach', T_KHACH, k); log_(k.ten_sale, 'nhận khách', k.id, 'xem số');
-    sua_(chat, k.msg_id, tinKhach_(k, true) + '\n\n✅ Bạn đã nhận. Báo cáo khách này để cập nhật.' + (laKhac_(k) ? '' : '\n' + dongHan_(k) + '\n(Hạn chuyển đổi: trước ' + fmt(hanLuc(k.luc_nhan, num('HAN_CHUYEN_DOI_NGAY') * phutMotNgay())) + ' · chỉ tính ' + num('GIO_BAT_DAU') + 'h–' + num('GIO_KET_THUC') + 'h)'), nutBaoCao_(k.id));
+    sua_(chat, k.msg_id, tinKhach_(k, true) + '\n\n✅ Bạn đã nhận. Báo cáo khách này để cập nhật.' + (laKhac_(k) ? '' : '\n' + dongHan_(k) + '\n(Hạn chuyển đổi: trước ' + fmt(hanLuc(k.luc_nhan, num('HAN_CHUYEN_DOI_NGAY') * phutMotNgay())) + ' · chỉ tính ' + gioChu_('GIO_BAT_DAU') + '–' + gioChu_('GIO_KET_THUC') + ')'), nutBaoCao_(k.id));
     return tl('Đã nhận khách');
   }
   if (parts[0] === 'b' && BC[parts[2]]) {

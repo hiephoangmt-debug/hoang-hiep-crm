@@ -79,7 +79,9 @@ ok(k.trang_thai==='cho_nhan','khách 20:50 được giao ('+k.ten_sale+')');
 NOW=Date.UTC(2026,9,27,0,15); run(); ok(K('K2').nguoi_giu===n1,'7:15 sáng hôm sau (10+15 phút làm việc): chưa thu hồi');
 NOW=Date.UTC(2026,9,27,0,21); run(); ok(K('K2').nguoi_giu!==n1,'7:21: đủ 30 phút làm việc → thu hồi');
 // khách lúc 23h: tin gửi im lặng
-NOW=Date.UTC(2026,9,27,16,0); crmRow('0966000222','Khuya'); run(); const mk=sent.filter(s=>/KHÁCH K3/.test(s.text)).pop(); ok(mk&&mk.disable_notification===true&&/trước 07:30 28\/10/.test(mk.text),'khách 23h: gửi im lặng, hạn nhận 07:30 sáng hôm sau');
+NOW=Date.UTC(2026,9,27,16,0); crmRow('0966000222','Khuya'); run(); ok(K('K3').trang_thai==='cho_giao'&&!K('K3').nguoi_giu&&to(900).some(x=>/Khách mới ngoài giờ/.test(x.text)&&/K3/.test(x.text)),'khách 23h: chưa chia, báo quản lý, chờ sáng');
+NOW=Date.UTC(2026,9,27,23,59); run(); ok(K('K3').trang_thai==='cho_giao','6:59 sáng: vẫn chờ');
+NOW=Date.UTC(2026,9,28,0,1); run(); const mk=sent.filter(s=>/KHÁCH K3/.test(s.text)).pop(); ok(K('K3').trang_thai==='cho_nhan'&&mk&&/trước 07:31 28\/10/.test(mk.text),'7:01 sáng: tự chia, hạn nhận 30 phút');
 // chuyển đổi dừng hạn
 NOW=Date.UTC(2026,9,28,1,0); k=K('K3'); click(k.nguoi_giu,'n:K3'); run(); click(k.nguoi_giu,'b:K3:hen'); run(); advW(14*60*6); run(); ok(K('K3').trang_thai==='chuyen_doi'&&K('K3').nguoi_giu===k.nguoi_giu,'hẹn gặp = chuyển đổi: qua hạn 3 ngày vẫn không thu hồi (6 ngày làm việc)');
 click(k.nguoi_giu,'b:K3:cd'); run(); ok(K('K3').trang_thai==='chot'&&to(900).some(s=>/đã chốt khách K3/.test(s.text)),'chốt: quản lý được báo');
