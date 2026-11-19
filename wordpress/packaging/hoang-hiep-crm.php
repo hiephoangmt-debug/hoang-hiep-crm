@@ -117,6 +117,7 @@ require HH_CRM_DIR . 'data-du-an-moi-b.php';
 require HH_CRM_DIR . 'data-masteri-11-2026.php';
 require HH_CRM_DIR . 'data-viet-huong-lakeside.php';
 require HH_CRM_DIR . 'data-the-sunrise-bay.php';
+require HH_CRM_DIR . 'du-an-gop-trang.php';
 require HH_CRM_DIR . 'data-du-an-moi-c.php';
 require HH_CRM_DIR . 'data-the-poet-residence.php';
 require HH_CRM_DIR . 'data-landmark.php';
