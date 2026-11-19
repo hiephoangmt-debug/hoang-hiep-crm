@@ -133,5 +133,6 @@
 | 19/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:15 | Sun Saphia có phải condotel – BỘ 3 ẢNH | /sun-saphia-residence-co-phai-condotel/ |
 | 19/11/2026 | Casamia (blogId 8074284) | 19:30 | Hỏi đáp nhanh Casamia Balanca – 5 câu (album 4 ảnh) | /du-an/casamia-balanca-hoi-an/ |
 | 19/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | Hỏi đáp Casamia Balanca – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
+| 19/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: Khu đô thị quốc tế Đa Phước (+2 tin ở bình luận) | /khu-do-thi-quoc-te-da-phuoc-3-giai-doan/ /nha-o-xa-hoi-cau-tien-son-731-can/ /nha-o-xa-hoi-viet-huong-lakeside-hoa-xuan/ |
 | CHỜ | Sun | 20/11 | (bài web 19/11 16:30) Studio hay 1PN Sun Saphia Residence | studio-hay-1pn-sun-saphia-residence (chờ) |
 | CHỜ | Sun | 21/11 | (bài web 19/11 18:30) Sun Saphia Residence đi Bà Nà Hills | sun-saphia-residence-di-ba-na-hills (chờ) |
