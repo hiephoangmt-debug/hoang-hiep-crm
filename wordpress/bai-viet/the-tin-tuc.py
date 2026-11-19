@@ -28,12 +28,14 @@ def script(size):
     name = os.environ.get('HH_SCRIPT_FONT', 'DancingScript')
     if name == 'DancingScript':
         f = ImageFont.truetype(f'{FD}/DancingScript[wght].ttf', size); f.set_variation_by_axes([600]); return f
-    return ImageFont.truetype(f'{FD}/{name}.ttf', size)
+    # Chữ ký nét mảnh có chiều cao chữ nhỏ: phóng to để cân với tiêu đề (kiểu mẫu FUTA Residence anh Hiệp gửi).
+    k = {'Allura-Regular': 1.4, 'GreatVibes-Regular': 1.3, 'Corinthia-Bold': 1.5}.get(name, 1.0)
+    return ImageFont.truetype(f'{FD}/{name}.ttf', int(size * k))
 
 
 def script_text(d, xy, text, font, fill, anchor='la'):
     """Vẽ dòng chữ viết tay; HH_SCRIPT_LINE=1 thì thêm nét gạch chân bút lông."""
-    d.text(xy, text, font=font, fill=fill, anchor=anchor)
+    d.text(xy, text, font=font, fill=fill, anchor=anchor, stroke_width=int(os.environ.get('HH_SCRIPT_STROKE', '0')), stroke_fill=fill)
     if os.environ.get('HH_SCRIPT_LINE') != '1':
         return
     l, t, r, b = d.textbbox(xy, text, font=font, anchor=anchor)
