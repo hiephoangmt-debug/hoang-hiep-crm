@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.44** + plugin Hoàng Hiệp CRM **2.20.325**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.44** + plugin Hoàng Hiệp CRM **2.20.326**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.326 (19/11/2026)
+
+- **Sun Ponte Residence, Sun Symphony Residence: "Đang bàn giao"** – trạng thái, mốc bàn giao (Sun Ponte từ 3/2026, Sun Symphony căn hộ S1 – S3 từ 5/2026) và bảng tiến độ trên trang dự án. Ô anh đã tự sửa thì không đè.
+- **Bài "Căn hộ Đà Nẵng sắp bàn giao 2026 – 2027"** (rev 3): mục 1 đổi thành "Đã và đang bàn giao", ghi rõ Sun Ponte, Sun Symphony đang bàn giao.
 
 ## Có gì mới – 2.20.325 (19/11/2026)
 

@@ -1380,26 +1380,26 @@ HTML
 	$posts[] = array(
 		'slug'     => 'can-ho-da-nang-sap-ban-giao-2026-2027',
 		'title'    => 'Căn hộ Đà Nẵng sắp bàn giao 2026 – 2027: hơn 20 dự án, mốc nhận nhà từng dự án',
-		'excerpt'  => 'Tổng hợp căn hộ Đà Nẵng sắp bàn giao và đã bàn giao trong 2026 – 2027: Sun Ponte, Sun Symphony, FPT Plaza 3, Masteri, MIA Center Point, Capital Square 2, Nobu, Peninsula, Sun Solar, Spana, Cora, The Poet, Hiyori Aqua, The Meridian… kèm mốc nhận nhà và lưu ý khi mua.',
+		'excerpt'  => 'Tổng hợp căn hộ Đà Nẵng sắp bàn giao, đang và đã bàn giao trong 2026 – 2027: Sun Ponte, Sun Symphony, FPT Plaza 3, Masteri, MIA Center Point, Capital Square 2, Nobu, Peninsula, Sun Solar, Spana, Cora, The Poet, Hiyori Aqua, The Meridian… kèm mốc nhận nhà và lưu ý khi mua.',
 		'keyword'  => 'căn hộ Đà Nẵng sắp bàn giao',
 		'keywords_extra' => array( 'dự án bàn giao 2026 Đà Nẵng', 'dự án bàn giao 2027 Đà Nẵng', 'căn hộ nhận nhà sớm Đà Nẵng', 'căn hộ có sổ Đà Nẵng' ),
 		'project'  => 'sun-solar-residence',
 		'schedule' => '2026-11-19 09:15',
-		'rev'      => 2, // 19/11: Newtown, Vinhomes Hải Vân Bay chưa bàn giao (anh Hiệp sửa).
+		'rev'      => 3, // 19/11: Newtown, Vinhomes Hải Vân Bay chưa bàn giao; Sun Symphony, Sun Ponte đang bàn giao (anh Hiệp sửa).
 		'category' => 'Tin dự án',
 		'tags'     => array( 'Bàn giao', 'Căn hộ Đà Nẵng', 'Thị trường' ),
 		'image'    => 'plugin:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg',
 		'image_alt' => 'Căn hộ Đà Nẵng sắp bàn giao và đã bàn giao ven sông Hàn, cầu Rồng (ảnh flycam thực tế)',
 		'content'  => <<<HTML
-<p>Danh sách <strong>căn hộ Đà Nẵng sắp bàn giao</strong> trong 2026 – 2027 là thông tin người mua để ở lẫn người mua cho thuê hỏi nhiều nhất: nhận nhà sớm là có chỗ ở, có dòng tiền cho thuê sớm và ít rủi ro tiến độ hơn. Hoàng Hiệp tổng hợp hơn 20 dự án theo ba nhóm – đã bàn giao trong 2026, sắp bàn giao cuối 2026 và bàn giao trong 2027 – kèm mốc nhận nhà theo tài liệu chủ đầu tư và báo chí (cập nhật 19/11/2026).</p>
+<p>Danh sách <strong>căn hộ Đà Nẵng sắp bàn giao</strong> trong 2026 – 2027 là thông tin người mua để ở lẫn người mua cho thuê hỏi nhiều nhất: nhận nhà sớm là có chỗ ở, có dòng tiền cho thuê sớm và ít rủi ro tiến độ hơn. Hoàng Hiệp tổng hợp hơn 20 dự án theo ba nhóm – đã và đang bàn giao trong 2026, sắp bàn giao cuối 2026 và bàn giao trong 2027 – kèm mốc nhận nhà theo tài liệu chủ đầu tư và báo chí (cập nhật 19/11/2026).</p>
 <!--hh-featured-->
-<h2>1. Đã bàn giao trong năm 2026</h2>
-<p>Trước khi xem danh sách căn hộ Đà Nẵng sắp bàn giao, đây là các dự án đã nhận nhà trong năm 2026 – lựa chọn an toàn nhất cho người cần ở hoặc cho thuê ngay.</p>
+<h2>1. Đã và đang bàn giao trong năm 2026</h2>
+<p>Trước khi xem danh sách căn hộ Đà Nẵng sắp bàn giao, đây là các dự án đã hoặc đang bàn giao trong năm 2026 – lựa chọn an toàn nhất cho người cần ở hoặc cho thuê ngay.</p>
 <table>
 <thead><tr><th>Dự án</th><th>Khu vực</th><th>Tình trạng</th></tr></thead>
 <tbody>
-<tr><td>{$d('sun-ponte-residence','Sun Ponte Residence')}</td><td>Trần Hưng Đạo, ven sông Hàn</td><td>Bắt đầu bàn giao từ tháng 3/2026, đã có căn khai thác cho thuê (theo báo chí)</td></tr>
-<tr><td>{$d('sun-symphony-residence','Sun Symphony Residence')}</td><td>Ven sông Hàn, Sơn Trà</td><td>Các tòa S1 – S3 bàn giao từ tháng 5/2026 (theo báo chí)</td></tr>
+<tr><td>{$d('sun-ponte-residence','Sun Ponte Residence')}</td><td>Trần Hưng Đạo, ven sông Hàn</td><td><strong>Đang bàn giao</strong> – bắt đầu từ tháng 3/2026, đã có căn khai thác cho thuê</td></tr>
+<tr><td>{$d('sun-symphony-residence','Sun Symphony Residence')}</td><td>Ven sông Hàn, Sơn Trà</td><td><strong>Đang bàn giao</strong> căn hộ các tòa S1 – S3, bắt đầu từ tháng 5/2026</td></tr>
 <tr><td>{$d('sun-cosmo-residence','Sun Cosmo Residence')}</td><td>Trần Thị Lý, Ngũ Hành Sơn</td><td>Tòa The Panoma đã bàn giao, đang cấp sổ (theo báo chí)</td></tr>
 <tr><td>{$d('fpt-plaza-3','FPT Plaza 3')}</td><td>FPT City, Ngũ Hành Sơn</td><td>Đã bàn giao từ 17/4/2026, đã có sổ hồng</td></tr>
 <tr><td>{$d('vista-residence-da-nang','Vista Residence')}</td><td>Xô Viết Nghệ Tĩnh, Hải Châu</td><td>Bàn giao từ tháng 8/2026</td></tr>
@@ -1444,7 +1444,7 @@ HTML
 <li>{$d('newtown-diamond-da-nang','Newtown Diamond')} (Trường Sa – Nam Kỳ Khởi Nghĩa): tòa The Ruby cất nóc khoảng tháng 4/2026, đang hoàn thiện – <strong>chưa bàn giao</strong>, chủ đầu tư chưa công bố mốc nhận nhà mới.</li>
 <li>{$d('vinhomes-hai-van-bay','Vinhomes Hải Vân Bay')} (chân đèo Hải Vân): đang thi công các phân khu – <strong>chưa bàn giao</strong>; lịch nhận nhà theo thông báo từng phân khu của chủ đầu tư.</li>
 </ul>
-<p>Với hai dự án này, nên theo dõi thông báo bàn giao chính thức của chủ đầu tư thay vì mốc trên tin rao.</p>
+<p>Hai dự án này chưa xếp vào nhóm căn hộ Đà Nẵng sắp bàn giao; nên theo dõi thông báo bàn giao chính thức của chủ đầu tư thay vì mốc trên tin rao.</p>
 <h2>5. Chọn căn hộ Đà Nẵng sắp bàn giao thế nào cho đúng?</h2>
 <ul>
 <li><strong>Xem mốc trong hợp đồng, không chỉ mốc quảng cáo:</strong> hợp đồng mua bán ghi thời hạn bàn giao và mức phạt chậm – đây mới là căn cứ.</li>
@@ -1463,12 +1463,12 @@ HTML
 			'seo_title' => 'Căn hộ Đà Nẵng sắp bàn giao 2026 – 2027: 20+ dự án',
 			'desc'      => 'Căn hộ Đà Nẵng sắp bàn giao và đã bàn giao 2026 – 2027: Sun Ponte, Sun Symphony, Masteri, Capital Square 2, Nobu, Sun Solar, Spana, Cora – mốc nhận nhà.',
 			'points'    => array(
-				'Đã bàn giao 2026: Sun Ponte (từ 3/2026), Sun Symphony S1 – S3 (từ 5/2026), FPT Plaza 3, Vista, Sun Cosmo The Panoma',
+				'Đang bàn giao: Sun Ponte (từ 3/2026), Sun Symphony S1 – S3 (từ 5/2026); đã bàn giao 2026: FPT Plaza 3, Vista, Sun Cosmo The Panoma',
 				'Cuối 2026: Masteri Rivera, MIA Center Point; Newtown Diamond, Vinhomes Hải Vân Bay chưa bàn giao, chưa có lịch chính thức',
 				'2027: Capital Square 2, Peninsula, Nobu, Sun Solar, Hiyori Aqua, The Poet, Spana, Cora, The Meridian, FPT Plaza 4',
 			),
 			'faq'       => array(
-				array( 'Căn hộ Đà Nẵng nào đã bàn giao năm 2026?', 'Sun Ponte (từ 3/2026), Sun Symphony S1 – S3 (từ 5/2026), FPT Plaza 3 (từ 17/4/2026), Vista Residence, Sun Cosmo tòa The Panoma, The Filmore.' ),
+				array( 'Căn hộ Đà Nẵng nào đã và đang bàn giao năm 2026?', 'Đang bàn giao: Sun Ponte (từ 3/2026), Sun Symphony S1 – S3 (từ 5/2026). Đã bàn giao: FPT Plaza 3 (từ 17/4/2026), Vista Residence, Sun Cosmo tòa The Panoma, The Filmore.' ),
 				array( 'Dự án nào bàn giao năm 2027?', 'Capital Square 2 (quý I), Peninsula Đà Nẵng (từ 30/3), Sun Solar (nhận sớm 28/4), Hiyori Aqua và The Poet (quý II), Spana (30/6), Cora (30/7), The Meridian, FPT Plaza 4, Wyndham Soleil A1 (quý IV), Nobu (trong năm 2027).' ),
 				array( 'Mua căn sắp bàn giao cần lưu ý gì?', 'Đọc mốc bàn giao và mức phạt chậm trong hợp đồng, kiểm tra pháp lý – thế chấp, chuẩn bị tiền đợt cuối và phí bảo trì 2%, đi xem căn thực tế.' ),
 				array( 'Mốc bàn giao có thay đổi không?', 'Có thể. Các mốc trong bài là dự kiến theo tài liệu chủ đầu tư và báo chí đến 19/11/2026; nên đối chiếu thông báo mới nhất trước khi giao dịch.' ),
