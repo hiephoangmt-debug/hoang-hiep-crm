@@ -121,9 +121,17 @@
 | 18/11/2026 | Casamia (blogId 8074284) | 21:00 | Sự kiện khách hàng Casamia Balanca – Sound of Balance 25/04/2026 (album 4 ảnh sự kiện) | /du-an/casamia-balanca-hoi-an/ |
 | 18/11/2026 | TikTok (@hiephoangmt, brand Sun) | 21:15 | Casamia Balanca cần xem gì – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
 | CHỜ | Hoàng Hiệp | 19/11 | (bài web 18/11 14:00) Vay mua Capital Square trả góp hằng tháng | vay-mua-capital-square-da-nang-tra-gop-hang-thang (chờ) |
-| CHỜ | Sun | 19/11 | (bài web 18/11 09:00) Chủ đầu tư Sun Saphia Residence là ai | chu-dau-tu-sun-saphia-residence-la-ai (chờ) |
-| CHỜ | Sun | 20/11 | (bài web 18/11 11:30) Bán lại Sun Saphia Residence sau khi có sổ | ban-lai-sun-saphia-residence-sau-khi-co-so (chờ) |
 | CHỜ | Sun | 20/11 | (bài web 18/11 16:30) Căn hộ cho người nghỉ hưu – Sun Saphia | can-ho-cho-nguoi-nghi-huu-sun-saphia (chờ) |
 | CHỜ | Sun | 21/11 | (bài web 18/11 18:30) Ăn uống quanh Sun Saphia Residence | an-uong-quanh-sun-saphia-residence (chờ) |
 | 18/11/2026 | (ghi chú) | 07:18 | Bài web bai-do-xe-ngam-bach-dang-da-nang đã có bài FB Hoàng Hiệp 16:30 do lịch hạ tầng hẹn sẵn – không làm trùng | /bai-do-xe-ngam-bach-dang-da-nang/ |
 | 18/11/2026 | (ghi chú) | 15:38 | Gỡ bài Casamia compound đăng nhầm trang Hoàng Hiệp 16:30 (chuyển bản nháp Metricool, theo anh Hiệp) | /biet-thu-compound-hoi-an-casamia-balanca/ |
+| 19/11/2026 | Sun | 09:00 | (bài web 18/11, hết CHỜ) Chủ đầu tư Sun Saphia Residence là ai (1 ảnh nền xanh) | /chu-dau-tu-sun-saphia-residence-la-ai/ |
+| 19/11/2026 | TikTok (@hiephoangmt, brand Sun) | 09:15 | Chủ đầu tư Sun Saphia – BỘ 3 ẢNH | /chu-dau-tu-sun-saphia-residence-la-ai/ |
+| 19/11/2026 | Casamia (blogId 8074284) | 09:30 | Dòng tiền biệt thự Casamia Balanca 5–10 năm theo CSBH 9/9/2026 (1 ảnh nền xanh) | /dau-tu-biet-thu-casamia-balanca-bai-toan-dong-tien/ |
+| 19/11/2026 | TikTok (@hiephoangmt, brand Sun) | 09:45 | Dòng tiền Casamia Balanca – BỘ 3 ẢNH | /dau-tu-biet-thu-casamia-balanca-bai-toan-dong-tien/ |
+| 19/11/2026 | Sun | 19:00 | (bài web mới 11:30) Sun Saphia Residence có phải condotel (1 ảnh nền xanh); bình luận kèm bài bán lại sau khi có sổ | /sun-saphia-residence-co-phai-condotel/ /ban-lai-sun-saphia-residence-sau-khi-co-so/ |
+| 19/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:15 | Sun Saphia có phải condotel – BỘ 3 ẢNH | /sun-saphia-residence-co-phai-condotel/ |
+| 19/11/2026 | Casamia (blogId 8074284) | 19:30 | Hỏi đáp nhanh Casamia Balanca – 5 câu (album 4 ảnh) | /du-an/casamia-balanca-hoi-an/ |
+| 19/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | Hỏi đáp Casamia Balanca – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
+| CHỜ | Sun | 20/11 | (bài web 19/11 16:30) Studio hay 1PN Sun Saphia Residence | studio-hay-1pn-sun-saphia-residence (chờ) |
+| CHỜ | Sun | 21/11 | (bài web 19/11 18:30) Sun Saphia Residence đi Bà Nà Hills | sun-saphia-residence-di-ba-na-hills (chờ) |
