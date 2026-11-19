@@ -1,0 +1,383 @@
+<title>Kịch bản Live Sun Saphia</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap">
+<style>
+/* Bố cục: một cột kịch bản đọc to, thanh mục lục dính trên cùng, mỗi phần = thời lượng + ảnh chiếu + lời thoại 2 người */
+:root{
+  --bg:#F6F9FB; --paper:#FFFFFF; --ink:#0B2236; --muted:#5A6B7A; --line:#DCE6EE;
+  --sea:#0E6E99; --sea-soft:#E3F2F8; --sun:#E2601A; --sun-soft:#FDEEE4;
+  --han:#7A3E9D; --han-soft:#F3EAF8; --hau:#0E6E99; --hau-soft:#E3F2F8;
+  --ok:#1F7A4D; --ok-soft:#E5F4EC; --warn:#A33A2A; --warn-soft:#FBE9E6;
+  --f-display:"Playfair Display",Georgia,serif; --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --fs:17px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A1620; --paper:#102231; --ink:#E7EEF4; --muted:#9DB0BF; --line:#22394B;
+  --sea:#5FB8DE; --sea-soft:#14334A; --sun:#F2894A; --sun-soft:#3A2416;
+  --han:#C99BE6; --han-soft:#2C1D38; --hau:#5FB8DE; --hau-soft:#14334A;
+  --ok:#6FCB9A; --ok-soft:#14301F; --warn:#F09A8A; --warn-soft:#3A1C17; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1620; --paper:#102231; --ink:#E7EEF4; --muted:#9DB0BF; --line:#22394B;
+  --sea:#5FB8DE; --sea-soft:#14334A; --sun:#F2894A; --sun-soft:#3A2416;
+  --han:#C99BE6; --han-soft:#2C1D38; --hau:#5FB8DE; --hau-soft:#14334A;
+  --ok:#6FCB9A; --ok-soft:#14301F; --warn:#F09A8A; --warn-soft:#3A1C17; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:var(--fs);line-height:1.65}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+.wrap{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2{font-family:var(--f-display);font-weight:600;text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(28px,5vw,42px)} h2{font-size:clamp(23px,3.6vw,30px)}
+h3{font-size:1.02em;margin:0;text-wrap:balance}
+p{margin:0}
+.eyebrow{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--sun)}
+header.top{background:var(--paper);border-bottom:1px solid var(--line)}
+header.top .wrap{padding-block:28px 22px;display:grid;gap:14px}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;font-size:13.5px;font-weight:600;background:var(--sea-soft);color:var(--sea)}
+.chip.han{background:var(--han-soft);color:var(--han)} .chip.hau{background:var(--hau-soft);color:var(--hau)} .chip.sun{background:var(--sun-soft);color:var(--sun)}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.role{border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.role b{display:block;margin-bottom:2px}
+.role.han b{color:var(--han)} .role.hau b{color:var(--hau)}
+.role p{font-size:14.5px;color:var(--muted)}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:8px;scrollbar-width:thin;align-items:center}
+nav.toc a{flex:none;text-decoration:none;color:var(--ink);font-size:13.5px;font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+nav.toc a:hover,nav.toc a:focus-visible{border-color:var(--sea);color:var(--sea);outline:none}
+nav.toc .fs{margin-left:auto;display:flex;gap:4px;flex:none}
+nav.toc button{font:inherit;font-size:13px;font-weight:700;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:5px 10px;cursor:pointer}
+nav.toc button:focus-visible{outline:2px solid var(--sea)}
+main .wrap{display:grid;gap:22px;padding-block:24px 60px}
+section.part{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px clamp(16px,3vw,28px);display:grid;gap:16px;scroll-margin-top:64px}
+.part-head{display:grid;gap:6px}
+.part-head .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.time{font-variant-numeric:tabular-nums;font-weight:700;color:var(--sun);font-size:14px}
+.goal{color:var(--muted);font-size:.95em}
+.screen{display:grid;gap:10px}
+.screen-label{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--sea)}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+figure{margin:0;border-radius:12px;overflow:hidden;background:var(--sea-soft);border:1px solid var(--line);min-width:0}
+figure img{display:block;width:100%;height:auto;max-width:100%}
+figcaption{padding:8px 11px;font-size:13.5px;line-height:1.45;color:var(--muted)}
+figcaption b{color:var(--ink)}
+figure.wide{grid-column:1/-1}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:6px;background:var(--sun-soft);color:var(--sun);margin-left:4px;vertical-align:1px}
+.tag.real{background:var(--ok-soft);color:var(--ok)}
+.script{display:grid;gap:10px}
+.line{display:grid;grid-template-columns:62px 1fr;gap:10px;align-items:start}
+.who{font-weight:700;font-size:13px;text-align:center;padding:4px 0;border-radius:8px;margin-top:3px}
+.line.han .who{background:var(--han-soft);color:var(--han)} .line.hau .who{background:var(--hau-soft);color:var(--hau)}
+.line.both .who{background:var(--sun-soft);color:var(--sun)}
+.line p{min-width:0}
+.cue{font-size:.86em;color:var(--sea);font-weight:600}
+.box{border-radius:12px;padding:12px 14px;display:grid;gap:6px}
+.box h3{font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+.box ul{margin:0;padding-left:20px;display:grid;gap:3px}
+.facts{background:var(--sea-soft)} .facts h3{color:var(--sea)}
+.ask{background:var(--sun-soft)} .ask h3{color:var(--sun)}
+.dont{background:var(--warn-soft)} .dont h3{color:var(--warn)}
+.prep{background:var(--ok-soft)} .prep h3{color:var(--ok)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.92em}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--sea-soft);color:var(--sea);font-size:13px;letter-spacing:.04em}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.qa{display:grid;gap:10px}
+.qa details{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--paper)}
+.qa summary{cursor:pointer;font-weight:700}
+.qa details p{margin-top:8px}
+.note{font-size:13px;color:var(--muted)}
+.timeline{display:flex;border-radius:10px;overflow:hidden;border:1px solid var(--line);font-size:12px;font-weight:700}
+.timeline span{padding:6px 4px;text-align:center;background:var(--sea-soft);color:var(--sea);border-right:1px solid var(--line);min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.timeline span:nth-child(even){background:var(--sun-soft);color:var(--sun)}
+.timeline span:last-child{border-right:0}
+@media (max-width:560px){.roles{grid-template-columns:1fr}.line{grid-template-columns:52px 1fr}.timeline{display:none}}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<header class="top"><div class="wrap">
+  <span class="eyebrow">Kịch bản livestream · Sun Saphia Residence</span>
+  <h1>Giải mã sức hút căn hộ ven biển</h1>
+  <div class="meta">
+    <span class="chip">⏱ Khoảng 60 phút</span>
+    <span class="chip">7 phần + mở đầu, kết</span>
+    <span class="chip sun">Ảnh chiếu kèm từng phần</span>
+  </div>
+  <div class="roles">
+    <div class="role han"><b>Hạnh · dẫn dắt</b><p>Mở đầu, đặt câu hỏi thay khách, đọc bình luận, giữ nhịp thời gian, kêu gọi tương tác.</p></div>
+    <div class="role hau"><b>Hậu · chuyên gia</b><p>Phân tích vị trí, mặt bằng, số liệu; trả lời câu hỏi chuyên sâu; chỉ ảnh trên màn hình.</p></div>
+  </div>
+  <div class="timeline" aria-hidden="true">
+    <span style="flex:3">Mở</span><span style="flex:7">1 Sức hút</span><span style="flex:8">2 Vị trí</span><span style="flex:8">3 Sống</span><span style="flex:8">4 Thực tế</span><span style="flex:9">5 Mặt bằng</span><span style="flex:7">6 Phong cách</span><span style="flex:6">7 Chọn căn</span><span style="flex:4">Kết</span>
+  </div>
+</div></header>
+
+<nav class="toc" aria-label="Mục lục"><div class="wrap">
+  <a href="#chuan-bi">Chuẩn bị</a><a href="#mo-dau">Mở đầu</a><a href="#p1">1 Sức hút</a><a href="#p2">2 Vị trí</a><a href="#p3">3 Chất lượng sống</a><a href="#p4">4 Ngoài phối cảnh</a><a href="#p5">5 Mặt bằng</a><a href="#p6">6 Phong cách sống</a><a href="#p7">7 Chọn căn</a><a href="#ket">Kết</a><a href="#hoi-dap">Hỏi đáp</a>
+  <span class="fs"><button type="button" id="fsDown" aria-label="Thu nhỏ chữ">A−</button><button type="button" id="fsUp" aria-label="Phóng to chữ">A+</button></span>
+</div></nav>
+
+<main><div class="wrap">
+
+<section class="part" id="chuan-bi">
+  <div class="part-head"><span class="eyebrow">Trước giờ lên sóng</span><h2>Chuẩn bị</h2></div>
+  <div class="box prep"><h3>Việc cần làm</h3><ul>
+    <li>Mở sẵn trang này trên điện thoại/máy tính bảng của Hạnh và Hậu; ảnh chiếu mở trên máy chia sẻ màn hình theo đúng thứ tự từng phần.</li>
+    <li>Mở sẵn web <b>sun-saphia-residence.com</b> (mục Tầm view, Mặt bằng, xem 360°) để chiếu khi khách hỏi thêm.</li>
+    <li>Ghim bình luận: <i>"Gõ GIÁ để nhận bảng giá tham khảo · Gõ MB để nhận mặt bằng căn"</i>.</li>
+    <li>Một người phụ trách trả lời tin nhắn, xin số điện thoại khách bình luận GIÁ/MB trong lúc live.</li>
+    <li>Thống nhất: mọi con số chỉ lấy từ kịch bản này. Gặp câu không chắc: ghi lại, hẹn trả lời sau buổi live.</li>
+  </ul></div>
+  <div class="box dont"><h3>Không nói trên live</h3><ul>
+    <li>Không cam kết lợi nhuận, không hứa tăng giá.</li>
+    <li>Không nói giá là giá chính thức. Luôn kèm câu "giá tham khảo, chưa VAT, chính thức khi chủ đầu tư công bố".</li>
+    <li>Không nói tiện ích miễn phí. Tiện ích nội khu có phí, tùy đơn vị vận hành.</li>
+    <li>Không nói đường sắt đô thị "chắc chắn có". Dự án này mới ở bước đề xuất.</li>
+    <li>Không chê dự án khác bằng tên.</li>
+  </ul></div>
+</section>
+
+<section class="part" id="mo-dau">
+  <div class="part-head"><div class="row"><span class="eyebrow">Mở đầu</span><span class="time">0:00 – 3:00</span></div>
+    <h2>Chào khán giả, giới thiệu chủ đề</h2>
+    <p class="goal">Mục tiêu: giữ người xem ở lại, xin tương tác ngay phút đầu.</p></div>
+  <div class="screen"><span class="screen-label">Màn hình</span>
+    <div class="shots"><figure class="wide"><img src="img/phoi-canh-binh-minh.webp" alt="Phối cảnh tòa Sun Saphia Residence bên bờ biển lúc bình minh" width="1164" height="644"><figcaption><b>Sun Saphia Residence bên biển Sơn Thủy</b> <span class="tag">Ảnh minh họa</span></figcaption></figure></div></div>
+  <div class="script">
+    <div class="line han"><span class="who">Hạnh</span><p>Xin chào cả nhà đang xem live! Hôm nay mình nói về một chủ đề ai mê biển cũng sẽ thích: <b>Giải mã sức hút căn hộ ven biển</b>. Vì sao căn hộ nhìn ra biển lúc nào cũng được săn đón, và chọn thế nào cho đúng.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Chào cả nhà, mình là Hậu. Hôm nay mình sẽ cùng Hạnh mổ xẻ một dự án cụ thể là <b>Sun Saphia Residence</b> của Sun Group, ngay mặt tiền đường biển Võ Nguyên Giáp – Trường Sa, Đà Nẵng. Có ảnh, có mặt bằng, có số liệu thật để cả nhà dễ hình dung.</p></div>
+    <div class="line han"><span class="who">Hạnh</span><p>Cả nhà đang xem từ đâu, gõ tên tỉnh thành lên bình luận giúp Hạnh nhé. Ai ở Đà Nẵng gõ "ĐN", ở Hà Nội gõ "HN". Cuối buổi có phần hỏi đáp, cứ để câu hỏi bên dưới.</p></div>
+  </div>
+</section>
+
+<section class="part" id="p1">
+  <div class="part-head"><div class="row"><span class="eyebrow">Phần 1</span><span class="time">3:00 – 10:00</span></div>
+    <h2>Vì sao căn hộ mặt biển luôn có sức hút?</h2>
+    <p class="goal">Mục tiêu: tạo cảm xúc về biển Đà Nẵng, rồi đưa ra câu hỏi "yếu tố nào quan trọng nhất".</p></div>
+  <div class="screen"><span class="screen-label">Màn hình</span>
+    <div class="shots">
+      <figure><img src="img/bien-thuc-te.webp" alt="Bãi biển Đà Nẵng đông người tắm buổi chiều, xa xa là bán đảo Sơn Trà" width="1200" height="676" loading="lazy"><figcaption><b>Biển Đà Nẵng mỗi chiều</b> <span class="tag real">Ảnh thực tế</span></figcaption></figure>
+      <figure><img src="img/gia-phong.webp" alt="Biểu đồ giá phòng khách sạn 3, 4, 5 sao gần biển Sơn Trà – Ngũ Hành Sơn theo mùa" width="1080" height="1350" loading="lazy"><figcaption><b>Giá phòng khách sạn gần biển theo mùa</b>: nhu cầu lưu trú ven biển</figcaption></figure>
+    </div></div>
+  <div class="script">
+    <div class="line han"><span class="who">Hạnh</span><p>Hậu ơi, nhiều người bảo "mua nhà gần biển là mua cảm xúc". Có đúng vậy không?</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Đúng một nửa thôi Hạnh. Cảm xúc thì có thật: mở cửa là gió biển, sáng đi bộ ra bãi tắm, chiều ngắm hoàng hôn. Nhưng nửa còn lại là <b>con số</b>. Đà Nẵng 8 tháng đầu năm 2026 đón khoảng <b>6,88 triệu lượt khách quốc tế, tăng 26,3%</b>; mỗi năm có thêm 15–16 nghìn người nhập cư; sau sáp nhập Quảng Nam, quy mô dân số khoảng 3 triệu.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p><span class="cue">[Chỉ biểu đồ giá phòng]</span> Khách đến đông thì cần chỗ ở gần biển. Cả nhà nhìn biểu đồ: giá phòng khách sạn gần biển lên rõ rệt vào mùa cao điểm. Trong khi đó, đất mặt biển thì không sinh thêm được. <b>Cầu tăng, cung có hạn</b>, đó là gốc của sức hút.</p></div>
+    <div class="line han"><span class="who">Hạnh</span><p>Vậy sở hữu căn hộ biển khác gì căn hộ trong phố?</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Mình tóm 3 điểm. Một, <b>trải nghiệm sống</b>: không khí, khoảng xanh, biển ngay trước nhà. Hai, <b>dùng được nhiều cách</b>: để ở, làm ngôi nhà thứ hai, hoặc cho thuê khi không dùng. Ba, <b>khan hiếm</b>: dải mặt biển đẹp chỉ có một, ai đến trước thì chọn trước.</p></div>
+    <div class="line han"><span class="who">Hạnh</span><p>Câu hỏi cho cả nhà: khi chọn căn hộ, mọi người ưu tiên gì nhất? Gõ <b>1</b> vị trí, <b>2</b> không gian, <b>3</b> tiện ích, <b>4</b> trải nghiệm sống.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p><span class="cue">[Đọc vài bình luận]</span> Theo mình, <b>vị trí là thứ duy nhất không sửa được</b>. Nội thất thay được, tiện ích nâng cấp được, còn vị trí thì mua là gắn liền. Nên phần tiếp theo mình nói kỹ về vị trí.</p></div>
+  </div>
+  <div class="box facts"><h3>Số liệu chốt</h3><ul>
+    <li>6,88 triệu lượt khách quốc tế 8 tháng đầu 2026 (+26,3%)</li>
+    <li>15–16 nghìn người nhập cư mỗi năm; dân số khoảng 3 triệu sau sáp nhập</li>
+  </ul></div>
+  <div class="box ask"><h3>Tương tác</h3><ul><li>"Gõ 1–2–3–4: vị trí, không gian, tiện ích hay trải nghiệm sống?"</li></ul></div>
+</section>
+
+<section class="part" id="p2">
+  <div class="part-head"><div class="row"><span class="eyebrow">Phần 2</span><span class="time">10:00 – 18:00</span></div>
+    <h2>Vị trí đắt giá, không chỉ là khoảng cách đến biển</h2>
+    <p class="goal">Mục tiêu: khách nhớ được 3 ý: mặt tiền trục biển, hơn 300 m ra biển, hạ tầng đang đến.</p></div>
+  <div class="screen"><span class="screen-label">Màn hình</span>
+    <div class="shots">
+      <figure class="wide"><img src="img/ngoai-khu.webp" alt="Infographic hệ sinh thái ngoại khu Sun Saphia: biển, dải resort, Ngũ Hành Sơn, Sơn Trà, cầu Rồng, sân bay, Hội An" width="1600" height="1067" loading="lazy"><figcaption><b>Hệ sinh thái ngoại khu</b>: khoảng cách đo theo đường chim bay</figcaption></figure>
+      <figure><img src="img/ba-duong.webp" alt="Ảnh vệ tinh 3 con đường đi bộ từ Sun Saphia xuống biển Mỹ Khê – Sơn Thủy" width="1200" height="589" loading="lazy"><figcaption><b>3 đường xuống biển</b> từ dự án</figcaption></figure>
+      <figure><img src="img/quang-truong.webp" alt="Phối cảnh quảng trường biển trong công viên công cộng trước dự án" width="946" height="323" loading="lazy"><figcaption><b>Công viên 2,45 ha trước dự án</b> <span class="tag">Ảnh minh họa</span></figcaption></figure>
+    </div></div>
+  <div class="script">
+    <div class="line han"><span class="who">Hạnh</span><p>Hậu chỉ giúp cả nhà Sun Saphia nằm chính xác ở đâu?</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p><span class="cue">[Chỉ infographic]</span> Dự án nằm ở góc <b>Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận</b>, mặt tiền trục đường biển đẹp nhất Đà Nẵng, con đường nối trung tâm thành phố với Hội An. Ra biển Sơn Thủy – Mỹ Khê chỉ <b>hơn 300 m</b>, băng qua công viên là tới.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Xung quanh là dải resort ven biển như Furama, Hyatt, Sheraton. Từ sân bay chạy khoảng <b>15–20 phút</b>; cầu Rồng khoảng <b>15 phút</b>; Ngũ Hành Sơn khoảng <b>5 phút</b>; phố cổ Hội An khoảng <b>30 phút</b> theo đường biển. Trước mặt là biển, nhìn ngang là núi Ngũ Hành Sơn.</p></div>
+    <div class="line han"><span class="who">Hạnh</span><p>Nhiều khách lo sau này trước mặt mọc tòa nhà khác, chắn mất view biển?</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p><span class="cue">[Chỉ ảnh công viên]</span> Câu này hay. Khu đất ngay trước dự án được thành phố thu hồi khoảng <b>2,45 ha</b> làm <b>công viên công cộng</b>, đã có Quyết định 2958/QĐ-UBND, vốn ngân sách hơn 47 tỷ đồng, thực hiện 2025–2027. Có quảng trường biển, thảm cỏ, khu vui chơi thiếu nhi, bãi đỗ xe. Nên khoảng trước mặt là không gian xanh, không phải tòa cao tầng.</p></div>
+    <div class="line han"><span class="who">Hạnh</span><p>Ngoài công viên còn gì đang làm nữa không Hậu?</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Có 3 dự án hạ tầng mình nói rõ mức độ chắc chắn. <b>Mở rộng trục biển</b> Võ Nguyên Giáp – Trường Sa – Lạc Long Quân, vốn dự kiến khoảng 2.633 tỷ, thành phố xếp nhóm ưu tiên. <b>Công viên văn hóa lịch sử Ngũ Hành Sơn</b> khoảng 92 ha, đang giải phóng mặt bằng. Còn <b>đường sắt đô thị</b> sân bay – Hội An có ga dự kiến cách dự án khoảng 500 m, nhưng mới ở bước nhà đầu tư đề xuất. Mình coi đó là điểm cộng tương lai, chưa phải điều chắc chắn.</p></div>
+  </div>
+  <div class="box facts"><h3>Số liệu chốt</h3><ul>
+    <li>Ra biển hơn 300 m · sân bay 15–20 phút (khoảng 8 km) · cầu Rồng khoảng 15 phút (khoảng 6 km)</li>
+    <li>Ngũ Hành Sơn khoảng 3 km · Hội An khoảng 25 km (khoảng 30 phút)</li>
+    <li>Công viên 2,45 ha: QĐ 2958/QĐ-UBND, hơn 47 tỷ đồng, 2025–2027</li>
+    <li>Mở rộng trục biển: khoảng 2.633 tỷ đồng (nhóm ưu tiên)</li>
+  </ul></div>
+  <div class="box ask"><h3>Tương tác</h3><ul><li>"Ai đã từng tắm biển Mỹ Khê – Sơn Thủy rồi, thả tim cho Hạnh xem nào!"</li></ul></div>
+</section>
+
+<section class="part" id="p3">
+  <div class="part-head"><div class="row"><span class="eyebrow">Phần 3</span><span class="time">18:00 – 26:00</span></div>
+    <h2>Từ vị trí đến chất lượng sống mỗi ngày</h2>
+    <p class="goal">Mục tiêu: chuyển từ "ở đâu" sang "sống thế nào": đi lại, tiện ích, một ngày ở Saphia.</p></div>
+  <div class="screen"><span class="screen-label">Màn hình</span>
+    <div class="shots">
+      <figure class="wide"><img src="img/noi-khu.webp" alt="Infographic hệ sinh thái nội khu Sun Saphia theo từng tầng: penthouse, căn hộ, hồ bơi, Gym Yoga, shophouse" width="1600" height="1067" loading="lazy"><figcaption><b>Hệ sinh thái nội khu theo tầng</b></figcaption></figure>
+      <figure><img src="img/ho-boi.webp" alt="Phối cảnh bể bơi trong tòa nhà nhìn ra biển" width="1200" height="675" loading="lazy"><figcaption><b>Bể bơi view biển, dài 27 m</b> <span class="tag">Ảnh minh họa</span></figcaption></figure>
+      <figure><img src="img/khoi-de.webp" alt="Phối cảnh khối đế shophouse với hàng dừa và vỉa hè" width="1024" height="576" loading="lazy"><figcaption><b>Shop khối đế tầng 1, cao 7 m</b> <span class="tag">Ảnh minh họa</span></figcaption></figure>
+    </div></div>
+  <div class="script">
+    <div class="line han"><span class="who">Hạnh</span><p>Vị trí đẹp rồi, nhưng sống hằng ngày thì sao? Đi chợ, đi làm, con đi học có tiện không?</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Dự án nằm trên trục chính nên đi đâu cũng thẳng đường: vào trung tâm khoảng 15 phút, cầu Trần Thị Lý và Sun World Asia Park khoảng 4 km, chợ Hàn khoảng 7 km. Đủ gần để vào phố, đủ xa để yên tĩnh.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p><span class="cue">[Chỉ infographic nội khu]</span> Trong tòa: <b>tầng 1</b> là shophouse; <b>tầng 2</b> là tầng tiện ích với Gym, Yoga, Pilates; có <b>bể bơi view biển</b> dài 27 m, rộng 11 m; khu wellness, spa; nhà trẻ. Chủ đầu tư gọi là hệ tiện ích "may đo" nghỉ dưỡng.</p></div>
+    <div class="line han"><span class="who">Hạnh</span><p>Tiện ích này cư dân dùng miễn phí hả Hậu?</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Đây là <b>tiện ích dịch vụ, có phí</b>. Mức phí và cách dùng do đơn vị vận hành quy định khi đưa vào hoạt động. Mô hình này giống resort: có người vận hành, cứu hộ, vệ sinh, huấn luyện viên; ai dùng thì trả, không dùng thì không mất. Còn logia, ban công là sở hữu riêng của từng căn.</p></div>
+    <div class="line han"><span class="who">Hạnh</span><p>Hậu kể thử một ngày ở Saphia xem nào.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Người trẻ: sáng chạy bộ ra biển, chèo SUP đón bình minh, về tắm rồi đi làm. Gia đình: chiều đưa con ra công viên trước nhà, cuối tuần cả nhà xuống bể bơi. Người làm việc từ xa: mở laptop ở logia, nghe gió biển. Biển ở đây phẳng, hợp kayak, SUP, jetski.</p></div>
+  </div>
+  <div class="box facts"><h3>Số liệu chốt</h3><ul>
+    <li>Tầng 1 shophouse cao 7 m · tầng 2 tiện ích cao 5,5 m</li>
+    <li>Bể bơi dài nhất 27 m, rộng nhất 11 m, sâu nhất 1,2 m</li>
+    <li>Tiện ích nội khu có phí, tùy đơn vị vận hành</li>
+  </ul></div>
+  <div class="box ask"><h3>Tương tác</h3><ul><li>"Sáng ở nhà biển, cả nhà muốn làm gì đầu tiên? Chạy bộ, cà phê ở logia hay tắm biển?"</li></ul></div>
+</section>
+
+<section class="part" id="p4">
+  <div class="part-head"><div class="row"><span class="eyebrow">Phần 4</span><span class="time">26:00 – 34:00</span></div>
+    <h2>Những giá trị không thể hiện hết trên phối cảnh</h2>
+    <p class="goal">Mục tiêu: thể hiện mình tư vấn thật: hướng, nắng, gió, view, riêng tư, quy hoạch 4 phía.</p></div>
+  <div class="screen"><span class="screen-label">Màn hình</span>
+    <div class="shots">
+      <figure><img src="img/view-dong.webp" alt="Phòng ngủ hướng Đông nhìn thẳng ra biển" width="1200" height="531" loading="lazy"><figcaption><b>Hướng Đông</b>: nhìn thẳng biển, đón bình minh <span class="tag">Ảnh minh họa</span></figcaption></figure>
+      <figure><img src="img/view-dong-nam.webp" alt="Ban công hướng Đông Nam nhìn biển chạy dài và dải resort" width="1200" height="534" loading="lazy"><figcaption><b>Hướng Đông Nam</b>: biển và dải resort <span class="tag">Ảnh minh họa</span></figcaption></figure>
+      <figure><img src="img/view-thanh-pho.webp" alt="Phòng ngủ Studio tầng 15 nhìn ra thành phố lúc hoàng hôn" width="1200" height="531" loading="lazy"><figcaption><b>Studio tầng 15, hướng thành phố</b>: hoàng hôn <span class="tag">Ảnh minh họa</span></figcaption></figure>
+      <figure><img src="img/mb-tang.webp" alt="Mặt bằng tầng điển hình 3A–28 tòa Saphia, 28 căn mỗi tầng" width="1500" height="1105" loading="lazy"><figcaption><b>Mặt bằng tầng 3A–28</b>: vị trí căn theo hướng</figcaption></figure>
+    </div></div>
+  <div class="script">
+    <div class="line han"><span class="who">Hạnh</span><p>Ảnh phối cảnh dự án nào cũng đẹp. Vậy khách cần xem thêm gì mà ảnh không nói hết?</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Mình hay khuyên khách xem 4 thứ. Thứ nhất là <b>hướng</b>. Tòa Saphia nhìn ra 4 phía: trước mặt là biển Mỹ Khê – Sơn Thủy; một bên là hướng trung tâm thành phố; một bên là hướng Hội An, Ngũ Hành Sơn; phía sau là hướng sân bay, sông Hàn. Căn góc nhìn được 2 hướng.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p><span class="cue">[Chỉ 3 ảnh view]</span> Thứ hai là <b>nắng và gió</b>. Căn hướng Đông đón bình minh trên biển và gió biển, nắng sáng dịu. Căn hướng thành phố thì ngắm hoàng hôn, buổi chiều nên có rèm. Mỗi hướng một cái hay, quan trọng là hợp nhu cầu của mình.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Thứ ba là <b>ánh sáng và độ thoáng</b>. Chiều cao tầng 3,5 m tính từ sàn tới sàn, cửa kính lớn mở ra logia. Lan can thép mạ kẽm, sơn tĩnh điện. Chủ đầu tư đổi từ lan can kính sang thép sau góp ý của cư dân dự án Symphony, để nhà thông thoáng, đón gió biển.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p><span class="cue">[Chỉ mặt bằng tầng]</span> Thứ tư là <b>riêng tư và vị trí căn</b>. Mỗi tầng điển hình 28 căn, 7 thang máy chia 2 sảnh, hành lang rộng 1,6 m. Căn gần sảnh thang thì đi lại nhanh; căn cuối hành lang thì yên tĩnh hơn.</p></div>
+    <div class="line han"><span class="who">Hạnh</span><p>Còn xung quanh tòa nhà sau này xây gì thì sao?</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Theo thông tin chủ đầu tư: phía biển là dự án resort thấp tầng; phía Tây quy hoạch tối đa 7 tầng; phía Nam có quy hoạch 26–30 tầng nhưng không căn nào của Saphia nhìn trực diện mặt đó; phía trước là công viên 2,45 ha chạy thẳng ra biển. Nên view biển được giữ thoáng.</p></div>
+  </div>
+  <div class="box facts"><h3>Số liệu chốt</h3><ul>
+    <li>Chiều cao tầng 3,5 m · hành lang 1,6 m · logia sâu 1 m (thông thủy)</li>
+    <li>28 căn/tầng điển hình · 7 thang máy, 2 sảnh</li>
+  </ul></div>
+  <div class="box ask"><h3>Tương tác</h3><ul><li>"Cả nhà thích ngắm bình minh hay hoàng hôn? Gõ BM hoặc HH!"</li></ul></div>
+</section>
+
+<section class="part" id="p5">
+  <div class="part-head"><div class="row"><span class="eyebrow">Phần 5</span><span class="time">34:00 – 43:00</span></div>
+    <h2>Mặt bằng: hiểu không gian, chọn đúng căn hộ</h2>
+    <p class="goal">Mục tiêu: khách hiểu 3 dòng căn, nhớ kích thước, biết căn nào hợp mình.</p></div>
+  <div class="screen"><span class="screen-label">Màn hình</span>
+    <div class="shots">
+      <figure><img src="img/mb-studio.webp" alt="Mặt bằng căn Studio 3,8 × 9 m: logia, giường, sofa, bếp chữ L, phòng tắm" width="960" height="641" loading="lazy"><figcaption><b>Studio</b> 30–31 m² · 3,8 × 9 m</figcaption></figure>
+      <figure><img src="img/mb-1pn.webp" alt="Mặt bằng căn 1 phòng ngủ + 1, thông thủy khoảng 51 m²" width="1200" height="848" loading="lazy"><figcaption><b>1 phòng ngủ + 1</b> 50–51 m² · khoảng 6,25 × 9,2 m</figcaption></figure>
+      <figure><img src="img/mb-2pn.webp" alt="Mặt bằng căn 2 phòng ngủ góc bo cong, thông thủy 67,69 m²" width="1200" height="848" loading="lazy"><figcaption><b>2 phòng ngủ</b> 60–70 m² · căn góc bo cong</figcaption></figure>
+    </div></div>
+  <div class="script">
+    <div class="line han"><span class="who">Hạnh</span><p>Phần này nhiều khách chờ nhất: mặt bằng. Hậu đi lần lượt từng loại căn giúp Hạnh.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Dự án có <b>782 căn</b>, 3 dòng chính. Đầu tiên là <b>Studio 30–31 m²</b>, chiếm khoảng 2/3 dự án với 513 căn. Căn rộng 3,8 m, sâu 9 m. <span class="cue">[Chỉ mặt bằng Studio]</span> Ngoài cùng là logia dài khoảng 3,5 m, sâu 1 m, có hộc máy giặt riêng. Vào trong là giường và sofa chung một không gian mở, bếp chữ L, phòng tắm tách khu tắm đứng.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Thứ hai là <b>1 phòng ngủ + 1</b>, 50–51 m², có 108 căn. Có 2 kiểu: kiểu thường thì phòng đa năng làm phòng làm việc hoặc kê giường đơn cho con; kiểu lớn thì phòng đa năng kê được giường đôi, thành căn 2 phòng ngủ 1 vệ sinh. Logia chạy gần hết bề ngang căn, khoảng 6 m.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Thứ ba là <b>2 phòng ngủ 60–70 m²</b>, 133 căn, nhiều căn ở góc với logia bo cong, nhìn 2 hướng. Hợp gia đình 3–4 người, có ông bà đi cùng.</p></div>
+    <div class="line han"><span class="who">Hạnh</span><p>Có căn nào đặc biệt không Hậu?</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Có. <b>Tầng 3</b> có căn ban công rất lớn: Studio ban công 53,71 m² và 2 phòng ngủ ban công 84,29 m². <b>Tầng 29</b> có 2 căn sân vườn riêng. <b>Tầng 30</b> chỉ 16 căn lớn, có dòng 1 phòng ngủ 63–74 m² chỉ tầng này có.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Về tối ưu diện tích: căn bàn giao <b>liền tường</b>, đã có điều hòa, bình nóng lạnh, thiết bị vệ sinh, đèn; chưa có tủ bếp, thiết bị bếp. Mình tự hoàn thiện theo mục đích: để ở thì chọn đồ bền, cho thuê thì chọn đồ gọn, dễ thay. Chủ đầu tư có sẵn concept nội thất gợi ý cho từng dòng căn.</p></div>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Dòng căn</th><th>Diện tích thông thủy</th><th>Kích thước</th><th>Số căn</th><th>Điểm nhấn</th></tr></thead>
+    <tbody>
+      <tr><td><b>Studio</b></td><td class="num">30–31 m²</td><td class="num">3,8 × 9 m</td><td class="num">513</td><td>Logia có hộc máy giặt; dễ cho thuê nhất</td></tr>
+      <tr><td><b>1 phòng ngủ + 1</b></td><td class="num">50–51 m²</td><td class="num">≈ 6,25 × 9,2 m</td><td class="num">108</td><td>Có kiểu 2 phòng ngủ 1 vệ sinh; logia khoảng 6 m</td></tr>
+      <tr><td><b>2 phòng ngủ</b></td><td class="num">60–70 m²</td><td class="num">≈ 7,25 × 9,9 m</td><td class="num">133</td><td>Nhiều căn góc bo cong, nhìn 2 hướng</td></tr>
+    </tbody></table></div>
+  <p class="note">Chiều dài logia đo theo tỷ lệ trên bản vẽ chủ đầu tư, sai số khoảng ±5 cm; thông số chính thức theo hợp đồng mua bán.</p>
+  <div class="box ask"><h3>Tương tác</h3><ul><li>"Ai muốn nhận mặt bằng chi tiết từng căn, gõ MB, bạn hỗ trợ gửi ngay!"</li></ul></div>
+</section>
+
+<section class="part" id="p6">
+  <div class="part-head"><div class="row"><span class="eyebrow">Phần 6</span><span class="time">43:00 – 50:00</span></div>
+    <h2>Một căn hộ, nhiều phong cách sống</h2>
+    <p class="goal">Mục tiêu: khách tự nhận ra mình thuộc nhóm nào và căn nào hợp.</p></div>
+  <div class="screen"><span class="screen-label">Màn hình</span>
+    <div class="shots">
+      <figure><img src="img/nt-studio.webp" alt="Concept nội thất căn Studio: góc ngủ và góc làm việc" width="1200" height="684" loading="lazy"><figcaption><b>Studio</b>: người trẻ, cặp đôi <span class="tag">Concept gợi ý</span></figcaption></figure>
+      <figure><img src="img/nt-1pn.webp" alt="Concept nội thất căn 1 phòng ngủ + 1: phòng ngủ chính view phố biển" width="1166" height="666" loading="lazy"><figcaption><b>1 phòng ngủ + 1</b>: vợ chồng trẻ, làm việc tại nhà <span class="tag">Concept gợi ý</span></figcaption></figure>
+      <figure><img src="img/nt-2pn.webp" alt="Concept nội thất căn 2 phòng ngủ: phòng khách và bàn ăn" width="1200" height="623" loading="lazy"><figcaption><b>2 phòng ngủ</b>: gia đình <span class="tag">Concept gợi ý</span></figcaption></figure>
+      <figure><img src="img/ong-ba.webp" alt="Hai ông bà uống trà trên ban công nhìn ra vịnh biển" width="1200" height="675" loading="lazy"><figcaption><b>Ngôi nhà thứ hai</b>: nghỉ dưỡng dài ngày <span class="tag">Ảnh minh họa</span></figcaption></figure>
+    </div></div>
+  <div class="script">
+    <div class="line han"><span class="who">Hạnh</span><p>Mỗi người mua căn hộ biển một lý do. Hậu chia giúp cả nhà theo từng nhóm nhé.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p><b>Người trẻ</b> thường chọn <b>Studio</b>: gọn, hiện đại, giá vào dễ tiếp cận nhất. Ở cũng được, mà đi công tác thì cho thuê theo đêm. Studio là dòng khách du lịch, cặp đôi, khách công tác thuê nhiều nhất.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p><b>Gia đình</b> ưu tiên tiện nghi và kết nối: chọn <b>1 phòng ngủ + 1 kiểu 2 phòng ngủ</b> nếu muốn gọn, hoặc <b>2 phòng ngủ 60–70 m²</b> nếu có ông bà. Dưới nhà có nhà trẻ, bể bơi, trước nhà là công viên và biển.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p><b>Nghỉ dưỡng, ngôi nhà thứ hai</b>: nhiều anh chị ở Hà Nội, TP. Hồ Chí Minh bay ra Đà Nẵng khoảng 1 tiếng 20 phút, xuống máy bay 15–20 phút là tới nhà. Mùa đông ra biển ở vài tuần, thời gian còn lại cho thuê. Saphia <b>không bắt buộc ký gửi</b> cho chủ đầu tư: mình tự cho thuê hoặc thuê đơn vị vận hành bên ngoài.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Để cả nhà tham khảo khi cho thuê, đây là số dự kiến, không phải cam kết: thuê dài hạn theo tháng, Studio khoảng 18 triệu/tháng, 1 phòng ngủ + 1 khoảng 24 triệu, 2 phòng ngủ khoảng 35 triệu. Thuê ngắn hạn theo đêm, Studio view biển khoảng 2,2–2,9 triệu/đêm.</p></div>
+    <div class="line han"><span class="who">Hạnh</span><p>Còn ai mua nhiều căn để đầu tư?</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Chủ đầu tư có bán nguyên sàn và có chiết khấu khi mua nhiều căn. Một sàn điển hình 28 căn, vận hành như một khách sạn nhỏ mặt biển, không phải lo xin phép xây dựng hay giám sát thi công.</p></div>
+  </div>
+  <div class="box facts"><h3>Số liệu chốt (tham khảo, không cam kết)</h3><ul>
+    <li>Thuê tháng: Studio ~18 triệu · 1 phòng ngủ + 1 ~24 triệu · 2 phòng ngủ ~35 triệu</li>
+    <li>Thuê đêm: Studio view biển 2,2–2,9 triệu · 1 phòng ngủ + 1 3,3–3,7 triệu</li>
+    <li>Không bắt buộc ký gửi cho chủ đầu tư</li>
+  </ul></div>
+  <div class="box ask"><h3>Tương tác</h3><ul><li>"Cả nhà mua để ở, nghỉ dưỡng hay cho thuê? Gõ Ở, NGHỈ hoặc THUÊ!"</li></ul></div>
+</section>
+
+<section class="part" id="p7">
+  <div class="part-head"><div class="row"><span class="eyebrow">Phần 7</span><span class="time">50:00 – 56:00</span></div>
+    <h2>Bạn sẽ chọn căn hộ nào tại Sun Saphia Residence?</h2>
+    <p class="goal">Mục tiêu: chốt lại bằng bảng chọn nhanh, mời khách để lại thông tin.</p></div>
+  <div class="screen"><span class="screen-label">Màn hình</span>
+    <div class="shots"><figure class="wide"><img src="img/thap.webp" alt="Phối cảnh tòa Sun Saphia Residence lúc hoàng hôn giữa cây xanh và biển" width="1200" height="675" loading="lazy"><figcaption><b>Sun Saphia Residence</b>: 30 tầng, cao khoảng 114 m <span class="tag">Ảnh minh họa</span></figcaption></figure></div></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Bạn là…</th><th>Gợi ý căn</th><th>Vì sao</th><th>Giá tham khảo từ</th></tr></thead>
+    <tbody>
+      <tr><td>Người trẻ, vốn vừa phải</td><td><b>Studio</b> tầng thấp, trung</td><td>Giá vào dễ nhất, dễ cho thuê</td><td class="num">~1,8 tỷ</td></tr>
+      <tr><td>Muốn view biển đẹp</td><td><b>Studio / 1 phòng ngủ + 1</b> hướng Đông, tầng cao</td><td>Nhìn thẳng biển, đón bình minh</td><td class="num">~2,1 tỷ (Studio tầng 15)</td></tr>
+      <tr><td>Vợ chồng trẻ, làm việc tại nhà</td><td><b>1 phòng ngủ + 1</b></td><td>Có phòng đa năng làm phòng làm việc</td><td class="num">~3 tỷ</td></tr>
+      <tr><td>Gia đình 3–4 người</td><td><b>2 phòng ngủ</b> / 1 phòng ngủ + 1 kiểu 2 phòng ngủ</td><td>Rộng, căn góc nhìn 2 hướng</td><td class="num">~3,8 tỷ</td></tr>
+      <tr><td>Thích không gian ngoài trời</td><td>Căn <b>tầng 3</b> ban công lớn</td><td>Ban công 53,71–84,29 m²</td><td class="num">Hỏi chuyên viên</td></tr>
+      <tr><td>Nhà đầu tư lớn</td><td><b>Nguyên sàn</b> 28 căn</td><td>Vận hành như khách sạn, có chiết khấu</td><td class="num">Hỏi chuyên viên</td></tr>
+    </tbody></table></div>
+  <p class="note">Giá tham khảo, chưa VAT; giá chính thức chủ đầu tư công bố khi mở bán.</p>
+  <div class="script">
+    <div class="line han"><span class="who">Hạnh</span><p>Giờ tới phần vui nhất: cả nhà sẽ chọn căn nào? Gõ <b>1</b> Studio, <b>2</b> 1 phòng ngủ + 1, <b>3</b> 2 phòng ngủ, <b>4</b> căn ban công lớn tầng 3.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p><span class="cue">[Đọc kết quả bình luận]</span> Về tài chính, cả nhà nghe kỹ: theo phương án tham khảo, chỉ cần thanh toán khoảng <b>25% tới lúc nhận nhà</b> dự kiến tháng 11/2028; ngân hàng cho vay 70%, chủ đầu tư hỗ trợ lãi suất lên tới 24 tháng. Studio tầng thấp đóng khoảng 450 triệu là tới lúc nhận nhà. Giá và chính sách chính thức chủ đầu tư công bố khi mở bán.</p></div>
+    <div class="line hau"><span class="who">Hậu</span><p>Pháp lý: dự án có Giấy chứng nhận đăng ký đầu tư, công trình cấp I, niên hạn sử dụng 100 năm; căn hộ được cấp sổ hồng sở hữu thời hạn 50 năm, tính từ 17/09/2026. Chủ đầu tư là Sun Property, thành viên Sun Group.</p></div>
+  </div>
+  <div class="box ask"><h3>Tương tác</h3><ul><li>"Gõ số 1–2–3–4 chọn căn mơ ước!"</li><li>"Gõ GIÁ để nhận bảng giá tham khảo và lịch thanh toán đúng căn."</li></ul></div>
+</section>
+
+<section class="part" id="ket">
+  <div class="part-head"><div class="row"><span class="eyebrow">Kết</span><span class="time">56:00 – 60:00</span></div>
+    <h2>Tóm tắt và kêu gọi</h2></div>
+  <div class="script">
+    <div class="line hau"><span class="who">Hậu</span><p>Tóm lại 3 ý cho cả nhà: <b>một</b>, vị trí mặt tiền trục biển, hơn 300 m ra biển, trước mặt là công viên 2,45 ha; <b>hai</b>, 3 dòng căn từ Studio tới 2 phòng ngủ, ở hay cho thuê đều hợp; <b>ba</b>, thương hiệu Sun Group, vốn ban đầu khoảng 25% tới lúc nhận nhà.</p></div>
+    <div class="line han"><span class="who">Hạnh</span><p>Sắp tới có <b>sự kiện mở bán ngày 05/12</b> tại Đà Nẵng. Ai muốn giữ thư mời, nhận mặt bằng, bảng giá tham khảo hoặc xem view đúng tầng, để lại số điện thoại hoặc nhắn tin trang, team gửi ngay sau live.</p></div>
+    <div class="line both"><span class="who">Cả hai</span><p>Cảm ơn cả nhà đã xem! Hẹn gặp lại ở buổi live sau. Nhớ theo dõi trang để không bỏ lỡ nhé!</p></div>
+  </div>
+  <div class="box prep"><h3>Liên hệ đọc trên live (nếu live trên trang Hoàng Hiệp)</h3><ul><li>Hotline/Zalo: <b>0904 567 009</b> · Web: <b>sun-saphia-residence.com</b></li></ul></div>
+</section>
+
+<section class="part" id="hoi-dap">
+  <div class="part-head"><span class="eyebrow">Dùng khi đọc bình luận</span><h2>Hỏi đáp nhanh trên live</h2><p class="goal">Bấm vào câu hỏi để xem câu trả lời mẫu.</p></div>
+  <div class="qa">
+    <details><summary>Giá bao nhiêu?</summary><p>Giá tham khảo hiện tại: Studio từ khoảng 1,8 tỷ, 1 phòng ngủ + 1 từ khoảng 3 tỷ, 2 phòng ngủ từ khoảng 3,8 tỷ, chưa VAT. Giá chính thức chủ đầu tư công bố khi mở bán. Anh/Chị để lại số điện thoại, bạn gửi bảng giá đúng căn mình quan tâm.</p></details>
+    <details><summary>Sổ 50 năm, hết hạn thì sao?</summary><p>Căn hộ được cấp sổ hồng sở hữu 50 năm, tính từ 17/09/2026, nên đồng hồ vừa mới bắt đầu. Công trình cấp I, niên hạn 100 năm. Phần quyền lợi khi hết thời hạn, bạn gửi văn bản giải thích kỹ sau live để Anh/Chị xem tận mắt.</p></details>
+    <details><summary>Tiện ích có miễn phí không?</summary><p>Tiện ích nội khu như bể bơi, Gym, Yoga, spa là tiện ích dịch vụ có phí; mức phí và cách dùng tùy đơn vị vận hành quy định khi đưa vào hoạt động. Logia, ban công, sân vườn là sở hữu riêng từng căn. Biển và công viên công cộng thì ai cũng dùng.</p></details>
+    <details><summary>Phí quản lý bao nhiêu?</summary><p>Dự kiến 15.000–20.000 đồng/m²/tháng, Studio 30 m² khoảng 450–600 nghìn/tháng. Mức áp dụng cho Saphia theo chính sách khi mở bán.</p></details>
+    <details><summary>Khi nào bàn giao? Bàn giao những gì?</summary><p>Dự kiến tháng 11/2028, bàn giao liền tường: trần, tường, sàn hoàn thiện; điều hòa, bình nóng lạnh, thiết bị vệ sinh, đèn, cửa, khóa. Chưa gồm tủ bếp, thiết bị bếp, máy hút mùi. Mốc chính xác ghi trong hợp đồng mua bán.</p></details>
+    <details><summary>Khu đó còn vắng không?</summary><p>Đây là khu đang phát triển; Sun Group thường đi trước ở khu vực mới rồi kéo dịch vụ tới. Bù lại, Saphia yên tĩnh, riêng tư, ngay bãi Sơn Thủy mà người Đà Nẵng xem là bãi tắm đẹp nhất, và đang có công viên, mở rộng trục biển làm quanh dự án.</p></details>
+    <details><summary>Có bắt buộc ký gửi cho thuê không?</summary><p>Không bắt buộc. Chủ căn tự ở, tự cho thuê hoặc thuê đơn vị vận hành bên ngoài. Chủ đầu tư cho biết chương trình cho thuê của Sun Group hiện không áp dụng cho Saphia.</p></details>
+    <details><summary>Người nước ngoài, ở xa có mua được không?</summary><p>Câu này phụ thuộc hồ sơ từng người. Bạn ghi lại thông tin, chuyên viên tư vấn riêng sau live để trả lời đúng quy định.</p></details>
+    <details><summary>Gặp câu không có trong kịch bản</summary><p>"Câu hỏi rất hay, để bạn kiểm tra văn bản chính thức và gửi riêng Anh/Chị ngay sau live, để không nói sai một con số nào ạ." Ghi tên người hỏi lại.</p></details>
+  </div>
+  <p class="note">Nguồn: tài liệu chủ đầu tư gửi đại lý, kiến thức chatbot dự án, quyết định và báo chí đã dẫn trên web dự án. Ảnh có nhãn "Ảnh minh họa" là phối cảnh, không phải ảnh chụp thực tế.</p>
+</section>
+
+</div></main>
+
+<script>
+(function(){
+  var root=document.documentElement, k='live-fs', size=17;
+  try{var v=parseInt(localStorage.getItem(k),10); if(v>=14&&v<=24) size=v;}catch(e){}
+  function apply(){root.style.setProperty('--fs',size+'px'); try{localStorage.setItem(k,String(size));}catch(e){}}
+  apply();
+  document.getElementById('fsUp').addEventListener('click',function(){if(size<24){size++;apply();}});
+  document.getElementById('fsDown').addEventListener('click',function(){if(size>14){size--;apply();}});
+})();
+</script>
