@@ -120,7 +120,6 @@
 | 18/11/2026 | TikTok (@hiephoangmt, brand Sun) | 20:15 | Bảo hiểm căn hộ cho thuê – BỘ 3 ẢNH | /bao-hiem-can-ho-cho-thue-sun-saphia/ |
 | 18/11/2026 | Casamia (blogId 8074284) | 21:00 | Sự kiện khách hàng Casamia Balanca – Sound of Balance 25/04/2026 (album 4 ảnh sự kiện) | /du-an/casamia-balanca-hoi-an/ |
 | 18/11/2026 | TikTok (@hiephoangmt, brand Sun) | 21:15 | Casamia Balanca cần xem gì – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
-| CHỜ | Hoàng Hiệp | 19/11 | (bài web 18/11 14:00) Vay mua Capital Square trả góp hằng tháng | vay-mua-capital-square-da-nang-tra-gop-hang-thang (chờ) |
 | CHỜ | Sun | 20/11 | (bài web 18/11 16:30) Căn hộ cho người nghỉ hưu – Sun Saphia | can-ho-cho-nguoi-nghi-huu-sun-saphia (chờ) |
 | CHỜ | Sun | 21/11 | (bài web 18/11 18:30) Ăn uống quanh Sun Saphia Residence | an-uong-quanh-sun-saphia-residence (chờ) |
 | 18/11/2026 | (ghi chú) | 07:18 | Bài web bai-do-xe-ngam-bach-dang-da-nang đã có bài FB Hoàng Hiệp 16:30 do lịch hạ tầng hẹn sẵn – không làm trùng | /bai-do-xe-ngam-bach-dang-da-nang/ |
@@ -134,5 +133,6 @@
 | 19/11/2026 | Casamia (blogId 8074284) | 19:30 | Hỏi đáp nhanh Casamia Balanca – 5 câu (album 4 ảnh) | /du-an/casamia-balanca-hoi-an/ |
 | 19/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | Hỏi đáp Casamia Balanca – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
 | 19/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: Khu đô thị quốc tế Đa Phước (+2 tin ở bình luận) | /khu-do-thi-quoc-te-da-phuoc-3-giai-doan/ /nha-o-xa-hoi-cau-tien-son-731-can/ /nha-o-xa-hoi-viet-huong-lakeside-hoa-xuan/ |
+| 19/11/2026 | Hoàng Hiệp | 17:00 | TỔNG HỢP: Căn hộ Đà Nẵng sắp bàn giao 2026 – 2027 (+4 tin ở bình luận) | /can-ho-da-nang-sap-ban-giao-2026-2027/ /phap-ly-the-legend-da-nang-so-huu-lau-dai/ /nobu-hay-the-legend-can-ho-cao-cap-da-nang/ /can-ho-masteri-rivera-danang-phan-tich/ /vay-mua-capital-square-da-nang-tra-gop-hang-thang/ |
 | CHỜ | Sun | 20/11 | (bài web 19/11 16:30) Studio hay 1PN Sun Saphia Residence | studio-hay-1pn-sun-saphia-residence (chờ) |
 | CHỜ | Sun | 21/11 | (bài web 19/11 18:30) Sun Saphia Residence đi Bà Nà Hills | sun-saphia-residence-di-ba-na-hills (chờ) |
