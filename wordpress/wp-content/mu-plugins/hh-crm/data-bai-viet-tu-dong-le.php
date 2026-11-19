@@ -1296,6 +1296,7 @@ HTML
 		'keywords_extra' => array( 'Masteri Đà Nẵng', 'Masterise Homes Đà Nẵng', 'căn hộ Hải Châu', 'căn hộ Dual Key Đà Nẵng' ),
 		'project'  => 'masteri-da-nang',
 		'schedule' => '2026-11-18 09:45',
+		'rev'      => 2, // 19/11: nạp lại ảnh chèn giữa bài sau khi cài 2.20.319.
 		'category' => 'Tin dự án',
 		'tags'     => array( 'Masteri Rivera Danang', 'Masterise Homes', 'Căn hộ Hải Châu' ),
 		'image'    => 'plugin:img/masteri-rivera-danang/masteri-rivera-danang-ho-boi-phoi-canh.jpg',

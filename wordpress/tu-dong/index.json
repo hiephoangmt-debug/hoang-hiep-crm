@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-18T16:09:32+00:00",
+    "updated": "2026-11-19T00:06:06+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen",
@@ -883,7 +883,8 @@
             "slug": "can-ho-masteri-rivera-danang-phan-tich",
             "title": "Căn hộ Masteri Rivera Danang: phân tích vị trí, sản phẩm, pháp lý và cách thanh toán",
             "publish": "2026-11-18 09:45",
-            "file": "bai/can-ho-masteri-rivera-danang-phan-tich.txt"
+            "file": "bai/can-ho-masteri-rivera-danang-phan-tich.txt",
+            "rev": 2
         },
         {
             "slug": "nha-o-xa-hoi-viet-huong-lakeside-hoa-xuan",
@@ -938,7 +939,8 @@
             "slug": "khu-do-thi-quoc-te-da-phuoc-3-giai-doan",
             "title": "Khu đô thị quốc tế Đa Phước: phối cảnh mới và tiến độ 3 giai đoạn, hoàn thành quý II/2033",
             "publish": "2026-11-19 06:45",
-            "file": "bai/khu-do-thi-quoc-te-da-phuoc-3-giai-doan.txt"
+            "file": "bai/khu-do-thi-quoc-te-da-phuoc-3-giai-doan.txt",
+            "rev": 2
         },
         {
             "slug": "nobu-hay-the-legend-can-ho-cao-cap-da-nang",

@@ -1055,6 +1055,7 @@ HTML
 		'keywords_extra' => array( 'Đa Phước tái khởi động', 'dự án lấn biển Đà Nẵng', 'cửa sông Hàn', 'The Sunrise Bay' ),
 		'project'        => 'peninsula-da-nang',
 		'schedule'       => '2026-11-19 06:45', // Sáng sớm nhất sau khi cài gói 2.20.323 (ảnh Đa Phước nằm trong plugin).
+		'rev'            => 2, // 19/11: nạp lại ảnh phối cảnh sau khi cài 2.20.323.
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'Đa Phước', 'Quy hoạch Đà Nẵng', 'Sông Hàn' ),
 		'image'          => 'plugin:img/da-phuoc/da-phuoc-phoi-canh-tong-the-cua-song-han.jpg',
