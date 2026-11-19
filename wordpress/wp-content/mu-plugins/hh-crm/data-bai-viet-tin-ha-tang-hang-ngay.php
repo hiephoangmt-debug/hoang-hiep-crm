@@ -1117,5 +1117,147 @@ HTML
 			'https://nhadautu.vn/da-nang-hoi-sinh-khu-do-thi-quoc-te-da-phuoc-d106941.html',
 		),
 	);
+	/* ---------------- 20/11 – Hủy quy hoạch khu biệt thự 25,6 ha trên bán đảo Sơn Trà (Tuổi Trẻ, VnExpress 19/11/2026) ---------------- */
+	$posts[] = array(
+		'slug'           => 'huy-quy-hoach-khu-biet-thu-son-tra',
+		'title'          => 'Đà Nẵng hủy quy hoạch khu biệt thự Sơn Trà 25,6 ha: bán đảo được giữ nguyên rừng',
+		'excerpt'        => 'Ngày 19/11/2026, UBND TP Đà Nẵng hủy hai quyết định quy hoạch khu biệt thự trên bán đảo Sơn Trà (Quyết định 7214/QĐ-UBND năm 2011 và 2289/QĐ-UBND năm 2014), tổng diện tích khoảng 25,6 ha. Tác động tới bất động sản quanh chân bán đảo.',
+		'keyword'        => 'hủy quy hoạch khu biệt thự Sơn Trà',
+		'keywords_extra' => array( 'bán đảo Sơn Trà', 'quy hoạch 1/500 Sơn Trà', 'biệt thự Sơn Trà', 'bất động sản Sơn Trà' ),
+		'project'        => 'the-camellia-son-tra',
+		'schedule'       => '2026-11-20 06:45',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Sơn Trà', 'Quy hoạch Đà Nẵng', 'Biệt thự' ),
+		'image'          => 'plugin:img/the-camellia/the-camellia-tien-do-8-2026-flycam-huong-bien.jpg',
+		'image_alt'      => 'Hủy quy hoạch khu biệt thự Sơn Trà – khu dân cư chân bán đảo Sơn Trà nhìn ra biển (ảnh flycam thực tế)',
+		'content'        => <<<'HTML'
+<p>Việc <strong>hủy quy hoạch khu biệt thự Sơn Trà</strong> đã chính thức có quyết định: ngày 19/11/2026, UBND TP Đà Nẵng hủy bỏ hai quyết định quy hoạch của dự án khu biệt thự trên bán đảo Sơn Trà, khép lại một dự án gây tranh cãi hơn 15 năm. Diện tích quy hoạch bị hủy khoảng 25,6 ha, trong đó hơn 13 ha từng được quy hoạch làm đất ở biệt thự.</p>
+<!--hh-featured-->
+<h2>Hủy quy hoạch khu biệt thự Sơn Trà: hai quyết định bị bãi bỏ</h2>
+<p>Theo báo Tuổi Trẻ và VnExpress, quyết định ngày 19/11/2026 của UBND thành phố hủy bỏ:</p>
+<ul>
+<li><strong>Quyết định 7214/QĐ-UBND ngày 22/8/2011</strong> phê duyệt quy hoạch chi tiết tỷ lệ 1/500 khu biệt thự tại bán đảo Sơn Trà;</li>
+<li><strong>Quyết định 2289/QĐ-UBND ngày 14/4/2014</strong> phê duyệt điều chỉnh tổng mặt bằng khu số 2 của dự án.</li>
+</ul>
+<p>Đồ án bị hủy có tổng diện tích 256.348 m² (khoảng 25,6 ha), trong đó đất ở biệt thự 132.208 m². Sở Xây dựng được giao rà soát, tham mưu phương án xử lý việc dừng thực hiện dự án hạ tầng kỹ thuật khu biệt thự. UBND phường Sơn Trà có trách nhiệm công bố công khai quyết định và quản lý khu vực theo quy hoạch chung, quy hoạch phân khu đã được duyệt.</p>
+<!--hh-img:img/the-camellia/the-camellia-tien-do-8-2026-flycam-huong-bien.jpg|Sau khi hủy quy hoạch khu biệt thự Sơn Trà, khu dân cư chân bán đảo (ảnh) vẫn là nơi hiếm hoi có nhà ở sát biển, sát rừng (ảnh flycam thực tế 8/2026)-->
+<h2>Quá trình đi tới quyết định hủy quy hoạch khu biệt thự Sơn Trà</h2>
+<p>Dự án khu biệt thự trên bán đảo Sơn Trà được duyệt quy hoạch từ năm 2011, sau đó điều chỉnh năm 2014, nhưng nhiều năm không triển khai trọn vẹn và nằm trong diện rà soát sau các kết luận thanh tra. Đầu tháng 5/2026, UBND phường Sơn Trà tổ chức lấy ý kiến cộng đồng dân cư về việc hủy bỏ đồ án quy hoạch chi tiết 1/500 này (Tuổi Trẻ đưa tin ngày 8/5/2026). Trước đó, thành phố cũng đã thu hồi các chấp thuận ranh giới đất của một số dự án chưa triển khai trên bán đảo.</p>
+<p>Với quyết định ngày 19/11/2026, việc hủy quy hoạch khu biệt thự Sơn Trà cho thấy định hướng rõ của thành phố: bán đảo Sơn Trà ưu tiên bảo tồn rừng, cảnh quan và phát triển du lịch sinh thái có kiểm soát, không mở thêm khu ở biệt thự trên sườn núi.</p>
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<p>Theo Hoàng Hiệp, việc hủy quy hoạch khu biệt thự Sơn Trà tác động tới thị trường ở bốn điểm:</p>
+<ul>
+<li><strong>Nguồn cung biệt thự trên bán đảo gần như đóng lại:</strong> sau khi hủy quy hoạch khu biệt thự Sơn Trà, khó có thêm dự án nhà ở mới trên sườn bán đảo. Bất động sản sát chân bán đảo (Lê Văn Lương, Lê Đức Thọ, Hoàng Sa, khu Thọ Quang – Mân Thái) càng hiếm.</li>
+<li><strong>Giữ cảnh quan – giữ giá trị view:</strong> rừng Sơn Trà được bảo toàn là "phông nền" lâu dài cho các căn hộ, khách sạn nhìn về bán đảo. View núi rừng, biển Sơn Trà không lo bị che bởi khu biệt thự mới.</li>
+<li><strong>Tín hiệu pháp lý minh bạch:</strong> thành phố xử lý dứt điểm các dự án tồn đọng trên bán đảo theo kết luận thanh tra; người mua nên tránh các lời mời "đất, biệt thự trên Sơn Trà" không có pháp lý rõ ràng.</li>
+<li><strong>Theo dõi tiếp:</strong> sau khi hủy quy hoạch khu biệt thự Sơn Trà, phương án xử lý phần hạ tầng kỹ thuật đã làm và các lô đất liên quan sẽ do Sở Xây dựng tham mưu – Hoàng Hiệp sẽ cập nhật khi có văn bản.</li>
+</ul>
+<!--hh-img:img/peninsula/peninsula-da-nang-tien-do-6-2026-ben-song-han-ban-dao-son-tra.jpg|Bán đảo Sơn Trà phía sau dự án Peninsula Đà Nẵng bên sông Hàn – rừng Sơn Trà là phông nền lâu dài cho căn hộ ven sông (ảnh tiến độ thực tế 6/2026)-->
+<h2>Dự án chịu ảnh hưởng</h2>
+<p>Các dự án dưới đây nằm quanh chân bán đảo hoặc nhìn về bán đảo – nhóm hưởng lợi rõ nhất khi hủy quy hoạch khu biệt thự Sơn Trà giữ nguyên rừng:</p>
+<ul>
+<li><a href="/du-an/the-camellia-son-tra/">The Camellia Sơn Trà</a>: ngã tư Lê Văn Lương – Lê Đức Thọ, sát chân bán đảo – căn hộ hiếm hoi gần rừng, gần biển phía Bắc khi bán đảo không mở thêm khu ở.</li>
+<li><a href="/du-an/hiyori-aqua-tower/">Hiyori Aqua Tower</a>: cùng trục Lê Đức Thọ, hướng về bán đảo và vịnh Mân Quang.</li>
+<li><a href="/du-an/sun-costa-residence/">Sun Costa Residence</a> và <a href="/du-an/wyndham-soleil-da-nang/">Wyndham Soleil</a>: căn hộ ven biển Mỹ Khê – Phạm Văn Đồng, nhìn về bán đảo Sơn Trà.</li>
+<li><a href="/du-an/peninsula-da-nang/">Peninsula Đà Nẵng</a>: bên bờ Đông sông Hàn, view trực diện núi Sơn Trà.</li>
+</ul>
+<p>Xem thêm tổng quan <a href="/bat-dong-san-son-tra-2026/">bất động sản Sơn Trà 2026</a> và bài <a href="/cong-bo-quy-hoach-chung-2050-aeon-mall-hoa-xuan/">công bố Quy hoạch chung Đà Nẵng 2050</a>. Cần tư vấn căn hộ, nhà phố quanh chân bán đảo sau khi hủy quy hoạch khu biệt thự Sơn Trà, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: <a href="https://tuoitre.vn/da-nang-chinh-thuc-huy-quy-hoach-du-an-khu-biet-thu-tai-ban-dao-son-tra-10026111916590273.htm">Tuổi Trẻ</a>; <a href="https://vnexpress.net/da-nang-huy-quy-hoach-khu-biet-thu-25-6-ha-tren-ban-dao-son-tra-5146783.html">VnExpress</a>; <a href="https://tuoitre.vn/se-xoa-so-quy-hoach-khu-biet-thu-tren-ban-dao-son-tra-nguoi-dan-duoc-lay-y-kien-2026050810221295.htm">Tuổi Trẻ (5/2026)</a>. Nội dung theo báo chí đưa tin về quyết định của UBND TP Đà Nẵng ngày 19/11/2026.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Hủy quy hoạch khu biệt thự Sơn Trà 25,6 ha: điều cần biết',
+			'desc'      => 'Hủy quy hoạch khu biệt thự Sơn Trà: ngày 19/11/2026 Đà Nẵng bãi bỏ quy hoạch 1/500 khu biệt thự 25,6 ha trên bán đảo. Tác động tới nhà ở chân bán đảo.',
+			'points'    => array(
+				'19/11/2026: UBND TP hủy Quyết định 7214/QĐ-UBND (2011) và 2289/QĐ-UBND (2014) về quy hoạch khu biệt thự bán đảo Sơn Trà',
+				'Diện tích khoảng 25,6 ha (256.348 m²), trong đó đất ở biệt thự 132.208 m²',
+				'Sở Xây dựng rà soát phương án dừng dự án hạ tầng kỹ thuật; phường Sơn Trà công bố, quản lý theo quy hoạch chung, phân khu',
+			),
+			'faq'       => array(
+				array( 'Đà Nẵng hủy quy hoạch khu biệt thự Sơn Trà khi nào?', 'Ngày 19/11/2026, UBND TP Đà Nẵng ban hành quyết định hủy bỏ hai quyết định quy hoạch của dự án khu biệt thự trên bán đảo Sơn Trà.' ),
+				array( 'Những quyết định nào bị hủy?', 'Quyết định 7214/QĐ-UBND ngày 22/8/2011 phê duyệt quy hoạch chi tiết 1/500 và Quyết định 2289/QĐ-UBND ngày 14/4/2014 điều chỉnh tổng mặt bằng khu số 2.' ),
+				array( 'Khu biệt thự bị hủy quy hoạch rộng bao nhiêu?', 'Khoảng 25,6 ha (256.348 m²), trong đó đất ở biệt thự 132.208 m².' ),
+				array( 'Ảnh hưởng gì tới bất động sản Sơn Trà?', 'Sau khi hủy quy hoạch khu biệt thự Sơn Trà, nguồn cung nhà ở trên bán đảo gần như đóng lại, rừng Sơn Trà được giữ làm cảnh quan lâu dài; căn hộ, nhà phố sát chân bán đảo và view Sơn Trà càng khan hiếm.' ),
+			),
+		),
+		'sources'        => array(
+			'https://tuoitre.vn/da-nang-chinh-thuc-huy-quy-hoach-du-an-khu-biet-thu-tai-ban-dao-son-tra-10026111916590273.htm',
+			'https://vnexpress.net/da-nang-huy-quy-hoach-khu-biet-thu-25-6-ha-tren-ban-dao-son-tra-5146783.html',
+			'https://tuoitre.vn/se-xoa-so-quy-hoach-khu-biet-thu-tren-ban-dao-son-tra-nguoi-dan-duoc-lay-y-kien-2026050810221295.htm',
+		),
+	);
+
+	/* ---------------- 20/11 – Khu đô thị Hòa Vang 183,9 ha, gần 19.000 tỷ: đấu thầu quốc tế chọn nhà đầu tư (Tuổi Trẻ, Thanh Niên 19/11/2026) ---------------- */
+	$posts[] = array(
+		'slug'           => 'khu-do-thi-hoa-vang-dau-thau-quoc-te',
+		'title'          => 'Khu đô thị Hòa Vang 183,9 ha, gần 19.000 tỷ đồng: Đà Nẵng đấu thầu quốc tế chọn nhà đầu tư',
+		'excerpt'        => 'Ngày 19/11/2026, UBND TP Đà Nẵng phê duyệt thông tin dự án Khu đô thị Hòa Vang: 183,9 ha, khoảng 33.910 dân, vốn hơn 18.922 tỷ đồng, 55,1 ha đất ở; chọn nhà đầu tư qua đấu thầu rộng rãi quốc tế từ quý IV/2026 đến quý II/2027.',
+		'keyword'        => 'khu đô thị Hòa Vang',
+		'keywords_extra' => array( 'đấu thầu quốc tế Đà Nẵng', 'dự án khu đô thị Đà Nẵng 2026', 'giãn dân Đà Nẵng', 'quỹ nhà ở Đà Nẵng' ),
+		'project'        => 'sun-neo-city',
+		'schedule'       => '2026-11-20 06:45',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Hòa Vang', 'Khu đô thị', 'Quy hoạch Đà Nẵng' ),
+		'image'          => 'plugin:img/hoa-xuan/hoa-xuan-flycam-8-2025-toan-canh-ven-song-cam-le.jpg',
+		'image_alt'      => 'Khu đô thị Hòa Vang – hướng phát triển phía Nam, Tây Nam Đà Nẵng (ảnh flycam ven sông Cẩm Lệ)',
+		'content'        => <<<'HTML'
+<p><strong>Khu đô thị Hòa Vang</strong> quy mô 183,9 ha, tổng vốn hơn 18.922 tỷ đồng vừa được UBND TP Đà Nẵng phê duyệt thông tin dự án và bảng theo dõi tiến độ lựa chọn nhà đầu tư ngày 19/11/2026. Nhà đầu tư sẽ được chọn bằng hình thức đấu thầu rộng rãi quốc tế – một trong những dự án khu đô thị lớn nhất thành phố đưa ra đấu thầu năm nay.</p>
+<!--hh-featured-->
+<h2>Khu đô thị Hòa Vang: quy mô và vốn đầu tư</h2>
+<table>
+<thead><tr><th>Hạng mục</th><th>Thông tin (theo báo chí)</th></tr></thead>
+<tbody>
+<tr><td>Vị trí</td><td>Xã Hòa Vang, TP Đà Nẵng</td></tr>
+<tr><td>Quy mô</td><td>183,9 ha, trong đó khoảng 55,1 ha đất ở</td></tr>
+<tr><td>Dân số dự kiến</td><td>Khoảng 33.910 người</td></tr>
+<tr><td>Tổng vốn dự kiến</td><td>Hơn 18.922 tỷ đồng (khoảng 13.580 tỷ thực hiện dự án, khoảng 2.503 tỷ bồi thường – tái định cư – giải phóng mặt bằng, phần còn lại dự phòng)</td></tr>
+<tr><td>Hình thức chọn nhà đầu tư</td><td>Đấu thầu rộng rãi quốc tế, một giai đoạn một túi hồ sơ</td></tr>
+<tr><td>Lựa chọn nhà đầu tư</td><td>Quý IV/2026 – quý II/2027</td></tr>
+<tr><td>Thực hiện dự án</td><td>Từ quý III/2027, kéo dài tới năm 2034</td></tr>
+</tbody>
+</table>
+<p>Quyết định do Phó Chủ tịch UBND thành phố Lê Quang Nam ký. Theo báo chí, mục tiêu của khu đô thị Hòa Vang là giãn dân cho khu trung tâm, bổ sung quỹ nhà ở và hình thành khu đô thị đồng bộ hạ tầng ở phía Tây Nam thành phố. Ở các đề xuất trước (cuối năm 2025), dự án có quy mô hơn 160 ha, vốn hơn 16.000 tỷ đồng – nay được nâng lên 183,9 ha.</p>
+<!--hh-img:img/hoa-xuan/hoa-xuan-flycam-8-2025-toan-canh-ven-song-cam-le.jpg|Khu đô thị Hòa Vang nằm trên hướng phát triển phía Nam – Tây Nam, nơi các khu đô thị ven sông Cẩm Lệ đã hình thành (ảnh flycam thực tế 8/2025)-->
+<h2>Tiến độ dự kiến của khu đô thị Hòa Vang</h2>
+<p>Thành phố dự kiến chọn được nhà đầu tư trong khoảng quý IV/2026 – quý II/2027, sau đó nhà đầu tư triển khai bồi thường, giải phóng mặt bằng và xây dựng hạ tầng từ quý III/2027. Với quy mô gần 184 ha, khu đô thị Hòa Vang sẽ làm theo nhiều giai đoạn, kéo dài tới năm 2034. Như vậy, sản phẩm nhà ở đầu tiên khó ra thị trường trước năm 2028 – 2029, tùy tiến độ giải phóng mặt bằng.</p>
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Đô thị hóa lan về phía Tây Nam:</strong> sau Hòa Xuân, Nam Hòa Xuân, việc mời đầu tư khu đô thị Hòa Vang cho thấy thành phố đẩy mạnh phát triển vùng ven theo Quy hoạch chung 2050. Hạ tầng kết nối (đường, cầu, điện, nước) sẽ đi trước, kéo giá đất khu vực.</li>
+<li><strong>Nguồn cung dài hạn, chưa phải ngắn hạn:</strong> khu đô thị Hòa Vang chưa có nhà đầu tư; người mua cần tránh các lời mời "đặt cọc giữ chỗ" khi dự án chưa đủ điều kiện kinh doanh.</li>
+<li><strong>Đấu thầu quốc tế – kỳ vọng nhà đầu tư lớn:</strong> hình thức đấu thầu rộng rãi quốc tế mở cửa cho các tập đoàn có năng lực tài chính, giúp dự án làm đồng bộ hơn các khu phân lô nhỏ lẻ.</li>
+<li><strong>Khu đô thị hiện hữu hưởng lợi trước:</strong> các khu đã có hạ tầng, đã ra sổ ở phía Nam như Hòa Xuân hưởng lợi sớm khi dân cư, tiện ích dịch chuyển về hướng này.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/sun-neo-city/">Sun NeO City</a> (Hòa Xuân, ven sông Cẩm Lệ): khu đô thị đã hình thành ở cửa ngõ phía Nam, hưởng lợi khi hướng Nam – Tây Nam tiếp tục được đô thị hóa.</li>
+<li><a href="/du-an/spana-tower/">Spana Tower</a> và <a href="/du-an/cora-tower/">Cora Tower</a>: căn hộ Sun Group trong Sun NeO City, bàn giao 2027 – lựa chọn có sẵn hạ tầng thay vì chờ khu đô thị mới.</li>
+<li><a href="/du-an/viet-huong-lakeside-hoa-xuan/">Việt Hương Lakeside</a>: nhà ở xã hội tại Hòa Xuân, phục vụ đúng nhu cầu giãn dân mà khu đô thị Hòa Vang hướng tới.</li>
+</ul>
+<p>Xem thêm bài <a href="/cong-bo-quy-hoach-chung-2050-aeon-mall-hoa-xuan/">công bố Quy hoạch chung Đà Nẵng 2050</a> và <a href="/khoi-cong-8-du-an-nha-o-xa-hoi-da-nang-2026/">8 dự án nhà ở xã hội khởi công cuối 2026</a>. Cần tư vấn bất động sản phía Nam Đà Nẵng, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: <a href="https://tuoitre.vn/da-nang-chuan-bi-dau-thau-quoc-te-du-an-khu-do-thi-gan-19000-ti-dong-o-hoa-vang-100261119141652851.htm">Tuổi Trẻ</a>; <a href="https://thanhnien.vn/phe-duyet-du-an-khu-do-thi-hoa-vang-gan-19000-ti-dong-o-da-nang-185261119141313206.htm">Thanh Niên</a>; <a href="https://www.sggp.org.vn/da-nang-dau-thau-quoc-te-du-an-khu-do-thi-hoa-vang-hon-18900-ty-dong-post882602.html">Sài Gòn Giải Phóng</a>. Số liệu theo báo chí đưa tin về quyết định ngày 19/11/2026; có thể điều chỉnh khi lập hồ sơ mời thầu.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Khu đô thị Hòa Vang 183,9 ha gần 19.000 tỷ: đấu thầu quốc tế',
+			'desc'      => 'Khu đô thị Hòa Vang 183,9 ha, vốn hơn 18.922 tỷ, khoảng 33.910 dân: Đà Nẵng chọn nhà đầu tư qua đấu thầu quốc tế từ quý IV/2026 đến quý II/2027.',
+			'points'    => array(
+				'183,9 ha tại xã Hòa Vang, 55,1 ha đất ở, khoảng 33.910 dân',
+				'Tổng vốn hơn 18.922 tỷ đồng; đấu thầu rộng rãi quốc tế, một giai đoạn một túi hồ sơ',
+				'Chọn nhà đầu tư quý IV/2026 – quý II/2027; thực hiện từ quý III/2027 tới năm 2034',
+			),
+			'faq'       => array(
+				array( 'Khu đô thị Hòa Vang rộng bao nhiêu?', 'Khoảng 183,9 ha tại xã Hòa Vang, trong đó khoảng 55,1 ha đất ở, dân số dự kiến khoảng 33.910 người.' ),
+				array( 'Tổng vốn đầu tư bao nhiêu?', 'Hơn 18.922 tỷ đồng, gồm khoảng 13.580 tỷ thực hiện dự án, khoảng 2.503 tỷ bồi thường – giải phóng mặt bằng và phần dự phòng.' ),
+				array( 'Khi nào chọn được nhà đầu tư?', 'Theo bảng tiến độ được duyệt, việc lựa chọn nhà đầu tư diễn ra từ quý IV/2026 đến quý II/2027, theo hình thức đấu thầu rộng rãi quốc tế.' ),
+				array( 'Đã mua được nhà ở khu đô thị Hòa Vang chưa?', 'Chưa. Dự án chưa có nhà đầu tư, chưa đủ điều kiện kinh doanh; cần cảnh giác với lời mời đặt cọc giữ chỗ.' ),
+			),
+		),
+		'sources'        => array(
+			'https://tuoitre.vn/da-nang-chuan-bi-dau-thau-quoc-te-du-an-khu-do-thi-gan-19000-ti-dong-o-hoa-vang-100261119141652851.htm',
+			'https://thanhnien.vn/phe-duyet-du-an-khu-do-thi-hoa-vang-gan-19000-ti-dong-o-da-nang-185261119141313206.htm',
+			'https://www.sggp.org.vn/da-nang-dau-thau-quoc-te-du-an-khu-do-thi-hoa-vang-hon-18900-ty-dong-post882602.html',
+		),
+	);
+
 	return $posts;
 }
