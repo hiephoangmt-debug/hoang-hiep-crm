@@ -1375,5 +1375,107 @@ HTML
 			'https://masterisehomes.com/masteri-rivera-danang/en/',
 		),
 	);
+	/* ---------------- 19/11 – Tổng hợp căn hộ Đà Nẵng đã / sắp bàn giao 2026 – 2027 (anh Hiệp yêu cầu) ---------------- */
+	$d = static fn( $slug, $name ) => '<a href="/du-an/' . $slug . '/">' . $name . '</a>';
+	$posts[] = array(
+		'slug'     => 'can-ho-da-nang-sap-ban-giao-2026-2027',
+		'title'    => 'Căn hộ Đà Nẵng sắp bàn giao 2026 – 2027: hơn 20 dự án, mốc nhận nhà từng dự án',
+		'excerpt'  => 'Tổng hợp căn hộ Đà Nẵng sắp bàn giao và đã bàn giao trong 2026 – 2027: Sun Ponte, Sun Symphony, FPT Plaza 3, Masteri, MIA Center Point, Capital Square 2, Nobu, Peninsula, Sun Solar, Spana, Cora, The Poet, Hiyori Aqua, The Meridian… kèm mốc nhận nhà và lưu ý khi mua.',
+		'keyword'  => 'căn hộ Đà Nẵng sắp bàn giao',
+		'keywords_extra' => array( 'dự án bàn giao 2026 Đà Nẵng', 'dự án bàn giao 2027 Đà Nẵng', 'căn hộ nhận nhà sớm Đà Nẵng', 'căn hộ có sổ Đà Nẵng' ),
+		'project'  => 'sun-solar-residence',
+		'schedule' => '2026-11-19 09:15',
+		'category' => 'Tin dự án',
+		'tags'     => array( 'Bàn giao', 'Căn hộ Đà Nẵng', 'Thị trường' ),
+		'image'    => 'plugin:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg',
+		'image_alt' => 'Căn hộ Đà Nẵng sắp bàn giao và đã bàn giao ven sông Hàn, cầu Rồng (ảnh flycam thực tế)',
+		'content'  => <<<HTML
+<p>Danh sách <strong>căn hộ Đà Nẵng sắp bàn giao</strong> trong 2026 – 2027 là thông tin người mua để ở lẫn người mua cho thuê hỏi nhiều nhất: nhận nhà sớm là có chỗ ở, có dòng tiền cho thuê sớm và ít rủi ro tiến độ hơn. Hoàng Hiệp tổng hợp hơn 20 dự án theo ba nhóm – đã bàn giao trong 2026, sắp bàn giao cuối 2026 và bàn giao trong 2027 – kèm mốc nhận nhà theo tài liệu chủ đầu tư và báo chí (cập nhật 19/11/2026).</p>
+<!--hh-featured-->
+<h2>1. Đã bàn giao trong năm 2026</h2>
+<p>Trước khi xem danh sách căn hộ Đà Nẵng sắp bàn giao, đây là các dự án đã nhận nhà trong năm 2026 – lựa chọn an toàn nhất cho người cần ở hoặc cho thuê ngay.</p>
+<table>
+<thead><tr><th>Dự án</th><th>Khu vực</th><th>Tình trạng</th></tr></thead>
+<tbody>
+<tr><td>{$d('sun-ponte-residence','Sun Ponte Residence')}</td><td>Trần Hưng Đạo, ven sông Hàn</td><td>Bắt đầu bàn giao từ tháng 3/2026, đã có căn khai thác cho thuê (theo báo chí)</td></tr>
+<tr><td>{$d('sun-symphony-residence','Sun Symphony Residence')}</td><td>Ven sông Hàn, Sơn Trà</td><td>Các tòa S1 – S3 bàn giao từ tháng 5/2026 (theo báo chí)</td></tr>
+<tr><td>{$d('sun-cosmo-residence','Sun Cosmo Residence')}</td><td>Trần Thị Lý, Ngũ Hành Sơn</td><td>Tòa The Panoma đã bàn giao, đang cấp sổ (theo báo chí)</td></tr>
+<tr><td>{$d('fpt-plaza-3','FPT Plaza 3')}</td><td>FPT City, Ngũ Hành Sơn</td><td>Đã bàn giao từ 17/4/2026, đã có sổ hồng</td></tr>
+<tr><td>{$d('vista-residence-da-nang','Vista Residence')}</td><td>Xô Viết Nghệ Tĩnh, Hải Châu</td><td>Bàn giao từ tháng 8/2026</td></tr>
+<tr><td>{$d('the-filmore-da-nang','The Filmore Đà Nẵng')}</td><td>Bạch Đằng, Hải Châu</td><td>Đã hoàn thiện, nhận nhà ngay</td></tr>
+</tbody>
+</table>
+<p>So với căn hộ Đà Nẵng sắp bàn giao, nhóm này hợp với người cần ở ngay hoặc muốn có dòng tiền cho thuê từ đầu: mua là xem được căn thật, kiểm tra được chất lượng hoàn thiện, nhiều dự án đã hoặc đang ra sổ.</p>
+<!--hh-img:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg|Ven sông Hàn – cầu Rồng, nơi có nhiều căn hộ Đà Nẵng sắp bàn giao và đã bàn giao trong 2026 (ảnh flycam thực tế 11/2026)-->
+<h2>2. Căn hộ Đà Nẵng sắp bàn giao cuối 2026</h2>
+<table>
+<thead><tr><th>Dự án</th><th>Khu vực</th><th>Mốc bàn giao</th></tr></thead>
+<tbody>
+<tr><td>{$d('masteri-da-nang','Masteri Rivera Danang')}</td><td>Quy Mỹ, Hải Châu</td><td>Dự kiến quý III – IV/2026 (cất nóc 12/2025); chờ thông báo chính thức của chủ đầu tư</td></tr>
+<tr><td>{$d('mia-center-point-da-nang','MIA Center Point')}</td><td>Ngô Thì Nhậm, Liên Chiểu</td><td>Tài liệu chủ đầu tư ghi quý II/2026; một số tin rao ghi nhận nhà từ tháng 8/2026</td></tr>
+<tr><td>{$d('newtown-diamond-da-nang','Newtown Diamond')}</td><td>Trường Sa – Nam Kỳ Khởi Nghĩa</td><td>Tòa The Ruby cất nóc khoảng 4/2026, đang hoàn thiện – chưa có mốc bàn giao mới</td></tr>
+<tr><td>{$d('vinhomes-hai-van-bay','Vinhomes Hải Vân Bay')}</td><td>Chân đèo Hải Vân, Liên Chiểu</td><td>Thấp tầng phân khu đầu: quý IV/2026; có chương trình về ở sớm bàn giao thô</td></tr>
+</tbody>
+</table>
+<p>Nhóm căn hộ Đà Nẵng sắp bàn giao cuối năm 2026 thường còn ít căn chủ đầu tư; giao dịch chủ yếu là chuyển nhượng hợp đồng, giá đã phản ánh phần nào tiến độ. Nên hỏi kỹ lịch bàn giao từng tòa, tình trạng thế chấp sổ và chi phí sang tên hợp đồng.</p>
+<h2>3. Căn hộ Đà Nẵng sắp bàn giao trong năm 2027</h2>
+<table>
+<thead><tr><th>Dự án</th><th>Khu vực</th><th>Mốc bàn giao dự kiến</th></tr></thead>
+<tbody>
+<tr><td>{$d('capital-square-da-nang','Capital Square 2')}</td><td>Ngô Quyền – Trần Hưng Đạo, ven sông Hàn</td><td>Quý I/2027</td></tr>
+<tr><td>{$d('peninsula-da-nang','Peninsula Đà Nẵng')}</td><td>Lê Văn Duyệt, Sơn Trà</td><td>Từ 30/3/2027</td></tr>
+<tr><td>{$d('nobu-da-nang','Nobu Residences Đà Nẵng')}</td><td>Võ Văn Kiệt – Võ Nguyên Giáp, An Hải</td><td>Năm 2027 (các nguồn ghi quý I – III/2027)</td></tr>
+<tr><td>{$d('sun-solar-residence','Sun Solar Residence')}</td><td>9 Lê Duẩn, Hải Châu</td><td>Nhận căn sớm từ 28/4/2027 (chương trình Sun Early Key)</td></tr>
+<tr><td>{$d('hiyori-aqua-tower','Hiyori Aqua Tower')}</td><td>Lê Đức Thọ – Ngô Cao Lãng, Sơn Trà</td><td>Quý II/2027</td></tr>
+<tr><td>{$d('the-poet-residence-da-nang','The Poet Residence')}</td><td>Hồ Xuân Hương, Ngũ Hành Sơn</td><td>Quý II/2027</td></tr>
+<tr><td>{$d('danang-landmark','Danang Landmark')}</td><td>Bạch Đằng nối dài, Hải Châu</td><td>Hoàn thành khoảng quý II/2027</td></tr>
+<tr><td>{$d('spana-tower','Spana Tower')}</td><td>Hòa Xuân, ven sông Cẩm Lệ</td><td>30/6/2027</td></tr>
+<tr><td>{$d('cora-tower','Cora Tower')}</td><td>Nguyễn Phước Lan – 29/3, Hòa Xuân</td><td>30/7/2027</td></tr>
+<tr><td>{$d('sun-costa-residence','Sun Costa Residence')}</td><td>Hồ Nghinh – Vương Thừa Vũ, Sơn Trà</td><td>Năm 2027 (có nguồn ghi quý IV/2026 – cần đối chiếu chủ đầu tư)</td></tr>
+<tr><td>{$d('the-meridian-da-nang','The Meridian Đà Nẵng')}</td><td>Quy Mỹ, Hải Châu</td><td>Quý IV/2027</td></tr>
+<tr><td>{$d('fpt-plaza-4','FPT Plaza 4')}</td><td>FPT City, Ngũ Hành Sơn</td><td>Quý IV/2027 (có nguồn ghi quý II/2027)</td></tr>
+<tr><td>{$d('wyndham-soleil-da-nang','Wyndham Soleil – tòa A1')}</td><td>Phạm Văn Đồng, Sơn Trà</td><td>Quý IV/2027</td></tr>
+<tr><td>{$d('vinhomes-hai-van-bay','Vinhomes Hải Vân Bay – cao tầng')}</td><td>Chân đèo Hải Vân</td><td>Quý IV/2027</td></tr>
+<tr><td>{$d('viet-huong-lakeside-hoa-xuan','Việt Hương Lakeside (nhà ở xã hội)')}</td><td>Hòa Xuân</td><td>Cuối năm 2027</td></tr>
+</tbody>
+</table>
+<p>Với căn hộ Đà Nẵng sắp bàn giao trong 2027, người mua vẫn còn chọn được căn chủ đầu tư với chính sách thanh toán giãn, hỗ trợ lãi suất. Bù lại cần chấp nhận rủi ro tiến độ – nên ưu tiên dự án đã cất nóc hoặc có chủ đầu tư, tổng thầu uy tín.</p>
+<!--hh-img:img/fpt-plaza-3/fpt-plaza-3-ban-giao-1pn-plus-phong-khach-bep.jpg|Căn hộ thực tế lúc bàn giao tại FPT Plaza 3 – một trong các căn hộ Đà Nẵng đã nhận nhà năm 2026-->
+<h2>4. Chọn căn hộ Đà Nẵng sắp bàn giao thế nào cho đúng?</h2>
+<ul>
+<li><strong>Xem mốc trong hợp đồng, không chỉ mốc quảng cáo:</strong> hợp đồng mua bán ghi thời hạn bàn giao và mức phạt chậm – đây mới là căn cứ.</li>
+<li><strong>Kiểm tra pháp lý và thế chấp:</strong> với mọi căn hộ Đà Nẵng sắp bàn giao, xem dự án đủ điều kiện bán chưa; sổ dự án có đang thế chấp ngân hàng không, chủ đầu tư giải chấp thế nào.</li>
+<li><strong>Tính dòng tiền đợt cuối:</strong> đợt bàn giao thường thu thêm 20 – 30% giá trị cùng 2% phí bảo trì; vay ngân hàng cần duyệt trước.</li>
+<li><strong>Đi xem công trường hoặc căn thực tế:</strong> với căn hộ Đà Nẵng sắp bàn giao, xem tận mắt tiến độ hoàn thiện, hướng nhìn, tầng – tránh mua theo hình ảnh.</li>
+<li><strong>Muốn cho thuê ngay:</strong> trong các căn hộ Đà Nẵng sắp bàn giao, ưu tiên dự án ven sông Hàn, gần biển Mỹ Khê, có bàn giao nội thất – cho thuê sớm, ít chi phí làm thêm.</li>
+</ul>
+<h2>5. Nhận định của Hoàng Hiệp</h2>
+<p>Năm 2026 là năm Đà Nẵng nhận nguồn cung căn hộ đã hoàn thiện lớn nhất nhiều năm qua, tập trung ven sông Hàn (Sun Ponte, Sun Symphony) và khu FPT City. Sang 2027, các tháp hàng hiệu và dự án ven biển (Nobu, Peninsula, Sun Solar, Spana, Cora, The Poet) lần lượt bàn giao. Nguồn căn hộ Đà Nẵng sắp bàn giao và đã hoàn thiện tăng giúp người mua dễ so sánh, dễ đàm phán giá chuyển nhượng; nhưng căn đẹp – view sông, view biển, tầng cao – vẫn ít và giữ giá tốt.</p>
+<p>Mốc của các căn hộ Đà Nẵng sắp bàn giao có thể thay đổi theo thông báo của chủ đầu tư. Để nhận lịch bàn giao từng tòa, giỏ hàng căn còn lại hoặc căn chuyển nhượng giá tốt của các dự án căn hộ Đà Nẵng sắp bàn giao, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Xem thêm toàn bộ <a href="/du-an/">dự án Đà Nẵng</a>.</p>
+<p class="src">Nguồn: tài liệu, thông báo của các chủ đầu tư; <a href="https://daibieunhandan.vn/to-hop-can-ho-sun-ponte-residence-noi-bat-ben-song-han-10418448.html">Đại biểu Nhân dân</a>; <a href="https://tuoitre.vn/da-nang-du-an-capital-square-2-duoc-mo-ban-hang-ngan-can-ho-so-do-the-chap-xu-ly-sao-20260514151105868.htm">Tuổi Trẻ</a>; <a href="https://nguoiquansat.vn/vinhomes-cap-nhat-tien-do-trien-khai-loat-du-an-quy-mo-lon-320505.html">Người Quan Sát</a>. Mốc bàn giao là dự kiến, cập nhật 19/11/2026.</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Căn hộ Đà Nẵng sắp bàn giao 2026 – 2027: 20+ dự án',
+			'desc'      => 'Căn hộ Đà Nẵng sắp bàn giao và đã bàn giao 2026 – 2027: Sun Ponte, Sun Symphony, Masteri, Capital Square 2, Nobu, Sun Solar, Spana, Cora – mốc nhận nhà.',
+			'points'    => array(
+				'Đã bàn giao 2026: Sun Ponte (từ 3/2026), Sun Symphony S1 – S3 (từ 5/2026), FPT Plaza 3, Vista, Sun Cosmo The Panoma',
+				'Cuối 2026: Masteri Rivera, MIA Center Point, Vinhomes Hải Vân Bay thấp tầng',
+				'2027: Capital Square 2, Peninsula, Nobu, Sun Solar, Hiyori Aqua, The Poet, Spana, Cora, The Meridian, FPT Plaza 4',
+			),
+			'faq'       => array(
+				array( 'Căn hộ Đà Nẵng nào đã bàn giao năm 2026?', 'Sun Ponte (từ 3/2026), Sun Symphony S1 – S3 (từ 5/2026), FPT Plaza 3 (từ 17/4/2026), Vista Residence, Sun Cosmo tòa The Panoma, The Filmore.' ),
+				array( 'Dự án nào bàn giao năm 2027?', 'Capital Square 2 (quý I), Peninsula Đà Nẵng (từ 30/3), Sun Solar (nhận sớm 28/4), Hiyori Aqua và The Poet (quý II), Spana (30/6), Cora (30/7), The Meridian, FPT Plaza 4, Wyndham Soleil A1 (quý IV), Nobu (trong năm 2027).' ),
+				array( 'Mua căn sắp bàn giao cần lưu ý gì?', 'Đọc mốc bàn giao và mức phạt chậm trong hợp đồng, kiểm tra pháp lý – thế chấp, chuẩn bị tiền đợt cuối và phí bảo trì 2%, đi xem căn thực tế.' ),
+				array( 'Mốc bàn giao có thay đổi không?', 'Có thể. Các mốc trong bài là dự kiến theo tài liệu chủ đầu tư và báo chí đến 19/11/2026; nên đối chiếu thông báo mới nhất trước khi giao dịch.' ),
+			),
+		),
+		'sources'  => array(
+			'https://daibieunhandan.vn/to-hop-can-ho-sun-ponte-residence-noi-bat-ben-song-han-10418448.html',
+			'https://tuoitre.vn/da-nang-du-an-capital-square-2-duoc-mo-ban-hang-ngan-can-ho-so-do-the-chap-xu-ly-sao-20260514151105868.htm',
+			'https://nguoiquansat.vn/vinhomes-cap-nhat-tien-do-trien-khai-loat-du-an-quy-mo-lon-320505.html',
+			'https://doanhnghiephoinhap.vn/loat-du-an-can-ho-cao-cap-ven-song-han-ve-dich-dung-mua-cao-diem-du-lich-137675.html',
+		),
+	);
 	return $posts;
 }
