@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Biệt thự Hội An 13,9 tỷ",
+  "CHO THUÊ",
+  "được bao nhiêu?"
+ ],
+ "question": "Bài toán dòng tiền Casamia Balanca 5 – 10 năm",
+ "hook_bg": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d19/casamia-balanca-ho-boi-vuon-dua.jpg",
+ "data_title": [
+  "Dòng tiền",
+  "CASAMIA BALANCA"
+ ],
+ "rows": [
+  [
+   "~13,86 tỷ",
+   "Park Home full NT",
+   "Giá không vay, gồm VAT"
+  ],
+  [
+   "1,5 – 3%",
+   "Tự cho thuê/năm",
+   "Giả định công suất 40–70%"
+  ],
+  [
+   "50 tr/tháng",
+   "Ủy thác tối thiểu",
+   "Park Home, hợp đồng 5 năm"
+  ],
+  [
+   "60 tr/tháng",
+   "Forestside tối thiểu",
+   "Theo chính sách CĐT"
+  ],
+  [
+   "24 tháng",
+   "Lãi 0%, ân hạn gốc",
+   "Khi vay đến 70%"
+  ]
+ ],
+ "note": "Giá và chương trình thuê theo chính sách chủ đầu tư từ 9/9/2026; lợi suất tự cho thuê là giả định của Hiệp, không phải cam kết lợi nhuận.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d19/casamia-balanca-song-co-co-hoang-hon.jpg",
+ "photo_caption": "Casamia Balanca – biệt thự ven sông Cổ Cò, Hội An",
+ "cta": "Bảng giá: Zalo 0904 567 009"
+}

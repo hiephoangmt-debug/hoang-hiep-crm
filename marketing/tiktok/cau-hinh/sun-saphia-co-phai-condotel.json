@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Căn hộ 50 năm ven biển",
+  "CONDOTEL?",
+  "hay không"
+ ],
+ "question": "Sun Saphia Residence giống và khác condotel ở đâu?",
+ "hook_bg": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d19/flycam-0042.jpg",
+ "data_title": [
+  "Sun Saphia",
+  "KHÁC CONDOTEL"
+ ],
+ "rows": [
+  [
+   "50 năm",
+   "Thời hạn dự án",
+   "Từ 17/09/2026"
+  ],
+  [
+   "782 căn",
+   "Tòa 30 tầng",
+   "Căn hộ thương mại dịch vụ"
+  ],
+  [
+   "Tự chọn",
+   "Ở hoặc cho thuê",
+   "Không bắt buộc giao vận hành"
+  ],
+  [
+   "Không",
+   "Cam kết lợi nhuận",
+   "Bài toán thuê chỉ tham khảo"
+  ],
+  [
+   "Tạm trú",
+   "Theo chủ đầu tư",
+   "Thường trú hỏi công an"
+  ]
+ ],
+ "note": "Theo tài liệu chủ đầu tư 11/2026. Căn hộ trên đất thương mại dịch vụ, không phải chung cư nhà ở. Tham khảo, không thay thế tư vấn pháp lý.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d19/sun-saphia-cdt-hoang-hon-bien-tren-cao.jpg",
+ "photo_caption": "Sun Saphia Residence – tòa 30 tầng ven biển Sơn Thủy",
+ "cta": "Bảng giá: Zalo 0904 567 009"
+}

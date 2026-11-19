@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Ai đứng sau tòa 30 tầng",
+  "SUN SAPHIA?",
+  "chủ đầu tư"
+ ],
+ "question": "Sun Group đã làm những dự án nhà ở nào tại Đà Nẵng?",
+ "hook_bg": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d19/sun-saphia-cdt-toa-thap-ngay.jpg",
+ "data_title": [
+  "Chủ đầu tư",
+  "SUN GROUP"
+ ],
+ "rows": [
+  [
+   "2007",
+   "Sun Group ra đời",
+   "Khởi nghiệp tại Đà Nẵng"
+  ],
+  [
+   "Đã giao",
+   "Premier Village",
+   "Và Euro Village 2"
+  ],
+  [
+   "Đang giao",
+   "Sun Symphony",
+   "Và Sun Cosmo Residence"
+  ],
+  [
+   "782 căn",
+   "Sun Saphia Residence",
+   "Tòa 30 tầng, cao 114 m"
+  ],
+  [
+   "3.720 m²",
+   "Khu đất dự án",
+   "Giao lộ Võ Nguyên Giáp"
+  ]
+ ],
+ "note": "Theo tài liệu chủ đầu tư, tổng hợp 11/2026 trên hiephoangmt.com. Pháp nhân ký hợp đồng ghi trên hợp đồng đặt chỗ.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d19/sun-saphia-cdt-dem-tren-cao-bien.jpg",
+ "photo_caption": "Sun Saphia Residence – ngay bãi tắm Sơn Thủy",
+ "cta": "Bảng giá: Zalo 0904 567 009"
+}

@@ -1,0 +1,86 @@
+{
+ "tag": "PHÁP LÝ · SUN SAPHIA RESIDENCE",
+ "title": "Sun Saphia Residence có phải condotel",
+ "sub": "Giống và khác condotel ở đâu?",
+ "xc": 0.5,
+ "yc": 0.45,
+ "stats": [
+  [
+   "50 năm",
+   "từ 17/09/2026"
+  ],
+  [
+   "Tự chọn",
+   "ở hoặc cho thuê"
+  ],
+  [
+   "Không",
+   "cam kết lợi nhuận"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo tài liệu chủ đầu tư 11/2026 · Thông tin tham khảo, không thay thế tư vấn pháp lý · Ảnh flycam thực tế",
+ "headline": [
+  [
+   "Có phải condotel",
+   "big",
+   0
+  ],
+  [
+   "Sun Saphia",
+   "script",
+   300
+  ],
+  [
+   "Residence",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Có phải condotel?",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "SUN SAPHIA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Residence",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}

@@ -1,0 +1,86 @@
+{
+ "tag": "CHỦ ĐẦU TƯ · SUN SAPHIA RESIDENCE",
+ "title": "Chủ đầu tư Sun Saphia Residence",
+ "sub": "Sun Group đã làm gì ở Đà Nẵng?",
+ "xc": 0.5,
+ "yc": 0.45,
+ "stats": [
+  [
+   "2007",
+   "Sun Group ra đời"
+  ],
+  [
+   "782 căn",
+   "tòa 30 tầng"
+  ],
+  [
+   "50 năm",
+   "từ 17/09/2026"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo tài liệu chủ đầu tư, tổng hợp 11/2026 · Ảnh flycam thực tế khu vực 17/10/2026",
+ "headline": [
+  [
+   "Chủ đầu tư",
+   "big",
+   0
+  ],
+  [
+   "Sun Saphia",
+   "script",
+   300
+  ],
+  [
+   "Residence",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Chủ đầu tư",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "SUN SAPHIA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Residence",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}
