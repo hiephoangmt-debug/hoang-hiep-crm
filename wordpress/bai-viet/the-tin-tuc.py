@@ -7,7 +7,7 @@ Hai khổ: web 1200×630 (ảnh đại diện bài, xem trước Facebook) và f
 Dùng: python3 bai-viet/the-tin-tuc.py spec.json <thư mục img plugin> [web|fb|ca-hai]
 spec.json: danh sách {slug, out, bg, title, tag, cap, [cat, head, big, script, lead, stats:[[số, nhãn]×≤3], src, out_fb]}.
 Thiếu head/big/script/lead thì tự tách từ tiêu đề (tên dự án trong tag → chữ cam lớn).
-Font: bai-viet/fonts (Cormorant Garamond, Be Vietnam Pro, Vujahday Script – OFL)."""
+Font: bai-viet/fonts (Cormorant Garamond, Be Vietnam Pro, Dancing Script – OFL)."""
 import sys, json, os, re
 from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageEnhance
 
@@ -24,15 +24,19 @@ def serif(size, wght=500):
 
 
 def script(size):
-    # Chữ viết tay kiểu bút lông nghiêng (anh Hiệp chọn theo mẫu "Đứng vững được là đủ", 19/11/2026) – Vujahday Script (OFL), có dấu tiếng Việt.
-    return ImageFont.truetype(f'{FD}/VujahdayScript-Regular.ttf', int(size * 1.12))
+    # Chữ viết tay: mặc định Dancing Script (mẫu cũ anh Hiệp đã duyệt). Thử kiểu khác: biến môi trường HH_SCRIPT_FONT, HH_SCRIPT_LINE=1 (gạch chân).
+    name = os.environ.get('HH_SCRIPT_FONT', 'DancingScript')
+    if name == 'DancingScript':
+        f = ImageFont.truetype(f'{FD}/DancingScript[wght].ttf', size); f.set_variation_by_axes([600]); return f
+    return ImageFont.truetype(f'{FD}/{name}.ttf', size)
 
 
 def script_text(d, xy, text, font, fill, anchor='la'):
-    """Vẽ dòng chữ viết tay: tô đậm nét (stroke cùng màu) + nét gạch chân bút lông uốn nhẹ bên dưới."""
-    sw = max(1, font.size // 30)
-    d.text(xy, text, font=font, fill=fill, anchor=anchor, stroke_width=sw, stroke_fill=fill)
-    l, t, r, b = d.textbbox(xy, text, font=font, anchor=anchor, stroke_width=sw)
+    """Vẽ dòng chữ viết tay; HH_SCRIPT_LINE=1 thì thêm nét gạch chân bút lông."""
+    d.text(xy, text, font=font, fill=fill, anchor=anchor)
+    if os.environ.get('HH_SCRIPT_LINE') != '1':
+        return
+    l, t, r, b = d.textbbox(xy, text, font=font, anchor=anchor)
     w = r - l
     x0, x1 = l + w * 0.38, r + w * 0.04
     y0 = b + font.size * 0.02
@@ -41,7 +45,7 @@ def script_text(d, xy, text, font, fill, anchor='la'):
         u0, u1 = i / n, (i + 1) / n
         ya = y0 - (u0 - 0.5) ** 2 * font.size * 0.28 + u0 * font.size * 0.05
         yb = y0 - (u1 - 0.5) ** 2 * font.size * 0.28 + u1 * font.size * 0.05
-        th = max(1, int(font.size * 0.075 * (1 - abs(u0 - 0.35) * 1.1)))
+        th = max(1, int(font.size * 0.07 * (1 - abs(u0 - 0.35) * 1.1)))
         d.line([(x0 + (x1 - x0) * u0, ya), (x0 + (x1 - x0) * u1, yb)], fill=fill, width=th)
 
 
