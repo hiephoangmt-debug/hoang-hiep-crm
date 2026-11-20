@@ -1044,6 +1044,55 @@ def hero_fx():
             '<section class="hxs" aria-label="Số liệu dự án"><div class="hxsw"><div><b>30 tầng</b><span>cao 114 m</span></div><div><b>782</b><span>căn hộ</span></div>'
             '<div><b>2,45 ha</b><span>công viên biển trước mặt</span></div><div><b>3,5 m</b><span>chiều cao tầng</span></div><div><b>1,8 tỷ</b><span>giá dự kiến từ (Studio)</span></div></div></section>' + js)
 
+def posters():
+    """Dải poster thông điệp mạnh (học phong cách poster quảng cáo: chữ to chuyển màu cam–đỏ, câu ngắn), ảnh phối cảnh của dự án."""
+    P = [('Dấu ấn', 'MẶT BIỂN', 'Căn hộ mặt biển <b>đầu tiên</b> của Sun Group tại Đà Nẵng', 'view-huong-dong', 'Phòng ngủ nhìn thẳng ra biển (ảnh minh họa)', 'ADS – poster Dấu ấn mặt biển'),
+         ('Khan hiếm', 'VỊ TRÍ', 'Quỹ đất mặt biển không thể nhân bản · <b>hơn 300 m</b> ra biển', 'cover-saphia-hoang-hon', 'Tòa Sun Saphia bên bờ biển Sơn Thủy (ảnh minh họa)', 'ADS – poster Khan hiếm vị trí'),
+         ('Chỉ có', '782 CĂN', 'Cơ hội sở hữu tầm nhìn biển và tầng cao · <b>30 tầng</b>, cao khoảng 114 m', 'phoi-canh-kickoff', 'Tòa tháp Sun Saphia lúc hoàng hôn (ảnh minh họa)', 'ADS – poster 782 cơ hội sở hữu'),
+         ('Chỉ từ', '~1,8 TỶ', 'Thanh toán khoảng <b>25%</b> tới lúc nhận nhà · vay 70%', 'gia-dinh-ban-cong', 'Gia đình thư giãn ở ban công (ảnh minh họa)', 'ADS – poster giá từ 1,8 tỷ')]
+    cards = ''
+    for i, (k, big, sub, im, alt, it) in enumerate(P):
+        cards += ('<button type="button" class="pst-c" data-pop data-interest="%s">'
+                  '<span class="pst-k%s">%s</span><b class="pst-b%s">%s</b><span class="pst-s">%s</span>'
+                  '<img src="%s%s-900.webp" alt="%s" loading="lazy" decoding="async" width="900" height="500"></button>') % (
+                  it, ' pst-kn' if i in (1,) else '', k, ' pst-num' if i in (2, 3) else '', big, sub, V4, im, alt)
+    return ('<section class="pst" aria-label="Điểm nổi bật Sun Saphia Residence"><style>'
+            '.pst{background:linear-gradient(180deg,#FFF6EC,#FFFDF9);padding:34px 0 30px}'
+            '.pst .wrap{display:grid;gap:16px}'
+            '.pst-g{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}'
+            '.pst-c{position:relative;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:4px;border:0;cursor:pointer;font:inherit;color:#0A2540;'
+            'background:linear-gradient(180deg,#FFF3E3 0%,#FFE8D0 100%);border-radius:20px;overflow:hidden;padding:18px 16px 0;min-height:360px;box-shadow:0 10px 30px rgba(233,97,24,.12);transition:transform .25s,box-shadow .25s}'
+            '.pst-c:hover,.pst-c:focus-visible{transform:translateY(-4px);box-shadow:0 18px 40px rgba(233,97,24,.22);outline:none}'
+            '.pst-k{font-family:"Be Vietnam Pro",sans-serif;font-weight:800;font-size:18px;letter-spacing:.06em;text-transform:uppercase;'
+            'background:linear-gradient(90deg,#F7A21B,#E96118 55%,#D62E1F);-webkit-background-clip:text;background-clip:text;color:transparent}'
+            '.pst-kn{background:#1B4F9C;color:#fff;-webkit-background-clip:border-box;background-clip:border-box;padding:4px 12px;border-radius:8px 8px 8px 0;font-size:15px}'
+            '.pst-b{display:block;font-family:"Be Vietnam Pro",sans-serif;font-weight:800;line-height:1.18;padding-top:.08em;letter-spacing:-.01em;font-size:clamp(38px,3.9vw,54px);'
+            'background:linear-gradient(95deg,#F9B233 0%,#F07A1A 40%,#E2401F 75%,#C9201C 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 rgba(255,255,255,.6))}'
+            '.pst-num{font-size:clamp(42px,4.4vw,60px)}'
+            '.pst-s{font-size:14px;line-height:1.45;color:#1E3A5F;max-width:30ch;margin-top:4px}.pst-s b{color:#E2401F}'
+            '.pst-c img{display:block;max-width:none;width:calc(100% + 32px);margin:12px -16px 0;height:170px;object-fit:cover;margin-top:auto;'
+            '-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 28%);mask-image:linear-gradient(180deg,transparent 0,#000 28%)}'
+            '.pst-f{position:relative;display:grid;grid-template-columns:1.2fr 1fr;align-items:center;gap:18px;border-radius:22px;overflow:hidden;padding:24px 26px;color:#fff;'
+            'background:linear-gradient(100deg,rgba(10,37,64,.96) 0%,rgba(10,37,64,.85) 48%,rgba(10,37,64,.25) 100%),url("' + V4 + 'thap-bien-hoang-hon-2-900.webp") right center/cover no-repeat}'
+            '.pst-f .pst-k{font-size:14px;background:none;color:#FFB347;-webkit-background-clip:border-box;background-clip:border-box}'
+            '.pst-ft{display:block;font-family:"Be Vietnam Pro",sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,42px);line-height:1.2;margin:4px 0 8px;'
+            'background:linear-gradient(95deg,#FFD07A,#FF8A3D 50%,#FF5A3C);-webkit-background-clip:text;background-clip:text;color:transparent}'
+            '.pst-fp{margin:0;font-size:15px;line-height:1.55;color:#DCE6EF;max-width:46ch}.pst-fp b{color:#fff}'
+            '.pst-fa{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}'
+            '.pst-note{font-size:12px;color:#6A7280;margin:0}'
+            '@media(max-width:980px){.pst-g{grid-template-columns:repeat(2,1fr)}}'
+            '@media(max-width:620px){.pst{padding:24px 0}.pst-g{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}'
+            '.pst-g::-webkit-scrollbar{display:none}.pst-c{flex:0 0 78%;scroll-snap-align:start;min-height:340px}'
+            '.pst-f{grid-template-columns:1fr;padding:20px 18px;background:linear-gradient(180deg,rgba(10,37,64,.94),rgba(10,37,64,.88)),url("' + V4 + 'thap-bien-hoang-hon-2-900.webp") center/cover}.pst-fa{justify-content:flex-start}}'
+            '@media(prefers-reduced-motion:reduce){.pst-c{transition:none}}'
+            '</style><div class="wrap"><div class="pst-g">' + cards + '</div>'
+            '<div class="pst-f"><div><span class="pst-k">Founding owners</span><b class="pst-ft">Chủ nhân tiên phong</b>'
+            '<p class="pst-fp">Đặt chỗ <b>50 triệu/căn, hoàn lại 100%</b> nếu không mua, được <b>ưu tiên chọn căn</b> trước ngày mở bán <b>05/12/2026</b> tại Đà Nẵng.</p></div>'
+            '<div class="pst-fa"><button type="button" class="btn" data-pop data-interest="ADS – poster Chủ nhân tiên phong (đặt chỗ ưu tiên)">Giữ suất ưu tiên chọn căn</button></div></div>'
+            '<p class="pst-note">Ảnh minh họa – phối cảnh dự án. Giá tham khảo, chưa VAT; giá và chính sách chính thức chủ đầu tư công bố khi mở bán.</p>'
+            '</div></section>')
+
+
 def ads(domain, home_page=False):
     url = MAIN + '/ads'  # cả hai tên miền chuẩn hóa về trang ads chính
     HB = RAW + '90c9302fe8dca2fa597009660b9635821c7d1eb5/landing/sun-saphia/v4/img/hero-bien'
@@ -1128,14 +1177,14 @@ def ads(domain, home_page=False):
     # Bố cục: hero 4D → sự kiện → tổng quan → vị trí → tiện ích → (360°, tầm view) → mặt bằng → loại căn → chính sách → quy hoạch → đầu tư → pháp lý → tầm nhìn
     i = b.index('<div class="hcvt">'); b = b[:i] + '</section>' + b[b.index('</section>', i) + 10:]
     b = cover_top() + hero_fx() + b
-    b = b.replace('<section class="sec tq" id="tong-quan">', su_kien('ADS') + '<section class="sec tq" id="tong-quan">', 1)
+    b = b.replace('<section class="sec tq" id="tong-quan">', posters() + su_kien('ADS') + '<section class="sec tq" id="tong-quan">', 1)
     b += tldr('Sun Saphia Residence', [('Dự án', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, 30 tầng, 782 căn'), ('Loại căn', 'Studio 30 m² · 1BR+ 50 m² · 2BR 60–70 m²'),
-        ('Công trình', 'Cấp I, niên hạn 100 năm · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Sự kiện', '9:00 CN 08/11/2026 tại Sun Gallery Tây Hồ View, Hà Nội · mở bán 05/12/2026 tại Đà Nẵng'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
+        ('Công trình', 'Cấp I, niên hạn 100 năm · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Sự kiện', '9:00 CN 22/11/2026 tại khách sạn Daewoo Hà Nội · mở bán 05/12/2026 tại Đà Nẵng'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
     b += ('<section class="sec"><div class="wrap">' + sh('☀', 'Một ngày ở Saphia', 'Mở cửa ra là <b>biển</b>', 'y') +
           day4()
           + bgal() +
           '<p class="src" style="margin-top:8px">Ảnh chụp thực tế bãi biển Mỹ Khê – Sơn Thủy hướng về bán đảo Sơn Trà.</p></div></section>')
-    b += pband('30 tầng bên <b>biển Mỹ Khê</b>', 'Căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng – sự kiện giới thiệu dự án 9:00 Chủ nhật 08/11/2026 tại Sun Gallery Tây Hồ View, Hà Nội.', 'ADS – dải ảnh tòa tháp')
+    b += pband('30 tầng bên <b>biển Mỹ Khê</b>', 'Căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng – sự kiện giới thiệu dự án 9:00 Chủ nhật 22/11/2026 tại khách sạn Daewoo Hà Nội, mở bán 05/12/2026 tại Đà Nẵng.', 'ADS – dải ảnh tòa tháp')
     b += vitri_dark('vi-tri', 'ADS')
     b += ('<section class="sec alt" id="tien-ich"><div class="wrap">' + sh('04', 'Tiện ích nội – ngoại khu', 'Sống gắn với <b>biển mỗi ngày</b>', 'y') +
           '<div class="g3"><article class="card">' + ('<img class="r" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 400px" width="1600" height="900" alt="Hồ bơi tầng 3 nhìn ra biển – Sun Saphia Residence (ảnh minh họa)" loading="lazy" decoding="async">' % ((RAW + 'a0a6849c15880dc681b6e91708d2a0752bd2aa43/landing/sun-saphia/v4/img/ho-boi-tang-3',) * 3)) + '<h3 style="margin-top:12px">Hồ bơi tầng 3 view biển</h3></article>'
