@@ -1,0 +1,86 @@
+{
+ "tag": "QUY HOẠCH · BÁN ĐẢO SƠN TRÀ",
+ "title": "Hủy quy hoạch khu biệt thự Sơn Trà",
+ "sub": "Bãi bỏ quy hoạch 1/500 năm 2011",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "25,6 ha",
+   "diện tích hủy"
+  ],
+  [
+   "13,2 ha",
+   "đất ở biệt thự"
+  ],
+  [
+   "19/11",
+   "ngày quyết định"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo Tuổi Trẻ, VnExpress 19/11/2026 · Ảnh khu biệt thự bỏ dở trên bán đảo Sơn Trà",
+ "headline": [
+  [
+   "Hủy quy hoạch",
+   "big",
+   0
+  ],
+  [
+   "Biệt thự Sơn Trà",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Hủy quy hoạch",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "BIỆT THỰ SƠN TRÀ",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "giữ rừng bán đảo",
+     "script"
+    ]
+   ],
+   "dx": 160,
+   "over": true
+  }
+ ]
+}
