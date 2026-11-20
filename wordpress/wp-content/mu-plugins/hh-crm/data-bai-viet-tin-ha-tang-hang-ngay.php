@@ -1126,10 +1126,11 @@ HTML
 		'keywords_extra' => array( 'bán đảo Sơn Trà', 'quy hoạch 1/500 Sơn Trà', 'biệt thự Sơn Trà', 'bất động sản Sơn Trà' ),
 		'project'        => 'the-camellia-son-tra',
 		'schedule'       => '2026-11-20 06:45',
+		'rev'            => 2, // 20/11: ảnh The Camellia chưa có trên web → đổi ảnh có sẵn.
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'Sơn Trà', 'Quy hoạch Đà Nẵng', 'Biệt thự' ),
-		'image'          => 'plugin:img/the-camellia/the-camellia-tien-do-8-2026-flycam-huong-bien.jpg',
-		'image_alt'      => 'Hủy quy hoạch khu biệt thự Sơn Trà – khu dân cư chân bán đảo Sơn Trà nhìn ra biển (ảnh flycam thực tế)',
+		'image'          => 'plugin:img/peninsula/peninsula-da-nang-tien-do-6-2026-ben-song-han-ban-dao-son-tra.jpg',
+		'image_alt'      => 'Hủy quy hoạch khu biệt thự Sơn Trà – bán đảo Sơn Trà nhìn từ bờ Tây sông Hàn (ảnh thực tế)',
 		'content'        => <<<'HTML'
 <p>Việc <strong>hủy quy hoạch khu biệt thự Sơn Trà</strong> đã chính thức có quyết định: ngày 19/11/2026, UBND TP Đà Nẵng hủy bỏ hai quyết định quy hoạch của dự án khu biệt thự trên bán đảo Sơn Trà, khép lại một dự án gây tranh cãi hơn 15 năm. Diện tích quy hoạch bị hủy khoảng 25,6 ha, trong đó hơn 13 ha từng được quy hoạch làm đất ở biệt thự.</p>
 <!--hh-featured-->
@@ -1140,7 +1141,7 @@ HTML
 <li><strong>Quyết định 2289/QĐ-UBND ngày 14/4/2014</strong> phê duyệt điều chỉnh tổng mặt bằng khu số 2 của dự án.</li>
 </ul>
 <p>Đồ án bị hủy có tổng diện tích 256.348 m² (khoảng 25,6 ha), trong đó đất ở biệt thự 132.208 m². Sở Xây dựng được giao rà soát, tham mưu phương án xử lý việc dừng thực hiện dự án hạ tầng kỹ thuật khu biệt thự. UBND phường Sơn Trà có trách nhiệm công bố công khai quyết định và quản lý khu vực theo quy hoạch chung, quy hoạch phân khu đã được duyệt.</p>
-<!--hh-img:img/the-camellia/the-camellia-tien-do-8-2026-flycam-huong-bien.jpg|Sau khi hủy quy hoạch khu biệt thự Sơn Trà, khu dân cư chân bán đảo (ảnh) vẫn là nơi hiếm hoi có nhà ở sát biển, sát rừng (ảnh flycam thực tế 8/2026)-->
+<!--hh-img:img/sun-ponte/sun-ponte-toan-canh-ban-dao-son-tra.jpg|Sau khi hủy quy hoạch khu biệt thự Sơn Trà, rừng bán đảo Sơn Trà (phía sau) được giữ làm cảnh quan cho cả bờ Đông sông Hàn (phối cảnh dự án Sun Ponte Residence)-->
 <h2>Quá trình đi tới quyết định hủy quy hoạch khu biệt thự Sơn Trà</h2>
 <p>Dự án khu biệt thự trên bán đảo Sơn Trà được duyệt quy hoạch từ năm 2011, sau đó điều chỉnh năm 2014, nhưng nhiều năm không triển khai trọn vẹn và nằm trong diện rà soát sau các kết luận thanh tra. Đầu tháng 5/2026, UBND phường Sơn Trà tổ chức lấy ý kiến cộng đồng dân cư về việc hủy bỏ đồ án quy hoạch chi tiết 1/500 này (Tuổi Trẻ đưa tin ngày 8/5/2026). Trước đó, thành phố cũng đã thu hồi các chấp thuận ranh giới đất của một số dự án chưa triển khai trên bán đảo.</p>
 <p>Với quyết định ngày 19/11/2026, việc hủy quy hoạch khu biệt thự Sơn Trà cho thấy định hướng rõ của thành phố: bán đảo Sơn Trà ưu tiên bảo tồn rừng, cảnh quan và phát triển du lịch sinh thái có kiểm soát, không mở thêm khu ở biệt thự trên sườn núi.</p>
