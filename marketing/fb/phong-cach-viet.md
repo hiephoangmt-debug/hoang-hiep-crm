@@ -107,3 +107,7 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 - Nền kem – cam nhạt, tiêu đề chữ khối Oswald cực lớn cam → đỏ, nhãn xanh, chữ viết tay tên dự án, ảnh phối cảnh hoà vào nền phía dưới, thanh Hoàng Hiệp + Zalo ở đáy.
 - Dùng cho trang Sun khi bài có MỘT thông điệp/con số mạnh (vị trí, số căn, giá từ, tầng cao…). Bài nhiều số liệu vẫn dùng poster nền xanh.
 - KHÔNG đưa logo Sun Property / Sun Group / đại lý (BHS…), không chép khẩu hiệu chủ đầu tư ("đầu tiên", "không thể nhân bản", "khan hiếm") khi không có nguồn; số chỉ lấy từ tài liệu chủ đầu tư / bài web, ghi "dự kiến" với giá.
+
+## KIỂM TRA LINK TRƯỚC KHI ĐĂNG (anh Hiệp 20/11/2026 báo lỗi "Page Not Found")
+- Bài có trong wordpress/tu-dong/index.json CHƯA CHẮC đã lên web (bài can-ho-hang-hieu-la-gi-nobu-da-nang 20/11 bị 404).
+- Mọi link https://hiephoangmt.com/... trong bài/bình luận đầu: `curl -s -o /dev/null -w '%{http_code}' -L <link>` phải ra 200. Không 200 thì không dùng link đó (đổi sang trang dự án /du-an/<slug>/ đã có, hoặc để bài CHỜ).
