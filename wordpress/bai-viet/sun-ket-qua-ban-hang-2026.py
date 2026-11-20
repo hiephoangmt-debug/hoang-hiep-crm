@@ -29,6 +29,40 @@ def spaced(d, xy, t, f, fill, tr):
         d.text((x, y), ch, font=f, fill=fill); x += d.textlength(ch, font=f) + tr
 
 
+def weather(im, cx, cy, lv):
+    """Biểu tượng thời tiết 0 nắng · 1 nắng + mây · 2 mây · 3 mây mưa · 4 mây đen mưa to · 5 bão sét."""
+    S = 4; sz = 120; ic = Image.new('RGBA', (sz * S, sz * S), (0, 0, 0, 0)); g = ImageDraw.Draw(ic)
+    c = sz * S / 2
+    def sun(x, y, r):
+        for a in range(0, 360, 45):
+            import math
+            dx, dy = math.cos(math.radians(a)), math.sin(math.radians(a))
+            g.line([(x + dx * r * 1.35, y + dy * r * 1.35), (x + dx * r * 1.75, y + dy * r * 1.75)], fill=(244, 170, 40), width=int(r * 0.22))
+        g.ellipse((x - r, y - r, x + r, y + r), fill=(250, 190, 50))
+    def cloud(x, y, w, col):
+        h = w * 0.42
+        g.ellipse((x - w * 0.5, y - h * 0.2, x - w * 0.05, y + h * 0.5), fill=col)
+        g.ellipse((x - w * 0.28, y - h * 0.75, x + w * 0.22, y + h * 0.35), fill=col)
+        g.ellipse((x + 0.0 * w, y - h * 0.45, x + w * 0.5, y + h * 0.5), fill=col)
+        g.rounded_rectangle((x - w * 0.42, y, x + w * 0.42, y + h * 0.5), int(h * 0.25), fill=col)
+    if lv == 0:
+        sun(c, c, 70 * S / 4 * 1.6)
+    elif lv == 1:
+        sun(c - 40 * S / 4 * 1.6, c - 30 * S / 4 * 1.6, 48 * S / 4 * 1.6); cloud(c + 20, c + 60, 300, (214, 224, 236))
+    else:
+        col = {2: (176, 190, 208), 3: (150, 164, 186), 4: (104, 118, 142), 5: (70, 82, 104)}[lv]
+        cloud(c, c - 40, 380, col)
+        if lv >= 3:
+            n_ = {3: 3, 4: 5, 5: 4}[lv]
+            for q in range(n_):
+                x = c - 120 + q * (240 / max(1, n_ - 1))
+                g.line([(x, c + 80), (x - 22, c + 150)], fill=(70, 140, 220), width=16)
+        if lv == 5:
+            g.polygon([(c + 10, c + 40), (c - 50, c + 150), (c - 2, c + 150), (c - 30, c + 230), (c + 60, c + 110), (c + 12, c + 110), (c + 40, c + 40)], fill=(250, 196, 40))
+    ic = ic.resize((sz, sz), Image.LANCZOS)
+    im.alpha_composite(ic, (int(cx - sz / 2), int(cy - sz / 2)))
+
+
 ROWS = [  # (thời điểm, dự án, số bán, nhãn số, bối cảnh thị trường – diễn đạt nhẹ khi gửi khách, nổi bật)
     ('T3/2026', 'Đất nền Võ Chí Công', 350, '350 lô', 'Thị trường còn tốt', False),
     ('T4 – T5', 'FourS Tower F1, F5', 1000, '1.000/1.100 SP', 'Lãi suất cao', True),
@@ -90,17 +124,24 @@ def main(out):
     for k in range(n):
         d.rounded_rectangle((cx[k] - 60, ax_ - 18, cx[k] + 60, ax_ + 18), 18, fill=NV)
         d.text((cx[k], ax_), ROWS[k][0].replace('/2026', ''), font=sans(19, 'ExtraBold'), fill=(255, 255, 255), anchor='mm')
-    # Thị trường (cột xuống)
-    top = ax_ + 62; dmax = 210; sev = [0.12, 0.32, 0.52, 0.7, 0.86, 1.0]; MK = (120, 134, 156)
-    d.text((x0 + 28, ax_ + 28), 'THỊ TRƯỜNG BĐS CHUNG – cột càng dài càng trầm (minh họa)', font=sans(18, 'ExtraBold'), fill=BLUE)
+    # Thị trường: biểu tượng thời tiết (nắng → mây → mưa → bão) – khách nhìn là hiểu.
+    d.text((x0 + 28, ax_ + 30), 'THỜI TIẾT THỊ TRƯỜNG BĐS CHUNG', font=sans(20, 'ExtraBold'), fill=BLUE)
     for k in range(n):
-        h = int(dmax * sev[k])
-        d.rounded_rectangle((cx[k] - bw / 2, top, cx[k] + bw / 2, top + h), 6, fill=MK)
-        d.rectangle((cx[k] - bw / 2, top, cx[k] + bw / 2, top + 6), fill=MK)
+        weather(im, cx[k], ax_ + 150, k)
+    d = ImageDraw.Draw(im)
+    for k in range(n):
         ctx = ROWS[k][4].replace('Thị trường ', '').capitalize()
-        d.text((cx[k], top + h + 8), ctx, font=sans(15, 'SemiBold'), fill=INK, anchor='ma')
+        d.text((cx[k], ax_ + 222), ctx, font=sans(16, 'SemiBold'), fill=INK, anchor='ma')
+    # dải màu dễ bán → khó bán
+    gy = ax_ + 262; gx0, gx1 = cx[0] - 60, cx[-1] + 60
+    for x in range(int(gx0), int(gx1)):
+        t = (x - gx0) / (gx1 - gx0)
+        c = (int(92 + (200 - 92) * t), int(170 + (70 - 170) * t), int(120 + (70 - 120) * t))
+        d.line([(x, gy), (x, gy + 12)], fill=c)
+    d.text((gx0, gy + 20), 'Dễ bán', font=sans(15, 'SemiBold'), fill=(70, 140, 96))
+    d.text((gx1, gy + 20), 'Khó bán', font=sans(15, 'SemiBold'), fill=(190, 70, 70), anchor='ra')
     y = 1182
-    d.text((W // 2, y), 'Thị trường đi xuống – sản phẩm Sun vẫn bán đều', font=script(32), fill=OR, anchor='ma')
+    d.text((W // 2, y), 'Thị trường từ nắng sang bão – Sun vẫn bán đều', font=script(32), fill=OR, anchor='ma')
 
     box = (32, H - 128, W - 32, H - 26); bx, by0, bx2, by1 = box; h = by1 - by0
     ov = Image.new('RGBA', im.size, (0, 0, 0, 0)); ImageDraw.Draw(ov).rounded_rectangle(box, 22, fill=(24, 40, 70, 240)); im.alpha_composite(ov)
