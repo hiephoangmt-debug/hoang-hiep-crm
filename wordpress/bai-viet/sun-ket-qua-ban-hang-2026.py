@@ -29,9 +29,9 @@ def spaced(d, xy, t, f, fill, tr):
         d.text((x, y), ch, font=f, fill=fill); x += d.textlength(ch, font=f) + tr
 
 
-def weather(im, cx, cy, lv):
+def weather(im, cx, cy, lv, sz=120):
     """Biểu tượng thời tiết 0 nắng · 1 nắng + mây · 2 mây · 3 mây mưa · 4 mây đen mưa to · 5 bão sét."""
-    S = 4; sz = 120; ic = Image.new('RGBA', (sz * S, sz * S), (0, 0, 0, 0)); g = ImageDraw.Draw(ic)
+    S = 4; ic = Image.new('RGBA', (sz * S, sz * S), (0, 0, 0, 0)); g = ImageDraw.Draw(ic)
     c = sz * S / 2
     def sun(x, y, r):
         for a in range(0, 360, 45):
@@ -101,45 +101,53 @@ def main(out):
     d.text((60 + tw + 22, 372), 'sản phẩm bán ra', font=sans(30, 'ExtraBold'), fill=INK)
     d.text((60 + tw + 22, 414), 'trong 8 tháng (3 – 10/2026)', font=sans(23, 'Medium'), fill=GREY)
 
-    # Biểu đồ trục thời gian ở giữa: phía trên = số sản phẩm Sun bán ra (cột lên), phía dưới = thị trường chung (cột xuống, càng dài càng trầm – định tính).
+    # Dòng thời gian dạng bảng: mỗi CỘT là một mốc thời gian; hàng trên = Sun bán được, hàng dưới = thị trường lúc đó.
     x0, x1 = 44, W - 44
     sh = Image.new('RGBA', im.size, (0, 0, 0, 0)); ImageDraw.Draw(sh).rounded_rectangle((x0, 492, x1, 1176), 24, fill=(22, 40, 66, 20)); im.alpha_composite(sh)
     d = ImageDraw.Draw(im)
     d.rounded_rectangle((x0, 486, x1, 1170), 24, fill=(255, 255, 255), outline=LINE, width=2)
-    n = len(ROWS); cw = (x1 - x0 - 40) / n; cx = [x0 + 20 + cw * k + cw / 2 for k in range(n)]
-    NM = ['Đất nền Võ Chí Công', 'FourS Tower F1, F5', 'Symphony 5', 'S-Light Tower', 'Penthouse & Shop', 'FourS Tower F2']
-    d.text((x0 + 28, 504), 'SẢN PHẨM SUN GROUP BÁN RA (số sản phẩm)', font=sans(20, 'ExtraBold'), fill=OR)
-    ax_ = 812; base = ax_ - 26; hmax = 170; bw = 92
+    n = len(ROWS); cw = (x1 - x0 - 32) / n; cx = [x0 + 16 + cw * k + cw / 2 for k in range(n)]; hw = cw / 2 - 5
+    NM = ['Đất nền\nVõ Chí Công', 'FourS Tower\nF1, F5', 'Symphony 5', 'S-Light\nTower', 'Penthouse\n& Shop', 'FourS Tower\nF2']
+    # Mốc thời gian + mũi tên chạy
+    ty = 528
+    d.line([(cx[0], ty), (cx[-1] + 40, ty)], fill=(196, 206, 220), width=4)
+    d.polygon([(cx[-1] + 56, ty), (cx[-1] + 38, ty - 11), (cx[-1] + 38, ty + 11)], fill=(196, 206, 220))
+    for k in range(n):
+        d.rounded_rectangle((cx[k] - hw + 6, ty - 19, cx[k] + hw - 6, ty + 19), 19, fill=NV)
+        d.text((cx[k], ty), ROWS[k][0].replace('/2026', ''), font=sans(19, 'ExtraBold'), fill=(255, 255, 255), anchor='mm')
+    # Hàng 1: Sun bán được
+    d.text((x0 + 22, 566), 'SUN GROUP BÁN ĐƯỢC', font=sans(20, 'ExtraBold'), fill=OR)
+    r1, r2 = 598, 830
     for k, (t, name, val, lab, ctx, hot) in enumerate(ROWS):
-        h = max(8, int(hmax * val / 1000)); col = OR if hot else (232, 168, 120)
-        d.rounded_rectangle((cx[k] - bw / 2, base - h, cx[k] + bw / 2, base), 6, fill=col)
-        d.rectangle((cx[k] - bw / 2, base - 6, cx[k] + bw / 2, base), fill=col)
+        bg = OR if hot else (253, 236, 222); fg = (255, 255, 255) if hot else INK; sub = (255, 230, 210) if hot else GREY
+        d.rounded_rectangle((cx[k] - hw, r1, cx[k] + hw, r2), 16, fill=bg)
+        for q, ln in enumerate(NM[k].split('\n')):
+            d.text((cx[k], r1 + 16 + q * 21), ln, font=sans(16, 'SemiBold'), fill=sub, anchor='ma')
         num = lab.split(' ')[0]; unit = lab[len(num):].strip()
-        d.text((cx[k], base - h - 50), NM[k], font=sans(15, 'SemiBold'), fill=GREY, anchor='ms')
-        d.text((cx[k], base - h - 24), num, font=sans(24, 'ExtraBold'), fill=INK, anchor='ms')
-        if unit:
-            d.text((cx[k], base - h - 6), unit, font=sans(14, 'SemiBold'), fill=OR if hot else GREY, anchor='ms')
-    # Trục thời gian
-    d.line([(x0 + 20, ax_), (x1 - 20, ax_)], fill=(196, 206, 220), width=3)
+        f = sans(40, 'ExtraBold')
+        while d.textlength(num, font=f) > 2 * hw - 12: f = sans(f.size - 2, 'ExtraBold')
+        d.text((cx[k], r1 + 128), num, font=f, fill=fg if hot else OR, anchor='mm')
+        for q, ln in enumerate(unit.replace(' · ', '\n').replace('SP (kỷ lục)', 'SP\n(kỷ lục)').split('\n')):
+            d.text((cx[k], r1 + 160 + q * 21), ln.replace('SP', 'sản phẩm'), font=sans(16, 'SemiBold'), fill=sub, anchor='ma')
+    # Hàng 2: thị trường lúc đó (màu xanh → đỏ + biểu tượng thời tiết)
+    d.text((x0 + 22, 850), 'THỊ TRƯỜNG LÚC ĐÓ', font=sans(20, 'ExtraBold'), fill=BLUE)
+    q1, q2 = 882, 1090
     for k in range(n):
-        d.rounded_rectangle((cx[k] - 60, ax_ - 18, cx[k] + 60, ax_ + 18), 18, fill=NV)
-        d.text((cx[k], ax_), ROWS[k][0].replace('/2026', ''), font=sans(19, 'ExtraBold'), fill=(255, 255, 255), anchor='mm')
-    # Thị trường: biểu tượng thời tiết (nắng → mây → mưa → bão) – khách nhìn là hiểu.
-    d.text((x0 + 28, ax_ + 30), 'THỜI TIẾT THỊ TRƯỜNG BĐS CHUNG', font=sans(20, 'ExtraBold'), fill=BLUE)
+        t_ = k / (n - 1)
+        c = (int(226 + (250 - 226) * t_), int(242 + (222 - 242) * t_), int(230 + (222 - 230) * t_))
+        d.rounded_rectangle((cx[k] - hw, q1, cx[k] + hw, q2), 16, fill=c)
     for k in range(n):
-        weather(im, cx[k], ax_ + 150, k)
+        weather(im, cx[k], q1 + 64, k, 96)
     d = ImageDraw.Draw(im)
     for k in range(n):
         ctx = ROWS[k][4].replace('Thị trường ', '').capitalize()
-        d.text((cx[k], ax_ + 222), ctx, font=sans(16, 'SemiBold'), fill=INK, anchor='ma')
-    # dải màu dễ bán → khó bán
-    gy = ax_ + 262; gx0, gx1 = cx[0] - 60, cx[-1] + 60
-    for x in range(int(gx0), int(gx1)):
-        t = (x - gx0) / (gx1 - gx0)
-        c = (int(92 + (200 - 92) * t), int(170 + (70 - 170) * t), int(120 + (70 - 120) * t))
-        d.line([(x, gy), (x, gy + 12)], fill=c)
-    d.text((gx0, gy + 20), 'Dễ bán', font=sans(15, 'SemiBold'), fill=(70, 140, 96))
-    d.text((gx1, gy + 20), 'Khó bán', font=sans(15, 'SemiBold'), fill=(190, 70, 70), anchor='ra')
+        words = ctx.split(' '); a, b = '', ''
+        for w_ in words:
+            if not b and d.textlength((a + ' ' + w_).strip(), font=sans(17, 'ExtraBold')) <= 2 * hw - 14: a = (a + ' ' + w_).strip()
+            else: b = (b + ' ' + w_).strip()
+        d.text((cx[k], q1 + 130), a, font=sans(17, 'ExtraBold'), fill=INK, anchor='ma')
+        if b: d.text((cx[k], q1 + 153), b, font=sans(17, 'ExtraBold'), fill=INK, anchor='ma')
+    d.text((x0 + 22, 1112), 'Trời càng xấu (thị trường càng khó), Sun vẫn bán được hàng ở mọi đợt', font=sans(18, 'SemiBold'), fill=GREY)
     y = 1182
     d.text((W // 2, y), 'Thị trường từ nắng sang bão – Sun vẫn bán đều', font=script(32), fill=OR, anchor='ma')
 
