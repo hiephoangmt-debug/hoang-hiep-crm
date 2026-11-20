@@ -68,7 +68,9 @@ $short_name = trim( preg_replace( '/\s+(Đà Nẵng|Quảng Nam|Hội An)$/u', '
 $hero      = (int) get_post_thumbnail_id();
 $gallery   = hh_ids( 'hh_p_gallery' );
 $img_text  = static fn( $img ) => get_the_title( $img ) . ' ' . get_post_meta( $img, '_wp_attachment_image_alt', true );
-$interior  = array_values( array_filter( $gallery, static fn( $img ) => (bool) preg_match( '/căn (hộ )?mẫu|nội thất|sample|showroom/iu', $img_text( $img ) ) ) );
+$interior  = array_values( array_filter( $gallery, static fn( $img ) => (bool) preg_match( '/căn (hộ )?mẫu|nội thất|sample|showroom|(phòng khách|phòng ngủ|phòng bếp|phòng vệ sinh|phòng tắm|logia)[^|]{0,30}bàn giao/iu', $img_text( $img ) ) ) );
+// Ảnh phối cảnh tiêu chuẩn bàn giao (VD Peninsula Private 20/11/2026): đặt tên khu là "Nội thất bàn giao".
+$int_bg    = $interior && count( array_filter( $interior, static fn( $img ) => (bool) preg_match( '/bàn giao/iu', $img_text( $img ) ) ) ) * 2 >= count( $interior );
 $gallery   = array_values( array_diff( $gallery, $interior, array( $hero ) ) );
 $floors    = hh_ids( 'hh_p_floorplans' );
 $amen_plan = array_values( array_filter( $floors, static fn( $img ) => (bool) preg_match( '/tiện ích/iu', get_the_title( $img ) ) ) );
@@ -205,7 +207,7 @@ $nav = array_filter(
 		'xem-4d'     => ( $m( 'hh_p_tour_4d' ) || $m( 'hh_p_tour_360' ) ) ? 'Xem 4D' : '',
 		'mat-bang'   => ( $master || $floors || apply_filters( 'hh_project_has_map_plan', false, get_the_ID() ) ) ? 'Mặt bằng' : '',
 		'loai-can'   => ( $units || $other_products ) ? 'Loại căn' : '',
-		'noi-that'   => $interior ? 'Nội thất' : '',
+		'noi-that'   => $interior ? ( $int_bg ? 'Bàn giao' : 'Nội thất' ) : '',
 		'bang-gia'   => ( $price_tbl || $m( 'hh_p_price_from' ) || $m( 'hh_p_resale_price' ) ) ? 'Giá' : '',
 		'gia-khu-vuc' => $price_log ? 'Giá khu vực' : '',
 		'thanh-toan' => ( $payment || $policy || $m( 'hh_p_loan' ) ) ? 'Thanh toán' : '',
@@ -559,9 +561,15 @@ if ( ! $parent ) {
 <!-- NỘI THẤT CĂN MẪU -->
 <section id="noi-that" style="background:#fff" aria-labelledby="h-nt">
   <div class="container">
+    <?php if ( $int_bg ) : ?>
+    <span class="eyebrow">Tiêu chuẩn bàn giao</span>
+    <h2 class="title" id="h-nt">Nội thất bàn giao <em><?php echo $e( $short_name ); ?></em></h2>
+    <p class="lead"><?php echo $e( $m( 'hh_p_handover_std' ) ?: 'Phối cảnh vật liệu, thiết bị bàn giao theo tài liệu chủ đầu tư.' ); ?> Đồ rời, trang trí trong ảnh chỉ để minh họa.</p>
+    <?php else : ?>
     <span class="eyebrow">Nội thất căn mẫu</span>
     <h2 class="title" id="h-nt">Căn hộ mẫu <em><?php echo $e( $short_name ); ?></em></h2>
     <p class="lead">Phối cảnh nội thất căn hộ mẫu của chủ đầu tư. Bàn giao thực tế theo tiêu chuẩn của từng loại căn; đồ rời, trang trí trong ảnh chỉ để minh họa.</p>
+    <?php endif; ?>
     <div class="interior">
       <?php foreach ( array_slice( $interior, 0, 9 ) as $i => $img ) { echo $card( $img, $cap( $img ), 0 === $i ); } // phpcs:ignore ?>
     </div>
