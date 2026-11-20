@@ -1494,5 +1494,357 @@ HTML
 			'https://doanhnghiephoinhap.vn/loat-du-an-can-ho-cao-cap-ven-song-han-ve-dich-dung-mua-cao-diem-du-lich-137675.html',
 		),
 	);
+	/* ================= 20/11 – Cụm bài The Poet Residence (anh Hiệp yêu cầu: nội thất, vị trí, tiện ích, mặt bằng, giá) ================= */
+	$poet   = '<a href="/du-an/the-poet-residence-da-nang/">The Poet Residence</a>';
+	$poetcta = '<p>Cần bảng hàng, mặt bằng tầng và chính sách đang áp dụng của The Poet Residence, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>';
+	$poetsrc = '<p class="src">Nguồn: tài liệu chủ đầu tư Phúc Thanh An; <a href="https://thuvienphapluat.vn/phap-luat-nha-dat/du-an-the-poet-residence-da-nang-gia-ban-hien-nay-bao-nhieu-8667.html">Thư viện Pháp luật</a>; <a href="https://www.centralcons.vn/?p=13782">Central (tổng thầu)</a>. Phối cảnh mang tính minh họa; số liệu cập nhật 11/2026.</p>';
+	$poetsources = array( 'https://thuvienphapluat.vn/phap-luat-nha-dat/du-an-the-poet-residence-da-nang-gia-ban-hien-nay-bao-nhieu-8667.html', 'https://www.centralcons.vn/?p=13782', 'https://thuvienphapluat.vn/phap-luat-nha-dat/he-thong-tien-ich-du-an-the-poet-residence-co-gi-thu-hut-15044.html' );
+
+	/* ---------------- The Poet – Nội thất bàn giao ---------------- */
+	$posts[] = array(
+		'slug'     => 'noi-that-the-poet-residence',
+		'title'    => 'Nội thất The Poet Residence: bàn giao những gì trong căn hộ 2027?',
+		'excerpt'  => 'Nội thất The Poet Residence bàn giao hoàn thiện: sàn porcelain 800×800, kính hộp Low-E, điều hòa âm trần Samsung, khóa điện tử, bếp Teka/Malloca, thiết bị vệ sinh Grohe/Toto – chi tiết từng phòng và lưu ý khi nhận nhà.',
+		'keyword'  => 'nội thất The Poet Residence',
+		'keywords_extra' => array( 'bàn giao The Poet Residence', 'căn hộ mẫu The Poet', 'tiêu chuẩn bàn giao căn hộ Đà Nẵng' ),
+		'project'  => 'the-poet-residence-da-nang',
+		'schedule' => '2026-11-21 08:15',
+		'category' => 'Tin dự án',
+		'tags'     => array( 'The Poet Residence', 'Nội thất', 'Bàn giao' ),
+		'image'    => 'plugin:img/the-poet/the-poet-can-mau-phong-khach-view-bien.jpg',
+		'image_alt' => 'Nội thất The Poet Residence – phòng khách căn hộ mẫu nhìn ra biển (phối cảnh)',
+		'content'  => <<<HTML
+<p><strong>Nội thất The Poet Residence</strong> được bàn giao hoàn thiện theo danh mục vật tư của chủ đầu tư Phúc Thanh An: người mua nhận căn hộ có sàn, trần, cửa, điều hòa, bếp và thiết bị vệ sinh, chỉ cần bổ sung đồ rời là vào ở hoặc cho thuê. Bài này đi qua từng phòng để anh chị biết nội thất The Poet Residence gồm những gì và nên kiểm tra gì khi nhận nhà năm 2027.</p>
+<!--hh-featured-->
+<h2>Tổng quan nội thất The Poet Residence khi bàn giao</h2>
+<p>Theo danh mục chủ đầu tư công bố, {$poet} bàn giao căn hộ hoàn thiện cao cấp. Thương hiệu ghi trong danh mục có thể được thay bằng loại tương đương khi thi công, vì vậy khi ký hợp đồng mua bán nên đối chiếu phụ lục vật tư đính kèm.</p>
+<table>
+<thead><tr><th>Hạng mục</th><th>Vật liệu, thiết bị bàn giao</th></tr></thead>
+<tbody>
+<tr><td>Sàn</td><td>Gạch porcelain khổ lớn 800×800</td></tr>
+<tr><td>Trần, tường</td><td>Trần thạch cao Vĩnh Tường / Gyproc, sơn Jotun</td></tr>
+<tr><td>Cửa sổ, cửa logia</td><td>Nhôm Xingfa, kính hộp Low-E giảm nóng và cách âm</td></tr>
+<tr><td>Cửa chính</td><td>Khóa điện tử Sharp</td></tr>
+<tr><td>Điều hòa</td><td>Điều hòa âm trần Samsung</td></tr>
+<tr><td>Thiết bị điện</td><td>Legrand</td></tr>
+<tr><td>Bếp</td><td>Bếp Teka / Malloca, tủ bếp An Cường / Suofeiya</td></tr>
+<tr><td>Phòng tắm</td><td>Thiết bị vệ sinh Innoci / Grohe / Toto</td></tr>
+</tbody>
+</table>
+<!--hh-img:img/the-poet/the-poet-can-mau-phong-khach-view-bien.jpg|Nội thất The Poet Residence: phòng khách căn hộ mẫu với kính lớn nhìn ra biển Mỹ Khê (phối cảnh chủ đầu tư)-->
+<h2>Phòng khách và bếp: kính lớn, bếp liền khối</h2>
+<p>Phòng khách căn hộ The Poet dùng kính lớn kịch trần, tận dụng hướng nhìn biển Mỹ Khê (căn phía Đông Bắc) hoặc sông Hàn (căn phía Tây Nam). Sàn porcelain sáng màu giúp không gian rộng hơn. Bếp bố trí liền phòng khách, tủ bếp gỗ công nghiệp phủ chống ẩm, mặt bếp đá, bếp từ và hút mùi theo danh mục.</p>
+<!--hh-img:img/the-poet/the-poet-can-mau-phong-khach-bep.jpg|Phòng khách liền bếp – căn hộ mẫu The Poet Residence (phối cảnh)-->
+<p>Đồ rời trong ảnh căn mẫu như sofa, bàn ăn, tranh, thảm là đồ trang trí minh họa, không nằm trong danh mục nội thất The Poet Residence bàn giao. Ngân sách đồ rời cho căn 2PN thường khoảng vài trăm triệu tùy phong cách.</p>
+<h2>Phòng ngủ và phòng tắm có cửa sổ riêng</h2>
+<p>Điểm cộng của nội thất The Poet Residence là phòng tắm có cửa sổ riêng, thoáng và khô hơn phòng tắm kín. Phòng ngủ master có tủ áo, bàn trang điểm trong căn mẫu; điều hòa âm trần Samsung giữ trần phẳng, gọn.</p>
+<!--hh-img:img/the-poet/the-poet-can-mau-phong-ngu-master.jpg|Phòng ngủ master – nội thất The Poet Residence căn mẫu (phối cảnh)-->
+<!--hh-img:img/the-poet/the-poet-can-mau-phong-tam.jpg|Phòng tắm căn hộ mẫu The Poet Residence, thiết bị vệ sinh Grohe / Toto hoặc tương đương (phối cảnh)-->
+<h2>Kiểm tra gì khi nhận nội thất The Poet Residence?</h2>
+<ul>
+<li><strong>Đối chiếu phụ lục vật tư:</strong> thương hiệu, mã sản phẩm từng hạng mục so với hợp đồng mua bán.</li>
+<li><strong>Sàn và tường:</strong> gõ thử gạch tìm chỗ bộp, kiểm tra vết nứt, mạch ron, độ phẳng tường.</li>
+<li><strong>Cửa kính Low-E:</strong> đóng mở cửa logia, kiểm tra gioăng chống nước khi mưa lớn.</li>
+<li><strong>Điện nước, điều hòa:</strong> bật thử toàn bộ, kiểm tra thoát nước sàn tắm, bếp, logia.</li>
+<li><strong>Bảo hành:</strong> căn hộ bảo hành 60 tháng – ghi rõ lỗi vào biên bản để chủ đầu tư khắc phục.</li>
+</ul>
+<h2>Nội thất The Poet Residence có hợp để cho thuê?</h2>
+<p>Với vị trí cách biển Mỹ Khê khoảng 300 m, căn hộ bàn giao sẵn điều hòa, bếp và thiết bị vệ sinh giúp chủ nhà chỉ cần thêm giường, sofa, rèm là cho thuê được. Nội thất The Poet Residence theo hướng hiện đại, sáng màu, dễ phối đồ và dễ bảo trì – phù hợp khách thuê dài hạn lẫn ngắn ngày. Xem thêm {$poet} để biết loại căn và giá tham khảo, hoặc bài <a href="/can-ho-da-nang-sap-ban-giao-2026-2027/">căn hộ Đà Nẵng sắp bàn giao 2026 – 2027</a>.</p>
+{$poetcta}
+{$poetsrc}
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Nội thất The Poet Residence: bàn giao 8 hạng mục 2027',
+			'desc'      => 'Nội thất The Poet Residence bàn giao hoàn thiện: sàn porcelain, kính Low-E, điều hòa Samsung, bếp Teka, thiết bị Grohe/Toto, khóa điện tử – chi tiết từng phòng.',
+			'points'    => array(
+				'Bàn giao hoàn thiện: sàn porcelain 800×800, trần Vĩnh Tường, sơn Jotun, cửa Xingfa kính hộp Low-E',
+				'Điều hòa âm trần Samsung, điện Legrand, khóa điện tử Sharp, bếp Teka/Malloca, tủ bếp An Cường/Suofeiya',
+				'Phòng tắm có cửa sổ riêng, thiết bị Innoci/Grohe/Toto; bảo hành căn hộ 60 tháng',
+			),
+			'faq'       => array(
+				array( 'Nội thất The Poet Residence bàn giao những gì?', 'Sàn porcelain, trần thạch cao, sơn, cửa nhôm kính Low-E, khóa điện tử, điều hòa âm trần, thiết bị điện, bếp và tủ bếp, thiết bị vệ sinh – theo danh mục vật tư chủ đầu tư.' ),
+				array( 'Có bàn giao sofa, giường, tủ đồ rời không?', 'Không. Đồ rời trong ảnh căn hộ mẫu chỉ để minh họa; người mua tự bổ sung theo nhu cầu.' ),
+				array( 'Thương hiệu có thể thay đổi không?', 'Có thể thay bằng loại tương đương; nên đối chiếu phụ lục vật tư trong hợp đồng mua bán.' ),
+				array( 'Căn hộ bảo hành bao lâu?', 'Theo chủ đầu tư, căn hộ The Poet Residence bảo hành 60 tháng.' ),
+			),
+		),
+		'sources'  => $poetsources,
+	);
+
+	/* ---------------- The Poet – Vị trí ---------------- */
+	$posts[] = array(
+		'slug'     => 'vi-tri-the-poet-residence',
+		'title'    => 'Vị trí The Poet Residence: 300 m ra biển Mỹ Khê, kết nối trung tâm thế nào?',
+		'excerpt'  => 'Vị trí The Poet Residence tại 95 – 99 Hồ Xuân Hương (Ngũ Hành Sơn): cách biển Mỹ Khê khoảng 300 m, cầu Tiên Sơn 1,5 km, Lotte Mart 2 km, sân bay 6,5 km – phân tích ưu nhược điểm vị trí.',
+		'keyword'  => 'vị trí The Poet Residence',
+		'keywords_extra' => array( 'The Poet Residence ở đâu', 'căn hộ gần biển Mỹ Khê', 'căn hộ Hồ Xuân Hương Đà Nẵng' ),
+		'project'  => 'the-poet-residence-da-nang',
+		'schedule' => '2026-11-22 08:15',
+		'category' => 'Tin dự án',
+		'tags'     => array( 'The Poet Residence', 'Vị trí', 'Ngũ Hành Sơn' ),
+		'image'    => 'plugin:img/the-poet/the-poet-toan-canh-bien-my-khe.jpg',
+		'image_alt' => 'Vị trí The Poet Residence nhìn ra biển Mỹ Khê và bán đảo Sơn Trà (phối cảnh)',
+		'content'  => <<<HTML
+<p><strong>Vị trí The Poet Residence</strong> nằm tại 95 – 97 – 99 Hồ Xuân Hương, phường Ngũ Hành Sơn, Đà Nẵng – trên trục đường nối thẳng ra biển Mỹ Khê, cách bãi biển khoảng 300 m. Đây là lý do chính khiến dự án được người mua để ở lẫn đầu tư cho thuê quan tâm. Bài viết phân tích vị trí The Poet Residence: kết nối, tiện ích xung quanh và điểm cần cân nhắc.</p>
+<!--hh-featured-->
+<h2>Vị trí The Poet Residence trên bản đồ Đà Nẵng</h2>
+<p>{$poet} thuộc khu Mỹ An cũ, giữa hai trục du lịch lớn là biển Mỹ Khê (phía Đông) và sông Hàn (phía Tây). Hồ Xuân Hương là đường nối từ cầu Tiên Sơn ra biển, hai bên là khách sạn, nhà hàng và khu phố du lịch.</p>
+<!--hh-img:img/the-poet/the-poet-toan-canh-bien-my-khe.jpg|Vị trí The Poet Residence gần biển Mỹ Khê, nhìn về bán đảo Sơn Trà (phối cảnh chủ đầu tư)-->
+<h2>Khoảng cách từ The Poet Residence tới các điểm chính</h2>
+<table>
+<thead><tr><th>Điểm đến</th><th>Khoảng cách (ước tính)</th></tr></thead>
+<tbody>
+<tr><td>Biển Mỹ Khê</td><td>Khoảng 300 m – đi bộ vài phút</td></tr>
+<tr><td>Cầu Tiên Sơn</td><td>Khoảng 1,5 km</td></tr>
+<tr><td>Lotte Mart Đà Nẵng</td><td>Khoảng 2 km</td></tr>
+<tr><td>Đà Nẵng Downtown</td><td>Khoảng 3,5 km</td></tr>
+<tr><td>Sân bay quốc tế Đà Nẵng</td><td>Khoảng 6,5 km</td></tr>
+</tbody>
+</table>
+<p>Với vị trí The Poet Residence, qua cầu Tiên Sơn là vào Hải Châu; theo Võ Nguyên Giáp lên Sơn Trà hoặc xuống Non Nước, Hội An. Khu vực ít ngập, đường rộng, gần trường học và chợ dân sinh khu Mỹ An.</p>
+<h2>Hai hướng view: biển Mỹ Khê và sông Hàn</h2>
+<p>Do vị trí The Poet Residence nằm giữa biển và sông, tòa tháp 25 tầng có hai hướng nhìn rõ ràng: căn phía Đông Bắc nhìn biển Mỹ Khê và bán đảo Sơn Trà; căn phía Tây Nam nhìn sông Hàn, cầu Rồng và pháo hoa DIFF mỗi mùa lễ hội. Tầng mái có quảng trường ngắm pháo hoa dành cho cư dân.</p>
+<!--hh-img:img/the-poet/the-poet-toan-canh-dem-song-han.jpg|The Poet Residence về đêm nhìn về sông Hàn, cầu Rồng – hướng view Tây Nam (phối cảnh)-->
+<h2>Vị trí The Poet Residence hợp với ai?</h2>
+<ul>
+<li><strong>Gia đình mua để ở:</strong> gần biển để tập thể dục buổi sáng, gần siêu thị, trường học, vào trung tâm chỉ một cây cầu.</li>
+<li><strong>Nhà đầu tư cho thuê:</strong> khu Mỹ Khê – Hồ Xuân Hương đông khách du lịch quanh năm, nhu cầu thuê ngắn ngày và dài hạn đều ổn định.</li>
+<li><strong>Người làm việc tự do, chuyên gia:</strong> sống cạnh biển nhưng vẫn gần khu văn phòng, sân bay.</li>
+</ul>
+<h2>Điểm cần cân nhắc</h2>
+<p>Đường Hồ Xuân Hương đông xe giờ cao điểm và mùa du lịch; căn tầng thấp phía mặt đường sẽ ồn hơn căn tầng cao. Khu đất 2.009 m² nên sân vườn mặt đất hạn chế – bù lại tiện ích tập trung ở tầng 3 và tầng mái. Khi chọn căn, nên ưu tiên tầng cao và hướng view phù hợp nhu cầu.</p>
+<p>So sánh thêm: căn hộ ven biển phía Nam như <a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a> (Trường Sa) hay dự án bên kia cầu Tiên Sơn <a href="/du-an/masteri-da-nang/">Masteri Rivera Danang</a> – mỗi nơi một lợi thế. Vị trí The Poet Residence nổi bật ở chỗ vừa sát biển vừa gần trung tâm.</p>
+<h2>Hạ tầng quanh vị trí The Poet Residence đang thay đổi</h2>
+<p>Khu bờ Đông sông Hàn và trục ven biển đang được thành phố đầu tư mạnh: chỉnh trang tuyến Võ Nguyên Giáp – Trường Sa, các dự án quanh cầu Tiên Sơn và khu Đà Nẵng Downtown. Khi hạ tầng hoàn thiện, giá trị của vị trí The Poet Residence – nằm ngay giữa biển và sông – càng rõ hơn. Theo dõi các tin hạ tầng mới trong mục tin tức Hạ tầng &amp; quy hoạch trên web Hoàng Hiệp.</p>
+<p>Một lợi thế ít người để ý: từ dự án đi bộ được tới biển, nên cư dân ít phụ thuộc xe máy, ô tô cho nhu cầu hằng ngày như tắm biển, chạy bộ, ăn uống. Với khách thuê du lịch, "đi bộ ra biển" là tiêu chí lọc phòng đầu tiên trên các ứng dụng đặt phòng.</p>
+{$poetcta}
+{$poetsrc}
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Vị trí The Poet Residence: cách biển Mỹ Khê 300 m',
+			'desc'      => 'Vị trí The Poet Residence tại 95 – 99 Hồ Xuân Hương: cách biển Mỹ Khê khoảng 300 m, cầu Tiên Sơn 1,5 km, sân bay 6,5 km, view biển hoặc sông Hàn.',
+			'points'    => array(
+				'Địa chỉ 95 – 97 – 99 Hồ Xuân Hương, phường Ngũ Hành Sơn – cách biển Mỹ Khê khoảng 300 m',
+				'Khoảng 1,5 km tới cầu Tiên Sơn, 2 km Lotte Mart, 3,5 km Đà Nẵng Downtown, 6,5 km sân bay',
+				'Hai hướng view: biển Mỹ Khê – Sơn Trà (Đông Bắc) và sông Hàn – pháo hoa (Tây Nam)',
+			),
+			'faq'       => array(
+				array( 'The Poet Residence ở đâu?', 'Tại 95 – 97 – 99 Hồ Xuân Hương, phường Ngũ Hành Sơn, Đà Nẵng, cách biển Mỹ Khê khoảng 300 m.' ),
+				array( 'Từ dự án ra sân bay bao xa?', 'Khoảng 6,5 km, đi qua cầu Tiên Sơn khoảng 15 phút.' ),
+				array( 'Căn nào view biển, căn nào view sông?', 'Căn phía Đông Bắc nhìn biển Mỹ Khê và Sơn Trà; căn phía Tây Nam nhìn sông Hàn, cầu Rồng và pháo hoa.' ),
+				array( 'Vị trí The Poet Residence có hợp cho thuê không?', 'Có. Khu Mỹ Khê – Hồ Xuân Hương đông khách du lịch, nhu cầu thuê ngắn ngày và dài hạn ổn định.' ),
+			),
+		),
+		'sources'  => $poetsources,
+	);
+
+	/* ---------------- The Poet – Tiện ích ---------------- */
+	$posts[] = array(
+		'slug'     => 'tien-ich-the-poet-residence',
+		'title'    => 'Tiện ích The Poet Residence: hồ bơi trong nhà, gym, tầng mái ngắm pháo hoa',
+		'excerpt'  => 'Tiện ích The Poet Residence theo từng tầng: café, mini mart tầng 1; nhà trẻ tầng 2; hồ bơi trong nhà khoảng 231 m², bể sục, gym, yoga tầng 3; vườn trà, bar, quảng trường ngắm pháo hoa trên tầng mái.',
+		'keyword'  => 'tiện ích The Poet Residence',
+		'keywords_extra' => array( 'hồ bơi The Poet Residence', 'tầng mái ngắm pháo hoa Đà Nẵng', 'căn hộ có hồ bơi trong nhà Đà Nẵng' ),
+		'project'  => 'the-poet-residence-da-nang',
+		'schedule' => '2026-11-23 08:15',
+		'category' => 'Tin dự án',
+		'tags'     => array( 'The Poet Residence', 'Tiện ích' ),
+		'image'    => 'plugin:img/the-poet/the-poet-ho-boi.jpg',
+		'image_alt' => 'Tiện ích The Poet Residence – hồ bơi trong nhà tầng 3 (phối cảnh)',
+		'content'  => <<<HTML
+<p><strong>Tiện ích The Poet Residence</strong> được bố trí theo tầng: tầng 1 thương mại, tầng 2 cho trẻ em và sinh hoạt cộng đồng, tầng 3 là hồ bơi trong nhà cùng gym – yoga, và tầng mái dành cho vườn, bar, ngắm pháo hoa sông Hàn. Với tòa tháp 25 tầng, 263 căn, mật độ cư dân vừa phải giúp tiện ích ít đông đúc hơn các tổ hợp lớn.</p>
+<!--hh-featured-->
+<h2>Tiện ích The Poet Residence theo từng tầng</h2>
+<table>
+<thead><tr><th>Tầng</th><th>Tiện ích</th></tr></thead>
+<tbody>
+<tr><td>Tầng 1</td><td>Sảnh đón, café, mini mart, văn phòng cho thuê</td></tr>
+<tr><td>Tầng 2</td><td>2 nhà trẻ, 2 phòng sinh hoạt cộng đồng</td></tr>
+<tr><td>Tầng 3</td><td>Hồ bơi trong nhà người lớn khoảng 231 m² và hồ trẻ em, bể sục, gym – aerobic – yoga, khu thư giãn</td></tr>
+<tr><td>Tầng mái</td><td>Vườn trà, bar coffee, quảng trường ngắm pháo hoa, khu vui chơi trẻ em, khu VIP</td></tr>
+<tr><td>Hầm</td><td>Khoảng 92 chỗ ô tô, 353 chỗ xe máy</td></tr>
+</tbody>
+</table>
+<h2>Hồ bơi trong nhà – dùng được quanh năm</h2>
+<p>Khác nhiều dự án ven biển dùng hồ bơi ngoài trời, tiện ích The Poet Residence có hồ bơi trong nhà ở tầng 3, dùng được cả mùa mưa và mùa đông Đà Nẵng. Bên cạnh là bể sục và khu ghế thư giãn, phù hợp gia đình có trẻ nhỏ và người lớn tuổi.</p>
+<!--hh-img:img/the-poet/the-poet-ho-boi.jpg|Tiện ích The Poet Residence: hồ bơi trong nhà tầng 3 dùng được quanh năm (phối cảnh)-->
+<!--hh-img:img/the-poet/the-poet-be-suc.jpg|Bể sục cạnh hồ bơi trong nhà The Poet Residence (phối cảnh)-->
+<h2>Gym, yoga và lounge cư dân</h2>
+<p>Phòng gym nhìn ra phố, phòng yoga riêng và lounge sinh hoạt giúp cư dân không phải ra ngoài để tập luyện. Tầng 2 có nhà trẻ và phòng cộng đồng – điểm cộng cho gia đình trẻ.</p>
+<!--hh-img:img/the-poet/the-poet-gym.jpg|Phòng gym – tiện ích The Poet Residence (phối cảnh)-->
+<h2>Tầng mái ngắm pháo hoa sông Hàn</h2>
+<p>Điểm riêng của tiện ích The Poet Residence là tầng mái thiết kế thành không gian ngoài trời: vườn trà, bar coffee, khu VIP và quảng trường ngắm pháo hoa. Mỗi mùa Lễ hội pháo hoa quốc tế Đà Nẵng (DIFF), cư dân có chỗ xem pháo hoa ngay trên nóc nhà.</p>
+<!--hh-img:img/the-poet/the-poet-tang-mai-phao-hoa-song-han.jpg|Tầng mái The Poet Residence – bar, vườn, quảng trường ngắm pháo hoa sông Hàn (phối cảnh)-->
+<h2>Tiện ích xung quanh dự án</h2>
+<p>Ngoài nội khu, cư dân đi bộ khoảng 300 m ra biển Mỹ Khê, vài phút tới Lotte Mart, nhà hàng hải sản và phố du lịch Hồ Xuân Hương. Tiện ích The Poet Residence vì vậy gồm cả "tiện ích mượn" của khu biển – thứ mà các dự án xa biển khó có. An ninh: kiểm soát thẻ xe hầm, thang máy, thang bộ, camera toàn tòa, 4 thang máy Schindler.</p>
+<h2>Phí tiện ích, phí quản lý</h2>
+<p>Chủ đầu tư chưa công bố phí quản lý và phí sử dụng tiện ích; tư vấn vận hành dự kiến là CBRE. Khi ký hợp đồng nên hỏi rõ tiện ích nào miễn phí cho cư dân, tiện ích nào tính phí. Xem thêm trang {$poet} và bài <a href="/vi-tri-the-poet-residence/">vị trí The Poet Residence</a>.</p>
+<h2>So sánh tiện ích The Poet Residence với căn hộ ven biển khác</h2>
+<p>Các tổ hợp lớn thường có hồ bơi ngoài trời rộng, công viên nội khu; đổi lại số căn rất nhiều, tiện ích đông vào cuối tuần. Tiện ích The Poet Residence gọn hơn nhưng dành cho 263 căn, dùng trong nhà được quanh năm, và có tầng mái ngắm pháo hoa – điểm hiếm ở khu Mỹ Khê. Với người mua để ở, tiện ích The Poet Residence đáp ứng nhu cầu hằng ngày: bơi, tập, chỗ cho trẻ chơi, cà phê ngay dưới nhà.</p>
+<p>Với nhà đầu tư cho thuê, hồ bơi trong nhà, gym và tầng mái là điểm cộng khi đăng phòng: khách du lịch ưu tiên căn hộ có hồ bơi và chỗ ngắm cảnh. Kết hợp vị trí cách biển khoảng 300 m, tiện ích The Poet Residence giúp căn hộ dễ cho thuê cả mùa thấp điểm.</p>
+{$poetcta}
+{$poetsrc}
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Tiện ích The Poet Residence: hồ bơi 231 m², tầng mái',
+			'desc'      => 'Tiện ích The Poet Residence: hồ bơi trong nhà khoảng 231 m², bể sục, gym, yoga, nhà trẻ, tầng mái ngắm pháo hoa sông Hàn, 92 chỗ ô tô – chi tiết từng tầng.',
+			'points'    => array(
+				'Tầng 3: hồ bơi trong nhà khoảng 231 m², hồ trẻ em, bể sục, gym – aerobic – yoga',
+				'Tầng mái: vườn trà, bar coffee, quảng trường ngắm pháo hoa sông Hàn, khu VIP',
+				'Tầng 1 café, mini mart; tầng 2 nhà trẻ, phòng cộng đồng; hầm khoảng 92 chỗ ô tô',
+			),
+			'faq'       => array(
+				array( 'The Poet Residence có hồ bơi không?', 'Có hồ bơi trong nhà người lớn khoảng 231 m² và hồ trẻ em ở tầng 3, kèm bể sục.' ),
+				array( 'Tầng mái có gì?', 'Vườn trà, bar coffee, quảng trường ngắm pháo hoa sông Hàn, khu vui chơi trẻ em và khu VIP.' ),
+				array( 'Có chỗ đỗ ô tô không?', 'Khoảng 92 chỗ ô tô và 353 chỗ xe máy ở tầng hầm và tầng 1.' ),
+				array( 'Tiện ích The Poet Residence có tính phí không?', 'Chủ đầu tư chưa công bố; nên hỏi rõ khi ký hợp đồng. Tư vấn vận hành dự kiến là CBRE.' ),
+			),
+		),
+		'sources'  => $poetsources,
+	);
+
+	/* ---------------- The Poet – Mặt bằng, layout ---------------- */
+	$posts[] = array(
+		'slug'     => 'mat-bang-the-poet-residence',
+		'title'    => 'Mặt bằng The Poet Residence: layout 1PN+1 đến 3PN góc, chọn căn nào?',
+		'excerpt'  => 'Mặt bằng The Poet Residence: mỗi tầng điển hình 12 căn gồm 1PN+1 45,8 m², 2PN 64,4 – 80,6 m², 3PN góc 89,4 m²; căn Đông Bắc view biển Mỹ Khê, căn Tây Nam view sông Hàn – cách chọn căn theo nhu cầu.',
+		'keyword'  => 'mặt bằng The Poet Residence',
+		'keywords_extra' => array( 'layout The Poet Residence', 'căn 2PN The Poet', 'căn 3PN view biển Mỹ Khê' ),
+		'project'  => 'the-poet-residence-da-nang',
+		'schedule' => '2026-11-24 08:15',
+		'category' => 'Tin dự án',
+		'tags'     => array( 'The Poet Residence', 'Mặt bằng', 'Layout căn hộ' ),
+		'image'    => 'plugin:img/the-poet/the-poet-layout-3pn-89.jpg',
+		'image_alt' => 'Mặt bằng The Poet Residence – layout căn 3PN góc 89,4 m²',
+		'content'  => <<<HTML
+<p>Trước khi chọn căn, nên xem kỹ <strong>mặt bằng The Poet Residence</strong>: tòa nhà gồm 25 tầng nổi và 2 tầng hầm; từ tầng 4 đến 23 mỗi tầng điển hình có 12 căn, từ 1PN+1 khoảng 45,8 m² tới 3PN góc 89,4 m², trên cùng là 5 penthouse thông tầng 190 – 235 m². Bài viết đọc mặt bằng The Poet Residence theo từng loại căn để anh chị chọn căn hợp nhu cầu ở hoặc cho thuê.</p>
+<p>Toàn bộ layout dưới đây là bản vẽ của chủ đầu tư; diện tích là thông thủy, có thể chênh nhẹ giữa các tầng.</p>
+<!--hh-featured-->
+<h2>Cơ cấu mặt bằng The Poet Residence</h2>
+<table>
+<thead><tr><th>Loại căn</th><th>Diện tích thông thủy</th><th>Hướng view chính</th></tr></thead>
+<tbody>
+<tr><td>1PN+1</td><td>Khoảng 45,8 – 46,7 m²</td><td>Biển Mỹ Khê</td></tr>
+<tr><td>2PN</td><td>Khoảng 64,4 – 66,2 m²</td><td>Biển Mỹ Khê (logia Đông Bắc)</td></tr>
+<tr><td>2PN góc</td><td>Khoảng 74,9 – 80,6 m²</td><td>Sông Hàn, pháo hoa (logia Tây Nam)</td></tr>
+<tr><td>3PN góc</td><td>Khoảng 89,4 – 91,4 m²</td><td>Biển Mỹ Khê, 2 logia</td></tr>
+<tr><td>Penthouse thông tầng</td><td>190 – 235 m² (5 căn)</td><td>Toàn cảnh</td></tr>
+</tbody>
+</table>
+<p>Tầng căn hộ cao 3,3 m, hành lang rộng 1,8 m, 4 thang máy; mỗi tầng có phòng rác riêng.</p>
+<h2>Căn 1PN+1 45,8 m²: dễ cho thuê</h2>
+<p>Căn 1PN+1 có phòng ngủ chính và một góc phụ làm phòng làm việc hoặc giường phụ. Đây là căn có tổng giá thấp nhất, hợp người độc thân, cặp vợ chồng trẻ hoặc nhà đầu tư cho thuê khách du lịch.</p>
+<!--hh-img:img/the-poet/the-poet-layout-1pn-46.jpg|Mặt bằng The Poet Residence: layout căn 1PN+1 khoảng 45,8 m² view biển-->
+<h2>Căn 2PN: view biển hay view sông?</h2>
+<p>Căn 2PN 64,4 – 66,2 m² nằm phía Đông Bắc, logia nhìn biển Mỹ Khê, đón gió biển và nắng sáng. Căn 2PN góc 74,9 – 80,6 m² nằm phía Tây Nam, nhìn sông Hàn và pháo hoa, diện tích lớn hơn nên phòng khách rộng. Gia đình 3 – 4 người nên ưu tiên căn góc.</p>
+<!--hh-img:img/the-poet/the-poet-layout-2pn-80.jpg|Layout căn 2PN góc 80,6 m² The Poet Residence – view sông Hàn, logia hướng Tây Nam-->
+<!--hh-img:img/the-poet/the-poet-layout-2pn-64.jpg|Layout căn 2PN 64,4 m² The Poet Residence – view biển Mỹ Khê, logia hướng Đông Bắc-->
+<h2>Căn 3PN góc 89,4 m²: hai logia nhìn biển</h2>
+<p>Căn 3PN góc là căn lớn nhất ở tầng điển hình, có 2 logia và view biển Mỹ Khê. Số lượng ít trên mỗi tầng nên thường được chọn sớm; phù hợp gia đình nhiều thế hệ.</p>
+<!--hh-img:img/the-poet/the-poet-layout-3pn-89.jpg|Mặt bằng The Poet Residence: căn 3PN góc 89,4 m², 2 logia view biển Mỹ Khê-->
+<h2>Đọc mặt bằng The Poet Residence để chọn căn</h2>
+<ul>
+<li><strong>Ưu tiên tầng cao</strong> cho view thoáng và ít tiếng ồn đường Hồ Xuân Hương.</li>
+<li><strong>Hướng Đông Bắc</strong> mát buổi chiều, đón gió biển; <strong>hướng Tây Nam</strong> ngắm hoàng hôn, pháo hoa nhưng nắng chiều – kính Low-E giúp giảm nóng.</li>
+<li><strong>Kiểm tra vị trí</strong> so với thang máy, phòng rác trên mặt bằng The Poet Residence của từng tầng.</li>
+<li><strong>Căn cho thuê</strong>: 1PN+1 và 2PN view biển thường dễ cho thuê nhất.</li>
+</ul>
+<p>Xem toàn bộ layout trên trang {$poet} và bài <a href="/noi-that-the-poet-residence/">nội thất The Poet Residence</a> để biết căn bàn giao những gì.</p>
+<h2>Mặt bằng The Poet Residence: tiện ích nằm ở đâu?</h2>
+<p>Ngoài các tầng căn hộ, mặt bằng The Poet Residence dành tầng 1 cho sảnh, café, mini mart; tầng 2 cho nhà trẻ và phòng cộng đồng; tầng 3 cho hồ bơi trong nhà, gym, yoga; tầng mái cho vườn, bar và quảng trường ngắm pháo hoa. Hai tầng hầm có khoảng 92 chỗ ô tô và 353 chỗ xe máy. Nhờ tiện ích tập trung ở khối đế và mái, các tầng căn hộ yên tĩnh hơn.</p>
+<!--hh-img:img/the-poet/the-poet-mat-bang-tien-ich-tang-3.jpg|Mặt bằng The Poet Residence tầng 3: hồ bơi người lớn, hồ trẻ em, khu thư giãn, cà phê bar-->
+<h2>Chọn căn theo ngân sách và mục đích</h2>
+<p>Ngân sách vừa phải, mua cho thuê: căn 1PN+1. Gia đình trẻ: 2PN 64 – 66 m² view biển. Gia đình đông người, cần phòng khách rộng: 2PN góc view sông hoặc 3PN góc view biển. Khách tìm sản phẩm hiếm: penthouse thông tầng. Hoàng Hiệp có thể gửi mặt bằng The Poet Residence từng tầng kèm danh sách căn còn trống để anh chị so sánh trực tiếp.</p>
+{$poetcta}
+{$poetsrc}
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Mặt bằng The Poet Residence: 12 căn/tầng, 1PN+1 – 3PN',
+			'desc'      => 'Mặt bằng The Poet Residence: mỗi tầng 12 căn, 1PN+1 45,8 m², 2PN 64,4 – 80,6 m², 3PN góc 89,4 m², 5 penthouse – cách chọn căn view biển hay sông Hàn.',
+			'points'    => array(
+				'Tầng 4 – 23 mỗi tầng 12 căn; 5 penthouse thông tầng 190 – 235 m² trên cùng',
+				'1PN+1 khoảng 45,8 m²; 2PN 64,4 – 66,2 m² view biển; 2PN góc 74,9 – 80,6 m² view sông Hàn; 3PN góc 89,4 m²',
+				'Tầng cao 3,3 m, hành lang 1,8 m, 4 thang máy, mỗi tầng có phòng rác riêng',
+			),
+			'faq'       => array(
+				array( 'Mỗi tầng The Poet Residence có bao nhiêu căn?', 'Tầng điển hình (4 – 23) có 12 căn.' ),
+				array( 'Căn nhỏ nhất bao nhiêu m²?', 'Theo mặt bằng The Poet Residence, căn 1PN+1 khoảng 45,8 – 46,7 m² thông thủy là căn nhỏ nhất.' ),
+				array( 'Căn nào view biển Mỹ Khê?', 'Các căn phía Đông Bắc: 1PN+1, 2PN 64 – 66 m² và 3PN góc 89,4 m².' ),
+				array( 'Có penthouse không?', 'Có 5 căn penthouse thông tầng 190 – 235 m² ở các tầng trên cùng.' ),
+			),
+		),
+		'sources'  => $poetsources,
+	);
+
+	/* ---------------- The Poet – Giá và thanh toán ---------------- */
+	$posts[] = array(
+		'slug'     => 'gia-the-poet-residence-thanh-toan',
+		'title'    => 'Giá The Poet Residence 11/2026: chỉ từ khoảng 4,94 tỷ, thanh toán và vay thế nào?',
+		'excerpt'  => 'Giá The Poet Residence tham khảo 11/2026 chỉ từ khoảng 4,94 tỷ (đã gồm VAT) cho căn 1PN+1; đặt cọc 200 triệu, ký hợp đồng 15%, các phương thức thanh toán theo tiến độ, thanh toán sớm 70%, vay 50 – 70% hỗ trợ lãi suất.',
+		'keyword'  => 'giá The Poet Residence',
+		'keywords_extra' => array( 'bảng giá The Poet Residence', 'thanh toán The Poet Residence', 'vay mua căn hộ The Poet' ),
+		'project'  => 'the-poet-residence-da-nang',
+		'schedule' => '2026-11-25 08:15',
+		'category' => 'Tin dự án',
+		'tags'     => array( 'The Poet Residence', 'Giá căn hộ', 'Thanh toán' ),
+		'image'    => 'plugin:img/the-poet/the-poet-phoi-canh-goc-duong.jpg',
+		'image_alt' => 'Giá The Poet Residence – tòa tháp 25 tầng trên đường Hồ Xuân Hương (phối cảnh)',
+		'content'  => <<<HTML
+<p><strong>Giá The Poet Residence</strong> tham khảo tháng 11/2026 chỉ từ khoảng 4,94 tỷ đồng (đã gồm VAT) cho căn 1PN+1 khoảng 45,8 m²; giá các căn lớn hơn thay đổi theo tầng, hướng view và phương thức thanh toán. Bài viết tóm tắt giá The Poet Residence và các cách thanh toán, vay ngân hàng để anh chị tính dòng tiền trước khi chọn căn.</p>
+<!--hh-featured-->
+<h2>Giá The Poet Residence tham khảo 11/2026</h2>
+<p>Theo bảng hàng các tầng thấp (tháng 11/2026), căn 1PN+1 có giá chỉ từ khoảng 4,94 tỷ đồng, đã gồm VAT, chưa gồm kinh phí bảo trì. Đơn giá tham khảo khoảng 92 – 107 triệu/m² thông thủy; tầng cao, căn góc và căn view biển cao hơn. Giá từng căn cụ thể và căn còn trống thay đổi theo từng đợt – liên hệ để nhận bảng giá mới nhất.</p>
+<!--hh-img:img/the-poet/the-poet-phoi-canh-goc-duong.jpg|Giá The Poet Residence chỉ từ khoảng 4,94 tỷ – tòa tháp 25 tầng trên đường Hồ Xuân Hương (phối cảnh)-->
+<h2>Lịch thanh toán tiêu chuẩn</h2>
+<table>
+<thead><tr><th>Đợt</th><th>Thời điểm</th><th>Tỷ lệ</th></tr></thead>
+<tbody>
+<tr><td>Đặt cọc</td><td>Ký thỏa thuận đặt cọc</td><td>200 triệu</td></tr>
+<tr><td>Đợt 1</td><td>Trong 10 ngày, ký hợp đồng mua bán</td><td>15% (gồm cọc)</td></tr>
+<tr><td>Đợt 2 – 7</td><td>Theo tiến độ xây dựng (sàn tầng 15, 20, 25, cất nóc)</td><td>55%</td></tr>
+<tr><td>Đợt 8</td><td>Nhận thông báo bàn giao</td><td>25% + kinh phí bảo trì</td></tr>
+<tr><td>Đợt 9</td><td>Nhận giấy chứng nhận</td><td>5%</td></tr>
+</tbody>
+</table>
+<h2>Các phương thức thanh toán khác</h2>
+<ul>
+<li><strong>Thanh toán sớm 70%</strong> trong 30 ngày sau ký hợp đồng mua bán – mức ưu đãi cao nhất.</li>
+<li><strong>Nhận nhà ưu việt:</strong> thanh toán khoảng 45% trước bàn giao, 25% khi nhận nhà, 25% sau 12 tháng.</li>
+<li><strong>Vay ngân hàng</strong> 50 – 70% giá trị căn; chủ đầu tư hỗ trợ lãi suất 100% đến khi nhận nhà, 50% thêm 12 tháng (tối đa 24 tháng); ân hạn gốc 18 – 36 tháng tùy ngân hàng.</li>
+</ul>
+<p>Ngân hàng bảo lãnh là VietinBank; cho vay có VietinBank, Vietcombank, MB. Mức chiết khấu theo từng phương thức thay đổi theo đợt chính sách.</p>
+<h2>Giá The Poet Residence có hợp lý?</h2>
+<p>So với mặt bằng căn hộ ven biển Mỹ Khê, giá The Poet Residence nằm ở phân khúc cao cấp nhưng đi kèm vị trí cách biển khoảng 300 m, pháp lý đã đủ điều kiện bán (Sở Xây dựng xác nhận 263 căn ngày 24/6/2026), tổng thầu Central và bàn giao hoàn thiện. Người mua nên so sánh tổng chi phí sở hữu: giá căn, phí bảo trì 2%, chi phí đồ rời và lãi vay sau thời gian hỗ trợ.</p>
+<h2>Ví dụ dòng tiền khi mua theo tiến độ</h2>
+<p>Lấy căn 1PN+1 có giá chỉ từ khoảng 4,94 tỷ làm ví dụ: đặt cọc 200 triệu, khi ký hợp đồng thanh toán đủ 15% (khoảng 741 triệu gồm cọc), sau đó 55% chia theo các mốc xây dựng, 25% khi nhận nhà và 5% khi có sổ. Nếu vay ngân hàng, khách chỉ cần chuẩn bị phần vốn tự có ban đầu; lãi được chủ đầu tư hỗ trợ đến khi nhận nhà. Số tiền cụ thể tùy căn và chính sách tại thời điểm ký – giá The Poet Residence ở ví dụ chỉ để tham khảo.</p>
+<h2>Giá The Poet Residence đã gồm những gì?</h2>
+<p>Giá The Poet Residence trong bảng hàng đã gồm VAT và nội thất bàn giao hoàn thiện (sàn, trần, cửa, điều hòa, bếp, thiết bị vệ sinh), chưa gồm 2% kinh phí bảo trì và lệ phí trước bạ khi làm sổ. Khi so sánh giá với dự án khác, nên quy về cùng một chuẩn: cùng có VAT, cùng tiêu chuẩn bàn giao.</p>
+<p>Đọc thêm <a href="/mat-bang-the-poet-residence/">mặt bằng The Poet Residence</a>, <a href="/chi-phi-khi-mua-can-ho-moi-ngoai-gia-ban/">chi phí khi mua căn hộ mới ngoài giá bán</a> và trang {$poet}.</p>
+{$poetcta}
+{$poetsrc}
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Giá The Poet Residence 11/2026: chỉ từ 4,94 tỷ',
+			'desc'      => 'Giá The Poet Residence tham khảo 11/2026 chỉ từ khoảng 4,94 tỷ (gồm VAT); cọc 200 triệu, ký HĐMB 15%, thanh toán sớm 70%, vay 50 – 70% hỗ trợ lãi suất.',
+			'points'    => array(
+				'Giá chỉ từ khoảng 4,94 tỷ (căn 1PN+1, đã gồm VAT) – tham khảo 11/2026',
+				'Đặt cọc 200 triệu, ký hợp đồng mua bán 15%, 55% theo tiến độ, 25% khi nhận nhà, 5% khi có sổ',
+				'Thanh toán sớm 70% ưu đãi cao nhất; vay 50 – 70%, hỗ trợ lãi suất tối đa 24 tháng',
+			),
+			'faq'       => array(
+				array( 'Giá The Poet Residence bao nhiêu?', 'Tham khảo 11/2026: chỉ từ khoảng 4,94 tỷ đồng cho căn 1PN+1, đã gồm VAT; căn lớn, tầng cao giá cao hơn.' ),
+				array( 'Đặt cọc bao nhiêu?', '200 triệu đồng; trong 10 ngày ký hợp đồng mua bán và thanh toán đủ 15% (gồm cọc).' ),
+				array( 'Vay ngân hàng được bao nhiêu?', '50 – 70% giá trị căn; chủ đầu tư hỗ trợ lãi suất tối đa 24 tháng; ngân hàng VietinBank, Vietcombank, MB.' ),
+				array( 'Người nước ngoài có mua được không?', 'Chưa – Sở Xây dựng yêu cầu chủ đầu tư không bán cho tổ chức, cá nhân nước ngoài.' ),
+			),
+		),
+		'sources'  => $poetsources,
+	);
+
 	return $posts;
 }
