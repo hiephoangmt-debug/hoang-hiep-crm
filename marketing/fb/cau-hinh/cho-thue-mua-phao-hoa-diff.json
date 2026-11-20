@@ -1,0 +1,86 @@
+{
+ "tag": "CHO THUÊ · SUN SAPHIA RESIDENCE",
+ "title": "Cho thuê mùa pháo hoa DIFF",
+ "sub": "Ven biển Sơn Thủy hưởng lợi thế nào?",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "~2,7 triệu",
+   "lượt khách lưu trú"
+  ],
+  [
+   "95–100%",
+   "phòng trung tâm"
+  ],
+  [
+   "6 tuần",
+   "mùa DIFF 2026"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Số liệu DIFF 2026 theo Sở VHTTDL Đà Nẵng (Tiền Phong) · Ảnh pháo hoa DIFF bên sông Hàn",
+ "headline": [
+  [
+   "Cho thuê mùa",
+   "big",
+   0
+  ],
+  [
+   "Pháo hoa DIFF",
+   "script",
+   300
+  ],
+  [
+   "Sun Saphia",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Cho thuê mùa",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "PHÁO HOA DIFF",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Sun Saphia",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}

@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Sống trong khu 31,1 ha",
+  "5 CÔNG VIÊN",
+  "quanh nhà"
+ ],
+ "question": "Ở Casamia Balanca, một ngày có thể làm gì?",
+ "hook_bg": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d20/c-thien-bai-co.jpg",
+ "data_title": [
+  "Casamia Balanca",
+  "TIỆN ÍCH NỘI KHU"
+ ],
+ "rows": [
+  [
+   "5",
+   "Công viên chủ đề",
+   "Grand Central, Wellness, Sport, Floral, Nipa"
+  ],
+  [
+   "Olympic",
+   "Bể bơi tiêu chuẩn",
+   "Kèm khu trẻ em, gym ngoài trời"
+  ],
+  [
+   "Sport",
+   "Sân Pickleball, bóng rổ",
+   "Thể thao cho cả gia đình"
+  ],
+  [
+   "Yoga",
+   "Wellness Park",
+   "Vườn yoga, đường dạo sinh thái"
+  ],
+  [
+   "Cafe",
+   "Grand Central Park",
+   "Co-working, trạm đọc, gym"
+  ]
+ ],
+ "note": "Theo quy hoạch chủ đầu tư Đạt Phương; nên hỏi hạng mục nào đã vận hành, hạng mục nào đang triển khai.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d20/c-pickleball-cap-doi.jpg",
+ "photo_caption": "Phối cảnh tiện ích Casamia Balanca",
+ "cta": "Hỏi thêm: Zalo 0904 567 009"
+}

@@ -1,0 +1,86 @@
+{
+ "tag": "CHỌN CĂN · SUN SAPHIA RESIDENCE",
+ "title": "Studio hay 1PN+ Sun Saphia Residence",
+ "sub": "Chọn theo mục đích ở hay cho thuê",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "513 căn",
+   "studio 30–31 m²"
+  ],
+  [
+   "108 căn",
+   "1PN+ 49–51 m²"
+  ],
+  [
+   "~2,13 tỷ",
+   "studio từ (dự kiến)"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo tài liệu chủ đầu tư 10–11/2026 · Giá dự kiến, tham khảo · Phối cảnh nội thất studio",
+ "headline": [
+  [
+   "Studio hay 1PN+",
+   "big",
+   0
+  ],
+  [
+   "Sun Saphia",
+   "script",
+   300
+  ],
+  [
+   "Residence",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Nên chọn căn nào?",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "STUDIO HAY 1PN+",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Sun Saphia",
+     "script"
+    ]
+   ],
+   "dx": 240,
+   "over": true
+  }
+ ]
+}

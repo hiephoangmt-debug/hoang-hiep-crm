@@ -203,7 +203,7 @@ else:
 .lux .note{font:400 15px/1.35 BVP;color:#8a93a5;margin:0;text-align:right;max-width:400px}'''
 
 page = '''<!doctype html><html><head><meta charset="utf-8"><style>%s
-*{box-sizing:border-box}html,body{margin:0;width:1080px;height:1350px}
+*{box-sizing:border-box;font-variant-numeric:lining-nums!important}html,body{margin:0;width:1080px;height:1350px}
 .card{position:relative;width:1080px;height:1350px;overflow:hidden;font-family:BVP}
 .foot{display:flex;align-items:center;gap:18px}
 .ava{width:92px;height:92px;border-radius:50%%;object-fit:cover;border:3px solid #e8c88c}

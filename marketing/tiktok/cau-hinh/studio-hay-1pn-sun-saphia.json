@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "30 m² hay 50 m²",
+  "STUDIO HAY 1PN+",
+  "chọn căn nào"
+ ],
+ "question": "Sun Saphia Residence: 513 studio nhưng chỉ 108 căn 1PN+",
+ "hook_bg": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d20/noi-that-studio-sun-saphia-album-2.jpg",
+ "data_title": [
+  "Sun Saphia Residence",
+  "STUDIO VS 1PN+"
+ ],
+ "rows": [
+  [
+   "513 căn",
+   "Studio",
+   "30–31 m², căn góc 40 m²"
+  ],
+  [
+   "108 căn",
+   "1PN+",
+   "49–51 m², có phòng đa năng"
+  ],
+  [
+   "~2,13 tỷ",
+   "Studio từ",
+   "Tầng 15, dãy sau, giá dự kiến"
+  ],
+  [
+   "15–20k",
+   "Phí quản lý dự kiến",
+   "Đồng/m²/tháng"
+  ],
+  [
+   "782 căn",
+   "Tổng cả tòa",
+   "Tòa 30 tầng ven biển Sơn Thủy"
+  ]
+ ],
+ "note": "Theo tài liệu chủ đầu tư 10–11/2026. Giá, phí là dự kiến, tham khảo; không phải cam kết lợi nhuận.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d19/sun-saphia-cdt-toa-thap-ngay.jpg",
+ "photo_caption": "Phối cảnh Sun Saphia Residence",
+ "cta": "Mặt bằng: Zalo 0904 567 009"
+}
