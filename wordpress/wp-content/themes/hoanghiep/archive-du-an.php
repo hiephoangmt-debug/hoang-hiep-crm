@@ -87,6 +87,26 @@ usort( $subtypes, static fn( $a, $b ) => ( 'biet-thu-lau-dai' === $b->slug ) <=>
 	<?php endif; ?>
 </div>
 
+<?php
+// Danh mục A–Z mọi dự án (chỉ trang 1 "Tất cả"): mỗi trang dự án đều có link nội bộ từ trang được Google thu thập,
+// tránh dự án nằm sâu ở trang phân trang bị "Đã phát hiện – chưa lập chỉ mục".
+if ( ! $term && ! is_paged() && '' === $current && '' === $area && '' === (string) get_query_var( 'tk' ) ) :
+	$all = get_posts( array( 'post_type' => 'du-an', 'post_status' => 'publish', 'numberposts' => 400, 'orderby' => 'title', 'order' => 'ASC', 'no_found_rows' => true, 'update_post_term_cache' => false ) );
+	if ( $all ) :
+		?>
+<section class="container section project-az" aria-labelledby="project-az-title">
+	<h2 id="project-az-title" class="section__title">Danh sách dự án Đà Nẵng – Quảng Nam (A–Z)</h2>
+	<ul class="project-az__list">
+		<?php foreach ( $all as $p ) : ?>
+			<li><a href="<?php echo esc_url( get_permalink( $p ) ); ?>"><?php echo esc_html( get_the_title( $p ) ); ?></a></li>
+		<?php endforeach; ?>
+	</ul>
+</section>
+		<?php
+	endif;
+endif;
+?>
+
 <?php get_template_part( 'template-parts/cta' ); ?>
 <?php
 get_footer();
