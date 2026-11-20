@@ -29,6 +29,7 @@ Quy tắc bắt buộc:
 - Vị trí: Cẩm Thanh, Hội An, giữa rừng dừa Bảy Mẫu (thuộc khu dự trữ sinh quyển thế giới Cù Lao Chàm – Hội An, UNESCO), sông nước bao quanh.
 - Khoảng cách (ước tính): rừng dừa 0 km (ngay tại dự án); phố cổ Hội An ~10 phút (~5 km); biển An Bàng, Cửa Đại ~5 km; sân bay quốc tế Đà Nẵng ~30 km qua trục Võ Chí Công (nối Đà Nẵng – Hội An – sân bay Chu Lai). Gần làng rau Trà Quế, chợ đêm, sông Hoài; Cù Lao Chàm đi ca nô từ Cửa Đại.
 - Trung tâm Hội An (~10 phút) có đủ trường học, chợ, bệnh viện.
+- Giải thưởng: Clubhouse Casamia Hội An (dự án lân cận đã bàn giao, cùng CĐT Đạt Phương, VTN Architects thiết kế) nhận 2 giải tại AIA International Design Awards 2026: Thiết kế Hòa nhập Xuất sắc (Inclusive Design Excellence Award) và Ghi nhận Thiết kế Kiến trúc Xuất sắc (Merit Award), theo thông báo của Đạt Phương 11/2026. Nói rõ đây là Clubhouse của Casamia Hội An, không phải của Casamia Balanca.
 - Kiến trúc mang hồn Hội An (ngói nâu đất, xanh cây lá, gốm ánh kim), có tư vấn thiết kế của VTN Architects (KTS Võ Trọng Nghĩa): mở, xanh, đón gió và ánh sáng tự nhiên.
 - Tiện ích nội khu: Clubhouse Casamia có Fitness & Pool (miễn phí 1 năm cho chủ nhà), công viên, phố vườn hoa giấy. Có ban quản lý khu đô thị (miễn phí phí quản lý 2 năm đầu).
 - Chi tiết an ninh, quy định vận hành, danh sách tiện ích nội khu đầy đủ: CHƯA có trong tài liệu → hẹn gửi bản chính thức.
