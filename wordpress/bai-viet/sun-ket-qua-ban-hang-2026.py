@@ -1,5 +1,5 @@
 """Ảnh gửi khách (Zalo/Facebook) – Sun Group Đà Nẵng: kết quả bán hàng 3 – 10/2026 (số liệu anh Hiệp gửi 20/11/2026).
-Khổ dọc 1080×1350, cùng tông thẻ tin thống nhất (navy – cam – vàng, Cormorant + Be Vietnam Pro).
+Khổ dọc 1080×1350, tông sáng như thẻ tin thống nhất anh Hiệp duyệt (nền trắng xanh nhạt, chữ navy, số cam, thẻ liên hệ navy – vàng).
 Dùng: python3.13 bai-viet/sun-ket-qua-ban-hang-2026.py <file ảnh ra .jpg>"""
 import sys, os
 from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageEnhance
@@ -40,65 +40,65 @@ ROWS = [  # (thời điểm, dự án, số bán, nhãn số, bối cảnh thị
 
 
 def main(out):
-    im = Image.new('RGBA', (W, H), NAVY + (255,))
-    # Ảnh nền phối cảnh FourS Tower phía trên, mờ dần vào nền navy.
-    ph = Image.open(f'{IMG}/fours-tower/fours-tower-toan-canh-hoang-hon.jpg').convert('RGB')
-    ph = ImageEnhance.Brightness(ImageOps.fit(ph, (W, 560), Image.LANCZOS, centering=(0.5, 0.45))).enhance(0.42)
-    m = Image.new('L', (W, 560))
-    for y in range(560):
-        ImageDraw.Draw(m).line([(0, y), (W, y)], fill=int(255 * min(1, max(0, (520 - y) / 300))))
-    im.paste(ph, (0, 0), m)
+    BG_TOP = (238, 244, 250); BG_MID = (246, 249, 252); INK = (20, 24, 32); BLUE = (30, 70, 112)
+    NV = (22, 40, 66); OR = (214, 104, 40); LINE = (214, 224, 236); GREY = (110, 122, 138)
+    im = Image.new('RGBA', (W, H), BG_MID + (255,))
+    g = ImageDraw.Draw(im)
+    for y in range(H):
+        t = y / H; g.line([(0, y), (W, y)], fill=tuple(int(BG_TOP[k] * (1 - t) + BG_MID[k] * t) for k in range(3)) + (255,))
+    # Phối cảnh FourS Tower góc phải trên, mờ dần sang trái và xuống dưới (như thẻ tin web).
+    PW, PH = 640, 500
+    ph = ImageOps.fit(Image.open(f'{IMG}/fours-tower/fours-tower-toan-canh-hoang-hon.jpg').convert('RGB'), (PW, PH), Image.LANCZOS, centering=(0.55, 0.5))
+    m = Image.new('L', (PW, PH), 0); mg = ImageDraw.Draw(m)
+    for x in range(PW):
+        for y in range(0, PH, 2):
+            a = min(1, max(0, (x - 20) / 320)) ** 1.4 * min(1, max(0, (PH - 20 - y) / 200))
+            mg.line([(x, y), (x, y + 1)], fill=int(255 * a))
+    im.paste(ph, (W - PW, 0), m)
     d = ImageDraw.Draw(im)
 
-    spaced(d, (64, 52), 'HOÀNG HIỆP · BẤT ĐỘNG SẢN ĐÀ NẴNG', sans(22, 'ExtraBold'), GOLD, 4)
-    d.text((64, 100), 'Sun Group Đà Nẵng 2026', font=serif(58, 600), fill=WHITE)
-    d.text((64, 166), 'Thị trường chững lại,', font=serif(46, 500), fill=SOFT)
-    d.text((64, 222), 'sản phẩm Sun vẫn có người mua', font=script(52), fill=GOLD)
-    # Con số tổng
-    d.text((64, 300), '~3.000', font=serif(150, 700), fill=ORANGE, features=['lnum'])
-    tw = d.textlength('~3.000', font=serif(150, 700))
-    d.text((64 + tw + 24, 342), 'sản phẩm', font=sans(34, 'ExtraBold'), fill=WHITE)
-    d.text((64 + tw + 24, 390), 'bán ra trong 8 tháng', font=sans(26, 'Medium'), fill=SOFT)
-    d.text((64 + tw + 24, 426), '(tháng 3 – tháng 10/2026)', font=sans(22, 'Medium'), fill=SOFT)
+    spaced(d, (60, 50), 'HOÀNG HIỆP · BẤT ĐỘNG SẢN ĐÀ NẴNG', sans(20, 'ExtraBold'), BLUE, 4)
+    spaced(d, (60, 86), 'KẾT QUẢ BÁN HÀNG · 2026', serif(26, 600), INK, 4)
+    d.text((60, 128), 'Sun Group Đà Nẵng', font=serif(66, 600), fill=NV)
+    d.text((60, 204), 'Thị trường chững lại,', font=serif(44, 500), fill=NV)
+    d.text((70, 256), 'Sun vẫn bán tốt', font=script(56), fill=OR)
+    d.text((60, 340), '~3.000', font=serif(140, 700), fill=OR, features=['lnum'])
+    tw = d.textlength('~3.000', font=serif(140, 700))
+    d.text((60 + tw + 22, 372), 'sản phẩm bán ra', font=sans(30, 'ExtraBold'), fill=INK)
+    d.text((60 + tw + 22, 414), 'trong 8 tháng (3 – 10/2026)', font=sans(23, 'Medium'), fill=GREY)
 
-    # Bảng tiến trình: mỗi đợt một hàng, thanh ngang tỉ lệ số sản phẩm.
-    y0 = 512; rh = 98; x0, x1 = 64, W - 64; L = 236
-    d.text((x0, y0 - 14), 'KẾT QUẢ TỪNG ĐỢT MỞ BÁN', font=sans(22, 'ExtraBold'), fill=GOLD)
-    y = y0 + 26
-    bx0, bx1 = 400, x1 - 10
+    y0 = 528; rh = 98; x0, x1 = 56, W - 56; L = 236
+    d.text((x0 + 4, y0 - 12), 'KẾT QUẢ TỪNG ĐỢT MỞ BÁN', font=sans(21, 'ExtraBold'), fill=BLUE)
+    y = y0 + 22
     for t, name, n, lab, ctx, hot in ROWS:
-        card = (x0, y, x1, y + rh - 14)
-        d.rounded_rectangle(card, 18, fill=(30, 52, 90) if hot else NAVY2)
-        d.rounded_rectangle((x0 + 18, y + 20, x0 + 140, y + 56), 18, fill=ORANGE if hot else (52, 78, 120))
-        d.text((x0 + 79, y + 38), t, font=sans(20, 'ExtraBold'), fill=WHITE, anchor='mm')
-        d.text((x0 + 18, y + 62), ctx, font=sans(16, 'Medium'), fill=(150, 168, 196))
-        d.text((x0 + L, y + 14), name, font=sans(26, 'ExtraBold'), fill=WHITE)
-        # thanh
-        bw = int((bx1 - x0 - L) * n / 1000)
-        by = y + 56
-        d.rounded_rectangle((x0 + L, by, bx1, by + 16), 8, fill=(44, 66, 104))
-        d.rounded_rectangle((x0 + L, by, x0 + L + max(16, bw), by + 16), 8, fill=ORANGE if hot else GOLD)
-        f = sans(26, 'ExtraBold')
-        d.text((x1 - 20, y + 14), lab, font=f, fill=ORANGE if hot else GOLD, anchor='ra')
+        sh = Image.new('RGBA', im.size, (0, 0, 0, 0)); ImageDraw.Draw(sh).rounded_rectangle((x0, y + 3, x1, y + rh - 11), 18, fill=(22, 40, 66, 22))
+        im.alpha_composite(sh); d = ImageDraw.Draw(im)
+        d.rounded_rectangle((x0, y, x1, y + rh - 14), 18, fill=(255, 255, 255), outline=(242, 196, 160) if hot else LINE, width=2)
+        d.rounded_rectangle((x0 + 18, y + 18, x0 + 140, y + 54), 18, fill=OR if hot else NV)
+        d.text((x0 + 79, y + 36), t, font=sans(20, 'ExtraBold'), fill=(255, 255, 255), anchor='mm')
+        d.text((x0 + 18, y + 60), ctx, font=sans(16, 'Medium'), fill=GREY)
+        d.text((x0 + L, y + 12), name, font=sans(26, 'ExtraBold'), fill=INK)
+        bx1 = x1 - 20; by = y + 54
+        d.rounded_rectangle((x0 + L, by, bx1, by + 16), 8, fill=(230, 236, 244))
+        d.rounded_rectangle((x0 + L, by, x0 + L + max(16, int((bx1 - x0 - L) * n / 1000)), by + 16), 8, fill=OR if hot else (226, 160, 112))
+        d.text((x1 - 20, y + 12), lab, font=sans(26, 'ExtraBold'), fill=OR, anchor='ra')
         y += rh
+    y += 4
+    d.text((W // 2, y), 'Mua sản phẩm thanh khoản tốt – an tâm cả khi thị trường khó', font=sans(25, 'SemiBold'), fill=NV, anchor='ma')
+    d.text((W // 2, y + 36), 'Nhận giỏ hàng & chính sách mới nhất Sun Group Đà Nẵng', font=sans(21, 'Medium'), fill=GREY, anchor='ma')
 
-    # Thông điệp
-    y += 2
-    d.text((W // 2, y), 'Mua sản phẩm thanh khoản tốt – an tâm cả khi thị trường khó', font=sans(25, 'SemiBold'), fill=WHITE, anchor='ma')
-    d.text((W // 2, y + 36), 'Nhận giỏ hàng & chính sách mới nhất Sun Group Đà Nẵng', font=sans(21, 'Medium'), fill=SOFT, anchor='ma')
-
-    # Thẻ liên hệ
     box = (32, H - 128, W - 32, H - 26); bx, by0, bx2, by1 = box; h = by1 - by0
-    d.rounded_rectangle(box, 22, fill=(232, 120, 52))
-    a = int(h * 0.76); ax, ay = bx + 18, by0 + (h - a) // 2
+    ov = Image.new('RGBA', im.size, (0, 0, 0, 0)); ImageDraw.Draw(ov).rounded_rectangle(box, 22, fill=(24, 40, 70, 240)); im.alpha_composite(ov)
+    d = ImageDraw.Draw(im)
+    a = int(h * 0.74); ax, ay = bx + 18, by0 + (h - a) // 2
     av = ImageOps.fit(Image.open(AVA).convert('RGB'), (a, a), Image.LANCZOS)
     mk = Image.new('L', (a, a), 0); ImageDraw.Draw(mk).ellipse((0, 0, a - 1, a - 1), fill=255)
-    d.ellipse((ax - 3, ay - 3, ax + a + 3, ay + a + 3), fill=WHITE); im.paste(av, (ax, ay), mk)
+    d.ellipse((ax - 3, ay - 3, ax + a + 3, ay + a + 3), fill=(228, 186, 110)); im.paste(av, (ax, ay), mk)
     tx = ax + a + 22
-    d.text((tx, by0 + 16), 'Hoàng Hiệp', font=sans(32, 'ExtraBold'), fill=WHITE)
-    d.text((tx, by0 + 58), 'Chuyên gia BĐS Đà Nẵng · hiephoangmt.com', font=sans(20, 'Medium'), fill=(255, 236, 214))
-    d.text((bx2 - 26, by0 + h / 2), 'Zalo 0904 567 009', font=sans(34, 'ExtraBold'), fill=WHITE, anchor='rm')
-    d.text((W // 2, H - 14), 'Số liệu tổng hợp theo kết quả bán hàng các đợt mở bán 2026 · Phối cảnh FourS Tower', font=sans(14, 'Medium'), fill=(120, 140, 170), anchor='ms')
+    d.text((tx, by0 + 16), 'Hoàng Hiệp', font=sans(32, 'ExtraBold'), fill=(255, 255, 255))
+    d.text((tx, by0 + 58), 'BĐS Đà Nẵng · hiephoangmt.com', font=sans(20, 'SemiBold'), fill=(232, 190, 112))
+    d.text((bx2 - 26, by0 + h / 2), 'Zalo 0904 567 009', font=sans(34, 'ExtraBold'), fill=(232, 190, 112), anchor='rm')
+    d.text((W // 2, H - 10), 'Số liệu tổng hợp theo kết quả bán hàng các đợt mở bán 2026 · Phối cảnh FourS Tower', font=sans(14, 'Medium'), fill=GREY, anchor='ms')
     im.convert('RGB').save(out, quality=90, optimize=True, progressive=True)
 
 
