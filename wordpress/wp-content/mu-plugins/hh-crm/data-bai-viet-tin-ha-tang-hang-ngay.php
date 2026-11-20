@@ -1344,5 +1344,78 @@ HTML
 		),
 	);
 
+	/* ---------------- 21/11 – Đề xuất công viên kiểu Disneyland tại xã Thăng An trong kế hoạch kinh tế ban đêm 2027 – 2030 (Tuổi Trẻ 20/11/2026, anh Hiệp gửi) ---------------- */
+	$posts[] = array(
+		'slug'           => 'cong-vien-kieu-disneyland-da-nang-thang-an',
+		'title'          => 'Công viên kiểu Disneyland Đà Nẵng: đề xuất kêu gọi đầu tư tại xã Thăng An để phát triển kinh tế đêm 2027 – 2030',
+		'excerpt'        => 'Sáng 20/11/2026, Sở Văn hóa, Thể thao và Du lịch Đà Nẵng tham vấn đề án phát triển kinh tế ban đêm 2027 – 2030, tầm nhìn 2050; dự thảo đề xuất kêu gọi đầu tư khu phức hợp vui chơi giải trí, lễ hội, sự kiện quốc tế theo mô hình Disneyland tại xã Thăng An.',
+		'keyword'        => 'công viên kiểu Disneyland Đà Nẵng',
+		'keywords_extra' => array( 'kinh tế ban đêm Đà Nẵng', 'xã Thăng An Đà Nẵng', 'khu vui chơi giải trí Đà Nẵng', 'bất động sản Nam Hội An' ),
+		'project'        => 'hoiana-residences',
+		'schedule'       => '2026-11-21 06:45',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Kinh tế đêm', 'Du lịch Đà Nẵng', 'Quy hoạch Đà Nẵng' ),
+		'image'          => 'plugin:img/da-nang/duy-xuyen-flycam-song-thu-bon-cau-cua-dai-hoi-an.jpg',
+		'image_alt'      => 'Công viên kiểu Disneyland Đà Nẵng được đề xuất tại xã Thăng An, vùng ven biển phía Nam thành phố (ảnh flycam thực tế khu vực Nam Hội An)',
+		'content'        => <<<'HTML'
+<p>Ý tưởng <strong>công viên kiểu Disneyland Đà Nẵng</strong> vừa được đưa vào dự thảo đề án phát triển kinh tế ban đêm giai đoạn 2027 – 2030, tầm nhìn đến năm 2050. Sáng 20/11/2026, Sở Văn hóa, Thể thao và Du lịch TP Đà Nẵng mời chuyên gia, doanh nghiệp du lịch tham vấn các nội dung của đề án; một trong những đề xuất được chú ý là xúc tiến kêu gọi đầu tư khu phức hợp vui chơi giải trí, lễ hội và sự kiện quốc tế theo mô hình công viên Disneyland tại xã Thăng An.</p>
+<!--hh-featured-->
+<h2>Công viên kiểu Disneyland Đà Nẵng gồm những gì?</h2>
+<p>Theo dự thảo được Tuổi Trẻ đưa tin, công viên kiểu Disneyland Đà Nẵng tại xã Thăng An có thể gồm các hạng mục:</p>
+<table>
+<thead><tr><th>Hạng mục đề xuất</th><th>Vai trò với kinh tế ban đêm</th></tr></thead>
+<tbody>
+<tr><td>Công viên giải trí chuyên đề</td><td>Điểm vui chơi chính, giữ chân khách cả ngày và buổi tối</td></tr>
+<tr><td>Khu nghỉ dưỡng cao cấp</td><td>Lưu trú tại chỗ, kéo dài số đêm khách ở lại</td></tr>
+<tr><td>Quảng trường sự kiện, sân khấu ngoài trời</td><td>Tổ chức lễ hội, biểu diễn, sự kiện quốc tế về đêm</td></tr>
+<tr><td>Trung tâm triển lãm và hội nghị</td><td>Thu hút khách MICE, hội nghị, triển lãm</td></tr>
+</tbody>
+</table>
+<p>Đây mới là nội dung trong dự thảo đang lấy ý kiến, chưa phải quyết định đầu tư. Báo chí chưa công bố quy mô diện tích, tổng vốn, nhà đầu tư hay mốc thời gian cụ thể cho công viên kiểu Disneyland Đà Nẵng. Hoàng Hiệp sẽ cập nhật khi đề án được thông qua hoặc có nhà đầu tư đăng ký.</p>
+<!--hh-img:img/da-nang/duy-xuyen-flycam-song-thu-bon-cau-cua-dai-hoi-an.jpg|Công viên kiểu Disneyland Đà Nẵng được đề xuất ở vùng ven biển phía Nam thành phố, nơi đã có nhiều khu nghỉ dưỡng (ảnh flycam thực tế từ Duy Xuyên nhìn về cầu Cửa Đại, Hội An)-->
+<h2>Vì sao chọn xã Thăng An?</h2>
+<p>Xã Thăng An nằm ở vùng ven biển phía Nam thành phố, dọc sông Trường Giang (khu vực Thăng Bình thuộc Quảng Nam cũ trước hợp nhất). Theo Quy hoạch chung Đà Nẵng đến năm 2050, Thăng An là một trong 7 đô thị mới dự kiến hình thành, cùng Duy Nghĩa, Thăng Điền, Thăng Trường, Tây Hồ, Vu Gia và Hoàng Sa. Khu vực này còn quỹ đất lớn, gần trục ven biển và các khu nghỉ dưỡng Nam Hội An – điều kiện phù hợp cho một tổ hợp vui chơi quy mô lớn mà nội đô Đà Nẵng khó bố trí.</p>
+<p>Nếu được kêu gọi thành công, công viên kiểu Disneyland Đà Nẵng sẽ bổ sung cho chuỗi điểm đến về đêm hiện có ở trung tâm như sông Hàn, cầu Rồng, bãi biển Mỹ Khê, đồng thời kéo dòng khách xuống phía Nam thay vì chỉ tập trung ở nội đô.</p>
+<!--hh-img:img/da-nang/song-han-du-thuyen-cau-rong-ve-dem.jpg|Kinh tế ban đêm Đà Nẵng hiện tập trung ở sông Hàn, cầu Rồng – công viên kiểu Disneyland Đà Nẵng ở Thăng An sẽ mở thêm điểm đến phía Nam (ảnh thực tế)-->
+<h2>Kinh tế ban đêm Đà Nẵng: các đề xuất khác</h2>
+<p>Cùng dịp này, Tuổi Trẻ cũng nhắc tới đề xuất tổ hợp kinh tế đêm khoảng 5.000 tỉ đồng tại bãi biển Mỹ Khê của một doanh nghiệp (xem bài <a href="/kinh-te-dem-bien-my-khe-da-nang-2026/">kinh tế đêm biển Mỹ Khê</a>). Trước đó, lãnh đạo UBND thành phố từng kêu gọi doanh nghiệp đầu tư một khu vui chơi giải trí đẳng cấp kiểu Disneyland. Đề án kinh tế ban đêm 2027 – 2030 là bước cụ thể hóa định hướng đó, với công viên kiểu Disneyland Đà Nẵng là điểm nhấn được chú ý nhất.</p>
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Động lực dài hạn cho du lịch phía Nam:</strong> một công viên kiểu Disneyland Đà Nẵng quy mô quốc tế thường kéo theo khách sạn, dịch vụ, nhà ở cho người lao động. Vùng Nam Hội An – Thăng Bình cũ sẽ có thêm lý do để khách lưu trú dài ngày.</li>
+<li><strong>Mới là đề xuất trong dự thảo:</strong> chưa có nhà đầu tư, vốn, quy mô. Từ ý tưởng tới khởi công một công viên kiểu Disneyland Đà Nẵng thường mất nhiều năm; không nên mua đất chỉ vì tin này.</li>
+<li><strong>Cảnh giác "sốt" đất Thăng An:</strong> khi có tin lớn như công viên kiểu Disneyland Đà Nẵng, môi giới dễ thổi giá đất nông nghiệp, đất chưa có quy hoạch chi tiết. Cần kiểm tra quy hoạch sử dụng đất, sổ đỏ trước khi đặt cọc.</li>
+<li><strong>Ưu tiên sản phẩm đã có pháp lý, đã vận hành:</strong> các khu nghỉ dưỡng ven biển phía Nam đã hoạt động hưởng lợi sớm nhất nếu lượng khách tăng.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<p>Các dự án dưới đây cùng nằm trên vùng ven biển phía Nam, sẽ hưởng lợi nếu công viên kiểu Disneyland Đà Nẵng được kêu gọi đầu tư thành công:</p>
+<ul>
+<li><a href="/du-an/hoiana-residences/">Hoiana Residences</a> (Duy Hải, ven biển Nam Hội An): căn hộ trong quần thể nghỉ dưỡng đã vận hành, cùng hướng phát triển du lịch phía Nam.</li>
+<li><a href="/du-an/nam-hoi-an-city/">Nam Hội An City</a>: khu đô thị ven biển phía Nam, gần khu vực Thăng Bình cũ, hưởng lợi khi dòng khách và dân cư dịch chuyển xuống phía Nam.</li>
+</ul>
+<p>Xem thêm bài <a href="/quy-hoach-chung-do-thi-thang-dien-den-2050/">quy hoạch đô thị Thăng Điền đến 2050</a> và <a href="/bat-dong-san-hoi-an-2026-sau-hop-nhat/">bất động sản Hội An 2026 sau hợp nhất</a>. Cần tư vấn bất động sản ven biển phía Nam Đà Nẵng, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: <a href="https://tuoitre.vn/da-nang-se-lam-cong-vien-kieu-disneyland-o-xa-thang-an-de-khai-thac-kinh-te-dem-100261120103228017.htm">Tuổi Trẻ (20/11/2026)</a>; <a href="https://plo.vn/da-nang-keu-goi-dau-tu-cong-vien-giai-tri-dang-cap-nhu-disneyland-post875301.html">Pháp Luật TP.HCM</a>. Nội dung là đề xuất trong dự thảo đề án đang tham vấn, có thể thay đổi khi được phê duyệt.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Công viên kiểu Disneyland Đà Nẵng ở Thăng An: đề xuất 2027',
+			'desc'      => 'Công viên kiểu Disneyland Đà Nẵng được đề xuất tại xã Thăng An trong đề án kinh tế ban đêm 2027 – 2030: giải trí chuyên đề, nghỉ dưỡng, lễ hội, hội nghị.',
+			'points'    => array(
+				'Sáng 20/11/2026, Sở VH-TT-DL Đà Nẵng tham vấn đề án kinh tế ban đêm 2027 – 2030, tầm nhìn 2050',
+				'Đề xuất kêu gọi đầu tư khu phức hợp vui chơi, lễ hội, sự kiện quốc tế theo mô hình Disneyland tại xã Thăng An',
+				'Có thể gồm công viên chuyên đề, nghỉ dưỡng cao cấp, quảng trường sự kiện, sân khấu ngoài trời, trung tâm triển lãm – hội nghị',
+			),
+			'faq'       => array(
+				array( 'Công viên kiểu Disneyland Đà Nẵng ở đâu?', 'Theo dự thảo đề án kinh tế ban đêm, khu phức hợp được đề xuất kêu gọi đầu tư tại xã Thăng An, vùng ven biển phía Nam thành phố.' ),
+				array( 'Đã có nhà đầu tư chưa?', 'Chưa. Đây là đề xuất trong dự thảo đang tham vấn (20/11/2026); chưa công bố nhà đầu tư, quy mô hay vốn.' ),
+				array( 'Tổ hợp gồm những hạng mục nào?', 'Có thể gồm công viên giải trí chuyên đề, khu nghỉ dưỡng cao cấp, quảng trường sự kiện, sân khấu ngoài trời, trung tâm triển lãm và hội nghị.' ),
+				array( 'Có nên mua đất Thăng An đón tin này?', 'Cần thận trọng: dự án mới là đề xuất. Chỉ nên xem xét đất có sổ, đúng quy hoạch và tránh đặt cọc theo tin đồn.' ),
+			),
+		),
+		'sources'        => array(
+			'https://tuoitre.vn/da-nang-se-lam-cong-vien-kieu-disneyland-o-xa-thang-an-de-khai-thac-kinh-te-dem-100261120103228017.htm',
+			'https://plo.vn/da-nang-keu-goi-dau-tu-cong-vien-giai-tri-dang-cap-nhu-disneyland-post875301.html',
+		),
+	);
+
 	return $posts;
 }
