@@ -980,7 +980,7 @@ HTML
 		'image'          => 'plugin:img/hoa-xuan/hoa-xuan-flycam-8-2025-song-cam-le-nhin-ve-trung-tam.jpg',
 		'image_alt'      => 'Sông Cẩm Lệ – sông Hàn nhìn về trung tâm Đà Nẵng, khu vực có nhà ở xã hội cầu Tiên Sơn (ảnh flycam thực tế)',
 		'content'        => <<<HTML
-<p><strong>Nhà ở xã hội cầu Tiên Sơn</strong> – tên đầy đủ là Dự án Nhà ở xã hội tại khu đất A2-4, đường Ngũ Hành Sơn và đường dẫn lên cầu Tiên Sơn – đang làm các thủ tục về quy hoạch tổng mặt bằng sau khi được UBND TP Đà Nẵng chấp thuận chủ trương đầu tư (tháng 6/2025) và giao chủ đầu tư (tháng 7/2026). Hồ sơ mới cho thấy quy mô 2 tòa tháp 31 tầng với 731 căn hộ, ngay nút giao đường dẫn cầu Tiên Sơn và đường Ngũ Hành Sơn.</p>
+<p><strong>Nhà ở xã hội cầu Tiên Sơn</strong> – tên đầy đủ là Dự án Nhà ở xã hội tại khu đất A2-4, đường Ngũ Hành Sơn và đường dẫn lên cầu Tiên Sơn – đang làm các thủ tục về quy hoạch tổng mặt bằng sau khi được UBND TP Đà Nẵng chấp thuận chủ trương đầu tư (tháng 6/2025) và giao chủ đầu tư theo Quyết định 3128/QĐ-UBND ngày 16/7/2026. Hồ sơ mới cho thấy quy mô 2 tòa tháp 31 tầng với 731 căn hộ, ngay nút giao đường dẫn cầu Tiên Sơn và đường Ngũ Hành Sơn.</p>
 <!--hh-featured-->
 <h2>Quy mô nhà ở xã hội cầu Tiên Sơn theo hồ sơ quy hoạch</h2>
 <table>
@@ -991,20 +991,24 @@ HTML
 <tr><td>Công trình</td><td>2 tòa tháp, mỗi tòa 31 tầng + tầng tum, 2 tầng hầm, cao 123,1 m</td></tr>
 <tr><td>Số căn hộ</td><td>731 căn, trong đó chủ đầu tư giữ lại 175 căn để cho thuê (căn hộ dịch vụ du lịch)</td></tr>
 <tr><td>Tổng diện tích sàn</td><td>82.945 m²</td></tr>
+<tr><td>Mật độ xây dựng / hệ số sử dụng đất</td><td>33% / 9,4 lần (tháp A 862 m², tháp B 1.440 m²)</td></tr>
+<tr><td>Cây xanh / giao thông nội bộ</td><td>1.420 m² (20,4%) / 3.248 m² (46,6%)</td></tr>
 <tr><td>Dân số thường trú</td><td>Khoảng 1.412 người</td></tr>
 <tr><td>Tổng mức đầu tư sơ bộ</td><td>Khoảng 1.225 tỷ đồng</td></tr>
 </tbody>
 </table>
 <p>Lưu ý: khi thành phố mời đầu tư năm 2025, một số báo ghi nhà ở xã hội cầu Tiên Sơn khoảng 831 căn hộ. Con số 731 căn là theo hồ sơ quy hoạch tổng mặt bằng đang lập; số căn bán theo cơ chế nhà ở xã hội chính thức sẽ theo văn bản phê duyệt và thông báo mở bán của Sở Xây dựng.</p>
-<!--hh-img:img/hoa-xuan/hoa-xuan-flycam-8-2025-song-cam-le-nhin-ve-trung-tam.jpg|Sông Cẩm Lệ – sông Hàn nhìn về trung tâm Đà Nẵng, khu vực ven sông có nhà ở xã hội cầu Tiên Sơn (ảnh flycam thực tế 8/2025)-->
+<!--hh-img:img/noxh-cau-tien-son/noxh-cau-tien-son-phoi-canh-ven-song.jpg|Phối cảnh nhà ở xã hội cầu Tiên Sơn – 2 tháp 31 tầng nhìn từ công viên ven sông (phối cảnh dự án)-->
+<p>Trên bản đồ quy hoạch phân khu Ven sông Hàn và bờ Đông, khu đất là ô nhà ở xã hội NOXH-2, nằm ở góc vòng xoay đường Ngũ Hành Sơn – đường dẫn cầu Tiên Sơn – Hồ Xuân Hương – Lê Văn Hiến. Ranh giới: phía Đông giáp đường Ngũ Hành Sơn, phía Nam giáp đường dẫn lên cầu Tiên Sơn, phía Tây giáp hành lang tuyến điện, phía Bắc giáp trụ sở công an phường.</p>
+<!--hh-img:img/noxh-cau-tien-son/noxh-cau-tien-son-ban-do-quy-hoach-khu-dat-a2-4.jpg|Vị trí nhà ở xã hội cầu Tiên Sơn (ô X – khu đất A2-4) trên bản đồ quy hoạch, ngay vòng xoay chân cầu Tiên Sơn-->
 <h2>Ai làm chủ đầu tư nhà ở xã hội cầu Tiên Sơn?</h2>
-<p>Theo CafeLand (17/7/2026), UBND thành phố đã giao chủ đầu tư dự án cho liên danh gồm Công ty CP Đầu tư Phát triển đô thị A&amp;T Đà Nẵng, Công ty TNHH Peninsula Private Đà Nẵng, Công ty CP Đầu tư Phát triển đô thị A&amp;T Bình Dương và Công ty TNHH Đông Đô Peninsula Đà Nẵng; trong đó Công ty CP Đầu tư Phát triển đô thị A&amp;T Bình Dương là chủ đầu tư. Chủ trương đầu tư theo Quyết định 1942/QĐ-UBND ngày 24/6/2025. Vốn thực hiện là vốn góp của các thành viên liên danh.</p>
+<p>Theo Quyết định 3128/QĐ-UBND ngày 16/7/2026 và CafeLand (17/7/2026), UBND thành phố đã giao chủ đầu tư dự án cho liên danh gồm Công ty CP Đầu tư Phát triển đô thị A&amp;T Đà Nẵng, Công ty TNHH Peninsula Private Đà Nẵng, Công ty CP Đầu tư Phát triển đô thị A&amp;T Bình Dương và Công ty TNHH Đông Đô Peninsula Đà Nẵng; trong đó Công ty CP Đầu tư Phát triển đô thị A&amp;T Bình Dương là chủ đầu tư. Chủ trương đầu tư theo Quyết định 1942/QĐ-UBND ngày 24/6/2025. Vốn thực hiện là vốn góp của các thành viên liên danh.</p>
 <p>Đây cũng là nhóm doanh nghiệp đứng sau hai dự án căn hộ ven sông Hàn đang có trên web Hoàng Hiệp: <a href="/du-an/peninsula-da-nang/">Peninsula Đà Nẵng</a> và <a href="/du-an/peninsula-private-da-nang/">Peninsula Private</a>. Kinh nghiệm thi công cao tầng ven sông của nhóm này là điểm cộng cho tiến độ nhà ở xã hội cầu Tiên Sơn.</p>
 <!--hh-img:img/peninsula/peninsula-da-nang-tien-do-6-2026-tu-bo-tay-song-han.jpg|Peninsula Đà Nẵng – dự án của cùng nhóm nhà đầu tư nhà ở xã hội cầu Tiên Sơn, nhìn từ bờ Tây sông Hàn (ảnh thực tế 6/2026)-->
 <h2>Tiến độ nhà ở xã hội cầu Tiên Sơn</h2>
 <ul>
 <li><strong>24/6/2025:</strong> UBND TP chấp thuận chủ trương đầu tư (Quyết định 1942/QĐ-UBND).</li>
-<li><strong>7/2026:</strong> giao chủ đầu tư cho liên danh A&amp;T – Peninsula – Đông Đô.</li>
+<li><strong>16/7/2026:</strong> giao chủ đầu tư cho liên danh A&amp;T – Peninsula – Đông Đô (Quyết định 3128/QĐ-UBND).</li>
 <li><strong>Hiện nay:</strong> làm thủ tục quy hoạch tổng mặt bằng.</li>
 <li><strong>Thời gian xây dựng:</strong> theo quyết định, xây dựng cơ bản và đưa vào vận hành trong 3 năm kể từ khi được giao đất hoặc cho thuê đất; thời hạn hoạt động dự án 50 năm.</li>
 </ul>
@@ -1017,6 +1021,7 @@ HTML
 <li><strong>Người cần nhà ở xã hội:</strong> nên chuẩn bị sớm cho nhà ở xã hội cầu Tiên Sơn: giấy xác nhận đối tượng, thu nhập và điều kiện nhà ở; dự án mới ở bước quy hoạch nên còn thời gian (xem thêm <a href="/nha-o-xa-hoi-viet-huong-lakeside-hoa-xuan/">nhà ở xã hội Việt Hương Lakeside</a> và <a href="/khoi-cong-8-du-an-nha-o-xa-hoi-da-nang-2026/">nhà ở xã hội Đà Nẵng 2026</a>).</li>
 </ul>
 <h2>Dự án chịu ảnh hưởng</h2>
+<p>Xem trang dự án <a href="/du-an/nha-o-xa-hoi-a2-4-ngu-hanh-son/">nhà ở xã hội cầu Tiên Sơn</a> để theo dõi tiến độ, quy hoạch tổng mặt bằng và thời điểm nhận hồ sơ.</p>
 <ul>
 <li><a href="/du-an/peninsula-da-nang/">Peninsula Đà Nẵng</a> và <a href="/du-an/peninsula-private-da-nang/">Peninsula Private</a>: cùng nhóm nhà đầu tư; năng lực triển khai của nhóm được thể hiện qua tiến độ các dự án này.</li>
 <li><a href="/du-an/masteri-da-nang/">Masteri Rivera Danang</a>: nằm phía đầu cầu Tiên Sơn bên Hải Châu (cạnh Cung thể thao Tiên Sơn); khu vực hai đầu cầu sẽ đông dân cư hơn khi nhà ở xã hội cầu Tiên Sơn hoàn thành.</li>
@@ -1031,7 +1036,7 @@ HTML
 			'points'    => array(
 				'Khu đất A2-4 khoảng 6.970 m² ở nút giao đường dẫn cầu Tiên Sơn – đường Ngũ Hành Sơn',
 				'2 tháp 31 tầng + tum, 2 hầm, cao 123,1 m; 731 căn, 175 căn giữ lại cho thuê; tổng sàn 82.945 m²',
-				'Chủ trương 24/6/2025, giao liên danh A&T – Peninsula – Đông Đô làm chủ đầu tư 7/2026; vốn sơ bộ khoảng 1.225 tỷ',
+				'Chủ trương 24/6/2025; Quyết định 3128/QĐ-UBND ngày 16/7/2026 giao liên danh A&T – Peninsula – Đông Đô làm chủ đầu tư; vốn sơ bộ khoảng 1.225 tỷ',
 			),
 			'faq'       => array(
 				array( 'Nhà ở xã hội cầu Tiên Sơn nằm ở đâu?', 'Khu đất A2-4 tại nút giao đường dẫn lên cầu Tiên Sơn và đường Ngũ Hành Sơn, phường Ngũ Hành Sơn, TP Đà Nẵng.' ),
@@ -1126,11 +1131,11 @@ HTML
 		'keywords_extra' => array( 'bán đảo Sơn Trà', 'quy hoạch 1/500 Sơn Trà', 'biệt thự Sơn Trà', 'bất động sản Sơn Trà' ),
 		'project'        => 'the-camellia-son-tra',
 		'schedule'       => '2026-11-20 06:45',
-		'rev'            => 2, // 20/11: ảnh The Camellia chưa có trên web → đổi ảnh có sẵn.
+		'rev'            => 3, // 20/11: ảnh The Camellia chưa có trên web → đổi ảnh có sẵn; rev 3: ảnh đại diện là ảnh thực tế anh Hiệp gửi (tu-dong/bia-bai).
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'Sơn Trà', 'Quy hoạch Đà Nẵng', 'Biệt thự' ),
 		'image'          => 'plugin:img/peninsula/peninsula-da-nang-tien-do-6-2026-ben-song-han-ban-dao-son-tra.jpg',
-		'image_alt'      => 'Hủy quy hoạch khu biệt thự Sơn Trà – bán đảo Sơn Trà nhìn từ bờ Tây sông Hàn (ảnh thực tế)',
+		'image_alt'      => 'Hủy quy hoạch khu biệt thự Sơn Trà – khu biệt thự xây dở trên bán đảo Sơn Trà nhìn từ trên cao',
 		'content'        => <<<'HTML'
 <p>Việc <strong>hủy quy hoạch khu biệt thự Sơn Trà</strong> đã chính thức có quyết định: ngày 19/11/2026, UBND TP Đà Nẵng hủy bỏ hai quyết định quy hoạch của dự án khu biệt thự trên bán đảo Sơn Trà, khép lại một dự án gây tranh cãi hơn 15 năm. Diện tích quy hoạch bị hủy khoảng 25,6 ha, trong đó hơn 13 ha từng được quy hoạch làm đất ở biệt thự.</p>
 <!--hh-featured-->
