@@ -38,8 +38,10 @@ body{{width:1080px;height:1080px;position:relative;overflow:hidden;font-family:B
 .kick{{position:absolute;top:150px;left:64px;font:700 96px/1 OS;letter-spacing:.01em}}
 .title{{position:absolute;top:240px;left:40px;right:40px;display:flex;justify-content:center;align-items:flex-start;gap:0}}
 .w{{font:700 330px/0.9 OS;white-space:nowrap;letter-spacing:-.01em}}
-.g{{background:linear-gradient(180deg,#f9b233 0%,#f27420 45%,#e2381f 100%);-webkit-background-clip:text;color:transparent;
-padding:.14em .03em .02em;margin:-.14em -.03em -.02em;filter:drop-shadow(0 8px 12px rgba(226,56,31,.18))}}
+.g{{background:linear-gradient(90deg,#fdb515 0%,#f7941d 40%,#f26522 100%);-webkit-background-clip:text;color:transparent;
+padding:.14em .03em .02em;margin:-.14em -.03em -.02em;filter:drop-shadow(0 4px 6px rgba(200,90,20,.12))}}
+.kick .g{{background:linear-gradient(90deg,#f7941d,#f26a21);-webkit-background-clip:text}}
+.r .g{{background:linear-gradient(90deg,#f26522 0%,#ec4a24 45%,#d9261c 100%);-webkit-background-clip:text}}
 .fig{{position:relative;width:170px;margin:-20px -10px 0;z-index:3;filter:drop-shadow(0 18px 18px rgba(80,50,20,.25))}}
 .fig img{{width:170px;display:block}}
 .sub{{position:absolute;top:610px;right:70px;text-align:right;font:800 32px/1.25 BVP;color:#1f4f9a;text-transform:uppercase}}
@@ -55,7 +57,7 @@ body = f"""<div class="leaf" style="width:230px;height:104px;left:-40px;top:560p
 <div class="leaf" style="width:90px;height:40px;right:40px;top:520px;transform:rotate(-150deg);filter:blur(2.5px);opacity:.85"></div>
 <div class="brand">HOÀNG HIỆP · BĐS ĐÀ NẴNG</div><div class="proj">{e(c.get('project', ''))}</div>
 <div class="kick"><span class="g">{e(c['kicker'])}</span></div>
-<div class="title"><div class="w"><span class="g">{e(c['left'])}</span></div><div class="fig"><img src="{b64(c['figure'])}"></div><div class="w"><span class="g">{e(c['right'])}</span></div></div>
+<div class="title"><div class="w"><span class="g">{e(c['left'])}</span></div><div class="fig"><img src="{b64(c['figure'])}"></div><div class="w r"><span class="g">{e(c['right'])}</span></div></div>
 <div class="sub">{sub}</div>
 <div class="bub" style="width:250px;height:250px;left:360px;top:660px"></div>
 <div class="bub" style="width:70px;height:70px;left:250px;top:560px"></div>
