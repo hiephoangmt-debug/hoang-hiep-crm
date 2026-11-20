@@ -975,6 +975,7 @@ HTML
 		'keywords_extra' => array( 'nhà ở xã hội Ngũ Hành Sơn', 'nhà ở xã hội Đà Nẵng 2026', 'khu đất A2-4 đường Ngũ Hành Sơn', 'A&T Peninsula nhà ở xã hội' ),
 		'project'        => 'peninsula-da-nang',
 		'schedule'       => '2026-11-18 19:15', // Tin tức lên sớm nhất (anh Hiệp 18/11/2026).
+		'rev'            => 2, // 20/11: QĐ 3128/QĐ-UBND, chỉ tiêu quy hoạch, phối cảnh, bản đồ quy hoạch, link trang dự án.
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'Nhà ở xã hội', 'Ngũ Hành Sơn', 'Cầu Tiên Sơn' ),
 		'image'          => 'plugin:img/hoa-xuan/hoa-xuan-flycam-8-2025-song-cam-le-nhin-ve-trung-tam.jpg',
