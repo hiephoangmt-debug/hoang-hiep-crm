@@ -101,3 +101,9 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 - TRANG HOÀNG HIỆP (anh Hiệp 18/11/2026 sửa lại: "tối đa 2 bài/ngày; tin tức xây dựng báo lên hết thì tổng hợp lại trong ngày, trước 11h, chiều trước 17h"): ĐÚNG 2 bài TỔNG HỢP/ngày lúc 11:00 và 17:00, do lịch "Tổng hợp tin trang Hoàng Hiệp 11h – 17h" (chạy 10:32, 16:32) làm. Bài 11:00 gom tin lên web từ 17:00 hôm trước tới 10:30; bài 17:00 gom tin 10:30 – 16:30. Tin quan trọng nhất làm thân bài + ảnh; tin phụ mỗi tin 1 dòng + link trong BÌNH LUẬN ĐẦU. Không có tin thì lấp nội dung tự chọn. Lịch bản tin hạ tầng / Sở Xây dựng chỉ đăng web, không tự đăng Facebook.
 - TUYỂN DỤNG (anh Hiệp 18/11/2026: "lên 1 bài tuyển dụng thôi/ngày"): trang Hoàng Hiệp tối đa 1 bài tuyển dụng/ngày, ngoài 2 bài tổng hợp; cách bài tổng hợp ≥ 1 tiếng. Thấy hơn 1 bài tuyển dụng/ngày thì báo anh, không tự xoá.
 - Bài lịch khác đã hẹn sẵn (tuyển dụng, hạ tầng, Reel) giữ nguyên, tính vào số bài của trang đó; trùng giờ thì dời bài của mình.
+
+## MẪU "NẮNG CAM" (anh Hiệp 20/11/2026: "Saphia đẹp chỉnh lại" – làm mẫu mới theo kiểu bộ ảnh Sun Saphia của chủ đầu tư)
+- Công cụ: `python3 wordpress/bai-viet/the-nang-cam.py <cau-hinh.json> <anh-dai-dien.jpg> <out.jpg> [doc|vuong|tiktok]` (doc 1080x1350 cho FB; tiktok 1080x1920). Mẫu cấu hình: marketing/fb/nang-cam/*.json.
+- Nền kem – cam nhạt, tiêu đề chữ khối Oswald cực lớn cam → đỏ, nhãn xanh, chữ viết tay tên dự án, ảnh phối cảnh hoà vào nền phía dưới, thanh Hoàng Hiệp + Zalo ở đáy.
+- Dùng cho trang Sun khi bài có MỘT thông điệp/con số mạnh (vị trí, số căn, giá từ, tầng cao…). Bài nhiều số liệu vẫn dùng poster nền xanh.
+- KHÔNG đưa logo Sun Property / Sun Group / đại lý (BHS…), không chép khẩu hiệu chủ đầu tư ("đầu tiên", "không thể nhân bản", "khan hiếm") khi không có nguồn; số chỉ lấy từ tài liệu chủ đầu tư / bài web, ghi "dự kiến" với giá.
