@@ -1266,5 +1266,83 @@ HTML
 		),
 	);
 
+	/* ---------------- 21/11 – Phấn đấu khởi công cải tạo đường băng 17R/35L sân bay Đà Nẵng cuối 11/2026 (Thời báo Tài chính VN, VnEconomy, QĐ 1417/QĐ-BXD) ---------------- */
+	$posts[] = array(
+		'slug'           => 'khoi-cong-duong-bang-san-bay-da-nang',
+		'title'          => 'Khởi công đường băng sân bay Đà Nẵng cuối tháng 11/2026: dự án gần 1.696 tỷ đồng được rút ngắn thủ tục',
+		'excerpt'        => 'Bộ Xây dựng chấp thuận dùng thiết kế kỹ thuật thay thiết kế cơ sở, rút ngắn khoảng 1 tháng để phấn đấu khởi công cải tạo đường cất hạ cánh 17R/35L sân bay Đà Nẵng cuối tháng 11/2026; dự án nhóm B gần 1.696 tỷ đồng, thực hiện 2026 – 2028.',
+		'keyword'        => 'khởi công đường băng sân bay Đà Nẵng',
+		'keywords_extra' => array( 'đường cất hạ cánh 17R/35L', 'cải tạo đường băng sân bay Đà Nẵng', 'sân bay quốc tế Đà Nẵng 2026', 'căn hộ gần sân bay Đà Nẵng' ),
+		'project'        => 'sun-saphia-residence',
+		'schedule'       => '2026-11-21 06:45',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Sân bay Đà Nẵng', 'Hạ tầng giao thông', 'Quy hoạch Đà Nẵng' ),
+		'image'          => 'plugin:img/tin-tuc/san-bay-da-nang-sun-saphia.jpg',
+		'image_alt'      => 'Khởi công đường băng sân bay Đà Nẵng: cải tạo đường cất hạ cánh 17R/35L, tổng mức đầu tư gần 1.696 tỷ đồng',
+		'content'        => <<<'HTML'
+<p>Lịch <strong>khởi công đường băng sân bay Đà Nẵng</strong> đã được đẩy lên sớm: Bộ Xây dựng chấp thuận dùng thiết kế kỹ thuật thay cho thiết kế cơ sở trong báo cáo nghiên cứu khả thi, giúp rút ngắn khoảng 1 tháng so với trình tự thông thường, để phấn đấu khởi công dự án cải tạo đường cất hạ cánh 17R/35L vào cuối tháng 11/2026. Đây là dự án nhóm B, tổng mức đầu tư gần 1.696 tỷ đồng, thực hiện giai đoạn 2026 – 2028.</p>
+<!--hh-featured-->
+<h2>Vì sao phải khởi công đường băng sân bay Đà Nẵng sớm?</h2>
+<p>Theo báo chí, kết cấu mặt đường cất hạ cánh 17R/35L đã hết tuổi thọ thiết kế nhưng vẫn phải khai thác với cường độ cao, làm tăng nguy cơ bong bật mặt đường và hư hỏng tàu bay. Vì vậy, việc khởi công đường băng sân bay Đà Nẵng được xem là yêu cầu cấp bách về an toàn bay, không chỉ là nâng cấp để đón thêm chuyến.</p>
+<p>Đề xuất dùng thiết kế kỹ thuật thay thiết kế cơ sở do Ban quản lý dự án Thăng Long đưa ra. Khi được chấp thuận, hồ sơ thiết kế được làm sâu ngay từ đầu, bớt một bước trình duyệt, nhờ đó tiến độ chuẩn bị rút ngắn khoảng 1 tháng.</p>
+<h2>Thông tin dự án cải tạo đường cất hạ cánh 17R/35L</h2>
+<table>
+<thead><tr><th>Hạng mục</th><th>Thông tin (theo báo chí, văn bản)</th></tr></thead>
+<tbody>
+<tr><td>Căn cứ</td><td>Quyết định 1417/QĐ-BXD ngày 12/8/2026 của Bộ Xây dựng về chủ trương đầu tư</td></tr>
+<tr><td>Phạm vi</td><td>Cải tạo đường cất hạ cánh 17R/35L và hệ thống trang thiết bị phụ trợ; xây 1 đường lăn thoát nhanh, 1 đường lăn nối giữa hai đường cất hạ cánh, 1 đường lăn nối với đường lăn song song E</td></tr>
+<tr><td>Quy mô</td><td>Theo cấp sân bay 4E (ICAO)</td></tr>
+<tr><td>Tổng mức đầu tư</td><td>Khoảng 1.696 tỷ đồng, dự án nhóm B</td></tr>
+<tr><td>Nguồn vốn</td><td>Ngân sách trung ương</td></tr>
+<tr><td>Thời gian thực hiện</td><td>2026 – 2028</td></tr>
+<tr><td>Mốc khởi công</td><td>Phấn đấu cuối tháng 11/2026 (kế hoạch, chưa phải lễ khởi công đã diễn ra)</td></tr>
+</tbody>
+</table>
+<p>Như vậy, khởi công đường băng sân bay Đà Nẵng sẽ là bước tiếp theo sau quyết định chủ trương đầu tư ban hành tháng 8/2026. Trước khi được duyệt, Cục Hàng không Việt Nam trình phương án với tổng mức khoảng 1.819,8 tỷ đồng; con số được Bộ Xây dựng chốt trong quyết định là khoảng 1.696 tỷ đồng.</p>
+<!--hh-img:img/tin-tuc/san-bay-da-nang-sun-saphia.jpg|Khởi công đường băng sân bay Đà Nẵng: cải tạo đường cất hạ cánh 17R/35L khoảng 1.696 tỷ đồng, thực hiện 2026 – 2028-->
+<h2>Khởi công đường băng sân bay Đà Nẵng ảnh hưởng gì tới chuyến bay?</h2>
+<p>Sân bay Đà Nẵng có hai đường cất hạ cánh song song. Khi một đường băng thi công, đường còn lại vẫn khai thác, nên sân bay không phải đóng cửa. Tuy vậy, trong giai đoạn thi công, năng lực cất hạ cánh giờ cao điểm có thể bị hạn chế; lịch bay cụ thể do nhà chức trách hàng không và các hãng thông báo. Báo chí hiện chưa công bố phương án điều hành bay chi tiết, nên du khách và chủ căn hộ cho thuê nên theo dõi thông báo chính thức.</p>
+<p>Về dài hạn, khi khởi công đường băng sân bay Đà Nẵng và hoàn thành năm 2028, đường cất hạ cánh mới cùng đường lăn thoát nhanh giúp máy bay rời đường băng nhanh hơn, tăng số chuyến mỗi giờ – điều kiện để sân bay đón thêm đường bay quốc tế, đi cùng việc <a href="/mo-rong-nha-ga-t2-san-bay-da-nang/">mở rộng nhà ga T2 sân bay Đà Nẵng</a>.</p>
+<!--hh-img:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg|Trung tâm Đà Nẵng bên sông Hàn, cách sân bay vài km – khu vực hưởng lợi khi sân bay được cải tạo (ảnh flycam thực tế 11/2026)-->
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Du lịch là động lực của căn hộ cho thuê:</strong> sân bay khai thác an toàn, thêm chuyến quốc tế thì lượng khách lưu trú tăng – có lợi cho căn hộ ven biển và trung tâm đang khai thác cho thuê ngắn ngày.</li>
+<li><strong>Ngắn hạn cần tính tới thi công:</strong> sau khi khởi công đường băng sân bay Đà Nẵng, trong 2026 – 2028, nếu năng lực cất hạ cánh bị hạn chế giờ cao điểm, chủ căn cho thuê nên linh hoạt giờ nhận, trả phòng của khách.</li>
+<li><strong>Tin hạ tầng đã được phê duyệt, có vốn:</strong> khác với các đề xuất, việc khởi công đường băng sân bay Đà Nẵng có quyết định chủ trương đầu tư và vốn ngân sách trung ương, nên mức chắc chắn cao.</li>
+<li><strong>Không nên mua chỉ vì một tin:</strong> khởi công đường băng sân bay Đà Nẵng là tin tốt cho cả thành phố, nhưng giá căn hộ vẫn phụ thuộc pháp lý, chủ đầu tư, vị trí và dòng tiền thực tế; tin sân bay là yếu tố cộng thêm, không thay thế việc kiểm tra dự án.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<p>Các dự án dưới đây nằm ở khu vực có kết nối sân bay thuận tiện, nên tin khởi công đường băng sân bay Đà Nẵng là yếu tố cộng thêm cho nhu cầu lưu trú:</p>
+<ul>
+<li><a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a> (khu biển Sơn Thủy): cách sân bay khoảng 9 – 14 km, sản phẩm hướng tới khách lưu trú – hưởng lợi trực tiếp khi sân bay đón thêm chuyến. Xem bài <a href="/sun-saphia-residence-di-san-bay/">Sun Saphia Residence đi sân bay mất bao lâu</a>.</li>
+<li><a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a> và <a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a> (ven sông Hàn): đang bàn giao, nằm ở trung tâm gần sân bay, phù hợp cả ở và cho thuê.</li>
+</ul>
+<p>Xem thêm: <a href="/nang-cap-san-bay-da-nang-1696-ty-sun-saphia/">nâng cấp sân bay Đà Nẵng 1.696 tỷ</a> và <a href="/duong-sat-do-thi-da-nang-san-bay-my-khe-hoi-an/">đường sắt đô thị sân bay – Mỹ Khê</a>. Cần tư vấn căn hộ gần sân bay, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: <a href="https://thoibaotaichinhvietnam.vn/khoi-cong-cai-tao-tong-the-duong-cat-ha-canh-san-bay-da-nang-vao-cuoi-thang-11-2026-202900.html">Thời báo Tài chính Việt Nam</a>; <a href="https://vneconomy.vn/gan-1696-ty-dong-dau-tu-du-an-cai-tao-duong-cat-ha-canh-duong-lan-cang-hang-khong-quoc-te-da-nang.htm">VnEconomy</a>; <a href="https://luatvietnam.vn/dau-tu/quyet-dinh-1417-qd-bxd-2026-dau-tu-xay-dung-cai-tao-duong-cat-ha-canh-cang-hang-khong-da-nang-444767-d1.html">Quyết định 1417/QĐ-BXD (LuatVietnam)</a>; <a href="https://www.tinnhanhchungkhoan.vn/dau-tu-1819-ty-dong-xay-dung-cai-tao-duong-cat-ha-canh-san-bay-da-nang-post393036.html">Tin nhanh chứng khoán</a>. Mốc khởi công là kế hoạch theo báo chí, có thể thay đổi.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Khởi công đường băng sân bay Đà Nẵng 11/2026: gần 1.696 tỷ',
+			'desc'      => 'Khởi công đường băng sân bay Đà Nẵng phấn đấu cuối 11/2026: cải tạo đường cất hạ cánh 17R/35L gần 1.696 tỷ đồng, thực hiện 2026 – 2028.',
+			'points'    => array(
+				'Bộ Xây dựng cho dùng thiết kế kỹ thuật thay thiết kế cơ sở, rút ngắn khoảng 1 tháng',
+				'Phấn đấu khởi công đường băng sân bay Đà Nẵng cuối tháng 11/2026',
+				'Cải tạo đường cất hạ cánh 17R/35L, thêm 3 đường lăn; gần 1.696 tỷ đồng, vốn ngân sách trung ương, 2026 – 2028',
+			),
+			'faq'       => array(
+				array( 'Khi nào khởi công đường băng sân bay Đà Nẵng?', 'Theo báo chí, dự án phấn đấu khởi công cuối tháng 11/2026 nhờ được dùng thiết kế kỹ thuật thay thiết kế cơ sở, rút ngắn khoảng 1 tháng chuẩn bị.' ),
+				array( 'Dự án cải tạo đường băng bao nhiêu tiền?', 'Khoảng 1.696 tỷ đồng theo Quyết định 1417/QĐ-BXD ngày 12/8/2026, dự án nhóm B, vốn ngân sách trung ương, thực hiện 2026 – 2028.' ),
+				array( 'Sân bay Đà Nẵng có đóng cửa khi thi công không?', 'Sân bay có hai đường cất hạ cánh song song nên vẫn khai thác trên đường còn lại; lịch bay cụ thể theo thông báo của nhà chức trách và các hãng.' ),
+				array( 'Vì sao phải cải tạo đường cất hạ cánh 17R/35L?', 'Kết cấu mặt đường đã hết tuổi thọ thiết kế nhưng vẫn khai thác cường độ cao, tăng nguy cơ bong bật mặt đường và hư hỏng tàu bay.' ),
+			),
+		),
+		'sources'        => array(
+			'https://thoibaotaichinhvietnam.vn/khoi-cong-cai-tao-tong-the-duong-cat-ha-canh-san-bay-da-nang-vao-cuoi-thang-11-2026-202900.html',
+			'https://vneconomy.vn/gan-1696-ty-dong-dau-tu-du-an-cai-tao-duong-cat-ha-canh-duong-lan-cang-hang-khong-quoc-te-da-nang.htm',
+			'https://luatvietnam.vn/dau-tu/quyet-dinh-1417-qd-bxd-2026-dau-tu-xay-dung-cai-tao-duong-cat-ha-canh-cang-hang-khong-da-nang-444767-d1.html',
+			'https://www.tinnhanhchungkhoan.vn/dau-tu-1819-ty-dong-xay-dung-cai-tao-duong-cat-ha-canh-san-bay-da-nang-post393036.html',
+		),
+	);
+
 	return $posts;
 }
