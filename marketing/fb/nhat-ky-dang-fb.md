@@ -142,6 +142,7 @@
 | 20/11/2026 | Casamia (blogId 8074284) | 19:30 | Tổng quan Casamia Balanca – 31,1 ha, 363 sản phẩm (album 4 ảnh: biệt thự ven kênh, toàn cảnh, đường nội khu, hồ bơi ven sông) | /du-an/casamia-balanca-hoi-an/ |
 | 20/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | Tổng quan Casamia Balanca – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
 | 20/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: Hủy quy hoạch khu biệt thự Sơn Trà (+1 tin ở bình luận) | /huy-quy-hoach-khu-biet-thu-son-tra/ /khu-do-thi-hoa-vang-dau-thau-quoc-te/ |
+| 20/11/2026 | TikTok (@hiephoangmt, brand Sun) | 14:15 | (anh Hiệp yêu cầu) Hủy quy hoạch khu biệt thự Sơn Trà – BỘ 3 ẢNH (ảnh anh gửi); web đổi ảnh đại diện rev 3 | /huy-quy-hoach-khu-biet-thu-son-tra/ |
 | CHỜ | Sun | 21/11 | (bài web 20/11 09:00) Mặt bằng căn hộ Cora Tower | mat-bang-can-ho-cora-tower (chờ) |
 | CHỜ | Sun | 21/11 | (bài web 20/11 11:30) Sun Saphia Residence gần Làng Đại học | sun-saphia-residence-gan-lang-dai-hoc (chờ) |
 | CHỜ | Sun | 21/11 | (bài web 20/11 16:30) Studio góc Sun Saphia 40 m² | studio-goc-sun-saphia-residence-40m2 (chờ) |
