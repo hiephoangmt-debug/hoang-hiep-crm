@@ -1046,7 +1046,7 @@ def hero_fx():
 
 def posters():
     """Dải poster quảng cáo (ảnh vuông dựng sẵn: chữ to chuyển màu, tòa tháp đè lên chữ) + dải Chủ nhân tiên phong."""
-    PB = RAW + '3ba621c3642c116f3b8755502e26d4ea0fe81efe/landing/sun-saphia/v4/img/'
+    PB = RAW + 'ed6bae2432d4411e4246e2d74c18b2a917267d17/landing/sun-saphia/v4/img/'
     P = [('poster-1-dau-an-mat-bien', 'Dấu ấn mặt biển – căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, hơn 300 m ra bãi tắm Sơn Thủy (ảnh minh họa)', 'ADS – poster Dấu ấn mặt biển'),
          ('poster-2-khan-hiem-vi-tri', 'Khan hiếm vị trí – quỹ đất mặt biển không thể nhân bản, mặt tiền trục biển Võ Nguyên Giáp – Trường Sa (ảnh minh họa)', 'ADS – poster Khan hiếm vị trí'),
          ('poster-3-782-co-hoi', '782 cơ hội sở hữu – đặc quyền tầm nhìn biển và tầng cao, tòa 30 tầng (ảnh minh họa)', 'ADS – poster 782 cơ hội sở hữu'),
