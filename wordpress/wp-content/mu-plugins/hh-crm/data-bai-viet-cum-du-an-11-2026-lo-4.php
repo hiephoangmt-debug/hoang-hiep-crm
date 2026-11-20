@@ -236,7 +236,7 @@ HTML
 
 	/* ---------------- Căn hộ hàng hiệu – Nobu ---------------- */
 	$posts[] = array(
-		'slug'     => 'can-ho-hang-hieu-la-gi-nobu-da-nang',
+		'slug'     => 'can-ho-hang-hieu-la-gi-nobu-residences', // 20/11: đường dẫn cũ can-ho-hang-hieu-la-gi-nobu-da-nang bị web bỏ qua lúc đăng – đăng lại đường dẫn mới, link cũ chuyển 301.
 		'title'    => 'Căn hộ hàng hiệu là gì? Nobu Residences Đà Nẵng khác căn hộ cao cấp thường ở đâu',
 		'excerpt'  => 'Căn hộ hàng hiệu (branded residences) là căn hộ gắn thương hiệu khách sạn, được vận hành theo chuẩn thương hiệu. Lấy Nobu Residences Đà Nẵng làm ví dụ: thương hiệu, dịch vụ, chi phí, cách khai thác và điều cần hỏi trước khi mua.',
 		'keyword'  => 'căn hộ hàng hiệu',

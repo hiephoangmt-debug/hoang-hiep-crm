@@ -166,7 +166,7 @@ HTML
 <li><strong>Thời hạn sở hữu:</strong> các nguồn chưa thống nhất (lâu dài cho người Việt hay đến 2060 theo đất thương mại dịch vụ).</li>
 <li><strong>Hợp đồng vận hành với Nobu Hospitality:</strong> phí dịch vụ, chương trình cho thuê.</li>
 </ol>
-<p>Xem thêm: <a href="/gia-nobu-residences-da-nang-bao-nhieu/">giá Nobu Đà Nẵng</a>, <a href="/can-ho-hang-hieu-la-gi-nobu-da-nang/">căn hộ hàng hiệu là gì</a>.</p>
+<p>Xem thêm: <a href="/gia-nobu-residences-da-nang-bao-nhieu/">giá Nobu Đà Nẵng</a>, <a href="/can-ho-hang-hieu-la-gi-nobu-residences/">căn hộ hàng hiệu là gì</a>.</p>
 <h2>Nobu Đà Nẵng của ai: VCRE là doanh nghiệp nào</h2>
 <p>VCRE (Viet Capital Real Estate) là tên viết tắt của Công ty CP Bất động sản Bản Việt, thành lập năm 2007 và là thành viên của Phoenix Holdings. Doanh nghiệp theo đuổi phân khúc nhà ở và lưu trú hạng sang gắn với thương hiệu quốc tế, đã mở thêm văn phòng kinh doanh tại Hà Nội. Tổng giám đốc là ông Võ Thành Lâm. Theo <a href="https://vneconomy.vn/nobu-danang-san-sang-chao-don-nhung-chu-nhan-tinh-hoa-moi.htm">VnEconomy</a>, sau Đà Nẵng, VCRE tiếp tục hợp tác với Nobu để đưa thương hiệu này vào TP.HCM. <a href="https://vnexpress.net/vcre-cung-nobu-hospitality-kien-tao-bieu-tuong-phong-cach-song-tai-da-nang-4598075.html">VnExpress</a> cũng có bài về việc VCRE cùng Nobu Hospitality phát triển dự án tại Đà Nẵng – nguồn tham khảo tốt khi tìm hiểu Nobu Đà Nẵng của ai.</p>
 <h2>Nobu Đà Nẵng của ai: vai trò của Nobu Hospitality</h2>

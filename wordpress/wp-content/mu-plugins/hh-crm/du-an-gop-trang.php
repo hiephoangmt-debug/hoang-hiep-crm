@@ -59,3 +59,26 @@ add_action(
 	},
 	1
 );
+
+/**
+ * Bài viết đổi đường dẫn (bài tự đăng bị bỏ qua, đăng lại đường dẫn mới) – link cũ đã chia sẻ chuyển 301.
+ * 20/11/2026: link Facebook /can-ho-hang-hieu-la-gi-nobu-da-nang/ báo "Page Not Found".
+ */
+function hh_bai_doi_duong_dan() {
+	return array(
+		'can-ho-hang-hieu-la-gi-nobu-da-nang' => 'can-ho-hang-hieu-la-gi-nobu-residences',
+	);
+}
+
+add_action(
+	'template_redirect',
+	static function () {
+		$path = trim( (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		$map  = hh_bai_doi_duong_dan();
+		if ( isset( $map[ $path ] ) && ! get_page_by_path( $path, OBJECT, 'post' ) ) {
+			wp_safe_redirect( home_url( '/' . $map[ $path ] . '/' ), 301 );
+			exit;
+		}
+	},
+	1
+);

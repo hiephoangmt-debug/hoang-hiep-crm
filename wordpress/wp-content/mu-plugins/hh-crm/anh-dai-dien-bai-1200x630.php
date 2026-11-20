@@ -201,7 +201,7 @@ function hh_bia_bai_slugs() {
 		'nobu-hay-the-legend-can-ho-cao-cap-da-nang',
 		'phap-ly-the-legend-da-nang-so-huu-lau-dai',
 		'mat-bang-can-ho-cora-tower',
-		'can-ho-hang-hieu-la-gi-nobu-da-nang',
+		'can-ho-hang-hieu-la-gi-nobu-residences',
 		'mat-bang-can-ho-fours-tower',
 		'can-1pn-plus-sun-saphia-residence-49-51m2',
 		'tien-do-capital-square-da-nang',
