@@ -67,25 +67,58 @@ def main(out):
     d.text((60 + tw + 22, 372), 'sản phẩm bán ra', font=sans(30, 'ExtraBold'), fill=INK)
     d.text((60 + tw + 22, 414), 'trong 8 tháng (3 – 10/2026)', font=sans(23, 'Medium'), fill=GREY)
 
-    y0 = 528; rh = 98; x0, x1 = 56, W - 56; L = 236
-    d.text((x0 + 4, y0 - 12), 'KẾT QUẢ TỪNG ĐỢT MỞ BÁN', font=sans(21, 'ExtraBold'), fill=BLUE)
-    y = y0 + 22
-    for t, name, n, lab, ctx, hot in ROWS:
-        sh = Image.new('RGBA', im.size, (0, 0, 0, 0)); ImageDraw.Draw(sh).rounded_rectangle((x0, y + 3, x1, y + rh - 11), 18, fill=(22, 40, 66, 22))
-        im.alpha_composite(sh); d = ImageDraw.Draw(im)
-        d.rounded_rectangle((x0, y, x1, y + rh - 14), 18, fill=(255, 255, 255), outline=(242, 196, 160) if hot else LINE, width=2)
-        d.rounded_rectangle((x0 + 18, y + 18, x0 + 140, y + 54), 18, fill=OR if hot else NV)
-        d.text((x0 + 79, y + 36), t, font=sans(20, 'ExtraBold'), fill=(255, 255, 255), anchor='mm')
-        d.text((x0 + 18, y + 60), ctx, font=sans(16, 'Medium'), fill=GREY)
-        d.text((x0 + L, y + 12), name, font=sans(26, 'ExtraBold'), fill=INK)
-        bx1 = x1 - 20; by = y + 54
-        d.rounded_rectangle((x0 + L, by, bx1, by + 16), 8, fill=(230, 236, 244))
-        d.rounded_rectangle((x0 + L, by, x0 + L + max(16, int((bx1 - x0 - L) * n / 1000)), by + 16), 8, fill=OR if hot else (226, 160, 112))
-        d.text((x1 - 20, y + 12), lab, font=sans(26, 'ExtraBold'), fill=OR, anchor='ra')
-        y += rh
-    y += 4
-    d.text((W // 2, y), 'Mua sản phẩm thanh khoản tốt – an tâm cả khi thị trường khó', font=sans(25, 'SemiBold'), fill=NV, anchor='ma')
-    d.text((W // 2, y + 36), 'Nhận giỏ hàng & chính sách mới nhất Sun Group Đà Nẵng', font=sans(21, 'Medium'), fill=GREY, anchor='ma')
+    # Biểu đồ 2 tầng cùng trục thời gian: trên = diễn biến thị trường (định tính), dưới = số sản phẩm bán ra.
+    x0, x1 = 44, W - 44
+    sh = Image.new('RGBA', im.size, (0, 0, 0, 0)); ImageDraw.Draw(sh).rounded_rectangle((x0, 492, x1, 1176), 24, fill=(22, 40, 66, 20)); im.alpha_composite(sh)
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((x0, 486, x1, 1170), 24, fill=(255, 255, 255), outline=LINE, width=2)
+    n = len(ROWS); cw = (x1 - x0 - 40) / n; cx = [x0 + 20 + cw * k + cw / 2 for k in range(n)]
+    MK = (88, 104, 128)  # thị trường: xám xanh (1 chuỗi – không cần chú thích màu)
+    # --- Tầng trên: thị trường ---
+    d.text((x0 + 28, 506), 'THỊ TRƯỜNG BĐS CHUNG', font=sans(20, 'ExtraBold'), fill=BLUE)
+    d.text((x1 - 28, 508), 'diễn biến minh họa', font=sans(16, 'Medium'), fill=GREY, anchor='ra')
+    ty, by_ = 560, 700  # đỉnh (tốt) – đáy (trầm)
+    d.text((x0 + 28, ty - 10), 'Tốt', font=sans(15, 'SemiBold'), fill=GREY)
+    d.text((x0 + 28, by_ - 4), 'Trầm', font=sans(15, 'SemiBold'), fill=GREY)
+    for gy in (ty, (ty + by_) / 2, by_):
+        d.line([(x0 + 80, gy), (x1 - 24, gy)], fill=(236, 240, 246), width=1)
+    lv = [1.0, 0.78, 0.55, 0.36, 0.18, 0.06]
+    pts = [(cx[k], by_ - (by_ - ty) * lv[k]) for k in range(n)]
+    area = Image.new('RGBA', im.size, (0, 0, 0, 0)); ImageDraw.Draw(area).polygon(pts + [(pts[-1][0], by_), (pts[0][0], by_)], fill=(88, 104, 128, 30)); im.alpha_composite(area)
+    d = ImageDraw.Draw(im)
+    d.line(pts, fill=MK, width=4, joint='curve')
+    for k, (px, py) in enumerate(pts):
+        d.ellipse((px - 8, py - 8, px + 8, py + 8), fill=(255, 255, 255), outline=MK, width=3)
+        ctx = ROWS[k][4].replace('Thị trường ', '').capitalize()
+        f = sans(15, 'SemiBold'); lab = ctx
+        tx = min(max(px, x0 + 90), x1 - 70)
+        d.text((tx, py + 14), lab, font=f, fill=INK, anchor='ma')
+    # --- Trục thời gian chung ---
+    my = 748
+    d.line([(x0 + 20, my), (x1 - 20, my)], fill=LINE, width=2)
+    for k in range(n):
+        d.rounded_rectangle((cx[k] - 62, my - 18, cx[k] + 62, my + 18), 18, fill=OR if ROWS[k][5] else NV)
+        d.text((cx[k], my), ROWS[k][0].replace('/2026', ''), font=sans(19, 'ExtraBold'), fill=(255, 255, 255), anchor='mm')
+    # --- Tầng dưới: kết quả bán ---
+    d.text((x0 + 28, 784), 'KẾT QUẢ BÁN HÀNG SUN GROUP', font=sans(20, 'ExtraBold'), fill=BLUE)
+    d.text((x1 - 28, 786), 'số sản phẩm bán ra', font=sans(16, 'Medium'), fill=GREY, anchor='ra')
+    base = 1050; hmax = 170; bw = 84
+    NM = ['Đất nền\nVõ Chí Công', 'FourS Tower\nF1, F5', 'Symphony 5', 'S-Light\nTower', 'Penthouse &\nShop khối đế', 'FourS Tower\nF2']
+    d.line([(x0 + 20, base), (x1 - 20, base)], fill=(196, 206, 220), width=2)
+    for k, (t, name, val, lab, ctx, hot) in enumerate(ROWS):
+        h = max(8, int(hmax * val / 1000))
+        d.rounded_rectangle((cx[k] - bw / 2, base - h, cx[k] + bw / 2, base), 6, fill=OR if hot else (232, 168, 120))
+        d.rectangle((cx[k] - bw / 2, base - 6, cx[k] + bw / 2, base), fill=OR if hot else (232, 168, 120))
+        num = lab.split(' ')[0]; unit = lab[len(num):].strip()
+        d.text((cx[k], base - h - 30), num, font=sans(24, 'ExtraBold'), fill=INK, anchor='ms')
+        if unit:
+            d.text((cx[k], base - h - 8), unit, font=sans(14, 'SemiBold'), fill=OR if hot else GREY, anchor='ms')
+        # tên dự án dưới trục, tối đa 2 dòng
+        for q, ln in enumerate(NM[k].split('\n')):
+            d.text((cx[k], base + 12 + q * 22), ln, font=sans(17, 'SemiBold'), fill=INK, anchor='ma')
+    d.text((W // 2, 1118), 'Thị trường đi xuống, kết quả bán hàng vẫn giữ vững', font=script(30), fill=OR, anchor='ma')
+    y = 1186
+    d.text((W // 2, y), 'Mua sản phẩm thanh khoản tốt – an tâm cả khi thị trường khó', font=sans(24, 'SemiBold'), fill=NV, anchor='ma')
 
     box = (32, H - 128, W - 32, H - 26); bx, by0, bx2, by1 = box; h = by1 - by0
     ov = Image.new('RGBA', im.size, (0, 0, 0, 0)); ImageDraw.Draw(ov).rounded_rectangle(box, 22, fill=(24, 40, 70, 240)); im.alpha_composite(ov)
