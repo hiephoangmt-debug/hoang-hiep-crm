@@ -1045,53 +1045,43 @@ def hero_fx():
             '<div><b>2,45 ha</b><span>công viên biển trước mặt</span></div><div><b>3,5 m</b><span>chiều cao tầng</span></div><div><b>1,8 tỷ</b><span>giá dự kiến từ (Studio)</span></div></div></section>' + js)
 
 def posters():
-    """Dải poster thông điệp mạnh (học phong cách poster quảng cáo: chữ to chuyển màu cam–đỏ, câu ngắn), ảnh phối cảnh của dự án."""
-    P = [('Dấu ấn', 'MẶT BIỂN', 'Căn hộ mặt biển <b>đầu tiên</b> của Sun Group tại Đà Nẵng', 'view-huong-dong', 'Phòng ngủ nhìn thẳng ra biển (ảnh minh họa)', 'ADS – poster Dấu ấn mặt biển'),
-         ('Khan hiếm', 'VỊ TRÍ', 'Quỹ đất mặt biển không thể nhân bản · <b>hơn 300 m</b> ra biển', 'cover-saphia-hoang-hon', 'Tòa Sun Saphia bên bờ biển Sơn Thủy (ảnh minh họa)', 'ADS – poster Khan hiếm vị trí'),
-         ('Chỉ có', '782 CĂN', 'Cơ hội sở hữu tầm nhìn biển và tầng cao · <b>30 tầng</b>, cao khoảng 114 m', 'phoi-canh-kickoff', 'Tòa tháp Sun Saphia lúc hoàng hôn (ảnh minh họa)', 'ADS – poster 782 cơ hội sở hữu'),
-         ('Chỉ từ', '~1,8 TỶ', 'Thanh toán khoảng <b>25%</b> tới lúc nhận nhà · vay 70%', 'gia-dinh-ban-cong', 'Gia đình thư giãn ở ban công (ảnh minh họa)', 'ADS – poster giá từ 1,8 tỷ')]
-    cards = ''
-    for i, (k, big, sub, im, alt, it) in enumerate(P):
-        cards += ('<button type="button" class="pst-c" data-pop data-interest="%s">'
-                  '<span class="pst-k%s">%s</span><b class="pst-b%s">%s</b><span class="pst-s">%s</span>'
-                  '<img src="%s%s-900.webp" alt="%s" loading="lazy" decoding="async" width="900" height="500"></button>') % (
-                  it, ' pst-kn' if i in (1,) else '', k, ' pst-num' if i in (2, 3) else '', big, sub, V4, im, alt)
+    """Dải poster quảng cáo (ảnh vuông dựng sẵn: chữ to chuyển màu, tòa tháp đè lên chữ) + dải Chủ nhân tiên phong."""
+    PB = RAW + '3ba621c3642c116f3b8755502e26d4ea0fe81efe/landing/sun-saphia/v4/img/'
+    P = [('poster-1-dau-an-mat-bien', 'Dấu ấn mặt biển – căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, hơn 300 m ra bãi tắm Sơn Thủy (ảnh minh họa)', 'ADS – poster Dấu ấn mặt biển'),
+         ('poster-2-khan-hiem-vi-tri', 'Khan hiếm vị trí – quỹ đất mặt biển không thể nhân bản, mặt tiền trục biển Võ Nguyên Giáp – Trường Sa (ảnh minh họa)', 'ADS – poster Khan hiếm vị trí'),
+         ('poster-3-782-co-hoi', '782 cơ hội sở hữu – đặc quyền tầm nhìn biển và tầng cao, tòa 30 tầng (ảnh minh họa)', 'ADS – poster 782 cơ hội sở hữu'),
+         ('poster-4-chi-tu-1-8-ty', 'Chỉ từ 1,8 tỷ – thanh toán khoảng 25% tới lúc nhận nhà, vay 70%, hỗ trợ lãi suất tới 24 tháng (giá tham khảo, chưa VAT)', 'ADS – poster giá từ 1,8 tỷ')]
+    cards = ''.join('<button type="button" class="pst-c" data-pop data-interest="%s"><img src="%s%s-720.webp" alt="%s" width="720" height="720" loading="lazy" decoding="async"><span class="pst-go">Nhận bảng giá ›</span></button>' % (it, PB, n, alt) for n, alt, it in P)
     return ('<section class="pst" aria-label="Điểm nổi bật Sun Saphia Residence"><style>'
             '.pst{background:linear-gradient(180deg,#FFF6EC,#FFFDF9);padding:34px 0 30px}'
-            '.pst .wrap{display:grid;gap:16px}'
-            '.pst-g{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}'
-            '.pst-c{position:relative;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:4px;border:0;cursor:pointer;font:inherit;color:#0A2540;'
-            'background:linear-gradient(180deg,#FFF3E3 0%,#FFE8D0 100%);border-radius:20px;overflow:hidden;padding:18px 16px 0;min-height:360px;box-shadow:0 10px 30px rgba(233,97,24,.12);transition:transform .25s,box-shadow .25s}'
-            '.pst-c:hover,.pst-c:focus-visible{transform:translateY(-4px);box-shadow:0 18px 40px rgba(233,97,24,.22);outline:none}'
-            '.pst-k{font-family:"Be Vietnam Pro",sans-serif;font-weight:800;font-size:18px;letter-spacing:.06em;text-transform:uppercase;'
-            'background:linear-gradient(90deg,#F7A21B,#E96118 55%,#D62E1F);-webkit-background-clip:text;background-clip:text;color:transparent}'
-            '.pst-kn{background:#1B4F9C;color:#fff;-webkit-background-clip:border-box;background-clip:border-box;padding:4px 12px;border-radius:8px 8px 8px 0;font-size:15px}'
-            '.pst-b{display:block;font-family:"Be Vietnam Pro",sans-serif;font-weight:800;line-height:1.18;padding-top:.08em;letter-spacing:-.01em;font-size:clamp(38px,3.9vw,54px);'
-            'background:linear-gradient(95deg,#F9B233 0%,#F07A1A 40%,#E2401F 75%,#C9201C 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 rgba(255,255,255,.6))}'
-            '.pst-num{font-size:clamp(42px,4.4vw,60px)}'
-            '.pst-s{font-size:14px;line-height:1.45;color:#1E3A5F;max-width:30ch;margin-top:4px}.pst-s b{color:#E2401F}'
-            '.pst-c img{display:block;max-width:none;width:calc(100% + 32px);margin:12px -16px 0;height:170px;object-fit:cover;margin-top:auto;'
-            '-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 28%);mask-image:linear-gradient(180deg,transparent 0,#000 28%)}'
+            '.pst .wrap{display:grid;gap:18px}'
+            '.pst-g{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}'
+            '.pst-c{position:relative;display:block;padding:0;border:0;cursor:pointer;border-radius:22px;overflow:hidden;background:#FFE8D0;'
+            'box-shadow:0 14px 36px rgba(10,37,64,.16);transition:transform .3s,box-shadow .3s;aspect-ratio:1/1}'
+            '.pst-c img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s}'
+            '.pst-c:hover,.pst-c:focus-visible{transform:translateY(-4px);box-shadow:0 22px 48px rgba(10,37,64,.24);outline:none}'
+            '.pst-c:hover img{transform:scale(1.03)}'
+            '.pst-go{position:absolute;right:16px;top:16px;background:linear-gradient(135deg,#FF8A3D,#E96118);color:#fff;font-weight:800;font-size:14px;padding:8px 14px;border-radius:999px;box-shadow:0 6px 16px rgba(233,97,24,.4);opacity:0;transform:translateY(-6px);transition:.3s}'
+            '.pst-c:hover .pst-go,.pst-c:focus-visible .pst-go{opacity:1;transform:none}'
             '.pst-f{position:relative;display:grid;grid-template-columns:1.2fr 1fr;align-items:center;gap:18px;border-radius:22px;overflow:hidden;padding:24px 26px;color:#fff;'
             'background:linear-gradient(100deg,rgba(10,37,64,.96) 0%,rgba(10,37,64,.85) 48%,rgba(10,37,64,.25) 100%),url("' + V4 + 'thap-bien-hoang-hon-2-900.webp") right center/cover no-repeat}'
-            '.pst-f .pst-k{font-size:14px;background:none;color:#FFB347;-webkit-background-clip:border-box;background-clip:border-box}'
+            '.pst-k{font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#FFB347}'
             '.pst-ft{display:block;font-family:"Be Vietnam Pro",sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,42px);line-height:1.2;margin:4px 0 8px;'
             'background:linear-gradient(95deg,#FFD07A,#FF8A3D 50%,#FF5A3C);-webkit-background-clip:text;background-clip:text;color:transparent}'
             '.pst-fp{margin:0;font-size:15px;line-height:1.55;color:#DCE6EF;max-width:46ch}.pst-fp b{color:#fff}'
             '.pst-fa{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}'
             '.pst-note{font-size:12px;color:#6A7280;margin:0}'
-            '@media(max-width:980px){.pst-g{grid-template-columns:repeat(2,1fr)}}'
-            '@media(max-width:620px){.pst{padding:24px 0}.pst-g{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}'
-            '.pst-g::-webkit-scrollbar{display:none}.pst-c{flex:0 0 78%;scroll-snap-align:start;min-height:340px}'
+            '.pst .wrap{max-width:1040px}'
+            '@media(max-width:620px){.pst{padding:22px 0}.pst-g{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px;padding:0 16px 6px;scrollbar-width:none}'
+            '.pst-g::-webkit-scrollbar{display:none}.pst-c{flex:0 0 86%;scroll-snap-align:center}.pst-go{display:none}'
             '.pst-f{grid-template-columns:1fr;padding:20px 18px;background:linear-gradient(180deg,rgba(10,37,64,.94),rgba(10,37,64,.88)),url("' + V4 + 'thap-bien-hoang-hon-2-900.webp") center/cover}.pst-fa{justify-content:flex-start}}'
-            '@media(prefers-reduced-motion:reduce){.pst-c{transition:none}}'
+            '@media(prefers-reduced-motion:reduce){.pst-c,.pst-c img,.pst-go{transition:none}}'
             '</style><div class="wrap"><div class="pst-g">' + cards + '</div>'
             '<div class="pst-f"><div><span class="pst-k">Founding owners</span><b class="pst-ft">Chủ nhân tiên phong</b>'
             '<p class="pst-fp">Đặt chỗ <b>50 triệu/căn, hoàn lại 100%</b> nếu không mua, được <b>ưu tiên chọn căn</b> trước ngày mở bán <b>05/12/2026</b> tại Đà Nẵng.</p></div>'
             '<div class="pst-fa"><button type="button" class="btn" data-pop data-interest="ADS – poster Chủ nhân tiên phong (đặt chỗ ưu tiên)">Giữ suất ưu tiên chọn căn</button></div></div>'
             '<p class="pst-note">Ảnh minh họa – phối cảnh dự án. Giá tham khảo, chưa VAT; giá và chính sách chính thức chủ đầu tư công bố khi mở bán.</p>'
             '</div></section>')
-
 
 def ads(domain, home_page=False):
     url = MAIN + '/ads'  # cả hai tên miền chuẩn hóa về trang ads chính
