@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.45** + plugin Hoàng Hiệp CRM **2.20.331**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.45** + plugin Hoàng Hiệp CRM **2.20.332**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.332 (20/11/2026)
+
+- **Nobu Residences Đà Nẵng – chính sách bán hàng:** khung ưu đãi "Chiết khấu theo phương thức thanh toán tới 14%" (chọn căn 2%, 24 giờ 0,5%, mua nhiều căn 1 – 2%), vay ân hạn gốc và hỗ trợ lãi suất 24 tháng, lịch thanh toán đặt chỗ 100 triệu – 5% – 25% – 5% – 25% – 35% – 5% (ngân hàng giải ngân khoảng 70%). Chỉ điền ô còn trống. Sau khi cài bấm "Nhập / cập nhật dữ liệu".
 
 ## Có gì mới – 2.20.331 (20/11/2026)
 
