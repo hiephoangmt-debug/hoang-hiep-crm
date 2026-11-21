@@ -23,6 +23,7 @@ ORDER = [
     ('kich-ban-telesale-bat-dong-san', 'Kịch bản telesale bất động sản'),
     ('ky-nang-chot-sale-bat-dong-san', 'Kỹ năng chốt sale bất động sản'),
     ('can-ho-hinh-thanh-trong-tuong-lai', 'Căn hộ hình thành trong tương lai'),
+    ('luat-kinh-doanh-bat-dong-san', 'Luật Kinh doanh BĐS 2023 cho người mới'),
 ]
 # Ảnh thật minh hoạ đúng nội dung từng bài (chèn sau hộp Trả lời nhanh). Bài không có ảnh khớp thì để trống.
 FIG = {
@@ -128,7 +129,7 @@ def build(slug):
             items.append(f'<li><div class="si"><b><a href="{S}/{s2}">{i}. {esc(t2)}</a></b><a class="si-go" href="{S}/{s2}">Đọc bài →</a></div></li>')
     series = f'''<section class="card" id="doc-tiep">
 <h2>Chuỗi bài <span>Nhập môn Sale BĐS</span></h2>
-<p class="lead">10 bài từ cơ bản đến kỹ năng, viết cho người mới. Đọc xong chuỗi này, tiếp tục với <a href="{S}/lo-trinh-sale-moi-60-ngay-dau">lộ trình 60 ngày đầu</a> và chuỗi bài marketing.</p>
+<p class="lead">11 bài từ cơ bản đến kỹ năng và pháp lý, viết cho người mới. Đọc xong chuỗi này, tiếp tục với <a href="{S}/lo-trinh-sale-moi-60-ngay-dau">lộ trình 60 ngày đầu</a> và chuỗi bài marketing.</p>
 <ol class="series">{''.join(items)}</ol>
 <p class="more">Muốn học trực tiếp, có người kèm? <a href="{S}/ung-tuyen">Gửi hồ sơ 30 giây</a> · <a href="{S}/#vi-tri">Xem các vị trí đang tuyển</a></p>
 </section>
