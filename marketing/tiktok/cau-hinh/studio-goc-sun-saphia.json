@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Cùng là studio nhưng",
+  "+10 m²",
+  "ở căn góc"
+ ],
+ "question": "Studio góc Sun Saphia rộng hơn studio thường bao nhiêu?",
+ "hook_bg": "/home/user/hoang-hiep-crm/marketing/fb/noi-that-studio-sun-saphia-album-1.jpg",
+ "data_title": [
+  "Sun Saphia Residence",
+  "STUDIO GÓC"
+ ],
+ "rows": [
+  [
+   "~40 m²",
+   "Studio góc",
+   "Thường có thêm mặt thoáng"
+  ],
+  [
+   "30–31 m²",
+   "Studio thường",
+   "Mặt tiền 3,8 m, sâu 9 m"
+  ],
+  [
+   "19",
+   "Studio mỗi sàn",
+   "Tầng điển hình 3A – 28"
+  ],
+  [
+   "600–800k",
+   "Phí quản lý dự kiến",
+   "Đồng/tháng, studio góc"
+  ],
+  [
+   "~2,13 tỷ",
+   "Studio thường từ",
+   "Tầng 15, giá dự kiến"
+  ]
+ ],
+ "note": "Theo mặt bằng và tài liệu chủ đầu tư 11/2026. Giá, phí dự kiến, tham khảo.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d19/sun-saphia-cdt-toa-thap-ngay.jpg",
+ "photo_caption": "Phối cảnh Sun Saphia Residence",
+ "cta": "Mặt bằng: Zalo 0904 567 009"
+}

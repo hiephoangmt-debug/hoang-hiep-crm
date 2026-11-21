@@ -1,0 +1,39 @@
+{
+ "hook": [
+  "31,1 ha ven sông",
+  "363 CĂN",
+  "sống chậm"
+ ],
+ "question": "Sống ven sông Cổ Cò ở Hội An như thế nào?",
+ "hook_bg": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d21/c-song-co-co-hoang-hon.jpg",
+ "data_title": [
+  "Casamia Balanca",
+  "VEN SÔNG CỔ CÒ"
+ ],
+ "rows": [
+  [
+   "31,1 ha",
+   "Quy mô dự án",
+   "Cẩm Thanh, Hội An"
+  ],
+  [
+   "363",
+   "Sản phẩm thấp tầng",
+   "Bình quân ~12 mỗi ha"
+  ],
+  [
+   "5",
+   "Công viên chủ đề",
+   "Có Nipa Park ven rừng dừa"
+  ],
+  [
+   "Sổ đỏ",
+   "Sở hữu lâu dài",
+   "Theo chủ đầu tư"
+  ]
+ ],
+ "note": "Theo chủ đầu tư Đạt Phương. Ảnh phối cảnh dự án.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d21/c-nha-vuon-ven-song.jpg",
+ "photo_caption": "Phối cảnh nhà vườn ven sông Casamia",
+ "cta": "Xem nhà: Zalo 0904 567 009"
+}

@@ -115,3 +115,6 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 ## CASAMIA: ẢNH THÔNG ĐIỆP ĐẦU (anh Hiệp 21/11/2026: "Casa không có hình thông điệp đầu à")
 - Mỗi bài trang Casamia: ảnh 1 = thẻ thông điệp mẫu "nắng cam" (`wordpress/bai-viet/the-nang-cam.py`, khổ doc 1080x1350; mẫu marketing/fb/nang-cam/casamia-*.json), nền là 1 ảnh phối cảnh hợp chủ đề; sau đó 3 ảnh thật/phối cảnh KHÔNG CHỮ (album 4 ảnh). Không lặp ảnh nền thẻ trong album.
 - Thông điệp: 1 con số/cụm từ mạnh có nguồn (vd "316 m² sàn sử dụng", "Sống chậm ven sông"), nhãn xanh ngắn, dòng phụ 1 dòng.
+
+## TIKTOK: VÙNG AN TOÀN (anh Hiệp 21/11/2026 báo "bản đăng tiktok bị cắt hình")
+- tiktok-slides.py đã dồn mọi chữ vào y 260–1480, x 50–920 (khung 3:4 ở giữa ảnh 1080x1920) để không mất chữ khi TikTok cắt khung hoặc che bởi nút/lời bài. Không đặt chữ ngoài vùng này.

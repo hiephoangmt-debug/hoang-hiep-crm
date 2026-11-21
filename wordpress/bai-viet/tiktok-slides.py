@@ -7,7 +7,7 @@ Chạy: python3 wordpress/bai-viet/tiktok-slides.py <cau-hinh.json> <anh-dai-die
  "rows": [["con số", "nhãn", "giải thích ngắn"], ...]   (4-6 dòng),
  "note": "nguồn số liệu", "photo": "ảnh 3", "photo_caption": "chú thích ảnh 3", "cta": "lời mời ở ảnh 3"
 }
-Vùng an toàn TikTok: chữ quan trọng nằm trong x 60-900, y < 1500 (đáy và cột phải bị nút, lời bài che)."""
+Vùng an toàn TikTok (anh Hiệp 21/11/2026 báo bị cắt hình): mọi chữ nằm trong y 260–1480, x 50–920 – vừa khung 3:4 ở giữa, vừa tránh thanh trên, nút bên phải và lời bài phía dưới."""
 import base64, html, json, os, subprocess, sys
 
 CFG, AVA, OUT = sys.argv[1:4]
@@ -29,7 +29,7 @@ def b64(p):
 
 BASE = """*{margin:0;box-sizing:border-box;font-variant-numeric:lining-nums!important}body{width:1080px;height:1920px;position:relative;overflow:hidden;font-family:BVP;color:#14233f;font-variant-numeric:lining-nums;
 background:linear-gradient(180deg,#d9ecf9 0%,#eef6fc 50%,#ffffff 100%)}
-.brand{position:absolute;top:120px;left:0;right:0;text-align:center;font:700 30px BVP;letter-spacing:.2em;color:#1f4f86}
+.brand{position:absolute;top:270px;left:0;right:0;text-align:center;font:700 30px BVP;letter-spacing:.2em;color:#1f4f86}
 .cop{font-variant-numeric:lining-nums;background:linear-gradient(180deg,#e0701f,#b44d16);-webkit-background-clip:text;color:transparent;padding:.22em .08em .12em;margin:-.22em -.08em -.12em}
 .photo{position:absolute;left:0;right:0;bottom:0;background-size:cover;background-position:center}
 .photo:before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#eaf4fc 0%,rgba(234,244,252,.85) 12%,rgba(234,244,252,0) 38%)}
@@ -40,12 +40,12 @@ def page(css, body):
 
 h = c['hook']
 s1 = page("""
-.h1{position:absolute;top:250px;left:0;right:0;text-align:center;font:600 84px/1.1 CG;color:#14233f}
-.h2{position:absolute;top:360px;left:40px;right:40px;text-align:center;font:700 150px/1 CG;letter-spacing:.01em;white-space:nowrap}
-.h3{position:absolute;top:510px;left:0;right:70px;text-align:right;font:400 120px GV;color:#c4561a}
-.q{position:absolute;top:720px;left:70px;right:70px;text-align:center;font:700 60px/1.3 BVP;color:#14233f;text-wrap:balance}
-.photo{top:880px}
-.swipe{position:absolute;top:1330px;left:50%;transform:translateX(-50%);white-space:nowrap;background:#14233f;color:#fff;font:700 42px BVP;padding:22px 48px;border-radius:999px;box-shadow:0 14px 34px rgba(20,35,63,.3)}
+.h1{position:absolute;top:350px;left:0;right:0;text-align:center;font:600 84px/1.1 CG;color:#14233f}
+.h2{position:absolute;top:455px;left:70px;right:150px;text-align:center;font:700 150px/1 CG;letter-spacing:.01em;white-space:nowrap}
+.h3{position:absolute;top:600px;left:0;right:170px;text-align:right;font:400 120px GV;color:#c4561a}
+.q{position:absolute;top:800px;left:70px;right:170px;text-align:center;font:700 60px/1.3 BVP;color:#14233f;text-wrap:balance}
+.photo{top:960px}
+.swipe{position:absolute;top:1360px;left:44%;transform:translateX(-50%);white-space:nowrap;background:#14233f;color:#fff;font:700 42px BVP;padding:22px 48px;border-radius:999px;box-shadow:0 14px 34px rgba(20,35,63,.3)}
 """, f"""<div class="photo" style="background-image:url({b64(c['hook_bg'])})"></div>
 <div class="brand">HOÀNG HIỆP · BẤT ĐỘNG SẢN ĐÀ NẴNG</div>
 <div class="h1">{e(h[0])}</div><div class="h2"><span class="cop">{e(h[1])}</span></div><div class="h3">{e(h[2])}</div>
@@ -54,14 +54,14 @@ s1 = page("""
 rows = ''.join(f'<div class="r"><div class="n"><span class="cop">{e(n)}</span></div><div class="t"><b>{e(l)}</b><span>{e(d)}</span></div></div>' for n, l, d in c['rows'])
 dt = c['data_title']
 s2 = page("""
-.d1{position:absolute;top:200px;left:0;right:0;text-align:center;font:600 72px CG;color:#14233f}
-.d2{position:absolute;top:280px;left:40px;right:40px;text-align:center;font:700 104px/1 CG;white-space:nowrap}
-.rows{position:absolute;top:450px;left:50px;right:110px;display:flex;flex-direction:column;gap:26px}
-.r{display:flex;align-items:center;gap:26px;background:rgba(255,255,255,.92);border-radius:26px;padding:30px 28px;box-shadow:0 10px 28px rgba(20,35,63,.10)}
-.n{flex:0 0 310px;text-align:center;font:700 74px/1 CG;white-space:nowrap;font-variant-numeric:lining-nums}
-.t b{display:block;font:700 42px/1.2 BVP;color:#14233f}.t span{display:block;margin-top:8px;font:500 32px/1.3 BVP;color:#4a5b70}
-.note{position:absolute;top:1560px;left:60px;right:60px;font:500 26px/1.45 BVP;color:#4a5b70}
-.who{position:absolute;top:1700px;left:60px;display:flex;align-items:center;gap:20px;font:700 34px BVP;color:#14233f}
+.d1{position:absolute;top:330px;left:0;right:0;text-align:center;font:600 72px CG;color:#14233f}
+.d2{position:absolute;top:405px;left:60px;right:150px;text-align:center;font:700 104px/1 CG;white-space:nowrap}
+.rows{position:absolute;top:540px;left:50px;right:160px;display:flex;flex-direction:column;gap:16px}
+.r{display:flex;align-items:center;gap:26px;background:rgba(255,255,255,.92);border-radius:26px;padding:20px 24px;box-shadow:0 10px 28px rgba(20,35,63,.10)}
+.n{flex:0 0 250px;text-align:center;font:700 62px/1 CG;white-space:nowrap;font-variant-numeric:lining-nums}
+.t b{display:block;font:700 36px/1.2 BVP;color:#14233f}.t span{display:block;margin-top:6px;font:500 28px/1.3 BVP;color:#4a5b70}
+.note{position:absolute;top:1290px;left:60px;right:170px;font:500 26px/1.45 BVP;color:#4a5b70}
+.who{position:absolute;top:1420px;left:60px;display:flex;align-items:center;gap:20px;font:700 34px BVP;color:#14233f}
 .who img{width:84px;height:84px;border-radius:50%;object-fit:cover;border:4px solid #fff}
 """, f"""<div class="brand">HOÀNG HIỆP · BẤT ĐỘNG SẢN ĐÀ NẴNG</div>
 <div class="d1">{e(dt[0])}</div><div class="d2"><span class="cop">{e(dt[1])}</span></div>
@@ -72,8 +72,8 @@ s3 = page("""
 body{background:#14233f}.full{position:absolute;inset:0;background-size:cover;background-position:center}
 .full:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,35,63,.55) 0%,rgba(20,35,63,0) 22%,rgba(20,35,63,0) 50%,rgba(20,35,63,.85) 82%)}
 .brand{color:#fff;z-index:2}
-.cap{position:absolute;top:1120px;left:60px;right:120px;z-index:2;font:700 58px/1.25 BVP;color:#fff;text-shadow:0 4px 18px rgba(0,0,0,.35)}
-.cta{position:absolute;top:1330px;left:60px;z-index:2;display:flex;align-items:center;gap:20px;background:#fff;border-radius:999px;padding:12px 30px 12px 12px;font:700 34px BVP;color:#14233f}
+.cap{position:absolute;top:1080px;left:60px;right:170px;z-index:2;font:700 58px/1.25 BVP;color:#fff;text-shadow:0 4px 18px rgba(0,0,0,.35)}
+.cta{position:absolute;top:1300px;left:60px;z-index:2;display:flex;align-items:center;gap:20px;background:#fff;border-radius:999px;padding:12px 30px 12px 12px;font:700 34px BVP;color:#14233f}
 .cta img{width:76px;height:76px;border-radius:50%;object-fit:cover}
 """, f"""<div class="full" style="background-image:url({b64(c['photo'])})"></div><div class="brand">HOÀNG HIỆP · BẤT ĐỘNG SẢN ĐÀ NẴNG</div>
 <div class="cap">{e(c['photo_caption'])}</div><div class="cta"><img src="{b64(AVA)}"><span>{e(c.get('cta', 'Zalo 0904 567 009'))}</span></div>""")
