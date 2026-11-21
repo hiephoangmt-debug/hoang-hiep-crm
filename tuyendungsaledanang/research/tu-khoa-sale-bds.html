@@ -1,0 +1,239 @@
+<title>Bản đồ từ khóa Sale BĐS</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: một cột đọc, thanh chọn cấp độ dính trên cùng, mỗi bài học là một khối có 2 cột từ khóa (Google | ChatGPT) */
+:root{
+  --bg:#f6f7fb; --surface:#ffffff; --fg:#17203d; --muted:#5b6482; --line:#e1e5f0;
+  --navy:#1B2D6B; --accent:#f47c20; --accent-soft:#fff1e6; --navy-soft:#eaeefa;
+  --ok:#1f7a4d; --ok-soft:#e5f4ec; --todo:#a8520f;
+  --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1530; --surface:#17204a; --fg:#e8ecf8; --muted:#a3acc9; --line:#2a3566;
+  --navy:#9fb2f0; --accent:#ff9a4a; --accent-soft:#3a2414; --navy-soft:#1f2a5c;
+  --ok:#6fd3a0; --ok-soft:#173a2a; --todo:#ffb37a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1530; --surface:#17204a; --fg:#e8ecf8; --muted:#a3acc9; --line:#2a3566;
+  --navy:#9fb2f0; --accent:#ff9a4a; --accent-soft:#3a2414; --navy-soft:#1f2a5c;
+  --ok:#6fd3a0; --ok-soft:#173a2a; --todo:#ffb37a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.6 var(--f-body)}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{padding-block:28px 18px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(26px,5vw,38px);line-height:1.2;margin:6px 0 10px;color:var(--navy);text-wrap:balance;font-weight:800}
+.lead{color:var(--muted);max-width:65ch;margin:0}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--muted)}
+.stat b{color:var(--fg);font-size:16px;font-variant-numeric:tabular-nums;margin-right:4px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+nav.levels{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.levels .wrap{display:flex;gap:8px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav.levels a{flex:none;text-decoration:none;font-size:13px;font-weight:600;color:var(--navy);background:var(--navy-soft);padding:6px 12px;border-radius:999px;white-space:nowrap}
+nav.levels a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section.level{padding-block:28px 8px}
+.lvl-head{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.lvl-num{font-weight:800;color:var(--accent);font-size:14px;letter-spacing:.04em}
+h2{font-size:22px;margin:0;color:var(--navy);text-wrap:balance}
+.lvl-desc{color:var(--muted);margin:6px 0 14px;max-width:65ch}
+.lesson{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px}
+.lesson h3{font-size:16px;margin:0 0 4px;display:flex;gap:8px;align-items:baseline}
+.lesson h3 .n{color:var(--muted);font-weight:600;font-variant-numeric:tabular-nums;font-size:13px;min-width:2.2em}
+.goal{color:var(--muted);font-size:14px;margin:0 0 12px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.cols{grid-template-columns:1fr}}
+.col{min-width:0}
+.col-h{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:13px;background:var(--navy-soft);color:var(--fg);padding:3px 9px;border-radius:6px}
+.chip.top{background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+ul.q{margin:0;padding-left:18px;font-size:14px}
+ul.q li{margin-bottom:3px}
+.status{margin-top:12px;font-size:13px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pill{font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.pill.todo{background:var(--accent-soft);color:var(--todo)}
+.status a{color:var(--navy);word-break:break-all}
+.note{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-block:12px}
+.note h3{margin:0 0 6px;font-size:16px;color:var(--navy)}
+.note p,.note li{max-width:65ch}
+.note ol,.note ul{padding-left:20px;margin:6px 0 0}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:12px;align-items:center}
+footer{color:var(--muted);font-size:13px;padding-block:24px 40px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<header class="top"><div class="wrap">
+  <div class="eyebrow">Nghiên cứu từ khóa · 11/2026</div>
+  <h1>Bản đồ từ khóa Sale BĐS: từ tìm việc đến nâng cao</h1>
+  <p class="lead">Mỗi cụm trong cột Google là gợi ý tìm kiếm thật Google đưa ra cho người dùng Việt Nam (lấy ngày 21/11/2026). Cột ChatGPT là các câu hỏi cùng ý định, viết lại theo kiểu người ta hỏi trợ lý AI. Mỗi bài học ghi rõ site đã có bài hay chưa.</p>
+  <div class="stats">
+    <div class="stat"><b>487</b>cụm gợi ý Google đã thu</div>
+    <div class="stat"><b>100</b>từ khóa gốc</div>
+    <div class="stat"><b id="nLessons">0</b>bài học</div>
+    <div class="stat"><b id="nTodo">0</b>bài site còn thiếu</div>
+  </div>
+  <div class="legend"><span class="chip top">cụm nổi bật</span> người mới tìm nhiều, nên ưu tiên <span class="pill ok">Đã có bài</span><span class="pill todo">Nên viết</span></div>
+</div></header>
+
+<nav class="levels" aria-label="Cấp độ"><div class="wrap" id="nav"></div></nav>
+
+<main class="wrap" id="main"></main>
+
+<div class="wrap">
+  <div class="note" id="chatgpt">
+    <h3>Để site được ChatGPT nhắc tới</h3>
+    <p>ChatGPT không công bố dữ liệu người dùng hỏi gì, nên không có danh sách "từ khóa ChatGPT" chính thức. Khi ChatGPT tìm web để trả lời, nó ưu tiên trang trả lời thẳng câu hỏi. Mỗi bài nên có:</p>
+    <ol>
+      <li><b>Câu trả lời ngay đoạn đầu.</b> Ví dụ: "Sale BĐS Đà Nẵng có lương cứng 7–10 triệu/tháng ở cấp Pro Sales, cộng hoa hồng…"</li>
+      <li><b>Mục Hỏi đáp</b> dùng đúng các câu ở cột ChatGPT làm tiêu đề câu hỏi.</li>
+      <li><b>Số liệu cụ thể, ngày cập nhật, tên tác giả.</b> AI ưu tiên nguồn có ngày tháng và người chịu trách nhiệm.</li>
+      <li><b>Tên địa phương trong câu.</b> Nói "tại Đà Nẵng", "dự án Sun Group", để khi người hỏi kèm "Đà Nẵng" thì trang khớp.</li>
+      <li><b>Link qua lại giữa các bài cùng cấp độ</b> như mục lục của khóa học, để cả site được xem là nguồn chuyên về nghề Sale BĐS.</li>
+    </ol>
+  </div>
+  <div class="note">
+    <h3>Cách đọc số liệu</h3>
+    <p>Google chỉ gợi ý một cụm khi có đủ người tìm, nên mọi cụm ở đây đều có người tìm thật. Trang này chưa có lượng tìm kiếm mỗi tháng: công cụ đo đang hết lượt đến 06/12. Một số từ khóa gốc không có gợi ý nào (ví dụ "kịch bản gọi điện bất động sản", "sale bất động sản mới vào nghề"). Đó là chủ đề ít người viết, nên dễ lên top nếu site viết trước.</p>
+  </div>
+</div>
+
+<footer><div class="wrap">Nguồn: Google Autocomplete (hl=vi, gl=vn), 21/11/2026 · Bài trên site: tuyendungsaledanang.com</div></footer>
+
+<script>
+const S="https://www.tuyendungsaledanang.com/";
+const L=[
+{id:"tim-viec",n:"Cấp 0",t:"Tìm việc",d:"Người đang tìm chỗ làm. Ý định nộp hồ sơ cao nhất, nên dùng cho quảng cáo, tiêu đề bài tuyển và trang vị trí.",
+ x:[
+ {t:"Tuyển Sale BĐS Đà Nẵng",g:"Người tìm việc ở Đà Nẵng, sẵn sàng nộp hồ sơ.",
+  k:["*tuyển sale bất động sản đà nẵng","*tuyển dụng sale bất động sản đà nẵng","*tuyển nhân viên kinh doanh bất động sản đà nẵng","tuyển dụng nhân viên bất động sản đà nẵng","công ty bất động sản đà nẵng tuyển dụng","việc làm bất động sản đà nẵng","nhân viên kinh doanh bất động sản đà nẵng","sale căn hộ đà nẵng"],
+  q:["Công ty bất động sản nào ở Đà Nẵng đang tuyển sale?","Tôi ở Đà Nẵng, muốn làm sale BĐS thì nộp hồ sơ ở đâu?","Sale BĐS Đà Nẵng nên chọn công ty có hỗ trợ marketing không?"],s:S},
+ {t:"Tuyển có lương cứng, không cần kinh nghiệm",g:"Người lo thu nhập ổn định, người mới ra trường.",
+  k:["*tuyển sale bất động sản có lương cứng","*sale bất động sản có lương cứng không","lương cứng sale bất động sản","tuyển sale bất động sản part time","làm sale bất động sản có cần bằng cấp không"],
+  q:["Có công ty BĐS nào trả lương cứng cho sale mới không?","Sinh viên mới ra trường không kinh nghiệm có làm sale BĐS được không?","Làm sale BĐS part time được không?"],s:S+"tuyen-sale-moi-ra-truong"},
+ {t:"Tuyển theo vị trí và dự án",g:"Người đã có nghề, tìm vị trí hoặc dự án lớn.",
+  k:["*tuyển chuyên viên kinh doanh bất động sản","tuyển trưởng phòng kinh doanh bất động sản","jd trưởng phòng kinh doanh bất động sản","tuyển sale bất động sản vinhome","sale bds vinhome","tuyển sale dự án","sale căn hộ tuyển dụng","cv chuyên viên kinh doanh bất động sản"],
+  q:["Mô tả công việc trưởng phòng kinh doanh BĐS gồm những gì?","Viết giúp tôi CV ứng tuyển chuyên viên kinh doanh BĐS","Làm sale dự án Sun Group, Vinhomes cần điều kiện gì?"],s:S+"tuyen-truong-nhom-truong-phong-kinh-doanh-bds-da-nang"}
+ ]},
+{id:"nhap-mon",n:"Cấp 1",t:"Nhập môn nghề",d:"Người đang cân nhắc vào nghề. Tìm nhiều nhất nhưng site còn thiếu bài. Đây là chỗ dễ lấy người đọc mới.",
+ x:[
+ {t:"Sale BĐS là gì, làm những việc gì",g:"Hiểu nghề trước khi quyết định.",
+  k:["*sale bất động sản là gì","*sale bất động sản là làm gì","*nhân viên kinh doanh bất động sản là làm gì","môi giới bất động sản là gì","chuyên viên kinh doanh bất động sản là gì","công việc của chuyên viên kinh doanh bất động sản","sale bất động sản tiếng anh là gì","môi giới bất động sản gọi là gì"],
+  q:["Sale bất động sản là gì, một ngày làm những việc gì?","Sale BĐS khác môi giới BĐS thế nào?","Giải thích nghề sale BĐS cho người chưa biết gì"],s:""},
+ {t:"Lương, hoa hồng, có giàu không",g:"Câu hỏi về tiền: tìm nhiều nhất cả nhóm.",
+  k:["*sale bất động sản lương bao nhiêu","*sale bất động sản hoa hồng bao nhiêu","*sale bds ăn bao nhiêu","sale bds được bao nhiêu","lương cơ bản của sale bất động sản","nhân viên kinh doanh bất động sản lương bao nhiêu","cách tính hoa hồng môi giới bất động sản","mức hoa hồng môi giới bất động sản","thuế hoa hồng môi giới bất động sản","làm sale bất động sản có giàu không","trưởng phòng kinh doanh bất động sản lương bao nhiêu"],
+  q:["Sale BĐS ở Đà Nẵng thu nhập thực tế bao nhiêu một tháng?","Hoa hồng bán một căn hộ 3 tỷ được bao nhiêu?","Hoa hồng môi giới BĐS có phải đóng thuế không?","Làm sale BĐS bao lâu thì có thu nhập ổn định?"],s:S+"#chinh-sach",p:"Có mục Chính sách, nên viết bài riêng"},
+ {t:"Có nên làm, có khó không, cần gì",g:"Người còn phân vân.",
+  k:["*có nên làm sale bất động sản không","*làm sale bất động sản có khó không","*làm sale bất động sản cần gì","sale bất động sản cần những gì","nhân viên kinh doanh bất động sản cần gì","làm môi giới bất động sản bắt đầu từ đâu","cách làm bất động sản cho người mới bắt đầu","làm sale bất động sản học ngành gì","sale bất động sản voz"],
+  q:["Tôi 23 tuổi, có nên làm sale BĐS năm 2026 không?","Người hướng nội có làm sale BĐS được không?","Bắt đầu làm môi giới BĐS từ con số 0 thì làm gì trước?"],s:""},
+ {t:"Chứng chỉ hành nghề môi giới",g:"Điều kiện pháp lý để hành nghề.",
+  k:["*môi giới bất động sản có cần chứng chỉ không","*chứng chỉ môi giới bất động sản đà nẵng","chứng chỉ môi giới bất động sản học ở đâu","chứng chỉ môi giới bất động sản do ai cấp","chứng chỉ môi giới bất động sản có thời hạn bao lâu","học môi giới bất động sản tại đà nẵng","học môi giới bất động sản online","làm môi giới bất động sản có cần chứng chỉ hành nghề không"],
+  q:["Làm sale BĐS có bắt buộc chứng chỉ môi giới không?","Thi chứng chỉ môi giới BĐS ở Đà Nẵng thế nào?","Chứng chỉ môi giới BĐS có thời hạn bao lâu?"],s:""},
+ {t:"Thuật ngữ và các loại hình sale",g:"Hiểu ngôn ngữ trong nghề.",
+  k:["*thuật ngữ bất động sản","*các thuật ngữ trong sale bất động sản","f1 f2 trong bất động sản là gì","sale dự án là gì","sale thổ cư là gì","sale đất nền là gì","sale căn hộ là gì","sale kit dự án","booking căn hộ là gì","thuật ngữ bất động sản tiếng anh"],
+  q:["Giải thích các thuật ngữ booking, F1, F2, giỏ hàng, sale kit","Sale dự án và sale thổ cư khác nhau thế nào, người mới nên chọn loại nào?"],s:""},
+ {t:"Lộ trình 60 ngày đầu",g:"Người vừa vào nghề cần biết làm gì trước.",
+  k:["sale bất động sản mới vào nghề","sale bds cần học gì","kinh nghiệm làm việc của sale bất động sản","quy trình và kỹ năng môi giới bất động sản","lộ trình thăng tiến sale bất động sản"],
+  q:["Sale BĐS mới vào nghề nên làm gì trong tháng đầu tiên?","Lập kế hoạch học 60 ngày cho sale BĐS mới"],s:S+"lo-trinh-sale-moi-60-ngay-dau"}
+ ]},
+{id:"san-pham-phap-ly",n:"Cấp 2",t:"Sản phẩm, pháp lý, tài chính",d:"Kiến thức để tư vấn đúng. Khách hỏi gì thì sale cũng phải tra đúng những cụm này.",
+ x:[
+ {t:"Sổ hồng, sổ đỏ, sở hữu",g:"Câu hỏi pháp lý đầu tiên khách nào cũng hỏi.",
+  k:["*sổ hồng khác gì sổ đỏ","sổ hồng là gì","sổ hồng chung cư","sổ hồng và sổ đỏ sổ nào giá trị hơn","pháp lý bất động sản là gì","pháp lý bất động sản nghỉ dưỡng"],
+  q:["Sổ hồng căn hộ chung cư và sổ đỏ khác nhau thế nào?","Căn hộ du lịch có sổ hồng lâu dài không?"],s:""},
+ {t:"Hợp đồng đặt cọc, mua bán, căn hộ hình thành trong tương lai",g:"Đọc và giải thích hợp đồng cho khách.",
+  k:["*hợp đồng mua bán căn hộ hình thành trong tương lai","*căn hộ hình thành trong tương lai là gì","hợp đồng đặt cọc mua nhà","hợp đồng đặt cọc vô hiệu khi nào","hợp đồng mua bán căn hộ có cần công chứng","điều kiện bán căn hộ hình thành trong tương lai","thế chấp căn hộ hình thành trong tương lai"],
+  q:["Mua căn hộ hình thành trong tương lai cần kiểm tra những gì?","Hợp đồng đặt cọc mua nhà cần có điều khoản gì?"],s:""},
+ {t:"Bảo lãnh ngân hàng, tiến độ thanh toán, chính sách bán hàng",g:"Đặc thù khi bán dự án mới.",
+  k:["*ngân hàng bảo lãnh dự án là gì","bảo lãnh ngân hàng cho dự án chung cư","ngân hàng bảo lãnh tiến độ dự án","tiến độ thanh toán căn hộ chung cư","chính sách bán hàng dự án bất động sản","booking căn hộ đà nẵng"],
+  q:["Bảo lãnh ngân hàng dự án bảo vệ người mua thế nào?","Giải thích chính sách thanh toán 25% đến khi nhận nhà"],s:""},
+ {t:"Vay ngân hàng và lãi suất",g:"Phần lớn khách mua căn hộ đều vay.",
+  k:["*vay ngân hàng mua nhà mỗi tháng trả bao nhiêu","*lãi suất vay mua nhà hiện nay","vay ngân hàng mua nhà cần điều kiện gì","vay ngân hàng mua nhà tối đa bao nhiêu năm","lãi suất vay mua nhà ngân hàng nào thấp nhất","lãi suất vay mua nhà bidv 2026"],
+  q:["Vay 70% mua căn hộ 2 tỷ trong 20 năm thì mỗi tháng trả bao nhiêu?","Lãi suất 0% 24 tháng rồi thả nổi thì cần tính gì?"],s:""},
+ {t:"Thuế phí, sang tên",g:"Chi phí giao dịch khách cần biết trước.",
+  k:["*các loại thuế phí khi mua bán nhà đất","thuế phí mua bán nhà đất 2026","cách tính thuế phí khi mua bán nhà đất","thủ tục sang tên sổ đỏ"],
+  q:["Mua bán nhà đất năm 2026 phải đóng những khoản thuế phí nào?","Thủ tục sang tên sổ hồng mất bao lâu?"],s:""},
+ {t:"Luật Kinh doanh BĐS 2023, Luật Đất đai 2024",g:"Nền pháp lý mới, khách hay hỏi để yên tâm.",
+  k:["*luật kinh doanh bất động sản 2023 có hiệu lực khi nào","luật kinh doanh bất động sản 2023 sửa đổi bổ sung 2024","luật đất đai 2024 có hiệu lực","luật đất đai 2024 sửa đổi bổ sung 2025","học pháp lý bất động sản"],
+  q:["Luật Kinh doanh BĐS 2023 thay đổi gì với sale và môi giới?","Tóm tắt những điểm mới của Luật Đất đai 2024 người mua cần biết"],s:""}
+ ]},
+{id:"ky-nang-ban",n:"Cấp 3",t:"Kỹ năng bán hàng",d:"Từ có số điện thoại đến chốt cọc. Nhóm này có ít bài cạnh tranh, đặc biệt là kịch bản gọi điện.",
+ x:[
+ {t:"Tìm khách và data khách hàng",g:"Câu hỏi số 1 của người mới: khách ở đâu.",
+  k:["*cách tìm khách hàng bất động sản","*các kênh tìm kiếm khách hàng bất động sản","cách tìm khách hàng mua bất động sản","data khách hàng bất động sản đà nẵng","data khách hàng đầu tư bất động sản","mua data khách hàng bất động sản","chân dung khách hàng mua bất động sản"],
+  q:["Sale BĐS mới không có mối quan hệ thì tìm khách ở đâu?","Có nên mua data khách hàng BĐS không?","Mô tả chân dung khách mua căn hộ nghỉ dưỡng ở Đà Nẵng"],s:S+"tu-data-thanh-deal-nguon-marketing"},
+ {t:"Kịch bản gọi điện (telesale)",g:"Mở lời, hẹn gặp, không bị cúp máy.",
+  k:["*kịch bản telesale bất động sản","mẫu kịch bản telesale bất động sản","kịch bản gọi telesale bất động sản","kịch bản telesale dự án bất động sản","xin số điện thoại khách hàng"],
+  q:["Viết kịch bản gọi điện lần đầu cho khách quan tâm căn hộ","Khách nói 'đang bận' thì nói gì tiếp?"],s:""},
+ {t:"Tư vấn và dẫn khách xem nhà",g:"Biến cuộc gọi thành buổi xem nhà.",
+  k:["*cách tư vấn khách hàng bất động sản","cách tư vấn bán bất động sản","học cách tư vấn bất động sản","quy trình dẫn khách đi xem nhà"],
+  q:["Quy trình dẫn khách đi xem căn hộ mẫu gồm những bước nào?","Nên hỏi khách những câu gì để biết nhu cầu thật?"],s:""},
+ {t:"Xử lý từ chối và chốt sale",g:"Kỹ năng quyết định thu nhập.",
+  k:["*kỹ năng chốt sale bất động sản","*cách chốt sale bất động sản hiệu quả","xử lý từ chối trong bất động sản","kỹ năng cần có của môi giới bất động sản"],
+  q:["Khách chê giá cao thì xử lý thế nào?","10 câu từ chối thường gặp khi bán căn hộ và cách trả lời"],s:""},
+ {t:"Chăm sóc khách qua Zalo",g:"Giữ khách nóng đến khi đặt cọc.",
+  k:["*quy trình chăm sóc khách hàng bất động sản","cách chăm sóc khách hàng bất động sản","cách chăm sóc khách hàng qua zalo","cách nhắn tin cho khách hàng bất động sản"],
+  q:["Lịch nhắn tin chăm khách BĐS trong 30 ngày","Mẫu tin nhắn Zalo hỏi thăm khách sau buổi xem nhà"],s:S+"cham-khach-qua-zalo"}
+ ]},
+{id:"marketing",n:"Cấp 4",t:"Marketing và nguồn khách",d:"Sale tự tạo khách. Site đã mạnh ở nhóm này, nên mở rộng thêm content và thương hiệu cá nhân.",
+ x:[
+ {t:"Quảng cáo Facebook",g:"Kênh ra khách nhanh nhất cho căn hộ.",
+  k:["*chạy quảng cáo facebook bất động sản","*hướng dẫn chạy quảng cáo facebook bất động sản","content quảng cáo bất động sản facebook","cách chạy quảng cáo bất động sản trên facebook","học chạy quảng cáo bất động sản"],
+  q:["Hướng dẫn chạy quảng cáo Facebook cho dự án căn hộ, ngân sách 300 nghìn/ngày","Vì sao quảng cáo BĐS bị Facebook từ chối?"],s:S+"chay-quang-cao-facebook-cho-nguoi-moi",p:"Có 3 bài"},
+ {t:"Google Ads và SEO",g:"Bắt khách đang tìm dự án.",
+  k:["*chạy quảng cáo google ads bất động sản","seo bất động sản là gì","học seo bất động sản","seo web bất động sản"],
+  q:["Nên chạy Google Ads từ khóa nào cho dự án căn hộ?","SEO bất động sản cho cá nhân bắt đầu thế nào?"],s:S+"chay-google-ads-cho-nguoi-moi",p:"Có bài Google Ads, chưa có SEO"},
+ {t:"Đăng tin rao vặt",g:"Kênh miễn phí cho người mới.",
+  k:["*đăng tin bất động sản miễn phí","đăng tin bất động sản hiệu quả","trang đăng tin bất động sản","web đăng tin bất động sản miễn phí","đăng tin bất động sản ở đâu"],
+  q:["Trang nào đăng tin BĐS miễn phí mà có khách?","Viết tiêu đề tin đăng bán căn hộ thu hút"],s:S+"dang-tin-rao-vat-bat-dong-san"},
+ {t:"Viết content",g:"Bài đăng trang cá nhân, nhóm, quảng cáo.",
+  k:["*mẫu content bất động sản","*viết content bất động sản","content bất động sản hay","content marketing bất động sản","content video bất động sản"],
+  q:["Viết 5 bài đăng Facebook giới thiệu căn hộ view sông Hàn","Công thức viết content BĐS không bị nhàm"],s:"",p:"Nên viết"},
+ {t:"Quay video, TikTok, AI",g:"Video ngắn bằng điện thoại, CapCut, AI.",
+  k:["*cách làm video bất động sản trên điện thoại","*cách quay video bất động sản","cách làm video bất động sản trên capcut","cách làm video bất động sản bằng ai","kịch bản quay video bất động sản","xây kênh tiktok bất động sản","cách làm video review bất động sản"],
+  q:["Kịch bản video TikTok 30 giây giới thiệu căn hộ","Dùng AI làm video BĐS thế nào?"],s:S+"quay-video-ngan-ban-bds",p:"Có bài, nên thêm AI/TikTok"},
+ {t:"Thương hiệu cá nhân",g:"Để khách tự tìm đến mình.",
+  k:["*xây dựng thương hiệu cá nhân bất động sản","cách xây kênh bất động sản"],
+  q:["Sale BĐS xây thương hiệu cá nhân trên Facebook như thế nào?","Lên kế hoạch nội dung 30 ngày cho trang cá nhân sale BĐS"],s:""}
+ ]},
+{id:"nang-cao",n:"Cấp 5",t:"Nâng cao",d:"Cho sale lâu năm và quản lý. Ít người viết sâu, nhất là nội dung theo Đà Nẵng.",
+ x:[
+ {t:"Thị trường và quy hoạch Đà Nẵng",g:"Tư vấn đầu tư bằng số liệu.",
+  k:["*thị trường bất động sản đà nẵng 2026","*quy hoạch đà nẵng 2030","báo cáo thị trường bất động sản đà nẵng 2026","quy hoạch đà nẵng sau sáp nhập","quy hoạch đà nẵng tầm nhìn 2050","tra cứu quy hoạch đà nẵng","app tra cứu quy hoạch đà nẵng","cách đọc bản đồ quy hoạch","cách đọc bản đồ quy hoạch theo màu"],
+  q:["Thị trường căn hộ Đà Nẵng 2026 đang thế nào?","Cách tra cứu quy hoạch một lô đất ở Đà Nẵng","Đọc bản đồ quy hoạch 1/500 thế nào?"],s:"",p:"Nên viết (có thể link sang hiephoangmt.com)"},
+ {t:"Định giá và phân tích dự án",g:"So sánh, định giá, tư vấn đầu tư.",
+  k:["*cách định giá bất động sản","định giá bất động sản bằng phương pháp so sánh","cách ngân hàng định giá bất động sản","cách phân tích thị trường bất động sản","phân tích thị trường bất động sản đà nẵng"],
+  q:["Định giá một căn hộ bằng phương pháp so sánh thế nào?","Lập bảng so sánh 3 dự án căn hộ ở Đà Nẵng"],s:""},
+ {t:"Tư vấn đầu tư cho thuê",g:"Khách đầu tư hỏi dòng tiền.",
+  k:["*đầu tư căn hộ cho thuê ở đà nẵng","có nên đầu tư căn hộ cho thuê","kinh nghiệm đầu tư căn hộ cho thuê","đầu tư căn hộ dịch vụ cho thuê"],
+  q:["Căn hộ 2 tỷ ở Đà Nẵng cho thuê được bao nhiêu một tháng?","Tính lợi suất cho thuê căn hộ du lịch"],s:""},
+ {t:"Quản lý đội sale",g:"Lên trưởng nhóm, trưởng phòng.",
+  k:["*cách quản lý đội sale hiệu quả","cách quản lý đội nhóm sale","phần mềm quản lý đội sale","công việc trưởng phòng kinh doanh bất động sản","content tuyển dụng nhân viên kinh doanh bất động sản"],
+  q:["Trưởng nhóm sale BĐS nên đặt KPI thế nào cho người mới?","Cách tuyển và giữ sale BĐS giỏi"],s:S+"tuyen-truong-nhom-truong-phong-kinh-doanh-bds-da-nang",p:"Có trang vị trí, chưa có bài"}
+ ]}
+];
+const nav=document.getElementById('nav'),main=document.getElementById('main');
+let i=0,todo=0;
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+L.forEach(l=>{
+  nav.insertAdjacentHTML('beforeend',`<a href="#${l.id}">${l.n} · ${l.t}</a>`);
+  let h=`<section class="level" id="${l.id}"><div class="lvl-head"><span class="lvl-num">${l.n}</span><h2>${l.t}</h2></div><p class="lvl-desc">${l.d}</p>`;
+  l.x.forEach(x=>{
+    i++;
+    const chips=x.k.map(k=>k[0]==='*'?`<span class="chip top">${esc(k.slice(1))}</span>`:`<span class="chip">${esc(k)}</span>`).join('');
+    const qs=x.q.map(q=>`<li>${esc(q)}</li>`).join('');
+    let st;
+    if(x.s){st=`<span class="pill ok">Đã có bài</span>${x.p?`<span>${x.p}</span>`:''}<a href="${x.s}" target="_blank" rel="noopener">${x.s.replace('https://www.','')}</a>`}
+    else{todo++;st=`<span class="pill todo">Nên viết</span><span>Chưa có bài trên site</span>`}
+    h+=`<article class="lesson"><h3><span class="n">${String(i).padStart(2,'0')}</span>${x.t}</h3><p class="goal">${x.g}</p>
+    <div class="cols"><div class="col"><div class="col-h">Google tìm gì</div><div class="chips">${chips}</div></div>
+    <div class="col"><div class="col-h">Hỏi ChatGPT gì</div><ul class="q">${qs}</ul></div></div>
+    <div class="status">${st}</div></article>`;
+  });
+  main.insertAdjacentHTML('beforeend',h+'</section>');
+});
+nav.insertAdjacentHTML('beforeend',`<a href="#chatgpt">ChatGPT</a>`);
+document.getElementById('nLessons').textContent=i;
+document.getElementById('nTodo').textContent=todo;
+</script>
