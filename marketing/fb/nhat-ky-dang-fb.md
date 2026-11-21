@@ -151,5 +151,8 @@
 | 21/11/2026 | Sun | 19:00 | (bài web 18/11, hết CHỜ – ngày cuối) Căn hộ cho người nghỉ hưu – Sun Saphia (1 ảnh nền xanh, flycam biển) | /can-ho-cho-nguoi-nghi-huu-sun-saphia/ |
 | 21/11/2026 | Casamia (blogId 8074284) | 19:30 | Sống chậm ven sông Cổ Cò – album 4 ảnh: thẻ thông điệp "Sống chậm ven sông" (nắng cam) + nhà vườn ven sông, ban công, góc đọc sách | /du-an/casamia-balanca-hoi-an/ |
 | 21/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: Khởi công đường băng sân bay Đà Nẵng (+2 tin ở bình luận) | /khoi-cong-duong-bang-san-bay-da-nang/ /cong-vien-kieu-disneyland-da-nang-thang-an/ /gia-dat-cu-the-alphanam-luxury-an-hai/ |
-| CHỜ | TikTok | 21/11 | 4 bài TikTok hôm nay tạm giữ: anh Hiệp báo TikTok bị cắt hình, chờ ảnh chụp màn hình để sửa khung | (chờ) |
+| 21/11/2026 | TikTok (@hiephoangmt, brand Sun) | 14:15 | Studio góc Sun Saphia – BỘ 3 ẢNH (khung an toàn mới; dời từ 09:15) | /studio-goc-sun-saphia-residence-40m2/ |
+| 21/11/2026 | TikTok (@hiephoangmt, brand Sun) | 14:45 | Nội thất Casamia Balanca – BỘ 3 ẢNH (dời từ 09:45) | /du-an/casamia-balanca-hoi-an/ |
+| 21/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:15 | Căn hộ cho người nghỉ hưu – BỘ 3 ẢNH | /can-ho-cho-nguoi-nghi-huu-sun-saphia/ |
+| 21/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | Sống chậm ven sông Cổ Cò – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
 | CHỜ | Sun | 22/11 | (bài web 21/11 14:00, chưa lên web lúc hẹn) Căn 1PN+ Sun Saphia 49–51 m² | can-1pn-plus-sun-saphia-residence-49-51m2 (chờ) |
