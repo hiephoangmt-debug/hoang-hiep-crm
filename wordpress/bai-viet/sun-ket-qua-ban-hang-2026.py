@@ -1,7 +1,7 @@
 """Ảnh gửi khách (Zalo/Facebook) – Sun Group Đà Nẵng: kết quả bán hàng 3 – 10/2026 (số liệu anh Hiệp gửi 20/11/2026).
 Khổ dọc 1080×1350, tông sáng như thẻ tin thống nhất anh Hiệp duyệt (nền trắng xanh nhạt, chữ navy, số cam, thẻ liên hệ navy – vàng).
 Dùng: python3.13 bai-viet/sun-ket-qua-ban-hang-2026.py <file ảnh ra .jpg>"""
-import sys, os
+import math, sys, os
 from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageEnhance
 
 HERE = os.path.dirname(os.path.abspath(__file__)); FD = f'{HERE}/fonts'
@@ -101,53 +101,82 @@ def main(out):
     d.text((60 + tw + 22, 372), 'sản phẩm bán ra', font=sans(30, 'ExtraBold'), fill=INK)
     d.text((60 + tw + 22, 414), 'trong 8 tháng (3 – 10/2026)', font=sans(23, 'Medium'), fill=GREY)
 
-    # Dòng thời gian dạng bảng: mỗi CỘT là một mốc thời gian; hàng trên = Sun bán được, hàng dưới = thị trường lúc đó.
+    # Biểu đồ mũi tên cong (parabol): trục ngang = mốc thời gian; trên = Sun bán cộng dồn (mũi tên cong đi LÊN),
+    # dưới = thị trường (đường cong đi XUỐNG, kèm biểu tượng thời tiết) – hai đường tách xa dần.
     x0, x1 = 44, W - 44
     sh = Image.new('RGBA', im.size, (0, 0, 0, 0)); ImageDraw.Draw(sh).rounded_rectangle((x0, 492, x1, 1176), 24, fill=(22, 40, 66, 20)); im.alpha_composite(sh)
     d = ImageDraw.Draw(im)
     d.rounded_rectangle((x0, 486, x1, 1170), 24, fill=(255, 255, 255), outline=LINE, width=2)
-    n = len(ROWS); cw = (x1 - x0 - 32) / n; cx = [x0 + 16 + cw * k + cw / 2 for k in range(n)]; hw = cw / 2 - 5
-    NM = ['Đất nền\nVõ Chí Công', 'FourS Tower\nF1, F5', 'Symphony 5', 'S-Light\nTower', 'Penthouse\n& Shop', 'FourS Tower\nF2']
-    # Mốc thời gian + mũi tên chạy
-    ty = 528
-    d.line([(cx[0], ty), (cx[-1] + 40, ty)], fill=(196, 206, 220), width=4)
-    d.polygon([(cx[-1] + 56, ty), (cx[-1] + 38, ty - 11), (cx[-1] + 38, ty + 11)], fill=(196, 206, 220))
+    n = len(ROWS); cw = (x1 - x0 - 60) / n; cx = [x0 + 30 + cw * k + cw / 2 for k in range(n)]
+    NM = ['Đất nền VCC', 'FourS F1, F5', 'Symphony 5', 'S-Light', 'Penthouse, Shop', 'FourS F2']
+
+    def smooth(pts, steps=30):  # Catmull-Rom qua các điểm
+        P = [pts[0]] + pts + [pts[-1]]; out = []
+        for i in range(1, len(P) - 2):
+            p0, p1, p2, p3 = P[i - 1], P[i], P[i + 1], P[i + 2]
+            for j in range(steps):
+                t = j / steps; t2, t3 = t * t, t * t * t
+                out.append(tuple(0.5 * (2 * p1[q] + (-p0[q] + p2[q]) * t + (2 * p0[q] - 5 * p1[q] + 4 * p2[q] - p3[q]) * t2 + (-p0[q] + 3 * p1[q] - 3 * p2[q] + p3[q]) * t3) for q in (0, 1)))
+        out.append(pts[-1]); return out
+
+    def thick(pts, col, wd, head=True):
+        SS = 3
+        L = Image.new('L', (W * SS, H * SS), 0); g2 = ImageDraw.Draw(L)
+        g2.line([(x * SS, y * SS) for x, y in pts], fill=255, width=wd * SS, joint='curve')
+        for x, y in (pts[0],): g2.ellipse(((x - wd / 2) * SS, (y - wd / 2) * SS, (x + wd / 2) * SS, (y + wd / 2) * SS), fill=255)
+        if head:
+            (xa, ya), (xb, yb) = pts[-6], pts[-1]
+            ang = math.atan2(yb - ya, xb - xa); hl, hw2 = wd * 3.2, wd * 2.2
+            tip = (xb + math.cos(ang) * hl * 0.7, yb + math.sin(ang) * hl * 0.7)
+            bl = (xb - math.sin(ang) * hw2, yb + math.cos(ang) * hw2); br = (xb + math.sin(ang) * hw2, yb - math.cos(ang) * hw2)
+            g2.polygon([(q[0] * SS, q[1] * SS) for q in (tip, bl, br)], fill=255)
+        L = L.resize((W, H), Image.LANCZOS)
+        im.paste(Image.new('RGB', (W, H), col), (0, 0), L)
+
+    # Mốc thời gian (trục ngang ở giữa)
+    ty = 836
+    d.line([(cx[0] - 40, ty), (cx[-1] + 40, ty)], fill=(206, 214, 226), width=3)
     for k in range(n):
-        d.rounded_rectangle((cx[k] - hw + 6, ty - 19, cx[k] + hw - 6, ty + 19), 19, fill=NV)
+        d.rounded_rectangle((cx[k] - 52, ty - 18, cx[k] + 52, ty + 18), 18, fill=NV)
         d.text((cx[k], ty), ROWS[k][0].replace('/2026', ''), font=sans(19, 'ExtraBold'), fill=(255, 255, 255), anchor='mm')
-    # Hàng 1: Sun bán được
-    d.text((x0 + 22, 566), 'SUN GROUP BÁN ĐƯỢC', font=sans(20, 'ExtraBold'), fill=OR)
-    r1, r2 = 598, 830
+
+    # Trên: Sun bán cộng dồn
+    d.text((x0 + 26, 510), 'SUN GROUP BÁN ĐƯỢC · CỘNG DỒN', font=sans(20, 'ExtraBold'), fill=OR)
+    cum = []; acc = 0
+    for r in ROWS: acc += r[2]; cum.append(acc)
+    ytop, ybot = 640, 790
+    # dáng parabol (minh hoạ đà đi lên); con số thật ghi trên từng điểm
+    sp = [(cx[k], ybot - (ybot - ytop) * (k / (n - 1)) ** 1.9) for k in range(n)]
+    curve = smooth(sp)
+    # vùng tô nhạt dưới đường Sun
+    poly = curve + [(cx[-1], ybot), (cx[0], ybot)]
+    ov = Image.new('RGBA', im.size, (0, 0, 0, 0)); ImageDraw.Draw(ov).polygon(poly, fill=OR + (34,)); im.alpha_composite(ov)
+    thick(curve, OR, 9)
+    d = ImageDraw.Draw(im)
     for k, (t, name, val, lab, ctx, hot) in enumerate(ROWS):
-        bg = OR if hot else (253, 236, 222); fg = (255, 255, 255) if hot else INK; sub = (255, 230, 210) if hot else GREY
-        d.rounded_rectangle((cx[k] - hw, r1, cx[k] + hw, r2), 16, fill=bg)
-        for q, ln in enumerate(NM[k].split('\n')):
-            d.text((cx[k], r1 + 16 + q * 21), ln, font=sans(16, 'SemiBold'), fill=sub, anchor='ma')
-        num = lab.split(' ')[0]; unit = lab[len(num):].strip()
-        f = sans(40, 'ExtraBold')
-        while d.textlength(num, font=f) > 2 * hw - 12: f = sans(f.size - 2, 'ExtraBold')
-        d.text((cx[k], r1 + 128), num, font=f, fill=fg if hot else OR, anchor='mm')
-        for q, ln in enumerate(unit.replace(' · ', '\n').replace('SP (kỷ lục)', 'SP\n(kỷ lục)').split('\n')):
-            d.text((cx[k], r1 + 160 + q * 21), ln.replace('SP', 'sản phẩm'), font=sans(16, 'SemiBold'), fill=sub, anchor='ma')
-    # Hàng 2: thị trường lúc đó (màu xanh → đỏ + biểu tượng thời tiết)
-    d.text((x0 + 22, 850), 'THỊ TRƯỜNG LÚC ĐÓ', font=sans(20, 'ExtraBold'), fill=BLUE)
-    q1, q2 = 882, 1090
+        x, y = sp[k]
+        d.ellipse((x - 11, y - 11, x + 11, y + 11), fill=(255, 255, 255), outline=OR, width=5)
+        num = '+' + lab.split(' ')[0].split('/')[0]
+        above = k != n - 1
+        bx_ = x if k else x + 6
+        d.text((bx_, y - 58), num, font=sans(28 if hot else 24, 'ExtraBold'), fill=OR, anchor='mm')
+        d.text((bx_, y - 32), NM[k], font=sans(15, 'SemiBold'), fill=GREY, anchor='mm')
+    d.text((x1 - 26, 512), 'tổng ~3.000 sản phẩm', font=sans(19, 'ExtraBold'), fill=NV, anchor='ra')
+
+    # Dưới: thị trường đi xuống
+    d.text((x0 + 26, 878), 'THỊ TRƯỜNG LÚC ĐÓ', font=sans(20, 'ExtraBold'), fill=BLUE)
+    lv = [0.0, 0.18, 0.42, 0.62, 0.8, 1.0]
+    yt, yb = 950, 1050
+    mp = [(cx[k], yt + (yb - yt) * lv[k]) for k in range(n)]
+    mc = smooth(mp)
+    thick(mc, (120, 140, 168), 6)
     for k in range(n):
-        t_ = k / (n - 1)
-        c = (int(226 + (250 - 226) * t_), int(242 + (222 - 242) * t_), int(230 + (222 - 230) * t_))
-        d.rounded_rectangle((cx[k] - hw, q1, cx[k] + hw, q2), 16, fill=c)
-    for k in range(n):
-        weather(im, cx[k], q1 + 64, k, 96)
+        weather(im, mp[k][0], mp[k][1] - 4, k, 84)
     d = ImageDraw.Draw(im)
     for k in range(n):
         ctx = ROWS[k][4].replace('Thị trường ', '').capitalize()
-        words = ctx.split(' '); a, b = '', ''
-        for w_ in words:
-            if not b and d.textlength((a + ' ' + w_).strip(), font=sans(17, 'ExtraBold')) <= 2 * hw - 14: a = (a + ' ' + w_).strip()
-            else: b = (b + ' ' + w_).strip()
-        d.text((cx[k], q1 + 130), a, font=sans(17, 'ExtraBold'), fill=INK, anchor='ma')
-        if b: d.text((cx[k], q1 + 153), b, font=sans(17, 'ExtraBold'), fill=INK, anchor='ma')
-    d.text((x0 + 22, 1112), 'Trời càng xấu (thị trường càng khó), Sun vẫn bán được hàng ở mọi đợt', font=sans(18, 'SemiBold'), fill=GREY)
+        d.text((mp[k][0], mp[k][1] + 46 if k < n - 1 else mp[k][1] + 46), ctx, font=sans(16, 'ExtraBold'), fill=INK, anchor='ma')
+    d.text((x0 + 26, 1132), 'Thị trường đi xuống, đường bán hàng của Sun vẫn đi lên', font=sans(18, 'SemiBold'), fill=GREY)
     y = 1182
     d.text((W // 2, y), 'Thị trường từ nắng sang bão – Sun vẫn bán đều', font=script(32), fill=OR, anchor='ma')
 
