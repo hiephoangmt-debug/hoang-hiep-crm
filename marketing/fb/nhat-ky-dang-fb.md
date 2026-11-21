@@ -119,7 +119,6 @@
 | 18/11/2026 | TikTok (@hiephoangmt, brand Sun) | 20:15 | Bảo hiểm căn hộ cho thuê – BỘ 3 ẢNH | /bao-hiem-can-ho-cho-thue-sun-saphia/ |
 | 18/11/2026 | Casamia (blogId 8074284) | 21:00 | Sự kiện khách hàng Casamia Balanca – Sound of Balance 25/04/2026 (album 4 ảnh sự kiện) | /du-an/casamia-balanca-hoi-an/ |
 | 18/11/2026 | TikTok (@hiephoangmt, brand Sun) | 21:15 | Casamia Balanca cần xem gì – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
-| CHỜ | Sun | 20/11 | (bài web 18/11 16:30) Căn hộ cho người nghỉ hưu – Sun Saphia | can-ho-cho-nguoi-nghi-huu-sun-saphia (chờ) |
 | 18/11/2026 | (ghi chú) | 07:18 | Bài web bai-do-xe-ngam-bach-dang-da-nang đã có bài FB Hoàng Hiệp 16:30 do lịch hạ tầng hẹn sẵn – không làm trùng | /bai-do-xe-ngam-bach-dang-da-nang/ |
 | 18/11/2026 | (ghi chú) | 15:38 | Gỡ bài Casamia compound đăng nhầm trang Hoàng Hiệp 16:30 (chuyển bản nháp Metricool, theo anh Hiệp) | /biet-thu-compound-hoi-an-casamia-balanca/ |
 | 19/11/2026 | Sun | 09:00 | (bài web 18/11, hết CHỜ) Chủ đầu tư Sun Saphia Residence là ai (1 ảnh nền xanh) | /chu-dau-tu-sun-saphia-residence-la-ai/ |
@@ -146,5 +145,10 @@
 | 20/11/2026 | Hoàng Hiệp | 17:00 | TỔNG HỢP: Căn hộ hàng hiệu là gì – Nobu Đà Nẵng (+0 tin ở bình luận; 1 ảnh nền xanh) – LỖI: link bình luận 404 (slug cũ); web đăng lại slug mới, link cũ sẽ 301 khi cài gói 2.20.331 | /can-ho-hang-hieu-la-gi-nobu-residences/ (cũ: can-ho-hang-hieu-la-gi-nobu-da-nang) |
 | CHỜ | Sun | 21/11 | (bài web 20/11 09:00) Mặt bằng căn hộ Cora Tower | mat-bang-can-ho-cora-tower (chờ) |
 | CHỜ | Sun | 21/11 | (bài web 20/11 11:30) Sun Saphia Residence gần Làng Đại học | sun-saphia-residence-gan-lang-dai-hoc (chờ) |
-| CHỜ | Sun | 21/11 | (bài web 20/11 16:30) Studio góc Sun Saphia 40 m² | studio-goc-sun-saphia-residence-40m2 (chờ) |
 | CHỜ | Sun | 21/11 | (bài web 20/11 18:30) Sun Saphia Residence đi trung tâm Đà Nẵng | sun-saphia-residence-di-trung-tam-da-nang (chờ) |
+| 21/11/2026 | Sun | 09:00 | (bài web 20/11, hết CHỜ) Studio góc Sun Saphia ~40 m² (1 ảnh mẫu nắng cam, nội thất studio) | /studio-goc-sun-saphia-residence-40m2/ /studio-hay-1pn-sun-saphia-residence/ |
+| 21/11/2026 | Casamia (blogId 8074284) | 09:30 | Nội thất biệt thự Casamia Balanca – album 4 ảnh (phòng khách view vườn, bếp đảo gỗ, phòng ăn, phòng ngủ ban công) | /du-an/casamia-balanca-hoi-an/ |
+| 21/11/2026 | Sun | 19:00 | (bài web 18/11, hết CHỜ – ngày cuối) Căn hộ cho người nghỉ hưu – Sun Saphia (1 ảnh nền xanh, flycam biển) | /can-ho-cho-nguoi-nghi-huu-sun-saphia/ |
+| 21/11/2026 | Casamia (blogId 8074284) | 19:30 | Sống chậm ven sông Cổ Cò – album 4 ảnh (nhà vườn ven sông, ban công, góc đọc sách, hoàng hôn sông) | /du-an/casamia-balanca-hoi-an/ |
+| CHỜ | TikTok | 21/11 | 4 bài TikTok hôm nay tạm giữ: anh Hiệp báo TikTok bị cắt hình, chờ ảnh chụp màn hình để sửa khung | (chờ) |
+| CHỜ | Sun | 22/11 | (bài web 21/11 14:00, chưa lên web lúc hẹn) Căn 1PN+ Sun Saphia 49–51 m² | can-1pn-plus-sun-saphia-residence-49-51m2 (chờ) |
