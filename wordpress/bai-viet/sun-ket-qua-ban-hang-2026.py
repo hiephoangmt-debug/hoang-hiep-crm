@@ -166,19 +166,24 @@ def main(out):
     # Dưới: thị trường đi xuống
     d.text((x0 + 26, 878), 'THỊ TRƯỜNG LÚC ĐÓ', font=sans(20, 'ExtraBold'), fill=BLUE)
     lv = [0.0, 0.18, 0.42, 0.62, 0.8, 1.0]
-    yt, yb = 950, 1050
+    yt, yb = 962, 1085
     mp = [(cx[k], yt + (yb - yt) * lv[k]) for k in range(n)]
     mc = smooth(mp)
-    thick(mc, (120, 140, 168), 6)
-    for k in range(n):
-        weather(im, mp[k][0], mp[k][1] - 4, k, 84)
+    MK = [(70, 150, 110), (120, 150, 100), (170, 140, 80), (200, 110, 60), (200, 80, 60), (190, 50, 50)]
+    # đường thị trường: mũi tên đi xuống, đổi màu xanh → đỏ theo từng đoạn
+    seg = len(mc) // (n - 1)
+    for k in range(n - 1):
+        part = mc[k * seg:(k + 1) * seg + 1] if k < n - 2 else mc[k * seg:]
+        thick(part, MK[k], 6, head=(k == n - 2))
     d = ImageDraw.Draw(im)
     for k in range(n):
+        x, y = mp[k]
+        d.ellipse((x - 9, y - 9, x + 9, y + 9), fill=(255, 255, 255), outline=MK[k], width=4)
         ctx = ROWS[k][4].replace('Thị trường ', '').capitalize()
-        d.text((mp[k][0], mp[k][1] + 46 if k < n - 1 else mp[k][1] + 46), ctx, font=sans(16, 'ExtraBold'), fill=INK, anchor='ma')
-    d.text((x0 + 26, 1132), 'Thị trường đi xuống, đường bán hàng của Sun vẫn đi lên', font=sans(18, 'SemiBold'), fill=GREY)
+        d.text((x, y - 24), ctx, font=sans(16, 'ExtraBold'), fill=MK[k], anchor='ms')
+    d.text((x0 + 26, 1132), 'Đợt mở bán nào của Sun cũng có hàng bán ra, dù thị trường kém dần', font=sans(18, 'SemiBold'), fill=GREY)
     y = 1182
-    d.text((W // 2, y), 'Thị trường từ nắng sang bão – Sun vẫn bán đều', font=script(32), fill=OR, anchor='ma')
+    d.text((W // 2, y), 'Thị trường đi xuống – Sun vẫn bán đều', font=script(32), fill=OR, anchor='ma')
 
     box = (32, H - 128, W - 32, H - 26); bx, by0, bx2, by1 = box; h = by1 - by0
     ov = Image.new('RGBA', im.size, (0, 0, 0, 0)); ImageDraw.Draw(ov).rounded_rectangle(box, 22, fill=(24, 40, 70, 240)); im.alpha_composite(ov)
