@@ -111,3 +111,7 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 ## KIỂM TRA LINK TRƯỚC KHI ĐĂNG (anh Hiệp 20/11/2026 báo lỗi "Page Not Found")
 - Bài có trong wordpress/tu-dong/index.json CHƯA CHẮC đã lên web (bài can-ho-hang-hieu-la-gi-nobu-da-nang 20/11 bị 404).
 - Mọi link https://hiephoangmt.com/... trong bài/bình luận đầu: `curl -s -o /dev/null -w '%{http_code}' -L <link>` phải ra 200. Không 200 thì không dùng link đó (đổi sang trang dự án /du-an/<slug>/ đã có, hoặc để bài CHỜ).
+
+## CASAMIA: ẢNH THÔNG ĐIỆP ĐẦU (anh Hiệp 21/11/2026: "Casa không có hình thông điệp đầu à")
+- Mỗi bài trang Casamia: ảnh 1 = thẻ thông điệp mẫu "nắng cam" (`wordpress/bai-viet/the-nang-cam.py`, khổ doc 1080x1350; mẫu marketing/fb/nang-cam/casamia-*.json), nền là 1 ảnh phối cảnh hợp chủ đề; sau đó 3 ảnh thật/phối cảnh KHÔNG CHỮ (album 4 ảnh). Không lặp ảnh nền thẻ trong album.
+- Thông điệp: 1 con số/cụm từ mạnh có nguồn (vd "316 m² sàn sử dụng", "Sống chậm ven sông"), nhãn xanh ngắn, dòng phụ 1 dòng.

@@ -147,8 +147,8 @@
 | CHỜ | Sun | 21/11 | (bài web 20/11 11:30) Sun Saphia Residence gần Làng Đại học | sun-saphia-residence-gan-lang-dai-hoc (chờ) |
 | CHỜ | Sun | 21/11 | (bài web 20/11 18:30) Sun Saphia Residence đi trung tâm Đà Nẵng | sun-saphia-residence-di-trung-tam-da-nang (chờ) |
 | 21/11/2026 | Sun | 09:00 | (bài web 20/11, hết CHỜ) Studio góc Sun Saphia ~40 m² (1 ảnh mẫu nắng cam, nội thất studio) | /studio-goc-sun-saphia-residence-40m2/ /studio-hay-1pn-sun-saphia-residence/ |
-| 21/11/2026 | Casamia (blogId 8074284) | 09:30 | Nội thất biệt thự Casamia Balanca – album 4 ảnh (phòng khách view vườn, bếp đảo gỗ, phòng ăn, phòng ngủ ban công) | /du-an/casamia-balanca-hoi-an/ |
+| 21/11/2026 | Casamia (blogId 8074284) | 09:30 | Nội thất biệt thự Casamia Balanca – album 4 ảnh: thẻ thông điệp "316 m² sàn" (nắng cam) + bếp đảo gỗ, phòng ăn, phòng ngủ ban công | /du-an/casamia-balanca-hoi-an/ |
 | 21/11/2026 | Sun | 19:00 | (bài web 18/11, hết CHỜ – ngày cuối) Căn hộ cho người nghỉ hưu – Sun Saphia (1 ảnh nền xanh, flycam biển) | /can-ho-cho-nguoi-nghi-huu-sun-saphia/ |
-| 21/11/2026 | Casamia (blogId 8074284) | 19:30 | Sống chậm ven sông Cổ Cò – album 4 ảnh (nhà vườn ven sông, ban công, góc đọc sách, hoàng hôn sông) | /du-an/casamia-balanca-hoi-an/ |
+| 21/11/2026 | Casamia (blogId 8074284) | 19:30 | Sống chậm ven sông Cổ Cò – album 4 ảnh: thẻ thông điệp "Sống chậm ven sông" (nắng cam) + nhà vườn ven sông, ban công, góc đọc sách | /du-an/casamia-balanca-hoi-an/ |
 | CHỜ | TikTok | 21/11 | 4 bài TikTok hôm nay tạm giữ: anh Hiệp báo TikTok bị cắt hình, chờ ảnh chụp màn hình để sửa khung | (chờ) |
 | CHỜ | Sun | 22/11 | (bài web 21/11 14:00, chưa lên web lúc hẹn) Căn 1PN+ Sun Saphia 49–51 m² | can-1pn-plus-sun-saphia-residence-49-51m2 (chờ) |
