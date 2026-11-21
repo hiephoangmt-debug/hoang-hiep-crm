@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.333**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.334**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.334 (21/11/2026)
+
+- **Vinhomes Hải Vân Bay**: cập nhật chính sách bán hàng áp dụng từ 19/11/2026 cho trang tổng và 3 phân khu Bạch Vân, Vịnh Mây, Đảo Ngọc – thanh toán sớm 7,5%, voucher tới 30% (đến 31/12/2026), VinClub 0,5 – 0,9%, Bạch Vân về ở sớm 10%, Đảo Ngọc cam kết thuê 7%/năm 3 năm hoặc về ở sớm 10% (223 căn), 2 phương án vay (lãi cố định 3 – 9% hoặc hỗ trợ 0% có cộng thêm). Ô anh đã tự sửa trong quản trị giữ nguyên.
+- Sau khi cài: bấm **Nhập / cập nhật dữ liệu** rồi LiteSpeed **Purge All**.
 
 ## Có gì mới – 2.20.333 (20/11/2026)
 
