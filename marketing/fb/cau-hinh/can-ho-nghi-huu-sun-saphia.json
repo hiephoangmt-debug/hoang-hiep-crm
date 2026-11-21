@@ -1,0 +1,85 @@
+{
+ "tag": "Ở THEO MÙA · SUN SAPHIA RESIDENCE",
+ "title": "Căn hộ cho người nghỉ hưu",
+ "sub": "Ở theo mùa, cho thuê phần còn lại",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "2,45 ha",
+   "công viên biển"
+  ],
+  [
+   "7",
+   "thang máy"
+  ],
+  [
+   "~50 m²",
+   "căn 1PN+"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo tài liệu chủ đầu tư 11/2026 · Ảnh flycam thực tế khu vực dự án 17/10/2026",
+ "headline": [
+  [
+   "Căn hộ",
+   "big",
+   0
+  ],
+  [
+   "nghỉ hưu",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Căn hộ cho",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "NGƯỜI NGHỈ HƯU",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "ven biển",
+     "script"
+    ]
+   ],
+   "dx": 300
+  }
+ ]
+}
