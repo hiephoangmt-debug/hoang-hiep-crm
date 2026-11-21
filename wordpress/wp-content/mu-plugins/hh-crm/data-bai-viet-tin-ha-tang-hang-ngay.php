@@ -1417,5 +1417,75 @@ HTML
 		),
 	);
 
+	/* ---------------- 21/11 – QĐ 5316/QĐ-UBND ngày 20/11/2026 phê duyệt giá đất cụ thể dự án Alphanam Luxury, phường An Hải (danang.gov.vn 21/11, anh Hiệp gửi) ---------------- */
+	$posts[] = array(
+		'slug'           => 'gia-dat-cu-the-alphanam-luxury-an-hai',
+		'title'          => 'Giá đất cụ thể Alphanam Luxury: Đà Nẵng duyệt 96,7 triệu đồng/m² để thu nghĩa vụ tài chính do điều chỉnh quy hoạch',
+		'excerpt'        => 'Quyết định 5316/QĐ-UBND ngày 20/11/2026 phê duyệt giá đất cụ thể tại dự án Alphanam Luxury, phường An Hải, tại thời điểm 29/10/2018: 96.734.786 đồng/m² sau điều chỉnh quy hoạch, làm cơ sở thu nghĩa vụ tài chính phát sinh (nếu có).',
+		'keyword'        => 'giá đất cụ thể Alphanam Luxury',
+		'keywords_extra' => array( 'Quyết định 5316/QĐ-UBND', 'giá đất An Hải Đà Nẵng', 'nghĩa vụ tài chính điều chỉnh quy hoạch', 'giá đất ven sông Hàn' ),
+		'project'        => 'sun-ponte-residence',
+		'schedule'       => '2026-11-21 07:00',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Giá đất', 'An Hải', 'Pháp lý dự án' ),
+		'image'          => 'plugin:img/capital-square/capital-square-tien-do-5-2026-flycam-01.jpg',
+		'image_alt'      => 'Giá đất cụ thể Alphanam Luxury tại phường An Hải – khu ven sông Hàn, Đà Nẵng (ảnh flycam thực tế)',
+		'content'        => <<<'HTML'
+<p>Bảng <strong>giá đất cụ thể Alphanam Luxury</strong> vừa được UBND TP Đà Nẵng phê duyệt tại Quyết định số 5316/QĐ-UBND ngày 20/11/2026. Mức giá được tính tại thời điểm 29/10/2018, làm cơ sở thu nghĩa vụ tài chính phát sinh (nếu có) do điều chỉnh quy hoạch chi tiết tại dự án Tổ hợp căn hộ thương mại, dịch vụ và khách sạn Alphanam Luxury, phường An Hải, của Công ty Cổ phần Địa ốc Alphanam.</p>
+<!--hh-featured-->
+<h2>Giá đất cụ thể Alphanam Luxury trước và sau điều chỉnh quy hoạch</h2>
+<p>Theo thông tin trên Cổng thông tin điện tử thành phố, quyết định nêu giá đất cụ thể Alphanam Luxury của quy hoạch trước và sau khi điều chỉnh:</p>
+<table>
+<thead><tr><th>Quy hoạch</th><th>Khu đất</th><th>Giá đất cụ thể (thời điểm 29/10/2018)</th></tr></thead>
+<tbody>
+<tr><td rowspan="2">Trước điều chỉnh</td><td>Thửa 29, 30, 31, 32 tờ bản đồ số 10 (lô A1, A2, A3, A4 khu biệt thự cao cấp Redstar)</td><td>Lần lượt 85.116.409; 195.359.366; 183.453.439 và 184.695.241 đồng/m²</td></tr>
+<tr><td>Đất thương mại dịch vụ, thời hạn 50 năm</td><td>29.721.599 đồng/m²</td></tr>
+<tr><td>Sau điều chỉnh (Quyết định 5001/QĐ-UBND ngày 29/10/2018)</td><td>1.185,8 m² đất ở xây khối căn hộ; 1.439,3 m² đất thương mại dịch vụ xây khối khách sạn; 2.866 m² đất thương mại dịch vụ phần không xây dựng</td><td>96.734.786 đồng/m²</td></tr>
+</tbody>
+</table>
+<p>Thời điểm tính giá là ngày ký Quyết định 5001/QĐ-UBND ngày 29/10/2018 – quyết định cho phép Công ty Cổ phần Địa ốc Alphanam chuyển mục đích sử dụng đất tại dự án. Vì vậy, giá đất cụ thể Alphanam Luxury phản ánh mặt bằng giá năm 2018, không phải giá thị trường hiện nay.</p>
+<!--hh-img:img/capital-square/capital-square-tien-do-5-2026-flycam-01.jpg|Giá đất cụ thể Alphanam Luxury được duyệt cho khu đất tại phường An Hải, bờ Đông sông Hàn – khu vực có nhiều dự án cao tầng (ảnh flycam thực tế 5/2026)-->
+<h2>Giá đất cụ thể dùng để làm gì?</h2>
+<p>Giá đất cụ thể là mức giá do UBND thành phố quyết định cho từng trường hợp, dùng để tính các khoản nghĩa vụ tài chính về đất như tiền sử dụng đất, tiền thuê đất. Ở trường hợp này, việc điều chỉnh quy hoạch chi tiết làm thay đổi cơ cấu sử dụng đất (từ các lô biệt thự và đất thương mại dịch vụ sang đất ở xây căn hộ, đất thương mại dịch vụ xây khách sạn), nên phát sinh phần chênh lệch nghĩa vụ tài chính mà doanh nghiệp có thể phải nộp thêm.</p>
+<p>Theo quyết định, Văn phòng Đăng ký đất đai thành phố chuyển hồ sơ sang Thuế thành phố Đà Nẵng; cơ quan thuế căn cứ giá đất cụ thể Alphanam Luxury để thông báo nghĩa vụ tài chính cho doanh nghiệp. Thông tin công bố chưa nêu tổng số tiền phải nộp.</p>
+<h2>Điều kiện để quyết định có hiệu lực</h2>
+<p>Đáng chú ý, Quyết định 5316/QĐ-UBND chỉ có hiệu lực áp dụng khi được Cơ quan Kiểm toán Nhà nước xem xét, thống nhất bằng văn bản. Như vậy, giá đất cụ thể Alphanam Luxury chưa phải con số cuối cùng cho tới khi Kiểm toán Nhà nước có ý kiến.</p>
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Tháo gỡ pháp lý dự án tồn đọng:</strong> việc xác định giá đất cụ thể Alphanam Luxury là bước để hoàn tất nghĩa vụ tài chính – điều kiện quan trọng để dự án tiến tới các thủ tục tiếp theo. Phê duyệt giá đất cụ thể Alphanam Luxury là tín hiệu thành phố đang xử lý dần các dự án vướng từ giai đoạn trước.</li>
+<li><strong>Thước đo giá đất ven sông Hàn:</strong> ngay từ năm 2018, giá đất cụ thể các lô biệt thự tại đây đã lên tới khoảng 183 – 195 triệu đồng/m². Điều này giải thích vì sao căn hộ mới ở bờ Đông sông Hàn khó có giá thấp.</li>
+<li><strong>Người mua cần xem nghĩa vụ tài chính:</strong> trường hợp giá đất cụ thể Alphanam Luxury cho thấy với dự án điều chỉnh quy hoạch, nên hỏi rõ chủ đầu tư đã hoàn thành nghĩa vụ tài chính chưa, vì việc này ảnh hưởng tới tiến độ cấp sổ.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<p>Các dự án dưới đây cùng ở phường An Hải, bờ Đông sông Hàn – nơi giá đất cụ thể Alphanam Luxury là một tham chiếu về mặt bằng giá đất khu vực:</p>
+<ul>
+<li><a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a> (chân cầu Rồng): căn hộ Sun Group đang bàn giao, pháp lý rõ ràng, cùng khu vực ven sông.</li>
+<li><a href="/du-an/the-legend-da-nang/">The Legend Đà Nẵng</a> (góc Võ Văn Kiệt – Võ Nguyên Giáp): căn hộ mới tại An Hải, chịu cùng mặt bằng giá đất.</li>
+<li><a href="/du-an/capital-square-toa-c3/">Capital Square tòa C3</a> và <a href="/du-an/capital-square-hudson-place-s4/">Hudson Place S4</a>: tổ hợp ven sông Hàn tại An Hải.</li>
+</ul>
+<p>Xem thêm bài <a href="/trung-tam-tai-chinh-quoc-te-da-nang/">trung tâm tài chính quốc tế Đà Nẵng</a> và <a href="/huy-quy-hoach-khu-biet-thu-son-tra/">hủy quy hoạch khu biệt thự Sơn Trà</a>. Cần tư vấn căn hộ ven sông Hàn, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: <a href="https://danang.gov.vn/vi/web/dng/w/phe-duyet-gia-dat-cu-the-tai-du-an-alphanam-luxury-phuong-an-hai">Cổng thông tin điện tử TP Đà Nẵng (21/11/2026)</a> – Quyết định 5316/QĐ-UBND ngày 20/11/2026. Giá đất là giá cụ thể tại thời điểm 29/10/2018 để tính nghĩa vụ tài chính, không phải giá bán căn hộ.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Giá đất cụ thể Alphanam Luxury: 96,7 triệu/m² (QĐ 5316)',
+			'desc'      => 'Giá đất cụ thể Alphanam Luxury tại An Hải: 96.734.786 đồng/m² theo QĐ 5316/QĐ-UBND ngày 20/11/2026, tính tại 29/10/2018 để thu nghĩa vụ tài chính.',
+			'points'    => array(
+				'QĐ 5316/QĐ-UBND ngày 20/11/2026 phê duyệt giá đất cụ thể tại thời điểm 29/10/2018',
+				'Sau điều chỉnh quy hoạch: 96.734.786 đồng/m² cho 1.185,8 m² đất ở, 1.439,3 m² và 2.866 m² đất thương mại dịch vụ',
+				'Chỉ có hiệu lực khi Kiểm toán Nhà nước xem xét, thống nhất bằng văn bản',
+			),
+			'faq'       => array(
+				array( 'Giá đất cụ thể Alphanam Luxury là bao nhiêu?', 'Sau điều chỉnh quy hoạch là 96.734.786 đồng/m², tính tại thời điểm 29/10/2018, theo Quyết định 5316/QĐ-UBND ngày 20/11/2026.' ),
+				array( 'Giá này dùng để làm gì?', 'Làm cơ sở thu nghĩa vụ tài chính phát sinh (nếu có) do điều chỉnh quy hoạch chi tiết; cơ quan thuế căn cứ để thông báo cho doanh nghiệp.' ),
+				array( 'Quyết định đã có hiệu lực chưa?', 'Quyết định chỉ có hiệu lực áp dụng khi Cơ quan Kiểm toán Nhà nước xem xét, thống nhất bằng văn bản.' ),
+				array( 'Đây có phải giá bán căn hộ không?', 'Không. Đây là giá đất để tính nghĩa vụ tài chính với Nhà nước tại thời điểm 2018, không phải giá bán căn hộ hiện nay.' ),
+			),
+		),
+		'sources'        => array(
+			'https://danang.gov.vn/vi/web/dng/w/phe-duyet-gia-dat-cu-the-tai-du-an-alphanam-luxury-phuong-an-hai',
+		),
+	);
+
 	return $posts;
 }
