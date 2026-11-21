@@ -1487,5 +1487,83 @@ HTML
 		),
 	);
 
+	/* ---------------- 21/11 – Quốc hội thông qua Luật Kinh doanh bất động sản (sửa đổi): cọc tối đa 5%, lần đầu ≤ 30%, cấm thu tiền giữ chỗ; hiệu lực 1/7/2027 (anh Hiệp gửi link VietnamBiz) ---------------- */
+	$posts[] = array(
+		'slug'           => 'luat-kinh-doanh-bat-dong-san-sua-doi-2026',
+		'title'          => 'Luật Kinh doanh bất động sản sửa đổi được thông qua: cọc tối đa 5%, lần đầu không quá 30%, cấm thu tiền giữ chỗ',
+		'excerpt'        => 'Sáng 21/11/2026, Quốc hội thông qua Luật Kinh doanh bất động sản (sửa đổi) với 471/479 đại biểu tán thành; luật có 10 chương, 63 điều, hiệu lực từ 1/7/2027: đặt cọc tối đa 5%, nhà hình thành trong tương lai thanh toán lần đầu không quá 30%, cấm thu tiền giữ chỗ.',
+		'keyword'        => 'Luật Kinh doanh bất động sản sửa đổi',
+		'keywords_extra' => array( 'đặt cọc mua nhà tối đa 5%', 'nhà ở hình thành trong tương lai', 'cấm thu tiền giữ chỗ', 'luật kinh doanh bất động sản 2027' ),
+		'project'        => 'sun-saphia-residence',
+		'schedule'       => '2026-11-21 16:45',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Pháp lý', 'Luật Kinh doanh bất động sản', 'Kinh nghiệm mua nhà' ),
+		'image'          => 'plugin:img/capital-square/capital-square-tien-do-5-2026-flycam-01.jpg',
+		'image_alt'      => 'Luật Kinh doanh bất động sản sửa đổi siết đặt cọc, thanh toán khi mua nhà hình thành trong tương lai (ảnh công trường thực tế tại Đà Nẵng)',
+		'content'        => <<<'HTML'
+<p><strong>Luật Kinh doanh bất động sản sửa đổi</strong> vừa được Quốc hội thông qua sáng 21/11/2026 tại Kỳ họp thứ Hai, Quốc hội khóa XVI, với 471/479 đại biểu tham gia biểu quyết tán thành. Luật gồm 10 chương, 63 điều (giảm 20 điều so với Luật năm 2023) và có hiệu lực từ ngày 1/7/2027. Điểm người mua nhà quan tâm nhất là các quy định siết đặt cọc, tiến độ thanh toán và cấm thu tiền khi dự án chưa đủ điều kiện.</p>
+<!--hh-featured-->
+<h2>Luật Kinh doanh bất động sản sửa đổi: 6 điểm người mua nhà cần biết</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Quy định mới (theo báo chí đưa tin ngày 21/11/2026)</th></tr></thead>
+<tbody>
+<tr><td>Đặt cọc</td><td>Chủ đầu tư chỉ được nhận đặt cọc tối đa 5% giá bán và chỉ khi dự án đã đủ điều kiện đưa vào kinh doanh; thỏa thuận đặt cọc phải ghi rõ giá bán, tiền cọc được tính vào lần thanh toán đầu tiên</td></tr>
+<tr><td>Thanh toán lần đầu</td><td>Với nhà ở hình thành trong tương lai, lần đầu không quá 30% giá trị hợp đồng (đã gồm tiền cọc); các lần sau theo tiến độ xây dựng</td></tr>
+<tr><td>Tiền giữ chỗ, "booking"</td><td>Cấm chủ đầu tư thu tiền dưới mọi hình thức khi dự án chưa đủ điều kiện kinh doanh</td></tr>
+<tr><td>Ủy quyền ký hợp đồng</td><td>Chủ đầu tư không được ủy quyền cho bên khác ký hợp đồng đặt cọc, mua bán; trừ dự án có từ hai nhà đầu tư trở lên theo quy định của Chính phủ</td></tr>
+<tr><td>Công khai thông tin</td><td>Phải công khai đầy đủ, trung thực thông tin dự án trên Hệ thống thông tin về nhà ở và thị trường bất động sản trước khi đưa vào kinh doanh</td></tr>
+<tr><td>Hành vi bị cấm</td><td>Kinh doanh bất động sản không đủ điều kiện; giả mạo tài liệu, gian lận, lừa đảo; thu, sử dụng tiền của bên mua trái pháp luật</td></tr>
+</tbody>
+</table>
+<p>Theo Dân trí, Luật Kinh doanh bất động sản sửa đổi cũng giữ nguyên tắc chủ đầu tư không được thu hết tiền mua nhà khi người mua chưa được cấp giấy chứng nhận. Tỷ lệ cụ thể và các quy định chi tiết sẽ được hướng dẫn trong nghị định của Chính phủ, nên Hoàng Hiệp sẽ cập nhật khi có văn bản luật chính thức.</p>
+<!--hh-img:img/capital-square/capital-square-tien-do-5-2026-flycam-01.jpg|Luật Kinh doanh bất động sản sửa đổi áp dụng cho dự án nhà ở hình thành trong tương lai đang xây dựng tại Đà Nẵng (ảnh flycam thực tế 5/2026)-->
+<h2>Đặt cọc tối đa 5% – thay đổi lớn với người mua</h2>
+<p>Trước khi có Luật Kinh doanh bất động sản sửa đổi, nhiều dự án thu cọc 10 – 20% hoặc thu "tiền giữ chỗ" từ khi chưa đủ điều kiện mở bán. Khi Luật Kinh doanh bất động sản sửa đổi có hiệu lực, tiền cọc bị khống chế 5% giá bán, chỉ được nhận khi dự án đã đủ điều kiện. Người mua giảm được rủi ro "kẹt tiền" ở những dự án chưa hoàn thiện pháp lý, chưa có hạ tầng.</p>
+<p>Với chủ đầu tư, Luật Kinh doanh bất động sản sửa đổi buộc phải hoàn thiện pháp lý trước khi bán, không thể dùng tiền giữ chỗ để thăm dò thị trường hoặc làm vốn. Các dự án của chủ đầu tư lớn, có tiềm lực tài chính sẽ ít bị ảnh hưởng hơn.</p>
+<h2>Thanh toán theo tiến độ: lần đầu không quá 30%</h2>
+<p>Theo Luật Kinh doanh bất động sản sửa đổi, với căn hộ, nhà ở hình thành trong tương lai, lần thanh toán đầu tiên không quá 30% giá trị hợp đồng (đã tính cả tiền cọc); các đợt sau phải bám tiến độ xây dựng thực tế. Đây là cơ chế giúp tiền của người mua đi cùng công trình, hạn chế tình trạng thu tiền quá nhanh so với tiến độ.</p>
+<h2>Luật Kinh doanh bất động sản sửa đổi có hiệu lực khi nào?</h2>
+<p>Luật Kinh doanh bất động sản sửa đổi có hiệu lực từ ngày 1/7/2027. Từ nay đến thời điểm đó, các giao dịch vẫn thực hiện theo Luật Kinh doanh bất động sản năm 2023 và văn bản hướng dẫn hiện hành. Người mua nên kiểm tra kỹ điều kiện bán nhà hình thành trong tương lai, thông báo đủ điều kiện của Sở Xây dựng và bảo lãnh ngân hàng của dự án trước khi đặt cọc.</p>
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Bảo vệ người mua tốt hơn:</strong> Luật Kinh doanh bất động sản sửa đổi chặn các khoản "booking" không có cơ sở pháp lý – vốn là nguồn rủi ro lớn nhất với người mua dự án mới.</li>
+<li><strong>Dự án đủ pháp lý được ưu tiên:</strong> thị trường sẽ phân hóa rõ giữa dự án đã đủ điều kiện kinh doanh và dự án "bán trước, làm sau". Người mua nên ưu tiên dự án đã có thông báo đủ điều kiện bán.</li>
+<li><strong>Dòng tiền nhẹ hơn ban đầu:</strong> cọc 5% và lần đầu tối đa 30% giúp người mua có thời gian chuẩn bị tài chính, nhất là khi kết hợp vay ngân hàng.</li>
+<li><strong>Chính sách bán hàng có thể thay đổi:</strong> khi Luật Kinh doanh bất động sản sửa đổi có hiệu lực, các ưu đãi thanh toán nhanh, thanh toán sớm hiện nay sẽ cần điều chỉnh cho phù hợp; mỗi đợt bán cần xem chính sách đúng thời điểm.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<p>Các dự án căn hộ hình thành trong tương lai tại Đà Nẵng đều chịu điều chỉnh của Luật Kinh doanh bất động sản sửa đổi khi luật có hiệu lực. Một số dự án đang mở bán:</p>
+<ul>
+<li><a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a>: căn hộ Sun Group đang bán theo tiến độ – xem thêm <a href="/tien-do-thanh-toan-sun-saphia-residence/">tiến độ thanh toán Sun Saphia Residence</a>.</li>
+<li><a href="/du-an/fours-tower/">FourS Tower</a> và <a href="/du-an/the-poet-residence-da-nang/">The Poet Residence</a>: căn hộ đang bán theo tiến độ xây dựng, người mua nên đối chiếu lịch thanh toán với quy định mới.</li>
+</ul>
+<p>Cần kiểm tra pháp lý, điều kiện bán của dự án trước khi đặt cọc, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: <a href="https://baoxaydung.vn/quoc-hoi-thong-qua-luat-kinh-doanh-bat-dong-san-sua-doi-192261121093157195.htm">Báo Xây dựng</a>; <a href="https://luatvietnam.vn/tin-van-ban-moi/sang-21-11-quoc-hoi-thong-qua-luat-kinh-doanh-bat-dong-san-sua-doi-186-116027-article.html">LuatVietnam</a>; <a href="https://tienphong.vn/quy-dinh-moi-ve-tien-do-thanh-toan-tien-dat-coc-bat-dong-san-post1896354.tpo">Tiền Phong</a>; <a href="https://dantri.com.vn/bat-dong-san/chua-co-so-do-chu-dau-tu-khong-duoc-thu-het-tien-mua-nha-20261121160032534.htm">Dân trí</a>; <a href="https://vietnambiz.vn/quoc-hoi-thong-qua-luat-kinh-doanh-bat-dong-san-sua-doi-bo-sung-nhieu-quy-dinh-ve-giao-dich-nha-dat-2026112195245509.htm">VietnamBiz</a>. Nội dung theo báo chí đưa tin ngày 21/11/2026; cần đối chiếu văn bản luật chính thức khi được công bố.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Luật Kinh doanh bất động sản sửa đổi: cọc tối đa 5% từ 2027',
+			'desc'      => 'Luật Kinh doanh bất động sản sửa đổi thông qua 21/11/2026: đặt cọc tối đa 5%, nhà hình thành trong tương lai trả lần đầu ≤ 30%, cấm thu tiền giữ chỗ.',
+			'points'    => array(
+				'Quốc hội thông qua sáng 21/11/2026, 471/479 đại biểu tán thành; 10 chương, 63 điều; hiệu lực 1/7/2027',
+				'Đặt cọc tối đa 5% giá bán, chỉ khi dự án đủ điều kiện kinh doanh; lần đầu không quá 30% (gồm cọc)',
+				'Cấm thu tiền giữ chỗ dưới mọi hình thức; không ủy quyền ký hợp đồng cho bên khác (trừ dự án nhiều nhà đầu tư)',
+			),
+			'faq'       => array(
+				array( 'Luật Kinh doanh bất động sản sửa đổi có hiệu lực khi nào?', 'Từ ngày 1/7/2027. Trước thời điểm đó, giao dịch vẫn áp dụng Luật Kinh doanh bất động sản năm 2023.' ),
+				array( 'Đặt cọc mua nhà tối đa bao nhiêu?', 'Theo luật mới, chủ đầu tư chỉ được nhận đặt cọc tối đa 5% giá bán và chỉ khi dự án đã đủ điều kiện đưa vào kinh doanh.' ),
+				array( 'Mua nhà hình thành trong tương lai trả lần đầu bao nhiêu?', 'Không quá 30% giá trị hợp đồng, đã bao gồm tiền đặt cọc; các lần sau theo tiến độ xây dựng.' ),
+				array( 'Chủ đầu tư có được thu tiền giữ chỗ không?', 'Không. Luật cấm thu tiền dưới mọi hình thức khi dự án chưa đủ điều kiện kinh doanh.' ),
+			),
+		),
+		'sources'        => array(
+			'https://baoxaydung.vn/quoc-hoi-thong-qua-luat-kinh-doanh-bat-dong-san-sua-doi-192261121093157195.htm',
+			'https://luatvietnam.vn/tin-van-ban-moi/sang-21-11-quoc-hoi-thong-qua-luat-kinh-doanh-bat-dong-san-sua-doi-186-116027-article.html',
+			'https://tienphong.vn/quy-dinh-moi-ve-tien-do-thanh-toan-tien-dat-coc-bat-dong-san-post1896354.tpo',
+			'https://dantri.com.vn/bat-dong-san/chua-co-so-do-chu-dau-tu-khong-duoc-thu-het-tien-mua-nha-20261121160032534.htm',
+			'https://vietnambiz.vn/quoc-hoi-thong-qua-luat-kinh-doanh-bat-dong-san-sua-doi-bo-sung-nhieu-quy-dinh-ve-giao-dich-nha-dat-2026112195245509.htm',
+		),
+	);
+
 	return $posts;
 }
