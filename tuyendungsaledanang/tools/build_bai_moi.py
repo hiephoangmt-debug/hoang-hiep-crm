@@ -76,6 +76,8 @@ def build(slug):
     src = open(os.path.join(ROOT, 'bai-src', slug + '.html'), encoding='utf-8').read()
     m = re.search(r'<!--META\s*(\{.*?\})\s*META-->', src, re.S)
     meta = json.loads(m.group(1))
+    if len(meta['title']) > 70 and meta['title'].endswith(' | Tuyển Sale Đà Nẵng'):
+        meta['title'] = meta['title'][:-len(' | Tuyển Sale Đà Nẵng')]
     body = src[m.end():].strip()
     url = f'{S}/{slug}'
     og = f'{IMG}og-{slug}.jpg'
@@ -110,7 +112,7 @@ def build(slug):
 <div class="formbox apply">
 <p style="margin:0 0 12px;font-weight:700;font-size:17px;color:#1B2D6B">Gửi hồ sơ trong 30 giây, không cần CV</p>
 <a class="ab ab1" href="{S}/ung-tuyen">📄 Gửi hồ sơ ứng tuyển ngay</a>
-<a class="ab ab3" href="https://zalo.me/0904567009" target="_blank" rel="noopener">💬 Chat Zalo với Hiệp: 0904 567 009</a>
+<a class="ab ab3" href="https://zalo.me/0904567009" target="_blank" rel="noopener">💬 Chat Zalo với Hiệp</a>
 <a class="ab ab2" href="tel:0904567009">📞 Gọi 0904 567 009</a>
 <a class="ab ab4" href="mailto:hiephoangmt@gmail.com?subject=CV%20%E1%BB%A9ng%20tuy%E1%BB%83n%20Sale%20%C4%90%C3%A0%20N%E1%BA%B5ng">✉️ Gửi file CV qua email</a>
 <p style="font-size:13px;color:#6b7896;margin:10px 0 0">Miễn phí · CV không bắt buộc · Hiệp gọi lại trong ngày · Bảo mật thông tin</p></div>
