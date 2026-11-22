@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.338**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.339**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.339
+
+- Sun Saphia Residence: khung ưu đãi "Early Bird chiết khấu 3% cho khách hàng tiên phong" (938 booking, sự kiện bán hàng dự kiến 05/12/2026) và poster Early Bird của chủ đầu tư trong Thư viện. Kèm ảnh sự kiện dùng trong bài tin Early Bird (tự đăng 22/11 11:15).
 
 ## Có gì mới – 2.20.338
 

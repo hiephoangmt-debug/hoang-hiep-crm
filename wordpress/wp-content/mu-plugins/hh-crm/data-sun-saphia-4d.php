@@ -144,3 +144,41 @@ add_filter(
 	},
 	25
 );
+
+// 22/11/2026: chủ đầu tư chính thức công bố Early Bird chiết khấu 3% và 938 booking tại sự kiện Radiance of Heritage (ảnh anh Hiệp chụp).
+// Thêm khung ưu đãi + poster Early Bird của chủ đầu tư vào Thư viện. Chỉ thay ô còn đúng bản web đã nhập.
+add_filter(
+	'hh_project_dataset',
+	static function ( $projects ) {
+		foreach ( $projects as &$p ) {
+			if ( 'sun-saphia-residence' !== ( $p['slug'] ?? '' ) ) {
+				continue;
+			}
+			$upd = array(
+				'hh_p_offer_title' => 'Early Bird chiết khấu 3% cho khách hàng tiên phong',
+				'hh_p_offer_note'  => 'Sun Property chính thức công bố Early Bird 3% tại sự kiện Radiance of Heritage ở Đà Nẵng. Thời hạn và điều kiện áp dụng theo chính sách bán hàng của chủ đầu tư – liên hệ Hoàng Hiệp để kiểm tra booking của anh chị.',
+				'hh_p_offer_stats' => "3% | Chiết khấu Early Bird\n938 | Booking chủ đầu tư công bố\n782 | Căn hộ của dự án\n05/12/2026 | Sự kiện bán hàng dự kiến",
+			);
+			foreach ( $upd as $k => $v ) {
+				$cur = (string) ( $p['meta'][ $k ] ?? '' );
+				if ( $cur === $v ) {
+					continue;
+				}
+				if ( '' !== trim( $cur ) ) {
+					$p['fix_meta'][ $k ] = array_merge( (array) ( $p['fix_meta'][ $k ] ?? array() ), array( $cur ) );
+				}
+				$p['meta'][ $k ] = $v;
+			}
+			$links = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+			if ( '' !== $links && false === strpos( $links, 'sun-saphia-early-bird-3-phan-tram-poster.jpg' ) ) {
+				$rows = explode( "\n", $links );
+				array_splice( $rows, min( 6, count( $rows ) ), 0, array( 'plugin:img/sun-saphia/sun-saphia-early-bird-3-phan-tram-poster.jpg | Sun Saphia Residence chính thức công bố Early Bird chiết khấu 3% – poster chủ đầu tư Sun Property | thư viện | Early Bird 3%' ) );
+				$p['meta']['hh_p_image_links']     = implode( "\n", $rows );
+				$p['fix_meta']['hh_p_image_links'] = array_values( array_unique( array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $links ) ) ) );
+			}
+		}
+		unset( $p );
+		return $projects;
+	},
+	26
+);

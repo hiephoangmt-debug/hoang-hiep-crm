@@ -1851,5 +1851,75 @@ HTML
 		'sources'  => $poetsources,
 	);
 
+	/* ---------------- 22/11 – Sun Saphia: Early Bird 3%, 938 booking (ảnh anh Hiệp chụp tại sự kiện) ---------------- */
+	$posts[] = array(
+		'slug'     => 'early-bird-sun-saphia-residence-chiet-khau-3',
+		'title'    => 'Early Bird Sun Saphia Residence chiết khấu 3%: chủ đầu tư công bố tại sự kiện, ghi nhận 938 booking',
+		'excerpt'  => 'Sun Property chính thức công bố Early Bird Sun Saphia Residence chiết khấu 3% cho khách hàng tiên phong và ghi nhận 938 booking tại sự kiện Radiance of Heritage ở Đà Nẵng. Ý nghĩa với người đang giữ chỗ và cách chuẩn bị trước ngày mở bán.',
+		'keyword'  => 'Early Bird Sun Saphia Residence',
+		'keywords_extra' => array( 'Sun Saphia Residence chiết khấu 3%', 'Sun Saphia Residence 938 booking', 'Radiance of Heritage', 'Sun Saphia Residence' ),
+		'project'  => 'sun-saphia-residence',
+		'schedule' => '2026-11-22 11:15',
+		'category' => 'Tin dự án',
+		'tags'     => array( 'Sun Saphia Residence', 'Chính sách bán hàng', 'Sun Group' ),
+		'image'    => 'plugin:img/sun-saphia/sun-saphia-su-kien-938-booking.jpg',
+		'image_alt' => 'Early Bird Sun Saphia Residence – màn hình sự kiện Radiance of Heritage chúc mừng 938 booking',
+		'content'  => <<<'HTML'
+<p><strong>Early Bird Sun Saphia Residence</strong> đã được Sun Property (thành viên Tập đoàn Sun Group) chính thức công bố: chiết khấu 3% dành cho "chủ nhân tiên phong". Cũng tại sự kiện Radiance of Heritage – Kiệt tác giữa biển trời ở Đà Nẵng, màn hình sân khấu chúc mừng con số 938 booking cho dự án <a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a>. Hiệp có mặt tại hội trường và ghi lại các thông tin dưới đây để khách đang giữ chỗ nắm nhanh.</p>
+<!--hh-featured-->
+<h2>Early Bird Sun Saphia Residence: chiết khấu 3% cho khách tiên phong</h2>
+<p>Slide công bố tại sự kiện ghi rõ "Đặc quyền cho chủ nhân tiên phong – Early Bird – Chiết khấu 3%". Poster chính thức của chủ đầu tư cũng dùng đúng thông điệp "Chính thức công bố Early Bird 3%". Early Bird Sun Saphia Residence là mức ưu đãi dành cho nhóm khách vào sớm, cộng vào chính sách bán hàng chung sẽ công bố khi mở bán.</p>
+<!--hh-img:img/sun-saphia/sun-saphia-su-kien-early-bird-chiet-khau-3.jpg|Slide Early Bird Sun Saphia Residence chiết khấu 3% – đặc quyền cho chủ nhân tiên phong tại sự kiện-->
+<p>Chủ đầu tư chưa công bố trên slide các điều kiện chi tiết như thời hạn áp dụng, nhóm khách được hưởng (khách đã có booking hay khách ký trong khung thời gian nhất định) và cách cộng dồn với các ưu đãi khác. Những điểm này sẽ nằm trong văn bản chính sách bán hàng chính thức; Hiệp sẽ cập nhật ngay khi nhận được bản của chủ đầu tư.</p>
+<h2>Early Bird Sun Saphia Residence 3% tương đương bao nhiêu tiền?</h2>
+<p>Bảng dưới tính thử Early Bird Sun Saphia Residence 3% trên giá dự kiến studio 30 m² tầng 15 mà chủ đầu tư đưa ra trước đây (giá có vay, chưa VAT và 2% bảo trì). Đây chỉ là phép tính minh họa, chưa phải bảng giá chính thức và chưa trừ các ưu đãi khác.</p>
+<table>
+<thead><tr><th>Căn tham khảo</th><th>Giá dự kiến</th><th>3% Early Bird (ước tính)</th></tr></thead>
+<tbody>
+<tr><td>Studio 30 m² – dãy phía sau</td><td>Khoảng 2,13 tỷ</td><td>Khoảng 64 triệu</td></tr>
+<tr><td>Studio 30 m² – cánh bên</td><td>Khoảng 2,37 tỷ</td><td>Khoảng 71 triệu</td></tr>
+<tr><td>Studio 30 m² – dãy mặt biển</td><td>Khoảng 2,85 tỷ</td><td>Khoảng 86 triệu</td></tr>
+</tbody>
+</table>
+<p>Với căn 1PN+ hoặc 2PN có tổng giá cao hơn, số tiền Early Bird Sun Saphia Residence tương ứng sẽ lớn hơn. Khi chủ đầu tư công bố bảng giá chính thức, con số thực tế có thể khác bảng trên.</p>
+<h2>938 booking cho 782 căn: con số này nói lên điều gì?</h2>
+<!--hh-img:img/sun-saphia/sun-saphia-su-kien-938-booking.jpg|Sự kiện Radiance of Heritage công bố Early Bird Sun Saphia Residence và chúc mừng 938 booking-->
+<p>Sun Saphia Residence có 782 căn trong tòa 30 tầng cao 114 m tại khu Sơn Thủy, Ngũ Hành Sơn. Con số 938 booking mà chủ đầu tư công bố đã vượt tổng số căn, tức trung bình khoảng 1,2 booking trên mỗi căn. Booking là đăng ký giữ chỗ để được tham gia chọn căn, chưa phải hợp đồng mua bán, nên không phải tất cả booking sẽ chuyển thành giao dịch.</p>
+<p>Điều Hiệp để ý nhất là sự chênh lệch giữa các loại căn: 513 studio chiếm phần lớn quỹ căn, trong khi 2PN chỉ có 133 căn và 1PN+ chỉ 108 căn. Nếu nhiều khách cùng nhắm căn 2PN góc hoặc studio dãy mặt biển, những căn đó sẽ hết trước. Khách đang có booking và muốn hưởng Early Bird Sun Saphia Residence nên chuẩn bị sẵn 2 – 3 phương án căn thay vì chỉ một mã căn duy nhất.</p>
+<h2>Khách đã giữ chỗ cần làm gì trước ngày mở bán?</h2>
+<ul>
+<li><strong>Xác nhận điều kiện Early Bird Sun Saphia Residence:</strong> hỏi rõ thời hạn và việc ưu đãi 3% có áp dụng cho booking của mình hay không.</li>
+<li><strong>Chốt ngân sách và phương án vay:</strong> tài liệu dự án nêu ngân hàng hỗ trợ gồm Vietcombank, BIDV, NCB; nên làm hồ sơ sơ bộ trước để không lỡ thời gian ký.</li>
+<li><strong>Chọn trước nhóm căn:</strong> xem mặt bằng tầng, hướng nắng và view; bài <a href="/studio-hay-1pn-sun-saphia-residence/">studio hay 1PN+ Sun Saphia Residence</a> so sánh chi tiết hai loại căn phổ biến.</li>
+<li><strong>Đọc kỹ pháp lý cọc:</strong> theo <a href="https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx" target="_blank" rel="noopener">Luật Kinh doanh bất động sản 2023</a>, chủ đầu tư chỉ được thu tiền đặt cọc không quá 5% giá bán khi nhà ở hình thành trong tương lai đã đủ điều kiện đưa vào kinh doanh.</li>
+</ul>
+<h2>Lịch mở bán và nhận định của Hoàng Hiệp</h2>
+<p>Sau đợt công bố Early Bird Sun Saphia Residence, theo lịch triển khai cập nhật gần nhất, sự kiện bán hàng chính thức của chủ đầu tư dự kiến ngày 05/12/2026 tại Đà Nẵng; bảng giá chính thức sẽ công bố vào thời điểm đó. Dự án có thời hạn 50 năm kể từ 17/09/2026 và dự kiến bàn giao tháng 11/2028. Thông tin về chủ đầu tư xem bài <a href="/chu-dau-tu-sun-saphia-residence-la-ai/">chủ đầu tư Sun Saphia Residence là ai</a>.</p>
+<p>Ở góc nhìn của Hiệp, Early Bird Sun Saphia Residence 3% có ý nghĩa nhất với người đã chắc chắn mua: số tiền tiết kiệm được với một studio đã tương đương vài tháng tiền thuê. Còn với người đang cân nhắc, đừng để chữ "tiên phong" làm vội: hãy đặt bài toán dòng tiền và khả năng vay lên trước, rồi mới quyết định giữ hay nhả booking.</p>
+<p>Cần cập nhật điều kiện Early Bird Sun Saphia Residence, mặt bằng tầng và tư vấn chọn căn Sun Saphia Residence trước ngày mở bán, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: thông tin công bố tại sự kiện Radiance of Heritage của Sun Property (ảnh Hoàng Hiệp chụp tại sự kiện) và poster Early Bird của chủ đầu tư; tài liệu giới thiệu dự án 10/2026 (quy mô, giá dự kiến, ngân hàng); Luật Kinh doanh bất động sản 2023 (Thư viện Pháp luật). Giá và ưu đãi là tham khảo, áp dụng theo chính sách chính thức của chủ đầu tư.</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Early Bird Sun Saphia Residence: chiết khấu 3%, 938 booking',
+			'desc'      => 'Early Bird Sun Saphia Residence chiết khấu 3% cho khách tiên phong, chủ đầu tư công bố 938 booking cho 782 căn. Số tiền ưu đãi ước tính và việc cần làm.',
+			'points'    => array(
+				'Early Bird Sun Saphia Residence: chiết khấu 3% cho chủ nhân tiên phong, Sun Property chính thức công bố',
+				'Sự kiện Radiance of Heritage chúc mừng 938 booking – vượt 782 căn của dự án',
+				'Với studio giá dự kiến 2,13 – 2,85 tỷ, 3% tương đương khoảng 64 – 86 triệu (ước tính)',
+				'Sự kiện bán hàng chính thức dự kiến 05/12/2026; điều kiện Early Bird theo chính sách chủ đầu tư',
+			),
+			'faq'       => array(
+				array( 'Early Bird Sun Saphia Residence là gì?', 'Là ưu đãi chiết khấu 3% dành cho khách hàng tiên phong, được Sun Property chính thức công bố tại sự kiện Radiance of Heritage ở Đà Nẵng.' ),
+				array( 'Ai được hưởng chiết khấu 3%?', 'Điều kiện cụ thể (thời hạn, nhóm khách, cách cộng dồn) theo văn bản chính sách bán hàng của chủ đầu tư. Liên hệ Hoàng Hiệp để kiểm tra booking của anh chị có được áp dụng không.' ),
+				array( 'Sun Saphia Residence có bao nhiêu booking?', 'Tại sự kiện, chủ đầu tư công bố 938 booking, trong khi dự án có 782 căn hộ.' ),
+				array( 'Khi nào Sun Saphia Residence mở bán chính thức?', 'Theo lịch cập nhật gần nhất, sự kiện bán hàng của chủ đầu tư dự kiến ngày 05/12/2026 tại Đà Nẵng, bảng giá chính thức công bố khi mở bán.' ),
+			),
+		),
+		'sources'  => array(
+			'https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Kinh-doanh-bat-dong-san-29-2023-QH15-530116.aspx',
+		),
+	);
+
 	return $posts;
 }
