@@ -73,6 +73,8 @@ ld = [
 ldj = '\n'.join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in ld)
 
 CSS = '''
+.card p,.card li,.card dd,.tldr,.hl,.ex,.note,.goal,.mile li,.it p,.hero p,.cta li,.faq details p,.nw p,.fs{text-align:justify;text-justify:inter-word}
+.card td p,.card th,.si span,.more,.formbox p{text-align:left}
 #thi{scroll-margin-top:70px}
 .qz{background:#fff;border-radius:16px;padding:22px;margin:24px 0;box-shadow:0 2px 10px rgba(11,42,91,.06)}
 .qz h2{margin:0 0 6px;color:#1B2D6B}

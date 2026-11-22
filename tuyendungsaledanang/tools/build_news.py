@@ -59,6 +59,8 @@ ld = [{'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': titl
 ldj = ''.join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in ld)
 
 CSS = '''
+.card p,.card li,.card dd,.tldr,.hl,.ex,.note,.goal,.mile li,.it p,.hero p,.cta li,.faq details p,.nw p,.fs{text-align:justify;text-justify:inter-word}
+.card td p,.card th,.si span,.more,.formbox p{text-align:left}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
 .chips button{border:1px solid #cfd6e4;background:#fff;border-radius:99px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer;color:#1B2D6B}
 .chips button[aria-pressed=true]{background:#1B2D6B;color:#fff;border-color:#1B2D6B}

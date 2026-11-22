@@ -79,6 +79,8 @@ PROJECTS = ref[ref.index('<section class="card" id="du-an-dang-ban">'):ref.index
 TAIL = ref[ref.index('<footer'):]
 
 NEW_CSS = '''
+.card p,.card li,.card dd,.tldr,.hl,.ex,.note,.goal,.mile li,.it p,.hero p,.cta li,.faq details p,.nw p,.fs{text-align:justify;text-justify:inter-word}
+.card td p,.card th,.si span,.more,.formbox p{text-align:left}
 .tldr{background:#fff;border:2px solid #f47c20;border-radius:14px;padding:16px 18px;margin:20px 0;font-size:16.5px}
 .tldr b:first-child{color:#e06a10}
 .byline{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;color:#c9d3ea;font-size:14px;margin:18px 0 0}
