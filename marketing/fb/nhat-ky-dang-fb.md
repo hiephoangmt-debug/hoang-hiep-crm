@@ -131,7 +131,7 @@
 | 19/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | Hỏi đáp Casamia Balanca – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
 | 19/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: Khu đô thị quốc tế Đa Phước (+2 tin ở bình luận) | /khu-do-thi-quoc-te-da-phuoc-3-giai-doan/ /nha-o-xa-hoi-cau-tien-son-731-can/ /nha-o-xa-hoi-viet-huong-lakeside-hoa-xuan/ |
 | 19/11/2026 | Hoàng Hiệp | 17:00 | TỔNG HỢP: Căn hộ Đà Nẵng sắp bàn giao 2026 – 2027 (+4 tin ở bình luận) | /can-ho-da-nang-sap-ban-giao-2026-2027/ /phap-ly-the-legend-da-nang-so-huu-lau-dai/ /nobu-hay-the-legend-can-ho-cao-cap-da-nang/ /can-ho-masteri-rivera-danang-phan-tich/ /vay-mua-capital-square-da-nang-tra-gop-hang-thang/ |
-| CHỜ | Sun | 21/11 | (bài web 19/11 18:30) Sun Saphia Residence đi Bà Nà Hills | sun-saphia-residence-di-ba-na-hills (chờ) |
+| BỎ QUA (quá 3 ngày) | Sun | 21/11 | (bài web 19/11 18:30) Sun Saphia Residence đi Bà Nà Hills | sun-saphia-residence-di-ba-na-hills (chờ) |
 | 20/11/2026 | Sun | 09:00 | (bài web 19/11, hết CHỜ) Studio hay 1PN+ Sun Saphia Residence (1 ảnh nền xanh, nội thất studio) | /studio-hay-1pn-sun-saphia-residence/ |
 | 20/11/2026 | TikTok (@hiephoangmt, brand Sun) | 09:15 | Studio hay 1PN+ Sun Saphia – BỘ 3 ẢNH | /studio-hay-1pn-sun-saphia-residence/ |
 | 20/11/2026 | Casamia (blogId 8074284) | 09:30 | Tiện ích sống Casamia Balanca – 5 công viên (album 4 ảnh: pickleball, thiền bãi cỏ, tập ven hồ, dạo bộ) | /biet-thu-compound-hoi-an-casamia-balanca/ |
@@ -156,4 +156,13 @@
 | 21/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:15 | Căn hộ cho người nghỉ hưu – BỘ 3 ẢNH | /can-ho-cho-nguoi-nghi-huu-sun-saphia/ |
 | 21/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | Sống chậm ven sông Cổ Cò – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
 | 21/11/2026 | Hoàng Hiệp | 17:00 | TỔNG HỢP: Nội thất The Poet Residence (+0 tin ở bình luận; thẻ -fb sẵn có) | /noi-that-the-poet-residence/ |
-| CHỜ | Sun | 22/11 | (bài web 21/11 14:00, chưa lên web lúc hẹn) Căn 1PN+ Sun Saphia 49–51 m² | can-1pn-plus-sun-saphia-residence-49-51m2 (chờ) |
+| 22/11/2026 | Sun | 09:00 | (bài web 21/11, hết CHỜ) Căn 1PN+ Sun Saphia – 108 căn (1 ảnh nền xanh) | /can-1pn-plus-sun-saphia-residence-49-51m2/ |
+| 22/11/2026 | TikTok (@hiephoangmt, brand Sun) | 09:15 | Căn 1PN+ Sun Saphia – BỘ 3 ẢNH | /can-1pn-plus-sun-saphia-residence-49-51m2/ |
+| 22/11/2026 | Casamia (blogId 8074284) | 09:30 | Vị trí – kết nối Casamia Balanca – thẻ nền xanh + 3 ảnh (xe điện, đường nội khu, đạp xe) | /du-an/casamia-balanca-hoi-an/ |
+| 22/11/2026 | TikTok (@hiephoangmt, brand Sun) | 09:45 | Vị trí Casamia Balanca – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
+| 22/11/2026 | Sun | 19:00 | (bài web mới 21/11) Mua chung Sun Saphia Residence (1 ảnh nền xanh, flycam biển) | /mua-chung-sun-saphia-residence/ |
+| 22/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:15 | Mua chung Sun Saphia – BỘ 3 ẢNH | /mua-chung-sun-saphia-residence/ |
+| 22/11/2026 | Casamia (blogId 8074284) | 19:30 | Loại biệt thự Casamia Balanca – thẻ nền xanh + 3 ảnh (biệt thự ven kênh, gia đình trước nhà, đón khách) | /du-an/casamia-balanca-hoi-an/ |
+| 22/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | Loại biệt thự Casamia Balanca – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
+| CHỜ | Sun | 23/11 | (bài web 21/11 09:00) Mặt bằng FourS Tower | mat-bang-can-ho-fours-tower (chờ) |
+| CHỜ | Sun | 23/11 | (bài web 21/11 18:30) Bãi biển gần Sun Saphia Residence | bai-bien-gan-sun-saphia-residence (chờ) |
