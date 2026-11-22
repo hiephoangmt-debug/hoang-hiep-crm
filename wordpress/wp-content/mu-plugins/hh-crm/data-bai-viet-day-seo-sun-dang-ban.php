@@ -12,7 +12,7 @@ function hh_posts_day_seo_sun_dang_ban( $posts ) {
 		'keyword'        => 'giá S-Light Tower bao nhiêu',
 		'keywords_extra' => array( 'giá S-Light Tower', 'giá căn hộ S-Light Tower Đà Nẵng', 'S-Light Tower giá bao nhiêu một m2' ),
 		'project'        => 's-light-tower',
-		'schedule'       => '2026-11-22 20:30',
+		'schedule'       => '2026-11-22 21:00',
 		'category'       => 'Tin dự án',
 		'tags'           => array( 'S-Light Tower', 'Sun NeO City', 'Giá căn hộ Đà Nẵng' ),
 		'image'          => 'plugin:img/hoa-xuan/hoa-xuan-flycam-8-2025-song-cam-le-nhin-ve-trung-tam.jpg',

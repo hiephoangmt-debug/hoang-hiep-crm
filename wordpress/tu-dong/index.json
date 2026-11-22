@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-22T00:35:00+00:00",
+    "updated": "2026-11-22T00:37:40+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen",
@@ -1144,6 +1144,12 @@
             "file": "bai/sun-saphia-residence-di-san-bay.txt"
         },
         {
+            "slug": "gia-s-light-tower-bao-nhieu",
+            "title": "Giá S-Light Tower bao nhiêu? Đơn giá 58 – 69 triệu/m², studio từ khoảng 2 tỷ (11/2026)",
+            "publish": "2026-11-22 21:00",
+            "file": "bai/gia-s-light-tower-bao-nhieu.txt"
+        },
+        {
             "slug": "tien-ich-the-poet-residence",
             "title": "Tiện ích The Poet Residence: hồ bơi trong nhà, gym, tầng mái ngắm pháo hoa",
             "publish": "2026-11-23 08:15",
@@ -1185,6 +1191,12 @@
             "file": "bai/phap-ly-capital-square-da-nang-so-hong.txt"
         },
         {
+            "slug": "phap-ly-spana-tower-du-dieu-kien-ban",
+            "title": "Pháp lý Spana Tower: 7 văn bản từ chủ trương đầu tư đến bảo lãnh VietinBank (2026)",
+            "publish": "2026-11-23 20:30",
+            "file": "bai/phap-ly-spana-tower-du-dieu-kien-ban.txt"
+        },
+        {
             "slug": "mat-bang-the-poet-residence",
             "title": "Mặt bằng The Poet Residence: layout 1PN+1 đến 3PN góc, chọn căn nào?",
             "publish": "2026-11-24 08:15",
@@ -1219,6 +1231,12 @@
             "title": "Pháp lý The Poet Residence: 263 căn đủ điều kiện bán, chủ đầu tư Phúc Thanh An là ai?",
             "publish": "2026-11-24 16:15",
             "file": "bai/phap-ly-the-poet-residence-chu-dau-tu.txt"
+        },
+        {
+            "slug": "tien-do-thanh-toan-symphony-5",
+            "title": "Tiến độ thanh toán Symphony 5: cọc 100 triệu, 15 đợt, trả 70% nhận căn 30/06/2028",
+            "publish": "2026-11-24 20:30",
+            "file": "bai/tien-do-thanh-toan-symphony-5.txt"
         },
         {
             "slug": "gia-the-poet-residence-thanh-toan",
@@ -1257,6 +1275,12 @@
             "file": "bai/toa-c3-capital-square-phan-tang-chon-can.txt"
         },
         {
+            "slug": "can-ho-san-vuon-fours-tower",
+            "title": "Căn hộ sân vườn FourS Tower: sân riêng đến 69 m² ở tầng 2 – 3 Tòa F2 (2026)",
+            "publish": "2026-11-25 20:30",
+            "file": "bai/can-ho-san-vuon-fours-tower.txt"
+        },
+        {
             "slug": "mua-biet-thu-premier-village-my-khe",
             "title": "Mua biệt thự Premier Village Đà Nẵng 2026: 118 căn trên biển Mỹ Khê, giá chuyển nhượng khoảng 39 – 47 tỷ",
             "publish": "2026-11-26 09:30",
@@ -1273,6 +1297,12 @@
             "title": "Vị trí The Legend Đà Nẵng: 4 mặt tiền chân cầu Rồng, view sông Hàn hay biển Mỹ Khê?",
             "publish": "2026-11-26 15:30",
             "file": "bai/vi-tri-the-legend-da-nang-view-cau-rong.txt"
+        },
+        {
+            "slug": "mat-bang-s-light-tower-loai-can-dien-tich",
+            "title": "Mặt bằng S-Light Tower: 2 tháp 22 tầng, gần 800 căn từ 33,3 đến 95,1 m²",
+            "publish": "2026-11-26 20:30",
+            "file": "bai/mat-bang-s-light-tower-loai-can-dien-tich.txt"
         },
         {
             "slug": "co-nen-mua-euro-village-2-hoa-xuan",
@@ -1293,6 +1323,12 @@
             "file": "bai/tien-ich-hudson-place-s4-ban-giao.txt"
         },
         {
+            "slug": "co-nen-mua-spana-tower",
+            "title": "Có nên mua Spana Tower? 5 điểm mạnh, 4 điều cần cân nhắc (11/2026)",
+            "publish": "2026-11-27 20:30",
+            "file": "bai/co-nen-mua-spana-tower.txt"
+        },
+        {
             "slug": "phap-ly-casamia-calm-co-nen-mua",
             "title": "Pháp lý Casamia Calm Hội An: sổ hồng lâu dài, cần kiểm tra gì trước khi mua chuyển nhượng?",
             "publish": "2026-11-28 09:30",
@@ -1305,10 +1341,22 @@
             "file": "bai/co-nen-mua-the-poet-residence.txt"
         },
         {
+            "slug": "tien-ich-symphony-5-sun-symphony-residence",
+            "title": "Tiện ích Symphony 5: bể bơi 450 m², yoga tầng 27 và 3 công viên gần 19.000 m²",
+            "publish": "2026-11-28 20:30",
+            "file": "bai/tien-ich-symphony-5-sun-symphony-residence.txt"
+        },
+        {
             "slug": "vi-tri-capital-square-da-nang-ven-song-han",
             "title": "Vị trí Capital Square Đà Nẵng: bờ Đông sông Hàn, giữa Trần Hưng Đạo – Ngô Quyền",
             "publish": "2026-11-29 15:30",
             "file": "bai/vi-tri-capital-square-da-nang-ven-song-han.txt"
+        },
+        {
+            "slug": "co-nen-mua-s-light-tower",
+            "title": "Có nên mua S-Light Tower? Ưu – nhược điểm căn hộ ngã ba sông Hòa Xuân (11/2026)",
+            "publish": "2026-11-29 20:30",
+            "file": "bai/co-nen-mua-s-light-tower.txt"
         }
     ]
 }
