@@ -143,11 +143,11 @@ def build(slug):
     if meta.get('quiz_topics'):
         btns = ''.join(f'<a class="ab ab1" href="{S}/thi-thu-chung-chi-moi-gioi#cd-{tslug(t)}">📝 Luyện {min(20, QCOUNT[t])} câu: {esc(t)}</a>' for t in meta['quiz_topics'] if QCOUNT[t])
         quiz = (f'<section class="card" id="luyen-tap"><h2>Luyện ngay <span>câu hỏi chuyên đề</span></h2>'
-                f'<p class="lead">Đề tự đảo mỗi lần làm, xem đáp án và giải thích ngay sau mỗi câu.</p>{btns}'
-                f'<a class="ab ab4" href="{S}/thi-thu-chung-chi-moi-gioi">🎯 Làm đề thi thử 30 câu (chia đều 2 phần)</a></section>\n')
+                f'<p class="lead">Đề tự đảo mỗi lần làm, xem đáp án và giải thích ngay sau mỗi câu.</p><div class="apply">{btns}'
+                f'<a class="ab ab4" href="{S}/thi-thu-chung-chi-moi-gioi">🎯 Làm đề thi thử 30 câu (chia đều 2 phần)</a></div></section>\n')
     elif SR is SERIES['on-thi']:
         quiz = (f'<section class="card" id="luyen-tap"><h2>Bắt đầu <span>luyện đề</span></h2>'
-                f'<a class="ab ab1" href="{S}/thi-thu-chung-chi-moi-gioi">📝 Làm đề thi thử 30 câu</a></section>\n')
+                f'<div class="apply"><a class="ab ab1" href="{S}/thi-thu-chung-chi-moi-gioi">📝 Làm đề thi thử 30 câu</a></div></section>\n')
     faq = meta['faq']
     faq_html = '<section class="card faq" id="hoi-dap">\n<h2>Câu hỏi <span>thường gặp</span></h2>\n' + ''.join(
         f'<details><summary>{esc(q)}</summary><p>{a}</p></details>\n' for q, a in faq) + '</section>\n'
