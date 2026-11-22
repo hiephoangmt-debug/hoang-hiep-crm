@@ -48,13 +48,13 @@ EVBAR = ('<div id="evbar" class="evb" role="region" aria-label="Thư mời sự 
          '.evb i{font-style:normal}.evb .m{display:none}'
          '@media(max-width:700px){.evb{font-size:13px}.evb .q,.evb .l{display:none}.evb .m{display:inline}.evb .t{flex:1 1 100%}.evb .w{padding:7px 36px 8px 10px;gap:5px 8px}.evb .k{font-size:12px;padding:2px 8px}.evb button.go{padding:6px 14px;font-size:13px}}'
          '@media(prefers-reduced-motion:reduce){.evb button.go{animation:none}}</style>'
-         '<div class="w"><span class="t">🎁 <b>THƯ MỜI · 9:00 CN 22/11</b><i class="l"> · “Radiance of Heritage” tại</i><i class="m"> ·</i> <b>Khách sạn Daewoo Hà Nội</b><i class="l"> (360 Kim Mã, Ba Đình)</i></span>'
-         '<span class="q">· Giới thiệu dự án &amp; tư vấn chọn căn</span><span class="k" id="evk"></span>'
-         '<button type="button" class="go" data-evreg data-interest="Dải thư mời – đăng ký thư mời sự kiện 22/11 Khách sạn Daewoo Hà Nội" data-ev-t="Radiance of Heritage – Kiệt tác giữa biển trời" data-ev-d="9:00 CN 22/11 · Hà Nội" data-ev-n="Hanoi Daewoo Hotel · 360 Kim Mã, Ba Đình">Giữ thư mời</button></div>'
-         '<button type="button" class="x" aria-label="Ẩn thông báo" onclick="this.parentNode.remove();try{sessionStorage.setItem(\'evx22\',1)}catch(e){}">×</button>'
-         '<script>(function(){var b=document.getElementById("evbar"),end=Date.parse("2026-11-22T11:30:00+07:00"),n=Date.now();'
-         'try{if(sessionStorage.getItem("evx22"))n=end}catch(e){}if(n>=end){b.remove();return}'
-         'var d=Math.ceil((Date.parse("2026-11-22T00:00:00+07:00")-n)/864e5),k=document.getElementById("evk");'
+         '<div class="w"><span class="t">🔥 <b>MỞ BÁN 05/12</b><i class="l"> · sự kiện bán hàng của chủ đầu tư tại</i><i class="m"> ·</i> <b>Đà Nẵng</b><i class="l"> · Early Bird chiết khấu 3%</i></span>'
+         '<span class="q">· Đã có 938 booking tại sự kiện Hà Nội</span><span class="k" id="evk"></span>'
+         '<button type="button" class="go" data-evreg data-interest="Dải thông báo – giữ suất mở bán 05/12 + Early Bird 3%" data-ev-t="Sự kiện bán hàng của Chủ đầu tư" data-ev-d="05/12 · Đà Nẵng · MỞ BÁN" data-ev-n="Ngày mở bán chính thức">Giữ suất ưu tiên</button></div>'
+         '<button type="button" class="x" aria-label="Ẩn thông báo" onclick="this.parentNode.remove();try{sessionStorage.setItem(\'evx0512\',1)}catch(e){}">×</button>'
+         '<script>(function(){var b=document.getElementById("evbar"),end=Date.parse("2026-12-05T12:00:00+07:00"),n=Date.now();'
+         'try{if(sessionStorage.getItem("evx0512"))n=end}catch(e){}if(n>=end){b.remove();return}'
+         'var d=Math.ceil((Date.parse("2026-12-05T00:00:00+07:00")-n)/864e5),k=document.getElementById("evk");'
          'k.textContent=d>1?"Còn "+d+" ngày":d===1?"Ngày mai":"Hôm nay"})();</script></div>')
 
 
