@@ -1573,5 +1573,77 @@ HTML
 		),
 	);
 
+	/* ---------------- 23/11 – Kế hoạch hạ tầng khu kinh tế, KCN gắn Khu thương mại tự do 2026 – 2045 ---------------- */
+	$posts[] = array(
+		'slug'           => 'ha-tang-khu-thuong-mai-tu-do-da-nang-2045',
+		'title'          => 'Hạ tầng Khu thương mại tự do Đà Nẵng: kế hoạch 2026 – 2045 nâng sân bay Chu Lai lên 4F, làm tổng thể cảng Liên Chiểu',
+		'excerpt'        => 'Đà Nẵng ban hành kế hoạch phát triển hạ tầng khu kinh tế, khu công nghiệp, khu công nghệ cao gắn với Khu thương mại tự do giai đoạn 2026 – 2045: sân bay Chu Lai 4F khoảng 10 triệu khách/năm, cảng container Liên Chiểu, cảng cạn ICD. Tác động tới bất động sản Liên Chiểu, Hòa Vang.',
+		'keyword'        => 'hạ tầng Khu thương mại tự do Đà Nẵng',
+		'keywords_extra' => array( 'sân bay Chu Lai 4F', 'cảng Liên Chiểu', 'khu công nghiệp Đà Nẵng 2045', 'bất động sản Liên Chiểu' ),
+		'project'        => 'the-ori-garden',
+		'schedule'       => '2026-11-23 06:45',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Khu thương mại tự do', 'Cảng Liên Chiểu', 'Quy hoạch Đà Nẵng' ),
+		'image'          => 'plugin:img/da-nang/song-han-cau-quay-trung-tam-ve-dem.jpg',
+		'image_alt'      => 'Hạ tầng Khu thương mại tự do Đà Nẵng – kế hoạch 2026 – 2045 (ảnh tư liệu sông Hàn, Đà Nẵng)',
+		'content'        => <<<'HTML'
+<p><strong>Hạ tầng Khu thương mại tự do Đà Nẵng</strong> vừa có lộ trình dài hạn: UBND thành phố đã ban hành kế hoạch phát triển hạ tầng các khu kinh tế, khu công nghiệp, cụm công nghiệp, khu công nghệ cao và khu công nghệ số gắn với Khu thương mại tự do giai đoạn 2026 – 2045, tầm nhìn đến 2050. Theo <a href="https://baodautu.vn/da-nang-phat-trien-ha-tang-chien-luoc-ket-noi-khu-cong-nghiep-khu-thuong-mai-tu-do-d697644.html" target="_blank" rel="noopener">Báo Đầu tư</a>, kế hoạch do Phó Chủ tịch UBND thành phố Phan Thái Bình ký ban hành.</p>
+<!--hh-featured-->
+<h2>Hạ tầng Khu thương mại tự do Đà Nẵng: 3 trục đầu tư chính</h2>
+<p>Bài viết dưới đây tóm tắt theo nội dung báo chí đã đưa tin; Hiệp chưa đọc được toàn văn kế hoạch nên chỉ nêu những điểm đã được công bố.</p>
+<table>
+<thead><tr><th>Hạng mục</th><th>Định hướng theo kế hoạch</th></tr></thead>
+<tbody>
+<tr><td>Sân bay Chu Lai</td><td>Đầu tư thành sân bay quốc tế cấp 4F, công suất khoảng 10 triệu hành khách/năm và 1,5 triệu tấn hàng hóa/năm, kèm trung tâm logistics hàng không và bảo dưỡng tàu bay</td></tr>
+<tr><td>Cảng biển, logistics</td><td>Đầu tư xây dựng tổng thể bến cảng container Liên Chiểu; phát triển các cảng cạn (ICD) gắn với khu công nghiệp và Khu thương mại tự do</td></tr>
+<tr><td>Khu công nghệ cao</td><td>Mở rộng Khu công nghệ cao Đà Nẵng thành đô thị khoa học – công nghệ hoàn chỉnh</td></tr>
+</tbody>
+</table>
+<p>Ba hạng mục của kế hoạch hạ tầng Khu thương mại tự do Đà Nẵng gắn với nhau thành một chuỗi: hàng hóa sản xuất trong khu công nghiệp, khu công nghệ cao đi ra cảng Liên Chiểu bằng đường biển hoặc ra sân bay Chu Lai bằng đường hàng không, còn Khu thương mại tự do là nơi hưởng cơ chế ưu đãi về thuế, hải quan để thu hút nhà đầu tư.</p>
+<h2>Hạ tầng Khu thương mại tự do Đà Nẵng đã triển khai tới đâu?</h2>
+<p>Khu thương mại tự do Đà Nẵng được thành lập năm 2025, gồm nhiều vị trí phân tán ở Liên Chiểu, Hòa Vang và khu vực cảng. Tháng 11/2026, thành phố đã chọn nhà đầu tư hạ tầng cho vị trí số 7 tại Hòa Vang – chi tiết xem bài <a href="/vsip-ha-tang-vi-tri-so-7-khu-thuong-mai-tu-do/">VSIP làm hạ tầng vị trí số 7 Khu thương mại tự do</a>. Kế hoạch hạ tầng Khu thương mại tự do Đà Nẵng 2026 – 2045 vừa ban hành là bước tiếp theo: đưa hạ tầng giao thông, logistics bám theo các vị trí này.</p>
+<!--hh-img:img/tin-tuc/vsip-vi-tri-7-khu-thuong-mai-tu-do-11-2026.jpg|Khu vực Hòa Vang nơi triển khai hạ tầng Khu thương mại tự do Đà Nẵng vị trí số 7-->
+<p>Ở phía Nam, mắt xích hàng không của hạ tầng Khu thương mại tự do Đà Nẵng là sân bay Chu Lai, nằm trong vùng Quảng Nam cũ đã hợp nhất về Đà Nẵng. Cùng khu vực này, thành phố đã ấn định thời hạn khởi công ba khu đô thị lớn – xem bài <a href="/khoi-cong-3-khu-do-thi-chu-lai-40400-ty/">khởi công 3 khu đô thị Chu Lai</a>.</p>
+<h2>Tác động tới bất động sản – nhận định của Hoàng Hiệp</h2>
+<p>Kế hoạch hạ tầng Khu thương mại tự do Đà Nẵng có tầm nhìn tới 2045 – 2050, nên tác động lên giá nhà đất sẽ đến dần theo từng công trình khởi công chứ không đến ngay. Hiệp chia làm ba nhóm để khách dễ hình dung:</p>
+<ul>
+<li><strong>Liên Chiểu – Hòa Khánh:</strong> hưởng lợi trực tiếp nhất từ hạ tầng Khu thương mại tự do Đà Nẵng và cảng Liên Chiểu và các vị trí Khu thương mại tự do phía Tây Bắc. Nhu cầu nhà ở cho chuyên gia, kỹ sư và công nhân sẽ tăng khi cảng và khu công nghiệp vận hành, đặc biệt là căn hộ cho thuê giá vừa phải.</li>
+<li><strong>Hòa Vang:</strong> quỹ đất lớn, gắn vị trí số 7 Khu thương mại tự do; phù hợp người mua dài hạn, cần kiểm tra kỹ quy hoạch từng thửa vì nhiều khu vực còn là đất nông nghiệp.</li>
+<li><strong>Chu Lai – Núi Thành:</strong> câu chuyện dài hạn nhất, phụ thuộc vào tiến độ nâng cấp sân bay; Hiệp khuyên chỉ nên quan tâm khi có quyết định đầu tư và nguồn vốn cụ thể cho sân bay.</li>
+</ul>
+<p>Khi khách hỏi Hiệp nên chọn đâu để đón sóng hạ tầng Khu thương mại tự do Đà Nẵng, Hiệp thường gợi ý ưu tiên dự án đã có pháp lý rõ và đã xây dựng ở khu Tây Bắc, thay vì đất nền chưa có hạ tầng chỉ vì tên một kế hoạch dài hạn.</p>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/the-ori-garden/">The Ori Garden</a> – căn hộ tại Liên Chiểu, vùng hưởng lợi từ hạ tầng Khu thương mại tự do Đà Nẵng, gần trục đi cảng Liên Chiểu và các khu công nghiệp phía Tây Bắc, phù hợp nhu cầu thuê của người làm việc tại cảng và Khu thương mại tự do.</li>
+<li><a href="/du-an/dragon-smart-city/">Dragon Smart City</a> – khu đô thị ở Liên Chiểu, hưởng lợi khi hạ tầng logistics và việc làm quanh cảng tăng.</li>
+<li><a href="/du-an/lakeside-palace/">Lakeside Palace</a> – khu dân cư tại Liên Chiểu, cùng vùng ảnh hưởng của cảng và khu công nghiệp.</li>
+<li><a href="/du-an/ecohome-hoa-hiep-da-nang/">Nhà ở xã hội Ecohome Hòa Hiệp</a> – nguồn nhà ở cho người lao động khu Tây Bắc, gần cảng Liên Chiểu.</li>
+</ul>
+<p>Cần thông tin giá và pháp lý các dự án khu Liên Chiểu, Hòa Vang hoặc tư vấn chọn bất động sản đón hạ tầng Khu thương mại tự do Đà Nẵng, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: Báo Đầu tư (kế hoạch phát triển hạ tầng các khu kinh tế, khu công nghiệp, khu công nghệ cao gắn với Khu thương mại tự do giai đoạn 2026 – 2045, tầm nhìn 2050); Cổng thông tin điện tử TP Đà Nẵng (Quy hoạch chung đến 2050: ưu tiên cảng Liên Chiểu, nâng cấp sân bay Chu Lai). Nội dung tóm tắt theo báo chí, chưa phải toàn văn kế hoạch.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Hạ tầng Khu thương mại tự do Đà Nẵng: kế hoạch 2026 – 2045',
+			'desc'      => 'Hạ tầng Khu thương mại tự do Đà Nẵng 2026 – 2045: sân bay Chu Lai 4F khoảng 10 triệu khách/năm, cảng container Liên Chiểu, ICD. Tác động tới BĐS Liên Chiểu.',
+			'points'    => array(
+				'Hạ tầng Khu thương mại tự do Đà Nẵng có kế hoạch giai đoạn 2026 – 2045, tầm nhìn 2050',
+				'Sân bay Chu Lai lên cấp 4F: khoảng 10 triệu hành khách và 1,5 triệu tấn hàng hóa/năm',
+				'Đầu tư tổng thể bến cảng container Liên Chiểu và các cảng cạn ICD gắn khu công nghiệp',
+				'Khu công nghệ cao mở rộng thành đô thị khoa học – công nghệ',
+			),
+			'faq'       => array(
+				array( 'Kế hoạch hạ tầng Khu thương mại tự do Đà Nẵng áp dụng giai đoạn nào?', 'Giai đoạn 2026 – 2045, tầm nhìn đến 2050, gồm hạ tầng các khu kinh tế, khu công nghiệp, cụm công nghiệp, khu công nghệ cao và khu công nghệ số gắn với Khu thương mại tự do.' ),
+				array( 'Sân bay Chu Lai được nâng cấp thế nào?', 'Theo kế hoạch, sân bay Chu Lai được đầu tư thành sân bay quốc tế cấp 4F, công suất khoảng 10 triệu hành khách/năm và 1,5 triệu tấn hàng hóa/năm.' ),
+				array( 'Cảng Liên Chiểu có trong kế hoạch không?', 'Có. Thành phố đầu tư xây dựng tổng thể bến cảng container Liên Chiểu và phát triển các cảng cạn ICD gắn với khu công nghiệp, Khu thương mại tự do.' ),
+				array( 'Bất động sản khu nào hưởng lợi?', 'Liên Chiểu – Hòa Khánh gần cảng và các vị trí Khu thương mại tự do phía Tây Bắc hưởng lợi rõ nhất; Hòa Vang và Chu Lai là câu chuyện dài hạn hơn.' ),
+			),
+		),
+		'sources'        => array(
+			'https://baodautu.vn/da-nang-phat-trien-ha-tang-chien-luoc-ket-noi-khu-cong-nghiep-khu-thuong-mai-tu-do-d697644.html',
+			'https://danang.gov.vn/en/w/phe-duyet-quy-hoach-chung-thanh-pho-da-nang-den-nam-2050-tam-nhin-den-nam-2075',
+		),
+	);
+
 	return $posts;
 }
