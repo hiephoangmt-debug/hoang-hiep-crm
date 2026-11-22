@@ -87,11 +87,18 @@ add_filter(
 	static function ( $projects ) {
 		$upd = array(
 			'hh_p_handover' => 'Dự kiến bàn giao căn hộ 15/12/2027 (theo tiến độ tổng thể của dự án cập nhật 31/10/2026) – hỏi Hoàng Hiệp tiến độ mới nhất',
-			'hh_p_progress' => "17/12/2025 | Giao đất cho chủ đầu tư\n18/12/2025 | Cấp giấy phép xây dựng số 11111/SXD-GPXD\n19/12/2025 | Khởi công\n20/01 – 27/4/2026 | Ép cọc đại trà\n16/3/2026 | Sở Xây dựng công khai thông tin tiếp nhận hồ sơ (đợt 1: 849 căn)\n16/4 – 16/5/2026 | Nhận hồ sơ đăng ký mua\n10/4 – 30/10/2026 | Kết cấu phần hầm đến cốt 0.000\n15/10/2026 | Bốc thăm quyền mua tại UBND phường Hòa Xuân\n30/11/2026 – 15/5/2027 | Kết cấu phần thân (kế hoạch)\n12/2026 – 10/2027 | Hoàn thiện kiến trúc, hệ thống điện nước, điều hòa, PCCC (kế hoạch)\n6 – 11/2027 | Mặt dựng, hệ cửa; hạ tầng, cảnh quan (kế hoạch)\n10/10 – 10/12/2027 | Nghiệm thu căn hộ, nghiệm thu hoàn thành dự án (kế hoạch)\n15/12/2027 | Dự kiến bàn giao căn hộ đưa vào sử dụng",
+			'hh_p_progress' => "17/12/2025 | Giao đất cho chủ đầu tư\n18/12/2025 | Cấp giấy phép xây dựng số 11111/SXD-GPXD\n19/12/2025 | Khởi công\n20/01 – 27/4/2026 | Ép cọc đại trà\n16/3/2026 | Sở Xây dựng công khai thông tin tiếp nhận hồ sơ (đợt 1: 849 căn)\n16/4 – 16/5/2026 | Nhận hồ sơ đăng ký mua\n10/4 – 30/10/2026 | Kết cấu phần hầm đến cốt 0.000\n15/10/2026 | Bốc thăm quyền mua tại UBND phường Hòa Xuân\n11/2026 | Công trường có 5 cẩu tháp, một số khối đã thi công lên sàn tầng 2\n30/11/2026 – 15/5/2027 | Kết cấu phần thân (kế hoạch)\n12/2026 – 10/2027 | Hoàn thiện kiến trúc, hệ thống điện nước, điều hòa, PCCC (kế hoạch)\n6 – 11/2027 | Mặt dựng, hệ cửa; hạ tầng, cảnh quan (kế hoạch)\n10/10 – 10/12/2027 | Nghiệm thu căn hộ, nghiệm thu hoàn thành dự án (kế hoạch)\n15/12/2027 | Dự kiến bàn giao căn hộ đưa vào sử dụng",
 		);
 		foreach ( $projects as $i => $p ) {
 			if ( 'viet-huong-lakeside-hoa-xuan' !== ( $p['slug'] ?? '' ) ) {
 				continue;
+			}
+			// 22/11/2026: phối cảnh tổng thể dự án làm ảnh đại diện; ảnh flycam khu vực chuyển vào Thư viện.
+			// Bản tiến độ 2.20.338 (chưa có dòng cẩu tháp 11/2026) đã lên web → được phép thay.
+			$p['fix_meta']['hh_p_progress'] = array_merge( (array) ( $p['fix_meta']['hh_p_progress'] ?? array() ), array( str_replace( "11/2026 | Công trường có 5 cẩu tháp, một số khối đã thi công lên sàn tầng 2\n", '', $upd['hh_p_progress'] ) ) );
+			$links = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+			if ( false === strpos( $links, 'viet-huong-lakeside-phoi-canh-tong-the.jpg' ) ) {
+				$upd['hh_p_image_links'] = 'plugin:img/viet-huong-lakeside/viet-huong-lakeside-phoi-canh-tong-the.jpg | Phối cảnh tổng thể Việt Hương Lakeside – nhà ở xã hội chung cư số 5 Hòa Xuân: 3 khối nhà ở xã hội và 1 khối nhà ở thương mại 14 tầng bên hồ | đại diện' . ( '' !== $links ? "\n" . str_replace( ' | đại diện', ' | thư viện', $links ) : '' );
 			}
 			foreach ( $upd as $k => $v ) {
 				$cur = (string) ( $p['meta'][ $k ] ?? '' );

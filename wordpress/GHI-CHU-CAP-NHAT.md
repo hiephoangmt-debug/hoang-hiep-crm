@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.339**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.340**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.340
+
+- Việt Hương Lakeside: ảnh đại diện mới là phối cảnh tổng thể dự án (4 khối 14 tầng bên hồ), ảnh flycam khu vực chuyển vào Thư viện; thêm mốc tiến độ 11/2026 – công trường có 5 cẩu tháp, một số khối đã lên sàn tầng 2.
 
 ## Có gì mới – 2.20.339
 
