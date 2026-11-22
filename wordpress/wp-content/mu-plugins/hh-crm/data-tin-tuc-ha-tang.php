@@ -679,7 +679,6 @@ function hh_import_news() {
 		} elseif ( ! empty( $n['date'] ) && $date > time() ) {
 			$date = time() - $i; // Tin có ngày cố định: không lên lịch (múi giờ web khác giờ Việt Nam vẫn đăng ngay).
 		}
-		$content = hh_news_build_content( $n, $seo );
 		$post    = get_posts( array( 'name' => $n['slug'], 'post_type' => 'post', 'post_status' => array( 'publish', 'future', 'draft', 'pending', 'private' ), 'numberposts' => 1 ) )[0] ?? null;
 		if ( ! $post ) {
 			foreach ( (array) ( $n['old_slug'] ?? array() ) as $os ) { // Bài đổi đường dẫn (rút gọn URL): đổi tên bài cũ, link cũ chuyển hướng 301.
@@ -691,6 +690,12 @@ function hh_import_news() {
 				}
 			}
 		}
+		// Nhập nhanh (22/11/2026): bài có dữ liệu y hệt lần nhập trước và đã có ảnh đại diện → bỏ qua.
+		$sig = md5( serialize( $n ) . serialize( $seo ) );
+		if ( $post && empty( $GLOBALS['hh_import_full'] ) && has_post_thumbnail( $post->ID ) && get_post_meta( $post->ID, '_hh_import_sig', true ) === $sig ) {
+			continue;
+		}
+		$content = hh_news_build_content( $n, $seo );
 		if ( $post ) {
 			$id   = $post->ID;
 			$content = hh_news_featured_in_content( $content, $id, $n );
@@ -833,6 +838,7 @@ function hh_import_news() {
 		}
 		update_post_meta( $id, '_hh_news_meta_hash', $auto );
 		do_action( 'hh_quick_post_created', $id ); // seo-bai-viet.php: chuẩn SEO Rank Math.
+		update_post_meta( $id, '_hh_import_sig', $sig );
 	}
 	return $created;
 }

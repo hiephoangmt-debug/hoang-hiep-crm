@@ -637,12 +637,21 @@ function hh_import_projects() {
 	$updated = 0;
 	// Chi tiết bổ sung (vị trí, liên kết vùng, tiện ích, tiến độ…) ở data-du-an-chi-tiet.php.
 	$details = function_exists( 'hh_project_enrichment' ) ? hh_project_enrichment() : array();
-	foreach ( hh_project_dataset() as $p ) {
+	$dataset = hh_project_dataset(); // Tính một lần (mỗi lần gọi chạy lại mọi bộ lọc dữ liệu).
+	// Nhập nhanh (22/11/2026): dự án có dữ liệu y hệt lần nhập trước thì bỏ qua – chỉ xử lý dự án vừa đổi.
+	// Ô "Nhập lại toàn bộ" (hoặc $GLOBALS['hh_import_full']) xử lý lại tất cả như trước.
+	$full = ! empty( $GLOBALS['hh_import_full'] );
+	foreach ( $dataset as $p ) {
 		if ( isset( $details[ $p['slug'] ] ) ) {
 			$p['meta']   += $details[ $p['slug'] ]['meta'] ?? array();
 			$p['sources'] = array_values( array_unique( array_merge( $p['sources'] ?? array(), $details[ $p['slug'] ]['sources'] ?? array() ) ) );
 		}
+		$sig      = md5( serialize( $p ) );
 		$existing = get_page_by_path( $p['slug'], OBJECT, 'du-an' );
+		if ( $existing && ! $full && get_post_meta( $existing->ID, '_hh_import_sig', true ) === $sig ) {
+			++$updated;
+			continue;
+		}
 		if ( $existing ) {
 			$id = $existing->ID;
 			++$updated;
@@ -738,10 +747,11 @@ function hh_import_projects() {
 			}
 		}
 		update_post_meta( $id, 'hh_p_sources', implode( "\n", $p['sources'] ) );
+		update_post_meta( $id, '_hh_import_sig', $sig );
 	}
 	delete_transient( 'hh_chat_faq2' ); // Trợ lý chat đọc lại câu hỏi đáp vừa cập nhật.
 	// Lượt 2: nối dự án thành phần / phân khu với tổ hợp (sau khi mọi dự án đã được tạo).
-	foreach ( hh_project_dataset() as $p ) {
+	foreach ( $dataset as $p ) {
 		if ( empty( $p['parent'] ) ) {
 			continue;
 		}
@@ -753,7 +763,7 @@ function hh_import_projects() {
 	}
 	// Ảnh từ link (Google Drive): chỉ đưa vào hàng chờ, tải ngầm từng ít một (tải ngay dễ quá thời gian → lỗi nghiêm trọng).
 	if ( function_exists( 'hh_img_links_queue' ) ) {
-		foreach ( hh_project_dataset() as $p ) {
+		foreach ( $dataset as $p ) {
 			$post = ! empty( $p['meta']['hh_p_image_links'] ) ? get_page_by_path( $p['slug'], OBJECT, 'du-an' ) : null;
 			// Ảnh đi kèm plugin từng tải lỗi (gói cập nhật trước thiếu file) mà nay file đã có → thử lại.
 			if ( $post && function_exists( 'hh_img_link_local_path' ) ) {
@@ -834,6 +844,7 @@ function hh_import_page() {
 			@set_time_limit( 300 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
 		}
 		try {
+			$GLOBALS['hh_import_full'] = ! empty( $_POST['hh_import_full'] );
 			$result = hh_import_projects();
 			do_action( 'litespeed_purge_all' ); // Xoá bộ nhớ đệm (cả bản điện thoại) để trang mới hiện ngay.
 		} catch ( \Throwable $e ) {
@@ -865,6 +876,7 @@ function hh_import_page() {
 		<form method="post">
 			<?php wp_nonce_field( 'hh_import_du_an' ); ?>
 			<p><button class="button button-primary" name="hh_import" value="1">Nhập / cập nhật dữ liệu</button></p>
+			<p><label><input type="checkbox" name="hh_import_full" value="1"> Nhập lại toàn bộ (chậm – chỉ dùng khi được dặn; bình thường web chỉ xử lý dự án, bài viết vừa thay đổi)</label></p>
 		</form>
 		<?php $img_wait = function_exists( 'hh_img_links_queue_pending' ) ? hh_img_links_queue_pending() : 0; ?>
 		<?php if ( null !== $img_left && $img_left ) : ?>

@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.340**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.341**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.341
+
+- Nút "Nhập / cập nhật dữ liệu" nhanh hơn: dự án và bài viết không đổi so với lần nhập trước được bỏ qua, chỉ xử lý phần vừa thay đổi. Lần bấm đầu tiên sau khi cài vẫn chậm (đánh dấu toàn bộ), các lần sau nhanh. Có ô "Nhập lại toàn bộ" khi cần chạy lại tất cả.
 
 ## Có gì mới – 2.20.340
 
