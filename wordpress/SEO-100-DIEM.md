@@ -52,6 +52,7 @@ Khi bài lên web, `seo-bai-viet.php` tự: đưa từ khoá vào tiêu đề / 
 
 ## Giọng văn thương hiệu "Hiệp" (anh Hiệp 22/11/2026)
 
-- Bài phân tích, tin tức, bài dự án: **lồng ghép tên Hiệp 2 – 3 lần/bài** theo ngôi thứ nhất, tự nhiên, để khách nhớ thương hiệu. Ví dụ: "Theo kinh nghiệm tư vấn của Hiệp…", "Hiệp thấy…", "Từ thực tế dẫn khách đi xem, Hiệp rút ra…", "Nhiều khách hỏi Hiệp câu này…", "Nếu là người mua, Hiệp sẽ cân nhắc…".
-- Vị trí gợi ý: đầu mục "Tác động / nhận định của Hoàng Hiệp" (1 câu dẫn), 1 lần giữa bài khi phân tích/so sánh, và đoạn CTA cuối ("Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế").
-- Không bịa thành tích/số năm kinh nghiệm/số khách đã tư vấn; không nhắc quá dày (tránh lặp mỗi đoạn); số liệu vẫn phải có nguồn.
+- Bài phân tích, tin tức, bài dự án: nhắc **Hiệp** theo ngôi thứ nhất **1 – 2 lần/bài** (ngoài đoạn liên hệ "Hoàng Hiệp – 0904 567 009") để khách nhớ thương hiệu. Xưng "Hiệp", không xưng "tôi".
+- **Phải tự nhiên, không lặp:** câu có "Hiệp" phải gắn với chi tiết cụ thể của bài (một con số, một loại căn, một tình huống khách hay hỏi), không dùng câu dẫn chung chung kiểu "Theo kinh nghiệm của Hiệp, khách nên lưu ý mấy điểm sau". Mỗi bài một cách nói khác; không dùng cùng một câu cho nhiều bài; không thêm câu kết giống nhau vào mọi bài.
+- Cách lồng ghép tốt: đưa "Hiệp" vào ngay câu nhận định có sẵn ("Hiệp thấy căn sân vườn tầng 2 hợp gia đình có trẻ nhỏ", "Khi khách nhờ Hiệp xin bản vẽ, Hiệp luôn hỏi ba điều…", "Câu khách hỏi Hiệp nhiều nhất là tầm 5 – 6 tỷ thì mua được gì…"). Thường đặt trong mục "Nhận định của Hoàng Hiệp" hoặc chỗ so sánh/khuyên chọn.
+- Không bịa thành tích, số năm kinh nghiệm, số khách; số liệu vẫn phải có nguồn.

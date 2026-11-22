@@ -59,9 +59,8 @@ function hh_posts_day_seo_casamia_euro_premier( $posts ) {
 <h2>Chi phí cần tính ngoài giá biệt thự Casamia Calm</h2>
 <p>Khi mua chuyển nhượng, ngoài giá biệt thự Casamia Calm thỏa thuận với chủ nhà, người mua nên dự trù: lệ phí trước bạ 0,5%, thuế thu nhập cá nhân 2% của bên bán (hai bên thỏa thuận ai nộp), phí công chứng, phí đo vẽ nếu có. Với căn để cho thuê, cần tính thêm chi phí bảo trì hồ bơi, sân vườn và phí quản lý khu. Chi tiết các khoản xem bài <a href="/thue-phi-mua-ban-nha-dat-da-nang-2026/">thuế phí mua bán nhà đất 2026</a>.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Theo kinh nghiệm tư vấn của Hiệp, khách hàng nên lưu ý mấy điểm sau.</p>
 <p>Với ngân sách khoảng 7 – 10 tỷ, Casamia Calm là một trong số ít lựa chọn biệt thự hồ bơi riêng, sổ hồng lâu dài, cách phố cổ chỉ khoảng 2 km. Hiệp đánh giá giá biệt thự Casamia Calm hiện hợp lý cho khách mua để ở, nghỉ dưỡng gia đình hoặc khai thác cho thuê nguyên căn. Điều quan trọng là so 3 – 4 căn cùng mẫu trước khi chốt, vì giá chào giữa các chủ nhà chênh khá xa.</p>
-<p>Cần danh sách căn Casamia Calm đang bán kèm giá thật, hoặc nhờ định giá căn đang sở hữu, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế. Thông tin dự án xem tại trang <a href="/du-an/casamia-calm-hoi-an/">Casamia Calm Hội An</a>.</p>
+<p>Cần danh sách căn Casamia Calm đang bán kèm giá thật, hoặc nhờ định giá căn đang sở hữu, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Thông tin dự án xem tại trang <a href="/du-an/casamia-calm-hoi-an/">Casamia Calm Hội An</a>.</p>
 <p class="src">Nguồn: Cafeland (trang dự án Casamia Calm Hội An), tin rao chuyển nhượng trên batdongsan.com.vn tháng 11/2026, dữ liệu dự án Hoàng Hiệp tổng hợp. Giá mang tính tham khảo.</p>
 HTML
 		,
@@ -152,9 +151,8 @@ HTML
 <li><strong>Trường tiểu học công lập Hòa Xuân:</strong> khu đất 13.655 m² trong khu đô thị – xem bài <a href="/truong-tieu-hoc-cong-lap-hoa-xuan/">trường tiểu học Hòa Xuân</a>.</li>
 </ul>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Hiệp thấy có vài điểm đáng chú ý mà cả người mua ở lẫn nhà đầu tư nên cân nhắc.</p>
 <p>Giá đất biệt thự Euro Village 2 đã ở mặt bằng cao so với đất nền phổ thông Hòa Xuân, nhưng vẫn thấp hơn nhiều khu biệt thự ven sông Hàn. Với khách mua để xây nhà ở lâu dài, Hiệp ưu tiên lô nhìn công viên hoặc lưng kênh – giá vừa phải, yên tĩnh. Khách giữ tài sản nên chọn lô nhìn sông hoặc lô góc vì nguồn cung loại này rất ít.</p>
-<p>Cần giỏ hàng đất biệt thự Euro Village 2 cập nhật kèm vị trí trên bản đồ, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế. Thông tin dự án xem tại trang <a href="/du-an/euro-village-2/">Euro Village 2 Hòa Xuân</a>.</p>
+<p>Cần giỏ hàng đất biệt thự Euro Village 2 cập nhật kèm vị trí trên bản đồ, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Thông tin dự án xem tại trang <a href="/du-an/euro-village-2/">Euro Village 2 Hòa Xuân</a>.</p>
 <p class="src">Nguồn: giỏ hàng chuyển nhượng Hoàng Hiệp tổng hợp 26/10/2026 (giá chào, tham khảo); toprealty.vn, timdanang.com (quy mô dự án); Tuổi Trẻ (Aeon Mall Hòa Xuân).</p>
 HTML
 		,
@@ -241,9 +239,8 @@ HTML
 <h2>Điểm cần hỏi rõ khi đánh giá tiện ích</h2>
 <p>Một phần tiện ích Casamia Balanca thể hiện theo quy hoạch và phối cảnh chủ đầu tư; ảnh flycam cho thấy nhiều dãy nhà vườn vẫn đang thi công. Trước khi ký, anh chị nên hỏi tiện ích nào đã vận hành, tiện ích nào hoàn thiện theo giai đoạn, và phí sử dụng sau thời gian miễn phí. Thông tin về chủ đầu tư có thể tham khảo bài trên <a href="https://tapchicongthuong.vn/tap-doan-dat-phuong--dpg--cho-doi--cu-hich--tu-du-an-casamia-balanca-127046.htm" target="_blank" rel="noopener">Tạp chí Công Thương</a>.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Từ thực tế dẫn khách đi xem và giao dịch, Hiệp rút ra mấy nhận định.</p>
-<p>Điểm mạnh nhất của tiện ích Casamia Balanca là quỹ đất công viên lớn và dòng sông nội khu – thứ khó tìm ở các dự án nhà phố trong phố. Khách mua để ở nên chọn Park Home sát Grand Central Park; khách cho thuê nghỉ dưỡng nên xem La Riva, Forestside vì hồ bơi riêng và cảnh quan sông, rừng dừa là điểm bán phòng tốt.</p>
-<p>Cần bảng hàng từng phân khu, sơ đồ vị trí căn so với tiện ích, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế. Thông tin dự án xem tại trang <a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca Hội An</a>.</p>
+<p>Mỗi lần dẫn khách đi xem, điều Hiệp thấy khách thích nhất ở tiện ích Casamia Balanca là quỹ đất công viên lớn và dòng sông nội khu – thứ khó tìm ở các dự án nhà phố trong phố. Khách mua để ở nên chọn Park Home sát Grand Central Park; khách cho thuê nghỉ dưỡng nên xem La Riva, Forestside vì hồ bơi riêng và cảnh quan sông, rừng dừa là điểm bán phòng tốt.</p>
+<p>Cần bảng hàng từng phân khu, sơ đồ vị trí căn so với tiện ích, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Thông tin dự án xem tại trang <a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca Hội An</a>.</p>
 <p class="src">Nguồn: tài liệu chủ đầu tư Tập đoàn Đạt Phương, chính sách bán hàng từ 09/09/2026; Tạp chí Công Thương.</p>
 HTML
 		,
@@ -326,9 +323,8 @@ HTML
 </ul>
 <p>Mặt bằng Casamia Calm cũng nên được đặt cạnh các khu khác của cùng chủ đầu tư như <a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca</a> (31,1 ha) để so sánh mật độ và loại sản phẩm. Danh sách biệt thự đang giao dịch quanh Hội An xem tại trang <a href="/biet-thu-hoi-an/">biệt thự Hội An</a>.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Đây cũng là câu nhiều khách hỏi Hiệp nhất; dưới đây là góc nhìn của Hiệp.</p>
 <p>Điểm Hiệp đánh giá cao ở mặt bằng Casamia Calm là quy mô nhỏ – chỉ 112 căn, toàn biệt thự đơn lập, không có nhà phố hay chung cư xen kẽ – nên khu yên tĩnh và cộng đồng đồng đều. Điểm cần lưu ý là diện tích đất mẫu BT1 khá vừa, ai cần sân vườn rộng nên tìm căn BT2.</p>
-<p>Cần sơ đồ vị trí căn đang bán trên mặt bằng, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế. Thông tin dự án xem tại trang <a href="/du-an/casamia-calm-hoi-an/">Casamia Calm Hội An</a>.</p>
+<p>Cần sơ đồ vị trí căn đang bán trên mặt bằng, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Thông tin dự án xem tại trang <a href="/du-an/casamia-calm-hoi-an/">Casamia Calm Hội An</a>.</p>
 <p class="src">Nguồn: Cafeland (trang dự án Casamia Calm Hội An), thuviennhadat.vn, tài liệu giới thiệu dự án; dữ liệu Hoàng Hiệp tổng hợp 11/2026.</p>
 HTML
 		,
@@ -408,9 +404,8 @@ HTML
 <h2>So với villa ven biển khác ở Đà Nẵng</h2>
 <p>Theo mặt bằng giá tham khảo tháng 10/2026, Furama Villas khoảng 21 – 40 tỷ, Fusion Resort &amp; Villas khoảng 32 – 54 tỷ, Hyatt Regency 3 phòng ngủ khoảng 50 tỷ. Mua biệt thự Premier Village đắt hơn Furama nhưng đổi lại vị trí gần trung tâm nhất. Bảng so sánh đầy đủ xem bài <a href="/so-sanh-villa-ven-bien-da-nang-co-so/">so sánh villa ven biển Đà Nẵng có sổ</a>.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Theo quan sát của Hiệp trên thị trường Đà Nẵng thời gian qua, có mấy điểm đáng nói.</p>
 <p>Quỹ căn Premier Village rất ít – chỉ 118 căn và không còn hàng mới – nên giao dịch thưa nhưng giá giữ tốt. Hiệp thấy việc mua biệt thự Premier Village hợp với khách cần một tài sản an toàn, gần trung tâm, dùng vừa nghỉ dưỡng gia đình vừa tiếp khách. Khách tìm lợi suất cho thuê cao nên tính kỹ chi phí vận hành villa lớn trước khi quyết định.</p>
-<p>Cần danh sách căn đang chuyển nhượng, hỗ trợ kiểm tra sổ và hợp đồng vận hành, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế. Thông tin dự án xem tại trang <a href="/du-an/premier-village-da-nang/">Premier Village Đà Nẵng</a>.</p>
+<p>Cần danh sách căn đang chuyển nhượng, hỗ trợ kiểm tra sổ và hợp đồng vận hành, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Thông tin dự án xem tại trang <a href="/du-an/premier-village-da-nang/">Premier Village Đà Nẵng</a>.</p>
 <p class="src">Nguồn: Accor (Premier Village Danang Resort – Managed by Accor), Danang Fantasticity, Báo Đầu tư, mia.vn; tin rao chuyển nhượng 2026, dữ liệu Hoàng Hiệp tổng hợp. Giá mang tính tham khảo.</p>
 HTML
 		,
@@ -494,9 +489,8 @@ HTML
 <li>Thỏa thuận rõ ai chịu thuế, phí; ghi tiến độ thanh toán, công chứng trong hợp đồng cọc – tham khảo bài <a href="/hop-dong-dat-coc-mua-nha-rui-ro-phong-tranh/">hợp đồng đặt cọc mua nhà</a>.</li>
 </ol>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Nếu là người mua, Hiệp sẽ cân nhắc những điểm sau.</p>
 <p>Có nên mua Euro Village 2? Theo Hiệp, câu trả lời là có với khách mua để ở hoặc giữ tài sản bằng vốn tự có, và chưa nên với khách cần quay vòng vốn nhanh. Điểm cộng lớn nhất là sổ đỏ lâu dài cùng hạ tầng Hòa Xuân đang hoàn thiện; điểm trừ là vốn lớn và thanh khoản chậm.</p>
-<p>Cần giỏ hàng đất biệt thự đang chuyển nhượng, vị trí lô trên bản đồ và hỗ trợ kiểm tra sổ, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế. Thông tin dự án xem tại trang <a href="/du-an/euro-village-2/">Euro Village 2 Hòa Xuân</a>.</p>
+<p>Cần giỏ hàng đất biệt thự đang chuyển nhượng, vị trí lô trên bản đồ và hỗ trợ kiểm tra sổ, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Thông tin dự án xem tại trang <a href="/du-an/euro-village-2/">Euro Village 2 Hòa Xuân</a>.</p>
 <p class="src">Nguồn: toprealty.vn, timdanang.com (quy mô dự án); giỏ hàng chuyển nhượng Hoàng Hiệp 26/10/2026; Tuổi Trẻ (Aeon Mall Hòa Xuân); dữ liệu hạ tầng Hoàng Hiệp tổng hợp.</p>
 HTML
 		,
@@ -575,9 +569,8 @@ HTML
 </ul>
 <p>So với dự án mới cùng chủ đầu tư <a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca</a>, Casamia Calm có giá vào thấp hơn và nhận nhà ngay, nhưng không có chính sách thuê lại của chủ đầu tư.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Theo kinh nghiệm tư vấn của Hiệp, khách hàng nên lưu ý mấy điểm sau.</p>
 <p>Hiệp đánh giá pháp lý Casamia Calm thuộc nhóm an toàn trong các khu biệt thự Hội An: dự án hoàn thành, có sổ, sở hữu lâu dài. Rủi ro chủ yếu nằm ở từng căn – thế chấp, cơi nới, hợp đồng thuê – nên kiểm tra kỹ từng hồ sơ thay vì chỉ nhìn pháp lý chung của dự án.</p>
-<p>Cần kiểm tra sổ, định giá hoặc danh sách căn đang bán, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế. Thông tin dự án xem tại trang <a href="/du-an/casamia-calm-hoi-an/">Casamia Calm Hội An</a>.</p>
+<p>Cần kiểm tra sổ, định giá hoặc danh sách căn đang bán, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Thông tin dự án xem tại trang <a href="/du-an/casamia-calm-hoi-an/">Casamia Calm Hội An</a>.</p>
 <p class="src">Nguồn: Cafeland (trang dự án Casamia Calm Hội An); dữ liệu dự án Hoàng Hiệp tổng hợp 11/2026.</p>
 HTML
 		,

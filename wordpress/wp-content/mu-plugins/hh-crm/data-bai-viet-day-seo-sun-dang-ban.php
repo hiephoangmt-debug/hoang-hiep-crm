@@ -60,10 +60,9 @@ function hh_posts_day_seo_sun_dang_ban( $posts ) {
 <h2>Giá S-Light Tower bao nhiêu theo loại căn</h2>
 <p>Diện tích tham khảo theo CafeLand: studio 33,3 m²; căn 1 phòng ngủ khoảng 49,3 m²; 2PN khoảng 57,6 – 59 m²; 3PN góc khoảng 76 m²; căn lớn nhất 95,1 m². Nhân với đơn giá 58 – 69 triệu/m² sẽ ra khoảng giá của từng loại, nhưng căn tầng cao, hướng sông hoặc căn góc thường nằm ở nửa trên của khoảng giá. Penthouse tầng 22 có bảng giá riêng.</p>
 <h2>Nhận định của Hoàng Hiệp về giá S-Light Tower</h2>
-<p>Đây cũng là câu nhiều khách hỏi Hiệp nhất; dưới đây là góc nhìn của Hiệp.</p>
-<p>Trả lời ngắn cho câu hỏi giá S-Light Tower bao nhiêu: đơn giá S-Light đang thấp hơn Spana và phần lớn giỏ hàng Cora, trong khi vị trí ở ngã ba sông Hàn – Cẩm Lệ – Đô Tỏa. Đổi lại, mốc nhận nhà muộn hơn (dự kiến 30/6/2028) và chiết khấu không vay chỉ 3%. Người có vốn sẵn nên so phương án trả sớm 95% với lãi tiền gửi; người cần đòn bẩy nên tận dụng 24 tháng hỗ trợ lãi suất và tiến độ 48 tháng.</p>
+<p>Hiệp trả lời ngắn cho câu hỏi giá S-Light Tower bao nhiêu: đơn giá S-Light đang thấp hơn Spana và phần lớn giỏ hàng Cora, trong khi vị trí ở ngã ba sông Hàn – Cẩm Lệ – Đô Tỏa. Đổi lại, mốc nhận nhà muộn hơn (dự kiến 30/6/2028) và chiết khấu không vay chỉ 3%. Người có vốn sẵn nên so phương án trả sớm 95% với lãi tiền gửi; người cần đòn bẩy nên tận dụng 24 tháng hỗ trợ lãi suất và tiến độ 48 tháng.</p>
 <p>Trước khi đặt cọc, nên xin hai phiếu tính giá (vay và không vay) cho cùng một căn để thấy rõ giá S-Light Tower bao nhiêu khi thực trả. Đọc thêm <a href="/chinh-sach-ban-hang-s-light-tower-thang-11-2026/">chính sách bán hàng S-Light Tower tháng 11/2026</a> và <a href="/cora-spana-s-light-sun-neo-city-nen-chon-toa-nao/">Cora, Spana hay S-Light – nên chọn tòa nào</a>.</p>
-<p>Cần bảng giá từng căn S-Light Tower còn trống và phiếu tính dòng tiền, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
+<p>Cần bảng giá từng căn S-Light Tower còn trống và phiếu tính dòng tiền, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: bảng hàng S-Light Tower 10/2026; chính sách bán hàng CSBH 01/SL và mức thanh toán sớm tháng 11/2026 của chủ đầu tư; CafeLand (thông tin dự án). Giá tham khảo, thay đổi theo đợt.</p>
 HTML
 		,
@@ -135,9 +134,8 @@ HTML
 <li>Mặt bằng tầng và layout căn có ghi diện tích thông thủy, diện tích tim tường.</li>
 </ol>
 <h2>Nhận định của Hoàng Hiệp về pháp lý Spana Tower</h2>
-<p>Theo quan sát của Hiệp trên thị trường Đà Nẵng thời gian qua, có mấy điểm đáng nói.</p>
-<p>Trong ba tòa căn hộ Sun Group ở Hòa Xuân, Spana Tower đang có bộ pháp lý công khai rõ nhất: đủ điều kiện bán, bảo lãnh ngân hàng, đất ở lâu dài và công trường đã lên cao. Điều người mua cần làm khi xem pháp lý Spana Tower là đối chiếu giấy tờ với đúng căn, đúng tòa khi ký, không chỉ nghe giới thiệu. Chính sách đi kèm (quà an cư 3%, không vay chiết khấu 5%, vay 70% hỗ trợ lãi suất 24 tháng) xem tại <a href="/chinh-sach-ban-hang-spana-tower-thang-11-2026/">chính sách bán hàng Spana Tower</a>; so sánh với các dự án khác tại <a href="/chinh-sach-ban-hang-sun-group-da-nang-11-2026/">chính sách bán hàng Sun Group 11/2026</a>.</p>
-<p>Cần bản sao văn bản pháp lý Spana Tower, mặt bằng và căn còn trống, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
+<p>Trong ba tòa căn hộ Sun Group ở Hòa Xuân mà Hiệp đang theo dõi, Spana Tower đang có bộ pháp lý công khai rõ nhất: đủ điều kiện bán, bảo lãnh ngân hàng, đất ở lâu dài và công trường đã lên cao. Điều người mua cần làm khi xem pháp lý Spana Tower là đối chiếu giấy tờ với đúng căn, đúng tòa khi ký, không chỉ nghe giới thiệu. Chính sách đi kèm (quà an cư 3%, không vay chiết khấu 5%, vay 70% hỗ trợ lãi suất 24 tháng) xem tại <a href="/chinh-sach-ban-hang-spana-tower-thang-11-2026/">chính sách bán hàng Spana Tower</a>; so sánh với các dự án khác tại <a href="/chinh-sach-ban-hang-sun-group-da-nang-11-2026/">chính sách bán hàng Sun Group 11/2026</a>.</p>
+<p>Cần bản sao văn bản pháp lý Spana Tower, mặt bằng và căn còn trống, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: hồ sơ pháp lý dự án Spana Tower của chủ đầu tư (2010 – 2026); Luật Kinh doanh bất động sản 2023 trên Thư viện Pháp luật; ảnh flycam công trường 11/2026. Thông tin tham khảo, đối chiếu văn bản khi ký.</p>
 HTML
 		,
@@ -213,9 +211,8 @@ HTML
 <li>Tùy chọn bàn giao hoàn thiện liền tường (đăng ký khi ký hợp đồng mua bán), tính thêm theo diện tích thông thủy.</li>
 </ul>
 <h2>Nhận định của Hoàng Hiệp về tiến độ thanh toán Symphony 5</h2>
-<p>Nếu là người mua, Hiệp sẽ cân nhắc những điểm sau.</p>
-<p>Điểm hay của tiến độ thanh toán Symphony 5 là khoảng cách giữa các đợt dài (khoảng 120 ngày) và mức nhận căn 70% đến sau khoảng hai năm, nên người mua có thời gian tích lũy. Điểm cần cân nhắc là căn hộ trên đất thương mại dịch vụ, sở hữu 50 năm – đọc kỹ <a href="/phap-ly-symphony-5-so-huu-50-nam/">pháp lý Symphony 5</a> trước khi chọn. Với mục tiêu cho thuê studio, có thể so thêm với Sun Saphia tại bài <a href="/sun-saphia-hay-symphony-5-mua-studio-cho-thue/">Sun Saphia hay Symphony 5</a>.</p>
-<p>Cần phiếu tính giá và lịch thanh toán của căn cụ thể (vay và không vay), liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
+<p>Điểm Hiệp thấy hay nhất ở tiến độ thanh toán Symphony 5 là khoảng cách giữa các đợt dài (khoảng 120 ngày) và mức nhận căn 70% đến sau khoảng hai năm, nên người mua có thời gian tích lũy. Điểm cần cân nhắc là căn hộ trên đất thương mại dịch vụ, sở hữu 50 năm – đọc kỹ <a href="/phap-ly-symphony-5-so-huu-50-nam/">pháp lý Symphony 5</a> trước khi chọn. Với mục tiêu cho thuê studio, có thể so thêm với Sun Saphia tại bài <a href="/sun-saphia-hay-symphony-5-mua-studio-cho-thue/">Sun Saphia hay Symphony 5</a>.</p>
+<p>Cần phiếu tính giá và lịch thanh toán của căn cụ thể (vay và không vay), liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: chính sách bán hàng CSBH 02/S5 (từ 20/07/2026) và giỏ hàng 11/2026 của chủ đầu tư; CafeLand (thông tin dự án); Luật Kinh doanh bất động sản 2023. Thông tin tham khảo, chủ đầu tư có quyền thay đổi chính sách.</p>
 HTML
 		,
@@ -286,9 +283,8 @@ HTML
 <p>Căn sân vườn Tòa F2 áp dụng chính sách CSBH 4.2/FT (từ 26/9/2026): quà nội thất Nhà Xinh từ 35 triệu (studio) đến 100 triệu (3PN); không vay chiết khấu thêm 3%; đặt cọc 100 triệu (3PN 150 triệu), giãn tiến độ đến 45 tháng; vay 70% hỗ trợ lãi suất 24 tháng (không muộn hơn 31/1/2029); miễn phí quản lý 2 năm. Sun Early Key: trả 70% nhận nhà, dự kiến 31/5/2028. Bàn giao hoàn thiện cơ bản, lan can lô gia kính cường lực.</p>
 <p>So sánh với Tòa F1, F5 tại <a href="/chinh-sach-ban-hang-fours-tower-f1-f5-thang-11-2026/">chính sách FourS Tower F1, F5 tháng 11/2026</a> và với các dự án Sun khác tại <a href="/chinh-sach-ban-hang-sun-group-da-nang-11-2026/">chính sách bán hàng Sun Group 11/2026</a>.</p>
 <h2>Nhận định của Hoàng Hiệp về căn hộ sân vườn FourS Tower</h2>
-<p>Theo kinh nghiệm tư vấn của Hiệp, khách hàng nên lưu ý mấy điểm sau.</p>
-<p>Số căn có sân lớn chỉ tập trung ở vài tầng thấp mỗi tòa, nên đây là nhóm hàng ít, khó thay thế. Người mua để ở nên ưu tiên căn có sân 15 m² trở lên, hướng ra khu biệt thự hoặc sông; người cho thuê nên chọn studio hoặc căn khoảng 50 m² có sân, tổng tiền vừa phải. Đọc thêm <a href="/co-nen-mua-can-ho-fours-tower/">có nên mua FourS Tower</a> để cân nhắc tổng thể dự án.</p>
-<p>Nhận mặt bằng tầng 2 – 3 và danh sách căn hộ sân vườn FourS Tower còn trống, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
+<p>Hiệp để ý số căn có sân lớn chỉ tập trung ở vài tầng thấp mỗi tòa, nên đây là nhóm hàng ít, khó thay thế. Người mua để ở nên ưu tiên căn có sân 15 m² trở lên, hướng ra khu biệt thự hoặc sông; người cho thuê nên chọn studio hoặc căn khoảng 50 m² có sân, tổng tiền vừa phải. Đọc thêm <a href="/co-nen-mua-can-ho-fours-tower/">có nên mua FourS Tower</a> để cân nhắc tổng thể dự án.</p>
+<p>Nhận mặt bằng tầng 2 – 3 và danh sách căn hộ sân vườn FourS Tower còn trống, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: mặt bằng tầng 2, tầng 3 Tòa F2 và chính sách CSBH 4.2/FT của chủ đầu tư; VnExpress, Tuổi Trẻ. Diện tích tương đối theo bản vẽ, thông số chính thức theo hợp đồng.</p>
 HTML
 		,
@@ -378,9 +374,8 @@ HTML
 <h2>Penthouse và shophouse trên mặt bằng S-Light Tower</h2>
 <p>Penthouse nằm ở tầng 22 của hai tòa SL1, SL2, tầm nhìn sông Hàn, Cẩm Lệ và Đô Tỏa; mặt bằng tầng 22 đã có trên <a href="/du-an/s-light-tower/">trang dự án S-Light Tower</a>. Shophouse khối đế thuộc đợt sản phẩm giới hạn Sun Property ra mắt tháng 8/2026. So sánh penthouse ba tòa tại bài <a href="/penthouse-spana-cora-s-light-sun-neo-city/">penthouse Spana, Cora, S-Light</a>.</p>
 <h2>Nhận định của Hoàng Hiệp về mặt bằng S-Light Tower</h2>
-<p>Hiệp thấy có vài điểm đáng chú ý mà cả người mua ở lẫn nhà đầu tư nên cân nhắc.</p>
-<p>So với <a href="/mat-bang-can-ho-cora-tower/">mặt bằng Cora Tower</a> và Spana, S-Light có ưu thế ở vị trí ngã ba sông và cam kết mọi căn đón nắng gió. Căn studio nhỏ nhất từ 33,3 m², hợp người mua lần đầu hoặc cho thuê. Khi xin bản vẽ, anh chị nên hỏi ba điều: căn nằm tháp nào, hướng nào; diện tích thông thủy là bao nhiêu; căn có gần lõi thang hay phòng kỹ thuật không.</p>
-<p>Giá tham khảo xem tại trang dự án; chính sách tháng này xem tại <a href="/chinh-sach-ban-hang-s-light-tower-thang-11-2026/">chính sách bán hàng S-Light Tower</a>. Cần bản vẽ mặt bằng S-Light Tower từng tầng và danh sách căn còn trống, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
+<p>So với <a href="/mat-bang-can-ho-cora-tower/">mặt bằng Cora Tower</a> và Spana, S-Light có ưu thế ở vị trí ngã ba sông và cam kết mọi căn đón nắng gió. Căn studio nhỏ nhất từ 33,3 m², hợp người mua lần đầu hoặc cho thuê. Khi khách nhờ Hiệp xin bản vẽ, Hiệp luôn hỏi kỹ ba điều: căn nằm tháp nào, hướng nào; diện tích thông thủy là bao nhiêu; căn có gần lõi thang hay phòng kỹ thuật không.</p>
+<p>Giá tham khảo xem tại trang dự án; chính sách tháng này xem tại <a href="/chinh-sach-ban-hang-s-light-tower-thang-11-2026/">chính sách bán hàng S-Light Tower</a>. Cần bản vẽ mặt bằng S-Light Tower từng tầng và danh sách căn còn trống, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: thông tin dự án S-Light Tower trên CafeLand và CafeF; bộ layout penthouse và chính sách CSBH 01/SL của chủ đầu tư. Thông số tham khảo, chính thức theo hợp đồng.</p>
 HTML
 		,
@@ -459,9 +454,8 @@ HTML
 </tbody>
 </table>
 <h2>Nhận định của Hoàng Hiệp: có nên mua Spana Tower lúc này</h2>
-<p>Từ thực tế dẫn khách đi xem và giao dịch, Hiệp rút ra mấy nhận định.</p>
-<p>Có nên mua Spana Tower phụ thuộc vào việc anh chị trả tiền cho điều gì: Spana bán "thời gian" (nhận nhà sớm) và "sự chắc chắn" (pháp lý, công trường đã lên). Nếu hai yếu tố này quan trọng, mức đơn giá cao hơn vài triệu/m² là hợp lý. Nếu ưu tiên tổng tiền thấp nhất, trước khi chốt có nên mua Spana Tower hay không, nên so thêm tại bài <a href="/cora-spana-s-light-sun-neo-city-nen-chon-toa-nao/">Cora, Spana hay S-Light – nên chọn tòa nào</a> và <a href="/chinh-sach-ban-hang-sun-group-da-nang-11-2026/">chính sách bán hàng Sun Group 11/2026</a>.</p>
-<p>Cần phiếu tính giá căn cụ thể và xem công trường thực tế, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
+<p>Với Hiệp, có nên mua Spana Tower phụ thuộc vào việc anh chị trả tiền cho điều gì: Spana bán "thời gian" (nhận nhà sớm) và "sự chắc chắn" (pháp lý, công trường đã lên). Nếu hai yếu tố này quan trọng, mức đơn giá cao hơn vài triệu/m² là hợp lý. Nếu ưu tiên tổng tiền thấp nhất, trước khi chốt có nên mua Spana Tower hay không, nên so thêm tại bài <a href="/cora-spana-s-light-sun-neo-city-nen-chon-toa-nao/">Cora, Spana hay S-Light – nên chọn tòa nào</a> và <a href="/chinh-sach-ban-hang-sun-group-da-nang-11-2026/">chính sách bán hàng Sun Group 11/2026</a>.</p>
+<p>Cần phiếu tính giá căn cụ thể và xem công trường thực tế, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: hồ sơ pháp lý, chính sách CSƯĐ 03 và bảng hàng 10/2026 của chủ đầu tư; ảnh flycam công trường 11/2026; CafeLand. Giá tham khảo, thay đổi theo đợt.</p>
 HTML
 		,
@@ -533,9 +527,8 @@ HTML
 </ul>
 <p>Muốn so tiềm năng cho thuê studio, đọc bài <a href="/sun-saphia-hay-symphony-5-mua-studio-cho-thue/">Sun Saphia hay Symphony 5</a>; xem mặt bằng tầng chứa tiện ích tại <a href="/mat-bang-can-ho-symphony-5/">mặt bằng Symphony 5</a>.</p>
 <h2>Nhận định của Hoàng Hiệp về tiện ích Symphony 5</h2>
-<p>Đây cũng là câu nhiều khách hỏi Hiệp nhất; dưới đây là góc nhìn của Hiệp.</p>
-<p>Điểm mạnh nhất của tiện ích Symphony 5 không nằm ở số lượng hạng mục trong tòa, mà ở việc thừa hưởng ba công viên và bờ sông của cả tổ hợp Sun Symphony – thứ các tòa đơn lẻ ven sông khó có. Cần lưu ý: công viên là tiện ích chung, mức phí quản lý và quy định sử dụng bể bơi, spa nên hỏi rõ khi ký. Căn hộ sở hữu 50 năm, nhận căn sử dụng dự kiến 30/06/2028 theo Sun Early Key; giá studio từ khoảng 2,50 tỷ (giỏ hàng 11/2026) – xem <a href="/gia-symphony-5-sun-symphony-residence-bao-nhieu/">giá Symphony 5 bao nhiêu</a>.</p>
-<p>Các dự án Sun Group Đà Nẵng khác đang bán (Spana, Cora, S-Light, FourS) có tiện ích tập trung ở tầng 2 – so chính sách tại <a href="/chinh-sach-ban-hang-sun-group-da-nang-11-2026/">chính sách bán hàng Sun Group 11/2026</a>. Cần bộ ảnh tiện ích Symphony 5 và giỏ căn còn trống, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
+<p>Theo Hiệp, điểm mạnh nhất của tiện ích Symphony 5 không nằm ở số lượng hạng mục trong tòa, mà ở việc thừa hưởng ba công viên và bờ sông của cả tổ hợp Sun Symphony – thứ các tòa đơn lẻ ven sông khó có. Cần lưu ý: công viên là tiện ích chung, mức phí quản lý và quy định sử dụng bể bơi, spa nên hỏi rõ khi ký. Căn hộ sở hữu 50 năm, nhận căn sử dụng dự kiến 30/06/2028 theo Sun Early Key; giá studio từ khoảng 2,50 tỷ (giỏ hàng 11/2026) – xem <a href="/gia-symphony-5-sun-symphony-residence-bao-nhieu/">giá Symphony 5 bao nhiêu</a>.</p>
+<p>Các dự án Sun Group Đà Nẵng khác đang bán (Spana, Cora, S-Light, FourS) có tiện ích tập trung ở tầng 2 – so chính sách tại <a href="/chinh-sach-ban-hang-sun-group-da-nang-11-2026/">chính sách bán hàng Sun Group 11/2026</a>. Cần bộ ảnh tiện ích Symphony 5 và giỏ căn còn trống, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: tổng mặt bằng phân khu và bộ phối cảnh tiện ích Symphony 5 của chủ đầu tư (11/2026); CafeLand (thông tin dự án). Diện tích công viên theo tài liệu chủ đầu tư, có thể điều chỉnh.</p>
 HTML
 		,
@@ -620,9 +613,8 @@ HTML
 </tbody>
 </table>
 <h2>Nhận định của Hoàng Hiệp: có nên mua S-Light Tower lúc này</h2>
-<p>Theo quan sát của Hiệp trên thị trường Đà Nẵng thời gian qua, có mấy điểm đáng nói.</p>
-<p>Có nên mua S-Light Tower phụ thuộc vào thời gian chờ anh chị chấp nhận được. Đổi một năm chờ so với Spana, người mua có đơn giá thấp hơn, tiến độ dài hơn và vị trí ngã ba sông. Nếu đã trả lời được có nên mua S-Light Tower, khi đặt căn nên yêu cầu xem văn bản đủ điều kiện bán và thư bảo lãnh của tòa. So sánh đủ ba tòa tại <a href="/cora-spana-s-light-sun-neo-city-nen-chon-toa-nao/">Cora, Spana hay S-Light – nên chọn tòa nào</a>; xem chính sách tại <a href="/chinh-sach-ban-hang-s-light-tower-thang-11-2026/">chính sách bán hàng S-Light Tower</a> và <a href="/chinh-sach-ban-hang-sun-group-da-nang-11-2026/">chính sách Sun Group 11/2026</a>.</p>
-<p>Mức thanh toán sớm tháng 11/2026 đã hết hạn 25/11; mức tháng mới, phiếu tính giá và danh sách căn S-Light còn trống: liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
+<p>Hiệp thường nói với khách: có nên mua S-Light Tower phụ thuộc vào thời gian chờ anh chị chấp nhận được. Đổi một năm chờ so với Spana, người mua có đơn giá thấp hơn, tiến độ dài hơn và vị trí ngã ba sông. Nếu đã trả lời được có nên mua S-Light Tower, khi đặt căn nên yêu cầu xem văn bản đủ điều kiện bán và thư bảo lãnh của tòa. So sánh đủ ba tòa tại <a href="/cora-spana-s-light-sun-neo-city-nen-chon-toa-nao/">Cora, Spana hay S-Light – nên chọn tòa nào</a>; xem chính sách tại <a href="/chinh-sach-ban-hang-s-light-tower-thang-11-2026/">chính sách bán hàng S-Light Tower</a> và <a href="/chinh-sach-ban-hang-sun-group-da-nang-11-2026/">chính sách Sun Group 11/2026</a>.</p>
+<p>Mức thanh toán sớm tháng 11/2026 đã hết hạn 25/11; mức tháng mới, phiếu tính giá và danh sách căn S-Light còn trống: liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
 <p class="src">Nguồn: CafeLand (thông tin dự án, bài tầm nhìn S-Light Tower); CafeF (Sun Property ra mắt S-Light Tower, 6/2026); bảng hàng 10/2026 và chính sách CSBH 01/SL của chủ đầu tư; số liệu giao dịch Hoàng Hiệp tổng hợp. Thông tin tham khảo.</p>
 HTML
 		,
