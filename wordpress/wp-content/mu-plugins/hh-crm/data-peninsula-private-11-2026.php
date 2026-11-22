@@ -99,3 +99,41 @@ add_filter(
 	},
 	70
 );
+
+/*
+ * 22/11/2026: giá dự kiến ("rumor") tầng 11 và chính sách chiết khấu anh Hiệp gửi. Chỉ lấy thông tin, không dùng ảnh
+ * (có logo đơn vị phân phối), không đăng mã căn; bỏ ưu đãi riêng khách của đơn vị phân phối. Theo quy tắc giá: chỉ đăng "chỉ từ".
+ * Giá tầng 11 đã gồm VAT: đơn giá 65,4 – 71,4 triệu/m²; thấp nhất studio 36,2 m² khoảng 2,418 tỷ.
+ */
+add_filter(
+	'hh_project_dataset',
+	static function ( $projects ) {
+		$upd = array(
+			'hh_p_price_from'  => '2418',
+			'hh_p_price_m2'    => 'Khoảng 65 – 71 triệu/m², đã gồm VAT (giá dự kiến tầng 11, tham khảo)',
+			'hh_p_price_hint'  => 'Giá dự kiến tầng 11 (đã gồm VAT): studio khoảng 36 m² chỉ từ khoảng 2,42 tỷ; căn 1PN và 2PN – liên hệ Hoàng Hiệp nhận giá từng căn. Giá chính thức theo bảng giá chủ đầu tư khi ký.',
+			'hh_p_offer_title' => 'Chiết khấu tới 12% khi thanh toán nhanh – hỗ trợ lãi suất 0% trong 24 tháng',
+			'hh_p_offer_note'  => 'Theo chính sách bán hàng 11/2026: khách đăng ký nhu cầu và giao dịch thành công trước 30/11/2026 được chiết khấu thêm 3%. Điều kiện chi tiết theo chính sách chủ đầu tư – liên hệ Hoàng Hiệp.',
+			'hh_p_offer_stats' => "12% | Chiết khấu thanh toán nhanh\n6% | Chiết khấu thanh toán theo tiến độ\n3% | Giao dịch trước 30/11/2026\n0% | Lãi suất trong 24 tháng",
+			'hh_p_policy'      => "Khách đăng ký nhu cầu và giao dịch thành công trước 30/11/2026: chiết khấu 3%\nƯu đãi theo vị trí ưu tiên đăng ký nhu cầu (đăng ký từ 31/7 – 30/11/2026): 20 – 50 triệu đồng\nThanh toán theo tiến độ: chiết khấu 6%\nThanh toán nhanh: chiết khấu 12%\nThanh toán vay ưu đãi: chiết khấu 2%\nHỗ trợ lãi suất 0% trong 24 tháng\nGiá dự kiến tầng 11 đã gồm VAT; điều kiện áp dụng theo chính sách bán hàng chủ đầu tư từng thời điểm",
+		);
+		foreach ( $projects as $i => $p ) {
+			if ( 'peninsula-private-da-nang' !== ( $p['slug'] ?? '' ) ) {
+				continue;
+			}
+			foreach ( $upd as $k => $v ) {
+				$cur = (string) ( $p['meta'][ $k ] ?? '' );
+				if ( $cur === $v ) {
+					continue;
+				}
+				if ( '' !== trim( $cur ) ) {
+					$p['fix_meta'][ $k ] = array_merge( (array) ( $p['fix_meta'][ $k ] ?? array() ), array( $cur ) );
+				}
+				$p['meta'][ $k ] = $v;
+			}
+			$projects[ $i ] = $p;
+		}
+		return $projects;
+	},
+	80
+);

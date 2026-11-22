@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.341**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.342**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.342
+
+- Peninsula Private: giá dự kiến tầng 11 (đã gồm VAT) – chỉ từ khoảng 2,42 tỷ, đơn giá khoảng 65 – 71 triệu/m²; khung ưu đãi và chính sách chiết khấu 11/2026 (thanh toán nhanh 12%, theo tiến độ 6%, vay 2%, giao dịch trước 30/11/2026 thêm 3%, hỗ trợ lãi suất 0% 24 tháng).
 
 ## Có gì mới – 2.20.341
 
