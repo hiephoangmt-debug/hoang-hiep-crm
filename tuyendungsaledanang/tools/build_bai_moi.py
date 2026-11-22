@@ -5,6 +5,8 @@ lo-trinh-sale-moi-60-ngay-dau.html để mọi bài giống nhau.
 Chạy: python3 tools/build_bai_moi.py [slug ...]   (không truyền slug = dựng tất cả)
 """
 import html, json, os, re, sys, datetime
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import add_hiep_notes
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 S = 'https://www.tuyendungsaledanang.com'
@@ -243,6 +245,7 @@ def build(slug):
 {PROJECTS}{cta}
 {series}</main>
 {TAIL}'''
+    page, _ = add_hiep_notes.apply(page, slug)
     out = os.path.join(ROOT, 'bai', slug + '.html')
     open(out, 'w', encoding='utf-8').write(page)
     return out, meta
