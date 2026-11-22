@@ -122,6 +122,8 @@ def build(slug):
     # Mục lục từ các section
     secs = re.findall(r'<section class="card[^"]*" id="([^"]+)">\s*<h2>(.*?)</h2>', body, re.S)
     toc = ''.join(f'<li><a href="#{i}">{esc(strip_tags(h))}</a></li>' for i, h in secs)
+    if series_of(slug) is SERIES['on-thi']:
+        toc += '<li><a href="#luyen-tap">📝 Luyện tập</a></li>'
     toc += '<li><a href="#hoi-dap">Câu hỏi thường gặp</a></li><li><a href="#ung-tuyen">Ứng tuyển</a></li>'
 
     # Ảnh minh hoạ sau hộp Trả lời nhanh
