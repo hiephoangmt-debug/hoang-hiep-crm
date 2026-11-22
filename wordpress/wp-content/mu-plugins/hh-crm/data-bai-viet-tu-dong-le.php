@@ -1503,6 +1503,7 @@ HTML
 	/* ---------------- The Poet – Nội thất bàn giao ---------------- */
 	$posts[] = array(
 		'slug'     => 'noi-that-the-poet-residence',
+		'rev'            => 2, // 22/11: giọng văn thương hiệu Hiệp.
 		'title'    => 'Nội thất The Poet Residence: bàn giao những gì trong căn hộ 2027?',
 		'excerpt'  => 'Nội thất The Poet Residence bàn giao hoàn thiện: sàn porcelain 800×800, kính hộp Low-E, điều hòa âm trần Samsung, khóa điện tử, bếp Teka/Malloca, thiết bị vệ sinh Grohe/Toto – chi tiết từng phòng và lưu ý khi nhận nhà.',
 		'keyword'  => 'nội thất The Poet Residence',
@@ -1549,7 +1550,7 @@ HTML
 <li><strong>Bảo hành:</strong> căn hộ bảo hành 60 tháng – ghi rõ lỗi vào biên bản để chủ đầu tư khắc phục.</li>
 </ul>
 <h2>Nội thất The Poet Residence có hợp để cho thuê?</h2>
-<p>Với vị trí cách biển Mỹ Khê khoảng 300 m, căn hộ bàn giao sẵn điều hòa, bếp và thiết bị vệ sinh giúp chủ nhà chỉ cần thêm giường, sofa, rèm là cho thuê được. Nội thất The Poet Residence theo hướng hiện đại, sáng màu, dễ phối đồ và dễ bảo trì – phù hợp khách thuê dài hạn lẫn ngắn ngày. Xem thêm {$poet} để biết loại căn và giá tham khảo, hoặc bài <a href="/can-ho-da-nang-sap-ban-giao-2026-2027/">căn hộ Đà Nẵng sắp bàn giao 2026 – 2027</a>.</p>
+<p>Với vị trí cách biển Mỹ Khê khoảng 300 m, căn hộ bàn giao sẵn điều hòa, bếp và thiết bị vệ sinh giúp chủ nhà chỉ cần thêm giường, sofa, rèm là cho thuê được. Hiệp thấy nội thất The Poet Residence theo hướng hiện đại, sáng màu, dễ phối đồ và dễ bảo trì – phù hợp khách thuê dài hạn lẫn ngắn ngày. Xem thêm {$poet} để biết loại căn và giá tham khảo, hoặc bài <a href="/can-ho-da-nang-sap-ban-giao-2026-2027/">căn hộ Đà Nẵng sắp bàn giao 2026 – 2027</a>.</p>
 {$poetcta}
 {$poetsrc}
 HTML
@@ -1575,6 +1576,7 @@ HTML
 	/* ---------------- The Poet – Vị trí ---------------- */
 	$posts[] = array(
 		'slug'     => 'vi-tri-the-poet-residence',
+		'rev'            => 2, // 22/11: giọng văn thương hiệu Hiệp.
 		'title'    => 'Vị trí The Poet Residence: 300 m ra biển Mỹ Khê, kết nối trung tâm thế nào?',
 		'excerpt'  => 'Vị trí The Poet Residence tại 95 – 99 Hồ Xuân Hương (Ngũ Hành Sơn): cách biển Mỹ Khê khoảng 300 m, cầu Tiên Sơn 1,5 km, Lotte Mart 2 km, sân bay 6,5 km – phân tích ưu nhược điểm vị trí.',
 		'keyword'  => 'vị trí The Poet Residence',
@@ -1613,7 +1615,7 @@ HTML
 <li><strong>Người làm việc tự do, chuyên gia:</strong> sống cạnh biển nhưng vẫn gần khu văn phòng, sân bay.</li>
 </ul>
 <h2>Điểm cần cân nhắc</h2>
-<p>Đường Hồ Xuân Hương đông xe giờ cao điểm và mùa du lịch; căn tầng thấp phía mặt đường sẽ ồn hơn căn tầng cao. Khu đất 2.009 m² nên sân vườn mặt đất hạn chế – bù lại tiện ích tập trung ở tầng 3 và tầng mái. Khi chọn căn, nên ưu tiên tầng cao và hướng view phù hợp nhu cầu.</p>
+<p>Đường Hồ Xuân Hương đông xe giờ cao điểm và mùa du lịch; căn tầng thấp phía mặt đường sẽ ồn hơn căn tầng cao. Khu đất 2.009 m² nên sân vườn mặt đất hạn chế – bù lại tiện ích tập trung ở tầng 3 và tầng mái. Khi giúp khách chọn căn, Hiệp thường ưu tiên tầng cao và hướng view hợp nhu cầu.</p>
 <p>So sánh thêm: căn hộ ven biển phía Nam như <a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a> (Trường Sa) hay dự án bên kia cầu Tiên Sơn <a href="/du-an/masteri-da-nang/">Masteri Rivera Danang</a> – mỗi nơi một lợi thế. Vị trí The Poet Residence nổi bật ở chỗ vừa sát biển vừa gần trung tâm.</p>
 <h2>Hạ tầng quanh vị trí The Poet Residence đang thay đổi</h2>
 <p>Khu bờ Đông sông Hàn và trục ven biển đang được thành phố đầu tư mạnh: chỉnh trang tuyến Võ Nguyên Giáp – Trường Sa, các dự án quanh cầu Tiên Sơn và khu Đà Nẵng Downtown. Khi hạ tầng hoàn thiện, giá trị của vị trí The Poet Residence – nằm ngay giữa biển và sông – càng rõ hơn. Theo dõi các tin hạ tầng mới trong mục tin tức Hạ tầng &amp; quy hoạch trên web Hoàng Hiệp.</p>

@@ -1197,6 +1197,7 @@ HTML
 	/* ---------------- 20/11 – Khu đô thị Hòa Vang 183,9 ha, gần 19.000 tỷ: đấu thầu quốc tế chọn nhà đầu tư (Tuổi Trẻ, Thanh Niên 19/11/2026) ---------------- */
 	$posts[] = array(
 		'slug'           => 'khu-do-thi-hoa-vang-dau-thau-quoc-te',
+		'rev'            => 2, // 22/11: giọng văn thương hiệu Hiệp.
 		'title'          => 'Khu đô thị Hòa Vang 183,9 ha, gần 19.000 tỷ đồng: Đà Nẵng đấu thầu quốc tế chọn nhà đầu tư',
 		'excerpt'        => 'Ngày 19/11/2026, UBND TP Đà Nẵng phê duyệt thông tin dự án Khu đô thị Hòa Vang: 183,9 ha, khoảng 33.910 dân, vốn hơn 18.922 tỷ đồng, 55,1 ha đất ở; chọn nhà đầu tư qua đấu thầu rộng rãi quốc tế từ quý IV/2026 đến quý II/2027.',
 		'keyword'        => 'khu đô thị Hòa Vang',
@@ -1230,7 +1231,7 @@ HTML
 <h2>Tác động / nhận định của Hoàng Hiệp</h2>
 <ul>
 <li><strong>Đô thị hóa lan về phía Tây Nam:</strong> sau Hòa Xuân, Nam Hòa Xuân, việc mời đầu tư khu đô thị Hòa Vang cho thấy thành phố đẩy mạnh phát triển vùng ven theo Quy hoạch chung 2050. Hạ tầng kết nối (đường, cầu, điện, nước) sẽ đi trước, kéo giá đất khu vực.</li>
-<li><strong>Nguồn cung dài hạn, chưa phải ngắn hạn:</strong> khu đô thị Hòa Vang chưa có nhà đầu tư; người mua cần tránh các lời mời "đặt cọc giữ chỗ" khi dự án chưa đủ điều kiện kinh doanh.</li>
+<li><strong>Nguồn cung dài hạn, chưa phải ngắn hạn:</strong> khu đô thị Hòa Vang chưa có nhà đầu tư; Hiệp khuyên khách tránh các lời mời "đặt cọc giữ chỗ" khi dự án chưa đủ điều kiện kinh doanh.</li>
 <li><strong>Đấu thầu quốc tế – kỳ vọng nhà đầu tư lớn:</strong> hình thức đấu thầu rộng rãi quốc tế mở cửa cho các tập đoàn có năng lực tài chính, giúp dự án làm đồng bộ hơn các khu phân lô nhỏ lẻ.</li>
 <li><strong>Khu đô thị hiện hữu hưởng lợi trước:</strong> các khu đã có hạ tầng, đã ra sổ ở phía Nam như Hòa Xuân hưởng lợi sớm khi dân cư, tiện ích dịch chuyển về hướng này.</li>
 </ul>
@@ -1269,6 +1270,7 @@ HTML
 	/* ---------------- 21/11 – Phấn đấu khởi công cải tạo đường băng 17R/35L sân bay Đà Nẵng cuối 11/2026 (Thời báo Tài chính VN, VnEconomy, QĐ 1417/QĐ-BXD) ---------------- */
 	$posts[] = array(
 		'slug'           => 'khoi-cong-duong-bang-san-bay-da-nang',
+		'rev'            => 2, // 22/11: giọng văn thương hiệu Hiệp.
 		'title'          => 'Khởi công đường băng sân bay Đà Nẵng cuối tháng 11/2026: dự án gần 1.696 tỷ đồng được rút ngắn thủ tục',
 		'excerpt'        => 'Bộ Xây dựng chấp thuận dùng thiết kế kỹ thuật thay thiết kế cơ sở, rút ngắn khoảng 1 tháng để phấn đấu khởi công cải tạo đường cất hạ cánh 17R/35L sân bay Đà Nẵng cuối tháng 11/2026; dự án nhóm B gần 1.696 tỷ đồng, thực hiện 2026 – 2028.',
 		'keyword'        => 'khởi công đường băng sân bay Đà Nẵng',
@@ -1307,7 +1309,7 @@ HTML
 <h2>Tác động / nhận định của Hoàng Hiệp</h2>
 <ul>
 <li><strong>Du lịch là động lực của căn hộ cho thuê:</strong> sân bay khai thác an toàn, thêm chuyến quốc tế thì lượng khách lưu trú tăng – có lợi cho căn hộ ven biển và trung tâm đang khai thác cho thuê ngắn ngày.</li>
-<li><strong>Ngắn hạn cần tính tới thi công:</strong> sau khi khởi công đường băng sân bay Đà Nẵng, trong 2026 – 2028, nếu năng lực cất hạ cánh bị hạn chế giờ cao điểm, chủ căn cho thuê nên linh hoạt giờ nhận, trả phòng của khách.</li>
+<li><strong>Ngắn hạn cần tính tới thi công:</strong> sau khi khởi công đường băng sân bay Đà Nẵng, trong 2026 – 2028, nếu năng lực cất hạ cánh bị hạn chế giờ cao điểm, Hiệp hay nhắc các chủ căn cho thuê nên linh hoạt giờ nhận, trả phòng của khách.</li>
 <li><strong>Tin hạ tầng đã được phê duyệt, có vốn:</strong> khác với các đề xuất, việc khởi công đường băng sân bay Đà Nẵng có quyết định chủ trương đầu tư và vốn ngân sách trung ương, nên mức chắc chắn cao.</li>
 <li><strong>Không nên mua chỉ vì một tin:</strong> khởi công đường băng sân bay Đà Nẵng là tin tốt cho cả thành phố, nhưng giá căn hộ vẫn phụ thuộc pháp lý, chủ đầu tư, vị trí và dòng tiền thực tế; tin sân bay là yếu tố cộng thêm, không thay thế việc kiểm tra dự án.</li>
 </ul>
@@ -1347,6 +1349,7 @@ HTML
 	/* ---------------- 21/11 – Đề xuất công viên kiểu Disneyland tại xã Thăng An trong kế hoạch kinh tế ban đêm 2027 – 2030 (Tuổi Trẻ 20/11/2026, anh Hiệp gửi) ---------------- */
 	$posts[] = array(
 		'slug'           => 'cong-vien-kieu-disneyland-da-nang-thang-an',
+		'rev'            => 2, // 22/11: giọng văn thương hiệu Hiệp.
 		'title'          => 'Công viên kiểu Disneyland Đà Nẵng: đề xuất kêu gọi đầu tư tại xã Thăng An để phát triển kinh tế đêm 2027 – 2030',
 		'excerpt'        => 'Sáng 20/11/2026, Sở Văn hóa, Thể thao và Du lịch Đà Nẵng tham vấn đề án phát triển kinh tế ban đêm 2027 – 2030, tầm nhìn 2050; dự thảo đề xuất kêu gọi đầu tư khu phức hợp vui chơi giải trí, lễ hội, sự kiện quốc tế theo mô hình Disneyland tại xã Thăng An.',
 		'keyword'        => 'công viên kiểu Disneyland Đà Nẵng',
@@ -1382,7 +1385,7 @@ HTML
 <h2>Tác động / nhận định của Hoàng Hiệp</h2>
 <ul>
 <li><strong>Động lực dài hạn cho du lịch phía Nam:</strong> một công viên kiểu Disneyland Đà Nẵng quy mô quốc tế thường kéo theo khách sạn, dịch vụ, nhà ở cho người lao động. Vùng Nam Hội An – Thăng Bình cũ sẽ có thêm lý do để khách lưu trú dài ngày.</li>
-<li><strong>Mới là đề xuất trong dự thảo:</strong> chưa có nhà đầu tư, vốn, quy mô. Từ ý tưởng tới khởi công một công viên kiểu Disneyland Đà Nẵng thường mất nhiều năm; không nên mua đất chỉ vì tin này.</li>
+<li><strong>Mới là đề xuất trong dự thảo:</strong> chưa có nhà đầu tư, vốn, quy mô. Từ ý tưởng tới khởi công một công viên kiểu Disneyland Đà Nẵng thường mất nhiều năm; Hiệp không khuyên khách mua đất chỉ vì tin này.</li>
 <li><strong>Cảnh giác "sốt" đất Thăng An:</strong> khi có tin lớn như công viên kiểu Disneyland Đà Nẵng, môi giới dễ thổi giá đất nông nghiệp, đất chưa có quy hoạch chi tiết. Cần kiểm tra quy hoạch sử dụng đất, sổ đỏ trước khi đặt cọc.</li>
 <li><strong>Ưu tiên sản phẩm đã có pháp lý, đã vận hành:</strong> các khu nghỉ dưỡng ven biển phía Nam đã hoạt động hưởng lợi sớm nhất nếu lượng khách tăng.</li>
 </ul>
@@ -1420,6 +1423,7 @@ HTML
 	/* ---------------- 21/11 – QĐ 5316/QĐ-UBND ngày 20/11/2026 phê duyệt giá đất cụ thể dự án Alphanam Luxury, phường An Hải (danang.gov.vn 21/11, anh Hiệp gửi) ---------------- */
 	$posts[] = array(
 		'slug'           => 'gia-dat-cu-the-alphanam-luxury-an-hai',
+		'rev'            => 2, // 22/11: giọng văn thương hiệu Hiệp.
 		'title'          => 'Giá đất cụ thể Alphanam Luxury: Đà Nẵng duyệt 96,7 triệu đồng/m² để thu nghĩa vụ tài chính do điều chỉnh quy hoạch',
 		'excerpt'        => 'Quyết định 5316/QĐ-UBND ngày 20/11/2026 phê duyệt giá đất cụ thể tại dự án Alphanam Luxury, phường An Hải, tại thời điểm 29/10/2018: 96.734.786 đồng/m² sau điều chỉnh quy hoạch, làm cơ sở thu nghĩa vụ tài chính phát sinh (nếu có).',
 		'keyword'        => 'giá đất cụ thể Alphanam Luxury',
@@ -1453,7 +1457,7 @@ HTML
 <h2>Tác động / nhận định của Hoàng Hiệp</h2>
 <ul>
 <li><strong>Tháo gỡ pháp lý dự án tồn đọng:</strong> việc xác định giá đất cụ thể Alphanam Luxury là bước để hoàn tất nghĩa vụ tài chính – điều kiện quan trọng để dự án tiến tới các thủ tục tiếp theo. Phê duyệt giá đất cụ thể Alphanam Luxury là tín hiệu thành phố đang xử lý dần các dự án vướng từ giai đoạn trước.</li>
-<li><strong>Thước đo giá đất ven sông Hàn:</strong> ngay từ năm 2018, giá đất cụ thể các lô biệt thự tại đây đã lên tới khoảng 183 – 195 triệu đồng/m². Điều này giải thích vì sao căn hộ mới ở bờ Đông sông Hàn khó có giá thấp.</li>
+<li><strong>Thước đo giá đất ven sông Hàn:</strong> ngay từ năm 2018, giá đất cụ thể các lô biệt thự tại đây đã lên tới khoảng 183 – 195 triệu đồng/m². Đây cũng là điều Hiệp hay giải thích khi khách hỏi vì sao căn hộ mới ở bờ Đông sông Hàn khó có giá thấp.</li>
 <li><strong>Người mua cần xem nghĩa vụ tài chính:</strong> trường hợp giá đất cụ thể Alphanam Luxury cho thấy với dự án điều chỉnh quy hoạch, nên hỏi rõ chủ đầu tư đã hoàn thành nghĩa vụ tài chính chưa, vì việc này ảnh hưởng tới tiến độ cấp sổ.</li>
 </ul>
 <h2>Dự án chịu ảnh hưởng</h2>
@@ -1490,7 +1494,7 @@ HTML
 	/* ---------------- 21/11 – Quốc hội thông qua Luật Kinh doanh bất động sản (sửa đổi): cọc tối đa 5%, lần đầu ≤ 30%, cấm thu tiền giữ chỗ; hiệu lực 1/7/2027 (anh Hiệp gửi link VietnamBiz) ---------------- */
 	$posts[] = array(
 		'slug'           => 'luat-kinh-doanh-bat-dong-san-sua-doi-2026',
-		'rev'            => 2, // 21/11 17h: bổ sung trần 70% trước bàn giao, 95% trước khi cấp sổ, thuê mua 30% / 50% (anh Hiệp gửi).
+		'rev'            => 3, // 21/11 17h: bổ sung trần 70% trước bàn giao, 95% trước khi cấp sổ, thuê mua 30% / 50% (anh Hiệp gửi).
 		'title'          => 'Luật Kinh doanh bất động sản sửa đổi được thông qua: cọc tối đa 5%, lần đầu không quá 30%, cấm thu tiền giữ chỗ',
 		'excerpt'        => 'Sáng 21/11/2026, Quốc hội thông qua Luật Kinh doanh bất động sản (sửa đổi) với 471/479 đại biểu tán thành; luật có 10 chương, 63 điều, hiệu lực từ 1/7/2027: đặt cọc tối đa 5%, nhà hình thành trong tương lai thanh toán lần đầu không quá 30%, cấm thu tiền giữ chỗ.',
 		'keyword'        => 'Luật Kinh doanh bất động sản sửa đổi',
@@ -1530,7 +1534,7 @@ HTML
 <h2>Tác động / nhận định của Hoàng Hiệp</h2>
 <ul>
 <li><strong>Bảo vệ người mua tốt hơn:</strong> Luật Kinh doanh bất động sản sửa đổi chặn các khoản "booking" không có cơ sở pháp lý – vốn là nguồn rủi ro lớn nhất với người mua dự án mới.</li>
-<li><strong>Dự án đủ pháp lý được ưu tiên:</strong> thị trường sẽ phân hóa rõ giữa dự án đã đủ điều kiện kinh doanh và dự án "bán trước, làm sau". Người mua nên ưu tiên dự án đã có thông báo đủ điều kiện bán.</li>
+<li><strong>Dự án đủ pháp lý được ưu tiên:</strong> thị trường sẽ phân hóa rõ giữa dự án đã đủ điều kiện kinh doanh và dự án "bán trước, làm sau". Khi tư vấn, Hiệp luôn ưu tiên giới thiệu dự án đã có thông báo đủ điều kiện bán.</li>
 <li><strong>Dòng tiền nhẹ hơn ban đầu:</strong> cọc 5% và lần đầu tối đa 30% giúp người mua có thời gian chuẩn bị tài chính, nhất là khi kết hợp vay ngân hàng.</li>
 <li><strong>Chính sách bán hàng có thể thay đổi:</strong> khi Luật Kinh doanh bất động sản sửa đổi có hiệu lực, các ưu đãi thanh toán nhanh, thanh toán sớm hiện nay sẽ cần điều chỉnh cho phù hợp; mỗi đợt bán cần xem chính sách đúng thời điểm.</li>
 </ul>

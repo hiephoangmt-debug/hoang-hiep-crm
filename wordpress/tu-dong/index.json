@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-22T01:04:48+00:00",
+    "updated": "2026-11-22T01:09:16+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen",
@@ -996,7 +996,8 @@
             "slug": "khu-do-thi-hoa-vang-dau-thau-quoc-te",
             "title": "Khu đô thị Hòa Vang 183,9 ha, gần 19.000 tỷ đồng: Đà Nẵng đấu thầu quốc tế chọn nhà đầu tư",
             "publish": "2026-11-20 06:45",
-            "file": "bai/khu-do-thi-hoa-vang-dau-thau-quoc-te.txt"
+            "file": "bai/khu-do-thi-hoa-vang-dau-thau-quoc-te.txt",
+            "rev": 2
         },
         {
             "slug": "mat-bang-can-ho-cora-tower",
@@ -1034,25 +1035,29 @@
             "slug": "khoi-cong-duong-bang-san-bay-da-nang",
             "title": "Khởi công đường băng sân bay Đà Nẵng cuối tháng 11/2026: dự án gần 1.696 tỷ đồng được rút ngắn thủ tục",
             "publish": "2026-11-21 06:45",
-            "file": "bai/khoi-cong-duong-bang-san-bay-da-nang.txt"
+            "file": "bai/khoi-cong-duong-bang-san-bay-da-nang.txt",
+            "rev": 2
         },
         {
             "slug": "cong-vien-kieu-disneyland-da-nang-thang-an",
             "title": "Công viên kiểu Disneyland Đà Nẵng: đề xuất kêu gọi đầu tư tại xã Thăng An để phát triển kinh tế đêm 2027 – 2030",
             "publish": "2026-11-21 06:45",
-            "file": "bai/cong-vien-kieu-disneyland-da-nang-thang-an.txt"
+            "file": "bai/cong-vien-kieu-disneyland-da-nang-thang-an.txt",
+            "rev": 2
         },
         {
             "slug": "gia-dat-cu-the-alphanam-luxury-an-hai",
             "title": "Giá đất cụ thể Alphanam Luxury: Đà Nẵng duyệt 96,7 triệu đồng/m² để thu nghĩa vụ tài chính do điều chỉnh quy hoạch",
             "publish": "2026-11-21 07:00",
-            "file": "bai/gia-dat-cu-the-alphanam-luxury-an-hai.txt"
+            "file": "bai/gia-dat-cu-the-alphanam-luxury-an-hai.txt",
+            "rev": 2
         },
         {
             "slug": "noi-that-the-poet-residence",
             "title": "Nội thất The Poet Residence: bàn giao những gì trong căn hộ 2027?",
             "publish": "2026-11-21 08:15",
-            "file": "bai/noi-that-the-poet-residence.txt"
+            "file": "bai/noi-that-the-poet-residence.txt",
+            "rev": 2
         },
         {
             "slug": "mat-bang-can-ho-fours-tower",
@@ -1079,7 +1084,7 @@
             "title": "Luật Kinh doanh bất động sản sửa đổi được thông qua: cọc tối đa 5%, lần đầu không quá 30%, cấm thu tiền giữ chỗ",
             "publish": "2026-11-21 16:45",
             "file": "bai/luat-kinh-doanh-bat-dong-san-sua-doi-2026.txt",
-            "rev": 2
+            "rev": 3
         },
         {
             "slug": "bai-bien-gan-sun-saphia-residence",
@@ -1091,7 +1096,8 @@
             "slug": "vi-tri-the-poet-residence",
             "title": "Vị trí The Poet Residence: 300 m ra biển Mỹ Khê, kết nối trung tâm thế nào?",
             "publish": "2026-11-22 08:15",
-            "file": "bai/vi-tri-the-poet-residence.txt"
+            "file": "bai/vi-tri-the-poet-residence.txt",
+            "rev": 2
         },
         {
             "slug": "tien-do-capital-square-da-nang",
