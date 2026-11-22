@@ -4,13 +4,13 @@ const ROOT=path.dirname(__dirname);const IMG=path.join(ROOT,'img');
 const b64=f=>'data:image/jpeg;base64,'+fs.readFileSync(path.join(IMG,f)).toString('base64');
 const photo=b64('hoang-hiep-walk-wide.jpg');
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const all=fs.readdirSync(path.join(ROOT,'bai-src')).filter(f=>f.endsWith('.html')).map(f=>f.slice(0,-5));
+const extra=JSON.parse(fs.readFileSync(path.join(ROOT,'bai-src','og-extra.json'),'utf8'));
+const all=fs.readdirSync(path.join(ROOT,'bai-src')).filter(f=>f.endsWith('.html')).map(f=>f.slice(0,-5)).concat(Object.keys(extra));
 const slugs=process.argv.slice(2).length?process.argv.slice(2):all;
 (async()=>{const br=await chromium.launch({executablePath:'/opt/pw-browsers/chromium'});
 const p=await br.newPage({viewport:{width:1200,height:630}});
 for(const s of slugs){
- const src=fs.readFileSync(path.join(ROOT,'bai-src',s+'.html'),'utf8');
- const m=JSON.parse(src.match(/<!--META\s*(\{[\s\S]*?\})\s*META-->/)[1]);
+ const m=extra[s]||JSON.parse(fs.readFileSync(path.join(ROOT,'bai-src',s+'.html'),'utf8').match(/<!--META\s*(\{[\s\S]*?\})\s*META-->/)[1]);
  const h=`<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>*{margin:0;box-sizing:border-box}body{font-family:"Be Vietnam Pro",sans-serif}
 .c{width:1200px;height:630px;background:linear-gradient(100deg,#13214f 0%,#1B2D6B 60%,#22388a 100%);position:relative;overflow:hidden;color:#fff}
