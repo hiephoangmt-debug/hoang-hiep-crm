@@ -1,0 +1,85 @@
+{
+ "tag": "SẢN PHẨM · CASAMIA BALANCA",
+ "title": "BIỆT THỰ",
+ "sub": "Tổng 363 sản phẩm thấp tầng",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "173",
+   "biệt thự đơn lập"
+  ],
+  [
+   "116",
+   "biệt thự song lập"
+  ],
+  [
+   "74",
+   "shophouse"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo chủ đầu tư Đạt Phương · Phối cảnh dự án",
+ "headline": [
+  [
+   "BIỆT THỰ",
+   "big",
+   0
+  ],
+  [
+   "Casamia Balanca",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Chọn loại nào?",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "BIỆT THỰ",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Casamia Balanca",
+     "script"
+    ]
+   ],
+   "dx": 100
+  }
+ ]
+}

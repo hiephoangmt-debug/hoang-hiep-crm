@@ -118,3 +118,7 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 
 ## TIKTOK: VÙNG AN TOÀN (anh Hiệp 21/11/2026 báo "bản đăng tiktok bị cắt hình")
 - tiktok-slides.py đã dồn mọi chữ vào y 260–1480, x 50–920 (khung 3:4 ở giữa ảnh 1080x1920) để không mất chữ khi TikTok cắt khung hoặc che bởi nút/lời bài. Không đặt chữ ngoài vùng này.
+
+## MÀU ẢNH (anh Hiệp 22/11/2026: khoanh thẻ "Mua chung Sun Saphia" nền xanh – "Lấy màu này")
+- Thẻ thông điệp Facebook (Sun, Casamia, Hoàng Hiệp) dùng màu POSTER NỀN XANH (`fb-the-doc-v2.py poster-xanh`): nền xanh trời nhạt, tiêu đề chữ có chân màu cam đất, chữ viết tay cam, số liệu cam. Mẫu "nắng cam" chỉ dùng khi anh Hiệp yêu cầu riêng.
+- Casamia: ảnh 1 = thẻ poster nền xanh (thay cho nắng cam ở mục "CASAMIA: ẢNH THÔNG ĐIỆP ĐẦU"), sau đó 3 ảnh không chữ.

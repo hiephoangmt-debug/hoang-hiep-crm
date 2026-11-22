@@ -1,0 +1,85 @@
+{
+ "tag": "VỊ TRÍ · CASAMIA BALANCA",
+ "title": "CASAMIA BALANCA",
+ "sub": "Đường 38 m nối Đà Nẵng – Hội An – Chu Lai",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "38 m",
+   "trục đường"
+  ],
+  [
+   "31,1 ha",
+   "quy mô"
+  ],
+  [
+   "363",
+   "sản phẩm"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo chủ đầu tư Đạt Phương · Phối cảnh dự án",
+ "headline": [
+  [
+   "CASAMIA BALANCA",
+   "big",
+   0
+  ],
+  [
+   "Đà Nẵng – Hội An – Chu Lai",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Vị trí – kết nối",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "CASAMIA BALANCA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "ven sông Cổ Cò",
+     "script"
+    ]
+   ],
+   "dx": 200
+  }
+ ]
+}
