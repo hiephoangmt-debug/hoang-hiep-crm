@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-22T00:30:14+00:00",
+    "updated": "2026-11-22T00:35:00+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen",
@@ -1101,6 +1101,12 @@
             "rev": 2
         },
         {
+            "slug": "gia-biet-thu-casamia-calm-hoi-an-2026",
+            "title": "Giá biệt thự Casamia Calm Hội An 2026: giá gốc từ 6,2 tỷ, chuyển nhượng khoảng 7,3 – 9,5 tỷ",
+            "publish": "2026-11-22 12:15",
+            "file": "bai/gia-biet-thu-casamia-calm-hoi-an-2026.txt"
+        },
+        {
             "slug": "benh-vien-gan-sun-saphia-residence",
             "title": "Bệnh viện gần Sun Saphia Residence: Phụ sản – Nhi, Vinmec, Hoàn Mỹ, Bệnh viện Đà Nẵng cách bao xa",
             "publish": "2026-11-22 11:30",
@@ -1151,6 +1157,12 @@
             "rev": 2
         },
         {
+            "slug": "gia-dat-biet-thu-euro-village-2-hoa-xuan",
+            "title": "Giá đất biệt thự Euro Village 2 cuối 2026: khoảng 83 – 105 triệu/m², chênh theo view sông, kênh, công viên",
+            "publish": "2026-11-23 12:15",
+            "file": "bai/gia-dat-biet-thu-euro-village-2-hoa-xuan.txt"
+        },
+        {
             "slug": "gia-vinhomes-hai-van-bay-2026-theo-phan-khu",
             "title": "Giá Vinhomes Hải Vân Bay 2026 theo phân khu: Bạch Vân, Vịnh Mây, Đảo Ngọc chỉ từ bao nhiêu?",
             "publish": "2026-11-23 12:15",
@@ -1185,6 +1197,12 @@
             "file": "bai/cora-tower-spana-tower-khi-nao-ban-giao.txt"
         },
         {
+            "slug": "tien-ich-casamia-balanca-5-cong-vien",
+            "title": "Tiện ích Casamia Balanca: 5 công viên chủ đề, bể bơi Olympic, bến du thuyền trong khu 31,1 ha",
+            "publish": "2026-11-24 12:15",
+            "file": "bai/tien-ich-casamia-balanca-5-cong-vien.txt"
+        },
+        {
             "slug": "gia-biet-thu-furama-villas-da-nang-2026",
             "title": "Giá biệt thự Furama Villas Đà Nẵng 2026: 3 – 4 phòng ngủ khoảng 21 – 40 tỷ, cần kiểm tra gì?",
             "publish": "2026-11-24 12:15",
@@ -1215,6 +1233,12 @@
             "file": "bai/the-legend-da-nang-cua-chu-dau-tu-nao.txt"
         },
         {
+            "slug": "mat-bang-casamia-calm-mau-biet-thu",
+            "title": "Mặt bằng Casamia Calm Hội An: 112 biệt thự trên 6,4 ha, mẫu đất 150 – 252,7 m², hồ bơi riêng",
+            "publish": "2026-11-25 12:15",
+            "file": "bai/mat-bang-casamia-calm-mau-biet-thu.txt"
+        },
+        {
             "slug": "phap-ly-vinhomes-hai-van-bay-so-huu-lau-dai",
             "title": "Pháp lý Vinhomes Hải Vân Bay: sản phẩm nào sở hữu lâu dài, sản phẩm nào 50 năm?",
             "publish": "2026-11-25 12:15",
@@ -1233,6 +1257,12 @@
             "file": "bai/toa-c3-capital-square-phan-tang-chon-can.txt"
         },
         {
+            "slug": "mua-biet-thu-premier-village-my-khe",
+            "title": "Mua biệt thự Premier Village Đà Nẵng 2026: 118 căn trên biển Mỹ Khê, giá chuyển nhượng khoảng 39 – 47 tỷ",
+            "publish": "2026-11-26 09:30",
+            "file": "bai/mua-biet-thu-premier-village-my-khe.txt"
+        },
+        {
             "slug": "vi-tri-vinhomes-lang-van-ket-noi-giao-thong",
             "title": "Vị trí Vinhomes Làng Vân ở đâu? Kết nối hầm Hải Vân, cảng Liên Chiểu, trung tâm Đà Nẵng",
             "publish": "2026-11-26 11:30",
@@ -1245,6 +1275,12 @@
             "file": "bai/vi-tri-the-legend-da-nang-view-cau-rong.txt"
         },
         {
+            "slug": "co-nen-mua-euro-village-2-hoa-xuan",
+            "title": "Có nên mua Euro Village 2 Hòa Xuân năm 2026? Ưu điểm, điểm cần cân nhắc và ai nên mua",
+            "publish": "2026-11-27 09:30",
+            "file": "bai/co-nen-mua-euro-village-2-hoa-xuan.txt"
+        },
+        {
             "slug": "dao-ngoc-hay-bach-van-vinhomes-hai-van-bay",
             "title": "Đảo Ngọc hay Bạch Vân: nên chọn phân khu nào ở Vinhomes Hải Vân Bay?",
             "publish": "2026-11-27 11:30",
@@ -1255,6 +1291,12 @@
             "title": "Tiện ích Hudson Place S4: bể bơi resort, sân golf mini và tiêu chuẩn bàn giao căn hộ",
             "publish": "2026-11-27 15:30",
             "file": "bai/tien-ich-hudson-place-s4-ban-giao.txt"
+        },
+        {
+            "slug": "phap-ly-casamia-calm-co-nen-mua",
+            "title": "Pháp lý Casamia Calm Hội An: sổ hồng lâu dài, cần kiểm tra gì trước khi mua chuyển nhượng?",
+            "publish": "2026-11-28 09:30",
+            "file": "bai/phap-ly-casamia-calm-co-nen-mua.txt"
         },
         {
             "slug": "co-nen-mua-the-poet-residence",
