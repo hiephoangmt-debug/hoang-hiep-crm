@@ -49,3 +49,9 @@ Khi bài lên web, `seo-bai-viet.php` tự: đưa từ khoá vào tiêu đề / 
 
 - Tin tức mới (bản tin hạ tầng, Sở Xây dựng, tin thị trường): **lên web sớm nhất** – đặt `'schedule'` = thời điểm hiện tại (giờ Việt Nam, làm tròn **xuống** 15 phút), không hẹn giờ cố định 08:00. Web tự đăng ở lượt kiểm tra kế tiếp (15 phút/lần).
 - Facebook: hẹn khung trống sớm nhất trong ngày (vẫn giữ cách nhau ≥ 3 tiếng, tối đa 3 bài tự động/ngày/trang).
+
+## Giọng văn thương hiệu "Hiệp" (anh Hiệp 22/11/2026)
+
+- Bài phân tích, tin tức, bài dự án: **lồng ghép tên Hiệp 2 – 3 lần/bài** theo ngôi thứ nhất, tự nhiên, để khách nhớ thương hiệu. Ví dụ: "Theo kinh nghiệm tư vấn của Hiệp…", "Hiệp thấy…", "Từ thực tế dẫn khách đi xem, Hiệp rút ra…", "Nhiều khách hỏi Hiệp câu này…", "Nếu là người mua, Hiệp sẽ cân nhắc…".
+- Vị trí gợi ý: đầu mục "Tác động / nhận định của Hoàng Hiệp" (1 câu dẫn), 1 lần giữa bài khi phân tích/so sánh, và đoạn CTA cuối ("Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế").
+- Không bịa thành tích/số năm kinh nghiệm/số khách đã tư vấn; không nhắc quá dày (tránh lặp mỗi đoạn); số liệu vẫn phải có nguồn.

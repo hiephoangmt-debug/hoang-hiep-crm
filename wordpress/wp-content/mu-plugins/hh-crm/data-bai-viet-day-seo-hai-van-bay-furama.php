@@ -85,6 +85,7 @@ function hh_posts_day_seo_hai_van_bay_furama( $posts ) {
 <p>Chương trình khóa trần lãi suất 6%/năm trong 5 năm thuộc đợt 20/4 – 20/7/2026 (theo <a href="https://tienphong.vn/vinhomes-hai-van-bay-bung-no-giao-dich-trong-ngay-dau-sieu-chinh-sach-khoa-tran-lai-suat-6nam-trong-5-nam-co-hieu-luc-post1836841.tpo">Tiền Phong</a>) và chính sách tháng 10/2026 không còn là chính sách hiện hành. Khi đọc tin cũ trên mạng, anh chị nên đối chiếu ngày áp dụng trước khi tính toán.</p>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
+<p>Hiệp thấy có vài điểm đáng chú ý mà cả người mua ở lẫn nhà đầu tư nên cân nhắc.</p>
 <p>Chính sách Vinhomes Hải Vân Bay đợt 19/11/2026 chia khá rõ theo nhu cầu: khách dư vốn nên tính ưu đãi thanh toán sớm 7,5% cộng VinClub; khách muốn ở thật chọn Bạch Vân về ở sớm 10%; khách cần dòng tiền thụ động cân nhắc căn hoàn thiện Đảo Ngọc nhận cam kết 7%/năm. Với vay ngân hàng, PA2 hấp dẫn về dòng tiền nhưng chi phí cộng vào giá tăng nhanh theo thời gian hỗ trợ, nên so tổng tiền phải trả của cả hai phương án cho đúng căn định mua.</p>
 <p>Xem tổng quan dự án tại trang <a href="/du-an/vinhomes-hai-van-bay/">Vinhomes Hải Vân Bay</a> và bài <a href="/phan-khu-vinhomes-hai-van-bay-2026/">phân khu Vinhomes Hải Vân Bay</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận phiếu tính giá theo chính sách Vinhomes Hải Vân Bay hiện hành cho từng phương án thanh toán.</p>
 <p class="src">Nguồn: chính sách bán hàng Vinhomes Hải Vân Bay của chủ đầu tư áp dụng từ 19/11/2026; <a href="https://market.vinhomes.vn/du-an/vinhomes-hai-van-bay">Vinhomes</a>; <a href="https://tienphong.vn/vinhomes-hai-van-bay-bung-no-giao-dich-trong-ngay-dau-sieu-chinh-sach-khoa-tran-lai-suat-6nam-trong-5-nam-co-hieu-luc-post1836841.tpo">Tiền Phong</a>. Phối cảnh mang tính minh họa.</p>
@@ -166,6 +167,7 @@ HTML
 <p>Theo chính sách hiện hành, ngân hàng cho vay tới 70% giá trị căn. Với căn liền kề Bạch Vân chỉ từ khoảng 5,3 tỷ, phần vốn tự có 30% vào khoảng 1,6 tỷ; số tiền thực tế còn phụ thuộc phương án vay (PA1 lãi cố định hay PA2 lãi 0%) và ưu đãi được áp dụng. Chi tiết xem bài <a href="/chinh-sach-vinhomes-hai-van-bay-19-11-2026/">chính sách Vinhomes Hải Vân Bay từ 19/11/2026</a>.</p>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
+<p>Từ thực tế dẫn khách đi xem và giao dịch, Hiệp rút ra mấy nhận định.</p>
 <p>Nếu ngân sách khoảng 5 – 6 tỷ, liền kề Bạch Vân hoặc Vịnh Mây là hai lựa chọn chính: Bạch Vân nhận nhà sớm, Vịnh Mây đơn giá thấp và giãn xây lâu hơn. Ngân sách từ 15 tỷ trở lên nên so biệt thự đơn lập Vịnh Mây (tầm nhìn vịnh từ đồi) với đơn lập Đảo Ngọc (gần VinWonders, phố biển). Giá Vinhomes Hải Vân Bay 2026 thay đổi theo đợt, vì vậy hãy xin bảng giá đúng ngày trước khi đặt cọc. Theo <a href="https://vnexpress.net/vinhomes-ra-mat-du-an-vinhomes-hai-van-bay-5064704.html">VnExpress</a>, dự án được Vinhomes ra mắt ngày 20/4/2026.</p>
 <p>Xem thêm trang <a href="/du-an/vinhomes-hai-van-bay/">dự án Vinhomes Hải Vân Bay</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá từng căn và phiếu tính giá theo chính sách mới nhất.</p>
 <p class="src">Nguồn: giỏ hàng tháng 9 – 10/2026 (giá gồm VAT, tham khảo); tài liệu chủ đầu tư; <a href="https://vnexpress.net/vinhomes-ra-mat-du-an-vinhomes-hai-van-bay-5064704.html">VnExpress</a>; <a href="https://market.vinhomes.vn/du-an/vinhomes-hai-van-bay">Vinhomes</a>. Phối cảnh mang tính minh họa.</p>
@@ -259,6 +261,7 @@ HTML
 <p>Theo báo chí thời điểm chào bán, chủ biệt thự được nghỉ miễn phí một thời gian mỗi năm, thời gian còn lại hợp tác cho thuê qua Furama. Người mua lại cần xem hợp đồng vận hành hiện hành: tỷ lệ chia doanh thu, số đêm chủ được ở, phí quản lý và điều kiện rút khỏi chương trình.</p>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
+<p>Đây cũng là câu nhiều khách hỏi Hiệp nhất; dưới đây là góc nhìn của Hiệp.</p>
 <p>Với ngân sách khoảng 20 – 40 tỷ và mong muốn có ngay biệt thự biển hoàn thiện, đã vận hành, giá biệt thự Furama Villas là điểm vào hợp lý nhất trên trục Trường Sa. Nếu ưu tiên sổ lâu dài và chấp nhận chờ bàn giao, anh chị có thể so thêm biệt thự đơn lập <a href="/du-an/vinhomes-hai-van-bay-vinh-may/">Vịnh Mây – Vinhomes Hải Vân Bay</a> chỉ từ khoảng 15,1 tỷ. Thông tin dự án do <a href="https://vnexpress.net/khu-biet-thu-furama-villas-2701751.html">VnExpress</a> giới thiệu: 134 căn, đất khoảng 280 – 976 m², 3 – 4 phòng ngủ.</p>
 <p>Xem trang <a href="/du-an/furama-villas-da-nang/">Furama Villas Đà Nẵng</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách căn đang chuyển nhượng thật, kèm thông tin sổ và giá biệt thự Furama Villas chốt gần nhất.</p>
 <p class="src">Nguồn: <a href="https://vnexpress.net/khu-biet-thu-furama-villas-2701751.html">VnExpress</a>; <a href="https://vneconomy.vn/furama-resort-se-quan-ly-du-an-furama-villas.htm">VnEconomy</a>; tổng hợp tin rao chuyển nhượng công khai 2026 (tham khảo).</p>
@@ -351,6 +354,7 @@ HTML
 </ul>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
+<p>Theo quan sát của Hiệp trên thị trường Đà Nẵng thời gian qua, có mấy điểm đáng nói.</p>
 <p>Điểm mạnh nhất về pháp lý Vinhomes Hải Vân Bay là chủ trương đầu tư cấp Thủ tướng và phần lớn thấp tầng trên đất ở sở hữu lâu dài. Điểm cần theo dõi là tiến độ bàn giao và cấp sổ của từng phân khu, vì Bạch Vân đi trước, Vịnh Mây và Đảo Ngọc theo đợt. Khách muốn sổ lâu dài nên chọn Bạch Vân, Vịnh Mây, Đảo Ngọc; Tinh Vân 50 năm hợp với nhu cầu nghỉ dưỡng, khai thác. Xem thêm bài <a href="/kiem-tra-phap-ly-quy-hoach-nha-dat-da-nang/">kiểm tra pháp lý, quy hoạch nhà đất Đà Nẵng</a>.</p>
 <p>Thông tin dự án tại trang <a href="/du-an/vinhomes-hai-van-bay/">Vinhomes Hải Vân Bay</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận hồ sơ pháp lý Vinhomes Hải Vân Bay và mẫu hợp đồng mua bán của căn anh chị quan tâm.</p>
 <p class="src">Nguồn: <a href="https://tuoitre.vn/vinpearl-khoi-cong-du-an-44-000-ti-dong-duoi-chan-deo-hai-van-2025062308042255.htm">Tuổi Trẻ</a>; <a href="https://tienphong.vn/so-do-lau-dai-gia-tri-thuc-tao-loi-the-khong-doi-thu-cho-do-thi-vinh-bien-vinhomes-hai-van-bay-post1831206.tpo">Tiền Phong</a>; <a href="https://vnexpress.net/vinhomes-ra-mat-du-an-vinhomes-hai-van-bay-5064704.html">VnExpress</a>; chính sách bán hàng chủ đầu tư từ 19/11/2026. Phối cảnh mang tính minh họa.</p>
@@ -440,6 +444,7 @@ HTML
 </table>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
+<p>Nếu là người mua, Hiệp sẽ cân nhắc những điểm sau.</p>
 <p>Vị trí Vinhomes Làng Vân phù hợp người muốn một không gian biển riêng tư, quy mô lớn, chấp nhận đi xe khoảng 20 – 25 phút vào phố. Nếu cần nhận nhà sớm và đi lại nhiều, hãy ưu tiên Bạch Vân ở cửa ngõ; nếu ưu tiên tầm nhìn vịnh, xem Vịnh Mây hoặc Đảo Ngọc. Theo <a href="https://vnexpress.net/vinhomes-ra-mat-du-an-vinhomes-hai-van-bay-5064704.html">VnExpress</a>, dự án ra mắt ngày 20/4/2026 với phân khu Bạch Vân.</p>
 <p>Xem trang <a href="/du-an/vinhomes-hai-van-bay/">dự án Vinhomes Hải Vân Bay</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để được đưa đi xem thực tế vị trí Vinhomes Làng Vân và nhà mẫu.</p>
 <p class="src">Nguồn: <a href="https://vnexpress.net/vinhomes-ra-mat-du-an-vinhomes-hai-van-bay-5064704.html">VnExpress</a>; <a href="https://tuoitre.vn/vinpearl-khoi-cong-du-an-44-000-ti-dong-duoi-chan-deo-hai-van-2025062308042255.htm">Tuổi Trẻ</a>; tài liệu chủ đầu tư; UBND TP Đà Nẵng (dự án đường tránh Nam Hải Vân). Phối cảnh mang tính minh họa.</p>
@@ -526,6 +531,7 @@ HTML
 <p>Cả hai phân khu đều có phần lớn sản phẩm thấp tầng trên đất ở đô thị, sở hữu lâu dài cho người Việt Nam, cùng áp dụng ưu đãi chung từ 19/11/2026: thanh toán sớm 7,5%, voucher thanh toán tới 30% (dùng trước 31/12/2026), VinClub 0,5 – 0,9%, vay tới 70% với hai phương án. Chi tiết xem bài <a href="/chinh-sach-vinhomes-hai-van-bay-19-11-2026/">chính sách Vinhomes Hải Vân Bay</a> và <a href="/gia-vinhomes-hai-van-bay-2026-theo-phan-khu/">giá Vinhomes Hải Vân Bay 2026 theo phân khu</a>.</p>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
+<p>Theo kinh nghiệm tư vấn của Hiệp, khách hàng nên lưu ý mấy điểm sau.</p>
 <p>Không có đáp án chung cho câu hỏi Đảo Ngọc hay Bạch Vân. Khách cần ở, vốn vừa phải nên chọn Bạch Vân; khách mua để khai thác du lịch hoặc muốn dòng tiền cam kết nên chọn Đảo Ngọc. Đảo Ngọc ra mắt ngày 5/5/2026 (theo <a href="https://vnexpress.net/ra-mat-khu-dao-ngoc-du-an-vinhomes-hai-van-bay-5070332.html">VnExpress</a>) và ghi nhận gần 1.000 lượt đặt chỗ trong 72 giờ (theo <a href="https://dantri.com.vn/bat-dong-san/dao-ngoc-vinhomes-hai-van-bay-ghi-nhan-1000-luot-dat-cho-trong-72-gio-20260426110141706.htm">Dân trí</a>), cho thấy sức hút của vị trí cạnh VinWonders. Dù chọn Đảo Ngọc hay Bạch Vân, hãy so đúng căn, đúng hướng và tính tổng tiền theo phương án vay trước khi đặt cọc.</p>
 <p>Xem tổng quan tại trang <a href="/du-an/vinhomes-hai-van-bay/">Vinhomes Hải Vân Bay</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng so sánh căn cụ thể giữa Đảo Ngọc hay Bạch Vân theo ngân sách của anh chị.</p>
 <p class="src">Nguồn: tài liệu chủ đầu tư (tổng mặt bằng tiện ích Đảo Ngọc, chính sách từ 19/11/2026); <a href="https://vnexpress.net/ra-mat-khu-dao-ngoc-du-an-vinhomes-hai-van-bay-5070332.html">VnExpress</a>; <a href="https://market.vinhomes.vn/du-an/vinhomes-hai-van-bay">Vinhomes</a>; giỏ hàng tháng 9 – 10/2026 (tham khảo). Phối cảnh mang tính minh họa.</p>

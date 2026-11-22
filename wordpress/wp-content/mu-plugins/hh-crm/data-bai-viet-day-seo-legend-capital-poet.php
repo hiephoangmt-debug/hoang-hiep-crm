@@ -62,9 +62,10 @@ function hh_posts_day_seo_legend_capital_poet( $posts ) {
 <h2>Cuối tiến độ The Legend Đà Nẵng: nhận gì khi nhận nhà</h2>
 <p>Căn hộ bàn giao hoàn thiện cao cấp, tích hợp smarthome: sàn gỗ kỹ thuật sồi châu Âu, gạch nhập khẩu Florim / Porcelanosa, điều hòa Multi Daikin hoặc Mitsubishi, bếp từ và máy rửa bát Teka/Smeg, thiết bị vệ sinh Bagnodesign/Axent, khóa thông minh. Chủ đầu tư miễn phí quản lý vận hành 24 tháng từ khi nhận nhà. Chi tiết loại căn xem bài <a href="/mat-bang-can-ho-the-legend-da-nang/">mặt bằng The Legend Đà Nẵng</a>.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
+<p>Hiệp thấy có vài điểm đáng chú ý mà cả người mua ở lẫn nhà đầu tư nên cân nhắc.</p>
 <p>Theo dõi tiến độ The Legend Đà Nẵng, tôi thấy dự án đã qua phần khó nhất là 3 tầng hầm sát sông Hàn, hồ sơ pháp lý đủ (đủ điều kiện huy động vốn 3/2025, 800 căn đủ điều kiện bán đầu 2026 – xem bài <a href="/phap-ly-the-legend-da-nang-so-huu-lau-dai/">pháp lý The Legend</a>). Mốc cần kiểm chứng tiếp là cất nóc cuối 2026: nếu đạt, khả năng bàn giao đầu 2028 khá rõ.</p>
 <p>Với người mua để ở, chọn thanh toán bám theo tiến độ The Legend Đà Nẵng giúp "trả theo công trình", không ôm vốn quá sớm. Với người muốn tối ưu giá, phương án thanh toán sớm 95% có chiết khấu đến 12% (chính sách 17/7/2025, áp dụng đến khi có chính sách thay thế) – xem bài <a href="/gia-the-legend-da-nang-bao-nhieu/">giá The Legend bao nhiêu</a>.</p>
-<p>Cần ảnh công trường mới, lịch thanh toán và phiếu tính giá từng căn <a href="/du-an/the-legend-da-nang/">The Legend Đà Nẵng</a>, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Cần ảnh công trường mới, lịch thanh toán và phiếu tính giá từng căn <a href="/du-an/the-legend-da-nang/">The Legend Đà Nẵng</a>, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
 <p class="src">Nguồn: chính sách bán hàng chủ đầu tư ban hành 17/7/2025; Công văn 674/SXD-QLN của Sở Xây dựng Đà Nẵng; <a href="https://dantri.com.vn/bat-dong-san/tien-do-du-an-the-legend-danang-20251114105051807.htm">Dân trí</a>; <a href="https://baodautu.vn/batdongsan/chu-dau-tu-the-legend-danang-day-nhanh-tien-do-thi-cong-du-an-d433621.html">Báo Đầu tư</a>. Ảnh công trường thực tế 6/2025; mốc tương lai là dự kiến, cập nhật 11/2026.</p>
 HTML
 		,
@@ -135,8 +136,9 @@ HTML
 <h2>Thế chấp, bảo lãnh trong pháp lý Capital Square</h2>
 <p>Theo thông báo của Sở Xây dựng, chủ đầu tư Capital Square 3 không thế chấp quyền sử dụng đất của dự án. Với Capital Square 2, báo chí năm 2026 có đặt vấn đề về quyền sử dụng đất đang thế chấp; người mua nên yêu cầu thư bảo lãnh ngân hàng và phương án giải chấp cho căn hộ. Khung thanh toán theo luật: đợt đầu không quá 30% giá trị hợp đồng, trước bàn giao không quá 70%, chưa có sổ không quá 95%.</p>
 <h2>Nhận định của Hoàng Hiệp về pháp lý Capital Square</h2>
+<p>Từ thực tế dẫn khách đi xem và giao dịch, Hiệp rút ra mấy nhận định.</p>
 <p>Điểm mạnh của pháp lý Capital Square là phần lớn rổ hàng (2.1 – 2.7, MAT 5-6, MAT 7, MAT 8-9) đã có văn bản đủ điều kiện bán, sổ hồng lâu dài, có suất cho người nước ngoài. Điểm cần cẩn thận là tổ hợp lớn, nhiều mã tòa, nhiều hình thức mua (HĐMB trực tiếp hoặc chuyển nhượng HĐMB). Tôi luôn gửi khách bản đối chiếu pháp lý Capital Square theo căn – tòa – văn bản trước khi đặt cọc.</p>
-<p>Tham khảo thêm <a href="/capital-square-da-nang-cac-toa-loai-can-gia/">các tòa Capital Square</a>, <a href="/bang-gia-capital-square-da-nang-theo-toa/">giá Capital Square theo tòa</a> và trang <a href="/du-an/capital-square-da-nang/">Capital Square Đà Nẵng</a>. Cần bản đối chiếu pháp lý từng căn, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Tham khảo thêm <a href="/capital-square-da-nang-cac-toa-loai-can-gia/">các tòa Capital Square</a>, <a href="/bang-gia-capital-square-da-nang-theo-toa/">giá Capital Square theo tòa</a> và trang <a href="/du-an/capital-square-da-nang/">Capital Square Đà Nẵng</a>. Cần bản đối chiếu pháp lý từng căn, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
 <p class="src">Nguồn: <a href="https://tuoitre.vn/1-237-can-ho-tai-14-toa-nha-cao-tang-ben-song-han-du-dieu-kien-duoc-ban-20260214144050977.htm">Tuổi Trẻ</a>; <a href="https://baodautu.vn/batdongsan/da-nang-khu-do-thi-capital-square-2-du-dieu-kien-mo-ban-530-can-ho-d314431.html">Báo Đầu tư – Capital Square 2</a>; <a href="https://baodautu.vn/batdongsan/da-nang-khu-do-thi-capital-square-3-duoc-phep-mo-ban-hon-580-can-ho-d362936.html">Báo Đầu tư – Capital Square 3</a>; <a href="https://baodautu.vn/da-nang-khu-do-thi-capital-square-3-tiep-tuc-duoc-phep-mo-ban-250-can-ho-d605920.html">Báo Đầu tư – MAT 7</a>; tài liệu bán hàng chủ đầu tư 28/9/2026. Cập nhật 11/2026.</p>
 HTML
 		,
@@ -218,8 +220,9 @@ HTML
 <li>Đọc phụ lục vật tư bàn giao và điều khoản phạt chậm bàn giao (dự kiến năm 2027).</li>
 </ol>
 <h2>Nhận định của Hoàng Hiệp về pháp lý The Poet Residence</h2>
+<p>Đây cũng là câu nhiều khách hỏi Hiệp nhất; dưới đây là góc nhìn của Hiệp.</p>
 <p>So với nhiều dự án đang chào bán ở Đà Nẵng, pháp lý The Poet Residence khá "sạch": đủ chuỗi chủ trương – quy hoạch – giấy phép – đủ điều kiện bán, có sổ đất, đã nộp tiền sử dụng đất, chưa thế chấp, có ngân hàng bảo lãnh. Hạn chế duy nhất là không bán cho người nước ngoài, nên tệp khách thuê – mua lại chủ yếu là người Việt.</p>
-<p>Xem trang <a href="/du-an/the-poet-residence-da-nang/">The Poet Residence Đà Nẵng</a> để biết loại căn và giá tham khảo. Cần bản chụp văn bản pháp lý, mẫu hợp đồng và căn còn trống, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Xem trang <a href="/du-an/the-poet-residence-da-nang/">The Poet Residence Đà Nẵng</a> để biết loại căn và giá tham khảo. Cần bản chụp văn bản pháp lý, mẫu hợp đồng và căn còn trống, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
 <p class="src">Nguồn: tài liệu chủ đầu tư Phúc Thanh An; Công văn 11222/SXD-QLN ngày 24/6/2026 của Sở Xây dựng Đà Nẵng; <a href="https://thuvienphapluat.vn/phap-luat-nha-dat/du-an-the-poet-residence-da-nang-gia-ban-hien-nay-bao-nhieu-8667.html">Thư viện Pháp luật</a>; <a href="https://www.centralcons.vn/?p=13782">Central (tổng thầu)</a>; <a href="https://www.tinnhanhchungkhoan.vn/dia-oc-phuc-thanh-an-lam-chu-dau-tu-chung-cu-hon-792-ty-dong-o-da-nang-post326445.html">Tin nhanh Chứng khoán</a>. Cập nhật 11/2026.</p>
 HTML
 		,
@@ -308,8 +311,9 @@ HTML
 <h2>Vị trí tòa C3 trong tổ hợp</h2>
 <p>Phía Bắc tòa là Con đường Ánh sáng, phía Nam là phố đi bộ Park Boulevard, phía Đông là Grand Central Mall và quảng trường nội khu, phía Tây là đường Trần Hưng Đạo và sông Hàn. Theo chủ đầu tư, từ tổ hợp đi khoảng 5 phút ra biển Mỹ Khê, 30 phút tới Hội An; liền kề Vincom Plaza. So với tòa S4 phía Nam, xem bài <a href="/hudson-place-hay-broadway-place-capital-square/">Hudson Place hay Broadway Place</a>.</p>
 <h2>Nhận định của Hoàng Hiệp về tòa C3 Capital Square</h2>
+<p>Theo quan sát của Hiệp trên thị trường Đà Nẵng thời gian qua, có mấy điểm đáng nói.</p>
 <p>Điểm tôi đánh giá cao ở tòa C3 Capital Square là vị trí hàng đầu sát sông và mật độ 9 căn/sàn. Căn đáng chú ý nhất là 3PN gần 120 m² góc sông Hàn ở tầng 14 – 25 – loại căn hiếm trong tổ hợp. Điểm cần cân nhắc: tòa ở mặt đường lớn và cạnh phố đi bộ nên căn tầng thấp có thể ồn hơn vào buổi tối.</p>
-<p>Cần mặt bằng từng tầng, bảng giá và chính sách đang áp dụng của <a href="/du-an/capital-square-toa-c3/">tòa C3 Capital Square</a> hoặc so với các tòa khác của <a href="/du-an/capital-square-da-nang/">Capital Square Đà Nẵng</a>, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Cần mặt bằng từng tầng, bảng giá và chính sách đang áp dụng của <a href="/du-an/capital-square-toa-c3/">tòa C3 Capital Square</a> hoặc so với các tòa khác của <a href="/du-an/capital-square-da-nang/">Capital Square Đà Nẵng</a>, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
 <p class="src">Nguồn: tài liệu phân tầng, mặt bằng tòa C3 của chủ đầu tư (10/2026); <a href="https://www.capital-square.vn/">Capital Square (trang dự án)</a>; <a href="https://tuoitre.vn/1-237-can-ho-tai-14-toa-nha-cao-tang-ben-song-han-du-dieu-kien-duoc-ban-20260214144050977.htm">Tuổi Trẻ</a>. Phối cảnh minh họa; số liệu cập nhật 11/2026.</p>
 HTML
 		,
@@ -383,9 +387,10 @@ HTML
 <h2>Điểm cần cân nhắc về vị trí The Legend Đà Nẵng</h2>
 <p>Khu đầu cầu Rồng đông xe giờ cao điểm, đặc biệt tối cuối tuần và mùa pháo hoa; căn tầng thấp sát đường Võ Văn Kiệt sẽ ồn hơn căn tầng cao. Hai mặt tiền phía sau (Mai Hắc Đế, Lý Nam Đế) là đường nội khu yên tĩnh hơn. Ngoài ra, cùng một dự án có tháp khách sạn 25 tầng (444 phòng, thời hạn 50 năm), nên lượng khách lưu trú quanh khối đế sẽ đông – tốt cho kinh doanh, nhưng người thích yên tĩnh nên chọn tầng cao.</p>
 <h2>Nhận định của Hoàng Hiệp về vị trí The Legend Đà Nẵng</h2>
+<p>Nếu là người mua, Hiệp sẽ cân nhắc những điểm sau.</p>
 <p>Trong các dự án căn hộ đang bán ở Đà Nẵng, rất ít nơi có vị trí "đầu cầu Rồng – 4 mặt tiền – gần biển" như The Legend. Lô đất đấu giá, quỹ đất ven sông gần như không còn, nên vị trí The Legend Đà Nẵng có tính khan hiếm thật sự. Đó cũng là lý do giá khởi điểm căn 1PN từ khoảng 7,65 tỷ (tham khảo, gồm VAT).</p>
 <p>Tôi khuyên khách chọn hướng trước, chọn loại căn sau: thích sông và thành phố thì chọn cánh Legacy, thích biển thì chọn Infinity. Xem thêm <a href="/mat-bang-can-ho-the-legend-da-nang/">mặt bằng The Legend Đà Nẵng</a> và so sánh <a href="/nobu-hay-the-legend-can-ho-cao-cap-da-nang/">Nobu hay The Legend</a>.</p>
-<p>Cần danh sách căn còn trống theo hướng view, bảng giá và chính sách của <a href="/du-an/the-legend-da-nang/">The Legend Đà Nẵng</a>, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Cần danh sách căn còn trống theo hướng view, bảng giá và chính sách của <a href="/du-an/the-legend-da-nang/">The Legend Đà Nẵng</a>, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
 <p class="src">Nguồn: tài liệu chủ đầu tư; Quyết định 4105/QĐ-UBND công nhận kết quả đấu giá khu đất A20; <a href="https://baodautu.vn/batdongsan/chu-dau-tu-the-legend-danang-day-nhanh-tien-do-thi-cong-du-an-d433621.html">Báo Đầu tư</a>; <a href="https://dantri.com.vn/bat-dong-san/tien-do-du-an-the-legend-danang-20251114105051807.htm">Dân trí</a>. Phối cảnh minh họa; cập nhật 11/2026.</p>
 HTML
 		,
@@ -456,8 +461,9 @@ HTML
 <h2>Vận hành tiện ích Hudson Place S4, phí quản lý và quà tặng</h2>
 <p>Tòa S4 do Savills vận hành. Theo chính sách 11/2026 cho tòa S3, S4: miễn phí phí quản lý dịch vụ 1 năm, quà gói Smart Home 1PN 100 triệu, 2PN 200 triệu, 3PN 300 triệu, chiết khấu thêm 5%. Vay ngân hàng đến 70% với hỗ trợ lãi suất – chi tiết ở bài <a href="/vay-mua-capital-square-da-nang-tra-gop-hang-thang/">vay mua Capital Square</a>. Chính sách thay đổi theo đợt, hỏi lại khi đặt căn.</p>
 <h2>Nhận định của Hoàng Hiệp về tiện ích Hudson Place S4</h2>
+<p>Theo kinh nghiệm tư vấn của Hiệp, khách hàng nên lưu ý mấy điểm sau.</p>
 <p>Nếu chỉ xét tiện ích Hudson Place S4 sát chân tòa, đây là một trong những vị trí "đắt giá" nhất tổ hợp: xuống thang máy là bể bơi, sân chơi trẻ em, sân golf mini. Kết hợp vận hành Savills và căn 3PN dualkey (2PN + studio riêng cửa), tòa hợp cả gia đình ở lâu dài lẫn người vừa ở vừa cho thuê. Điểm cần tính: bàn giao bán hoàn thiện, nên cộng thêm ngân sách nội thất.</p>
-<p>Cần mặt bằng tầng, căn còn trống hướng bể bơi và phiếu tính giá <a href="/du-an/capital-square-hudson-place-s4/">Hudson Place S4</a> trong tổ hợp <a href="/du-an/capital-square-da-nang/">Capital Square Đà Nẵng</a>, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Cần mặt bằng tầng, căn còn trống hướng bể bơi và phiếu tính giá <a href="/du-an/capital-square-hudson-place-s4/">Hudson Place S4</a> trong tổ hợp <a href="/du-an/capital-square-da-nang/">Capital Square Đà Nẵng</a>, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
 <p class="src">Nguồn: tài liệu bán hàng tòa S4 của chủ đầu tư SIH (28/9/2026), chính sách 11/2026; <a href="https://www.capital-square.vn/">Capital Square (trang dự án)</a>; <a href="https://baodautu.vn/batdongsan/da-nang-khu-do-thi-capital-square-3-duoc-phep-mo-ban-hon-580-can-ho-d362936.html">Báo Đầu tư</a>. Phối cảnh minh họa; cập nhật 11/2026.</p>
 HTML
 		,
@@ -538,8 +544,9 @@ HTML
 <h2>Thanh toán: không cần trả hết ngay</h2>
 <p>Đặt cọc 200 triệu, ký hợp đồng 15%; các đợt tiếp theo theo tiến độ xây dựng, 25% khi nhận nhà, 5% khi nhận sổ. Khách vay được ngân hàng cho vay 50 – 70%, chủ đầu tư hỗ trợ lãi suất tối đa 24 tháng (100% đến khi nhận nhà, 50% thêm 12 tháng). Mức chiết khấu thay đổi theo đợt chính sách.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
+<p>Hiệp thấy có vài điểm đáng chú ý mà cả người mua ở lẫn nhà đầu tư nên cân nhắc.</p>
 <p>Có nên mua The Poet Residence? Theo tôi, nên – nếu anh/chị ưu tiên vị trí đi bộ ra biển, pháp lý rõ ràng và tòa nhỏ yên tĩnh trong tầm 5 – 10 tỷ. Không nên nếu cần tiện ích ngoài trời quy mô lớn hoặc cần đứng tên người nước ngoài. Câu hỏi có nên mua The Poet Residence sẽ dễ trả lời hơn khi đặt cạnh dòng tiền thực tế của anh/chị, chọn căn view biển ở tầng cao để giữ giá tốt nhất. Đọc thêm <a href="/noi-that-the-poet-residence/">nội thất The Poet Residence</a>.</p>
-<p>Cần bảng hàng, căn còn trống và chính sách đang áp dụng của <a href="/du-an/the-poet-residence-da-nang/">The Poet Residence</a>, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Cần bảng hàng, căn còn trống và chính sách đang áp dụng của <a href="/du-an/the-poet-residence-da-nang/">The Poet Residence</a>, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
 <p class="src">Nguồn: tài liệu chủ đầu tư Phúc Thanh An; bảng hàng tham khảo 11/2026; <a href="https://thuvienphapluat.vn/phap-luat-nha-dat/du-an-the-poet-residence-da-nang-gia-ban-hien-nay-bao-nhieu-8667.html">Thư viện Pháp luật</a>; <a href="https://www.centralcons.vn/?p=13782">Central (tổng thầu)</a>. Giá tham khảo, phối cảnh minh họa; cập nhật 11/2026.</p>
 HTML
 		,
@@ -618,8 +625,9 @@ HTML
 <h2>Điểm cần cân nhắc về vị trí Capital Square Đà Nẵng</h2>
 <p>Trần Hưng Đạo và Ngô Quyền là trục đông xe, đặc biệt mùa pháo hoa và cuối tuần; căn tầng thấp mặt đường lớn sẽ ồn hơn. Tổ hợp 3.391 căn, khi đủ cư dân sẽ đông đúc hơn các tòa đơn lẻ. Tiến độ các tòa khác nhau, nên căn ở tòa bàn giao sau có thể sống cạnh công trường một thời gian – xem bài <a href="/vay-mua-capital-square-da-nang-tra-gop-hang-thang/">vay mua Capital Square</a> để tính dòng tiền theo thời điểm nhận nhà.</p>
 <h2>Nhận định của Hoàng Hiệp về vị trí Capital Square Đà Nẵng</h2>
+<p>Từ thực tế dẫn khách đi xem và giao dịch, Hiệp rút ra mấy nhận định.</p>
 <p>Vị trí Capital Square Đà Nẵng là lợi thế khó lặp lại: quỹ đất 6 ha ven sông Hàn, giữa trung tâm thương mại và biển. Báo <a href="https://tuoitre.vn/1-237-can-ho-tai-14-toa-nha-cao-tang-ben-song-han-du-dieu-kien-duoc-ban-20260214144050977.htm">Tuổi Trẻ</a> gọi đây là cụm 14 tòa nhà cao tầng bên sông Hàn. Với người mua, tôi khuyên chọn tòa theo ưu tiên: view sông chọn dãy Trần Hưng Đạo, tiện ích chọn S3/S4, gần biển chọn phía Ngô Quyền.</p>
-<p>Cần bản đồ vị trí từng tòa, bảng giá và chính sách của <a href="/du-an/capital-square-da-nang/">Capital Square Đà Nẵng</a>, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p>Cần bản đồ vị trí từng tòa, bảng giá và chính sách của <a href="/du-an/capital-square-da-nang/">Capital Square Đà Nẵng</a>, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Hiệp sẵn sàng gửi bảng hàng chi tiết và dẫn anh chị đi xem thực tế.</p>
 <p class="src">Nguồn: tài liệu chủ đầu tư; <a href="https://www.capital-square.vn/">Capital Square (trang dự án)</a>; <a href="https://tuoitre.vn/1-237-can-ho-tai-14-toa-nha-cao-tang-ben-song-han-du-dieu-kien-duoc-ban-20260214144050977.htm">Tuổi Trẻ</a>; <a href="https://vietnammoi.vn/delta-trung-thau-to-hop-can-ho-capital-square-2-3-o-da-nang-20263187387819.htm">Vietnammoi</a>. Khoảng cách ước tính, phối cảnh minh họa; cập nhật 11/2026.</p>
 HTML
 		,

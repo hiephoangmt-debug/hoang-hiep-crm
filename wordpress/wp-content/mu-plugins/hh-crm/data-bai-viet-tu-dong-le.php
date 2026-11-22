@@ -1682,6 +1682,7 @@ HTML
 <h2>Phí tiện ích, phí quản lý</h2>
 <p>Chủ đầu tư chưa công bố phí quản lý và phí sử dụng tiện ích; tư vấn vận hành dự kiến là CBRE. Khi ký hợp đồng nên hỏi rõ tiện ích nào miễn phí cho cư dân, tiện ích nào tính phí. Xem thêm trang {$poet} và bài <a href="/vi-tri-the-poet-residence/">vị trí The Poet Residence</a>.</p>
 <h2>So sánh tiện ích The Poet Residence với căn hộ ven biển khác</h2>
+<p>Theo kinh nghiệm dẫn khách đi xem nhiều dự án ven biển, Hiệp thấy tiện ích là yếu tố khách thuê và khách ở đều so sánh rất kỹ.</p>
 <p>Các tổ hợp lớn thường có hồ bơi ngoài trời rộng, công viên nội khu; đổi lại số căn rất nhiều, tiện ích đông vào cuối tuần. Tiện ích The Poet Residence gọn hơn nhưng dành cho 263 căn, dùng trong nhà được quanh năm, và có tầng mái ngắm pháo hoa – điểm hiếm ở khu Mỹ Khê. Với người mua để ở, tiện ích The Poet Residence đáp ứng nhu cầu hằng ngày: bơi, tập, chỗ cho trẻ chơi, cà phê ngay dưới nhà.</p>
 <p>Với nhà đầu tư cho thuê, hồ bơi trong nhà, gym và tầng mái là điểm cộng khi đăng phòng: khách du lịch ưu tiên căn hộ có hồ bơi và chỗ ngắm cảnh. Kết hợp vị trí cách biển khoảng 300 m, tiện ích The Poet Residence giúp căn hộ dễ cho thuê cả mùa thấp điểm.</p>
 {$poetcta}
@@ -1757,6 +1758,7 @@ HTML
 <p>Ngoài các tầng căn hộ, mặt bằng The Poet Residence dành tầng 1 cho sảnh, café, mini mart; tầng 2 cho nhà trẻ và phòng cộng đồng; tầng 3 cho hồ bơi trong nhà, gym, yoga; tầng mái cho vườn, bar và quảng trường ngắm pháo hoa. Hai tầng hầm có khoảng 92 chỗ ô tô và 353 chỗ xe máy. Nhờ tiện ích tập trung ở khối đế và mái, các tầng căn hộ yên tĩnh hơn.</p>
 <!--hh-img:img/the-poet/the-poet-mat-bang-tien-ich-tang-3.jpg|Mặt bằng The Poet Residence tầng 3: hồ bơi người lớn, hồ trẻ em, khu thư giãn, cà phê bar-->
 <h2>Chọn căn theo ngân sách và mục đích</h2>
+<p>Khi tư vấn chọn căn, Hiệp thường hỏi khách hai câu: mua để ở hay cho thuê, và ngân sách thực tế là bao nhiêu – từ đó mới khoanh vùng tầng, hướng phù hợp.</p>
 <p>Ngân sách vừa phải, mua cho thuê: căn 1PN+1. Gia đình trẻ: 2PN 64 – 66 m² view biển. Gia đình đông người, cần phòng khách rộng: 2PN góc view sông hoặc 3PN góc view biển. Khách tìm sản phẩm hiếm: penthouse thông tầng. Hoàng Hiệp có thể gửi mặt bằng The Poet Residence từng tầng kèm danh sách căn còn trống để anh chị so sánh trực tiếp.</p>
 {$poetcta}
 {$poetsrc}
@@ -1818,6 +1820,7 @@ HTML
 </ul>
 <p>Ngân hàng bảo lãnh là VietinBank; cho vay có VietinBank, Vietcombank, MB. Mức chiết khấu theo từng phương thức thay đổi theo đợt chính sách.</p>
 <h2>Giá The Poet Residence có hợp lý?</h2>
+<p>Đây là câu nhiều khách hỏi Hiệp nhất; dưới đây là góc nhìn của Hiệp khi so với mặt bằng giá khu vực.</p>
 <p>So với mặt bằng căn hộ ven biển Mỹ Khê, giá The Poet Residence nằm ở phân khúc cao cấp nhưng đi kèm vị trí cách biển khoảng 300 m, pháp lý đã đủ điều kiện bán (Sở Xây dựng xác nhận 263 căn ngày 24/6/2026), tổng thầu Central và bàn giao hoàn thiện. Người mua nên so sánh tổng chi phí sở hữu: giá căn, phí bảo trì 2%, chi phí đồ rời và lãi vay sau thời gian hỗ trợ.</p>
 <h2>Ví dụ dòng tiền khi mua theo tiến độ</h2>
 <p>Lấy căn 1PN+1 có giá chỉ từ khoảng 4,94 tỷ làm ví dụ: đặt cọc 200 triệu, khi ký hợp đồng thanh toán đủ 15% (khoảng 741 triệu gồm cọc), sau đó 55% chia theo các mốc xây dựng, 25% khi nhận nhà và 5% khi có sổ. Nếu vay ngân hàng, khách chỉ cần chuẩn bị phần vốn tự có ban đầu; lãi được chủ đầu tư hỗ trợ đến khi nhận nhà. Số tiền cụ thể tùy căn và chính sách tại thời điểm ký – giá The Poet Residence ở ví dụ chỉ để tham khảo.</p>
