@@ -45,7 +45,8 @@ GAL = re.search(r'<div class="gal">.*?</div>', TEAM, re.S).group(0)
 FIGS = re.findall(r'<figure.*?</figure>', GAL, re.S)
 TEAM_IMG = FIGS[0].replace('<figure class="big">', '<figure class="big" style="grid-column:1/-1">')
 PICS = [f.replace(' class="big"', '') for f in FIGS[1:]]
-CONTEST = re.search(r'<section class="sec" id="thi-dua">.*?</section>', main, re.S).group(0)
+_c = re.search(r'<section class="sec" id="thi-dua">.*?</section>', main, re.S)
+CONTEST = _c.group(0) if _c else ''  # khối thi đua đã gỡ sau 30/11/2026
 MKT3 = re.search(r'<section class="sec soft" id="mkt-3-lop">.*?</section>', main, re.S).group(0)
 ENV = f"""<section class="sec navy" id="moi-truong">
   <div class="wrap">
