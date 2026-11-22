@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.334**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.335**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – 2.20.335 (22/11/2026)
+
+- Trang dự án mới **Euro Village 1 – Làng Châu Âu Đà Nẵng** (/du-an/euro-village-1/): khu biệt thự, nhà phố ven sông Hàn của Sun Group, 23,7 ha, 245 nhà phố + 175 biệt thự, sổ đỏ lâu dài, giá rao bán tham khảo.
+- Sửa số liệu **Euro Village 2**: trước nhập nhầm số của Euro Village 1 (23,7 ha, 245/175) → nay khoảng 320 lô biệt thự 250 – 500 m², giai đoạn 1B Hòa Xuân. Ô anh đã tự sửa giữ nguyên.
+- Sau khi cài: bấm **Nhập / cập nhật dữ liệu** rồi LiteSpeed **Purge All**.
 
 ## Có gì mới – 2.20.334 (21/11/2026)
 
