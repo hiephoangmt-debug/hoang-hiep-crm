@@ -3718,5 +3718,383 @@
 "out": "tu-dong/bia-bai/luat-kinh-doanh-bat-dong-san-sua-doi-2026.jpg",
 "cat": "Hạ tầng & quy hoạch",
 "src": "Theo báo chí 21/11/2026 · Ảnh thật trung tâm Đà Nẵng"
+},
+{
+"slug": "tien-do-the-legend-da-nang-cat-noc-ban-giao",
+"out": "tu-dong/bia-bai/tien-do-the-legend-da-nang-cat-noc-ban-giao.jpg",
+"bg": "the-legend/the-legend-da-nang-tien-do-6-2025-flycam-cong-truong.jpg",
+"cat": "Tin dự án",
+"tag": "TIẾN ĐỘ · THE LEGEND ĐÀ NẴNG",
+"title": "Tiến độ The Legend Đà Nẵng: từ khởi công 2/2025 đến cất nóc và bàn giao 2028",
+"head": "Cất nóc cuối 2026",
+"big": "The Legend",
+"script": "chân cầu Rồng",
+"lead": "Đã xong 3 tầng hầm, nhận nhà 3/2028",
+"stats": [
+[
+"2/2025",
+"khởi công"
+],
+[
+"12/2026",
+"cất nóc dự kiến"
+],
+[
+"3/2028",
+"bàn giao dự kiến"
+]
+],
+"src": "Theo tài liệu chủ đầu tư 11/2026 · Ảnh công trường 6/2025"
+},
+{
+"slug": "phap-ly-capital-square-da-nang-so-hong",
+"out": "tu-dong/bia-bai/phap-ly-capital-square-da-nang-so-hong.jpg",
+"bg": "capital-square/capital-square-tien-do-5-2026-flycam-01.jpg",
+"cat": "Tin dự án",
+"tag": "PHÁP LÝ · CAPITAL SQUARE ĐÀ NẴNG",
+"title": "Pháp lý Capital Square Đà Nẵng: tòa nào đủ điều kiện bán, sổ hồng và lưu ý khi mua",
+"head": "Pháp lý từng tòa",
+"big": "Capital Square",
+"script": "sổ hồng lâu dài",
+"lead": "Văn bản Sở Xây dựng cho từng tòa",
+"stats": [
+[
+"3.017",
+"căn đủ điều kiện bán"
+],
+[
+"14",
+"tòa ven sông Hàn"
+],
+[
+"50 năm",
+"người nước ngoài"
+]
+],
+"src": "Theo Sở Xây dựng Đà Nẵng, báo chí · Ảnh flycam 5/2026"
+},
+{
+"slug": "phap-ly-the-poet-residence-chu-dau-tu",
+"out": "tu-dong/bia-bai/phap-ly-the-poet-residence-chu-dau-tu.jpg",
+"bg": "the-poet/the-poet-toan-canh-dem-song-han.jpg",
+"cat": "Tin dự án",
+"tag": "PHÁP LÝ · THE POET RESIDENCE",
+"title": "Pháp lý The Poet Residence: 263 căn đủ điều kiện bán, chủ đầu tư Phúc Thanh An là ai?",
+"head": "Đã được phép bán",
+"big": "The Poet",
+"script": "Phúc Thanh An",
+"lead": "Sở Xây dựng xác nhận ngày 24/6/2026",
+"stats": [
+[
+"263",
+"căn đủ điều kiện bán"
+],
+[
+"414/GPXD",
+"giấy phép xây dựng"
+],
+[
+"VietinBank",
+"ngân hàng bảo lãnh"
+]
+],
+"src": "Theo tài liệu chủ đầu tư 11/2026 · Phối cảnh dự án"
+},
+{
+"slug": "toa-c3-capital-square-phan-tang-chon-can",
+"out": "tu-dong/bia-bai/toa-c3-capital-square-phan-tang-chon-can.jpg",
+"bg": "capital-square/capital-square-phoi-canh-dem-ven-song-han.jpg",
+"cat": "Tin dự án",
+"tag": "MẶT BẰNG · CAPITAL SQUARE TÒA C3",
+"title": "Tòa C3 Capital Square: 26 tầng mặt tiền Trần Hưng Đạo, phân tầng và cách chọn căn",
+"head": "Tòa C3 sát sông Hàn",
+"big": "Capital Square",
+"script": "phân tầng và chọn căn",
+"lead": "9 căn mỗi sàn, 3PN gần 120 m²",
+"stats": [
+[
+"26",
+"tầng"
+],
+[
+"~206",
+"căn hộ"
+],
+[
+"16",
+"shophouse"
+]
+],
+"src": "Theo tài liệu chủ đầu tư 10/2026 · Phối cảnh dự án"
+},
+{
+"slug": "vi-tri-the-legend-da-nang-view-cau-rong",
+"out": "tu-dong/bia-bai/vi-tri-the-legend-da-nang-view-cau-rong.jpg",
+"bg": "the-legend/the-legend-da-nang-vi-tri-chan-cau-rong-tu-tren-cao.jpg",
+"cat": "Tin dự án",
+"tag": "VỊ TRÍ · THE LEGEND ĐÀ NẴNG",
+"title": "Vị trí The Legend Đà Nẵng: 4 mặt tiền chân cầu Rồng, view sông Hàn hay biển Mỹ Khê?",
+"head": "Ngay chân cầu Rồng",
+"big": "The Legend",
+"script": "view sông hay view biển",
+"lead": "Lô A20 Võ Văn Kiệt, 4 mặt tiền",
+"stats": [
+[
+"4",
+"mặt tiền"
+],
+[
+"~1 km",
+"ra biển Mỹ Khê"
+],
+[
+"11.487 m²",
+"khu đất"
+]
+],
+"src": "Theo tài liệu chủ đầu tư 11/2026 · Phối cảnh dự án"
+},
+{
+"slug": "tien-ich-hudson-place-s4-ban-giao",
+"out": "tu-dong/bia-bai/tien-ich-hudson-place-s4-ban-giao.jpg",
+"bg": "hudson-place/hudson-place-be-boi-resort.jpg",
+"cat": "Tin dự án",
+"tag": "TIỆN ÍCH · HUDSON PLACE S4",
+"title": "Tiện ích Hudson Place S4: bể bơi resort, sân golf mini và tiêu chuẩn bàn giao căn hộ",
+"head": "Sát hồ bơi resort",
+"big": "Hudson Place",
+"script": "Capital Square 3",
+"lead": "Vận hành Savills, nhận nhà quý III/2027",
+"stats": [
+[
+"314",
+"căn hộ"
+],
+[
+"24",
+"tầng"
+],
+[
+"2.000 m²",
+"công viên tổ hợp"
+]
+],
+"src": "Theo tài liệu chủ đầu tư 9/2026 · Phối cảnh dự án"
+},
+{
+"slug": "co-nen-mua-the-poet-residence",
+"out": "tu-dong/bia-bai/co-nen-mua-the-poet-residence.jpg",
+"bg": "the-poet/the-poet-toan-canh-bien-my-khe.jpg",
+"cat": "Tin dự án",
+"tag": "ĐÁNH GIÁ · THE POET RESIDENCE",
+"title": "Có nên mua The Poet Residence? Ưu nhược điểm, so sánh dự án lân cận và bài toán cho thuê",
+"head": "Có nên mua?",
+"big": "The Poet",
+"script": "5 ưu, 4 nhược",
+"lead": "Cách biển Mỹ Khê khoảng 300 m",
+"stats": [
+[
+"300 m",
+"ra biển Mỹ Khê"
+],
+[
+"4,94 tỷ",
+"giá chỉ từ"
+],
+[
+"263",
+"căn hộ"
+]
+],
+"src": "Theo tài liệu chủ đầu tư 11/2026 · Phối cảnh dự án"
+},
+{
+"slug": "vi-tri-capital-square-da-nang-ven-song-han",
+"out": "tu-dong/bia-bai/vi-tri-capital-square-da-nang-ven-song-han.jpg",
+"bg": "capital-square/capital-square-phoi-canh-ngay-ven-song-han.jpg",
+"cat": "Tin dự án",
+"tag": "VỊ TRÍ · CAPITAL SQUARE ĐÀ NẴNG",
+"title": "Vị trí Capital Square Đà Nẵng: bờ Đông sông Hàn, giữa Trần Hưng Đạo – Ngô Quyền",
+"head": "Bờ Đông sông Hàn",
+"big": "Capital Square",
+"script": "liền kề Vincom Plaza",
+"lead": "Giữa Trần Hưng Đạo và Ngô Quyền",
+"stats": [
+[
+"61.368 m²",
+"khu đất"
+],
+[
+"~1,5 km",
+"ra biển Mỹ Khê"
+],
+[
+"~40%",
+"mật độ xây dựng"
+]
+],
+"src": "Theo tài liệu chủ đầu tư 11/2026 · Phối cảnh dự án"
+},
+{
+"slug": "chinh-sach-vinhomes-hai-van-bay-19-11-2026",
+"out": "tu-dong/bia-bai/chinh-sach-vinhomes-hai-van-bay-19-11-2026.jpg",
+"bg": "vinhomes-hai-van-bay/vhvb-dao-ngoc-tong-the-2.jpg",
+"cat": "Tin dự án",
+"tag": "CHÍNH SÁCH · VINHOMES HẢI VÂN BAY",
+"title": "Chính sách Vinhomes Hải Vân Bay từ 19/11/2026",
+"head": "Chính sách từ 19/11/2026",
+"big": "Hải Vân Bay",
+"script": "ưu đãi mới nhất",
+"lead": "Bạch Vân, Vịnh Mây, Đảo Ngọc",
+"stats": [
+[
+"7,5%",
+"Thanh toán sớm"
+],
+[
+"30%",
+"Voucher thanh toán"
+],
+[
+"7%/năm",
+"Cam kết thuê"
+]
+],
+"src": "Theo CSBH chủ đầu tư 19/11/2026 · Phối cảnh dự án"
+},
+{
+"slug": "gia-vinhomes-hai-van-bay-2026-theo-phan-khu",
+"out": "tu-dong/bia-bai/gia-vinhomes-hai-van-bay-2026-theo-phan-khu.jpg",
+"bg": "vinhomes-hai-van-bay/vhvb-dao-ngoc-tong-the-1.jpg",
+"cat": "Tin dự án",
+"tag": "BẢNG GIÁ · VINHOMES HẢI VÂN BAY",
+"title": "Giá Vinhomes Hải Vân Bay 2026 theo phân khu",
+"head": "Giá theo phân khu 2026",
+"big": "Hải Vân Bay",
+"script": "chỉ từ 5,3 tỷ",
+"lead": "Giá gồm VAT, giỏ hàng 9–10/2026",
+"stats": [
+[
+"5,3 tỷ",
+"Liền kề Bạch Vân"
+],
+[
+"5,6 tỷ",
+"Liền kề Vịnh Mây"
+],
+[
+"7,6 tỷ",
+"Liền kề Đảo Ngọc"
+]
+],
+"src": "Theo giỏ hàng 9–10/2026, tham khảo · Phối cảnh dự án"
+},
+{
+"slug": "gia-biet-thu-furama-villas-da-nang-2026",
+"out": "tu-dong/bia-bai/gia-biet-thu-furama-villas-da-nang-2026.jpg",
+"bg": "da-nang/song-han-cau-quay-trung-tam-ve-dem.jpg",
+"cat": "Tin dự án",
+"tag": "BIỆT THỰ BIỂN · FURAMA VILLAS",
+"title": "Giá biệt thự Furama Villas Đà Nẵng 2026",
+"head": "Giá chuyển nhượng 2026",
+"big": "Furama Villas",
+"script": "biệt thự biển Ngũ Hành Sơn",
+"lead": "134 căn cạnh Furama Resort",
+"stats": [
+[
+"134",
+"Biệt thự"
+],
+[
+"21–25 tỷ",
+"Căn 3 phòng ngủ"
+],
+[
+"30–40 tỷ",
+"Căn 4 phòng ngủ"
+]
+],
+"src": "Theo tin rao 2026, tham khảo · Ảnh minh họa Đà Nẵng"
+},
+{
+"slug": "phap-ly-vinhomes-hai-van-bay-so-huu-lau-dai",
+"out": "tu-dong/bia-bai/phap-ly-vinhomes-hai-van-bay-so-huu-lau-dai.jpg",
+"bg": "vinhomes-hai-van-bay/vhvb-dao-ngoc-tong-the-3.jpg",
+"cat": "Tin dự án",
+"tag": "PHÁP LÝ · VINHOMES HẢI VÂN BAY",
+"title": "Pháp lý Vinhomes Hải Vân Bay",
+"head": "Pháp lý dự án",
+"big": "Hải Vân Bay",
+"script": "sở hữu lâu dài",
+"lead": "Chủ trương đầu tư 20/11/2024",
+"stats": [
+[
+"512 ha",
+"Quy mô dự án"
+],
+[
+"90%",
+"Sổ lâu dài"
+],
+[
+"50 năm",
+"Tinh Vân, condotel"
+]
+],
+"src": "Theo Tuổi Trẻ, Tiền Phong · Phối cảnh dự án"
+},
+{
+"slug": "vi-tri-vinhomes-lang-van-ket-noi-giao-thong",
+"out": "tu-dong/bia-bai/vi-tri-vinhomes-lang-van-ket-noi-giao-thong.jpg",
+"bg": "vinhomes-hai-van-bay/vhvb-dao-ngoc-tong-the-4.jpg",
+"cat": "Tin dự án",
+"tag": "VỊ TRÍ · VINHOMES LÀNG VÂN",
+"title": "Vị trí Vinhomes Làng Vân",
+"head": "Vị trí và kết nối",
+"big": "Làng Vân",
+"script": "vịnh Nam Chơn",
+"lead": "Chân đèo Hải Vân, Đà Nẵng",
+"stats": [
+[
+"20–25 phút",
+"Về trung tâm"
+],
+[
+"512 ha",
+"Quy mô dự án"
+],
+[
+"6 làn",
+"Đường tránh mới"
+]
+],
+"src": "Theo tài liệu chủ đầu tư, VnExpress · Phối cảnh dự án"
+},
+{
+"slug": "dao-ngoc-hay-bach-van-vinhomes-hai-van-bay",
+"out": "tu-dong/bia-bai/dao-ngoc-hay-bach-van-vinhomes-hai-van-bay.jpg",
+"bg": "vinhomes-hai-van-bay/vhvb-biet-thu-dao-ngoc.jpg",
+"cat": "Tin dự án",
+"tag": "SO SÁNH · VINHOMES HẢI VÂN BAY",
+"title": "Đảo Ngọc hay Bạch Vân",
+"head": "Chọn phân khu nào?",
+"big": "Đảo Ngọc",
+"script": "hay Bạch Vân",
+"lead": "So sánh 8 tiêu chí 2026",
+"stats": [
+[
+"5,3 tỷ",
+"Liền kề Bạch Vân"
+],
+[
+"7,6 tỷ",
+"Liền kề Đảo Ngọc"
+],
+[
+"7%/năm",
+"Cam kết thuê"
+]
+],
+"src": "Theo tài liệu chủ đầu tư 11/2026 · Phối cảnh dự án"
 }
 ]

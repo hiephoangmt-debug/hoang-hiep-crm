@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-21T10:06:32+00:00",
+    "updated": "2026-11-22T00:30:14+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen",
@@ -1107,11 +1107,23 @@
             "file": "bai/benh-vien-gan-sun-saphia-residence.txt"
         },
         {
+            "slug": "chinh-sach-vinhomes-hai-van-bay-19-11-2026",
+            "title": "Chính sách Vinhomes Hải Vân Bay từ 19/11/2026: thanh toán sớm 7,5%, voucher 30%, cam kết thuê 7%/năm",
+            "publish": "2026-11-22 14:15",
+            "file": "bai/chinh-sach-vinhomes-hai-van-bay-19-11-2026.txt"
+        },
+        {
             "slug": "co-nen-mua-the-legend-da-nang-uu-nhuoc-diem",
             "title": "Có nên mua The Legend Đà Nẵng? 5 ưu điểm, 4 điểm cần cân nhắc",
             "publish": "2026-11-22 14:00",
             "file": "bai/co-nen-mua-the-legend-da-nang-uu-nhuoc-diem.txt",
             "rev": 2
+        },
+        {
+            "slug": "tien-do-the-legend-da-nang-cat-noc-ban-giao",
+            "title": "Tiến độ The Legend Đà Nẵng: từ khởi công 2/2025 đến cất nóc và bàn giao 2028",
+            "publish": "2026-11-22 18:15",
+            "file": "bai/tien-do-the-legend-da-nang-cat-noc-ban-giao.txt"
         },
         {
             "slug": "sun-saphia-residence-di-son-tra",
@@ -1139,6 +1151,12 @@
             "rev": 2
         },
         {
+            "slug": "gia-vinhomes-hai-van-bay-2026-theo-phan-khu",
+            "title": "Giá Vinhomes Hải Vân Bay 2026 theo phân khu: Bạch Vân, Vịnh Mây, Đảo Ngọc chỉ từ bao nhiêu?",
+            "publish": "2026-11-23 12:15",
+            "file": "bai/gia-vinhomes-hai-van-bay-2026-theo-phan-khu.txt"
+        },
+        {
             "slug": "hop-dong-mua-can-ho-hinh-thanh-trong-tuong-lai",
             "title": "Hợp đồng mua căn hộ hình thành trong tương lai: cần xem gì, đóng tiền tối đa bao nhiêu?",
             "publish": "2026-11-23 14:00",
@@ -1147,6 +1165,12 @@
             "old_slug": [
                 "hop-dong-mua-can-ho-hinh-thanh-trong-tuong-lai-can-xem-gi"
             ]
+        },
+        {
+            "slug": "phap-ly-capital-square-da-nang-so-hong",
+            "title": "Pháp lý Capital Square Đà Nẵng: tòa nào đủ điều kiện bán, sổ hồng và lưu ý khi mua",
+            "publish": "2026-11-23 16:15",
+            "file": "bai/phap-ly-capital-square-da-nang-so-hong.txt"
         },
         {
             "slug": "mat-bang-the-poet-residence",
@@ -1161,10 +1185,22 @@
             "file": "bai/cora-tower-spana-tower-khi-nao-ban-giao.txt"
         },
         {
+            "slug": "gia-biet-thu-furama-villas-da-nang-2026",
+            "title": "Giá biệt thự Furama Villas Đà Nẵng 2026: 3 – 4 phòng ngủ khoảng 21 – 40 tỷ, cần kiểm tra gì?",
+            "publish": "2026-11-24 12:15",
+            "file": "bai/gia-biet-thu-furama-villas-da-nang-2026.txt"
+        },
+        {
             "slug": "nobu-da-nang-cua-ai-chu-dau-tu",
             "title": "Nobu Đà Nẵng của ai? Chủ đầu tư VCRE, thương hiệu Nobu Hospitality và tòa tháp 43 tầng",
             "publish": "2026-11-24 14:00",
             "file": "bai/nobu-da-nang-cua-ai-chu-dau-tu.txt"
+        },
+        {
+            "slug": "phap-ly-the-poet-residence-chu-dau-tu",
+            "title": "Pháp lý The Poet Residence: 263 căn đủ điều kiện bán, chủ đầu tư Phúc Thanh An là ai?",
+            "publish": "2026-11-24 16:15",
+            "file": "bai/phap-ly-the-poet-residence-chu-dau-tu.txt"
         },
         {
             "slug": "gia-the-poet-residence-thanh-toan",
@@ -1179,10 +1215,58 @@
             "file": "bai/the-legend-da-nang-cua-chu-dau-tu-nao.txt"
         },
         {
+            "slug": "phap-ly-vinhomes-hai-van-bay-so-huu-lau-dai",
+            "title": "Pháp lý Vinhomes Hải Vân Bay: sản phẩm nào sở hữu lâu dài, sản phẩm nào 50 năm?",
+            "publish": "2026-11-25 12:15",
+            "file": "bai/phap-ly-vinhomes-hai-van-bay-so-huu-lau-dai.txt"
+        },
+        {
             "slug": "sun-symphony-5-o-dau-vi-tri",
             "title": "Sun Symphony 5 ở đâu? Vị trí bên sông Hàn, cách cầu Rồng 1,5 km, biển Mỹ Khê 2,5 km",
             "publish": "2026-11-25 14:00",
             "file": "bai/sun-symphony-5-o-dau-vi-tri.txt"
+        },
+        {
+            "slug": "toa-c3-capital-square-phan-tang-chon-can",
+            "title": "Tòa C3 Capital Square: 26 tầng mặt tiền Trần Hưng Đạo, phân tầng và cách chọn căn",
+            "publish": "2026-11-25 16:15",
+            "file": "bai/toa-c3-capital-square-phan-tang-chon-can.txt"
+        },
+        {
+            "slug": "vi-tri-vinhomes-lang-van-ket-noi-giao-thong",
+            "title": "Vị trí Vinhomes Làng Vân ở đâu? Kết nối hầm Hải Vân, cảng Liên Chiểu, trung tâm Đà Nẵng",
+            "publish": "2026-11-26 11:30",
+            "file": "bai/vi-tri-vinhomes-lang-van-ket-noi-giao-thong.txt"
+        },
+        {
+            "slug": "vi-tri-the-legend-da-nang-view-cau-rong",
+            "title": "Vị trí The Legend Đà Nẵng: 4 mặt tiền chân cầu Rồng, view sông Hàn hay biển Mỹ Khê?",
+            "publish": "2026-11-26 15:30",
+            "file": "bai/vi-tri-the-legend-da-nang-view-cau-rong.txt"
+        },
+        {
+            "slug": "dao-ngoc-hay-bach-van-vinhomes-hai-van-bay",
+            "title": "Đảo Ngọc hay Bạch Vân: nên chọn phân khu nào ở Vinhomes Hải Vân Bay?",
+            "publish": "2026-11-27 11:30",
+            "file": "bai/dao-ngoc-hay-bach-van-vinhomes-hai-van-bay.txt"
+        },
+        {
+            "slug": "tien-ich-hudson-place-s4-ban-giao",
+            "title": "Tiện ích Hudson Place S4: bể bơi resort, sân golf mini và tiêu chuẩn bàn giao căn hộ",
+            "publish": "2026-11-27 15:30",
+            "file": "bai/tien-ich-hudson-place-s4-ban-giao.txt"
+        },
+        {
+            "slug": "co-nen-mua-the-poet-residence",
+            "title": "Có nên mua The Poet Residence? Ưu nhược điểm, so sánh dự án lân cận và bài toán cho thuê",
+            "publish": "2026-11-28 15:30",
+            "file": "bai/co-nen-mua-the-poet-residence.txt"
+        },
+        {
+            "slug": "vi-tri-capital-square-da-nang-ven-song-han",
+            "title": "Vị trí Capital Square Đà Nẵng: bờ Đông sông Hàn, giữa Trần Hưng Đạo – Ngô Quyền",
+            "publish": "2026-11-29 15:30",
+            "file": "bai/vi-tri-capital-square-da-nang-ven-song-han.txt"
         }
     ]
 }
