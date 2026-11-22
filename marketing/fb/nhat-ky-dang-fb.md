@@ -166,5 +166,6 @@
 | 22/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | Loại biệt thự Casamia Balanca – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
 | 22/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: Luật Kinh doanh BĐS sửa đổi 2026 (+2 tin ở bình luận) | /luat-kinh-doanh-bat-dong-san-sua-doi-2026/ /vi-tri-the-poet-residence/ /tien-do-capital-square-da-nang/ |
 | 22/11/2026 | Sun | 11:35 | (anh Hiệp yêu cầu đăng ngay) Sun Saphia công bố Early Bird 3% – sự kiện Radiance of Heritage, 938 booking (4 ảnh: thẻ nền xanh + 2 ảnh thực tế sự kiện + poster Early Bird) | /du-an/sun-saphia-residence/ |
+| 22/11/2026 | Hoàng Hiệp | 17:00 | TỔNG HỢP: Chính sách Vinhomes Hải Vân Bay từ 19/11/2026 (+2 tin ở bình luận) | /chinh-sach-vinhomes-hai-van-bay-19-11-2026/ /co-nen-mua-the-legend-da-nang-uu-nhuoc-diem/ /gia-biet-thu-casamia-calm-hoi-an-2026/ |
 | CHỜ | Sun | 23/11 | (bài web 21/11 09:00) Mặt bằng FourS Tower | mat-bang-can-ho-fours-tower (chờ) |
 | CHỜ | Sun | 23/11 | (bài web 21/11 18:30) Bãi biển gần Sun Saphia Residence | bai-bien-gan-sun-saphia-residence (chờ) |
