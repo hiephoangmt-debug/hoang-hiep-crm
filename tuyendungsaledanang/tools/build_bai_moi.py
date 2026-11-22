@@ -233,7 +233,7 @@ def build(slug):
 <h1>{esc(meta['h1'])}</h1>
 <p>{meta['intro']}</p>
 <a class="btn" href="{b1[0]}">{esc(b1[1])}</a><a class="btn2" href="{S}/ung-tuyen">Gửi hồ sơ, có người kèm</a>
-<div class="byline"><img src="{IMG}hoang-hiep-portrait.jpg" alt="Hoàng Hiệp" width="34" height="34"><span>Viết bởi <b>Hoàng Hiệp</b> · Giám đốc kinh doanh</span><span>Cập nhật {TODAY_VN}</span></div>
+<div class="byline"><img src="{IMG}hoang-hiep-avatar.jpg" alt="Hoàng Hiệp" width="34" height="34"><span>Viết bởi <b>Hoàng Hiệp</b> · Giám đốc kinh doanh</span><span>Cập nhật {TODAY_VN}</span></div>
 </div></header>
 <main class="wrap">
 <nav class="mluc" id="muc-luc">

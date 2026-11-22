@@ -10,8 +10,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG = 'https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/'
 CSS = ('/*hiep-note*/.hiep{display:flex;gap:12px;align-items:flex-start;background:#f3f6fc;border:1px solid #d9e1f2;'
        'border-left:4px solid #1B2D6B;border-radius:12px;padding:12px 14px;margin:16px 0 4px}'
-       '.hiep img{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none}'
+       '.hiep img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:none;border:2px solid #fff;box-shadow:0 0 0 1px #d9e1f2}'
        '.hiep p{margin:0;text-align:justify;text-justify:inter-word}'
+       '.hiep2{border-left:3px solid #f47c20;padding:2px 0 2px 12px;margin:14px 0 4px;font-style:italic;color:#33405c;text-align:justify;text-justify:inter-word}'
        '.hiep .hn{display:block;font-weight:800;color:#1B2D6B;font-size:14px;margin-bottom:2px;text-align:left}')
 RX_OLD = re.compile(r'<!--hiep-->.*?<!--/hiep-->', re.S)
 
@@ -23,9 +24,12 @@ def load():
     return notes
 
 
-def box(text):
-    return (f'<!--hiep--><div class="hiep"><img src="{IMG}hoang-hiep-portrait.jpg" alt="Hoàng Hiệp" width="40" height="40" loading="lazy">'
-            f'<p><span class="hn">💬 Hiệp chia sẻ</span>{text}</p></div><!--/hiep-->')
+def box(text, first):
+    # Lần đầu: hộp có ảnh + tên. Các lần sau: một đoạn trích nhẹ, không ảnh/nhãn, để đọc tự nhiên, không lặp khuôn.
+    if first:
+        return (f'<!--hiep--><div class="hiep"><img src="{IMG}hoang-hiep-avatar.jpg" alt="Hoàng Hiệp" width="44" height="44" loading="lazy">'
+                f'<p><span class="hn">Hoàng Hiệp chia sẻ</span>{text}</p></div><!--/hiep-->')
+    return f'<!--hiep--><p class="hiep2">{text}</p><!--/hiep-->'
 
 
 def apply(page, slug, notes=None):
@@ -34,9 +38,9 @@ def apply(page, slug, notes=None):
     items = notes.get(slug)
     if not items:
         return page, 0
-    if '/*hiep-note*/' not in page:
-        i = page.index('</style>')
-        page = page[:i] + CSS + page[i:]
+    page = re.sub(r'/\*hiep-note\*/[^\n<]*?(?=\n|</style>)', '', page)
+    i = page.index('</style>')
+    page = page[:i] + CSS + page[i:]
     n = 0
     for it in items:
         key = it['h2']
@@ -53,7 +57,7 @@ def apply(page, slug, notes=None):
         if end < 0 or page.rfind('<section', 0, pos) < 0:
             print(f'  ! {slug}: mục "{key}" không nằm trong <section>')
             continue
-        page = page[:end] + box(it['text']) + '\n' + page[end:]
+        page = page[:end] + box(it['text'], n == 0) + '\n' + page[end:]
         n += 1
     return page, n
 
