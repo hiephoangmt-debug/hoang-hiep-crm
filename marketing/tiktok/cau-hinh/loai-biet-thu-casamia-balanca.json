@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "363 sản phẩm, chia làm",
+  "3 LOẠI",
+  "chọn loại nào?"
+ ],
+ "question": "Đơn lập, song lập hay shophouse Casamia?",
+ "hook_bg": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d22/c-biet-thu-ven-kenh.jpg",
+ "data_title": [
+  "Casamia Balanca",
+  "LOẠI SẢN PHẨM"
+ ],
+ "rows": [
+  [
+   "173",
+   "Biệt thự đơn lập",
+   "Nhà vườn riêng"
+  ],
+  [
+   "116",
+   "Biệt thự song lập",
+   "Hai căn chung tường"
+  ],
+  [
+   "74",
+   "Shophouse",
+   "Nhà phố kinh doanh"
+  ],
+  [
+   "178 m²",
+   "Đất Park Home",
+   "Sàn 316,09 m², 3 phòng ngủ"
+  ],
+  [
+   "Sổ đỏ",
+   "Sở hữu lâu dài",
+   "Theo chủ đầu tư"
+  ]
+ ],
+ "note": "Theo chủ đầu tư Đạt Phương. Ảnh phối cảnh dự án.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d22/c-gia-dinh-truoc-nha.jpg",
+ "photo_caption": "Phối cảnh biệt thự Casamia Balanca",
+ "cta": "Bảng giá: Zalo 0904 567 009"
+}

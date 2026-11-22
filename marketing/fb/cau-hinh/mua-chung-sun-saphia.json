@@ -1,0 +1,85 @@
+{
+ "tag": "KINH NGHIỆM · SUN SAPHIA RESIDENCE",
+ "title": "Mua chung Sun Saphia Residence",
+ "sub": "Ghi tên ai, chia thế nào cho rõ?",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "~2,13 tỷ",
+   "studio từ (dự kiến)"
+  ],
+  [
+   "Điều 135",
+   "Luật Đất đai 2024"
+  ],
+  [
+   "5 điều",
+   "nên thỏa thuận"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo Luật Đất đai 2024, tài liệu CĐT · Tham khảo · Ảnh flycam khu vực dự án 17/10/2026",
+ "headline": [
+  [
+   "Mua chung",
+   "big",
+   0
+  ],
+  [
+   "Sun Saphia",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Mua chung căn hộ",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "SUN SAPHIA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "cần thỏa thuận gì?",
+     "script"
+    ]
+   ],
+   "dx": 180
+  }
+ ]
+}
