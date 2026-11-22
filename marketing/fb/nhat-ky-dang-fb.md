@@ -164,5 +164,6 @@
 | 22/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:15 | Mua chung Sun Saphia – BỘ 3 ẢNH | /mua-chung-sun-saphia-residence/ |
 | 22/11/2026 | Casamia (blogId 8074284) | 19:30 | Loại biệt thự Casamia Balanca – thẻ nền xanh + 3 ảnh (biệt thự ven kênh, gia đình trước nhà, đón khách) | /du-an/casamia-balanca-hoi-an/ |
 | 22/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | Loại biệt thự Casamia Balanca – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
+| 22/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: Luật Kinh doanh BĐS sửa đổi 2026 (+2 tin ở bình luận) | /luat-kinh-doanh-bat-dong-san-sua-doi-2026/ /vi-tri-the-poet-residence/ /tien-do-capital-square-da-nang/ |
 | CHỜ | Sun | 23/11 | (bài web 21/11 09:00) Mặt bằng FourS Tower | mat-bang-can-ho-fours-tower (chờ) |
 | CHỜ | Sun | 23/11 | (bài web 21/11 18:30) Bãi biển gần Sun Saphia Residence | bai-bien-gan-sun-saphia-residence (chờ) |
