@@ -120,3 +120,27 @@ add_filter(
 	},
 	24
 );
+
+// 22/11/2026: phối cảnh chủ đầu tư bản sạch (không chữ) – tòa tháp bên biển Sơn Thủy lúc hoàng hôn, hồ nước và khối thấp tầng (anh Hiệp gửi).
+// Thêm vào Thư viện ngay sau 5 ảnh phối cảnh 4K; chỉ đổi khi ô ảnh vẫn là bản web đã nhập.
+add_filter(
+	'hh_project_dataset',
+	static function ( $projects ) {
+		foreach ( $projects as &$p ) {
+			if ( 'sun-saphia-residence' !== ( $p['slug'] ?? '' ) ) {
+				continue;
+			}
+			$links = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+			if ( '' === $links || false !== strpos( $links, 'sun-saphia-cdt-ven-bien-son-thuy-ho-nuoc.jpg' ) ) {
+				continue;
+			}
+			$rows = explode( "\n", $links );
+			array_splice( $rows, min( 5, count( $rows ) ), 0, array( 'plugin:img/sun-saphia/sun-saphia-cdt-ven-bien-son-thuy-ho-nuoc.jpg | Sun Saphia Residence bên bãi biển Sơn Thủy lúc hoàng hôn, phía trước là công viên ven biển và hồ nước – phối cảnh chủ đầu tư | thư viện | Bên biển Sơn Thủy lúc hoàng hôn' ) );
+			$p['meta']['hh_p_image_links']     = implode( "\n", $rows );
+			$p['fix_meta']['hh_p_image_links'] = array_values( array_unique( array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $links ) ) ) );
+		}
+		unset( $p );
+		return $projects;
+	},
+	25
+);

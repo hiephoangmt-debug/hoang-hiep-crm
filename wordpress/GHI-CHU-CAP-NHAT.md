@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.335**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.336**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.336
+
+- Sun Saphia Residence: thêm phối cảnh chủ đầu tư bản sạch (tòa tháp bên biển Sơn Thủy lúc hoàng hôn, hồ nước phía trước) vào Thư viện ảnh. Ô ảnh anh đã tự sửa trong quản trị giữ nguyên.
 
 ## Cài đặt từng bước (khoảng 10 phút)
 
