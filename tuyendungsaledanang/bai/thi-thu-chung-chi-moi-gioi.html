@@ -217,6 +217,9 @@ function finish(){
 }
 $('#start').onclick=start;$('#again').onclick=start;$('#back').onclick=()=>{$('#result').hidden=true;$('#setup').hidden=false};
 $('#quit').onclick=()=>{clearInterval(timer);$('#play').hidden=true;$('#setup').hidden=false};
+const TSLUG={"phap-luat-kdbds": "Pháp luật KDBĐS", "thi-truong-bds": "Thị trường BĐS", "dao-duc-nghe": "Đạo đức nghề", "quy-trinh-moi-gioi": "Quy trình môi giới", "tai-chinh-gia": "Tài chính & giá", "hop-dong-giao-dich": "Hợp đồng & giao dịch", "ky-nang-tu-van-dam-phan": "Kỹ năng tư vấn & đàm phán", "phap-luat-dat-dai": "Pháp luật đất đai", "phap-luat-nha-o": "Pháp luật nhà ở", "phap-luat-dau-tu": "Pháp luật đầu tư", "thue-phi-le-phi": "Thuế, phí, lệ phí", "cong-chung": "Công chứng", "phong-chong-rua-tien": "Phòng chống rửa tiền", "xu-phat-hanh-chinh": "Xử phạt hành chính"};
+function fromHash(){const m=location.hash.match(/^#cd-([a-z0-9-]+)$/);if(!m||!TSLUG[m[1]])return;document.querySelector('[data-m=topic]').click();$('#topic').value=TSLUG[m[1]];start()}
+window.addEventListener('hashchange',fromHash);fromHash();
 </script>
 <footer class="foot"><div class="wrap"><div class="fgrid">
 <div><h4>Tuyển Sale Đà Nẵng</h4><p>Tuyển Sale BĐS, nhân viên kinh doanh bất động sản tại Đà Nẵng.</p><p>Phụ trách tuyển dụng: <b>Hoàng Phạm Đình Hiệp</b></p><p>23–25 Nguyễn Phước Lan, Đà Nẵng</p><p>Hotline / Zalo: <a href="tel:0904567009"><b>0904 567 009</b></a></p><p>Email: <a href="mailto:hiephoangmt@gmail.com">hiephoangmt@gmail.com</a></p></div>

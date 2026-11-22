@@ -25,6 +25,41 @@ ORDER = [
     ('can-ho-hinh-thanh-trong-tuong-lai', 'Căn hộ hình thành trong tương lai'),
     ('luat-kinh-doanh-bat-dong-san', 'Luật Kinh doanh BĐS 2023 cho người mới'),
 ]
+ON_THI = [
+    ('on-thi-chung-chi-moi-gioi-bat-dong-san', 'Cấu trúc kỳ thi và lộ trình ôn 30 ngày'),
+    ('on-thi-phap-luat-kinh-doanh-bat-dong-san', 'Pháp luật Kinh doanh BĐS'),
+    ('on-thi-phap-luat-dat-dai', 'Pháp luật Đất đai 2024'),
+    ('on-thi-phap-luat-nha-o', 'Pháp luật Nhà ở 2023'),
+    ('on-thi-hop-dong-dat-coc-cong-chung', 'Hợp đồng, đặt cọc, công chứng'),
+    ('on-thi-thue-phi-le-phi-bat-dong-san', 'Thuế, phí, lệ phí'),
+    ('on-thi-dau-tu-phong-chong-rua-tien-xu-phat', 'Đầu tư, phòng chống rửa tiền, xử phạt'),
+    ('on-thi-thi-truong-dinh-gia-bat-dong-san', 'Thị trường và định giá BĐS'),
+    ('on-thi-quy-trinh-moi-gioi-dao-duc', 'Quy trình môi giới và đạo đức nghề'),
+    ('on-thi-ky-nang-tu-van-dam-phan', 'Kỹ năng tư vấn và đàm phán'),
+]
+SERIES = {
+    'nhap-mon': dict(items=ORDER, name='Nhập môn Sale BĐS', crumb='Cẩm nang',
+                     lead='11 bài từ cơ bản đến kỹ năng và pháp lý, viết cho người mới. Đọc xong chuỗi này, tiếp tục với <a href="https://www.tuyendungsaledanang.com/lo-trinh-sale-moi-60-ngay-dau">lộ trình 60 ngày đầu</a> và <a href="https://www.tuyendungsaledanang.com/on-thi-chung-chi-moi-gioi-bat-dong-san">chuỗi ôn thi chứng chỉ</a>.',
+                     mid=('Muốn có người kèm từ ngày đầu?', 'Data phân bổ mỗi ngày · hỗ trợ 50–100% quảng cáo · 03 tháng xét lương')),
+    'on-thi': dict(items=ON_THI, name='Ôn thi chứng chỉ môi giới', crumb='Ôn thi chứng chỉ',
+                   lead='10 bài ôn theo đúng chuyên đề của đề thi, mỗi bài kèm 20 câu luyện tập. Học xong, làm <a href="https://www.tuyendungsaledanang.com/thi-thu-chung-chi-moi-gioi">đề thi thử 30 câu</a> để kiểm tra.',
+                     mid=('Vừa đi làm vừa ôn thi chứng chỉ?', 'Vào đội: có người kèm, được hướng dẫn hồ sơ thi, data phân bổ mỗi ngày')),
+}
+def series_of(slug):
+    for k, v in SERIES.items():
+        if slug in [x for x, _ in v['items']]:
+            return v
+    raise KeyError(slug)
+
+from collections import Counter
+QCOUNT = Counter(b['topic'] for b in json.load(open(os.path.join(ROOT, 'bai-src', 'quiz-bank.json'), encoding='utf-8')))
+import unicodedata
+def tslug(t):
+    t = t.replace('đ', 'd').replace('Đ', 'D')
+    t = unicodedata.normalize('NFD', t)
+    t = ''.join(c for c in t if unicodedata.category(c) != 'Mn').lower()
+    return re.sub(r'[^a-z0-9]+', '-', t).strip('-')
+
 # Ảnh thật minh hoạ đúng nội dung từng bài (chèn sau hộp Trả lời nhanh). Bài không có ảnh khớp thì để trống.
 FIG = {
     'sale-bat-dong-san-la-gi': ('hop-dau-ngay.jpg', 'Họp đầu ngày 8:30 của đội kinh doanh tại văn phòng 23–25 Nguyễn Phước Lan'),
@@ -82,7 +117,7 @@ def build(slug):
     body = src[m.end():].strip()
     url = f'{S}/{slug}'
     og = f'{IMG}og-{slug}.jpg'
-    n = [s for s, _ in ORDER].index(slug) + 1
+    SR = series_of(slug)
 
     # Mục lục từ các section
     secs = re.findall(r'<section class="card[^"]*" id="([^"]+)">\s*<h2>(.*?)</h2>', body, re.S)
@@ -96,12 +131,21 @@ def build(slug):
         body = re.sub(r'(<div class="tldr">.*?</div>)', lambda mm: mm.group(1) + '\n' + fig, body, count=1, flags=re.S)
 
     # Hộp CTA giữa bài, sau section thứ 2
-    mid = (f'<div class="midcta"><p>Muốn có người kèm từ ngày đầu?<span>Data phân bổ mỗi ngày · hỗ trợ 50–100% quảng cáo · 03 tháng xét lương</span></p>'
+    mid = (f'<div class="midcta"><p>{SR["mid"][0]}<span>{SR["mid"][1]}</span></p>'
            f'<a href="{S}/ung-tuyen">Gửi hồ sơ 30 giây →</a></div>')
     ends = [mm.end() for mm in re.finditer(r'</section>', body)]
     if len(ends) >= 2:
         body = body[:ends[1]] + '\n' + mid + body[ends[1]:]
 
+    quiz = ''
+    if meta.get('quiz_topics'):
+        btns = ''.join(f'<a class="ab ab1" href="{S}/thi-thu-chung-chi-moi-gioi#cd-{tslug(t)}">📝 Luyện {min(20, QCOUNT[t])} câu: {esc(t)}</a>' for t in meta['quiz_topics'] if QCOUNT[t])
+        quiz = (f'<section class="card" id="luyen-tap"><h2>Luyện ngay <span>câu hỏi chuyên đề</span></h2>'
+                f'<p class="lead">Đề tự đảo mỗi lần làm, xem đáp án và giải thích ngay sau mỗi câu.</p>{btns}'
+                f'<a class="ab ab4" href="{S}/thi-thu-chung-chi-moi-gioi">🎯 Làm đề thi thử 30 câu (chia đều 2 phần)</a></section>\n')
+    elif SR is SERIES['on-thi']:
+        quiz = (f'<section class="card" id="luyen-tap"><h2>Bắt đầu <span>luyện đề</span></h2>'
+                f'<a class="ab ab1" href="{S}/thi-thu-chung-chi-moi-gioi">📝 Làm đề thi thử 30 câu</a></section>\n')
     faq = meta['faq']
     faq_html = '<section class="card faq" id="hoi-dap">\n<h2>Câu hỏi <span>thường gặp</span></h2>\n' + ''.join(
         f'<details><summary>{esc(q)}</summary><p>{a}</p></details>\n' for q, a in faq) + '</section>\n'
@@ -122,14 +166,14 @@ def build(slug):
 '''
 
     items = []
-    for i, (s2, t2) in enumerate(ORDER, 1):
+    for i, (s2, t2) in enumerate(SR['items'], 1):
         if s2 == slug:
             items.append(f'<li><div class="cur"><b>{i}. {esc(t2)} <em>Bạn đang đọc</em></b><span>{esc(meta["series_desc"])}</span></div></li>')
         else:
             items.append(f'<li><div class="si"><b><a href="{S}/{s2}">{i}. {esc(t2)}</a></b><a class="si-go" href="{S}/{s2}">Đọc bài →</a></div></li>')
     series = f'''<section class="card" id="doc-tiep">
-<h2>Chuỗi bài <span>Nhập môn Sale BĐS</span></h2>
-<p class="lead">11 bài từ cơ bản đến kỹ năng và pháp lý, viết cho người mới. Đọc xong chuỗi này, tiếp tục với <a href="{S}/lo-trinh-sale-moi-60-ngay-dau">lộ trình 60 ngày đầu</a> và chuỗi bài marketing.</p>
+<h2>Chuỗi bài <span>{SR['name']}</span></h2>
+<p class="lead">{SR['lead']}</p>
 <ol class="series">{''.join(items)}</ol>
 <p class="more">Muốn học trực tiếp, có người kèm? <a href="{S}/ung-tuyen">Gửi hồ sơ 30 giây</a> · <a href="{S}/#vi-tri">Xem các vị trí đang tuyển</a></p>
 </section>
@@ -147,7 +191,7 @@ def build(slug):
     }, {
         '@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': 'Tuyển Sale Đà Nẵng', 'item': S + '/'},
-            {'@type': 'ListItem', 'position': 2, 'name': 'Cẩm nang', 'item': S + '/#cam-nang'},
+            {'@type': 'ListItem', 'position': 2, 'name': SR['crumb'], 'item': S + '/#cam-nang'},
             {'@type': 'ListItem', 'position': 3, 'name': meta['h1'], 'item': url}]},
     ]
     ldj = '\n'.join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in ld)
@@ -192,7 +236,7 @@ def build(slug):
 <ul>{toc}</ul>
 </nav>
 {body}
-{faq_html}
+{quiz}{faq_html}
 {PROJECTS}{cta}
 {series}</main>
 {TAIL}'''
@@ -202,7 +246,7 @@ def build(slug):
 
 
 if __name__ == '__main__':
-    slugs = sys.argv[1:] or [s for s, _ in ORDER]
+    slugs = sys.argv[1:] or [s for v in SERIES.values() for s, _ in v['items']]
     for s in slugs:
         if not os.path.exists(os.path.join(ROOT, 'bai-src', s + '.html')):
             print('chưa có', s); continue

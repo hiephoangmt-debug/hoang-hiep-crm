@@ -180,10 +180,20 @@ function finish(){
 }
 $('#start').onclick=start;$('#again').onclick=start;$('#back').onclick=()=>{$('#result').hidden=true;$('#setup').hidden=false};
 $('#quit').onclick=()=>{clearInterval(timer);$('#play').hidden=true;$('#setup').hidden=false};
+const TSLUG=__TSLUG__;
+function fromHash(){const m=location.hash.match(/^#cd-([a-z0-9-]+)$/);if(!m||!TSLUG[m[1]])return;document.querySelector('[data-m=topic]').click();$('#topic').value=TSLUG[m[1]];start()}
+window.addEventListener('hashchange',fromHash);fromHash();
 '''
+import unicodedata
+def tslug(t):
+    t = t.replace('đ', 'd').replace('Đ', 'D')
+    t = unicodedata.normalize('NFD', t)
+    t = ''.join(c for c in t if unicodedata.category(c) != 'Mn').lower()
+    return re.sub(r'[^a-z0-9]+', '-', t).strip('-')
+TSLUG = {tslug(t): t for t in topics}
 topic_opts = ''.join(f'<option value="{e(t)}">{e(t)} ({c} câu)</option>' for t, c in topics.most_common())
 js = (JS.replace('__BANK__', json.dumps(bank, ensure_ascii=False, separators=(',', ':')))
-      .replace('__EXAM_N__', str(EXAM_N)).replace('__EXAM_MIN__', str(EXAM_MIN)).replace('__PASS__', str(PASS)))
+      .replace('__TSLUG__', json.dumps(TSLUG, ensure_ascii=False)).replace('__EXAM_N__', str(EXAM_N)).replace('__EXAM_MIN__', str(EXAM_MIN)).replace('__PASS__', str(PASS)))
 
 page = f'''<!doctype html>
 <html lang="vi">
