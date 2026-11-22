@@ -77,3 +77,35 @@ add_filter(
 	},
 	20
 );
+
+/*
+ * 22/11/2026: tiến độ tổng thể phần nhà ở thương mại theo tiến độ chung của dự án (bản 31/10/2026 anh Hiệp gửi).
+ * Chỉ lấy mốc thời gian – không đăng file gốc, không tên/số điện thoại người lập. Chỉ thay ô còn đúng bản web đã nhập.
+ */
+add_filter(
+	'hh_project_dataset',
+	static function ( $projects ) {
+		$upd = array(
+			'hh_p_handover' => 'Dự kiến bàn giao căn hộ 15/12/2027 (theo tiến độ tổng thể của dự án cập nhật 31/10/2026) – hỏi Hoàng Hiệp tiến độ mới nhất',
+			'hh_p_progress' => "17/12/2025 | Giao đất cho chủ đầu tư\n18/12/2025 | Cấp giấy phép xây dựng số 11111/SXD-GPXD\n19/12/2025 | Khởi công\n20/01 – 27/4/2026 | Ép cọc đại trà\n16/3/2026 | Sở Xây dựng công khai thông tin tiếp nhận hồ sơ (đợt 1: 849 căn)\n16/4 – 16/5/2026 | Nhận hồ sơ đăng ký mua\n10/4 – 30/10/2026 | Kết cấu phần hầm đến cốt 0.000\n15/10/2026 | Bốc thăm quyền mua tại UBND phường Hòa Xuân\n30/11/2026 – 15/5/2027 | Kết cấu phần thân (kế hoạch)\n12/2026 – 10/2027 | Hoàn thiện kiến trúc, hệ thống điện nước, điều hòa, PCCC (kế hoạch)\n6 – 11/2027 | Mặt dựng, hệ cửa; hạ tầng, cảnh quan (kế hoạch)\n10/10 – 10/12/2027 | Nghiệm thu căn hộ, nghiệm thu hoàn thành dự án (kế hoạch)\n15/12/2027 | Dự kiến bàn giao căn hộ đưa vào sử dụng",
+		);
+		foreach ( $projects as $i => $p ) {
+			if ( 'viet-huong-lakeside-hoa-xuan' !== ( $p['slug'] ?? '' ) ) {
+				continue;
+			}
+			foreach ( $upd as $k => $v ) {
+				$cur = (string) ( $p['meta'][ $k ] ?? '' );
+				if ( $cur === $v ) {
+					continue;
+				}
+				if ( '' !== trim( $cur ) ) {
+					$p['fix_meta'][ $k ] = array_merge( (array) ( $p['fix_meta'][ $k ] ?? array() ), array( $cur ) );
+				}
+				$p['meta'][ $k ] = $v;
+			}
+			$projects[ $i ] = $p;
+		}
+		return $projects;
+	},
+	40
+);

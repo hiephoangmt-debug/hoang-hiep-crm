@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.337**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.338**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.338
+
+- Việt Hương Lakeside (nhà ở xã hội B5 Hòa Xuân): thêm tiến độ tổng thể theo kế hoạch dự án cập nhật 31/10/2026 – kết cấu thân 30/11/2026 – 15/5/2027, nghiệm thu 10/2027 – 12/2027, dự kiến bàn giao 15/12/2027.
 
 ## Có gì mới – 2.20.337
 
