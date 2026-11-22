@@ -33,6 +33,10 @@ section[id],nav[id]{scroll-margin-top:100px}html{scroll-behavior:smooth}
 @media(max-width:760px){.top .bg{display:inline-block}.top .menu{display:none;max-height:calc(100vh - 56px);overflow-y:auto}.hm-tg:checked~.menu{display:block}.hm-tg:checked~.wrap .bg .o{display:none}.hm-tg:checked~.wrap .bg .x{display:inline}
 .top .menu .wrap{display:block;white-space:normal;overflow:visible;padding-top:4px;padding-bottom:10px}.top .menu a{display:block;padding:12px 4px;border-bottom:1px solid rgba(255,255,255,.08);font-size:15px}}
 
+/* căn đều 2 bên */
+.card p,.card li,.tldr,.hl,.ex,.note,.goal,.mile li,.it p,.hero p,.cta li,.faq details p{text-align:justify;text-justify:inter-word}
+.card td p,.card th,.si span,.more,.formbox p{text-align:left}
+/*hiep-note*/.hiep{display:flex;gap:12px;align-items:flex-start;background:#f3f6fc;border:1px solid #d9e1f2;border-left:4px solid #1B2D6B;border-radius:12px;padding:12px 14px;margin:16px 0 4px}.hiep img{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none}.hiep p{margin:0;text-align:justify;text-justify:inter-word}.hiep .hn{display:block;font-weight:800;color:#1B2D6B;font-size:14px;margin-bottom:2px;text-align:left}
 .card p,.card li,.card dd,.tldr,.hl,.ex,.note,.goal,.mile li,.it p,.hero p,.cta li,.faq details p,.nw p,.fs{text-align:justify;text-justify:inter-word}
 .card td p,.card th,.si span,.more,.formbox p{text-align:left}
 .tldr{background:#fff;border:2px solid #f47c20;border-radius:14px;padding:16px 18px;margin:20px 0;font-size:16.5px}
@@ -96,6 +100,7 @@ section[id],nav[id]{scroll-margin-top:100px}html{scroll-behavior:smooth}
 <tr><td><b>Dự án</b> (căn hộ, biệt thự từ chủ đầu tư)</td><td>Chủ đầu tư trả cho đại lý phân phối theo hợp đồng</td><td>Công ty chia lại cho sale theo chính sách nội bộ từng dự án</td></tr>
 <tr><td><b>Thổ cư / thứ cấp</b> (nhà, đất của cá nhân)</td><td>Người bán hoặc người mua, theo thỏa thuận</td><td>Theo thỏa thuận giữa sale, công ty và khách</td></tr></table>
 <p>Với dự án, tiền đi qua 3 tầng: chủ đầu tư → đại lý (công ty bạn) → sale. Phần đến tay sale phụ thuộc chính sách của cả hai tầng trên, nên cùng một căn nhưng bán qua hai công ty khác nhau có thể cho hai mức hoa hồng khác nhau.</p>
+<!--hiep--><div class="hiep"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/hoang-hiep-portrait.jpg" alt="Hoàng Hiệp" width="40" height="40" loading="lazy"><p><span class="hn">💬 Hiệp chia sẻ</span>Hiệp hay dặn các bạn mới: trước khi bán một dự án, hãy hỏi quản lý chính sách hoa hồng của chính dự án đó. Mỗi dự án một khác, hiểu rõ ngay từ đầu giúp bạn tư vấn tự tin hơn.</p></div><!--/hiep-->
 </section>
 
 <section class="card" id="la-bao-nhieu">
@@ -123,6 +128,7 @@ section[id],nav[id]{scroll-margin-top:100px}html{scroll-behavior:smooth}
 <tr><td>3 tỷ</td><td>30.000.000đ</td><td>đến 10.000.000đ</td><td>đến 40.000.000đ</td></tr>
 <tr><td>6 tỷ (liền kề Vinhomes Hải Vân Bay, từ khoảng)</td><td>60.000.000đ</td><td>đến 10.000.000đ</td><td>đến 70.000.000đ</td></tr></table>
 <p class="note"><b>Ví dụ minh họa, tỷ lệ 1% là giả định để dễ tính</b>, không phải tỷ lệ của đội hay của dự án nào. Tỷ lệ thực tế theo chính sách từng dự án, trao đổi trực tiếp và ghi trong hợp đồng. Thu nhập tháng đó còn cộng lương sàn nếu bạn ở cấp Pro Sales (7–10 triệu/tháng).</p>
+<!--hiep--><div class="hiep"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/hoang-hiep-portrait.jpg" alt="Hoàng Hiệp" width="40" height="40" loading="lazy"><p><span class="hn">💬 Hiệp chia sẻ</span>Theo kinh nghiệm của Hiệp, bạn nên tự làm phép tính này cho căn mình đang tư vấn rồi nhờ quản lý kiểm tra lại. Làm vài lần là quen, không còn mơ hồ về khoản mình sẽ nhận.</p></div><!--/hiep-->
 </section>
 
 <section class="card" id="du-an-vs-tho-cu">
@@ -165,6 +171,7 @@ section[id],nav[id]{scroll-margin-top:100px}html{scroll-behavior:smooth}
 <tr><td>Không hỏi rõ mốc trả hoa hồng</td><td>Tưởng có tiền, kế hoạch tài chính bị lệch</td><td>Hỏi và ghi lại chính sách từng dự án trước khi bán</td></tr>
 <tr><td>Hứa với khách điều ngoài chính sách</td><td>Khách hủy cọc, mất cả giao dịch</td><td>Chỉ tư vấn theo chính sách chính thức, vướng thì hỏi quản lý</td></tr>
 <tr><td>Làm chung mà không thống nhất tỷ lệ chia</td><td>Tranh chấp với đồng nghiệp</td><td>Thống nhất bằng văn bản ngay từ đầu</td></tr></table>
+<!--hiep--><div class="hiep"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/hoang-hiep-portrait.jpg" alt="Hoàng Hiệp" width="40" height="40" loading="lazy"><p><span class="hn">💬 Hiệp chia sẻ</span>Điều Hiệp muốn bạn nhớ: ghi nhận khách lên hệ thống ngay sau cuộc gọi đầu tiên. Việc nhỏ này mất vài phút nhưng bảo vệ công sức của bạn suốt cả quá trình chăm khách.</p></div><!--/hiep-->
 </section>
 
 <section class="card" id="tang-hoa-hong">
@@ -177,6 +184,7 @@ section[id],nav[id]{scroll-margin-top:100px}html{scroll-behavior:smooth}
 <li><b>Chốt từ nguồn marketing</b> để có thêm thưởng đến 10 triệu mỗi giao dịch. Ví dụ thật: <a href="https://www.tuyendungsaledanang.com/tu-data-thanh-deal-nguon-marketing">Từ data thành deal</a>.</li>
 </ol>
 <div class="goal"><b>Xem thêm:</b> tổng thu nhập gồm những gì ở bài <a href="https://www.tuyendungsaledanang.com/luong-sale-bat-dong-san">Sale bất động sản lương bao nhiêu</a>.</div>
+<!--hiep--><div class="hiep"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/hoang-hiep-portrait.jpg" alt="Hoàng Hiệp" width="40" height="40" loading="lazy"><p><span class="hn">💬 Hiệp chia sẻ</span>Hiệp thấy bạn nào tăng thu nhập nhanh thường không chạy theo dự án hoa hồng cao nhất, mà bám chắc một dự án dễ bán và gọi khách đều mỗi ngày. Số giao dịch mới là thứ bạn tự quyết được.</p></div><!--/hiep-->
 </section>
 <section class="card faq" id="hoi-dap">
 <h2>Câu hỏi <span>thường gặp</span></h2>
