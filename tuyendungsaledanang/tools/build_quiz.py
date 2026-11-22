@@ -12,8 +12,11 @@ SLUG = 'thi-thu-chung-chi-moi-gioi'
 TODAY, TODAY_VN = '2026-11-22', '22/11/2026'
 
 bank = json.load(open(os.path.join(ROOT, 'bai-src', 'quiz-bank.json'), encoding='utf-8'))
+SIDE_A = ('Tổng quan môi giới', 'Kiến thức pháp luật')
 for b in bank:
     assert len(b['opts']) == 4 and 0 <= b['ans'] <= 3, b['id']
+    b['side'] = 0 if b['cat'] in SIDE_A else 1
+SIDES = Counter(b['side'] for b in bank)
 N = len(bank)
 topics = Counter(b['topic'] for b in bank)
 fmt_path = os.path.join(ROOT, 'bai-src', 'quiz-config.json')
@@ -120,7 +123,10 @@ function build(){
   let pool=BANK;
   if(mode==='topic'){const t=$('#topic').value;pool=BANK.filter(b=>b.topic===t)}
   let n=mode==='exam'?Math.min(EXAM_N,pool.length):mode==='topic'?Math.min(20,pool.length):pool.length;
-  return shuffle(pool).slice(0,n).map(b=>{
+  let pick;
+  if(mode==='exam'){const a=shuffle(pool.filter(b=>b.side===0)),c=shuffle(pool.filter(b=>b.side===1));const h=Math.floor(n/2);pick=shuffle(a.slice(0,n-h).concat(c.slice(0,h)))}
+  else pick=shuffle(pool).slice(0,n);
+  return pick.map(b=>{
     let idx=[0,1,2,3];
     idx=b.lock_last?shuffle([0,1,2]).concat([3]):shuffle(idx);
     return {b,order:idx,correct:idx.indexOf(b.ans)};
@@ -213,7 +219,7 @@ page = f'''<!doctype html>
 <div id="setup">
 <h2>Chọn cách làm bài</h2>
 <div class="modes">
-<button class="mode" data-m="exam" aria-pressed="true"><b>📝 Đề thi thử</b><small>{EXAM_N} câu ngẫu nhiên · {EXAM_MIN} phút · chấm điểm cuối</small></button>
+<button class="mode" data-m="exam" aria-pressed="true"><b>📝 Đề thi thử</b><small>{EXAM_N} câu: {EXAM_N-EXAM_N//2} Tổng quan & pháp luật + {EXAM_N//2} Quy trình & kỹ năng · {EXAM_MIN} phút</small></button>
 <button class="mode" data-m="topic" aria-pressed="false"><b>🎯 Theo chuyên đề</b><small>20 câu một chuyên đề · xem đáp án ngay</small></button>
 <button class="mode" data-m="all" aria-pressed="false"><b>📚 Ôn toàn bộ</b><small>Cả {N} câu, đảo thứ tự · xem đáp án ngay</small></button>
 </div>
@@ -249,7 +255,7 @@ page = f'''<!doctype html>
 
 <section class="card" id="cau-truc">
 <h2>Ngân hàng câu hỏi <span>theo chuyên đề</span></h2>
-<p class="lead">{N} câu, biên soạn lại theo phạm vi kiến thức kỳ thi chứng chỉ hành nghề môi giới và cập nhật luật đang có hiệu lực. Câu nào dựa trên luật cũ đã được sửa hoặc loại bỏ.</p>
+<p class="lead">{N} câu chia 2 phần: <b>Tổng quan & pháp luật</b> ({SIDES[0]} câu) và <b>Quy trình & kỹ năng môi giới</b> ({SIDES[1]} câu). Đề thi thử luôn lấy đều 2 phần. Câu hỏi biên soạn lại theo phạm vi kiến thức kỳ thi chứng chỉ hành nghề môi giới và cập nhật luật đang có hiệu lực. Câu nào dựa trên luật cũ đã được sửa hoặc loại bỏ.</p>
 <table><tr><th>Chuyên đề</th><th>Số câu</th></tr>{topic_rows}</table>
 <p class="note">Đề trên trang là đề luyện tập, không phải đề thi chính thức. Lịch thi, cấu trúc đề và điểm đạt theo thông báo của cơ quan tổ chức thi. Xem thêm <a href="{S}/chung-chi-moi-gioi-bat-dong-san">Chứng chỉ môi giới BĐS: có bắt buộc không, thi thế nào</a> và <a href="{S}/luat-kinh-doanh-bat-dong-san">Luật Kinh doanh BĐS 2023 cho người mới</a>.</p>
 </section>
