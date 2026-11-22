@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.336**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.337**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.337
+
+- Euro Village 2: giỏ hàng đất biệt thự cập nhật 22/11/2026 – giá chào chỉ từ khoảng 80 triệu/m² (lô 300 m² khoảng 24 tỷ); bảng lô chỉ ghi vị trí, giá từng lô "Liên hệ" (theo quy tắc chỉ đăng giá thấp nhất). Ô anh đã tự sửa trong quản trị giữ nguyên.
 
 ## Có gì mới – 2.20.336
 

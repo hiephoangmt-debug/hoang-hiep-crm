@@ -89,8 +89,8 @@ HTML
 	/* ---------------- 2. Euro Village 2 – Giá đất biệt thự ---------------- */
 	$posts[] = array(
 		'slug'     => 'gia-dat-biet-thu-euro-village-2-hoa-xuan',
-		'title'    => 'Giá đất biệt thự Euro Village 2 cuối 2026: khoảng 83 – 105 triệu/m², chênh theo view sông, kênh, công viên',
-		'excerpt'  => 'Giá đất biệt thự Euro Village 2 (Hòa Xuân) theo giỏ hàng chuyển nhượng 26/10/2026: khoảng 83 – 105 triệu/m² tùy view sông, lưng kênh, công viên, lô góc, cặp lô. Tổng tiền lô 300 m² và hạ tầng tác động.',
+		'title'    => 'Giá đất biệt thự Euro Village 2 cuối 2026: khoảng 80 – 105 triệu/m², chênh theo view sông, kênh, công viên',
+		'excerpt'  => 'Giá đất biệt thự Euro Village 2 (Hòa Xuân) theo giỏ hàng chuyển nhượng 22/11/2026: khoảng 80 – 105 triệu/m² tùy view sông, lưng kênh, công viên, lô góc, cặp lô. Tổng tiền lô 300 m² và hạ tầng tác động.',
 		'keyword'  => 'giá đất biệt thự Euro Village 2',
 		'keywords_extra' => array( 'đất biệt thự Hòa Xuân', 'Euro Village 2 giá bao nhiêu', 'Làng Châu Âu 2 Hòa Xuân' ),
 		'project'  => 'euro-village-2',
@@ -100,7 +100,7 @@ HTML
 		'image'    => 'plugin:img/hoa-xuan/hoa-xuan-flycam-8-2025-day-pho-ven-song-nhin-ve-cau-rong.jpg',
 		'image_alt' => 'Giá đất biệt thự Euro Village 2 – khu biệt thự ven sông Hòa Xuân nhìn về trung tâm Đà Nẵng (ảnh flycam 8/2025)',
 		'content'  => <<<'HTML'
-<p><strong>Giá đất biệt thự Euro Village 2</strong> theo giỏ hàng chuyển nhượng Hoàng Hiệp tổng hợp ngày 26/10/2026 dao động khoảng 83 – 105 triệu/m², tùy lô nhìn sông, lưng kênh, nhìn công viên hay lô góc. Euro Village 2 (Làng Châu Âu 2) thuộc giai đoạn 1B Khu đô thị sinh thái Hòa Xuân của Sun Group, phường Hòa Xuân (cũ), Cẩm Lệ. Bài viết phân tích giá theo vị trí, tổng tiền một lô và hạ tầng đang tác động tới khu vực.</p>
+<p><strong>Giá đất biệt thự Euro Village 2</strong> theo giỏ hàng chuyển nhượng Hoàng Hiệp cập nhật ngày 22/11/2026 dao động khoảng 80 – 105 triệu/m², tùy lô nhìn sông, lưng kênh, nhìn công viên hay lô góc. Euro Village 2 (Làng Châu Âu 2) thuộc giai đoạn 1B Khu đô thị sinh thái Hòa Xuân của Sun Group, phường Hòa Xuân (cũ), Cẩm Lệ. Bài viết phân tích giá theo vị trí, tổng tiền một lô và hạ tầng đang tác động tới khu vực.</p>
 <!--hh-featured-->
 <h2>Euro Village 2 ở đâu, quy mô thế nào?</h2>
 <p>Khu biệt thự nằm ven sông Cẩm Lệ, phía Nam trung tâm Đà Nẵng, cách sân bay khoảng 10 phút, trung tâm thành phố khoảng 15 phút và biển Mỹ Khê khoảng 20 phút đi xe. Đây là khu biệt thự quy hoạch riêng, không lẫn nhà phố, hạ tầng đường, cây xanh, kênh cảnh quan đã hoàn thiện.</p>
@@ -116,27 +116,27 @@ HTML
 </tbody>
 </table>
 <h2>Giá đất biệt thự Euro Village 2 theo vị trí lô</h2>
-<p>Bảng dưới gom giá đất biệt thự Euro Village 2 theo nhóm vị trí (không ghi số lô) từ giỏ hàng 26/10/2026. Đây là giá chủ nhà đưa ra, một số lô còn thương lượng.</p>
+<p>Bảng dưới gom giá đất biệt thự Euro Village 2 theo nhóm vị trí (không ghi số lô) từ giỏ hàng 22/11/2026. Đây là giá chủ nhà đưa ra, một số lô còn thương lượng.</p>
 <table>
 <thead><tr><th>Nhóm vị trí</th><th>Diện tích</th><th>Giá chào tham khảo</th></tr></thead>
 <tbody>
-<tr><td>Lô thường, hướng Tây Nam</td><td>300 m²</td><td>Khoảng 25 tỷ (khoảng 83 triệu/m²)</td></tr>
+<tr><td>Lô thường, hướng Tây Nam</td><td>300 m²</td><td>Khoảng 24 tỷ (khoảng 80 triệu/m²)</td></tr>
 <tr><td>Lô hướng Đông Nam, đường nội khu</td><td>–</td><td>Khoảng 87 triệu/m²</td></tr>
 <tr><td>Lô nhìn công viên</td><td>300 – 312,5 m²</td><td>Khoảng 89 – 90 triệu/m²</td></tr>
-<tr><td>Lô lưng kênh, nhìn kênh</td><td>–</td><td>Khoảng 89 triệu/m² (một số lô nhìn kênh: liên hệ)</td></tr>
+<tr><td>Lô lưng kênh, nhìn kênh</td><td>–</td><td>Khoảng 89 triệu/m²</td></tr>
 <tr><td>Lô góc</td><td>438 m²</td><td>Khoảng 92 triệu/m²</td></tr>
 <tr><td>Lô nhìn sông</td><td>–</td><td>Khoảng 100 triệu/m²</td></tr>
-<tr><td>Cặp lô liền kề</td><td>600 – 670 m²</td><td>Khoảng 90 – 105 triệu/m²</td></tr>
+<tr><td>Cặp lô liền kề</td><td>600 – 670 m²</td><td>Khoảng 88 – 105 triệu/m²</td></tr>
 </tbody>
 </table>
-<p>Như vậy giá đất biệt thự Euro Village 2 chênh khoảng 20% giữa lô thường và lô nhìn sông. Cặp lô liền kề được nhiều khách xây biệt thự lớn tìm nên giá/m² không thấp hơn lô đơn, có cặp lô nhìn sông được chào khoảng 105 triệu/m².</p>
+<p>Như vậy giá đất biệt thự Euro Village 2 chênh khoảng 25% giữa lô thường và lô nhìn sông. Cặp lô liền kề được nhiều khách xây biệt thự lớn tìm nên giá/m² không thấp hơn lô đơn, có cặp lô nhìn sông được chào khoảng 105 triệu/m².</p>
 <!--hh-img:img/hoa-xuan/hoa-xuan-flycam-8-2025-toan-canh-ven-song-cam-le.jpg|Toàn cảnh khu đô thị ven sông Cẩm Lệ – lô nhìn sông là nhóm có giá đất biệt thự Euro Village 2 cao nhất (flycam 8/2025)-->
 <h2>Tổng tiền một lô 300 m² là bao nhiêu?</h2>
 <p>Lô 300 m² là diện tích phổ biến nhất. Với mức giá đất biệt thự Euro Village 2 hiện nay, tổng tiền đất ước tính:</p>
 <table>
 <thead><tr><th>Đơn giá</th><th>Tổng tiền lô 300 m²</th></tr></thead>
 <tbody>
-<tr><td>Khoảng 83 triệu/m²</td><td>Khoảng 25 tỷ</td></tr>
+<tr><td>Khoảng 80 triệu/m²</td><td>Khoảng 24 tỷ</td></tr>
 <tr><td>Khoảng 90 triệu/m²</td><td>Khoảng 27 tỷ</td></tr>
 <tr><td>Khoảng 100 triệu/m²</td><td>Khoảng 30 tỷ</td></tr>
 </tbody>
@@ -153,20 +153,20 @@ HTML
 <h2>Nhận định của Hoàng Hiệp</h2>
 <p>Giá đất biệt thự Euro Village 2 đã ở mặt bằng cao so với đất nền phổ thông Hòa Xuân, nhưng vẫn thấp hơn nhiều khu biệt thự ven sông Hàn. Với khách mua để xây nhà ở lâu dài, Hiệp ưu tiên lô nhìn công viên hoặc lưng kênh – giá vừa phải, yên tĩnh. Khách giữ tài sản nên chọn lô nhìn sông hoặc lô góc vì nguồn cung loại này rất ít.</p>
 <p>Cần giỏ hàng đất biệt thự Euro Village 2 cập nhật kèm vị trí trên bản đồ, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Thông tin dự án xem tại trang <a href="/du-an/euro-village-2/">Euro Village 2 Hòa Xuân</a>.</p>
-<p class="src">Nguồn: giỏ hàng chuyển nhượng Hoàng Hiệp tổng hợp 26/10/2026 (giá chào, tham khảo); toprealty.vn, timdanang.com (quy mô dự án); Tuổi Trẻ (Aeon Mall Hòa Xuân).</p>
+<p class="src">Nguồn: giỏ hàng chuyển nhượng Hoàng Hiệp cập nhật 22/11/2026 (giá chào, tham khảo); toprealty.vn, timdanang.com (quy mô dự án); Tuổi Trẻ (Aeon Mall Hòa Xuân).</p>
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Giá đất biệt thự Euro Village 2: 83 – 105 triệu/m² (2026)',
-			'desc'      => 'Giá đất biệt thự Euro Village 2 theo giỏ hàng 26/10/2026: khoảng 83 – 105 triệu/m² tùy view sông, kênh, công viên. Lô 300 m² khoảng 25 – 30 tỷ.',
+			'seo_title' => 'Giá đất biệt thự Euro Village 2: 80 – 105 triệu/m² (2026)',
+			'desc'      => 'Giá đất biệt thự Euro Village 2 theo giỏ hàng 22/11/2026: khoảng 80 – 105 triệu/m² tùy view sông, kênh, công viên. Lô 300 m² khoảng 24 – 30 tỷ.',
 			'points'    => array(
-				'Giá đất biệt thự Euro Village 2 (giỏ hàng 26/10/2026) khoảng 83 – 105 triệu/m², giá chào tham khảo',
-				'Lô phổ biến 300 m² (12 × 25 m): tổng tiền đất khoảng 25 – 30 tỷ tùy vị trí',
+				'Giá đất biệt thự Euro Village 2 (giỏ hàng 22/11/2026) khoảng 80 – 105 triệu/m², giá chào tham khảo',
+				'Lô phổ biến 300 m² (12 × 25 m): tổng tiền đất khoảng 24 – 30 tỷ tùy vị trí',
 				'Khoảng 320 lô biệt thự, sổ đỏ lâu dài, giai đoạn 1B Khu đô thị sinh thái Hòa Xuân của Sun Group',
 			),
 			'faq'       => array(
-				array( 'Giá đất biệt thự Euro Village 2 hiện nay bao nhiêu?', 'Theo giỏ hàng chuyển nhượng 26/10/2026, giá đất biệt thự Euro Village 2 khoảng 83 – 105 triệu/m², thấp nhất ở lô thường và cao nhất ở lô, cặp lô nhìn sông.' ),
-				array( 'Lô 300 m² ở Euro Village 2 giá bao nhiêu?', 'Với giá đất biệt thự Euro Village 2 hiện nay, lô 300 m² khoảng 25 – 30 tỷ tiền đất tùy vị trí; lô thường hướng Tây Nam được chào khoảng 25 tỷ.' ),
+				array( 'Giá đất biệt thự Euro Village 2 hiện nay bao nhiêu?', 'Theo giỏ hàng chuyển nhượng 22/11/2026, giá đất biệt thự Euro Village 2 khoảng 80 – 105 triệu/m², thấp nhất ở lô thường và cao nhất ở lô, cặp lô nhìn sông.' ),
+				array( 'Lô 300 m² ở Euro Village 2 giá bao nhiêu?', 'Với giá đất biệt thự Euro Village 2 hiện nay, lô 300 m² khoảng 24 – 30 tỷ tiền đất tùy vị trí; lô thường hướng Tây Nam được chào khoảng 24 tỷ.' ),
 				array( 'Euro Village 2 có sổ đỏ chưa?', 'Có. Đất biệt thự là đất ở lâu dài, sổ đỏ từng lô; người mua vẫn nên kiểm tra bản gốc trước khi đặt cọc.' ),
 				array( 'Euro Village 2 có phải Làng Châu Âu ở Sơn Trà không?', 'Không. Euro Village 2 nằm ở Hòa Xuân (Cẩm Lệ), khác với khu Làng Châu Âu đầu tiên ven sông Hàn.' ),
 			),
