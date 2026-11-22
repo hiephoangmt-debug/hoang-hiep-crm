@@ -152,7 +152,7 @@ def jsonld(p):
     strip = lambda x: re.sub('<[^>]+>', '', x)
     job = {"@context": "https://schema.org", "@type": "JobPosting", "title": p['job_title'],
            "description": '<p>' + strip(p['desc']) + '</p><ul>' + ''.join('<li>' + strip(i) + '</li>' for c in p['panels'] for _, items in c['lists'] for i in items) + '</ul>',
-           "datePosted": "2026-10-05", "validThrough": "2026-12-31T23:59", "employmentType": "FULL_TIME",
+           "datePosted": "2026-10-05", "validThrough": "2027-06-30T23:59", "employmentType": "FULL_TIME",
            "hiringOrganization": {"@type": "Organization", "name": "Tuyển Sale Đà Nẵng", "sameAs": SITE + "/"},
            "jobLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "streetAddress": "23–25 Nguyễn Phước Lan", "addressLocality": "Đà Nẵng", "addressRegion": "Đà Nẵng", "addressCountry": "VN"}},
            "directApply": True, "url": URL[p['key']]}
