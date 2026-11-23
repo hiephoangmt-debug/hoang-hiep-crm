@@ -16,7 +16,7 @@ OVERVIEW = [
     ('Đơn vị phát triển', 'Sun Property – thành viên Tập đoàn Sun Group'),
     ('Vị trí', 'Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu Saphia, phường Ngũ Hành Sơn, TP Đà Nẵng'),
     ('Diện tích khu đất', '3.720,1 m²'),
-    ('Chiều cao', '30 tầng – 114 m · 2 tầng hầm · căn hộ từ tầng 3A đến tầng 28'),
+    ('Chiều cao', '30 tầng – 114 m · 2 tầng hầm · căn hộ từ tầng 2 đến tầng 30'),
     ('Tổng số căn', '782 căn'),
     ('Cơ cấu sản phẩm', 'Studio 513 căn (30–31 m²) · 1BR+ 108 căn (50–51 m²) · 2BR 133 căn (60–70 m²)'),
     ('Chiều cao căn hộ', '3,5 m'),
@@ -59,8 +59,8 @@ def units_drawings(base=None):
                   '<b>1BR+</b> · thông thủy 51,11 m² · tim tường 56,42 m²', 1800, 1272, True)
             + one('2br-a', 'Layout mặt bằng căn 2BR A tòa Saphia (căn góc bo cong): phòng khách, bếp và bàn ăn, 2 phòng ngủ, 2 vệ sinh, logia; thông thủy 67,69 m², tim tường 76,36 m²',
                   '<b>2BR A</b> · thông thủy 67,69 m² · tim tường 76,36 m² · <span>căn góc bo cong</span>', 1800, 1272, True)
-            + one('2br-c', 'Layout mặt bằng căn 2BR C tòa Saphia: phòng khách, bếp và bàn ăn, 2 phòng ngủ, 2 vệ sinh, logia; thông thủy 61,14 m², tim tường 68,67 m²',
-                  '<b>2BR C</b> · thông thủy 61,14 m² · tim tường 68,67 m² · <span>căn góc bo cong</span>', 1800, 1272, True)
+            + one('2br-c', 'Layout mặt bằng căn 2BR C tòa Saphia: phòng khách, bếp và bàn ăn, 2 phòng ngủ, 2 vệ sinh, logia; thông thủy 61,31 m², tim tường 68,67 m²',
+                  '<b>2BR C</b> · thông thủy 61,31 m² · tim tường 68,67 m² · <span>căn góc bo cong</span>', 1800, 1272, True)
             + '</div><p class="src">Layout mặt bằng tòa Saphia theo tài liệu chủ đầu tư; nội thất minh họa, bàn giao liền tường (fit-out). Ô tô màu trên sơ đồ nhỏ là vị trí căn trên tầng.</p>' + interior(base))
 
 NT = {
@@ -274,7 +274,7 @@ def related(cur):
     it = [('/quy-hoach', 'Quy hoạch quanh dự án', 'Công viên 2,45 ha, trục biển, đường sắt, Ngũ Hành Sơn'),
           ('/vi-sao-sun-group', 'Vì sao căn hộ mặt biển', 'Vì sao Sun Group chọn mặt biển Đà Nẵng'),
           ('/bang-gia', 'Giá Sun Saphia Residence', 'So sánh giá căn hộ mặt biển, vay ngân hàng'),
-          ('/mat-bang', 'Mặt bằng & chọn căn', 'Layout tầng 3A–28, Studio, 1BR+, 2BR'),
+          ('/mat-bang', 'Mặt bằng & chọn căn', 'Layout tầng mới nhất, Studio, 1BR+, 2BR'),
           ('/phap-ly', 'Pháp lý & tiến độ', 'GCN đầu tư, quyền sở hữu, mốc mở bán'),
           ('/cho-thue', 'Cho thuê & dòng tiền', 'Giá thuê, lấp đầy, nhóm khách thuê'),
           ('/tinh-dong-tien', 'Bảng tính dòng tiền', 'Kéo thanh tính tiền về túi theo căn'),

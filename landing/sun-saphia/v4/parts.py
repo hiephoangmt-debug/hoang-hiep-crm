@@ -2,7 +2,7 @@
 import json, os, re
 
 RAW = 'https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/'
-SK_HASH = 'cd20c0301cdcc17d5fbb47dd9797b6c2abb8c9be'
+SK_HASH = '5eaa523ae202185ce393057058f4e920b746656b'
 SK = RAW + SK_HASH + '/projects/sun-saphia/sk2310/'
 SK_DIR = '/home/user/hoang-hiep-crm/projects/sun-saphia/sk2310/'
 CERT = RAW + '0822bbe92e25ca0891b57c3d82a52bc4a2621c88/projects/sun-saphia/images/tatiland-dai-ly-chinh-thuc-sun-saphia.jpg'
@@ -11,9 +11,9 @@ MAIN = 'https://www.sun-saphia-residence.com'
 TEL = '0904567009'
 TEL_S = '0904 567 009'
 ZALO = 'https://zalo.me/0904567009'
-UPDATED = '24/10/2026'
+UPDATED = '23/11/2026'
 CC_SHA = '45c95e0a2b99cb1e0309c153a760be80869f0635'
-D4_SHA = '89ba5c6653301cff57652a12bc14659929b7c616'
+D4_SHA = 'eaa85bb373369bed3785353467104e7b6f6fe14c'
 SLOGAN = '<p class="slogan">Trước mặt là <b>Biển</b> · Sau lưng là <b>Sông</b> · Bên cạnh là <b>Núi</b></p>'
 
 def esc(s):
