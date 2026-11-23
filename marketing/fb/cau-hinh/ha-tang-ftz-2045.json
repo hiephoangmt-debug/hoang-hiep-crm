@@ -1,0 +1,85 @@
+{
+ "tag": "HẠ TẦNG · KHU THƯƠNG MẠI TỰ DO",
+ "title": "Hạ tầng FTZ Đà Nẵng",
+ "sub": "Sân bay Chu Lai · cảng Liên Chiểu · ICD",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "4F",
+   "sân bay Chu Lai"
+  ],
+  [
+   "10 triệu",
+   "khách/năm"
+  ],
+  [
+   "1,5 triệu",
+   "tấn hàng/năm"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo Báo Đầu tư 11/2026 · Ảnh thực tế trung tâm hành chính Đà Nẵng",
+ "headline": [
+  [
+   "Hạ tầng",
+   "big",
+   0
+  ],
+  [
+   "2026 – 2045",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Kế hoạch hạ tầng",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "2026 – 2045",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Khu thương mại tự do",
+     "script"
+    ]
+   ],
+   "dx": 160
+  }
+ ]
+}
