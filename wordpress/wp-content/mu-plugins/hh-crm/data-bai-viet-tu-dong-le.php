@@ -1921,5 +1921,76 @@ HTML
 		),
 	);
 
+	/* ---------------- 23/11 – Sun Group khởi công Khu đô thị số 1 Măng Đen (thông cáo Sun Group, ảnh anh Hiệp gửi) ---------------- */
+	$posts[] = array(
+		'slug'     => 'khoi-cong-khu-do-thi-so-1-mang-den-sun-group',
+		'title'    => 'Sun Group khởi công Khu đô thị số 1 Măng Đen: 264,4 ha, gần 6.700 tỷ đồng, "rừng trong thị trấn"',
+		'excerpt'  => 'Ngày 23/11/2026, Sun Group khởi công Khu đô thị số 1 tại xã Măng Đen, tỉnh Quảng Ngãi: 264,4 ha, vốn gần 6.700 tỷ đồng, mật độ xây dựng tối đa 23,2%, 4 tiểu khu thể thao, nghỉ dưỡng – chăm sóc sức khỏe, biệt thự rừng thông và vui chơi giải trí.',
+		'keyword'  => 'Khu đô thị số 1 Măng Đen',
+		'keywords_extra' => array( 'Sun Group Măng Đen', 'khởi công Măng Đen 2026', 'bất động sản Măng Đen', 'thị trấn nghỉ dưỡng cao nguyên' ),
+		'project'  => 'sun-saphia-residence',
+		'schedule' => '2026-11-23 14:45',
+		'category' => 'Tin dự án',
+		'tags'     => array( 'Sun Group', 'Măng Đen', 'Quảng Ngãi' ),
+		'image'    => 'plugin:img/tin-tuc/mang-den-khu-do-thi-so-1-phoi-canh-ho-rung-thong.jpg',
+		'image_alt' => 'Khu đô thị số 1 Măng Đen của Sun Group – phối cảnh hồ và rừng thông',
+		'content'  => <<<'HTML'
+<p><strong>Khu đô thị số 1 Măng Đen</strong> chính thức được Sun Group khởi công ngày 23/11/2026 tại xã Măng Đen, tỉnh Quảng Ngãi. Theo thông cáo của tập đoàn, dự án rộng 264,4 ha, tổng vốn đầu tư gần 6.700 tỷ đồng, định hướng thành một thị trấn nghỉ dưỡng cao nguyên theo tinh thần "rừng trong thị trấn, thị trấn trong rừng".</p>
+<!--hh-featured-->
+<h2>Khu đô thị số 1 Măng Đen: thông tin chính</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Thông tin</th></tr></thead>
+<tbody>
+<tr><td>Chủ đầu tư</td><td>Sun Group (pháp nhân thực hiện: Sun World, theo báo chí)</td></tr>
+<tr><td>Vị trí</td><td>Xã Măng Đen, tỉnh Quảng Ngãi; tiếp giáp Quốc lộ 24</td></tr>
+<tr><td>Quy mô</td><td>264,4 ha</td></tr>
+<tr><td>Tổng vốn</td><td>Gần 6.700 tỷ đồng</td></tr>
+<tr><td>Mật độ xây dựng</td><td>Tối đa 23,2% toàn khu</td></tr>
+<tr><td>Khởi công</td><td>23/11/2026</td></tr>
+</tbody>
+</table>
+<!--hh-img:img/tin-tuc/mang-den-khu-do-thi-so-1-le-khoi-cong-23-11-2026.jpg|Lễ khởi công Khu đô thị số 1 Măng Đen ngày 23/11/2026-->
+<h2>4 tiểu khu của Khu đô thị số 1 Măng Đen</h2>
+<ul>
+<li><strong>Tiểu khu đô thị thể thao:</strong> bên danh thắng hồ Toong Đam, gồm chuỗi công viên thể thao đa năng, tổ hợp giải trí 24/7, phố thương mại và ẩm thực.</li>
+<li><strong>Tiểu khu nghỉ dưỡng và chăm sóc sức khỏe:</strong> bên hồ sinh thái, điểm nhấn là tổ hợp y tế, trị liệu rộng hơn 16 ha theo mô hình làng an dưỡng.</li>
+<li><strong>Khu ở sinh thái giữa rừng thông:</strong> biệt thự kiến trúc sinh thái bám theo địa hình, nằm dưới tán rừng.</li>
+<li><strong>Khu ở sinh thái gắn với vui chơi giải trí:</strong> công viên giải trí ngoài trời, quảng trường sự kiện và phố thương mại trải nghiệm.</li>
+</ul>
+<!--hh-img:img/tin-tuc/mang-den-khu-do-thi-so-1-phoi-canh-the-thao.jpg|Phối cảnh tiểu khu đô thị thể thao, Khu đô thị số 1 Măng Đen-->
+<p>Trước lễ khởi công, báo chí từng đưa tin dự án đã được tháo gỡ thủ tục đất đai, giao đất đợt đầu hơn 200 ha. Đây là dự án đầu tiên trong ba khu đô thị lớn được quy hoạch tại Măng Đen, theo <a href="https://cafef.vn/du-an-khu-do-thi-hon-6700-ty-dong-rong-264-ha-cua-sun-group-tai-noi-duoc-vi-nhu-da-lat-thu-hai-cua-tay-nguyen-co-dien-bien-moi-18826073107101667.chn" target="_blank" rel="noopener">CafeF</a>.</p>
+<h2>Hạ tầng kết nối và mục tiêu du lịch</h2>
+<p>Khu đô thị số 1 Măng Đen nằm cạnh Quốc lộ 24, đón đầu tuyến cao tốc nối Kon Tum và Quảng Ngãi cùng quy hoạch Cảng hàng không Măng Đen. Theo Sun Group, dự án góp phần đưa Măng Đen tới mục tiêu Khu du lịch quốc gia, đón khoảng 2,5 triệu lượt khách mỗi năm vào năm 2030.</p>
+<!--hh-img:img/tin-tuc/mang-den-khu-do-thi-so-1-flycam-hien-trang.jpg|Hiện trạng khu vực khởi công Khu đô thị số 1 Măng Đen nhìn từ trên cao-->
+<h2>Khu đô thị số 1 Măng Đen khác gì các dự án nghỉ dưỡng biển?</h2>
+<p>Khác với căn hộ, biệt thự ven biển ở Đà Nẵng hay Phú Quốc, Khu đô thị số 1 Măng Đen dựa vào khí hậu mát quanh năm của cao nguyên, rừng thông và hồ tự nhiên. Khách du lịch tới đây chủ yếu để nghỉ ngơi, chữa lành, cắm trại, nên tổ hợp chăm sóc sức khỏe hơn 16 ha và các công viên thể thao là điểm nhấn của dự án. Nhịp khai thác của Khu đô thị số 1 Măng Đen vì vậy phụ thuộc nhiều vào tiến độ cao tốc và sân bay, khi việc đi lại hiện vẫn chủ yếu bằng Quốc lộ 24 qua đèo.</p>
+<h2>Nhận định của Hoàng Hiệp</h2>
+<p>Với Khu đô thị số 1 Măng Đen, Sun Group đang đi đúng con đường Sun Group từng làm ở Bà Nà, Phú Quốc hay Sa Pa: đi trước bằng du lịch, hạ tầng giải trí, sau đó mới tới bất động sản nghỉ dưỡng. Hiệp thấy điểm khác ở đây là mật độ xây dựng chỉ 23,2%, nghĩa là phần lớn diện tích giữ lại cho rừng, hồ và cảnh quan – yếu tố quyết định giá trị lâu dài của một thị trấn cao nguyên.</p>
+<p>Với khách đang để dành tiền cho bất động sản Sun Group, Hiệp khuyên chưa vội xuống tiền ở Măng Đen khi chưa có thông tin sản phẩm, giá và pháp lý chính thức. Trong lúc chờ, các dự án Sun Group đã mở bán tại Đà Nẵng như <a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a> hay <a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a> có thông tin rõ ràng hơn để so sánh.</p>
+<p>Cần cập nhật thông tin dự án Sun Group tại Đà Nẵng và các khu vực lân cận, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: thông cáo Tập đoàn Sun Group ngày 23/11/2026 (quy mô, vốn, các tiểu khu, mục tiêu du lịch); CafeF (giao đất, ba khu đô thị tại Măng Đen). Ảnh: Sun Group.</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Khu đô thị số 1 Măng Đen: Sun Group khởi công 264,4 ha',
+			'desc'      => 'Khu đô thị số 1 Măng Đen được Sun Group khởi công 23/11/2026: 264,4 ha, vốn gần 6.700 tỷ đồng, mật độ xây dựng 23,2%, 4 tiểu khu nghỉ dưỡng cao nguyên.',
+			'points'    => array(
+				'Khu đô thị số 1 Măng Đen khởi công ngày 23/11/2026 tại xã Măng Đen, tỉnh Quảng Ngãi',
+				'Quy mô 264,4 ha, tổng vốn gần 6.700 tỷ đồng, mật độ xây dựng tối đa 23,2%',
+				'4 tiểu khu: thể thao, nghỉ dưỡng – chăm sóc sức khỏe, biệt thự rừng thông, vui chơi giải trí',
+				'Mục tiêu đưa Măng Đen đón khoảng 2,5 triệu lượt khách mỗi năm vào 2030',
+			),
+			'faq'       => array(
+				array( 'Khu đô thị số 1 Măng Đen ở đâu?', 'Tại xã Măng Đen, tỉnh Quảng Ngãi, tiếp giáp Quốc lộ 24.' ),
+				array( 'Quy mô và vốn đầu tư bao nhiêu?', 'Rộng 264,4 ha, tổng vốn gần 6.700 tỷ đồng, mật độ xây dựng tối đa 23,2%.' ),
+				array( 'Dự án có những phân khu nào?', 'Bốn tiểu khu: đô thị thể thao bên hồ Toong Đam, nghỉ dưỡng và chăm sóc sức khỏe, khu ở sinh thái giữa rừng thông, khu ở gắn với vui chơi giải trí.' ),
+				array( 'Đã có giá bán chưa?', 'Chưa. Sun Group mới khởi công, chưa công bố sản phẩm, giá và chính sách bán hàng.' ),
+			),
+		),
+		'sources'  => array(
+			'https://cafef.vn/du-an-khu-do-thi-hon-6700-ty-dong-rong-264-ha-cua-sun-group-tai-noi-duoc-vi-nhu-da-lat-thu-hai-cua-tay-nguyen-co-dien-bien-moi-18826073107101667.chn',
+		),
+	);
+
 	return $posts;
 }
