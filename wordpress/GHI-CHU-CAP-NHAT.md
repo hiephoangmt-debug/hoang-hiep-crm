@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.346**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.347**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.347
+
+- Form liên hệ chặn thêm bot quảng cáo: lời nhắn có đường link, từ khoá spam (XEvil, captcha, casino, crypto…), chữ Nga, hoặc tên kiểu "KatyGoors0045" – bot vẫn thấy "gửi thành công" nhưng web không lưu, không báo Telegram/email.
 
 ## Có gì mới – 2.20.346
 

@@ -235,6 +235,11 @@ function hh_handle_lead() {
 	if ( function_exists( 'hh_is_real_phone' ) && ! hh_is_real_phone( $phone ) ) {
 		$go( 'ok' );
 	}
+	// Bot quảng cáo (VD "KatyGoors0045" quảng cáo XEvil, 23/11/2026): lời nhắn có đường link / từ khoá spam,
+	// hoặc tên kiểu chữ Latin + dãy số. Báo thành công cho bot nhưng KHÔNG lưu, không báo.
+	if ( function_exists( 'hh_lead_is_spam' ) && hh_lead_is_spam( $name, $message ) ) {
+		$go( 'ok' );
+	}
 	$spam = false;
 
 	$lead_id = wp_insert_post(
@@ -375,3 +380,24 @@ add_action(
 		update_option( 'hh_lead_spam_don_v1', 1, false );
 	}
 );
+
+/** Lời nhắn / tên của bot spam (quảng cáo phần mềm, link, chữ Nga…). Khách thật hiếm khi gửi link qua form. */
+function hh_lead_is_spam( $name, $message ) {
+	$name = trim( (string) $name );
+	$msg  = (string) $message;
+	if ( preg_match( '#https?://|www\.|\.(ru|xyz|top|click|biz)\b|\[url|<a\s#i', $msg ) ) {
+		return true;
+	}
+	if ( preg_match( '/\b(xevil|captcha|recaptcha|hcaptcha|crypto|bitcoin|casino|viagra|backlinks?|seo service|porn|loan offer)\b/i', $msg ) ) {
+		return true;
+	}
+	if ( preg_match( '/[\x{0400}-\x{04FF}]/u', $msg . $name ) ) { // Chữ Nga (Cyrillic).
+		return true;
+	}
+	// Tên dạng "KatyGoors0045", "RobertVat123": chữ Latin không dấu liền dãy 3+ chữ số.
+	if ( preg_match( '/^[A-Za-z]+\d{3,}$/', $name ) ) {
+		return true;
+	}
+	return false;
+}
+
