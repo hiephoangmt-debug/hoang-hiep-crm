@@ -864,6 +864,59 @@ def su_kien(ctx='ADS'):
             '<p class="src" style="margin-top:10px">Chương trình theo thư mời của Sun Property. Số lượng thư mời có hạn – đăng ký để đại lý giữ chỗ cho Anh/Chị.</p></div>'
             '</div></div><script>(function(){var T=Date.parse("2026-11-01T09:00:00+07:00");function z(n){return(n<10?"0":"")+n}function t(){var d=Math.max(0,T-Date.now())/1e3;document.querySelectorAll(".skcd").forEach(function(e){var u={d:Math.floor(d/86400),h:Math.floor(d%86400/3600),m:Math.floor(d%3600/60),s:Math.floor(d%60)};for(var k in u){var b=e.querySelector("[data-k="+k+"]");if(b)b.textContent=k=="d"?u[k]:z(u[k])}if(d<=0){var x=e.querySelector(".skcdt");if(x)x.textContent="🎉 Sự kiện đang diễn ra tại Hilton Đà Nẵng"}})}t();setInterval(t,1000)})();</script><script>(function(){if(Date.now()>Date.parse("2026-11-01T12:00:00+07:00")){var e=document.getElementById("ra-mat");if(e)e.style.display="none"}})();</script></section>')
 
+def thu_vien(ctx='ADS'):
+    """Thư viện ảnh phối cảnh mới của chủ đầu tư (23/11): tab theo nhóm, ảnh lớn + dải ảnh nhỏ, bấm phóng to."""
+    I = RAW + '1e2febd69da760081eb0070d09e3324d46f78e8c/landing/sun-saphia/v4/img/'
+    G = [('pool', '🏊 Hồ bơi', 'Hồ bơi tràn nhìn biển, khu tắm khoáng và ghế nằm thư giãn', [
+            ('tv-pool-1', 'Hồ bơi tràn bờ dưới chân tòa tháp, nhìn ra biển'), ('tv-pool-2', 'Hồ bơi bao quanh hàng cột ốp đá, cây xanh nhiệt đới'),
+            ('tv-pool-3', 'Bể sục tròn nhìn ra biển'), ('tv-pool-4', 'Khu ghế nằm có mái che bên hồ bơi'), ('tv-pool-5', 'Hồ bơi khu có mái che, ghế nằm dọc tường hoa văn')]),
+         ('gym', '💪 Gym &amp; Yoga', 'Phòng gym máy hiện đại, phòng yoga mở ra vườn, sảnh lounge', [
+            ('tv-gym-1', 'Phòng gym với máy chạy, xe đạp, vách kính nhìn ra cây xanh'), ('tv-gym-2', 'Khu tập tạ và máy đa năng'),
+            ('tv-yoga-1', 'Phòng yoga mở ra sân vườn'), ('tv-yoga-2', 'Phòng yoga sàn gỗ, ánh sáng tự nhiên'), ('tv-gym-3', 'Sảnh lounge khu gym &amp; yoga')]),
+         ('kid', '🧸 Kid Club', 'Khu vui chơi cho trẻ: cầu trượt, hồ bóng, góc đọc sách', [
+            ('tv-kid-1', 'Kid Club với cầu trượt ống và thú nhún'), ('tv-kid-2', 'Bàn học vẽ và kệ đồ chơi'), ('tv-kid-3', 'Góc đọc sách cho bé'), ('tv-kid-4', 'Khu vận động trong nhà')]),
+         ('sanh', '🏛️ Sảnh &amp; hành lang', 'Sảnh đón tông đỏ đất, hoa văn Chăm Pa, hành lang và sảnh thang máy', [
+            ('tv-sanh-1', 'Sảnh đón cư dân với quầy lễ tân và vòm tường SAPHIA'), ('tv-sanh-2', 'Sảnh lễ tân nhìn về khu chờ'),
+            ('tv-sanh-3', 'Khu chờ ở sảnh tầng'), ('tv-sanh-4', 'Sảnh thang máy ốp đồng và gỗ'), ('tv-sanh-5', 'Hành lang lát gạch hoa văn')]),
+         ('view', '🌅 View từ căn', 'Phối cảnh tầm nhìn từ phòng khách, ban công, phòng ngủ ở các tầng', [
+            ('tv-view-10', 'Tầng 10 · ban công nhìn biển lúc bình minh'), ('tv-view-5', 'Tầng 5 · phòng khách nhìn biển lúc bình minh'),
+            ('tv-view-20', 'Tầng 20 · ban công nhìn Ngũ Hành Sơn và sông Cổ Cò'), ('tv-view-25', 'Tầng 25 · phòng ngủ nhìn về sông và Sunneva Island')]),
+         ('tt', '🏙️ Toàn cảnh', 'Tòa tháp 30 tầng bên công viên ven biển Sơn Thủy', [
+            ('tv-tt-1', 'Toàn cảnh tòa tháp, công viên và biển lúc hoàng hôn'), ('tv-tt-2', 'Tòa tháp bên trục đường biển, bãi biển trải dài phía trước'),
+            ('tv-tt-3', 'Tòa tháp nhìn từ phía công viên ven biển'), ('tv-tt-4', 'Tòa tháp nhìn về phía thành phố'), ('tv-tt-5', 'Khối đế và lối vào tòa nhà')])]
+    tabs = ''.join('<button type="button" role="tab" data-tv="%s"%s>%s</button>' % (k, ' class="on" aria-selected="true"' if i == 0 else ' aria-selected="false"', n) for i, (k, n, _, _) in enumerate(G))
+    pans = ''
+    for i, (k, n, d, L) in enumerate(G):
+        f0 = L[0]
+        thumbs = ''.join('<button type="button" class="tvt%s" data-src="%s%s.webp" data-cap="%s" aria-label="%s"><img src="%s%s-720.webp" width="720" height="480" loading="lazy" decoding="async" alt=""></button>'
+                         % (' on' if j == 0 else '', I, f, c, c, I, f) for j, (f, c) in enumerate(L))
+        pans += ('<div class="tvp%s" data-tp="%s" role="tabpanel"><figure class="tvm" tabindex="0" role="button" aria-label="Phóng to ảnh"><img src="%s%s.webp" srcset="%s%s-720.webp 720w, %s%s.webp 1600w" sizes="(max-width: 760px) 100vw, 1100px" width="1600" height="1067" loading="lazy" decoding="async" alt="%s – Sun Saphia Residence (ảnh minh họa chủ đầu tư)">'
+                 '<figcaption><b>%s</b><span>%s</span></figcaption><i class="tvz">🔍 Phóng to</i></figure><div class="tvs">%s</div><p class="tvd">%s</p></div>') % (
+            '' if i == 0 else ' off', k, I, f0[0], I, f0[0], I, f0[0], f0[1], n.split(' ', 1)[1], f0[1], thumbs, d)
+    css = ('<style>.tv{max-width:1100px;margin:0 auto}.tvb{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;scrollbar-width:none}.tvb::-webkit-scrollbar{display:none}'
+           '.tvb button{flex:0 0 auto;border:1.5px solid #D7E9F5;background:#fff;color:#134A8E;font:700 14.5px "Be Vietnam Pro",Arial,sans-serif;padding:9px 15px;border-radius:999px;cursor:pointer;white-space:nowrap}'
+           '.tvb button.on{background:linear-gradient(135deg,#1F6FB8,#134A8E);border-color:#134A8E;color:#fff;box-shadow:0 8px 18px -10px rgba(19,74,142,.8)}'
+           '.tvp.off{display:none}.tvm{position:relative;margin:0;border-radius:22px;overflow:hidden;cursor:zoom-in;box-shadow:0 24px 50px -28px rgba(19,74,142,.6);background:#EAF3F9}'
+           '.tvm img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;transition:opacity .25s}'
+           '.tvm figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 20px 16px;color:#fff;background:linear-gradient(transparent,rgba(8,30,60,.78));text-align:left}'
+           '.tvm figcaption b{display:inline-block;background:rgba(238,123,30,.95);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-bottom:6px}.tvm figcaption span{display:block;font-size:17px;font-weight:700}'
+           '.tvz{position:absolute;right:12px;top:12px;font-style:normal;background:rgba(8,30,60,.6);color:#fff;font-size:12.5px;font-weight:700;padding:5px 11px;border-radius:999px}'
+           '.tvs{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:10px;margin-top:10px}.tvt{border:0;padding:0;border-radius:12px;overflow:hidden;cursor:pointer;opacity:.62;outline:3px solid transparent;outline-offset:-3px;transition:opacity .2s}'
+           '.tvt img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover}.tvt.on,.tvt:hover{opacity:1}.tvt.on{outline-color:#EE7B1E}'
+           '.tvd{margin:10px 0 0;color:#557585;font-size:14px;text-align:left!important}'
+           '.tvlb{position:fixed;inset:0;z-index:2147483000;background:rgba(5,15,28,.93);display:flex;align-items:center;justify-content:center;padding:12px;cursor:zoom-out}.tvlb img{max-width:100%;max-height:92vh;object-fit:contain;border-radius:8px}.tvlb b{position:absolute;top:8px;right:16px;color:#fff;font-size:36px}'
+           '@media(max-width:760px){.tvs{display:flex;overflow-x:auto;scrollbar-width:none}.tvs::-webkit-scrollbar{display:none}.tvt{flex:0 0 30%}.tvm{border-radius:16px}.tvm figcaption span{font-size:15px}}</style>')
+    js = ('<script>(function(){var r=document.currentScript.previousElementSibling;'
+          'r.addEventListener("click",function(e){var t=e.target.closest("[data-tv]");if(t){r.querySelectorAll("[data-tv]").forEach(function(b){var on=b===t;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});'
+          'r.querySelectorAll("[data-tp]").forEach(function(p){p.classList.toggle("off",p.getAttribute("data-tp")!==t.getAttribute("data-tv"))});try{gtag("event","thu_vien_tab",{event_label:t.getAttribute("data-tv")})}catch(x){}return}'
+          'var h=e.target.closest(".tvt");if(h){var p=h.closest(".tvp"),m=p.querySelector(".tvm img");p.querySelectorAll(".tvt").forEach(function(b){b.classList.toggle("on",b===h)});'
+          'm.src=h.getAttribute("data-src");m.removeAttribute("srcset");p.querySelector(".tvm figcaption span").innerHTML=h.getAttribute("data-cap");return}'
+          'var f=e.target.closest(".tvm");if(f){var d=document.createElement("div");d.className="tvlb";d.innerHTML="<b>×</b><img alt=\\"\\" src=\\""+f.querySelector("img").currentSrc+"\\">";d.onclick=function(){d.remove()};document.body.appendChild(d)}});'
+          'r.addEventListener("keydown",function(e){var f=e.target.closest&&e.target.closest(".tvm");if(f&&(e.key==="Enter"||e.key===" ")){e.preventDefault();f.click()}})})();</script>')
+    return (css + '<div class="tv"><div class="tvb" role="tablist">' + tabs + '</div>' + pans + '</div>' + js +
+            '<p class="src" style="margin-top:10px">Ảnh minh họa phối cảnh do chủ đầu tư công bố (cập nhật 23/11/2026). Thiết kế thực tế theo hồ sơ dự án.</p>'
+            '<p style="text-align:center;margin-top:14px"><button type="button" class="btn" data-pop data-interest="' + ctx + ' – xem tiện ích, nhận bộ ảnh phối cảnh">Nhận trọn bộ ảnh &amp; video dự án</button></p>')
+
 def vitri_dark(sid='vi-tri', ctx='ADS'):
     I = RAW + '3c076ddb411cdc4df18a30f1fd09bd98b60ff86a/landing/sun-saphia/v4/img/'
     T = [('5\'', 'đi bộ', 'Biển Sơn Thủy (~300 m)'), ('3\'', 'phút', 'Chuỗi resort 5 sao ven biển'),
@@ -1170,10 +1223,8 @@ def ads(domain, home_page=False):
           '<p class="src" style="margin-top:8px">Ảnh chụp thực tế bãi biển Mỹ Khê – Sơn Thủy hướng về bán đảo Sơn Trà.</p></div></section>')
     b += pband('30 tầng bên <b>biển Mỹ Khê</b>', 'Căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng – mở bán 05/12/2026 tại Đà Nẵng, Early Bird chiết khấu 3&#37; cho khách giữ chỗ sớm.', 'ADS – dải ảnh tòa tháp')
     b += vitri_dark('vi-tri', 'ADS')
-    b += ('<section class="sec alt" id="tien-ich"><div class="wrap">' + sh('04', 'Tiện ích nội – ngoại khu', 'Sống gắn với <b>biển mỗi ngày</b>', 'y') +
-          '<div class="g3"><article class="card">' + ('<img class="r" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 400px" width="1600" height="900" alt="Hồ bơi tầng 3 nhìn ra biển – Sun Saphia Residence (ảnh minh họa)" loading="lazy" decoding="async">' % ((RAW + 'a0a6849c15880dc681b6e91708d2a0752bd2aa43/landing/sun-saphia/v4/img/ho-boi-tang-3',) * 3)) + '<h3 style="margin-top:12px">Hồ bơi tầng 3 view biển</h3></article>'
-          '<article class="card">' + img('tien-ich-gym', 'Gym, pilates (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Gym · Yoga · Pilates</h3></article>'
-          '<article class="card">' + img('the-thao-bien', 'Thể thao biển (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Kayak · SUP · Jetski</h3></article></div>' + khoi_de() + '</div></section>')
+    b += ('<section class="sec alt" id="tien-ich"><div class="wrap">' + sh('04', 'Tiện ích &amp; không gian sống', 'Sống như <b>nghỉ dưỡng mỗi ngày</b>', 'y') +
+          thu_vien('ADS') + '<div style="margin-top:26px">' + khoi_de() + '</div>' + '</div></section>')
     b += band('Mỗi tầng chỉ vài căn nhìn thẳng ra biển', 'Người đăng ký sớm được gửi mặt bằng trước và ưu tiên chọn căn ngay khi mở bán.', 'Ưu tiên chọn căn', 'ADS – ưu tiên chọn căn')
     b += ('<section class="sec" id="mat-bang"><div class="wrap">' + sh('05', 'Mặt bằng', 'Mặt bằng tầng – <b>bấm từng căn</b>', 'n') +
           mb_4d() + '</div></section>')
