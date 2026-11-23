@@ -182,3 +182,49 @@ add_filter(
 	},
 	26
 );
+
+// 23/11/2026: ảnh chủ đầu tư mới (Drive "Sun Saphia Residence / Ảnh phối cảnh", anh Hiệp gửi): 5 phối cảnh tầm view theo tầng
+// và 16 phối cảnh tiện ích (hồ bơi, gym, yoga, kid club). Thêm vào Thư viện / Tiện ích; chỉ đổi khi ô ảnh vẫn là bản web đã nhập.
+add_filter(
+	'hh_project_dataset',
+	static function ( $projects ) {
+		$l   = static fn( $f, $alt, $where, $t ) => "plugin:img/sun-saphia/sun-saphia-$f.jpg | $alt | $where | $t";
+		$add = array(
+			$l( 'view-tang-5-phong-khach-bien', 'Tầm view tầng 5 Sun Saphia Residence: phòng khách nhìn ra biển lúc bình minh (phối cảnh chủ đầu tư)', 'thư viện', 'View tầng 5' ),
+			$l( 'view-tang-10-ban-cong-bien', 'Tầm view tầng 10 Sun Saphia Residence: ban công nhìn biển Sơn Thủy lúc bình minh (phối cảnh chủ đầu tư)', 'thư viện', 'View tầng 10' ),
+			$l( 'view-tang-15-studio-san-bay-thanh-pho', 'Tầm view tầng 15 Sun Saphia Residence: phòng ngủ studio nhìn về sân bay, thành phố và biển (phối cảnh chủ đầu tư)', 'thư viện', 'View tầng 15' ),
+			$l( 'view-tang-20-ngu-hanh-son-song-co-co', 'Tầm view tầng 20 Sun Saphia Residence: nhìn Ngũ Hành Sơn và sông Cổ Cò (phối cảnh chủ đầu tư)', 'thư viện', 'View tầng 20' ),
+			$l( 'view-tang-25-phong-ngu-song', 'Tầm view tầng 25 Sun Saphia Residence: phòng ngủ nhìn về sông và thành phố (phối cảnh chủ đầu tư)', 'thư viện', 'View tầng 25' ),
+			$l( 'tien-ich-ho-boi-1', 'Bể bơi view biển Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Bể bơi view biển' ),
+			$l( 'tien-ich-ho-boi-2', 'Bể bơi ngoài trời dưới chân tòa tháp Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Bể bơi ngoài trời' ),
+			$l( 'tien-ich-ho-boi-3', 'Bể sục, bể trẻ em khu hồ bơi Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Bể sục' ),
+			$l( 'tien-ich-ho-boi-4', 'Khu ghế nghỉ cạnh hồ bơi nhìn ra biển, Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Khu nghỉ hồ bơi' ),
+			$l( 'tien-ich-ho-boi-5', 'Hành lang ghế tắm nắng khu hồ bơi Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Ghế tắm nắng' ),
+			$l( 'tien-ich-ho-boi-6', 'Bể tròn nhìn biển lúc hoàng hôn, Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Bể tròn view biển' ),
+			$l( 'tien-ich-gym-1', 'Phòng gym Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Phòng gym' ),
+			$l( 'tien-ich-gym-2', 'Khu chạy bộ, máy tập cardio phòng gym Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Khu cardio' ),
+			$l( 'tien-ich-gym-3', 'Khu tập tạ phòng gym Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Khu tập tạ' ),
+			$l( 'tien-ich-sanh-gym-yoga', 'Sảnh lễ tân khu gym và yoga Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Sảnh gym & yoga' ),
+			$l( 'tien-ich-lounge-gym-yoga', 'Khu lounge nghỉ ngơi cạnh gym và yoga, Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Lounge' ),
+			$l( 'tien-ich-yoga-1', 'Phòng yoga mở ra vườn, Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Phòng yoga' ),
+			$l( 'tien-ich-yoga-2', 'Phòng yoga nhìn ra sân vườn, Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Yoga sân vườn' ),
+			$l( 'tien-ich-kid-club-1', 'Kid club Sun Saphia Residence: khu đọc sách và vui chơi (phối cảnh chủ đầu tư)', 'tiện ích', 'Kid club' ),
+			$l( 'tien-ich-kid-club-2', 'Kid club Sun Saphia Residence: khu cầu trượt, đồ chơi (phối cảnh chủ đầu tư)', 'tiện ích', 'Khu vui chơi trẻ em' ),
+			$l( 'tien-ich-kid-club-3', 'Kid club Sun Saphia Residence nhìn ra thành phố (phối cảnh chủ đầu tư)', 'tiện ích', 'Kid club view thành phố' ),
+		);
+		foreach ( $projects as &$p ) {
+			if ( 'sun-saphia-residence' !== ( $p['slug'] ?? '' ) ) {
+				continue;
+			}
+			$links = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+			if ( '' === $links || false !== strpos( $links, 'sun-saphia-view-tang-5-phong-khach-bien.jpg' ) ) {
+				continue;
+			}
+			$p['meta']['hh_p_image_links']     = $links . "\n" . implode( "\n", $add );
+			$p['fix_meta']['hh_p_image_links'] = array_values( array_unique( array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( $links ) ) ) );
+		}
+		unset( $p );
+		return $projects;
+	},
+	27
+);
