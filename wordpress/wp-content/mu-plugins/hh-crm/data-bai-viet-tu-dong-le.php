@@ -1992,5 +1992,73 @@ HTML
 		),
 	);
 
+	/* ---------------- 23/11 – Masteri Rivera Danang bàn giao căn hộ 29/11/2026 (thông báo Masterise Homes, anh Hiệp gửi) ---------------- */
+	$posts[] = array(
+		'slug'     => 'ban-giao-masteri-rivera-danang-29-11-2026',
+		'title'    => 'Bàn giao Masteri Rivera Danang ngày 29/11/2026: Masterise Homes đón cư dân đầu tiên tại Đà Nẵng',
+		'excerpt'  => 'Masterise Homes tổ chức lễ bàn giao căn hộ Masteri Rivera Danang "Trọn vẹn nhịp sống giao hòa" lúc 10:00 Chủ nhật 29/11/2026 tại 50 Quy Mỹ, Hòa Cường. Dự án đầu tiên của chủ đầu tư tại Đà Nẵng: 2 tháp, gần 1.200 căn, 31 tiện ích.',
+		'keyword'  => 'bàn giao Masteri Rivera Danang',
+		'keywords_extra' => array( 'Masteri Rivera Danang', 'Masterise Homes Đà Nẵng', 'căn hộ bàn giao Đà Nẵng 2026', 'căn hộ ven sông Cẩm Lệ' ),
+		'project'  => 'masteri-da-nang',
+		'schedule' => '2026-11-23 16:00',
+		'category' => 'Tin dự án',
+		'tags'     => array( 'Masteri Rivera Danang', 'Masterise Homes', 'Bàn giao' ),
+		'image'    => 'plugin:img/masteri-rivera-danang/masteri-rivera-danang-le-ban-giao-29-11-2026.jpg',
+		'image_alt' => 'Bàn giao Masteri Rivera Danang ngày 29/11/2026 – lễ bàn giao căn hộ Masterise Homes',
+		'content'  => <<<'HTML'
+<p><strong>Bàn giao Masteri Rivera Danang</strong> sẽ chính thức diễn ra vào 10:00 Chủ nhật, ngày 29/11/2026: Masterise Homes tổ chức lễ bàn giao căn hộ với chủ đề "Trọn vẹn nhịp sống giao hòa" tại văn phòng bán hàng số 50 Quy Mỹ, phường Hòa Cường, Đà Nẵng. Đây là dự án đầu tiên của chủ đầu tư tại Đà Nẵng và cũng là thời điểm những cư dân đầu tiên nhận nhà.</p>
+<!--hh-featured-->
+<h2>Lịch bàn giao Masteri Rivera Danang</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Thông tin</th></tr></thead>
+<tbody>
+<tr><td>Sự kiện</td><td>Lễ bàn giao căn hộ "Trọn vẹn nhịp sống giao hòa"</td></tr>
+<tr><td>Thời gian</td><td>10:00, Chủ nhật 29/11/2026</td></tr>
+<tr><td>Địa điểm</td><td>Văn phòng bán hàng Masterise Homes, 50 Quy Mỹ, phường Hòa Cường, Đà Nẵng</td></tr>
+<tr><td>Chủ đầu tư</td><td>Masterise Homes</td></tr>
+</tbody>
+</table>
+<p>Trước khi bàn giao Masteri Rivera Danang, dự án đã cất nóc hai tòa tháp vào tháng 12/2025. Lễ bàn giao cho thấy dự án về đích sau khoảng một năm hoàn thiện, đúng giai đoạn cuối năm 2026 mà thị trường chờ đợi.</p>
+<h2>Masteri Rivera Danang có gì?</h2>
+<p>Dự án gồm hai tháp A và B cao 39 tầng, gần 1.200 căn hộ từ 1PN+ đến 3PN và căn Dual Key, nằm trên đường Quy Mỹ, khu Hòa Cường Nam, nhìn ra sông Cẩm Lệ, cạnh Cung thể thao Tiên Sơn. Theo chủ đầu tư, cư dân có hệ thống 31 tiện ích nội khu khép kín từ tầng 1 đến tầng 4, trong đó có hồ bơi resort, vườn dạo bộ và sân chơi trẻ em. Thông tin chi tiết xem trang <a href="/du-an/masteri-da-nang/">dự án Masteri Rivera Danang</a>.</p>
+<!--hh-img:img/masteri-rivera-danang/masteri-rivera-danang-ho-boi-phoi-canh.jpg|Hồ bơi resort – tiện ích cư dân nhận khi bàn giao Masteri Rivera Danang (phối cảnh chủ đầu tư)-->
+<h2>Khi nhận nhà bàn giao Masteri Rivera Danang, cần kiểm tra gì?</h2>
+<ul>
+<li><strong>Đối chiếu hợp đồng:</strong> diện tích thông thủy thực tế, sai số cho phép, danh mục vật liệu và thiết bị bàn giao.</li>
+<li><strong>Kiểm tra kỹ thuật:</strong> thấm dột ở ban công, cửa sổ, nhà vệ sinh; điện, nước, điều hòa, ổ cắm; độ phẳng sàn, tường.</li>
+<li><strong>Thủ tục tài chính:</strong> khoản thanh toán đợt nhận nhà, phí quản lý, kinh phí bảo trì 2% và lịch làm sổ.</li>
+<li><strong>Lập biên bản tồn tại:</strong> ghi rõ hạng mục cần sửa và thời hạn khắc phục trước khi ký biên bản bàn giao.</li>
+</ul>
+<p>Chi tiết các bước, có thể tham khảo bài <a href="/masteri-da-nang-gia-tien-do-ban-giao/">giá, tiến độ và bàn giao Masteri Đà Nẵng</a>.</p>
+<h2>Ý nghĩa của việc bàn giao Masteri Rivera Danang với thị trường</h2>
+<p>Bàn giao Masteri Rivera Danang đưa thêm gần 1.200 căn hộ cao cấp vào khai thác ở khu Hòa Cường Nam, nơi trước đây chủ yếu là nhà phố và đất nền. Nguồn căn cho thuê dài hạn cho chuyên gia, gia đình trẻ làm việc ở trung tâm Hải Châu vì vậy sẽ dồi dào hơn. Với người mua, sau bàn giao Masteri Rivera Danang sẽ có thêm dữ liệu thật về giá thuê, phí quản lý và chất lượng vận hành để so sánh với các dự án khác cùng khu vực.</p>
+<h2>Nhận định của Hoàng Hiệp</h2>
+<p>Với thị trường Đà Nẵng, một dự án căn hộ cao cấp bàn giao đúng hẹn là tín hiệu tốt cho người mua nhà hình thành trong tương lai. Hiệp để ý rằng sau bàn giao, giá thuê và giá chuyển nhượng thường "lộ" rõ hơn vì người mua nhìn được căn thật, tiện ích thật; đây là lúc nên so sánh căn đã hoàn thiện với các dự án còn đang xây cùng phân khúc như <a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a> ven sông Hàn.</p>
+<p>Với khách đang cần căn nhận nhà ngay ở khu Hòa Cường Nam, bàn giao Masteri Rivera Danang mở thêm lựa chọn chuyển nhượng; nên xem trực tiếp căn và hướng view trước khi đặt cọc.</p>
+<p>Cần xem căn chuyển nhượng hoặc tư vấn nhận nhà Masteri Rivera Danang, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: thông báo của Masterise Homes về Lễ bàn giao căn hộ Masteri Rivera Danang (29/11/2026); tài liệu chủ đầu tư (quy mô, tiện ích); quy định kinh phí bảo trì theo <a href="https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Nha-o-2023-27-2023-QH15-528669.aspx" target="_blank" rel="noopener">Luật Nhà ở 2023</a>.</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Bàn giao Masteri Rivera Danang 29/11/2026: cần biết gì',
+			'desc'      => 'Bàn giao Masteri Rivera Danang lúc 10:00 ngày 29/11/2026 tại 50 Quy Mỹ: dự án đầu tiên của Masterise Homes tại Đà Nẵng, 2 tháp, gần 1.200 căn, 31 tiện ích.',
+			'points'    => array(
+				'Bàn giao Masteri Rivera Danang: lễ "Trọn vẹn nhịp sống giao hòa" lúc 10:00 Chủ nhật 29/11/2026',
+				'Địa điểm: văn phòng bán hàng Masterise Homes, 50 Quy Mỹ, phường Hòa Cường',
+				'Dự án đầu tiên của Masterise Homes tại Đà Nẵng: 2 tháp 39 tầng, gần 1.200 căn, 31 tiện ích',
+				'Khi nhận nhà: đối chiếu diện tích, kiểm tra thấm dột, thiết bị, lập biên bản tồn tại',
+			),
+			'faq'       => array(
+				array( 'Masteri Rivera Danang bàn giao khi nào?', 'Lễ bàn giao căn hộ diễn ra lúc 10:00 Chủ nhật, ngày 29/11/2026, theo thông báo của Masterise Homes.' ),
+				array( 'Lễ bàn giao tổ chức ở đâu?', 'Tại văn phòng bán hàng Masterise Homes, số 50 đường Quy Mỹ, phường Hòa Cường, Đà Nẵng.' ),
+				array( 'Dự án có bao nhiêu căn và tiện ích?', 'Hai tháp A và B cao 39 tầng, gần 1.200 căn hộ, 31 tiện ích nội khu từ tầng 1 đến tầng 4.' ),
+				array( 'Nhận nhà cần chuẩn bị gì?', 'Hợp đồng, giấy tờ tùy thân, khoản thanh toán đợt nhận nhà, phí quản lý, kinh phí bảo trì; kiểm tra kỹ căn và lập biên bản tồn tại nếu có.' ),
+			),
+		),
+		'sources'  => array(
+			'https://thuvienphapluat.vn/van-ban/Bat-dong-san/Luat-Nha-o-2023-27-2023-QH15-528669.aspx',
+		),
+	);
+
 	return $posts;
 }

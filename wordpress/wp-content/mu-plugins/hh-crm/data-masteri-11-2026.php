@@ -54,3 +54,40 @@ add_filter(
 	},
 	30
 );
+
+/*
+ * 23/11/2026: Masterise Homes công bố Lễ bàn giao căn hộ Masteri Rivera Danang "Trọn vẹn nhịp sống giao hòa"
+ * 10:00 Chủ nhật 29/11/2026 tại văn phòng bán hàng 50 Quy Mỹ (thông báo chủ đầu tư, anh Hiệp gửi).
+ */
+add_filter(
+	'hh_project_dataset',
+	static function ( $projects ) {
+		foreach ( $projects as $i => $p ) {
+			if ( 'masteri-da-nang' !== ( $p['slug'] ?? '' ) ) {
+				continue;
+			}
+			$prog = (string) ( $p['meta']['hh_p_progress'] ?? '' );
+			$upd  = array(
+				'hh_p_handover' => 'Lễ bàn giao căn hộ ngày 29/11/2026 (theo thông báo của Masterise Homes)',
+				'hh_p_progress' => str_replace( 'Quý III/2026 | Dự kiến bàn giao', '29/11/2026 | Lễ bàn giao căn hộ "Trọn vẹn nhịp sống giao hòa" – đón cư dân đầu tiên', $prog ),
+			);
+			$links = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+			if ( '' !== $links && false === strpos( $links, 'le-ban-giao-29-11-2026' ) ) {
+				$upd['hh_p_image_links'] = $links . "\nplugin:img/masteri-rivera-danang/masteri-rivera-danang-le-ban-giao-29-11-2026.jpg | Masteri Rivera Danang tổ chức lễ bàn giao căn hộ ngày 29/11/2026 (ảnh chủ đầu tư Masterise Homes) | thư viện | Lễ bàn giao 29/11/2026";
+			}
+			foreach ( $upd as $k => $v ) {
+				$cur = (string) ( $p['meta'][ $k ] ?? '' );
+				if ( $cur === $v ) {
+					continue;
+				}
+				if ( '' !== trim( $cur ) ) {
+					$p['fix_meta'][ $k ] = array_merge( (array) ( $p['fix_meta'][ $k ] ?? array() ), array( $cur ) );
+				}
+				$p['meta'][ $k ] = $v;
+			}
+			$projects[ $i ] = $p;
+		}
+		return $projects;
+	},
+	40
+);
