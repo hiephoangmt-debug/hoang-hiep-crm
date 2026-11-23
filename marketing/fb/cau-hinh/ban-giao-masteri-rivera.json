@@ -1,0 +1,85 @@
+{
+ "tag": "BÀN GIAO · MASTERI RIVERA DANANG",
+ "title": "Bàn giao Masteri Rivera Danang",
+ "sub": "10:00 Chủ nhật tại 50 Quy Mỹ, Hòa Cường",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "2 tháp",
+   "39 tầng"
+  ],
+  [
+   "~1.200",
+   "căn hộ"
+  ],
+  [
+   "31",
+   "tiện ích nội khu"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo thông báo Masterise Homes 11/2026 · Ảnh thực tế trung tâm Đà Nẵng",
+ "headline": [
+  [
+   "Bàn giao",
+   "big",
+   0
+  ],
+  [
+   "29/11/2026",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Lễ bàn giao căn hộ",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "29/11/2026",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Masteri Rivera",
+     "script"
+    ]
+   ],
+   "dx": 180
+  }
+ ]
+}
