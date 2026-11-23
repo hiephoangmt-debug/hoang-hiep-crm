@@ -1645,5 +1645,74 @@ HTML
 		),
 	);
 
+	/* ---------------- 23/11 – Nhà ở xã hội An Hòa Sun Home nhận hồ sơ 104 căn từ 2/12 ---------------- */
+	$posts[] = array(
+		'slug'           => 'nha-o-xa-hoi-sun-home-son-tra-104-can',
+		'title'          => 'Nhà ở xã hội Sun Home Sơn Trà nhận hồ sơ 104 căn từ 2/12/2026: giá khoảng 6,38 triệu/m², chỉ dành cho hộ di dời 3 chung cư cũ',
+		'excerpt'        => 'Sun Group mở nhận hồ sơ mua 104 căn nhà ở xã hội tòa SH2, Khu dân cư An Hòa (Sun Home) trên đường Vân Đồn, phường Sơn Trà từ 2/12/2026 đến 5/1/2027. Giá khoảng 6,38 triệu đồng/m², đối tượng là hộ giải tỏa chung cư Thuận Phước, Lâm đặc sản Hòa Cường, Hòa Minh.',
+		'keyword'        => 'nhà ở xã hội Sun Home Sơn Trà',
+		'keywords_extra' => array( 'An Hòa Sun Home', 'nhà ở xã hội Đà Nẵng 2026', 'chung cư Thuận Phước di dời', 'nhà ở xã hội Sun Group' ),
+		'project'        => 'sun-ponte-residence',
+		'schedule'       => '2026-11-23 10:00',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Nhà ở xã hội', 'Sun Group', 'Sơn Trà' ),
+		'image'          => 'plugin:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg',
+		'image_alt'      => 'Nhà ở xã hội Sun Home Sơn Trà – khu vực bờ Đông sông Hàn, Đà Nẵng (ảnh flycam thực tế 11/2026)',
+		'content'        => <<<'HTML'
+<p><strong>Nhà ở xã hội Sun Home Sơn Trà</strong> sắp nhận hồ sơ: chủ đầu tư Sun Group mở bán 104 căn nhà ở xã hội tại tòa SH2, Khu dân cư An Hòa (thường gọi là Sun Home) trên đường Vân Đồn, phường Sơn Trà, Đà Nẵng. Thời gian nhận hồ sơ từ ngày 2/12/2026 đến hết ngày 5/1/2027, theo thông tin <a href="https://vnexpress.net/sun-group-mo-ban-nha-xa-hoi-cho-cu-dan-tai-dinh-cu-5141512.html" target="_blank" rel="noopener">VnExpress</a> và nhiều báo đã đưa tin.</p>
+<!--hh-featured-->
+<h2>Nhà ở xã hội Sun Home Sơn Trà: thông tin đợt mở bán</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Thông tin theo báo chí</th></tr></thead>
+<tbody>
+<tr><td>Dự án</td><td>Nhà ở xã hội Khu dân cư An Hòa (Sun Home), đường Vân Đồn, phường Sơn Trà</td></tr>
+<tr><td>Số căn đợt này</td><td>104 căn thuộc tòa SH2, diện tích khoảng 30 – 62 m²</td></tr>
+<tr><td>Giá bán</td><td>Khoảng 6,38 triệu đồng/m², chưa gồm hệ số tầng và kinh phí bảo trì</td></tr>
+<tr><td>Đối tượng</td><td>Cá nhân, hộ gia đình thuộc diện giải tỏa, di dời ở 3 chung cư xuống cấp: Thuận Phước, Lâm đặc sản Hòa Cường, Hòa Minh</td></tr>
+<tr><td>Nhận hồ sơ</td><td>2/12/2026 – 5/1/2027; sáng 8h30 – 11h30, chiều 13h30 – 16h30, thứ Hai đến sáng thứ Bảy</td></tr>
+<tr><td>Nơi nộp</td><td>Văn phòng Ban Quản lý dự án trên đường Trần Thánh Tông, phường Sơn Trà</td></tr>
+</tbody>
+</table>
+<p>Với nhà ở xã hội Sun Home Sơn Trà, một số báo lưu ý mức 6,38 triệu đồng/m² là giá chủ đầu tư đưa ra; giá chính thức do Sở Xây dựng công bố sau khi thẩm định hồ sơ giá bán, cho thuê. Người đăng ký nên hỏi lại giá cuối cùng và hệ số tầng trước khi ký.</p>
+<h2>Vì sao giá nhà ở xã hội Sun Home Sơn Trà thấp như vậy?</h2>
+<p>Mức khoảng 6,38 triệu đồng/m² của nhà ở xã hội Sun Home Sơn Trà thấp hơn nhiều so với các dự án nhà ở xã hội mới ở Đà Nẵng (thường khoảng 16 – 21 triệu đồng/m²). Theo báo chí, chủ đầu tư giữ đơn giá dự kiến từ nhiều năm trước, và đợt này phục vụ riêng người dân phải di dời khỏi các chung cư cũ xuống cấp thuộc tài sản công. Trước đợt mở bán nhà ở xã hội Sun Home Sơn Trà này, Sở Xây dựng đã đồng ý cho đưa vào kinh doanh 347 căn nhà ở xã hội tại dự án, gồm 221 căn để bán và 126 căn cho thuê.</p>
+<!--hh-img:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg|Bờ Đông sông Hàn, khu vực có nhà ở xã hội Sun Home Sơn Trà (ảnh flycam thực tế 11/2026)-->
+<h2>Tác động của nhà ở xã hội Sun Home Sơn Trà – nhận định của Hoàng Hiệp</h2>
+<p>Đợt mở bán nhà ở xã hội Sun Home Sơn Trà không dành cho người mua thông thường, nên không tạo thêm nguồn cung cho thị trường chung. Ý nghĩa lớn hơn nằm ở việc thành phố đang giải quyết dần các chung cư cũ xuống cấp: khi cư dân Thuận Phước, Hòa Minh, Hòa Cường được bố trí chỗ ở mới, quỹ đất các chung cư cũ có cơ hội được cải tạo, chỉnh trang.</p>
+<p>Với khách đang tìm nhà ở xã hội ở Đà Nẵng, Hiệp khuyên theo dõi các dự án mở bán rộng rãi như <a href="/nha-o-xa-hoi-cau-tien-son-731-can/">nhà ở xã hội cầu Tiên Sơn 731 căn</a> hoặc danh sách <a href="/khoi-cong-8-du-an-nha-o-xa-hoi-da-nang-2026/">8 dự án nhà ở xã hội sắp khởi công</a>, thay vì đợt nhà ở xã hội Sun Home Sơn Trà dành riêng cho hộ di dời. Nếu nhà anh chị thuộc diện giải tỏa ở 3 chung cư trên, nên chuẩn bị giấy tờ chứng minh diện di dời và nộp trong khung giờ quy định, tránh dồn vào những ngày cuối.</p>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a> – căn hộ Sun Group ở bờ Đông sông Hàn, cùng phường với nhà ở xã hội Sun Home Sơn Trà; việc chỉnh trang chung cư cũ quanh khu vực giúp cảnh quan bờ Đông đồng bộ hơn.</li>
+<li><a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a> – dự án Sun Group ven sông Hàn gần khu Sun Home, hưởng lợi khi khu dân cư An Hòa hoàn thiện hạ tầng.</li>
+<li><a href="/du-an/sun-cosmo-residence/">Sun Cosmo Residence</a> – căn hộ Sun Group ven sông Hàn, cùng nhóm dự án đô thị bờ sông của chủ đầu tư.</li>
+</ul>
+<p>Cần tư vấn chọn căn hộ ven sông Hàn của Sun Group hoặc thông tin các đợt mở bán nhà ở xã hội Đà Nẵng, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: VnExpress (Sun Group mở bán nhà xã hội cho cư dân tái định cư); CafeF, Người Quan Sát, Tiền Phong (104 căn tòa SH2, giá khoảng 6,38 triệu đồng/m², thời gian nhận hồ sơ); CafeLand (Sở Xây dựng đồng ý đưa 347 căn vào kinh doanh). Giá và thủ tục theo thông báo chính thức của chủ đầu tư và Sở Xây dựng.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Nhà ở xã hội Sun Home Sơn Trà: 104 căn, nhận hồ sơ từ 2/12',
+			'desc'      => 'Nhà ở xã hội Sun Home Sơn Trà mở nhận hồ sơ 104 căn tòa SH2 từ 2/12/2026 đến 5/1/2027, giá khoảng 6,38 triệu/m², dành cho hộ di dời 3 chung cư cũ.',
+			'points'    => array(
+				'Nhà ở xã hội Sun Home Sơn Trà mở bán 104 căn tòa SH2, diện tích khoảng 30 – 62 m²',
+				'Giá khoảng 6,38 triệu đồng/m², chưa gồm hệ số tầng và kinh phí bảo trì',
+				'Chỉ dành cho hộ giải tỏa chung cư Thuận Phước, Lâm đặc sản Hòa Cường, Hòa Minh',
+				'Nhận hồ sơ từ 2/12/2026 đến hết 5/1/2027 tại Ban Quản lý dự án đường Trần Thánh Tông',
+			),
+			'faq'       => array(
+				array( 'Nhà ở xã hội Sun Home Sơn Trà ở đâu?', 'Tại Khu dân cư An Hòa trên đường Vân Đồn, phường Sơn Trà, Đà Nẵng, do Sun Group làm chủ đầu tư.' ),
+				array( 'Ai được mua đợt này?', 'Cá nhân, hộ gia đình thuộc diện giải tỏa, di dời ở 3 chung cư xuống cấp: Thuận Phước, Lâm đặc sản Hòa Cường và Hòa Minh.' ),
+				array( 'Giá bán bao nhiêu?', 'Khoảng 6,38 triệu đồng/m², chưa gồm hệ số tầng và kinh phí bảo trì; giá chính thức theo công bố của Sở Xây dựng.' ),
+				array( 'Nộp hồ sơ khi nào, ở đâu?', 'Từ 2/12/2026 đến hết 5/1/2027, thứ Hai đến sáng thứ Bảy, tại Văn phòng Ban Quản lý dự án trên đường Trần Thánh Tông, phường Sơn Trà.' ),
+			),
+		),
+		'sources'        => array(
+			'https://vnexpress.net/sun-group-mo-ban-nha-xa-hoi-cho-cu-dan-tai-dinh-cu-5141512.html',
+			'https://cafef.vn/sun-group-chuan-bi-mo-ban-hang-tram-can-nha-o-xa-hoi-tai-thanh-pho-dang-song-bac-nhat-viet-nam-18826110621443424.chn',
+			'https://tienphong.vn/ai-se-duoc-mua-nha-o-xa-hoi-tai-da-nang-sap-mo-ban-post1892042.tpo',
+			'https://cafeland.vn/tin-tuc/gan-350-can-nha-o-xa-hoi-cua-sun-group-tai-da-nang-du-dieu-kien-ban-cho-thue-154227.html',
+		),
+	);
+
 	return $posts;
 }
