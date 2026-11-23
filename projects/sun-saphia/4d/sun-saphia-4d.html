@@ -658,8 +658,8 @@ function makePlan(){
 function updPlan(fly){
   var f=+floorEl.value, y=planY(f);
   planMesh.position.y=y+.4; clipP.constant=T.localToWorld(new THREE.Vector3(0,y+.5,0)).y;
-  mainLbl.textContent='MẶT BẰNG TẦNG '+(f<=28?f:'3A–28')+' · bấm vào căn để xem';
-  floorOut.textContent='Tầng '+f+' · bấm căn';
+  mainLbl.textContent='MẶT BẰNG TẦNG '+(f<=29?(f===4?'3A':f):'3A–29')+' · bấm vào căn để xem';
+  floorOut.textContent='Tầng '+(f===4?'3A':f)+' · bấm căn';
   if(fly){ var c=new THREE.Vector3(X1-14.9,y,Z0+27.2);
     /* nhìn gần như thẳng từ trên xuống, tự tính khoảng cách để cả mặt bằng (49,6 m dọc màn hình × 54,4 m ngang) vừa khung */
     /* trừ phần bị thanh tiêu đề (.top) và bảng điều khiển (.console) che, căn mặt bằng vào giữa phần còn thấy */
@@ -691,10 +691,11 @@ var UNITS=[['11','2PN',0,9.9,0,7.25,'E'],['12','STU',10,13.8,0,9,'E'],['12A','ST
  ['28','1PN',17.6,23.8,10.7,19.7,'W'],['27','STU',23.8,27.6,10.7,19.7,'W'],['26','STU',27.6,31.4,10.7,19.7,'W'],['25','STU',31.4,35.2,10.7,19.7,'W'],['24','STU',35.2,39,10.7,19.7,'W'],['23','STU',39,42.8,10.7,19.7,'W'],['22','STU',42.8,46.6,10.7,19.7,'W'],['21','STU',46.6,50.4,10.7,19.7,'W'],
  ['20','STUL',50.4,54.4,8.8,19.7,'W']];
 var UINFO={STU:['Studio','3,8 × 9 m'],STUL:['Studio lớn đầu hồi','2 mặt thoáng'],'1PN':['1PN+1','6,2 × 9 m'],'2PN':['2PN góc bo','7,25 × 9,9 m']};
-// diện tích theo mặt bằng tầng 3A–28 của CĐT: [thông thủy, tim tường] m²
-var UAREA={'11':[70.21,77.35],'12':[31,34.58],'12A':[30,34.58],'12B':[51.11,56.42],'15':[30,34.58],'16':[30,34.58],'17':[50.18,56.38],'18':[67.68,75.5],'19':[67.69,76.36],
- '10':[50.28,56.42],'09':[30,34.58],'08':[30,34.58],'07':[31,35.03],'06':[30,34.13],'05':[30,34.58],'03A':[61.14,68.67],'03':[60.30,68.32],'01':[30,33.88],'02':[30,33.88],
- '28':[48.98,55.27],'27':[30,33.88],'26':[30,33.88],'25':[30,33.88],'24':[30,33.88],'23':[30,33.88],'22':[30,33.88],'21':[30,33.88],'20':[40.03,46.38]};
+// diện tích theo layout tầng CĐT cập nhật 23/11/2026 (tầng 5–17 & 19–27; tầng 3A & 18 căn 01 = 32,61 m²): [thông thủy, tim tường] m²
+var UAREA={'11':[70.21,77.35],'12':[31,34.58],'12A':[30,34.58],'12B':[51.11,56.42],'15':[30,34.58],'16':[30,34.58],'17':[50.18,56.38],'18':[67.91,75.5],'19':[67.42,76.36],
+ '10':[51.19,56.42],'09':[30,34.58],'08':[30,34.58],'07':[31,35.03],'06':[30,34.13],'05':[30,34.58],'03A':[61.31,68.67],'03':[60.81,68.32],'01':[35,39.75],'02':[30,33.88],
+ '28':[48.62,55.27],'27':[30,33.88],'26':[30,33.88],'25':[30,33.88],'24':[30,33.88],'23':[30,33.88],'22':[30,33.88],'21':[30.1,33.88],'20':[39.69,46.38]};
+function uArea(r){ var f=uFloor(), a=UAREA[r[0]]; if(r[0]==='01'&&(f===4||f===18)) a=[32.61,37.07]; if(r[0]==='21'&&f>=28) a=[30,33.88]; return a; }
 function um2(x){ return String(x).replace('.',','); }
 var UVIEW={E:['Biển Đông',0],W:['Sông Hàn · trung tâm TP',Math.PI],N:['Sơn Trà (Bắc)',-Math.PI/2],S:['Đô thị phía Nam',Math.PI/2]};
 var UCOL={STU:0xe86a78,STUL:0xe86a78,'1PN':0x4fb3e0,'2PN':0xf2c14e};
@@ -709,14 +710,14 @@ document.head.appendChild(uCss);
 var uCard=null;
 function unitAt(u,v){ var hit=null; UNITS.forEach(function(r){ if(r[1]==='STUL') return; if(u>=r[2]&&u<=r[3]&&v>=r[4]&&v<=r[5]) hit=r; });
   if(!hit&&u>=47.6&&u<=54.4&&v>=8.8&&v<=19.7&&!(u<50.4&&v>10.7)) hit=UNITS[UNITS.length-1]; return hit; }
-function uFloor(){ return Math.max(3,Math.min(28,+floorEl.value)); }
-function uCode(r){ var f=uFloor(); return 'SP'+(f<10?'0':'')+f+r[0]; }
+function uFloor(){ return Math.max(4,Math.min(29,+floorEl.value)); }
+function uCode(r){ var f=uFloor(); return 'SP'+(f===4?'3A':(f<10?'0':'')+f)+r[0]; }
 function showUnit(r){
   var y=planY(+floorEl.value)+.55, u0=r[1]==='STUL'?r[2]:r[2], w=r[3]-u0, d=r[5]-r[4];
   uHi.scale.set(d,w,1); uHi.position.set(X1-(r[4]+r[5])/2,y,Z0+(u0+r[3])/2); uHi.visible=true; uHi.material.color.setHex(0xff6a2b);
   if(!uCard){ uCard=document.createElement('div'); uCard.id='uCard'; document.body.appendChild(uCard); }
   var inf=UINFO[r[1]], vw=UVIEW[r[6]];
-  uCard.innerHTML='<button class="x" aria-label="Đóng">✕</button><h4>Căn '+uCode(r)+' · '+inf[0]+'</h4><div class="s"><b>Thông thủy '+um2(UAREA[r[0]][0])+' m²</b> · tim tường '+um2(UAREA[r[0]][1])+' m²<br>'+inf[1]+' · view '+vw[0]+'</div>'
+  uCard.innerHTML='<button class="x" aria-label="Đóng">✕</button><h4>Căn '+uCode(r)+' · '+inf[0]+'</h4><div class="s"><b>Thông thủy '+um2(uArea(r)[0])+' m²</b> · tim tường '+um2(uArea(r)[1])+' m²<br>'+inf[1]+' · view '+vw[0]+'</div>'
     +'<div class="b"><button class="o" data-a="plan">Mặt bằng &amp; 3D căn</button><button class="n" data-a="view">View từ căn này (5D)</button></div>';
   uCard.style.display='block';
   uCard.querySelector('.x').onclick=function(){ uCard.style.display='none'; uHi.visible=false; };
