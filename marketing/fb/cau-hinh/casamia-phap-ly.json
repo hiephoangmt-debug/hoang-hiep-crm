@@ -1,0 +1,85 @@
+{
+ "tag": "PHÁP LÝ · CASAMIA BALANCA",
+ "title": "SỔ ĐỎ LÂU DÀI",
+ "sub": "Biệt thự sổ đỏ, sở hữu lâu dài",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "Sổ đỏ",
+   "theo chủ đầu tư"
+  ],
+  [
+   "Lâu dài",
+   "thời hạn sở hữu"
+  ],
+  [
+   "31,1 ha",
+   "khu đô thị"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo thông tin chủ đầu tư Đạt Phương · Thông tin tham khảo, không thay thế tư vấn pháp lý",
+ "headline": [
+  [
+   "SỔ ĐỎ LÂU DÀI",
+   "big",
+   0
+  ],
+  [
+   "Casamia Balanca",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Pháp lý biệt thự",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "SỔ ĐỎ LÂU DÀI",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Casamia Balanca",
+     "script"
+    ]
+   ],
+   "dx": 150
+  }
+ ]
+}

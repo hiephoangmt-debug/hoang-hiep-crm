@@ -1,0 +1,85 @@
+{
+ "tag": "TIỆN ÍCH · SUN SAPHIA RESIDENCE",
+ "title": "SUN SAPHIA",
+ "sub": "Đối diện công viên bãi tắm khoảng 2,45 ha",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "Sơn Thủy",
+   "bãi tắm đối diện"
+  ],
+  [
+   "5–7 km",
+   "đến Mỹ Khê trung tâm"
+  ],
+  [
+   "2,45 ha",
+   "công viên biển"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo tài liệu chủ đầu tư; khoảng cách ước tính theo bản đồ · Ảnh flycam thực tế 17/10/2026",
+ "headline": [
+  [
+   "SUN SAPHIA",
+   "big",
+   0
+  ],
+  [
+   "qua đường là biển",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Bãi biển gần",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "SUN SAPHIA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "qua đường là biển",
+     "script"
+    ]
+   ],
+   "dx": 220
+  }
+ ]
+}

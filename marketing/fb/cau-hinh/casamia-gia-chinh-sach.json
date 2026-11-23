@@ -1,0 +1,85 @@
+{
+ "tag": "GIÁ & CHÍNH SÁCH · CASAMIA BALANCA",
+ "title": "CASAMIA BALANCA",
+ "sub": "Park Home full nội thất · đã gồm VAT",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "~13,86 tỷ",
+   "từ, không vay"
+  ],
+  [
+   "70%",
+   "vay, HTLS 0% 24 tháng"
+  ],
+  [
+   "300 tr",
+   "đặt cọc"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo CSBH chủ đầu tư từ 9/9/2026, áp dụng đến khi có chính sách thay thế · Phối cảnh dự án",
+ "headline": [
+  [
+   "CASAMIA BALANCA",
+   "big",
+   0
+  ],
+  [
+   "chính sách 2026",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Giá biệt thự",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "CASAMIA BALANCA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "chính sách 2026",
+     "script"
+    ]
+   ],
+   "dx": 220
+  }
+ ]
+}
