@@ -196,7 +196,7 @@ add_filter(
 			$l( 'view-tang-20-ngu-hanh-son-song-co-co', 'Tầm view tầng 20 Sun Saphia Residence: nhìn Ngũ Hành Sơn và sông Cổ Cò (phối cảnh chủ đầu tư)', 'thư viện', 'View tầng 20' ),
 			$l( 'view-tang-25-phong-ngu-song', 'Tầm view tầng 25 Sun Saphia Residence: phòng ngủ nhìn về sông và thành phố (phối cảnh chủ đầu tư)', 'thư viện', 'View tầng 25' ),
 			$l( 'tien-ich-ho-boi-1', 'Bể bơi view biển Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Bể bơi view biển' ),
-			$l( 'tien-ich-ho-boi-2', 'Bể bơi ngoài trời dưới chân tòa tháp Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Bể bơi ngoài trời' ),
+			$l( 'tien-ich-ho-boi-2', 'Bể bơi ngoài trời view biển Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Bể bơi ngoài trời' ),
 			$l( 'tien-ich-ho-boi-3', 'Bể sục, bể trẻ em khu hồ bơi Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Bể sục' ),
 			$l( 'tien-ich-ho-boi-4', 'Khu ghế nghỉ cạnh hồ bơi nhìn ra biển, Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Khu nghỉ hồ bơi' ),
 			$l( 'tien-ich-ho-boi-5', 'Hành lang ghế tắm nắng khu hồ bơi Sun Saphia Residence (phối cảnh chủ đầu tư)', 'tiện ích', 'Ghế tắm nắng' ),

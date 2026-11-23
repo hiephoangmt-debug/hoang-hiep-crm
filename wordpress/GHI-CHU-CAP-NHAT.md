@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.46** + plugin Hoàng Hiệp CRM **2.20.343**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.344**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.344 (giao diện 2.16.47)
+
+- Trang Sun Saphia Residence (giao diện landing): mục Tiện ích đổi sang các tab Hồ bơi (6 ảnh), Gym · Yoga (7 ảnh), Kid club (3 ảnh), Khối đế, Chuỗi bãi tắm – dùng phối cảnh chủ đầu tư mới; thêm mục "Tầm view" với 5 ảnh view tầng 5 – 25.
 
 ## Có gì mới – 2.20.343
 
