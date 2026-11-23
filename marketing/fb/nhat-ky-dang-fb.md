@@ -177,6 +177,7 @@
 | 23/11/2026 | Casamia (blogId 8074284) | 19:30 | Pháp lý Casamia Balanca – sổ đỏ lâu dài – thẻ nền xanh + 3 ảnh (phòng khách sum họp, xe điện cổng, ban công) | /du-an/casamia-balanca-hoi-an/ |
 | 23/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | Pháp lý Casamia Balanca – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
 | 23/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: Hạ tầng Khu thương mại tự do 2026 – 2045 (+3 tin ở bình luận; thẻ nền xanh tự làm) | /ha-tang-khu-thuong-mai-tu-do-da-nang-2045/ /nha-o-xa-hoi-sun-home-son-tra-104-can/ /tien-do-the-legend-da-nang-cat-noc-ban-giao/ /chi-phi-khi-mua-can-ho-moi-ngoai-gia-ban/ |
+| 23/11/2026 | Hoàng Hiệp | 17:00 | TỔNG HỢP: Bàn giao Masteri Rivera Danang 29/11 (+4 tin ở bình luận; thẻ nền xanh tự làm) | /ban-giao-masteri-rivera-danang-29-11-2026/ /gia-vinhomes-hai-van-bay-2026-theo-phan-khu/ /gia-dat-biet-thu-euro-village-2-hoa-xuan/ /phap-ly-capital-square-da-nang-so-hong/ /hop-dong-mua-can-ho-hinh-thanh-trong-tuong-lai/ |
 | CHỜ | Sun | 24/11 | (bài web 22/11 16:30) Sun Saphia Residence đi Sơn Trà | sun-saphia-residence-di-son-tra (chờ) |
 | CHỜ | Sun | 24/11 | (bài web 22/11 18:30) Sun Saphia Residence đi sân bay | sun-saphia-residence-di-san-bay (chờ) |
 | CHỜ | Sun | 24/11 | (bài web 23/11 10:45, chưa lên web lúc hẹn) Hướng căn hộ Sun Saphia Residence | huong-can-ho-sun-saphia-residence (chờ) |
