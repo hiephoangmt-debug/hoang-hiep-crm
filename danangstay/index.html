@@ -167,6 +167,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:14.5
       <a href="#how" data-i18n="nav_how">Cách đặt</a>
       <a href="#partner" data-i18n="nav_partner">Chủ khách sạn</a>
       <a href="#faq" data-i18n="nav_faq">Hỏi đáp</a>
+      <a href="#" class="js-blog" data-i18n="nav_blog">Cẩm nang</a>
     </nav>
     <div class="lang" role="group" aria-label="Language">
       <button data-lang="vi" class="on">VI</button>
@@ -352,6 +353,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:14.5
         <ul>
           <li><a class="js-fb" href="#" target="_blank" rel="noopener">Facebook</a></li>
           <li><a class="js-zalo" href="#" target="_blank" rel="noopener">Zalo</a></li>
+          <li><a class="js-blog" href="#" data-i18n="nav_blog">Cẩm nang</a></li>
           <li><a class="js-tiktok" href="#" target="_blank" rel="noopener">TikTok</a></li>
         </ul>
       </div>
@@ -372,9 +374,10 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:14.5
   <a href="#book" data-i18n="m_book">Báo giá</a>
 </div>
 
+<!--DS_CONFIG-->
 <script>
 /* ===================== CẤU HÌNH – SỬA CÁC DÒNG NÀY ===================== */
-const CONFIG = {
+const CONFIG = Object.assign({
   phone:     "0900000000",        // Hotline (hiển thị + nút gọi)
   zalo:      "0900000000",        // Số Zalo hoặc link Zalo OA, ví dụ "https://zalo.me/1234567890"
   whatsapp:  "84900000000",       // Số WhatsApp dạng quốc tế, không có dấu +
@@ -383,12 +386,14 @@ const CONFIG = {
   facebook:  "",                  // Link Fanpage
   tiktok:    "",                  // Link TikTok
   // Link Web App Google Apps Script (xem danangstay/google_sheet.gs). Để trống thì form chỉ mở Zalo/WhatsApp.
-  sheetWebhook: ""
-};
+  sheetWebhook: "",
+  leadEndpoint: "",               // Plugin WordPress tự điền (lưu khách vào WordPress)
+  blogUrl: ""                     // Link trang blog/cẩm nang (plugin WordPress tự điền)
+}, window.DS_CONFIG || {});
 /* ====================================================================== */
 
 const I18N = {
-  en:{nav_areas:"Areas",nav_rooms:"Rooms",nav_how:"How to book",nav_partner:"Hotel owners",nav_faq:"FAQ",
+  en:{nav_areas:"Areas",nav_rooms:"Rooms",nav_how:"How to book",nav_partner:"Hotel owners",nav_faq:"FAQ",nav_blog:"Travel guide",
     badge:"📍 Da Nang · My Khe · Man Thai · Son Tra",
     h1:"Sea-view stays in Da Nang,<br><em>quote in 15 minutes</em>",
     lead:"Our local team finds the right room for your needs and budget, secures it fast and supports you throughout your trip.",
@@ -430,7 +435,7 @@ const I18N = {
     title:"DanangStay – Da Nang hotel booking",
     msg_intro:"Hello DanangStay, I'd like a room quote:",l_in:"Check-in",l_out:"Check-out",l_g:"Guests",l_r:"Rooms",l_b:"Budget",l_n:"Name",l_p:"Phone",l_m:"Note",
     err:"Please fill in dates, name and phone.",err_date:"Check-out must be after check-in.",partner_msg:"I'm a hotel/apartment owner and want to partner with DanangStay."},
-  ko:{nav_areas:"지역",nav_rooms:"객실",nav_how:"예약 방법",nav_partner:"호텔 파트너",nav_faq:"FAQ",
+  ko:{nav_areas:"지역",nav_rooms:"객실",nav_how:"예약 방법",nav_partner:"호텔 파트너",nav_faq:"FAQ",nav_blog:"여행 가이드",
     badge:"📍 다낭 · 미케 · 만타이 · 선짜",
     h1:"다낭 오션뷰 숙소,<br><em>15분 안에 견적</em>",
     lead:"현지 팀이 일정과 예산에 맞는 객실을 찾아 빠르게 예약하고, 여행 내내 도와드립니다.",
@@ -512,6 +517,7 @@ setLinks(".js-call", CONFIG.phone && "tel:" + CONFIG.phone.replace(/\s/g,""));
 setLinks(".js-mail", CONFIG.email && "mailto:" + CONFIG.email);
 setLinks(".js-fb", CONFIG.facebook);
 setLinks(".js-tiktok", CONFIG.tiktok);
+setLinks(".js-blog", CONFIG.blogUrl);
 document.querySelectorAll(".js-phone-text").forEach(s=>s.textContent=CONFIG.phone.replace(/(\d{4})(\d{3})(\d+)/,"$1 $2 $3"));
 document.querySelectorAll(".js-mail-text").forEach(s=>s.textContent=CONFIG.email);
 document.getElementById("yr").textContent = new Date().getFullYear();
@@ -553,8 +559,15 @@ f.addEventListener("submit", async e=>{
   delete payload.website;
 
   const btn = f.querySelector("button[type=submit]"); btn.disabled = true; btn.style.opacity=.7;
+  let saved = false;
+  if (CONFIG.leadEndpoint) {
+    try {
+      const r = await fetch(CONFIG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+      saved = r.ok;
+    } catch(err){ console.warn(err) }
+  }
   if (CONFIG.sheetWebhook) {
-    try { await fetch(CONFIG.sheetWebhook,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)}); }
+    try { await fetch(CONFIG.sheetWebhook,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)}); saved = true; }
     catch(err){ console.warn(err) }
   }
   // Nút trên màn hình cảm ơn mang sẵn nội dung yêu cầu
@@ -565,8 +578,8 @@ f.addEventListener("submit", async e=>{
   if (typeof fbq==="function") fbq("track","Lead");
   f.style.display="none"; document.getElementById("okBox").style.display="block";
   document.getElementById("book").scrollIntoView({behavior:"smooth",block:"center"});
-  // Không cấu hình webhook → mở luôn kênh khách chọn để không mất khách
-  if (!CONFIG.sheetWebhook) {
+  // Chưa lưu được yêu cầu → mở luôn kênh khách chọn để không mất khách
+  if (!saved) {
     if (d.via==="WhatsApp" && CONFIG.whatsapp) window.open(waUrl(text),"_blank");
     else if (d.via==="KakaoTalk" && CONFIG.kakao) window.open(CONFIG.kakao,"_blank");
     else if (CONFIG.zalo) window.open(zaloUrl,"_blank");

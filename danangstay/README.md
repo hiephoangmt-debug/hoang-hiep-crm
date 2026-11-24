@@ -18,3 +18,6 @@ Trang một file (`index.html`) cho khách trong và ngoài nước gửi yêu c
 - `emblem.svg` / `emblem.png` – biểu tượng chính gồm mặt trời, núi Sơn Trà và tượng Quan Âm, Cầu Vàng (dải cầu vàng trên đôi bàn tay), Cầu Rồng trên sông Hàn, sóng biển Mỹ Khê.
 - `icon.svg` / `icon.png` – bản rút gọn cho favicon và ảnh đại diện Zalo/Facebook.
 - `preview.html` – xem logo ngang DanangStay / DanangLife trên nền sáng và nền tối.
+
+## WordPress
+Plugin `wordpress/danangstay-landing.zip`: landing page chạy trên WordPress, lưu yêu cầu đặt phòng trong trang quản trị, báo khách mới qua email/Telegram, xuất Excel. Hướng dẫn: [`wordpress/HUONG_DAN.md`](wordpress/HUONG_DAN.md).
