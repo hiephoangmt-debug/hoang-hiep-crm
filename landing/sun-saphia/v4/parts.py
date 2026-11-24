@@ -130,6 +130,32 @@ def daily():
             '<li>Giữ chỗ, ký hợp đồng đúng quy trình chủ đầu tư</li><li>Tư vấn trực tiếp: Hoàng Phạm Đình Hiệp – Giám đốc kinh doanh</li></ul>'
             '<a class="btn sm" href="#dang-ky">Nhận bảng giá gốc từ đại lý chính thức</a></div></div>') % CERT
 
+def motion():
+    """Hiệu ứng chuyển trang + hiện dần khi cuộn: nhẹ, nhanh, tắt khi người dùng bật giảm chuyển động."""
+    css = ('<style>@view-transition{navigation:auto}'
+           'header.top{view-transition-name:hdr}::view-transition-group(hdr){animation:none}'
+           '::view-transition-old(root){animation:vtO .2s cubic-bezier(.4,0,1,1) both}::view-transition-new(root){animation:vtI .42s cubic-bezier(.16,1,.3,1) both}'
+           '@keyframes vtO{to{opacity:0;transform:translateY(-8px)}}@keyframes vtI{from{opacity:0;transform:translateY(14px)}}'
+           'html.pgfb body{transition:opacity .2s ease}html.pgout body{opacity:0}'
+           '.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);transition-delay:var(--rd,0s)}'
+           '.rv.in{opacity:1;transform:none}'
+           '@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}.rv{opacity:1!important;transform:none!important;transition:none!important}html.pgout body{opacity:1}}</style>')
+    js = ('<script>(function(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var H=document.documentElement;'
+          # trình duyệt chưa hỗ trợ chuyển trang (Safari cũ, Firefox): mờ dần trước khi chuyển
+          'if(!("onpagereveal" in window)){H.classList.add("pgfb");document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");'
+          'if(!a||e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||a.target==="_blank"||a.hasAttribute("download"))return;'
+          'var u=new URL(a.href,location.href);if(u.origin!==location.origin||(u.pathname===location.pathname&&u.hash))return;'
+          'e.preventDefault();H.classList.add("pgout");setTimeout(function(){location.href=u.href},180)});'
+          'addEventListener("pageshow",function(){H.classList.remove("pgout")})}'
+          # hiện dần khi cuộn: chỉ khối nằm dưới màn hình đầu tiên, mỗi nhóm trễ tối đa 3 bước
+          'if(!("IntersectionObserver" in window))return;'
+          'var S=".sec .sh,.sec .lead,.sec .card,.sec .g2>*,.sec .g3>*,.sec .tldr,.tv,.evk,.skg2 h3,.skg2 .skw figure,.band,.cta-blk,.faq details";'
+          'var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{rootMargin:"0px 0px -8% 0px",threshold:.08});'
+          'var vh=innerHeight;[].slice.call(document.querySelectorAll(S)).forEach(function(el){if(el.closest(".rv")||el.closest("#ss4d,.mbx,.cdv,[role=dialog]"))return;'
+          'var r=el.getBoundingClientRect();if(r.top<vh*.92||!r.height)return;var i=0,p=el.previousElementSibling;while(p&&i<3){if(p.classList.contains("rv"))i++;p=p.previousElementSibling}'
+          'el.style.setProperty("--rd",(i*.08)+"s");el.classList.add("rv");io.observe(el)})})();</script>')
+    return css + js
+
 def tail(with_tools):
     """Phần script dùng chung lấy nguyên từ trang chủ đang chạy: CRM, nút liên hệ nhanh, chat, xử lý form, 4D + chọn căn."""
     s = open(D + 'chat/pages/trang-chu.html', encoding='utf8').read()
