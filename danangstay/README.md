@@ -21,3 +21,5 @@ Trang một file (`index.html`) cho khách trong và ngoài nước gửi yêu c
 
 ## WordPress
 Plugin `wordpress/danangstay-landing.zip`: landing page chạy trên WordPress, lưu yêu cầu đặt phòng trong trang quản trị, báo khách mới qua email/Telegram, xuất Excel. Hướng dẫn: [`wordpress/HUONG_DAN.md`](wordpress/HUONG_DAN.md).
+
+SEO & tốc độ: [`SEO.md`](SEO.md).

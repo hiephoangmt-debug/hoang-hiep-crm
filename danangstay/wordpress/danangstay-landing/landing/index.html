@@ -8,6 +8,13 @@
 <meta property="og:title" content="DanangStay – Đặt phòng khách sạn Đà Nẵng">
 <meta property="og:description" content="Báo giá nhanh, hỗ trợ 24/7. Vietnamese · English · 한국어">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="DanangStay">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:image" content="logo/emblem.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b6e8a">
+<link rel="apple-touch-icon" href="logo/icon.png">
 <link rel="icon" href="logo/icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,8 +39,11 @@ header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdro
 .nav-links a{text-decoration:none;color:var(--muted)}
 .nav-links a:hover{color:var(--sea)}
 .lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
-.lang button{border:0;background:none;padding:6px 10px;font:600 13px inherit;font-family:inherit;cursor:pointer;color:var(--muted)}
-.lang button.on{background:var(--sea);color:#fff}
+.lang a{padding:6px 10px;font-weight:600;font-size:13px;text-decoration:none;color:var(--muted)}
+.lang a.on{background:var(--sea);color:#fff}
+#langTip{display:none;background:#fff6e6;border-bottom:1px solid #f3dcb3;font-size:14px;text-align:center;padding:8px 16px}
+#langTip a{font-weight:700;color:var(--sea-d);margin:0 6px}
+#langTip button{border:0;background:none;cursor:pointer;color:var(--muted);font-size:16px;margin-left:6px}
 /* Hero */
 .hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(180deg,#0a5d75 0%,#0b6e8a 45%,#2a9bb5 100%)}
 .hero svg.waves{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:120px}
@@ -158,6 +168,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:14.5
 </head>
 <body>
 
+<div id="langTip" role="note"><span id="langTipText"></span> <a id="langTipLink" href="#"></a><button type="button" aria-label="Close" id="langTipClose">×</button></div>
 <header>
   <div class="wrap nav">
     <a class="logo" href="#top" aria-label="DanangStay"><img src="logo/icon.svg" alt="" width="34" height="34"><b>Danang<span>Stay</span></b></a>
@@ -170,9 +181,9 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:14.5
       <a href="#" class="js-blog" data-i18n="nav_blog">Cẩm nang</a>
     </nav>
     <div class="lang" role="group" aria-label="Language">
-      <button data-lang="vi" class="on">VI</button>
-      <button data-lang="en">EN</button>
-      <button data-lang="ko">KO</button>
+      <a href="?lang=vi" hreflang="vi" lang="vi" data-lang="vi" class="on">VI</a>
+      <a href="?lang=en" hreflang="en" lang="en" data-lang="en">EN</a>
+      <a href="?lang=ko" hreflang="ko" lang="ko" data-lang="ko">KO</a>
     </div>
   </div>
 </header>
@@ -432,7 +443,7 @@ const I18N = {
     q5:"Can you handle large groups?",a5:"Yes. Groups of 10+ rooms, team building or conferences – send a request for group rates.",
     ft_p:"Hotels and sea-view apartments in Da Nang. 24/7 support.",ft_c:"Contact",ft_addr:"Da Nang, Vietnam",ft_f:"Follow us",
     m_call:"📞 Call",m_book:"Get quote",
-    title:"DanangStay – Da Nang hotel booking",
+    title:"DanangStay – Da Nang Hotel & Sea-View Apartment Booking",meta_desc:"Book hotels and sea-view apartments in Da Nang – My Khe, Man Thai, Son Tra. Local team, quote in 15 minutes, 24/7 support in English, Korean and Vietnamese.",
     msg_intro:"Hello DanangStay, I'd like a room quote:",l_in:"Check-in",l_out:"Check-out",l_g:"Guests",l_r:"Rooms",l_b:"Budget",l_n:"Name",l_p:"Phone",l_m:"Note",
     err:"Please fill in dates, name and phone.",err_date:"Check-out must be after check-in.",partner_msg:"I'm a hotel/apartment owner and want to partner with DanangStay."},
   ko:{nav_areas:"지역",nav_rooms:"객실",nav_how:"예약 방법",nav_partner:"호텔 파트너",nav_faq:"FAQ",nav_blog:"여행 가이드",
@@ -474,11 +485,11 @@ const I18N = {
     q5:"단체 예약 가능한가요?",a5:"가능합니다. 10객실 이상 단체, 워크숍, 행사 – 단체 요금을 문의하세요.",
     ft_p:"다낭 호텔 · 오션뷰 아파트 예약. 24시간 상담.",ft_c:"연락처",ft_addr:"베트남 다낭",ft_f:"팔로우",
     m_call:"📞 전화",m_book:"견적",
-    title:"DanangStay – 다낭 호텔 예약",
+    title:"DanangStay – 다낭 호텔·오션뷰 숙소 예약",meta_desc:"다낭 호텔·오션뷰 아파트 예약 – 미케 비치, 만타이, 선짜. 현지 팀이 15분 안에 견적, 한국어 24시간 상담.",
     msg_intro:"안녕하세요 DanangStay, 객실 견적 부탁드립니다:",l_in:"체크인",l_out:"체크아웃",l_g:"인원",l_r:"객실",l_b:"예산",l_n:"이름",l_p:"연락처",l_m:"요청",
     err:"날짜, 이름, 연락처를 입력해 주세요.",err_date:"체크아웃은 체크인 이후여야 합니다.",partner_msg:"다낭 호텔/아파트 운영자입니다. DanangStay와 파트너십을 원합니다."}
 };
-const VI_EXTRA = {title:"DanangStay – Đặt phòng khách sạn Đà Nẵng",
+const VI_EXTRA = {title:document.title,meta_desc:document.querySelector('meta[name=description]').content,
   msg_intro:"Chào DanangStay, mình cần báo giá phòng:",l_in:"Nhận phòng",l_out:"Trả phòng",l_g:"Số khách",l_r:"Số phòng",l_b:"Ngân sách",l_n:"Tên",l_p:"SĐT",l_m:"Ghi chú",
   err:"Vui lòng điền ngày, họ tên và số điện thoại.",err_date:"Ngày trả phòng phải sau ngày nhận phòng.",partner_msg:"Tôi là chủ khách sạn/căn hộ, muốn hợp tác với DanangStay."};
 
@@ -490,6 +501,11 @@ document.querySelectorAll("[data-i18n-ph]").forEach(el=>VI[el.dataset.i18nPh]=el
 I18N.vi = VI;
 
 let lang = "vi";
+function ldScript(id,obj){ let el=document.getElementById(id); if(!el){el=document.createElement("script");el.type="application/ld+json";el.id=id;document.head.appendChild(el)} el.textContent=JSON.stringify(obj) }
+function buildFaqSchema(){
+  const items=[...document.querySelectorAll("#faq details")].map(d=>({"@type":"Question",name:d.querySelector("summary").textContent.trim(),acceptedAnswer:{"@type":"Answer",text:d.querySelector("p").textContent.trim()}}));
+  ldScript("ds-faq",{"@context":"https://schema.org","@type":"FAQPage",inLanguage:lang,mainEntity:items});
+}
 function t(k){return (I18N[lang]&&I18N[lang][k]) ?? VI[k] ?? k}
 function setLang(l){
   lang = I18N[l] ? l : "vi";
@@ -497,15 +513,34 @@ function setLang(l){
   document.querySelectorAll("[data-i18n]").forEach(el=>el.textContent=t(el.dataset.i18n));
   document.querySelectorAll("[data-i18n-html]").forEach(el=>el.innerHTML=t(el.dataset.i18nHtml));
   document.querySelectorAll("[data-i18n-ph]").forEach(el=>el.placeholder=t(el.dataset.i18nPh));
-  document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.lang===lang));
+  document.querySelectorAll(".lang a").forEach(b=>b.classList.toggle("on",b.dataset.lang===lang));
   document.title = t("title");
+  const setMeta=(sel,v)=>{const m=document.querySelector(sel); if(m) m.setAttribute("content",v)};
+  setMeta('meta[name=description]', t("meta_desc"));
+  setMeta('meta[property="og:title"]', t("title"));
+  setMeta('meta[property="og:description"]', t("meta_desc"));
+  setMeta('meta[property="og:locale"]', {vi:"vi_VN",en:"en_US",ko:"ko_KR"}[lang]);
+  buildFaqSchema();
   // Khách Hàn: gợi ý Kakao trước
   const via = document.querySelector(`input[name=via][value="${lang==="ko"?"KakaoTalk":lang==="en"?"WhatsApp":"Zalo"}"]`);
   if (via) via.checked = true;
   try{localStorage.setItem("ds_lang",lang)}catch(e){}
 }
-document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.lang)));
+document.querySelectorAll(".lang a").forEach(b=>b.addEventListener("click",e=>{
+  e.preventDefault(); setLang(b.dataset.lang); hideTip();
+  try{ const u=new URL(location.href); if(lang==="vi") u.searchParams.delete("lang"); else u.searchParams.set("lang",lang); history.replaceState(null,"",u) }catch(err){}
+}));
 
+// Dữ liệu doanh nghiệp cho Google (plugin WordPress in sẵn phía máy chủ; bản tĩnh thì tạo ở đây)
+if (!document.getElementById("ds-org")) {
+  const home = location.origin + location.pathname;
+  ldScript("ds-org",{"@context":"https://schema.org","@type":"TravelAgency",name:"DanangStay",url:home,
+    logo:new URL("logo/emblem.png",home).href,image:new URL("logo/emblem.png",home).href,
+    telephone:CONFIG.phone||undefined,email:CONFIG.email||undefined,priceRange:"₫₫",
+    address:{"@type":"PostalAddress",addressLocality:"Đà Nẵng",addressCountry:"VN"},
+    areaServed:{"@type":"City",name:"Da Nang"},availableLanguage:["vi","en","ko"],
+    sameAs:[CONFIG.facebook,CONFIG.tiktok].filter(Boolean)});
+}
 // Liên kết liên hệ
 const zaloUrl = /^https?:/.test(CONFIG.zalo) ? CONFIG.zalo : "https://zalo.me/" + CONFIG.zalo.replace(/\D/g,"");
 const waUrl = txt => "https://wa.me/" + CONFIG.whatsapp.replace(/\D/g,"") + (txt?"?text="+encodeURIComponent(txt):"");
@@ -590,9 +625,19 @@ f.addEventListener("submit", async e=>{
 (function(){
   const q = new URLSearchParams(location.search).get("lang");
   let saved=null; try{saved=localStorage.getItem("ds_lang")}catch(e){}
+  setLang(q || saved || "vi");
+  // Không tự đổi ngôn ngữ theo trình duyệt (để Google đọc đúng từng bản) – chỉ gợi ý
   const nav = (navigator.language||"vi").slice(0,2);
-  setLang(q || saved || (nav==="ko"?"ko":nav==="vi"?"vi":"en"));
+  if (!q && !saved && nav!=="vi") {
+    const tl = nav==="ko" ? "ko" : "en";
+    document.getElementById("langTipText").textContent = tl==="ko" ? "한국어 페이지가 있습니다." : "This page is available in English.";
+    const a = document.getElementById("langTipLink"); a.textContent = tl==="ko" ? "한국어로 보기 →" : "View in English →"; a.href="?lang="+tl;
+    a.addEventListener("click",e=>{e.preventDefault(); document.querySelector(`.lang a[data-lang="${tl}"]`).click()});
+    document.getElementById("langTip").style.display="block";
+  }
 })();
+function hideTip(){ document.getElementById("langTip").style.display="none" }
+document.getElementById("langTipClose").addEventListener("click",()=>{ hideTip(); try{localStorage.setItem("ds_lang",lang)}catch(e){} });
 </script>
 </body>
 </html>

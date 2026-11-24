@@ -33,6 +33,9 @@ function dsl_fields()
         'email'          => ['Email hiển thị', 'text', 'Ví dụ: booking@danangstay.com.vn'],
         'facebook'       => ['Fanpage Facebook', 'text', 'https://facebook.com/...'],
         'tiktok'         => ['TikTok', 'text', 'https://tiktok.com/@...'],
+        'seo_title'      => ['Tiêu đề SEO (tiếng Việt)', 'text', 'Để trống dùng mặc định. Nên 50–60 ký tự, có "khách sạn Đà Nẵng"'],
+        'seo_desc'       => ['Mô tả SEO (tiếng Việt)', 'textarea', 'Để trống dùng mặc định. Nên 140–160 ký tự'],
+        'address'        => ['Địa chỉ văn phòng', 'text', 'Ví dụ: 12 Hồ Nghinh, Phước Mỹ, Sơn Trà, Đà Nẵng (hiện trong dữ liệu Google)'],
         'blog_url'       => ['Trang Cẩm nang / Blog', 'text', 'Ví dụ: https://danangstay.com.vn/blog/ (để trống thì ẩn)'],
         'notify_email'   => ['Email nhận báo khách mới', 'text', 'Có thể nhiều email, cách nhau bằng dấu phẩy'],
         'telegram_token' => ['Telegram bot token', 'text', 'Không bắt buộc. Tạo bot qua @BotFather'],
@@ -49,6 +52,7 @@ function dsl_opts()
         'mode' => 'page', 'slug' => 'dat-phong', 'phone' => '', 'zalo' => '', 'whatsapp' => '', 'kakao' => '',
         'email' => $admin, 'facebook' => '', 'tiktok' => '', 'blog_url' => '', 'notify_email' => $admin,
         'telegram_token' => '', 'telegram_chat' => '', 'sheet_webhook' => '', 'head_code' => '',
+        'seo_title' => '', 'seo_desc' => '', 'address' => '',
     ]);
 }
 
@@ -61,7 +65,9 @@ function dsl_sanitize($in)
     $out = [];
     foreach (dsl_fields() as $k => $f) {
         $v = isset($in[$k]) ? $in[$k] : '';
-        if ($k === 'head_code') {
+        if ($k === 'seo_desc') {
+            $out[$k] = sanitize_textarea_field($v);
+        } elseif ($k === 'head_code') {
             $out[$k] = current_user_can('unfiltered_html') ? $v : wp_kses_post($v);
         } elseif (in_array($k, ['kakao', 'facebook', 'tiktok', 'blog_url', 'sheet_webhook'], true)) {
             $out[$k] = esc_url_raw(trim($v));
@@ -149,12 +155,80 @@ add_action('template_redirect', function () {
     exit;
 }, 1);
 
+function dsl_seo_texts($lang)
+{
+    $o = dsl_opts();
+    $t = [
+        'vi' => [
+            'title' => $o['seo_title'] ?: 'DanangStay – Đặt phòng khách sạn, căn hộ view biển Đà Nẵng',
+            'desc'  => $o['seo_desc'] ?: 'Đặt phòng khách sạn, căn hộ view biển Đà Nẵng: Mỹ Khê, Mân Thái, Sơn Trà. Báo giá trong 15 phút, giá trực tiếp, hỗ trợ 24/7 tiếng Việt, English, 한국어.',
+            'locale' => 'vi_VN',
+        ],
+        'en' => [
+            'title' => 'DanangStay – Da Nang Hotel & Sea-View Apartment Booking',
+            'desc'  => 'Book hotels and sea-view apartments in Da Nang – My Khe, Man Thai, Son Tra. Local team, quote in 15 minutes, 24/7 support in English, Korean and Vietnamese.',
+            'locale' => 'en_US',
+        ],
+        'ko' => [
+            'title' => 'DanangStay – 다낭 호텔·오션뷰 숙소 예약',
+            'desc'  => '다낭 호텔·오션뷰 아파트 예약 – 미케 비치, 만타이, 선짜. 현지 팀이 15분 안에 견적, 한국어 24시간 상담.',
+            'locale' => 'ko_KR',
+        ],
+    ];
+    return $t[$lang];
+}
+
+function dsl_lang_url($lang)
+{
+    return $lang === 'vi' ? dsl_landing_url() : add_query_arg('lang', $lang, dsl_landing_url());
+}
+
 function dsl_render()
 {
     $o = dsl_opts();
+    $lang = isset($_GET['lang']) ? sanitize_key(wp_unslash($_GET['lang'])) : 'vi'; // phpcs:ignore WordPress.Security.NonceVerification
+    if (!in_array($lang, ['vi', 'en', 'ko'], true)) {
+        $lang = 'vi';
+    }
+    $seo = dsl_seo_texts($lang);
     $html = file_get_contents(__DIR__ . '/landing/index.html');
     $base = plugins_url('landing/', __FILE__);
-    $html = str_replace(['src="logo/', 'href="logo/'], ['src="' . $base . 'logo/', 'href="' . $base . 'logo/'], $html);
+    $html = str_replace(['src="logo/', 'href="logo/', 'content="logo/'], ['src="' . $base . 'logo/', 'href="' . $base . 'logo/', 'content="' . $base . 'logo/'], $html);
+
+    // Tiêu đề, mô tả, ngôn ngữ theo từng bản (Google đọc đúng ngay từ máy chủ)
+    $html = str_replace('<html lang="vi">', '<html lang="' . $lang . '">', $html);
+    $html = preg_replace('#<title>.*?</title>#s', '<title>' . esc_html($seo['title']) . '</title>', $html, 1);
+    $html = preg_replace('#<meta name="description" content="[^"]*">#', '<meta name="description" content="' . esc_attr($seo['desc']) . '">', $html, 1);
+    $html = preg_replace('#<meta property="og:title" content="[^"]*">#', '<meta property="og:title" content="' . esc_attr($seo['title']) . '">', $html, 1);
+    $html = preg_replace('#<meta property="og:description" content="[^"]*">#', '<meta property="og:description" content="' . esc_attr($seo['desc']) . '">', $html, 1);
+    $html = str_replace('<meta property="og:locale" content="vi_VN">', '<meta property="og:locale" content="' . $seo['locale'] . '">', $html);
+
+    $head = '<meta property="og:url" content="' . esc_url(dsl_lang_url($lang)) . '">' . "\n"
+        . '<link rel="canonical" href="' . esc_url(dsl_lang_url($lang)) . '">' . "\n";
+    foreach (['vi', 'en', 'ko'] as $l) {
+        $head .= '<link rel="alternate" hreflang="' . $l . '" href="' . esc_url(dsl_lang_url($l)) . '">' . "\n";
+    }
+    $head .= '<link rel="alternate" hreflang="x-default" href="' . esc_url(dsl_lang_url('vi')) . '">' . "\n";
+
+    $org = [
+        '@context' => 'https://schema.org', '@type' => 'TravelAgency', 'name' => 'DanangStay',
+        'url' => dsl_landing_url(), 'logo' => $base . 'logo/emblem.png', 'image' => $base . 'logo/emblem.png',
+        'priceRange' => '₫₫', 'availableLanguage' => ['vi', 'en', 'ko'],
+        'areaServed' => ['@type' => 'City', 'name' => 'Da Nang'],
+        'address' => array_filter(['@type' => 'PostalAddress', 'streetAddress' => $o['address'], 'addressLocality' => 'Đà Nẵng', 'addressCountry' => 'VN']),
+    ];
+    if ($o['phone']) {
+        $org['telephone'] = $o['phone'];
+    }
+    if ($o['email']) {
+        $org['email'] = $o['email'];
+    }
+    $same = array_values(array_filter([$o['facebook'], $o['tiktok']]));
+    if ($same) {
+        $org['sameAs'] = $same;
+    }
+    $head .= '<script type="application/ld+json" id="ds-org">' . wp_json_encode($org, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+    $html = str_replace('<link rel="icon"', $head . '<link rel="icon"', $html);
 
     $cfg = [
         'phone' => $o['phone'], 'zalo' => $o['zalo'], 'whatsapp' => $o['whatsapp'], 'kakao' => $o['kakao'],
@@ -163,19 +237,42 @@ function dsl_render()
         'sheetWebhook' => $o['sheet_webhook'],
     ];
     $html = str_replace('<!--DS_CONFIG-->', '<script>window.DS_CONFIG=' . wp_json_encode($cfg) . ';</script>', $html);
-    $html = str_replace('<meta property="og:type" content="website">', '<meta property="og:type" content="website">' . "\n" .
-        '<meta property="og:url" content="' . esc_url(dsl_landing_url()) . '">' . "\n" .
-        '<meta property="og:image" content="' . esc_url($base . 'logo/emblem.png') . '">' . "\n" .
-        '<link rel="canonical" href="' . esc_url(dsl_landing_url()) . '">', $html);
     if ($o['head_code']) {
         $html = str_replace('</head>', $o['head_code'] . "\n</head>", $html);
     }
 
     status_header(200);
-    nocache_headers();
     header('Content-Type: text/html; charset=utf-8');
     echo $html; // phpcs:ignore WordPress.Security.EscapeOutput -- trang tĩnh của plugin
 }
+
+// Đưa landing page (3 ngôn ngữ) vào sitemap của WordPress: /wp-sitemap.xml
+add_action('init', function () {
+    if (!function_exists('wp_register_sitemap_provider') || !class_exists('WP_Sitemaps_Provider')) {
+        return;
+    }
+    if (!class_exists('DSL_Sitemap')) {
+        class DSL_Sitemap extends WP_Sitemaps_Provider
+        {
+            public function __construct()
+            {
+                $this->name = 'danangstay';
+                $this->object_type = 'danangstay';
+            }
+            public function get_url_list($page_num, $object_subtype = '')
+            {
+                return array_map(function ($l) {
+                    return ['loc' => dsl_lang_url($l)];
+                }, ['vi', 'en', 'ko']);
+            }
+            public function get_max_num_pages($object_subtype = '')
+            {
+                return 1;
+            }
+        }
+    }
+    wp_register_sitemap_provider('danangstay', new DSL_Sitemap());
+});
 
 /* ------------------------------------------------------------------ */
 /* Lưu yêu cầu đặt phòng                                               */
