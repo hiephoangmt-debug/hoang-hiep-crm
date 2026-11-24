@@ -167,7 +167,7 @@
 | 22/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: Luật Kinh doanh BĐS sửa đổi 2026 (+2 tin ở bình luận) | /luat-kinh-doanh-bat-dong-san-sua-doi-2026/ /vi-tri-the-poet-residence/ /tien-do-capital-square-da-nang/ |
 | 22/11/2026 | Sun | 11:35 | (anh Hiệp yêu cầu đăng ngay) Sun Saphia công bố Early Bird 3% – sự kiện Radiance of Heritage, 938 booking (4 ảnh: thẻ nền xanh + 2 ảnh thực tế sự kiện + poster Early Bird) | /du-an/sun-saphia-residence/ |
 | 22/11/2026 | Hoàng Hiệp | 17:00 | TỔNG HỢP: Chính sách Vinhomes Hải Vân Bay từ 19/11/2026 (+2 tin ở bình luận) | /chinh-sach-vinhomes-hai-van-bay-19-11-2026/ /co-nen-mua-the-legend-da-nang-uu-nhuoc-diem/ /gia-biet-thu-casamia-calm-hoi-an-2026/ |
-| CHỜ | Sun | 23/11 | (bài web 21/11 09:00) Mặt bằng FourS Tower | mat-bang-can-ho-fours-tower (chờ) |
+| BỎ QUA (quá 3 ngày) | Sun | 23/11 | (bài web 21/11 09:00) Mặt bằng FourS Tower | mat-bang-can-ho-fours-tower (chờ) |
 | 23/11/2026 | Sun | 09:00 | (bài web mới 22/11 21:00) Giá S-Light Tower bao nhiêu (1 ảnh – thẻ -fb của web) | /gia-s-light-tower-bao-nhieu/ |
 | 23/11/2026 | TikTok (@hiephoangmt, brand Sun) | 09:15 | Giá S-Light Tower – BỘ 3 ẢNH | /gia-s-light-tower-bao-nhieu/ |
 | 23/11/2026 | Casamia (blogId 8074284) | 09:30 | Giá và chính sách Casamia Balanca (CSBH 9/9/2026) – thẻ nền xanh + 3 ảnh (phòng khách, nhà vườn ven sông, toàn cảnh) | /du-an/casamia-balanca-hoi-an/ |
@@ -180,6 +180,16 @@
 | 23/11/2026 | Hoàng Hiệp | 17:00 | TỔNG HỢP: Bàn giao Masteri Rivera Danang 29/11 (+4 tin ở bình luận; thẻ nền xanh tự làm) | /ban-giao-masteri-rivera-danang-29-11-2026/ /gia-vinhomes-hai-van-bay-2026-theo-phan-khu/ /gia-dat-biet-thu-euro-village-2-hoa-xuan/ /phap-ly-capital-square-da-nang-so-hong/ /hop-dong-mua-can-ho-hinh-thanh-trong-tuong-lai/ |
 | CHỜ | Sun | 24/11 | (bài web 22/11 16:30) Sun Saphia Residence đi Sơn Trà | sun-saphia-residence-di-son-tra (chờ) |
 | CHỜ | Sun | 24/11 | (bài web 22/11 18:30) Sun Saphia Residence đi sân bay | sun-saphia-residence-di-san-bay (chờ) |
-| CHỜ | Sun | 24/11 | (bài web 23/11 10:45, chưa lên web lúc hẹn) Hướng căn hộ Sun Saphia Residence | huong-can-ho-sun-saphia-residence (chờ) |
-| CHỜ | Sun | 24/11 | (bài web 23/11 18:15) Kiến trúc Sun Saphia Residence | kien-truc-sun-saphia-residence (chờ) |
-| CHỜ | Sun | 24/11 | (bài web 23/11 20:30) Pháp lý Spana Tower đủ điều kiện bán | phap-ly-spana-tower-du-dieu-kien-ban (chờ) |
+| 24/11/2026 | Sun | 09:00 | (bài web 23/11, hết CHỜ) Pháp lý Spana Tower đủ điều kiện bán (1 ảnh – thẻ -fb của web) | /phap-ly-spana-tower-du-dieu-kien-ban/ |
+| 24/11/2026 | TikTok (@hiephoangmt, brand Sun) | 09:15 | Pháp lý Spana Tower – BỘ 3 ẢNH | /phap-ly-spana-tower-du-dieu-kien-ban/ |
+| 24/11/2026 | Casamia (blogId 8074284) | 09:30 | Tiến độ Casamia Balanca – lịch bàn giao theo CSBH – thẻ nền xanh (flycam công trường) + 3 ảnh | /du-an/casamia-balanca-hoi-an/ |
+| 24/11/2026 | TikTok (@hiephoangmt, brand Sun) | 09:45 | Tiến độ Casamia Balanca – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
+| 24/11/2026 | Sun | 19:00 | (bài web 23/11, hết CHỜ) Hướng căn hộ Sun Saphia (1 ảnh – thẻ -fb của web); bình luận kèm bài kiến trúc Sun Saphia | /huong-can-ho-sun-saphia-residence/ /kien-truc-sun-saphia-residence/ |
+| 24/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:15 | Hướng căn hộ Sun Saphia – BỘ 3 ẢNH | /huong-can-ho-sun-saphia-residence/ |
+| 24/11/2026 | Casamia (blogId 8074284) | 19:30 | So sánh biệt thự Hội An – Casamia hợp với ai – thẻ nền xanh + 3 ảnh | /du-an/casamia-balanca-hoi-an/ |
+| 24/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | So sánh biệt thự Hội An – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
+| CHỜ | Sun | 25/11 | (bài web 24/11 09:00) Cora, Spana khi nào bàn giao | cora-tower-spana-tower-khi-nao-ban-giao (chờ) |
+| CHỜ | Sun | 25/11 | (bài web 24/11 10:45) Ga LRT gần Sun Saphia | ga-lrt-gan-sun-saphia-residence (chờ) |
+| CHỜ | Sun | 25/11 | (bài web 24/11 18:15) Hợp đồng mua bán Sun Saphia | hop-dong-mua-ban-sun-saphia-residence (chờ) |
+| CHỜ | Sun | 25/11 | (bài web 24/11 20:30) Tiến độ thanh toán Symphony 5 | tien-do-thanh-toan-symphony-5 (chờ) |
+| CHỜ | Casamia | 25/11 | (bài web 24/11 12:15) Tiện ích Casamia Balanca 5 công viên – để làm link bình luận | tien-ich-casamia-balanca-5-cong-vien (chờ) |
