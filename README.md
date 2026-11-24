@@ -8,3 +8,4 @@ CRM – Real Estate Sales Management System
 - [`bds-bot/`](bds-bot/HUONG_DAN.md) – Bot tư vấn BĐS 24/7 (Zalo, Facebook Messenger, khung chat LadiPage) + CRM: độ nhiệt khách, vòng đời chăm sóc, hỗ trợ gọi điện, việc cần làm, quản lý đội sale, trang web CRM.
 - [`be-hoc-lop-1/`](be-hoc-lop-1/README.md) – Phần mềm học cho bé lớp 1: tập đọc tiếng Việt (nghe bé đọc, đánh vần khi sai), Toán, Tiếng Anh có giọng đọc chuẩn.
 - [`dau-tu/`](dau-tu/README.md) – Thống kê kênh đầu tư: vàng, chứng khoán, khối ngoại mua/bán ròng, cổ phiếu lớn tăng/giảm, USD, Bitcoin, BĐS – biểu đồ theo ngày, tự cập nhật.
+- [`danangstay/`](danangstay/README.md) – Landing page DanangStay: đặt phòng khách sạn Đà Nẵng (VI/EN/KO), form báo giá về Google Sheet + Telegram, nút Zalo/WhatsApp/KakaoTalk.

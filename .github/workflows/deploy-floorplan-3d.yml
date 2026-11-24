@@ -9,6 +9,7 @@ on:
       - 'floorplan-3d/**'
       - 'dau-tu/**'
       - 'be-hoc-lop-1/**'
+      - 'danangstay/**'
       - '.github/workflows/deploy-floorplan-3d.yml'
   workflow_dispatch:
 
@@ -42,6 +43,9 @@ jobs:
       # App học cho bé lớp 1 (tĩnh) nằm ở /be-hoc-lop-1/
       - name: Thêm app Bé Vui Học
         run: mkdir -p dist/be-hoc-lop-1 && cp ../be-hoc-lop-1/index.html dist/be-hoc-lop-1/
+      # Landing page DanangStay (tĩnh) nằm ở /danangstay/
+      - name: Thêm landing page DanangStay
+        run: mkdir -p dist/danangstay && cp ../danangstay/index.html dist/danangstay/
       # Âm thanh chuẩn từng tiếng (tạo bởi workflow bvh-audio.yml, lưu trong bộ nhớ đệm)
       - uses: actions/cache/restore@v4
         with:

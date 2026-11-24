@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DanangStay – Đặt phòng khách sạn Đà Nẵng</title>
+<meta name="description" content="DanangStay – đặt phòng khách sạn, căn hộ view biển Đà Nẵng: Mỹ Khê, Mân Thái, Sơn Trà. Báo giá nhanh, hỗ trợ 24/7 bằng tiếng Việt, English, 한국어.">
+<meta property="og:title" content="DanangStay – Đặt phòng khách sạn Đà Nẵng">
+<meta property="og:description" content="Báo giá nhanh, hỗ trợ 24/7. Vietnamese · English · 한국어">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sea:#0b6e8a; --sea-d:#074c61; --sky:#e8f6fa; --sand:#f7efe2; --sun:#f29f3d;
+  --ink:#13232b; --muted:#5b6b73; --line:#d9e6ea; --card:#fff; --bg:#fbfdfe;
+  --radius:16px; --shadow:0 10px 30px rgba(7,76,97,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Be Vietnam Pro",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+/* Header */
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:20px;text-decoration:none;color:var(--sea-d)}
+.logo span{color:var(--sun)}
+.nav-links{display:flex;gap:20px;font-size:15px}
+.nav-links a{text-decoration:none;color:var(--muted)}
+.nav-links a:hover{color:var(--sea)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{border:0;background:none;padding:6px 10px;font:600 13px inherit;font-family:inherit;cursor:pointer;color:var(--muted)}
+.lang button.on{background:var(--sea);color:#fff}
+/* Hero */
+.hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(180deg,#0a5d75 0%,#0b6e8a 45%,#2a9bb5 100%)}
+.hero svg.waves{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:120px}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;padding-top:56px;padding-bottom:120px;align-items:start}
+.badge{display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:6px 12px;border-radius:999px;font-size:13px}
+.hero h1{font-size:clamp(30px,4.6vw,50px);line-height:1.15;margin:16px 0 14px;font-weight:800}
+.hero h1 em{font-style:normal;color:#ffd08a}
+.hero p.lead{font-size:18px;opacity:.92;margin:0 0 22px;max-width:560px}
+.ticks{list-style:none;padding:0;margin:0 0 26px;display:grid;gap:8px}
+.ticks li{display:flex;gap:10px;align-items:flex-start}
+.ticks li::before{content:"✓";flex:none;width:22px;height:22px;border-radius:50%;background:#ffd08a;color:var(--sea-d);font-weight:800;display:grid;place-items:center;font-size:13px;margin-top:2px}
+.quick{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:12px 18px;font:700 15px/1 inherit;font-family:inherit;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-sun{background:var(--sun);color:#fff;box-shadow:0 8px 20px rgba(242,159,61,.35)}
+.btn-ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.4)}
+.btn-zalo{background:#0068ff;color:#fff}
+.btn-wa{background:#25d366;color:#fff}
+.btn-kakao{background:#fee500;color:#191919}
+/* Form card */
+.card{background:var(--card);color:var(--ink);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+.form-card h2{margin:0 0 4px;font-size:21px}
+.form-card .sub{margin:0 0 16px;color:var(--muted);font-size:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px}
+input,select,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:15px inherit;font-family:inherit;color:var(--ink);background:#fff}
+input:focus,select:focus,textarea:focus{outline:2px solid #9fd6e4;border-color:var(--sea)}
+textarea{resize:vertical;min-height:70px}
+.field{margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{margin:0;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-weight:500;color:var(--ink);cursor:pointer;font-size:14px}
+.chips input{width:auto;margin:0}
+.chips label:has(input:checked){border-color:var(--sea);background:var(--sky);color:var(--sea-d)}
+.form-card .btn{width:100%;margin-top:4px;padding:14px}
+.note{font-size:12px;color:var(--muted);margin:10px 0 0;text-align:center}
+.hp{position:absolute;left:-9999px}
+.ok{display:none;text-align:center;padding:24px 8px}
+.ok .big{font-size:44px}
+.ok h3{margin:8px 0}
+.ok .quick{justify-content:center;margin-top:14px}
+/* Sections */
+section{padding:64px 0}
+.sec-title{text-align:center;max-width:680px;margin:0 auto 36px}
+.sec-title h2{font-size:clamp(24px,3.2vw,34px);margin:0 0 8px}
+.sec-title p{color:var(--muted);margin:0}
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.feat .card{box-shadow:none;border:1px solid var(--line)}
+.ico{width:46px;height:46px;border-radius:12px;background:var(--sky);display:grid;place-items:center;font-size:22px;margin-bottom:12px}
+.feat h3{margin:0 0 6px;font-size:17px}
+.feat p{margin:0;color:var(--muted);font-size:14.5px}
+.areas{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.area{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff;display:flex;flex-direction:column}
+.area .pic{height:130px;display:grid;place-items:center;font-size:42px}
+.area .body{padding:16px;flex:1;display:flex;flex-direction:column}
+.area h3{margin:0 0 6px;font-size:17px}
+.area p{margin:0 0 12px;color:var(--muted);font-size:14px;flex:1}
+.area a{font-weight:700;color:var(--sea);text-decoration:none;font-size:14px}
+.p1{background:linear-gradient(135deg,#bfe7f2,#7cc6db)}
+.p2{background:linear-gradient(135deg,#ffe2b8,#f5b971)}
+.p3{background:linear-gradient(135deg,#cdebd3,#86c99a)}
+.p4{background:linear-gradient(135deg,#f6d3cf,#e59c90)}
+.bg-sand{background:var(--sand)}
+.rooms{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.room{background:#fff;border-radius:var(--radius);padding:20px;border:1px solid #ecdcc4}
+.room h3{margin:0 0 4px;font-size:18px}
+.room .tag{display:inline-block;font-size:12px;font-weight:700;color:var(--sea-d);background:var(--sky);padding:3px 9px;border-radius:999px;margin-bottom:10px}
+.room ul{margin:0 0 14px;padding-left:18px;color:var(--muted);font-size:14.5px}
+.room .btn{width:100%;background:var(--sea);color:#fff}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+.step{position:relative;padding:22px 20px 20px 20px;border-radius:var(--radius);background:#fff;border:1px solid var(--line)}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--sea);color:#fff;font-weight:800;margin-bottom:10px}
+.step h3{margin:0 0 6px;font-size:17px}
+.step p{margin:0;color:var(--muted);font-size:14.5px}
+.partner{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;background:linear-gradient(135deg,var(--sea-d),var(--sea));color:#fff;border-radius:22px;padding:36px}
+.partner h2{margin:0 0 10px;font-size:clamp(22px,3vw,30px)}
+.partner p{margin:0 0 6px;opacity:.9}
+.partner ul{margin:10px 0 0;padding-left:18px;opacity:.95}
+.partner .quick{justify-content:flex-end}
+.faq{max-width:780px;margin:0 auto}
+details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--sea);font-weight:800}
+details[open] summary::after{content:"–"}
+details p{margin:10px 0 0;color:var(--muted)}
+footer{background:#0b2a35;color:#cfe3ea;padding:40px 0 90px}
+.foot{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:24px}
+footer h4{color:#fff;margin:0 0 10px}
+footer a{text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:14.5px}
+.copy{border-top:1px solid rgba(255,255,255,.12);margin-top:28px;padding-top:16px;font-size:13px;opacity:.75}
+/* Floating */
+.float{position:fixed;right:16px;bottom:16px;z-index:30;display:flex;flex-direction:column;gap:10px}
+.float a{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.f-call{background:var(--sun);font-size:22px!important}
+.f-zalo{background:#0068ff}
+.f-wa{background:#25d366;font-size:22px!important}
+.f-kakao{background:#fee500;color:#191919!important}
+.mbar{display:none}
+@media (max-width:920px){
+  .hero-grid{grid-template-columns:1fr;padding-top:36px;padding-bottom:110px}
+  .feat,.areas{grid-template-columns:1fr 1fr}
+  .rooms,.steps{grid-template-columns:1fr}
+  .partner{grid-template-columns:1fr;padding:26px}
+  .partner .quick{justify-content:flex-start}
+  .foot{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+@media (max-width:560px){
+  .feat,.areas{grid-template-columns:1fr}
+  .grid2{grid-template-columns:1fr}
+  section{padding:48px 0}
+  .float{display:none}
+  .mbar{display:grid;grid-template-columns:1fr 1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:1px solid var(--line)}
+  .mbar a{padding:12px 4px;text-align:center;font-weight:700;font-size:13px;text-decoration:none}
+  .mbar a:nth-child(1){color:var(--sun)}
+  .mbar a:nth-child(2){color:#0068ff}
+  .mbar a:nth-child(3){background:var(--sea);color:#fff}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="DanangStay">🌊 <b>Danang<span>Stay</span></b></a>
+    <nav class="nav-links">
+      <a href="#areas" data-i18n="nav_areas">Khu vực</a>
+      <a href="#rooms" data-i18n="nav_rooms">Loại phòng</a>
+      <a href="#how" data-i18n="nav_how">Cách đặt</a>
+      <a href="#partner" data-i18n="nav_partner">Chủ khách sạn</a>
+      <a href="#faq" data-i18n="nav_faq">Hỏi đáp</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button data-lang="vi" class="on">VI</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="ko">KO</button>
+    </div>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="badge" data-i18n="badge">📍 Đà Nẵng · Mỹ Khê · Mân Thái · Sơn Trà</span>
+      <h1 data-i18n-html="h1">Phòng view biển Đà Nẵng,<br><em>báo giá trong 15 phút</em></h1>
+      <p class="lead" data-i18n="lead">Đội ngũ địa phương tìm phòng đúng nhu cầu và ngân sách, giữ phòng nhanh, hỗ trợ suốt chuyến đi.</p>
+      <ul class="ticks">
+        <li data-i18n="t1">Giá tốt khi đặt trực tiếp, không phí ẩn</li>
+        <li data-i18n="t2">Khách sạn, căn hộ gần biển, phù hợp gia đình và nhóm đông</li>
+        <li data-i18n="t3">Hỗ trợ 24/7 bằng tiếng Việt, English, 한국어</li>
+        <li data-i18n="t4">Hỗ trợ đặt xe sân bay, tour Bà Nà, Hội An, Sơn Trà</li>
+      </ul>
+      <div class="quick">
+        <a class="btn btn-zalo js-zalo" href="#" target="_blank" rel="noopener">Zalo</a>
+        <a class="btn btn-wa js-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn btn-kakao js-kakao" href="#" target="_blank" rel="noopener">KakaoTalk</a>
+        <a class="btn btn-ghost js-call" href="#">📞 <span class="js-phone-text"></span></a>
+      </div>
+    </div>
+
+    <div class="card form-card" id="book">
+      <form id="leadForm" novalidate>
+        <h2 data-i18n="f_title">Nhận báo giá phòng</h2>
+        <p class="sub" data-i18n="f_sub">Điền 30 giây – chúng tôi gửi phòng phù hợp qua Zalo/WhatsApp/Kakao.</p>
+        <div class="grid2">
+          <div class="field"><label for="checkin" data-i18n="f_in">Ngày nhận phòng</label><input type="date" id="checkin" name="checkin" required></div>
+          <div class="field"><label for="checkout" data-i18n="f_out">Ngày trả phòng</label><input type="date" id="checkout" name="checkout" required></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label for="guests" data-i18n="f_guests">Số khách</label>
+            <select id="guests" name="guests">
+              <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5–8</option><option>9–20</option><option>20+</option>
+            </select></div>
+          <div class="field"><label for="rooms_n" data-i18n="f_rooms">Số phòng</label>
+            <select id="rooms_n" name="rooms">
+              <option selected>1</option><option>2</option><option>3</option><option>4–10</option><option>10+</option>
+            </select></div>
+        </div>
+        <div class="field"><label for="budget" data-i18n="f_budget">Ngân sách / đêm</label>
+          <select id="budget" name="budget">
+            <option value="<800k" data-i18n="b1">Dưới 800.000đ</option>
+            <option value="800k-1.5tr" data-i18n="b2" selected>800.000đ – 1.500.000đ</option>
+            <option value="1.5-3tr" data-i18n="b3">1.500.000đ – 3.000.000đ</option>
+            <option value=">3tr" data-i18n="b4">Trên 3.000.000đ</option>
+          </select></div>
+        <div class="field"><label for="name" data-i18n="f_name">Họ tên</label><input id="name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="phone" data-i18n="f_phone">Số điện thoại / Zalo / WhatsApp</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+        <div class="field"><label data-i18n="f_via">Liên hệ lại qua</label>
+          <div class="chips">
+            <label><input type="radio" name="via" value="Zalo" checked> Zalo</label>
+            <label><input type="radio" name="via" value="WhatsApp"> WhatsApp</label>
+            <label><input type="radio" name="via" value="KakaoTalk"> KakaoTalk</label>
+            <label><input type="radio" name="via" value="Phone"> <span data-i18n="v_call">Gọi điện</span></label>
+          </div></div>
+        <div class="field"><label for="msg" data-i18n="f_msg">Yêu cầu thêm (không bắt buộc)</label><textarea id="msg" name="msg" data-i18n-ph="f_msg_ph" placeholder="VD: view biển, gần Mân Thái, có bếp, cần xe sân bay…"></textarea></div>
+        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-sun" type="submit" data-i18n="f_btn">Gửi yêu cầu báo giá</button>
+        <p class="note" data-i18n="f_note">🔒 Thông tin chỉ dùng để tư vấn đặt phòng.</p>
+      </form>
+      <div class="ok" id="okBox">
+        <div class="big">✅</div>
+        <h3 data-i18n="ok_t">Đã nhận yêu cầu!</h3>
+        <p data-i18n="ok_p">Chúng tôi sẽ liên hệ trong 15 phút (8:00–23:00). Muốn nhanh hơn, nhắn ngay:</p>
+        <div class="quick">
+          <a class="btn btn-zalo js-zalo" href="#" target="_blank" rel="noopener">Zalo</a>
+          <a class="btn btn-wa js-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-kakao js-kakao" href="#" target="_blank" rel="noopener">KakaoTalk</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg class="waves" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="#fbfdfe" fill-opacity=".45" d="M0,64 C240,112 480,16 720,48 C960,80 1200,112 1440,56 L1440,120 L0,120Z"/>
+    <path fill="#fbfdfe" d="M0,88 C320,40 560,120 820,92 C1080,64 1260,84 1440,96 L1440,120 L0,120Z"/>
+  </svg>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sec-title"><h2 data-i18n="why_t">Vì sao chọn DanangStay?</h2><p data-i18n="why_p">Người Đà Nẵng tư vấn cho khách đến Đà Nẵng.</p></div>
+    <div class="feat">
+      <div class="card"><div class="ico">💬</div><h3 data-i18n="w1t">Trả lời nhanh</h3><p data-i18n="w1p">Báo giá trong 15 phút qua kênh bạn quen dùng.</p></div>
+      <div class="card"><div class="ico">💰</div><h3 data-i18n="w2t">Giá trực tiếp</h3><p data-i18n="w2p">Làm việc thẳng với khách sạn, ưu đãi khi đặt dài ngày hoặc nhiều phòng.</p></div>
+      <div class="card"><div class="ico">🏖️</div><h3 data-i18n="w3t">Hiểu từng khu</h3><p data-i18n="w3p">Gợi ý đúng khu theo nhu cầu: tắm biển, ăn hải sản, đi Hội An hay Bà Nà.</p></div>
+      <div class="card"><div class="ico">🌏</div><h3 data-i18n="w4t">Đa ngôn ngữ</h3><p data-i18n="w4p">Hỗ trợ tiếng Việt, English, 한국어 – trước, trong và sau chuyến đi.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="areas" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-title"><h2 data-i18n="ar_t">Khu vực lưu trú nổi bật</h2><p data-i18n="ar_p">Chọn khu phù hợp lịch trình của bạn.</p></div>
+    <div class="areas">
+      <div class="area"><div class="pic p1">🌊</div><div class="body"><h3 data-i18n="a1t">Mân Thái – Sơn Trà</h3><p data-i18n="a1p">Biển yên, làng chài và hải sản tươi, gần bán đảo Sơn Trà, chùa Linh Ứng.</p><a href="#book" class="js-area" data-area="Mân Thái – Sơn Trà" data-i18n="pick">Tìm phòng khu này →</a></div></div>
+      <div class="area"><div class="pic p2">🏝️</div><div class="body"><h3 data-i18n="a2t">Biển Mỹ Khê</h3><p data-i18n="a2p">Bãi biển đẹp, nhiều nhà hàng, quán cà phê, sôi động cả ngày lẫn đêm.</p><a href="#book" class="js-area" data-area="Mỹ Khê" data-i18n="pick">Tìm phòng khu này →</a></div></div>
+      <div class="area"><div class="pic p3">🍜</div><div class="body"><h3 data-i18n="a3t">An Thượng</h3><p data-i18n="a3p">Phố Tây gần biển, nhiều quán ăn quốc tế, hợp khách trẻ và ở dài ngày.</p><a href="#book" class="js-area" data-area="An Thượng" data-i18n="pick">Tìm phòng khu này →</a></div></div>
+      <div class="area"><div class="pic p4">🌉</div><div class="body"><h3 data-i18n="a4t">Trung tâm – sông Hàn</h3><p data-i18n="a4p">Gần cầu Rồng, chợ Hàn, sân bay chỉ ~10 phút – tiện công tác.</p><a href="#book" class="js-area" data-area="Trung tâm" data-i18n="pick">Tìm phòng khu này →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="rooms" class="bg-sand">
+  <div class="wrap">
+    <div class="sec-title"><h2 data-i18n="rm_t">Bạn đang tìm loại phòng nào?</h2><p data-i18n="rm_p">Chọn một loại, chúng tôi gửi các lựa chọn còn trống kèm giá.</p></div>
+    <div class="rooms">
+      <div class="room"><span class="tag" data-i18n="r1g">Cặp đôi · Công tác</span><h3 data-i18n="r1t">Phòng tiêu chuẩn / Deluxe</h3><ul><li data-i18n="r1a">1 giường đôi hoặc 2 giường đơn</li><li data-i18n="r1b">Gần biển, có ăn sáng tùy chọn</li><li data-i18n="r1c">Phù hợp 2 khách</li></ul><a href="#book" class="btn js-room" data-room="Deluxe" data-i18n="ask">Hỏi giá</a></div>
+      <div class="room"><span class="tag" data-i18n="r2g">Nghỉ dưỡng</span><h3 data-i18n="r2t">Phòng view biển tầng cao</h3><ul><li data-i18n="r2a">Ban công / cửa kính nhìn thẳng ra biển</li><li data-i18n="r2b">Khách sạn có hồ bơi, nhà hàng</li><li data-i18n="r2c">Phù hợp 2–3 khách</li></ul><a href="#book" class="btn js-room" data-room="View biển" data-i18n="ask">Hỏi giá</a></div>
+      <div class="room"><span class="tag" data-i18n="r3g">Gia đình · Nhóm · Ở dài ngày</span><h3 data-i18n="r3t">Căn hộ 1–3 phòng ngủ</h3><ul><li data-i18n="r3a">Có bếp, máy giặt, phòng khách</li><li data-i18n="r3b">Giá tốt khi ở từ 7 đêm</li><li data-i18n="r3c">Phù hợp 4–8 khách</li></ul><a href="#book" class="btn js-room" data-room="Căn hộ" data-i18n="ask">Hỏi giá</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-title"><h2 data-i18n="hw_t">Đặt phòng chỉ 3 bước</h2></div>
+    <div class="steps">
+      <div class="step"><h3 data-i18n="s1t">Gửi yêu cầu</h3><p data-i18n="s1p">Điền form hoặc nhắn Zalo/WhatsApp/Kakao: ngày, số khách, ngân sách.</p></div>
+      <div class="step"><h3 data-i18n="s2t">Nhận lựa chọn</h3><p data-i18n="s2p">Trong 15 phút, nhận 2–3 phòng phù hợp kèm ảnh thật và giá cuối.</p></div>
+      <div class="step"><h3 data-i18n="s3t">Xác nhận & giữ phòng</h3><p data-i18n="s3p">Chuyển cọc qua ngân hàng/thẻ, nhận xác nhận đặt phòng từ khách sạn.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="partner" style="padding-top:0">
+  <div class="wrap">
+    <div class="partner">
+      <div>
+        <h2 data-i18n="pt_t">Bạn là chủ khách sạn, căn hộ tại Đà Nẵng?</h2>
+        <p data-i18n="pt_p">DanangStay nhận vận hành và kết nối bán phòng:</p>
+        <ul>
+          <li data-i18n="pt1">Đưa phòng lên Agoda, Booking, Traveloka, Trip.com và kênh khách Hàn</li>
+          <li data-i18n="pt2">Quản lý giá, lịch phòng, đánh giá và chat với khách</li>
+          <li data-i18n="pt3">Bán trực tiếp qua website, Zalo, đại lý – giảm phí hoa hồng</li>
+        </ul>
+      </div>
+      <div class="quick">
+        <a href="#book" class="btn btn-sun js-partner" data-i18n="pt_btn">Đăng ký hợp tác</a>
+        <a class="btn btn-ghost js-zalo" href="#" target="_blank" rel="noopener">Zalo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="bg-sand">
+  <div class="wrap">
+    <div class="sec-title"><h2 data-i18n="fq_t">Câu hỏi thường gặp</h2></div>
+    <div class="faq">
+      <details><summary data-i18n="q1">Đặt qua DanangStay có đắt hơn đặt trên app không?</summary><p data-i18n="a1">Thường bằng hoặc tốt hơn, vì chúng tôi làm việc trực tiếp với khách sạn. Nếu bạn thấy giá rẻ hơn ở nơi khác, gửi cho chúng tôi để kiểm tra.</p></details>
+      <details><summary data-i18n="q2">Cần đặt cọc bao nhiêu?</summary><p data-i18n="a2">Tùy khách sạn và mùa, thường 30–50% hoặc đêm đầu tiên. Điều kiện hủy được ghi rõ trước khi bạn chuyển cọc.</p></details>
+      <details><summary data-i18n="q3">Thanh toán bằng cách nào?</summary><p data-i18n="a3">Chuyển khoản ngân hàng Việt Nam, thẻ quốc tế hoặc thanh toán tại khách sạn tùy nơi.</p></details>
+      <details><summary data-i18n="q4">Có hỗ trợ xe sân bay và tour không?</summary><p data-i18n="a4">Có. Chúng tôi đặt giúp xe đón sân bay, tour Bà Nà, Hội An, Sơn Trà, Cù Lao Chàm theo yêu cầu.</p></details>
+      <details><summary data-i18n="q5">Đặt cho đoàn đông người được không?</summary><p data-i18n="a5">Được. Đoàn từ 10 phòng, team building, hội nghị – gửi yêu cầu để nhận giá đoàn.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="logo" style="color:#fff">🌊 <b>Danang<span>Stay</span></b></div>
+        <p data-i18n="ft_p">Đặt phòng khách sạn, căn hộ view biển Đà Nẵng. Hỗ trợ 24/7.</p>
+      </div>
+      <div>
+        <h4 data-i18n="ft_c">Liên hệ</h4>
+        <ul>
+          <li>📞 <a class="js-call" href="#"><span class="js-phone-text"></span></a></li>
+          <li>✉️ <a class="js-mail" href="#"><span class="js-mail-text"></span></a></li>
+          <li>📍 <span data-i18n="ft_addr">Đà Nẵng, Việt Nam</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="ft_f">Theo dõi</h4>
+        <ul>
+          <li><a class="js-fb" href="#" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a class="js-zalo" href="#" target="_blank" rel="noopener">Zalo</a></li>
+          <li><a class="js-tiktok" href="#" target="_blank" rel="noopener">TikTok</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© <span id="yr"></span> DanangStay</div>
+  </div>
+</footer>
+
+<div class="float">
+  <a class="f-call js-call" href="#" aria-label="Call">📞</a>
+  <a class="f-zalo js-zalo" href="#" target="_blank" rel="noopener" aria-label="Zalo">Zalo</a>
+  <a class="f-wa js-wa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">✆</a>
+  <a class="f-kakao js-kakao" href="#" target="_blank" rel="noopener" aria-label="KakaoTalk">TALK</a>
+</div>
+<div class="mbar">
+  <a class="js-call" href="#" data-i18n="m_call">📞 Gọi</a>
+  <a class="js-zalo" href="#" target="_blank" rel="noopener">Zalo</a>
+  <a href="#book" data-i18n="m_book">Báo giá</a>
+</div>
+
+<script>
+/* ===================== CẤU HÌNH – SỬA CÁC DÒNG NÀY ===================== */
+const CONFIG = {
+  phone:     "0900000000",        // Hotline (hiển thị + nút gọi)
+  zalo:      "0900000000",        // Số Zalo hoặc link Zalo OA, ví dụ "https://zalo.me/1234567890"
+  whatsapp:  "84900000000",       // Số WhatsApp dạng quốc tế, không có dấu +
+  kakao:     "",                  // Link KakaoTalk Open Chat / Channel, ví dụ "https://open.kakao.com/o/xxxx"
+  email:     "booking@danangstay.vn",
+  facebook:  "",                  // Link Fanpage
+  tiktok:    "",                  // Link TikTok
+  // Link Web App Google Apps Script (xem danangstay/google_sheet.gs). Để trống thì form chỉ mở Zalo/WhatsApp.
+  sheetWebhook: ""
+};
+/* ====================================================================== */
+
+const I18N = {
+  en:{nav_areas:"Areas",nav_rooms:"Rooms",nav_how:"How to book",nav_partner:"Hotel owners",nav_faq:"FAQ",
+    badge:"📍 Da Nang · My Khe · Man Thai · Son Tra",
+    h1:"Sea-view stays in Da Nang,<br><em>quote in 15 minutes</em>",
+    lead:"Our local team finds the right room for your needs and budget, secures it fast and supports you throughout your trip.",
+    t1:"Best direct rates, no hidden fees",t2:"Hotels and apartments near the beach, great for families and groups",t3:"24/7 support in Vietnamese, English, 한국어",t4:"Airport transfers, Ba Na Hills, Hoi An and Son Tra tours",
+    f_title:"Get a room quote",f_sub:"Takes 30 seconds – we'll send matching rooms via Zalo/WhatsApp/Kakao.",
+    f_in:"Check-in",f_out:"Check-out",f_guests:"Guests",f_rooms:"Rooms",f_budget:"Budget / night",
+    b1:"Under 800,000 VND (~$32)",b2:"800,000 – 1,500,000 VND (~$32–60)",b3:"1.5 – 3 million VND (~$60–120)",b4:"Over 3 million VND (~$120+)",
+    f_name:"Full name",f_phone:"Phone / WhatsApp / Kakao ID",f_via:"Contact me via",v_call:"Phone call",
+    f_msg:"Special requests (optional)",f_msg_ph:"e.g. sea view, near Man Thai, kitchen, airport pickup…",
+    f_btn:"Request a quote",f_note:"🔒 Your details are used only for your booking.",
+    ok_t:"Request received!",ok_p:"We'll contact you within 15 minutes (8:00–23:00). For a faster reply, message us now:",
+    why_t:"Why DanangStay?",why_p:"Locals helping visitors find the right stay.",
+    w1t:"Fast replies",w1p:"Quote within 15 minutes on the app you already use.",w2t:"Direct rates",w2p:"We work directly with hotels – deals for long stays and multiple rooms.",
+    w3t:"Local know-how",w3p:"The right neighbourhood for beaches, seafood, Hoi An or Ba Na trips.",w4t:"Multilingual",w4p:"Vietnamese, English, 한국어 – before, during and after your trip.",
+    ar_t:"Popular areas to stay",ar_p:"Pick the area that fits your plans.",
+    a1t:"Man Thai – Son Tra",a1p:"Calm beach, fishing village and fresh seafood, close to Son Tra Peninsula and Linh Ung Pagoda.",
+    a2t:"My Khe Beach",a2p:"Beautiful beach with plenty of restaurants and cafés, lively day and night.",
+    a3t:"An Thuong",a3p:"Walkable expat area near the beach with international food – great for long stays.",
+    a4t:"City centre – Han River",a4p:"Near Dragon Bridge and Han Market, ~10 min to the airport – ideal for business.",
+    pick:"Find rooms here →",
+    rm_t:"What kind of room are you looking for?",rm_p:"Pick one and we'll send available options with prices.",
+    r1g:"Couples · Business",r1t:"Standard / Deluxe room",r1a:"1 double or 2 single beds",r1b:"Near the beach, breakfast optional",r1c:"Fits 2 guests",
+    r2g:"Holiday",r2t:"High-floor sea-view room",r2a:"Balcony or glass wall facing the sea",r2b:"Hotels with pool and restaurant",r2c:"Fits 2–3 guests",
+    r3g:"Families · Groups · Long stay",r3t:"1–3 bedroom apartment",r3a:"Kitchen, washing machine, living room",r3b:"Better rates from 7 nights",r3c:"Fits 4–8 guests",
+    ask:"Ask for price",hw_t:"Book in 3 steps",
+    s1t:"Send a request",s1p:"Fill in the form or message us on Zalo/WhatsApp/Kakao: dates, guests, budget.",
+    s2t:"Get options",s2p:"Within 15 minutes, get 2–3 matching rooms with real photos and final prices.",
+    s3t:"Confirm & reserve",s3p:"Pay the deposit by bank transfer or card and receive the hotel's confirmation.",
+    pt_t:"Own a hotel or apartment in Da Nang?",pt_p:"DanangStay offers operations and distribution:",
+    pt1:"List rooms on Agoda, Booking, Traveloka, Trip.com and Korean channels",pt2:"Manage rates, availability, reviews and guest messaging",pt3:"Direct sales via website, Zalo and travel agents – lower commissions",pt_btn:"Partner with us",
+    fq_t:"Frequently asked questions",
+    q1:"Is booking with DanangStay more expensive than apps?",a1:"Usually the same or better, as we work directly with hotels. Found a lower price elsewhere? Send it to us and we'll check.",
+    q2:"How much deposit is required?",a2:"It depends on the hotel and season, typically 30–50% or the first night. Cancellation terms are stated clearly before you pay.",
+    q3:"How can I pay?",a3:"Vietnamese bank transfer, international card or pay at the hotel, depending on the property.",
+    q4:"Can you arrange airport transfers and tours?",a4:"Yes – airport pickup and tours to Ba Na Hills, Hoi An, Son Tra and Cham Islands on request.",
+    q5:"Can you handle large groups?",a5:"Yes. Groups of 10+ rooms, team building or conferences – send a request for group rates.",
+    ft_p:"Hotels and sea-view apartments in Da Nang. 24/7 support.",ft_c:"Contact",ft_addr:"Da Nang, Vietnam",ft_f:"Follow us",
+    m_call:"📞 Call",m_book:"Get quote",
+    title:"DanangStay – Da Nang hotel booking",
+    msg_intro:"Hello DanangStay, I'd like a room quote:",l_in:"Check-in",l_out:"Check-out",l_g:"Guests",l_r:"Rooms",l_b:"Budget",l_n:"Name",l_p:"Phone",l_m:"Note",
+    err:"Please fill in dates, name and phone.",err_date:"Check-out must be after check-in.",partner_msg:"I'm a hotel/apartment owner and want to partner with DanangStay."},
+  ko:{nav_areas:"지역",nav_rooms:"객실",nav_how:"예약 방법",nav_partner:"호텔 파트너",nav_faq:"FAQ",
+    badge:"📍 다낭 · 미케 · 만타이 · 선짜",
+    h1:"다낭 오션뷰 숙소,<br><em>15분 안에 견적</em>",
+    lead:"현지 팀이 일정과 예산에 맞는 객실을 찾아 빠르게 예약하고, 여행 내내 도와드립니다.",
+    t1:"직접 예약 특가, 숨은 수수료 없음",t2:"해변 근처 호텔·아파트, 가족·단체 여행에 적합",t3:"베트남어 · English · 한국어 24시간 상담",t4:"공항 픽업, 바나힐, 호이안, 선짜 투어 예약",
+    f_title:"객실 견적 받기",f_sub:"30초면 충분해요 – 카카오톡/WhatsApp/Zalo로 맞춤 객실을 보내드립니다.",
+    f_in:"체크인",f_out:"체크아웃",f_guests:"인원",f_rooms:"객실 수",f_budget:"1박 예산",
+    b1:"80만 동 미만 (~4.5만 원)",b2:"80만–150만 동 (~4.5–8.5만 원)",b3:"150만–300만 동 (~8.5–17만 원)",b4:"300만 동 이상 (~17만 원+)",
+    f_name:"이름",f_phone:"전화번호 / 카카오톡 ID / WhatsApp",f_via:"연락 방법",v_call:"전화",
+    f_msg:"요청 사항 (선택)",f_msg_ph:"예: 오션뷰, 만타이 근처, 주방, 공항 픽업…",
+    f_btn:"견적 요청하기",f_note:"🔒 입력하신 정보는 예약 상담에만 사용됩니다.",
+    ok_t:"요청이 접수되었습니다!",ok_p:"15분 안에 연락드립니다 (8:00–23:00). 더 빠른 상담은 지금 메시지 주세요:",
+    why_t:"왜 DanangStay인가요?",why_p:"다낭 현지인이 직접 숙소를 찾아드립니다.",
+    w1t:"빠른 답변",w1p:"평소 쓰는 메신저로 15분 안에 견적.",w2t:"직거래 요금",w2p:"호텔과 직접 계약 – 장기 숙박·다객실 할인.",
+    w3t:"지역 전문가",w3p:"해수욕, 해산물, 호이안·바나힐 일정에 맞는 지역 추천.",w4t:"다국어 지원",w4p:"베트남어, English, 한국어 – 여행 전·중·후 모두.",
+    ar_t:"인기 숙박 지역",ar_p:"일정에 맞는 지역을 선택하세요.",
+    a1t:"만타이 – 선짜",a1p:"한적한 해변과 어촌, 신선한 해산물. 선짜 반도·린응사 인근.",
+    a2t:"미케 비치",a2p:"아름다운 해변, 레스토랑과 카페가 많아 밤낮으로 활기찬 곳.",
+    a3t:"안트엉",a3p:"해변 근처 여행자 거리, 다양한 세계 음식 – 장기 숙박에 좋아요.",
+    a4t:"시내 – 한강",a4p:"용다리·한시장 인근, 공항까지 약 10분 – 출장에 편리.",
+    pick:"이 지역 객실 찾기 →",
+    rm_t:"어떤 객실을 찾으세요?",rm_p:"하나를 선택하시면 예약 가능한 객실과 요금을 보내드립니다.",
+    r1g:"커플 · 출장",r1t:"스탠다드 / 디럭스",r1a:"더블 1개 또는 싱글 2개",r1b:"해변 근처, 조식 선택 가능",r1c:"2인 기준",
+    r2g:"휴양",r2t:"고층 오션뷰 객실",r2a:"바다가 보이는 발코니 / 통창",r2b:"수영장·레스토랑 있는 호텔",r2c:"2–3인",
+    r3g:"가족 · 단체 · 장기 숙박",r3t:"1–3 베드룸 아파트",r3a:"주방, 세탁기, 거실",r3b:"7박 이상 특가",r3c:"4–8인",
+    ask:"요금 문의",hw_t:"3단계로 간편 예약",
+    s1t:"요청 보내기",s1p:"양식 작성 또는 카카오톡/WhatsApp/Zalo 메시지: 날짜, 인원, 예산.",
+    s2t:"객실 추천 받기",s2p:"15분 안에 실제 사진과 최종 요금이 포함된 2–3개 객실 추천.",
+    s3t:"확정 & 예약",s3p:"계좌이체 또는 카드로 예약금 결제 후 호텔 확정서 수령.",
+    pt_t:"다낭에서 호텔·아파트를 운영하시나요?",pt_p:"DanangStay가 운영과 판매 채널을 맡아 드립니다:",
+    pt1:"Agoda, Booking, Traveloka, Trip.com 및 한국 채널 등록",pt2:"요금·재고·리뷰·고객 메시지 관리",pt3:"웹사이트, Zalo, 여행사 직판 – 수수료 절감",pt_btn:"파트너 신청",
+    fq_t:"자주 묻는 질문",
+    q1:"앱보다 비싸지 않나요?",a1:"호텔과 직접 거래해 보통 같거나 더 저렴합니다. 다른 곳이 더 싸다면 링크를 보내주세요.",
+    q2:"예약금은 얼마인가요?",a2:"호텔과 시즌에 따라 보통 30–50% 또는 첫 1박입니다. 취소 규정은 결제 전에 안내드립니다.",
+    q3:"결제 방법은?",a3:"베트남 계좌이체, 해외 카드 또는 숙소에 따라 현장 결제.",
+    q4:"공항 픽업과 투어도 되나요?",a4:"네. 공항 픽업, 바나힐·호이안·선짜·참섬 투어를 예약해 드립니다.",
+    q5:"단체 예약 가능한가요?",a5:"가능합니다. 10객실 이상 단체, 워크숍, 행사 – 단체 요금을 문의하세요.",
+    ft_p:"다낭 호텔 · 오션뷰 아파트 예약. 24시간 상담.",ft_c:"연락처",ft_addr:"베트남 다낭",ft_f:"팔로우",
+    m_call:"📞 전화",m_book:"견적",
+    title:"DanangStay – 다낭 호텔 예약",
+    msg_intro:"안녕하세요 DanangStay, 객실 견적 부탁드립니다:",l_in:"체크인",l_out:"체크아웃",l_g:"인원",l_r:"객실",l_b:"예산",l_n:"이름",l_p:"연락처",l_m:"요청",
+    err:"날짜, 이름, 연락처를 입력해 주세요.",err_date:"체크아웃은 체크인 이후여야 합니다.",partner_msg:"다낭 호텔/아파트 운영자입니다. DanangStay와 파트너십을 원합니다."}
+};
+const VI_EXTRA = {title:"DanangStay – Đặt phòng khách sạn Đà Nẵng",
+  msg_intro:"Chào DanangStay, mình cần báo giá phòng:",l_in:"Nhận phòng",l_out:"Trả phòng",l_g:"Số khách",l_r:"Số phòng",l_b:"Ngân sách",l_n:"Tên",l_p:"SĐT",l_m:"Ghi chú",
+  err:"Vui lòng điền ngày, họ tên và số điện thoại.",err_date:"Ngày trả phòng phải sau ngày nhận phòng.",partner_msg:"Tôi là chủ khách sạn/căn hộ, muốn hợp tác với DanangStay."};
+
+// Lưu bản tiếng Việt gốc từ HTML
+const VI = {...VI_EXTRA};
+document.querySelectorAll("[data-i18n]").forEach(el=>VI[el.dataset.i18n]=el.textContent);
+document.querySelectorAll("[data-i18n-html]").forEach(el=>VI[el.dataset.i18nHtml]=el.innerHTML);
+document.querySelectorAll("[data-i18n-ph]").forEach(el=>VI[el.dataset.i18nPh]=el.placeholder);
+I18N.vi = VI;
+
+let lang = "vi";
+function t(k){return (I18N[lang]&&I18N[lang][k]) ?? VI[k] ?? k}
+function setLang(l){
+  lang = I18N[l] ? l : "vi";
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>el.textContent=t(el.dataset.i18n));
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>el.innerHTML=t(el.dataset.i18nHtml));
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>el.placeholder=t(el.dataset.i18nPh));
+  document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.lang===lang));
+  document.title = t("title");
+  // Khách Hàn: gợi ý Kakao trước
+  const via = document.querySelector(`input[name=via][value="${lang==="ko"?"KakaoTalk":lang==="en"?"WhatsApp":"Zalo"}"]`);
+  if (via) via.checked = true;
+  try{localStorage.setItem("ds_lang",lang)}catch(e){}
+}
+document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.lang)));
+
+// Liên kết liên hệ
+const zaloUrl = /^https?:/.test(CONFIG.zalo) ? CONFIG.zalo : "https://zalo.me/" + CONFIG.zalo.replace(/\D/g,"");
+const waUrl = txt => "https://wa.me/" + CONFIG.whatsapp.replace(/\D/g,"") + (txt?"?text="+encodeURIComponent(txt):"");
+function setLinks(sel,url){document.querySelectorAll(sel).forEach(a=>{ if(url){a.href=url}else{a.style.display="none"} })}
+setLinks(".js-zalo", CONFIG.zalo && zaloUrl);
+setLinks(".js-wa", CONFIG.whatsapp && waUrl(""));
+setLinks(".js-kakao", CONFIG.kakao);
+setLinks(".js-call", CONFIG.phone && "tel:" + CONFIG.phone.replace(/\s/g,""));
+setLinks(".js-mail", CONFIG.email && "mailto:" + CONFIG.email);
+setLinks(".js-fb", CONFIG.facebook);
+setLinks(".js-tiktok", CONFIG.tiktok);
+document.querySelectorAll(".js-phone-text").forEach(s=>s.textContent=CONFIG.phone.replace(/(\d{4})(\d{3})(\d+)/,"$1 $2 $3"));
+document.querySelectorAll(".js-mail-text").forEach(s=>s.textContent=CONFIG.email);
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+// Ngày mặc định: mai → ngày kia
+const f = document.getElementById("leadForm");
+const iso = d => new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const today = new Date(); const d1 = new Date(today); d1.setDate(d1.getDate()+1); const d2 = new Date(today); d2.setDate(d2.getDate()+3);
+f.checkin.min = iso(today); f.checkout.min = iso(d1);
+f.checkin.value = iso(d1); f.checkout.value = iso(d2);
+f.checkin.addEventListener("change",()=>{ f.checkout.min=f.checkin.value; if(f.checkout.value<=f.checkin.value){const x=new Date(f.checkin.value);x.setDate(x.getDate()+1);f.checkout.value=iso(x)} });
+
+// Nút chọn khu / loại phòng / hợp tác điền sẵn ghi chú
+let source = "Khách đặt phòng";
+document.querySelectorAll(".js-area").forEach(a=>a.addEventListener("click",()=>{f.msg.value="Khu vực: "+a.dataset.area; source="Khách đặt phòng";}));
+document.querySelectorAll(".js-room").forEach(a=>a.addEventListener("click",()=>{f.msg.value="Loại phòng: "+a.dataset.room; source="Khách đặt phòng";}));
+document.querySelectorAll(".js-partner").forEach(a=>a.addEventListener("click",()=>{f.msg.value=t("partner_msg"); source="Chủ khách sạn hợp tác";}));
+
+function buildMessage(d){
+  return [t("msg_intro"),
+    `• ${t("l_in")}: ${d.checkin} → ${t("l_out")}: ${d.checkout}`,
+    `• ${t("l_g")}: ${d.guests} · ${t("l_r")}: ${d.rooms}`,
+    `• ${t("l_b")}: ${d.budget}`,
+    `• ${t("l_n")}: ${d.name} · ${t("l_p")}: ${d.phone}`,
+    d.msg ? `• ${t("l_m")}: ${d.msg}` : ""].filter(Boolean).join("\n");
+}
+
+f.addEventListener("submit", async e=>{
+  e.preventDefault();
+  if (f.website.value) return; // chống spam
+  const d = Object.fromEntries(new FormData(f).entries());
+  d.name=d.name.trim(); d.phone=d.phone.trim();
+  if(!d.checkin||!d.checkout||!d.name||d.phone.replace(/\D/g,"").length<6){alert(t("err"));return}
+  if(d.checkout<=d.checkin){alert(t("err_date"));return}
+  const nights = Math.round((new Date(d.checkout)-new Date(d.checkin))/864e5);
+  const budgetLabel = f.budget.options[f.budget.selectedIndex].textContent;
+  const payload = {...d, budget:budgetLabel, nights, lang, source, page:location.href.split("?")[0],
+    utm:new URLSearchParams(location.search).toString(), time:new Date().toISOString()};
+  delete payload.website;
+
+  const btn = f.querySelector("button[type=submit]"); btn.disabled = true; btn.style.opacity=.7;
+  if (CONFIG.sheetWebhook) {
+    try { await fetch(CONFIG.sheetWebhook,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)}); }
+    catch(err){ console.warn(err) }
+  }
+  // Nút trên màn hình cảm ơn mang sẵn nội dung yêu cầu
+  const text = buildMessage({...d,budget:budgetLabel});
+  document.querySelectorAll("#okBox .js-wa").forEach(a=>{ if(CONFIG.whatsapp) a.href=waUrl(text) });
+  try{ navigator.clipboard && navigator.clipboard.writeText(text).catch(()=>{}) }catch(e){}
+  if (typeof gtag==="function") gtag("event","generate_lead",{method:d.via});
+  if (typeof fbq==="function") fbq("track","Lead");
+  f.style.display="none"; document.getElementById("okBox").style.display="block";
+  document.getElementById("book").scrollIntoView({behavior:"smooth",block:"center"});
+  // Không cấu hình webhook → mở luôn kênh khách chọn để không mất khách
+  if (!CONFIG.sheetWebhook) {
+    if (d.via==="WhatsApp" && CONFIG.whatsapp) window.open(waUrl(text),"_blank");
+    else if (d.via==="KakaoTalk" && CONFIG.kakao) window.open(CONFIG.kakao,"_blank");
+    else if (CONFIG.zalo) window.open(zaloUrl,"_blank");
+  }
+});
+
+// Ngôn ngữ: ?lang=en|ko, lần trước đã chọn, hoặc theo trình duyệt
+(function(){
+  const q = new URLSearchParams(location.search).get("lang");
+  let saved=null; try{saved=localStorage.getItem("ds_lang")}catch(e){}
+  const nav = (navigator.language||"vi").slice(0,2);
+  setLang(q || saved || (nav==="ko"?"ko":nav==="vi"?"vi":"en"));
+})();
+</script>
+</body>
+</html>
