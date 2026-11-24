@@ -1,0 +1,85 @@
+{
+ "tag": "BIỆT THỰ BIỂN · FURAMA VILLAS",
+ "title": "Giá biệt thự Furama Villas",
+ "sub": "134 căn cạnh Furama Resort",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "134",
+   "biệt thự"
+  ],
+  [
+   "21–25 tỷ",
+   "căn 3 phòng ngủ"
+  ],
+  [
+   "30–40 tỷ",
+   "căn 4 phòng ngủ"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo tin rao chuyển nhượng 2026, tham khảo · Ảnh thực tế biển Mỹ Khê",
+ "headline": [
+  [
+   "Furama Villas",
+   "big",
+   0
+  ],
+  [
+   "giá 2026",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Giá chuyển nhượng 2026",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "FURAMA VILLAS",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "biệt thự biển",
+     "script"
+    ]
+   ],
+   "dx": 240
+  }
+ ]
+}
