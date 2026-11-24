@@ -189,6 +189,7 @@
 | 24/11/2026 | Casamia (blogId 8074284) | 19:30 | So sánh biệt thự Hội An – Casamia hợp với ai – thẻ nền xanh + 3 ảnh | /du-an/casamia-balanca-hoi-an/ |
 | 24/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | So sánh biệt thự Hội An – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
 | 24/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: Sun Group khởi công Khu đô thị số 1 Măng Đen (+2 tin ở bình luận) | /khoi-cong-khu-do-thi-so-1-mang-den-sun-group/ /tien-ich-the-poet-residence/ /mat-bang-the-poet-residence/ |
+| 24/11/2026 | Hoàng Hiệp | 17:00 | TỔNG HỢP: Giá biệt thự Furama Villas 2026 (+2 tin ở bình luận; thẻ nền xanh tự làm) | /gia-biet-thu-furama-villas-da-nang-2026/ /phap-ly-the-poet-residence-chu-dau-tu/ /nobu-da-nang-cua-ai-chu-dau-tu/ |
 | CHỜ | Sun | 25/11 | (bài web 24/11 09:00) Cora, Spana khi nào bàn giao | cora-tower-spana-tower-khi-nao-ban-giao (chờ) |
 | CHỜ | Sun | 25/11 | (bài web 24/11 10:45) Ga LRT gần Sun Saphia | ga-lrt-gan-sun-saphia-residence (chờ) |
 | CHỜ | Sun | 25/11 | (bài web 24/11 18:15) Hợp đồng mua bán Sun Saphia | hop-dong-mua-ban-sun-saphia-residence (chờ) |
