@@ -1714,5 +1714,81 @@ HTML
 		),
 	);
 
+	/* ---------------- 25/11 – Đề án du lịch sinh thái Cù Lao Chàm: 18 điểm, 509,75 ha ---------------- */
+	$posts[] = array(
+		'slug'           => 'de-an-du-lich-cu-lao-cham-18-diem',
+		'title'          => 'Đề án du lịch Cù Lao Chàm được duyệt: 18 điểm sinh thái 509,75 ha, mục tiêu 350.000 khách năm 2030',
+		'excerpt'        => 'UBND TP Đà Nẵng phê duyệt đề án du lịch sinh thái, nghỉ dưỡng, giải trí tại Khu bảo tồn thiên nhiên Cù Lao Chàm đến 2030, tầm nhìn 2050: 18 điểm du lịch trên 509,75 ha, 12 tuyến dài 39,8 km, kinh phí định hướng 346,5 tỷ đồng.',
+		'keyword'        => 'đề án du lịch Cù Lao Chàm',
+		'keywords_extra' => array( 'du lịch sinh thái Cù Lao Chàm', 'Cù Lao Chàm 18 điểm du lịch', 'Quyết định 5356/QĐ-UBND', 'bất động sản Hội An' ),
+		'project'        => 'casamia-balanca-hoi-an',
+		'schedule'       => '2026-11-25 06:30',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Hội An', 'Du lịch', 'Quy hoạch' ),
+		'image'          => 'plugin:img/da-nang/duy-xuyen-flycam-song-thu-bon-cau-cua-dai-hoi-an.jpg',
+		'image_alt'      => 'Đề án du lịch Cù Lao Chàm – cửa biển Cửa Đại, Hội An nhìn từ trên cao (ảnh flycam thực tế)',
+		'content'        => <<<'HTML'
+<p><strong>Đề án du lịch Cù Lao Chàm</strong> vừa được UBND TP Đà Nẵng phê duyệt tại Quyết định số 5356/QĐ-UBND: đề án phát triển du lịch sinh thái, nghỉ dưỡng, giải trí trong Khu bảo tồn thiên nhiên Cù Lao Chàm đến năm 2030, tầm nhìn đến năm 2050. Theo <a href="https://tuoitre.vn/phat-trien-du-lich-o-dao-cu-lao-cham-voi-18-diem-du-lich-sinh-thai-nghi-duong-giai-tri-100261124101532942.htm" target="_blank" rel="noopener">Tuổi Trẻ</a> và <a href="https://baodanang.vn/cu-lao-cham-dat-muc-tieu-don-350-000-luot-khach-nam-2030-3359411.html" target="_blank" rel="noopener">Báo Đà Nẵng</a> đưa tin ngày 24/11/2026, đảo sẽ có 18 điểm du lịch với tổng diện tích 509,75 ha.</p>
+<!--hh-featured-->
+<h2>Đề án du lịch Cù Lao Chàm: các con số chính</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Theo đề án được duyệt</th></tr></thead>
+<tbody>
+<tr><td>Văn bản</td><td>Quyết định số 5356/QĐ-UBND của UBND TP Đà Nẵng</td></tr>
+<tr><td>Thời hạn</td><td>Đến năm 2030, tầm nhìn đến năm 2050</td></tr>
+<tr><td>Số điểm du lịch</td><td>18 điểm, tổng diện tích 509,75 ha</td></tr>
+<tr><td>Hợp phần rừng</td><td>12 điểm trải nghiệm sinh thái, hơn 257 ha</td></tr>
+<tr><td>Hợp phần biển</td><td>6 điểm</td></tr>
+<tr><td>Tuyến du lịch</td><td>12 tuyến sinh thái, dài khoảng 39,8 km, tận dụng đường tuần tra và đường mòn có sẵn</td></tr>
+<tr><td>Mục tiêu khách</td><td>Khoảng 350.000 lượt khách mỗi năm vào năm 2030</td></tr>
+<tr><td>Kinh phí định hướng</td><td>Khoảng 346,5 tỷ đồng đến năm 2030</td></tr>
+</tbody>
+</table>
+<p>Điểm đáng chú ý của đề án du lịch Cù Lao Chàm là cách chia hai hợp phần rừng và biển có quan hệ chặt chẽ về sinh thái. Các tuyến đi bộ, quan sát rừng, lặn ngắm san hô được nối với nhau bằng hệ thống đường mòn sẵn có, hạn chế mở đường mới trên đảo.</p>
+<h2>Bảo tồn đi trước: những gì không được làm</h2>
+<p>Cù Lao Chàm là khu dự trữ sinh quyển thế giới, nên đề án du lịch Cù Lao Chàm đặt nhiều giới hạn. Theo các báo, trong phân khu bảo vệ nghiêm ngặt sẽ không bố trí điểm du lịch, không có hoạt động nghỉ dưỡng, giải trí và không cho thuê môi trường rừng. Ở phân khu phục hồi sinh thái, công trình xây dựng không được vượt quá 2% diện tích, theo <a href="https://baophapluat.vn/quy-hoach-18-diem-du-lich-sinh-thai-nghi-duong-giai-tri-o-cu-lao-cham.html" target="_blank" rel="noopener">Báo Pháp luật Việt Nam</a>.</p>
+<p>Nói cách khác, đề án du lịch Cù Lao Chàm không mở đường cho resort lớn trên đảo. Nó tổ chức lại du lịch theo hướng có kiểm soát: khách đến trải nghiệm rồi phần lớn quay về đất liền lưu trú. Đây chính là chỗ đề án chạm tới thị trường bất động sản ven biển Hội An – Điện Bàn.</p>
+<!--hh-img:img/da-nang/duy-xuyen-flycam-song-thu-bon-cau-cua-dai-hoi-an.jpg|Cửa Đại – điểm xuất phát ra đảo, nơi đề án du lịch Cù Lao Chàm kéo thêm khách lưu trú (ảnh flycam thực tế)-->
+<h2>Tác động của đề án du lịch Cù Lao Chàm – nhận định của Hoàng Hiệp</h2>
+<p>Thứ nhất, theo đề án du lịch Cù Lao Chàm, khách tăng nhưng chỗ ngủ trên đảo bị giới hạn. Với mục tiêu khoảng 350.000 lượt khách mỗi năm và quy định chặt về xây dựng, nhu cầu lưu trú sẽ dồn về bờ: phố cổ Hội An, Cửa Đại, ven biển Điện Bàn – Duy Xuyên. Khu vực này hưởng lợi rõ nhất là các sản phẩm cho thuê ngắn ngày và biệt thự nghỉ dưỡng gần bến tàu.</p>
+<p>Thứ hai, chất lượng khách thay đổi. Du lịch sinh thái có kiểm soát thường hút nhóm khách chi tiêu cao hơn, ở lâu hơn và thích không gian yên tĩnh. Hiệp thấy đây là nhóm khách hợp với mô hình biệt thự compound có hồ bơi, vườn riêng hơn là khách sạn nhiều tầng.</p>
+<p>Thứ ba, đừng kỳ vọng tác động tức thì. Kinh phí định hướng của đề án du lịch Cù Lao Chàm khoảng 346,5 tỷ đồng, chia đến năm 2030, nên các tuyến, điểm sẽ hoàn thiện dần. Người mua bất động sản nghỉ dưỡng quanh Hội An nên xem đề án du lịch Cù Lao Chàm là một lực đỡ trung hạn cho nhu cầu thuê, đi cùng các hạ tầng khác như <a href="/duong-ven-bien-vo-chi-cong-hoi-an/">tuyến ven biển Võ Chí Công</a>, chứ không phải lý do để mua vội.</p>
+<p>Ai muốn hiểu thêm nhịp sống của khách du lịch ở Hội An, từ phố đèn lồng đến những đêm rằm bên sông, có thể đọc thêm cẩm nang <a href="https://danangstay.com.vn/vi/hoi-an-khi-dem-xuong-den-long-tiem-may-va-dong-song-dem-ram-vi/" target="_blank" rel="noopener">Hội An khi đêm xuống</a> – đó cũng là bức tranh nhu cầu lưu trú mà người cho thuê ở khu vực này đang phục vụ.</p>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/casamia-balanca-hoi-an/">Casamia Balanca Hội An</a> – khu biệt thự compound ven sông ở Hội An, gần tuyến ra Cửa Đại; nhóm khách sinh thái ở lâu từ đề án du lịch Cù Lao Chàm là tệp thuê phù hợp với biệt thự có vườn, hồ bơi.</li>
+<li><a href="/du-an/casamia-calm-hoi-an/">Casamia Calm Hội An</a> – dự án biệt thự cùng khu vực, hưởng lợi khi lượng khách lưu trú quanh Hội An tăng theo lộ trình đến 2030.</li>
+</ul>
+<!--hh-img:img/casamia-balanca/casamia-balanca-flycam-toan-canh-thi-cong.jpg|Casamia Balanca Hội An – dự án biệt thự hưởng lợi từ đề án du lịch Cù Lao Chàm (ảnh flycam thi công)-->
+<p>Bức tranh chung của khu vực sau hợp nhất, Hiệp đã tổng hợp trong bài <a href="/bat-dong-san-hoi-an-2026-sau-hop-nhat/">bất động sản Hội An 2026 sau hợp nhất</a>. Cần tư vấn biệt thự nghỉ dưỡng quanh Hội An hoặc phương án cho thuê, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: Tuổi Trẻ, Dân Trí (18 điểm du lịch sinh thái, nghỉ dưỡng, giải trí ở Cù Lao Chàm); Báo Đà Nẵng, Báo Xây dựng (mục tiêu 350.000 lượt khách năm 2030, 12 tuyến 39,8 km); Báo Pháp luật Việt Nam (giới hạn xây dựng theo phân khu). Số liệu theo Quyết định 5356/QĐ-UBND như báo chí đưa tin; chi tiết theo văn bản chính thức của UBND TP Đà Nẵng.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Đề án du lịch Cù Lao Chàm: 18 điểm sinh thái, 509,75 ha',
+			'desc'      => 'Đề án du lịch Cù Lao Chàm được duyệt: 18 điểm sinh thái trên 509,75 ha, 12 tuyến 39,8 km, mục tiêu 350.000 khách năm 2030. Tác động tới BĐS Hội An.',
+			'points'    => array(
+				'Đề án du lịch Cù Lao Chàm duyệt theo Quyết định 5356/QĐ-UBND, đến 2030, tầm nhìn 2050',
+				'18 điểm du lịch trên 509,75 ha: 12 điểm rừng hơn 257 ha và 6 điểm biển',
+				'12 tuyến du lịch sinh thái dài khoảng 39,8 km, tận dụng đường mòn có sẵn',
+				'Mục tiêu khoảng 350.000 lượt khách mỗi năm vào 2030, kinh phí định hướng 346,5 tỷ đồng',
+				'Không làm du lịch trong phân khu bảo vệ nghiêm ngặt – nhu cầu lưu trú dồn về bờ Hội An',
+			),
+			'faq'       => array(
+				array( 'Đề án du lịch Cù Lao Chàm được duyệt khi nào?', 'Theo báo chí đưa tin ngày 24/11/2026, UBND TP Đà Nẵng đã phê duyệt tại Quyết định số 5356/QĐ-UBND, thời hạn đến 2030, tầm nhìn đến 2050.' ),
+				array( 'Đề án có bao nhiêu điểm du lịch?', '18 điểm với tổng diện tích 509,75 ha, gồm 12 điểm trải nghiệm sinh thái ở rừng (hơn 257 ha) và 6 điểm ở biển, nối bằng 12 tuyến dài khoảng 39,8 km.' ),
+				array( 'Có được xây resort trên đảo không?', 'Đề án đặt giới hạn chặt: không làm du lịch, nghỉ dưỡng trong phân khu bảo vệ nghiêm ngặt; công trình ở phân khu phục hồi sinh thái không quá 2% diện tích.' ),
+				array( 'Đề án ảnh hưởng thế nào tới bất động sản Hội An?', 'Lượng khách tăng nhưng chỗ ở trên đảo bị giới hạn, nên nhu cầu lưu trú dồn về bờ Hội An, Cửa Đại – có lợi cho biệt thự nghỉ dưỡng, căn hộ cho thuê trong trung hạn.' ),
+			),
+		),
+		'sources'        => array(
+			'https://tuoitre.vn/phat-trien-du-lich-o-dao-cu-lao-cham-voi-18-diem-du-lich-sinh-thai-nghi-duong-giai-tri-100261124101532942.htm',
+			'https://dantri.com.vn/du-lich/da-nang-quy-hoach-18-diem-du-lich-sinh-thai-tai-hon-ngoc-xanh-cu-lao-cham-20261124110014462.htm',
+			'https://baodanang.vn/cu-lao-cham-dat-muc-tieu-don-350-000-luot-khach-nam-2030-3359411.html',
+			'https://baoxaydung.vn/da-nang-cu-lao-cham-dat-muc-tieu-350000-khach-nam-2030-siet-xay-dung-giu-he-sinh-thai-192261124071326371.htm',
+			'https://baophapluat.vn/quy-hoach-18-diem-du-lich-sinh-thai-nghi-duong-giai-tri-o-cu-lao-cham.html',
+		),
+	);
+
 	return $posts;
 }
