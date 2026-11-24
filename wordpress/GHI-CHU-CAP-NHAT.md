@@ -1,7 +1,12 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.347**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.348**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.348
+
+- Gắn Google Analytics 4 (mã G-CTXK4CGRLN) cho toàn web, kể cả trang landing dự án. Không đếm khi anh đang đăng nhập quản trị.
+- Đếm thêm: khách gửi form (generate_lead), bấm Zalo (click_zalo), bấm Gọi (click_call).
 
 ## Có gì mới – 2.20.347
 
