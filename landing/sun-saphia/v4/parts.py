@@ -131,29 +131,40 @@ def daily():
             '<a class="btn sm" href="#dang-ky">Nhận bảng giá gốc từ đại lý chính thức</a></div></div>') % CERT
 
 def motion():
-    """Hiệu ứng chuyển trang + hiện dần khi cuộn: nhẹ, nhanh, tắt khi người dùng bật giảm chuyển động."""
+    """Hiệu ứng chuyển trang / chuyển mục, hiện dần khi cuộn, thanh tiến trình; tắt khi bật giảm chuyển động."""
     css = ('<style>@view-transition{navigation:auto}'
            'header.top{view-transition-name:hdr}::view-transition-group(hdr){animation:none}'
-           '::view-transition-old(root){animation:vtO .2s cubic-bezier(.4,0,1,1) both}::view-transition-new(root){animation:vtI .42s cubic-bezier(.16,1,.3,1) both}'
-           '@keyframes vtO{to{opacity:0;transform:translateY(-8px)}}@keyframes vtI{from{opacity:0;transform:translateY(14px)}}'
-           'html.pgfb body{transition:opacity .2s ease}html.pgout body{opacity:0}'
-           '.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);transition-delay:var(--rd,0s)}'
+           '::view-transition-old(root){animation:vtO .28s cubic-bezier(.4,0,1,1) both}::view-transition-new(root){animation:vtI .55s cubic-bezier(.16,1,.3,1) both}'
+           '@keyframes vtO{to{opacity:0;transform:translateY(-24px) scale(.985)}}@keyframes vtI{from{opacity:0;transform:translateY(40px)}}'
+           'html.pgfx main{animation:pgIn .6s cubic-bezier(.16,1,.3,1) both}@keyframes pgIn{from{opacity:0;transform:translateY(24px)}}'
+           'html.pgfx main{transition:opacity .22s ease,transform .22s ease}html.pgout main{opacity:0!important;transform:translateY(-16px)!important}'
+           '#pgbar{position:fixed;left:0;top:0;height:3px;width:0;z-index:2147483600;background:linear-gradient(90deg,#F7A13A,#EE7B1E);box-shadow:0 0 10px rgba(238,123,30,.7);transition:width .9s cubic-bezier(.1,.7,.2,1),opacity .3s}'
+           '.rv{opacity:0;transform:translateY(42px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);transition-delay:var(--rd,0s)}'
            '.rv.in{opacity:1;transform:none}'
-           '@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}.rv{opacity:1!important;transform:none!important;transition:none!important}html.pgout body{opacity:1}}</style>')
-    js = ('<script>(function(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var H=document.documentElement;'
-          # trình duyệt chưa hỗ trợ chuyển trang (Safari cũ, Firefox): mờ dần trước khi chuyển
-          'if(!("onpagereveal" in window)){H.classList.add("pgfb");document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");'
-          'if(!a||e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||a.target==="_blank"||a.hasAttribute("download"))return;'
-          'var u=new URL(a.href,location.href);if(u.origin!==location.origin||(u.pathname===location.pathname&&u.hash))return;'
-          'e.preventDefault();H.classList.add("pgout");setTimeout(function(){location.href=u.href},180)});'
-          'addEventListener("pageshow",function(){H.classList.remove("pgout")})}'
-          # hiện dần khi cuộn: chỉ khối nằm dưới màn hình đầu tiên, mỗi nhóm trễ tối đa 3 bước
+           '@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}html.pgfx main{animation:none}.rv{opacity:1!important;transform:none!important;transition:none!important}}</style>')
+    js = ('<script>(function(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var H=document.documentElement,VT="onpagereveal" in window;H.classList.add("pgfx");'
+          'var bar=document.createElement("div");bar.id="pgbar";document.body.appendChild(bar);'
+          'function prog(){bar.style.opacity=1;bar.style.width="0";requestAnimationFrame(function(){bar.style.width="82%"})}'
+          'function done(){bar.style.width="100%";setTimeout(function(){bar.style.opacity=0;setTimeout(function(){bar.style.width="0"},300)},250)}'
+          'function showIn(){var vh=innerHeight;document.querySelectorAll(".rv:not(.in)").forEach(function(el){var r=el.getBoundingClientRect();if(r.top<vh&&r.bottom>0)el.classList.add("in")})}'
+          'document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");'
+          'if(!a||e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||a.target==="_blank"||a.hasAttribute("download")||a.hasAttribute("data-pop"))return;'
+          'var h=a.getAttribute("href");'
+          # chuyển tới mục trong cùng trang (menu trang chủ): hiệu ứng mờ – trượt thay vì cuộn dài
+          'if(h.charAt(0)==="#"){var id=decodeURIComponent(h.slice(1)),t=id&&document.getElementById(id);if(!t||a.getAttribute("role")==="tab")return;e.preventDefault();'
+          'var go=function(){t.scrollIntoView({behavior:"instant",block:"start"});try{history.pushState(null,"","#"+id)}catch(x){}showIn()};'
+          'prog();if(document.startViewTransition){var v=document.startViewTransition(go);v.finished.then(done,done)}else{H.classList.add("pgout");setTimeout(function(){go();H.classList.remove("pgout");done()},230)}return}'
+          # sang trang khác cùng tên miền
+          'var u=new URL(a.href,location.href);if(u.origin!==location.origin||(u.pathname===location.pathname&&u.search===location.search))return;prog();'
+          'if(!VT){e.preventDefault();H.classList.add("pgout");setTimeout(function(){location.href=u.href},220)}});'
+          'addEventListener("pageshow",function(){H.classList.remove("pgout");done()});'
+          # hiện dần khi cuộn
           'if(!("IntersectionObserver" in window))return;'
           'var S=".sec .sh,.sec .lead,.sec .card,.sec .g2>*,.sec .g3>*,.sec .tldr,.tv,.evk,.skg2 h3,.skg2 .skw figure,.band,.cta-blk,.faq details";'
-          'var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{rootMargin:"0px 0px -8% 0px",threshold:.08});'
+          'var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{rootMargin:"0px 0px -6% 0px",threshold:.06});'
           'var vh=innerHeight;[].slice.call(document.querySelectorAll(S)).forEach(function(el){if(el.closest(".rv")||el.closest("#ss4d,.mbx,.cdv,[role=dialog]"))return;'
           'var r=el.getBoundingClientRect();if(r.top<vh*.92||!r.height)return;var i=0,p=el.previousElementSibling;while(p&&i<3){if(p.classList.contains("rv"))i++;p=p.previousElementSibling}'
-          'el.style.setProperty("--rd",(i*.08)+"s");el.classList.add("rv");io.observe(el)})})();</script>')
+          'el.style.setProperty("--rd",(i*.09)+"s");el.classList.add("rv");io.observe(el)})})();</script>')
     return css + js
 
 def tail(with_tools):
