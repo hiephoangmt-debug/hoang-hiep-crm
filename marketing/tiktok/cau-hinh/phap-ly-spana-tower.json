@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Căn hộ Hòa Xuân",
+  "SỔ LÂU DÀI",
+  "đất ở đô thị"
+ ],
+ "question": "Pháp lý Spana Tower đã đủ điều kiện bán chưa?",
+ "hook_bg": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d24/spana.jpg",
+ "data_title": [
+  "Spana Tower",
+  "PHÁP LÝ"
+ ],
+ "rows": [
+  [
+   "05/5/2026",
+   "Sở Xây dựng xác nhận",
+   "Đủ điều kiện bán nhà HTTTL"
+  ],
+  [
+   "07/5/2026",
+   "VietinBank bảo lãnh",
+   "Cho người mua"
+  ],
+  [
+   "2 sổ",
+   "Lô A1-3, A1-4",
+   "Đất ở đô thị"
+  ],
+  [
+   "1.237",
+   "Căn hộ",
+   "2 tòa, 22 tầng"
+  ],
+  [
+   "Lâu dài",
+   "Thời hạn sở hữu",
+   "Không phải 50 năm"
+  ]
+ ],
+ "note": "Theo hồ sơ pháp lý chủ đầu tư. Tham khảo, không thay thế tư vấn pháp lý.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d24/spana.jpg",
+ "photo_caption": "Spana Tower – khu Sun NeO City, Hòa Xuân",
+ "cta": "Hồ sơ: Zalo 0904 567 009"
+}

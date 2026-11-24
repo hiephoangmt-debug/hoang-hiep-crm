@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Cùng tòa, khác hướng",
+  "NẮNG SÁNG",
+  "hay nắng chiều?"
+ ],
+ "question": "Hướng căn hộ Sun Saphia nào mát hơn?",
+ "hook_bg": "/home/user/hoang-hiep-crm/marketing/anh-thuc-te/sun-saphia-flycam-17-10-2026/flycam-0010.jpg",
+ "data_title": [
+  "Sun Saphia Residence",
+  "HƯỚNG CĂN"
+ ],
+ "rows": [
+  [
+   "Đông",
+   "Dãy mặt biển",
+   "Nắng sáng, gió biển trực diện"
+  ],
+  [
+   "Tây",
+   "Dãy phía sau",
+   "Nắng chiều, giá vào thấp hơn"
+  ],
+  [
+   "Bắc",
+   "Cánh bên",
+   "Ít nắng, nhìn về Sơn Trà"
+  ],
+  [
+   "Nam",
+   "Cánh chéo",
+   "Nhìn Ngũ Hành Sơn"
+  ],
+  [
+   "28",
+   "Căn mỗi sàn",
+   "Tầng 3A – 28"
+  ]
+ ],
+ "note": "Phân tích theo hướng địa lý của Hoàng Hiệp, đối chiếu mặt bằng có la bàn khi chọn căn.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d19/sun-saphia-cdt-hoang-hon-bien-tren-cao.jpg",
+ "photo_caption": "Phối cảnh Sun Saphia Residence",
+ "cta": "Mặt bằng: Zalo 0904 567 009"
+}

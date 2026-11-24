@@ -1,0 +1,85 @@
+{
+ "tag": "TIẾN ĐỘ · CASAMIA BALANCA",
+ "title": "CASAMIA BALANCA",
+ "sub": "Lịch bàn giao theo chính sách chủ đầu tư",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "12/2026",
+   "bàn giao thô"
+  ],
+  [
+   "3/2027",
+   "Park Home nội thất"
+  ],
+  [
+   "6/2027",
+   "Forestside nội thất"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo CSBH chủ đầu tư 9/9/2026, phương án không vay · Ảnh flycam công trường",
+ "headline": [
+  [
+   "CASAMIA BALANCA",
+   "big",
+   0
+  ],
+  [
+   "sắp nhận nhà",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Tiến độ cuối năm",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "CASAMIA BALANCA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "sắp nhận nhà",
+     "script"
+    ]
+   ],
+   "dx": 240
+  }
+ ]
+}

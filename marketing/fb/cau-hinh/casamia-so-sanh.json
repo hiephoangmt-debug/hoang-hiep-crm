@@ -1,0 +1,85 @@
+{
+ "tag": "SO SÁNH · BIỆT THỰ HỘI AN",
+ "title": "HỘI AN",
+ "sub": "Ven sông yên tĩnh hay mặt biển resort?",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "Ven sông",
+   "Cổ Cò, gần phố cổ"
+  ],
+  [
+   "Sổ đỏ",
+   "sở hữu lâu dài"
+  ],
+  [
+   "363",
+   "sản phẩm / 31,1 ha"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo chủ đầu tư Đạt Phương; dự án khác tham khảo báo chí · Phối cảnh dự án",
+ "headline": [
+  [
+   "HỘI AN",
+   "big",
+   0
+  ],
+  [
+   "Casamia hợp với ai?",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "So sánh biệt thự",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "HỘI AN",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Casamia hợp với ai?",
+     "script"
+    ]
+   ],
+   "dx": 220
+  }
+ ]
+}
