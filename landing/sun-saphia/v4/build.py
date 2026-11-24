@@ -1240,17 +1240,26 @@ def ads(domain, home_page=False):
     b += ('<section class="sec alt"><div class="wrap">' + sh('10', 'Pháp lý', 'Công trình <b>cấp I</b> – pháp lý rõ ràng', 'n') + legal_box_ads() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('11', 'Tầm nhìn', 'Mỗi hướng <b>một khung tranh</b>', 'o') + views('<img class="vb" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1668w" sizes="(max-width: 760px) 100vw, 900px" width="1668" height="943" alt="Biển ngay ngoài ban công – căn hộ cao tầng mặt biển Đà Nẵng lúc hoàng hôn (ảnh minh họa)" loading="lazy" decoding="async">' % (HB, HB, HB)) + '</div></section>')
     b += tim_can('ADS')
+    fq_h, fld_h = faq([
+        ('Sun Saphia Residence Đà Nẵng ở đâu?', 'Sun Saphia Residence nằm ở góc ngã ba Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, phường Ngũ Hành Sơn, Đà Nẵng. Trước mặt dự án là công viên ven biển, đi bộ hơn 300 m là tới bãi tắm Sơn Thủy – Mỹ Khê.'),
+        ('Chủ đầu tư Sun Saphia Residence là ai?', 'Dự án do Sun Group phát triển, Sun Property phân phối. Đây là tòa căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: 30 tầng, 782 căn, trên khu đất 3.720,1 m².'),
+        ('Khi nào Sun Saphia Residence Đà Nẵng mở bán?', 'Chủ đầu tư dự kiến mở bán chính thức ngày 05/12/2026 tại Đà Nẵng. Tại sự kiện ở Hà Nội ngày 22/11, dự án ghi nhận 1.088 booking và công bố chính sách Early Bird chiết khấu 3&#37;.'),
+        ('Giá căn hộ Sun Saphia Residence Đà Nẵng bao nhiêu?', 'Theo tài liệu chủ đầu tư, Studio giá dự kiến từ khoảng 1,8 tỷ; thanh toán khoảng 25&#37; đến khi nhận nhà, ngân hàng cho vay 70&#37; và hỗ trợ lãi suất tới 24 tháng. Bảng giá chính thức công bố khi mở bán.'),
+        ('Sun Saphia Residence có những loại căn nào?', 'Studio 30–35 m² (513 căn), 1 phòng ngủ + 1 khoảng 48,6–51,2 m² (108 căn) và 2 phòng ngủ 60,8–70,2 m² (133 căn); tầng 30 có các căn lớn 50–84 m². Bàn giao liền tường, trần cao 3,5 m.'),
+        ('Tiện ích Sun Saphia Residence gồm những gì?', 'Hồ bơi tràn nhìn biển, gym, yoga, Kid Club ngay trong tòa nhà; khối đế shop, cà phê, nhà hàng; ra biển chỉ vài phút đi bộ với chuỗi 3 công viên bãi tắm.'),
+    ])
+    b += ('<section class="sec alt" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>Sun Saphia Residence Đà Nẵng</b>', 'y') + fq_h + '</div></section>')
     b += more_pages()
     b += cta_block('ADS – form cuối trang')
-    title = 'Sun Saphia Residence – Căn hộ mặt biển Sun Group Đà Nẵng chỉ từ 1,8 tỷ'
-    desc = 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: Studio chỉ từ ~1,8 tỷ (dự kiến), thanh toán 25% đến khi nhận nhà, vay 70% hỗ trợ lãi suất 24 tháng. Cách biển chỉ hơn 300m, công trình cấp I. Zalo 0904 567 009.'
+    title = 'Sun Saphia Residence Đà Nẵng – Căn hộ mặt biển Sun Group từ 1,8 tỷ'
+    desc = 'Sun Saphia Residence Đà Nẵng – căn hộ mặt biển đầu tiên của Sun Group, mở bán 05/12/2026: Studio chỉ từ ~1,8 tỷ (dự kiến), thanh toán 25% đến khi nhận nhà, vay 70% hỗ trợ lãi suất 24 tháng. Cách biển chỉ hơn 300m, công trình cấp I. Zalo 0904 567 009.'
     for frag, sid in [('4 quy hoạch <b>bao quanh dự án</b>', 'quy-hoach'), ('Tiềm năng <b>dòng tiền</b>', 'dong-tien'), ('Công trình <b>cấp I</b>', 'phap-ly')]:
         i = b.find(frag)
         if i > 0:
             j = b.rfind('<section', 0, i); t = b.index('>', j)
             if ' id="' not in b[j:t]: b = b[:j] + '<section id="%s"' % sid + b[j + 8:]
     b = re.sub(r'<p[^>]*><a class="lk" href="\{M\}/quy-hoach">[^<]*</a></p>', '', b)
-    html = head(title, desc, url, COVER + 'og-saphia-hoang-hon.jpg', 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES], FAV)
+    html = head(title, desc, url, COVER + 'og-saphia-hoang-hon.jpg', 'sun saphia residence, sun saphia residence đà nẵng, sun saphia đà nẵng, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES, fld_h], FAV)
     b = b.replace('{M}', MAIN)
     html += '<body>\n' + header('/ads', MAIN, LOGO, menu=False, toc=ADS_TOC) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN, pages=home_page) + '\n' + popup() + '<script>window.SS4D_GATE=20;</script>' + tail(True) + wave_audio() + motion() + '</body>\n</html>\n'
     return copy_fix(tour_insert(quiz_end(html)))
