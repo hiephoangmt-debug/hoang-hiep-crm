@@ -45,7 +45,7 @@ jobs:
         run: mkdir -p dist/be-hoc-lop-1 && cp ../be-hoc-lop-1/index.html dist/be-hoc-lop-1/
       # Landing page DanangStay (tĩnh) nằm ở /danangstay/
       - name: Thêm landing page DanangStay
-        run: mkdir -p dist/danangstay && cp ../danangstay/index.html dist/danangstay/
+        run: mkdir -p dist/danangstay && cp -r ../danangstay/index.html ../danangstay/logo dist/danangstay/
       # Âm thanh chuẩn từng tiếng (tạo bởi workflow bvh-audio.yml, lưu trong bộ nhớ đệm)
       - uses: actions/cache/restore@v4
         with:

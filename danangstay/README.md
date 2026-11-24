@@ -13,3 +13,8 @@ Trang một file (`index.html`) cho khách trong và ngoài nước gửi yêu c
 2. Nhận khách vào Google Sheet và Telegram: làm theo hướng dẫn trong `google_sheet.gs`, rồi dán link Web App vào `CONFIG.sheetWebhook`.
    Nếu để trống, khi khách bấm gửi, trang sẽ mở Zalo/WhatsApp/Kakao để khách nhắn thẳng.
 3. Đăng trang: sau khi merge vào `main`, trang tự lên GitHub Pages tại `/danangstay/`. Hoặc copy `index.html` lên hosting / LadiPage (dán HTML).
+
+## Logo (`logo/`)
+- `emblem.svg` / `emblem.png` – biểu tượng chính gồm mặt trời, núi Sơn Trà và tượng Quan Âm, Cầu Vàng (dải cầu vàng trên đôi bàn tay), Cầu Rồng trên sông Hàn, sóng biển Mỹ Khê.
+- `icon.svg` / `icon.png` – bản rút gọn cho favicon và ảnh đại diện Zalo/Facebook.
+- `preview.html` – xem logo ngang DanangStay / DanangLife trên nền sáng và nền tối.

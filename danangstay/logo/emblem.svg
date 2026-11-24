@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Biểu tượng Đà Nẵng: núi Sơn Trà, Cầu Vàng, Cầu Rồng, biển Mỹ Khê">
+  <defs>
+    <clipPath id="c"><circle cx="256" cy="256" r="238"/></clipPath>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff6e6"/><stop offset="1" stop-color="#ffd59a"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1fa3c4"/><stop offset="1" stop-color="#0b6e8a"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f7c948"/><stop offset="1" stop-color="#e8a317"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#c)">
+    <rect width="512" height="512" fill="url(#sky)"/>
+    <!-- Mặt trời -->
+    <circle cx="352" cy="150" r="44" fill="#f29f3d"/>
+    <!-- Núi Sơn Trà: lớp xa và lớp gần -->
+    <path d="M0,270 C70,215 120,170 180,178 C230,185 255,215 300,198 C350,178 380,120 430,150 C470,175 495,215 512,232 L512,512 L0,512Z" fill="#7cbf96"/>
+    <path d="M0,305 C60,270 110,245 170,250 C230,256 270,282 330,262 C390,242 440,232 512,262 L512,512 L0,512Z" fill="#2f7d5b"/>
+    <!-- Tượng Quan Âm Sơn Trà (nét đơn giản trên đỉnh núi) -->
+    <g fill="#ffffff"><path d="M422,152 L425,128 L431,128 L434,152Z"/><circle cx="428" cy="122" r="5"/></g>
+    <!-- Cầu Vàng: dải cầu vàng uốn cong trên đôi bàn tay đá -->
+    <path d="M60,214 C110,198 165,196 224,209" fill="none" stroke="url(#gold)" stroke-width="11" stroke-linecap="round"/>
+    <g fill="#9aa096" stroke="#6f756c" stroke-width="1.5"><rect x="96" y="222" width="34" height="42" rx="11"/><rect x="98.0" y="200" width="6.5" height="30" rx="3.2"/><rect x="105.5" y="200" width="6.5" height="30" rx="3.2"/><rect x="113.0" y="200" width="6.5" height="30" rx="3.2"/><rect x="120.5" y="200" width="6.5" height="30" rx="3.2"/><rect x="86" y="226" width="7" height="22" rx="3.5" transform="rotate(-30 90 240)"/><rect x="168" y="222" width="34" height="42" rx="11"/><rect x="170.0" y="200" width="6.5" height="30" rx="3.2"/><rect x="177.5" y="200" width="6.5" height="30" rx="3.2"/><rect x="185.0" y="200" width="6.5" height="30" rx="3.2"/><rect x="192.5" y="200" width="6.5" height="30" rx="3.2"/><rect x="158" y="226" width="7" height="22" rx="3.5" transform="rotate(-30 162 240)"/></g>
+    <!-- Sông Hàn -->
+    <rect x="0" y="330" width="512" height="60" fill="#3fb2cf"/>
+    <!-- Cầu Rồng: mặt cầu + thân rồng uốn lượn + đầu rồng -->
+    <rect x="20" y="346" width="472" height="9" rx="3" fill="#1c4d5e"/>
+    <path d="M40,350 Q78,282 116,350 Q154,282 192,350 Q230,282 268,350 Q306,282 344,350 Q372,300 392,312" fill="none" stroke="url(#gold)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M384,300 L420,292 L438,304 L424,310 L432,320 L404,318 L392,322 Z" fill="#e8a317"/>
+    <circle cx="414" cy="301" r="3" fill="#1c4d5e"/>
+    <path d="M440,302 q14,-6 22,4 q-12,-2 -18,8 z" fill="#f26b3d"/>
+    <!-- Biển Mỹ Khê -->
+    <path d="M0,392 C60,372 110,412 170,394 C230,376 280,414 340,396 C400,378 450,410 512,392 L512,512 L0,512Z" fill="url(#sea)"/>
+    <path d="M0,432 C70,414 120,450 190,432 C260,414 310,452 380,434 C440,418 480,442 512,432" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" opacity=".85"/>
+    <path d="M40,468 C100,452 150,482 210,468 C270,454 320,484 380,470 C430,458 470,478 512,470" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+  </g>
+  <circle cx="256" cy="256" r="238" fill="none" stroke="#074c61" stroke-width="16"/>
+</svg>
