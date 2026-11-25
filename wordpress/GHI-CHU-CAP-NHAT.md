@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.350**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.351**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.351
+
+- Chiết khấu thanh toán sớm tháng 12/2026 (hạn 25/12/2026) các dự án Sun Group Đà Nẵng: Symphony 5, FourS Tower (F1/F5 theo ngày ký, F2), Spana, Cora (căn hộ & shop đế), S-Light, Sun Solar, Symphony 1-2-3 (căn hộ, shop đế), The Sonata, shop đế The Panoma. Thay dòng thanh toán sớm trong Chính sách bán hàng và Bảng chiết khấu; ưu đãi khác giữ nguyên. Cần bấm "Nhập / cập nhật dữ liệu".
 
 ## Có gì mới – 2.20.350
 
