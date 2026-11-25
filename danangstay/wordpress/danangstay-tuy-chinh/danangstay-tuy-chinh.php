@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 1.2.0
+ * Version: 1.3.0
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -78,6 +78,21 @@ function dst_css()
 /* Menu mở trên điện thoại: nền trắng, chữ đậm */
 body.menu-open .site-header, body.nav-compact.menu-open .site-header { background: #fff; color: var(--ink); }
 
+/* Bảng trong bài viết: gọn, dễ đọc; trên điện thoại mỗi dòng thành một thẻ */
+.prose table { width: 100%; border-collapse: collapse; margin: 1.6em 0; font-size: 16px; line-height: 1.5; }
+.prose th, .prose td { padding: 12px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.prose thead th { background: var(--sea); color: #fff; font: 600 12px/1.3 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
+.prose tbody tr:nth-child(even) td { background: var(--ivory); }
+@media (max-width: 700px) {
+  .prose table, .prose tbody, .prose tr, .prose td { display: block; width: 100%; }
+  .prose thead { display: none; }
+  .prose tr { border: 1px solid var(--line); border-radius: 10px; margin: 0 0 12px; padding: 12px 16px; background: #fff; }
+  .prose tbody tr:nth-child(even) td { background: none; }
+  .prose td { border: 0; padding: 3px 0; font-size: 15.5px; }
+  .prose td:first-child { font-weight: 700; font-size: 17px; color: var(--ink); padding-bottom: 6px; }
+  .prose td[data-label]:not(:first-child)::before { content: attr(data-label) ": "; font-weight: 600; color: var(--bronze); }
+}
+
 /* Menu ☰ trên máy tính / máy tính bảng: ngăn kéo gọn bên phải thay vì phủ kín màn hình */
 @media (min-width: 901px) {
   body.menu-open .nav, body.nav-compact.menu-open .nav {
@@ -114,6 +129,13 @@ add_action('wp_footer', function () {
 <script id="dst-notranslate">
 (function () {
   var names = ['Hue', 'Huế', 'Hoi An', 'Hội An', 'Da Nang', 'Đà Nẵng', 'My Khe', 'Mỹ Khê', 'Son Tra', 'Sơn Trà', 'Man Thai', 'Mân Thái', 'Ba Na', 'Ba Na Hills', 'Bà Nà', 'An Thuong', 'An Thượng', 'Hai Van', 'Hải Vân', 'Cu Lao Cham', 'Cù Lao Chàm', 'DanangStay'];
+  document.querySelectorAll('.prose table').forEach(function (t) {
+    var heads = Array.prototype.map.call(t.querySelectorAll('thead th'), function (th) { return th.textContent.trim(); });
+    if (!heads.length) return;
+    t.querySelectorAll('tbody tr').forEach(function (tr) {
+      Array.prototype.forEach.call(tr.children, function (td, i) { if (heads[i]) td.setAttribute('data-label', heads[i]); });
+    });
+  });
   document.querySelectorAll('.brand, .brand__word').forEach(function (e) { e.setAttribute('translate', 'no'); });
   document.querySelectorAll('a, button, span, li, h3, h4, strong, em, td, th, label, option').forEach(function (e) {
     if (e.children.length) return;
@@ -150,6 +172,12 @@ function dst_filter_html($html)
         },
         $html
     );
+    // Đổi tên mục menu "Đà Nẵng" (gồm cả Hội An, Huế) thành "Khám phá" theo từng ngôn ngữ
+    $labels = ['vi' => 'Khám phá', 'en' => 'Explore', 'ko' => '여행 가이드', 'ja' => '観光ガイド', 'zh' => '旅行指南', 'ru' => 'Путеводитель', 'fr' => 'Découvrir', 'de' => 'Entdecken'];
+    $lang = preg_match('#<html[^>]*\slang="([a-z]{2})#i', $html, $lm) ? strtolower($lm[1]) : 'en';
+    if (isset($labels[$lang])) {
+        $html = preg_replace('#(/discover/"\s+class="nav__parent"[^>]*>)[^<]+#u', '${1}' . $labels[$lang], $html);
+    }
     if (preg_match('#<html[^>]*\slang="vi#i', $html)) {
         $html = dst_viet_hoa($html);
     }
