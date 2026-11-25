@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 1.9.1
+ * Version: 2.1.1
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -899,9 +899,10 @@ add_filter('dst_html', function ($html) {
     }
     $url = dst_tickets_url();
     if ($url) {
-        $html = preg_replace_callback('#(<a href="[^"]*/flights/">[^<]*</a>)#u', function ($m) use ($url) {
-            return $m[1] . '<a href="' . esc_url($url) . '">' . esc_html(dst_t('tickets')) . '</a>';
-        }, $html, 2);
+        $html = preg_replace_callback('#(<a href="[^"]*/flights/">[^<]*</a>)(\s*</li>)?#u', function ($m) use ($url) {
+            $link = '<a href="' . esc_url($url) . '">' . esc_html(dst_t('tickets')) . '</a>';
+            return !empty($m[2]) ? $m[1] . '</li><li>' . $link . $m[2] : $m[1] . $link;
+        }, $html, 3);
     }
     if (preg_match('#<section class="flight-hero"#', $html) && strpos($html, '<section class="ds-flight-notes"') === false) {
         $notes = dst_flight_notes_html();
@@ -937,7 +938,7 @@ add_action('rest_api_init', function () {
 /* ------------------------------------------------------------------ */
 
 add_filter('dst_html', function ($html) {
-    $is_hub = strpos($html, 'class="ds-services"') !== false;
+    $is_hub = strpos($html, 'class="hub-main"') !== false || strpos($html, 'class="ds-services"') !== false;
     if ((strpos($html, 'class="ds-tickets ') === false && !$is_hub) || strpos($html, '<header class="page-head">') === false) {
         return $html;
     }
@@ -990,16 +991,16 @@ add_filter('dst_html', function ($html) {
         $html,
         1
     );
-    return str_replace('<body class="', '<body class="ds-service ', $html);
+    return str_replace('<body class="', '<body class="ds-svcpage ', $html);
 });
 
 add_action('wp_head', function () {
     ?>
 <style id="dst-service-css">
 /* Hero */
-body.ds-service .page-head.ds-hero { padding: 150px 0 56px; background: linear-gradient(135deg, #0b2447 0%, #133a6b 60%, #1e4f8a 100%); color: #fff; position: relative; overflow: hidden; }
-body.ds-service .page-head.ds-hero::after { content: ""; position: absolute; right: -120px; bottom: -160px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(255,138,61,.28), rgba(255,138,61,0) 70%); pointer-events: none; }
-body.ds-service .ds-hero h1 { color: #fff; font-size: clamp(32px, 4.2vw, 56px); font-weight: 500; line-height: 1.12; max-width: 920px; margin: 14px 0 16px; }
+body.ds-svcpage .page-head.ds-hero { padding: 150px 0 56px; background: linear-gradient(135deg, #0b2447 0%, #133a6b 60%, #1e4f8a 100%); color: #fff; position: relative; overflow: hidden; }
+body.ds-svcpage .page-head.ds-hero::after { content: ""; position: absolute; right: -120px; bottom: -160px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(255,138,61,.28), rgba(255,138,61,0) 70%); pointer-events: none; }
+body.ds-svcpage .ds-hero h1 { color: #fff; font-size: clamp(32px, 4.2vw, 56px); font-weight: 500; line-height: 1.12; max-width: 920px; margin: 14px 0 16px; }
 .ds-hero__kicker { display: inline-block; font: 700 12px/1 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: #ffa04d; }
 .ds-hero__sub { color: #d6e0ee !important; font-size: 18px !important; max-width: 720px !important; margin: 0 0 24px !important; line-height: 1.6; }
 .ds-hero__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
@@ -1008,19 +1009,19 @@ body.ds-service .ds-hero h1 { color: #fff; font-size: clamp(32px, 4.2vw, 56px); 
 .ds-hero__chips a { padding: 8px 16px; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; color: #fff; font: 600 13.5px/1 var(--sans); text-decoration: none; }
 .ds-hero__chips a:hover { background: #fff; color: var(--sea); }
 /* Bỏ chữ cái phóng to đầu bài trên trang dịch vụ */
-body.ds-service .prose > p:first-of-type::first-letter { float: none; font-size: inherit; padding: 0; color: inherit; font-family: inherit; }
-body.ds-service .prose > p:first-of-type { font-size: 19px; color: var(--ink); }
+body.ds-svcpage .prose > p:first-of-type::first-letter { float: none; font-size: inherit; padding: 0; color: inherit; font-family: inherit; }
+body.ds-svcpage .prose > p:first-of-type { font-size: 19px; color: var(--ink); }
 /* Lưới thẻ & tiêu đề khu vực trải rộng 3 cột */
-body.ds-service .prose .ds-tickets, body.ds-service .prose h2.ds-area, body.ds-service .prose .ds-news {
+body.ds-svcpage .prose .ds-tickets, body.ds-svcpage .prose h2.ds-area, body.ds-svcpage .prose .ds-news {
   width: min(1200px, calc(100vw - 2 * var(--gutter))); position: relative; left: 50%; transform: translateX(-50%); max-width: none;
 }
-body.ds-service .prose .ds-tickets { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-@media (max-width: 1100px) { body.ds-service .prose .ds-tickets { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 700px) { body.ds-service .prose .ds-tickets { grid-template-columns: 1fr; } }
-body.ds-service .prose h2.ds-area { display: flex; align-items: center; gap: 14px; margin-top: 2.2em; padding-top: 28px; border-top: 1px solid var(--line); scroll-margin-top: 100px; }
-body.ds-service .prose h2.ds-area::before { content: ""; width: 10px; height: 34px; border-radius: 4px; background: var(--bronze); }
-body.ds-service .prose h2#hoi-an::before { background: #c2410c; }
-body.ds-service .prose h2#hue::before { background: #7c3aed; }
+body.ds-svcpage .prose .ds-tickets { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 1100px) { body.ds-svcpage .prose .ds-tickets { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { body.ds-svcpage .prose .ds-tickets { grid-template-columns: 1fr; } }
+body.ds-svcpage .prose h2.ds-area { display: flex; align-items: center; gap: 14px; margin-top: 2.2em; padding-top: 28px; border-top: 1px solid var(--line); scroll-margin-top: 100px; }
+body.ds-svcpage .prose h2.ds-area::before { content: ""; width: 10px; height: 34px; border-radius: 4px; background: var(--bronze); }
+body.ds-svcpage .prose h2#hoi-an::before { background: #c2410c; }
+body.ds-svcpage .prose h2#hue::before { background: #7c3aed; }
 /* Thẻ */
 .ds-ticket { position: relative; border-top: 4px solid var(--bronze); box-shadow: 0 14px 34px -26px rgba(11,36,71,.55); transition: transform .2s, box-shadow .2s; }
 .ds-ticket:hover { transform: translateY(-3px); box-shadow: 0 22px 44px -26px rgba(11,36,71,.6); }
@@ -1032,8 +1033,8 @@ body.ds-service .prose h2#hue::before { background: #7c3aed; }
 /* Hộp liên hệ: căn giữa chữ VT */
 .ds-contact__avatar { display: flex !important; align-items: center !important; justify-content: center !important; line-height: 1 !important; text-align: center !important; }
 /* Bảng chọn nhanh */
-body.ds-service .prose table td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
-@media (max-width: 700px) { body.ds-service .prose table td:first-child { white-space: normal; } body.ds-service .page-head.ds-hero { padding: 120px 0 40px; } }
+body.ds-svcpage .prose table td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+@media (max-width: 700px) { body.ds-svcpage .prose table td:first-child { white-space: normal; } body.ds-svcpage .page-head.ds-hero { padding: 120px 0 40px; } }
 </style>
     <?php
 }, 102);
@@ -1150,9 +1151,17 @@ add_filter('dst_html', function ($html) {
     $all = ['vi' => 'Tất cả dịch vụ', 'ko' => '전체 서비스', 'en' => 'All services'];
     $label = isset($all[dst_lang()]) ? $all[dst_lang()] : $all['en'];
     $html = preg_replace('#<a href="[^"]*/stays/"(\s+class="nav__parent")#', '<a href="' . esc_url($url) . '"$1', $html);
-    $html = preg_replace_callback('#(<a href="[^"]*/stays/">[^<]*</a>)#u', function ($m) use ($url, $label) {
-        return '<a href="' . esc_url($url) . '">' . esc_html($label) . '</a>' . $m[1];
-    }, $html, 2);
+    $html = preg_replace_callback('#(<li>\s*)?(<a href="[^"]*/stays/">[^<]*</a>)#u', function ($m) use ($url, $label) {
+        $link = '<a href="' . esc_url($url) . '">' . esc_html($label) . '</a>';
+        return !empty($m[1]) ? $m[1] . $link . '</li><li>' . $m[2] : $link . $m[2];
+    }, $html, 3);
+    // Thanh liên hệ cố định cho điện thoại trên trang dịch vụ
+    if (strpos($html, 'ds-svcpage') !== false && strpos($html, '<nav class="ds-mbar"') === false) {
+        $mb = ['vi' => ['Gọi', 'Zalo', 'Gửi yêu cầu'], 'ko' => ['전화', 'Zalo', '문의하기'], 'en' => ['Call', 'Zalo', 'Request']];
+        $m = isset($mb[dst_lang()]) ? $mb[dst_lang()] : $mb['en'];
+        $bar = '<nav class="ds-mbar" translate="no"><a href="tel:0909669325">📞 ' . $m[0] . '</a><a href="https://zalo.me/0909669325" target="_blank" rel="noopener">💬 ' . $m[1] . '</a><a href="' . esc_url(trailingslashit(dst_lang_home()) . '#reserve') . '">✉️ ' . $m[2] . '</a></nav>';
+        $html = str_replace('</body>', $bar . '</body>', $html);
+    }
     // Trang Vé máy bay: thêm quy định mới + tin mới dưới mục lưu ý
     if (strpos($html, '<section class="ds-flight-notes"') !== false && strpos($html, '<section class="ds-rules"') === false) {
         $extra = '<div class="ds-flight-extra">' . do_shortcode('[ds_quy_dinh]') . do_shortcode('[ds_tin_moi so="3"]') . '</div>';
@@ -1228,6 +1237,91 @@ add_action('wp_head', function () {
 .ds-split__side .ds-contact__qr { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 14px; display: flex; gap: 10px; align-items: center; text-align: left; }
 .ds-split__side .ds-contact__qr img { width: 96px; height: 96px; }
 @media (max-width: 700px) { .ds-contact.has-qr { grid-template-columns: 1fr; } .ds-contact__qr { display: none; } }
+/* Trang dịch vụ: khoảng cách, nút nổi, hỏi đáp, thanh liên hệ điện thoại */
+body.ds-svcpage main > .section:first-of-type, body.ds-svcpage .page-head + .section { padding-top: 56px; }
+@media (min-width: 1001px) { body.ds-svcpage .float-cta { display: none !important; } }
+body.ds-svcpage .prose details { border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin: 0 0 10px; background: #fff; }
+body.ds-svcpage .prose details[open] { border-color: var(--bronze); box-shadow: 0 10px 26px -22px rgba(11,36,71,.6); }
+body.ds-svcpage .prose summary { cursor: pointer; font: 600 16.5px/1.4 var(--sans); color: var(--ink); list-style: none; position: relative; padding-right: 28px; }
+body.ds-svcpage .prose summary::-webkit-details-marker { display: none; }
+body.ds-svcpage .prose summary::after { content: "+"; position: absolute; right: 0; top: -2px; font-size: 22px; color: var(--bronze); }
+body.ds-svcpage .prose details[open] summary::after { content: "–"; }
+body.ds-svcpage .prose details p { margin: 10px 0 0 !important; font-size: 15.5px !important; }
+.ds-mbar { display: none; }
+@media (max-width: 1000px) {
+  .ds-mbar { display: grid; grid-template-columns: 1fr 1fr 1.3fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; box-shadow: 0 -8px 24px rgba(11,36,71,.22); }
+  .ds-mbar a { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 15px 6px calc(15px + env(safe-area-inset-bottom)); font: 700 15px/1 var(--sans); color: #fff !important; text-decoration: none; background: var(--bronze); }
+  .ds-mbar a:nth-child(2) { background: #0068ff; } .ds-mbar a:nth-child(3) { background: var(--sea); }
+  body.ds-svcpage .float-cta, body.ds-svcpage .callbar { display: none !important; }
+  body.ds-svcpage { padding-bottom: 56px; }
+  body.ds-svcpage .lang-hint { bottom: 72px; }
+  .lang-hint { right: 76px !important; left: 12px !important; }
+}
+/* ===== Trang chính Dịch vụ (hub) ===== */
+body.ds-hub .prose { font-size: 17px; }
+body.ds-hub .prose > *:not(.hub-main):not(.hub-more):not(.hub-stats) { max-width: 1200px; }
+.hub-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: -96px 0 48px !important; position: relative; z-index: 3; }
+.hub-stats > div { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; box-shadow: 0 18px 40px -28px rgba(11,36,71,.6); text-align: left; }
+.hub-stats b { display: block; font: 700 16px/1.3 var(--sans); color: var(--ink); }
+.hub-stats span { display: block; font-size: 13.5px; line-height: 1.45; color: var(--muted); margin-top: 3px; }
+body.ds-hub .page-head.ds-hero { padding-bottom: 130px; }
+.prose h2.hub-h { font-size: clamp(28px, 3vw, 40px); margin: 1.6em 0 .35em; text-align: left; }
+.prose .hub-lead { color: var(--muted); font-size: 17px !important; margin: 0 0 20px !important; text-align: left !important; }
+.hub-main { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.hub-card { position: relative; display: flex; flex-direction: column; padding: 26px 24px 24px; border-radius: 18px; color: #fff !important; text-decoration: none !important; overflow: hidden; min-height: 340px; box-shadow: 0 24px 48px -30px rgba(11,36,71,.8); transition: transform .25s, box-shadow .25s; text-align: left; }
+.hub-card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -30px rgba(11,36,71,.85); }
+.hub-card--stay { background: linear-gradient(150deg, #0b2447, #1e4f8a); }
+.hub-card--fly { background: linear-gradient(150deg, #0e3a5f, #0a7aa8); }
+.hub-card--ticket { background: linear-gradient(150deg, #c2410c, #ea580c 55%, #ff8a3d); }
+.hub-card::after { content: ""; position: absolute; right: -60px; top: -60px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,.08); }
+.hub-card .ic { font-size: 40px; line-height: 1; margin-bottom: 14px; }
+.hub-card strong { font: 600 28px/1.15 var(--serif); }
+.hub-card em { font-style: normal; font-size: 14.5px; opacity: .85; margin: 4px 0 14px; }
+.hub-card ul { list-style: none; margin: 0 0 18px !important; padding: 0 !important; display: grid; gap: 8px; flex: 1; }
+.hub-card li { margin: 0 !important; padding: 0 0 0 24px !important; position: relative; font-size: 15px !important; line-height: 1.45 !important; color: #fff !important; text-align: left !important; }
+.hub-card li::before { content: "✓" !important; position: absolute !important; left: 0; top: 0; width: auto !important; height: auto !important; background: none !important; color: #ffd08a; font-weight: 700; }
+.hub-card .btn { align-self: flex-start; background: #fff; color: var(--ink); border-radius: 999px; padding: 11px 18px; font: 700 14px/1 var(--sans); }
+.hub-card--ticket .btn { color: #c2410c; }
+.hub-more { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
+.hub-more a { display: flex; gap: 14px; align-items: center; padding: 16px 18px; border: 1px solid var(--line); border-radius: 14px; background: #fff; color: var(--ink) !important; text-decoration: none !important; transition: border-color .2s, transform .2s; text-align: left; }
+.hub-more a:hover { border-color: var(--bronze); transform: translateY(-2px); }
+.hub-more .ic { font-size: 28px; }
+.hub-more strong { display: block; font: 600 16px/1.3 var(--sans); }
+.hub-more span:not(.ic) { display: block; font-size: 13.5px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
+body.ds-hub .ds-steps { counter-reset: s; }
+body.ds-hub .ds-steps li { position: relative; padding-top: 18px; }
+body.ds-hub .ds-steps li strong { display: block; font: 600 18px/1.3 var(--serif); margin-bottom: 6px; }
+.hub-cta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 18px; margin: 40px 0 10px; padding: 26px 28px; border-radius: 18px; background: linear-gradient(120deg, #fff1e8, #ffe3cf); border: 1px solid #ffd3b3; text-align: left; }
+.hub-cta strong { display: block; font: 600 22px/1.3 var(--serif); color: var(--ink); }
+.hub-cta span { display: block; font-size: 15px; color: var(--ink-2); margin-top: 4px; max-width: 640px; }
+.hub-cta__btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.hub-why { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.hub-why > div { background: var(--ivory); border-radius: 14px; padding: 20px 18px; text-align: left; }
+.hub-why span { font-size: 28px; display: block; margin-bottom: 8px; }
+.hub-why strong { display: block; font: 600 17px/1.3 var(--sans); color: var(--ink); margin-bottom: 4px; }
+.hub-why p { margin: 0 !important; font-size: 14.5px !important; line-height: 1.5 !important; text-align: left !important; }
+.hub-areas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.hub-areas > div { border: 1px solid var(--line); border-left: 4px solid var(--bronze); border-radius: 10px; padding: 14px 16px; background: #fff; text-align: left; }
+.hub-areas strong { display: block; font: 600 16px/1.3 var(--sans); color: var(--ink); }
+.hub-areas span { display: block; font-size: 14px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
+.hub-info { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 20px; margin: 48px 0 0; align-items: start; }
+.hub-info > p:empty { display: none; }
+@media (max-width: 1000px) {
+  .hub-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: -70px !important; }
+  .hub-main, .hub-more, .hub-areas { grid-template-columns: 1fr 1fr; }
+  .hub-why { grid-template-columns: 1fr 1fr; }
+  .hub-info { grid-template-columns: 1fr; }
+  .hub-card { min-height: 0; }
+}
+@media (max-width: 640px) {
+  .hub-main, .hub-more, .hub-areas { grid-template-columns: 1fr; }
+  .hub-stats { gap: 10px; }
+  .hub-stats > div { padding: 12px 14px; }
+  .hub-stats b { font-size: 14.5px; } .hub-stats span { font-size: 12.5px; }
+  .hub-card { padding: 22px 20px; }
+  .hub-card strong { font-size: 24px; }
+  .hub-cta { padding: 20px; }
+}
 /* Căn trái, không dàn đều chữ trong khối dịch vụ */
 .ds-split, .ds-split p, .ds-split li, .ds-steps li, .ds-rules li, .ds-rules span, .ds-service .tx, .ds-ticket p, .ds-ticket li { text-align: left !important; hyphens: manual; }
 .ds-split__side > p:empty { display: none; }
@@ -1247,8 +1341,130 @@ body.ds-hub .prose > p:first-of-type::first-letter { float: none; font-size: inh
 
 // Đánh dấu trang Dịch vụ để dùng bố cục rộng
 add_filter('dst_html', function ($html) {
-    if (strpos($html, 'class="ds-services"') !== false && strpos($html, 'class="ds-split"') !== false) {
-        $html = str_replace('<body class="', '<body class="ds-hub ds-service ', $html);
+    if (strpos($html, 'class="hub-main"') !== false || (strpos($html, 'class="ds-services"') !== false && strpos($html, 'class="ds-split"') !== false)) {
+        $html = str_replace('<body class="', '<body class="ds-hub ds-svcpage ', $html);
     }
     return $html;
 }, 5);
+
+/* ------------------------------------------------------------------ */
+/* 12. Không tự chèn <p> trên trang dịch vụ (giữ nguyên bố cục thẻ)     */
+/* ------------------------------------------------------------------ */
+add_filter('the_content', function ($c) {
+    if (strpos($c, 'class="hub-main"') !== false || strpos($c, 'class="ds-tickets') !== false || strpos($c, 'class="ds-split"') !== false) {
+        remove_filter('the_content', 'wpautop');
+        remove_filter('the_content', 'shortcode_unautop');
+    }
+    return $c;
+}, 1);
+
+/* ------------------------------------------------------------------ */
+/* 13. Nút Zalo + khung chat cạnh phải (toàn site)                      */
+/* ------------------------------------------------------------------ */
+add_action('wp_footer', function () {
+    $l = dst_lang();
+    $T = [
+        'vi' => ['Vân Trần', 'Tư vấn DanangStay · thường trả lời trong vài phút', 'Xin chào 👋 Bạn cần tìm phòng, vé máy bay hay vé tham quan ở Đà Nẵng? Nhắn Zalo hoặc để lại số điện thoại, mình gọi lại ngay nhé!', 'Chat Zalo', 'WhatsApp', 'Gọi', 'Hoặc để lại thông tin', 'Tên của bạn', 'Số điện thoại / Zalo', 'Bạn cần gì?', ['Đặt phòng', 'Vé máy bay', 'Vé tham quan', 'Xe đưa đón', 'Tour', 'Trọn gói'], 'Ngày đi, số người… (không bắt buộc)', 'Gửi', 'Cảm ơn bạn! Vân Trần sẽ liên hệ sớm.', 'Chưa gửi được, bạn nhắn Zalo giúp mình nhé.', 'Chat với chúng tôi', 'Đóng'],
+        'ko' => ['Vân Trần', 'DanangStay 상담 · 보통 몇 분 안에 답변', '안녕하세요 👋 다낭 숙소, 항공권, 입장권이 필요하신가요? 카카오톡·Zalo로 메시지 주시거나 연락처를 남겨 주세요!', 'Zalo 채팅', 'WhatsApp', '전화', '또는 연락처 남기기', '이름', '전화번호 / 카카오톡 ID', '필요한 서비스', ['숙소', '항공권', '입장권', '픽업', '투어', '패키지'], '날짜, 인원… (선택)', '보내기', '감사합니다! 곧 연락드리겠습니다.', '전송에 실패했습니다. Zalo로 메시지 주세요.', '채팅 상담', '닫기'],
+        'en' => ['Vân Trần', 'DanangStay concierge · usually replies in minutes', 'Hi 👋 Looking for a room, flights or attraction tickets in Da Nang? Message us on WhatsApp or Zalo, or leave your number and we will get back to you!', 'Chat on Zalo', 'WhatsApp', 'Call', 'Or leave your details', 'Your name', 'Phone / WhatsApp', 'What do you need?', ['Room', 'Flights', 'Tickets', 'Transfer', 'Tour', 'Package'], 'Dates, guests… (optional)', 'Send', 'Thank you! We will contact you shortly.', 'Could not send — please message us on WhatsApp or Zalo.', 'Chat with us', 'Close'],
+    ];
+    $t = isset($T[$l]) ? $T[$l] : $T['en'];
+    $avatar = (string) get_option('dst_contact_avatar', '');
+    $av = $avatar ? '<img src="' . esc_url($avatar) . '" alt="" width="44" height="44">' : '<span>VT</span>';
+    $opts = '';
+    foreach ($t[10] as $o) {
+        $opts .= '<option>' . esc_html($o) . '</option>';
+    }
+    $endpoint = esc_url(rest_url('danangstay/v1/lead'));
+    ?>
+<div class="dsw" translate="no" data-endpoint="<?php echo $endpoint; ?>" data-lang="<?php echo esc_attr($l); ?>" data-ok="<?php echo esc_attr($t[13]); ?>" data-err="<?php echo esc_attr($t[14]); ?>">
+  <div class="dsw__panel" role="dialog" aria-label="<?php echo esc_attr($t[15]); ?>" hidden>
+    <div class="dsw__head"><div class="dsw__av"><?php echo $av; // phpcs:ignore ?></div><div><strong><?php echo esc_html($t[0]); ?></strong><span><?php echo esc_html($t[1]); ?></span></div><button type="button" class="dsw__x" aria-label="<?php echo esc_attr($t[16]); ?>">×</button></div>
+    <div class="dsw__body">
+      <p class="dsw__msg"><?php echo esc_html($t[2]); ?></p>
+      <div class="dsw__btns"><a href="https://zalo.me/0909669325" target="_blank" rel="noopener" class="z">💬 <?php echo esc_html($t[3]); ?></a><a href="https://wa.me/84909669325" target="_blank" rel="noopener" class="w">🟢 <?php echo esc_html($t[4]); ?></a><a href="tel:0909669325" class="c">📞 <?php echo esc_html($t[5]); ?></a></div>
+      <form class="dsw__form" novalidate>
+        <p class="dsw__or"><?php echo esc_html($t[6]); ?></p>
+        <input name="name" placeholder="<?php echo esc_attr($t[7]); ?>" autocomplete="name" required>
+        <input name="phone" type="tel" placeholder="<?php echo esc_attr($t[8]); ?>" autocomplete="tel" inputmode="tel" required>
+        <select name="need" aria-label="<?php echo esc_attr($t[9]); ?>"><?php echo $opts; // phpcs:ignore ?></select>
+        <textarea name="msg" rows="2" placeholder="<?php echo esc_attr($t[11]); ?>"></textarea>
+        <input name="website" class="dsw__hp" tabindex="-1" autocomplete="off">
+        <button type="submit"><?php echo esc_html($t[12]); ?></button>
+        <p class="dsw__status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+  <a class="dsw__zalo" href="https://zalo.me/0909669325" target="_blank" rel="noopener" aria-label="Zalo">Zalo</a>
+  <button type="button" class="dsw__open" aria-label="<?php echo esc_attr($t[15]); ?>"><span class="dsw__dot"></span>💬</button>
+</div>
+<script id="dst-chat">
+(function () {
+  var w = document.querySelector('.dsw'); if (!w) return;
+  var p = w.querySelector('.dsw__panel'), f = w.querySelector('.dsw__form'), st = w.querySelector('.dsw__status');
+  function toggle(open) { p.hidden = !open; w.classList.toggle('is-open', open); try { sessionStorage.setItem('dswSeen', '1'); } catch (e) {} }
+  w.querySelector('.dsw__open').addEventListener('click', function () { toggle(p.hidden); });
+  w.querySelector('.dsw__x').addEventListener('click', function () { toggle(false); });
+  try { if (!sessionStorage.getItem('dswSeen')) w.classList.add('is-new'); } catch (e) {}
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (f.website.value) return;
+    var name = f.name.value.trim(), phone = f.phone.value.trim();
+    if (!name || phone.replace(/\D/g, '').length < 6) { f.reportValidity && f.reportValidity(); return; }
+    var btn = f.querySelector('button'); btn.disabled = true;
+    fetch(w.dataset.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+      name: name, phone: phone, via: 'Chat web', msg: (f.need.value + (f.msg.value.trim() ? ' – ' + f.msg.value.trim() : '')),
+      lang: w.dataset.lang, source: 'Khung chat web: ' + f.need.value, page: location.href.split('?')[0] }) })
+    .then(function (r) { if (!r.ok) throw 0; st.textContent = w.dataset.ok; f.reset(); if (window.gtag) gtag('event', 'generate_lead', { method: 'chat' }); if (window.fbq) fbq('track', 'Lead'); })
+    .catch(function () { st.textContent = w.dataset.err; })
+    .then(function () { btn.disabled = false; });
+  });
+})();
+</script>
+    <?php
+}, 120);
+
+add_action('wp_head', function () {
+    ?>
+<style id="dst-chat-css">
+.dsw { position: fixed; right: 18px; bottom: 96px; z-index: 80; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; font-family: var(--sans); }
+.dsw__zalo, .dsw__open { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; border: 0; cursor: pointer; box-shadow: 0 10px 24px -8px rgba(11,36,71,.55); text-decoration: none; }
+.dsw__zalo { background: #0068ff; color: #fff !important; font: 800 13px/1 var(--sans); }
+.dsw__open { background: var(--bronze); color: #fff; font-size: 24px; position: relative; }
+.dsw.is-open .dsw__open { background: var(--sea); }
+.dsw__dot { position: absolute; top: 4px; right: 4px; width: 12px; height: 12px; border-radius: 50%; background: #22c55e; border: 2px solid #fff; display: none; }
+.dsw.is-new .dsw__dot { display: block; animation: dswPulse 1.8s infinite; }
+@keyframes dswPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.25); } }
+.dsw__zalo:hover, .dsw__open:hover { transform: translateY(-2px); }
+.dsw__panel { width: min(360px, calc(100vw - 32px)); background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 60px -20px rgba(11,36,71,.55); border: 1px solid var(--line); }
+.dsw__panel[hidden] { display: none; }
+.dsw__head { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: linear-gradient(135deg, #0b2447, #1e4f8a); color: #fff; }
+.dsw__head strong { display: block; font-size: 16px; }
+.dsw__head span { display: block; font-size: 12px; color: #c9d6e6; }
+.dsw__av { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex: none; background: var(--bronze); display: grid; place-items: center; font-weight: 700; }
+.dsw__av img { width: 100%; height: 100%; object-fit: cover; }
+.dsw__x { margin-left: auto; background: none; border: 0; color: #fff; font-size: 26px; line-height: 1; cursor: pointer; opacity: .8; }
+.dsw__body { padding: 14px 16px 16px; max-height: min(70vh, 520px); overflow-y: auto; }
+.dsw__msg { background: var(--ivory); border-radius: 4px 14px 14px 14px; padding: 10px 12px; margin: 0 0 12px; font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+.dsw__btns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.dsw__btns a { display: flex; align-items: center; justify-content: center; padding: 10px 6px; border-radius: 10px; color: #fff !important; font: 700 13px/1.2 var(--sans); text-decoration: none; text-align: center; }
+.dsw__btns .z { background: #0068ff; } .dsw__btns .w { background: #25d366; } .dsw__btns .c { background: var(--bronze); }
+.dsw__or { margin: 0 0 8px; font-size: 12.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
+.dsw__form { display: grid; gap: 8px; }
+.dsw__form input, .dsw__form select, .dsw__form textarea { width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font: 400 14.5px/1.4 var(--sans); color: var(--ink); background: #fff; box-sizing: border-box; }
+.dsw__form input:focus, .dsw__form select:focus, .dsw__form textarea:focus { outline: 2px solid #ffb27a; border-color: var(--bronze); }
+.dsw__form button { border: 0; border-radius: 10px; padding: 12px; background: var(--sea); color: #fff; font: 700 15px/1 var(--sans); cursor: pointer; }
+.dsw__form button:disabled { opacity: .6; }
+.dsw__hp { position: absolute; left: -9999px; }
+.dsw__status { margin: 2px 0 0; font-size: 13.5px; color: #16803c; }
+@media (max-width: 1000px) {
+  .dsw { right: 12px; bottom: 84px; }
+  body.ds-svcpage .dsw { bottom: 72px; }
+  .dsw__zalo, .dsw__open { width: 50px; height: 50px; }
+}
+/* Thẻ dịch vụ lớn: chữ trắng */
+.hub-card strong, .hub-card em, .hub-card li { color: #fff !important; }
+@media (max-width: 640px) { body.ds-hub .page-head.ds-hero { padding-bottom: 96px; } }
+</style>
+    <?php
+}, 104);
