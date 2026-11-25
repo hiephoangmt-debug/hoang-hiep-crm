@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 3.1.0
+ * Version: 3.3.1
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2057,7 +2057,7 @@ add_filter('dst_html', function ($html) {
 
 // ===== 20. "Tin tức" thành mục riêng trên menu chính (bỏ khỏi menu con Khám phá) =====
 add_filter('dst_html', function ($html) {
-    if (!preg_match('#<nav class="nav" aria-label="Menu">.*?</nav>#s', $html, $nm)) {
+    if (!preg_match('#<nav class="nav" aria-label="[^"]*">.*?</nav>#s', $html, $nm)) {
         return $html;
     }
     $nav = $nm[0];
@@ -2234,7 +2234,7 @@ body.home .map-section { align-items: center; }
 // ===== 23. Trang chủ: mục "Sắp diễn ra" (lấy từ trang Sự kiện, lưu đệm 6 giờ) =====
 function dst_upcoming_events($lang, $n = 4)
 {
-    $key = 'dst_ev_' . $lang;
+    $key = "dst_ev2_" . $lang;
     $list = get_transient($key);
     if ($list === false) {
         $list = [];
@@ -2319,3 +2319,33 @@ add_filter('dst_html', function ($html) {
 </style>';
     return str_replace('</head>', $css . '</head>', $html);
 }, 45);
+
+// ===== 24. Trang ko/ja/zh/ru/fr/de: dịch các chuỗi theme chỉ có tiếng Anh (sự kiện, chỗ ở, số liệu, thành phố) =====
+add_filter('dst_html', function ($html) {
+    $l = dst_lang();
+    $file = __DIR__ . '/i18n/' . $l . '.php';
+    if (!in_array($l, ['ko', 'ja', 'zh', 'ru', 'fr', 'de'], true) || !file_exists($file)) {
+        return $html;
+    }
+    static $map = null;
+    if ($map === null) {
+        $map = include $file;
+    }
+    $parts = preg_split('#(<(?:script|style)\b.*?</(?:script|style)>)#s', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
+    foreach ($parts as $i => $part) {
+        if ($i % 2) {
+            continue;
+        }
+        $parts[$i] = preg_replace_callback('#>([^<>]{2,})<#u', function ($m) use ($map) {
+            $raw = $m[1];
+            $txt = trim(html_entity_decode($raw, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+            if ($txt === '' || !isset($map[$txt])) {
+                return $m[0];
+            }
+            $lead = preg_match('#^\s+#', $raw, $x) ? $x[0] : '';
+            $tail = preg_match('#\s+$#', $raw, $y) ? $y[0] : '';
+            return '>' . $lead . esc_html($map[$txt]) . $tail . '<';
+        }, $part);
+    }
+    return implode('', $parts);
+}, 5);
