@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 1.0.3
+ * Version: 1.0.4
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -155,9 +155,10 @@ function dst_filter_html($html)
     }
     if (strpos($html, 'hreflang="x-default"') === false) {
         $html = preg_replace_callback(
-            '#<link\s+rel="alternate"\s+href="([^"]+)"\s+hreflang="en"\s*/?>#',
+            '#<link\s+rel="alternate"\s+(?:href="([^"]+)"\s+hreflang="en"|hreflang="en"\s+href="([^"]+)")\s*/?>#',
             function ($m) {
-                return $m[0] . "\n" . '<link rel="alternate" href="' . $m[1] . '" hreflang="x-default" />';
+                $url = $m[1] !== '' ? $m[1] : $m[2];
+                return $m[0] . "\n" . '<link rel="alternate" href="' . $url . '" hreflang="x-default" />';
             },
             $html,
             1
