@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -12 240 260">
+<defs>
+<linearGradient id="st" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7B32B"/><stop offset=".35" stop-color="#F28C28"/><stop offset="1" stop-color="#D7263D"/></linearGradient>
+<linearGradient id="bw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D7263D"/><stop offset=".6" stop-color="#A2238F"/><stop offset="1" stop-color="#7B2CBF"/></linearGradient>
+<linearGradient id="hd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7B32B"/><stop offset="1" stop-color="#F28C28"/></linearGradient>
+</defs>
+<!-- bụng chữ D -->
+<path d="M104 74 C150 52 214 64 226 120 C238 180 170 236 84 236 C60 236 40 232 30 226 C52 228 70 228 88 226 C160 220 210 178 202 124 C196 84 150 72 108 86 Z" fill="url(#bw)"/>
+<!-- cổ rồng = nét dọc -->
+<path d="M58 240 C76 196 80 140 74 104 C70 84 62 72 50 64 L62 50 C80 62 92 80 96 104 C102 146 92 196 72 242 Z" fill="url(#st)"/>
+<!-- nét hất chân -->
+<path d="M10 214 C34 196 62 198 96 210 C64 206 38 208 14 222 Z" fill="#F7B32B"/>
+<!-- đầu rồng -->
+<path d="M62 50 C68 44 72 38 70 32 C78 32 82 26 78 20 C84 18 86 10 80 6 C76 12 70 12 66 8 C64 14 58 16 52 12 C52 18 48 22 42 20 L70 0 C58 2 46 8 38 16 C30 18 22 22 16 28 C10 30 4 32 2 36 C8 38 14 38 20 38 C14 42 8 46 6 52 C14 52 22 50 28 48 C34 54 42 60 50 64 Z" fill="url(#hd)"/>
+<circle cx="32" cy="27" r="2.6" fill="#fff"/><circle cx="31.6" cy="27" r="1.3" fill="#0B2447"/>
+<path d="M20 22 C14 14 8 12 2 14" fill="none" stroke="#E8590C" stroke-width="2.4" stroke-linecap="round"/>
+</svg>
