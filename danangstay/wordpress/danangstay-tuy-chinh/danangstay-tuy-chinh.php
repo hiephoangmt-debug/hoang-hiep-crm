@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 2.4.4
+ * Version: 2.5.0
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -1128,6 +1128,16 @@ add_shortcode('ds_quy_dinh', function () {
     ];
     $q = isset($Q[dst_lang()]) ? $Q[dst_lang()] : $Q['en'];
     $out = '<section class="ds-rules"><h3>📌 ' . esc_html($q[0]) . '</h3><p class="ds-rules__note">' . esc_html($q[1]) . '</p><ul>';
+    // Bài gắn thẻ "quy-dinh-moi" (do lịch tin tức tự đăng) hiện lên đầu danh sách
+    $nq = new WP_Query(['post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 3, 'no_found_rows' => true, 'ignore_sticky_posts' => true,
+        'lang' => dst_lang(), 'date_query' => [['after' => '120 days ago']],
+        'tax_query' => [['taxonomy' => 'post_tag', 'field' => 'slug', 'terms' => ['quy-dinh-moi', 'quy-dinh-moi-vi', 'quy-dinh-moi-ko', 'quy-dinh-moi-en', 'new-rules', 'new-rules-ko']]]]);
+    $newl = ['vi' => 'Mới', 'ko' => '새 소식'];
+    while ($nq->have_posts()) {
+        $nq->the_post();
+        $out .= '<li class="is-new"><b><em>' . esc_html($newl[dst_lang()] ?? 'New') . '</em> <a href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</a></b><span>' . esc_html(get_the_date('d/m/Y') . ' · ' . wp_trim_words(get_the_excerpt(), 20)) . '</span></li>';
+    }
+    wp_reset_postdata();
     foreach ($q[2] as $r) {
         $out .= '<li><b>' . esc_html($r[0]) . '</b><span>' . esc_html($r[1]) . '</span></li>';
     }
@@ -1820,6 +1830,8 @@ add_filter('dst_html', function ($html) {
 .ds-art__stick { position: sticky; top: 100px; }
 .ds-art__sticky { height: 100%; display: flex; flex-direction: column; gap: 18px; }
 .ds-art__side .ds-contact { margin: 0; }
+.ds-rules li.is-new em { font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: var(--bronze); color: #fff; border-radius: 4px; padding: 2px 6px; margin-right: 4px; vertical-align: 1px; }
+.ds-rules li.is-new a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .ds-toc { border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; background: #fff; font-family: var(--sans); }
 .ds-toc b, .ds-side-svc > b { display: block; font: 700 12px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--bronze); margin-bottom: 10px; }
 .ds-toc ol { margin: 0; padding: 0; list-style: none; counter-reset: t; max-height: 38vh; overflow: auto; }
