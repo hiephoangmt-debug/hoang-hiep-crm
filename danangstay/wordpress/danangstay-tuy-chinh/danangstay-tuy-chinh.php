@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 1.6.3
+ * Version: 1.6.4
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -888,6 +888,11 @@ function dst_flight_notes_html()
 
 // Chèn link "Vé tham quan" vào menu Đặt phòng + mục lưu ý vào trang Vé máy bay
 add_filter('dst_html', function ($html) {
+    // Menu: bỏ số điện thoại sau "Vé máy bay", đổi "Đặt phòng" (bản tiếng Việt) thành "Dịch vụ"
+    $html = preg_replace('#(<a href="[^"]*/flights/"[^>]*>[^<]*?)\s*·\s*0909\s?669\s?325\s*</a>#u', '$1</a>', $html);
+    if (dst_lang() === 'vi' || preg_match('#<html[^>]*\slang="vi#i', $html)) {
+        $html = preg_replace('#(/stays/"\s+class="nav__parent"[^>]*>)[^<]+#u', '${1}Dịch vụ', $html);
+    }
     $url = dst_tickets_url();
     if ($url) {
         $html = preg_replace_callback('#(<a href="[^"]*/flights/">[^<]*</a>)#u', function ($m) use ($url) {
