@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 1.0.4
+ * Version: 1.1.0
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -251,3 +251,86 @@ add_action('template_redirect', function () {
         exit;
     }
 }, 1);
+
+/* ------------------------------------------------------------------ */
+/* 4. Khóa API riêng cho trợ lý (hosting chặn header Authorization)    */
+/*    Gửi khóa qua header X-DS-Token; chỉ dùng cho REST API (/wp-json). */
+/* ------------------------------------------------------------------ */
+
+function dst_is_rest_request()
+{
+    $uri = isset($_SERVER['REQUEST_URI']) ? (string) wp_unslash($_SERVER['REQUEST_URI']) : '';
+    return strpos($uri, '/wp-json/') !== false || isset($_GET['rest_route']); // phpcs:ignore WordPress.Security.NonceVerification
+}
+
+add_filter('determine_current_user', function ($user_id) {
+    if ($user_id || empty($_SERVER['HTTP_X_DS_TOKEN']) || !dst_is_rest_request()) {
+        return $user_id;
+    }
+    $hash = (string) get_option('dst_api_key_hash', '');
+    $uid  = (int) get_option('dst_api_user', 0);
+    if ($hash === '' || $uid <= 0) {
+        return $user_id;
+    }
+    $key = (string) wp_unslash($_SERVER['HTTP_X_DS_TOKEN']);
+    if (!hash_equals($hash, hash('sha256', $key))) {
+        return $user_id;
+    }
+    update_option('dst_api_last_used', current_time('mysql'), false);
+    return $uid;
+}, 30);
+
+add_action('admin_menu', function () {
+    add_options_page('DanangStay API', 'DanangStay API', 'manage_options', 'danangstay-api', 'dst_api_page');
+});
+
+function dst_api_page()
+{
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+    $new_key = '';
+    if (isset($_POST['dst_action']) && check_admin_referer('dst_api')) {
+        if ($_POST['dst_action'] === 'create') {
+            $new_key = 'dsk_' . bin2hex(random_bytes(24));
+            update_option('dst_api_key_hash', hash('sha256', $new_key), false);
+            update_option('dst_api_user', get_current_user_id(), false);
+            update_option('dst_api_created', current_time('mysql'), false);
+            delete_option('dst_api_last_used');
+        } elseif ($_POST['dst_action'] === 'revoke') {
+            delete_option('dst_api_key_hash');
+            delete_option('dst_api_user');
+            delete_option('dst_api_created');
+            delete_option('dst_api_last_used');
+        }
+    }
+    $has = (string) get_option('dst_api_key_hash', '') !== '';
+    echo '<div class="wrap"><h1>DanangStay API – khóa cho trợ lý</h1>';
+    echo '<p>Khóa này cho phép trợ lý (Claude) đăng bài, tải ảnh và cập nhật website qua REST API, với quyền của tài khoản tạo khóa. Thu hồi khóa bất cứ lúc nào.</p>';
+    if ($new_key) {
+        echo '<div class="notice notice-success"><p><strong>Khóa mới (chỉ hiện một lần — copy ngay):</strong></p>';
+        echo '<p><input type="text" readonly class="large-text code" value="' . esc_attr($new_key) . '" onclick="this.select()"></p>';
+        echo '<p>Dán khóa này vào ô bảo mật trợ lý gửi (không dán vào khung chat).</p></div>';
+    }
+    if ($has) {
+        $u = get_userdata((int) get_option('dst_api_user'));
+        echo '<p>Trạng thái: <strong style="color:#00a32a">Đang bật</strong> · tài khoản: ' . esc_html($u ? $u->user_login : '?')
+            . ' · tạo lúc: ' . esc_html((string) get_option('dst_api_created'))
+            . ' · dùng lần cuối: ' . esc_html((string) get_option('dst_api_last_used', 'chưa dùng')) . '</p>';
+    } else {
+        echo '<p>Trạng thái: <strong>Chưa có khóa</strong></p>';
+    }
+    echo '<form method="post" style="display:inline-block;margin-right:8px">';
+    wp_nonce_field('dst_api');
+    echo '<input type="hidden" name="dst_action" value="create">';
+    submit_button($has ? 'Tạo khóa mới (khóa cũ hết hiệu lực)' : 'Tạo khóa', 'primary', 'submit', false);
+    echo '</form>';
+    if ($has) {
+        echo '<form method="post" style="display:inline-block">';
+        wp_nonce_field('dst_api');
+        echo '<input type="hidden" name="dst_action" value="revoke">';
+        submit_button('Thu hồi khóa', 'delete', 'submit', false);
+        echo '</form>';
+    }
+    echo '</div>';
+}
