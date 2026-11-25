@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.6.1
+ * * Version: 3.7.0
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -748,6 +748,7 @@ add_shortcode('ds_lien_he', function () {
         . '<a class="ds-btn ds-btn--call" href="tel:' . $phone . '">📞 ' . esc_html(dst_t('call')) . ' 0909 669 325</a>'
         . '<a class="ds-btn ds-btn--zalo" href="https://zalo.me/' . $phone . '" target="_blank" rel="noopener">Zalo</a>'
         . '<a class="ds-btn ds-btn--wa" href="https://wa.me/' . $intl . '" target="_blank" rel="noopener">WhatsApp</a>'
+        . '<a class="ds-btn ds-btn--fb" href="' . DST_FB . '" target="_blank" rel="noopener">Facebook</a>'
         . '</div><p class="ds-contact__note">' . esc_html(dst_t('hours')) . '</p>' . $qrh . '</div></div>';
 });
 
@@ -2418,3 +2419,49 @@ footer .brand img.ds-logo,.site-footer .brand img.ds-logo{height:84px}
 @media (max-width:600px){.brand img.ds-logo{height:44px}}
 </style>';
 }, 108);
+
+// ===== 28. Trang Facebook: chân trang, hộp liên hệ, cuối bài, schema sameAs =====
+if (!defined('DST_FB')) {
+    define('DST_FB', 'https://www.facebook.com/profile.php?id=61596640483357');
+}
+function dst_fb_label() {
+    $l = function_exists('pll_current_language') ? pll_current_language() : 'en';
+    $m = ['vi' => ['Theo dõi DanangStay trên Facebook', 'Tin du lịch, sự kiện và ưu đãi Đà Nẵng – Hội An – Huế mỗi ngày.', 'Theo dõi'],
+          'ko' => ['페이스북에서 DanangStay 팔로우', '다낭·호이안·후에 여행 소식, 이벤트, 특가를 매일 전해 드려요.', '팔로우'],
+          'ja' => ['FacebookでDanangStayをフォロー', 'ダナン・ホイアン・フエの旅行ニュースやイベントを毎日お届け。', 'フォロー'],
+          'zh' => ['在 Facebook 关注 DanangStay', '每天分享岘港、会安、顺化的旅游资讯与活动。', '关注'],
+          'ru' => ['Подписывайтесь на DanangStay в Facebook', 'Новости, события и предложения Дананга, Хойана и Хюэ каждый день.', 'Подписаться'],
+          'fr' => ['Suivez DanangStay sur Facebook', 'Actus, événements et bons plans à Da Nang, Hoi An et Hué chaque jour.', 'Suivre'],
+          'de' => ['Folgen Sie DanangStay auf Facebook', 'Täglich Reise-News, Events und Angebote aus Da Nang, Hoi An und Hue.', 'Folgen'],
+          'en' => ['Follow DanangStay on Facebook', 'Daily travel news, events and deals from Da Nang, Hoi An and Hue.', 'Follow']];
+    return $m[$l] ?? $m['en'];
+}
+add_filter('the_content', function ($c) {
+    if (!is_singular('post') || !in_the_loop() || !is_main_query()) {
+        return $c;
+    }
+    $t = dst_fb_label();
+    return $c . '<div class="ds-fbfollow" translate="no"><span class="ds-fbfollow__ic" aria-hidden="true">f</span><div><strong>' . esc_html($t[0]) . '</strong><br><span>' . esc_html($t[1]) . '</span></div><a class="ds-btn ds-btn--fb" href="' . DST_FB . '" target="_blank" rel="noopener">' . esc_html($t[2]) . '</a></div>';
+}, 30);
+add_filter('dst_html', function ($html) {
+    $fb = DST_FB;
+    // chân trang: thêm dòng Facebook vào cột Liên hệ + nút dưới đoạn giới thiệu
+    $html = preg_replace('#(<div class="footer-top">.*)(</ul>\s*</div>\s*</div>\s*<div class="footer-bottom">)#s', '$1<li><a href="' . $fb . '" target="_blank" rel="noopener">Facebook · DanangStay</a></li>$2', $html, 1);
+    $html = preg_replace('#(<div class="footer-top">\s*<div>\s*<a class="brand".*?</a>\s*<p>.*?</p>)#s', '$1<p class="ds-social"><a class="ds-social__fb" href="' . $fb . '" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.6V21h2.9z"/></svg> Facebook</a></p>', $html, 1);
+    // schema: sameAs + logo mới
+    $html = str_replace('"@id":"https://danangstay.com.vn/#organization",', '"@id":"https://danangstay.com.vn/#organization","sameAs":["' . str_replace('/', '\/', $fb) . '"],', $html);
+    $html = str_replace('https://danangstay.com.vn/wp-content/themes/danangstay-v3/assets/img/logo.png', plugins_url('assets/logo-720.png', __FILE__), $html);
+    return $html;
+}, 61);
+add_action('wp_head', function () {
+    echo '<style id="dst-fb-css">
+.ds-btn--fb{background:#1877f2}
+.ds-social{margin-top:14px!important}
+.ds-social__fb{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:#1877f2;color:#fff!important;font:600 14px/1 var(--sans);text-decoration:none!important}
+.ds-fbfollow{display:flex;align-items:center;gap:16px;margin:2em 0;padding:18px 20px;border-radius:12px;background:#eef4ff;border:1px solid #d6e4ff;font-family:var(--sans);text-align:left}
+.ds-fbfollow strong{color:#0b2447;font-size:17px}.ds-fbfollow span{color:#41557a;font-size:14px;line-height:1.5}
+.ds-fbfollow__ic{flex:none;width:44px;height:44px;border-radius:50%;background:#1877f2;color:#fff!important;font:700 26px/44px Arial,sans-serif!important;text-align:center}
+.ds-fbfollow .ds-btn{margin-left:auto;flex:none}
+@media (max-width:600px){.ds-fbfollow{flex-wrap:wrap}.ds-fbfollow .ds-btn{margin-left:0}}
+</style>';
+}, 109);
