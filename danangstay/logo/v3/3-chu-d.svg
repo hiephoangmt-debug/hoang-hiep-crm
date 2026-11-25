@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="DanangStay">
+  <!-- Chữ D: chữ D lớn chứa mặt trời, núi Sơn Trà và sóng — dạng monogram -->
+  <defs><clipPath id="d"><path d="M50 30 L104 30 C148 30 172 62 172 100 C172 138 148 170 104 170 L50 170Z"/></clipPath></defs>
+  <rect x="4" y="4" width="192" height="192" rx="44" fill="#0B2447"/>
+  <g clip-path="url(#d)">
+    <rect width="200" height="200" fill="#FFF1D6"/>
+    <circle cx="122" cy="80" r="22" fill="#E8590C"/>
+    <path d="M40 128 C64 104 84 98 104 110 C122 120 140 108 180 118 L180 200 L40 200Z" fill="#1F6E5A"/>
+    <path d="M40 146 C70 136 94 154 124 144 C148 136 164 146 180 142 L180 200 L40 200Z" fill="#1F7A8C"/>
+    <path d="M56 160 C80 154 98 166 122 160 C140 156 156 162 176 158" fill="none" stroke="#F7C548" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <path d="M50 30 L104 30 C148 30 172 62 172 100 C172 138 148 170 104 170 L50 170Z" fill="none" stroke="#F7C548" stroke-width="7" stroke-linejoin="round"/>
+</svg>

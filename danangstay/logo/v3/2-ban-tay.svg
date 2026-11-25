@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="DanangStay">
+  <!-- Bàn tay nâng: hai bàn tay tối giản nâng cung cầu vàng + mặt trời -->
+  <circle cx="100" cy="100" r="96" fill="#FFF4E2"/>
+  <circle cx="100" cy="74" r="20" fill="#E8590C"/>
+  <path d="M34 104 C70 84 130 84 166 104" fill="none" stroke="#E0A10B" stroke-width="10" stroke-linecap="round"/>
+  <!-- tay trái -->
+  <path d="M48 112 L48 100 a6 6 0 0 1 12 0 L60 96 a6 6 0 0 1 12 0 L72 112 C72 132 66 146 58 156 L46 156 C48 142 44 128 48 112Z" fill="#0B2447"/>
+  <!-- tay phải -->
+  <path d="M152 112 L152 100 a6 6 0 0 0 -12 0 L140 96 a6 6 0 0 0 -12 0 L128 112 C128 132 134 146 142 156 L154 156 C152 142 156 128 152 112Z" fill="#0B2447"/>
+  <path d="M36 170 C60 162 80 176 100 170 C120 164 140 176 164 170" fill="none" stroke="#1F7A8C" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="100" cy="100" r="92" fill="none" stroke="#0B2447" stroke-width="6"/>
+</svg>

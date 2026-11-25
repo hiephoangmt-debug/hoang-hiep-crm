@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="DanangStay">
+  <!-- Sóng Rồng: mặt trời mọc + thân Cầu Rồng một nét liền + sóng biển -->
+  <defs>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A3D"/><stop offset="1" stop-color="#E8590C"/></linearGradient>
+    <clipPath id="r"><rect x="0" y="0" width="200" height="200" rx="46"/></clipPath>
+  </defs>
+  <g clip-path="url(#r)">
+    <rect width="200" height="200" fill="#0B2447"/>
+    <circle cx="100" cy="104" r="44" fill="url(#sun)"/>
+    <rect x="0" y="104" width="200" height="96" fill="#0B2447"/>
+    <path d="M26 122 Q46 84 66 122 T106 122 T146 122 Q156 104 166 98 L178 92 L172 104 L180 108 L166 112"
+          fill="none" stroke="#F7C548" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M30 148 C52 140 70 156 100 148 C130 140 148 156 170 148" fill="none" stroke="#3AA0D8" stroke-width="7" stroke-linecap="round"/>
+    <path d="M52 168 C70 162 84 174 100 168 C116 162 130 174 148 168" fill="none" stroke="#3AA0D8" stroke-width="7" stroke-linecap="round" opacity=".55"/>
+  </g>
+</svg>

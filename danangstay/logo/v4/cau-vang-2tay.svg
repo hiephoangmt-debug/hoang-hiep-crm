@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200" role="img" aria-label="DanangStay – Cầu Vàng">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A3A68"/><stop offset="1" stop-color="#0B2447"/></linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#BFB8A8"/><stop offset=".5" stop-color="#EEE9DE"/><stop offset="1" stop-color="#B3AB9A"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F9D368"/><stop offset=".5" stop-color="#F2BB3A"/><stop offset="1" stop-color="#E3A21A"/></linearGradient>
+    <clipPath id="r"><rect width="200" height="200" rx="44"/></clipPath>
+    <!-- một bàn tay ngửa, các ngón hướng lên (ngón cái bên trong) -->
+    <g id="hand">
+      <path d="M0 200 L2 150 C-8 144 -14 132 -14 120 L-14 82 C-14 77 -10 74 -6 74 C-2 74 2 77 2 82 L2 100
+               L4 70 C4 65 8 62 12 62 C16 62 20 65 20 70 L20 100
+               L22 66 C22 61 26 58 30 58 C34 58 38 61 38 66 L38 102
+               L40 76 C40 71 44 68 48 68 C52 68 55 71 55 76 L55 114
+               L62 104 C65 100 70 100 72 104 C74 108 72 112 70 116 L58 140 C54 148 48 152 42 154 L44 200Z"
+            fill="url(#stone)" stroke="#6E6758" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M2 100 L2 110 M20 100 L20 110 M38 102 L38 112" stroke="#8A8272" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+  </defs>
+  <g clip-path="url(#r)">
+    <rect width="200" height="200" fill="url(#bg)"/>
+    <circle cx="100" cy="50" r="18" fill="#F28C28"/>
+    <path d="M30 46 C36 38 48 40 50 46 C57 44 62 49 60 54 L28 54 C22 54 23 46 30 46Z" fill="#fff" opacity=".18"/>
+    <path d="M142 40 C148 32 160 34 162 40 C169 38 174 43 172 48 L140 48 C134 48 135 40 142 40Z" fill="#fff" opacity=".14"/>
+    <path d="M0 154 C30 134 54 138 76 146 C98 154 122 132 152 134 C174 136 190 146 200 152 L200 200 L0 200Z" fill="#1E5F4E"/>
+    <!-- tay trái và tay phải (lật gương) -->
+    <use xlink:href="#hand" transform="translate(30 6) scale(.9)"/>
+    <use xlink:href="#hand" transform="translate(170 6) scale(-.9 .9)"/>
+    <!-- cầu vàng vắt ngang, tựa lên đầu các ngón tay -->
+    <path d="M-8 98 C50 80 150 80 208 98 L208 110 C150 93 50 93 -8 110Z" fill="url(#gold)"/>
+    <path d="M-8 98 C50 80 150 80 208 98" fill="none" stroke="#FFF2C4" stroke-width="2"/>
+    <g stroke="#B9800E" stroke-width="1.5" opacity=".85">
+      <path d="M6 94 L6 105 M18 90 L18 101 M30 87 L30 98 M42 85 L42 96 M54 83 L54 94 M66 82 L66 93 M78 81 L78 92 M90 80 L90 91 M102 80 L102 91 M114 80 L114 91 M126 81 L126 92 M138 82 L138 93 M150 84 L150 95 M162 86 L162 97 M174 88 L174 99 M186 91 L186 102"/>
+    </g>
+    <path d="M-4 178 C20 168 40 174 58 180 C78 170 102 172 116 182 C136 172 162 172 204 180 L204 204 L-4 204Z" fill="#F4F6F8" opacity=".95"/>
+  </g>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400" role="img" aria-label="DanangStay – Đà Nẵng, Hội An, Huế">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A3A68"/><stop offset="1" stop-color="#0B2447"/></linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#BFB8A8"/><stop offset=".5" stop-color="#EEE9DE"/><stop offset="1" stop-color="#B3AB9A"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F9D368"/><stop offset="1" stop-color="#E3A21A"/></linearGradient>
+    <linearGradient id="lan" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B8142B"/><stop offset=".5" stop-color="#E8394D"/><stop offset="1" stop-color="#B8142B"/></linearGradient>
+    <path id="arcTop" d="M70 200 A130 130 0 0 1 330 200"/>
+    <path id="arcBot" d="M62 206 A138 138 0 0 0 338 206"/>
+    <clipPath id="inner"><circle cx="200" cy="200" r="112"/></clipPath>
+    <g id="hand">
+      <path d="M0 200 L2 150 C-8 144 -14 132 -14 120 L-14 82 C-14 77 -10 74 -6 74 C-2 74 2 77 2 82 L2 100 L4 70 C4 65 8 62 12 62 C16 62 20 65 20 70 L20 100 L22 66 C22 61 26 58 30 58 C34 58 38 61 38 66 L38 102 L40 76 C40 71 44 68 48 68 C52 68 55 71 55 76 L55 114 L62 104 C65 100 70 100 72 104 C74 108 72 112 70 116 L58 140 C54 148 48 152 42 154 L44 200Z"
+            fill="url(#stone)" stroke="#6E6758" stroke-width="2.6" stroke-linejoin="round"/>
+    </g>
+  </defs>
+
+  <!-- vòng ngoài -->
+  <circle cx="200" cy="200" r="190" fill="#0B2447"/>
+  <circle cx="200" cy="200" r="178" fill="none" stroke="#F2BB3A" stroke-width="3"/>
+  <circle cx="200" cy="200" r="118" fill="none" stroke="#F2BB3A" stroke-width="3"/>
+  <text font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="40" letter-spacing="6" fill="#FFFFFF">
+    <textPath xlink:href="#arcTop" startOffset="50%" text-anchor="middle">DANANG STAY</textPath>
+  </text>
+  <text font-family="'Be Vietnam Pro',Arial,sans-serif" font-weight="700" font-size="21" letter-spacing="4" fill="#F2BB3A">
+    <textPath xlink:href="#arcBot" startOffset="50%" text-anchor="middle">ĐÀ NẴNG · HỘI AN · HUẾ</textPath>
+  </text>
+  <circle cx="58" cy="200" r="6" fill="#E8590C"/><circle cx="342" cy="200" r="6" fill="#E8590C"/>
+
+  <!-- khung trong: cảnh 3 miền -->
+  <g clip-path="url(#inner)">
+    <rect x="80" y="80" width="240" height="240" fill="url(#bg)"/>
+    <circle cx="200" cy="128" r="20" fill="#F28C28"/>
+    <path d="M80 236 C120 214 150 220 176 228 C204 236 236 214 270 216 C292 218 308 226 320 232 L320 320 L80 320Z" fill="#1E5F4E"/>
+
+    <!-- HUẾ: Ngọ Môn (bên phải) -->
+    <g transform="translate(244 206)">
+      <rect x="-4" y="22" width="72" height="30" fill="#C8463A" stroke="#5A1E19" stroke-width="2"/>
+      <path d="M8 52 L8 38 a6 6 0 0 1 12 0 L20 52Z M28 52 L28 34 a6 6 0 0 1 12 0 L40 52Z M48 52 L48 38 a6 6 0 0 1 12 0 L60 52Z" fill="#3A1410"/>
+      <rect x="10" y="10" width="44" height="12" fill="#E7D3A8" stroke="#5A1E19" stroke-width="1.6"/>
+      <path d="M2 12 C12 8 52 8 62 12 L56 4 C44 2 20 2 8 4Z" fill="#F2BB3A" stroke="#8A5A0B" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M14 3 C22 0 42 0 50 3 L46 -6 C38 -8 26 -8 18 -6Z" fill="#F2BB3A" stroke="#8A5A0B" stroke-width="1.6" stroke-linejoin="round"/>
+    </g>
+
+    <!-- HỘI AN: đèn lồng (bên trái) -->
+    <g transform="translate(118 168)">
+      <line x1="16" y1="-30" x2="16" y2="-6" stroke="#F2BB3A" stroke-width="2"/>
+      <rect x="9" y="-8" width="14" height="6" rx="2" fill="#F2BB3A"/>
+      <path d="M16 -2 C-6 2 -8 44 16 48 C40 44 38 2 16 -2Z" fill="url(#lan)" stroke="#7A0F1E" stroke-width="1.6"/>
+      <path d="M16 -2 C8 6 8 40 16 48 M16 -2 C24 6 24 40 16 48" fill="none" stroke="#7A0F1E" stroke-width="1.2" opacity=".7"/>
+      <rect x="9" y="46" width="14" height="6" rx="2" fill="#F2BB3A"/>
+      <path d="M16 52 L16 70 M12 56 L10 70 M20 56 L22 70" stroke="#F2BB3A" stroke-width="2" stroke-linecap="round"/>
+    </g>
+
+    <!-- ĐÀ NẴNG: Cầu Vàng ở giữa -->
+    <use xlink:href="#hand" transform="translate(166 158) scale(.42)"/>
+    <use xlink:href="#hand" transform="translate(234 158) scale(-.42 .42)"/>
+    <path d="M150 196 C176 186 224 186 250 196 L250 202 C224 192 176 192 150 202Z" fill="url(#gold)" stroke="#B9800E" stroke-width="1"/>
+
+    <!-- biển Mỹ Khê -->
+    <path d="M80 272 C110 262 136 280 170 272 C204 264 230 282 264 272 C290 264 306 272 320 270 L320 320 L80 320Z" fill="#1F7A8C"/>
+    <path d="M100 290 C126 282 146 296 172 290 C198 284 220 298 246 290 C268 284 286 292 304 288" fill="none" stroke="#BFE3F5" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>

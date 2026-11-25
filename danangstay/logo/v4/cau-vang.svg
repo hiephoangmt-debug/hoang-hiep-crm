@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="DanangStay – Cầu Vàng">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16325C"/><stop offset="1" stop-color="#0B2447"/></linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C9C2B3"/><stop offset=".45" stop-color="#ECE7DC"/><stop offset="1" stop-color="#B7AF9F"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F9D368"/><stop offset="1" stop-color="#E3A21A"/></linearGradient>
+    <clipPath id="r"><rect width="200" height="200" rx="44"/></clipPath>
+  </defs>
+  <g clip-path="url(#r)">
+    <rect width="200" height="200" fill="url(#bg)"/>
+    <!-- mặt trời & mây -->
+    <circle cx="152" cy="52" r="17" fill="#F28C28"/>
+    <path d="M118 66 C124 58 136 60 138 66 C146 64 152 70 150 76 L116 76 C110 76 111 66 118 66Z" fill="#fff" opacity=".22"/>
+    <path d="M20 58 C26 50 38 52 40 58 C47 56 52 61 50 66 L18 66 C12 66 13 58 20 58Z" fill="#fff" opacity=".16"/>
+    <!-- núi Bà Nà -->
+    <path d="M0 150 C30 128 52 132 74 140 C96 148 120 126 150 128 C172 130 188 140 200 146 L200 200 L0 200Z" fill="#1E5F4E"/>
+    <!-- bàn tay đá (ngón cái bên trái) -->
+    <g>
+      <path d="M72 200 L76 150 C66 146 58 138 52 128 L38 102 C35 96 38 90 44 90 C49 90 52 93 55 98 L64 114
+               L64 64 C64 57 69 53 74 53 C79 53 84 57 84 64 L84 104
+               L86 52 C86 45 91 41 96 41 C101 41 106 45 106 52 L106 104
+               L108 58 C108 51 113 47 118 47 C123 47 128 51 128 58 L128 108
+               L130 72 C130 66 134 62 139 62 C144 62 148 66 148 72 L148 128 C148 142 140 152 128 156 L130 200 Z"
+            fill="url(#stone)" stroke="#6E6758" stroke-width="2.2" stroke-linejoin="round"/>
+      <!-- khe ngón -->
+      <path d="M84 104 L84 116 M106 104 L106 116 M128 108 L128 118" stroke="#8A8272" stroke-width="2" stroke-linecap="round"/>
+      <path d="M92 168 C96 176 100 180 106 182" fill="none" stroke="#9C9484" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+    </g>
+    <!-- Cầu Vàng tựa trên các ngón tay -->
+    <path d="M-6 126 C44 104 120 100 210 116 L210 128 C120 113 44 117 -6 138Z" fill="url(#gold)"/>
+    <path d="M-6 126 C44 104 120 100 210 116" fill="none" stroke="#FFF2C4" stroke-width="2"/>
+    <g stroke="#B9800E" stroke-width="1.6" opacity=".9">
+      <path d="M8 121 L8 132 M20 117 L20 128 M32 114 L32 125 M44 111 L44 122 M56 109 L56 120 M68 108 L68 119 M80 107 L80 118 M92 106 L92 117 M104 106 L104 117 M116 106 L116 117 M128 107 L128 118 M140 108 L140 119 M152 109 L152 120 M164 111 L164 122 M176 112 L176 123 M188 114 L188 125"/>
+    </g>
+    <!-- mây sương dưới chân -->
+    <path d="M-4 176 C20 166 40 172 56 178 C76 170 100 172 112 180 C132 170 160 172 204 178 L204 204 L-4 204Z" fill="#fff" opacity=".9"/>
+  </g>
+</svg>
