@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 1.3.0
+ * Version: 1.4.0
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -462,3 +462,102 @@ function dst_self_update(WP_REST_Request $r)
     }
     return ['ok' => true, 'version' => $data['Version']];
 }
+
+/* ------------------------------------------------------------------ */
+/* 6. Khung dự báo thời tiết 7 ngày: chèn <div class="ds-weather"></div> */
+/*    vào bài viết. Dữ liệu Open-Meteo (miễn phí), trình duyệt khách tự tải. */
+/* ------------------------------------------------------------------ */
+
+add_action('wp_head', function () {
+    ?>
+<style id="dst-weather-css">
+.ds-weather { margin: 1.8em 0; border: 1px solid var(--line); border-radius: 12px; background: var(--ivory); padding: 20px; font-family: var(--sans); }
+.ds-weather__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; margin-bottom: 14px; }
+.ds-weather__title { font: 600 18px/1.3 var(--sans); color: var(--ink); margin: 0; }
+.ds-weather__note { font-size: 12.5px; color: var(--muted); }
+.ds-weather__tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.ds-weather__tabs button { border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 999px; padding: 7px 14px; font: 600 13.5px/1 var(--sans); cursor: pointer; }
+.ds-weather__tabs button[aria-selected="true"] { background: var(--sea); border-color: var(--sea); color: #fff; }
+.ds-weather__days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+.ds-weather__day { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 12px 6px; text-align: center; font-size: 13.5px; color: var(--ink-2); }
+.ds-weather__day b { display: block; color: var(--ink); font-size: 13.5px; }
+.ds-weather__day .ic { font-size: 26px; line-height: 1.2; margin: 6px 0 2px; }
+.ds-weather__day .t { font-weight: 700; color: var(--ink); font-size: 15px; }
+.ds-weather__day .t span { font-weight: 500; color: var(--muted); }
+.ds-weather__day .r { color: var(--sea-2); font-size: 12.5px; margin-top: 4px; }
+.ds-weather__day .d { font-size: 11.5px; color: var(--muted); min-height: 2.6em; }
+.ds-weather__err { color: var(--muted); font-size: 14px; }
+@media (max-width: 700px) {
+  .ds-weather { padding: 16px 14px; }
+  .ds-weather__days { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 104px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; }
+  .ds-weather__day { scroll-snap-align: start; }
+}
+</style>
+    <?php
+}, 100);
+
+add_action('wp_footer', function () {
+    ?>
+<script id="dst-weather">
+(function () {
+  var boxes = document.querySelectorAll('.ds-weather');
+  if (!boxes.length) return;
+  var lang = (document.documentElement.lang || 'en').slice(0, 2);
+  var T = {
+    vi: { title: 'Dự báo thời tiết 7 ngày tới', note: 'Cập nhật tự động · nguồn Open-Meteo', rain: 'Khả năng mưa', err: 'Chưa tải được dự báo. Vui lòng thử lại sau.', today: 'Hôm nay',
+          places: ['Đà Nẵng', 'Hội An', 'Huế', 'Đỉnh Bà Nà'], days: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+          w: { 0: 'Trời quang', 1: 'Ít mây', 2: 'Ít mây', 3: 'Nhiều mây', 45: 'Sương mù', 48: 'Sương mù', 51: 'Mưa phùn', 53: 'Mưa phùn', 55: 'Mưa phùn', 61: 'Mưa nhỏ', 63: 'Mưa vừa', 65: 'Mưa to', 80: 'Mưa rào nhẹ', 81: 'Mưa rào', 82: 'Mưa rào to', 95: 'Dông', 96: 'Dông', 99: 'Dông' } },
+    ko: { title: '향후 7일 일기예보', note: '자동 업데이트 · 출처 Open-Meteo', rain: '강수 확률', err: '예보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.', today: '오늘',
+          places: ['다낭', '호이안', '후에', '바나힐 정상'], days: ['일', '월', '화', '수', '목', '금', '토'],
+          w: { 0: '맑음', 1: '구름 조금', 2: '구름 조금', 3: '흐림', 45: '안개', 48: '안개', 51: '이슬비', 53: '이슬비', 55: '이슬비', 61: '약한 비', 63: '비', 65: '강한 비', 80: '약한 소나기', 81: '소나기', 82: '강한 소나기', 95: '뇌우', 96: '뇌우', 99: '뇌우' } },
+    en: { title: '7-day weather forecast', note: 'Updated automatically · data by Open-Meteo', rain: 'Chance of rain', err: 'Could not load the forecast. Please try again later.', today: 'Today',
+          places: ['Da Nang', 'Hoi An', 'Hue', 'Ba Na summit'], days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+          w: { 0: 'Clear', 1: 'Mostly clear', 2: 'Partly cloudy', 3: 'Cloudy', 45: 'Fog', 48: 'Fog', 51: 'Drizzle', 53: 'Drizzle', 55: 'Drizzle', 61: 'Light rain', 63: 'Rain', 65: 'Heavy rain', 80: 'Light showers', 81: 'Showers', 82: 'Heavy showers', 95: 'Thunderstorm', 96: 'Thunderstorm', 99: 'Thunderstorm' } }
+  };
+  var L = T[lang] || T.en;
+  var LAT = [16.0544, 15.8801, 16.4637, 15.9950], LON = [108.2022, 108.3380, 107.5909, 107.9960];
+  function icon(c) {
+    if (c === 0) return '☀️'; if (c <= 2) return '🌤️'; if (c === 3) return '☁️'; if (c === 45 || c === 48) return '🌫️';
+    if (c >= 51 && c <= 57) return '🌦️'; if (c >= 95) return '⛈️'; return '🌧️';
+  }
+  function desc(c) { return L.w[c] || L.w[Math.floor(c / 10) * 10 + 1] || ''; }
+  var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + LAT.join(',') + '&longitude=' + LON.join(',') +
+    '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FHo_Chi_Minh&forecast_days=7';
+  function load() {
+    try { var c = JSON.parse(sessionStorage.getItem('dsWeather') || 'null'); if (c && Date.now() - c.t < 3600000) return Promise.resolve(c.d); } catch (e) {}
+    return fetch(url).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) {
+      d = Array.isArray(d) ? d : [d];
+      try { sessionStorage.setItem('dsWeather', JSON.stringify({ t: Date.now(), d: d })); } catch (e) {}
+      return d;
+    });
+  }
+  boxes.forEach(function (box) {
+    box.setAttribute('translate', 'no');
+    box.innerHTML = '<div class="ds-weather__head"><p class="ds-weather__title">⛅ ' + L.title + '</p><span class="ds-weather__note">' + L.note + '</span></div>' +
+      '<div class="ds-weather__tabs" role="tablist"></div><div class="ds-weather__days" aria-live="polite"></div>';
+    var tabs = box.querySelector('.ds-weather__tabs'), days = box.querySelector('.ds-weather__days');
+    load().then(function (data) {
+      function show(i) {
+        Array.prototype.forEach.call(tabs.children, function (b, j) { b.setAttribute('aria-selected', i === j ? 'true' : 'false'); });
+        var d = data[i].daily, html = '';
+        for (var k = 0; k < d.time.length; k++) {
+          var dt = new Date(d.time[k] + 'T12:00:00'), code = d.weather_code[k], p = d.precipitation_probability_max ? d.precipitation_probability_max[k] : null;
+          html += '<div class="ds-weather__day"><b>' + (k === 0 ? L.today : L.days[dt.getDay()]) + ' ' + dt.getDate() + '/' + (dt.getMonth() + 1) + '</b>' +
+            '<div class="ic" aria-hidden="true">' + icon(code) + '</div><div class="d">' + desc(code) + '</div>' +
+            '<div class="t">' + Math.round(d.temperature_2m_max[k]) + '° <span>' + Math.round(d.temperature_2m_min[k]) + '°</span></div>' +
+            (p === null ? '' : '<div class="r" title="' + L.rain + '">💧 ' + p + '%</div>') + '</div>';
+        }
+        days.innerHTML = html;
+      }
+      L.places.forEach(function (name, i) {
+        if (!data[i]) return;
+        var b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.textContent = name;
+        b.addEventListener('click', function () { show(i); }); tabs.appendChild(b);
+      });
+      show(0);
+    }).catch(function () { days.innerHTML = '<p class="ds-weather__err">' + L.err + '</p>'; });
+  });
+})();
+</script>
+    <?php
+}, 100);
