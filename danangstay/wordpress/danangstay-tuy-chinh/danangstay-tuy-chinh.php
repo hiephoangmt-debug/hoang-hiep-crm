@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 1.5.0
+ * Version: 1.6.3
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -163,6 +163,7 @@ function dst_filter_html($html)
     if (!is_string($html) || stripos($html, '<html') === false) {
         return $html;
     }
+    $html = apply_filters('dst_html', $html);
     $map = ['vi' => 'vi_VN', 'en' => 'en_US', 'ja' => 'ja_JP', 'ko' => 'ko_KR', 'zh' => 'zh_CN', 'ru' => 'ru_RU', 'fr' => 'fr_FR', 'de' => 'de_DE'];
     $html = preg_replace_callback(
         '#(<meta\s+property="og:locale(?::alternate)?"\s+content=")([a-zA-Z]{2})(")#',
@@ -700,6 +701,224 @@ add_action('rest_api_init', function () {
             }
             update_option('dst_verify', $v, false);
             return ['ok' => true, 'verify' => $v];
+        },
+    ]);
+});
+
+/* ------------------------------------------------------------------ */
+/* 9. Vé tham quan, liên hệ Vân Trần, tin mới, lưu ý vé máy bay         */
+/* ------------------------------------------------------------------ */
+
+function dst_lang()
+{
+    if (function_exists('pll_current_language') && pll_current_language()) {
+        return pll_current_language();
+    }
+    return substr(get_locale(), 0, 2);
+}
+
+function dst_t($key)
+{
+    $t = [
+        'vi' => ['call' => 'Gọi', 'contact' => 'Liên hệ đặt vé', 'name' => 'Vân Trần', 'role' => 'Tư vấn vé máy bay, vé tham quan & tour', 'news' => 'Tin mới cập nhật', 'more' => 'Xem tất cả', 'tickets' => 'Vé tham quan', 'hours' => 'Trả lời nhanh qua Zalo, 7:00–22:00'],
+        'ko' => ['call' => '전화', 'contact' => '예약 문의', 'name' => 'Vân Trần', 'role' => '항공권·입장권·투어 상담', 'news' => '최신 소식', 'more' => '전체 보기', 'tickets' => '입장권·투어', 'hours' => '카카오톡·Zalo·WhatsApp 빠른 답변, 7:00–22:00'],
+        'en' => ['call' => 'Call', 'contact' => 'Book with us', 'name' => 'Vân Trần', 'role' => 'Flights, attraction tickets & tours', 'news' => 'Latest updates', 'more' => 'See all', 'tickets' => 'Attraction tickets', 'hours' => 'Fast replies on WhatsApp & Zalo, 7:00–22:00'],
+    ];
+    $l = dst_lang();
+    $set = isset($t[$l]) ? $t[$l] : $t['en'];
+    return $set[$key];
+}
+
+// [ds_lien_he] – hộp liên hệ Vân Trần
+add_shortcode('ds_lien_he', function () {
+    $phone = '0909669325';
+    $intl = '84909669325';
+    return '<div class="ds-contact" translate="no">'
+        . '<div class="ds-contact__who"><span class="ds-contact__avatar" aria-hidden="true">VT</span><div><strong>' . esc_html(dst_t('name')) . '</strong><br><span>' . esc_html(dst_t('role')) . '</span></div></div>'
+        . '<div class="ds-contact__btns">'
+        . '<a class="ds-btn ds-btn--call" href="tel:' . $phone . '">📞 ' . esc_html(dst_t('call')) . ' 0909 669 325</a>'
+        . '<a class="ds-btn ds-btn--zalo" href="https://zalo.me/' . $phone . '" target="_blank" rel="noopener">Zalo</a>'
+        . '<a class="ds-btn ds-btn--wa" href="https://wa.me/' . $intl . '" target="_blank" rel="noopener">WhatsApp</a>'
+        . '</div><p class="ds-contact__note">' . esc_html(dst_t('hours')) . '</p></div>';
+});
+
+// [ds_tin_moi so="6" danh_muc="news"] – bài mới nhất cùng ngôn ngữ
+add_shortcode('ds_tin_moi', function ($atts) {
+    $a = shortcode_atts(['so' => 6, 'danh_muc' => ''], $atts);
+    $args = ['post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => max(1, min(12, (int) $a['so'])), 'ignore_sticky_posts' => true, 'no_found_rows' => true];
+    if (function_exists('pll_current_language')) {
+        $args['lang'] = dst_lang();
+    }
+    if ($a['danh_muc'] !== '') {
+        $slug = sanitize_title($a['danh_muc']);
+        $term = get_term_by('slug', $slug . '-' . dst_lang(), 'category') ?: get_term_by('slug', $slug, 'category');
+        if ($term) {
+            $args['cat'] = $term->term_id;
+        }
+    }
+    $q = new WP_Query($args);
+    if (!$q->have_posts()) {
+        return '';
+    }
+    $out = '<section class="ds-news"><h2>' . esc_html(dst_t('news')) . '</h2><div class="ds-news__grid">';
+    while ($q->have_posts()) {
+        $q->the_post();
+        $cats = get_the_category();
+        $out .= '<a class="ds-news__item" href="' . esc_url(get_permalink()) . '">'
+            . '<span class="ds-news__meta">' . esc_html(($cats ? $cats[0]->name . ' · ' : '') . get_the_date(dst_lang() === 'vi' ? 'd/m/Y' : (dst_lang() === 'ko' ? 'Y. n. j.' : 'M j, Y'))) . '</span>'
+            . '<strong>' . esc_html(get_the_title()) . '</strong>'
+            . '<span class="ds-news__ex">' . esc_html(wp_trim_words(get_the_excerpt(), 22)) . '</span></a>';
+    }
+    wp_reset_postdata();
+    return $out . '</div></section>';
+});
+
+add_action('wp_head', function () {
+    ?>
+<style id="dst-blocks-css">
+.ds-contact { margin: 1.8em 0; padding: 20px 22px; border-radius: 12px; background: var(--sea); color: #fff; font-family: var(--sans); }
+.ds-contact__who { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.ds-contact__who strong { font-size: 18px; color: #fff; }
+.ds-contact__who span { color: #c9d6e6; font-size: 14px; }
+.ds-contact__avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--bronze); display: grid; place-items: center; font-weight: 700; color: #fff !important; font-size: 16px !important; flex: none; }
+.ds-contact__btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.ds-btn { display: inline-flex; align-items: center; gap: 6px; padding: 11px 16px; border-radius: 8px; font: 600 14px/1 var(--sans); text-decoration: none !important; color: #fff !important; }
+.ds-btn--call { background: var(--bronze); } .ds-btn--zalo { background: #0068ff; } .ds-btn--wa { background: #25d366; }
+.ds-contact__note { margin: 12px 0 0 !important; font-size: 13px !important; color: #c9d6e6 !important; }
+.ds-tickets { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin: 1.2em 0 2em; }
+.ds-ticket { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; background: #fff; font-family: var(--sans); }
+.ds-ticket h3 { margin: 0 0 6px !important; font-size: 19px !important; }
+.ds-ticket .where { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--bronze); font-weight: 700; }
+.ds-ticket p { font-size: 15px !important; margin: 6px 0 !important; line-height: 1.55 !important; }
+.ds-ticket .tip { font-size: 14px; color: var(--ink-2); background: var(--ivory); border-radius: 8px; padding: 8px 10px; margin-top: 8px; }
+.ds-ticket a.ds-btn { margin-top: 10px; background: var(--bronze); padding: 9px 14px; font-size: 13.5px; }
+.ds-contact, .ds-ticket, .ds-news, .ds-weather { text-align: left; }
+.ds-contact *, .ds-ticket * { text-align: left !important; }
+.ds-contact__who span { line-height: 1.45; display: inline-block; }
+.ds-ticket .facts { list-style: none; margin: 10px 0 !important; padding: 0 !important; display: grid; gap: 4px; }
+.ds-ticket .facts li { margin: 0 !important; padding: 0 !important; font-size: 14px; line-height: 1.45; color: var(--ink-2); }
+.ds-ticket .facts li::before { display: none !important; }
+.ds-ticket .facts li { display: grid !important; grid-template-columns: 132px 1fr; gap: 8px; }
+.ds-ticket .facts span { color: var(--muted); font-weight: 600; }
+.ds-ticket .tip ul { margin: 6px 0 0 !important; padding-left: 18px !important; }
+.ds-ticket .tip li { font-size: 14px; line-height: 1.5; margin: 3px 0 !important; }
+.ds-ticket .tip strong { display: block; color: var(--ink); }
+.ds-ticket { display: flex; flex-direction: column; }
+.ds-ticket a.ds-btn { align-self: flex-start; margin-top: auto; }
+.ds-ticket .tip { margin-bottom: 12px; }
+@media (max-width: 700px) { .ds-ticket .facts li { grid-template-columns: 1fr; gap: 0; margin-bottom: 6px !important; } .ds-ticket .facts span { font-size: 12.5px; letter-spacing: .02em; } }
+.ds-news { margin: 2.4em 0 1em; }
+.ds-news__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.ds-news__item { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: #fff; text-decoration: none !important; color: var(--ink) !important; transition: box-shadow .2s, transform .2s; }
+.ds-news__item:hover { box-shadow: 0 12px 30px -18px rgba(11,36,71,.5); transform: translateY(-2px); }
+.ds-news__item strong { font: 600 16.5px/1.35 var(--sans); }
+.ds-news__meta { font-size: 12px; color: var(--bronze); font-weight: 600; letter-spacing: .04em; }
+.ds-news__ex { font-size: 14px; color: var(--muted); line-height: 1.5; }
+.ds-flight-notes { padding: 64px 0; background: #fff; }
+.ds-flight-notes .wrap { max-width: 1040px; }
+.ds-flight-notes h2 { margin: 0 0 8px; }
+.ds-flight-notes .lead { color: var(--muted); margin: 0 0 24px; }
+.ds-flight-notes__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.ds-flight-notes__grid div { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; background: var(--ivory); font-family: var(--sans); }
+.ds-flight-notes__grid b { display: block; color: var(--ink); margin-bottom: 6px; font-size: 16px; }
+.ds-flight-notes__grid p { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-2); }
+</style>
+    <?php
+}, 101);
+
+// Trang "Vé tham quan" (id bản tiếng Việt lưu ở option dst_tickets_page)
+function dst_tickets_url()
+{
+    $id = (int) get_option('dst_tickets_page', 0);
+    if (!$id) {
+        return '';
+    }
+    if (function_exists('pll_get_post')) {
+        $tr = pll_get_post($id, dst_lang());
+        if (!$tr) {
+            return '';
+        }
+        $id = $tr;
+    }
+    return get_post_status($id) === 'publish' ? get_permalink($id) : '';
+}
+
+function dst_flight_notes_html()
+{
+    $l = dst_lang();
+    $notes = [
+        'vi' => ['Lưu ý khi đặt và đi vé máy bay', 'Những điều nên biết trước chuyến bay đến Đà Nẵng — đội ngũ DanangStay kiểm tra giúp bạn khi đặt vé.', [
+            ['Giấy tờ tùy thân', 'Chuyến nội địa: CCCD, hộ chiếu hoặc tài khoản định danh điện tử VNeID mức 2 còn hiệu lực. Chuyến quốc tế: hộ chiếu còn hạn tối thiểu 6 tháng và thị thực nếu cần.'],
+            ['Họ tên trên vé', 'Phải trùng khớp với giấy tờ, viết không dấu, đúng thứ tự họ – tên. Sai tên thường phải đổi vé, có phí.'],
+            ['Giờ có mặt ở sân bay', 'Nội địa nên đến trước khoảng 90–120 phút, quốc tế trước khoảng 3 giờ. Quầy làm thủ tục thường đóng 40–60 phút trước giờ bay.'],
+            ['Hành lý', 'Mỗi hãng, mỗi hạng vé quy định khác nhau về hành lý xách tay và ký gửi. Mua thêm ký gửi khi đặt vé luôn rẻ hơn mua tại sân bay.'],
+            ['Pin sạc dự phòng', 'Chỉ mang trong hành lý xách tay, không để trong hành lý ký gửi và không sử dụng trên máy bay theo quy định hiện hành.'],
+            ['Mùa cao điểm', 'Tết, dịp lễ 30/4, hè và cuối năm vé tăng nhanh — nên đặt trước 1–2 tháng. Tháng 10–12 là mùa mưa, có thể chậm chuyến; cân nhắc mua bảo hiểm.'],
+            ['Đổi, hoàn vé', 'Vé giá rẻ thường không hoàn, đổi có phí. Hỏi rõ điều kiện trước khi thanh toán.'],
+            ['Sân bay Đà Nẵng', 'Cách trung tâm khoảng 3 km. Ga T1 cho chuyến nội địa, ga T2 cho chuyến quốc tế. Có Grab, taxi và xe đưa đón đặt trước.'],
+        ]],
+        'ko' => ['항공권 예약·탑승 시 유의사항', '다낭행 항공편 전에 알아 두면 좋은 내용입니다. 예약할 때 DanangStay가 함께 확인해 드립니다.', [
+            ['신분증·여권', '국제선은 잔여 유효기간 6개월 이상의 여권이 필요합니다. 한국 여권은 무비자 최대 45일 체류(최신 규정 확인 필요).'],
+            ['항공권 영문 이름', '여권과 철자·순서가 정확히 같아야 합니다. 이름이 틀리면 대부분 유료 변경이 필요합니다.'],
+            ['공항 도착 시간', '국제선은 출발 약 3시간 전, 국내선은 약 90–120분 전 도착을 권장합니다. 체크인 카운터는 보통 40–60분 전에 마감됩니다.'],
+            ['수하물', '항공사·운임마다 기내·위탁 수하물 규정이 다릅니다. 위탁 수하물은 예약 시 추가하는 것이 공항보다 저렴합니다.'],
+            ['보조배터리', '기내 수하물로만 반입하고, 현행 규정상 기내에서 사용하지 마세요.'],
+            ['성수기', '설·연휴·여름·연말에는 가격이 빠르게 오르니 1–2개월 전 예약을 추천합니다. 10–12월 우기에는 지연 가능성이 있어 여행자 보험을 권장합니다.'],
+            ['변경·환불', '특가 항공권은 대부분 환불 불가, 변경 시 수수료가 있습니다. 결제 전에 조건을 확인하세요.'],
+            ['다낭 공항', '시내에서 약 3km. T1은 국내선, T2는 국제선입니다. Grab, 택시, 사전 예약 픽업을 이용할 수 있습니다.'],
+        ]],
+        'en' => ['Good to know before you fly', 'A few things to check before your flight to Da Nang — we double-check them for you when you book with us.', [
+            ['Passport & visa', 'International flights need a passport valid for at least 6 months, plus a visa or e-visa if your nationality requires one.'],
+            ['Name on the ticket', 'Must match your passport exactly, in the same order. Name corrections usually cost a fee.'],
+            ['Airport arrival', 'About 3 hours before international flights and 90–120 minutes before domestic ones. Check-in desks usually close 40–60 minutes before departure.'],
+            ['Baggage', 'Cabin and checked allowances differ by airline and fare. Adding checked bags when booking is cheaper than at the airport.'],
+            ['Power banks', 'Carry them in cabin baggage only, never in checked bags, and do not use them on board under current rules.'],
+            ['Peak seasons', 'Tet, public holidays, summer and year-end sell out fast — book 1–2 months ahead. October–December is the rainy season and delays can happen; consider travel insurance.'],
+            ['Changes & refunds', 'Promo fares are usually non-refundable and changes cost a fee. Check the fare rules before paying.'],
+            ['Da Nang Airport (DAD)', 'About 3 km from the city centre. Terminal 1 is domestic, Terminal 2 international. Grab, taxis and pre-booked transfers are available.'],
+        ]],
+    ];
+    $n = isset($notes[$l]) ? $notes[$l] : $notes['en'];
+    $html = '<section class="ds-flight-notes"><div class="wrap"><h2>' . esc_html($n[0]) . '</h2><p class="lead">' . esc_html($n[1]) . '</p><div class="ds-flight-notes__grid">';
+    foreach ($n[2] as $it) {
+        $html .= '<div><b>' . esc_html($it[0]) . '</b><p>' . esc_html($it[1]) . '</p></div>';
+    }
+    return $html . '</div>' . do_shortcode('[ds_lien_he]') . '</div></section>';
+}
+
+// Chèn link "Vé tham quan" vào menu Đặt phòng + mục lưu ý vào trang Vé máy bay
+add_filter('dst_html', function ($html) {
+    $url = dst_tickets_url();
+    if ($url) {
+        $html = preg_replace_callback('#(<a href="[^"]*/flights/">[^<]*</a>)#u', function ($m) use ($url) {
+            return $m[1] . '<a href="' . esc_url($url) . '">' . esc_html(dst_t('tickets')) . '</a>';
+        }, $html, 2);
+    }
+    if (preg_match('#<section class="flight-hero"#', $html) && strpos($html, '<section class="ds-flight-notes"') === false) {
+        $notes = dst_flight_notes_html();
+        $pos = strpos($html, '<h2 class="faq-h"');
+        if ($pos !== false) {
+            $sec = strrpos(substr($html, 0, $pos), '<section');
+            if ($sec !== false) {
+                $html = substr($html, 0, $sec) . $notes . substr($html, $sec);
+            }
+        }
+    }
+    return $html;
+});
+
+// API: lưu cài đặt cho trợ lý {"tickets_page": 123}
+add_action('rest_api_init', function () {
+    register_rest_route('danangstay/v1', '/options', [
+        'methods' => 'POST',
+        'permission_callback' => function () {
+            return current_user_can('manage_options');
+        },
+        'callback' => function (WP_REST_Request $r) {
+            if ($r->get_param('tickets_page') !== null) {
+                update_option('dst_tickets_page', (int) $r->get_param('tickets_page'), false);
+            }
+            return ['ok' => true, 'tickets_page' => (int) get_option('dst_tickets_page', 0)];
         },
     ]);
 });
