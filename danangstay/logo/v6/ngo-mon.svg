@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 130" role="img" aria-label="Ngọ Môn – Huế">
+  <defs>
+    <linearGradient id="roof" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6CF5A"/><stop offset="1" stop-color="#D99A1C"/></linearGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8E5A45"/><stop offset="1" stop-color="#6A3E2E"/></linearGradient>
+  </defs>
+  <!-- nền thành (hình chữ U nhìn chính diện) -->
+  <path d="M4 126 L10 80 L190 80 L196 126 Z" fill="url(#wall)" stroke="#3E2219" stroke-width="2"/>
+  <rect x="8" y="76" width="184" height="6" fill="#B98A6E" stroke="#3E2219" stroke-width="1.5"/>
+  <!-- 5 cửa: cửa giữa lớn nhất -->
+  <g fill="#2A140E">
+    <path d="M88 126 L88 104 a12 12 0 0 1 24 0 L112 126Z"/>
+    <path d="M60 126 L60 108 a8 8 0 0 1 16 0 L76 126Z"/>
+    <path d="M124 126 L124 108 a8 8 0 0 1 16 0 L140 126Z"/>
+    <path d="M26 126 L26 112 a6 6 0 0 1 12 0 L38 126Z"/>
+    <path d="M162 126 L162 112 a6 6 0 0 1 12 0 L174 126Z"/>
+  </g>
+  <!-- lầu Ngũ Phụng: sàn + hàng cột đỏ -->
+  <rect x="38" y="68" width="124" height="9" fill="#E9D9B5" stroke="#5A3A22" stroke-width="1.5"/>
+  <rect x="46" y="50" width="108" height="18" fill="#B3261E"/>
+  <g stroke="#F2C14E" stroke-width="2"><path d="M54 50 L54 68 M66 50 L66 68 M78 50 L78 68 M90 50 L90 68 M100 50 L100 68 M110 50 L110 68 M122 50 L122 68 M134 50 L134 68 M146 50 L146 68"/></g>
+  <!-- mái dưới (đầu đao cong vút) -->
+  <path d="M22 50 C40 46 160 46 178 50 C182 50 186 46 188 42 C178 44 168 40 160 36 L40 36 C32 40 22 44 12 42 C14 46 18 50 22 50 Z" fill="url(#roof)" stroke="#8A5A0B" stroke-width="1.6" stroke-linejoin="round"/>
+  <rect x="62" y="28" width="76" height="8" fill="#B3261E"/>
+  <!-- mái trên -->
+  <path d="M52 28 C64 25 136 25 148 28 C152 28 156 24 158 20 C150 22 142 18 136 14 L64 14 C58 18 50 22 42 20 C44 24 48 28 52 28 Z" fill="url(#roof)" stroke="#8A5A0B" stroke-width="1.6" stroke-linejoin="round"/>
+  <!-- bờ nóc và trang trí -->
+  <path d="M66 14 L134 14" stroke="#8A5A0B" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="100" cy="9" r="4" fill="#F6CF5A" stroke="#8A5A0B" stroke-width="1.4"/>
+</svg>

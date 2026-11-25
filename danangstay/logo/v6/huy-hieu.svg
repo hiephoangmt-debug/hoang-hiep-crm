@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400" role="img" aria-label="DanangStay – Đà Nẵng, Hội An, Huế">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A3A68"/><stop offset="1" stop-color="#0B2447"/></linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#BFB8A8"/><stop offset=".5" stop-color="#EEE9DE"/><stop offset="1" stop-color="#B3AB9A"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F9D368"/><stop offset="1" stop-color="#E3A21A"/></linearGradient>
+    <linearGradient id="lan" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B8142B"/><stop offset=".5" stop-color="#E8394D"/><stop offset="1" stop-color="#B8142B"/></linearGradient>
+    <path id="arcTop" d="M70 200 A130 130 0 0 1 330 200"/>
+    <path id="arcBot" d="M62 206 A138 138 0 0 0 338 206"/>
+    <clipPath id="inner"><circle cx="200" cy="200" r="112"/></clipPath>
+    
+  
+    <linearGradient id="st" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3F0E8"/><stop offset=".55" stop-color="#DAD4C7"/><stop offset="1" stop-color="#B8B09F"/></linearGradient>
+    <linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F9D368"/><stop offset="1" stop-color="#C98A12"/></linearGradient>
+    <g id="finger"><rect x="-21" y="0" width="42" height="150" rx="21"/></g>
+  </defs>
+
+  <!-- vòng ngoài -->
+  <circle cx="200" cy="200" r="190" fill="#0B2447"/>
+  <circle cx="200" cy="200" r="178" fill="none" stroke="#F2BB3A" stroke-width="3"/>
+  <circle cx="200" cy="200" r="118" fill="none" stroke="#F2BB3A" stroke-width="3"/>
+  <text font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="40" letter-spacing="6" fill="#FFFFFF">
+    <textPath xlink:href="#arcTop" startOffset="50%" text-anchor="middle">DANANG STAY</textPath>
+  </text>
+  <text font-family="'Be Vietnam Pro',Arial,sans-serif" font-weight="700" font-size="21" letter-spacing="4" fill="#F2BB3A">
+    <textPath xlink:href="#arcBot" startOffset="50%" text-anchor="middle">ĐÀ NẴNG · HỘI AN · HUẾ</textPath>
+  </text>
+  <circle cx="58" cy="200" r="6" fill="#E8590C"/><circle cx="342" cy="200" r="6" fill="#E8590C"/>
+
+  <!-- khung trong: cảnh 3 miền -->
+  <g clip-path="url(#inner)">
+    <rect x="80" y="80" width="240" height="240" fill="url(#bg)"/>
+    <circle cx="176" cy="122" r="18" fill="#F28C28"/>
+    <path d="M80 236 C112 220 140 222 164 230 C200 240 236 214 272 216 C294 218 310 226 320 232 L320 320 L80 320Z" fill="#1E5F4E"/>
+    <!-- HUẾ: Ngọ Môn (bên phải) -->
+    <g transform="translate(96 214) scale(.66)">
+      <rect x="-4" y="22" width="72" height="30" fill="#C8463A" stroke="#5A1E19" stroke-width="2"/>
+      <path d="M8 52 L8 38 a6 6 0 0 1 12 0 L20 52Z M28 52 L28 34 a6 6 0 0 1 12 0 L40 52Z M48 52 L48 38 a6 6 0 0 1 12 0 L60 52Z" fill="#3A1410"/>
+      <rect x="10" y="10" width="44" height="12" fill="#E7D3A8" stroke="#5A1E19" stroke-width="1.6"/>
+      <path d="M2 12 C12 8 52 8 62 12 L56 4 C44 2 20 2 8 4Z" fill="#F2BB3A" stroke="#8A5A0B" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M14 3 C22 0 42 0 50 3 L46 -6 C38 -8 26 -8 18 -6Z" fill="#F2BB3A" stroke="#8A5A0B" stroke-width="1.6" stroke-linejoin="round"/>
+    </g>
+    <!-- HỘI AN: đèn lồng (bên trái) -->
+    <g transform="translate(104 132) scale(.85)">
+      <line x1="16" y1="-30" x2="16" y2="-6" stroke="#F2BB3A" stroke-width="2"/>
+      <rect x="9" y="-8" width="14" height="6" rx="2" fill="#F2BB3A"/>
+      <path d="M16 -2 C-6 2 -8 44 16 48 C40 44 38 2 16 -2Z" fill="url(#lan)" stroke="#7A0F1E" stroke-width="1.6"/>
+      <path d="M16 -2 C8 6 8 40 16 48 M16 -2 C24 6 24 40 16 48" fill="none" stroke="#7A0F1E" stroke-width="1.2" opacity=".7"/>
+      <rect x="9" y="46" width="14" height="6" rx="2" fill="#F2BB3A"/>
+      <path d="M16 52 L16 70 M12 56 L10 70 M20 56 L22 70" stroke="#F2BB3A" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(176 128) scale(.38)">
+  <g fill="url(#st)" stroke="#5E584B" stroke-width="4" stroke-linejoin="round">
+    <!-- bốn ngón phía sau cầu (nghiêng nhẹ sang phải) -->
+    <use href="#finger" transform="translate(196 70) rotate(4)"/>
+    <use href="#finger" transform="translate(236 38) rotate(6)"/>
+    <use href="#finger" transform="translate(284 14) rotate(9)"/>
+    <use href="#finger" transform="translate(340 34) rotate(14)"/>
+    <!-- lòng bàn tay + cổ tay vươn lên từ vách đá -->
+    <path d="M0 300 C30 262 70 232 120 196 L170 150 L372 150 C376 190 352 226 314 248 C270 274 214 288 150 300 Z"/>
+  </g>
+  <!-- Cầu Vàng: lan can + mặt cầu -->
+  <g stroke="#D9A21E" stroke-width="3.2"><path d="M-420 78 L-420 108 M-396 80 L-396 110 M-372 82 L-372 112 M-348 84 L-348 114 M-324 86 L-324 116 M-300 88 L-300 118 M-276 91 L-276 121 M-252 93 L-252 123 M-228 95 L-228 125 M-204 97 L-204 127 M-180 99 L-180 129 M-156 101 L-156 131 M-132 104 L-132 134 M-108 106 L-108 136 M-84 108 L-84 138 M-60 110 L-60 140 M-36 112 L-36 142 M-12 114 L-12 144 M12 117 L12 147 M36 119 L36 149 M60 121 L60 151 M84 123 L84 153 M108 125 L108 155 M132 127 L132 157 M156 130 L156 160 M180 132 L180 162 M204 134 L204 164 M228 136 L228 166 M252 138 L252 168 M276 140 L276 170 M300 142 L300 172 M324 145 L324 175 M348 147 L348 177 M372 149 L372 179 M396 151 L396 181"/></g>
+  <path d="M-420 76 C-200 92 120 116 406 138" fill="none" stroke="#F4C95A" stroke-width="5" stroke-linecap="round"/>
+  <path d="M-420 108 C-200 124 120 150 406 176 L406 200 C120 172 -200 148 -420 132 Z" fill="url(#gd)" stroke="#8C5E08" stroke-width="3"/>
+  <!-- ngón cái dựng phía trước cầu -->
+  <path d="M150 34 C170 30 184 44 180 64 L162 172 C158 194 140 206 118 202 C98 198 86 182 92 162 L128 52 C132 40 140 36 150 34 Z"
+        fill="url(#st)" stroke="#5E584B" stroke-width="4" stroke-linejoin="round"/>
+  <!-- phần lòng bàn tay dưới mặt cầu (che gốc ngón cái để liền khối) -->
+  <path d="M0 300 C30 262 58 238 84 214 L90 172 L170 175 C230 186 300 184 356 192 C344 214 332 232 314 248 C270 274 214 288 150 300 Z" fill="url(#st)"/>
+  <path d="M0 300 C30 262 58 238 84 214 C88 200 90 188 92 172 M356 192 C344 214 332 232 314 248 C270 274 214 288 150 300" fill="none" stroke="#5E584B" stroke-width="4" stroke-linecap="round"/>
+  <!-- nếp đốt ngón (gợi khối đá) -->
+  <g fill="none" stroke="#9A9282" stroke-width="2.4" stroke-linecap="round">
+    <path d="M128 98 C136 102 146 102 156 98"/>
+    <path d="M200 92 C206 94 212 94 216 92"/><path d="M242 62 C248 64 254 64 258 62"/>
+    <path d="M290 40 C296 42 302 42 306 40"/><path d="M344 62 C350 66 356 66 360 64"/>
+  </g>
+</g>
+    <path d="M80 272 C110 262 136 280 170 272 C204 264 230 282 264 272 C290 264 306 272 320 270 L320 320 L80 320Z" fill="#1F7A8C"/>
+    <path d="M100 290 C126 282 146 296 172 290 C198 284 220 298 246 290 C268 284 286 292 304 288" fill="none" stroke="#BFE3F5" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>
