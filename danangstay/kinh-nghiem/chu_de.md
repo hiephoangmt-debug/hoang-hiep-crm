@@ -36,7 +36,7 @@ Cột chuyên mục dùng: plan, places, food, culture.
 | [ ] | sân bay Đà Nẵng về Mỹ Khê | Từ sân bay Đà Nẵng về Mỹ Khê, Sơn Trà: Grab, taxi, xe đón và giá thật | plan | 다낭 공항 그랩 |
 | [ ] | Mân Thái | Cẩm nang Mân Thái – Sơn Trà: bãi biển yên tĩnh, hải sản, nơi ở | places | 다낭 만타이 |
 | [ ] | lịch trình Đà Nẵng 3 ngày 2 đêm | Lịch trình Đà Nẵng 3 ngày 2 đêm chi tiết cho lần đầu đến | plan | 다낭 3박4일 일정 |
-| [ ] | giá vé Bà Nà 2026 | Giá vé Bà Nà Hills 2026–2027: vé cáp treo 3 ngày, Ba Na by Night | places | 바나힐 입장료 |
+| [x] | giá vé Bà Nà 2026 | Giá vé Bà Nà Hills 2026–2027: vé cáp treo 3 ngày, Ba Na by Night | places | 바나힐 입장료 | https://danangstay.com.vn/vi/ba-na-va-cau-vang-di-sao-cho-dung-vi/ (viết lại bài cũ)
 | [ ] | miễn visa 45 ngày | Visa Việt Nam 2026: miễn thị thực 45 ngày và e-visa 90 ngày | plan | 베트남 무비자 45일 |
 | [ ] | đổi tiền Đà Nẵng | Đổi tiền ở Đà Nẵng: tiệm vàng, ngân hàng, ATM, thanh toán QR | plan | 다낭 환전 |
 | [ ] | ăn gì ở Đà Nẵng | Ăn gì ở Đà Nẵng: 25 món và quán người địa phương hay ăn | food | 다낭 맛집 |
