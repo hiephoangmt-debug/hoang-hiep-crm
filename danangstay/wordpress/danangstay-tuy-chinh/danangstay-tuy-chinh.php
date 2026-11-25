@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 1.4.0
+ * Version: 1.5.0
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -561,3 +561,145 @@ add_action('wp_footer', function () {
 </script>
     <?php
 }, 100);
+
+/* ------------------------------------------------------------------ */
+/* 7. IndexNow: tự báo Bing, Naver, Yandex… khi đăng / sửa bài          */
+/* ------------------------------------------------------------------ */
+
+function dst_indexnow_key()
+{
+    $k = (string) get_option('dst_indexnow_key', '');
+    if (!preg_match('/^[a-f0-9]{32}$/', $k)) {
+        $k = bin2hex(random_bytes(16));
+        update_option('dst_indexnow_key', $k, false);
+    }
+    return $k;
+}
+
+// Phục vụ tệp khóa https://danangstay.com.vn/{key}.txt
+add_action('init', function () {
+    $path = trim((string) wp_parse_url(isset($_SERVER['REQUEST_URI']) ? wp_unslash($_SERVER['REQUEST_URI']) : '', PHP_URL_PATH), '/');
+    $key = dst_indexnow_key();
+    if ($path === $key . '.txt') {
+        status_header(200);
+        header('Content-Type: text/plain; charset=utf-8');
+        echo $key; // phpcs:ignore
+        exit;
+    }
+}, 0);
+
+function dst_indexnow_submit(array $urls)
+{
+    $urls = array_values(array_unique(array_filter(array_map('esc_url_raw', $urls))));
+    if (!$urls) {
+        return new WP_Error('empty', 'Không có URL');
+    }
+    $host = (string) wp_parse_url(home_url('/'), PHP_URL_HOST);
+    $key = dst_indexnow_key();
+    $res = wp_remote_post('https://api.indexnow.org/indexnow', [
+        'timeout' => 15,
+        'headers' => ['Content-Type' => 'application/json; charset=utf-8'],
+        'body' => wp_json_encode([
+            'host' => $host,
+            'key' => $key,
+            'keyLocation' => 'https://' . $host . '/' . $key . '.txt',
+            'urlList' => array_slice($urls, 0, 10000),
+        ]),
+    ]);
+    $code = is_wp_error($res) ? $res->get_error_message() : wp_remote_retrieve_response_code($res);
+    update_option('dst_indexnow_last', ['time' => current_time('mysql'), 'count' => count($urls), 'result' => $code], false);
+    return $code;
+}
+
+function dst_post_urls($post_id)
+{
+    $ids = [$post_id];
+    if (function_exists('pll_get_post_translations')) {
+        $ids = array_merge($ids, array_values(pll_get_post_translations($post_id)));
+    }
+    $urls = [];
+    foreach (array_unique($ids) as $id) {
+        if (get_post_status($id) === 'publish') {
+            $urls[] = get_permalink($id);
+        }
+    }
+    return $urls;
+}
+
+// Đăng mới hoặc sửa bài đã đăng → báo IndexNow (chạy nền sau khi lưu)
+add_action('transition_post_status', function ($new, $old, $post) {
+    if ($new !== 'publish' || !in_array($post->post_type, ['post', 'page'], true) || wp_is_post_revision($post)) {
+        return;
+    }
+    if (!wp_next_scheduled('dst_indexnow_post', [$post->ID])) {
+        wp_schedule_single_event(time() + 30, 'dst_indexnow_post', [$post->ID]);
+    }
+}, 10, 3);
+add_action('dst_indexnow_post', function ($post_id) {
+    dst_indexnow_submit(dst_post_urls($post_id));
+});
+
+// API cho trợ lý: gửi danh sách URL hoặc toàn bộ bài/trang đã đăng
+add_action('rest_api_init', function () {
+    register_rest_route('danangstay/v1', '/indexnow', [
+        'methods' => 'POST',
+        'permission_callback' => function () {
+            return current_user_can('edit_others_posts');
+        },
+        'callback' => function (WP_REST_Request $r) {
+            $urls = (array) $r->get_param('urls');
+            if ($r->get_param('all')) {
+                $ids = get_posts(['post_type' => ['post', 'page'], 'post_status' => 'publish', 'numberposts' => -1, 'fields' => 'ids', 'lang' => '']);
+                foreach ($ids as $id) {
+                    $urls[] = get_permalink($id);
+                }
+                $urls[] = home_url('/');
+                if (function_exists('pll_languages_list')) {
+                    foreach (pll_languages_list() as $l) {
+                        $urls[] = pll_home_url($l);
+                    }
+                }
+            }
+            $code = dst_indexnow_submit($urls);
+            return ['result' => is_wp_error($code) ? $code->get_error_message() : $code, 'count' => count(array_unique($urls)), 'key_url' => home_url('/' . dst_indexnow_key() . '.txt')];
+        },
+    ]);
+});
+
+/* ------------------------------------------------------------------ */
+/* 8. Thẻ xác minh Google / Naver / Bing (trợ lý đặt qua API)           */
+/* ------------------------------------------------------------------ */
+
+add_action('wp_head', function () {
+    $v = (array) get_option('dst_verify', []);
+    $names = ['google' => 'google-site-verification', 'naver' => 'naver-site-verification', 'bing' => 'msvalidate.01'];
+    foreach ($names as $k => $meta) {
+        if (!empty($v[$k])) {
+            echo '<meta name="' . esc_attr($meta) . '" content="' . esc_attr($v[$k]) . '" />' . "\n";
+        }
+    }
+}, 1);
+
+add_action('rest_api_init', function () {
+    register_rest_route('danangstay/v1', '/verify', [
+        'methods' => 'POST',
+        'permission_callback' => function () {
+            return current_user_can('manage_options');
+        },
+        'callback' => function (WP_REST_Request $r) {
+            $v = (array) get_option('dst_verify', []);
+            foreach (['google', 'naver', 'bing'] as $k) {
+                $val = $r->get_param($k);
+                if ($val !== null) {
+                    // Nhận cả nguyên thẻ <meta ... content="..."> hoặc chỉ mã
+                    if (preg_match('/content=["\']([^"\']+)/', (string) $val, $m)) {
+                        $val = $m[1];
+                    }
+                    $v[$k] = preg_replace('/[^A-Za-z0-9_\-]/', '', (string) $val);
+                }
+            }
+            update_option('dst_verify', $v, false);
+            return ['ok' => true, 'verify' => $v];
+        },
+    ]);
+});
