@@ -58,7 +58,7 @@ Cột chuyên mục dùng: plan, places, food, culture.
 | [ ] | Ngũ Hành Sơn | Ngũ Hành Sơn: đi động nào, mất bao lâu, vé và thang máy | places | 오행산 |
 | [ ] | phố cổ Hội An về đêm | Phố cổ Hội An buổi tối: vé tham quan, thả đèn, đi thuyền sông Hoài | places | 호이안 야경 |
 | [ ] | Cù Lao Chàm | Đi Cù Lao Chàm: mùa đẹp, tàu cao tốc, lặn ngắm san hô, quy định | places | 참섬 투어 |
-| [ ] | Mỹ Sơn | Thánh địa Mỹ Sơn: đi giờ nào, xem gì, kết hợp Hội An | culture | 미선 유적지 |
+| [x] | Mỹ Sơn | Thánh địa Mỹ Sơn: đi giờ nào, xem gì, kết hợp Hội An | culture | 미선 유적지 | https://danangstay.com.vn/vi/thanh-dia-my-son/
 | [ ] | Huế 1 ngày | Huế trong 1 ngày: Đại Nội, lăng tẩm, ăn gì, đi từ Đà Nẵng | places | 후에 당일치기 |
 | [ ] | đèo Hải Vân | Đèo Hải Vân bằng xe máy hoặc ô tô: điểm dừng, an toàn | places | 하이반 패스 |
 | [ ] | suối khoáng nóng Núi Thần Tài | Suối khoáng nóng Núi Thần Tài: vé, giờ tắm bùn, kinh nghiệm cho gia đình | places | 탄따이 온천 |
