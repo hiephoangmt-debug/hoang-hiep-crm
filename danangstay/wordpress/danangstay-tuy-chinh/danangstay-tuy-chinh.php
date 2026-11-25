@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 1.6.4
+ * Version: 1.8.2
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -927,3 +927,308 @@ add_action('rest_api_init', function () {
         },
     ]);
 });
+
+/* ------------------------------------------------------------------ */
+/* 10. Giao diện trang dịch vụ (Vé tham quan): hero, lưới rộng 3 cột    */
+/* ------------------------------------------------------------------ */
+
+add_filter('dst_html', function ($html) {
+    $is_hub = strpos($html, 'class="ds-services"') !== false;
+    if ((strpos($html, 'class="ds-tickets ') === false && !$is_hub) || strpos($html, '<header class="page-head">') === false) {
+        return $html;
+    }
+    $l = dst_lang();
+    if ($is_hub) {
+        $home = trailingslashit(dst_lang_home());
+        $tk = dst_tickets_url();
+        $hub = [
+            'vi' => ['DanangStay · Dịch vụ du lịch', 'Chỗ ở, vé máy bay, vé tham quan, xe đưa đón và tour ở Đà Nẵng – Hội An – Huế. Một đầu mối, người địa phương tư vấn, báo giá trong ngày.', ['stays/' => 'Chỗ ở', 'flights/' => 'Vé máy bay', 'tk' => 'Vé tham quan'], 'Nhắn Zalo', 'Gọi 0909 669 325'],
+            'ko' => ['DanangStay · 여행 서비스', '다낭·호이안·후에 숙소, 항공권, 입장권, 픽업, 투어를 한 곳에서. 현지인 상담, 당일 견적.', ['stays/' => '숙소', 'flights/' => '항공권', 'tk' => '입장권·투어'], 'Zalo 문의', '전화 +84 909 669 325'],
+            'en' => ['DanangStay · Travel services', 'Stays, flights, attraction tickets, transfers and tours in Da Nang, Hoi An and Hue — one local contact, same-day quotes.', ['stays/' => 'Stays', 'flights/' => 'Flights', 'tk' => 'Tickets'], 'Message on Zalo', 'Call +84 909 669 325'],
+        ];
+        $h = isset($hub[$l]) ? $hub[$l] : $hub['en'];
+        $chips = '';
+        foreach ($h[2] as $k => $name) {
+            $u = $k === 'tk' ? $tk : $home . $k;
+            if ($u) {
+                $chips .= '<a href="' . esc_url($u) . '">' . esc_html($name) . '</a>';
+            }
+        }
+        $html = preg_replace(
+            '#<header class="page-head">\s*<div class="wrap">\s*<h1>(.*?)</h1>\s*</div>\s*</header>#s',
+            '<header class="page-head ds-hero"><div class="wrap"><span class="ds-hero__kicker">' . esc_html($h[0]) . '</span><h1>$1</h1>'
+            . '<p class="ds-hero__sub">' . esc_html($h[1]) . '</p>'
+            . '<div class="ds-hero__actions"><a class="ds-btn ds-btn--zalo" href="https://zalo.me/0909669325" target="_blank" rel="noopener">💬 ' . esc_html($h[3]) . '</a>'
+            . '<a class="ds-btn ds-btn--call" href="tel:0909669325">📞 ' . esc_html($h[4]) . '</a></div>'
+            . '<nav class="ds-hero__chips">' . $chips . '</nav></div></header>',
+            $html,
+            1
+        );
+        return $html;
+    }
+    $tx = [
+        'vi' => ['Dịch vụ · Vé tham quan &amp; tour', '18 điểm vui chơi nổi bật ở Đà Nẵng, Hội An, Huế — kinh nghiệm thực tế của người địa phương, báo giá trong ngày, vé điện tử gửi qua Zalo.', ['da-nang' => 'Đà Nẵng', 'hoi-an' => 'Hội An', 'hue' => 'Huế'], 'Nhắn Zalo đặt vé', 'Gọi 0909 669 325'],
+        'ko' => ['서비스 · 입장권 &amp; 투어', '다낭·호이안·후에 인기 명소 18곳 — 현지인의 실제 팁, 당일 견적, 카카오톡·Zalo로 전자 티켓 발송.', ['da-nang' => '다낭', 'hoi-an' => '호이안', 'hue' => '후에'], 'Zalo로 예약 문의', '전화 +84 909 669 325'],
+        'en' => ['Services · Tickets &amp; tours', '18 top attractions in Da Nang, Hoi An and Hue — local tips, same-day quotes, e-tickets sent via WhatsApp or Zalo.', ['da-nang' => 'Da Nang', 'hoi-an' => 'Hoi An', 'hue' => 'Hue'], 'Message us on Zalo', 'Call +84 909 669 325'],
+    ];
+    $t = isset($tx[$l]) ? $tx[$l] : $tx['en'];
+    $chips = '';
+    foreach ($t[2] as $id => $name) {
+        $chips .= '<a href="#' . $id . '">' . esc_html($name) . '</a>';
+    }
+    $html = preg_replace(
+        '#<header class="page-head">\s*<div class="wrap">\s*<h1>(.*?)</h1>\s*</div>\s*</header>#s',
+        '<header class="page-head ds-hero"><div class="wrap"><span class="ds-hero__kicker">' . $t[0] . '</span><h1>$1</h1>'
+        . '<p class="ds-hero__sub">' . esc_html($t[1]) . '</p>'
+        . '<div class="ds-hero__actions"><a class="ds-btn ds-btn--zalo" href="https://zalo.me/0909669325" target="_blank" rel="noopener">💬 ' . esc_html($t[3]) . '</a>'
+        . '<a class="ds-btn ds-btn--call" href="tel:0909669325">📞 ' . esc_html($t[4]) . '</a></div>'
+        . '<nav class="ds-hero__chips" aria-label="Khu vực">' . $chips . '</nav></div></header>',
+        $html,
+        1
+    );
+    return str_replace('<body class="', '<body class="ds-service ', $html);
+});
+
+add_action('wp_head', function () {
+    ?>
+<style id="dst-service-css">
+/* Hero */
+body.ds-service .page-head.ds-hero { padding: 150px 0 56px; background: linear-gradient(135deg, #0b2447 0%, #133a6b 60%, #1e4f8a 100%); color: #fff; position: relative; overflow: hidden; }
+body.ds-service .page-head.ds-hero::after { content: ""; position: absolute; right: -120px; bottom: -160px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(255,138,61,.28), rgba(255,138,61,0) 70%); pointer-events: none; }
+body.ds-service .ds-hero h1 { color: #fff; font-size: clamp(32px, 4.2vw, 56px); font-weight: 500; line-height: 1.12; max-width: 920px; margin: 14px 0 16px; }
+.ds-hero__kicker { display: inline-block; font: 700 12px/1 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: #ffa04d; }
+.ds-hero__sub { color: #d6e0ee !important; font-size: 18px !important; max-width: 720px !important; margin: 0 0 24px !important; line-height: 1.6; }
+.ds-hero__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+.ds-hero__actions .ds-btn { padding: 14px 20px; font-size: 15px; }
+.ds-hero__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.ds-hero__chips a { padding: 8px 16px; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; color: #fff; font: 600 13.5px/1 var(--sans); text-decoration: none; }
+.ds-hero__chips a:hover { background: #fff; color: var(--sea); }
+/* Bỏ chữ cái phóng to đầu bài trên trang dịch vụ */
+body.ds-service .prose > p:first-of-type::first-letter { float: none; font-size: inherit; padding: 0; color: inherit; font-family: inherit; }
+body.ds-service .prose > p:first-of-type { font-size: 19px; color: var(--ink); }
+/* Lưới thẻ & tiêu đề khu vực trải rộng 3 cột */
+body.ds-service .prose .ds-tickets, body.ds-service .prose h2.ds-area, body.ds-service .prose .ds-news {
+  width: min(1200px, calc(100vw - 2 * var(--gutter))); position: relative; left: 50%; transform: translateX(-50%); max-width: none;
+}
+body.ds-service .prose .ds-tickets { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 1100px) { body.ds-service .prose .ds-tickets { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { body.ds-service .prose .ds-tickets { grid-template-columns: 1fr; } }
+body.ds-service .prose h2.ds-area { display: flex; align-items: center; gap: 14px; margin-top: 2.2em; padding-top: 28px; border-top: 1px solid var(--line); scroll-margin-top: 100px; }
+body.ds-service .prose h2.ds-area::before { content: ""; width: 10px; height: 34px; border-radius: 4px; background: var(--bronze); }
+body.ds-service .prose h2#hoi-an::before { background: #c2410c; }
+body.ds-service .prose h2#hue::before { background: #7c3aed; }
+/* Thẻ */
+.ds-ticket { position: relative; border-top: 4px solid var(--bronze); box-shadow: 0 14px 34px -26px rgba(11,36,71,.55); transition: transform .2s, box-shadow .2s; }
+.ds-ticket:hover { transform: translateY(-3px); box-shadow: 0 22px 44px -26px rgba(11,36,71,.6); }
+.ds-tickets--ha .ds-ticket { border-top-color: #c2410c; }
+.ds-tickets--hue .ds-ticket { border-top-color: #7c3aed; }
+.ds-ticket .num { position: absolute; top: 14px; right: 16px; font: 700 13px/1 var(--sans); color: var(--muted); opacity: .6; }
+.ds-ticket h3 { font-family: var(--serif) !important; font-size: 22px !important; line-height: 1.25 !important; color: var(--ink); padding-right: 28px; }
+.ds-ticket .where { padding-right: 30px; }
+/* Hộp liên hệ: căn giữa chữ VT */
+.ds-contact__avatar { display: flex !important; align-items: center !important; justify-content: center !important; line-height: 1 !important; text-align: center !important; }
+/* Bảng chọn nhanh */
+body.ds-service .prose table td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+@media (max-width: 700px) { body.ds-service .prose table td:first-child { white-space: normal; } body.ds-service .page-head.ds-hero { padding: 120px 0 40px; } }
+</style>
+    <?php
+}, 102);
+
+/* ------------------------------------------------------------------ */
+/* 11. Trang chính "Dịch vụ": ô dịch vụ, quy định mới, tin mới cột bên  */
+/* ------------------------------------------------------------------ */
+
+function dst_page_url($opt)
+{
+    $id = (int) get_option($opt, 0);
+    if (!$id) {
+        return '';
+    }
+    if (function_exists('pll_get_post')) {
+        $id = (int) pll_get_post($id, dst_lang());
+    }
+    return $id && get_post_status($id) === 'publish' ? get_permalink($id) : '';
+}
+
+function dst_lang_home()
+{
+    return function_exists('pll_home_url') ? pll_home_url(dst_lang()) : home_url('/');
+}
+
+// [ds_dich_vu] – các ô dịch vụ
+add_shortcode('ds_dich_vu', function () {
+    $home = trailingslashit(dst_lang_home());
+    $tickets = dst_tickets_url() ?: 'https://zalo.me/0909669325';
+    $zalo = 'https://zalo.me/0909669325';
+    $S = [
+        'vi' => [
+            ['🏨', 'Chỗ ở', 'Khách sạn, căn hộ, villa view biển ở Mỹ Khê, Mân Thái – Sơn Trà, trung tâm và Hội An. Người địa phương chọn phòng hợp lịch trình và ngân sách.', $home . 'stays/', 'Xem chỗ ở'],
+            ['✈️', 'Vé máy bay', 'Vé nội địa và quốc tế đến Đà Nẵng, so sánh nhiều hãng, hỗ trợ hành lý, chỗ ngồi, đổi vé. Có sẵn lưu ý trước chuyến bay.', $home . 'flights/', 'Đặt vé máy bay'],
+            ['🎟️', 'Vé tham quan', 'Bà Nà Hills, Núi Thần Tài, Suối Lương, Hòa Phú Thành, Ký Ức Hội An, VinWonders, Mỹ Sơn, Đại Nội Huế — kèm kinh nghiệm từng điểm.', $tickets, 'Xem 18 điểm'],
+            ['🚗', 'Xe đưa đón & thuê xe', 'Đón sân bay cầm bảng tên, xe đi Bà Nà, Hội An, Mỹ Sơn, Huế; xe 4–29 chỗ, tài xế đúng giờ, giá báo trước.', $zalo, 'Đặt xe'],
+            ['🧭', 'Tour & hướng dẫn viên', 'Tour riêng hoặc ghép: Sơn Trà, Hội An, Mỹ Sơn, Huế, Cù Lao Chàm; hướng dẫn viên tiếng Việt, English, 한국어.', $zalo, 'Hỏi tour'],
+            ['🧳', 'Trọn gói chuyến đi', 'Một yêu cầu: vé máy bay + phòng + xe + vé tham quan. Gửi ngày đi và số người, chúng tôi lên lịch trình và báo giá.', $home . '#reserve', 'Gửi yêu cầu'],
+        ],
+        'ko' => [
+            ['🏨', '숙소', '미케, 만타이–선짜, 시내, 호이안의 오션뷰 호텔·아파트·풀빌라. 현지인이 일정과 예산에 맞게 골라 드립니다.', $home . 'stays/', '숙소 보기'],
+            ['✈️', '항공권', '다낭행 국내선·국제선, 항공사 비교, 수하물·좌석·변경 지원, 탑승 전 유의사항 안내.', $home . 'flights/', '항공권 예약'],
+            ['🎟️', '입장권·투어', '바나힐, 탄따이 온천, 수이르엉, 호아푸타인, 호이안 메모리즈, 빈원더스, 미선, 후에 왕궁 — 명소별 현지 팁.', $tickets, '18곳 보기'],
+            ['🚗', '픽업·차량 대절', '네임보드 공항 픽업, 바나힐·호이안·미선·후에 차량, 4–29인승, 시간 엄수, 사전 견적.', $zalo, '차량 예약'],
+            ['🧭', '투어·가이드', '선짜, 호이안, 미선, 후에, 참섬 단독·조인 투어, 한국어 가이드.', $zalo, '투어 문의'],
+            ['🧳', '여행 패키지', '항공권 + 숙소 + 차량 + 입장권을 한 번에. 날짜와 인원을 보내 주시면 일정과 견적을 드립니다.', $home . '#reserve', '문의하기'],
+        ],
+        'en' => [
+            ['🏨', 'Stays', 'Sea-view hotels, apartments and villas in My Khe, Man Thai – Son Tra, the centre and Hoi An, hand-picked by locals.', $home . 'stays/', 'See stays'],
+            ['✈️', 'Flights', 'Domestic and international flights to Da Nang, airline comparison, baggage, seats and changes — plus pre-flight tips.', $home . 'flights/', 'Book flights'],
+            ['🎟️', 'Attraction tickets', 'Ba Na Hills, Than Tai hot springs, Suoi Luong, Hoa Phu Thanh, Hoi An Memories, VinWonders, My Son, Hue Citadel — with local tips.', $tickets, 'See 18 places'],
+            ['🚗', 'Transfers & car hire', 'Airport pickup with name sign, cars to Ba Na, Hoi An, My Son and Hue; 4–29 seats, punctual drivers, prices agreed upfront.', $zalo, 'Book a car'],
+            ['🧭', 'Tours & guides', 'Private or shared tours of Son Tra, Hoi An, My Son, Hue and Cham Islands; English, Korean and Vietnamese guides.', $zalo, 'Ask about tours'],
+            ['🧳', 'Trip packages', 'One request for flights + room + transfers + tickets. Send dates and guests and we plan and quote it.', $home . '#reserve', 'Send a request'],
+        ],
+    ];
+    $list = isset($S[dst_lang()]) ? $S[dst_lang()] : $S['en'];
+    $out = '<div class="ds-services">';
+    foreach ($list as $s) {
+        $ext = strpos($s[3], 'zalo.me') !== false ? ' target="_blank" rel="noopener"' : '';
+        $out .= '<a class="ds-service" href="' . esc_url($s[3]) . '"' . $ext . '><span class="ic" aria-hidden="true">' . $s[0] . '</span><strong>' . esc_html($s[1]) . '</strong><span class="tx">' . esc_html($s[2]) . '</span><span class="go">' . esc_html($s[4]) . ' →</span></a>';
+    }
+    return $out . '</div>';
+});
+
+// [ds_quy_dinh] – quy định mới cần biết
+add_shortcode('ds_quy_dinh', function () {
+    $Q = [
+        'vi' => ['Quy định mới cần biết', 'Cập nhật 11/2026 · luôn đối chiếu với cơ quan chức năng, hãng bay trước khi đi', [
+            ['Miễn thị thực 45 ngày', 'Công dân Hàn Quốc, Nhật Bản và một số nước châu Âu được miễn thị thực tối đa 45 ngày; chính sách hiện có hiệu lực đến 14/3/2028.'],
+            ['Thị thực điện tử (e-visa)', 'Cấp cho công dân mọi quốc gia, thời hạn tối đa 90 ngày, nhập cảnh một hoặc nhiều lần; xin trên cổng chính thức của Cục Quản lý xuất nhập cảnh.'],
+            ['Bay nội địa bằng VNeID', 'Hành khách Việt Nam có thể dùng tài khoản định danh điện tử VNeID mức 2 thay cho CCCD khi làm thủ tục bay nội địa.'],
+            ['Sạc dự phòng trên máy bay', 'Chỉ mang trong hành lý xách tay và không sử dụng trong suốt chuyến bay.'],
+            ['Địa giới hành chính mới', 'Từ 1/7/2025, Hội An và tỉnh Quảng Nam cũ thuộc thành phố Đà Nẵng; tên phường, xã trên địa chỉ có thể đã thay đổi, ứng dụng bản đồ có nơi chưa cập nhật.'],
+            ['Vé cáp treo Bà Nà', 'Từ năm 2026, vé cáp treo Sun World Bà Nà Hills dùng được tối đa 3 ngày liên tiếp.'],
+        ]],
+        'ko' => ['꼭 알아야 할 새 규정', '2026년 11월 업데이트 · 출발 전 관계 기관·항공사에서 다시 확인하세요', [
+            ['무비자 45일', '한국, 일본 및 일부 유럽 국가 국민은 최대 45일 무비자 체류가 가능하며, 현재 정책은 2028년 3월 14일까지 유효합니다.'],
+            ['전자비자 (e-visa)', '모든 국가 국민에게 발급되며 최대 90일, 단수·복수 입국이 가능합니다. 베트남 출입국관리국 공식 사이트에서 신청하세요.'],
+            ['보조배터리', '기내 수하물로만 반입하고 비행 중에는 사용할 수 없습니다.'],
+            ['새 행정구역', '2025년 7월 1일부터 호이안과 옛 꽝남성이 다낭시에 편입되었습니다. 주소의 동·면 이름이 바뀌었을 수 있고 지도 앱에 반영되지 않은 곳도 있습니다.'],
+            ['바나힐 케이블카 티켓', '2026년부터 썬월드 바나힐 케이블카 티켓은 최대 3일 연속 사용할 수 있습니다.'],
+        ]],
+        'en' => ['New rules worth knowing', 'Updated Nov 2026 · always double-check with the authorities or your airline before travelling', [
+            ['45-day visa exemption', 'Citizens of South Korea, Japan and several European countries can stay visa-free for up to 45 days; the current policy runs until 14 March 2028.'],
+            ['E-visa', 'Available to citizens of all countries, valid for up to 90 days with single or multiple entry; apply on the official Immigration Department portal.'],
+            ['Power banks on board', 'Cabin baggage only, and they may not be used during the flight.'],
+            ['New administrative map', 'Since 1 July 2025, Hoi An and the former Quang Nam province are part of Da Nang city; ward names in addresses may have changed and some map apps lag behind.'],
+            ['Ba Na Hills cable car', 'From 2026, Sun World Ba Na Hills cable-car tickets can be used for up to 3 consecutive days.'],
+        ]],
+    ];
+    $q = isset($Q[dst_lang()]) ? $Q[dst_lang()] : $Q['en'];
+    $out = '<section class="ds-rules"><h3>📌 ' . esc_html($q[0]) . '</h3><p class="ds-rules__note">' . esc_html($q[1]) . '</p><ul>';
+    foreach ($q[2] as $r) {
+        $out .= '<li><b>' . esc_html($r[0]) . '</b><span>' . esc_html($r[1]) . '</span></li>';
+    }
+    return $out . '</ul></section>';
+});
+
+// Tin mới dạng gọn cho cột bên: [ds_tin_moi so="5" kieu="gon"]
+add_filter('do_shortcode_tag', function ($out, $tag, $atts) {
+    if ($tag !== 'ds_tin_moi' || empty($atts['kieu']) || $atts['kieu'] !== 'gon' || $out === '') {
+        return $out;
+    }
+    return str_replace('<section class="ds-news">', '<section class="ds-news ds-news--side">', $out);
+}, 10, 3);
+
+// Link chữ "DỊCH VỤ / Book / 예약" trên menu → trang chính Dịch vụ, thêm mục "Tổng quan dịch vụ"
+add_filter('dst_html', function ($html) {
+    $url = dst_page_url('dst_services_page');
+    if (!$url) {
+        return $html;
+    }
+    $all = ['vi' => 'Tất cả dịch vụ', 'ko' => '전체 서비스', 'en' => 'All services'];
+    $label = isset($all[dst_lang()]) ? $all[dst_lang()] : $all['en'];
+    $html = preg_replace('#<a href="[^"]*/stays/"(\s+class="nav__parent")#', '<a href="' . esc_url($url) . '"$1', $html);
+    $html = preg_replace_callback('#(<a href="[^"]*/stays/">[^<]*</a>)#u', function ($m) use ($url, $label) {
+        return '<a href="' . esc_url($url) . '">' . esc_html($label) . '</a>' . $m[1];
+    }, $html, 2);
+    // Trang Vé máy bay: thêm quy định mới + tin mới dưới mục lưu ý
+    if (strpos($html, '<section class="ds-flight-notes"') !== false && strpos($html, '<section class="ds-rules"') === false) {
+        $extra = '<div class="ds-flight-extra">' . do_shortcode('[ds_quy_dinh]') . do_shortcode('[ds_tin_moi so="3"]') . '</div>';
+        $html = preg_replace('#(<section class="ds-flight-notes"><div class="wrap">.*?)(</div></section>)#s', '$1' . str_replace(['\\', '$'], ['\\\\', '\$'], $extra) . '$2', $html, 1);
+    }
+    return $html;
+}, 20);
+
+add_action('rest_api_init', function () {
+    register_rest_route('danangstay/v1', '/options2', [
+        'methods' => 'POST',
+        'permission_callback' => function () {
+            return current_user_can('manage_options');
+        },
+        'callback' => function (WP_REST_Request $r) {
+            foreach (['services_page'] as $k) {
+                if ($r->get_param($k) !== null) {
+                    update_option('dst_' . $k, (int) $r->get_param($k), false);
+                }
+            }
+            return ['ok' => true, 'services_page' => (int) get_option('dst_services_page', 0)];
+        },
+    ]);
+});
+
+add_action('wp_head', function () {
+    ?>
+<style id="dst-hub-css">
+.ds-services { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 1.4em 0 2em; }
+@media (max-width: 1000px) { .ds-services { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .ds-services { grid-template-columns: 1fr; } }
+.ds-service { display: flex; flex-direction: column; gap: 8px; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: #fff; text-decoration: none !important; color: var(--ink) !important; box-shadow: 0 14px 34px -28px rgba(11,36,71,.6); transition: transform .2s, box-shadow .2s, border-color .2s; }
+.ds-service:hover { transform: translateY(-3px); border-color: var(--bronze); box-shadow: 0 22px 44px -26px rgba(11,36,71,.55); }
+.ds-service .ic { font-size: 30px; line-height: 1; }
+.ds-service strong { font: 600 20px/1.25 var(--serif); }
+.ds-service .tx { font: 400 14.5px/1.55 var(--sans); color: var(--ink-2); flex: 1; }
+.ds-service .go { font: 700 13.5px/1 var(--sans); color: var(--bronze); }
+.ds-split { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 40px; align-items: start; }
+.ds-split__side { position: sticky; top: 104px; display: grid; gap: 18px; }
+@media (max-width: 1000px) { .ds-split { grid-template-columns: 1fr; } .ds-split__side { position: static; } }
+.ds-rules { border: 1px solid var(--line); border-radius: 14px; background: var(--ivory); padding: 18px 20px; font-family: var(--sans); text-align: left; }
+.ds-rules h3 { margin: 0 0 4px !important; font: 600 18px/1.3 var(--sans) !important; color: var(--ink); }
+.ds-rules__note { margin: 0 0 12px !important; font-size: 12.5px !important; color: var(--muted) !important; line-height: 1.45 !important; }
+.ds-rules ul { list-style: none; margin: 0 !important; padding: 0 !important; display: grid; gap: 10px; }
+.ds-rules li { margin: 0 !important; padding: 0 0 10px !important; border-bottom: 1px dashed var(--line); font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+.ds-rules li:last-child { border-bottom: 0; padding-bottom: 0 !important; }
+.ds-rules li::before { display: none !important; }
+.ds-rules li b { display: block; color: var(--ink); font-size: 14.5px; margin-bottom: 2px; }
+.ds-news--side { margin: 0 !important; width: auto !important; left: auto !important; transform: none !important; }
+.ds-news--side h2 { font: 600 18px/1.3 var(--sans) !important; margin: 0 0 10px !important; }
+.ds-news--side .ds-news__grid { grid-template-columns: 1fr; gap: 10px; }
+.ds-news--side .ds-news__item { padding: 12px 14px; }
+.ds-news--side .ds-news__item strong { font-size: 15px; }
+.ds-news--side .ds-news__ex { display: none; }
+.ds-flight-extra { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; margin-top: 24px; align-items: start; }
+.ds-flight-extra .ds-news { margin: 0; }
+.ds-flight-extra .ds-news h2 { font-size: 22px; margin: 0 0 10px; }
+.ds-flight-extra .ds-news__grid { grid-template-columns: 1fr; }
+@media (max-width: 900px) { .ds-flight-extra { grid-template-columns: 1fr; } }
+/* Căn trái, không dàn đều chữ trong khối dịch vụ */
+.ds-split, .ds-split p, .ds-split li, .ds-steps li, .ds-rules li, .ds-rules span, .ds-service .tx, .ds-ticket p, .ds-ticket li { text-align: left !important; hyphens: manual; }
+.ds-split__side > p:empty { display: none; }
+.ds-split__side .ds-contact { margin: 0; }
+.ds-ticket .tip strong { font: 700 14px/1.4 var(--sans) !important; letter-spacing: .02em; color: var(--ink) !important; text-transform: none; margin-bottom: 4px; }
+.ds-steps li strong { display: block; font: 600 18px/1.3 var(--serif); color: var(--ink); margin-bottom: 4px; }
+/* Trang Dịch vụ: nội dung rộng */
+body.ds-hub .narrow.prose { width: min(1200px, calc(100% - 2 * var(--gutter))); }
+body.ds-hub .prose > p:first-of-type::first-letter { float: none; font-size: inherit; padding: 0; color: inherit; font-family: inherit; }
+.ds-steps { counter-reset: s; list-style: none; padding: 0 !important; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.ds-steps li { counter-increment: s; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 16px; font-size: 15px !important; line-height: 1.5 !important; margin: 0 !important; }
+.ds-steps li::before { content: counter(s, decimal-leading-zero) !important; display: block !important; position: static !important; width: auto !important; height: auto !important; background: none !important; font: 700 22px/1 var(--serif); color: var(--bronze); margin-bottom: 8px; }
+@media (max-width: 800px) { .ds-steps { grid-template-columns: 1fr 1fr; } }
+</style>
+    <?php
+}, 103);
+
+// Đánh dấu trang Dịch vụ để dùng bố cục rộng
+add_filter('dst_html', function ($html) {
+    if (strpos($html, 'class="ds-services"') !== false && strpos($html, 'class="ds-split"') !== false) {
+        $html = str_replace('<body class="', '<body class="ds-hub ds-service ', $html);
+    }
+    return $html;
+}, 5);

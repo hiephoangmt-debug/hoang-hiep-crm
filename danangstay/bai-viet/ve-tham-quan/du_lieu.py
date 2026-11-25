@@ -335,13 +335,14 @@ T = dict(
 )
 
 def cards(lang, area):
-    out = ['<div class="ds-tickets">']
+    out = [f'<div class="ds-tickets ds-tickets--{area}">']
     for a in A:
         if a["area"] != area: continue
         d = a[lang]; L = T[lang]
         facts = "".join(f'<li><span>{L["lbl"][k]}</span>{html.escape(d[k])}</li>' for k in ("time", "best", "fit", "move"))
         tips = "".join(f"<li>{html.escape(t)}</li>" for t in d["tips"])
-        out.append(f'<div class="ds-ticket"><span class="where">{html.escape(d["where"])}</span><h3>{html.escape(d["name"])}</h3>'
+        n = sum(1 for b in A[:A.index(a) + 1] if b["area"] == area)
+        out.append(f'<div class="ds-ticket"><span class="num">{n:02d}</span><span class="where">{html.escape(d["where"])}</span><h3>{html.escape(d["name"])}</h3>'
                    f'<p>{html.escape(d["desc"])}</p><ul class="facts">{facts}</ul>'
                    f'<div class="tip"><strong>{L["kn"]}</strong><ul>{tips}</ul></div>'
                    f'<a class="ds-btn" href="{ZALO}" target="_blank" rel="noopener">{html.escape(d["btn"])}</a></div>')
