@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="DanangStay">
+  <defs><clipPath id="i"><circle cx="32" cy="32" r="29"/></clipPath></defs>
+  <g clip-path="url(#i)">
+    <rect width="64" height="64" fill="#fff1d6"/>
+    <circle cx="44" cy="18" r="6" fill="#f29f3d"/>
+    <path d="M0,34 C10,26 18,22 28,26 C38,30 46,22 64,28 L64,64 L0,64Z" fill="#2f7d5b"/>
+    <path d="M4,44 Q11,32 18,44 Q25,32 32,44 Q39,32 46,44 Q51,36 55,38" fill="none" stroke="#f2b632" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M0,47 C10,43 18,51 32,47 C46,43 54,51 64,47 L64,64 L0,64Z" fill="#0b6e8a"/>
+    <path d="M6,55 C14,52 22,58 32,55 C42,52 50,58 58,55" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+  </g>
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#074c61" stroke-width="4"/>
+</svg>
