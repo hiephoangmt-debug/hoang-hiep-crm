@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.351**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.352**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.352
+
+- **Tự cập nhật** (Dự án → Tự cập nhật): web tự tải code plugin + giao diện mới từ kho code (mỗi giờ, hoặc ngay khi Claude gọi cổng /wp-json/hh/v1/self-update bằng khoá bí mật), kiểm tra mã từng tệp và cú pháp PHP, sao lưu bản cũ, tự kiểm tra sau khi chép (lỗi → trả lại bản cũ), rồi tự Nhập / cập nhật dữ liệu + xoá bộ nhớ đệm LiteSpeed. Ảnh mới tải dần. Từ bản này không cần tải zip nữa.
 
 ## Có gì mới – 2.20.351
 
