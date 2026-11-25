@@ -16,6 +16,11 @@ Cột chuyên mục dùng: plan, places, food, culture.
 
 | Trạng thái | Từ khóa chính (VI) | Tiêu đề gợi ý | Chuyên mục | Từ khóa KO |
 |---|---|---|---|---|
+| [x] | chèo SUP Đà Nẵng | Chèo SUP ở Đà Nẵng – Hội An: điểm chèo đẹp, giờ, giá, an toàn | places | 다낭 패들보드 | https://danangstay.com.vn/vi/cheo-sup-da-nang/
+| [ ] | lặn ngắm san hô Sơn Trà | Lặn ngắm san hô Sơn Trà, Cù Lao Chàm: mùa, giá tour, quy định bảo tồn | places | 다낭 스노클링 |
+| [ ] | lướt sóng Đà Nẵng | Lướt sóng (surf) ở Đà Nẵng: mùa sóng, bãi tập, học surf cho người mới | places | 다낭 서핑 |
+| [ ] | dù lượn Sơn Trà | Bay dù lượn Sơn Trà: điều kiện bay, giá, an toàn | places | 다낭 패러글라이딩 |
+| [ ] | kayak Đà Nẵng | Chèo kayak ở Đà Nẵng – Hội An: sông Hàn, rừng dừa, hồ Hòa Trung | places | 다낭 카약 |
 | [ ] | điểm check in Đà Nẵng | Top 20 điểm check-in đẹp nhất Đà Nẵng 2026 (kèm giờ chụp đẹp) | places | 다낭 사진 명소 |
 | [ ] | quán ăn ngon Đà Nẵng | Top 25 quán ăn ngon ở Đà Nẵng người địa phương hay ăn | food | 다낭 현지 맛집 |
 | [x] | giao thừa Đà Nẵng 2027 | Đón giao thừa 2027 ở Đà Nẵng: countdown, pháo hoa, nơi xem đẹp | plan | 다낭 새해 카운트다운 | https://danangstay.com.vn/vi/giao-thua-da-nang-2027/
