@@ -31,3 +31,11 @@
 
 ## Cập nhật plugin khi landing page thay đổi
 Chạy `./build.sh` để tạo lại `danangstay-landing.zip`, rồi tải lên lại (WordPress hỏi "Thay thế bản hiện tại" → đồng ý; cài đặt và dữ liệu khách vẫn giữ nguyên).
+
+## Plugin "DanangStay – Tùy chỉnh" (`danangstay-tuy-chinh.zip`)
+Dùng cho giao diện `danangstay-v3`. Cài: **Plugin → Cài mới → Tải plugin lên → danangstay-tuy-chinh.zip → Kích hoạt**, rồi xóa cache LiteSpeed.
+- Tông màu theo hiephoangmt.com: navy `#0b2447`, cam `#ea580c`, font Be Vietnam Pro + Playfair Display.
+- Sửa thanh menu bị ẩn trên máy tính. Nguyên nhân: menu con đang ẩn của mục "Đặt phòng" vẫn chiếm chỗ, giao diện tưởng menu bị tràn nên chuyển sang nút ☰.
+- SEO: `og:locale` đầy đủ (vi → vi_VN…), thêm `hreflang="x-default"`.
+- Bảo mật: bỏ sitemap tác giả và sitemap `/dat-phong/` (đang 404), ẩn `/wp-json/wp/v2/users` với khách, chuyển trang tác giả về trang chủ.
+Tắt plugin là trở lại như cũ.
