@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), ẩn tên đăng nhập quản trị.
- * Version: 1.0.0
+ * Version: 1.0.2
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -78,14 +78,52 @@ function dst_css()
 /* Menu mở trên điện thoại: nền trắng, chữ đậm */
 body.menu-open .site-header, body.nav-compact.menu-open .site-header { background: #fff; color: var(--ink); }
 
+/* Menu ☰ trên máy tính / máy tính bảng: ngăn kéo gọn bên phải thay vì phủ kín màn hình */
+@media (min-width: 901px) {
+  body.menu-open .nav, body.nav-compact.menu-open .nav {
+    left: auto; right: 0; width: min(420px, 100%);
+    padding: 28px 32px 48px; border-left: 1px solid var(--line);
+    box-shadow: -30px 0 60px -30px rgba(11, 36, 71, .45);
+  }
+  body.menu-open .nav a, body.nav-compact.menu-open .nav a { font-size: 22px; }
+  body.menu-open .nav__sub a { font-size: 15px !important; }
+  body.menu-open::after {
+    content: ""; position: fixed; inset: 84px 0 0 0; z-index: 48;
+    background: rgba(11, 36, 71, .35); pointer-events: none;
+  }
+}
+/* Khi đăng nhập (có thanh quản trị) menu ☰ không bị lệch */
+.admin-bar.menu-open .nav, .admin-bar.nav-compact.menu-open .nav { top: 116px; height: calc(100dvh - 116px); }
+.admin-bar.menu-open::after { top: 116px; }
+@media (max-width: 782px) {
+  .admin-bar.menu-open .nav, .admin-bar.nav-compact.menu-open .nav { top: 130px; height: calc(100dvh - 130px); }
+}
+
 /* Sửa lỗi thanh menu bị ẩn trên máy tính:
    menu con đang ẩn vẫn chiếm chỗ bên phải nên giao diện tưởng menu bị tràn và chuyển sang nút ☰ */
 @media (min-width: 1201px) {
-  .nav__group:not(:hover):not(:focus-within):not(.is-open) > .nav__sub { display: none; }
-  .nav > .nav__group:nth-last-child(-n+2) > .nav__sub { left: auto; right: -18px; }
+  body:not(.menu-open) .nav__group:not(:hover):not(:focus-within):not(.is-open) > .nav__sub { display: none; }
+  body:not(.menu-open) .nav > .nav__group:nth-last-child(-n+2) > .nav__sub { left: auto; right: -18px; }
 }
 CSS;
 }
+
+// Không cho Google Dịch (Chrome) dịch sai tên riêng: "Hue" → "Màu sắc", "Book" → "Sách"…
+add_action('wp_footer', function () {
+    ?>
+<script id="dst-notranslate">
+(function () {
+  var names = ['Hue', 'Huế', 'Hoi An', 'Hội An', 'Da Nang', 'Đà Nẵng', 'My Khe', 'Mỹ Khê', 'Son Tra', 'Sơn Trà', 'Man Thai', 'Mân Thái', 'Ba Na', 'Ba Na Hills', 'Bà Nà', 'An Thuong', 'An Thượng', 'Hai Van', 'Hải Vân', 'Cu Lao Cham', 'Cù Lao Chàm', 'DanangStay'];
+  document.querySelectorAll('.brand, .brand__word').forEach(function (e) { e.setAttribute('translate', 'no'); });
+  document.querySelectorAll('a, button, span, li, h3, h4, strong, em, td, th, label, option').forEach(function (e) {
+    if (e.children.length) return;
+    var t = (e.textContent || '').trim();
+    if (names.indexOf(t) !== -1) e.setAttribute('translate', 'no');
+  });
+})();
+</script>
+    <?php
+}, 99);
 
 /* ------------------------------------------------------------------ */
 /* 2. SEO: og:locale đầy đủ (vi → vi_VN) + hreflang x-default           */
