@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 532 260" width="532" height="260" role="img" aria-label="Cầu Rồng – Đà Nẵng">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F2BB3A"/><stop offset="1" stop-color="#E8590C"/></linearGradient>
+  </defs>
+  <!-- thân rồng: 5 vòm uốn lượn trên mặt cầu, đuôi cuộn bên trái -->
+  <path d="M40 150 C30 140 32 124 46 122 C58 120 62 134 52 140
+           C70 128 78 98 96 98 C114 98 120 150 136 150
+           C152 150 160 82 186 82 C212 82 218 150 236 150
+           C254 150 262 70 290 70 C318 70 324 150 342 150
+           C360 150 368 84 392 84 C412 84 418 132 432 116"
+        fill="none" stroke="url(#g)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- vảy lưng (vây) -->
+  <g fill="none" stroke="#E8590C" stroke-width="3" stroke-linecap="round">
+    <path d="M90 96 L94 86 M100 96 L106 87 M180 80 L184 69 M190 80 L196 70 M284 68 L288 56 M294 68 L300 57 M386 82 L390 72 M396 82 L402 73"/>
+  </g>
+  <!-- đầu rồng ngẩng cao (bên phải): mõm dài, sừng vuốt sau, bờm, miệng há phun lửa -->
+  <path d="M430 120 C436 104 442 94 450 86 C452 80 458 76 466 76 C480 76 494 80 504 84 C510 86 512 90 508 94 L494 96 L506 102 C508 106 504 108 498 108 L482 108 C474 112 466 116 456 118 C448 120 440 122 430 120 Z"
+        fill="#F2BB3A" stroke="#B9800E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M458 78 C452 70 446 62 436 56 M468 76 C464 66 460 58 452 50" fill="none" stroke="#B9800E" stroke-width="4" stroke-linecap="round"/>
+  <path d="M446 92 L434 88 L444 100 L430 102 L440 110" fill="none" stroke="#E8590C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="478" cy="86" r="3.6" fill="#0B2447"/>
+  <path d="M484 100 L494 96" stroke="#B9800E" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M506 98 C516 92 518 82 514 74 C524 80 526 94 518 104 C524 104 526 110 520 116 C514 110 510 104 506 98 Z" fill="#E8590C"/>
+  <!-- mặt cầu + trụ -->
+  <path d="M20 152 L500 152" stroke="#F7E7C6" stroke-width="8" stroke-linecap="round"/>
+  <path d="M20 164 L500 164" stroke="#F7E7C6" stroke-width="4" stroke-linecap="round"/>
+  <g stroke="#F7E7C6" stroke-width="7" stroke-linecap="round">
+    <path d="M136 166 L136 214 M236 166 L236 214 M342 166 L342 214"/>
+  </g>
+  <!-- sông Hàn -->
+  <path d="M10 222 C50 212 86 232 130 222 C174 212 210 232 254 222 C298 212 334 232 378 222 C422 212 458 230 510 220" fill="none" stroke="#1F7A8C" stroke-width="6" stroke-linecap="round"/>
+  <path d="M60 242 C92 234 120 250 154 242 C188 234 216 250 250 242 C284 234 312 250 346 242 C380 234 408 248 446 240" fill="none" stroke="#1F7A8C" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+</svg>
