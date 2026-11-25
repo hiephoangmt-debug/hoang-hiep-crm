@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 2.6.1
+ * Version: 2.8.1
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -1809,6 +1809,11 @@ function dst_side_css()
 .ds-art__stick { position: sticky; top: 100px; }
 .ds-art__sticky { height: 100%; display: flex; flex-direction: column; gap: 18px; }
 .ds-art__side .ds-contact { margin: 0; }
+.ds-art .prose > figure, .ds-art .prose figure.wide, .ds-art figure.wide { width: 100% !important; max-width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; left: auto !important; transform: none !important; }
+.ds-art .prose > figure img { width: 100%; height: auto; border-radius: 12px; }
+.ds-contact__qr img { width: 84px !important; height: 84px !important; max-width: none !important; }
+@container (min-width: 560px) { .ds-contact__qr img { width: 120px !important; height: 120px !important; } }
+.ds-contact__qr { width: auto !important; }
 .ds-rules li.is-new em { font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: var(--bronze); color: #fff; border-radius: 4px; padding: 2px 6px; margin-right: 4px; vertical-align: 1px; }
 .ds-rules li.is-new a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .ds-toc { border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; background: #fff; font-family: var(--sans); }
@@ -1933,3 +1938,135 @@ add_filter('dst_html', function ($html) {
 </style>';
     return str_replace('</head>', dst_side_css() . $css . '</head>', $html);
 }, 41);
+
+// ===== 18. Trang Vé tham quan (máy tính): cột trái chọn nhanh 18 điểm, nhảy tới từng điểm =====
+add_filter('dst_html', function ($html) {
+    if (strpos($html, '<div class="ds-tickets') === false || strpos($html, 'ds-tk__grid') !== false
+        || !preg_match('#<section class="section">\s*<div class="narrow prose">#', $html)) {
+        return $html;
+    }
+    $lang = dst_lang();
+    $T = ['vi' => ['Chọn điểm tham quan', 'Nhắn Zalo đặt vé', 'Báo giá trong ngày'], 'ko' => ['명소 선택', 'Zalo로 예약 문의', '당일 견적']];
+    $t = $T[$lang] ?? ['Choose an attraction', 'Book via WhatsApp/Zalo', 'Same-day quote'];
+    // gắn id cho từng điểm, dựng danh sách theo khu vực
+    $n = 0;
+    $html = preg_replace_callback('#<div class="ds-ticket">#', function () use (&$n) {
+        $n++;
+        return '<div class="ds-ticket" id="diem-' . $n . '">';
+    }, $html);
+    if ($n < 3) {
+        return $html;
+    }
+    $nav = '';
+    $i = 0;
+    if (preg_match_all('#<h2 id="([a-z-]+)" class="ds-area">([^<]+)</h2>(.*?)(?=<h2 |$)#s', $html, $areas, PREG_SET_ORDER)) {
+        foreach ($areas as $a) {
+            if (!preg_match_all('#<h3>([^<]+)</h3>#', $a[3], $hs)) {
+                continue;
+            }
+            $nav .= '<div class="ds-tk__grp"><a class="ds-tk__area" href="#' . $a[1] . '">' . esc_html(html_entity_decode($a[2])) . ' <small>' . count($hs[1]) . '</small></a><ol>';
+            foreach ($hs[1] as $h) {
+                $i++;
+                if ($i > $n) {
+                    break;
+                }
+                $nav .= '<li><a href="#diem-' . $i . '"><span>' . sprintf('%02d', $i) . '</span>' . $h . '</a></li>';
+            }
+            $nav .= '</ol></div>';
+        }
+    }
+    if ($nav === '') {
+        return $html;
+    }
+    $side = '<aside class="ds-tk__side"><nav class="ds-tk__nav"><b class="ds-side-h">' . esc_html($t[0]) . '</b>' . $nav
+        . '<a class="ds-btn ds-btn--zalo ds-tk__cta" href="https://zalo.me/0909669325" target="_blank" rel="noopener">💬 ' . esc_html($t[1]) . '</a>'
+        . '<p class="ds-tk__note">📞 0909 669 325 · ' . esc_html($t[2]) . '</p></nav></aside>';
+    $html = preg_replace('#<section class="section">\s*<div class="narrow prose">#', '<section class="section ds-tk"><div class="ds-tk__grid">' . str_replace(['\\', '$'], ['\\\\', '\\$'], $side) . '<div class="narrow prose">', $html, 1);
+    $html = preg_replace('#(</div>)(\s*</section>\s*</main>)#', '$1</div>$2', $html, 1);
+    $css = '<style id="dst-tk-css">
+.ds-tk__grid { width: min(1240px, calc(100% - 2 * var(--gutter, 24px))); margin: 0 auto; display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 56px; align-items: start; }
+.ds-tk .narrow { width: auto !important; max-width: 860px; margin: 0 !important; }
+.ds-tk__side { position: sticky; top: 96px; max-height: calc(100vh - 116px); overflow: auto; scrollbar-width: thin; }
+.ds-tk__nav { border: 1px solid var(--line); border-radius: 14px; padding: 16px; background: #fff; font-family: var(--sans); }
+.ds-side-h { display: block; font: 700 12px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--bronze); margin-bottom: 10px; }
+.ds-tk__area { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding: 8px 10px; border-radius: 8px; background: var(--sea); color: #fff !important; font: 600 14px/1.2 var(--sans); text-decoration: none; }
+.ds-tk__area small { font-size: 12px; opacity: .8; }
+.ds-tk__grp ol { list-style: none; margin: 4px 0 0; padding: 0; }
+.ds-tk__grp li a { display: flex; gap: 10px; align-items: baseline; padding: 6px 8px; border-radius: 8px; font-size: 14px; line-height: 1.35; color: var(--ink-2); text-decoration: none; }
+.ds-tk__grp li a span { font: 700 11.5px/1 var(--sans); color: var(--bronze); flex: none; width: 20px; }
+.ds-tk__grp li a:hover, .ds-tk__grp li a.on { background: var(--ivory); color: var(--ink); }
+.ds-tk__grp li a.on { font-weight: 600; box-shadow: inset 3px 0 0 var(--bronze); }
+.ds-tk__cta { display: flex !important; justify-content: center; margin-top: 14px; }
+.ds-tk__note { margin: 8px 0 0 !important; font-size: 12.5px !important; color: var(--muted, #6b7280) !important; text-align: center !important; }
+.ds-ticket, .ds-area { scroll-margin-top: 100px; }
+.ds-tk .narrow { max-width: none !important; }
+body.ds-svcpage .ds-tk .prose .ds-tickets, body.ds-svcpage .ds-tk .prose h2.ds-area, body.ds-svcpage .ds-tk .prose .ds-news { width: auto !important; left: auto !important; transform: none !important; }
+body.ds-svcpage .ds-tk .prose .ds-tickets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 700px) { body.ds-svcpage .ds-tk .prose .ds-tickets { grid-template-columns: 1fr; } }
+.ds-ticket:target { box-shadow: 0 0 0 2px var(--bronze); }
+@media (max-width: 1080px) { .ds-tk__grid { grid-template-columns: 1fr; } .ds-tk__side { display: none; } .ds-tk .narrow { margin: 0 auto !important; } }
+</style>';
+    $js = '<script id="dst-tk-js">(function(){var l=[].slice.call(document.querySelectorAll(".ds-tk__grp li a"));if(!l.length)return;var t=l.map(function(a){return document.querySelector(a.getAttribute("href"));});addEventListener("scroll",function(){var c=-1;t.forEach(function(e,i){if(e&&e.getBoundingClientRect().top<160)c=i;});l.forEach(function(a,i){a.classList.toggle("on",i===c);});if(c>=0){var a=l[c],s=document.querySelector(".ds-tk__side"),r=a.getBoundingClientRect(),q=s.getBoundingClientRect();if(r.top<q.top||r.bottom>q.bottom)s.scrollTop+=r.top-q.top-q.height/2;}},{passive:true});})();</script>';
+    $html = str_replace('</head>', $css . '</head>', $html);
+    return str_replace('</body>', $js . '</body>', $html);
+}, 42);
+
+// ===== 19. Ảnh đại diện (featured image) được ưu tiên: ảnh bìa bài viết + ảnh thẻ bài ở mọi danh sách =====
+function dst_swap_img($tag, $id)
+{
+    $src = get_the_post_thumbnail_url($id, 'full');
+    if (!$src) {
+        return $tag;
+    }
+    $alt = trim(strip_tags(get_post_meta(get_post_thumbnail_id($id), '_wp_attachment_image_alt', true))) ?: get_the_title($id);
+    $tag = preg_replace('#\ssrcset="[^"]*"#', '', $tag);
+    $tag = preg_replace('#\ssizes="[^"]*"#', '', $tag);
+    $tag = preg_replace('#\ssrc="[^"]*"#', ' src="' . esc_url($src) . '"', $tag, 1);
+    return preg_replace('#\salt="[^"]*"#', ' alt="' . esc_attr($alt) . '"', $tag, 1);
+}
+add_filter('dst_html', function ($html) {
+    // ảnh bìa trang bài
+    if (is_singular('post')) {
+        $id = get_queried_object_id();
+        if (has_post_thumbnail($id)) {
+            $html = preg_replace_callback('#(<header class="article-hero">\s*)(<img[^>]*>)#', function ($m) use ($id) {
+                return $m[1] . dst_swap_img($m[2], $id);
+            }, $html, 1);
+        }
+    }
+    // ảnh trong thẻ link tới bài
+    $home = preg_quote(home_url('/'), '#');
+    return preg_replace_callback('#<a\s[^>]*href="(' . $home . '[^"\#?]+)"[^>]*>(?:(?!</a>).)*?<img[^>]*>#s', function ($m) {
+        static $cache = [];
+        $u = $m[1];
+        if (!isset($cache[$u])) {
+            $cache[$u] = url_to_postid($u);
+        }
+        $id = $cache[$u];
+        if (!$id || get_post_type($id) !== 'post' || !has_post_thumbnail($id)) {
+            return $m[0];
+        }
+        return preg_replace_callback('#<img[^>]*>#', function ($i) use ($id) {
+            return dst_swap_img($i[0], $id);
+        }, $m[0], 1);
+    }, $html);
+}, 50);
+
+// ===== 20. "Tin tức" thành mục riêng trên menu chính (bỏ khỏi menu con Khám phá) =====
+add_filter('dst_html', function ($html) {
+    if (!preg_match('#<nav class="nav" aria-label="Menu">.*?</nav>#s', $html, $nm)) {
+        return $html;
+    }
+    $nav = $nm[0];
+    if (!preg_match('#<a href="([^"]*/category/news[^"]*)"[^>]*>([^<]+)</a>#', $nav, $nl) || strpos($nav, 'ds-nav-news') !== false) {
+        return $html;
+    }
+    $new = str_replace($nl[0], '', $nav);
+    $cur = (is_category() && strpos(get_term_link(get_queried_object()), '/news') !== false) ? ' aria-current="page"' : '';
+    $item = '<a href="' . $nl[1] . '" class="ds-nav-news"' . $cur . '>' . $nl[2] . '</a>' . "\n";
+    $new = preg_replace('#(<a href="[^"]*/events/"[^>]*>)#', $item . '$1', $new, 1, $cnt);
+    if (!$cnt) {
+        return $html;
+    }
+    return str_replace($nav, $new, $html);
+}, 60);
