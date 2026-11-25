@@ -327,9 +327,15 @@ A = [
     btn="까후에 예약")),
 ]
 
+import sys as _s; _s.path.insert(0, os.path.dirname(os.path.abspath(__file__))); from du_lieu_en import EN
+for _a, _e in zip(A, EN):
+    _a["en"] = _e
+
 T = dict(
   vi=dict(lbl=dict(time="⏱ Nên dành", best="🌤 Thời điểm đẹp", fit="👥 Phù hợp", move="🚗 Di chuyển"), kn="Kinh nghiệm &amp; lưu ý",
           areas=dict(dn="Đà Nẵng", ha="Hội An – Quảng Nam", hue="Huế")),
+  en=dict(lbl=dict(time="⏱ Time needed", best="🌤 Best time", fit="👥 Good for", move="🚗 Getting there"), kn="Tips &amp; good to know",
+          areas=dict(dn="Da Nang", ha="Hoi An – Quang Nam", hue="Hue")),
   ko=dict(lbl=dict(time="⏱ 소요 시간", best="🌤 추천 시기", fit="👥 추천 대상", move="🚗 이동"), kn="팁 &amp; 유의사항",
           areas=dict(dn="다낭", ha="호이안 – 꽝남", hue="후에")),
 )
@@ -356,6 +362,6 @@ def build(lang):
     open(os.path.join(os.path.dirname(__file__), f"{lang}.html"), "w", encoding="utf-8").write(src)
 
 if __name__ == "__main__":
-    for l in ("vi", "ko"):
+    for l in ("vi", "ko", "en"):
         build(l)
     print("ok", len(A), "điểm")

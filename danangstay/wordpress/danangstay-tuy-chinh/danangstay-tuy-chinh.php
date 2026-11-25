@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 2.2.2
+ * Version: 2.3.0
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -1511,3 +1511,238 @@ body.menu-open .dsw { display: none; }
 </style>
     <?php
 }, 104);
+
+/* ------------------------------------------------------------------ */
+/* 14. Trang Chỗ ở: hero 2 cột + khu vực, lịch mùa, kinh nghiệm, hỏi đáp */
+/* ------------------------------------------------------------------ */
+function dst_stays_text()
+{
+    $T = [
+        'vi' => [
+            'kicker' => 'Dịch vụ · Chỗ ở', 'cta1' => 'Nhận báo giá phòng', 'cta2' => 'Nhắn Zalo',
+            'why' => 'Vì sao đặt phòng qua DanangStay?', 'whys' => ['Người địa phương đã tận mắt xem phòng', 'Gợi ý đúng khu theo lịch trình của bạn', 'Báo giá cuối, điều kiện hủy rõ ràng', 'Hỗ trợ đổi phòng, gia hạn trong chuyến đi'],
+            'reply' => 'Thường trả lời trong vài phút',
+            'areas_t' => 'Nên ở khu nào?', 'areas_p' => 'Mỗi khu một không khí — chọn theo việc bạn định làm nhiều nhất.',
+            'lbl' => ['Phù hợp', 'Điểm cộng', 'Lưu ý'],
+            'areas' => [
+                ['Mỹ Khê – An Thượng', 'Lần đầu đến, cặp đôi, nhóm bạn', 'Sát biển đẹp nhất thành phố, nhiều quán ăn, cà phê, phố đi bộ An Thượng', 'Mùa hè và cuối tuần đông, giá cao hơn vào cao điểm'],
+                ['Mân Thái – Sơn Trà', 'Gia đình, người thích yên tĩnh', 'Biển êm, làng chài, hải sản tươi, gần bán đảo Sơn Trà và chùa Linh Ứng', 'Ít quán bar, xa Hội An hơn các khu phía nam'],
+                ['Trung tâm – sông Hàn', 'Công tác, đi sân bay, xem pháo hoa', 'Cách sân bay ~10 phút, gần cầu Rồng, chợ Hàn, nhiều lựa chọn giá', 'Không sát biển; dịp pháo hoa, năm mới phòng view sông kín sớm'],
+                ['Ngũ Hành Sơn – Non Nước', 'Nghỉ dưỡng resort, tuần trăng mật', 'Resort ven biển rộng, yên tĩnh, đi Hội An chỉ ~25 phút', 'Xa trung tâm, cần xe khi đi ăn chơi tối'],
+                ['Hội An', 'Yêu phố cổ, làng quê, ẩm thực', 'Buổi tối đèn lồng, homestay, villa giữa ruộng, biển An Bàng', 'Mùa mưa lớn có thể ngập vài tuyến phố sát sông Hoài'],
+                ['Bà Nà – Hòa Vang', 'Muốn ngắm Cầu Vàng lúc vắng', 'Ngủ trên núi hoặc gần ga cáp treo để lên sớm, gần suối khoáng Núi Thần Tài', 'Xa biển và trung tâm, trên núi lạnh hơn'],
+            ],
+            'season_t' => 'Lịch mùa trong năm', 'season_p' => 'Tham khảo để chọn ngày được giá tốt — giá thực tế còn tùy từng khách sạn.',
+            'lv' => ['Cao điểm', 'Trung bình', 'Thấp điểm'],
+            'months' => ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'],
+            'notes' => ['Tết Nguyên đán', 'Tết, lễ hội', 'Xuân mát', 'Lễ 30/4', 'Hè bắt đầu', 'Pháo hoa DIFF', 'Hè cao điểm', 'Hè cao điểm', 'Cuối hè', 'Mùa mưa', 'Mùa mưa', 'Giáng sinh – năm mới'],
+            'tips_t' => 'Kinh nghiệm đặt phòng ở Đà Nẵng',
+            'tips' => [
+                ['📅', 'Đặt sớm dịp cao điểm', 'Tết, 30/4, hè và đêm 31/12 nên đặt trước 1–2 tháng; phòng view biển, view sông hết sớm nhất.'],
+                ['🌅', 'Chọn hướng phòng', 'Phòng hướng biển phía đông đón bình minh; phòng view sông Hàn đẹp về đêm và dịp pháo hoa.'],
+                ['🏢', 'Tầng cao, view thoáng', 'Hỏi rõ tầng và hướng nhìn — “view biển” có thể chỉ nhìn được một góc.'],
+                ['🧒', 'Đi cùng trẻ nhỏ', 'Ưu tiên khách sạn có hồ bơi, gần bãi tắm có cứu hộ, phòng gia đình hoặc căn hộ có bếp.'],
+                ['🧳', 'Ở dài ngày', 'Từ 7 đêm nên cân nhắc căn hộ: có bếp, máy giặt, thường có giá tốt hơn theo tuần, tháng.'],
+                ['💳', 'Đặt cọc & hủy phòng', 'Đọc kỹ điều kiện cọc, hủy, hoàn trước khi chuyển khoản; dịp lễ thường không hoàn.'],
+                ['🚕', 'Đưa đón sân bay', 'Sân bay chỉ cách trung tâm ~3 km; đặt xe đón trước nếu đến đêm khuya hoặc đi đoàn đông.'],
+                ['🌧️', 'Mùa mưa', 'Tháng 10–12 giá mềm hơn; chọn khu gần trung tâm, có hồ bơi trong nhà hoặc spa cho ngày mưa.'],
+            ],
+            'faq_t' => 'Hỏi đáp về đặt phòng',
+            'faq' => [
+                ['Giá trên trang là giá cuối chưa?', 'Đó là mức tham khảo theo loại chỗ ở. Gửi ngày đi và số người, chúng tôi báo giá cuối của từng khách sạn trong vài giờ.'],
+                ['Đặt qua DanangStay có đắt hơn ứng dụng không?', 'Thường bằng hoặc tốt hơn vì làm việc trực tiếp với khách sạn; nếu thấy giá rẻ hơn ở nơi khác, gửi để chúng tôi kiểm tra.'],
+                ['Có nhận đặt cho đoàn đông người không?', 'Có — đoàn từ 10 phòng, team building, hội nghị đều có giá đoàn kèm xe đưa đón.'],
+                ['Thanh toán thế nào?', 'Chuyển khoản ngân hàng Việt Nam hoặc thanh toán tại khách sạn tùy nơi; luôn có xác nhận đặt phòng trước ngày đến.'],
+            ],
+        ],
+        'ko' => [
+            'kicker' => '서비스 · 숙소', 'cta1' => '숙소 견적 받기', 'cta2' => 'Zalo 문의',
+            'why' => 'DanangStay에서 예약하는 이유', 'whys' => ['현지인이 직접 확인한 숙소', '일정에 맞는 지역 추천', '최종 가격·취소 조건 명확', '여행 중 객실 변경·연장 지원'],
+            'reply' => '보통 몇 분 안에 답변',
+            'areas_t' => '어느 지역에 묵을까?', 'areas_p' => '지역마다 분위기가 다릅니다. 가장 많이 할 일에 맞춰 고르세요.',
+            'lbl' => ['추천 대상', '장점', '참고'],
+            'areas' => [
+                ['미케 – 안트엉', '첫 방문, 커플, 친구', '시내에서 가장 아름다운 해변, 식당·카페·안트엉 거리', '여름·주말 붐빔, 성수기 가격 상승'],
+                ['만타이 – 선짜', '가족, 조용한 여행', '잔잔한 바다, 어촌, 신선한 해산물, 선짜 반도·린응사 근처', '바가 적고 호이안과 거리가 있음'],
+                ['시내 – 한강', '출장, 공항 이동, 불꽃 관람', '공항까지 약 10분, 용다리·한시장 근처, 다양한 가격대', '해변과 떨어짐, 불꽃축제·연말 리버뷰 조기 마감'],
+                ['응우하인선 – 논느억', '리조트 휴양, 신혼여행', '넓은 해변 리조트, 조용함, 호이안까지 약 25분', '시내와 멀어 저녁 외출 시 차량 필요'],
+                ['호이안', '구시가지·시골·음식 애호가', '저녁 등불, 홈스테이, 논밭 풀빌라, 안방 해변', '우기 폭우 시 강변 거리 침수 가능'],
+                ['바나힐 – 호아방', '한적한 골든브릿지를 원하면', '산 위 또는 케이블카역 근처 숙박으로 이른 입장, 탄따이 온천 근처', '바다·시내와 멀고 산 위는 쌀쌀함'],
+            ],
+            'season_t' => '연중 시즌 달력', 'season_p' => '좋은 가격의 날짜를 고르는 참고용입니다. 실제 요금은 호텔마다 다릅니다.',
+            'lv' => ['성수기', '보통', '비수기'],
+            'months' => ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            'notes' => ['설 연휴', '설·축제', '선선한 봄', '4/30 연휴', '여름 시작', '불꽃축제', '여름 성수기', '여름 성수기', '늦여름', '우기', '우기', '크리스마스·연말'],
+            'tips_t' => '다낭 숙소 예약 팁',
+            'tips' => [
+                ['📅', '성수기는 일찍', '설, 4/30, 여름, 12/31은 1–2개월 전 예약 추천. 오션뷰·리버뷰가 가장 먼저 마감됩니다.'],
+                ['🌅', '방향 선택', '동쪽 바다 방향은 일출, 한강 뷰는 야경과 불꽃이 아름답습니다.'],
+                ['🏢', '고층·시야', '층수와 방향을 꼭 확인하세요. ‘오션뷰’가 일부만 보일 수도 있습니다.'],
+                ['🧒', '아이와 함께', '수영장, 안전요원 있는 해변 근처, 패밀리룸이나 주방 있는 아파트 추천.'],
+                ['🧳', '장기 숙박', '7박 이상이면 주방·세탁기 있는 아파트가 주·월 단위로 더 저렴한 경우가 많습니다.'],
+                ['💳', '예약금·취소', '송금 전 예약금·취소·환불 조건 확인. 연휴에는 환불 불가가 많습니다.'],
+                ['🚕', '공항 픽업', '공항은 시내에서 약 3km. 심야 도착이나 단체라면 픽업을 미리 예약하세요.'],
+                ['🌧️', '우기', '10–12월은 가격이 부드럽습니다. 실내 수영장·스파가 있는 시내 근처 숙소 추천.'],
+            ],
+            'faq_t' => '숙소 예약 Q&A',
+            'faq' => [
+                ['페이지 가격이 최종 가격인가요?', '숙소 유형별 참고 가격입니다. 날짜와 인원을 보내 주시면 몇 시간 안에 호텔별 최종 견적을 드립니다.'],
+                ['앱보다 비싸지 않나요?', '호텔과 직접 거래해 보통 같거나 더 저렴합니다. 더 싼 곳이 있으면 보내 주세요.'],
+                ['단체 예약도 되나요?', '네 — 10객실 이상 단체, 팀빌딩, 행사 모두 차량 포함 단체 요금이 있습니다.'],
+                ['결제는 어떻게 하나요?', '베트남 계좌이체 또는 숙소에 따라 현장 결제. 도착 전 예약 확인서를 드립니다.'],
+            ],
+        ],
+        'en' => [
+            'kicker' => 'Services · Stays', 'cta1' => 'Get a room quote', 'cta2' => 'Chat on Zalo',
+            'why' => 'Why book stays with DanangStay?', 'whys' => ['Rooms seen in person by locals', 'The right area for your plans', 'Final prices and clear cancellation terms', 'Help with changes and extensions during your trip'],
+            'reply' => 'Usually replies in minutes',
+            'areas_t' => 'Where should you stay?', 'areas_p' => 'Each area has its own feel — choose by what you will do most.',
+            'lbl' => ['Good for', 'Pluses', 'Keep in mind'],
+            'areas' => [
+                ['My Khe – An Thuong', 'First visits, couples, friends', "The city's best beach, plenty of restaurants, cafés and the An Thuong walking streets", 'Busy in summer and at weekends; higher prices in peak season'],
+                ['Man Thai – Son Tra', 'Families, quiet stays', 'Calm sea, a fishing village, fresh seafood, close to Son Tra and Linh Ung pagoda', 'Few bars; further from Hoi An than the southern areas'],
+                ['Centre – Han River', 'Business, airport runs, fireworks', '~10 min to the airport, near the Dragon Bridge and Han Market, every budget', 'Not on the beach; river-view rooms sell out early for fireworks and New Year'],
+                ['Ngu Hanh Son – Non Nuoc', 'Resort holidays, honeymoons', 'Spacious, quiet beach resorts, ~25 min to Hoi An', 'Far from the centre; you need a car for evenings out'],
+                ['Hoi An', 'Old-town, village and food lovers', 'Lantern-lit evenings, homestays, villas among rice fields, An Bang beach', 'Heavy rain can flood some streets by the Hoai River'],
+                ['Ba Na – Hoa Vang', 'An empty Golden Bridge at dawn', 'Stay on the mountain or near the cable car for an early start, close to Than Tai hot springs', 'Far from the beach and city; cooler up the mountain'],
+            ],
+            'season_t' => 'Seasons through the year', 'season_p' => 'A guide to finding good-value dates — actual prices vary by hotel.',
+            'lv' => ['Peak', 'Shoulder', 'Low'],
+            'months' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            'notes' => ['Lunar New Year', 'Tet, festivals', 'Mild spring', '30 April holiday', 'Summer starts', 'DIFF fireworks', 'Summer peak', 'Summer peak', 'Late summer', 'Rainy season', 'Rainy season', 'Christmas – New Year'],
+            'tips_t' => 'Tips for booking a stay in Da Nang',
+            'tips' => [
+                ['📅', 'Book early for peaks', 'Tet, 30 April, summer and 31 December: book 1–2 months ahead; sea and river views go first.'],
+                ['🌅', 'Pick the view', 'East-facing sea views get the sunrise; Han River views shine at night and during fireworks.'],
+                ['🏢', 'High floors', 'Ask for the floor and exact view — “sea view” can mean a partial glimpse.'],
+                ['🧒', 'With kids', 'Choose a pool, a lifeguarded beach nearby, family rooms or an apartment with a kitchen.'],
+                ['🧳', 'Long stays', 'For 7+ nights consider an apartment with a kitchen and washer — often cheaper weekly or monthly.'],
+                ['💳', 'Deposits & cancellations', 'Read deposit, cancellation and refund terms before paying; holiday bookings are often non-refundable.'],
+                ['🚕', 'Airport transfers', 'The airport is ~3 km from the centre; pre-book a pickup for late arrivals or big groups.'],
+                ['🌧️', 'Rainy season', 'October–December is cheaper; stay near the centre with an indoor pool or spa for rainy days.'],
+            ],
+            'faq_t' => 'Stay booking FAQ',
+            'faq' => [
+                ['Are the prices shown final?', 'They are typical ranges by type. Send your dates and guests and we quote each hotel within hours.'],
+                ['Is it more expensive than booking apps?', 'Usually the same or better, as we work directly with hotels. Found it cheaper elsewhere? Send it to us.'],
+                ['Do you handle groups?', 'Yes — 10+ rooms, team building and events, with group rates and transfers.'],
+                ['How do I pay?', 'Vietnamese bank transfer or pay at the hotel depending on the property; you get a confirmation before arrival.'],
+            ],
+        ],
+    ];
+    $l = dst_lang();
+    return isset($T[$l]) ? $T[$l] : $T['en'];
+}
+
+add_filter('dst_html', function ($html) {
+    if (strpos($html, '<header class="page-head page-head--stays">') === false) {
+        return $html;
+    }
+    $t = dst_stays_text();
+    $avatar = (string) get_option('dst_contact_avatar', '');
+    // Hero 2 cột
+    $html = preg_replace_callback('#<header class="page-head page-head--stays">\s*<div class="wrap">(.*?)</div>\s*</header>#s', function ($m) use ($t, $avatar) {
+        $inner = preg_replace('#<span class="kicker">.*?</span>#s', '<span class="ds-hero__kicker">' . esc_html($t['kicker']) . '</span>', $m[1], 1);
+        $why = '';
+        foreach ($t['whys'] as $w) {
+            $why .= '<li>' . esc_html($w) . '</li>';
+        }
+        $chips = '';
+        foreach ($t['areas'] as $i => $a) {
+            if ($i < 4) {
+                $chips .= '<a href="#khu-vuc">' . esc_html($a[0]) . '</a>';
+            }
+        }
+        $card = '<aside class="st-card"><strong>' . esc_html($t['why']) . '</strong><ul>' . $why . '</ul>'
+            . '<div class="st-card__who">' . ($avatar ? '<img src="' . esc_url($avatar) . '" alt="Vân Trần" width="44" height="44">' : '') . '<div><b>Vân Trần · 0909 669 325</b><span>' . esc_html($t['reply']) . '</span></div></div></aside>';
+        return '<header class="page-head page-head--stays ds-hero st-hero"><div class="wrap st-hero__grid"><div>' . $inner
+            . '<div class="ds-hero__actions"><a class="ds-btn ds-btn--call" href="#reserve">📩 ' . esc_html($t['cta1']) . '</a><a class="ds-btn ds-btn--zalo" href="https://zalo.me/0909669325" target="_blank" rel="noopener">💬 ' . esc_html($t['cta2']) . '</a></div>'
+            . '<nav class="ds-hero__chips">' . $chips . '</nav></div>' . $card . '</div></header>';
+    }, $html, 1);
+
+    // Phần nội dung thêm, chèn sau bảng giá tham khảo
+    $L = $t['lbl'];
+    $areas = '';
+    foreach ($t['areas'] as $a) {
+        $areas .= '<article class="st-area"><h3>' . esc_html($a[0]) . '</h3><dl><dt>👥 ' . esc_html($L[0]) . '</dt><dd>' . esc_html($a[1]) . '</dd><dt>👍 ' . esc_html($L[1]) . '</dt><dd>' . esc_html($a[2]) . '</dd><dt>⚠️ ' . esc_html($L[2]) . '</dt><dd>' . esc_html($a[3]) . '</dd></dl></article>';
+    }
+    $lvl = [0, 0, 1, 0, 1, 0, 0, 0, 1, 2, 2, 0];
+    $cls = ['hi', 'mid', 'lo'];
+    $months = '';
+    foreach ($t['months'] as $i => $mo) {
+        $months .= '<div class="st-m st-m--' . $cls[$lvl[$i]] . '"><b>' . esc_html($mo) . '</b><span>' . esc_html($t['notes'][$i]) . '</span></div>';
+    }
+    $legend = '<div class="st-legend"><span class="hi">' . esc_html($t['lv'][0]) . '</span><span class="mid">' . esc_html($t['lv'][1]) . '</span><span class="lo">' . esc_html($t['lv'][2]) . '</span></div>';
+    $tips = '';
+    foreach ($t['tips'] as $p) {
+        $tips .= '<div class="st-tip"><span>' . $p[0] . '</span><strong>' . esc_html($p[1]) . '</strong><p>' . esc_html($p[2]) . '</p></div>';
+    }
+    $faq = '';
+    foreach ($t['faq'] as $i => $q) {
+        $faq .= '<details' . ($i === 0 ? ' open' : '') . '><summary>' . esc_html($q[0]) . '</summary><p>' . esc_html($q[1]) . '</p></details>';
+    }
+    $extra = '<section class="st-extra"><div class="wrap">'
+        . '<div class="st-block" id="khu-vuc"><span class="kicker">01</span><h2>' . esc_html($t['areas_t']) . '</h2><p class="st-lead">' . esc_html($t['areas_p']) . '</p><div class="st-areas">' . $areas . '</div></div>'
+        . '<div class="st-block"><span class="kicker">02</span><h2>' . esc_html($t['season_t']) . '</h2><p class="st-lead">' . esc_html($t['season_p']) . '</p>' . $legend . '<div class="st-months">' . $months . '</div></div>'
+        . '<div class="st-block"><span class="kicker">03</span><h2>' . esc_html($t['tips_t']) . '</h2><div class="st-tips">' . $tips . '</div></div>'
+        . '<div class="st-block st-block--faq"><span class="kicker">04</span><h2>' . esc_html($t['faq_t']) . '</h2><div class="st-faq">' . $faq . '</div>' . do_shortcode('[ds_lien_he]') . '</div>'
+        . '</div></section>';
+    $pos = strpos($html, '<section class="section section--tight">');
+    if ($pos !== false) {
+        $html = substr($html, 0, $pos) . $extra . substr($html, $pos);
+    }
+    return str_replace('<body class="', '<body class="ds-stays ', $html);
+}, 12);
+
+add_action('wp_head', function () {
+    ?>
+<style id="dst-stays-css">
+body.ds-stays .page-head.st-hero { padding: 140px 0 56px; background: linear-gradient(135deg, #0b2447 0%, #133a6b 60%, #1e4f8a 100%); color: #fff; }
+.st-hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 48px; align-items: center; }
+body.ds-stays .st-hero h1 { color: #fff; font-size: clamp(40px, 5vw, 72px); margin: 12px 0 14px; }
+body.ds-stays .st-hero h1 em { color: #ffa04d; }
+body.ds-stays .st-hero p { color: #d6e0ee; max-width: 620px; margin: 0 0 22px; }
+.st-card { background: #fff; color: var(--ink); border-radius: 18px; padding: 22px 22px 18px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
+.st-card > strong { display: block; font: 600 20px/1.3 var(--serif); margin-bottom: 10px; }
+.st-card ul { list-style: none; margin: 0 0 16px; padding: 0; display: grid; gap: 8px; }
+.st-card li { position: relative; padding-left: 26px; font-size: 15px; line-height: 1.45; color: var(--ink-2); }
+.st-card li::before { content: "✓"; position: absolute; left: 0; top: 0; width: 18px; height: 18px; border-radius: 50%; background: #fff1e8; color: var(--bronze); font: 700 11px/18px var(--sans); text-align: center; }
+.st-card__who { display: flex; gap: 12px; align-items: center; padding-top: 14px; border-top: 1px solid var(--line); }
+.st-card__who img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+.st-card__who b { display: block; font-size: 14.5px; } .st-card__who span { font-size: 12.5px; color: var(--muted); }
+body.ds-stays main > .section { padding-top: 64px; padding-bottom: 32px; }
+.st-extra { padding: 8px 0 40px; }
+.st-block { margin-top: 64px; }
+.st-block h2 { font-size: clamp(30px, 3.4vw, 46px); margin: 6px 0 8px; }
+.st-lead { color: var(--muted); margin: 0 0 22px; max-width: 720px; }
+.st-areas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.st-area { background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--bronze); border-radius: 14px; padding: 18px 20px; box-shadow: 0 14px 34px -28px rgba(11,36,71,.6); }
+.st-area h3 { margin: 0 0 10px; font-size: 21px; }
+.st-area dl { margin: 0; display: grid; gap: 6px; }
+.st-area dt { font: 700 12px/1.3 var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+.st-area dd { margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+.st-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; font-size: 13.5px; }
+.st-legend span::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.st-legend .hi::before, .st-m--hi { background: #ffe3cf; } .st-legend .mid::before, .st-m--mid { background: #fff4d6; } .st-legend .lo::before, .st-m--lo { background: #dff3e6; }
+.st-legend .hi::before { background: var(--bronze); } .st-legend .mid::before { background: #f2b632; } .st-legend .lo::before { background: #22a06b; }
+.st-months { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 6px; }
+.st-m { border-radius: 10px; padding: 10px 8px; min-height: 86px; }
+.st-m b { display: block; font: 700 15px/1.2 var(--sans); color: var(--ink); }
+.st-m span { display: block; font-size: 12px; line-height: 1.35; color: var(--ink-2); margin-top: 4px; }
+.st-m--hi { border-bottom: 4px solid var(--bronze); } .st-m--mid { border-bottom: 4px solid #f2b632; } .st-m--lo { border-bottom: 4px solid #22a06b; }
+.st-tips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.st-tip { background: var(--ivory); border-radius: 14px; padding: 18px; }
+.st-tip span { font-size: 26px; display: block; margin-bottom: 8px; }
+.st-tip strong { display: block; font: 600 16px/1.3 var(--sans); color: var(--ink); margin-bottom: 4px; }
+.st-tip p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+.st-block--faq { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
+.st-faq details { border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin: 0 0 10px; background: #fff; }
+.st-faq details[open] { border-color: var(--bronze); }
+.st-faq summary { cursor: pointer; font: 600 16.5px/1.4 var(--sans); color: var(--ink); }
+.st-faq p { margin: 10px 0 0; font-size: 15px; color: var(--ink-2); }
+@media (max-width: 1100px) { .st-months { grid-template-columns: repeat(6, minmax(0, 1fr)); } .st-tips { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 1000px) { .st-hero__grid { grid-template-columns: 1fr; gap: 28px; } .st-areas { grid-template-columns: 1fr 1fr; } body.ds-stays .page-head.st-hero { padding: 120px 0 40px; } }
+@media (max-width: 640px) { .st-areas, .st-tips { grid-template-columns: 1fr; } .st-months { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+</style>
+    <?php
+}, 106);
