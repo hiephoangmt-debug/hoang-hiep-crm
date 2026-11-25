@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 2.8.1
+ * Version: 2.9.3
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -1783,6 +1783,9 @@ add_filter('dst_html', function ($html) {
     ];
     $t = $L[$lang] ?? ['Latest travel news', 'Summarised and rewritten by DanangStay from local press, with sources cited.'];
     $box = '';
+    if (is_category()) {
+        $q = new WP_Query(['post__in' => [0]]);
+    }
     if ($q->have_posts()) {
         $box = '<div class="press press--own"><h3 class="press__title">' . esc_html($t[0]) . '</h3><ul>';
         while ($q->have_posts()) {
@@ -2070,3 +2073,105 @@ add_filter('dst_html', function ($html) {
     }
     return str_replace($nav, $new, $html);
 }, 60);
+
+// ===== 21. Trang chuyên mục: đầu trang 2 cột (mô tả + khung hỗ trợ), bớt khoảng trắng, khối đọc thêm + quy định =====
+add_filter('dst_html', function ($html) {
+    if (!is_category() || strpos($html, '<header class="page-head">') === false || strpos($html, 'ds-cat__side') !== false) {
+        return $html;
+    }
+    $lang = dst_lang();
+    $term = get_queried_object();
+    $base = preg_replace('#-(vi|ko|ja|zh|ru|fr|de)$#', '', $term->slug);
+    $D = [
+        'vi' => [
+            'news' => 'Tin du lịch Đà Nẵng – Hội An – Huế cập nhật mỗi sáng: quy định mới, lễ hội, điểm đến, thời tiết. Mỗi bài được viết lại dễ hiểu và ghi rõ nguồn báo.',
+            'plan' => 'Kinh nghiệm lên kế hoạch: lịch trình, chi phí, thời tiết từng tháng, đi lại và mẹo của người Đà Nẵng — để chuyến đi trọn vẹn, không tốn tiền oan.',
+            'places' => 'Điểm đến và điểm check-in đẹp ở Đà Nẵng, Hội An, Huế: nên đi giờ nào, mất bao lâu, vé ra sao, chụp ảnh ở đâu.',
+            'food' => 'Ăn gì, ở đâu: quán ngon người địa phương hay ăn, hải sản giá rõ ràng, cà phê đẹp và đặc sản mang về.',
+            'culture' => 'Con người, phong tục, di sản và lễ hội miền Trung — hiểu để đi chậm và cảm nhận sâu hơn.',
+            'h' => ['bài viết', 'Cập nhật', 'Cần đặt phòng, vé hay xe?', 'Nhắn Vân Trần — báo giá trong ngày.', 'Đọc thêm', 'Bài mới ở các chuyên mục khác'],
+        ],
+        'ko' => [
+            'news' => '매일 아침 업데이트되는 다낭·호이안·후에 여행 소식: 새 규정, 축제, 명소, 날씨. 모든 글에 출처를 밝힙니다.',
+            'plan' => '일정, 경비, 월별 날씨, 이동, 현지인 팁까지 — 알찬 다낭 여행 준비 가이드.',
+            'places' => '다낭·호이안·후에의 명소와 사진 스폿: 추천 시간, 소요 시간, 입장권 정보.',
+            'food' => '현지인 맛집, 가격이 분명한 해산물 식당, 예쁜 카페와 기념품.',
+            'culture' => '중부 베트남의 사람, 풍습, 유산과 축제.',
+            'h' => ['개의 글', '업데이트', '숙소·티켓·차량 예약이 필요하세요?', 'Vân Trần에게 문의 — 당일 견적.', '더 읽기', '다른 카테고리의 새 글'],
+        ],
+    ];
+    $E = [
+        'news' => 'Da Nang, Hoi An and Hue travel news updated every morning: new rules, festivals, places and weather — rewritten clearly, sources cited.',
+        'plan' => 'Planning guides: itineraries, costs, month-by-month weather, getting around and local tips.',
+        'places' => 'The best places and photo spots in Da Nang, Hoi An and Hue — when to go, how long, tickets.',
+        'food' => 'Where locals eat, honest seafood spots, beautiful cafés and gifts to take home.',
+        'culture' => 'People, customs, heritage and festivals of Central Vietnam.',
+        'h' => ['articles', 'Updated', 'Need a room, tickets or a car?', 'Message Vân Trần — same-day quote.', 'Keep reading', 'New in other sections'],
+    ];
+    $d = $D[$lang] ?? $E;
+    $desc = $d[$base] ?? ($E[$base] ?? '');
+    $h = $d['h'];
+    $last = get_posts(['category' => $term->term_id, 'numberposts' => 1, 'lang' => $lang]);
+    $date = $last ? get_the_date('d/m/Y', $last[0]) : '';
+    $home = trailingslashit(dst_lang_home());
+    $svc = [
+        ['🏨', $lang === 'ko' ? '숙소' : ($lang === 'vi' ? 'Chỗ ở' : 'Stays'), $home . 'stays/'],
+        ['✈️', $lang === 'ko' ? '항공권' : ($lang === 'vi' ? 'Vé máy bay' : 'Flights'), $home . 'flights/'],
+        ['🎟️', $lang === 'ko' ? '입장권' : ($lang === 'vi' ? 'Vé tham quan' : 'Tickets'), dst_tickets_url() ?: $home],
+    ];
+    $avatar = (string) get_option('dst_contact_avatar', '');
+    $side = '<aside class="ds-cat__side"><div class="ds-cat__stats"><div><b>' . (int) $term->count . '</b><span>' . esc_html($h[0]) . '</span></div>'
+        . ($date ? '<div><b>' . esc_html($date) . '</b><span>' . esc_html($h[1]) . '</span></div>' : '') . '</div>'
+        . '<div class="ds-cat__help">' . ($avatar ? '<img src="' . esc_url($avatar) . '" alt="Vân Trần" width="52" height="52">' : '')
+        . '<div><strong>' . esc_html($h[2]) . '</strong><small>' . esc_html($h[3]) . '</small></div></div>'
+        . '<div class="ds-cat__btns"><a class="ds-btn ds-btn--zalo" href="https://zalo.me/0909669325" target="_blank" rel="noopener">Zalo</a><a class="ds-btn ds-btn--call" href="tel:0909669325">📞 0909 669 325</a></div>'
+        . '<div class="ds-cat__svc">';
+    foreach ($svc as $s) {
+        $side .= '<a href="' . esc_url($s[2]) . '"><span>' . $s[0] . '</span>' . esc_html($s[1]) . '</a>';
+    }
+    $side .= '</div></aside>';
+    $html = preg_replace('#<header class="page-head">\s*<div class="wrap">(.*?)</div>\s*</header>#s',
+        '<header class="page-head ds-cat"><div class="wrap ds-cat__grid"><div class="ds-cat__main">$1</div>' . str_replace(['\\', '$'], ['\\\\', '\\$'], $side) . '</div></header>', $html, 1);
+    if ($desc) {
+        $html = preg_replace('#(<div class="ds-cat__main">.*?</h1>)#s', '$1<p class="ds-cat__desc">' . str_replace(['\\', '$'], ['\\\\', '\\$'], esc_html($desc)) . '</p>', $html, 1);
+    }
+    // khối đọc thêm + quy định cuối trang
+    $more = '<section class="section ds-cat-more"><div class="wrap ds-cat-more__grid"><div><span class="kicker">' . esc_html($h[4]) . '</span><h2>' . esc_html($h[5]) . '</h2>'
+        . do_shortcode('[ds_tin_moi so="6"]') . '</div><div>' . do_shortcode('[ds_quy_dinh]') . '</div></div></section>';
+    $html = preg_replace('#(</section>)(\s*<section class="concierge|\s*</main>)#', '$1' . str_replace(['\\', '$'], ['\\\\', '\\$'], $more) . '$2', $html, 1);
+    $css = '<style id="dst-cat-css">
+.page-head.ds-cat { padding-bottom: 48px; }
+.journal { justify-content: flex-start !important; }
+.ds-cat__desc { margin-bottom: 18px !important; }
+@media (max-width: 760px) { .journal .card--lead { display: block !important; } .journal .card--lead .card__img { margin-bottom: 16px !important; } .journal .card { flex-basis: 100% !important; } }
+.ds-cat__grid { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 56px; align-items: center; }
+.ds-cat__main h1 { margin-bottom: 10px; }
+.ds-cat__desc { max-width: 640px; font-size: 18px; line-height: 1.6; color: var(--ink-2); margin: 6px 0 22px; }
+.ds-cat__main .filter { margin-top: 0; }
+.ds-cat__side { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 20px; box-shadow: 0 18px 40px -24px rgba(11,36,71,.35); font-family: var(--sans); }
+.ds-cat__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.ds-cat__stats div { background: var(--ivory); border-radius: 12px; padding: 12px 14px; }
+.ds-cat__stats b { display: block; font: 700 22px/1.1 var(--sans); color: var(--ink); }
+.ds-cat__stats span { font-size: 12.5px; color: var(--ink-2); }
+.ds-cat__help { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+.ds-cat__help img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex: none; }
+.ds-cat__help strong { display: block; font-size: 15.5px; color: var(--ink); }
+.ds-cat__help small { font-size: 13px; color: var(--ink-2); }
+.ds-cat__btns { display: grid; grid-template-columns: 1fr 1.6fr; gap: 8px; margin-bottom: 12px; }
+.ds-cat__btns .ds-btn { justify-content: center; }
+.ds-cat__svc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ds-cat__svc a { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 6px; border-radius: 12px; border: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--ink); text-decoration: none; text-align: center; }
+.ds-cat__svc a span { font-size: 20px; }
+.ds-cat__svc a:hover { border-color: var(--bronze); color: var(--bronze); }
+body.archive.category main > .section:not(.ds-cat-more):first-of-type, body.archive.category .page-head + .section { padding-top: 48px; }
+.ds-cat-more { background: var(--ivory); }
+.ds-cat-more__grid { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 48px; align-items: start; }
+.ds-cat-more h2 { margin: 6px 0 18px; }
+.ds-cat-more .ds-news { margin: 0; } .ds-cat-more .ds-news > h2 { display: none; }
+.ds-cat-more .ds-news__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ds-cat-more .ds-rules { margin: 0; }
+@media (max-width: 1000px) { .ds-cat__grid, .ds-cat-more__grid { grid-template-columns: 1fr; gap: 28px; } }
+@media (max-width: 640px) { .ds-cat-more .ds-news__grid { grid-template-columns: 1fr; } }
+</style>';
+    return str_replace('</head>', $css . '</head>', $html);
+}, 43);
