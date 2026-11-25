@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 3.5.0
+ * Version: 3.5.1
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2375,3 +2375,25 @@ figure.ds-fig img { display: block; width: 100% !important; height: auto !import
 figure.ds-fig figcaption { margin-top: 10px; font: 400 14px/1.5 var(--sans); color: var(--muted, #6b7280); text-align: left; padding-left: 12px; border-left: 3px solid var(--bronze); }
 </style>';
 }, 107);
+
+// ===== 26. Ảnh chia sẻ mạng xã hội (og:image / twitter:image) = ảnh đại diện của bài =====
+add_filter('dst_html', function ($html) {
+    if (!is_singular('post')) {
+        return $html;
+    }
+    $id = get_queried_object_id();
+    $src = has_post_thumbnail($id) ? get_the_post_thumbnail_url($id, 'full') : '';
+    if (!$src) {
+        return $html;
+    }
+    $u = esc_url($src);
+    $html = preg_replace('#<meta property="og:image" content="[^"]*"\s*/?>#', '<meta property="og:image" content="' . $u . '">', $html, -1, $n);
+    if (!$n) {
+        $html = str_replace('</head>', '<meta property="og:image" content="' . $u . '">' . "\n</head>", $html);
+    }
+    $html = preg_replace('#<meta name="twitter:image" content="[^"]*"\s*/?>#', '<meta name="twitter:image" content="' . $u . '">', $html, -1, $m);
+    if (!$m) {
+        $html = str_replace('</head>', '<meta name="twitter:image" content="' . $u . '">' . "\n</head>", $html);
+    }
+    return $html;
+}, 55);
