@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
- * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), ẩn tên đăng nhập quản trị.
- * Version: 1.0.2
+ * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
+ * Version: 1.0.3
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -150,6 +150,9 @@ function dst_filter_html($html)
         },
         $html
     );
+    if (preg_match('#<html[^>]*\slang="vi#i', $html)) {
+        $html = dst_viet_hoa($html);
+    }
     if (strpos($html, 'hreflang="x-default"') === false) {
         $html = preg_replace_callback(
             '#<link\s+rel="alternate"\s+href="([^"]+)"\s+hreflang="en"\s*/?>#',
@@ -161,6 +164,62 @@ function dst_filter_html($html)
         );
     }
     return $html;
+}
+
+/**
+ * Bản tiếng Việt (/vi/): đổi các chữ còn sót tiếng Anh (địa điểm, "Annual"…) sang tiếng Việt.
+ * Chỉ đổi phần chữ hiển thị giữa các thẻ HTML, không đụng link hay code.
+ * Cách sửa tận gốc: vào trang quản trị → Sự kiện → mở từng sự kiện bản tiếng Việt và sửa ô địa điểm.
+ */
+function dst_viet_hoa($html)
+{
+    $phrases = [
+        'Hoai River Square, An Hoi sculpture garden and old-town streets' => 'Quảng trường sông Hoài, vườn tượng An Hội và các tuyến phố cổ',
+        'Ariyana Convention Centre, 107 Vo Nguyen Giap' => 'Trung tâm Hội nghị Ariyana, 107 Võ Nguyên Giáp',
+        'My Son Sanctuary (towers B and C)' => 'Khu đền tháp Mỹ Sơn (nhóm tháp B và C)',
+        'Bach Dang walking street and both banks by the Dragon Bridge' => 'Phố đi bộ Bạch Đằng và hai bờ sông quanh cầu Rồng',
+        'East Sea Park (Công viên Biển Đông)' => 'Công viên Biển Đông',
+        'Han River, stands on Tran Hung Dao street' => 'Sông Hàn, khán đài trên đường Trần Hưng Đạo',
+        'City beaches and coastal roads' => 'Các bãi biển và tuyến đường ven biển',
+        'Ngo Mon Square, Imperial City' => 'Quảng trường Ngọ Môn, Hoàng thành Huế',
+        'Marble Mountains (Ngu Hanh Son)' => 'Danh thắng Ngũ Hành Sơn',
+        'Every 15th of the month' => 'Ngày 15 hằng tháng',
+        ' · Annual' => ' · Hằng năm',
+    ];
+    $exact = [
+        'Hoi An Ancient Town' => 'Phố cổ Hội An',
+        'Hoi An Ancient Quarter' => 'Khu phố cổ Hội An',
+        'East Sea Park' => 'Công viên Biển Đông',
+        'Da Nang Museum' => 'Bảo tàng Đà Nẵng',
+        'Perfume River, Hue' => 'Sông Hương, Huế',
+        'An Hai ward' => 'Phường An Hải',
+        'Hue' => 'Huế',
+        'Da Nang' => 'Đà Nẵng',
+        'Hoi An' => 'Hội An',
+        'Phone' => 'Điện thoại',
+        'Shanghai' => 'Thượng Hải',
+        'Taipei' => 'Đài Bắc',
+        'Hong Kong' => 'Hồng Kông',
+    ];
+    // Chỉ xử lý phần <body>, bỏ qua <script>/<style>
+    $parts = preg_split('#(<script\b.*?</script>|<style\b.*?</style>|<head\b.*?</head>)#is', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
+    foreach ($parts as $i => $part) {
+        if (preg_match('#^<(script|style|head)\b#i', $part)) {
+            continue;
+        }
+        $parts[$i] = preg_replace_callback('#>([^<>]+)<#', function ($m) use ($phrases, $exact) {
+            $t = $m[1];
+            $trim = trim($t);
+            if ($trim === '' || !preg_match('/[A-Za-z]/', $trim)) {
+                return $m[0];
+            }
+            if (isset($exact[$trim])) {
+                return '>' . str_replace($trim, $exact[$trim], $t) . '<';
+            }
+            return '>' . strtr($t, $phrases) . '<';
+        }, $part);
+    }
+    return implode('', $parts);
 }
 
 /* ------------------------------------------------------------------ */
