@@ -32,7 +32,7 @@ function hh_posts_sun_saphia_dot_2( $posts ) {
 		'keywords_extra' => array( 'giá Sun Saphia Residence bao nhiêu', 'giá căn hộ Sun Saphia', 'giá studio Sun Saphia' ), // 09/11: "Sun Saphia Residence", "Sun Saphia Đà Nẵng" để trang dự án giữ.
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-22 15:00',
-		'rev'      => 7, // 15/11: chuẩn SEO 100 – từ khoá "Sun Saphia giá bao nhiêu", ví dụ tổng tiền, nguồn lệ phí trước bạ.
+		'rev'      => 8, // 25/11: tiêu đề SEO thêm "Giá Sun Saphia Residence" (GSC: truy vấn "sun saphia residence giá" vị trí 10). 15/11: chuẩn SEO 100 – từ khoá "Sun Saphia giá bao nhiêu", ví dụ tổng tiền, nguồn lệ phí trước bạ.
 		// rev 6 // 09/11: khung trả lời nhanh đầu bài (cho Google AI Overview), bảng giá theo loại căn, câu hỏi "Giá bán Sun Saphia Đà Nẵng".
 		// rev 5 // 09/11: thêm liên kết đầu bài về trang dự án, nhường từ khoá tên dự án cho trang dự án.
 		// rev 4 // 28/10: giá dự kiến (rumor) studio tầng 15, chính sách hỗ trợ lãi suất 24 tháng, sự kiện bán hàng 28/11.
@@ -119,7 +119,7 @@ function hh_posts_sun_saphia_dot_2( $posts ) {
 HTML
 		,
 		'seo'      => array(
-			'seo_title' => 'Sun Saphia giá bao nhiêu? Studio tầng 15 từ 2,13 tỷ (2026)',
+			'seo_title' => 'Sun Saphia giá bao nhiêu? Giá Sun Saphia Residence 2,13 tỷ',
 			'desc'      => 'Sun Saphia giá bao nhiêu? Giá dự kiến 28/10/2026: studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ (có vay, chưa VAT, phí bảo trì); bán hàng dự kiến 05/12/2026.',
 			'points'    => array(
 				'Sun Saphia giá bao nhiêu: giá dự kiến 28/10/2026 studio 30 m² tầng 15 khoảng 2,13 – 2,85 tỷ (phương án có vay)',

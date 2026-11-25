@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.349**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.350**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.350
+
+- Tối ưu tiêu đề theo truy vấn thật trên Google Search Console (11/2026): Tòa C3 Capital Square (thêm "Capital Square 3", "Tòa C3"), Peninsula Private Đà Nẵng (thêm giá từ 2,42 tỷ), bài giá Sun Saphia (thêm "Giá Sun Saphia Residence").
 
 ## Có gì mới – 2.20.349
 
