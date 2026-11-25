@@ -1,7 +1,7 @@
 # Tạo Trang Facebook DanangStay: nội dung để dán
 
 ## 1. Ô "Tên Trang"
-**DanangStay – Du lịch Đà Nẵng, Hội An, Huế**
+**DanangStay - Du lịch Đà Nẵng, Hội An, Huế** (dùng dấu gạch ngang thường "-", Facebook không nhận "–")
 
 Có thể đặt ngắn gọn là "DanangStay". Tên có kèm địa danh thì dễ được tìm thấy trên Facebook hơn.
 
