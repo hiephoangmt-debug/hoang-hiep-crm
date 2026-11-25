@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 2.3.0
+ * Version: 2.4.4
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -737,13 +737,13 @@ add_shortcode('ds_lien_he', function () {
     $qr = (string) get_option('dst_contact_qr', '');
     $av = $avatar ? '<img class="ds-contact__photo" src="' . esc_url($avatar) . '" alt="' . esc_attr(dst_t('name')) . '" width="56" height="56" loading="lazy">' : '<span class="ds-contact__avatar" aria-hidden="true">VT</span>';
     $qrh = $qr ? '<figure class="ds-contact__qr"><img src="' . esc_url($qr) . '" alt="QR Zalo ' . esc_attr(dst_t('name')) . '" width="132" height="132" loading="lazy"><figcaption>' . esc_html(dst_t('qr')) . '</figcaption></figure>' : '';
-    return '<div class="ds-contact' . ($qr ? ' has-qr' : '') . '" translate="no">'
+    return '<div class="ds-contact' . ($qr ? ' has-qr' : '') . '" translate="no"><div class="ds-contact__in">'
         . '<div class="ds-contact__who">' . $av . '<div><strong>' . esc_html(dst_t('name')) . '</strong><br><span>' . esc_html(dst_t('role')) . '</span></div></div>'
         . '<div class="ds-contact__btns">'
         . '<a class="ds-btn ds-btn--call" href="tel:' . $phone . '">📞 ' . esc_html(dst_t('call')) . ' 0909 669 325</a>'
         . '<a class="ds-btn ds-btn--zalo" href="https://zalo.me/' . $phone . '" target="_blank" rel="noopener">Zalo</a>'
         . '<a class="ds-btn ds-btn--wa" href="https://wa.me/' . $intl . '" target="_blank" rel="noopener">WhatsApp</a>'
-        . '</div><p class="ds-contact__note">' . esc_html(dst_t('hours')) . '</p>' . $qrh . '</div>';
+        . '</div><p class="ds-contact__note">' . esc_html(dst_t('hours')) . '</p>' . $qrh . '</div></div>';
 });
 
 // [ds_tin_moi so="6" danh_muc="news"] – bài mới nhất cùng ngôn ngữ
@@ -1220,17 +1220,25 @@ add_action('wp_head', function () {
 .ds-flight-extra .ds-news h2 { font-size: 22px; margin: 0 0 10px; }
 .ds-flight-extra .ds-news__grid { grid-template-columns: 1fr; }
 @media (max-width: 900px) { .ds-flight-extra { grid-template-columns: 1fr; } }
-.ds-contact { position: relative; }
-.ds-contact.has-qr { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 20px; }
-.ds-contact.has-qr > :not(.ds-contact__qr) { grid-column: 1; }
-.ds-contact__qr { grid-column: 2; grid-row: 1 / span 3; margin: 0; text-align: center; align-self: center; }
-.ds-contact__qr img { display: block; width: 132px; height: 132px; border-radius: 10px; background: #fff; padding: 6px; }
-.ds-contact__qr figcaption { margin-top: 6px; font: 500 11.5px/1.3 var(--sans); color: #c9d6e6; max-width: 132px; }
+.ds-contact { position: relative; container-type: inline-size; padding: 20px !important; }
+.ds-contact__in { display: grid; grid-template-columns: minmax(0, 1fr); }
+.ds-contact__who strong { white-space: nowrap; }
+.ds-contact__btns { display: grid !important; grid-template-columns: 1fr 1fr; gap: 8px !important; }
+.ds-contact__btns .ds-btn { justify-content: center; padding: 11px 10px; white-space: nowrap; }
+.ds-contact__btns .ds-btn--call { grid-column: 1 / -1; }
+.ds-contact__qr { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.15); display: flex; gap: 12px; align-items: center; }
+.ds-contact__qr img { display: block; width: 84px; height: 84px; border-radius: 10px; background: #fff; padding: 5px; flex: none; }
+.ds-contact__qr figcaption { font: 500 13px/1.4 var(--sans); color: #c9d6e6; }
 .ds-contact__photo { width: 56px !important; height: 56px !important; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,.7); flex: none; margin: 0 !important; }
-.ds-split__side .ds-contact.has-qr { grid-template-columns: 1fr; }
-.ds-split__side .ds-contact__qr { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 14px; display: flex; gap: 10px; align-items: center; text-align: left; }
-.ds-split__side .ds-contact__qr img { width: 96px; height: 96px; }
-@media (max-width: 700px) { .ds-contact.has-qr { grid-template-columns: 1fr; } .ds-contact__qr { display: none; } }
+@container (min-width: 560px) {
+  .ds-contact__in { grid-template-columns: minmax(0, 1fr) auto; column-gap: 28px; align-items: start; align-content: center; }
+  .ds-contact__in > :not(.ds-contact__qr) { grid-column: 1; }
+  .ds-contact__btns { grid-template-columns: auto auto auto; justify-content: start; }
+  .ds-contact__btns .ds-btn--call { grid-column: auto; }
+  .ds-contact__qr { grid-column: 2; grid-row: 1 / span 3; margin: 0; padding: 0; border: 0; flex-direction: column; align-self: center; text-align: center; }
+  .ds-contact__qr img { width: 120px; height: 120px; }
+  .ds-contact__qr figcaption { max-width: 130px; text-align: center !important; font-size: 12px; }
+}
 /* Trang dịch vụ: khoảng cách, nút nổi, hỏi đáp, thanh liên hệ điện thoại */
 body.ds-svcpage main > .section:first-of-type, body.ds-svcpage .page-head + .section { padding-top: 56px; }
 @media (min-width: 1001px) { body.ds-svcpage .float-cta { display: none !important; } }
@@ -1746,3 +1754,91 @@ body.ds-stays main > .section { padding-top: 64px; padding-bottom: 32px; }
 </style>
     <?php
 }, 106);
+
+// ===== 15. Khối "Tin báo chí" của theme → tin DanangStay tự viết lại (có ghi nguồn) =====
+add_filter('dst_html', function ($html) {
+    if (strpos($html, '<div class="press">') === false) {
+        return $html;
+    }
+    $lang = function_exists('pll_current_language') ? dst_lang() : 'vi';
+    $args = ['post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 6, 'ignore_sticky_posts' => true, 'no_found_rows' => true, 'lang' => $lang];
+    $term = get_term_by('slug', 'news-' . $lang, 'category') ?: get_term_by('slug', 'news', 'category');
+    if ($term) {
+        $args['cat'] = $term->term_id;
+    }
+    $q = new WP_Query($args);
+    $L = [
+        'vi' => ['Tin du lịch mới', 'DanangStay tổng hợp và viết lại từ báo chí, mỗi bài đều ghi nguồn.'],
+        'ko' => ['최신 여행 소식', 'DanangStay가 언론 보도를 정리해 다시 썼으며, 각 글에 출처를 밝힙니다.'],
+    ];
+    $t = $L[$lang] ?? ['Latest travel news', 'Summarised and rewritten by DanangStay from local press, with sources cited.'];
+    $box = '';
+    if ($q->have_posts()) {
+        $box = '<div class="press press--own"><h3 class="press__title">' . esc_html($t[0]) . '</h3><ul>';
+        while ($q->have_posts()) {
+            $q->the_post();
+            $box .= '<li><a href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</a><small>DanangStay · ' . esc_html(get_the_date('d/m/Y')) . '</small></li>';
+        }
+        wp_reset_postdata();
+        $box .= '</ul><p class="press__note">' . esc_html($t[1]) . '</p></div>';
+    }
+    return preg_replace('#<div class="press">.*?<p class="press__note">.*?</p>\s*</div>#s', $box, $html, 1);
+}, 30);
+
+// ===== 16. Trang bài viết: khung rộng 2 cột + cột bên (liên hệ, mục lục, dịch vụ, tin mới) =====
+add_filter('dst_html', function ($html) {
+    if (!preg_match('#<body class="[^"]*\bsingle-post\b#', $html) || strpos($html, '<div class="section article-body">') === false || strpos($html, 'ds-art__side') !== false) {
+        return $html;
+    }
+    $lang = dst_lang();
+    $home = trailingslashit(dst_lang_home());
+    $T = [
+        'vi' => ['Trong bài này', 'Dịch vụ DanangStay', 'Chỗ ở', 'Khách sạn, căn hộ, villa', 'Vé máy bay', 'Giá tốt, tư vấn hành lý', 'Vé tham quan', 'Bà Nà, Hội An, Huế…', 'Xe & tour', 'Đưa đón sân bay, tour riêng'],
+        'ko' => ['목차', 'DanangStay 서비스', '숙소', '호텔·아파트·빌라', '항공권', '좋은 가격, 수하물 안내', '입장권', '바나힐·호이안·후에…', '차량·투어', '공항 픽업, 프라이빗 투어'],
+    ];
+    $t = $T[$lang] ?? ['In this article', 'DanangStay services', 'Stays', 'Hotels, apartments, villas', 'Flights', 'Good fares, baggage advice', 'Attraction tickets', 'Ba Na, Hoi An, Hue…', 'Cars & tours', 'Airport pickup, private tours'];
+    $svc = dst_page_url('dst_services_page') ?: $home;
+    $items = [
+        ['🏨', $t[2], $t[3], $home . 'stays/'],
+        ['✈️', $t[4], $t[5], $home . 'flights/'],
+        ['🎟️', $t[6], $t[7], dst_tickets_url() ?: $svc],
+        ['🚐', $t[8], $t[9], $svc],
+    ];
+    $s = '<aside class="ds-art__side"><div class="ds-art__sticky">';
+    $s .= '<nav class="ds-toc" hidden><b>' . esc_html($t[0]) . '</b><ol></ol></nav>';
+    $s .= '<div class="ds-side-svc"><b>' . esc_html($t[1]) . '</b>';
+    foreach ($items as $i) {
+        $s .= '<a href="' . esc_url($i[3]) . '"><span>' . $i[0] . '</span><div><strong>' . esc_html($i[1]) . '</strong><small>' . esc_html($i[2]) . '</small></div></a>';
+    }
+    $s .= '</div>' . do_shortcode('[ds_tin_moi so="4" kieu="gon"]') . '<div class="ds-art__stick">' . do_shortcode('[ds_lien_he]') . '</div></div></aside>';
+    $html = str_replace('<div class="section article-body">', '<div class="section article-body ds-art"><div class="ds-art__grid">', $html);
+    $html = preg_replace('#</div>(\s*</div>\s*</article>)#', '</div>' . str_replace(['\\', '$'], ['\\\\', '\\$'], $s) . '</div>$1', $html, 1);
+    $css = '<style id="dst-art-css">
+.ds-art__grid { width: min(1240px, calc(100% - 2 * var(--gutter, 24px))); margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; align-items: stretch; }
+.ds-art .narrow { width: auto !important; max-width: 780px; margin: 0 !important; }
+.ds-art .narrow .prose, .ds-art .narrow > * { width: auto !important; max-width: none; }
+.ds-art__stick { position: sticky; top: 100px; }
+.ds-art__sticky { height: 100%; display: flex; flex-direction: column; gap: 18px; }
+.ds-art__side .ds-contact { margin: 0; }
+.ds-toc { border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; background: #fff; font-family: var(--sans); }
+.ds-toc b, .ds-side-svc > b { display: block; font: 700 12px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--bronze); margin-bottom: 10px; }
+.ds-toc ol { margin: 0; padding: 0; list-style: none; counter-reset: t; max-height: 38vh; overflow: auto; }
+.ds-toc li { counter-increment: t; }
+.ds-toc a { display: flex; gap: 10px; padding: 6px 0; font-size: 14.5px; line-height: 1.4; color: var(--ink-2); text-decoration: none; border-bottom: 1px dashed var(--line); }
+.ds-toc a::before { content: counter(t); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--ivory); font-size: 12px; font-weight: 700; display: grid; place-items: center; color: var(--ink); }
+.ds-toc a.on, .ds-toc a:hover { color: var(--bronze); }
+.ds-side-svc { border-radius: 14px; background: var(--ivory); padding: 16px; font-family: var(--sans); }
+.ds-side-svc a { display: flex; gap: 12px; align-items: center; padding: 10px; border-radius: 10px; background: #fff; margin-top: 8px; text-decoration: none; transition: transform .15s, box-shadow .15s; }
+.ds-side-svc a:hover { transform: translateX(3px); box-shadow: 0 4px 14px rgba(15,35,64,.1); }
+.ds-side-svc a > span { font-size: 22px; width: 40px; height: 40px; border-radius: 10px; background: var(--ivory); display: grid; place-items: center; flex: none; }
+.ds-side-svc strong { display: block; font: 600 15px/1.2 var(--sans); color: var(--ink); }
+.ds-side-svc small { display: block; font-size: 12.5px; color: var(--ink-2); margin-top: 2px; }
+.ds-art__side .ds-news { margin: 0; }
+.prose table thead th, .prose thead td { color: #fff !important; padding: 12px 14px !important; }
+.prose table td { padding: 11px 14px !important; }
+@media (max-width: 1080px) { .ds-art__grid { grid-template-columns: 1fr; gap: 32px; } .ds-art .narrow { max-width: 780px; margin: 0 auto !important; } .ds-art__stick { position: static; } .ds-toc { display: none; } .ds-art__side { max-width: 780px; margin: 0 auto; width: 100%; } }
+</style>';
+    $js = '<script id="dst-art-js">(function(){var p=document.querySelector(".ds-art .prose"),n=document.querySelector(".ds-toc");if(!p||!n)return;var hs=p.querySelectorAll("h2");if(hs.length<3)return;var ol=n.querySelector("ol"),as=[];hs.forEach(function(h,i){if(!h.id)h.id="muc-"+(i+1);var a=document.createElement("a");a.href="#"+h.id;a.textContent=h.textContent;var li=document.createElement("li");li.appendChild(a);ol.appendChild(li);as.push([h,a]);});n.hidden=false;addEventListener("scroll",function(){var c=null;as.forEach(function(x){if(x[0].getBoundingClientRect().top<140)c=x[1];});as.forEach(function(x){x[1].classList.toggle("on",x[1]===c);});},{passive:true});})();</script>';
+    $html = str_replace('</head>', $css . '</head>', $html);
+    return str_replace('</body>', $js . '</body>', $html);
+}, 40);
