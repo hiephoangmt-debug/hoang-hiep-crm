@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 3.0.1
+ * Version: 3.1.0
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2230,3 +2230,92 @@ body.home .map-section { align-items: center; }
 </style>';
     return str_replace('</head>', $css . '</head>', $html);
 }, 44);
+
+// ===== 23. Trang chủ: mục "Sắp diễn ra" (lấy từ trang Sự kiện, lưu đệm 6 giờ) =====
+function dst_upcoming_events($lang, $n = 4)
+{
+    $key = 'dst_ev_' . $lang;
+    $list = get_transient($key);
+    if ($list === false) {
+        $list = [];
+        $url = trailingslashit(dst_lang_home()) . 'events/';
+        $r = wp_remote_get($url, ['timeout' => 15, 'headers' => ['User-Agent' => 'DanangStay-internal']]);
+        $body = is_wp_error($r) ? '' : (string) wp_remote_retrieve_body($r);
+        $cut = strpos($body, 'ev-h--past');
+        if ($cut !== false) {
+            $body = substr($body, 0, $cut);
+        }
+        if (preg_match_all('#<article class="ev" data-city="([a-z]*)">(.*?)</article>#s', $body, $m, PREG_SET_ORDER)) {
+            foreach ($m as $e) {
+                $g = function ($re) use ($e) {
+                    return preg_match($re, $e[2], $x) ? trim(html_entity_decode(wp_strip_all_tags($x[1]))) : '';
+                };
+                $list[] = [
+                    'city' => $e[1],
+                    'day' => $g('#<div class="ev__date"><b>([^<]*)</b>#'),
+                    'mon' => $g('#<div class="ev__date"><b>[^<]*</b><span>([^<]*)</span>#'),
+                    'cityname' => $g('#<span class="ev__city[^"]*">([^<]*)</span>#'),
+                    'when' => $g('#</span>([^<]*)</p>#'),
+                    'title' => $g('#<h3>(.*?)</h3>#s'),
+                    'desc' => $g('#<p class="ev__desc">(.*?)</p>#s'),
+                    'venue' => $g('#<p class="ev__venue">(?:<svg.*?</svg>)?(.*?)</p>#s'),
+                ];
+                if (count($list) >= 8) {
+                    break;
+                }
+            }
+        }
+        set_transient($key, $list, $list ? 6 * HOUR_IN_SECONDS : 15 * MINUTE_IN_SECONDS);
+    }
+    return array_slice($list, 0, $n);
+}
+
+add_filter('dst_html', function ($html) {
+    if (!preg_match('#<body class="[^"]*\bhome\b#', $html) || strpos($html, 'ds-home-ev') !== false) {
+        return $html;
+    }
+    $lang = dst_lang();
+    $ev = dst_upcoming_events($lang, 4);
+    if (!$ev) {
+        return $html;
+    }
+    $T = ['vi' => ['Lịch sự kiện', 'Sắp diễn ra ở miền Trung', 'Xem lịch đầy đủ', 'Hỏi phòng gần đây'], 'ko' => ['행사 일정', '곧 열리는 중부 행사', '전체 일정 보기', '근처 숙소 문의']];
+    $t = $T[$lang] ?? ['Events', 'Coming up in Central Vietnam', 'Full calendar', 'Ask for a room nearby'];
+    $home = trailingslashit(dst_lang_home());
+    $out = '<section class="section ds-home-ev"><div class="wrap"><div class="ds-home-svc__head"><div><span class="kicker">' . esc_html($t[0]) . '</span><h2>' . esc_html($t[1]) . '</h2></div><a class="link-arrow" href="' . esc_url($home . 'events/') . '">' . esc_html($t[2]) . ' →</a></div><div class="ds-home-ev__grid">';
+    foreach ($ev as $e) {
+        $out .= '<a class="ds-hev ds-hev--' . esc_attr($e['city']) . '" href="' . esc_url($home . 'events/') . '"><div class="ds-hev__date"><b>' . esc_html($e['day']) . '</b><span>' . esc_html($e['mon']) . '</span></div>'
+            . '<div class="ds-hev__body"><span class="ds-hev__city">' . esc_html($e['cityname']) . '</span>'
+            . ($e['when'] ? '<small>' . esc_html($e['when']) . '</small>' : '')
+            . '<strong>' . esc_html($e['title']) . '</strong>'
+            . ($e['desc'] ? '<p>' . esc_html(wp_trim_words($e['desc'], 18)) . '</p>' : '')
+            . ($e['venue'] ? '<em>📍 ' . esc_html($e['venue']) . '</em>' : '') . '</div></a>';
+    }
+    $out .= '</div><p class="ds-home-ev__cta"><a class="ds-btn ds-btn--call" href="' . esc_url($home . 'stays/') . '">🏨 ' . esc_html($t[3]) . '</a><a class="ds-btn ds-btn--zalo" href="https://zalo.me/0909669325" target="_blank" rel="noopener">Zalo 0909 669 325</a></p></div></section>';
+    $q = str_replace(['\\', '$'], ['\\\\', '\\$'], $out);
+    $html = preg_replace('#(<section class="section ds-home-upd">)#', $q . '$1', $html, 1, $c);
+    if (!$c) {
+        $html = preg_replace('#(<section class="section quote">)#', $q . '$1', $html, 1);
+    }
+    $css = '<style id="dst-hev-css">
+.ds-home-ev { background: #fff; padding: 72px 0 !important; }
+.ds-home-ev__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.ds-hev { display: flex; gap: 14px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: #fff; text-decoration: none !important; color: var(--ink) !important; transition: transform .2s, box-shadow .2s, border-color .2s; border-top: 4px solid var(--sea); }
+.ds-hev--hoian { border-top-color: #b5651d; } .ds-hev--hue { border-top-color: #7a4fa3; } .ds-hev--danang { border-top-color: var(--sea); }
+.ds-hev:hover { transform: translateY(-3px); box-shadow: 0 18px 34px -24px rgba(11,36,71,.5); border-color: var(--bronze); }
+.ds-hev__date { flex: none; width: 56px; text-align: center; }
+.ds-hev__date b { display: block; font: 600 34px/1 var(--serif); color: var(--ink); }
+.ds-hev__date span { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted, #6b7280); }
+.ds-hev__body { display: flex; flex-direction: column; gap: 4px; min-width: 0; font-family: var(--sans); }
+.ds-hev__city { align-self: start; font: 700 11px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: #fff; background: var(--sea); border-radius: 999px; padding: 4px 9px; }
+.ds-hev--hoian .ds-hev__city { background: #b5651d; } .ds-hev--hue .ds-hev__city { background: #7a4fa3; }
+.ds-hev__body small { font-size: 12.5px; color: var(--muted, #6b7280); }
+.ds-hev__body strong { font: 600 17px/1.3 var(--serif); }
+.ds-hev__body p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink-2); }
+.ds-hev__body em { font-style: normal; font-size: 12.5px; color: var(--muted, #6b7280); }
+.ds-home-ev__cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 0; }
+@media (max-width: 1100px) { .ds-home-ev__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .ds-home-ev__grid { grid-template-columns: 1fr; } }
+</style>';
+    return str_replace('</head>', $css . '</head>', $html);
+}, 45);
