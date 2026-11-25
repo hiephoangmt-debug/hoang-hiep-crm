@@ -1790,5 +1790,75 @@ HTML
 		),
 	);
 
+	/* ---------------- 26/11 – KCN Tam Anh 3 – Indusvalley 238,11 ha, gần 2.479 tỷ (Chu Lai) ---------------- */
+	$posts[] = array(
+		'slug'           => 'khu-cong-nghiep-tam-anh-3-indusvalley',
+		'title'          => 'Khu công nghiệp Tam Anh 3 – Indusvalley được chấp thuận: 238,11 ha, vốn khoảng 2.479 tỷ đồng ở phía nam Đà Nẵng',
+		'excerpt'        => 'Ngày 25/11/2026, Ban Quản lý Khu kinh tế mở Chu Lai chấp thuận chủ trương đầu tư Khu công nghiệp Tam Anh 3 – Indusvalley (giai đoạn 1) tại xã Tam Anh: 238,11 ha, tổng vốn khoảng 2.479 tỷ đồng, thời hạn 70 năm.',
+		'keyword'        => 'khu công nghiệp Tam Anh 3',
+		'keywords_extra' => array( 'Indusvalley Chu Lai', 'khu kinh tế mở Chu Lai', 'bất động sản phía nam Đà Nẵng', 'Quyết định 259/QĐ-KTM' ),
+		'project'        => 'vinh-an-hoa-city',
+		'schedule'       => '2026-11-26 06:45',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Hạ tầng Đà Nẵng', 'Chu Lai', 'Khu công nghiệp' ),
+		'image'          => 'plugin:img/vinh-an-hoa/nam-hoi-an-city-phoi-canh-tren-cao.jpg',
+		'image_alt'      => 'Khu công nghiệp Tam Anh 3 – hành lang ven biển phía nam Đà Nẵng, nơi khu kinh tế mở Chu Lai mở rộng',
+		'content'        => <<<'HTML'
+<p><strong>Khu công nghiệp Tam Anh 3</strong> – Indusvalley (giai đoạn 1) vừa được Ban Quản lý Khu kinh tế mở Chu Lai chấp thuận chủ trương đầu tư tại Quyết định số 259/QĐ-KTM ngày 25/11/2026. Theo <a href="https://tuoitre.vn/phia-nam-da-nang-co-them-du-an-hon-2400-ti-dong-100261125153218841.htm" target="_blank" rel="noopener">Tuổi Trẻ</a> và <a href="https://cafef.vn/da-nang-chap-thuan-dau-tu-khu-cong-nghiep-tam-anh-3-indusvalley-hon-2479-ty-dong-188261125140401904.chn" target="_blank" rel="noopener">CafeF</a>, dự án rộng 238,11 ha tại xã Tam Anh, TP Đà Nẵng (vùng Quảng Nam cũ), tổng vốn khoảng 2.479 tỷ đồng.</p>
+<!--hh-featured-->
+<h2>Khu công nghiệp Tam Anh 3: các con số chính</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Theo quyết định được báo chí đưa tin</th></tr></thead>
+<tbody>
+<tr><td>Văn bản</td><td>Quyết định số 259/QĐ-KTM ngày 25/11/2026 của Ban Quản lý Khu kinh tế mở Chu Lai</td></tr>
+<tr><td>Dự án</td><td>Đầu tư xây dựng và kinh doanh hạ tầng Khu công nghiệp Tam Anh 3 – Indusvalley, giai đoạn 1</td></tr>
+<tr><td>Chủ đầu tư</td><td>Công ty cổ phần Indusvalley Chu Lai</td></tr>
+<tr><td>Vị trí</td><td>Xã Tam Anh, TP Đà Nẵng (thuộc Khu kinh tế mở Chu Lai)</td></tr>
+<tr><td>Quy mô</td><td>238,11 ha</td></tr>
+<tr><td>Tổng vốn</td><td>Khoảng 2.479 tỷ đồng: vốn góp 495,8 tỷ (20%), vốn huy động 1.983,2 tỷ (80%)</td></tr>
+<tr><td>Thời hạn</td><td>70 năm</td></tr>
+<tr><td>Tiến độ</td><td>48 tháng kể từ ngày được Nhà nước giao đất, cho thuê đất</td></tr>
+</tbody>
+</table>
+<p>Theo báo chí, trong phạm vi khu đất của khu công nghiệp Tam Anh 3 chưa có kết quả thăm dò, đánh giá trữ lượng khoáng sản, nên nhà đầu tư phải tự điều tra, đánh giá trước khi triển khai. Các bước tiếp theo vẫn là giải phóng mặt bằng, giao đất rồi mới xây hạ tầng – tức là từ quyết định đến lúc có nhà máy còn khá lâu.</p>
+<h2>Vì sao khu công nghiệp Tam Anh 3 đáng chú ý với bất động sản?</h2>
+<p>Tam Anh nằm trong vùng Núi Thành – Chu Lai, phía nam thành phố sau hợp nhất, gần sân bay Chu Lai và cảng Kỳ Hà. Khu vực này đã có nhiều khu công nghiệp và đang được thành phố đẩy mạnh với các khu đô thị mới. Đầu tháng 11, Hiệp đã tổng hợp việc <a href="/khoi-cong-3-khu-do-thi-chu-lai-40400-ty/">3 khu đô thị ở Chu Lai hơn 40.400 tỷ được ấn định thời hạn khởi công</a>; nay thêm khu công nghiệp Tam Anh 3 là thêm một nguồn việc làm cho chính vùng này.</p>
+<p>Khu công nghiệp kéo theo nhu cầu nhà ở cho công nhân, chuyên gia, nhà trọ, nhà phố thương mại và dịch vụ quanh khu. Tuy nhiên, nhu cầu này chỉ thật sự hình thành khi khu công nghiệp có nhà máy đi vào hoạt động – với tiến độ 48 tháng kể từ khi giao đất, mốc đó còn vài năm nữa.</p>
+<!--hh-img:img/da-nang/duy-xuyen-flycam-song-thu-bon-cau-cua-dai-hoi-an.jpg|Hành lang ven biển phía nam Đà Nẵng – vùng khu công nghiệp Tam Anh 3 và các khu đô thị Chu Lai đang mở rộng (ảnh flycam thực tế)-->
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<p>Thứ nhất, đây là tin tốt dài hạn cho cực phía nam, không phải lý do để mua đất vội. Kinh nghiệm ở các khu công nghiệp khác cho thấy giá đất quanh khu thường "chạy trước" khi có quyết định, rồi đi ngang nhiều năm chờ nhà máy. Hiệp khuyên ai quan tâm vùng Núi Thành – Tam Anh nên chọn sản phẩm có pháp lý rõ, hạ tầng đã xong, và tính dòng tiền cho thuê thực tế thay vì kỳ vọng tăng giá nhanh.</p>
+<p>Thứ hai, khu công nghiệp Tam Anh 3 cùng các khu đô thị Chu Lai làm rõ hướng phát triển "đa cực" của Đà Nẵng sau hợp nhất: trung tâm cũ giữ vai trò dịch vụ – du lịch, phía nam là công nghiệp, cảng và sân bay. Người mua để ở hoặc cho thuê tại trung tâm vẫn nên ưu tiên vị trí gần biển, gần việc làm dịch vụ; còn nhà đầu tư có vốn dài hơi có thể theo dõi phía nam theo từng mốc giao đất, khởi công.</p>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/vinh-an-hoa-city/">Vịnh An Hòa City</a> (Núi Thành, gần sân bay Chu Lai): dự án gần khu công nghiệp Tam Anh 3 nhất trên web, hưởng lợi khi việc làm và dân cư vùng Chu Lai tăng.</li>
+<li><a href="/du-an/nam-hoi-an-city/">Nam Hội An City</a>: nằm trên hành lang ven biển phía nam, cùng được hưởng khi trục Đà Nẵng – Chu Lai phát triển.</li>
+<li>Khu vực Tam Kỳ cũng có thêm động lực việc làm; xem thông tin tham khảo tại trang <a href="/du-an/meta-city-tam-ky/">Meta City Tam Kỳ</a> (trang thông tin dự án).</li>
+</ul>
+<p>Xem thêm: <a href="/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen/">hướng tuyến cao tốc nội thị Đà Nẵng – Chu Lai</a>. Cần tư vấn bất động sản phía nam Đà Nẵng hoặc so sánh với căn hộ ven biển trung tâm, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: Tuổi Trẻ (Phía nam Đà Nẵng có thêm dự án hơn 2.400 tỉ đồng, 25/11/2026); CafeF (Đà Nẵng chấp thuận đầu tư Khu công nghiệp Tam Anh 3 – Indusvalley hơn 2.479 tỷ đồng). Số liệu theo Quyết định 259/QĐ-KTM như báo chí đưa tin; chi tiết theo văn bản chính thức của Ban Quản lý Khu kinh tế mở Chu Lai.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Khu công nghiệp Tam Anh 3: 238,11 ha, vốn 2.479 tỷ',
+			'desc'      => 'Khu công nghiệp Tam Anh 3 – Indusvalley được chấp thuận ngày 25/11/2026: 238,11 ha tại xã Tam Anh, vốn khoảng 2.479 tỷ đồng. Tác động tới BĐS phía nam.',
+			'points'    => array(
+				'Khu công nghiệp Tam Anh 3 – Indusvalley (giai đoạn 1) chấp thuận theo Quyết định 259/QĐ-KTM ngày 25/11/2026',
+				'Quy mô 238,11 ha tại xã Tam Anh, TP Đà Nẵng, thuộc Khu kinh tế mở Chu Lai',
+				'Tổng vốn khoảng 2.479 tỷ đồng: 20% vốn góp, 80% vốn huy động; thời hạn 70 năm',
+				'Tiến độ 48 tháng kể từ khi được giao đất – nhu cầu nhà ở quanh khu hình thành sau khi có nhà máy',
+			),
+			'faq'       => array(
+				array( 'Khu công nghiệp Tam Anh 3 ở đâu?', 'Tại xã Tam Anh, TP Đà Nẵng (vùng Núi Thành, Quảng Nam cũ), thuộc Khu kinh tế mở Chu Lai, gần sân bay Chu Lai.' ),
+				array( 'Ai làm chủ đầu tư, vốn bao nhiêu?', 'Công ty cổ phần Indusvalley Chu Lai; tổng vốn khoảng 2.479 tỷ đồng, gồm 495,8 tỷ vốn góp và 1.983,2 tỷ vốn huy động.' ),
+				array( 'Bao giờ khu công nghiệp hoạt động?', 'Theo quyết định, tiến độ xây dựng và đưa vào hoạt động là 48 tháng kể từ ngày được Nhà nước giao đất, cho thuê đất.' ),
+				array( 'Có nên mua đất quanh khu công nghiệp Tam Anh 3 ngay?', 'Nên thận trọng: nhu cầu nhà ở chỉ tăng thật khi nhà máy hoạt động. Ưu tiên sản phẩm pháp lý rõ, hạ tầng xong và tính dòng tiền cho thuê thực tế.' ),
+			),
+		),
+		'sources'        => array(
+			'https://tuoitre.vn/phia-nam-da-nang-co-them-du-an-hon-2400-ti-dong-100261125153218841.htm',
+			'https://cafef.vn/da-nang-chap-thuan-dau-tu-khu-cong-nghiep-tam-anh-3-indusvalley-hon-2479-ty-dong-188261125140401904.chn',
+		),
+	);
+
 	return $posts;
 }
