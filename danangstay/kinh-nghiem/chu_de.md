@@ -50,7 +50,7 @@ Cột chuyên mục dùng: plan, places, food, culture.
 | [ ] | voọc chà vá chân nâu | Ngắm voọc chà vá chân nâu ở Sơn Trà: giờ, cung đường, quy tắc | places | 선짜 원숭이 |
 | [ ] | Đà Nẵng với người lớn tuổi | Đà Nẵng cho người lớn tuổi và gia đình nhiều thế hệ | plan | 다낭 효도여행 |
 | [ ] | pháo hoa Đà Nẵng 2027 | Lễ hội pháo hoa DIFF 2027: lịch dự kiến, vé, chỗ xem, khách sạn view sông | plan | 다낭 불꽃축제 2027 |
-| [ ] | chợ Hàn | Chợ Hàn và chợ Cồn: mua gì, mặc cả thế nào, ăn gì | places | 한시장 |
+| [x] | chợ Hàn | Chợ Hàn và chợ Cồn: mua gì, mặc cả thế nào, ăn gì | places | 한시장 | https://danangstay.com.vn/vi/cho-han-da-nang/
 | [ ] | cầu Rồng phun lửa | Xem cầu Rồng phun lửa, phun nước: giờ, vị trí đứng đẹp nhất | places | 다낭 용다리 불쇼 |
 | [ ] | Ngũ Hành Sơn | Ngũ Hành Sơn: đi động nào, mất bao lâu, vé và thang máy | places | 오행산 |
 | [ ] | phố cổ Hội An về đêm | Phố cổ Hội An buổi tối: vé tham quan, thả đèn, đi thuyền sông Hoài | places | 호이안 야경 |
