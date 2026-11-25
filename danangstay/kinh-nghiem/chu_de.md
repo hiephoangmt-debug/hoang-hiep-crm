@@ -21,6 +21,8 @@ Cột chuyên mục dùng: plan, places, food, culture.
 | [ ] | lướt sóng Đà Nẵng | Lướt sóng (surf) ở Đà Nẵng: mùa sóng, bãi tập, học surf cho người mới | places | 다낭 서핑 |
 | [ ] | dù lượn Sơn Trà | Bay dù lượn Sơn Trà: điều kiện bay, giá, an toàn | places | 다낭 패러글라이딩 |
 | [ ] | kayak Đà Nẵng | Chèo kayak ở Đà Nẵng – Hội An: sông Hàn, rừng dừa, hồ Hòa Trung | places | 다낭 카약 |
+| [x] | kinh nghiệm du lịch Huế | Kinh nghiệm du lịch Huế: Đại Nội, lăng tẩm, ăn gì, đi từ Đà Nẵng | places | 후에 여행 | https://danangstay.com.vn/vi/kinh-nghiem-du-lich-hue/
+| [x] | kinh nghiệm du lịch Hội An | Kinh nghiệm du lịch Hội An: đi gì, ăn gì, vé phố cổ | places | 호이안 여행 | https://danangstay.com.vn/vi/kinh-nghiem-du-lich-hoi-an/
 | [ ] | điểm check in Đà Nẵng | Top 20 điểm check-in đẹp nhất Đà Nẵng 2026 (kèm giờ chụp đẹp) | places | 다낭 사진 명소 |
 | [ ] | quán ăn ngon Đà Nẵng | Top 25 quán ăn ngon ở Đà Nẵng người địa phương hay ăn | food | 다낭 현지 맛집 |
 | [x] | giao thừa Đà Nẵng 2027 | Đón giao thừa 2027 ở Đà Nẵng: countdown, pháo hoa, nơi xem đẹp | plan | 다낭 새해 카운트다운 | https://danangstay.com.vn/vi/giao-thua-da-nang-2027/
