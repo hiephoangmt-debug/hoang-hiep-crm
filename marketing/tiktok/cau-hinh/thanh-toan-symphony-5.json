@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Cọc 100 triệu, đóng đủ",
+  "70%",
+  "là nhận căn"
+ ],
+ "question": "Tiến độ thanh toán Symphony 5 chia thế nào?",
+ "hook_bg": "/home/user/hoang-hiep-crm/marketing/anh-khu-vuc/song-han-cau-rong-son-tra-ngay.jpg",
+ "data_title": [
+  "Symphony 5",
+  "LỊCH THANH TOÁN"
+ ],
+ "rows": [
+  [
+   "100 tr",
+   "Đặt cọc",
+   "Mọi loại căn"
+  ],
+  [
+   "15%",
+   "Sau 10 ngày",
+   "Gồm tiền cọc"
+  ],
+  [
+   "10%",
+   "Mỗi ~120 ngày",
+   "Đợt 3 đến đợt 7"
+  ],
+  [
+   "30/6/2028",
+   "Nhận căn sử dụng",
+   "Khi đã đóng 70%"
+  ],
+  [
+   "5%",
+   "Chiết khấu không vay",
+   "Trên giá chưa VAT"
+  ]
+ ],
+ "note": "Theo CSBH 02/S5 chủ đầu tư từ 20/7/2026. Đất thương mại dịch vụ, sở hữu 50 năm.",
+ "photo": "/home/user/hoang-hiep-crm/marketing/anh-khu-vuc/song-han-cau-rong-son-tra-ngay.jpg",
+ "photo_caption": "Bờ Đông sông Hàn – khu Sun Symphony",
+ "cta": "Bảng tính: Zalo 0904 567 009"
+}

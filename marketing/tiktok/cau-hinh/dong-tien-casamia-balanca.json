@@ -1,44 +1,39 @@
 {
  "hook": [
-  "Biệt thự Hội An 13,9 tỷ",
-  "CHO THUÊ",
-  "được bao nhiêu?"
+  "Biệt thự Hội An cho thuê",
+  "50 TR/THÁNG",
+  "theo chính sách CĐT"
  ],
- "question": "Bài toán dòng tiền Casamia Balanca 5 – 10 năm",
- "hook_bg": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d19/casamia-balanca-ho-boi-vuon-dua.jpg",
+ "question": "Thuê lại hay ủy thác Casamia – khác nhau thế nào?",
+ "hook_bg": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d25/c-biet-thu-ho-boi-ven-song.jpg",
  "data_title": [
-  "Dòng tiền",
-  "CASAMIA BALANCA"
+  "Casamia Balanca",
+  "THUÊ LẠI / ỦY THÁC"
  ],
  "rows": [
   [
-   "~13,86 tỷ",
-   "Park Home full NT",
-   "Giá không vay, gồm VAT"
+   "50 tr",
+   "Thuê lại Park Home thô",
+   "Mỗi tháng, hợp đồng 3 năm"
   ],
   [
-   "1,5 – 3%",
-   "Tự cho thuê/năm",
-   "Giả định công suất 40–70%"
+   "45%",
+   "Ủy thác vận hành",
+   "Doanh thu thuần, tối thiểu 50 tr"
   ],
   [
-   "50 tr/tháng",
-   "Ủy thác tối thiểu",
-   "Park Home, hợp đồng 5 năm"
+   "5 năm",
+   "Thời hạn ủy thác",
+   "10 đêm ở miễn phí/năm"
   ],
   [
-   "60 tr/tháng",
-   "Forestside tối thiểu",
-   "Theo chính sách CĐT"
-  ],
-  [
-   "24 tháng",
-   "Lãi 0%, ân hạn gốc",
-   "Khi vay đến 70%"
+   "60 tr",
+   "Forestside thuê lại",
+   "Mỗi tháng, hợp đồng 3 năm"
   ]
  ],
- "note": "Giá và chương trình thuê theo chính sách chủ đầu tư từ 9/9/2026; lợi suất tự cho thuê là giả định của Hiệp, không phải cam kết lợi nhuận.",
- "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d19/casamia-balanca-song-co-co-hoang-hon.jpg",
- "photo_caption": "Casamia Balanca – biệt thự ven sông Cổ Cò, Hội An",
- "cta": "Bảng giá: Zalo 0904 567 009"
+ "note": "Theo CSBH chủ đầu tư 9/9/2026; có điều kiện, quỹ căn; không phải lợi nhuận đảm bảo.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d25/c-phong-khach-view-vuon.jpg",
+ "photo_caption": "Phối cảnh biệt thự Casamia Balanca",
+ "cta": "Bảng tính: Zalo 0904 567 009"
 }

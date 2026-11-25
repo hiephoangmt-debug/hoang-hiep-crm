@@ -1,0 +1,85 @@
+{
+ "tag": "THANH TOÁN · SYMPHONY 5",
+ "title": "SYMPHONY 5",
+ "sub": "Trả đủ 70% nhận căn dự kiến 30/6/2028",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "100 tr",
+   "đặt cọc mọi căn"
+  ],
+  [
+   "10%",
+   "mỗi ~120 ngày"
+  ],
+  [
+   "30 tháng",
+   "hỗ trợ lãi vay"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo CSBH 02/S5 chủ đầu tư từ 20/7/2026 · Ảnh thực tế sông Hàn",
+ "headline": [
+  [
+   "SYMPHONY 5",
+   "big",
+   0
+  ],
+  [
+   "CSBH 02/S5",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Lịch thanh toán",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "SYMPHONY 5",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "nhận căn khi đủ 70%",
+     "script"
+    ]
+   ],
+   "dx": 160
+  }
+ ]
+}

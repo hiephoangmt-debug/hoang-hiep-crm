@@ -1,0 +1,85 @@
+{
+ "tag": "DÒNG TIỀN · CASAMIA BALANCA",
+ "title": "CASAMIA BALANCA",
+ "sub": "Thuê lại / ủy thác theo chính sách chủ đầu tư",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "50 tr",
+   "thuê lại/tháng"
+  ],
+  [
+   "3 năm",
+   "hợp đồng thuê"
+  ],
+  [
+   "45%",
+   "doanh thu – ủy thác"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo CSBH chủ đầu tư 9/9/2026; có thời hạn, điều kiện, không phải lợi nhuận đảm bảo",
+ "headline": [
+  [
+   "CASAMIA BALANCA",
+   "big",
+   0
+  ],
+  [
+   "theo chính sách 2026",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Bài toán dòng tiền",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "CASAMIA BALANCA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "theo chính sách 2026",
+     "script"
+    ]
+   ],
+   "dx": 200
+  }
+ ]
+}
