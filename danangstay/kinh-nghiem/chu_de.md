@@ -18,7 +18,7 @@ Cột chuyên mục dùng: plan, places, food, culture.
 |---|---|---|---|---|
 | [ ] | điểm check in Đà Nẵng | Top 20 điểm check-in đẹp nhất Đà Nẵng 2026 (kèm giờ chụp đẹp) | places | 다낭 사진 명소 |
 | [ ] | quán ăn ngon Đà Nẵng | Top 25 quán ăn ngon ở Đà Nẵng người địa phương hay ăn | food | 다낭 현지 맛집 |
-| [ ] | giao thừa Đà Nẵng 2027 | Đón giao thừa 2027 ở Đà Nẵng: countdown, pháo hoa, nơi xem đẹp | plan | 다낭 새해 카운트다운 |
+| [x] | giao thừa Đà Nẵng 2027 | Đón giao thừa 2027 ở Đà Nẵng: countdown, pháo hoa, nơi xem đẹp | plan | 다낭 새해 카운트다운 | https://danangstay.com.vn/vi/giao-thua-da-nang-2027/
 | [ ] | điểm check in Hội An | Top 15 điểm check-in đẹp ở Hội An: phố cổ, làng quê, biển | places | 호이안 사진 명소 |
 | [ ] | quán hải sản ngon Đà Nẵng | Top 12 quán hải sản ngon, giá rõ ràng ở Đà Nẵng | food | 다낭 해산물 맛집 |
 | [ ] | Tết Đà Nẵng 2027 | Tết Đinh Mùi 2027 ở Đà Nẵng: hàng quán mở cửa, giá phòng, chơi gì | plan | 다낭 설 연휴 여행 |
