@@ -23,6 +23,7 @@ Cột chuyên mục dùng: plan, places, food, culture.
 | [ ] | kayak Đà Nẵng | Chèo kayak ở Đà Nẵng – Hội An: sông Hàn, rừng dừa, hồ Hòa Trung | places | 다낭 카약 |
 | [x] | kinh nghiệm du lịch Huế | Kinh nghiệm du lịch Huế: Đại Nội, lăng tẩm, ăn gì, đi từ Đà Nẵng | places | 후에 여행 | https://danangstay.com.vn/vi/kinh-nghiem-du-lich-hue/
 | [x] | kinh nghiệm du lịch Hội An | Kinh nghiệm du lịch Hội An: đi gì, ăn gì, vé phố cổ | places | 호이안 여행 | https://danangstay.com.vn/vi/kinh-nghiem-du-lich-hoi-an/
+| [x] | bán đảo Sơn Trà | Bán đảo Sơn Trà: chùa Linh Ứng, đỉnh Bàn Cờ, cung đường, voọc | places | 선짜반도 | https://danangstay.com.vn/vi/son-tra-ban-dao-hoang-so-cach-pho-muoi-phut-vi/ (viết lại bài cũ)
 | [ ] | điểm check in Đà Nẵng | Top 20 điểm check-in đẹp nhất Đà Nẵng 2026 (kèm giờ chụp đẹp) | places | 다낭 사진 명소 |
 | [ ] | quán ăn ngon Đà Nẵng | Top 25 quán ăn ngon ở Đà Nẵng người địa phương hay ăn | food | 다낭 현지 맛집 |
 | [x] | giao thừa Đà Nẵng 2027 | Đón giao thừa 2027 ở Đà Nẵng: countdown, pháo hoa, nơi xem đẹp | plan | 다낭 새해 카운트다운 | https://danangstay.com.vn/vi/giao-thua-da-nang-2027/
@@ -69,7 +70,7 @@ Cột chuyên mục dùng: plan, places, food, culture.
 | [ ] | tắm biển Mỹ Khê an toàn | Tắm biển Đà Nẵng an toàn: cờ báo, giờ cứu hộ, mùa sóng lớn | plan | 미케비치 수영 |
 | [ ] | đi Hội An từ Đà Nẵng | Từ Đà Nẵng đi Hội An: xe buýt, Grab, xe riêng, xe máy | plan | 다낭 호이안 이동 |
 | [ ] | mua gì làm quà Đà Nẵng | Mua gì làm quà ở Đà Nẵng: đặc sản, nơi mua, mang lên máy bay | food | 다낭 기념품 |
-| [ ] | Bán đảo Sơn Trà bằng xe máy | Một vòng Sơn Trà: chùa Linh Ứng, cây đa nghìn năm, đỉnh Bàn Cờ | places | 선짜반도 투어 |
+| [x] | Bán đảo Sơn Trà bằng xe máy | Một vòng Sơn Trà: chùa Linh Ứng, cây đa nghìn năm, đỉnh Bàn Cờ | places | 선짜반도 투어 |
 | [ ] | Rừng dừa Bảy Mẫu | Rừng dừa Bảy Mẫu, thuyền thúng: giá, tránh bị ép mua, giờ đẹp | places | 바구니배 |
 | [ ] | Đà Nẵng tháng 1 | Đà Nẵng tháng 1: thời tiết, Tết, nên đi đâu | plan | 1월 다낭 날씨 |
 | [ ] | Đà Nẵng tháng 2 | Đà Nẵng tháng 2: hết mưa chưa, lễ hội đầu năm | plan | 2월 다낭 날씨 |
