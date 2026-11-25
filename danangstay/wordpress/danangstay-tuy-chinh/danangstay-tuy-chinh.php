@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 2.1.2
+ * Version: 2.2.2
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -1148,15 +1148,9 @@ add_filter('dst_html', function ($html) {
     if (!$url) {
         return $html;
     }
-    $all = ['vi' => 'Tất cả dịch vụ', 'ko' => '전체 서비스', 'en' => 'All services'];
-    $label = isset($all[dst_lang()]) ? $all[dst_lang()] : $all['en'];
     $html = preg_replace('#<a href="[^"]*/stays/"(\s+class="nav__parent")#', '<a href="' . esc_url($url) . '"$1', $html);
-    $html = preg_replace_callback('#(<li>\s*)?(<a href="[^"]*/stays/">[^<]*</a>)#u', function ($m) use ($url, $label) {
-        $link = '<a href="' . esc_url($url) . '">' . esc_html($label) . '</a>';
-        return !empty($m[1]) ? $m[1] . $link . '</li><li>' . $m[2] : $link . $m[2];
-    }, $html, 3);
     // Thanh liên hệ cố định cho điện thoại trên trang dịch vụ
-    if (strpos($html, 'ds-svcpage') !== false && strpos($html, '<nav class="ds-mbar"') === false) {
+    if (preg_match('#<body class="[^"]*\bds-svcpage#', $html) && strpos($html, '<nav class="ds-mbar"') === false) {
         $mb = ['vi' => ['Gọi', 'Zalo', 'Gửi yêu cầu'], 'ko' => ['전화', 'Zalo', '문의하기'], 'en' => ['Call', 'Zalo', 'Request']];
         $m = isset($mb[dst_lang()]) ? $mb[dst_lang()] : $mb['en'];
         $bar = '<nav class="ds-mbar" translate="no"><a href="tel:0909669325">📞 ' . $m[0] . '</a><a href="https://zalo.me/0909669325" target="_blank" rel="noopener">💬 ' . $m[1] . '</a><a href="' . esc_url(trailingslashit(dst_lang_home()) . '#reserve') . '">✉️ ' . $m[2] . '</a></nav>';
@@ -1348,6 +1342,53 @@ add_filter('dst_html', function ($html) {
 }, 5);
 
 /* ------------------------------------------------------------------ */
+/* 11b. Menu xổ xuống DỊCH VỤ: biểu tượng + mô tả, bỏ mục thừa          */
+/* ------------------------------------------------------------------ */
+add_filter('dst_html', function ($html) {
+    $M = [
+        'vi' => [['🏨', 'Chỗ ở', 'Khách sạn, căn hộ, villa view biển'], ['✈️', 'Vé máy bay', 'Nội địa & quốc tế đến Đà Nẵng'], ['🎟️', 'Vé tham quan', 'Bà Nà, Núi Thần Tài, Hội An, Huế…']],
+        'ko' => [['🏨', '숙소', '오션뷰 호텔·아파트·풀빌라'], ['✈️', '항공권', '다낭행 국내선·국제선'], ['🎟️', '입장권·투어', '바나힐, 탄따이 온천, 호이안, 후에…']],
+        'en' => [['🏨', 'Stays', 'Sea-view hotels, apartments, villas'], ['✈️', 'Flights', 'Domestic & international to Da Nang'], ['🎟️', 'Tickets & tours', 'Ba Na Hills, hot springs, Hoi An, Hue…']],
+    ];
+    $m = isset($M[dst_lang()]) ? $M[dst_lang()] : $M['en'];
+    return preg_replace_callback('#<div class="nav__sub">(\s*<a href="([^"]*)/stays/">.*?)</div>#su', function ($x) use ($m) {
+        $base = $x[2];
+        preg_match('#<a href="([^"]*/flights/)"#', $x[1], $f);
+        $tk = dst_tickets_url();
+        $items = [[$base . '/stays/', $m[0]], [isset($f[1]) ? $f[1] : $base . '/flights/', $m[1]]];
+        if ($tk) {
+            $items[] = [$tk, $m[2]];
+        }
+        $out = '<div class="nav__sub ds-mega">';
+        foreach ($items as $it) {
+            $out .= '<a href="' . esc_url($it[0]) . '"><span class="mi" aria-hidden="true">' . $it[1][0] . '</span><span class="mt"><b>' . esc_html($it[1][1]) . '</b><small>' . esc_html($it[1][2]) . '</small></span></a>';
+        }
+        return $out . '</div>';
+    }, $html, 1);
+}, 30);
+
+add_action('wp_head', function () {
+    ?>
+<style id="dst-mega-css">
+.nav__sub.ds-mega { min-width: 330px; padding: 8px !important; border-radius: 14px; }
+.nav__sub.ds-mega a { display: flex !important; align-items: center; gap: 12px; padding: 10px 12px !important; border-radius: 10px; white-space: normal !important; }
+.nav__sub.ds-mega a:hover { background: var(--ivory); }
+.nav__sub.ds-mega .mi { width: 40px; height: 40px; flex: none; border-radius: 10px; background: #fff1e8; display: grid; place-items: center; font-size: 20px; }
+.nav__sub.ds-mega a:nth-child(2) .mi { background: #e6f1fb; }
+.nav__sub.ds-mega a:nth-child(3) .mi { background: #fdeee4; }
+.nav__sub.ds-mega .mt { display: flex; flex-direction: column; gap: 2px; }
+.nav__sub.ds-mega b { font: 600 15px/1.25 var(--sans); color: var(--ink); letter-spacing: 0; text-transform: none; }
+.nav__sub.ds-mega small { font: 400 12.5px/1.35 var(--sans); color: var(--muted); letter-spacing: 0; text-transform: none; }
+.nav__sub.ds-mega a:hover b { color: var(--bronze); }
+body.menu-open .nav__sub.ds-mega { min-width: 0; padding: 0 0 8px 0 !important; }
+body.menu-open .nav__sub.ds-mega a { padding: 8px 0 !important; }
+body.menu-open .nav__sub.ds-mega .mi { width: 34px; height: 34px; font-size: 17px; }
+body.menu-open .nav__sub.ds-mega b { font-size: 16px !important; color: var(--ink) !important; }
+</style>
+    <?php
+}, 105);
+
+/* ------------------------------------------------------------------ */
 /* 12. Không tự chèn <p> trên trang dịch vụ (giữ nguyên bố cục thẻ)     */
 /* ------------------------------------------------------------------ */
 add_filter('the_content', function ($c) {
@@ -1463,6 +1504,7 @@ add_action('wp_head', function () {
   body.ds-svcpage .dsw__zalo { display: none; }
   .dsw__zalo, .dsw__open { width: 50px; height: 50px; }
 }
+body.menu-open .dsw { display: none; }
 /* Thẻ dịch vụ lớn: chữ trắng */
 .hub-card strong, .hub-card em, .hub-card li { color: #fff !important; }
 @media (max-width: 640px) { body.ds-hub .page-head.ds-hero { padding-bottom: 96px; } }
