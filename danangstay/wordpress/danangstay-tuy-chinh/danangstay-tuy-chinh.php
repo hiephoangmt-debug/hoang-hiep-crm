@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 1.8.2
+ * Version: 1.9.1
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -720,9 +720,9 @@ function dst_lang()
 function dst_t($key)
 {
     $t = [
-        'vi' => ['call' => 'Gọi', 'contact' => 'Liên hệ đặt vé', 'name' => 'Vân Trần', 'role' => 'Tư vấn vé máy bay, vé tham quan & tour', 'news' => 'Tin mới cập nhật', 'more' => 'Xem tất cả', 'tickets' => 'Vé tham quan', 'hours' => 'Trả lời nhanh qua Zalo, 7:00–22:00'],
-        'ko' => ['call' => '전화', 'contact' => '예약 문의', 'name' => 'Vân Trần', 'role' => '항공권·입장권·투어 상담', 'news' => '최신 소식', 'more' => '전체 보기', 'tickets' => '입장권·투어', 'hours' => '카카오톡·Zalo·WhatsApp 빠른 답변, 7:00–22:00'],
-        'en' => ['call' => 'Call', 'contact' => 'Book with us', 'name' => 'Vân Trần', 'role' => 'Flights, attraction tickets & tours', 'news' => 'Latest updates', 'more' => 'See all', 'tickets' => 'Attraction tickets', 'hours' => 'Fast replies on WhatsApp & Zalo, 7:00–22:00'],
+        'vi' => ['call' => 'Gọi', 'contact' => 'Liên hệ đặt vé', 'name' => 'Vân Trần', 'role' => 'Tư vấn vé máy bay, vé tham quan & tour', 'news' => 'Tin mới cập nhật', 'more' => 'Xem tất cả', 'tickets' => 'Vé tham quan', 'hours' => 'Trả lời nhanh qua Zalo, 7:00–22:00', 'qr' => 'Quét mã để nhắn Zalo'],
+        'ko' => ['call' => '전화', 'contact' => '예약 문의', 'name' => 'Vân Trần', 'role' => '항공권·입장권·투어 상담', 'news' => '최신 소식', 'more' => '전체 보기', 'tickets' => '입장권·투어', 'hours' => '카카오톡·Zalo·WhatsApp 빠른 답변, 7:00–22:00', 'qr' => 'QR 스캔으로 Zalo 문의'],
+        'en' => ['call' => 'Call', 'contact' => 'Book with us', 'name' => 'Vân Trần', 'role' => 'Flights, attraction tickets & tours', 'news' => 'Latest updates', 'more' => 'See all', 'tickets' => 'Attraction tickets', 'hours' => 'Fast replies on WhatsApp & Zalo, 7:00–22:00', 'qr' => 'Scan to chat on Zalo'],
     ];
     $l = dst_lang();
     $set = isset($t[$l]) ? $t[$l] : $t['en'];
@@ -733,13 +733,17 @@ function dst_t($key)
 add_shortcode('ds_lien_he', function () {
     $phone = '0909669325';
     $intl = '84909669325';
-    return '<div class="ds-contact" translate="no">'
-        . '<div class="ds-contact__who"><span class="ds-contact__avatar" aria-hidden="true">VT</span><div><strong>' . esc_html(dst_t('name')) . '</strong><br><span>' . esc_html(dst_t('role')) . '</span></div></div>'
+    $avatar = (string) get_option('dst_contact_avatar', '');
+    $qr = (string) get_option('dst_contact_qr', '');
+    $av = $avatar ? '<img class="ds-contact__photo" src="' . esc_url($avatar) . '" alt="' . esc_attr(dst_t('name')) . '" width="56" height="56" loading="lazy">' : '<span class="ds-contact__avatar" aria-hidden="true">VT</span>';
+    $qrh = $qr ? '<figure class="ds-contact__qr"><img src="' . esc_url($qr) . '" alt="QR Zalo ' . esc_attr(dst_t('name')) . '" width="132" height="132" loading="lazy"><figcaption>' . esc_html(dst_t('qr')) . '</figcaption></figure>' : '';
+    return '<div class="ds-contact' . ($qr ? ' has-qr' : '') . '" translate="no">'
+        . '<div class="ds-contact__who">' . $av . '<div><strong>' . esc_html(dst_t('name')) . '</strong><br><span>' . esc_html(dst_t('role')) . '</span></div></div>'
         . '<div class="ds-contact__btns">'
         . '<a class="ds-btn ds-btn--call" href="tel:' . $phone . '">📞 ' . esc_html(dst_t('call')) . ' 0909 669 325</a>'
         . '<a class="ds-btn ds-btn--zalo" href="https://zalo.me/' . $phone . '" target="_blank" rel="noopener">Zalo</a>'
         . '<a class="ds-btn ds-btn--wa" href="https://wa.me/' . $intl . '" target="_blank" rel="noopener">WhatsApp</a>'
-        . '</div><p class="ds-contact__note">' . esc_html(dst_t('hours')) . '</p></div>';
+        . '</div><p class="ds-contact__note">' . esc_html(dst_t('hours')) . '</p>' . $qrh . '</div>';
 });
 
 // [ds_tin_moi so="6" danh_muc="news"] – bài mới nhất cùng ngôn ngữ
@@ -1169,7 +1173,12 @@ add_action('rest_api_init', function () {
                     update_option('dst_' . $k, (int) $r->get_param($k), false);
                 }
             }
-            return ['ok' => true, 'services_page' => (int) get_option('dst_services_page', 0)];
+            foreach (['contact_avatar', 'contact_qr'] as $k) {
+                if ($r->get_param($k) !== null) {
+                    update_option('dst_' . $k, esc_url_raw((string) $r->get_param($k)), false);
+                }
+            }
+            return ['ok' => true, 'services_page' => (int) get_option('dst_services_page', 0), 'contact_avatar' => get_option('dst_contact_avatar', ''), 'contact_qr' => get_option('dst_contact_qr', '')];
         },
     ]);
 });
@@ -1208,6 +1217,17 @@ add_action('wp_head', function () {
 .ds-flight-extra .ds-news h2 { font-size: 22px; margin: 0 0 10px; }
 .ds-flight-extra .ds-news__grid { grid-template-columns: 1fr; }
 @media (max-width: 900px) { .ds-flight-extra { grid-template-columns: 1fr; } }
+.ds-contact { position: relative; }
+.ds-contact.has-qr { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 20px; }
+.ds-contact.has-qr > :not(.ds-contact__qr) { grid-column: 1; }
+.ds-contact__qr { grid-column: 2; grid-row: 1 / span 3; margin: 0; text-align: center; align-self: center; }
+.ds-contact__qr img { display: block; width: 132px; height: 132px; border-radius: 10px; background: #fff; padding: 6px; }
+.ds-contact__qr figcaption { margin-top: 6px; font: 500 11.5px/1.3 var(--sans); color: #c9d6e6; max-width: 132px; }
+.ds-contact__photo { width: 56px !important; height: 56px !important; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,.7); flex: none; margin: 0 !important; }
+.ds-split__side .ds-contact.has-qr { grid-template-columns: 1fr; }
+.ds-split__side .ds-contact__qr { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 14px; display: flex; gap: 10px; align-items: center; text-align: left; }
+.ds-split__side .ds-contact__qr img { width: 96px; height: 96px; }
+@media (max-width: 700px) { .ds-contact.has-qr { grid-template-columns: 1fr; } .ds-contact__qr { display: none; } }
 /* Căn trái, không dàn đều chữ trong khối dịch vụ */
 .ds-split, .ds-split p, .ds-split li, .ds-steps li, .ds-rules li, .ds-rules span, .ds-service .tx, .ds-ticket p, .ds-ticket li { text-align: left !important; hyphens: manual; }
 .ds-split__side > p:empty { display: none; }
