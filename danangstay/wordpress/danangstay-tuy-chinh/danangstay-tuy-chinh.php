@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 2.9.3
+ * Version: 3.0.1
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2175,3 +2175,58 @@ body.archive.category main > .section:not(.ds-cat-more):first-of-type, body.arch
 </style>';
     return str_replace('</head>', $css . '</head>', $html);
 }, 43);
+
+// ===== 22. Trang chủ: dải dịch vụ dưới ảnh bìa, thời tiết cạnh bản đồ, khối Tin mới · Quy định · Liên hệ =====
+add_filter('dst_html', function ($html) {
+    if (!preg_match('#<body class="[^"]*\bhome\b#', $html) || strpos($html, 'ds-home-svc') !== false) {
+        return $html;
+    }
+    $lang = dst_lang();
+    $T = [
+        'vi' => ['Dịch vụ DanangStay', 'Một người địa phương lo trọn chuyến đi', 'Phòng, vé máy bay, vé tham quan, xe và tour — nhắn một lần, báo giá trong ngày.', 'Thời tiết 7 ngày tới', 'Cập nhật', 'Tin mới & quy định cần biết', 'Xem tất cả tin'],
+        'ko' => ['DanangStay 서비스', '현지인이 여행 전체를 챙겨 드립니다', '숙소, 항공권, 입장권, 차량·투어 — 한 번 문의로 당일 견적.', '7일 날씨', '업데이트', '최신 소식 & 꼭 알아야 할 규정', '모든 소식 보기'],
+    ];
+    $t = $T[$lang] ?? ['DanangStay services', 'A local who takes care of the whole trip', 'Rooms, flights, attraction tickets, cars and tours — one message, same-day quote.', '7-day weather', 'Updates', 'Latest news & rules to know', 'All news'];
+    $q = function ($s) {
+        return str_replace(['\\', '$'], ['\\\\', '\\$'], $s);
+    };
+    // 1) dải dịch vụ sau ảnh bìa
+    $svc = '<section class="section ds-home-svc"><div class="wrap"><div class="ds-home-svc__head"><div><span class="kicker">' . esc_html($t[0]) . '</span><h2>' . esc_html($t[1]) . '</h2></div><p>' . esc_html($t[2]) . '</p></div>'
+        . do_shortcode('[ds_dich_vu]') . '</div></section>';
+    $html = preg_replace('#(<section class="hero">.*?</section>)#s', '$1' . $q($svc), $html, 1);
+    // 2) thời tiết dưới phần chữ cạnh bản đồ
+    $html = preg_replace('#(<div class="map-section__text[^"]*">.*?)(</div>\s*<div class="reveal"><figure class="map")#s', '$1<div class="ds-home-w"><b class="ds-side-h">' . $q(esc_html($t[3])) . '</b><div class="ds-weather"></div></div>$2', $html, 1);
+    // 3) khối tin mới + quy định + liên hệ trước trích dẫn
+    $term = get_term_by('slug', 'news-' . $lang, 'category') ?: get_term_by('slug', 'news', 'category');
+    $all = $term ? get_term_link($term) : '';
+    $upd = '<section class="section ds-home-upd"><div class="wrap"><div class="ds-home-svc__head"><div><span class="kicker">' . esc_html($t[4]) . '</span><h2>' . esc_html($t[5]) . '</h2></div>'
+        . ($all && !is_wp_error($all) ? '<a class="link-arrow" href="' . esc_url($all) . '">' . esc_html($t[6]) . ' →</a>' : '') . '</div>'
+        . '<div class="ds-home-upd__grid"><div>' . do_shortcode('[ds_tin_moi so="5"]') . '</div><div>' . do_shortcode('[ds_quy_dinh]') . '</div><div>' . do_shortcode('[ds_lien_he]') . '</div></div></div></section>';
+    $html = preg_replace('#(<section class="section quote">)#', $q($upd) . '$1', $html, 1);
+    $css = '<style id="dst-home-css">
+.ds-home-svc { padding: 64px 0 !important; background: #fff; }
+.ds-home-svc__head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 24px; }
+.ds-home-svc__head h2 { margin: 6px 0 0; }
+.ds-home-svc__head p { max-width: 440px; margin: 0; color: var(--ink-2); font-size: 16.5px; line-height: 1.6; }
+.ds-home-svc .ds-services { margin: 0; }
+.ds-home-w { margin-top: 28px; }
+.ds-home-w .ds-weather { margin: 0; padding: 14px; }
+.ds-home-w .ds-weather__head { display: none; }
+.ds-home-w .ds-weather__days { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+.ds-home-w .ds-weather__day:nth-child(n+5) { display: none; }
+.ds-side-h { display: block; font: 700 12px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--bronze); margin-bottom: 10px; }
+.ds-home-upd { background: var(--ivory); padding: 72px 0 !important; }
+.ds-home-upd__grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, .9fr); gap: 24px; align-items: start; }
+.ds-home-upd .ds-news { margin: 0; } .ds-home-upd .ds-news > h2 { display: none; }
+.ds-home-upd .ds-news__grid { grid-template-columns: 1fr; gap: 10px; }
+.ds-home-upd .ds-news__item { padding: 14px 16px; }
+.ds-home-upd .ds-news__ex { display: none; }
+.ds-home-upd .ds-rules, .ds-home-upd .ds-contact { margin: 0; }
+.ds-home-upd .ds-rules ul { max-height: 420px; overflow: auto; }
+body.home .section.quote { padding: 64px 0 !important; }
+body.home .map-section { align-items: center; }
+@media (max-width: 1100px) { .ds-home-upd__grid { grid-template-columns: 1fr 1fr; } .ds-home-upd__grid > :first-child { grid-column: 1 / -1; } }
+@media (max-width: 700px) { .ds-home-svc__head { flex-direction: column; align-items: start; } .ds-home-upd__grid, .ds-home-upd .ds-news__grid { grid-template-columns: 1fr; } }
+</style>';
+    return str_replace('</head>', $css . '</head>', $html);
+}, 44);
