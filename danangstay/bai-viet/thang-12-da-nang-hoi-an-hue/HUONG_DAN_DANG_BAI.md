@@ -3,7 +3,7 @@
 ## Thông tin SEO
 | | Tiếng Việt (`vi.html`) | 한국어 (`ko.html`) |
 |---|---|---|
-| **Tiêu đề** | Đà Nẵng, Hội An, Huế tháng 12/2026: thời tiết, lễ hội và lịch trình gợi ý | 12월 다낭·호이안·후에 여행: 날씨, 우기, 축제 일정과 3박 4일 코스 (2026) |
+| **Tiêu đề** | Đà Nẵng, Hội An, Huế tháng 12/2026: thời tiết, lễ hội và top điểm đến nên đi | 12월 다낭·호이안·후에 여행 가이드 (2026): 날씨, 축제, 추천 TOP 5와 코스 |
 | **Đường dẫn (slug)** | `da-nang-hoi-an-hue-thang-12` | `danang-hoian-hue-december` |
 | **Mô tả (excerpt)** | Đi Đà Nẵng, Hội An, Huế tháng 12/2026: thời tiết thực tế, có tắm biển được không, lịch lễ hội Giáng sinh – giao thừa, đêm rằm Hội An 22/12 và lịch trình 4 ngày. | 12월 다낭·호이안·후에 날씨와 우기, 수영 가능 여부, 크리스마스·새해 카운트다운 일정, 호이안 보름밤(12/22), 3박 4일 추천 코스. |
 | **Từ khóa chính** | Đà Nẵng tháng 12 | 12월 다낭 날씨 |
@@ -23,3 +23,6 @@
 - Ngày đêm rằm 22/12/2026 = 14/11 âm lịch (tính theo lịch âm; đối chiếu lịch âm Việt Nam).
 - Nhiệt độ là mức thường gặp, ghi "khoảng".
 - Thông tin miễn thị thực 45 ngày cho khách Hàn (bản tiếng Hàn): kiểm tra lại quy định mới nhất.
+
+## Trạng thái
+Đã đăng dạng **nháp** qua API: bài tiếng Việt #188, bài tiếng Hàn #189 (bản viết lại, có các mục Top 5).
