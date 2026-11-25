@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.7.0
+ * * Version: 3.7.1
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2465,3 +2465,11 @@ add_action('wp_head', function () {
 @media (max-width:600px){.ds-fbfollow{flex-wrap:wrap}.ds-fbfollow .ds-btn{margin-left:0}}
 </style>';
 }, 109);
+
+// ===== 29. Số điện thoại chung: dùng số của Vân (0909 669 325) thay số cũ của theme =====
+add_filter('dst_html', function ($html) {
+    return str_replace(
+        ['href="tel:0904567009">0904 567 009', 'href="tel:0904567009">0904567009', 'href="tel:0904567009"', '"telephone":"0904567009"', '0904 567 009', '0904567009'],
+        ['href="tel:0909669325">0909 669 325', 'href="tel:0909669325">0909 669 325', 'href="tel:0909669325"', '"telephone":"+84909669325"', '0909 669 325', '0909669325'],
+        $html);
+}, 62);
