@@ -28,6 +28,7 @@
 - **Giá vé Bà Nà:** các nguồn đưa ra không khớp nhau. Từ 2026, vé cáp treo dùng được tối đa 3 ngày liên tiếp.
 - **DIFF 2027:** chưa công bố lịch chính thức. Dự đoán từ cuối tháng 5 đến giữa tháng 7, theo lịch 2026 (30/5–11/7).
 - **Tết Đinh Mùi:** rơi vào 6/2/2027.
+- **Địa giới mới:** từ 1/7/2025, Hội An và tỉnh Quảng Nam cũ thuộc thành phố Đà Nẵng; tên phường/xã trên địa chỉ có thể đã đổi, nhiều ứng dụng bản đồ chưa cập nhật.
 
 ## 2. Câu hỏi dài (dùng cho FAQ / bài viết)
 1. Is December a good time to visit Da Nang? / Đà Nẵng tháng 12 có tắm biển được không?
