@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 3.4.0
+ * Version: 3.4.2
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -249,12 +249,7 @@ function dst_viet_hoa($html)
             return '>' . strtr($t, $phrases) . '<';
         }, $part);
     }
-    $html = implode('', $parts);
-    // thuộc tính placeholder / aria-label / title
-    return preg_replace_callback('#\b(placeholder|aria-label|title)="([^"]{2,})"#u', function ($m) use ($map) {
-        $txt = html_entity_decode($m[2], ENT_QUOTES | ENT_HTML5, 'UTF-8');
-        return isset($map[$txt]) ? $m[1] . '="' . esc_attr($map[$txt]) . '"' : $m[0];
-    }, $html);
+    return implode('', $parts);
 }
 
 /* ------------------------------------------------------------------ */
@@ -2359,5 +2354,10 @@ add_filter('dst_html', function ($html) {
             return '>' . $lead . esc_html($map[$txt]) . $tail . '<';
         }, $part);
     }
-    return implode('', $parts);
-}, 5);
+    $html = implode('', $parts);
+    // thuộc tính placeholder / aria-label / title
+    return preg_replace_callback('#\b(placeholder|aria-label|title)="([^"]{2,})"#u', function ($m) use ($map) {
+        $txt = html_entity_decode($m[2], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        return isset($map[$txt]) ? $m[1] . '="' . esc_attr($map[$txt]) . '"' : $m[0];
+    }, $html);
+}, 999);
