@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -333,4 +333,104 @@ function dst_api_page()
         echo '</form>';
     }
     echo '</div>';
+}
+
+/* ------------------------------------------------------------------ */
+/* 5. API cho trợ lý: liên kết bản dịch Polylang, tự cập nhật plugin    */
+/* ------------------------------------------------------------------ */
+
+add_action('rest_api_init', function () {
+    // Gán ngôn ngữ + liên kết các bản dịch: {"translations":{"vi":188,"ko":189}}
+    register_rest_route('danangstay/v1', '/translations', [
+        'methods' => 'POST',
+        'permission_callback' => function () {
+            return current_user_can('edit_others_posts');
+        },
+        'callback' => function (WP_REST_Request $r) {
+            if (!function_exists('pll_save_post_translations') || !function_exists('pll_set_post_language')) {
+                return new WP_Error('no_polylang', 'Polylang chưa bật', ['status' => 400]);
+            }
+            $map = [];
+            foreach ((array) $r->get_param('translations') as $lang => $pid) {
+                $lang = sanitize_key($lang);
+                $pid = (int) $pid;
+                if (!$pid || !get_post($pid) || !current_user_can('edit_post', $pid)) {
+                    return new WP_Error('bad_post', 'Không sửa được bài ' . $pid, ['status' => 400]);
+                }
+                $map[$lang] = $pid;
+            }
+            if (count($map) < 1) {
+                return new WP_Error('empty', 'Thiếu translations', ['status' => 400]);
+            }
+            foreach ($map as $lang => $pid) {
+                pll_set_post_language($pid, $lang);
+            }
+            if (count($map) > 1) {
+                pll_save_post_translations($map);
+            }
+            return ['ok' => true, 'translations' => pll_get_post_translations(reset($map))];
+        },
+    ]);
+
+    // Tự cập nhật CHÍNH plugin này từ tệp zip gửi lên (field "package")
+    register_rest_route('danangstay/v1', '/self-update', [
+        'methods' => 'POST',
+        'permission_callback' => function () {
+            return current_user_can('install_plugins') && current_user_can('update_plugins');
+        },
+        'callback' => 'dst_self_update',
+    ]);
+});
+
+function dst_self_update(WP_REST_Request $r)
+{
+    $files = $r->get_file_params();
+    if (empty($files['package']['tmp_name']) || !is_uploaded_file($files['package']['tmp_name'])) {
+        return new WP_Error('no_file', 'Thiếu tệp package', ['status' => 400]);
+    }
+    if (!class_exists('ZipArchive')) {
+        return new WP_Error('no_zip', 'Máy chủ thiếu ZipArchive', ['status' => 500]);
+    }
+    // Chỉ chấp nhận gói của chính plugin này
+    $zip = new ZipArchive();
+    if ($zip->open($files['package']['tmp_name']) !== true) {
+        return new WP_Error('bad_zip', 'Tệp zip lỗi', ['status' => 400]);
+    }
+    $ok = $zip->locateName('danangstay-tuy-chinh/danangstay-tuy-chinh.php') !== false;
+    for ($i = 0; $ok && $i < $zip->numFiles; $i++) {
+        $name = $zip->getNameIndex($i);
+        if (strpos($name, 'danangstay-tuy-chinh/') !== 0 || strpos($name, '..') !== false) {
+            $ok = false;
+        }
+    }
+    $zip->close();
+    if (!$ok) {
+        return new WP_Error('wrong_package', 'Chỉ nhận gói danangstay-tuy-chinh', ['status' => 400]);
+    }
+
+    require_once ABSPATH . 'wp-admin/includes/file.php';
+    require_once ABSPATH . 'wp-admin/includes/plugin.php';
+    require_once ABSPATH . 'wp-admin/includes/misc.php';
+    require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+    $tmp = wp_tempnam('danangstay-tuy-chinh.zip');
+    if (!@copy($files['package']['tmp_name'], $tmp)) {
+        return new WP_Error('copy_failed', 'Không chép được tệp tạm', ['status' => 500]);
+    }
+    $skin = new WP_Ajax_Upgrader_Skin();
+    $upgrader = new Plugin_Upgrader($skin);
+    $result = $upgrader->install($tmp, ['overwrite_package' => true]);
+    @unlink($tmp);
+    if (is_wp_error($result) || !$result) {
+        $err = is_wp_error($result) ? $result : $skin->get_errors();
+        return new WP_Error('install_failed', is_wp_error($err) ? $err->get_error_message() : 'Cài thất bại', ['status' => 500]);
+    }
+    $file = 'danangstay-tuy-chinh/danangstay-tuy-chinh.php';
+    if (!is_plugin_active($file)) {
+        activate_plugin($file);
+    }
+    $data = get_plugin_data(WP_PLUGIN_DIR . '/' . $file, false, false);
+    if (function_exists('opcache_reset')) {
+        @opcache_reset();
+    }
+    return ['ok' => true, 'version' => $data['Version']];
 }
