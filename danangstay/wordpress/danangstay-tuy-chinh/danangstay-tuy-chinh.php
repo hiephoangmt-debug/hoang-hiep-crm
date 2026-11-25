@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 3.5.1
+ * * Version: 3.6.1
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2397,3 +2397,24 @@ add_filter('dst_html', function ($html) {
     }
     return $html;
 }, 55);
+
+// ===== 27. Logo mới (chữ D đầu rồng) + favicon =====
+add_filter('dst_html', function ($html) {
+    $a = plugins_url('assets/', __FILE__);
+    $img = '<img class="ds-logo" src="' . $a . 'logo-360.webp" srcset="' . $a . 'logo-360.webp 360w, ' . $a . 'logo-720.webp 720w" sizes="(max-width:600px) 150px, 200px" width="360" height="168" alt="DanangStay – Đà Nẵng · Hội An · Huế">';
+    $html = preg_replace('#(<a class="brand"[^>]*>)\s*<svg viewBox="0 0 40 40".*?</svg>\s*<span class="brand__word"[^>]*>.*?</span>#s', '$1' . $img, $html);
+    $icons = '<link rel="icon" href="' . $a . 'icon-32.png" sizes="32x32" type="image/png">'
+        . '<link rel="icon" href="' . $a . 'icon-192.png" sizes="192x192" type="image/png">'
+        . '<link rel="apple-touch-icon" href="' . $a . 'icon-180.png">';
+    $html = preg_replace('#<link rel="icon"[^>]*>#', '', $html);
+    $html = preg_replace('#<link rel="apple-touch-icon"[^>]*>#', '', $html);
+    $html = str_replace('</head>', $icons . "\n</head>", $html);
+    return $html;
+}, 60);
+add_action('wp_head', function () {
+    echo '<style id="dst-logo-css">
+.brand img.ds-logo{display:block;height:66px;width:auto;max-width:none}
+footer .brand img.ds-logo,.site-footer .brand img.ds-logo{height:84px}
+@media (max-width:600px){.brand img.ds-logo{height:44px}}
+</style>';
+}, 108);
