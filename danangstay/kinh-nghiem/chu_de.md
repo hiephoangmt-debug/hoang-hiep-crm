@@ -6,10 +6,28 @@ Mỗi sáng, lịch tự động lấy dòng `[ ]` đầu tiên, viết bản VI
 
 Cột chuyên mục dùng: plan, places, food, culture.
 
+**Bài dạng "Top N"** (điểm check-in, quán ăn): mỗi mục là một h3 có số thứ tự và tên. Bên dưới mỗi mục ghi:
+- 2–3 câu vì sao nên đến;
+- địa chỉ hoặc khu vực, giờ mở cửa và giá tham khảo;
+- giờ đẹp nhất để chụp, hoặc món nên gọi;
+- một mẹo nhỏ.
+
+Đầu bài có bảng tóm tắt (tên, khu vực, phù hợp với ai). Chỉ nêu quán và điểm thật, đang hoạt động, có nhiều nguồn xác nhận. Không bịa địa chỉ; nếu không chắc thì ghi khu vực, không ghi số nhà.
+
 | Trạng thái | Từ khóa chính (VI) | Tiêu đề gợi ý | Chuyên mục | Từ khóa KO |
 |---|---|---|---|---|
+| [ ] | điểm check in Đà Nẵng | Top 20 điểm check-in đẹp nhất Đà Nẵng 2026 (kèm giờ chụp đẹp) | places | 다낭 사진 명소 |
+| [ ] | quán ăn ngon Đà Nẵng | Top 25 quán ăn ngon ở Đà Nẵng người địa phương hay ăn | food | 다낭 현지 맛집 |
 | [ ] | giao thừa Đà Nẵng 2027 | Đón giao thừa 2027 ở Đà Nẵng: countdown, pháo hoa, nơi xem đẹp | plan | 다낭 새해 카운트다운 |
+| [ ] | điểm check in Hội An | Top 15 điểm check-in đẹp ở Hội An: phố cổ, làng quê, biển | places | 호이안 사진 명소 |
+| [ ] | quán hải sản ngon Đà Nẵng | Top 12 quán hải sản ngon, giá rõ ràng ở Đà Nẵng | food | 다낭 해산물 맛집 |
 | [ ] | Tết Đà Nẵng 2027 | Tết Đinh Mùi 2027 ở Đà Nẵng: hàng quán mở cửa, giá phòng, chơi gì | plan | 다낭 설 연휴 여행 |
+| [ ] | quán cà phê view biển Đà Nẵng | Top 15 quán cà phê view biển, view sông đẹp nhất Đà Nẵng | food | 다낭 오션뷰 카페 |
+| [ ] | quán ăn ngon Hội An | Top 20 món và quán ăn ngon ở Hội An (cao lầu, cơm gà, bánh mì) | food | 호이안 맛집 |
+| [ ] | địa điểm du lịch Đà Nẵng | Top 30 địa điểm du lịch Đà Nẵng nên đi, xếp theo khu vực | places | 다낭 가볼만한 곳 |
+| [ ] | quán ăn ngon Huế | Top 15 quán ăn ngon ở Huế: bún bò, cơm hến, bánh bèo | food | 후에 맛집 |
+| [ ] | quán ăn vặt Đà Nẵng | Top quán ăn vặt, ăn đêm ở Đà Nẵng dưới 50.000 đồng | food | 다낭 야식 |
+| [ ] | điểm check in Huế | Top 12 điểm check-in đẹp ở Huế | places | 후에 사진 명소 |
 | [ ] | sân bay Đà Nẵng về Mỹ Khê | Từ sân bay Đà Nẵng về Mỹ Khê, Sơn Trà: Grab, taxi, xe đón và giá thật | plan | 다낭 공항 그랩 |
 | [ ] | Mân Thái | Cẩm nang Mân Thái – Sơn Trà: bãi biển yên tĩnh, hải sản, nơi ở | places | 다낭 만타이 |
 | [ ] | lịch trình Đà Nẵng 3 ngày 2 đêm | Lịch trình Đà Nẵng 3 ngày 2 đêm chi tiết cho lần đầu đến | plan | 다낭 3박4일 일정 |

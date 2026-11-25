@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * Version: 2.5.0
+ * Version: 2.6.1
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -1795,35 +1795,14 @@ add_filter('dst_html', function ($html) {
     return preg_replace('#<div class="press">.*?<p class="press__note">.*?</p>\s*</div>#s', $box, $html, 1);
 }, 30);
 
-// ===== 16. Trang bài viết: khung rộng 2 cột + cột bên (liên hệ, mục lục, dịch vụ, tin mới) =====
-add_filter('dst_html', function ($html) {
-    if (!preg_match('#<body class="[^"]*\bsingle-post\b#', $html) || strpos($html, '<div class="section article-body">') === false || strpos($html, 'ds-art__side') !== false) {
-        return $html;
+function dst_side_css()
+{
+    static $done = false;
+    if ($done) {
+        return '';
     }
-    $lang = dst_lang();
-    $home = trailingslashit(dst_lang_home());
-    $T = [
-        'vi' => ['Trong bài này', 'Dịch vụ DanangStay', 'Chỗ ở', 'Khách sạn, căn hộ, villa', 'Vé máy bay', 'Giá tốt, tư vấn hành lý', 'Vé tham quan', 'Bà Nà, Hội An, Huế…', 'Xe & tour', 'Đưa đón sân bay, tour riêng'],
-        'ko' => ['목차', 'DanangStay 서비스', '숙소', '호텔·아파트·빌라', '항공권', '좋은 가격, 수하물 안내', '입장권', '바나힐·호이안·후에…', '차량·투어', '공항 픽업, 프라이빗 투어'],
-    ];
-    $t = $T[$lang] ?? ['In this article', 'DanangStay services', 'Stays', 'Hotels, apartments, villas', 'Flights', 'Good fares, baggage advice', 'Attraction tickets', 'Ba Na, Hoi An, Hue…', 'Cars & tours', 'Airport pickup, private tours'];
-    $svc = dst_page_url('dst_services_page') ?: $home;
-    $items = [
-        ['🏨', $t[2], $t[3], $home . 'stays/'],
-        ['✈️', $t[4], $t[5], $home . 'flights/'],
-        ['🎟️', $t[6], $t[7], dst_tickets_url() ?: $svc],
-        ['🚐', $t[8], $t[9], $svc],
-    ];
-    $s = '<aside class="ds-art__side"><div class="ds-art__sticky">';
-    $s .= '<nav class="ds-toc" hidden><b>' . esc_html($t[0]) . '</b><ol></ol></nav>';
-    $s .= '<div class="ds-side-svc"><b>' . esc_html($t[1]) . '</b>';
-    foreach ($items as $i) {
-        $s .= '<a href="' . esc_url($i[3]) . '"><span>' . $i[0] . '</span><div><strong>' . esc_html($i[1]) . '</strong><small>' . esc_html($i[2]) . '</small></div></a>';
-    }
-    $s .= '</div>' . do_shortcode('[ds_tin_moi so="4" kieu="gon"]') . '<div class="ds-art__stick">' . do_shortcode('[ds_lien_he]') . '</div></div></aside>';
-    $html = str_replace('<div class="section article-body">', '<div class="section article-body ds-art"><div class="ds-art__grid">', $html);
-    $html = preg_replace('#</div>(\s*</div>\s*</article>)#', '</div>' . str_replace(['\\', '$'], ['\\\\', '\\$'], $s) . '</div>$1', $html, 1);
-    $css = '<style id="dst-art-css">
+    $done = true;
+    return '<style id="dst-art-css">
 .ds-art__grid { width: min(1240px, calc(100% - 2 * var(--gutter, 24px))); margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; align-items: stretch; }
 .ds-art .narrow { width: auto !important; max-width: 780px; margin: 0 !important; }
 .ds-art .narrow .prose, .ds-art .narrow > * { width: auto !important; max-width: none; }
@@ -1850,7 +1829,107 @@ add_filter('dst_html', function ($html) {
 .prose table td { padding: 11px 14px !important; }
 @media (max-width: 1080px) { .ds-art__grid { grid-template-columns: 1fr; gap: 32px; } .ds-art .narrow { max-width: 780px; margin: 0 auto !important; } .ds-art__stick { position: static; } .ds-toc { display: none; } .ds-art__side { max-width: 780px; margin: 0 auto; width: 100%; } }
 </style>';
+}
+
+function dst_side_html($toc = true, $top = '')
+{
+    $lang = dst_lang();
+    $home = trailingslashit(dst_lang_home());
+    $T = [
+        'vi' => ['Trong bài này', 'Dịch vụ DanangStay', 'Chỗ ở', 'Khách sạn, căn hộ, villa', 'Vé máy bay', 'Giá tốt, tư vấn hành lý', 'Vé tham quan', 'Bà Nà, Hội An, Huế…', 'Xe & tour', 'Đưa đón sân bay, tour riêng'],
+        'ko' => ['목차', 'DanangStay 서비스', '숙소', '호텔·아파트·빌라', '항공권', '좋은 가격, 수하물 안내', '입장권', '바나힐·호이안·후에…', '차량·투어', '공항 픽업, 프라이빗 투어'],
+    ];
+    $t = $T[$lang] ?? ['In this article', 'DanangStay services', 'Stays', 'Hotels, apartments, villas', 'Flights', 'Good fares, baggage advice', 'Attraction tickets', 'Ba Na, Hoi An, Hue…', 'Cars & tours', 'Airport pickup, private tours'];
+    $svc = dst_page_url('dst_services_page') ?: $home;
+    $items = [
+        ['🏨', $t[2], $t[3], $home . 'stays/'],
+        ['✈️', $t[4], $t[5], $home . 'flights/'],
+        ['🎟️', $t[6], $t[7], dst_tickets_url() ?: $svc],
+        ['🚐', $t[8], $t[9], $svc],
+    ];
+    $s = '<aside class="ds-art__side"><div class="ds-art__sticky">' . $top;
+    if ($toc) {
+        $s .= '<nav class="ds-toc" hidden><b>' . esc_html($t[0]) . '</b><ol></ol></nav>';
+    }
+    $s .= '<div class="ds-side-svc"><b>' . esc_html($t[1]) . '</b>';
+    foreach ($items as $i) {
+        $s .= '<a href="' . esc_url($i[3]) . '"><span>' . $i[0] . '</span><div><strong>' . esc_html($i[1]) . '</strong><small>' . esc_html($i[2]) . '</small></div></a>';
+    }
+    $s .= '</div>' . do_shortcode('[ds_tin_moi so="4" kieu="gon"]') . '<div class="ds-art__stick">' . do_shortcode('[ds_lien_he]') . '</div></div></aside>';
+    return $s;
+}
+
+// ===== 16. Trang bài viết: khung rộng 2 cột + cột bên (liên hệ, mục lục, dịch vụ, tin mới) =====
+add_filter('dst_html', function ($html) {
+    if (!preg_match('#<body class="[^"]*\bsingle-post\b#', $html) || strpos($html, '<div class="section article-body">') === false || strpos($html, 'ds-art__side') !== false) {
+        return $html;
+    }
+    $s = dst_side_html(true);
+    $html = str_replace('<div class="section article-body">', '<div class="section article-body ds-art"><div class="ds-art__grid">', $html);
+    $html = preg_replace('#</div>(\s*</div>\s*</article>)#', '</div>' . str_replace(['\\', '$'], ['\\\\', '\\$'], $s) . '</div>$1', $html, 1);
+    $css = dst_side_css();
     $js = '<script id="dst-art-js">(function(){var p=document.querySelector(".ds-art .prose"),n=document.querySelector(".ds-toc");if(!p||!n)return;var hs=p.querySelectorAll("h2");if(hs.length<3)return;var ol=n.querySelector("ol"),as=[];hs.forEach(function(h,i){if(!h.id)h.id="muc-"+(i+1);var a=document.createElement("a");a.href="#"+h.id;a.textContent=h.textContent;var li=document.createElement("li");li.appendChild(a);ol.appendChild(li);as.push([h,a]);});n.hidden=false;addEventListener("scroll",function(){var c=null;as.forEach(function(x){if(x[0].getBoundingClientRect().top<140)c=x[1];});as.forEach(function(x){x[1].classList.toggle("on",x[1]===c);});},{passive:true});})();</script>';
     $html = str_replace('</head>', $css . '</head>', $html);
     return str_replace('</body>', $js . '</body>', $html);
 }, 40);
+
+
+// ===== 17. Trang Sự kiện: 2 cột, cột bên (thời tiết, mục theo tháng, liên hệ, tin), nút hỏi phòng/vé mỗi sự kiện =====
+add_filter('dst_html', function ($html) {
+    if (strpos($html, '<nav class="stay-tabs ev-tabs" id="evTabs">') === false || strpos($html, 'ds-ev__grid') !== false) {
+        return $html;
+    }
+    $lang = dst_lang();
+    $T = [
+        'vi' => ['Xem nhanh theo tháng', 'sự kiện', 'Hỏi phòng gần đây', 'Hỏi vé & xe', 'Thời tiết 7 ngày tới'],
+        'ko' => ['월별 보기', '개 행사', '근처 숙소 문의', '티켓·차량 문의', '7일 날씨'],
+    ];
+    $t = $T[$lang] ?? ['Jump to month', 'events', 'Ask for a room nearby', 'Tickets & transfers', '7-day weather'];
+    // mục lục theo tháng
+    $idx = '';
+    if (preg_match_all('#<div class="ev-month">\s*<h3 class="ev-month__h">([^<]+)</h3>(.*?)(?=<div class="ev-month">|<aside class="stay-cta ev-cta">|<h2 class="ev-h)#s', $html, $m, PREG_SET_ORDER)) {
+        $n = 0;
+        foreach ($m as $mm) {
+            $n++;
+            $html = preg_replace('#<h3 class="ev-month__h">' . preg_quote($mm[1], '#') . '</h3>#', '<h3 class="ev-month__h" id="thang-' . $n . '">' . $mm[1] . '</h3>', $html, 1);
+            $idx .= '<a href="#thang-' . $n . '"><b>' . esc_html($mm[1]) . '</b><span>' . substr_count($mm[2], '<article class="ev') . ' ' . esc_html($t[1]) . '</span></a>';
+        }
+    }
+    $top = '<div class="ds-ev-side-w"><b class="ds-side-h">' . esc_html($t[4]) . '</b><div class="ds-weather"></div></div>';
+    if ($idx) {
+        $top = '<nav class="ds-ev-idx"><b class="ds-side-h">' . esc_html($t[0]) . '</b>' . $idx . '</nav>' . $top;
+    }
+    $side = dst_side_html(false, $top);
+    // nút hành động cho từng sự kiện sắp diễn ra
+    $stays = trailingslashit(dst_lang_home()) . 'stays/';
+    $btn = '<p class="ds-ev-act"><a href="' . esc_url($stays) . '">🏨 ' . esc_html($t[2]) . '</a><a href="https://zalo.me/0909669325" target="_blank" rel="noopener">🎟️ ' . esc_html($t[3]) . '</a></p>';
+    $cut = strpos($html, '<h2 class="ev-h ev-h--past"');
+    $head = $cut === false ? $html : substr($html, 0, $cut);
+    $tail = $cut === false ? '' : substr($html, $cut);
+    $head = preg_replace('#(<article class="ev"[^>]*>.*?)(</div>\s*</article>)#s', '$1' . $btn . '$2', $head);
+    $html = $head . $tail;
+    // bọc 2 cột
+    $html = preg_replace('#<section class="section">\s*<div class="wrap">\s*(<nav class="stay-tabs ev-tabs" id="evTabs">)#', '<section class="section ds-ev"><div class="wrap ds-ev__grid"><div class="ds-ev__main">$1', $html, 1);
+    $html = preg_replace('#(</div>\s*</section>\s*<section class="concierge)#', '</div>' . str_replace(['\\', '$'], ['\\\\', '\\$'], $side) . '$1', $html, 1);
+    $css = '<style id="dst-ev-css">
+.ds-ev__grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 48px; align-items: stretch; }
+.ds-ev__main { min-width: 0; }
+.ds-ev .ds-art__side .ds-contact { margin: 0; }
+.ds-side-h { display: block; font: 700 12px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--bronze); margin-bottom: 10px; }
+.ds-ev-idx { border: 1px solid var(--line); border-radius: 14px; padding: 16px; background: #fff; font-family: var(--sans); }
+.ds-ev-idx a { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; margin-top: 6px; border-radius: 10px; background: var(--ivory); text-decoration: none; color: var(--ink); }
+.ds-ev-idx a:hover { background: var(--sea); color: #fff; }
+.ds-ev-idx a b { font-weight: 600; font-size: 15px; } .ds-ev-idx a span { font-size: 12.5px; opacity: .75; }
+.ds-ev-side-w .ds-weather { margin: 0; padding: 14px; }
+.ds-ev-side-w .ds-weather__head { display: none; }
+.ds-ev-side-w .ds-weather__days { grid-template-columns: 1fr !important; grid-auto-flow: row !important; grid-auto-columns: auto !important; gap: 6px; overflow: visible; }
+.ds-ev-side-w .ds-weather__day { display: grid; grid-template-columns: 1.3fr auto 1fr 1fr; align-items: center; gap: 6px; text-align: left; padding: 8px 10px; }
+.ds-ev-side-w .ds-weather__day * { margin: 0 !important; }
+.ds-ev-act { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0 !important; }
+.ds-ev-act a { font: 600 13px/1 var(--sans); padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--ink) !important; text-decoration: none; }
+.ds-ev-act a:hover { border-color: var(--bronze); color: var(--bronze) !important; }
+.ds-ev-month__h, .ev-month__h { scroll-margin-top: 110px; }
+@media (max-width: 1080px) { .ds-ev__grid { grid-template-columns: 1fr; } .ds-ev .ds-art__stick { position: static; } }
+</style>';
+    return str_replace('</head>', dst_side_css() . $css . '</head>', $html);
+}, 41);
