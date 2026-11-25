@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="DanangStay – Cầu Rồng">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B2447"/><stop offset="1" stop-color="#19376D"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#F7C548"/><stop offset="1" stop-color="#E8590C"/>
+    </linearGradient>
+    <clipPath id="c"><circle cx="120" cy="120" r="110"/></clipPath>
+  </defs>
+  <circle cx="120" cy="120" r="116" fill="#fff"/>
+  <g clip-path="url(#c)">
+    <rect width="240" height="240" fill="url(#sky)"/>
+    <!-- mặt trời mọc trên biển Mỹ Khê -->
+    <circle cx="120" cy="132" r="34" fill="#E8590C" opacity=".95"/>
+    <!-- núi Sơn Trà -->
+    <path d="M10 150 C40 118 62 112 84 124 C100 132 112 128 124 120 C146 104 176 108 230 140 L230 240 L10 240Z" fill="#1F6E5A"/>
+    <!-- thân rồng uốn lượn thành cầu -->
+    <path d="M22 168 C42 132 62 132 78 160 C92 186 108 186 122 160 C136 134 154 134 168 160 C180 182 196 182 214 150"
+          fill="none" stroke="url(#gold)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- đầu rồng -->
+    <path d="M214 150 C220 140 224 132 222 124 C230 128 234 136 232 144 C238 142 240 146 238 150 C232 152 226 156 220 158Z" fill="#F7C548"/>
+    <circle cx="225" cy="139" r="2" fill="#0B2447"/>
+    <!-- mặt cầu và sông Hàn -->
+    <rect x="10" y="172" width="220" height="6" rx="3" fill="#F7C548"/>
+    <path d="M10 196 C50 188 80 204 120 196 C160 188 190 204 230 196 L230 240 L10 240Z" fill="#2B83B6"/>
+    <path d="M30 214 C60 208 84 220 118 214 C150 208 176 220 210 214" fill="none" stroke="#BFE3F5" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <circle cx="120" cy="120" r="110" fill="none" stroke="#0B2447" stroke-width="8"/>
+</svg>

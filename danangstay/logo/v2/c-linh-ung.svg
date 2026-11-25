@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="DanangStay – Sơn Trà">
+  <defs><clipPath id="k"><circle cx="120" cy="120" r="104"/></clipPath></defs>
+  <circle cx="120" cy="120" r="112" fill="#FFF6E6"/>
+  <g clip-path="url(#k)">
+    <rect width="240" height="240" fill="#FFF1D6"/>
+    <circle cx="120" cy="96" r="58" fill="#F7C548" opacity=".55"/>
+    <!-- tượng Quan Âm Linh Ứng (cách điệu) -->
+    <path d="M120 40 C128 40 132 48 130 56 C138 60 140 70 136 80 C146 96 148 118 144 140 L96 140 C92 118 94 96 104 80 C100 70 102 60 110 56 C108 48 112 40 120 40Z" fill="#F4F1EA" stroke="#0B2447" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M112 86 C116 96 124 96 128 86" fill="none" stroke="#0B2447" stroke-width="3" stroke-linecap="round"/>
+    <!-- bán đảo Sơn Trà -->
+    <path d="M0 150 C30 126 58 120 86 134 C104 142 114 140 120 138 C130 134 150 118 180 122 C204 126 222 138 240 150 L240 240 L0 240Z" fill="#1F6E5A"/>
+    <!-- biển, sóng -->
+    <path d="M0 176 C40 166 80 186 120 176 C160 166 200 186 240 176 L240 240 L0 240Z" fill="#19376D"/>
+    <path d="M18 196 C50 188 78 204 112 196 C146 188 176 204 222 194" fill="none" stroke="#F7C548" stroke-width="6" stroke-linecap="round"/>
+    <path d="M38 216 C66 210 90 222 120 216 C150 210 174 222 202 216" fill="none" stroke="#BFE3F5" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <circle cx="120" cy="120" r="104" fill="none" stroke="#E8590C" stroke-width="7"/>
+</svg>

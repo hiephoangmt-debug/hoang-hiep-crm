@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="DanangStay – Cầu Vàng">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F7C548"/><stop offset="1" stop-color="#D98E04"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="224" height="224" rx="56" fill="#0B2447"/>
+  <!-- mặt trời / mây -->
+  <circle cx="168" cy="70" r="22" fill="#E8590C"/>
+  <path d="M40 92 C52 80 70 82 76 92 C86 86 100 90 100 102 L40 102 C32 102 32 92 40 92Z" fill="#ffffff" opacity=".18"/>
+  <!-- cầu vàng cong -->
+  <path d="M30 118 C80 92 160 92 210 118" fill="none" stroke="url(#g)" stroke-width="12" stroke-linecap="round"/>
+  <!-- hai bàn tay đá nâng cầu -->
+  <g fill="#E9E2D3" stroke="#0B2447" stroke-width="3" stroke-linejoin="round">
+    <path d="M58 126 C56 116 60 108 66 108 L66 98 C66 92 74 92 74 98 L74 104 C74 96 82 96 82 104 L82 106 C82 100 90 100 90 108 L90 132 C90 150 82 166 70 176 L54 176 C56 160 50 146 46 136 C42 126 52 120 58 126Z"/>
+    <path d="M182 126 C184 116 180 108 174 108 L174 98 C174 92 166 92 166 98 L166 104 C166 96 158 96 158 104 L158 106 C158 100 150 100 150 108 L150 132 C150 150 158 166 170 176 L186 176 C184 160 190 146 194 136 C198 126 188 120 182 126Z"/>
+  </g>
+  <!-- biển -->
+  <path d="M30 192 C60 184 86 198 120 192 C154 186 180 198 210 192" fill="none" stroke="#2B83B6" stroke-width="7" stroke-linecap="round"/>
+  <path d="M48 208 C74 202 96 212 120 208 C146 204 166 212 192 208" fill="none" stroke="#BFE3F5" stroke-width="5" stroke-linecap="round"/>
+</svg>
