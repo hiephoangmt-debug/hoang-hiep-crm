@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.13.1
+ * * Version: 3.14.1
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2606,7 +2606,7 @@ add_filter('dst_html', function ($html) {
     $img = function ($n, $cls, $alt = '') use ($a) {
         return '<img class="' . $cls . '" src="' . $a . 'logo-' . $n . '-360.webp?v=2" srcset="' . $a . 'logo-' . $n . '-360.webp?v=2 360w, ' . $a . 'logo-' . $n . '-720.webp?v=2 720w" sizes="260px" width="360" height="89" alt="' . $alt . '"' . ($alt ? '' : ' aria-hidden="true"') . '>';
     };
-    $new = $img('bom', 'ds-l-bom') . $img('dau', 'ds-logo ds-l-dau', 'DanangStay – Đà Nẵng · Hội An · Huế') . '<span class="ds-fire" aria-hidden="true"><i></i><i></i><i></i></span><span class="ds-fire ds-fire-in" aria-hidden="true"><i></i><i></i><i></i></span>';
+    $new = $img('bom', 'ds-l-bom') . $img('dau', 'ds-logo ds-l-dau', 'DanangStay – Đà Nẵng · Hội An · Huế') . '<span class="ds-fire" aria-hidden="true"><i></i><i></i><i></i></span><span class="ds-fire ds-fire-in" aria-hidden="true"><i></i><i></i><i></i></span><span class="ds-smoke" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="ds-mist" aria-hidden="true"><i></i><i></i><i></i></span>';
     return preg_replace('#<img class="ds-logo ds-l-rong"[^>]*>#', $new, $html, 1);
 }, 64);
 add_action('wp_head', function () {
@@ -2644,3 +2644,23 @@ add_action('wp_head', function () {
 @media (prefers-reduced-motion:reduce){.ds-logo2 .ds-l-chu{animation:none!important}.ds-fire-in{display:none!important}}
 </style>';
 }, 117);
+
+// ===== 38. Rồng thay phiên: phun lửa → phun khói → phun sương (như Cầu Rồng) =====
+add_action('wp_head', function () {
+    echo '<style id="dst-logo-fx">
+.ds-fire:not(.ds-fire-in){animation:dsFire 18s ease-out 4s infinite!important}
+@keyframes dsFire{0%{opacity:0;transform:scaleX(0) scaleY(.5)}2%{opacity:1;transform:scaleX(1) scaleY(1)}6%{opacity:1;transform:scaleX(1.12) scaleY(.9)}9%{opacity:0;transform:scaleX(1.25) scaleY(.5)}100%{opacity:0}}
+.ds-smoke,.ds-mist{position:absolute;z-index:3;left:41%;top:18%;width:30%;height:46%;pointer-events:none;opacity:0}
+.ds-smoke{animation:dsShow 18s linear 10s infinite}
+.ds-mist{animation:dsShow 18s linear 16s infinite}
+@keyframes dsShow{0%{opacity:0}1%{opacity:1}13%{opacity:1}15%{opacity:0}100%{opacity:0}}
+.ds-smoke i{position:absolute;left:-4%;top:28%;width:34%;height:52%;border-radius:50%;background:radial-gradient(circle,#fff 0,rgba(225,228,235,.95) 35%,rgba(170,175,185,.75) 55%,rgba(150,155,165,0) 72%);filter:blur(1px);opacity:0;animation:dsPuff 18s ease-out 10s infinite}
+.ds-smoke i:nth-child(2){animation-delay:10.35s}.ds-smoke i:nth-child(3){animation-delay:10.7s}.ds-smoke i:nth-child(4){animation-delay:11.05s}
+@keyframes dsPuff{0%{opacity:0;transform:translate(0,0) scale(.4)}1%{opacity:1}8%{opacity:.85;transform:translate(150%,-40%) scale(1.7)}12%{opacity:0;transform:translate(210%,-70%) scale(2.3)}100%{opacity:0}}
+.ds-mist i{position:absolute;left:0;top:28%;width:100%;height:44%;transform-origin:0 50%;border-radius:0 60% 60% 0/50%;background:radial-gradient(ellipse at 0 50%,#fff 0,rgba(225,245,255,.95) 30%,rgba(170,220,255,.65) 55%,rgba(160,215,255,0) 76%);filter:blur(.6px) drop-shadow(0 0 3px rgba(180,225,255,.9));opacity:0;animation:dsSpray 18s ease-out 16s infinite}
+.ds-mist i:nth-child(2){top:8%;height:40%;transform:rotate(-12deg);animation-delay:16.2s}
+.ds-mist i:nth-child(3){top:40%;height:40%;animation-delay:16.4s;background:radial-gradient(circle,rgba(255,255,255,.9) 0 6%,transparent 7%) 0 0/14px 14px,radial-gradient(ellipse at 0 50%,rgba(210,240,255,.6) 0,rgba(210,240,255,0) 70%)}
+@keyframes dsSpray{0%{opacity:0;transform:scaleX(0)}1.5%{opacity:1;transform:scaleX(1)}10%{opacity:.9;transform:scaleX(1.25) translateY(-6%)}14%{opacity:0;transform:scaleX(1.5) translateY(-12%)}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.ds-smoke,.ds-mist{display:none}}
+</style>';
+}, 118);
