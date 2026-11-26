@@ -25,7 +25,7 @@ function hh_posts_cum_du_an_11_2026_lo_2( $posts ) {
 		'keywords_extra' => array( 'giá Cora Tower Đà Nẵng', 'bảng giá Cora Tower', 'Cora Tower Sun NeO City giá' ),
 		'project'  => 'cora-tower',
 		'schedule' => '2026-11-15 09:00',
-		'rev'      => 2,
+		'rev'      => 3, // 26/11: chiết khấu thanh toán sớm tháng 12/2026 (hạn 25/12).
 		'category' => 'Thị trường',
 		'tags'     => array( 'Cora Tower', 'Sun NeO City', 'Giá căn hộ Đà Nẵng' ),
 		'image'    => 'plugin:img/tin-tuc/gia-cora-tower-sun-neo-city.jpg',
@@ -62,7 +62,7 @@ function hh_posts_cum_du_an_11_2026_lo_2( $posts ) {
 <li><strong>Đã gồm:</strong> VAT và phí bảo trì.</li>
 <li><strong>Đặc quyền hoàn thiện nội thất 7%</strong> cho căn hộ tòa A1, A2 (CSƯĐ 06.1 từ 21/8/2026).</li>
 <li><strong>Không vay ngân hàng:</strong> chiết khấu thêm 5%.</li>
-<li><strong>Thanh toán sớm tháng 11/2026</strong> (hạn 25/11): 95% chiết khấu 7,5%; 70% chiết khấu 1,5%.</li>
+<li><strong>Thanh toán sớm tháng 12/2026</strong> (hạn 25/12): 95% chiết khấu 7%; 70% chiết khấu 1% (áp dụng cho căn hộ và shop khối đế).</li>
 <li>Các khoản chiết khấu tính trên giá chưa VAT và phí bảo trì.</li>
 </ul>
 <h2>Thanh toán và vay</h2>
@@ -79,14 +79,14 @@ function hh_posts_cum_du_an_11_2026_lo_2( $posts ) {
 <h2>Giá Cora Tower bao nhiêu so với các tòa khác ở Sun NeO City</h2>
 <p>Cora Tower có giỏ hàng công khai rõ nhất trong ba tòa căn hộ Sun Group ở Hòa Xuân. Spana Tower bàn giao sớm hơn một tháng (dự kiến 30/06/2027), S-Light Tower có chiết khấu thanh toán sớm cao hơn. So sánh chi tiết: <a href="/cora-spana-s-light-sun-neo-city-nen-chon-toa-nao/">Cora, Spana hay S-Light – nên chọn tòa nào</a>.</p>
 <h2>Ví dụ: giá Cora Tower bao nhiêu với căn studio 2,42 tỷ</h2>
-<p>Hoàng Hiệp tự tính theo chính sách tháng 11/2026 để anh chị hình dung, chưa phải phiếu tính giá của chủ đầu tư:</p>
+<p>Hoàng Hiệp tự tính theo chính sách tháng 12/2026 để anh chị hình dung, chưa phải phiếu tính giá của chủ đầu tư:</p>
 <ul>
 <li><strong>Đặt cọc:</strong> 100 triệu.</li>
 <li><strong>Vay tối đa 70%:</strong> khoảng 1,69 tỷ; chủ đầu tư hỗ trợ lãi suất 24 tháng (không muộn hơn 30/9/2028), ân hạn gốc cùng thời gian.</li>
 <li><strong>Vốn tự có 30%:</strong> khoảng 0,73 tỷ, đóng theo tiến độ, giãn đến 40 tháng.</li>
 <li><strong>Nhận nhà:</strong> khi đã thanh toán đủ 70% (Sun Early Key).</li>
 </ul>
-<p>Nếu không vay, anh chị được chiết khấu thêm 5% trên giá chưa VAT và phí bảo trì; nếu thanh toán sớm 95% trong đợt tháng 11/2026 thì chiết khấu thêm 7,5% (hạn 25/11).</p>
+<p>Nếu không vay, anh chị được chiết khấu thêm 5% trên giá chưa VAT và phí bảo trì; nếu thanh toán sớm 95% trong đợt tháng 12/2026 thì chiết khấu thêm 7% (hạn 25/12).</p>
 <h2>Vị trí và quy mô</h2>
 <p>Cora Tower gồm hai tòa A1, A2 hai bên đường 29/3, sát vòng xoay giao Nguyễn Phước Lan, trung tâm khu đô thị Sun NeO City (Hòa Xuân). Mỗi tòa có 616 căn hộ điển hình, 28 căn mỗi tầng; tầng 1 shophouse, tầng 25 penthouse. Xem chi tiết <a href="/mat-bang-can-ho-cora-tower/">mặt bằng Cora Tower</a>.</p>
 <!--hh-dimg:1wnsijH2qgHtzHwhDnYpb6ELxk_aKErVa|Cora Tower nhìn từ trên cao – giao lộ Nguyễn Phước Lan, đường 29/3 (phối cảnh chủ đầu tư)-->
@@ -100,7 +100,7 @@ function hh_posts_cum_du_an_11_2026_lo_2( $posts ) {
 <p>Các khoản ưu đãi của Cora Tower đều tính trên giá chưa VAT và phí bảo trì, nên con số thực trả luôn thấp hơn giá giỏ hàng. Để biết chính xác giá Cora Tower bao nhiêu với căn mình chọn, anh chị nên kiểm tra trên phiếu tính giá ba điểm:</p>
 <ol>
 <li><strong>Phần giá làm căn cứ chiết khấu:</strong> giá giỏ hàng đã tách VAT và phí bảo trì.</li>
-<li><strong>Các ưu đãi được áp dụng cùng lúc:</strong> đặc quyền hoàn thiện nội thất 7%, chiết khấu 5% nếu không vay, chiết khấu thanh toán sớm (95% được 7,5%, 70% được 1,5%, hạn 25/11/2026) và cách cộng dồn theo phiếu.</li>
+<li><strong>Các ưu đãi được áp dụng cùng lúc:</strong> đặc quyền hoàn thiện nội thất 7%, chiết khấu 5% nếu không vay, chiết khấu thanh toán sớm (95% được 7%, 70% được 1%, hạn 25/12/2026) và cách cộng dồn theo phiếu.</li>
 <li><strong>Phần cộng lại sau chiết khấu:</strong> VAT và phí bảo trì được tính lại trên giá sau ưu đãi hay giữ nguyên.</li>
 </ol>
 <p>Hai khách cùng mua một căn studio nhưng chọn vay và không vay sẽ có câu trả lời khác nhau cho giá Cora Tower bao nhiêu. Vì vậy, Hoàng Hiệp luôn gửi khách hai phiếu tính giá (vay và không vay) để so trước khi đặt cọc. Thông tin tổng quan dự án có trên <a href="https://cafeland.vn/du-an/sun-cora-tower-du-an-can-ho-tai-da-nang-4728.html">CafeLand</a>; các dòng sản phẩm giới hạn ở tổ hợp căn hộ Sun Group khu Nam trung tâm Đà Nẵng từng được <a href="https://cafef.vn/lo-dien-gan-300-san-pham-phien-ban-gioi-han-tai-cac-to-hop-can-ho-sun-group-nam-trung-tam-da-nang-188260811154747855.chn">CafeF</a> đưa tin.</p>
@@ -120,7 +120,7 @@ HTML
 				array( 'Giá Cora Tower bao nhiêu theo giỏ hàng 11/2026?', 'Theo giỏ hàng 11/2026: studio 32,3 m² khoảng 2,42 – 2,74 tỷ, căn 1PN+ 53,2 – 54,2 m² khoảng 3,45 – 3,84 tỷ, shop khối đế tòa A2 khoảng 5,17 – 9,12 tỷ. Giá gồm VAT và phí bảo trì, chưa trừ chiết khấu.' ),
 				array( 'Cora Tower sở hữu bao lâu?', 'Căn hộ Cora Tower sở hữu lâu dài.' ),
 				array( 'Cora Tower khi nào bàn giao?', 'Dự kiến 30/07/2027, bàn giao hoàn thiện trần, tường, sàn; thanh toán đủ 70% là nhận nhà sử dụng (Sun Early Key).' ),
-				array( 'Mua Cora Tower được chiết khấu bao nhiêu?', 'Đặc quyền hoàn thiện nội thất 7%, không vay thêm 5%, thanh toán sớm 95% trong tháng 11/2026 thêm 7,5% (hạn 25/11). Chiết khấu tính trên giá chưa VAT và phí bảo trì, nên giá Cora Tower bao nhiêu khi thực trả phụ thuộc phương án thanh toán.' ),
+				array( 'Mua Cora Tower được chiết khấu bao nhiêu?', 'Đặc quyền hoàn thiện nội thất 7%, không vay thêm 5%, thanh toán sớm 95% trong tháng 12/2026 thêm 7% (hạn 25/12). Chiết khấu tính trên giá chưa VAT và phí bảo trì, nên giá Cora Tower bao nhiêu khi thực trả phụ thuộc phương án thanh toán.' ),
 				array( 'Giá Cora Tower bao nhiêu một m²?', 'Quy từ giỏ hàng 11/2026, studio khoảng 75 – 85 triệu/m², căn 1PN+ khoảng 64 – 72 triệu/m² (Hoàng Hiệp tự quy đổi, giá gồm VAT và phí bảo trì, chưa trừ chiết khấu).' ),
 				array( 'Giá Cora Tower bao nhiêu với căn 2PN, 3PN?', 'Giỏ hàng 11/2026 chưa công khai giá căn 2PN, 3PN. Anh chị liên hệ Hoàng Hiệp để nhận giá từng căn còn trống.' ),
 			),
@@ -137,7 +137,7 @@ HTML
 		'keywords_extra' => array( 'căn hộ Sun NeO City', 'so sánh Cora Spana S-Light', 'căn hộ Hòa Xuân Sun Group' ),
 		'project'  => 'cora-tower',
 		'schedule' => '2026-11-15 14:00',
-		'rev'      => 2,
+		'rev'      => 3, // 26/11: chiết khấu thanh toán sớm tháng 12/2026 (hạn 25/12).
 		'category' => 'Kinh nghiệm',
 		'tags'     => array( 'Sun NeO City', 'Cora Tower', 'Spana Tower', 'S-Light Tower' ),
 		'image'    => 'plugin:img/tin-tuc/chon-toa-sun-neo-city-hoa-xuan.jpg',
@@ -159,13 +159,14 @@ HTML
 <tr><td>Giá tham khảo</td><td>Studio 2,42 – 2,74 tỷ; 1PN+ 3,45 – 3,84 tỷ</td><td>Liên hệ</td><td>Liên hệ</td></tr>
 <tr><td>Bàn giao</td><td>Dự kiến 30/07/2027</td><td>Dự kiến 30/06/2027</td><td>Liên hệ</td></tr>
 <tr><td>Không vay</td><td>Chiết khấu thêm 5%</td><td>Chiết khấu thêm 5%</td><td>Chiết khấu thêm 3%</td></tr>
-<tr><td>Thanh toán sớm 95% (11/2026)</td><td>7,5%</td><td>6%</td><td>10%</td></tr>
+<tr><td>Thanh toán sớm 95% (12/2026)</td><td>7%</td><td>5,5%</td><td>9,5%</td></tr>
+<tr><td>Thanh toán sớm 70% (12/2026)</td><td>1%</td><td>Không áp dụng</td><td>2,5%</td></tr>
 <tr><td>Ưu đãi riêng</td><td>Hoàn thiện nội thất 7%</td><td>Quà an cư 3%</td><td>Early Bird 3% (có thời hạn)</td></tr>
 <tr><td>Đặt cọc</td><td>100 triệu (3PN 150 triệu)</td><td>100 triệu (3PN 150 triệu)</td><td>Studio 100 triệu, 1PN+ 150 triệu, 2PN – 3PN 200 triệu</td></tr>
 <tr><td>Giãn tiến độ</td><td>Đến 40 tháng</td><td>Đến 38 tháng</td><td>Đến 48 tháng</td></tr>
 </tbody>
 </table>
-<p><small>Chính sách tham khảo tháng 11/2026; hạn thanh toán sớm 25/11. Chiết khấu tính trên giá chưa VAT và phí bảo trì.</small></p>
+<p><small>Chính sách tham khảo; mức thanh toán sớm tháng 12/2026, hạn 25/12/2026. Chiết khấu tính trên giá chưa VAT và phí bảo trì.</small></p>
 <h2>Sun NeO City chọn tòa nào cũng có 4 điểm chung</h2>
 <ul>
 <li>Chủ đầu tư Sun Group, sở hữu lâu dài.</li>
@@ -181,7 +182,7 @@ HTML
 <p>Spana bàn giao dự kiến 30/06/2027, sớm nhất trong ba tòa. Sở Xây dựng xác nhận đủ điều kiện bán ngày 05/5/2026, có bảo lãnh VietinBank. Tháng 11/2026 hai tòa đang thi công phần thân, lên khoảng tầng 10. Trọn tầng 2 là tiện ích: bể bơi, gym, spa, co-working, khu trẻ em.</p>
 <!--hh-img:img/spana-tower/spana-tower-tien-do-11-2026-nhin-tu-cau-hoa-xuan.jpg|Sun NeO City chọn tòa nào nếu muốn nhận nhà sớm: Spana Tower nhìn từ cầu Hòa Xuân, hai tòa S1, S2 đang thi công (tiến độ 11/2026)-->
 <h3>S-Light Tower: muốn view sông và trả sớm</h3>
-<p>S-Light nằm ở ngã ba sông Hàn – Cẩm Lệ – Đô Toả, tầm nhìn sông và pháo hoa DIFF. Chiết khấu thanh toán sớm 95% cao nhất (10%), giãn tiến độ dài nhất (48 tháng). Đổi lại, tiền cọc căn lớn cao hơn.</p>
+<p>S-Light nằm ở ngã ba sông Hàn – Cẩm Lệ – Đô Toả, tầm nhìn sông và pháo hoa DIFF. Chiết khấu thanh toán sớm 95% cao nhất (9,5% trong tháng 12/2026), giãn tiến độ dài nhất (48 tháng). Đổi lại, tiền cọc căn lớn cao hơn.</p>
 <!--hh-dimg:1PzoF4f2-geg_T48jzs58EJhAIQrEJkMI|Hai tháp S-Light Tower bên sông (phối cảnh chủ đầu tư)-->
 <p>Ba tòa đều có penthouse, xem thêm <a href="/penthouse-spana-cora-s-light-sun-neo-city/">penthouse Spana, Cora, S-Light</a>.</p>
 <h2>Sun NeO City chọn tòa nào: pháp lý từng tòa</h2>
@@ -200,7 +201,7 @@ HTML
 <ol>
 <li><strong>Có cần biết tổng tiền ngay không?</strong> Nếu có, Cora là tòa có giỏ hàng công khai theo loại căn (studio từ khoảng 2,42 tỷ, 1PN+ từ khoảng 3,45 tỷ).</li>
 <li><strong>Cần nhận nhà sớm nhất?</strong> Spana dự kiến bàn giao 30/06/2027, sớm hơn Cora một tháng.</li>
-<li><strong>Có thể thanh toán sớm 95% không?</strong> Nếu có, S-Light cho chiết khấu cao nhất (10%, hạn 25/11/2026).</li>
+<li><strong>Có thể thanh toán sớm 95% không?</strong> Nếu có, S-Light cho chiết khấu cao nhất (9,5%, hạn 25/12/2026).</li>
 <li><strong>Vốn ban đầu ít?</strong> Cora và Spana đặt cọc 100 triệu cho căn đến 2PN; S-Light cọc cao hơn với căn lớn nhưng giãn tiến độ đến 48 tháng.</li>
 </ol>
 <p>Trả lời xong bốn câu này, câu hỏi Sun NeO City chọn tòa nào thường chỉ còn một hoặc hai phương án. Thông tin ra mắt S-Light Tower từng được <a href="https://cafef.vn/sun-property-ra-mat-s-light-tower-tam-diem-vuong-khi-trung-tam-nam-da-nang-188260622082242751.chn">CafeF</a> đưa tin; tổng quan Cora Tower và S-Light Tower có trên <a href="https://cafeland.vn/du-an/sun-cora-tower-du-an-can-ho-tai-da-nang-4728.html">CafeLand</a>.</p>
@@ -213,12 +214,12 @@ HTML
 			'points'    => array(
 				'Sun NeO City chọn tòa nào: Cora có giỏ hàng công khai, studio từ khoảng 2,42 tỷ, bàn giao 30/07/2027',
 				'Spana: chân cầu Hòa Xuân, 1.237 căn, bàn giao sớm nhất 30/06/2027',
-				'S-Light: ngã ba sông, chiết khấu thanh toán sớm 95% cao nhất 10%',
+				'S-Light: ngã ba sông, chiết khấu thanh toán sớm 95% cao nhất 9,5% (tháng 12/2026)',
 			),
 			'faq'       => array(
 				array( 'Sun NeO City có những tòa căn hộ nào?', 'Ba tòa căn hộ Sun Group đang bán: Cora Tower (A1, A2), Spana Tower (S1, S2) và S-Light Tower (2 tháp 22 tầng), đều sở hữu lâu dài.' ),
 				array( 'Tòa nào ở Sun NeO City bàn giao sớm nhất?', 'Spana Tower, dự kiến 30/06/2027. Cora Tower dự kiến 30/07/2027.' ),
-				array( 'Sun NeO City chọn tòa nào nếu thanh toán sớm?', 'S-Light Tower: thanh toán sớm 95% được chiết khấu 10% (chính sách tháng 11/2026, hạn 25/11).' ),
+				array( 'Sun NeO City chọn tòa nào nếu thanh toán sớm?', 'S-Light Tower: thanh toán sớm 95% được chiết khấu 9,5% (chính sách tháng 12/2026, hạn 25/12).' ),
 				array( 'Sun NeO City chọn tòa nào để cho thuê?', 'Nếu cần tổng tiền thấp và giá rõ, Cora có giỏ hàng công khai (studio từ khoảng 2,42 tỷ); nếu nhắm khách thích view sông, S-Light ở ngã ba sông Hàn – Cẩm Lệ – Đô Toả. Nên so tổng tiền sau ưu đãi của từng căn.' ),
 				array( 'Sun NeO City chọn tòa nào để gia đình ở?', 'Spana có căn đến 3PN 95,5 m², trọn tầng 2 tiện ích và bàn giao sớm nhất; Cora có căn 2PN, 3PN ở vị trí giữa khu đô thị, gần trục Nguyễn Phước Lan.' ),
 			),
