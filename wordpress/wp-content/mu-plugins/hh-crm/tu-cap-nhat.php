@@ -441,8 +441,23 @@ add_action(
 					if ( function_exists( 'spawn_cron' ) ) {
 						spawn_cron();
 					}
+					if ( ! wp_next_scheduled( 'hh_auto_posts' ) || wp_next_scheduled( 'hh_auto_posts' ) > time() + 60 ) {
+						wp_schedule_single_event( time(), 'hh_auto_posts_at' ); // Kiểm tra luôn bài tự đăng có bản sửa mới.
+					}
 					$log = (array) get_option( 'hh_su_log', array() );
-					return array( 'ok' => true, 'msg' => 'Đã hẹn cập nhật ngay.', 'v' => HH_CRM_VERSION, 'last' => $log ? end( $log )[1] : '' );
+					$ap  = (int) get_option( 'hh_auto_posts_checked' );
+					return array(
+						'ok'    => true,
+						'msg'   => 'Đã hẹn cập nhật ngay.',
+						'v'     => HH_CRM_VERSION,
+						'last'  => $log ? end( $log )[1] : '',
+						// Tình trạng Tự đăng bài (chỉ tiêu đề bài + giờ, không có dữ liệu riêng tư) để kiểm tra từ xa.
+						'posts' => array(
+							'checked' => $ap ? wp_date( 'd/m H:i', $ap ) : '',
+							'next'    => wp_next_scheduled( 'hh_auto_posts' ) ? wp_date( 'd/m H:i', wp_next_scheduled( 'hh_auto_posts' ) ) : '',
+							'log'     => array_slice( (array) get_option( 'hh_auto_posts_log', array() ), -6 ),
+						),
+					);
 				},
 			)
 		);
