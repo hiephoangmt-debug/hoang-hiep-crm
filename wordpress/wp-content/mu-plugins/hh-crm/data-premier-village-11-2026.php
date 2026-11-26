@@ -47,6 +47,9 @@ add_filter(
 						$img( 'premier-village-flycam-ho-boi-bai-bien', 'Hồ bơi và bãi biển riêng của khu nghỉ dưỡng Premier Village', 'tiện ích' ),
 						$img( 'premier-village-nha-hang-ven-bien', 'Nhà hàng ven biển trong Premier Village', 'tiện ích' ),
 						$img( 'premier-village-phong-gym', 'Phòng gym mở cửa 24/7 tại Premier Village', 'tiện ích' ),
+						$img( 'premier-village-mat-bang-tong-the', 'Mặt bằng tổng thể Premier Village Đà Nẵng – vị trí 111 biệt thự, Nautica Beach Club, LemonGrass, Kids Club, khu đón tiếp', 'tổng thể' ),
+						$img( 'premier-village-vi-tri-du-an', 'Vị trí Premier Village trên đường Võ Nguyên Giáp, gần cầu Trần Thị Lý, cầu Rồng và sân bay Đà Nẵng' ),
+						$img( 'premier-village-tien-ich-su-kien', 'Tiện ích, sự kiện tại Premier Village: tiệc hồ bơi, tiệc cưới bãi biển, hoạt động gia đình', 'tiện ích' ),
 					)
 				),
 			);

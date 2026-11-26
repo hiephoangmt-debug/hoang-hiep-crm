@@ -357,7 +357,7 @@ HTML
 		'keyword'  => 'mua biệt thự Premier Village',
 		'keywords_extra' => array( 'biệt thự Premier Village Đà Nẵng', 'villa Premier Village Mỹ Khê', 'thuê biệt thự Premier Village', 'gửi bán biệt thự Premier Village' ),
 		'project'  => 'premier-village-da-nang',
-		'rev'      => 4, // rev 4: tên loại căn, tiện ích, liên kết vùng theo trang giới thiệu anh Hiệp gửi; 26/11: viết lại – giá "chỉ từ", ai nên mua, các bước mua; rev 3: viết dày hơn, thêm mục thuê / cho thuê / gửi bán (anh Hiệp).
+		'rev'      => 5, // rev 5: mặt bằng tổng thể, sơ đồ vị trí; rev 4: tên loại căn, tiện ích, liên kết vùng theo trang giới thiệu anh Hiệp gửi; 26/11: viết lại – giá "chỉ từ", ai nên mua, các bước mua; rev 3: viết dày hơn, thêm mục thuê / cho thuê / gửi bán (anh Hiệp).
 		'schedule' => '2026-11-26 09:30',
 		'category' => 'Tin dự án',
 		'tags'     => array( 'Premier Village', 'Biệt thự biển', 'Mỹ Khê' ),
@@ -394,6 +394,8 @@ HTML
 <tr><td>Beachfront Villa (trực diện biển)</td><td>6</td><td>Khoảng 511 m²</td><td>Sát bãi biển, hồ bơi vô cực riêng, quản gia riêng</td></tr>
 </tbody>
 </table>
+<!--hh-img:img/premier-village/premier-village-mat-bang-tong-the.jpg|Mặt bằng tổng thể khi mua biệt thự Premier Village: vị trí 111 biệt thự, Nautica Beach Club, LemonGrass, khu đón tiếp, bãi đỗ xe-->
+<p>Trước khi mua biệt thự Premier Village, nên xem kỹ mặt bằng tổng thể: dãy biệt thự trực diện biển nằm sát bãi cát phía trên, nhóm có lối ra biển ở hai bên hồ bơi Nautica, còn biệt thự hướng vườn xếp thành các dãy phía trong, gần đường Võ Nguyên Giáp. Khu đón tiếp, bãi đỗ xe ở phía Đông; nhà hàng LemonGrass nằm giữa khu.</p>
 <p>Theo thông tin giới thiệu khu nghỉ dưỡng, mỗi biệt thự có hồ bơi riêng, phòng khách, bếp đầy đủ thiết bị (tủ lạnh, lò vi sóng, lò nướng), phòng ngủ có phòng tắm riêng và đón được tối đa khoảng 8 người lớn, 4 trẻ em – hợp với đại gia đình. Vì vậy người mua biệt thự Premier Village thường là gia đình đông người hoặc doanh nghiệp cần nơi tiếp khách.</p>
 <!--hh-img:img/premier-village/premier-village-biet-thu-huong-vuon.jpg|Mua biệt thự Premier Village loại hướng vườn: vườn riêng, hồ bơi riêng (ảnh khu nghỉ dưỡng)-->
 <p>Một số chủ đã cải tạo, nâng số phòng ngủ hoặc thay nội thất, nên khi mua biệt thự Premier Village cần xem tận nơi thay vì chỉ dựa vào bản vẽ cũ. Căn càng gần biển thì giá càng cao và càng hiếm người bán – nhóm trực diện biển chỉ có 6 căn.</p>
@@ -483,6 +485,7 @@ HTML
 </ol>
 <p>Nếu căn định mua biệt thự Premier Village đang trong chương trình cho thuê, cần thêm bước làm việc với khu nghỉ dưỡng để chuyển hợp đồng cho chủ mới hoặc thanh lý hợp đồng – nên ghi rõ việc này vào thỏa thuận đặt cọc để tránh tranh chấp về sau.</p>
 <h2>Vị trí – lợi thế lớn nhất</h2>
+<!--hh-img:img/premier-village/premier-village-vi-tri-du-an.jpg|Vị trí khi mua biệt thự Premier Village: đường Võ Nguyên Giáp, gần cầu Trần Thị Lý, cầu Rồng, sân bay Đà Nẵng-->
 <p>Lý do chính khách chọn mua biệt thự Premier Village là vị trí: từ khu biệt thự đến cầu Rồng và trung tâm thành phố khoảng 5 phút, sân bay quốc tế Đà Nẵng khoảng 15 phút, bán đảo Sơn Trà khoảng 20 phút, phố cổ Hội An khoảng 40 phút đi xe. Phố du lịch An Thượng cách khoảng 3 phút, danh thắng Ngũ Hành Sơn khoảng 5 phút, ga Đà Nẵng khoảng 12 phút, Bà Nà Hills khoảng 45 phút; bệnh viện Vinmec, Hoàn Mỹ khoảng 10 phút.</p>
 <p>Gần đó có dự án căn hộ <a href="/du-an/the-poet-residence-da-nang/">The Poet Residence</a> trên đường Hồ Xuân Hương. Thông tin giới thiệu khu nghỉ dưỡng có trên <a href="https://danangfantasticity.com/premier-village-danang-resort/" target="_blank" rel="noopener">Danang Fantasticity</a> – cổng du lịch của thành phố.</p>
 <h2>So với villa ven biển khác ở Đà Nẵng</h2>
