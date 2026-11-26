@@ -55,6 +55,10 @@ add_filter(
 				$projects[ $i ]['fix_excerpt'] = array_merge( (array) ( $p['fix_excerpt'] ?? array() ), array( (string) ( $p['excerpt'] ?? '' ) ) );
 				$projects[ $i ]['excerpt']     = $excerpt;
 			}
+			// Giá trị bản 2.20.356 đã ghi lên web (khác dữ liệu gốc) – cho phép thay bằng bản mới.
+			$was = array(
+				'hh_p_villa_table' => "Biệt thự hướng vườn (77 căn) | Khoảng 300 – 330 m² | Hồ bơi riêng, vườn riêng | Chỉ từ khoảng 39 tỷ\nBiệt thự có lối ra biển (28 căn) | Khoảng 360 – 390 m² | Lối đi riêng ra biển, hồ bơi riêng | Từ khoảng 47 tỷ\nBiệt thự trực diện biển (6 căn) | Đến khoảng 511 m² | Sát bãi biển, sân thượng cạnh hồ bơi | Liên hệ",
+			);
 			foreach ( $upd as $k => $v ) {
 				$cur = (string) ( $p['meta'][ $k ] ?? '' );
 				if ( $cur === $v ) {
@@ -64,6 +68,9 @@ add_filter(
 					$projects[ $i ]['fix_meta'][ $k ] = array_merge( (array) ( $p['fix_meta'][ $k ] ?? array() ), array( $cur ) );
 				}
 				$projects[ $i ]['meta'][ $k ] = $v;
+			}
+			foreach ( $was as $k => $v ) {
+				$projects[ $i ]['fix_meta'][ $k ] = array_merge( (array) ( $projects[ $i ]['fix_meta'][ $k ] ?? array() ), array( $v ) );
 			}
 		}
 		return $projects;
