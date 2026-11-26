@@ -137,7 +137,7 @@ def motion():
            'header.top{view-transition-name:hdr}::view-transition-group(hdr){animation:none}'
            '::view-transition-old(root){animation:vtO .28s cubic-bezier(.4,0,1,1) both}::view-transition-new(root){animation:vtI .55s cubic-bezier(.16,1,.3,1) both}'
            '@keyframes vtO{to{opacity:0;transform:translateY(-24px) scale(.985)}}@keyframes vtI{from{opacity:0;transform:translateY(40px)}}'
-           'html.pgfx main{animation:pgIn .6s cubic-bezier(.16,1,.3,1) both}@keyframes pgIn{from{opacity:0;transform:translateY(24px)}}'
+           'html.pgfx main{animation:pgIn .6s cubic-bezier(.16,1,.3,1) backwards}@keyframes pgIn{from{opacity:0;transform:translateY(24px)}}'
            'html.pgfx main{transition:opacity .22s ease,transform .22s ease}html.pgout main{opacity:0!important;transform:translateY(-16px)!important}'
            '#pgbar{position:fixed;left:0;top:0;height:3px;width:0;z-index:2147483600;background:linear-gradient(90deg,#F7A13A,#EE7B1E);box-shadow:0 0 10px rgba(238,123,30,.7);transition:width .9s cubic-bezier(.1,.7,.2,1),opacity .3s}'
            '.rv{opacity:0;transform:translateY(42px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);transition-delay:var(--rd,0s)}'
