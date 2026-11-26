@@ -9,7 +9,10 @@ FOOT = (f'<!--fbf--><p style="margin:14px 0 0"><a href="{FB}" target="_blank" re
         f'text-decoration:none;padding:10px 16px;border-radius:999px;font-size:15px;white-space:nowrap">{SVG}Theo dõi Fanpage tuyển dụng</a></p><!--/fbf-->')
 WID = (f'<!--fbw--><a class="hhf-fb" href="{FB}" target="_blank" rel="noopener" aria-label="Theo dõi Fanpage Tuyển Sale BĐS Đà Nẵng">'
        f'<span class="hhf-lb">Theo dõi <b>Fanpage</b></span><span class="hhf-ic" style="background:#1877F2">{SVG.replace("18","24")}</span></a><!--/fbw-->\n  ')
-RX = re.compile(r'<!--fb[fw]-->.*?<!--/fb[fw]-->\n?\s*', re.S)
+NHS = ('<!--nhs--><a class="hhf-nhs" href="https://www.tuyendungsaledanang.com/ung-tuyen" aria-label="Nộp hồ sơ ứng tuyển" '
+       'style="background:#FF6B1A;color:#fff;font-weight:900;font-size:15px;padding:12px 16px;border-radius:999px;border:3px solid #fff;'
+       'box-shadow:0 8px 20px rgba(21,36,90,.28);white-space:nowrap;gap:6px">📄 Nộp hồ sơ</a><!--/nhs-->\n  ')
+RX = re.compile(r'<!--(?:fb[fw]|nhs)-->.*?<!--/(?:fb[fw]|nhs)-->\n?\s*', re.S)
 
 def apply(s):
     s = RX.sub('', s)
@@ -21,7 +24,7 @@ def apply(s):
             s = s[:e] + FOOT + s[e:]
     z = s.find('<a class="hhf-zalo"')
     if z > 0:
-        s = s[:z] + WID + s[z:]
+        s = s[:z] + NHS + WID + s[z:]
     return s
 
 if __name__ == '__main__':
