@@ -58,7 +58,7 @@ EVBAR = ('<div id="evbar" class="evb" role="region" aria-label="Thư mời sự 
          'k.textContent=d>1?"Còn "+d+" ngày":d===1?"Ngày mai":"Hôm nay"})();</script></div>')
 
 
-X360_SHA = '060858ecec87266728a57d9a913eda7413d5b2e8'
+X360_SHA = '5927be980b7599dcda44062cd2b50736f20ba844'
 X360_ASSET_SHA = '0cc1dce3308fc20855dbb17d712623f559400155'   # ảnh + mã 360° (jsDelivr đã có sẵn bản này; repo mới bị jsDelivr chặn 403)
 X360 = ('<section class="sec" id="xem-360" style="background:linear-gradient(160deg,#0B2447,#1d4a7a);color:#fff"><div class="wrap">'
         '<style>#xem-360 .x3{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:26px;align-items:center}'
