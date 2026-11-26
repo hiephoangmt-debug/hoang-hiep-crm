@@ -1,0 +1,366 @@
+{
+ "#Giá căn hộ": [
+  "#Apartment prices",
+  "#아파트 가격"
+ ],
+ "#Thị trường Đà Nẵng": [
+  "#Da Nang market",
+  "#다낭 시장"
+ ],
+ "(căn hộ hạng sang ven sông Hàn). Hoàng Hiệp tổng hợp từ 3 nguồn, ưu tiên theo thứ tự:": [
+  "(luxury apartments along the Han River). Hoang Hiep compiled them from 3 sources, in order of priority:",
+  "(다낭 한강변 고급 아파트)까지입니다. 호앙 히엡이 3가지 출처를 우선순위에 따라 종합했습니다:"
+ ],
+ "(nhà ở xã hội Liên Chiểu) đến gần": [
+  "(Lien Chieu social housing) to nearly",
+  "(리엔찌에우 사회주택)에서 약"
+ ],
+ "190 triệu/m²": [
+  "190 million VND/m²",
+  "m²당 1억 9,000만 동"
+ ],
+ "21 triệu/m²": [
+  "21 million VND/m²",
+  "m²당 2,100만 동"
+ ],
+ "40 – 60 triệu/m²:": [
+  "40 – 60 million VND/m²:",
+  "m²당 4,000만~6,000만 동:"
+ ],
+ "60 – 80 triệu/m²:": [
+  "60 – 80 million VND/m²:",
+  "m²당 6,000만~8,000만 동:"
+ ],
+ "80 – 100 triệu/m²:": [
+  "80 – 100 million VND/m²:",
+  "m²당 8,000만~1억 동:"
+ ],
+ ": bảng hàng mới của chủ đầu tư thường cao hơn giá chuyển nhượng các dự án đã bàn giao lâu năm.": [
+  ": new developer inventory is usually priced higher than resale prices at projects handed over years ago.",
+  ": 시행사의 신규 매물은 보통 수년 전에 인도된 프로젝트의 전매 가격보다 높습니다."
+ ],
+ ": căn hộ du lịch, condotel khác căn hộ chung cư để ở. Thứ tư là": [
+  ": tourism apartments and condotels differ from residential apartments. The fourth is",
+  ": 관광 아파트와 콘도텔은 주거용 아파트와 다릅니다. 넷째는"
+ ],
+ ": căn hộ hàng hiệu, bàn giao nội thất cao cấp có giá mỗi m² cao hơn nhiều. Thứ ba là": [
+  ": branded residences and units handed over with premium furniture cost much more per m². The third is",
+  ": 브랜드 레지던스와 고급 가구 포함 인도 세대는 m²당 가격이 훨씬 높습니다. 셋째는"
+ ],
+ ": dải ven sông Hàn và trục biển Võ Nguyên Giáp gần như hết quỹ đất mới, nên giá cao nhất. Thứ hai là": [
+  ": the Han River strip and the Vo Nguyen Giap beach road have almost no new land left, so prices are highest. The second is",
+  ": 다낭 한강변과 보응우옌잡 해변도로는 신규 부지가 거의 남지 않아 가격이 가장 높습니다. 둘째는"
+ ],
+ "Biển Mỹ Khê, Sơn Trà": [
+  "My Khe Beach, Son Tra",
+  "미케 비치, 선짜"
+ ],
+ "Biển Ngũ Hành Sơn": [
+  "Ngu Hanh Son beach",
+  "응우하인선 해변"
+ ],
+ "Biển Võ Nguyên Giáp": [
+  "Vo Nguyen Giap beach",
+  "보응우옌잡 해변"
+ ],
+ "Bảng giá căn hộ 30 dự án Đà Nẵng theo triệu/m²: bảng hàng chủ đầu tư The Legend 119 – 188, Capital Square 92 – 146, Newtown Diamond 67 – 120; dự án Sun từ FourS 45 – 68 đến Sun Solar 117 – 178; Liên Chiểu dưới 40 triệu/m².": [
+  "Apartment prices for 30 Da Nang projects in million VND/m²: developer inventory The Legend 119 – 188, Capital Square 92 – 146, Newtown Diamond 67 – 120; Sun projects from FourS 45 – 68 to Sun Solar 117 – 178; Lien Chieu below 40 million VND/m².",
+  "다낭 30개 프로젝트 아파트 가격(백만 동/m²): 시행사 매물 기준 The Legend 119~188, Capital Square 92~146, Newtown Diamond 67~120; Sun 프로젝트는 FourS 45~68부터 Sun Solar 117~178까지; 리엔찌에우는 m²당 4,000만 동 미만."
+ ],
+ "Bảng giá tầng 5 – 15": [
+  "Price list floors 5 – 15",
+  "5~15층 분양가표"
+ ],
+ "Bảng hàng 10/2026, gồm VAT & KPBT": [
+  "Inventory October 2026, incl. VAT & maintenance fee",
+  "2026년 10월 매물표, VAT 및 관리기금 포함"
+ ],
+ "Bảng hàng CĐT 01/09/2026, gồm VAT": [
+  "Developer inventory September 1, 2026, incl. VAT",
+  "2026년 9월 1일 시행사 매물표, VAT 포함"
+ ],
+ "Bảng hàng CĐT 09/2026, gồm VAT & KPBT": [
+  "Developer inventory September 2026, incl. VAT & maintenance fee",
+  "2026년 9월 시행사 매물표, VAT 및 관리기금 포함"
+ ],
+ "Bảng hàng CĐT 09/2026: The Legend 119 – 188, Capital Square 92 – 146, Newtown Diamond 67 – 120 triệu/m²": [
+  "Developer inventory September 2026: The Legend 119 – 188, Capital Square 92 – 146, Newtown Diamond 67 – 120 million VND/m²",
+  "2026년 9월 시행사 매물: The Legend 119~188, Capital Square 92~146, Newtown Diamond 67~120(백만 동/m²)"
+ ],
+ "Bảng hàng quỹ đại lý tầng 7 – 19": [
+  "Agency inventory floors 7 – 19",
+  "대리점 매물표 7~19층"
+ ],
+ "Cách đọc bảng mặt bằng giá căn hộ Đà Nẵng:": [
+  "How to read the Da Nang apartment price table:",
+  "다낭 아파트 가격표 읽는 법:"
+ ],
+ "Căn hộ Hòa Xuân giá bao nhiêu?": [
+  "How much do Hoa Xuan apartments cost?",
+  "호아쑤언 아파트 가격은 얼마입니까?"
+ ],
+ "Cầu Rồng, Sơn Trà": [
+  "Dragon Bridge, Son Tra",
+  "용다리, 선짜"
+ ],
+ "Dưới 40 triệu/m²:": [
+  "Below 40 million VND/m²:",
+  "m²당 4,000만 동 미만:"
+ ],
+ "Dự án Sun: FourS 45 – 68, Hòa Xuân 58 – 83, Sun Ponte, Sun Cosmo 83 – 130, Sun Solar 117 – 178 triệu/m²": [
+  "Sun projects: FourS 45 – 68, Hoa Xuan 58 – 83, Sun Ponte, Sun Cosmo 83 – 130, Sun Solar 117 – 178 million VND/m²",
+  "Sun 프로젝트: FourS 45~68, 호아쑤언 58~83, Sun Ponte, Sun Cosmo 83~130, Sun Solar 117~178(백만 동/m²)"
+ ],
+ "Dự án căn hộ nào đắt nhất Đà Nẵng?": [
+  "Which apartment project is the most expensive in Da Nang?",
+  "다낭에서 가장 비싼 아파트 프로젝트는 어디입니까?"
+ ],
+ "Ecohome Hòa Hiệp": [
+  "Ecohome Hoa Hiep",
+  "Ecohome Hoa Hiep"
+ ],
+ "FPT City, Ngũ Hành Sơn": [
+  "FPT City, Ngu Hanh Son",
+  "FPT City, 응우하인선"
+ ],
+ "FourS Tower, FPT City, MIA Center Point, một số chung cư Sơn Trà.": [
+  "FourS Tower, FPT City, MIA Center Point, some Son Tra apartment buildings.",
+  "FourS Tower, FPT City, MIA Center Point, 일부 선짜 아파트 단지."
+ ],
+ "Giá rao trên sàn 21/10/2026": [
+  "Asking price on listing platforms, October 21, 2026",
+  "2026년 10월 21일 중개 플랫폼 호가"
+ ],
+ "Giỏ hàng CĐT 1/2026, gồm VAT": [
+  "Developer available units January 2026, incl. VAT",
+  "2026년 1월 시행사 매물 목록, VAT 포함"
+ ],
+ "Hoàng Hiệp cập nhật mặt bằng giá căn hộ Đà Nẵng định kỳ khi có bảng hàng mới. Anh chị cần bảng hàng chi tiết đúng tầm giá, hoặc so sánh 2 – 3 dự án cụ thể, liên hệ": [
+  "Hoang Hiep updates Da Nang apartment price levels regularly when new inventory is released. If you need detailed inventory in your price range, or a comparison of 2 – 3 specific projects, contact",
+  "호앙 히엡은 새 매물표가 나올 때마다 다낭 아파트 가격 수준을 정기적으로 업데이트합니다. 예산에 맞는 상세 매물표나 2~3개 프로젝트 비교가 필요하시면 다음으로 연락하십시오:"
+ ],
+ "Hòa Khánh, Liên Chiểu": [
+  "Hoa Khanh, Lien Chieu",
+  "호아카인, 리엔찌에우"
+ ],
+ "Hòa Xuân (Cora, Spana, S-Light), Peninsula, The Monarchy, Regal Complex.": [
+  "Hoa Xuan (Cora, Spana, S-Light), Peninsula, The Monarchy, Regal Complex.",
+  "호아쑤언(Cora, Spana, S-Light), Peninsula, The Monarchy, Regal Complex."
+ ],
+ "Hòa Xuân, Cẩm Lệ": [
+  "Hoa Xuan, Cam Le",
+  "호아쑤언, 깜레"
+ ],
+ "Hải Châu – Hòa Cường": [
+  "Hai Chau – Hoa Cuong",
+  "하이쩌우 – 호아끄엉"
+ ],
+ "Hệ thống thông tin nhà ở và thị trường bất động sản của Bộ Xây dựng": [
+  "Ministry of Construction's Housing and Real Estate Market Information System",
+  "건설부 주택·부동산시장 정보시스템"
+ ],
+ "Khoảng cách từ dưới 40 đến gần 190 triệu/m² phản ánh bốn yếu tố. Thứ nhất là": [
+  "The gap from under 40 to nearly 190 million VND/m² reflects four factors. The first is",
+  "m²당 4,000만 동 미만에서 약 1억 9,000만 동까지의 격차는 네 가지 요인을 반영합니다. 첫째는"
+ ],
+ "Khu Nam, Ngũ Hành Sơn": [
+  "Southern area, Ngu Hanh Son",
+  "남부 지역, 응우하인선"
+ ],
+ "Kiểm tra dự án trước khi xuống tiền:": [
+  "Check the project before committing money:",
+  "자금을 투입하기 전에 프로젝트를 확인하십시오:"
+ ],
+ "Liên Chiểu, Thanh Khê và nhà ở xã hội.": [
+  "Lien Chieu, Thanh Khe and social housing.",
+  "리엔찌에우, 타인케, 사회주택."
+ ],
+ "Mặt bằng giá căn hộ Đà Nẵng": [
+  "Da Nang apartment price levels",
+  "다낭 아파트 가격 수준은"
+ ],
+ "Mặt bằng giá căn hộ Đà Nẵng 11/2026: từ 21 đến gần 190 triệu/m² – bảng giá 30 dự án": [
+  "Da Nang apartment price levels, November 2026: from 21 to nearly 190 million VND/m² – price list of 30 projects",
+  "2026년 11월 다낭 아파트 가격 수준: m²당 2,100만~약 1억 9,000만 동 – 30개 프로젝트 가격표"
+ ],
+ "Mặt bằng giá căn hộ Đà Nẵng chia theo 5 nhóm": [
+  "Da Nang apartment price levels in 5 groups",
+  "5개 그룹으로 본 다낭 아파트 가격 수준"
+ ],
+ "Mặt bằng giá căn hộ Đà Nẵng hiện bao nhiêu một m²?": [
+  "What is the current Da Nang apartment price level per m²?",
+  "현재 다낭 아파트 가격 수준은 m²당 얼마입니까?"
+ ],
+ "Mặt bằng giá căn hộ Đà Nẵng khoảng 21 – 188 triệu/m² tùy khu vực và nguồn giá": [
+  "Da Nang apartment prices range from about 21 – 188 million VND/m² depending on area and price source",
+  "다낭 아파트 가격은 지역과 가격 출처에 따라 m²당 약 2,100만~1억 8,800만 동입니다"
+ ],
+ "Mặt bằng giá căn hộ Đà Nẵng theo dự án (triệu/m² thông thủy)": [
+  "Da Nang apartment price levels by project (million VND/m² of net area)",
+  "프로젝트별 다낭 아파트 가격 수준(전용면적 기준 백만 동/m²)"
+ ],
+ "Mặt bằng giá căn hộ Đà Nẵng trong bài lấy từ đâu?": [
+  "Where do the Da Nang apartment price levels in this article come from?",
+  "이 글의 다낭 아파트 가격 수준은 어디에서 가져온 것입니까?"
+ ],
+ "Nguồn: bảng hàng chủ đầu tư The Legend, Capital Square, Newtown Diamond (cập nhật 09/2026), bảng hàng / bảng giá các dự án Sun Group, The Poet, Times Square, Peninsula, MIA Center Point mà Hoàng Hiệp đang theo dõi; giá rao thứ cấp trên Batdongsan, Guland, Muaban, Cafeland, Thư viện Pháp luật (7 – 10/2026); bản đồ mặt bằng giá căn hộ Đà Nẵng của Biggee.vn (nhận 09/11/2026). Biểu đồ do Hoàng Hiệp vẽ.": [
+  "Sources: developer inventory for The Legend, Capital Square, Newtown Diamond (updated September 2026), inventory / price lists for Sun Group projects, The Poet, Times Square, Peninsula, MIA Center Point tracked by Hoang Hiep; secondary asking prices on Batdongsan, Guland, Muaban, Cafeland, Thu vien Phap luat (July – October 2026); Biggee.vn's Da Nang apartment price map (retrieved November 9, 2026). Chart drawn by Hoang Hiep.",
+  "출처: The Legend, Capital Square, Newtown Diamond 시행사 매물표(2026년 9월 업데이트), 호앙 히엡이 추적 중인 Sun Group 프로젝트, The Poet, Times Square, Peninsula, MIA Center Point 매물표/분양가표; Batdongsan, Guland, Muaban, Cafeland, Thu vien Phap luat의 2차 시장 호가(2026년 7~10월); Biggee.vn 다낭 아파트 가격 지도(2026년 11월 9일 조회). 차트는 호앙 히엡이 작성했습니다."
+ ],
+ "Nhận định của Hoàng Hiệp về mặt bằng giá căn hộ Đà Nẵng": [
+  "Hoang Hiep's view on Da Nang apartment price levels",
+  "다낭 아파트 가격 수준에 대한 호앙 히엡의 견해"
+ ],
+ "Niêm yết CĐT 25/07/2026": [
+  "Developer list price July 25, 2026",
+  "2026년 7월 25일 시행사 공시가"
+ ],
+ "So cùng loại giá:": [
+  "Compare like with like:",
+  "같은 유형의 가격끼리 비교하십시오:"
+ ],
+ "Sun Group có hàng ở mọi tầm giá:": [
+  "Sun Group has products at every price point:",
+  "Sun Group은 모든 가격대의 상품을 갖추고 있습니다:"
+ ],
+ "Sun Riverpolis, Ngũ Hành Sơn": [
+  "Sun Riverpolis, Ngu Hanh Son",
+  "Sun Riverpolis, 응우하인선"
+ ],
+ "Thanh Khê": [
+  "Thanh Khe",
+  "타인케"
+ ],
+ "Theo bảng hàng 10/2026 (gồm VAT và phí bảo trì): Cora Tower 59 – 83, Spana Tower 65 – 73, S-Light Tower 58 – 69 triệu/m².": [
+  "According to the October 2026 inventory (incl. VAT and maintenance fee): Cora Tower 59 – 83, Spana Tower 65 – 73, S-Light Tower 58 – 69 million VND/m².",
+  "2026년 10월 매물표 기준(VAT 및 관리기금 포함): Cora Tower 59~83, Spana Tower 65~73, S-Light Tower 58~69(백만 동/m²)."
+ ],
+ "Tháng 11/2026 khoảng 21 – 188 triệu/m²: dưới 40 triệu ở Liên Chiểu và nhà ở xã hội, 45 – 83 triệu ở FourS, FPT City, Hòa Xuân, và từ 90 đến gần 190 triệu ven sông Hàn, trục Võ Nguyên Giáp.": [
+  "In November 2026, about 21 – 188 million VND/m²: below 40 million in Lien Chieu and social housing, 45 – 83 million at FourS, FPT City and Hoa Xuan, and from 90 to nearly 190 million along the Han River and Vo Nguyen Giap.",
+  "2026년 11월 기준 m²당 약 2,100만~1억 8,800만 동: 리엔찌에우와 사회주택은 4,000만 동 미만, FourS·FPT City·호아쑤언은 4,500만~8,300만 동, 다낭 한강변과 보응우옌잡 도로는 9,000만~약 1억 9,000만 동입니다."
+ ],
+ "Trong mặt bằng giá căn hộ Đà Nẵng, theo bảng hàng chủ đầu tư 09/2026, The Legend ven sông Hàn ở mức 119 – 188 triệu/m²; Times Square, Nobu Residences và Sun Solar cũng trên 150 triệu/m² ở nhóm căn cao nhất.": [
+  "Among Da Nang apartment prices, according to the September 2026 developer inventory, The Legend on the Han River is at 119 – 188 million VND/m²; Times Square, Nobu Residences and Sun Solar are also above 150 million VND/m² for their top units.",
+  "2026년 9월 시행사 매물표 기준 다낭 한강변 The Legend가 m²당 1억 1,900만~1억 8,800만 동이며, Times Square, Nobu Residences, Sun Solar도 최상위 세대는 m²당 1억 5,000만 동을 넘습니다."
+ ],
+ "Trên 100 triệu/m²:": [
+  "Above 100 million VND/m²:",
+  "m²당 1억 동 이상:"
+ ],
+ "Ven sông Hàn tiếp tục kéo mặt bằng giá căn hộ Đà Nẵng lên:": [
+  "The Han River keeps pulling Da Nang apartment prices up:",
+  "다낭 한강변이 계속해서 다낭 아파트 가격 수준을 끌어올리고 있습니다:"
+ ],
+ "Ven sông Hàn, Hải Châu": [
+  "Han River side, Hai Chau",
+  "다낭 한강변, 하이쩌우"
+ ],
+ "Ven sông Hàn, Ngũ Hành Sơn": [
+  "Han River side, Ngu Hanh Son",
+  "다낭 한강변, 응우하인선"
+ ],
+ "Ven sông Hàn, Sơn Trà": [
+  "Han River side, Son Tra",
+  "다낭 한강변, 선짜"
+ ],
+ "Vì sao mặt bằng giá căn hộ Đà Nẵng chênh lệch lớn?": [
+  "Why do Da Nang apartment price levels vary so widely?",
+  "다낭 아파트 가격 수준의 격차가 큰 이유는?"
+ ],
+ "Vì vậy, khi nói mặt bằng giá căn hộ Đà Nẵng “tăng” hay “giảm”, anh chị nên hỏi đang so nhóm nào với nhóm nào. Một dự án mới ven sông Hàn mở bán giá cao không có nghĩa căn hộ Liên Chiểu cũng tăng theo cùng tốc độ.": [
+  "So when people say Da Nang apartment prices are 'rising' or 'falling', you should ask which group is being compared with which. A new Han River project launching at a high price does not mean Lien Chieu apartments are rising at the same pace.",
+  "따라서 다낭 아파트 가격이 '오른다' 또는 '내린다'고 할 때는 어떤 그룹을 어떤 그룹과 비교하는지 물어보셔야 합니다. 다낭 한강변 신규 프로젝트가 높은 가격에 분양된다고 해서 리엔찌에우 아파트도 같은 속도로 오르는 것은 아닙니다."
+ ],
+ "Võ Nguyên Giáp, Sơn Trà": [
+  "Vo Nguyen Giap, Son Tra",
+  "보응우옌잡, 선짜"
+ ],
+ "bản đồ giá Biggee.vn": [
+  "the Biggee.vn price map",
+  "Biggee.vn 가격 지도"
+ ],
+ "bảng hàng / bảng giá chủ đầu tư": [
+  "the latest developer inventory / price lists",
+  "최신 시행사 매물표 / 분양가표"
+ ],
+ "bảng hàng mới của The Legend, Capital Square đều có căn trên 140 triệu/m², cao hơn rõ so với mặt bằng rao bán 6 – 12 tháng trước.": [
+  "new inventory at The Legend and Capital Square both include units above 140 million VND/m², clearly higher than asking prices 6 – 12 months ago.",
+  "The Legend와 Capital Square의 신규 매물 모두 m²당 1억 4,000만 동이 넘는 세대가 있으며, 6~12개월 전 호가보다 확연히 높습니다."
+ ],
+ "cho các dự án còn lại.": [
+  "for the remaining projects.",
+  "(나머지 프로젝트)."
+ ],
+ "cách tra cứu": [
+  "how to look it up",
+  "조회 방법"
+ ],
+ "căn hộ hạng sang ven sông Hàn và trục Võ Nguyên Giáp – The Legend, Times Square, Nobu, Sun Solar, phần căn cao cấp của Capital Square, The Poet, Sun Ponte, Sun Cosmo.": [
+  "luxury apartments along the Han River and Vo Nguyen Giap – The Legend, Times Square, Nobu, Sun Solar, the high-end units of Capital Square, The Poet, Sun Ponte, Sun Cosmo.",
+  "다낭 한강변과 보응우옌잡 도로의 고급 아파트 – The Legend, Times Square, Nobu, Sun Solar, Capital Square 고급 세대, The Poet, Sun Ponte, Sun Cosmo."
+ ],
+ "dù mặt bằng giá căn hộ Đà Nẵng hấp dẫn đến đâu, anh chị nên tra cứu dự án trên": [
+  "however attractive Da Nang apartment prices may be, you should look up the project on the",
+  "다낭 아파트 가격이 아무리 매력적이어도, 다음 시스템에서 프로젝트를 조회하시기 바랍니다:"
+ ],
+ "giá bảng hàng chủ đầu tư là giá niêm yết (gồm VAT, phần lớn gồm 2% kinh phí bảo trì), chưa trừ chiết khấu – giá thực trả sau chính sách thường thấp hơn. Giá rao thứ cấp là giá người bán đưa ra, chưa phải giá giao dịch.": [
+  "developer inventory prices are list prices (incl. VAT, mostly incl. the 2% maintenance fee), before discounts – the actual price paid after policies is usually lower. Secondary asking prices are what sellers ask, not transaction prices.",
+  "시행사 매물 가격은 공시가(VAT 포함, 대부분 2% 관리기금 포함)로 할인 전 가격이며, 정책 적용 후 실제 지불 가격은 보통 더 낮습니다. 2차 시장 호가는 매도인이 제시한 가격일 뿐 실거래가가 아닙니다."
+ ],
+ "giá chủ đầu tư (chưa chiết khấu) nên so với giá chủ đầu tư; giá rao chuyển nhượng so với giá rao. Chênh 10 – 20 triệu/m² trong cùng dự án thường do tầng, view, nội thất.": [
+  "developer prices (before discount) should be compared with developer prices; resale asking prices with asking prices. A gap of 10 – 20 million VND/m² within the same project usually comes from floor, view and furniture.",
+  "시행사 가격(할인 전)은 시행사 가격과, 전매 호가는 호가와 비교해야 합니다. 같은 프로젝트 안에서 m²당 1,000만~2,000만 동 차이는 보통 층, 조망, 가구에서 비롯됩니다."
+ ],
+ "giá rao thứ cấp": [
+  "secondary-market asking prices",
+  "2차 시장 호가"
+ ],
+ "loại sản phẩm": [
+  "product type",
+  "상품 유형"
+ ],
+ "mới nhất,": [
+  "latest,",
+  "최신,"
+ ],
+ "nguồn giá": [
+  "price source",
+  "가격 출처"
+ ],
+ "phần lớn căn của Newtown Diamond, Sun Symphony, Sun Costa, Wyndham Soleil, The Meridian.": [
+  "most units at Newtown Diamond, Sun Symphony, Sun Costa, Wyndham Soleil, The Meridian.",
+  "Newtown Diamond, Sun Symphony, Sun Costa, Wyndham Soleil, The Meridian의 대부분 세대."
+ ],
+ "tháng 11/2026 trải từ khoảng": [
+  "in November 2026 range from about",
+  "2026년 11월 기준 약"
+ ],
+ "thương hiệu và tiêu chuẩn bàn giao": [
+  "brand and handover standard",
+  "브랜드와 인도 기준"
+ ],
+ "từ FourS Tower 45 – 68 triệu/m², Hòa Xuân 58 – 83, đến Sun Ponte, Sun Cosmo, Sun Solar trên 100 triệu/m² – anh chị có thể chọn theo ngân sách mà vẫn cùng một chủ đầu tư.": [
+  "from FourS Tower at 45 – 68 million VND/m² and Hoa Xuan at 58 – 83, to Sun Ponte, Sun Cosmo and Sun Solar above 100 million VND/m² – you can choose by budget while staying with the same developer.",
+  "m²당 4,500만~6,800만 동의 FourS Tower, 5,800만~8,300만 동의 호아쑤언부터 m²당 1억 동 이상인 Sun Ponte, Sun Cosmo, Sun Solar까지, 같은 시행사 안에서 예산에 맞게 선택할 수 있습니다."
+ ],
+ "và xem văn bản đủ điều kiện bán (xem": [
+  "and see the document confirming eligibility for sale (see",
+  "분양 요건 충족 서류도 확인하십시오(참고:"
+ ],
+ "vị trí": [
+  "location",
+  "입지"
+ ],
+ "đang chờ chủ đầu tư công bố giá nên chưa có trong bảng.": [
+  "is awaiting the developer's price announcement and is not yet in the table.",
+  "는 시행사의 가격 발표를 기다리고 있어 아직 표에 포함되지 않았습니다."
+ ],
+ "Ưu tiên bảng hàng, bảng giá chủ đầu tư mới nhất; tiếp theo là giá rao thứ cấp tháng 7 – 10/2026 và bản đồ giá Biggee.vn cho các dự án còn lại. Đây là giá tham khảo, chưa phải giá giao dịch.": [
+  "Priority goes to the latest developer inventory and price lists; next come secondary asking prices from July – October 2026 and the Biggee.vn price map for the remaining projects. These are reference prices, not transaction prices.",
+  "최신 시행사 매물표와 분양가표를 우선으로 하고, 그다음 2026년 7~10월 2차 시장 호가와 나머지 프로젝트에 대한 Biggee.vn 가격 지도를 사용했습니다. 참고 가격이며 실거래가가 아닙니다."
+ ],
+ "Ảnh thực tế flycam 11/2026: sông Hàn – cầu Rồng, nơi mặt bằng giá căn hộ Đà Nẵng cao nhất": [
+  "Actual drone photo, November 2026: Han River – Dragon Bridge, where Da Nang apartment prices are highest",
+  "드론 실사, 2026년 11월: 다낭 아파트 가격이 가장 높은 다낭 한강 – 용다리 일대"
+ ]
+}

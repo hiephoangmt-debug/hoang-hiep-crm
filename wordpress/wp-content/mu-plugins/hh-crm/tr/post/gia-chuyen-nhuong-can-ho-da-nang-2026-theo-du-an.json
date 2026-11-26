@@ -1,0 +1,318 @@
+{
+ "(gọi/Zalo) để nhận danh sách căn chuyển nhượng đang giao dịch thật theo ngân sách của anh chị.": [
+  "(call/Zalo) to receive a list of resale units actually being traded, matched to your budget.",
+  "(전화/Zalo)로 문의하시면 고객님 예산에 맞는 실제 거래 중인 전매 세대 목록을 보내 드립니다."
+ ],
+ "), nên khi so sánh, anh chị nên đặt căn chuyển nhượng cạnh giá chủ đầu tư hiện hành, chính sách chiết khấu và thời gian chờ nhận nhà.": [
+  "), so when comparing, you should put the resale unit next to the current developer price, discount policy and waiting time for handover.",
+  "), 비교할 때는 전매 세대를 현재 시행사 가격, 할인 정책, 입주 대기 기간과 나란히 놓고 보십시오."
+ ],
+ "1PN 1,31 – 1,94 tỷ; 2PN 1,96 – 2,56 tỷ; 3PN 2,79 – 3,1 tỷ": [
+  "1BR 1.31 – 1.94 billion VND; 2BR 1.96 – 2.56 billion VND; 3BR 2.79 – 3.1 billion VND",
+  "1베드룸 13억 1천만 – 19억 4천만 동, 2베드룸 19억 6천만 – 25억 6천만 동, 3베드룸 27억 9천만 – 31억 동"
+ ],
+ "1PN 1,6 – 2,5 tỷ; 2PN 2,6 – 4 tỷ": [
+  "1BR 1.6 – 2.5 billion VND; 2BR 2.6 – 4 billion VND",
+  "1베드룸 16억 – 25억 동, 2베드룸 26억 – 40억 동"
+ ],
+ "1PN 2,2 – 2,7 tỷ; 2PN 3 – 5 tỷ; 3PN 5,5 – 6,5 tỷ": [
+  "1BR 2.2 – 2.7 billion VND; 2BR 3 – 5 billion VND; 3BR 5.5 – 6.5 billion VND",
+  "1베드룸 22억 – 27억 동, 2베드룸 30억 – 50억 동, 3베드룸 55억 – 65억 동"
+ ],
+ "1PN 2,8 – 3,9 tỷ; 2PN 4,5 – 7,5 tỷ; 3PN 7,2 – 11,6 tỷ": [
+  "1BR 2.8 – 3.9 billion VND; 2BR 4.5 – 7.5 billion VND; 3BR 7.2 – 11.6 billion VND",
+  "1베드룸 28억 – 39억 동, 2베드룸 45억 – 75억 동, 3베드룸 72억 – 116억 동"
+ ],
+ "1PN 3,3 – 4,5 tỷ; 2PN 4,7 – 7,8 tỷ; 3PN 9,5 – 12,6 tỷ": [
+  "1BR 3.3 – 4.5 billion VND; 2BR 4.7 – 7.8 billion VND; 3BR 9.5 – 12.6 billion VND",
+  "1베드룸 33억 – 45억 동, 2베드룸 47억 – 78억 동, 3베드룸 95억 – 126억 동"
+ ],
+ "1PN 4,5 – 7,6 tỷ; 2PN 8,3 – 9,3 tỷ": [
+  "1BR 4.5 – 7.6 billion VND; 2BR 8.3 – 9.3 billion VND",
+  "1베드룸 45억 – 76억 동, 2베드룸 83억 – 93억 동"
+ ],
+ "2PN (63 – 71 m²) 5 – 6,7 tỷ": [
+  "2BR (63 – 71 m²) 5 – 6.7 billion VND",
+  "2베드룸(63 – 71 m²) 50억 – 67억 동"
+ ],
+ "2PN (76 m²) 4,3 – 5,1 tỷ": [
+  "2BR (76 m²) 4.3 – 5.1 billion VND",
+  "2베드룸(76 m²) 43억 – 51억 동"
+ ],
+ "2PN 2,25 – 3,4 tỷ; 3PN 3,9 – 4,25 tỷ": [
+  "2BR 2.25 – 3.4 billion VND; 3BR 3.9 – 4.25 billion VND",
+  "2베드룸 22억 5천만 – 34억 동, 3베드룸 39억 – 42억 5천만 동"
+ ],
+ "50 – 100 triệu/m²: ven sông Hàn, trục Trường Sa": [
+  "50 – 100 million VND/m²: along the Han River and the Truong Sa axis",
+  "m²당 5,000만 – 1억 동: 다낭 한강변, 쯔엉사 축"
+ ],
+ "Ba phân khúc giá chuyển nhượng căn hộ Đà Nẵng": [
+  "Three price segments for Da Nang apartment resales",
+  "다낭 아파트 전매 가격 3개 구간"
+ ],
+ "Bảng giá chuyển nhượng căn hộ Đà Nẵng theo dự án (tham khảo 10/2026)": [
+  "Da Nang apartment resale price table by project (for reference, October 2026)",
+  "프로젝트별 다낭 아파트 전매 가격표(참고, 2026년 10월)"
+ ],
+ "Bảng giá chuyển nhượng căn hộ Đà Nẵng tháng 10/2026 theo 15 dự án: từ khoảng 30 – 42 triệu/m² ở FPT City đến khoảng 150 triệu/m² ở Times Square (tham khảo tin rao).": [
+  "Da Nang apartment resale price table for October 2026 across 15 projects: from about 30 – 42 million VND/m² at FPT City to about 150 million VND/m² at Times Square (based on listings, for reference).",
+  "2026년 10월 15개 프로젝트별 다낭 아파트 전매 가격표: FPT City m²당 약 3,000만 – 4,200만 동부터 Times Square m²당 약 1억 5,000만 동까지(매물 광고 기준, 참고)."
+ ],
+ "Bảng giá chuyển nhượng căn hộ Đà Nẵng từ tin rao giúp định vị mặt bằng, nhưng giá giao dịch thật của từng căn chỉ rõ khi đã kiểm tra tầng, view, nội thất và pháp lý. Khi chọn giữa hai dự án cùng tầm tiền, anh chị nên so thêm giá thuê thực tế để biết khả năng khai thác, và thời gian còn lại đến khi nhận sổ. Quy trình giao dịch an toàn xem bài": [
+  "A resale price table from listings helps you gauge the general level, but the real transaction price of each unit only becomes clear after checking floor, view, furnishing and legal status. When choosing between two projects in the same price range, also compare actual rents to gauge rental potential, and the time remaining until the Pink Book is issued. For a safe transaction process see the article",
+  "매물 광고 기반 전매 가격표는 시세 수준 파악에 도움이 되지만, 세대별 실제 거래가는 층, 전망, 인테리어, 법적 상태를 확인해야 알 수 있습니다. 같은 가격대의 두 프로젝트 중 고를 때는 실제 임대료를 비교해 임대 가능성을 파악하고, 증서 발급까지 남은 기간도 함께 보십시오. 안전한 거래 절차는 다음 글을 참고하십시오:"
+ ],
+ "Chuyển nhượng HĐMB 2PN khoảng 4,9 tỷ": [
+  "SPA resale of a 2BR about 4.9 billion VND",
+  "2베드룸 매매계약 전매 약 49억 동"
+ ],
+ "Cách đọc giá chuyển nhượng căn hộ Đà Nẵng cho đúng": [
+  "How to read Da Nang apartment resale prices correctly",
+  "다낭 아파트 전매 가격을 올바르게 읽는 법"
+ ],
+ "Căn hộ chuyển nhượng nào dưới 3 tỷ?": [
+  "Which resale apartments are under 3 billion VND?",
+  "30억 동 미만 전매 아파트는?"
+ ],
+ "Dưới 50 triệu/m²: Liên Chiểu, FPT City": [
+  "Under 50 million VND/m²: Lien Chieu, FPT City",
+  "m²당 5,000만 동 미만: 리엔치에우, FPT City"
+ ],
+ "Giá chuyển nhượng căn hộ Đà Nẵng": [
+  "Da Nang apartment resale prices",
+  "다낭 아파트 전매 가격은"
+ ],
+ "Giá chuyển nhượng căn hộ Đà Nẵng 2026 bao nhiêu?": [
+  "What are Da Nang apartment resale prices in 2026?",
+  "2026년 다낭 아파트 전매 가격은 얼마인가요?"
+ ],
+ "Giá chuyển nhượng căn hộ Đà Nẵng 2026: bảng tổng hợp theo dự án": [
+  "Da Nang apartment resale prices 2026: summary table by project",
+  "2026년 다낭 아파트 전매 가격: 프로젝트별 종합표"
+ ],
+ "Giá chuyển nhượng căn hộ Đà Nẵng có thấp hơn giá chủ đầu tư không?": [
+  "Are Da Nang apartment resale prices lower than developer prices?",
+  "다낭 아파트 전매 가격이 시행사 가격보다 낮나요?"
+ ],
+ "Giá chuyển nhượng căn hộ Đà Nẵng so với giá bán mới": [
+  "Da Nang apartment resale prices vs new sale prices",
+  "다낭 아파트 전매 가격 vs 신규 분양가"
+ ],
+ "Giá chuyển nhượng căn hộ Đà Nẵng ở Liên Chiểu, FPT City khoảng 30 – 42 triệu/m² (tham khảo tin rao)": [
+  "Da Nang apartment resale prices in Lien Chieu and FPT City about 30 – 42 million VND/m² (based on listings)",
+  "리엔치에우, FPT City 다낭 아파트 전매 가격 m²당 약 3,000만 – 4,200만 동(매물 광고 기준)"
+ ],
+ "Giá rao chuyển nhượng có phải giá chốt không?": [
+  "Is the listed resale price the final price?",
+  "전매 광고 가격이 최종 거래가인가요?"
+ ],
+ "Hạng sang: The Filmore khoảng 110 triệu/m², Times Square khoảng 150 triệu/m²": [
+  "Luxury: The Filmore about 110 million VND/m², Times Square about 150 million VND/m²",
+  "고급: The Filmore m²당 약 1억 1,000만 동, Times Square m²당 약 1억 5,000만 동"
+ ],
+ "Hải Châu – sông Hàn": [
+  "Hai Chau – Han River",
+  "하이쩌우 – 다낭 한강"
+ ],
+ "Không phải lúc nào căn chuyển nhượng cũng đắt hơn giá gốc. Ở một số dự án, giá chuyển nhượng căn hộ Đà Nẵng đang thấp hơn giá chào của chủ đầu tư: The Filmore chuyển nhượng quanh 110 triệu/m² trong khi giá chủ đầu tư khoảng 130 – 150 triệu/m²; căn 1PN Newtown Diamond rao chuyển nhượng từ khoảng 2,8 tỷ, thấp hơn khoảng giá chào bán 3,5 – 3,9 tỷ. Ngược lại, căn đã bàn giao, có nội thất và đang cho thuê thường được chào cao hơn.": [
+  "Resale units are not always more expensive than the original price. In some projects, Da Nang apartment resale prices are currently below the developer's asking price: The Filmore resells at around 110 million VND/m² while the developer price is about 130 – 150 million VND/m²; Newtown Diamond 1BR units are listed for resale from about 2.8 billion VND, below the asking range of 3.5 – 3.9 billion VND. Conversely, units that have been handed over, are furnished and are being rented out are usually offered at higher prices.",
+  "전매 세대가 항상 원분양가보다 비싼 것은 아닙니다. 일부 프로젝트는 현재 다낭 아파트 전매 가격이 시행사 호가보다 낮습니다. The Filmore는 m²당 약 1억 1,000만 동에 전매되는 반면 시행사 가격은 m²당 약 1억 3,000만 – 1억 5,000만 동이며, Newtown Diamond 1베드룸은 약 28억 동부터 전매 매물이 나와 호가 범위 35억 – 39억 동보다 낮습니다. 반대로 이미 인도되어 인테리어를 갖추고 임대 중인 세대는 보통 더 높은 가격에 나옵니다."
+ ],
+ "Không. Đây là giá chào, thường còn biên độ thương lượng và chênh theo tầng, view, nội thất, pháp lý.": [
+  "No. It is an asking price, usually with room for negotiation, and varies by floor, view, furnishing and legal status.",
+  "아닙니다. 호가이며 보통 협상 여지가 있고 층, 전망, 인테리어, 법적 상태에 따라 달라집니다."
+ ],
+ "Masteri Đà Nẵng": [
+  "Masteri Da Nang",
+  "Masteri Da Nang"
+ ],
+ "Nguồn: tổng hợp tin rao bán công khai tháng 10/2026. Giá chuyển nhượng căn hộ Đà Nẵng trong bảng có khoảng rộng vì phụ thuộc tầng, hướng view, nội thất, tình trạng pháp lý (đã có sổ hay chuyển nhượng hợp đồng). Giá rao thường còn biên độ thương lượng.": [
+  "Source: compiled from public sale listings in October 2026. Da Nang apartment resale prices in the table have wide ranges because they depend on floor, view, furnishing and legal status (Pink Book issued or contract resale). Listed prices usually leave room for negotiation.",
+  "출처: 2026년 10월 공개 매물 광고 종합. 표의 다낭 아파트 전매 가격은 층, 전망, 인테리어, 법적 상태(증서 발급 여부 또는 계약 전매)에 따라 달라 범위가 넓습니다. 광고 가격은 보통 협상 여지가 있습니다."
+ ],
+ "Ngũ Hành Sơn – biển": [
+  "Ngu Hanh Son – beach",
+  "응우한선 – 해변"
+ ],
+ "Ngũ Hành Sơn – sông Hàn": [
+  "Ngu Hanh Son – Han River",
+  "응우한선 – 다낭 한강"
+ ],
+ "Phân biệt căn có sổ và chuyển nhượng HĐMB:": [
+  "Distinguish between units with a Pink Book and SPA resales:",
+  "증서 발급 세대와 매매계약 전매 구분:"
+ ],
+ "Quy về đơn giá/m² thông thủy": [
+  "Convert to price per m² of net area",
+  "전용면적 m²당 단가로 환산"
+ ],
+ "Studio 1,8 – 2,5 tỷ; 1PN 2,8 – 5,3 tỷ; 2PN 3,6 – 6,8 tỷ; 3PN 6 – 9,5 tỷ": [
+  "Studio 1.8 – 2.5 billion VND; 1BR 2.8 – 5.3 billion VND; 2BR 3.6 – 6.8 billion VND; 3BR 6 – 9.5 billion VND",
+  "스튜디오 18억 – 25억 동, 1베드룸 28억 – 53억 동, 2베드룸 36억 – 68억 동, 3베드룸 60억 – 95억 동"
+ ],
+ "Studio 2,3 – 2,6 tỷ; 1PN (55 – 58 m²) khoảng 4,3 tỷ": [
+  "Studio 2.3 – 2.6 billion VND; 1BR (55 – 58 m²) about 4.3 billion VND",
+  "스튜디오 23억 – 26억 동, 1베드룸(55 – 58 m²) 약 43억 동"
+ ],
+ "Studio 3,2 – 3,6 tỷ; 1PN+ từ 4,5 tỷ; 2PN 6 – 8 tỷ; 3PN từ 8,2 tỷ": [
+  "Studio 3.2 – 3.6 billion VND; 1BR+ from 4.5 billion VND; 2BR 6 – 8 billion VND; 3BR from 8.2 billion VND",
+  "스튜디오 32억 – 36억 동, 1베드룸+ 45억 동부터, 2베드룸 60억 – 80억 동, 3베드룸 82억 동부터"
+ ],
+ "Studio/1PN 2,96 – 4,49 tỷ; 2PN 4,3 – 6,9 tỷ; 3PN 5,6 – 10 tỷ": [
+  "Studio/1BR 2.96 – 4.49 billion VND; 2BR 4.3 – 6.9 billion VND; 3BR 5.6 – 10 billion VND",
+  "스튜디오/1베드룸 29억 6천만 – 44억 9천만 동, 2베드룸 43억 – 69억 동, 3베드룸 56억 – 100억 동"
+ ],
+ "Studio/1PN 6,5 – 8,5 tỷ; 2PN 12 – 14 tỷ": [
+  "Studio/1BR 6.5 – 8.5 billion VND; 2BR 12 – 14 billion VND",
+  "스튜디오/1베드룸 65억 – 85억 동, 2베드룸 120억 – 140억 동"
+ ],
+ "Sun Ponte Residence nhìn từ sông Hàn – nhóm ven sông có giá chuyển nhượng căn hộ Đà Nẵng khoảng 70 – 112 triệu/m²": [
+  "Sun Ponte Residence seen from the Han River – the riverside group with Da Nang apartment resale prices of about 70 – 112 million VND/m²",
+  "다낭 한강에서 본 Sun Ponte Residence – 다낭 아파트 전매 가격 m²당 약 7,000만 – 1억 1,200만 동의 강변 그룹"
+ ],
+ "Sông Hàn": [
+  "Han River",
+  "다낭 한강"
+ ],
+ "Sơn Trà – biển": [
+  "Son Tra – beach",
+  "선짜 – 해변"
+ ],
+ "Sơn Trà – biển Mỹ Khê": [
+  "Son Tra – My Khe Beach",
+  "선짜 – 미케 비치"
+ ],
+ "Sơn Trà – sông Hàn": [
+  "Son Tra – Han River",
+  "선짜 – 다낭 한강"
+ ],
+ "Tham khảo tin rao tháng 10/2026: khoảng 30 – 42 triệu/m² ở FPT City, Liên Chiểu; 50 – 125 triệu/m² ở dự án ven sông Hàn; trên 100 triệu/m² ở nhóm hạng sang.": [
+  "Based on October 2026 listings: about 30 – 42 million VND/m² at FPT City and Lien Chieu; 50 – 125 million VND/m² at projects along the Han River; over 100 million VND/m² in the luxury group.",
+  "2026년 10월 매물 광고 기준: FPT City, 리엔치에우 m²당 약 3,000만 – 4,200만 동, 다낭 한강변 프로젝트 m²당 5,000만 – 1억 2,500만 동, 고급 그룹 m²당 1억 동 이상."
+ ],
+ "The Filmore và Times Square nằm ở nhóm giá chuyển nhượng căn hộ Đà Nẵng cao nhất, quỹ căn ít, giá giữ tốt nhờ vị trí khó thay thế. Xem bài": [
+  "The Filmore and Times Square are in the highest Da Nang apartment resale price group, with few units and prices holding well thanks to hard-to-replace locations. See the article",
+  "The Filmore와 Times Square는 다낭 아파트 전매 가격이 가장 높은 그룹으로, 세대 수가 적고 대체하기 어려운 입지 덕분에 가격이 잘 유지됩니다. 다음 글을 보십시오:"
+ ],
+ "The Ori Garden và các tòa FPT Plaza có tổng giá căn 2PN quanh 2 – 4 tỷ, phù hợp người mua ở thực ngân sách vừa phải. Xem thêm bài": [
+  "The Ori Garden and the FPT Plaza towers have 2BR total prices around 2 – 4 billion VND, suitable for owner-occupiers with a moderate budget. See also the article",
+  "The Ori Garden과 FPT Plaza 각 동은 2베드룸 총액이 약 20억 – 40억 동으로, 예산이 적당한 실거주 매수자에게 적합합니다. 함께 보기:"
+ ],
+ "Theo tin rao, nhóm có giá chuyển nhượng căn hộ Đà Nẵng dưới 3 tỷ gồm The Ori Garden, FPT Plaza và một số căn 1PN Peninsula, studio Sun Cosmo; cần kiểm tra từng căn cụ thể.": [
+  "According to listings, the group with Da Nang apartment resale prices under 3 billion VND includes The Ori Garden, FPT Plaza and some 1BR units at Peninsula and studios at Sun Cosmo; each specific unit needs to be checked.",
+  "매물 광고에 따르면 30억 동 미만 다낭 아파트 전매 그룹에는 The Ori Garden, FPT Plaza, 일부 Peninsula 1베드룸, Sun Cosmo 스튜디오가 있으며, 세대별로 확인이 필요합니다."
+ ],
+ "Thị trường năm 2026 phân hóa mạnh giữa các khu vực và dòng sản phẩm (xem nhận định trên": [
+  "The 2026 market is strongly divided across areas and product lines (see the assessment on",
+  "2026년 시장은 지역과 상품군에 따라 크게 분화되어 있으므로(다음 견해 참고:"
+ ],
+ "Trên 100 triệu/m²: hạng sang mặt sông, mặt biển": [
+  "Over 100 million VND/m²: luxury riverfront and beachfront",
+  "m²당 1억 동 이상: 강변·해변 고급 아파트"
+ ],
+ "Tách giá nội thất:": [
+  "Separate the furnishing value:",
+  "인테리어 가치 분리:"
+ ],
+ "Tính đủ thuế phí:": [
+  "Account for all taxes and fees:",
+  "세금과 수수료 모두 계산:"
+ ],
+ "Tùy dự án. Theo tin rao 10/2026, giá chuyển nhượng căn hộ Đà Nẵng ở The Filmore (khoảng 110 triệu/m²) thấp hơn giá chủ đầu tư (khoảng 130 – 150 triệu/m²); căn đã bàn giao có nội thất thường được chào cao hơn.": [
+  "It depends on the project. According to October 2026 listings, Da Nang apartment resale prices at The Filmore (about 110 million VND/m²) are lower than the developer price (about 130 – 150 million VND/m²); units that have been handed over and are furnished are usually offered higher.",
+  "프로젝트에 따라 다릅니다. 2026년 10월 매물 광고 기준 The Filmore의 전매 가격(m²당 약 1억 1,000만 동)은 시행사 가격(m²당 약 1억 3,000만 – 1억 5,000만 동)보다 낮으며, 인도 후 인테리어를 갖춘 세대는 보통 더 높게 나옵니다."
+ ],
+ "Ven sông Hàn, trục Trường Sa khoảng 50 – 125 triệu/m²": [
+  "Along the Han River and the Truong Sa axis about 50 – 125 million VND/m²",
+  "다낭 한강변, 쯔엉사 축 m²당 약 5,000만 – 1억 2,500만 동"
+ ],
+ "căn HĐMB còn nghĩa vụ thanh toán với chủ đầu tư, cần cộng phần còn lại vào tổng giá.": [
+  "SPA units still have payment obligations to the developer; add the remaining amount to the total price.",
+  "매매계약 세대는 시행사에 대한 남은 납부 의무가 있으므로 잔금을 총액에 더해야 합니다."
+ ],
+ "căn full nội thất cao cấp có thể chênh vài trăm triệu so với căn bàn giao cơ bản.": [
+  "a fully furnished high-end unit may differ by a few hundred million VND from a unit with the basic handover package.",
+  "고급 풀옵션 세대는 기본 인도 세대와 수억 동 차이가 날 수 있습니다."
+ ],
+ "căn hộ đang bán tại Đà Nẵng": [
+  "apartments for sale in Da Nang",
+  "다낭 매매 아파트"
+ ],
+ "mua căn hộ Đà Nẵng 2 – 3 tỷ": [
+  "buying a Da Nang apartment for 2 – 3 billion VND",
+  "20억 – 30억 동으로 다낭 아파트 사기"
+ ],
+ "thuế, phí mua bán nhà đất 2026": [
+  "real estate transaction taxes and fees 2026",
+  "2026년 부동산 매매 세금과 수수료"
+ ],
+ "tháng 10/2026 phân hóa rõ theo vị trí: khoảng 30 – 42 triệu/m² ở FPT City và Liên Chiểu, 50 – 125 triệu/m² ở các dự án ven sông Hàn, và khoảng 110 – 150 triệu/m² ở nhóm hạng sang mặt sông, mặt biển. Bảng dưới đây tổng hợp khoảng giá từ tin rao công khai theo từng dự án, chỉ để tham khảo mặt bằng, không phải giá chốt.": [
+  "in October 2026 vary clearly by location: about 30 – 42 million VND/m² at FPT City and Lien Chieu, 50 – 125 million VND/m² at projects along the Han River, and about 110 – 150 million VND/m² in the luxury riverfront and beachfront group. The table below compiles price ranges from public listings by project, only as a reference for the general level, not final prices.",
+  " 2026년 10월 기준 위치에 따라 뚜렷하게 나뉩니다. FPT City와 리엔치에우는 m²당 약 3,000만 – 4,200만 동, 다낭 한강변 프로젝트는 m²당 5,000만 – 1억 2,500만 동, 강변·해변 고급 그룹은 m²당 약 1억 1,000만 – 1억 5,000만 동입니다. 아래 표는 공개 매물 광고의 가격대를 프로젝트별로 정리한 것으로, 시세 수준 참고용이며 최종 거래가가 아닙니다."
+ ],
+ "Đây là nhóm giá chuyển nhượng căn hộ Đà Nẵng đông giao dịch nhất năm 2026 vì nhiều dự án vừa bàn giao: Sun Cosmo, Sun Ponte, Sun Symphony, Peninsula, Newtown Diamond, Capital Square. Chi tiết từng dự án xem các bài": [
+  "This is the Da Nang apartment resale price group with the most transactions in 2026, because many projects have just been handed over: Sun Cosmo, Sun Ponte, Sun Symphony, Peninsula, Newtown Diamond, Capital Square. For details on each project see the articles",
+  "많은 프로젝트가 막 인도되어 2026년 다낭 아파트 전매 거래가 가장 활발한 가격대입니다: Sun Cosmo, Sun Ponte, Sun Symphony, Peninsula, Newtown Diamond, Capital Square. 프로젝트별 자세한 내용은 다음 글을 참고하십시오:"
+ ],
+ "Đơn giá ước tính": [
+  "Estimated unit price",
+  "추정 단가"
+ ],
+ "Đọc thêm về giá chuyển nhượng căn hộ Đà Nẵng": [
+  "Further reading on Da Nang apartment resale prices",
+  "다낭 아파트 전매 가격 관련 더 읽기"
+ ],
+ "để so giữa các căn khác diện tích.": [
+  "to compare units of different sizes.",
+  "하여 면적이 다른 세대를 비교하십시오."
+ ],
+ "≈ 110 triệu/m²": [
+  "≈ 110 million VND/m²",
+  "≈ m²당 1억 1,000만 동"
+ ],
+ "≈ 150 triệu/m²": [
+  "≈ 150 million VND/m²",
+  "≈ m²당 1억 5,000만 동"
+ ],
+ "≈ 30 – 42 triệu/m²": [
+  "≈ 30 – 42 million VND/m²",
+  "≈ m²당 3,000만 – 4,200만 동"
+ ],
+ "≈ 37 – 42 triệu/m²": [
+  "≈ 37 – 42 million VND/m²",
+  "≈ m²당 3,700만 – 4,200만 동"
+ ],
+ "≈ 48 – 55 triệu/m²": [
+  "≈ 48 – 55 million VND/m²",
+  "≈ m²당 4,800만 – 5,500만 동"
+ ],
+ "≈ 50 – 83 triệu/m²": [
+  "≈ 50 – 83 million VND/m²",
+  "≈ m²당 5,000만 – 8,300만 동"
+ ],
+ "≈ 60 – 90 triệu/m²": [
+  "≈ 60 – 90 million VND/m²",
+  "≈ m²당 6,000만 – 9,000만 동"
+ ],
+ "≈ 65 – 95 triệu/m²": [
+  "≈ 65 – 95 million VND/m²",
+  "≈ m²당 6,500만 – 9,500만 동"
+ ],
+ "≈ 69 – 125 triệu/m²": [
+  "≈ 69 – 125 million VND/m²",
+  "≈ m²당 6,900만 – 1억 2,500만 동"
+ ],
+ "≈ 70 – 112 triệu/m²": [
+  "≈ 70 – 112 million VND/m²",
+  "≈ m²당 7,000만 – 1억 1,200만 동"
+ ],
+ "≈ 74 – 130 triệu/m²": [
+  "≈ 74 – 130 million VND/m²",
+  "≈ m²당 7,400만 – 1억 3,000만 동"
+ ],
+ "≈ 74 – 90 triệu/m²": [
+  "≈ 74 – 90 million VND/m²",
+  "≈ m²당 7,400만 – 9,000만 동"
+ ]
+}

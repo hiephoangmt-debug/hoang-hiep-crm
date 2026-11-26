@@ -1,0 +1,438 @@
+{
+ "(Bảng hàng quỹ đại lý tầng 7 – 19)": [
+  "(Agency inventory list, floors 7 – 19)",
+  "(대리점 매물 목록, 7 – 19층)"
+ ],
+ "(gọi/Zalo) để nhận danh sách căn hộ view sông Hàn trực diện đang có hàng và so sánh giá từng tầng, từng hướng.": [
+  "(call/Zalo) to receive the list of available Han River direct-view apartments and compare prices by floor and orientation.",
+  "(전화/Zalo)로 문의하시면 현재 매물이 있는 다낭 한강 정면 전망 아파트 목록을 받고 층별·방향별 가격을 비교하실 수 있습니다."
+ ],
+ "(số liệu Biggee.vn), chưa phải giá giao dịch; căn tầng cao, view trực diện thường ở mức trên của khoảng giá. Nhìn chung: dự án mới, hạng sang quanh cầu Sông Hàn – cầu Rồng (M Landmark, The Filmore, The Legend, Landmark Tower) trên 118 triệu/m²; nhóm Sun Group bờ Đông khoảng 86 – 124 triệu/m²; chung cư lâu năm phía Bắc (Blooming, Hòa Bình Green, Blue House, Vicoland) dưới 50 triệu/m² – lựa chọn view sông vừa túi tiền.": [
+  "(Biggee.vn data), not transaction prices; high-floor units with direct views are usually at the top of the range. Overall: new luxury projects around Han River Bridge – Dragon Bridge (M Landmark, The Filmore, The Legend, Landmark Tower) are above 118 million VND/m²; the Sun Group cluster on the East Bank is about 86 – 124 million VND/m²; older condominiums to the north (Blooming, Hoa Binh Green, Blue House, Vicoland) are below 50 million VND/m² – an affordable river-view option.",
+  "(Biggee.vn 자료)이며 실거래가가 아닙니다. 고층·정면 전망 세대는 대개 가격대 상단에 있습니다. 전체적으로 다낭 한강교 – 용다리 주변 신규 고급 프로젝트(M Landmark, The Filmore, The Legend, Landmark Tower)는 m²당 1억 1,800만 동 이상, 동안의 Sun Group 프로젝트군은 약 8,600만 – 1억 2,400만 동, 북쪽의 오래된 아파트(Blooming, Hoa Binh Green, Blue House, Vicoland)는 5,000만 동 미만으로 부담 없는 강 전망 선택지입니다."
+ ],
+ ", chuyên gia.": [
+  ", as well as expatriate professionals.",
+  ", 외국인 전문가에게 임대하기 쉽습니다."
+ ],
+ ". Danh sách đầy đủ dự án cao tầng có tại trang": [
+  ". The full list of high-rise projects is on the page",
+  ". 고층 프로젝트 전체 목록은 다음 페이지에 있습니다:"
+ ],
+ "100 – 124 triệu/m²": [
+  "100 – 124 million VND/m²",
+  "m²당 1억 – 1억 2,400만 동"
+ ],
+ "112 – 122 triệu/m²": [
+  "112 – 122 million VND/m²",
+  "m²당 1억 1,200만 – 1억 2,200만 동"
+ ],
+ "117 – 178 triệu/m²": [
+  "117 – 178 million VND/m²",
+  "m²당 1억 1,700만 – 1억 7,800만 동"
+ ],
+ "118 – 128 triệu/m²": [
+  "118 – 128 million VND/m²",
+  "m²당 1억 1,800만 – 1억 2,800만 동"
+ ],
+ "132 – 145 triệu/m²": [
+  "132 – 145 million VND/m²",
+  "m²당 1억 3,200만 – 1억 4,500만 동"
+ ],
+ "174 – 212 triệu/m²": [
+  "174 – 212 million VND/m²",
+  "m²당 1억 7,400만 – 2억 1,200만 동"
+ ],
+ "208 – 228 triệu/m²": [
+  "208 – 228 million VND/m²",
+  "m²당 2억 800만 – 2억 2,800만 동"
+ ],
+ "2PN khoảng 5,95 – 6,7 tỷ": [
+  "2BR about 5.95 – 6.7 billion VND",
+  "2베드룸 약 59억 5천만 – 67억 동"
+ ],
+ "35 – 40 triệu/m²": [
+  "35 – 40 million VND/m²",
+  "m²당 3,500만 – 4,000만 동"
+ ],
+ "39 – 41 triệu/m²": [
+  "39 – 41 million VND/m²",
+  "m²당 3,900만 – 4,100만 동"
+ ],
+ "42 – 44 triệu/m²": [
+  "42 – 44 million VND/m²",
+  "m²당 4,200만 – 4,400만 동"
+ ],
+ "44 – 46 triệu/m²": [
+  "44 – 46 million VND/m²",
+  "m²당 4,400만 – 4,600만 동"
+ ],
+ "54 – 57 triệu/m²": [
+  "54 – 57 million VND/m²",
+  "m²당 5,400만 – 5,700만 동"
+ ],
+ "58 – 67 triệu/m²": [
+  "58 – 67 million VND/m²",
+  "m²당 5,800만 – 6,700만 동"
+ ],
+ "65 – 66 triệu/m²": [
+  "65 – 66 million VND/m²",
+  "m²당 6,500만 – 6,600만 동"
+ ],
+ "68 – 80 triệu/m²": [
+  "68 – 80 million VND/m²",
+  "m²당 6,800만 – 8,000만 동"
+ ],
+ "69 – 72 triệu/m²": [
+  "69 – 72 million VND/m²",
+  "m²당 6,900만 – 7,200만 동"
+ ],
+ "72 – 85 triệu/m²": [
+  "72 – 85 million VND/m²",
+  "m²당 7,200만 – 8,500만 동"
+ ],
+ "81 – 88 triệu/m²": [
+  "81 – 88 million VND/m²",
+  "m²당 8,100만 – 8,800만 동"
+ ],
+ "85 – 95 triệu/m²": [
+  "85 – 95 million VND/m²",
+  "m²당 8,500만 – 9,500만 동"
+ ],
+ "86 – 106 triệu/m²": [
+  "86 – 106 million VND/m²",
+  "m²당 8,600만 – 1억 600만 동"
+ ],
+ "90 – 98 triệu/m²": [
+  "90 – 98 million VND/m²",
+  "m²당 9,000만 – 9,800만 동"
+ ],
+ "99 – 116 triệu/m²": [
+  "99 – 116 million VND/m²",
+  "m²당 9,900만 – 1억 1,600만 동"
+ ],
+ "Bàn giao Quý 3/2026 (dự kiến)": [
+  "Handover Q3 2026 (expected)",
+  "2026년 3분기 인도(예정)"
+ ],
+ "Bản đồ vị trí và giá rao 21 dự án căn hộ hai bờ sông Hàn. Số liệu giá rao: Biggee.vn; đồ hoạ: hiephoangmt.com.": [
+  "Location map and asking prices of 21 apartment projects on both banks of the Han River. Asking-price data: Biggee.vn; graphics: hiephoangmt.com.",
+  "다낭 한강 양안 21개 아파트 프로젝트 위치 지도 및 호가. 호가 자료: Biggee.vn, 그래픽: hiephoangmt.com."
+ ],
+ "Bảng giá căn hộ view sông Hàn 10/2026: 21 dự án hai bờ": [
+  "Han River view apartment price list, October 2026: 21 projects on both banks",
+  "다낭 한강 전망 아파트 분양가표 2026년 10월: 양안 21개 프로젝트"
+ ],
+ "Bảng giá rao 21 dự án căn hộ view sông Hàn, kèm bản đồ vị trí": [
+  "Asking-price list for 21 Han River view apartment projects, with a location map",
+  "다낭 한강 전망 아파트 21개 프로젝트 호가표 및 위치 지도"
+ ],
+ "Bờ Tây (Bạch Đằng)": [
+  "West Bank (Bach Dang)",
+  "서안(박당 거리)"
+ ],
+ "Bờ Tây (Quy Mỹ)": [
+  "West Bank (Quy My)",
+  "서안(꾸이미)"
+ ],
+ "Bờ Tây (đường 2/9)": [
+  "West Bank (2/9 Street)",
+  "서안(2/9 거리)"
+ ],
+ "Bờ Tây (đối diện công viên APEC)": [
+  "West Bank (opposite APEC Park)",
+  "서안(APEC 공원 맞은편)"
+ ],
+ "Bờ Tây là lõi hành chính, thương mại với công viên APEC, chợ Hàn, phố đi bộ ven sông. Số căn ít hơn, giá mỗi m² thường cao hơn, phù hợp khách tìm căn hạng sang hoặc căn cho thuê chuyên gia.": [
+  "The West Bank is the administrative and commercial core, with APEC Park, Han Market and the riverside walking street. There are fewer units and prices per m² are usually higher, suited to buyers seeking luxury units or units to rent to expatriate professionals.",
+  "서안은 APEC 공원, 한시장, 강변 보행자 거리가 있는 행정·상업 중심지입니다. 세대수가 적고 m²당 가격이 대개 더 높아, 고급 세대나 외국인 전문가 임대용 세대를 찾는 고객에게 적합합니다."
+ ],
+ "Bờ Tây – Hải Châu": [
+  "West Bank – Hai Chau",
+  "서안 – 하이쩌우"
+ ],
+ "Bờ sông": [
+  "Bank",
+  "강변"
+ ],
+ "Bờ Đông (Sơn Trà)": [
+  "East Bank (Son Tra)",
+  "동안(선짜)"
+ ],
+ "Bờ Đông (Trần Hưng Đạo)": [
+  "East Bank (Tran Hung Dao)",
+  "동안(쩐흥다오 거리)"
+ ],
+ "Bờ Đông (chân cầu Trần Thị Lý)": [
+  "East Bank (foot of Tran Thi Ly Bridge)",
+  "동안(쩐티리 다리 기슭)"
+ ],
+ "Bờ Đông (gần cầu Thuận Phước)": [
+  "East Bank (near Thuan Phuoc Bridge)",
+  "동안(투언프억 다리 인근)"
+ ],
+ "Bờ Đông (đầu cầu Rồng)": [
+  "East Bank (Dragon Bridge end)",
+  "동안(용다리 입구)"
+ ],
+ "Bờ Đông có nhiều dự án quy mô lớn, nhìn sang trung tâm Hải Châu, gần biển Mỹ Khê. Nguồn hàng đa dạng từ studio đến penthouse, phù hợp cả ở thực và cho thuê.": [
+  "The East Bank has many large-scale projects looking across to central Hai Chau, close to My Khe Beach. Supply ranges from studios to penthouses, suitable for both living and renting out.",
+  "동안에는 하이쩌우 중심부를 바라보고 미케 비치와 가까운 대규모 프로젝트가 많습니다. 스튜디오부터 펜트하우스까지 매물이 다양해 실거주와 임대 모두에 적합합니다."
+ ],
+ "Bờ Đông nhiều lựa chọn, giá đa dạng, gần biển; bờ Tây ít căn hơn, giá cao hơn nhưng nằm ngay lõi trung tâm Hải Châu.": [
+  "The East Bank offers more choice and varied prices, close to the beach; the West Bank has fewer units and higher prices but sits right in the core of central Hai Chau.",
+  "동안은 선택지가 많고 가격이 다양하며 해변과 가깝습니다. 서안은 세대수가 적고 가격이 높지만 하이쩌우 중심부 핵심에 위치합니다."
+ ],
+ "Bờ Đông – Sơn Trà": [
+  "East Bank – Son Tra",
+  "동안 – 선짜"
+ ],
+ "Cao nhất M Landmark 208 – 228, The Filmore 174 – 212 triệu/m²; thấp nhất Hòa Bình Green 35 – 40 triệu/m²": [
+  "Highest: M Landmark 208 – 228, The Filmore 174 – 212 million VND/m²; lowest: Hoa Binh Green 35 – 40 million VND/m²",
+  "최고: M Landmark m²당 2억 800만 – 2억 2,800만 동, The Filmore 1억 7,400만 – 2억 1,200만 동; 최저: Hoa Binh Green 3,500만 – 4,000만 동"
+ ],
+ "Chung cư Vicoland": [
+  "Vicoland Apartments",
+  "Vicoland 아파트"
+ ],
+ "Chú ý tầng:": [
+  "Mind the floor:",
+  "층수 확인:"
+ ],
+ "Các chung cư lâu năm phía cầu Thuận Phước như Hòa Bình Green (35 – 40), Blooming Tower (39 – 41), Blue House (42 – 44), Vicoland (44 – 46 triệu/m²).": [
+  "Older condominiums near Thuan Phuoc Bridge such as Hoa Binh Green (35 – 40), Blooming Tower (39 – 41), Blue House (42 – 44) and Vicoland (44 – 46 million VND/m²).",
+  "투언프억 다리 쪽 오래된 아파트인 Hoa Binh Green(3,500만 – 4,000만), Blooming Tower(3,900만 – 4,100만), Blue House(4,200만 – 4,400만), Vicoland(m²당 4,400만 – 4,600만 동)입니다."
+ ],
+ "Căn hộ view sông Hàn bờ Đông hay bờ Tây?": [
+  "Han River view apartments: East Bank or West Bank?",
+  "다낭 한강 전망 아파트: 동안인가 서안인가?"
+ ],
+ "Căn hộ view sông Hàn giá bao nhiêu?": [
+  "How much does a Han River view apartment cost?",
+  "다낭 한강 전망 아파트는 얼마인가요?"
+ ],
+ "Căn hộ view sông Hàn hiện có ở cả hai bờ: bờ Đông (Sơn Trà, Ngũ Hành Sơn) với các dự án của Sun Group, Peninsula, Capital Square, The Legend và bờ Tây (Hải Châu) với The Filmore, Danang Landmark, M Riverside, The Meridian. Giá rao tháng 10/2026 của 21 dự án hai bờ dao động khoảng 35 – 228 triệu/m², phổ biến 65 – 125 triệu/m² tùy dự án, tầng và hướng nhìn. Thông tin được Hoàng Hiệp cập nhật tháng 10/2026.": [
+  "Han River view apartments are available on both banks: the East Bank (Son Tra, Ngu Hanh Son) with projects by Sun Group, Peninsula, Capital Square and The Legend, and the West Bank (Hai Chau) with The Filmore, Danang Landmark, M Riverside and The Meridian. October 2026 asking prices for the 21 projects on both banks range from about 35 to 228 million VND/m², typically 65 – 125 million VND/m² depending on the project, floor and view. Information updated by Hoang Hiep in October 2026.",
+  "다낭 한강 전망 아파트는 양안 모두에 있습니다. 동안(선짜, 오행산)에는 Sun Group, Peninsula, Capital Square, The Legend 프로젝트가, 서안(하이쩌우)에는 The Filmore, Danang Landmark, M Riverside, The Meridian이 있습니다. 2026년 10월 양안 21개 프로젝트의 호가는 m²당 약 3,500만 – 2억 2,800만 동이며, 프로젝트·층·전망에 따라 대개 6,500만 – 1억 2,500만 동입니다. 호앙 히엡이 2026년 10월에 업데이트한 정보입니다."
+ ],
+ "Căn hộ view sông Hàn nào giá mềm nhất?": [
+  "Which Han River view apartments are the most affordable?",
+  "가장 저렴한 다낭 한강 전망 아파트는 어디인가요?"
+ ],
+ "Căn hộ view sông Hàn tháng 10/2026: bảng giá rao 21 dự án hai bờ Sơn Trà, Hải Châu từ 35 – 40 đến 208 – 228 triệu/m², bản đồ vị trí, giá theo loại căn và tình trạng bàn giao.": [
+  "Han River view apartments in October 2026: asking prices for 21 projects on both banks in Son Tra and Hai Chau, from 35 – 40 to 208 – 228 million VND/m², with a location map, prices by unit type and handover status.",
+  "2026년 10월 다낭 한강 전망 아파트: 선짜·하이쩌우 양안 21개 프로젝트 호가 m²당 3,500만 – 4,000만 동부터 2억 800만 – 2억 2,800만 동까지, 위치 지도, 세대 유형별 가격 및 인도 현황."
+ ],
+ "Căn hộ view sông Hàn thường dễ cho thuê cho khách du lịch, chuyên gia; ví dụ 1PN The Filmore khoảng 22 – 27 triệu/tháng, 2PN Sun Ponte khoảng 32 – 40 triệu/tháng (tham khảo). Hiệu quả thực tế cần tính trên giá mua vào.": [
+  "Han River view apartments are usually easy to rent to tourists and expatriate professionals; for example, a 1BR at The Filmore is about 22 – 27 million VND/month and a 2BR at Sun Ponte about 32 – 40 million VND/month (for reference). Actual returns should be calculated against the purchase price.",
+  "다낭 한강 전망 아파트는 대개 관광객과 외국인 전문가에게 임대하기 쉽습니다. 예를 들어 The Filmore 1베드룸은 월 약 2,200만 – 2,700만 동, Sun Ponte 2베드룸은 월 약 3,200만 – 4,000만 동입니다(참고). 실제 수익은 매입가 기준으로 계산해야 합니다."
+ ],
+ "Căn hộ view sông Hàn tầng nào đẹp nhất?": [
+  "Which floors offer the best Han River views?",
+  "다낭 한강 전망이 가장 좋은 층은 어디인가요?"
+ ],
+ "Căn hộ view sông Hàn đang bán: giá theo loại căn, tình trạng": [
+  "Han River view apartments on sale: prices by unit type and status",
+  "판매 중인 다낭 한강 전망 아파트: 세대 유형별 가격과 현황"
+ ],
+ "Căn hộ view sông Hàn: bảng giá 21 dự án hai bờ tháng 10/2026": [
+  "Han River View Apartments: Price List of 21 Projects on Both Banks, October 2026",
+  "다낭 한강 전망 아파트: 양안 21개 프로젝트 분양가표, 2026년 10월"
+ ],
+ "Dự án view sông Hàn nào đã bàn giao?": [
+  "Which Han River view projects have been handed over?",
+  "인도가 완료된 다낭 한강 전망 프로젝트는 어디인가요?"
+ ],
+ "Giá căn hộ view sông Hàn tháng 10/2026 chênh nhau tới khoảng 5 lần: từ 35 – 40 triệu/m² ở các chung cư cũ phía cầu Thuận Phước đến 208 – 228 triệu/m² ở dự án hạng sang sát cầu Sông Hàn. Bảng xếp hạng theo giá rao trung bình mỗi m² (cao → thấp):": [
+  "Han River view apartment prices in October 2026 differ by up to about 5 times: from 35 – 40 million VND/m² at older condominiums near Thuan Phuoc Bridge to 208 – 228 million VND/m² at luxury projects next to Han River Bridge. Ranking by average asking price per m² (high → low):",
+  "2026년 10월 다낭 한강 전망 아파트 가격은 최대 약 5배 차이가 납니다. 투언프억 다리 쪽 오래된 아파트의 m²당 3,500만 – 4,000만 동부터 다낭 한강교 인근 고급 프로젝트의 2억 800만 – 2억 2,800만 동까지입니다. m²당 평균 호가 순위(높음 → 낮음):"
+ ],
+ "Giá là khoảng tham khảo từ bảng giá công bố và tin chuyển nhượng công khai. Căn tầng cao, view sông trực diện thường nằm ở mức trên của khoảng giá.": [
+  "Prices are reference ranges from published price lists and public resale listings. High-floor units with direct river views are usually at the top of the range.",
+  "가격은 공개된 분양가표와 공개 전매 매물을 바탕으로 한 참고 범위입니다. 고층·정면 강 전망 세대는 대개 가격대 상단에 있습니다."
+ ],
+ "Giá rao tháng 10/2026 khoảng 35 – 228 triệu/m² tùy dự án, phổ biến 65 – 125 triệu/m²; studio từ khoảng 1,8 – 3,2 tỷ, căn 2PN phổ biến 4 – 8 tỷ.": [
+  "October 2026 asking prices are about 35 – 228 million VND/m² depending on the project, typically 65 – 125 million VND/m²; studios from about 1.8 – 3.2 billion VND, and 2BR units typically 4 – 8 billion VND.",
+  "2026년 10월 호가는 프로젝트에 따라 m²당 약 3,500만 – 2억 2,800만 동, 대개 6,500만 – 1억 2,500만 동입니다. 스튜디오는 약 18억 – 32억 동부터, 2베드룸은 대개 40억 – 80억 동입니다."
+ ],
+ "Giá thuê tham khảo của căn hộ view sông Hàn": [
+  "Reference rents for Han River view apartments",
+  "다낭 한강 전망 아파트 참고 임대료"
+ ],
+ "Giữa năm 2027 (dự kiến)": [
+  "Mid-2027 (expected)",
+  "2027년 중반(예정)"
+ ],
+ "Khi so sánh, anh chị nên lấy giá thuê chia giá mua để có tỷ suất gộp, thay vì chỉ nhìn giá thuê tuyệt đối. Chi tiết xem bài": [
+  "When comparing, divide the rent by the purchase price to get the gross yield, instead of looking only at absolute rent. For details, see the article",
+  "비교할 때는 임대료 절대액만 보지 말고 임대료를 매입가로 나누어 총수익률을 계산하십시오. 자세한 내용은 다음 글을 참고하십시오:"
+ ],
+ "Khoảng 110 triệu/m²; 1PN khoảng 5,5 – 6 tỷ": [
+  "About 110 million VND/m²; 1BR about 5.5 – 6 billion VND",
+  "m²당 약 1억 1,000만 동, 1베드룸 약 55억 – 60억 동"
+ ],
+ "Khoảng 117 – 128 triệu/m²": [
+  "About 117 – 128 million VND/m²",
+  "m²당 약 1억 1,700만 – 1억 2,800만 동"
+ ],
+ "Khoảng 50 – 83 triệu/m²": [
+  "About 50 – 83 million VND/m²",
+  "m²당 약 5,000만 – 8,300만 동"
+ ],
+ "Khoảng 70 – 112 triệu/m²": [
+  "About 70 – 112 million VND/m²",
+  "m²당 약 7,000만 – 1억 1,200만 동"
+ ],
+ "Khoảng 74 – 90 triệu/m²": [
+  "About 74 – 90 million VND/m²",
+  "m²당 약 7,400만 – 9,000만 동"
+ ],
+ "Kinh nghiệm chọn căn hộ view sông Hàn": [
+  "Tips for choosing a Han River view apartment",
+  "다낭 한강 전망 아파트 선택 요령"
+ ],
+ "Kiểm tra hướng nắng:": [
+  "Check sun exposure:",
+  "일조 방향 확인:"
+ ],
+ "Mua căn hộ view sông Hàn để cho thuê có tốt không?": [
+  "Is buying a Han River view apartment to rent out a good idea?",
+  "임대 목적으로 다낭 한강 전망 아파트를 사는 것이 좋을까요?"
+ ],
+ "Một căn hộ view sông Hàn 2PN khoảng 70 m² ở mức 90 triệu/m² có tổng giá khoảng 6,3 tỷ; cùng diện tích ở mức 40 triệu/m² chỉ khoảng 2,8 tỷ. Chênh lệch đến từ tuổi công trình, tiện ích và mức độ view trực diện, nên cần so sánh trên cùng loại căn và cùng hướng nhìn.": [
+  "A 2BR Han River view apartment of about 70 m² at 90 million VND/m² totals about 6.3 billion VND; the same area at 40 million VND/m² is only about 2.8 billion VND. The difference comes from building age, amenities and how direct the view is, so compare the same unit type with the same view direction.",
+  "약 70m² 2베드룸 다낭 한강 전망 아파트는 m²당 9,000만 동이면 총 약 63억 동, 같은 면적이 m²당 4,000만 동이면 약 28억 동에 불과합니다. 차이는 건물 연식, 편의시설, 정면 전망 정도에서 오므로 같은 세대 유형과 같은 전망 방향으로 비교해야 합니다."
+ ],
+ "Ngân sách nào mua được căn hộ view sông Hàn?": [
+  "What budget buys a Han River view apartment?",
+  "어느 정도 예산이면 다낭 한강 전망 아파트를 살 수 있나요?"
+ ],
+ "Nhóm Sun Group bờ Đông khoảng 86 – 124 triệu/m²": [
+  "The Sun Group cluster on the East Bank is about 86 – 124 million VND/m²",
+  "동안의 Sun Group 프로젝트군은 m²당 약 8,600만 – 1억 2,400만 동"
+ ],
+ "Nhóm khoảng 65 – 125 triệu/m² là phổ biến nhất, gồm Sun Cosmo, Capital Square, The Peninsula, Sun Ponte, Sun Symphony. Ở nhóm này, studio căn hộ view sông Hàn có giá tham khảo từ khoảng 1,8 – 3,2 tỷ, căn 2PN phổ biến 4 – 8 tỷ. Nhóm trên 118 triệu/m² là căn hộ view sông Hàn hạng sang quanh cầu Rồng – cầu Sông Hàn như M Landmark, The Filmore, The Legend, Landmark Tower.": [
+  "The about 65 – 125 million VND/m² group is the most common, including Sun Cosmo, Capital Square, The Peninsula, Sun Ponte and Sun Symphony. In this group, Han River view studios have reference prices from about 1.8 – 3.2 billion VND, and 2BR units are typically 4 – 8 billion VND. The above-118-million-VND/m² group consists of luxury Han River view apartments around Dragon Bridge – Han River Bridge, such as M Landmark, The Filmore, The Legend and Landmark Tower.",
+  "m²당 약 6,500만 – 1억 2,500만 동 그룹이 가장 일반적이며 Sun Cosmo, Capital Square, The Peninsula, Sun Ponte, Sun Symphony가 포함됩니다. 이 그룹의 다낭 한강 전망 스튜디오 참고가는 약 18억 – 32억 동부터, 2베드룸은 대개 40억 – 80억 동입니다. m²당 1억 1,800만 동 이상 그룹은 M Landmark, The Filmore, The Legend, Landmark Tower 등 용다리 – 다낭 한강교 주변의 고급 다낭 한강 전망 아파트입니다."
+ ],
+ "Nên mua bờ Đông hay bờ Tây sông Hàn?": [
+  "Should you buy on the East or West Bank of the Han River?",
+  "다낭 한강 동안과 서안 중 어디를 사야 하나요?"
+ ],
+ "Năm 2027 (dự kiến)": [
+  "2027 (expected)",
+  "2027년(예정)"
+ ],
+ "Nếu anh chị quan tâm thêm dòng căn ven biển, xem bài": [
+  "If you are also interested in beachfront apartments, see the article",
+  "해변 아파트에도 관심이 있다면 다음 글을 참고하십시오:"
+ ],
+ "Penthouse từ khoảng 37 tỷ; căn thường liên hệ": [
+  "Penthouses from about 37 billion VND; contact for standard units",
+  "펜트하우스 약 370억 동부터, 일반 세대는 문의"
+ ],
+ "Phân biệt view trực diện, view chéo khi chọn căn": [
+  "Distinguish direct views from diagonal views when choosing a unit",
+  "세대 선택 시 정면 전망과 측면 전망을 구분하십시오"
+ ],
+ "Quỹ đất ven sông gần như không còn mới, nên số dự án có view sông trực diện rất hạn chế. Đây là lý do giá căn view sông thường cao hơn căn cùng dự án nhưng nhìn về hướng khác.": [
+  "Riverside land is almost exhausted, so the number of projects with direct river views is very limited. This is why river-view units usually cost more than units in the same project facing other directions.",
+  "강변 신규 토지는 거의 남아 있지 않아 정면 강 전망 프로젝트 수가 매우 제한적입니다. 이 때문에 강 전망 세대는 같은 프로젝트 내 다른 방향 세대보다 대개 가격이 높습니다."
+ ],
+ "So sánh giá chuyển nhượng:": [
+  "Compare resale prices:",
+  "전매 가격 비교:"
+ ],
+ "Studio khoảng 1,8 – 2,5 tỷ; 2PN khoảng 3,6 – 6,8 tỷ": [
+  "Studios about 1.8 – 2.5 billion VND; 2BR about 3.6 – 6.8 billion VND",
+  "스튜디오 약 18억 – 25억 동, 2베드룸 약 36억 – 68억 동"
+ ],
+ "Studio từ khoảng 3,2 tỷ; 2PN khoảng 6 – 8 tỷ": [
+  "Studios from about 3.2 billion VND; 2BR about 6 – 8 billion VND",
+  "스튜디오 약 32억 동부터, 2베드룸 약 60억 – 80억 동"
+ ],
+ "Studio/1PN từ khoảng 2,9 tỷ": [
+  "Studio/1BR from about 2.9 billion VND",
+  "스튜디오/1베드룸 약 29억 동부터"
+ ],
+ "Sun Symphony Residence, Sun Cosmo Residence và The Filmore đã và đang bàn giao, có thể nhận nhà sớm.": [
+  "Sun Symphony Residence, Sun Cosmo Residence and The Filmore have been or are being handed over, so you can move in early.",
+  "Sun Symphony Residence, Sun Cosmo Residence, The Filmore는 인도가 완료되었거나 진행 중이어서 빠른 입주가 가능합니다."
+ ],
+ "Sông Hàn là trục cảnh quan trung tâm của Đà Nẵng, gắn với cầu Rồng, cầu Trần Thị Lý và khu vực bắn pháo hoa quốc tế. Căn hộ nhìn ra sông vừa phục vụ ở thực, vừa dễ cho thuê với": [
+  "The Han River is Da Nang's central landscape axis, linked to Dragon Bridge, Tran Thi Ly Bridge and the international fireworks area. River-view apartments serve both owner-occupiers and are easy to rent out to",
+  "다낭 한강은 용다리, 쩐티리 다리, 국제 불꽃축제 구역과 연결된 다낭의 중심 경관 축입니다. 강 전망 아파트는 실거주용이면서도"
+ ],
+ "Tây (Hải Châu – Thanh Khê)": [
+  "West (Hai Chau – Thanh Khe)",
+  "서안(하이쩌우 – 타인케)"
+ ],
+ "Tầng trung trở lên thường ít bị che view hơn; căn hộ view sông Hàn trực diện ở tầng cao thường nằm ở mức trên của khoảng giá.": [
+  "Mid floors and above are usually less likely to have their view blocked; Han River direct-view apartments on high floors are usually at the top of the price range.",
+  "중층 이상은 대개 전망이 가려질 가능성이 적으며, 고층의 다낭 한강 정면 전망 아파트는 대개 가격대 상단에 있습니다."
+ ],
+ "Từ bảng giá rao 10/2026 có thể chia căn hộ view sông Hàn thành ba nhóm ngân sách. Nhóm dưới 50 triệu/m² gồm các chung cư lâu năm phía cầu Thuận Phước như Hòa Bình Green, Blooming Tower, Blue House, Vicoland – phù hợp người cần view sông với tổng tiền thấp, chấp nhận tiện ích cũ hơn.": [
+  "Based on the October 2026 asking prices, Han River view apartments fall into three budget groups. The under-50-million-VND/m² group includes older condominiums near Thuan Phuoc Bridge such as Hoa Binh Green, Blooming Tower, Blue House and Vicoland – suitable for buyers who want a river view at a low total price and accept older amenities.",
+  "2026년 10월 호가를 기준으로 다낭 한강 전망 아파트는 세 가지 예산군으로 나눌 수 있습니다. m²당 5,000만 동 미만 그룹은 Hoa Binh Green, Blooming Tower, Blue House, Vicoland 등 투언프억 다리 쪽 오래된 아파트로, 낮은 총액으로 강 전망을 원하고 오래된 편의시설을 감수할 수 있는 고객에게 적합합니다."
+ ],
+ "View sông Hàn không chỉ đẹp mà còn giúp căn hộ cho thuê tốt hơn. Theo tin cho thuê công khai, căn 1PN tại The Filmore khoảng 22 – 27 triệu/tháng, căn 3PN view sông có thể đến 95 triệu/tháng.": [
+  "A Han River view is not just beautiful; it also helps an apartment rent better. According to public rental listings, a 1BR at The Filmore is about 22 – 27 million VND/month, and a 3BR river-view unit can reach 95 million VND/month.",
+  "다낭 한강 전망은 아름다울 뿐 아니라 임대에도 유리합니다. 공개 임대 매물에 따르면 The Filmore 1베드룸은 월 약 2,200만 – 2,700만 동, 강 전망 3베드룸은 월 9,500만 동에 이를 수 있습니다."
+ ],
+ "Vì sao căn hộ view sông Hàn luôn được săn đón": [
+  "Why Han River view apartments are always in demand",
+  "다낭 한강 전망 아파트가 늘 인기 있는 이유"
+ ],
+ "Ví dụ quy đổi giá theo diện tích": [
+  "Example price conversions by area",
+  "면적별 가격 환산 예시"
+ ],
+ "Xác định view thật:": [
+  "Identify the real view:",
+  "실제 전망 확인:"
+ ],
+ "căn nhìn sông từ bờ Đông thường hướng Tây, cần tính rèm, kính cách nhiệt.": [
+  "river-view units on the East Bank usually face west, so plan for curtains and heat-insulating glass.",
+  "동안의 강 전망 세대는 대개 서향이므로 커튼과 단열 유리를 고려해야 합니다."
+ ],
+ "dự án đã bàn giao có dữ liệu giao dịch thật để đối chiếu.": [
+  "handed-over projects have real transaction data for comparison.",
+  "인도가 완료된 프로젝트는 비교할 수 있는 실거래 자료가 있습니다."
+ ],
+ "giá rao trên thị trường": [
+  "These are market asking prices",
+  "이는 시장 호가"
+ ],
+ "khu vực Sơn Trà": [
+  "Son Tra area",
+  "선짜 지역"
+ ],
+ "tầng thấp có thể bị che bởi công trình xung quanh trong tương lai.": [
+  "lower floors may be blocked by surrounding buildings in the future.",
+  "저층은 향후 주변 건물에 전망이 가려질 수 있습니다."
+ ],
+ "view trực diện, view chéo hay view một phần khác nhau rất nhiều về giá và khả năng cho thuê.": [
+  "direct, diagonal and partial views differ greatly in price and rentability.",
+  "정면, 측면, 부분 전망은 가격과 임대 가능성에서 큰 차이가 납니다."
+ ],
+ "Đang bán": [
+  "On sale",
+  "판매 중"
+ ],
+ "Đà Nẵng Plaza": [
+  "Da Nang Plaza",
+  "Da Nang Plaza"
+ ],
+ "Đông (Sơn Trà)": [
+  "East (Son Tra)",
+  "동안(선짜)"
+ ],
+ "Đọc thêm về căn hộ view sông Hàn": [
+  "More on Han River view apartments",
+  "다낭 한강 전망 아파트 더 알아보기"
+ ],
+ "Ở bờ Đông, 2PN Sun Ponte Residence khoảng 32 – 40 triệu/tháng, Peninsula Đà Nẵng khoảng 20 – 45 triệu/tháng tùy diện tích và view. Đây là các khoảng giá tham khảo, phụ thuộc nhiều vào nội thất.": [
+  "On the East Bank, a 2BR at Sun Ponte Residence is about 32 – 40 million VND/month, and Peninsula Da Nang about 20 – 45 million VND/month depending on size and view. These are reference ranges and depend heavily on furnishing.",
+  "동안에서는 Sun Ponte Residence 2베드룸이 월 약 3,200만 – 4,000만 동, Peninsula Da Nang은 면적과 전망에 따라 월 약 2,000만 – 4,500만 동입니다. 이는 참고 범위이며 인테리어에 크게 좌우됩니다."
+ ]
+}

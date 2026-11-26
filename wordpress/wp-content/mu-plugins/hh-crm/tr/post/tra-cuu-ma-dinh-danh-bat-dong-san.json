@@ -1,0 +1,394 @@
+{
+ "#Mã định danh bất động sản": [
+  "#Real estate identification code",
+  "#부동산 식별 코드"
+ ],
+ "(thay vì chỉ khuyến khích tra cứu mã định danh bất động sản) theo một số báo vẫn đang nằm trong dự thảo Luật Kinh doanh bất động sản sửa đổi, chưa phải quy định đã áp dụng cho mọi giao dịch nhà đất.": [
+  "(rather than merely encouraging real estate identification code lookups), according to some newspapers, are still in the draft amended Law on Real Estate Business and are not yet rules applied to all property transactions.",
+  "(부동산 식별 코드 조회를 권장하는 수준을 넘어서는 것)은 일부 언론에 따르면 아직 부동산사업법 개정 초안에 머물러 있으며, 모든 부동산 거래에 적용되는 규정은 아닙니다."
+ ],
+ "(tên miền .gov.vn của Bộ Xây dựng). Không bấm link lạ gửi qua tin nhắn.": [
+  "directly (the Ministry of Construction's .gov.vn domain). Do not click unfamiliar links sent via messages.",
+  "(건설부의 .gov.vn 도메인). 메시지로 받은 낯선 링크는 클릭하지 마십시오."
+ ],
+ "), mã định danh là chuỗi ký tự số và chữ, tối đa 40 ký tự, cấp cho từng nhà ở hoặc phần diện tích sàn xây dựng; với nhà ở, mã được tạo tự động trên hệ thống. Nhờ đó, việc tra cứu mã định danh bất động sản giúp người mua biết tài sản đã được xác thực trên dữ liệu quốc gia hay chưa.": [
+  "), an identification code is a string of numbers and letters, up to 40 characters, issued to each dwelling or portion of construction floor area; for housing, the code is generated automatically on the system. Looking up a real estate identification code therefore tells buyers whether a property has been verified in the national database.",
+  "), 식별 코드는 최대 40자의 숫자와 문자로 이루어진 문자열로, 각 주택 또는 건축 바닥면적 단위별로 발급되며, 주택의 경우 시스템에서 자동으로 생성됩니다. 따라서 부동산 식별 코드를 조회하면 해당 자산이 국가 데이터베이스에서 검증되었는지 여부를 알 수 있습니다."
+ ],
+ ". Bài viết dưới đây giải thích hệ thống này là gì, cách tra cứu mã định danh bất động sản, dự án, môi giới và nên dùng thế nào khi mua nhà ở Đà Nẵng.": [
+  ". The article below explains what this system is, how to look up real estate identification codes, projects and brokers, and how to use it when buying a home in Da Nang.",
+  ". 아래 글에서는 이 시스템이 무엇인지, 부동산 식별 코드·프로젝트·중개인을 조회하는 방법, 그리고 다낭에서 주택을 구매할 때 어떻게 활용하면 좋은지 설명합니다."
+ ],
+ ". Ngoài việc xem giấy tờ chủ đầu tư cung cấp, hiện nay người mua có thêm một kênh chính thức để đối chiếu:": [
+  ". Besides reviewing the documents provided by the developer, buyers now have an additional official channel to cross-check:",
+  ". 시행사가 제공하는 서류를 확인하는 것 외에도, 이제 구매자는 대조할 수 있는 공식 채널을 하나 더 갖게 되었습니다:"
+ ],
+ "1.297 dự án": [
+  "1,297 projects",
+  "프로젝트 1,297개"
+ ],
+ "1.580 / 875 / 63 dự án": [
+  "1,580 / 875 / 63 projects",
+  "1,580 / 875 / 63개 프로젝트"
+ ],
+ "1.938 dự án": [
+  "1,938 projects",
+  "프로젝트 1,938개"
+ ],
+ "100.005 giao dịch": [
+  "100,005 transactions",
+  "거래 100,005건"
+ ],
+ "131 dự án": [
+  "131 projects",
+  "프로젝트 131개"
+ ],
+ "59.073 bất động sản": [
+  "59,073 properties",
+  "부동산 59,073건"
+ ],
+ "867.583 căn/lô (388.863 nhà ở riêng lẻ, 478.720 căn chung cư)": [
+  "867,583 units/plots (388,863 individual houses, 478,720 apartments)",
+  "867,583세대/필지(단독주택 388,863채, 아파트 478,720세대)"
+ ],
+ "Anh chị cần Hiệp tra cứu mã định danh bất động sản giúp, tra một dự án, đối chiếu văn bản đủ điều kiện bán hoặc kiểm tra hồ sơ trước khi đặt cọc, liên hệ": [
+  "If you need Hiep to look up a real estate identification code for you, check a project, cross-check a notice of eligibility for sale or review documents before paying a deposit, contact",
+  "히엡이 부동산 식별 코드 조회, 프로젝트 조회, 분양 요건 충족 통지문 대조 또는 계약금 납부 전 서류 검토를 도와드리길 원하시면 연락 주십시오:"
+ ],
+ "Bất động sản hình thành trong tương lai đủ điều kiện": [
+  "Eligible off-plan real estate",
+  "요건을 충족한 미래 형성 부동산"
+ ],
+ "Bất động sản thương mại": [
+  "Commercial real estate",
+  "상업용 부동산"
+ ],
+ "Chứng chỉ hành nghề môi giới": [
+  "Brokerage practice licenses",
+  "중개 실무 자격증"
+ ],
+ "Cá nhân được thụ hưởng chính sách hỗ trợ nhà ở": [
+  "Individuals eligible for housing support policies",
+  "주택 지원 정책 수혜 대상 개인"
+ ],
+ "Cách tra cứu mã định danh bất động sản trên cổng": [
+  "How to look up a real estate identification code on the portal",
+  "포털에서 부동산 식별 코드를 조회하는 방법"
+ ],
+ "Có kiểm tra được môi giới bất động sản không?": [
+  "Can I check a real estate broker?",
+  "부동산 중개인을 확인할 수 있습니까?"
+ ],
+ "Có. Cổng có mục tra cứu tổ chức kinh doanh dịch vụ bất động sản và danh sách cá nhân có chứng chỉ hành nghề môi giới.": [
+  "Yes. The portal has a section for looking up real estate service companies and a list of individuals holding brokerage practice licenses.",
+  "네. 포털에는 부동산 서비스 업체 조회 항목과 중개 실무 자격증 보유자 목록이 있습니다."
+ ],
+ "Căn hộ thương mại dịch vụ, condotel": [
+  "Commercial-service apartments and condotels",
+  "상업 서비스용 아파트, 콘도텔"
+ ],
+ "Danh sách dự án bất động sản thương mại được chủ đầu tư công khai trước khi đưa vào kinh doanh": [
+  "List of commercial real estate projects disclosed by developers before going on sale",
+  "시행사가 분양 전에 공개한 상업용 부동산 프로젝트 목록"
+ ],
+ "Danh sách dự án nhà ở xã hội được chủ đầu tư công khai trước khi đưa vào kinh doanh": [
+  "List of social housing projects disclosed by developers before going on sale",
+  "시행사가 분양 전에 공개한 사회주택 프로젝트 목록"
+ ],
+ "Dùng để làm gì": [
+  "What it is for",
+  "용도"
+ ],
+ "Dữ liệu đang được các địa phương và chủ đầu tư cập nhật, nên chưa có kết quả không có nghĩa dự án sai phạm. Hãy hỏi chủ đầu tư và xem bản gốc văn bản pháp lý, văn bản đủ điều kiện bán của Sở Xây dựng.": [
+  "The data is still being updated by localities and developers, so no result does not mean the project is in violation. Ask the developer and review the original legal documents and the Department of Construction's notice of eligibility for sale.",
+  "데이터는 지방과 시행사가 계속 업데이트하고 있으므로 결과가 없다고 해서 프로젝트가 위반 사항이 있다는 뜻은 아닙니다. 시행사에 문의하고 법적 서류 원본과 건설국의 분양 요건 충족 통지문을 확인하십시오."
+ ],
+ "Dữ liệu đang được cập nhật:": [
+  "Data is being updated:",
+  "데이터 업데이트 중:"
+ ],
+ "Dự án Hoàng Hiệp hỗ trợ kiểm tra hồ sơ": [
+  "Projects where Hoang Hiep can help check the paperwork",
+  "호앙 히엡이 서류 확인을 도와드리는 프로젝트"
+ ],
+ "Dự án nhà ở thương mại / nhà ở xã hội / du lịch, nghỉ dưỡng": [
+  "Commercial housing / social housing / tourism and resort projects",
+  "상업용 주택 / 사회주택 / 관광·리조트 프로젝트"
+ ],
+ "Giữ lại kết quả tra cứu:": [
+  "Keep your lookup results:",
+  "조회 결과 보관:"
+ ],
+ "Hệ thống thông tin về nhà ở và thị trường bất động sản": [
+  "the housing and real estate market information system",
+  "주택 및 부동산 시장 정보 시스템"
+ ],
+ "Hệ thống thông tin về nhà ở và thị trường bất động sản của Bộ Xây dựng (thongtinbds.moc.gov.vn) cho tra cứu mã định danh bất động sản, dự án được chủ đầu tư công khai trước khi kinh doanh, tổ chức dịch vụ và môi giới có chứng chỉ. Quý II/2026 hệ thống ghi nhận 1.938 dự án, 131 dự án đủ điều kiện bán nhà ở hình thành trong tương lai.": [
+  "The Ministry of Construction's housing and real estate market information system (thongtinbds.moc.gov.vn) lets you look up real estate identification codes, projects disclosed by developers before going on sale, and service companies and licensed brokers. In Q2 2026, the system recorded 1,938 projects, 131 of which were eligible to sell off-plan housing.",
+  "건설부의 주택 및 부동산 시장 정보 시스템(thongtinbds.moc.gov.vn)에서는 부동산 식별 코드, 시행사가 분양 전에 공개한 프로젝트, 부동산 서비스 업체 및 자격증을 보유한 중개인을 조회할 수 있습니다. 2026년 2분기 기준 시스템에는 1,938개 프로젝트가 등록되어 있으며, 이 중 131개 프로젝트가 미래 형성 주택(선분양 주택) 판매 요건을 충족했습니다."
+ ],
+ "Hệ thống thông tin về nhà ở và thị trường bất động sản là gì?": [
+  "What is the housing and real estate market information system?",
+  "주택 및 부동산 시장 정보 시스템이란 무엇입니까?"
+ ],
+ "Khi tra cứu mã định danh bất động sản không ra kết quả, chưa nên kết luận dự án có vấn đề: hệ thống mới vận hành từ 30/7/2026, nhiều địa phương và chủ đầu tư vẫn đang nhập dữ liệu. Khi đó, hãy hỏi chủ đầu tư dự án đã được cập nhật lên hệ thống chưa, và yêu cầu xem bản gốc các văn bản pháp lý.": [
+  "If a real estate identification code lookup returns no results, do not conclude that the project has problems: the system has only been in operation since July 30, 2026, and many localities and developers are still entering data. In that case, ask the developer whether the project has been updated on the system, and ask to see the original legal documents.",
+  "부동산 식별 코드 조회 결과가 나오지 않더라도 프로젝트에 문제가 있다고 단정해서는 안 됩니다. 시스템은 2026년 7월 30일부터 운영되기 시작했으며, 많은 지방과 시행사가 아직 데이터를 입력하고 있습니다. 이 경우 시행사에 프로젝트가 시스템에 업데이트되었는지 문의하고, 법적 서류 원본을 요청하십시오."
+ ],
+ "Kiểm tra cá nhân môi giới có chứng chỉ hành nghề": [
+  "Check whether an individual broker holds a practice license",
+  "개인 중개인의 실무 자격증 보유 여부 확인"
+ ],
+ "Kiểm tra người tư vấn:": [
+  "Check your advisor:",
+  "상담자 확인:"
+ ],
+ "Kết quả tra cứu không thay hồ sơ pháp lý; vẫn cần văn bản đủ điều kiện bán của Sở Xây dựng": [
+  "Lookup results do not replace legal documents; you still need the Department of Construction's notice of eligibility for sale",
+  "조회 결과가 법적 서류를 대체하지는 않습니다. 건설국의 분양 요건 충족 통지문은 여전히 필요합니다"
+ ],
+ "Kết quả tra cứu mã định danh bất động sản không thay hồ sơ pháp lý:": [
+  "Real estate identification code lookup results do not replace legal documents:",
+  "부동산 식별 코드 조회 결과는 법적 서류를 대체하지 않습니다:"
+ ],
+ "Luật, nghị định, thông tư, quyết định liên quan nhà ở và kinh doanh bất động sản": [
+  "Laws, decrees, circulars and decisions related to housing and real estate business",
+  "주택 및 부동산 사업 관련 법률, 시행령, 시행규칙, 결정문"
+ ],
+ "Làm sao biết dự án đã được phép bán?": [
+  "How do I know whether a project has been approved for sale?",
+  "프로젝트가 분양 허가를 받았는지 어떻게 알 수 있습니까?"
+ ],
+ "Lưu ý quan trọng khi tra cứu mã định danh bất động sản": [
+  "Important notes when looking up real estate identification codes",
+  "부동산 식별 코드 조회 시 중요한 유의사항"
+ ],
+ "Lọc theo tỉnh/thành phố, loại hình, tình trạng – kiểm tra sàn giao dịch, công ty môi giới": [
+  "Filter by province/city, type and status – check real estate exchanges and brokerage firms",
+  "성/시, 유형, 상태별 필터 – 부동산 거래소 및 중개 회사 확인"
+ ],
+ "Mã định danh bất động sản là gì?": [
+  "What is a real estate identification code?",
+  "부동산 식별 코드란 무엇입니까?"
+ ],
+ "Mã định danh điện tử": [
+  "Electronic identification code",
+  "전자 식별 코드"
+ ],
+ "Một số ô (tổng mức đầu tư, giá trị giao dịch) hiện để trống trên hệ thống. Số liệu là tổng toàn quốc, phụ thuộc mức độ các địa phương và chủ đầu tư cập nhật; các tỉnh, thành vẫn đang được yêu cầu chuẩn hóa dữ liệu, nên chưa phản ánh đầy đủ thị trường.": [
+  "Some fields (total investment, transaction value) are currently blank on the system. The figures are national totals and depend on how thoroughly localities and developers update them; provinces and cities are still being asked to standardize their data, so the figures do not yet fully reflect the market.",
+  "일부 항목(총투자액, 거래 금액)은 현재 시스템에 비어 있습니다. 수치는 전국 합계이며 각 지방과 시행사의 업데이트 정도에 따라 달라집니다. 각 성·시는 아직 데이터 표준화를 요구받고 있어 시장을 완전히 반영하지는 못합니다."
+ ],
+ "Mục trên cổng": [
+  "Portal section",
+  "포털 항목"
+ ],
+ "Nghị định 357/2025/NĐ-CP": [
+  "Decree 357/2025/NĐ-CP",
+  "Nghị định 357/2025/NĐ-CP"
+ ],
+ "Ngoài tra cứu mã định danh bất động sản, cổng cho xem dự án thương mại và nhà ở xã hội công khai trước khi kinh doanh, tổ chức dịch vụ, chứng chỉ môi giới": [
+  "Besides real estate identification code lookups, the portal shows commercial and social housing projects disclosed before going on sale, real estate service companies and broker licenses",
+  "부동산 식별 코드 조회 외에도 포털에서는 분양 전에 공개된 상업용 주택 및 사회주택 프로젝트, 부동산 서비스 업체, 중개인 자격증을 확인할 수 있습니다"
+ ],
+ "Nguồn: Hệ thống thông tin về nhà ở và thị trường bất động sản – Bộ Xây dựng (thongtinbds.moc.gov.vn, số liệu trang chủ “Tổng quan thị trường quý II 2026”, xem ngày 13/11/2026); Nghị định 357/2025/NĐ-CP theo tóm tắt của Thư viện Pháp luật, LuatVietnam, Cổng thông tin Chính phủ; thông tin vận hành hệ thống theo Tiền Phong, Báo Xây dựng; Đà Nẵng triển khai cơ sở dữ liệu theo VnEconomy.": [
+  "Sources: the housing and real estate market information system – Ministry of Construction (thongtinbds.moc.gov.vn, homepage figures “Market overview Q2 2026”, viewed November 13, 2026); Decree 357/2025/NĐ-CP as summarized by Thu Vien Phap Luat, LuatVietnam and the Government Portal; system operation information from Tien Phong and Bao Xay Dung; Da Nang database rollout from VnEconomy.",
+  "출처: 주택 및 부동산 시장 정보 시스템 – 건설부(thongtinbds.moc.gov.vn, 홈페이지 수치 “2026년 2분기 시장 개요”, 2026년 11월 13일 열람); Nghị định 357/2025/NĐ-CP(Thu Vien Phap Luat, LuatVietnam, 정부 포털 요약); 시스템 운영 정보(Tien Phong, Bao Xay Dung); 다낭 데이터베이스 구축(VnEconomy)."
+ ],
+ "Nhà ở thương mại: dự án đang triển khai xây dựng": [
+  "Commercial housing: projects under construction",
+  "상업용 주택: 공사 중인 프로젝트"
+ ],
+ "Nhà ở thương mại: số lượng bất động sản": [
+  "Commercial housing: number of properties",
+  "상업용 주택: 부동산 수"
+ ],
+ "Nhà ở thương mại: đủ điều kiện bán nhà ở hình thành trong tương lai": [
+  "Commercial housing: eligible to sell off-plan housing",
+  "상업용 주택: 미래 형성 주택 판매 요건 충족"
+ ],
+ "Nhà ở xã hội": [
+  "Social housing",
+  "사회주택"
+ ],
+ "Quy định bắt buộc dùng mã định danh trong mọi giao dịch": [
+  "Rules making identification codes mandatory in all transactions",
+  "모든 거래에서 식별 코드 사용을 의무화하는 규정"
+ ],
+ "Quý II/2026: 1.938 dự án, 131 dự án đủ điều kiện bán nhà ở hình thành trong tương lai, 100.005 giao dịch (toàn quốc)": [
+  "Q2 2026: 1,938 projects, 131 projects eligible to sell off-plan housing, 100,005 transactions (nationwide)",
+  "2026년 2분기: 프로젝트 1,938개, 미래 형성 주택 판매 요건 충족 프로젝트 131개, 거래 100,005건(전국)"
+ ],
+ "Sông Hàn và trung tâm Đà Nẵng về đêm – người mua căn hộ nên tra cứu mã định danh bất động sản và dự án trên hệ thống của Bộ Xây dựng trước khi đặt cọc (ảnh thực tế)": [
+  "The Han River and central Da Nang at night – apartment buyers should look up the real estate identification code and the project on the Ministry of Construction's system before paying a deposit (actual photo)",
+  "밤의 다낭 한강과 다낭 도심 – 아파트 구매자는 계약금 납부 전에 건설부 시스템에서 부동산 식별 코드와 프로젝트를 조회하는 것이 좋습니다(실사)"
+ ],
+ "Số liệu hiển thị trên trang chủ": [
+  "Figures shown on the homepage",
+  "홈페이지에 표시된 수치"
+ ],
+ "Số liệu tổng quan trên hệ thống (quý II/2026, toàn quốc)": [
+  "Overview figures on the system (Q2 2026, nationwide)",
+  "시스템 개요 수치(2026년 2분기, 전국)"
+ ],
+ "Số lượng giao dịch bất động sản": [
+  "Number of real estate transactions",
+  "부동산 거래 건수"
+ ],
+ "TP Đà Nẵng đã có văn bản triển khai cơ sở dữ liệu nhà ở và thị trường bất động sản; theo báo chí, Sở Xây dựng đã cấp hơn 300 tài khoản cho cơ quan, đơn vị cập nhật dữ liệu.": [
+  "Da Nang City has issued a document on implementing the housing and real estate market database; according to the press, the Department of Construction has issued more than 300 accounts to agencies and units to update data.",
+  "다낭시는 주택 및 부동산 시장 데이터베이스 구축 시행 문서를 발표했으며, 언론에 따르면 건설국은 데이터 업데이트를 위해 기관 및 부서에 300개 이상의 계정을 발급했습니다."
+ ],
+ "Theo Nghị định 357/2025/NĐ-CP, là chuỗi ký tự số và chữ tối đa 40 ký tự cấp cho từng nhà ở hoặc phần diện tích sàn xây dựng; với nhà ở, mã được tạo tự động trên hệ thống.": [
+  "Under Decree 357/2025/NĐ-CP, it is a string of numbers and letters of up to 40 characters issued to each dwelling or portion of construction floor area; for housing, the code is generated automatically on the system.",
+  "Nghị định 357/2025/NĐ-CP에 따르면 각 주택 또는 건축 바닥면적 단위별로 발급되는 최대 40자의 숫자와 문자 조합이며, 주택의 경우 시스템에서 자동으로 생성됩니다."
+ ],
+ "Theo các trang pháp luật tóm tắt Nghị định 357/2025/NĐ-CP (": [
+  "According to legal websites summarizing Decree 357/2025/NĐ-CP (",
+  "Nghị định 357/2025/NĐ-CP를 요약한 법률 사이트들에 따르면("
+ ],
+ "Tra cứu liên quan đối tượng mua, thuê nhà ở xã hội": [
+  "Lookups related to eligible buyers and renters of social housing",
+  "사회주택 매입·임차 대상자 관련 조회"
+ ],
+ "Tra cứu mã định danh bất động sản": [
+  "Looking up the real estate identification code",
+  "부동산 식별 코드 조회"
+ ],
+ "Tra cứu mã định danh bất động sản khi mua nhà ở Đà Nẵng: 5 bước Hoàng Hiệp hay làm": [
+  "Looking up real estate identification codes when buying a home in Da Nang: Hoang Hiep's 5 usual steps",
+  "다낭에서 주택 구매 시 부동산 식별 코드 조회: 호앙 히엡이 늘 하는 5단계"
+ ],
+ "Tra cứu mã định danh bất động sản không ra kết quả thì sao?": [
+  "What if the real estate identification code lookup returns no results?",
+  "부동산 식별 코드 조회 결과가 나오지 않으면 어떻게 합니까?"
+ ],
+ "Tra cứu mã định danh bất động sản trên Hệ thống thông tin về nhà ở và thị trường bất động sản của Bộ Xây dựng tại thongtinbds.moc.gov.vn, mục \"Mã định danh điện tử\", lọc theo loại hình và khu vực.": [
+  "Look up real estate identification codes on the Ministry of Construction's housing and real estate market information system at thongtinbds.moc.gov.vn, under \"Electronic identification code\", filtering by property type and area.",
+  "부동산 식별 코드는 건설부의 주택 및 부동산 시장 정보 시스템(thongtinbds.moc.gov.vn)의 \"전자 식별 코드\" 항목에서 유형과 지역별로 필터링하여 조회합니다."
+ ],
+ "Tra cứu mã định danh bất động sản trên thongtinbds.moc.gov.vn – Hệ thống Hệ thống thông tin về nhà ở và thị trường bất động sản của Bộ Xây dựng, vận hành theo Nghị định 357/2025/NĐ-CP": [
+  "Looking up real estate identification codes on thongtinbds.moc.gov.vn – the Ministry of Construction's housing and real estate market information system, operated under Decree 357/2025/NĐ-CP",
+  "thongtinbds.moc.gov.vn에서 부동산 식별 코드 조회 – Nghị định 357/2025/NĐ-CP에 따라 운영되는 건설부의 주택 및 부동산 시장 정보 시스템"
+ ],
+ "Tra cứu mã định danh bất động sản và những mục khác trên cổng": [
+  "Real estate identification code lookup and other sections on the portal",
+  "부동산 식별 코드 조회 및 포털의 기타 항목"
+ ],
+ "Tra cứu mã định danh bất động sản ở đâu?": [
+  "Where can I look up a real estate identification code?",
+  "부동산 식별 코드는 어디에서 조회합니까?"
+ ],
+ "Tra cứu mã định danh bất động sản: danh sách tài sản đã được xác thực và gán mã định danh. Tra theo loại hình và khu vực; kết quả gồm mã dự án/công trình, mã thửa đất, loại hình, khu vực, chủ đầu tư": [
+  "Real estate identification code lookup: a list of properties that have been verified and assigned an identification code. Search by property type and area; results include the project/building code, land parcel code, property type, area and developer",
+  "부동산 식별 코드 조회: 검증되어 식별 코드가 부여된 자산 목록입니다. 유형과 지역별로 조회하며, 결과에는 프로젝트/건물 코드, 필지 코드, 유형, 지역, 시행사가 포함됩니다"
+ ],
+ "Tra danh sách dự án được chủ đầu tư công khai trước khi kinh doanh trên thongtinbds.moc.gov.vn và đối chiếu văn bản thông báo đủ điều kiện bán nhà ở hình thành trong tương lai của Sở Xây dựng.": [
+  "Look up the list of projects disclosed by developers before going on sale on thongtinbds.moc.gov.vn and cross-check it with the Department of Construction's notice that off-plan housing is eligible for sale.",
+  "thongtinbds.moc.gov.vn에서 시행사가 분양 전에 공개한 프로젝트 목록을 조회하고, 미래 형성 주택의 분양 요건 충족에 관한 건설국 통지문과 대조하십시오."
+ ],
+ "Tra dự án:": [
+  "Look up the project:",
+  "프로젝트 조회:"
+ ],
+ "Tổ chức kinh doanh dịch vụ bất động sản": [
+  "Real estate service companies",
+  "부동산 서비스 업체"
+ ],
+ "Tổng số dự án bất động sản": [
+  "Total number of real estate projects",
+  "부동산 프로젝트 총수"
+ ],
+ "Vào đúng địa chỉ:": [
+  "Go to the correct address:",
+  "정확한 주소로 접속:"
+ ],
+ "Văn bản quy phạm pháp luật": [
+  "Legal normative documents",
+  "법규 문서"
+ ],
+ "cho bất động sản. Hệ thống cũng kết nối dữ liệu với các cơ sở dữ liệu đất đai, công chứng, xây dựng.": [
+  "for real estate. The system also connects with land, notarization and construction databases.",
+  "를 발급하는 데 사용됩니다. 또한 토지, 공증, 건설 데이터베이스와도 연결됩니다."
+ ],
+ "chụp màn hình kèm ngày tra cứu, lưu cùng hồ sơ cọc để đối chiếu khi ký hợp đồng.": [
+  "take a screenshot with the lookup date and keep it with your deposit documents to cross-check when signing the contract.",
+  "조회 날짜가 나오도록 화면을 캡처해 계약금 서류와 함께 보관하고, 계약서 서명 시 대조하십시오."
+ ],
+ "cách kiểm tra pháp lý, quy hoạch nhà đất Đà Nẵng": [
+  "how to check the legal status and zoning of Da Nang property",
+  "다낭 부동산의 법적 상태 및 도시계획 확인 방법"
+ ],
+ "của Bộ Xây dựng tại địa chỉ": [
+  "of the Ministry of Construction at",
+  "(건설부) 주소:"
+ ],
+ "mã định danh điện tử": [
+  "electronic identification codes",
+  "전자 식별 코드"
+ ],
+ "ngày 31/12/2025 (hiệu lực từ 01/3/2026), thay cho hệ thống cũ theo Nghị định 94/2024/NĐ-CP. Hệ thống dùng để công khai thông tin dự án bất động sản, bất động sản đủ điều kiện đưa vào kinh doanh, giao dịch bất động sản, thông tin về tổ chức, cá nhân hoạt động trong lĩnh vực này, và cấp": [
+  "dated December 31, 2025 (effective March 1, 2026), replacing the old system under Decree 94/2024/NĐ-CP. The system is used to publish information on real estate projects, real estate eligible for business, real estate transactions, and organizations and individuals operating in this field, and to issue",
+  "(2025년 12월 31일 자, 2026년 3월 1일 시행). 이는 Nghị định 94/2024/NĐ-CP에 따른 기존 시스템을 대체합니다. 이 시스템은 부동산 프로젝트, 사업 요건을 갖춘 부동산, 부동산 거래, 이 분야에서 활동하는 조직 및 개인에 관한 정보를 공개하고, 부동산에"
+ ],
+ "như Sun Saphia Residence không phải “nhà ở” theo Luật Nhà ở, nên thủ tục và danh sách công khai có thể khác căn hộ chung cư – xem thêm": [
+  "such as Sun Saphia Residence are not “housing” under the Housing Law, so procedures and public listings may differ from those for apartments – see also",
+  "Sun Saphia Residence와 같은 상품은 주택법상 “주택”이 아니므로 절차와 공개 목록이 일반 아파트와 다를 수 있습니다. 함께 보기:"
+ ],
+ "tra tên công ty dịch vụ bất động sản và chứng chỉ hành nghề môi giới của người đang tư vấn cho mình.": [
+  "look up the name of the real estate service company and the brokerage practice license of the person advising you.",
+  "상담해 주는 사람의 부동산 서비스 회사명과 중개 실무 자격증을 조회하십시오."
+ ],
+ "và thông tin dự án là bước nên làm trước khi đặt cọc. Nhiều anh chị hỏi Hoàng Hiệp:": [
+  "and project information is a step worth taking before paying a deposit. Many clients ask Hoang Hiep:",
+  "와 프로젝트 정보 확인은 계약금 납부 전에 꼭 거쳐야 할 단계입니다. 많은 고객님께서 호앙 히엡에게 이렇게 묻습니다:"
+ ],
+ "vào mục “Bất động sản thương mại” (hoặc “Nhà ở xã hội”), chọn khu vực Đà Nẵng, tìm theo tên dự án hoặc chủ đầu tư. Dự án được công khai trước khi kinh doanh là tín hiệu tốt; chưa thấy thì hỏi lại chủ đầu tư, không vội kết luận vì dữ liệu còn đang cập nhật.": [
+  "go to “Commercial real estate” (or “Social housing”), select the Da Nang area, and search by project name or developer. A project disclosed before going on sale is a good sign; if it is not listed, ask the developer and do not jump to conclusions, as the data is still being updated.",
+  "“상업용 부동산”(또는 “사회주택”) 항목으로 들어가 다낭 지역을 선택하고 프로젝트명이나 시행사로 검색합니다. 분양 전에 공개된 프로젝트라면 좋은 신호이며, 보이지 않는다면 시행사에 다시 문의하십시오. 데이터가 아직 업데이트 중이므로 성급하게 결론을 내리지 않는 것이 좋습니다."
+ ],
+ "vẫn cần xem quyết định chủ trương đầu tư, giấy phép xây dựng, văn bản đủ điều kiện bán, bảo lãnh ngân hàng (với nhà hình thành trong tương lai) và hợp đồng mẫu.": [
+  "you still need to review the investment policy decision, construction permit, notice of eligibility for sale, bank guarantee (for off-plan housing) and the sample contract.",
+  "투자 주체 승인 결정, 건축 허가, 분양 요건 충족 통지문, 은행 보증(미래 형성 주택의 경우), 표준 계약서를 반드시 확인해야 합니다."
+ ],
+ "với nhà ở hình thành trong tương lai, cần thêm văn bản của Sở Xây dựng thông báo nhà ở đủ điều kiện được bán – Sở Xây dựng Đà Nẵng cũng công bố danh sách này định kỳ.": [
+  "for off-plan housing, you also need the Department of Construction's notice that the housing is eligible for sale – the Da Nang Department of Construction also publishes this list periodically.",
+  "미래 형성 주택의 경우 주택이 분양 요건을 충족했다는 건설국의 통지문이 추가로 필요합니다. 다낭 건설국도 이 목록을 정기적으로 공표합니다."
+ ],
+ "· 9 phút đọc · Cập nhật 15/11/2026": [
+  "· 9 min read · Updated November 15, 2026",
+  "· 9분 읽기 · 2026년 11월 15일 업데이트"
+ ],
+ "Đây là hệ thống do Bộ Xây dựng quản lý, theo báo chí đưa tin được đưa vào vận hành từ ngày 30/7/2026 theo": [
+  "This system is managed by the Ministry of Construction and, according to press reports, has been in operation since July 30, 2026 under",
+  "이 시스템은 건설부가 관리하며, 언론 보도에 따르면 2026년 7월 30일부터 다음 규정에 따라 운영되고 있습니다:"
+ ],
+ "Để tra cứu mã định danh bất động sản, anh chị vào mục “Mã định danh điện tử” trên trang chủ, chọn loại hình (nhà ở riêng lẻ, căn hộ chung cư, công trình…) và khu vực (tỉnh/thành, phường/xã), rồi xem danh sách tài sản đã được xác thực. Mỗi dòng kết quả cho biết mã dự án hoặc công trình, mã thửa đất, loại hình, khu vực và chủ đầu tư. Nếu căn hộ anh chị định mua thuộc một dự án đã có trong danh sách, đó là dữ liệu tốt để đối chiếu với hợp đồng.": [
+  "To look up a real estate identification code, go to the “Electronic identification code” section on the homepage, select the property type (individual house, apartment, building…) and area (province/city, ward/commune), then view the list of verified properties. Each result row shows the project or building code, land parcel code, property type, area and developer. If the apartment you plan to buy belongs to a project already on the list, that is good data to cross-check against the contract.",
+  "부동산 식별 코드를 조회하려면 홈페이지의 “전자 식별 코드” 항목에서 유형(단독주택, 아파트, 건축물 등)과 지역(성/시, 동/사)을 선택한 뒤 검증된 자산 목록을 확인하십시오. 각 결과 행에는 프로젝트 또는 건물 코드, 필지 코드, 유형, 지역, 시행사가 표시됩니다. 고객님께서 구매하려는 아파트가 이미 목록에 있는 프로젝트에 속한다면 계약서와 대조할 수 있는 좋은 자료가 됩니다."
+ ],
+ "Đối chiếu với văn bản đủ điều kiện bán:": [
+  "Cross-check with the notice of eligibility for sale:",
+  "분양 요건 충족 통지문과 대조:"
+ ],
+ "để tra cứu mã định danh bất động sản, gõ trực tiếp": [
+  "to look up a real estate identification code, type",
+  "부동산 식별 코드를 조회하려면 다음 주소를 직접 입력하십시오:"
+ ],
+ "– căn hộ Sun Group ở Hòa Xuân, Hải Châu.": [
+  "– Sun Group apartments in Hoa Xuan, Hai Chau.",
+  "– 하이쩌우 호아쑤언의 Sun Group 아파트."
+ ],
+ "– căn hộ hàng hiệu ven biển Mỹ Khê.": [
+  "– branded residences along My Khe Beach.",
+  "– 미케 비치 해안의 브랜드 레지던스."
+ ],
+ "– căn hộ thương mại dịch vụ mặt biển của Sun Group, sắp giới thiệu chính thức.": [
+  "– Sun Group's beachfront commercial-service apartments, to be officially introduced soon.",
+  "– Sun Group의 해변 상업 서비스용 아파트로, 곧 공식 소개될 예정입니다."
+ ],
+ "“Làm sao biết dự án này đã được phép bán chưa?”": [
+  "“How do I know whether this project has been approved for sale?”",
+  "“이 프로젝트가 분양 허가를 받았는지 어떻게 알 수 있나요?”"
+ ]
+}
