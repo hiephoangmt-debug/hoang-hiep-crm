@@ -137,7 +137,7 @@ HTML
 		'keywords_extra' => array( 'căn hộ Sun NeO City', 'so sánh Cora Spana S-Light', 'căn hộ Hòa Xuân Sun Group' ),
 		'project'  => 'cora-tower',
 		'schedule' => '2026-11-15 14:00',
-		'rev'      => 3, // 26/11: chiết khấu thanh toán sớm tháng 12/2026 (hạn 25/12).
+		'rev'      => 4, // 26/11 chiều: S-Light nhận nhà dự kiến 30/06/2028. // 26/11: chiết khấu thanh toán sớm tháng 12/2026 (hạn 25/12).
 		'category' => 'Kinh nghiệm',
 		'tags'     => array( 'Sun NeO City', 'Cora Tower', 'Spana Tower', 'S-Light Tower' ),
 		'image'    => 'plugin:img/tin-tuc/chon-toa-sun-neo-city-hoa-xuan.jpg',
@@ -157,7 +157,7 @@ HTML
 <tr><td>Quy mô</td><td>2 tòa A1, A2; 616 căn điển hình/tòa</td><td>2 tòa S1, S2; 22 tầng + tum; 1.237 căn</td><td>2 tháp 22 tầng; gần 800 căn</td></tr>
 <tr><td>Diện tích</td><td>Studio 32,3 m², 1PN+ 53,2 – 54,2 m², 2PN, 3PN</td><td>Studio 31,6 m² đến 3PN 95,5 m²</td><td>33,3 – 95,1 m²</td></tr>
 <tr><td>Giá tham khảo</td><td>Studio 2,42 – 2,74 tỷ; 1PN+ 3,45 – 3,84 tỷ</td><td>Liên hệ</td><td>Liên hệ</td></tr>
-<tr><td>Bàn giao</td><td>Dự kiến 30/07/2027</td><td>Dự kiến 30/06/2027</td><td>Liên hệ</td></tr>
+<tr><td>Bàn giao</td><td>Dự kiến 30/07/2027</td><td>Dự kiến 30/06/2027</td><td>Nhận nhà sử dụng dự kiến 30/06/2028</td></tr>
 <tr><td>Không vay</td><td>Chiết khấu thêm 5%</td><td>Chiết khấu thêm 5%</td><td>Chiết khấu thêm 3%</td></tr>
 <tr><td>Thanh toán sớm 95% (12/2026)</td><td>7%</td><td>5,5%</td><td>9,5%</td></tr>
 <tr><td>Thanh toán sớm 70% (12/2026)</td><td>1%</td><td>Không áp dụng</td><td>2,5%</td></tr>

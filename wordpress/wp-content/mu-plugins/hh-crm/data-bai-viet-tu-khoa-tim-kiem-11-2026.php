@@ -22,6 +22,7 @@ function hh_posts_tu_khoa_tim_kiem_11_2026( $posts ) {
 		'keyword'  => 'Cora Tower khi nào bàn giao',
 		'keywords_extra' => array( 'Spana Tower khi nào bàn giao', 'tiến độ Spana Tower', 'tiến độ Cora Tower', 'S-Light Tower ở đâu' ),
 		'project'  => 'cora-tower',
+		'rev'      => 2, // 26/11: S-Light nhận nhà dự kiến 30/06/2028 theo CSBH 01/SL.
 		'schedule' => '2026-11-24 09:00',
 		'category' => 'Dự án',
 		'tags'     => array( 'Cora Tower', 'Spana Tower', 'S-Light Tower', 'Sun NeO City', 'Tiến độ dự án' ),
@@ -40,7 +41,7 @@ function hh_posts_tu_khoa_tim_kiem_11_2026( $posts ) {
 <tbody>
 <tr><td>Spana Tower (S1, S2)</td><td>30/06/2027</td><td>Đủ điều kiện bán (VB 7111/SXD-QLN, 05/5/2026), bảo lãnh VietinBank; 11/2026 lên khoảng tầng 10</td></tr>
 <tr><td>Cora Tower (A1, A2)</td><td>30/07/2027 (căn hộ); shop khối đế nhận nhà khi thanh toán 70%, dự kiến 31/10/2027</td><td>Đang bán</td></tr>
-<tr><td>S-Light Tower</td><td>Theo hợp đồng từng căn</td><td>Ra mắt 6/2026, đang bán</td></tr>
+<tr><td>S-Light Tower</td><td>Nhận nhà sử dụng dự kiến 30/06/2028 (Sun Early Key, theo CSBH 01/SL của chủ đầu tư)</td><td>Ra mắt 6/2026, đang bán</td></tr>
 </tbody>
 </table>
 <h2>Spana Tower: xây đến đâu</h2>
