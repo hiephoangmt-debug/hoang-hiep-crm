@@ -1,7 +1,7 @@
 {
- "version": "2.20.371",
+ "version": "2.20.372",
  "theme": "2.16.50",
- "commit": "398789c7fbb81eda36c6d9e0fa439b897d8b723c",
- "manifest_sha": "f896e517e1a356eb7c8f7971c431cc1f03f2436d86424b6f981987ec907631c9",
+ "commit": "b002d10adb652c54c20cc32829d29a530fe39bf3",
+ "manifest_sha": "d1f04f1f5ab7e065140d0db66dd12cec01189f7755806070057af99ef959ed21",
  "files": 1904
 }
