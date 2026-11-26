@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.8.3
+ * * Version: 3.8.6
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2469,7 +2469,29 @@ add_action('wp_head', function () {
 // ===== 29. Số điện thoại chung: dùng số của Vân (0909 669 325) thay số cũ của theme =====
 add_filter('dst_html', function ($html) {
     return str_replace(
-        ['href="tel:0904567009">0904 567 009', 'href="tel:0904567009">0904567009', 'href="tel:0904567009"', '"telephone":"0904567009"', '0904 567 009', '0904567009'],
-        ['href="tel:0909669325">0909 669 325', 'href="tel:0909669325">0909 669 325', 'href="tel:0909669325"', '"telephone":"+84909669325"', '0909 669 325', '0909669325'],
+        ['K34/98 Lê Hữu Trác, An Hải, Đà Nẵng', 'href="tel:0904567009">0904 567 009', 'href="tel:0904567009">0904567009', 'href="tel:0904567009"', '"telephone":"0904567009"', '0904 567 009', '0904567009'],
+        ['Lê Hữu Trác, Đà Nẵng', 'href="tel:0909669325">0909 669 325', 'href="tel:0909669325">0909 669 325', 'href="tel:0909669325"', '"telephone":"+84909669325"', '0909 669 325', '0909669325'],
         $html);
 }, 62);
+
+// ===== 30. Chân trang trên điện thoại: 2 cột cho gọn =====
+add_action('wp_head', function () {
+    echo '<style id="dst-foot-mob">
+@media (max-width:760px){
+.site-footer .footer-top{display:grid!important;grid-template-columns:1fr 1fr!important;gap:22px 18px!important}
+.site-footer .footer-top>div:first-child{grid-column:1/-1}
+.site-footer .footer-top>div:nth-child(2){grid-column:1;grid-row:2/span 2}
+.site-footer .footer-top>div:nth-child(3){grid-column:2;grid-row:2}
+.site-footer .footer-top>div:last-child{grid-column:2;grid-row:3}
+.site-footer .footer-top li,.site-footer .footer-top li a{padding-top:0!important;padding-bottom:0!important}
+.site-footer .footer-top>div:last-child li{font-size:14px!important}
+.site-footer .footer-top>div:last-child li a[href^=mailto]{font-size:12.5px!important;word-break:normal!important}
+.site-footer .brand img.ds-logo{height:auto!important;width:100%!important;max-width:330px}
+.site-footer .footer-top ul{margin:0!important;padding:0!important}
+.site-footer .footer-top li{margin:0 0 6px!important;font-size:15px!important;line-height:1.35!important;letter-spacing:normal!important}
+.site-footer .footer-top li a{letter-spacing:normal!important;word-break:break-word}
+.site-footer .footer-top h4{margin:0 0 12px!important}
+.site-footer .footer-top>div:first-child p{margin-bottom:10px!important}
+}
+</style>';
+}, 110);
