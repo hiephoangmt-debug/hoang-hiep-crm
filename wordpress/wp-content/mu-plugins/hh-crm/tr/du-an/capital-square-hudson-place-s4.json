@@ -1,0 +1,686 @@
+{
+ "(mã bán hàng": [
+  "(sales code",
+  "(분양 코드"
+ ],
+ ") là tòa căn hộ 24 tầng, 314 căn thuộc phân khu": [
+  ") is a 24-floor apartment tower with 314 units in the",
+  ")는 24층, 314세대 규모의 아파트 동으로,"
+ ],
+ ", khoảng 92 – 146 triệu/m²": [
+  ", about 92 – 146 million VND/m²",
+  ", m²당 약 9,200만 – 1억 4,600만 동"
+ ],
+ "101,00 – 101,62 m²": [
+  "101.00 – 101.62 m²",
+  "101.00 – 101.62 m²"
+ ],
+ "108,39 – 109,86 m²": [
+  "108.39 – 109.86 m²",
+  "108.39 – 109.86 m²"
+ ],
+ "1PN 46,33 – 47,17 m² · 2PN 72,00 – 74,31 m² · 3PN 91,29 – 101,62 m²": [
+  "1BR 46.33 – 47.17 m² · 2BR 72.00 – 74.31 m² · 3BR 91.29 – 101.62 m²",
+  "1베드룸 46.33 – 47.17 m² · 2베드룸 72.00 – 74.31 m² · 3베드룸 91.29 – 101.62 m²"
+ ],
+ "1PN 46,33 – 47,17 m² · 2PN 72,00 – 74,31 m² · 3PN 91,29 – 101,62 m² (thông thủy). Bấm vào ảnh để xem mặt bằng lớn.": [
+  "1BR 46.33 – 47.17 m² · 2BR 72.00 – 74.31 m² · 3BR 91.29 – 101.62 m² (net area). Click the image to view the large floor plan.",
+  "1베드룸 46.33 – 47.17 m² · 2베드룸 72.00 – 74.31 m² · 3베드룸 91.29 – 101.62 m²(전용면적). 이미지를 클릭하면 큰 평면도를 보실 수 있습니다."
+ ],
+ "1PN, 2PN, 3PN, 3PN dualkey": [
+  "1BR, 2BR, 3BR, 3BR dual-key",
+  "1베드룸, 2베드룸, 3베드룸, 3베드룸 듀얼키"
+ ],
+ "24 tầng, 314 căn hộ; tầng điển hình 15 căn/sàn gồm 2 căn 1PN, 7 căn 2PN và 6 căn 3PN.": [
+  "24 floors, 314 apartments; typical floors have 15 units each: 2 1BR, 7 2BR and 6 3BR units.",
+  "24층, 아파트 314세대이며, 기준층은 층당 15세대로 1베드룸 2세대, 2베드룸 7세대, 3베드룸 6세대입니다."
+ ],
+ "24 tầng, 314 căn hộ; tầng điển hình 15 căn/sàn, hành lang rộng 2 m": [
+  "24 floors, 314 apartments; typical floors with 15 units each, 2 m wide corridors",
+  "24층, 아파트 314세대; 기준층 층당 15세대, 폭 2 m 복도"
+ ],
+ "24 tầng, 314 căn – tòa S4 cạnh bể bơi và cụm tiện ích lớn nhất Capital Square": [
+  "24 floors, 314 units – tower S4 next to the pool and the largest amenity cluster in Capital Square",
+  "24층, 314세대 – Capital Square 최대 편의시설 구역과 수영장 옆의 S4동"
+ ],
+ "300 triệu": [
+  "300 million VND",
+  "3억 동"
+ ],
+ "314 căn hộ": [
+  "314 apartments",
+  "아파트 314세대"
+ ],
+ "36 tháng": [
+  "36 months",
+  "36개월"
+ ],
+ "3PN (có dualkey)": [
+  "3BR (with dual-key)",
+  "3베드룸(듀얼키)"
+ ],
+ "4,32 tỷ": [
+  "4.32 billion VND",
+  "43억 2천만 동"
+ ],
+ "4,32 – 4,91 tỷ": [
+  "4.32 – 4.91 billion VND",
+  "43억 2천만 – 49억 1천만 동"
+ ],
+ "46,3 – 47,2 m²": [
+  "46.3 – 47.2 m²",
+  "46.3 – 47.2 m²"
+ ],
+ "46,33 – 47,17 m²": [
+  "46.33 – 47.17 m²",
+  "46.33 – 47.17 m²"
+ ],
+ "5 năm": [
+  "5 years",
+  "5년"
+ ],
+ "5% giá bán HĐMB": [
+  "5% of the SPA sale price",
+  "매매계약서(SPA) 분양가의 5%"
+ ],
+ "50,44 – 51,56 m²": [
+  "50.44 – 51.56 m²",
+  "50.44 – 51.56 m²"
+ ],
+ "6,61 – 10,58 tỷ": [
+  "6.61 – 10.58 billion VND",
+  "66억 1천만 – 105억 8천만 동"
+ ],
+ "72,0 – 74,3 m²": [
+  "72.0 – 74.3 m²",
+  "72.0 – 74.3 m²"
+ ],
+ "72,00 – 73,12 m²": [
+  "72.00 – 73.12 m²",
+  "72.00 – 73.12 m²"
+ ],
+ "74,31 m²": [
+  "74.31 m²",
+  "74.31 m²"
+ ],
+ "77,15 – 78,12 m²": [
+  "77.15 – 78.12 m²",
+  "77.15 – 78.12 m²"
+ ],
+ "79,29 m²": [
+  "79.29 m²",
+  "79.29 m²"
+ ],
+ "9,33 – 13,41 tỷ": [
+  "9.33 – 13.41 billion VND",
+  "93억 3천만 – 134억 1천만 동"
+ ],
+ "91,29 – 91,40 m²": [
+  "91.29 – 91.40 m²",
+  "91.29 – 91.40 m²"
+ ],
+ "91,3 – 101,6 m²": [
+  "91.3 – 101.6 m²",
+  "91.3 – 101.6 m²"
+ ],
+ "98,64 m²": [
+  "98.64 m²",
+  "98.64 m²"
+ ],
+ ": chủ sở hữu HĐMB là Công ty CP Đầu tư Dịch vụ Vui chơi Giải trí Thể thao Hà Nội (đơn vị thành viên hệ sinh thái BRG), khách hàng ký hợp đồng chuyển nhượng tại văn phòng chủ đầu tư.": [
+  ": the SPA holder is Hanoi Entertainment, Recreation and Sports Service Investment JSC (a member of the BRG ecosystem), and buyers sign the transfer contract at the developer's office.",
+  "방식으로 판매됩니다: 매매계약서 보유자는 하노이 레저·엔터테인먼트·스포츠 서비스 투자 주식회사(BRG 생태계 계열사)이며, 고객은 시행사 사무실에서 양도 계약을 체결합니다."
+ ],
+ "Bàn giao căn hộ": [
+  "Apartment handover",
+  "아파트 입주(인도)"
+ ],
+ "Bể bơi resort cạnh tòa S4 Hudson Place, Capital Square Đà Nẵng": [
+  "Resort pool next to tower S4 Hudson Place, Capital Square Da Nang",
+  "Capital Square Da Nang, Hudson Place S4동 옆 리조트형 수영장"
+ ],
+ "Bể bơi resort, bể bơi trẻ em": [
+  "Resort pool, children's pool",
+  "리조트형 수영장, 어린이 수영장"
+ ],
+ "Bể bơi và quầy café ngoài trời nội khu Capital Square 3": [
+  "Pool and outdoor café within Capital Square 3",
+  "Capital Square 3 단지 내 수영장과 야외 카페"
+ ],
+ "Bộ 3 ưu đãi 11/2026: vay 5 năm không lo lãi suất, chiết khấu thêm 5%, quà Smart Home tới 300 triệu": [
+  "3 incentives for November 2026: 5-year loans without worrying about interest, an additional 5% discount, Smart Home gift worth up to 300 million VND",
+  "2026년 11월 3대 혜택: 5년간 이자 걱정 없는 대출, 5% 추가 할인, 최대 3억 동 Smart Home 증정"
+ ],
+ "Café ngoài trời, khu BBQ, outdoor gym": [
+  "Outdoor café, BBQ area, outdoor gym",
+  "야외 카페, BBQ 구역, 야외 운동기구"
+ ],
+ "Capital Square 3": [
+  "Capital Square 3",
+  "Capital Square 3"
+ ],
+ "Capital Square 3 – tòa số 12 trên mặt bằng tổng thể": [
+  "Capital Square 3 – building no. 12 on the master plan",
+  "Capital Square 3 – 마스터플랜상 12번 동"
+ ],
+ "Chiết khấu thêm 5%": [
+  "An additional 5% discount",
+  "5% 추가 할인"
+ ],
+ "Chính sách 11/2026 cho tòa Broadway Place (S3) và Hudson Place (S4)": [
+  "November 2026 policy for Broadway Place (S3) and Hudson Place (S4)",
+  "Broadway Place(S3동)와 Hudson Place(S4동) 2026년 11월 정책"
+ ],
+ "Chính sách thay đổi theo đợt – liên hệ để nhận phiếu tính giá từng căn": [
+  "The policy changes with each phase – contact us for a price calculation sheet for each unit",
+  "정책은 차수별로 변경됩니다 – 세대별 가격 계산서는 문의해 주십시오"
+ ],
+ "Có, sở hữu lâu dài. Khách mua theo hình thức chuyển nhượng hợp đồng mua bán, ký tại văn phòng chủ đầu tư SIH.": [
+  "Yes, freehold. Buyers purchase by transfer of the sale and purchase agreement, signed at the office of the developer SIH.",
+  "네, 영구 소유입니다. 매매계약서 양도 방식으로 매입하며, 시행사 SIH 사무실에서 체결합니다."
+ ],
+ "Công ty CP Bất động sản SIH": [
+  "SIH Real Estate JSC",
+  "SIH 부동산 주식회사"
+ ],
+ "Công viên khoảng 2.000 m², Grand Central Mall": [
+  "Park of about 2,000 m², Grand Central Mall",
+  "약 2,000 m² 공원, Grand Central Mall"
+ ],
+ "Căn 1PN · 46,33 – 47,17 m²": [
+  "1BR unit · 46.33 – 47.17 m²",
+  "1베드룸 · 46.33 – 47.17 m²"
+ ],
+ "Căn 2PN (2 logia)": [
+  "2BR unit (2 loggias)",
+  "2베드룸(로지아 2개)"
+ ],
+ "Căn 2PN (2 logia) · 72,00 – 74,31 m²": [
+  "2BR unit (2 loggias) · 72.00 – 74.31 m²",
+  "2베드룸(로지아 2개) · 72.00 – 74.31 m²"
+ ],
+ "Căn 2PN đều có 2 logia; có dòng 3PN dualkey (2PN + studio riêng cửa)": [
+  "All 2BR units have 2 loggias; 3BR dual-key units available (2BR + studio with its own door)",
+  "2베드룸 전 세대 로지아 2개; 3베드룸 듀얼키 타입(2베드룸 + 별도 출입문 스튜디오) 보유"
+ ],
+ "Căn 3PN dualkey": [
+  "3BR dual-key unit",
+  "3베드룸 듀얼키 세대"
+ ],
+ "Căn 3PN dualkey (2PN + studio)": [
+  "3BR dual-key unit (2BR + studio)",
+  "3베드룸 듀얼키(2베드룸 + 스튜디오)"
+ ],
+ "Căn 3PN dualkey (2PN + studio) · 101,00 – 101,62 m²": [
+  "3BR dual-key unit (2BR + studio) · 101.00 – 101.62 m²",
+  "3베드룸 듀얼키(2베드룸 + 스튜디오) · 101.00 – 101.62 m²"
+ ],
+ "Căn 3PN khoảng 101 m² chia thành một căn 2 phòng ngủ và một studio có cửa riêng, ở hai thế hệ hoặc vừa ở vừa cho thuê.": [
+  "A 3BR unit of about 101 m² divided into a 2-bedroom unit and a studio with its own door, for two generations living together or for living in one part while renting out the other.",
+  "약 101 m² 3베드룸 세대를 2베드룸 세대와 별도 출입문이 있는 스튜디오로 나눈 형태로, 두 세대가 함께 거주하거나 거주와 임대를 병행할 수 있습니다."
+ ],
+ "Căn 3PN · 91,29 – 91,40 m²": [
+  "3BR unit · 91.29 – 91.40 m²",
+  "3베드룸 · 91.29 – 91.40 m²"
+ ],
+ "Căn 3PN, 3PN dualkey": [
+  "3BR, 3BR dual-key units",
+  "3베드룸, 3베드룸 듀얼키"
+ ],
+ "Căn dualkey Hudson Place là gì?": [
+  "What is a Hudson Place dual-key unit?",
+  "Hudson Place 듀얼키 세대란 무엇인가요?"
+ ],
+ "Căn hộ tại Capital Square 3 được bán theo hình thức": [
+  "Apartments at Capital Square 3 are sold by way of",
+  "Capital Square 3의 아파트는"
+ ],
+ "Cầu Sông Hàn": [
+  "Han River Bridge",
+  "다낭 한강교"
+ ],
+ "Cầu Sông Hàn, cầu Rồng, Quảng trường sông Hàn": [
+  "Han River Bridge, Dragon Bridge, Han River Square",
+  "다낭 한강교, 용다리, 다낭 한강 광장"
+ ],
+ "Dự kiến bàn giao căn hộ bán hoàn thiện": [
+  "Expected handover of semi-finished apartments",
+  "반마감 아파트 입주(인도) 예정"
+ ],
+ "Dự kiến quý III/2027, bàn giao bán hoàn thiện: phòng tắm đủ thiết bị, cửa chống cháy smartkey, sàn và tường trát phẳng.": [
+  "Expected Q3 2027, semi-finished handover: fully equipped bathrooms, fire-rated door with smart key, plastered floors and walls.",
+  "2027년 3분기 예정이며, 반마감 인도입니다: 설비가 완비된 욕실, 스마트키 방화문, 미장 마감된 바닥과 벽."
+ ],
+ "HUDSON PLACE S4": [
+  "HUDSON PLACE S4",
+  "HUDSON PLACE S4"
+ ],
+ "Hai khái niệm cần hiểu khi xem giá:": [
+  "Two concepts to understand when looking at prices:",
+  "가격을 볼 때 알아야 할 두 가지 개념:"
+ ],
+ "Hudson Place": [
+  "Hudson Place",
+  "Hudson Place"
+ ],
+ "Hudson Place (tòa S4) – Capital Square 3, CĐT SIH: 24 tầng, 314 căn 1PN, 2PN, 3PN và 3PN dualkey ven sông Hàn, bàn giao quý III/2027, vận hành Savills, vay 70% hỗ trợ lãi suất 0% tới 36 tháng.": [
+  "Hudson Place (tower S4) – Capital Square 3, developer SIH: 24 floors, 314 1BR, 2BR, 3BR and 3BR dual-key units by the Han River, handover Q3 2027, operated by Savills, 70% loans with 0% interest support for up to 36 months.",
+  "Hudson Place(S4동) – Capital Square 3, 시행사 SIH: 24층, 다낭 한강변 1베드룸, 2베드룸, 3베드룸 및 3베드룸 듀얼키 314세대, 2027년 3분기 입주(인도), Savills 운영, 70% 대출 및 최대 36개월 0% 이자 지원."
+ ],
+ "Hudson Place S4 Capital Square": [
+  "Hudson Place S4 Capital Square",
+  "Hudson Place S4 Capital Square"
+ ],
+ "Hudson Place S4 Capital Square Đà Nẵng – Đường Nguyễn Công Trứ, tổ hợp Capital Square, phường An Hải (Sơn Trà cũ), Đà Nẵng. Thông tin, hình ảnh tổng hợp từ tài liệu chủ đầu tư, mang tính tham khảo; giá và chính sách có thể thay đổi. Tư vấn: Hoàng Hiệp – 0904 567 009.": [
+  "Hudson Place S4 Capital Square Da Nang – Nguyen Cong Tru Street, Capital Square complex, An Hai Ward (former Son Tra), Da Nang. Information and images are compiled from developer documents and are for reference only; prices and policies may change. Advice: Hoang Hiep – 0904 567 009.",
+  "Hudson Place S4 Capital Square Da Nang – 다낭 안하이 동(구 선짜), Capital Square 단지, 응우옌꽁쯔 거리(Nguyen Cong Tru St.). 정보와 이미지는 시행사 자료를 바탕으로 정리한 참고용이며, 가격과 정책은 변경될 수 있습니다. 상담: 호앙 히엡 – 0904 567 009."
+ ],
+ "Hudson Place S4 bao giờ bàn giao?": [
+  "When will Hudson Place S4 be handed over?",
+  "Hudson Place S4는 언제 입주(인도)하나요?"
+ ],
+ "Hudson Place S4 có bao nhiêu căn?": [
+  "How many units does Hudson Place S4 have?",
+  "Hudson Place S4는 몇 세대인가요?"
+ ],
+ "Hudson Place S4 có sổ hồng lâu dài không?": [
+  "Does Hudson Place S4 come with a freehold Pink Book?",
+  "Hudson Place S4는 영구 소유 핑크북이 발급되나요?"
+ ],
+ "Hudson Place S4 do ai vận hành?": [
+  "Who operates Hudson Place S4?",
+  "Hudson Place S4의 운영사는 어디인가요?"
+ ],
+ "Hình thức mua": [
+  "Purchase method",
+  "매입 방식"
+ ],
+ "Hướng Nam view sông Hàn, cầu Rồng cao nhất": [
+  "South-facing with Han River views, Dragon Bridge views are the highest-priced",
+  "다낭 한강·용다리 전망의 남향 세대가 가장 높은 가격"
+ ],
+ "Hỏi Hoàng Hiệp mức chiết khấu từng phương án": [
+  "Ask Hoang Hiep about the discount for each payment option",
+  "납부 방식별 할인율은 호앙 히엡에게 문의해 주십시오"
+ ],
+ "Khoảng 1 km": [
+  "About 1 km",
+  "약 1km"
+ ],
+ "Khoảng 10,16 – 13,32 tỷ": [
+  "About 10.16 – 13.32 billion VND",
+  "약 101억 6천만 – 133억 2천만 동"
+ ],
+ "Khoảng 300 m": [
+  "About 300 m",
+  "약 300 m"
+ ],
+ "Khoảng 4,32 – 4,91 tỷ": [
+  "About 4.32 – 4.91 billion VND",
+  "약 43억 2천만 – 49억 1천만 동"
+ ],
+ "Khoảng 6,61 – 10,58 tỷ": [
+  "About 6.61 – 10.58 billion VND",
+  "약 66억 1천만 – 105억 8천만 동"
+ ],
+ "Khoảng 9,33 – 13,41 tỷ": [
+  "About 9.33 – 13.41 billion VND",
+  "약 93억 3천만 – 134억 1천만 동"
+ ],
+ "Kinh phí bảo trì + VAT 5% giá bán": [
+  "Maintenance fund + 5% VAT on the sale price",
+  "관리기금 + 분양가의 VAT 5%"
+ ],
+ "Ký hợp đồng chuyển nhượng HĐMB": [
+  "Sign the SPA transfer contract",
+  "매매계약서(SPA) 양도 계약 체결"
+ ],
+ "Ký hợp đồng chuyển nhượng HĐMB, thanh toán theo tỷ lệ của phương án đã chọn.": [
+  "Sign the SPA transfer contract and pay according to the ratio of the chosen option.",
+  "매매계약서(SPA) 양도 계약을 체결하고, 선택한 방식의 비율에 따라 납부합니다."
+ ],
+ "Ký hợp đồng chuyển nhượng hợp đồng mua bán tại văn phòng chủ đầu tư": [
+  "Sign a transfer of the sale and purchase agreement at the developer's office",
+  "시행사 사무실에서 매매계약서 양도 계약 체결"
+ ],
+ "Ký thỏa thuận đặt cọc chuyển nhượng": [
+  "Sign the transfer deposit agreement",
+  "양도 계약금 합의서 체결"
+ ],
+ "Ký thỏa thuận đặt cọc chuyển nhượng (TTĐCCN) với chủ sở hữu, đặt cọc 100 triệu/căn, trong 2 ngày kể từ khi nộp đủ cọc.": [
+  "Sign the transfer deposit agreement (TTĐCCN) with the holder, with a deposit of 100 million VND per unit, within 2 days of paying the full deposit.",
+  "보유자와 양도 계약금 합의서(TTĐCCN)를 체결하고 세대당 1억 동의 계약금을 납부하며, 계약금 전액 납부일로부터 2일 이내에 체결합니다."
+ ],
+ "Layout vuông, 100% phòng lấy sáng tự nhiên, hành lang 2 m, 15 căn/sàn": [
+  "Square layouts, 100% of rooms with natural light, 2 m corridors, 15 units per floor",
+  "정방형 평면, 모든 방 자연 채광, 2 m 복도, 층당 15세대"
+ ],
+ "Miễn phí phí quản lý dịch vụ 1 năm": [
+  "Free service management fee for 1 year",
+  "1년간 관리비 무료"
+ ],
+ "Mặt bằng tiện ích quanh tòa S4: bể bơi resort, sân vườn, sân golf mini, sân chơi trẻ em": [
+  "Amenity plan around tower S4: resort pool, garden, mini golf course, children's playground",
+  "S4동 주변 편의시설 배치도: 리조트형 수영장, 정원, 미니 골프장, 어린이 놀이터"
+ ],
+ "Mặt bằng tiện ích tổng thể Capital Square Đà Nẵng, Hudson Place là tòa số 12": [
+  "Overall amenity plan of Capital Square Da Nang; Hudson Place is building no. 12",
+  "Capital Square Da Nang 전체 편의시설 배치도, Hudson Place는 12번 동"
+ ],
+ "Mặt bằng tầng: 15 căn/sàn, 100% phòng lấy sáng tự nhiên": [
+  "Floor plan: 15 units per floor, 100% of rooms with natural light",
+  "평면도: 층당 15세대, 모든 방 자연 채광"
+ ],
+ "Mặt bằng vị trí các tòa Capital Square: Hudson Place, Broadway Place, Kings Place, Queens Place, Times Place giữa Trần Hưng Đạo, Ngô Quyền và Nguyễn Công Trứ": [
+  "Location plan of the Capital Square towers: Hudson Place, Broadway Place, Kings Place, Queens Place, Times Place between Tran Hung Dao, Ngo Quyen and Nguyen Cong Tru streets",
+  "Capital Square 각 동 위치도: 쩐흥다오, 응오꾸옌, 응우옌꽁쯔 거리 사이의 Hudson Place, Broadway Place, Kings Place, Queens Place, Times Place"
+ ],
+ "Nhận bảng giá Hudson Place S4 Capital Square": [
+  "Get the Hudson Place S4 Capital Square price list",
+  "Hudson Place S4 Capital Square 분양가표 받기"
+ ],
+ "Nhận giấy chứng nhận": [
+  "Receive the certificate",
+  "증서 수령"
+ ],
+ "Phòng vệ sinh hoàn thiện đầy đủ thiết bị; cửa chính chống cháy có khóa smartkey và chuông cửa camera; ban công, logia hoàn thiện. Tường, vách ngăn được trát phẳng, ống gen chờ sẵn đầu điện nước; sàn chống thấm, cán phẳng để chủ nhà tự hoàn thiện theo ý thích.": [
+  "Bathrooms fully finished with fixtures; fire-rated main door with smart key lock and camera doorbell; balconies and loggias finished. Walls and partitions plastered, service shafts with electrical and water connection points ready; floors waterproofed and screeded so owners can finish them to their own taste.",
+  "욕실은 설비까지 완전 마감; 스마트키 도어락과 카메라 도어벨이 있는 방화 현관문; 발코니와 로지아 마감. 벽체와 칸막이는 미장 마감, 설비 샤프트에 전기·수도 연결부 준비; 바닥은 방수 및 평탄 시공되어 소유주가 원하는 대로 마감할 수 있습니다."
+ ],
+ "Phối cảnh Hudson Place tòa S4 Capital Square Đà Nẵng ven sông Hàn, 24 tầng, 314 căn hộ": [
+  "Rendering of Hudson Place tower S4, Capital Square Da Nang by the Han River, 24 floors, 314 apartments",
+  "다낭 한강변 Capital Square Da Nang의 Hudson Place S4동 조감도, 24층, 아파트 314세대"
+ ],
+ "Phối cảnh tổ hợp Capital Square Đà Nẵng bên bờ Đông sông Hàn, nhìn về cầu Rồng": [
+  "Rendering of the Capital Square Da Nang complex on the east bank of the Han River, looking toward Dragon Bridge",
+  "다낭 한강 동쪽 강변의 Capital Square Da Nang 단지 조감도, 용다리 방향"
+ ],
+ "Quy trình mua: chuyển nhượng hợp đồng mua bán": [
+  "Purchase process: transfer of the sale and purchase agreement",
+  "매입 절차: 매매계약서 양도"
+ ],
+ "Quà tặng gói Smart Home: 1PN 100 triệu · 2PN 200 triệu · 3PN 300 triệu": [
+  "Smart Home package gift: 1BR 100 million VND · 2BR 200 million VND · 3BR 300 million VND",
+  "Smart Home 패키지 증정: 1베드룸 1억 동 · 2베드룸 2억 동 · 3베드룸 3억 동"
+ ],
+ "Quà tặng sự kiện – số lượng giới hạn": [
+  "Event gifts – limited quantity",
+  "이벤트 증정 – 수량 한정"
+ ],
+ "Quý III/2027": [
+  "Q3 2027",
+  "2027년 3분기"
+ ],
+ "Quý III/2027 (dự kiến), bán hoàn thiện": [
+  "Q3 2027 (expected), semi-finished",
+  "2027년 3분기(예정), 반마감"
+ ],
+ "S4-01, S4-08": [
+  "S4-01, S4-08",
+  "S4-01, S4-08"
+ ],
+ "S4-02, 06A, 09, 15": [
+  "S4-02, 06A, 09, 15",
+  "S4-02, 06A, 09, 15"
+ ],
+ "S4-03, 03A, 05, 06, 10, 11": [
+  "S4-03, 03A, 05, 06, 10, 11",
+  "S4-03, 03A, 05, 06, 10, 11"
+ ],
+ "S4-12, S4-12A": [
+  "S4-12, S4-12A",
+  "S4-12, S4-12A"
+ ],
+ "S4-12B": [
+  "S4-12B",
+  "S4-12B"
+ ],
+ "Savills": [
+  "Savills",
+  "Savills"
+ ],
+ "Savills (vận hành)": [
+  "Savills (operator)",
+  "Savills(운영사)"
+ ],
+ "Savills.": [
+  "Savills.",
+  "Savills입니다."
+ ],
+ "Sân chơi trẻ em cạnh bể bơi tòa S4 Hudson Place": [
+  "Children's playground next to the tower S4 Hudson Place pool",
+  "Hudson Place S4동 수영장 옆 어린이 놀이터"
+ ],
+ "Sân chơi trẻ em, sân golf mini": [
+  "Children's playground, mini golf course",
+  "어린이 놀이터, 미니 골프장"
+ ],
+ "Sân golf mini nội khu Capital Square 3": [
+  "Mini golf course within Capital Square 3",
+  "Capital Square 3 단지 내 미니 골프장"
+ ],
+ "Sân pickleball, sân bóng rổ, đường dạo trên cao": [
+  "Pickleball court, basketball court, elevated walkway",
+  "피클볼 코트, 농구장, 공중 산책로"
+ ],
+ "Sân vườn thư giãn trên khối đế, nhìn ra sông Hàn": [
+  "Relaxation garden on the podium, overlooking the Han River",
+  "다낭 한강이 내려다보이는 포디움 위 휴식 정원"
+ ],
+ "Sân vườn thư giãn, đồi chà là, chòi nghỉ": [
+  "Relaxation garden, date palm hill, pavilions",
+  "휴식 정원, 대추야자 언덕, 정자"
+ ],
+ "Sở hữu lâu dài; mua theo hình thức chuyển nhượng hợp đồng mua bán, ký tại văn phòng chủ đầu tư": [
+  "Freehold; purchased by transfer of the sale and purchase agreement, signed at the developer's office",
+  "영구 소유; 매매계약서 양도 방식으로 매입하며, 시행사 사무실에서 체결"
+ ],
+ "Thanh toán hoặc ngân hàng giải ngân các đợt tiếp theo với chủ đầu tư SIH: đợt bàn giao, và 5% cuối khi căn hộ được cấp giấy chứng nhận.": [
+  "Pay, or have the bank disburse, the subsequent installments to the developer SIH: the handover installment, and the final 5% when the apartment's certificate is issued.",
+  "이후 회차는 시행사 SIH에 직접 납부하거나 은행이 대출을 실행합니다: 입주(인도) 회차, 그리고 아파트 증서 발급 시 마지막 5%."
+ ],
+ "Thanh toán sớm Hudson Place S4 được ưu đãi bao nhiêu?": [
+  "What incentives come with early payment at Hudson Place S4?",
+  "Hudson Place S4 조기 납부 시 혜택은 얼마인가요?"
+ ],
+ "Theo phương án chọn": [
+  "According to the chosen option",
+  "선택한 방식에 따름"
+ ],
+ "Theo thông báo bàn giao của chủ đầu tư": [
+  "As per the developer's handover notice",
+  "시행사 입주(인도) 공지에 따름"
+ ],
+ "Theo thông báo của chủ đầu tư": [
+  "As notified by the developer",
+  "시행사 공지에 따름"
+ ],
+ "Theo tài liệu 28/9/2026: thanh toán tiến độ 8%, thanh toán nhanh 100% giá chuyển nhượng 12%, thanh toán sớm 95% giá bán 18%; tặng gói smarthome 100 – 300 triệu trừ vào giá.": [
+  "According to the document dated September 28, 2026: payment by construction progress 8%, fast payment of 100% of the transfer price 12%, early payment of 95% of the sale price 18%; a smart home package worth 100 – 300 million VND deducted from the price.",
+  "2026년 9월 28일자 자료 기준: 공사 진행에 따른 납부 8%, 양도가 100% 빠른 납부 12%, 분양가 95% 조기 납부 18%이며, 가격에서 차감되는 1억 – 3억 동 상당의 스마트홈 패키지가 증정됩니다."
+ ],
+ "Thông số tòa S4 Hudson Place": [
+  "Tower S4 Hudson Place specifications",
+  "Hudson Place S4동 개요"
+ ],
+ "Thông thủy": [
+  "Net area",
+  "전용면적"
+ ],
+ "Tim tường": [
+  "Gross area",
+  "공급면적"
+ ],
+ "Tiêu chuẩn bàn giao: bán hoàn thiện": [
+  "Handover standard: semi-finished",
+  "인도 기준: 반마감"
+ ],
+ "Trong 15 ngày kể từ ký thỏa thuận đặt cọc": [
+  "Within 15 days of signing the deposit agreement",
+  "계약금 합의서 체결일로부터 15일 이내"
+ ],
+ "Trong 2 ngày kể từ khi nộp đủ cọc": [
+  "Within 2 days of paying the full deposit",
+  "계약금 전액 납부일로부터 2일 이내"
+ ],
+ "Tòa S4 Hudson Place và tòa S3 Broadway Place đang thi công phần thân": [
+  "Tower S4 Hudson Place and tower S3 Broadway Place under superstructure construction",
+  "골조 공사 중인 Hudson Place S4동과 Broadway Place S3동"
+ ],
+ "Tòa S4 nằm góc phía Nam tổ hợp Capital Square, mặt tiếp giáp đường Nguyễn Công Trứ, cạnh bể bơi resort và Sales Gallery; cách cầu Sông Hàn khoảng 300 m, cầu Rồng khoảng 1 km, biển Mỹ Khê khoảng 1,5 km.": [
+  "Tower S4 sits at the southern corner of the Capital Square complex, fronting Nguyen Cong Tru Street, next to the resort pool and the Sales Gallery; about 300 m from Han River Bridge, about 1 km from Dragon Bridge and about 1.5 km from My Khe Beach.",
+  "S4동은 Capital Square 단지 남쪽 모서리에 위치하며 응우옌꽁쯔 거리(Nguyen Cong Tru St.)에 접해 있고, 리조트형 수영장과 Sales Gallery 옆에 있습니다. 다낭 한강교에서 약 300 m, 용다리에서 약 1km, 미케 비치에서 약 1.5km 거리입니다."
+ ],
+ "Tòa S4 · Tầng 12A Hudson Place · bấm để phóng to.": [
+  "Tower S4 · Floor 12A Hudson Place · click to enlarge.",
+  "S4동 · Hudson Place 12A층 · 클릭하면 확대됩니다."
+ ],
+ "Tòa S4 · Tầng 5 – 12 và 14 – 24 Hudson Place · bấm để phóng to.": [
+  "Tower S4 · Floors 5 – 12 and 14 – 24 Hudson Place · click to enlarge.",
+  "S4동 · Hudson Place 5 – 12층 및 14 – 24층 · 클릭하면 확대됩니다."
+ ],
+ "Tầng 12A Hudson Place": [
+  "Floor 12A Hudson Place",
+  "Hudson Place 12A층"
+ ],
+ "Tầng 5 – 12 và 14 – 24 Hudson Place": [
+  "Floors 5 – 12 and 14 – 24 Hudson Place",
+  "Hudson Place 5 – 12층 및 14 – 24층"
+ ],
+ "Tầng 5 – 12 và 14 – 24 có 15 căn: 2 căn 1PN, 7 căn 2PN và 6 căn 3PN. Dãy căn phía Nam (S4-01 đến S4-08) nhìn về cầu Rồng, bể bơi và khu vui chơi trẻ em; dãy phía Bắc (S4-09 đến S4-15) nhìn sân vườn nội khu; đầu hồi phía Tây nhìn sông Hàn, đầu hồi phía Đông nhìn sân golf mini và vườn thư giãn. Tầng 12A có 14 căn, vị trí căn S4-12B là không gian sử dụng riêng của chủ đầu tư.": [
+  "Floors 5 – 12 and 14 – 24 have 15 units: 2 1BR, 7 2BR and 6 3BR units. The south row (S4-01 to S4-08) faces Dragon Bridge, the pool and the children's play area; the north row (S4-09 to S4-15) faces the internal garden; the west end faces the Han River, the east end faces the mini golf course and relaxation garden. Floor 12A has 14 units; position S4-12B is the developer's private-use space.",
+  "5 – 12층 및 14 – 24층은 15세대로, 1베드룸 2세대, 2베드룸 7세대, 3베드룸 6세대입니다. 남쪽 라인(S4-01 ~ S4-08)은 용다리, 수영장, 어린이 놀이터를 바라보고, 북쪽 라인(S4-09 ~ S4-15)은 단지 내 정원을, 서쪽 끝세대는 다낭 한강을, 동쪽 끝세대는 미니 골프장과 휴식 정원을 바라봅니다. 12A층은 14세대이며, S4-12B 위치는 시행사 전용 공간입니다."
+ ],
+ "Tầng 5 – 12 và 14 – 24: 15 căn/sàn gồm 2 căn 1PN (S4-12, S4-12A, khoảng 46 – 47 m²), 7 căn 2PN (S4-03, 03A, 05, 06, 10, 11, 12B, khoảng 72 – 74 m²) và 6 căn 3PN (S4-01, 08 khoảng 91 m²; S4-02, 06A, 09, 15 khoảng 101 m², có thiết kế dualkey). Dãy phía Nam nhìn cầu Rồng, bể bơi, khu vui chơi trẻ em; dãy phía Bắc nhìn sân vườn nội khu; đầu hồi Tây nhìn sông Hàn, đầu hồi Đông nhìn sân golf mini và vườn thư giãn. Tầng 12A có 14 căn (vị trí S4-12B là không gian riêng của chủ đầu tư). Không có tầng 13.": [
+  "Floors 5 – 12 and 14 – 24: 15 units per floor, comprising 2 1BR units (S4-12, S4-12A, about 46 – 47 m²), 7 2BR units (S4-03, 03A, 05, 06, 10, 11, 12B, about 72 – 74 m²) and 6 3BR units (S4-01, 08 about 91 m²; S4-02, 06A, 09, 15 about 101 m², with a dual-key design). The south row faces Dragon Bridge, the pool and the children's play area; the north row faces the internal garden; the west end faces the Han River, the east end faces the mini golf course and relaxation garden. Floor 12A has 14 units (position S4-12B is the developer's private space). There is no 13th floor.",
+  "5 – 12층 및 14 – 24층: 층당 15세대로, 1베드룸 2세대(S4-12, S4-12A, 약 46 – 47 m²), 2베드룸 7세대(S4-03, 03A, 05, 06, 10, 11, 12B, 약 72 – 74 m²), 3베드룸 6세대(S4-01, 08 약 91 m²; S4-02, 06A, 09, 15 약 101 m², 듀얼키 설계)로 구성됩니다. 남쪽 라인은 용다리, 수영장, 어린이 놀이터를 바라보고, 북쪽 라인은 단지 내 정원을, 서쪽 끝세대는 다낭 한강을, 동쪽 끝세대는 미니 골프장과 휴식 정원을 바라봅니다. 12A층은 14세대이며(S4-12B 위치는 시행사 전용 공간), 13층은 없습니다."
+ ],
+ "Tầng 7 – 22": [
+  "Floors 7 – 22",
+  "7 – 22층"
+ ],
+ "Tặng chuyến du lịch châu Âu trị giá 100 triệu": [
+  "A Europe trip worth 100 million VND as a gift",
+  "1억 동 상당의 유럽 여행 증정"
+ ],
+ "Tới 70% tổng giá bán, lãi suất 0% tới 36 tháng (phương án 1), ân hạn gốc 36 tháng, miễn phí trả nợ trước hạn trong thời gian hỗ trợ lãi suất.": [
+  "Up to 70% of the total sale price, 0% interest for up to 36 months (option 1), 36-month principal grace period, no early repayment fee during the interest support period.",
+  "총 분양가의 최대 70%, 최대 36개월 0% 이자(방식 1), 36개월 원금 상환 유예, 이자 지원 기간 중 중도상환수수료 면제입니다."
+ ],
+ "Vay 0%, thanh toán sớm có chiết khấu": [
+  "0% loans, discounts for early payment",
+  "0% 대출, 조기 납부 시 할인"
+ ],
+ "Vay 70%, lãi suất 0% tới 36 tháng, ân hạn gốc 36 tháng": [
+  "70% loans, 0% interest for up to 36 months, 36-month principal grace period",
+  "70% 대출, 최대 36개월 0% 이자, 36개월 원금 상환 유예"
+ ],
+ "Vay mua Capital Square Đà Nẵng: vay 70%, 0% lãi suất đến 36 tháng, trả góp mỗi tháng bao nhiêu?": [
+  "Loans to buy at Capital Square Da Nang: 70% loans, 0% interest for up to 36 months – how much is the monthly installment?",
+  "Capital Square Da Nang 매입 대출: 70% 대출, 최대 36개월 0% 이자 – 월 상환액은 얼마일까?"
+ ],
+ "Vay mua Hudson Place S4 được bao nhiêu?": [
+  "How much can you borrow to buy at Hudson Place S4?",
+  "Hudson Place S4 매입 시 대출은 얼마까지 가능한가요?"
+ ],
+ "Vay ngân hàng: 5 năm không lo lãi suất (hỏi Hoàng Hiệp điều kiện và hạn mức cụ thể)": [
+  "Bank loans: 5 years without worrying about interest (ask Hoang Hiep for the specific conditions and limits)",
+  "은행 대출: 5년간 이자 걱정 없음(구체적인 조건과 한도는 호앙 히엡에게 문의)"
+ ],
+ "Vay tới 70% tổng giá bán (có VAT, không gồm kinh phí bảo trì), ân hạn gốc 36 tháng, miễn phí trả nợ trước hạn trong thời gian hỗ trợ lãi suất. Phương án 1: lãi suất 0% 36 tháng với 50% giá bán, 24 tháng với 20%. Phương án 2: 0% 24 tháng với 50%, 12 tháng với 20%, sau đó cố định 7,5%/năm trong 36 tháng.": [
+  "Loans of up to 70% of the total sale price (including VAT, excluding the maintenance fund), 36-month principal grace period, no early repayment fee during the interest support period. Option 1: 0% interest for 36 months on 50% of the sale price, 24 months on 20%. Option 2: 0% for 24 months on 50%, 12 months on 20%, then fixed at 7.5%/year for 36 months.",
+  "총 분양가(VAT 포함, 관리기금 제외)의 최대 70%까지 대출, 36개월 원금 상환 유예, 이자 지원 기간 중 중도상환수수료 면제. 방식 1: 분양가 50%에 대해 36개월, 20%에 대해 24개월 0% 이자. 방식 2: 50%에 대해 24개월, 20%에 대해 12개월 0% 이자, 이후 36개월간 연 7.5% 고정."
+ ],
+ "View cầu Rồng, view chéo sông Hàn, sân vườn và sân golf mini nội khu": [
+  "Dragon Bridge views, diagonal Han River views, internal garden and mini golf course",
+  "용다리 전망, 다낭 한강 사선 전망, 단지 내 정원과 미니 골프장"
+ ],
+ "Vincom Plaza Đà Nẵng": [
+  "Vincom Plaza Da Nang",
+  "Vincom Plaza Da Nang"
+ ],
+ "Vincom Plaza, Grand Central Mall": [
+  "Vincom Plaza, Grand Central Mall",
+  "Vincom Plaza, Grand Central Mall"
+ ],
+ "Vị trí tòa S4 Hudson Place giáp đường Nguyễn Công Trứ và ảnh thi công tòa S4, S3 tháng 9/2026": [
+  "Location of tower S4 Hudson Place bordering Nguyen Cong Tru Street and construction photo of towers S4 and S3 in September 2026",
+  "응우옌꽁쯔 거리에 접한 Hudson Place S4동 위치 및 2026년 9월 S4·S3동 공사 사진"
+ ],
+ "Xem toàn bộ album (3 ảnh)": [
+  "View the full album (3 photos)",
+  "전체 앨범 보기(사진 3장)"
+ ],
+ "bằng giá chuyển nhượng cộng phần giá trị HĐMB còn lại chưa thanh toán cho chủ đầu tư. Theo tài liệu, chủ sở hữu chịu trách nhiệm đóng thuế theo quy định. Trước khi ký, nên xem bản gốc HĐMB, xác nhận của chủ đầu tư về tình trạng hợp đồng và số tiền đã thanh toán.": [
+  "equals the transfer price plus the remaining SPA value not yet paid to the developer. According to the documents, the holder is responsible for paying taxes as required. Before signing, you should review the original SPA and the developer's confirmation of the contract status and the amount paid.",
+  "– 양도가에 시행사에 아직 납부하지 않은 매매계약서 잔여 금액을 더한 금액입니다. 자료에 따르면 세금은 보유자가 규정에 따라 납부합니다. 계약 전 매매계약서 원본과 계약 상태 및 납부 금액에 대한 시행사 확인서를 검토하시기 바랍니다."
+ ],
+ "chia thành một căn 2 phòng ngủ và một studio có cửa riêng: ở hai thế hệ, hoặc vừa ở vừa cho thuê phần studio.": [
+  "is divided into a 2-bedroom unit and a studio with its own door: for two generations living together, or living in one part while renting out the studio.",
+  "– 2베드룸 세대와 별도 출입문이 있는 스튜디오로 나뉩니다: 두 세대가 함께 거주하거나, 거주하면서 스튜디오를 임대할 수 있습니다."
+ ],
+ "chuyển nhượng hợp đồng mua bán (HĐMB)": [
+  "transfer of the sale and purchase agreement (SPA)",
+  "매매계약서(SPA) 양도"
+ ],
+ "do Công ty CP Bất động sản SIH làm chủ đầu tư, nằm trong": [
+  "subdivision, developed by SIH Real Estate JSC, located in",
+  "구역에 속하며 시행사는 SIH 부동산 주식회사이고, 다낭 한강변"
+ ],
+ "giá chuyển nhượng hợp đồng": [
+  "the contract transfer price",
+  "계약 양도가"
+ ],
+ "layout vuông, đều có 2 logia, hợp gia đình nhỏ hoặc vừa và kinh doanh cho thuê.": [
+  "have square layouts and 2 loggias each, suited to small or medium families and rental business.",
+  "– 정방형 평면에 모두 로지아 2개가 있어 소·중규모 가족과 임대 사업에 적합합니다."
+ ],
+ "là số tiền bên bán đã đóng cho chủ đầu tư cộng phần chênh bên mua chấp nhận;": [
+  "is the amount the seller has paid the developer plus the premium the buyer agrees to;",
+  "– 매도인이 시행사에 납부한 금액에 매수인이 수용한 프리미엄을 더한 금액이며,"
+ ],
+ "tài chính thấp, hợp người độc thân, gia đình trẻ hoặc nhà đầu tư cho thuê.": [
+  "with a low budget requirement, suited to singles, young families or investors renting out.",
+  "– 자금 부담이 적어 1인 가구, 신혼·젊은 가족 또는 임대 투자자에게 적합합니다."
+ ],
+ "tòa S4": [
+  "tower S4",
+  "S4동"
+ ],
+ "tổng giá bán căn hộ": [
+  "the total apartment sale price",
+  "총 아파트 분양가"
+ ],
+ "từ 4,32 tỷ": [
+  "from 4.32 billion VND",
+  "43억 2천만 동부터"
+ ],
+ "ven sông Hàn. Tòa có căn 1PN, 2PN, 3PN và 3PN dualkey, dự kiến bàn giao quý III/2027, sổ hồng sở hữu lâu dài, đơn vị vận hành Savills.": [
+  "by the Han River. The tower offers 1BR, 2BR, 3BR and 3BR dual-key units, expected handover Q3 2027, freehold Pink Book, operated by Savills.",
+  "단지 내에 위치합니다. 1베드룸, 2베드룸, 3베드룸 및 3베드룸 듀얼키 세대로 구성되며, 2027년 3분기 입주(인도) 예정, 영구 소유 핑크북, 운영사는 Savills입니다."
+ ],
+ "Ân hạn nợ gốc": [
+  "Principal grace period",
+  "원금 상환 유예"
+ ],
+ "Đường Nguyễn Công Trứ, tổ hợp Capital Square, phường An Hải": [
+  "Nguyen Cong Tru Street, Capital Square complex, An Hai Ward",
+  "안하이 동, Capital Square 단지, 응우옌꽁쯔 거리(Nguyen Cong Tru St.)"
+ ],
+ "Đặc điểm từng loại căn": [
+  "Features of each unit type",
+  "세대 유형별 특징"
+ ],
+ "Đọc giới thiệu đầy đủ về Hudson Place S4 Capital Square Đà Nẵng": [
+  "Read the full introduction to Hudson Place S4 Capital Square Da Nang",
+  "Hudson Place S4 Capital Square Da Nang 전체 소개 읽기"
+ ],
+ "Ưu đãi theo phương thức thanh toán (tài liệu 28/9/2026 – hỏi lại khi đặt căn): theo tiến độ 8%, thanh toán nhanh 100% giá chuyển nhượng hợp đồng 12%, thanh toán sớm 95% 18%": [
+  "Incentives by payment method (document dated September 28, 2026 – check again when booking a unit): by construction progress 8%, fast payment of 100% of the contract transfer price 12%, early payment of 95% 18%",
+  "납부 방식별 혜택(2026년 9월 28일자 자료 – 세대 예약 시 재확인 필요): 공사 진행에 따른 납부 8%, 계약 양도가 100% 빠른 납부 12%, 95% 조기 납부 18%"
+ ],
+ "✔ Đang mở bán · bàn giao quý III/2027": [
+  "✔ On sale · handover Q3 2027",
+  "✔ 분양 중 · 2027년 3분기 입주(인도)"
+ ]
+}

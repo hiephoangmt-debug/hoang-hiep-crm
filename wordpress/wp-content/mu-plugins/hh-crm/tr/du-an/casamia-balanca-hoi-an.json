@@ -1,0 +1,674 @@
+{
+ "(gọi/Zalo) để nhận bảng hàng từng phân khu, chính sách bán hàng mới nhất và sơ đồ vị trí căn.": [
+  "(call/Zalo) to receive the available units list for each zone, the latest sales policy and the unit location map.",
+  "(전화/Zalo)로 문의하시면 구역별 매물 목록, 최신 분양 정책, 세대 위치도를 받아보실 수 있습니다."
+ ],
+ "11%/năm": [
+  "11%/year",
+  "연 11%"
+ ],
+ "13,86 – 14,01 tỷ": [
+  "13.86 – 14.01 billion VND",
+  "138억 6천만 – 140억 1천만 동"
+ ],
+ "14,02 – 14,19 tỷ": [
+  "14.02 – 14.19 billion VND",
+  "140억 2천만 – 141억 9천만 동"
+ ],
+ "14,47 – 14,64 tỷ": [
+  "14.47 – 14.64 billion VND",
+  "144억 7천만 – 146억 4천만 동"
+ ],
+ "15,05 – 15,23 tỷ": [
+  "15.05 – 15.23 billion VND",
+  "150억 5천만 – 152억 3천만 동"
+ ],
+ "20% T9/26 (ký HĐMB) · 10% T10/26 · 40% T11/26 · 25% T12/26 (bàn giao) · 5% T1/27 (nhận GCN)": [
+  "20% Sep 2026 (sign SPA) · 10% Oct 2026 · 40% Nov 2026 · 25% Dec 2026 (handover) · 5% Jan 2027 (receive certificate)",
+  "20% 2026년 9월(SPA 체결) · 10% 2026년 10월 · 40% 2026년 11월 · 25% 2026년 12월(인도) · 5% 2027년 1월(증서 수령)"
+ ],
+ "20% T9/26 (ký HĐMB) · 25% T10/26 · 25% T11/26 · 25% T12/26 (bàn giao) · 5% T1/27 (nhận GCN)": [
+  "20% Sep 2026 (sign SPA) · 25% Oct 2026 · 25% Nov 2026 · 25% Dec 2026 (handover) · 5% Jan 2027 (receive certificate)",
+  "20% 2026년 9월(SPA 체결) · 25% 2026년 10월 · 25% 2026년 11월 · 25% 2026년 12월(인도) · 5% 2027년 1월(증서 수령)"
+ ],
+ "20% T9/26 · 10% T10/26 · 10% T11/26 · 10% T12/26 · 5% mỗi tháng T1 – T4/27 · 25% T6/27 (bàn giao) · 5% nhận GCN": [
+  "20% Sep 2026 · 10% Oct 2026 · 10% Nov 2026 · 10% Dec 2026 · 5% per month Jan – Apr 2027 · 25% Jun 2027 (handover) · 5% on receiving the certificate",
+  "20% 2026년 9월 · 10% 2026년 10월 · 10% 2026년 11월 · 10% 2026년 12월 · 2027년 1월 – 4월 매월 5% · 25% 2027년 6월(인도) · 증서 수령 시 5%"
+ ],
+ "20% T9/26 · 10% T10/26 · 40% T3/27 · 25% T6/27 (bàn giao) · 5% nhận GCN": [
+  "20% Sep 2026 · 10% Oct 2026 · 40% Mar 2027 · 25% Jun 2027 (handover) · 5% on receiving the certificate",
+  "20% 2026년 9월 · 10% 2026년 10월 · 40% 2027년 3월 · 25% 2027년 6월(인도) · 증서 수령 시 5%"
+ ],
+ "20% T9/26 · 10% T11/26 · 10% T12/26 · 10% T3/27 (bàn giao) · 45% T4/27 · 5% T6/27 (nhận GCN)": [
+  "20% Sep 2026 · 10% Nov 2026 · 10% Dec 2026 · 10% Mar 2027 (handover) · 45% Apr 2027 · 5% Jun 2027 (receive certificate)",
+  "20% 2026년 9월 · 10% 2026년 11월 · 10% 2026년 12월 · 10% 2027년 3월(인도) · 45% 2027년 4월 · 5% 2027년 6월(증서 수령)"
+ ],
+ "20% T9/26 · 10% T11/26 · 20% T12/26 (bàn giao) · 20% T1/27 · 25% T2/27 · 5% T6/27 (nhận GCN)": [
+  "20% Sep 2026 · 10% Nov 2026 · 20% Dec 2026 (handover) · 20% Jan 2027 · 25% Feb 2027 · 5% Jun 2027 (receive certificate)",
+  "20% 2026년 9월 · 10% 2026년 11월 · 20% 2026년 12월(인도) · 20% 2027년 1월 · 25% 2027년 2월 · 5% 2027년 6월(증서 수령)"
+ ],
+ "20% T9/26 · 10% T11/26 · 20% T12/26 (bàn giao) · 5% mỗi tháng T1 – T9/27 · 5% T11/27 (nhận GCN)": [
+  "20% Sep 2026 · 10% Nov 2026 · 20% Dec 2026 (handover) · 5% per month Jan – Sep 2027 · 5% Nov 2027 (receive certificate)",
+  "20% 2026년 9월 · 10% 2026년 11월 · 20% 2026년 12월(인도) · 2027년 1월 – 9월 매월 5% · 5% 2027년 11월(증서 수령)"
+ ],
+ "20% T9/26 · 10% T11/26 · 5% mỗi tháng T12/26 – T3/27 (bàn giao T3/27) · 10% mỗi tháng T4 – T7/27 · 5% T9/27 · 5% T11/27 (nhận GCN)": [
+  "20% Sep 2026 · 10% Nov 2026 · 5% per month Dec 2026 – Mar 2027 (handover Mar 2027) · 10% per month Apr – Jul 2027 · 5% Sep 2027 · 5% Nov 2027 (receive certificate)",
+  "20% 2026년 9월 · 10% 2026년 11월 · 2026년 12월 – 2027년 3월 매월 5%(2027년 3월 인도) · 2027년 4월 – 7월 매월 10% · 5% 2027년 9월 · 5% 2027년 11월(증서 수령)"
+ ],
+ "300 triệu/căn": [
+  "300 million VND/unit",
+  "세대당 3억 동"
+ ],
+ "31,1 ha": [
+  "31.1 ha",
+  "31.1헥타르"
+ ],
+ "363 sản phẩm thấp tầng: 173 biệt thự đơn lập, 116 biệt thự song lập, 74 shophouse": [
+  "363 low-rise units: 173 detached villas, 116 semi-detached villas, 74 shophouses",
+  "저층 상품 363세대: 단독 빌라 173세대, 듀플렉스(세미 단독) 빌라 116세대, 샵하우스 74세대"
+ ],
+ "5 công viên chủ đề trong Casamia Balanca": [
+  "5 themed parks in Casamia Balanca",
+  "Casamia Balanca의 5개 테마 공원"
+ ],
+ "5 công viên chủ đề: Wellness, Sport Park, Grand Central Park, Floral Park, Nipa Park": [
+  "5 themed parks: Wellness, Sport Park, Grand Central Park, Floral Park, Nipa Park",
+  "5개 테마 공원: Wellness, Sport Park, Grand Central Park, Floral Park, Nipa Park"
+ ],
+ "Biệt thự compound Hội An: Casamia Balanca khác biệt ở đâu khi mua để ở?": [
+  "Compound villas in Hoi An: what sets Casamia Balanca apart when buying to live in?",
+  "호이안 단지형 빌라: 실거주 매입 시 Casamia Balanca의 차별점은?"
+ ],
+ "Biệt thự có hồ bơi riêng hướng sông – Casamia Balanca Hội An": [
+  "Villa with a private pool facing the river – Casamia Balanca Hoi An",
+  "강을 향한 개인 수영장 빌라 – Casamia Balanca Hoi An"
+ ],
+ "Biệt thự rừng dừa": [
+  "Coconut forest villas",
+  "야자수 숲 빌라"
+ ],
+ "Biệt thự ven kênh có hồ bơi riêng, bến thuyền trước nhà": [
+  "Canal-side villas with private pools and a boat dock in front of the house",
+  "개인 수영장과 집 앞 보트 선착장을 갖춘 운하변 빌라"
+ ],
+ "Biệt thự ven kênh, hồ bơi riêng, bến thuyền (theo phối cảnh CĐT)": [
+  "Canal-side villas with private pools and boat docks (per developer renderings)",
+  "개인 수영장, 보트 선착장을 갖춘 운하변 빌라(시행사 조감도 기준)"
+ ],
+ "Biệt thự ven sông Cổ Cò (theo phối cảnh CĐT)": [
+  "Villas along the Co Co River (per developer renderings)",
+  "꼬꼬 강(Co Co River)변 빌라(시행사 조감도 기준)"
+ ],
+ "Biệt thự vườn dọc trục đường La Riva": [
+  "Garden villas along the La Riva axis",
+  "La Riva 축을 따라 들어선 가든 빌라"
+ ],
+ "Bungalow ven sông": [
+  "Riverside bungalows",
+  "강변 방갈로"
+ ],
+ "Bến thuyền, cầu cảng, biệt thự hướng sông": [
+  "Boat docks, piers, river-view villas",
+  "보트 선착장, 부두, 강 전망 빌라"
+ ],
+ "Bể bơi tiêu chuẩn Olympic, hồ vô cực, gym & fitness, co-working, coffee & bistro trong Grand Central Park": [
+  "Olympic-standard swimming pool, infinity pool, gym & fitness, co-working, coffee & bistro in Grand Central Park",
+  "Grand Central Park 내 올림픽 규격 수영장, 인피니티 풀, 헬스·피트니스, 코워킹, 커피 & 비스트로"
+ ],
+ "Bể bơi tiêu chuẩn Olympic, khu vui chơi trẻ em, khu gym ngoài trời": [
+  "Olympic-standard swimming pool, children's playground, outdoor gym",
+  "올림픽 규격 수영장, 어린이 놀이터, 야외 헬스장"
+ ],
+ "Bể bơi vô cực": [
+  "Infinity pool",
+  "인피니티 풀"
+ ],
+ "CASAMIA BALANCA": [
+  "CASAMIA BALANCA",
+  "CASAMIA BALANCA"
+ ],
+ "CSBH từ 09/09/2026: chiết khấu đến 4 tỷ khi nhận bàn giao thô, CĐT thuê lại 50 – 60 triệu/tháng, HTLS 0% 24 tháng": [
+  "Sales policy from September 9, 2026: discounts of up to 4 billion VND for bare-shell handover, developer leaseback at 50 – 60 million VND/month, 0% interest support for 24 months",
+  "2026년 9월 9일부터 분양 정책: 골조 인도 시 최대 40억 동 할인, 시행사 재임대 월 5,000만 – 6,000만 동, 24개월 0% 이자 지원"
+ ],
+ "Cam kết thuê (từ 01/09/2026): biệt thự sân vườn 50 triệu/tháng – 5 năm nếu mua quỹ căn full nội thất của đơn vị khai thác, 3 năm nếu mua thô và tự hoàn thiện nội thất theo tiêu chuẩn chủ đầu tư; biệt thự rừng dừa 60 triệu/tháng – 3 năm kể từ khi bàn giao biệt thự full nội thất theo tiêu chuẩn chủ đầu tư": [
+  "Rental guarantee (from September 1, 2026): garden villas 50 million VND/month – 5 years if buying from the operator's fully furnished units, 3 years if buying bare-shell and finishing the interior to the developer's standard; coconut forest villas 60 million VND/month – 3 years from handover of the villa fully furnished to the developer's standard",
+  "임대 보장(2026년 9월 1일부터): 가든 빌라 월 5,000만 동 – 운영사의 풀옵션 가구 세대 매입 시 5년, 골조 매입 후 시행사 기준에 따라 인테리어를 직접 마감하는 경우 3년; 야자수 숲 빌라 월 6,000만 동 – 시행사 기준 풀옵션 빌라 인도일로부터 3년"
+ ],
+ "Casamia Balanca": [
+  "Casamia Balanca",
+  "Casamia Balanca"
+ ],
+ "Casamia Balanca (Khu đô thị Cồn Tiến) nằm tại xã Cẩm Thanh, Hội An (Quảng Nam cũ), giữa rừng dừa Bảy Mẫu thuộc Khu dự trữ sinh quyển thế giới Cù Lao Chàm – Hội An. Dự án tiếp giáp trục Võ Chí Công nối Đà Nẵng – Hội An – sân bay Chu Lai, quy mô 31,1 ha và có dòng sông tự nhiên nội khu.": [
+  "Casamia Balanca (Con Tien Urban Area) is located in Cam Thanh Commune, Hoi An (former Quang Nam Province), amid the Bay Mau coconut forest within the Cu Lao Cham – Hoi An World Biosphere Reserve. The project borders Vo Chi Cong Road, which links Da Nang – Hoi An – Chu Lai Airport, covers 31.1 ha and has a natural river running through the site.",
+  "Casamia Balanca(Con Tien 신도시)는 호이안 껌타인(Cam Thanh) 사(구 꽝남성)에 위치하며, 꾸라오참 – 호이안 세계 생물권 보전지역에 속한 바이머우(Bay Mau) 야자수 숲 한가운데에 자리합니다. 다낭 – 호이안 – 쭈라이 공항을 잇는 보찌꽁 거리(Vo Chi Cong St.)와 접해 있으며, 31.1헥타르 규모에 단지 내 자연 하천이 흐릅니다."
+ ],
+ "Casamia Balanca Hội An": [
+  "Casamia Balanca Hoi An",
+  "Casamia Balanca Hoi An"
+ ],
+ "Casamia Balanca Hội An có những loại sản phẩm nào?": [
+  "What property types does Casamia Balanca Hoi An offer?",
+  "Casamia Balanca Hoi An에는 어떤 상품이 있나요?"
+ ],
+ "Casamia Balanca Hội An nằm ở đâu?": [
+  "Where is Casamia Balanca Hoi An located?",
+  "Casamia Balanca Hoi An은 어디에 있나요?"
+ ],
+ "Casamia Balanca Hội An – Khu đô thị Cồn Tiến, phường Hội An Đông (xã Cẩm Thanh cũ), thành phố Đà Nẵng. Thông tin, hình ảnh tổng hợp từ tài liệu chủ đầu tư, mang tính tham khảo; giá và chính sách có thể thay đổi. Tư vấn: Hoàng Hiệp – 0904 567 009.": [
+  "Casamia Balanca Hoi An – Con Tien Urban Area, Hoi An Dong Ward (former Cam Thanh Commune), Da Nang City. Information and images are compiled from developer documents and are for reference only; prices and policies may change. Advice: Hoang Hiep – 0904 567 009.",
+  "Casamia Balanca Hoi An – 다낭시 호이안동(Hoi An Dong) 동(구 껌타인 사) Con Tien 신도시. 정보와 이미지는 시행사 자료를 바탕으로 정리한 참고용이며, 가격과 정책은 변경될 수 있습니다. 상담: 호앙 히엡 – 0904 567 009."
+ ],
+ "Chiết khấu 4 tỷ khi nhận bàn giao thô": [
+  "4 billion VND discount for bare-shell handover",
+  "골조(미시공) 인도 선택 시 40억 동 할인"
+ ],
+ "Chính sách bán hàng Casamia Balanca phân khu Forestside Villa – bàn giao nội thất, nhận nhà 2027 (từ 09/09/2026)": [
+  "Casamia Balanca sales policy for the Forestside Villa zone – furnished handover, move-in 2027 (from September 9, 2026)",
+  "Casamia Balanca Forestside Villa 구역 분양 정책 – 가구 포함 인도, 2027년 입주(2026년 9월 9일부터)"
+ ],
+ "Chính sách bán hàng Casamia Balanca phân khu Park Home – bàn giao nội thất, nhận nhà 2027 (từ 09/09/2026)": [
+  "Casamia Balanca sales policy for the Park Home zone – furnished handover, move-in 2027 (from September 9, 2026)",
+  "Casamia Balanca Park Home 구역 분양 정책 – 가구 포함 인도, 2027년 입주(2026년 9월 9일부터)"
+ ],
+ "Chính sách bán hàng áp dụng từ 09/09/2026 đến khi chủ đầu tư ban hành chính sách thay thế": [
+  "Sales policy applies from September 9, 2026 until the developer issues a replacement policy",
+  "분양 정책은 2026년 9월 9일부터 시행사가 새 정책을 발표할 때까지 적용됩니다"
+ ],
+ "Chơi pickleball lúc hoàng hôn – Casamia Balanca": [
+  "Playing pickleball at sunset – Casamia Balanca",
+  "해 질 녘 피클볼 – Casamia Balanca"
+ ],
+ "Chủ đầu tư dự án Casamia Balanca Hội An là ai?": [
+  "Who is the developer of Casamia Balanca Hoi An?",
+  "Casamia Balanca Hoi An의 시행사는 누구인가요?"
+ ],
+ "Công viên Wellness": [
+  "Wellness Park",
+  "Wellness 공원"
+ ],
+ "Công viên Wellness: vườn yoga, đường dạo sinh thái": [
+  "Wellness Park: yoga garden, eco walking trails",
+  "Wellness 공원: 요가 정원, 생태 산책로"
+ ],
+ "Cùng với đó là khách sạn 5*, sky bar, trung tâm hội nghị, bể bơi vô cực ven sông, trung tâm thương mại, trường mầm non quốc tế và khu bungalow.": [
+  "Alongside these are a 5-star hotel, sky bar, convention center, riverside infinity pool, shopping center, international kindergarten and a bungalow area.",
+  "이와 함께 5성급 호텔, 스카이 바, 컨벤션 센터, 강변 인피니티 풀, 쇼핑센터, 국제 유치원, 방갈로 구역이 들어섭니다."
+ ],
+ "CĐT thuê lại 50 triệu/tháng; chiết khấu 3,5 tỷ khi nhận thô": [
+  "Developer leaseback at 50 million VND/month; 3.5 billion VND discount for bare-shell handover",
+  "시행사 재임대 월 5,000만 동; 골조(미시공) 인도 선택 시 35억 동 할인"
+ ],
+ "CĐT thuê lại 60 triệu/tháng; chiết khấu 4 tỷ khi nhận thô": [
+  "Developer leaseback at 60 million VND/month; 4 billion VND discount for bare-shell handover",
+  "시행사 재임대 월 6,000만 동; 골조(미시공) 인도 선택 시 40억 동 할인"
+ ],
+ "Cổng chào hoa giấy": [
+  "Bougainvillea entrance gate",
+  "부겐빌레아 정문 게이트"
+ ],
+ "Dãy biệt thự ven kênh có bến du thuyền riêng – Casamia Balanca": [
+  "Row of canal-side villas with private boat docks – Casamia Balanca",
+  "전용 보트 선착장을 갖춘 운하변 빌라 단지 – Casamia Balanca"
+ ],
+ "Dạo bộ cùng thú cưng trong công viên – Casamia Balanca": [
+  "Walking pets in the park – Casamia Balanca",
+  "공원에서 반려동물과 산책 – Casamia Balanca"
+ ],
+ "Dự án do Tập đoàn Đạt Phương làm chủ đầu tư.": [
+  "The project's developer is Dat Phuong Group.",
+  "이 프로젝트의 시행사는 Dat Phuong Group입니다."
+ ],
+ "Dự án tọa lạc tại khu đô thị Cồn Tiến, phường Hội An Đông (xã Cẩm Thanh cũ), thành phố Đà Nẵng.": [
+  "The project is located in Con Tien Urban Area, Hoi An Dong Ward (former Cam Thanh Commune), Da Nang City.",
+  "이 프로젝트는 다낭시 호이안동(Hoi An Dong) 동(구 껌타인 사) Con Tien 신도시에 위치합니다."
+ ],
+ "Floral Park": [
+  "Floral Park",
+  "Floral Park"
+ ],
+ "Floral Park: công viên hoa giấy": [
+  "Floral Park: bougainvillea park",
+  "Floral Park: 부겐빌레아 공원"
+ ],
+ "Forestside Villa": [
+  "Forestside Villa",
+  "Forestside Villa"
+ ],
+ "Forestside Villa bàn giao nội thất (nhận nhà 2027): chiết khấu 400 triệu khi nhận gói nội thất cơ bản; ủy thác chủ đầu tư vận hành cho thuê – 45% doanh thu cho thuê thuần, thu nhập tối thiểu 60 triệu/tháng, hợp đồng 5 năm, 10 đêm lưu trú miễn phí/năm (biệt thự đủ điều kiện vận hành); chiết khấu 4% khi thanh toán sớm 95%": [
+  "Forestside Villa furnished handover (move-in 2027): 400 million VND discount with the basic furniture package; rental operation entrusted to the developer – 45% of net rental revenue, minimum income of 60 million VND/month, 5-year contract, 10 free nights/year (for villas eligible for operation); 4% discount for 95% early payment",
+  "Forestside Villa 가구 포함 인도(2027년 입주): 기본 가구 패키지 선택 시 4억 동 할인; 시행사에 임대 운영 위탁 – 순임대수익의 45%, 최소 수입 월 6,000만 동, 계약 5년, 연 10박 무료 숙박(운영 조건을 충족한 빌라); 95% 조기 납부 시 4% 할인"
+ ],
+ "Forestside Villa bàn giao thô (nhận nhà 2026): chiết khấu 4 tỷ khi chọn bàn giao thô; chủ đầu tư trực tiếp thuê lại 60 triệu/tháng, hợp đồng thuê 3 năm; chiết khấu 2% khi thanh toán sớm 95%": [
+  "Forestside Villa bare-shell handover (move-in 2026): 4 billion VND discount when choosing bare-shell handover; the developer directly leases the unit back at 60 million VND/month on a 3-year lease; 2% discount for 95% early payment",
+  "Forestside Villa 골조 인도(2026년 입주): 골조 인도 선택 시 40억 동 할인; 시행사가 월 6,000만 동에 직접 재임대, 임대 계약 3년; 95% 조기 납부 시 2% 할인"
+ ],
+ "Forestside Villa: chiết khấu thêm 1% cho khách hàng thân thiết": [
+  "Forestside Villa: an additional 1% discount for loyal customers",
+  "Forestside Villa: 기존 고객 추가 1% 할인"
+ ],
+ "Forestside nội thất 2027 – không vay": [
+  "Forestside furnished 2027 – no loan",
+  "Forestside 가구 포함 2027 – 대출 없음"
+ ],
+ "Forestside nội thất 2027 – vay": [
+  "Forestside furnished 2027 – with loan",
+  "Forestside 가구 포함 2027 – 대출"
+ ],
+ "Forestside thô 2026 – không vay": [
+  "Forestside bare-shell 2026 – no loan",
+  "Forestside 골조 2026 – 대출 없음"
+ ],
+ "Forestside thô 2026 – vay": [
+  "Forestside bare-shell 2026 – with loan",
+  "Forestside 골조 2026 – 대출"
+ ],
+ "Full nội thất khoảng 13,86 – 14,01 tỷ (đã VAT)": [
+  "Fully furnished about 13.86 – 14.01 billion VND (VAT included)",
+  "풀옵션 가구 약 138억 6천만 – 140억 1천만 동(VAT 포함)"
+ ],
+ "Giá bán Casamia Balanca Hội An hiện nay bao nhiêu?": [
+  "What is the current price of Casamia Balanca Hoi An?",
+  "현재 Casamia Balanca Hoi An의 가격은 얼마인가요?"
+ ],
+ "Giáp sông Cổ Cò": [
+  "Bordering the Co Co River",
+  "꼬꼬 강(Co Co River)과 접함"
+ ],
+ "Giấy chứng nhận quyền sử dụng đất lô 16 khu SL3 – Khu đô thị Cồn Tiến (Casamia Balanca), cấp tháng 8/2026": [
+  "Land use right certificate for plot 16, zone SL3 – Con Tien Urban Area (Casamia Balanca), issued in August 2026",
+  "SL3 구역 16번 필지 토지사용권 증서 – Con Tien 신도시(Casamia Balanca), 2026년 8월 발급"
+ ],
+ "Grand Central Park": [
+  "Grand Central Park",
+  "Grand Central Park"
+ ],
+ "Grand Central Park: quảng trường, hồ vô cực, trạm đọc, co-working space, coffee & bistro, gym & fitness, zone game": [
+  "Grand Central Park: plaza, infinity pool, reading stations, co-working space, coffee & bistro, gym & fitness, game zone",
+  "Grand Central Park: 광장, 인피니티 풀, 독서 공간, 코워킹 스페이스, 커피 & 비스트로, 헬스·피트니스, 게임 존"
+ ],
+ "Hướng đi sân bay Đà Nẵng và sân bay Chu Lai": [
+  "Toward Da Nang Airport and Chu Lai Airport",
+  "다낭 공항 및 쭈라이 공항 방면"
+ ],
+ "Hồ bơi bên hàng dừa và trụ hoa giấy – Casamia Balanca": [
+  "Pool beside rows of coconut palms and bougainvillea pillars – Casamia Balanca",
+  "야자수 길과 부겐빌레아 기둥 옆 수영장 – Casamia Balanca"
+ ],
+ "Khi nào Casamia Balanca Hội An bàn giao?": [
+  "When is Casamia Balanca Hoi An handed over?",
+  "Casamia Balanca Hoi An은 언제 입주(인도)하나요?"
+ ],
+ "Khu dự trữ sinh quyển Cù Lao Chàm – Hội An": [
+  "Cu Lao Cham – Hoi An Biosphere Reserve",
+  "꾸라오참 – 호이안 생물권 보전지역"
+ ],
+ "Khu đô thị Cồn Tiến, phường Hội An Đông": [
+  "Con Tien Urban Area, Hoi An Dong Ward",
+  "Con Tien 신도시, 호이안동(Hoi An Dong) 동"
+ ],
+ "Khu đô thị sinh thái 31,1 ha bên sông Cổ Cò, hướng vịnh Cửa Đại – Hội An": [
+  "31.1 ha eco-township by the Co Co River, facing Cua Dai Bay – Hoi An",
+  "꼬꼬 강(Co Co River) 옆, 끄어다이 만(Cua Dai Bay)을 향한 31.1헥타르 생태 신도시 – 호이안"
+ ],
+ "Khu đô thị sinh thái 31,1 ha của Đạt Phương tại Cẩm Thanh, Hội An: 363 sản phẩm thấp tầng gồm 173 biệt thự đơn lập, 116 song lập, 74 shophouse, ra mắt tháng 6/2025.": [
+  "Dat Phuong's 31.1 ha eco-township in Cam Thanh, Hoi An: 363 low-rise units including 173 detached villas, 116 semi-detached villas and 74 shophouses, launched in June 2025.",
+  "호이안 껌타인(Cam Thanh)에 위치한 Dat Phuong의 31.1헥타르 생태 신도시입니다: 단독 빌라 173세대, 듀플렉스(세미 단독) 빌라 116세대, 샵하우스 74세대 등 저층 상품 363세대이며, 2025년 6월에 공개되었습니다."
+ ],
+ "Khách hàng tham dự sự kiện Sound of Balance – Casamia Balanca": [
+  "Customers attending the Sound of Balance event – Casamia Balanca",
+  "Sound of Balance 행사에 참석한 고객 – Casamia Balanca"
+ ],
+ "Khách hàng xem tài liệu dự án tại sự kiện Casamia Balanca": [
+  "Customers reviewing project materials at the Casamia Balanca event",
+  "Casamia Balanca 행사에서 프로젝트 자료를 살펴보는 고객"
+ ],
+ "Khách sạn 5*": [
+  "5-star hotel",
+  "5성급 호텔"
+ ],
+ "Khách sạn 5*, sky bar, trung tâm hội nghị, bể bơi vô cực ven sông": [
+  "5-star hotel, sky bar, convention center, riverside infinity pool",
+  "5성급 호텔, 스카이 바, 컨벤션 센터, 강변 인피니티 풀"
+ ],
+ "Khách trả 30%, ngân hàng giải ngân từ T11/26": [
+  "Buyer pays 30%, bank disburses from Nov 2026",
+  "고객 30% 납부, 은행 2026년 11월부터 대출 실행"
+ ],
+ "Khách trả 30%, ngân hàng giải ngân từ T12/26": [
+  "Buyer pays 30%, bank disburses from Dec 2026",
+  "고객 30% 납부, 은행 2026년 12월부터 대출 실행"
+ ],
+ "Khách trả 30%, ngân hàng giải ngân từ T3/27": [
+  "Buyer pays 30%, bank disburses from Mar 2027",
+  "고객 30% 납부, 은행 2027년 3월부터 대출 실행"
+ ],
+ "Khởi công hạ tầng": [
+  "Infrastructure groundbreaking",
+  "기반시설 착공"
+ ],
+ "La Palma": [
+  "La Palma",
+  "La Palma"
+ ],
+ "La Riva": [
+  "La Riva",
+  "La Riva"
+ ],
+ "Liên hệ nhận bảng hàng": [
+  "Contact for the available units list",
+  "매물 목록 문의"
+ ],
+ "Miễn phí 2 năm phí quản lý khu đô thị và 1 năm Fitness & Pool tại Clubhouse Casamia": [
+  "2 years of free township management fees and 1 year of Fitness & Pool at Clubhouse Casamia",
+  "신도시 관리비 2년 면제 및 Clubhouse Casamia 피트니스·수영장 1년 무료"
+ ],
+ "Mua Casamia Balanca Hội An có được hỗ trợ vay ngân hàng không?": [
+  "Is bank loan support available when buying at Casamia Balanca Hoi An?",
+  "Casamia Balanca Hoi An 매입 시 은행 대출 지원이 되나요?"
+ ],
+ "Mua để ở, nghỉ dưỡng gia đình:": [
+  "Buying to live in or for family holidays:",
+  "실거주·가족 휴양 목적:"
+ ],
+ "Nguồn tham khảo về Casamia Balanca Hội An": [
+  "Reference sources on Casamia Balanca Hoi An",
+  "Casamia Balanca Hoi An 참고 자료"
+ ],
+ "Nhà phố vườn": [
+  "Garden townhouse",
+  "가든 타운하우스"
+ ],
+ "Nhà phố vườn (Park Home), biệt thự vườn (Park Villa), biệt thự ven kênh, shophouse; quy mô 363 sản phẩm thấp tầng: 173 biệt thự đơn lập, 116 biệt thự song lập, 74 shophouse.": [
+  "Garden townhouses (Park Home), garden villas (Park Villa), canal-side villas and shophouses; 363 low-rise units in total: 173 detached villas, 116 semi-detached villas, 74 shophouses.",
+  "가든 타운하우스(Park Home), 가든 빌라(Park Villa), 운하변 빌라, 샵하우스이며, 총 저층 상품 363세대 규모입니다: 단독 빌라 173세대, 듀플렉스(세미 단독) 빌라 116세대, 샵하우스 74세대."
+ ],
+ "Nhà phố vườn ven các công viên chủ đề – đất 178 m², sàn 316,09 m²": [
+  "Garden townhouses along the themed parks – land 178 m², floor area 316.09 m²",
+  "테마 공원을 따라 들어선 가든 타운하우스 – 대지 178 m², 연면적 316.09 m²"
+ ],
+ "Nhận bảng giá Casamia Balanca": [
+  "Get the Casamia Balanca price list",
+  "Casamia Balanca 분양가표 받기"
+ ],
+ "Nhận định của Hoàng Hiệp": [
+  "Hoang Hiep's assessment",
+  "호앙 히엡의 평가"
+ ],
+ "Nipa Park": [
+  "Nipa Park",
+  "Nipa Park"
+ ],
+ "Nipa Park: đường dạo rừng dừa, cầu cảng, lầu vọng cảnh, tiểu cảnh check-in": [
+  "Nipa Park: coconut forest trails, piers, viewing pavilion, check-in spots",
+  "Nipa Park: 야자수 숲 산책로, 부두, 전망 정자, 포토 스폿"
+ ],
+ "Nội thất tham khảo: bếp và phòng ăn view kênh – Casamia Balanca": [
+  "Sample interior: kitchen and dining room with canal view – Casamia Balanca",
+  "참고 인테리어: 운하 전망 주방·다이닝룸 – Casamia Balanca"
+ ],
+ "Nội thất tham khảo: phòng khách mở ra hồ bơi hướng sông – Casamia Balanca": [
+  "Sample interior: living room opening onto a river-view pool – Casamia Balanca",
+  "참고 인테리어: 강 전망 수영장으로 열리는 거실 – Casamia Balanca"
+ ],
+ "Nội thất tham khảo: phòng ngủ master view sông – Casamia Balanca": [
+  "Sample interior: master bedroom with river view – Casamia Balanca",
+  "참고 인테리어: 강 전망 마스터 침실 – Casamia Balanca"
+ ],
+ "Nội thất tham khảo: phòng tắm bồn đứng view sông – Casamia Balanca": [
+  "Sample interior: bathroom with freestanding tub and river view – Casamia Balanca",
+  "참고 인테리어: 강 전망 독립형 욕조 욕실 – Casamia Balanca"
+ ],
+ "Park Home": [
+  "Park Home",
+  "Park Home"
+ ],
+ "Park Home bàn giao nội thất (nhận nhà 2027): ủy thác chủ đầu tư vận hành – 45% doanh thu cho thuê thuần, thu nhập tối thiểu 50 triệu/tháng, hợp đồng 5 năm, 10 đêm lưu trú miễn phí/năm (quỹ 50 căn); chiết khấu 300 triệu khi nhận gói nội thất cơ bản; chiết khấu 5% khi thanh toán sớm 95%": [
+  "Park Home furnished handover (move-in 2027): operation entrusted to the developer – 45% of net rental revenue, minimum income of 50 million VND/month, 5-year contract, 10 free nights/year (50 units available); 300 million VND discount with the basic furniture package; 5% discount for 95% early payment",
+  "Park Home 가구 포함 인도(2027년 입주): 시행사에 운영 위탁 – 순임대수익의 45%, 최소 수입 월 5,000만 동, 계약 5년, 연 10박 무료 숙박(50세대 한정); 기본 가구 패키지 선택 시 3억 동 할인; 95% 조기 납부 시 5% 할인"
+ ],
+ "Park Home bàn giao thô (nhận nhà 2026): chủ đầu tư trực tiếp thuê lại 50 triệu/tháng, hợp đồng thuê 3 năm; chiết khấu 3,5 tỷ khi nhận bàn giao thô (quỹ căn theo danh sách chủ đầu tư); chiết khấu 5% khi thanh toán sớm 95%": [
+  "Park Home bare-shell handover (move-in 2026): the developer directly leases the unit back at 50 million VND/month on a 3-year lease; 3.5 billion VND discount for bare-shell handover (units per the developer's list); 5% discount for 95% early payment",
+  "Park Home 골조 인도(2026년 입주): 시행사가 월 5,000만 동에 직접 재임대, 임대 계약 3년; 골조 인도 시 35억 동 할인(시행사 지정 세대); 95% 조기 납부 시 5% 할인"
+ ],
+ "Park Home full nội thất – không vay": [
+  "Park Home fully furnished – no loan",
+  "Park Home 풀옵션 가구 – 대출 없음"
+ ],
+ "Park Home full nội thất – vay, HTLS 12 tháng": [
+  "Park Home fully furnished – with loan, 12-month interest support",
+  "Park Home 풀옵션 가구 – 대출, 12개월 이자 지원"
+ ],
+ "Park Home full nội thất – vay, HTLS 18 tháng": [
+  "Park Home fully furnished – with loan, 18-month interest support",
+  "Park Home 풀옵션 가구 – 대출, 18개월 이자 지원"
+ ],
+ "Park Home full nội thất – vay, HTLS 24 tháng": [
+  "Park Home fully furnished – with loan, 24-month interest support",
+  "Park Home 풀옵션 가구 – 대출, 24개월 이자 지원"
+ ],
+ "Park Home nội thất 2027 – không vay": [
+  "Park Home furnished 2027 – no loan",
+  "Park Home 가구 포함 2027 – 대출 없음"
+ ],
+ "Park Home nội thất 2027 – vay": [
+  "Park Home furnished 2027 – with loan",
+  "Park Home 가구 포함 2027 – 대출"
+ ],
+ "Park Home thô 2026 – không vay": [
+  "Park Home bare-shell 2026 – no loan",
+  "Park Home 골조 2026 – 대출 없음"
+ ],
+ "Park Home thô 2026 – vay": [
+  "Park Home bare-shell 2026 – with loan",
+  "Park Home 골조 2026 – 대출"
+ ],
+ "Park Home, Park Villa cạnh 5 công viên – tiện ích đi bộ vài phút.": [
+  "Park Home and Park Villa beside the 5 parks – amenities a few minutes' walk away.",
+  "5개 공원 옆 Park Home, Park Villa – 도보 몇 분 거리의 편의시설."
+ ],
+ "Park Villa": [
+  "Park Villa",
+  "Park Villa"
+ ],
+ "Pháp lý và hình thức sở hữu của Casamia Balanca Hội An thế nào?": [
+  "What is the legal status and form of ownership of Casamia Balanca Hoi An?",
+  "Casamia Balanca Hoi An의 법적 상태와 소유 형태는 어떻게 되나요?"
+ ],
+ "Phương án không vay: khách thanh toán sớm hơn tiến độ được tính lãi suất 11%/năm cho phần thanh toán sớm": [
+  "No-loan option: buyers who pay ahead of schedule earn interest of 11%/year on the early-paid amount",
+  "대출 없음 옵션: 일정보다 일찍 납부하면 조기 납부액에 대해 연 11% 이자를 적용합니다"
+ ],
+ "Phương án vay: hỗ trợ vay 70%, hỗ trợ lãi suất 0% trong 24 tháng, ân hạn nợ gốc 24 tháng": [
+  "Loan option: 70% loan support, 0% interest support for 24 months, 24-month principal grace period",
+  "대출 옵션: 70% 대출 지원, 24개월 0% 이자 지원, 원금 상환 유예 24개월"
+ ],
+ "Phố thương mại phân khu nhà vườn về đêm – Casamia Balanca Hội An": [
+  "Commercial street of the garden-home zone at night – Casamia Balanca Hoi An",
+  "가든 하우스 구역 상업 거리 야경 – Casamia Balanca Hoi An"
+ ],
+ "Phối cảnh toàn cảnh Casamia Balanca Hội An bên sông Cổ Cò": [
+  "Panoramic rendering of Casamia Balanca Hoi An by the Co Co River",
+  "꼬꼬 강(Co Co River) 옆 Casamia Balanca Hoi An 전경 조감도"
+ ],
+ "Ra biển Cửa Đại, An Bàng": [
+  "Out to Cua Dai and An Bang beaches",
+  "끄어다이·안방 해변으로 연결"
+ ],
+ "Ra mắt dự án": [
+  "Project launch",
+  "프로젝트 공개"
+ ],
+ "Sky bar": [
+  "Sky bar",
+  "스카이 바"
+ ],
+ "Sport Park": [
+  "Sport Park",
+  "Sport Park"
+ ],
+ "Sport Park: sân bóng rổ, hệ thống sân Pickleball": [
+  "Sport Park: basketball court, pickleball courts",
+  "Sport Park: 농구 코트, 피클볼 코트"
+ ],
+ "Sân pickleball nội khu – Casamia Balanca": [
+  "On-site pickleball court – Casamia Balanca",
+  "단지 내 피클볼 코트 – Casamia Balanca"
+ ],
+ "Sơ đồ mặt bằng Casamia Balanca Hội An 31,1 ha: 5 công viên chủ đề, Park Home, Park Villa": [
+  "Casamia Balanca Hoi An 31.1 ha master plan: 5 themed parks, Park Home, Park Villa",
+  "Casamia Balanca Hoi An 31.1헥타르 마스터플랜: 5개 테마 공원, Park Home, Park Villa"
+ ],
+ "Sự kiện Sound of Balance gặp gỡ khách hàng tại Casamia Balanca": [
+  "Sound of Balance customer event at Casamia Balanca",
+  "Casamia Balanca Sound of Balance 고객 행사"
+ ],
+ "Sự kiện Sound of Balance tại Casamia Balanca Hội An ngày 25/04/2026": [
+  "Sound of Balance event at Casamia Balanca Hoi An on April 25, 2026",
+  "2026년 4월 25일 Casamia Balanca Hoi An Sound of Balance 행사"
+ ],
+ "Thanh toán sớm tính lãi suất 11%/năm": [
+  "Early payment earns interest of 11%/year",
+  "조기 납부 시 연 11% 이자 적용"
+ ],
+ "Theo bảng hàng": [
+  "Per the available units list",
+  "매물 목록 기준"
+ ],
+ "Tiện ích Casamia Balanca: 5 công viên chủ đề, bể bơi Olympic, bến du thuyền trong khu 31,1 ha": [
+  "Casamia Balanca amenities: 5 themed parks, an Olympic pool and a marina within the 31.1 ha township",
+  "Casamia Balanca 편의시설: 31.1헥타르 단지 내 5개 테마 공원, 올림픽 수영장, 마리나"
+ ],
+ "Toàn cảnh flycam Casamia Balanca Hội An – các dãy nhà vườn đang thi công, nhìn ra sông và biển": [
+  "Drone panorama of Casamia Balanca Hoi An – rows of garden homes under construction, overlooking the river and the sea",
+  "Casamia Balanca Hoi An 드론 전경 – 공사 중인 가든 하우스 단지, 강과 바다 전망"
+ ],
+ "Trung tâm hội nghị": [
+  "Convention center",
+  "컨벤션 센터"
+ ],
+ "Trung tâm thương mại": [
+  "Shopping center",
+  "쇼핑센터"
+ ],
+ "Trường mầm non quốc tế": [
+  "International kindergarten",
+  "국제 유치원"
+ ],
+ "Tư vấn khách hàng tại sự kiện Casamia Balanca Hội An": [
+  "Advising customers at the Casamia Balanca Hoi An event",
+  "Casamia Balanca Hoi An 행사 현장 고객 상담"
+ ],
+ "Tất cả phân khu, phương án": [
+  "All zones and options",
+  "전체 구역·옵션"
+ ],
+ "Tập đoàn Đạt Phương": [
+  "Dat Phuong Group",
+  "Dat Phuong Group"
+ ],
+ "VTN Architects / ENCITY": [
+  "VTN Architects / ENCITY",
+  "VTN Architects / ENCITY"
+ ],
+ "Vịnh Cửa Đại": [
+  "Cua Dai Bay",
+  "끄어다이 만(Cua Dai Bay)"
+ ],
+ "Xe điện nội khu qua chốt bảo vệ cổng – Casamia Balanca Hội An": [
+  "On-site electric shuttle passing the gate security post – Casamia Balanca Hoi An",
+  "정문 경비 초소를 통과하는 단지 내 전동 셔틀 – Casamia Balanca Hoi An"
+ ],
+ "Xe điện nội khu đưa đón cư dân – Casamia Balanca": [
+  "On-site electric shuttle for residents – Casamia Balanca",
+  "입주민을 위한 단지 내 전동 셔틀 – Casamia Balanca"
+ ],
+ "Xem toàn bộ album (22 ảnh)": [
+  "View the full album (22 photos)",
+  "전체 앨범 보기(사진 22장)"
+ ],
+ "biệt thự ven kênh có hồ bơi riêng, bến thuyền – phù hợp khách du lịch Hội An.": [
+  "canal-side villas with private pools and boat docks – well suited to Hoi An tourists.",
+  "개인 수영장과 보트 선착장을 갖춘 운하변 빌라 – 호이안 관광객 수요에 적합합니다."
+ ],
+ "là khu đô thị sinh thái 31,1 ha của Tập đoàn Đạt Phương bên sông Cổ Cò, hướng vịnh Cửa Đại, nằm giữa rừng dừa Bảy Mẫu – Khu dự trữ sinh quyển thế giới Cù Lao Chàm – Hội An. Dự án gồm nhà phố vườn Park Home, biệt thự vườn Park Villa và các dãy biệt thự ven kênh có hồ bơi riêng, bến thuyền trước nhà.": [
+  "is Dat Phuong Group's 31.1 ha eco-township by the Co Co River, facing Cua Dai Bay, set amid the Bay Mau coconut forest – the Cu Lao Cham – Hoi An World Biosphere Reserve. The project includes Park Home garden townhouses, Park Villa garden villas and rows of canal-side villas with private pools and a boat dock in front of the house.",
+  "은 꼬꼬 강(Co Co River) 옆, 끄어다이 만(Cua Dai Bay)을 향해 바이머우(Bay Mau) 야자수 숲 – 꾸라오참 – 호이안 세계 생물권 보전지역 – 한가운데 자리한 Dat Phuong Group의 31.1헥타르 생태 신도시입니다. Park Home 가든 타운하우스, Park Villa 가든 빌라, 그리고 개인 수영장과 집 앞 보트 선착장을 갖춘 운하변 빌라 단지로 구성됩니다."
+ ],
+ "tapchicongthuong.vn": [
+  "tapchicongthuong.vn",
+  "tapchicongthuong.vn"
+ ],
+ "Đã có sổ hồng từng lô – giấy chứng nhận quyền sử dụng đất cấp tháng 8/2026 (đất ở tại đô thị, sử dụng riêng)": [
+  "Pink Book (ownership certificate) issued for each plot – land use right certificate issued in August 2026 (urban residential land, private use)",
+  "필지별 핑크북(소유권 증서) 발급 완료 – 2026년 8월 토지사용권 증서 발급(도시 주거용지, 개별 사용)"
+ ],
+ "Đã gồm VAT": [
+  "VAT included",
+  "VAT 포함"
+ ],
+ "Đã gồm VAT, giá tham khảo 11/2026": [
+  "VAT included, reference price November 2026",
+  "VAT 포함, 2026년 11월 참고 가격"
+ ],
+ "Đường Võ Chí Công": [
+  "Vo Chi Cong Road",
+  "보찌꽁 거리(Vo Chi Cong St.)"
+ ],
+ "Đường chạy bộ rợp bóng cây – Casamia Balanca": [
+  "Tree-shaded jogging track – Casamia Balanca",
+  "나무 그늘이 드리운 조깅 트랙 – Casamia Balanca"
+ ],
+ "Đất 178 m², sàn 316,09 m²": [
+  "Land 178 m², floor area 316.09 m²",
+  "대지 178 m², 연면적 316.09 m²"
+ ],
+ "Đất ở tại đô thị": [
+  "Urban residential land",
+  "도시 주거용지"
+ ],
+ "Đất ở tại đô thị. Sổ đứng tên chủ đầu tư ghi thời hạn đến 18/06/2069; thời hạn khi sang tên cho người mua theo quy định hiện hành – kiểm tra cùng Hoàng Hiệp trước khi ký": [
+  "Urban residential land. The certificate in the developer's name states a term until June 18, 2069; the term upon transfer to the buyer follows current regulations – check with Hoang Hiep before signing",
+  "도시 주거용지. 시행사 명의 증서에 2069년 6월 18일까지의 기한이 기재되어 있으며, 매수자 명의 이전 시 기한은 현행 규정에 따름 – 계약 전 호앙 히엡과 함께 확인하십시오"
+ ],
+ "Đất ở tại đô thị. Sổ đứng tên chủ đầu tư ghi thời hạn đến 18/06/2069; thời hạn khi sang tên cho người mua theo quy định hiện hành – kiểm tra cùng Hoàng Hiệp trước khi ký; đã có sổ hồng từng lô – giấy chứng nhận quyền sử dụng đất cấp tháng 8/2026 (đất ở tại đô thị, sử dụng riêng).": [
+  "Urban residential land. The certificate in the developer's name states a term until June 18, 2069; the term upon transfer to the buyer follows current regulations – check with Hoang Hiep before signing; a Pink Book (ownership certificate) has been issued for each plot – land use right certificate issued in August 2026 (urban residential land, private use).",
+  "도시 주거용지입니다. 시행사 명의 증서에 2069년 6월 18일까지의 기한이 기재되어 있으며, 매수자 명의 이전 시 기한은 현행 규정에 따릅니다 – 계약 전 호앙 히엡과 함께 확인하십시오. 필지별 핑크북(소유권 증서)이 발급되었으며, 토지사용권 증서는 2026년 8월에 발급되었습니다(도시 주거용지, 개별 사용)."
+ ],
+ "Đầu tư cho thuê nghỉ dưỡng:": [
+  "Investing for holiday rentals:",
+  "휴양 임대 투자 목적:"
+ ],
+ "Đặt cọc 300 triệu đồng/căn; ký hợp đồng mua bán thanh toán 20% (tháng 9/2026)": [
+  "Deposit of 300 million VND/unit; pay 20% on signing the sale and purchase agreement (September 2026)",
+  "세대당 계약금 3억 동; 매매계약서(SPA) 체결 시 20% 납부(2026년 9월)"
+ ],
+ "Đề án du lịch Cù Lao Chàm được duyệt: 18 điểm sinh thái 509,75 ha, mục tiêu 350.000 khách năm 2030": [
+  "Cu Lao Cham tourism plan approved: 18 eco sites over 509.75 ha, targeting 350,000 visitors by 2030",
+  "꾸라오참 관광 계획 승인: 509.75헥타르 18개 생태 관광지, 2030년 방문객 35만 명 목표"
+ ],
+ "Đọc giới thiệu đầy đủ về Casamia Balanca Hội An": [
+  "Read the full introduction to Casamia Balanca Hoi An",
+  "Casamia Balanca Hoi An 소개 전문 보기"
+ ],
+ "– công viên hoa giấy.": [
+  "– bougainvillea park.",
+  "– 부겐빌레아 공원."
+ ],
+ "– quảng trường, hồ vô cực, trạm đọc, co-working, coffee & bistro, gym & fitness, zone game, bể bơi tiêu chuẩn Olympic, khu vui chơi trẻ em, gym ngoài trời.": [
+  "– plaza, infinity pool, reading stations, co-working, coffee & bistro, gym & fitness, game zone, Olympic-standard swimming pool, children's playground, outdoor gym.",
+  "– 광장, 인피니티 풀, 독서 공간, 코워킹, 커피 & 비스트로, 헬스·피트니스, 게임 존, 올림픽 규격 수영장, 어린이 놀이터, 야외 헬스장."
+ ],
+ "– sân bóng rổ, hệ thống sân Pickleball.": [
+  "– basketball court, pickleball courts.",
+  "– 농구 코트, 피클볼 코트."
+ ],
+ "– vườn yoga, đường dạo sinh thái.": [
+  "– yoga garden, eco walking trails.",
+  "– 요가 정원, 생태 산책로."
+ ],
+ "– đường dạo rừng dừa, cầu cảng, lầu vọng cảnh, tiểu cảnh check-in.": [
+  "– coconut forest trails, piers, viewing pavilion, check-in spots.",
+  "– 야자수 숲 산책로, 부두, 전망 정자, 포토 스폿."
+ ]
+}
