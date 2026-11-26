@@ -424,3 +424,23 @@ add_action(
 	},
 	99
 );
+
+// Chuyển hướng nội bộ khi đang xem trang dịch (VD /en/nha-dat/ → /mua-ban/): giữ ngôn ngữ (/en/mua-ban/).
+add_filter(
+	'wp_redirect',
+	static function ( $location ) {
+		if ( ! hh_tl() || ! is_string( $location ) ) {
+			return $location;
+		}
+		$p = wp_parse_url( $location );
+		if ( ! empty( $p['host'] ) && wp_parse_url( home_url(), PHP_URL_HOST ) !== $p['host'] ) {
+			return $location;
+		}
+		$path = (string) ( $p['path'] ?? '/' );
+		if ( ! hh_tl_path_ok( $path ) ) {
+			return $location;
+		}
+		return home_url( '/' . hh_tl() . $path ) . ( isset( $p['query'] ) ? '?' . $p['query'] : '' ) . ( isset( $p['fragment'] ) ? '#' . $p['fragment'] : '' );
+	},
+	99
+);
