@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.53** + plugin Hoàng Hiệp CRM **2.20.385**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.53** + plugin Hoàng Hiệp CRM **2.20.386**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.386
+
+- Trang EN / KO: dịch nốt khoảng 2.200 đoạn còn sót (chú thích ảnh, tiêu đề bài ở thanh bên, nút Mục lục / Nhắn Zalo / Về trang chủ, tiêu đề tab) – dùng chung cho mọi trang.
 
 ## Có gì mới – 2.20.385 (giao diện 2.16.53)
 
