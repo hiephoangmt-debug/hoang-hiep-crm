@@ -107,7 +107,7 @@ const geo = new THREE.SphereGeometry(2000, 96, 48); geo.scale(-1, 1, 1);   // t�
 const mat = new THREE.MeshBasicMaterial({ color: 0x222222 });
 const sphere = new THREE.Mesh(geo, mat); scene.add(sphere);
 const overlay = new THREE.Group(); scene.add(overlay);
-const planGroup = new THREE.Group(); scene.add(planGroup); let floor = -1;
+const planGroup = new THREE.Group(); scene.add(planGroup); let floor = 2;   // mặc định: mặt bằng tầng 28 (không hiện mái)
 // Vật liệu "in xuống đất": hoà bản vẽ vào ảnh 360° tại chỗ — lấy màu ảnh flycam đúng hướng nhìn,
 // giữ bóng đổ/sáng tối của mặt đất thật lên bản vẽ, viền mờ theo kênh alpha, chỉnh tông theo ảnh.
 const makeGroundMat = (sphereMesh) => new THREE.ShaderMaterial({
@@ -223,7 +223,7 @@ function buildZone(q) {
   el.onclick = () => openPlans(PLANS.findIndex(([n]) => n === 'Quy hoạch'));
   $('lbls').appendChild(el); labels.unshift({ el, dir: v.normalize(), w: 0, stem: el.lastChild, k: 0, g: 'zone' });
 }
-const FLOOR_NO = [2, 3, 22, 22, 29, 30];   // 3A–28 hiển thị ở tầng 22
+const FLOOR_NO = [2, 3, 28, 28, 29, 30];   // 3A–28 cắt ở tầng 28
 function setFloor(i) {
   floor = i; const m = planGroup.getObjectByName('plan'); if (!m) return;
   const onTower = !!(showTower && towerObj);   // có toà tháp: cắt ngang tháp, đặt mặt bằng 4D lên tầng đang chọn
