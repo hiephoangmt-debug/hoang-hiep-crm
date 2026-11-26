@@ -357,7 +357,7 @@ HTML
 		'keyword'  => 'mua biệt thự Premier Village',
 		'keywords_extra' => array( 'biệt thự Premier Village Đà Nẵng', 'villa Premier Village Mỹ Khê', 'thuê biệt thự Premier Village', 'gửi bán biệt thự Premier Village' ),
 		'project'  => 'premier-village-da-nang',
-		'rev'      => 3, // 26/11: viết lại – giá "chỉ từ", ai nên mua, các bước mua; rev 3: viết dày hơn, thêm mục thuê / cho thuê / gửi bán (anh Hiệp).
+		'rev'      => 4, // rev 4: tên loại căn, tiện ích, liên kết vùng theo trang giới thiệu anh Hiệp gửi; 26/11: viết lại – giá "chỉ từ", ai nên mua, các bước mua; rev 3: viết dày hơn, thêm mục thuê / cho thuê / gửi bán (anh Hiệp).
 		'schedule' => '2026-11-26 09:30',
 		'category' => 'Tin dự án',
 		'tags'     => array( 'Premier Village', 'Biệt thự biển', 'Mỹ Khê' ),
@@ -389,9 +389,9 @@ HTML
 <table>
 <thead><tr><th>Loại biệt thự</th><th>Số căn</th><th>Diện tích</th><th>Điểm riêng</th></tr></thead>
 <tbody>
-<tr><td>Hướng vườn</td><td>77</td><td>Khoảng 300 – 330 m²</td><td>Vườn riêng, hồ bơi riêng</td></tr>
-<tr><td>Có lối đi ra biển</td><td>28</td><td>Khoảng 360 – 390 m²</td><td>Lối đi riêng ra bãi biển</td></tr>
-<tr><td>Trực diện biển</td><td>6</td><td>Đến khoảng 511 m²</td><td>Sát bãi biển, sân thượng cạnh hồ bơi</td></tr>
+<tr><td>Garden View Villa (hướng vườn)</td><td>77</td><td>Khoảng 300 – 330 m²</td><td>Vườn riêng, hồ bơi riêng</td></tr>
+<tr><td>Ocean Access Villa (có lối ra biển)</td><td>28</td><td>Khoảng 360 – 390 m²</td><td>Lối đi riêng ra bãi biển</td></tr>
+<tr><td>Beachfront Villa (trực diện biển)</td><td>6</td><td>Khoảng 511 m²</td><td>Sát bãi biển, hồ bơi vô cực riêng, quản gia riêng</td></tr>
 </tbody>
 </table>
 <p>Theo thông tin giới thiệu khu nghỉ dưỡng, mỗi biệt thự có hồ bơi riêng, phòng khách, bếp đầy đủ thiết bị (tủ lạnh, lò vi sóng, lò nướng), phòng ngủ có phòng tắm riêng và đón được tối đa khoảng 8 người lớn, 4 trẻ em – hợp với đại gia đình. Vì vậy người mua biệt thự Premier Village thường là gia đình đông người hoặc doanh nghiệp cần nơi tiếp khách.</p>
@@ -407,7 +407,9 @@ HTML
 <li>Hồ bơi Nautica khoảng 550 m² sát biển và hồ bơi trẻ em khoảng 200 m².</li>
 <li>Câu lạc bộ trẻ em với lớp học, thư viện, sân chơi trong nhà và ngoài trời.</li>
 <li>Phòng gym mở cửa 24/7, hoạt động thể thao bãi biển.</li>
-<li>Nhà hàng LemonGrass, Cá Chuồn Cồ và phòng hội nghị khoảng 720 m² cho tối đa 150 khách.</li>
+<li>Nautica Beach Club, nhà hàng LemonGrass, Cá Chuồn Cồ và phòng hội nghị khoảng 720 m² cho tối đa 150 khách.</li>
+<li>Spa, vườn nhiệt đới và lối đi bộ trong khuôn viên khoảng 15 ha.</li>
+<li>Dịch vụ quản gia, xe điện nội khu, dọn phòng, đầu bếp riêng theo yêu cầu.</li>
 </ul>
 <!--hh-img:img/premier-village/premier-village-ho-boi-nautica-ven-bien.jpg|Hồ bơi Nautica sát biển – tiện ích khi mua biệt thự Premier Village (ảnh khu nghỉ dưỡng)-->
 <p>Mua biệt thự Premier Village, chủ nhà và khách ở dùng chung hệ tiện ích của khu nghỉ dưỡng: bãi biển ngay trước khu, hồ bơi chung, câu lạc bộ trẻ em nên bố mẹ yên tâm nghỉ. Nhà hàng ven biển phục vụ cả bữa sáng lẫn tiệc tối – tiện cho chủ nhà tổ chức tiếp khách, họp mặt gia đình ngay trong khu.</p>
@@ -481,7 +483,8 @@ HTML
 </ol>
 <p>Nếu căn định mua biệt thự Premier Village đang trong chương trình cho thuê, cần thêm bước làm việc với khu nghỉ dưỡng để chuyển hợp đồng cho chủ mới hoặc thanh lý hợp đồng – nên ghi rõ việc này vào thỏa thuận đặt cọc để tránh tranh chấp về sau.</p>
 <h2>Vị trí – lợi thế lớn nhất</h2>
-<p>Lý do chính khách chọn mua biệt thự Premier Village là vị trí: từ khu biệt thự đến cầu Rồng và trung tâm thành phố khoảng 5 phút, sân bay quốc tế Đà Nẵng khoảng 15 phút, bán đảo Sơn Trà khoảng 20 phút, phố cổ Hội An khoảng 40 phút đi xe. Xung quanh là phố du lịch An Thượng và dải biển Mỹ Khê; gần đó có dự án căn hộ <a href="/du-an/the-poet-residence-da-nang/">The Poet Residence</a> trên đường Hồ Xuân Hương. Thông tin giới thiệu khu nghỉ dưỡng có trên <a href="https://danangfantasticity.com/premier-village-danang-resort/" target="_blank" rel="noopener">Danang Fantasticity</a> – cổng du lịch của thành phố.</p>
+<p>Lý do chính khách chọn mua biệt thự Premier Village là vị trí: từ khu biệt thự đến cầu Rồng và trung tâm thành phố khoảng 5 phút, sân bay quốc tế Đà Nẵng khoảng 15 phút, bán đảo Sơn Trà khoảng 20 phút, phố cổ Hội An khoảng 40 phút đi xe. Phố du lịch An Thượng cách khoảng 3 phút, danh thắng Ngũ Hành Sơn khoảng 5 phút, ga Đà Nẵng khoảng 12 phút, Bà Nà Hills khoảng 45 phút; bệnh viện Vinmec, Hoàn Mỹ khoảng 10 phút.</p>
+<p>Gần đó có dự án căn hộ <a href="/du-an/the-poet-residence-da-nang/">The Poet Residence</a> trên đường Hồ Xuân Hương. Thông tin giới thiệu khu nghỉ dưỡng có trên <a href="https://danangfantasticity.com/premier-village-danang-resort/" target="_blank" rel="noopener">Danang Fantasticity</a> – cổng du lịch của thành phố.</p>
 <h2>So với villa ven biển khác ở Đà Nẵng</h2>
 <p>Theo mặt bằng giá tham khảo tháng 10/2026, Furama Villas chỉ từ khoảng 21 tỷ, Fusion Resort &amp; Villas từ khoảng 32 tỷ, Hyatt Regency 3 phòng ngủ khoảng 50 tỷ. Mua biệt thự Premier Village đắt hơn Furama nhưng đổi lại vị trí gần trung tâm nhất. Bảng so sánh đầy đủ xem bài <a href="/so-sanh-villa-ven-bien-da-nang-co-so/">so sánh villa ven biển Đà Nẵng có sổ</a>.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>

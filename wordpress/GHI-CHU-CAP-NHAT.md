@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.48** + plugin Hoàng Hiệp CRM **2.20.360**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.48** + plugin Hoàng Hiệp CRM **2.20.361**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.361
+
+- Premier Village Đà Nẵng: tên loại căn Garden View / Ocean Access / Beachfront Villa, tiêu chuẩn bàn giao, mô tả vị trí, liên kết vùng (10 điểm), tiện ích nội – ngoại khu (Nautica Beach Club, spa, quản gia, xe điện…).
 
 ## Có gì mới – 2.20.360 (giao diện 2.16.48)
 
