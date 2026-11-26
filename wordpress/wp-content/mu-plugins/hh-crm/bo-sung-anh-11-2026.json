@@ -1,0 +1,181 @@
+{
+ "the-monarchy-da-nang": [
+  "plugin:img/the-monarchy/the-monarchy-cong-vao-canh-quan.jpg | Cổng vào và cảnh quan nội khu The Monarchy Đà Nẵng, phối cảnh dự án | đại diện",
+  "plugin:img/the-monarchy/the-monarchy-phoi-canh-khoi-de-vong-xoay.jpg | Khối đế và tòa tháp The Monarchy nhìn từ vòng xoay trước dự án, phối cảnh | thư viện",
+  "plugin:img/the-monarchy/the-monarchy-so-do-vi-tri.jpg | Sơ đồ vị trí The Monarchy gần cầu Trần Thị Lý, bán kính 1 – 5 km tới trung tâm, sông Hàn và biển Mỹ Khê | thư viện",
+  "plugin:img/the-monarchy/the-monarchy-tong-mat-bang-tien-ich.jpg | Tổng mặt bằng tiện ích The Monarchy: hồ bơi người lớn và trẻ em, vườn dạo bộ, quảng trường, gym, shophouse | tổng thể",
+  "plugin:img/the-monarchy/the-monarchy-mat-bang-tang-1.jpg | Mặt bằng tầng 1 The Monarchy giáp đường Trần Hưng Đạo và An Trung | mặt bằng | Tầng 1",
+  "plugin:img/the-monarchy/the-monarchy-mat-bang-tang-5-17.jpg | Mặt bằng tầng điển hình 5 – 17 The Monarchy, 8 căn hộ mỗi tầng | mặt bằng | Tầng 5 – 17",
+  "plugin:img/the-monarchy/the-monarchy-mat-bang-tang-18-penthouse.jpg | Mặt bằng tầng 18 căn penthouse The Monarchy | mặt bằng | Tầng 18 penthouse",
+  "plugin:img/the-monarchy/the-monarchy-noi-that-phong-an.jpg | Phòng ăn căn hộ mẫu The Monarchy, phối cảnh nội thất | thư viện",
+  "plugin:img/the-monarchy/the-monarchy-noi-that-bep.jpg | Bếp căn hộ mẫu The Monarchy, phối cảnh nội thất | thư viện",
+  "plugin:img/the-monarchy/the-monarchy-noi-that-bep-quay-bar.jpg | Bếp và quầy bar căn hộ mẫu The Monarchy, phối cảnh nội thất | thư viện",
+  "plugin:img/the-monarchy/the-monarchy-noi-that-ban-cong.jpg | Ban công căn hộ The Monarchy, phối cảnh nội thất | thư viện",
+  "plugin:img/the-monarchy/the-monarchy-noi-that-ban-cong-san-vuon.jpg | Ban công sân vườn căn hộ The Monarchy, phối cảnh nội thất | thư viện",
+  "plugin:img/the-monarchy/the-monarchy-noi-that-phong-ngu.jpg | Phòng ngủ căn hộ mẫu The Monarchy, phối cảnh nội thất | thư viện"
+ ],
+ "aria-da-nang-hotel-resort": [
+  "plugin:img/aria-da-nang/aria-da-nang-ho-boi-tran-bo-bien.jpg | Hồ bơi tràn bờ hướng biển và các điểm nhấn của Aria Đà Nẵng Hotel & Resort, ảnh giới thiệu dự án | đại diện",
+  "plugin:img/aria-da-nang/aria-da-nang-so-do-vi-tri.jpg | Sơ đồ vị trí Aria Đà Nẵng trên đường Võ Nguyên Giáp, biển Non Nước và khoảng cách tới sân bay, Hội An | thư viện",
+  "plugin:img/aria-da-nang/aria-da-nang-mat-bang-tong-the-tien-ich.jpg | Mặt bằng tổng thể tiện ích Aria Đà Nẵng: sảnh, hồ bơi water park, rooftop bar, shophouse, nhà hàng, beach bar | tổng thể",
+  "plugin:img/aria-da-nang/aria-da-nang-mat-bang-aqua-tower-tang-3-7.jpg | Mặt bằng tầng 3 – 7 tòa Aqua Tower, Aria Đà Nẵng | mặt bằng | Aqua Tower tầng 3 – 7",
+  "plugin:img/aria-da-nang/aria-da-nang-mat-bang-aqua-tower-tang-8-15.jpg | Mặt bằng tầng 8 – 15 tòa Aqua Tower, Aria Đà Nẵng | mặt bằng | Aqua Tower tầng 8 – 15",
+  "plugin:img/aria-da-nang/aria-da-nang-mat-bang-aqua-tower-tang-17-29.jpg | Mặt bằng tầng 17 – 29 tòa Aqua Tower, Aria Đà Nẵng | mặt bằng | Aqua Tower tầng 17 – 29"
+ ],
+ "wyndham-soleil-da-nang": [
+  "plugin:img/wyndham-soleil/wyndham-soleil-phoi-canh-ven-bien-pham-van-dong.jpg | Cụm tháp Wyndham Soleil Đà Nẵng bên bãi biển Phạm Văn Đồng, phối cảnh dự án | đại diện",
+  "plugin:img/wyndham-soleil/wyndham-soleil-mo-hinh-cac-toa.jpg | Mô hình các tòa Wyndham Soleil Đà Nẵng: Tower A1, A2 57 tầng, Tower B 47 tầng, Tower D 50 tầng và trung tâm thương mại | thư viện",
+  "plugin:img/wyndham-soleil/wyndham-soleil-ho-boi.jpg | Hồ bơi giữa các tòa tháp Wyndham Soleil Đà Nẵng, phối cảnh | tiện ích",
+  "plugin:img/wyndham-soleil/wyndham-soleil-so-do-vi-tri.jpg | Sơ đồ vị trí Wyndham Soleil Đà Nẵng: 1 phút ra biển Phạm Văn Đồng, gần cầu Sông Hàn, sân bay và bán đảo Sơn Trà | thư viện",
+  "plugin:img/wyndham-soleil/wyndham-soleil-mat-bang-toa-a1-tang-5-24.jpg | Mặt bằng điển hình tầng 5 – 24 tòa A1 Wyndham Soleil Đà Nẵng | mặt bằng | Tòa A1 tầng 5 – 24",
+  "plugin:img/wyndham-soleil/wyndham-soleil-mat-bang-toa-a1-tang-25-42-46-52.jpg | Mặt bằng điển hình tầng 25 – 42 và 46 – 52 tòa A1 Wyndham Soleil Đà Nẵng | mặt bằng | Tòa A1 tầng 25 – 42, 46 – 52",
+  "plugin:img/wyndham-soleil/wyndham-soleil-layout-studio.jpg | Layout nội thất căn hộ studio Wyndham Soleil Đà Nẵng | layout | Studio",
+  "plugin:img/wyndham-soleil/wyndham-soleil-layout-1pn.jpg | Layout nội thất căn hộ 1 phòng ngủ Wyndham Soleil Đà Nẵng | layout | 1 phòng ngủ",
+  "plugin:img/wyndham-soleil/wyndham-soleil-layout-2pn.jpg | Layout nội thất căn hộ 2 phòng ngủ Wyndham Soleil Đà Nẵng | layout | 2 phòng ngủ",
+  "plugin:img/wyndham-soleil/wyndham-soleil-layout-3pn.jpg | Layout nội thất căn hộ 3 phòng ngủ Wyndham Soleil Đà Nẵng | layout | 3 phòng ngủ",
+  "plugin:img/wyndham-soleil/wyndham-soleil-noi-that-phong-khach.jpg | Phòng khách căn hộ Wyndham Soleil Đà Nẵng, phối cảnh nội thất | thư viện",
+  "plugin:img/wyndham-soleil/wyndham-soleil-noi-that-phong-ngu.jpg | Phòng ngủ căn hộ Wyndham Soleil Đà Nẵng, phối cảnh nội thất | thư viện",
+  "plugin:img/wyndham-soleil/wyndham-soleil-noi-that-phong-tam-view-bien.jpg | Phòng tắm nhìn ra biển, căn hộ Wyndham Soleil Đà Nẵng, phối cảnh | thư viện",
+  "plugin:img/wyndham-soleil/wyndham-soleil-noi-that-bep.jpg | Bếp căn hộ Wyndham Soleil Đà Nẵng, phối cảnh nội thất | thư viện",
+  "plugin:img/wyndham-soleil/wyndham-soleil-noi-that-ban-cong-view-bien.jpg | Ban công và phòng khách nhìn ra biển, căn hộ Wyndham Soleil Đà Nẵng, phối cảnh | thư viện",
+  "plugin:img/wyndham-soleil/wyndham-soleil-noi-that-phong-khach-2.jpg | Phòng khách căn hộ Wyndham Soleil Đà Nẵng, phối cảnh nội thất | thư viện",
+  "plugin:img/wyndham-soleil/wyndham-soleil-noi-that-phong-ngu-2.jpg | Phòng ngủ có ban công, căn hộ Wyndham Soleil Đà Nẵng, phối cảnh nội thất | thư viện"
+ ],
+ "casamia-calm-hoi-an": [
+  "plugin:img/casamia-calm/casamia-calm-phoi-canh-toan-canh.jpg | Toàn cảnh khu biệt thự Casamia Calm Hội An bên hồ cảnh quan, phối cảnh dự án | đại diện",
+  "plugin:img/casamia-calm/casamia-calm-mat-bang-tong-the.jpg | Mặt bằng tổng thể Casamia Calm Hội An: dãy biệt thự BT1, BT2 ven kênh, hồ trung tâm, clubhouse, khu yoga, spa, nhà hàng | tổng thể",
+  "plugin:img/casamia-calm/casamia-calm-phoi-canh-tren-cao.jpg | Khu biệt thự Casamia Calm Hội An nhìn từ trên cao bên sông, phối cảnh | thư viện",
+  "plugin:img/casamia-calm/casamia-calm-phoi-canh-ven-song.jpg | Casamia Calm Hội An giữa vùng xanh ven sông nhìn từ trên cao, phối cảnh | thư viện",
+  "plugin:img/casamia-calm/casamia-calm-clubhouse-ven-ho.jpg | Clubhouse mái lá bên hồ tại Casamia Calm Hội An, phối cảnh | tiện ích",
+  "plugin:img/casamia-calm/casamia-calm-nha-hang-ven-ho.jpg | Công trình mái lá và rừng dừa ven hồ Casamia Calm Hội An, phối cảnh | tiện ích"
+ ],
+ "sun-cosmo-residence": [
+  "plugin:img/sun-cosmo/sun-cosmo-toan-canh-cau-tran-thi-ly.jpg | Hai tòa căn hộ Sun Cosmo Residence bên cầu Trần Thị Lý và sông Hàn lúc hoàng hôn, phối cảnh chủ đầu tư | đại diện",
+  "plugin:img/sun-cosmo/sun-cosmo-toan-canh-ve-dem.jpg | Sun Cosmo Residence về đêm bên sông Hàn, phối cảnh chủ đầu tư | thư viện",
+  "plugin:img/sun-cosmo/sun-cosmo-toa-thap-ben-cau-ban-ngay.jpg | Tòa tháp Sun Cosmo Residence và dãy nhà phố bên cầu Trần Thị Lý, phối cảnh chủ đầu tư | thư viện",
+  "plugin:img/sun-cosmo/sun-cosmo-toa-thap-ve-dem.jpg | Tòa căn hộ Sun Cosmo Residence và cầu Trần Thị Lý về đêm, phối cảnh chủ đầu tư | thư viện",
+  "plugin:img/sun-cosmo/sun-cosmo-mat-dung-toa-thap.jpg | Mặt đứng tòa căn hộ Sun Cosmo Residence nhìn ra cầu Trần Thị Lý, phối cảnh chủ đầu tư | thư viện",
+  "plugin:img/sun-cosmo/sun-cosmo-mat-dung-ve-dem.jpg | Mặt đứng tòa tháp Sun Cosmo Residence và khu phố thấp tầng về đêm, phối cảnh chủ đầu tư | thư viện",
+  "plugin:img/sun-cosmo/sun-cosmo-so-do-vi-tri.jpg | Vị trí Sun Cosmo Residence giữa cầu Trần Thị Lý, Trần Hưng Đạo, Ngô Quyền và Nguyễn Văn Thoại, phối cảnh chủ đầu tư | thư viện",
+  "plugin:img/sun-cosmo/sun-cosmo-nha-pho-thap-tang.jpg | Dãy nhà phố thấp tầng Sun Cosmo Residence, phối cảnh chủ đầu tư | thư viện",
+  "plugin:img/sun-cosmo/sun-cosmo-biet-thu.jpg | Biệt thự thấp tầng Sun Cosmo Residence, phối cảnh chủ đầu tư | thư viện",
+  "plugin:img/sun-cosmo/sun-cosmo-ho-boi-vo-cuc.jpg | Hồ bơi vô cực nhìn sông Hàn tại Sun Cosmo Residence, phối cảnh chủ đầu tư | tiện ích",
+  "plugin:img/sun-cosmo/sun-cosmo-phong-gym.jpg | Phòng gym nhìn ra thành phố tại Sun Cosmo Residence, phối cảnh chủ đầu tư | tiện ích",
+  "plugin:img/sun-cosmo/sun-cosmo-phong-gym-2.jpg | Phòng tập thể dục có đường chạy trong nhà tại Sun Cosmo Residence, phối cảnh chủ đầu tư | tiện ích",
+  "plugin:img/sun-cosmo/sun-cosmo-mat-bang-tang-tien-ich.jpg | Mặt bằng tầng tiện ích Sun Cosmo Residence: bể bơi, gym, kidclub, xông hơi – yoga, phòng sinh hoạt cộng đồng | mặt bằng | Tầng tiện ích",
+  "plugin:img/sun-cosmo/sun-cosmo-mat-bang-p1-tang-4-17.jpg | Mặt bằng điển hình tầng 4 – 17 tòa P1 Sun Cosmo Residence | mặt bằng | P1 tầng 4 – 17",
+  "plugin:img/sun-cosmo/sun-cosmo-mat-bang-p1-tang-19-25-le.jpg | Mặt bằng điển hình tầng 19, 21, 23, 25 tòa P1 Sun Cosmo Residence | mặt bằng | P1 tầng 19 – 25 (lẻ)",
+  "plugin:img/sun-cosmo/sun-cosmo-mat-bang-p1-tang-20-26-chan.jpg | Mặt bằng điển hình tầng 20, 22, 24, 26 tòa P1 Sun Cosmo Residence | mặt bằng | P1 tầng 20 – 26 (chẵn)",
+  "plugin:img/sun-cosmo/sun-cosmo-mat-bang-p1-tang-27.jpg | Mặt bằng tầng 27 tòa P1 Sun Cosmo Residence, căn hộ và sân vườn | mặt bằng | P1 tầng 27",
+  "plugin:img/sun-cosmo/sun-cosmo-mat-bang-p1-tang-28-32.jpg | Mặt bằng điển hình tầng 28, 30, 32 tòa P1 Sun Cosmo Residence | mặt bằng | P1 tầng 28 – 32",
+  "plugin:img/sun-cosmo/sun-cosmo-mat-bang-p2-tang-3a-25.jpg | Mặt bằng điển hình tầng 3A – 17 và 19 – 25 tòa P2 Sun Cosmo Residence | mặt bằng | P2 tầng 3A – 17, 19 – 25"
+ ],
+ "hoiana-resort-golf": [
+  "plugin:img/hoiana/hoiana-quy-hoach-tong-the-nam-hoi-an.jpg | Quy hoạch tổng thể dự án Nam Hội An (Hoi An South Development Project), nền tảng của quần thể Hoiana | tổng thể",
+  "plugin:img/hoiana/hoiana-giai-doan-1.jpg | Phạm vi giai đoạn 1 Hoiana 165 ha: sân golf Hoiana Shores, Rosewood Hội An, khách sạn New World và khu casino | tổng thể",
+  "plugin:img/hoiana/hoiana-ket-noi-hang-khong.jpg | Sơ đồ vị trí Hoiana và thời gian bay từ sân bay Đà Nẵng tới các thành phố châu Á | thư viện"
+ ],
+ "fpt-plaza-2": [
+  "plugin:img/fpt-plaza-2/fpt-plaza-2-phoi-canh-toa-nha.jpg | Tòa căn hộ FPT Plaza 2 trong khu đô thị FPT City Đà Nẵng, phối cảnh dự án | đại diện",
+  "plugin:img/fpt-plaza-2/fpt-plaza-2-so-do-vi-tri.jpg | Sơ đồ vị trí FPT Plaza 2 trên đường Võ Chí Công, gần biển Tân Trà, chợ Non Nước, Đại học FPT | thư viện",
+  "plugin:img/fpt-plaza-2/fpt-plaza-2-shophouse-tang-lung.jpg | Shophouse FPT Plaza 2 cao 4,7 m có tầng lửng, minh họa | thư viện",
+  "plugin:img/fpt-plaza-2/fpt-plaza-2-layout-3d-2pn.jpg | Layout 3D căn hộ 2 phòng ngủ FPT Plaza 2 | layout | 2 phòng ngủ",
+  "plugin:img/fpt-plaza-2/fpt-plaza-2-layout-3d-3pn.jpg | Layout 3D căn hộ 3 phòng ngủ FPT Plaza 2 | layout | 3 phòng ngủ",
+  "plugin:img/fpt-plaza-2/fpt-plaza-2-noi-that-phong-khach.jpg | Phòng khách căn hộ FPT Plaza 2, phối cảnh nội thất | thư viện",
+  "plugin:img/fpt-plaza-2/fpt-plaza-2-noi-that-bep.jpg | Bếp và bàn ăn căn hộ FPT Plaza 2, phối cảnh nội thất | thư viện",
+  "plugin:img/fpt-plaza-2/fpt-plaza-2-noi-that-phong-ngu.jpg | Phòng ngủ căn hộ FPT Plaza 2, phối cảnh nội thất | thư viện",
+  "plugin:img/fpt-plaza-2/fpt-plaza-2-noi-that-phong-tam.jpg | Phòng tắm căn hộ FPT Plaza 2, phối cảnh nội thất | thư viện",
+  "plugin:img/fpt-plaza-2/fpt-plaza-2-noi-that-phong-khach-2.jpg | Phòng khách sofa góc căn hộ FPT Plaza 2, phối cảnh nội thất | thư viện",
+  "plugin:img/fpt-plaza-2/fpt-plaza-2-noi-that-tuong-tivi.jpg | Tường tivi phòng khách căn hộ FPT Plaza 2, phối cảnh nội thất | thư viện",
+  "plugin:img/fpt-plaza-2/fpt-plaza-2-noi-that-ban-an.jpg | Góc bàn ăn căn hộ FPT Plaza 2, phối cảnh nội thất | thư viện"
+ ],
+ "nam-hoi-an-city": [
+  "plugin:img/vinh-an-hoa/nam-hoi-an-city-quy-hoach-su-dung-dat.jpg | Quy hoạch sử dụng đất Nam Hội An City: đất ở, thương mại dịch vụ, cây xanh, mặt nước và bảng cơ cấu sử dụng đất | tổng thể",
+  "plugin:img/vinh-an-hoa/nam-hoi-an-city-so-do-vi-tri.jpg | Sơ đồ vị trí Nam Hội An City bên sông Thu Bồn, khoảng cách tới phố cổ Hội An, biển Cửa Đại, Hoiana | thư viện",
+  "plugin:img/vinh-an-hoa/nam-hoi-an-city-noi-that-cau-thang-nha-pho.jpg | Cầu thang và sảnh nhà phố mẫu Nam Hội An City, phối cảnh nội thất | thư viện",
+  "plugin:img/vinh-an-hoa/nam-hoi-an-city-noi-that-phong-khach-nha-pho.jpg | Phòng khách nhà phố mẫu Nam Hội An City, phối cảnh nội thất | thư viện",
+  "plugin:img/vinh-an-hoa/nam-hoi-an-city-noi-that-quay-bar-gam-cau-thang.jpg | Quầy bar dưới gầm cầu thang nhà phố mẫu Nam Hội An City, phối cảnh nội thất | thư viện",
+  "plugin:img/vinh-an-hoa/nam-hoi-an-city-noi-that-phong-an.jpg | Phòng ăn nhà phố mẫu Nam Hội An City, phối cảnh nội thất | thư viện",
+  "plugin:img/vinh-an-hoa/nam-hoi-an-city-noi-that-phong-khach-ban-an.jpg | Phòng khách liền bàn ăn nhà phố mẫu Nam Hội An City, phối cảnh nội thất | thư viện",
+  "plugin:img/vinh-an-hoa/nam-hoi-an-city-noi-that-phong-khach-sofa.jpg | Phòng khách nhà phố mẫu Nam Hội An City, phối cảnh nội thất | thư viện",
+  "plugin:img/vinh-an-hoa/nam-hoi-an-city-noi-that-phong-ngu-doi.jpg | Phòng ngủ hai giường nhà phố mẫu Nam Hội An City, phối cảnh nội thất | thư viện",
+  "plugin:img/vinh-an-hoa/nam-hoi-an-city-noi-that-phong-ngu.jpg | Phòng ngủ nhà phố mẫu Nam Hội An City, phối cảnh nội thất | thư viện"
+ ],
+ "fpt-city-da-nang": [
+  "plugin:img/fpt-city/fpt-city-phoi-canh-tren-cao.jpg | Khu đô thị FPT City Đà Nẵng bên sông Cổ Cò nhìn từ trên cao, phối cảnh | đại diện",
+  "plugin:img/fpt-city/fpt-city-phoi-canh-ven-song.jpg | Khu đô thị FPT City Đà Nẵng ven sông Cổ Cò, phối cảnh từ trên cao | thư viện",
+  "plugin:img/fpt-city/fpt-city-quy-hoach-phan-khu-chuc-nang.jpg | Phân khu chức năng FPT City Đà Nẵng: town centre, campus, business park, trường học, khu biệt thự ven sông và ven hồ | tổng thể",
+  "plugin:img/fpt-city/fpt-city-mat-bang-phan-lo.jpg | Mặt bằng phân lô khu đô thị FPT City Đà Nẵng giáp sông Cổ Cò | tổng thể",
+  "plugin:img/fpt-city/fpt-city-lien-ket-vung.jpg | Liên kết vùng FPT City Đà Nẵng: trung tâm thành phố, biển Mỹ Khê, Ngũ Hành Sơn, Hội An, Bà Nà | thư viện",
+  "plugin:img/fpt-city/fpt-city-so-do-vi-tri.jpg | Sơ đồ vị trí FPT City Đà Nẵng và các tiện ích lân cận: sân bay, Lotte Mart, bệnh viện, trường quốc tế | thư viện",
+  "plugin:img/fpt-city/fpt-city-phoi-canh-fpt-plaza-1.jpg | Tòa căn hộ FPT Plaza 1 trong khu đô thị FPT City Đà Nẵng, phối cảnh | thư viện",
+  "plugin:img/fpt-city/fpt-city-anh-thuc-te-can-ho-phong-khach.jpg | Ảnh thực tế phòng khách và bàn ăn một căn hộ hoàn thiện tại FPT City Đà Nẵng | thư viện",
+  "plugin:img/fpt-city/fpt-city-anh-thuc-te-can-ho-bep.jpg | Ảnh thực tế bếp và phòng khách một căn hộ hoàn thiện tại FPT City Đà Nẵng | thư viện"
+ ],
+ "shantira-beach-resort-hoi-an": [
+  "plugin:img/shantira/shantira-phoi-canh-ban-dem.jpg | Shantira Beach Resort & Spa Hội An nhìn từ biển về đêm, phối cảnh chủ đầu tư | đại diện",
+  "plugin:img/shantira/shantira-phoi-canh-tren-cao.jpg | Shantira Beach Resort & Spa nhìn từ trên cao: các tòa căn hộ và biệt thự hướng biển, phối cảnh chủ đầu tư | thư viện",
+  "plugin:img/shantira/shantira-phoi-canh-tong-the.jpg | Tổng thể Shantira Beach Resort & Spa với tòa căn hộ hình chữ V và dãy biệt thự sát biển, phối cảnh chủ đầu tư | thư viện",
+  "plugin:img/shantira/shantira-so-do-vi-tri.jpg | Sơ đồ vị trí Shantira Beach Resort & Spa ven biển giữa Đà Nẵng và Hội An | thư viện",
+  "plugin:img/shantira/shantira-mat-bang-tien-ich.jpg | Mặt bằng tiện ích Shantira Beach Resort & Spa: hồ bơi, sân tennis, nhà hàng Thái, spa, quầy bar, lối đi bộ ven biển | tổng thể",
+  "plugin:img/shantira/shantira-ho-boi-ven-bien.jpg | Hồ bơi ven biển tại Shantira Beach Resort & Spa, phối cảnh chủ đầu tư | tiện ích",
+  "plugin:img/shantira/shantira-biet-thu-ho-boi.jpg | Biệt thự có hồ bơi riêng sát biển tại Shantira Beach Resort & Spa, phối cảnh | thư viện",
+  "plugin:img/shantira/shantira-noi-that-phong-khach.jpg | Phòng khách tại Shantira Beach Resort & Spa, phối cảnh nội thất | thư viện",
+  "plugin:img/shantira/shantira-noi-that-phong-ngu-ho-boi.jpg | Phòng ngủ nhìn ra hồ bơi tại Shantira Beach Resort & Spa, phối cảnh nội thất | thư viện",
+  "plugin:img/shantira/shantira-noi-that-phong-ngu-hai-giuong.jpg | Phòng ngủ hai giường tại Shantira Beach Resort & Spa, phối cảnh nội thất | thư viện",
+  "plugin:img/shantira/shantira-noi-that-phong-ngu-view-bien.jpg | Phòng ngủ nhìn biển tại Shantira Beach Resort & Spa, phối cảnh nội thất | thư viện",
+  "plugin:img/shantira/shantira-layout-biet-thu-2pn.jpg | Mặt bằng điển hình biệt thự 2 phòng ngủ Shantira: đất 288 – 297 m², sàn 176 m², hồ bơi 28 m² | layout | Biệt thự 2 phòng ngủ",
+  "plugin:img/shantira/shantira-layout-biet-thu-3pn.jpg | Mặt bằng điển hình biệt thự 3 phòng ngủ Shantira | layout | Biệt thự 3 phòng ngủ",
+  "plugin:img/shantira/shantira-layout-studio.jpg | Layout căn hộ studio Shantira Beach Resort & Spa, bản vẽ chủ đầu tư | layout | Studio",
+  "plugin:img/shantira/shantira-layout-1pn-loai-a.jpg | Layout căn hộ 1 phòng ngủ loại A Shantira Beach Resort & Spa, bản vẽ chủ đầu tư | layout | 1PN loại A",
+  "plugin:img/shantira/shantira-layout-1pn-loai-b.jpg | Layout căn hộ 1 phòng ngủ loại B Shantira Beach Resort & Spa, bản vẽ chủ đầu tư | layout | 1PN loại B",
+  "plugin:img/shantira/shantira-layout-2pn-loai-a.jpg | Layout căn hộ 2 phòng ngủ loại A Shantira Beach Resort & Spa, bản vẽ chủ đầu tư | layout | 2PN loại A",
+  "plugin:img/shantira/shantira-layout-2pn-loai-b.jpg | Layout căn hộ 2 phòng ngủ loại B Shantira Beach Resort & Spa, bản vẽ chủ đầu tư | layout | 2PN loại B",
+  "plugin:img/shantira/shantira-layout-2pn-loai-c.jpg | Layout căn hộ 2 phòng ngủ loại C Shantira Beach Resort & Spa, bản vẽ chủ đầu tư | layout | 2PN loại C",
+  "plugin:img/shantira/shantira-layout-3pn.jpg | Layout căn hộ 3 phòng ngủ Shantira Beach Resort & Spa, bản vẽ chủ đầu tư | layout | 3PN"
+ ],
+ "vinh-an-hoa-city": [
+  "plugin:img/vinh-an-hoa/vinh-an-hoa-city-phoi-canh-tong-the.jpg | Vịnh An Hòa City nhìn từ trên cao với dãy nhà phố ven vịnh, phối cảnh dự án | đại diện",
+  "plugin:img/vinh-an-hoa/vinh-an-hoa-city-mat-bang-tong-the.jpg | Mặt bằng tổng thể khu đô thị Vịnh An Hòa City ven vịnh An Hòa, phối cảnh | tổng thể",
+  "plugin:img/vinh-an-hoa/vinh-an-hoa-city-so-do-vi-tri.jpg | Sơ đồ vị trí Vịnh An Hòa City tại Núi Thành, gần sân bay Chu Lai, quốc lộ 1A và biển Rạng | thư viện",
+  "plugin:img/vinh-an-hoa/vinh-an-hoa-city-biet-thu.jpg | Khu biệt thự Vịnh An Hòa City, phối cảnh dự án | thư viện",
+  "plugin:img/vinh-an-hoa/vinh-an-hoa-city-ben-du-thuyen.jpg | Bến du thuyền ven vịnh tại Vịnh An Hòa City, phối cảnh | tiện ích",
+  "plugin:img/vinh-an-hoa/vinh-an-hoa-city-cong-vien.jpg | Công viên cây xanh trung tâm Vịnh An Hòa City, phối cảnh | tiện ích",
+  "plugin:img/vinh-an-hoa/vinh-an-hoa-city-layout-nha-pho-2-tang.jpg | Phương án kiến trúc nhà ở 2 tầng 1 tum tại Vịnh An Hòa City: mặt bằng tầng 1 và phối cảnh nội thất | layout | Nhà phố 2 tầng 1 tum",
+  "plugin:img/vinh-an-hoa/vinh-an-hoa-city-anh-thuc-te-flycam.jpg | Ảnh flycam thực tế hạ tầng Vịnh An Hòa City dọc bờ vịnh An Hòa | tiến độ"
+ ],
+ "sentosa-riverside-dien-ngoc": [
+  "plugin:img/dien-ngoc/sentosa-riverside-dien-ngoc-mat-bang-tong-the.jpg | Mặt bằng tổng thể Sentosa Riverside bên sông Cổ Cò, giáp các khu Green, Ngọc Dương, Thạnh Mỹ, Hera | tổng thể"
+ ],
+ "masteri-da-nang": [
+  "plugin:img/masteri-rivera-danang/masteri-rivera-danang-hai-toa-thap.jpg | Hai tòa tháp 39 tầng Masteri Rivera Danang với 1.112 căn hộ, phối cảnh dự án | thư viện",
+  "plugin:img/masteri-rivera-danang/masteri-rivera-danang-mat-bang-tong-the-tien-ich.jpg | Mặt bằng tổng thể và tiện ích Masteri Rivera Danang: bể bơi resort, sân pickleball, vườn trên mây, tiện ích trong nhà tầng 1 – 3 | tổng thể",
+  "plugin:img/masteri-rivera-danang/masteri-rivera-danang-so-do-vi-tri.jpg | Sơ đồ vị trí Masteri Rivera Danang gần đường 2 Tháng 9 bên sông Hàn, kết nối sân bay và biển | thư viện"
+ ],
+ "fpt-plaza-3": [
+  "plugin:img/fpt-plaza-3/fpt-plaza-3-so-do-vi-tri.jpg | Sơ đồ vị trí FPT Plaza 3 trong FPT City: gần đường Võ Chí Công, biển Tân Trà, Đại học FPT và sân golf BRG | thư viện"
+ ],
+ "sun-symphony-residence": [
+  "plugin:img/sun-symphony/sun-symphony-so-do-vi-tri.jpg | Sơ đồ vị trí Sun Symphony Residence trên đường Trần Hưng Đạo bên sông Hàn, gần cầu Sông Hàn và cầu Rồng | thư viện"
+ ],
+ "peninsula-da-nang": [
+  "plugin:img/peninsula/peninsula-da-nang-so-do-vi-tri.jpg | Sơ đồ vị trí Peninsula Đà Nẵng bên sông Hàn trên đường Lê Văn Duyệt, kết nối sân bay và biển | thư viện"
+ ],
+ "fusion-resort-villas-da-nang": [
+  "plugin:img/fusion/fusion-so-do-vi-tri.jpg | Sơ đồ vị trí Fusion Resort & Villas Đà Nẵng trên đường Trường Sa, giữa sân bay Đà Nẵng và Hội An | thư viện"
+ ],
+ "the-filmore-da-nang": [
+  "plugin:img/the-filmore/the-filmore-layout-ch04-ch05-1pn.jpg | Mặt bằng căn CH04, CH05 tầng 3 – 8, 1 phòng ngủ The Filmore Đà Nẵng | layout | CH04, CH05 – tầng 3 – 8",
+  "plugin:img/the-filmore/the-filmore-layout-ch01-ch11-2pn.jpg | Mặt bằng căn CH01, CH11 tầng 3 – 8, 2 phòng ngủ The Filmore Đà Nẵng | layout | CH01, CH11 – tầng 3 – 8",
+  "plugin:img/the-filmore/the-filmore-layout-ch01-ch02-can-gop.jpg | Mặt bằng căn gộp CH01 + CH02 tầng 11 – 19 The Filmore Đà Nẵng | layout | CH01 + CH02 – tầng 11 – 19",
+  "plugin:img/the-filmore/the-filmore-layout-ch03-ch04-can-gop.jpg | Mặt bằng căn gộp CH03 + CH04 tầng 16 – 20 The Filmore Đà Nẵng | layout | CH03 + CH04 – tầng 16 – 20",
+  "plugin:img/the-filmore/the-filmore-layout-penthouse-ph1.jpg | Mặt bằng penthouse PH-1 tầng 21 – 22 The Filmore Đà Nẵng | layout | PH-1 – tầng 21 – 22",
+  "plugin:img/the-filmore/the-filmore-layout-penthouse-ph2.jpg | Mặt bằng penthouse PH-2 tầng 23 – 24 The Filmore Đà Nẵng | layout | PH-2 – tầng 23 – 24"
+ ],
+ "casamia-hoi-an": [
+  "plugin:img/casamia-hoi-an/casamia-hoi-an-layout-casa-gala-shophouse.jpg | Thiết kế điển hình shophouse Casa Gala Casamia Hội An: mặt bằng các tầng, diện tích đất và sàn xây dựng | layout | Casa Gala shophouse",
+  "plugin:img/casamia-hoi-an/casamia-hoi-an-layout-casa-rivana-don-lap.jpg | Thiết kế điển hình biệt thự đơn lập Casa Rivana Casamia Hội An: mặt bằng các tầng, diện tích đất và sàn xây dựng | layout | Casa Rivana đơn lập",
+  "plugin:img/casamia-hoi-an/casamia-hoi-an-layout-casa-rivana-song-lap.jpg | Thiết kế điển hình biệt thự song lập Casa Rivana Casamia Hội An: mặt bằng các tầng, diện tích đất và sàn xây dựng | layout | Casa Rivana song lập",
+  "plugin:img/casamia-hoi-an/casamia-hoi-an-layout-casa-vela-biet-thu.jpg | Thiết kế điển hình biệt thự Casa Vela Casamia Hội An: mặt bằng các tầng, diện tích đất và sàn xây dựng | layout | Casa Vela"
+ ]
+}

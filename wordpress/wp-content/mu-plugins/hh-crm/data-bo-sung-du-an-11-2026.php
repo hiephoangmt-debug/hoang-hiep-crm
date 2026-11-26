@@ -34,6 +34,30 @@ add_filter(
 				$projects[ $i ]['fix_meta'][ $k ] = array_values( array_unique( array_merge( (array) ( $p['fix_meta'][ $k ] ?? array() ), array( $cur ) ) ) );
 			}
 		}
+		// Ảnh lấy từ web cũ (bo-sung-anh-11-2026.json): nối thêm vào danh sách link ảnh của dự án.
+		$raw  = file_get_contents( __DIR__ . '/bo-sung-anh-11-2026.json' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+		$imgs = $raw ? json_decode( $raw, true ) : null;
+		foreach ( is_array( $imgs ) ? $projects : array() as $i => $p ) {
+			$add = (array) ( $imgs[ $p['slug'] ?? '' ] ?? array() );
+			if ( ! $add ) {
+				continue;
+			}
+			$cur   = (string) ( $projects[ $i ]['meta']['hh_p_image_links'] ?? '' );
+			$lines = array_filter( array_map( 'trim', explode( "\n", $cur ) ) );
+			$keys  = array_map( static fn( $l ) => trim( explode( '|', $l )[0] ), $lines );
+			foreach ( $add as $l ) {
+				if ( ! in_array( trim( explode( '|', $l )[0] ), $keys, true ) ) {
+					$lines[] = $l;
+				}
+			}
+			$new = implode( "\n", $lines );
+			if ( $new !== $cur ) {
+				$projects[ $i ]['meta']['hh_p_image_links'] = $new;
+				if ( '' !== trim( $cur ) ) {
+					$projects[ $i ]['fix_meta']['hh_p_image_links'] = array_values( array_unique( array_merge( (array) ( $projects[ $i ]['fix_meta']['hh_p_image_links'] ?? array() ), array( $cur ) ) ) );
+				}
+			}
+		}
 		return $projects;
 	},
 	999

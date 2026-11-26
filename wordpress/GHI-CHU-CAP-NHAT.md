@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.48** + plugin Hoàng Hiệp CRM **2.20.364**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.48** + plugin Hoàng Hiệp CRM **2.20.365**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.365
+
+- Thêm 141 ảnh từ web cũ hoanggiaminh.com cho 19 dự án (mặt bằng, layout, sơ đồ vị trí, phối cảnh, nội thất): Monarchy, Aria, Wyndham Soleil, Casamia Calm, Sun Cosmo, Hoiana, FPT Plaza 2, FPT City, Shantira, Vịnh An Hòa, Nam Hội An City, The Filmore, Casamia Hội An, Masteri, Sentosa, FPT Plaza 3, Sun Symphony, Peninsula, Fusion.
 
 ## Có gì mới – 2.20.364
 
