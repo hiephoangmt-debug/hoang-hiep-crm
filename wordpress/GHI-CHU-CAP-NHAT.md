@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.50** + plugin Hoàng Hiệp CRM **2.20.371**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.50** + plugin Hoàng Hiệp CRM **2.20.372**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.372
+
+- Bản dịch EN / KO: bớt khóa tên riêng giữa câu (Mỹ Khê, sổ đỏ, tên dự án ở bản tiếng Anh) để câu dịch liền mạch, không bị cắt khúc.
 
 ## Có gì mới – 2.20.371
 

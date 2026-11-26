@@ -271,15 +271,7 @@ function hh_lang_phrases() {
 		'cầu Rồng'                      => array( 'Dragon Bridge', '용다리' ),
 		'cầu Trần Thị Lý'               => array( 'Tran Thi Ly Bridge', '쩐티리 다리' ),
 		'cầu Hòa Xuân'                  => array( 'Hoa Xuan Bridge', '호아쑤언 다리' ),
-		'bãi biển Mỹ Khê'               => array( 'My Khe Beach', '미케 비치' ),
-		'Tập đoàn Sun Group'            => array( 'Sun Group', 'Sun Group' ),
 		'Cá Chuồn Cồ'                   => array( 'Ca Chuon Co', 'Ca Chuon Co' ),
-		'Ngũ Hành Sơn'                  => array( 'Marble Mountains (Ngu Hanh Son)', '오행산(응우한선)' ),
-		'phố du lịch An Thượng'         => array( 'An Thuong tourist street', '안트엉 관광 거리' ),
-		'chợ Hàn'                       => array( 'Han Market', '한시장' ),
-		'sổ đỏ'                         => array( 'Red Book (land use right certificate)', '레드북(토지사용권 증서)' ),
-		'biển Mỹ Khê'                   => array( 'My Khe Beach', '미케 비치' ),
-		'Mỹ Khê'                        => array( 'My Khe', '미케' ),
 		'bán đảo Sơn Trà'               => array( 'Son Tra Peninsula', '선짜 반도' ),
 		'Bà Nà'                         => array( 'Ba Na Hills', '바나힐' ),
 		'phố cổ Hội An'                 => array( 'Hoi An Ancient Town', '호이안 올드타운' ),
@@ -339,7 +331,7 @@ add_action(
 			}
 		}
 		foreach ( hh_lang_brands() as $vi => $latin ) {
-			$phr[ $vi ] = array( 'en' => $latin, 'ko' => $latin );
+			$phr[ $vi ] = array( 'en' => '', 'ko' => $latin ); // Tiếng Anh: Google giữ nguyên tên Latin – không khóa để câu không bị cắt khúc.
 		}
 		$map = array();
 		foreach ( hh_lang_glossary() as $vi => list( $en, $ko ) ) {
@@ -370,7 +362,7 @@ add_action(
 		} );
 		// Cụm từ trong câu: thay phần khớp bằng <span translate="no">, phần còn lại để Google dịch.
 		var phr = <?php echo wp_json_encode( $phr, JSON_UNESCAPED_UNICODE ); ?>;
-		var keys = Object.keys( phr ).sort( function ( a, b ) { return b.length - a.length; } );
+		var keys = Object.keys( phr ).filter( function ( k ) { return phr[ k ][ tl ]; } ).sort( function ( a, b ) { return b.length - a.length; } );
 		if ( keys.length ) {
 			var re = new RegExp( '(' + keys.map( function ( k ) { return k.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' ); } ).join( '|' ) + ')', 'g' );
 			var w2 = document.createTreeWalker( document.body, NodeFilter.SHOW_TEXT ), list = [], m2;
