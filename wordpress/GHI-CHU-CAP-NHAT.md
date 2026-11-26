@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.53** + plugin Hoàng Hiệp CRM **2.20.386**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.53** + plugin Hoàng Hiệp CRM **2.20.387**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.387
+
+- Sửa lỗi trang /en/, /ko/ (trang giới thiệu) báo lỗi 500 từ bản 2.20.385: trang lớn (~1,5 MB) vượt giới hạn biểu thức chính quy; nay nâng giới hạn và nếu dịch lỗi thì vẫn trả trang gốc.
 
 ## Có gì mới – 2.20.386
 

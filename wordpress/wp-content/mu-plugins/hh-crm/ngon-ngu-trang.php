@@ -185,6 +185,18 @@ function hh_tl_translate_html( $html ) {
 	if ( '' === $html || false === stripos( $html, '<html' ) ) {
 		return $html;
 	}
+	// Lỗi bất kỳ khi dịch (VD trang quá lớn cho biểu thức chính quy): trả trang gốc thay vì lỗi 500.
+	try {
+		@ini_set( 'pcre.backtrack_limit', '10000000' ); // phpcs:ignore
+		$out = hh_tl_translate_html_run( (string) $html );
+		return is_string( $out ) && '' !== $out ? $out : $html;
+	} catch ( \Throwable $err ) {
+		return $html;
+	}
+}
+
+/** Phần dịch chính của hh_tl_translate_html(). */
+function hh_tl_translate_html_run( $html ) {
 	$tl = hh_tl_out();
 	$h  = static fn( $s ) => html_entity_decode( (string) $s, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
 	$e  = static fn( $s ) => htmlspecialchars( (string) $s, ENT_QUOTES | ENT_HTML5, 'UTF-8', false );
@@ -209,10 +221,16 @@ function hh_tl_translate_html( $html ) {
 		);
 	}
 
+	if ( ! is_string( $html ) ) {
+		return '';
+	}
 	// 2) Tách thẻ / chữ; dịch từng đoạn chữ, thuộc tính chữ; giữ liên kết nội bộ trong cùng ngôn ngữ.
 	$home  = home_url();
 	$hosts = preg_quote( (string) wp_parse_url( $home, PHP_URL_HOST ), '#' );
 	$parts = preg_split( '#(<!--.*?-->|<script\b.*?</script>|<style\b.*?</style>|<textarea\b.*?</textarea>|<svg\b.*?</svg>|<[^>]+>)#si', $html, -1, PREG_SPLIT_DELIM_CAPTURE );
+	if ( ! is_array( $parts ) ) {
+		return '';
+	}
 	$skip  = 0; // Đang trong vùng translate="no".
 	$stack = array();
 	foreach ( $parts as $i => $p ) {
@@ -301,6 +319,9 @@ function hh_tl_translate_html( $html ) {
 		$html
 	);
 
+	if ( ! is_string( $html ) ) {
+		return '';
+	}
 	// 4) Thẻ ngôn ngữ của trang.
 	$locale = 'ko' === $tl ? 'ko-KR' : 'en-US';
 	$html   = preg_replace( '#<html\b([^>]*)\blang=(["\'])[^"\']*\2#i', '<html$1lang="' . $locale . '"', $html, 1 );
