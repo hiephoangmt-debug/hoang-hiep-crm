@@ -1,0 +1,594 @@
+{
+ "(Theo thông tin đơn vị phân phối)": [
+  "(According to the distributor)",
+  "(분양 대행사 정보 기준)"
+ ],
+ "100 triệu (Studio/1PN/1PN+) · 200 triệu (2PN, 3PN) · 300 triệu (Duplex)": [
+  "100 million VND (Studio/1BR/1BR+) · 200 million VND (2BR, 3BR) · 300 million VND (Duplex)",
+  "1억 동(스튜디오/1베드룸/1베드룸+) · 2억 동(2베드룸, 3베드룸) · 3억 동(듀플렉스)"
+ ],
+ "15% (gồm đợt 1)": [
+  "15% (including installment 1)",
+  "15%(1회차 포함)"
+ ],
+ "1PN+": [
+  "1BR+",
+  "1베드룸+"
+ ],
+ "2PN+": [
+  "2BR+",
+  "2베드룸+"
+ ],
+ "30 tháng": [
+  "30 months",
+  "30개월"
+ ],
+ "33 m²": [
+  "33 m²",
+  "33 m²"
+ ],
+ "33,1 m²": [
+  "33.1 m²",
+  "33.1 m²"
+ ],
+ "39,1 m²": [
+  "39.1 m²",
+  "39.1 m²"
+ ],
+ "4,12 tỷ": [
+  "4.12 billion VND",
+  "41억 2천만 동"
+ ],
+ "4,53 tỷ": [
+  "4.53 billion VND",
+  "45억 3천만 동"
+ ],
+ "4,53 – 5,86 tỷ": [
+  "4.53 – 5.86 billion VND",
+  "45억 3천만 – 58억 6천만 동"
+ ],
+ "4,78 – 4,93 tỷ": [
+  "4.78 – 4.93 billion VND",
+  "47억 8천만 – 49억 3천만 동"
+ ],
+ "4,78 – 6,24 tỷ": [
+  "4.78 – 6.24 billion VND",
+  "47억 8천만 – 62억 4천만 동"
+ ],
+ "4,91 tỷ": [
+  "4.91 billion VND",
+  "49억 1천만 동"
+ ],
+ "4,91 – 6,85 tỷ": [
+  "4.91 – 6.85 billion VND",
+  "49억 1천만 – 68억 5천만 동"
+ ],
+ "41 m²": [
+  "41 m²",
+  "41 m²"
+ ],
+ "41,1 m²": [
+  "41.1 m²",
+  "41.1 m²"
+ ],
+ "43,2 m²": [
+  "43.2 m²",
+  "43.2 m²"
+ ],
+ "43,3 m²": [
+  "43.3 m²",
+  "43.3 m²"
+ ],
+ "46,2 m²": [
+  "46.2 m²",
+  "46.2 m²"
+ ],
+ "46,3 m²": [
+  "46.3 m²",
+  "46.3 m²"
+ ],
+ "46,4 m²": [
+  "46.4 m²",
+  "46.4 m²"
+ ],
+ "46,5 m²": [
+  "46.5 m²",
+  "46.5 m²"
+ ],
+ "5% (nộp ký quỹ khi bàn giao, CĐT trả lãi 8%/năm)": [
+  "5% (deposited in escrow at handover, the developer pays 8%/year interest)",
+  "5%(입주(인도) 시 예치, 시행사가 연 8% 이자 지급)"
+ ],
+ "5,36 tỷ": [
+  "5.36 billion VND",
+  "53억 6천만 동"
+ ],
+ "5,47 – 5,68 tỷ": [
+  "5.47 – 5.68 billion VND",
+  "54억 7천만 – 56억 8천만 동"
+ ],
+ "5,86 tỷ": [
+  "5.86 billion VND",
+  "58억 6천만 동"
+ ],
+ "5,94 – 6,08 tỷ": [
+  "5.94 – 6.08 billion VND",
+  "59억 4천만 – 60억 8천만 동"
+ ],
+ "5,94 – 6,09 tỷ": [
+  "5.94 – 6.09 billion VND",
+  "59억 4천만 – 60억 9천만 동"
+ ],
+ "5,97 – 6,00 tỷ": [
+  "5.97 – 6.00 billion VND",
+  "59억 7천만 – 60억 동"
+ ],
+ "55,1 m²": [
+  "55.1 m²",
+  "55.1 m²"
+ ],
+ "55,2 m²": [
+  "55.2 m²",
+  "55.2 m²"
+ ],
+ "6,16 – 6,36 tỷ": [
+  "6.16 – 6.36 billion VND",
+  "61억 6천만 – 63억 6천만 동"
+ ],
+ "6,24 tỷ": [
+  "6.24 billion VND",
+  "62억 4천만 동"
+ ],
+ "6,36 tỷ": [
+  "6.36 billion VND",
+  "63억 6천만 동"
+ ],
+ "6,46 – 6,85 tỷ": [
+  "6.46 – 6.85 billion VND",
+  "64억 6천만 – 68억 5천만 동"
+ ],
+ "6,47 – 6,56 tỷ": [
+  "6.47 – 6.56 billion VND",
+  "64억 7천만 – 65억 6천만 동"
+ ],
+ "6,73 tỷ": [
+  "6.73 billion VND",
+  "67억 3천만 동"
+ ],
+ "6,73 – 10,05 tỷ": [
+  "6.73 – 10.05 billion VND",
+  "67억 3천만 – 100억 5천만 동"
+ ],
+ "9 Lê Duẩn, phường Hải Châu, Đà Nẵng – cách cầu sông Hàn khoảng 300 m": [
+  "9 Le Duan, Hai Chau Ward, Da Nang – about 300 m from Han River Bridge",
+  "다낭 하이쩌우 동, 레주언 거리(Le Duan St.) 9번지 – 다낭 한강교에서 약 300 m"
+ ],
+ "9,73 tỷ": [
+  "9.73 billion VND",
+  "97억 3천만 동"
+ ],
+ "9,87 – 10,05 tỷ": [
+  "9.87 – 10.05 billion VND",
+  "98억 7천만 – 100억 5천만 동"
+ ],
+ "Bàn giao hoàn thiện theo bảng tiêu chuẩn của chủ đầu tư: trần thạch cao, sơn Dulux/Jotun; phòng ngủ lát gỗ công nghiệp; rèm 2 lớp; tủ bếp, mặt đá, bếp và hút mùi Hafele/Teka; thiết bị vệ sinh Toto/Grohe, vách tắm kính cường lực (nếu có), bình nóng lạnh Ariston/Ferroli; điều hòa Daikin/Mitsubishi/Panasonic (âm trần phòng khách, treo tường phòng ngủ); cửa chính gỗ chống cháy, khóa thông minh; lô gia lát gạch chống trơn, lan can kính cường lực (hoặc tương đương).": [
+  "Finished handover per the developer's standards list: gypsum ceilings, Dulux/Jotun paint; engineered wood floors in bedrooms; 2-layer curtains; kitchen cabinets, stone countertop, Hafele/Teka hob and range hood; Toto/Grohe sanitary ware, tempered glass shower screen (if any), Ariston/Ferroli water heater; Daikin/Mitsubishi/Panasonic air conditioning (ceiling-concealed in the living room, wall-mounted in bedrooms); fire-rated wooden main door, smart lock; anti-slip tiled loggia, tempered glass railing (or equivalent).",
+  "시행사 기준표에 따른 마감 인도: 석고 천장, Dulux/Jotun 페인트; 침실 엔지니어드 마루; 2중 커튼; 주방 수납장, 석재 상판, Hafele/Teka 쿡탑 및 레인지후드; Toto/Grohe 욕실 설비, 강화유리 샤워 칸막이(해당 시), Ariston/Ferroli 온수기; Daikin/Mitsubishi/Panasonic 에어컨(거실 천장 매립형, 침실 벽걸이형); 방화 목재 현관문, 스마트 도어락; 미끄럼 방지 타일 로지아, 강화유리 난간(또는 동급)."
+ ],
+ "Bể bơi bốn mùa Sun Solar Residence buổi sáng, phối cảnh chủ đầu tư": [
+  "Sun Solar Residence all-season pool in the morning, developer's rendering",
+  "아침의 Sun Solar Residence 사계절 수영장, 시행사 조감도"
+ ],
+ "Bể bơi bốn mùa Sun Solar Residence nhìn sông Hàn, phối cảnh chủ đầu tư": [
+  "Sun Solar Residence all-season pool overlooking the Han River, developer's rendering",
+  "다낭 한강이 보이는 Sun Solar Residence 사계절 수영장, 시행사 조감도"
+ ],
+ "Chiết khấu tổng 20% khi thanh toán sớm 95% trước 25/10/2026": [
+  "Total discount of 20% for 95% early payment before October 25, 2026",
+  "2026년 10월 25일 이전 95% 조기 납부 시 총 20% 할인"
+ ],
+ "Chiết khấu đến 20%": [
+  "Discounts up to 20%",
+  "최대 20% 할인"
+ ],
+ "Chính sách thanh toán sớm không áp dụng đồng thời với gói hỗ trợ lãi suất": [
+  "The early payment policy cannot be combined with the interest support package",
+  "조기 납부 정책은 이자 지원 패키지와 중복 적용되지 않습니다"
+ ],
+ "Chợ Hàn, cầu Rồng, Bảo tàng Điêu khắc Chăm": [
+  "Han Market, Dragon Bridge, Museum of Cham Sculpture",
+  "한시장, 용다리, 참 조각 박물관"
+ ],
+ "Chợ Hàn, phố đi bộ Bạch Đằng": [
+  "Han Market, Bach Dang walking street",
+  "한시장, 박당 보행자 거리"
+ ],
+ "Chủ đầu tư dự án Sun Solar Residence Đà Nẵng là ai?": [
+  "Who is the developer of Sun Solar Residence Da Nang?",
+  "Sun Solar Residence Da Nang의 시행사는 누구인가요?"
+ ],
+ "Căn 1PN · 41 – 43,2 m²": [
+  "1BR unit · 41 – 43.2 m²",
+  "1베드룸 · 41 – 43.2 m²"
+ ],
+ "Căn 1PN+ · 41 – 55,2 m²": [
+  "1BR+ unit · 41 – 55.2 m²",
+  "1베드룸+ · 41 – 55.2 m²"
+ ],
+ "Căn 2PN · 55,1 – 55,2 m²": [
+  "2BR unit · 55.1 – 55.2 m²",
+  "2베드룸 · 55.1 – 55.2 m²"
+ ],
+ "Căn 2PN+": [
+  "2BR+ unit",
+  "2베드룸+"
+ ],
+ "Căn 2PN+ · Khoảng 83,5 m²": [
+  "2BR+ unit · About 83.5 m²",
+  "2베드룸+ · 약 83.5 m²"
+ ],
+ "Căn 3PN · Khoảng 99,4 m²": [
+  "3BR unit · About 99.4 m²",
+  "3베드룸 · 약 99.4 m²"
+ ],
+ "Căn hộ cao cấp; quy mô khoảng 256 căn hộ.": [
+  "Premium apartments; about 256 apartments in total.",
+  "고급 아파트이며, 약 256세대 규모입니다."
+ ],
+ "Căn hộ Đà Nẵng sắp bàn giao 2026 – 2027: hơn 20 dự án, mốc nhận nhà từng dự án": [
+  "Da Nang apartments handing over in 2026 – 2027: more than 20 projects, handover milestones for each",
+  "2026 – 2027년 입주(인도) 예정 다낭 아파트: 20여 개 프로젝트, 프로젝트별 입주 일정"
+ ],
+ "Cầu quay sông Hàn (khoảng 300 m)": [
+  "Han River swing bridge (about 300 m)",
+  "다낭 한강 회전교(약 300 m)"
+ ],
+ "Cầu sông Hàn": [
+  "Han River Bridge",
+  "다낭 한강교"
+ ],
+ "Dự kiến 28/04/2027": [
+  "Expected April 28, 2027",
+  "2027년 4월 28일 예정"
+ ],
+ "Dự kiến 30/04/2029": [
+  "Expected April 30, 2029",
+  "2029년 4월 30일 예정"
+ ],
+ "Dự kiến ngày 7 sau hạn đợt 2": [
+  "Expected on day 7 after the installment 2 deadline",
+  "2회차 마감 후 7일째 예정"
+ ],
+ "Dự kiến nhận căn sử dụng (Sun Early Key)": [
+  "Expected unit hand-over for use (Sun Early Key)",
+  "세대 사용 인도 예정(Sun Early Key)"
+ ],
+ "Dự án tọa lạc tại 9 Lê Duẩn, phường Hải Châu, Đà Nẵng – cách cầu sông Hàn khoảng 300 m.": [
+  "The project is located at 9 Le Duan, Hai Chau Ward, Da Nang – about 300 m from Han River Bridge.",
+  "이 프로젝트는 다낭 하이쩌우 동, 레주언 거리(Le Duan St.) 9번지에 위치합니다 – 다낭 한강교에서 약 300 m입니다."
+ ],
+ "Flycam công trường mới nhất: tòa tháp đang thi công phần thân, có lưới bao che, cần trục tháp đang hoạt động": [
+  "Latest drone footage of the site: the tower's superstructure under construction, with protective netting and tower cranes in operation",
+  "최신 현장 드론 촬영: 보호망을 설치하고 타워크레인이 가동 중인 타워 골조 공사"
+ ],
+ "Giá bán Sun Solar Residence Đà Nẵng hiện nay bao nhiêu?": [
+  "What is the current price of Sun Solar Residence Da Nang?",
+  "현재 Sun Solar Residence Da Nang의 분양가는 얼마인가요?"
+ ],
+ "Gym, yoga, spa": [
+  "Gym, yoga, spa",
+  "헬스장, 요가, 스파"
+ ],
+ "KPBT + VAT phần 5% còn lại": [
+  "Maintenance fund + VAT on the remaining 5%",
+  "관리기금 + 잔여 5%분 VAT"
+ ],
+ "Khi cấp giấy chứng nhận": [
+  "When the certificate is issued",
+  "증서 발급 시"
+ ],
+ "Khi ký": [
+  "Upon signing",
+  "체결 시"
+ ],
+ "Khi nào Sun Solar Residence Đà Nẵng bàn giao?": [
+  "When will Sun Solar Residence Da Nang be handed over?",
+  "Sun Solar Residence Da Nang은 언제 입주(인도)하나요?"
+ ],
+ "Khoản 5% ký quỹ cấp sổ: chủ đầu tư trả lãi 8%/năm đến khi nhận giấy chứng nhận": [
+  "5% certificate escrow deposit: the developer pays 8%/year interest until the certificate is issued",
+  "증서 발급 예치금 5%: 증서 수령 시까지 시행사가 연 8% 이자 지급"
+ ],
+ "Khoảng 256 căn hộ": [
+  "About 256 apartments",
+  "아파트 약 256세대"
+ ],
+ "Khu gym & yoga Sun Solar Residence, phối cảnh chủ đầu tư": [
+  "Sun Solar Residence gym & yoga area, developer's rendering",
+  "Sun Solar Residence 헬스장 및 요가 공간, 시행사 조감도"
+ ],
+ "Khu spa Sun Solar Residence, phối cảnh chủ đầu tư": [
+  "Sun Solar Residence spa area, developer's rendering",
+  "Sun Solar Residence 스파 공간, 시행사 조감도"
+ ],
+ "Không vay: chiết khấu thêm 5%, giãn tiến độ đến 33 tháng (giai đoạn 70% – 30%)": [
+  "No loan: an additional 5% discount, payment schedule extended up to 33 months (70% – 30% stage)",
+  "대출 미이용 시: 5% 추가 할인, 납부 일정 최대 33개월 연장(70% – 30% 단계)"
+ ],
+ "Ký HĐMB": [
+  "Sign the SPA",
+  "매매계약서(SPA) 체결"
+ ],
+ "Lõi trung tâm Hải Châu, trên trục Lê Duẩn – cách cầu sông Hàn khoảng 300 m": [
+  "In the heart of central Hai Chau, on the Le Duan axis – about 300 m from Han River Bridge",
+  "하이쩌우 도심 핵심부, 레주언 축 – 다낭 한강교에서 약 300 m"
+ ],
+ "Miễn phí dịch vụ quản lý căn hộ": [
+  "Free apartment management service",
+  "아파트 관리 서비스 무료"
+ ],
+ "Miễn phí dịch vụ quản lý căn hộ 3 năm từ ngày bàn giao chính thức (không gồm điện, nước, gửi xe… của bên thứ ba)": [
+  "Free apartment management service for 3 years from the official handover date (excluding third-party electricity, water, parking, etc.)",
+  "공식 입주(인도)일로부터 3년간 아파트 관리 서비스 무료(제3자의 전기, 수도, 주차 등 제외)"
+ ],
+ "Mua Sun Solar Residence Đà Nẵng có được hỗ trợ vay ngân hàng không?": [
+  "Is bank loan support available when buying at Sun Solar Residence Da Nang?",
+  "Sun Solar Residence Da Nang 매입 시 은행 대출 지원이 되나요?"
+ ],
+ "Mặt bằng tầng 5 Sun Solar Residence: sinh hoạt cộng đồng, thư viện & kids club, spa, phòng thư giãn, gym & yoga · bấm để phóng to.": [
+  "5th-floor plan of Sun Solar Residence: community room, library & kids club, spa, relaxation room, gym & yoga · click to enlarge.",
+  "Sun Solar Residence 5층 평면도: 커뮤니티룸, 도서관 및 키즈 클럽, 스파, 휴식실, 헬스장 및 요가 · 클릭하면 확대됩니다."
+ ],
+ "Mỗi đợt 10%": [
+  "10% per installment",
+  "회차당 10%"
+ ],
+ "Mỗi đợt 5%": [
+  "5% per installment",
+  "회차당 5%"
+ ],
+ "Ngày 15 kể từ ký HĐTHNV": [
+  "Day 15 from signing the letter-of-intent agreement",
+  "구매 의향 계약 체결일로부터 15일째"
+ ],
+ "Ngày 375": [
+  "Day 375",
+  "375일째"
+ ],
+ "Ngày 495, 615, 735, 855, 975": [
+  "Days 495, 615, 735, 855, 975",
+  "495일, 615일, 735일, 855일, 975일째"
+ ],
+ "Ngày 75, 135, 195, 285": [
+  "Days 75, 135, 195, 285",
+  "75일, 135일, 195일, 285일째"
+ ],
+ "Ngân hàng theo chỉ định của chủ đầu tư, cho vay tối đa 70% giá trị căn hộ (gồm VAT). Chủ đầu tư hỗ trợ lãi suất tối đa 30 tháng kể từ lần giải ngân đầu tiên, không muộn hơn 30/11/2028; ân hạn nợ gốc theo thời gian hỗ trợ lãi suất; miễn phí trả nợ trước hạn trong thời gian hỗ trợ. Sau thời gian hỗ trợ: lãi suất cơ sở + biên độ theo ngân hàng. Tiến độ vay: đặt cọc → 15% (ngày 15) → ký HĐMB → ngân hàng giải ngân đến 70% → 10% (ngày 75) → KPBT + VAT 5% khi bàn giao → 5% khi nhận sổ.": [
+  "Banks designated by the developer lend up to 70% of the apartment value (including VAT). The developer supports interest for up to 30 months from the first disbursement, no later than November 30, 2028; the principal grace period follows the interest support period; no early repayment fee during the support period. After the support period: base rate + margin per the bank. Loan schedule: deposit → 15% (day 15) → sign the SPA → bank disburses up to 70% → 10% (day 75) → maintenance fund + 5% VAT at handover → 5% upon receiving the Pink Book.",
+  "시행사 지정 은행이 아파트 가격(VAT 포함)의 최대 70%까지 대출합니다. 시행사는 최초 대출 실행일로부터 최대 30개월간(2028년 11월 30일 이전까지) 이자를 지원하며, 원금 상환 유예는 이자 지원 기간과 동일하고, 지원 기간 중 중도상환수수료가 면제됩니다. 지원 기간 이후: 은행 기준금리 + 가산금리. 대출 일정: 계약금 → 15%(15일째) → 매매계약서(SPA) 체결 → 은행 최대 70% 대출 실행 → 10%(75일째) → 입주(인도) 시 관리기금 + VAT 5% → 핑크북 수령 시 5%."
+ ],
+ "Nhận bảng giá Sun Solar Residence": [
+  "Get the Sun Solar Residence price list",
+  "Sun Solar Residence 분양가표 받기"
+ ],
+ "Nhận căn sử dụng (Sun Early Key)": [
+  "Unit hand-over for use (Sun Early Key)",
+  "세대 사용 인도(Sun Early Key)"
+ ],
+ "Nhận căn sử dụng dự kiến 28/04/2027": [
+  "Expected unit hand-over for use April 28, 2027",
+  "2027년 4월 28일 세대 사용 인도 예정"
+ ],
+ "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu.": [
+  "Listed prices include VAT & the maintenance fund, before discounts.",
+  "공시 가격은 VAT·관리기금 포함, 할인 전 가격입니다."
+ ],
+ "Pháp lý và hình thức sở hữu của Sun Solar Residence Đà Nẵng thế nào?": [
+  "What is the legal status and form of ownership of Sun Solar Residence Da Nang?",
+  "Sun Solar Residence Da Nang의 법적 상태와 소유 형태는 어떻게 되나요?"
+ ],
+ "Phòng gym Sun Solar Residence nhìn thành phố, phối cảnh chủ đầu tư": [
+  "Sun Solar Residence gym with city views, developer's rendering",
+  "도시 전망의 Sun Solar Residence 헬스장, 시행사 조감도"
+ ],
+ "Phố đi bộ Bạch Đằng ven sông Hàn": [
+  "Bach Dang walking street along the Han River",
+  "다낭 한강변 박당 보행자 거리"
+ ],
+ "Quà tặng an cư: chiết khấu 5% trên giá trị căn hộ chưa gồm VAT & KPBT": [
+  "Home-settling gift: 5% discount on the apartment value excluding VAT & the maintenance fund",
+  "입주 축하 혜택: VAT·관리기금 제외 아파트 가격의 5% 할인"
+ ],
+ "SUN SOLAR RESIDENCE": [
+  "SUN SOLAR RESIDENCE",
+  "SUN SOLAR RESIDENCE"
+ ],
+ "Studio · 33 – 39,1 m²": [
+  "Studio · 33 – 39.1 m²",
+  "스튜디오 · 33 – 39.1 m²"
+ ],
+ "Sun Early Key: thanh toán tối thiểu 70% (gồm VAT) là được nhận căn để sử dụng, khai thác cho thuê – dự kiến 28/04/2027": [
+  "Sun Early Key: pay at least 70% (including VAT) to receive the unit for use and rental – expected April 28, 2027",
+  "Sun Early Key: 최소 70%(VAT 포함) 납부 시 세대를 인도받아 사용·임대 가능 – 2027년 4월 28일 예정"
+ ],
+ "Sun Solar Residence": [
+  "Sun Solar Residence",
+  "Sun Solar Residence"
+ ],
+ "Sun Solar Residence nằm trên đường Lê Duẩn, khu lõi trung tâm hành chính – thương mại của Đà Nẵng, cách cầu sông Hàn khoảng 300 m, đi bộ ra bờ sông Hàn, phố Bạch Đằng, chợ Hàn.": [
+  "Sun Solar Residence is located on Le Duan Street, in the core administrative – commercial center of Da Nang, about 300 m from Han River Bridge, within walking distance of the Han River bank, Bach Dang Street and Han Market.",
+  "Sun Solar Residence는 다낭의 행정·상업 중심 핵심부인 레주언 거리에 위치하며, 다낭 한강교에서 약 300 m 거리로 다낭 한강변, 박당 거리, 한시장까지 걸어서 갈 수 있습니다."
+ ],
+ "Sun Solar Residence Đà Nẵng có những loại sản phẩm nào?": [
+  "What property types does Sun Solar Residence Da Nang offer?",
+  "Sun Solar Residence Da Nang에는 어떤 상품이 있나요?"
+ ],
+ "Sun Solar Residence Đà Nẵng nằm ở đâu?": [
+  "Where is Sun Solar Residence Da Nang located?",
+  "Sun Solar Residence Da Nang은 어디에 있나요?"
+ ],
+ "Sun Solar Residence Đà Nẵng – 9 Lê Duẩn, phường Hải Châu, Đà Nẵng – cách cầu sông Hàn khoảng 300 m. Thông tin, hình ảnh tổng hợp từ tài liệu chủ đầu tư, mang tính tham khảo; giá và chính sách có thể thay đổi. Tư vấn: Hoàng Hiệp – 0904 567 009.": [
+  "Sun Solar Residence Da Nang – 9 Le Duan, Hai Chau Ward, Da Nang – about 300 m from Han River Bridge. Information and images are compiled from developer documents and are for reference only; prices and policies may change. Advice: Hoang Hiep – 0904 567 009.",
+  "Sun Solar Residence Da Nang – 다낭 하이쩌우 동, 레주언 거리(Le Duan St.) 9번지 – 다낭 한강교에서 약 300 m. 정보와 이미지는 시행사 자료를 바탕으로 정리한 참고용이며, 가격과 정책은 변경될 수 있습니다. 상담: 호앙 히엡 – 0904 567 009."
+ ],
+ "Sun Solar Residence – tòa căn hộ 20 tầng trên đường Lê Duẩn bên sông Hàn lúc hoàng hôn, phối cảnh chủ đầu tư": [
+  "Sun Solar Residence – a 20-floor apartment tower on Le Duan Street by the Han River at sunset, developer's rendering",
+  "Sun Solar Residence – 해 질 녘 다낭 한강변 레주언 거리의 20층 아파트 타워, 시행사 조감도"
+ ],
+ "Sân thượng thư giãn Sun Solar Residence nhìn thành phố về đêm, phối cảnh chủ đầu tư": [
+  "Sun Solar Residence relaxation terrace overlooking the city at night, developer's rendering",
+  "야경이 보이는 Sun Solar Residence 휴식 테라스, 시행사 조감도"
+ ],
+ "Sảnh spa Sun Solar Residence, phối cảnh chủ đầu tư": [
+  "Sun Solar Residence spa lobby, developer's rendering",
+  "Sun Solar Residence 스파 로비, 시행사 조감도"
+ ],
+ "Số lượng căn ít (khoảng 256 căn) – dòng căn hộ cao cấp giới hạn": [
+  "Small number of units (about 256) – a limited premium apartment line",
+  "적은 세대수(약 256세대) – 한정된 고급 아파트"
+ ],
+ "Sở hữu lâu dài (100% căn hộ)": [
+  "Freehold (100% of apartments)",
+  "영구 소유(아파트 100%)"
+ ],
+ "Sở hữu lâu dài (100% căn hộ).": [
+  "Freehold (100% of apartments).",
+  "영구 소유(아파트 100%)입니다."
+ ],
+ "Thanh toán sớm hơn tiến độ bằng vốn tự có: hưởng lãi 8%/năm trên số tiền và số ngày trả trước": [
+  "Paying ahead of schedule with your own funds: earn 8%/year interest on the amount and number of days paid in advance",
+  "자기자금으로 일정보다 먼저 납부 시: 선납 금액과 선납 일수에 대해 연 8% 이자 지급"
+ ],
+ "Thanh toán sớm tháng 12/2026 (hạn 25/12): 95% chiết khấu 9% · 70% chiết khấu 3,5% · 50% chiết khấu 1,5%": [
+  "Early payment in December 2026 (deadline December 25): 95% discount 9% · 70% discount 3.5% · 50% discount 1.5%",
+  "2026년 12월 조기 납부(마감 12월 25일): 95% 납부 9% 할인 · 70% 납부 3.5% 할인 · 50% 납부 1.5% 할인"
+ ],
+ "Tháp căn hộ cao cấp của Sun Group trên đường Lê Duẩn, lõi trung tâm Hải Châu, cách cầu quay sông Hàn khoảng 300 m: 1 tòa 20 tầng, khoảng 256 căn hộ hướng sông Hàn.": [
+  "Sun Group's premium apartment tower on Le Duan Street, in the heart of central Hai Chau, about 300 m from the Han River swing bridge: 1 tower of 20 floors, about 256 apartments facing the Han River.",
+  "하이쩌우 도심 핵심부 레주언 거리에 위치한 Sun Group의 고급 아파트 타워로, 다낭 한강 회전교에서 약 300 m 거리입니다: 20층 타워 1개 동, 다낭 한강 방향 아파트 약 256세대."
+ ],
+ "Thông thủy khoảng 33 – 99 m² (Studio – 3PN)": [
+  "Net area about 33 – 99 m² (Studio – 3BR)",
+  "전용면적 약 33 – 99 m²(스튜디오 – 3베드룸)"
+ ],
+ "Thông thủy khoảng 33 – 99 m² (Studio – 3PN). Bấm vào ảnh để xem mặt bằng lớn.": [
+  "Net area about 33 – 99 m² (Studio – 3BR). Click the image to view the large floor plan.",
+  "전용면적 약 33 – 99 m²(스튜디오 – 3베드룸). 이미지를 클릭하면 큰 평면도를 보실 수 있습니다."
+ ],
+ "Thư viện & kids club Sun Solar Residence, phối cảnh chủ đầu tư": [
+  "Sun Solar Residence library & kids club, developer's rendering",
+  "Sun Solar Residence 도서관 및 키즈 클럽, 시행사 조감도"
+ ],
+ "Thư viện cư dân Sun Solar Residence, phối cảnh chủ đầu tư": [
+  "Sun Solar Residence residents' library, developer's rendering",
+  "Sun Solar Residence 입주민 도서관, 시행사 조감도"
+ ],
+ "Toàn cảnh Sun Solar Residence nhìn sông Hàn, cầu sông Hàn và cầu Rồng, phối cảnh chủ đầu tư": [
+  "Panoramic view of Sun Solar Residence overlooking the Han River, Han River Bridge and Dragon Bridge, developer's rendering",
+  "다낭 한강, 다낭 한강교, 용다리를 바라보는 Sun Solar Residence 전경, 시행사 조감도"
+ ],
+ "Tình trạng hiện tại: đang mở bán. Thời gian bàn giao: nhận căn sử dụng dự kiến 28/04/2027 (Sun Early Key, đã thanh toán tối thiểu 70%); bàn giao chính thức theo tiến độ thanh toán chuẩn dự kiến 30/04/2029.": [
+  "Current status: on sale. Handover: unit hand-over for use expected April 28, 2027 (Sun Early Key, at least 70% paid); official handover under the standard payment schedule expected April 30, 2029.",
+  "현재 상태: 분양 중. 입주(인도) 시기: 세대 사용 인도 2027년 4월 28일 예정(Sun Early Key, 최소 70% 납부 시); 표준 납부 일정에 따른 공식 입주(인도)는 2029년 4월 30일 예정입니다."
+ ],
+ "Tích điểm hội viên Sun Signature 0,7% – 2% giá trị hợp đồng theo hạng (dùng trong hệ sinh thái Sun Group)": [
+  "Sun Signature membership points of 0.7% – 2% of the contract value depending on tier (usable within the Sun Group ecosystem)",
+  "등급에 따라 계약 금액의 0.7% – 2% Sun Signature 회원 포인트 적립(Sun Group 생태계 내 사용)"
+ ],
+ "Tòa tháp 20 tầng với mặt bằng tầng điển hình từ tầng 7 đến tầng 19, bố trí để từng căn đều đón sáng tự nhiên và hướng ra sông Hàn hoặc thành phố. Cơ cấu sản phẩm từ Studio (khoảng 33 – 39 m²) đến căn 3 phòng ngủ (khoảng 99,4 m²), phần lớn căn hướng trực diện sông Hàn.": [
+  "A 20-floor tower with typical floor plans from floor 7 to floor 19, laid out so that every unit gets natural light and faces the Han River or the city. The product mix ranges from studios (about 33 – 39 m²) to 3-bedroom units (about 99.4 m²), with most units directly facing the Han River.",
+  "7층부터 19층까지 기준층 평면으로 구성된 20층 타워로, 모든 세대가 자연 채광을 받고 다낭 한강 또는 도시를 바라보도록 배치되었습니다. 상품은 스튜디오(약 33 – 39 m²)부터 3베드룸(약 99.4 m²)까지이며, 대부분 세대가 다낭 한강을 정면으로 바라봅니다."
+ ],
+ "Tầm nhìn hướng sông Hàn, gần phố đi bộ Bạch Đằng, chợ Hàn": [
+  "Views toward the Han River, near Bach Dang walking street and Han Market",
+  "다낭 한강 전망, 박당 보행자 거리와 한시장 인근"
+ ],
+ "Tầng 20": [
+  "Floor 20",
+  "20층"
+ ],
+ "Tầng 20 · bấm để phóng to.": [
+  "Floor 20 · click to enlarge.",
+  "20층 · 클릭하면 확대됩니다."
+ ],
+ "Tầng 6 kèm diện tích từng căn": [
+  "Floor 6 with the area of each unit",
+  "6층 및 세대별 면적"
+ ],
+ "Tầng 6 kèm diện tích từng căn · bấm để phóng to.": [
+  "Floor 6 with the area of each unit · click to enlarge.",
+  "6층 및 세대별 면적 · 클릭하면 확대됩니다."
+ ],
+ "Tầng điển hình 7 – 19": [
+  "Typical floors 7 – 19",
+  "기준층 7 – 19층"
+ ],
+ "Tầng điển hình 7 – 19 · bấm để phóng to.": [
+  "Typical floors 7 – 19 · click to enlarge.",
+  "기준층 7 – 19층 · 클릭하면 확대됩니다."
+ ],
+ "Tổng chiết khấu khi thanh toán sớm 95% (trước 25/10/2026)": [
+  "Total discount for 95% early payment (before October 25, 2026)",
+  "95% 조기 납부 시 총 할인(2026년 10월 25일 이전)"
+ ],
+ "Từ 4,12 tỷ. Giá và chính sách thay đổi theo từng đợt mở bán, vị trí căn. Gọi hoặc nhắn Zalo 0904 567 009 để nhận bảng giá, lịch thanh toán và rổ hàng mới nhất.": [
+  "From 4.12 billion VND. Prices and policies change with each sales phase and unit location. Call or message Zalo 0904 567 009 for the price list, payment schedule and latest available units.",
+  "41억 2천만 동부터입니다. 가격과 정책은 분양 차수와 세대 위치에 따라 달라집니다. 분양가표, 납부 일정 및 최신 매물 목록은 전화 또는 Zalo 0904 567 009로 문의해 주십시오."
+ ],
+ "Vay tối đa, hỗ trợ lãi suất đến 30 tháng": [
+  "Maximum loan, interest support for up to 30 months",
+  "최대 대출, 최대 30개월 이자 지원"
+ ],
+ "Vị trí Sun Solar Residence trên đường Lê Duẩn, gần cầu sông Hàn, sơ đồ chủ đầu tư": [
+  "Location of Sun Solar Residence on Le Duan Street, near Han River Bridge, developer's map",
+  "다낭 한강교 인근 레주언 거리의 Sun Solar Residence 위치, 시행사 지도"
+ ],
+ "Xem toàn bộ album (9 ảnh)": [
+  "View the full album (9 photos)",
+  "전체 앨범 보기(사진 9장)"
+ ],
+ "hỗ trợ lãi suất 0%": [
+  "0% interest support",
+  "0% 이자 지원"
+ ],
+ "từ 4,12 tỷ": [
+  "from 4.12 billion VND",
+  "41억 2천만 동부터"
+ ],
+ "ân hạn nợ gốc": [
+  "principal grace period",
+  "원금 상환 유예"
+ ],
+ "Đã thanh toán tối thiểu 70%": [
+  "At least 70% paid",
+  "최소 70% 납부 완료"
+ ],
+ "Đợt 1 – ký HĐ thực hiện nguyện vọng": [
+  "Installment 1 – sign the letter-of-intent agreement",
+  "1회차 – 구매 의향 계약 체결"
+ ],
+ "Đợt 13 – bàn giao chính thức": [
+  "Installment 13 – official handover",
+  "13회차 – 공식 입주(인도)"
+ ],
+ "Đợt 3 → 6": [
+  "Installments 3 → 6",
+  "3 → 6회차"
+ ],
+ "Đợt 7": [
+  "Installment 7",
+  "7회차"
+ ],
+ "Đợt 8 → 12": [
+  "Installments 8 → 12",
+  "8 → 12회차"
+ ],
+ "Đợt cuối – nhận sổ": [
+  "Final installment – receive the Pink Book",
+  "마지막 회차 – 핑크북 수령"
+ ],
+ "✔ Đang mở bán · bàn giao nhận căn sử dụng dự kiến 28/04/2027": [
+  "✔ On sale · expected unit hand-over for use April 28, 2027",
+  "✔ 분양 중 · 2027년 4월 28일 세대 사용 인도 예정"
+ ]
+}

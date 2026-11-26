@@ -1,31 +1,531 @@
 {
+ "(gọi/Zalo) để nhận bảng hàng đầy đủ, phiếu tính giá theo từng phương án thanh toán, chính sách mới nhất và ảnh chỉ vị trí căn trên mặt bằng.": [
+  "(call/Zalo) to receive the full list of available units, price quotes for each payment option, the latest sales policy and images showing the unit's location on the floor plan.",
+  "(전화/Zalo)로 문의하시면 전체 매물 목록, 납부 방식별 가격 산정표, 최신 분양 정책 및 평면도상 세대 위치 이미지를 받아보실 수 있습니다."
+ ],
+ "03 tháng": [
+  "3 months",
+  "3개월"
+ ],
+ "1 + phòng đa năng": [
+  "1 + multipurpose room",
+  "1 + 다용도실"
+ ],
+ "1 năm": [
+  "1 year",
+  "1년"
+ ],
+ "1 phòng ngủ": [
+  "1 bedroom",
+  "1베드룸"
+ ],
+ "100 m²": [
+  "100 m²",
+  "100 m²"
+ ],
+ "100 triệu": [
+  "100 million VND",
+  "1억 동"
+ ],
+ "100 triệu/căn": [
+  "100 million VND/unit",
+  "세대당 1억 동"
+ ],
+ "1PN": [
+  "1BR",
+  "1베드룸"
+ ],
+ "2 phòng ngủ": [
+  "2 bedrooms",
+  "2베드룸"
+ ],
+ "24 tháng": [
+  "24 months",
+  "24개월"
+ ],
+ "265 căn hộ": [
+  "265 apartments",
+  "아파트 265세대"
+ ],
+ "2PN": [
+  "2BR",
+  "2베드룸"
+ ],
+ "3 năm": [
+  "3 years",
+  "3년"
+ ],
+ "3 phòng ngủ": [
+  "3 bedrooms",
+  "3베드룸"
+ ],
+ "3PN": [
+  "3BR",
+  "3베드룸"
+ ],
+ "4 phòng ngủ": [
+  "4 bedrooms",
+  "4베드룸"
+ ],
+ "4 tầng": [
+  "4 floors",
+  "4층"
+ ],
+ "50 năm": [
+  "50-year leasehold",
+  "50년 소유"
+ ],
+ "50 triệu": [
+  "50 million VND",
+  "5,000만 동"
+ ],
+ "60 tháng": [
+  "60 months",
+  "60개월"
+ ],
+ "600 m²": [
+  "600 m²",
+  "600 m²"
+ ],
+ "70 m²": [
+  "70 m²",
+  "70 m²"
+ ],
+ "8%/năm": [
+  "8%/year",
+  "연 8%"
+ ],
+ "80 m²": [
+  "80 m²",
+  "80 m²"
+ ],
+ "An ninh 24/7": [
+  "24/7 security",
+  "24시간 보안"
+ ],
+ "An)": [
+  "An)",
+  "An)"
+ ],
+ "BRG Đà Nẵng Golf Resort": [
+  "BRG Da Nang Golf Resort",
+  "BRG Da Nang Golf Resort"
+ ],
+ "Biển An Bàng, Cửa Đại": [
+  "An Bang and Cua Dai beaches",
+  "안방 해변, 끄어다이 해변"
+ ],
+ "Biển Hà My": [
+  "Ha My Beach",
+  "하미 해변"
+ ],
+ "Biển Hà My, biển Non Nước": [
+  "Ha My Beach, Non Nuoc Beach",
+  "하미 해변, 논느억 해변"
+ ],
+ "Biển Mỹ Khê": [
+  "My Khe Beach",
+  "미케 비치"
+ ],
+ "Biển Mỹ Khê, biển Non Nước": [
+  "My Khe Beach, Non Nuoc Beach",
+  "미케 비치, 논느억 해변"
+ ],
+ "Biển Nam Hội An": [
+  "Nam Hoi An Beach",
+  "남호이안 해변"
+ ],
+ "Biển Nguyễn Tất Thành, Xuân Thiều": [
+  "Nguyen Tat Thanh beach, Xuan Thieu Beach",
+  "응우옌떳타인 해변, 쑤언티에우 해변"
+ ],
+ "Biển Non Nước, biển Mỹ Khê": [
+  "Non Nuoc Beach, My Khe Beach",
+  "논느억 해변, 미케 비치"
+ ],
+ "Biển Xuân Thiều, Nam Ô": [
+  "Xuan Thieu and Nam O beaches",
+  "쑤언티에우 해변, 남오 해변"
+ ],
+ "Biệt thự (tin rao)": [
+  "Villa (listing)",
+  "빌라(매물 광고)"
+ ],
+ "Biệt thự / Villa": [
+  "Villa",
+  "빌라"
+ ],
+ "Biệt thự 3PN (tin rao)": [
+  "3BR villa (listing)",
+  "3베드룸 빌라(매물 광고)"
+ ],
+ "Biệt thự biển": [
+  "Beach villa",
+  "해변 빌라"
+ ],
+ "Biệt thự golf, shop villa, shophouse": [
+  "Golf villas, shop villas, shophouses",
+  "골프 빌라, 샵 빌라, 샵하우스"
+ ],
+ "Biệt thự nghỉ dưỡng ven biển": [
+  "Seaside resort villas",
+  "해변 리조트 빌라"
+ ],
+ "Biệt thự sân golf": [
+  "Golf course villas",
+  "골프장 빌라"
+ ],
+ "Biệt thự đơn lập": [
+  "Detached villa",
+  "단독 빌라"
+ ],
+ "Biệt thự đơn lập trên đồi, liền kề": [
+  "Hillside detached villas, townhouses",
+  "언덕 위 단독 빌라, 타운하우스"
+ ],
+ "Biệt thự, nhà phố liền kề": [
+  "Villas, townhouses",
+  "빌라, 타운하우스"
+ ],
+ "Block đất nền": [
+  "Land plot block",
+  "토지(필지) 블록"
+ ],
  "Bàn giao": [
   "Handover",
   "입주(인도)"
+ ],
+ "Bàn giao (dự kiến)": [
+  "Handover (expected)",
+  "입주(인도) 예정"
+ ],
+ "Bán đảo Sơn Trà": [
+  "Son Tra Peninsula",
+  "선짜 반도"
+ ],
+ "Bán đảo Sơn Trà, chùa Linh Ứng": [
+  "Son Tra Peninsula, Linh Ung Pagoda",
+  "선짜 반도, 린응 사원"
+ ],
+ "Bãi biển": [
+  "Beach",
+  "해변"
+ ],
+ "Bãi biển Mỹ Khê": [
+  "My Khe Beach",
+  "미케 비치"
+ ],
+ "Bãi biển Non Nước – Mỹ Khê": [
+  "Non Nuoc – My Khe Beach",
+  "논느억 – 미케 비치"
  ],
  "Bản sao văn bản pháp lý: nhắn Zalo 0904 567 009 để nhận.": [
   "Copies of the legal documents: message Zalo 0904 567 009 to receive them.",
   "법적 서류 사본: Zalo 0904 567 009로 메시지를 보내 주시면 받아보실 수 있습니다."
  ],
+ "Bảng giá": [
+  "Price list",
+  "분양가표"
+ ],
+ "Bảng giá & chính sách": [
+  "Price list & sales policy",
+  "분양가표·분양 정책"
+ ],
+ "Bảng giá từng căn, từng tầng": [
+  "Price list by unit and floor",
+  "세대별·층별 분양가표"
+ ],
+ "Bến du thuyền": [
+  "Marina",
+  "마리나"
+ ],
+ "Bệnh viện Đà Nẵng": [
+  "Da Nang Hospital",
+  "다낭 병원"
+ ],
+ "CAPITAL SQUARE ĐÀ": [
+  "CAPITAL SQUARE DA NANG",
+  "CAPITAL SQUARE DA NANG"
+ ],
+ "Capital Square Đà Nẵng": [
+  "Capital Square Da Nang",
+  "Capital Square Da Nang"
+ ],
+ "Capital Square Đà Nẵng – Khối LAT 4-5": [
+  "Capital Square Da Nang – Block LAT 4-5",
+  "Capital Square Da Nang – LAT 4-5 블록"
+ ],
+ "Capital Square Đà Nẵng – Khối MAT 5-6": [
+  "Capital Square Da Nang – Block MAT 5-6",
+  "Capital Square Da Nang – MAT 5-6 블록"
+ ],
+ "Capital Square Đà Nẵng – Tòa": [
+  "Capital Square Da Nang – Tower",
+  "Capital Square Da Nang – 타워"
+ ],
+ "Capital Square Đà Nẵng – Tòa 2.1": [
+  "Capital Square Da Nang – Tower 2.1",
+  "Capital Square Da Nang – 2.1동"
+ ],
+ "Capital Square Đà Nẵng – Tòa 2.2": [
+  "Capital Square Da Nang – Tower 2.2",
+  "Capital Square Da Nang – 2.2동"
+ ],
+ "Capital Square Đà Nẵng – Tòa 2.3": [
+  "Capital Square Da Nang – Tower 2.3",
+  "Capital Square Da Nang – 2.3동"
+ ],
+ "Capital Square Đà Nẵng – Tòa 2.4 The King": [
+  "Capital Square Da Nang – Tower 2.4 The King",
+  "Capital Square Da Nang – 2.4동 The King"
+ ],
+ "Capital Square Đà Nẵng – Tòa 2.5": [
+  "Capital Square Da Nang – Tower 2.5",
+  "Capital Square Da Nang – 2.5동"
+ ],
+ "Capital Square Đà Nẵng – Tòa 2.6 The Queen": [
+  "Capital Square Da Nang – Tower 2.6 The Queen",
+  "Capital Square Da Nang – 2.6동 The Queen"
+ ],
+ "Capital Square Đà Nẵng – Tòa 2.7": [
+  "Capital Square Da Nang – Tower 2.7",
+  "Capital Square Da Nang – 2.7동"
+ ],
+ "Capital Square Đà Nẵng – Tòa MAT 7": [
+  "Capital Square Da Nang – Tower MAT 7",
+  "Capital Square Da Nang – MAT 7동"
+ ],
+ "Capital Square Đà Nẵng – Tòa MAT 8-9": [
+  "Capital Square Da Nang – Tower MAT 8-9",
+  "Capital Square Da Nang – MAT 8-9동"
+ ],
+ "Chiết khấu tính trên giá chưa VAT và phí bảo trì · Sun Early Key: thanh toán đủ 70% là nhận nhà sử dụng": [
+  "Discounts are calculated on the price excluding VAT and the maintenance fee · Sun Early Key: pay 70% and take possession of your home",
+  "할인은 VAT 및 유지보수비 제외 가격 기준 · Sun Early Key: 70% 납부 시 주택 인도·사용 가능"
+ ],
+ "Chiết khấu tối đa": [
+  "Maximum discount",
+  "최대 할인"
+ ],
+ "Chiết khấu đến 5%": [
+  "Discount up to 5%",
+  "최대 5% 할인"
+ ],
  "Cho thuê": [
   "For rent",
   "임대"
+ ],
+ "Chuỗi resort ven biển Trường Sa": [
+  "Truong Sa coastal resort strip",
+  "쯔엉사 해안 리조트 벨트"
+ ],
+ "Chuỗi resort ven biển Đà Nẵng – Hội An": [
+  "Da Nang – Hoi An coastal resort strip",
+  "다낭 – 호이안 해안 리조트 벨트"
+ ],
+ "Chính sách & thanh toán": [
+  "Sales policy & payment",
+  "분양 정책·납부"
+ ],
+ "Chính sách bán hàng": [
+  "Sales policy",
+  "분양 정책"
+ ],
+ "Chính sách chiết khấu đang áp dụng của chủ đầu tư": [
+  "The developer's current discount policy",
+  "시행사의 현행 할인 정책"
+ ],
+ "Chợ Cẩm Lệ": [
+  "Cam Le Market",
+  "껌레 시장"
+ ],
+ "Chợ Hàn, chợ Cồn": [
+  "Han Market, Con Market",
+  "한시장, 꼰 시장"
+ ],
+ "Chợ Điện Ngọc": [
+  "Dien Ngoc Market",
+  "Dien Ngoc 시장"
+ ],
+ "Chợ đêm Sơn Trà": [
+  "Son Tra Night Market",
+  "선짜 야시장"
+ ],
+ "Chụp ảnh, đăng tin trên hiephoangmt.com – không công khai tên, số điện thoại chủ nhà": [
+  "Photos and a listing on hiephoangmt.com – the owner's name and phone number are never made public",
+  "사진 촬영 및 hiephoangmt.com 매물 게시 – 소유주 성함과 전화번호는 공개하지 않습니다"
  ],
  "Chủ đầu tư": [
   "Developer",
   "시행사"
  ],
+ "Cocobay": [
+  "Cocobay",
+  "Cocobay"
+ ],
+ "Cora Tower Đà Nẵng": [
+  "Cora Tower Da Nang",
+  "Cora Tower Da Nang"
+ ],
+ "Các dự án khác cùng tổ hợp": [
+  "Other projects in the same complex",
+  "같은 복합 단지의 다른 프로젝트"
+ ],
+ "Các dự án trong": [
+  "Projects in",
+  "소속 프로젝트:"
+ ],
+ "Các dự án đất nền Điện Ngọc khác": [
+  "Other Dien Ngoc land plot projects",
+  "Dien Ngoc의 다른 토지(필지) 프로젝트"
+ ],
  "Các loại sản phẩm": [
   "Product types",
   "상품 종류"
+ ],
+ "Các phân khu khác của Vinhomes Hải Vân Bay": [
+  "Other subdivisions of Vinhomes Hai Van Bay",
+  "Vinhomes Hai Van Bay의 다른 구역"
+ ],
+ "Công ty CP Bất động sản SIH (hệ sinh thái BRG Group)": [
+  "SIH Real Estate JSC (BRG Group ecosystem)",
+  "SIH Real Estate JSC(BRG Group 생태계)"
+ ],
+ "Công ty CP Vinpearl – Vinhomes phát triển (Tập đoàn Vingroup)": [
+  "Vinpearl JSC – developed by Vinhomes (Vingroup)",
+  "Vinpearl JSC – Vinhomes 개발(Vingroup)"
+ ],
+ "Công ty CP Đô thị FPT Đà Nẵng": [
+  "FPT Da Nang Urban JSC",
+  "FPT Da Nang Urban JSC"
+ ],
+ "Công ty TNHH Mega Assets (hệ sinh thái BRG Group)": [
+  "Mega Assets Co., Ltd. (BRG Group ecosystem)",
+  "Mega Assets Co., Ltd.(BRG Group 생태계)"
+ ],
+ "Công ty TNHH Phát triển New Town": [
+  "New Town Development Co., Ltd.",
+  "New Town Development Co., Ltd."
+ ],
+ "Công viên APEC, Cung thể thao Tiên Sơn": [
+  "APEC Park, Tien Son Sports Palace",
+  "APEC 공원, 띠엔선 체육관"
+ ],
+ "Cùng tổ hợp": [
+  "Same complex",
+  "같은 복합 단지"
+ ],
+ "Căn 1PN": [
+  "1BR unit",
+  "1베드룸 세대"
+ ],
+ "Căn 1PN+": [
+  "1BR+ unit",
+  "1베드룸+ 세대"
+ ],
+ "Căn 1PN+1": [
+  "1BR+1 unit",
+  "1베드룸+1 세대"
+ ],
+ "Căn 2PN": [
+  "2BR unit",
+  "2베드룸 세대"
+ ],
+ "Căn 3PN": [
+  "3BR unit",
+  "3베드룸 세대"
+ ],
+ "Căn 3PN · –": [
+  "3BR unit · –",
+  "3베드룸 세대 · –"
  ],
  "Căn chuyển nhượng, cho thuê mới nhất kèm giá thật": [
   "Latest resale and rental units with real prices",
   "실제 가격이 포함된 최신 전매·임대 매물"
  ],
+ "Căn hoàn thiện nội thất vay ngân hàng chỉ áp dụng PA1": [
+  "Fully furnished units financed with a bank loan: PA1 only",
+  "인테리어 완비 세대의 은행 대출은 PA1만 적용"
+ ],
+ "Căn hộ": [
+  "Apartment",
+  "아파트"
+ ],
+ "Căn hộ Studio – 3 phòng ngủ": [
+  "Studio – 3-bedroom apartments",
+  "스튜디오 – 3베드룸 아파트"
+ ],
+ "Căn hộ cao cấp": [
+  "Luxury apartments",
+  "고급 아파트"
+ ],
+ "Căn hộ cao cấp ven biển": [
+  "Luxury seaside apartments",
+  "해변 고급 아파트"
+ ],
+ "Căn hộ cao cấp ven sông Hàn": [
+  "Luxury apartments on the Han River",
+  "다낭 한강변 고급 아파트"
+ ],
+ "Căn hộ cao cấp ven sông Hàn, shophouse khối đế": [
+  "Luxury apartments on the Han River, podium shophouses",
+  "다낭 한강변 고급 아파트, 포디움 샵하우스"
+ ],
+ "Căn hộ cao cấp ven sông Hàn; quy mô 265 căn hộ.": [
+  "Luxury apartments on the Han River; 265 apartments in total.",
+  "다낭 한강변 고급 아파트이며, 총 265세대 규모입니다."
+ ],
+ "Căn hộ chung cư": [
+  "Apartment",
+  "아파트"
+ ],
+ "Căn hộ khách sạn (condotel)": [
+  "Hotel apartments (condotel)",
+  "호텔 아파트(콘도텔)"
+ ],
+ "Căn hộ khách sạn / condotel": [
+  "Hotel apartments / condotel",
+  "호텔 아파트 / 콘도텔"
+ ],
+ "Căn hộ mẫu": [
+  "Model apartment",
+  "견본 아파트"
+ ],
+ "Căn hộ, penthouse": [
+  "Apartments, penthouses",
+  "아파트, 펜트하우스"
+ ],
+ "Căn hộ, penthouse, shophouse khối đế": [
+  "Apartments, penthouses, podium shophouses",
+  "아파트, 펜트하우스, 포디움 샵하우스"
+ ],
+ "Căn hộ, shophouse khối đế": [
+  "Apartments, podium shophouses",
+  "아파트, 포디움 샵하우스"
+ ],
+ "Căn đẹp còn trống, chính sách mới nhất": [
+  "Best available units, latest sales policy",
+  "잔여 우수 세대, 최신 분양 정책"
+ ],
  "Cảm ơn anh/chị! Hoàng Hiệp sẽ gửi thông tin qua Zalo sớm nhất.": [
   "Thank you! Hoang Hiep will send you the information via Zalo as soon as possible.",
   "감사합니다! 호앙 히엡이 최대한 빨리 Zalo로 정보를 보내 드리겠습니다."
+ ],
+ "Cảng Liên Chiểu, đường sắt Bắc – Nam": [
+  "Lien Chieu Port, North–South Railway",
+  "리엔찌에우 항, 남북 철도"
+ ],
+ "Cầu Rồng": [
+  "Dragon Bridge",
+  "용다리"
+ ],
+ "Cầu Rồng, cầu sông Hàn": [
+  "Dragon Bridge, Han River Bridge",
+  "용다리, 다낭 한강교"
+ ],
+ "Cầu Rồng, trung tâm thành phố": [
+  "Dragon Bridge, city center",
+  "용다리, 도심"
  ],
  "Danh sách căn đang bán": [
   "Units for sale",
@@ -35,45 +535,253 @@
   "Units for sale, real prices",
   "판매 중인 매물 목록, 실제 가격"
  ],
+ "Danh thắng Ngũ Hành Sơn": [
+  "Marble Mountains (Ngu Hanh Son)",
+  "오행산"
+ ],
+ "Danh thắng Ngũ Hành Sơn, làng đá Non Nước": [
+  "Marble Mountains (Ngu Hanh Son), Non Nuoc stone-carving village",
+  "오행산, 논느억 석조각 마을"
+ ],
  "Diện tích": [
   "Area",
   "면적"
+ ],
+ "Diện tích đất": [
+  "Land area",
+  "대지 면적"
+ ],
+ "Duplex": [
+  "Duplex",
+  "듀플렉스"
+ ],
+ "Dùng chung tiện ích tổ hợp: hồ bơi bốn mùa, sky lounge, vườn treo": [
+  "Shared complex amenities: all-season pool, sky lounge, hanging gardens",
+  "복합 단지 공용 편의시설: 사계절 수영장, 스카이 라운지, 공중 정원"
+ ],
+ "Dự án": [
+  "Project",
+  "프로젝트"
+ ],
+ "Dự án do Công ty CP Bất động sản SIH (hệ sinh thái BRG Group) làm chủ đầu tư.": [
+  "The project's developer is SIH Real Estate JSC (BRG Group ecosystem).",
+  "이 프로젝트의 시행사는 SIH Real Estate JSC(BRG Group 생태계)입니다."
+ ],
+ "Dự án do Công ty CP Đô thị FPT Đà Nẵng làm chủ đầu tư.": [
+  "The project's developer is FPT Da Nang Urban JSC.",
+  "이 프로젝트의 시행사는 FPT Da Nang Urban JSC입니다."
+ ],
+ "Dự án do Công ty TNHH Mega Assets (hệ sinh thái BRG Group) làm chủ đầu tư.": [
+  "The project's developer is Mega Assets Co., Ltd. (BRG Group ecosystem).",
+  "이 프로젝트의 시행사는 Mega Assets Co., Ltd.(BRG Group 생태계)입니다."
+ ],
+ "Dự án do Công ty TNHH Phát triển New Town làm chủ đầu tư.": [
+  "The project's developer is New Town Development Co., Ltd.",
+  "이 프로젝트의 시행사는 New Town Development Co., Ltd.입니다."
+ ],
+ "Dự án do Tập đoàn Sun Group (Sun Property phát triển) làm chủ đầu tư.": [
+  "The project's developer is Sun Group (developed by Sun Property).",
+  "이 프로젝트의 시행사는 Sun Group(Sun Property 개발)입니다."
+ ],
+ "Dự án do Tập đoàn Sun Group làm chủ đầu tư.": [
+  "The project's developer is Sun Group.",
+  "이 프로젝트의 시행사는 Sun Group입니다."
+ ],
+ "Dự án tọa lạc tại ngã tư Trường Sa – Nam Kỳ Khởi Nghĩa, phường Hòa Hải (cũ), Ngũ Hành Sơn, Đà Nẵng.": [
+  "The project is located at the Truong Sa – Nam Ky Khoi Nghia intersection, Hoa Hai Ward (former), Ngu Hanh Son, Da Nang.",
+  "이 프로젝트는 다낭 응우한선 호아하이동(구), 쯔엉사(Truong Sa St.) – 남끼커이응이어(Nam Ky Khoi Nghia St.) 교차로에 위치합니다."
+ ],
+ "Dự án tọa lạc tại đường Ngô Quyền – Trần Hưng Đạo, phường An Hải (An Hải Bắc, Sơn Trà cũ), Đà Nẵng – ven sông Hàn.": [
+  "The project is located on Ngo Quyen – Tran Hung Dao streets, An Hai Ward (former An Hai Bac, Son Tra), Da Nang – on the Han River.",
+  "이 프로젝트는 다낭 안하이동(구 선짜 안하이박), 응오꾸옌(Ngo Quyen St.) – 쩐흥다오(Tran Hung Dao St.) 거리에 위치한 다낭 한강변 프로젝트입니다."
+ ],
+ "Dự án tọa lạc tại đường Trường Sa, phường Hòa Hải (cũ), Ngũ Hành Sơn, Đà Nẵng.": [
+  "The project is located on Truong Sa Street, Hoa Hai Ward (former), Ngu Hanh Son, Da Nang.",
+  "이 프로젝트는 다낭 응우한선 호아하이동(구), 쯔엉사 거리(Truong Sa St.)에 위치합니다."
+ ],
+ "Euro Village 2 Hòa Xuân": [
+  "Euro Village 2 Hoa Xuan",
+  "Euro Village 2 Hoa Xuan"
  ],
  "FPT City Đà Nẵng": [
   "FPT City Da Nang",
   "FPT City Da Nang"
  ],
+ "FPT Plaza": [
+  "FPT Plaza",
+  "FPT Plaza"
+ ],
+ "FPT Plaza 1": [
+  "FPT Plaza 1",
+  "FPT Plaza 1"
+ ],
+ "FPT Plaza 2": [
+  "FPT Plaza 2",
+  "FPT Plaza 2"
+ ],
+ "FPT Plaza 3": [
+  "FPT Plaza 3",
+  "FPT Plaza 3"
+ ],
+ "FPT Plaza 4": [
+  "FPT Plaza 4",
+  "FPT Plaza 4"
+ ],
+ "FPT Plaza 5": [
+  "FPT Plaza 5",
+  "FPT Plaza 5"
+ ],
  "Facebook": [
   "Facebook",
   "Facebook"
+ ],
+ "FourS Tower (Tháp Bốn Mùa) Đà Nẵng": [
+  "FourS Tower (Four Seasons Tower) Da Nang",
+  "FourS Tower(사계절 타워) Da Nang"
+ ],
+ "GAIA City Điện Ngọc": [
+  "GAIA City Dien Ngoc",
+  "GAIA City Dien Ngoc"
+ ],
+ "Ghi chú": [
+  "Notes",
+  "비고"
  ],
  "Giá": [
   "Prices",
   "가격"
  ],
+ "Giá Capital Square Đà Nẵng theo tòa (11/2026): từ 4,32 tỷ, căn 1PN đến 3PN": [
+  "Capital Square Da Nang prices by tower (November 2026): from 4.32 billion VND, 1BR to 3BR units",
+  "Capital Square Da Nang 동별 가격(2026년 11월): 43억 2천만 동부터, 1베드룸 – 3베드룸 세대"
+ ],
+ "Giá Vinhomes Hải Vân Bay 2026 theo phân khu: Bạch Vân, Vịnh Mây, Đảo Ngọc chỉ từ bao nhiêu?": [
+  "Vinhomes Hai Van Bay prices in 2026 by subdivision: how much do Bach Van, Vinh May and Dao Ngoc start from?",
+  "2026년 Vinhomes Hai Van Bay 구역별 가격: Bach Van, Vinh May, Dao Ngoc은 얼마부터일까요?"
+ ],
+ "Giá bán": [
+  "Price",
+  "가격"
+ ],
+ "Giá bán (tham khảo)": [
+  "Price (for reference)",
+  "가격(참고)"
+ ],
+ "Giá bán tham khảo": [
+  "Reference price",
+  "참고 가격"
+ ],
+ "Giá chuyển nhượng": [
+  "Resale price",
+  "전매 가격"
+ ],
+ "Giá rao": [
+  "Asking price",
+  "호가"
+ ],
+ "Giá tham khảo": [
+  "Reference price",
+  "참고 가격"
+ ],
  "Giá tham khảo, chưa trừ chiết khấu; giá và căn còn trống thay đổi theo đợt – để lại số, Hoàng Hiệp gửi bảng giá cập nhật qua Zalo.": [
   "Prices are for reference, before discounts; prices and available units change with each sales phase – leave your number and Hoang Hiep will send the updated price list via Zalo.",
   "참고 가격이며 할인 전 가격입니다. 가격과 잔여 세대는 차수별로 변동됩니다 – 연락처를 남겨 주시면 호앙 히엡이 최신 분양가표를 Zalo로 보내 드립니다."
+ ],
+ "Giá thuê tham khảo:": [
+  "Reference rent:",
+  "참고 임대료:"
+ ],
+ "Giá tùy vị trí, tầng, view và nội thất từng căn. Gọi hoặc nhắn Zalo 0904 567 009 để nhận danh sách căn đang bán.": [
+  "Prices vary with each unit's location, floor, view and furnishing. Call or message Zalo 0904 567 009 to receive the list of units for sale.",
+  "가격은 세대별 위치, 층, 전망, 가구에 따라 다릅니다. 판매 중인 매물 목록은 전화 또는 Zalo 0904 567 009로 문의해 주십시오."
+ ],
+ "Giá từ (tham khảo)": [
+  "Price from (for reference)",
+  "시작 가격(참고)"
+ ],
+ "Giá và chính sách thay đổi theo từng đợt mở bán, vị trí căn. Gọi hoặc nhắn Zalo 0904 567 009 để nhận bảng giá, lịch thanh toán và rổ hàng mới nhất.": [
+  "Prices and policies change with each sales phase and unit location. Call or message Zalo 0904 567 009 to receive the latest price list, payment schedule and available units.",
+  "가격과 정책은 분양 차수와 세대 위치에 따라 변동됩니다. 최신 분양가표, 납부 일정 및 매물 목록은 전화 또는 Zalo 0904 567 009로 문의해 주십시오."
+ ],
+ "Giỏ hàng 10/2026, gồm VAT & KPBT, chưa chiết khấu": [
+  "Available units, October 2026, incl. VAT & maintenance fee, before discounts",
+  "2026년 10월 매물 목록, VAT 및 유지보수비 포함, 할인 전"
  ],
  "Giỏ hàng chuyển nhượng · cập nhật 11/2026": [
   "Resale available units · updated November 2026",
   "전매 매물 목록 · 2026년 11월 업데이트"
  ],
+ "Giới thiệu": [
+  "Introduction",
+  "소개"
+ ],
+ "Gym, yoga, spa, sauna": [
+  "Gym, yoga, spa, sauna",
+  "헬스장, 요가, 스파, 사우나"
+ ],
+ "Gần": [
+  "Close by",
+  "가까운 곳"
+ ],
  "Gọi": [
   "Call",
   "전화"
+ ],
+ "Gọi 0904 567 009": [
+  "Call 0904 567 009",
+  "전화 0904 567 009"
+ ],
+ "Gửi kèm: loại căn, diện tích, hiện trạng nội thất, giá mong muốn, căn có đang trong hợp đồng cho thuê với đơn vị vận hành hay không.": [
+  "Please include: unit type, area, furniture condition, asking price, and whether the unit is currently under a rental contract with the operator.",
+  "함께 보내 주실 내용: 세대 유형, 면적, 가구 상태, 희망 가격, 운영사와의 임대 계약 여부."
+ ],
+ "Gửi thông tin căn qua Zalo": [
+  "Send your unit details via Zalo",
+  "Zalo로 매물 정보 보내기"
+ ],
+ "Hiện tại": [
+  "Current status",
+  "현재"
+ ],
+ "Hoiana Beach Villas": [
+  "Hoiana Beach Villas",
+  "Hoiana Beach Villas"
+ ],
+ "Hoiana Residences": [
+  "Hoiana Residences",
+  "Hoiana Residences"
+ ],
+ "Hoiana Resort & Golf": [
+  "Hoiana Resort & Golf",
+  "Hoiana Resort & Golf"
+ ],
+ "Hoiana Shores Golf Villas": [
+  "Hoiana Shores Golf Villas",
+  "Hoiana Shores Golf Villas"
  ],
  "Hoàng Hiệp": [
   "Hoang Hiep",
   "호앙 히엡"
  ],
+ "Hoàng Hiệp – 0904 567 009": [
+  "Hoang Hiep – 0904 567 009",
+  "호앙 히엡 – 0904 567 009"
+ ],
  "Hoặc gọi/Zalo": [
   "Or call/Zalo",
   "또는 전화/Zalo"
  ],
+ "Hudson Place S4 Capital Square Đà Nẵng": [
+  "Hudson Place S4 Capital Square Da Nang",
+  "Hudson Place S4 Capital Square Da Nang"
+ ],
  "Hình ảnh": [
   "Gallery",
   "사진"
+ ],
+ "Hạn mức vay, thời gian hỗ trợ và chi phí cộng thêm theo xét duyệt ngân hàng; áp dụng theo điều kiện và danh sách căn tại CSBH của chủ đầu tư": [
+  "Loan limit, support period and additional costs are subject to bank approval; applies under the conditions and unit list in the developer's sales policy",
+  "대출 한도, 지원 기간 및 추가 비용은 은행 심사에 따르며, 시행사 분양 정책의 조건과 세대 목록에 따라 적용됩니다"
  ],
  "Hẹn xem nhà trong tuần": [
   "Schedule a viewing this week",
@@ -95,21 +803,145 @@
   "FAQ",
   "자주 묻는 질문"
  ],
+ "Hồ bơi": [
+  "Swimming pool",
+  "수영장"
+ ],
+ "Hồ bơi bốn mùa": [
+  "All-season pool",
+  "사계절 수영장"
+ ],
+ "Hồ bơi vô cực": [
+  "Infinity pool",
+  "인피니티 풀"
+ ],
+ "Hỗ trợ lãi suất": [
+  "Interest rate support",
+  "이자 지원"
+ ],
+ "Hỗ trợ vay ngân hàng": [
+  "Bank loan support",
+  "은행 대출 지원"
+ ],
+ "Hỗ trợ đặt cọc, công chứng, kê khai thuế và sang tên (bán) hoặc hợp đồng thuê (cho thuê)": [
+  "Support with the deposit, notarization, tax declaration and title transfer (sale) or the lease agreement (rental)",
+  "계약금, 공증, 세금 신고 및 명의 이전(매매) 또는 임대차 계약(임대) 지원"
+ ],
  "Hội An": [
   "Hoi An",
   "호이안"
+ ],
+ "KHU NHÀ Ở": [
+  "RESIDENTIAL AREA",
+  "주거 단지"
+ ],
+ "KHU ĐÔ THỊ": [
+  "URBAN AREA",
+  "신도시"
+ ],
+ "Khoảng 1,5 km": [
+  "About 1.5 km",
+  "약 1.5km"
+ ],
+ "Khoảng 10 phút": [
+  "About 10 minutes",
+  "약 10분"
+ ],
+ "Khu Cồn Dầu, phường Hòa Xuân (cũ), Cẩm Lệ, Đà Nẵng": [
+  "Con Dau area, Hoa Xuan Ward (former), Cam Le, Da Nang",
+  "다낭 껌레 호아쑤언동(구) 꼰자우 지역"
+ ],
+ "Khu công nghiệp Hòa Khánh": [
+  "Hoa Khanh Industrial Park",
+  "호아칸 산업단지"
+ ],
+ "Khu dân cư Hòa Xuân": [
+  "Hoa Xuan residential area",
+  "호아쑤언 주거 지역"
+ ],
+ "Khu vui chơi trẻ em": [
+  "Children's play area",
+  "어린이 놀이터"
+ ],
+ "Khu đô thị 1A – 1B Điện Ngọc (gần ĐH FPT)": [
+  "Dien Ngoc 1A – 1B Urban Area (near FPT University)",
+  "Dien Ngoc 1A – 1B 신도시(FPT 대학교 인근)"
+ ],
+ "Khu đô thị 7B Điện Ngọc (Coco Center House, Sentosa City)": [
+  "Dien Ngoc 7B Urban Area (Coco Center House, Sentosa City)",
+  "Dien Ngoc 7B 신도시(Coco Center House, Sentosa City)"
+ ],
+ "Khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng": [
+  "FPT City urban area, Ngu Hanh Son, Da Nang",
+  "다낭 응우한선 FPT City 신도시"
+ ],
+ "Khu đô thị Hòa Vang 183,9 ha, gần 19.000 tỷ đồng: Đà Nẵng đấu thầu quốc tế chọn nhà đầu tư": [
+  "183.9 ha Hoa Vang urban area worth nearly 19,000 billion VND: Da Nang holds an international tender to select the investor",
+  "183.9헥타르 호아방 신도시, 약 19조 동 규모: 다낭시, 국제 입찰로 투자자 선정"
+ ],
+ "Khu đô thị số 3 Điện Nam – Điện Ngọc": [
+  "Dien Nam – Dien Ngoc Urban Area No. 3",
+  "Dien Nam – Dien Ngoc 제3 신도시"
+ ],
+ "Khu đô thị số 9 Điện Ngọc": [
+  "Dien Ngoc Urban Area No. 9",
+  "Dien Ngoc 제9 신도시"
  ],
  "Khách hay hỏi về": [
   "FAQs about",
   "자주 묻는 질문:"
  ],
+ "Không gian sinh hoạt cộng đồng": [
+  "Community space",
+  "커뮤니티 공간"
+ ],
+ "Không vay ngân hàng: chiết khấu thêm 5%": [
+  "No bank loan: additional 5% discount",
+  "은행 대출 미이용 시: 추가 5% 할인"
+ ],
+ "Khởi công": [
+  "Groundbreaking",
+  "착공"
+ ],
+ "Khởi công dự án": [
+  "Project groundbreaking",
+  "프로젝트 착공"
+ ],
  "Kiểm tra sổ, định giá căn": [
   "Certificate check & unit valuation",
   "소유권 증서 확인·세대 시세 평가"
  ],
+ "Kết nối": [
+  "Connections",
+  "교통 연결"
+ ],
  "Liên hệ": [
   "Contact",
   "문의"
+ ],
+ "Liên hệ 0904 567 009 để nhận danh sách căn trống và lịch xem nhà.": [
+  "Contact 0904 567 009 to receive the list of available units and viewing times.",
+  "공실 세대 목록과 현장 방문 일정은 0904 567 009로 문의해 주십시오."
+ ],
+ "Liền kề": [
+  "Townhouse",
+  "타운하우스"
+ ],
+ "Liền kề, liền kề xẻ khe, shophouse, biệt…": [
+  "Townhouses, townhouses with side gaps, shophouses, villas…",
+  "타운하우스, 측면 이격 타운하우스, 샵하우스, 빌라…"
+ ],
+ "Liền kề, shophouse, biệt thự song lập, biệt thự đơn lập": [
+  "Townhouses, shophouses, semi-detached villas, detached villas",
+  "타운하우스, 샵하우스, 세미 단독 빌라, 단독 빌라"
+ ],
+ "Loại": [
+  "Type",
+  "유형"
+ ],
+ "Loại / mã căn": [
+  "Unit type / code",
+  "세대 유형 / 호실 번호"
  ],
  "Loại căn": [
   "Unit types",
@@ -127,21 +959,197 @@
   "Product type of interest",
   "관심 상품 종류"
  ],
+ "Làng đại học Đà Nẵng": [
+  "Da Nang University Village",
+  "다낭 대학촌"
+ ],
+ "Lân cận": [
+  "Nearby",
+  "인근"
+ ],
+ "Lâu dài": [
+  "Freehold",
+  "영구 소유"
+ ],
+ "Lâu dài (đất ở đô thị)": [
+  "Freehold (urban residential land)",
+  "영구 소유(도시 주거용지)"
+ ],
+ "Lô": [
+  "Plot",
+  "필지"
+ ],
+ "Lô A1-3, A1-4 Khu đô thị sinh thái ven sông Hòa Xuân": [
+  "Plots A1-3, A1-4, Hoa Xuan Riverside Eco Urban Area",
+  "호아쑤언 강변 생태 신도시 A1-3, A1-4 부지"
+ ],
+ "Lô B5-4 đường Hoàng Minh Thắng, Khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng": [
+  "Plot B5-4, Hoang Minh Thang Street, FPT City urban area, Ngu Hanh Son, Da Nang",
+  "다낭 응우한선 FPT City 신도시, 호앙민탕 거리(Hoang Minh Thang St.) B5-4 부지"
+ ],
+ "Lô lớn": [
+  "Large plot",
+  "대형 필지"
+ ],
+ "Lô phổ biến": [
+  "Common plot",
+  "일반 필지"
+ ],
+ "Lô đất": [
+  "Land plot",
+  "토지(필지)"
+ ],
+ "Lăng Cô, Cố đô Huế": [
+  "Lang Co, Hue Imperial City",
+  "랑꼬, 후에 고도"
+ ],
+ "Lưu ý chung khi đăng ký nhà ở xã hội:": [
+  "General notes on registering for social housing:",
+  "사회주택 신청 시 일반 유의사항:"
+ ],
+ "Lưu ý khi mua": [
+  "Notes when buying",
+  "매입 시 유의사항"
+ ],
+ "Lọc khách có nhu cầu thật, dẫn xem theo lịch của chủ nhà": [
+  "Screening for genuine buyers and tenants, viewings on the owner's schedule",
+  "실수요 고객만 선별, 소유주 일정에 맞춘 현장 안내"
+ ],
+ "Miễn phí quản lý 1 năm · Điểm thưởng Sun Signature 0,7 – 2% theo hạng": [
+  "1 year of free management fees · Sun Signature reward points of 0.7 – 2% by tier",
+  "관리비 1년 무료 · 등급별 Sun Signature 포인트 0.7 – 2%"
+ ],
  "Miễn phí · gửi qua Zalo trong 15 phút": [
   "Free · sent via Zalo within 15 minutes",
   "무료 · 15분 이내 Zalo로 발송"
+ ],
+ "Mã căn": [
+  "Unit code",
+  "호실 번호"
+ ],
+ "Mật độ": [
+  "Density",
+  "건폐율"
  ],
  "Mặt bằng": [
   "Floor plans",
   "평면도"
  ],
+ "Mặt bằng khoảng": [
+  "Prices are around",
+  "시세 수준은 약"
+ ],
+ "Mặt bằng, pháp lý dự án; hẹn đi xem dự án, nhà mẫu": [
+  "Floor plans and the project's legal status; schedule a visit to the project and show unit",
+  "평면도·프로젝트 법적 상태; 프로젝트 및 모델하우스 방문 예약"
+ ],
+ "Mặt tiền đường Trần Hưng Đạo, tổ hợp Capital Square, phường An Hải": [
+  "Fronting Tran Hung Dao Street, Capital Square complex, An Hai Ward",
+  "안하이동 Capital Square 복합 단지, 쩐흥다오 거리(Tran Hung Dao St.) 전면"
+ ],
  "Mở tab mới ↗": [
   "Open in new tab ↗",
   "새 탭에서 열기 ↗"
  ],
+ "NHÀ Ở XÃ": [
+  "SOCIAL HOUSING",
+  "사회주택"
+ ],
+ "Newtown Diamond Đà Nẵng": [
+  "Newtown Diamond Da Nang",
+  "Newtown Diamond Da Nang"
+ ],
+ "Newtown Diamond: 3 tòa căn hộ và phân khu thấp tầng Newtown Legend": [
+  "Newtown Diamond: 3 apartment towers and the Newtown Legend low-rise subdivision",
+  "Newtown Diamond: 아파트 3개 동과 Newtown Legend 저층 구역"
+ ],
+ "Newtown Legend Đà Nẵng": [
+  "Newtown Legend Da Nang",
+  "Newtown Legend Da Nang"
+ ],
+ "Newtown The Diamond": [
+  "Newtown The Diamond",
+  "Newtown The Diamond"
+ ],
+ "Newtown The Ruby": [
+  "Newtown The Ruby",
+  "Newtown The Ruby"
+ ],
+ "Newtown The Sapphire": [
+  "Newtown The Sapphire",
+  "Newtown The Sapphire"
+ ],
+ "Ngay": [
+  "Right next to",
+  "바로 인접"
+ ],
+ "Ngay chân đèo": [
+  "At the foot of the pass",
+  "고개 바로 아래"
+ ],
+ "Nghỉ dưỡng cao cấp (thấp tầng)": [
+  "Luxury resort (low-rise)",
+  "고급 리조트(저층)"
+ ],
+ "Ngân hàng cho vay": [
+  "Lending banks",
+  "대출 은행"
+ ],
+ "Ngã tư Nguyễn Phước Lan – Minh Mạng, phường Hòa Quý": [
+  "Nguyen Phuoc Lan – Minh Mang intersection, Hoa Quy Ward",
+  "호아꾸이동, 응우옌프억란(Nguyen Phuoc Lan St.) – 민망(Minh Mang St.) 교차로"
+ ],
+ "Ngã tư Trường Sa – Nam Kỳ Khởi Nghĩa, phường Hòa Hải": [
+  "Truong Sa – Nam Ky Khoi Nghia intersection, Hoa Hai Ward",
+  "호아하이동, 쯔엉사(Truong Sa St.) – 남끼커이응이어(Nam Ky Khoi Nghia St.) 교차로"
+ ],
+ "Ngũ Hành Sơn, Đà Nẵng": [
+  "Ngu Hanh Son, Da Nang",
+  "다낭 응우한선"
+ ],
+ "Ngọc": [
+  "Ngoc",
+  "Ngoc"
+ ],
+ "Nhà giãn xây: chính sách tính trên giá trị quyền sử dụng đất và thương mại, chưa gồm tiền xây dựng": [
+  "Deferred-construction homes: the policy is calculated on the land use right and commercial value, excluding construction costs",
+  "건축 유예 주택: 정책은 토지사용권 및 상업 가치 기준이며 건축비는 포함되지 않습니다"
+ ],
+ "Nhà hàng": [
+  "Restaurant",
+  "레스토랑"
+ ],
+ "Nhà hàng, café": [
+  "Restaurants, cafes",
+  "레스토랑, 카페"
+ ],
+ "Nhà phố": [
+  "Townhouse",
+  "타운하우스"
+ ],
+ "Nhà phố – Shophouse": [
+  "Townhouses & shophouses",
+  "타운하우스·샵하우스"
+ ],
+ "Nhà trẻ": [
+  "Kindergarten",
+  "유치원"
+ ],
+ "Nhà ở xã hội (căn hộ chung cư)": [
+  "Social housing (apartments)",
+  "사회주택(아파트)"
+ ],
  "Nhận bảng giá": [
   "Get the price list",
   "분양가표 받기"
+ ],
+ "Nhận bảng giá & chính sách qua Zalo →": [
+  "Get the price list & sales policy via Zalo →",
+  "Zalo로 분양가표·분양 정책 받기 →"
+ ],
+ "Nhận bảng giá & căn trống": [
+  "Get the price list & available units",
+  "분양가표·잔여 세대 받기"
  ],
  "Nhận danh sách căn": [
   "Get available units",
@@ -159,13 +1167,41 @@
   "Get this unit's price",
   "이 세대 가격 받기"
  ],
+ "Nhận gửi bán · gửi cho thuê": [
+  "Consignment for sale · for rent",
+  "매매 위탁 · 임대 위탁"
+ ],
  "Nhận ký gửi bán, cho thuê căn của bạn": [
   "Consignment: list your unit with us for sale or rent",
   "고객님 세대의 매매·임대 위탁(매물 등록)을 받습니다"
  ],
+ "Nhận nhà": [
+  "Key handover",
+  "입주"
+ ],
  "Nhập câu hỏi hoặc số Zalo…": [
   "Type your question or Zalo number…",
   "질문 또는 Zalo 번호를 입력하세요…"
+ ],
+ "Nội thất": [
+  "Furnishing",
+  "인테리어"
+ ],
+ "Nội thất căn mẫu": [
+  "Model unit interior",
+  "견본 세대 인테리어"
+ ],
+ "One World Regency": [
+  "One World Regency",
+  "One World Regency"
+ ],
+ "Penthouse": [
+  "Penthouse",
+  "펜트하우스"
+ ],
+ "Phiếu tính giá theo phương án thanh toán": [
+  "Price quote by payment option",
+  "납부 방식별 가격 산정표"
  ],
  "Pháp lý": [
   "Legal status",
@@ -175,17 +1211,141 @@
   "Legal status & construction progress",
   "법적 상태·공사 진행"
  ],
+ "Pháp lý Capital Square Đà Nẵng: tòa nào đủ điều kiện bán, sổ hồng và lưu ý khi mua": [
+  "Capital Square Da Nang legal status: which towers are eligible for sale, the Pink Book and what to note when buying",
+  "Capital Square Da Nang 법적 상태: 판매 요건을 갖춘 동, 핑크북 및 매입 시 유의사항"
+ ],
+ "Pháp lý Vinhomes Hải Vân Bay: sản phẩm nào sở hữu lâu dài, sản phẩm nào 50 năm?": [
+  "Vinhomes Hai Van Bay legal status: which products are freehold and which are 50-year leasehold?",
+  "Vinhomes Hai Van Bay 법적 상태: 어떤 상품이 영구 소유이고 어떤 상품이 50년 소유일까요?"
+ ],
+ "Phân khu": [
+  "Subdivision",
+  "구역"
+ ],
+ "Phân khu Bạch Vân – Vinhomes Hải Vân Bay (Khu 1)": [
+  "Bach Van subdivision – Vinhomes Hai Van Bay (Zone 1)",
+  "Bach Van 구역 – Vinhomes Hai Van Bay(1구역)"
+ ],
+ "Phân khu Tinh Vân – Vinhomes Hải Vân Bay (Khu 4)": [
+  "Tinh Van subdivision – Vinhomes Hai Van Bay (Zone 4)",
+  "Tinh Van 구역 – Vinhomes Hai Van Bay(4구역)"
+ ],
+ "Phân khu Vịnh Mây – Vinhomes Hải Vân Bay (Khu 2)": [
+  "Vinh May subdivision – Vinhomes Hai Van Bay (Zone 2)",
+  "Vinh May 구역 – Vinhomes Hai Van Bay(2구역)"
+ ],
+ "Phân khu Đảo Ngọc – Vinhomes Hải Vân Bay (Khu 3)": [
+  "Dao Ngoc subdivision – Vinhomes Hai Van Bay (Zone 3)",
+  "Dao Ngoc 구역 – Vinhomes Hai Van Bay(3구역)"
+ ],
  "Phòng gym": [
   "Gym",
   "헬스장"
+ ],
+ "Phòng ngủ": [
+  "Bedrooms",
+  "침실"
+ ],
+ "Phòng yoga": [
+  "Yoga room",
+  "요가룸"
+ ],
+ "Phường Hòa Xuân": [
+  "Hoa Xuan Ward",
+  "호아쑤언동"
+ ],
+ "Phố chợ Điện Ngọc": [
+  "Dien Ngoc Market Street",
+  "Dien Ngoc 시장 거리"
  ],
  "Phố cổ Hội An": [
   "Hoi An Ancient Town",
   "호이안 올드타운"
  ],
+ "Phố cổ Hội An (di sản UNESCO)": [
+  "Hoi An Ancient Town (UNESCO World Heritage Site)",
+  "호이안 올드타운(유네스코 세계유산)"
+ ],
+ "Phối cảnh Capital Square Đà Nẵng – các tòa căn hộ bên bờ Đông sông Hàn": [
+  "Rendering of Capital Square Da Nang – apartment towers on the east bank of the Han River",
+  "Capital Square Da Nang 조감도 – 다낭 한강 동쪽 강변의 아파트 동"
+ ],
+ "Phối cảnh nội thất căn hộ mẫu của chủ đầu tư. Bàn giao thực tế theo tiêu chuẩn của từng loại căn; đồ rời, trang trí trong ảnh chỉ để minh họa.": [
+  "Developer's interior rendering of the model apartment. Actual handover follows the standard for each unit type; loose furniture and decor in the images are for illustration only.",
+  "시행사의 견본 아파트 인테리어 투시도입니다. 실제 인도는 세대 유형별 인도 기준에 따르며, 사진 속 가구 및 장식은 예시용입니다."
+ ],
+ "Qua hầm Hải Vân": [
+  "Via Hai Van Tunnel",
+  "하이번 터널 경유"
+ ],
+ "Quy cách": [
+  "Specifications",
+  "사양"
+ ],
  "Quy mô": [
   "Site area",
   "대지 규모"
+ ],
+ "Quy mô và sản phẩm": [
+  "Scale and products",
+  "규모 및 상품"
+ ],
+ "Quần thể Hoiana, Duy Xuyên (Quảng Nam cũ), Đà Nẵng": [
+  "Hoiana complex, Duy Xuyen (former Quang Nam), Da Nang",
+  "다낭 주이쑤옌(구 꽝남성) Hoiana 단지"
+ ],
+ "Quốc lộ 1A, cao tốc La Sơn – Túy Loan": [
+  "National Highway 1A, La Son – Tuy Loan Expressway",
+  "1A 국도, 라선 – 뚜이로안 고속도로"
+ ],
+ "Residence": [
+  "Residence",
+  "Residence"
+ ],
+ "Rừng dừa Bảy Mẫu": [
+  "Bay Mau Coconut Forest",
+  "바이머우 코코넛 숲"
+ ],
+ "S-Light Tower Đà Nẵng": [
+  "S-Light Tower Da Nang",
+  "S-Light Tower Da Nang"
+ ],
+ "Sentosa Riverside (Peaceful Land)": [
+  "Sentosa Riverside (Peaceful Land)",
+  "Sentosa Riverside (Peaceful Land)"
+ ],
+ "Sheraton Grand Đà Nẵng Resort": [
+  "Sheraton Grand Da Nang Resort",
+  "Sheraton Grand Da Nang Resort"
+ ],
+ "Shop khối đế": [
+  "Podium shop",
+  "포디움 상가"
+ ],
+ "Shophouse": [
+  "Shophouse",
+  "샵하우스"
+ ],
+ "Shophouse khối đế": [
+  "Podium shophouse",
+  "포디움 샵하우스"
+ ],
+ "So sánh phương án: thanh toán sớm, giãn tiến độ, vay ngân hàng": [
+  "Compare options: early payment, extended payment schedule, bank loan",
+  "방식 비교: 조기 납부, 납부 일정 연장, 은행 대출"
+ ],
+ "Spa": [
+  "Spa",
+  "스파"
+ ],
+ "Spana Tower Hòa Xuân": [
+  "Spana Tower Hoa Xuan",
+  "Spana Tower Hoa Xuan"
+ ],
+ "Studio": [
+  "Studio",
+  "스튜디오"
  ],
  "Sun NeO City Hòa Xuân": [
   "Sun NeO City Hoa Xuan",
@@ -199,9 +1359,21 @@
   "Da Nang International Airport",
   "다낭 국제공항"
  ],
+ "Sân thể thao, đường dạo bộ, nhà trẻ": [
+  "Sports courts, walking paths, kindergarten",
+  "스포츠 코트, 산책로, 유치원"
+ ],
+ "Sông Hàn, cầu Rồng": [
+  "Han River, Dragon Bridge",
+  "다낭 한강, 용다리"
+ ],
  "Sản phẩm": [
   "Units",
   "세대"
+ ],
+ "Sắp mở bán": [
+  "Coming soon",
+  "분양 예정"
  ],
  "Số Zalo / điện thoại *": [
   "Zalo / phone number *",
@@ -211,25 +1383,149 @@
   "Number of units",
   "세대수"
  ],
+ "Số tầng": [
+  "Floors",
+  "층수"
+ ],
  "Số điện thoại": [
   "Phone number",
   "전화번호"
+ ],
+ "Sổ hồng sở hữu": [
+  "Pink Book ownership",
+  "핑크북 소유"
+ ],
+ "Sở hữu": [
+  "Ownership",
+  "소유 형태"
+ ],
+ "Sở hữu lâu dài": [
+  "Freehold (long-term ownership)",
+  "영구 소유"
+ ],
+ "Sở hữu lâu dài (người Việt Nam)": [
+  "Freehold (long-term ownership, Vietnamese buyers)",
+  "영구 소유(베트남인)"
+ ],
+ "Sở hữu lâu dài (nhà ở xã hội – hạn chế chuyển nhượng 5 năm theo quy định)": [
+  "Freehold (long-term ownership; social housing – resale restricted for 5 years by regulation)",
+  "영구 소유(사회주택 – 규정에 따라 5년간 전매 제한)"
+ ],
+ "Sở hữu lâu dài (nhà ở xã hội – hạn chế chuyển nhượng 5 năm theo quy định).": [
+  "Freehold (long-term ownership; social housing – resale restricted for 5 years by regulation).",
+  "영구 소유(사회주택 – 규정에 따라 5년간 전매 제한)."
+ ],
+ "Sở hữu lâu dài (sổ hồng từng căn)": [
+  "Freehold (long-term ownership; a Pink Book for each unit)",
+  "영구 소유(세대별 핑크북)"
+ ],
+ "Sở hữu lâu dài (sổ hồng từng căn).": [
+  "Freehold (long-term ownership; a Pink Book for each unit).",
+  "영구 소유(세대별 핑크북)."
+ ],
+ "Sở hữu lâu dài.": [
+  "Freehold (long-term ownership).",
+  "영구 소유."
+ ],
+ "TTTM Vincom": [
+  "Vincom shopping mall",
+  "Vincom 쇼핑몰"
+ ],
+ "TTTM Vincom Đà Nẵng": [
+  "Vincom Da Nang shopping mall",
+  "Vincom 다낭 쇼핑몰"
+ ],
+ "Tham quan trực tuyến": [
+  "Virtual tour",
+  "온라인 투어"
+ ],
+ "Thanh toán": [
+  "Payment",
+  "납부"
+ ],
+ "Thanh toán sớm: ưu đãi 7,5%": [
+  "Early payment: 7.5% incentive",
+  "조기 납부: 7.5% 혜택"
+ ],
+ "Theo chính sách bán hàng chủ đầu tư gần nhất; chính sách thay đổi theo đợt – liên hệ để nhận chính sách đang áp dụng.": [
+  "Based on the developer's most recent sales policy; policies change with each phase – contact us for the policy currently in effect.",
+  "시행사의 최신 분양 정책 기준이며, 정책은 차수별로 변동됩니다 – 현재 적용 중인 정책은 문의해 주십시오."
+ ],
+ "Theo dõi Hoàng Hiệp trên Facebook": [
+  "Follow Hoang Hiep on Facebook",
+  "Facebook에서 호앙 히엡 팔로우"
+ ],
+ "Thiết kế": [
+  "Design",
+  "설계"
+ ],
+ "Thuộc tổ hợp Capital Square Đà Nẵng →": [
+  "Part of the Capital Square Da Nang complex →",
+  "Capital Square Da Nang 복합 단지 소속 →"
+ ],
+ "Thuộc tổ hợp FPT City Đà Nẵng →": [
+  "Part of the FPT City Da Nang township →",
+  "FPT City Da Nang 복합 단지 소속 →"
+ ],
+ "Thuộc tổ hợp Newtown Diamond Đà Nẵng →": [
+  "Part of the Newtown Diamond Da Nang township →",
+  "Newtown Diamond Da Nang 복합 단지 소속 →"
+ ],
+ "Thuộc tổ hợp Sun NeO City Hòa Xuân →": [
+  "Part of the Sun NeO City Hoa Xuan township →",
+  "Sun NeO City Hoa Xuan 복합 단지 소속 →"
+ ],
+ "Thuộc tổ hợp Vinhomes Hải Vân Bay (Làng Vân) Đà Nẵng →": [
+  "Part of the Vinhomes Hai Van Bay (Lang Van) Da Nang township →",
+  "Vinhomes Hai Van Bay (Lang Van) Da Nang 복합 단지 소속 →"
+ ],
+ "Thánh địa Mỹ Sơn": [
+  "My Son Sanctuary",
+  "미선 유적지"
+ ],
+ "Thánh địa Mỹ Sơn (di sản UNESCO)": [
+  "My Son Sanctuary (UNESCO World Heritage Site)",
+  "미선 유적지(유네스코 세계유산)"
+ ],
+ "Thôn Tây Sơn Tây, xã Duy Hải, Duy Xuyên": [
+  "Tay Son Tay Village, Duy Hai Commune, Duy Xuyen",
+  "주이쑤옌 주이하이사 떠이선떠이 마을"
  ],
  "Thông tin chỉ dùng để Hoàng Hiệp tư vấn, không chia sẻ cho bên khác.": [
   "Your information is used only for Hoang Hiep's consultation and is never shared with third parties.",
   "입력하신 정보는 호앙 히엡의 상담 목적으로만 사용되며 제3자에게 공유되지 않습니다."
  ],
+ "Thông tin tham khảo 12/2026 – chính sách thay đổi theo từng đợt, liên hệ Hoàng Hiệp 0904 567 009 để nhận phiếu tính giá căn cụ thể": [
+  "Reference information, December 2026 – policies change with each phase; contact Hoang Hiep at 0904 567 009 to receive a price quote for a specific unit",
+  "2026년 12월 참고 정보 – 정책은 차수별로 변동됩니다. 특정 세대의 가격 산정표는 호앙 히엡 0904 567 009로 문의해 주십시오"
+ ],
  "Thư viện ảnh": [
   "Photo gallery",
   "사진 갤러리"
+ ],
+ "Thời điểm": [
+  "Timing",
+  "시점"
  ],
  "Tin mới về": [
   "Latest news on",
   "최신 소식:"
  ],
+ "Tin rao": [
+  "Listing",
+  "매물 광고"
+ ],
  "Tin tức": [
   "News",
   "뉴스"
+ ],
+ "Tiêu chuẩn bàn giao": [
+  "Handover standard",
+  "인도 기준"
+ ],
+ "Tiến độ Capital Square Đà Nẵng: Capital Square 3 thi công phần thân, bàn giao dự kiến 2027": [
+  "Capital Square Da Nang construction progress: Capital Square 3 superstructure under construction, handover expected in 2027",
+  "Capital Square Da Nang 공사 진행: Capital Square 3 골조 공사 중, 2027년 입주(인도) 예정"
  ],
  "Tiện ích": [
   "Amenities",
@@ -239,13 +1535,65 @@
   "The project page has a loan and cash-flow calculator so you can estimate your monthly payment yourself. Hiep helps connect you with banks and prepare the loan application once you have chosen a suitable unit.",
   "프로젝트 페이지의 대출·현금흐름 계산기로 고객님께서 월 상환액을 직접 추정해 보실 수 있습니다. 적합한 세대를 선택하시면 히엡이 은행 연결과 대출 서류 준비를 지원합니다."
  ],
+ "Tropical Palm (Ngọc Dương Riverside)": [
+  "Tropical Palm (Ngoc Duong Riverside)",
+  "Tropical Palm (Ngoc Duong Riverside)"
+ ],
+ "Trung tâm hành chính thành phố": [
+  "City administrative center",
+  "시 행정 센터"
+ ],
+ "Trung tâm thành phố": [
+  "City center",
+  "도심"
+ ],
+ "Trung tâm thành phố, cầu Rồng": [
+  "City center, Dragon Bridge",
+  "도심, 용다리"
+ ],
+ "Trung tâm thương mại, phố thương mại nội khu": [
+  "Shopping mall, on-site commercial street",
+  "쇼핑몰, 단지 내 상업 거리"
+ ],
+ "Trung tâm Đà Nẵng": [
+  "Central Da Nang",
+  "다낭 도심"
+ ],
+ "Trả trước hạn từng đợt (≥ 10 ngày): hưởng 8%/năm; 5% cuối đóng khi bàn giao, chủ đầu tư trả lãi 8%/năm": [
+  "Pay each installment ahead of schedule (≥ 10 days): earn 8%/year; the final 5% is paid at handover, and the developer pays 8%/year interest",
+  "회차별 조기 납부(10일 이상): 연 8% 혜택; 마지막 5%는 인도(입주) 시 납부하며 시행사가 연 8% 이자 지급"
+ ],
  "Trợ lý của Hoàng Hiệp": [
   "Hoang Hiep's assistant",
   "호앙 히엡의 어시스턴트"
  ],
+ "Trục Cách Mạng Tháng 8": [
+  "Cach Mang Thang 8 Street axis",
+  "까익망탕땀 거리(Cach Mang Thang 8 St.) 축"
+ ],
+ "Tình trạng": [
+  "Status",
+  "상태"
+ ],
+ "Tình trạng hiện tại: sắp mở bán.": [
+  "Current status: coming soon.",
+  "현재 상태: 분양 예정."
+ ],
+ "Tình trạng hiện tại: đang mở bán.": [
+  "Current status: on sale.",
+  "현재 상태: 분양 중."
+ ],
  "Tình trạng hiện tại: đã bàn giao.": [
   "Current status: handed over.",
   "현재 상태: 입주 완료."
+ ],
+ "Tòa C3 Capital Square Đà Nẵng": [
+  "Tower C3 Capital Square Da Nang",
+  "Capital Square Da Nang C3동"
+ ],
+ "Tòa nằm trong tổ hợp Capital Square Đà Nẵng (61.368 m²) giữa các trục Trần Hưng Đạo – Ngô Quyền – Nguyễn Công Trứ, bờ Đông sông Hàn, liền kề TTTM Vincom.": [
+  "The tower is part of the Capital Square Da Nang complex (61,368 m²) between Tran Hung Dao, Ngo Quyen and Nguyen Cong Tru streets, on the east bank of the Han River, next to the Vincom shopping mall.",
+  "이 동은 쩐흥다오(Tran Hung Dao St.) – 응오꾸옌(Ngo Quyen St.) – 응우옌꽁쯔(Nguyen Cong Tru St.) 거리 사이, 다낭 한강 동쪽 강변의 Capital Square Da Nang 복합 단지(61,368 m²) 내에 있으며 Vincom 쇼핑몰과 인접해 있습니다."
  ],
  "Tư vấn bất động sản Đà Nẵng · trực tiếp, không qua tổng đài": [
   "Da Nang real estate advice · direct, no call center",
@@ -255,9 +1603,45 @@
   "All projects",
   "전체 프로젝트"
  ],
+ "Tầng 1": [
+  "Floor 1",
+  "1층"
+ ],
+ "Tầng 1 · bấm để phóng to.": [
+  "Floor 1 · click to zoom in.",
+  "1층 · 클릭하여 확대."
+ ],
+ "Tầng 2": [
+  "Floor 2",
+  "2층"
+ ],
+ "Tầng 2 · bấm để phóng to.": [
+  "Floor 2 · click to zoom in.",
+  "2층 · 클릭하여 확대."
+ ],
+ "Tầng 3": [
+  "Floor 3",
+  "3층"
+ ],
+ "Tầng 3 · bấm để phóng to.": [
+  "Floor 3 · click to zoom in.",
+  "3층 · 클릭하여 확대."
+ ],
+ "Tập đoàn Sun Group": [
+  "Sun Group",
+  "Sun Group"
+ ],
  "Tập đoàn Sun Group (Sun Property phát triển)": [
   "Sun Group (developed by Sun Property)",
   "Sun Group(Sun Property 개발)"
+ ],
+ "Tổ hợp": [
+  "Complex",
+  "복합 단지"
+ ],
+ "Tổ hợp dự án": [
+  "Mixed-use township",
+  "복합 단지"
  ],
  "Tổng quan": [
   "Key facts",
@@ -267,13 +1651,165 @@
   "Project overview",
   "프로젝트 개요"
  ],
+ "Tổng thầu": [
+  "General contractor",
+  "종합 시공사"
+ ],
+ "Tổng thể dự án": [
+  "Overall project",
+  "프로젝트 전체"
+ ],
+ "Từ 2,1 tỷ (tham khảo)": [
+  "From 2.1 billion VND (for reference)",
+  "21억 동부터(참고)"
+ ],
+ "Từ 2,42 tỷ (tham khảo)": [
+  "From 2.42 billion VND (for reference)",
+  "24억 2천만 동부터(참고)"
+ ],
+ "Từ 3,01 tỷ (tham khảo)": [
+  "From 3.01 billion VND (for reference)",
+  "30억 1천만 동부터(참고)"
+ ],
+ "Từ 3,52 tỷ (tham khảo)": [
+  "From 3.52 billion VND (for reference)",
+  "35억 2천만 동부터(참고)"
+ ],
+ "Từ 4,32 tỷ (tham khảo)": [
+  "From 4.32 billion VND (for reference)",
+  "43억 2천만 동부터(참고)"
+ ],
+ "Từ 5,3 tỷ (tham khảo)": [
+  "From 5.3 billion VND (for reference)",
+  "53억 동부터(참고)"
+ ],
+ "Từ 5,47 tỷ (tham khảo)": [
+  "From 5.47 billion VND (for reference)",
+  "54억 7천만 동부터(참고)"
+ ],
+ "Từ 5,6 tỷ (tham khảo)": [
+  "From 5.6 billion VND (for reference)",
+  "56억 동부터(참고)"
+ ],
+ "Từ 5,74 tỷ (tham khảo)": [
+  "From 5.74 billion VND (for reference)",
+  "57억 4천만 동부터(참고)"
+ ],
+ "Từ 7,6 tỷ (tham khảo)": [
+  "From 7.6 billion VND (for reference)",
+  "76억 동부터(참고)"
+ ],
+ "Tỷ lệ": [
+  "Percentage",
+  "비율"
+ ],
+ "Vay PA1 – lãi suất cố định: vay theo giá gốc tới 70% giá trị căn (sản phẩm giãn xây vay tới 80% tiền đất và thương mại, không vượt 70% tổng giá trị); khách trả 3%/năm (18 tháng), 4,5% (24 tháng), 6% (30 tháng), 7,5% (36 tháng), 8,5% (48 tháng), 9% (60 tháng)": [
+  "PA1 loan – fixed interest rate: borrow up to 70% of the unit value based on the original price (deferred-construction products can borrow up to 80% of the land and commercial value, not exceeding 70% of the total value); the buyer pays 3%/year (18 months), 4.5% (24 months), 6% (30 months), 7.5% (36 months), 8.5% (48 months), 9% (60 months)",
+  "PA1 대출 – 고정 금리: 원가 기준 세대 가치의 최대 70%까지 대출(건축 유예 상품은 토지·상업 가치의 최대 80%까지, 총가치의 70% 이내); 고객 부담 연 3%(18개월), 4.5%(24개월), 6%(30개월), 7.5%(36개월), 8.5%(48개월), 9%(60개월)"
+ ],
+ "Vay PA2 – hỗ trợ lãi suất 0%, cộng thêm vào giá gốc: vay 70% giá trị căn +3,5% (18 tháng), +8% (24 tháng), +13,5% (30 tháng), +19,5% (36 tháng); vay 80% tiền đất và thương mại (chỉ sản phẩm giãn xây) +5,5%, +10,5%, +17,5%, +25%": [
+  "PA2 loan – 0% interest support, added to the original price: borrow 70% of the unit value +3.5% (18 months), +8% (24 months), +13.5% (30 months), +19.5% (36 months); borrow 80% of the land and commercial value (deferred-construction products only) +5.5%, +10.5%, +17.5%, +25%",
+  "PA2 대출 – 0% 이자 지원, 원가에 가산: 세대 가치의 70% 대출 시 +3.5%(18개월), +8%(24개월), +13.5%(30개월), +19.5%(36개월); 토지·상업 가치의 80% 대출 시(건축 유예 상품만) +5.5%, +10.5%, +17.5%, +25%"
+ ],
+ "Villas": [
+  "Villas",
+  "Villas"
+ ],
+ "Vincom Plaza Ngô Quyền": [
+  "Vincom Plaza Ngo Quyen",
+  "Vincom Plaza Ngo Quyen"
+ ],
+ "Vinhomes Hải Vân Bay": [
+  "Vinhomes Hai Van Bay",
+  "Vinhomes Hai Van Bay"
+ ],
+ "Vinhomes Hải Vân Bay (Làng Vân)": [
+  "Vinhomes Hai Van Bay (Lang Van)",
+  "Vinhomes Hai Van Bay (Lang Van)"
+ ],
+ "Vinhomes Hải Vân Bay (Làng Vân) Đà Nẵng": [
+  "Vinhomes Hai Van Bay (Lang Van) Da Nang",
+  "Vinhomes Hai Van Bay (Lang Van) Da Nang"
+ ],
+ "Vinhomes Hải Vân Bay – phối cảnh dự án": [
+  "Vinhomes Hai Van Bay – project rendering",
+  "Vinhomes Hai Van Bay – 프로젝트 조감도"
+ ],
+ "Voucher Vinhomes: thanh toán tối đa 30% giá trị bất động sản – áp dụng voucher chậm nhất ngày 31/12/2026; mỗi voucher áp dụng 01 căn, hạn chế chuyển nhượng 03 tháng từ ngày dùng voucher": [
+  "Vinhomes voucher: pay up to 30% of the property value – the voucher must be applied by December 31, 2026 at the latest; each voucher applies to 1 unit, with resale restricted for 3 months from the date the voucher is used",
+  "Vinhomes 바우처: 부동산 가치의 최대 30%까지 결제 – 늦어도 2026년 12월 31일까지 바우처 적용; 바우처 1장당 1세대 적용, 바우처 사용일로부터 3개월간 전매 제한"
+ ],
+ "Vài phút": [
+  "A few minutes",
+  "몇 분 거리"
+ ],
+ "Vận hành": [
+  "Operator",
+  "운영사"
+ ],
  "Vị trí": [
   "Location",
   "입지"
  ],
+ "Vị trí Vinhomes Làng Vân ở đâu? Kết nối hầm Hải Vân, cảng Liên Chiểu, trung tâm Đà Nẵng": [
+  "Where is Vinhomes Lang Van? Connections to Hai Van Tunnel, Lien Chieu Port and central Da Nang",
+  "Vinhomes Lang Van은 어디에 있을까요? 하이번 터널, 리엔찌에우 항, 다낭 도심과의 연결"
+ ],
+ "Vịnh Nam Chơn": [
+  "Nam Chon Bay",
+  "남쩐 만"
+ ],
+ "Xem": [
+  "View",
+  "가상 투어:"
+ ],
+ "Xem 4D": [
+  "View in 4D",
+  "4D 보기"
+ ],
  "Xem các dự án khác": [
   "View other projects",
   "다른 프로젝트 보기"
+ ],
+ "Xem dự án →": [
+  "View project →",
+  "프로젝트 보기 →"
+ ],
+ "Xem thêm": [
+  "See more",
+  "더 보기"
+ ],
+ "Xem toàn bộ album (2 ảnh)": [
+  "View the full album (2 photos)",
+  "전체 앨범 보기(사진 2장)"
+ ],
+ "Xem toàn bộ album (4 ảnh)": [
+  "View the full album (4 photos)",
+  "전체 앨범 보기(사진 4장)"
+ ],
+ "Xem toàn bộ album (5 ảnh)": [
+  "View the full album (5 photos)",
+  "전체 앨범 보기(사진 5장)"
+ ],
+ "Xem toàn bộ album (6 ảnh)": [
+  "View the full album (6 photos)",
+  "전체 앨범 보기(사진 6장)"
+ ],
+ "Xem tổng quan dự án tại trang": [
+  "See the project overview on the page",
+  "프로젝트 개요 페이지:"
+ ],
+ "Xuân": [
+  "Xuan",
+  "Xuan"
+ ],
+ "Xã Duy Hải, Duy Xuyên": [
+  "Duy Hai Commune, Duy Xuyen",
+  "주이쑤옌 주이하이사"
+ ],
+ "Xã Duy Hải, Duy Xuyên (Quảng Nam cũ), Đà Nẵng": [
+  "Duy Hai Commune, Duy Xuyen (former Quang Nam), Da Nang",
+  "다낭 주이쑤옌(구 꽝남성) 주이하이사"
  ],
  "Zalo": [
   "Zalo",
@@ -287,6 +1823,50 @@
   "Zalo/Hotline:",
   "Zalo/핫라인:"
  ],
+ "baodanang.vn": [
+  "baodanang.vn",
+  "baodanang.vn"
+ ],
+ "baodauthau.vn": [
+  "baodauthau.vn",
+  "baodauthau.vn"
+ ],
+ "baodautu.vn": [
+  "baodautu.vn",
+  "baodautu.vn"
+ ],
+ "cafef.vn": [
+  "cafef.vn",
+  "cafef.vn"
+ ],
+ "cafeland.vn": [
+  "cafeland.vn",
+  "cafeland.vn"
+ ],
+ "dantri.com.vn": [
+  "dantri.com.vn",
+  "dantri.com.vn"
+ ],
+ "doanhnhan.baophapluat.vn": [
+  "doanhnhan.baophapluat.vn",
+  "doanhnhan.baophapluat.vn"
+ ],
+ "người mua cần thuộc nhóm đối tượng được hỗ trợ (người thu nhập thấp, công nhân, người lao động trong và ngoài khu công nghiệp…), chưa có nhà ở hoặc đất ở, chưa từng được hưởng chính sách nhà ở xã hội tại Đà Nẵng và đáp ứng điều kiện cư trú, bảo hiểm xã hội theo quy định. Hồ sơ chỉ nộp theo thông báo chính thức của Sở Xây dựng và chủ đầu tư.": [
+  "buyers must belong to an eligible group (low-income earners, factory workers, employees inside and outside industrial parks…), own no house or residential land, have never benefited from a social housing policy in Da Nang, and meet the residency and social insurance requirements under regulations. Applications are submitted only according to official announcements from the Department of Construction and the developer.",
+  "매수자는 지원 대상 그룹(저소득층, 공장 근로자, 산업단지 내외 노동자 등)에 속해야 하며, 주택이나 주거용 토지가 없고, 다낭에서 사회주택 정책 혜택을 받은 적이 없으며, 규정에 따른 거주 및 사회보험 요건을 충족해야 합니다. 서류는 건설국과 시행사의 공식 공고에 따라서만 제출합니다."
+ ],
+ "nhadautu.vn": [
+  "nhadautu.vn",
+  "nhadautu.vn"
+ ],
+ "nhandan.vn": [
+  "nhandan.vn",
+  "nhandan.vn"
+ ],
+ "như đang đứng tại dự án": [
+  "as if you were standing on site",
+  "현장에 서 있는 것처럼 둘러보기"
+ ],
  "phút": [
   "min",
   "분"
@@ -294,6 +1874,58 @@
  "qua hình ảnh": [
   "in pictures",
   "사진으로 보기"
+ ],
+ "thanhnien.vn": [
+  "thanhnien.vn",
+  "thanhnien.vn"
+ ],
+ "thuvienphapluat.vn": [
+  "thuvienphapluat.vn",
+  "thuvienphapluat.vn"
+ ],
+ "tienphong.vn": [
+  "tienphong.vn",
+  "tienphong.vn"
+ ],
+ "tuoitre.vn": [
+  "tuoitre.vn",
+  "tuoitre.vn"
+ ],
+ "tổ hợp Capital Square Đà Nẵng": [
+  "the Capital Square Da Nang complex",
+  "Capital Square Da Nang 복합 단지"
+ ],
+ "tỷ lệ vay tối đa": [
+  "maximum loan ratio",
+  "최대 대출 비율"
+ ],
+ "vietnamnet.vn": [
+  "vietnamnet.vn",
+  "vietnamnet.vn"
+ ],
+ "vneconomy.vn": [
+  "vneconomy.vn",
+  "vneconomy.vn"
+ ],
+ "vnexpress.net": [
+  "vnexpress.net",
+  "vnexpress.net"
+ ],
+ "và": [
+  "and",
+  "및"
+ ],
+ "và các phân khu:": [
+  "and its subdivisions:",
+  "및 각 구역:"
+ ],
+ "Áp dụng từ 19/11/2026 cho Bạch Vân, Vịnh Mây, Đảo Ngọc": [
+  "Applies from November 19, 2026 to Bach Van, Vinh May and Dao Ngoc",
+  "2026년 11월 19일부터 Bach Van, Vinh May, Dao Ngoc에 적용"
+ ],
+ "Đang bàn giao": [
+  "Handover in progress",
+  "입주 진행 중"
  ],
  "Đang mở bán": [
   "On sale",
@@ -303,17 +1935,113 @@
   "Online · replies within minutes",
   "온라인 · 몇 분 내 답변"
  ],
+ "Đang xem": [
+  "Currently viewing",
+  "현재 보는 중"
+ ],
  "Đà Nẵng": [
   "Da Nang",
   "다낭"
+ ],
+ "Đà Nẵng duyệt nhiệm vụ quy hoạch chung đô thị Thăng Điền đến 2050: hơn 6.158 ha, gần 96.500 dân": [
+  "Da Nang approves the general planning task for Thang Dien urban area to 2050: over 6,158 ha, nearly 96,500 residents",
+  "다낭시, 2050년까지 탕디엔 도시 종합계획 과제 승인: 6,158헥타르 이상, 인구 약 96,500명"
  ],
  "Đã bàn giao": [
   "Handed over",
   "입주 완료"
  ],
+ "Đèo Hải Vân": [
+  "Hai Van Pass",
+  "하이번 고개"
+ ],
+ "Đèo Hải Vân, hầm Hải Vân": [
+  "Hai Van Pass, Hai Van Tunnel",
+  "하이번 고개, 하이번 터널"
+ ],
+ "Đơn lập": [
+  "Detached",
+  "단독"
+ ],
+ "Đường Ngô Quyền – Trần Hưng Đạo, phường An Hải": [
+  "Ngo Quyen – Tran Hung Dao streets, An Hai Ward",
+  "안하이동, 응오꾸옌(Ngo Quyen St.) – 쩐흥다오(Tran Hung Dao St.) 거리"
+ ],
+ "Đường Trường Sa, phường Hòa Hải (cũ), Ngũ Hành Sơn, Đà Nẵng": [
+  "Truong Sa Street, Hoa Hai Ward (former), Ngu Hanh Son, Da Nang",
+  "다낭 응우한선 호아하이동(구), 쯔엉사 거리(Truong Sa St.)"
+ ],
+ "Đường Võ Chí Công, phường Hòa Hải": [
+  "Vo Chi Cong Street, Hoa Hai Ward",
+  "호아하이동, 보찌꽁 거리(Vo Chi Cong St.)"
+ ],
+ "Đại học Bách khoa, Đại học Sư phạm Đà Nẵng": [
+  "Da Nang University of Science and Technology, Da Nang University of Education",
+  "다낭 과학기술대학교, 다낭 사범대학교"
+ ],
+ "Đại học Kinh tế Đà Nẵng": [
+  "Da Nang University of Economics",
+  "다낭 경제대학교"
+ ],
+ "Đất nền Cồn Dầu Hòa Xuân": [
+  "Con Dau Hoa Xuan land plots",
+  "Con Dau Hoa Xuan 토지(필지)"
+ ],
+ "Đất nền phân lô xây tự do": [
+  "Subdivided land plots, free to build",
+  "자유 건축 분할 토지(필지)"
+ ],
+ "Đặt cọc": [
+  "Deposit",
+  "계약금"
+ ],
+ "Định giá tham khảo theo giao dịch, tin rao cùng khu – đặt giá sát thị trường": [
+  "Reference valuation based on transactions and listings in the same area – set a price close to the market",
+  "같은 지역의 거래·매물 기준 참고 시세 평가 – 시장가에 맞춘 가격 책정"
+ ],
  "Định giá, kiểm tra sổ hồng trước khi giao dịch": [
   "Valuation and Pink Book (ownership certificate) check before the transaction",
   "거래 전 시세 평가 및 핑크북(소유권 증서) 확인"
+ ],
+ "Đợt": [
+  "Installment",
+  "회차"
+ ],
+ "Đợt 1": [
+  "Installment 1",
+  "1회차"
+ ],
+ "Đợt 2": [
+  "Installment 2",
+  "2회차"
+ ],
+ "Đợt 3": [
+  "Installment 3",
+  "3회차"
+ ],
+ "Đợt 4": [
+  "Installment 4",
+  "4회차"
+ ],
+ "để nhận danh sách lô đang bán thật, kiểm tra sổ đỏ, quy hoạch và đi xem đất trực tiếp tại Điện Ngọc.": [
+  "to receive the list of plots genuinely for sale, check the Red Book (land use right certificate) and zoning, and visit the land in person in Dien Ngoc.",
+  "연락 주시면 실제 판매 중인 필지 목록을 받아보시고, 레드북(토지사용권 증서)과 도시계획을 확인하며, Dien Ngoc 현장에서 직접 토지를 둘러보실 수 있습니다."
+ ],
+ "Ưu đãi VinClub: 0,5% – 0,7% – 0,9% tùy hạng thành viên": [
+  "VinClub incentive: 0.5% – 0.7% – 0.9% depending on membership tier",
+  "VinClub 혜택: 회원 등급에 따라 0.5% – 0.7% – 0.9%"
+ ],
+ "Ưu đãi thanh toán sớm": [
+  "Early payment incentive",
+  "조기 납부 혜택"
+ ],
+ "Ưu đãi đang áp dụng · cập nhật 11/2026": [
+  "Current incentives · updated November 2026",
+  "현행 혜택 · 2026년 11월 업데이트"
+ ],
+ "Ảnh bìa Newtown Diamond Đà Nẵng": [
+  "Newtown Diamond Da Nang cover image",
+  "Newtown Diamond Da Nang 대표 이미지"
  ],
  "Ảnh phối cảnh, minh họa của chủ đầu tư; ảnh thực tế có ghi chú riêng.": [
   "Renderings and illustrations are from the developer; actual photos are labeled separately.",
@@ -326,6 +2054,26 @@
  "← Về trang chủ": [
   "← Back to home",
   "← 홈으로"
+ ],
+ "▶ Xem 360°": [
+  "▶ View 360°",
+  "▶ 360° 보기"
+ ],
+ "✔ Sắp mở bán": [
+  "✔ Coming soon",
+  "✔ 분양 예정"
+ ],
+ "✔ Đang mở bán": [
+  "✔ On sale",
+  "✔ 분양 중"
+ ],
+ "✔ Đã bàn giao": [
+  "✔ Handed over",
+  "✔ 입주 완료"
+ ],
+ "✔ Đã bán hết từ chủ đầu tư": [
+  "✔ Sold out by the developer",
+  "✔ 시행사 분양 완료"
  ],
  "📍 Chỉ đường tới dự án ↗": [
   "📍 Directions to the project ↗",
