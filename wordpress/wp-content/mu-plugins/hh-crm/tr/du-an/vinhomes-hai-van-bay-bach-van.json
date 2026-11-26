@@ -124,8 +124,8 @@
   "프로젝트 최초 인도 – 즉시 입주 또는 임대에 유리"
  ],
  "Bạch Vân (nhà thô, xây ngay) – về ở sớm ưu đãi 10%: ưu đãi vào giá HĐMB khi ký hợp đồng, hoàn tiền khi đủ điều kiện về ở sớm (theo danh sách căn thuộc chương trình)": [
-  "Bach Van (shell houses, build right away) – 10% early move-in incentive: applied to the SPA price at signing, refunded once early move-in conditions are met (for units on the program list)",
-  "Bach Van(골조 주택, 즉시 건축 가능) – 조기 입주 10% 혜택: 계약 체결 시 매매계약서(SPA) 가격에 반영되며, 조기 입주 조건 충족 시 환급(프로그램 대상 세대 목록 기준)"
+  "Bach Van (shell house, build right away) – 10% early move-in incentive: applied to the SPA price on signing, refunded once early move-in conditions are met (for units on the program list)",
+  "Bach Van(골조 주택, 즉시 건축) – 조기 입주 10% 혜택: 계약 체결 시 SPA 가격에 반영, 조기 입주 조건 충족 시 환급(프로그램 대상 세대 목록 기준)"
  ],
  "Bạch Vân có những loại sản phẩm nào?": [
   "What property types does Bach Van offer?",
@@ -160,8 +160,8 @@
   "Bach Van 분양가표 2026년 10월(참고)"
  ],
  "Chọn 1 trong 2 phương án (CSBH từ 19/11/2026): PA1 lãi suất cố định – vay tới 70% giá trị căn, khách trả 3%/năm nếu hỗ trợ 18 tháng, 4,5% (24 tháng), 6% (30 tháng), 7,5% (36 tháng), 8,5% (48 tháng), 9% (60 tháng); PA2 hỗ trợ lãi suất 0% với chi phí cộng thêm vào giá gốc (vay 70%: +3,5% cho 18 tháng đến +19,5% cho 36 tháng). Sản phẩm giãn xây vay tới 80% tiền đất và thương mại. Căn hoàn thiện nội thất chỉ áp dụng PA1. Hạn mức theo xét duyệt ngân hàng.": [
-  "Choose 1 of 2 options (sales policy from November 19, 2026): Option 1 fixed interest rate – loans up to 70% of the unit value, the buyer pays 3%/year with 18 months of support, 4.5% (24 months), 6% (30 months), 7.5% (36 months), 8.5% (48 months), 9% (60 months); Option 2 0% interest support with the cost added to the base price (70% loan: +3.5% for 18 months up to +19.5% for 36 months). Extended-payment products can borrow up to 80% of the land and commercial value. Units with completed interiors only apply Option 1. Loan limits are subject to bank approval.",
-  "2가지 방안 중 1가지 선택(2026년 11월 19일부터 분양 정책): 방안 1 고정 금리 – 세대 가치의 최대 70% 대출, 지원 기간 18개월 시 고객 부담 연 3%, 4.5%(24개월), 6%(30개월), 7.5%(36개월), 8.5%(48개월), 9%(60개월); 방안 2 0% 이자 지원, 비용은 기본 가격에 가산(70% 대출: 18개월 +3.5%부터 36개월 +19.5%까지). 분할 납부 상품은 토지 및 상업 가치의 최대 80%까지 대출 가능. 인테리어 완비 세대는 방안 1만 적용. 대출 한도는 은행 심사에 따릅니다."
+  "Choose 1 of 2 options (sales policy from November 19, 2026): Option 1 fixed interest rate – borrow up to 70% of the unit value, the buyer pays 3%/year with 18 months of support, 4.5% (24 months), 6% (30 months), 7.5% (36 months), 8.5% (48 months), 9% (60 months); Option 2 0% interest support with the cost added to the original price (70% loan: +3.5% for 18 months up to +19.5% for 36 months). Spread-construction products can borrow up to 80% of the land and commercial value. Furnished units are eligible for Option 1 only. Loan limits are subject to bank approval.",
+  "2개 방안 중 1개 선택(2026년 11월 19일부터 분양 정책): 방안 1 고정 금리 – 세대 가치의 최대 70% 대출, 고객 부담 18개월 지원 시 연 3%, 4.5%(24개월), 6%(30개월), 7.5%(36개월), 8.5%(48개월), 9%(60개월); 방안 2 0% 이자 지원, 비용은 원가에 가산(70% 대출: 18개월 +3.5%부터 36개월 +19.5%까지). 건축비 분할 납부 상품은 토지·상업 가치의 최대 80%까지 대출 가능. 가구 마감 세대는 방안 1만 적용. 대출 한도는 은행 심사에 따릅니다."
  ],
  "Chợ Hong Kong": [
   "Hong Kong market",
@@ -333,7 +333,7 @@
  ],
  "Voucher thanh toán tối đa": [
   "Maximum payment voucher",
-  "최대 결제 바우처"
+  "최대 납부 바우처"
  ],
  "Về ở sớm ưu đãi 10% – thanh toán sớm 7,5%": [
   "10% early move-in incentive – 7.5% for early payment",

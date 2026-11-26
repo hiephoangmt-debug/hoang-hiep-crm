@@ -1,0 +1,2118 @@
+{
+ "\"Giữ căn\"": [
+  "\"Hold unit\"",
+  "\"세대 홀드\""
+ ],
+ "%/năm": [
+  "%/year",
+  "%/년"
+ ],
+ "(số lượng có hạn)": [
+  "(limited quantity)",
+  "(수량 한정)"
+ ],
+ "* Con số minh họa tính trên giá trị căn hộ có VAT, chưa trừ 3% chiết khấu không vay và chưa cộng kinh phí bảo trì (KPBT). Số tiền chính xác căn cứ theo hợp đồng.": [
+  "* Illustrative figures calculated on the unit value including VAT, before the 3% no-loan discount and excluding the maintenance fee. Exact amounts are based on the contract.",
+  "* 예시 수치는 VAT 포함 세대 가치 기준이며, 대출 미이용 3% 할인 전, 관리 유지비 제외 금액입니다. 정확한 금액은 계약서를 기준으로 합니다."
+ ],
+ "* Căn cứ chính sách CSBH 4.2/FT/SPG/09-2026 dành cho căn hộ Tòa F2, hiệu lực từ 26/09/2026. Các ưu đãi thanh toán sớm không cộng gộp với nhau, cũng không đi cùng gói hỗ trợ lãi suất. Chủ đầu tư có quyền điều chỉnh chính sách mà không phải thông báo trước.": [
+  "* Based on sales policy 4.2/FT/SPG/09-2026 for Tower F2 apartments, effective from September 26, 2026. Early payment incentives cannot be combined with each other or with the interest support package. The developer reserves the right to adjust the policy without prior notice.",
+  "* F2동 아파트 대상 분양 정책 4.2/FT/SPG/09-2026 기준, 2026년 9월 26일부터 유효. 조기 납부 혜택은 서로 중복되지 않으며 이자 지원 패키지와도 함께 적용되지 않습니다. 시행사는 사전 통지 없이 정책을 조정할 권리가 있습니다."
+ ],
+ "* Danh sách căn có thể đổi khi căn đã có người giao dịch. Đơn giá tính theo diện tích thông thủy, chưa tính ban công/sân vườn. Thứ tự trừ trên giá chưa VAT & KPBT: quà nội thất Nhà Xinh (35–100 triệu tùy loại căn) → không vay 3% → từ chối bảo lãnh ngân hàng 1% (nếu chọn) → thanh toán sớm 2,5% / 5% / 12% (căn đã giữ chỗ trước 26/10/2026, số lượng có hạn). Cộng dồn chiết khấu tối đa ~15,5%, chưa tính phần quà.": [
+  "* The list may change once a unit is under transaction. Unit price is calculated on net area, excluding balcony/garden. Order of deductions from the price before VAT & maintenance fee: Nha Xinh furniture gift (35–100 million VND depending on unit type) → 3% for no loan → 1% for declining the bank guarantee (if chosen) → early payment 2.5% / 5% / 12% (units booked before October 26, 2026, limited quantity). Cumulative discount up to ~15.5%, excluding the gift.",
+  "* 거래가 진행된 세대는 목록이 변경될 수 있습니다. 단가는 전용면적 기준이며 발코니/정원은 제외됩니다. VAT·관리 유지비 제외 가격에서의 차감 순서: Nha Xinh 가구 증정(세대 유형별 3,500만–1억 동) → 대출 미이용 3% → 은행 보증 거절 1%(선택 시) → 조기 납부 2.5% / 5% / 12%(2026년 10월 26일 이전 예약 세대, 수량 한정). 누적 할인 최대 ~15.5%, 증정품 제외."
+ ],
+ "* Diện tích lấy theo mặt bằng tầng chủ đầu tư phát hành, chỉ mang tính tương đối; thông số chính thức căn cứ văn bản ký kết.": [
+  "* Areas are taken from the floor plans issued by the developer and are approximate; official figures are based on the signed documents.",
+  "* 면적은 시행사가 발행한 층별 평면도 기준이며 대략적인 수치입니다. 공식 수치는 체결된 문서를 기준으로 합니다."
+ ],
+ "* Số liệu ước tính dựa trên giá niêm yết (đã gồm VAT & KPBT), chưa áp chiết khấu. Ngân hàng do chủ đầu tư chỉ định; con số chính xác căn cứ hợp đồng và kết quả phê duyệt tín dụng.": [
+  "* Figures are estimates based on list prices (including VAT & maintenance fee), before discounts. The bank is designated by the developer; exact figures depend on the contract and the credit approval result.",
+  "* 수치는 정가(VAT·관리 유지비 포함), 할인 전 기준 추정치입니다. 은행은 시행사가 지정하며, 정확한 수치는 계약서와 대출 심사 결과에 따릅니다."
+ ],
+ "* Trường hợp vay ít hơn 70%, khách hàng bù phần vốn tự có ở đợt 3 cho đủ 70% giá trị căn hộ.": [
+  "* If you borrow less than 70%, you top up the difference with your own capital at installment 3 to reach 70% of the unit value.",
+  "* 70% 미만으로 대출하시는 경우, 3차에 자기 자본으로 부족분을 보충하여 세대 가치의 70%를 채우셔야 합니다."
+ ],
+ "+ ban công 10,7 m²": [
+  "+ balcony 10.7 m²",
+  "+ 발코니 10.7 m²"
+ ],
+ "+ ban công 13,0 m²": [
+  "+ balcony 13.0 m²",
+  "+ 발코니 13.0 m²"
+ ],
+ ", có ân hạn nợ gốc và không mất phí khi tất toán sớm. Lấy căn 2 phòng ngủ (~2,9 tỷ nếu vay) làm ví dụ: tới ngày nhận nhà anh/chị bỏ ra khoảng 725 triệu; còn nếu thanh toán nhanh thì giá chỉ khoảng 2,7 tỷ.": [
+  ", with a principal grace period and no fee for early settlement. Take a 2-bedroom unit (~2.9 billion VND with a loan) as an example: by handover you will have paid about 725 million VND; with fast payment the price is only about 2.7 billion VND.",
+  "를 지원하며, 원금 거치와 중도 상환 수수료 면제가 적용됩니다. 2베드룸 세대(대출 시 ~29억 동)를 예로 들면, 입주일까지 고객님이 부담하시는 금액은 약 7억 2,500만 동이며, 일시 납부 시 가격은 약 27억 동에 불과합니다."
+ ],
+ ", căn 1PN từ 2,22 tỷ, 1PN+ khoảng 2,80 – 3,64 tỷ, 2PN từ 4,30 tỷ, 3PN từ 5,91 tỷ (khoảng 53 – 78 triệu/m²). Giá đã gồm VAT và phí bảo trì, chưa trừ chiết khấu: quà nội thất 35 – 100 triệu, không vay 3%; thanh toán sớm tới 12% còn cho một số căn đã giữ chỗ trước 26/10/2026. Tòa F2 có 607 căn đủ điều kiện bán, bàn giao sử dụng dự kiến 31/5/2028 (Sun Early Key).": [
+  ", 1BR from 2.22 billion VND, 1BR+ about 2.80 – 3.64 billion VND, 2BR from 4.30 billion VND, 3BR from 5.91 billion VND (about 53 – 78 million VND/m²). Prices include VAT and the maintenance fee, before discounts: furniture gift of 35 – 100 million VND, 3% for no loan; early payment of up to 12% still available for some units booked before October 26, 2026. Tower F2 has 607 units eligible for sale, with handover for use expected on May 31, 2028 (Sun Early Key).",
+  "부터, 1베드룸 22억 2천만 동부터, 1베드룸+ 약 28억 – 36억 4천만 동, 2베드룸 43억 동부터, 3베드룸 59억 1천만 동부터(m²당 약 5,300만 – 7,800만 동). 가격은 VAT와 관리 유지비 포함, 할인 전 가격입니다: 가구 증정 3,500만 – 1억 동, 대출 미이용 시 3%; 2026년 10월 26일 이전 예약한 일부 세대는 최대 12% 조기 납부 할인이 남아 있습니다. F2동은 분양 요건을 충족한 607세대이며, 2028년 5월 31일 입주(인도) 예정입니다(Sun Early Key)."
+ ],
+ ". Anh/chị thấy căn nào phù hợp thì nhấn": [
+  ". If you find a suitable unit, click",
+  "가격입니다. 마음에 드는 세대가 있으시면"
+ ],
+ "/căn": [
+  "/unit",
+  "/세대부터"
+ ],
+ "0đ lãi · chưa trả gốc": [
+  "0 VND interest · no principal payments yet",
+  "이자 0동 · 원금 상환 없음"
+ ],
+ "1,98 tỷ": [
+  "1.98 billion VND",
+  "19억 8천만 동"
+ ],
+ "1,98 – 2,33 tỷ": [
+  "1.98 – 2.33 billion VND",
+  "19억 8천만 – 23억 3천만 동"
+ ],
+ "1.984.393.401 đ": [
+  "1,984,393,401 VND",
+  "1,984,393,401동"
+ ],
+ "10 căn có ban công lớn ~8–23 m², ngay cạnh tầng tiện ích hồ bơi": [
+  "10 units with large balconies of ~8–23 m², right next to the pool amenity floor",
+  "~8–23 m² 대형 발코니 세대 10세대, 수영장 편의시설층 바로 옆"
+ ],
+ "10% giá trị căn hộ ·": [
+  "10% of the unit value ·",
+  "세대 가치의 10% ·"
+ ],
+ "100 triệu (Studio/1PN/1PN+/2PN) · 150 triệu (3PN)": [
+  "100 million VND (Studio/1BR/1BR+/2BR) · 150 million VND (3BR)",
+  "1억 동(스튜디오/1베드룸/1베드룸+/2베드룸) · 1억 5,000만 동(3베드룸)"
+ ],
+ "15% giá trị căn hộ (đã gồm đợt 1)": [
+  "15% of the unit value (including installment 1)",
+  "세대 가치의 15%(1차 포함)"
+ ],
+ "150 triệu": [
+  "150 million VND",
+  "1억 5,000만 동"
+ ],
+ "1PN / 1PN+": [
+  "1BR / 1BR+",
+  "1베드룸 / 1베드룸+"
+ ],
+ "1PN · 1PN+": [
+  "1BR · 1BR+",
+  "1베드룸 · 1베드룸+"
+ ],
+ "1PN+": [
+  "1BR+",
+  "1베드룸+"
+ ],
+ "2 tầng hầm, 20 tầng nổi · 8 thang máy bố trí đều hai phía": [
+  "2 basements, 20 above-ground floors · 8 elevators evenly distributed on both sides",
+  "지하 2층, 지상 20층 · 양쪽에 고르게 배치된 엘리베이터 8대"
+ ],
+ "2,03 tỷ": [
+  "2.03 billion VND",
+  "20억 3천만 동"
+ ],
+ "2,1 tỷ": [
+  "2.1 billion VND",
+  "21억 동"
+ ],
+ "2,14 tỷ": [
+  "2.14 billion VND",
+  "21억 4천만 동"
+ ],
+ "2,22 tỷ": [
+  "2.22 billion VND",
+  "22억 2천만 동"
+ ],
+ "2,33 tỷ": [
+  "2.33 billion VND",
+  "23억 3천만 동"
+ ],
+ "2,7 tỷ": [
+  "2.7 billion VND",
+  "27억 동"
+ ],
+ "2,80 tỷ": [
+  "2.80 billion VND",
+  "28억 동"
+ ],
+ "2,80 – 3,64 tỷ": [
+  "2.80 – 3.64 billion VND",
+  "28억 – 36억 4천만 동"
+ ],
+ "2,85 tỷ": [
+  "2.85 billion VND",
+  "28억 5천만 동"
+ ],
+ "2.136.450.455 đ": [
+  "2,136,450,455 VND",
+  "2,136,450,455동"
+ ],
+ "2.221.231.108 đ": [
+  "2,221,231,108 VND",
+  "2,221,231,108동"
+ ],
+ "2.334.629.636 đ": [
+  "2,334,629,636 VND",
+  "2,334,629,636동"
+ ],
+ "2.797.664.495 đ": [
+  "2,797,664,495 VND",
+  "2,797,664,495동"
+ ],
+ "2.848.367.018 đ": [
+  "2,848,367,018 VND",
+  "2,848,367,018동"
+ ],
+ "25% là đủ tới khi nhận nhà": [
+  "25% is enough until handover",
+  "입주 시까지 25%면 충분"
+ ],
+ "290 triệu": [
+  "290 million VND",
+  "2억 9,000만 동"
+ ],
+ "3,04 tỷ": [
+  "3.04 billion VND",
+  "30억 4천만 동"
+ ],
+ "3,31 tỷ": [
+  "3.31 billion VND",
+  "33억 1천만 동"
+ ],
+ "3,64 tỷ": [
+  "3.64 billion VND",
+  "36억 4천만 동"
+ ],
+ "3.042.183.925 đ": [
+  "3,042,183,925 VND",
+  "3,042,183,925동"
+ ],
+ "3.314.947.525 đ": [
+  "3,314,947,525 VND",
+  "3,314,947,525동"
+ ],
+ "3.640.438.546 đ": [
+  "3,640,438,546 VND",
+  "3,640,438,546동"
+ ],
+ "30,1 m²": [
+  "30.1 m²",
+  "30.1 m²"
+ ],
+ "30,1 – 30,4 m²": [
+  "30.1 – 30.4 m²",
+  "30.1 – 30.4 m²"
+ ],
+ "30,4 m²": [
+  "30.4 m²",
+  "30.4 m²"
+ ],
+ "300 triệu": [
+  "300 million VND",
+  "3억 동"
+ ],
+ "31/05/2028 (sau khi thanh toán đủ 70%)": [
+  "May 31, 2028 (after paying the full 70%)",
+  "2028년 5월 31일(70% 완납 후)"
+ ],
+ "335 triệu": [
+  "335 million VND",
+  "3억 3,500만 동"
+ ],
+ "35 triệu": [
+  "35 million VND",
+  "3,500만 동"
+ ],
+ "4,30 tỷ": [
+  "4.30 billion VND",
+  "43억 동"
+ ],
+ "4.295.865.403 đ": [
+  "4,295,865,403 VND",
+  "4,295,865,403동"
+ ],
+ "41,8 m²": [
+  "41.8 m²",
+  "41.8 m²"
+ ],
+ "450 triệu": [
+  "450 million VND",
+  "4억 5,000만 동"
+ ],
+ "5,91 tỷ": [
+  "5.91 billion VND",
+  "59억 1천만 동"
+ ],
+ "5.914.300.368 đ": [
+  "5,914,300,368 VND",
+  "5,914,300,368동"
+ ],
+ "50,2 m²": [
+  "50.2 m²",
+  "50.2 m²"
+ ],
+ "50,2 – 60,8 m²": [
+  "50.2 – 60.8 m²",
+  "50.2 – 60.8 m²"
+ ],
+ "51,0 m²": [
+  "51.0 m²",
+  "51.0 m²"
+ ],
+ "53,0 m²": [
+  "53.0 m²",
+  "53.0 m²"
+ ],
+ "53,1 tr/m²": [
+  "53.1 million VND/m²",
+  "m²당 5,310만 동"
+ ],
+ "53,7 tr/m²": [
+  "53.7 million VND/m²",
+  "m²당 5,370만 동"
+ ],
+ "55,7 tr/m²": [
+  "55.7 million VND/m²",
+  "m²당 5,570만 동"
+ ],
+ "55,8 m²": [
+  "55.8 m²",
+  "55.8 m²"
+ ],
+ "59,4 tr/m²": [
+  "59.4 million VND/m²",
+  "m²당 5,940만 동"
+ ],
+ "59,7 tr/m²": [
+  "59.7 million VND/m²",
+  "m²당 5,970만 동"
+ ],
+ "59,9 tr/m²": [
+  "59.9 million VND/m²",
+  "m²당 5,990만 동"
+ ],
+ "60,8 m²": [
+  "60.8 m²",
+  "60.8 m²"
+ ],
+ "63,2 m²": [
+  "63.2 m²",
+  "63.2 m²"
+ ],
+ "65,9 tr/m²": [
+  "65.9 million VND/m²",
+  "m²당 6,590만 동"
+ ],
+ "68,0 tr/m²": [
+  "68.0 million VND/m²",
+  "m²당 6,800만 동"
+ ],
+ "68,5 tr/m²": [
+  "68.5 million VND/m²",
+  "m²당 6,850만 동"
+ ],
+ "70,3 tr/m²": [
+  "70.3 million VND/m²",
+  "m²당 7,030만 동"
+ ],
+ "725 triệu": [
+  "725 million VND",
+  "7억 2,500만 동"
+ ],
+ "75 triệu": [
+  "75 million VND",
+  "7,500만 동"
+ ],
+ "77,6 tr/m²": [
+  "77.6 million VND/m²",
+  "m²당 7,760만 동"
+ ],
+ "77,95 m · tầng 20 cao 6 m": [
+  "77.95 m · 20th floor 6 m high",
+  "77.95 m · 20층 층고 6 m"
+ ],
+ "86,3 m²": [
+  "86.3 m²",
+  "86.3 m²"
+ ],
+ "AEON Mall 5 phút · điểm bắn pháo hoa DIFF 8 phút": [
+  "AEON Mall 5 minutes · DIFF fireworks festival venue 8 minutes",
+  "AEON Mall 5분 · 다낭 국제 불꽃축제(DIFF) 장소 8분"
+ ],
+ "Anh/chị còn thắc mắc về tòa F2?": [
+  "Still have questions about Tower F2?",
+  "F2동에 대해 더 궁금하신 점이 있으신가요?"
+ ],
+ "Anh/chị đã ưng căn Tòa F2 nào?": [
+  "Which Tower F2 unit do you like?",
+  "마음에 드는 F2동 세대가 있으신가요?"
+ ],
+ "Anh/chị được miễn phí dịch vụ quản lý trong 2 năm tính từ ngày bàn giao chính thức, nhận lãi 8%/năm khi dùng vốn tự có thanh toán trước hạn, đồng thời tích thưởng Sun Signature 0,7–2% giá trị hợp đồng mua bán tùy hạng hội viên.": [
+  "You get free management service for 2 years from the official handover date, 8%/year interest when paying early with your own capital, and Sun Signature rewards of 0.7–2% of the SPA value depending on membership tier.",
+  "공식 입주(인도)일로부터 2년간 관리 서비스 무료, 자기 자본으로 조기 납부 시 연 8% 이자, 회원 등급에 따라 SPA 금액의 0.7–2% Sun Signature 적립 혜택이 있습니다."
+ ],
+ "Anh/chị được ngân hàng chủ đầu tư chỉ định cho vay tới 70% giá trị căn hộ. Thời gian hỗ trợ lãi suất tối đa 24 tháng tính từ lần giải ngân đầu tiên, chậm nhất đến 31/01/2029; trong thời gian này được ân hạn nợ gốc, và trả nợ trước hạn không mất phí.": [
+  "The bank designated by the developer lends you up to 70% of the unit value. The interest support period is up to 24 months from the first disbursement, no later than January 31, 2029; during this time there is a principal grace period, and early repayment is free of charge.",
+  "시행사가 지정한 은행이 세대 가치의 최대 70%를 대출해 드립니다. 이자 지원 기간은 첫 대출 실행일로부터 최대 24개월, 늦어도 2029년 1월 31일까지이며, 이 기간 동안 원금 거치가 적용되고 중도 상환 수수료가 없습니다."
+ ],
+ "Anh/chị để lại số điện thoại, tôi tính luôn khoản tiết kiệm được cho đúng căn anh/chị đang nhắm.": [
+  "Leave your phone number and I will calculate the savings for exactly the unit you have in mind.",
+  "전화번호를 남겨 주시면 고객님이 염두에 두신 세대 기준으로 절약 금액을 바로 계산해 드리겠습니다."
+ ],
+ "Anh/chị ở xa, chưa tiện ra Đà Nẵng?": [
+  "Living far away and can't easily come to Da Nang?",
+  "멀리 계셔서 다낭에 오시기 어려우신가요?"
+ ],
+ "BIỂN ĐÔNG": [
+  "EAST SEA",
+  "동해"
+ ],
+ "Biển": [
+  "Beach",
+  "해변"
+ ],
+ "Buổi sáng tắm biển, buổi tối về nhà, lại không phải trả mức giá của căn hộ sát biển.": [
+  "Swim in the sea in the morning, come home in the evening – without paying beachfront apartment prices.",
+  "아침에는 바다 수영, 저녁에는 집으로 – 해변 아파트 가격을 지불하지 않아도 됩니다."
+ ],
+ "Bàn giao chính thức (dự kiến 31/05/2030)": [
+  "Official handover (expected May 31, 2030)",
+  "공식 입주(인도)(2030년 5월 31일 예정)"
+ ],
+ "Bảng giá Tòa F2": [
+  "Tower F2 price list",
+  "F2동 분양가표"
+ ],
+ "Bảng giá Tòa F2 FourS Tower –": [
+  "FourS Tower Tower F2 price list –",
+  "FourS Tower F2동 분양가표 –"
+ ],
+ "Bảng giá căn hộ Sun Đà Nẵng": [
+  "Sun Da Nang apartment price list",
+  "다낭 Sun 아파트 분양가표"
+ ],
+ "Bảng giá căn hộ Tòa F2 FourS Tower – giỏ hàng cập nhật 03/10/2026": [
+  "FourS Tower Tower F2 apartment price list – available units updated October 3, 2026",
+  "FourS Tower F2동 아파트 분양가표 – 2026년 10월 3일 매물 목록 업데이트"
+ ],
+ "Bảng tính": [
+  "Calculator",
+  "계산기"
+ ],
+ "Bảng tính dòng tiền": [
+  "Cash-flow calculator",
+  "현금흐름 계산기"
+ ],
+ "Bấm vào ảnh phóng to để xem mã căn, diện tích tim tường và thông thủy từng căn.": [
+  "Click the enlarged image to see each unit's code, gross area and net area.",
+  "확대 이미지를 클릭하면 세대별 호수, 공급면적, 전용면적을 보실 수 있습니다."
+ ],
+ "Bỏ qua đến nội dung chính": [
+  "Skip to main content",
+  "본문으로 건너뛰기"
+ ],
+ "Bổ sung đủ 15% (ngày 15)": [
+  "Top up to 15% (day 15)",
+  "15%까지 추가 납부(15일째)"
+ ],
+ "Cam kết bảo mật thông tin tuyệt đối": [
+  "Your information is kept strictly confidential",
+  "개인정보를 철저히 보호합니다"
+ ],
+ "Chiết khấu": [
+  "Discount",
+  "할인"
+ ],
+ "Chiết khấu thanh toán sớm Tòa F2 (trừ trực tiếp vào giá trị căn hộ chưa VAT & KPBT)": [
+  "Tower F2 early payment discounts (deducted directly from the unit value before VAT & maintenance fee)",
+  "F2동 조기 납부 할인(VAT·관리 유지비 제외 세대 가치에서 직접 차감)"
+ ],
+ "Chiết khấu tới 15,5% + quà nội thất tới": [
+  "Discounts of up to 15.5% + furniture gift of up to",
+  "최대 15.5% 할인 + 가구 증정 최대"
+ ],
+ "Chiết khấu tới 15,5% + quà nội thất tới 100 triệu": [
+  "Discounts of up to 15.5% + furniture gift of up to 100 million VND",
+  "최대 15.5% 할인 + 최대 1억 동 가구 증정"
+ ],
+ "Chiều cao": [
+  "Height",
+  "높이"
+ ],
+ "Chính sách": [
+  "Policy",
+  "정책"
+ ],
+ "Chính sách bán hàng CSBH 4.2": [
+  "Sales policy 4.2",
+  "분양 정책 4.2"
+ ],
+ "Chính sách hỗ trợ lãi suất Tòa F2": [
+  "Tower F2 interest support policy",
+  "F2동 이자 지원 정책"
+ ],
+ "Chính sách mới · ký từ 17/10/2026": [
+  "New policy · contracts signed from October 17, 2026",
+  "신규 정책 · 2026년 10월 17일부터 계약"
+ ],
+ "Chưa rõ – cần tư vấn": [
+  "Not sure – need advice",
+  "미정 – 상담 필요"
+ ],
+ "Chỉ thanh toán 25% đến khi nhận nhà": [
+  "Pay only 25% until handover",
+  "입주 시까지 25%만 납부"
+ ],
+ "Chọn căn": [
+  "Choose a unit",
+  "세대 선택"
+ ],
+ "Chọn căn, ngày ký và phương án – nhận ngay giá sau chiết khấu, lịch đóng tiền từng ngày và bảng so sánh 5 phương án theo phiếu tính giá CSBH 4.2.": [
+  "Choose a unit, signing date and option – instantly get the price after discount, the day-by-day payment schedule and a comparison of 5 options based on the sales policy 4.2 price sheet.",
+  "세대, 계약일, 방안을 선택하면 분양 정책 4.2 가격 산정표 기준 할인 후 가격, 일자별 납부 일정, 5가지 방안 비교표를 바로 받아보실 수 있습니다."
+ ],
+ "Chọn tầng, xoay tòa nhà – xem chi tiết từng căn": [
+  "Choose a floor, rotate the building – see each unit in detail",
+  "층 선택, 건물 회전 – 세대별 상세 보기"
+ ],
+ "Chủ đầu tư Công ty Cổ phần Địa Cầu · Sun Property (Sun Group) phát triển": [
+  "Developer Dia Cau JSC · developed by Sun Property (Sun Group)",
+  "시행사 Dia Cau 주식회사 · Sun Property(Sun Group) 개발"
+ ],
+ "Cuộn để phóng to, kéo để xoay; lọc theo tầng, mặt đứng và loại căn để hình dung vị trí cũng như hướng view của căn anh/chị đang để ý.": [
+  "Scroll to zoom, drag to rotate; filter by floor, facade and unit type to picture the position and view of the unit you are interested in.",
+  "스크롤하여 확대, 드래그하여 회전하고, 층·입면·세대 유형으로 필터링해 관심 세대의 위치와 전망을 확인해 보십시오."
+ ],
+ "Các tầng 2–7 của tòa F2 (tính cả tầng 3A) có vành đai sân vườn, nên nhiều căn sở hữu sân vườn hoặc ban công rộng riêng. Chẳng hạn tại tầng 3, hai căn F2-03-30 và F2-03-31 rộng khoảng 54,6 m² thông thủy, đi kèm sân vườn thông thủy khoảng 69 m²; căn góc 3 phòng ngủ F2-03-24 khoảng 87 m², sân vườn khoảng 47,6 m².": [
+  "Floors 2–7 of Tower F2 (including floor 3A) have a garden belt, so many units have their own garden or large balcony. For example, on the 3rd floor, units F2-03-30 and F2-03-31 are about 54.6 m² net with a net garden area of about 69 m²; the 3-bedroom corner unit F2-03-24 is about 87 m² with a garden of about 47.6 m².",
+  "F2동 2–7층(3A층 포함)에는 가든 벨트가 있어 많은 세대가 개인 정원이나 넓은 발코니를 보유합니다. 예를 들어 3층의 F2-03-30, F2-03-31 세대는 전용 약 54.6 m²에 정원 전용 약 69 m²가 딸려 있고, 3베드룸 코너 세대 F2-03-24는 약 87 m²에 정원 약 47.6 m²입니다."
+ ],
+ "Cách biển 2 km – từ sân bay về nhà chỉ 10 phút": [
+  "2 km from the sea – just 10 minutes from the airport to your home",
+  "바다까지 2km – 공항에서 집까지 단 10분"
+ ],
+ "Có tầng 3A (thay cho tầng 4); vành đai sân vườn giúp nhiều căn sở hữu sân vườn/ban công lớn riêng": [
+  "Includes floor 3A (instead of floor 4); the garden belt gives many units their own large garden/balcony",
+  "3A층 포함(4층 대신); 가든 벨트 덕분에 많은 세대가 넓은 개인 정원/발코니 보유"
+ ],
+ "Công cụ mới": [
+  "New tool",
+  "새 도구"
+ ],
+ "Căn cứ CSBH 4.2 (từ 17/10/2026), các khoản được trừ theo thứ tự trên giá chưa VAT & phí bảo trì: trước hết là quà nội thất Nhà Xinh (Studio 35 triệu, 1PN/1PN+ 50 triệu, 2PN 75 triệu, 3PN 100 triệu), kế đến không vay 3%, từ chối bảo lãnh ngân hàng 1% (không bắt buộc), sau cùng là thanh toán sớm 2,5% (50%) / 5% (70%) / 12% (95%) cho căn đã giữ chỗ trước 26/10/2026 (số lượng có hạn). Tổng cộng chiết khấu khoảng 15,5%, chưa tính quà. Lưu ý: ưu đãi thanh toán sớm không dùng chung với gói hỗ trợ lãi suất.": [
+  "Under sales policy 4.2 (from October 17, 2026), deductions apply in order on the price before VAT & maintenance fee: first the Nha Xinh furniture gift (Studio 35 million, 1BR/1BR+ 50 million, 2BR 75 million, 3BR 100 million VND), then 3% for no loan, 1% for declining the bank guarantee (optional), and finally early payment of 2.5% (50%) / 5% (70%) / 12% (95%) for units booked before October 26, 2026 (limited quantity). The total discount is about 15.5%, excluding the gift. Note: early payment incentives cannot be combined with the interest support package.",
+  "분양 정책 4.2(2026년 10월 17일부터)에 따라 VAT·관리 유지비 제외 가격에서 순서대로 차감됩니다: 먼저 Nha Xinh 가구 증정(스튜디오 3,500만, 1베드룸/1베드룸+ 5,000만, 2베드룸 7,500만, 3베드룸 1억 동), 다음으로 대출 미이용 3%, 은행 보증 거절 1%(선택 사항), 마지막으로 2026년 10월 26일 이전 예약 세대(수량 한정) 대상 조기 납부 2.5%(50%) / 5%(70%) / 12%(95%). 총 할인율은 증정품 제외 약 15.5%입니다. 참고: 조기 납부 혜택은 이자 지원 패키지와 함께 적용되지 않습니다."
+ ],
+ "Căn giữ chỗ trước 26/10/2026 (số lượng có hạn)": [
+  "Units booked before October 26, 2026 (limited quantity)",
+  "2026년 10월 26일 이전 예약 세대(수량 한정)"
+ ],
+ "Căn hộ sân vườn FourS Jardin Tòa F2 –": [
+  "FourS Jardin garden apartments in Tower F2 –",
+  "F2동 FourS Jardin 가든 아파트 –"
+ ],
+ "Căn hộ tòa F2 FourS Tower giá khoảng bao nhiêu?": [
+  "Roughly how much do Tower F2 FourS Tower apartments cost?",
+  "FourS Tower F2동 아파트 가격은 대략 얼마인가요?"
+ ],
+ "Căn sân vườn": [
+  "Garden units",
+  "가든 세대"
+ ],
+ "Căn sân vườn tòa F2 là căn gì?": [
+  "What are the Tower F2 garden units?",
+  "F2동 가든 세대란 무엇인가요?"
+ ],
+ "Căn sân vườn tầng 2–7": [
+  "Garden units on floors 2–7",
+  "2–7층 가든 세대"
+ ],
+ "Căn/tầng (tầng 8–19)": [
+  "Units/floor (floors 8–19)",
+  "층당 세대수(8–19층)"
+ ],
+ "Cảm ơn anh/chị đã quan tâm đến Tòa F2 FourS Tower. Trong khoảng 15 phút (giờ hành chính), chuyên viên tư vấn sẽ liên hệ và gửi thông tin qua Zalo. Cần hỗ trợ gấp? Nhắn Zalo:": [
+  "Thank you for your interest in FourS Tower Tower F2. Within about 15 minutes (business hours), an advisor will contact you and send the information via Zalo. Need urgent help? Message on Zalo:",
+  "FourS Tower F2동에 관심을 가져 주셔서 감사합니다. 약 15분 이내(업무 시간 기준) 상담사가 연락드리고 Zalo로 정보를 보내 드립니다. 급하신가요? Zalo 메시지:"
+ ],
+ "Cập nhật giỏ hàng ngày 03/10/2026: Tòa F2 có giá (gồm VAT và KPBT) khởi điểm khoảng 1,98 tỷ cho Studio 30,1 m²; 1PN từ 2,22 tỷ; 1PN+ từ 2,80 tỷ; 2PN từ 4,30 tỷ; 3PN khoảng 5,91 tỷ. Đơn giá dao động khoảng 53–78 triệu/m² thông thủy, tùy tầng và view.": [
+  "Available units updated October 3, 2026: Tower F2 prices (including VAT and maintenance fee) start at about 1.98 billion VND for a 30.1 m² studio; 1BR from 2.22 billion VND; 1BR+ from 2.80 billion VND; 2BR from 4.30 billion VND; 3BR about 5.91 billion VND. Unit prices range from about 53–78 million VND/m² of net area, depending on floor and view.",
+  "2026년 10월 3일 매물 목록 기준: F2동 가격(VAT·관리 유지비 포함)은 30.1 m² 스튜디오 약 19억 8천만 동부터, 1베드룸 22억 2천만 동부터, 1베드룸+ 28억 동부터, 2베드룸 43억 동부터, 3베드룸 약 59억 1천만 동입니다. 단가는 층과 전망에 따라 전용면적 m²당 약 5,300만–7,800만 동입니다."
+ ],
+ "Cập nhật: 02/10/2026": [
+  "Updated: October 2, 2026",
+  "업데이트: 2026년 10월 2일"
+ ],
+ "Cọc 100 triệu": [
+  "Deposit 100 million VND",
+  "계약금 1억 동"
+ ],
+ "Cọc ngày ký": [
+  "Deposit on signing day",
+  "계약일 계약금"
+ ],
+ "DT thông thủy": [
+  "Net area",
+  "전용면적"
+ ],
+ "Danh sách căn còn trống, có cả căn sân vườn": [
+  "List of available units, including garden units",
+  "가든 세대를 포함한 잔여 세대 목록"
+ ],
+ "Danh thắng Ngũ Hành Sơn chỉ 5 phút": [
+  "Marble Mountains (Ngu Hanh Son) just 5 minutes away",
+  "오행산까지 단 5분"
+ ],
+ "Dùng vốn tự có đóng trước hạn tối thiểu 10 ngày sẽ được tính lãi 8%/năm theo số tiền và số ngày đóng sớm.": [
+  "Paying with your own capital at least 10 days ahead of schedule earns interest of 8%/year on the amount and number of days paid early.",
+  "자기 자본으로 최소 10일 앞당겨 납부하면 조기 납부 금액과 일수에 따라 연 8%의 이자가 적용됩니다."
+ ],
+ "Dự kiến nhận nhà 31/05/2028": [
+  "Expected handover May 31, 2028",
+  "2028년 5월 31일 입주(인도) 예정"
+ ],
+ "Em sẽ gọi video Zalo, đi thực tế từ dự án ra tới biển để anh/chị tận mắt xem.": [
+  "I'll make a Zalo video call and walk from the project to the beach so you can see it with your own eyes.",
+  "제가 Zalo 영상 통화로 프로젝트에서 바다까지 직접 걸어가며 고객님께서 눈으로 확인하실 수 있도록 보여 드리겠습니다."
+ ],
+ "F2-03-19 (2PN góc):": [
+  "F2-03-19 (2BR corner):",
+  "F2-03-19(2베드룸 코너):"
+ ],
+ "F2-03-24 (căn góc 3PN):": [
+  "F2-03-24 (3BR corner unit):",
+  "F2-03-24(3베드룸 코너 세대):"
+ ],
+ "F2-03-29, F2-03-32:": [
+  "F2-03-29, F2-03-32:",
+  "F2-03-29, F2-03-32:"
+ ],
+ "F2-03-30, F2-03-31:": [
+  "F2-03-30, F2-03-31:",
+  "F2-03-30, F2-03-31:"
+ ],
+ "F2-03A-18": [
+  "F2-03A-18",
+  "F2-03A-18"
+ ],
+ "F2-03A-18 · Studio · 2,14 tỷ": [
+  "F2-03A-18 · Studio · 2.14 billion VND",
+  "F2-03A-18 · 스튜디오 · 21억 4천만 동"
+ ],
+ "F2-06-12": [
+  "F2-06-12",
+  "F2-06-12"
+ ],
+ "F2-06-12 · 1PN+ · 3,04 tỷ": [
+  "F2-06-12 · 1BR+ · 3.04 billion VND",
+  "F2-06-12 · 1베드룸+ · 30억 4천만 동"
+ ],
+ "F2-11-24": [
+  "F2-11-24",
+  "F2-11-24"
+ ],
+ "F2-11-24 · 3PN · 5,91 tỷ": [
+  "F2-11-24 · 3BR · 5.91 billion VND",
+  "F2-11-24 · 3베드룸 · 59억 1천만 동"
+ ],
+ "F2-11-31": [
+  "F2-11-31",
+  "F2-11-31"
+ ],
+ "F2-11-31 · 1PN+ · 3,64 tỷ": [
+  "F2-11-31 · 1BR+ · 3.64 billion VND",
+  "F2-11-31 · 1베드룸+ · 36억 4천만 동"
+ ],
+ "F2-12-10": [
+  "F2-12-10",
+  "F2-12-10"
+ ],
+ "F2-12-10 · 2PN · 4,3 tỷ": [
+  "F2-12-10 · 2BR · 4.3 billion VND",
+  "F2-12-10 · 2베드룸 · 43억 동"
+ ],
+ "F2-12-22": [
+  "F2-12-22",
+  "F2-12-22"
+ ],
+ "F2-12-22 · 1PN+ · 2,85 tỷ": [
+  "F2-12-22 · 1BR+ · 2.85 billion VND",
+  "F2-12-22 · 1베드룸+ · 28억 5천만 동"
+ ],
+ "F2-12A-01": [
+  "F2-12A-01",
+  "F2-12A-01"
+ ],
+ "F2-12A-01 · 1PN · 2,22 tỷ": [
+  "F2-12A-01 · 1BR · 2.22 billion VND",
+  "F2-12A-01 · 1베드룸 · 22억 2천만 동"
+ ],
+ "F2-12A-03A": [
+  "F2-12A-03A",
+  "F2-12A-03A"
+ ],
+ "F2-12A-03A · Studio · 2,33 tỷ": [
+  "F2-12A-03A · Studio · 2.33 billion VND",
+  "F2-12A-03A · 스튜디오 · 23억 3천만 동"
+ ],
+ "F2-12A-12": [
+  "F2-12A-12",
+  "F2-12A-12"
+ ],
+ "F2-12A-12 · 1PN+ · 2,8 tỷ": [
+  "F2-12A-12 · 1BR+ · 2.8 billion VND",
+  "F2-12A-12 · 1베드룸+ · 28억 동"
+ ],
+ "F2-15-29": [
+  "F2-15-29",
+  "F2-15-29"
+ ],
+ "F2-15-29 · 1PN+ · 3,31 tỷ": [
+  "F2-15-29 · 1BR+ · 3.31 billion VND",
+  "F2-15-29 · 1베드룸+ · 33억 1천만 동"
+ ],
+ "F2-15-32": [
+  "F2-15-32",
+  "F2-15-32"
+ ],
+ "F2-15-32 · 1PN+ · 3,31 tỷ": [
+  "F2-15-32 · 1BR+ · 3.31 billion VND",
+  "F2-15-32 · 1베드룸+ · 33억 1천만 동"
+ ],
+ "F2-16-11": [
+  "F2-16-11",
+  "F2-16-11"
+ ],
+ "F2-16-11 · Studio · 1,98 tỷ": [
+  "F2-16-11 · Studio · 1.98 billion VND",
+  "F2-16-11 · 스튜디오 · 19억 8천만 동"
+ ],
+ "F2-xx-xx · 2PN · x,xx tỷ": [
+  "F2-xx-xx · 2BR · x.xx billion VND",
+  "F2-xx-xx · 2베드룸 · x.xx 10억 동"
+ ],
+ "Giá Studio từ (đã gồm VAT)": [
+  "Studio prices from (VAT included)",
+  "스튜디오 가격(VAT 포함)"
+ ],
+ "Giá bán FourS Tower F2 – Tháp Mai Đà Nẵng (giỏ hàng tòa F2):": [
+  "FourS Tower F2 – Mai Tower Da Nang prices (Tower F2 available units):",
+  "FourS Tower F2 – Mai동 다낭 가격(F2동 매물 목록):"
+ ],
+ "Giá còn được trừ quà nội thất Nhà Xinh 35–100 triệu, tiếp đó là 3% khi không vay, 1% khi từ chối bảo lãnh và tới 12% khi thanh toán sớm (căn đã giữ chỗ trước 26/10, số lượng có hạn) – cộng lại chiết khấu tới 15,5%. Anh/chị xem ngay số tiền thực trả cho căn đã chọn.": [
+  "The price can still be reduced by the Nha Xinh furniture gift of 35–100 million VND, then 3% with no loan, 1% for declining the guarantee and up to 12% for early payment (units booked before October 26, limited quantity) – a total discount of up to 15.5%. See the actual amount you would pay for your chosen unit now.",
+  "가격에서 Nha Xinh 가구 증정 3,500만–1억 동이 차감되고, 이어서 대출 미이용 3%, 보증 거절 1%, 조기 납부 최대 12%(10월 26일 이전 예약 세대, 수량 한정)가 적용되어 총 최대 15.5% 할인됩니다. 선택하신 세대의 실제 납부 금액을 지금 확인하십시오."
+ ],
+ "Giá căn (tỷ)": [
+  "Unit price (billion VND)",
+  "세대 가격(10억 동 단위)"
+ ],
+ "Giá trên là giá TRƯỚC chiết khấu": [
+  "The prices above are BEFORE discount",
+  "위 가격은 할인 전 가격입니다"
+ ],
+ "Giá trị căn hộ (tỷ đồng, đã gồm VAT)": [
+  "Unit value (billion VND, VAT included)",
+  "세대 가치(10억 동 단위, VAT 포함)"
+ ],
+ "Giá từ": [
+  "Prices from",
+  "가격"
+ ],
+ "Giá từng căn sau khi trừ chiết khấu": [
+  "Price of each unit after discount",
+  "할인 적용 후 세대별 가격"
+ ],
+ "Giám đốc kinh doanh Sun FourS Tower · tư vấn trực tiếp, không qua tổng đài": [
+  "Sun FourS Tower Sales Director · direct advice, no call center",
+  "Sun FourS Tower 영업 이사 · 콜센터 없이 직접 상담"
+ ],
+ "Giây": [
+  "Seconds",
+  "초"
+ ],
+ "Giải đáp thắc mắc về": [
+  "Answers to questions about",
+  "자주 묻는 질문:"
+ ],
+ "Giỏ hàng": [
+  "Available units",
+  "매물 목록"
+ ],
+ "Giờ": [
+  "Hours",
+  "시간"
+ ],
+ "Giữ chỗ & nhận bảng tính giá": [
+  "Book & get the price calculation",
+  "예약 & 가격 계산표 받기"
+ ],
+ "Giữ chỗ & nhận bảng tính →": [
+  "Book & get the calculation →",
+  "예약 & 계산표 받기 →"
+ ],
+ "Giữ căn": [
+  "Hold unit",
+  "세대 홀드"
+ ],
+ "Gym, spa, Kids Club, hồ bơi 4 mùa": [
+  "Gym, spa, Kids Club, four-season pool",
+  "헬스장, 스파, 키즈 클럽, 사계절 수영장"
+ ],
+ "Góc ngã tư Nguyễn Phước Lan – Minh Mạng, phường Ngũ Hành Sơn (phường Hòa Quý cũ), Đà Nẵng ·": [
+  "Corner of the Nguyen Phuoc Lan – Minh Mang intersection, Ngu Hanh Son Ward (former Hoa Quy Ward), Da Nang ·",
+  "다낭 응우한선 동(구 호아뀌 동), 응우옌프억란(Nguyen Phuoc Lan) – 민망(Minh Mang) 사거리 코너 ·"
+ ],
+ "Gọi ngay để được ưu tiên": [
+  "Call now for priority",
+  "우선 상담을 위해 지금 전화"
+ ],
+ "Gửi bảng tính dòng tiền qua Zalo": [
+  "Cash-flow calculator sent via Zalo",
+  "Zalo로 현금흐름 계산표 발송"
+ ],
+ "Gửi cho tôi qua Zalo →": [
+  "Send it to me via Zalo →",
+  "Zalo로 보내 주세요 →"
+ ],
+ "Gửi qua Zalo bảng tính giá sau chiết khấu, so sánh 5 phương án": [
+  "Price-after-discount calculation sent via Zalo, comparing 5 options",
+  "할인 후 가격 계산표 Zalo 발송, 5가지 방안 비교"
+ ],
+ "Gửi qua Zalo trong 15 phút.": [
+  "Sent via Zalo within 15 minutes.",
+  "15분 내 Zalo로 발송합니다."
+ ],
+ "Hiện Tòa F2 còn các căn: Studio từ 1,98 tỷ, 1PN từ 2,22 tỷ, 1PN+ từ 2,80 tỷ, 2PN từ 4,30 tỷ, 3PN từ 5,91 tỷ. Mức giá này đã bao gồm VAT & KPBT và là giá": [
+  "Tower F2 currently has: Studio from 1.98 billion VND, 1BR from 2.22 billion VND, 1BR+ from 2.80 billion VND, 2BR from 4.30 billion VND, 3BR from 5.91 billion VND. These prices include VAT & the maintenance fee and are prices",
+  "현재 F2동 잔여 세대: 스튜디오 19억 8천만 동부터, 1베드룸 22억 2천만 동부터, 1베드룸+ 28억 동부터, 2베드룸 43억 동부터, 3베드룸 59억 1천만 동부터. 이 가격은 VAT 및 관리 유지비가 포함된"
+ ],
+ "Hotline:": [
+  "Hotline:",
+  "핫라인:"
+ ],
+ "Hoàng Phạm Đình Hiệp": [
+  "Hoang Pham Dinh Hiep",
+  "호앙 팜 딘 히엡"
+ ],
+ "Hoàng Phạm Đình Hiệp – Giám đốc kinh doanh": [
+  "Hoang Pham Dinh Hiep – Sales Director",
+  "호앙 팜 딘 히엡 – 영업 이사"
+ ],
+ "Hình flycam chụp thực tế phía trên khu đất, đã đánh dấu mặt bằng từng tòa. Anh/chị kéo để xoay 360°, quan sát dự án nằm giữa sông Cổ Cò, biển, núi Sơn Trà, Ngũ Hành Sơn và cả khu Sun Riverpolis. Muốn xem rõ hơn, bấm vào biểu tượng toàn màn hình.": [
+  "Actual drone photo taken above the site, with each tower's footprint marked. Drag to rotate 360° and see the project between the Co Co River, the sea, Son Tra mountain, the Marble Mountains (Ngu Hanh Son) and the whole Sun Riverpolis area. For a closer look, click the full-screen icon.",
+  "부지 상공에서 촬영한 드론 실사로, 동별 위치가 표시되어 있습니다. 드래그하여 360° 회전하면 꼬꼬 강, 바다, 선짜 산, 오행산, Sun Riverpolis 전체 사이에 자리한 프로젝트를 보실 수 있습니다. 더 자세히 보시려면 전체 화면 아이콘을 클릭하십시오."
+ ],
+ "Hướng dẫn đặt cọc 100 triệu từ xa, không phải lên văn phòng": [
+  "Guidance on paying the 100 million VND deposit remotely, no need to visit the office",
+  "1억 동 계약금 원격 납부 안내, 사무실 방문 불필요"
+ ],
+ "Hướng view": [
+  "View",
+  "전망"
+ ],
+ "Hạn thanh toán": [
+  "Payment deadline",
+  "납부 기한"
+ ],
+ "Hẹn gọi video xem vị trí": [
+  "Book a video call to view the location",
+  "입지 확인 영상 통화 예약"
+ ],
+ "Hết 24 tháng ưu đãi, hàng tháng phải trả bao nhiêu?": [
+  "After the 24-month incentive, how much do I pay each month?",
+  "24개월 혜택 종료 후 매월 얼마를 상환해야 하나요?"
+ ],
+ "Hồ sơ pháp lý Tòa F2 FourS Tower ra sao?": [
+  "What is the legal status of FourS Tower Tower F2?",
+  "FourS Tower F2동의 법적 상태는 어떤가요?"
+ ],
+ "KPBT + VAT phần 5% và 5% vào tài khoản đảm bảo cấp sổ": [
+  "Maintenance fee + VAT on the 5% portion, and 5% into the escrow account for certificate issuance",
+  "관리 유지비 + 5% 부분 VAT, 증서 발급 보증 계좌에 5% 납부"
+ ],
+ "Khi bàn giao (dự kiến 31/05/2028)": [
+  "At handover (expected May 31, 2028)",
+  "입주(인도) 시(2028년 5월 31일 예정)"
+ ],
+ "Khi ký Hợp đồng thực hiện nguyện vọng (riêng căn 3PN: 150 triệu)": [
+  "On signing the Expression of Interest Agreement (3BR units only: 150 million VND)",
+  "매수 희망 계약 체결 시(3베드룸 세대만 1억 5,000만 동)"
+ ],
+ "Khi được cấp Giấy chứng nhận": [
+  "When the certificate is issued",
+  "증서 발급 시"
+ ],
+ "Khoản quà được trừ ngay vào giá trước VAT & KPBT, sau đó mới áp các mức chiết khấu %.": [
+  "The gift is deducted directly from the price before VAT & maintenance fee, after which the percentage discounts apply.",
+  "증정품 금액은 VAT·관리 유지비 제외 가격에서 바로 차감되며, 이후 % 할인이 적용됩니다."
+ ],
+ "Khoản trả ngân hàng trong thời gian hỗ trợ": [
+  "Bank payments during the support period",
+  "지원 기간 중 은행 상환액"
+ ],
+ "Không thu phí dịch vụ quản lý căn hộ trong 2 năm đầu, tính từ ngày bàn giao chính thức.": [
+  "No apartment management service fee for the first 2 years from the official handover date.",
+  "공식 입주(인도)일로부터 첫 2년간 아파트 관리 서비스 비용이 부과되지 않습니다."
+ ],
+ "Không vay ngân hàng": [
+  "No bank loan",
+  "은행 대출 없음"
+ ],
+ "Không vay – theo tiến độ": [
+  "No loan – according to schedule",
+  "대출 없음 – 일정에 따라"
+ ],
+ "Khấu trừ 5% từ tài khoản đảm bảo": [
+  "5% deducted from the escrow account",
+  "보증 계좌에서 5% 차감"
+ ],
+ "Ký Hợp đồng mua bán": [
+  "Sign the sale and purchase agreement (SPA)",
+  "매매계약서(SPA) 체결"
+ ],
+ "Ký hợp đồng từ 17/10/2026, anh/chị nhận gói nội thất Nhà Xinh 35–100 triệu (trừ trực tiếp vào giá); nếu không dùng hỗ trợ lãi suất thì được giảm thêm 3% và tiến độ giãn tới 45 tháng. Chọn từ chối bảo lãnh ngân hàng được cộng thêm 1%.": [
+  "For contracts signed from October 17, 2026, you receive a Nha Xinh furniture package worth 35–100 million VND (deducted directly from the price); if you do not use the interest support, you get a further 3% off and the payment schedule extends to 45 months. Choosing to decline the bank guarantee adds another 1%.",
+  "2026년 10월 17일부터 계약 시 3,500만–1억 동 상당의 Nha Xinh 가구 패키지가 제공됩니다(가격에서 직접 차감). 이자 지원을 이용하지 않으면 3% 추가 할인과 함께 납부 일정이 45개월까지 연장됩니다. 은행 보증 거절을 선택하면 1%가 추가됩니다."
+ ],
+ "Kề FPT City, Làng Đại học – khu dân cư đã có người ở, không hề vắng vẻ.": [
+  "Next to FPT City and University Village – an established residential area, not at all deserted.",
+  "FPT City, 대학촌과 인접 – 이미 주민이 거주하는 지역으로 전혀 한적하지 않습니다."
+ ],
+ "Loại căn hộ tại Tòa F2 FourS Tower": [
+  "Apartment types in FourS Tower Tower F2",
+  "FourS Tower F2동 아파트 유형"
+ ],
+ "Loại căn quan tâm": [
+  "Unit type of interest",
+  "관심 세대 유형"
+ ],
+ "Lãi suất 0%": [
+  "0% interest",
+  "0% 이자"
+ ],
+ "Lãi suất 0% trong 24 tháng": [
+  "0% interest for 24 months",
+  "24개월 0% 이자"
+ ],
+ "Lãi suất cơ sở + biên độ theo quy định ngân hàng": [
+  "Base rate + margin per the bank's rules",
+  "기준 금리 + 은행 규정에 따른 가산 금리"
+ ],
+ "Lãi thanh toán trước hạn": [
+  "Interest for early payment",
+  "조기 납부 이자"
+ ],
+ "Lô đất A3-10 (3.910 m²) có GCN QSDĐ số CP 912579 · 607 căn đủ điều kiện bán theo VB 17239/SXD-QLN · từ 26/10/2026 mời ký HĐMB ·": [
+  "Land lot A3-10 (3,910 m²) with Land Use Right Certificate No. CP 912579 · 607 units eligible for sale under Document 17239/SXD-QLN · SPA signing from October 26, 2026 ·",
+  "A3-10 필지(3,910 m²), 토지사용권 증서 번호 CP 912579 · 공문 17239/SXD-QLN에 따라 607세대 분양 요건 충족 · 2026년 10월 26일부터 SPA 체결 ·"
+ ],
+ "Lúc bàn giao nộp kinh phí bảo trì + 5% vào tài khoản đảm bảo cấp sổ": [
+  "At handover, pay the maintenance fund + 5% into the escrow account for certificate issuance",
+  "입주(인도) 시 관리 유지비 + 5%를 증서 발급 보증 계좌에 납부"
+ ],
+ "Lũy kế": [
+  "Cumulative",
+  "누계"
+ ],
+ "Miễn phí quản lý": [
+  "Free management",
+  "관리비 무료"
+ ],
+ "Miễn phí quản lý 2 năm": [
+  "2 years of free management fees",
+  "관리비 2년 무료"
+ ],
+ "Miễn phí trong thời gian hỗ trợ lãi suất": [
+  "Free during the interest support period",
+  "이자 지원 기간 중 면제"
+ ],
+ "Mua căn hộ tòa F2 bằng vốn vay ngân hàng ra sao?": [
+  "How do I buy a Tower F2 apartment with a bank loan?",
+  "은행 대출로 F2동 아파트를 매입하려면 어떻게 하나요?"
+ ],
+ "Mã căn quan tâm": [
+  "Unit code of interest",
+  "관심 세대 호수"
+ ],
+ "Mã căn quan tâm (nếu có), VD: F2-12A-03A": [
+  "Unit code of interest (if any), e.g. F2-12A-03A",
+  "관심 세대 호수(있는 경우), 예: F2-12A-03A"
+ ],
+ "Mô hình 3D tòa F2": [
+  "3D model of Tower F2",
+  "F2동 3D 모델"
+ ],
+ "Mặt bằng các tầng Tòa F2 FourS Tower": [
+  "Floor plans of FourS Tower Tower F2",
+  "FourS Tower F2동 층별 평면도"
+ ],
+ "Mặt bằng căn 1 phòng ngủ Tòa F2 FourS Tower": [
+  "1-bedroom floor plan, FourS Tower Tower F2",
+  "FourS Tower F2동 1베드룸 평면도"
+ ],
+ "Mặt bằng căn 1PN+ Tòa F2 FourS Tower": [
+  "1BR+ floor plan, FourS Tower Tower F2",
+  "FourS Tower F2동 1베드룸+ 평면도"
+ ],
+ "Mặt bằng căn 2 phòng ngủ 1 vệ sinh Tòa F2 FourS Tower": [
+  "2-bedroom 1-bathroom floor plan, FourS Tower Tower F2",
+  "FourS Tower F2동 2베드룸 1욕실 평면도"
+ ],
+ "Mặt bằng căn 2 phòng ngủ 2 vệ sinh Tòa F2 FourS Tower": [
+  "2-bedroom 2-bathroom floor plan, FourS Tower Tower F2",
+  "FourS Tower F2동 2베드룸 2욕실 평면도"
+ ],
+ "Mặt bằng căn 3 phòng ngủ Tòa F2 FourS Tower": [
+  "3-bedroom floor plan, FourS Tower Tower F2",
+  "FourS Tower F2동 3베드룸 평면도"
+ ],
+ "Mặt bằng căn Studio Tòa F2 FourS Tower": [
+  "Studio floor plan, FourS Tower Tower F2",
+  "FourS Tower F2동 스튜디오 평면도"
+ ],
+ "Mặt bằng căn góc 2 phòng ngủ 2 vệ sinh Tòa F2 FourS Tower": [
+  "2-bedroom 2-bathroom corner floor plan, FourS Tower Tower F2",
+  "FourS Tower F2동 2베드룸 2욕실 코너 평면도"
+ ],
+ "Mặt bằng căn hộ": [
+  "Unit floor plans",
+  "세대 평면도"
+ ],
+ "Mặt bằng tầng": [
+  "Floor plans",
+  "층별 평면도"
+ ],
+ "Mở bán từ 26/09 · Cọc 100 triệu · 25% là đủ tới khi nhận nhà": [
+  "On sale from September 26 · Deposit 100 million VND · 25% is enough until handover",
+  "9월 26일부터 분양 · 계약금 1억 동 · 입주 시까지 25%면 충분"
+ ],
+ "Mở bán từ 26/09/2026 · CSBH 4.2": [
+  "On sale from September 26, 2026 · Sales policy 4.2",
+  "2026년 9월 26일부터 분양 · 분양 정책 4.2"
+ ],
+ "Mở bảng tính chi tiết →": [
+  "Open the detailed calculator →",
+  "상세 계산기 열기 →"
+ ],
+ "Mức chiết khấu cao nhất + quà nội thất tới 100 triệu": [
+  "Highest discount + furniture gift of up to 100 million VND",
+  "최대 할인 + 최대 1억 동 가구 증정"
+ ],
+ "Mức cho vay & hỗ trợ lãi suất": [
+  "Loan amount & interest support",
+  "대출 한도 & 이자 지원"
+ ],
+ "Ngay gần Sân bay quốc tế Đà Nẵng, anh/chị ở xa ra thăm nhà hay đi đón người thân đều thuận tiện.": [
+  "Close to Da Nang International Airport, so visiting your home from afar or picking up family is convenient.",
+  "다낭 국제공항과 가까워 멀리서 집을 방문하시거나 가족을 마중하기에 편리합니다."
+ ],
+ "Ngoài giá, mua căn tòa F2 còn ưu đãi gì nữa?": [
+  "Besides the price, what other incentives come with a Tower F2 unit?",
+  "가격 외에 F2동 세대 매입 시 어떤 혜택이 있나요?"
+ ],
+ "Nguyễn Phước Lan – Minh Mạng": [
+  "Nguyen Phuoc Lan – Minh Mang",
+  "응우옌프억란 – 민망"
+ ],
+ "Ngày": [
+  "Days",
+  "일"
+ ],
+ "Ngày ký & ngày thứ 15": [
+  "Signing day & day 15",
+  "계약일 & 15일째"
+ ],
+ "Ngày thứ 1035": [
+  "Day 1035",
+  "1035일째"
+ ],
+ "Ngày thứ 105": [
+  "Day 105",
+  "105일째"
+ ],
+ "Ngày thứ 1155": [
+  "Day 1155",
+  "1155일째"
+ ],
+ "Ngày thứ 15": [
+  "Day 15",
+  "15일째"
+ ],
+ "Ngày thứ 195": [
+  "Day 195",
+  "195일째"
+ ],
+ "Ngày thứ 285": [
+  "Day 285",
+  "285일째"
+ ],
+ "Ngày thứ 375": [
+  "Day 375",
+  "375일째"
+ ],
+ "Ngày thứ 465": [
+  "Day 465",
+  "465일째"
+ ],
+ "Ngày thứ 555 · nhận nhà dự kiến 31/05/2028": [
+  "Day 555 · expected handover May 31, 2028",
+  "555일째 · 2028년 5월 31일 입주(인도) 예정"
+ ],
+ "Ngày thứ 675": [
+  "Day 675",
+  "675일째"
+ ],
+ "Ngày thứ 795": [
+  "Day 795",
+  "795일째"
+ ],
+ "Ngày thứ 915": [
+  "Day 915",
+  "915일째"
+ ],
+ "Ngân hàng": [
+  "Bank",
+  "은행"
+ ],
+ "Ngân hàng cho vay tới 70%; chủ đầu tư hỗ trợ lãi suất tối đa 24 tháng (chậm nhất đến 31/01/2029), kèm ân hạn nợ gốc và miễn phí trả nợ trước hạn.": [
+  "The bank lends up to 70%; the developer supports interest for up to 24 months (no later than January 31, 2029), with a principal grace period and free early repayment.",
+  "은행이 최대 70%를 대출하고, 시행사가 최대 24개월(늦어도 2029년 1월 31일까지) 이자를 지원하며, 원금 거치와 중도 상환 수수료 면제가 적용됩니다."
+ ],
+ "Ngân hàng giải ngân 70%": [
+  "Bank disburses 70%",
+  "은행 70% 대출 실행"
+ ],
+ "Ngã tư Nguyễn Phước Lan – Minh Mạng,": [
+  "Nguyen Phuoc Lan – Minh Mang intersection,",
+  "응우옌프억란(Nguyen Phuoc Lan) – 민망(Minh Mang) 사거리,"
+ ],
+ "Ngũ Hành Sơn": [
+  "Marble Mountains (Ngu Hanh Son)",
+  "오행산"
+ ],
+ "Nhà Xinh": [
+  "Nha Xinh",
+  "Nha Xinh"
+ ],
+ "Nhận báo giá": [
+  "Get a quote",
+  "견적 받기"
+ ],
+ "Nhận giá F2 sau chiết khấu": [
+  "Get F2 prices after discount",
+  "F2동 할인 후 가격 받기"
+ ],
+ "Nhận giá sau chiết khấu": [
+  "Get prices after discount",
+  "할인 후 가격 받기"
+ ],
+ "Nhận giá sau chiết khấu →": [
+  "Get prices after discount →",
+  "할인 후 가격 받기 →"
+ ],
+ "Nhận giỏ hàng đầy đủ tòa F2": [
+  "Get the full Tower F2 available units",
+  "F2동 전체 매물 목록 받기"
+ ],
+ "Nhận lịch vay & khoản trả hàng tháng →": [
+  "Get the loan schedule & monthly payments →",
+  "대출 일정 & 월 상환액 받기 →"
+ ],
+ "Nhận nhà dự kiến": [
+  "Expected handover",
+  "입주(인도) 예정"
+ ],
+ "Nhận qua Zalo sau 15 phút – không cần gặp trực tiếp": [
+  "Received via Zalo within 15 minutes – no need to meet in person",
+  "15분 내 Zalo로 수신 – 직접 만나실 필요 없음"
+ ],
+ "Nhập tin nhắn hoặc số điện thoại…": [
+  "Type a message or phone number…",
+  "메시지 또는 전화번호를 입력하세요…"
+ ],
+ "Nhắn Zalo 0904 567 009": [
+  "Message Zalo 0904 567 009",
+  "Zalo 0904 567 009로 메시지"
+ ],
+ "Nhắn Zalo ngay": [
+  "Message on Zalo now",
+  "지금 Zalo로 메시지"
+ ],
+ "Nhắn trực tiếp Giám đốc kinh doanh – phản hồi sau vài phút, không qua tổng đài.": [
+  "Message the Sales Director directly – reply within minutes, no call center.",
+  "영업 이사에게 직접 메시지 – 몇 분 내 답변, 콜센터 없음."
+ ],
+ "Nội khu, Nam Hòa Xuân": [
+  "Inner area, Nam Hoa Xuan",
+  "단지 내부, 남호아쑤언"
+ ],
+ "Phí trả nợ trước hạn": [
+  "Early repayment fee",
+  "중도 상환 수수료"
+ ],
+ "Phút": [
+  "Minutes",
+  "분"
+ ],
+ "Phương án": [
+  "Option",
+  "방안"
+ ],
+ "Phương án thanh toán": [
+  "Payment option",
+  "납부 방안"
+ ],
+ "Phương án thanh toán quan tâm": [
+  "Payment option of interest",
+  "관심 납부 방안"
+ ],
+ "Phần còn lại ngân hàng cho vay 70%, chủ đầu tư hỗ trợ": [
+  "For the rest, the bank lends 70% and the developer provides",
+  "나머지는 은행이 70%를 대출하고 시행사가"
+ ],
+ "Phối cảnh minh họa view nhìn từ ban công sân vườn của căn hộ": [
+  "Illustrative rendering of the view from an apartment's garden balcony",
+  "아파트 가든 발코니에서 본 전망 예시 투시도"
+ ],
+ "Quà Nhà Xinh + không vay": [
+  "Nha Xinh gift + no loan",
+  "Nha Xinh 증정 + 대출 미이용"
+ ],
+ "Quà nội thất": [
+  "Furniture gift",
+  "가구 증정"
+ ],
+ "SUN FOURS TOWER": [
+  "SUN FOURS TOWER",
+  "SUN FOURS TOWER"
+ ],
+ "Sau thời gian hỗ trợ": [
+  "After the support period",
+  "지원 기간 종료 후"
+ ],
+ "Studio Tòa F2 có logia riêng, bố trí mở – hợp với người trẻ ở một mình hoặc mua để cho thuê.": [
+  "Tower F2 studios have a private loggia and an open layout – suited to young people living alone or buyers purchasing to rent out.",
+  "F2동 스튜디오는 전용 로지아와 개방형 구조로, 1인 가구 젊은 층이나 임대 목적 매수자에게 적합합니다."
+ ],
+ "Studio, 1PN, 1PN+, 2PN, 3PN": [
+  "Studio, 1BR, 1BR+, 2BR, 3BR",
+  "스튜디오, 1베드룸, 1베드룸+, 2베드룸, 3베드룸"
+ ],
+ "Sun Early Key: chỉ cần đóng tối thiểu 70% (đã gồm VAT) là nhận căn hộ vào ở, thời điểm dự kiến 31/05/2028.": [
+  "Sun Early Key: pay a minimum of just 70% (VAT included) to move into the apartment, expected on May 31, 2028.",
+  "Sun Early Key: 최소 70%(VAT 포함)만 납부하면 아파트에 입주할 수 있으며, 예정일은 2028년 5월 31일입니다."
+ ],
+ "Sun FourS Tower": [
+  "Sun FourS Tower",
+  "Sun FourS Tower"
+ ],
+ "Sun FourS Tower – Tòa F2 (Tòa Mai)": [
+  "Sun FourS Tower – Tower F2 (Mai Tower)",
+  "Sun FourS Tower – F2동(Mai동)"
+ ],
+ "Sát bên sông Cổ Cò": [
+  "Right by the Co Co River",
+  "꼬꼬 강 바로 옆"
+ ],
+ "Sân vườn 69 m² lưng chừng trời – cả tòa chỉ tầng 2–7 mới có": [
+  "A 69 m² garden halfway up the sky – only floors 2–7 in the whole tower have them",
+  "하늘 중간의 69 m² 정원 – 동 전체에서 2–7층에만 있습니다"
+ ],
+ "Sân vườn riêng rộng nhất (tầng 3)": [
+  "Largest private garden (3rd floor)",
+  "최대 개인 정원(3층)"
+ ],
+ "Sông, Sunneva, pháo hoa DIFF": [
+  "River, Sunneva, DIFF fireworks",
+  "강, Sunneva, DIFF 불꽃축제"
+ ],
+ "Sông, biển, Ngũ Hành Sơn": [
+  "River, sea, Marble Mountains (Ngu Hanh Son)",
+  "강, 바다, 오행산"
+ ],
+ "Sông, biển, Sunneva": [
+  "River, sea, Sunneva",
+  "강, 바다, Sunneva"
+ ],
+ "Sông, biển, pháo hoa DIFF, CV Đầm Sen": [
+  "River, sea, DIFF fireworks, Dam Sen Park",
+  "강, 바다, DIFF 불꽃축제, Dam Sen 공원"
+ ],
+ "Sơ đồ mang tính minh họa, không đúng tỉ lệ ·": [
+  "Diagram for illustration only, not to scale ·",
+  "예시용 지도이며 축척과 다릅니다 ·"
+ ],
+ "Sơn Thủy": [
+  "Son Thuy",
+  "선투이"
+ ],
+ "Số tiền": [
+  "Amount",
+  "금액"
+ ],
+ "Số tiền đóng để nhận nhà (70%):": [
+  "Amount paid to receive the home (70%):",
+  "입주를 위한 납부액(70%):"
+ ],
+ "Số điện thoại (Zalo)": [
+  "Phone number (Zalo)",
+  "전화번호(Zalo)"
+ ],
+ "Số điện thoại *": [
+  "Phone number *",
+  "전화번호 *"
+ ],
+ "Số điện thoại / Zalo *": [
+  "Phone number / Zalo *",
+  "전화번호 / Zalo *"
+ ],
+ "Sở hữu căn hộ Tòa F2 FourS Tower dù vốn ít –": [
+  "Own a Tower F2 FourS Tower apartment even with little capital –",
+  "적은 자본으로도 FourS Tower F2동 아파트 소유 –"
+ ],
+ "Tham quan 360°": [
+  "360° tour",
+  "360° 투어"
+ ],
+ "Thanh toán 10% (ngày 105)": [
+  "Pay 10% (day 105)",
+  "10% 납부(105일째)"
+ ],
+ "Thanh toán 50% – phần còn lại theo tiến độ": [
+  "Pay 50% – the rest according to the schedule",
+  "50% 납부 – 잔금은 일정에 따라"
+ ],
+ "Thanh toán 70%": [
+  "Pay 70%",
+  "70% 납부"
+ ],
+ "Thanh toán 70% nhận nhà": [
+  "Pay 70% to receive the home",
+  "70% 납부 시 입주"
+ ],
+ "Thanh toán 70% – phần còn lại theo tiến độ": [
+  "Pay 70% – the rest according to the schedule",
+  "70% 납부 – 잔금은 일정에 따라"
+ ],
+ "Thanh toán 95% – nhận nhà khi nghiệm thu (dự kiến 31/05/2028)": [
+  "Pay 95% – receive the home at acceptance (expected May 31, 2028)",
+  "95% 납부 – 준공 검수 시 입주(2028년 5월 31일 예정)"
+ ],
+ "Thanh toán sớm 12% chỉ còn cho một số căn đã giữ chỗ trước 26/10 (số lượng có hạn).": [
+  "The 12% early payment discount is only still available for some units booked before October 26 (limited quantity).",
+  "12% 조기 납부 할인은 10월 26일 이전 예약한 일부 세대에만 남아 있습니다(수량 한정)."
+ ],
+ "Thanh toán sớm 95% (CK 12%)": [
+  "Early payment 95% (12% discount)",
+  "조기 납부 95%(12% 할인)"
+ ],
+ "Thanh toán sớm ở tòa F2 được chiết khấu bao nhiêu?": [
+  "How much is the early payment discount at Tower F2?",
+  "F2동 조기 납부 할인은 얼마인가요?"
+ ],
+ "Theo chỉ định của chủ đầu tư": [
+  "As designated by the developer",
+  "시행사 지정"
+ ],
+ "Theo mặt bằng từng tầng, diện tích thông thủy tham khảo như sau: 3PN ~85–87 m², 2PN ~59–64 m², 1PN+ ~47–61 m², 1PN ~42 m², Studio ~30–34 m².": [
+  "According to each floor plan, reference net areas are: 3BR ~85–87 m², 2BR ~59–64 m², 1BR+ ~47–61 m², 1BR ~42 m², Studio ~30–34 m².",
+  "층별 평면도 기준 참고 전용면적: 3베드룸 ~85–87 m², 2베드룸 ~59–64 m², 1베드룸+ ~47–61 m², 1베드룸 ~42 m², 스튜디오 ~30–34 m²."
+ ],
+ "Theo thời gian hỗ trợ lãi suất": [
+  "Same as the interest support period",
+  "이자 지원 기간과 동일"
+ ],
+ "Thuộc cụm 4 tòa Sun FourS Tower giữa đại đô thị Sun Riverpolis, Tòa F2 tọa lạc ngay giao lộ Nguyễn Phước Lan – Minh Mạng. Tên gọi lấy ý từ hoa Mai – loài hoa tượng trưng cho mùa xuân trong bộ tranh tứ bình, còn thông điệp định vị của tòa là \"Tầm nhìn rộng – Kết nối trung tâm\". Điểm nhấn gồm khối đế shophouse, tầng 2 dành riêng cho tiện ích (hồ bơi bốn mùa, gym, yoga, spa, Kids Club, phòng khám Mặt Trời) cùng dòng căn hộ sân vườn FourS Jardin – sản phẩm hiếm gặp ở Đà Nẵng.": [
+  "Part of the cluster of 4 Sun FourS Tower buildings in the heart of the Sun Riverpolis mega urban area, Tower F2 sits right at the Nguyen Phuoc Lan – Minh Mang intersection. Its name comes from the Mai (apricot) blossom – the flower symbolizing spring in the traditional four-panel painting set – and the tower's positioning message is \"Wide views – Central connections\". Highlights include a shophouse podium, a 2nd floor dedicated to amenities (four-season pool, gym, yoga, spa, Kids Club, Mat Troi clinic) and the FourS Jardin garden apartment line – a product rarely found in Da Nang.",
+  "Sun Riverpolis 대형 도시구역 중심의 Sun FourS Tower 4개 동 중 하나인 F2동은 응우옌프억란(Nguyen Phuoc Lan) – 민망(Minh Mang) 교차로에 바로 위치합니다. 이름은 전통 사계 병풍화에서 봄을 상징하는 매화(Mai)에서 따왔으며, 동의 포지셔닝 메시지는 \"넓은 전망 – 도심 연결\"입니다. 주요 특징은 샵하우스 포디움, 편의시설 전용 2층(사계절 수영장, 헬스장, 요가, 스파, 키즈 클럽, Mat Troi 의원), 그리고 다낭에서 보기 드문 FourS Jardin 가든 아파트 라인입니다."
+ ],
+ "Thuộc dự án căn hộ Sun Group tại Đà Nẵng –": [
+  "Part of Sun Group's apartment project in Da Nang –",
+  "다낭 Sun Group 아파트 프로젝트 소속 –"
+ ],
+ "Thời gian hỗ trợ lãi suất": [
+  "Interest support period",
+  "이자 지원 기간"
+ ],
+ "Thời hạn": [
+  "Deadline",
+  "기한"
+ ],
+ "Thời hạn (tính từ ngày ký HĐTHNV)": [
+  "Deadline (from the EOI agreement signing date)",
+  "기한(매수 희망 계약 체결일 기준)"
+ ],
+ "Tiến độ": [
+  "Payment schedule",
+  "납부 일정"
+ ],
+ "Tiến độ thanh toán Tòa F2 FourS Tower": [
+  "FourS Tower Tower F2 payment schedule",
+  "FourS Tower F2동 납부 일정"
+ ],
+ "Tiến độ thanh toán có vay ngân hàng – Tòa F2 (CSBH 4.2)": [
+  "Payment schedule with a bank loan – Tower F2 (sales policy 4.2)",
+  "은행 대출 납부 일정 – F2동(분양 정책 4.2)"
+ ],
+ "Tiến độ thanh toán không vay – Tòa F2 (CSBH 4.2)": [
+  "Payment schedule without a loan – Tower F2 (sales policy 4.2)",
+  "대출 없는 납부 일정 – F2동(분양 정책 4.2)"
+ ],
+ "Tiện tuyến đi Hội An và Thánh địa Mỹ Sơn.": [
+  "Convenient route to Hoi An and My Son Sanctuary.",
+  "호이안과 미선 유적지로 가는 길이 편리합니다."
+ ],
+ "Tiện ích tại FourS Tower": [
+  "Amenities at FourS Tower",
+  "FourS Tower 편의시설"
+ ],
+ "Toàn cảnh 360° xung quanh": [
+  "360° panorama of the surroundings",
+  "주변 360° 전경"
+ ],
+ "Trong 15 ngày kể từ ký HĐMB": [
+  "Within 15 days of signing the SPA",
+  "SPA 체결 후 15일 이내"
+ ],
+ "Trong vòng 15 ngày kể từ khi ký HĐMB · suốt thời gian hỗ trợ (tối đa 24 tháng, không quá 31/01/2029) hưởng lãi suất 0%, chưa phải trả gốc": [
+  "Within 15 days of signing the SPA · throughout the support period (up to 24 months, no later than January 31, 2029) enjoy 0% interest with no principal payments",
+  "SPA 체결 후 15일 이내 · 지원 기간(최대 24개월, 2029년 1월 31일 이내) 동안 0% 이자, 원금 상환 없음"
+ ],
+ "Trên khoản ngân hàng cho vay 70%, chủ đầu tư hỗ trợ lãi suất 0% kèm ân hạn nợ gốc 24 tháng. Phần anh/chị tự lo chỉ là 25% giá trị căn, đóng thành 3 đợt trong khoảng 3,5 tháng đầu tiên, sau đó yên tâm đợi ngày bàn giao.": [
+  "On the 70% bank loan, the developer supports 0% interest plus a 24-month principal grace period. The part you fund yourself is only 25% of the unit value, paid in 3 installments over the first 3.5 months or so, after which you can simply wait for the handover date.",
+  "은행 대출 70%에 대해 시행사가 0% 이자와 24개월 원금 거치를 지원합니다. 고객님이 직접 마련하실 부분은 세대 가치의 25%뿐이며, 처음 약 3.5개월 동안 3회에 나누어 납부한 뒤 입주(인도)일까지 안심하고 기다리시면 됩니다."
+ ],
+ "Trừ quà xong vẫn được cộng thêm: không vay 3% · từ chối bảo lãnh 1% · thanh toán sớm tới 12% (căn giữ chỗ trước 26/10/2026, số lượng có hạn).": [
+  "After the gift you can still add: 3% for no loan · 1% for declining the guarantee · early payment of up to 12% (units booked before October 26, 2026, limited quantity).",
+  "증정품 차감 후에도 추가 적용: 대출 미이용 3% · 보증 거절 1% · 조기 납부 최대 12%(2026년 10월 26일 이전 예약 세대, 수량 한정)."
+ ],
+ "Trừ trước quà nội thất Nhà Xinh 35–100 triệu, sau đó cộng không vay 3%, từ chối bảo lãnh 1% và thanh toán sớm tới 12% – riêng thanh toán sớm chỉ còn cho một số căn đã giữ chỗ trước": [
+  "First deduct the Nha Xinh furniture gift of 35–100 million VND, then add 3% for no loan, 1% for declining the guarantee and up to 12% for early payment – early payment is only still available for some units booked before",
+  "먼저 Nha Xinh 가구 증정 3,500만–1억 동을 차감한 뒤, 대출 미이용 3%, 보증 거절 1%, 조기 납부 최대 12%가 추가됩니다 – 조기 납부 할인은 다음 날짜 이전에 예약한 일부 세대에만 남아 있습니다:"
+ ],
+ "Tên tòa": [
+  "Tower name",
+  "동 이름"
+ ],
+ "Tích thưởng Sun Signature": [
+  "Sun Signature rewards",
+  "Sun Signature 적립"
+ ],
+ "Tính 25% cho căn của tôi": [
+  "Calculate 25% for my unit",
+  "내 세대의 25% 계산"
+ ],
+ "Tính chi tiết": [
+  "Calculate details",
+  "상세 계산"
+ ],
+ "Tính giá sau quà cho căn của tôi": [
+  "Calculate the price after the gift for my unit",
+  "내 세대의 증정품 차감 후 가격 계산"
+ ],
+ "Tính khoản trả hàng tháng": [
+  "Calculate monthly payments",
+  "월 상환액 계산"
+ ],
+ "Tính số tiền tôi tiết kiệm →": [
+  "Calculate how much I save →",
+  "절약 금액 계산하기 →"
+ ],
+ "Tính vốn tự có cho căn anh/chị chọn": [
+  "Calculate the own capital for your chosen unit",
+  "선택하신 세대의 자기 자본 계산"
+ ],
+ "Tòa F1, F5 giá dự kiến từ 1,77 tỷ": [
+  "Towers F1, F5 expected prices from 1.77 billion VND",
+  "F1·F5동 예상 가격 17억 7천만 동부터"
+ ],
+ "Tòa F2": [
+  "Tower F2",
+  "F2동"
+ ],
+ "Tòa F2 (Tòa Mai)": [
+  "Tower F2 (Mai Tower)",
+  "F2동(Mai동)"
+ ],
+ "Tòa F2 FourS Tower": [
+  "FourS Tower – Tower F2",
+  "FourS Tower F2동"
+ ],
+ "Tòa F2 FourS Tower gồm những dòng căn nào?": [
+  "What unit types does FourS Tower Tower F2 have?",
+  "FourS Tower F2동에는 어떤 세대 유형이 있나요?"
+ ],
+ "Tòa F2 FourS Tower thanh toán theo tiến độ nào?": [
+  "What is the payment schedule for FourS Tower Tower F2?",
+  "FourS Tower F2동의 납부 일정은 어떻게 되나요?"
+ ],
+ "Tòa F2 FourS Tower: tặng nội thất tới 100 triệu + chiết khấu đến 15,5%": [
+  "FourS Tower Tower F2: furniture gift of up to 100 million VND + discounts of up to 15.5%",
+  "FourS Tower F2동: 최대 1억 동 가구 증정 + 최대 15.5% 할인"
+ ],
+ "Tòa F2 bố trí vành đai sân vườn bao quanh các tầng từ 2 đến 7 (tính cả tầng 3A), nhờ vậy nhiều căn sở hữu sân vườn hoặc ban công lớn của riêng mình – điều hiếm thấy ở phân khúc căn hộ Sun Đà Nẵng.": [
+  "Tower F2 has a garden belt around floors 2 to 7 (including floor 3A), so many units have their own garden or large balcony – rare in the Sun Da Nang apartment segment.",
+  "F2동은 2층부터 7층(3A층 포함)까지 가든 벨트가 둘러싸고 있어 많은 세대가 개인 정원이나 넓은 발코니를 보유합니다 – 다낭 Sun 아파트 중 보기 드문 특징입니다."
+ ],
+ "Tòa F2 nằm trên lô đất A3-10 rộng 3.910 m², đã có Giấy chứng nhận quyền sử dụng đất số CP 912579. Sở Xây dựng Đà Nẵng, tại Văn bản 17239/SXD-QLN ngày 19/09/2026, xác nhận 607 căn hộ của tòa đủ điều kiện bán; người mua được Techcombank cam kết phát hành thư bảo lãnh. Công trình khởi công ngày 21/07/2026, dự kiến hoàn thành 30/12/2027.": [
+  "Tower F2 sits on land lot A3-10 of 3,910 m², which has Land Use Right Certificate No. CP 912579. The Da Nang Department of Construction, in Document 17239/SXD-QLN dated September 19, 2026, confirmed that the tower's 607 apartments are eligible for sale; Techcombank has committed to issuing guarantee letters to buyers. Construction started on July 21, 2026, with completion expected on December 30, 2027.",
+  "F2동은 3,910 m² 규모의 A3-10 필지에 위치하며, 토지사용권 증서 번호 CP 912579를 보유하고 있습니다. 다낭 건설국은 2026년 9월 19일 자 공문 17239/SXD-QLN에서 이 동의 아파트 607세대가 분양 요건을 충족함을 확인했으며, Techcombank가 매수자에게 보증서 발급을 약정했습니다. 2026년 7월 21일 착공했으며 2027년 12월 30일 준공 예정입니다."
+ ],
+ "Tòa F2 thuộc FourS Tower là tòa nào?": [
+  "Which tower is Tower F2 in FourS Tower?",
+  "FourS Tower의 F2동은 어떤 동인가요?"
+ ],
+ "Tòa F2 – còn gọi là Tòa Mai – nằm trong bộ bốn tòa căn hộ của Sun FourS Tower, dự án do Sun Property (Sun Group) đầu tư tại ngã tư Nguyễn Phước Lan – Minh Mạng, Đà Nẵng. Tòa cao 20 tầng nổi, có 2 tầng hầm, chính thức mở bán theo chính sách CSBH 4.2 kể từ 26/09/2026.": [
+  "Tower F2 – also called Mai Tower – is one of the four apartment towers of Sun FourS Tower, a project developed by Sun Property (Sun Group) at the Nguyen Phuoc Lan – Minh Mang intersection, Da Nang. The tower has 20 above-ground floors and 2 basements, and officially went on sale under sales policy 4.2 from September 26, 2026.",
+  "F2동(Mai동)은 Sun Property(Sun Group)가 다낭 응우옌프억란(Nguyen Phuoc Lan) – 민망(Minh Mang) 사거리에 개발한 Sun FourS Tower 아파트 4개 동 중 하나입니다. 지상 20층, 지하 2층 규모이며 2026년 9월 26일부터 분양 정책 4.2에 따라 공식 분양을 시작했습니다."
+ ],
+ "Tòa Mai": [
+  "Mai Tower",
+  "Mai동"
+ ],
+ "Tòa Mai – dòng căn hộ sân vườn tầng 2–7 của Sun tại Đà Nẵng": [
+  "Mai Tower – Sun's line of garden apartments on floors 2–7 in Da Nang",
+  "Mai동 – 다낭 Sun의 2–7층 가든 아파트 라인"
+ ],
+ "Tôi giữ chỗ giúp anh/chị ngay": [
+  "I'll reserve it for you right away",
+  "바로 예약해 드리겠습니다"
+ ],
+ "Tôi sẽ tính khoản góp mỗi tháng theo lãi suất ngân hàng thực tế, kèm phương án cho thuê để bù khoản vay, áp đúng cho căn anh/chị chọn.": [
+  "I will calculate your monthly installment at the actual bank interest rate, with a rental plan to offset the loan, specifically for the unit you choose.",
+  "선택하신 세대에 맞춰 실제 은행 금리 기준 월 상환액과 대출 상쇄 임대 방안을 계산해 드리겠습니다."
+ ],
+ "Tư vấn & bán hàng FourS Tower": [
+  "FourS Tower advice & sales",
+  "FourS Tower 상담 & 판매"
+ ],
+ "Tư vấn Sun FourS Tower": [
+  "Sun FourS Tower advice",
+  "Sun FourS Tower 상담"
+ ],
+ "Tại thời điểm ký": [
+  "At signing",
+  "계약 시"
+ ],
+ "Tầng 1 (cao 6 m): gồm sảnh đón, căn hộ tầng trệt, xung quanh là sân vườn cảnh quan.": [
+  "1st floor (6 m high): reception lobby and ground-floor apartments, surrounded by landscaped gardens.",
+  "1층(층고 6 m): 로비와 1층 아파트, 주변은 조경 정원입니다."
+ ],
+ "Tầng 2:": [
+  "2nd floor:",
+  "2층:"
+ ],
+ "Tầng 2: tiện ích hồ bơi, phòng thay đồ cùng 10 căn hộ ban công lớn.": [
+  "2nd floor: pool amenities, changing rooms and 10 apartments with large balconies.",
+  "2층: 수영장 편의시설, 탈의실, 대형 발코니 아파트 10세대."
+ ],
+ "Tầng 3 – 7": [
+  "Floors 3 – 7",
+  "3 – 7층"
+ ],
+ "Tầng 3: căn hộ sở hữu sân vườn riêng, sân vườn rộng nhất ~69 m² thông thủy.": [
+  "3rd floor: apartments with private gardens, the largest garden ~69 m² net area.",
+  "3층: 개인 정원 보유 아파트, 최대 정원 전용면적 ~69 m²."
+ ],
+ "Tầng 3A": [
+  "Floor 3A",
+  "3A층"
+ ],
+ "Tầng 3A (thay tầng 4): 32 căn, có vành đai sân vườn ôm quanh khối căn hộ.": [
+  "Floor 3A (instead of floor 4): 32 units, with a garden belt wrapping around the apartment block.",
+  "3A층(4층 대신): 32세대, 아파트 블록을 감싸는 가든 벨트."
+ ],
+ "Tầng 5": [
+  "5th floor",
+  "5층"
+ ],
+ "Tầng 5: 32 căn kèm sân vườn ngoài trời.": [
+  "5th floor: 32 units with outdoor gardens.",
+  "5층: 야외 정원이 딸린 32세대."
+ ],
+ "Tầng 6": [
+  "6th floor",
+  "6층"
+ ],
+ "Tầng 6: gồm 32 căn và sân vườn ngoài trời.": [
+  "6th floor: 32 units and outdoor gardens.",
+  "6층: 32세대 및 야외 정원."
+ ],
+ "Tầng 7": [
+  "7th floor",
+  "7층"
+ ],
+ "Tầng 7 gồm 32 căn – đây là tầng chót còn vành đai sân vườn, phía trên là các tầng điển hình.": [
+  "The 7th floor has 32 units – the last floor with the garden belt; above it are the typical floors.",
+  "7층은 32세대로 가든 벨트가 있는 마지막 층이며, 그 위는 기준층입니다."
+ ],
+ "Tầng 8–19": [
+  "Floors 8–19",
+  "8–19층"
+ ],
+ "Tầng nổi · 2 tầng hầm": [
+  "Above-ground floors · 2 basements",
+  "지상층 · 지하 2층"
+ ],
+ "Tầng tiện ích hồ bơi + căn hộ sân vườn": [
+  "Amenity floor with pool + garden apartments",
+  "수영장 편의시설층 + 가든 아파트"
+ ],
+ "Tầng trệt cao 6 m: sảnh đón và căn hộ": [
+  "6 m-high ground floor: reception lobby and apartments",
+  "층고 6 m 1층: 로비 및 아파트"
+ ],
+ "Tầng điển hình 8–19: mỗi tầng 32 căn, có Studio, 1PN, 1PN+, 2PN và 3PN góc.": [
+  "Typical floors 8–19: 32 units per floor, with Studio, 1BR, 1BR+, 2BR and corner 3BR units.",
+  "기준층 8–19층: 층당 32세대, 스튜디오, 1베드룸, 1베드룸+, 2베드룸, 코너 3베드룸."
+ ],
+ "Tầng điển hình, 32 căn/tầng": [
+  "Typical floors, 32 units/floor",
+  "기준층, 층당 32세대"
+ ],
+ "Tối thiểu 15% đã thanh toán": [
+  "At least 15% paid",
+  "최소 15% 납부 완료"
+ ],
+ "Tối đa 70% giá trị căn hộ": [
+  "Up to 70% of the unit value",
+  "세대 가치의 최대 70%"
+ ],
+ "Tối đa 70% giá trị căn hộ (gồm VAT)": [
+  "Up to 70% of the unit value (including VAT)",
+  "세대 가치(VAT 포함)의 최대 70%"
+ ],
+ "Tổng giá (gồm VAT & KPBT)": [
+  "Total price (incl. VAT & maintenance fee)",
+  "총 가격(VAT·관리 유지비 포함)"
+ ],
+ "Tổng hợp: Hoàng Hiệp – môi giới bất động sản Đà Nẵng hơn 15 năm, từ giỏ hàng tòa F2 và chính sách CSBH 4.2 của chủ đầu tư · cập nhật 09/11/2026. Giá tham khảo, thay đổi theo đợt; liên hệ 0904 567 009 để nhận giỏ hàng mới nhất.": [
+  "Compiled by Hoang Hiep – Da Nang real estate broker with over 15 years of experience, from the Tower F2 available units and the developer's sales policy 4.2 · updated November 9, 2026. Prices are for reference and change by phase; contact 0904 567 009 for the latest available units.",
+  "정리: 호앙 히엡 – 15년 이상 경력의 다낭 부동산 중개인, F2동 매물 목록 및 시행사 분양 정책 4.2 기준 · 2026년 11월 9일 업데이트. 참고 가격이며 차수별로 변동됩니다. 최신 매물 목록은 0904 567 009로 문의해 주십시오."
+ ],
+ "Tổng quan F2": [
+  "F2 overview",
+  "F2 개요"
+ ],
+ "Tổng quan Tòa F2": [
+  "Tower F2 overview",
+  "F2동 개요"
+ ],
+ "Tổng quan dự án Sun FourS Tower": [
+  "Sun FourS Tower project overview",
+  "Sun FourS Tower 프로젝트 개요"
+ ],
+ "Từ 2,22 tỷ": [
+  "From 2.22 billion VND",
+  "22억 2천만 동부터"
+ ],
+ "Từ 4,30 tỷ": [
+  "From 4.30 billion VND",
+  "43억 동부터"
+ ],
+ "Từ 5,91 tỷ": [
+  "From 5.91 billion VND",
+  "59억 1천만 동부터"
+ ],
+ "Từ sân bay về nhà chỉ 10 phút": [
+  "Just 10 minutes from the airport to your home",
+  "공항에서 집까지 단 10분"
+ ],
+ "Vay 70% · lãi suất 0% trong 24 tháng": [
+  "70% loan · 0% interest for 24 months",
+  "70% 대출 · 24개월 0% 이자"
+ ],
+ "Vay 70% – vốn ít": [
+  "70% loan – low capital",
+  "70% 대출 – 적은 자본"
+ ],
+ "Vay 70% – vốn ít (25% đến nhận nhà)": [
+  "70% loan – low capital (25% until handover)",
+  "70% 대출 – 적은 자본(입주 시까지 25%)"
+ ],
+ "Vay 70%, lãi suất 0% 24 tháng – chỉ cần 25% tới lúc nhận nhà": [
+  "70% loan, 0% interest for 24 months – only 25% needed until handover",
+  "70% 대출, 24개월 0% 이자 – 입주 시까지 25%만 필요"
+ ],
+ "Vào ngày thứ 105 · lúc này tổng vốn tự có mới chạm 25%": [
+  "On day 105 · only now does your own capital reach 25%",
+  "105일째 · 이 시점에 자기 자본이 비로소 25%에 도달"
+ ],
+ "Vào ngày thứ 15 · tiếp theo ký Hợp đồng mua bán": [
+  "On day 15 · then sign the sale and purchase agreement (SPA)",
+  "15일째 · 이어서 매매계약서(SPA) 체결"
+ ],
+ "Ví dụ căn 2 phòng ngủ (~2,9 tỷ), vay 70%": [
+  "Example: 2-bedroom unit (~2.9 billion VND), 70% loan",
+  "예시: 2베드룸 세대(~29억 동), 70% 대출"
+ ],
+ "Vị trí kẹp giữa sông và biển; từ tầng cao có thể ngắm sông, biển lẫn danh thắng Ngũ Hành Sơn.": [
+  "Located between the river and the sea; from the upper floors you can see the river, the sea and the Marble Mountains (Ngu Hanh Son).",
+  "강과 바다 사이에 위치하여 고층에서는 강, 바다, 오행산을 모두 조망할 수 있습니다."
+ ],
+ "Vị trí, 4 tòa căn hộ, tiện ích": [
+  "Location, 4 apartment towers, amenities",
+  "입지, 아파트 4개 동, 편의시설"
+ ],
+ "Vốn chưa nhiều: nên chọn": [
+  "Limited capital: choose",
+  "자본이 많지 않다면:"
+ ],
+ "Vốn chưa nhiều? Căn 2 phòng ngủ vay 70% chỉ cần khoảng 725 triệu là nhận nhà": [
+  "Limited capital? A 2-bedroom unit with a 70% loan needs only about 725 million VND until handover",
+  "자본이 많지 않으신가요? 70% 대출 시 2베드룸 세대는 입주까지 약 7억 2,500만 동이면 충분합니다"
+ ],
+ "Vốn tự có đến khi nhận nhà": [
+  "Own capital until handover",
+  "입주 시까지 자기 자본"
+ ],
+ "Vốn ít": [
+  "Low capital",
+  "적은 자본"
+ ],
+ "Vốn ít? Chỉ cần 25% tới khi nhận nhà →": [
+  "Low capital? Only 25% needed until handover →",
+  "자본이 적으신가요? 입주 시까지 25%만 필요 →"
+ ],
+ "Vốn đã sẵn? Chọn thanh toán nhanh, căn 2 phòng ngủ còn khoảng": [
+  "Have the capital ready? Choose fast payment, and a 2-bedroom unit comes to about",
+  "자본이 준비되셨나요? 일시 납부를 선택하시면 2베드룸 세대가 약"
+ ],
+ "Vốn đến nhận nhà: ~1,07 tỷ": [
+  "Capital until handover: ~1.07 billion VND",
+  "입주 시까지 자본: ~10억 7천만 동"
+ ],
+ "Vốn đến nhận nhà: ~1,48 tỷ": [
+  "Capital until handover: ~1.48 billion VND",
+  "입주 시까지 자본: ~14억 8천만 동"
+ ],
+ "Vốn đến nhận nhà: ~496 triệu": [
+  "Capital until handover: ~496 million VND",
+  "입주 시까지 자본: ~4억 9,600만 동"
+ ],
+ "Vốn đến nhận nhà: ~534 triệu": [
+  "Capital until handover: ~534 million VND",
+  "입주 시까지 자본: ~5억 3,400만 동"
+ ],
+ "Vốn đến nhận nhà: ~555 triệu": [
+  "Capital until handover: ~555 million VND",
+  "입주 시까지 자본: ~5억 5,500만 동"
+ ],
+ "Vốn đến nhận nhà: ~584 triệu": [
+  "Capital until handover: ~584 million VND",
+  "입주 시까지 자본: ~5억 8,400만 동"
+ ],
+ "Vốn đến nhận nhà: ~699 triệu": [
+  "Capital until handover: ~699 million VND",
+  "입주 시까지 자본: ~6억 9,900만 동"
+ ],
+ "Vốn đến nhận nhà: ~712 triệu": [
+  "Capital until handover: ~712 million VND",
+  "입주 시까지 자본: ~7억 1,200만 동"
+ ],
+ "Vốn đến nhận nhà: ~761 triệu": [
+  "Capital until handover: ~761 million VND",
+  "입주 시까지 자본: ~7억 6,100만 동"
+ ],
+ "Vốn đến nhận nhà: ~829 triệu": [
+  "Capital until handover: ~829 million VND",
+  "입주 시까지 자본: ~8억 2,900만 동"
+ ],
+ "Vốn đến nhận nhà: ~910 triệu": [
+  "Capital until handover: ~910 million VND",
+  "입주 시까지 자본: ~9억 1,000만 동"
+ ],
+ "Xem 360° toàn màn hình ⛶": [
+  "View 360° full screen ⛶",
+  "360° 전체 화면 보기 ⛶"
+ ],
+ "Xem Google Maps ↗": [
+  "View on Google Maps ↗",
+  "Google Maps에서 보기 ↗"
+ ],
+ "Xem bản đồ ↗": [
+  "View map ↗",
+  "지도 보기 ↗"
+ ],
+ "Xem căn loại này còn trống": [
+  "View available units of this type",
+  "이 유형의 잔여 세대 보기"
+ ],
+ "Xem căn sân vườn còn trống": [
+  "View available garden units",
+  "잔여 가든 세대 보기"
+ ],
+ "Xem căn view đẹp còn trống": [
+  "View available units with great views",
+  "전망 좋은 잔여 세대 보기"
+ ],
+ "Xem giá sau chiết khấu": [
+  "View prices after discount",
+  "할인 후 가격 보기"
+ ],
+ "Xem hồ sơ pháp lý": [
+  "View legal documents",
+  "법적 서류 보기"
+ ],
+ "Xem mô hình 3D toàn màn hình ↗": [
+  "View the 3D model full screen ↗",
+  "3D 모델 전체 화면 보기 ↗"
+ ],
+ "Xem ngay căn nào còn trống – giỏ hàng cập nhật mỗi ngày": [
+  "See which units are still available – the list is updated daily",
+  "잔여 세대를 지금 확인하십시오 – 매물 목록은 매일 업데이트됩니다"
+ ],
+ "Xem ngay căn sân vườn còn trống cùng giá và hướng.": [
+  "See the available garden units now, with prices and orientations.",
+  "잔여 가든 세대의 가격과 향을 지금 확인하십시오."
+ ],
+ "Xem toàn cảnh rồi – giờ chọn căn có view đẹp nhất": [
+  "Seen the big picture – now choose the unit with the best view",
+  "전경을 보셨다면 – 이제 전망이 가장 좋은 세대를 고르십시오"
+ ],
+ "Xem đủ 61 câu hỏi – đáp →": [
+  "See all 61 questions and answers →",
+  "61개 질문·답변 전체 보기 →"
+ ],
+ "Zalo:": [
+  "Zalo:",
+  "Zalo:"
+ ],
+ "căn studio 30 m² từ khoảng": [
+  "30 m² studios from about",
+  "30 m² 스튜디오 약"
+ ],
+ "hồ sơ pháp lý": [
+  "legal documents",
+  "법적 서류"
+ ],
+ "là tòa vừa được mở bán gần đây nhất. Quy mô gồm 20 tầng nổi cùng 2 tầng hầm, mỗi tầng điển hình bố trí 32 căn; tòa có cả căn hộ sân vườn riêng và áp dụng chính sách thanh toán 70% nhận nhà.": [
+  "is the most recently launched tower. It has 20 above-ground floors and 2 basements, with 32 units on each typical floor; the tower includes apartments with private gardens and applies a policy of paying 70% to receive the home.",
+  "은 가장 최근에 분양을 시작한 동입니다. 지상 20층, 지하 2층 규모로 기준층마다 32세대가 배치되며, 개인 정원이 딸린 가든 아파트가 있고 70% 납부 시 입주하는 정책이 적용됩니다."
+ ],
+ "lãi suất 0% trong 24 tháng": [
+  "0% interest for 24 months",
+  "24개월 0% 이자"
+ ],
+ "ngày hưởng chiết khấu thanh toán sớm 12%": [
+  "days left for the 12% early payment discount",
+  "일 남은 12% 조기 납부 할인"
+ ],
+ "ngày · ưu đãi hết hạn 26/10": [
+  "days left · offer ends October 26",
+  "일 · 혜택 10월 26일 종료"
+ ],
+ "ngày ưu đãi": [
+  "days of offer left",
+  "일 혜택 남음"
+ ],
+ "năm": [
+  "years",
+  "년"
+ ],
+ "phường Ngũ Hành Sơn, TP. Đà Nẵng": [
+  "Ngu Hanh Son Ward, Da Nang City",
+  "다낭시 응우한선 동"
+ ],
+ "sông Cổ Cò": [
+  "Co Co River",
+  "꼬꼬 강"
+ ],
+ "tháng": [
+  "months",
+  "개월"
+ ],
+ "tr + 3%": [
+  "million VND + 3%",
+  "백만 동 + 3%"
+ ],
+ "trước chiết khấu": [
+  "before discount",
+  "할인 전"
+ ],
+ "trị giá tới 100 triệu": [
+  "worth up to 100 million VND",
+  "최대 1억 동 상당"
+ ],
+ "tối đa 24 tháng từ lần giải ngân đầu tiên, không muộn hơn 31/01/2029": [
+  "up to 24 months from the first disbursement, no later than January 31, 2029",
+  "첫 대출 실행일로부터 최대 24개월, 2029년 1월 31일 이내"
+ ],
+ "tổng vốn tự có 25%": [
+  "total own capital 25%",
+  "자기 자본 총 25%"
+ ],
+ "từ 1,98 tỷ": [
+  "from 1.98 billion VND",
+  "19억 8천만 동부터"
+ ],
+ "vay ngân hàng 70%": [
+  "a 70% bank loan",
+  "70% 은행 대출"
+ ],
+ "villa giữa tầng không": [
+  "villas in the sky",
+  "하늘 위의 빌라"
+ ],
+ "~2 km · 5'": [
+  "~2 km · 5'",
+  "~2km · 5분"
+ ],
+ "~2 km – 5 phút ra biển Sơn Thủy": [
+  "~2 km – 5 minutes to Son Thuy Beach",
+  "~2km – 선투이 해변까지 5분"
+ ],
+ "~50,1 m² thông thủy + ~27,3 m² sân vườn": [
+  "~50.1 m² net area + ~27.3 m² garden",
+  "전용면적 ~50.1 m² + 정원 ~27.3 m²"
+ ],
+ "~54,6 m² thông thủy + ~69 m² sân vườn thông thủy": [
+  "~54.6 m² net area + ~69 m² net garden area",
+  "전용면적 ~54.6 m² + 정원 전용면적 ~69 m²"
+ ],
+ "~64 m² thông thủy + ~51,5 m² sân vườn": [
+  "~64 m² net area + ~51.5 m² garden",
+  "전용면적 ~64 m² + 정원 ~51.5 m²"
+ ],
+ "~69m²": [
+  "~69m²",
+  "~69m²"
+ ],
+ "~7 ngày sau hạn đợt 2": [
+  "~7 days after the installment 2 deadline",
+  "2차 기한 후 ~7일"
+ ],
+ "~87 m² thông thủy + ~47,6 m² sân vườn": [
+  "~87 m² net area + ~47.6 m² garden",
+  "전용면적 ~87 m² + 정원 ~47.6 m²"
+ ],
+ "Áp dụng từ 26/09/2026 theo CSBH 4.2/FT/SPG/09-2026": [
+  "Applies from September 26, 2026 under sales policy 4.2/FT/SPG/09-2026",
+  "2026년 9월 26일부터 분양 정책 4.2/FT/SPG/09-2026에 따라 적용"
+ ],
+ "Ân hạn nợ gốc": [
+  "Principal grace period",
+  "원금 거치"
+ ],
+ "áp dụng từ 26/09/2026": [
+  "applicable from September 26, 2026",
+  "2026년 9월 26일부터 적용"
+ ],
+ "Đang online · phản hồi ngay": [
+  "Online · instant reply",
+  "온라인 · 즉시 답변"
+ ],
+ "Điểm nhấn Tòa F2": [
+  "Tower F2 highlights",
+  "F2동 하이라이트"
+ ],
+ "Đây là trang thông tin dự án do Giám đốc kinh doanh Hoàng Phạm Đình Hiệp biên soạn, không phải website chính thức của chủ đầu tư. Phối cảnh chỉ mang tính minh họa. Giá bán, chính sách và các thông tin khác có thể được chủ đầu tư điều chỉnh theo từng thời điểm. Cập nhật lần cuối: 02/10/2026.": [
+  "This is a project information page compiled by Sales Director Hoang Pham Dinh Hiep, not the developer's official website. Renderings are for illustration only. Prices, policies and other information may be adjusted by the developer from time to time. Last updated: October 2, 2026.",
+  "이 페이지는 영업 이사 호앙 팜 딘 히엡이 작성한 프로젝트 정보 페이지이며, 시행사 공식 웹사이트가 아닙니다. 조감도는 예시용입니다. 가격, 정책 및 기타 정보는 시행사가 수시로 조정할 수 있습니다. 최종 업데이트: 2026년 10월 2일."
+ ],
+ "Đóng bổ sung cho đủ 15%": [
+  "Top up to 15%",
+  "15%까지 추가 납부"
+ ],
+ "Đóng thêm 10%": [
+  "Pay a further 10%",
+  "10% 추가 납부"
+ ],
+ "Đăng ký thành công!": [
+  "Registration successful!",
+  "등록이 완료되었습니다!"
+ ],
+ "Đơn giá": [
+  "Unit price",
+  "단가"
+ ],
+ "Được tích thưởng theo giá trị HĐMB: 0,7% (Silver) – 1% (Gold) – 1,5% (Platinum) – 2% (Infinity), dùng để chi tiêu trong hệ sinh thái Sun Group.": [
+  "Earn rewards based on the SPA value: 0.7% (Silver) – 1% (Gold) – 1.5% (Platinum) – 2% (Infinity), to spend within the Sun Group ecosystem.",
+  "SPA 금액 기준 적립: 0.7%(Silver) – 1%(Gold) – 1.5%(Platinum) – 2%(Infinity), Sun Group 생태계 내에서 사용 가능합니다."
+ ],
+ "Đầu tiên anh/chị đặt cọc 100 triệu (Studio, 1PN, 1PN+, 2PN) hoặc 150 triệu (3PN); 15 ngày sau đóng 15%, rồi cứ khoảng 3 tháng đóng 10%. Đóng đủ 70% giá trị căn hộ là được nhận nhà vào ở (dự kiến 31/05/2028), 30% còn lại giãn tới khoảng 45 tháng. Ngoài ra còn có quà nội thất Nhà Xinh (35–100 triệu tùy loại căn, trừ trực tiếp vào giá), và không vay thì chiết khấu thêm 3%.": [
+  "First you pay a deposit of 100 million VND (Studio, 1BR, 1BR+, 2BR) or 150 million VND (3BR); 15 days later you pay 15%, then 10% roughly every 3 months. Once 70% of the unit value is paid, you can move in (expected May 31, 2028), with the remaining 30% spread over about 45 months. There is also a Nha Xinh furniture gift (35–100 million VND depending on unit type, deducted directly from the price), and an extra 3% discount if you do not take a loan.",
+  "먼저 계약금 1억 동(스튜디오, 1베드룸, 1베드룸+, 2베드룸) 또는 1억 5,000만 동(3베드룸)을 납부하고, 15일 후 15%, 이후 약 3개월마다 10%씩 납부합니다. 세대 가치의 70%를 납부하면 입주할 수 있으며(2028년 5월 31일 예정), 나머지 30%는 약 45개월에 걸쳐 분할 납부합니다. 또한 Nha Xinh 가구 증정(세대 유형별 3,500만–1억 동, 가격에서 직접 차감)이 있고, 대출을 이용하지 않으면 3% 추가 할인됩니다."
+ ],
+ "Đến lúc nhận nhà chỉ đóng 25% – vay ngân hàng 70%, lãi suất 0% trong 24 tháng": [
+  "Pay only 25% until handover – 70% bank loan, 0% interest for 24 months",
+  "입주 시까지 25%만 납부 – 70% 은행 대출, 24개월 0% 이자"
+ ],
+ "Để sau": [
+  "Later",
+  "나중에"
+ ],
+ "Để tôi gọi lại": [
+  "Let me call you back",
+  "전화 회신 요청"
+ ],
+ "Địa chỉ dự án FourS Tower": [
+  "FourS Tower project address",
+  "FourS Tower 프로젝트 주소"
+ ],
+ "Đợt 10": [
+  "Installment 10",
+  "10차"
+ ],
+ "Đợt 11": [
+  "Installment 11",
+  "11차"
+ ],
+ "Đợt 12": [
+  "Installment 12",
+  "12차"
+ ],
+ "Đợt 13": [
+  "Installment 13",
+  "13차"
+ ],
+ "Đợt 14: KPBT + VAT phần 5% và 5% vào tài khoản đảm bảo cấp sổ (CĐT trả lãi 8%/năm)": [
+  "Installment 14: maintenance fee + VAT on the 5% portion, and 5% into the escrow account for certificate issuance (developer pays 8%/year interest)",
+  "14차: 관리 유지비 + 5% 부분 VAT, 증서 발급 보증 계좌에 5% 납부(시행사가 연 8% 이자 지급)"
+ ],
+ "Đợt 15: khấu trừ 5% từ tài khoản đảm bảo": [
+  "Installment 15: 5% deducted from the escrow account",
+  "15차: 보증 계좌에서 5% 차감"
+ ],
+ "Đợt 1: Ký HĐTHNV": [
+  "Installment 1: Sign the EOI agreement",
+  "1차: 매수 희망 계약 체결"
+ ],
+ "Đợt 1–2: Ký HĐTHNV (cọc 100 tr / 150 tr căn 3PN) + bổ sung": [
+  "Installments 1–2: Sign the EOI agreement (deposit 100 million / 150 million VND for 3BR) + top-up",
+  "1–2차: 매수 희망 계약 체결(계약금 1억 동 / 3베드룸 1억 5,000만 동) + 추가 납부"
+ ],
+ "Đợt 3: Ngân hàng giải ngân": [
+  "Installment 3: Bank disbursement",
+  "3차: 은행 대출 실행"
+ ],
+ "Đợt 5": [
+  "Installment 5",
+  "5차"
+ ],
+ "Đợt 6": [
+  "Installment 6",
+  "6차"
+ ],
+ "Đợt 7": [
+  "Installment 7",
+  "7차"
+ ],
+ "Đợt 8 → Nhận nhà sử dụng (Sun Early Key)": [
+  "Installment 8 → Receive the home for use (Sun Early Key)",
+  "8차 → 입주(Sun Early Key)"
+ ],
+ "Đợt 9": [
+  "Installment 9",
+  "9차"
+ ],
+ "để tôi xác nhận căn còn trống, tránh bị người khác chốt mất; muốn biết giá sau chiết khấu cùng lịch đóng tiền từng ngày thì nhấn \"Tính chi tiết\".": [
+  "so I can confirm it is still available and nobody else takes it first; to see the price after discount and the day-by-day payment schedule, click \"Calculate details\".",
+  "를 눌러 주십시오. 제가 잔여 여부를 확인해 다른 분이 먼저 계약하지 않도록 해 드립니다. 할인 후 가격과 일자별 납부 일정은 \"상세 계산\"을 눌러 확인하십시오."
+ ],
+ "Ưu tiên cho người đến sớm": [
+  "Priority for early buyers",
+  "선착순 우대"
+ ],
+ "Ưu tiên chọn căn sân vườn, căn view sông & pháo hoa DIFF": [
+  "Priority choice of garden units and river & DIFF fireworks view units",
+  "가든 세대, 강 & DIFF 불꽃축제 전망 세대 우선 선택"
+ ],
+ "Ưu đãi Tòa F2 FourS Tower –": [
+  "FourS Tower Tower F2 incentives –",
+  "FourS Tower F2동 혜택 –"
+ ],
+ "Ưu đãi có hạn": [
+  "Limited-time offer",
+  "기간 한정 혜택"
+ ],
+ "Ở Tòa F2, anh/chị có thể chọn Studio (khoảng 30–34 m² thông thủy), căn 1 phòng ngủ (khoảng 42 m²), 1PN+ (khoảng 47–61 m²), căn 2 phòng ngủ (khoảng 59–64 m²) và căn 3 phòng ngủ (khoảng 85–87 m²). Các tầng điển hình 8–19 mỗi tầng bố trí 32 căn.": [
+  "In Tower F2 you can choose a Studio (about 30–34 m² net), a 1-bedroom (about 42 m²), 1BR+ (about 47–61 m²), a 2-bedroom (about 59–64 m²) and a 3-bedroom (about 85–87 m²). Typical floors 8–19 each have 32 units.",
+  "F2동에서는 스튜디오(전용 약 30–34 m²), 1베드룸(약 42 m²), 1베드룸+(약 47–61 m²), 2베드룸(약 59–64 m²), 3베드룸(약 85–87 m²) 중 선택하실 수 있습니다. 기준층 8–19층은 층마다 32세대입니다."
+ ],
+ "Ở tòa F2, những căn nhìn sông, biển, pháo hoa DIFF thường hết sớm nhất. Kiểm tra ngay căn còn trống.": [
+  "In Tower F2, units overlooking the river, the sea and the DIFF fireworks usually sell out first. Check the available units now.",
+  "F2동에서는 강, 바다, 다낭 국제 불꽃축제(DIFF) 전망 세대가 가장 먼저 판매됩니다. 지금 잔여 세대를 확인하십시오."
+ ],
+ "Ở xa vẫn dễ hình dung": [
+  "Easy to picture even from afar",
+  "멀리 계셔도 쉽게 그려지는 입지"
+ ],
+ "– Chọn căn trong giỏ hàng –": [
+  "– Choose a unit from the available list –",
+  "– 매물 목록에서 세대 선택 –"
+ ],
+ "– Tháp Bốn Mùa, dự án căn hộ cao tầng mở màn cho đại đô thị Sun Riverpolis Đà Nẵng.": [
+  "– the Four Seasons Tower, the high-rise apartment project that launches the Sun Riverpolis Da Nang mega urban area.",
+  "– 사계절 타워, Sun Riverpolis Da Nang 대형 도시구역의 첫 고층 아파트 프로젝트입니다."
+ ],
+ "– Tòa F2 FourS Tower": [
+  "– Tower F2, FourS Tower",
+  "– FourS Tower F2동"
+ ],
+ "– đến lúc nhận nhà chỉ đóng 25%. Vốn sẵn có: chọn không vay để được thêm 3% chiết khấu, tiến độ kéo dài tới ~45 tháng.": [
+  "– pay only 25% until handover. Capital ready: choose no loan for an extra 3% discount, with the schedule extended to ~45 months.",
+  "을 선택하십시오 – 입주 시까지 25%만 납부합니다. 자본이 준비되어 있다면: 대출 없이 3% 추가 할인을 받고 납부 일정이 ~45개월까지 연장됩니다."
+ ],
+ "↑ Sơn Trà": [
+  "↑ Son Tra",
+  "↑ 선짜"
+ ],
+ "→ số vốn cần tới lúc nhận nhà khoảng": [
+  "→ capital needed until handover about",
+  "→ 입주 시까지 필요한 자본 약"
+ ],
+ "↓ hướng Hội An": [
+  "↓ toward Hoi An",
+  "↓ 호이안 방향"
+ ],
+ "⏳ Còn": [
+  "⏳ Only",
+  "⏳ 남은 기간"
+ ],
+ "▶ Bấm để xem tòa F2 dạng 3D": [
+  "▶ Click to view Tower F2 in 3D",
+  "▶ 클릭하여 F2동 3D 보기"
+ ],
+ "▶ Bấm để xoay 360°": [
+  "▶ Click to rotate 360°",
+  "▶ 클릭하여 360° 회전"
+ ],
+ "✈ Sân bay Đà Nẵng · 10'": [
+  "✈ Da Nang Airport · 10'",
+  "✈ 다낭 공항 · 10분"
+ ],
+ "🏦 Ngân hàng giải ngân 70%": [
+  "🏦 Bank disburses 70%",
+  "🏦 은행 70% 대출 실행"
+ ],
+ "📍 Chỉ đường Google Maps ↗": [
+  "📍 Directions on Google Maps ↗",
+  "📍 Google Maps 길찾기 ↗"
+ ],
+ "📞 Gọi ngay": [
+  "📞 Call now",
+  "📞 지금 전화"
+ ],
+ "🔒 Cam kết không spam, không gọi dồn dập – chỉ gửi thông tin anh/chị cần.": [
+  "🔒 No spam, no repeated calls – only the information you need.",
+  "🔒 스팸이나 반복 전화 없이 필요한 정보만 보내 드립니다."
+ ],
+ "🔒 Giỏ hàng này mới là 12 / 607 căn đủ điều kiện bán – còn nhiều căn view sông, biển, pháo hoa DIFF chưa đăng": [
+  "🔒 This list is only 12 / 607 units eligible for sale – many more river, sea and DIFF fireworks view units are not yet posted",
+  "🔒 이 목록은 분양 요건 충족 607세대 중 12세대뿐입니다 – 강, 바다, DIFF 불꽃축제 전망 세대가 아직 많이 게시되지 않았습니다"
+ ],
+ "🔒 Phương án cho thuê bù khoản vay & số tiền trả mỗi tháng sau ưu đãi": [
+  "🔒 Rental plan to offset the loan & monthly payment after the incentive period",
+  "🔒 대출 상쇄 임대 방안 & 혜택 종료 후 월 상환액"
+ ],
+ "🔒 Số điện thoại chỉ để tư vấn, không spam.": [
+  "🔒 Your phone number is used only for advice, no spam.",
+  "🔒 전화번호는 상담 목적으로만 사용되며 스팸은 없습니다."
+ ]
+}
