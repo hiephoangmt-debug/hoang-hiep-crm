@@ -9,7 +9,7 @@ import html, json, os, re, subprocess, sys, tempfile, urllib.request
 
 WP = "https://danangstay.com.vn/wp-json"
 HERE = os.path.dirname(os.path.abspath(__file__))
-LOGO = os.path.join(HERE, "..", "logo", "final", "danangstay-logo.png")
+LOGO = os.path.join(HERE, "..", "logo", "final2", "danangstay-ngang.png")
 
 
 def get(u):
@@ -36,7 +36,7 @@ def main():
 <style>html,body{{margin:0}}.c{{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:'Be Vietnam Pro',sans-serif;color:#fff}}
 .bg{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
 .sh{{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,26,50,.72) 0%,rgba(7,26,50,.25) 14%,rgba(7,26,50,0) 26%,rgba(7,26,50,0) 42%,rgba(7,26,50,.78) 66%,rgba(7,26,50,.96) 100%)}}
-.lg{{position:absolute;left:44px;top:34px;width:300px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.45))}}
+.lg{{position:absolute;left:40px;top:40px;width:380px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.45))}}
 .tag{{position:absolute;right:44px;top:52px;background:#E8590C;padding:12px 20px;border-radius:999px;font:700 22px/1 'Be Vietnam Pro';letter-spacing:.06em}}
 .tx{{position:absolute;left:64px;right:64px;bottom:210px}}
 h1{{margin:0;font:800 108px/1.1 'Be Vietnam Pro';text-shadow:0 4px 22px rgba(0,0,0,.35)}}

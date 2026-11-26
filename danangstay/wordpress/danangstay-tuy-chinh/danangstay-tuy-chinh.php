@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.7.1
+ * * Version: 3.8.2
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2402,11 +2402,11 @@ add_filter('dst_html', function ($html) {
 // ===== 27. Logo mới (chữ D đầu rồng) + favicon =====
 add_filter('dst_html', function ($html) {
     $a = plugins_url('assets/', __FILE__);
-    $img = '<img class="ds-logo" src="' . $a . 'logo-360.webp" srcset="' . $a . 'logo-360.webp 360w, ' . $a . 'logo-720.webp 720w" sizes="(max-width:600px) 150px, 200px" width="360" height="168" alt="DanangStay – Đà Nẵng · Hội An · Huế">';
+    $img = '<img class="ds-logo" src="' . $a . 'logo-360.webp?v=380" srcset="' . $a . 'logo-360.webp?v=380 360w, ' . $a . 'logo-720.webp?v=380 720w" sizes="(max-width:600px) 200px, 260px" width="360" height="94" alt="DanangStay – Đà Nẵng · Hội An · Huế">';
     $html = preg_replace('#(<a class="brand"[^>]*>)\s*<svg viewBox="0 0 40 40".*?</svg>\s*<span class="brand__word"[^>]*>.*?</span>#s', '$1' . $img, $html);
-    $icons = '<link rel="icon" href="' . $a . 'icon-32.png" sizes="32x32" type="image/png">'
-        . '<link rel="icon" href="' . $a . 'icon-192.png" sizes="192x192" type="image/png">'
-        . '<link rel="apple-touch-icon" href="' . $a . 'icon-180.png">';
+    $icons = '<link rel="icon" href="' . $a . 'icon-32.png?v=380" sizes="32x32" type="image/png">'
+        . '<link rel="icon" href="' . $a . 'icon-192.png?v=380" sizes="192x192" type="image/png">'
+        . '<link rel="apple-touch-icon" href="' . $a . 'icon-180.png?v=380">';
     $html = preg_replace('#<link rel="icon"[^>]*>#', '', $html);
     $html = preg_replace('#<link rel="apple-touch-icon"[^>]*>#', '', $html);
     $html = str_replace('</head>', $icons . "\n</head>", $html);
@@ -2414,9 +2414,9 @@ add_filter('dst_html', function ($html) {
 }, 60);
 add_action('wp_head', function () {
     echo '<style id="dst-logo-css">
-.brand img.ds-logo{display:block;height:66px;width:auto;max-width:none}
-footer .brand img.ds-logo,.site-footer .brand img.ds-logo{height:84px}
-@media (max-width:600px){.brand img.ds-logo{height:44px}}
+.brand img.ds-logo{display:block;height:62px;width:auto;max-width:none}
+footer .brand img.ds-logo,.site-footer .brand img.ds-logo{height:96px}
+@media (max-width:600px){.brand img.ds-logo{height:46px}}
 </style>';
 }, 108);
 
@@ -2450,7 +2450,7 @@ add_filter('dst_html', function ($html) {
     $html = preg_replace('#(<div class="footer-top">\s*<div>\s*<a class="brand".*?</a>\s*<p>.*?</p>)#s', '$1<p class="ds-social"><a class="ds-social__fb" href="' . $fb . '" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.6V21h2.9z"/></svg> Facebook</a></p>', $html, 1);
     // schema: sameAs + logo mới
     $html = str_replace('"@id":"https://danangstay.com.vn/#organization",', '"@id":"https://danangstay.com.vn/#organization","sameAs":["' . str_replace('/', '\/', $fb) . '"],', $html);
-    $html = str_replace('https://danangstay.com.vn/wp-content/themes/danangstay-v3/assets/img/logo.png', plugins_url('assets/logo-720.png', __FILE__), $html);
+    $html = str_replace('https://danangstay.com.vn/wp-content/themes/danangstay-v3/assets/img/logo.png', plugins_url('assets/logo-720.png?v=380', __FILE__), $html);
     return $html;
 }, 61);
 add_action('wp_head', function () {
