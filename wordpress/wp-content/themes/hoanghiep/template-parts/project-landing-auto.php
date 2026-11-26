@@ -235,7 +235,11 @@ $form_opts = $unit_rows ? wp_list_pluck( $unit_rows, 0 ) : array_values( wp_list
       <?php foreach ( $nav as $k => $lb ) : ?><a href="#<?php echo esc_attr( $k ); ?>"><?php echo $e( $lb ); ?></a><?php endforeach; ?>
       <a class="nav-out" href="<?php echo esc_url( home_url( '/' ) ); ?>">← Trang chủ</a><a class="nav-out" href="<?php echo esc_url( home_url( '/du-an/' ) ); ?>">Tất cả dự án</a>
     </nav>
-    <?php if ( is_file( get_theme_file_path( 'landing/' . get_post_field( 'post_name', get_the_ID() ) . '--en.html' ) ) ) : ?><a class="lang-en" href="<?php echo esc_url( trailingslashit( get_permalink() ) . 'en/' ); ?>" hreflang="en" lang="en" translate="no" title="English version">EN</a><?php endif; ?>
+    <?php if ( function_exists( 'hh_lang_switch_url' ) ) : // Chuyển ngôn ngữ: EN có bản viết riêng thì mở bản đó, còn lại bản dịch tự động (giữ thuật ngữ BĐS chuẩn). ?>
+    <nav class="lang-switch top-lang notranslate" translate="no" aria-label="Ngôn ngữ / Language">
+      <span class="lang-switch__item is-active" aria-current="true">VI</span><?php foreach ( array( 'en' => 'English', 'ko' => '한국어' ) as $lc => $ln ) : ?><a class="lang-switch__item" href="<?php echo esc_url( hh_lang_switch_url( $lc ) ); ?>" hreflang="<?php echo esc_attr( $lc ); ?>" lang="<?php echo esc_attr( $lc ); ?>" title="<?php echo esc_attr( $ln ); ?>"><?php echo esc_html( strtoupper( $lc ) ); ?></a><?php endforeach; ?>
+    </nav>
+    <?php endif; ?>
     <a class="btn btn-gold" href="#dang-ky"><?php echo $resale ? 'Nhận danh sách căn' : 'Nhận bảng giá'; ?></a>
   </div>
 </header>
