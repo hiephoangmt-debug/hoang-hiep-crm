@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.8.6
+ * * Version: 3.9.2
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2495,3 +2495,30 @@ add_action('wp_head', function () {
 }
 </style>';
 }, 110);
+
+// ===== 31. Trang chủ trên điện thoại: thẻ chia 2 cột =====
+add_action('wp_head', function () {
+    echo '<style id="dst-home-mob">
+@media (max-width:760px){
+.ds-services,.tiles,.areas,.intro__facts{display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important}
+.ds-service{padding:14px 12px!important;margin:0!important}
+.ds-service h3,.ds-service strong{font-size:16px!important;line-height:1.25!important}
+.ds-service .tx,.ds-service p{font-size:13px!important;line-height:1.45!important;max-height:4.35em!important;display:-webkit-box!important;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tiles .tile{margin:0!important;min-height:0!important;aspect-ratio:3/4}
+.tiles .tile h3{font-size:17px!important}.tiles .tile p{display:none!important}
+.areas .area{margin:0!important}
+.areas .area img,.areas .area .area__img{aspect-ratio:1/1!important;height:auto!important}
+.areas .area h3{font-size:15px!important;margin-top:8px!important}
+.areas .area p{font-size:12px!important;line-height:1.4!important;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.intro__facts{grid-template-columns:repeat(3,1fr)!important}
+.intro__facts .fact *{font-size:12px!important}.intro__facts .fact strong,.intro__facts .fact b,.intro__facts .fact span:first-child{font-size:22px!important}
+.journal{display:grid!important;grid-template-columns:1fr 1fr!important;gap:18px 12px!important}
+.journal .card{margin:0!important;display:flex!important;flex-direction:column!important}
+.journal .card--lead{grid-column:1/-1}
+.journal .card:not(.card--lead) .card__img{aspect-ratio:4/3!important;height:auto!important}
+.journal .card:not(.card--lead) h3{font-size:15px!important;line-height:1.3!important}
+.journal .card:not(.card--lead) p{display:none!important}
+.concierge .steps{display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important}
+}
+</style>';
+}, 111);
