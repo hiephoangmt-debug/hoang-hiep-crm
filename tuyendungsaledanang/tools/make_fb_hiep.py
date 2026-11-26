@@ -12,6 +12,15 @@ POSTS = [
  {"id": "04", "photo": "hoang-hiep-walk-wide.jpg", "pos": "center 30%", "tag": "Telesale",
   "head": "Nghe lại cuộc gọi của chính mình là cách <em>tiến bộ nhanh&nbsp;nhất</em>.",
   "sub": "Mỗi tối chọn một cuộc, tìm một chỗ cần sửa. Hôm sau sửa đúng chỗ đó."},
+ {"id": "05", "photo": "ra-quan-1.jpg", "pos": "center 35%", "tag": "Sức bền",
+  "head": "Nghề sale chạy <em>đường dài</em>, không phải chạy nước&nbsp;rút.",
+  "sub": "Giữ giờ ăn, giờ ngủ, uống đủ nước khi đi dự án ngoài nắng. Sức khỏe tốt thì giọng nói và năng lượng khi tư vấn mới&nbsp;tốt."},
+ {"id": "06", "photo": "team-trip-1.jpg", "pos": "center 40%", "tag": "Không ai tự bơi",
+  "head": "Cái khó nhất của người mới là phải <em>tự xoay sở</em> một&nbsp;mình.",
+  "sub": "Ở đội của Hiệp, bạn mới có người kèm và được chia data mỗi ngày, không ai phải ngồi chờ&nbsp;khách."},
+ {"id": "07", "photo": "ky-ket-casamia-2.jpg", "pos": "center 45%", "tag": "Chọn nơi làm",
+  "head": "Chọn <em>đúng nơi làm</em> quan trọng hơn chọn dự&nbsp;án.",
+  "sub": "Ở môi trường có đào tạo từ 0 và có người kèm, cái khó tháng đầu sẽ nhẹ đi rất&nbsp;nhiều."}
 ]
 TPL = open(os.path.join(OUT, 'tpl-anh.html'), encoding='utf-8').read()
 for p in POSTS:
