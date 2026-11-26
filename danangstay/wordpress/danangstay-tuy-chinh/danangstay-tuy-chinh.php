@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.16.4
+ * * Version: 3.16.5
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2746,3 +2746,12 @@ add_action('wp_head', function () {
 add_action('wp_footer', function () {
     echo '<script src="' . plugins_url('assets/rong-fx.js?v=5', __FILE__) . '" defer></script>';
 }, 100);
+
+// ===== 47. Điện thoại: đoạn văn căn đều 2 bên, gọn khoảng trắng =====
+add_action('wp_head', function () {
+    echo '<style id="dst-justify">
+@media (max-width:760px){
+.lede,.intro p,.map-section__text p,.feature p,.concierge p,.ds-home-svc__head p{text-align:justify!important;text-align-last:left!important;text-justify:inter-word;font-size:16.5px!important;line-height:1.62!important;word-spacing:-.02em}
+}
+</style>';
+}, 127);
