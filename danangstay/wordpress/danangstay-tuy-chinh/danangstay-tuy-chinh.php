@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.9.9
+ * * Version: 3.10.0
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2572,8 +2572,10 @@ add_action('wp_head', function () {
 .brand::after{content:"";position:absolute;inset:0;pointer-events:none;
 background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.95) 50%,transparent 60%) no-repeat;background-size:250% 100%;background-position:150% 0;
 -webkit-mask:url(' . $m . ') left center/auto 100% no-repeat;mask:url(' . $m . ') left center/auto 100% no-repeat;
-animation:dsShine 4s ease-in-out infinite;mix-blend-mode:screen}
+animation:dsShine 4s ease-in-out 1.8s infinite;mix-blend-mode:screen}
+.site-header .brand img.ds-logo{animation:dsReveal 1.6s cubic-bezier(.2,.7,.2,1) .15s both}
+@keyframes dsReveal{0%{clip-path:inset(0 100% 0 0);transform:translateX(-6px) scale(.96);opacity:.4}25%{clip-path:inset(0 72% 0 0);transform:none;opacity:1}100%{clip-path:inset(0 0 0 0)}}
 @keyframes dsShine{0%{background-position:150% 0}45%,100%{background-position:-60% 0}}
-@media (prefers-reduced-motion:reduce){.brand::after{animation:none;display:none}}
+@media (prefers-reduced-motion:reduce){.brand::after{animation:none;display:none}.site-header .brand img.ds-logo{animation:none}}
 </style>';
 }, 114);
