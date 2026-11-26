@@ -430,7 +430,34 @@ add_action(
 					$key  = (string) $req->get_header( 'x_hh_key' );
 					return '' !== $hash && '' !== $key && hash_equals( $hash, hash( 'sha256', $key ) );
 				},
-				'callback'            => static function () {
+				'callback'            => static function ( $req ) {
+					$diag = sanitize_title( (string) $req->get_param( 'du_an' ) );
+					if ( $diag ) { // Chẩn đoán ảnh của 1 dự án (không có dữ liệu riêng tư).
+						$pp = get_page_by_path( $diag, OBJECT, 'du-an' );
+						if ( ! $pp ) {
+							return array( 'ok' => false, 'msg' => 'Không thấy dự án.' );
+						}
+						if ( '1' === (string) $req->get_param( 'chay' ) && function_exists( 'hh_img_links_run_now' ) ) {
+							hh_img_links_requeue_all();
+							hh_img_links_run_now( 20 ); // Gắn ảnh ngay khoảng 20 giây, không chờ WP-Cron.
+							do_action( 'litespeed_purge_all' );
+						}
+						$done = (array) get_post_meta( $pp->ID, '_hh_img_links', true );
+						$st   = array();
+						foreach ( function_exists( 'hh_lines' ) ? hh_lines( 'hh_p_image_links', $pp->ID ) : array() as $line ) {
+							$k      = function_exists( 'hh_img_link_key' ) ? hh_img_link_key( trim( explode( '|', $line )[0] ) ) : '';
+							$st[]   = basename( $k ) . ' = ' . ( isset( $done[ $k ] ) ? ( is_int( $done[ $k ] ) ? 'ok' : $done[ $k ] ) : 'chờ' ) . ( function_exists( 'hh_img_link_local_path' ) && 0 === strpos( $k, 'plugin:' ) && ! hh_img_link_local_path( $k ) ? ' (thiếu file)' : '' );
+						}
+						return array(
+							'lines'   => $st,
+							'pending' => function_exists( 'hh_img_links_pending' ) ? hh_img_links_pending( $pp->ID ) : null,
+							'queue'   => array_slice( (array) get_option( 'hh_img_links_queue', array() ), 0, 30 ),
+							'next'    => wp_next_scheduled( 'hh_img_links_cron' ) ? wp_date( 'H:i:s', wp_next_scheduled( 'hh_img_links_cron' ) ) : '',
+							'lock'    => get_option( 'hh_img_links_lock' ),
+							'err'     => get_post_meta( $pp->ID, '_hh_img_links_err', true ),
+							'id'      => $pp->ID,
+						);
+					}
 					if ( ! hh_su_enabled() ) {
 						return array( 'ok' => false, 'msg' => 'Tự cập nhật đang tắt.', 'v' => HH_CRM_VERSION );
 					}
