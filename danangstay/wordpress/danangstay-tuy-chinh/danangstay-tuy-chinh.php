@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.12.1
+ * * Version: 3.13.1
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2606,7 +2606,7 @@ add_filter('dst_html', function ($html) {
     $img = function ($n, $cls, $alt = '') use ($a) {
         return '<img class="' . $cls . '" src="' . $a . 'logo-' . $n . '-360.webp?v=2" srcset="' . $a . 'logo-' . $n . '-360.webp?v=2 360w, ' . $a . 'logo-' . $n . '-720.webp?v=2 720w" sizes="260px" width="360" height="89" alt="' . $alt . '"' . ($alt ? '' : ' aria-hidden="true"') . '>';
     };
-    $new = $img('bom', 'ds-l-bom') . $img('dau', 'ds-logo ds-l-dau', 'DanangStay – Đà Nẵng · Hội An · Huế') . '<span class="ds-fire" aria-hidden="true"><i></i><i></i><i></i></span>';
+    $new = $img('bom', 'ds-l-bom') . $img('dau', 'ds-logo ds-l-dau', 'DanangStay – Đà Nẵng · Hội An · Huế') . '<span class="ds-fire" aria-hidden="true"><i></i><i></i><i></i></span><span class="ds-fire ds-fire-in" aria-hidden="true"><i></i><i></i><i></i></span>';
     return preg_replace('#<img class="ds-logo ds-l-rong"[^>]*>#', $new, $html, 1);
 }, 64);
 add_action('wp_head', function () {
@@ -2626,3 +2626,21 @@ add_action('wp_head', function () {
 @media (prefers-reduced-motion:reduce){.ds-logo2 *{animation:none!important}.ds-fire{display:none}}
 </style>';
 }, 116);
+
+// ===== 37. Logo mở đầu: rồng hiện, phun lửa từ giữa miệng, lửa quét tới đâu chữ hiện tới đó =====
+add_action('wp_head', function () {
+    echo '<style id="dst-logo-intro">
+.site-header .ds-logo2{animation:none!important}
+.ds-logo2 .ds-l-bom{animation:dsIn .6s ease-out both,dsBom 2.4s ease-in-out 2.4s infinite!important}
+.ds-logo2 .ds-l-dau{animation:dsIn .6s ease-out both,dsDau 3.6s ease-in-out 2.4s infinite!important}
+.ds-logo2 .ds-l-chu{animation:dsChu 1.15s linear .85s both}
+@keyframes dsIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+@keyframes dsChu{from{clip-path:inset(0 57% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.ds-fire{left:40.8%!important;top:30.5%!important;height:21.6%!important;width:18%!important;animation:dsFire 8s ease-out 9s infinite!important}
+.ds-fire-in{width:13%!important;animation:dsFi 1.3s linear .7s both!important}
+@keyframes dsFi{0%{opacity:0;transform:translateX(0) scaleX(0)}10%{opacity:1;transform:translateX(0) scaleX(1)}85%{opacity:1;transform:translateX(330%) scaleX(1.1)}100%{opacity:0;transform:translateX(380%) scaleX(.6)}}
+@keyframes dsFire{0%{opacity:0;transform:scaleX(0) scaleY(.5)}5%{opacity:1;transform:scaleX(1) scaleY(1)}13%{opacity:1;transform:scaleX(1.12) scaleY(.9)}19%{opacity:0;transform:scaleX(1.25) scaleY(.5)}100%{opacity:0}}
+.brand::after{animation-delay:2.3s!important}
+@media (prefers-reduced-motion:reduce){.ds-logo2 .ds-l-chu{animation:none!important}.ds-fire-in{display:none!important}}
+</style>';
+}, 117);
