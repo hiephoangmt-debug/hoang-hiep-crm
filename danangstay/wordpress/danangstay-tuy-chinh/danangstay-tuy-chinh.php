@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.9.2
+ * * Version: 3.9.6
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2184,7 +2184,7 @@ body.archive.category main > .section:not(.ds-cat-more):first-of-type, body.arch
 
 // ===== 22. Trang chủ: dải dịch vụ dưới ảnh bìa, thời tiết cạnh bản đồ, khối Tin mới · Quy định · Liên hệ =====
 add_filter('dst_html', function ($html) {
-    if (!preg_match('#<body class="[^"]*\bhome\b#', $html) || strpos($html, 'ds-home-svc') !== false) {
+    if (!preg_match('#<body class="[^"]*\bhome\b#', $html) || strpos($html, 'class="section ds-home-svc"') !== false) {
         return $html;
     }
     $lang = dst_lang();
@@ -2277,7 +2277,7 @@ function dst_upcoming_events($lang, $n = 4)
 }
 
 add_filter('dst_html', function ($html) {
-    if (!preg_match('#<body class="[^"]*\bhome\b#', $html) || strpos($html, 'ds-home-ev') !== false) {
+    if (!preg_match('#<body class="[^"]*\bhome\b#', $html) || strpos($html, 'class="section ds-home-ev"') !== false) {
         return $html;
     }
     $lang = dst_lang();
@@ -2522,3 +2522,26 @@ add_action('wp_head', function () {
 }
 </style>';
 }, 111);
+
+// ===== 32. Trang chủ điện thoại: căn giữa tiêu đề, thẻ đều nhau =====
+add_action('wp_head', function () {
+    if (!is_front_page()) { return; }
+    echo '<style id="dst-home-mob2">
+@media (max-width:760px){
+.ds-home-svc__head,.section-head,.intro>div,.map-section__text{text-align:center!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important}
+.ds-home-svc__head h2,.section-head h2,.intro h2,.map-section__text h2{margin-left:auto!important;margin-right:auto!important;max-width:15em}
+.ds-home-svc__head p,.map-section__text .lede{margin-left:auto!important;margin-right:auto!important}
+.ds-home-svc__head .link-arrow,.section-head .link-arrow{margin:12px auto 0!important}
+.ds-services{align-items:stretch!important}
+.ds-service{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;height:100%}
+.ds-service .ic{margin:0 auto 6px!important}
+.ds-service .tx,.ds-service .go{text-align:center!important;width:100%}
+.ds-service strong{min-height:2.5em;display:flex!important;align-items:center;justify-content:center}
+.ds-service .go{margin-top:auto!important;padding-top:8px}
+.areas .area,.journal .card:not(.card--lead),.journal .card:not(.card--lead) *{text-align:center!important}
+.journal .card:not(.card--lead) .card__meta,.journal .card:not(.card--lead) span{display:block;margin-left:auto;margin-right:auto}
+.tiles .tile{text-align:center!important}
+.intro__facts .fact{text-align:center!important}
+}
+</style>';
+}, 112);
