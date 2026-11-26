@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.353**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.354**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.354
+
+- Tự cập nhật: bước tự kiểm tra sau khi chép chờ bộ đệm mã PHP (OPcache) của hosting làm mới tới ~2 phút trước khi kết luận (trước đây kiểm tra ngay nên báo nhầm lỗi và trả bản cũ); cổng su-ping không bị LiteSpeed lưu đệm.
 
 ## Có gì mới – 2.20.353
 

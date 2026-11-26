@@ -120,7 +120,7 @@ function hh_su_run( $force = false ) {
 
 function hh_su_run_inner( $force ) {
 	if ( function_exists( 'set_time_limit' ) ) {
-		@set_time_limit( 240 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+		@set_time_limit( 420 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
 	}
 	$repo = (string) apply_filters( 'hh_su_repo', HH_SU_REPO );
 	$ver  = hh_su_fetch( $repo . HH_SU_REF . '/wordpress/tu-dong/cap-nhat/version.json?t=' . time(), 20 );
@@ -273,6 +273,11 @@ function hh_su_apply_code( $items, $base, $version ) {
 		}
 	}
 	$clean();
+	foreach ( $items as $it ) {
+		if ( function_exists( 'opcache_invalidate' ) && preg_match( '/\.php$/i', $it[0] ) ) {
+			@opcache_invalidate( $it[0], true ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+		}
+	}
 	if ( function_exists( 'opcache_reset' ) ) {
 		opcache_reset();
 	}
@@ -280,15 +285,25 @@ function hh_su_apply_code( $items, $base, $version ) {
 	if ( ! $can_check ) {
 		return true;
 	}
+	// Hosting thường giữ bộ đệm mã PHP (OPcache) tới ~60 giây → hỏi lại su-ping tối đa ~2 phút trước khi kết luận.
 	$ok   = false;
 	$why  = '';
-	$ping = wp_remote_get( rest_url( 'hh/v1/su-ping' ) . '?t=' . time(), array( 'timeout' => 30 ) );
-	if ( ! is_wp_error( $ping ) && 200 === (int) wp_remote_retrieve_response_code( $ping ) ) {
-		$pv = json_decode( (string) wp_remote_retrieve_body( $ping ), true );
-		$ok = is_array( $pv ) && ( $pv['v'] ?? '' ) === $version;
-		$why = $ok ? '' : 'su-ping báo phiên bản ' . ( $pv['v'] ?? '?' );
-	} else {
-		$why = 'su-ping lỗi ' . ( is_wp_error( $ping ) ? $ping->get_error_message() : wp_remote_retrieve_response_code( $ping ) );
+	$errs = 0;
+	for ( $try = 0; $try < 12 && ! $ok; $try++ ) {
+		if ( $try ) {
+			sleep( 10 );
+		}
+		$ping = wp_remote_get( rest_url( 'hh/v1/su-ping' ) . '?t=' . time() . '-' . $try, array( 'timeout' => 30, 'headers' => array( 'Cache-Control' => 'no-cache' ) ) );
+		if ( ! is_wp_error( $ping ) && 200 === (int) wp_remote_retrieve_response_code( $ping ) ) {
+			$pv  = json_decode( (string) wp_remote_retrieve_body( $ping ), true );
+			$ok  = is_array( $pv ) && ( $pv['v'] ?? '' ) === $version;
+			$why = $ok ? '' : 'su-ping vẫn báo phiên bản ' . ( $pv['v'] ?? '?' ) . ' sau ' . ( $try * 10 ) . ' giây';
+		} else {
+			$why = 'su-ping lỗi ' . ( is_wp_error( $ping ) ? $ping->get_error_message() : wp_remote_retrieve_response_code( $ping ) );
+			if ( ++$errs >= 3 ) {
+				break; // Lỗi thật (500…) – trả bản cũ ngay.
+			}
+		}
 	}
 	if ( $ok ) {
 		$home = wp_remote_get( add_query_arg( 'hh_su', time(), home_url( '/' ) ), array( 'timeout' => 30 ) );
@@ -394,7 +409,12 @@ add_action(
 			array(
 				'methods'             => 'GET',
 				'permission_callback' => '__return_true',
-				'callback'            => static fn() => array( 'v' => HH_CRM_VERSION ),
+				'callback'            => static function () {
+					do_action( 'litespeed_control_set_nocache', 'hh su-ping' );
+					$r = new WP_REST_Response( array( 'v' => HH_CRM_VERSION ) );
+					$r->header( 'Cache-Control', 'no-store, max-age=0' );
+					return $r;
+				},
 			)
 		);
 		register_rest_route(
