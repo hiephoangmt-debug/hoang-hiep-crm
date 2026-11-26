@@ -122,3 +122,8 @@ Yêu cầu của anh: ảnh đẹp chuẩn FB; lời văn **mềm mỏng, nhẹ 
 ## MÀU ẢNH (anh Hiệp 22/11/2026: khoanh thẻ "Mua chung Sun Saphia" nền xanh – "Lấy màu này")
 - Thẻ thông điệp Facebook (Sun, Casamia, Hoàng Hiệp) dùng màu POSTER NỀN XANH (`fb-the-doc-v2.py poster-xanh`): nền xanh trời nhạt, tiêu đề chữ có chân màu cam đất, chữ viết tay cam, số liệu cam. Mẫu "nắng cam" chỉ dùng khi anh Hiệp yêu cầu riêng.
 - Casamia: ảnh 1 = thẻ poster nền xanh (thay cho nắng cam ở mục "CASAMIA: ẢNH THÔNG ĐIỆP ĐẦU"), sau đó 3 ảnh không chữ.
+
+## THREADS (anh Hiệp 26/11/2026)
+- Tài khoản Threads @hiephoangmt kết nối ở brand Sun (blogId 7637635). Brand Casamia không có Threads/TikTok → bài Threads/TikTok của Casamia cũng đặt ở blogId 7637635.
+- Mỗi bài FB trang Sun và Casamia → 1 bài Threads, giờ FB + 5 phút (09:05, 09:35, 19:05, 19:35). providers [{"network":"threads"}], "threadsData":{}.
+- Tối đa 500 ký tự (kể cả link): câu mở có từ khoá, 2–3 gạch đầu dòng số liệu có thật, 1 câu gợi ý, link bài web (curl 200), "Zalo Hiệp: 0904 567 009". Tối đa 1 hashtag. Ảnh: 1–2 ảnh đầu của bài FB. Giữ đủ lưu ý pháp lý bắt buộc.

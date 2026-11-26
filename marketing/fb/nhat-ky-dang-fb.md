@@ -214,3 +214,5 @@
 | CHỜ | Sun | 27/11 | (bài web 26/11) Sun Saphia Residence hay căn hộ có sẵn | sun-saphia-residence-hay-can-ho-co-san (chờ) |
 | CHỜ | Sun | 27/11 | (bài web 26/11) Rủi ro khi mua Sun Saphia Residence | rui-ro-khi-mua-sun-saphia-residence (chờ) |
 | CHỜ | Sun | 27/11 | (bài web 26/11) Mặt bằng S-Light Tower – loại căn, diện tích | mat-bang-s-light-tower-loai-can-dien-tich (chờ) |
+| 26/11/2026 | Threads (@hiephoangmt, brand Sun) | 19:05 | Căn hộ sân vườn FourS Tower – bản ngắn, 1 ảnh | /can-ho-san-vuon-fours-tower/ |
+| 26/11/2026 | Threads (@hiephoangmt, brand Sun) | 19:35 | Tham quan Casamia Balanca – bản ngắn, 2 ảnh | /du-an/casamia-balanca-hoi-an/ |
