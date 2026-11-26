@@ -287,7 +287,7 @@ function chips() {
   zb.innerHTML = [[0, '🌴 Phía trước: hiện trạng'], [1, '🌴 Quy hoạch công viên'], [2, '🌴 QH + làm sạch'], [3, '🏝 Quy hoạch resort']].map(([v, t]) => `<option value="${v}">${t}</option>`).join('');
   zb.value = frontMode; zb.onchange = () => { setFront(+zb.value); zb.classList.toggle('active', frontMode > 0); }; $('chips').appendChild(zb);
   const tw = chip('🏢 Toà nhà 3D', null, () => { showTower = !showTower; tw.classList.toggle('active', showTower); towerGroup.visible = showTower; setFloor(floor); }, showTower);
-  chip('⬇ Nhìn khu đất', null, () => { Object.assign(view, siteDir(q)); view.fov = 80; });
+  chip('⬇ Nhìn khu đất', null, () => { Object.assign(view, siteDir(q)); view.fov = innerWidth < innerHeight ? 100 : 80; });   // điện thoại dọc: mở rộng góc nhìn để thấy trọn mặt bằng
   const lb = document.createElement('select'); lb.id = 'lblSel'; lb.className = 'chip' + (showLbl ? ' active' : ''); lb.setAttribute('aria-label', 'Lọc nhãn');
   lb.innerHTML = [['all', '🏷 Nhãn: tất cả'], ['dd', '🏷 Địa danh'], ['rs', '🏷 Resort'], ['duong', '🏷 Tên đường'], ['prj', '🏷 Dự án'], ['off', '🏷 Tắt nhãn']].map(([v, t]) => `<option value="${v}">${t}</option>`).join('');
   lb.value = showLbl ? lblGroup : 'off';
