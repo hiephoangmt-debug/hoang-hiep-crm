@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.11.0
+ * * Version: 3.12.1
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2599,3 +2599,30 @@ add_action('wp_head', function () {
 @media (prefers-reduced-motion:reduce){.ds-logo2 .ds-l-rong,.site-header .ds-logo2{animation:none!important}}
 </style>';
 }, 115);
+
+// ===== 36. Logo: bờm bay, đầu lắc, thỉnh thoảng phun lửa =====
+add_filter('dst_html', function ($html) {
+    $a = plugins_url('assets/', __FILE__);
+    $img = function ($n, $cls, $alt = '') use ($a) {
+        return '<img class="' . $cls . '" src="' . $a . 'logo-' . $n . '-360.webp?v=2" srcset="' . $a . 'logo-' . $n . '-360.webp?v=2 360w, ' . $a . 'logo-' . $n . '-720.webp?v=2 720w" sizes="260px" width="360" height="89" alt="' . $alt . '"' . ($alt ? '' : ' aria-hidden="true"') . '>';
+    };
+    $new = $img('bom', 'ds-l-bom') . $img('dau', 'ds-logo ds-l-dau', 'DanangStay – Đà Nẵng · Hội An · Huế') . '<span class="ds-fire" aria-hidden="true"><i></i><i></i><i></i></span>';
+    return preg_replace('#<img class="ds-logo ds-l-rong"[^>]*>#', $new, $html, 1);
+}, 64);
+add_action('wp_head', function () {
+    echo '<style id="dst-logo-anim2">
+.ds-logo2 .ds-l-bom,.ds-logo2 .ds-l-dau{position:absolute;left:0;top:0}
+.ds-logo2 .ds-l-bom{position:relative}
+.ds-logo2 .ds-l-bom{transform-origin:19.5% 55%;animation:dsBom 2.4s ease-in-out 1.6s infinite}
+.ds-logo2 .ds-l-dau{transform-origin:22% 70%;animation:dsDau 3.6s ease-in-out 1.6s infinite}
+@keyframes dsBom{0%,100%{transform:rotate(0) skewY(0)}25%{transform:rotate(3deg) skewY(-3deg)}50%{transform:rotate(-1.5deg) skewY(2deg)}75%{transform:rotate(2deg) skewY(-1deg)}}
+@keyframes dsDau{0%,100%{transform:rotate(0) translateY(0)}18%{transform:rotate(-7deg) translateY(-3px)}36%{transform:rotate(3deg) translateY(1px)}52%{transform:rotate(-3deg) translateY(-1px)}68%{transform:rotate(0) translateY(0)}}
+.ds-fire{position:absolute;z-index:3;left:40%;top:30%;width:20%;height:26%;pointer-events:none;transform-origin:0 50%;animation:dsFire 7s ease-out 2.5s infinite;opacity:0}
+.ds-fire i{position:absolute;left:0;top:50%;height:100%;width:100%;transform:translateY(-50%);border-radius:50% 60% 60% 50%/50%;background:radial-gradient(ellipse at 12% 50%,#fffbe0 0,#ffd23f 22%,#ff8a1a 48%,#ff4a00 62%,rgba(255,40,0,0) 74%);filter:drop-shadow(0 0 4px rgba(255,140,0,.9))}
+.ds-fire i:nth-child(2){width:70%;height:70%;left:30%;top:20%;animation:dsFl .25s linear infinite alternate}
+.ds-fire i:nth-child(3){width:50%;height:60%;left:55%;top:70%;animation:dsFl .3s linear infinite alternate-reverse}
+@keyframes dsFire{0%{opacity:0;transform:scaleX(0) scaleY(.4) rotate(-8deg)}5%{opacity:1;transform:scaleX(1) scaleY(1) rotate(-8deg)}14%{opacity:1;transform:scaleX(1.15) scaleY(.9) rotate(-12deg)}20%{opacity:0;transform:scaleX(1.3) scaleY(.5) rotate(-16deg)}100%{opacity:0}}
+@keyframes dsFl{from{transform:translateY(-50%) scale(1)}to{transform:translateY(-58%) scale(.85)}}
+@media (prefers-reduced-motion:reduce){.ds-logo2 *{animation:none!important}.ds-fire{display:none}}
+</style>';
+}, 116);
