@@ -340,6 +340,11 @@ add_action(
 		foreach ( hh_lang_glossary() as $vi => list( $en, $ko ) ) {
 			$map[ $vi ] = array( 'en' => $en, 'ko' => $ko );
 		}
+		foreach ( hh_lang_page_dict() as $vi => $tr ) { // Bảng dịch viết sẵn theo trang (chuẩn hơn bản dịch máy).
+			if ( ! empty( $tr[0] ) || ! empty( $tr[1] ) ) {
+				$map[ $vi ] = array( 'en' => (string) ( $tr[0] ?? '' ), 'ko' => (string) ( $tr[1] ?? '' ) );
+			}
+		}
 		?>
 <script>
 (function () {
@@ -425,3 +430,32 @@ add_action(
 	},
 	1
 );
+
+/**
+ * Bảng dịch viết sẵn (tr/chung.json cho nhãn dùng chung + tr/<loại>/<slug>.json theo trang): { "câu tiếng Việt": ["English", "한국어"] }.
+ * Nhúng vào chân trang; mã JS chỉ dùng tới khi trang được mở qua bản dịch translate.goog.
+ */
+function hh_lang_page_dict() {
+	if ( is_admin() ) {
+		return array();
+	}
+	$files = array( HH_CRM_DIR . 'tr/chung.json' );
+	$obj   = get_queried_object();
+	if ( $obj instanceof WP_Post ) {
+		$files[] = HH_CRM_DIR . 'tr/' . sanitize_key( $obj->post_type ) . '/' . sanitize_title( $obj->post_name ) . '.json';
+	} elseif ( is_front_page() ) {
+		$files[] = HH_CRM_DIR . 'tr/trang-chu.json';
+	} elseif ( is_post_type_archive() ) {
+		$files[] = HH_CRM_DIR . 'tr/luu-tru-' . sanitize_key( (string) get_query_var( 'post_type' ) ) . '.json';
+	}
+	$out = array();
+	foreach ( $files as $f ) {
+		if ( is_file( $f ) ) {
+			$d = json_decode( (string) file_get_contents( $f ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+			if ( is_array( $d ) ) {
+				$out = array_merge( $out, $d );
+			}
+		}
+	}
+	return $out;
+}
