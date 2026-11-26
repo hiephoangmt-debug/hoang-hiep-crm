@@ -1,11 +1,15 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.356**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.357**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.357
+
+- Premier Village Đà Nẵng: bỏ thông tin "Accor vận hành" (Accor không còn quản lý) trên trang dự án, bài mua biệt thự và ảnh bìa; chỉ ghi chủ đầu tư Công ty CP Địa Cầu (Sun Group).
 
 ## Có gì mới – 2.20.356
 
-- Premier Village Đà Nẵng: sửa số căn thành 111 biệt thự (77 hướng vườn, 28 lối ra biển, 6 trực diện biển), chủ đầu tư Công ty CP Địa Cầu (Sun Group), Accor vận hành, bảng loại biệt thự, tiện ích, 10 ảnh chính thức của khu nghỉ dưỡng, giá chỉ từ khoảng 39 tỷ.
+- Premier Village Đà Nẵng: sửa số căn thành 111 biệt thự (77 hướng vườn, 28 lối ra biển, 6 trực diện biển), chủ đầu tư Công ty CP Địa Cầu (Sun Group), bảng loại biệt thự, tiện ích, 10 ảnh chính thức của khu nghỉ dưỡng, giá chỉ từ khoảng 39 tỷ.
 
 ## Có gì mới – 2.20.355
 
