@@ -11,7 +11,7 @@ def git(*a):
     return subprocess.check_output(['git', *a]).decode()
 
 commit = git('rev-parse', 'HEAD').strip()
-if git('status', '--porcelain', '--', 'wordpress/wp-content/mu-plugins/hh-crm', 'wordpress/wp-content/themes/hoanghiep', 'wordpress/packaging').strip():
+if git('status', '--porcelain', '--untracked-files=no', '--', 'wordpress/wp-content/mu-plugins/hh-crm', 'wordpress/wp-content/themes/hoanghiep', 'wordpress/packaging').strip():
     sys.exit('Còn thay đổi chưa commit trong plugin/giao diện – commit trước rồi chạy lại.')
 safe = re.compile(r'^[A-Za-z0-9._/@+-]+$')
 files, skipped = [], []

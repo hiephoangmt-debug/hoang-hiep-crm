@@ -425,3 +425,5 @@ body.admin-bar header.top{top:32px}
 @media (max-width:760px){.top .top-lang{height:28px;margin-right:6px}.top .top-lang .lang-switch__item{min-width:24px;height:20px;padding:0 4px;font-size:11px}}
 @media (max-width:760px){.top .brand{min-width:0;flex:1 1 auto;overflow:hidden}.top .brand b,.top .brand small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.top .top-lang{margin-left:auto}}
 .float .fb{background:#1877f2}
+.foot .foot-fb{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:9px 16px;border-radius:999px;background:#1877f2;color:#fff;font-weight:700;text-decoration:none}
+.foot .foot-fb:before{content:'f';font:700 16px/1 Arial,sans-serif}
