@@ -11,7 +11,7 @@ function rnd(a,b){return a+Math.random()*(b-a)}
 function emit(kind,n,s){for(var i=0;i<n;i++){var a=ANG+rnd(-.1,.1),sp;
  if(kind=='fire'){sp=rnd(2.8,4.4)*s;P.push({k:0,x:mx,y:my,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,l:0,L:rnd(28,44),r:rnd(3,6)*s});}
  else if(kind=='smoke'){sp=rnd(1.1,2)*s;P.push({k:1,x:mx,y:my,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,l:0,L:rnd(70,110),r:rnd(4,7)*s,g:rnd(.35,.7)});}
- else{sp=rnd(2.4,3.4)*s;var d=Math.random()<.75;P.push({k:d?2:3,x:mx,y:my,vx:Math.cos(a+rnd(-.05,.05))*sp,vy:Math.sin(a)*sp,l:0,L:d?rnd(40,60):rnd(50,80),r:d?rnd(.7,1.6)*s:rnd(5,9)*s});}}}
+ else{sp=rnd(2.8,3.8)*s;var d=Math.random()<.75,am=a-0.2;P.push({k:d?2:3,x:mx,y:my,vx:Math.cos(am+rnd(-.05,.05))*sp,vy:Math.sin(am)*sp,l:0,L:d?rnd(40,60):rnd(50,80),r:d?rnd(.7,1.6)*s:rnd(5,9)*s});}}}
 function frame(now){
  var t=(now-t0)/1000,s=H/150;
  if(!mode&&t>3.5){var c=(t-3.5)%6;if(c<.05){mode=seq[si%3];si++;mt=now;}}
@@ -26,7 +26,7 @@ function frame(now){
    ctx.globalCompositeOperation='source-over';var a=Math.sin(Math.PI*Math.min(1,f*1.3))*.55;var c=Math.round(255*p.g+60);
    var g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,r);g.addColorStop(0,'rgba('+c+','+c+','+(c+8)+','+a+')');g.addColorStop(.6,'rgba('+(c-30)+','+(c-28)+','+(c-20)+','+a*.55+')');g.addColorStop(1,'rgba(120,125,135,0)');
    ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,r,0,7);ctx.fill();}
-  else if(p.k==2){p.vy+=.045*s;p.vx*=.985;p.x+=p.vx;p.y+=p.vy;ctx.globalCompositeOperation='lighter';ctx.fillStyle='rgba(225,245,255,'+(1-f)*.9+')';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fill();}
+  else if(p.k==2){p.vy+=.04*s;p.vx*=.988;p.x+=p.vx;p.y+=p.vy;ctx.globalCompositeOperation='lighter';ctx.fillStyle='rgba(225,245,255,'+(1-f)*.9+')';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fill();}
   else{p.vy+=.015*s;p.vx*=.97;p.x+=p.vx;p.y+=p.vy;var r=p.r*(1+f*2.5);ctx.globalCompositeOperation='lighter';
    var g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,r);var a=(1-f)*.22;g.addColorStop(0,'rgba(220,240,255,'+a+')');g.addColorStop(1,'rgba(180,220,255,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,r,0,7);ctx.fill();}
  }
