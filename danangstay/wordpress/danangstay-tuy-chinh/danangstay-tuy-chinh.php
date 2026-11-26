@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.9.6
+ * * Version: 3.9.9
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2545,3 +2545,35 @@ add_action('wp_head', function () {
 }
 </style>';
 }, 112);
+
+// ===== 33. Điện thoại: bớt rối – ẩn nút nổi "Đặt chỗ nghỉ", gợi ý ngôn ngữ thành dải mảnh dưới đầu trang =====
+add_action('wp_head', function () {
+    echo '<style id="dst-mob-clean">
+@media (max-width:760px){
+.float-cta{display:none!important}
+.lang-hint{left:0!important;right:0!important;top:84px!important;bottom:auto!important;width:auto!important;max-width:none!important;border-radius:0!important;padding:8px 14px!important;font-size:13px!important;box-shadow:0 6px 16px -10px rgba(0,0,0,.5)!important;display:flex!important;align-items:center;gap:10px}
+.lang-hint *{font-size:13px!important;line-height:1.3!important}
+.lang-hint.ds-hide{display:none!important}
+.lede,.intro p,.map-section__text p,.feature p,.concierge p{text-align:left!important;hyphens:none!important;-webkit-hyphens:none!important;font-size:17px!important;line-height:1.6!important}
+.areas .area p{text-align:center!important}
+.dsw{transform:scale(.82);transform-origin:right bottom}
+}
+</style>';
+}, 113);
+add_action('wp_footer', function () {
+    echo '<script>(function(){var h=document.querySelector(".lang-hint");if(!h)return;setTimeout(function(){h.classList.add("ds-hide")},7000);})();</script>';
+}, 99);
+
+// ===== 34. Logo: vệt sáng chạy qua =====
+add_action('wp_head', function () {
+    $m = plugins_url('assets/logo-720.png?v=381', __FILE__);
+    echo '<style id="dst-logo-shine">
+.brand{position:relative;display:inline-block;line-height:0}
+.brand::after{content:"";position:absolute;inset:0;pointer-events:none;
+background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.95) 50%,transparent 60%) no-repeat;background-size:250% 100%;background-position:150% 0;
+-webkit-mask:url(' . $m . ') left center/auto 100% no-repeat;mask:url(' . $m . ') left center/auto 100% no-repeat;
+animation:dsShine 4s ease-in-out infinite;mix-blend-mode:screen}
+@keyframes dsShine{0%{background-position:150% 0}45%,100%{background-position:-60% 0}}
+@media (prefers-reduced-motion:reduce){.brand::after{animation:none;display:none}}
+</style>';
+}, 114);
