@@ -1860,5 +1860,85 @@ HTML
 		),
 	);
 
+	/* ---------------- 27/11 – Khu tái định cư Thăng Phú (Dự án thành phần 15) phục vụ đường sắt tốc độ cao ---------------- */
+	$posts[] = array(
+		'slug'           => 'tai-dinh-cu-thang-phu-duong-sat-toc-do-cao',
+		'title'          => 'Đà Nẵng duyệt khu tái định cư Thăng Phú hơn 121 tỷ, gần 10 ha cho đường sắt tốc độ cao Bắc – Nam',
+		'excerpt'        => 'Ngày 25/11/2026, UBND TP Đà Nẵng phê duyệt Dự án thành phần 15 – khu tái định cư Thăng Phú gồm 2 khu Tú Trà và Mỹ Trà, tổng mức đầu tư hơn 121 tỷ đồng, gần 10 ha, thực hiện 2026 – 2029, phục vụ giải phóng mặt bằng đường sắt tốc độ cao Bắc – Nam.',
+		'keyword'        => 'tái định cư Thăng Phú',
+		'keywords_extra' => array( 'khu tái định cư Tú Trà Mỹ Trà', 'đường sắt tốc độ cao qua Đà Nẵng', 'dự án thành phần 15 đường sắt tốc độ cao', 'bất động sản Thăng Bình' ),
+		'project'        => 'hoiana-resort-golf',
+		'schedule'       => '2026-11-27 06:45',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Đường sắt tốc độ cao', 'Thăng Phú', 'Tái định cư' ),
+		'image'          => 'plugin:img/meta-city-tam-ky/meta-city-tam-ky-phoi-canh-tong-the.jpg',
+		'image_alt'      => 'Tái định cư Thăng Phú phục vụ đường sắt tốc độ cao – vùng Thăng Bình, Tam Kỳ cũ phía nam Đà Nẵng (ảnh minh hoạ phối cảnh khu đô thị lân cận)',
+		'content'        => <<<HTML
+<p>Thêm một khu <strong>tái định cư Thăng Phú</strong> được duyệt cho tuyến đường sắt tốc độ cao: ngày <strong>25/11/2026</strong>, UBND thành phố Đà Nẵng phê duyệt <strong>Dự án thành phần 15</strong> – khu tái định cư phục vụ dự án đường sắt tốc độ cao trên trục Bắc – Nam tại xã Thăng Phú, tổng mức đầu tư <strong>hơn 121 tỷ đồng</strong>, gồm 2 khu Tú Trà và Mỹ Trà với tổng diện tích gần 10 ha.</p>
+<!--hh-featured-->
+<h2>Tái định cư Thăng Phú: những con số chính</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Theo Báo Xây dựng (25/11/2026)</th></tr></thead>
+<tbody>
+<tr><td>Ngày phê duyệt</td><td>25/11/2026 – quyết định của UBND TP Đà Nẵng</td></tr>
+<tr><td>Tên dự án</td><td>Dự án thành phần 15: Khu tái định cư phục vụ dự án đường sắt tốc độ cao trên trục Bắc – Nam trên địa bàn xã Thăng Phú</td></tr>
+<tr><td>Gồm</td><td>2 khu tái định cư: Tú Trà và Mỹ Trà</td></tr>
+<tr><td>Tổng diện tích sử dụng đất</td><td>Gần 10 ha</td></tr>
+<tr><td>Tổng mức đầu tư</td><td>Hơn 121 tỷ đồng</td></tr>
+<tr><td>Thời gian thực hiện</td><td>2026 – 2029</td></tr>
+<tr><td>Hạng mục</td><td>San nền, giao thông, thoát nước mưa, thu gom và xử lý nước thải, cấp nước, phòng cháy chữa cháy, cấp điện, điện chiếu sáng, cây xanh và hoàn trả hạ tầng hiện trạng</td></tr>
+</tbody>
+</table>
+<p>Khu tái định cư Thăng Phú thuộc dự án bồi thường, hỗ trợ, tái định cư và di dời công trình hạ tầng kỹ thuật của tuyến đường sắt tốc độ cao đoạn qua Đà Nẵng. Xã Thăng Phú là một trong các xã mới hình thành từ vùng huyện Thăng Bình cũ sau khi Đà Nẵng và Quảng Nam hợp nhất. Thông tin chi tiết theo bài của <a href="https://baoxaydung.vn/them-khu-tai-dinh-cu-tram-ty-phuc-vu-du-an-duong-sat-toc-do-cao-qua-da-nang-192261125212515246.htm">Báo Xây dựng</a>.</p>
+<h2>Tái định cư Thăng Phú nằm trong chuỗi 31 dự án thành phần</h2>
+<p>Theo Báo Xây dựng, công tác giải phóng mặt bằng, tái định cư và di dời hạ tầng kỹ thuật cho đường sắt tốc độ cao đoạn qua Đà Nẵng được chia thành <strong>31 dự án thành phần</strong>: 2 dự án chính thực hiện bồi thường, hỗ trợ, tái định cư, giải phóng mặt bằng toàn tuyến và di dời hệ thống điện, nước, viễn thông, thủy lợi, giao thông ngầm; 29 dự án độc lập xây dựng <strong>20 khu tái định cư và 9 khu nghĩa trang</strong>.</p>
+<p>Trước khu tái định cư Thăng Phú, thành phố đã duyệt 3 khu tái định cư hơn 392 tỷ đồng tại Duy Xuyên (xem <a href="/tai-dinh-cu-duy-xuyen-duong-sat-toc-do-cao-392-ty/">tái định cư Duy Xuyên</a>) và khu Hương Trà ở vùng Tam Kỳ cũ (xem <a href="/tai-dinh-cu-huong-tra-hoa-lien-tuy-loan/">tái định cư Hương Trà, Hòa Liên – Túy Loan</a>). Các khu được duyệt dần theo hướng tuyến từ Bắc vào Nam của thành phố.</p>
+<h2>Đường sắt tốc độ cao Bắc – Nam đang ở bước nào?</h2>
+<ul>
+<li>Tuyến dài khoảng 1.541 km, sơ bộ tổng mức đầu tư khoảng 67,34 tỷ USD, gồm 23 ga hành khách và 5 ga hàng hóa.</li>
+<li>Mốc khởi công được báo chí cập nhật liên tục: đầu tháng 11/2026 nêu mục tiêu tháng 12/2027; tiêu đề bài CafeF ngày 26/11/2026 ghi "dự kiến khởi công vào cuối năm 2028" – cần chờ văn bản chính thức.</li>
+<li>Ga Đà Nẵng dự kiến đặt tại Hòa Sơn – xem <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son/">ga đường sắt tốc độ cao Đà Nẵng tại Hòa Sơn</a>.</li>
+</ul>
+<!--hh-img:img/meta-city-tam-ky/meta-city-tam-ky-phoi-canh-tong-the.jpg|Phối cảnh khu đô thị Meta City ở Tây Bắc Tam Kỳ – cùng vùng phía nam thành phố với khu tái định cư Thăng Phú (phối cảnh chủ đầu tư, ảnh minh hoạ khu vực)-->
+<h2>Hộ dân trong diện tái định cư Thăng Phú cần làm gì?</h2>
+<p>Với các hộ có đất nằm trong hành lang tuyến, khu tái định cư Thăng Phú (Tú Trà, Mỹ Trà) là nơi dự kiến bố trí đất ở mới. Hộ dân nên theo dõi thông báo thu hồi đất, biên bản kiểm đếm và phương án bồi thường – hỗ trợ – tái định cư được UBND xã niêm yết; kiểm tra kỹ diện tích, loại đất, tài sản trên đất được ghi nhận; hỏi rõ vị trí lô, giá giao đất tái định cư và nghĩa vụ tài chính. Nếu chưa đồng ý số liệu, nên góp ý bằng văn bản trong thời gian niêm yết công khai.</p>
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Hướng tuyến qua Thăng Bình cũ đã rõ hơn:</strong> có quyết định đầu tư khu tái định cư Thăng Phú nghĩa là phạm vi thu hồi đất của tuyến qua khu vực này đã được xác định đủ để lập dự án.</li>
+<li><strong>Đất trong hành lang tuyến cần kiểm tra trước khi xuống tiền:</strong> khách hỏi Hiệp về đất nền giá thấp ở Thăng Bình, Tam Kỳ cũ thì việc đầu tiên Hiệp làm là đề nghị hỏi UBND xã hoặc văn phòng đăng ký đất đai xem thửa đất có nằm trong phạm vi thu hồi của tuyến hay khu tái định cư Thăng Phú hay không.</li>
+<li><strong>Lô tái định cư không phải hàng bán tự do:</strong> đất trong khu tái định cư Thăng Phú giao cho hộ bị thu hồi; gặp tin rao "suất tái định cư" cần xem quyết định giao đất và điều kiện chuyển nhượng.</li>
+<li><strong>Tác động giá là dài hạn:</strong> 2 khu Tú Trà, Mỹ Trà làm xong hạ tầng trong giai đoạn 2026 – 2029; giá đất quanh tuyến chủ yếu thay đổi khi tuyến khởi công và quanh các nhà ga, không nên kỳ vọng tăng ngay.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/hoiana-resort-golf/">Hoiana Resort &amp; Golf</a> – quần thể nghỉ dưỡng ven biển phía Nam Hội An, phía bắc vùng Thăng Bình cũ; kết nối đường sắt tốc độ cao trong dài hạn giúp rút ngắn thời gian đi từ các thành phố lớn.</li>
+<li><a href="/du-an/meta-city-tam-ky/">Meta City Tam Kỳ</a> – khu đô thị ở Tây Bắc Tam Kỳ cũ, giáp vùng Thăng Bình cũ; các khu tái định cư phục vụ tuyến làm khu vực phía nam thành phố có thêm hạ tầng dân cư (trang thông tin tham khảo).</li>
+<li><a href="/du-an/vinh-an-hoa-city/">Vịnh An Hòa City</a> – khu đô thị phía Nam gần Khu kinh tế mở Chu Lai, cùng hành lang hạ tầng Bắc – Nam của thành phố.</li>
+</ul>
+<p>Cần kiểm tra một thửa đất cụ thể ở Thăng Bình, Tam Kỳ cũ có nằm trong hành lang tuyến hay khu tái định cư Thăng Phú hay không, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: Báo Xây dựng (25/11/2026) về quyết định phê duyệt Dự án thành phần 15 của UBND TP Đà Nẵng ngày 25/11/2026; Người Quan Sát (11/2026); thông tin tuyến đường sắt tốc độ cao theo CafeF (05/11 và 26/11/2026). Chưa đọc được toàn văn quyết định (báo chí không nêu số hiệu) – số liệu ghi theo báo chí.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Tái định cư Thăng Phú 121 tỷ cho đường sắt tốc độ cao',
+			'desc'      => 'Đà Nẵng duyệt khu tái định cư Thăng Phú (Tú Trà, Mỹ Trà) gần 10 ha, hơn 121 tỷ đồng, thực hiện 2026 – 2029 phục vụ đường sắt tốc độ cao Bắc – Nam.',
+			'points'    => array(
+				'Tái định cư Thăng Phú: ngày 25/11/2026 UBND TP Đà Nẵng duyệt Dự án thành phần 15, hơn 121 tỷ đồng',
+				'Gồm 2 khu Tú Trà và Mỹ Trà, tổng diện tích gần 10 ha, thực hiện 2026 – 2029',
+				'Đoạn qua Đà Nẵng chia 31 dự án thành phần: 20 khu tái định cư, 9 khu nghĩa trang',
+			),
+			'faq'       => array(
+				array( 'Khu tái định cư Thăng Phú gồm những khu nào?', 'Khu tái định cư Thăng Phú (Dự án thành phần 15) gồm 2 khu Tú Trà và Mỹ Trà tại xã Thăng Phú, TP Đà Nẵng, tổng diện tích sử dụng đất gần 10 ha.' ),
+				array( 'Tổng vốn và thời gian làm khu tái định cư Thăng Phú?', 'Tổng mức đầu tư hơn 121 tỷ đồng, thực hiện từ năm 2026 đến 2029, theo quyết định UBND TP Đà Nẵng phê duyệt ngày 25/11/2026.' ),
+				array( 'Ai được bố trí đất ở khu tái định cư Thăng Phú?', 'Khu tái định cư Thăng Phú dành cho các hộ có đất bị thu hồi để làm tuyến đường sắt tốc độ cao Bắc – Nam qua khu vực; lô đất được giao theo phương án bồi thường, hỗ trợ, tái định cư được duyệt, không phải hàng bán tự do.' ),
+			),
+		),
+		'sources'        => array(
+			'https://baoxaydung.vn/them-khu-tai-dinh-cu-tram-ty-phuc-vu-du-an-duong-sat-toc-do-cao-qua-da-nang-192261125212515246.htm',
+			'https://nguoiquansat.vn/da-nang-chi-hon-121-ty-lam-hai-khu-tai-dinh-cu-10ha-phuc-vu-duong-sat-toc-do-cao-bac-nam-330188.html',
+			'https://cafef.vn/sieu-du-an-duong-sat-toc-do-cao-350km-h-di-qua-15-tinh-thanh-von-dau-tu-67-ty-usd-du-kien-khoi-cong-vao-cuoi-nam-2028-co-dien-bien-moi-188261126144003271.chn',
+		),
+	);
+
 	return $posts;
 }
