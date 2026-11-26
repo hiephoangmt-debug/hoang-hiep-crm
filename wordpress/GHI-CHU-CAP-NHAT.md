@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.359**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.48** + plugin Hoàng Hiệp CRM **2.20.360**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.360 (giao diện 2.16.48)
+
+- Trang dự án chuyển nhượng (VD Premier Village): dưới mục Giá chuyển nhượng có khối "Gửi bán, gửi cho thuê căn … qua Hoàng Hiệp" – ảnh thật dự án, giá thuê tham khảo, các bước nhận ký gửi, nút Zalo / gọi.
 
 ## Có gì mới – 2.20.359
 

@@ -607,6 +607,32 @@ if ( ! $parent ) {
     </div>
     <?php endif; ?>
     <p class="note">Giá tham khảo, chưa trừ chiết khấu; giá và căn còn trống thay đổi theo đợt – để lại số, Hoàng Hiệp gửi bảng giá cập nhật qua Zalo.</p>
+    <?php
+    if ( $resale ) :
+		// Dự án chuyển nhượng: khối nhận gửi bán / gửi cho thuê kèm ảnh thật của dự án (anh Hiệp 26/11/2026).
+		$kg_img = $gallery[2] ?? ( $gallery[0] ?? $hero );
+		$kg_src = $kg_img ? $url( $kg_img, 'large' ) : '';
+		?>
+    <div class="ky-gui rv">
+      <?php if ( $kg_src ) : ?><figure class="ky-gui__img"><img src="<?php echo esc_url( $kg_src ); ?>" alt="<?php echo esc_attr( 'Gửi bán, cho thuê ' . $short_name . ' – ' . $alt( $kg_img ) ); ?>" loading="lazy" decoding="async"><figcaption>Nhận gửi bán · gửi cho thuê</figcaption></figure><?php endif; ?>
+      <div class="ky-gui__body">
+        <span class="ky-gui__tag">Chủ nhà <?php echo $e( $short_name ); ?></span>
+        <h3>Gửi bán, gửi cho thuê căn <?php echo $e( $short_name ); ?> qua Hoàng Hiệp</h3>
+        <?php if ( $m( 'hh_p_rent_price' ) ) : ?><p class="ky-gui__rent"><b>Giá thuê tham khảo:</b> <?php echo $e( $m( 'hh_p_rent_price' ) ); ?></p><?php endif; ?>
+        <ul>
+          <li>Định giá tham khảo theo giao dịch, tin rao cùng khu – đặt giá sát thị trường</li>
+          <li>Chụp ảnh, đăng tin trên hiephoangmt.com – không công khai tên, số điện thoại chủ nhà</li>
+          <li>Lọc khách có nhu cầu thật, dẫn xem theo lịch của chủ nhà</li>
+          <li>Hỗ trợ đặt cọc, công chứng, kê khai thuế và sang tên (bán) hoặc hợp đồng thuê (cho thuê)</li>
+        </ul>
+        <p class="ky-gui__need">Gửi kèm: loại căn, diện tích, hiện trạng nội thất, giá mong muốn, căn có đang trong hợp đồng cho thuê với đơn vị vận hành hay không.</p>
+        <div class="ky-gui__acts">
+          <a class="btn btn-gold js-zalo" href="<?php echo esc_url( $zalo ); ?>" target="_blank" rel="noopener">Gửi thông tin căn qua Zalo</a>
+          <a class="btn ky-gui__call" href="tel:0904567009">Gọi <?php echo $e( $phone ); ?></a>
+        </div>
+      </div>
+    </div>
+    <?php endif; ?>
   </div>
 </section>
 <?php endif; ?>
