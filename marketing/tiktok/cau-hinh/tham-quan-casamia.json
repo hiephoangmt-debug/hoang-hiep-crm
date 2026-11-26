@@ -1,0 +1,39 @@
+{
+ "hook": [
+  "Xem tận mắt trước khi chọn",
+  "CUỐI TUẦN",
+  "đi xem nhà"
+ ],
+ "question": "Tham quan Casamia Balanca xem gì?",
+ "hook_bg": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d26/c-su-kien-sound-of-balance.jpg",
+ "data_title": [
+  "Casamia Balanca",
+  "THAM QUAN"
+ ],
+ "rows": [
+  [
+   "31,1 ha",
+   "Khu đô thị",
+   "Ven sông Cổ Cò, Hội An"
+  ],
+  [
+   "363",
+   "Sản phẩm thấp tầng",
+   "Đơn lập, song lập, shophouse"
+  ],
+  [
+   "5",
+   "Công viên chủ đề",
+   "Theo quy hoạch chủ đầu tư"
+  ],
+  [
+   "12/2026",
+   "Bàn giao thô",
+   "Theo CSBH chủ đầu tư"
+  ]
+ ],
+ "note": "Theo chủ đầu tư Đạt Phương. Ảnh sự kiện khách hàng tại dự án.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d26/c-nha-vuon-ven-song.jpg",
+ "photo_caption": "Phối cảnh nhà vườn ven sông Casamia",
+ "cta": "Đặt lịch: Zalo 0904 567 009"
+}

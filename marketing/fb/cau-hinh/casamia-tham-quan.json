@@ -1,0 +1,85 @@
+{
+ "tag": "THAM QUAN · CASAMIA BALANCA",
+ "title": "CASAMIA BALANCA",
+ "sub": "Xem căn thật, đường nội khu, ven sông Cổ Cò",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "31,1 ha",
+   "khu đô thị"
+  ],
+  [
+   "363",
+   "sản phẩm"
+  ],
+  [
+   "Cuối tuần",
+   "Hiệp đưa đi xem"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Ảnh sự kiện khách hàng tại dự án · Theo chủ đầu tư",
+ "headline": [
+  [
+   "CASAMIA BALANCA",
+   "big",
+   0
+  ],
+  [
+   "tận mắt trước khi chọn",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Cuối tuần xem nhà",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "CASAMIA BALANCA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "tận mắt trước khi chọn",
+     "script"
+    ]
+   ],
+   "dx": 200
+  }
+ ]
+}

@@ -1,0 +1,85 @@
+{
+ "tag": "TIẾN ĐỘ · SUN NEO CITY",
+ "title": "CORA & SPANA",
+ "sub": "Thanh toán đủ 70% là nhận nhà sử dụng",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "30/6/2027",
+   "Spana Tower"
+  ],
+  [
+   "30/7/2027",
+   "Cora Tower"
+  ],
+  [
+   "~tầng 10",
+   "Spana 11/2026"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo tài liệu chủ đầu tư và ảnh công trường 11/2026 · Phối cảnh dự án",
+ "headline": [
+  [
+   "CORA & SPANA",
+   "big",
+   0
+  ],
+  [
+   "Sun NeO City Hòa Xuân",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Khi nào bàn giao?",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "CORA & SPANA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "Sun NeO City",
+     "script"
+    ]
+   ],
+   "dx": 240
+  }
+ ]
+}

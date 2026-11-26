@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Sun Group Hòa Xuân",
+  "2027",
+  "nhận nhà"
+ ],
+ "question": "Cora, Spana khi nào bàn giao?",
+ "hook_bg": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d26/spana.jpg",
+ "data_title": [
+  "Sun NeO City",
+  "MỐC BÀN GIAO"
+ ],
+ "rows": [
+  [
+   "30/6/2027",
+   "Spana Tower",
+   "Tòa S1, S2, 22 tầng"
+  ],
+  [
+   "30/7/2027",
+   "Cora Tower",
+   "Căn hộ A1, A2"
+  ],
+  [
+   "31/10/2027",
+   "Shop khối đế Cora",
+   "Khi thanh toán 70%"
+  ],
+  [
+   "~tầng 10",
+   "Spana 11/2026",
+   "Đang thi công phần thân"
+  ],
+  [
+   "70%",
+   "Sun Early Key",
+   "Đủ 70% nhận nhà sử dụng"
+  ]
+ ],
+ "note": "Theo tài liệu chủ đầu tư, ảnh công trường 11/2026. Mốc dự kiến.",
+ "photo": "/tmp/claude-0/-home-user-hoang-hiep-crm/eb2d04b8-d3cb-5e3b-bd5b-6f43e46a0150/scratchpad/d26/spana.jpg",
+ "photo_caption": "Spana Tower – Hòa Xuân",
+ "cta": "Tiến độ: Zalo 0904 567 009"
+}
