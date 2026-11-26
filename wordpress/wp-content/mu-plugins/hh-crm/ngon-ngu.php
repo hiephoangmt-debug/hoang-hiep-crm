@@ -271,6 +271,9 @@ function hh_lang_phrases() {
 		'cầu Rồng'                      => array( 'Dragon Bridge', '용다리' ),
 		'cầu Trần Thị Lý'               => array( 'Tran Thi Ly Bridge', '쩐티리 다리' ),
 		'cầu Hòa Xuân'                  => array( 'Hoa Xuan Bridge', '호아쑤언 다리' ),
+		'giao dịch chuyển nhượng'       => array( '', '전매 거래' ), // Google dịch "chuyển nhượng" thành 픽업/이동 (đưa đón).
+		'giá chuyển nhượng'             => array( '', '전매 가격' ),
+		'chuyển nhượng'                 => array( '', '전매' ),
 		'Cá Chuồn Cồ'                   => array( 'Ca Chuon Co', 'Ca Chuon Co' ),
 		'bán đảo Sơn Trà'               => array( 'Son Tra Peninsula', '선짜 반도' ),
 		'Bà Nà'                         => array( 'Ba Na Hills', '바나힐' ),
@@ -327,7 +330,7 @@ add_action(
 			$phr[ $vi ] = array( 'en' => $en, 'ko' => $ko );
 			$up         = mb_strtoupper( mb_substr( $vi, 0, 1 ) ) . mb_substr( $vi, 1 );
 			if ( $up !== $vi && ! isset( $phr[ $up ] ) ) {
-				$phr[ $up ] = array( 'en' => ucfirst( $en ), 'ko' => $ko );
+				$phr[ $up ] = array( 'en' => '' === $en ? '' : ucfirst( $en ), 'ko' => $ko );
 			}
 		}
 		foreach ( hh_lang_brands() as $vi => $latin ) {
