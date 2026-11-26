@@ -109,6 +109,7 @@ def footer(base, pages=True):
             '<p class="fsm" style="font-size:12.5px;line-height:1.55;opacity:.85">Trang thông tin do Hoàng Hiệp – TATILAND, <a href="' + MAIN + '/phap-ly#dai-ly">đại lý phân phối chính thức</a> thực hiện; không phải website chủ đầu tư. Hình ảnh minh họa. '
             'Hotline/Zalo <a href="tel:%s">%s</a> · <a href="' + MAIN + '/chinh-sach-bao-mat">Bảo mật</a></p></div></footer>'
             '<a class="pill" href="#dang-ky">📩 Nhận bảng giá ngay khi công bố</a>'
+            '<script>(function(){var H=document.documentElement,t=0;function f(){t=0;H.classList.toggle("scl",scrollY>innerHeight*.55)}addEventListener("scroll",function(){if(!t)t=requestAnimationFrame(f)},{passive:true});f()})();</script>'
 ) % (links, TEL, TEL_S)
 
 MIENTRU = ('<p style="margin-top:16px;font-size:13.5px;color:#557585">Trang thông tin dự án do Hoàng Phạm Đình Hiệp – Giám đốc kinh doanh TATILAND (Công ty CP Đầu tư Địa ốc TATI) thực hiện, không phải website của chủ đầu tư. '
