@@ -424,3 +424,4 @@ body.admin-bar header.top{top:32px}
 .top .top-lang .lang-switch__item.is-active{background:rgba(255,255,255,.18);opacity:1}
 @media (max-width:760px){.top .top-lang{height:28px;margin-right:6px}.top .top-lang .lang-switch__item{min-width:24px;height:20px;padding:0 4px;font-size:11px}}
 @media (max-width:760px){.top .brand{min-width:0;flex:1 1 auto;overflow:hidden}.top .brand b,.top .brand small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.top .top-lang{margin-left:auto}}
+.float .fb{background:#1877f2}

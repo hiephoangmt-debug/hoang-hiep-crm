@@ -71,6 +71,7 @@ $hh_t = function_exists( 'hh_lang' ) && 'vi' !== hh_lang() ? hh_lang_strings( hh
 </footer>
 
 <div class="contact-dock" aria-label="Liên hệ nhanh">
+	<?php if ( hoanghiep_opt( 'hh_facebook' ) ) : ?><a class="contact-dock__btn contact-dock__btn--fb" href="<?php echo esc_url( hoanghiep_opt( 'hh_facebook' ) ); ?>" target="_blank" rel="noopener" title="<?php echo esc_attr( $hh_t ? ( $hh_t['dock_fb'] ?? 'Follow on Facebook' ) : 'Theo dõi Hoàng Hiệp trên Facebook' ); ?>"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.6V21h2.9z"/></svg><span><?php echo esc_html( $hh_t ? ( $hh_t['dock_fb'] ?? 'Follow on Facebook' ) : 'Theo dõi Facebook' ); ?></span></a><?php endif; ?>
 	<a class="contact-dock__btn contact-dock__btn--call" href="tel:<?php echo esc_attr( hoanghiep_tel() ); ?>"><?php echo hh_icon( 'phone' ); // phpcs:ignore ?><span><?php echo esc_html( $hh_t ? $hh_t['dock_call'] : 'Gọi ngay' ); ?></span></a>
 	<a class="contact-dock__btn contact-dock__btn--zalo" href="https://zalo.me/<?php echo esc_attr( hoanghiep_tel( hoanghiep_opt( 'hh_zalo' ) ) ); ?>" target="_blank" rel="noopener"><b>Zalo</b><span><?php echo esc_html( $hh_t ? $hh_t['dock_zalo'] : 'Chat Zalo' ); ?></span></a>
 </div>
