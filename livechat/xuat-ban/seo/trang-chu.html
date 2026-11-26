@@ -453,6 +453,12 @@ html:not([data-kv=hn]) .kv-hn,html:not([data-kv=dn]) .kv-dn,html[data-kv] .kv-de
 .award h3{color:#fff;font-size:24px;line-height:1.3;margin:12px 0 8px}.award p{color:#d7deea;margin:0 0 6px;font-size:15.5px}
 .award .realg{margin-top:18px}.award small{display:block;color:#9fb0cc;font-size:12.5px;margin-top:10px}
 @media(max-width:800px){.award{padding:18px 16px}.award h3{font-size:20px}}
+.fbf{padding:22px 0}.fbf .wrap{display:flex;align-items:center;gap:18px;justify-content:space-between;background:#f0f5ff;border:1px solid #d6e2fb;border-radius:16px;padding:18px 22px;flex-wrap:wrap}
+.fbf-t{display:flex;align-items:center;gap:14px;flex:1 1 380px}.fbf-i{flex:none;width:48px;height:48px;border-radius:50%;background:#1877f2;color:#fff;display:flex;align-items:center;justify-content:center}
+.fbf b{display:block;color:#0b2a5b;font-size:17px}.fbf small{color:#5d6b80;font-size:14px}
+.fbf-btn{display:inline-flex;align-items:center;gap:8px;background:#1877f2;color:#fff!important;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:999px;white-space:nowrap}.fbf-btn:hover{background:#0f63d4}
+@media(max-width:700px){.fbf .wrap{margin:0 16px;padding:16px}.fbf-btn{width:100%;justify-content:center}}
+.ft-fb{display:inline-flex;align-items:center;gap:6px;color:#fff!important;background:#1877f2;padding:6px 12px;border-radius:999px;text-decoration:none;font-weight:600;font-size:14px}
 </style>
 <script>
 (function(){try{var q=new URLSearchParams(location.search),k=(q.get('kv')||'').toLowerCase(),hs=location.hash;
@@ -890,6 +896,13 @@ if(k==='hn'||k==='dn')document.documentElement.setAttribute('data-kv',k);}catch(
   </div>
 </section>
 
+<section class="fbf" aria-label="Theo dõi fanpage">
+  <div class="wrap">
+    <div class="fbf-t"><span class="fbf-i"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07"/></svg></span><div><b>Theo dõi fanpage Casamia Balanca by Hoàng Hiệp</b><small>Cập nhật tiến độ thi công, chính sách mới và căn đẹp mỗi tuần.</small></div></div>
+    <a class="fbf-btn" href="https://www.facebook.com/1063607203497962" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','fb_follow_click')"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07"/></svg> Theo dõi trên Facebook</a>
+  </div>
+</section>
+
 <section class="sec" id="hoi-dap">
   <div class="wrap">
     <div class="center"><span class="eye rv">Hỏi đáp</span><h2 class="rv">Câu hỏi thường gặp về <em>Casamia Balanca</em></h2></div>
@@ -919,7 +932,7 @@ if(k==='hn'||k==='dn')document.documentElement.setAttribute('data-kv',k);}catch(
         <li><a href="https://www.casamia-balanca.com.vn/dong-tien-cho-thue">Phân tích dòng tiền cho thuê</a></li>
         <li><a href="https://www.casamia-balanca.com.vn/hoi-dap">Hỏi đáp dự án</a></li>
       </ul></div>
-      <div><h4>Liên hệ tư vấn</h4><ul><li>Hoàng Hiệp – Tư vấn dự án</li><li>Hotline/Zalo: <a href="tel:0904567009">0904 567 009</a></li><li>Email: <a href="mailto:hiephoangmt@gmail.com">hiephoangmt@gmail.com</a></li><li>Khu vực: Hội An – Đà Nẵng</li></ul></div>
+      <div><h4>Liên hệ tư vấn</h4><ul><li>Hoàng Hiệp – Tư vấn dự án</li><li>Hotline/Zalo: <a href="tel:0904567009">0904 567 009</a></li><li>Email: <a href="mailto:hiephoangmt@gmail.com">hiephoangmt@gmail.com</a></li><li><a class="ft-fb" href="https://www.facebook.com/1063607203497962" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','fb_follow_click')"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07"/></svg> Fanpage Facebook</a></li><li>Khu vực: Hội An – Đà Nẵng</li></ul></div>
     </div>
     <p class="disc">Website thông tin do đơn vị tư vấn – phân phối vận hành, không phải website chính thức của Chủ đầu tư. Hình ảnh phối cảnh mang tính minh họa; giá bán, chính sách và tiến độ có thể thay đổi theo thông báo của Chủ đầu tư tại từng thời điểm. Cập nhật: 10/2026.</p>
   </div>
