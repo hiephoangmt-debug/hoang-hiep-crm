@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.354**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.355**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.355
+
+- Tự đăng bài: bài web tự đăng chỉ bị coi là "sửa tay" khi đã có người bấm Cập nhật trong trang soạn bài – bài chưa ai mở sửa vẫn nhận bản sửa mới (trước đây bài Cora Tower khi nào bàn giao bị bỏ qua).
 
 ## Có gì mới – 2.20.354
 

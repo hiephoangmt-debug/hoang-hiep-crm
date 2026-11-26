@@ -22,7 +22,7 @@ function hh_posts_tu_khoa_tim_kiem_11_2026( $posts ) {
 		'keyword'  => 'Cora Tower khi nào bàn giao',
 		'keywords_extra' => array( 'Spana Tower khi nào bàn giao', 'tiến độ Spana Tower', 'tiến độ Cora Tower', 'S-Light Tower ở đâu' ),
 		'project'  => 'cora-tower',
-		'rev'      => 2, // 26/11: S-Light nhận nhà dự kiến 30/06/2028 theo CSBH 01/SL.
+		'rev'      => 3, // 26/11: S-Light nhận nhà dự kiến 30/06/2028 theo CSBH 01/SL.
 		'schedule' => '2026-11-24 09:00',
 		'category' => 'Dự án',
 		'tags'     => array( 'Cora Tower', 'Spana Tower', 'S-Light Tower', 'Sun NeO City', 'Tiến độ dự án' ),

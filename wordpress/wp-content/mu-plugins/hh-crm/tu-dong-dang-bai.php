@@ -239,7 +239,9 @@ function hh_auto_post_update( $id, $n ) {
 	if ( ! $post || 'post' !== $post->post_type || ! get_post_meta( $id, '_hh_auto_post', true ) ) {
 		return new WP_Error( 'missing', 'bài không còn hoặc không do web tự đăng.' );
 	}
-	if ( get_post_meta( $id, '_hh_news_hash', true ) !== md5( $post->post_content ) ) {
+	// Sửa tay = có người bấm Cập nhật trong trang soạn bài (WordPress ghi _edit_last). Mã nội dung lệch mà chưa ai mở sửa
+	// (VD bộ lọc khác ghi lại nội dung khi đăng theo lịch) thì vẫn cập nhật theo gói mới (26/11/2026).
+	if ( get_post_meta( $id, '_hh_news_hash', true ) !== md5( $post->post_content ) && get_post_meta( $id, '_edit_last', true ) ) {
 		return new WP_Error( 'edited', 'bài đã được sửa tay (giữ nguyên).' );
 	}
 	if ( ! empty( $n['kind'] ) || ( $n['slug'] !== $post->post_name && ! in_array( $post->post_name, (array) ( $n['old_slug'] ?? array() ), true ) ) ) {
