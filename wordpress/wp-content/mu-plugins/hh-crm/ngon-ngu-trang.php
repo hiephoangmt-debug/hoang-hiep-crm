@@ -346,3 +346,48 @@ add_action(
 	},
 	3
 );
+
+/*
+ * Phần chèn bằng JavaScript sau khi tải trang (nút chat "Hỏi em nhé", khung chat, popup…): dịch tiếp theo cùng bảng dịch.
+ * Chỉ gửi các câu ngắn dùng chung (≤ 80 ký tự) để trang nhẹ; nội dung chính đã dịch sẵn trên máy chủ.
+ */
+add_action(
+	'wp_footer',
+	static function () {
+		if ( ! hh_tl() ) {
+			return;
+		}
+		$i   = 'ko' === hh_tl() ? 1 : 0;
+		$map = array();
+		foreach ( hh_tl_dict() as $vi => $tr ) {
+			if ( '' !== $tr[ $i ] && mb_strlen( $vi ) <= 80 ) {
+				$map[ $vi ] = $tr[ $i ];
+			}
+		}
+		?>
+<script>
+(function () {
+	var map = <?php echo wp_json_encode( $map, JSON_UNESCAPED_UNICODE ); ?>;
+	var norm = function ( s ) { return s.replace( /\s+/g, ' ' ).trim(); };
+	var run = function ( root ) {
+		if ( root.closest && root.closest( '[translate="no"], script, style' ) ) { return; }
+		var w = document.createTreeWalker( root, NodeFilter.SHOW_TEXT ), n, list = [];
+		while ( ( n = w.nextNode() ) ) { list.push( n ); }
+		list.forEach( function ( t ) { var k = norm( t.nodeValue ); if ( map[ k ] ) { t.nodeValue = t.nodeValue.replace( k, map[ k ] ); } } );
+		( root.querySelectorAll ? root.querySelectorAll( '[placeholder],[aria-label],[title]' ) : [] ).forEach( function ( el ) {
+			[ 'placeholder', 'aria-label', 'title' ].forEach( function ( a ) { var v = el.getAttribute( a ); if ( v && map[ norm( v ) ] ) { el.setAttribute( a, map[ norm( v ) ] ); } } );
+		} );
+	};
+	var go = function () {
+		run( document.body );
+		if ( window.MutationObserver ) {
+			new MutationObserver( function ( ms ) { ms.forEach( function ( m ) { m.addedNodes.forEach( function ( a ) { if ( a.nodeType === 1 ) { run( a ); } else if ( a.nodeType === 3 && map[ norm( a.nodeValue ) ] ) { a.nodeValue = map[ norm( a.nodeValue ) ]; } } ); } ); } ).observe( document.body, { childList: true, subtree: true } );
+		}
+	};
+	if ( document.readyState === 'loading' ) { document.addEventListener( 'DOMContentLoaded', go ); } else { go(); }
+})();
+</script>
+		<?php
+	},
+	99
+);

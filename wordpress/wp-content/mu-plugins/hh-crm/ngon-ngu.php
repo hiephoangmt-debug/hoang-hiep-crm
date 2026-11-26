@@ -329,7 +329,7 @@ add_action( 'save_post_du-an', static fn() => delete_transient( 'hh_lang_brands'
 add_action(
 	'wp_footer',
 	static function () {
-		if ( is_admin() ) {
+		if ( is_admin() || ( function_exists( 'hh_tl' ) && hh_tl() ) ) { // Trang /en/, /ko/ đã dịch sẵn trên máy chủ (ngon-ngu-trang.php).
 			return;
 		}
 		$phr = array();
