@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.14.3
+ * * Version: 3.15.1
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2682,3 +2682,22 @@ add_action('wp_head', function () {
 @keyframes dsPuff{0%{opacity:0;transform:translate(0,0) scale(.5)}1%{opacity:1}9%{opacity:1;transform:translate(140%,-35%) scale(1.9)}13%{opacity:0;transform:translate(200%,-65%) scale(2.6)}100%{opacity:0}}
 </style>';
 }, 120);
+
+// ===== 41. Phun chếch lên 45 độ (lửa định kỳ, khói, sương); lửa mở đầu vẫn ngang để hiện chữ =====
+add_action('wp_head', function () {
+    echo '<style id="dst-spray45">
+.site-header,.site-header .brand,.ds-logo2{overflow:visible!important}
+.ds-smoke,.ds-mist{transform-origin:0 50%!important;transform:rotate(-45deg)!important;left:41%!important;top:22%!important}
+@keyframes dsFire{0%{opacity:0;transform:rotate(-45deg) scaleX(0) scaleY(.5)}2%{opacity:1;transform:rotate(-45deg) scaleX(1) scaleY(1)}6%{opacity:1;transform:rotate(-45deg) scaleX(1.15) scaleY(.9)}9%{opacity:0;transform:rotate(-45deg) scaleX(1.3) scaleY(.5)}100%{opacity:0}}
+</style>';
+}, 121);
+
+// ===== 42. Phun theo đường cong: bốc lên ~30° rồi uốn ra phía trước =====
+add_action('wp_head', function () {
+    echo '<style id="dst-spray-arc">
+.ds-smoke,.ds-mist{transform:rotate(-28deg)!important;top:26%!important}
+@keyframes dsFire{0%{opacity:0;transform:rotate(-32deg) scaleX(0) scaleY(.5)}2%{opacity:1;transform:rotate(-30deg) scaleX(1) scaleY(1)}6%{opacity:1;transform:rotate(-22deg) scaleX(1.15) scaleY(.9)}9%{opacity:0;transform:rotate(-16deg) scaleX(1.3) scaleY(.5)}100%{opacity:0}}
+@keyframes dsPuff{0%{opacity:0;transform:translate(0,0) scale(.5)}1%{opacity:1}5%{opacity:1;transform:translate(80%,-45%) scale(1.4)}9%{opacity:1;transform:translate(160%,-25%) scale(1.9)}13%{opacity:0;transform:translate(220%,-15%) scale(2.5)}100%{opacity:0}}
+@keyframes dsSpray{0%{opacity:0;transform:scaleX(0) rotate(0)}1.5%{opacity:1;transform:scaleX(1) rotate(0)}8%{opacity:.95;transform:scaleX(1.2) rotate(10deg)}14%{opacity:0;transform:scaleX(1.4) rotate(16deg)}100%{opacity:0}}
+</style>';
+}, 122);
