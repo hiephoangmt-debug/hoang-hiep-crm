@@ -58,7 +58,8 @@ EVBAR = ('<div id="evbar" class="evb" role="region" aria-label="Thư mời sự 
          'k.textContent=d>1?"Còn "+d+" ngày":d===1?"Ngày mai":"Hôm nay"})();</script></div>')
 
 
-X360_SHA = '0cc1dce3308fc20855dbb17d712623f559400155'
+X360_SHA = '060858ecec87266728a57d9a913eda7413d5b2e8'
+X360_ASSET_SHA = '0cc1dce3308fc20855dbb17d712623f559400155'   # ảnh + mã 360° (jsDelivr đã có sẵn bản này; repo mới bị jsDelivr chặn 403)
 X360 = ('<section class="sec" id="xem-360" style="background:linear-gradient(160deg,#0B2447,#1d4a7a);color:#fff"><div class="wrap">'
         '<style>#xem-360 .x3{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:26px;align-items:center}'
         '#xem-360 .x3p{position:relative;display:block;width:100%;border:0;padding:0;border-radius:16px;overflow:hidden;cursor:pointer;background:#123;box-shadow:0 18px 40px -18px rgba(0,0,0,.6);aspect-ratio:16/9}'
@@ -79,9 +80,9 @@ X360 = ('<section class="sec" id="xem-360" style="background:linear-gradient(160
         '<li>Bật quy hoạch công viên phía trước, đặt mặt bằng tầng lên khu đất</li><li>Mặt bằng tầng, layout căn và layout căn 3D xem ngay trong khung</li></ul>'
         '<button type="button" class="x3b" data-x360>▶ Mở 360° khu đất</button></div></div></div>'
         '<div id="x360" hidden role="dialog" aria-label="360° khu đất Sun Saphia"><div class="xl">Đang tải ảnh 360°…</div><button type="button" class="xx">✕ Đóng</button></div>'
-        '<script>(function(){var P="hiephoangmt-debug/hoang-hiep-crm",S="' + X360_SHA + '",D="/projects/sun-saphia/360/",'
-        'B=["https://cdn.jsdelivr.net/gh/"+P+"@"+S+D,"https://raw.githubusercontent.com/"+P+"/"+S+D],M=document.getElementById("x360"),f=null,R=document.documentElement;'
-        'function get(i){return fetch(B[i]+"xem-360.html").then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){return [B[i],t]})}'
+        '<script>(function(){var P="hiephoangmt-debug/hoang-hiep-crm",S="' + X360_SHA + '",A="' + X360_ASSET_SHA + '",D="/projects/sun-saphia/360/",'
+        'J="https://cdn.jsdelivr.net/gh/"+P+"@"+A+D,B=["https://raw.githubusercontent.com/"+P+"/"+S+D,"https://cdn.jsdelivr.net/gh/"+P+"@"+S+D],M=document.getElementById("x360"),f=null,R=document.documentElement;'
+        'function get(i){return fetch(B[i]+"xem-360.html").then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){return [J,t]})}'
         'function load(){if(f)return;f=document.createElement("iframe");f.title="360° khu đất Sun Saphia";f.setAttribute("allow","fullscreen;gyroscope;accelerometer");'
         'get(0).catch(function(){return get(1)}).then(function(a){f.srcdoc="<!doctype html><html lang=\\"vi\\"><head><meta charset=\\"utf-8\\"><meta name=\\"viewport\\" content=\\"width=device-width,initial-scale=1,viewport-fit=cover\\"><base href=\\""+a[0]+"\\"><style>[hidden]{display:none!important}<\\/style><\\/head><body>"+a[1]+"<\\/body><\\/html>";M.appendChild(f)})'
         '.catch(function(){M.querySelector(".xl").textContent="Chưa tải được 360°, anh/chị thử lại sau ít phút."})}'
