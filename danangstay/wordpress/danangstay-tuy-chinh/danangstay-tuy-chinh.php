@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.14.2
+ * * Version: 3.14.3
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2672,3 +2672,13 @@ add_action('wp_head', function () {
 @keyframes dsShine2{0%{background-position:150% 0}22%{background-position:-60% 0}100%{background-position:-60% 0}}
 </style>';
 }, 119);
+
+// ===== 40. Khói đậm hơn =====
+add_action('wp_head', function () {
+    echo '<style id="dst-smoke-thick">
+.ds-smoke{width:36%!important;height:60%!important;top:8%!important}
+.ds-smoke i{width:38%!important;height:58%!important;background:radial-gradient(circle,#f4f4f6 0,#d4d6dc 30%,#9da2ad 55%,rgba(110,115,125,.85) 64%,rgba(90,95,105,0) 74%)!important;filter:drop-shadow(0 0 6px rgba(200,205,215,.8))!important}
+.ds-smoke i:nth-child(odd){background:radial-gradient(circle,#e8e9ed 0,#b9bdc6 35%,#80858f 58%,rgba(80,85,95,0) 74%)!important}
+@keyframes dsPuff{0%{opacity:0;transform:translate(0,0) scale(.5)}1%{opacity:1}9%{opacity:1;transform:translate(140%,-35%) scale(1.9)}13%{opacity:0;transform:translate(200%,-65%) scale(2.6)}100%{opacity:0}}
+</style>';
+}, 120);
