@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.50** + plugin Hoàng Hiệp CRM **2.20.370**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.50** + plugin Hoàng Hiệp CRM **2.20.371**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.371
+
+- Bản dịch EN / KO: hết lỗi dính chữ quanh địa danh, tên riêng ("Sun Groupon the beach"); bỏ khóa sẵn các từ thông dụng giữa câu (bàn giao, mở bán, đặt cọc, chiết khấu…) để Google dịch đúng ngữ pháp; thêm bản dịch chuẩn cho nhãn trang dự án (Loại căn, Giá chuyển nhượng, Nhận danh sách căn…), địa danh (bãi biển Mỹ Khê, Ngũ Hành Sơn, An Thượng, chợ Hàn), sổ đỏ, tên nhà hàng Cá Chuồn Cồ.
 
 ## Có gì mới – 2.20.370 (giao diện 2.16.50)
 

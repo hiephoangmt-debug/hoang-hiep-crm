@@ -168,6 +168,8 @@ function hh_lang_glossary() {
 		'Đang mở bán'              => array( 'On sale', '분양 중' ),
 		'Đang bàn giao'            => array( 'Handover in progress', '입주 진행 중' ),
 		'Đã bàn giao'              => array( 'Handed over', '입주 완료' ),
+		'Đã bán hết từ chủ đầu tư' => array( 'Sold out by the developer', '시행사 분양 완료' ),
+		'✔ Đã bán hết từ chủ đầu tư' => array( '✔ Sold out by the developer', '✔ 시행사 분양 완료' ),
 		'Tất cả tình trạng'        => array( 'All statuses', '전체 상태' ),
 		'Tất cả'                   => array( 'All', '전체' ),
 		'Tất cả khu vực'           => array( 'All areas', '전체 지역' ),
@@ -193,6 +195,20 @@ function hh_lang_glossary() {
 		'Hotline tư vấn'           => array( 'Hotline', '상담 전화' ),
 		'Tìm dự án'                => array( 'Find projects', '프로젝트 찾기' ),
 		'Nhận bảng giá'            => array( 'Get the price list', '분양가표 받기' ),
+		'Nhận danh sách căn'       => array( 'Get available units', '매물 목록 받기' ),
+		'Nhận danh sách căn đang bán' => array( 'Get units for sale', '매매 매물 목록 받기' ),
+		'Gửi thông tin căn qua Zalo' => array( 'Send your unit details via Zalo', 'Zalo로 매물 정보 보내기' ),
+		'Loại căn'                 => array( 'Unit types', '세대 유형' ),
+		'Giá'                      => array( 'Prices', '가격' ),
+		'Sản phẩm'                 => array( 'Units', '세대' ),
+		'Giá chuyển nhượng'        => array( 'Resale price', '전매 가격' ),
+		'Giá thuê'                 => array( 'Rent', '임대료' ),
+		'Vận hành'                 => array( 'Operator', '운영사' ),
+		'Tiêu chuẩn bàn giao'      => array( 'Handover standard', '인도 기준' ),
+		'Loại / mã căn'            => array( 'Unit type', '세대 유형' ),
+		'Diện tích đất'            => array( 'Land area', '대지 면적' ),
+		'Quy cách'                 => array( 'Features', '특징' ),
+		'Giá bán'                  => array( 'Price', '가격' ),
 		// Mục lục trang dự án.
 		'Giới thiệu'               => array( 'Overview', '소개' ),
 		'Tổng quan'                => array( 'Key facts', '개요' ),
@@ -255,6 +271,13 @@ function hh_lang_phrases() {
 		'cầu Rồng'                      => array( 'Dragon Bridge', '용다리' ),
 		'cầu Trần Thị Lý'               => array( 'Tran Thi Ly Bridge', '쩐티리 다리' ),
 		'cầu Hòa Xuân'                  => array( 'Hoa Xuan Bridge', '호아쑤언 다리' ),
+		'bãi biển Mỹ Khê'               => array( 'My Khe Beach', '미케 비치' ),
+		'Tập đoàn Sun Group'            => array( 'Sun Group', 'Sun Group' ),
+		'Cá Chuồn Cồ'                   => array( 'Ca Chuon Co', 'Ca Chuon Co' ),
+		'Ngũ Hành Sơn'                  => array( 'Marble Mountains (Ngu Hanh Son)', '오행산(응우한선)' ),
+		'phố du lịch An Thượng'         => array( 'An Thuong tourist street', '안트엉 관광 거리' ),
+		'chợ Hàn'                       => array( 'Han Market', '한시장' ),
+		'sổ đỏ'                         => array( 'Red Book (land use right certificate)', '레드북(토지사용권 증서)' ),
 		'biển Mỹ Khê'                   => array( 'My Khe Beach', '미케 비치' ),
 		'Mỹ Khê'                        => array( 'My Khe', '미케' ),
 		'bán đảo Sơn Trà'               => array( 'Son Tra Peninsula', '선짜 반도' ),
@@ -265,7 +288,6 @@ function hh_lang_phrases() {
 		'sân bay Đà Nẵng'               => array( 'Da Nang Airport', '다낭 공항' ),
 		'pháo hoa DIFF'                 => array( 'DIFF fireworks festival', '다낭 국제 불꽃축제(DIFF)' ),
 		'Sun Early Key'                 => array( 'Sun Early Key', 'Sun Early Key(조기 입주 프로그램)' ),
-		'chủ đầu tư'                    => array( 'developer', '시행사' ),
 		'sở hữu lâu dài'                => array( 'long-term ownership', '영구 소유' ),
 		'căn hộ dịch vụ'                => array( 'serviced apartment', '서비스 아파트' ),
 		'sổ hồng'                       => array( 'Pink Book (ownership certificate)', '핑크북(소유권 증서)' ),
@@ -273,16 +295,9 @@ function hh_lang_phrases() {
 		'tim tường'                     => array( 'gross area', '공급면적' ),
 		'bảo lãnh ngân hàng'            => array( 'bank guarantee', '은행 지급보증' ),
 		'hợp đồng mua bán'              => array( 'sale and purchase agreement (SPA)', '매매계약서(SPA)' ),
-		'thanh toán sớm'                => array( 'early payment', '조기 납부' ),
-		'chiết khấu'                    => array( 'discount', '할인' ),
 		'phiếu tính giá'                => array( 'price quotation', '세대별 가격 견적서' ),
-		'vay tối đa'                    => array( 'loan up to', '최대 대출 비율' ),
 		'hỗ trợ lãi suất'               => array( 'interest-rate support', '이자 지원' ),
 		'ân hạn nợ gốc'                 => array( 'principal grace period', '원금 상환 유예' ),
-		'đặt cọc'                       => array( 'deposit', '계약금' ),
-		'giữ chỗ'                       => array( 'booking', '예약' ),
-		'bàn giao'                      => array( 'handover', '입주(인도)' ),
-		'mở bán'                        => array( 'sales launch', '분양' ),
 		'shophouse'                     => array( 'shophouse', '샵하우스' ),
 		'penthouse'                     => array( 'penthouse', '펜트하우스' ),
 	);
@@ -370,8 +385,9 @@ add_action(
 				var frag = document.createDocumentFragment(), last = 0, mm;
 				while ( ( mm = re.exec( txt ) ) ) {
 					if ( mm.index > last ) { frag.appendChild( document.createTextNode( txt.slice( last, mm.index ) ) ); }
-					var sp = document.createElement( 'span' );
-					sp.textContent = phr[ mm[0] ][ tl ];
+					var sp = document.createElement( 'span' ), bef = txt.charAt( mm.index - 1 ), aft = txt.charAt( mm.index + mm[0].length );
+					// Google bỏ khoảng trắng sát cụm giữ nguyên → chữ dính ("Sun Groupon the beach"): đặt khoảng trắng bên trong cụm.
+					sp.textContent = ( /\s/.test( bef ) ? ' ' : '' ) + phr[ mm[0] ][ tl ] + ( /\s/.test( aft ) ? ' ' : '' );
 					lock( sp );
 					frag.appendChild( sp );
 					last = mm.index + mm[0].length;

@@ -30,10 +30,10 @@ add_filter(
 				'hh_p_resale_note'  => 'Quỹ chỉ 111 căn, không còn hàng mới nên giao dịch thưa nhưng giá giữ tốt. Tiền thuê nguyên căn khoảng 0,96 – 1,2 tỷ/năm, tương đương khoảng 2,5 – 3%/năm trên giá chào – khách mua chủ yếu để giữ tài sản ven biển và dùng cho gia đình. Nhận gửi bán, gửi cho thuê: Hoàng Hiệp 0904 567 009.',
 				'hh_p_villa_table'  => "Garden View Villa – hướng vườn (77 căn) | Khoảng 300 – 330 m² | Hồ bơi riêng, vườn riêng | Chỉ từ khoảng 39 tỷ\nOcean Access Villa – có lối ra biển (28 căn) | Khoảng 360 – 390 m² | Lối đi riêng ra biển, hồ bơi riêng | Từ khoảng 47 tỷ\nBeachfront Villa – trực diện biển (6 căn) | Khoảng 511 m² | Sát bãi biển, hồ bơi vô cực riêng, quản gia riêng, ở tối đa 8 người lớn + 4 trẻ em | Liên hệ",
 				'hh_p_legal'        => 'Sổ đỏ (giấy chứng nhận quyền sử dụng đất) cấp riêng từng biệt thự – chủ đầu tư công bố khi mở bán năm 2015',
-				'hh_p_ownership'    => 'Theo thời hạn ghi trên sổ của từng căn – kiểm tra mục đích, thời hạn sử dụng đất trước khi đặt cọc',
+				'hh_p_ownership'    => 'Theo thời hạn ghi trên sổ đỏ từng căn – kiểm tra mục đích, thời hạn sử dụng đất trước khi đặt cọc',
 				'hh_p_legal_docs'   => "Giấy chứng nhận quyền sử dụng đất cấp riêng từng biệt thự (sổ đỏ trao tay khi mở bán 8/2015)\nHợp đồng mua bán biệt thự giữa chủ đầu tư và người mua đầu tiên\nHợp đồng hợp tác cho thuê với khu nghỉ dưỡng (tùy căn – kiểm tra còn hiệu lực, điều khoản chấm dứt)\nKhi chuyển nhượng: kiểm tra bản gốc sổ, tình trạng thế chấp, tranh chấp tại văn phòng đăng ký đất đai",
 				'hh_p_designer'     => 'SALA (Anh) – theo Báo Đầu tư',
-				'hh_p_handover'     => 'Đã hoạt động từ năm 2014 – biệt thự đã bàn giao',
+				'hh_p_handover'     => 'Đã bàn giao, hoạt động từ 2014',
 				'hh_p_progress'     => "04/2014 | Khai trương khu nghỉ dưỡng Premier Village Danang Resort\n08/2015 | Sun Group chính thức mở bán biệt thự: sổ đỏ trao tay, chính sách cam kết lợi nhuận khoảng 9%/năm cho người mua đầu tiên\n09/2015 | Đợt mở bán biệt thự thứ hai\n2019 | World Travel Awards vinh danh khu nghỉ dưỡng biệt thự dành cho gia đình hàng đầu thế giới\n2026 | Khu nghỉ dưỡng hoạt động ổn định; giao dịch chuyển nhượng chỉ từ khoảng 39 tỷ, cho thuê chỉ từ khoảng 80 triệu/tháng",
 				'hh_p_handover_std' => 'Đã bàn giao, đầy đủ nội thất theo tiêu chuẩn khu nghỉ dưỡng 5 sao, mỗi căn có hồ bơi riêng',
 				'hh_p_location_desc' => 'Nằm tại 99 Võ Nguyên Giáp (khu Mỹ An cũ), giao đường Hồ Xuân Hương, ngay trên bãi biển Mỹ Khê – đoạn biển gần trung tâm nhất của Đà Nẵng. Sát phố du lịch An Thượng, vài phút tới cầu Rồng, chợ Hàn; khoảng 10 – 15 phút ra sân bay quốc tế, khoảng 30 – 40 phút tới phố cổ Hội An.',
@@ -79,6 +79,8 @@ add_filter(
 				}
 				$projects[ $i ]['meta'][ $k ] = $v;
 			}
+			$was['hh_p_handover']  = 'Đã hoạt động từ năm 2014 – biệt thự đã bàn giao'; // Bản 2.20.368.
+			$was['hh_p_ownership'] = 'Theo thời hạn ghi trên sổ của từng căn – kiểm tra mục đích, thời hạn sử dụng đất trước khi đặt cọc';
 			// Danh sách 10 ảnh đã ghi lên web ở bản 2.20.356 – cho phép thay bằng danh sách mới (thêm mặt bằng, vị trí).
 			$was['hh_p_image_links'] = implode( "\n", array_slice( explode( "\n", $upd['hh_p_image_links'] ), 0, 10 ) );
 			foreach ( $was as $k => $v ) {
