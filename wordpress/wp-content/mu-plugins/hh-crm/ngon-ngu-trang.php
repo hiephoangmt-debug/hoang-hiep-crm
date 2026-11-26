@@ -107,6 +107,47 @@ function hh_tl_text( $vi ) {
 	return '' !== $k && isset( $d[ $k ] ) ? (string) $d[ $k ][ $i ] : '';
 }
 
+/**
+ * Dịch tiêu đề trang (thẻ title, og:title): có sẵn trong bảng dịch thì dùng; không thì dịch từng phần cách nhau bởi " | ", " – ", ": "
+ * và mẫu "Tên: Bảng giá, chính sách 11/2026" của trang dự án. '' nếu vẫn còn phần chưa dịch được.
+ */
+function hh_tl_title( $vi ) {
+	$vi = trim( html_entity_decode( (string) $vi, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
+	$t  = hh_tl_text( $vi );
+	if ( '' !== $t ) {
+		return $t;
+	}
+	$ko    = 'ko' === hh_tl();
+	$fixed = array(
+		'Hoàng Hiệp' => $ko ? '호앙 히엡' : 'Hoang Hiep',
+		'Đà Nẵng'    => $ko ? '다낭' : 'Da Nang',
+	);
+	$name = static function ( $n ) use ( $fixed ) {
+		$t = hh_tl_text( $n );
+		if ( '' !== $t ) {
+			return $t;
+		}
+		$n = strtr( $n, $fixed );
+		// Tên riêng (dự án, địa danh) chỉ còn chữ Latin có dấu: bỏ dấu cho cả 2 thứ tiếng như hướng dẫn dịch.
+		return function_exists( 'remove_accents' ) ? remove_accents( $n ) : $n;
+	};
+	if ( preg_match( '#^(.+?): Bảng giá, chính sách (\d{1,2})/(\d{4})(?: \| Hoàng Hiệp)?$#u', $vi, $m ) ) {
+		$when = $ko ? $m[3] . '년 ' . (int) $m[2] . '월' : gmdate( 'F', gmmktime( 0, 0, 0, (int) $m[2], 1, 2000 ) ) . ' ' . $m[3];
+		return $name( $m[1] ) . ( $ko ? ': 분양가표·분양 정책 ' : ': Price list & sales policy ' ) . $when . ( $ko ? ' | 호앙 히엡' : ' | Hoang Hiep' );
+	}
+	$parts = preg_split( '#( \| | – | - |: )#u', $vi, -1, PREG_SPLIT_DELIM_CAPTURE );
+	foreach ( $parts as $i => $p ) {
+		if ( 0 === $i % 2 ) {
+			$t = isset( $fixed[ $p ] ) ? $fixed[ $p ] : hh_tl_text( $p );
+			if ( '' === $t ) {
+				return '';
+			}
+			$parts[ $i ] = $t;
+		}
+	}
+	return implode( '', $parts );
+}
+
 /** Trang hiện tại có bảng dịch riêng không (để gắn hreflang ở bản tiếng Việt). */
 function hh_tl_has_page_dict() {
 	$obj = get_queried_object();
@@ -262,10 +303,10 @@ foreach ( array( 'rank_math/frontend/title', 'rank_math/opengraph/facebook/og_ti
 			if ( ! hh_tl() || ! is_string( $v ) ) {
 				return $v;
 			}
-			$t = hh_tl_text( $v );
+			$t = hh_tl_title( $v );
 			if ( '' === $t && is_singular() ) {
 				$t = hh_tl_text( get_the_title() ); // Tiêu đề SEO chưa có bản dịch: dùng tiêu đề bài đã dịch.
-				$t = '' !== $t ? $t . ' | Hoang Hiep' : '';
+				$t = '' !== $t ? $t . ( 'ko' === hh_tl() ? ' | 호앙 히엡' : ' | Hoang Hiep' ) : '';
 			}
 			return '' !== $t ? $t : $v;
 		},
