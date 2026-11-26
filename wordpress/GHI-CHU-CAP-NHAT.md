@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.352**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.47** + plugin Hoàng Hiệp CRM **2.20.353**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.353
+
+- S-Light Tower theo CSBH 01/SL + phiếu tính giá 11/2026: giá chỉ từ khoảng 3,01 tỷ (1PN+ 49,3 m², gồm VAT & phí bảo trì), bảng chiết khấu theo phương án (cộng dồn Early Bird 3% → không vay 3% → thanh toán sớm tháng 12), ví dụ giá thực trả, nhận nhà sử dụng dự kiến 30/06/2028.
 
 ## Có gì mới – 2.20.352
 
