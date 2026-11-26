@@ -27,11 +27,12 @@ add_filter(
 			}
 			foreach ( (array) ( $d['replace'] ?? array() ) as $k => $pair ) {
 				$cur = (string) ( $p['meta'][ $k ] ?? '' );
-				if ( ! is_array( $pair ) || 2 !== count( $pair ) || $cur !== (string) $pair[0] ) {
+				// [cũ, mới] hoặc [cũ, mới, [giá trị đã từng ghi lên web cần thay]].
+				if ( ! is_array( $pair ) || count( $pair ) < 2 || $cur !== (string) $pair[0] ) {
 					continue;
 				}
 				$projects[ $i ]['meta'][ $k ]     = (string) $pair[1];
-				$projects[ $i ]['fix_meta'][ $k ] = array_values( array_unique( array_merge( (array) ( $p['fix_meta'][ $k ] ?? array() ), array( $cur ) ) ) );
+				$projects[ $i ]['fix_meta'][ $k ] = array_values( array_unique( array_merge( (array) ( $p['fix_meta'][ $k ] ?? array() ), array( $cur ), (array) ( $pair[2] ?? array() ) ) ) );
 			}
 		}
 		// Ảnh lấy từ web cũ (bo-sung-anh-11-2026.json): nối thêm vào danh sách link ảnh của dự án.

@@ -401,7 +401,10 @@
   "replace": {
    "hh_p_developer": [
     "Bách Đạt, Bách Đạt An",
-    "Công ty TNHH Sản xuất và Thương mại Bất động sản Bách Đạt (Bách Đạt An); nhà đầu tư chiến lược: Công ty CP Tập đoàn Bất động sản CENGROUP"
+    "Bách Đạt, Bách Đạt An",
+    [
+     "Công ty TNHH Sản xuất và Thương mại Bất động sản Bách Đạt (Bách Đạt An); nhà đầu tư chiến lược: Công ty CP Tập đoàn Bất động sản CENGROUP"
+    ]
    ],
    "hh_p_scale": [
     "20,33 ha",
@@ -468,7 +471,10 @@
    ],
    "hh_p_developer": [
     "Công ty TNHH Phát triển Nam Hội An",
-    "Công ty TNHH Phát triển Nam Hội An (liên doanh ban đầu của VinaCapital, Suncity Group, VMS Investment Group)"
+    "Công ty TNHH Phát triển Nam Hội An",
+    [
+     "Công ty TNHH Phát triển Nam Hội An (liên doanh ban đầu của VinaCapital, Suncity Group, VMS Investment Group)"
+    ]
    ]
   }
  }
