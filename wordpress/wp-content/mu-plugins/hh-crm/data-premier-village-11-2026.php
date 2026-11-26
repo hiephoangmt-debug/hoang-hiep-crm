@@ -72,6 +72,8 @@ add_filter(
 				}
 				$projects[ $i ]['meta'][ $k ] = $v;
 			}
+			// Danh sách 10 ảnh đã ghi lên web ở bản 2.20.356 – cho phép thay bằng danh sách mới (thêm mặt bằng, vị trí).
+			$was['hh_p_image_links'] = implode( "\n", array_slice( explode( "\n", $upd['hh_p_image_links'] ), 0, 10 ) );
 			foreach ( $was as $k => $v ) {
 				$projects[ $i ]['fix_meta'][ $k ] = array_merge( (array) ( $projects[ $i ]['fix_meta'][ $k ] ?? array() ), array( $v ) );
 			}
