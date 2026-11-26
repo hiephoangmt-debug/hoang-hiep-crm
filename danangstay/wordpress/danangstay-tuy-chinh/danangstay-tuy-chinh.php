@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.10.0
+ * * Version: 3.11.0
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2579,3 +2579,23 @@ animation:dsShine 4s ease-in-out 1.8s infinite;mix-blend-mode:screen}
 @media (prefers-reduced-motion:reduce){.brand::after{animation:none;display:none}.site-header .brand img.ds-logo{animation:none}}
 </style>';
 }, 114);
+
+// ===== 35. Logo: con rồng chuyển động (tách lớp rồng / chữ) =====
+add_filter('dst_html', function ($html) {
+    $a = plugins_url('assets/', __FILE__);
+    $rep = '<span class="ds-logo2"><img class="ds-logo ds-l-rong" src="' . $a . 'logo-rong-360.webp?v=1" srcset="' . $a . 'logo-rong-360.webp?v=1 360w, ' . $a . 'logo-rong-720.webp?v=1 720w" sizes="260px" width="360" height="89" alt="DanangStay – Đà Nẵng · Hội An · Huế"><img class="ds-l-chu" src="' . $a . 'logo-chu-360.webp?v=1" srcset="' . $a . 'logo-chu-360.webp?v=1 360w, ' . $a . 'logo-chu-720.webp?v=1 720w" sizes="260px" width="360" height="89" alt="" aria-hidden="true"></span>';
+    return preg_replace('#(<header[^>]*class="[^"]*site-header.*?<a class="brand"[^>]*>)\s*<img class="ds-logo"[^>]*>#s', '$1' . $rep, $html, 1);
+}, 63);
+add_action('wp_head', function () {
+    echo '<style id="dst-logo-anim">
+.ds-logo2{position:relative;display:inline-block;line-height:0}
+.ds-logo2 img{display:block;height:62px;width:auto}
+.ds-logo2 .ds-l-chu{position:absolute;left:0;top:0}
+.ds-logo2 .ds-l-rong{transform-origin:12% 75%;animation:dsRong 3.2s ease-in-out 1.6s infinite}
+@keyframes dsRong{0%,100%{transform:rotate(0) translateY(0)}20%{transform:rotate(-5deg) translateY(-2px)}40%{transform:rotate(2deg) translateY(1px)}55%{transform:rotate(-2deg) translateY(-1px)}70%{transform:rotate(0) translateY(0)}}
+.site-header .ds-logo2{animation:dsReveal 1.6s cubic-bezier(.2,.7,.2,1) .15s both}
+.site-header .brand img.ds-logo.ds-l-rong{animation:dsRong 3.2s ease-in-out 1.6s infinite}
+@media (max-width:600px){.ds-logo2 img{height:46px}}
+@media (prefers-reduced-motion:reduce){.ds-logo2 .ds-l-rong,.site-header .ds-logo2{animation:none!important}}
+</style>';
+}, 115);
