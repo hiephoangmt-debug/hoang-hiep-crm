@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.15.2
+ * * Version: 3.15.3
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2711,3 +2711,16 @@ add_action('wp_head', function () {
 @keyframes dsSpray{0%{opacity:0;transform:scaleX(0) rotate(0)}1.5%{opacity:1;transform:scaleX(1) rotate(0)}8%{opacity:.95;transform:scaleX(1.2) rotate(5deg)}14%{opacity:0;transform:scaleX(1.4) rotate(8deg)}100%{opacity:0}}
 </style>';
 }, 123);
+
+// ===== 44. Phun 20°, luồn phía sau chữ (chữ luôn nằm trên) =====
+add_action('wp_head', function () {
+    echo '<style id="dst-spray20">
+.ds-logo2 .ds-l-chu{z-index:4!important}
+.ds-logo2 .ds-l-dau{z-index:3}
+.ds-fire:not(.ds-fire-in),.ds-smoke,.ds-mist{z-index:2!important}
+.ds-fire-in{z-index:5!important}
+.ds-smoke,.ds-mist{transform:rotate(-20deg)!important;top:28%!important}
+@keyframes dsFire{0%{opacity:0;transform:rotate(-21deg) scaleX(0) scaleY(.5)}2%{opacity:1;transform:rotate(-20deg) scaleX(1) scaleY(1)}6%{opacity:1;transform:rotate(-16deg) scaleX(1.2) scaleY(.9)}9%{opacity:0;transform:rotate(-13deg) scaleX(1.35) scaleY(.5)}100%{opacity:0}}
+@keyframes dsPuff{0%{opacity:0;transform:translate(0,0) scale(.5)}1%{opacity:1}5%{opacity:1;transform:translate(90%,-25%) scale(1.4)}9%{opacity:1;transform:translate(180%,-18%) scale(1.9)}13%{opacity:0;transform:translate(250%,-12%) scale(2.4)}100%{opacity:0}}
+</style>';
+}, 124);
