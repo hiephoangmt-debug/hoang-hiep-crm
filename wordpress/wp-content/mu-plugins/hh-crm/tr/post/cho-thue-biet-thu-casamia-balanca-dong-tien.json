@@ -1,0 +1,338 @@
+{
+ "(gọi/Zalo) để nhận bảng tính dòng tiền cho thuê biệt thự Casamia Balanca theo từng căn, với số liệu bạn tự điều chỉnh.": [
+  "(call/Zalo) to receive a cash flow spreadsheet for renting out each Casamia Balanca villa, with figures you can adjust yourself.",
+  "(전화/Zalo) 직접 수치를 조정할 수 있는 세대별 Casamia Balanca 빌라 임대 현금 흐름 계산표를 받아보실 수 있습니다."
+ ],
+ ", không phải số liệu dự án.": [
+  ", not project data.",
+  "이며 프로젝트 자료가 아닙니다."
+ ],
+ ". Bài viết hướng dẫn cách tự ước tính dòng tiền, thay vì đưa ra con số lợi nhuận hứa hẹn.": [
+  ". This article explains how to estimate cash flow yourself, rather than presenting promised profit figures.",
+  ". 이 글은 약속된 수익률 수치를 제시하는 대신 현금 흐름을 직접 추정하는 방법을 안내합니다."
+ ],
+ ". Thông tin dự án xem tại": [
+  ". Project information is available at",
+  ". 프로젝트 정보는 다음에서 확인하실 수 있습니다:"
+ ],
+ "3 – 4 phòng ngủ có phòng tắm riêng, hồ bơi riêng phù hợp nhóm gia đình.": [
+  "3 – 4 bedrooms with en-suite bathrooms and a private pool suit family groups.",
+  "개별 욕실이 있는 3 – 4베드룸과 전용 수영장은 가족 단위 고객에게 적합합니다."
+ ],
+ "Cao hơn": [
+  "Higher",
+  "더 높음"
+ ],
+ "Casamia Balanca có cam kết lợi nhuận không?": [
+  "Does Casamia Balanca offer a guaranteed return?",
+  "Casamia Balanca는 수익 보장을 제공합니까?"
+ ],
+ "Cho thuê Casamia Balanca có sinh lời không? Hướng dẫn ước tính dòng tiền biệt thự theo giá thuê villa Cẩm Thanh, công suất và chi phí.": [
+  "Is renting out a Casamia Balanca villa profitable? A guide to estimating villa cash flow based on Cam Thanh villa rents, occupancy and costs.",
+  "Casamia Balanca 빌라 임대는 수익성이 있을까요? 껌타인 빌라 임대료, 객실 가동률, 비용을 바탕으로 빌라 현금 흐름을 추정하는 방법을 안내합니다."
+ ],
+ "Cho thuê biệt thự Casamia Balanca chưa có số liệu doanh thu thực tế công khai; cần tự ước tính theo công thức.": [
+  "There is no public data yet on actual rental revenue for Casamia Balanca villas; you need to estimate it yourself using the formula.",
+  "Casamia Balanca 빌라 임대의 실제 매출 공개 자료는 아직 없으므로 공식을 이용해 직접 추정해야 합니다."
+ ],
+ "Cho thuê biệt thự Casamia Balanca hiện chưa có số liệu doanh thu thực tế công khai. Có thể tham khảo giá thuê villa Cẩm Thanh khoảng 1,5 – 4 triệu/đêm và tự tính theo công suất giả định.": [
+  "There is no public data yet on actual rental revenue for Casamia Balanca villas. You can refer to Cam Thanh villa rents of about 1.5 – 4 million VND/night and calculate yourself based on assumed occupancy.",
+  "Casamia Balanca 빌라 임대의 실제 매출 공개 자료는 아직 없습니다. 껌타인 빌라 임대료 1박 약 150만 – 400만 동을 참고해 가정 객실 가동률로 직접 계산해 보실 수 있습니다."
+ ],
+ "Cho thuê biệt thự Casamia Balanca phải nộp thuế gì?": [
+  "What taxes apply to renting out a Casamia Balanca villa?",
+  "Casamia Balanca 빌라 임대 시 어떤 세금을 내야 합니까?"
+ ],
+ "Cho thuê biệt thự Casamia Balanca theo mô hình villa nghỉ dưỡng là hướng khai thác khả thi vì dự án nằm ở Cẩm Thanh, gần": [
+  "Renting out a Casamia Balanca villa as a holiday villa is a feasible strategy because the project is in Cam Thanh, near",
+  "Casamia Balanca 빌라를 휴양 빌라 모델로 임대하는 것은 실현 가능한 방향입니다. 프로젝트가 껌타인에 있으며 다음과 가깝기 때문입니다:"
+ ],
+ "Cho thuê biệt thự Casamia Balanca được bao nhiêu?": [
+  "How much can you earn renting out a Casamia Balanca villa?",
+  "Casamia Balanca 빌라 임대로 얼마를 벌 수 있습니까?"
+ ],
+ "Cách tính dòng tiền cho thuê biệt thự?": [
+  "How do you calculate villa rental cash flow?",
+  "빌라 임대 현금 흐름은 어떻게 계산합니까?"
+ ],
+ "Công suất giả định": [
+  "Assumed occupancy",
+  "가정 객실 가동률"
+ ],
+ "Công sức": [
+  "Effort",
+  "노력"
+ ],
+ "Công thức ước tính dòng tiền cho thuê biệt thự Casamia Balanca": [
+  "Formula for estimating Casamia Balanca villa rental cash flow",
+  "Casamia Balanca 빌라 임대 현금 흐름 추정 공식"
+ ],
+ "Doanh thu = giá thuê/đêm x 365 x công suất; trừ hoa hồng, vận hành, phí quản lý, thuế để ra dòng tiền ròng.": [
+  "Revenue = nightly rate x 365 x occupancy; deduct commissions, operations, management fees and taxes to get net cash flow.",
+  "매출 = 1박 임대료 x 365 x 객실 가동률이며, 커미션, 운영비, 관리비, 세금을 차감하면 순현금 흐름이 됩니다."
+ ],
+ "Doanh thu giữ lại": [
+  "Revenue retained",
+  "보유 매출"
+ ],
+ "Doanh thu gộp/năm": [
+  "Gross revenue/year",
+  "연간 총매출"
+ ],
+ "Doanh thu năm = Giá thuê trung bình/đêm x 365 x Công suất phòng.": [
+  "Annual revenue = Average nightly rate x 365 x Occupancy.",
+  "연 매출 = 1박 평균 임대료 x 365 x 객실 가동률."
+ ],
+ "Dòng tiền ròng = Doanh thu – Phí OTA/hoa hồng – Chi phí vận hành (nhân sự, điện nước, giặt là, bảo trì hồ bơi) – Phí quản lý khu đô thị – Thuế cho thuê – Khấu hao nội thất.": [
+  "Net cash flow = Revenue – OTA fees/commissions – Operating costs (staff, utilities, laundry, pool maintenance) – Urban area management fee – Rental tax – Furniture depreciation.",
+  "순현금 흐름 = 매출 – OTA 수수료/커미션 – 운영비(인건비, 전기·수도, 세탁, 수영장 관리) – 신도시 관리비 – 임대 세금 – 가구 감가상각."
+ ],
+ "Dù chọn cách nào, hãy yêu cầu báo cáo doanh thu, chi phí hằng tháng để theo dõi hiệu quả thực.": [
+  "Whichever you choose, ask for monthly revenue and cost reports to track actual performance.",
+  "어느 방식을 선택하든 실제 성과를 확인할 수 있도록 월별 매출·비용 보고서를 요구하십시오."
+ ],
+ "Giá thuê thay đổi rất mạnh theo mùa du lịch, số phòng ngủ, hồ bơi riêng và chất lượng vận hành. Đây là giá các villa đang hoạt động, không phải giá của Casamia Balanca.": [
+  "Rents vary greatly with the tourist season, number of bedrooms, private pool and quality of operation. These are prices for operating villas, not Casamia Balanca prices.",
+  "임대료는 관광 시즌, 침실 수, 전용 수영장, 운영 품질에 따라 크게 달라집니다. 이는 운영 중인 빌라의 가격이며 Casamia Balanca의 가격이 아닙니다."
+ ],
+ "Giá thuê villa khu Cẩm Thanh – mốc tham chiếu khi cho thuê biệt thự Casamia Balanca": [
+  "Villa rents in the Cam Thanh area – a benchmark for renting out a Casamia Balanca villa",
+  "껌타인 지역 빌라 임대료 – Casamia Balanca 빌라 임대의 기준점"
+ ],
+ "Gói chia doanh thu do phân phối giới thiệu cần kiểm tra hợp đồng vận hành cụ thể.": [
+  "Revenue-sharing packages presented by distributors require checking the specific operating contract.",
+  "분양 대행사가 소개하는 매출 분배 패키지는 구체적인 운영 계약서를 확인해야 합니다."
+ ],
+ "Hội An có mùa mưa cuối năm, cần tính công suất cả năm, không chỉ mùa cao điểm.": [
+  "Hoi An has a rainy season at the end of the year; calculate occupancy for the whole year, not just the peak season.",
+  "호이안은 연말에 우기가 있으므로 성수기만이 아니라 연간 객실 가동률을 계산해야 합니다."
+ ],
+ "Khoảng 1,5 – 4 triệu/đêm": [
+  "About 1.5 – 4 million VND/night",
+  "1박 약 150만 – 400만 동"
+ ],
+ "Khoảng 3,7%": [
+  "About 3.7%",
+  "약 3.7%"
+ ],
+ "Khoảng 4,6%": [
+  "About 4.6%",
+  "약 4.6%"
+ ],
+ "Khoảng 5,6%": [
+  "About 5.6%",
+  "약 5.6%"
+ ],
+ "Khoảng 511 triệu": [
+  "About 511 million VND",
+  "약 5억 1,100만 동"
+ ],
+ "Khoảng 6 – 8 triệu/đêm tùy ngày thường, cuối tuần, lễ Tết": [
+  "About 6 – 8 million VND/night depending on weekdays, weekends, holidays and Tet",
+  "평일, 주말, 명절·뗏(설)에 따라 1박 약 600만 – 800만 동"
+ ],
+ "Khoảng 639 triệu": [
+  "About 639 million VND",
+  "약 6억 3,900만 동"
+ ],
+ "Khoảng 767 triệu": [
+  "About 767 million VND",
+  "약 7억 6,700만 동"
+ ],
+ "Loại villa": [
+  "Villa type",
+  "빌라 유형"
+ ],
+ "Lời khuyên": [
+  "Advice",
+  "조언"
+ ],
+ "Minh họa doanh thu gộp với các giả định": [
+  "Illustration of gross revenue under the assumptions",
+  "가정에 따른 총매출 예시"
+ ],
+ "Mùa vụ:": [
+  "Seasonality:",
+  "계절성:"
+ ],
+ "Một số phân phối giới thiệu gói chia doanh thu; chưa thấy văn bản chính thức của chủ đầu tư, cần kiểm tra hợp đồng trước khi tin.": [
+  "Some distributors present revenue-sharing packages; no official developer document has been seen, so check the contract before trusting it.",
+  "일부 분양 대행사가 매출 분배 패키지를 소개하지만 시행사의 공식 문서는 확인되지 않았으므로 믿기 전에 계약서를 확인하십시오."
+ ],
+ "Một số trang phân phối giới thiệu gói hợp tác khai thác chia khoảng 45% doanh thu thuần, kèm mức tối thiểu khoảng 30 triệu/tháng. Hoàng Hiệp chưa thấy văn bản chính thức của chủ đầu tư về gói này. Nếu được chào, hãy yêu cầu hợp đồng cụ thể: bên vận hành là ai, thời hạn, cách tính doanh thu thuần, ai chịu chi phí, điều kiện chấm dứt.": [
+  "Some distributor sites present an operating partnership package sharing about 45% of net revenue, with a minimum of about 30 million VND/month. Hoang Hiep has not seen any official developer document on this package. If it is offered, ask for the specific contract: who the operator is, the term, how net revenue is calculated, who bears the costs, and the termination conditions.",
+  "일부 분양 대행사 사이트는 순매출의 약 45%를 분배하고 최소 월 약 3,000만 동을 보장하는 공동 운영 패키지를 소개합니다. 호앙 히엡은 이 패키지에 관한 시행사의 공식 문서를 아직 보지 못했습니다. 제안을 받으신다면 구체적인 계약서를 요구하십시오: 운영사가 누구인지, 기간, 순매출 계산 방법, 비용 부담 주체, 해지 조건."
+ ],
+ "Nhiều: đăng bài, đón khách, dọn dẹp": [
+  "A lot: listing, welcoming guests, cleaning",
+  "많음: 게시, 손님 응대, 청소"
+ ],
+ "Nếu cho khách lưu trú ngắn ngày, chủ nhà còn phải đáp ứng quy định về khai báo lưu trú cho khách, đặc biệt với khách nước ngoài.": [
+  "If hosting short-stay guests, owners must also comply with regulations on registering guests' stays, especially foreign guests.",
+  "단기 숙박객을 받는 경우 소유주는 투숙객 숙박 신고 규정, 특히 외국인 투숙객 관련 규정도 준수해야 합니다."
+ ],
+ "Phụ thuộc kinh nghiệm chủ nhà": [
+  "Depends on the owner's experience",
+  "소유주 경험에 좌우"
+ ],
+ "Phụ thuộc uy tín đơn vị vận hành": [
+  "Depends on the operator's reputation",
+  "운영사 신뢰도에 좌우"
+ ],
+ "Rủi ro chất lượng": [
+  "Quality risk",
+  "품질 위험"
+ ],
+ "Thiết kế:": [
+  "Design:",
+  "설계:"
+ ],
+ "Thu nhập cho thuê nhà là thu nhập chịu thuế; chủ nhà cá nhân kê khai thuế giá trị gia tăng và thuế thu nhập cá nhân theo quy định hiện hành.": [
+  "Home rental income is taxable income; individual owners declare value-added tax and personal income tax under current regulations.",
+  "주택 임대 소득은 과세 소득이며, 개인 소유주는 현행 규정에 따라 부가가치세와 개인소득세를 신고합니다."
+ ],
+ "Thu nhập từ cho thuê nhà là thu nhập chịu thuế. Chủ nhà cá nhân cần kê khai và nộp thuế giá trị gia tăng, thuế thu nhập cá nhân theo quy định hiện hành; cách tính được hướng dẫn trong bài": [
+  "Income from renting out a home is taxable income. Individual owners need to declare and pay value-added tax and personal income tax under current regulations; the calculation is explained in the article",
+  "주택 임대 소득은 과세 소득입니다. 개인 소유주는 현행 규정에 따라 부가가치세와 개인소득세를 신고·납부해야 하며, 계산 방법은 다음 글에 안내되어 있습니다:"
+ ],
+ "Thuê đơn vị quản lý": [
+  "Management company",
+  "관리 회사 위탁"
+ ],
+ "Thuế khi cho thuê biệt thự Casamia Balanca": [
+  "Taxes on renting out a Casamia Balanca villa",
+  "Casamia Balanca 빌라 임대 세금"
+ ],
+ "Thấp hơn do chia phí quản lý": [
+  "Lower due to shared management fees",
+  "관리 수수료 분배로 더 낮음"
+ ],
+ "Trang du lịch": [
+  "Travel sites",
+  "여행 사이트"
+ ],
+ "Trang đặt phòng, du lịch": [
+  "Booking and travel sites",
+  "예약·여행 사이트"
+ ],
+ "Từ khoảng 3,5 – 5,5 triệu/đêm": [
+  "From about 3.5 – 5.5 million VND/night",
+  "1박 약 350만 – 550만 동부터"
+ ],
+ "Tự vận hành": [
+  "Self-managed",
+  "직접 운영"
+ ],
+ "Tự vận hành hay thuê đơn vị quản lý?": [
+  "Self-manage or hire a management company?",
+  "직접 운영할까, 관리 회사에 맡길까?"
+ ],
+ "Tỷ suất = Dòng tiền ròng / Tổng vốn đầu tư (giá căn + nội thất + chi phí khác).": [
+  "Yield = Net cash flow / Total investment (unit price + furniture + other costs).",
+  "수익률 = 순현금 흐름 / 총투자금(세대 가격 + 인테리어 + 기타 비용)."
+ ],
+ "Tỷ suất gộp trên 13,75 tỷ": [
+  "Gross yield on 13.75 billion VND",
+  "137억 5천만 동 대비 총수익률"
+ ],
+ "Villa 3 – 8 phòng ngủ tại Cẩm Thanh": [
+  "3 – 8 bedroom villas in Cam Thanh",
+  "껌타인 3 – 8베드룸 빌라"
+ ],
+ "Villa 4 phòng ngủ có hồ bơi (Hội An)": [
+  "4-bedroom villa with pool (Hoi An)",
+  "수영장 있는 4베드룸 빌라(호이안)"
+ ],
+ "Villa Cẩm Thanh (mức phổ biến)": [
+  "Cam Thanh villa (typical level)",
+  "껌타인 빌라(일반 수준)"
+ ],
+ "Villa nguyên căn Cẩm Thanh cho thuê phổ biến khoảng 1,5 – 4 triệu/đêm; villa nhiều phòng có hồ bơi cao hơn.": [
+  "Whole villas in Cam Thanh typically rent for about 1.5 – 4 million VND/night; multi-room villas with a pool are higher.",
+  "껌타인의 단독 빌라 임대료는 보통 1박 약 150만 – 400만 동이며, 수영장이 있는 다객실 빌라는 더 높습니다."
+ ],
+ "Ví dụ dưới đây dùng giá thuê 3,5 triệu/đêm (mức thấp của villa nhiều phòng ở Cẩm Thanh) và giá căn 13,75 tỷ (lô 250 m² x 55 triệu/m², theo Tạp chí Công Thương 12/2024). Công suất là": [
+  "The example below uses a rent of 3.5 million VND/night (the low end for multi-room villas in Cam Thanh) and a unit price of 13.75 billion VND (a 250 m² plot x 55 million VND/m², per Cong Thuong Magazine, December 2024). Occupancy is",
+  "아래 예시는 1박 임대료 350만 동(껌타인 다객실 빌라의 하단 수준)과 세대 가격 137억 5천만 동(250 m² 필지 x m²당 5,500만 동, Cong Thuong 잡지 2024년 12월 기준)을 사용합니다. 객실 가동률은"
+ ],
+ "Vận hành:": [
+  "Operations:",
+  "운영:"
+ ],
+ "Về các gói cam kết khai thác": [
+  "About rental guarantee packages",
+  "운영 보장 패키지에 관하여"
+ ],
+ "Với số liệu hiện có, cho thuê biệt thự Casamia Balanca nên được xem là cách khai thác thêm cho một tài sản tích lũy dài hạn, không phải sản phẩm dòng tiền cao. Nếu ưu tiên dòng tiền, bạn có thể so sánh với căn hộ, khách sạn tại trang": [
+  "With the data available, renting out a Casamia Balanca villa should be seen as an additional way to use a long-term store-of-value asset, not a high cash-flow product. If you prioritize cash flow, you can compare with apartments and hotels on the pages",
+  "현재 자료로 보면 Casamia Balanca 빌라 임대는 고현금 흐름 상품이 아니라 장기 자산 축적용 부동산을 추가로 활용하는 방법으로 보아야 합니다. 현금 흐름을 우선하신다면 다음 페이지의 아파트, 호텔과 비교해 보실 수 있습니다:"
+ ],
+ "Yếu tố giúp cho thuê biệt thự Casamia Balanca tốt": [
+  "Factors that help a Casamia Balanca villa rent well",
+  "Casamia Balanca 빌라 임대를 잘 되게 하는 요소"
+ ],
+ "cho thuê": [
+  "rentals",
+  "임대"
+ ],
+ "chưa có số liệu doanh thu thực tế công khai": [
+  "there is no public data yet on actual revenue",
+  "실제 매출 공개 자료는 아직 없습니다"
+ ],
+ "cách tính thuế cho thuê bất động sản 2026": [
+  "how to calculate tax on property rental 2026",
+  "2026년 부동산 임대 세금 계산 방법"
+ ],
+ "căn ven sông, view rừng dừa, gần bến thuyền dễ bán phòng hơn.": [
+  "riverside units, coconut forest views and proximity to the boat pier make rooms easier to sell.",
+  "강변 세대, 코코넛 숲 전망, 선착장 인근 세대가 객실 판매에 유리합니다."
+ ],
+ "giả định của người đọc": [
+  "the reader's own assumption",
+  "독자의 가정"
+ ],
+ "hình ảnh, đánh giá trên nền tảng đặt phòng, dịch vụ đón tiễn.": [
+  "photos, reviews on booking platforms, pick-up and drop-off services.",
+  "예약 플랫폼의 사진과 후기, 픽업·샌딩 서비스."
+ ],
+ "khi cho thuê biệt thự Casamia Balanca. Sau khi trừ hoa hồng nền tảng đặt phòng, vận hành, thuế, dòng tiền ròng sẽ thấp hơn đáng kể. Hãy thay số theo căn và giá thuê bạn khảo sát được.": [
+  "from renting out a Casamia Balanca villa. After deducting booking platform commissions, operations and taxes, net cash flow will be considerably lower. Replace the figures with the unit and rents you have surveyed.",
+  "Casamia Balanca 빌라 임대 매출입니다. 예약 플랫폼 수수료, 운영비, 세금을 차감하면 순현금 흐름은 상당히 낮아집니다. 직접 조사한 세대와 임대료로 수치를 바꿔 계산해 보십시오."
+ ],
+ "mua bán khách sạn": [
+  "hotels for sale",
+  "호텔 매매"
+ ],
+ "trên Thư Viện Pháp Luật. Khoản thuế này cần trừ vào dòng tiền ròng khi tính hiệu quả cho thuê biệt thự Casamia Balanca.": [
+  "on Thu Vien Phap Luat. This tax must be deducted from net cash flow when assessing the returns of renting out a Casamia Balanca villa.",
+  "(Thu Vien Phap Luat). Casamia Balanca 빌라 임대 수익성을 계산할 때 이 세금을 순현금 흐름에서 차감해야 합니다."
+ ],
+ "trước chi phí": [
+  "before costs",
+  "비용 차감 전"
+ ],
+ "và bảng": [
+  "and the table",
+  "및 표"
+ ],
+ "Ít, phù hợp chủ ở xa": [
+  "Little, suitable for owners living far away",
+  "적음, 원거리 거주 소유주에게 적합"
+ ],
+ "Đây là doanh thu": [
+  "This is revenue",
+  "이는"
+ ],
+ "Đón khách tại biệt thự – dịch vụ vận hành quyết định hiệu quả cho thuê biệt thự Casamia Balanca (ảnh chủ đầu tư)": [
+  "Welcoming guests at the villa – operating services determine how well a Casamia Balanca villa rents (developer's image)",
+  "빌라에서 손님 맞이 – 운영 서비스가 Casamia Balanca 빌라 임대 성과를 좌우합니다(시행사 이미지)"
+ ],
+ "Đọc thêm về cho thuê biệt thự Casamia Balanca": [
+  "Further reading on renting out Casamia Balanca villas",
+  "Casamia Balanca 빌라 임대 관련 추가 자료"
+ ],
+ "– nơi villa nguyên căn đang cho thuê phổ biến khoảng 1,5 – 4 triệu đồng/đêm. Tuy nhiên, đến tháng 10/2026 dự án mới bắt đầu bàn giao,": [
+  "– where whole villas typically rent for about 1.5 – 4 million VND/night. However, as of October 2026 the project has only just begun handover,",
+  "– 이곳의 단독 빌라는 보통 1박 약 150만 – 400만 동에 임대됩니다. 다만 2026년 10월 현재 프로젝트는 인도를 막 시작했을 뿐이며"
+ ]
+}

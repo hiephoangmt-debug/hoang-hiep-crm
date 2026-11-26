@@ -1,0 +1,282 @@
+{
+ "(gọi/Zalo) để được ước tính giá thuê căn hộ Đà Nẵng và dòng tiền theo từng căn cụ thể hoặc ký gửi căn hộ cho thuê.": [
+  "(call/Zalo) for an estimate of Da Nang apartment rent and cash flow for each specific unit, or to consign your apartment for rent.",
+  "(전화/Zalo)로 문의하시면 세대별 다낭 아파트 임대료와 현금흐름을 추정해 드리며, 임대 아파트 위탁(매물 등록)도 가능합니다."
+ ],
+ ". Nên xác nhận lại với cơ quan thuế tại thời điểm ký hợp đồng.": [
+  ". Confirm again with the tax authority at the time of signing the contract.",
+  ". 계약 체결 시점에 세무 당국에 다시 확인하는 것이 좋습니다."
+ ],
+ "1PN 18 – 25; 2PN 25 – 35 (ước tính)": [
+  "1BR 18 – 25; 2BR 25 – 35 (estimated)",
+  "1베드룸 18 – 25; 2베드룸 25 – 35(추정)"
+ ],
+ "1PN 22 – 27; 2PN 35 – 40; 3PN đến 95": [
+  "1BR 22 – 27; 2BR 35 – 40; 3BR up to 95",
+  "1베드룸 22 – 27; 2베드룸 35 – 40; 3베드룸 최대 95"
+ ],
+ "1PN từ 6,5; 2PN 10 – 13; 3PN 15,5 – 17": [
+  "1BR from 6.5; 2BR 10 – 13; 3BR 15.5 – 17",
+  "1베드룸 6.5부터; 2베드룸 10 – 13; 3베드룸 15.5 – 17"
+ ],
+ "2PN 15 – 25 (phổ biến 18 – 21)": [
+  "2BR 15 – 25 (commonly 18 – 21)",
+  "2베드룸 15 – 25(일반적으로 18 – 21)"
+ ],
+ "; về hình thức hợp đồng thuê nhà ở theo Luật Nhà ở 2023, xem giải đáp trên": [
+  "; on the form of housing leases under the 2023 Housing Law, see the answer on",
+  "; 2023년 주택법에 따른 주택 임대차 계약 형식은 다음의 답변을 참고하십시오:"
+ ],
+ "Anh chị có thể xem căn đang cho thuê tại trang": [
+  "You can see units currently for rent on the page",
+  "현재 임대 중인 세대는 다음 페이지에서 보실 수 있습니다:"
+ ],
+ "Bảng giá thuê căn hộ Đà Nẵng theo dự án": [
+  "Da Nang apartment rent table by project",
+  "프로젝트별 다낭 아파트 임대료 표"
+ ],
+ "Bảo trì, thay nội thất": [
+  "Maintenance, furniture replacement",
+  "유지보수, 가구 교체"
+ ],
+ "Cao hơn với căn thuê ngắn hạn, căn gần biển": [
+  "Higher for short-term rentals and units near the beach",
+  "단기 임대 세대, 해변 인근 세대일수록 높음"
+ ],
+ "Chi phí cần trừ khỏi giá thuê căn hộ Đà Nẵng": [
+  "Costs to deduct from Da Nang apartment rents",
+  "다낭 아파트 임대료에서 차감할 비용"
+ ],
+ "Cho thuê căn hộ Đà Nẵng lãi bao nhiêu phần trăm?": [
+  "What percentage return does renting out a Da Nang apartment give?",
+  "다낭 아파트 임대 수익률은 몇 %인가요?"
+ ],
+ "Căn 3PN biến động mạnh nhất: 5 – 8 triệu ở The Ori Garden, 15,5 – 17 triệu ở FPT City, 30 – 40 triệu ở Vista Residence và có thể đến 95 triệu ở căn view sông hạng sang The Filmore. Khi đọc giá thuê căn hộ Đà Nẵng trên tin rao, cần phân biệt căn có nội thất và căn trống.": [
+  "3BR units vary the most: 5 – 8 million VND at The Ori Garden, 15.5 – 17 million VND at FPT City, 30 – 40 million VND at Vista Residence and up to 95 million VND for luxury river-view units at The Filmore. When reading Da Nang apartment rents in listings, distinguish between furnished and empty units.",
+  "3베드룸은 편차가 가장 큽니다: The Ori Garden 500만 – 800만 동, FPT City 1,550만 – 1,700만 동, Vista Residence 3,000만 – 4,000만 동, The Filmore 강 전망 럭셔리 세대는 9,500만 동까지. 매물 광고의 다낭 아파트 임대료를 볼 때는 가구 완비 세대와 빈 세대를 구분해야 합니다."
+ ],
+ "Căn hạng sang view sông Hàn có thể đến 95 triệu/tháng": [
+  "Luxury units with Han River views can reach 95 million VND/month",
+  "다낭 한강 전망 럭셔리 세대는 월 9,500만 동까지 가능"
+ ],
+ "Căn ven sông Hàn, ven biển có giá thuê cao gấp 3 – 5 lần căn ở khu ngoại vi. Khách thuê chính là chuyên gia, người nước ngoài và khách du lịch dài ngày.": [
+  "Units along the Han River and by the beach rent for 3 – 5 times as much as units in outlying areas. The main tenants are expats, foreigners and long-stay tourists.",
+  "다낭 한강변, 해변 세대의 임대료는 외곽 지역 세대의 3 – 5배입니다. 주요 임차인은 전문직 외국인, 외국인 거주자, 장기 체류 관광객입니다."
+ ],
+ "Căn đầy đủ nội thất thường cho thuê nhanh và giá cao hơn rõ rệt so với căn trống. Chi phí nội thất cần được tính vào vốn đầu tư.": [
+  "Fully furnished units usually rent faster and at noticeably higher prices than empty units. Furnishing costs should be included in the investment capital.",
+  "가구가 완비된 세대는 빈 세대보다 보통 더 빨리, 눈에 띄게 높은 가격에 임대됩니다. 가구 비용은 투자 자금에 포함해 계산해야 합니다."
+ ],
+ "Dài hạn 25 – 40": [
+  "Long-term 25 – 40",
+  "장기 25 – 40"
+ ],
+ "Giá thuê căn hộ Đà Nẵng 2PN bao nhiêu?": [
+  "How much is the rent for a 2BR apartment in Da Nang?",
+  "다낭 2베드룸 아파트 임대료는 얼마인가요?"
+ ],
+ "Giá thuê căn hộ Đà Nẵng có thay đổi theo mùa không?": [
+  "Do Da Nang apartment rents change with the seasons?",
+  "다낭 아파트 임대료는 계절에 따라 달라지나요?"
+ ],
+ "Giá thuê căn hộ Đà Nẵng hiện dao động rất rộng: khoảng 3 – 8 triệu/tháng ở khu Liên Chiểu, 6,5 – 17 triệu/tháng ở FPT City và 20 – 40 triệu/tháng cho căn ven sông Hàn, ven biển có nội thất. Căn view đẹp ở dự án hạng sang có thể đến 95 triệu/tháng. Bảng dưới đây tổng hợp từ tin cho thuê công khai, cập nhật tháng 10/2026.": [
+  "Da Nang apartment rents currently vary very widely: about 3 – 8 million VND/month in the Lien Chieu area, 6.5 – 17 million VND/month at FPT City, and 20 – 40 million VND/month for furnished units along the Han River and by the beach. Units with great views in luxury projects can reach 95 million VND/month. The table below is compiled from public rental listings, updated October 2026.",
+  "현재 다낭 아파트 임대료는 편차가 매우 큽니다. 리엔찌에우(Lien Chieu) 지역은 월 약 300만 – 800만 동, FPT City는 월 650만 – 1,700만 동, 가구가 갖춰진 다낭 한강변·해변 세대는 월 2,000만 – 4,000만 동입니다. 럭셔리 프로젝트의 전망 좋은 세대는 월 9,500만 동까지 받을 수 있습니다. 아래 표는 공개된 임대 매물을 바탕으로 정리했으며 2026년 10월 업데이트입니다."
+ ],
+ "Giá thuê căn hộ Đà Nẵng studio bao nhiêu?": [
+  "How much is the rent for a studio apartment in Da Nang?",
+  "다낭 스튜디오 아파트 임대료는 얼마인가요?"
+ ],
+ "Giá thuê căn hộ Đà Nẵng theo loại căn": [
+  "Da Nang apartment rents by unit type",
+  "세대 유형별 다낭 아파트 임대료"
+ ],
+ "Giá thuê căn hộ Đà Nẵng theo từng dự án: studio, 1PN, 2PN, 3PN thu bao nhiêu mỗi tháng và cách ước tính tỷ suất cho thuê, cập nhật 10/2026.": [
+  "Da Nang apartment rents by project: how much studios, 1BR, 2BR and 3BR units earn each month and how to estimate rental yield, updated October 2026.",
+  "프로젝트별 다낭 아파트 임대료: 스튜디오, 1베드룸, 2베드룸, 3베드룸이 매달 얼마를 받는지와 임대 수익률 추정법, 2026년 10월 업데이트."
+ ],
+ "Giá thuê căn hộ Đà Nẵng từ 3 – 8 triệu (Liên Chiểu) đến 20 – 40 triệu (ven sông, biển)": [
+  "Da Nang apartment rents range from 3 – 8 million VND (Lien Chieu) to 20 – 40 million VND (riverside, beachfront)",
+  "다낭 아파트 임대료는 300만 – 800만 동(리엔찌에우)부터 2,000만 – 4,000만 동(강변, 해변)까지"
+ ],
+ "Giá thuê căn hộ Đà Nẵng ven sông Hàn thường cao hơn khu ngoại vi – Sun Ponte Residence lúc hoàng hôn (phối cảnh chủ đầu tư)": [
+  "Da Nang apartment rents along the Han River are usually higher than in outlying areas – Sun Ponte Residence at sunset (developer rendering)",
+  "다낭 한강변 아파트 임대료는 보통 외곽 지역보다 높습니다 – 석양 무렵 Sun Ponte Residence(시행사 조감도)"
+ ],
+ "Giá thuê căn hộ Đà Nẵng: cho thuê thu bao nhiêu mỗi tháng?": [
+  "Da Nang Apartment Rents: How Much Can You Earn Each Month?",
+  "다낭 아파트 임대료: 매달 얼마를 받을 수 있을까?"
+ ],
+ "Giá thuê tham khảo (triệu/tháng)": [
+  "Reference rent (million VND/month)",
+  "참고 임대료(월, 백만 동)"
+ ],
+ "Gom dữ liệu trong bảng theo loại căn, giá thuê căn hộ Đà Nẵng có thể hình dung như sau (triệu/tháng, tham khảo): studio khoảng 13 – 20 ở các dự án ven sông như Sun Ponte, Sun Cosmo; 1PN từ 3 – 4,5 ở Liên Chiểu, từ 6,5 ở FPT City đến 20 – 30 ở ven sông Hàn; 2PN từ 4 – 6 (Liên Chiểu), 10 – 13 (FPT City) đến 30 – 40 ở Sun Ponte, Sun Cosmo, The Filmore.": [
+  "Grouping the data in the table by unit type, Da Nang apartment rents can be pictured as follows (million VND/month, for reference): studios about 13 – 20 at riverside projects such as Sun Ponte and Sun Cosmo; 1BR from 3 – 4.5 in Lien Chieu, from 6.5 at FPT City up to 20 – 30 along the Han River; 2BR from 4 – 6 (Lien Chieu) and 10 – 13 (FPT City) up to 30 – 40 at Sun Ponte, Sun Cosmo and The Filmore.",
+  "표의 데이터를 세대 유형별로 묶으면 다낭 아파트 임대료는 다음과 같이 볼 수 있습니다(월, 백만 동, 참고): 스튜디오는 Sun Ponte, Sun Cosmo 등 강변 프로젝트에서 약 13 – 20; 1베드룸은 리엔찌에우 3 – 4.5부터, FPT City 6.5부터, 다낭 한강변 20 – 30까지; 2베드룸은 리엔찌에우 4 – 6, FPT City 10 – 13부터 Sun Ponte, Sun Cosmo, The Filmore 30 – 40까지."
+ ],
+ "Hải Châu – sông Hàn": [
+  "Hai Chau – Han River",
+  "하이쩌우 – 다낭 한강"
+ ],
+ "Khi thuê đơn vị quản lý hoặc tìm khách qua môi giới": [
+  "When hiring a management company or finding tenants through brokers",
+  "관리 회사를 이용하거나 중개인을 통해 임차인을 구할 때"
+ ],
+ "Khoản chi": [
+  "Expense",
+  "비용 항목"
+ ],
+ "Khách chuyên gia, gia đình: 2PN – 3PN có nội thất ở trung tâm Hải Châu, Sơn Trà.": [
+  "Expat and family tenants: furnished 2BR – 3BR units in central Hai Chau and Son Tra.",
+  "전문직 외국인, 가족 임차인: 하이쩌우 중심부와 선짜의 가구 완비 2베드룸 – 3베드룸."
+ ],
+ "Lập bảng dòng tiền đầy đủ giúp anh chị so sánh trung thực giữa các dự án, thay vì chỉ nhìn giá thuê đăng trên tin rao.": [
+  "Building a full cash-flow table helps you compare projects honestly, instead of only looking at the rents posted in listings.",
+  "현금흐름표를 제대로 작성하면 매물 광고의 임대료만 보는 대신 프로젝트들을 정직하게 비교할 수 있습니다."
+ ],
+ "Muốn nhàn: căn hộ khách sạn có đơn vị vận hành, nhưng cần đọc kỹ điều kiện chia lợi nhuận.": [
+  "Want it hands-off: hotel apartments with an operator, but read the profit-sharing terms carefully.",
+  "손이 덜 가길 원한다면: 운영사가 있는 호텔형 아파트. 단, 수익 배분 조건을 꼼꼼히 읽어야 합니다."
+ ],
+ "Mùa vụ ảnh hưởng thế nào?": [
+  "How does seasonality affect rents?",
+  "계절은 임대료에 어떤 영향을 주나?"
+ ],
+ "Ngân sách vừa phải: studio, 1PN gần sông Hàn hoặc biển, dễ cho thuê cho người đi làm và khách du lịch.": [
+  "Moderate budget: studios and 1BR units near the Han River or the beach, easy to rent to workers and tourists.",
+  "적정 예산: 다낭 한강이나 해변 인근 스튜디오, 1베드룸으로 직장인과 관광객에게 임대하기 쉽습니다."
+ ],
+ "Ngũ Hành Sơn – sông Hàn": [
+  "Ngu Hanh Son – Han River",
+  "응우하인선 – 다낭 한강"
+ ],
+ "Ngắn hạn có thể thu cao hơn mùa du lịch nhưng tốn công vận hành; dài hạn ổn định, ít trống phòng hơn.": [
+  "Short-term can earn more in the tourist season but takes operational effort; long-term is stable with less vacancy.",
+  "단기 임대는 관광 시즌에 더 벌 수 있지만 운영 부담이 있고, 장기 임대는 안정적이며 공실이 적습니다."
+ ],
+ "Nên dự phòng 1 – 2 tháng/năm với thuê dài hạn": [
+  "Allow 1 – 2 months/year for long-term rentals",
+  "장기 임대 시 연 1 – 2개월을 예비로 잡는 것이 좋습니다"
+ ],
+ "Nên mua căn nào để cho thuê?": [
+  "Which unit should you buy to rent out?",
+  "임대용으로 어떤 세대를 사야 할까?"
+ ],
+ "Phí môi giới, vận hành": [
+  "Brokerage, operation fees",
+  "중개 수수료, 운영비"
+ ],
+ "Phí quản lý tòa nhà": [
+  "Building management fee",
+  "건물 관리비"
+ ],
+ "Sau khi trừ phí quản lý, thời gian trống phòng, bảo trì và thuế, tỷ suất ròng sẽ thấp hơn. Nếu có vay, cần so dòng tiền thuê với tiền trả nợ, xem thêm bài": [
+  "After deducting management fees, vacancy periods, maintenance and taxes, the net yield will be lower. If you have a loan, compare rental cash flow with debt repayments; see also the article",
+  "관리비, 공실 기간, 유지보수, 세금을 차감하면 순수익률은 더 낮아집니다. 대출이 있다면 임대 현금흐름과 원리금 상환액을 비교해야 합니다. 다음 글도 참고하십시오:"
+ ],
+ "Studio khoảng 20; căn lớn 25 – 45": [
+  "Studio about 20; larger units 25 – 45",
+  "스튜디오 약 20; 대형 세대 25 – 45"
+ ],
+ "Studio từ 16; 1PN 23 – 24; 2PN 30 – 35": [
+  "Studio from 16; 1BR 23 – 24; 2BR 30 – 35",
+  "스튜디오 16부터; 1베드룸 23 – 24; 2베드룸 30 – 35"
+ ],
+ "Sơn Trà – biển": [
+  "Son Tra – beach",
+  "선짜 – 해변"
+ ],
+ "Sơn Trà – biển Mỹ Khê": [
+  "Son Tra – My Khe Beach",
+  "선짜 – 미케 비치"
+ ],
+ "Sơn Trà – sông Hàn": [
+  "Son Tra – Han River",
+  "선짜 – 다낭 한강"
+ ],
+ "Tham khảo khoảng 13 – 20 triệu/tháng cho studio có nội thất ở dự án ven sông Hàn như Sun Ponte, Sun Cosmo; studio Wyndham Soleil ven biển khoảng 20 triệu/tháng.": [
+  "For reference, about 13 – 20 million VND/month for furnished studios at Han River projects such as Sun Ponte and Sun Cosmo; beachfront Wyndham Soleil studios about 20 million VND/month.",
+  "참고로 Sun Ponte, Sun Cosmo 등 다낭 한강변 프로젝트의 가구 완비 스튜디오는 월 약 1,300만 – 2,000만 동, 해변의 Wyndham Soleil 스튜디오는 월 약 2,000만 동입니다."
+ ],
+ "Tham khảo khoảng 4 – 6 triệu ở Liên Chiểu, 10 – 13 triệu ở FPT City và 20 – 40 triệu ở dự án ven sông Hàn, ven biển có nội thất.": [
+  "For reference, about 4 – 6 million VND in Lien Chieu, 10 – 13 million VND at FPT City and 20 – 40 million VND at furnished projects along the Han River and by the beach.",
+  "참고로 리엔찌에우 약 400만 – 600만 동, FPT City 1,000만 – 1,300만 동, 가구가 갖춰진 다낭 한강변·해변 프로젝트 2,000만 – 4,000만 동입니다."
+ ],
+ "Theo quy định hiện hành với cá nhân cho thuê": [
+  "Under current regulations for individual lessors",
+  "개인 임대인에 대한 현행 규정에 따름"
+ ],
+ "Thuê dài hạn hay ngắn hạn": [
+  "Long-term or short-term rental",
+  "장기 임대냐 단기 임대냐"
+ ],
+ "Thuê ngắn hạn có thể cho doanh thu cao hơn mùa cao điểm, nhưng tốn công vận hành và phụ thuộc quy định của tòa nhà. Thuê dài hạn ổn định hơn, ít rủi ro trống phòng.": [
+  "Short-term rentals can bring higher revenue in peak season but take more operational effort and depend on building rules. Long-term rentals are more stable, with less vacancy risk.",
+  "단기 임대는 성수기에 더 높은 매출을 올릴 수 있지만 운영 부담이 크고 건물 규정에 좌우됩니다. 장기 임대는 더 안정적이고 공실 위험이 적습니다."
+ ],
+ "Thuê ngắn hạn hay dài hạn tốt hơn?": [
+  "Is short-term or long-term rental better?",
+  "단기 임대와 장기 임대 중 어느 쪽이 나은가요?"
+ ],
+ "Thuế cho thuê tài sản": [
+  "Property rental tax",
+  "부동산 임대소득세"
+ ],
+ "Thời gian trống phòng": [
+  "Vacancy periods",
+  "공실 기간"
+ ],
+ "Tính theo m², trả hằng tháng dù có khách hay không": [
+  "Charged per m², paid monthly whether or not there is a tenant",
+  "m²당 부과되며 임차인 유무와 관계없이 매달 납부"
+ ],
+ "Tùy giá mua và giá thuê; ví dụ căn 5 tỷ cho thuê 25 triệu/tháng có tỷ suất gộp khoảng 6%/năm, tỷ suất ròng thấp hơn sau chi phí.": [
+  "It depends on the purchase price and rent; for example, a 5 billion VND unit rented at 25 million VND/month has a gross yield of about 6%/year, with a lower net yield after costs.",
+  "매입가와 임대료에 따라 다릅니다. 예를 들어 50억 동 세대를 월 2,500만 동에 임대하면 총수익률은 연 약 6%이며, 비용을 차감한 순수익률은 더 낮습니다."
+ ],
+ "Từ giá thuê căn hộ Đà Nẵng đến tỷ suất cho thuê": [
+  "From Da Nang apartment rents to rental yield",
+  "다낭 아파트 임대료에서 임대 수익률까지"
+ ],
+ "Tỷ suất gộp = tiền thuê cả năm chia giá mua. Ví dụ căn 2PN mua khoảng 5 tỷ, cho thuê 25 triệu/tháng thì thu khoảng 300 triệu/năm, tỷ suất gộp khoảng 6%/năm.": [
+  "Gross yield = annual rent divided by the purchase price. For example, a 2BR unit bought for about 5 billion VND and rented at 25 million VND/month earns about 300 million VND/year, a gross yield of about 6%/year.",
+  "총수익률 = 연간 임대료 ÷ 매입가. 예를 들어 약 50억 동에 산 2베드룸을 월 2,500만 동에 임대하면 연 약 3억 동을 받아 총수익률은 연 약 6%입니다."
+ ],
+ "Ví dụ: căn 5 tỷ thuê 25 triệu/tháng cho tỷ suất gộp khoảng 6%/năm": [
+  "Example: a 5 billion VND unit rented at 25 million VND/month gives a gross yield of about 6%/year",
+  "예: 50억 동 세대를 월 2,500만 동에 임대하면 총수익률 연 약 6%"
+ ],
+ "Về nghĩa vụ thuế khi cá nhân cho thuê nhà, anh chị có thể tham khảo phân tích trên": [
+  "On tax obligations when individuals rent out housing, you can refer to the analysis on",
+  "개인 주택 임대 시 납세 의무에 대해서는 다음의 분석을 참고하실 수 있습니다:"
+ ],
+ "Vị trí và view": [
+  "Location and view",
+  "위치와 전망"
+ ],
+ "Với thuê ngắn ngày, giá thuê căn hộ Đà Nẵng ven biển, ven sông thường tăng vào mùa du lịch hè và mùa pháo hoa, giảm vào mùa mưa cuối năm. Khi lập kế hoạch dòng tiền, nên lấy giá thuê dài hạn làm mức cơ sở, phần tăng thêm mùa cao điểm chỉ là dư địa.": [
+  "For short-term rentals, Da Nang apartment rents by the beach and river usually rise during the summer tourist season and the fireworks season, and fall in the year-end rainy season. When planning cash flow, use the long-term rent as the baseline; the extra in peak season is just upside.",
+  "단기 임대의 경우 다낭 해변·강변 아파트 임대료는 보통 여름 관광 시즌과 불꽃축제 시즌에 오르고 연말 우기에 내려갑니다. 현금흐름을 계획할 때는 장기 임대료를 기준으로 삼고, 성수기 추가분은 여유분으로만 보는 것이 좋습니다."
+ ],
+ "Với thuê ngắn ngày, giá thường cao hơn vào mùa du lịch hè và mùa pháo hoa; thuê dài hạn ổn định hơn và nên dùng làm mức cơ sở khi tính dòng tiền.": [
+  "For short-term rentals, prices are usually higher in the summer tourist season and the fireworks season; long-term rentals are more stable and should be used as the baseline when calculating cash flow.",
+  "단기 임대의 경우 가격은 보통 여름 관광 시즌과 불꽃축제 시즌에 더 높습니다. 장기 임대는 더 안정적이므로 현금흐름 계산 시 기준으로 삼는 것이 좋습니다."
+ ],
+ "Yếu tố quyết định giá thuê căn hộ Đà Nẵng": [
+  "Factors that determine Da Nang apartment rents",
+  "다낭 아파트 임대료를 결정하는 요인"
+ ],
+ "hoặc tham khảo": [
+  "or refer to",
+  "또는 다음을 참고하십시오:"
+ ],
+ "Đây là khoảng giá tổng hợp từ tin rao, phụ thuộc nội thất, tầng, view và thời điểm. Giá thuê thực tế cần kiểm chứng với hợp đồng đang chạy.": [
+  "These are price ranges compiled from listings and depend on furnishing, floor, view and timing. Actual rents should be verified against active leases.",
+  "이는 매물 광고를 종합한 가격 범위로 가구, 층, 전망, 시기에 따라 달라집니다. 실제 임대료는 현재 진행 중인 임대차 계약으로 확인해야 합니다."
+ ],
+ "Đọc thêm về giá thuê căn hộ Đà Nẵng": [
+  "Read more about Da Nang apartment rents",
+  "다낭 아파트 임대료 더 읽어보기"
+ ]
+}

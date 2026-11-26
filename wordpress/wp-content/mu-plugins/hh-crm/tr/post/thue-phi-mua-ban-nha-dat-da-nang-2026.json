@@ -1,0 +1,370 @@
+{
+ "(Cổng thông tin TP Đà Nẵng), nên khi ước tính thuế phí mua bán nhà đất cho một lô đất cụ thể, anh chị cần tra đúng tuyến đường, vị trí thửa. Điểm mới của bảng giá xem bài": [
+  "(Da Nang City Portal), so when estimating property transaction taxes and fees for a specific plot, you need to look up the exact street and parcel position. For what is new in the price table, see the article",
+  "(다낭시 포털). 따라서 특정 필지의 부동산 매매 세금·수수료를 추정할 때는 정확한 도로와 필지 위치를 조회해야 합니다. 가격표의 변경 사항은 다음 글을 참고하십시오:"
+ ],
+ "(gọi/Zalo) để được ước tính thuế phí mua bán nhà đất và tổng chi phí giao dịch cho căn cụ thể trước khi đặt cọc.": [
+  "(call/Zalo) for an estimate of property transaction taxes and fees and total transaction costs for a specific unit before placing a deposit.",
+  "(전화/Zalo) 계약금 지급 전에 특정 세대의 부동산 매매 세금·수수료와 총 거래 비용을 추정해 드립니다."
+ ],
+ "). Luật bổ sung quy định thời điểm xác định thu nhập tính thuế là thời điểm hợp đồng chuyển nhượng có hiệu lực hoặc thời điểm đăng ký quyền sở hữu, quyền sử dụng.": [
+  "). The law adds a provision that the time of determining taxable income is when the transfer contract takes effect or when ownership or use rights are registered.",
+  "). 개정법은 과세 소득 확정 시점을 양도 계약 효력 발생 시점 또는 소유권·사용권 등록 시점으로 하는 규정을 추가했습니다."
+ ],
+ "0,1% giá trị": [
+  "0.1% of value",
+  "금액의 0.1%"
+ ],
+ "0,5% giá tính lệ phí trước bạ": [
+  "0.5% of the registration fee base price",
+  "등록세 과세 가격의 0.5%"
+ ],
+ "1 triệu + 0,06% phần vượt 1 tỷ": [
+  "1 million VND + 0.06% of the amount over 1 billion VND",
+  "100만 동 + 10억 동 초과분의 0.06%"
+ ],
+ "100.000 đồng": [
+  "100,000 VND",
+  "10만 동"
+ ],
+ "2% giá chuyển nhượng": [
+  "2% of the transfer price",
+  "양도가액의 2%"
+ ],
+ "2,2 triệu + 0,05% phần vượt 3 tỷ": [
+  "2.2 million VND + 0.05% of the amount over 3 billion VND",
+  "220만 동 + 30억 동 초과분의 0.05%"
+ ],
+ "2,2 triệu + 0,05% × 1 tỷ": [
+  "2.2 million VND + 0.05% × 1 billion VND",
+  "220만 동 + 0.05% × 10억 동"
+ ],
+ "2,7 triệu": [
+  "2.7 million VND",
+  "270만 동"
+ ],
+ "20 triệu": [
+  "20 million VND",
+  "2,000만 동"
+ ],
+ "3,2 triệu + 0,04% phần vượt 5 tỷ": [
+  "3.2 million VND + 0.04% of the amount over 5 billion VND",
+  "320만 동 + 50억 동 초과분의 0.04%"
+ ],
+ "32,2 triệu + 0,02% phần vượt 100 tỷ, tối đa 70 triệu": [
+  "32.2 million VND + 0.02% of the amount over 100 billion VND, up to 70 million VND",
+  "3,220만 동 + 1,000억 동 초과분의 0.02%, 최대 7,000만 동"
+ ],
+ "4 tỷ × 0,5% (giả định giá tính bằng giá hợp đồng)": [
+  "4 billion VND × 0.5% (assuming the base equals the contract price)",
+  "40억 동 × 0.5%(과세 가격을 계약 가격으로 가정)"
+ ],
+ "4 tỷ × 2%": [
+  "4 billion VND × 2%",
+  "40억 동 × 2%"
+ ],
+ "5,2 triệu + 0,03% phần vượt 10 tỷ": [
+  "5.2 million VND + 0.03% of the amount over 10 billion VND",
+  "520만 동 + 100억 동 초과분의 0.03%"
+ ],
+ "50.000 đồng": [
+  "50,000 VND",
+  "5만 동"
+ ],
+ "80 triệu": [
+  "80 million VND",
+  "8,000만 동"
+ ],
+ "Bán nhà duy nhất có phải nộp thuế không?": [
+  "Do you have to pay tax when selling your only home?",
+  "유일한 주택을 매도할 때도 세금을 내야 합니까?"
+ ],
+ "Bên bán": [
+  "Seller",
+  "매도인"
+ ],
+ "Bên mua": [
+  "Buyer",
+  "매수인"
+ ],
+ "Bảng tổng hợp thuế phí mua bán nhà đất 2026": [
+  "Summary table of property transaction taxes and fees 2026",
+  "2026년 부동산 매매 세금·수수료 요약표"
+ ],
+ "Chuyển nhượng giữa những người có quan hệ hôn nhân, huyết thống, nuôi dưỡng theo luật định.": [
+  "Transfers between people related by marriage, blood or legal guardianship as defined by law.",
+  "법률이 정한 혼인, 혈연, 양육 관계에 있는 사람 간의 양도."
+ ],
+ "Chuyển nhượng nhà ở, đất ở duy nhất của cá nhân. Theo Nghị định 253/2026/NĐ-CP, người bán phải có quyền sở hữu, sử dụng tối thiểu 183 ngày tính đến thời điểm chuyển nhượng; miễn thuế không áp dụng với nhà ở hình thành trong tương lai.": [
+  "Transfer of an individual's only home or only residential land. Under Decree 253/2026/NĐ-CP, the seller must have held ownership or use rights for at least 183 days up to the time of transfer; the exemption does not apply to off-plan housing.",
+  "개인의 유일한 주택 또는 주거용지 양도. 시행령 253/2026/NĐ-CP에 따라 매도인은 양도 시점까지 최소 183일 이상 소유권 또는 사용권을 보유해야 하며, 미래 형성 주택(분양권)에는 면세가 적용되지 않습니다."
+ ],
+ "Căn 4 tỷ: ba khoản chính khoảng 102,7 triệu": [
+  "4 billion VND unit: the three main items total about 102.7 million VND",
+  "40억 동 세대: 주요 3개 항목 합계 약 1억 270만 동"
+ ],
+ "Căn cứ": [
+  "Legal basis",
+  "근거"
+ ],
+ "Dãy nhà phố ven sông ở Đà Nẵng – thuế phí mua bán nhà đất áp dụng cho cả nhà phố, đất ở và căn hộ": [
+  "A row of riverside townhouses in Da Nang – property transaction taxes and fees apply to townhouses, residential land and apartments alike",
+  "다낭 강변 타운하우스 라인 – 부동산 매매 세금·수수료는 타운하우스, 주거용지, 아파트에 모두 적용됩니다"
+ ],
+ "Dưới 50 triệu": [
+  "Under 50 million VND",
+  "5,000만 동 미만"
+ ],
+ "Giá trị tài sản / hợp đồng": [
+  "Asset / contract value",
+  "자산 / 계약 금액"
+ ],
+ "Khi giao dịch nhà đất, căn hộ tại Đà Nẵng năm 2026,": [
+  "When transacting land, houses or apartments in Da Nang in 2026,",
+  "2026년 다낭에서 토지, 주택, 아파트를 거래할 때"
+ ],
+ "Khi so giá giữa các căn, anh chị nên quy về cùng một điều kiện: giá đã gồm hay chưa gồm thuế phí mua bán nhà đất, đã gồm nội thất hay chưa. Hai căn chênh nhau vài chục triệu trên tin rao có thể bằng nhau khi tính đủ chi phí. Nếu dùng vốn vay, đừng quên khoản phí liên quan đến thế chấp, tham khảo bài": [
+  "When comparing prices between units, bring them to the same basis: whether the price includes property transaction taxes and fees, and whether it includes furniture. Two units that differ by a few tens of millions on listings may come out equal once all costs are counted. If you are using a loan, don't forget mortgage-related fees; see the article",
+  "세대 간 가격을 비교할 때는 같은 조건으로 맞추시기 바랍니다: 가격에 부동산 매매 세금·수수료가 포함되었는지, 가구가 포함되었는지 여부입니다. 매물 광고상 수천만 동 차이 나는 두 세대도 비용을 모두 계산하면 같아질 수 있습니다. 대출을 이용하신다면 담보 관련 수수료도 잊지 마십시오. 다음 글을 참고하십시오:"
+ ],
+ "Khoảng 102,7 triệu": [
+  "About 102.7 million VND",
+  "약 1억 270만 동"
+ ],
+ "Liên hệ cơ quan đăng ký đất đai": [
+  "Contact the land registration office",
+  "토지등록 기관에 문의"
+ ],
+ "Luật Thuế TNCN 2025 (hiệu lực 1/7/2026)": [
+  "2025 Personal Income Tax Law (effective July 1, 2026)",
+  "2025년 개인소득세법(2026년 7월 1일 시행)"
+ ],
+ "Luật Thuế thu nhập cá nhân 2025 có hiệu lực từ 1/7/2026. Với cá nhân cư trú, thuế từ chuyển nhượng bất động sản vẫn tính bằng": [
+  "The 2025 Personal Income Tax Law takes effect from July 1, 2026. For resident individuals, tax on real estate transfers is still calculated as",
+  "2025년 개인소득세법은 2026년 7월 1일부터 시행됩니다. 거주자 개인의 경우 부동산 양도 세금은 여전히 다음과 같이 계산됩니다:"
+ ],
+ "Lưu ý: khai đúng giá giao dịch thực tế trên hợp đồng. Khai thấp giá để giảm thuế có thể gây rủi ro cho cả hai bên khi phát sinh tranh chấp hoặc khi bên mua bán lại sau này.": [
+  "Note: declare the actual transaction price in the contract. Under-declaring the price to reduce tax can create risks for both parties if a dispute arises or when the buyer resells later.",
+  "유의: 계약서에 실제 거래 가격을 신고하십시오. 세금을 줄이기 위해 가격을 낮춰 신고하면 분쟁 발생 시 또는 매수인이 추후 재매도할 때 양측 모두에게 위험이 될 수 있습니다."
+ ],
+ "Lệ phí trước bạ 0,5% trong thuế phí mua bán nhà đất": [
+  "The 0.5% registration fee among property transaction taxes and fees",
+  "부동산 매매 세금·수수료 중 0.5% 등록세"
+ ],
+ "Lệ phí trước bạ 0,5%; phí công chứng theo biểu lũy tiến, tối đa 70 triệu": [
+  "0.5% registration fee; notarization fee on a progressive scale, up to 70 million VND",
+  "등록세 0.5%, 공증 수수료는 누진 요율로 최대 7,000만 동"
+ ],
+ "Lệ phí trước bạ nhà đất là bao nhiêu?": [
+  "How much is the property registration fee?",
+  "부동산 등록세는 얼마입니까?"
+ ],
+ "Lệ phí trước bạ nhà đất năm 2026 là 0,5% giá tính lệ phí trước bạ. Với giao dịch chuyển nhượng, giá tính thường là giá ghi trên hợp đồng nếu cao hơn giá do UBND thành phố ban hành. Bên mua nộp khoản này khi đăng ký sang tên. Một số trường hợp được miễn lệ phí trước bạ, ví dụ chuyển giao giữa vợ chồng, cha mẹ và con theo quy định.": [
+  "The property registration fee in 2026 is 0.5% of the registration fee base price. For transfers, the base is usually the price stated in the contract if it is higher than the price issued by the City People's Committee. The buyer pays this fee when registering the change of name. Some cases are exempt from the registration fee, for example transfers between spouses, or between parents and children as prescribed.",
+  "2026년 부동산 등록세는 등록세 과세 가격의 0.5%입니다. 양도 거래의 경우 과세 가격은 계약서상 가격이 시 인민위원회 고시 가격보다 높으면 보통 계약서 가격이 됩니다. 매수인은 명의 변경 등록 시 이 금액을 납부합니다. 규정에 따라 부부 간, 부모와 자녀 간 이전 등 일부 경우는 등록세가 면제됩니다."
+ ],
+ "Miễn thuế nhà ở duy nhất: sở hữu tối thiểu 183 ngày (Nghị định 253/2026)": [
+  "Tax exemption for an only home: owned for at least 183 days (Decree 253/2026)",
+  "유일한 주택 면세: 최소 183일 이상 보유(시행령 253/2026)"
+ ],
+ "Mức phí": [
+  "Fee",
+  "수수료"
+ ],
+ "Mức thu": [
+  "Rate",
+  "부과 수준"
+ ],
+ "Mức thu là 0,5% giá tính lệ phí trước bạ, do bên mua nộp khi đăng ký sang tên (trừ khi các bên thỏa thuận khác).": [
+  "The rate is 0.5% of the registration fee base price, paid by the buyer when registering the change of name (unless the parties agree otherwise).",
+  "등록세 과세 가격의 0.5%이며, 명의 변경 등록 시 매수인이 납부합니다(당사자 간 달리 합의한 경우 제외)."
+ ],
+ "Mức thuế TNCN 2% và lệ phí trước bạ 0,5% áp dụng chung cho căn hộ, nhà phố và đất ở. Điểm khác là với đất ở, nhà phố, cơ quan thuế còn đối chiếu giá trên hợp đồng với bảng giá đất của thành phố. Từ 10/6/2026, Đà Nẵng áp dụng bảng giá đất theo": [
+  "The 2% personal income tax and 0.5% registration fee apply equally to apartments, townhouses and residential land. The difference is that for residential land and townhouses, the tax authority also compares the contract price with the city's land price table. From June 10, 2026, Da Nang applies the land price table under",
+  "2% 개인소득세와 0.5% 등록세는 아파트, 타운하우스, 주거용지에 공통으로 적용됩니다. 차이점은 주거용지와 타운하우스의 경우 세무 당국이 계약서 가격을 시의 토지 가격표와도 대조한다는 것입니다. 2026년 6월 10일부터 다낭은 다음 결의에 따른 토지 가격표를 적용합니다:"
+ ],
+ "Nghị quyết 28/2026/NQ-HĐND": [
+  "Resolution 28/2026/NQ-HĐND",
+  "결의 28/2026/NQ-HĐND"
+ ],
+ "Ngoài phí công chứng, tổ chức công chứng có thể thu thêm thù lao soạn thảo, sao y, công chứng ngoài trụ sở – nên hỏi trước.": [
+  "Besides the notarization fee, notary offices may charge extra for drafting, certified copies and notarization outside the office – ask in advance.",
+  "공증 수수료 외에도 공증 사무소는 문서 작성, 사본 인증, 출장 공증 보수를 추가로 받을 수 있으니 미리 문의하십시오."
+ ],
+ "Người nộp theo luật": [
+  "Payer by law",
+  "법정 납부자"
+ ],
+ "Phí công chứng": [
+  "Notarization fee",
+  "공증 수수료"
+ ],
+ "Phí công chứng hợp đồng": [
+  "Contract notarization fee",
+  "계약 공증 수수료"
+ ],
+ "Phí công chứng mua bán căn hộ 4 tỷ là bao nhiêu?": [
+  "How much is the notarization fee for buying a 4 billion VND apartment?",
+  "40억 동 아파트 매매 공증 수수료는 얼마입니까?"
+ ],
+ "Phí công chứng – khoản nhỏ nhất trong thuế phí mua bán nhà đất": [
+  "Notarization fee – the smallest item among property transaction taxes and fees",
+  "공증 수수료 – 부동산 매매 세금·수수료 중 가장 작은 항목"
+ ],
+ "Phí thẩm định hồ sơ, lệ phí cấp giấy chứng nhận": [
+  "Dossier appraisal fee, certificate issuance fee",
+  "서류 심사 수수료, 증서 발급 수수료"
+ ],
+ "Quy định về lệ phí trước bạ hiện hành": [
+  "Current regulations on registration fees",
+  "현행 등록세 규정"
+ ],
+ "Theo biểu lũy tiến, tối đa 70 triệu/trường hợp": [
+  "Progressive scale, up to 70 million VND per case",
+  "누진 요율, 건당 최대 7,000만 동"
+ ],
+ "Theo biểu phí, căn 4 tỷ có phí công chứng 2,2 triệu + 0,05% phần vượt 3 tỷ, tức khoảng 2,7 triệu, chưa gồm thù lao khác.": [
+  "Under the fee schedule, a 4 billion VND unit has a notarization fee of 2.2 million VND + 0.05% of the amount over 3 billion VND, i.e. about 2.7 million VND, excluding other service charges.",
+  "수수료표에 따르면 40억 동 세대의 공증 수수료는 220만 동 + 30억 동 초과분의 0.05%, 즉 약 270만 동이며 기타 보수는 포함되지 않습니다."
+ ],
+ "Theo luật, bên bán là người có thu nhập nên nộp thuế TNCN; bên mua là người đăng ký sở hữu nên nộp lệ phí trước bạ. Tuy nhiên, các bên được thỏa thuận khác, ví dụ “giá bán đã bao gồm thuế phí” hoặc “bên mua chịu toàn bộ”. Thỏa thuận về thuế phí mua bán nhà đất phải ghi rõ trong hợp đồng đặt cọc và hợp đồng mua bán để tránh tranh cãi khi đến bước kê khai.": [
+  "By law, the seller is the one earning income and so pays personal income tax; the buyer is the one registering ownership and so pays the registration fee. However, the parties may agree otherwise, for example “the sale price includes taxes and fees” or “the buyer bears everything”. Any agreement on property transaction taxes and fees must be stated clearly in the deposit agreement and the sale and purchase agreement to avoid disputes at the filing stage.",
+  "법률상 소득이 발생하는 매도인이 개인소득세를, 소유권을 등록하는 매수인이 등록세를 납부합니다. 다만 당사자 간에 “매매가에 세금·수수료 포함” 또는 “매수인이 전액 부담”처럼 달리 합의할 수 있습니다. 부동산 매매 세금·수수료에 관한 합의는 신고 단계에서 분쟁이 생기지 않도록 계약금 계약서와 매매계약서(SPA)에 명확히 기재해야 합니다."
+ ],
+ "Theo nghị quyết của HĐND thành phố": [
+  "Per resolution of the City People's Council",
+  "시 인민의회 결의에 따름"
+ ],
+ "Theo thỏa thuận": [
+  "By agreement",
+  "합의에 따름"
+ ],
+ "Thuế TNCN": [
+  "Personal income tax",
+  "개인소득세"
+ ],
+ "Thuế TNCN khi bán nhà năm 2026 là bao nhiêu?": [
+  "How much is personal income tax when selling a home in 2026?",
+  "2026년 주택 매도 시 개인소득세는 얼마입니까?"
+ ],
+ "Thuế phí mua bán nhà đất 2026 gồm những khoản nào?": [
+  "What do property transaction taxes and fees in 2026 include?",
+  "2026년 부동산 매매 세금·수수료에는 어떤 항목이 있습니까?"
+ ],
+ "Thuế phí mua bán nhà đất 2026 gồm thuế TNCN 2% giá chuyển nhượng (bên bán), lệ phí trước bạ 0,5% (bên mua), phí công chứng theo biểu lũy tiến tối đa 70 triệu, cùng phí thẩm định hồ sơ và lệ phí cấp giấy chứng nhận.": [
+  "Property transaction taxes and fees in 2026 include personal income tax of 2% of the transfer price (seller), a 0.5% registration fee (buyer), a notarization fee on a progressive scale up to 70 million VND, plus the dossier appraisal fee and the certificate issuance fee.",
+  "2026년 부동산 매매 세금·수수료는 양도가액의 2% 개인소득세(매도인), 0.5% 등록세(매수인), 최대 7,000만 동의 누진 요율 공증 수수료, 그리고 서류 심사 수수료와 증서 발급 수수료로 구성됩니다."
+ ],
+ "Thuế phí mua bán nhà đất 2026: thuế TNCN 2% giá chuyển nhượng, giữ nguyên theo Luật Thuế TNCN 2025 (từ 1/7/2026)": [
+  "Property transaction taxes and fees 2026: personal income tax of 2% of the transfer price, unchanged under the 2025 Personal Income Tax Law (from July 1, 2026)",
+  "2026년 부동산 매매 세금·수수료: 양도가액의 2% 개인소득세, 2025년 개인소득세법(2026년 7월 1일 시행)에서도 동일 유지"
+ ],
+ "Thuế phí mua bán nhà đất 2026: thuế TNCN 2% giá chuyển nhượng, lệ phí trước bạ 0,5%, phí công chứng theo biểu lũy tiến; ai trả khoản nào và ví dụ tính cho căn hộ 4 tỷ.": [
+  "Property transaction taxes and fees 2026: personal income tax of 2% of the transfer price, 0.5% registration fee, notarization fee on a progressive scale; who pays what, and a worked example for a 4 billion VND apartment.",
+  "2026년 부동산 매매 세금·수수료: 양도가액의 2% 개인소득세, 0.5% 등록세, 누진 요율의 공증 수수료. 누가 어떤 항목을 부담하는지와 40억 동 아파트 계산 예시를 안내합니다."
+ ],
+ "Thuế phí mua bán nhà đất với đất ở, nhà phố": [
+  "Property transaction taxes and fees for residential land and townhouses",
+  "주거용지·타운하우스의 부동산 매매 세금·수수료"
+ ],
+ "Thuế phí mua bán nhà đất: ai trả khoản nào?": [
+  "Property transaction taxes and fees: who pays what?",
+  "부동산 매매 세금·수수료: 누가 어떤 항목을 부담합니까?"
+ ],
+ "Thuế thu nhập cá nhân": [
+  "Personal income tax",
+  "개인소득세"
+ ],
+ "Thuế thu nhập cá nhân 2% – thay đổi gì từ 1/7/2026?": [
+  "2% personal income tax – what changes from July 1, 2026?",
+  "2% 개인소득세 – 2026년 7월 1일부터 무엇이 바뀝니까?"
+ ],
+ "Thuế, phí khi mua bán nhà đất Đà Nẵng 2026: thuế TNCN, trước bạ, công chứng, ai trả?": [
+  "Taxes and fees when buying and selling property in Da Nang 2026: personal income tax, registration fee, notarization – who pays?",
+  "2026년 다낭 부동산 매매 시 세금·수수료: 개인소득세, 등록세, 공증 – 누가 부담합니까?"
+ ],
+ "Thông tư 257/2016/TT-BTC (sửa đổi bởi Thông tư 111/2017/TT-BTC)": [
+  "Circular 257/2016/TT-BTC (amended by Circular 111/2017/TT-BTC)",
+  "통지 257/2016/TT-BTC(통지 111/2017/TT-BTC로 개정)"
+ ],
+ "Thường là bên mua": [
+  "Usually the buyer",
+  "보통 매수인"
+ ],
+ "Trên 1 – 3 tỷ": [
+  "Over 1 – 3 billion VND",
+  "10억 동 초과 – 30억 동"
+ ],
+ "Trên 10 – 100 tỷ": [
+  "Over 10 – 100 billion VND",
+  "100억 동 초과 – 1,000억 동"
+ ],
+ "Trên 100 triệu – 1 tỷ": [
+  "Over 100 million – 1 billion VND",
+  "1억 동 초과 – 10억 동"
+ ],
+ "Trên 100 tỷ": [
+  "Over 100 billion VND",
+  "1,000억 동 초과"
+ ],
+ "Trên 3 – 5 tỷ": [
+  "Over 3 – 5 billion VND",
+  "30억 동 초과 – 50억 동"
+ ],
+ "Trên 5 – 10 tỷ": [
+  "Over 5 – 10 billion VND",
+  "50억 동 초과 – 100억 동"
+ ],
+ "Trường hợp được miễn thuế TNCN": [
+  "Cases exempt from personal income tax",
+  "개인소득세 면제 대상"
+ ],
+ "Tổng ba khoản chính": [
+  "Total of the three main items",
+  "주요 3개 항목 합계"
+ ],
+ "Tổng thuế phí mua bán nhà đất ở ví dụ trên chưa gồm phí thẩm định hồ sơ, lệ phí cấp giấy chứng nhận và thù lao công chứng.": [
+  "The total property transaction taxes and fees in the example above exclude the dossier appraisal fee, the certificate issuance fee and notary service charges.",
+  "위 예시의 부동산 매매 세금·수수료 합계에는 서류 심사 수수료, 증서 발급 수수료, 공증 보수가 포함되지 않았습니다."
+ ],
+ "Từ 50 – 100 triệu": [
+  "50 – 100 million VND",
+  "5,000만 – 1억 동"
+ ],
+ "Ví dụ tính thuế phí mua bán nhà đất cho căn hộ 4 tỷ": [
+  "Example calculation of property transaction taxes and fees for a 4 billion VND apartment",
+  "40억 동 아파트의 부동산 매매 세금·수수료 계산 예시"
+ ],
+ "Với cá nhân cư trú, thuế bằng 2% giá chuyển nhượng từng lần, giữ nguyên theo Luật Thuế TNCN 2025 có hiệu lực từ 1/7/2026.": [
+  "For resident individuals, the tax is 2% of the transfer price per transaction, unchanged under the 2025 Personal Income Tax Law effective from July 1, 2026.",
+  "거주자 개인의 경우 세금은 거래 건별 양도가액의 2%이며, 2026년 7월 1일 시행되는 2025년 개인소득세법에서도 동일하게 유지됩니다."
+ ],
+ "Với căn hộ chuyển nhượng hợp đồng mua bán (chưa có sổ), thuế phí mua bán nhà đất vẫn phát sinh: bên bán có nghĩa vụ thuế TNCN trên giá chuyển nhượng; lệ phí trước bạ được nộp khi người mua làm thủ tục cấp sổ. Quy trình chi tiết xem bài": [
+  "For apartments resold via transfer of the sale and purchase agreement (before the Pink Book is issued), property transaction taxes and fees still arise: the seller owes personal income tax on the transfer price; the registration fee is paid when the buyer applies for the Pink Book. For the detailed procedure, see the article",
+  "매매계약서(SPA) 양도 방식으로 전매되는 아파트(증서 발급 전)도 부동산 매매 세금·수수료가 발생합니다: 매도인은 양도가액에 대해 개인소득세 납부 의무가 있고, 등록세는 매수인이 증서 발급 절차를 밟을 때 납부합니다. 자세한 절차는 다음 글을 참고하십시오:"
+ ],
+ "cho từng lần giao dịch, không đổi so với trước (tóm tắt trên": [
+  "for each transaction, unchanged from before (summary on",
+  ". 거래 건별로 부과되며 이전과 동일합니다(요약 출처:"
+ ],
+ "giá chuyển nhượng × 2%": [
+  "transfer price × 2%",
+  "양도가액 × 2%"
+ ],
+ "gồm ba khoản chính: thuế thu nhập cá nhân 2% trên giá chuyển nhượng, lệ phí trước bạ 0,5% và phí công chứng tính theo giá trị hợp đồng (tối đa 70 triệu đồng). Bài viết tổng hợp mức thu, người nộp và ví dụ tính cụ thể, cập nhật tháng 10/2026. Đây là thông tin tham khảo, anh chị nên đối chiếu hướng dẫn của cơ quan thuế khi kê khai.": [
+  "consist of three main items: personal income tax of 2% on the transfer price, a 0.5% registration fee and a notarization fee based on the contract value (up to 70 million VND). This article summarizes the rates, who pays and a concrete worked example, updated in October 2026. This is reference information; please check the tax authority's guidance when filing.",
+  "크게 세 가지 항목으로 구성됩니다: 양도가액의 2% 개인소득세, 0.5% 등록세, 계약 금액 기준 공증 수수료(최대 7,000만 동). 이 글은 2026년 10월 기준으로 부과 수준, 납부자, 구체적인 계산 예시를 정리했습니다. 참고용 정보이므로 신고 시에는 세무 당국의 안내와 대조하시기 바랍니다."
+ ],
+ "thuế phí mua bán nhà đất": [
+  "property transaction taxes and fees",
+  "부동산 매매 세금·수수료는"
+ ],
+ "Được miễn thuế TNCN nếu là nhà ở, đất ở duy nhất và sở hữu tối thiểu 183 ngày tính đến thời điểm chuyển nhượng; không áp dụng với nhà ở hình thành trong tương lai.": [
+  "You are exempt from personal income tax if it is your only home or only residential land and you have owned it for at least 183 days up to the time of transfer; this does not apply to off-plan housing.",
+  "유일한 주택 또는 주거용지이고 양도 시점까지 최소 183일 이상 보유한 경우 개인소득세가 면제됩니다. 미래 형성 주택(분양권)에는 적용되지 않습니다."
+ ],
+ "Đọc thêm về thuế phí mua bán nhà đất": [
+  "Further reading on property transaction taxes and fees",
+  "부동산 매매 세금·수수료 관련 추가 자료"
+ ]
+}

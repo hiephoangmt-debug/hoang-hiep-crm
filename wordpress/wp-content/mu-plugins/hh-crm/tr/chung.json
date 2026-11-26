@@ -1,15 +1,235 @@
 {
+ "#Biệt thự Hội An": [
+  "#Hoi An villas",
+  "#호이안 빌라"
+ ],
+ "#Bất động sản Đà Nẵng": [
+  "#Da Nang real estate",
+  "#다낭 부동산"
+ ],
+ "#Capital Square Đà Nẵng": [
+  "#Capital Square Da Nang",
+  "#Capital Square Da Nang"
+ ],
+ "#Cho thuê căn hộ": [
+  "#Apartments for rent",
+  "#아파트 임대"
+ ],
+ "#Căn hộ biển Đà Nẵng": [
+  "#Da Nang beach apartments",
+  "#다낭 해변 아파트"
+ ],
+ "#Căn hộ sông Hàn": [
+  "#Han River apartments",
+  "#다낭 한강 아파트"
+ ],
+ "#Căn hộ ven biển": [
+  "#Seaside apartments",
+  "#해변 아파트"
+ ],
+ "#Căn hộ Đà Nẵng": [
+  "#Da Nang apartments",
+  "#다낭 아파트"
+ ],
+ "#Cảng Liên Chiểu": [
+  "#Lien Chieu Port",
+  "#리엔찌에우 항"
+ ],
+ "#Cầu Hòa Xuân": [
+  "#Hoa Xuan Bridge",
+  "#호아쑤언 다리"
+ ],
+ "#Du lịch Đà Nẵng": [
+  "#Da Nang tourism",
+  "#다낭 관광"
+ ],
+ "#Giá căn hộ Đà Nẵng": [
+  "#Da Nang apartment prices",
+  "#다낭 아파트 가격"
+ ],
+ "#Hòa Xuân": [
+  "#Hoa Xuan",
+  "#호아쑤언"
+ ],
+ "#Hạ tầng Đà Nẵng": [
+  "#Da Nang infrastructure",
+  "#다낭 인프라"
+ ],
+ "#Hội An": [
+  "#Hoi An",
+  "#호이안"
+ ],
+ "#Khu thương mại tự do": [
+  "#Free trade zone",
+  "#자유무역지대"
+ ],
+ "#Kinh nghiệm mua nhà": [
+  "#Home buying tips",
+  "#주택 구입 노하우"
+ ],
+ "#Liên Chiểu": [
+  "#Lien Chieu",
+  "#리엔찌에우"
+ ],
+ "#Mặt bằng": [
+  "#Floor plans",
+  "#평면도"
+ ],
+ "#Mặt bằng căn hộ": [
+  "#Apartment floor plans",
+  "#아파트 평면도"
+ ],
+ "#Ngũ Hành Sơn": [
+  "#Ngu Hanh Son",
+  "#응우한선"
+ ],
+ "#Nhà ở xã hội": [
+  "#Social housing",
+  "#사회주택"
+ ],
+ "#Nobu Residences Đà Nẵng": [
+  "#Nobu Residences Da Nang",
+  "#Nobu Residences Da Nang"
+ ],
+ "#Pháp lý bất động sản": [
+  "#Real estate legal status",
+  "#부동산 법적 상태"
+ ],
+ "#Pháp lý nhà đất": [
+  "#Property legal status",
+  "#주택·토지 법적 상태"
+ ],
+ "#Quy hoạch": [
+  "#Planning",
+  "#도시계획"
+ ],
+ "#Quy hoạch Đà Nẵng": [
+  "#Da Nang planning",
+  "#다낭 도시계획"
+ ],
+ "#Sân bay Đà Nẵng": [
+  "#Da Nang Airport",
+  "#다낭 공항"
+ ],
+ "#Sông Hàn": [
+  "#Han River",
+  "#다낭 한강"
+ ],
+ "#Sơn Trà": [
+  "#Son Tra",
+  "#선짜"
+ ],
+ "#The Legend Đà Nẵng": [
+  "#The Legend Da Nang",
+  "#The Legend Da Nang"
+ ],
+ "#Tiến độ dự án": [
+  "#Project progress",
+  "#프로젝트 공사 진행"
+ ],
+ "#Vinhomes Hải Vân Bay": [
+  "#Vinhomes Hai Van Bay",
+  "#Vinhomes Hai Van Bay"
+ ],
+ "#Đường sắt tốc độ cao": [
+  "#High-speed railway",
+  "#고속철도"
+ ],
+ "#Đầu tư cho thuê": [
+  "#Rental investment",
+  "#임대 투자"
+ ],
+ "(Bản đồ giá Biggee.vn)": [
+  "(Biggee.vn price map)",
+  "(Biggee.vn 시세 지도)"
+ ],
+ "(Bảng giá tầng 5 – 15)": [
+  "(Price list, floors 5 – 15)",
+  "(5 – 15층 분양가표)"
+ ],
+ "(Bảng hàng 10/2026, gồm VAT & phí bảo trì)": [
+  "(Available units list, October 2026, incl. VAT & maintenance fee)",
+  "(2026년 10월 매물 목록, VAT 및 유지보수비 포함)"
+ ],
+ "(Bảng hàng chủ đầu tư 09/2026, gồm VAT & phí bảo trì)": [
+  "(Developer's available units list, September 2026, incl. VAT & maintenance fee)",
+  "(2026년 9월 시행사 매물 목록, VAT 및 유지보수비 포함)"
+ ],
+ "(Giá rao thứ cấp (ít tin))": [
+  "(Secondary-market asking prices (few listings))",
+  "(2차 시장 호가(매물 적음))"
+ ],
+ "(Giá rao thứ cấp 7 – 10/2026)": [
+  "(Secondary-market asking prices, July – October 2026)",
+  "(2026년 7 – 10월 2차 시장 호가)"
+ ],
+ "(Giá rao trên sàn 21/10/2026)": [
+  "(Brokerage asking prices, October 21, 2026)",
+  "(2026년 10월 21일 중개업체 호가)"
+ ],
+ "(Niêm yết chủ đầu tư 25/07/2026)": [
+  "(Developer's listed prices, July 25, 2026)",
+  "(2026년 7월 25일 시행사 공시 가격)"
+ ],
  "(gọi/Zalo) để nhận bảng hàng đầy đủ, phiếu tính giá theo từng phương án thanh toán, chính sách mới nhất và ảnh chỉ vị trí căn trên mặt bằng.": [
   "(call/Zalo) to receive the full list of available units, price quotes for each payment option, the latest sales policy and images showing the unit's location on the floor plan.",
   "(전화/Zalo)로 문의하시면 전체 매물 목록, 납부 방식별 가격 산정표, 최신 분양 정책 및 평면도상 세대 위치 이미지를 받아보실 수 있습니다."
+ ],
+ "(gọi/Zalo).": [
+  "(call/Zalo).",
+  "(전화/Zalo)."
+ ],
+ "(gọi/Zalo). Hoàng Hiệp gửi giỏ hàng mới nhất và so sánh với các dự án cùng tầm giá.": [
+  "(call/Zalo). Hoang Hiep will send the latest available units and a comparison with projects in the same price range.",
+  "(전화/Zalo). 호앙 히엡이 최신 매물 목록과 같은 가격대 프로젝트와의 비교 자료를 보내 드립니다."
+ ],
+ "(gọi/Zalo). Hoàng Hiệp gửi kèm bảng so sánh với các dự án ven biển cùng tầm tiền.": [
+  "(call/Zalo). Hoang Hiep will also send a comparison table with seaside projects in the same price range.",
+  "(전화/Zalo). 호앙 히엡이 같은 가격대 해변 프로젝트와의 비교표도 함께 보내 드립니다."
+ ],
+ "(gọi/Zalo). Hoàng Hiệp gửi kèm bảng tính chi phí, dòng tiền theo đúng căn anh chị quan tâm.": [
+  "(call/Zalo). Hoang Hiep will also send a cost and cash-flow calculation for the exact unit you are interested in.",
+  "(전화/Zalo). 호앙 히엡이 고객님께서 관심 있는 세대에 맞춘 비용·현금흐름 계산표도 함께 보내 드립니다."
+ ],
+ "(gọi/Zalo). Thông tin dự án xem tại trang": [
+  "(call/Zalo). See project information on the page",
+  "(전화/Zalo). 프로젝트 정보는 다음 페이지에서 확인하실 수 있습니다:"
+ ],
+ "(gọi/Zalo). Xem chính sách tất cả dự án tại": [
+  "(call/Zalo). See the policies of all projects at",
+  "(전화/Zalo). 전체 프로젝트의 정책은 다음에서 확인하실 수 있습니다:"
+ ],
+ ", liên hệ": [
+  ", contact",
+  ", 연락처:"
+ ],
+ ". Bài viết mang tính tham khảo, thông tin dự án có thể thay đổi theo quyết định của cơ quan có thẩm quyền.": [
+  ". This article is for reference only; project information may change according to decisions of the competent authorities.",
+  ". 본 기사는 참고용이며, 프로젝트 정보는 관계 당국의 결정에 따라 변경될 수 있습니다."
+ ],
+ ". Liên hệ": [
+  ". Contact",
+  ". 연락처:"
+ ],
+ ". Phối cảnh mang tính minh họa; số liệu cập nhật 11/2026.": [
+  ". Renderings are for illustration only; figures updated November 2026.",
+  ". 조감도는 예시용이며, 수치는 2026년 11월 기준입니다."
  ],
  "03 tháng": [
   "3 months",
   "3개월"
  ],
+ "05/11/2026 · 3 phút đọc": [
+  "November 5, 2026 · 3 min read",
+  "2026년 11월 5일 · 3분 읽기"
+ ],
  "1 + phòng đa năng": [
   "1 + multipurpose room",
   "1 + 다용도실"
+ ],
+ "1 căn chuyển nhượng · 4 căn cho thuê": [
+  "1 resale unit · 4 rental units",
+  "전매 1세대 · 임대 4세대"
  ],
  "1 năm": [
   "1 year",
@@ -31,6 +251,42 @@
   "100 million VND/unit",
   "세대당 1억 동"
  ],
+ "11.487 m² đất": [
+  "11,487 m² of land",
+  "대지 11,487 m²"
+ ],
+ "119 – 188 triệu/m²": [
+  "119 – 188 million VND/m²",
+  "1억 1,900만 – 1억 8,800만 동/m²"
+ ],
+ "15+ năm kinh nghiệm": [
+  "15+ years of experience",
+  "15년 이상 경력"
+ ],
+ "15/11/2026 · 8 phút đọc": [
+  "November 15, 2026 · 8 min read",
+  "2026년 11월 15일 · 8분 읽기"
+ ],
+ "150 – 181 triệu/m²": [
+  "150 – 181 million VND/m²",
+  "1억 5,000만 – 1억 8,100만 동/m²"
+ ],
+ "151 – 171 triệu/m²": [
+  "151 – 171 million VND/m²",
+  "1억 5,100만 – 1억 7,100만 동/m²"
+ ],
+ "16/11/2026 · 7 phút đọc": [
+  "November 16, 2026 · 7 min read",
+  "2026년 11월 16일 · 7분 읽기"
+ ],
+ "17/11/2026 · 6 phút đọc": [
+  "November 17, 2026 · 6 min read",
+  "2026년 11월 17일 · 6분 읽기"
+ ],
+ "19/11/2026 · 6 phút đọc": [
+  "November 19, 2026 · 6 min read",
+  "2026년 11월 19일 · 6분 읽기"
+ ],
  "1PN": [
   "1BR",
   "1베드룸"
@@ -39,9 +295,73 @@
   "2 bedrooms",
   "2베드룸"
  ],
+ "2,85 tỷ": [
+  "2.85 billion VND",
+  "28억 5천만 동"
+ ],
+ "20/11/2026 · 5 phút đọc": [
+  "November 20, 2026 · 5 min read",
+  "2026년 11월 20일 · 5분 읽기"
+ ],
+ "21/11/2026 · 5 phút đọc": [
+  "November 21, 2026 · 5 min read",
+  "2026년 11월 21일 · 5분 읽기"
+ ],
+ "21/11/2026 · 6 phút đọc": [
+  "November 21, 2026 · 6 min read",
+  "2026년 11월 21일 · 6분 읽기"
+ ],
+ "22/11/2026 · 5 phút đọc": [
+  "November 22, 2026 · 5 min read",
+  "2026년 11월 22일 · 5분 읽기"
+ ],
+ "22/11/2026 · 7 phút đọc": [
+  "November 22, 2026 · 7 min read",
+  "2026년 11월 22일 · 7분 읽기"
+ ],
+ "23/11/2026 · 5 phút đọc": [
+  "November 23, 2026 · 5 min read",
+  "2026년 11월 23일 · 5분 읽기"
+ ],
+ "23/11/2026 · 6 phút đọc": [
+  "November 23, 2026 · 6 min read",
+  "2026년 11월 23일 · 6분 읽기"
+ ],
+ "23/11/2026 · 7 phút đọc": [
+  "November 23, 2026 · 7 min read",
+  "2026년 11월 23일 · 7분 읽기"
+ ],
  "24 tháng": [
   "24 months",
   "24개월"
+ ],
+ "24/11/2026 · 5 phút đọc": [
+  "November 24, 2026 · 5 min read",
+  "2026년 11월 24일 · 5분 읽기"
+ ],
+ "24/11/2026 · 6 phút đọc": [
+  "November 24, 2026 · 6 min read",
+  "2026년 11월 24일 · 6분 읽기"
+ ],
+ "25% + kinh phí bảo trì": [
+  "25% + maintenance fee",
+  "25% + 유지보수비"
+ ],
+ "25/11/2026 · 5 phút đọc": [
+  "November 25, 2026 · 5 min read",
+  "2026년 11월 25일 · 5분 읽기"
+ ],
+ "25/11/2026 · 6 phút đọc": [
+  "November 25, 2026 · 6 min read",
+  "2026년 11월 25일 · 6분 읽기"
+ ],
+ "26/11/2026 · 16 phút đọc": [
+  "November 26, 2026 · 16 min read",
+  "2026년 11월 26일 · 16분 읽기"
+ ],
+ "26/11/2026 · 5 phút đọc": [
+  "November 26, 2026 · 5 min read",
+  "2026년 11월 26일 · 5분 읽기"
  ],
  "265 căn hộ": [
   "265 apartments",
@@ -51,6 +371,10 @@
   "2BR",
   "2베드룸"
  ],
+ "3 kịch bản dòng tiền": [
+  "3 cash-flow scenarios",
+  "3가지 현금흐름 시나리오"
+ ],
  "3 năm": [
   "3 years",
   "3년"
@@ -58,6 +382,10 @@
  "3 phòng ngủ": [
   "3 bedrooms",
   "3베드룸"
+ ],
+ "3.720,1 m² đất": [
+  "3,720.1 m² of land",
+  "대지 3,720.1 m²"
  ],
  "3PN": [
   "3BR",
@@ -71,6 +399,10 @@
   "4 floors",
   "4층"
  ],
+ "45 – 68 triệu/m²": [
+  "45 – 68 million VND/m²",
+  "4,500만 – 6,800만 동/m²"
+ ],
  "50 năm": [
   "50-year leasehold",
   "50년 소유"
@@ -79,17 +411,45 @@
   "50 million VND",
   "5,000만 동"
  ],
+ "58 – 69 triệu/m²": [
+  "58 – 69 million VND/m²",
+  "5,800만 – 6,900만 동/m²"
+ ],
+ "59 – 83 triệu/m²": [
+  "59 – 83 million VND/m²",
+  "5,900만 – 8,300만 동/m²"
+ ],
  "60 tháng": [
   "60 months",
   "60개월"
+ ],
+ "60 – 120 triệu/m²": [
+  "60 – 120 million VND/m²",
+  "6,000만 – 1억 2,000만 동/m²"
  ],
  "600 m²": [
   "600 m²",
   "600 m²"
  ],
+ "65 – 73 triệu/m²": [
+  "65 – 73 million VND/m²",
+  "6,500만 – 7,300만 동/m²"
+ ],
+ "67 – 120 triệu/m²": [
+  "67 – 120 million VND/m²",
+  "6,700만 – 1억 2,000만 동/m²"
+ ],
  "70 m²": [
   "70 m²",
   "70 m²"
+ ],
+ "74 – 130 triệu/m²": [
+  "74 – 130 million VND/m²",
+  "7,400만 – 1억 3,000만 동/m²"
+ ],
+ "75 – 83 triệu/m²": [
+  "75 – 83 million VND/m²",
+  "7,500만 – 8,300만 동/m²"
  ],
  "8%/năm": [
   "8%/year",
@@ -98,6 +458,22 @@
  "80 m²": [
   "80 m²",
   "80 m²"
+ ],
+ "83 – 130 triệu/m²": [
+  "83 – 130 million VND/m²",
+  "8,300만 – 1억 3,000만 동/m²"
+ ],
+ "86 – 89 triệu/m²": [
+  "86 – 89 million VND/m²",
+  "8,600만 – 8,900만 동/m²"
+ ],
+ "8:00 – 21:00, tất cả các ngày": [
+  "8:00 – 21:00, every day",
+  "매일 8:00 – 21:00"
+ ],
+ "92 – 146 triệu/m²": [
+  "92 – 146 million VND/m²",
+  "9,200만 – 1억 4,600만 동/m²"
  ],
  "An ninh 24/7": [
   "24/7 security",
@@ -147,6 +523,10 @@
   "Xuan Thieu and Nam O beaches",
   "쑤언티에우 해변, 남오 해변"
  ],
+ "Biệt thự": [
+  "Villas",
+  "빌라"
+ ],
  "Biệt thự (tin rao)": [
   "Villa (listing)",
   "빌라(매물 광고)"
@@ -163,9 +543,17 @@
   "Beach villa",
   "해변 빌라"
  ],
+ "Biệt thự compound Hội An: Casamia Balanca khác biệt ở đâu khi mua để ở?": [
+  "Hoi An compound villas: what sets Casamia Balanca apart when buying to live in?",
+  "호이안 컴파운드 빌라: 실거주용으로 매입할 때 Casamia Balanca는 무엇이 다를까요?"
+ ],
  "Biệt thự golf, shop villa, shophouse": [
   "Golf villas, shop villas, shophouses",
   "골프 빌라, 샵 빌라, 샵하우스"
+ ],
+ "Biệt thự nghỉ dưỡng": [
+  "Resort villas",
+  "리조트 빌라"
  ],
  "Biệt thự nghỉ dưỡng ven biển": [
   "Seaside resort villas",
@@ -174,6 +562,10 @@
  "Biệt thự sân golf": [
   "Golf course villas",
   "골프장 빌라"
+ ],
+ "Biệt thự sở hữu lâu dài": [
+  "Freehold villas",
+  "영구 소유 빌라"
  ],
  "Biệt thự đơn lập": [
   "Detached villa",
@@ -187,6 +579,10 @@
   "Villas, townhouses",
   "빌라, 타운하우스"
  ],
+ "Biệt thự, nhà phố, đất nền Đà Nẵng 2026": [
+  "Da Nang villas, townhouses and land plots 2026",
+  "2026 다낭 빌라·타운하우스·토지(필지)"
+ ],
  "Block đất nền": [
   "Land plot block",
   "토지(필지) 블록"
@@ -199,13 +595,33 @@
   "Handover (expected)",
   "입주(인도) 예정"
  ],
+ "Bán lại Sun Saphia Residence sau khi có sổ: thuế 2%, lệ phí trước bạ 0,5% và các bước sang tên": [
+  "Reselling Sun Saphia Residence after receiving the certificate: 2% tax, 0.5% registration fee and the title transfer steps",
+  "증서 발급 후 Sun Saphia Residence 재매도: 세금 2%, 등록세 0.5% 및 명의 이전 절차"
+ ],
  "Bán đảo Sơn Trà": [
   "Son Tra Peninsula",
   "선짜 반도"
  ],
+ "Bán đảo Sơn Trà là điểm đến gần nhất để khách ở biển Sơn Thủy ngắm toàn cảnh Đà Nẵng. Hướng dẫn đi từ Sun Saphia Residence lên Sơn Trà: khoảng cách ước tính, chùa Linh Ứng Bãi Bụt, quy định bảo tồn và lịch trình gợi ý.": [
+  "Son Tra Peninsula is the nearest spot for guests staying at Son Thuy Beach to take in a panoramic view of Da Nang. A guide to getting from Sun Saphia Residence to Son Tra: estimated distance, Linh Ung Pagoda at Bai But, conservation rules and a suggested itinerary.",
+  "선짜 반도는 선투이 해변에 머무는 고객이 다낭 전경을 감상할 수 있는 가장 가까운 명소입니다. Sun Saphia Residence에서 선짜까지 가는 방법: 예상 거리, 바이붓 린응 사원, 보존 규정 및 추천 일정을 안내합니다."
+ ],
  "Bán đảo Sơn Trà, chùa Linh Ứng": [
   "Son Tra Peninsula, Linh Ung Pagoda",
   "선짜 반도, 린응 사원"
+ ],
+ "Báo Văn hóa": [
+  "Van Hoa Newspaper",
+  "Van Hoa 신문"
+ ],
+ "Báo Đà Nẵng": [
+  "Da Nang Newspaper",
+  "다낭 신문"
+ ],
+ "Báo Đầu tư": [
+  "Dau Tu Newspaper",
+  "Dau Tu 신문"
  ],
  "Bãi biển": [
   "Beach",
@@ -219,9 +635,25 @@
   "Non Nuoc – My Khe Beach",
   "논느억 – 미케 비치"
  ],
+ "Bãi tắm Sơn Thủy": [
+  "Son Thuy Beach",
+  "선투이 해변"
+ ],
+ "Bạch Vân: khoảng 345 căn thấp tầng bàn giao thô quý 4/2026": [
+  "Bach Van: about 345 low-rise units handed over as bare shell in Q4 2026",
+  "Bach Van: 저층 약 345세대, 2026년 4분기 골조 상태 인도"
+ ],
  "Bản sao văn bản pháp lý: nhắn Zalo 0904 567 009 để nhận.": [
   "Copies of the legal documents: message Zalo 0904 567 009 to receive them.",
   "법적 서류 사본: Zalo 0904 567 009로 메시지를 보내 주시면 받아보실 수 있습니다."
+ ],
+ "Bản đồ dự án": [
+  "Project map",
+  "프로젝트 지도"
+ ],
+ "Bản đồ kết nối Sun Saphia Residence với trung tâm Đà Nẵng, sân bay, Hội An (tài liệu chủ đầu tư)": [
+  "Map connecting Sun Saphia Residence with central Da Nang, the airport and Hoi An (developer's material)",
+  "Sun Saphia Residence와 다낭 도심, 공항, 호이안 연결 지도(시행사 자료)"
  ],
  "Bảng giá": [
   "Price list",
@@ -231,21 +663,69 @@
   "Price list & sales policy",
   "분양가표·분양 정책"
  ],
+ "Bảng giá Capital Square Đà Nẵng giỏ hàng 11/2026 theo tòa: S4 Hudson Place 4,32 – 13,41 tỷ, S3 Broadway 4,78 – 11,61 tỷ, C7 Victory, C6 The Kings, C1 The Times, C4 The Queens. Giá theo loại căn, ưu đãi và sở hữu.": [
+  "Capital Square Da Nang price list of available units, November 2026, by tower: S4 Hudson Place 4.32 – 13.41 billion VND, S3 Broadway 4.78 – 11.61 billion VND, C7 Victory, C6 The Kings, C1 The Times, C4 The Queens. Prices by unit type, incentives and ownership.",
+  "Capital Square Da Nang 2026년 11월 매물 동별 분양가표: S4 Hudson Place 43억 2천만 – 134억 1천만 동, S3 Broadway 47억 8천만 – 116억 1천만 동, C7 Victory, C6 The Kings, C1 The Times, C4 The Queens. 세대 유형별 가격, 혜택 및 소유 형태."
+ ],
+ "Bảng giá biệt thự, villa ven biển": [
+  "Seaside villa price list",
+  "해변 빌라 가격표"
+ ],
+ "Bảng giá căn hộ theo dự án": [
+  "Apartment price lists by project",
+  "프로젝트별 아파트 분양가표"
+ ],
+ "Bảng giá khách sạn ven biển": [
+  "Seaside hotel price list",
+  "해변 호텔 가격표"
+ ],
  "Bảng giá từng căn, từng tầng": [
   "Price list by unit and floor",
   "세대별·층별 분양가표"
+ ],
+ "Bảng giá đất lớn, đất xây khách sạn": [
+  "Price list: large land plots, hotel land",
+  "대형 토지·호텔 부지 가격표"
+ ],
+ "Bảo lãnh ngân hàng": [
+  "Bank guarantee",
+  "은행 보증"
+ ],
+ "Bất động sản Cẩm Lệ 2026: căn hộ Sun NeO City, đất nền Hòa Xuân và mặt bằng giá": [
+  "Cam Le real estate 2026: Sun NeO City apartments, Hoa Xuan land plots and price levels",
+  "2026 껌레 부동산: Sun NeO City 아파트, 호아쑤언 토지(필지) 및 시세 수준"
+ ],
+ "Bất động sản Hội An 2026 sau hợp nhất Đà Nẵng – Quảng Nam": [
+  "Hoi An real estate 2026 after the Da Nang – Quang Nam merger",
+  "다낭 – 꽝남 통합 이후 2026 호이안 부동산"
+ ],
+ "Bất động sản Nam Đà Nẵng 2026: hạ tầng Hòa Xuân – Hòa Quý và giá nhà đất": [
+  "South Da Nang real estate 2026: Hoa Xuan – Hoa Quy infrastructure and property prices",
+  "2026 남다낭 부동산: 호아쑤언 – 호아꾸이 인프라와 부동산 가격"
  ],
  "Bến du thuyền": [
   "Marina",
   "마리나"
  ],
+ "Bệnh viện gần Sun Saphia Residence: Phụ sản – Nhi, Vinmec, Hoàn Mỹ, Bệnh viện Đà Nẵng cách bao xa": [
+  "Hospitals near Sun Saphia Residence: how far are the Obstetrics & Pediatrics Hospital, Vinmec, Hoan My and Da Nang Hospital",
+  "Sun Saphia Residence 인근 병원: 산부인과·소아과 병원, Vinmec, Hoan My, 다낭 병원까지의 거리"
+ ],
  "Bệnh viện Đà Nẵng": [
   "Da Nang Hospital",
   "다낭 병원"
  ],
+ "Bỏ qua đến nội dung": [
+  "Skip to content",
+  "본문으로 건너뛰기"
+ ],
  "CAPITAL SQUARE ĐÀ": [
   "CAPITAL SQUARE DA NANG",
   "CAPITAL SQUARE DA NANG"
+ ],
+ "Cao tầng": [
+  "High-rise",
+  "고층"
  ],
  "Capital Square Đà Nẵng": [
   "Capital Square Da Nang",
@@ -299,6 +779,38 @@
   "Capital Square Da Nang – Tower MAT 8-9",
   "Capital Square Da Nang – MAT 8-9동"
  ],
+ "Capital Square Đà Nẵng – tổng quan, giá bán, mặt bằng, chính sách": [
+  "Capital Square Da Nang – overview, prices, floor plans, sales policy",
+  "Capital Square Da Nang – 개요, 가격, 평면도, 분양 정책"
+ ],
+ "Capital Square Đà Nẵng: các tòa, loại căn và giá chuyển nhượng 2026": [
+  "Capital Square Da Nang: towers, unit types and resale prices 2026",
+  "Capital Square Da Nang: 2026년 동별·세대 유형별 전매 가격"
+ ],
+ "Capital Square: Bảng hàng chủ đầu tư 09/2026, gồm VAT & phí bảo trì. Giá tham khảo theo m² thông thủy.": [
+  "Capital Square: developer's available units list, September 2026, incl. VAT & maintenance fee. Reference prices per m² of net area.",
+  "Capital Square: 2026년 9월 시행사 매물 목록, VAT 및 유지보수비 포함. 전용면적 m²당 참고 가격입니다."
+ ],
+ "Casamia Balanca Hội An": [
+  "Casamia Balanca Hoi An",
+  "Casamia Balanca Hoi An"
+ ],
+ "Casamia Balanca Hội An – tổng quan, giá bán, mặt bằng, chính sách": [
+  "Casamia Balanca Hoi An – overview, prices, floor plans, sales policy",
+  "Casamia Balanca Hoi An – 개요, 가격, 평면도, 분양 정책"
+ ],
+ "Central (tổng thầu)": [
+  "Central (general contractor)",
+  "Central(종합 시공사)"
+ ],
+ "Chi tiết": [
+  "Details",
+  "상세 보기"
+ ],
+ "Chia sẻ bài viết:": [
+  "Share this article:",
+  "기사 공유:"
+ ],
  "Chiết khấu tính trên giá chưa VAT và phí bảo trì · Sun Early Key: thanh toán đủ 70% là nhận nhà sử dụng": [
   "Discounts are calculated on the price excluding VAT and the maintenance fee · Sun Early Key: pay 70% and take possession of your home",
   "할인은 VAT 및 유지보수비 제외 가격 기준 · Sun Early Key: 70% 납부 시 주택 인도·사용 가능"
@@ -315,6 +827,22 @@
   "For rent",
   "임대"
  ],
+ "Cho thuê Casamia Balanca: cách ước tính dòng tiền biệt thự Hội An": [
+  "Renting out Casamia Balanca: how to estimate cash flow from a Hoi An villa",
+  "Casamia Balanca 임대: 호이안 빌라 현금흐름 추정 방법"
+ ],
+ "Cho thuê dài hạn Sun Saphia Residence: giá thuê tháng khu Ngũ Hành Sơn, tỷ suất và so với cho thuê ngắn ngày": [
+  "Long-term rental at Sun Saphia Residence: monthly rents in Ngu Hanh Son, yields and comparison with short-term rental",
+  "Sun Saphia Residence 장기 임대: 응우한선 지역 월 임대료, 수익률 및 단기 임대와의 비교"
+ ],
+ "Chung cư Mường Thanh": [
+  "Muong Thanh apartments",
+  "Muong Thanh 아파트"
+ ],
+ "Chuyên gia bất động sản tại Đà Nẵng": [
+  "Real estate expert in Da Nang",
+  "다낭 부동산 전문가"
+ ],
  "Chuỗi resort ven biển Trường Sa": [
   "Truong Sa coastal resort strip",
   "쯔엉사 해안 리조트 벨트"
@@ -323,17 +851,65 @@
   "Da Nang – Hoi An coastal resort strip",
   "다낭 – 호이안 해안 리조트 벨트"
  ],
+ "Chính sách & bảng tính": [
+  "Policies & calculators",
+  "정책·계산기"
+ ],
+ "Chính sách & bảng tính giá": [
+  "Sales policies & price calculators",
+  "분양 정책·가격 계산기"
+ ],
  "Chính sách & thanh toán": [
   "Sales policy & payment",
   "분양 정책·납부"
+ ],
+ "Chính sách FourS Tower: thanh toán, chiết khấu và vay ngân hàng": [
+  "FourS Tower policy: payment, discounts and bank loans",
+  "FourS Tower 정책: 납부, 할인 및 은행 대출"
+ ],
+ "Chính sách Vinhomes Hải Vân Bay từ 19/11/2026: thanh toán sớm 7,5%, voucher 30%, cam kết thuê 7%/năm": [
+  "Vinhomes Hai Van Bay policy from November 19, 2026: 7.5% early payment, 30% voucher, 7%/year rental guarantee",
+  "2026년 11월 19일부터 Vinhomes Hai Van Bay 정책: 조기 납부 7.5%, 바우처 30%, 연 7% 임대 보장"
  ],
  "Chính sách bán hàng": [
   "Sales policy",
   "분양 정책"
  ],
+ "Chính sách bán hàng Casamia Balanca 2026: chiết khấu đến 4 tỷ, thuê lại 50 – 60 triệu/tháng": [
+  "Casamia Balanca sales policy 2026: discounts up to 4 billion VND, leaseback of 50 – 60 million VND/month",
+  "2026 Casamia Balanca 분양 정책: 최대 40억 동 할인, 월 5,000만 – 6,000만 동 리스백"
+ ],
+ "Chính sách bán hàng Cora Tower áp dụng tháng 11/2026: chiết khấu không vay, thanh toán sớm (hạn 25/11), đặt cọc, giãn tiến độ, hỗ trợ lãi suất, Sun Early Key.": [
+  "Cora Tower sales policy for November 2026: no-loan discount, early payment (deadline November 25), deposit, extended payment schedule, interest rate support, Sun Early Key.",
+  "2026년 11월 적용 Cora Tower 분양 정책: 대출 미이용 할인, 조기 납부(기한 11월 25일), 계약금, 납부 일정 연장, 이자 지원, Sun Early Key."
+ ],
+ "Chính sách bán hàng FourS Tower F1, F5 áp dụng tháng 11/2026: chiết khấu không vay, thanh toán sớm (hạn 25/11), đặt cọc, giãn tiến độ, hỗ trợ lãi suất, Sun Early Key.": [
+  "FourS Tower F1, F5 sales policy for November 2026: no-loan discount, early payment (deadline November 25), deposit, extended payment schedule, interest rate support, Sun Early Key.",
+  "2026년 11월 적용 FourS Tower F1, F5 분양 정책: 대출 미이용 할인, 조기 납부(기한 11월 25일), 계약금, 납부 일정 연장, 이자 지원, Sun Early Key."
+ ],
+ "Chính sách bán hàng FourS Tower F2 áp dụng tháng 11/2026: chiết khấu không vay, thanh toán sớm (hạn 25/11), đặt cọc, giãn tiến độ, hỗ trợ lãi suất, Sun Early Key.": [
+  "FourS Tower F2 sales policy for November 2026: no-loan discount, early payment (deadline November 25), deposit, extended payment schedule, interest rate support, Sun Early Key.",
+  "2026년 11월 적용 FourS Tower F2 분양 정책: 대출 미이용 할인, 조기 납부(기한 11월 25일), 계약금, 납부 일정 연장, 이자 지원, Sun Early Key."
+ ],
+ "Chính sách bán hàng S-Light Tower áp dụng tháng 11/2026: chiết khấu không vay, thanh toán sớm (hạn 25/11), đặt cọc, giãn tiến độ, hỗ trợ lãi suất, Sun Early Key.": [
+  "S-Light Tower sales policy for November 2026: no-loan discount, early payment (deadline November 25), deposit, extended payment schedule, interest rate support, Sun Early Key.",
+  "2026년 11월 적용 S-Light Tower 분양 정책: 대출 미이용 할인, 조기 납부(기한 11월 25일), 계약금, 납부 일정 연장, 이자 지원, Sun Early Key."
+ ],
+ "Chính sách bán hàng các dự án Sun Group Đà Nẵng tháng 11/2026: Spana, Cora, S-Light, FourS": [
+  "Sales policies of Sun Group projects in Da Nang, November 2026: Spana, Cora, S-Light, FourS",
+  "2026년 11월 다낭 Sun Group 프로젝트 분양 정책: Spana, Cora, S-Light, FourS"
+ ],
  "Chính sách chiết khấu đang áp dụng của chủ đầu tư": [
   "The developer's current discount policy",
   "시행사의 현행 할인 정책"
+ ],
+ "Chưa công bố": [
+  "Not yet announced",
+  "미발표"
+ ],
+ "Chỉ tiêu": [
+  "Indicator",
+  "지표"
  ],
  "Chợ Cẩm Lệ": [
   "Cam Le Market",
@@ -363,9 +939,29 @@
   "Cocobay",
   "Cocobay"
  ],
+ "Cora Tower dự kiến bàn giao 30/07/2027, Spana Tower dự kiến 30/06/2027; tháng 11/2026 hai tòa Spana đang lên khoảng tầng 10. Nhận nhà sớm khi thanh toán 70% (Sun Early Key). S-Light Tower ở đâu, đã mở bán từ khi nào.": [
+  "Cora Tower is expected to be handed over on July 30, 2027 and Spana Tower on June 30, 2027; in November 2026 the two Spana towers are at about the 10th floor. Early key handover once 70% is paid (Sun Early Key). Where S-Light Tower is and when its sales launched.",
+  "Cora Tower는 2027년 7월 30일, Spana Tower는 2027년 6월 30일 입주(인도) 예정이며, 2026년 11월 현재 Spana 2개 동은 약 10층까지 올라갔습니다. 70% 납부 시 조기 입주(Sun Early Key). S-Light Tower의 위치와 분양 시작 시기도 안내합니다."
+ ],
+ "Cora Tower khi nào bàn giao? Spana Tower, S-Light Tower và tiến độ Sun NeO City Hòa Xuân": [
+  "When will Cora Tower be handed over? Spana Tower, S-Light Tower and Sun NeO City Hoa Xuan construction progress",
+  "Cora Tower는 언제 입주할까요? Spana Tower, S-Light Tower 및 Sun NeO City Hoa Xuan 공사 진행"
+ ],
  "Cora Tower Đà Nẵng": [
   "Cora Tower Da Nang",
   "Cora Tower Da Nang"
+ ],
+ "Cora Tower Đà Nẵng – tổng quan, giá bán, mặt bằng, chính sách": [
+  "Cora Tower Da Nang – overview, prices, floor plans, sales policy",
+  "Cora Tower Da Nang – 개요, 가격, 평면도, 분양 정책"
+ ],
+ "Cora Tower: Bảng hàng 10/2026, gồm VAT & phí bảo trì. Giá tham khảo theo m² thông thủy.": [
+  "Cora Tower: available units list, October 2026, incl. VAT & maintenance fee. Reference prices per m² of net area.",
+  "Cora Tower: 2026년 10월 매물 목록, VAT 및 유지보수비 포함. 전용면적 m²당 참고 가격입니다."
+ ],
+ "Cora, Spana hay S-Light: mua căn hộ Sun NeO City Hòa Xuân nên chọn tòa nào?": [
+  "Cora, Spana or S-Light: which tower to choose when buying a Sun NeO City Hoa Xuan apartment?",
+  "Cora, Spana, S-Light: Sun NeO City Hoa Xuan 아파트 매입 시 어느 동을 선택해야 할까요?"
  ],
  "Các dự án khác cùng tổ hợp": [
   "Other projects in the same complex",
@@ -387,9 +983,61 @@
   "Other subdivisions of Vinhomes Hai Van Bay",
   "Vinhomes Hai Van Bay의 다른 구역"
  ],
+ "Cách tra cứu dự án, mã định danh bất động sản trên cổng thông tin của Bộ Xây dựng trước khi đặt cọc": [
+  "How to look up projects and property identification codes on the Ministry of Construction portal before paying a deposit",
+  "계약금 납부 전 건설부 포털에서 프로젝트 및 부동산 식별 코드를 조회하는 방법"
+ ],
+ "Câu hỏi thường gặp": [
+  "Frequently asked questions",
+  "자주 묻는 질문"
+ ],
+ "Có Biệt thự / Villa": [
+  "Has villas",
+  "빌라 보유"
+ ],
+ "Có Biệt thự / Villa · Nhà phố – Shophouse": [
+  "Has villas · Townhouses & shophouses",
+  "빌라 · 타운하우스·샵하우스 보유"
+ ],
+ "Có Shop khối đế": [
+  "Has podium shops",
+  "포디움 상가 보유"
+ ],
+ "Có Shop khối đế · Duplex": [
+  "Has podium shops · Duplex",
+  "포디움 상가 · 듀플렉스 보유"
+ ],
+ "Có Shop khối đế · Penthouse": [
+  "Has podium shops · Penthouse",
+  "포디움 상가 · 펜트하우스 보유"
+ ],
+ "Có Shop khối đế · Penthouse · Duplex": [
+  "Has podium shops · Penthouse · Duplex",
+  "포디움 상가 · 펜트하우스 · 듀플렉스 보유"
+ ],
+ "Có nên mua FourS Tower? Ưu – nhược điểm căn hộ Sun Group Nam Đà Nẵng": [
+  "Should you buy FourS Tower? Pros and cons of Sun Group's South Da Nang apartments",
+  "FourS Tower, 매입할 만할까요? 남다낭 Sun Group 아파트의 장단점"
+ ],
+ "Có nên mua The Legend Đà Nẵng? 5 ưu điểm, 4 điểm cần cân nhắc": [
+  "Should you buy The Legend Da Nang? 5 strengths, 4 points to consider",
+  "The Legend Da Nang, 매입할 만할까요? 장점 5가지, 고려할 점 4가지"
+ ],
+ "Công năng": [
+  "Function",
+  "용도"
+ ],
  "Công ty CP Bất động sản SIH (hệ sinh thái BRG Group)": [
   "SIH Real Estate JSC (BRG Group ecosystem)",
   "SIH Real Estate JSC(BRG Group 생태계)"
+ ],
+ "Công ty CP Tập đoàn Mặt Trời (Sun Group), Sun Property phát triển": [
+  "Mat Troi Group JSC (Sun Group), developed by Sun Property",
+  "Mat Troi Group JSC(Sun Group), Sun Property 개발"
+ ],
+ "Công ty CP Vinpearl (Tập đoàn Vingroup), Vinhomes phát triển": [
+  "Vinpearl JSC (Vingroup), developed by Vinhomes",
+  "Vinpearl JSC(Vingroup), Vinhomes 개발"
  ],
  "Công ty CP Vinpearl – Vinhomes phát triển (Tập đoàn Vingroup)": [
   "Vinpearl JSC – developed by Vinhomes (Vingroup)",
@@ -399,9 +1047,21 @@
   "FPT Da Nang Urban JSC",
   "FPT Da Nang Urban JSC"
  ],
+ "Công ty Cổ phần Địa ốc Phúc Thanh An": [
+  "Phuc Thanh An Real Estate JSC",
+  "Phuc Thanh An Real Estate JSC"
+ ],
+ "Công ty TNHH MTV VIPICO": [
+  "VIPICO One Member Co., Ltd.",
+  "VIPICO One Member Co., Ltd."
+ ],
  "Công ty TNHH Mega Assets (hệ sinh thái BRG Group)": [
   "Mega Assets Co., Ltd. (BRG Group ecosystem)",
   "Mega Assets Co., Ltd.(BRG Group 생태계)"
+ ],
+ "Công ty TNHH Mặt Trời Sông Hàn (thành viên Sun Group)": [
+  "Mat Troi Song Han Co., Ltd. (a Sun Group member)",
+  "Mat Troi Song Han Co., Ltd.(Sun Group 계열사)"
  ],
  "Công ty TNHH Phát triển New Town": [
   "New Town Development Co., Ltd.",
@@ -410,6 +1070,50 @@
  "Công viên APEC, Cung thể thao Tiên Sơn": [
   "APEC Park, Tien Son Sports Palace",
   "APEC 공원, 띠엔선 체육관"
+ ],
+ "Công viên kiểu Disneyland Đà Nẵng: đề xuất kêu gọi đầu tư tại xã Thăng An để phát triển kinh tế đêm 2027 – 2030": [
+  "A Disneyland-style park in Da Nang: proposal to call for investment in Thang An Commune to develop the night-time economy in 2027 – 2030",
+  "다낭 디즈니랜드형 테마파크: 2027 – 2030년 야간경제 발전을 위해 탕안사에 투자 유치 제안"
+ ],
+ "Cùng chuyên mục Chính sách bán hàng": [
+  "More in Sales policy",
+  "분양 정책 카테고리 다른 글"
+ ],
+ "Cùng chuyên mục Dự án": [
+  "More in Projects",
+  "프로젝트 카테고리 다른 글"
+ ],
+ "Cùng chuyên mục Hạ tầng & quy hoạch": [
+  "More in Infrastructure & planning",
+  "인프라·도시계획 카테고리 다른 글"
+ ],
+ "Cùng chuyên mục Kinh nghiệm": [
+  "More in Tips",
+  "노하우 카테고리 다른 글"
+ ],
+ "Cùng chuyên mục Kinh nghiệm mua bán": [
+  "More in Buying & selling tips",
+  "매매 노하우 카테고리 다른 글"
+ ],
+ "Cùng chuyên mục Kinh nghiệm mua nhà": [
+  "More in Home buying tips",
+  "주택 구입 노하우 카테고리 다른 글"
+ ],
+ "Cùng chuyên mục Pháp lý nhà đất": [
+  "More in Property legal status",
+  "부동산 법적 상태 카테고리 다른 글"
+ ],
+ "Cùng chuyên mục Thị trường": [
+  "More in Market",
+  "시장 동향 카테고리 다른 글"
+ ],
+ "Cùng chuyên mục Tin dự án": [
+  "More in Project news",
+  "프로젝트 소식 카테고리 다른 글"
+ ],
+ "Cùng chuyên mục Vị trí – tiện ích": [
+  "More in Location – amenities",
+  "입지 – 편의시설 카테고리 다른 글"
  ],
  "Cùng tổ hợp": [
   "Same complex",
@@ -423,6 +1127,14 @@
   "1BR+ unit",
   "1베드룸+ 세대"
  ],
+ "Căn 1PN+ Sun Saphia Residence 49 – 51 m²: chỉ 108 căn, bố trí ra sao, ai nên mua": [
+  "Sun Saphia Residence 1BR+ units of 49 – 51 m²: only 108 units, how they are laid out and who should buy",
+  "Sun Saphia Residence 49 – 51 m² 1베드룸+ 세대: 단 108세대, 배치와 추천 매수자"
+ ],
+ "Căn 1PN+ Sun Saphia Residence: 108 căn, 49 – 51 m² thông thủy, 4 căn mỗi sàn từ tầng 3A đến 28; một phòng ngủ cộng phòng đa năng. Bố trí, giá ước tính, hợp ở hay cho thuê dài hạn.": [
+  "Sun Saphia Residence 1BR+ units: 108 units, 49 – 51 m² net area, 4 units per floor from floor 3A to 28; one bedroom plus a multipurpose room. Layout, estimated prices, and whether they suit living in or long-term rental.",
+  "Sun Saphia Residence 1베드룸+ 세대: 108세대, 전용면적 49 – 51 m², 3A층부터 28층까지 층당 4세대, 침실 1개와 다용도실 1개. 배치, 예상 가격, 실거주 또는 장기 임대 적합성을 안내합니다."
+ ],
  "Căn 1PN+1": [
   "1BR+1 unit",
   "1베드룸+1 세대"
@@ -430,6 +1142,10 @@
  "Căn 2PN": [
   "2BR unit",
   "2베드룸 세대"
+ ],
+ "Căn 2PN Sun Saphia Residence 60 – 70 m²: 133 căn ở góc tòa – để ở, nghỉ dưỡng gia đình hay cho thuê?": [
+  "Sun Saphia Residence 2BR units of 60 – 70 m²: 133 corner units – for living in, family holidays or rental?",
+  "Sun Saphia Residence 60 – 70 m² 2베드룸 세대: 코너 133세대 – 실거주, 가족 휴양, 임대 중 무엇에 적합할까요?"
  ],
  "Căn 3PN": [
   "3BR unit",
@@ -479,6 +1195,26 @@
   "Apartment",
   "아파트"
  ],
+ "Căn hộ dưới 3 tỷ ở Đà Nẵng tháng 11/2026: FourS Tower F1, F5, The Camellia Sơn Trà, FPT Plaza 4, Sun Saphia Residence, Cora Tower, Symphony 5 – diện tích, giá, sở hữu, bàn giao.": [
+  "Apartments under 3 billion VND in Da Nang, November 2026: FourS Tower F1, F5, The Camellia Son Tra, FPT Plaza 4, Sun Saphia Residence, Cora Tower, Symphony 5 – area, price, ownership, handover.",
+  "2026년 11월 다낭 30억 동 미만 아파트: FourS Tower F1, F5, The Camellia Son Tra, FPT Plaza 4, Sun Saphia Residence, Cora Tower, Symphony 5 – 면적, 가격, 소유 형태, 입주(인도)."
+ ],
+ "Căn hộ dưới 3 tỷ ở Đà Nẵng: 7 dự án đang bán, giá từng loại căn (11/2026)": [
+  "Apartments under 3 billion VND in Da Nang: 7 projects on sale, prices by unit type (November 2026)",
+  "다낭 30억 동 미만 아파트: 판매 중인 7개 프로젝트, 세대 유형별 가격(2026년 11월)"
+ ],
+ "Căn hộ dịch vụ (50 năm)": [
+  "Serviced apartments (50 years)",
+  "서비스 아파트(50년)"
+ ],
+ "Căn hộ hàng hiệu (branded residences) là căn hộ gắn thương hiệu khách sạn, được vận hành theo chuẩn thương hiệu. Lấy Nobu Residences Đà Nẵng làm ví dụ: thương hiệu, dịch vụ, chi phí, cách khai thác và điều cần hỏi trước khi mua.": [
+  "Branded residences are apartments tied to a hotel brand and operated to that brand's standards. Using Nobu Residences Da Nang as an example: the brand, services, costs, how to earn income from them and what to ask before buying.",
+  "브랜드 레지던스는 호텔 브랜드가 결합되어 해당 브랜드 기준으로 운영되는 아파트입니다. Nobu Residences Da Nang을 예로 브랜드, 서비스, 비용, 수익 운용 방법 및 매입 전 확인할 사항을 안내합니다."
+ ],
+ "Căn hộ hàng hiệu là gì? Nobu Residences Đà Nẵng khác căn hộ cao cấp thường ở đâu": [
+  "What are branded residences? How Nobu Residences Da Nang differs from ordinary luxury apartments",
+  "브랜드 레지던스란? Nobu Residences Da Nang은 일반 고급 아파트와 무엇이 다를까요"
+ ],
  "Căn hộ khách sạn (condotel)": [
   "Hotel apartments (condotel)",
   "호텔 아파트(콘도텔)"
@@ -487,9 +1223,33 @@
   "Hotel apartments / condotel",
   "호텔 아파트 / 콘도텔"
  ],
+ "Căn hộ khách sạn – condotel": [
+  "Hotel apartments – condotel",
+  "호텔 아파트 – 콘도텔"
+ ],
  "Căn hộ mẫu": [
   "Model apartment",
   "견본 아파트"
+ ],
+ "Căn hộ sân vườn FourS Tower nằm ở tầng 2 – 3 Tòa F2 (Tháp Mai), ngay trên khối đế: theo mặt bằng chủ đầu tư, phần sân vườn – ban công thông thủy từ khoảng 5 m² đến 69 m², có cả studio, căn 2 phòng ngủ và căn lớn hơn 86 m².": [
+  "FourS Tower garden apartments are on floors 2 – 3 of Tower F2 (Mai Tower), right above the podium: according to the developer's floor plans, the garden – balcony net area ranges from about 5 m² to 69 m², with studios, 2-bedroom units and units larger than 86 m².",
+  "FourS Tower 가든 아파트는 포디움 바로 위 F2동(Mai 타워) 2 – 3층에 있습니다. 시행사 평면도에 따르면 가든 – 발코니 전용면적은 약 5 m²부터 69 m²까지이며, 스튜디오, 2베드룸 세대 및 86 m²를 초과하는 세대가 있습니다."
+ ],
+ "Căn hộ sân vườn FourS Tower: sân riêng đến 69 m² ở tầng 2 – 3 Tòa F2 (2026)": [
+  "FourS Tower garden apartments: private gardens up to 69 m² on floors 2 – 3 of Tower F2 (2026)",
+  "FourS Tower 가든 아파트: F2동 2 – 3층, 최대 69 m² 전용 정원(2026)"
+ ],
+ "Căn hộ sở hữu lâu dài": [
+  "Freehold apartments",
+  "영구 소유 아파트"
+ ],
+ "Căn hộ ven sông Hàn": [
+  "Han River apartments",
+  "다낭 한강변 아파트"
+ ],
+ "Căn hộ Đà Nẵng – các dự án đang mở bán 2026": [
+  "Da Nang apartments – projects on sale in 2026",
+  "다낭 아파트 – 2026년 분양 중인 프로젝트"
  ],
  "Căn hộ, penthouse": [
   "Apartments, penthouses",
@@ -507,6 +1267,10 @@
   "Best available units, latest sales policy",
   "잔여 우수 세대, 최신 분양 정책"
  ],
+ "Cải tạo cảnh quan hai bờ sông Hàn khoảng 29,22 ha: 5 phường, các khu vực dự kiến và căn hộ ven sông hưởng lợi": [
+  "Han River embankment landscaping of about 29.22 ha: 5 wards, the planned areas and the riverside apartments that benefit",
+  "약 29.22헥타르 다낭 한강 양안 경관 개선: 5개 동, 예정 구역 및 수혜 강변 아파트"
+ ],
  "Cảm ơn anh/chị! Hoàng Hiệp sẽ gửi thông tin qua Zalo sớm nhất.": [
   "Thank you! Hoang Hiep will send you the information via Zalo as soon as possible.",
   "감사합니다! 호앙 히엡이 최대한 빨리 Zalo로 정보를 보내 드리겠습니다."
@@ -514,6 +1278,30 @@
  "Cảng Liên Chiểu, đường sắt Bắc – Nam": [
   "Lien Chieu Port, North–South Railway",
   "리엔찌에우 항, 남북 철도"
+ ],
+ "Cần bảng giá, mặt bằng tầng và chính sách": [
+  "Need the price list, floor plans and sales policy for",
+  "분양가표, 층별 평면도 및 분양 정책이 필요하신 경우 –"
+ ],
+ "Cần bảng hàng, mặt bằng tầng và chính sách đang áp dụng của The Poet Residence, liên hệ": [
+  "For the available units list, floor plans and current sales policy of The Poet Residence, contact",
+  "The Poet Residence의 매물 목록, 층별 평면도 및 현행 분양 정책이 필요하시면 연락처:"
+ ],
+ "Cần cân nhắc": [
+  "Points to consider",
+  "고려할 점"
+ ],
+ "Cần mặt bằng, bảng giá và bảng tính dòng tiền": [
+  "Need floor plans, the price list and a cash-flow calculation for",
+  "평면도, 분양가표 및 현금흐름 계산표가 필요하신 경우 –"
+ ],
+ "Cần mặt bằng, bảng giá và tư vấn chọn căn": [
+  "Need floor plans, the price list and advice on choosing a unit at",
+  "평면도, 분양가표 및 세대 선택 상담이 필요하신 경우 –"
+ ],
+ "Cần mặt bằng, bảng giá và tư vấn hồ sơ mua": [
+  "Need floor plans, the price list and advice on the purchase paperwork for",
+  "평면도, 분양가표 및 매입 서류 상담이 필요하신 경우 –"
  ],
  "Cầu Rồng": [
   "Dragon Bridge",
@@ -526,6 +1314,14 @@
  "Cầu Rồng, trung tâm thành phố": [
   "Dragon Bridge, city center",
   "용다리, 도심"
+ ],
+ "Cẩm Lệ": [
+  "Cam Le",
+  "껌레"
+ ],
+ "Danh mục": [
+  "Categories",
+  "카테고리"
  ],
  "Danh sách căn đang bán": [
   "Units for sale",
@@ -547,6 +1343,18 @@
   "Area",
   "면적"
  ],
+ "Diện tích khu đất": [
+  "Site area",
+  "부지 면적"
+ ],
+ "Diện tích tham khảo": [
+  "Reference area",
+  "참고 면적"
+ ],
+ "Diện tích thông thủy": [
+  "Net area",
+  "전용면적"
+ ],
  "Diện tích đất": [
   "Land area",
   "대지 면적"
@@ -555,13 +1363,45 @@
   "Duplex",
   "듀플렉스"
  ],
+ "Duy Xuyên": [
+  "Duy Xuyen",
+  "주이쑤옌"
+ ],
+ "Dân trí": [
+  "Dan Tri",
+  "Dan Tri"
+ ],
+ "Dòng sản phẩm": [
+  "Product line",
+  "상품 라인"
+ ],
  "Dùng chung tiện ích tổ hợp: hồ bơi bốn mùa, sky lounge, vườn treo": [
   "Shared complex amenities: all-season pool, sky lounge, hanging gardens",
   "복합 단지 공용 편의시설: 사계절 수영장, 스카이 라운지, 공중 정원"
  ],
+ "Dự kiến năm 2027": [
+  "Expected in 2027",
+  "2027년 예정"
+ ],
+ "Dự kiến quý I/2028": [
+  "Expected in Q1 2028",
+  "2028년 1분기 예정"
+ ],
  "Dự án": [
   "Project",
   "프로젝트"
+ ],
+ "Dự án bất động sản Đà Nẵng 2026": [
+  "Da Nang real estate projects 2026",
+  "2026 다낭 부동산 프로젝트"
+ ],
+ "Dự án chịu ảnh hưởng": [
+  "Affected projects",
+  "영향을 받는 프로젝트"
+ ],
+ "Dự án căn hộ mới, sắp mở bán": [
+  "New apartment projects, coming soon",
+  "신규 아파트 프로젝트, 분양 예정"
  ],
  "Dự án do Công ty CP Bất động sản SIH (hệ sinh thái BRG Group) làm chủ đầu tư.": [
   "The project's developer is SIH Real Estate JSC (BRG Group ecosystem).",
@@ -587,6 +1427,10 @@
   "The project's developer is Sun Group.",
   "이 프로젝트의 시행사는 Sun Group입니다."
  ],
+ "Dự án trong bài viết": [
+  "Projects in this article",
+  "기사 속 프로젝트"
+ ],
  "Dự án tọa lạc tại ngã tư Trường Sa – Nam Kỳ Khởi Nghĩa, phường Hòa Hải (cũ), Ngũ Hành Sơn, Đà Nẵng.": [
   "The project is located at the Truong Sa – Nam Ky Khoi Nghia intersection, Hoa Hai Ward (former), Ngu Hanh Son, Da Nang.",
   "이 프로젝트는 다낭 응우한선 호아하이동(구), 쯔엉사(Truong Sa St.) – 남끼커이응이어(Nam Ky Khoi Nghia St.) 교차로에 위치합니다."
@@ -598,6 +1442,34 @@
  "Dự án tọa lạc tại đường Trường Sa, phường Hòa Hải (cũ), Ngũ Hành Sơn, Đà Nẵng.": [
   "The project is located on Truong Sa Street, Hoa Hai Ward (former), Ngu Hanh Son, Da Nang.",
   "이 프로젝트는 다낭 응우한선 호아하이동(구), 쯔엉사 거리(Truong Sa St.)에 위치합니다."
+ ],
+ "Dự án, nhà đất Cẩm Lệ": [
+  "Projects & property in Cam Le",
+  "껌레 프로젝트·부동산"
+ ],
+ "Dự án, nhà đất Duy Xuyên": [
+  "Projects & property in Duy Xuyen",
+  "주이쑤옌 프로젝트·부동산"
+ ],
+ "Dự án, nhà đất Hải Châu": [
+  "Projects & property in Hai Chau",
+  "하이쩌우 프로젝트·부동산"
+ ],
+ "Dự án, nhà đất Hội An": [
+  "Projects & property in Hoi An",
+  "호이안 프로젝트·부동산"
+ ],
+ "Dự án, nhà đất Liên Chiểu": [
+  "Projects & property in Lien Chieu",
+  "리엔찌에우 프로젝트·부동산"
+ ],
+ "Dự án, nhà đất Ngũ Hành Sơn": [
+  "Projects & property in Ngu Hanh Son",
+  "응우한선 프로젝트·부동산"
+ ],
+ "Dự án, nhà đất Sơn Trà": [
+  "Projects & property in Son Tra",
+  "선짜 프로젝트·부동산"
  ],
  "Euro Village 2 Hòa Xuân": [
   "Euro Village 2 Hoa Xuan",
@@ -639,13 +1511,33 @@
   "FourS Tower (Four Seasons Tower) Da Nang",
   "FourS Tower(사계절 타워) Da Nang"
  ],
+ "FourS Tower (Tháp Bốn Mùa) Đà Nẵng – tổng quan, giá bán, mặt bằng, chính sách": [
+  "FourS Tower (Four Seasons Tower) Da Nang – overview, prices, floor plans, sales policy",
+  "FourS Tower(사계절 타워) Da Nang – 개요, 가격, 평면도, 분양 정책"
+ ],
+ "FourS Tower F2 Tháp Mai – Mùa Xuân có gì khác 3 tháp còn lại?": [
+  "FourS Tower F2 Mai Tower – Spring: how is it different from the other 3 towers?",
+  "FourS Tower F2 Mai 타워 – 봄: 나머지 3개 타워와 무엇이 다를까요?"
+ ],
+ "FourS Tower: Giá rao thứ cấp 7 – 10/2026. Giá tham khảo theo m² thông thủy.": [
+  "FourS Tower: secondary-market asking prices, July – October 2026. Reference prices per m² of net area.",
+  "FourS Tower: 2026년 7 – 10월 2차 시장 호가. 전용면적 m²당 참고 가격입니다."
+ ],
  "GAIA City Điện Ngọc": [
   "GAIA City Dien Ngoc",
   "GAIA City Dien Ngoc"
  ],
+ "Ga LRT gần Sun Saphia Residence: ga 09 cách khoảng 500 m, tuyến dự kiến khởi công 2/2027 – nên kỳ vọng tới đâu": [
+  "LRT station near Sun Saphia Residence: station 09 about 500 m away, line expected to break ground in February 2027 – how much should you expect",
+  "Sun Saphia Residence 인근 LRT역: 약 500m 거리의 09역, 2027년 2월 착공 예정 노선 – 어느 정도 기대해야 할까요"
+ ],
  "Ghi chú": [
   "Notes",
   "비고"
+ ],
+ "Giai đoạn": [
+  "Phase",
+  "단계"
  ],
  "Giá": [
   "Prices",
@@ -654,6 +1546,22 @@
  "Giá Capital Square Đà Nẵng theo tòa (11/2026): từ 4,32 tỷ, căn 1PN đến 3PN": [
   "Capital Square Da Nang prices by tower (November 2026): from 4.32 billion VND, 1BR to 3BR units",
   "Capital Square Da Nang 동별 가격(2026년 11월): 43억 2천만 동부터, 1베드룸 – 3베드룸 세대"
+ ],
+ "Giá Casamia Balanca 2026: bảng giá biệt thự tham khảo theo dòng sản phẩm": [
+  "Casamia Balanca prices 2026: reference villa price list by product line",
+  "2026 Casamia Balanca 가격: 상품 라인별 빌라 참고 가격표"
+ ],
+ "Giá Cora Tower Đà Nẵng bao nhiêu? Studio từ 2,42 tỷ, 1PN+ 3,45 – 3,84 tỷ (11/2026)": [
+  "How much is Cora Tower Da Nang? Studios from 2.42 billion VND, 1BR+ 3.45 – 3.84 billion VND (November 2026)",
+  "Cora Tower Da Nang 가격은? 스튜디오 24억 2천만 동부터, 1베드룸+ 34억 5천만 – 38억 4천만 동(2026년 11월)"
+ ],
+ "Giá Sun Symphony 5 Đà Nẵng bao nhiêu? Studio từ 2,5 tỷ, 1PN+ đến 4,54 tỷ (11/2026)": [
+  "How much is Sun Symphony 5 Da Nang? Studios from 2.5 billion VND, 1BR+ up to 4.54 billion VND (November 2026)",
+  "Sun Symphony 5 Da Nang 가격은? 스튜디오 25억 동부터, 1베드룸+ 최대 45억 4천만 동(2026년 11월)"
+ ],
+ "Giá The Poet Residence 11/2026: chỉ từ khoảng 4,94 tỷ, thanh toán và vay thế nào?": [
+  "The Poet Residence prices, November 2026: from about 4.94 billion VND – how do payment and loans work?",
+  "2026년 11월 The Poet Residence 가격: 약 49억 4천만 동부터, 납부와 대출은 어떻게 할까요?"
  ],
  "Giá Vinhomes Hải Vân Bay 2026 theo phân khu: Bạch Vân, Vịnh Mây, Đảo Ngọc chỉ từ bao nhiêu?": [
   "Vinhomes Hai Van Bay prices in 2026 by subdivision: how much do Bach Van, Vinh May and Dao Ngoc start from?",
@@ -675,6 +1583,18 @@
   "Resale price",
   "전매 가격"
  ],
+ "Giá chuyển nhượng tham khảo": [
+  "Reference resale prices",
+  "참고 전매 가격"
+ ],
+ "Giá chuyển nhượng tham khảo (10/2026)": [
+  "Reference resale prices (October 2026)",
+  "참고 전매 가격(2026년 10월)"
+ ],
+ "Giá cập nhật 11/2026": [
+  "Prices updated November 2026",
+  "2026년 11월 업데이트 가격"
+ ],
  "Giá rao": [
   "Asking price",
   "호가"
@@ -686,6 +1606,14 @@
  "Giá tham khảo, chưa trừ chiết khấu; giá và căn còn trống thay đổi theo đợt – để lại số, Hoàng Hiệp gửi bảng giá cập nhật qua Zalo.": [
   "Prices are for reference, before discounts; prices and available units change with each sales phase – leave your number and Hoang Hiep will send the updated price list via Zalo.",
   "참고 가격이며 할인 전 가격입니다. 가격과 잔여 세대는 차수별로 변동됩니다 – 연락처를 남겨 주시면 호앙 히엡이 최신 분양가표를 Zalo로 보내 드립니다."
+ ],
+ "Giá thuê tham khảo": [
+  "Reference rent",
+  "참고 임대료"
+ ],
+ "Giá thuê tham khảo/tháng": [
+  "Reference rent/month",
+  "참고 월 임대료"
  ],
  "Giá thuê tham khảo:": [
   "Reference rent:",
@@ -703,6 +1631,14 @@
   "Prices and policies change with each sales phase and unit location. Call or message Zalo 0904 567 009 to receive the latest price list, payment schedule and available units.",
   "가격과 정책은 분양 차수와 세대 위치에 따라 변동됩니다. 최신 분양가표, 납부 일정 및 매물 목록은 전화 또는 Zalo 0904 567 009로 문의해 주십시오."
  ],
+ "Giá đất cụ thể Alphanam Luxury: Đà Nẵng duyệt 96,7 triệu đồng/m² để thu nghĩa vụ tài chính do điều chỉnh quy hoạch": [
+  "Specific land price for Alphanam Luxury: Da Nang approves 96.7 million VND/m² to collect financial obligations due to a planning adjustment",
+  "Alphanam Luxury 개별 토지 가격: 다낭시, 도시계획 조정에 따른 재정 의무 징수를 위해 m²당 9,670만 동 승인"
+ ],
+ "Giá: Liên hệ": [
+  "Price: Contact us",
+  "가격: 문의"
+ ],
  "Giỏ hàng 10/2026, gồm VAT & KPBT, chưa chiết khấu": [
   "Available units, October 2026, incl. VAT & maintenance fee, before discounts",
   "2026년 10월 매물 목록, VAT 및 유지보수비 포함, 할인 전"
@@ -719,6 +1655,10 @@
   "Gym, yoga, spa, sauna",
   "헬스장, 요가, 스파, 사우나"
  ],
+ "Góp vốn mua chung một căn studio ven biển là cách nhiều nhóm bạn, anh em chọn để giảm số vốn mỗi người. Hướng dẫn mua chung Sun Saphia Residence: ghi tên trên hợp đồng, giấy chứng nhận, thỏa thuận chia lợi nhuận và khi một người muốn rút.": [
+  "Pooling money to co-buy a seaside studio is how many groups of friends and siblings reduce the capital each person needs. A guide to co-buying Sun Saphia Residence: names on the contract and certificate, profit-sharing agreements and what happens when one person wants to exit.",
+  "해변 스튜디오 한 세대를 공동 출자로 매입하는 것은 많은 친구, 형제들이 1인당 자금 부담을 줄이기 위해 선택하는 방법입니다. Sun Saphia Residence 공동 매입 가이드: 계약서 및 증서상 명의, 수익 배분 합의, 한 사람이 빠지려 할 때의 처리 방법을 안내합니다."
+ ],
  "Gần": [
   "Close by",
   "가까운 곳"
@@ -731,9 +1671,41 @@
   "Call 0904 567 009",
   "전화 0904 567 009"
  ],
+ "Gọi ngay": [
+  "Call now",
+  "지금 전화하기"
+ ],
+ "Gồm 1 dự án thành phần": [
+  "Includes 1 component project",
+  "하위 프로젝트 1개 포함"
+ ],
+ "Gồm 13 dự án thành phần": [
+  "Includes 13 component projects",
+  "하위 프로젝트 13개 포함"
+ ],
+ "Gồm 4 dự án thành phần": [
+  "Includes 4 component projects",
+  "하위 프로젝트 4개 포함"
+ ],
+ "Gồm 5 dự án thành phần": [
+  "Includes 5 component projects",
+  "하위 프로젝트 5개 포함"
+ ],
+ "Gợi ý": [
+  "Suggestion",
+  "추천"
+ ],
  "Gửi kèm: loại căn, diện tích, hiện trạng nội thất, giá mong muốn, căn có đang trong hợp đồng cho thuê với đơn vị vận hành hay không.": [
   "Please include: unit type, area, furniture condition, asking price, and whether the unit is currently under a rental contract with the operator.",
   "함께 보내 주실 내용: 세대 유형, 면적, 가구 상태, 희망 가격, 운영사와의 임대 계약 여부."
+ ],
+ "Gửi qua Zalo": [
+  "Send via Zalo",
+  "Zalo로 보내기"
+ ],
+ "Gửi thông tin": [
+  "Submit",
+  "정보 보내기"
  ],
  "Gửi thông tin căn qua Zalo": [
   "Send your unit details via Zalo",
@@ -747,6 +1719,10 @@
   "Hoiana Beach Villas",
   "Hoiana Beach Villas"
  ],
+ "Hoiana Beach Villas: 198 biệt thự biển Nam Hội An – 7 dòng biệt thự, diện tích, tiện ích và vị trí từng dòng": [
+  "Hoiana Beach Villas: 198 beach villas in South Hoi An – 7 villa lines, areas, amenities and the location of each line",
+  "Hoiana Beach Villas: 남호이안 해변 빌라 198채 – 7개 빌라 라인별 면적, 편의시설 및 위치"
+ ],
  "Hoiana Residences": [
   "Hoiana Residences",
   "Hoiana Residences"
@@ -758,6 +1734,10 @@
  "Hoiana Shores Golf Villas": [
   "Hoiana Shores Golf Villas",
   "Hoiana Shores Golf Villas"
+ ],
+ "Hotline tư vấn": [
+  "Advice hotline",
+  "상담 핫라인"
  ],
  "Hoàng Hiệp": [
   "Hoang Hiep",
@@ -779,9 +1759,33 @@
   "Gallery",
   "사진"
  ],
+ "Hướng": [
+  "Orientation",
+  "향"
+ ],
+ "Hướng căn hộ Sun Saphia Residence: dãy Đông đón nắng sáng, dãy Tây nắng chiều – chọn sao cho mát": [
+  "Sun Saphia Residence unit orientation: the east side gets morning sun, the west side afternoon sun – how to choose a cooler unit",
+  "Sun Saphia Residence 세대 향: 동쪽 라인은 아침 햇살, 서쪽 라인은 오후 햇살 – 시원한 세대를 고르는 방법"
+ ],
+ "Hạ tầng & quy hoạch": [
+  "Infrastructure & planning",
+  "인프라·도시계획"
+ ],
+ "Hạ tầng Khu thương mại tự do Đà Nẵng: kế hoạch 2026 – 2045 nâng sân bay Chu Lai lên 4F, làm tổng thể cảng Liên Chiểu": [
+  "Da Nang Free Trade Zone infrastructure: 2026 – 2045 plan to upgrade Chu Lai Airport to 4F and master-plan Lien Chieu Port",
+  "다낭 자유무역지대 인프라: 2026 – 2045년 계획, 쭈라이 공항 4F 등급 격상 및 리엔찌에우 항 종합 개발"
+ ],
  "Hạn mức vay, thời gian hỗ trợ và chi phí cộng thêm theo xét duyệt ngân hàng; áp dụng theo điều kiện và danh sách căn tại CSBH của chủ đầu tư": [
   "Loan limit, support period and additional costs are subject to bank approval; applies under the conditions and unit list in the developer's sales policy",
   "대출 한도, 지원 기간 및 추가 비용은 은행 심사에 따르며, 시행사 분양 정책의 조건과 세대 목록에 따라 적용됩니다"
+ ],
+ "Hạng mục": [
+  "Item",
+  "구분"
+ ],
+ "Hải Châu": [
+  "Hai Chau",
+  "하이쩌우"
  ],
  "Hẹn xem nhà trong tuần": [
   "Schedule a viewing this week",
@@ -831,6 +1835,22 @@
   "Hoi An",
   "호이안"
  ],
+ "Hợp với": [
+  "Best for",
+  "추천 대상"
+ ],
+ "Hợp đồng mua bán Sun Saphia Residence – căn hộ thương mại dịch vụ thời hạn 50 năm – có những điểm khác căn hộ để ở: loại hình, thời hạn, diện tích thông thủy và tim tường, tiến độ thanh toán, bảo lãnh, bàn giao, phí quản lý, quy định cho thuê. Bài liệt kê 8 điều khoản nên đọc kỹ.": [
+  "The Sun Saphia Residence sale and purchase agreement – for a 50-year commercial-service apartment – differs from that of a residential apartment in several ways: property type, term, net and gross area, payment schedule, guarantee, handover, management fees and rental rules. This article lists 8 clauses to read carefully.",
+  "Sun Saphia Residence 매매계약서(SPA)는 50년 기한의 상업서비스용 아파트로서 주거용 아파트와 다른 점이 있습니다: 상품 유형, 기한, 전용면적과 공급면적, 납부 일정, 보증, 인도(입주), 관리비, 임대 규정. 꼼꼼히 읽어야 할 8개 조항을 정리했습니다."
+ ],
+ "Hợp đồng mua bán Sun Saphia Residence: 8 điều khoản cần đọc kỹ trước khi ký": [
+  "Sun Saphia Residence sale and purchase agreement: 8 clauses to read carefully before signing",
+  "Sun Saphia Residence 매매계약서(SPA): 서명 전 꼼꼼히 읽어야 할 8개 조항"
+ ],
+ "Hợp đồng mua căn hộ hình thành trong tương lai: cần xem gì, đóng tiền tối đa bao nhiêu?": [
+  "Off-plan apartment purchase agreements: what to check and what is the maximum you pay?",
+  "미래 형성 주택 아파트 매매계약: 무엇을 확인하고 최대 얼마까지 납부할까요?"
+ ],
  "KHU NHÀ Ở": [
   "RESIDENTIAL AREA",
   "주거 단지"
@@ -838,6 +1858,10 @@
  "KHU ĐÔ THỊ": [
   "URBAN AREA",
   "신도시"
+ ],
+ "Khoản": [
+  "Cost item",
+  "항목"
  ],
  "Khoảng 1,5 km": [
   "About 1.5 km",
@@ -847,6 +1871,22 @@
   "About 10 minutes",
   "약 10분"
  ],
+ "Khoảng 3.000 m² đất, tổng sàn xây dựng khoảng 48.510 m²": [
+  "About 3,000 m² of land, total construction floor area of about 48,510 m²",
+  "대지 약 3,000 m², 총 연면적 약 48,510 m²"
+ ],
+ "Khoảng 42 – 372 m² (studio đến penthouse)": [
+  "About 42 – 372 m² (studio to penthouse)",
+  "약 42 – 372 m²(스튜디오 – 펜트하우스)"
+ ],
+ "Khoảng 450 ha": [
+  "About 450 ha",
+  "약 450헥타르"
+ ],
+ "Khoảng 46 – 91 m²; penthouse 190 – 235 m²": [
+  "About 46 – 91 m²; penthouses 190 – 235 m²",
+  "약 46 – 91 m², 펜트하우스 190 – 235 m²"
+ ],
  "Khu Cồn Dầu, phường Hòa Xuân (cũ), Cẩm Lệ, Đà Nẵng": [
   "Con Dau area, Hoa Xuan Ward (former), Cam Le, Da Nang",
   "다낭 껌레 호아쑤언동(구) 꼰자우 지역"
@@ -855,13 +1895,29 @@
   "Hoa Khanh Industrial Park",
   "호아칸 산업단지"
  ],
+ "Khu công nghiệp Tam Anh 3 – Indusvalley được chấp thuận: 238,11 ha, vốn khoảng 2.479 tỷ đồng ở phía nam Đà Nẵng": [
+  "Tam Anh 3 – Indusvalley Industrial Park approved: 238.11 ha, investment of about 2,479 billion VND in southern Da Nang",
+  "Tam Anh 3 – Indusvalley 산업단지 승인: 238.11헥타르, 투자금 약 2조 4,790억 동, 다낭 남부"
+ ],
  "Khu dân cư Hòa Xuân": [
   "Hoa Xuan residential area",
   "호아쑤언 주거 지역"
  ],
+ "Khu thương mại tự do Đà Nẵng tiến tới đâu và tác động gì tới căn hộ ven biển như Sun Saphia Residence": [
+  "How far has the Da Nang Free Trade Zone progressed and how does it affect seaside apartments such as Sun Saphia Residence",
+  "다낭 자유무역지대의 진행 상황과 Sun Saphia Residence 등 해변 아파트에 미치는 영향"
+ ],
+ "Khu thương mại tự do Đà Nẵng đã có quy hoạch khoảng 1.881 ha, các vị trí số 2, 3 và mới nhất là số 7 đã có nhà đầu tư. Tóm tắt tiến độ năm 2026 và nhu cầu lưu trú, thuê ở mà dòng chuyên gia, doanh nhân có thể tạo ra cho căn hộ ven biển.": [
+  "The Da Nang Free Trade Zone has a plan covering about 1,881 ha, and locations No. 2, 3 and, most recently, No. 7 already have investors. A summary of progress in 2026 and the demand for accommodation and rentals that experts and businesspeople may create for seaside apartments.",
+  "다낭 자유무역지대는 약 1,881헥타르 규모의 계획이 수립되었으며, 2·3번 부지와 최근 7번 부지에 투자자가 확정되었습니다. 2026년 진행 상황과 전문가·기업인 유입이 해변 아파트에 가져올 수 있는 숙박·임대 수요를 정리했습니다."
+ ],
  "Khu vui chơi trẻ em": [
   "Children's play area",
   "어린이 놀이터"
+ ],
+ "Khu vực": [
+  "Area",
+  "지역"
  ],
  "Khu đô thị 1A – 1B Điện Ngọc (gần ĐH FPT)": [
   "Dien Ngoc 1A – 1B Urban Area (near FPT University)",
@@ -878,6 +1934,10 @@
  "Khu đô thị Hòa Vang 183,9 ha, gần 19.000 tỷ đồng: Đà Nẵng đấu thầu quốc tế chọn nhà đầu tư": [
   "183.9 ha Hoa Vang urban area worth nearly 19,000 billion VND: Da Nang holds an international tender to select the investor",
   "183.9헥타르 호아방 신도시, 약 19조 동 규모: 다낭시, 국제 입찰로 투자자 선정"
+ ],
+ "Khu đô thị quốc tế Đa Phước: phối cảnh mới và tiến độ 3 giai đoạn, hoàn thành quý II/2033": [
+  "Da Phuoc International Urban Area: new renderings and progress across 3 phases, completion in Q2 2033",
+  "다프억 국제 신도시: 새 조감도와 3단계 공사 진행, 2033년 2분기 완공"
  ],
  "Khu đô thị số 3 Điện Nam – Điện Ngọc": [
   "Dien Nam – Dien Ngoc Urban Area No. 3",
@@ -907,13 +1967,41 @@
   "Project groundbreaking",
   "프로젝트 착공"
  ],
+ "Khởi công đường băng sân bay Đà Nẵng cuối tháng 11/2026: dự án gần 1.696 tỷ đồng được rút ngắn thủ tục": [
+  "Groundbreaking of the Da Nang Airport runway at the end of November 2026: the project worth nearly 1,696 billion VND has its procedures shortened",
+  "2026년 11월 말 다낭 공항 활주로 착공: 약 1조 6,960억 동 규모 프로젝트, 절차 단축"
+ ],
+ "Kinh nghiệm": [
+  "Tips",
+  "노하우"
+ ],
+ "Kinh nghiệm mua bán": [
+  "Buying & selling tips",
+  "매매 노하우"
+ ],
+ "Kinh nghiệm mua nhà": [
+  "Home buying tips",
+  "주택 구입 노하우"
+ ],
  "Kiểm tra sổ, định giá căn": [
   "Certificate check & unit valuation",
   "소유권 증서 확인·세대 시세 평가"
  ],
+ "Ký gửi bán / cho thuê": [
+  "Consignment: sale / rent",
+  "매매 / 임대 위탁"
+ ],
  "Kết nối": [
   "Connections",
   "교통 연결"
+ ],
+ "Layout căn 1PN+ 51 m² Sun Saphia Residence (bản vẽ chủ đầu tư, tham khảo)": [
+  "Layout of the 51 m² 1BR+ unit at Sun Saphia Residence (developer's drawing, for reference)",
+  "Sun Saphia Residence 51 m² 1베드룸+ 세대 배치도(시행사 도면, 참고)"
+ ],
+ "Liên Chiểu": [
+  "Lien Chieu",
+  "리엔찌에우"
  ],
  "Liên hệ": [
   "Contact",
@@ -923,9 +2011,17 @@
   "Contact 0904 567 009 to receive the list of available units and viewing times.",
   "공실 세대 목록과 현장 방문 일정은 0904 567 009로 문의해 주십시오."
  ],
+ "Liên hệ Hoàng Hiệp – tư vấn, nhận bảng giá": [
+  "Contact Hoang Hiep – advice and price lists",
+  "호앙 히엡 문의 – 상담 및 분양가표 받기"
+ ],
  "Liền kề": [
   "Townhouse",
   "타운하우스"
+ ],
+ "Liền kề 63 – 174 m² · Song lập 140 – 221 m² · Đơn lập 140 – 420 m²": [
+  "Townhouses 63 – 174 m² · Semi-detached 140 – 221 m² · Detached 140 – 420 m²",
+  "타운하우스 63 – 174 m² · 세미 단독 140 – 221 m² · 단독 140 – 420 m²"
  ],
  "Liền kề, liền kề xẻ khe, shophouse, biệt…": [
   "Townhouses, townhouses with side gaps, shophouses, villas…",
@@ -959,6 +2055,22 @@
   "Product type of interest",
   "관심 상품 종류"
  ],
+ "Loại đất": [
+  "Land type",
+  "토지 유형"
+ ],
+ "Luật Kinh doanh bất động sản 2023": [
+  "Law on Real Estate Business 2023",
+  "2023년 부동산사업법"
+ ],
+ "Luật Kinh doanh bất động sản sửa đổi được thông qua: cọc tối đa 5%, lần đầu không quá 30%, cấm thu tiền giữ chỗ": [
+  "Amended Law on Real Estate Business passed: deposit capped at 5%, first payment no more than 30%, booking fees banned",
+  "개정 부동산사업법 통과: 계약금 최대 5%, 1차 납부 30% 이하, 예약금 징수 금지"
+ ],
+ "Làng Đại học Đà Nẵng phần thuộc Ngũ Hành Sơn khoảng 110 ha đang được triển khai sau gần 3 thập kỷ. Phân tích vị trí Sun Saphia Residence so với Làng Đại học và nhóm khách thuê có thể đến từ giảng viên, chuyên gia, phụ huynh.": [
+  "The part of Da Nang University Village in Ngu Hanh Son, about 110 ha, is being developed after nearly 3 decades. An analysis of Sun Saphia Residence's location relative to the University Village and the tenant groups it may bring: lecturers, experts and parents.",
+  "응우한선에 속한 약 110헥타르 규모의 다낭 대학촌 구역이 약 30년 만에 개발되고 있습니다. 대학촌 대비 Sun Saphia Residence의 입지와 교수진, 전문가, 학부모 등 예상 임차인층을 분석합니다."
+ ],
  "Làng đại học Đà Nẵng": [
   "Da Nang University Village",
   "다낭 대학촌"
@@ -978,6 +2090,10 @@
  "Lô": [
   "Plot",
   "필지"
+ ],
+ "Lô A1-3": [
+  "Plot A1-3",
+  "A1-3 부지"
  ],
  "Lô A1-3, A1-4 Khu đô thị sinh thái ven sông Hòa Xuân": [
   "Plots A1-3, A1-4, Hoa Xuan Riverside Eco Urban Area",
@@ -1003,6 +2119,10 @@
   "Lang Co, Hue Imperial City",
   "랑꼬, 후에 고도"
  ],
+ "Lưu ý": [
+  "Note",
+  "유의사항"
+ ],
  "Lưu ý chung khi đăng ký nhà ở xã hội:": [
   "General notes on registering for social housing:",
   "사회주택 신청 시 일반 유의사항:"
@@ -1011,9 +2131,17 @@
   "Notes when buying",
   "매입 시 유의사항"
  ],
+ "Lệ phí trước bạ": [
+  "Registration fee",
+  "등록세"
+ ],
  "Lọc khách có nhu cầu thật, dẫn xem theo lịch của chủ nhà": [
   "Screening for genuine buyers and tenants, viewings on the owner's schedule",
   "실수요 고객만 선별, 소유주 일정에 맞춘 현장 안내"
+ ],
+ "Lời nhắn": [
+  "Message",
+  "메시지"
  ],
  "Miễn phí quản lý 1 năm · Điểm thưởng Sun Signature 0,7 – 2% theo hạng": [
   "1 year of free management fees · Sun Signature reward points of 0.7 – 2% by tier",
@@ -1023,9 +2151,45 @@
   "Free · sent via Zalo within 15 minutes",
   "무료 · 15분 이내 Zalo로 발송"
  ],
+ "Mua Sun Saphia Residence để ở được không? Pháp lý, tạm trú, bàn giao, chi phí sống và khác biệt với chung cư": [
+  "Can you live in Sun Saphia Residence? Legal status, temporary residence, handover, living costs and differences from residential apartments",
+  "Sun Saphia Residence, 실거주가 가능할까요? 법적 상태, 임시거주 등록, 입주(인도), 생활비 및 일반 아파트와의 차이"
+ ],
+ "Mua Sun Saphia Residence để ở được không? Tạm trú, bàn giao, chi phí sống và những điều khác chung cư thường": [
+  "Can you live in Sun Saphia Residence? Temporary residence, handover, living costs and how it differs from ordinary apartments",
+  "Sun Saphia Residence, 실거주가 가능할까요? 임시거주 등록, 입주(인도), 생활비 및 일반 아파트와 다른 점"
+ ],
+ "Mua biệt thự Premier Village Đà Nẵng 2026: 111 căn trên biển Mỹ Khê, giá chuyển nhượng chỉ từ khoảng 39 tỷ": [
+  "Buying a Premier Village Da Nang villa in 2026: 111 villas on My Khe Beach, resale prices from about 39 billion VND",
+  "2026 Premier Village Da Nang 빌라 매입: 미케 비치 빌라 111채, 전매 가격 약 390억 동부터"
+ ],
+ "Mua biệt thự Premier Village Đà Nẵng: 111 biệt thự có hồ bơi riêng trên khoảng 15 ha bên biển Mỹ Khê của Sun Group, giá chuyển nhượng tham khảo chỉ từ khoảng 39 tỷ. Loại biệt thự, thuê và cho thuê, gửi bán, pháp lý và các bước mua.": [
+  "Buying a Premier Village Da Nang villa: 111 villas with private pools on about 15 ha by My Khe Beach from Sun Group, reference resale prices from about 39 billion VND. Villa types, renting and renting out, consignment, legal status and the buying steps.",
+  "Premier Village Da Nang 빌라 매입: 미케 비치 옆 약 15헥타르 부지에 개인 수영장을 갖춘 Sun Group의 빌라 111채, 참고 전매 가격 약 390억 동부터. 빌라 유형, 임차 및 임대, 위탁 매매, 법적 상태 및 매입 절차를 안내합니다."
+ ],
+ "Mua bán nhà đất Đà Nẵng – bảng giá thị trường": [
+  "Da Nang property for sale – market price list",
+  "다낭 부동산 매매 – 시장 시세표"
+ ],
+ "Mua chung Sun Saphia Residence với bạn bè, người thân: đứng tên thế nào, chia lợi nhuận và rút vốn ra sao": [
+  "Co-buying Sun Saphia Residence with friends or relatives: whose name goes on the title, how to share profits and how to withdraw capital",
+  "친구·가족과 Sun Saphia Residence 공동 매입: 명의, 수익 배분 및 자금 회수 방법"
+ ],
+ "Mua căn hộ chưa xây xong (nhà ở hình thành trong tương lai): đặt cọc, văn bản đủ điều kiện bán, bảo lãnh ngân hàng, tỷ lệ thanh toán tối đa trước bàn giao và trước khi có sổ, các điều khoản hợp đồng cần đọc kỹ.": [
+  "Buying an unfinished apartment (off-plan housing): deposit, the document confirming eligibility for sale, bank guarantee, maximum payment ratios before handover and before the certificate is issued, and contract clauses to read carefully.",
+  "완공 전 아파트(미래 형성 주택) 매입: 계약금, 판매 요건 충족 확인 문서, 은행 보증, 인도 전·증서 발급 전 최대 납부 비율, 꼼꼼히 읽어야 할 계약 조항."
+ ],
+ "Mua căn hộ mới cần trả những chi phí gì ngoài giá bán? 7 khoản người mua hay quên": [
+  "What costs do you pay beyond the price when buying a new apartment? 7 items buyers often forget",
+  "신규 아파트 매입 시 분양가 외에 어떤 비용을 낼까요? 매수자가 자주 놓치는 7가지 항목"
+ ],
  "Mã căn": [
   "Unit code",
   "호실 번호"
+ ],
+ "Mô hình 4D Sun Saphia Residence: xoay tòa 30 tầng, chọn tầng, xem hướng trước khi giữ chỗ": [
+  "Sun Saphia Residence 4D model: rotate the 30-storey tower, choose a floor and check the orientation before booking",
+  "Sun Saphia Residence 4D 모델: 예약 전 30층 타워를 회전하고 층을 선택해 향을 확인하십시오"
  ],
  "Mật độ": [
   "Density",
@@ -1035,9 +2199,45 @@
   "Floor plans",
   "평면도"
  ],
+ "Mặt bằng Cora Tower: 2 tòa A1, A2 hai bên đường 29/3, 28 căn mỗi tầng, layout studio đến 3PN": [
+  "Cora Tower floor plans: 2 towers A1, A2 on either side of 29/3 Street, 28 units per floor, layouts from studio to 3BR",
+  "Cora Tower 평면도: 29/3 거리(29/3 St.) 양쪽의 A1, A2 2개 동, 층당 28세대, 스튜디오 – 3베드룸 배치"
+ ],
+ "Mặt bằng FourS Tower (Sun Riverpolis, Ngũ Hành Sơn): 4 tháp Mai – Trúc – Cúc – Tùng cao 20 tầng, 2.394 căn studio đến 3PN; tầng 1 thương mại, tầng 2 tiện ích; mặt bằng tầng và layout tòa F2, diện tích từng loại căn.": [
+  "FourS Tower floor plans (Sun Riverpolis, Ngu Hanh Son): 4 towers Mai – Truc – Cuc – Tung, 20 floors each, 2,394 units from studio to 3BR; commercial space on floor 1, amenities on floor 2; floor plans and layouts of Tower F2, area of each unit type.",
+  "FourS Tower 평면도(Sun Riverpolis, 응우한선): Mai – Truc – Cuc – Tung 20층 4개 타워, 스튜디오 – 3베드룸 2,394세대; 1층 상업시설, 2층 편의시설; F2동 층별 평면도와 배치, 세대 유형별 면적."
+ ],
+ "Mặt bằng FourS Tower: 4 tháp 20 tầng, 2.394 căn – mặt bằng tầng và layout tòa F2": [
+  "FourS Tower floor plans: 4 towers of 20 floors, 2,394 units – floor plans and Tower F2 layouts",
+  "FourS Tower 평면도: 20층 4개 타워, 2,394세대 – 층별 평면도와 F2동 배치"
+ ],
+ "Mặt bằng FourS Tower: layout căn Studio đến 3PN và diện tích": [
+  "FourS Tower floor plans: studio to 3BR layouts and areas",
+  "FourS Tower 평면도: 스튜디오 – 3베드룸 배치와 면적"
+ ],
+ "Mặt bằng The Poet Residence: layout 1PN+1 đến 3PN góc, chọn căn nào?": [
+  "The Poet Residence floor plans: layouts from 1BR+1 to corner 3BR – which unit to choose?",
+  "The Poet Residence 평면도: 1베드룸+1부터 코너 3베드룸까지, 어떤 세대를 선택할까요?"
+ ],
+ "Mặt bằng căn hộ Symphony 5: 1.228 căn studio, 1PN+, 2PN, penthouse theo từng tầng": [
+  "Symphony 5 apartment floor plans: 1,228 studio, 1BR+, 2BR and penthouse units floor by floor",
+  "Symphony 5 아파트 평면도: 층별 스튜디오, 1베드룸+, 2베드룸, 펜트하우스 1,228세대"
+ ],
+ "Mặt bằng giá căn hộ Đà Nẵng · 11/2026": [
+  "Da Nang apartment price levels · November 2026",
+  "다낭 아파트 시세 수준 · 2026년 11월"
+ ],
  "Mặt bằng khoảng": [
   "Prices are around",
   "시세 수준은 약"
+ ],
+ "Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích căn (bản vẽ chủ đầu tư, tham khảo)": [
+  "Typical floor plan for floors 3A – 28 of Sun Saphia Residence with unit areas (developer's drawing, for reference)",
+  "Sun Saphia Residence 3A – 28층 기준층 평면도 및 세대 면적(시행사 도면, 참고)"
+ ],
+ "Mặt bằng tổng thể Sun Saphia Residence cạnh công viên bãi tắm Sơn Thủy (bản vẽ chủ đầu tư, tham khảo)": [
+  "Master plan of Sun Saphia Residence next to the Son Thuy beach park (developer's drawing, for reference)",
+  "선투이 해변 공원 옆 Sun Saphia Residence 마스터플랜(시행사 도면, 참고)"
  ],
  "Mặt bằng, pháp lý dự án; hẹn đi xem dự án, nhà mẫu": [
   "Floor plans and the project's legal status; schedule a visit to the project and show unit",
@@ -1047,13 +2247,29 @@
   "Fronting Tran Hung Dao Street, Capital Square complex, An Hai Ward",
   "안하이동 Capital Square 복합 단지, 쩐흥다오 거리(Tran Hung Dao St.) 전면"
  ],
+ "Mốc": [
+  "Milestone",
+  "주요 시점"
+ ],
  "Mở tab mới ↗": [
   "Open in new tab ↗",
   "새 탭에서 열기 ↗"
  ],
+ "Mục đích": [
+  "Purpose",
+  "목적"
+ ],
+ "Mức": [
+  "Level",
+  "수준"
+ ],
  "NHÀ Ở XÃ": [
   "SOCIAL HOUSING",
   "사회주택"
+ ],
+ "Nam Hội An City": [
+  "Nam Hoi An City",
+  "Nam Hoi An City"
  ],
  "Newtown Diamond Đà Nẵng": [
   "Newtown Diamond Da Nang",
@@ -1091,6 +2307,34 @@
   "Luxury resort (low-rise)",
   "고급 리조트(저층)"
  ],
+ "Ngoài giá bán, mua căn hộ mới từ chủ đầu tư còn các khoản: VAT, kinh phí bảo trì 2%, lệ phí trước bạ 0,5% khi làm sổ, phí quản lý hằng tháng, chi phí hoàn thiện nội thất, lãi vay sau hỗ trợ và phí làm sổ. Cách đọc giá đã gồm gì.": [
+  "Beyond the price, buying a new apartment from a developer involves: VAT, a 2% maintenance fee, a 0.5% registration fee when the certificate is issued, monthly management fees, interior fit-out costs, loan interest after the support period and certificate processing fees. How to read what the price includes.",
+  "시행사로부터 신규 아파트를 매입할 때는 분양가 외에 VAT, 유지보수비 2%, 증서 발급 시 등록세 0.5%, 월 관리비, 인테리어 마감 비용, 지원 기간 이후 대출 이자, 증서 발급 수수료가 듭니다. 가격에 무엇이 포함되었는지 확인하는 방법을 안내합니다."
+ ],
+ "Nguồn": [
+  "Source",
+  "출처"
+ ],
+ "Nguồn tổng hợp:": [
+  "Compiled from:",
+  "종합 출처:"
+ ],
+ "Nguồn:": [
+  "Source:",
+  "출처:"
+ ],
+ "Nguồn: chính sách bán hàng và phiếu tính giá của chủ đầu tư (11/2026). Thông tin tham khảo, có thể thay đổi theo từng đợt.": [
+  "Source: the developer's sales policy and price quotes (November 2026). For reference only; subject to change with each phase.",
+  "출처: 시행사 분양 정책 및 가격 산정표(2026년 11월). 참고 정보이며 차수별로 변경될 수 있습니다."
+ ],
+ "Nguồn: tài liệu chủ đầu tư Phúc Thanh An;": [
+  "Source: Phuc Thanh An developer materials;",
+  "출처: 시행사 Phuc Thanh An 자료;"
+ ],
+ "Ngày 25/11/2026, Ban Quản lý Khu kinh tế mở Chu Lai chấp thuận chủ trương đầu tư Khu công nghiệp Tam Anh 3 – Indusvalley (giai đoạn 1) tại xã Tam Anh: 238,11 ha, tổng vốn khoảng 2.479 tỷ đồng, thời hạn 70 năm.": [
+  "On November 25, 2026, the Chu Lai Open Economic Zone Management Board approved the investment policy for Tam Anh 3 – Indusvalley Industrial Park (phase 1) in Tam Anh Commune: 238.11 ha, total investment of about 2,479 billion VND, a 70-year term.",
+  "2026년 11월 25일, 쭈라이 개방경제구역 관리위원회는 땀안사의 Tam Anh 3 – Indusvalley 산업단지(1단계) 투자 방침을 승인했습니다: 238.11헥타르, 총투자금 약 2조 4,790억 동, 기간 70년."
+ ],
  "Ngân hàng cho vay": [
   "Lending banks",
   "대출 은행"
@@ -1103,13 +2347,29 @@
   "Truong Sa – Nam Ky Khoi Nghia intersection, Hoa Hai Ward",
   "호아하이동, 쯔엉사(Truong Sa St.) – 남끼커이응이어(Nam Ky Khoi Nghia St.) 교차로"
  ],
+ "Ngũ Hành Sơn": [
+  "Ngu Hanh Son",
+  "응우한선"
+ ],
  "Ngũ Hành Sơn, Đà Nẵng": [
   "Ngu Hanh Son, Da Nang",
   "다낭 응우한선"
  ],
+ "Người mua để ở, gia đình có trẻ nhỏ, người lớn tuổi thường hỏi về y tế quanh dự án. Tổng hợp bệnh viện gần Sun Saphia Residence, khoảng cách ước tính, khi nào đi đâu và chuẩn bị gì cho khách lưu trú.": [
+  "Buyers who will live in the unit, families with young children and older people often ask about healthcare around the project. A summary of hospitals near Sun Saphia Residence, estimated distances, where to go when, and what to prepare for staying guests.",
+  "실거주 매수자, 어린 자녀가 있는 가족, 고령자는 프로젝트 주변 의료 시설을 자주 문의합니다. Sun Saphia Residence 인근 병원, 예상 거리, 상황별 이용 병원 및 숙박 고객을 위한 준비 사항을 정리했습니다."
+ ],
  "Ngọc": [
   "Ngoc",
   "Ngoc"
+ ],
+ "Nhiều khách hỏi Sun Saphia Residence có phải condotel không. Bài so sánh căn hộ thương mại dịch vụ 50 năm của dự án với condotel (căn hộ du lịch) về pháp lý, giấy chứng nhận, cam kết lợi nhuận và quyền tự cho thuê.": [
+  "Many clients ask whether Sun Saphia Residence is a condotel. This article compares the project's 50-year commercial-service apartments with condotels (tourist apartments) in terms of legal status, certificates, guaranteed returns and the right to rent out independently.",
+  "많은 고객이 Sun Saphia Residence가 콘도텔인지 문의합니다. 본 기사는 이 프로젝트의 50년 상업서비스용 아파트와 콘도텔(관광 아파트)을 법적 상태, 증서, 수익 보장, 자율 임대 권리 측면에서 비교합니다."
+ ],
+ "Nhu cầu": [
+  "Need",
+  "수요"
  ],
  "Nhà giãn xây: chính sách tính trên giá trị quyền sử dụng đất và thương mại, chưa gồm tiền xây dựng": [
   "Deferred-construction homes: the policy is calculated on the land use right and commercial value, excluding construction costs",
@@ -1139,6 +2399,14 @@
   "Social housing (apartments)",
   "사회주택(아파트)"
  ],
+ "Nhà ở xã hội Sun Home Sơn Trà nhận hồ sơ 104 căn từ 2/12/2026: giá khoảng 6,38 triệu/m², chỉ dành cho hộ di dời 3 chung cư cũ": [
+  "Sun Home Son Tra social housing accepts applications for 104 units from December 2, 2026: about 6.38 million VND/m², only for households relocated from 3 old apartment buildings",
+  "Sun Home Son Tra 사회주택, 2026년 12월 2일부터 104세대 신청 접수: m²당 약 638만 동, 노후 아파트 3개 동 이주 가구 전용"
+ ],
+ "Nhà ở xã hội cầu Tiên Sơn: 2 tháp 31 tầng, 731 căn, vốn khoảng 1.225 tỷ đồng": [
+  "Tien Son Bridge social housing: 2 towers of 31 floors, 731 units, investment of about 1,225 billion VND",
+  "띠엔선 다리 사회주택: 31층 2개 동, 731세대, 투자금 약 1조 2,250억 동"
+ ],
  "Nhận bảng giá": [
   "Get the price list",
   "분양가표 받기"
@@ -1150,6 +2418,14 @@
  "Nhận bảng giá & căn trống": [
   "Get the price list & available units",
   "분양가표·잔여 세대 받기"
+ ],
+ "Nhận bảng giá dự án": [
+  "Get the project price list",
+  "프로젝트 분양가표 받기"
+ ],
+ "Nhận căn sử dụng dự kiến 30/06/2028": [
+  "Unit handover for use expected June 30, 2028",
+  "2028년 6월 30일 세대 입주 예정"
  ],
  "Nhận danh sách căn": [
   "Get available units",
@@ -1179,9 +2455,61 @@
   "Key handover",
   "입주"
  ],
+ "Nhận nhà sử dụng dự kiến 30/06/2028": [
+  "Home handover for use expected June 30, 2028",
+  "2028년 6월 30일 주택 입주 예정"
+ ],
+ "Nhận phiếu tính giá theo đúng căn, so sánh phương án vay và thanh toán sớm: liên hệ": [
+  "For a price quote for your exact unit and a comparison of loan and early-payment options: contact",
+  "세대별 가격 산정표를 받고 대출·조기 납부 방식을 비교하시려면 연락 주십시오:"
+ ],
+ "Nhận sổ": [
+  "Certificate issuance",
+  "증서 수령"
+ ],
+ "Nhận tư vấn miễn phí": [
+  "Get free advice",
+  "무료 상담 받기"
+ ],
+ "Nhận định của Hoàng Hiệp": [
+  "Hoang Hiep's view",
+  "호앙 히엡의 견해"
+ ],
  "Nhập câu hỏi hoặc số Zalo…": [
   "Type your question or Zalo number…",
   "질문 또는 Zalo 번호를 입력하세요…"
+ ],
+ "Nobu Residences hay The Legend: chọn căn hộ cao cấp nào ở Đà Nẵng?": [
+  "Nobu Residences or The Legend: which luxury apartment to choose in Da Nang?",
+  "Nobu Residences와 The Legend: 다낭에서 어떤 고급 아파트를 선택할까요?"
+ ],
+ "Nobu Residences Đà Nẵng": [
+  "Nobu Residences Da Nang",
+  "Nobu Residences Da Nang"
+ ],
+ "Nobu Residences Đà Nẵng – tổng quan, giá bán, mặt bằng, chính sách": [
+  "Nobu Residences Da Nang – overview, prices, floor plans, sales policy",
+  "Nobu Residences Da Nang – 개요, 가격, 평면도, 분양 정책"
+ ],
+ "Nobu Residences: Giá rao thứ cấp 7 – 10/2026. Giá tham khảo theo m² thông thủy.": [
+  "Nobu Residences: secondary-market asking prices, July – October 2026. Reference prices per m² of net area.",
+  "Nobu Residences: 2026년 7 – 10월 2차 시장 호가. 전용면적 m²당 참고 가격입니다."
+ ],
+ "Nobu Đà Nẵng (Nobu Residences Danang) do VCRE – Công ty CP Bất động sản Bản Việt, thành viên Phoenix Holdings – phát triển cùng Nobu Hospitality. Tòa tháp 43 tầng ở 01 Võ Văn Kiệt, góc Võ Nguyên Giáp; tiến độ, số căn, điều cần kiểm tra.": [
+  "Nobu Da Nang (Nobu Residences Danang) is developed by VCRE – Ban Viet Real Estate JSC, a member of Phoenix Holdings – together with Nobu Hospitality. A 43-storey tower at 01 Vo Van Kiet, on the corner of Vo Nguyen Giap; construction progress, number of units and what to check.",
+  "Nobu Da Nang(Nobu Residences Danang)은 Phoenix Holdings 계열사인 VCRE – Ban Viet Real Estate JSC가 Nobu Hospitality와 함께 개발합니다. 보반끼엣 거리(Vo Van Kiet St.) 01번지, 보응우옌잡 거리(Vo Nguyen Giap St.) 모퉁이의 43층 타워이며, 공사 진행, 세대수 및 확인할 사항을 안내합니다."
+ ],
+ "Nobu Đà Nẵng của ai? Chủ đầu tư VCRE, thương hiệu Nobu Hospitality và tòa tháp 43 tầng": [
+  "Who owns Nobu Da Nang? Developer VCRE, the Nobu Hospitality brand and the 43-storey tower",
+  "Nobu Da Nang은 누구의 프로젝트일까요? 시행사 VCRE, Nobu Hospitality 브랜드와 43층 타워"
+ ],
+ "Nội dung": [
+  "Content",
+  "내용"
+ ],
+ "Nội dung bài viết": [
+  "Contents",
+  "목차"
  ],
  "Nội thất": [
   "Furnishing",
@@ -1195,9 +2523,17 @@
   "One World Regency",
   "One World Regency"
  ],
+ "Peninsula Đà Nẵng": [
+  "Peninsula Da Nang",
+  "Peninsula Da Nang"
+ ],
  "Penthouse": [
   "Penthouse",
   "펜트하우스"
+ ],
+ "Penthouse Spana, Cora, S-Light: tầng đỉnh giới hạn của Sun Group tại Hòa Xuân": [
+  "Spana, Cora, S-Light penthouses: Sun Group's limited top floors in Hoa Xuan",
+  "Spana, Cora, S-Light 펜트하우스: 호아쑤언 Sun Group의 한정 최상층"
  ],
  "Phiếu tính giá theo phương án thanh toán": [
   "Price quote by payment option",
@@ -1215,9 +2551,33 @@
   "Capital Square Da Nang legal status: which towers are eligible for sale, the Pink Book and what to note when buying",
   "Capital Square Da Nang 법적 상태: 판매 요건을 갖춘 동, 핑크북 및 매입 시 유의사항"
  ],
+ "Pháp lý Casamia Balanca: sổ hồng, tiến độ cấp giấy và điều cần kiểm tra": [
+  "Casamia Balanca legal status: Pink Book, certificate issuance progress and what to check",
+  "Casamia Balanca 법적 상태: 핑크북, 증서 발급 진행 상황 및 확인 사항"
+ ],
+ "Pháp lý Spana Tower: 7 văn bản từ chủ trương đầu tư đến bảo lãnh VietinBank (2026)": [
+  "Spana Tower legal status: 7 documents from the investment policy to the VietinBank guarantee (2026)",
+  "Spana Tower 법적 상태: 투자 방침부터 VietinBank 보증까지 7개 문서(2026)"
+ ],
+ "Pháp lý Symphony 5: sở hữu 50 năm, đất thương mại dịch vụ – người mua cần biết gì": [
+  "Symphony 5 legal status: 50-year ownership on commercial-service land – what buyers need to know",
+  "Symphony 5 법적 상태: 상업서비스 용지 50년 소유 – 매수자가 알아야 할 사항"
+ ],
+ "Pháp lý The Legend Đà Nẵng: sở hữu lâu dài, đủ điều kiện bán 800 căn – các văn bản cần biết": [
+  "The Legend Da Nang legal status: freehold, 800 units eligible for sale – the documents to know",
+  "The Legend Da Nang 법적 상태: 영구 소유, 800세대 판매 요건 충족 – 알아야 할 문서"
+ ],
+ "Pháp lý The Poet Residence: 263 căn đủ điều kiện bán, chủ đầu tư Phúc Thanh An là ai?": [
+  "The Poet Residence legal status: 263 units eligible for sale – who is the developer Phuc Thanh An?",
+  "The Poet Residence 법적 상태: 263세대 판매 요건 충족, 시행사 Phuc Thanh An은 어떤 회사일까요?"
+ ],
  "Pháp lý Vinhomes Hải Vân Bay: sản phẩm nào sở hữu lâu dài, sản phẩm nào 50 năm?": [
   "Vinhomes Hai Van Bay legal status: which products are freehold and which are 50-year leasehold?",
   "Vinhomes Hai Van Bay 법적 상태: 어떤 상품이 영구 소유이고 어떤 상품이 50년 소유일까요?"
+ ],
+ "Pháp lý nhà đất": [
+  "Property legal status",
+  "부동산 법적 상태"
  ],
  "Phân khu": [
   "Subdivision",
@@ -1239,6 +2599,14 @@
   "Dao Ngoc subdivision – Vinhomes Hai Van Bay (Zone 3)",
   "Dao Ngoc 구역 – Vinhomes Hai Van Bay(3구역)"
  ],
+ "Phí quản lý": [
+  "Management fee",
+  "관리비"
+ ],
+ "Phí quản lý Sun Saphia Residence 15.000 – 20.000 đ/m²: studio, 1PN+, 2PN mỗi tháng trả bao nhiêu?": [
+  "Sun Saphia Residence management fee of 15,000 – 20,000 VND/m²: how much do studio, 1BR+ and 2BR units pay per month?",
+  "Sun Saphia Residence 관리비 m²당 15,000 – 20,000동: 스튜디오, 1베드룸+, 2베드룸은 매월 얼마를 낼까요?"
+ ],
  "Phòng gym": [
   "Gym",
   "헬스장"
@@ -1251,9 +2619,17 @@
   "Yoga room",
   "요가룸"
  ],
+ "Phù hợp": [
+  "Suitable for",
+  "적합 대상"
+ ],
  "Phường Hòa Xuân": [
   "Hoa Xuan Ward",
   "호아쑤언동"
+ ],
+ "Phạm vi": [
+  "Scope",
+  "범위"
  ],
  "Phố chợ Điện Ngọc": [
   "Dien Ngoc Market Street",
@@ -1291,6 +2667,10 @@
   "Scale and products",
   "규모 및 상품"
  ],
+ "Quy mô:": [
+  "Scale:",
+  "규모:"
+ ],
  "Quần thể Hoiana, Duy Xuyên (Quảng Nam cũ), Đà Nẵng": [
   "Hoiana complex, Duy Xuyen (former Quang Nam), Da Nang",
   "다낭 주이쑤옌(구 꽝남성) Hoiana 단지"
@@ -1303,6 +2683,10 @@
   "Residence",
   "Residence"
  ],
+ "Rủi ro": [
+  "Risks",
+  "리스크"
+ ],
  "Rừng dừa Bảy Mẫu": [
   "Bay Mau Coconut Forest",
   "바이머우 코코넛 숲"
@@ -1310,6 +2694,14 @@
  "S-Light Tower Đà Nẵng": [
   "S-Light Tower Da Nang",
   "S-Light Tower Da Nang"
+ ],
+ "SDN – Đầu tư Sài Gòn – Đà Nẵng": [
+  "SDN – Saigon – Da Nang Investment",
+  "SDN – Saigon – Da Nang Investment"
+ ],
+ "Sau khi Sun Saphia Residence được cấp giấy chứng nhận, bán lại căn hộ phải công chứng hợp đồng, nộp thuế thu nhập cá nhân 2% và lệ phí trước bạ 0,5%. Ví dụ tính trên studio giá tham khảo 3 tỷ và lưu ý thời hạn 50 năm.": [
+  "After Sun Saphia Residence receives its certificates, reselling a unit requires a notarized contract, 2% personal income tax and a 0.5% registration fee. A worked example for a studio with a reference price of 3 billion VND, and notes on the 50-year term.",
+  "Sun Saphia Residence 증서 발급 후 세대를 재매도하려면 계약서 공증, 개인소득세 2%, 등록세 0.5%가 필요합니다. 참고 가격 30억 동 스튜디오 기준 계산 예시와 50년 기한 유의사항을 안내합니다."
  ],
  "Sentosa Riverside (Peaceful Land)": [
   "Sentosa Riverside (Peaceful Land)",
@@ -1331,9 +2723,21 @@
   "Podium shophouse",
   "포디움 샵하우스"
  ],
+ "So sánh căn hộ Sun Group Đà Nẵng: FourS Tower, Spana Tower, S-Light Tower": [
+  "Comparing Sun Group apartments in Da Nang: FourS Tower, Spana Tower, S-Light Tower",
+  "다낭 Sun Group 아파트 비교: FourS Tower, Spana Tower, S-Light Tower"
+ ],
+ "So sánh mua căn hình thành trong tương lai như Sun Saphia Residence (bàn giao dự kiến 11/2028) với căn hộ ven biển có sẵn đang vận hành ở Mỹ Khê: tổng tiền, cách thanh toán, dòng tiền, độ mới, rủi ro và ai hợp lựa chọn nào.": [
+  "Comparing an off-plan purchase such as Sun Saphia Residence (expected handover November 2028) with a ready, operating seaside apartment in My Khe: total cost, payment method, cash flow, newness, risks and who suits which option.",
+  "Sun Saphia Residence(2028년 11월 입주 예정) 같은 미래 형성 주택 매입과 미케의 운영 중인 기존 해변 아파트 비교: 총비용, 납부 방식, 현금흐름, 신축도, 리스크 및 선택지별 적합 대상."
+ ],
  "So sánh phương án: thanh toán sớm, giãn tiến độ, vay ngân hàng": [
   "Compare options: early payment, extended payment schedule, bank loan",
   "방식 비교: 조기 납부, 납부 일정 연장, 은행 대출"
+ ],
+ "So với các dự án cùng tầm giá": [
+  "Compared with projects in the same price range",
+  "같은 가격대 프로젝트와 비교"
  ],
  "Spa": [
   "Spa",
@@ -1343,17 +2747,137 @@
   "Spana Tower Hoa Xuan",
   "Spana Tower Hoa Xuan"
  ],
+ "Spana Tower Hòa Xuân – tổng quan, giá bán, mặt bằng, chính sách": [
+  "Spana Tower Hoa Xuan – overview, prices, floor plans, sales policy",
+  "Spana Tower Hoa Xuan – 개요, 가격, 평면도, 분양 정책"
+ ],
+ "Spana Tower Hòa Xuân: giá bán, mặt bằng và loại căn 2026": [
+  "Spana Tower Hoa Xuan: prices, floor plans and unit types 2026",
+  "Spana Tower Hoa Xuan: 2026년 가격, 평면도 및 세대 유형"
+ ],
+ "Spana Tower: Bảng hàng 10/2026, gồm VAT & phí bảo trì. Giá tham khảo theo m² thông thủy.": [
+  "Spana Tower: available units list, October 2026, incl. VAT & maintenance fee. Reference prices per m² of net area.",
+  "Spana Tower: 2026년 10월 매물 목록, VAT 및 유지보수비 포함. 전용면적 m²당 참고 가격입니다."
+ ],
  "Studio": [
   "Studio",
   "스튜디오"
+ ],
+ "Studio 30 – 31 m² · 1PN+ 49 – 51 m² · 2PN 60 – 70 m² (thông thủy)": [
+  "Studio 30 – 31 m² · 1BR+ 49 – 51 m² · 2BR 60 – 70 m² (net area)",
+  "스튜디오 30 – 31 m² · 1베드룸+ 49 – 51 m² · 2베드룸 60 – 70 m²(전용면적)"
+ ],
+ "Studio góc Sun Saphia Residence khoảng 40 m²: rộng hơn studio thường 10 m², bố trí và ai nên chọn": [
+  "Sun Saphia Residence corner studio of about 40 m²: 10 m² larger than a standard studio, layout and who should choose it",
+  "Sun Saphia Residence 약 40 m² 코너 스튜디오: 일반 스튜디오보다 10 m² 넓은 배치와 추천 대상"
+ ],
+ "Sun Group mở nhận hồ sơ mua 104 căn nhà ở xã hội tòa SH2, Khu dân cư An Hòa (Sun Home) trên đường Vân Đồn, phường Sơn Trà từ 2/12/2026 đến 5/1/2027. Giá khoảng 6,38 triệu đồng/m², đối tượng là hộ giải tỏa chung cư Thuận Phước, Lâm đặc sản Hòa Cường, Hòa Minh.": [
+  "Sun Group is accepting applications to buy 104 social housing units in Tower SH2, An Hoa Residential Area (Sun Home) on Van Don Street, Son Tra Ward, from December 2, 2026 to January 5, 2027. The price is about 6.38 million VND/m², and applicants are households relocated from the Thuan Phuoc, Lam Dac San Hoa Cuong and Hoa Minh apartment buildings.",
+  "Sun Group은 2026년 12월 2일부터 2027년 1월 5일까지 선짜동 번돈 거리(Van Don St.) 안호아 주거단지(Sun Home) SH2동 사회주택 104세대 매입 신청을 받습니다. 가격은 m²당 약 638만 동이며, 대상은 Thuan Phuoc, Lam Dac San Hoa Cuong, Hoa Minh 아파트 철거 이주 가구입니다."
  ],
  "Sun NeO City Hòa Xuân": [
   "Sun NeO City Hoa Xuan",
   "Sun NeO City Hoa Xuan"
  ],
+ "Sun NeO City Hòa Xuân – toàn bộ phân khu": [
+  "Sun NeO City Hoa Xuan – all subdivisions",
+  "Sun NeO City Hoa Xuan – 전체 구역"
+ ],
+ "Sun NeO City Hòa Xuân – tổng quan, giá bán, mặt bằng, chính sách": [
+  "Sun NeO City Hoa Xuan – overview, prices, floor plans, sales policy",
+  "Sun NeO City Hoa Xuan – 개요, 가격, 평면도, 분양 정책"
+ ],
+ "Sun Ponte Residence – tổng quan, giá bán, mặt bằng, chính sách": [
+  "Sun Ponte Residence – overview, prices, floor plans, sales policy",
+  "Sun Ponte Residence – 개요, 가격, 평면도, 분양 정책"
+ ],
+ "Sun Ponte Residence: giá chuyển nhượng, giá cho thuê và các loại căn 2026": [
+  "Sun Ponte Residence: resale prices, rental prices and unit types 2026",
+  "Sun Ponte Residence: 2026년 전매 가격, 임대 가격 및 세대 유형"
+ ],
+ "Sun Ponte: Giá rao thứ cấp 7 – 10/2026. Giá tham khảo theo m² thông thủy.": [
+  "Sun Ponte: secondary-market asking prices, July – October 2026. Reference prices per m² of net area.",
+  "Sun Ponte: 2026년 7 – 10월 2차 시장 호가. 전용면적 m²당 참고 가격입니다."
+ ],
+ "Sun Property – thành viên Tập đoàn Sun Group": [
+  "Sun Property – a member of Sun Group",
+  "Sun Property – Sun Group 계열사"
+ ],
+ "Sun Riverpolis Nam Hòa Xuân – toàn bộ phân khu": [
+  "Sun Riverpolis Nam Hoa Xuan – all subdivisions",
+  "Sun Riverpolis Nam Hoa Xuan – 전체 구역"
+ ],
+ "Sun Saphia Residence cao 30 tầng (114 m): tầng 1 shophouse, tầng 2 tiện ích, tầng 3A – 28 căn hộ điển hình, tầng 29 căn sân vườn, tầng 30 penthouse. Phân tích chọn tầng theo view, quy hoạch xung quanh, gió biển và thang máy.": [
+  "Sun Saphia Residence is 30 storeys (114 m): shophouses on floor 1, amenities on floor 2, typical apartments on floors 3A – 28, garden units on floor 29, penthouses on floor 30. An analysis of choosing a floor by view, surrounding planning, sea breeze and elevators.",
+  "Sun Saphia Residence는 30층(114m) 높이입니다: 1층 샵하우스, 2층 편의시설, 3A – 28층 기준층 아파트, 29층 가든 세대, 30층 펜트하우스. 전망, 주변 도시계획, 바닷바람, 엘리베이터를 기준으로 층 선택을 분석합니다."
+ ],
+ "Sun Saphia Residence cho gia đình có con nhỏ: căn 2PN 61 – 70 m², công viên biển, bể bơi và những điều phải hỏi": [
+  "Sun Saphia Residence for families with young children: 2BR units of 61 – 70 m², beach park, swimming pool and what you must ask",
+  "어린 자녀가 있는 가족을 위한 Sun Saphia Residence: 61 – 70 m² 2베드룸 세대, 해변 공원, 수영장 및 꼭 확인할 사항"
+ ],
+ "Sun Saphia Residence cách sân bay quốc tế Đà Nẵng khoảng 9 – 14 km. Hướng dẫn đi sân bay: tuyến đường, thời gian theo giờ, phương tiện, tuyến LRT dự kiến và mẹo cho chủ căn khi đón trả khách lưu trú.": [
+  "Sun Saphia Residence is about 9 – 14 km from Da Nang International Airport. Getting to the airport: routes, travel times by hour, transport options, the planned LRT line and tips for owners picking up and dropping off guests.",
+  "Sun Saphia Residence는 다낭 국제공항에서 약 9 – 14km 떨어져 있습니다. 공항 가는 방법: 경로, 시간대별 소요 시간, 교통수단, 예정 LRT 노선 및 숙박 고객 픽업·샌딩 시 소유주를 위한 팁을 안내합니다."
+ ],
+ "Sun Saphia Residence có phải condotel? Khác căn hộ du lịch ở pháp lý, thời hạn, cách cho thuê": [
+  "Is Sun Saphia Residence a condotel? How it differs from tourist apartments in legal status, term and rental method",
+  "Sun Saphia Residence는 콘도텔일까요? 법적 상태, 기한, 임대 방식에서 관광 아파트와 다른 점"
+ ],
+ "Sun Saphia Residence gần Làng Đại học Đà Nẵng: 110 ha ở Ngũ Hành Sơn và nhu cầu thuê của giảng viên, chuyên gia": [
+  "Sun Saphia Residence near Da Nang University Village: 110 ha in Ngu Hanh Son and rental demand from lecturers and experts",
+  "다낭 대학촌 인근 Sun Saphia Residence: 응우한선 110헥타르와 교수진·전문가 임대 수요"
+ ],
+ "Sun Saphia Residence hay căn hộ có sẵn ven biển Mỹ Khê: mua căn chờ đến 2028 hay căn nhận ngay?": [
+  "Sun Saphia Residence or a ready seaside apartment in My Khe: buy a unit and wait until 2028, or one you can take over now?",
+  "Sun Saphia Residence와 미케 기존 해변 아파트: 2028년까지 기다릴 세대와 즉시 인수 가능한 세대 중 무엇을 살까요?"
+ ],
+ "Sun Saphia Residence hỏi đáp: bàn giao gì, phí quản lý, cho thuê, sổ 50 năm, quy hoạch xung quanh": [
+  "Sun Saphia Residence Q&A: what is handed over, management fees, rental, 50-year certificate, surrounding planning",
+  "Sun Saphia Residence 질의응답: 인도 범위, 관리비, 임대, 50년 증서, 주변 도시계획"
+ ],
+ "Sun Saphia Residence là căn hộ trên đất thương mại dịch vụ, không phải chung cư nhà ở. Mua để ở cần biết: thời hạn 50 năm, tạm trú, thường trú, bảo lãnh, cho thuê theo luật; bàn giao, tiện ích, chi phí hằng tháng.": [
+  "Sun Saphia Residence is an apartment on commercial-service land, not a residential apartment building. Buying to live in, you need to know: the 50-year term, temporary residence, permanent residence, the guarantee, rental under the law; handover, amenities and monthly costs.",
+  "Sun Saphia Residence는 상업서비스 용지 위의 아파트이며 주거용 아파트가 아닙니다. 실거주 목적 매입 시 알아야 할 사항: 50년 기한, 임시거주 등록, 상주 등록, 보증, 법에 따른 임대; 인도(입주), 편의시설, 월 비용."
+ ],
+ "Sun Saphia Residence nghiêng về căn hộ cho thuê, nhưng vẫn có 133 căn 2PN và 108 căn 1PN+ hợp gia đình trẻ. Bài phân tích chọn căn, tiện ích cho trẻ, công viên bãi tắm phía trước, bệnh viện, trường học và các câu hỏi an toàn nên hỏi trước khi mua để ở.": [
+  "Sun Saphia Residence leans towards rental apartments, but it still has 133 2BR units and 108 1BR+ units that suit young families. This article analyzes unit selection, amenities for children, the beach park in front, hospitals, schools and the safety questions to ask before buying to live in.",
+  "Sun Saphia Residence는 임대용 아파트 성격이 강하지만, 젊은 가족에게 적합한 2베드룸 133세대와 1베드룸+ 108세대도 있습니다. 세대 선택, 어린이 편의시설, 앞쪽 해변 공원, 병원, 학교 및 실거주 매입 전 확인할 안전 관련 질문을 분석합니다."
+ ],
+ "Sun Saphia Residence về đêm, tòa tháp 30 tầng ven biển (ảnh chủ đầu tư)": [
+  "Sun Saphia Residence at night, the 30-storey seaside tower (developer's photo)",
+  "야경 속 Sun Saphia Residence, 30층 해변 타워(시행사 사진)"
+ ],
  "Sun Saphia Residence Đà Nẵng": [
   "Sun Saphia Residence Da Nang",
   "Sun Saphia Residence Da Nang"
+ ],
+ "Sun Saphia Residence Đà Nẵng – tổng quan, giá bán, mặt bằng, chính sách": [
+  "Sun Saphia Residence Da Nang – overview, prices, floor plans, sales policy",
+  "Sun Saphia Residence Da Nang – 개요, 가격, 평면도, 분양 정책"
+ ],
+ "Sun Saphia Residence ở đâu": [
+  "Where is Sun Saphia Residence",
+  "Sun Saphia Residence 위치"
+ ],
+ "Sun Symphony 5 (Symphony 5 – Sun Symphony Residence) nằm trên đường Lê Văn Duyệt, phường Sơn Trà (Nại Hiên Đông cũ), bờ Đông sông Hàn: cách cầu Rồng 1,5 km, biển Mỹ Khê 2,5 km, sân bay 6 km. Tiện ích xung quanh, tổng mặt bằng.": [
+  "Sun Symphony 5 (Symphony 5 – Sun Symphony Residence) is on Le Van Duyet Street, Son Tra Ward (former Nai Hien Dong), on the east bank of the Han River: 1.5 km from Dragon Bridge, 2.5 km from My Khe Beach and 6 km from the airport. Surrounding amenities, master plan.",
+  "Sun Symphony 5(Symphony 5 – Sun Symphony Residence)는 다낭 한강 동쪽 강변, 선짜동(구 나이히엔동) 레반주옛 거리(Le Van Duyet St.)에 있습니다: 용다리 1.5km, 미케 비치 2.5km, 공항 6km. 주변 편의시설, 마스터플랜."
+ ],
+ "Sun Symphony 5 ở đâu? Vị trí bên sông Hàn, cách cầu Rồng 1,5 km, biển Mỹ Khê 2,5 km": [
+  "Where is Sun Symphony 5? On the Han River, 1.5 km from Dragon Bridge, 2.5 km from My Khe Beach",
+  "Sun Symphony 5는 어디에 있을까요? 다낭 한강변, 용다리 1.5km, 미케 비치 2.5km"
+ ],
+ "Sun Symphony Residence – toàn bộ phân khu": [
+  "Sun Symphony Residence – all subdivisions",
+  "Sun Symphony Residence – 전체 구역"
+ ],
+ "Sun Symphony: Giá rao trên sàn 21/10/2026. Giá tham khảo theo m² thông thủy.": [
+  "Sun Symphony: brokerage asking prices, October 21, 2026. Reference prices per m² of net area.",
+  "Sun Symphony: 2026년 10월 21일 중개업체 호가. 전용면적 m²당 참고 가격입니다."
+ ],
+ "Symphony 5 – Sun Symphony Residence – tổng quan, giá bán, mặt bằng, chính sách": [
+  "Symphony 5 – Sun Symphony Residence – overview, prices, floor plans, sales policy",
+  "Symphony 5 – Sun Symphony Residence – 개요, 가격, 평면도, 분양 정책"
  ],
  "Sân bay quốc tế Đà Nẵng": [
   "Da Nang International Airport",
@@ -1366,6 +2890,10 @@
  "Sông Hàn, cầu Rồng": [
   "Han River, Dragon Bridge",
   "다낭 한강, 용다리"
+ ],
+ "Sơn Trà": [
+  "Son Tra",
+  "선짜"
  ],
  "Sản phẩm": [
   "Units",
@@ -1383,6 +2911,14 @@
   "Number of units",
   "세대수"
  ],
+ "Số liệu trong bài theo thời điểm đăng.": [
+  "Figures in this article are as of the publication date.",
+  "본문의 수치는 게시 시점 기준입니다."
+ ],
+ "Số tiền": [
+  "Amount",
+  "금액"
+ ],
  "Số tầng": [
   "Floors",
   "층수"
@@ -1390,6 +2926,10 @@
  "Số điện thoại": [
   "Phone number",
   "전화번호"
+ ],
+ "Số điện thoại *": [
+  "Phone number *",
+  "전화번호 *"
  ],
  "Sổ hồng sở hữu": [
   "Pink Book ownership",
@@ -1427,6 +2967,10 @@
   "Freehold (long-term ownership).",
   "영구 소유."
  ],
+ "Sự kiện": [
+  "Event",
+  "이벤트"
+ ],
  "TTTM Vincom": [
   "Vincom shopping mall",
   "Vincom 쇼핑몰"
@@ -1435,9 +2979,17 @@
   "Vincom Da Nang shopping mall",
   "Vincom 다낭 쇼핑몰"
  ],
+ "Taxi, xe công nghệ:": [
+  "Taxi, ride-hailing:",
+  "택시, 차량 호출 앱:"
+ ],
  "Tham quan trực tuyến": [
   "Virtual tour",
   "온라인 투어"
+ ],
+ "Thanh Niên": [
+  "Thanh Nien",
+  "Thanh Nien"
  ],
  "Thanh toán": [
   "Payment",
@@ -1447,6 +2999,54 @@
   "Early payment: 7.5% incentive",
   "조기 납부: 7.5% 혜택"
  ],
+ "The Camellia Sơn Trà": [
+  "The Camellia Son Tra",
+  "The Camellia Son Tra"
+ ],
+ "The Filmore Đà Nẵng": [
+  "The Filmore Da Nang",
+  "The Filmore Da Nang"
+ ],
+ "The Legend Đà Nẵng": [
+  "The Legend Da Nang",
+  "The Legend Da Nang"
+ ],
+ "The Legend Đà Nẵng (The Legend City Danang) do Công ty TNHH MTV VIPICO làm chủ đầu tư, ROX Signature phát triển, trên lô A20 Võ Văn Kiệt ngay đầu cầu Rồng. Quy mô, vốn, lịch sử pháp lý khu đất và điều người mua cần kiểm tra.": [
+  "The Legend Da Nang (The Legend City Danang) has VIPICO One Member Co., Ltd. as its developer and is developed by ROX Signature, on plot A20 Vo Van Kiet right at the foot of Dragon Bridge. Scale, capital, the site's legal history and what buyers should check.",
+  "The Legend Da Nang(The Legend City Danang)은 VIPICO One Member Co., Ltd.가 시행사이고 ROX Signature가 개발하며, 용다리 바로 앞 보반끼엣 거리(Vo Van Kiet St.) A20 부지에 있습니다. 규모, 자본금, 부지의 법적 이력 및 매수자가 확인할 사항을 안내합니다."
+ ],
+ "The Legend Đà Nẵng của chủ đầu tư nào? VIPICO và dự án The Legend City đầu cầu Rồng": [
+  "Who is the developer of The Legend Da Nang? VIPICO and The Legend City project at the foot of Dragon Bridge",
+  "The Legend Da Nang의 시행사는? VIPICO와 용다리 앞 The Legend City 프로젝트"
+ ],
+ "The Legend Đà Nẵng – tổng quan, giá bán, mặt bằng, chính sách": [
+  "The Legend Da Nang – overview, prices, floor plans, sales policy",
+  "The Legend Da Nang – 개요, 가격, 평면도, 분양 정책"
+ ],
+ "The Legend: Bảng hàng chủ đầu tư 09/2026, gồm VAT & phí bảo trì. Giá tham khảo theo m² thông thủy.": [
+  "The Legend: developer's available units list, September 2026, incl. VAT & maintenance fee. Reference prices per m² of net area.",
+  "The Legend: 2026년 9월 시행사 매물 목록, VAT 및 유지보수비 포함. 전용면적 m²당 참고 가격입니다."
+ ],
+ "The Meridian Đà Nẵng": [
+  "The Meridian Da Nang",
+  "The Meridian Da Nang"
+ ],
+ "The Poet Residence Đà Nẵng": [
+  "The Poet Residence Da Nang",
+  "The Poet Residence Da Nang"
+ ],
+ "The Poet Residence Đà Nẵng – tổng quan, giá bán, mặt bằng, chính sách": [
+  "The Poet Residence Da Nang – overview, prices, floor plans, sales policy",
+  "The Poet Residence Da Nang – 개요, 가격, 평면도, 분양 정책"
+ ],
+ "The Poet: Bảng hàng chủ đầu tư 01/09/2026, gồm VAT. Giá tham khảo theo m² thông thủy.": [
+  "The Poet: developer's available units list, September 1, 2026, incl. VAT. Reference prices per m² of net area.",
+  "The Poet: 2026년 9월 1일 시행사 매물 목록, VAT 포함. 전용면적 m²당 참고 가격입니다."
+ ],
+ "Theo báo chí đưa tin": [
+  "According to press reports",
+  "언론 보도에 따르면"
+ ],
  "Theo chính sách bán hàng chủ đầu tư gần nhất; chính sách thay đổi theo đợt – liên hệ để nhận chính sách đang áp dụng.": [
   "Based on the developer's most recent sales policy; policies change with each phase – contact us for the policy currently in effect.",
   "시행사의 최신 분양 정책 기준이며, 정책은 차수별로 변동됩니다 – 현재 적용 중인 정책은 문의해 주십시오."
@@ -1455,9 +3055,17 @@
   "Follow Hoang Hiep on Facebook",
   "Facebook에서 호앙 히엡 팔로우"
  ],
+ "Theo tài liệu chủ đầu tư, Sun Saphia Residence cách ga LRT 09 trên tuyến đường sắt đô thị sân bay – biển khoảng 500 m. Bài nói rõ tuyến đang ở bước nào, 500 m đi bộ là bao lâu, lợi ích với người ở, người cho thuê và vì sao chưa nên tính ga vào giá.": [
+  "According to the developer's materials, Sun Saphia Residence is about 500 m from LRT station 09 on the airport – beach urban railway line. This article explains what stage the line is at, how long a 500 m walk takes, the benefits for residents and landlords, and why the station should not yet be factored into the price.",
+  "시행사 자료에 따르면 Sun Saphia Residence는 공항 – 해변 도시철도 노선의 LRT 09역에서 약 500m 거리입니다. 노선의 현재 단계, 500m 도보 소요 시간, 거주자·임대인에게 주는 이점, 그리고 아직 역을 가격에 반영하지 말아야 하는 이유를 설명합니다."
+ ],
  "Thiết kế": [
   "Design",
   "설계"
+ ],
+ "Thuê": [
+  "Rent",
+  "임대"
  ],
  "Thuộc tổ hợp Capital Square Đà Nẵng →": [
   "Part of the Capital Square Da Nang complex →",
@@ -1471,9 +3079,21 @@
   "Part of the Newtown Diamond Da Nang township →",
   "Newtown Diamond Da Nang 복합 단지 소속 →"
  ],
+ "Thuộc tổ hợp Sun NeO City Hòa Xuân": [
+  "Part of the Sun NeO City Hoa Xuan township",
+  "Sun NeO City Hoa Xuan 복합 단지 소속"
+ ],
  "Thuộc tổ hợp Sun NeO City Hòa Xuân →": [
   "Part of the Sun NeO City Hoa Xuan township →",
   "Sun NeO City Hoa Xuan 복합 단지 소속 →"
+ ],
+ "Thuộc tổ hợp Sun Riverpolis Nam Hòa Xuân": [
+  "Part of the Sun Riverpolis Nam Hoa Xuan township",
+  "Sun Riverpolis Nam Hoa Xuan 복합 단지 소속"
+ ],
+ "Thuộc tổ hợp Sun Symphony Residence": [
+  "Part of the Sun Symphony Residence township",
+  "Sun Symphony Residence 복합 단지 소속"
  ],
  "Thuộc tổ hợp Vinhomes Hải Vân Bay (Làng Vân) Đà Nẵng →": [
   "Part of the Vinhomes Hai Van Bay (Lang Van) Da Nang township →",
@@ -1487,25 +3107,101 @@
   "My Son Sanctuary (UNESCO World Heritage Site)",
   "미선 유적지(유네스코 세계유산)"
  ],
+ "Thêm": [
+  "More",
+  "더 보기"
+ ],
  "Thôn Tây Sơn Tây, xã Duy Hải, Duy Xuyên": [
   "Tay Son Tay Village, Duy Hai Commune, Duy Xuyen",
   "주이쑤옌 주이하이사 떠이선떠이 마을"
+ ],
+ "Thông thủy": [
+  "Net area",
+  "전용면적"
+ ],
+ "Thông thủy khoảng 30 – 70 m² (Studio, 1PN+, 2PN) và 12 penthouse": [
+  "Net area about 30 – 70 m² (Studio, 1BR+, 2BR) and 12 penthouses",
+  "전용면적 약 30 – 70 m²(스튜디오, 1베드룸+, 2베드룸) 및 펜트하우스 12세대"
+ ],
+ "Thông tin": [
+  "Information",
+  "정보"
  ],
  "Thông tin chỉ dùng để Hoàng Hiệp tư vấn, không chia sẻ cho bên khác.": [
   "Your information is used only for Hoang Hiep's consultation and is never shared with third parties.",
   "입력하신 정보는 호앙 히엡의 상담 목적으로만 사용되며 제3자에게 공유되지 않습니다."
  ],
+ "Thông tin của bạn được bảo mật và chỉ dùng để tư vấn.": [
+  "Your information is kept confidential and used only for consultation.",
+  "입력하신 정보는 보안이 유지되며 상담 목적으로만 사용됩니다."
+ ],
+ "Thông tin mang tính tham khảo, cập nhật 11/2026. Giá và chính sách thay đổi theo từng đợt – liên hệ để nhận thông tin mới nhất.": [
+  "Information for reference, updated November 2026. Prices and policies change with each phase – contact us for the latest information.",
+  "참고 정보이며 2026년 11월에 업데이트되었습니다. 가격과 정책은 차수별로 변동됩니다 – 최신 정보는 문의해 주십시오."
+ ],
+ "Thông tin tham khảo 11/2026 – chính sách thay đổi theo từng đợt, liên hệ Hoàng Hiệp 0904 567 009 để nhận phiếu tính giá căn cụ thể": [
+  "Reference information, November 2026 – policies change with each phase; contact Hoang Hiep at 0904 567 009 to receive a price quote for a specific unit",
+  "2026년 11월 참고 정보 – 정책은 차수별로 변동됩니다. 특정 세대의 가격 산정표는 호앙 히엡 0904 567 009로 문의해 주십시오"
+ ],
  "Thông tin tham khảo 12/2026 – chính sách thay đổi theo từng đợt, liên hệ Hoàng Hiệp 0904 567 009 để nhận phiếu tính giá căn cụ thể": [
   "Reference information, December 2026 – policies change with each phase; contact Hoang Hiep at 0904 567 009 to receive a price quote for a specific unit",
   "2026년 12월 참고 정보 – 정책은 차수별로 변동됩니다. 특정 세대의 가격 산정표는 호앙 히엡 0904 567 009로 문의해 주십시오"
+ ],
+ "Thông tin đầy đủ về dự án:": [
+  "Full project information:",
+  "프로젝트 상세 정보:"
+ ],
+ "Thư Viện Pháp Luật": [
+  "Thu Vien Phap Luat",
+  "Thu Vien Phap Luat"
+ ],
+ "Thư viện Pháp luật": [
+  "Thu Vien Phap Luat",
+  "Thu Vien Phap Luat"
  ],
  "Thư viện ảnh": [
   "Photo gallery",
   "사진 갤러리"
  ],
+ "Thấp tầng": [
+  "Low-rise",
+  "저층"
+ ],
+ "Thị trường": [
+  "Market",
+  "시장 동향"
+ ],
+ "Thống kê đầu tư": [
+  "Investment statistics",
+  "투자 통계"
+ ],
+ "Thời gian": [
+  "Time",
+  "시간"
+ ],
+ "Thời hạn": [
+  "Term",
+  "기간"
+ ],
+ "Thời hạn sở hữu:": [
+  "Ownership term:",
+  "소유 기간:"
+ ],
  "Thời điểm": [
   "Timing",
   "시점"
+ ],
+ "Times Square Đà Nẵng": [
+  "Times Square Da Nang",
+  "Times Square Da Nang"
+ ],
+ "Tin dự án": [
+  "Project news",
+  "프로젝트 소식"
+ ],
+ "Tin mới nhất": [
+  "Latest news",
+  "최신 뉴스"
  ],
  "Tin mới về": [
   "Latest news on",
@@ -1523,13 +3219,53 @@
   "Handover standard",
   "인도 기준"
  ],
+ "Tiêu chí": [
+  "Criteria",
+  "기준"
+ ],
+ "Tiến độ": [
+  "Construction progress",
+  "공사 진행"
+ ],
  "Tiến độ Capital Square Đà Nẵng: Capital Square 3 thi công phần thân, bàn giao dự kiến 2027": [
   "Capital Square Da Nang construction progress: Capital Square 3 superstructure under construction, handover expected in 2027",
   "Capital Square Da Nang 공사 진행: Capital Square 3 골조 공사 중, 2027년 입주(인도) 예정"
  ],
+ "Tiến độ Nobu Residences Đà Nẵng 10/2026: kết cấu đến tầng 22, lắp kính tầng 7 – 13": [
+  "Nobu Residences Da Nang construction progress, October 2026: structure up to floor 22, glazing on floors 7 – 13",
+  "2026년 10월 Nobu Residences Da Nang 공사 진행: 22층까지 골조, 7 – 13층 유리 설치"
+ ],
+ "Tiến độ The Legend Đà Nẵng: từ khởi công 2/2025 đến cất nóc và bàn giao 2028": [
+  "The Legend Da Nang construction progress: from groundbreaking in February 2025 to topping out and handover in 2028",
+  "The Legend Da Nang 공사 진행: 2025년 2월 착공부터 상량, 2028년 입주(인도)까지"
+ ],
+ "Tiến độ thanh toán Symphony 5: cọc 100 triệu, 15 đợt, trả 70% nhận căn 30/06/2028": [
+  "Symphony 5 payment schedule: 100 million VND deposit, 15 installments, pay 70% and receive the unit on June 30, 2028",
+  "Symphony 5 납부 일정: 계약금 1억 동, 15회차, 70% 납부 후 2028년 6월 30일 입주"
+ ],
+ "Tiến độ:": [
+  "Construction progress:",
+  "공사 진행:"
+ ],
+ "Tiền Phong": [
+  "Tien Phong",
+  "Tien Phong"
+ ],
  "Tiện ích": [
   "Amenities",
   "편의시설"
+ ],
+ "Tiện ích Casamia Balanca: 5 công viên chủ đề, bể bơi Olympic, bến du thuyền trong khu 31,1 ha": [
+  "Casamia Balanca amenities: 5 themed parks, an Olympic-size pool and a marina within the 31.1 ha site",
+  "Casamia Balanca 편의시설: 31.1헥타르 단지 내 테마 공원 5곳, 올림픽 규격 수영장, 마리나"
+ ],
+ "Tiện ích The Poet Residence: hồ bơi trong nhà, gym, tầng mái ngắm pháo hoa": [
+  "The Poet Residence amenities: indoor pool, gym, rooftop for watching fireworks",
+  "The Poet Residence 편의시설: 실내 수영장, 헬스장, 불꽃놀이 감상 루프탑"
+ ],
+ "Trang chủ": [
+  "Home",
+  "홈"
  ],
  "Trang dự án có bảng tính vay và dòng tiền để bạn tự ước tính số tiền trả hằng tháng. Hiệp hỗ trợ kết nối ngân hàng, hồ sơ vay khi bạn chọn được căn phù hợp.": [
   "The project page has a loan and cash-flow calculator so you can estimate your monthly payment yourself. Hiep helps connect you with banks and prepare the loan application once you have chosen a suitable unit.",
@@ -1559,6 +3295,14 @@
   "Central Da Nang",
   "다낭 도심"
  ],
+ "Trên mặt bằng tầng điển hình, Sun Saphia Residence có studio góc khoảng 40 m² bên cạnh studio 30 – 31 m². Phân tích bố trí, ưu nhược điểm, cách tính phí quản lý và nhóm khách thuê phù hợp với studio góc.": [
+  "On the typical floor plan, Sun Saphia Residence has corner studios of about 40 m² alongside 30 – 31 m² studios. An analysis of the layout, pros and cons, how the management fee is calculated and the tenant groups that suit corner studios.",
+  "기준층 평면도상 Sun Saphia Residence에는 30 – 31 m² 스튜디오 외에 약 40 m² 코너 스튜디오가 있습니다. 배치, 장단점, 관리비 산정 방식 및 코너 스튜디오에 맞는 임차인층을 분석합니다."
+ ],
+ "Trường tiểu học công lập trong Khu đô thị sinh thái Hòa Xuân: khu đất 13.655 m², 3 mặt tiền Lê Sỹ – Cồn Dầu 18 – Đỗ Quỳ": [
+  "Public primary school in Hoa Xuan Eco Urban Area: a 13,655 m² site fronting 3 streets, Le Sy – Con Dau 18 – Do Quy",
+  "호아쑤언 생태 신도시 내 공립 초등학교: 13,655 m² 부지, 레시(Le Sy St.) – 꼰자우 18(Con Dau 18 St.) – 도꾸이(Do Quy St.) 3면 접도"
+ ],
  "Trả trước hạn từng đợt (≥ 10 ngày): hưởng 8%/năm; 5% cuối đóng khi bàn giao, chủ đầu tư trả lãi 8%/năm": [
   "Pay each installment ahead of schedule (≥ 10 days): earn 8%/year; the final 5% is paid at handover, and the developer pays 8%/year interest",
   "회차별 조기 납부(10일 이상): 연 8% 혜택; 마지막 5%는 인도(입주) 시 납부하며 시행사가 연 8% 이자 지급"
@@ -1570,6 +3314,18 @@
  "Trục Cách Mạng Tháng 8": [
   "Cach Mang Thang 8 Street axis",
   "까익망탕땀 거리(Cach Mang Thang 8 St.) 축"
+ ],
+ "Tuổi Trẻ": [
+  "Tuoi Tre",
+  "Tuoi Tre"
+ ],
+ "Tác động / nhận định của Hoàng Hiệp": [
+  "Impact / Hoang Hiep's view",
+  "영향 / 호앙 히엡의 견해"
+ ],
+ "Tìm hiểu thêm về Hoàng Hiệp": [
+  "Learn more about Hoang Hiep",
+  "호앙 히엡 더 알아보기"
  ],
  "Tình trạng": [
   "Status",
@@ -1587,21 +3343,57 @@
   "Current status: handed over.",
   "현재 상태: 입주 완료."
  ],
+ "Tính tiền từng đợt": [
+  "Calculate each installment",
+  "회차별 금액 계산"
+ ],
  "Tòa C3 Capital Square Đà Nẵng": [
   "Tower C3 Capital Square Da Nang",
   "Capital Square Da Nang C3동"
+ ],
+ "Tòa C3 Capital Square Đà Nẵng cao 26 tầng ở hàng tòa đầu tiên nhìn sông Hàn: 16 shophouse, căn sân vườn tầng 4, khoảng 206 căn hộ 1PN – 3PN, penthouse tầng 26. Phân tầng, diện tích và cách chọn căn theo hướng nhìn.": [
+  "Tower C3 Capital Square Da Nang is 26 storeys in the first row of towers facing the Han River: 16 shophouses, garden units on floor 4, about 206 1BR – 3BR apartments, penthouses on floor 26. Floor breakdown, areas and how to choose a unit by view.",
+  "Capital Square Da Nang C3동은 다낭 한강을 바라보는 첫 번째 열의 26층 타워입니다: 샵하우스 16세대, 4층 가든 세대, 1베드룸 – 3베드룸 아파트 약 206세대, 26층 펜트하우스. 층 구성, 면적 및 전망별 세대 선택 방법을 안내합니다."
+ ],
+ "Tòa C3 Capital Square: 26 tầng mặt tiền Trần Hưng Đạo, phân tầng và cách chọn căn": [
+  "Tower C3 Capital Square: 26 storeys fronting Tran Hung Dao Street, floor breakdown and how to choose a unit",
+  "Capital Square C3동: 쩐흥다오 거리(Tran Hung Dao St.) 전면 26층, 층 구성과 세대 선택 방법"
+ ],
+ "Tòa F2: bàn giao sử dụng dự kiến 31/5/2028": [
+  "Tower F2: handover for use expected May 31, 2028",
+  "F2동: 2028년 5월 31일 입주(인도) 예정"
+ ],
+ "Tòa Sun Saphia Residence có mặt dài hướng biển phía Đông, dãy phía sau nhìn về thành phố phía Tây. Bài phân tích nắng, gió, nhiệt từng hướng căn hộ, cách giảm nóng cho căn phía Tây và hướng nào hợp để ở, hướng nào hợp cho thuê.": [
+  "Sun Saphia Residence's long side faces the sea to the east, while the rear row looks west towards the city. This article analyzes sun, wind and heat for each orientation, how to reduce heat in west-facing units, and which orientations suit living in and which suit renting out.",
+  "Sun Saphia Residence는 긴 면이 동쪽 바다를 향하고, 뒤쪽 라인은 서쪽 도시를 바라봅니다. 향별 햇빛, 바람, 열을 분석하고, 서향 세대의 더위를 줄이는 방법과 실거주·임대에 각각 적합한 향을 안내합니다."
  ],
  "Tòa nằm trong tổ hợp Capital Square Đà Nẵng (61.368 m²) giữa các trục Trần Hưng Đạo – Ngô Quyền – Nguyễn Công Trứ, bờ Đông sông Hàn, liền kề TTTM Vincom.": [
   "The tower is part of the Capital Square Da Nang complex (61,368 m²) between Tran Hung Dao, Ngo Quyen and Nguyen Cong Tru streets, on the east bank of the Han River, next to the Vincom shopping mall.",
   "이 동은 쩐흥다오(Tran Hung Dao St.) – 응오꾸옌(Ngo Quyen St.) – 응우옌꽁쯔(Nguyen Cong Tru St.) 거리 사이, 다낭 한강 동쪽 강변의 Capital Square Da Nang 복합 단지(61,368 m²) 내에 있으며 Vincom 쇼핑몰과 인접해 있습니다."
  ],
+ "Tôi là Hoàng Hiệp, hơn 15 năm gắn bó với thị trường bất động sản Đà Nẵng và miền Trung. Đi lên từ trưởng nhóm, trưởng phòng, giám đốc sàn, giám đốc kinh doanh đến CEO, tôi hiểu rõ từng dự án, từng khu vực và cách chọn đúng sản phẩm cho nhu cầu ở hay đầu tư.": [
+  "I'm Hoang Hiep, with more than 15 years in the Da Nang and Central Vietnam real estate market. Having risen from team leader, department head, real estate exchange director and sales director to CEO, I know each project and each area well, and how to choose the right product for living in or investing.",
+  "저는 호앙 히엡입니다. 15년 넘게 다낭 및 베트남 중부 부동산 시장에서 일해 왔습니다. 팀장, 부서장, 부동산 거래소 대표, 영업 총괄을 거쳐 CEO에 이르기까지 경험을 쌓아 각 프로젝트와 지역을 잘 알고 있으며, 실거주 또는 투자 목적에 맞는 상품을 고르는 방법을 잘 알고 있습니다."
+ ],
  "Tư vấn bất động sản Đà Nẵng · trực tiếp, không qua tổng đài": [
   "Da Nang real estate advice · direct, no call center",
   "다낭 부동산 상담 · 콜센터 없이 직접 상담"
  ],
+ "Tư vấn đầu tư": [
+  "Investment advice",
+  "투자 상담"
+ ],
+ "Tất cả chủ đầu tư (72)": [
+  "All developers (72)",
+  "전체 시행사(72)"
+ ],
  "Tất cả dự án": [
   "All projects",
   "전체 프로젝트"
+ ],
+ "Tầng": [
+  "Floor",
+  "층"
  ],
  "Tầng 1": [
   "Floor 1",
@@ -1627,6 +3419,10 @@
   "Floor 3 · click to zoom in.",
   "3층 · 클릭하여 확대."
  ],
+ "Tầng cao hay tầng thấp Sun Saphia Residence? Cấu trúc 30 tầng, view 4 hướng và 7 thang máy": [
+  "High or low floor at Sun Saphia Residence? 30-storey structure, 4-way views and 7 elevators",
+  "Sun Saphia Residence, 고층과 저층 중 어디가 좋을까요? 30층 구조, 4면 전망, 엘리베이터 7대"
+ ],
  "Tập đoàn Sun Group": [
   "Sun Group",
   "Sun Group"
@@ -1635,6 +3431,10 @@
   "Sun Group (developed by Sun Property)",
   "Sun Group(Sun Property 개발)"
  ],
+ "Tập đoàn Đạt Phương": [
+  "Dat Phuong Group",
+  "Dat Phuong Group"
+ ],
  "Tổ hợp": [
   "Complex",
   "복합 단지"
@@ -1642,6 +3442,38 @@
  "Tổ hợp dự án": [
   "Mixed-use township",
   "복합 단지"
+ ],
+ "Tổ hợp dự án · Biệt thự nghỉ dưỡng": [
+  "Mixed-use township · Resort villas",
+  "복합 단지 · 리조트 빌라"
+ ],
+ "Tổ hợp dự án · Biệt thự nghỉ dưỡng · Nhà phố – Shophouse · Biệt thự sở hữu lâu dài": [
+  "Mixed-use township · Resort villas · Townhouses & shophouses · Freehold villas",
+  "복합 단지 · 리조트 빌라 · 타운하우스·샵하우스 · 영구 소유 빌라"
+ ],
+ "Tổ hợp dự án · Căn hộ sở hữu lâu dài": [
+  "Mixed-use township · Freehold apartments",
+  "복합 단지 · 영구 소유 아파트"
+ ],
+ "Tổ hợp dự án · Căn hộ sở hữu lâu dài · Đất nền": [
+  "Mixed-use township · Freehold apartments · Land plots",
+  "복합 단지 · 영구 소유 아파트 · 토지(필지)"
+ ],
+ "Tổng hợp: Hoàng Hiệp – môi giới bất động sản Đà Nẵng hơn 15 năm, từ giỏ hàng và tài liệu chủ đầu tư · cập nhật 10/11/2026. Giá tham khảo, thay đổi theo đợt.": [
+  "Compiled by: Hoang Hiep – Da Nang real estate broker for more than 15 years, from available units lists and developer materials · updated November 10, 2026. Reference prices, subject to change with each phase.",
+  "작성: 호앙 히엡 – 15년 이상 경력의 다낭 부동산 중개인, 매물 목록 및 시행사 자료 기준 · 2026년 11월 10일 업데이트. 참고 가격이며 차수별로 변동됩니다."
+ ],
+ "Tổng hợp: Hoàng Hiệp – môi giới bất động sản Đà Nẵng hơn 15 năm, từ tài liệu chủ đầu tư và dữ liệu dự án · cập nhật 10/11/2026.": [
+  "Compiled by: Hoang Hiep – Da Nang real estate broker for more than 15 years, from developer materials and project data · updated November 10, 2026.",
+  "작성: 호앙 히엡 – 15년 이상 경력의 다낭 부동산 중개인, 시행사 자료 및 프로젝트 데이터 기준 · 2026년 11월 10일 업데이트."
+ ],
+ "Tổng hợp: Hoàng Hiệp – môi giới bất động sản Đà Nẵng hơn 15 năm, từ tài liệu chủ đầu tư, văn bản Sở Xây dựng và báo chí · cập nhật 11/2026.": [
+  "Compiled by: Hoang Hiep – Da Nang real estate broker for more than 15 years, from developer materials, Department of Construction documents and the press · updated November 2026.",
+  "작성: 호앙 히엡 – 15년 이상 경력의 다낭 부동산 중개인, 시행사 자료, 건설국 문서 및 언론 보도 기준 · 2026년 11월 업데이트."
+ ],
+ "Tổng mức đầu tư": [
+  "Total investment",
+  "총투자액"
  ],
  "Tổng quan": [
   "Key facts",
@@ -1659,13 +3491,25 @@
   "Overall project",
   "프로젝트 전체"
  ],
+ "Tổng vốn": [
+  "Total capital",
+  "총자본"
+ ],
  "Từ 2,1 tỷ (tham khảo)": [
   "From 2.1 billion VND (for reference)",
   "21억 동부터(참고)"
  ],
+ "Từ 2,42 tỷ": [
+  "From 2.42 billion VND",
+  "24억 2천만 동부터"
+ ],
  "Từ 2,42 tỷ (tham khảo)": [
   "From 2.42 billion VND (for reference)",
   "24억 2천만 동부터(참고)"
+ ],
+ "Từ 2,5 tỷ": [
+  "From 2.5 billion VND",
+  "25억 동부터"
  ],
  "Từ 3,01 tỷ (tham khảo)": [
   "From 3.01 billion VND (for reference)",
@@ -1675,9 +3519,21 @@
   "From 3.52 billion VND (for reference)",
   "35억 2천만 동부터(참고)"
  ],
+ "Từ 4,32 tỷ": [
+  "From 4.32 billion VND",
+  "43억 2천만 동부터"
+ ],
  "Từ 4,32 tỷ (tham khảo)": [
   "From 4.32 billion VND (for reference)",
   "43억 2천만 동부터(참고)"
+ ],
+ "Từ 4,94 tỷ": [
+  "From 4.94 billion VND",
+  "49억 4천만 동부터"
+ ],
+ "Từ 5,3 tỷ": [
+  "From 5.3 billion VND",
+  "53억 동부터"
  ],
  "Từ 5,3 tỷ (tham khảo)": [
   "From 5.3 billion VND (for reference)",
@@ -1699,9 +3555,33 @@
   "From 7.6 billion VND (for reference)",
   "76억 동부터(참고)"
  ],
+ "Từ 7,65 tỷ": [
+  "From 7.65 billion VND",
+  "76억 5천만 동부터"
+ ],
+ "Từ Sun Saphia Residence đi Hội An bao xa? Đường ven biển, xe buýt và lịch trình cho khách thuê": [
+  "How far is Hoi An from Sun Saphia Residence? Coastal road, buses and itineraries for tenants",
+  "Sun Saphia Residence에서 호이안까지 얼마나 걸릴까요? 해안 도로, 버스 및 임차인을 위한 일정"
+ ],
+ "Từ Sun Saphia Residence đi bán đảo Sơn Trà: chùa Linh Ứng, voọc chà vá chân nâu và lịch trình nửa ngày": [
+  "From Sun Saphia Residence to Son Tra Peninsula: Linh Ung Pagoda, red-shanked douc langurs and a half-day itinerary",
+  "Sun Saphia Residence에서 선짜 반도로: 린응 사원, 붉은다리두크랑구르, 반나절 일정"
+ ],
+ "Từ Sun Saphia Residence đi sân bay Đà Nẵng mất bao lâu? Đường đi, giờ cao điểm và mẹo đón khách": [
+  "How long from Sun Saphia Residence to Da Nang Airport? Routes, rush hours and tips for picking up guests",
+  "Sun Saphia Residence에서 다낭 공항까지 얼마나 걸릴까요? 경로, 출퇴근 시간대 및 고객 픽업 팁"
+ ],
  "Tỷ lệ": [
   "Percentage",
   "비율"
+ ],
+ "UBND TP Đà Nẵng phê duyệt đề án du lịch sinh thái, nghỉ dưỡng, giải trí tại Khu bảo tồn thiên nhiên Cù Lao Chàm đến 2030, tầm nhìn 2050: 18 điểm du lịch trên 509,75 ha, 12 tuyến dài 39,8 km, kinh phí định hướng 346,5 tỷ đồng.": [
+  "Da Nang City People's Committee approves the scheme for eco-tourism, resort and entertainment in the Cu Lao Cham (Cham Islands) Nature Reserve to 2030, with a vision to 2050: 18 tourist sites on 509.75 ha, 12 routes totaling 39.8 km, indicative budget of 346.5 billion VND.",
+  "다낭시 인민위원회, 꾸라오짬(Cham Islands) 자연보호구역 생태관광·휴양·엔터테인먼트 계획(2030년까지, 2050년 비전) 승인: 509.75헥타르에 관광지 18곳, 총 39.8km 노선 12개, 예상 예산 3,465억 동."
+ ],
+ "VCRE (Viet Capital Real Estate) – pháp nhân dự án: Công ty CP Bất động sản Circle Point": [
+  "VCRE (Viet Capital Real Estate) – project entity: Circle Point Real Estate JSC",
+  "VCRE(Viet Capital Real Estate) – 프로젝트 법인: Circle Point Real Estate JSC"
  ],
  "Vay PA1 – lãi suất cố định: vay theo giá gốc tới 70% giá trị căn (sản phẩm giãn xây vay tới 80% tiền đất và thương mại, không vượt 70% tổng giá trị); khách trả 3%/năm (18 tháng), 4,5% (24 tháng), 6% (30 tháng), 7,5% (36 tháng), 8,5% (48 tháng), 9% (60 tháng)": [
   "PA1 loan – fixed interest rate: borrow up to 70% of the unit value based on the original price (deferred-construction products can borrow up to 80% of the land and commercial value, not exceeding 70% of the total value); the buyer pays 3%/year (18 months), 4.5% (24 months), 6% (30 months), 7.5% (36 months), 8.5% (48 months), 9% (60 months)",
@@ -1710,6 +3590,10 @@
  "Vay PA2 – hỗ trợ lãi suất 0%, cộng thêm vào giá gốc: vay 70% giá trị căn +3,5% (18 tháng), +8% (24 tháng), +13,5% (30 tháng), +19,5% (36 tháng); vay 80% tiền đất và thương mại (chỉ sản phẩm giãn xây) +5,5%, +10,5%, +17,5%, +25%": [
   "PA2 loan – 0% interest support, added to the original price: borrow 70% of the unit value +3.5% (18 months), +8% (24 months), +13.5% (30 months), +19.5% (36 months); borrow 80% of the land and commercial value (deferred-construction products only) +5.5%, +10.5%, +17.5%, +25%",
   "PA2 대출 – 0% 이자 지원, 원가에 가산: 세대 가치의 70% 대출 시 +3.5%(18개월), +8%(24개월), +13.5%(30개월), +19.5%(36개월); 토지·상업 가치의 80% 대출 시(건축 유예 상품만) +5.5%, +10.5%, +17.5%, +25%"
+ ],
+ "Vay ngân hàng": [
+  "Bank loan",
+  "은행 대출"
  ],
  "Villas": [
   "Villas",
@@ -1731,9 +3615,17 @@
   "Vinhomes Hai Van Bay (Lang Van) Da Nang",
   "Vinhomes Hai Van Bay (Lang Van) Da Nang"
  ],
+ "Vinhomes Hải Vân Bay (Làng Vân) Đà Nẵng – tổng quan, giá bán, mặt bằng, chính sách": [
+  "Vinhomes Hai Van Bay (Lang Van) Da Nang – overview, prices, floor plans, sales policy",
+  "Vinhomes Hai Van Bay (Lang Van) Da Nang – 개요, 가격, 평면도, 분양 정책"
+ ],
  "Vinhomes Hải Vân Bay – phối cảnh dự án": [
   "Vinhomes Hai Van Bay – project rendering",
   "Vinhomes Hai Van Bay – 프로젝트 조감도"
+ ],
+ "Vinhomes Hải Vân Bay: cập nhật 2026 – phân khu, giá, tiến độ": [
+  "Vinhomes Hai Van Bay: 2026 update – subdivisions, prices, construction progress",
+  "Vinhomes Hai Van Bay: 2026 업데이트 – 구역, 가격, 공사 진행"
  ],
  "Voucher Vinhomes: thanh toán tối đa 30% giá trị bất động sản – áp dụng voucher chậm nhất ngày 31/12/2026; mỗi voucher áp dụng 01 căn, hạn chế chuyển nhượng 03 tháng từ ngày dùng voucher": [
   "Vinhomes voucher: pay up to 30% of the property value – the voucher must be applied by December 31, 2026 at the latest; each voucher applies to 1 unit, with resale restricted for 3 months from the date the voucher is used",
@@ -1743,17 +3635,45 @@
   "A few minutes",
   "몇 분 거리"
  ],
+ "Văn bản": [
+  "Document",
+  "문서"
+ ],
  "Vận hành": [
   "Operator",
   "운영사"
+ ],
+ "Về Hiệp": [
+  "About Hiep",
+  "히엡 소개"
  ],
  "Vị trí": [
   "Location",
   "입지"
  ],
+ "Vị trí The Poet Residence: 300 m ra biển Mỹ Khê, kết nối trung tâm thế nào?": [
+  "The Poet Residence location: 300 m to My Khe Beach – how does it connect to the city center?",
+  "The Poet Residence 입지: 미케 비치까지 300m, 도심과는 어떻게 연결될까요?"
+ ],
+ "Vị trí Vinhomes Làng Vân (Vinhomes Hải Vân Bay): vịnh Nam Chơn, chân đèo Hải Vân, phường Hải Vân, Đà Nẵng – khoảng 20 – 25 phút về trung tâm và sân bay, sát hầm Hải Vân, Quốc lộ 1A, gần cảng Liên Chiểu.": [
+  "Location of Vinhomes Lang Van (Vinhomes Hai Van Bay): Nam Chon Bay, at the foot of Hai Van Pass, Hai Van Ward, Da Nang – about 20 – 25 minutes to the city center and the airport, next to Hai Van Tunnel and National Highway 1A, near Lien Chieu Port.",
+  "Vinhomes Lang Van(Vinhomes Hai Van Bay) 입지: 다낭 하이번동 하이번 고개 아래 남쩐 만 – 도심과 공항까지 약 20 – 25분, 하이번 터널·1A 국도 인접, 리엔찌에우 항 인근."
+ ],
  "Vị trí Vinhomes Làng Vân ở đâu? Kết nối hầm Hải Vân, cảng Liên Chiểu, trung tâm Đà Nẵng": [
   "Where is Vinhomes Lang Van? Connections to Hai Van Tunnel, Lien Chieu Port and central Da Nang",
   "Vinhomes Lang Van은 어디에 있을까요? 하이번 터널, 리엔찌에우 항, 다낭 도심과의 연결"
+ ],
+ "Vị trí – tiện ích": [
+  "Location – amenities",
+  "입지 – 편의시설"
+ ],
+ "Vị trí:": [
+  "Location:",
+  "입지:"
+ ],
+ "Vịnh An Hòa City": [
+  "Vinh An Hoa City",
+  "Vinh An Hoa City"
  ],
  "Vịnh Nam Chơn": [
   "Nam Chon Bay",
@@ -1767,6 +3687,10 @@
   "View in 4D",
   "4D 보기"
  ],
+ "Xem bảng giá 30 dự án căn hộ Đà Nẵng →": [
+  "View price lists for 30 Da Nang apartment projects →",
+  "다낭 아파트 30개 프로젝트 분양가표 보기 →"
+ ],
  "Xem các dự án khác": [
   "View other projects",
   "다른 프로젝트 보기"
@@ -1778,6 +3702,18 @@
  "Xem thêm": [
   "See more",
   "더 보기"
+ ],
+ "Xem thêm bài": [
+  "More articles",
+  "기사 더 보기"
+ ],
+ "Xem thêm danh sách": [
+  "See more in the list",
+  "목록 더 보기"
+ ],
+ "Xem thêm:": [
+  "See also:",
+  "함께 보기:"
  ],
  "Xem toàn bộ album (2 ảnh)": [
   "View the full album (2 photos)",
@@ -1794,6 +3730,18 @@
  "Xem toàn bộ album (6 ảnh)": [
   "View the full album (6 photos)",
   "전체 앨범 보기(사진 6장)"
+ ],
+ "Xem toàn bộ dự án tại trang": [
+  "See all projects on the page",
+  "전체 프로젝트는 다음 페이지에서 확인하십시오:"
+ ],
+ "Xem trang dự án": [
+  "View project page",
+  "프로젝트 페이지 보기"
+ ],
+ "Xem tất cả": [
+  "View all",
+  "전체 보기"
  ],
  "Xem tổng quan dự án tại trang": [
   "See the project overview on the page",
@@ -1835,6 +3783,66 @@
   "baodautu.vn",
   "baodautu.vn"
  ],
+ "biển Mỹ Khê": [
+  "My Khe Beach",
+  "미케 비치"
+ ],
+ "bảng giá Casamia Balanca Hội An": [
+  "Casamia Balanca Hoi An price list",
+  "Casamia Balanca Hoi An 분양가표"
+ ],
+ "bảng giá Cora Tower": [
+  "Cora Tower price list",
+  "Cora Tower 분양가표"
+ ],
+ "bảng giá FourS Tower Đà Nẵng": [
+  "FourS Tower Da Nang price list",
+  "FourS Tower Da Nang 분양가표"
+ ],
+ "bảng giá Nobu Residences Đà Nẵng": [
+  "Nobu Residences Da Nang price list",
+  "Nobu Residences Da Nang 분양가표"
+ ],
+ "bảng giá Spana Tower Hòa Xuân": [
+  "Spana Tower Hoa Xuan price list",
+  "Spana Tower Hoa Xuan 분양가표"
+ ],
+ "bảng giá Sun NeO City": [
+  "Sun NeO City price list",
+  "Sun NeO City 분양가표"
+ ],
+ "bảng giá Sun Ponte Residence": [
+  "Sun Ponte Residence price list",
+  "Sun Ponte Residence 분양가표"
+ ],
+ "bảng giá Sun Saphia Residence": [
+  "Sun Saphia Residence price list",
+  "Sun Saphia Residence 분양가표"
+ ],
+ "bảng giá Sun Symphony 5": [
+  "Sun Symphony 5 price list",
+  "Sun Symphony 5 분양가표"
+ ],
+ "bảng giá The Legend Đà Nẵng": [
+  "The Legend Da Nang price list",
+  "The Legend Da Nang 분양가표"
+ ],
+ "bảng giá The Poet Residence Đà Nẵng": [
+  "The Poet Residence Da Nang price list",
+  "The Poet Residence Da Nang 분양가표"
+ ],
+ "bảng giá Vinhomes Hải Vân Bay": [
+  "Vinhomes Hai Van Bay price list",
+  "Vinhomes Hai Van Bay 분양가표"
+ ],
+ "bảng giá đất Đà Nẵng sửa đổi 2026": [
+  "Da Nang's amended land price table 2026",
+  "2026년 개정 다낭 토지 가격표"
+ ],
+ "bất động sản Sơn Trà": [
+  "Son Tra real estate",
+  "선짜 부동산"
+ ],
  "cafef.vn": [
   "cafef.vn",
   "cafef.vn"
@@ -1843,6 +3851,30 @@
   "cafeland.vn",
   "cafeland.vn"
  ],
+ "cho thuê bất động sản Đà Nẵng": [
+  "Da Nang property for rent",
+  "다낭 부동산 임대"
+ ],
+ "căn hộ view biển Đà Nẵng": [
+  "Da Nang sea-view apartments",
+  "다낭 바다 전망 아파트"
+ ],
+ "căn hộ view sông Hàn": [
+  "Han River view apartments",
+  "다낭 한강 전망 아파트"
+ ],
+ "căn hộ Đà Nẵng": [
+  "Da Nang apartments",
+  "다낭 아파트"
+ ],
+ "cảng Liên Chiểu và khu thương mại tự do": [
+  "Lien Chieu Port and the free trade zone",
+  "리엔찌에우 항과 자유무역지대"
+ ],
+ "danh thắng Ngũ Hành Sơn": [
+  "the Marble Mountains (Ngu Hanh Son)",
+  "오행산"
+ ],
  "dantri.com.vn": [
   "dantri.com.vn",
   "dantri.com.vn"
@@ -1850,6 +3882,66 @@
  "doanhnhan.baophapluat.vn": [
   "doanhnhan.baophapluat.vn",
   "doanhnhan.baophapluat.vn"
+ ],
+ "dự án bất động sản Đà Nẵng": [
+  "Da Nang real estate projects",
+  "다낭 부동산 프로젝트"
+ ],
+ "giá biệt thự Casamia Balanca 2026": [
+  "Casamia Balanca villa prices 2026",
+  "2026 Casamia Balanca 빌라 가격"
+ ],
+ "giá thuê căn hộ Đà Nẵng": [
+  "Da Nang apartment rents",
+  "다낭 아파트 임대료"
+ ],
+ "giá đất ven biển Đà Nẵng": [
+  "Da Nang seafront land prices",
+  "다낭 해변 토지 가격"
+ ],
+ "hoặc": [
+  "or",
+  "또는"
+ ],
+ "hoặc danh sách": [
+  "or the list of",
+  "또는 목록:"
+ ],
+ "khi chủ đầu tư công bố, liên hệ": [
+  "when the developer announces them, contact",
+  "(시행사 발표 시), 연락처:"
+ ],
+ "khách du lịch": [
+  "tourists",
+  "관광객"
+ ],
+ "kiểm tra pháp lý, quy hoạch nhà đất Đà Nẵng": [
+  "checking the legal status and zoning of Da Nang property",
+  "다낭 부동산 법적 상태·도시계획 확인"
+ ],
+ "mua bán căn hộ chung cư Đà Nẵng": [
+  "Da Nang apartments for sale",
+  "다낭 아파트 매매"
+ ],
+ "mua căn hộ chuyển nhượng Đà Nẵng": [
+  "buying resale apartments in Da Nang",
+  "다낭 전매 아파트 매입"
+ ],
+ "mặt bằng Sun Saphia Residence": [
+  "Sun Saphia Residence floor plans",
+  "Sun Saphia Residence 평면도"
+ ],
+ "mới nhất, chính sách và giỏ hàng đang bán trên trang dự án.": [
+  "(latest), plus the sales policy and units for sale on the project page.",
+  "(최신)과 분양 정책, 판매 중인 매물 목록을 프로젝트 페이지에서 확인하십시오."
+ ],
+ "ngay khi chủ đầu tư công bố, liên hệ": [
+  "as soon as the developer announces them, contact",
+  "(시행사 발표 즉시), 연락처:"
+ ],
+ "ngay khi mở bán, hoặc cần so sánh với các dự án khác cùng tầm tiền, liên hệ": [
+  "as soon as sales launch, or if you need a comparison with other projects in the same price range, contact",
+  "(분양 즉시) 또는 같은 가격대의 다른 프로젝트와 비교가 필요하시면 연락처:"
  ],
  "người mua cần thuộc nhóm đối tượng được hỗ trợ (người thu nhập thấp, công nhân, người lao động trong và ngoài khu công nghiệp…), chưa có nhà ở hoặc đất ở, chưa từng được hưởng chính sách nhà ở xã hội tại Đà Nẵng và đáp ứng điều kiện cư trú, bảo hiểm xã hội theo quy định. Hồ sơ chỉ nộp theo thông báo chính thức của Sở Xây dựng và chủ đầu tư.": [
   "buyers must belong to an eligible group (low-income earners, factory workers, employees inside and outside industrial parks…), own no house or residential land, have never benefited from a social housing policy in Da Nang, and meet the residency and social insurance requirements under regulations. Applications are submitted only according to official announcements from the Department of Construction and the developer.",
@@ -1867,13 +3959,33 @@
   "as if you were standing on site",
   "현장에 서 있는 것처럼 둘러보기"
  ],
+ "penthouse Đà Nẵng": [
+  "Da Nang penthouses",
+  "다낭 펜트하우스"
+ ],
+ "phí quản lý Sun Saphia Residence": [
+  "Sun Saphia Residence management fees",
+  "Sun Saphia Residence 관리비"
+ ],
  "phút": [
   "min",
   "분"
  ],
+ "phố cổ Hội An": [
+  "Hoi An Ancient Town",
+  "호이안 올드타운"
+ ],
  "qua hình ảnh": [
   "in pictures",
   "사진으로 보기"
+ ],
+ "quy hoạch chung Đà Nẵng 2050": [
+  "Da Nang general plan to 2050",
+  "2050 다낭 종합계획"
+ ],
+ "quy trình mua căn hộ 6 bước": [
+  "the 6-step apartment buying process",
+  "아파트 매입 6단계 절차"
  ],
  "thanhnien.vn": [
   "thanhnien.vn",
@@ -1887,9 +3999,25 @@
   "tienphong.vn",
   "tienphong.vn"
  ],
+ "tiến độ Nobu Đà Nẵng": [
+  "Nobu Da Nang construction progress",
+  "Nobu Da Nang 공사 진행"
+ ],
+ "toàn cảnh hạ tầng Đà Nẵng 2026": [
+  "an overview of Da Nang infrastructure 2026",
+  "2026 다낭 인프라 총정리"
+ ],
+ "triệu/m²": [
+  "million VND/m²",
+  "만 동/m²"
+ ],
  "tuoitre.vn": [
   "tuoitre.vn",
   "tuoitre.vn"
+ ],
+ "tầng cao hay tầng thấp": [
+  "high or low floor",
+  "고층과 저층"
  ],
  "tổ hợp Capital Square Đà Nẵng": [
   "the Capital Square Da Nang complex",
@@ -1898,6 +4026,10 @@
  "tỷ lệ vay tối đa": [
   "maximum loan ratio",
   "최대 대출 비율"
+ ],
+ "vay mua căn hộ Đà Nẵng 2026": [
+  "Da Nang apartment loans 2026",
+  "2026 다낭 아파트 대출"
  ],
  "vietnamnet.vn": [
   "vietnamnet.vn",
@@ -1919,6 +4051,62 @@
   "and its subdivisions:",
   "및 각 구역:"
  ],
+ "và thay đổi theo tháng.": [
+  "and changes monthly.",
+  "까지이며 매월 변경됩니다."
+ ],
+ "© 2026 Hoàng Hiệp · hiephoangmt.com": [
+  "© 2026 Hoang Hiep · hiephoangmt.com",
+  "© 2026 호앙 히엡 · hiephoangmt.com"
+ ],
+ "· 3 phút đọc · Cập nhật 15/11/2026": [
+  "· 3 min read · Updated November 15, 2026",
+  "· 3분 읽기 · 2026년 11월 15일 업데이트"
+ ],
+ "· 5 phút đọc": [
+  "· 5 min read",
+  "· 5분 읽기"
+ ],
+ "· 5 phút đọc · Cập nhật 15/11/2026": [
+  "· 5 min read · Updated November 15, 2026",
+  "· 5분 읽기 · 2026년 11월 15일 업데이트"
+ ],
+ "· 5 phút đọc · Cập nhật 22/11/2026": [
+  "· 5 min read · Updated November 22, 2026",
+  "· 5분 읽기 · 2026년 11월 22일 업데이트"
+ ],
+ "· 6 phút đọc": [
+  "· 6 min read",
+  "· 6분 읽기"
+ ],
+ "· 6 phút đọc · Cập nhật 15/11/2026": [
+  "· 6 min read · Updated November 15, 2026",
+  "· 6분 읽기 · 2026년 11월 15일 업데이트"
+ ],
+ "· 6 phút đọc · Cập nhật 22/11/2026": [
+  "· 6 min read · Updated November 22, 2026",
+  "· 6분 읽기 · 2026년 11월 22일 업데이트"
+ ],
+ "· 7 phút đọc": [
+  "· 7 min read",
+  "· 7분 읽기"
+ ],
+ "· 7 phút đọc · Cập nhật 15/11/2026": [
+  "· 7 min read · Updated November 15, 2026",
+  "· 7분 읽기 · 2026년 11월 15일 업데이트"
+ ],
+ "· 7 phút đọc · Cập nhật 22/11/2026": [
+  "· 7 min read · Updated November 22, 2026",
+  "· 7분 읽기 · 2026년 11월 22일 업데이트"
+ ],
+ "· 8 phút đọc · Cập nhật 22/11/2026": [
+  "· 8 min read · Updated November 22, 2026",
+  "· 8분 읽기 · 2026년 11월 22일 업데이트"
+ ],
+ "· 9 phút đọc · Cập nhật 22/11/2026": [
+  "· 9 min read · Updated November 22, 2026",
+  "· 9분 읽기 · 2026년 11월 22일 업데이트"
+ ],
  "Áp dụng từ 19/11/2026 cho Bạch Vân, Vịnh Mây, Đảo Ngọc": [
   "Applies from November 19, 2026 to Bach Van, Vinh May and Dao Ngoc",
   "2026년 11월 19일부터 Bach Van, Vinh May, Dao Ngoc에 적용"
@@ -1926,6 +4114,18 @@
  "Đang bàn giao": [
   "Handover in progress",
   "입주 진행 중"
+ ],
+ "Đang bàn giao căn hộ tòa tháp": [
+  "Tower apartments being handed over",
+  "타워 아파트 입주 진행 중"
+ ],
+ "Đang cập nhật": [
+  "Updating",
+  "업데이트 중"
+ ],
+ "Đang cập nhật theo đợt": [
+  "Updated by phase",
+  "차수별 업데이트 중"
  ],
  "Đang mở bán": [
   "On sale",
@@ -1939,17 +4139,65 @@
   "Currently viewing",
   "현재 보는 중"
  ],
+ "Điểm chính": [
+  "Key points",
+  "핵심 내용"
+ ],
+ "Điểm đến": [
+  "Destination",
+  "목적지"
+ ],
+ "Điện Bàn": [
+  "Dien Ban",
+  "디엔반"
+ ],
  "Đà Nẵng": [
   "Da Nang",
   "다낭"
+ ],
+ "Đà Nẵng Downtown": [
+  "Da Nang Downtown",
+  "Da Nang Downtown"
+ ],
+ "Đà Nẵng ban hành kế hoạch phát triển hạ tầng khu kinh tế, khu công nghiệp, khu công nghệ cao gắn với Khu thương mại tự do giai đoạn 2026 – 2045: sân bay Chu Lai 4F khoảng 10 triệu khách/năm, cảng container Liên Chiểu, cảng cạn ICD. Tác động tới bất động sản Liên Chiểu, Hòa Vang.": [
+  "Da Nang issues a plan to develop infrastructure for economic zones, industrial parks and high-tech parks linked to the Free Trade Zone for 2026 – 2045: Chu Lai Airport at 4F with about 10 million passengers/year, Lien Chieu container port, ICD dry port. Impact on Lien Chieu and Hoa Vang real estate.",
+  "다낭시, 2026 – 2045년 자유무역지대 연계 경제구역·산업단지·첨단기술단지 인프라 개발 계획 발표: 연간 약 1,000만 명 규모 4F 등급 쭈라이 공항, 리엔찌에우 컨테이너 항, ICD 내륙 항. 리엔찌에우·호아방 부동산에 미치는 영향."
+ ],
+ "Đà Nẵng chuẩn bị công bố Quy hoạch chung 2050 cuối tháng 11: dự kiến khởi công Aeon Mall Hòa Xuân, tái khởi động Đa Phước": [
+  "Da Nang prepares to announce the 2050 General Plan at the end of November: Aeon Mall Hoa Xuan expected to break ground, Da Phuoc to restart",
+  "다낭시, 11월 말 2050 종합계획 발표 준비: Aeon Mall Hoa Xuan 착공 예정, 다프억 재개"
+ ],
+ "Đà Nẵng chấp thuận tổ hợp khách sạn – căn hộ du lịch 25 tầng tại 16 Bạch Đằng, đặt 3 tiêu chí tài chính để gỡ dự án tồn đọng": [
+  "Da Nang approves a 25-storey hotel – tourist apartment complex at 16 Bach Dang, sets 3 financial criteria to unblock stalled projects",
+  "다낭시, 박당 거리(Bach Dang St.) 16번지 25층 호텔·관광 아파트 복합 단지 승인, 지연 프로젝트 해결을 위한 3가지 재무 기준 제시"
+ ],
+ "Đà Nẵng chọn VSIP làm hạ tầng vị trí số 7 Khu thương mại tự do: 3.525 tỷ, 276 ha tại Hòa Vang": [
+  "Da Nang chooses VSIP for infrastructure at location No. 7 of the Free Trade Zone: 3,525 billion VND, 276 ha in Hoa Vang",
+  "다낭시, 자유무역지대 7번 부지 인프라 사업자로 VSIP 선정: 3조 5,250억 동, 호아방 276헥타르"
  ],
  "Đà Nẵng duyệt nhiệm vụ quy hoạch chung đô thị Thăng Điền đến 2050: hơn 6.158 ha, gần 96.500 dân": [
   "Da Nang approves the general planning task for Thang Dien urban area to 2050: over 6,158 ha, nearly 96,500 residents",
   "다낭시, 2050년까지 탕디엔 도시 종합계획 과제 승인: 6,158헥타르 이상, 인구 약 96,500명"
  ],
+ "Đà Nẵng hủy quy hoạch khu biệt thự Sơn Trà 25,6 ha: bán đảo được giữ nguyên rừng": [
+  "Da Nang cancels the 25.6 ha Son Tra villa area plan: the peninsula's forest is preserved",
+  "다낭시, 25.6헥타르 선짜 빌라 단지 계획 취소: 반도 숲 원형 보존"
+ ],
+ "Đánh giá The Legend Đà Nẵng (The Legend City) chân cầu Rồng: ưu điểm vị trí, sở hữu lâu dài, bàn giao cao cấp, ưu đãi; điểm cần cân nhắc về giá, thời gian chờ bàn giao, chung khu với khách sạn. Ai nên mua.": [
+  "Review of The Legend Da Nang (The Legend City) at the foot of Dragon Bridge: strengths in location, freehold ownership, high-end handover standard and incentives; points to consider on price, the wait for handover and sharing the complex with a hotel. Who should buy.",
+  "용다리 앞 The Legend Da Nang(The Legend City) 평가: 입지, 영구 소유, 고급 인도 기준, 혜택 등의 장점과 가격, 입주 대기 기간, 호텔과의 단지 공유 등 고려할 점. 추천 매수자."
+ ],
+ "Đây là": [
+  "This is",
+  "이는"
+ ],
  "Đã bàn giao": [
   "Handed over",
   "입주 완료"
+ ],
+ "Đã bán hết": [
+  "Sold out",
+  "분양 완료"
  ],
  "Đèo Hải Vân": [
   "Hai Van Pass",
@@ -1958,6 +4206,18 @@
  "Đèo Hải Vân, hầm Hải Vân": [
   "Hai Van Pass, Hai Van Tunnel",
   "하이번 고개, 하이번 터널"
+ ],
+ "Đúng nhu cầu – Đúng giá trị – Đúng pháp lý": [
+  "The right fit – The right value – The right legal status",
+  "필요에 맞게 – 가치에 맞게 – 법적으로 확실하게"
+ ],
+ "Đăng ký nhận bảng giá, mặt bằng tầng và chính sách": [
+  "Sign up to receive the price list, floor plans and sales policy for",
+  "분양가표, 층별 평면도 및 분양 정책 받기 신청 –"
+ ],
+ "Đăng ký nhận bảng giá, mặt bằng và chính sách": [
+  "Sign up for the price list, floor plans and sales policy",
+  "분양가표, 평면도 및 분양 정책 받기 신청"
  ],
  "Đơn lập": [
   "Detached",
@@ -1983,6 +4243,14 @@
   "Da Nang University of Economics",
   "다낭 경제대학교"
  ],
+ "Đất 2.009 m², 1 tòa 25 tầng, 263 căn": [
+  "2,009 m² of land, 1 tower of 25 floors, 263 units",
+  "대지 2,009 m², 25층 1개 동, 263세대"
+ ],
+ "Đất nền": [
+  "Land plots",
+  "토지(필지)"
+ ],
  "Đất nền Cồn Dầu Hòa Xuân": [
   "Con Dau Hoa Xuan land plots",
   "Con Dau Hoa Xuan 토지(필지)"
@@ -1991,9 +4259,29 @@
   "Subdivided land plots, free to build",
   "자유 건축 분할 토지(필지)"
  ],
+ "Đất thương mại dịch vụ khoảng 11.371 m²; tổng vốn hơn 3.716 tỷ đồng": [
+  "Commercial-service land of about 11,371 m²; total investment of more than 3,716 billion VND",
+  "상업서비스 용지 약 11,371 m², 총투자금 3조 7,160억 동 이상"
+ ],
+ "Đất ở": [
+  "Residential land",
+  "주거용지"
+ ],
+ "Đầu tư": [
+  "Investment",
+  "투자"
+ ],
  "Đặt cọc": [
   "Deposit",
   "계약금"
+ ],
+ "Đặt lịch xem nhà": [
+  "Book a viewing",
+  "현장 방문 예약"
+ ],
+ "Đề án du lịch Cù Lao Chàm được duyệt: 18 điểm sinh thái 509,75 ha, mục tiêu 350.000 khách năm 2030": [
+  "Cu Lao Cham tourism scheme approved: 18 eco-sites on 509.75 ha, target of 350,000 visitors in 2030",
+  "꾸라오짬 관광 계획 승인: 509.75헥타르 생태 관광지 18곳, 2030년 방문객 35만 명 목표"
  ],
  "Định giá tham khảo theo giao dịch, tin rao cùng khu – đặt giá sát thị trường": [
   "Reference valuation based on transactions and listings in the same area – set a price close to the market",
@@ -2023,9 +4311,29 @@
   "Installment 4",
   "4회차"
  ],
+ "đang áp dụng tháng 11/2026 theo văn bản của chủ đầu tư. Mức thanh toán sớm có hạn đến": [
+  "in effect in November 2026 according to the developer's documents. The early payment rate is valid until",
+  "– 시행사 문서에 따라 2026년 11월 현재 적용 중인 정책입니다. 조기 납부 혜택 적용 기한은"
+ ],
+ "đánh giá chi tiết Sun Saphia Residence": [
+  "detailed review of Sun Saphia Residence",
+  "Sun Saphia Residence 상세 평가"
+ ],
+ "đưa tin.": [
+  "reported.",
+  "에서 보도했습니다."
+ ],
  "để nhận danh sách lô đang bán thật, kiểm tra sổ đỏ, quy hoạch và đi xem đất trực tiếp tại Điện Ngọc.": [
   "to receive the list of plots genuinely for sale, check the Red Book (land use right certificate) and zoning, and visit the land in person in Dien Ngoc.",
   "연락 주시면 실제 판매 중인 필지 목록을 받아보시고, 레드북(토지사용권 증서)과 도시계획을 확인하며, Dien Ngoc 현장에서 직접 토지를 둘러보실 수 있습니다."
+ ],
+ "để nhập giá căn, chọn phương án (không vay, vay ngân hàng, thanh toán sớm) và xem số tiền từng đợt. Chính sách các tháng trước và các dự án khác:": [
+  "to enter the unit price, choose an option (no loan, bank loan, early payment) and see the amount for each installment. Policies from previous months and other projects:",
+  "– 세대 가격을 입력하고 방식(대출 미이용, 은행 대출, 조기 납부)을 선택하여 회차별 금액을 확인하실 수 있습니다. 이전 달 및 다른 프로젝트의 정책:"
+ ],
+ "Ưu điểm": [
+  "Pros",
+  "장점"
  ],
  "Ưu đãi VinClub: 0,5% – 0,7% – 0,9% tùy hạng thành viên": [
   "VinClub incentive: 0.5% – 0.7% – 0.9% depending on membership tier",
@@ -2046,6 +4354,10 @@
  "Ảnh phối cảnh, minh họa của chủ đầu tư; ảnh thực tế có ghi chú riêng.": [
   "Renderings and illustrations are from the developer; actual photos are labeled separately.",
   "조감도·예시 이미지는 시행사 자료이며, 실사는 별도로 표기되어 있습니다."
+ ],
+ "– mặt bằng, giá tham khảo, pháp lý, tiến độ. Cần tư vấn thêm, liên hệ Hoàng Hiệp 0904 567 009 (gọi/Zalo).": [
+  "– floor plans, reference prices, legal status, construction progress. For further advice, contact Hoang Hiep at 0904 567 009 (call/Zalo).",
+  "– 평면도, 참고 가격, 법적 상태, 공사 진행. 추가 상담은 호앙 히엡 0904 567 009(전화/Zalo)로 문의해 주십시오."
  ],
  "← Trang chủ": [
   "← Home",

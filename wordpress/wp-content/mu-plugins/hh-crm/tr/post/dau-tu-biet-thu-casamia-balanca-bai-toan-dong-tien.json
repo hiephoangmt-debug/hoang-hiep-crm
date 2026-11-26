@@ -1,0 +1,570 @@
+{
+ "(gọi/Zalo) hoặc qua trang": [
+  "(call/Zalo) or via the",
+  "(전화/Zalo) 또는"
+ ],
+ "(thả nổi) và chỉ tính tiền lãi, chưa tính trả gốc.": [
+  "(floating) and counts interest only, not principal repayments.",
+  "(변동금리), 원금 상환은 제외하고 이자만 계산했습니다."
+ ],
+ ". Bảng dưới": [
+  ". The table below",
+  ". 아래 표는"
+ ],
+ ". Hiệp dùng một căn mẫu để minh họa bài toán đầu tư biệt thự Casamia Balanca. Thông tin tổng quan dự án 31,1 ha của Tập đoàn Đạt Phương có thể xem thêm trên": [
+  ". Hiep uses a sample unit to illustrate the Casamia Balanca villa investment math. An overview of the 31.1 ha project by Dat Phuong Group is available on the",
+  ". 히엡은 샘플 세대 하나로 Casamia Balanca 빌라 투자 계산을 설명합니다. Dat Phuong 그룹의 31.1헥타르 규모 프로젝트 개요는 다음에서 확인하실 수 있습니다:"
+ ],
+ "0,75 tỷ → tổng vốn khoảng 14,5 tỷ": [
+  "0.75 billion VND → total capital about 14.5 billion VND",
+  "7억 5천만 동 → 총 투자금 약 145억 동"
+ ],
+ "230 triệu": [
+  "230 million VND",
+  "2억 3,000만 동"
+ ],
+ "3,5 triệu/đêm": [
+  "3.5 million VND/night",
+  "1박 350만 동"
+ ],
+ "316 triệu": [
+  "316 million VND",
+  "3억 1,600만 동"
+ ],
+ "402 triệu": [
+  "402 million VND",
+  "4억 200만 동"
+ ],
+ "45% doanh thu gộp": [
+  "45% of gross revenue",
+  "총매출의 45%"
+ ],
+ "5 câu hỏi trước khi đầu tư biệt thự Casamia Balanca": [
+  "5 questions to ask before investing in a Casamia Balanca villa",
+  "Casamia Balanca 빌라 투자 전 확인할 5가지 질문"
+ ],
+ "50% (6,875 tỷ)": [
+  "50% (6.875 billion VND)",
+  "50%(68억 7,500만 동)"
+ ],
+ "511 triệu": [
+  "511 million VND",
+  "5억 1,100만 동"
+ ],
+ "60 triệu": [
+  "60 million VND",
+  "6,000만 동"
+ ],
+ "60 triệu/năm": [
+  "60 million VND/year",
+  "연 6,000만 동"
+ ],
+ "70% (9,625 tỷ)": [
+  "70% (9.625 billion VND)",
+  "70%(96억 2,500만 동)"
+ ],
+ "703 triệu": [
+  "703 million VND",
+  "7억 300만 동"
+ ],
+ "894 triệu": [
+  "894 million VND",
+  "8억 9,400만 동"
+ ],
+ "Biệt thự 10 – 20 tỷ có tệp khách mua lại hẹp, nên người đầu tư biệt thự Casamia Balanca cần tính thời gian nắm giữ dài; biệt thự Vinpearl Nam Hội An hiện được rao thấp hơn giá bán gốc là ví dụ cần lưu ý.": [
+  "Villas priced at 10 – 20 billion VND have a narrow pool of resale buyers, so Casamia Balanca villa investors should plan for a long holding period; Vinpearl Nam Hoi An villas currently listed below their original sale price are a cautionary example.",
+  "100억~200억 동대 빌라는 재매수 수요층이 좁으므로 Casamia Balanca 빌라 투자자는 장기 보유를 염두에 두어야 합니다. 현재 최초 분양가보다 낮게 매물로 나온 Vinpearl Nam Hoi An 빌라는 유의해야 할 사례입니다."
+ ],
+ "Biệt thự hồ bơi ven sông – căn mẫu để tính bài toán đầu tư biệt thự Casamia Balanca": [
+  "Riverside pool villa – the sample unit used for the Casamia Balanca villa investment math",
+  "강변 풀빌라 – Casamia Balanca 빌라 투자 계산에 사용한 샘플 세대"
+ ],
+ "Báo chí, trang phân phối": [
+  "Press, distributor websites",
+  "언론, 분양 대행 사이트"
+ ],
+ "Chi phí cố định": [
+  "Fixed costs",
+  "고정비"
+ ],
+ "Chi phí cố định (bảo trì lớn, bảo hiểm, phí khu)": [
+  "Fixed costs (major maintenance, insurance, community fees)",
+  "고정비(대규모 유지보수, 보험, 단지 관리비)"
+ ],
+ "Chi phí vận hành 45%": [
+  "Operating costs 45%",
+  "운영비 45%"
+ ],
+ "Chi phí vận hành, phí OTA, thuế": [
+  "Operating costs, OTA fees, taxes",
+  "운영비, OTA 수수료, 세금"
+ ],
+ "Chính sách bán hàng của chủ đầu tư từ 09/09/2026 hỗ trợ vay 70% giá trị hợp đồng, hỗ trợ lãi suất 0% và ân hạn nợ gốc 24 tháng; lưu ý giá bán theo phương án vay hỗ trợ lãi suất cao hơn giá không vay. Sau ân hạn, Hiệp": [
+  "The developer's sales policy from September 9, 2026 offers loans of up to 70% of the contract value, 0% interest support and a 24-month principal grace period; note that the price under the interest-supported loan option is higher than the no-loan price. After the grace period, Hiep",
+  "2026년 9월 9일부터 적용되는 시행사 분양 정책은 계약금액의 70% 대출 지원, 0% 이자 지원, 원금 상환 24개월 유예를 제공합니다. 다만 이자 지원 대출 방식의 분양가는 대출을 받지 않는 경우보다 높다는 점에 유의해야 합니다. 유예 기간 이후 히엡은"
+ ],
+ "Chính sách từ 09/09/2026: ủy thác 5 năm, 45% doanh thu thuần, tối thiểu 50 – 60 triệu/tháng; mức tối thiểu vượt phần chia thực nên cần đọc kỹ điều khoản cam kết.": [
+  "Policy from September 9, 2026: 5-year management contract, 45% of net revenue, minimum 50 – 60 million VND/month; the minimum exceeds the actual revenue share, so read the guarantee terms carefully.",
+  "2026년 9월 9일부터 적용되는 정책: 5년 위탁, 순매출의 45%, 월 최소 5,000만~6,000만 동. 최소 보장액이 실제 배분액보다 높으므로 보장 조항을 꼼꼼히 확인해야 합니다."
+ ],
+ "Chưa có doanh thu thực tế công khai. Với giá thuê 3,5 triệu/đêm và giả định chi phí 45%, lợi suất ròng khoảng 1,5 – 3%/năm trên tổng vốn khi không vay.": [
+  "No actual revenue figures have been made public. At 3.5 million VND/night and assumed costs of 45%, the net yield is about 1.5 – 3%/year on total capital without a loan.",
+  "아직 공개된 실제 매출 자료는 없습니다. 1박 350만 동, 비용 45% 가정 시 대출이 없는 경우 총 투자금 대비 순수익률은 연 약 1.5~3%입니다."
+ ],
+ "Chỉ nên vay ở mức trả được lãi bằng thu nhập chính. Với giả định lãi 10%/năm, tiền thuê ở mặt bằng villa Cẩm Thanh không đủ trả lãi khi vay 50 – 70%.": [
+  "Only borrow as much as you can service from your main income. At an assumed 10%/year interest rate, rents at the going rate for Cam Thanh villas do not cover the interest on a 50 – 70% loan.",
+  "주 소득으로 이자를 감당할 수 있는 수준까지만 대출받으십시오. 금리를 연 10%로 가정하면 깜타인 빌라 시세 수준의 임대료로는 50~70% 대출 이자를 감당할 수 없습니다."
+ ],
+ "Chủ đầu tư đặt mục tiêu hoàn thiện thủ tục cấp giấy chứng nhận từng lô trong năm 2026. Xem chi tiết tại bài": [
+  "The developer aims to complete certificate issuance procedures for each lot in 2026. See details in the article",
+  "시행사는 2026년 내 필지별 증서 발급 절차 완료를 목표로 하고 있습니다. 자세한 내용은 다음 글을 참고하십시오:"
+ ],
+ "Có nên chọn gói chia doanh thu?": [
+  "Should you choose the revenue-share package?",
+  "수익 배분 상품을 선택해야 할까요?"
+ ],
+ "Có. Theo chính sách bán hàng từ 09/09/2026, khách vay được hỗ trợ 70%, hỗ trợ lãi suất 0% và ân hạn nợ gốc 24 tháng; giá theo phương án vay cao hơn giá không vay.": [
+  "Yes. Under the sales policy from September 9, 2026, buyers can get 70% loan support, 0% interest support and a 24-month principal grace period; the price under the loan option is higher than the no-loan price.",
+  "있습니다. 2026년 9월 9일부터 적용되는 분양 정책에 따르면 70% 대출 지원, 0% 이자 지원, 원금 상환 24개월 유예를 받을 수 있습니다. 다만 대출 방식의 분양가는 대출을 받지 않는 경우보다 높습니다."
+ ],
+ "Công suất (giả định)": [
+  "Occupancy (assumed)",
+  "가동률(가정)"
+ ],
+ "Công suất phòng": [
+  "Occupancy rate",
+  "객실 가동률"
+ ],
+ "Căn có giấy chứng nhận riêng chưa, cao độ nền và thoát nước khu vực ra sao?": [
+  "Does the unit have its own certificate yet, and what are the ground elevation and drainage like in the area?",
+  "해당 세대에 개별 증서가 발급되었습니까? 지반 높이와 지역 배수 상황은 어떻습니까?"
+ ],
+ "Cộng dồn 5 năm ở công suất 55%, dòng tiền ròng khoảng 1,6 tỷ; 10 năm khoảng 3,3 tỷ, tức chưa tới một phần tư vốn bỏ ra. Theo chính sách bán hàng của chủ đầu tư từ 09/09/2026, thanh toán sớm 95% được chiết khấu 2 – 5% tùy phân khu; mức 5% giảm khoảng 0,69 tỷ trên căn mẫu 13,75 tỷ. Chọn bàn giao thô còn được chiết khấu 3,5 – 4 tỷ nhưng phải tự làm nội thất.": [
+  "Cumulatively over 5 years at 55% occupancy, net cash flow is about 1.6 billion VND; over 10 years about 3.3 billion VND, still less than a quarter of the capital invested. Under the developer's sales policy from September 9, 2026, paying 95% early earns a 2 – 5% discount depending on the subdivision; the 5% rate cuts about 0.69 billion VND off the 13.75 billion VND sample unit. Choosing a shell (unfinished) handover earns a further 3.5 – 4 billion VND discount, but you must fit out the interior yourself.",
+  "가동률 55% 기준 5년 누적 순현금흐름은 약 16억 동, 10년은 약 33억 동으로 투자금의 4분의 1에도 못 미칩니다. 2026년 9월 9일부터 적용되는 시행사 분양 정책에 따르면 95%를 조기 납부하면 구역에 따라 2~5% 할인을 받을 수 있으며, 5% 할인 시 137억 5천만 동 샘플 세대 기준 약 6억 9천만 동이 줄어듭니다. 골조 상태(미시공) 인도를 선택하면 35억~40억 동을 추가 할인받지만 인테리어는 직접 해야 합니다."
+ ],
+ "Doanh thu gộp năm = 3,5 triệu x 365 đêm x công suất. Tương ứng khoảng 511 triệu (40%), 703 triệu (55%) và 894 triệu (70%).": [
+  "Annual gross revenue = 3.5 million VND x 365 nights x occupancy. That works out to about 511 million VND (40%), 703 million VND (55%) and 894 million VND (70%).",
+  "연간 총매출 = 350만 동 x 365박 x 가동률. 이에 따라 약 5억 1,100만 동(40%), 7억 300만 동(55%), 8억 9,400만 동(70%)입니다."
+ ],
+ "Doanh thu gộp/năm": [
+  "Gross revenue/year",
+  "연간 총매출"
+ ],
+ "Dòng tiền Casamia Balanca theo 3 kịch bản: trả đủ tự cho thuê, vay 50–70%, giao đơn vị vận hành. Bảng tính công suất 40/55/70% và điểm hòa vốn.": [
+  "Casamia Balanca cash flow under 3 scenarios: pay in full and rent it out yourself, borrow 50–70%, or hand it to an operator. Tables at 40/55/70% occupancy and the break-even points.",
+  "3가지 시나리오별 Casamia Balanca 현금흐름: 전액 자기자본으로 직접 임대, 50~70% 대출, 운영사 위탁. 객실 가동률 40/55/70% 기준 계산표와 손익분기점을 정리했습니다."
+ ],
+ "Dòng tiền ròng 40%": [
+  "Net cash flow at 40%",
+  "가동률 40% 순현금흐름"
+ ],
+ "Dòng tiền ròng 55%": [
+  "Net cash flow at 55%",
+  "가동률 55% 순현금흐름"
+ ],
+ "Dòng tiền ròng 70%": [
+  "Net cash flow at 70%",
+  "가동률 70% 순현금흐름"
+ ],
+ "Dòng tiền ròng/năm": [
+  "Net cash flow/year",
+  "연간 순현금흐름"
+ ],
+ "Dải giá tham khảo": [
+  "Reference price range",
+  "참고 가격대"
+ ],
+ "Dữ liệu đầu vào khi đầu tư biệt thự Casamia Balanca": [
+  "Input data for investing in a Casamia Balanca villa",
+  "Casamia Balanca 빌라 투자 시 입력 데이터"
+ ],
+ "Dự án mới bắt đầu bàn giao (kế hoạch khoảng 100 căn trong tháng 11 – 12/2026), nên": [
+  "The project has only just begun handover (about 100 units planned for November – December 2026), so",
+  "프로젝트가 이제 막 인도(입주)를 시작했기 때문에(2026년 11~12월 약 100세대 계획)"
+ ],
+ "Dự án nằm ven sông, giữa rừng dừa Bảy Mẫu. Hiệp chưa có số liệu ngập riêng cho dự án; trước khi chọn căn, hãy hỏi cao độ nền, hệ thống thoát nước và lịch sử nước lên của khu vực.": [
+  "The project sits on the riverside, amid the Bay Mau coconut forest. Hiep does not yet have flooding data specific to the project; before choosing a unit, ask about the ground elevation, the drainage system and the area's flood history.",
+  "프로젝트는 강변, 바이마우 코코넛 숲 한가운데에 위치합니다. 히엡은 아직 프로젝트 자체의 침수 자료를 확보하지 못했습니다. 세대를 고르기 전에 지반 높이, 배수 시스템, 해당 지역의 침수 이력을 문의하십시오."
+ ],
+ "Giá căn mẫu": [
+  "Sample unit price",
+  "샘플 세대 가격"
+ ],
+ "Giá căn tôi chọn đã gồm chiết khấu thanh toán (2 – 5% khi thanh toán sớm 95%, hoặc 3,5 – 4 tỷ khi nhận bàn giao thô, theo chính sách từ 09/09/2026) hay chưa?": [
+  "Does the price of the unit I chose already include the payment discount (2 – 5% for paying 95% early, or 3.5 – 4 billion VND for a shell handover, under the policy from September 9, 2026)?",
+  "제가 선택한 세대 가격에 납부 할인(2026년 9월 9일부터 적용되는 정책 기준, 95% 조기 납부 시 2~5%, 골조 상태 인도 시 35억~40억 동)이 이미 반영되어 있습니까?"
+ ],
+ "Giá thuê bình quân": [
+  "Average rental rate",
+  "평균 임대료"
+ ],
+ "Giá trị dùng trong bài": [
+  "Value used in this article",
+  "본 글에 사용한 값"
+ ],
+ "Giả định": [
+  "Assumption",
+  "가정"
+ ],
+ "Gói ân hạn, hỗ trợ lãi suất có văn bản của chủ đầu tư, áp dụng cho đúng căn và đúng đợt không?": [
+  "Are the grace period and interest support packages documented in writing by the developer, and do they apply to this exact unit and sales phase?",
+  "유예 및 이자 지원 혜택이 시행사 문서로 명시되어 있고, 해당 세대와 해당 분양 차수에 정확히 적용됩니까?"
+ ],
+ "Hòa vốn chi phí vận hành (kịch bản A):": [
+  "Operating break-even (scenario A):",
+  "운영비 손익분기점(시나리오 A):"
+ ],
+ "Hòa vốn tiền lãi (kịch bản B):": [
+  "Interest break-even (scenario B):",
+  "이자 손익분기점(시나리오 B):"
+ ],
+ "Hội An có mùa mưa cuối năm, công suất giảm mạnh. Hãy tính công suất bình quân cả năm.": [
+  "Hoi An has a rainy season at the end of the year, when occupancy drops sharply. Calculate the average occupancy across the whole year.",
+  "호이안은 연말에 우기가 있어 가동률이 크게 떨어집니다. 연간 평균 가동률로 계산하십시오."
+ ],
+ "Khi đầu tư biệt thự Casamia Balanca để cho thuê nghỉ dưỡng, dòng tiền với giả định thận trọng chỉ đạt khoảng 1,5 – 3%/năm trên tổng vốn khi mua bằng tiền mặt. Khi vay ngân hàng 50 – 70%, tiền thuê không đủ trả lãi sau thời gian ân hạn. Vì vậy biệt thự ở đây nên được xem là tài sản tích lũy dài hạn, không phải sản phẩm dòng tiền. Bài viết cập nhật tháng 10/2026, mọi con số đều ghi rõ nguồn hoặc đánh dấu “giả định”.": [
+  "When investing in a Casamia Balanca villa as a holiday rental, cash flow under conservative assumptions reaches only about 1.5 – 3%/year on total capital for a cash purchase. With a 50 – 70% bank loan, rental income does not cover the interest after the grace period. A villa here should therefore be seen as a long-term store of wealth, not a cash-flow product. This article was updated in October 2026; every figure cites its source or is marked “assumption”.",
+  "Casamia Balanca 빌라를 휴양 임대용으로 투자할 경우, 보수적인 가정하에 현금 매입 시 현금흐름은 총 투자금 대비 연 약 1.5~3%에 그칩니다. 은행 대출 50~70%를 받으면 유예 기간 이후 임대 수입으로 이자를 감당하지 못합니다. 따라서 이곳의 빌라는 현금흐름 상품이 아니라 장기 자산 축적용으로 보는 것이 맞습니다. 본 글은 2026년 10월에 업데이트되었으며, 모든 수치에는 출처를 밝히거나 ‘가정’으로 표시했습니다."
+ ],
+ "Khoảng 1,1%": [
+  "About 1.1%",
+  "약 1.1%"
+ ],
+ "Khoảng 1,5%": [
+  "About 1.5%",
+  "약 1.5%"
+ ],
+ "Khoảng 1,6%": [
+  "About 1.6%",
+  "약 1.6%"
+ ],
+ "Khoảng 13,75 tỷ (lô 250 m² x 55 triệu/m²)": [
+  "About 13.75 billion VND (250 m² lot x 55 million VND/m²)",
+  "약 137억 5천만 동(250 m² 필지 x m²당 5,500만 동)"
+ ],
+ "Khoảng 165 triệu": [
+  "About 165 million VND",
+  "약 1억 6,500만 동"
+ ],
+ "Khoảng 195 triệu": [
+  "About 195 million VND",
+  "약 1억 9,500만 동"
+ ],
+ "Khoảng 2,2%": [
+  "About 2.2%",
+  "약 2.2%"
+ ],
+ "Khoảng 2,3%": [
+  "About 2.3%",
+  "약 2.3%"
+ ],
+ "Khoảng 221 triệu": [
+  "About 221 million VND",
+  "약 2억 2,100만 동"
+ ],
+ "Khoảng 239 triệu": [
+  "About 239 million VND",
+  "약 2억 3,900만 동"
+ ],
+ "Khoảng 269 triệu": [
+  "About 269 million VND",
+  "약 2억 6,900만 동"
+ ],
+ "Khoảng 3,0%": [
+  "About 3.0%",
+  "약 3.0%"
+ ],
+ "Khoảng 312 triệu": [
+  "About 312 million VND",
+  "약 3억 1,200만 동"
+ ],
+ "Khoảng 327 triệu": [
+  "About 327 million VND",
+  "약 3억 2,700만 동"
+ ],
+ "Khoảng 342 triệu": [
+  "About 342 million VND",
+  "약 3억 4,200만 동"
+ ],
+ "Khoảng 432 triệu": [
+  "About 432 million VND",
+  "약 4억 3,200만 동"
+ ],
+ "Khoảng 570 triệu (3,9%)": [
+  "About 570 million VND (3.9%)",
+  "약 5억 7,000만 동(3.9%)"
+ ],
+ "Khoảng 688 triệu": [
+  "About 688 million VND",
+  "약 6억 8,800만 동"
+ ],
+ "Khoảng 963 triệu": [
+  "About 963 million VND",
+  "약 9억 6,300만 동"
+ ],
+ "Kịch bản A: đầu tư biệt thự Casamia Balanca bằng tiền mặt, tự cho thuê": [
+  "Scenario A: buying a Casamia Balanca villa in cash and renting it out yourself",
+  "시나리오 A: Casamia Balanca 빌라를 현금으로 매입해 직접 임대"
+ ],
+ "Kịch bản B: đầu tư biệt thự Casamia Balanca có vay ngân hàng 50 – 70%": [
+  "Scenario B: buying a Casamia Balanca villa with a 50 – 70% bank loan",
+  "시나리오 B: 은행 대출 50~70%로 Casamia Balanca 빌라 투자"
+ ],
+ "Kịch bản C: giao đơn vị vận hành, chia doanh thu": [
+  "Scenario C: handing it to an operator under a revenue share",
+  "시나리오 C: 운영사 위탁, 수익 배분"
+ ],
+ "Lãi vay/năm (giả định 10%)": [
+  "Interest/year (assumed 10%)",
+  "연간 이자(10% 가정)"
+ ],
+ "Lợi suất": [
+  "Yield",
+  "수익률"
+ ],
+ "Lợi suất trên 14,5 tỷ": [
+  "Yield on 14.5 billion VND",
+  "145억 동 대비 수익률"
+ ],
+ "Mùa thấp điểm": [
+  "Low season",
+  "비수기"
+ ],
+ "Mức thấp của villa nhiều phòng tại Cẩm Thanh (khoảng 3,5 – 5,5 triệu/đêm, trang du lịch)": [
+  "Low end for multi-bedroom villas in Cam Thanh (about 3.5 – 5.5 million VND/night, per travel websites)",
+  "깜타인 지역 다침실 빌라의 하단 가격(1박 약 350만~550만 동, 여행 사이트 기준)"
+ ],
+ "Mức vay": [
+  "Loan amount",
+  "대출 규모"
+ ],
+ "Nguồn / tính chất": [
+  "Source / nature",
+  "출처 / 성격"
+ ],
+ "Ngập lụt khu vực Cẩm Thanh": [
+  "Flooding in the Cam Thanh area",
+  "깜타인 지역 침수"
+ ],
+ "Nếu chỉ tính tiền thuê theo kịch bản A, thời gian thu hồi vốn khoảng 34 – 66 năm; phần còn lại phụ thuộc giá bán lại, Hoàng Hiệp không dự báo con số này.": [
+  "Counting rent alone under scenario A, the payback period is about 34 – 66 years; the rest depends on the resale price, which Hoang Hiep does not forecast.",
+  "시나리오 A 기준 임대료만 계산하면 원금 회수 기간은 약 34~66년입니다. 나머지는 재매각 가격에 달려 있으며, 호앙 히엡은 이 수치를 예측하지 않습니다."
+ ],
+ "Nếu có sẵn vốn và muốn vừa nghỉ dưỡng vừa khai thác khi đầu tư biệt thự Casamia Balanca, kịch bản A (kèm chiết khấu thanh toán) an toàn nhất. Nếu vay, chỉ nên vay ở mức bạn trả được lãi bằng thu nhập chính, không trông vào tiền thuê. Kịch bản C hợp với chủ ở xa, nhưng phải đọc kỹ hợp đồng vận hành.": [
+  "If you have the capital ready and want both holidays and rental income from a Casamia Balanca villa, scenario A (with the payment discount) is the safest. If you borrow, only borrow as much as you can service from your main income, without relying on rent. Scenario C suits owners who live far away, but read the management contract carefully.",
+  "자금이 준비되어 있고 Casamia Balanca 빌라를 휴양과 임대 수익 모두에 활용하고 싶으시다면 시나리오 A(납부 할인 포함)가 가장 안전합니다. 대출을 받으신다면 임대료에 기대지 말고 주 소득으로 이자를 감당할 수 있는 수준까지만 받으십시오. 시나리오 C는 멀리 거주하는 소유주에게 적합하지만 운영 계약서를 꼼꼼히 읽어야 합니다."
+ ],
+ "Nếu công suất chỉ đạt 40% trong 2 năm đầu, tôi có trả được lãi vay bằng thu nhập chính không?": [
+  "If occupancy only reaches 40% in the first 2 years, can I pay the loan interest from my main income?",
+  "처음 2년간 가동률이 40%에 그친다면 주 소득으로 대출 이자를 낼 수 있습니까?"
+ ],
+ "Nếu cần bán lại sau 5 năm, mức giá nào tôi chấp nhận được?": [
+  "If I need to resell after 5 years, what price could I accept?",
+  "5년 후 재매각해야 한다면 어느 가격까지 받아들일 수 있습니까?"
+ ],
+ "Nội thất, chi phí ban đầu": [
+  "Furniture, initial costs",
+  "인테리어, 초기 비용"
+ ],
+ "Pháp lý sổ hồng": [
+  "Pink Book legal status",
+  "핑크북 법적 상태"
+ ],
+ "Phù hợp chủ ở xa, nhưng cần kiểm tra bên vận hành, cách tính doanh thu thuần, mức sàn và điều kiện chấm dứt hợp đồng.": [
+  "It suits owners who live far away, but check the operator, how net revenue is calculated, the floor and the contract termination conditions.",
+  "멀리 거주하는 소유주에게 적합하지만 운영사, 순매출 산정 방식, 최저 보장액, 계약 해지 조건을 확인해야 합니다."
+ ],
+ "Phần chia 45%": [
+  "45% share",
+  "45% 배분액"
+ ],
+ "Ròng nếu không có mức sàn": [
+  "Net without a floor",
+  "최저 보장 없는 순수익"
+ ],
+ "Ròng nếu mức tối thiểu 600 triệu/năm (50 triệu/tháng) được thực hiện": [
+  "Net if the 600 million VND/year minimum (50 million VND/month) is honored",
+  "연 6억 동(월 5,000만 동) 최소 보장이 이행될 경우 순수익"
+ ],
+ "Rủi ro cần tính khi đầu tư biệt thự Casamia Balanca": [
+  "Risks to factor in when investing in a Casamia Balanca villa",
+  "Casamia Balanca 빌라 투자 시 고려해야 할 리스크"
+ ],
+ "Thanh khoản": [
+  "Liquidity",
+  "환금성"
+ ],
+ "Thu hồi vốn chỉ bằng tiền thuê:": [
+  "Payback from rent alone:",
+  "임대료만으로 원금 회수:"
+ ],
+ "Thông số": [
+  "Parameter",
+  "항목"
+ ],
+ "Trong 24 tháng ân hạn, vốn tự có khi vay 70% chỉ khoảng 4,9 tỷ nên lợi suất trên vốn tự có đạt khoảng 4,5 – 8,9%. Nhưng ân hạn có thể trôi qua một phần trước khi căn đi vào khai thác.": [
+  "During the 24-month grace period, equity with a 70% loan is only about 4.9 billion VND, so the return on equity reaches about 4.5 – 8.9%. But part of the grace period may pass before the unit starts operating.",
+  "24개월 유예 기간 동안 70% 대출 시 자기자본은 약 49억 동에 불과하므로 자기자본 수익률은 약 4.5~8.9%에 이릅니다. 하지만 세대가 운영을 시작하기 전에 유예 기간의 일부가 지나갈 수 있습니다."
+ ],
+ "Trả lời được 5 câu hỏi này, anh chị sẽ biết việc đầu tư biệt thự Casamia Balanca phù hợp với mục tiêu tích lũy tài sản hay đang kỳ vọng quá nhiều vào dòng tiền cho thuê.": [
+  "Once you can answer these 5 questions, you will know whether investing in a Casamia Balanca villa fits a wealth-building goal or whether you are expecting too much from rental cash flow.",
+  "이 5가지 질문에 답할 수 있다면 Casamia Balanca 빌라 투자가 자산 축적 목표에 맞는지, 아니면 임대 현금흐름에 지나치게 기대하고 있는지 판단하실 수 있습니다."
+ ],
+ "Tạp chí Công Thương, thời điểm 12/2024": [
+  "Industry and Trade Magazine, as of December 2024",
+  "산업무역잡지(Tạp chí Công Thương), 2024년 12월 기준"
+ ],
+ "Từ 09/09/2026, chủ đầu tư công bố chương trình ủy thác vận hành cho thuê với căn bàn giao nội thất (nhận nhà 2027): chủ nhà hưởng 45% doanh thu cho thuê thuần, thu nhập tối thiểu 50 triệu/tháng (Park Home, quỹ 50 căn) hoặc 60 triệu/tháng (Forestside Villa), hợp đồng 5 năm, kèm 10 đêm nghỉ miễn phí/năm. Căn bàn giao thô thì chủ đầu tư thuê lại cố định 50 – 60 triệu/tháng trong 3 năm. Xem chi tiết tại bài": [
+  "From September 9, 2026, the developer announced a rental management program for units handed over furnished (handover in 2027): owners receive 45% of net rental revenue, with a minimum income of 50 million VND/month (Park Home, quota of 50 units) or 60 million VND/month (Forestside Villa), a 5-year contract and 10 free nights/year. For shell-handover units, the developer leases them back at a fixed 50 – 60 million VND/month for 3 years. See details in the article",
+  "2026년 9월 9일부터 시행사는 가구 포함 인도 세대(2027년 입주)를 대상으로 임대 운영 위탁 프로그램을 발표했습니다. 소유주는 순임대매출의 45%를 받으며, 최소 수입은 월 5,000만 동(Park Home, 50세대 한정) 또는 월 6,000만 동(Forestside Villa)이고, 계약 기간은 5년이며 연 10박 무료 숙박이 제공됩니다. 골조 상태 인도 세대는 시행사가 3년간 월 5,000만~6,000만 동 고정 임대료로 재임차합니다. 자세한 내용은 다음 글을 참고하십시오:"
+ ],
+ "Từ khoảng 8,8 tỷ; phổ biến 10 – 20 tỷ/căn": [
+  "From about 8.8 billion VND; typically 10 – 20 billion VND/unit",
+  "약 88억 동부터, 일반적으로 세대당 100억~200억 동"
+ ],
+ "Vay 50 – 70% khi đầu tư biệt thự Casamia Balanca, lãi giả định 10%/năm: tiền thuê không đủ trả lãi sau ân hạn.": [
+  "Borrowing 50 – 70% to invest in a Casamia Balanca villa at an assumed 10%/year interest rate: rental income does not cover the interest once the grace period ends.",
+  "Casamia Balanca 빌라 투자 시 50~70%를 대출하고 금리를 연 10%로 가정하면: 유예 기간 종료 후 임대 수입으로 이자를 감당할 수 없습니다."
+ ],
+ "Vay 70% đầu tư biệt thự Casamia Balanca có trả được lãi bằng tiền thuê không?": [
+  "With a 70% loan on a Casamia Balanca villa, can rental income cover the interest?",
+  "Casamia Balanca 빌라 투자 시 70%를 대출하면 임대 수입으로 이자를 감당할 수 있을까요?"
+ ],
+ "Với kịch bản vay 70%, sau 10 năm (2 năm ân hạn, 8 năm trả lãi) ở công suất 55%, tổng dòng tiền âm khoảng 4,4 tỷ. Đây là khoản người đầu tư biệt thự Casamia Balanca bằng vốn vay phải bù từ thu nhập khác, chưa kể trả gốc.": [
+  "In the 70% loan scenario, after 10 years (2 years of grace, 8 years paying interest) at 55% occupancy, total cash flow is negative by about 4.4 billion VND. This is the amount an investor financing a Casamia Balanca villa with borrowed money must cover from other income, not counting principal repayments.",
+  "70% 대출 시나리오에서 가동률 55% 기준 10년(유예 2년, 이자 납부 8년) 후 누적 현금흐름은 약 44억 동 적자입니다. 이는 대출로 Casamia Balanca 빌라에 투자한 사람이 원금 상환을 제외하고도 다른 소득으로 메워야 하는 금액입니다."
+ ],
+ "Với lãi suất giả định 10%/năm, giá thuê cần khoảng 7,3 triệu/đêm ở công suất 70% mới đủ trả lãi – cao hơn mặt bằng villa Cẩm Thanh.": [
+  "At an assumed 10%/year interest rate, the rate would need to be about 7.3 million VND/night at 70% occupancy just to cover interest – higher than the going rate for Cam Thanh villas.",
+  "금리를 연 10%로 가정하면 가동률 70%에서 1박 약 730만 동은 되어야 이자를 감당할 수 있으며, 이는 깜타인 빌라 시세보다 높습니다."
+ ],
+ "chưa có doanh thu thực tế công khai": [
+  "no actual revenue figures have been made public yet",
+  "아직 공개된 실제 매출 자료가 없습니다"
+ ],
+ "chỉ cần công suất khoảng 9% là đủ bù 60 triệu chi phí cố định. Rủi ro lỗ vận hành thấp nếu không vay.": [
+  "occupancy of only about 9% is enough to cover 60 million VND in fixed costs. The risk of an operating loss is low without a loan.",
+  "가동률 약 9%만으로 6,000만 동의 고정비를 충당할 수 있습니다. 대출이 없으면 운영 손실 위험은 낮습니다."
+ ],
+ "cách ước tính dòng tiền cho thuê": [
+  "how to estimate rental cash flow",
+  "임대 현금흐름 추정 방법"
+ ],
+ "doanh thu thuần bằng 85% doanh thu gộp, chủ nhà tự chịu khoảng 30 triệu/năm chi phí cố định.": [
+  "net revenue equals 85% of gross revenue, with the owner bearing about 30 million VND/year in fixed costs.",
+  "순매출은 총매출의 85%이며, 소유주가 연 약 3,000만 동의 고정비를 부담합니다."
+ ],
+ "dự án biệt thự": [
+  "villa projects",
+  "빌라 프로젝트 목록"
+ ],
+ "giả định": [
+  "assumes",
+  "가정합니다:"
+ ],
+ "giả định lãi suất 10%/năm": [
+  "assumes an interest rate of 10%/year",
+  "금리를 연 10%로 가정했으며"
+ ],
+ "khoảng 34 – 66 năm theo kịch bản A. Phần còn lại phụ thuộc giá bán lại, Hiệp không dự báo.": [
+  "about 34 – 66 years under scenario A. The rest depends on the resale price, which Hiep does not forecast.",
+  "시나리오 A 기준 약 34~66년입니다. 나머지는 재매각 가격에 달려 있으며, 히엡은 이를 예측하지 않습니다."
+ ],
+ "liên hệ": [
+  "contact",
+  "문의"
+ ],
+ "pháp lý sổ hồng Casamia Balanca": [
+  "Casamia Balanca Pink Book legal status",
+  "Casamia Balanca 핑크북 법적 상태"
+ ],
+ "trang dự án Casamia Balanca": [
+  "Casamia Balanca project page",
+  "Casamia Balanca 프로젝트 페이지"
+ ],
+ "và danh mục": [
+  "and the list of",
+  "그리고"
+ ],
+ "· 10 phút đọc · Cập nhật 22/11/2026": [
+  "· 10-minute read · Updated November 22, 2026",
+  "· 10분 분량 · 2026년 11월 22일 업데이트"
+ ],
+ "Âm khoảng 256 triệu": [
+  "Negative, about 256 million VND",
+  "약 2억 5,600만 동 적자"
+ ],
+ "Âm khoảng 361 triệu": [
+  "Negative, about 361 million VND",
+  "약 3억 6,100만 동 적자"
+ ],
+ "Âm khoảng 467 triệu": [
+  "Negative, about 467 million VND",
+  "약 4억 6,700만 동 적자"
+ ],
+ "Âm khoảng 531 triệu": [
+  "Negative, about 531 million VND",
+  "약 5억 3,100만 동 적자"
+ ],
+ "Âm khoảng 636 triệu": [
+  "Negative, about 636 million VND",
+  "약 6억 3,600만 동 적자"
+ ],
+ "Âm khoảng 742 triệu": [
+  "Negative, about 742 million VND",
+  "약 7억 4,200만 동 적자"
+ ],
+ "Điểm hòa vốn của dòng tiền Casamia Balanca": [
+  "Break-even points for Casamia Balanca cash flow",
+  "Casamia Balanca 현금흐름의 손익분기점"
+ ],
+ "Đầu tư biệt thự Casamia Balanca bao lâu thì thu hồi vốn?": [
+  "How long does it take to recoup an investment in a Casamia Balanca villa?",
+  "Casamia Balanca 빌라 투자 원금 회수에는 얼마나 걸리나요?"
+ ],
+ "Đầu tư biệt thự Casamia Balanca bằng tiền mặt, tự cho thuê: lợi suất ròng giả định khoảng 1,5 – 3%/năm trên tổng vốn.": [
+  "Buying a Casamia Balanca villa in cash and renting it out yourself: assumed net yield of about 1.5 – 3%/year on total capital.",
+  "Casamia Balanca 빌라를 현금으로 매입해 직접 임대할 경우: 총 투자금 대비 가정 순수익률 연 약 1.5~3%입니다."
+ ],
+ "Đầu tư biệt thự Casamia Balanca cho thuê lời bao nhiêu?": [
+  "How much can a Casamia Balanca villa earn as a rental investment?",
+  "Casamia Balanca 빌라를 임대하면 수익은 얼마나 될까요?"
+ ],
+ "Đầu tư biệt thự Casamia Balanca có nên vay ngân hàng?": [
+  "Should you take a bank loan to invest in a Casamia Balanca villa?",
+  "Casamia Balanca 빌라 투자 시 은행 대출을 받아야 할까요?"
+ ],
+ "Đầu tư biệt thự Casamia Balanca có được ân hạn lãi vay không?": [
+  "Is there an interest grace period when investing in a Casamia Balanca villa?",
+  "Casamia Balanca 빌라 투자 시 대출 이자 유예가 있나요?"
+ ],
+ "Đầu tư biệt thự Casamia Balanca: bài toán dòng tiền 5–10 năm": [
+  "Investing in a Casamia Balanca villa: the 5–10 year cash-flow math",
+  "Casamia Balanca 빌라 투자: 5~10년 현금흐름 분석"
+ ],
+ "Đầu tư biệt thự Casamia Balanca: chọn kịch bản nào?": [
+  "Investing in a Casamia Balanca villa: which scenario to choose?",
+  "Casamia Balanca 빌라 투자: 어떤 시나리오를 선택할까?"
+ ],
+ "Đọc thêm về đầu tư biệt thự Casamia Balanca": [
+  "More on investing in a Casamia Balanca villa",
+  "Casamia Balanca 빌라 투자 관련 더 읽기"
+ ],
+ "Đọc thêm:": [
+  "Read more:",
+  "더 읽기:"
+ ],
+ "để nhận file tính dòng tiền theo đúng căn, giá và mức vay của bạn.": [
+  "page to receive a cash-flow spreadsheet for your exact unit, price and loan amount.",
+  "페이지로 연락 주시면 고객님의 세대, 가격, 대출 규모에 맞춘 현금흐름 계산 파일을 받아보실 수 있습니다."
+ ],
+ "Ở cả ba mức công suất, mức tối thiểu 50 triệu/tháng đều cao hơn phần chia thực (với Forestside 60 triệu/tháng, ròng khoảng 690 triệu, tức 4,8%). Nghĩa là bên vận hành phải bù tiền, nên năng lực tài chính và điều khoản ràng buộc của họ quan trọng hơn con số cam kết. Nếu đầu tư biệt thự Casamia Balanca theo kịch bản này, hãy yêu cầu văn bản ghi rõ bên cam kết, thời hạn và cơ chế xử lý khi bên vận hành không chi trả đủ.": [
+  "At all three occupancy levels, the 50 million VND/month minimum is higher than the actual revenue share (for Forestside at 60 million VND/month, net is about 690 million VND, or 4.8%). This means the operator has to make up the difference, so its financial strength and contractual obligations matter more than the guaranteed figure. If you invest in a Casamia Balanca villa under this scenario, ask for a written document that clearly states who provides the guarantee, its duration and what happens if the operator does not pay in full.",
+  "세 가지 가동률 모두에서 월 5,000만 동 최소 보장액이 실제 배분액보다 높습니다(Forestside의 경우 월 6,000만 동, 순수익 약 6억 9,000만 동, 즉 4.8%). 즉 운영사가 차액을 보전해야 하므로, 보장 금액보다 운영사의 재무 능력과 계약상 의무 조항이 더 중요합니다. 이 시나리오로 Casamia Balanca 빌라에 투자하신다면 보장 주체, 기간, 운영사가 전액 지급하지 못할 경우의 처리 방식을 명시한 문서를 요구하시기 바랍니다."
+ ],
+ "ở công suất 70%, giá thuê bình quân cần khoảng 5,3 triệu/đêm (vay 50%) hoặc 7,3 triệu/đêm (vay 70%). Mức này tương đương villa 4 phòng ngủ có hồ bơi ở Hội An (khoảng 6 – 8 triệu/đêm theo trang villa), cao hơn đáng kể mặt bằng chung 1,5 – 4 triệu/đêm ở Cẩm Thanh.": [
+  "at 70% occupancy, the average rate would need to be about 5.3 million VND/night (50% loan) or 7.3 million VND/night (70% loan). That is on par with a 4-bedroom pool villa in Hoi An (about 6 – 8 million VND/night, per villa websites) and well above the general level of 1.5 – 4 million VND/night in Cam Thanh.",
+  "가동률 70%에서 평균 임대료가 1박 약 530만 동(50% 대출) 또는 730만 동(70% 대출)은 되어야 합니다. 이는 호이안의 수영장 딸린 4베드룸 빌라 수준(빌라 사이트 기준 1박 약 600만~800만 동)으로, 깜타인 지역의 일반적인 수준인 1박 150만~400만 동보다 훨씬 높습니다."
+ ]
+}

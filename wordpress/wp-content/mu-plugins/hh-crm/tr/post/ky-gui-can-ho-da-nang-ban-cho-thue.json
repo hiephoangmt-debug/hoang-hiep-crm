@@ -1,0 +1,314 @@
+{
+ "(gọi/Zalo) để ký gửi bán hoặc cho thuê căn hộ của anh chị và nhận đánh giá giá sát thị trường.": [
+  "(call/Zalo) to consign your apartment for sale or rent and receive a price assessment close to the market.",
+  "(전화/Zalo)로 문의하시면 아파트 매도·임대 위탁을 접수하고 시세에 맞는 가격 평가를 받아보실 수 있습니다."
+ ],
+ ". Hoàng Hiệp nhắc các mốc này ngay khi nhận ký gửi căn hộ Đà Nẵng để chủ nhà tính đúng số tiền thực nhận.": [
+  ". Hoang Hiep flags these points as soon as he takes on a Da Nang apartment consignment so the owner can calculate the actual amount received correctly.",
+  ". 호앙 히엡은 다낭 아파트 위탁을 접수하는 즉시 이러한 사항을 안내해 소유주가 실수령액을 정확히 계산할 수 있도록 합니다."
+ ],
+ "1. Tiếp nhận": [
+  "1. Intake",
+  "1. 접수"
+ ],
+ "2. Kiểm tra": [
+  "2. Verification",
+  "2. 확인"
+ ],
+ "3. Định giá": [
+  "3. Pricing",
+  "3. 가격 산정"
+ ],
+ "4. Tiếp thị": [
+  "4. Marketing",
+  "4. 마케팅"
+ ],
+ "5. Giao dịch": [
+  "5. Transaction",
+  "5. 거래"
+ ],
+ "Anh chị có thể xem các căn đang chào bán tại": [
+  "You can see units currently for sale at",
+  "현재 판매 중인 세대는 다음에서 보실 수 있으며:"
+ ],
+ "Ban công căn hộ nhìn ra sông Hàn – nhóm căn được hỏi nhiều khi ký gửi căn hộ Đà Nẵng để cho thuê": [
+  "Apartment balcony overlooking the Han River – the type of unit most asked about when consigning Da Nang apartments for rent",
+  "다낭 한강이 보이는 아파트 발코니 – 다낭 아파트 임대 위탁 시 문의가 많은 세대 유형"
+ ],
+ "Biên lai đã thanh toán với chủ đầu tư (với căn chưa có sổ).": [
+  "Receipts for payments made to the developer (for units without a title).",
+  "시행사 납부 영수증(증서가 없는 세대)."
+ ],
+ "Bước": [
+  "Step",
+  "단계"
+ ],
+ "CCCD của chủ sở hữu; giấy tờ về tình trạng hôn nhân nếu là tài sản chung.": [
+  "The owner's citizen ID; marital status documents if it is jointly owned property.",
+  "소유주 신분증(CCCD), 공동재산인 경우 혼인 관계 서류."
+ ],
+ "Chuẩn bị giấy tờ sở hữu, tình trạng thế chấp, danh sách nội thất": [
+  "Prepare ownership documents, mortgage status and a furniture list",
+  "소유 서류, 담보 설정 여부, 가구 목록 준비"
+ ],
+ "Chủ nhà ở xa cần lưu ý gì?": [
+  "What should owners living far away keep in mind?",
+  "멀리 거주하는 소유주가 유의할 점은?"
+ ],
+ "Có nên ký gửi độc quyền?": [
+  "Should you consign exclusively?",
+  "전속 위탁을 해야 할까요?"
+ ],
+ "Có thể, qua hình thức chuyển nhượng hợp đồng mua bán với chủ đầu tư; cần hợp đồng, biên lai thanh toán và thủ tục theo quy định của chủ đầu tư.": [
+  "Yes, by transferring the sale and purchase agreement with the developer; you need the contract, payment receipts and the procedures required by the developer.",
+  "가능합니다. 시행사와의 매매계약서 양도 방식으로 진행하며, 계약서, 납부 영수증, 시행사 규정에 따른 절차가 필요합니다."
+ ],
+ "Căn hộ chưa có sổ có ký gửi bán được không?": [
+  "Can an apartment without a title be consigned for sale?",
+  "증서가 없는 아파트도 매도 위탁이 가능한가요?"
+ ],
+ "Danh sách nội thất, thiết bị, chỉ số điện nước khi bàn giao.": [
+  "A list of furniture and appliances, and meter readings for electricity and water at handover.",
+  "가구·가전 목록, 인도 시 전기·수도 계량기 수치."
+ ],
+ "Dọn dẹp, sửa các lỗi nhỏ và chụp ảnh vào giờ có ánh sáng tự nhiên giúp tin đăng nổi bật hơn. Với căn cho thuê, nội thất cơ bản đầy đủ và giá điện nước minh bạch là điều khách quan tâm nhất.": [
+  "Cleaning, fixing minor defects and taking photos in natural daylight make the listing stand out. For rental units, complete basic furnishings and transparent electricity and water rates are what tenants care about most.",
+  "청소, 작은 하자 수리, 자연광이 있는 시간대의 사진 촬영은 매물을 돋보이게 합니다. 임대 세대의 경우 임차인이 가장 중시하는 것은 기본 가구 완비와 투명한 전기·수도 요금입니다."
+ ],
+ "Giấy chứng nhận quyền sở hữu, hoặc hợp đồng mua bán với chủ đầu tư nếu căn chưa có sổ.": [
+  "The ownership certificate, or the sale and purchase agreement with the developer if the unit has no title yet.",
+  "소유권 증서 또는 증서가 아직 없는 경우 시행사와의 매매계약서."
+ ],
+ "Giấy tờ chứng minh quyền sở hữu hoặc quyền cho thuê.": [
+  "Documents proving ownership or the right to lease.",
+  "소유권 또는 임대 권리를 증명하는 서류."
+ ],
+ "Giấy tờ cần chuẩn bị": [
+  "Documents to prepare",
+  "준비 서류"
+ ],
+ "Giấy tờ sở hữu, tình trạng căn": [
+  "Ownership documents, unit condition",
+  "소유 서류, 세대 상태"
+ ],
+ "Giữ chìa khóa:": [
+  "Key holding:",
+  "열쇠 보관:"
+ ],
+ "Khi ký gửi bán": [
+  "When consigning for sale",
+  "매도 위탁 시"
+ ],
+ "Khi ký gửi cho thuê": [
+  "When consigning for rent",
+  "임대 위탁 시"
+ ],
+ "Khi ký gửi căn hộ Đà Nẵng, căn đặt giá quá cao thường nằm lâu trên thị trường, sau đó phải giảm sâu. Cách làm hợp lý là so sánh với các căn cùng tòa, cùng diện tích, cùng hướng đã giao dịch gần đây, rồi điều chỉnh theo tầng, view và nội thất.": [
+  "When consigning a Da Nang apartment, units priced too high usually sit on the market for a long time and then have to be cut sharply. A sensible approach is to compare with recent transactions of units in the same building with the same area and orientation, then adjust for floor, view and furnishings.",
+  "다낭 아파트를 위탁할 때 가격을 너무 높게 책정한 세대는 보통 오랫동안 시장에 머물다가 결국 큰 폭으로 가격을 내려야 합니다. 같은 건물에서 면적과 방향이 같은 세대의 최근 거래와 비교한 뒤 층수, 전망, 인테리어에 따라 조정하는 것이 합리적입니다."
+ ],
+ "Khi nào nên ký gửi căn hộ Đà Nẵng?": [
+  "When should you consign an apartment in Da Nang?",
+  "다낭 아파트는 언제 위탁하는 것이 좋을까요?"
+ ],
+ "Ký gửi bán": [
+  "Consigning for sale",
+  "매도 위탁"
+ ],
+ "Ký gửi cho thuê": [
+  "Consigning for rent",
+  "임대 위탁"
+ ],
+ "Ký gửi căn hộ Đà Nẵng bao lâu thì bán được?": [
+  "How long does it take to sell a consigned apartment in Da Nang?",
+  "다낭 위탁 아파트는 매도까지 얼마나 걸리나요?"
+ ],
+ "Ký gửi căn hộ Đà Nẵng cho thuê có cần công chứng hợp đồng thuê?": [
+  "When consigning a Da Nang apartment for rent, does the lease need to be notarized?",
+  "다낭 아파트 임대 위탁 시 임대차 계약을 공증해야 하나요?"
+ ],
+ "Ký gửi căn hộ Đà Nẵng là việc chủ nhà ủy thác cho người môi giới tìm khách mua hoặc khách thuê, kèm thỏa thuận về giá, phí và thời hạn. Để ký gửi hiệu quả, anh chị cần chuẩn bị đủ giấy tờ, định giá sát thị trường và thống nhất bằng văn bản ngay từ đầu (cập nhật tháng 10/2026).": [
+  "Consigning an apartment in Da Nang means the owner entrusts a broker with finding a buyer or tenant, with an agreement on price, fee and term. To consign effectively, you need to prepare all the documents, price close to the market and put everything in writing from the start (updated October 2026).",
+  "다낭 아파트 위탁(매물 등록)이란 소유주가 중개인에게 매수자나 임차인을 찾도록 맡기고 가격, 수수료, 기간을 합의하는 것입니다. 효과적으로 위탁하려면 서류를 모두 준비하고, 시세에 맞게 가격을 정하며, 처음부터 서면으로 합의하셔야 합니다(2026년 10월 업데이트)."
+ ],
+ "Ký gửi căn hộ Đà Nẵng theo 5 bước: tiếp nhận, kiểm tra, định giá, tiếp thị, giao dịch": [
+  "Consigning an apartment in Da Nang in 5 steps: intake, verification, pricing, marketing, transaction",
+  "다낭 아파트 위탁 5단계: 접수, 확인, 가격 산정, 마케팅, 거래"
+ ],
+ "Ký gửi căn hộ Đà Nẵng để bán dẫn đến hợp đồng chuyển nhượng phải công chứng, kèm thuế thu nhập cá nhân, lệ phí trước bạ và phí công chứng; hai bên nên thống nhất sớm ai chịu khoản nào để tránh vướng ở phút cuối. Mức phí công chứng hiện hành được": [
+  "Consigning a Da Nang apartment for sale leads to a transfer contract that must be notarized, along with personal income tax, registration fees and notary fees; the two parties should agree early on who pays what to avoid snags at the last minute. Current notary fee rates are published by",
+  "다낭 아파트 매도 위탁은 공증이 필요한 양도 계약으로 이어지며, 개인소득세, 등록세, 공증 수수료가 발생합니다. 막판에 문제가 생기지 않도록 양측이 어떤 비용을 누가 부담할지 일찍 합의해야 합니다. 현행 공증 수수료는"
+ ],
+ "Ký gửi căn hộ Đà Nẵng để bán hoặc cho thuê: quy trình 5 bước, giấy tờ cần chuẩn bị, cách định giá và các lưu ý khi ký hợp đồng ký gửi.": [
+  "Consigning a Da Nang apartment for sale or rent: the 5-step process, the documents to prepare, how to price it and what to watch when signing the consignment contract.",
+  "다낭 아파트 매도·임대 위탁: 5단계 절차, 준비 서류, 가격 산정 방법, 위탁 계약 체결 시 유의 사항."
+ ],
+ "Ký gửi căn hộ Đà Nẵng: quy trình bán, cho thuê, giấy tờ và lưu ý": [
+  "Consigning an apartment in Da Nang: the process for selling and renting, documents and key points",
+  "다낭 아파트 위탁(매물 등록): 매도·임대 절차, 서류, 유의 사항"
+ ],
+ "Ký gửi phù hợp khi anh chị không ở Đà Nẵng thường xuyên, không có thời gian dẫn khách hoặc muốn tiếp cận nhiều khách hơn. Với căn hộ cho thuê, ký gửi còn giúp giảm thời gian trống phòng nhờ có người theo dõi nhu cầu thuê liên tục.": [
+  "Consignment suits you if you do not live in Da Nang regularly, do not have time to show the unit or want to reach more buyers. For rental apartments, consignment also reduces vacancy time because someone is continuously tracking rental demand.",
+  "다낭에 상주하지 않거나, 고객 안내에 시간을 낼 수 없거나, 더 많은 고객에게 노출하고 싶으시다면 위탁이 적합합니다. 임대 아파트의 경우 임대 수요를 꾸준히 살피는 사람이 있어 공실 기간도 줄어듭니다."
+ ],
+ "Ký hợp đồng thuê, bàn giao, thu cọc": [
+  "Sign the lease, hand over, collect the deposit",
+  "임대차 계약 체결, 인도, 보증금 수령"
+ ],
+ "Lưu ý khi ký hợp đồng ký gửi căn hộ Đà Nẵng": [
+  "What to watch when signing a Da Nang apartment consignment contract",
+  "다낭 아파트 위탁 계약 체결 시 유의 사항"
+ ],
+ "Mẹo giúp ký gửi căn hộ Đà Nẵng nhanh có khách": [
+  "Tips to find buyers or tenants quickly for a consigned Da Nang apartment",
+  "다낭 위탁 아파트의 고객을 빨리 찾는 팁"
+ ],
+ "Nếu không ở Đà Nẵng, khi ký gửi căn hộ Đà Nẵng anh chị nên thống nhất cách nhận báo cáo định kỳ, cách xác nhận khách đặt cọc và cách ký giấy tờ (ủy quyền công chứng hoặc ra ký trực tiếp). Tiền cọc, tiền thuê nên chuyển thẳng vào tài khoản chủ nhà để minh bạch.": [
+  "If you do not live in Da Nang, when consigning your Da Nang apartment you should agree on how you will receive regular reports, how deposits from buyers or tenants are confirmed and how documents are signed (notarized power of attorney or signing in person). Deposits and rent should be paid directly into the owner's account for transparency.",
+  "다낭에 거주하지 않으신다면 다낭 아파트를 위탁할 때 정기 보고를 받는 방법, 고객의 계약금 확인 방법, 서류 서명 방법(공증 위임장 또는 직접 방문 서명)을 합의하시는 것이 좋습니다. 투명성을 위해 계약금과 임대료는 소유주 계좌로 직접 입금되도록 하십시오."
+ ],
+ "Nội thất, thiết bị, quy định tòa nhà": [
+  "Furniture, appliances, building rules",
+  "가구, 가전, 건물 규정"
+ ],
+ "Phí do hai bên thỏa thuận; thường bán tính theo phần trăm giá trị giao dịch, cho thuê tính theo số tháng tiền thuê. Nên ghi rõ trong hợp đồng.": [
+  "The fee is agreed between the two parties; sales are usually a percentage of the transaction value, rentals a number of months' rent. It should be stated clearly in the contract.",
+  "수수료는 양측이 합의합니다. 보통 매도는 거래 금액의 일정 비율, 임대는 몇 개월분 임대료로 정하며, 계약서에 명시하는 것이 좋습니다."
+ ],
+ "Phí ký gửi căn hộ Đà Nẵng là bao nhiêu?": [
+  "How much is the fee for consigning an apartment in Da Nang?",
+  "다낭 아파트 위탁 수수료는 얼마인가요?"
+ ],
+ "Phí môi giới:": [
+  "Brokerage fee:",
+  "중개 수수료:"
+ ],
+ "Phụ thuộc giá chào so với các căn cùng tòa, tình trạng căn và pháp lý. Căn định giá sát thị trường, giấy tờ đầy đủ thường có khách nhanh hơn rõ rệt.": [
+  "It depends on the asking price relative to other units in the same building, the unit's condition and its legal status. Units priced close to the market with complete documents usually find buyers noticeably faster.",
+  "같은 건물 다른 세대 대비 호가, 세대 상태, 법적 상태에 따라 다릅니다. 시세에 맞게 가격을 정하고 서류가 완비된 세대는 보통 훨씬 빨리 고객을 찾습니다."
+ ],
+ "Quy trình ký gửi căn hộ Đà Nẵng 5 bước": [
+  "The 5-step process for consigning an apartment in Da Nang",
+  "다낭 아파트 위탁 5단계 절차"
+ ],
+ "Quy định của ban quản lý tòa nhà về cho thuê, đăng ký tạm trú.": [
+  "The building management board's rules on leasing and temporary residence registration.",
+  "임대 및 임시 거주 신고에 관한 건물 관리위원회 규정."
+ ],
+ "So sánh căn tương tự đã giao dịch": [
+  "Compare similar units already sold",
+  "거래된 유사 세대와 비교"
+ ],
+ "So sánh giá thuê cùng tòa, cùng khu vực": [
+  "Compare rents in the same building and area",
+  "같은 건물·지역 임대료와 비교"
+ ],
+ "Theo Luật Nhà ở 2023, hợp đồng thuê nhà ở không bắt buộc công chứng, trừ khi các bên có nhu cầu. Chủ nhà vẫn cần kê khai thuế với thu nhập cho thuê.": [
+  "Under the 2023 Law on Housing, residential leases do not have to be notarized unless the parties wish to. The owner still needs to declare tax on rental income.",
+  "2023년 주택법에 따라 주택 임대차 계약은 당사자가 원하지 않는 한 공증이 의무가 아닙니다. 소유주는 임대 소득에 대해 세금을 신고해야 합니다."
+ ],
+ "Thuế, công chứng khi ký gửi căn hộ Đà Nẵng": [
+  "Taxes and notarization when consigning an apartment in Da Nang",
+  "다낭 아파트 위탁 시 세금과 공증"
+ ],
+ "Thông tin căn, giá mong muốn": [
+  "Unit details, asking price",
+  "세대 정보, 희망 가격"
+ ],
+ "Thông tin căn, giá thuê, thời hạn": [
+  "Unit details, rent, term",
+  "세대 정보, 임대료, 기간"
+ ],
+ "Thống nhất phí, thời hạn, quyền giữ chìa khóa bằng văn bản": [
+  "Agree in writing on the fee, term and who holds the keys",
+  "수수료, 기간, 열쇠 보관 권한을 서면으로 합의"
+ ],
+ "Thời hạn và độc quyền:": [
+  "Term and exclusivity:",
+  "기간과 전속 여부:"
+ ],
+ "Tiền cọc của khách:": [
+  "Buyer's or tenant's deposit:",
+  "고객의 계약금·보증금:"
+ ],
+ "Với cho thuê, cần tính cả mùa du lịch: căn hộ gần biển, gần sân bay thường có nhu cầu thuê ngắn hạn cao hơn vào mùa hè và dịp lễ hội. Tham khảo thêm bài": [
+  "For rentals, factor in the tourist season: apartments near the beach or the airport usually see higher short-term rental demand in summer and during festivals. See also the article",
+  "임대의 경우 관광 시즌도 고려해야 합니다. 해변이나 공항 근처 아파트는 보통 여름과 축제 기간에 단기 임대 수요가 더 높습니다. 다음 글도 참고하십시오:"
+ ],
+ "Với ký gửi cho thuê, hợp đồng thuê nhà ở theo Luật Nhà ở 2023 không bắt buộc công chứng, trừ khi các bên có nhu cầu. Tuy vậy, chủ nhà vẫn cần kê khai thuế với thu nhập cho thuê; cách tính được hướng dẫn trong bài": [
+  "For rental consignments, under the 2023 Law on Housing, residential leases do not have to be notarized unless the parties wish to. However, the owner still needs to declare tax on rental income; how to calculate it is explained in the article",
+  "임대 위탁의 경우 2023년 주택법에 따라 주택 임대차 계약은 당사자가 원하지 않는 한 공증이 의무가 아닙니다. 다만 소유주는 임대 소득에 대해 세금을 신고해야 하며, 계산 방법은 다음 글에서 안내합니다:"
+ ],
+ "Xác nhận tình trạng thế chấp nếu căn đang vay ngân hàng.": [
+  "Confirmation of mortgage status if the unit has a bank loan.",
+  "은행 대출이 있는 경우 담보 설정 확인서."
+ ],
+ "ai giữ, dẫn khách theo lịch nào, có báo trước cho chủ nhà không.": [
+  "who holds them, the viewing schedule, and whether the owner is notified in advance.",
+  "누가 보관하는지, 어떤 일정으로 고객을 안내하는지, 소유주에게 사전 통보하는지."
+ ],
+ "chuyển trực tiếp cho chủ nhà hay qua môi giới, có văn bản xác nhận.": [
+  "paid directly to the owner or through the broker, with written confirmation.",
+  "소유주에게 직접 송금하는지 중개인을 거치는지, 서면 확인 여부."
+ ],
+ "cách tính thuế cho thuê bất động sản 2026": [
+  "how to calculate tax on property rentals 2026",
+  "2026년 부동산 임대 소득세 계산 방법"
+ ],
+ "cập nhật theo năm.": [
+  "and updated annually.",
+  "에서 매년 업데이트됩니다."
+ ],
+ "ghi rõ mức phí, thời điểm thanh toán và điều kiện được hưởng. Trên thị trường, phí bán thường tính theo phần trăm giá trị giao dịch, phí cho thuê thường tính theo số tháng tiền thuê; mức cụ thể do hai bên thỏa thuận.": [
+  "state the fee, when it is paid and the conditions for earning it. In the market, sale fees are usually a percentage of the transaction value and rental fees are usually a number of months' rent; the exact amount is agreed between the two parties.",
+  "수수료 금액, 지급 시점, 지급 조건을 명시하십시오. 시장에서 매도 수수료는 보통 거래 금액의 일정 비율, 임대 수수료는 보통 몇 개월분 임대료로 정하며, 구체적인 금액은 양측이 합의합니다."
+ ],
+ "ký gửi độc quyền hay không, kéo dài bao lâu, điều kiện chấm dứt.": [
+  "whether the consignment is exclusive, how long it lasts and the termination conditions.",
+  "전속 위탁인지 여부, 기간, 해지 조건."
+ ],
+ "thị trường bất động sản Đà Nẵng 2026": [
+  "Da Nang real estate market 2026",
+  "2026년 다낭 부동산 시장"
+ ],
+ "tần suất cập nhật số khách xem, phản hồi về giá.": [
+  "how often you get updates on the number of viewings and feedback on the price.",
+  "방문 고객 수와 가격 관련 피드백을 얼마나 자주 받는지."
+ ],
+ "và căn cho thuê tại": [
+  "and units for rent at",
+  "임대 세대는 다음에서 보실 수 있습니다:"
+ ],
+ "Đặt cọc, công chứng, sang tên": [
+  "Deposit, notarization, title transfer",
+  "계약금, 공증, 명의 이전"
+ ],
+ "Định giá: bước quyết định tốc độ giao dịch": [
+  "Pricing: the step that determines how fast a deal happens",
+  "가격 산정: 거래 속도를 결정하는 단계"
+ ],
+ "Đọc thêm về ký gửi căn hộ Đà Nẵng": [
+  "More on consigning apartments in Da Nang",
+  "다낭 아파트 위탁 관련 더 읽기"
+ ],
+ "Độc quyền giúp môi giới đầu tư tiếp thị nhiều hơn, nhưng nên giới hạn thời hạn và ghi rõ điều kiện chấm dứt.": [
+  "Exclusivity lets the broker invest more in marketing, but you should limit the term and state the termination conditions clearly.",
+  "전속 위탁은 중개인이 마케팅에 더 투자하게 하지만, 기간을 제한하고 해지 조건을 명시하는 것이 좋습니다."
+ ],
+ "để nắm mặt bằng giá chung.": [
+  "to get a sense of the general price level.",
+  "전반적인 가격 수준을 파악하실 수 있습니다."
+ ],
+ "để tham khảo cách trình bày tin.": [
+  "for reference on how listings are presented.",
+  "매물 소개 방식을 참고하시기 바랍니다."
+ ],
+ "Ảnh, video, kết nối khách thuê": [
+  "Photos, videos, connecting with tenants",
+  "사진, 영상, 임차인 연결"
+ ],
+ "Ảnh, video, đăng tin, dẫn khách": [
+  "Photos, videos, listings, viewings",
+  "사진, 영상, 매물 게시, 고객 안내"
+ ]
+}
