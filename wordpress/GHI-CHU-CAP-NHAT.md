@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.52** + plugin Hoàng Hiệp CRM **2.20.377**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.52** + plugin Hoàng Hiệp CRM **2.20.378**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.378
+
+- Bản dịch EN / KO: tiêu đề mục ghép đúng trật tự từng thứ tiếng ("Premier Village at a glance", "Premier Village 개요"); khung chat, popup hiện sau khi tải trang cũng được dịch theo bảng viết sẵn; thêm 437 câu dùng chung và bản dịch viết sẵn cho các trang dự án đã xong.
 
 ## Có gì mới – 2.20.377 (giao diện 2.16.52)
 

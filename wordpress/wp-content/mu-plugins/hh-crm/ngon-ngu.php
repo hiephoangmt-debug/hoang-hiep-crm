@@ -355,7 +355,26 @@ add_action(
 	var norm = function ( s ) { return s.replace( /\s+/g, ' ' ).trim(); };
 	var lock = function ( el ) { el.setAttribute( 'translate', 'no' ); el.classList.add( 'notranslate' ); };
 	if ( tl === 'en' || tl === 'ko' ) {
-		var walker = document.createTreeWalker( document.body, NodeFilter.SHOW_TEXT ), nodes = [], n;
+		// Tiêu đề dạng "Tổng quan <em>Tên dự án</em>": ghép lại đúng trật tự từng thứ tiếng ("Premier Village at a glance").
+		var heads = <?php echo wp_json_encode( hh_lang_heading_patterns(), JSON_UNESCAPED_UNICODE ); ?>;
+		document.querySelectorAll( 'h1, h2, h3' ).forEach( function ( h ) {
+			var em = h.querySelector( 'em' );
+			if ( ! em || h.closest( '[translate="no"]' ) ) { return; }
+			var pre = norm( h.textContent.slice( 0, h.textContent.indexOf( em.textContent ) ) ), pat = heads[ pre ] && heads[ pre ][ tl === 'en' ? 0 : 1 ];
+			if ( ! pat ) { return; }
+			var name = norm( em.textContent ), tn = map[ name ] && map[ name ][ tl ];
+			var parts = pat.split( '{n}' ), mk = function ( t ) { var sp = document.createElement( 'span' ); sp.textContent = t; lock( sp ); return sp; };
+			var after = [], nx = em.nextSibling; // Phần sau <em> (VD ", khoảng 56 triệu/m²") giữ nguyên để Google dịch.
+			while ( nx ) { after.push( nx ); nx = nx.nextSibling; }
+			h.textContent = '';
+			if ( parts[0] ) { h.appendChild( mk( parts[0] ) ); }
+			if ( tn ) { em.textContent = tn; lock( em ); } // Chưa có bản dịch viết sẵn: để Google dịch phần trong <em>.
+			h.appendChild( em );
+			if ( parts[1] ) { h.appendChild( mk( parts[1] ) ); }
+			after.forEach( function ( x ) { h.appendChild( x ); } );
+		} );
+		var doMap = function ( root ) {
+		var walker = document.createTreeWalker( root, NodeFilter.SHOW_TEXT ), nodes = [], n;
 		while ( ( n = walker.nextNode() ) ) { nodes.push( n ); }
 		nodes.forEach( function ( node ) {
 			var key = norm( node.nodeValue ), t = map[ key ] && map[ key ][ tl ];
@@ -368,6 +387,14 @@ add_action(
 			p.replaceChild( span, node );
 			span.appendChild( node );
 		} );
+		};
+		doMap( document.body );
+		// Khung chat, popup… chèn sau khi tải trang: dịch tiếp phần mới thêm (theo dõi 8 giây đầu).
+		if ( window.MutationObserver ) {
+			var mo = new MutationObserver( function ( ms ) { ms.forEach( function ( m ) { m.addedNodes.forEach( function ( a ) { if ( a.nodeType === 1 && ! a.closest( '[translate="no"]' ) ) { doMap( a ); } } ); } ); } );
+			mo.observe( document.body, { childList: true, subtree: true } );
+			setTimeout( function () { mo.disconnect(); }, 8000 );
+		}
 		// Cụm từ trong câu: thay phần khớp bằng <span translate="no">, phần còn lại để Google dịch.
 		var phr = <?php echo wp_json_encode( $phr, JSON_UNESCAPED_UNICODE ); ?>;
 		var keys = Object.keys( phr ).filter( function ( k ) { return phr[ k ][ tl ]; } ).sort( function ( a, b ) { return b.length - a.length; } );
@@ -458,4 +485,30 @@ function hh_lang_page_dict() {
 		}
 	}
 	return $out;
+}
+
+/** Tiêu đề mục trang dự án "Tiền tố <em>Tên</em>" → mẫu câu đúng trật tự EN / KO ({n} = tên dự án hoặc giá đã dịch). */
+function hh_lang_heading_patterns() {
+	return array(
+		'Tổng quan'              => array( '{n} at a glance', '{n} 개요' ),
+		'Vị trí'                 => array( 'Location of {n}', '{n} 입지' ),
+		'Tiện ích'               => array( '{n} amenities', '{n} 편의시설' ),
+		'Mặt bằng'               => array( '{n} floor plans', '{n} 평면도' ),
+		'Các loại sản phẩm'      => array( '{n} unit types', '{n} 세대 유형' ),
+		'Pháp lý'                => array( '{n} legal status', '{n} 법적 상태' ),
+		'Giá chuyển nhượng'      => array( 'Resale price: {n}', '전매 가격: {n}' ),
+		'Bảng giá'               => array( '{n} price list', '{n} 분양가표' ),
+		'Giá'                    => array( 'Price: {n}', '가격: {n}' ),
+		'Các dự án trong'        => array( 'Projects in {n}', '{n} 내 프로젝트' ),
+		'Các dự án khác cùng tổ hợp' => array( 'Other projects in the {n} complex', '{n} 단지 내 다른 프로젝트' ),
+		'Chính sách bán hàng'    => array( '{n} sales policy', '{n} 분양 정책' ),
+		'Tiến độ'                => array( '{n} construction progress', '{n} 공사 진행' ),
+		'Tin mới về'             => array( 'Latest news on {n}', '{n} 최신 소식' ),
+		'Khách hay hỏi về'       => array( 'FAQs about {n}', '{n} 자주 묻는 질문' ),
+		'Danh sách căn đang bán' => array( '{n} units for sale', '{n} 매물 목록' ),
+		'Nội thất bàn giao'      => array( '{n} handover interiors', '{n} 인도 인테리어' ),
+		'Căn hộ mẫu'             => array( '{n} show apartment', '{n} 모델하우스' ),
+		'Bảng giá & chính sách'  => array( '{n} prices & sales policy', '{n} 분양가·분양 정책' ),
+		'Giá bất động sản quanh' => array( 'Property prices around {n}', '{n} 주변 부동산 시세' ),
+	);
 }
