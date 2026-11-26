@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.48** + plugin Hoàng Hiệp CRM **2.20.361**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.48** + plugin Hoàng Hiệp CRM **2.20.362**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.362
+
+- Bổ sung thông tin 21 dự án từ web cũ hoanggiaminh.com (106 ô trống được điền, 61 ô viết đầy đủ hơn): Sun Solar, Sun Symphony, Sun Cosmo, FPT Plaza 2/3/4, FPT City, Masteri, Peninsula, Fusion, The Filmore, Casamia, Casamia Calm, Shantira, Aria, Wyndham Soleil, Monarchy, Sentosa Riverside, Vịnh An Hòa City, Nam Hội An City, Hoiana. Không đụng giá. Premier Village: bảng loại biệt thự tên mới.
 
 ## Có gì mới – 2.20.361
 

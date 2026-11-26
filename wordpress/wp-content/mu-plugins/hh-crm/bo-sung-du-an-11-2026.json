@@ -1,0 +1,475 @@
+{
+ "sun-solar-residence": {
+  "add": {
+   "hh_p_handover": "Dự kiến 28/04/2027 – nhận căn sớm theo chương trình Sun Early Key",
+   "hh_p_unit_area": "Khoảng 33 – 99,4 m² (Studio đến 3PN)",
+   "hh_p_unit_types": "Studio | 33 – 39,1 m² | Studio | Liên hệ\nCăn 1PN | 41 – 43,2 m² | 1 | Liên hệ\nCăn 1PN+ | 41 – 55,2 m² | 1 + phòng đa năng | Liên hệ\nCăn 2PN | 55,1 – 55,2 m² | 2 | Liên hệ\nCăn 2PN+ | Khoảng 83,5 m² | 2 + phòng đa năng | Liên hệ\nCăn 3PN | Khoảng 99,4 m² | 3 | Liên hệ",
+   "hh_p_design_desc": "Tòa tháp 20 tầng với mặt bằng tầng điển hình từ tầng 7 đến tầng 19, bố trí để từng căn đều đón sáng tự nhiên và hướng ra sông Hàn hoặc thành phố. Cơ cấu sản phẩm từ Studio (khoảng 33 – 39 m²) đến căn 3 phòng ngủ (khoảng 99,4 m²), phần lớn căn hướng trực diện sông Hàn.",
+   "hh_p_amenities_out": "Cầu quay sông Hàn (khoảng 300 m)\nChợ Hàn, cầu Rồng, Bảo tàng Điêu khắc Chăm\nPhố đi bộ Bạch Đằng ven sông Hàn\nBiển Mỹ Khê\nSân bay quốc tế Đà Nẵng"
+  },
+  "replace": {
+   "hh_p_amenities_in": [
+    "Hồ bơi bốn mùa\nGym, yoga, spa\nKhu vui chơi trẻ em\n(Theo thông tin đơn vị phân phối)",
+    "Hồ bơi bốn mùa hướng sông Hàn\nGym, yoga, spa\nThư viện\nKids club – khu vui chơi trẻ em\nKhông gian sinh hoạt cộng đồng trên cao"
+   ]
+  }
+ },
+ "fpt-plaza-4": {
+  "add": {
+   "hh_p_amenities_out": "Đại học FPT, Đại học Greenwich, Làng Đại học Đà Nẵng\nHệ thống trường liên cấp FPT Schools\nBệnh viện đa khoa, trạm y tế phường Hòa Hải\nLotte Mart, Vincom Ngũ Hành Sơn (khoảng 10 phút)\nBãi biển Non Nước (khoảng 2,5 km)\nCác resort ven biển Hyatt, Melia, Pullman\nKhu công nghệ FPT Complex"
+  },
+  "replace": {
+   "hh_p_connections": [
+    "1 phút | Công viên trung tâm, quảng trường, tiện ích FPT City, FPT Schools\n3 phút | Bãi tắm Tân Trà, Đại học FPT, trường quốc tế SIS, APU, Legend Danang Golf Resort\n5 phút | Danh thắng Ngũ Hành Sơn, Montgomerie Links, chợ Non Nước, bệnh viện\n10 phút | Sân bay quốc tế Đà Nẵng, Da Nang Downtown, Lotte Mart",
+    "1 phút | Sông Cổ Cò (khoảng 100 m), công viên trung tâm, quảng trường, FPT Schools\n3 phút | Đại học FPT – Làng Đại học (khoảng 1 km), bãi tắm Tân Trà, trường quốc tế SIS, APU, Legend Danang Golf Resort\n5 phút | Bãi biển Non Nước (khoảng 2,5 km), danh thắng Ngũ Hành Sơn, Montgomerie Links, chợ Non Nước\n8 – 10 phút | KCN Điện Nam – Điện Ngọc (khoảng 6 km)\n10 phút | Lotte Mart, Vincom Ngũ Hành Sơn\n12 – 15 phút | Trung tâm Đà Nẵng (khoảng 10 km), Da Nang Downtown\n15 phút | Sân bay quốc tế Đà Nẵng (khoảng 11 km)\n20 phút | Phố cổ Hội An (khoảng 18 km)"
+   ],
+   "hh_p_highlights": [
+    "4 mặt tiền đường: Hoàng Minh Thắng 33 m, Trần Quốc Vượng 17,5 m, D15, N27\nCông viên nội khu 5.400 m² với hồ bơi, foodcourt, vườn nhiệt đới, khu vui chơi trẻ em\nHồ bơi tầng thượng (tầng 20), vườn thượng uyển tầng 17\nBàn giao hoàn thiện nội thất liền tường; sở hữu lâu dài\nTổng vốn đầu tư khoảng 2.790 tỷ đồng",
+    "4 mặt tiền đường: Hoàng Minh Thắng 33 m, Trần Quốc Vượng 17,5 m, D15, N27\nCông viên nội khu 5.400 m² với hồ bơi, foodcourt, vườn nhiệt đới, khu vui chơi trẻ em\nHồ bơi tầng thượng (tầng 20), vườn thượng uyển tầng 17\nBàn giao hoàn thiện nội thất liền tường; sở hữu lâu dài\nTổng vốn đầu tư khoảng 2.790 tỷ đồng\nMật độ xây dựng 43%, khu đất 18.905 m², kề sông Cổ Cò, cách biển Non Nước khoảng 2,5 km\nAn ninh 3 lớp, camera 24/7, thẻ từ thang máy theo tầng"
+   ]
+  }
+ },
+ "fpt-plaza-3": {
+  "add": {
+   "hh_p_connections": "800 m | Bãi tắm biển Tân Trà\n10 phút | Sân bay quốc tế Đà Nẵng\nVài phút | Trục Lê Văn Hiến, Trường Sa nối Đà Nẵng – Hội An\nNgay cạnh | Sông Cổ Cò, Khu đô thị FPT City (khoảng 180 ha)",
+   "hh_p_amenities_out": "Trung tâm thương mại, cửa hàng quanh FPT City\nNhà hàng, quán cà phê\nCơ sở y tế, ngân hàng, siêu thị\nCông viên, khu vui chơi giải trí\nBãi tắm Tân Trà",
+   "hh_p_location_desc": "FPT Plaza 3 nằm ở trung tâm Khu đô thị công nghệ FPT City (quy mô khoảng 180 ha), Ngũ Hành Sơn, được bao quanh bởi sông Cổ Cò. Từ dự án đi khoảng 800 m ra bãi tắm Tân Trà, khoảng 10 phút tới sân bay quốc tế Đà Nẵng; dự án nằm giữa hai trục kết nối Lê Văn Hiến và Trường Sa, thuận tiện đi trung tâm Đà Nẵng và phố cổ Hội An."
+  },
+  "replace": {
+   "hh_p_units": [
+    "837 căn hộ và shophouse khối đế",
+    "837 căn hộ (17 căn 1PN, 64 căn 1PN+1, 646 căn 2PN, 51 căn 2PN+1, 39 căn 3PN, 9 căn 3PN+1, 11 căn thông tầng) và shophouse khối đế"
+   ],
+   "hh_p_highlights": [
+    "4 mặt tiền: Hoàng Minh Thắng 33 m, D11 18,5 m, N16 17,5 m, N18 15,5 m\nTrung tâm Khu đô thị FPT City, cạnh quảng trường – công viên khoảng 30.000 m²\nĐã bàn giao từ 17/4/2026; ngày 13/11/2026 hoàn thành cấp sổ hồng cho 100% căn hộ (sở hữu lâu dài với khách Việt Nam)\nPhí quản lý dự kiến 13.000 đồng/m²/tháng (chưa VAT)\nBể bơi miễn phí năm đầu cho cư dân",
+    "4 mặt tiền: Hoàng Minh Thắng 33 m, D11 18,5 m, N16 17,5 m, N18 15,5 m\nTrung tâm Khu đô thị FPT City, cạnh quảng trường – công viên khoảng 30.000 m²\nĐã bàn giao từ 17/4/2026; ngày 13/11/2026 hoàn thành cấp sổ hồng cho 100% căn hộ (sở hữu lâu dài với khách Việt Nam)\nPhí quản lý dự kiến 13.000 đồng/m²/tháng (chưa VAT)\nBể bơi miễn phí năm đầu cho cư dân\nTổng vốn đầu tư khoảng 1.100 tỷ đồng\nCách bãi tắm Tân Trà khoảng 800 m"
+   ],
+   "hh_p_amenities_in": [
+    "Bể bơi trong nhà tầng 3 (khu bơi 140 m², 25,2 × 5,7 m) và bể bơi trẻ em\nSân vườn trên không (Sky Garden)\nSân chơi chung trên mái tầng 4 và tầng 12B\nSân vườn chung tầng 1\nPhòng sinh hoạt cộng đồng, lễ tân\nShophouse khối đế\nHầm 116 chỗ ô tô, 1.683 chỗ xe máy – xe đạp; tầng 1 thêm 6 chỗ ô tô, 69 chỗ xe máy\nHầm có hệ thống chống ngập, kiểm soát xe thông minh",
+    "Bể bơi trong nhà tầng 3 (khu bơi 140 m², 25,2 × 5,7 m) và bể bơi trẻ em\nPhòng gym\nSân vườn trên không (Sky Garden)\nSân chơi chung trên mái tầng 4 và tầng 12B\nSân vườn chung tầng 1, khu BBQ\nPhòng sinh hoạt cộng đồng, lễ tân\nShophouse khối đế\nHầm 116 chỗ ô tô, 1.683 chỗ xe máy – xe đạp; tầng 1 thêm 6 chỗ ô tô, 69 chỗ xe máy\nHầm có hệ thống chống ngập, kiểm soát xe thông minh"
+   ]
+  }
+ },
+ "fpt-plaza-2": {
+  "add": {
+   "hh_p_builder": "Công ty TNHH Tập đoàn Xây dựng Delta (tổng thầu)",
+   "hh_p_density": "49,7%",
+   "hh_p_handover": "Đã bàn giao tháng 6/2023",
+   "hh_p_unit_area": "Căn 2PN khoảng 56,4 – 74,8 m²; căn 3PN góc 77,86 m²; shophouse tầng 1 khoảng 56 – 126 m²",
+   "hh_p_unit_types": "Căn 2PN | 56,4 – 74,8 m² | 2 | Liên hệ\nCăn 3PN (2 góc cánh chữ U) | 77,86 m² | 3 | Liên hệ\nShophouse tầng 1 (23 căn) | 56 – 126 m² | – | Liên hệ",
+   "hh_p_design_desc": "Tòa nhà hình chữ U cao 25 tầng, 2 tầng hầm. Tầng 1 gồm 23 căn shophouse (khoảng 56 – 126 m²) cho nhà hàng, siêu thị, salon, cửa hàng. Tầng 2 có 10 căn hộ, phần còn lại là không gian chung với bể bơi trong nhà, phòng thể thao và khu cafe. Từ tầng 3 đến tầng 25 mỗi tầng 30 căn: 28 căn 2 phòng ngủ và 2 căn 3 phòng ngủ ở hai góc cánh chữ U, tầm nhìn ra biển, thành phố, quảng trường hoặc núi Ngũ Hành Sơn. Dự kiến khoảng 1.900 cư dân.",
+   "hh_p_handover_std": "Hoàn thiện nội thất cơ bản: sàn lát gạch, lát gỗ; tường, trần sơn bả, tường vệ sinh ốp gạch; cửa chính, cửa thông phòng, cửa ban công, cửa sổ; tủ bếp trên dưới kèm chậu và vòi rửa; thiết bị vệ sinh cơ bản; đèn LED chiếu sáng, công tắc, ổ cắm điện, ổ cắm TV, ổ cắm mạng; điều hòa chờ sẵn ống đồng và ống thoát nước ngưng.",
+   "hh_p_amenities_in": "Sảnh đón tiếp, bảo vệ 2 lớp\nBể bơi trong nhà tầng 2\nPhòng gym, yoga, fitness\nPhòng sinh hoạt cộng đồng, khu cafe tầng 2\nShophouse, nhà hàng, cafe tầng 1 – 2\nCông viên nội khu, kênh cảnh quan dẫn nước sông Cổ Cò",
+   "hh_p_amenities_out": "Công viên – quảng trường trung tâm FPT City\nHệ thống trường FPT liên cấp (mẫu giáo – trung học), Đại học FPT\nTrường Quốc tế Singapore, Trường Quốc tế Hoa Kỳ (APU), Làng Đại học Đà Nẵng\nBãi tắm Tân Trà, sông Cổ Cò\nDanh thắng Ngũ Hành Sơn, phố cổ Hội An, Bà Nà Hills",
+   "hh_p_connections": "Ngay cạnh | Sông Cổ Cò, công viên – quảng trường FPT City\n800 m | Bãi tắm biển Tân Trà\n10 phút | Sân bay quốc tế Đà Nẵng\nKết nối trực tiếp | Trần Đại Nghĩa, Trường Sa, Võ Chí Công, Nam Kỳ Khởi Nghĩa",
+   "hh_p_location_desc": "FPT Plaza 2 nằm ở trung tâm Khu đô thị công nghệ FPT City, trên đường Võ Chí Công – trục chính của khu, gần sân bay Đà Nẵng và bãi tắm Tân Trà; một mặt hướng sông Cổ Cò, nội khu có kênh cảnh quan lấy nước từ sông. Dự án kết nối trực tiếp 4 trục Trần Đại Nghĩa, Trường Sa, Võ Chí Công và Nam Kỳ Khởi Nghĩa để đi trung tâm Đà Nẵng, Hội An. FPT City là nơi làm việc của hơn 10.000 chuyên gia, kỹ sư công nghệ, có hệ thống giáo dục từ mầm non đến đại học trên khoảng 97.000 m².",
+   "hh_p_highlights": "Thuộc chuỗi FPT Plaza tại trung tâm FPT City, đường Võ Chí Công\n700 căn hộ 2 – 3 phòng ngủ, 23 shophouse khối đế\nTổng vốn đầu tư khoảng 1.000 tỷ đồng, tổng thầu Delta\nĐã bàn giao tháng 6/2023\nBể bơi trong nhà, gym – yoga, cafe ở tầng 2"
+  },
+  "replace": {
+   "hh_p_units": [
+    "700 căn hộ",
+    "700 căn hộ (653 căn 2PN, 47 căn 3PN) và 23 shophouse khối đế"
+   ],
+   "hh_p_scale": [
+    "5.865 m² đất",
+    "5.865 m² đất, tổng diện tích sàn gần 80.000 m²"
+   ]
+  }
+ },
+ "masteri-da-nang": {
+  "add": {
+   "hh_p_legal_docs": "Thông báo 9233/SXD-QLN của Sở Xây dựng Đà Nẵng – nhà ở hình thành trong tương lai đủ điều kiện được bán"
+  },
+  "replace": {
+   "hh_p_handover_std": [
+    "Hoàn thiện sàn, trần, tường và nội thất cơ bản",
+    "Bàn giao hoàn thiện cơ bản theo tiêu chuẩn Masteri Collection: phòng khách, phòng ngủ lát sàn gỗ công nghiệp; cửa kính Low-E cách âm, cách nhiệt; trần thạch cao, đèn LED âm trần; điều hòa âm trần Multi từng phòng; cửa chính chống cháy, khóa thông minh (vân tay, mã số, thẻ từ). Bếp: tủ trên – dưới vật liệu chống ẩm, mặt đá thạch anh, bếp từ âm và hút mùi Hafele/Bosch, chậu inox, vòi nóng lạnh. Phòng tắm: thiết bị TOTO/Kohler (hoặc tương đương), vách kính tắm đứng, lavabo, gương, gạch chống trơn, ốp tường toàn phần, nước nóng âm tường. Ban công/lô gia: lan can kính cường lực, gạch chống trượt, chờ sẵn cấp – thoát nước và ổ điện cho máy giặt. Hệ thống Smart Home điều khiển đèn, điều hòa, ổ điện qua điện thoại."
+   ],
+   "hh_p_amenities_in": [
+    "31 tiện ích nội khu (tầng 1 – 4)\nHồ bơi resort, sảnh thư giãn\nVườn BBQ, vườn yoga\nSân chơi vườn trên cao, khu vui chơi trẻ em\nSân pickleball, phòng gym\nTrung tâm thương mại khoảng 2.500 m², nhà hàng",
+    "31 tiện ích nội khu (tầng 1 – 4)\nSảnh đón tiếp\nHồ bơi vô cực resort, lounge nổi thư giãn\nVườn BBQ, vườn yoga, yoga ngoài trời\nSân chơi trên không, khu vui chơi trẻ em trong nhà và ngoài trời\nSân pickleball, phòng gym – yoga\nVườn đọc sách, cafe ngoài trời\nKhu khám phá rừng, vườn thú cưng cho bé\nKhông gian làm việc chung, phòng đa chức năng\nTrung tâm thương mại khoảng 2.500 m², nhà hàng"
+   ],
+   "hh_p_design_desc": [
+    "Hai tháp A và B cao 39 tầng trên khối đế thương mại tầng 1 – 3 (shophouse, trung tâm thương mại khoảng 2.500 m²), tầng 4 là hồ bơi resort, vườn dạo bộ và sân chơi trẻ em; 2 tầng hầm đỗ xe. Cơ cấu căn: 1PN+, 2PN, 2PN+, 3PN và Dual Key (căn Dual Key khoảng 101 m² thông thủy, 2 cửa vào riêng).",
+    "Hai tháp A và B cao 39 tầng trên khối đế thương mại tầng 1 – 3 (shophouse, trung tâm thương mại khoảng 2.500 m²), tầng 4 là hồ bơi resort, vườn dạo bộ và sân chơi trẻ em; 2 tầng hầm đỗ xe. Cơ cấu căn: 1PN+, 2PN, 2PN+, 3PN và Dual Key (căn Dual Key khoảng 101 m² thông thủy, 2 cửa vào riêng). Tháp B triển khai trước, mỗi tầng chỉ 16 căn, chủ yếu là căn 2PN, cùng 1 căn 1PN+, 1 căn 2PN+, 3 căn 3PN và 1 căn Dual Key; 100% phòng ngủ có cửa sổ ra ngoài; 15/16 căn mỗi tầng nhìn sông Hàn, sông Cẩm Lệ hoặc thành phố, 1 căn nhìn nội khu."
+   ],
+   "hh_p_connections": [
+    "Vài phút | Sông Cẩm Lệ, Cung thể thao Tiên Sơn\nVài phút | Lotte Mart, Asia Park, đường 2/9\nKhoảng 10 phút | Cầu Rồng, trung tâm Hải Châu\nKhoảng 10 phút | Sân bay quốc tế Đà Nẵng",
+    "5 phút | Lotte Mart (đối diện dự án qua Nại Nam), cầu Rồng – trung tâm Hải Châu (qua đường 2/9)\nVài phút | Sông Cẩm Lệ, Cung thể thao Tiên Sơn, Asia Park\n7 – 10 phút | Biển Mỹ Khê (qua cầu Tiên Sơn)\nKhoảng 10 phút | Sân bay quốc tế Đà Nẵng (Nguyễn Hữu Thọ – Duy Tân – 2/9 – Quy Mỹ)\nGần | Vincom Đà Nẵng, Bệnh viện Đà Nẵng, Bệnh viện Hoàn Mỹ"
+   ],
+   "hh_p_amenities_out": [
+    "Lotte Mart, Asia Park\nSông Cẩm Lệ, Cung thể thao Tiên Sơn\nTrường học, bệnh viện khu Hải Châu\nCầu Rồng, trung tâm hành chính",
+    "Lotte Mart, Vincom Đà Nẵng\nAsia Park (Sun World), Cung thể thao Tiên Sơn, sông Cẩm Lệ\nBệnh viện Đà Nẵng, Bệnh viện Hoàn Mỹ\nTrường học, cơ sở giáo dục quốc tế khu Hải Châu\nCầu Rồng, trung tâm hành chính, biển Mỹ Khê"
+   ]
+  }
+ },
+ "peninsula-da-nang": {
+  "add": {
+   "hh_p_scale": "Khoảng 7.167,5 m² đất, tổng diện tích sàn xây dựng 92.651,8 m²",
+   "hh_p_density": "44%",
+   "hh_p_location_desc": "Peninsula Đà Nẵng nằm tại lô A2-1 đường Lê Văn Duyệt, phường Nại Hiên Đông (cũ), Sơn Trà, ngay bờ Đông sông Hàn, phía cửa vịnh Đà Nẵng, cách bãi biển khoảng 2 km. Khu đất có 4 mặt đường: phía Đông Bắc giáp Bùi Dương Lịch, phía Tây giáp sông Hàn, phía Bắc giáp Nại Hưng 1 và dự án Marina Complex, phía Nam giáp Hồ Hán Thương; tầm nhìn ra sông Hàn, cửa biển, khu bắn pháo hoa và công viên.",
+   "hh_p_unit_types": "Căn 1PN | 45 – 55 m² | 1 | Liên hệ\nCăn 2PN | 65 – 99 m² | 2 | Liên hệ\nCăn 3PN | 109 m² | 3 | Liên hệ",
+   "hh_p_highlights": "Bờ Đông sông Hàn, giao lộ Lê Văn Duyệt – Hồ Hán Thương – Nại Hưng 1 – Bùi Dương Lịch\nTầm nhìn sông Hàn, cửa biển, khu bắn pháo hoa\n941 căn hộ sở hữu lâu dài, 30 tầng, 3 tầng hầm\nMật độ xây dựng 44%\nBàn giao nội thất thương hiệu Bosch, Panasonic, Hafele"
+  },
+  "replace": {
+   "hh_p_handover_std": [
+    "Bàn giao toàn bộ nội thất liền tường, thiết bị – vật liệu hạng sang (theo chủ đầu tư)",
+    "Bàn giao hoàn thiện nội thất liền tường, thiết bị – vật liệu nhập khẩu thương hiệu Bosch, Panasonic, Hafele (theo chủ đầu tư)"
+   ],
+   "hh_p_amenities_in": [
+    "3 tầng hầm đỗ ô tô\nSảnh đón chuẩn khách sạn 5 sao, phòng chờ thương gia\nBể bơi vô cực điện phân muối và Sky Park trên tầng thượng\nPhòng gym hơn 600 m², yoga, spa\nThư viện, khu vui chơi trẻ em trong nhà, phòng họp cư dân\nKhối đế: nhà hàng, cafe, mini mart, văn phòng",
+    "3 tầng hầm đỗ ô tô\nSảnh đón chuẩn khách sạn 5 sao, phòng chờ thương gia\nBể bơi vô cực điện phân muối và Sky Park trên tầng thượng\nPhòng gym hơn 600 m², yoga, spa\nThư viện, khu vui chơi trẻ em trong nhà, phòng họp cư dân\nNhà trẻ\nCông viên nội khu\nKhối đế: nhà hàng, cafe, mini mart, văn phòng, khu thương mại dịch vụ\nAn ninh 24/7"
+   ]
+  }
+ },
+ "sun-symphony-residence": {
+  "add": {
+   "hh_p_designer": "Aedas, Design Lab (tư vấn thiết kế)",
+   "hh_p_start": "Triển khai quý 2/2024",
+   "hh_p_location_desc": "Sun Symphony Residence nằm trên khu đất ven sông Hàn tại đường Trần Hưng Đạo – Lê Văn Duyệt, phường Nại Hiên Đông (cũ), Sơn Trà, trên dải đất bồi tự nhiên của sông. Phía Đông giáp đường Trần Hưng Đạo, phía Bắc giáp Lê Văn Duyệt – Vân Đồn, phía Tây và phía Nam giáp sông Hàn. Các tòa tháp sát mặt nước, nhìn ra sông Hàn, biển, bán đảo Sơn Trà và là điểm ngắm Lễ hội pháo hoa quốc tế Đà Nẵng; hầm chui sông Hàn (nối Đống Đa – Trần Phú với Vân Đồn – Trần Hưng Đạo) đi qua khu vực dự án.",
+   "hh_p_connections": "3 phút | Cầu quay sông Hàn, cầu Thuận Phước\n5 phút | Trung tâm Hành chính Đà Nẵng, khách sạn Novotel, cầu Rồng, cầu Tình Yêu\nNgay cạnh | Hầm chui qua sông Hàn\n6 phút | Biển Mân Thái, Mỹ Khê, Phạm Văn Đồng\n15 phút | Asia Park, công viên APEC, sân bay quốc tế Đà Nẵng",
+   "hh_p_amenities_in": "Bể bơi vô cực, bể bơi trẻ em, bể bơi trong nhà\nPool bar, Sky Lounge\nBistro Glasshouse\nKid Club\nPhòng sinh hoạt cộng đồng, phòng gym (tầng tiện ích tòa S2)",
+   "hh_p_amenities_out": "Sông Hàn, cầu Rồng, cầu Tình Yêu, cầu quay sông Hàn\nTrung tâm Hành chính Đà Nẵng\nBiển Mân Thái, Mỹ Khê, Phạm Văn Đồng\nAsia Park, công viên APEC\nKhu vực Lễ hội pháo hoa quốc tế Đà Nẵng (DIFF)"
+  },
+  "replace": {
+   "hh_p_address": [
+    "Ven sông Hàn, Sơn Trà, Đà Nẵng",
+    "Đường Trần Hưng Đạo & Lê Văn Duyệt, phường Nại Hiên Đông (cũ), Sơn Trà, Đà Nẵng – ven sông Hàn"
+   ],
+   "hh_p_ownership": [
+    "Sở hữu lâu dài",
+    "Sở hữu lâu dài (khách Việt Nam); 50 năm (khách nước ngoài)"
+   ],
+   "hh_p_developer": [
+    "Tập đoàn Sun Group",
+    "Sun Property – thành viên Tập đoàn Sun Group"
+   ],
+   "hh_p_unit_types": [
+    "Studio | 35,8 m² | 1 | Liên hệ\nCăn 1PN+1 | 49,3 m² | 1 | Liên hệ\nCăn 2PN | 68,8 m² | 2 | Liên hệ\nCăn 2PN+1 | 79,2 m² | 2 | Liên hệ\nCăn 3PN | 93,1 m² | 3 | Liên hệ",
+    "Studio (305 căn) | 35,8 m² | Studio | Liên hệ\nCăn 1PN+1 (407 căn) | 49,3 m² | 1 | Liên hệ\nCăn 2PN (231 căn) | 68,8 m² | 2 | Liên hệ\nCăn 2PN+1 (102 căn) | 79,2 m² | 2 | Liên hệ\nCăn 3PN (161 căn) | 93,1 m² | 3 | Liên hệ\nPenthouse, Dual Front, Garden House, Sky Villa | – | – | Liên hệ"
+   ],
+   "hh_p_zones": [
+    "Khu cao tầng (tòa S1, S2, S3) | Căn hộ, duplex, shop khối đế | 1.313 căn hộ, 77 shop khối đế | Căn hộ bàn giao Quý 1–2/2026 (dự kiến)\nThe Sonata (thấp tầng, 3 ha) | Nhà phố 3 tầng, shophouse 5 tầng, biệt thự | 180 nhà phố, 20 biệt thự | Bàn giao Quý 2/2025 (dự kiến)",
+    "Khu cao tầng The Symphony (tòa S1, S2, S3) | Căn hộ Studio – 3PN, penthouse, Dual Front, Garden House, Sky Villa, shop khối đế | 1.313 căn hộ, 77 shop khối đế | Căn hộ đang bàn giao từ tháng 5/2026\nThe Sonata (thấp tầng, 3 ha) | Shophouse 3 tầng (106 căn, 263 – 463 m²), shophouse 5 tầng (74 căn, 425 – 800 m²), biệt thự mặt sông Hàn 3 tầng (20 căn, 540 – 608 m²) | 180 shophouse, 20 biệt thự | Bàn giao Quý 2/2025 (dự kiến)"
+   ]
+  }
+ },
+ "sun-cosmo-residence": {
+  "add": {
+   "hh_p_designer": "Aedas (tư vấn thiết kế)",
+   "hh_p_manager": "Sun Property Management",
+   "hh_p_blocks": "2 tòa căn hộ The Panoma: P1 (33 tầng) và P2 (27 tầng); phân khu thấp tầng The Cosmo",
+   "hh_p_floors": "P1 33 tầng, P2 27 tầng; mỗi tòa 3 tầng hầm và khối đế 3 tầng (2 tầng shophouse + 1 tầng tiện ích)",
+   "hh_p_location_desc": "Sun Cosmo Residence nằm ngay chân cầu Trần Thị Lý, bên sông Hàn, tại giao lộ Trần Hưng Đạo – Chương Dương – Nguyễn Văn Thoại – Ngô Quyền, nơi giao nhau của ba quận trung tâm Hải Châu, Sơn Trà, Ngũ Hành Sơn, cách biển Mỹ Khê khoảng 1 km. Trần Hưng Đạo dẫn tới cầu Rồng và khu Lễ hội pháo hoa DIFF; Nguyễn Văn Thoại là trục du lịch ra biển Mỹ Khê, nơi tập trung cộng đồng người nước ngoài; cầu Trần Thị Lý nối sang sân bay và hướng Hội An, Sơn Trà. Tòa P2 có 4 mặt tiền Trần Thị Lý – Chương Dương – Nguyễn Tư Giản – Phạm Hữu Kính, ba mặt hướng sông Hàn, một mặt hướng biển; cạnh công viên Nguyễn Văn Trỗi (khoảng 10 ha) và khu biệt thự Euro Village.",
+   "hh_p_connections": "Khoảng 1 km | Biển Mỹ Khê\n3 phút | Cầu Rồng, cầu Tình Yêu\n7 phút | Bảo tàng Điêu khắc Chăm, chợ Hàn\n9 phút | Trung tâm Hành chính Đà Nẵng\n11 phút | Sân bay quốc tế Đà Nẵng\n13 phút | Chùa Linh Ứng\n30 – 40 phút | Bà Nà Hills, InterContinental Sun Peninsula, phố cổ Hội An",
+   "hh_p_amenities_in": "Bể bơi vô cực view sông Hàn tại P2 (330 m², đường bơi 38 m); bể bơi bốn mùa tại P1\nPhòng gym (P2 khoảng 140 m²), spa\nKid club, khu vui chơi trẻ em\nThể thao trong nhà\nNhà hàng, cafe, khu BBQ\nPhòng cộng đồng\nVườn trên cao, vườn đèn lồng trên mái, Sky Garden Retails\nCông viên cảnh quan\nShophouse khối đế, khu phố thương mại The Cosmo\nAn ninh 24/7",
+   "hh_p_amenities_out": "Quảng trường Hoa Hồng\nCông viên Nguyễn Văn Trỗi (khoảng 10 ha)\nĐài bắn pháo hoa DIFF\nTrung tâm Thể dục thể thao Sơn Trà\nBiển Mỹ Khê, phố Nguyễn Văn Thoại\nSun World Asia Park\nSân bay quốc tế Đà Nẵng\nBến du thuyền khu Euro Village",
+   "hh_p_design_desc": "Lấy cảm hứng từ làng chiếu Cẩm Nê: khung tòa nhà màu trắng đan ngang dọc như kỹ thuật dệt chiếu, điểm các mảng màu đỏ đun, vàng, xanh ngọc. Mỗi tòa The Panoma có 3 tầng hầm, tầng 1 – 2 là shophouse khối đế, tầng 3 là tầng tiện ích (bể bơi, gym, spa, kid club, nhà hàng, cafe). Tòa P1 cao 33 tầng, tầng 18 là tầng sinh hoạt chung kiêm lánh nạn. Tòa P2 cao 27 tầng, căn hộ từ tầng 4 đến 27 (24 tầng, 264 căn); tầng 18 chỉ có 6 căn Sky Villa ở độ cao khoảng 65 m, trần cao 4,5 m, ban công rộng gấp 2 – 3 lần căn thường. Quy hoạch để 100% căn hộ có tầm nhìn panorama ra sông Hàn, biển Mỹ Khê và thành phố.",
+   "hh_p_unit_types": "Studio | – | Studio | Liên hệ\nCăn 1PN / 1PN+1 | – | 1 | Liên hệ\nCăn 2PN / 2PN+1 | – | 2 | Liên hệ\nCăn 3PN | – | 3 | Liên hệ\nDuplex, penthouse, Sky Villa (tầng 18 tòa P2, 6 căn) | – | – | Liên hệ"
+  },
+  "replace": {
+   "hh_p_developer": [
+    "Tập đoàn Sun Group",
+    "Sun Property – thành viên Tập đoàn Sun Group"
+   ],
+   "hh_p_address": [
+    "Đường Trần Thị Lý, Ngũ Hành Sơn, Đà Nẵng",
+    "Chân cầu Trần Thị Lý, giao lộ Trần Hưng Đạo – Chương Dương – Nguyễn Văn Thoại – Ngô Quyền, phường Mỹ An (cũ), Ngũ Hành Sơn, Đà Nẵng"
+   ],
+   "hh_p_ownership": [
+    "Sở hữu lâu dài",
+    "Sở hữu lâu dài (khách Việt Nam); 50 năm (khách nước ngoài)"
+   ],
+   "hh_p_zones": [
+    "Khu cao tầng | Căn hộ studio – 3PN, duplex, shop khối đế | Khoảng 650 căn hộ, 38 shop | Bàn giao cuối 2025 – đầu 2026 (dự kiến)\nKhu thấp tầng | Nhà phố 6 – 7 tầng (đất 100 – 140 m²), biệt thự 3 tầng (đất 200 – 500 m²) | 101 nhà phố, 45 biệt thự | –",
+    "The Panoma (cao tầng: tòa P1 33 tầng, P2 27 tầng) | Căn hộ Studio – 3PN, duplex, penthouse, Sky Villa, shop khối đế | Khoảng 650 căn hộ, 38 shop | Bàn giao cuối 2025 – đầu 2026 (dự kiến)\nThe Cosmo – Townhouse | Nhà phố 6 – 7 tầng, đất 100 – 140 m², xây dựng tầng 1 80 – 100 m², tổng sàn 490 – 715 m² | 101 căn | –\nThe Cosmo – Shop Villa | Biệt thự 3 tầng, đất 200 – 500 m², xây dựng tầng 1 85 – 185 m², tổng sàn 250 – 550 m² | 43 – 45 căn | –"
+   ]
+  }
+ },
+ "fusion-resort-villas-da-nang": {
+  "add": {
+   "hh_p_ownership": "Sở hữu lâu dài, sổ hồng riêng từng căn (theo chính sách bán hàng; khách nước ngoài theo hình thức thuê dài hạn)",
+   "hh_p_handover": "Giai đoạn 1 (44 căn) dự kiến hoàn thành cuối 2022, giai đoạn 2 dự kiến quý 2/2024; khu biệt thự vận hành từ quý 1/2024",
+   "hh_p_handover_std": "Bàn giao kèm nội thất gắn tường và nội thất rời theo chính sách bán hàng (trang ghi 'hoàn thiện nội thất cơ bản'); tham gia cho thuê cần gói nội thất tiêu chuẩn Fusion; bảo hành 24 tháng",
+   "hh_p_location_desc": "Fusion Resort & Villas Đà Nẵng nằm trên đường Trường Sa, phường Hòa Hải (cũ), Ngũ Hành Sơn – cung đường biển nối Đà Nẵng – Hội An. Phía Bắc giáp The Ocean Villas, phía Tây giáp đường Trường Sa và sân golf BRG, phía Nam giáp các khu nghỉ dưỡng khác, mặt còn lại trực diện bãi biển riêng khoảng 300 m. Từ đây dễ đi trung tâm Đà Nẵng, sân bay, cảng biển và các điểm Cầu Rồng, Bà Nà Hills, Ngũ Hành Sơn, Hội An.",
+   "hh_p_highlights": "Dự án nhà ở đầu tiên của thương hiệu Fusion, 85 biệt thự 1 – 6 phòng ngủ có hồ bơi riêng\nBãi biển riêng khoảng 300 m trên trục Trường Sa\nGiai đoạn 1 gồm 44 căn bán hết trong vài giờ khi mở bán\nFusion Hotel Group vận hành, có chương trình cho thuê\nTrung tâm spa 2 tầng 30 phòng trị liệu, hồ bơi chính"
+  },
+  "replace": {
+   "hh_p_amenities_in": [
+    "Hồ bơi chính 1.377 m² (trong nhà và ngoài trời), hồ bơi riêng từng biệt thự 24 – 192 m²\nBãi biển riêng khoảng 300 m\nSpa, phòng tập, câu lạc bộ thể thao, sân tennis, sân golf mini\nNhà hàng chính bên hồ bơi (158 chỗ) và Grill House & Bar bên bãi biển\nKhu vui chơi trẻ em\nAn ninh, vận hành, kỹ thuật 24/7; xe buggy nội khu\nBãi đỗ xe 3.653 m² (khoảng 143 ô tô, 200 xe máy)",
+    "Hồ bơi chính 1.377 m² (trong nhà và ngoài trời, dài khoảng 60 m) kèm hồ bơi trẻ em; hồ bơi riêng từng biệt thự 24 – 192 m²\nBãi biển riêng khoảng 300 m\nTrung tâm spa 2 tầng trong vườn riêng: 30 phòng trị liệu, phòng yoga, phòng thiền, massage chân tay, xông hơi khô, khu thay đồ\nPhòng tập, câu lạc bộ thể dục – thể thao, sân tennis, sân golf mini\nNhà hàng chính bên hồ bơi (158 chỗ, ẩm thực Á – Âu) và Grill House & Bar bên bãi biển\nKhu Beach Garden với hoạt động gia đình buổi tối, khu vui chơi trẻ em\nAn ninh, vận hành, kỹ thuật 24/7; xe buggy nội khu\nBãi đỗ xe 3.653 m² (khoảng 143 ô tô, 200 xe máy)"
+   ]
+  }
+ },
+ "nam-hoi-an-city": {
+  "add": {
+   "hh_p_handover_std": "Hoàn thiện mặt ngoài, xây thô bên trong: mái bê tông lợp ngói âm dương đất nung; tường gạch xi măng mác M100, ốp đá granite kết hợp sơn nước",
+   "hh_p_start": "Mở bán tháng 9/2019",
+   "hh_p_handover": "Dự kiến giao nhà năm 2023 (theo trang)",
+   "hh_p_location_desc": "Nam Hội An City (Khu đô thị Nồi Rang) nằm ven bờ Nam sông Thu Bồn, chân phía Nam cầu Cửa Đại, cách phố cổ Hội An khoảng 5 km (khoảng 10 phút đi xe qua Trần Nhân Tông – Võ Chí Công), trên trục Di sản miền Trung Đà Nẵng – Hội An – Mỹ Sơn. Phía Đông giáp đường Võ Chí Công (ĐT129), cách biển khoảng 900 m; phía Tây giáp khu dân cư hiện hữu, cách chợ Nồi Rang khoảng 900 m; phía Nam là các đại dự án Hoiana, Vinpearl Nam Hội An; phía Bắc là sông Thu Bồn. Tuyến ven biển Võ Chí Công nối Đà Nẵng – Hội An – sân bay Chu Lai – Dung Quất.",
+   "hh_p_connections": "5 phút | Bãi biển An Bàng, rừng dừa Bảy Mẫu\n7 phút | Trung tâm phố cổ Hội An\n6 phút | Green Shoots International School\n10 phút | Casino Nam Hội An, Trường Quốc tế Hội An, siêu thị – minimart\n12 phút | Vinpearl Golf Nam Hội An\n15 phút | Montgomerie Links, sân golf BRG, Trường Quốc tế Singapore, APU\n40 phút | Sân bay quốc tế Đà Nẵng\n60 phút | Sân bay Chu Lai",
+   "hh_p_amenities_in": "Khu an ninh khép kín, bảo vệ 24/24\nNhiều công viên cây xanh, công viên trung tâm\nSân tennis, sân bóng đá, phòng gym\nHồ bơi, clubhouse\nĐường đi bộ ven sông Thu Bồn\nDãy nhà hàng, khu thương mại, bến du thuyền",
+   "hh_p_amenities_out": "Phố cổ Hội An, biển An Bàng, rừng dừa Bảy Mẫu\nHoiana (casino, sân golf, khách sạn), Vinpearl Nam Hội An\nCác trường quốc tế: Hội An, Singapore, APU, Green Shoots\nChợ Nồi Rang"
+  },
+  "replace": {
+   "hh_p_unit_area": [
+    "Đất phổ biến 100 m² (5 × 20 m), sàn 240 – 300 m²",
+    "Đất khoảng 100 – 700 m², phổ biến 100 m² (5 × 20 m); nhà 3 tầng xây dựng khoảng 75 – 90 m²/sàn, tổng sàn khoảng 225 – 270 m² theo từng dãy (một số nguồn ghi 240 – 300 m²)"
+   ]
+  }
+ },
+ "the-filmore-da-nang": {
+  "add": {
+   "hh_p_start": "Quý II/2020 (chuẩn bị đầu tư quý I/2019 – quý II/2020)",
+   "hh_p_legal": "Chấp thuận chủ trương đầu tư dự án căn hộ chung cư thương mại để bán; thời gian thực hiện dự án 50 năm kể từ ngày chấp thuận chủ trương; không có quỹ đất nhà ở xã hội. Sở hữu căn hộ: lâu dài với người Việt Nam, tối đa 50 năm với cá nhân nước ngoài."
+  },
+  "replace": {
+   "hh_p_address": [
+    "Đường Bạch Đằng – Trần Văn Trứ – Bình Minh 5, phường Bình Thuận (cũ), Hải Châu, Đà Nẵng",
+    "Lô B1-1-8, Khu B1-1, Khu dân cư, khách sạn, căn hộ và thương mại dịch vụ 2/9; mặt tiền Bạch Đằng – Trần Văn Trứ – Bình Minh 5, phường Bình Thuận (cũ), Hải Châu, Đà Nẵng"
+   ],
+   "hh_p_scale": [
+    "Khoảng 1.504 m² đất, tổng sàn xây dựng khoảng 22.600 m²",
+    "1.504,2 m² đất; diện tích sàn căn hộ khoảng 12.969 m², sàn thương mại dịch vụ khoảng 288,3 m²; chiều cao 84 m, hệ số sử dụng đất 12,1 lần; quy mô dân số khoảng 519 người"
+   ],
+   "hh_p_density": [
+    "Khoảng 55 – 56%",
+    "55,6%"
+   ],
+   "hh_p_design_desc": [
+    "Tòa 25 tầng, 206 căn: tầng 3 – 8 mỗi tầng 11 căn, từ tầng 9 chỉ 9 căn mỗi tầng. Có căn 1PN, 2PN, căn ghép 3PN, loft và 4 penthouse thông tầng – diện tích từng loại xem bảng bên dưới.",
+    "Tòa 25 tầng nổi, 3 tầng hầm, 206 căn từ tầng 3 đến tầng 24; tầng trệt và tầng 25 dành cho tiện ích. Tầng 3 – 8: mỗi tầng có căn 1PN, căn 2PN ở 4 góc và các căn ghép (2+2, 2+1) – tổng 12 căn kép thuận tiện ở nhiều thế hệ hoặc cho thuê. Tầng 9 gồm 9 căn Sky Terrace (3 căn 1PN, 6 căn 2PN) có sân vườn riêng 3,5 – 15,4 m². Tầng 10 – 20: mỗi tầng 9 căn (3 căn 1PN, 6 căn 2PN). Tầng 21 – 24: mỗi tầng 7 căn (3 căn 1PN, 4 căn 2PN) cùng 4 căn loft thông tầng và các penthouse. Hơn 80% mặt ngoài phủ kính Low-E 2 lớp hộp khí, ban công lồi; ý tưởng kiến trúc 'cá chép hóa rồng' với tông đồng và ánh vàng. 3 tầng hầm khoảng 3.243 m² với 63 chỗ ô tô, 230 chỗ xe máy."
+   ],
+   "hh_p_amenities_in": [
+    "Tầng trệt: sảnh lễ tân, khu thương mại – café, khu vui chơi trẻ em ngoài trời, phòng thư tín\nTầng 2: không gian sáng tạo cho trẻ em\nRooftop tầng 25: hồ bơi nhiệt vô cực khoảng 18 × 6 m và hồ bơi trẻ em\nRooftop: ghế tắm nắng, khu ngắm cảnh ngoài trời, phòng gym\nThư viện và không gian làm việc chung trên tầng thượng\nPhòng xông hơi tia hồng ngoại, phòng thay đồ, Nucalm\nKhu tổ chức tiệc trong nhà có bếp, khu BBQ ngoài trời\nAn ninh 24/7, lễ tân, quản lý tài sản và tiện ích",
+    "Tầng trệt: sảnh lễ tân, nhà hàng, café, siêu thị – khu thương mại, khu vui chơi trẻ em ngoài trời, phòng thư tín\nTầng 2: không gian sáng tạo cho trẻ em\nRooftop tầng 25: hồ bơi nước ấm vô cực khoảng 18 × 6 m và hồ bơi trẻ em\nRooftop: ghế tắm nắng, đài ngắm cảnh, phòng gym\nThư viện và không gian làm việc chung trên tầng thượng\nPhòng xông hơi tia hồng ngoại, phòng thay đồ, Nucalm\nPhòng khánh tiết có đảo bếp, khu BBQ ngoài trời\nFace ID kiểm soát thang máy, khóa căn hộ mở bằng app và mật mã\nDịch vụ lễ tân, dọn phòng, bảo trì tận cửa, quản gia; an ninh 24/7"
+   ],
+   "hh_p_progress": [
+    "2025 | Hoàn thiện tòa nhà\n2026 | Bàn giao, nhận nhà ở ngay",
+    "Quý I/2019 – quý II/2020 | Chuẩn bị đầu tư\nQuý II/2020 | Khởi công xây dựng (kế hoạch bàn giao quý II/2024)\n2025 | Hoàn thiện tòa nhà\n2026 | Bàn giao, nhận nhà ở ngay"
+   ]
+  }
+ },
+ "casamia-hoi-an": {
+  "add": {
+   "hh_p_designer": "Võ Trọng Nghĩa Architects",
+   "hh_p_manager": "Khách sạn: Tập đoàn AKARYN; khu đô thị: Big Sky",
+   "hh_p_handover_std": "Xây thô, hoàn thiện mặt ngoài",
+   "hh_p_zones": "Shophouse | Nhà phố thương mại | Đất 175 – 234,24 m², sàn xây dựng 327 – 385 m² | Đã bàn giao\nBiệt thự | Biệt thự sinh thái ven sông | Đất 303 – 307 m², sàn xây dựng 396,71 m² | Đã bàn giao",
+   "hh_p_location_desc": "Casamia Hội An nằm trong vùng dự trữ sinh quyển rừng dừa nước được UNESCO công nhận, gần ngã ba sông Cổ Cò. Một mặt giáp đường lớn rộng 38 m, một mặt giáp sông tự nhiên – ô tô và thuyền vào tận nhà. Phía Đông – Nam giáp sông Cổ Cò hướng ra biển; phía Tây giáp tuyến đường nối Vinpearl Hội An – TP Hội An – Đà Nẵng; phía Bắc giáp khu du lịch rừng dừa Bảy Mẫu. Từ đây kết nối nhanh phố cổ Hội An, biển An Bàng, Vinpearl Nam Hội An, casino Nam Hội An.",
+   "hh_p_connections": "5 phút | Bãi biển An Bàng, rừng dừa Bảy Mẫu\n6 phút | Green Shoots International School\n7 phút | Trung tâm phố cổ Hội An\n10 phút | Casino Nam Hội An, Trường Quốc tế Hội An, siêu thị – minimart\n12 phút | Vinpearl Golf Nam Hội An\n15 phút | Montgomerie Links, sân golf BRG, Trường Quốc tế Singapore, APU\n40 phút | Sân bay quốc tế Đà Nẵng\n60 phút | Sân bay Chu Lai",
+   "hh_p_amenities_in": "Gym, spa\nNhà hàng, cafe\nBể bơi vô cực (có tại gia)\nKid Club\nBến du thuyền – mỗi nhà được tặng bến thuyền gỗ tự nhiên\nBãi đỗ xe tập trung\nKhách sạn 5 sao\nCông viên chủ đề",
+   "hh_p_design_desc": "Khu đô thị sinh thái mật độ thấp lấy cảm hứng từ Venice: nhà ven kênh, mỗi căn có bến thuyền riêng. Khoảng 65% diện tích dành cho cây xanh tự nhiên và tiện ích, gần 60% là cây xanh – mặt nước cửa biển; chỉ số bụi mịn PM2.5 thường dưới 50."
+  },
+  "replace": {
+   "hh_p_scale": [
+    "15,6 ha (đất ở 6 ha)",
+    "15,6 ha (đất xây dựng khoảng 3,6 ha, cây xanh và mặt nước khoảng 12 ha)"
+   ],
+   "hh_p_highlights": [
+    "Mô hình biệt thự sinh thái \"2 trong 1\": để ở và nghỉ dưỡng\nNằm trong khu dự trữ sinh quyển thế giới Cù Lao Chàm – Hội An",
+    "Mô hình biệt thự sinh thái \"2 trong 1\": để ở và nghỉ dưỡng\nNằm trong khu dự trữ sinh quyển thế giới Cù Lao Chàm – Hội An\nMặt đường 38 m và mặt sông, ô tô và thuyền vào tận nhà\nKhoảng 65% diện tích là cây xanh, mặt nước và tiện ích\nThiết kế bởi Võ Trọng Nghĩa Architects, khách sạn do AKARYN vận hành"
+   ]
+  }
+ },
+ "casamia-calm-hoi-an": {
+  "add": {
+   "hh_p_legal": "Tên pháp lý: Dự án đầu tư xây dựng nhà ở Khu đô thị dịch vụ Đồng Nà – dự án đối ứng thu hồi vốn BT xây dựng cầu Km0+317 trên tuyến đường dẫn phía Bắc cầu Cửa Đại; quy hoạch chi tiết 1/500 đã duyệt. Đất ở biệt thự chuyển nhượng quyền sử dụng đất (112 lô) cho người mua tự xây hoặc xây theo thiết kế; chủ đầu tư cam kết sổ đỏ lâu dài.",
+   "hh_p_handover": "Đã hoàn thiện hạ tầng; dự kiến bàn giao quý IV/2021",
+   "hh_p_density": "Đất ở biệt thự: mật độ xây dựng 55%, hệ số sử dụng đất 1,1",
+   "hh_p_location_desc": "Casamia Calm nằm trong lõi thành phố di sản Hội An tại xã Cẩm Hà, được sông Cổ Cò uốn quanh, chỉ vài phút tới phố cổ; xung quanh là các làng nghề rau Trà Quế, lụa Hội An, gốm Thanh Hà. Ranh giới: phía Đông giáp sông Cổ Cò, phía Tây giáp mặt nước, phía Nam giáp khu dân cư, phía Bắc giáp mặt nước và hành lang bảo vệ sông Cổ Cò. Dễ kết nối biển An Bàng, rừng dừa Bảy Mẫu, casino Nam Hội An.",
+   "hh_p_amenities_in": "Hơn 30 tiện ích nội khu phong cách resort\nCông viên cây xanh, hồ nước, thảm cỏ ven hồ\nHệ thống kênh nước bao quanh các biệt thự, hàng cau dọc lối đi\n2 bãi đỗ xe tập trung (khoảng 3.474 m²)",
+   "hh_p_design_desc": "Theo quy hoạch: tổng khoảng 6,4 ha gồm đất xây dựng dự án 60.367,98 m² và đất hành lang bảo vệ luồng sông Cổ Cò 3.597,26 m². Cơ cấu đất: đất ở 23.289,28 m² (biệt thự 17.663,40 m², mật độ 55%, hệ số 1,1; chung cư 5.526,88 m², mật độ 50%, hệ số 3,0), thương mại dịch vụ 8.593,60 m² (mật độ 25 – 60%), hạ tầng kỹ thuật 4.919,76 m², giao thông 7.776,79 m², cây xanh – mặt nước 15.788,55 m². Quy mô dân số khoảng 750 người. Toàn bộ là biệt thự thấp tầng nên khu đô thị thoáng, nhiều mặt nước và cây xanh.",
+   "hh_p_highlights": "Quần thể biệt thự duy nhất trong lõi di sản phố Hội, bên sông Cổ Cò\n112 biệt thự bao quanh bởi kênh nước\nHơn 30 tiện ích nội khu\nHạ tầng đã hoàn thiện, sổ đỏ lâu dài\nCùng chủ đầu tư dự án Casamia đã bàn giao"
+  },
+  "replace": {}
+ },
+ "shantira-beach-resort-hoi-an": {
+  "add": {
+   "hh_p_handover": "Biệt thự mặt biển: quý 1/2021; căn hộ resort: quý 2/2021 (kế hoạch theo trang)",
+   "hh_p_handover_std": "Bàn giao đầy đủ nội thất (full nội thất)",
+   "hh_p_design_desc": "Biệt thự Shantira thiết kế đương đại, mở, tối đa tầm nhìn ra biển An Bàng; có các loại hướng vườn, có lối đi riêng ra biển và đối diện biển, mỗi căn có hồ bơi riêng (khoảng 28 m²). Khối căn hộ Shantira Luxury Condo gồm 2 tòa A và B, nội thất lấy cảm hứng từ văn hóa phố cổ Hội An và vật liệu bản địa; loại căn gồm Studio, 1PN (loại A, B), 2PN (loại A, B, C) và 3PN."
+  },
+  "replace": {
+   "hh_p_villa_desc": [
+    "Shantira LegaSea Villas gồm biệt thự 2 và 3 phòng ngủ, cao 2 tầng, thiết kế mở, mỗi căn có hồ bơi riêng; riêng loại 3 phòng ngủ có nguồn ghi 38 căn xếp 5 hàng, 100% view biển. Giá bán gốc theo nguồn phân phối: 2PN đất 348 – 606 m² khoảng 20 – 25 tỷ (chưa VAT), 3PN đất 322 – 807 m² khoảng 22 – 42 tỷ (gồm VAT).",
+    "Shantira LegaSea Villas gồm khoảng 70 biệt thự cao 2 tầng, thiết kế mở, mỗi căn có hồ bơi riêng (khoảng 28 m²): 31 căn 2 phòng ngủ, 38 căn 3 phòng ngủ (xếp 5 hàng, 100% view biển) và 1 căn 5 phòng ngủ. Có loại hướng vườn, có lối riêng ra biển và loại đối diện biển. Diện tích theo trang: 2PN khoảng 288 – 297 m², 3PN khoảng 278 – 360 m² (một số nguồn khác ghi đất 2PN 348 – 606 m², 3PN 322 – 807 m²)."
+   ],
+   "hh_p_unit_types": [
+    "Studio | 36 – 45 m² | Studio | Từ khoảng 1,3 tỷ (giá gốc); chuyển nhượng khoảng 1,65 tỷ (tin rao)\nCăn 2PN | 52 – 60 m² | 2 | Từ khoảng 1,8 tỷ (theo nguồn phân phối)",
+    "Studio | 36 – 45 m² | Studio | Từ khoảng 1,3 tỷ (giá gốc); chuyển nhượng khoảng 1,65 tỷ (tin rao)\nCăn 1PN | Khoảng 51,6 m² | 1 | Liên hệ\nCăn 2PN | 52 – 60 m² (trang ghi có căn 86 m²) | 2 | Từ khoảng 1,8 tỷ (theo nguồn phân phối)\nCăn 3PN | Khoảng 112 – 115 m² | 3 | Liên hệ"
+   ],
+   "hh_p_amenities_in": [
+    "Hồ bơi vô cực, beach bar\nNhà hàng Á – Âu\nSpa, xông hơi khô – ướt, jacuzzi\nPhòng gym\nKhu vui chơi trẻ em trong nhà và ngoài trời, phòng game\nHồ bơi riêng từng biệt thự",
+    "Hồ bơi vô cực, beach bar, beach club\nNhà hàng Á – Âu\nSpa & Wellness trị liệu kiểu Thái, xông hơi khô – ướt, jacuzzi\nPhòng gym\nKhu vui chơi trẻ em trong nhà và ngoài trời, phòng game\nHồ bơi riêng từng biệt thự\nKhu mua sắm, ẩm thực dưới chân tòa căn hộ\nBãi biển riêng khoảng 300 m"
+   ],
+   "hh_p_amenities_out": [
+    "Bãi biển An Bàng\nPhố cổ Hội An\nCù Lao Chàm\nCác resort ven biển Điện Dương – Hà My",
+    "Bãi biển An Bàng – Hà My\nPhố cổ Hội An, vịnh Cửa Đại, rừng dừa Bảy Mẫu\nCù Lao Chàm, làng rau Trà Quế\nLàng gốm Thanh Hà, làng mộc Kim Bồng, làng đèn lồng (bán kính 5 – 10 km)\nThánh địa Mỹ Sơn, Bà Nà\nCác resort ven biển Điện Dương – Hà My"
+   ]
+  }
+ },
+ "aria-da-nang-hotel-resort": {
+  "add": {
+   "hh_p_designer": "Atkins (kiến trúc)",
+   "hh_p_builder": "Contecons Đà Nẵng (thi công); nhà thầu D&D",
+   "hh_p_unit_area": "Căn condotel khoảng 48,8 m² (theo trang)",
+   "hh_p_legal": "Thời hạn 50 năm (theo trang)",
+   "hh_p_start": "Quý 4/2019",
+   "hh_p_loan_bank": "PVcomBank (ngân hàng đồng hành dự án, theo trang)",
+   "hh_p_location_desc": "Aria Đà Nẵng nằm mặt tiền đường Trường Sa, Ngũ Hành Sơn, hướng ra biển Non Nước, trên cung đường biển Hoàng Sa – Võ Nguyên Giáp – Trường Sa nối trung tâm Đà Nẵng với phố cổ Hội An. Phía Bắc giáp Nam Khang Resort Residences, phía Nam giáp Pulchra Resort, phía Tây giáp đường Trường Sa, phía Đông giáp biển Non Nước.",
+   "hh_p_amenities_in": "Sảnh lobby (khoảng 6.000 m²), lounge cafe\nHồ bơi vô cực view biển (khoảng 8.000 m²), khu hồ bơi & water park, hồ cảnh quan\nRooftop bar, beach bar\nBoutique shophouse, khu mua sắm\nTerrace coffee, khu ẩm thực, nhà hàng đại dương\nSpa & massage, tắm bùn\nKhu thể thao – giải trí\nCông viên nội khu, BBQ ngoài trời, vườn cảnh quan\n7 thang máy tốc độ cao"
+  },
+  "replace": {
+   "hh_p_scale": [
+    "Tổng vốn hơn 750 tỷ đồng",
+    "Khoảng 8 ha; tổng vốn hơn 750 tỷ đồng"
+   ]
+  }
+ },
+ "wyndham-soleil-da-nang": {
+  "add": {},
+  "replace": {
+   "hh_p_scale": [
+    "Khoảng 21.800 m² đất",
+    "Khoảng 2,2 ha (khoảng 21.800 m² đất); tổng mức đầu tư dự kiến khoảng 11.029 tỷ đồng"
+   ],
+   "hh_p_address": [
+    "02 Phạm Văn Đồng (giao Võ Nguyên Giáp, Hồ Nghinh), phường Phước Mỹ (cũ), Sơn Trà, Đà Nẵng",
+    "02 Phạm Văn Đồng, phường Phước Mỹ (cũ), Sơn Trà, Đà Nẵng – khu đất 4 mặt tiền Võ Nguyên Giáp (Đông), Phạm Văn Đồng (Nam), Hồ Nghinh (Tây), Morrison (Bắc)"
+   ],
+   "hh_p_designer": [
+    "Aedas",
+    "Aedas PTE Ltd (Singapore) – kiến trúc, cảnh quan; thiết kế M&E: Công ty TNHH Liên doanh Bon Việt Nam; khảo sát địa chất: Công ty TNHH Đầu tư Xây dựng P&P"
+   ],
+   "hh_p_location_desc": [
+    "Dự án nằm tại giao lộ Phạm Văn Đồng – Võ Nguyên Giáp – Hồ Nghinh, đối diện công viên Biển Đông và bãi biển Phạm Văn Đồng (Mỹ Khê), đầu cầu sông Hàn phía Sơn Trà.",
+    "Dự án nằm trên khu đất khoảng 2,2 ha với 4 mặt tiền: phía Đông giáp Võ Nguyên Giáp, phía Nam giáp Phạm Văn Đồng, phía Tây giáp Hồ Nghinh, phía Bắc giáp Morrison. Trước mặt là công viên Biển Đông – nơi diễn ra nhiều sự kiện lớn của thành phố – và bãi biển Phạm Văn Đồng (Mỹ Khê) chỉ khoảng 100 m; phía sau hướng sông Hàn, đầu cầu sông Hàn phía Sơn Trà."
+   ],
+   "hh_p_connections": [
+    "1 phút | Bãi biển Phạm Văn Đồng, công viên Biển Đông\n5 phút | Cầu sông Hàn, cầu Rồng\n10 phút | Trung tâm Hải Châu\n15 phút | Sân bay quốc tế Đà Nẵng",
+    "Khoảng 100 m | Biển Mỹ Khê – Phạm Văn Đồng, công viên Biển Đông\n5 phút | Cầu sông Hàn, cầu Rồng, trung tâm thành phố\n10 phút | Trung tâm Hải Châu, núi Sơn Trà – chùa Linh Ứng\n15 phút | Sân bay quốc tế Đà Nẵng\n30 phút | Phố cổ Hội An"
+   ],
+   "hh_p_amenities_in": [
+    "Khách sạn Wyndham Soleil 5 sao\nHồ bơi vô cực trên cao, pool bar\nCầu kính trên không nối các tòa\nNhà hàng, spa, xông hơi\nKhu thương mại trong tổ hợp",
+    "Khách sạn Wyndham Soleil 5 sao\nBể bơi khối đế và 4 bể bơi tràn trên tầng thượng các tòa, hồ jacuzzi, pool bar\nCầu kính trên không nối các tòa, có nhà hàng – bar trên cầu\nNhà hàng quốc tế, bar tại khối đế; nhà hàng VIP và bar trên tầng thượng\nSpa, phòng gym, yoga club, xông hơi\nKid club: game room, khu giữ trẻ, English Club\nTrung tâm thương mại tại khối đế\nBusiness center, phòng hội nghị\n21 thang máy và thang cuốn"
+   ],
+   "hh_p_highlights": [
+    "Ngã ba Phạm Văn Đồng – Võ Nguyên Giáp, đối diện công viên Biển Đông\nTổ hợp 4 tòa tháp, cao nhất 57 tầng (khoảng 199 m)\nThiết kế Aedas với cầu kính trên không nối các tòa\nNhiều hồ bơi vô cực trên cao, hơn 30 tiện ích\nWyndham Hotel Group quản lý vận hành",
+    "Ngã ba Phạm Văn Đồng – Võ Nguyên Giáp, đối diện công viên Biển Đông\nTổ hợp 4 tòa tháp, cao nhất 57 tầng (khoảng 199 m)\nThiết kế Aedas: 4 tòa mô phỏng rặng san hô, ban công uốn lượn như sóng, 2 cầu kính trên không nối các tòa\n4 hồ bơi vô cực trên tầng thượng, hơn 30 tiện ích\nKhoảng 75% căn hộ có ban công hướng biển\nWyndham Hotel Group quản lý vận hành; quản lý dự án Artelia (Pháp); ngân hàng bảo lãnh VietinBank"
+   ]
+  }
+ },
+ "fpt-city-da-nang": {
+  "add": {
+   "hh_p_designer": "Quy hoạch tổng thể: Skidmore, Owings & Merrill – SOM (Mỹ); cảnh quan: Cicada Pte Ltd (Singapore); tư vấn thủy văn, cấp thoát nước: WSP Parsons Brinckerhoff (Canada)",
+   "hh_p_density": "Khoảng 40% (60% diện tích dành cho cây xanh, mặt nước, tiện ích)",
+   "hh_p_unit_area": "Khoảng 90 – 1.000 m²; liền kề 6 × 15 m (90 m²), 6 × 18 m (108 m²), 6 × 24 m (144 m²); liền kề 2 mặt tiền 115 – 120 m²; shophouse 90 – 144 m²; biệt thự 112,5 – 288 m² (mặt tiền 7,5 – 12 m)",
+   "hh_p_legal": "Sổ đỏ từng nền, hạ tầng hoàn thiện khi giao đất (theo chủ đầu tư)",
+   "hh_p_ownership": "Lâu dài (đất ở đô thị)",
+   "hh_p_location_desc": "FPT City Đà Nẵng nằm trên trục Võ Chí Công, phường Hòa Hải (cũ), Ngũ Hành Sơn, tại giao lộ Trần Đại Nghĩa – Nam Kỳ Khởi Nghĩa; sát bờ sông Cổ Cò, sau lưng là núi Ngũ Hành Sơn, cách biển khoảng 1 – 1,5 km. Khu đô thị tiếp giáp khu đô thị mới Điện Nam – Điện Ngọc, kết nối thuận tiện về trung tâm Đà Nẵng và Hội An qua các trục Võ Chí Công – Trần Đại Nghĩa – Nam Kỳ Khởi Nghĩa.",
+   "hh_p_connections": "Khoảng 1 – 1,5 km | Biển (Non Nước – Tân Trà)\n10 phút | Cầu Rồng, trung tâm Đà Nẵng\n15 phút | Sân bay quốc tế Đà Nẵng\n20 phút | Cảng Tiên Sa\nTiếp giáp | Khu đô thị Điện Nam – Điện Ngọc\nGần | Hội An, Bà Nà Hills, Cù Lao Chàm",
+   "hh_p_amenities_in": "Hơn 100 ha công viên, cây xanh, mặt nước; hồ cảnh quan khoảng 3,6 ha\nCông viên – quảng trường trung tâm khoảng 3 ha, quảng trường nhạc nước\nHệ thống giáo dục từ mầm non đến đại học trên khoảng 97.000 m²: FPT Schools, Đại học FPT\nPhố thương mại, shophouse; công viên kết hợp khu thể thao, sân chơi trẻ em\nĐiện năng lượng mặt trời, nước sạch ION\nAn ninh 24/7",
+   "hh_p_amenities_out": "Trường Quốc tế Việt Nam – Singapore (SIS), Trường Quốc tế Hoa Kỳ APU, Đại học Mỹ Thái Bình Dương\nCao đẳng Du lịch Đà Nẵng, Cao đẳng Việt – Hàn, Đại học Y Dược, Làng Đại học Đà Nẵng\nKhu công nghệ FPT Complex\nResort ven biển: Pullman, The Ocean Villas, Sheraton Grand\nDanh thắng Ngũ Hành Sơn",
+   "hh_p_design_desc": "Quy hoạch theo hướng khu đô thị xanh thông minh: SOM lập quy hoạch tổng thể theo khí hậu và văn hóa miền Trung; WSP thiết kế cao độ nền và hạ tầng thoát nước để không ngập trong 50 năm; Cicada chọn cây trồng phù hợp thổ nhưỡng. Khu đô thị chia 8 phân khu: Town Centre (thương mại, căn hộ), Business Park (văn phòng), Campus (Đại học FPT, đào tạo – nghiên cứu phần mềm), Schools (mẫu giáo – trung học), Sports Centre, Villages (làng biệt thự), Lakeside Villas (biệt thự ven hồ) và Lagoon (hồ nước ngọt nhân tạo). Nhà phố có mặt tiền tối thiểu 6 m, ưu tiên ánh sáng và thông gió tự nhiên; các lô chủ yếu hướng Nam – Bắc. Khối căn hộ FPT Plaza nằm trên tuyến thương mại Võ Chí Công, cao 15 – 25 tầng, tổng hơn 4.000 căn trên 5 khu đất, cạnh công viên – quảng trường trung tâm."
+  },
+  "replace": {
+   "hh_p_zones": [
+    "Căn hộ FPT Plaza 1 – 5 | Căn hộ chung cư | 5 tòa (xem các dự án thành phần) | Plaza 1–2 đã bàn giao, Plaza 3–4 đang triển khai, Plaza 5 sắp mở bán\nĐất nền, shophouse, biệt thự | Thấp tầng | – | –",
+    "Căn hộ FPT Plaza 1 – 5 | Căn hộ chung cư (15 – 25 tầng) | 5 tòa, hơn 4.000 căn (xem các dự án thành phần) | Plaza 1–2 đã bàn giao, Plaza 3–4 đang triển khai, Plaza 5 sắp mở bán\nĐất nền liền kề, shophouse | Thấp tầng | Lô 90 – 144 m², liền kề 2 mặt tiền 115 – 120 m² | –\nĐất biệt thự (Villages, Lakeside Villas) | Thấp tầng | Lô 112,5 – 288 m² | –\nPhân khu V1 (gần Đại học FPT) và V5 (sát Nam Kỳ Khởi Nghĩa) | Đất nền | – | –"
+   ],
+   "hh_p_highlights": [
+    "Hơn 3 km mặt sông Cổ Cò\nCách biển khoảng 1 km, trên trục Đà Nẵng – Hội An\nĐịnh hướng khu đô thị xanh thông minh kiểu mẫu",
+    "Hơn 3 km mặt sông Cổ Cò, sau lưng núi Ngũ Hành Sơn\nCách biển khoảng 1 – 1,5 km, trên trục Đà Nẵng – Hội An\nĐịnh hướng khu đô thị xanh thông minh kiểu mẫu, mật độ xây dựng khoảng 40%\nQuy hoạch bởi SOM (Mỹ), cảnh quan Cicada (Singapore), thủy văn WSP (Canada) – thiết kế chống ngập 50 năm\nHồ cảnh quan khoảng 3,6 ha, hơn 100 ha công viên – cây xanh – mặt nước\nHệ thống giáo dục mầm non đến đại học khoảng 97.000 m²\nSổ đỏ từng nền, hạ tầng hoàn thiện"
+   ]
+  }
+ },
+ "the-monarchy-da-nang": {
+  "add": {
+   "hh_p_density": "55%",
+   "hh_p_location_desc": "The Monarchy nằm ở bờ Đông sông Hàn, trên đường Trần Hưng Đạo, giữa cầu Rồng và cầu Trần Thị Lý (nối Nguyễn Văn Linh ra sân bay), bên cạnh khu biệt thự Euro Village, phường An Hải Tây (cũ), Sơn Trà. Khu đất 4 mặt tiền, hướng chính nhìn ra sông Hàn; cách bến du thuyền sông Hàn khoảng 200 m.",
+   "hh_p_connections": "200 m | Bến du thuyền sông Hàn\nVài phút | Cầu Rồng, cầu Trần Thị Lý\nNgay cạnh | Khu biệt thự Euro Village\nQua cầu Trần Thị Lý – Nguyễn Văn Linh | Sân bay quốc tế Đà Nẵng",
+   "hh_p_amenities_in": "Hồ bơi\nPhòng gym\nNhà sinh hoạt cộng đồng\nQuảng trường, vườn hoa thư giãn cho trẻ em và người cao tuổi\nChỗ đậu xe cho toàn bộ cư dân",
+   "hh_p_design_desc": "Thiết kế theo phong cách châu Âu hiện đại; mặt bằng căn hộ mẫu tầng 5 – 17 và tầng 18 penthouse (block A)."
+  },
+  "replace": {}
+ },
+ "sentosa-riverside-dien-ngoc": {
+  "add": {
+   "hh_p_design_desc": "Quy hoạch đan xen một bên biệt thự, một bên nhà phố; các căn hướng ra sân golf, sông Cổ Cò hoặc công viên, hồ sinh thái, vị trí cao nhất có thể nhìn ra biển, núi Sơn Trà, Cù Lao Chàm. Cơ cấu đất: công trình công cộng 0,42 ha; đất ở liền kề 6,87 ha; đất ở biệt thự 4,02 ha; cây xanh 2,20 ha; mặt nước 1,11 ha; giao thông 5,71 ha. Sản phẩm có thể dùng để ở, kinh doanh (khách sạn, nhà hàng, văn phòng, cửa hàng) hoặc khai thác du lịch – nghỉ dưỡng."
+  },
+  "replace": {
+   "hh_p_developer": [
+    "Bách Đạt, Bách Đạt An",
+    "Công ty TNHH Sản xuất và Thương mại Bất động sản Bách Đạt (Bách Đạt An); nhà đầu tư chiến lược: Công ty CP Tập đoàn Bất động sản CENGROUP"
+   ],
+   "hh_p_scale": [
+    "20,33 ha",
+    "20,33 ha (đất ở liền kề 6,87 ha, đất ở biệt thự 4,02 ha, cây xanh 2,20 ha, mặt nước 1,11 ha, giao thông 5,71 ha, công trình công cộng 0,42 ha)"
+   ],
+   "hh_p_unit_area": [
+    "Liền kề 108 – 150 m²",
+    "Khoảng 100 – 200 m²; liền kề phổ biến 108 – 150 m²"
+   ],
+   "hh_p_legal": [
+    "615/677 lô có sổ (2022) – kiểm tra từng lô",
+    "Quy hoạch chi tiết 1/500 đã duyệt; 615/677 lô có sổ (2022) – kiểm tra từng lô"
+   ],
+   "hh_p_connections": [
+    "Khoảng 500 m | Biển Viêm Đông\nKhoảng 400 m | Tuyến ven biển Sơn Trà – Điện Ngọc\nKhoảng 5 phút | Ngũ Hành Sơn\nKhoảng 15 phút | Sân bay Đà Nẵng, phố cổ Hội An",
+    "Khoảng 400 – 500 m | Biển Viêm Đông, tuyến ven biển Sơn Trà – Điện Ngọc\nKề bên | Biệt thự Bồng Lai, sân golf Montgomerie Links\n800 m | Resort The Ocean Villas, sân golf Đà Nẵng (VinaCapital)\n1 km | Khu đô thị FPT City\nKhoảng 5 phút | Danh thắng Ngũ Hành Sơn\nKhoảng 15 phút (15 km) | Sân bay Đà Nẵng, phố cổ Hội An\nKhoảng 10 km | Trung tâm Đà Nẵng"
+   ],
+   "hh_p_amenities_out": [
+    "Sân golf Montgomerie Links, Đà Nẵng Golf\nCocobay, FPT City, Làng Đại học\nBiển Viêm Đông, resort ven biển Điện Ngọc",
+    "Sân golf Montgomerie Links, Đà Nẵng Golf\nCocobay, FPT City, Làng Đại học Đà Nẵng, Đại học Nội vụ\nBệnh viện 600 giường\nBiển Viêm Đông, resort ven biển Điện Ngọc: The Ocean Villas, Hyatt Regency, The Empire, The Dune"
+   ],
+   "hh_p_amenities_in": [
+    "3 công viên, trong đó có công viên ven sông Cổ Cò\nBến du thuyền, phố đi dạo ven sông\nHồ sinh thái, mặt nước 1,11 ha",
+    "3 công viên: công viên ven sông Cổ Cò kết hợp phố đi dạo và bến du thuyền, 2 công viên trung tâm\nBến du thuyền, phố đi dạo ven sông\nHồ sinh thái, mặt nước 1,11 ha\nCây xanh 2,20 ha"
+   ]
+  }
+ },
+ "vinh-an-hoa-city": {
+  "add": {
+   "hh_p_zones": "An Hòa 1 | Đất nền nhà phố, đất biệt thự | 45,64 ha | –\nAn Hòa 2 | Đất nền nhà phố, đất biệt thự, nhà phố và biệt thự xây sẵn | Khoảng 53,96 ha | –",
+   "hh_p_handover_std": "Nhà phố 2 tầng xây sẵn: xây thô bên trong, hoàn thiện mặt ngoài; kiến trúc Địa Trung Hải",
+   "hh_p_design_desc": "Quy hoạch 6 nhóm đất: đất ở; thương mại – du lịch – dịch vụ; giao thông đô thị; cây xanh; công trình công cộng; nhà ở chuyên gia. Hạ tầng đã hoàn thiện với đường nội khu 7,5 m và 10,5 m, vỉa hè 5 – 6 m. Dự kiến 2.685 sản phẩm gồm đất nền nhà phố và đất biệt thự, diện tích phổ biến 150 m² (6 × 25 m), 240 m² (10 × 24 m), 375 m² (15 × 25 m); dải chung khoảng 90 – 1.000 m². Triển khai theo nhiều giai đoạn: đất nền, nhà phố view sông, biệt thự Hoa Sứ, biệt thự Nhật Bản (từ 11/2022)."
+  },
+  "replace": {
+   "hh_p_unit_area": [
+    "Đất nền phổ biến 150 – 160 m²",
+    "Khoảng 90 – 1.000 m²; đất nền phổ biến 150 – 160 m² (6 × 25 m), lô lớn 240 m² (10 × 24 m), 375 m² (15 × 25 m)"
+   ],
+   "hh_p_location_desc": [
+    "Vịnh An Hòa City nằm ở xã Tam Hiệp cũ (từ 1/7/2025 thuộc xã Núi Thành, TP. Đà Nẵng), dọc vịnh An Hòa trên sông Trường Giang, tiếp giáp Quốc lộ 1A. Dự án gần sân bay Chu Lai và nằm trong vùng Khu kinh tế mở Chu Lai; theo trang dự án, kết nối với cao tốc Đà Nẵng – Quảng Ngãi, ĐT617 và đường ven biển Võ Chí Công.",
+    "Vịnh An Hòa City nằm ở xã Tam Hiệp và thị trấn Núi Thành cũ (từ 1/7/2025 thuộc xã Núi Thành, TP. Đà Nẵng), dọc vịnh An Hòa trên sông Trường Giang, tiếp giáp Quốc lộ 1A. Ranh giới: Đông Bắc giáp vịnh An Hòa, Đông Nam giáp đường Quang Trung, Tây Nam giáp khu nhà ở công nhân và khu dân cư Tam Hiệp 2, Tây Bắc giáp khu đô thị Tam Hiệp. Dự án gần sân bay Chu Lai, trong vùng Khu kinh tế mở Chu Lai; kết nối ĐT617, đường ven biển 129 (Võ Chí Công), Quốc lộ 1A và cao tốc Đà Nẵng – Quảng Ngãi."
+   ],
+   "hh_p_connections": [
+    "Khoảng 10 – 20 phút | Sân bay Chu Lai\nKhoảng 25 km (30 phút) | Trung tâm Tam Kỳ\nKhoảng 60 phút | Phố cổ Hội An\nKhoảng 85 km (1 giờ 30 phút) | Trung tâm Đà Nẵng",
+    "Khoảng 10 – 20 phút | Sân bay Chu Lai\nKhoảng 15 phút | Ga Núi Thành\nLân cận | Cảng Tam Hiệp, cảng Chu Lai; bến du thuyền trong dự án\nKhoảng 25 km (30 phút) | Trung tâm Tam Kỳ\nKhoảng 60 phút | Phố cổ Hội An\nKhoảng 85 km (1 giờ 30 phút) | Trung tâm Đà Nẵng"
+   ],
+   "hh_p_amenities_in": [
+    "Công viên, quảng trường ven vịnh\nĐất trường học, chợ, thương mại dịch vụ theo quy hoạch\nĐất nhà ở chuyên gia",
+    "Công viên, quảng trường ven vịnh; công viên kết hợp khu thể thao, sân chơi trẻ em\nPhố thương mại, trung tâm thương mại, siêu thị\nTrường mầm non, đất trường học liên cấp, chợ theo quy hoạch\nBể bơi bốn mùa, gym, spa, sân tennis, club house\nPhòng khám đa khoa\nNhà hàng Á – Âu, cafe, bar\nBến du thuyền\nĐất nhà ở chuyên gia"
+   ]
+  }
+ },
+ "hoiana-resort-golf": {
+  "add": {
+   "hh_p_location_desc": "Hoiana nằm trên dải bờ biển hoang sơ phía Nam Hội An, cách phố cổ khoảng 10 km, gần cầu Cửa Đại; cách sân bay quốc tế Đà Nẵng chưa đầy 1 giờ đi xe.",
+   "hh_p_connections": "25 phút | Phố cổ Hội An, biển Cửa Đại\n60 phút | Trung tâm Đà Nẵng, sân bay quốc tế Đà Nẵng\n70 phút | Hồ Phú Ninh\n85 phút | Thánh địa Mỹ Sơn\n180 phút | Cố đô Huế",
+   "hh_p_amenities_in": "Sân golf 18 lỗ Hoiana Shores Golf Club (đón khách chơi thử từ 23/9/2019)\nKhách sạn và villas các thương hiệu: Rosewood Hoi An, New World Hoiana Hotel & Residences\nKhu giải trí có casino\nBeach club, nhà hàng, spa\nCâu lạc bộ thể thao, trung tâm mua sắm\nBãi biển dài phía Nam Hội An",
+   "hh_p_progress": "Cuối 2019 | Hoàn thiện giai đoạn 1 (kế hoạch): sân golf 18 lỗ, hơn 1.000 phòng khách sạn và villas\n23/9/2019 | Sân golf Hoiana Shores đón khách chơi thử trước khai trương"
+  },
+  "replace": {
+   "hh_p_highlights": [
+    "Quần thể nghỉ dưỡng tích hợp tổng vốn khoảng 4 tỷ USD\nSân golf, beach club, nhà hàng, spa, câu lạc bộ thể thao, trung tâm mua sắm\nSản phẩm sở hữu: căn hộ khách sạn Hoiana Residences, biệt thự Hoiana Beach Villas và Hoiana Shores Golf Villas",
+    "Quần thể nghỉ dưỡng tích hợp tổng vốn khoảng 4 tỷ USD, quy mô 985,6 ha, triển khai 7 giai đoạn\nSân golf Hoiana Shores ven biển trên cồn cát, nhiều giải thưởng golf châu Á năm 2019\nKhách sạn Rosewood, New World; khu giải trí có casino\nSân golf, beach club, nhà hàng, spa, câu lạc bộ thể thao, trung tâm mua sắm\nSản phẩm sở hữu: căn hộ khách sạn Hoiana Residences, biệt thự Hoiana Beach Villas và Hoiana Shores Golf Villas"
+   ],
+   "hh_p_developer": [
+    "Công ty TNHH Phát triển Nam Hội An",
+    "Công ty TNHH Phát triển Nam Hội An (liên doanh ban đầu của VinaCapital, Suncity Group, VMS Investment Group)"
+   ]
+  }
+ }
+}
