@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.52** + plugin Hoàng Hiệp CRM **2.20.380**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.52** + plugin Hoàng Hiệp CRM **2.20.381**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.381
+
+- Bản tiếng Hàn: sửa "미케 비치 위" (nghĩa đen "trên nóc") thành "미케 비치의 / 바로 앞"; chữ "H" ở ảnh đại diện khối liên hệ không còn bị dịch thành "시간".
 
 ## Có gì mới – 2.20.380
 
