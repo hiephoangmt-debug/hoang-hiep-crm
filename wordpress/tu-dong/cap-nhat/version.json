@@ -1,7 +1,8 @@
 {
- "version": "2.20.354",
+ "version": "2.20.352",
  "theme": "2.16.47",
  "commit": "bf35294648c686b05f7a9760aed6575eeccb99bd",
  "manifest_sha": "9d4837c94acffffd0142cf3ae7343ad262a958f7a5968011453349ed80fff7b6",
- "files": 1746
+ "files": 1746,
+ "note": "Tạm ghi 2.20.352 để bản đang chạy (kiểm tra ngay, chưa chờ OPcache) nhận cập nhật lên 2.20.354; trả lại số thật sau khi web đã lên."
 }
