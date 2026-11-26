@@ -82,6 +82,10 @@ function hh_translate_url( $url, $code ) {
 	if ( empty( $p['host'] ) ) {
 		return $url;
 	}
+	// Trang của web: dùng bản dịch chạy bằng code (/en/…, /ko/…) – không qua Google Dịch.
+	if ( function_exists( 'hh_tl_path_ok' ) && in_array( $code, array( 'en', 'ko' ), true ) && wp_parse_url( home_url(), PHP_URL_HOST ) === $p['host'] && hh_tl_path_ok( $p['path'] ?? '/' ) ) {
+		return home_url( '/' . $code . ( $p['path'] ?? '/' ) ) . ( isset( $p['query'] ) ? '?' . $p['query'] : '' );
+	}
 	$host = str_replace( '.', '-', str_replace( '-', '--', $p['host'] ) ) . '.translate.goog';
 	$out  = 'https://' . $host . ( $p['path'] ?? '/' ) . ( isset( $p['query'] ) ? '?' . $p['query'] : '' );
 	return add_query_arg( array( '_x_tr_sl' => 'vi', '_x_tr_tl' => $code, '_x_tr_hl' => $code ), $out );
@@ -109,6 +113,9 @@ function hh_lang_switch_url( $code ) {
 	$pair = hh_project_en_pair();
 	if ( $pair && in_array( $code, array( 'vi', 'en' ), true ) ) {
 		return $pair[ $code ];
+	}
+	if ( function_exists( 'hh_tl' ) && ( hh_tl() || ( ! is_front_page() && 'vi' === hh_lang() && hh_tl_path_ok( hh_tl_path() ) ) ) ) {
+		return hh_tl_url( $code );
 	}
 	if ( 'vi' === $code || 'vi' !== hh_lang() || is_front_page() ) {
 		return hh_lang_url( $code );

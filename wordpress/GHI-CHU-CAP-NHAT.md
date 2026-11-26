@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.52** + plugin Hoàng Hiệp CRM **2.20.381**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.52** + plugin Hoàng Hiệp CRM **2.20.382**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.382
+
+- Trang tiếng Anh / tiếng Hàn chạy bằng code, không qua Google Dịch: mọi trang có thêm địa chỉ riêng hiephoangmt.com/en/… và /ko/… (ví dụ /en/du-an/premier-village-da-nang/). Web tự thay chữ theo bảng dịch viết sẵn, có thẻ lang, canonical, hreflang vi/en/ko, tiêu đề SEO tiếng Anh / Hàn; liên kết trong trang giữ nguyên ngôn ngữ đang xem; nút VI · EN · KO chuyển sang các địa chỉ này.
 
 ## Có gì mới – 2.20.381
 
