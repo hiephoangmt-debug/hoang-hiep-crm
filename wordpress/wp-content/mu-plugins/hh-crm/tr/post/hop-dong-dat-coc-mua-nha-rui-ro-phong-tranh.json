@@ -1,0 +1,302 @@
+{
+ "(gọi/Zalo) để được hỗ trợ rà soát hợp đồng đặt cọc trước khi ký.": [
+  "(call/Zalo) for help reviewing your deposit agreement before signing.",
+  "(전화/Zalo)로 연락하시면 서명 전 계약금 계약서 검토를 도와드립니다."
+ ],
+ "1. Người nhận cọc không phải chủ sở hữu": [
+  "1. The person receiving the deposit is not the owner",
+  "1. 계약금을 받는 사람이 소유주가 아님"
+ ],
+ "2. Tài sản đang thế chấp, tranh chấp": [
+  "2. The property is mortgaged or in dispute",
+  "2. 자산이 담보 설정 중이거나 분쟁 중"
+ ],
+ "3. Lô đất dính quy hoạch, lộ giới": [
+  "3. The plot is affected by planning or road boundaries",
+  "3. 필지가 계획 또는 도로 경계선에 걸림"
+ ],
+ "4. Thời hạn công chứng không rõ": [
+  "4. Unclear notarization deadline",
+  "4. 공증 기한이 불명확"
+ ],
+ "5. Không lường trước trở ngại khách quan": [
+  "5. Failing to anticipate objective obstacles",
+  "5. 불가항력적 장애를 예상하지 못함"
+ ],
+ "6 rủi ro thường gặp trong hợp đồng đặt cọc": [
+  "6 common risks in deposit agreements",
+  "계약금 계약서의 흔한 리스크 6가지"
+ ],
+ "6. Giá ghi trong hợp đồng khác giá thực tế": [
+  "6. The price in the contract differs from the actual price",
+  "6. 계약서상 가격이 실제 가격과 다름"
+ ],
+ "Ai nộp thuế thu nhập cá nhân, lệ phí trước bạ, phí công chứng": [
+  "Who pays personal income tax, the registration fee and the notarization fee",
+  "개인소득세, 등록세, 공증 수수료 납부 주체"
+ ],
+ "Bên nhận cọc (người bán) từ chối": [
+  "The deposit recipient (seller) backs out",
+  "계약금 수령자(매도인)가 거절"
+ ],
+ "Bên đặt cọc (người mua) từ chối": [
+  "The depositor (buyer) backs out",
+  "계약금 지급자(매수인)가 거절"
+ ],
+ "Cam kết của bên bán": [
+  "Seller's commitments",
+  "매도인의 확약"
+ ],
+ "Chuyển khoản vào đúng tài khoản người đứng tên sổ, ghi nội dung “đặt cọc mua nhà đất số…”.": [
+  "Transfer to the account of the person named on the certificate, with the note “deposit for purchase of property no. …”.",
+  "증서 명의자 계좌로 이체하고, 내용란에 “부동산 매수 계약금 번호 …”라고 기재하십시오."
+ ],
+ "Cách phòng tránh rủi ro": [
+  "How to avoid the risks",
+  "리스크 예방법"
+ ],
+ "Có nên đưa tiền cọc cho môi giới?": [
+  "Should you hand the deposit to a broker?",
+  "계약금을 중개인에게 줘도 되나요?"
+ ],
+ "Cọc cho người không đứng tên sổ, hoặc chỉ một trong hai vợ chồng ký với tài sản chung. Môi giới không mặc nhiên có quyền nhận cọc thay chủ nhà nếu không có văn bản ủy quyền hợp lệ.": [
+  "Paying a deposit to someone not named on the certificate, or only one spouse signing for jointly owned property. A broker does not automatically have the right to receive a deposit on the owner's behalf without a valid power of attorney.",
+  "증서에 이름이 없는 사람에게 계약금을 주거나, 공동 재산인데 배우자 중 한 명만 서명하는 경우. 유효한 위임장이 없으면 중개인은 소유주를 대신해 계약금을 받을 권한이 당연히 있는 것이 아닙니다."
+ ],
+ "Ghi giá thấp để giảm thuế tiềm ẩn rủi ro pháp lý cho cả hai bên và gây bất lợi khi tranh chấp.": [
+  "Stating a lower price to reduce taxes carries legal risks for both parties and puts you at a disadvantage in a dispute.",
+  "세금을 줄이려고 가격을 낮게 적으면 양측 모두 법적 리스크를 지고 분쟁 시 불리해집니다."
+ ],
+ "Giá và phương thức thanh toán": [
+  "Price and payment method",
+  "가격과 납부 방식"
+ ],
+ "Gợi ý điều khoản hoàn cọc trong hợp đồng đặt cọc": [
+  "Suggested deposit refund clauses in a deposit agreement",
+  "계약금 계약서의 계약금 반환 조항 예시"
+ ],
+ "Hậu quả (trừ khi các bên thỏa thuận khác)": [
+  "Consequence (unless the parties agree otherwise)",
+  "결과(당사자 간 별도 합의가 없는 한)"
+ ],
+ "Hợp đồng cọc tốt là hợp đồng trả lời trước được câu hỏi “nếu không mua được thì sao?”. Hiệp khuyên anh chị đọc kỹ từng điều khoản hoàn cọc, đặc biệt khi mua có vay ngân hàng. Với căn hộ dự án, hãy đối chiếu điều kiện hoàn tiền giữ chỗ và văn bản đủ điều kiện bán trước khi chuyển tiền.": [
+  "A good deposit agreement is one that answers in advance the question “what if the purchase falls through?”. Hiep advises you to read every deposit refund clause carefully, especially when buying with a bank loan. For project apartments, cross-check the booking refund conditions and the eligible-for-sale document before transferring money.",
+  "좋은 계약금 계약서란 “매수가 무산되면 어떻게 되는가?”라는 질문에 미리 답하는 계약서입니다. 히엡은 특히 은행 대출로 구매할 때 계약금 반환 조항을 하나하나 꼼꼼히 읽으시라고 조언합니다. 분양 아파트는 이체 전에 예약금 환불 조건과 분양 적격 공문을 대조하십시오."
+ ],
+ "Hợp đồng được giao kết, thực hiện": [
+  "The contract is concluded and performed",
+  "계약 체결 및 이행"
+ ],
+ "Hợp đồng đặt cọc cần ghi rõ thời hạn công chứng, cách giải chấp, trường hợp hoàn cọc; chuyển tiền vào tài khoản chủ sở hữu": [
+  "A deposit agreement should clearly state the notarization deadline, how the mortgage will be released and the refund cases; transfer money to the owner's account",
+  "계약금 계약서에는 공증 기한, 담보 해제 방법, 계약금 반환 사유를 명시하고, 대금은 소유주 계좌로 이체해야 합니다"
+ ],
+ "Hợp đồng đặt cọc khi mua căn hộ dự án": [
+  "Deposit agreements when buying project apartments",
+  "분양 아파트 구매 시 계약금 계약서"
+ ],
+ "Hợp đồng đặt cọc mua nhà": [
+  "A deposit agreement for buying a home",
+  "주택 매수 계약금 계약서는"
+ ],
+ "Hợp đồng đặt cọc mua nhà có bắt buộc công chứng không?": [
+  "Must a deposit agreement for buying a home be notarized?",
+  "주택 매수 계약금 계약서는 반드시 공증해야 하나요?"
+ ],
+ "Hợp đồng đặt cọc mua nhà đất: quy định Điều 328 Bộ luật Dân sự 2015, phạt cọc, các rủi ro thường gặp và điều khoản cần có để bảo vệ người mua tại Đà Nẵng.": [
+  "Deposit agreements for buying property: Article 328 of the 2015 Civil Code, deposit penalties, common risks and the clauses needed to protect buyers in Da Nang.",
+  "부동산 매수 계약금 계약서: 2015년 민법 제328조, 계약금 위약 규정, 흔한 리스크, 다낭에서 매수인을 보호하는 데 필요한 조항."
+ ],
+ "Hợp đồng đặt cọc mua nhà đất: rủi ro thường gặp và cách phòng tránh": [
+  "Deposit agreements for buying property: common risks and how to avoid them",
+  "부동산 매수 계약금 계약서: 흔한 리스크와 예방법"
+ ],
+ "Hợp đồng đặt cọc nên ghi mức cọc bao nhiêu?": [
+  "How much deposit should a deposit agreement state?",
+  "계약금 계약서에는 계약금을 얼마로 적어야 하나요?"
+ ],
+ "Hợp đồng đặt cọc viết tay có giá trị không?": [
+  "Is a handwritten deposit agreement valid?",
+  "손으로 쓴 계약금 계약서도 효력이 있나요?"
+ ],
+ "Không ghi hạn chót ký hợp đồng chuyển nhượng, dẫn đến kéo dài hoặc bên kia viện cớ “chưa đến hạn”.": [
+  "No deadline for signing the transfer contract, leading to delays or the other party claiming it is “not yet due.”",
+  "양도 계약 체결 기한을 적지 않아 지연되거나 상대방이 “아직 기한이 아니다”라고 핑계를 대는 경우."
+ ],
+ "Kiểm tra sổ bản gốc, quy hoạch, thế chấp trước khi chuyển bất kỳ khoản tiền nào.": [
+  "Check the original certificate, planning and mortgage status before transferring any money.",
+  "어떤 금액이든 이체하기 전에 증서 원본, 계획, 담보 상태를 확인하십시오."
+ ],
+ "Môi giới không mặc nhiên có quyền nhận cọc thay chủ nhà. Nên chuyển khoản trực tiếp vào tài khoản người đứng tên sổ, trừ khi có văn bản ủy quyền hợp lệ.": [
+  "A broker does not automatically have the right to receive a deposit on the owner's behalf. Transfer directly to the account of the person named on the certificate, unless there is a valid power of attorney.",
+  "중개인은 소유주를 대신해 계약금을 받을 권한이 당연히 있는 것이 아닙니다. 유효한 위임장이 없다면 증서 명의자 계좌로 직접 이체하십시오."
+ ],
+ "Mất tiền cọc": [
+  "Loses the deposit",
+  "계약금 몰수"
+ ],
+ "Mức cọc vừa phải, đủ ràng buộc; thời hạn công chứng ngắn và cụ thể.": [
+  "A moderate deposit that is enough to bind; a short, specific notarization deadline.",
+  "구속력을 갖출 만큼 적당한 계약금, 짧고 구체적인 공증 기한."
+ ],
+ "Mức phạt cụ thể với từng bên": [
+  "Specific penalty amounts for each party",
+  "당사자별 구체적인 위약 금액"
+ ],
+ "Ngày ký hợp đồng công chứng, ngày bàn giao": [
+  "Date of signing the notarized contract, handover date",
+  "공증 계약 체결일, 인도일"
+ ],
+ "Người bán đổi ý không bán thì xử lý thế nào?": [
+  "What happens if the seller changes their mind and won't sell?",
+  "매도인이 마음을 바꿔 팔지 않으면 어떻게 하나요?"
+ ],
+ "Người mua vay ngân hàng nhưng hồ sơ vay bị từ chối, hoặc thủ tục hành chính kéo dài. Nếu hợp đồng không có điều khoản xử lý, rất dễ tranh chấp về việc có bị phạt cọc hay không.": [
+  "The buyer applies for a bank loan but is rejected, or administrative procedures drag on. If the contract has no clause to handle this, disputes over whether the deposit is forfeited are very likely.",
+  "매수인이 은행 대출을 신청했지만 거절되거나 행정 절차가 길어지는 경우. 계약서에 처리 조항이 없으면 계약금 몰수 여부를 두고 분쟁이 생기기 쉽습니다."
+ ],
+ "Nhà ở hình thành trong tương lai: cọc không quá 5% giá bán (Luật KDBĐS 2023)": [
+  "Off-plan housing: the deposit may not exceed 5% of the sale price (2023 Law on Real Estate Business)",
+  "분양 단계 주택: 계약금은 분양가의 5%를 넘을 수 없습니다(2023년 부동산사업법)"
+ ],
+ "Những điều khoản cần có trong hợp đồng đặt cọc mua nhà đất": [
+  "Clauses a deposit agreement for buying property should include",
+  "부동산 매수 계약금 계약서에 포함해야 할 조항"
+ ],
+ "Những điều khoản này không thay thế bước kiểm tra trước khi ký, nhưng giúp hợp đồng đặt cọc trả lời rõ câu hỏi “nếu không mua được thì sao”, hạn chế tranh cãi về việc có bị phạt cọc hay không.": [
+  "These clauses do not replace checks before signing, but they help the deposit agreement clearly answer the question “what if the purchase falls through,” limiting arguments over whether the deposit is forfeited.",
+  "이 조항들이 서명 전 확인을 대신하지는 않지만, 계약금 계약서가 “매수가 무산되면 어떻게 되는가”라는 질문에 명확히 답하게 하여 계약금 몰수 여부를 둘러싼 다툼을 줄여 줍니다."
+ ],
+ "Nội dung nên ghi": [
+  "What to include",
+  "기재할 내용"
+ ],
+ "Pháp luật không bắt buộc công chứng hợp đồng đặt cọc, nhưng nên lập văn bản rõ ràng và có thể công chứng với giao dịch lớn. Hợp đồng chuyển nhượng quyền sử dụng đất thì bắt buộc công chứng hoặc chứng thực.": [
+  "The law does not require deposit agreements to be notarized, but they should be in clear writing and can be notarized for large transactions. A land use right transfer contract must be notarized or certified.",
+  "법은 계약금 계약서의 공증을 의무화하지 않지만 명확한 서면으로 작성해야 하며 고액 거래는 공증할 수 있습니다. 토지사용권 양도 계약은 반드시 공증 또는 인증을 받아야 합니다."
+ ],
+ "Pháp luật không bắt buộc công chứng hợp đồng đặt cọc, nhưng nên lập văn bản rõ ràng, có chữ ký đầy đủ các bên; với giao dịch giá trị lớn có thể công chứng để hạn chế tranh chấp. Lưu ý: hợp đồng chuyển nhượng quyền sử dụng đất sau đó bắt buộc phải công chứng hoặc chứng thực.": [
+  "The law does not require deposit agreements to be notarized, but they should be in clear writing with the full signatures of all parties; for high-value transactions, notarization can help limit disputes. Note: the subsequent land use right transfer contract must be notarized or certified.",
+  "법은 계약금 계약서의 공증을 의무화하지 않지만, 모든 당사자가 서명한 명확한 서면으로 작성해야 하며, 고액 거래는 분쟁을 줄이기 위해 공증할 수 있습니다. 참고: 이후의 토지사용권 양도 계약은 반드시 공증 또는 인증을 받아야 합니다."
+ ],
+ "Pháp luật không bắt buộc công chứng hợp đồng đặt cọc; văn bản viết tay vẫn có thể có giá trị nếu đủ nội dung và chữ ký các bên. Với giao dịch lớn, nên lập hợp đồng đặt cọc rõ ràng, có người làm chứng hoặc công chứng.": [
+  "The law does not require deposit agreements to be notarized; a handwritten document can still be valid if it has sufficient content and the parties' signatures. For large transactions, draw up a clear deposit agreement with a witness or notarization.",
+  "법은 계약금 계약서의 공증을 의무화하지 않으므로, 손으로 쓴 문서도 내용과 당사자 서명을 갖추면 효력이 있을 수 있습니다. 고액 거래는 증인이나 공증을 갖춘 명확한 계약금 계약서를 작성하십시오."
+ ],
+ "Pháp luật không quy định mức cọc với nhà đất thổ cư; nên ở mức vừa đủ ràng buộc và kèm thời hạn công chứng ngắn. Với nhà ở hình thành trong tương lai, cọc không quá 5% giá bán theo Luật Kinh doanh bất động sản 2023.": [
+  "The law sets no deposit level for residential land; it should be just enough to bind, with a short notarization deadline. For off-plan housing, the deposit may not exceed 5% of the sale price under the 2023 Law on Real Estate Business.",
+  "주거용 토지의 계약금 수준은 법으로 정해져 있지 않으므로, 구속력을 갖출 만큼만 정하고 공증 기한을 짧게 두는 것이 좋습니다. 분양 단계 주택은 2023년 부동산사업법에 따라 분양가의 5%를 넘을 수 없습니다."
+ ],
+ "Phát hiện sau khi cọc rằng một phần đất nằm trong lộ giới hoặc quy hoạch công trình công cộng. Xem cách kiểm tra trong bài": [
+  "Discovering after paying the deposit that part of the land lies within a road boundary or planned public works. See how to check in the article",
+  "계약금을 낸 후 토지 일부가 도로 경계선이나 공공시설 계획에 포함된 사실을 알게 되는 경우. 확인 방법은 관련 글 참조:"
+ ],
+ "Phạt cọc": [
+  "Deposit penalties",
+  "계약금 위약"
+ ],
+ "Phần dễ tranh chấp nhất của hợp đồng đặt cọc là các trường hợp được nhận lại tiền. Anh chị có thể tham khảo cách diễn đạt dưới đây và nhờ luật sư hoặc công chứng viên điều chỉnh cho đúng từng giao dịch:": [
+  "The most dispute-prone part of a deposit agreement is the cases in which the money is refunded. You can refer to the wording below and ask a lawyer or notary to adjust it for each transaction:",
+  "계약금 계약서에서 분쟁이 가장 잦은 부분은 돈을 돌려받는 경우입니다. 아래 문구를 참고하고 변호사나 공증인에게 거래별로 조정해 달라고 하십시오:"
+ ],
+ "Quy hoạch không như cam kết, ngân hàng không cho vay, trở ngại khách quan": [
+  "Planning differs from what was promised, the bank refuses the loan, objective obstacles",
+  "계획이 약속과 다름, 은행 대출 거절, 불가항력적 장애"
+ ],
+ "Số sổ, thửa đất, tờ bản đồ, diện tích, địa chỉ cũ và mới": [
+  "Certificate number, land plot number, map sheet, area, old and new addresses",
+  "증서 번호, 필지 번호, 지적도 번호, 면적, 이전·신규 주소"
+ ],
+ "Sổ đang thế chấp ngân hàng mà hợp đồng không nêu cách giải chấp, ai chịu trách nhiệm và thời hạn.": [
+  "The certificate is mortgaged to a bank, but the contract does not state how the mortgage will be released, who is responsible and by when.",
+  "증서가 은행에 담보로 잡혀 있는데 계약서에 담보 해제 방법, 책임자, 기한이 명시되지 않은 경우."
+ ],
+ "Theo Điều 328 Bộ luật Dân sự 2015, bên nhận cọc từ chối giao kết phải trả lại tiền cọc và một khoản tương đương giá trị tiền cọc, trừ khi các bên thỏa thuận khác.": [
+  "Under Article 328 of the 2015 Civil Code, a deposit recipient who refuses to conclude the contract must return the deposit plus an amount equal to the deposit, unless the parties agree otherwise.",
+  "2015년 민법 제328조에 따르면 계약 체결을 거절한 계약금 수령자는 당사자 간 별도 합의가 없는 한 계약금과 같은 금액을 더해 반환해야 합니다."
+ ],
+ "Theo Điều 328 Bộ luật Dân sự 2015, đặt cọc là việc một bên giao cho bên kia một khoản tiền hoặc tài sản có giá trị trong một thời hạn để bảo đảm giao kết hoặc thực hiện hợp đồng.": [
+  "Under Article 328 of the 2015 Civil Code, a deposit is when one party gives the other a sum of money or valuable property for a period of time to guarantee the conclusion or performance of a contract.",
+  "2015년 민법 제328조에 따르면 계약금이란 한쪽 당사자가 계약 체결 또는 이행을 보장하기 위해 일정 기간 상대방에게 금전이나 가치 있는 재산을 맡기는 것입니다."
+ ],
+ "Thuế, phí": [
+  "Taxes and fees",
+  "세금과 수수료"
+ ],
+ "Thông tin tài sản": [
+  "Property information",
+  "자산 정보"
+ ],
+ "Tiền cọc được trả lại hoặc trừ vào tiền mua": [
+  "The deposit is returned or deducted from the purchase price",
+  "계약금 반환 또는 매매대금에서 공제"
+ ],
+ "Trường hợp hoàn cọc": [
+  "Deposit refund cases",
+  "계약금 반환 사유"
+ ],
+ "Trả lại tiền cọc và một khoản tương đương giá trị tiền cọc": [
+  "Returns the deposit plus an amount equal to the deposit",
+  "계약금과 같은 금액을 더해 반환"
+ ],
+ "Tài sản không tranh chấp, không kê biên; cách giải chấp nếu đang thế chấp": [
+  "The property is not in dispute or under seizure; how the mortgage will be released if any",
+  "자산이 분쟁·압류 상태가 아님; 담보가 있다면 해제 방법"
+ ],
+ "Tình huống": [
+  "Situation",
+  "상황"
+ ],
+ "Tổng giá, số tiền cọc, các đợt thanh toán, chuyển khoản vào tài khoản chủ sở hữu": [
+  "Total price, deposit amount, payment installments, bank transfer to the owner's account",
+  "총액, 계약금, 납부 회차, 소유주 계좌로 이체"
+ ],
+ "Với nhà ở hình thành trong tương lai, Luật Kinh doanh bất động sản 2023 giới hạn tiền đặt cọc không quá 5% giá bán và chỉ được thu khi dự án đã đủ điều kiện đưa vào kinh doanh. Các khoản “giữ chỗ”, “booking” trước thời điểm này cần xem kỹ điều kiện hoàn tiền. Tóm tắt quy định mới về đặt cọc, thanh toán nhà ở hình thành trong tương lai có trên": [
+  "For off-plan housing, the 2023 Law on Real Estate Business caps the deposit at no more than 5% of the sale price, and it may only be collected once the project is eligible for sale. “Reservation” or “booking” payments before that point require careful review of the refund conditions. A summary of the new rules on deposits and payments for off-plan housing is available on",
+  "분양 단계 주택의 경우 2023년 부동산사업법은 계약금을 분양가의 5% 이하로 제한하며, 프로젝트가 분양 요건을 갖춘 후에만 받을 수 있습니다. 그 이전의 “예약”, “부킹” 금액은 환불 조건을 꼼꼼히 확인해야 합니다. 분양 단계 주택의 계약금·납부에 관한 새 규정 요약은 다음에서 볼 수 있습니다:"
+ ],
+ "là văn bản đầu tiên ràng buộc người mua và người bán, nhưng cũng là nơi phát sinh nhiều tranh chấp nhất. Một hợp đồng cọc viết sơ sài có thể khiến anh chị mất tiền cọc dù không có lỗi, hoặc không đòi được tiền khi người bán đổi ý. Bài viết tóm tắt quy định pháp luật, các rủi ro thường gặp và điều khoản nên có, cập nhật tháng 10/2026.": [
+  "is the first document binding the buyer and seller, but it is also where the most disputes arise. A sloppily written deposit agreement can cause you to lose your deposit through no fault of your own, or leave you unable to recover your money when the seller changes their mind. This article summarizes the legal rules, common risks and the clauses to include, updated October 2026.",
+  "매수인과 매도인을 묶는 첫 문서이지만 분쟁이 가장 많이 생기는 곳이기도 합니다. 허술하게 작성된 계약금 계약서 때문에 고객님은 잘못이 없어도 계약금을 잃거나, 매도인이 마음을 바꿨을 때 돈을 돌려받지 못할 수 있습니다. 이 글은 법 규정, 흔한 리스크, 포함해야 할 조항을 정리했으며 2026년 10월에 업데이트되었습니다."
+ ],
+ "nhà đất đang bán": [
+  "properties for sale",
+  "매매 중인 부동산"
+ ],
+ "Điều 328 BLDS 2015: bên mua từ chối mất cọc; bên bán từ chối trả cọc và khoản tương đương, trừ khi có thỏa thuận khác": [
+  "Article 328 of the 2015 Civil Code: if the buyer backs out, they lose the deposit; if the seller backs out, they return the deposit plus an equivalent amount, unless otherwise agreed",
+  "2015년 민법 제328조: 매수인이 거절하면 계약금을 잃고, 매도인이 거절하면 계약금과 같은 금액을 더해 반환합니다(별도 합의가 없는 한)"
+ ],
+ "Điều khoản": [
+  "Clause",
+  "조항"
+ ],
+ "Điều khoản nên có trong hợp đồng đặt cọc": [
+  "Clauses a deposit agreement should include",
+  "계약금 계약서에 포함해야 할 조항"
+ ],
+ "Đặt cọc theo Bộ luật Dân sự 2015": [
+  "Deposits under the 2015 Civil Code",
+  "2015년 민법상 계약금"
+ ],
+ "Đọc thêm về hợp đồng đặt cọc": [
+  "Read more about deposit agreements",
+  "계약금 계약서 관련 글 더 보기"
+ ],
+ "Đủ chữ ký của tất cả đồng sở hữu; có người làm chứng hoặc công chứng với giao dịch lớn.": [
+  "Signatures of all co-owners; a witness or notarization for large transactions.",
+  "모든 공동 소유자의 서명; 고액 거래는 증인 또는 공증."
+ ],
+ "“Nếu ngân hàng từ chối cho vay vì lý do không thuộc lỗi của bên mua, bên mua được nhận lại tiền cọc (toàn bộ hoặc một phần, theo thỏa thuận).”": [
+  "“If the bank refuses the loan for reasons not attributable to the buyer, the buyer is entitled to a refund of the deposit (in full or in part, as agreed).”",
+  "“매수인의 귀책 사유가 아닌 이유로 은행이 대출을 거절하면 매수인은 계약금을 돌려받는다(합의에 따라 전액 또는 일부).”"
+ ],
+ "“Nếu thông tin quy hoạch do cơ quan có thẩm quyền cung cấp khác với cam kết của bên bán, hai bên chấm dứt thỏa thuận và bên bán hoàn trả tiền cọc.”": [
+  "“If the planning information provided by the competent authority differs from the seller's commitment, the two parties shall terminate the agreement and the seller shall refund the deposit.”",
+  "“관할 기관이 제공한 계획 정보가 매도인의 확약과 다르면 양 당사자는 합의를 종료하고 매도인은 계약금을 반환한다.”"
+ ],
+ "“Nếu đến ngày … bên bán chưa giải chấp xong tài sản, bên mua được nhận lại toàn bộ tiền cọc.”": [
+  "“If by … the seller has not completed the release of the mortgage on the property, the buyer is entitled to a full refund of the deposit.”",
+  "“…일까지 매도인이 자산의 담보 해제를 완료하지 못하면 매수인은 계약금 전액을 돌려받는다.”"
+ ]
+}
