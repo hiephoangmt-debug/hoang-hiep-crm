@@ -473,8 +473,15 @@ function hh_lang_page_dict() {
 	if ( is_admin() ) {
 		return array();
 	}
-	$files = array( HH_CRM_DIR . 'tr/chung.json' );
+	// tieu-de.json: tiêu đề + mô tả ngắn mọi bài, dự án, tin rao (thẻ bài liên quan, danh sách) – trang nào cũng dùng được.
+	$files = array( HH_CRM_DIR . 'tr/chung.json', HH_CRM_DIR . 'tr/tieu-de.json' );
 	$obj   = get_queried_object();
+	// Bảng dịch theo đường dẫn (trang danh mục, khu vực, chủ đầu tư, trang lọc…): tr/duong-dan/<đường-dẫn với "/" thay bằng "__">.json.
+	$path = function_exists( 'hh_tl_path' ) ? hh_tl_path() : (string) wp_parse_url( (string) ( $_SERVER['REQUEST_URI'] ?? '/' ), PHP_URL_PATH ); // phpcs:ignore
+	$key  = preg_replace( '#[^a-z0-9_-]#', '', str_replace( '/', '__', strtolower( trim( $path, '/' ) ) ) );
+	if ( '' !== $key ) {
+		$files[] = HH_CRM_DIR . 'tr/duong-dan/' . $key . '.json';
+	}
 	if ( $obj instanceof WP_Post ) {
 		$files[] = HH_CRM_DIR . 'tr/' . sanitize_key( $obj->post_type ) . '/' . sanitize_title( $obj->post_name ) . '.json';
 	} elseif ( is_front_page() ) {

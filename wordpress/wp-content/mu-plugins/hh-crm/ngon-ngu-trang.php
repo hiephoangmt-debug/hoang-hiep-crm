@@ -28,6 +28,11 @@ function hh_tl() {
 	return (string) ( $GLOBALS['hh_tl'] ?? '' );
 }
 
+/** Ngôn ngữ xuất chữ: trang dịch /en/…, /ko/… hoặc trang giới thiệu /en/, /ko/ (dịch menu, chân trang theo cùng bảng dịch). */
+function hh_tl_out() {
+	return hh_tl() ?: (string) ( $GLOBALS['hh_tl_out'] ?? '' );
+}
+
 /** Đường dẫn tiếng Việt của trang đang xem (bỏ tiền tố /en, /ko), luôn bắt đầu bằng "/". */
 function hh_tl_path() {
 	if ( isset( $GLOBALS['hh_tl_path'] ) ) {
@@ -103,7 +108,7 @@ function hh_tl_dict() {
 function hh_tl_text( $vi ) {
 	$d = hh_tl_dict();
 	$k = trim( preg_replace( '/\s+/u', ' ', (string) $vi ) );
-	$i = 'ko' === hh_tl() ? 1 : 0;
+	$i = 'ko' === hh_tl_out() ? 1 : 0;
 	return '' !== $k && isset( $d[ $k ] ) ? (string) $d[ $k ][ $i ] : '';
 }
 
@@ -117,7 +122,7 @@ function hh_tl_title( $vi ) {
 	if ( '' !== $t ) {
 		return $t;
 	}
-	$ko    = 'ko' === hh_tl();
+	$ko    = 'ko' === hh_tl_out();
 	$fixed = array(
 		'Hoàng Hiệp' => $ko ? '호앙 히엡' : 'Hoang Hiep',
 		'Đà Nẵng'    => $ko ? '다낭' : 'Da Nang',
@@ -150,6 +155,10 @@ function hh_tl_title( $vi ) {
 
 /** Trang hiện tại có bảng dịch riêng không (để gắn hreflang ở bản tiếng Việt). */
 function hh_tl_has_page_dict() {
+	$key = preg_replace( '#[^a-z0-9_-]#', '', str_replace( '/', '__', strtolower( trim( hh_tl_path(), '/' ) ) ) );
+	if ( '' !== $key && is_file( HH_CRM_DIR . 'tr/duong-dan/' . $key . '.json' ) ) {
+		return true;
+	}
 	$obj = get_queried_object();
 	if ( $obj instanceof WP_Post ) {
 		return is_file( HH_CRM_DIR . 'tr/' . sanitize_key( $obj->post_type ) . '/' . sanitize_title( $obj->post_name ) . '.json' );
@@ -161,7 +170,10 @@ function hh_tl_has_page_dict() {
 add_action(
 	'template_redirect',
 	static function () {
-		if ( hh_tl() && ! is_feed() ) {
+		if ( ! hh_tl() && ! is_feed() && function_exists( 'hh_lang' ) && 'vi' !== hh_lang() ) {
+			$GLOBALS['hh_tl_out'] = hh_lang(); // Trang giới thiệu /en/, /ko/: dịch menu, chân trang, liên kết sang trang dịch.
+		}
+		if ( hh_tl_out() && ! is_feed() ) {
 			ob_start( 'hh_tl_translate_html' );
 		}
 	},
@@ -173,7 +185,7 @@ function hh_tl_translate_html( $html ) {
 	if ( '' === $html || false === stripos( $html, '<html' ) ) {
 		return $html;
 	}
-	$tl = hh_tl();
+	$tl = hh_tl_out();
 	$h  = static fn( $s ) => html_entity_decode( (string) $s, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
 	$e  = static fn( $s ) => htmlspecialchars( (string) $s, ENT_QUOTES | ENT_HTML5, 'UTF-8', false );
 
@@ -271,7 +283,7 @@ function hh_tl_translate_html( $html ) {
 	$html = implode( '', $parts );
 
 	// 3) Nút VI · EN · KO: đánh dấu ngôn ngữ đang xem, các nút còn lại trỏ sang cùng trang ở ngôn ngữ đó.
-	$html = preg_replace_callback(
+	$html = ! hh_tl() ? $html : preg_replace_callback(
 		'#(<nav\b[^>]*\blang-switch\b[^>]*>)(.*?)(</nav>)#si',
 		static function ( $m ) use ( $tl ) {
 			$names = array( 'vi' => 'Tiếng Việt', 'en' => 'English', 'ko' => '한국어' );
@@ -354,10 +366,10 @@ add_action(
 add_action(
 	'wp_footer',
 	static function () {
-		if ( ! hh_tl() ) {
+		if ( ! hh_tl_out() ) {
 			return;
 		}
-		$i   = 'ko' === hh_tl() ? 1 : 0;
+		$i   = 'ko' === hh_tl_out() ? 1 : 0;
 		$map = array();
 		foreach ( hh_tl_dict() as $vi => $tr ) {
 			if ( '' !== $tr[ $i ] && mb_strlen( $vi ) <= 80 ) {
