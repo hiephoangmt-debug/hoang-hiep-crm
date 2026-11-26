@@ -20,7 +20,16 @@ POSTS = [
   "sub": "Ở đội của Hiệp, bạn mới có người kèm và được chia data mỗi ngày, không ai phải ngồi chờ&nbsp;khách."},
  {"id": "07", "photo": "ky-ket-casamia-2.jpg", "pos": "center 45%", "tag": "Chọn nơi làm",
   "head": "Chọn <em>đúng nơi làm</em> quan trọng hơn chọn dự&nbsp;án.",
-  "sub": "Ở môi trường có đào tạo từ 0 và có người kèm, cái khó tháng đầu sẽ nhẹ đi rất&nbsp;nhiều."}
+  "sub": "Ở môi trường có đào tạo từ 0 và có người kèm, cái khó tháng đầu sẽ nhẹ đi rất&nbsp;nhiều."},
+ {"id": "08", "photo": "doi-23-11/doi-15.jpg", "pos": "center 30%", "tag": "Có người kèm",
+  "head": "Đừng ngại sai. Sai khi có <em>người kèm</em> bên cạnh là cách học nhanh&nbsp;nhất.",
+  "sub": "Ở đội của Hiệp, bạn mới có người kèm nghe cùng những cuộc gọi đầu tiên. Sai đâu sửa đó, ít rủi ro&nbsp;nhất."},
+ {"id": "09", "photo": "doi-23-11/doi-33.jpg", "pos": "center 30%", "tag": "Đều đặn",
+  "head": "Chậm mà <em>đều</em> quan trọng hơn nhanh mà bỏ&nbsp;dở.",
+  "sub": "Mỗi tối dành vài phút ghi lại hôm nay gọi bao nhiêu khách, học được gì, mai cần sửa gì. Sau 60 ngày bạn sẽ thấy mình tiến bộ&nbsp;rõ."},
+ {"id": "10", "photo": "doi-23-11/doi-03.jpg", "pos": "center 45%", "tag": "Ngày 23/11/2026",
+  "head": "Một ngày ngoài trời <em>cùng nhau</em> của đội&nbsp;Hiệp.",
+  "sub": "Làm việc hết mình, vui chơi hết mình. Muốn vào một đội như thế này? Nhắn Hiệp&nbsp;nhé."}
 ]
 TPL = open(os.path.join(OUT, 'tpl-anh.html'), encoding='utf-8').read()
 for p in POSTS:
