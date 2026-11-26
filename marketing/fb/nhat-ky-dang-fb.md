@@ -218,3 +218,4 @@
 | 26/11/2026 | Threads (@hiephoangmt, brand Sun) | 19:35 | Tham quan Casamia Balanca – bản ngắn, 2 ảnh | /du-an/casamia-balanca-hoi-an/ |
 | 26/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: KCN Tam Anh 3 – Indusvalley được chấp thuận (+0 tin ở bình luận) | /khu-cong-nghiep-tam-anh-3-indusvalley/ |
 | CHỜ | Sun | 27/11 | (bài web 26/11 09:30, dự án Sun Group → trang Sun) Mua biệt thự Premier Village Mỹ Khê | mua-biet-thu-premier-village-my-khe (chờ) |
+| 26/11/2026 | Hoàng Hiệp | 17:00 | TỔNG HỢP: Vị trí Vinhomes Làng Vân – kết nối giao thông (+1 tin ở bình luận) | /vi-tri-vinhomes-lang-van-ket-noi-giao-thong/ /vi-tri-the-legend-da-nang-view-cau-rong/ |
