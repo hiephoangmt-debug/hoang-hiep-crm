@@ -1,0 +1,442 @@
+{
+ "hiephoangmt@gmail.com": [
+  "hiephoangmt@gmail.com",
+  "hiephoangmt@gmail.com"
+ ],
+ "Sun Group": [
+  "Sun Group",
+  "Sun Group"
+ ],
+ "BRG Group": [
+  "BRG Group",
+  "BRG Group"
+ ],
+ "Vingroup": [
+  "Vingroup",
+  "Vingroup"
+ ],
+ "VinaCapital": [
+  "VinaCapital",
+  "VinaCapital"
+ ],
+ "New Town": [
+  "New Town",
+  "New Town"
+ ],
+ "Nhập tên dự án, đường, khu vực…": [
+  "Enter a project, street or area…",
+  "프로젝트명, 거리, 지역 입력…"
+ ],
+ "Hòa Vang": [
+  "Hoa Vang",
+  "호아방"
+ ],
+ "Núi Thành": [
+  "Nui Thanh",
+  "누이타인"
+ ],
+ "P.Hoà Xuân": [
+  "Hoa Xuan Ward",
+  "호아쑤언동"
+ ],
+ "Tam Kỳ": [
+  "Tam Ky",
+  "땀끼"
+ ],
+ "Thanh Khê": [
+  "Thanh Khe",
+  "타인케"
+ ],
+ "Loại nhà đất": [
+  "Property type",
+  "부동산 유형"
+ ],
+ "Căn hộ dịch vụ": [
+  "Serviced apartment",
+  "서비스 아파트"
+ ],
+ "Khách sạn": [
+  "Hotel",
+  "호텔"
+ ],
+ "Mặt bằng kinh doanh": [
+  "Commercial premises",
+  "상업 공간"
+ ],
+ "Nhà kiệt / hẻm": [
+  "Alley house",
+  "골목 주택"
+ ],
+ "Tìm kiếm": [
+  "Search",
+  "검색"
+ ],
+ "Bảng giá thị trường Đà Nẵng": [
+  "Da Nang market price list",
+  "다낭 시장 시세표"
+ ],
+ "Căn hộ theo dự án": [
+  "Apartments by project",
+  "프로젝트별 아파트"
+ ],
+ "Giá bán lại, giá thuê từng dự án": [
+  "Resale and rental prices for each project",
+  "프로젝트별 전매가·임대료"
+ ],
+ "Biệt thự, villa ven biển": [
+  "Seaside villas",
+  "해변 빌라"
+ ],
+ "Giá villa các dự án Đà Nẵng – Hội An": [
+  "Villa prices across Da Nang – Hoi An projects",
+  "다낭·호이안 프로젝트별 빌라 가격"
+ ],
+ "Đất lớn, đất xây khách sạn": [
+  "Large plots & hotel land",
+  "대형 토지·호텔 부지"
+ ],
+ "Giá theo 18 tuyến đường": [
+  "Prices on 18 streets",
+  "18개 도로별 가격"
+ ],
+ "Khách sạn ven biển": [
+  "Seaside hotels",
+  "해변 호텔"
+ ],
+ "Giá theo 10 khu vực ven biển": [
+  "Prices in 10 seaside areas",
+  "10개 해변 지역별 가격"
+ ],
+ "140 m² đất, 7 – 12 tầng, 26 – 52 phòng": [
+  "140 m² of land, 7 – 12 floors, 26 – 52 rooms",
+  "토지 140m², 7~12층, 객실 26~52개"
+ ],
+ "Khoảng 48 – 90 tỷ": [
+  "About 48 – 90 billion VND",
+  "약 480억~900억 동"
+ ],
+ "Khoảng 650 – 1.350 tỷ": [
+  "About 650 – 1,350 billion VND",
+  "약 6,500억~1조 3,500억 동"
+ ],
+ "An Thượng (phố Tây Mỹ Khê)": [
+  "An Thuong (My Khe backpacker street)",
+  "안트엉(미케 여행자 거리)"
+ ],
+ "Trần Bạch Đằng – Đỗ Bá (Mỹ An)": [
+  "Tran Bach Dang – Do Ba (My An)",
+  "쩐박당 – 도바(미안)"
+ ],
+ "Khoảng 75 – 170 tỷ": [
+  "About 75 – 170 billion VND",
+  "약 750억~1,700억 동"
+ ],
+ "Hồ Nghinh (Sơn Trà)": [
+  "Ho Nghinh (Son Tra)",
+  "호응인(선짜)"
+ ],
+ "Khoảng 30 – 125 tỷ": [
+  "About 30 – 125 billion VND",
+  "약 300억~1,250억 동"
+ ],
+ "Phạm Văn Đồng (Sơn Trà)": [
+  "Pham Van Dong (Son Tra)",
+  "팜반동(선짜)"
+ ],
+ "Khoảng 88 – 165 tỷ": [
+  "About 88 – 165 billion VND",
+  "약 880억~1,650억 동"
+ ],
+ "Sơn Thủy – An Tư Công Chúa – Hồ Xuân Hương (Ngũ Hành Sơn)": [
+  "Son Thuy – An Tu Cong Chua – Ho Xuan Huong (Ngu Hanh Son)",
+  "선투이 – 안뜨꽁쭈아 – 호쑤언흐엉(오행산)"
+ ],
+ "Khoảng 68 – 115 tỷ": [
+  "About 68 – 115 billion VND",
+  "약 680억~1,150억 동"
+ ],
+ "Phan Tôn – Dương Đình Nghệ – Võ Văn Kiệt (Sơn Trà)": [
+  "Phan Ton – Duong Dinh Nghe – Vo Van Kiet (Son Tra)",
+  "판똔 – 즈엉딘응에 – 보반끼엣(선짜)"
+ ],
+ "Khoảng 97 – 170 tỷ": [
+  "About 97 – 170 billion VND",
+  "약 970억~1,700억 동"
+ ],
+ "Hội An – An Bàng, Tân Thành": [
+  "Hoi An – An Bang, Tan Thanh",
+  "호이안 – 안방, 떤타인"
+ ],
+ "Bán khách sạn 4 sao 12 tầng, 84 phòng khu biển Phạm Văn Đồng – đất 610 m², ngang 30 m – 250 tỷ": [
+  "For sale: 4-star, 12-storey, 84-room hotel in the Pham Van Dong beach area – 610 m² of land, 30 m wide – 250 billion VND",
+  "매매: 팜반동(Pham Van Dong) 해변 지역 4성급 12층 84실 호텔 – 대지 610 m², 전면 폭 30m – 2,500억 동"
+ ],
+ "Bán": [
+  "For sale",
+  "매매"
+ ],
+ "250 tỷ": [
+  "250 billion VND",
+  "2,500억 동"
+ ],
+ "409,8 triệu/m²": [
+  "409.8 million VND/m²",
+  "m²당 4억 980만 동"
+ ],
+ "610 m²": [
+  "610 m²",
+  "610 m²"
+ ],
+ "HH48599": [
+  "HH48599",
+  "HH48599"
+ ],
+ "Bán khách sạn căn góc 3 sao 12 tầng, 66 phòng đường Hà Bổng – đất 302 m² – 200 tỷ": [
+  "For sale: 3-star, 12-storey, 66-room corner hotel on Ha Bong Street – 302 m² of land – 200 billion VND",
+  "매매: 하봉 거리(Ha Bong St.) 코너 3성급 12층 66실 호텔 – 대지 302 m² – 2,000억 동"
+ ],
+ "200 tỷ": [
+  "200 billion VND",
+  "2,000억 동"
+ ],
+ "662,3 triệu/m²": [
+  "662.3 million VND/m²",
+  "m²당 6억 6,230만 동"
+ ],
+ "302 m²": [
+  "302 m²",
+  "302 m²"
+ ],
+ "HH48597": [
+  "HH48597",
+  "HH48597"
+ ],
+ "Bán khách sạn 3 sao 12 tầng, 50 phòng + 6 căn hộ đường Dương Đình Nghệ – đất 368 m² – 165 tỷ": [
+  "For sale: 3-star, 12-storey hotel with 50 rooms + 6 apartments on Duong Dinh Nghe Street – 368 m² of land – 165 billion VND",
+  "매매: 즈엉딘응에 거리(Duong Dinh Nghe St.) 3성급 12층 호텔, 객실 50실 + 아파트 6세대 – 대지 368 m² – 1,650억 동"
+ ],
+ "165 tỷ": [
+  "165 billion VND",
+  "1,650억 동"
+ ],
+ "448,4 triệu/m²": [
+  "448.4 million VND/m²",
+  "m²당 4억 4,840만 동"
+ ],
+ "368 m²": [
+  "368 m²",
+  "368 m²"
+ ],
+ "HH48593": [
+  "HH48593",
+  "HH48593"
+ ],
+ "180 m²": [
+  "180 m²",
+  "180 m²"
+ ],
+ "170 tỷ": [
+  "170 billion VND",
+  "1,700억 동"
+ ],
+ "160 tỷ": [
+  "160 billion VND",
+  "1,600억 동"
+ ],
+ "120 tỷ": [
+  "120 billion VND",
+  "1,200억 동"
+ ],
+ "115 tỷ": [
+  "115 billion VND",
+  "1,150억 동"
+ ],
+ "Phân trang bài viết": [
+  "Pagination",
+  "페이지 이동"
+ ],
+ "Bạn đang tìm nhà để ở hay để đầu tư?": [
+  "Are you looking for a home to live in or to invest in?",
+  "고객님은 실거주용 주택을 찾으시나요, 투자용을 찾으시나요?"
+ ],
+ "Để lại số điện thoại, Hiệp sẽ trực tiếp gọi lại tư vấn và gửi danh sách sản phẩm phù hợp nhất với bạn.": [
+  "Leave your phone number and Hiep will call you back personally to advise you and send you the list of properties that best match your needs.",
+  "전화번호를 남겨 주시면 히엡이 직접 연락드려 상담해 드리고 고객님께 가장 적합한 매물 목록을 보내 드립니다."
+ ],
+ "Đăng ký nhận tư vấn": [
+  "Request a consultation",
+  "상담 신청"
+ ],
+ "Website": [
+  "Website",
+  "웹사이트"
+ ],
+ "Mua": [
+  "Buy",
+  "매수"
+ ],
+ "Bán khách sạn Đà Nẵng – Cập nhật 11/2026 – Hoàng Hiệp": [
+  "Hotels for sale in Da Nang – Updated November 2026 – Hoang Hiep",
+  "다낭 호텔 매매 – 2026년 11월 업데이트 – 호앙 히엡"
+ ],
+ "/ Khách sạn": [
+  "/ Hotels",
+  "/ 호텔"
+ ],
+ "Bán khách sạn Đà Nẵng": [
+  "Hotels for sale in Da Nang",
+  "다낭 호텔 매매"
+ ],
+ "từ 18,5 tỷ đến 250 tỷ": [
+  "from 18.5 billion VND to 250 billion VND",
+  "185억 동부터 2,500억 동까지"
+ ],
+ ". Thông tin được Hoàng Hiệp kiểm tra pháp lý và cập nhật ngày 14/11/2026.": [
+  ". Legal status checked and information updated by Hoang Hiep on November 14, 2026.",
+  ". 호앙 히엡이 법적 상태를 확인하고 2026년 11월 14일에 정보를 업데이트했습니다."
+ ],
+ "Giá khách sạn ven biển Đà Nẵng theo khu vực": [
+  "Da Nang coastal hotel prices by area",
+  "지역별 다낭 해안 호텔 가격"
+ ],
+ "Khoảng giá chào bán khách sạn đang kinh doanh gần biển Mỹ Khê, Sơn Trà và Hội An theo tin rao năm 2026. Năm 2026 thị trường phân hóa mạnh, công suất phòng 4 – 5 sao quý I đạt khoảng 85 – 88%; giá chào thường còn biên độ thương lượng.": [
+  "Asking price ranges for operating hotels near My Khe Beach, Son Tra and Hoi An based on 2026 listings. In 2026 the market is highly polarized, with 4 – 5 star occupancy reaching about 85 – 88% in Q1; asking prices usually leave room for negotiation.",
+  "2026년 매물 광고 기준 미케 비치, 선짜, 호이안 인근 영업 중인 호텔의 매도 호가대입니다. 2026년 시장은 양극화가 뚜렷하며, 1분기 4 – 5성급 객실 가동률은 약 85 – 88%에 달했습니다. 호가에는 보통 협상 여지가 있습니다."
+ ],
+ "Võ Nguyên Giáp – mặt biển (boutique)": [
+  "Vo Nguyen Giap – beachfront (boutique)",
+  "Vo Nguyen Giap – 해변 전면(부티크)"
+ ],
+ "Khách sạn 52 phòng 12 tầng rao 90 tỷ, công suất mùa cao điểm khoảng 95%.": [
+  "A 52-room, 12-floor hotel listed at 90 billion VND, with peak-season occupancy of about 95%.",
+  "객실 52개 12층 호텔 호가 900억 동, 성수기 가동률 약 95%입니다."
+ ],
+ "Nhận danh sách": [
+  "Get the list",
+  "목록 받기"
+ ],
+ "Võ Nguyên Giáp – mặt biển (4 sao, quy mô lớn)": [
+  "Vo Nguyen Giap – beachfront (4-star, large scale)",
+  "Vo Nguyen Giap – 해변 전면(4성급, 대형)"
+ ],
+ "500 – 900 m² đất, 12 – 26 tầng, 84 – 165 phòng": [
+  "500 – 900 m² land, 12 – 26 floors, 84 – 165 rooms",
+  "대지 500 – 900 m², 12 – 26층, 객실 84 – 165개"
+ ],
+ "Có hồ bơi vô cực, spa, phòng hội nghị; tin rao 84 phòng khoảng 710 tỷ, 118 phòng khoảng 650 tỷ.": [
+  "With infinity pools, spas and conference rooms; listings: 84 rooms about 710 billion VND, 118 rooms about 650 billion VND.",
+  "인피니티 풀, 스파, 회의실을 갖추고 있습니다. 매물 광고: 객실 84개 약 7,100억 동, 객실 118개 약 6,500억 동."
+ ],
+ "80 – 300 m² đất, 5 – 11 tầng, 16 – 40 phòng": [
+  "80 – 300 m² land, 5 – 11 floors, 16 – 40 rooms",
+  "대지 80 – 300 m², 5 – 11층, 객실 16 – 40개"
+ ],
+ "Khoảng 28 – 125 tỷ (phổ biến 59 – 65 tỷ cho 40 phòng)": [
+  "About 28 – 125 billion VND (typically 59 – 65 billion VND for 40 rooms)",
+  "약 280억 – 1,250억 동(객실 40개 기준 보통 590억 – 650억 동)"
+ ],
+ "Đang kinh doanh; An Thượng 1 – 16 phòng doanh thu khoảng 300 triệu/tháng rao 28 tỷ; 3 sao 40 phòng 295 m² rao 65 tỷ.": [
+  "Operating; a 16-room hotel on An Thuong 1 with revenue of about 300 million VND/month listed at 28 billion VND; a 3-star 40-room hotel on 295 m² listed at 65 billion VND.",
+  "영업 중입니다. An Thuong 1 거리 객실 16개, 월 매출 약 3억 동 호텔 호가 280억 동; 3성급 객실 40개, 295 m² 호텔 호가 650억 동."
+ ],
+ "155 – 300 m² đất, 11 – 15 tầng, 40 – 57 phòng": [
+  "155 – 300 m² land, 11 – 15 floors, 40 – 57 rooms",
+  "대지 155 – 300 m², 11 – 15층, 객실 40 – 57개"
+ ],
+ "Cách biển Mỹ Khê khoảng 150 – 300 m; 3 sao 40 phòng 155 m² rao 75 tỷ; 3 sao 12 tầng 57 phòng doanh thu hơn 450 triệu/tháng chào 130 tỷ.": [
+  "About 150 – 300 m from My Khe Beach; a 3-star 40-room hotel on 155 m² listed at 75 billion VND; a 3-star 12-floor 57-room hotel with revenue over 450 million VND/month offered at 130 billion VND.",
+  "미케 비치에서 약 150 – 300 m; 3성급 객실 40개 155 m² 호가 750억 동; 3성급 12층 객실 57개, 월 매출 4억 5천만 동 이상 호텔 호가 1,300억 동."
+ ],
+ "100 – 300 m² đất, 9 – 16 tầng, 16 – 68 phòng": [
+  "100 – 300 m² land, 9 – 16 floors, 16 – 68 rooms",
+  "대지 100 – 300 m², 9 – 16층, 객실 16 – 68개"
+ ],
+ "Gần tháp đôi Vương Thừa Vũ; khách sạn có hồ bơi doanh thu khoảng 600 triệu/tháng rao 99 tỷ.": [
+  "Near the Vuong Thua Vu twin towers; a hotel with a pool and revenue of about 600 million VND/month listed at 99 billion VND.",
+  "Vuong Thua Vu 트윈 타워 인근; 수영장이 있고 월 매출 약 6억 동인 호텔 호가 990억 동."
+ ],
+ "235 – 345 m² đất, 12 – 16 tầng, 60 – 81 phòng": [
+  "235 – 345 m² land, 12 – 16 floors, 60 – 81 rooms",
+  "대지 235 – 345 m², 12 – 16층, 객실 60 – 81개"
+ ],
+ "2 mặt tiền 12 tầng 60 phòng doanh thu hơn 600 triệu/tháng chào 88 tỷ; 4 sao 16 tầng 74 phòng chào 160 tỷ (10/2026).": [
+  "A 12-floor 60-room hotel with 2 frontages and revenue over 600 million VND/month offered at 88 billion VND; a 4-star 16-floor 74-room hotel offered at 160 billion VND (October 2026).",
+  "2면 도로 접한 12층 객실 60개, 월 매출 6억 동 이상 호텔 호가 880억 동; 4성급 16층 객실 74개 호텔 호가 1,600억 동(2026년 10월)."
+ ],
+ "258 – 381 m² đất, 9 – 12 tầng, 45 – 56 phòng": [
+  "258 – 381 m² land, 9 – 12 floors, 45 – 56 rooms",
+  "대지 258 – 381 m², 9 – 12층, 객실 45 – 56개"
+ ],
+ "Căn góc 9 tầng 45 phòng biển Sơn Thủy chào 68 tỷ; 2 mặt tiền An Tư Công Chúa 52 phòng chào 85 tỷ (10/2026).": [
+  "A 9-floor 45-room corner hotel at Son Thuy Beach offered at 68 billion VND; a 52-room hotel with 2 frontages on An Tu Cong Chua offered at 85 billion VND (October 2026).",
+  "선투이 해변 9층 객실 45개 코너 호텔 호가 680억 동; An Tu Cong Chua 거리 2면 도로 접한 객실 52개 호텔 호가 850억 동(2026년 10월)."
+ ],
+ "180 – 270 m² đất, 11 – 12 tầng, 37 – 53 phòng": [
+  "180 – 270 m² land, 11 – 12 floors, 37 – 53 rooms",
+  "대지 180 – 270 m², 11 – 12층, 객실 37 – 53개"
+ ],
+ "Phan Tôn 42 phòng doanh thu hơn 700 triệu/tháng chào 125 tỷ; Võ Văn Kiệt 53 phòng cho thuê khoán 220 triệu/tháng chào 170 tỷ.": [
+  "A 42-room hotel on Phan Ton with revenue over 700 million VND/month offered at 125 billion VND; a 53-room hotel on Vo Van Kiet on a master lease of 220 million VND/month offered at 170 billion VND.",
+  "Phan Ton 거리 객실 42개, 월 매출 7억 동 이상 호텔 호가 1,250억 동; Vo Van Kiet 거리 객실 53개, 월 2억 2천만 동 통임대 호텔 호가 1,700억 동."
+ ],
+ "Mỹ Khê – đường nhánh gần biển": [
+  "My Khe – side streets near the beach",
+  "미케 – 해변 인근 골목 도로"
+ ],
+ "124 – 370 m² đất": [
+  "124 – 370 m² land",
+  "대지 124 – 370 m²"
+ ],
+ "Khoảng 30 – 165 tỷ": [
+  "About 30 – 165 billion VND",
+  "약 300억 – 1,650억 동"
+ ],
+ "Boutique 285 m² rao 38 tỷ, 124 m² rao 30 tỷ; lô 368 m² ngang 18,5 m rao 165 tỷ.": [
+  "Boutique hotels: 285 m² listed at 38 billion VND, 124 m² listed at 30 billion VND; a 368 m² plot with 18.5 m frontage listed at 165 billion VND.",
+  "부티크 호텔 285 m² 호가 380억 동, 124 m² 호가 300억 동; 368 m² 전면 폭 18.5 m 필지 호가 1,650억 동."
+ ],
+ "650 – 1.600 m² đất, 3 – 7 tầng, 20 – 39 phòng": [
+  "650 – 1,600 m² land, 3 – 7 floors, 20 – 39 rooms",
+  "대지 650 – 1,600 m², 3 – 7층, 객실 20 – 39개"
+ ],
+ "Khoảng 50 – 91 tỷ; resort 5 sao 80 phòng rao khoảng 900 tỷ": [
+  "About 50 – 91 billion VND; a 5-star 80-room resort listed at about 900 billion VND",
+  "약 500억 – 910억 동; 5성급 객실 80개 리조트 호가 약 9,000억 동"
+ ],
+ "Villa 20 phòng cách biển An Bàng 50 m rao 50 tỷ; khách sạn 39 phòng trên 1.600 m² rao 91 tỷ.": [
+  "A 20-room villa 50 m from An Bang Beach listed at 50 billion VND; a 39-room hotel on 1,600 m² listed at 91 billion VND.",
+  "안방 해변에서 50 m 거리 객실 20개 빌라 호가 500억 동; 1,600 m² 부지 객실 39개 호텔 호가 910억 동."
+ ],
+ "Khoảng giá tổng hợp từ tin rao và báo cáo thị trường công khai – chỉ để tham khảo. Sản phẩm lớn thường giao dịch kín, không đăng công khai: liên hệ 0904 567 009 để nhận danh sách thật đúng tiêu chí. Bạn có tài sản cần bán?": [
+  "Price ranges compiled from listings and public market reports – for reference only. Large properties are often traded privately and not publicly listed: contact 0904 567 009 to receive a list that matches your criteria. Do you have a property to sell?",
+  "가격대는 매물 광고와 공개 시장 보고서를 종합한 것으로 참고용입니다. 대형 매물은 비공개로 거래되는 경우가 많으므로 0904 567 009로 연락하시면 조건에 맞는 목록을 받아보실 수 있습니다. 매도하실 부동산이 있으신가요?"
+ ],
+ "www.nhadatdanang.asia": [
+  "www.nhadatdanang.asia",
+  "www.nhadatdanang.asia"
+ ],
+ "alonhadat.com.vn": [
+  "alonhadat.com.vn",
+  "alonhadat.com.vn"
+ ],
+ "Câu hỏi thường gặp về bán khách sạn Đà Nẵng": [
+  "FAQ about hotels for sale in Da Nang",
+  "다낭 호텔 매매 자주 묻는 질문"
+ ],
+ "Giá bán khách sạn Đà Nẵng hiện nay khoảng bao nhiêu?": [
+  "How much do hotels in Da Nang cost now?",
+  "현재 다낭 호텔 매매 가격은 어느 정도입니까?"
+ ],
+ "Theo 26 tin đang đăng trên website (cập nhật 14/11/2026), giá bán khách sạn Đà Nẵng dao động từ 18,5 tỷ đến 250 tỷ, trung bình khoảng 415 triệu/m². Giá thực tế phụ thuộc vị trí, pháp lý và hiện trạng từng căn.": [
+  "Based on 26 listings on the website (updated November 14, 2026), hotels for sale in Da Nang range from 18.5 billion VND to 250 billion VND, averaging about 415 million VND/m². Actual prices depend on the location, legal status and condition of each property.",
+  "웹사이트에 게시된 매물 26건(2026년 11월 14일 업데이트) 기준, 다낭 호텔 매매가는 185억 동에서 2,500억 동까지이며 평균 약 4억 1,500만 동/m²입니다. 실제 가격은 매물별 위치, 법적 상태 및 현황에 따라 달라집니다."
+ ],
+ "Hiện nhiều tin nhất là Sơn Trà (17 tin), Ngũ Hành Sơn (9 tin).": [
+  "The most listings are currently in Son Tra (17 listings) and Ngu Hanh Son (9 listings).",
+  "현재 매물이 가장 많은 지역은 선짜(17건), 응우한선(9건)입니다."
+ ],
+ "Làm sao để xem nhà và được tư vấn bán khách sạn Đà Nẵng?": [
+  "How can I view properties and get advice on hotels for sale in Da Nang?",
+  "다낭 호텔 매물을 보고 상담을 받으려면 어떻게 해야 합니까?"
+ ]
+}
