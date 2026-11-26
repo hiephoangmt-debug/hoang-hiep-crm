@@ -22,7 +22,7 @@ function hh_posts_tu_khoa_tim_kiem_11_2026( $posts ) {
 		'keyword'  => 'Cora Tower khi nào bàn giao',
 		'keywords_extra' => array( 'Spana Tower khi nào bàn giao', 'tiến độ Spana Tower', 'tiến độ Cora Tower', 'S-Light Tower ở đâu' ),
 		'project'  => 'cora-tower',
-		'rev'      => 3, // 26/11: S-Light nhận nhà dự kiến 30/06/2028 theo CSBH 01/SL.
+		'rev'      => 4, // 26/11: bỏ câu dẫn CafeLand (anh Hiệp). S-Light nhận nhà dự kiến 30/06/2028 theo CSBH 01/SL.
 		'schedule' => '2026-11-24 09:00',
 		'category' => 'Dự án',
 		'tags'     => array( 'Cora Tower', 'Spana Tower', 'S-Light Tower', 'Sun NeO City', 'Tiến độ dự án' ),
@@ -51,7 +51,7 @@ function hh_posts_tu_khoa_tim_kiem_11_2026( $posts ) {
 <h2>Cora Tower khi nào bàn giao: căn hộ và shop khối đế</h2>
 <!--hh-img:img/tin-tuc/mat-bang-cora-tower.jpg|Mặt bằng hai tòa A1, A2 bên đường 29/3 – Cora Tower khi nào bàn giao: căn hộ dự kiến 30/07/2027-->
 <p>Chủ đầu tư công bố bàn giao căn hộ Cora Tower dự kiến <strong>30/07/2027</strong>, hoàn thiện trần, tường, sàn (chưa gồm nội thất rời). Khách thanh toán đủ 70% được nhận nhà sử dụng theo Sun Early Key. Xem thêm <a href="/gia-cora-tower-da-nang-bao-nhieu/">giá Cora Tower</a>.</p>
-<p>Hỏi "Cora Tower khi nào bàn giao" cũng cần phân biệt căn hộ và shop khối đế: shop nhận nhà khi thanh toán 70%, dự kiến 31/10/2027 – muộn hơn căn hộ khoảng 3 tháng. Thông tin tổng quan dự án có trên <a href="https://cafeland.vn/du-an/sun-cora-tower-du-an-can-ho-tai-da-nang-4728.html">CafeLand</a>.</p>
+<p>Hỏi "Cora Tower khi nào bàn giao" cũng cần phân biệt căn hộ và shop khối đế: shop nhận nhà khi thanh toán 70%, dự kiến 31/10/2027 – muộn hơn căn hộ khoảng 3 tháng.</p>
 <!--hh-dimg:1wnsijH2qgHtzHwhDnYpb6ELxk_aKErVa|Cora Tower nhìn từ trên cao – giao lộ Nguyễn Phước Lan, đường 29/3 (phối cảnh chủ đầu tư)-->
 <h2>S-Light Tower ở đâu</h2>
 <p>S-Light Tower nằm ở đường 29/3 giao Nguyễn Đình Thi, trong Sun NeO City, nơi giao ba dòng sông Hàn – Cẩm Lệ – Đô Toả. Cặp tháp 22 tầng, 3 tầng hầm, gần 800 căn từ 33,3 đến 95,1 m², sở hữu lâu dài. Sun Property ra mắt dự án tháng 6/2026.</p>
@@ -97,6 +97,7 @@ function hh_posts_tu_khoa_tim_kiem_11_2026( $posts ) {
 <h2>Cora Tower khi nào bàn giao nếu tiến độ thay đổi?</h2>
 <p>Câu trả lời cho "Cora Tower khi nào bàn giao" trong bài là mốc dự kiến chủ đầu tư công bố. Mốc ràng buộc là mốc ghi trong hợp đồng mua bán, kèm điều khoản phạt khi chậm bàn giao. Anh chị nên đọc kỹ điều khoản này trước khi ký và theo dõi ảnh tiến độ định kỳ của từng tòa.</p>
 {$cta('Cora Tower, Spana Tower, S-Light Tower')}
+<p class="src">Nguồn: tài liệu chủ đầu tư; văn bản Sở Xây dựng Đà Nẵng; <a href="https://cafef.vn/sun-property-ra-mat-s-light-tower-tam-diem-vuong-khi-trung-tam-nam-da-nang-188260622082242751.chn" target="_blank" rel="noopener">CafeF</a> (S-Light Tower ra mắt 6/2026).</p>
 HTML
 		,
 		'seo'      => array(
