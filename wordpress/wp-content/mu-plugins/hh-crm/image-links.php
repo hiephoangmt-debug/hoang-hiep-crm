@@ -65,6 +65,10 @@ function hh_img_links_import( $post_id, $limit = 2 ) {
 	foreach ( $lines as $n => $line ) {
 		$parts = array_map( 'trim', explode( '|', $line ) );
 		$url   = hh_img_link_key( $parts[0] ?? '' );
+		if ( $url && 'failed' === ( $done[ $url ] ?? '' ) && hh_img_link_local_path( $url ) ) {
+			unset( $done[ $url ] ); // Ảnh plugin lỗi vì lúc đó file chưa tải về (tự cập nhật tải ảnh sau) – nay đã có: thử lại.
+			delete_post_meta( $post_id, '_hh_img_fail_' . md5( $url ) );
+		}
 		if ( ! $url || isset( $done[ $url ] ) ) {
 			continue;
 		}
@@ -164,7 +168,7 @@ function hh_img_links_pending( $post_id ) {
 	$n    = 0;
 	foreach ( hh_lines( 'hh_p_image_links', $post_id ) as $line ) {
 		$url = hh_img_link_key( trim( explode( '|', $line )[0] ) );
-		if ( $url && ! isset( $done[ $url ] ) ) {
+		if ( $url && ( ! isset( $done[ $url ] ) || ( 'failed' === $done[ $url ] && hh_img_link_local_path( $url ) ) ) ) {
 			++$n;
 		}
 	}
@@ -331,4 +335,20 @@ function hh_img_links_run_now( $seconds = 20 ) {
 		wp_schedule_single_event( time() + 20, 'hh_img_links_cron' );
 	}
 	return hh_img_links_queue_pending();
+}
+
+/**
+ * Sau khi tự cập nhật tải xong ảnh plugin: đưa các dự án còn ảnh chưa gắn (kể cả ảnh từng lỗi vì file chưa có) vào hàng chờ.
+ */
+function hh_img_links_requeue_all() {
+	$ids = get_posts( array( 'post_type' => 'du-an', 'post_status' => 'any', 'numberposts' => -1, 'fields' => 'ids', 'meta_key' => 'hh_p_image_links' ) ); // phpcs:ignore WordPress.DB.SlowDBQuery
+	$n   = 0;
+	foreach ( $ids as $id ) {
+		if ( hh_img_links_pending( $id ) ) {
+			delete_post_meta( $id, '_hh_img_links_tries' );
+			hh_img_links_queue( $id );
+			++$n;
+		}
+	}
+	return $n;
 }

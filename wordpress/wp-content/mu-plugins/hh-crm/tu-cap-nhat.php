@@ -375,6 +375,9 @@ add_action(
 		if ( $left ) {
 			wp_schedule_single_event( time() + 120, 'hh_su_images' );
 		} else {
+			if ( function_exists( 'hh_img_links_requeue_all' ) ) {
+				hh_img_links_requeue_all(); // Gắn ảnh mới vào dự án (lượt nhập dữ liệu trước chạy khi ảnh chưa về).
+			}
 			do_action( 'litespeed_purge_all' );
 		}
 		if ( $done ) {
@@ -440,6 +443,10 @@ add_action(
 					}
 					if ( function_exists( 'spawn_cron' ) ) {
 						spawn_cron();
+					}
+					$iq = (array) get_option( 'hh_su_img_queue', array() );
+					if ( function_exists( 'hh_img_links_requeue_all' ) && empty( $iq['items'] ) ) {
+						hh_img_links_requeue_all(); // Ảnh plugin đã về đủ: gắn nốt ảnh còn thiếu vào dự án.
 					}
 					if ( ! wp_next_scheduled( 'hh_auto_posts' ) || wp_next_scheduled( 'hh_auto_posts' ) > time() + 60 ) {
 						wp_schedule_single_event( time(), 'hh_auto_posts_at' ); // Kiểm tra luôn bài tự đăng có bản sửa mới.

@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.48** + plugin Hoàng Hiệp CRM **2.20.363**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.48** + plugin Hoàng Hiệp CRM **2.20.364**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.364
+
+- Ảnh dự án đi kèm plugin: nếu lúc nhập dữ liệu ảnh chưa tải về (tự cập nhật tải ảnh sau) thì khi ảnh về đủ, web tự gắn lại vào dự án (trước đây bị đánh dấu lỗi và không hiện – VD mặt bằng Premier Village).
 
 ## Có gì mới – 2.20.363
 
