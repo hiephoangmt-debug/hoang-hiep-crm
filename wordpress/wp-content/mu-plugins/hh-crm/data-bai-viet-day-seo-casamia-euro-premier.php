@@ -353,11 +353,11 @@ HTML
 	$posts[] = array(
 		'slug'     => 'mua-biet-thu-premier-village-my-khe',
 		'title'    => 'Mua biệt thự Premier Village Đà Nẵng 2026: 111 căn trên biển Mỹ Khê, giá chuyển nhượng chỉ từ khoảng 39 tỷ',
-		'excerpt'  => 'Mua biệt thự Premier Village Đà Nẵng: 111 biệt thự có hồ bơi riêng trên khoảng 15 ha bên biển Mỹ Khê của Sun Group, giá chuyển nhượng tham khảo chỉ từ khoảng 39 tỷ. Loại biệt thự, ai nên mua, pháp lý và các bước mua.',
+		'excerpt'  => 'Mua biệt thự Premier Village Đà Nẵng: 111 biệt thự có hồ bơi riêng trên khoảng 15 ha bên biển Mỹ Khê của Sun Group, giá chuyển nhượng tham khảo chỉ từ khoảng 39 tỷ. Loại biệt thự, thuê và cho thuê, gửi bán, pháp lý và các bước mua.',
 		'keyword'  => 'mua biệt thự Premier Village',
-		'keywords_extra' => array( 'biệt thự Premier Village Đà Nẵng', 'villa Premier Village Mỹ Khê', 'biệt thự biển Mỹ Khê' ),
+		'keywords_extra' => array( 'biệt thự Premier Village Đà Nẵng', 'villa Premier Village Mỹ Khê', 'thuê biệt thự Premier Village', 'gửi bán biệt thự Premier Village' ),
 		'project'  => 'premier-village-da-nang',
-		'rev'      => 2, // 26/11: viết lại – giá "chỉ từ", thêm ai nên mua, các bước mua (anh Hiệp).
+		'rev'      => 3, // 26/11: viết lại – giá "chỉ từ", ai nên mua, các bước mua; rev 3: viết dày hơn, thêm mục thuê / cho thuê / gửi bán (anh Hiệp).
 		'schedule' => '2026-11-26 09:30',
 		'category' => 'Tin dự án',
 		'tags'     => array( 'Premier Village', 'Biệt thự biển', 'Mỹ Khê' ),
@@ -382,6 +382,9 @@ HTML
 <tr><td>Giá chuyển nhượng</td><td>Chỉ từ khoảng 39 tỷ (tin rao 2026, tham khảo)</td></tr>
 </tbody>
 </table>
+<p>Premier Village là một trong những dự án nghỉ dưỡng đầu tiên Sun Group làm tại Đà Nẵng. Biệt thự được chào bán từ khoảng tháng 8/2015 theo mô hình khách mua biệt thự, nhận giấy chứng nhận rồi gửi lại cho khu nghỉ dưỡng khai thác; thời điểm đó Báo Đầu tư đưa tin chính sách "sổ đỏ trao tay – lời ngay 9%/năm". Các cam kết này nằm trong hợp đồng giai đoạn đầu giữa chủ đầu tư và người mua đầu tiên, nên người mua lại hôm nay cần hỏi rõ điều khoản nào còn hiệu lực, điều khoản nào đã hết.</p>
+<p>Sau gần 10 năm hoạt động, khu biệt thự đã ổn định: cây xanh, rừng dừa phủ kín, hạ tầng nội khu và dịch vụ khách sạn chạy đều. Đây là điểm khác biệt so với các dự án mới – khi mua biệt thự Premier Village, người mua nhìn thấy ngay tài sản thật, không phải chờ xây.</p>
+<!--hh-img:img/premier-village/premier-village-flycam-biet-thu-ho-boi-rieng.jpg|Cụm biệt thự có hồ bơi riêng trong khu Premier Village (ảnh khu nghỉ dưỡng)-->
 <h2>Mua biệt thự Premier Village: các loại căn</h2>
 <table>
 <thead><tr><th>Loại biệt thự</th><th>Số căn</th><th>Diện tích</th><th>Điểm riêng</th></tr></thead>
@@ -394,6 +397,11 @@ HTML
 <p>Theo thông tin giới thiệu khu nghỉ dưỡng, mỗi biệt thự có hồ bơi riêng, phòng khách, bếp đầy đủ thiết bị (tủ lạnh, lò vi sóng, lò nướng), phòng ngủ có phòng tắm riêng và đón được tối đa khoảng 8 người lớn, 4 trẻ em – hợp với đại gia đình. Vì vậy người mua biệt thự Premier Village thường là gia đình đông người hoặc doanh nghiệp cần nơi tiếp khách.</p>
 <!--hh-img:img/premier-village/premier-village-biet-thu-huong-vuon.jpg|Mua biệt thự Premier Village loại hướng vườn: vườn riêng, hồ bơi riêng (ảnh khu nghỉ dưỡng)-->
 <p>Một số chủ đã cải tạo, nâng số phòng ngủ hoặc thay nội thất, nên khi mua biệt thự Premier Village cần xem tận nơi thay vì chỉ dựa vào bản vẽ cũ. Căn càng gần biển thì giá càng cao và càng hiếm người bán – nhóm trực diện biển chỉ có 6 căn.</p>
+<h3>Bên trong căn nhà khi mua biệt thự Premier Village</h3>
+<p>Biệt thự thiết kế theo lối nhiệt đới hiện đại: tầng trệt là phòng khách liền bếp, cửa kính lớn mở thẳng ra hồ bơi và sân vườn; các phòng ngủ bố trí tách khỏi khu sinh hoạt chung để cả nhà ở cùng mà vẫn riêng tư. Nội thất, đồ dùng theo tiêu chuẩn khách sạn – vì phần lớn căn từng được đưa vào khai thác cho thuê.</p>
+<!--hh-img:img/premier-village/premier-village-phong-khach-biet-thu.jpg|Phòng khách biệt thự Premier Village mở ra hồ bơi riêng (ảnh khu nghỉ dưỡng)-->
+<p>Bếp có đủ tủ lạnh, lò vi sóng, lò nướng và bàn ăn lớn – gia đình có thể tự nấu thay vì ăn nhà hàng suốt kỳ nghỉ. Với người mua biệt thự Premier Village để cho thuê, đây là điểm cộng: khách gia đình, khách đi nhóm thường chọn villa có bếp đầy đủ.</p>
+<!--hh-img:img/premier-village/premier-village-bep-biet-thu.jpg|Bếp biệt thự Premier Village đầy đủ thiết bị (ảnh khu nghỉ dưỡng)-->
 <h2>Tiện ích chung khi mua biệt thự Premier Village</h2>
 <ul>
 <li>Hồ bơi Nautica khoảng 550 m² sát biển và hồ bơi trẻ em khoảng 200 m².</li>
@@ -402,6 +410,8 @@ HTML
 <li>Nhà hàng LemonGrass, Cá Chuồn Cồ và phòng hội nghị khoảng 720 m² cho tối đa 150 khách.</li>
 </ul>
 <!--hh-img:img/premier-village/premier-village-ho-boi-nautica-ven-bien.jpg|Hồ bơi Nautica sát biển – tiện ích khi mua biệt thự Premier Village (ảnh khu nghỉ dưỡng)-->
+<p>Mua biệt thự Premier Village, chủ nhà và khách ở dùng chung hệ tiện ích của khu nghỉ dưỡng: bãi biển ngay trước khu, hồ bơi chung, câu lạc bộ trẻ em nên bố mẹ yên tâm nghỉ. Nhà hàng ven biển phục vụ cả bữa sáng lẫn tiệc tối – tiện cho chủ nhà tổ chức tiếp khách, họp mặt gia đình ngay trong khu.</p>
+<!--hh-img:img/premier-village/premier-village-nha-hang-ven-bien.jpg|Nhà hàng ven biển trong khu Premier Village (ảnh khu nghỉ dưỡng)-->
 <h2>Giá khi mua biệt thự Premier Village năm 2026</h2>
 <table>
 <thead><tr><th>Nhóm căn</th><th>Diện tích đất</th><th>Giá chào tham khảo</th></tr></thead>
@@ -412,6 +422,39 @@ HTML
 </table>
 <p>Đây là giá rao, chưa phải giá giao dịch. Mức chốt khi mua biệt thự Premier Village tùy hiện trạng nhà, nội thất, thời hạn ghi trên sổ và căn có đang nằm trong chương trình cho thuê của khu nghỉ dưỡng hay không. Hiệp đang nhận một căn 300 m², 3 tầng, hướng Đông, mặt tiền Võ Nguyên Giáp – xem tin <a href="/nha-dat/ban-biet-thu-premier-village-vo-nguyen-giap-my-an-300m2-sat-bien/">bán biệt thự Premier Village 300 m²</a>.</p>
 <!--hh-img:img/premier-village/premier-village-flycam-biet-thu-ven-bien.jpg|Mua biệt thự Premier Village: các căn giữa rừng dừa ven biển Mỹ Khê nhìn từ trên cao (ảnh khu nghỉ dưỡng)-->
+<h2>Thuê hay mua biệt thự Premier Village?</h2>
+<p>Không phải ai cũng cần mua biệt thự Premier Village – nhiều gia đình chỉ cần <strong>thuê biệt thự Premier Village</strong> cho kỳ nghỉ hè, Tết hay mùa pháo hoa DIFF. Có hai cách thuê phổ biến:</p>
+<table>
+<thead><tr><th>Cách thuê</th><th>Giá thuê tham khảo (11/2026)</th><th>Phù hợp</th><th>Lưu ý</th></tr></thead>
+<tbody>
+<tr><td>Đặt phòng qua khu nghỉ dưỡng hoặc các kênh đặt phòng</td><td>Chỉ từ khoảng 370 – 390 USD/đêm; biệt thự hướng vườn có hồ bơi riêng khoảng 440 USD/đêm; căn trực diện biển có thể trên 1.000 USD/đêm</td><td>Kỳ nghỉ ngắn ngày, cần đủ dịch vụ khách sạn (dọn phòng, bữa sáng, tiện ích)</td><td>Giá theo ngày ở và loại căn; cao điểm hè (tháng 4 – 9), lễ Tết, mùa pháo hoa DIFF tăng mạnh, nên đặt sớm</td></tr>
+<tr><td>Thuê nguyên căn theo tháng từ chủ biệt thự</td><td>Chỉ từ khoảng 80 triệu/tháng (căn khoảng 336 m², 4 phòng ngủ, hồ bơi riêng); căn hướng biển khoảng 100 – 120 triệu/tháng</td><td>Ở dài ngày, khách công tác, chuyên gia, gia đình chuyển tới Đà Nẵng</td><td>Hợp đồng thường từ 6 – 12 tháng; thống nhất ai trả phí dịch vụ, điện nước, bảo trì hồ bơi</td></tr>
+</tbody>
+</table>
+<p>Giá trên Hiệp tổng hợp từ các trang đặt phòng và tin cho thuê đang đăng tháng 11/2026, chỉ để tham khảo – giá thật phụ thuộc ngày ở, số phòng ngủ, căn hướng vườn hay gần biển và nội thất. Thuê thử một kỳ nghỉ cũng là cách tốt để hiểu khu trước khi quyết định mua biệt thự Premier Village. Khách cần thuê theo tháng hoặc thuê nguyên căn cho đoàn, nhắn Hiệp ngày ở, số người để được báo căn trống và giá thực tế.</p>
+<!--hh-img:img/premier-village/premier-village-flycam-ho-boi-bai-bien.jpg|Hồ bơi và bãi biển trước khu Premier Village – lý do khách thuê biệt thự (ảnh khu nghỉ dưỡng)-->
+<h2>Mua biệt thự Premier Village rồi cho thuê: chọn cách nào?</h2>
+<p>Chủ biệt thự hiện có hai hướng khai thác. Mỗi hướng có ưu, nhược riêng, và căn có đang ràng buộc hợp đồng cho thuê với khu nghỉ dưỡng hay không sẽ quyết định chủ được chọn cách nào.</p>
+<table>
+<thead><tr><th>Hướng khai thác</th><th>Ưu điểm</th><th>Nhược điểm</th></tr></thead>
+<tbody>
+<tr><td>Gửi khu nghỉ dưỡng vận hành, chia doanh thu theo hợp đồng</td><td>Không phải tự quản lý; khách đến từ hệ thống bán phòng của khu; nhà được bảo trì theo chuẩn khách sạn</td><td>Số đêm chủ được tự ở bị giới hạn; tỷ lệ chia và chi phí do hợp đồng quy định</td></tr>
+<tr><td>Tự cho thuê hoặc qua đơn vị quản lý nhỏ</td><td>Chủ động giá, chủ động lịch ở; thuê dài hạn cho dòng tiền đều</td><td>Tự lo khách, dọn dẹp, sửa chữa; phải kê khai, nộp thuế cho thuê tài sản</td></tr>
+</tbody>
+</table>
+<p>Tính nhanh theo giá thuê tháng ở trên: căn cho thuê khoảng 80 – 100 triệu/tháng thu khoảng 0,96 – 1,2 tỷ/năm, tức chỉ khoảng 2,5 – 3%/năm trên giá chào 39 tỷ, chưa trừ chi phí.</p>
+<p>Vì vậy, khi mua biệt thự Premier Village để cho thuê, hãy coi lợi suất cho thuê chỉ là phần phụ – giá trị chính nằm ở tài sản đất ven biển và nhu cầu sử dụng của gia đình.</p>
+<p>Chủ nhà nên tính đủ chi phí giữ nhà (phí quản lý, bảo trì hồ bơi, sân vườn, điện nước, thay nội thất định kỳ) trước khi so sánh. Về thuế khi cho thuê, xem bài <a href="/cho-thue-ngan-ngay-can-ho-da-nang-phap-ly-thue/">cho thuê ngắn ngày ở Đà Nẵng: pháp lý và thuế</a>; cách làm với villa tương tự có ở bài <a href="/cho-thue-biet-thu-casamia-balanca-dong-tien/">cho thuê biệt thự Casamia Balanca</a>.</p>
+<h2>Gửi bán biệt thự Premier Village qua Hoàng Hiệp</h2>
+<p>Quỹ căn ít nên khách mua biệt thự Premier Village thường là người có chủ đích, tìm đúng khu này. Chủ nhà muốn <strong>gửi bán biệt thự Premier Village</strong> hoặc gửi cho thuê dài hạn có thể liên hệ Hiệp. Cách làm:</p>
+<ol>
+<li><strong>Trao đổi thông tin căn:</strong> loại căn, diện tích đất, số tầng, số phòng ngủ, hiện trạng nội thất, căn có đang trong chương trình cho thuê của khu nghỉ dưỡng không, giá mong muốn.</li>
+<li><strong>Định giá tham khảo:</strong> Hiệp đối chiếu tin rao và các giao dịch mua biệt thự Premier Village cùng khu, cùng nhóm căn để chủ nhà đặt giá sát thị trường – giá quá cao làm căn nằm lâu, giá thấp thì thiệt cho chủ.</li>
+<li><strong>Chụp ảnh, đăng tin:</strong> tin đăng trên hiephoangmt.com và gửi tới nhóm khách đang tìm mua biệt thự Premier Village và villa biển; không công khai tên, số điện thoại chủ nhà.</li>
+<li><strong>Lọc khách, dẫn xem:</strong> chỉ dẫn khách đã xác nhận nhu cầu và tài chính, hẹn giờ theo lịch chủ nhà.</li>
+<li><strong>Hỗ trợ đến khi sang tên:</strong> soạn thỏa thuận đặt cọc, chuẩn bị hồ sơ công chứng, kê khai thuế, phí và theo dõi thủ tục sang tên.</li>
+</ol>
+<p>Chủ nhà nên chuẩn bị sẵn bản sao sổ, giấy tờ tùy thân, hợp đồng cho thuê với khu nghỉ dưỡng (nếu có) và biên lai các khoản phí đã đóng – hồ sơ đủ thì người mua biệt thự Premier Village tin và giao dịch nhanh hơn. Hình thức ký gửi chung xem thêm bài <a href="/ky-gui-can-ho-da-nang-ban-cho-thue/">ký gửi bán, cho thuê nhà đất Đà Nẵng</a>.</p>
 <h2>Ai nên mua biệt thự Premier Village?</h2>
 <ul>
 <li><strong>Gia đình cần nơi nghỉ dưỡng gần trung tâm:</strong> ra biển vài bước, vào trung tâm thành phố chỉ vài phút, không phải đi xa như các khu villa phía nam.</li>
@@ -434,30 +477,35 @@ HTML
 <li>Xem nhà thực tế, kiểm tra hiện trạng, nội thất, hồ bơi.</li>
 <li>Kiểm tra sổ, thế chấp, hợp đồng cho thuê đi kèm như mục trên.</li>
 <li>Đặt cọc qua văn bản rõ điều kiện hoàn cọc, sau đó công chứng hợp đồng chuyển nhượng.</li>
-<li>Nộp thuế, phí và làm thủ tục sang tên tại cơ quan đăng ký đất đai.</li>
+<li>Nộp thuế, phí và làm thủ tục sang tên tại cơ quan đăng ký đất đai: thông thường bên bán nộp thuế thu nhập cá nhân 2%, bên mua nộp lệ phí trước bạ 0,5% (hai bên có thể thỏa thuận khác) – chi tiết ở bài <a href="/thue-phi-mua-ban-nha-dat-da-nang-2026/">thuế, phí mua bán nhà đất Đà Nẵng 2026</a>.</li>
 </ol>
+<p>Nếu căn định mua biệt thự Premier Village đang trong chương trình cho thuê, cần thêm bước làm việc với khu nghỉ dưỡng để chuyển hợp đồng cho chủ mới hoặc thanh lý hợp đồng – nên ghi rõ việc này vào thỏa thuận đặt cọc để tránh tranh chấp về sau.</p>
 <h2>Vị trí – lợi thế lớn nhất</h2>
 <p>Lý do chính khách chọn mua biệt thự Premier Village là vị trí: từ khu biệt thự đến cầu Rồng và trung tâm thành phố khoảng 5 phút, sân bay quốc tế Đà Nẵng khoảng 15 phút, bán đảo Sơn Trà khoảng 20 phút, phố cổ Hội An khoảng 40 phút đi xe. Xung quanh là phố du lịch An Thượng và dải biển Mỹ Khê; gần đó có dự án căn hộ <a href="/du-an/the-poet-residence-da-nang/">The Poet Residence</a> trên đường Hồ Xuân Hương. Thông tin giới thiệu khu nghỉ dưỡng có trên <a href="https://danangfantasticity.com/premier-village-danang-resort/" target="_blank" rel="noopener">Danang Fantasticity</a> – cổng du lịch của thành phố.</p>
 <h2>So với villa ven biển khác ở Đà Nẵng</h2>
 <p>Theo mặt bằng giá tham khảo tháng 10/2026, Furama Villas chỉ từ khoảng 21 tỷ, Fusion Resort &amp; Villas từ khoảng 32 tỷ, Hyatt Regency 3 phòng ngủ khoảng 50 tỷ. Mua biệt thự Premier Village đắt hơn Furama nhưng đổi lại vị trí gần trung tâm nhất. Bảng so sánh đầy đủ xem bài <a href="/so-sanh-villa-ven-bien-da-nang-co-so/">so sánh villa ven biển Đà Nẵng có sổ</a>.</p>
 <h2>Nhận định của Hoàng Hiệp</h2>
 <p>Quỹ căn Premier Village rất ít – chỉ 111 căn và không còn hàng mới – nên giao dịch thưa nhưng giá giữ tốt. Hiệp thấy việc mua biệt thự Premier Village hợp với khách cần một tài sản an toàn, gần trung tâm, dùng vừa nghỉ dưỡng gia đình vừa tiếp khách; khách đặt nặng dòng tiền cho thuê nên so thêm với căn hộ ven biển trước khi quyết định.</p>
-<p>Cần danh sách căn đang chuyển nhượng, hỗ trợ kiểm tra sổ và hợp đồng vận hành, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Thông tin dự án xem tại trang <a href="/du-an/premier-village-da-nang/">Premier Village Đà Nẵng</a>.</p>
-<p class="src">Nguồn: Danang Fantasticity, Báo Đầu tư, mia.vn, thông tin giới thiệu khu nghỉ dưỡng; tin rao chuyển nhượng 2026, dữ liệu Hoàng Hiệp tổng hợp. Ảnh: khu nghỉ dưỡng Premier Village. Giá mang tính tham khảo.</p>
+<p>Đất ven biển Mỹ Khê gần trung tâm gần như không còn quỹ mới cho biệt thự nghỉ dưỡng, trong khi hạ tầng quanh khu tiếp tục được nâng cấp. Vì vậy, với chủ đang sở hữu, giữ căn và khai thác cho thuê vẫn là lựa chọn hợp lý; chủ cần bán thì nên chuẩn bị hồ sơ sạch, giá sát thị trường để gặp đúng khách. Khi mua biệt thự Premier Village, nên ưu tiên căn có sổ rõ ràng, hợp đồng cho thuê minh bạch hoặc đã thanh lý.</p>
+<p>Cần danh sách căn đang chuyển nhượng, thuê biệt thự, gửi bán hoặc gửi cho thuê, hỗ trợ kiểm tra sổ và hợp đồng vận hành, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Thông tin dự án xem tại trang <a href="/du-an/premier-village-da-nang/">Premier Village Đà Nẵng</a>.</p>
+<p class="src">Nguồn: Danang Fantasticity, Báo Đầu tư, mia.vn, thông tin giới thiệu khu nghỉ dưỡng; giá phòng trên các trang đặt phòng và tin cho thuê, tin rao chuyển nhượng 11/2026, dữ liệu Hoàng Hiệp tổng hợp. Ảnh: khu nghỉ dưỡng Premier Village. Giá mang tính tham khảo.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Mua biệt thự Premier Village 2026: 111 căn biển Mỹ Khê',
-			'desc'      => 'Mua biệt thự Premier Village Đà Nẵng: 111 căn trên 15 ha bên biển Mỹ Khê, Sun Group phát triển, giá chuyển nhượng chỉ từ khoảng 39 tỷ. Loại căn, pháp lý, cách mua.',
+			'desc'      => 'Mua biệt thự Premier Village Đà Nẵng: 111 căn bên biển Mỹ Khê, giá chuyển nhượng chỉ từ khoảng 39 tỷ. Loại căn, thuê, cho thuê, gửi bán, pháp lý, cách mua.',
 			'points'    => array(
 				'Premier Village: 111 biệt thự (77 hướng vườn, 28 lối ra biển, 6 trực diện biển) trên khoảng 15 ha, Sun Group phát triển',
 				'Giá khi mua biệt thự Premier Village (tin rao 2026): chỉ từ khoảng 39 tỷ cho căn đất 300 m², căn lớn gần biển từ khoảng 47 tỷ',
 				'Đã bán hết từ chủ đầu tư – cần kiểm tra sổ, mục đích sử dụng đất và hợp đồng cho thuê đi kèm',
+				'Giá thuê tham khảo 11/2026: chỉ từ khoảng 370 USD/đêm (ngắn ngày) hoặc 80 triệu/tháng (nguyên căn); chủ nhà có thể gửi bán, gửi cho thuê qua Hoàng Hiệp',
 			),
 			'faq'       => array(
 				array( 'Mua biệt thự Premier Village giá bao nhiêu?', 'Theo tin rao 2026, giá chuyển nhượng chỉ từ khoảng 39 tỷ cho căn đất 300 m²; căn lớn gần biển hơn từ khoảng 47 tỷ.' ),
 				array( 'Premier Village có bao nhiêu biệt thự?', 'Khu nghỉ dưỡng có 111 biệt thự trên khoảng 15 ha: 77 hướng vườn, 28 có lối ra biển, 6 trực diện biển; muốn mua biệt thự Premier Village hiện chỉ có nguồn chuyển nhượng.' ),
 				array( 'Ai là chủ đầu tư Premier Village Đà Nẵng?', 'Chủ đầu tư là Công ty CP Địa Cầu, thành viên Tập đoàn Sun Group. Đơn vị vận hành và hợp đồng cho thuê của từng căn nên kiểm tra trực tiếp khi mua.' ),
+				array( 'Giá thuê biệt thự Premier Village bao nhiêu?', 'Tham khảo tháng 11/2026: thuê ngắn ngày qua khu nghỉ dưỡng chỉ từ khoảng 370 – 390 USD/đêm, căn trực diện biển có thể trên 1.000 USD/đêm; thuê nguyên căn theo tháng chỉ từ khoảng 80 triệu/tháng, căn hướng biển khoảng 100 – 120 triệu/tháng. Liên hệ Hoàng Hiệp 0904 567 009 để được báo căn trống.' ),
+				array( 'Gửi bán biệt thự Premier Village ở đâu?', 'Chủ nhà có thể gửi bán hoặc gửi cho thuê qua Hoàng Hiệp: định giá tham khảo theo giao dịch cùng khu, đăng tin không lộ thông tin chủ, lọc khách và hỗ trợ đến khi sang tên.' ),
 				array( 'Biệt thự Premier Village có sổ hồng không?', 'Khi mua biệt thự Premier Village, lưu ý các trang giới thiệu nêu biệt thự có sổ hồng sở hữu lâu dài; người mua nên kiểm tra bản gốc sổ, mục đích sử dụng đất và thời hạn từng căn.' ),
 			),
 		),
