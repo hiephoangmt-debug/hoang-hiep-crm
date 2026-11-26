@@ -4,6 +4,7 @@
  * 111 biệt thự (77 hướng vườn ~300 – 330 m², 28 có lối ra biển ~360 – 390 m², 6 trực diện biển đến ~511 m²), 15 ha,
  * chủ đầu tư Công ty CP Địa Cầu (Sun Group); không ghi Accor vận hành (anh Hiệp báo Accor không còn quản lý, 26/11); tiện ích; 10 ảnh chính thức của khu nghỉ dưỡng.
  * Bổ sung loại căn (Garden View / Ocean Access / Beachfront), liên kết vùng, tiện ích theo trang giới thiệu dự án anh Hiệp gửi 26/11 (viết lại, không ghi tên đơn vị môi giới).
+ * Pháp lý, tiến độ: khai trương 4/2014 (Báo Đà Nẵng), mở bán 8/2015 và 9/2015 (Báo Đầu tư, VietNamNet), thiết kế SALA.
  * Giá thuê tham khảo 11/2026 từ các trang đặt phòng và tin cho thuê (anh Hiệp yêu cầu 26/11).
  * Viết lại bằng lời mình, không ghi tên / số điện thoại đơn vị phân phối. Giá chỉ ghi "chỉ từ".
  */
@@ -28,6 +29,12 @@ add_filter(
 				'hh_p_rent_price'   => 'Thuê ngắn ngày chỉ từ khoảng 370 – 390 USD/đêm (căn trực diện biển có thể trên 1.000 USD/đêm) · Thuê nguyên căn theo tháng chỉ từ khoảng 80 triệu/tháng, căn hướng biển khoảng 100 – 120 triệu/tháng (tham khảo 11/2026)',
 				'hh_p_resale_note'  => 'Quỹ chỉ 111 căn, không còn hàng mới nên giao dịch thưa nhưng giá giữ tốt. Tiền thuê nguyên căn khoảng 0,96 – 1,2 tỷ/năm, tương đương khoảng 2,5 – 3%/năm trên giá chào – khách mua chủ yếu để giữ tài sản ven biển và dùng cho gia đình. Nhận gửi bán, gửi cho thuê: Hoàng Hiệp 0904 567 009.',
 				'hh_p_villa_table'  => "Garden View Villa – hướng vườn (77 căn) | Khoảng 300 – 330 m² | Hồ bơi riêng, vườn riêng | Chỉ từ khoảng 39 tỷ\nOcean Access Villa – có lối ra biển (28 căn) | Khoảng 360 – 390 m² | Lối đi riêng ra biển, hồ bơi riêng | Từ khoảng 47 tỷ\nBeachfront Villa – trực diện biển (6 căn) | Khoảng 511 m² | Sát bãi biển, hồ bơi vô cực riêng, quản gia riêng, ở tối đa 8 người lớn + 4 trẻ em | Liên hệ",
+				'hh_p_legal'        => 'Sổ đỏ (giấy chứng nhận quyền sử dụng đất) cấp riêng từng biệt thự – chủ đầu tư công bố khi mở bán năm 2015',
+				'hh_p_ownership'    => 'Theo thời hạn ghi trên sổ của từng căn – kiểm tra mục đích, thời hạn sử dụng đất trước khi đặt cọc',
+				'hh_p_legal_docs'   => "Giấy chứng nhận quyền sử dụng đất cấp riêng từng biệt thự (sổ đỏ trao tay khi mở bán 8/2015)\nHợp đồng mua bán biệt thự giữa chủ đầu tư và người mua đầu tiên\nHợp đồng hợp tác cho thuê với khu nghỉ dưỡng (tùy căn – kiểm tra còn hiệu lực, điều khoản chấm dứt)\nKhi chuyển nhượng: kiểm tra bản gốc sổ, tình trạng thế chấp, tranh chấp tại văn phòng đăng ký đất đai",
+				'hh_p_designer'     => 'SALA (Anh) – theo Báo Đầu tư',
+				'hh_p_handover'     => 'Đã hoạt động từ năm 2014 – biệt thự đã bàn giao',
+				'hh_p_progress'     => "04/2014 | Khai trương khu nghỉ dưỡng Premier Village Danang Resort\n08/2015 | Sun Group chính thức mở bán biệt thự: sổ đỏ trao tay, chính sách cam kết lợi nhuận khoảng 9%/năm cho người mua đầu tiên\n09/2015 | Đợt mở bán biệt thự thứ hai\n2019 | World Travel Awards vinh danh khu nghỉ dưỡng biệt thự dành cho gia đình hàng đầu thế giới\n2026 | Khu nghỉ dưỡng hoạt động ổn định; giao dịch chuyển nhượng chỉ từ khoảng 39 tỷ, cho thuê chỉ từ khoảng 80 triệu/tháng",
 				'hh_p_handover_std' => 'Đã bàn giao, đầy đủ nội thất theo tiêu chuẩn khu nghỉ dưỡng 5 sao, mỗi căn có hồ bơi riêng',
 				'hh_p_location_desc' => 'Nằm tại 99 Võ Nguyên Giáp (khu Mỹ An cũ), giao đường Hồ Xuân Hương, ngay trên bãi biển Mỹ Khê – đoạn biển gần trung tâm nhất của Đà Nẵng. Sát phố du lịch An Thượng, vài phút tới cầu Rồng, chợ Hàn; khoảng 10 – 15 phút ra sân bay quốc tế, khoảng 30 – 40 phút tới phố cổ Hội An.',
 				'hh_p_connections'  => "3 phút | Phố du lịch An Thượng\n5 phút | Danh thắng Ngũ Hành Sơn\n5 – 7 phút | Cầu Rồng, chợ Hàn\n10 phút | Bệnh viện Vinmec, Hoàn Mỹ\n10 – 15 phút | Sân bay quốc tế Đà Nẵng\n12 phút | Ga Đà Nẵng\n20 – 25 phút | Bán đảo Sơn Trà, chùa Linh Ứng\n30 – 40 phút | Phố cổ Hội An\n45 phút | Bà Nà Hills\n1 giờ | Thánh địa Mỹ Sơn",

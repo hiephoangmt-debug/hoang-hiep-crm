@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.48** + plugin Hoàng Hiệp CRM **2.20.367**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.48** + plugin Hoàng Hiệp CRM **2.20.368**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.368
+
+- Premier Village: mục Pháp lý & tiến độ đầy đủ – pháp lý (sổ đỏ từng căn), hình thức sở hữu, hồ sơ pháp lý cần kiểm tra, đơn vị thiết kế SALA, mốc tiến độ 4/2014 khai trương – 8/2015, 9/2015 mở bán – 2019 giải thưởng – 2026.
 
 ## Có gì mới – 2.20.367
 

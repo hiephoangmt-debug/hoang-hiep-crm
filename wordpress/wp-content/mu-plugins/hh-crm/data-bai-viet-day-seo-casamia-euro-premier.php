@@ -357,7 +357,7 @@ HTML
 		'keyword'  => 'mua biệt thự Premier Village',
 		'keywords_extra' => array( 'biệt thự Premier Village Đà Nẵng', 'villa Premier Village Mỹ Khê', 'thuê biệt thự Premier Village', 'gửi bán biệt thự Premier Village' ),
 		'project'  => 'premier-village-da-nang',
-		'rev'      => 5, // rev 5: mặt bằng tổng thể, sơ đồ vị trí; rev 4: tên loại căn, tiện ích, liên kết vùng theo trang giới thiệu anh Hiệp gửi; 26/11: viết lại – giá "chỉ từ", ai nên mua, các bước mua; rev 3: viết dày hơn, thêm mục thuê / cho thuê / gửi bán (anh Hiệp).
+		'rev'      => 6, // rev 6: khai trương 2014 (không phải 2016); rev 5: mặt bằng tổng thể, sơ đồ vị trí; rev 4: tên loại căn, tiện ích, liên kết vùng theo trang giới thiệu anh Hiệp gửi; 26/11: viết lại – giá "chỉ từ", ai nên mua, các bước mua; rev 3: viết dày hơn, thêm mục thuê / cho thuê / gửi bán (anh Hiệp).
 		'schedule' => '2026-11-26 09:30',
 		'category' => 'Tin dự án',
 		'tags'     => array( 'Premier Village', 'Biệt thự biển', 'Mỹ Khê' ),
@@ -370,7 +370,7 @@ HTML
 </div>
 <!--hh-featured-->
 <h2>Premier Village Đà Nẵng là khu biệt thự nào?</h2>
-<p>Premier Village Danang Resort là quần thể 111 biệt thự ven biển trên khu đất khoảng 15 ha tại 99 Võ Nguyên Giáp (khu Mỹ An cũ), giao đường Hồ Xuân Hương, nhìn thẳng ra biển Mỹ Khê. Khu nghỉ dưỡng do Sun Group phát triển, đi vào hoạt động từ năm 2016 và từng được World Travel Awards vinh danh là khu nghỉ dưỡng biệt thự dành cho gia đình hàng đầu thế giới năm 2019.</p>
+<p>Premier Village Danang Resort là quần thể 111 biệt thự ven biển trên khu đất khoảng 15 ha tại 99 Võ Nguyên Giáp (khu Mỹ An cũ), giao đường Hồ Xuân Hương, nhìn thẳng ra biển Mỹ Khê. Khu nghỉ dưỡng do Sun Group phát triển, khai trương tháng 4/2014, thiết kế bởi SALA (Anh) và từng được World Travel Awards vinh danh là khu nghỉ dưỡng biệt thự dành cho gia đình hàng đầu thế giới năm 2019.</p>
 <table>
 <thead><tr><th>Hạng mục</th><th>Thông tin</th></tr></thead>
 <tbody>
@@ -383,7 +383,7 @@ HTML
 </tbody>
 </table>
 <p>Premier Village là một trong những dự án nghỉ dưỡng đầu tiên Sun Group làm tại Đà Nẵng. Biệt thự được chào bán từ khoảng tháng 8/2015 theo mô hình khách mua biệt thự, nhận giấy chứng nhận rồi gửi lại cho khu nghỉ dưỡng khai thác; thời điểm đó Báo Đầu tư đưa tin chính sách "sổ đỏ trao tay – lời ngay 9%/năm". Các cam kết này nằm trong hợp đồng giai đoạn đầu giữa chủ đầu tư và người mua đầu tiên, nên người mua lại hôm nay cần hỏi rõ điều khoản nào còn hiệu lực, điều khoản nào đã hết.</p>
-<p>Sau gần 10 năm hoạt động, khu biệt thự đã ổn định: cây xanh, rừng dừa phủ kín, hạ tầng nội khu và dịch vụ khách sạn chạy đều. Đây là điểm khác biệt so với các dự án mới – khi mua biệt thự Premier Village, người mua nhìn thấy ngay tài sản thật, không phải chờ xây.</p>
+<p>Sau hơn 12 năm hoạt động, khu biệt thự đã ổn định: cây xanh, rừng dừa phủ kín, hạ tầng nội khu và dịch vụ khách sạn chạy đều. Đây là điểm khác biệt so với các dự án mới – khi mua biệt thự Premier Village, người mua nhìn thấy ngay tài sản thật, không phải chờ xây.</p>
 <!--hh-img:img/premier-village/premier-village-flycam-biet-thu-ho-boi-rieng.jpg|Cụm biệt thự có hồ bơi riêng trong khu Premier Village (ảnh khu nghỉ dưỡng)-->
 <h2>Mua biệt thự Premier Village: các loại căn</h2>
 <table>
