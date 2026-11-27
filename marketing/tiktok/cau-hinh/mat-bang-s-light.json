@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Sun NeO City Hòa Xuân",
+  "~800",
+  "căn hộ, 2 tháp"
+ ],
+ "question": "Mặt bằng S-Light có gì?",
+ "hook_bg": "/tmp/scratch/hx.jpg",
+ "data_title": [
+  "S-Light Tower",
+  "MẶT BẰNG"
+ ],
+ "rows": [
+  [
+   "33,3 m²",
+   "Studio",
+   "Cọc 100 triệu (CSBH 01/SL)"
+  ],
+  [
+   "49,3 m²",
+   "1PN+",
+   "Cọc 150 triệu"
+  ],
+  [
+   "57,6–59 m²",
+   "2 phòng ngủ",
+   "Cọc 200 triệu"
+  ],
+  [
+   "76 m²",
+   "3PN góc",
+   "Hai mặt thoáng"
+  ],
+  [
+   "22 tầng",
+   "2 tháp SL1, SL2",
+   "3 tầng hầm"
+  ]
+ ],
+ "note": "Theo CafeLand, CSBH 01/SL. Ảnh flycam khu vực Hòa Xuân.",
+ "photo": "/tmp/scratch/hx.jpg",
+ "photo_caption": "Ven sông Cẩm Lệ – khu vực Hòa Xuân",
+ "cta": "Bản vẽ: Zalo 0904 567 009"
+}

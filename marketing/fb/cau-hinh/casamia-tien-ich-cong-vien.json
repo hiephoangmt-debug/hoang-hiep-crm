@@ -1,0 +1,85 @@
+{
+ "tag": "TIỆN ÍCH · CASAMIA BALANCA",
+ "title": "CASAMIA BALANCA",
+ "sub": "Pickleball, yoga, đường chạy, bể bơi Olympic",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "5",
+   "công viên chủ đề"
+  ],
+  [
+   "Olympic",
+   "bể bơi"
+  ],
+  [
+   "31,1 ha",
+   "khu đô thị"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo quy hoạch chủ đầu tư · Phối cảnh dự án",
+ "headline": [
+  [
+   "CASAMIA BALANCA",
+   "big",
+   0
+  ],
+  [
+   "tận mắt trước khi chọn",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Tiện ích sống",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "CASAMIA BALANCA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "5 công viên chủ đề",
+     "script"
+    ]
+   ],
+   "dx": 200
+  }
+ ]
+}

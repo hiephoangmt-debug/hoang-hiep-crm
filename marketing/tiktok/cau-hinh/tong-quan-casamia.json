@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Biệt thự ven sông Hội An",
+  "363",
+  "sản phẩm thấp tầng"
+ ],
+ "question": "Casamia Balanca là dự án gì?",
+ "hook_bg": "/tmp/scratch/c-toan-canh.jpg",
+ "data_title": [
+  "Casamia Balanca",
+  "TỔNG QUAN"
+ ],
+ "rows": [
+  [
+   "31,1 ha",
+   "Khu đô thị",
+   "Ven sông Cổ Cò, Hội An"
+  ],
+  [
+   "173",
+   "Biệt thự đơn lập",
+   "Nhà vườn riêng"
+  ],
+  [
+   "116",
+   "Biệt thự song lập",
+   "Hai căn chung tường"
+  ],
+  [
+   "74",
+   "Shophouse",
+   "Nhà phố kinh doanh"
+  ],
+  [
+   "Sổ đỏ",
+   "Sở hữu lâu dài",
+   "Theo chủ đầu tư"
+  ]
+ ],
+ "note": "Theo chủ đầu tư Đạt Phương. Phối cảnh dự án.",
+ "photo": "/tmp/scratch/c-song-co-co-hoang-hon.jpg",
+ "photo_caption": "Hoàng hôn sông Cổ Cò – phối cảnh",
+ "cta": "Bảng giá: Zalo 0904 567 009"
+}

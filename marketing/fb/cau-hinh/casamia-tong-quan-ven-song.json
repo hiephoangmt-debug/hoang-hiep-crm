@@ -1,0 +1,85 @@
+{
+ "tag": "TỔNG QUAN · CASAMIA BALANCA",
+ "title": "CASAMIA BALANCA",
+ "sub": "Ven sông Cổ Cò, hướng vịnh Cửa Đại, Hội An",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "31,1 ha",
+   "khu đô thị"
+  ],
+  [
+   "Sổ đỏ",
+   "lâu dài"
+  ],
+  [
+   "13,86 tỷ",
+   "Park Home từ"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo chủ đầu tư Đạt Phương · Phối cảnh dự án",
+ "headline": [
+  [
+   "CASAMIA BALANCA",
+   "big",
+   0
+  ],
+  [
+   "tận mắt trước khi chọn",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Biệt thự ven sông Hội An",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "CASAMIA BALANCA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "363 sản phẩm thấp tầng",
+     "script"
+    ]
+   ],
+   "dx": 140
+  }
+ ]
+}

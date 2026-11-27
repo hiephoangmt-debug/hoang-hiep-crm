@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Sống trong công viên",
+  "5",
+  "công viên chủ đề"
+ ],
+ "question": "Casamia Balanca có tiện ích gì?",
+ "hook_bg": "/tmp/scratch/c-pickleball-cap-doi.jpg",
+ "data_title": [
+  "Casamia Balanca",
+  "TIỆN ÍCH"
+ ],
+ "rows": [
+  [
+   "5",
+   "Công viên chủ đề",
+   "Wellness, Sport, Grand Central, Floral, Nipa"
+  ],
+  [
+   "Olympic",
+   "Bể bơi tiêu chuẩn",
+   "Tại Grand Central Park"
+  ],
+  [
+   "Pickleball",
+   "Sân thể thao",
+   "Cùng sân bóng rổ"
+  ],
+  [
+   "5*",
+   "Khách sạn",
+   "Kèm bến du thuyền"
+  ],
+  [
+   "31,1 ha",
+   "Khu đô thị",
+   "363 sản phẩm thấp tầng"
+  ]
+ ],
+ "note": "Theo quy hoạch chủ đầu tư Đạt Phương. Phối cảnh dự án.",
+ "photo": "/tmp/scratch/c-yoga-bai-co.jpg",
+ "photo_caption": "Phối cảnh khu tiện ích Casamia",
+ "cta": "Tiện ích: Zalo 0904 567 009"
+}

@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Trước khi xuống cọc",
+  "6",
+  "rủi ro thật"
+ ],
+ "question": "Mua Sun Saphia cần biết gì?",
+ "hook_bg": "/tmp/scratch/saphia.jpg",
+ "data_title": [
+  "Sun Saphia",
+  "RỦI RO CẦN BIẾT"
+ ],
+ "rows": [
+  [
+   "11/2028",
+   "Bàn giao dự kiến",
+   "Đọc kỹ điều khoản phạt chậm"
+  ],
+  [
+   "50 năm",
+   "Thời hạn dự án",
+   "Đất thương mại dịch vụ"
+  ],
+  [
+   "513",
+   "Studio cùng một tòa",
+   "Cạnh tranh cho thuê mùa mưa"
+  ],
+  [
+   "5%",
+   "Cọc tối đa",
+   "Luật Kinh doanh BĐS 2023"
+  ],
+  [
+   "10–12%",
+   "Thử lãi thả nổi",
+   "Khi tính trả góp"
+  ]
+ ],
+ "note": "Theo bài phân tích hiephoangmt.com, tài liệu chủ đầu tư. Phối cảnh dự án.",
+ "photo": "/tmp/scratch/saphia.jpg",
+ "photo_caption": "Sun Saphia Residence – phối cảnh",
+ "cta": "Hỏi kỹ: Zalo 0904 567 009"
+}
