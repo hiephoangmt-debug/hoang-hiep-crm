@@ -1659,6 +1659,8 @@ if __name__ == '__main__':
     hp = ads(MAIN, home_page=True).replace(MAIN + '/ads"', MAIN + '/"').replace('ADS – ', 'Trang chủ – ')
     out['trang-chu.html'] = hp
     out['shaphia.html'] = out['trang-chu.html']
+    import tn
+    out['trai-nghiem.html'] = tn.trai_nghiem(page, mb_tuongtac)
     import slides_page
     out['trinh-chieu.html'] = slides_page.trinh_chieu(page, ORG, RES)
     out['dao-tao-sale.html'] = slides_page.dao_tao(head, header, tail, FAV, OG, LOGO)
