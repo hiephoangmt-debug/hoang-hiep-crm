@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tham quan căn hộ mẫu</title>
+<meta name="description" content="Cuộn để đi qua từng phòng của căn hộ mẫu.">
+<style>
+  :root { --bg:#0e0d0c; --fg:#f4efe8; --muted:#b9b0a3; --accent:#c8a46b; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--fg); font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+
+  /* Thanh menu trên cùng */
+  nav { position:fixed; inset:0 0 auto 0; z-index:10; display:flex; align-items:center; gap:18px;
+        padding:14px 20px; background:linear-gradient(#0009,#0000); font-size:14px; }
+  nav .logo { white-space:nowrap; font-weight:700; letter-spacing:.08em; margin-right:auto; }
+  nav a { white-space:nowrap; color:var(--muted); text-decoration:none; transition:color .2s; }
+  nav a.on, nav a:hover { color:var(--fg); }
+  nav .links { display:flex; gap:18px; }
+  @media (max-width:600px){ nav { gap:10px; } nav .logo { font-size:12px; } nav .links { gap:12px; overflow-x:auto; font-size:13px; } }
+
+  /* Khung chứa: cao nhiều màn hình, canvas dính lại khi cuộn */
+  #tour { position:relative; }
+  #stage { position:sticky; top:0; height:100vh; height:100svh; overflow:hidden; }
+  canvas { width:100%; height:100%; display:block; }
+
+  /* Chữ của từng phòng */
+  #stage::after { content:''; position:absolute; inset:auto 0 0 0; height:45%; pointer-events:none;
+                  background:linear-gradient(#0000,#000a); }
+  .caption { z-index:2; position:absolute; left:6vw; bottom:12vh; max-width:420px; opacity:0;
+             transform:translateY(20px); transition:opacity .5s, transform .5s; pointer-events:none; }
+  .caption.show { opacity:1; transform:none; }
+  .caption h2 { font-size:clamp(28px,5vw,48px); font-weight:600; }
+  .caption p { color:var(--muted); margin-top:8px; line-height:1.5; text-shadow:0 1px 8px #000; }
+  .caption b { color:var(--accent); }
+
+  #bar { position:absolute; left:0; bottom:0; height:3px; background:var(--accent); width:0; }
+  #loading { position:absolute; inset:0; display:grid; place-items:center; background:var(--bg);
+             font-size:14px; color:var(--muted); transition:opacity .6s; }
+  #hint { position:absolute; bottom:24px; right:24px; font-size:12px; color:var(--muted); }
+
+  /* Phần cuối: liên hệ */
+  #lien-he { min-height:80vh; display:grid; place-items:center; text-align:center; padding:60px 20px; }
+  #lien-he h2 { font-size:clamp(26px,4vw,40px); }
+  #lien-he p { color:var(--muted); margin:12px 0 28px; }
+  .btn { display:inline-block; padding:14px 28px; border-radius:999px; background:var(--accent);
+         color:#111; font-weight:600; text-decoration:none; margin:6px; }
+  .btn.ghost { background:none; color:var(--fg); border:1px solid #fff4; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">CĂN HỘ MẪU</span>
+  <span class="links" id="links"></span>
+</nav>
+
+<section id="tour">
+  <div id="stage">
+    <canvas id="c"></canvas>
+    <div id="captions"></div>
+    <div id="bar"></div>
+    <div id="hint">Cuộn xuống để tham quan ↓</div>
+    <div id="loading">Đang tải… <span id="pct">0</span>%</div>
+  </div>
+</section>
+
+<section id="lien-he">
+  <div>
+    <h2>Anh/chị thích căn này?</h2>
+    <p>Nhận bảng giá, chính sách và lịch xem nhà mẫu.</p>
+    <!-- ĐỔI số Zalo / link form của anh ở đây -->
+    <a class="btn" href="https://zalo.me/0900000000">Nhắn Zalo</a>
+    <a class="btn ghost" href="tel:0900000000">Gọi ngay</a>
+  </div>
+</section>
+
+<script>
+/* =================== CHỈ CẦN SỬA PHẦN NÀY =================== */
+const CONFIG = {
+  folder: 'frames/',        // thư mục chứa ảnh
+  prefix: 'f_',             // tên ảnh: f_0001.webp, f_0002.webp...
+  ext: '.webp',
+  count: 120,               // TỔNG SỐ ẢNH trong thư mục
+  screensPerRoom: 1.6,      // càng lớn thì cuộn càng chậm
+  // Mỗi phòng: tên, mô tả, và ảnh bắt đầu / kết thúc của phòng đó
+  rooms: [
+    { name:'Phòng khách', text:'Diện tích <b>32 m²</b>, trần cao 3,2 m, view sông Hàn.', from:1,  to:40 },
+    { name:'Phòng ngủ',   text:'Phòng ngủ master <b>18 m²</b>, tủ âm tường, rèm 2 lớp.', from:41, to:80 },
+    { name:'Phòng tắm',   text:'Đá marble, bồn tắm nằm, <b>8 m²</b>.',                   from:81, to:120 },
+  ],
+};
+/* ============================================================ */
+
+const canvas = document.getElementById('c'), ctx = canvas.getContext('2d');
+const tour = document.getElementById('tour');
+const imgs = [];
+let loaded = 0, current = -1;
+
+// Chiều cao vùng cuộn theo số phòng
+tour.style.height = (CONFIG.rooms.length * CONFIG.screensPerRoom * 100 + 100) + 'vh';
+
+// Tạo menu + chữ cho từng phòng
+const links = document.getElementById('links'), caps = document.getElementById('captions');
+CONFIG.rooms.forEach((r, i) => {
+  const a = document.createElement('a');
+  a.href = '#'; a.textContent = r.name;
+  a.onclick = e => { e.preventDefault(); goToFrame(r.from); };
+  links.appendChild(a); r.link = a;
+  const d = document.createElement('div');
+  d.className = 'caption'; d.innerHTML = `<h2>${r.name}</h2><p>${r.text}</p>`;
+  caps.appendChild(d); r.cap = d;
+});
+const contact = document.createElement('a');
+contact.href = '#lien-he'; contact.textContent = 'Liên hệ'; links.appendChild(contact);
+
+// Tải ảnh: ảnh đầu tiên trước, rồi các ảnh còn lại
+function src(i){ return CONFIG.folder + CONFIG.prefix + String(i).padStart(4,'0') + CONFIG.ext; }
+for (let i = 1; i <= CONFIG.count; i++) {
+  const im = new Image();
+  im.onload = () => {
+    loaded++;
+    document.getElementById('pct').textContent = Math.round(loaded / CONFIG.count * 100);
+    if (i === 1) { resize(); }
+    if (loaded >= Math.min(CONFIG.count, 20)) document.getElementById('loading').style.opacity = 0;
+  };
+  im.src = src(i);
+  imgs[i] = im;
+}
+
+// Vẽ ảnh phủ kín màn hình (giống object-fit: cover)
+function draw(i) {
+  const im = imgs[i];
+  if (!im || !im.complete || !im.naturalWidth) return;
+  const cw = canvas.width, ch = canvas.height;
+  const s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight);
+  const w = im.naturalWidth * s, h = im.naturalHeight * s;
+  ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
+}
+function resize() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = innerWidth * dpr; canvas.height = innerHeight * dpr;
+  current = -1; update();
+}
+
+// Cuộn → số thứ tự ảnh
+function progress() {
+  const max = tour.offsetHeight - innerHeight;
+  return Math.min(1, Math.max(0, -tour.getBoundingClientRect().top / max));
+}
+function update() {
+  const p = progress();
+  const i = Math.max(1, Math.min(CONFIG.count, Math.round(1 + p * (CONFIG.count - 1))));
+  if (i !== current) { current = i; draw(i); }
+  document.getElementById('bar').style.width = (p * 100) + '%';
+  document.getElementById('hint').style.opacity = p > 0.02 ? 0 : 1;
+  CONFIG.rooms.forEach(r => {
+    const on = i >= r.from && i <= r.to;
+    r.cap.classList.toggle('show', on);
+    r.link.classList.toggle('on', on);
+  });
+}
+function goToFrame(f) {
+  const max = tour.offsetHeight - innerHeight;
+  const y = tour.offsetTop + (f - 1) / (CONFIG.count - 1) * max;
+  window.scrollTo({ top: y + 2, behavior: 'smooth' });
+}
+
+let ticking = false;
+addEventListener('scroll', () => {
+  if (!ticking) { ticking = true; requestAnimationFrame(() => { update(); ticking = false; }); }
+}, { passive: true });
+addEventListener('resize', resize);
+</script>
+</body>
+</html>
