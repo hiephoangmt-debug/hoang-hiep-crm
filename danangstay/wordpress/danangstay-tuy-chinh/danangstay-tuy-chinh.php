@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.16.5
+ * * Version: 3.16.6
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2755,3 +2755,19 @@ add_action('wp_head', function () {
 }
 </style>';
 }, 127);
+
+// ===== 48. Chống tràn chữ sang phải trên điện thoại (iOS / trình duyệt trong app) =====
+add_action('wp_head', function () {
+    echo '<style id="dst-noover">
+html{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}
+html,body{max-width:100%;overflow-x:hidden}
+@media (max-width:1080px){
+.ds-art__grid,.ds-ev__grid{grid-template-columns:minmax(0,1fr)!important;width:calc(100% - 32px)!important}
+.ds-art .narrow,.ds-art .prose,.ds-art__side{min-width:0!important;max-width:100%!important}
+.ds-art .prose *{max-width:100%;overflow-wrap:break-word;word-wrap:break-word}
+.ds-art .prose table{display:block;width:100%!important;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ds-art .prose li,.ds-art .prose p{min-width:0}
+.ds-art .prose img,.ds-art .prose iframe{height:auto}
+}
+</style>';
+}, 128);
