@@ -2060,5 +2060,96 @@ HTML
 		),
 	);
 
+	/* ---------------- 27/11 – Hướng dẫn nhận mốc chỉ giới, bàn giao mặt bằng, cọc vỉa hè đất nền Hòa Xuân – Hòa Quý ---------------- */
+	$posts[] = array(
+		'slug'     => 'thu-tuc-nhan-moc-xay-dung-dat-nen-hoa-xuan',
+		'title'    => 'Thủ tục nhận mốc xây dựng đất nền Hòa Xuân – Hòa Quý 2026: hồ sơ, cọc vỉa hè 200.000 – 400.000 đ/m², 7 – 10 ngày',
+		'excerpt'  => 'Hướng dẫn chủ đất nền Hòa Xuân, Hòa Quý (Sun Group) nhận bàn giao mặt bằng, mốc chỉ giới xây dựng trước khi làm nhà: hồ sơ CCCD, sổ đỏ sao y 3 bản, 2 biểu mẫu, đặt cọc vỉa hè 200.000 – 400.000 đ/m², bàn giao trong 7 – 10 ngày làm việc và cách xin hoàn cọc.',
+		'keyword'  => 'thủ tục nhận mốc xây dựng',
+		'keywords_extra' => array( 'bàn giao mặt bằng đất nền Hòa Xuân', 'cọc vỉa hè Hòa Xuân', 'mốc chỉ giới xây dựng Hòa Quý', 'xây nhà đất nền Hòa Xuân' ),
+		'project'  => 'sun-riverpolis',
+		'schedule' => '2026-11-27 17:15',
+		'category' => 'Pháp lý nhà đất',
+		'tags'     => array( 'Hòa Xuân', 'Hòa Quý', 'Thủ tục xây nhà', 'Đất nền' ),
+		'image'    => 'plugin:img/nam-hoa-xuan/nam-hoa-xuan-flycam-8-2025-phan-lo-ven-song-ngu-hanh-son.jpg',
+		'image_alt' => 'Thủ tục nhận mốc xây dựng đất nền Hòa Xuân – Hòa Quý: khu phân lô ven sông nhìn từ trên cao (ảnh flycam thực tế)',
+		'content'  => <<<'HTML'
+<p><strong>Thủ tục nhận mốc xây dựng</strong> là bước bắt buộc trước khi chủ đất nền tại các dự án Hòa Xuân, Hòa Quý (Sun Group phát triển) khởi công làm nhà: chủ đất nộp hồ sơ, ký biên bản bàn giao mặt bằng, đặt cọc vỉa hè rồi nhận mốc chỉ giới xây dựng tại thực địa trong khoảng 7 – 10 ngày làm việc. Hướng dẫn dưới đây tổng hợp theo văn bản chủ đầu tư gửi các đơn vị bán hàng ngày 27/11/2026.</p>
+<!--hh-featured-->
+<h2>Thủ tục nhận mốc xây dựng gồm những bước nào?</h2>
+<table>
+<thead><tr><th>Bước</th><th>Chủ đất cần làm</th></tr></thead>
+<tbody>
+<tr><td>1. Chuẩn bị hồ sơ</td><td>CCCD sao y chứng thực 03 bản; sổ đỏ (hoặc hợp đồng chuyển nhượng quyền sử dụng đất) sao y chứng thực 03 bản</td></tr>
+<tr><td>2. Ký 2 biểu mẫu</td><td>Đơn đề nghị hỗ trợ xác định mốc chỉ giới xây dựng (02 bản); biên bản bàn giao mặt bằng trước khi thi công (02 bản)</td></tr>
+<tr><td>3. Đặt cọc vỉa hè</td><td>Chuyển khoản vào tài khoản công ty chủ đầu tư của đúng dự án ghi trên sổ đỏ</td></tr>
+<tr><td>4. Nhận mốc tại thực địa</td><td>Trong 7 – 10 ngày làm việc kể từ khi đăng ký đặt lịch (không tính Chủ nhật, lễ, tết)</td></tr>
+<tr><td>5. Xây nhà, hoàn cọc</td><td>Xây xong làm đơn đề nghị hoàn cọc, kèm ảnh hiện trạng vỉa hè</td></tr>
+</tbody>
+</table>
+<p>Nơi tiếp nhận hồ sơ thủ tục nhận mốc xây dựng là Văn phòng Ban quản lý dự án trên đường Ánh Đ, phường Ngũ Hành Sơn, TP Đà Nẵng – gần cầu Đồng Nò, khu ven sông Hòa Xuân – Hòa Quý.</p>
+<h2>Hồ sơ cần chuẩn bị khi làm thủ tục nhận mốc xây dựng</h2>
+<p>Bộ hồ sơ cho thủ tục nhận mốc xây dựng khá gọn, nhưng nhiều chủ đất phải đi lại hai lần vì mang bản photo thường thay vì bản sao y chứng thực. Trước khi lên văn phòng, nên chuẩn bị đủ:</p>
+<ul>
+<li><strong>Căn cước công dân</strong> của chủ đất: 03 bản sao y chứng thực. Nếu sổ đứng tên hai vợ chồng, nên mang CCCD của cả hai.</li>
+<li><strong>Sổ đỏ</strong> (Giấy chứng nhận quyền sử dụng đất) hoặc hợp đồng chuyển nhượng quyền sử dụng đất: 03 bản sao y chứng thực.</li>
+<li>Thông tin lô đất ghi đúng như trên sổ: số lô, ký hiệu khu (ví dụ lô 15 B1.80), dự án Hòa Xuân hay Hòa Quý.</li>
+</ul>
+<p>Tại bộ phận tiếp nhận, chủ đất kê khai và ký 2 biểu mẫu: đơn đề nghị hỗ trợ xác định mốc chỉ giới xây dựng và biên bản bàn giao mặt bằng trước khi thi công. Trong thủ tục nhận mốc xây dựng, biên bản này ghi nhận hiện trạng lô đất, diện tích vỉa hè trước lô và số tiền cọc vỉa hè phải nộp.</p>
+<!--hh-img:img/nam-hoa-xuan/nam-hoa-xuan-flycam-nha-pho-duong-ven-song.jpg|Nhà phố đã xây trên các lô đất nền ven sông – làm thủ tục nhận mốc xây dựng trước khi khởi công (ảnh flycam thực tế)-->
+<h2>Cọc vỉa hè trong thủ tục nhận mốc xây dựng bao nhiêu?</h2>
+<table>
+<thead><tr><th>Hiện trạng vỉa hè trước lô</th><th>Đơn giá đặt cọc</th></tr></thead>
+<tbody>
+<tr><td>Đã hoàn thiện lát gạch</td><td>400.000 đồng/m²</td></tr>
+<tr><td>Đã đổ bê tông, chưa lát gạch</td><td>200.000 đồng/m²</td></tr>
+</tbody>
+</table>
+<p>Ví dụ minh họa: lô có 20 m² vỉa hè đã lát gạch thì khoản cọc khoảng 20 × 400.000 = 8 triệu đồng; diện tích vỉa hè chính xác lấy theo biên bản bàn giao mặt bằng.</p>
+<p>Khi chuyển khoản tiền cọc trong thủ tục nhận mốc xây dựng, nội dung ghi theo cú pháp: <strong>TÊN CHỦ ĐẤT + SỐ CCCD + SỐ LÔ + TÊN DỰ ÁN</strong> (Hòa Xuân hoặc Hòa Quý, căn cứ thông tin trên sổ đỏ). Ví dụ: NGUYEN VAN A 0481880000xx LO 15 B1.80 HOA XUAN. Mỗi dự án có tài khoản nhận cọc riêng của công ty chủ đầu tư; chỉ chuyển vào đúng tài khoản ghi trên hướng dẫn chính thức hoặc do văn phòng Ban quản lý dự án cung cấp, không chuyển qua tài khoản cá nhân.</p>
+<h2>Bao lâu thì nhận mốc chỉ giới xây dựng?</h2>
+<p>Theo hướng dẫn thủ tục nhận mốc xây dựng, mặt bằng và mốc chỉ giới xây dựng được bàn giao tại thực địa trong vòng 7 – 10 ngày làm việc, tính từ lúc cán bộ phụ trách nhận đăng ký đặt lịch của chủ đất (không tính Chủ nhật, ngày lễ, tết). Nên đặt lịch nhận mốc sớm, trước khi chốt ngày khởi công với nhà thầu, để không bị dồn tiến độ.</p>
+<p>Lưu ý: thủ tục nhận mốc xây dựng chỉ xác định ranh, cốt xây dựng của lô; chủ đất vẫn cần làm hồ sơ xin giấy phép xây dựng (hoặc thông báo khởi công nếu thuộc diện miễn phép) theo quy định, có thể tra cứu và nộp trên <a href="https://dichvucong.danang.gov.vn/">Cổng dịch vụ công TP Đà Nẵng</a>.</p>
+<h2>Hoàn cọc vỉa hè – bước cuối của thủ tục nhận mốc xây dựng</h2>
+<ul>
+<li>Sau khi hoàn thành thi công, chủ đất làm <strong>đơn đề nghị hoàn trả cọc</strong>, đính kèm hình ảnh hiện trạng vỉa hè.</li>
+<li>Chủ đầu tư kiểm tra, nghiệm thu hiện trạng vỉa hè rồi làm thủ tục hoàn trả tiền cọc.</li>
+<li>Trong lúc xây, yêu cầu nhà thầu che chắn, không để vật liệu, xe cơ giới làm vỡ gạch, bó vỉa; vỉa hè hư hỏng có thể bị trừ chi phí sửa chữa khi hoàn cọc.</li>
+</ul>
+<h2>Nhận định của Hoàng Hiệp</h2>
+<p>Hiệp thấy khoản cọc vỉa hè không lớn so với chi phí xây một căn nhà phố 4 – 5 tầng, nhưng là bước nhiều chủ đất bỏ quên vì nghĩ có sổ đỏ là xây được ngay. Đi đúng thủ tục nhận mốc xây dựng giúp xây đúng ranh, đúng chỉ giới, tránh phải đập sửa và được hoàn đủ tiền cọc khi xong.</p>
+<p>Thủ tục nhận mốc xây dựng cũng là điều nên hỏi khi mua lại lô đất. Với người đang tìm mua đất nền Hòa Xuân, Hòa Quý để xây ở, các lô đã hoàn thiện vỉa hè và có hạ tầng đồng bộ thường xây nhanh hơn; nên hỏi rõ hiện trạng vỉa hè và tình trạng nhận mốc của lô trước khi đặt cọc mua.</p>
+<h2>Dự án liên quan</h2>
+<ul>
+<li><a href="/du-an/sun-riverpolis/">Sun Riverpolis</a> – khu đô thị ven sông Hòa Quý (xem thêm <a href="/sun-riverpolis-khu-do-thi-ven-song-hoa-quy/">bài giới thiệu khu đô thị ven sông Hòa Quý</a>).</li>
+<li><a href="/du-an/dat-nen-dam-sen-sun-riverpolis/">Đất nền Đầm Sen – Sun Riverpolis</a> và <a href="/du-an/dat-nen-con-dau-hoa-xuan/">đất nền Cồn Dầu – Hòa Xuân</a>.</li>
+<li><a href="/du-an/euro-village-2/">Euro Village 2</a> – khu biệt thự ven sông Hòa Xuân; xem thêm <a href="/dat-nen-hoa-xuan-2026-gia-theo-khu/">giá đất nền Hòa Xuân 2026 theo từng khu</a>.</li>
+</ul>
+<p>Cần hướng dẫn chi tiết thủ tục nhận mốc xây dựng, số tài khoản đặt cọc đúng dự án hoặc tìm lô đất nền Hòa Xuân – Hòa Quý sẵn sàng xây, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: hướng dẫn thủ tục bàn giao mốc chỉ giới xây dựng, bàn giao mặt bằng và đặt cọc vỉa hè dự án Hòa Xuân, Hòa Quý do chủ đầu tư gửi các đơn vị bán hàng (27/11/2026). Đơn giá và thời gian có thể thay đổi theo thông báo mới của chủ đầu tư.</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Thủ tục nhận mốc xây dựng đất Hòa Xuân 2026: hồ sơ, cọc',
+			'desc'      => 'Thủ tục nhận mốc xây dựng đất nền Hòa Xuân – Hòa Quý: hồ sơ CCCD, sổ đỏ sao y 3 bản, cọc vỉa hè 200.000 – 400.000 đ/m², nhận mốc trong 7 – 10 ngày.',
+			'points'    => array(
+				'Thủ tục nhận mốc xây dựng: nộp CCCD và sổ đỏ sao y chứng thực mỗi loại 03 bản, ký 2 biểu mẫu',
+				'Cọc vỉa hè khi làm thủ tục nhận mốc xây dựng: 400.000 đ/m² (đã lát gạch) hoặc 200.000 đ/m² (mới đổ bê tông)',
+				'Nhận mặt bằng, mốc chỉ giới trong 7 – 10 ngày làm việc kể từ khi đặt lịch',
+				'Xây xong làm đơn kèm ảnh hiện trạng vỉa hè để chủ đầu tư nghiệm thu, hoàn cọc',
+			),
+			'faq'       => array(
+				array( 'Thủ tục nhận mốc xây dựng đất nền Hòa Xuân cần giấy tờ gì?', 'CCCD sao y chứng thực 03 bản và sổ đỏ (hoặc hợp đồng chuyển nhượng QSDĐ) sao y chứng thực 03 bản; tại văn phòng ký thêm đơn đề nghị xác định mốc chỉ giới và biên bản bàn giao mặt bằng.' ),
+				array( 'Cọc vỉa hè Hòa Xuân, Hòa Quý bao nhiêu tiền?', '400.000 đồng/m² với vỉa hè đã lát gạch, 200.000 đồng/m² với vỉa hè mới đổ bê tông; diện tích tính theo biên bản bàn giao mặt bằng.' ),
+				array( 'Thủ tục nhận mốc xây dựng mất bao lâu?', 'Thủ tục nhận mốc xây dựng hoàn tất trong 7 – 10 ngày làm việc (không tính Chủ nhật, lễ, tết) kể từ khi đăng ký đặt lịch nhận bàn giao tại thực địa.' ),
+				array( 'Khi nào được hoàn tiền cọc vỉa hè?', 'Sau khi làm xong thủ tục nhận mốc xây dựng và xây xong nhà, chủ đất làm đơn đề nghị hoàn cọc kèm ảnh hiện trạng vỉa hè; chủ đầu tư nghiệm thu rồi hoàn tiền.' ),
+				array( 'Có cần xin giấy phép xây dựng sau khi nhận mốc không?', 'Có. Nhận mốc chỉ giới chỉ xác định ranh, cốt xây dựng; chủ đất vẫn làm hồ sơ giấy phép xây dựng hoặc thông báo khởi công theo quy định.' ),
+			),
+		),
+		'sources'  => array(
+			'https://dichvucong.danang.gov.vn/',
+		),
+	);
+
 	return $posts;
 }
