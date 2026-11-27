@@ -537,7 +537,7 @@ if ( ! $parent ) {
   <div class="container">
     <span class="eyebrow">Loại sản phẩm</span>
     <h2 class="title" id="h-lc">Các loại sản phẩm <em><?php echo $e( $short_name ); ?></em></h2>
-    <?php if ( $m( 'hh_p_unit_area' ) ) : ?><p class="lead"><?php echo $e( $m( 'hh_p_unit_area' ) ); ?>. Bấm vào ảnh để xem mặt bằng lớn.</p><?php endif; ?>
+    <?php if ( $m( 'hh_p_unit_area' ) ) : ?><p class="lead"><?php echo $e( $m( 'hh_p_unit_area' ) ); ?>.<?php echo array_filter( wp_list_pluck( $units, 'img' ) ) ? ' Bấm vào ảnh để xem mặt bằng lớn.' : ''; ?></p><?php endif; ?>
     <?php if ( $units ) : ?>
     <div class="units<?php echo count( $units ) > 4 && 0 !== count( $units ) % 3 ? ' units-c' : ''; ?>"<?php echo 4 === count( $units ) ? ' style="grid-template-columns:repeat(2,1fr)"' : ( count( $units ) < 3 ? ' style="grid-template-columns:repeat(' . count( $units ) . ',minmax(0,420px))"' : '' ); ?>>
       <?php foreach ( $units as $u ) : ?>
@@ -724,7 +724,8 @@ if ( ! $parent ) {
         <?php if ( $m( 'hh_p_legal' ) || $m( 'hh_p_ownership' ) ) : ?>
         <div class="legal-box rv"><?php if ( $m( 'hh_p_ownership' ) ) : ?><b><?php echo $e( $m( 'hh_p_ownership' ) ); ?></b><br><?php endif; ?><?php echo $e( $m( 'hh_p_legal' ) ); ?></div>
         <?php endif; ?>
-        <?php if ( $m( 'hh_p_handover_std' ) ) : ?><div class="std"><b>Tiêu chuẩn bàn giao</b><br><?php echo $e( $m( 'hh_p_handover_std' ) ); ?></div><?php endif; ?>
+        <?php $std_wide = mb_strlen( $m( 'hh_p_handover_std' ) ) > 300; // Tiêu chuẩn bàn giao dài: để hết chiều ngang dưới hai cột cho cân hai bên. ?>
+        <?php if ( $m( 'hh_p_handover_std' ) && ! $std_wide ) : ?><div class="std"><b>Tiêu chuẩn bàn giao</b><br><?php echo $e( $m( 'hh_p_handover_std' ) ); ?></div><?php endif; ?>
         <p class="note">Bản sao văn bản pháp lý: nhắn Zalo <?php echo $e( $phone ); ?> để nhận.</p>
         <?php if ( $progress && count( $progress ) < 3 ) : ?>
         <div class="vband rv" style="margin-top:18px;grid-template-columns:<?php echo 1 === count( $progress ) ? '1fr' : '1fr 1fr'; ?>"><?php foreach ( $progress as $img ) { echo $card( $img, $cap( $img ), true ); } // phpcs:ignore ?></div>
@@ -738,6 +739,7 @@ if ( ! $parent ) {
       </ol>
       <?php endif; ?>
     </div>
+    <?php if ( $std_wide ) : ?><div class="std" style="margin-top:22px"><b>Tiêu chuẩn bàn giao</b><br><?php echo $e( $m( 'hh_p_handover_std' ) ); ?></div><?php endif; ?>
     <?php if ( count( $progress ) >= 3 ) : ?>
     <div class="grid3" style="margin-top:26px"><?php foreach ( $full_rows( $progress, 3, 6 ) as $img ) { echo $card( $img, $cap( $img ) ); } // phpcs:ignore ?></div>
     <?php endif; ?>

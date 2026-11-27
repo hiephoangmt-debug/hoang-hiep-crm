@@ -288,9 +288,11 @@ add_filter(
 				'hh_p_image_links' => trim( $links . "\n" . implode( "\n", $add ) ),
 				'hh_p_unit_area'   => 'Khoảng 47 – 101 m² thông thủy (52,8 – 113,2 m² tim tường)',
 				'hh_p_unit_types'  => "Căn 1PN+ | 47,4 m² thông thủy | 1+ | Khoảng 4,13 – 4,51 tỷ\nCăn 2PN | 66,6 – 68,7 m² thông thủy | 2 | Khoảng 5,14 – 6,3 tỷ\nCăn 2PN+ | 76,2 m² thông thủy | 2+ | Khoảng 5,9 – 6,65 tỷ\nCăn 3PN | 78,7 – 79,2 m² thông thủy | 3 | Khoảng 6,68 – 8,11 tỷ\nDual Key | 101,3 m² thông thủy | 2 cửa vào riêng | Khoảng 9,43 – 10,34 tỷ",
-				'hh_p_policy'      => "Thanh toán theo tiến độ chuẩn của chủ đầu tư\nThanh toán sớm để nhận chiết khấu cao hơn\nKết hợp vay ngân hàng, có hỗ trợ lãi suất theo từng đợt chính sách\nKhách hàng là người Đà Nẵng thường có ưu đãi thêm; đặt cọc, chiết khấu và tiến độ thay đổi theo từng đợt – liên hệ Hoàng Hiệp 0904 567 009",
+				'hh_p_policy'      => "Thanh toán theo tiến độ chuẩn của chủ đầu tư\nThanh toán sớm để nhận chiết khấu cao hơn\nKết hợp vay ngân hàng, có hỗ trợ lãi suất theo từng đợt chính sách\nKhách hàng là người Đà Nẵng thường có ưu đãi thêm",
 				'hh_p_progress'    => false === strpos( $prog, '7/2025 |' ) ? str_replace( "\n8/2025 |", "\n7/2025 | Khai trương văn phòng bán hàng, căn hộ mẫu và sa bàn tại 50 Quy Mỹ\n8/2025 |", $prog ) : $prog,
 			);
+			// Bản 2.20.395 đã ghi chính sách 4 ý (ý cuối dài) lên web → thay bằng bản ngắn.
+			$p['fix_meta']['hh_p_policy'] = array_merge( (array) ( $p['fix_meta']['hh_p_policy'] ?? array() ), array( "Thanh toán theo tiến độ chuẩn của chủ đầu tư\nThanh toán sớm để nhận chiết khấu cao hơn\nKết hợp vay ngân hàng, có hỗ trợ lãi suất theo từng đợt chính sách\nKhách hàng là người Đà Nẵng thường có ưu đãi thêm; đặt cọc, chiết khấu và tiến độ thay đổi theo từng đợt – liên hệ Hoàng Hiệp 0904 567 009" ) );
 			foreach ( $upd as $k => $v ) {
 				$cur = (string) ( $p['meta'][ $k ] ?? '' );
 				if ( $cur === $v ) {

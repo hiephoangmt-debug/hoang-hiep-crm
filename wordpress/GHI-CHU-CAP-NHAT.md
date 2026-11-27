@@ -1,7 +1,12 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.55** + plugin Hoàng Hiệp CRM **2.20.395**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.56** + plugin Hoàng Hiệp CRM **2.20.396**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.396 (giao diện 2.16.56)
+
+- Trang dự án (mọi dự án): 2 ảnh tổng mặt bằng khác tỷ lệ hiện trong 2 khung bằng nhau; tiêu chuẩn bàn giao dài (> 300 ký tự) đặt hết chiều ngang dưới phần pháp lý – tiến độ cho cân hai cột; chỉ ghi "Bấm vào ảnh để xem mặt bằng lớn" khi thẻ loại căn có ảnh.
+- Masteri Rivera Danang: chính sách bán hàng 4 ý ngắn, 2 cột đều nhau.
 
 ## Có gì mới – 2.20.395 (giao diện 2.16.55)
 

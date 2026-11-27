@@ -318,6 +318,8 @@ body.admin-bar header.top{top:32px}
 .plan-mp img{max-height:min(60vh,560px)!important}
 .plan-mp .zoom{position:absolute;right:10px;bottom:10px;background:rgba(14,28,51,.82);color:#fff;font-size:13px;font-weight:600;border-radius:999px;padding:6px 12px}
 .mp-grid .plan-cap{margin:0}
+/* 2 ảnh tổng mặt bằng khác tỷ lệ: khung bằng nhau, ảnh vừa khung (không cắt) – cân hai bên */
+@media (min-width:761px){.mp-grid.mp-2 .plan-mp{display:flex;align-items:center;justify-content:center;aspect-ratio:3/2;background:#fff}.mp-grid.mp-2 .plan-mp img{width:100%;height:100%;max-height:none!important;object-fit:contain}}
 @media (max-width:760px){.mp-grid.mp-2{grid-template-columns:1fr}.plan-mp img{max-height:52vh!important}}
 /* Thanh bám đáy trên máy tính đặt bên trái – không đè nút chat "Hỏi em nhé" bên phải */
 @media (min-width:981px){.stick-cta{left:24px;right:auto;bottom:24px;max-width:440px}}
