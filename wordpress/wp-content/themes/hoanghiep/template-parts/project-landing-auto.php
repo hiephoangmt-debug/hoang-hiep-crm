@@ -70,6 +70,9 @@ $gallery   = hh_ids( 'hh_p_gallery' );
 $img_text  = static fn( $img ) => get_the_title( $img ) . ' ' . get_post_meta( $img, '_wp_attachment_image_alt', true );
 $interior  = array_values( array_filter( $gallery, static fn( $img ) => (bool) preg_match( '/căn (hộ )?mẫu|nội thất|sample|showroom|(phòng khách|phòng ngủ|phòng bếp|phòng vệ sinh|phòng tắm|logia)[^|]{0,30}bàn giao/iu', $img_text( $img ) ) ) );
 // Ảnh phối cảnh tiêu chuẩn bàn giao (VD Peninsula Private 20/11/2026): đặt tên khu là "Nội thất bàn giao".
+if ( 1 === count( $interior ) ) {
+	$interior = array(); // Chỉ 1 ảnh căn mẫu: để trong Thư viện ảnh, không dựng riêng một khu lệch nửa trang.
+}
 $int_bg    = $interior && count( array_filter( $interior, static fn( $img ) => (bool) preg_match( '/bàn giao/iu', $img_text( $img ) ) ) ) * 2 >= count( $interior );
 $gallery   = array_values( array_diff( $gallery, $interior, array( $hero ) ) );
 $floors    = hh_ids( 'hh_p_floorplans' );
@@ -536,7 +539,7 @@ if ( ! $parent ) {
     <h2 class="title" id="h-lc">Các loại sản phẩm <em><?php echo $e( $short_name ); ?></em></h2>
     <?php if ( $m( 'hh_p_unit_area' ) ) : ?><p class="lead"><?php echo $e( $m( 'hh_p_unit_area' ) ); ?>. Bấm vào ảnh để xem mặt bằng lớn.</p><?php endif; ?>
     <?php if ( $units ) : ?>
-    <div class="units"<?php echo 4 === count( $units ) ? ' style="grid-template-columns:repeat(2,1fr)"' : ( count( $units ) < 3 ? ' style="grid-template-columns:repeat(' . count( $units ) . ',minmax(0,420px))"' : '' ); ?>>
+    <div class="units<?php echo count( $units ) > 4 && 0 !== count( $units ) % 3 ? ' units-c' : ''; ?>"<?php echo 4 === count( $units ) ? ' style="grid-template-columns:repeat(2,1fr)"' : ( count( $units ) < 3 ? ' style="grid-template-columns:repeat(' . count( $units ) . ',minmax(0,420px))"' : '' ); ?>>
       <?php foreach ( $units as $u ) : ?>
       <article class="unit rv">
         <?php if ( $u['img'] ) : ?><a class="pic" href="<?php echo esc_url( $url( $u['img'], 'full' ) ); ?>"><img src="<?php echo esc_url( $url( $u['img'], 'medium_large' ) ?: $url( $u['img'], 'full' ) ); ?>" alt="<?php echo esc_attr( $alt( $u['img'] ) ); ?>" loading="lazy" decoding="async"></a><?php endif; ?>

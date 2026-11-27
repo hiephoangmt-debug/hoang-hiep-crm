@@ -260,3 +260,80 @@ add_action(
 	},
 	99
 );
+
+/*
+ * 27/11/2026 (2): mặt bằng tầng 10 – 19 tháp A, tháp B (tài liệu chủ đầu tư, 3.425 px), tổng mặt bằng có tên đường;
+ * diện tích từng loại căn theo mặt bằng chính thức; chính sách 4 ý, tiến độ thêm mốc 7/2025.
+ */
+function hh_masteri_2711b_images() {
+	$d = 'plugin:img/masteri-rivera-danang/masteri-rivera-danang-';
+	return array(
+		$d . 'mat-bang-tang-10-19-thap-a.jpg | Mặt bằng tầng 10 – 19 tháp A Masteri Rivera Danang: 16 căn/sàn gồm 1PN+, 2PN, 2PN+, 3PN, Dual Key (tài liệu chủ đầu tư Masterise Homes) | mặt bằng',
+		$d . 'mat-bang-tang-10-19-thap-b.jpg | Mặt bằng tầng 10 – 19 tháp B Masteri Rivera Danang: 16 căn/sàn gồm 1PN+, 2PN, 2PN+, 3PN, Dual Key (tài liệu chủ đầu tư Masterise Homes) | mặt bằng',
+		$d . 'tong-mat-bang-thap-a-b-duong-quy-my-nguyen-lo-trach.jpg | Tổng mặt bằng Masteri Rivera Danang: tháp A, tháp B, hồ bơi và sân vườn nội khu (tài liệu chủ đầu tư) | tổng thể',
+	);
+}
+
+add_filter(
+	'hh_project_dataset',
+	static function ( $projects ) {
+		foreach ( $projects as $i => $p ) {
+			if ( 'masteri-da-nang' !== ( $p['slug'] ?? '' ) ) {
+				continue;
+			}
+			$links = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+			$add   = array_filter( hh_masteri_2711b_images(), static fn( $l ) => false === strpos( $links, trim( explode( '|', $l )[0] ) ) );
+			$prog  = (string) ( $p['meta']['hh_p_progress'] ?? '' );
+			$upd   = array(
+				'hh_p_image_links' => trim( $links . "\n" . implode( "\n", $add ) ),
+				'hh_p_unit_area'   => 'Khoảng 47 – 101 m² thông thủy (52,8 – 113,2 m² tim tường)',
+				'hh_p_unit_types'  => "Căn 1PN+ | 47,4 m² thông thủy | 1+ | Khoảng 4,13 – 4,51 tỷ\nCăn 2PN | 66,6 – 68,7 m² thông thủy | 2 | Khoảng 5,14 – 6,3 tỷ\nCăn 2PN+ | 76,2 m² thông thủy | 2+ | Khoảng 5,9 – 6,65 tỷ\nCăn 3PN | 78,7 – 79,2 m² thông thủy | 3 | Khoảng 6,68 – 8,11 tỷ\nDual Key | 101,3 m² thông thủy | 2 cửa vào riêng | Khoảng 9,43 – 10,34 tỷ",
+				'hh_p_policy'      => "Thanh toán theo tiến độ chuẩn của chủ đầu tư\nThanh toán sớm để nhận chiết khấu cao hơn\nKết hợp vay ngân hàng, có hỗ trợ lãi suất theo từng đợt chính sách\nKhách hàng là người Đà Nẵng thường có ưu đãi thêm; đặt cọc, chiết khấu và tiến độ thay đổi theo từng đợt – liên hệ Hoàng Hiệp 0904 567 009",
+				'hh_p_progress'    => false === strpos( $prog, '7/2025 |' ) ? str_replace( "\n8/2025 |", "\n7/2025 | Khai trương văn phòng bán hàng, căn hộ mẫu và sa bàn tại 50 Quy Mỹ\n8/2025 |", $prog ) : $prog,
+			);
+			foreach ( $upd as $k => $v ) {
+				$cur = (string) ( $p['meta'][ $k ] ?? '' );
+				if ( $cur === $v ) {
+					continue;
+				}
+				if ( '' !== trim( $cur ) ) {
+					$p['fix_meta'][ $k ] = array_merge( (array) ( $p['fix_meta'][ $k ] ?? array() ), array( $cur ) );
+				}
+				$p['meta'][ $k ] = $v;
+			}
+			$projects[ $i ] = $p;
+		}
+		return $projects;
+	},
+	55
+);
+
+/** Danh sách ảnh trên web chưa có mặt bằng tầng (đợt 2): nối thêm rồi đưa vào hàng chờ tải. */
+function hh_masteri_2711b_links() {
+	if ( get_option( 'hh_masteri_img_2026_11_27b' ) ) {
+		return;
+	}
+	$post = get_page_by_path( 'masteri-da-nang', OBJECT, 'du-an' );
+	if ( ! $post ) {
+		return;
+	}
+	$cur = (string) get_post_meta( $post->ID, 'hh_p_image_links', true );
+	$add = array_filter( hh_masteri_2711b_images(), static fn( $l ) => false === strpos( $cur, trim( explode( '|', $l )[0] ) ) );
+	if ( $add ) {
+		update_post_meta( $post->ID, 'hh_p_image_links', trim( $cur . "\n" . implode( "\n", $add ) ) );
+	}
+	if ( function_exists( 'hh_img_links_queue' ) ) {
+		hh_img_links_queue( $post->ID );
+	}
+	update_option( 'hh_masteri_img_2026_11_27b', 1, false );
+}
+add_action( 'admin_init', 'hh_masteri_2711b_links' );
+add_action(
+	'init',
+	static function () {
+		if ( wp_doing_cron() && ! get_option( 'hh_masteri_img_2026_11_27b' ) ) {
+			hh_masteri_2711b_links();
+		}
+	},
+	99
+);

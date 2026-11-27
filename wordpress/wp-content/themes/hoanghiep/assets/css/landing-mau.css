@@ -103,6 +103,11 @@ section{padding:72px 0}
 .list-ok li::before{content:'✓';position:absolute;left:0;top:0;color:var(--gold);font-weight:700}
 /* Loại căn */
 .units{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+/* 5, 7, 8 thẻ: hàng cuối căn giữa cho cân hai bên */
+.units-c{display:flex;flex-wrap:wrap;justify-content:center}
+.units-c>.unit{flex:0 0 calc((100% - 32px)/3);min-width:0}
+@media (max-width:980px){.units-c>.unit{flex-basis:calc((100% - 16px)/2)}}
+@media (max-width:600px){.units-c>.unit{flex-basis:100%}}
 .unit{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
 .unit .pic{aspect-ratio:9/8;background:#f3ede3;cursor:zoom-in}
 .unit .pic img{width:100%;height:100%;object-fit:contain}
