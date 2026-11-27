@@ -739,7 +739,80 @@ if ( ! $parent ) {
       </ol>
       <?php endif; ?>
     </div>
-    <?php if ( $std_wide ) : ?><div class="std" style="margin-top:22px"><b>Tiêu chuẩn bàn giao</b><br><?php echo $e( $m( 'hh_p_handover_std' ) ); ?></div><?php endif; ?>
+    <?php
+    // Tiêu chuẩn bàn giao dài: tách theo khu ("Bếp: …", "Phòng tắm: …") thành thẻ có hình minh họa; đủ 3 khu trở lên mới dùng thẻ.
+    $std_cards = array();
+    $std_intro = '';
+    if ( $std_wide ) {
+        foreach ( preg_split( '/(?<=[.!])\s+(?=\p{Lu})/u', trim( $m( 'hh_p_handover_std' ) ) ) as $sent ) {
+            $sent = rtrim( trim( $sent ), '.' );
+            $lb   = '';
+            $body = $sent;
+            if ( preg_match( '/^([^:]{2,80}):\s*(.+)$/u', $sent, $x ) ) {
+                if ( mb_strlen( $x[1] ) <= 30 ) {
+                    list( , $lb, $body ) = $x;
+                } else {
+                    $std_intro = $x[1];
+                    $body      = $x[2];
+                }
+            }
+            $low = mb_strtolower( $lb . ' ' . $body );
+            $ic  = preg_match( '/bếp/u', $mb = mb_strtolower( $lb ) ) ? 'bep' : ( preg_match( '/tắm|vệ sinh|wc/u', $mb ) ? 'tam' : ( preg_match( '/ban công|lô gia|logia/u', $mb ) ? 'bancong' : ( preg_match( '/phòng khách|phòng ngủ/u', $low ) ? 'khach' : ( preg_match( '/smart home|nhà thông minh/u', $low ) && '' === $lb ? 'smart' : 'chung' ) ) ) );
+            if ( '' === $lb ) {
+                $lb = array( 'smart' => 'Nhà thông minh', 'khach' => 'Phòng khách, phòng ngủ', 'chung' => 'Hoàn thiện chung' )[ $ic ] ?? 'Hoàn thiện chung';
+            }
+            $items = array_values( array_filter( array_map( static fn( $t ) => hh_ucfirst( trim( $t ) ), preg_split( '/;\s*/u', $body ) ) ) );
+            if ( 1 === count( $items ) && '' !== $lb && ! in_array( $ic, array( 'smart', 'khach', 'chung' ), true ) ) {
+                $parts = preg_split( '/,\s*(?![^(]*\))/u', $items[0] ); // Tách theo dấu phẩy ngoài ngoặc: "Bếp: tủ…, mặt đá…, chậu inox".
+                if ( count( $parts ) >= 3 ) {
+                    $items = array_map( static fn( $t ) => hh_ucfirst( trim( $t ) ), $parts );
+                }
+            }
+            if ( 1 === count( $items ) && preg_match( '/^(Hệ thống Smart Home)\s+(.+)$/u', $items[0], $y ) ) {
+                $items = array( $y[1], hh_ucfirst( $y[2] ) );
+            }
+            $std_cards[] = array( 'lb' => $lb, 'ic' => $ic, 'items' => $items );
+        }
+        if ( count( $std_cards ) < 3 ) {
+            $std_cards = array();
+        }
+        // Trang EN / KO: chỉ dùng thẻ khi mọi ý đã có bản dịch, không thì giữ đoạn văn (đã dịch sẵn nguyên đoạn).
+        if ( $std_cards && function_exists( 'hh_tl' ) && hh_tl() && function_exists( 'hh_tl_text' ) ) {
+            foreach ( $std_cards as $c ) {
+                foreach ( array_merge( array( $c['lb'] ), $c['items'] ) as $t ) {
+                    if ( '' === hh_tl_text( $t ) ) {
+                        $std_cards = array();
+                        break 2;
+                    }
+                }
+            }
+        }
+    }
+    $std_svg = array(
+        'khach'   => '<path d="M5 18v-5a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v5"/><path d="M3 18h26v6H3z"/><path d="M6 24v3M26 24v3"/><path d="M9 11V8h14v3"/>',
+        'bep'     => '<path d="M4 14h24v13H4z"/><path d="M4 18h24"/><circle cx="11" cy="22.5" r="1.6"/><circle cx="21" cy="22.5" r="1.6"/><path d="M10 9c0-2 2-2 2-4M16 9c0-2 2-2 2-4M22 9c0-2 2-2 2-4"/>',
+        'tam'     => '<path d="M3 16h26v3a7 7 0 0 1-7 7H10a7 7 0 0 1-7-7z"/><path d="M7 16V7a3 3 0 0 1 6 0"/><path d="M11 26l-1 3M21 26l1 3"/><path d="M16 9l-1.5 2M19 10l-1.5 2"/>',
+        'bancong' => '<path d="M4 15h24"/><path d="M4 27h24"/><path d="M7 15v12M12 15v12M16 15v12M20 15v12M25 15v12"/><path d="M9 15V5h14v10"/><path d="M16 5v10"/>',
+        'smart'   => '<rect x="9" y="3" width="14" height="26" rx="3"/><path d="M14 25h4"/><path d="M12.5 13.5a5 5 0 0 1 7 0M14.5 16a2.2 2.2 0 0 1 3 0"/><circle cx="16" cy="18.5" r=".8"/>',
+        'chung'   => '<path d="M5 13L16 4l11 9v14H5z"/><path d="M12 27v-8h8v8"/><path d="M11 15l3 3 6-6"/>',
+    );
+    ?>
+    <?php if ( $std_cards ) : ?>
+    <div class="std-wrap rv" style="margin-top:26px">
+      <h3 class="std-h">Tiêu chuẩn bàn giao</h3>
+      <?php if ( $std_intro ) : ?><p class="note std-intro"><?php echo $e( $std_intro ); ?>.</p><?php endif; ?>
+      <div class="std-cards std-n<?php echo (int) count( $std_cards ); ?>">
+        <?php foreach ( $std_cards as $c ) : ?>
+        <div class="std-card">
+          <span class="std-ic" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><?php echo $std_svg[ $c['ic'] ]; // phpcs:ignore WordPress.Security.EscapeOutput -- SVG cố định. ?></svg></span>
+          <b><?php echo $e( $c['lb'] ); ?></b>
+          <ul><?php foreach ( $c['items'] as $it ) : ?><li><?php echo $e( $it ); ?></li><?php endforeach; ?></ul>
+        </div>
+        <?php endforeach; ?>
+      </div>
+      <p class="note">Hình minh họa mang tính tham khảo; vật liệu, thiết bị bàn giao theo hợp đồng mua bán từng căn.</p>
+    </div>
+    <?php elseif ( $std_wide ) : ?><div class="std" style="margin-top:22px"><b>Tiêu chuẩn bàn giao</b><br><?php echo $e( $m( 'hh_p_handover_std' ) ); ?></div><?php endif; ?>
     <?php if ( count( $progress ) >= 3 ) : ?>
     <div class="grid3" style="margin-top:26px"><?php foreach ( $full_rows( $progress, 3, 6 ) as $img ) { echo $card( $img, $cap( $img ) ); } // phpcs:ignore ?></div>
     <?php endif; ?>

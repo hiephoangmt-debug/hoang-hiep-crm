@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.56** + plugin Hoàng Hiệp CRM **2.20.396**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.57** + plugin Hoàng Hiệp CRM **2.20.397**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.397 (giao diện 2.16.57)
+
+- Trang dự án: tiêu chuẩn bàn giao dài tự tách theo khu (phòng khách – phòng ngủ, bếp, phòng tắm, ban công, nhà thông minh) thành thẻ có hình minh họa, gạch đầu dòng từng hạng mục; trang EN / KO dùng thẻ khi đã có bản dịch từng ý (Masteri Rivera Danang đã dịch đủ).
 
 ## Có gì mới – 2.20.396 (giao diện 2.16.56)
 
