@@ -339,3 +339,88 @@ add_action(
 	},
 	99
 );
+
+/*
+ * 27/11/2026 (3): đủ mặt bằng tầng 4 – 9, 20, 21 – 24, 25 – 29, 30 – 37 hai tháp và mặt bằng 5 loại căn
+ * theo trang sản phẩm chính thức của Masterise Homes (masterisehomes.com/masteri-rivera-danang/san-pham);
+ * diện tích theo bảng căn hộ chính thức (tim tường / thông thủy).
+ */
+function hh_masteri_2711c_images() {
+	$d   = 'plugin:img/masteri-rivera-danang/masteri-rivera-danang-';
+	$src = ' (tài liệu chủ đầu tư Masterise Homes)';
+	$out = array();
+	foreach ( array( 'a' => 'A', 'b' => 'B' ) as $k => $t ) {
+		foreach ( array( '4-9' => '4 – 9', '20' => '20', '21-24' => '21 – 24', '25-29' => '25 – 29', '30-37' => '30 – 37' ) as $f => $lb ) {
+			$out[] = $d . 'mat-bang-tang-' . $f . '-thap-' . $k . '.jpg | Mặt bằng tầng ' . $lb . ' tháp ' . $t . ' Masteri Rivera Danang' . $src . ' | mặt bằng';
+		}
+	}
+	$out[] = $d . 'mat-bang-can-1pn-plus.jpg | Mặt bằng căn 1PN+ Masteri Rivera Danang: 47,4 – 47,7 m² thông thủy' . $src . ' | layout';
+	$out[] = $d . 'mat-bang-can-2pn.jpg | Mặt bằng căn 2PN Masteri Rivera Danang: 66,5 – 68,8 m² thông thủy' . $src . ' | layout';
+	$out[] = $d . 'mat-bang-can-2pn-plus.jpg | Mặt bằng căn 2PN+ Masteri Rivera Danang: 76,2 – 76,9 m² thông thủy' . $src . ' | layout';
+	$out[] = $d . 'mat-bang-can-3pn.jpg | Mặt bằng căn 3PN Masteri Rivera Danang: 78,6 – 80,0 m² thông thủy' . $src . ' | layout';
+	$out[] = $d . 'mat-bang-can-dual-key.jpg | Mặt bằng căn Dual Key Masteri Rivera Danang: 101,2 – 102,1 m² thông thủy, 2 cửa vào riêng' . $src . ' | layout';
+	return $out;
+}
+
+add_filter(
+	'hh_project_dataset',
+	static function ( $projects ) {
+		foreach ( $projects as $i => $p ) {
+			if ( 'masteri-da-nang' !== ( $p['slug'] ?? '' ) ) {
+				continue;
+			}
+			$links = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+			$add   = array_filter( hh_masteri_2711c_images(), static fn( $l ) => false === strpos( $links, trim( explode( '|', $l )[0] ) ) );
+			$old   = array(
+				'hh_p_unit_area'  => 'Khoảng 47 – 101 m² thông thủy (52,8 – 113,2 m² tim tường)',
+				'hh_p_unit_types' => "Căn 1PN+ | 47,4 m² thông thủy | 1+ | Khoảng 4,13 – 4,51 tỷ\nCăn 2PN | 66,6 – 68,7 m² thông thủy | 2 | Khoảng 5,14 – 6,3 tỷ\nCăn 2PN+ | 76,2 m² thông thủy | 2+ | Khoảng 5,9 – 6,65 tỷ\nCăn 3PN | 78,7 – 79,2 m² thông thủy | 3 | Khoảng 6,68 – 8,11 tỷ\nDual Key | 101,3 m² thông thủy | 2 cửa vào riêng | Khoảng 9,43 – 10,34 tỷ",
+			);
+			$upd   = array(
+				'hh_p_image_links' => trim( $links . "\n" . implode( "\n", $add ) ),
+				'hh_p_unit_area'   => 'Khoảng 47 – 102 m² thông thủy (52,8 – 113,2 m² tim tường)',
+				'hh_p_unit_types'  => "Căn 1PN+ | 47,4 – 47,7 m² thông thủy | 1+ | Khoảng 4,13 – 4,51 tỷ\nCăn 2PN | 66,5 – 68,8 m² thông thủy | 2 | Khoảng 5,14 – 6,3 tỷ\nCăn 2PN+ | 76,2 – 76,9 m² thông thủy | 2+ | Khoảng 5,9 – 6,65 tỷ\nCăn 3PN | 78,6 – 80,0 m² thông thủy | 3 | Khoảng 6,68 – 8,11 tỷ\nDual Key | 101,2 – 102,1 m² thông thủy | 2 cửa vào riêng | Khoảng 9,43 – 10,34 tỷ",
+			);
+			foreach ( $upd as $k => $v ) {
+				$cur = (string) ( $p['meta'][ $k ] ?? '' );
+				if ( $cur === $v ) {
+					continue;
+				}
+				$p['fix_meta'][ $k ] = array_values( array_filter( array_merge( (array) ( $p['fix_meta'][ $k ] ?? array() ), array( $cur, $old[ $k ] ?? '' ) ) ) );
+				$p['meta'][ $k ]     = $v;
+			}
+			$projects[ $i ] = $p;
+		}
+		return $projects;
+	},
+	56
+);
+
+/** Nối mặt bằng các tầng còn lại và mặt bằng căn vào danh sách ảnh trên web rồi đưa vào hàng chờ tải. */
+function hh_masteri_2711c_links() {
+	if ( get_option( 'hh_masteri_img_2026_11_27c' ) ) {
+		return;
+	}
+	$post = get_page_by_path( 'masteri-da-nang', OBJECT, 'du-an' );
+	if ( ! $post ) {
+		return;
+	}
+	$cur = (string) get_post_meta( $post->ID, 'hh_p_image_links', true );
+	$add = array_filter( hh_masteri_2711c_images(), static fn( $l ) => false === strpos( $cur, trim( explode( '|', $l )[0] ) ) );
+	if ( $add ) {
+		update_post_meta( $post->ID, 'hh_p_image_links', trim( $cur . "\n" . implode( "\n", $add ) ) );
+	}
+	if ( function_exists( 'hh_img_links_queue' ) ) {
+		hh_img_links_queue( $post->ID );
+	}
+	update_option( 'hh_masteri_img_2026_11_27c', 1, false );
+}
+add_action( 'admin_init', 'hh_masteri_2711c_links' );
+add_action(
+	'init',
+	static function () {
+		if ( wp_doing_cron() && ! get_option( 'hh_masteri_img_2026_11_27c' ) ) {
+			hh_masteri_2711c_links();
+		}
+	},
+	99
+);

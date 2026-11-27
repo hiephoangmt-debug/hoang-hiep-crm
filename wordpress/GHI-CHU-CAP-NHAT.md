@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.58** + plugin Hoàng Hiệp CRM **2.20.398**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.58** + plugin Hoàng Hiệp CRM **2.20.399**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.399
+
+- Masteri Rivera Danang: đủ mặt bằng tầng hai tháp A, B (tầng 4 – 9, 10 – 19, 20, 21 – 24, 25 – 29, 30 – 37) và mặt bằng 5 loại căn (1PN+, 2PN, 2PN+, 3PN, Dual Key) lấy từ trang sản phẩm chính thức của Masterise Homes; diện tích thông thủy theo bảng căn hộ chính thức (1PN+ 47,4 – 47,7 m², 2PN 66,5 – 68,8 m², 2PN+ 76,2 – 76,9 m², 3PN 78,6 – 80,0 m², Dual Key 101,2 – 102,1 m²).
 
 ## Có gì mới – 2.20.398 (giao diện 2.16.58)
 
