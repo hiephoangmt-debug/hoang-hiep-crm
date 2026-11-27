@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.53** + plugin Hoàng Hiệp CRM **2.20.389**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.54** + plugin Hoàng Hiệp CRM **2.20.390**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.390 (giao diện 2.16.54)
+
+- Sun Saphia Residence: phần Hỏi đáp chia đều 2 cột (6 – 6 câu); rút gọn câu hỏi sự kiện cho 1 dòng, thêm câu "Cho thuê căn hộ có lời không?" (kèm bản dịch EN / KO).
 
 ## Có gì mới – 2.20.389
 
