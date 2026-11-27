@@ -1,0 +1,51 @@
+VIDEO VỊ TRÍ SUN SAPHIA RESIDENCE – DỰNG BẰNG AFTER EFFECTS + GEOLAYERS 3
+==========================================================================
+
+TRONG GÓI NÀY
+  SunSaphia_ViTri_GEOlayers.jsx  Script tự dựng comp 1080x1920, 30fps, 37,6 giây
+  giong-doc.wav                  Giọng đọc MiniMax (đã chuẩn âm lượng)
+  nhac-nen.wav                   Nhạc Summer Express, đã tự nhỏ đi khi có giọng
+  loi-thoai.txt                  Lời thoại
+
+CÁCH CHẠY (2 phút)
+  1. Giải nén, để 3 file .jsx + .wav CHUNG MỘT THƯ MỤC.
+  2. After Effects > File > Scripts > Run Script File… > chọn SunSaphia_ViTri_GEOlayers.jsx
+     (Nếu báo lỗi quyền: Settings > Scripting & Expressions > bật
+      "Allow Scripts to Write Files and Access Network".)
+  3. Script tạo comp "SUN SAPHIA - VI TRI" gồm:
+     - Layer dưới cùng "MAP - AP GEOLAYERS VAO DAY"  ← áp GEOlayers vào đây
+     - Layer "TOI NEN" (đen 25%) giúp chữ dễ đọc – chỉnh opacity tùy bản đồ
+     - Nhãn vàng, chip khoảng cách, số lớn, phụ đề đã có hiệu ứng bật lên
+     - Vòng định vị màu cam ở GIỮA khung
+     - 8 marker CAM 1–8 trên timeline = lúc nào camera bản đồ đi tới đâu
+     - Giọng đọc + nhạc nền
+
+DỰNG BẢN ĐỒ VỚI GEOLAYERS 3
+  - Chọn layer MAP > mở panel GEOlayers 3 > tạo Map (gợi ý: Satellite / imagery).
+  - Tìm vị trí: "Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng" rồi GHIM CHÍNH XÁC góc
+    Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận (đối chiếu Google Maps).
+  - Đặt keyframe camera theo marker:
+  CAM 1    0.0s  Toàn cảnh miền Trung Việt Nam (zoom ~6), camera từ từ tiến vào Đà Nẵng
+  CAM 2    4.2s  Dải biển Đà Nẵng, Sơn Trà → Hội An (zoom ~11). Tô sáng đường bờ biển
+  CAM 3    8.4s  Zoom vào trục Võ Nguyên Giáp – Trường Sa (zoom ~15). Tô sáng 3 tuyến đường
+  CAM 4   14.8s  Zoom sát khu đất (zoom ~17), đặt khu đất ĐÚNG GIỮA khung (vòng định vị cam nằm ở giữa). Nghiêng 3D nhẹ
+  CAM 5   18.0s  Pan về phía biển, vẽ đường đi bộ ~400 m ra bãi tắm Sơn Thủy
+  CAM 6   21.1s  Zoom out (zoom ~13) thấy Ngũ Hành Sơn + sân bay, vẽ 2 đường nối
+  CAM 7   26.1s  Zoom out (zoom ~11) thấy Hội An, vẽ đường nối
+  CAM 8   29.2s  Quay lại khu đất, xoay 3D chậm (orbit) đến hết
+  - Tô sáng đường: dùng tính năng Features/Data của GEOlayers để lấy tuyến đường
+    OSM (Võ Nguyên Giáp, Trường Sa, Nguyễn Đức Thuận) và tô viền vàng #E9B949.
+
+ĐỔI FONT
+  Mở file .jsx bằng TextEdit, sửa 2 dòng FONT_BOLD / FONT_ITALIC (tên PostScript
+  của font, ví dụ "SVN-Gilroy-Black"), rồi chạy lại. Mặc định Arial (có tiếng Việt).
+
+XUẤT VIDEO
+  Composition > Add to Render Queue > H.264 (hoặc Adobe Media Encoder) > 1080x1920.
+
+LƯU Ý
+  - Script chưa được chạy thử trên After Effects thật (chỉ kiểm tra cú pháp và
+    chạy giả lập). Nếu báo lỗi dòng nào, chụp màn hình gửi lại để sửa.
+  - Khoảng cách/thời gian di chuyển lấy theo hiephoangmt.com, là ước tính.
+  - Nhạc Summer Express là nhạc thương mại: đăng tài khoản kinh doanh có thể bị
+    tắt tiếng. Có thể tắt layer NHAC NEN và chọn nhạc Commercial trên TikTok.

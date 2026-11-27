@@ -1,0 +1,731 @@
+[
+ {
+  "id": "s1",
+  "text": "Nếu chỉ được chọn một góc biển ở Đà Nẵng, bạn sẽ chọn ở đâu?",
+  "start": 0.5,
+  "dur": 3.2914285714285714,
+  "words": [
+   {
+    "end": 0.3,
+    "start": 0.18,
+    "word": "Nếu"
+   },
+   {
+    "end": 0.5,
+    "start": 0.36,
+    "word": "chỉ"
+   },
+   {
+    "end": 0.66,
+    "start": 0.54,
+    "word": "được"
+   },
+   {
+    "end": 0.86,
+    "start": 0.7,
+    "word": "chọn"
+   },
+   {
+    "end": 1.02,
+    "start": 0.92,
+    "word": "một"
+   },
+   {
+    "end": 1.18,
+    "start": 1.06,
+    "word": "góc"
+   },
+   {
+    "end": 1.4,
+    "start": 1.24,
+    "word": "biển"
+   },
+   {
+    "end": 1.52,
+    "start": 1.48,
+    "word": "ở"
+   },
+   {
+    "end": 1.66,
+    "start": 1.58,
+    "word": "Đà"
+   },
+   {
+    "end": 1.9,
+    "start": 1.72,
+    "word": "Nẵng,"
+   },
+   {
+    "end": 2.36,
+    "start": 2.22,
+    "word": "bạn"
+   },
+   {
+    "end": 2.52,
+    "start": 2.42,
+    "word": "sẽ"
+   },
+   {
+    "end": 2.72,
+    "start": 2.58,
+    "word": "chọn"
+   },
+   {
+    "end": 2.84,
+    "start": 2.78,
+    "word": "ở"
+   },
+   {
+    "end": 3.04,
+    "start": 2.88,
+    "word": "đâu?"
+   }
+  ]
+ },
+ {
+  "id": "s2",
+  "text": "Hãy nhìn vào dải biển Đà Nẵng, chạy từ bán đảo Sơn Trà xuống tận Hội An.",
+  "start": 4.241,
+  "dur": 3.7355102040816326,
+  "words": [
+   {
+    "end": 0.26,
+    "start": 0.16,
+    "word": "Hãy"
+   },
+   {
+    "end": 0.48,
+    "start": 0.32,
+    "word": "nhìn"
+   },
+   {
+    "end": 0.66,
+    "start": 0.54,
+    "word": "vào"
+   },
+   {
+    "end": 0.82,
+    "start": 0.7,
+    "word": "dải"
+   },
+   {
+    "end": 1.0,
+    "start": 0.86,
+    "word": "biển"
+   },
+   {
+    "end": 1.12,
+    "start": 1.04,
+    "word": "Đà"
+   },
+   {
+    "end": 1.34,
+    "start": 1.18,
+    "word": "Nẵng,"
+   },
+   {
+    "end": 1.84,
+    "start": 1.68,
+    "word": "chạy"
+   },
+   {
+    "end": 1.98,
+    "start": 1.9,
+    "word": "từ"
+   },
+   {
+    "end": 2.14,
+    "start": 2.04,
+    "word": "bán"
+   },
+   {
+    "end": 2.32,
+    "start": 2.18,
+    "word": "đảo"
+   },
+   {
+    "end": 2.5,
+    "start": 2.4,
+    "word": "Sơn"
+   },
+   {
+    "end": 2.7,
+    "start": 2.54,
+    "word": "Trà"
+   },
+   {
+    "end": 2.9,
+    "start": 2.78,
+    "word": "xuống"
+   },
+   {
+    "end": 3.06,
+    "start": 2.94,
+    "word": "tận"
+   },
+   {
+    "end": 3.18,
+    "start": 3.08,
+    "word": "Hội"
+   },
+   {
+    "end": 3.44,
+    "start": 3.26,
+    "word": "An."
+   }
+  ]
+ },
+ {
+  "id": "s3",
+  "text": "Trên trục Võ Nguyên Giáp, có một khu đất nằm ở góc ba mặt đường: Võ Nguyên Giáp, Trường Sa và Nguyễn Đức Thuận.",
+  "start": 8.427,
+  "dur": 5.955918367346939,
+  "words": [
+   {
+    "end": 0.28,
+    "start": 0.12,
+    "word": "Trên"
+   },
+   {
+    "end": 0.48,
+    "start": 0.32,
+    "word": "trục"
+   },
+   {
+    "end": 0.64,
+    "start": 0.54,
+    "word": "Võ"
+   },
+   {
+    "end": 0.82,
+    "start": 0.68,
+    "word": "Nguyên"
+   },
+   {
+    "end": 1.1,
+    "start": 0.88,
+    "word": "Giáp,"
+   },
+   {
+    "end": 1.48,
+    "start": 1.4,
+    "word": "có"
+   },
+   {
+    "end": 1.64,
+    "start": 1.52,
+    "word": "một"
+   },
+   {
+    "end": 1.78,
+    "start": 1.66,
+    "word": "khu"
+   },
+   {
+    "end": 1.96,
+    "start": 1.82,
+    "word": "đất"
+   },
+   {
+    "end": 2.18,
+    "start": 2.02,
+    "word": "nằm"
+   },
+   {
+    "end": 2.32,
+    "start": 2.24,
+    "word": "ở"
+   },
+   {
+    "end": 2.5,
+    "start": 2.36,
+    "word": "góc"
+   },
+   {
+    "end": 2.64,
+    "start": 2.54,
+    "word": "ba"
+   },
+   {
+    "end": 2.82,
+    "start": 2.7,
+    "word": "mặt"
+   },
+   {
+    "end": 3.08,
+    "start": 2.88,
+    "word": "đường:"
+   },
+   {
+    "end": 3.52,
+    "start": 3.44,
+    "word": "Võ"
+   },
+   {
+    "end": 3.72,
+    "start": 3.58,
+    "word": "Nguyên"
+   },
+   {
+    "end": 4.0,
+    "start": 3.78,
+    "word": "Giáp,"
+   },
+   {
+    "end": 4.44,
+    "start": 4.26,
+    "word": "Trường"
+   },
+   {
+    "end": 4.76,
+    "start": 4.54,
+    "word": "Sa"
+   },
+   {
+    "end": 5.1,
+    "start": 5.02,
+    "word": "và"
+   },
+   {
+    "end": 5.3,
+    "start": 5.16,
+    "word": "Nguyễn"
+   },
+   {
+    "end": 5.44,
+    "start": 5.34,
+    "word": "Đức"
+   },
+   {
+    "end": 5.7,
+    "start": 5.48,
+    "word": "Thuận."
+   }
+  ]
+ },
+ {
+  "id": "s4",
+  "text": "Đó là vị trí của Sun Saphia Residence.",
+  "start": 14.833,
+  "dur": 2.690612244897959,
+  "words": [
+   {
+    "end": 0.3,
+    "start": 0.18,
+    "word": "Đó"
+   },
+   {
+    "end": 0.44,
+    "start": 0.36,
+    "word": "là"
+   },
+   {
+    "end": 0.6,
+    "start": 0.5,
+    "word": "vị"
+   },
+   {
+    "end": 0.84,
+    "start": 0.66,
+    "word": "trí"
+   },
+   {
+    "end": 1.04,
+    "start": 0.9,
+    "word": "của"
+   },
+   {
+    "end": 1.3,
+    "start": 1.12,
+    "word": "Sun"
+   },
+   {
+    "end": 1.76,
+    "start": 1.36,
+    "word": "Saphia"
+   },
+   {
+    "end": 2.38,
+    "start": 1.84,
+    "word": "Residence."
+   }
+  ]
+ },
+ {
+  "id": "s5",
+  "text": "Đi bộ khoảng bốn trăm mét là chạm bãi tắm Sơn Thủy.",
+  "start": 17.973,
+  "dur": 2.690612244897959,
+  "words": [
+   {
+    "end": 0.26,
+    "start": 0.18,
+    "word": "Đi"
+   },
+   {
+    "end": 0.44,
+    "start": 0.32,
+    "word": "bộ"
+   },
+   {
+    "end": 0.68,
+    "start": 0.48,
+    "word": "khoảng"
+   },
+   {
+    "end": 0.9,
+    "start": 0.76,
+    "word": "bốn"
+   },
+   {
+    "end": 1.08,
+    "start": 0.94,
+    "word": "trăm"
+   },
+   {
+    "end": 1.3,
+    "start": 1.12,
+    "word": "mét"
+   },
+   {
+    "end": 1.5,
+    "start": 1.38,
+    "word": "là"
+   },
+   {
+    "end": 1.7,
+    "start": 1.54,
+    "word": "chạm"
+   },
+   {
+    "end": 1.84,
+    "start": 1.74,
+    "word": "bãi"
+   },
+   {
+    "end": 2.02,
+    "start": 1.88,
+    "word": "tắm"
+   },
+   {
+    "end": 2.2,
+    "start": 2.08,
+    "word": "Sơn"
+   },
+   {
+    "end": 2.42,
+    "start": 2.24,
+    "word": "Thủy."
+   }
+  ]
+ },
+ {
+  "id": "s6",
+  "text": "Năm đến mười phút tới Ngũ Hành Sơn. Mười đến mười lăm phút ra sân bay quốc tế.",
+  "start": 21.114,
+  "dur": 4.493061224489796,
+  "words": [
+   {
+    "end": 0.32,
+    "start": 0.18,
+    "word": "Năm"
+   },
+   {
+    "end": 0.52,
+    "start": 0.38,
+    "word": "đến"
+   },
+   {
+    "end": 0.72,
+    "start": 0.58,
+    "word": "mười"
+   },
+   {
+    "end": 0.94,
+    "start": 0.78,
+    "word": "phút"
+   },
+   {
+    "end": 1.14,
+    "start": 0.98,
+    "word": "tới"
+   },
+   {
+    "end": 1.3,
+    "start": 1.18,
+    "word": "Ngũ"
+   },
+   {
+    "end": 1.46,
+    "start": 1.34,
+    "word": "Hành"
+   },
+   {
+    "end": 1.78,
+    "start": 1.56,
+    "word": "Sơn."
+   },
+   {
+    "end": 2.54,
+    "start": 2.4,
+    "word": "Mười"
+   },
+   {
+    "end": 2.72,
+    "start": 2.6,
+    "word": "đến"
+   },
+   {
+    "end": 2.88,
+    "start": 2.76,
+    "word": "mười"
+   },
+   {
+    "end": 3.04,
+    "start": 2.92,
+    "word": "lăm"
+   },
+   {
+    "end": 3.22,
+    "start": 3.08,
+    "word": "phút"
+   },
+   {
+    "end": 3.38,
+    "start": 3.26,
+    "word": "ra"
+   },
+   {
+    "end": 3.56,
+    "start": 3.44,
+    "word": "sân"
+   },
+   {
+    "end": 3.72,
+    "start": 3.6,
+    "word": "bay"
+   },
+   {
+    "end": 3.92,
+    "start": 3.78,
+    "word": "quốc"
+   },
+   {
+    "end": 4.18,
+    "start": 3.98,
+    "word": "tế."
+   }
+  ]
+ },
+ {
+  "id": "s7",
+  "text": "Và chỉ khoảng ba mươi phút là tới phố cổ Hội An.",
+  "start": 26.057,
+  "dur": 2.690612244897959,
+  "words": [
+   {
+    "end": 0.26,
+    "start": 0.18,
+    "word": "Và"
+   },
+   {
+    "end": 0.46,
+    "start": 0.32,
+    "word": "chỉ"
+   },
+   {
+    "end": 0.7,
+    "start": 0.48,
+    "word": "khoảng"
+   },
+   {
+    "end": 0.86,
+    "start": 0.76,
+    "word": "ba"
+   },
+   {
+    "end": 1.06,
+    "start": 0.92,
+    "word": "mươi"
+   },
+   {
+    "end": 1.28,
+    "start": 1.1,
+    "word": "phút"
+   },
+   {
+    "end": 1.44,
+    "start": 1.34,
+    "word": "là"
+   },
+   {
+    "end": 1.68,
+    "start": 1.52,
+    "word": "tới"
+   },
+   {
+    "end": 1.86,
+    "start": 1.74,
+    "word": "phố"
+   },
+   {
+    "end": 2.04,
+    "start": 1.94,
+    "word": "cổ"
+   },
+   {
+    "end": 2.22,
+    "start": 2.08,
+    "word": "Hội"
+   },
+   {
+    "end": 2.44,
+    "start": 2.3,
+    "word": "An."
+   }
+  ]
+ },
+ {
+  "id": "s8",
+  "text": "Trước mặt là biển, sau lưng là núi, bên cạnh là sông. Nếu là bạn, bạn chọn view biển hay view núi? Bình luận cho tôi biết.",
+  "start": 29.198,
+  "dur": 7.157551020408163,
+  "words": [
+   {
+    "end": 0.26,
+    "start": 0.12,
+    "word": "Trước"
+   },
+   {
+    "end": 0.42,
+    "start": 0.32,
+    "word": "mặt"
+   },
+   {
+    "end": 0.54,
+    "start": 0.46,
+    "word": "là"
+   },
+   {
+    "end": 0.8,
+    "start": 0.6,
+    "word": "biển,"
+   },
+   {
+    "end": 1.22,
+    "start": 1.12,
+    "word": "sau"
+   },
+   {
+    "end": 1.4,
+    "start": 1.26,
+    "word": "lưng"
+   },
+   {
+    "end": 1.52,
+    "start": 1.44,
+    "word": "là"
+   },
+   {
+    "end": 1.78,
+    "start": 1.58,
+    "word": "núi,"
+   },
+   {
+    "end": 2.2,
+    "start": 2.08,
+    "word": "bên"
+   },
+   {
+    "end": 2.38,
+    "start": 2.24,
+    "word": "cạnh"
+   },
+   {
+    "end": 2.5,
+    "start": 2.4,
+    "word": "là"
+   },
+   {
+    "end": 2.8,
+    "start": 2.6,
+    "word": "sông."
+   },
+   {
+    "end": 3.3,
+    "start": 3.2,
+    "word": "Nếu"
+   },
+   {
+    "end": 3.44,
+    "start": 3.34,
+    "word": "là"
+   },
+   {
+    "end": 3.66,
+    "start": 3.5,
+    "word": "bạn,"
+   },
+   {
+    "end": 4.1,
+    "start": 4.0,
+    "word": "bạn"
+   },
+   {
+    "end": 4.3,
+    "start": 4.14,
+    "word": "chọn"
+   },
+   {
+    "end": 4.46,
+    "start": 4.34,
+    "word": "view"
+   },
+   {
+    "end": 4.68,
+    "start": 4.5,
+    "word": "biển"
+   },
+   {
+    "end": 4.84,
+    "start": 4.72,
+    "word": "hay"
+   },
+   {
+    "end": 5.02,
+    "start": 4.9,
+    "word": "view"
+   },
+   {
+    "end": 5.28,
+    "start": 5.08,
+    "word": "núi?"
+   },
+   {
+    "end": 6.24,
+    "start": 6.12,
+    "word": "Bình"
+   },
+   {
+    "end": 6.42,
+    "start": 6.28,
+    "word": "luận"
+   },
+   {
+    "end": 6.56,
+    "start": 6.44,
+    "word": "cho"
+   },
+   {
+    "end": 6.68,
+    "start": 6.58,
+    "word": "tôi"
+   },
+   {
+    "end": 6.9,
+    "start": 6.72,
+    "word": "biết."
+   }
+  ]
+ }
+]
