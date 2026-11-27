@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.54** + plugin Hoàng Hiệp CRM **2.20.392**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.54** + plugin Hoàng Hiệp CRM **2.20.393**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.393
+
+- Masteri Rivera Danang: nhãn đầu trang ghi "bàn giao ngày 29/11/2026" (trước bị lặp chữ "bàn giao lễ bàn giao").
 
 ## Có gì mới – 2.20.392
 
