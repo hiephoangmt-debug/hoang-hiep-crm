@@ -230,3 +230,5 @@
 | CHỜ | Sun | 28/11 | (bài web 27/11 13:30) Cho thuê Sun Saphia mùa thấp điểm | cho-thue-sun-saphia-residence-mua-thap-diem (chờ) |
 | CHỜ | Sun | 28/11 | (bài web 27/11 18:00) Tiền điện căn hộ Sun Saphia | tien-dien-can-ho-sun-saphia-residence (chờ) |
 | CHỜ | Sun | 28/11 | (bài web 27/11 20:30) Có nên mua Spana Tower | co-nen-mua-spana-tower (chờ) |
+| 27/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: Duyệt tái định cư Thăng Phú – đường sắt tốc độ cao (+0 tin ở bình luận) | /tai-dinh-cu-thang-phu-duong-sat-toc-do-cao/ |
+| CHỜ | Sun | 28/11 | (bài web 27/11 09:30, dự án Sun Group Hòa Xuân → trang Sun) Có nên mua Euro Village 2 | co-nen-mua-euro-village-2-hoa-xuan (chờ) |
