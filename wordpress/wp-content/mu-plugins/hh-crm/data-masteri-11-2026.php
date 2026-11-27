@@ -135,6 +135,14 @@ add_filter(
 					$links[] = trim( $line );
 				}
 			}
+			// Giá trị đang có trên web = danh sách ảnh trước đây + 3 ảnh web cũ nối thêm (bo-sung-anh-11-2026.json bản trước) → ghi vào fix_meta để được thay.
+			$cur_links = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+			$was_json  = array(
+				'plugin:img/masteri-rivera-danang/masteri-rivera-danang-hai-toa-thap.jpg | Hai tòa tháp 39 tầng Masteri Rivera Danang với 1.112 căn hộ, phối cảnh dự án | thư viện',
+				'plugin:img/masteri-rivera-danang/masteri-rivera-danang-mat-bang-tong-the-tien-ich.jpg | Mặt bằng tổng thể và tiện ích Masteri Rivera Danang: bể bơi resort, sân pickleball, vườn trên mây, tiện ích trong nhà tầng 1 – 3 | tổng thể',
+				'plugin:img/masteri-rivera-danang/masteri-rivera-danang-so-do-vi-tri.jpg | Sơ đồ vị trí Masteri Rivera Danang gần đường 2 Tháng 9 bên sông Hàn, kết nối sân bay và biển | thư viện',
+			);
+			$p['fix_meta']['hh_p_image_links'] = array_merge( (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() ), array( implode( "\n", array_merge( array_filter( array_map( 'trim', explode( "\n", $cur_links ) ) ), $was_json ) ) ) );
 			$upd = array(
 				'hh_p_image_links'   => implode( "\n", array_merge( $links, hh_masteri_2711_images() ) ),
 				'hh_p_highlights'    => "Dự án căn hộ đầu tiên của Masterise Homes tại Đà Nẵng\n2 tháp A – B cao 39 tầng, gần 1.200 căn, nhìn ra sông Cẩm Lệ khu Hòa Cường Nam\nCạnh Cung thể thao Tiên Sơn, 3 mặt tiền Quy Mỹ – Nguyễn An Ninh – Nguyễn Lộ Trạch\n1 phút tới Lotte Mart, 10 phút ra biển Mỹ Khê, 15 phút tới sân bay\n31 tiện ích nội khu từ tầng 1 đến tầng 4\nCất nóc 12/2025, lễ bàn giao căn hộ ngày 29/11/2026\nSở hữu lâu dài cho người Việt Nam",
@@ -197,6 +205,21 @@ function hh_masteri_2711_cleanup() {
 	if ( ! $post || ! function_exists( 'hh_img_link_key' ) ) {
 		return;
 	}
+	// Danh sách link ảnh trên web chưa có ảnh mới (giá trị trên web khác bản cũ đã biết): thay trực tiếp rồi đưa vào hàng chờ tải.
+	$cur = (string) get_post_meta( $post->ID, 'hh_p_image_links', true );
+	if ( false === strpos( $cur, 'phoi-canh-tren-cao-song-cam-le' ) ) {
+		$keep = array();
+		foreach ( explode( "\n", $cur ) as $line ) {
+			if ( '' !== trim( $line ) && ! in_array( trim( explode( '|', $line )[0] ), HH_MASTERI_2711_OLD_IMAGES, true ) ) {
+				$keep[] = trim( $line );
+			}
+		}
+		update_post_meta( $post->ID, 'hh_p_image_links', implode( "\n", array_merge( $keep, hh_masteri_2711_images() ) ) );
+		if ( function_exists( 'hh_img_links_queue' ) ) {
+			hh_img_links_queue( $post->ID );
+		}
+		return;
+	}
 	$done = (array) get_post_meta( $post->ID, '_hh_img_links', true );
 	foreach ( hh_masteri_2711_images() as $line ) {
 		$key = hh_img_link_key( trim( explode( '|', $line )[0] ) );
@@ -227,3 +250,12 @@ function hh_masteri_2711_cleanup() {
 }
 add_action( 'admin_init', 'hh_masteri_2711_cleanup' );
 add_action( 'hh_img_links_cron', 'hh_masteri_2711_cleanup', 20 );
+add_action(
+	'init',
+	static function () {
+		if ( wp_doing_cron() && ! get_option( 'hh_masteri_img_2026_11_27' ) ) {
+			hh_masteri_2711_cleanup();
+		}
+	},
+	99
+);
