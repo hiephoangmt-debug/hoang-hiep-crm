@@ -1,0 +1,85 @@
+{
+ "tag": "SO SÁNH · VINHOMES HẢI VÂN BAY",
+ "title": "CASAMIA BALANCA",
+ "sub": "Chọn theo mục đích: ở sớm hay khai thác du lịch",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "5,3 tỷ",
+   "liền kề Bạch Vân từ"
+  ],
+  [
+   "7,6 tỷ",
+   "liền kề Đảo Ngọc từ"
+  ],
+  [
+   "Q4/2026",
+   "Bạch Vân bàn giao"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo tài liệu chủ đầu tư, giỏ hàng 9–10/2026 · Phối cảnh dự án",
+ "headline": [
+  [
+   "CASAMIA BALANCA",
+   "big",
+   0
+  ],
+  [
+   "tận mắt trước khi chọn",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Chọn phân khu nào?",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "ĐẢO NGỌC",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "hay Bạch Vân",
+     "script"
+    ]
+   ],
+   "dx": 260
+  }
+ ]
+}
