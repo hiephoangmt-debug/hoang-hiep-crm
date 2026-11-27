@@ -245,12 +245,19 @@ section{padding:52px 0}
 .std-cards.std-n5>.std-card:first-child{grid-column:span 2}
 .std-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
 .std-card b{display:block;font-size:17px;margin:10px 0 8px;color:var(--navy)}
-.std-card ul{margin:0;padding:0 0 0 18px;font-size:15px;line-height:1.6;color:var(--ink,#1d2433)}
-.std-card li{margin:0 0 4px}
+.std-card ol{margin:0;padding:0;list-style:none;counter-reset:bg;font-size:15px;line-height:1.55;color:var(--ink)}
+.std-card ol li{counter-increment:bg;position:relative;padding-left:30px;margin:0 0 7px}
+.std-card ol li::before{content:counter(bg);position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:50%;background:var(--gold);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.std-card.has-art{padding:0;overflow:hidden}
+.std-card.has-art .std-txt{padding:4px 22px 18px}
+.std-pic{background:var(--sand);border-bottom:1px solid var(--line)}
+.std-art{display:block;width:100%;height:auto}
 .std-ic{display:inline-flex;width:52px;height:52px;border-radius:14px;align-items:center;justify-content:center;background:rgba(242,85,29,.1);color:var(--gold)}
 .std-ic svg{width:30px;height:30px}
-.std-cards.std-n5>.std-card:first-child ul{columns:2;column-gap:28px}
-@media (max-width:980px){.std-cards{grid-template-columns:repeat(2,1fr)}.std-cards.std-n5>.std-card:first-child ul{columns:1}}
+.std-cards.std-n5>.std-card.has-art:first-child{display:grid;grid-template-columns:1.1fr 1fr;align-items:center}
+.std-cards.std-n5>.std-card.has-art:first-child .std-pic{border-bottom:0;border-right:1px solid var(--line);height:100%;display:flex;align-items:center}
+.std-cards.std-n5>.std-card.has-art:first-child .std-txt{padding:18px 22px}
+@media (max-width:980px){.std-cards{grid-template-columns:repeat(2,1fr)}.std-cards.std-n5>.std-card.has-art:first-child{grid-template-columns:1fr}.std-cards.std-n5>.std-card.has-art:first-child .std-pic{border-right:0;border-bottom:1px solid var(--line)}}
 @media (max-width:600px){.std-cards,.std-cards.std-n4{grid-template-columns:1fr}.std-cards.std-n5>.std-card:first-child{grid-column:auto}}
 body.admin-bar header.top{top:32px}
 @media (max-width:782px){body.admin-bar header.top{top:46px}}

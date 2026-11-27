@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.57** + plugin Hoàng Hiệp CRM **2.20.397**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.58** + plugin Hoàng Hiệp CRM **2.20.398**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.398 (giao diện 2.16.58)
+
+- Tiêu chuẩn bàn giao: mỗi khu có hình vẽ minh họa (phòng khách – phòng ngủ, bếp, phòng tắm, ban công, nhà thông minh) với chấm số đặt đúng vị trí từng hạng mục (sàn gỗ, cửa kính, điều hòa âm trần, tủ bếp, mặt đá, bếp từ, lavabo, vách kính tắm, lan can, chỗ máy giặt…), danh sách đánh số khớp với hình; ghi rõ là hình vẽ minh họa, không phải ảnh căn hộ thực tế.
 
 ## Có gì mới – 2.20.397 (giao diện 2.16.57)
 

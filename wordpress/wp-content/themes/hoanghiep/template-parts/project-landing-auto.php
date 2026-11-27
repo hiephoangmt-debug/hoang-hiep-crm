@@ -803,14 +803,17 @@ if ( ! $parent ) {
       <?php if ( $std_intro ) : ?><p class="note std-intro"><?php echo $e( $std_intro ); ?>.</p><?php endif; ?>
       <div class="std-cards std-n<?php echo (int) count( $std_cards ); ?>">
         <?php foreach ( $std_cards as $c ) : ?>
-        <div class="std-card">
-          <span class="std-ic" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><?php echo $std_svg[ $c['ic'] ]; // phpcs:ignore WordPress.Security.EscapeOutput -- SVG cố định. ?></svg></span>
+        <?php $art = function_exists( 'hoanghiep_bg_illus' ) ? hoanghiep_bg_illus( $c['ic'], $c['items'] )['svg'] : ''; ?>
+        <div class="std-card<?php echo $art ? ' has-art' : ''; ?>">
+          <?php if ( $art ) : ?><div class="std-pic"><?php echo $art; // phpcs:ignore WordPress.Security.EscapeOutput -- SVG cố định trong theme. ?></div><?php else : ?><span class="std-ic" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><?php echo $std_svg[ $c['ic'] ]; // phpcs:ignore WordPress.Security.EscapeOutput -- SVG cố định. ?></svg></span><?php endif; ?>
+          <div class="std-txt">
           <b><?php echo $e( $c['lb'] ); ?></b>
-          <ul><?php foreach ( $c['items'] as $it ) : ?><li><?php echo $e( $it ); ?></li><?php endforeach; ?></ul>
+          <ol><?php foreach ( $c['items'] as $it ) : ?><li><?php echo $e( $it ); ?></li><?php endforeach; ?></ol>
+          </div>
         </div>
         <?php endforeach; ?>
       </div>
-      <p class="note">Hình minh họa mang tính tham khảo; vật liệu, thiết bị bàn giao theo hợp đồng mua bán từng căn.</p>
+      <p class="note">Hình vẽ minh họa vị trí từng hạng mục, không phải ảnh căn hộ thực tế; vật liệu, thiết bị bàn giao theo hợp đồng mua bán từng căn.</p>
     </div>
     <?php elseif ( $std_wide ) : ?><div class="std" style="margin-top:22px"><b>Tiêu chuẩn bàn giao</b><br><?php echo $e( $m( 'hh_p_handover_std' ) ); ?></div><?php endif; ?>
     <?php if ( count( $progress ) >= 3 ) : ?>
