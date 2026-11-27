@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.54** + plugin Hoàng Hiệp CRM **2.20.390**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.54** + plugin Hoàng Hiệp CRM **2.20.391**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.391
+
+- Masteri Rivera Danang (/du-an/masteri-da-nang/): 11 ảnh gốc chủ đầu tư độ nét cao (phối cảnh trên cao làm ảnh đại diện, 2 tháp A – B nhìn từ sông, bản đồ vị trí, tổng mặt bằng, sa bàn – căn hộ mẫu, 6 ảnh tiện ích); gỡ ảnh poster và ảnh hồ bơi mờ cũ. Kết nối 1 / 5 / 10 / 15 / 30 phút và 31 tiện ích theo tầng đúng tài liệu Masterise Homes; thêm 8 câu hỏi đáp; bài giới thiệu thêm phần kết nối, 31 tiện ích, về Masterise Homes và mốc lễ bàn giao 29/11/2026.
 
 ## Có gì mới – 2.20.390 (giao diện 2.16.54)
 
