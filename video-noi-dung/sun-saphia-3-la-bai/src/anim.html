@@ -1,0 +1,215 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+:root{--gold:#E9B949;--gold2:#C8902A;--navy:#0A1424;--ink:#0B0F17;}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--ink);font-family:Inter,sans-serif;color:#fff}
+#stage{position:absolute;inset:0;overflow:hidden}
+.layer{position:absolute;inset:0;opacity:0}
+.bg{position:absolute;inset:-6%;background-size:cover;background-position:center}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,10,18,.55) 0%,rgba(6,10,18,.15) 35%,rgba(6,10,18,.35) 65%,rgba(6,10,18,.92) 100%)}
+.el{position:absolute;opacity:0;will-change:transform,opacity}
+.tag{background:linear-gradient(180deg,#F6CF6A,#D9A13A);color:#1a1205;font-weight:900;font-size:44px;padding:14px 34px;border-radius:10px;
+     box-shadow:0 8px 30px rgba(0,0,0,.45),inset 0 -3px 0 rgba(0,0,0,.18);letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.tag.sm{font-size:32px;padding:10px 24px}
+.chip{background:rgba(10,20,36,.86);border:2px solid var(--gold);color:#fff;font-weight:800;font-size:36px;padding:14px 26px;border-radius:12px;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.chip b{color:var(--gold)}
+.big{font-weight:900;color:var(--gold);text-shadow:0 6px 30px rgba(0,0,0,.6);letter-spacing:-2px}
+.title{font-weight:900;font-style:italic;text-transform:uppercase;text-shadow:0 4px 20px rgba(0,0,0,.7)}
+.src{position:absolute;left:40px;bottom:36px;font-size:22px;color:rgba(255,255,255,.6);opacity:0}
+.cap{position:absolute;left:60px;right:60px;top:1500px;text-align:center;font-weight:900;font-style:italic;font-size:50px;line-height:1.2;
+     text-transform:uppercase;color:#fff;text-shadow:0 3px 0 #000,0 0 18px rgba(0,0,0,.9)}
+.cap .w{opacity:.55}.cap .w.on{opacity:1;color:var(--gold)}
+.card{width:230px;height:330px;border-radius:18px;perspective:900px}
+.card .in{position:absolute;inset:0;transform-style:preserve-3d}
+.card .f,.card .b{position:absolute;inset:0;border-radius:18px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.card .b{background:repeating-linear-gradient(45deg,#13233f 0 14px,#0e1b31 14px 28px);border:5px solid var(--gold);font-size:120px;font-weight:900;color:var(--gold)}
+.card .f{background:#fff;color:#0c1a33;transform:rotateY(180deg);border:5px solid var(--gold);font-weight:900;text-align:center}
+.card .f .n{font-size:26px;color:#8a6a1e;letter-spacing:2px}
+.card .f .i{font-size:96px;line-height:1.2}
+.card .f .t{font-size:38px;text-transform:uppercase}
+.mini{position:absolute;top:70px;right:40px;display:flex;gap:12px;opacity:0}
+.mini div{width:62px;height:86px;border-radius:8px;border:3px solid var(--gold);background:#13233f;color:var(--gold);font-weight:900;font-size:40px;display:flex;align-items:center;justify-content:center}
+.mini div.on{background:#fff;color:#0c1a33;font-size:38px}
+#waffle{display:grid;grid-template-columns:repeat(23,1fr);gap:7px;width:860px}
+#waffle i{display:block;width:30px;height:30px;border-radius:5px;background:#2a3a58}
+#waffle i.g{background:var(--gold)}
+.road{position:absolute;left:90px;right:90px;top:1050px;height:14px;background:linear-gradient(90deg,var(--gold),#f3d48a);border-radius:7px;box-shadow:0 0 30px rgba(233,185,73,.5)}
+.stop{position:absolute;width:300px;text-align:center;opacity:0}
+.stop .dot{width:54px;height:54px;border-radius:50%;background:var(--navy);border:8px solid var(--gold);margin:0 auto 22px}
+.stop .d{font-size:44px;font-weight:900;color:var(--gold)}
+.stop .l{font-size:32px;font-weight:700;margin-top:8px;line-height:1.25}
+.stamp{white-space:nowrap;border:10px solid #E5484D;color:#E5484D;font-weight:900;font-size:80px;padding:10px 40px;border-radius:18px;transform:rotate(-8deg);letter-spacing:4px;background:rgba(0,0,0,.25)}
+.follow{background:#FE2C55;color:#fff;font-weight:900;font-size:46px;padding:20px 54px;border-radius:60px;box-shadow:0 10px 40px rgba(254,44,85,.5)}
+.ring{width:120px;height:120px;border-radius:50%;border:8px solid #FF7A1A;box-shadow:0 0 40px #FF7A1A}
+</style></head>
+<body><div id="stage"></div><script src="timing.js"></script>
+<script>
+const T = window.TIMING; // injected: [{id,start,dur,words:[{start,end,word}]}]
+const S = {}; T.forEach(s=>S[s.id]=s);
+const total = T[T.length-1].start + T[T.length-1].dur + 1.2;
+window.TOTAL = total;
+function w(id, k){ // absolute time of k-th word (0-based) or word match
+  const s=S[id]; if(typeof k==='string'){const i=s.words.findIndex(x=>x.word.toLowerCase().replace(/[^\p{L}\p{N}]/gu,'').startsWith(k)); k=i<0?0:i;}
+  return s.start + (s.words[Math.min(k,s.words.length-1)]||{start:0}).start;
+}
+const stage=document.getElementById('stage');
+const ease=x=>x<0?0:x>1?1:1-Math.pow(1-x,3);
+const back=x=>{if(x<=0)return 0;if(x>=1)return 1;const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const els=[]; // {node,t0,t1,anim}
+function add(html, css, t0, t1, anim='up'){
+  const d=document.createElement('div'); d.className='el'; d.innerHTML=html; Object.assign(d.style,css); stage.appendChild(d);
+  els.push({node:d,t0,t1,anim}); return d;
+}
+function layer(img, t0, t1, opts={}){
+  const L=document.createElement('div'); L.className='layer';
+  L.innerHTML=`<div class="bg" style="background-image:url(img/${img});${opts.filter?'filter:'+opts.filter:''}"></div><div class="shade"></div>`;
+  stage.appendChild(L); els.push({node:L,t0,t1,anim:'bg',opts}); return L;
+}
+function src(text,t0,t1){const d=document.createElement('div');d.className='src';d.textContent=text;stage.appendChild(d);els.push({node:d,t0,t1,anim:'fade'});}
+const st=id=>S[id].start, en=id=>S[id].start+S[id].dur+0.35;
+
+// ---------- SCENES ----------
+// 1 hook
+layer('hero-bien.png', 0, en('hook'), {z0:1.0,z1:1.12});
+add('<div class="tag sm">Đà Nẵng · 9 tháng 2026</div>',{left:'50%',top:'620px',transform:'translateX(-50%)'}, .2, en('hook'));
+const cnt=add('<div class="big" style="font-size:220px">0</div>',{left:'0',right:'0',top:'700px',textAlign:'center'}, .3, en('hook'),'pop');
+add('<div class="title" style="font-size:60px">triệu lượt khách lưu trú</div>',{left:0,right:0,top:'960px',textAlign:'center'}, w('hook','triệu'), en('hook'));
+src('Nguồn: VietnamPlus, 10/2026', .3, en('hook'));
+// 2 hook2 – map
+layer('so-do-vi-tri.png', st('hook2'), en('hook2'), {z0:1.0,z1:1.55,ox:'54%',oy:'58%'});
+add('<div class="tag">Dải biển Võ Nguyên Giáp</div>',{left:'50%',top:'300px',transform:'translateX(-50%)'}, st('hook2')+.2, en('hook2'));
+add('<div class="chip">Quỹ đất sát biển <b>ngày càng hiếm</b></div>',{left:'50%',top:'420px',transform:'translateX(-50%)'}, w('hook2','quỹ'), en('hook2'));
+add('<div class="card"><div class="in" style="transform:rotateY(0)"><div class="b">?</div></div></div>',{left:'50%',top:'1050px',marginLeft:'-115px'}, w('hook2','quân'), en('hook2'),'drop');
+src('Sơ đồ minh họa, không theo tỷ lệ', st('hook2'), en('hook2'));
+// 3 title + 3 cards
+layer('thap-bien-hoang-hon-2.png', st('title'), en('title'), {z0:1.05,z1:1.15});
+add('<div class="title big" style="font-size:96px;font-style:italic;letter-spacing:0">SUN SAPHIA<br>RESIDENCE</div>',{left:0,right:0,top:'420px',textAlign:'center'}, st('title')+.1, en('title'),'pop');
+add('<div class="tag sm">Căn hộ biển đầu tiên của Sun Group tại Đà Nẵng</div>',{left:'50%',top:'690px',transform:'translateX(-50%)'}, st('title')+.6, en('title'));
+[0,1,2].forEach(i=>add(`<div class="card"><div class="in"><div class="b">${i+1}</div></div></div>`,{left:(130+i*290)+'px',top:'1000px'}, w('title','lật')+i*.18, en('title'),'drop'));
+// mini tracker (from card1 to card3 end)
+const mini=document.createElement('div'); mini.className='mini'; mini.innerHTML='<div>1</div><div>2</div><div>3</div>'; stage.appendChild(mini);
+els.push({node:mini,t0:st('card1'),t1:en('card3'),anim:'fade'});
+// 4 card1 – location
+layer('vi-tri-saphia.png', st('card1'), w('card1','phía'), {z0:1.0,z1:1.15,ox:'47%',oy:'40%'});
+layer('ba-duong-xuong-bien.png', w('card1','phía')-.3, en('card1'), {z0:1.0,z1:1.12,ox:'66%',oy:'50%'});
+const c1=add('<div class="card"><div class="in"><div class="b">1</div><div class="f"><div class="n">LÁ BÀI 1</div><div class="i"><svg width="90" height="110" viewBox="0 0 24 30"><path d="M12 0C5.4 0 0 5.3 0 11.9 0 20.8 12 30 12 30s12-9.2 12-18.1C24 5.3 18.6 0 12 0z" fill="#E5484D"/><circle cx="12" cy="12" r="4.5" fill="#fff"/></svg></div><div class="t">Vị trí</div></div></div></div>',{left:'50%',top:'330px',marginLeft:'-115px'}, st('card1'), w('card1','góc'),'flip');
+add('<div class="tag">Lá bài 1: Vị trí</div>',{left:'50%',top:'300px',transform:'translateX(-50%)'}, w('card1','góc'), en('card1'));
+add('<div class="chip">① Võ Nguyên Giáp</div>',{left:'90px',top:'1080px'}, w('card1','võ'), w('card1','phía'));
+add('<div class="chip">② Trường Sa</div>',{left:'90px',top:'1190px'}, w('card1','trường'), w('card1','phía'));
+add('<div class="chip">③ Nguyễn Đức Thuận</div>',{left:'90px',top:'1300px'}, w('card1','nguyễn'), w('card1','phía'));
+
+add('<div class="chip">Trước mặt: <b>Biển Sơn Thủy ~400 m</b></div>',{left:'50%',top:'1120px',transform:'translateX(-50%)'}, w('card1','phía'), en('card1'));
+add('<div class="chip">Sau lưng: <b>Ngũ Hành Sơn</b></div>',{left:'50%',top:'1240px',transform:'translateX(-50%)'}, w('card1','ngũ'), en('card1'));
+src('Ảnh vệ tinh minh họa · khoảng cách theo hiephoangmt.com', st('card1'), en('card1'));
+// 5 card2 – product
+layer('cdt-toa-thap-ngay.jpg', st('card2'), en('card2'), {z0:1.0,z1:1.1,oy:'30%'});
+add('<div class="card"><div class="in"><div class="b">2</div><div class="f"><div class="n">LÁ BÀI 2</div><div class="i"><svg width="90" height="110" viewBox="0 0 24 30"><rect x="5" y="2" width="14" height="28" rx="1" fill="#0c1a33"/><rect x="8" y="5" width="3" height="2.4" fill="#E9B949"/><rect x="13" y="5" width="3" height="2.4" fill="#E9B949"/><rect x="8" y="9" width="3" height="2.4" fill="#E9B949"/><rect x="13" y="9" width="3" height="2.4" fill="#E9B949"/><rect x="8" y="13" width="3" height="2.4" fill="#E9B949"/><rect x="13" y="13" width="3" height="2.4" fill="#E9B949"/><rect x="8" y="17" width="3" height="2.4" fill="#E9B949"/><rect x="13" y="17" width="3" height="2.4" fill="#E9B949"/><rect x="8" y="21" width="3" height="2.4" fill="#E9B949"/><rect x="13" y="21" width="3" height="2.4" fill="#E9B949"/><rect x="8" y="25" width="3" height="2.4" fill="#E9B949"/><rect x="13" y="25" width="3" height="2.4" fill="#E9B949"/></svg></div><div class="t">Sản phẩm</div></div></div></div>',{left:'50%',top:'330px',marginLeft:'-115px'}, st('card2'), w('card2','một'),'flip');
+add('<div class="tag">Lá bài 2: Sản phẩm</div>',{left:'50%',top:'300px',transform:'translateX(-50%)'}, w('card2','một'), en('card2'));
+add('<div class="chip" style="font-size:54px"><b>30</b> tầng</div>',{left:'90px',top:'700px'}, w('card2','ba'), en('card2'),'pop');
+add('<div class="chip" style="font-size:54px"><b>114</b> m</div>',{left:'90px',top:'830px'}, w('card2','cao'), en('card2'),'pop');
+add('<div class="chip" style="font-size:54px"><b>782</b> căn</div>',{left:'90px',top:'960px'}, w('card2','bảy'), en('card2'),'pop');
+src('Phối cảnh: CĐT Sun Property', st('card2'), en('card2'));
+// 6 card2b – waffle
+layer('cdt-toa-thap-dem.jpg', st('card2b'), en('card2b'), {z0:1.1,z1:1.2,filter:'brightness(.35) blur(4px)'});
+add('<div class="tag">Nhìn kỹ 782 căn</div>',{left:'50%',top:'250px',transform:'translateX(-50%)'}, st('card2b'), en('card2b'));
+let wf='<div id="waffle">'; for(let i=0;i<782;i++) wf+=`<i data-i="${i}"></i>`; wf+='</div>';
+const waf=add(wf,{left:'110px',top:'400px'}, st('card2b')+.1, en('card2b'),'fade');
+add('<div class="big" style="font-size:150px">513</div>',{left:0,right:0,top:'1640px',textAlign:'center'}, w('card2b','năm'), en('card2b'),'pop');
+add('<div class="tag sm">studio 30–31 m² · ≈ 2/3 tòa tháp</div>',{left:'50%',top:'1810px',transform:'translateX(-50%)'}, w('card2b','studio'), en('card2b'));
+src('Nguồn: hiephoangmt.com', st('card2b'), en('card2b'));
+// 7 card2c – demand
+layer('view-tang-10-ban-cong-bien.jpg', st('card2c'), en('card2c'), {z0:1.0,z1:1.12});
+add('<div class="title" style="font-size:58px">Studio nhỏ =<br>dễ cho thuê nhất</div>',{left:0,right:0,top:'360px',textAlign:'center'}, w('card2c','studio'), en('card2c'));
+add('<div class="tag sm">Khách quốc tế đến Đà Nẵng</div>',{left:'50%',top:'760px',transform:'translateX(-50%)'}, w('card2c','khách'), en('card2c'));
+add('<div class="big" style="font-size:200px">+28,7%</div>',{left:0,right:0,top:'840px',textAlign:'center'}, w('card2c','tăng'), en('card2c'),'pop');
+src('Nguồn: VietnamPlus, 9 tháng 2026 · ảnh: phối cảnh CĐT', st('card2c'), en('card2c'));
+// 8 card3 – money
+layer('tien-ich-ho-boi-1.jpg', st('card3'), en('card3'), {z0:1.0,z1:1.12,filter:'brightness(.55)'});
+add('<div class="card"><div class="in"><div class="b">3</div><div class="f"><div class="n">LÁ BÀI 3</div><div class="i"><svg width="100" height="100" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#E9B949" stroke="#8a6a1e" stroke-width="1.5"/><text x="12" y="17" text-anchor="middle" font-size="14" font-weight="900" fill="#5a3d05" font-family="Inter">₫</text></svg></div><div class="t">Tiền</div></div></div></div>',{left:'50%',top:'330px',marginLeft:'-115px'}, st('card3'), w('card3','vietcombank'),'flip');
+add('<div class="tag">Lá bài 3: Tiền</div>',{left:'50%',top:'300px',transform:'translateX(-50%)'}, w('card3','vietcombank'), en('card3'));
+add('<div class="chip">Vietcombank</div>',{left:'90px',top:'460px'}, w('card3','vietcombank'), en('card3'),'pop');
+add('<div class="chip">BIDV</div>',{left:'470px',top:'460px'}, w('card3','bidv'), en('card3'),'pop');
+add('<div class="chip">NCB</div>',{left:'700px',top:'460px'}, w('card3','ncb'), en('card3'),'pop');
+add('<div class="tag sm">Hỗ trợ lãi suất</div>',{left:'50%',top:'640px',transform:'translateX(-50%)'}, w('card3','chính'), en('card3'));
+add('<div class="big" style="font-size:170px">24 THÁNG</div>',{left:0,right:0,top:'720px',textAlign:'center'}, w('card3','hai'), en('card3'),'pop');
+add('<div class="chip" style="font-size:40px">Đặt chỗ <b>50 triệu</b> · hoàn lại nếu không mua</div>',{left:'50%',top:'1000px',transform:'translateX(-50%)'}, w('card3','đặt'), en('card3'));
+src('Theo chính sách bán hàng dự kiến · hiephoangmt.com', st('card3'), en('card3'));
+// 9 twist
+layer('cdt-dem-tren-cao-bien.jpg', st('twist'), en('twist'), {z0:1.2,z1:1.0,filter:'brightness(.3) saturate(.6)'});
+add('<div class="title" style="font-size:64px">Câu hỏi chưa ai trả lời</div>',{left:0,right:0,top:'520px',textAlign:'center'}, st('twist'), en('twist'));
+add('<div class="big" style="font-size:150px;font-style:italic">GIÁ ? ? ?</div>',{left:0,right:0,top:'640px',textAlign:'center'}, w('twist','chủ'), en('twist'),'shake');
+add('<div class="stamp">CHƯA CÔNG BỐ</div>',{left:'50%',top:'900px',marginLeft:'-360px'}, w('twist','chưa'), en('twist'),'stamp');
+// 10 road
+layer('cdt-hoang-hon-bien-tren-cao.jpg', st('road'), en('road'), {z0:1.0,z1:1.1,filter:'brightness(.35)'});
+add('<div class="tag">Lộ trình còn 3 trạm</div>',{left:'50%',top:'560px',transform:'translateX(-50%)'}, st('road'), en('road'));
+add('<div class="road"></div>',{left:0,right:0,top:0,height:'1920px'}, st('road')+.2, en('road'),'fade');
+const stops=[['trạm',0,'05/12/2026','Sự kiện<br>bán hàng'],['trạm',1,'Sắp tới','Công bố giá<br>& mở bán'],['trạm',2,'11/2028','Bàn giao<br>(dự kiến)']];
+const stopT=[];{const s=S['road'];let c=0;s.words.forEach((x,i)=>{if(x.word.toLowerCase().startsWith('trạm')){stopT.push(s.start+x.start);}});} while(stopT.length>3) stopT.shift();
+stops.forEach((s,i)=>{add(`<div class="stop" style="opacity:1;position:static"><div class="dot"></div><div class="d">${s[2]}</div><div class="l">${s[3]}</div></div>`,{left:(90+i*300)+'px',top:'1029px',width:'300px'}, stopT[i]||st('road')+i*3, en('road'),'pop');});
+const bus=add('<svg width="130" height="80" viewBox="0 0 65 40"><rect x="1" y="4" width="62" height="28" rx="6" fill="#E5484D"/><rect x="6" y="9" width="11" height="9" rx="1.5" fill="#cfe6ff"/><rect x="20" y="9" width="11" height="9" rx="1.5" fill="#cfe6ff"/><rect x="34" y="9" width="11" height="9" rx="1.5" fill="#cfe6ff"/><rect x="48" y="9" width="11" height="15" rx="1.5" fill="#cfe6ff"/><rect x="1" y="24" width="62" height="3" fill="#E9B949"/><circle cx="15" cy="33" r="5" fill="#111"/><circle cx="50" cy="33" r="5" fill="#111"/></svg>',{left:'60px',top:'960px'}, st('road')+.2, en('road'),'fade');
+// 11 end
+layer('view-tang-20-ngu-hanh-son-song-co-co.jpg', st('end'), total, {z0:1.0,z1:1.1,filter:'brightness(.45)'});
+add('<div class="title" style="font-size:80px">Bạn đoán</div>',{left:0,right:0,top:'470px',textAlign:'center'}, st('end'), total,'pop');
+add('<div class="tag" style="font-size:72px">Giá bao nhiêu?</div>',{left:'50%',top:'580px',transform:'translateX(-50%)'}, st('end')+.3, total,'pop');
+add('<div class="chip" style="font-size:44px">Studio view biển · <b>? tỷ</b></div>',{left:'50%',top:'760px',transform:'translateX(-50%)'}, w('end','studio'), total);
+add('<div class="follow">+ FOLLOW</div>',{left:'50%',top:'1100px',transform:'translateX(-50%)'}, w('end','theo'), total,'pop');
+add('<div style="font-size:30px;font-weight:700;color:#ddd">hiephoangmt.com · Zalo 0904 567 009</div>',{left:0,right:0,top:'1260px',textAlign:'center'}, w('end','theo'), total,'fade');
+
+// captions: chunks of up to 5 words
+const capEl=document.createElement('div'); capEl.className='cap'; stage.appendChild(capEl);
+const chunks=[]; T.forEach(s=>{let cur=[];s.words.forEach((x,i)=>{cur.push(x);const endP=/[.,:?!]$/.test(x.word);if(cur.length>=5||endP||i==s.words.length-1){chunks.push({t0:s.start+cur[0].start,t1:s.start+cur[cur.length-1].end+.15,ws:cur.map(y=>({w:y.word,t:s.start+y.start}))});cur=[];}});});
+
+// ---------- RENDER ----------
+window.render=function(t){
+  for(const e of els){
+    const n=e.node, a=e.anim; const vis=t>=e.t0-0.001 && t<e.t1;
+    if(a==='bg'){
+      const fi=ease((t-e.t0)/.45), fo=1-ease((t-(e.t1-.3))/.3);
+      n.style.opacity=vis?Math.min(fi,fo):0;
+      if(vis){const o=e.opts,p=Math.min(1,Math.max(0,(t-e.t0)/(e.t1-e.t0)));const z=o.z0+(o.z1-o.z0)*p;
+        const b=n.firstChild;b.style.transform=`scale(${z})`;b.style.transformOrigin=`${o.ox||'50%'} ${o.oy||'50%'}`;}
+      continue;
+    }
+    if(!vis){n.style.opacity=0;continue;}
+    const p=(t-e.t0), fo=1-ease((t-(e.t1-.25))/.25);
+    let op=1, tf='';
+    const base=n.style.transform.includes('translateX(-50%)')?'translateX(-50%) ':'';
+    if(a==='up'){const k=ease(p/.4);op=k;tf=`translateY(${(1-k)*40}px)`}
+    else if(a==='fade'){op=ease(p/.5)}
+    else if(a==='pop'){const k=back(p/.45);op=Math.min(1,p/.15);tf=`scale(${.6+.4*k})`}
+    else if(a==='drop'){const k=back(p/.5);op=Math.min(1,p/.15);tf=`translateY(${(1-k)*-260}px) rotate(${(1-k)*-12}deg)`}
+    else if(a==='stamp'){const k=ease(p/.25);op=k;tf=`scale(${2.2-1.2*k})`}
+    else if(a==='shake'){op=ease(p/.2);tf=`translateX(${Math.sin(p*60)*Math.max(0,1-p/.6)*14}px)`}
+    else if(a==='pulse'){op=ease(p/.3);tf=`scale(${1+.12*Math.sin(p*6)})`}
+    else if(a==='flip'){ // card face down -> flips at t1 (handled: show until t1 then the tag replaces)
+      op=Math.min(1,p/.15); const k=back(Math.min(1,p/.4)); tf=`translateY(${(1-k)*-200}px)`;
+      const inn=n.querySelector('.in'); const dur=e.t1-e.t0; const fp=ease((p-(dur-.55))/.5); inn.style.transform=`rotateY(${fp*180}deg)`;
+      const fo2=1-ease((t-(e.t1-.05))/.05); op=Math.min(op,1);
+    }
+    if(e.node.dataset.keep!=='1') n.style.opacity=Math.max(0,Math.min(op,fo));
+    // stack transforms (keep centering)
+    const keepX = e._x ?? (e._x = (n.style.transform.match(/translateX\(-50%\)/)?'translateX(-50%) ':''));
+    n.style.transform=keepX+tf;
+  }
+  // counter
+  {const p=ease((t-.3)/2.2);cnt.firstChild.textContent=(15.86*p).toFixed(2).replace('.',',');}
+  // mini tracker
+  if(t>=st('card1')){const ds=mini.children; ds[0].className=t>=w('card1','góc')?'on':''; if(ds[0].className)ds[0].textContent='✓';
+    ds[1].className=t>=w('card2','một')?'on':''; if(ds[1].className)ds[1].textContent='✓';
+    ds[2].className=t>=w('card3','vietcombank')?'on':''; if(ds[2].className)ds[2].textContent='✓';}
+  // waffle fill
+  {const p=ease((t-st('card2b')-.2)/1.6); const nAll=Math.floor(782*p); const g=t>=w('card2b','năm')?Math.floor(513*ease((t-w('card2b','năm'))/1.2)):0;
+   const cells=waf.firstChild.children; for(let i=0;i<782;i++){cells[i].style.opacity=i<nAll?1:0; cells[i].className=i<g?'g':'';}}
+  // bus along road
+  {const xs=[240-65,540-65,840-65]; let x=60; const tt=stopT;
+   if(tt.length===3){ if(t<tt[0]) x=60+(xs[0]-60)*ease((t-st('road'))/(tt[0]-st('road')));
+     else if(t<tt[1]) x=xs[0]+(xs[1]-xs[0])*ease((t-tt[0]-1.2)/1.2);
+     else if(t<tt[2]) x=xs[1]+(xs[2]-xs[1])*ease((t-tt[1]-1.2)/1.2); else x=xs[2];}
+   bus.style.left=x+'px';}
+  // captions
+  const c=chunks.find(c=>t>=c.t0&&t<c.t1);
+  if(c){capEl.style.opacity=1;capEl.innerHTML=c.ws.map(x=>`<span class="w${t>=x.t?' on':''}">${x.w}</span>`).join(' ');}else capEl.style.opacity=0;
+};
+window.READY=true;
+</script></body></html>
