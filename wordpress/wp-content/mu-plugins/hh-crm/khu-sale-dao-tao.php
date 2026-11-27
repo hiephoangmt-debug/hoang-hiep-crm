@@ -179,6 +179,75 @@ HTML
 <li>Gửi khách <b>link trang dự án</b> trên hiephoangmt.com thay vì file nặng – khách xem được bảng giá tham khảo, mặt bằng, tiến độ và để lại số, giúp web lên Google tốt hơn.</li></ul>
 HTML
 		),
+		'thu-tuc-nhan-moc-hoa-xuan-hoa-quy' => array(
+			'Thủ tục nhận mốc chỉ giới, bàn giao mặt bằng và cọc vỉa hè – đất nền Hòa Xuân, Hòa Quý',
+			'Thủ tục',
+			<<<HTML
+<p><b>Dùng khi:</b> khách đã có sổ đỏ (hoặc HĐ chuyển nhượng QSDĐ) lô đất nền dự án Hòa Xuân / Hòa Quý muốn xây nhà. Trước khi thi công, chủ đất phải nhận bàn giao mặt bằng, mốc chỉ giới xây dựng và đặt cọc vỉa hè (theo hướng dẫn chủ đầu tư gửi đại lý ngày 27/11/2026).</p>
+<h3>1. Hồ sơ khách mang theo</h3>
+<ol><li>CCCD sao y chứng thực – <b>03 bản</b>.</li><li>Sổ đỏ (hoặc HĐ chuyển nhượng QSDĐ) sao y chứng thực – <b>03 bản</b>.</li></ol>
+<h3>2. Ký 2 biểu mẫu tại bộ phận tiếp nhận hồ sơ</h3>
+<ul><li>Đơn đề nghị hỗ trợ xác định mốc chỉ giới xây dựng – 02 bản.</li><li>Biên bản bàn giao mặt bằng trước khi thi công – 02 bản (xác nhận hiện trạng, diện tích vỉa hè, số tiền phải đặt cọc).</li></ul>
+<h3>3. Đặt cọc vỉa hè</h3>
+<table><tr><th>Hiện trạng vỉa hè</th><th>Đơn giá cọc</th></tr><tr><td>Đã hoàn thiện lát gạch</td><td><b>400.000 đ/m²</b></td></tr><tr><td>Đã đổ bê tông, chưa lát gạch</td><td><b>200.000 đ/m²</b></td></tr></table>
+<p><b>Nội dung chuyển khoản:</b> TÊN CHỦ ĐẤT + SỐ CCCD + SỐ LÔ (theo sổ đỏ) + TÊN DỰ ÁN (Hòa Xuân hoặc Hòa Quý theo sổ đỏ). Ví dụ: <i>NGUYEN THI HUONG 048188000xx LO 15 B1.80 HOA XUAN</i>.</p>
+<p><b>Tài khoản nhận cọc:</b> mỗi dự án một tài khoản công ty chủ đầu tư (Hòa Xuân và Hòa Quý khác nhau) – xem đúng tài khoản, mã QR trong file hướng dẫn gốc bên dưới. Chỉ hướng dẫn khách chuyển vào tài khoản công ty ghi trong file; không nhận tiền hộ.</p>
+<h3>4. Thời gian và nơi làm thủ tục</h3>
+<ul><li>Bàn giao mặt bằng, mốc chỉ giới trong <b>7 – 10 ngày làm việc</b> (không tính Chủ nhật, lễ, tết) kể từ khi cán bộ SPC nhận đăng ký đặt lịch bàn giao thực địa.</li>
+<li>Nơi nhận hồ sơ: Văn phòng Ban QLDA, đường Ánh Đ, phường Ngũ Hành Sơn, TP Đà Nẵng (bản đồ: <a href="https://maps.app.goo.gl/iEWR64VN6Umumv4d9" target="_blank" rel="noopener">maps.app.goo.gl/iEWR64VN6Umumv4d9</a>).</li>
+<li>Đầu mối: anh Nguyễn Mạnh Lâm (phụ trách bàn giao) 0905 700 761 · anh Nguyễn Khánh Sơn 0974 981 961 · anh Dương Mạnh Hà (bàn giao mốc thực địa) 0903 533 507.</li></ul>
+<h3>5. Hoàn cọc vỉa hè</h3>
+<p>Xây xong, chủ đất làm <b>đơn đề nghị hoàn trả cọc</b>, kèm ảnh hiện trạng vỉa hè. Chủ đầu tư kiểm tra, nghiệm thu rồi làm thủ tục hoàn tiền. Nhắc khách giữ vỉa hè nguyên trạng trong lúc thi công để được hoàn đủ.</p>
+<p><b>File gốc (có tài khoản, mã QR):</b> <a href="https://drive.google.com/file/d/1n-vrMlZxQOGZe4pvP-lzY8FgWibmf1XU/view?usp=sharing" target="_blank" rel="noopener">Hướng dẫn thủ tục bàn mốc chỉ giới xây dựng, bàn giao mặt bằng Hòa Xuân – Hòa Quý</a>.</p>
+<p class="note">Tài liệu nội bộ: không chụp, không gửi số tài khoản và số điện thoại cán bộ lên mạng xã hội. Gửi khách bài hướng dẫn công khai trên web: <a href="/thu-tuc-nhan-moc-xay-dung-dat-nen-hoa-xuan/" target="_blank">hiephoangmt.com/thu-tuc-nhan-moc-xay-dung-dat-nen-hoa-xuan/</a>.</p>
+HTML
+		),
+		'hoi-dap-thu-tuc-hdmb-sun-property' => array(
+			'Quy trình thủ tục ký HĐMB – 33 câu hỏi thường gặp (Sun Property, 20/11/2026)',
+			'Thủ tục',
+			<<<HTML
+<p>Tóm tắt buổi đào tạo quy trình thủ tục của PKD8 – Sun Property ngày 20/11/2026. Đọc kỹ trước khi đưa khách lên ký HĐMB.</p>
+<h3>Trước khi đưa khách lên ký HĐMB</h3>
+<ul><li>Gửi khách trước mẫu HĐMB và hồ sơ đính kèm (chủ đầu tư đã ban hành). Hướng dẫn khách <b>ký nháy tất cả các trang</b>, ký chính ở trang in tên; giấy tờ mang về (phiếu hẹn, PTG, thông báo nộp tiền, xác nhận thông tin) ký và viết tay "đã nhận 01 bản".</li>
+<li>Chuẩn bị sẵn bản photo CCCD, VNeID, đăng ký kết hôn / xác nhận độc thân để nộp PTT. Thông tin nơi cấp CCCD hay bị book sai nhất – kiểm tra trên VNeID.</li>
+<li>Kiểm tra book đúng, đủ chiết khấu trước khi lên ký.</li></ul>
+<h3>Cấu trúc ghi nhận tiền</h3>
+<ul><li>HĐMB: ghi nhận trước bàn giao không quá 70%.</li><li>Hợp đồng vay (chủ đầu tư vay khách): 25% – căn thanh toán sớm / vay ngân hàng, căn tiến độ có early key đều ký HĐV.</li><li>Thỏa thuận đặt cọc: 5% cuối, nộp khi làm sổ.</li></ul>
+<h3>Bảo lãnh ngân hàng – VAT – diện tích</h3>
+<ul><li><b>Chiết khấu hủy bảo lãnh</b> thường lợi hơn: chủ đầu tư đã có bảo lãnh cho toàn dự án; bảo lãnh riêng lẻ chỉ dùng khi chậm bàn giao quá hạn HĐMB khoảng 180 ngày, hoàn tối đa 70% giá trị HĐMB đã VAT (không KPBT, không lãi phạt), mất 3 – 4 tháng, có ngân hàng không giải ngân khi lấy BLNH. Không áp dụng chiết khấu này cho dự án TMDV.</li>
+<li><b>VAT không tròn 10%</b> vì không tính trên phần tiền sử dụng đất.</li>
+<li>Diện tích tăng/giảm giữa HĐTHNV và HĐMB do tinh chỉnh kỹ thuật (hộp kỹ thuật, vách, cột) hoặc yêu cầu PCCC, cơ quan nhà nước – không phải lý do từ chối ký HĐMB. Giá trị HĐMB thấp hơn: khách thanh toán theo thông báo nộp tiền mới nhất.</li></ul>
+<h3>Vợ chồng, Việt kiều, người nước ngoài</h3>
+<ul><li>Đà Nẵng chỉ ra sổ cho người ký tên trên HĐMB; nếu 1 trong 2 vợ chồng đứng tên thì người còn lại phải có giấy từ chối tài sản.</li>
+<li>Chồng/vợ ở nước ngoài: (1) ký online (book theo người ở VN, người ở nước ngoài ký biên bản từ chối tài sản theo mẫu CĐT, bổ sung công chứng khi về); (2) ủy quyền tại Đại sứ quán/Lãnh sự quán; (3) công chứng từ đầu. Căn vay cần hỏi ngân hàng có đồng ý 1 người đứng tên không.</li>
+<li>Khách song tịch có quốc tịch VN tính là người Việt – bắt buộc VNeID (định danh cấp 2) hoặc xác nhận cư trú; chỉ ký ở nước ngoài khi dùng quốc tịch VN và chứng minh đang ở nước ngoài. Việt kiều không còn quốc tịch VN, người nước ngoài chỉ ký HĐMB tại Việt Nam (nếu dự án cho phép), Việt kiều cần giấy chứng minh gốc Việt.</li>
+<li>Sản phẩm TMDV không được ký HĐMB với người nước ngoài; một số dự án nhà ở lâu dài cũng không bán cho người nước ngoài.</li>
+<li>Khách từ 16 tuổi được ký HĐMB; dưới 18 tuổi cần phụ huynh ký xác nhận, bổ sung người giám hộ trên booking portal.</li></ul>
+<h3>Chuyển nhượng, vay, đổi phương án</h3>
+<ul><li>Ký HĐTHNV/TTĐC: chuyển nhượng không mất thuế phí. Sau HĐMB: chuyển nhượng qua phòng công chứng, khách đóng thuế phí theo luật, nộp chứng từ cho PTT xác nhận – chủ đầu tư không thu phí chuyển nhượng. Đã nhận thông báo bàn giao: hoàn thiện nghĩa vụ tài chính và nhận nhà trước. Trong thời gian chờ làm sổ không được chuyển nhượng.</li>
+<li>Từ 2025 không áp dụng chuyển nhượng 2 đầu; chủ đầu tư hỗ trợ chuyển nhượng 01 lần tại thời điểm ký HĐMB khi khách không đủ điều kiện vay.</li>
+<li>Symphony 1 và các dự án CĐT hỗ trợ chuyển nhượng khoản vay cùng ngân hàng (ngân hàng vẫn thẩm định người nhận).</li>
+<li>Đổi phương án thanh toán: trước HĐMB báo PKD; sau HĐMB chỉ khi nợ xấu / ngân hàng không duyệt vay; tính lãi trên phần chênh lệch.</li>
+<li>Đổi ngân hàng: khách email kèm lý do (từ chối, đòi phí giải ngân, bắt mua bảo hiểm) hoặc thông báo cấp tín dụng của ngân hàng khác trong danh sách CĐT giới thiệu. Đổi chi nhánh: khách tự làm với ngân hàng.</li>
+<li>Chủ đầu tư không bảo đảm khách được vay – thẩm định là việc độc lập của ngân hàng.</li></ul>
+<h3>Chiết khấu, tiền thừa, thanh lý</h3>
+<ul><li>Chiết khấu khách hàng thân thiết chỉ cho sản phẩm Sun Property phân phối (đất nền Sunland không cộng dồn); mang HĐMB, HĐCN, sổ đỏ cũ để ghi nhận; chỉ tính tại HĐMB/HĐCN. Hiện chuyển dần sang tính điểm Sun Signature – cân nhắc thứ tự ký HĐMB.</li>
+<li>Chiết khấu thanh toán sớm theo mốc: tiền phải nổi đủ ở tài khoản CĐT đúng ngày mốc; trễ do ngân hàng thì gửi UNC thể hiện đúng ngày.</li>
+<li>Tiền thừa: tiền booking trước mở bán điều thành cọc / tiến độ / hoàn trong thời hạn CĐT quy định; tiền cọc treo điều 01 lần, ký trong 07 ngày; điều tiền khác số tài khoản mất 2 – 3 tuần.</li>
+<li>Khách xin bỏ căn: báo PKD; được duyệt và lãi chưa vượt gốc thì ký thanh lý (chỉ chấm dứt nghĩa vụ, không hoàn tiền); lãi vượt gốc thì chờ thông báo chấm dứt.</li></ul>
+<h3>Giấy tờ, hóa đơn, ủy quyền</h3>
+<ul><li>Xác nhận nộp tiền gửi qua email trong 10 ngày (hay vào spam) – kiểm tra qua hotline 1800 6636 (phím 2) hoặc cskh_bds@sungroup.com.vn.</li>
+<li>Hóa đơn xuất sau khi ký HĐMB, khoảng 2 – 3 tháng sau khi thanh toán.</li>
+<li>Ủy quyền nhận HĐMB: trả lời email mời nhận kèm CCCD người được ủy quyền. Ủy quyền ký HĐMB, nhận bàn giao: làm tại văn phòng công chứng, ghi rõ "ủy quyền ký HĐMB căn XX dự án YY và các hồ sơ đi kèm" – ghi chung chung sẽ bị từ chối.</li>
+<li>Xin gia hạn ký, ký từ xa, ký online: báo PKD trước 03 ngày để xin phê duyệt; CĐT có thể từ chối; khách vẫn chịu lãi chậm ký nếu có.</li></ul>
+<h3>Bàn giao, sửa nhà, phí quản lý, căn TMDV</h3>
+<ul><li>Không được đập thông tầng; chỉ đập thông tường giữa 2 căn nếu không phải tường chịu lực (tường 30) hay hộp kỹ thuật, phải gửi bản thiết kế cho ban quản lý duyệt. CĐT không đập thông sẵn, không thêm/bớt nội thất bàn giao.</li>
+<li>Phí quản lý dự án Đà Nẵng thường khoảng 15.000 – 25.000 đ/m²/tháng, CĐT thường miễn 1 – 3 năm; bể bơi, gym, spa… tính phí riêng. Phí quản lý và kinh phí bảo trì là 2 khoản tách biệt.</li>
+<li>Căn hộ TMDV (VD Symphony 5): Nghị quyết 278 xác định thời hạn sử dụng theo niên hạn công trình; hết 50 năm dự kiến gia hạn và nộp tiền thuê đất theo diện tích. TMDV đăng ký tạm trú được, không giới hạn số căn studio. Căn TMDV ký HĐMB khi có GPXD hoặc thẩm định thiết kế cơ sở + thông báo khởi công, mẫu HĐMB đăng ký tại Sở Công Thương.</li></ul>
+<p><b>File gốc:</b> <a href="https://drive.google.com/file/d/15fKd2FGp6axPda0zuvWXOgqlhiF8Tj1s/view?usp=sharing" target="_blank" rel="noopener">Đào tạo quy trình thủ tục 2026 11 20</a> (gồm cả hướng dẫn gửi hóa đơn FDA theo email từng dự án và nội quy văn phòng Sun Property).</p>
+<p class="note">Tài liệu nội bộ – không gửi ra ngoài. Chính sách thay đổi theo từng thời điểm, luôn hỏi lại PKD trước khi tư vấn khách.</p>
+HTML
+		),
 	);
 }
 
@@ -237,6 +306,13 @@ function hh_sale_core_questions() {
 		array( 'Thông tin nào KHÔNG được đăng lên mạng xã hội?', 'Hoa hồng, hợp đồng mẫu, bản scan pháp lý, thông tin khách hàng', array( 'Ảnh tiến độ thực tế', 'Giá tham khảo theo loại căn', 'Link trang dự án trên hiephoangmt.com' ), 'Tài liệu nội bộ và thông tin khách tuyệt đối không công khai.', $m ),
 		array( 'Bài đăng Facebook nên đặt link web ở đâu?', 'Bình luận đầu tiên', array( 'Không bao giờ đăng link', 'Dòng đầu tiên của bài', 'Trong ảnh' ), 'Facebook giảm hiển thị bài có link trong thân bài – đặt link ở bình luận đầu.', $m ),
 		array( 'Ảnh nào nên đặt đầu tiên trong bài đăng dự án?', 'Ảnh thực tế (công trường, flycam, nhà mẫu)', array( 'Ảnh có logo đơn vị khác', 'Ảnh chụp màn hình bảng hoa hồng', 'Ảnh mạng không rõ nguồn' ), 'Ảnh thật tạo tin tưởng; ghi rõ ảnh nào là thực tế, ảnh nào là phối cảnh.', $m ),
+		array( 'Chủ đất Hòa Xuân cần nộp hồ sơ gì để nhận bàn giao mốc chỉ giới xây dựng?', 'CCCD và sổ đỏ sao y chứng thực, mỗi loại 03 bản', array( 'Chỉ cần sổ đỏ bản gốc', 'Giấy phép xây dựng và bản vẽ thiết kế', 'Hợp đồng thi công với nhà thầu' ), 'Hồ sơ: CCCD sao y chứng thực 03 bản + sổ đỏ (hoặc HĐCNQSDĐ) sao y chứng thực 03 bản; ký thêm đơn đề nghị và biên bản bàn giao tại bộ phận tiếp nhận.', 'thu-tuc-nhan-moc-hoa-xuan-hoa-quy' ),
+		array( 'Đơn giá cọc vỉa hè đã lát gạch ở dự án Hòa Xuân, Hòa Quý là bao nhiêu?', '400.000 đ/m²', array( '200.000 đ/m²', '100.000 đ/m²', '1.000.000 đ/m²' ), 'Vỉa hè đã lát gạch 400.000 đ/m²; vỉa hè mới đổ bê tông 200.000 đ/m². Xây xong làm đơn kèm ảnh hiện trạng để hoàn cọc.', 'thu-tuc-nhan-moc-hoa-xuan-hoa-quy' ),
+		array( 'Sau khi đặt lịch, bao lâu chủ đất nhận bàn giao mặt bằng, mốc chỉ giới xây dựng Hòa Xuân – Hòa Quý?', '7 – 10 ngày làm việc', array( 'Trong ngày', '30 ngày', '3 tháng' ), 'Trong vòng 7 – 10 ngày làm việc (không tính Chủ nhật, lễ, tết) kể từ khi cán bộ SPC nhận đăng ký.', 'thu-tuc-nhan-moc-hoa-xuan-hoa-quy' ),
+		array( 'Vì sao thuế GTGT trên giá căn hộ Sun không tròn 10%?', 'VAT không tính trên phần tiền sử dụng đất', array( 'Chủ đầu tư được giảm thuế', 'Do làm tròn số khi in hợp đồng', 'Do khách nhận chiết khấu bảo lãnh' ), 'Thuế GTGT không tính trên phần quyền sử dụng đất nên tổng VAT trên giá bán không tròn 10%.', 'hoi-dap-thu-tuc-hdmb-sun-property' ),
+		array( 'Khách mua căn hộ Sun đã ký HĐMB và đang chờ làm sổ, có được chuyển nhượng không?', 'Không – trong thời gian chờ làm sổ không được chuyển nhượng', array( 'Được, chủ đầu tư thu phí 1%', 'Được nếu có 2 người làm chứng', 'Chỉ được chuyển cho người thân' ), 'Theo quy định, thời gian chờ làm sổ không được chuyển nhượng; trước đó chuyển nhượng HĐMB qua công chứng, CĐT không thu phí.', 'hoi-dap-thu-tuc-hdmb-sun-property' ),
+		array( 'Khách bao nhiêu tuổi thì được ký HĐMB căn hộ Sun?', 'Từ 16 tuổi (dưới 18 cần phụ huynh ký xác nhận)', array( 'Từ 18 tuổi', 'Từ 21 tuổi', 'Không giới hạn tuổi' ), 'Khách từ 16 tuổi đủ quyền ký HĐMB; dưới 18 tuổi cần phụ huynh ký xác nhận và bổ sung người giám hộ trên booking portal.', 'hoi-dap-thu-tuc-hdmb-sun-property' ),
+		array( 'Ủy quyền ký HĐMB nên ghi thế nào để không bị từ chối?', 'Ghi rõ: ủy quyền ký HĐMB căn XX dự án YY và các hồ sơ đi kèm', array( 'Ghi chung: ủy quyền ký hồ sơ căn hộ', 'Chỉ cần tin nhắn Zalo đồng ý', 'Ghi: ủy quyền toàn bộ tài sản' ), 'Ủy quyền ký HĐMB, nhận bàn giao làm tại văn phòng công chứng và phải ghi cụ thể căn, dự án, hồ sơ đi kèm.', 'hoi-dap-thu-tuc-hdmb-sun-property' ),
 	);
 }
 
