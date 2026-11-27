@@ -1940,5 +1940,86 @@ HTML
 		),
 	);
 
+	$posts[] = array(
+		'slug'           => 'thi-tuyen-cau-moi-qua-song-han',
+		'title'          => 'Đà Nẵng lấy ý kiến thi tuyển cầu mới qua sông Hàn: đoạn cầu sông Hàn – cầu Thuận Phước, tầm nhìn 2075',
+		'excerpt'        => 'Ban Quản lý các dự án đầu tư cơ sở hạ tầng ưu tiên TP Đà Nẵng đang lấy ý kiến dự thảo nhiệm vụ thi tuyển phương án quy hoạch – kiến trúc cầu mới qua sông Hàn, trong đoạn cầu sông Hàn – cầu Thuận Phước, quy mô đáp ứng giao thông đến 2050, tầm nhìn 2075.',
+		'keyword'        => 'thi tuyển cầu mới qua sông Hàn',
+		'keywords_extra' => array( 'cầu mới sông Hàn Thuận Phước', 'căn hộ ven sông Hàn Sơn Trà', 'trục Đông – Tây Đà Nẵng' ),
+		'project'        => 'sun-symphony-residence',
+		'schedule'       => '2026-11-28 06:45',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Sông Hàn', 'Cầu mới', 'Sơn Trà', 'Hải Châu' ),
+		'image'          => 'plugin:img/da-nang/song-han-cau-quay-trung-tam-ve-dem.jpg',
+		'image_alt'      => 'Thi tuyển cầu mới qua sông Hàn – cầu sông Hàn và trung tâm bờ Tây Đà Nẵng về đêm',
+		'content'        => <<<HTML
+<p>Đà Nẵng chuẩn bị <strong>thi tuyển cầu mới qua sông Hàn</strong>: Ban Quản lý các dự án đầu tư cơ sở hạ tầng ưu tiên thành phố đang lấy ý kiến dự thảo nhiệm vụ thi tuyển phương án quy hoạch – kiến trúc khu vực cầu mới qua sông Hàn và hai đầu cầu (Tuổi Trẻ, 26/11/2026). Phạm vi nghiên cứu là đoạn sông giữa <strong>cầu sông Hàn</strong> và <strong>cầu Thuận Phước</strong>, quy mô cầu phải đáp ứng nhu cầu giao thông đến năm 2050, tầm nhìn đến năm 2075.</p>
+<!--hh-featured-->
+<p>Việc thi tuyển cầu mới qua sông Hàn mới ở bước <strong>lấy ý kiến dự thảo nhiệm vụ</strong>, chưa phải quyết định đầu tư: vị trí cụ thể, hướng tuyến, quy mô, tổng vốn và thời gian khởi công đều chưa công bố. Bài dưới đây tóm tắt những gì dự thảo yêu cầu, phạm vi hai bờ được nghiên cứu và nhận định của Hiệp về tác động tới căn hộ ven sông Hàn.</p>
+<h2>Thi tuyển cầu mới qua sông Hàn: dự thảo nhiệm vụ yêu cầu gì?</h2>
+<p>Theo dự thảo được Tuổi Trẻ đưa tin, mục tiêu của cuộc thi tuyển cầu mới qua sông Hàn là chọn <strong>vị trí, hướng tuyến vượt sông và điểm đấu nối tối ưu</strong> trong đoạn cầu sông Hàn – cầu Thuận Phước, hài hòa với các công trình vượt sông hiện hữu.</p>
+<table>
+<thead><tr><th>Nội dung</th><th>Theo dự thảo nhiệm vụ (Tuổi Trẻ, 26/11/2026)</th></tr></thead>
+<tbody>
+<tr><td>Đơn vị lấy ý kiến</td><td>Ban Quản lý các dự án đầu tư cơ sở hạ tầng ưu tiên TP Đà Nẵng</td></tr>
+<tr><td>Phạm vi nghiên cứu</td><td>Đoạn sông giữa cầu sông Hàn và cầu Thuận Phước, cùng không gian đô thị hai bờ</td></tr>
+<tr><td>Quy mô</td><td>Đáp ứng nhu cầu giao thông đến năm 2050, tầm nhìn đến năm 2075</td></tr>
+<tr><td>Chức năng</td><td>Phân lưu, giảm tải cho Lê Duẩn, Trần Phú, Bạch Đằng, Nguyễn Văn Linh, cầu sông Hàn, cầu Rồng; hoàn thiện trục Đông – Tây</td></tr>
+<tr><td>Kết nối</td><td>Khu hành chính phía bắc Hải Châu với khu đô thị du lịch phía nam bán đảo Sơn Trà</td></tr>
+<tr><td>Yêu cầu kèm theo</td><td>Bảo lưu, tích hợp điều kiện cho đường sắt đô thị theo quy hoạch; kết nối xe buýt và đường thủy du lịch trên sông Hàn</td></tr>
+<tr><td>Kiến trúc</td><td>Công trình vĩnh cửu, độc bản, mang bản sắc Đà Nẵng; không cạnh tranh hay sao chép hình ảnh các cây cầu hiện hữu</td></tr>
+<tr><td>Hình thức</td><td>Thi tuyển rộng rãi, không hạn chế tổ chức, cá nhân trong nước và nước ngoài</td></tr>
+</tbody>
+</table>
+<p>Dự thảo thi tuyển cầu mới qua sông Hàn cũng yêu cầu tổ chức giao thông thông suốt ở hai đầu cầu, hạn chế tối đa điểm xung đột với dòng xe hiện hữu và phát sinh trong tương lai, bảo đảm năng lực thông hành lâu dài.</p>
+<h2>Hai bờ sông được đưa vào phạm vi nghiên cứu</h2>
+<p>Phạm vi thi tuyển cầu mới qua sông Hàn bao trùm hai hành lang tuyến định hướng ở cả hai bờ:</p>
+<p><strong>Bờ Tây (phường Hải Châu):</strong> khu vực nút Đống Đa – 3 Tháng 2 – Như Nguyệt – Bạch Đằng – Trần Phú và các trục Đống Đa, 3 Tháng 2, Như Nguyệt, Bạch Đằng, Trần Phú, Lê Duẩn, Lương Ngọc Quyến.</p>
+<p><strong>Bờ Đông (phường Sơn Trà):</strong> các trục Trần Hưng Đạo, Vân Đồn, Bùi Dương Lịch, Hoàng Việt, Nguyễn Thị Định, Đỗ Anh Hàn, Chu Huy Mân, Trần Thánh Tông, Ngô Quyền, Vương Thừa Vũ, đường số 1 KCN An Đồn và các tuyến nhánh liên quan.</p>
+<p>Ngoài cây cầu, phương án dự thi tuyển cầu mới qua sông Hàn phải nghiên cứu cả không gian hai bờ, không gian dưới cầu và hai đầu cầu; tuyến đi bộ ven sông, công viên, quảng trường; trục nhìn, đường chân trời (skyline) khu trung tâm; quan hệ với chuỗi cầu hiện hữu và <strong>các khu nhà kho, bến bãi cũ ven sông có khả năng tái cấu trúc</strong>.</p>
+<!--hh-img:img/peninsula/peninsula-da-nang-tien-do-10-2026-cua-so-nhin-cau-thuan-phuoc.jpg|Thi tuyển cầu mới qua sông Hàn trong đoạn tới cầu Thuận Phước – ảnh thật từ Peninsula Đà Nẵng nhìn cầu Thuận Phước, 10/2026-->
+<h2>Vì sao Đà Nẵng cần cầu mới qua sông Hàn?</h2>
+<p>Bờ Tây trung tâm Hải Châu đang gánh lượng xe lớn qua Lê Duẩn, Trần Phú, Bạch Đằng, Nguyễn Văn Linh rồi dồn lên cầu sông Hàn và cầu Rồng. Dự thảo định hướng cầu mới <strong>phân lưu, giảm tải</strong> cho các trục này và hoàn thiện mạng lưới trục Đông – Tây, nối khu hành chính phía bắc Hải Châu với khu đô thị du lịch phía nam bán đảo Sơn Trà.</p>
+<p>Yêu cầu tích hợp điều kiện cho đường sắt đô thị trong thi tuyển cầu mới qua sông Hàn cho thấy cây cầu được tính để dùng lâu dài, gắn với mạng lưới giao thông công cộng theo quy hoạch. Xem thêm tiến độ <a href="/duong-sat-do-thi-da-nang-san-bay-my-khe-hoi-an/">đường sắt đô thị sân bay – Mỹ Khê – Hội An</a> và dự án <a href="/cai-tao-canh-quan-hai-bo-song-han-29-ha/">cải tạo cảnh quan hai bờ sông Hàn khoảng 29,22 ha</a>.</p>
+<!--hh-img:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg|Sông Hàn và cầu Rồng nhìn từ trên cao, 11/2026 – cầu mới được định hướng giảm tải cho cầu Rồng, cầu sông Hàn-->
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Mới ở bước lấy ý kiến:</strong> nhiệm vụ thi tuyển cầu mới qua sông Hàn còn phải được duyệt, sau đó mới mời dự thi, chấm giải, rồi lập dự án đầu tư. Thời gian khởi công chưa có, nên đây là yếu tố dài hạn, không phải lý do để xuống tiền ngay.</li>
+<li><strong>Bờ Đông Sơn Trà hưởng lợi rõ nhất:</strong> nếu cầu đấu nối vào trục Trần Hưng Đạo – Ngô Quyền trong đoạn tới cầu Thuận Phước, khu Nại Hiên Đông, An Hải Bắc cũ sẽ gần trung tâm hành chính bờ Tây hơn, ít phụ thuộc cầu Rồng, cầu sông Hàn.</li>
+<li><strong>Quỹ đất kho bãi ven sông:</strong> dự thảo nhắc tới các khu nhà kho, bến bãi cũ có thể tái cấu trúc – đây là chi tiết đáng theo dõi vì liên quan trực tiếp tới quy hoạch sử dụng đất hai bờ.</li>
+<li><strong>Căn hộ ven sông đã bàn giao có lợi thế:</strong> khi hạ tầng còn nhiều năm, căn đã có sổ hoặc đang bàn giao như ở Sun Symphony, Peninsula cho phép ở hoặc cho thuê ngay, phần lợi từ cây cầu đến sau là cộng thêm.</li>
+</ul>
+<p>Khách hỏi Hiệp căn nào gần vị trí cầu mới nhất, Hiệp chỉ trả lời được theo phạm vi nghiên cứu (đoạn cầu sông Hàn – cầu Thuận Phước), vì dự thảo chưa chốt điểm đấu nối. Ai mua chỉ vì "chân cầu" lúc này nên chờ kết quả thi tuyển cầu mới qua sông Hàn.</p>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a> – khu căn hộ của Sun Group ven sông Hàn phía Sơn Trà, nằm trong đoạn bờ Đông được nghiên cứu; cầu mới giúp sang khu hành chính bờ Tây nhanh hơn.</li>
+<li><a href="/du-an/peninsula-da-nang/">Peninsula Đà Nẵng</a> – tòa căn hộ trên đường Lê Văn Duyệt, Nại Hiên Đông cũ, nhìn ra cầu Thuận Phước; nằm sát đầu phía bắc của phạm vi nghiên cứu.</li>
+<li><a href="/du-an/the-legend-da-nang/">The Legend Đà Nẵng</a> – chân cầu Rồng phía Sơn Trà; cầu mới được định hướng giảm tải cho cầu Rồng và trục Võ Văn Kiệt – Nguyễn Văn Linh.</li>
+<li><a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a> – căn hộ Sun Group trên Trần Hưng Đạo; trục Trần Hưng Đạo là một trong các tuyến bờ Đông được đưa vào phạm vi nghiên cứu.</li>
+</ul>
+<p>Cần so sánh căn hộ ven sông Hàn theo khoảng cách tới phạm vi cầu mới, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: <a href="https://tuoitre.vn/da-nang-tinh-lam-cau-moi-qua-song-han-o-dau-100261126095124521.htm">Tuổi Trẻ (26/11/2026)</a> về dự thảo nhiệm vụ thi tuyển phương án quy hoạch – kiến trúc khu vực cầu mới qua sông Hàn của Ban Quản lý các dự án đầu tư cơ sở hạ tầng ưu tiên TP Đà Nẵng. Dự thảo chưa được phê duyệt; vị trí, quy mô, vốn và tiến độ chưa công bố – bài ghi theo nội dung báo chí.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Thi tuyển cầu mới qua sông Hàn: tầm nhìn 2050 – 2075',
+			'desc'      => 'Đà Nẵng lấy ý kiến thi tuyển cầu mới qua sông Hàn trong đoạn cầu sông Hàn – cầu Thuận Phước, giảm tải bờ Tây, tích hợp đường sắt đô thị.',
+			'points'    => array(
+				'Thi tuyển cầu mới qua sông Hàn: Ban QLDA hạ tầng ưu tiên Đà Nẵng đang lấy ý kiến dự thảo nhiệm vụ (26/11/2026)',
+				'Phạm vi: đoạn cầu sông Hàn – cầu Thuận Phước, quy mô đáp ứng giao thông đến 2050, tầm nhìn 2075',
+				'Phải tích hợp điều kiện cho đường sắt đô thị, kết nối đường thủy du lịch; thi rộng rãi trong và ngoài nước',
+			),
+			'faq'       => array(
+				array( 'Thi tuyển cầu mới qua sông Hàn đang ở bước nào?', 'Ban Quản lý các dự án đầu tư cơ sở hạ tầng ưu tiên TP Đà Nẵng đang lấy ý kiến dự thảo nhiệm vụ thi tuyển cầu mới qua sông Hàn (Tuổi Trẻ, 26/11/2026). Sau khi nhiệm vụ và quy chế được duyệt mới phát hành thông báo mời dự thi.' ),
+				array( 'Cầu mới qua sông Hàn nằm ở đâu?', 'Dự thảo thi tuyển cầu mới qua sông Hàn giới hạn phạm vi trong đoạn sông giữa cầu sông Hàn và cầu Thuận Phước; vị trí, hướng tuyến và điểm đấu nối cụ thể sẽ được chọn qua cuộc thi.' ),
+				array( 'Ai được tham gia thi tuyển cầu mới qua sông Hàn?', 'Theo ban quản lý dự án, cuộc thi tuyển cầu mới qua sông Hàn tổ chức rộng rãi, không hạn chế tổ chức, cá nhân trong nước và nước ngoài.' ),
+				array( 'Cầu mới qua sông Hàn có tổng vốn và thời gian khởi công chưa?', 'Chưa. Dự thảo nhiệm vụ thi tuyển cầu mới qua sông Hàn mới nêu mục tiêu, phạm vi và yêu cầu kiến trúc; tổng mức đầu tư, nguồn vốn và tiến độ chưa được công bố.' ),
+			),
+		),
+		'sources'        => array(
+			'https://tuoitre.vn/da-nang-tinh-lam-cau-moi-qua-song-han-o-dau-100261126095124521.htm',
+		),
+	);
+
 	return $posts;
 }
