@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DanangStay – Tùy chỉnh (màu, menu, SEO)
  * Description: Tông màu theo hiephoangmt.com (navy + cam), sửa thanh menu bị ẩn trên máy tính, sửa SEO (og:locale, hreflang x-default), Việt hóa chữ còn sót trên bản tiếng Việt, ẩn tên đăng nhập quản trị.
- * * Version: 3.16.6
+ * * Version: 3.16.8
  * Requires PHP: 7.4
  * Author: DanangStay
  */
@@ -2771,3 +2771,15 @@ html,body{max-width:100%;overflow-x:hidden}
 }
 </style>';
 }, 128);
+
+// ===== 49. Điện thoại: căn đều 2 bên cho đoạn văn ở mọi trang =====
+add_action('wp_head', function () {
+    echo '<style id="dst-justify-all">
+@media (max-width:760px){
+main p,main li,.prose p,.prose li,.ds-rules li span,.ds-rules__note,.ds-news__item p,.ds-news__item span:not(.ds-news__meta),.ds-hev__body p,.ds-ev p,.ds-ev li,.entry-content p,.entry-content li,.page-content p,.page-content li,.ds-cat-head p,.excerpt,.card p{text-align:justify!important;text-align-last:left!important;text-justify:inter-word;hyphens:none}
+.ds-rules li>span,.ds-news__item>span:not(.ds-news__meta){display:block!important;text-align:justify!important;text-align-last:left!important}
+body .prose li,body main li,body .ds-rules li{text-align:justify!important;text-align-last:left!important}
+.ds-service *,.areas *,.tiles *,.intro__facts *,.journal .card:not(.card--lead) *,.site-footer *,nav *,.ds-mbar *,.btn,.ds-btn,.ds-contact__btns *,.kicker,figcaption,.ds-home-svc__head p,blockquote,cite,.quote *{text-align:inherit!important;text-align-last:auto!important}
+}
+</style>';
+}, 129);
