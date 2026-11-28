@@ -244,3 +244,4 @@
 | CHỜ | Sun | 29/11 | (bài web 28/11 13:30) Sông Cổ Cò gần Sun Saphia | song-co-co-gan-sun-saphia-residence (chờ) |
 | CHỜ | Sun | 29/11 | (bài web 28/11 18:00) Khách Ấn Độ thuê Sun Saphia | khach-an-do-thue-sun-saphia-residence (chờ) |
 | CHỜ | Sun | 29/11 | (bài web 28/11 20:30) Tiện ích Symphony 5 | tien-ich-symphony-5-sun-symphony-residence (chờ) |
+| 28/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: Thi tuyển cầu mới qua sông Hàn (+2 tin ở bình luận) | /thi-tuyen-cau-moi-qua-song-han/ /phap-ly-casamia-calm-co-nen-mua/ /thu-tuc-nhan-moc-xay-dung-dat-nen-hoa-xuan/ |
