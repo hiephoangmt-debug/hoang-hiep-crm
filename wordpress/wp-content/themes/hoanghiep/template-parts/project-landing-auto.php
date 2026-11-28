@@ -49,6 +49,8 @@ $phone  = '0904 567 009';
 $zalo   = 'https://zalo.me/0904567009';
 $resale = function_exists( 'hh_project_is_resale' ) && hh_project_is_resale( $id );
 $status = hh_option_label( hh_project_schema(), 'hh_p_status', $m( 'hh_p_status' ) );
+// Dự án đã / đang bàn giao: thêm khu Thuê · Mua bán (khách cần thuê, cần mua lại; chủ nhà gửi thuê, gửi bán) – anh Hiệp 28/11/2026.
+$handed = $resale || in_array( (string) $m( 'hh_p_status' ), array( 'dang-ban-giao', 'da-ban-giao' ), true );
 
 // Tên: phần cuối in nghiêng vàng như mẫu ("The Poet <em>Residence</em>").
 $name_html = static function ( $t ) use ( $e ) {
@@ -212,6 +214,7 @@ $nav = array_filter(
 		'loai-can'   => ( $units || $other_products ) ? 'Loại căn' : '',
 		'noi-that'   => $interior ? ( $int_bg ? 'Bàn giao' : 'Nội thất' ) : '',
 		'bang-gia'   => ( $price_tbl || $m( 'hh_p_price_from' ) || $m( 'hh_p_resale_price' ) ) ? 'Giá' : '',
+		'giao-dich'  => $handed ? 'Thuê · Mua bán' : '',
 		'gia-khu-vuc' => $price_log ? 'Giá khu vực' : '',
 		'thanh-toan' => ( $payment || $policy || $m( 'hh_p_loan' ) ) ? 'Thanh toán' : '',
 		'phap-ly'    => ( $m( 'hh_p_legal' ) || $m( 'hh_p_ownership' ) || $timeline[0] ) ? 'Pháp lý' : '',
@@ -614,32 +617,6 @@ if ( ! $parent ) {
     </div>
     <?php endif; ?>
     <p class="note">Giá tham khảo, chưa trừ chiết khấu; giá và căn còn trống thay đổi theo đợt – để lại số, Hoàng Hiệp gửi bảng giá cập nhật qua Zalo.</p>
-    <?php
-    if ( $resale ) :
-		// Dự án chuyển nhượng: khối nhận gửi bán / gửi cho thuê kèm ảnh thật của dự án (anh Hiệp 26/11/2026).
-		$kg_img = $gallery[2] ?? ( $gallery[0] ?? $hero );
-		$kg_src = $kg_img ? $url( $kg_img, 'large' ) : '';
-		?>
-    <div class="ky-gui rv">
-      <?php if ( $kg_src ) : ?><figure class="ky-gui__img"><img src="<?php echo esc_url( $kg_src ); ?>" alt="<?php echo esc_attr( 'Gửi bán, cho thuê ' . $short_name . ' – ' . $alt( $kg_img ) ); ?>" loading="lazy" decoding="async"><figcaption>Nhận gửi bán · gửi cho thuê</figcaption></figure><?php endif; ?>
-      <div class="ky-gui__body">
-        <span class="ky-gui__tag">Chủ nhà <?php echo $e( $short_name ); ?></span>
-        <h3>Gửi bán, gửi cho thuê căn <?php echo $e( $short_name ); ?> qua Hoàng Hiệp</h3>
-        <?php if ( $m( 'hh_p_rent_price' ) ) : ?><p class="ky-gui__rent"><b>Giá thuê tham khảo:</b> <?php echo $e( $m( 'hh_p_rent_price' ) ); ?></p><?php endif; ?>
-        <ul>
-          <li>Định giá tham khảo theo giao dịch, tin rao cùng khu – đặt giá sát thị trường</li>
-          <li>Chụp ảnh, đăng tin trên hiephoangmt.com – không công khai tên, số điện thoại chủ nhà</li>
-          <li>Lọc khách có nhu cầu thật, dẫn xem theo lịch của chủ nhà</li>
-          <li>Hỗ trợ đặt cọc, công chứng, kê khai thuế và sang tên (bán) hoặc hợp đồng thuê (cho thuê)</li>
-        </ul>
-        <p class="ky-gui__need">Gửi kèm: loại căn, diện tích, hiện trạng nội thất, giá mong muốn, căn có đang trong hợp đồng cho thuê với đơn vị vận hành hay không.</p>
-        <div class="ky-gui__acts">
-          <a class="btn btn-gold js-zalo" href="<?php echo esc_url( $zalo ); ?>" target="_blank" rel="noopener">Gửi thông tin căn qua Zalo</a>
-          <a class="btn ky-gui__call" href="tel:0904567009">Gọi <?php echo $e( $phone ); ?></a>
-        </div>
-      </div>
-    </div>
-    <?php endif; ?>
   </div>
 </section>
 <?php endif; ?>
@@ -659,6 +636,47 @@ if ( ! $parent ) {
       <a class="btn btn-gold js-zalo" href="<?php echo esc_url( $zalo ); ?>" target="_blank" rel="noopener">Hỏi giá thực tế qua Zalo</a>
       <a class="btn" href="tel:0904567009" style="border:1px solid var(--line);color:var(--navy)">Gọi <?php echo $e( $phone ); ?></a>
     </div>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if ( isset( $nav['giao-dich'] ) ) : ?>
+<?php
+$mk    = function_exists( 'hh_project_market' ) ? hh_project_market( $id ) : array( 'ban' => array( 'count' => 0, 'range' => '' ), 'thue' => array( 'count' => 0, 'range' => '' ) );
+$gd_b  = $mk['ban']['count'] ? $mk['ban']['count'] . ' căn đang chuyển nhượng' . ( $mk['ban']['range'] ? ', ' . $mk['ban']['range'] : '' ) : ( $m( 'hh_p_resale_price' ) ? 'Giá chuyển nhượng tham khảo: ' . $m( 'hh_p_resale_price' ) : '' );
+$gd_t  = $mk['thue']['count'] ? $mk['thue']['count'] . ' căn đang cho thuê' . ( $mk['thue']['range'] ? ', ' . $mk['thue']['range'] : '' ) : ( $m( 'hh_p_rent_price' ) ? 'Giá thuê tham khảo: ' . $m( 'hh_p_rent_price' ) : '' );
+$gd    = array(
+	array( 'thue', 'Khách cần thuê', 'Cần thuê căn ' . $short_name, 'Căn trống theo loại căn, nội thất, thời hạn thuê; hẹn xem nhà theo lịch của bạn.', $gd_t, 'Nhận danh sách căn cho thuê' ),
+	array( 'mua', 'Khách cần mua', 'Cần mua lại căn ' . $short_name, 'Căn chuyển nhượng giá thật, kiểm tra sổ hồng, hỗ trợ đặt cọc, công chứng, sang tên.', $gd_b, 'Nhận danh sách căn đang bán' ),
+	array( 'gui-thue', 'Chủ nhà', 'Có căn ' . $short_name . ' cần cho thuê', 'Định giá thuê sát thị trường, tìm khách, dẫn xem, làm hợp đồng thuê; không công khai số chủ nhà.', '', 'Gửi căn cho thuê' ),
+	array( 'gui-ban', 'Chủ nhà', 'Có căn ' . $short_name . ' cần bán', 'Định giá theo giao dịch cùng khu, đăng tin, lọc khách thật, hỗ trợ thủ tục, thuế, sang tên.', '', 'Ký gửi bán căn' ),
+);
+$gd_ic = array(
+	'thue'     => '<path d="M6 14l10-8 10 8v12H6z"/><circle cx="13" cy="19" r="2.5"/><path d="M15.5 19H22v3M20 19v2"/>',
+	'mua'      => '<path d="M6 14l10-8 10 8v12H6z"/><path d="M12 20l3 3 6-6"/>',
+	'gui-thue' => '<rect x="6" y="5" width="20" height="22" rx="2"/><path d="M11 11h10M11 15h10M11 19h6"/><circle cx="23" cy="23" r="4" fill="#fff"/><path d="M23 21v4M21 23h4"/>',
+	'gui-ban'  => '<path d="M5 17l7-7h7l8 8-7 7-8-8"/><circle cx="16" cy="13" r="1.6"/><path d="M5 17v6h6"/>',
+);
+?>
+<!-- THUÊ · MUA BÁN (dự án đã / đang bàn giao) -->
+<section id="giao-dich" aria-labelledby="h-gd">
+  <div class="container">
+    <span class="eyebrow">Cho thuê · Chuyển nhượng</span>
+    <h2 class="title" id="h-gd">Thuê, mua bán lại căn <em><?php echo $e( $short_name ); ?></em></h2>
+    <p class="lead">Dự án đã bàn giao – Hoàng Hiệp nhận cả bốn việc: tìm căn cho khách thuê, khách mua lại; nhận gửi cho thuê, ký gửi bán cho chủ nhà. Chọn đúng nhu cầu, Hiệp gửi danh sách hoặc gọi lại trong ngày.</p>
+    <div class="gd-grid">
+      <?php foreach ( $gd as list( $k, $who, $h, $txt, $info, $btn ) ) : ?>
+      <div class="gd-card gd-<?php echo esc_attr( $k ); ?> rv">
+        <span class="gd-ic" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><?php echo $gd_ic[ $k ]; // phpcs:ignore WordPress.Security.EscapeOutput -- SVG cố định. ?></svg></span>
+        <small><?php echo $e( $who ); ?></small>
+        <h3><?php echo $e( $h ); ?></h3>
+        <p><?php echo $e( $txt ); ?></p>
+        <?php if ( $info ) : ?><p class="gd-info"><?php echo $e( $info ); ?></p><?php endif; ?>
+        <a class="btn btn-gold gd-btn" href="#dang-ky" data-need="<?php echo esc_attr( $h ); ?>" data-title="<?php echo esc_attr( $btn . ' ' . $short_name ); ?>"><?php echo $e( $btn ); ?> →</a>
+      </div>
+      <?php endforeach; ?>
+    </div>
+    <p class="note">Chủ nhà gửi kèm: loại căn, diện tích, tầng – hướng, nội thất, giá mong muốn, căn có đang cho thuê hay trong hợp đồng với đơn vị vận hành không. Gọi / Zalo <a href="<?php echo esc_url( $zalo ); ?>" class="js-zalo" target="_blank" rel="noopener"><?php echo $e( $phone ); ?></a>.</p>
   </div>
 </section>
 <?php endif; ?>
@@ -934,6 +952,7 @@ $cta_get   = $resale ? array( 'Danh sách căn đang bán, giá thật', 'Kiểm
       <ul class="form-get"><?php foreach ( $cta_get as $g ) : ?><li><?php echo $e( $g ); ?></li><?php endforeach; ?></ul>
       <div class="field"><label for="f-name">Họ và tên</label><input id="f-name" name="name" placeholder="Họ và tên *" autocomplete="name" required></div>
       <div class="field"><label for="f-phone">Số điện thoại</label><input id="f-phone" name="phone" type="tel" inputmode="tel" placeholder="Số Zalo / điện thoại *" autocomplete="tel" required pattern="[0-9 +.]{9,14}"></div>
+      <?php if ( $handed ) : ?><div class="field"><label for="f-need">Nhu cầu</label><select id="f-need" name="need"><option value="">Nhu cầu của anh/chị</option><?php foreach ( array( 'Cần thuê căn ' . $short_name, 'Cần mua lại căn ' . $short_name, 'Có căn ' . $short_name . ' cần cho thuê', 'Có căn ' . $short_name . ' cần bán', 'Nhận thông tin dự án ' . $short_name ) as $nd ) : ?><option><?php echo $e( $nd ); ?></option><?php endforeach; ?></select></div><?php endif; ?>
       <?php if ( $form_opts ) : ?><div class="field"><label for="f-type">Loại sản phẩm quan tâm</label><select id="f-type" name="type"><option value="">Loại sản phẩm quan tâm</option><?php foreach ( array_unique( $form_opts ) as $o ) : ?><option><?php echo $e( $o ); ?></option><?php endforeach; ?></select></div><?php endif; ?>
       <button class="btn btn-gold" type="submit"><?php echo $resale ? 'Nhận danh sách căn qua Zalo' : 'Nhận bảng giá &amp; chính sách qua Zalo'; ?> →</button>
       <p class="form-safe">Thông tin chỉ dùng để Hoàng Hiệp tư vấn, không chia sẻ cho bên khác.</p>
@@ -1015,6 +1034,7 @@ addEventListener('keydown',function(e){if('Escape'===e.key)close(true);});})();
   lb.addEventListener('touchend',function(e){if(null===tx||set.length<2)return;var d=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(d)>40)show(at+(d<0?1:-1));},{passive:true});
   document.addEventListener('keydown',function(e){if(!lb.classList.contains('on'))return;if(e.key==='Escape')lb.classList.remove('on');else if(e.key==='ArrowLeft')show(at-1);else if(e.key==='ArrowRight')show(at+1);});
   document.querySelectorAll('[data-type]').forEach(function(a){a.addEventListener('click',function(){var s=document.getElementById('f-type');if(s){for(var i=0;i<s.options.length;i++){if(s.options[i].text===a.dataset.type){s.selectedIndex=i;}}}});});
+  document.querySelectorAll('.gd-btn').forEach(function(b){b.addEventListener('click',function(){var n=document.getElementById('f-need');if(n){n.value=b.getAttribute('data-need');}var t=document.getElementById('f-title');if(t&&b.getAttribute('data-title')){t.textContent=b.getAttribute('data-title');}var fm=t?t.closest('form'):null;if(fm){fm.setAttribute('data-form',b.getAttribute('data-title'));}setTimeout(function(){var p=document.getElementById('f-name');if(p)p.focus({preventScroll:true});},600);});});
   document.querySelectorAll('.lead-form').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();if(!f.checkValidity()){f.reportValidity();return;}var m=f.querySelector('.ok-msg');if(m)m.style.display='block';f.querySelector('button[type=submit]').disabled=true;});});
   var links=[].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
   var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});

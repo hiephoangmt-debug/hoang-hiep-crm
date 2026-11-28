@@ -211,11 +211,12 @@ body.hh-landing .title em,body.hh-landing h1 em,body.hh-landing h2 em{-webkit-te
 		var phone = String(tel.value || '').replace(/[^0-9+]/g, '');
 		if (!/^(\+?84|0)\d{8,10}$/.test(phone)) return;
 		var name = pick('[name=name], [autocomplete=name], input[type=text]');
-		var extra = pick('select');
+		var extra = pick('select:not([name=need])');
+		var need = pick('[name=need]');
 		var d = new FormData();
 		d.append('action', 'hh_lead'); d.append('ajax', '1'); d.append('ref_id', ref);
 		d.append('name', name || 'Khách trang ' + document.title.split(/[–|-]/)[0].trim()); d.append('phone', phone);
-		d.append('need', 'Nhận bảng giá dự án');
+		d.append('need', need || 'Nhận bảng giá dự án');
 		d.append('message', 'Trang landing: ' + document.title + (f.getAttribute('data-form') ? ' – ' + f.getAttribute('data-form') : '') + (extra ? ' – quan tâm: ' + extra : ''));
 		try { fetch(url, { method: 'POST', body: d, credentials: 'same-origin', keepalive: true }); } catch (err) {}
 		// Đã để lại số ở form bất kỳ → không hỏi lại khi xem mô hình 3D/4D.

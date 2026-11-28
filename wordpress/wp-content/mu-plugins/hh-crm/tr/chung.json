@@ -7046,5 +7046,61 @@
  "Hình minh họa mang tính tham khảo; vật liệu, thiết bị bàn giao theo hợp đồng mua bán từng căn.": [
   "Illustrations are for reference; handover materials and fittings follow each unit's sale contract.",
   "그림은 참고용이며, 인도 자재와 설비는 세대별 매매계약을 따릅니다."
+ ],
+ "Thuê · Mua bán": [
+  "Rent · Resale",
+  "임대 · 매매"
+ ],
+ "Cho thuê · Chuyển nhượng": [
+  "For rent · Resale",
+  "임대 · 양도"
+ ],
+ "Khách cần thuê": [
+  "Looking to rent",
+  "임차 희망"
+ ],
+ "Khách cần mua": [
+  "Looking to buy",
+  "매수 희망"
+ ],
+ "Chủ nhà": [
+  "Owners",
+  "집주인"
+ ],
+ "Nhận danh sách căn cho thuê": [
+  "Get rental listings",
+  "임대 매물 목록 받기"
+ ],
+ "Gửi căn cho thuê": [
+  "List my unit for rent",
+  "임대 맡기기"
+ ],
+ "Ký gửi bán căn": [
+  "List my unit for sale",
+  "매매 맡기기"
+ ],
+ "Nhu cầu của anh/chị": [
+  "Your need",
+  "요청 사항"
+ ],
+ "Căn trống theo loại căn, nội thất, thời hạn thuê; hẹn xem nhà theo lịch của bạn.": [
+  "Vacant units by type, furnishing and lease term; viewings arranged on your schedule.",
+  "유형·가구·임대 기간별 공실, 원하는 일정에 방문 예약."
+ ],
+ "Căn chuyển nhượng giá thật, kiểm tra sổ hồng, hỗ trợ đặt cọc, công chứng, sang tên.": [
+  "Resale units at real prices, title check, help with deposit, notarisation and transfer.",
+  "실거래가 양도 매물, 소유권 확인, 계약금·공증·명의 이전 지원."
+ ],
+ "Định giá thuê sát thị trường, tìm khách, dẫn xem, làm hợp đồng thuê; không công khai số chủ nhà.": [
+  "Market-based rent valuation, tenant search, viewings and lease contract; owner's number kept private.",
+  "시세 기준 임대료 산정, 임차인 모집, 방문 안내, 임대 계약; 집주인 번호 비공개."
+ ],
+ "Định giá theo giao dịch cùng khu, đăng tin, lọc khách thật, hỗ trợ thủ tục, thuế, sang tên.": [
+  "Valuation from nearby deals, listing, buyer screening, help with paperwork, tax and transfer.",
+  "인근 거래 기준 가격 산정, 매물 등록, 실수요자 선별, 절차·세금·명의 이전 지원."
+ ],
+ "Dự án đã bàn giao – Hoàng Hiệp nhận cả bốn việc: tìm căn cho khách thuê, khách mua lại; nhận gửi cho thuê, ký gửi bán cho chủ nhà. Chọn đúng nhu cầu, Hiệp gửi danh sách hoặc gọi lại trong ngày.": [
+  "The project has been handed over – Hoang Hiep handles all four: finding units for tenants and buyers, and taking rental and sale listings from owners. Pick your need and Hiep will send a list or call back the same day.",
+  "인도 완료 프로젝트 – 호앙 히엡이 임차·매수 고객의 매물 찾기와 집주인의 임대·매매 위탁을 모두 맡습니다. 요청을 선택하시면 당일 목록을 보내거나 연락드립니다."
  ]
 }
