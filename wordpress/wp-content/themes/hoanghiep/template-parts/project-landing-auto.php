@@ -643,11 +643,11 @@ if ( ! $parent ) {
 <?php if ( isset( $nav['giao-dich'] ) ) : ?>
 <?php
 $mk    = function_exists( 'hh_project_market' ) ? hh_project_market( $id ) : array( 'ban' => array( 'count' => 0, 'range' => '' ), 'thue' => array( 'count' => 0, 'range' => '' ) );
-$gd_b  = $mk['ban']['count'] ? $mk['ban']['count'] . ' căn đang chuyển nhượng' . ( $mk['ban']['range'] ? ', ' . $mk['ban']['range'] : '' ) : ( $m( 'hh_p_resale_price' ) ? 'Giá chuyển nhượng tham khảo: ' . $m( 'hh_p_resale_price' ) : '' );
-$gd_t  = $mk['thue']['count'] ? $mk['thue']['count'] . ' căn đang cho thuê' . ( $mk['thue']['range'] ? ', ' . $mk['thue']['range'] : '' ) : ( $m( 'hh_p_rent_price' ) ? 'Giá thuê tham khảo: ' . $m( 'hh_p_rent_price' ) : '' );
+$gd_b  = $mk['ban']['count'] ? $mk['ban']['count'] . ' căn đang chuyển nhượng' . ( $mk['ban']['range'] ? ', ' . $mk['ban']['range'] : '' ) : ( $m( 'hh_p_resale_price' ) ? 'Giá chuyển nhượng tham khảo: ' . preg_replace( '/^\s*(giá\s+)?chuyển nhượng\s*:\s*/iu', '', $m( 'hh_p_resale_price' ) ) : '' );
+$gd_t  = $mk['thue']['count'] ? $mk['thue']['count'] . ' căn đang cho thuê' . ( $mk['thue']['range'] ? ', ' . $mk['thue']['range'] : '' ) : ( $m( 'hh_p_rent_price' ) ? 'Giá thuê tham khảo: ' . preg_replace( '/^\s*(giá\s+)?(cho\s+)?thuê\s*:\s*/iu', '', $m( 'hh_p_rent_price' ) ) : '' );
 $gd    = array(
-	array( 'thue', 'Khách cần thuê', 'Cần thuê căn ' . $short_name, 'Căn trống theo loại căn, nội thất, thời hạn thuê; hẹn xem nhà theo lịch của bạn.', $gd_t, 'Nhận danh sách căn cho thuê' ),
-	array( 'mua', 'Khách cần mua', 'Cần mua lại căn ' . $short_name, 'Căn chuyển nhượng giá thật, kiểm tra sổ hồng, hỗ trợ đặt cọc, công chứng, sang tên.', $gd_b, 'Nhận danh sách căn đang bán' ),
+	array( 'thue', 'Khách cần thuê', 'Cần thuê căn ' . $short_name, 'Căn trống theo loại căn, nội thất, thời hạn thuê; hẹn xem nhà theo lịch của bạn.', $gd_t, 'Nhận căn cho thuê' ),
+	array( 'mua', 'Khách cần mua', 'Cần mua lại căn ' . $short_name, 'Căn chuyển nhượng giá thật, kiểm tra sổ hồng, hỗ trợ đặt cọc, công chứng, sang tên.', $gd_b, 'Nhận căn đang bán' ),
 	array( 'gui-thue', 'Chủ nhà', 'Có căn ' . $short_name . ' cần cho thuê', 'Định giá thuê sát thị trường, tìm khách, dẫn xem, làm hợp đồng thuê; không công khai số chủ nhà.', '', 'Gửi căn cho thuê' ),
 	array( 'gui-ban', 'Chủ nhà', 'Có căn ' . $short_name . ' cần bán', 'Định giá theo giao dịch cùng khu, đăng tin, lọc khách thật, hỗ trợ thủ tục, thuế, sang tên.', '', 'Ký gửi bán căn' ),
 );
