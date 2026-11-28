@@ -111,3 +111,38 @@
 .ld-plan--bld img { object-fit: cover; aspect-ratio: 4 / 3; }
 .ld-proj__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 14px; padding: 14px 16px; border-radius: 14px; background: var(--tint); }
 .ld-proj__cta small { color: var(--text); }
+
+/* Bố cục tin rao một cột giữa trang (anh Hiệp 28/11/2026): Hình chính → Tiêu đề → Giới thiệu → Thông tin → Mặt bằng & hình ảnh → Liên hệ. */
+.ld2 { padding-top: 18px; padding-bottom: 40px; }
+.ld2 .ld-hero { max-width: 1080px; margin: 0 auto; }
+.ld2-main { max-width: 900px; margin: 0 auto; }
+.ld2-head { text-align: center; padding: 26px 0 10px; }
+.ld2-head .listing-head__pills { justify-content: center; }
+.ld2-head .meta-line { justify-content: center; }
+.ld2-pricebar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 20px; margin: 12px 0 8px; }
+.ld2-pricebar .ld-head__price { margin: 0; }
+.ld2-toc { justify-content: center; margin: 6px 0 4px; }
+.ld2 .ld-sec { margin-top: 34px; }
+.ld2 .block__title { text-align: center; }
+.ld2 .ld-intro { font-size: 1.08rem; line-height: 1.7; }
+.ld2-sub { margin: 22px 0 12px; font-size: 1.05rem; text-align: center; }
+.ld2-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ld2-grid > :only-child { grid-column: 1 / -1; max-width: 640px; justify-self: center; width: 100%; }
+.ld2-grid .ld-plan img { aspect-ratio: 4 / 3; height: auto; max-height: none; object-fit: contain; background: #f6f7f9; }
+.ld2-photos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ld2-photos .ld-plan img { object-fit: cover; }
+.ld2-policy { margin: 18px 0; }
+.ld2-policy h3 { font-size: 1rem; margin-bottom: 6px; }
+.ld2-video { margin-top: 18px; }
+.ld2-contact { padding: 26px; border-radius: 18px; background: var(--navy, #0b2447); color: #fff; }
+.ld2-contact .block__title { color: #fff; }
+.ld2-contact__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 22px; align-items: start; }
+.ld2-contact__info .side-price { margin-bottom: 14px; }
+.ld2-contact__form .lead-form, .ld2-contact__form form { margin: 0; }
+@media (max-width: 760px) {
+	.ld2-grid, .ld2-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+	.ld2-grid:not(.ld2-photos) { grid-template-columns: 1fr; }
+	.ld2-contact { padding: 18px 14px; }
+	.ld2-contact__grid { grid-template-columns: 1fr; }
+	.ld2-head { padding-top: 18px; }
+}

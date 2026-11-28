@@ -735,10 +735,7 @@ function hh_seo_schema() {
 		$landing = function_exists( 'hoanghiep_landing_file' ) ? hoanghiep_landing_file() : '';
 		$graph[] = hh_schema_faq( $landing ? hh_landing_faq_rows( $landing ) : hh_project_faq() );
 	} elseif ( is_singular( 'bat-dong-san' ) ) {
-		$graph[] = hh_schema_listing();
-		if ( function_exists( 'hh_ld_faq' ) ) {
-			$graph[] = hh_schema_faq( hh_ld_faq() ); // Khớp đúng phần Hỏi đáp hiện trên trang tin.
-		}
+		$graph[] = hh_schema_listing(); // Trang tin không còn mục Hỏi đáp (28/11/2026) → không xuất FAQ schema.
 	}
 	if ( is_singular( 'post' ) ) {
 		$graph[] = hh_schema_faq( hh_table( 'hh_post_faq', 2 ) );

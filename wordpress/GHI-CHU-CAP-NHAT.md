@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.68** + plugin Hoàng Hiệp CRM **2.20.410**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.69** + plugin Hoàng Hiệp CRM **2.20.411**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.411 (giao diện 2.16.69)
+
+- Trang chi tiết tin mua bán / cho thuê: bố cục mới một cột giữa trang theo thứ tự Hình chính → Tiêu đề → Giới thiệu → Thông tin → Mặt bằng & hình ảnh → Liên hệ. Bỏ bản đồ, hỏi đáp và tin liên quan để khách tập trung vào căn đang xem; giá chỉ hiện ở tiêu đề và khung liên hệ.
 
 ## Có gì mới – 2.20.410 (giao diện 2.16.68)
 
