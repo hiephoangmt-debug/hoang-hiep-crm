@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Park Home Casamia",
+  "316 m²",
+  "sàn, 3 phòng ngủ"
+ ],
+ "question": "Bên trong nhà vườn có gì?",
+ "hook_bg": "/tmp/scratch/c-noi-that-phong-khach.jpg",
+ "data_title": [
+  "Casamia Balanca",
+  "NỘI THẤT"
+ ],
+ "rows": [
+  [
+   "178 m²",
+   "Diện tích đất",
+   "Dòng Park Home"
+  ],
+  [
+   "316,09 m²",
+   "Diện tích sàn",
+   "Nhà phố vườn"
+  ],
+  [
+   "3",
+   "Phòng ngủ",
+   "Hợp gia đình nhiều thế hệ"
+  ],
+  [
+   "12/2026",
+   "Bàn giao thô",
+   "Theo chính sách chủ đầu tư"
+  ],
+  [
+   "2027",
+   "Bàn giao nội thất",
+   "Theo chính sách chủ đầu tư"
+  ]
+ ],
+ "note": "Theo chủ đầu tư Đạt Phương. Phối cảnh nội thất.",
+ "photo": "/tmp/scratch/c-noi-that-phong-ngu.jpg",
+ "photo_caption": "Phối cảnh phòng ngủ Casamia",
+ "cta": "Mặt bằng: Zalo 0904 567 009"
+}

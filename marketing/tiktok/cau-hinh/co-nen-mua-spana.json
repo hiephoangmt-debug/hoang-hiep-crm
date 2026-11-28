@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Sun NeO City Hòa Xuân",
+  "30/6/2027",
+  "nhận nhà sớm nhất"
+ ],
+ "question": "Có nên mua Spana Tower?",
+ "hook_bg": "/tmp/scratch/spana.jpg",
+ "data_title": [
+  "Spana Tower",
+  "CÂN NHẮC"
+ ],
+ "rows": [
+  [
+   "65–73 tr",
+   "Đơn giá/m² Spana",
+   "Bảng hàng 10/2026, gồm VAT"
+  ],
+  [
+   "58–69 tr",
+   "Đơn giá/m² S-Light",
+   "Cùng bảng hàng"
+  ],
+  [
+   "1.237",
+   "Căn hộ, 2 tòa",
+   "Nguồn cung lớn cùng khu"
+  ],
+  [
+   "05/5/2026",
+   "Đủ điều kiện bán",
+   "VietinBank bảo lãnh"
+  ],
+  [
+   "~tầng 10",
+   "Tiến độ 11/2026",
+   "Bàn giao dự kiến 30/6/2027"
+  ]
+ ],
+ "note": "Theo tài liệu chủ đầu tư, bảng hàng 10/2026. Ảnh công trường 11/2026.",
+ "photo": "/tmp/scratch/spana.jpg",
+ "photo_caption": "Spana Tower – Hòa Xuân",
+ "cta": "Bảng hàng: Zalo 0904 567 009"
+}

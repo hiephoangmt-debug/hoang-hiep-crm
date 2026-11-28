@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Hội An, ven sông Cổ Cò",
+  "363",
+  "căn trên 31,1 ha"
+ ],
+ "question": "Sống chậm ở Casamia thế nào?",
+ "hook_bg": "/tmp/scratch/c-nha-vuon-ven-song.jpg",
+ "data_title": [
+  "Casamia Balanca",
+  "SỐNG CHẬM"
+ ],
+ "rows": [
+  [
+   "31,1 ha",
+   "Khu đô thị",
+   "Mật độ thấp"
+  ],
+  [
+   "363",
+   "Sản phẩm thấp tầng",
+   "Đơn lập, song lập, shophouse"
+  ],
+  [
+   "5",
+   "Công viên chủ đề",
+   "Yoga, dạo bộ, pickleball"
+  ],
+  [
+   "Cổ Cò",
+   "Mặt sông",
+   "Hướng vịnh Cửa Đại"
+  ],
+  [
+   "Bảy Mẫu",
+   "Rừng dừa",
+   "Ngay cạnh dự án"
+  ]
+ ],
+ "note": "Theo chủ đầu tư Đạt Phương. Phối cảnh dự án.",
+ "photo": "/tmp/scratch/c-thien-bai-co.jpg",
+ "photo_caption": "Phối cảnh khu công viên Casamia",
+ "cta": "Tham quan: Zalo 0904 567 009"
+}

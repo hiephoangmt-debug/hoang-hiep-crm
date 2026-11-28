@@ -1,0 +1,44 @@
+{
+ "hook": [
+  "Mùa mưa Đà Nẵng",
+  "4 tháng",
+  "thấp điểm mỗi năm"
+ ],
+ "question": "Cho thuê Sun Saphia mùa vắng?",
+ "hook_bg": "/tmp/scratch/saphia-dem.jpg",
+ "data_title": [
+  "Sun Saphia",
+  "MÙA THẤP ĐIỂM"
+ ],
+ "rows": [
+  [
+   "Tháng 9–12",
+   "Mùa mưa",
+   "Tháng 10–11 có thể có bão"
+  ],
+  [
+   "Tháng 6–8",
+   "Cao điểm",
+   "Giá đêm cao nhất năm"
+  ],
+  [
+   "513",
+   "Studio cùng tòa",
+   "Cạnh tranh giá khi vắng khách"
+  ],
+  [
+   "~2 ngày",
+   "Khách quốc tế lưu trú",
+   "9 tháng 2026 (Tuổi Trẻ)"
+  ],
+  [
+   "11/2028",
+   "Bàn giao dự kiến",
+   "Mùa đầu có thể là mùa mưa"
+  ]
+ ],
+ "note": "Theo cẩm nang thời tiết Đà Nẵng, Tuổi Trẻ 18/10/2026. Phối cảnh dự án.",
+ "photo": "/tmp/scratch/saphia-hh.jpg",
+ "photo_caption": "Sun Saphia Residence – phối cảnh",
+ "cta": "Dòng tiền: Zalo 0904 567 009"
+}

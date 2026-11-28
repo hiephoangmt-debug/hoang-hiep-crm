@@ -1,0 +1,85 @@
+{
+ "tag": "CHO THUÊ · SUN SAPHIA RESIDENCE",
+ "title": "CASAMIA BALANCA",
+ "sub": "Đổi từ thuê theo đêm sang thuê tuần, tháng",
+ "xc": 0.5,
+ "yc": 0.5,
+ "stats": [
+  [
+   "Tháng 9–12",
+   "mùa mưa"
+  ],
+  [
+   "513",
+   "studio cùng tòa"
+  ],
+  [
+   "11/2028",
+   "bàn giao dự kiến"
+  ]
+ ],
+ "items": [
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ],
+  [
+   "a",
+   "b"
+  ]
+ ],
+ "box": "",
+ "note": "Theo cẩm nang thời tiết Đà Nẵng, Tuổi Trẻ · Phối cảnh dự án",
+ "headline": [
+  [
+   "CASAMIA BALANCA",
+   "big",
+   0
+  ],
+  [
+   "tận mắt trước khi chọn",
+   "script",
+   300
+  ],
+  [
+   "",
+   "cap",
+   120
+  ]
+ ],
+ "headline_poster": [
+  {
+   "segs": [
+    [
+     "Cho thuê mùa thấp điểm",
+     "plain"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "SUN SAPHIA",
+     "big"
+    ]
+   ]
+  },
+  {
+   "segs": [
+    [
+     "để căn không bỏ trống",
+     "script"
+    ]
+   ],
+   "dx": 170
+  }
+ ]
+}
