@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.64** + plugin Hoàng Hiệp CRM **2.20.405**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.65** + plugin Hoàng Hiệp CRM **2.20.406**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.406 (giao diện 2.16.65)
+
+- Mục Thuê · Mua bán: chữ mô tả canh trái hẳn (không bị giãn khoảng do kiểu dàn đều của trang).
 
 ## Có gì mới – 2.20.405 (giao diện 2.16.64)
 
