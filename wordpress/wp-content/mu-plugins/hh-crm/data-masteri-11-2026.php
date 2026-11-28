@@ -450,3 +450,46 @@ add_filter(
 	},
 	1000
 );
+
+/** 28/11/2026: sửa thẳng tên đường trong các bài viết Masteri đã đăng (Nguyễn An Ninh → Trần Đăng Ninh), chạy một lần. */
+function hh_masteri_2811_street_posts() {
+	if ( get_option( 'hh_masteri_street_2026_11_28' ) ) {
+		return;
+	}
+	$done = true;
+	foreach ( array( 'can-ho-masteri-rivera-danang-phan-tich', 'masteri-da-nang-gia-tien-do-ban-giao' ) as $slug ) {
+		$p = get_page_by_path( $slug, OBJECT, 'post' );
+		if ( ! $p ) {
+			$done = false;
+			continue;
+		}
+		if ( false !== strpos( $p->post_content, 'Nguyễn An Ninh' ) || false !== strpos( $p->post_excerpt, 'Nguyễn An Ninh' ) ) {
+			wp_update_post(
+				array(
+					'ID'           => $p->ID,
+					'post_content' => str_replace( 'Nguyễn An Ninh', 'Trần Đăng Ninh', $p->post_content ),
+					'post_excerpt' => str_replace( 'Nguyễn An Ninh', 'Trần Đăng Ninh', $p->post_excerpt ),
+				)
+			);
+			$hash = get_post_meta( $p->ID, '_hh_news_hash', true );
+			if ( $hash ) {
+				update_post_meta( $p->ID, '_hh_news_hash', md5( get_post( $p->ID )->post_content ) );
+			}
+		}
+		foreach ( get_post_meta( $p->ID ) as $k => $vals ) {
+			$v = maybe_unserialize( $vals[0] ?? '' );
+			if ( is_string( $v ) && false !== strpos( $v, 'Nguyễn An Ninh' ) ) {
+				update_post_meta( $p->ID, $k, str_replace( 'Nguyễn An Ninh', 'Trần Đăng Ninh', $v ) );
+			}
+		}
+	}
+	if ( $done ) {
+		update_option( 'hh_masteri_street_2026_11_28', 1, false );
+	}
+}
+add_action( 'admin_init', 'hh_masteri_2811_street_posts', 30 );
+add_action( 'init', static function () {
+	if ( wp_doing_cron() ) {
+		hh_masteri_2811_street_posts();
+	}
+}, 120 );
