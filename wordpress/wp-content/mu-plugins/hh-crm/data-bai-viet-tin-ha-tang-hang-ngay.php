@@ -1948,6 +1948,7 @@ HTML
 		'keywords_extra' => array( 'cầu mới sông Hàn Thuận Phước', 'căn hộ ven sông Hàn Sơn Trà', 'trục Đông – Tây Đà Nẵng' ),
 		'project'        => 'sun-symphony-residence',
 		'schedule'       => '2026-11-28 06:45',
+		'rev'            => 2, // 28/11: thêm ảnh toàn cảnh sông Hàn hai bờ (anh Hiệp gửi).
 		'category'       => 'Hạ tầng & quy hoạch',
 		'tags'           => array( 'Sông Hàn', 'Cầu mới', 'Sơn Trà', 'Hải Châu' ),
 		'image'          => 'plugin:img/da-nang/song-han-cau-quay-trung-tam-ve-dem.jpg',
@@ -1976,6 +1977,7 @@ HTML
 <p>Phạm vi thi tuyển cầu mới qua sông Hàn bao trùm hai hành lang tuyến định hướng ở cả hai bờ:</p>
 <p><strong>Bờ Tây (phường Hải Châu):</strong> khu vực nút Đống Đa – 3 Tháng 2 – Như Nguyệt – Bạch Đằng – Trần Phú và các trục Đống Đa, 3 Tháng 2, Như Nguyệt, Bạch Đằng, Trần Phú, Lê Duẩn, Lương Ngọc Quyến.</p>
 <p><strong>Bờ Đông (phường Sơn Trà):</strong> các trục Trần Hưng Đạo, Vân Đồn, Bùi Dương Lịch, Hoàng Việt, Nguyễn Thị Định, Đỗ Anh Hàn, Chu Huy Mân, Trần Thánh Tông, Ngô Quyền, Vương Thừa Vũ, đường số 1 KCN An Đồn và các tuyến nhánh liên quan.</p>
+<!--hh-img:img/da-nang/song-han-toan-canh-flycam-hai-bo-hai-chau-son-tra.jpg|Toàn cảnh sông Hàn với hai bờ Hải Châu – Sơn Trà nhìn từ trên cao: phạm vi thi tuyển cầu mới nằm trong đoạn cầu sông Hàn – cầu Thuận Phước-->
 <p>Ngoài cây cầu, phương án dự thi tuyển cầu mới qua sông Hàn phải nghiên cứu cả không gian hai bờ, không gian dưới cầu và hai đầu cầu; tuyến đi bộ ven sông, công viên, quảng trường; trục nhìn, đường chân trời (skyline) khu trung tâm; quan hệ với chuỗi cầu hiện hữu và <strong>các khu nhà kho, bến bãi cũ ven sông có khả năng tái cấu trúc</strong>.</p>
 <!--hh-img:img/peninsula/peninsula-da-nang-tien-do-10-2026-cua-so-nhin-cau-thuan-phuoc.jpg|Thi tuyển cầu mới qua sông Hàn trong đoạn tới cầu Thuận Phước – ảnh thật từ Peninsula Đà Nẵng nhìn cầu Thuận Phước, 10/2026-->
 <h2>Vì sao Đà Nẵng cần cầu mới qua sông Hàn?</h2>
