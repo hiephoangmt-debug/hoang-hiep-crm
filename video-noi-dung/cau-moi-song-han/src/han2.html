@@ -1,0 +1,207 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+:root{--gold:#F2C14E}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#05080d;font-family:Inter,sans-serif;color:#fff}
+canvas{position:absolute;left:0;top:0}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,0) 40%,rgba(0,0,0,.55) 100%),linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 28%,rgba(0,0,0,0) 70%,rgba(0,0,0,.6) 100%)}
+.el{position:absolute;opacity:0;will-change:transform,opacity}
+.h1{font-weight:900;text-transform:uppercase;letter-spacing:2px;font-size:56px;text-align:center;text-shadow:0 4px 18px rgba(0,0,0,.85)}
+.h1:after{content:"";display:block;width:220px;height:6px;margin:14px auto 0;background:linear-gradient(90deg,#F6D06A,#E09A2C);border-radius:3px}
+.gold{font-weight:900;font-size:100px;text-align:center;line-height:1.05;background:linear-gradient(180deg,#FFE28A 0%,#F2B33D 55%,#C9831F 100%);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 6px 14px rgba(0,0,0,.8))}
+.tag{background:linear-gradient(180deg,#F8D46E,#DFA23A);color:#1b1205;font-weight:900;font-size:40px;padding:12px 30px;border-radius:10px;white-space:nowrap;box-shadow:0 8px 26px rgba(0,0,0,.5);transform-origin:center}
+.chip{background:rgba(8,14,24,.85);border:2px solid var(--gold);color:#fff;font-weight:800;font-size:34px;padding:12px 22px;border-radius:12px;white-space:nowrap;box-shadow:0 8px 22px rgba(0,0,0,.45)}
+.chip b{color:var(--gold)}
+.pin{position:absolute;width:0;height:0}
+.pin .lab{position:absolute;left:0;top:-92px;transform:translateX(-50%)}
+.pin .dot{position:absolute;left:-14px;top:-14px;width:28px;height:28px;border-radius:50%;background:#fff;border:6px solid #FF8A1F;box-shadow:0 0 20px #FF8A1F}
+.press{width:980px;background:#fff;color:#111;border-radius:14px;padding:30px 34px 26px;border:4px solid var(--gold);box-shadow:0 18px 50px rgba(0,0,0,.6)}
+.press .k{position:absolute;left:-14px;top:-34px;transform:rotate(-4deg);background:#F6C84F;color:#111;font-weight:900;font-size:34px;padding:8px 20px;border-radius:8px;box-shadow:0 6px 14px rgba(0,0,0,.35)}
+.press .t{font-weight:800;font-size:42px;line-height:1.25;font-family:Georgia,serif}
+.press .t mark{background:#FDE68A;padding:0 4px}
+.press .s{margin-top:16px;font-size:26px;color:#555;font-weight:600}
+.src{position:absolute;left:0;right:0;bottom:30px;text-align:center;font-size:24px;color:rgba(255,255,255,.75);font-weight:600;text-shadow:0 2px 6px #000}
+.cap{position:absolute;left:60px;right:60px;top:1560px;text-align:center;font-weight:900;font-style:italic;font-size:50px;line-height:1.2;text-transform:uppercase;text-shadow:0 3px 0 #000,0 0 18px rgba(0,0,0,.9)}
+.cap .w{opacity:.55}.cap .w.on{opacity:1;color:var(--gold)}
+.follow{background:#FE2C55;color:#fff;font-weight:900;font-size:44px;padding:18px 50px;border-radius:60px}
+</style></head><body>
+<canvas id="map" width="1080" height="1920"></canvas>
+<canvas id="vec" width="1080" height="1920"></canvas>
+<div id="vig"></div>
+<div id="ui"></div>
+<div class="src" id="src">Ảnh vệ tinh: Esri World Imagery · Đường: © OpenStreetMap · Tin: Tuổi Trẻ Online, Báo Đà Nẵng online</div>
+<script src="data.js"></script><script src="fly.js"></script>
+<script>
+const D=window.DATA, T=D.timing, S={}; T.forEach(s=>S[s.id]=s);
+const TOTAL=55.24; window.TOTAL=TOTAL;
+const nrm=w=>w.toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
+function w(id,k,n=0){const s=S[id];const h=s.words.map((x,i)=>[x,i]).filter(([x])=>nrm(x.word).startsWith(k));const x=(h[Math.min(n,h.length-1)]||[s.words[0]])[0];return s.start+x.start;}
+const st=id=>S[id].start, en=id=>S[id].start+S[id].dur+0.45;
+// ---------- projection ----------
+function merc0(lat,lon){const x=(lon+180)/360*256;const r=lat*Math.PI/180;const y=(1-Math.log(Math.tan(r)+1/Math.cos(r))/Math.PI)/2*256;return[x,y];}
+const ss=x=>x*x*(3-2*x);
+function cam(t){const K=D.cam.keys;if(t<=K[0][0]){const a=K[0];const m=merc0(a[1],a[2]);return{x:m[0],y:m[1],z:a[3],r:a[4]};}
+  for(let i=0;i<K.length-1;i++){const a=K[i],b=K[i+1];if(t>=a[0]&&t<=b[0]){const u=ss(b[0]>a[0]?(t-a[0])/(b[0]-a[0]):1);const A=merc0(a[1],a[2]),B=merc0(b[1],b[2]);
+    return{x:A[0]+(B[0]-A[0])*u,y:A[1]+(B[1]-A[1])*u,z:a[3]+(b[3]-a[3])*u,r:a[4]+(b[4]-a[4])*u};}}
+  const a=K[K.length-1];const m=merc0(a[1],a[2]);return{x:m[0],y:m[1],z:a[3],r:a[4]};}
+let C=null;
+function P(lat,lon){const m=merc0(lat,lon);const k=Math.pow(2,C.z);let dx=(m[0]-C.x)*k,dy=(m[1]-C.y)*k;const a=C.r*Math.PI/180;return[540+dx*Math.cos(a)-dy*Math.sin(a),960+dx*Math.sin(a)+dy*Math.cos(a)];}
+// ---------- tiles ----------
+const cache={};
+function tile(z,x,y){const k=z+'/'+x+'/'+y;if(!cache[k]){const im=new Image();im.src='tiles/'+k+'.jpg';cache[k]=im;im._p=new Promise(r=>{im.onload=()=>r(true);im.onerror=()=>r(false)});}return cache[k];}
+const mc=document.getElementById('map').getContext('2d'), vc=document.getElementById('vec').getContext('2d');
+async function drawMap(){
+  const L=Math.max(3,Math.min(17,Math.floor(C.z+0.4))), s=Math.pow(2,C.z-L), cx=C.x*Math.pow(2,L), cy=C.y*Math.pow(2,L), h=1110/s;
+  const list=[];for(let tx=Math.floor((cx-h)/256);tx<=Math.floor((cx+h)/256);tx++)for(let ty=Math.floor((cy-h)/256);ty<=Math.floor((cy+h)/256);ty++)list.push([tx,ty,tile(L,tx,ty)]);
+  await Promise.all(list.map(l=>l[2]._p));
+  mc.setTransform(1,0,0,1,0,0);mc.fillStyle='#0a1a2a';mc.fillRect(0,0,1080,1920);
+  mc.translate(540,960);mc.rotate(C.r*Math.PI/180);mc.scale(s,s);
+  for(const [tx,ty,im] of list){if(im.complete&&im.naturalWidth)mc.drawImage(im,tx*256-cx,ty*256-cy,256.6,256.6);}
+  mc.setTransform(1,0,0,1,0,0);
+  // sea unify: open-sea pixels (dark, bluish) -> one smooth sea colour (+ big blur) to hide imagery tile seams
+  if(!window._off){window._off=document.createElement('canvas');_off.width=108;_off.height=192;window._oc=_off.getContext('2d');
+    window._big=document.createElement('canvas');_big.width=1080;_big.height=1920;window._bc=_big.getContext('2d');}
+  _oc.filter='blur(14px)';_oc.clearRect(0,0,108,192);_oc.drawImage(mc.canvas,0,0,108,192);_oc.filter='none';
+  _bc.imageSmoothingQuality='high';_bc.drawImage(_off,0,0,1080,1920);
+  const A=mc.getImageData(0,0,1080,1920), B=_bc.getImageData(0,0,1080,1920), a=A.data, bb=B.data;
+  const SR=13,SG=34,SB=44;
+  for(let i=0;i<a.length;i+=4){const r=a[i],g=a[i+1],bl=a[i+2];const lum=(r+g+bl)/3;
+    if(bl>r+4 && lum<88){const k=lum<60?1:(88-lum)/28; const tr=SR*.6+bb[i]*.4, tg=SG*.6+bb[i+1]*.4, tb=SB*.6+bb[i+2]*.4;
+      a[i]=r+(tr-r)*k;a[i+1]=g+(tg-g)*k;a[i+2]=bl+(tb-bl)*k;}}
+  mc.putImageData(A,0,0);
+  // grade: slightly darker & warmer like reference
+  mc.fillStyle='rgba(10,14,22,.28)';mc.fillRect(0,0,1080,1920);
+}
+// ---------- vectors ----------
+const ease=x=>x<=0?0:x>=1?1:1-Math.pow(1-x,3);
+function poly(pts,prog,style){ // pts lat/lon list, prog 0..1 draw-on
+  const sp=pts.map(p=>P(p[0],p[1]));let tot=0;const seg=[];for(let i=1;i<sp.length;i++){const d=Math.hypot(sp[i][0]-sp[i-1][0],sp[i][1]-sp[i-1][1]);seg.push(d);tot+=d;}
+  let lim=tot*prog;vc.beginPath();vc.moveTo(sp[0][0],sp[0][1]);
+  for(let i=1;i<sp.length;i++){if(lim<=0)break;if(seg[i-1]<=lim){vc.lineTo(sp[i][0],sp[i][1]);lim-=seg[i-1];}else{const f=lim/seg[i-1];vc.lineTo(sp[i-1][0]+(sp[i][0]-sp[i-1][0])*f,sp[i-1][1]+(sp[i][1]-sp[i-1][1])*f);lim=0;}}
+  vc.save();vc.lineJoin='round';vc.lineCap='round';vc.setLineDash(style.dash||[]);
+  vc.shadowColor=style.glow;vc.shadowBlur=style.blur||18;vc.strokeStyle=style.color;vc.globalAlpha=style.alpha??1;vc.lineWidth=style.width;vc.stroke();
+  vc.shadowBlur=0;vc.lineWidth=style.width*0.45;vc.strokeStyle=style.core||style.color;vc.stroke();vc.restore();
+}
+const R=D.roads, ZONE=D.zone, POI=D.poi;
+function win(t,a,b,fi=.4,fo=.4){return Math.max(0,Math.min(1,(t-a)/fi,(b-t)/fo));}
+const GOLD={color:'#F6C34A',glow:'rgba(246,195,74,.95)',core:'#FFF2C4',width:11,blur:20};
+const CYAN={color:'#6FE3FF',glow:'rgba(111,227,255,.95)',core:'#E6FAFF',width:11,blur:20};
+const BR={color:'#FF5A4E',glow:'rgba(255,90,78,1)',core:'#FFD9D5',width:15,blur:26};
+const BRDIM={color:'#FF8A7E',glow:'rgba(255,120,110,.6)',width:9,blur:12};
+function dots(lines,t,speed,n,color,size){ // traffic dots moving along polylines (screen space)
+  for(const l of lines){const sp=l.map(p=>P(p[0],p[1]));let tot=0;const seg=[];for(let i=1;i<sp.length;i++){const d=Math.hypot(sp[i][0]-sp[i-1][0],sp[i][1]-sp[i-1][1]);seg.push(d);tot+=d;}
+    if(tot<10)continue;
+    for(let k=0;k<n;k++){for(const dir of [1,-1]){let u=((k/n)+dir*t*speed+ (dir<0?.37:0))%1;if(u<0)u+=1;
+      // bunching: dots crowd near the ends (bridgeheads)
+      u=.5+.5*Math.sign(u-.5)*Math.pow(Math.abs(2*u-1),.55);
+      let L=u*tot,i=0;while(i<seg.length-1&&L>seg[i]){L-=seg[i];i++;}const f=seg[i]?L/seg[i]:0;
+      const x=sp[i][0]+(sp[i+1][0]-sp[i][0])*f,y=sp[i][1]+(sp[i+1][1]-sp[i][1])*f;
+      const nx=-(sp[i+1][1]-sp[i][1])/(seg[i]||1),ny=(sp[i+1][0]-sp[i][0])/(seg[i]||1);const off=dir*5;
+      vc.beginPath();vc.arc(x+nx*off,y+ny*off,size,0,7);vc.fillStyle=color;vc.shadowColor=color;vc.shadowBlur=10;vc.fill();}}}
+  vc.shadowBlur=0;}
+function drawVec(t){
+  vc.setTransform(1,0,0,1,0,0);vc.clearRect(0,0,1080,1920);
+  const allA=win(t,st('s2')+.2,en('s5'),.3,.5);
+  const BL=[['thuan_phuoc','thuận',0],['song_han','sông',1],['rong','rồng',0],['tran_thi_ly','trần',0],['tien_son','tiên',0]];
+  if(allA>0){for(const [k,key,nth] of BL){const t0=w('s2',key,nth);if(t<t0)continue;const hot=['song_han','rong','tran_thi_ly'].includes(k)&&t>=st('s3');
+      R[k].forEach(l=>poly(l,ease((t-t0)/0.7),{...(hot?BR:BR),alpha:allA*(hot||t<st('s3')||t>en('s4')?1:.45)}));}}
+  // traffic jam dots on 3 overloaded bridges
+  const ja=win(t,st('s3')+.4,en('s4'),.5,.5);
+  if(ja>0){vc.save();vc.globalAlpha=ja;for(const k of ['song_han','rong','tran_thi_ly'])dots(R[k],t,0.025,7,'#FF3B30',5.5);vc.restore();}
+  // gap bracket
+  const ga=win(t,st('s5')+.6,en('s5'),.3,.4);
+  if(ga>0){poly([POI.gapS,POI.gapN],ease((t-st('s5')-.6)/1.2),{color:'#fff',glow:'rgba(255,255,255,.9)',width:8,dash:[18,14],alpha:ga});}
+  // new bridge (solution)
+  const na=win(t,w('s6','cây'),en('s7'),.3,.5);
+  if(na>0){R.dong_da.forEach(l=>poly(l,ease((t-w('s6','đống'))/0.9),{...GOLD,alpha:na*.85}));
+    R.tran_phu.forEach(l=>poly(l,ease((t-w('s6','trần'))/0.9),{...GOLD,alpha:na*.85}));
+    R.van_don.forEach(l=>poly(l,ease((t-w('s6','vân'))/0.9),{...CYAN,alpha:na*.85}));
+    R.tran_hung_dao.forEach(l=>poly(l,ease((t-w('s6','trần',1))/0.9),{...CYAN,alpha:na*.85}));
+    const pulse=.75+.25*Math.sin(t*6);
+    poly([POI.nb_w,POI.nb_e],ease((t-w('s6','cây'))/0.9),{color:'#FFE08A',glow:'rgba(255,214,90,1)',core:'#fff',width:18,dash:[26,12],alpha:na*pulse,blur:30});}
+  // study zone at the end
+  const za=win(t,st('s9')-.2,TOTAL,.5,.6);
+  if(za>0){poly(ZONE,ease((t-st('s9')+.2)/2.0),{color:'#fff',glow:'rgba(255,255,255,.9)',width:7,alpha:za,blur:22});
+    R.song_han.concat(R.thuan_phuoc).forEach(l=>poly(l,1,{...BR,alpha:za}));poly([POI.nb_w,POI.nb_e],1,{color:'#FFE08A',glow:'rgba(255,214,90,1)',core:'#fff',width:16,dash:[24,12],alpha:za,blur:26});}
+}
+// ---------- UI elements ----------
+const ui=document.getElementById('ui'), els=[];
+function add(html,css,t0,t1,anim='pop'){const d=document.createElement('div');d.className='el';d.innerHTML=html;Object.assign(d.style,css);ui.appendChild(d);const e={n:d,t0,t1,anim,cx:css.transform||''};els.push(e);return e;}
+function pin(key,html,t0,t1,dy=-92){const e=add(`<div class="dot"></div><div class="lab" style="top:${dy}px">${html}</div>`,{},t0,t1,'pin');e.n.classList.add('pin');e.poi=POI[key];return e;}
+const X='translateX(-50%)';
+// s1 (photo)
+add('<div class="h1">Bài toán sông Hàn</div>',{left:'50%',top:'300px',transform:X,width:'1000px'},.1,en('s1'),'up');
+add('<div class="gold" style="font-size:96px">GIỜ CAO ĐIỂM<br>ĐI CẦU NÀO?</div>',{left:'50%',top:'430px',transform:X,width:'1040px'},w('s1','muốn'),en('s1'));
+// s2 five bridges
+add('<div class="h1">5 cây cầu qua sông Hàn</div>',{left:'50%',top:'300px',transform:X,width:'1040px'},st('s2'),en('s2'),'up');
+pin('thuanphuoc','<div class="chip">Thuận Phước</div>',w('s2','thuận')+.3,en('s2'));
+pin('songhan','<div class="chip">Sông Hàn</div>',w('s2','sông',1)+.3,en('s2'));
+pin('rong','<div class="chip">Cầu Rồng</div>',w('s2','rồng')+.3,en('s2'));
+pin('ttl','<div class="chip">Trần Thị Lý</div>',w('s2','trần')+.3,en('s2'));
+pin('tienson','<div class="chip">Tiên Sơn</div>',w('s2','tiên')+.3,en('s2'),70);
+// s3 overloaded axes
+add('<div class="tag" style="font-size:46px;background:linear-gradient(180deg,#FF6B5E,#D9352A);color:#fff">Lưu lượng rất lớn</div>',{left:'50%',top:'300px',transform:X},st('s3')+.3,en('s4'));
+add('<div class="chip">Lê Duẩn → <b>cầu Sông Hàn</b></div>',{left:'60px',top:'430px'},w('s3','lê'),en('s3'));
+add('<div class="chip">Nguyễn Văn Linh → <b>cầu Rồng</b></div>',{left:'60px',top:'525px'},w('s3','nguyễn'),en('s3'));
+add('<div class="chip">Duy Tân → <b>cầu Trần Thị Lý</b></div>',{left:'60px',top:'620px'},w('s3','duy'),en('s3'));
+add('<div class="chip" style="font-size:24px;border-width:1px">Chấm đỏ: minh họa dòng xe, không phải số liệu đo đếm</div>',{left:'50%',top:'1800px',transform:X},st('s3')+.6,en('s4'),'fade');
+// s4 press
+add('<div class="press"><div class="k">TRÍCH BÁO</div><div class="t">“Tình trạng <mark>ùn tắc tại các nút giao đầu cầu</mark> và dọc các trục đường ngày càng nghiêm trọng.”</div><div class="s">Nguồn: Tuổi Trẻ Online, 09/10/2026</div></div>',{left:'50%',top:'1080px',transform:X},st('s4'),w('s4','nút')+.2,'up');
+pin('rongW','<div class="chip">Nút phía Tây cầu Rồng · <b>ách tắc giờ cao điểm</b></div>',w('s4','nút')+1.4,en('s4'));
+add('<div class="chip" style="font-size:24px;border-width:1px">Nguồn: Tuổi Trẻ Online, 08/09/2026</div>',{left:'50%',top:'1440px',transform:X},w('s4','nút')+1.4,en('s4'),'fade');
+// s5 gap
+add('<div class="h1">Khoảng trống phía Bắc</div>',{left:'50%',top:'300px',transform:X,width:'1040px'},st('s5'),en('s5'),'up');
+add('<div class="gold" style="font-size:110px">~2,5 km</div>',{left:'77%',top:'820px',transform:X,width:'480px'},w('s5','hai'),en('s5'));
+add('<div class="tag" style="font-size:40px">không có cây cầu nào</div>',{left:'77%',top:'970px',transform:X},w('s5','không'),en('s5'));
+pin('songhan','<div class="chip">Cầu Sông Hàn</div>',st('s5')+.4,en('s5'),70);
+pin('thuanphuoc','<div class="chip">Cầu Thuận Phước</div>',st('s5')+.8,en('s5'));
+// s6 solution
+add('<div class="tag" style="font-size:50px">Lời giải</div>',{left:'50%',top:'300px',transform:X},st('s6'),en('s6'));
+add('<div class="h1" style="font-size:50px">Cầu mới tại nút giao Đống Đa</div>',{left:'50%',top:'400px',transform:X,width:'1040px'},w('s6','cây'),en('s6'),'up');
+add('<div class="chip">Hải Châu: <b>Đống Đa – Trần Phú</b></div>',{left:'60px',top:'1120px'},w('s6','đống',1),en('s6'));
+add('<div class="chip">Sơn Trà: <b>Vân Đồn – Trần Hưng Đạo</b></div>',{right:'60px',top:'1230px'},w('s6','vân'),en('s6'));
+add('<div class="chip" style="font-size:24px;border-width:1px">Vị trí vẽ trên bản đồ mang tính minh họa · Nguồn: Tuổi Trẻ Online, 09/10/2026</div>',{left:'50%',top:'1800px',transform:X},w('s6','cây'),en('s7'),'fade');
+// s7 money
+add('<div class="h1">Vốn trung hạn 2026–2030</div>',{left:'50%',top:'300px',transform:X,width:'1040px'},st('s7'),en('s7'),'up');
+add('<div class="gold" style="font-size:150px">500 TỶ</div>',{left:'50%',top:'1080px',transform:X,width:'1040px'},w('s7','năm'),en('s7'));
+add('<div class="tag" style="font-size:48px">Phấn đấu khởi công trước 2030</div>',{left:'50%',top:'1270px',transform:X},w('s7','phấn'),en('s7'));
+// s8 (photo) architecture
+add('<div class="press"><div class="k">TRÍCH BÁO</div><div class="t">“Đang lấy ý kiến dự thảo nhiệm vụ <mark>thi tuyển phương án quy hoạch, kiến trúc</mark> khu vực cầu mới qua sông Hàn và hai đầu cầu”</div><div class="s">Nguồn: Báo Đà Nẵng online, 26/11/2026</div></div>',{left:'50%',top:'1030px',transform:X},st('s8'),en('s8'),'up');
+add('<div class="gold" style="font-size:104px">ĐỘC BẢN</div>',{left:'50%',top:'420px',transform:X,width:'1040px'},w('s8','độc'),en('s8'));
+add('<div class="tag" style="font-size:50px">Bản sắc riêng</div>',{left:'50%',top:'580px',transform:X},w('s8','bản'),en('s8'));
+// s9 question
+add('<div class="h1" style="font-size:52px">Cây cầu mới nên mang</div>',{left:'50%',top:'300px',transform:X,width:'1040px'},st('s9'),TOTAL,'up');
+add('<div class="gold" style="font-size:92px">HÌNH ẢNH GÌ<br>CỦA ĐÀ NẴNG?</div>',{left:'50%',top:'410px',transform:X,width:'1040px'},w('s9','hình'),TOTAL);
+add('<div class="follow">+ FOLLOW</div>',{left:'50%',top:'1330px',transform:X},w('s9','bình'),TOTAL);
+// captions
+const capEl=document.createElement('div');capEl.className='cap';ui.appendChild(capEl);
+const chunks=[];T.forEach(s=>{let cur=[];s.words.forEach((x,i)=>{cur.push(x);if(cur.length>=5||/[.,:?!]$/.test(x.word)||i==s.words.length-1){chunks.push({t0:s.start+cur[0].start,t1:s.start+cur[cur.length-1].end+.15,ws:cur.map(y=>({w:y.word,t:s.start+y.start}))});cur=[];}});});
+const back=x=>{if(x<=0)return 0;if(x>=1)return 1;const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const FLY=window.FLY, flyImg={};
+function flyAt(t){let seg=null;for(const f of FLY){if(t>=f.t0&&t<f.t1)seg=f;} if(!seg)return null;
+  const prevAdj=FLY.some(f=>f!==seg&&f.t1>=seg.t0-0.01&&f.t0<seg.t0), nextAdj=FLY.some(f=>f!==seg&&f.t0<=seg.t1+0.01&&f.t0>seg.t0);
+  let a=1; if(!prevAdj)a=Math.min(a,(t-seg.t0)/0.3); if(!nextAdj)a=Math.min(a,(seg.t1-t)/0.3);
+  return {seg,a:Math.max(0,Math.min(1,a))};}
+async function getFly(seg,t){const i=Math.min(seg.n,Math.max(1,Math.floor((t-seg.t0)*30)+1));const k=seg.id+'/'+String(i).padStart(5,'0');
+  if(!flyImg[k]){const im=new Image();im.src='fly/'+k+'.jpg';flyImg[k]=new Promise(r=>{im.onload=()=>r(im);im.onerror=()=>r(null)});}
+  const im=await flyImg[k]; delete flyImg[k]; return im;}
+const srcEl=document.getElementById('src'), SRC_MAP=srcEl.innerHTML, SRC_FLY='Ảnh: toàn cảnh sông Hàn (minh họa) · Tin: Báo Đà Nẵng online';
+window.render=async function(t){
+  C=cam(t); const F=flyAt(t);
+  if(!F||F.a<1){await drawMap(); drawVec(t);} else {vc.setTransform(1,0,0,1,0,0);vc.clearRect(0,0,1080,1920);}
+  if(F&&F.a>0){const im=await getFly(F.seg,t); if(im){mc.save();mc.globalAlpha=F.a;mc.drawImage(im,0,0,1080,1920);mc.restore();}
+    document.getElementById('vec').style.opacity=1-F.a;} else document.getElementById('vec').style.opacity=1;
+  srcEl.innerHTML=(F&&F.a>0.5)?SRC_FLY:SRC_MAP;
+  for(const e of els){const n=e.n;if(t<e.t0||t>=e.t1){n.style.opacity=0;continue;}
+    const p=t-e.t0,fo=Math.min(1,(e.t1-t)/.25);let op=1,tf='';
+    if(e.anim==='pop'){const k=back(p/.45);op=Math.min(1,p/.15);tf=`scale(${.6+.4*k})`;}
+    else if(e.anim==='up'){const k=ease(p/.45);op=k;tf=`translateY(${(1-k)*40}px)`;}
+    else if(e.anim==='fade'){op=ease(p/.5);}
+    else if(e.anim==='pin'){const q=P(e.poi[0],e.poi[1]);n.style.left=q[0]+'px';n.style.top=q[1]+'px';const k=back(p/.45);op=Math.min(1,p/.15);tf=`scale(${.5+.5*k})`;}
+    n.style.opacity=Math.max(0,Math.min(op,fo));n.style.transform=(e.cx?e.cx+' ':'')+tf;}
+  const c=chunks.find(c=>t>=c.t0&&t<c.t1);
+  if(c){capEl.style.opacity=1;capEl.innerHTML=c.ws.map(x=>`<span class="w${t>=x.t?' on':''}">${x.w}</span>`).join(' ');}else capEl.style.opacity=0;
+};
+window.READY=true;
+</script></body></html>

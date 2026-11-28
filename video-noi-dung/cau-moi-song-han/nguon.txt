@@ -1,0 +1,10 @@
+Nguồn tin dùng trong video:
+- Báo Đà Nẵng online (26/11/2026): lấy ý kiến dự thảo nhiệm vụ thi tuyển phương án quy hoạch, kiến trúc cầu mới qua sông Hàn; phạm vi giữa cầu Sông Hàn và cầu Thuận Phước.
+- Tuổi Trẻ Online 09/10/2026 "Đà Nẵng bổ sung 500 tỉ đồng vốn trung hạn cho dự án cầu mới qua sông Hàn": 3 trục lưu lượng lớn, ùn tắc nút giao đầu cầu ngày càng nghiêm trọng, cầu tại nút giao Đống Đa, khởi công trước 2030.
+  https://tuoitre.vn/da-nang-bo-sung-500-ti-dong-von-trung-han-cho-du-an-cau-moi-qua-song-han-100261009143701341.htm
+- Tuổi Trẻ Online 08/09/2026: nút giao phía Tây cầu Rồng thường xuyên ách tắc vào giờ cao điểm.
+  https://tuoitre.vn/lam-nut-giao-thong-phia-tay-cau-rong-nghien-cuu-xay-cau-moi-qua-song-han-10026090814440434.htm
+- Tuổi Trẻ Online 26/11/2026 "Đà Nẵng tính làm cầu mới qua sông Hàn ở đâu?"
+  https://tuoitre.vn/da-nang-tinh-lam-cau-moi-qua-song-han-o-dau-100261126095124521.htm
+- Khoảng cách ~2,5 km giữa cầu Sông Hàn và cầu Thuận Phước: đo trên bản đồ OpenStreetMap.
+- Chấm đỏ dòng xe và vị trí cầu mới trên bản đồ: minh họa.
