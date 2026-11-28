@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-27T10:28:17+00:00",
+    "updated": "2026-11-28T05:35:20+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen",
@@ -884,7 +884,7 @@
             "title": "Căn hộ Masteri Rivera Danang: phân tích vị trí, sản phẩm, pháp lý và cách thanh toán",
             "publish": "2026-11-18 09:45",
             "file": "bai/can-ho-masteri-rivera-danang-phan-tich.txt",
-            "rev": 2
+            "rev": 3
         },
         {
             "slug": "nha-o-xa-hoi-viet-huong-lakeside-hoa-xuan",
@@ -1521,6 +1521,12 @@
             "title": "Đà Nẵng lấy ý kiến thi tuyển cầu mới qua sông Hàn: đoạn cầu sông Hàn – cầu Thuận Phước, tầm nhìn 2075",
             "publish": "2026-11-28 06:45",
             "file": "bai/thi-tuyen-cau-moi-qua-song-han.txt"
+        },
+        {
+            "slug": "tai-khoi-dong-to-hop-dap-non-nuoc",
+            "title": "Tái khởi động Tổ hợp khu đô thị du lịch biển DAP tại Non Nước: khoảng 39 ha, khởi công chậm nhất quý II/2027",
+            "publish": "2026-11-28 12:30",
+            "file": "bai/tai-khoi-dong-to-hop-dap-non-nuoc.txt"
         }
     ]
 }

@@ -2021,5 +2021,78 @@ HTML
 		),
 	);
 
+	$posts[] = array(
+		'slug'           => 'tai-khoi-dong-to-hop-dap-non-nuoc',
+		'title'          => 'Tái khởi động Tổ hợp khu đô thị du lịch biển DAP tại Non Nước: khoảng 39 ha, khởi công chậm nhất quý II/2027',
+		'excerpt'        => 'Sáng 28/11/2026, Tổ hợp dự án đô thị, du lịch biển DAP, DAP 1 và DAP 2 tại bãi biển Non Nước (phường Ngũ Hành Sơn) chính thức tái khởi động. Quy mô khoảng 39 ha, được áp dụng cơ chế đặc thù, phải đủ điều kiện khởi công chậm nhất quý II/2027.',
+		'keyword'        => 'tổ hợp DAP Non Nước',
+		'keywords_extra' => array( 'tái khởi động dự án DAP Đà Nẵng', 'khu đô thị du lịch biển Non Nước', 'bất động sản ven biển Ngũ Hành Sơn' ),
+		'project'        => 'sun-saphia-residence',
+		'schedule'       => '2026-11-28 12:30',
+		'category'       => 'Hạ tầng & quy hoạch',
+		'tags'           => array( 'Non Nước', 'Ngũ Hành Sơn', 'Dự án ven biển', 'Cơ chế đặc thù' ),
+		'image'          => 'plugin:img/dap-non-nuoc/dap-non-nuoc-phoi-canh-to-hop-khu-do-thi-du-lich-bien.jpg',
+		'image_alt'      => 'Phối cảnh tổ hợp DAP Non Nước – khu đô thị du lịch biển tại phường Ngũ Hành Sơn, Đà Nẵng',
+		'content'        => <<<HTML
+<p>Sáng 28/11/2026, <strong>tổ hợp DAP Non Nước</strong> – tên đầy đủ là Tổ hợp dự án đô thị, du lịch biển DAP, DAP 1 và DAP 2 – chính thức tái khởi động tại bãi biển Non Nước (phường Ngũ Hành Sơn), theo Cổng Thông tin điện tử TP Đà Nẵng. Dự án do Công ty TNHH DAP, DAP 1 và DAP 2 làm chủ đầu tư, quy mô <strong>khoảng 39 ha</strong>, được thành phố yêu cầu đủ điều kiện khởi công <strong>chậm nhất trong quý II năm 2027</strong>.</p>
+<!--hh-featured-->
+<p>Đây là một trong những dự án ven biển lớn ở phía nam Đà Nẵng nằm im nhiều năm, nay được đưa vào danh mục áp dụng cơ chế đặc thù. Bài dưới đây tóm tắt những gì đã công bố về tổ hợp DAP Non Nước, những gì chưa có và nhận định của Hiệp về tác động tới bất động sản ven biển Ngũ Hành Sơn.</p>
+<h2>Tổ hợp DAP Non Nước: những gì đã công bố</h2>
+<table>
+<thead><tr><th>Nội dung</th><th>Theo Cổng TTĐT TP Đà Nẵng (28/11/2026)</th></tr></thead>
+<tbody>
+<tr><td>Tên dự án</td><td>Tổ hợp dự án đô thị, du lịch biển DAP, DAP 1 và DAP 2</td></tr>
+<tr><td>Vị trí</td><td>Bãi biển Non Nước, phường Ngũ Hành Sơn</td></tr>
+<tr><td>Chủ đầu tư</td><td>Công ty TNHH DAP, DAP 1 và DAP 2</td></tr>
+<tr><td>Quy mô</td><td>Khoảng 39 ha</td></tr>
+<tr><td>Định hướng</td><td>"Đô thị du lịch đa năng" cao cấp: khách sạn và căn hộ, khu biệt thự biệt lập, trung tâm hội nghị quốc tế, chuỗi nhà hàng, chăm sóc sức khỏe chuyên sâu</td></tr>
+<tr><td>Cơ chế</td><td>Được bổ sung vào danh mục áp dụng cơ chế đặc thù theo Nghị quyết số 29/2026/QH16 của Quốc hội và Nghị định số 147/2026/NĐ-CP của Chính phủ</td></tr>
+<tr><td>Mốc tiến độ</td><td>Đáp ứng đầy đủ điều kiện khởi công chậm nhất trong quý II năm 2027</td></tr>
+</tbody>
+</table>
+<p>Theo bài viết, tâm điểm của tổ hợp DAP Non Nước là các tòa khách sạn và căn hộ được giới thiệu ở "đẳng cấp 7 sao", tầm nhìn bao trọn vịnh Đà Nẵng. Tổng vốn đầu tư, số căn hộ, số biệt thự, số tòa và số tầng <strong>chưa được công bố</strong>.</p>
+<!--hh-img:img/dap-non-nuoc/dap-non-nuoc-le-tai-khoi-dong-28-11-2026.jpg|Đại biểu thực hiện nghi thức tái khởi động tổ hợp DAP Non Nước sáng 28/11/2026 (ảnh: Cổng TTĐT TP Đà Nẵng)-->
+<h2>Lãnh đạo thành phố nói gì tại lễ tái khởi động?</h2>
+<p>Dự lễ có ông Nguyễn Khắc Toàn, Ủy viên Trung ương Đảng, Phó Bí thư Thường trực Thành ủy; ông Nguyễn Mạnh Hùng, Phó Bí thư Thành ủy, Chủ tịch UBND thành phố; cùng lãnh đạo các sở, ngành, địa phương.</p>
+<p>Phát biểu tại sự kiện, Phó Chủ tịch UBND thành phố Trần Nam Hưng cho biết thành phố sẽ tiếp tục đồng hành cùng các chủ đầu tư; đã bổ sung tổ hợp DAP vào danh mục áp dụng cơ chế đặc thù. Ông yêu cầu UBND phường Ngũ Hành Sơn và các sở, ngành phối hợp hướng dẫn thủ tục để dự án <strong>đáp ứng đầy đủ điều kiện khởi công chậm nhất trong quý II năm 2027</strong>.</p>
+<!--hh-img:img/dap-non-nuoc/dap-non-nuoc-phoi-canh-to-hop-khu-do-thi-du-lich-bien.jpg|Phối cảnh tổ hợp DAP Non Nước bên bãi biển Non Nước: tháp khách sạn – căn hộ phía sau, biệt thự hồ bơi sát biển (ảnh: Cổng TTĐT TP Đà Nẵng)-->
+<h2>Tác động / nhận định của Hoàng Hiệp</h2>
+<ul>
+<li><strong>Tái khởi động chưa phải khởi công:</strong> mốc chính thức là "đủ điều kiện khởi công chậm nhất quý II/2027". Từ nay đến đó còn thủ tục; sản phẩm, giá bán chưa có, nên chưa có gì để đặt chỗ hay "giữ suất" – khách nghe ai mời cọc tổ hợp DAP Non Nước lúc này cần hỏi kỹ văn bản.</li>
+<li><strong>Tín hiệu tích cực cho dải biển Ngũ Hành Sơn:</strong> một khu đất ven biển lớn được đưa vào cơ chế đặc thù cho thấy thành phố muốn kéo các dự án "treo" ven biển phía nam chạy lại. Khi các tổ hợp du lịch cao cấp hình thành, nhu cầu lưu trú, dịch vụ và thuê nhà quanh Non Nước – Ngũ Hành Sơn có thêm động lực.</li>
+<li><strong>Dòng hàng nghỉ dưỡng cao cấp sẽ dày hơn:</strong> người mua căn hộ, biệt thự ven biển nên so sánh tổ hợp DAP Non Nước (khi có thông tin bán) với các dự án đã có pháp lý, đã bàn giao hoặc có tiến độ rõ ở cùng trục biển.</li>
+<li><strong>Theo dõi tiếp:</strong> quy hoạch chi tiết, tổng vốn, cơ cấu sản phẩm và pháp lý từng loại (căn hộ du lịch hay nhà ở) – Hiệp sẽ cập nhật khi có công bố chính thức.</li>
+</ul>
+<h2>Dự án chịu ảnh hưởng</h2>
+<ul>
+<li><a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a> – căn hộ mặt biển của Sun Group tại phường Ngũ Hành Sơn (Võ Nguyên Giáp – Trường Sa); cùng dải biển phía nam, hưởng lợi khi khu Non Nước có thêm tổ hợp du lịch cao cấp.</li>
+<li><a href="/du-an/the-ocean-suites-da-nang/">The Ocean Suites Đà Nẵng</a> – căn hộ trên đường Trường Sa, phường Ngũ Hành Sơn, thị trường thuê du lịch phụ thuộc trực tiếp sức hút của dải biển này.</li>
+<li><a href="/du-an/sun-cosmo-residence/">Sun Cosmo Residence</a> – khu căn hộ, nhà phố Sun Group ở Ngũ Hành Sơn, cùng khu vực phía nam thành phố.</li>
+<li><a href="/du-an/ariyana-beach-resort-suites-da-nang/">Ariyana Beach Resort &amp; Suites</a> – căn hộ nghỉ dưỡng ven biển Ngũ Hành Sơn, để so sánh khi tổ hợp DAP mở bán.</li>
+</ul>
+<p>Cần so sánh căn hộ, biệt thự ven biển Ngũ Hành Sơn đang có pháp lý rõ, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+<p class="src">Nguồn: <a href="https://danang.gov.vn/vi/web/dng/w/tai-khoi-dong-to-hop-khu-do-thi-du-lich-bien-dap">Cổng Thông tin điện tử TP Đà Nẵng (28/11/2026)</a> – "Tái khởi động Tổ hợp Khu đô thị du lịch biển DAP". Ảnh lễ tái khởi động và phối cảnh theo cổng thông tin thành phố. Tổng vốn, cơ cấu sản phẩm và giá bán chưa công bố.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Tổ hợp DAP Non Nước tái khởi động: 39 ha, khởi công 2027',
+			'desc'      => 'Tổ hợp DAP Non Nước (Ngũ Hành Sơn) tái khởi động 28/11/2026: khoảng 39 ha, cơ chế đặc thù, đủ điều kiện khởi công chậm nhất quý II/2027.',
+			'points'    => array(
+				'Tổ hợp DAP Non Nước (DAP, DAP 1, DAP 2) chính thức tái khởi động sáng 28/11/2026 tại bãi biển Non Nước, phường Ngũ Hành Sơn',
+				'Quy mô khoảng 39 ha, chủ đầu tư Công ty TNHH DAP, DAP 1 và DAP 2; áp dụng cơ chế đặc thù theo Nghị quyết 29/2026/QH16',
+				'Thành phố yêu cầu đủ điều kiện khởi công chậm nhất quý II/2027; tổng vốn, sản phẩm, giá bán chưa công bố',
+			),
+			'faq'       => array(
+				array( 'Tổ hợp DAP Non Nước nằm ở đâu?', 'Tổ hợp DAP Non Nước nằm tại bãi biển Non Nước, phường Ngũ Hành Sơn, TP Đà Nẵng, quy mô khoảng 39 ha (Cổng TTĐT TP Đà Nẵng, 28/11/2026).' ),
+				array( 'Ai là chủ đầu tư tổ hợp DAP Non Nước?', 'Chủ đầu tư là Công ty TNHH DAP, DAP 1 và DAP 2, theo Cổng Thông tin điện tử TP Đà Nẵng.' ),
+				array( 'Khi nào tổ hợp DAP Non Nước khởi công?', 'Phó Chủ tịch UBND thành phố Trần Nam Hưng yêu cầu dự án đáp ứng đầy đủ điều kiện khởi công chậm nhất trong quý II năm 2027.' ),
+				array( 'Tổ hợp DAP Non Nước đã mở bán chưa?', 'Chưa. Tổng vốn, cơ cấu sản phẩm, giá bán và pháp lý từng loại sản phẩm của tổ hợp DAP Non Nước chưa được công bố.' ),
+			),
+		),
+		'sources'        => array(
+			'https://danang.gov.vn/vi/web/dng/w/tai-khoi-dong-to-hop-khu-do-thi-du-lich-bien-dap',
+		),
+	);
+
 	return $posts;
 }
