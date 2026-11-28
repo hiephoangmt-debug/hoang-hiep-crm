@@ -650,8 +650,10 @@ $gd_rows = static function ( $txt ) {
 };
 $gd_rent = $gd_rows( $m( 'hh_p_rent_price' ) );
 $gd_sell = $gd_rows( $m( 'hh_p_resale_price' ) );
-$gd_img1 = $gallery[0] ?? $hero;
-$gd_img2 = $gallery[1] ?? ( $gallery[0] ?? $hero );
+// Ảnh đầu khối: chỉ ảnh thật / phối cảnh trong Thư viện, bỏ ảnh thẻ tự tạo (tên có "anh-dai-dien", "the-", "bia") – không có thì nền màu.
+$gd_real = array_values( array_filter( $gallery, static fn( $i ) => ! preg_match( '/anh-dai-dien|the-tin|bia-|placeholder|-card/i', (string) get_attached_file( $i ) ) ) );
+$gd_img1 = $gd_real[0] ?? 0;
+$gd_img2 = $gd_real[1] ?? ( $gd_real[0] ?? 0 );
 $gd_link = static fn( $need, $title, $txt, $cls = 'btn btn-gold gd-btn' ) => '<a class="' . esc_attr( $cls ) . '" href="#dang-ky" data-need="' . esc_attr( $need ) . '" data-title="' . esc_attr( $title ) . '">' . esc_html( $txt ) . ' →</a>';
 ?>
 <!-- THUÊ · MUA BÁN (dự án đã / đang bàn giao) -->
