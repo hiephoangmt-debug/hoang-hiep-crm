@@ -2385,5 +2385,74 @@ HTML
 		),
 	);
 
+	/* ---------------- 28/11 – Nội thất studio Sun Saphia phong cách Modern Asian Luxury (anh Hiệp gửi ảnh ý tưởng) ---------------- */
+	$posts[] = array(
+		'slug'           => 'noi-that-studio-sun-saphia-modern-asian-luxury',
+		'title'          => 'Nội thất studio Sun Saphia Residence phong cách Modern Asian Luxury: gỗ tự nhiên, be – kem, xanh navy cho căn 30 m²',
+		'excerpt'        => 'Ý tưởng nội thất studio Sun Saphia Residence theo phong cách Modern Asian Luxury: gỗ tự nhiên, gam be – kem, điểm nhấn xanh navy và vải dệt. Cách bố trí giường, tivi, bếp, tủ áo trong căn 30 m² trần 3,5 m để ở hoặc cho thuê nghỉ dưỡng.',
+		'keyword'        => 'nội thất studio Sun Saphia',
+		'keywords_extra' => array( 'Modern Asian Luxury', 'thiết kế studio 30m2 cho thuê', 'nội thất căn hộ nghỉ dưỡng Đà Nẵng' ),
+		'project'        => 'sun-saphia-residence',
+		'schedule'       => '2026-11-28 20:15',
+		'category'       => 'Tin dự án',
+		'tags'           => array( 'Sun Saphia Residence', 'Nội thất', 'Studio', 'Cho thuê' ),
+		'image'          => 'plugin:img/sun-saphia/noi-that/sun-saphia-studio-modern-asian-luxury-giuong-tivi.jpg',
+		'image_alt'      => 'Nội thất studio Sun Saphia phong cách Modern Asian Luxury – giường, vách tivi bọc vải và tủ áo kẻ caro (phối cảnh ý tưởng)',
+		'content'        => <<<HTML
+<p><strong>Nội thất studio Sun Saphia</strong> theo phong cách <strong>Modern Asian Luxury</strong> – sang trọng đương đại pha nét ấm áp Á Đông – đang được nhiều chủ căn quan tâm khi chuẩn bị làm nội thất để ở hoặc cho thuê nghỉ dưỡng. Đây là một ý tưởng thiết kế cho căn studio khoảng 30 m² của Sun Saphia Residence: gỗ tự nhiên, gam be – kem, điểm nhấn xanh navy và các chi tiết vải dệt.</p>
+<!--hh-featured-->
+<p>Sun Saphia Residence có 513 căn studio trong tổng số 782 căn, trần cao 3,5 m, <strong>bàn giao hoàn thiện cơ bản</strong> – nghĩa là chủ căn tự chọn phong cách nội thất. Bài dưới đây phân tích ý tưởng Modern Asian Luxury qua từng góc của căn: khu ngủ, vách tivi, bếp, tủ áo và góc cửa sổ.</p>
+<h2>Modern Asian Luxury là gì?</h2>
+<p>Phong cách lấy nền hiện đại, tối giản (đường nét gọn, ít đồ rời) rồi thêm chất liệu và họa tiết Á Đông: gỗ sáng màu, vải dệt thô, mây tre, họa tiết hình học. Mục tiêu là không gian <strong>tinh tế, có gu nhưng không phô trương</strong> – hợp với căn hộ nghỉ dưỡng ven biển, nơi khách thuê cần cảm giác thư thái hơn là xa hoa.</p>
+<table>
+<thead><tr><th>Thành phần</th><th>Gợi ý trong ý tưởng</th></tr></thead>
+<tbody>
+<tr><td>Màu nền</td><td>Be – kem cho tường, trần; sàn gỗ màu sáng</td></tr>
+<tr><td>Điểm nhấn</td><td>Xanh navy ở tủ bếp trên, vách tivi bọc vải, tủ áo kẻ caro</td></tr>
+<tr><td>Chất liệu</td><td>Gỗ tự nhiên, vải dệt, đá mặt bếp, đèn hắt trần</td></tr>
+<tr><td>Họa tiết</td><td>Tranh treo đầu giường họa tiết Á Đông, thảm vân sóng, gối thổ cẩm</td></tr>
+</tbody>
+</table>
+<h2>Khu ngủ và vách tivi: một mặt tường làm hai việc</h2>
+<p>Trong căn 30 m², giường và tivi thường đối diện nhau. Ý tưởng dùng một mảng vách bọc vải xám xanh làm nền tivi, kết hợp hộc gỗ trang trí và bàn tròn nhỏ – vừa là kệ, vừa là bàn làm việc nhanh. Trần thạch cao có hắt đèn giúp căn trông cao và mềm hơn, tận dụng lợi thế trần 3,5 m.</p>
+<!--hh-img:img/sun-saphia/noi-that/sun-saphia-studio-modern-asian-luxury-phong-ngu.jpg|Đầu giường gỗ, tranh họa tiết Á Đông, đèn ngủ đôi – nội thất studio Sun Saphia phong cách Modern Asian Luxury (phối cảnh ý tưởng)-->
+<h2>Bếp và tủ áo: gọn một mặt tường</h2>
+<p>Bếp chữ I với tủ dưới gỗ sáng, tủ trên xanh navy, mặt đá và gạch ốp thẻ dọc màu kem; tủ lạnh âm vào hốc tủ để không lấn diện tích. Ngay cạnh là tủ áo cửa kẻ caro xanh – trắng, tay nắm gỗ tròn – một chi tiết vải dệt "Á Đông" làm căn khác hẳn kiểu căn cho thuê đại trà.</p>
+<!--hh-img:img/sun-saphia/noi-that/sun-saphia-studio-modern-asian-luxury-bep-tu-ao.jpg|Bếp chữ I tủ trên xanh navy, tủ dưới gỗ sáng, tủ áo cửa kẻ caro – ý tưởng nội thất studio Sun Saphia (phối cảnh ý tưởng)-->
+<h2>Góc cửa sổ: để view biển và thành phố làm chủ</h2>
+<p>Ý tưởng giữ khu cửa sổ thoáng, chỉ đặt ghế dài hoặc đệm ngồi, rèm hai lớp màu kem. Studio Sun Saphia có nhiều hướng nhìn (biển, cánh bên, phía sau nhìn thành phố – sân bay), nên khoảng trống cạnh cửa sổ là "điểm bán" khi chụp ảnh cho thuê.</p>
+<!--hh-img:img/sun-saphia/noi-that/sun-saphia-studio-modern-asian-luxury-cua-so-view.jpg|Góc cửa sổ studio với giường, vách tivi bọc vải và rèm hai lớp – phong cách Modern Asian Luxury (phối cảnh ý tưởng)-->
+<h2>Nhận định của Hoàng Hiệp: có nên chọn phong cách này để cho thuê?</h2>
+<ul>
+<li><strong>Hợp cho thuê nghỉ dưỡng:</strong> khách du lịch, nhất là khách Hàn Quốc, Nhật, khách gia đình, thích không gian ấm, sạch, có chi tiết riêng để chụp ảnh – dễ nổi bật trên Booking, Airbnb.</li>
+<li><strong>Chi phí:</strong> vách vải, hộc gỗ, tủ áo cửa vải là hạng mục làm riêng nên cao hơn gói nội thất phổ thông; tham khảo các gói 80 – 300 triệu trong bài <a href="/noi-that-studio-sun-saphia-residence-30m2/">làm nội thất studio 30 m² hết bao nhiêu</a>.</li>
+<li><strong>Bền và dễ vệ sinh:</strong> căn cho thuê ngắn ngày nên chọn vải bọc chống bám bẩn, gỗ công nghiệp phủ chống ẩm (căn ven biển), tránh quá nhiều đồ trang trí rời dễ hỏng, thất lạc.</li>
+<li><strong>Đúng tiêu chuẩn tòa nhà:</strong> phần thay đổi trần, điện, nước cần theo quy định của ban quản lý; nên chốt bản vẽ trước khi nhận bàn giao.</li>
+</ul>
+<p>Xem thêm: <a href="/studio-hay-1pn-sun-saphia-residence/">studio hay 1PN+ Sun Saphia Residence</a> và <a href="/dau-tu-sun-saphia-residence-cho-thue-dong-tien/">3 kịch bản dòng tiền cho thuê studio</a>.</p>
+<h2>Cần tư vấn chọn căn và nội thất Sun Saphia?</h2>
+<p>Hiệp hỗ trợ chọn căn theo hướng nhìn, tính chi phí nội thất vào dòng tiền và kết nối đơn vị thi công: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo), hoặc xem <a href="/du-an/sun-saphia-residence/">trang dự án Sun Saphia Residence</a>.</p>
+<p class="src">Hình ảnh: phối cảnh ý tưởng nội thất studio phong cách Modern Asian Luxury (tham khảo, không phải căn mẫu hay tiêu chuẩn bàn giao của chủ đầu tư). Thông tin dự án theo tài liệu chủ đầu tư Sun Property: 782 căn, 513 studio, trần 3,5 m, bàn giao hoàn thiện cơ bản.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Nội thất studio Sun Saphia phong cách Modern Asian Luxury',
+			'desc'      => 'Ý tưởng nội thất studio Sun Saphia Residence 30 m² phong cách Modern Asian Luxury: gỗ tự nhiên, be – kem, xanh navy, vải dệt – để ở hay cho thuê nghỉ dưỡng.',
+			'points'    => array(
+				'Nội thất studio Sun Saphia phong cách Modern Asian Luxury: gỗ tự nhiên, gam be – kem, điểm nhấn xanh navy, vải dệt',
+				'Căn studio khoảng 30 m², trần 3,5 m, bàn giao hoàn thiện cơ bản – chủ căn tự làm nội thất',
+				'Bố trí gọn: vách tivi bọc vải, bếp chữ I tủ lạnh âm, tủ áo cửa kẻ caro, góc cửa sổ để view',
+			),
+			'faq'       => array(
+				array( 'Studio Sun Saphia Residence bàn giao nội thất gì?', 'Sun Saphia Residence bàn giao hoàn thiện cơ bản; nội thất rời và các hạng mục trang trí như trong ý tưởng Modern Asian Luxury do chủ căn tự làm.' ),
+				array( 'Phong cách Modern Asian Luxury có hợp căn cho thuê không?', 'Hợp với cho thuê nghỉ dưỡng vì không gian ấm, có chi tiết riêng để chụp ảnh; nên chọn vật liệu chống ẩm, dễ vệ sinh cho căn ven biển.' ),
+				array( 'Làm nội thất studio Sun Saphia hết bao nhiêu tiền?', 'Tùy mức đầu tư; tham khảo các gói khoảng 80 – 300 triệu cho studio 30 m² trong bài phân tích chi phí nội thất của Hoàng Hiệp. Thiết kế riêng như vách vải, tủ áo cửa vải thường ở mức cao hơn gói phổ thông.' ),
+			),
+		),
+		'sources'        => array(
+			'https://hiephoangmt.com/du-an/sun-saphia-residence/',
+		),
+	);
+
 	return $posts;
 }
