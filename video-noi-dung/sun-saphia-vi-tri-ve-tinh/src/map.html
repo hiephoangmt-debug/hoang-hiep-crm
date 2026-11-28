@@ -144,14 +144,13 @@ add('<div class="h1">Kết nối</div>',{left:'50%',top:'300px',transform:X,widt
 pin('nhs','<div class="chip">Ngũ Hành Sơn · <b>5–10 phút</b></div>',w('s6','năm')+.6,en('s7'));
 pin('air','<div class="chip">Sân bay · <b>10–15 phút</b></div>',w('s6','mười',1)+.8,en('s7'));
 pin('hoian','<div class="chip">Phố cổ Hội An · <b>~30 phút</b></div>',w('s7','ba')+1.0,en('s7'));
-add('<div class="chip" style="font-size:24px;border-width:1px">Thời gian di chuyển ước tính · hiephoangmt.com</div>',{left:'50%',top:'1800px',transform:X},st('s6'),en('s7'),'fade');
+add('<div class="chip" style="font-size:24px;border-width:1px">Thời gian di chuyển ước tính</div>',{left:'50%',top:'1800px',transform:X},st('s6'),en('s7'),'fade');
 // s8
 add('<div class="h1" style="font-size:60px">Trước mặt: Biển</div>',{left:'50%',top:'300px',transform:X,width:'1000px'},w('s8','trước'),TOTAL,'up');
 add('<div class="h1" style="font-size:60px">Sau lưng: Núi</div>',{left:'50%',top:'420px',transform:X,width:'1000px'},w('s8','sau'),TOTAL,'up');
 add('<div class="h1" style="font-size:60px">Bên cạnh: Sông</div>',{left:'50%',top:'540px',transform:X,width:'1000px'},w('s8','bên'),TOTAL,'up');
 add('<div class="tag" style="font-size:58px">View biển hay view núi?</div>',{left:'50%',top:'1170px',transform:X},w('s8','nếu'),TOTAL);
 add('<div class="follow">+ FOLLOW</div>',{left:'50%',top:'1320px',transform:X},w('s8','bình'),TOTAL);
-add('<div style="font-size:30px;font-weight:700;text-shadow:0 2px 6px #000">hiephoangmt.com</div>',{left:'50%',top:'1460px',transform:X,whiteSpace:'nowrap'},w('s8','bình'),TOTAL,'fade');
 // captions
 const capEl=document.createElement('div');capEl.className='cap';ui.appendChild(capEl);
 const chunks=[];T.forEach(s=>{let cur=[];s.words.forEach((x,i)=>{cur.push(x);if(cur.length>=5||/[.,:?!]$/.test(x.word)||i==s.words.length-1){chunks.push({t0:s.start+cur[0].start,t1:s.start+cur[cur.length-1].end+.15,ws:cur.map(y=>({w:y.word,t:s.start+y.start}))});cur=[];}});});
