@@ -222,9 +222,8 @@ $nav = array_filter(
 		'hoi-dap'    => $faq ? 'Hỏi đáp' : '',
 	)
 );
-if ( $parent && isset( $nav['to-hop'] ) ) {
+if ( $parent ) {
 	unset( $nav['to-hop'] );
-	$nav['to-hop'] = 'Cùng tổ hợp';
 }
 $brand_top = $short_name;
 $brand_sub = trim( preg_replace( '/^.*?,\s*/u', '', (string) $m( 'hh_p_address' ) ) ) ?: 'Đà Nẵng';
@@ -980,7 +979,7 @@ $cta_get   = $resale ? array( 'Danh sách căn đang bán, giá thật', 'Kiểm
     </form>
   </div>
 </section>
-<?php if ( $parent ) { $render_family(); } // Dự án con: tổ hợp ở cuối trang. ?>
+<?php // Dự án con: không liệt kê các dự án khác cùng tổ hợp để khách không bị sao nhãng (anh Hiệp 28/11/2026). ?>
 <?php
 // Dòng phụ thanh bám đáy: ưu tiên ưu đãi (chiết khấu, giá từ), viết thành câu tự nhiên.
 $bar_num = '';

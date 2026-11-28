@@ -1296,7 +1296,7 @@ HTML
 		'keywords_extra' => array( 'Masteri Đà Nẵng', 'Masterise Homes Đà Nẵng', 'căn hộ Hải Châu', 'căn hộ Dual Key Đà Nẵng' ),
 		'project'  => 'masteri-da-nang',
 		'schedule' => '2026-11-18 09:45',
-		'rev'      => 2, // 19/11: nạp lại ảnh chèn giữa bài sau khi cài 2.20.319.
+		'rev'      => 3, // 28/11: tên đường Trần Đăng Ninh. 19/11: nạp lại ảnh chèn giữa bài sau khi cài 2.20.319.
 		'category' => 'Tin dự án',
 		'tags'     => array( 'Masteri Rivera Danang', 'Masterise Homes', 'Căn hộ Hải Châu' ),
 		'image'    => 'plugin:img/masteri-rivera-danang/masteri-rivera-danang-ho-boi-phoi-canh.jpg',
@@ -1305,7 +1305,7 @@ HTML
 <p><strong>Căn hộ Masteri Rivera Danang</strong> là sản phẩm đầu tiên Masterise Homes đưa ra tại Đà Nẵng, sau chuỗi dự án Masteri ở Hà Nội và TP.HCM. Bài này Hoàng Hiệp phân tích theo bốn câu hỏi người mua hay đặt ra nhất: vị trí có gì, sản phẩm gồm những loại căn nào, pháp lý tới đâu và thanh toán theo cách nào. Giá bán thay đổi theo từng đợt nên chỉ ghi tham khảo – cần bảng giá đang áp dụng, anh chị liên hệ trực tiếp.</p>
 <!--hh-featured-->
 <h2>1. Vị trí căn hộ Masteri Rivera Danang: Quy Mỹ, nhìn sông Cẩm Lệ</h2>
-<p>Dự án nằm ở số 50 Quy Mỹ, khu Hòa Cường Nam (Hải Châu), có ba mặt tiền Quy Mỹ – Nguyễn An Ninh – Nguyễn Lộ Trạch. Theo phối cảnh chủ đầu tư, hai tháp A và B nhìn ra sông Cẩm Lệ, ngay cạnh Cung thể thao Tiên Sơn. Khu vực quanh căn hộ Masteri Rivera Danang là khu dân cư đã hình thành lâu, đường sá, trường học, chợ đều có sẵn – khác với nhiều dự án mới ở ven đô phải chờ hạ tầng.</p>
+<p>Dự án nằm ở số 50 Quy Mỹ, khu Hòa Cường Nam (Hải Châu), có ba mặt tiền Quy Mỹ – Trần Đăng Ninh – Nguyễn Lộ Trạch. Theo phối cảnh chủ đầu tư, hai tháp A và B nhìn ra sông Cẩm Lệ, ngay cạnh Cung thể thao Tiên Sơn. Khu vực quanh căn hộ Masteri Rivera Danang là khu dân cư đã hình thành lâu, đường sá, trường học, chợ đều có sẵn – khác với nhiều dự án mới ở ven đô phải chờ hạ tầng.</p>
 <p>Từ căn hộ Masteri Rivera Danang, đi Lotte Mart và Asia Park (Sun World Đà Nẵng Wonders) chỉ vài phút; ra đường 2/9, cầu Rồng và trung tâm Hải Châu khoảng 10 phút; sân bay quốc tế Đà Nẵng cũng khoảng 10 phút (ước tính theo bản đồ, giờ bình thường). Với người làm việc ở trung tâm hoặc gia đình có con đi học trong quận Hải Châu, đây là điểm cộng lớn.</p>
 <p>Điểm cần lưu ý: hướng nhìn sông Cẩm Lệ phụ thuộc tháp và vị trí căn. Căn nhìn sông, nhìn Cung thể thao Tiên Sơn hay nhìn vào nội khu có trải nghiệm khác nhau, nên khi chọn căn nên xem mặt bằng tầng và đứng tại công trường để hình dung hướng nhìn thực tế.</p>
 <!--hh-img:img/masteri-rivera-danang/masteri-rivera-danang-ho-boi-phoi-canh.jpg|Hồ bơi resort trên tầng 4 – tiện ích nổi bật của căn hộ Masteri Rivera Danang (phối cảnh chủ đầu tư Masterise Homes)-->
@@ -1361,7 +1361,7 @@ HTML
 				'Đủ điều kiện bán, sở hữu lâu dài cho người Việt; 3 cách thanh toán: tiến độ, trả sớm, vay ngân hàng',
 			),
 			'faq'       => array(
-				array( 'Căn hộ Masteri Rivera Danang nằm ở đâu?', 'Số 50 Quy Mỹ, khu Hòa Cường Nam (Hải Châu), ba mặt tiền Quy Mỹ – Nguyễn An Ninh – Nguyễn Lộ Trạch, nhìn ra sông Cẩm Lệ, cạnh Cung thể thao Tiên Sơn.' ),
+				array( 'Căn hộ Masteri Rivera Danang nằm ở đâu?', 'Số 50 Quy Mỹ, khu Hòa Cường Nam (Hải Châu), ba mặt tiền Quy Mỹ – Trần Đăng Ninh – Nguyễn Lộ Trạch, nhìn ra sông Cẩm Lệ, cạnh Cung thể thao Tiên Sơn.' ),
 				array( 'Chủ đầu tư Masteri Rivera Danang là ai?', 'Dự án do Masterise Homes phát triển; pháp nhân chủ đầu tư là Công ty CP Phát triển Nhà Tuyên Sơn, tên pháp lý Dự án khu chung cư cao tầng, văn phòng thương mại và nhà ở Tuyên Sơn.' ),
 				array( 'Căn Dual Key Masteri Rivera Danang rộng bao nhiêu?', 'Khoảng 101 m² thông thủy, có hai cửa vào riêng, có thể vừa ở vừa cho thuê.' ),
 				array( 'Mua căn hộ Masteri Rivera Danang thanh toán thế nào?', 'Thường có ba phương án: theo tiến độ chuẩn, thanh toán sớm nhận chiết khấu cao hơn, hoặc vay ngân hàng có hỗ trợ lãi suất; mức cụ thể thay đổi theo từng đợt chính sách.' ),

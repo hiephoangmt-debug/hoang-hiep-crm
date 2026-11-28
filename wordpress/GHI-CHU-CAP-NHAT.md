@@ -1,7 +1,13 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.67** + plugin Hoàng Hiệp CRM **2.20.408**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.68** + plugin Hoàng Hiệp CRM **2.20.409**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.409 (giao diện 2.16.68)
+
+- Trang dự án con (thuộc tổ hợp): bỏ khối "Các dự án khác cùng tổ hợp" ở cuối trang và mục "Cùng tổ hợp" trên thanh mục lục, để khách tập trung vào dự án đang xem.
+- Masteri Đà Nẵng: tên đường mặt tiền sửa thành Quy Mỹ – Trần Đăng Ninh – Nguyễn Lộ Trạch theo tổng mặt bằng của chủ đầu tư (trang dự án, 2 bài viết, hồ sơ chủ đầu tư, bản EN/KO).
+- Khu vực: ẩn và xóa 2 mục thừa không có tin ("P.Hoà Xuân", "Đà Nẵng").
 
 ## Có gì mới – 2.20.408 (giao diện 2.16.67)
 

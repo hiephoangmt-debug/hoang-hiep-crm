@@ -21,7 +21,7 @@ add_filter(
 				'hh_p_developer'     => 'Masterise Homes (pháp nhân chủ đầu tư: Công ty CP Phát triển Nhà Tuyên Sơn)',
 				'hh_p_type'          => 'Căn hộ cao cấp sở hữu lâu dài, Dual Key, khối đế thương mại (tên pháp lý: Dự án khu chung cư cao tầng, văn phòng thương mại và nhà ở Tuyên Sơn)',
 				'hh_p_blocks'        => '2 tòa tháp (tháp A và tháp B)',
-				'hh_p_highlights'    => "Dự án căn hộ đầu tiên của Masterise Homes tại Đà Nẵng\n2 tháp A – B cao 39 tầng, gần 1.200 căn, nhìn ra sông Cẩm Lệ khu Hòa Cường Nam\nCạnh Cung thể thao Tiên Sơn, 3 mặt tiền Quy Mỹ – Nguyễn An Ninh – Nguyễn Lộ Trạch\n31 tiện ích nội khu từ tầng 1 đến tầng 4\nĐã cất nóc tháng 12/2025, tổng thầu Central\nSở hữu lâu dài cho người Việt Nam",
+				'hh_p_highlights'    => "Dự án căn hộ đầu tiên của Masterise Homes tại Đà Nẵng\n2 tháp A – B cao 39 tầng, gần 1.200 căn, nhìn ra sông Cẩm Lệ khu Hòa Cường Nam\nCạnh Cung thể thao Tiên Sơn, 3 mặt tiền Quy Mỹ – Trần Đăng Ninh – Nguyễn Lộ Trạch\n31 tiện ích nội khu từ tầng 1 đến tầng 4\nĐã cất nóc tháng 12/2025, tổng thầu Central\nSở hữu lâu dài cho người Việt Nam",
 				'hh_p_design_desc'   => 'Hai tháp A và B cao 39 tầng trên khối đế thương mại tầng 1 – 3 (shophouse, trung tâm thương mại khoảng 2.500 m²), tầng 4 là hồ bơi resort, vườn dạo bộ và sân chơi trẻ em; 2 tầng hầm đỗ xe. Cơ cấu căn: 1PN+, 2PN, 2PN+, 3PN và Dual Key (căn Dual Key khoảng 101 m² thông thủy, 2 cửa vào riêng).',
 				'hh_p_location_desc' => 'Dự án nằm trên đường Quy Mỹ, khu Hòa Cường Nam (Hải Châu), nhìn ra sông Cẩm Lệ, cạnh Cung thể thao Tiên Sơn; gần Lotte Mart, Asia Park (Sun World Đà Nẵng Wonders), từ đây đi cầu Rồng và trung tâm Hải Châu khoảng 10 phút.',
 				'hh_p_connections'   => "Vài phút | Sông Cẩm Lệ, Cung thể thao Tiên Sơn\nVài phút | Lotte Mart, Asia Park, đường 2/9\nKhoảng 10 phút | Cầu Rồng, trung tâm Hải Châu\nKhoảng 10 phút | Sân bay quốc tế Đà Nẵng",
@@ -38,7 +38,7 @@ add_filter(
 			$c1 = strtr(
 				$c0,
 				array(
-					'<p>Dự án có ba mặt tiền Quy Mỹ – Nguyễn An Ninh – Nguyễn Lộ Trạch, gần sông Hàn, Lotte Mart và Asia Park. Theo chủ đầu tư, phần lớn căn hộ có hướng nhìn về sông Hàn.</p>' => '<p>Dự án có ba mặt tiền Quy Mỹ – Nguyễn An Ninh – Nguyễn Lộ Trạch, gồm tháp A và tháp B nhìn ra sông Cẩm Lệ, cạnh Cung thể thao Tiên Sơn; gần Lotte Mart và Asia Park, đi cầu Rồng khoảng 10 phút.</p>',
+					'<p>Dự án có ba mặt tiền Quy Mỹ – Trần Đăng Ninh – Nguyễn Lộ Trạch, gần sông Hàn, Lotte Mart và Asia Park. Theo chủ đầu tư, phần lớn căn hộ có hướng nhìn về sông Hàn.</p>' => '<p>Dự án có ba mặt tiền Quy Mỹ – Trần Đăng Ninh – Nguyễn Lộ Trạch, gồm tháp A và tháp B nhìn ra sông Cẩm Lệ, cạnh Cung thể thao Tiên Sơn; gần Lotte Mart và Asia Park, đi cầu Rồng khoảng 10 phút.</p>',
 					'<h2>Pháp lý & tiến độ</h2>' . "\n" . '<p>Dự án đã có văn bản đủ điều kiện bán,' => '<h2>Pháp lý & tiến độ</h2>' . "\n" . '<p>Tên pháp lý là Dự án khu chung cư cao tầng, văn phòng thương mại và nhà ở Tuyên Sơn, pháp nhân chủ đầu tư là Công ty CP Phát triển Nhà Tuyên Sơn (Masterise Homes phát triển). Dự án đã có văn bản đủ điều kiện bán,',
 					'<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> để nhận bảng giá' => '<h2>Cách thanh toán Masteri Rivera Danang</h2>' . "\n" . '<p>Chủ đầu tư thường có ba phương án: thanh toán theo tiến độ chuẩn, thanh toán sớm để nhận chiết khấu cao hơn, hoặc kết hợp vay ngân hàng có hỗ trợ lãi suất trong một thời gian. Khách hàng là người Đà Nẵng thường được ưu đãi thêm. Mức đặt cọc, chiết khấu và lịch thanh toán thay đổi theo từng đợt chính sách.</p>' . "\n" . '<p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> để nhận bảng giá',
 				)
@@ -146,12 +146,12 @@ add_filter(
 			$upd = array(
 				'hh_p_image_links'   => implode( "\n", array_merge( $links, hh_masteri_2711_images() ) ),
 				'hh_p_handover'      => 'Ngày 29/11/2026',
-				'hh_p_highlights'    => "Dự án căn hộ đầu tiên của Masterise Homes tại Đà Nẵng\n2 tháp A – B cao 39 tầng, gần 1.200 căn, nhìn ra sông Cẩm Lệ khu Hòa Cường Nam\nCạnh Cung thể thao Tiên Sơn, 3 mặt tiền Quy Mỹ – Nguyễn An Ninh – Nguyễn Lộ Trạch\n1 phút tới Lotte Mart, 10 phút ra biển Mỹ Khê, 15 phút tới sân bay\n31 tiện ích nội khu từ tầng 1 đến tầng 4\nCất nóc 12/2025, lễ bàn giao căn hộ ngày 29/11/2026\nSở hữu lâu dài cho người Việt Nam",
-				'hh_p_location_desc' => 'Masteri Rivera Danang nằm tại 50 Quy Mỹ, khu Hòa Cường Nam – một trong những khu dân cư hiện hữu sầm uất nhất của Hải Châu. Dự án có 3 mặt tiền Quy Mỹ, Nguyễn An Ninh và Nguyễn Lộ Trạch; hai tháp A và B hướng ra sông Cẩm Lệ, ngay cạnh Cung thể thao Tiên Sơn, phía trước là khoảng mở không bị che chắn. Theo chủ đầu tư, từ dự án chỉ 1 phút tới Lotte Mart, 10 phút ra biển Mỹ Khê, 15 phút tới sân bay và 30 phút tới phố cổ Hội An.',
+				'hh_p_highlights'    => "Dự án căn hộ đầu tiên của Masterise Homes tại Đà Nẵng\n2 tháp A – B cao 39 tầng, gần 1.200 căn, nhìn ra sông Cẩm Lệ khu Hòa Cường Nam\nCạnh Cung thể thao Tiên Sơn, 3 mặt tiền Quy Mỹ – Trần Đăng Ninh – Nguyễn Lộ Trạch\n1 phút tới Lotte Mart, 10 phút ra biển Mỹ Khê, 15 phút tới sân bay\n31 tiện ích nội khu từ tầng 1 đến tầng 4\nCất nóc 12/2025, lễ bàn giao căn hộ ngày 29/11/2026\nSở hữu lâu dài cho người Việt Nam",
+				'hh_p_location_desc' => 'Masteri Rivera Danang nằm tại 50 Quy Mỹ, khu Hòa Cường Nam – một trong những khu dân cư hiện hữu sầm uất nhất của Hải Châu. Dự án có 3 mặt tiền Quy Mỹ, Trần Đăng Ninh và Nguyễn Lộ Trạch; hai tháp A và B hướng ra sông Cẩm Lệ, ngay cạnh Cung thể thao Tiên Sơn, phía trước là khoảng mở không bị che chắn. Theo chủ đầu tư, từ dự án chỉ 1 phút tới Lotte Mart, 10 phút ra biển Mỹ Khê, 15 phút tới sân bay và 30 phút tới phố cổ Hội An.',
 				'hh_p_connections'   => "1 phút | Lotte Mart, hệ thống giáo dục Sky-Line\n5 phút | Asia Park, Cung thể thao Tiên Sơn, Cung thiếu nhi Đà Nẵng\n5 phút | Quảng trường 2/9, chợ Bắc Mỹ An, Trung tâm hội chợ triển lãm\n10 phút | Biển Mỹ Khê, cầu Rồng, Bệnh viện Vinmec Đà Nẵng\n15 phút | Cầu sông Hàn, chợ Cồn, chợ Hàn, Trung tâm hành chính\n15 phút | Sân bay quốc tế Đà Nẵng\n30 phút | Phố cổ Hội An",
 				'hh_p_amenities_in'  => "Tầng 1 ngoài trời: sảnh đón căn hộ, điểm lên xuống hầm có mái che, ốc đảo nhiệt đới\nKhu vui chơi \"Thám hiểm rừng sâu\", cafe ngoài trời, bậc nghỉ thư giãn, vườn thú cưng\nTầng 4: bể bơi resort, bể bơi trẻ em, khu tắm nắng, hồ cạn, lounge chìm, cabana\nTầng 4: vườn BBQ, sân chơi vườn trên mây, sân chơi cát, sân pickleball\nTầng 4: khu võng, thể thao đa năng, vườn thư giãn, vườn yoga, vườn đọc sách, điểm vọng cảnh\nTrong nhà tầng 1 – 2: sảnh cư dân, hòm thư, sảnh thang máy, teen's club, kid's area\nTrong nhà tầng 3: phòng gym & yoga, business hub, phòng đa chức năng\nTrung tâm thương mại khoảng 2.500 m², shophouse khối đế, 2 tầng hầm đỗ xe",
 				'hh_p_amenities_out' => "Lotte Mart, hệ thống giáo dục Sky-Line\nAsia Park, Cung thể thao Tiên Sơn, Cung thiếu nhi\nBiển Mỹ Khê, cầu Rồng, Bệnh viện Vinmec\nChợ Cồn, chợ Hàn, Trung tâm hành chính, sân bay",
-				'hh_p_faq'           => "Masteri Rivera Danang ở đâu? | 50 Quy Mỹ, khu Hòa Cường Nam, Hải Châu, Đà Nẵng – 3 mặt tiền Quy Mỹ, Nguyễn An Ninh, Nguyễn Lộ Trạch, nhìn ra sông Cẩm Lệ, cạnh Cung thể thao Tiên Sơn.\nChủ đầu tư là ai? | Dự án do Masterise Homes phát triển, pháp nhân chủ đầu tư là Công ty CP Phát triển Nhà Tuyên Sơn; tổng thầu thi công là Central (Centralcons).\nKhi nào nhận nhà? | Chủ đầu tư tổ chức lễ bàn giao căn hộ ngày 29/11/2026. Căn hộ bàn giao hoàn thiện sàn, trần, tường và nội thất cơ bản.\nCó sở hữu lâu dài không? | Có. Người Việt Nam được sở hữu lâu dài; người nước ngoài được sở hữu 50 năm theo quy định.\nDự án có những tiện ích gì? | 31 tiện ích nội khu từ tầng 1 đến tầng 4: bể bơi resort, bể bơi trẻ em, sân pickleball, vườn trên mây, vườn BBQ, vườn yoga, gym & yoga, business hub, khu vui chơi trẻ em trong nhà và ngoài trời, cùng trung tâm thương mại khoảng 2.500 m².\nCăn Dual Key là gì? | Căn khoảng 101 m² thông thủy có 2 cửa vào riêng: chủ nhà ở một phần và cho thuê phần còn lại, hoặc cho gia đình nhiều thế hệ ở chung mà vẫn riêng tư.\nGiá Masteri Rivera Danang bao nhiêu? | Giá chỉ từ khoảng 4,1 tỷ đồng/căn (tham khảo). Giá từng căn, giỏ hàng còn lại và chính sách thay đổi theo từng đợt – liên hệ Hoàng Hiệp 0904 567 009 để nhận bảng giá mới nhất.\nCó xem căn hộ thực tế được không? | Được. Văn phòng bán hàng, căn hộ mẫu và sa bàn ở 50 Quy Mỹ; anh chị liên hệ Hoàng Hiệp – 0904 567 009 để hẹn lịch xem căn và tiện ích.",
+				'hh_p_faq'           => "Masteri Rivera Danang ở đâu? | 50 Quy Mỹ, khu Hòa Cường Nam, Hải Châu, Đà Nẵng – 3 mặt tiền Quy Mỹ, Trần Đăng Ninh, Nguyễn Lộ Trạch, nhìn ra sông Cẩm Lệ, cạnh Cung thể thao Tiên Sơn.\nChủ đầu tư là ai? | Dự án do Masterise Homes phát triển, pháp nhân chủ đầu tư là Công ty CP Phát triển Nhà Tuyên Sơn; tổng thầu thi công là Central (Centralcons).\nKhi nào nhận nhà? | Chủ đầu tư tổ chức lễ bàn giao căn hộ ngày 29/11/2026. Căn hộ bàn giao hoàn thiện sàn, trần, tường và nội thất cơ bản.\nCó sở hữu lâu dài không? | Có. Người Việt Nam được sở hữu lâu dài; người nước ngoài được sở hữu 50 năm theo quy định.\nDự án có những tiện ích gì? | 31 tiện ích nội khu từ tầng 1 đến tầng 4: bể bơi resort, bể bơi trẻ em, sân pickleball, vườn trên mây, vườn BBQ, vườn yoga, gym & yoga, business hub, khu vui chơi trẻ em trong nhà và ngoài trời, cùng trung tâm thương mại khoảng 2.500 m².\nCăn Dual Key là gì? | Căn khoảng 101 m² thông thủy có 2 cửa vào riêng: chủ nhà ở một phần và cho thuê phần còn lại, hoặc cho gia đình nhiều thế hệ ở chung mà vẫn riêng tư.\nGiá Masteri Rivera Danang bao nhiêu? | Giá chỉ từ khoảng 4,1 tỷ đồng/căn (tham khảo). Giá từng căn, giỏ hàng còn lại và chính sách thay đổi theo từng đợt – liên hệ Hoàng Hiệp 0904 567 009 để nhận bảng giá mới nhất.\nCó xem căn hộ thực tế được không? | Được. Văn phòng bán hàng, căn hộ mẫu và sa bàn ở 50 Quy Mỹ; anh chị liên hệ Hoàng Hiệp – 0904 567 009 để hẹn lịch xem căn và tiện ích.",
 			);
 			foreach ( $upd as $k => $v ) {
 				$cur = (string) ( $p['meta'][ $k ] ?? '' );
@@ -423,4 +423,30 @@ add_action(
 		}
 	},
 	99
+);
+
+/*
+ * 28/11/2026: tên đường mặt tiền theo tổng mặt bằng chính thức của Masterise Homes là "Trần Đăng Ninh" (trước ghi "Nguyễn An Ninh"
+ * theo báo chí). Nguồn dữ liệu đã đổi; ở đây ghi bản cũ vào fix_meta / fix_content để web thay giá trị đang hiển thị.
+ */
+add_filter(
+	'hh_project_dataset',
+	static function ( $projects ) {
+		foreach ( $projects as $i => $p ) {
+			if ( 'masteri-da-nang' !== ( $p['slug'] ?? '' ) ) {
+				continue;
+			}
+			foreach ( (array) ( $p['meta'] ?? array() ) as $k => $v ) {
+				if ( is_string( $v ) && false !== strpos( $v, 'Trần Đăng Ninh' ) ) {
+					$p['fix_meta'][ $k ] = array_merge( (array) ( $p['fix_meta'][ $k ] ?? array() ), array( str_replace( 'Trần Đăng Ninh', 'Nguyễn An Ninh', $v ) ) );
+				}
+			}
+			if ( false !== strpos( (string) ( $p['content'] ?? '' ), 'Trần Đăng Ninh' ) ) {
+				$p['fix_content'] = array_merge( (array) ( $p['fix_content'] ?? array() ), array( str_replace( 'Trần Đăng Ninh', 'Nguyễn An Ninh', (string) $p['content'] ) ) );
+			}
+			$projects[ $i ] = $p;
+		}
+		return $projects;
+	},
+	1000
 );

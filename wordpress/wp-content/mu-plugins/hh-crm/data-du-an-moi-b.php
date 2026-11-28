@@ -21,7 +21,7 @@ function hh_dataset_du_an_moi_b( $projects ) {
 			'hh_p_developer'    => 'Masterise Homes (Masterise Group)',
 			'hh_p_builder'      => 'Central (Centralcons)',
 			'hh_p_type'         => 'Căn hộ cao cấp sở hữu lâu dài, Dual Key, khối đế thương mại',
-			'hh_p_address'      => '50 Quy Mỹ (3 mặt tiền Quy Mỹ – Nguyễn An Ninh – Nguyễn Lộ Trạch), phường Hòa Cường Nam (cũ), Hải Châu, Đà Nẵng',
+			'hh_p_address'      => '50 Quy Mỹ (3 mặt tiền Quy Mỹ – Trần Đăng Ninh – Nguyễn Lộ Trạch), phường Hòa Cường Nam (cũ), Hải Châu, Đà Nẵng',
 			'hh_p_scale'        => 'Khoảng 18.296 m² (1,83 ha), vốn đầu tư hơn 3.300 tỷ đồng',
 			'hh_p_blocks'       => '2 tòa tháp',
 			'hh_p_floors'       => '39 tầng nổi, 2 tầng hầm',
@@ -54,7 +54,7 @@ function hh_dataset_du_an_moi_b( $projects ) {
 <li>Khối đế thương mại tầng 1 – 3 có shophouse và trung tâm thương mại khoảng 2.500 m².</li>
 </ul>
 <h2>Vị trí Masteri Rivera Danang</h2>
-<p>Dự án có ba mặt tiền Quy Mỹ – Nguyễn An Ninh – Nguyễn Lộ Trạch, gần sông Hàn, Lotte Mart và Asia Park. Theo chủ đầu tư, phần lớn căn hộ có hướng nhìn về sông Hàn.</p>
+<p>Dự án có ba mặt tiền Quy Mỹ – Trần Đăng Ninh – Nguyễn Lộ Trạch, gần sông Hàn, Lotte Mart và Asia Park. Theo chủ đầu tư, phần lớn căn hộ có hướng nhìn về sông Hàn.</p>
 <h2>Pháp lý & tiến độ</h2>
 <p>Dự án đã có văn bản đủ điều kiện bán, ra mắt tháng 5/2025 và cất nóc tháng 12/2025. Bàn giao dự kiến Quý III/2026 (một số nguồn ghi Quý IV/2026). Người Việt Nam được sở hữu lâu dài, người nước ngoài 50 năm. Giá chào bán trung bình được các nguồn ghi khoảng 70 – 94 triệu/m².</p>
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> để nhận bảng giá, giỏ hàng căn còn lại và chính sách thanh toán mới nhất của Masteri Rivera Danang.</p>',

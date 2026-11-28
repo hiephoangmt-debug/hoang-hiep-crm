@@ -487,13 +487,14 @@ HTML
 		'keyword'  => 'tiến độ Masteri Đà Nẵng',
 		'project'  => 'masteri-da-nang',
 		'week'     => 8,
+		'rev'      => '2026-11-28a', // Tên đường Trần Đăng Ninh theo tổng mặt bằng chủ đầu tư.
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
 <p><strong>Masteri Đà Nẵng</strong> (tên chính thức Masteri Rivera Danang) là dự án căn hộ đầu tiên của Masterise Homes tại Đà Nẵng, gồm 2 tháp 39 tầng với gần 1.200 căn trên đường Quy Mỹ, Hải Châu. Giá tham khảo từ khoảng 4,13 tỷ cho căn 1PN+; về tiến độ Masteri Đà Nẵng, dự án đã cất nóc tháng 12/2025 và bàn giao theo kế hoạch Quý III/2026 (một số nguồn ghi Quý IV/2026). Thông tin cập nhật tháng 10/2026.</p>
 <!--hh-img:img/tin-tuc/masteri-da-nang-gia-tien-do-ban-giao.jpg|Tiến độ Masteri Đà Nẵng và giá bán tham khảo – ảnh bìa bài viết của hiephoangmt.com-->
 
 <h2>Tổng quan Masteri Đà Nẵng</h2>
-<p>Dự án rộng khoảng 18.296 m², vốn đầu tư hơn 3.300 tỷ đồng, nằm ở vị trí ba mặt tiền Quy Mỹ – Nguyễn An Ninh – Nguyễn Lộ Trạch, khu Hòa Cường Nam. Tổng thầu là Central (Centralcons).</p>
+<p>Dự án rộng khoảng 18.296 m², vốn đầu tư hơn 3.300 tỷ đồng, nằm ở vị trí ba mặt tiền Quy Mỹ – Trần Đăng Ninh – Nguyễn Lộ Trạch, khu Hòa Cường Nam. Tổng thầu là Central (Centralcons).</p>
 <p>Hai tháp 39 tầng đặt trên khối đế thương mại tầng 1 – 3 với trung tâm thương mại khoảng 2.500 m²; tầng 4 là hồ bơi resort, vườn dạo bộ và sân chơi trẻ em. Tổng cộng có 31 tiện ích nội khu.</p>
 <p>Về số căn, nguồn chủ đầu tư nêu gần 1.200 căn, một số nguồn ghi 1.112 căn đủ điều kiện bán – con số cụ thể nên đối chiếu khi ký hợp đồng.</p>
 
@@ -561,7 +562,7 @@ HTML
 			'faq'       => array(
 				array( 'Masteri Đà Nẵng giá bao nhiêu?', 'Tham khảo từ khoảng 4,13 tỷ cho căn 1PN+, 2PN khoảng 5,14 – 6,3 tỷ, 3PN khoảng 6,68 – 8,11 tỷ, đơn giá khoảng 70 – 94 triệu/m².' ),
 				array( 'Masteri Đà Nẵng khi nào bàn giao?', 'Theo tiến độ Masteri Đà Nẵng, kế hoạch được công bố là Quý III/2026, một số nguồn ghi Quý IV/2026; cần theo dõi thông báo chính thức của chủ đầu tư.' ),
-				array( 'Masteri Đà Nẵng nằm ở đâu?', 'Số 50 Quy Mỹ, ba mặt tiền Quy Mỹ – Nguyễn An Ninh – Nguyễn Lộ Trạch, khu Hòa Cường Nam, Hải Châu.' ),
+				array( 'Masteri Đà Nẵng nằm ở đâu?', 'Số 50 Quy Mỹ, ba mặt tiền Quy Mỹ – Trần Đăng Ninh – Nguyễn Lộ Trạch, khu Hòa Cường Nam, Hải Châu.' ),
 				array( 'Người nước ngoài có mua được Masteri Đà Nẵng không?', 'Có, theo quy định người nước ngoài được sở hữu 50 năm; người Việt Nam sở hữu lâu dài.' ),
 					array( 'Tiến độ Masteri Đà Nẵng hiện đến đâu?', 'Hai tháp đã cất nóc tháng 12/2025; kế hoạch bàn giao được công bố là Quý III/2026, một số nguồn ghi Quý IV/2026. Cần theo dõi thông báo bàn giao chính thức.' ),
 					array( 'Tiến độ Masteri Đà Nẵng chậm thì người mua được bảo vệ thế nào?', 'Mốc bàn giao và điều khoản phạt chậm bàn giao ghi trong hợp đồng mua bán là căn cứ; nhà ở hình thành trong tương lai cũng cần có bảo lãnh ngân hàng cho nghĩa vụ bàn giao.' ),
