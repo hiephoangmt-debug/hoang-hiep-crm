@@ -19,7 +19,7 @@ function hh_posts_sun_saphia_dot_7( $posts ) {
 	$posts[] = array(
 		'slug'     => 'chon-can-sun-saphia-residence-day-mat-bien',
 		'old_slug' => array( 'chon-day-can-sun-saphia-residence-mat-bien-canh-ben-phia-sau' ),
-		'rev'      => 3, // 28/11: thêm phối cảnh nội thất ý tưởng Modern Asian Luxury. 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá.
+		'rev'      => 2, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá.
 		'title'    => 'Chọn căn Sun Saphia Residence: dãy mặt biển, cánh bên hay phía sau – chênh 240 – 720 triệu có đáng?',
 		'excerpt'  => 'Cùng studio 30 m² tầng 15, giá dự kiến Sun Saphia Residence là 2,13 tỷ (phía sau), 2,37 tỷ (cánh bên) và 2,85 tỷ (mặt biển). Phân tích chênh lệch, dòng tiền cho thuê và ai nên chọn dãy nào.',
 		'keyword'  => 'chọn căn Sun Saphia Residence',
@@ -337,7 +337,7 @@ HTML
 	$posts[] = array(
 		'slug'     => 'noi-that-studio-sun-saphia-residence-30m2',
 		'old_slug' => array( 'chi-phi-noi-that-studio-30m2-cho-thue-sun-saphia' ),
-		'rev'      => 2, // 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá.
+		'rev'      => 3, // 28/11: thêm phối cảnh nội thất ý tưởng Modern Asian Luxury. 15/11: chuẩn SEO 100/100, đổi slug theo từ khoá.
 		'title'    => 'Làm nội thất studio 30 m² để cho thuê hết bao nhiêu? Gói 80 – 300 triệu và cách tính vào dòng tiền Sun Saphia Residence',
 		'excerpt'  => 'Sun Saphia Residence bàn giao hoàn thiện cơ bản, chủ căn tự làm nội thất. Báo giá thị trường 2026 cho studio: gói cơ bản 80 – 130 triệu, tiêu chuẩn 130 – 180 triệu, cao cấp 180 – 300 triệu. Cách khấu hao vào lợi nhuận cho thuê.',
 		'keyword'  => 'nội thất studio Sun Saphia Residence',
