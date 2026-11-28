@@ -174,7 +174,7 @@ const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 function play(name,{loop=false,push=false}={}){
   return new Promise(res=>{
     const v=vids[1-front],old=vids[front];
-    v.loop=loop;v.src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@6ffb830fee74473fcb0f68615bd213c1bbb77da4/landing/sun-saphia/tour/v2/"+name+".mp4";v.currentTime=0;
+    v.loop=loop;v.src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@f9d6d428d0be30d3cb4797089990a0623c80c8ec/landing/sun-saphia/tour/v2/"+name+".mp4";v.currentTime=0;
     v.className=push?"push-in":"";
     const go=()=>{requestAnimationFrame(()=>{v.classList.add("on");v.classList.remove("push-in")});
       old.classList.remove("drift");if(push)old.classList.add("push-out");old.classList.remove("on");
