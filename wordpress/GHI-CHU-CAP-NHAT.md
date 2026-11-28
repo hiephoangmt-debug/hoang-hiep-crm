@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.60** + plugin Hoàng Hiệp CRM **2.20.401**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.61** + plugin Hoàng Hiệp CRM **2.20.402**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.402 (giao diện 2.16.61)
+
+- Mọi trang trên web: lưới thẻ (tin tức, tin rao, dự án, khu vực, thẻ thông tin…) có hàng cuối thiếu thẻ hoặc ít thẻ hơn số cột thì tự căn giữa – không còn dồn một bên để trống một bên; thẻ cùng hàng cao bằng nhau. Không đổi lưới ảnh lớn + chữ, album có ảnh to, danh sách gạch đầu dòng, form và menu.
 
 ## Có gì mới – 2.20.401 (giao diện 2.16.60)
 

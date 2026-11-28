@@ -23,6 +23,7 @@ require get_theme_file_path( 'inc/content-tables.php' );
 require get_theme_file_path( 'inc/project-inline-css.php' );
 require get_theme_file_path( 'inc/landing.php' );
 require get_theme_file_path( 'inc/ban-giao-minh-hoa.php' );
+require get_theme_file_path( 'inc/can-giua-luoi.php' );
 require get_theme_file_path( 'inc/listing-detail.php' );
 require get_theme_file_path( 'inc/seo.php' );
 
