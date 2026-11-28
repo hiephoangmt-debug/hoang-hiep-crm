@@ -573,7 +573,8 @@ if ( ! $parent ) {
     <?php if ( $int_bg ) : ?>
     <span class="eyebrow">Tiêu chuẩn bàn giao</span>
     <h2 class="title" id="h-nt">Nội thất bàn giao <em><?php echo $e( $short_name ); ?></em></h2>
-    <p class="lead"><?php echo $e( $m( 'hh_p_handover_std' ) ?: 'Phối cảnh vật liệu, thiết bị bàn giao theo tài liệu chủ đầu tư.' ); ?> Đồ rời, trang trí trong ảnh chỉ để minh họa.</p>
+    <?php $nt_std = (string) $m( 'hh_p_handover_std' ); $nt_long = mb_strlen( $nt_std ) > 140 || ( function_exists( 'hoanghiep_std_kw' ) && hoanghiep_std_kw( $nt_std )['cards'] ); ?>
+    <p class="lead"><?php echo $nt_long ? 'Phối cảnh vật liệu, thiết bị bàn giao theo tài liệu chủ đầu tư. Danh mục bàn giao từng phòng có hình minh họa ở mục <a href="#phap-ly">Tiêu chuẩn bàn giao</a>.' : $e( $nt_std ?: 'Phối cảnh vật liệu, thiết bị bàn giao theo tài liệu chủ đầu tư.' ); // phpcs:ignore ?> Đồ rời, trang trí trong ảnh chỉ để minh họa.</p>
     <?php else : ?>
     <span class="eyebrow">Nội thất căn mẫu</span>
     <h2 class="title" id="h-nt">Căn hộ mẫu <em><?php echo $e( $short_name ); ?></em></h2>
@@ -761,7 +762,8 @@ $gd_link = static fn( $need, $title, $txt, $cls = 'btn btn-gold gd-btn' ) => '<a
         <?php if ( $m( 'hh_p_legal' ) || $m( 'hh_p_ownership' ) ) : ?>
         <div class="legal-box rv"><?php if ( $m( 'hh_p_ownership' ) ) : ?><b><?php echo $e( $m( 'hh_p_ownership' ) ); ?></b><br><?php endif; ?><?php echo $e( $m( 'hh_p_legal' ) ); ?></div>
         <?php endif; ?>
-        <?php $std_wide = mb_strlen( $m( 'hh_p_handover_std' ) ) > 300; // Tiêu chuẩn bàn giao dài: để hết chiều ngang dưới hai cột cho cân hai bên. ?>
+        <?php $std_kw = $m( 'hh_p_handover_std' ) && function_exists( 'hoanghiep_std_kw' ) ? hoanghiep_std_kw( $m( 'hh_p_handover_std' ) ) : array( 'intro' => '', 'cards' => array() ); // Tách theo khu bằng từ khóa (28/11/2026). ?>
+        <?php $std_wide = mb_strlen( $m( 'hh_p_handover_std' ) ) > 300 || $std_kw['cards']; // Tiêu chuẩn bàn giao dài hoặc tách được thẻ: để hết chiều ngang dưới hai cột. ?>
         <?php if ( $m( 'hh_p_handover_std' ) && ! $std_wide ) : ?><div class="std"><b>Tiêu chuẩn bàn giao</b><br><?php echo $e( $m( 'hh_p_handover_std' ) ); ?></div><?php endif; ?>
         <p class="note">Bản sao văn bản pháp lý: nhắn Zalo <?php echo $e( $phone ); ?> để nhận.</p>
         <?php if ( $progress && count( $progress ) < 3 ) : ?>
@@ -812,6 +814,11 @@ $gd_link = static fn( $need, $title, $txt, $cls = 'btn btn-gold gd-btn' ) => '<a
         }
         if ( count( $std_cards ) < 3 ) {
             $std_cards = array();
+        }
+        // Không có nhãn khu rõ ràng ("Bếp: …") → tách theo từ khóa từng hạng mục (anh Hiệp 28/11/2026: mọi dự án đều có hình minh họa).
+        if ( ! $std_cards && $std_kw['cards'] ) {
+            $std_cards = $std_kw['cards'];
+            $std_intro = $std_kw['intro'];
         }
         // Trang EN / KO: chỉ dùng thẻ khi mọi ý đã có bản dịch, không thì giữ đoạn văn (đã dịch sẵn nguyên đoạn).
         if ( $std_cards && function_exists( 'hh_tl' ) && hh_tl() && function_exists( 'hh_tl_text' ) ) {

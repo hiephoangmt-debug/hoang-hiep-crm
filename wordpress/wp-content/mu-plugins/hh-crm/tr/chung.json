@@ -7170,5 +7170,689 @@
  "Dự án đã bàn giao – Hoàng Hiệp nhận cả hai phía: tìm căn cho khách thuê, khách mua lại và nhận gửi cho thuê, ký gửi bán cho chủ nhà. Chọn đúng nhu cầu, Hiệp gửi danh sách hoặc gọi lại trong ngày.": [
   "The project has been handed over – Hoang Hiep works both sides: finding units for tenants and buyers, and taking rental and sale listings from owners. Pick your need and Hiep will send a list or call back the same day.",
   "인도 완료 프로젝트 – 호앙 히엡이 양쪽을 모두 맡습니다: 임차·매수 고객의 매물 찾기, 집주인의 임대·매매 위탁. 요청을 선택하시면 당일 목록을 보내거나 연락드립니다."
+ ],
+ "Bàn giao hoàn thiện liền tường (căn 1PN+1, 2PN, 3PN)": [
+  "Fully finished handover (1BR+1, 2BR, 3BR units)",
+  "완전 마감 인도(1BR+1, 2BR, 3BR 세대)"
+ ],
+ "Cửa chính gỗ công nghiệp chống cháy hoặc thép vân gỗ": [
+  "Fire-rated engineered wood or wood-grain steel main door",
+  "방화 엔지니어드 목재 또는 목무늬 강철 현관문"
+ ],
+ "Khóa điện tử ADEL/KAADAS/Samsung": [
+  "ADEL/KAADAS/Samsung digital lock",
+  "ADEL/KAADAS/Samsung 디지털 도어록"
+ ],
+ "Sàn phòng khách, phòng ngủ gỗ công nghiệp hoặc SPC vân gỗ": [
+  "Living room and bedroom floors in engineered wood or wood-grain SPC",
+  "거실·침실 바닥 엔지니어드 목재 또는 목무늬 SPC"
+ ],
+ "Trần thạch cao": [
+  "Gypsum ceiling",
+  "석고보드 천장"
+ ],
+ "Sơn Dulux/Jotun/Toa": [
+  "Dulux/Jotun/Toa paint",
+  "Dulux/Jotun/Toa 페인트"
+ ],
+ "Cửa sổ nhôm Xingfa": [
+  "Xingfa aluminium windows",
+  "Xingfa 알루미늄 창호"
+ ],
+ "Điều hòa Daikin/Mitsubishi/Panasonic/LG/Samsung (âm trần phòng khách)": [
+  "Daikin/Mitsubishi/Panasonic/LG/Samsung air conditioning (ceiling-concealed in the living room)",
+  "Daikin/Mitsubishi/Panasonic/LG/Samsung 에어컨(거실 천장 매립형)"
+ ],
+ "Đèn chiếu sáng cơ bản": [
+  "Basic lighting",
+  "기본 조명"
+ ],
+ "Tủ trên dưới MDF chống ẩm An Cường": [
+  "Moisture-resistant MDF upper and lower cabinets (An Cuong)",
+  "방습 MDF 상·하부장(An Cuong)"
+ ],
+ "Bếp từ": [
+  "Induction hob",
+  "인덕션 쿡탑"
+ ],
+ "Hút mùi": [
+  "Range hood",
+  "주방 후드"
+ ],
+ "Bồn rửa Hafele/Teka/Giovani": [
+  "Hafele/Teka/Giovani sink",
+  "Hafele/Teka/Giovani 싱크"
+ ],
+ "Thiết bị Bravat/Grohe/Kohler": [
+  "Bravat/Grohe/Kohler fixtures",
+  "Bravat/Grohe/Kohler 위생도기"
+ ],
+ "Tủ lavabo chống nước": [
+  "Waterproof vanity cabinet",
+  "방수 세면대 하부장"
+ ],
+ "Cabin kính cường lực": [
+  "Tempered glass shower cabin",
+  "강화유리 샤워부스"
+ ],
+ "Bình nóng lạnh Picenza/Rossi/Ferroli": [
+  "Picenza/Rossi/Ferroli water heater",
+  "Picenza/Rossi/Ferroli 온수기"
+ ],
+ "Đầu ra internet": [
+  "Internet outlet",
+  "인터넷 단자"
+ ],
+ "Truyền hình": [
+  "TV outlet",
+  "TV 단자"
+ ],
+ "Gạch Prime/Viglacera": [
+  "Prime/Viglacera tiles",
+  "Prime/Viglacera 타일"
+ ],
+ "Căn studio có danh mục riêng (hỏi Hoàng Hiệp)": [
+  "Studio units have a separate list (ask Hoang Hiep)",
+  "스튜디오 세대는 별도 목록(호앙 히엡에게 문의)"
+ ],
+ "Bàn giao liền tường theo danh mục vật liệu của chủ đầu tư": [
+  "Finished handover per the developer's material list",
+  "개발사 자재 목록에 따른 마감 인도"
+ ],
+ "Cửa chính chống cháy": [
+  "Fire-rated main door",
+  "방화 현관문"
+ ],
+ "Khóa từ kỹ thuật số (thẻ, mã số, vân tay, chìa cơ)": [
+  "Digital lock (card, PIN, fingerprint, key)",
+  "디지털 도어록(카드, 비밀번호, 지문, 열쇠)"
+ ],
+ "Tường trát phẳng – khách hàng tự hoàn thiện sàn, trần": [
+  "Smooth plastered walls – buyer finishes floors and ceilings",
+  "평활 미장 벽체 – 바닥·천장은 구매자 마감"
+ ],
+ "Chân tường": [
+  "Skirting",
+  "걸레받이"
+ ],
+ "Đèn và cửa thông phòng": [
+  "Lights and interior doors",
+  "조명 및 실내문"
+ ],
+ "Cửa nhôm kính Xingfa hoặc tương đương": [
+  "Xingfa aluminium-glass doors or equivalent",
+  "Xingfa 알루미늄 유리문 또는 동급"
+ ],
+ "Trần thạch cao chống ẩm": [
+  "Moisture-resistant gypsum ceiling",
+  "방습 석고보드 천장"
+ ],
+ "Điều hòa khách tự lắp (hệ Multi, vị trí cục nóng theo thiết kế)": [
+  "Air conditioning installed by buyer (Multi system, outdoor unit position per design)",
+  "에어컨 구매자 설치(멀티 시스템, 실외기 위치는 설계 기준)"
+ ],
+ "Vệ sinh ốp lát Viglacera/Thạch Bàn": [
+  "Viglacera/Thach Ban bathroom tiling",
+  "Viglacera/Thach Ban 욕실 타일"
+ ],
+ "Thiết bị Toto/American Standard": [
+  "Toto/American Standard fixtures",
+  "Toto/American Standard 위생도기"
+ ],
+ "Vách tắm kính": [
+  "Glass shower screen",
+  "유리 샤워 칸막이"
+ ],
+ "Tủ lavabo": [
+  "Vanity cabinet",
+  "세면대 하부장"
+ ],
+ "Bình nóng lạnh": [
+  "Water heater",
+  "온수기"
+ ],
+ "Lô gia, ban công": [
+  "Loggia, balcony",
+  "로지아, 발코니"
+ ],
+ "Ban công, lô gia lát gạch chống trơn": [
+  "Balcony and loggia with anti-slip tiles",
+  "발코니·로지아 미끄럼 방지 타일"
+ ],
+ "Chuông hình": [
+  "Video doorbell",
+  "비디오 도어폰"
+ ],
+ "Phòng khách, phòng ngủ, bếp sàn BTCT cán nền": [
+  "Living room, bedroom and kitchen: screeded concrete floor",
+  "거실·침실·주방: 콘크리트 바닥 미장"
+ ],
+ "Bếp có đầu chờ hút mùi (tủ bếp, thiết bị bếp khách tự lắp)": [
+  "Kitchen with range hood point (cabinets and appliances installed by buyer)",
+  "주방 후드 배관 준비(주방가구·기기는 구매자 설치)"
+ ],
+ "Điện": [
+  "Electrical",
+  "전기"
+ ],
+ "Internet bàn giao đến tủ tổng căn hộ": [
+  "Internet delivered to the unit's main panel",
+  "세대 메인 분전함까지 인터넷 인입"
+ ],
+ "Sơn Jotun": [
+  "Jotun paint",
+  "Jotun 페인트"
+ ],
+ "Thiết bị vệ sinh TOTO": [
+  "TOTO sanitary ware",
+  "TOTO 위생도기"
+ ],
+ "Thiết bị điện Philips, Panasonic": [
+  "Philips, Panasonic electrical devices",
+  "Philips, Panasonic 전기 기구"
+ ],
+ "Sàn gỗ AGT phòng ngủ": [
+  "AGT wooden flooring in bedrooms",
+  "침실 AGT 목재 바닥"
+ ],
+ "Máy lạnh âm trần Samsung WindFree": [
+  "Samsung WindFree ceiling air conditioning",
+  "Samsung WindFree 천장형 에어컨"
+ ],
+ "Khóa điện tử Yale": [
+  "Yale digital lock",
+  "Yale 디지털 도어록"
+ ],
+ "Kính hộp Low-E": [
+  "Low-E insulated glass",
+  "Low-E 복층유리"
+ ],
+ "Bếp từ và hút mùi Bosch": [
+  "Bosch induction hob and range hood",
+  "Bosch 인덕션 쿡탑 및 후드"
+ ],
+ "Thiết bị vệ sinh Kohler": [
+  "Kohler sanitary ware",
+  "Kohler 위생도기"
+ ],
+ "Nhà thông minh Schneider": [
+  "Schneider smart home",
+  "Schneider 스마트홈"
+ ],
+ "Hoàn thiện cơ bản theo danh mục vật liệu ký kèm hợp đồng mua bán": [
+  "Basic finish per the material list attached to the sale contract",
+  "매매계약서 첨부 자재 목록에 따른 기본 마감"
+ ],
+ "Sàn phòng khách, ăn, ngủ gỗ công nghiệp": [
+  "Living, dining and bedroom floors in engineered wood",
+  "거실·식당·침실 바닥 엔지니어드 목재"
+ ],
+ "Trần thạch cao khung chìm (Vĩnh Tường/Nanotech)": [
+  "Concealed-frame gypsum ceiling (Vinh Tuong/Nanotech)",
+  "히든 프레임 석고보드 천장(Vinh Tuong/Nanotech)"
+ ],
+ "Sơn Jotun/Dulux/Nippon": [
+  "Jotun/Dulux/Nippon paint",
+  "Jotun/Dulux/Nippon 페인트"
+ ],
+ "Cửa sổ nhôm sơn tĩnh điện kính dán": [
+  "Powder-coated aluminium windows with laminated glass",
+  "분체도장 알루미늄 창호, 접합유리"
+ ],
+ "Khóa điện tử Kaadas/PHG Lock": [
+  "Kaadas/PHG Lock digital lock",
+  "Kaadas/PHG Lock 디지털 도어록"
+ ],
+ "Cửa phòng gỗ công nghiệp hoặc composite": [
+  "Engineered wood or composite room doors",
+  "엔지니어드 목재 또는 복합재 방문"
+ ],
+ "Tủ bếp trên dưới gỗ công nghiệp": [
+  "Engineered wood upper and lower kitchen cabinets",
+  "엔지니어드 목재 주방 상·하부장"
+ ],
+ "Mặt đá": [
+  "Stone countertop",
+  "석재 상판"
+ ],
+ "Chậu và vòi inox": [
+  "Stainless steel sink and tap",
+  "스테인리스 싱크 및 수전"
+ ],
+ "Bếp, phòng tắm, lô gia lát gạch men": [
+  "Kitchen, bathroom and loggia with ceramic tiles",
+  "주방·욕실·로지아 세라믹 타일"
+ ],
+ "Căn hộ thường bàn giao hoàn thiện nội thất liền tường": [
+  "Standard units handed over with fitted interior finishes",
+  "일반 세대는 붙박이 내장 마감 인도"
+ ],
+ "Điều hòa cục bộ multi": [
+  "Multi split air conditioning",
+  "멀티 에어컨"
+ ],
+ "Khóa điện tử cửa chính Philips/Hafele/Yale (hoặc tương đương)": [
+  "Philips/Hafele/Yale main-door digital lock (or equivalent)",
+  "Philips/Hafele/Yale 현관 디지털 도어록(또는 동급)"
+ ],
+ "Tủ bếp trên – dưới": [
+  "Upper and lower kitchen cabinets",
+  "주방 상·하부장"
+ ],
+ "Bếp từ và hút mùi Hafele/Panasonic/Teka": [
+  "Hafele/Panasonic/Teka induction hob and range hood",
+  "Hafele/Panasonic/Teka 인덕션 쿡탑 및 후드"
+ ],
+ "Thiết bị vệ sinh Hafele/American Standard/Jomoo": [
+  "Hafele/American Standard/Jomoo sanitary ware",
+  "Hafele/American Standard/Jomoo 위생도기"
+ ],
+ "Vách kính tắm": [
+  "Glass shower screen",
+  "유리 샤워 칸막이"
+ ],
+ "Bình nóng lạnh Ariston/Ferroli/Rossi": [
+  "Ariston/Ferroli/Rossi water heater",
+  "Ariston/Ferroli/Rossi 온수기"
+ ],
+ "Sàn gỗ công nghiệp / SPC vân gỗ ở phòng khách, bếp, phòng ngủ": [
+  "Engineered wood / wood-grain SPC flooring in living room, kitchen and bedrooms",
+  "거실·주방·침실 엔지니어드 목재/목무늬 SPC 바닥"
+ ],
+ "Căn thông tầng và duplex bàn giao thô (hoàn thiện trong 6 tháng)": [
+  "Double-height and duplex units handed over as shell (finish within 6 months)",
+  "복층·듀플렉스 세대는 골조 인도(6개월 내 마감)"
+ ],
+ "Bàn giao nội thất": [
+  "Interior handover",
+  "내장 인도"
+ ],
+ "Sàn gỗ công nghiệp An Cường/Formica": [
+  "An Cuong/Formica engineered wood flooring",
+  "An Cuong/Formica 엔지니어드 목재 바닥"
+ ],
+ "Khóa vân tay Kin Long/Kaadas": [
+  "Kin Long/Kaadas fingerprint lock",
+  "Kin Long/Kaadas 지문 도어록"
+ ],
+ "Kính Việt Nhật hoặc tương đương": [
+  "Viet Nhat glass or equivalent",
+  "Viet Nhat 유리 또는 동급"
+ ],
+ "Tủ bếp An Cường/KES": [
+  "An Cuong/KES kitchen cabinets",
+  "An Cuong/KES 주방가구"
+ ],
+ "Bếp từ đôi và máy hút mùi Sunhouse/Electrolux": [
+  "Sunhouse/Electrolux double induction hob and range hood",
+  "Sunhouse/Electrolux 2구 인덕션 및 후드"
+ ],
+ "Thiết bị vệ sinh TOTO/Bravat/Clara/Rhenwear": [
+  "TOTO/Bravat/Clara/Rhenwear sanitary ware",
+  "TOTO/Bravat/Clara/Rhenwear 위생도기"
+ ],
+ "Bồn cầu thông minh phòng master": [
+  "Smart toilet in the master bathroom",
+  "마스터 욕실 스마트 비데 변기"
+ ],
+ "Nhôm Xingfa": [
+  "Xingfa aluminium",
+  "Xingfa 알루미늄"
+ ],
+ "Bàn giao hoàn thiện theo bảng tiêu chuẩn của chủ đầu tư": [
+  "Finished handover per the developer's standard schedule",
+  "개발사 표준 사양표에 따른 마감 인도"
+ ],
+ "Sơn Dulux/Jotun": [
+  "Dulux/Jotun paint",
+  "Dulux/Jotun 페인트"
+ ],
+ "Phòng ngủ lát gỗ công nghiệp": [
+  "Engineered wood flooring in bedrooms",
+  "침실 엔지니어드 목재 바닥"
+ ],
+ "Rèm 2 lớp": [
+  "Double-layer curtains",
+  "2겹 커튼"
+ ],
+ "Điều hòa Daikin/Mitsubishi/Panasonic (âm trần phòng khách, treo tường phòng ngủ)": [
+  "Daikin/Mitsubishi/Panasonic air conditioning (ceiling-concealed in the living room, wall-mounted in bedrooms)",
+  "Daikin/Mitsubishi/Panasonic 에어컨(거실 천장 매립형, 침실 벽걸이형)"
+ ],
+ "Cửa chính gỗ chống cháy": [
+  "Fire-rated wooden main door",
+  "방화 목재 현관문"
+ ],
+ "Khóa thông minh": [
+  "Smart lock",
+  "스마트 도어록"
+ ],
+ "Tủ bếp": [
+  "Kitchen cabinets",
+  "주방가구"
+ ],
+ "Bếp và hút mùi Hafele/Teka": [
+  "Hafele/Teka hob and range hood",
+  "Hafele/Teka 쿡탑 및 후드"
+ ],
+ "Thiết bị vệ sinh Toto/Grohe": [
+  "Toto/Grohe sanitary ware",
+  "Toto/Grohe 위생도기"
+ ],
+ "Vách tắm kính cường lực (nếu có)": [
+  "Tempered glass shower screen (if any)",
+  "강화유리 샤워 칸막이(해당 시)"
+ ],
+ "Bình nóng lạnh Ariston/Ferroli": [
+  "Ariston/Ferroli water heater",
+  "Ariston/Ferroli 온수기"
+ ],
+ "Lô gia lát gạch chống trơn": [
+  "Loggia with anti-slip tiles",
+  "로지아 미끄럼 방지 타일"
+ ],
+ "Lan can kính cường lực (hoặc tương đương)": [
+  "Tempered glass balustrade (or equivalent)",
+  "강화유리 난간(또는 동급)"
+ ],
+ "Bàn giao thô": [
+  "Shell handover",
+  "골조 인도"
+ ],
+ "Cửa nhôm kính": [
+  "Aluminium-glass doors",
+  "알루미늄 유리문"
+ ],
+ "Bên trong để thô (trần, sàn, tường)": [
+  "Interior left as shell (ceiling, floor, walls)",
+  "실내는 골조 상태(천장, 바닥, 벽)"
+ ],
+ "Điều hòa khách tự lắp": [
+  "Air conditioning installed by buyer",
+  "에어컨 구매자 설치"
+ ],
+ "Lô gia (sàn lát, lan can kính cường lực) hoàn thiện": [
+  "Finished loggia (tiled floor, tempered glass balustrade)",
+  "로지아 마감(타일 바닥, 강화유리 난간)"
+ ],
+ "Mặt ngoài": [
+  "Exterior",
+  "외관"
+ ],
+ "Đầu chờ điện, nước, internet": [
+  "Electrical, water and internet points",
+  "전기·수도·인터넷 배관 준비"
+ ],
+ "Tuỳ chọn bàn giao hoàn thiện liền tường (đăng ký khi ký HĐMB): khoảng 10,1 triệu/m² căn studio": [
+  "Optional fitted finish (register when signing the sale contract): about 10.1 million VND/m² for studios",
+  "선택형 붙박이 마감(매매계약 시 신청): 스튜디오 약 1,010만 동/m²"
+ ],
+ "9,5 triệu/m² căn 1PN/1PN+": [
+  "9.5 million VND/m² for 1BR/1BR+ units",
+  "1BR/1BR+ 세대 950만 동/m²"
+ ],
+ "11 triệu/m² căn 2PN/3PN (đã gồm VAT, tạm tính theo diện tích thông thủy)": [
+  "11 million VND/m² for 2BR/3BR units (incl. VAT, provisional by net area)",
+  "2BR/3BR 세대 1,100만 동/m²(VAT 포함, 전용면적 기준 잠정)"
+ ],
+ "Bàn giao hoàn thiện cao cấp, tích hợp smarthome": [
+  "Premium finished handover with integrated smart home",
+  "스마트홈 통합 고급 마감 인도"
+ ],
+ "Sàn phòng khách, ăn, ngủ gỗ kỹ thuật sồi châu Âu dày 12 mm (Pergo, Imondi, Kronoswiss)": [
+  "Living, dining and bedroom floors in 12 mm European oak engineered wood (Pergo, Imondi, Kronoswiss)",
+  "거실·식당·침실 바닥 12mm 유럽산 오크 엔지니어드 목재(Pergo, Imondi, Kronoswiss)"
+ ],
+ "Cửa chính gỗ chống cháy EI30": [
+  "EI30 fire-rated wooden main door",
+  "EI30 방화 목재 현관문"
+ ],
+ "Khóa thông minh Igloohome/Yale": [
+  "Igloohome/Yale smart lock",
+  "Igloohome/Yale 스마트 도어록"
+ ],
+ "Trần thạch cao Vĩnh Tường": [
+  "Vinh Tuong gypsum ceiling",
+  "Vinh Tuong 석고보드 천장"
+ ],
+ "Sơn Jotun/TOA": [
+  "Jotun/TOA paint",
+  "Jotun/TOA 페인트"
+ ],
+ "Cửa kính": [
+  "Glass doors",
+  "유리문"
+ ],
+ "Điều hòa Multi âm trần nối ống gió Daikin/Mitsubishi": [
+  "Daikin/Mitsubishi ducted ceiling multi air conditioning",
+  "Daikin/Mitsubishi 덕트형 천장 멀티 에어컨"
+ ],
+ "Đèn Philips": [
+  "Philips lighting",
+  "Philips 조명"
+ ],
+ "Tủ quần áo phòng ngủ phụ kiện Hafele/Blum": [
+  "Bedroom wardrobe with Hafele/Blum fittings",
+  "Hafele/Blum 하드웨어 침실 붙박이장"
+ ],
+ "Mặt đá Vicostone/Caesarstone": [
+  "Vicostone/Caesarstone stone countertop",
+  "Vicostone/Caesarstone 석재 상판"
+ ],
+ "Bếp từ 3 vùng": [
+  "3-zone induction hob",
+  "3구 인덕션 쿡탑"
+ ],
+ "Máy rửa bát Teka/Smeg": [
+  "Teka/Smeg dishwasher",
+  "Teka/Smeg 식기세척기"
+ ],
+ "Bồn cầu treo": [
+  "Wall-hung toilet",
+  "벽걸이 변기"
+ ],
+ "Sen vòi Bagnodesign/Axent": [
+  "Bagnodesign/Axent shower and taps",
+  "Bagnodesign/Axent 샤워·수전"
+ ],
+ "Bồn tắm cho căn 3PN": [
+  "Bathtub for 3BR units",
+  "3BR 세대 욕조"
+ ],
+ "Lan can nhôm Xingfa kính dán an toàn": [
+  "Xingfa aluminium balustrade with laminated safety glass",
+  "Xingfa 알루미늄 난간, 접합 안전유리"
+ ],
+ "Công tắc ổ cắm Legrand/Schneider màu gold kết nối smarthome": [
+  "Gold Legrand/Schneider switches and sockets connected to smart home",
+  "스마트홈 연동 골드 Legrand/Schneider 스위치·콘센트"
+ ],
+ "Gạch vệ sinh, bếp, logia nhập khẩu Florim, Porcelanosa, Vietceramic": [
+  "Imported bathroom, kitchen and loggia tiles: Florim, Porcelanosa, Vietceramic",
+  "욕실·주방·로지아 수입 타일: Florim, Porcelanosa, Vietceramic"
+ ],
+ "Chuông hình camera IP": [
+  "IP camera video doorbell",
+  "IP 카메라 비디오 도어폰"
+ ],
+ "Tủ Fomica/AICA": [
+  "Formica/AICA cabinets",
+  "Formica/AICA 수납장"
+ ],
+ "Hoàn thiện cao cấp": [
+  "Premium finish",
+  "고급 마감"
+ ],
+ "Sàn porcelain": [
+  "Porcelain flooring",
+  "포세린 타일 바닥"
+ ],
+ "Trần Vĩnh Tường / Gyproc": [
+  "Vinh Tuong / Gyproc ceiling",
+  "Vinh Tuong / Gyproc 천장"
+ ],
+ "Cửa Xingfa kính Low-E": [
+  "Xingfa doors with Low-E glass",
+  "Low-E 유리 Xingfa 창호"
+ ],
+ "Khóa điện tử Sharp": [
+  "Sharp digital lock",
+  "Sharp 디지털 도어록"
+ ],
+ "Điều hòa âm trần Samsung": [
+  "Samsung ceiling air conditioning",
+  "Samsung 천장형 에어컨"
+ ],
+ "Bếp Teka / Malloca (hoặc tương đương)": [
+  "Teka / Malloca kitchen appliances (or equivalent)",
+  "Teka / Malloca 주방기기(또는 동급)"
+ ],
+ "Thiết bị vệ sinh Innoci / Grohe / Toto": [
+  "Innoci / Grohe / Toto sanitary ware",
+  "Innoci / Grohe / Toto 위생도기"
+ ],
+ "Điện Legrand": [
+  "Legrand electrical devices",
+  "Legrand 전기 기구"
+ ],
+ "Hoàn thiện nội thất cơ bản": [
+  "Basic interior finish",
+  "기본 내장 마감"
+ ],
+ "Sàn lát gạch": [
+  "Tiled flooring",
+  "타일 바닥"
+ ],
+ "Lát gỗ": [
+  "Wooden flooring",
+  "목재 바닥"
+ ],
+ "Tường": [
+  "Walls",
+  "벽체"
+ ],
+ "Trần sơn bả": [
+  "Skim-coated and painted ceiling",
+  "퍼티·도장 천장"
+ ],
+ "Đèn LED chiếu sáng": [
+  "LED lighting",
+  "LED 조명"
+ ],
+ "Công tắc": [
+  "Switches",
+  "스위치"
+ ],
+ "Ổ cắm điện": [
+  "Power sockets",
+  "전기 콘센트"
+ ],
+ "Ổ cắm TV": [
+  "TV sockets",
+  "TV 단자"
+ ],
+ "Ổ cắm mạng": [
+  "Network sockets",
+  "네트워크 단자"
+ ],
+ "Điều hòa chờ sẵn ống đồng và ống thoát nước ngưng": [
+  "Air conditioning pre-piped with copper and condensate lines",
+  "에어컨 동배관·응축수 배관 선시공"
+ ],
+ "Tủ bếp trên dưới kèm chậu và vòi rửa": [
+  "Upper and lower kitchen cabinets with sink and tap",
+  "싱크·수전 포함 주방 상·하부장"
+ ],
+ "Tường vệ sinh ốp gạch": [
+  "Tiled bathroom walls",
+  "욕실 벽 타일"
+ ],
+ "Thiết bị vệ sinh cơ bản": [
+  "Basic sanitary ware",
+  "기본 위생도기"
+ ],
+ "Cửa ban công": [
+  "Balcony door",
+  "발코니 도어"
+ ],
+ "Cửa kính Low-E cách âm": [
+  "Soundproof Low-E glass doors",
+  "방음 Low-E 유리문"
+ ],
+ "Đèn LED âm trần": [
+  "Recessed LED lights",
+  "매립형 LED 조명"
+ ],
+ "Khóa thông minh (vân tay, mã số, thẻ từ)": [
+  "Smart lock (fingerprint, PIN, key card)",
+  "스마트 도어록(지문, 비밀번호, 카드키)"
+ ],
+ "Điều hòa": [
+  "Air conditioning",
+  "에어컨"
+ ],
+ "Vách kính tắm đứng, lavabo, gương": [
+  "Walk-in glass shower, washbasin, mirror",
+  "워크인 유리 샤워부스, 세면대, 거울"
+ ],
+ "Hệ thống Smart Home điều khiển đèn": [
+  "Smart Home system controlling lights",
+  "조명 제어 스마트홈 시스템"
+ ],
+ "Ổ điện qua điện thoại": [
+  "Sockets controlled by phone",
+  "휴대폰 제어 콘센트"
+ ],
+ "Cách nhiệt": [
+  "Thermal insulation",
+  "단열"
+ ],
+ "Hoàn thiện cơ bản theo danh mục vật liệu ký kèm hợp đồng mua bán.": [
+  "Basic finish per the material list attached to the sale contract.",
+  "매매계약서 첨부 자재 목록에 따른 기본 마감."
+ ],
+ "Căn hộ thường bàn giao hoàn thiện nội thất liền tường.": [
+  "Standard units handed over with fitted interior finishes.",
+  "일반 세대는 붙박이 내장 마감 인도."
+ ],
+ "Hoàn thiện nội thất cơ bản.": [
+  "Basic interior finish.",
+  "기본 내장 마감."
+ ],
+ "Bàn giao hoàn thiện theo bảng tiêu chuẩn của chủ đầu tư.": [
+  "Finished handover per the developer's standard schedule.",
+  "개발사 표준 사양표에 따른 마감 인도."
+ ],
+ "Bàn giao hoàn thiện cao cấp, tích hợp smarthome.": [
+  "Premium finished handover with integrated smart home.",
+  "스마트홈 통합 고급 마감 인도."
+ ],
+ "Bàn giao nội thất.": [
+  "Interior handover.",
+  "내장 인도."
+ ],
+ "Bàn giao thô.": [
+  "Shell handover.",
+  "골조 인도."
+ ],
+ "Bàn giao liền tường theo danh mục vật liệu của chủ đầu tư.": [
+  "Finished handover per the developer's material list.",
+  "개발사 자재 목록에 따른 마감 인도."
+ ],
+ "Hoàn thiện cao cấp.": [
+  "Premium finish.",
+  "고급 마감."
+ ],
+ "Bàn giao hoàn thiện liền tường (căn 1PN+1, 2PN, 3PN).": [
+  "Fully finished handover (1BR+1, 2BR, 3BR units).",
+  "완전 마감 인도(1BR+1, 2BR, 3BR 세대)."
+ ],
+ "Phối cảnh vật liệu, thiết bị bàn giao theo tài liệu chủ đầu tư. Danh mục bàn giao từng phòng có hình minh họa ở mục": [
+  "Renderings of handover materials and fittings from the developer's documents. The room-by-room handover list with illustrations is in the",
+  "개발사 자료의 인도 자재·설비 투시도입니다. 방별 인도 목록과 그림은 다음 항목에 있습니다:"
+ ],
+ ". Đồ rời, trang trí trong ảnh chỉ để minh họa.": [
+  " section. Loose furniture and decor in the images are for illustration only.",
+  " 사진 속 가구·소품은 예시입니다."
  ]
 }

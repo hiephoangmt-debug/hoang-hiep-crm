@@ -146,3 +146,4 @@
 	.ld2-contact__grid { grid-template-columns: 1fr; }
 	.ld2-head { padding-top: 18px; }
 }
+.ld2-head .listing-head__code { text-align: center; }

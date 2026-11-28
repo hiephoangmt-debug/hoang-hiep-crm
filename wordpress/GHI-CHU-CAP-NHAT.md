@@ -1,7 +1,13 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.69** + plugin Hoàng Hiệp CRM **2.20.411**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.70** + plugin Hoàng Hiệp CRM **2.20.412**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.412 (giao diện 2.16.70)
+
+- Tiêu chuẩn bàn giao trên mọi trang dự án: đoạn chữ viết liền được tự tách theo từng phòng (phòng khách – ngủ, bếp, phòng tắm, lô gia, nhà thông minh, hoàn thiện chung), mỗi phòng một thẻ có hình minh họa đánh số đúng hạng mục. Áp cho Sun Solar, Camellia, Capital Square, FPT Plaza 3, FPT Plaza 4, MIA Center Point, The Legend, The Poet, Sun Symphony 5… Có bản tiếng Anh, tiếng Hàn.
+- Mục "Nội thất bàn giao" không nhắc lại cả đoạn dài, chỉ dẫn xuống mục Tiêu chuẩn bàn giao.
+- Căn giữa dòng mã tin trên trang tin mua bán.
 
 ## Có gì mới – 2.20.411 (giao diện 2.16.69)
 
