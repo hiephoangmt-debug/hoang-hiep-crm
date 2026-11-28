@@ -27,8 +27,11 @@ html,body{height:100%}
 [hidden]{display:none!important}
 body{background:var(--ink);color:var(--text);font-family:var(--body);overflow:hidden}
 .stage{position:fixed;inset:0;background:var(--ink) url("https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e115c342d26bd142ba1eada36f2182a6b57a58b3/landing/sun-saphia/tour/p/hero.jpg") center/cover no-repeat;overflow:hidden}
-.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease}
+.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1);transition:opacity .7s ease,transform .9s cubic-bezier(.5,0,.2,1),filter .9s ease}
 .stage video.on{opacity:1}
+.stage video.push-out{opacity:0;transform:scale(1.14);filter:blur(3px)}
+.stage video.push-in{transform:scale(1.07)}
+.stage video.drift{transform:scale(1.06);transition:transform 16s linear,opacity .7s ease}
 .shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(4,10,14,.45),transparent 20%,transparent 72%,rgba(4,10,14,.55))}
 
 .glass{background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2)}
@@ -168,12 +171,15 @@ const vids=[$("vA"),$("vB")];let front=0;
 const stage=$("stage"),dock=$("dock"),picker=$("picker"),badge=$("badge");
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-function play(name,{loop=false}={}){
+function play(name,{loop=false,push=false}={}){
   return new Promise(res=>{
     const v=vids[1-front],old=vids[front];
-    v.loop=loop;v.src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e115c342d26bd142ba1eada36f2182a6b57a58b3/landing/sun-saphia/tour/v/"+name+".mp4";v.currentTime=0;
-    const go=()=>{v.classList.add("on");old.classList.remove("on");setTimeout(()=>old.pause(),400);front=1-front;if(loop)res()};
-    v.onended=()=>res();
+    v.loop=loop;v.src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@6ffb830fee74473fcb0f68615bd213c1bbb77da4/landing/sun-saphia/tour/v2/"+name+".mp4";v.currentTime=0;
+    v.className=push?"push-in":"";
+    const go=()=>{requestAnimationFrame(()=>{v.classList.add("on");v.classList.remove("push-in")});
+      old.classList.remove("drift");if(push)old.classList.add("push-out");old.classList.remove("on");
+      setTimeout(()=>{old.pause();old.className=""},900);front=1-front;if(loop)res()};
+    v.onended=()=>{if(!reduce)v.classList.add("drift");res()};
     const p=v.play();
     v.addEventListener("playing",go,{once:true});
     if(p&&p.catch)p.catch(()=>{go();res()});
@@ -203,7 +209,7 @@ function renderType(){const k=typeKeys[tIdx];$("typeName").innerHTML=k+"<small>"
 
 async function toHero(fromInside){
   lock(true);hideHs();setBadge();dock.innerHTML="";$("back").hidden=true;
-  if(fromInside)await play("out");
+  if(fromInside)await play("out-"+{Studio:"st","1PN":"p1","2PN":"p2"}[typeKeys[tIdx]],{push:room>0});
   mode="hero";room=-1;await play("hero",{loop:true});
   picker.classList.remove("off");lock(false);
 }
@@ -211,24 +217,28 @@ async function enterUnit(){
   if(busy)return;lock(true);picker.classList.add("off");mode="unit";
   const T=TYPES[typeKeys[tIdx]];
   $("back").hidden=false;setDock(T.rooms,-1,goRoom);
-  await play("enter");
-  setBadge("Ban công · "+typeKeys[tIdx],"Tầm nhìn ra biển");
-  showHs(.5,.5,"Vào trong căn",()=>goRoom(0));
+  setBadge("Căn "+typeKeys[tIdx],"Đang bay vào căn…");
+  await play("enter-"+{Studio:"st","1PN":"p1","2PN":"p2"}[typeKeys[tIdx]]);
+  room=0;arrived(T,0);
   lock(false);
 }
 async function goRoom(i){
   if(busy)return;lock(true);hideHs();room=i;
   const key=typeKeys[tIdx],T=TYPES[key],r=T.rooms[i];
   setDock(T.rooms,i,goRoom);setBadge("Căn "+key,r.name);
-  await play(r.id);
-  const n=(i+1)%T.rooms.length;
-  showHs(r.hx,r.hy,"Sang "+T.rooms[n].name.toLowerCase(),()=>goRoom(n));
+  await play(r.id,{push:true});
+  arrived(T,i);
   lock(false);
+}
+function arrived(T,i){
+  const r=T.rooms[i],n=(i+1)%T.rooms.length;
+  setDock(T.rooms,i,goRoom);setBadge("Căn "+typeKeys[tIdx],r.name);
+  showHs(r.hx,r.hy,"Sang "+T.rooms[n].name.toLowerCase(),()=>goRoom(n));
 }
 async function goAmen(i){
   if(busy)return;lock(true);hideHs();picker.classList.add("off");mode="amen";$("back").hidden=false;
   setDock(AMEN,i,goAmen);setBadge("Tiện ích",AMEN[i].name);
-  await play(AMEN[i].id);
+  await play(AMEN[i].id,{push:true});
   const n=(i+1)%AMEN.length;showHs(.6,.45,"Tiếp: "+AMEN[n].name,()=>goAmen(n));
   lock(false);
 }
