@@ -642,41 +642,59 @@ if ( ! $parent ) {
 
 <?php if ( isset( $nav['giao-dich'] ) ) : ?>
 <?php
-$mk    = function_exists( 'hh_project_market' ) ? hh_project_market( $id ) : array( 'ban' => array( 'count' => 0, 'range' => '' ), 'thue' => array( 'count' => 0, 'range' => '' ) );
-$gd_b  = $mk['ban']['count'] ? $mk['ban']['count'] . ' căn đang chuyển nhượng' . ( $mk['ban']['range'] ? ', ' . $mk['ban']['range'] : '' ) : ( $m( 'hh_p_resale_price' ) ? 'Giá chuyển nhượng tham khảo: ' . preg_replace( '/^\s*(giá\s+)?chuyển nhượng\s*:\s*/iu', '', $m( 'hh_p_resale_price' ) ) : '' );
-$gd_t  = $mk['thue']['count'] ? $mk['thue']['count'] . ' căn đang cho thuê' . ( $mk['thue']['range'] ? ', ' . $mk['thue']['range'] : '' ) : ( $m( 'hh_p_rent_price' ) ? 'Giá thuê tham khảo: ' . preg_replace( '/^\s*(giá\s+)?(cho\s+)?thuê\s*:\s*/iu', '', $m( 'hh_p_rent_price' ) ) : '' );
-$gd    = array(
-	array( 'thue', 'Khách cần thuê', 'Cần thuê căn ' . $short_name, 'Căn trống theo loại căn, nội thất, thời hạn thuê; hẹn xem nhà theo lịch của bạn.', $gd_t, 'Nhận căn cho thuê' ),
-	array( 'mua', 'Khách cần mua', 'Cần mua lại căn ' . $short_name, 'Căn chuyển nhượng giá thật, kiểm tra sổ hồng, hỗ trợ đặt cọc, công chứng, sang tên.', $gd_b, 'Nhận căn đang bán' ),
-	array( 'gui-thue', 'Chủ nhà', 'Có căn ' . $short_name . ' cần cho thuê', 'Định giá thuê sát thị trường, tìm khách, dẫn xem, làm hợp đồng thuê; không công khai số chủ nhà.', '', 'Gửi căn cho thuê' ),
-	array( 'gui-ban', 'Chủ nhà', 'Có căn ' . $short_name . ' cần bán', 'Định giá theo giao dịch cùng khu, đăng tin, lọc khách thật, hỗ trợ thủ tục, thuế, sang tên.', '', 'Ký gửi bán căn' ),
-);
-$gd_ic = array(
-	'thue'     => '<path d="M6 14l10-8 10 8v12H6z"/><circle cx="13" cy="19" r="2.5"/><path d="M15.5 19H22v3M20 19v2"/>',
-	'mua'      => '<path d="M6 14l10-8 10 8v12H6z"/><path d="M12 20l3 3 6-6"/>',
-	'gui-thue' => '<rect x="6" y="5" width="20" height="22" rx="2"/><path d="M11 11h10M11 15h10M11 19h6"/><circle cx="23" cy="23" r="4" fill="#fff"/><path d="M23 21v4M21 23h4"/>',
-	'gui-ban'  => '<path d="M5 17l7-7h7l8 8-7 7-8-8"/><circle cx="16" cy="13" r="1.6"/><path d="M5 17v6h6"/>',
-);
+$mk     = function_exists( 'hh_project_market' ) ? hh_project_market( $id ) : array( 'ban' => array( 'count' => 0, 'range' => '' ), 'thue' => array( 'count' => 0, 'range' => '' ) );
+// Giá tham khảo tách theo dòng ("1PN – 2PN khoảng …; 3PN …") để đọc như bảng nhỏ.
+$gd_rows = static function ( $txt ) {
+	$txt = trim( preg_replace( '/^\s*(giá\s+)?(chuyển nhượng|cho\s+thuê|thuê)\s*:\s*/iu', '', (string) $txt ) );
+	return '' === $txt ? array() : array_values( array_filter( array_map( static fn( $r ) => hh_ucfirst( trim( $r, " .\t" ) ), preg_split( '/;\s*/u', $txt ) ) ) );
+};
+$gd_rent = $gd_rows( $m( 'hh_p_rent_price' ) );
+$gd_sell = $gd_rows( $m( 'hh_p_resale_price' ) );
+$gd_img1 = $gallery[0] ?? $hero;
+$gd_img2 = $gallery[1] ?? ( $gallery[0] ?? $hero );
+$gd_link = static fn( $need, $title, $txt, $cls = 'btn btn-gold gd-btn' ) => '<a class="' . esc_attr( $cls ) . '" href="#dang-ky" data-need="' . esc_attr( $need ) . '" data-title="' . esc_attr( $title ) . '">' . esc_html( $txt ) . ' →</a>';
 ?>
 <!-- THUÊ · MUA BÁN (dự án đã / đang bàn giao) -->
 <section id="giao-dich" aria-labelledby="h-gd">
   <div class="container">
     <span class="eyebrow">Cho thuê · Chuyển nhượng</span>
     <h2 class="title" id="h-gd">Thuê, mua bán lại căn <em><?php echo $e( $short_name ); ?></em></h2>
-    <p class="lead">Dự án đã bàn giao – Hoàng Hiệp nhận cả bốn việc: tìm căn cho khách thuê, khách mua lại; nhận gửi cho thuê, ký gửi bán cho chủ nhà. Chọn đúng nhu cầu, Hiệp gửi danh sách hoặc gọi lại trong ngày.</p>
-    <div class="gd-grid">
-      <?php foreach ( $gd as list( $k, $who, $h, $txt, $info, $btn ) ) : ?>
-      <div class="gd-card gd-<?php echo esc_attr( $k ); ?> rv">
-        <span class="gd-ic" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><?php echo $gd_ic[ $k ]; // phpcs:ignore WordPress.Security.EscapeOutput -- SVG cố định. ?></svg></span>
-        <small><?php echo $e( $who ); ?></small>
-        <h3><?php echo $e( $h ); ?></h3>
-        <p><?php echo $e( $txt ); ?></p>
-        <?php if ( $info ) : ?><p class="gd-info"><?php echo $e( $info ); ?></p><?php endif; ?>
-        <a class="btn btn-gold gd-btn" href="#dang-ky" data-need="<?php echo esc_attr( $h ); ?>" data-title="<?php echo esc_attr( $btn . ' ' . $short_name ); ?>"><?php echo $e( $btn ); ?> →</a>
+    <p class="lead">Dự án đã bàn giao – Hoàng Hiệp nhận cả hai phía: tìm căn cho khách thuê, khách mua lại và nhận gửi cho thuê, ký gửi bán cho chủ nhà. Chọn đúng nhu cầu, Hiệp gửi danh sách hoặc gọi lại trong ngày.</p>
+    <div class="gd2">
+      <div class="gd2-p gd2-khach rv">
+        <div class="gd2-hd"<?php echo $gd_img1 ? ' style="background-image:url(' . esc_url( $url( $gd_img1, 'large' ) ) . ')"' : ''; ?>><span>Dành cho khách</span><b>Tìm căn thuê · mua lại</b></div>
+        <div class="gd2-bd">
+          <div class="gd2-blk">
+            <h3><i aria-hidden="true">🔑</i> Thuê căn <?php echo $e( $short_name ); ?></h3>
+            <?php if ( $mk['thue']['count'] ) : ?><p class="gd2-live"><?php echo (int) $mk['thue']['count']; ?> căn đang cho thuê<?php echo $mk['thue']['range'] ? ' · ' . $e( $mk['thue']['range'] ) : ''; ?></p><?php endif; ?>
+            <?php if ( $gd_rent ) : ?><ul class="gd2-price"><?php foreach ( $gd_rent as $r ) : ?><li><?php echo $e( $r ); ?></li><?php endforeach; ?></ul><?php else : ?><p class="gd2-note">Căn trống theo loại căn, nội thất, thời hạn thuê – hẹn xem nhà theo lịch của bạn.</p><?php endif; ?>
+            <?php echo $gd_link( 'Cần thuê căn ' . $short_name, 'Nhận căn cho thuê ' . $short_name, 'Nhận căn cho thuê' ); // phpcs:ignore ?>
+          </div>
+          <div class="gd2-blk">
+            <h3><i aria-hidden="true">🏠</i> Mua lại căn <?php echo $e( $short_name ); ?></h3>
+            <?php if ( $mk['ban']['count'] ) : ?><p class="gd2-live"><?php echo (int) $mk['ban']['count']; ?> căn đang chuyển nhượng<?php echo $mk['ban']['range'] ? ' · ' . $e( $mk['ban']['range'] ) : ''; ?></p><?php endif; ?>
+            <?php if ( $gd_sell ) : ?><ul class="gd2-price"><?php foreach ( $gd_sell as $r ) : ?><li><?php echo $e( $r ); ?></li><?php endforeach; ?></ul><?php else : ?><p class="gd2-note">Căn chuyển nhượng giá thật, kiểm tra sổ hồng, hỗ trợ đặt cọc, công chứng, sang tên.</p><?php endif; ?>
+            <?php echo $gd_link( 'Cần mua lại căn ' . $short_name, 'Nhận căn đang bán ' . $short_name, 'Nhận căn đang bán' ); // phpcs:ignore ?>
+          </div>
+        </div>
       </div>
-      <?php endforeach; ?>
+      <div class="gd2-p gd2-chu rv">
+        <div class="gd2-hd"<?php echo $gd_img2 ? ' style="background-image:url(' . esc_url( $url( $gd_img2, 'large' ) ) . ')"' : ''; ?>><span>Dành cho chủ nhà</span><b>Gửi cho thuê · ký gửi bán</b></div>
+        <div class="gd2-bd">
+          <ol class="gd2-steps">
+            <li><b>Định giá sát thị trường</b><span>Theo giao dịch, tin rao cùng dự án, cùng loại căn.</span></li>
+            <li><b>Chụp ảnh, đăng tin</b><span>Đăng trên hiephoangmt.com – không công khai tên, số điện thoại chủ nhà.</span></li>
+            <li><b>Lọc khách, dẫn xem</b><span>Chỉ dẫn khách có nhu cầu thật, theo lịch của chủ nhà.</span></li>
+            <li><b>Hợp đồng, thủ tục</b><span>Hợp đồng thuê; hoặc đặt cọc, công chứng, thuế, sang tên khi bán.</span></li>
+          </ol>
+          <div class="gd2-acts">
+            <?php echo $gd_link( 'Có căn ' . $short_name . ' cần cho thuê', 'Gửi căn cho thuê ' . $short_name, 'Gửi căn cho thuê', 'btn btn-gold gd-btn' ); // phpcs:ignore ?>
+            <?php echo $gd_link( 'Có căn ' . $short_name . ' cần bán', 'Ký gửi bán căn ' . $short_name, 'Ký gửi bán căn', 'btn gd-btn gd2-ghost' ); // phpcs:ignore ?>
+          </div>
+          <p class="gd2-need">Gửi kèm: loại căn, diện tích, tầng – hướng, nội thất, giá mong muốn; căn có đang cho thuê hay trong hợp đồng với đơn vị vận hành không.</p>
+        </div>
+      </div>
     </div>
-    <p class="note">Chủ nhà gửi kèm: loại căn, diện tích, tầng – hướng, nội thất, giá mong muốn, căn có đang cho thuê hay trong hợp đồng với đơn vị vận hành không. Gọi / Zalo <a href="<?php echo esc_url( $zalo ); ?>" class="js-zalo" target="_blank" rel="noopener"><?php echo $e( $phone ); ?></a>.</p>
   </div>
 </section>
 <?php endif; ?>

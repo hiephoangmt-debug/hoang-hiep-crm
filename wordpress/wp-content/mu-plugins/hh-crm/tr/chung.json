@@ -7110,5 +7110,65 @@
  "Nhận căn đang bán": [
   "Get units for sale",
   "매매 매물 받기"
+ ],
+ "Dành cho khách": [
+  "For buyers & tenants",
+  "고객용"
+ ],
+ "Tìm căn thuê · mua lại": [
+  "Find a unit to rent · buy",
+  "임대 · 매매 매물 찾기"
+ ],
+ "Dành cho chủ nhà": [
+  "For owners",
+  "집주인용"
+ ],
+ "Gửi cho thuê · ký gửi bán": [
+  "List for rent · list for sale",
+  "임대 · 매매 위탁"
+ ],
+ "Định giá sát thị trường": [
+  "Market-based valuation",
+  "시세 기준 가격 산정"
+ ],
+ "Theo giao dịch, tin rao cùng dự án, cùng loại căn.": [
+  "Based on deals and listings of the same project and unit type.",
+  "같은 단지·같은 유형의 거래와 매물 기준."
+ ],
+ "Chụp ảnh, đăng tin": [
+  "Photos and listing",
+  "사진 촬영, 매물 등록"
+ ],
+ "Đăng trên hiephoangmt.com – không công khai tên, số điện thoại chủ nhà.": [
+  "Listed on hiephoangmt.com – owner's name and phone kept private.",
+  "hiephoangmt.com에 등록 – 집주인 이름·전화번호 비공개."
+ ],
+ "Lọc khách, dẫn xem": [
+  "Screening and viewings",
+  "고객 선별, 방문 안내"
+ ],
+ "Chỉ dẫn khách có nhu cầu thật, theo lịch của chủ nhà.": [
+  "Only genuine clients, on the owner's schedule.",
+  "실수요 고객만, 집주인 일정에 맞춰."
+ ],
+ "Hợp đồng, thủ tục": [
+  "Contract and paperwork",
+  "계약, 절차"
+ ],
+ "Hợp đồng thuê; hoặc đặt cọc, công chứng, thuế, sang tên khi bán.": [
+  "Lease contract; or deposit, notarisation, tax and transfer when selling.",
+  "임대 계약; 매매 시 계약금·공증·세금·명의 이전."
+ ],
+ "Căn trống theo loại căn, nội thất, thời hạn thuê – hẹn xem nhà theo lịch của bạn.": [
+  "Vacant units by type, furnishing and lease term – viewings on your schedule.",
+  "유형·가구·임대 기간별 공실 – 원하는 일정에 방문."
+ ],
+ "Gửi kèm: loại căn, diện tích, tầng – hướng, nội thất, giá mong muốn; căn có đang cho thuê hay trong hợp đồng với đơn vị vận hành không.": [
+  "Please include: unit type, area, floor – orientation, furnishing, asking price; whether it is rented or under an operator contract.",
+  "함께 보내주세요: 유형, 면적, 층·향, 가구, 희망 가격, 임대 중 또는 운영사 계약 여부."
+ ],
+ "Dự án đã bàn giao – Hoàng Hiệp nhận cả hai phía: tìm căn cho khách thuê, khách mua lại và nhận gửi cho thuê, ký gửi bán cho chủ nhà. Chọn đúng nhu cầu, Hiệp gửi danh sách hoặc gọi lại trong ngày.": [
+  "The project has been handed over – Hoang Hiep works both sides: finding units for tenants and buyers, and taking rental and sale listings from owners. Pick your need and Hiep will send a list or call back the same day.",
+  "인도 완료 프로젝트 – 호앙 히엡이 양쪽을 모두 맡습니다: 임차·매수 고객의 매물 찾기, 집주인의 임대·매매 위탁. 요청을 선택하시면 당일 목록을 보내거나 연락드립니다."
  ]
 }

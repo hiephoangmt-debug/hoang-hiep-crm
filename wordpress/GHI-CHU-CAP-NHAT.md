@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.65** + plugin Hoàng Hiệp CRM **2.20.406**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.66** + plugin Hoàng Hiệp CRM **2.20.407**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.407 (giao diện 2.16.66)
+
+- Mục Thuê · Mua bán trình bày lại: 2 khối cân nhau có ảnh thật dự án – "Tìm căn thuê · mua lại" (giá thuê, giá chuyển nhượng tách từng dòng theo loại căn, mỗi phần một nút) và "Gửi cho thuê · ký gửi bán" (nền xanh, 4 bước định giá → đăng tin → dẫn xem → hợp đồng, 2 nút).
 
 ## Có gì mới – 2.20.406 (giao diện 2.16.65)
 
