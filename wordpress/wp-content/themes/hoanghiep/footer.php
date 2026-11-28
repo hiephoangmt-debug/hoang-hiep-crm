@@ -51,7 +51,8 @@ $hh_t = function_exists( 'hh_lang' ) && 'vi' !== hh_lang() ? hh_lang_strings( hh
 			<h3>Khu vực</h3>
 			<ul>
 				<?php
-				$areas = get_terms( array( 'taxonomy' => 'khu-vuc', 'hide_empty' => true, 'number' => 8 ) );
+				$areas = get_terms( array( 'taxonomy' => 'khu-vuc', 'hide_empty' => true ) ); // Lấy hết rồi cắt 8: quận trung tâm lên trước (inc/khu-vuc-thu-tu.php).
+				$areas = is_array( $areas ) ? array_slice( $areas, 0, 8 ) : $areas;
 				if ( $areas && ! is_wp_error( $areas ) ) :
 					foreach ( $areas as $t ) :
 						?>

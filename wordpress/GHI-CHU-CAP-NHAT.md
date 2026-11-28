@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.61** + plugin Hoàng Hiệp CRM **2.20.402**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.62** + plugin Hoàng Hiệp CRM **2.20.403**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.403 (giao diện 2.16.62)
+
+- Danh sách khu vực (ô lọc dự án, ô tìm kiếm, trang mua bán / cho thuê, chân trang): quận trung tâm lên trước – Hải Châu, Sơn Trà, Ngũ Hành Sơn, Thanh Khê, Cẩm Lệ, Liên Chiểu, Hòa Vang – rồi Hội An, Điện Bàn, Duy Xuyên, Thăng Bình, Tam Kỳ, Núi Thành; chân trang không còn thiếu Sơn Trà.
 
 ## Có gì mới – 2.20.402 (giao diện 2.16.61)
 
