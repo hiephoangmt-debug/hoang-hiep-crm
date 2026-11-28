@@ -200,8 +200,7 @@
 | 25/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | Biệt thự compound Casamia – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
 | 25/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: Đề án du lịch Cù Lao Chàm 18 điểm (+2 tin ở bình luận) | /de-an-du-lich-cu-lao-cham-18-diem/ /gia-the-poet-residence-thanh-toan/ /the-legend-da-nang-cua-chu-dau-tu-nao/ |
 | 25/11/2026 | Hoàng Hiệp | 17:00 | TỔNG HỢP: Pháp lý Vinhomes Hải Vân Bay – lâu dài hay 50 năm (+2 tin ở bình luận) | /phap-ly-vinhomes-hai-van-bay-so-huu-lau-dai/ /toa-c3-capital-square-phan-tang-chon-can/ /mat-bang-casamia-calm-mau-biet-thu/ |
-| CHỜ | Sun | 26/11 | (bài web 25/11 10:45) Mô hình 4D Sun Saphia | mo-hinh-4d-sun-saphia-residence (chờ) |
-| CHỜ | Sun | 26/11 | (bài web 25/11 14:00) Sun Symphony 5 ở đâu | sun-symphony-5-o-dau-vi-tri (chờ) |
+| BỎ QUA (quá 3 ngày) | Sun | 28/11 | (bài web 25/11 14:00) Sun Symphony 5 ở đâu | sun-symphony-5-o-dau-vi-tri |
 | 26/11/2026 | Sun | 09:00 | (bài web 24/11, hết CHỜ) Cora, Spana khi nào bàn giao (1 ảnh nền xanh tự làm) | /cora-tower-spana-tower-khi-nao-ban-giao/ |
 | 26/11/2026 | TikTok (@hiephoangmt, brand Sun) | 09:15 | Cora & Spana khi nào bàn giao – BỘ 3 ẢNH | /cora-tower-spana-tower-khi-nao-ban-giao/ |
 | 26/11/2026 | Casamia (blogId 8074284) | 09:30 | Hỏi đáp nhanh 5 câu Casamia – thẻ nền xanh + 3 ảnh | /du-an/casamia-balanca-hoi-an/ |
@@ -227,9 +226,21 @@
 | 27/11/2026 | Casamia (blogId 8074284) | 19:30 | Tổng quan Casamia – biệt thự ven sông Hội An – thẻ nền xanh + 3 ảnh (hoàng hôn sông Cổ Cò, hồ bơi ven sông, phố đêm) | /du-an/casamia-balanca-hoi-an/ |
 | 27/11/2026 | Threads (@hiephoangmt, brand Sun) | 19:35 | Tổng quan Casamia – bản ngắn, 2 ảnh | /du-an/casamia-balanca-hoi-an/ |
 | 27/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | Tổng quan Casamia – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
-| CHỜ | Sun | 28/11 | (bài web 27/11 13:30) Cho thuê Sun Saphia mùa thấp điểm | cho-thue-sun-saphia-residence-mua-thap-diem (chờ) |
-| CHỜ | Sun | 28/11 | (bài web 27/11 18:00) Tiền điện căn hộ Sun Saphia | tien-dien-can-ho-sun-saphia-residence (chờ) |
-| CHỜ | Sun | 28/11 | (bài web 27/11 20:30) Có nên mua Spana Tower | co-nen-mua-spana-tower (chờ) |
 | 27/11/2026 | Hoàng Hiệp | 11:00 | TỔNG HỢP: Duyệt tái định cư Thăng Phú – đường sắt tốc độ cao (+0 tin ở bình luận) | /tai-dinh-cu-thang-phu-duong-sat-toc-do-cao/ |
-| CHỜ | Sun | 28/11 | (bài web 27/11 09:30, dự án Sun Group Hòa Xuân → trang Sun) Có nên mua Euro Village 2 | co-nen-mua-euro-village-2-hoa-xuan (chờ) |
 | 27/11/2026 | Hoàng Hiệp | 17:00 | TỔNG HỢP: Đảo Ngọc hay Bạch Vân – Vinhomes Hải Vân Bay (thẻ nền xanh tự làm, bỏ dòng "7%/năm cam kết thuê" của thẻ web) (+1 tin ở bình luận) | /dao-ngoc-hay-bach-van-vinhomes-hai-van-bay/ /tien-ich-hudson-place-s4-ban-giao/ |
+| 28/11/2026 | Sun | 09:00 | (bài web 27/11, hết CHỜ) Có nên mua Spana Tower (1 ảnh – thẻ -fb của web); bình luận kèm Euro Village 2 | /co-nen-mua-spana-tower/ /co-nen-mua-euro-village-2-hoa-xuan/ |
+| 28/11/2026 | Threads (@hiephoangmt, brand Sun) | 09:05 | Có nên mua Spana – bản ngắn, 1 ảnh | /co-nen-mua-spana-tower/ |
+| 28/11/2026 | TikTok (@hiephoangmt, brand Sun) | 09:15 | Có nên mua Spana – BỘ 3 ẢNH | /co-nen-mua-spana-tower/ |
+| 28/11/2026 | Casamia (blogId 8074284) | 09:30 | Nội thất Park Home Casamia – thẻ nền xanh + 3 ảnh (bếp ăn, phòng ngủ, phòng khách view vườn) | /du-an/casamia-balanca-hoi-an/ |
+| 28/11/2026 | Threads (@hiephoangmt, brand Sun) | 09:35 | Nội thất Casamia – bản ngắn, 2 ảnh | /du-an/casamia-balanca-hoi-an/ |
+| 28/11/2026 | TikTok (@hiephoangmt, brand Sun) | 09:45 | Nội thất Casamia – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
+| 28/11/2026 | Sun | 19:00 | (bài web 27/11, hết CHỜ) Cho thuê Sun Saphia mùa thấp điểm (1 ảnh nền xanh tự làm – web chưa có thẻ -fb); bình luận kèm tiền điện + mô hình 4D | /cho-thue-sun-saphia-residence-mua-thap-diem/ /tien-dien-can-ho-sun-saphia-residence/ /mo-hinh-4d-sun-saphia-residence/ |
+| 28/11/2026 | Threads (@hiephoangmt, brand Sun) | 19:05 | Cho thuê mùa thấp điểm – bản ngắn, 1 ảnh | /cho-thue-sun-saphia-residence-mua-thap-diem/ |
+| 28/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:15 | Cho thuê mùa thấp điểm Sun Saphia – BỘ 3 ẢNH | /cho-thue-sun-saphia-residence-mua-thap-diem/ |
+| 28/11/2026 | Casamia (blogId 8074284) | 19:30 | Sống chậm ven sông Casamia – thẻ nền xanh + 3 ảnh (BBQ sân vườn, dạo bộ thú cưng, thiền bãi cỏ) | /du-an/casamia-balanca-hoi-an/ |
+| 28/11/2026 | Threads (@hiephoangmt, brand Sun) | 19:35 | Sống chậm Casamia – bản ngắn, 2 ảnh | /du-an/casamia-balanca-hoi-an/ |
+| 28/11/2026 | TikTok (@hiephoangmt, brand Sun) | 19:45 | Sống chậm Casamia – BỘ 3 ẢNH | /du-an/casamia-balanca-hoi-an/ |
+| CHỜ | Sun | 29/11 | (bài web 28/11 11:30) Từ Sun Saphia đi Cù Lao Chàm | sun-saphia-residence-di-cu-lao-cham (chờ) |
+| CHỜ | Sun | 29/11 | (bài web 28/11 13:30) Sông Cổ Cò gần Sun Saphia | song-co-co-gan-sun-saphia-residence (chờ) |
+| CHỜ | Sun | 29/11 | (bài web 28/11 18:00) Khách Ấn Độ thuê Sun Saphia | khach-an-do-thue-sun-saphia-residence (chờ) |
+| CHỜ | Sun | 29/11 | (bài web 28/11 20:30) Tiện ích Symphony 5 | tien-ich-symphony-5-sun-symphony-residence (chờ) |
