@@ -2151,5 +2151,239 @@ HTML
 		),
 	);
 
+	/* ---------------- 28/11 – Bài cho khách thuê các dự án đã bàn giao (anh Hiệp yêu cầu: kéo khách thuê về web) ---------------- */
+	$posts[] = array(
+		'slug'           => 'thue-can-ho-fpt-plaza-da-nang',
+		'title'          => 'Thuê căn hộ FPT Plaza Đà Nẵng 2026: giá thuê 1PN – 3PN, so sánh FPT Plaza 1, 2, 3 và ai nên thuê',
+		'excerpt'        => 'Thuê căn hộ FPT Plaza ở FPT City (Ngũ Hành Sơn): 1PN từ khoảng 6,5 triệu/tháng, 2PN khoảng 10 – 13 triệu, 3PN khoảng 15,5 – 17 triệu. So sánh FPT Plaza 1, 2, 3, tiện ích, chi phí phát sinh và kinh nghiệm thuê.',
+		'keyword'        => 'thuê căn hộ FPT Plaza',
+		'keywords_extra' => array( 'cho thuê căn hộ FPT City Đà Nẵng', 'giá thuê FPT Plaza 3', 'thuê căn hộ Ngũ Hành Sơn' ),
+		'project'        => 'fpt-plaza-3',
+		'schedule'       => '2026-11-28 17:45',
+		'category'       => 'Thị trường',
+		'tags'           => array( 'Cho thuê', 'FPT City', 'Ngũ Hành Sơn', 'FPT Plaza' ),
+		'image'          => 'plugin:img/fpt-plaza-3/fpt-plaza-3-flycam-cac-toa-fpt-plaza.jpg',
+		'image_alt'      => 'Thuê căn hộ FPT Plaza – các tòa FPT Plaza trong khu đô thị FPT City nhìn từ trên cao',
+		'content'        => <<<HTML
+<p><strong>Thuê căn hộ FPT Plaza</strong> là lựa chọn quen thuộc của giảng viên, kỹ sư, sinh viên năm cuối và gia đình trẻ làm việc ở phía nam Đà Nẵng. Ba tòa FPT Plaza 1, 2, 3 đều nằm trong Khu đô thị công nghệ FPT City (Ngũ Hành Sơn), đã bàn giao và có người ở, nên nguồn căn cho thuê nhiều, giá dễ chịu hơn hẳn khu ven biển Mỹ Khê.</p>
+<!--hh-featured-->
+<p>Bài này tổng hợp giá thuê căn hộ FPT Plaza theo loại căn, khác biệt giữa ba tòa, tiện ích, các khoản phí ngoài tiền nhà và kinh nghiệm xem căn để anh chị chọn nhanh, khỏi mất công đi nhiều lần.</p>
+<h2>Giá thuê căn hộ FPT Plaza 2026</h2>
+<table>
+<thead><tr><th>Loại căn</th><th>Giá thuê tham khảo</th><th>Hợp với ai</th></tr></thead>
+<tbody>
+<tr><td>1PN (khoảng 42 – 64 m²)</td><td>Từ khoảng 6,5 triệu/tháng</td><td>Người đi làm một mình, cặp đôi</td></tr>
+<tr><td>2PN (khoảng 55 – 75 m²)</td><td>Khoảng 10 – 13 triệu/tháng</td><td>Gia đình trẻ, 2 – 3 người ở ghép</td></tr>
+<tr><td>3PN (khoảng 72 – 86 m²)</td><td>Khoảng 15,5 – 17 triệu/tháng</td><td>Gia đình có con nhỏ, ông bà ở cùng</td></tr>
+</tbody>
+</table>
+<p>Giá trên là mặt bằng chung của chuỗi FPT Plaza theo tin cho thuê công khai, thay đổi theo tầng, hướng, mức nội thất và thời hạn hợp đồng. Căn đủ nội thất, tầng cao nhìn biển hoặc quảng trường thường cao hơn; căn nội thất cơ bản, ký dài hạn từ 12 tháng thường dễ thương lượng hơn.</p>
+<!--hh-img:img/fpt-plaza-3/fpt-plaza-3-can-mau-2pn-phong-khach.jpg|Thuê căn hộ FPT Plaza 2PN – phòng khách căn mẫu FPT Plaza 3 (ảnh chủ đầu tư)-->
+<h2>FPT Plaza 1, 2 hay 3: thuê tòa nào?</h2>
+<table>
+<thead><tr><th>Tòa</th><th>Quy mô, bàn giao</th><th>Điểm đáng chú ý khi thuê</th></tr></thead>
+<tbody>
+<tr><td><a href="/du-an/fpt-plaza-1/">FPT Plaza 1</a></td><td>15 tầng, 586 căn 1 – 3PN; bàn giao 3/2022</td><td>Tòa đầu tiên của FPT City, đường Võ Quý Huân; đông cư dân ở thật, nhiều căn đã có nội thất</td></tr>
+<tr><td><a href="/du-an/fpt-plaza-2/">FPT Plaza 2</a></td><td>25 tầng, 700 căn 2 – 3PN; bàn giao 6/2023</td><td>Đường Võ Chí Công; bể bơi bốn mùa, gym – yoga, cafe; 23 shophouse khối đế với siêu thị, nhà hàng</td></tr>
+<tr><td><a href="/du-an/fpt-plaza-3/">FPT Plaza 3</a></td><td>25 tầng, 837 căn từ 1PN đến 3PN+1; bàn giao từ 17/4/2026</td><td>Mới nhất, cạnh quảng trường – công viên khoảng 30.000 m²; bể bơi trong nhà tầng 3, sky garden; hoàn thành cấp sổ hồng 100% căn ngày 13/11/2026</td></tr>
+</tbody>
+</table>
+<p>Nếu cần căn 1PN giá mềm, FPT Plaza 3 có nhiều lựa chọn nhất vì cơ cấu căn đa dạng (1PN, 1PN+1, 2PN+1, 3PN+1). Muốn căn đã ở ổn định, nội thất sẵn, FPT Plaza 1 và 2 thường có nhiều căn hơn.</p>
+<!--hh-img:img/fpt-plaza-3/fpt-plaza-3-flycam-quang-truong-fpt-city.jpg|Quảng trường trung tâm FPT City cạnh FPT Plaza 3 – không gian đi bộ, sinh hoạt cho cư dân thuê căn hộ-->
+<h2>Ở FPT City tiện những gì?</h2>
+<ul>
+<li><strong>Trường học:</strong> hệ thống trường FPT từ mầm non đến đại học ngay trong khu – thuận cho gia đình có con và người làm việc tại trường.</li>
+<li><strong>Đi lại:</strong> trục Lê Văn Hiến, Trường Sa nối trung tâm và Hội An; khoảng 10 phút tới sân bay; bãi tắm Tân Trà khoảng 800 m từ FPT Plaza 3.</li>
+<li><strong>Không gian xanh:</strong> công viên, quảng trường, đường dạo ven sông Cổ Cò; khu BBQ, sân thể thao.</li>
+<li><strong>Tiện ích tòa:</strong> bể bơi trong nhà, gym, sân chơi trẻ em, shophouse khối đế; hầm xe ô tô, xe máy.</li>
+</ul>
+<h2>Ngoài tiền nhà cần tính thêm gì?</h2>
+<ul>
+<li><strong>Phí quản lý:</strong> FPT Plaza 3 dự kiến 13.000 đồng/m²/tháng (chưa VAT) – hỏi rõ bên nào trả, thường chủ nhà chịu khi thuê dài hạn.</li>
+<li><strong>Điện, nước, internet:</strong> tính theo đồng hồ riêng từng căn.</li>
+<li><strong>Gửi xe:</strong> phí xe máy, ô tô theo bảng giá ban quản lý tòa nhà.</li>
+<li><strong>Đặt cọc:</strong> thường 1 – 2 tháng tiền nhà, trả theo tháng hoặc quý tùy thỏa thuận.</li>
+</ul>
+<p>Hợp đồng nên ghi rõ danh sách nội thất bàn giao, chỉ số điện nước, thời hạn, điều kiện trả cọc và việc đăng ký tạm trú. Xem thêm <a href="/cho-thue-can-ho-da-nang-hop-dong-thue-tam-tru/">kinh nghiệm hợp đồng thuê và tạm trú</a>.</p>
+<h2>Kinh nghiệm thuê căn hộ FPT Plaza nhanh, đúng giá</h2>
+<ul>
+<li>Chốt trước ngân sách, số phòng ngủ và thời điểm dọn vào – căn đẹp thường có người giữ trong 1 – 2 tuần.</li>
+<li>Xem căn ban ngày để biết hướng nắng, tiếng ồn; hỏi tầng có bể bơi, sân chơi nếu nhà có trẻ nhỏ.</li>
+<li>Kiểm tra máy lạnh, bình nóng lạnh, bếp, khóa cửa ngay khi nhận; chụp ảnh hiện trạng gửi chủ nhà.</li>
+<li>Ký thuê dài hạn 12 tháng trở lên thường được giá tốt hơn thuê theo quý.</li>
+</ul>
+<h2>Cần thuê căn hộ FPT Plaza?</h2>
+<p>Hiệp đang nhận căn cho thuê ở cả ba tòa FPT Plaza từ chủ nhà. Anh chị nhắn ngân sách, số phòng ngủ và ngày dọn vào, Hiệp gửi danh sách căn phù hợp kèm ảnh thật, hẹn xem trong ngày: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo), hoặc bấm "Nhận căn cho thuê" ở <a href="/du-an/fpt-plaza-3/#giao-dich">mục Thuê · Mua bán FPT Plaza 3</a>. Chủ nhà muốn gửi cho thuê cũng liên hệ cùng số.</p>
+<p class="src">Nguồn: giá thuê tổng hợp từ tin cho thuê công khai căn hộ FPT Plaza (11/2026); thông tin tòa nhà theo chủ đầu tư Công ty CP Đô thị FPT Đà Nẵng. Giá tham khảo, thay đổi theo từng căn.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Thuê căn hộ FPT Plaza Đà Nẵng: giá 1PN – 3PN 2026',
+			'desc'      => 'Thuê căn hộ FPT Plaza (FPT City): 1PN từ 6,5 triệu, 2PN 10 – 13 triệu, 3PN 15,5 – 17 triệu/tháng. So sánh FPT Plaza 1, 2, 3, phí và kinh nghiệm thuê.',
+			'points'    => array(
+				'Thuê căn hộ FPT Plaza: 1PN từ khoảng 6,5 triệu, 2PN 10 – 13 triệu, 3PN 15,5 – 17 triệu/tháng (tham khảo)',
+				'Ba tòa FPT Plaza 1, 2, 3 đều đã bàn giao trong FPT City, Ngũ Hành Sơn; FPT Plaza 3 có sổ hồng 100% căn',
+				'Tính thêm phí quản lý, điện nước, gửi xe; cọc thường 1 – 2 tháng',
+			),
+			'faq'       => array(
+				array( 'Thuê căn hộ FPT Plaza giá bao nhiêu?', 'Mặt bằng thuê căn hộ FPT Plaza khoảng 6,5 triệu/tháng trở lên với 1PN, 10 – 13 triệu với 2PN và 15,5 – 17 triệu với 3PN, tùy tầng, hướng và nội thất.' ),
+				array( 'Nên thuê FPT Plaza 1, 2 hay 3?', 'FPT Plaza 3 mới nhất, nhiều căn 1PN và có quảng trường lớn bên cạnh; FPT Plaza 1 và 2 đã ở ổn định, nhiều căn có sẵn nội thất. Chọn theo ngân sách và số phòng ngủ.' ),
+				array( 'Thuê căn hộ FPT Plaza có phải trả phí quản lý không?', 'Có phí quản lý theo m² (FPT Plaza 3 dự kiến 13.000 đồng/m²/tháng chưa VAT). Thuê dài hạn thường chủ nhà trả, cần ghi rõ trong hợp đồng.' ),
+				array( 'Từ FPT Plaza đi sân bay, ra biển bao xa?', 'Khoảng 10 phút tới sân bay Đà Nẵng; từ FPT Plaza 3 ra bãi tắm Tân Trà khoảng 800 m.' ),
+			),
+		),
+		'sources'        => array(
+			'https://thuecanho123.com/cho-thue-can-ho-chung-cu-fpt-plaza.html',
+			'https://hiephoangmt.com/du-an/fpt-plaza-3/',
+		),
+	);
+
+	$posts[] = array(
+		'slug'           => 'thue-can-ho-sun-ponte-residence',
+		'title'          => 'Thuê căn hộ Sun Ponte Residence 2026: giá thuê studio đến 3PN full nội thất bên sông Hàn, cạnh cầu Rồng',
+		'excerpt'        => 'Thuê căn hộ Sun Ponte Residence (Trần Hưng Đạo, Sơn Trà): studio 11 – 17 triệu/tháng, 1PN+ 18 – 27 triệu, 2PN 25 – 38 triệu, căn 91 m² 45 – 50 triệu, full nội thất. Ai nên thuê, tiện ích và kinh nghiệm chọn căn.',
+		'keyword'        => 'thuê căn hộ Sun Ponte',
+		'keywords_extra' => array( 'cho thuê căn hộ Sun Ponte Residence', 'thuê căn hộ view sông Hàn', 'thuê căn hộ Sơn Trà full nội thất' ),
+		'project'        => 'sun-ponte-residence',
+		'schedule'       => '2026-11-29 08:15',
+		'category'       => 'Thị trường',
+		'tags'           => array( 'Cho thuê', 'Sun Ponte Residence', 'Sông Hàn', 'Sơn Trà' ),
+		'image'          => 'plugin:img/sun-ponte/sun-ponte-thuc-te-11-2026-flycam-cau-rong.jpg',
+		'image_alt'      => 'Thuê căn hộ Sun Ponte Residence – tòa tháp bên sông Hàn cạnh cầu Rồng, ảnh flycam thực tế 11/2026',
+		'content'        => <<<HTML
+<p><strong>Thuê căn hộ Sun Ponte</strong> đang là lựa chọn mới cho người muốn ở ngay trung tâm, nhìn sông Hàn và cầu Rồng. Tòa tháp The Ponte 26 tầng của Sun Group trên đường Trần Hưng Đạo (Sơn Trà) bắt đầu bàn giao căn hộ từ tháng 3/2026; nhiều chủ nhà đã làm xong nội thất và đưa căn ra cho thuê.</p>
+<!--hh-featured-->
+<p>Theo bảng căn cho thuê Hiệp tổng hợp tháng 11/2026 (khoảng 40 căn, đều <strong>full nội thất</strong>), giá thuê căn hộ Sun Ponte trải từ khoảng 11 triệu/tháng với studio đến khoảng 50 triệu/tháng với căn 91 m² view sông. Dưới đây là chi tiết theo loại căn, ai nên thuê và kinh nghiệm chọn căn.</p>
+<h2>Giá thuê căn hộ Sun Ponte theo loại căn</h2>
+<table>
+<thead><tr><th>Loại căn</th><th>Diện tích</th><th>Giá thuê tham khảo (full nội thất)</th></tr></thead>
+<tbody>
+<tr><td>Studio</td><td>26 – 30 m²</td><td>11 – 17 triệu/tháng</td></tr>
+<tr><td>1PN+</td><td>49 – 50 m²</td><td>18 – 27 triệu/tháng</td></tr>
+<tr><td>2PN</td><td>68 – 78 m²</td><td>25 – 38 triệu/tháng</td></tr>
+<tr><td>2PN lớn</td><td>91 m²</td><td>45 – 50 triệu/tháng</td></tr>
+<tr><td>3PN</td><td>91 m²</td><td>Khoảng 48 triệu/tháng</td></tr>
+</tbody>
+</table>
+<p>Chênh lệch trong cùng loại căn chủ yếu do tầng, hướng nhìn (sông Hàn – cầu Rồng hay phía thành phố), mức nội thất và thời hạn thuê. Giá có thể thay đổi theo mùa du lịch và lễ hội pháo hoa.</p>
+<!--hh-img:img/sun-ponte/sun-ponte-nhin-tu-song-han.jpg|Thuê căn hộ Sun Ponte – tòa tháp The Ponte nhìn từ sông Hàn (phối cảnh chủ đầu tư)-->
+<h2>Ai nên thuê căn hộ Sun Ponte?</h2>
+<ul>
+<li><strong>Chuyên gia, quản lý làm việc ở trung tâm:</strong> 1 phút tới cầu Rồng, 2 phút tới cầu sông Hàn, khoảng 10 phút ra sân bay.</li>
+<li><strong>Khách nước ngoài, người làm việc từ xa:</strong> studio và 1PN+ full nội thất, dọn vào ở ngay, gần biển Mỹ Khê (3 – 5 phút).</li>
+<li><strong>Gia đình cần căn rộng, view đẹp:</strong> 2PN, 3PN 91 m² nhìn sông Hàn, xem pháo hoa ngay tại nhà.</li>
+<li><strong>Khách thuê ngắn hạn vài tháng:</strong> công tác, dự án – hỏi Hiệp căn nhận thuê theo quý.</li>
+</ul>
+<!--hh-img:img/sun-ponte/sun-ponte-ve-dem-phao-hoa.jpg|Sun Ponte về đêm mùa pháo hoa – lợi thế view sông Hàn khi thuê căn hộ (phối cảnh chủ đầu tư)-->
+<h2>Tiện ích khi ở Sun Ponte</h2>
+<ul>
+<li>Hồ bơi vô cực nhìn toàn cảnh thành phố, bể jacuzzi, phòng gym – yoga, spa, xông hơi.</li>
+<li>Kids club, khu thể thao, BBQ ngoài trời; công viên ven sông, đường chạy bộ.</li>
+<li>Phố thương mại khối đế, nhà hàng, cafe ngay dưới tòa; an ninh 24/7.</li>
+<li>Xung quanh: Vincom Plaza Ngô Quyền, chợ đêm Sơn Trà, bán đảo Sơn Trà.</li>
+</ul>
+<h2>Kinh nghiệm thuê căn hộ Sun Ponte</h2>
+<ul>
+<li><strong>Hỏi rõ giá đã gồm gì:</strong> phí quản lý, internet, dọn phòng (nếu có) – mỗi chủ nhà một kiểu.</li>
+<li><strong>Kiểm tra danh sách nội thất:</strong> căn "full nội thất" vẫn khác nhau ở máy giặt, lò vi sóng, rèm, bộ chăn ga.</li>
+<li><strong>Chọn hướng theo nhu cầu:</strong> mặt sông đẹp nhưng nắng chiều, mặt phố yên tĩnh hơn – nên xem tận nơi.</li>
+<li><strong>Hợp đồng và tạm trú:</strong> ghi rõ thời hạn, cọc, điều kiện trả trước hạn; khách nước ngoài cần chủ nhà khai báo lưu trú. Xem thêm <a href="/cho-thue-can-ho-da-nang-hop-dong-thue-tam-tru/">kinh nghiệm hợp đồng thuê và tạm trú</a>.</li>
+</ul>
+<p>So sánh thêm giá thuê các dự án ven sông Hàn khác trong bài <a href="/gia-thue-can-ho-da-nang-moi-thang/">giá thuê căn hộ Đà Nẵng mỗi tháng</a>.</p>
+<h2>Cần thuê căn hộ Sun Ponte?</h2>
+<p>Hiệp đang giữ danh sách căn Sun Ponte cho thuê từ chủ nhà, có ảnh thật từng căn. Anh chị nhắn loại căn, ngân sách, ngày dọn vào – Hiệp gửi căn phù hợp và hẹn xem trong ngày: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo), hoặc bấm "Nhận căn cho thuê" ở <a href="/du-an/sun-ponte-residence/#giao-dich">mục Thuê · Mua bán Sun Ponte Residence</a>. Chủ nhà có căn muốn cho thuê cũng gửi về cùng số.</p>
+<p class="src">Nguồn: bảng căn cho thuê Sun Ponte Residence tháng 11/2026 do Hoàng Hiệp tổng hợp (khoảng 40 căn, full nội thất); thông tin dự án theo chủ đầu tư Sun Group. Giá tham khảo, không ghi mã căn.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Thuê căn hộ Sun Ponte 2026: giá studio – 3PN view sông Hàn',
+			'desc'      => 'Thuê căn hộ Sun Ponte Residence full nội thất: studio 11 – 17 triệu, 1PN+ 18 – 27 triệu, 2PN 25 – 38 triệu, căn 91 m² 45 – 50 triệu/tháng, cạnh cầu Rồng.',
+			'points'    => array(
+				'Thuê căn hộ Sun Ponte: studio 11 – 17 triệu, 1PN+ 18 – 27 triệu, 2PN 25 – 38 triệu/tháng, full nội thất (11/2026)',
+				'Tòa The Ponte 26 tầng, đường Trần Hưng Đạo, bàn giao căn hộ từ 3/2026, cạnh cầu Rồng',
+				'Hồ bơi vô cực, gym, spa, kids club, phố thương mại khối đế',
+			),
+			'faq'       => array(
+				array( 'Thuê căn hộ Sun Ponte giá bao nhiêu?', 'Theo bảng cho thuê 11/2026, thuê căn hộ Sun Ponte khoảng 11 – 17 triệu/tháng với studio, 18 – 27 triệu với 1PN+, 25 – 38 triệu với 2PN và 45 – 50 triệu với căn 91 m², đều full nội thất.' ),
+				array( 'Sun Ponte Residence đã có người ở chưa?', 'Có. Tòa tháp The Ponte bắt đầu bàn giao căn hộ từ tháng 3/2026; nhiều căn đã hoàn thiện nội thất và đưa ra cho thuê.' ),
+				array( 'Thuê căn hộ Sun Ponte có view sông Hàn không?', 'Nhiều căn nhìn sông Hàn và cầu Rồng; giá cao hơn căn hướng thành phố. Nên xem tận nơi để chọn hướng phù hợp.' ),
+				array( 'Có thuê căn hộ Sun Ponte theo tháng ngắn hạn được không?', 'Một số chủ nhà nhận thuê theo quý hoặc vài tháng; giá theo tháng ngắn hạn thường cao hơn ký 12 tháng. Liên hệ Hoàng Hiệp để có danh sách cụ thể.' ),
+			),
+		),
+		'sources'        => array(
+			'https://hiephoangmt.com/du-an/sun-ponte-residence/',
+		),
+	);
+
+	$posts[] = array(
+		'slug'           => 'thue-can-ho-masteri-rivera-danang',
+		'title'          => 'Thuê căn hộ Masteri Rivera Danang: bàn giao từ 29/11/2026, giá thuê dự kiến và những điều người thuê đầu tiên cần biết',
+		'excerpt'        => 'Masteri Rivera Danang (50 Quy Mỹ, Hải Châu) bàn giao từ 29/11/2026 – nguồn căn cho thuê đầu tiên sắp ra thị trường. Giá thuê ước tính 1PN+ khoảng 18 – 25 triệu, 2PN khoảng 20 – 25 triệu/tháng; tiện ích, vị trí và kinh nghiệm thuê căn mới bàn giao.',
+		'keyword'        => 'thuê căn hộ Masteri Rivera Danang',
+		'keywords_extra' => array( 'cho thuê căn hộ Masteri Đà Nẵng', 'thuê căn hộ Hải Châu view sông', 'giá thuê Masteri Đà Nẵng' ),
+		'project'        => 'masteri-da-nang',
+		'schedule'       => '2026-11-29 10:15',
+		'category'       => 'Thị trường',
+		'tags'           => array( 'Cho thuê', 'Masteri Rivera Danang', 'Hải Châu', 'Sông Cẩm Lệ' ),
+		'image'          => 'plugin:img/masteri-rivera-danang/masteri-rivera-danang-phoi-canh-tren-cao-song-cam-le.jpg',
+		'image_alt'      => 'Thuê căn hộ Masteri Rivera Danang – hai tòa tháp bên sông Cẩm Lệ, Hải Châu (phối cảnh chủ đầu tư)',
+		'content'        => <<<HTML
+<p><strong>Thuê căn hộ Masteri Rivera Danang</strong> sắp có thêm lựa chọn: chủ đầu tư Masterise Homes tổ chức lễ bàn giao căn hộ ngày <strong>29/11/2026</strong>. Sau khi chủ nhà nhận căn và làm nội thất, nguồn căn cho thuê đầu tiên của dự án sẽ ra thị trường trong vài tháng tới.</p>
+<!--hh-featured-->
+<p>Dự án gồm 2 tháp 39 tầng với gần 1.200 căn hộ tại 50 Quy Mỹ, khu Hòa Cường Nam (Hải Châu), nhìn ra sông Cẩm Lệ, cạnh Cung thể thao Tiên Sơn. Bài viết giúp người muốn thuê sớm hình dung giá thuê, loại căn, tiện ích và những lưu ý khi thuê một dự án vừa bàn giao.</p>
+<h2>Giá thuê căn hộ Masteri Rivera Danang (ước tính)</h2>
+<table>
+<thead><tr><th>Loại căn</th><th>Diện tích thông thủy</th><th>Giá thuê ước tính</th></tr></thead>
+<tbody>
+<tr><td>1PN+</td><td>Khoảng 47 – 48 m²</td><td>Khoảng 18 – 25 triệu/tháng</td></tr>
+<tr><td>2PN</td><td>Khoảng 67 – 68 m²</td><td>Khoảng 20 – 25 triệu/tháng</td></tr>
+<tr><td>2PN+, 3PN, Dual Key</td><td>Lớn hơn</td><td>Chưa đủ dữ liệu – báo giá theo từng căn</td></tr>
+</tbody>
+</table>
+<p>Đây là <strong>mức ước tính theo khu vực</strong>, chưa phải giá giao dịch thực tế vì dự án mới bàn giao. Giá thật sẽ phụ thuộc mức nội thất chủ nhà làm, tầng, hướng nhìn sông và thời điểm. Những tháng đầu thường có nhiều căn ra cùng lúc, người thuê sớm có lợi thế chọn căn và thương lượng.</p>
+<!--hh-img:img/masteri-rivera-danang/masteri-rivera-danang-le-ban-giao-29-11-2026.jpg|Masteri Rivera Danang tổ chức lễ bàn giao căn hộ ngày 29/11/2026 – mốc mở nguồn căn cho thuê (ảnh chủ đầu tư)-->
+<h2>Vị trí: ở trung tâm Hải Châu, nhìn sông</h2>
+<ul>
+<li>Khoảng 1 phút tới Lotte Mart; 5 phút tới Asia Park, Cung thể thao Tiên Sơn, Quảng trường 2/9.</li>
+<li>Khoảng 10 phút ra biển Mỹ Khê, cầu Rồng, Vinmec; 15 phút tới sân bay, chợ Hàn, chợ Cồn (theo chủ đầu tư).</li>
+<li>3 mặt tiền Quy Mỹ – Trần Đăng Ninh – Nguyễn Lộ Trạch, khu dân cư hiện hữu, trường học, chợ có sẵn.</li>
+</ul>
+<h2>31 tiện ích nội khu</h2>
+<p>Tầng 4 là "công viên trên cao" với bể bơi resort, bể bơi trẻ em, sân pickleball, vườn BBQ, vườn yoga; trong nhà có gym – yoga, không gian làm việc chung (business hub), khu vui chơi trẻ em; tầng 1 – 3 là khối đế thương mại. Với người thuê làm việc từ xa hoặc gia đình có con nhỏ, đây là điểm cộng lớn so với nhiều tòa căn hộ cũ ở Hải Châu.</p>
+<!--hh-img:img/masteri-rivera-danang/masteri-rivera-danang-ho-boi-resort-huong-song.jpg|Hồ bơi resort hướng sông của Masteri Rivera Danang (phối cảnh chủ đầu tư)-->
+<h2>Thuê căn mới bàn giao: cần lưu ý gì?</h2>
+<ul>
+<li><strong>Hỏi rõ tình trạng nội thất:</strong> căn bàn giao có hoàn thiện cơ bản; nội thất rời (giường, sofa, máy giặt…) do chủ nhà bổ sung – ghi danh sách vào hợp đồng.</li>
+<li><strong>Thời gian hoàn thiện:</strong> nhiều căn cần 1 – 2 tháng làm nội thất; nếu cần dọn vào ngay, nên chọn căn chủ nhà đã làm xong.</li>
+<li><strong>Thẻ cư dân, gửi xe, phí quản lý:</strong> hỏi ban quản lý về đăng ký thẻ, bãi xe và mức phí; ghi rõ bên nào chịu.</li>
+<li><strong>Tạm trú:</strong> chủ nhà cần hỗ trợ đăng ký tạm trú hoặc khai báo lưu trú với khách nước ngoài.</li>
+</ul>
+<p>Muốn so sánh với các khu khác, xem <a href="/gia-thue-can-ho-da-nang-moi-thang/">giá thuê căn hộ Đà Nẵng mỗi tháng</a> và <a href="/thue-can-ho-sun-ponte-residence/">giá thuê căn hộ Sun Ponte</a>.</p>
+<h2>Muốn thuê sớm căn Masteri?</h2>
+<p>Hiệp đang ghi danh khách thuê và nhận căn từ chủ nhà Masteri Rivera Danang. Anh chị nhắn loại căn, ngân sách và tháng muốn dọn vào, Hiệp báo ngay khi có căn phù hợp: <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo), hoặc bấm "Nhận căn cho thuê" ở <a href="/du-an/masteri-da-nang/#giao-dich">mục Thuê · Mua bán Masteri</a>. Chủ nhà vừa nhận căn muốn cho thuê, Hiệp hỗ trợ định giá và tìm khách.</p>
+<p class="src">Nguồn: thông tin dự án và lễ bàn giao 29/11/2026 theo chủ đầu tư Masterise Homes; giá thuê ước tính theo mặt bằng khu vực và tin cho thuê công khai, chưa phải giá giao dịch thực tế.</p>
+HTML
+		,
+		'seo'            => array(
+			'seo_title' => 'Thuê căn hộ Masteri Rivera Danang: giá dự kiến, bàn giao',
+			'desc'      => 'Thuê căn hộ Masteri Rivera Danang (50 Quy Mỹ, Hải Châu) bàn giao từ 29/11/2026: giá thuê ước tính 1PN+ 18 – 25 triệu, 2PN 20 – 25 triệu/tháng, 31 tiện ích.',
+			'points'    => array(
+				'Masteri Rivera Danang bàn giao căn hộ từ 29/11/2026 – nguồn căn cho thuê đầu tiên sắp ra thị trường',
+				'Giá thuê ước tính: 1PN+ khoảng 18 – 25 triệu, 2PN khoảng 20 – 25 triệu/tháng (chưa phải giá giao dịch)',
+				'2 tháp 39 tầng, gần 1.200 căn, 31 tiện ích nội khu, nhìn sông Cẩm Lệ, trung tâm Hải Châu',
+			),
+			'faq'       => array(
+				array( 'Khi nào thuê được căn hộ Masteri Rivera Danang?', 'Chủ đầu tư bàn giao căn hộ từ 29/11/2026. Sau khi chủ nhà nhận căn và làm nội thất, căn cho thuê sẽ ra dần trong các tháng tiếp theo.' ),
+				array( 'Thuê căn hộ Masteri Rivera Danang giá bao nhiêu?', 'Ước tính theo khu vực: 1PN+ khoảng 18 – 25 triệu/tháng, 2PN khoảng 20 – 25 triệu/tháng. Giá thực tế tùy nội thất, tầng và hướng.' ),
+				array( 'Masteri Rivera Danang có những tiện ích gì?', 'Dự án có 31 tiện ích nội khu: bể bơi resort, sân pickleball, vườn BBQ, vườn yoga, gym – yoga, không gian làm việc chung, khu vui chơi trẻ em và khối đế thương mại.' ),
+				array( 'Làm sao để thuê sớm căn Masteri?', 'Liên hệ Hoàng Hiệp – 0904 567 009 để ghi danh nhu cầu; Hiệp báo khi có căn phù hợp từ chủ nhà.' ),
+			),
+		),
+		'sources'        => array(
+			'https://masterisehomes.com/masteri-rivera-danang/',
+			'https://batdongsan.com.vn/cho-thue-can-ho-chung-cu-masteri-rivera-danang',
+		),
+	);
+
 	return $posts;
 }
