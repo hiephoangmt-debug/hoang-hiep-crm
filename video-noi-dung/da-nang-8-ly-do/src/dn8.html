@@ -1,0 +1,193 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+:root{--gold:#F2C14E}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#05080d;font-family:Inter,sans-serif;color:#fff}
+canvas{position:absolute;left:0;top:0}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,0) 40%,rgba(0,0,0,.55) 100%),linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 28%,rgba(0,0,0,0) 70%,rgba(0,0,0,.6) 100%)}
+.el{position:absolute;opacity:0;will-change:transform,opacity}
+.h1{font-weight:900;text-transform:uppercase;letter-spacing:2px;font-size:56px;text-align:center;text-shadow:0 4px 18px rgba(0,0,0,.85)}
+.h1:after{content:"";display:block;width:220px;height:6px;margin:14px auto 0;background:linear-gradient(90deg,#F6D06A,#E09A2C);border-radius:3px}
+.gold{font-weight:900;font-size:100px;text-align:center;line-height:1.05;background-image:linear-gradient(105deg,rgba(255,255,255,0) 44%,rgba(255,255,255,.95) 50%,rgba(255,255,255,0) 56%),linear-gradient(180deg,#FFEA9A 0%,#F6BC3E 52%,#CC8418 100%);background-size:320% 100%,100% 100%;background-repeat:no-repeat;background-position:100% 0,0 0;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1.4px rgba(95,52,0,.6);filter:drop-shadow(0 3px 2px rgba(0,0,0,.9)) drop-shadow(0 0 1px rgba(0,0,0,.9))}
+.tag{background:linear-gradient(180deg,#F8D46E,#DFA23A);color:#1b1205;font-weight:900;font-size:40px;padding:12px 30px;border-radius:10px;white-space:nowrap;box-shadow:0 8px 26px rgba(0,0,0,.5);transform-origin:center}
+.chip{background:rgba(8,14,24,.85);border:2px solid var(--gold);color:#fff;font-weight:800;font-size:34px;padding:12px 22px;border-radius:12px;white-space:nowrap;box-shadow:0 8px 22px rgba(0,0,0,.45)}
+.chip b{color:var(--gold)}
+.pin{position:absolute;width:0;height:0}
+.pin .lab{position:absolute;left:0;top:-92px;transform:translateX(-50%)}
+.pin .dot{position:absolute;left:-14px;top:-14px;width:28px;height:28px;border-radius:50%;background:#fff;border:6px solid #FF8A1F;box-shadow:0 0 20px #FF8A1F}
+.press{width:980px;background:#fff;color:#111;border-radius:14px;padding:30px 34px 26px;border:4px solid var(--gold);box-shadow:0 18px 50px rgba(0,0,0,.6)}
+.press .k{position:absolute;left:-14px;top:-34px;transform:rotate(-4deg);background:#F6C84F;color:#111;font-weight:900;font-size:34px;padding:8px 20px;border-radius:8px;box-shadow:0 6px 14px rgba(0,0,0,.35)}
+.press .t{font-weight:800;font-size:42px;line-height:1.25;font-family:Georgia,serif}
+.press .t mark{background:#FDE68A;padding:0 4px}
+.press .s{margin-top:16px;font-size:26px;color:#555;font-weight:600}
+.src{position:absolute;left:0;right:0;bottom:30px;text-align:center;font-size:24px;color:rgba(255,255,255,.75);font-weight:600;text-shadow:0 2px 6px #000}
+.cap{position:absolute;left:60px;right:60px;top:1560px;text-align:center;font-weight:900;font-style:italic;font-size:50px;line-height:1.2;text-transform:uppercase;text-shadow:0 3px 0 #000,0 0 18px rgba(0,0,0,.9)}
+.cap .w{opacity:.55}.cap .w.on{opacity:1;color:var(--gold)}
+.stamp{border:10px solid #E5484D;color:#E5484D;font-weight:900;padding:14px 30px;border-radius:18px;transform:rotate(-6deg);letter-spacing:2px;background:rgba(0,0,0,.45)}
+.follow{background:#FE2C55;color:#fff;font-weight:900;font-size:44px;padding:18px 50px;border-radius:60px}
+</style></head><body>
+<canvas id="map" width="1080" height="1920"></canvas>
+<canvas id="vec" width="1080" height="1920"></canvas>
+<div id="vig"></div>
+<img id="wm" src="sig/watermark.png" style="position:absolute;left:50%;top:50%;width:560px;transform:translate(-50%,-50%);opacity:.18;pointer-events:none">
+<img id="sig" style="position:absolute;left:50%;top:1250px;width:440px;transform:translateX(-50%);opacity:0;filter:drop-shadow(0 0 10px rgba(0,0,0,.6))">
+<div id="ui"></div>
+<div class="src" id="src">Ảnh vệ tinh: Esri World Imagery · Ranh giới thành phố: © OpenStreetMap · Góc nhìn cá nhân, không phải khuyến nghị đầu tư</div>
+<script src="data.js"></script><script src="fly.js"></script>
+<script>
+const D=window.DATA, T=D.timing, S={}; T.forEach(s=>S[s.id]=s);
+const TOTAL=86.24; window.TOTAL=TOTAL;
+const nrm=w=>w.toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
+function w(id,k,n=0){const s=S[id];const h=s.words.map((x,i)=>[x,i]).filter(([x])=>nrm(x.word).startsWith(k));const x=(h[Math.min(n,h.length-1)]||[s.words[0]])[0];return s.start+x.start;}
+const st=id=>S[id].start, en=id=>S[id].start+S[id].dur+0.45;
+// ---------- projection ----------
+function merc0(lat,lon){const x=(lon+180)/360*256;const r=lat*Math.PI/180;const y=(1-Math.log(Math.tan(r)+1/Math.cos(r))/Math.PI)/2*256;return[x,y];}
+const ss=x=>x*x*(3-2*x);
+function cam(t){const K=D.cam.keys;if(t<=K[0][0]){const a=K[0];const m=merc0(a[1],a[2]);return{x:m[0],y:m[1],z:a[3],r:a[4]};}
+  for(let i=0;i<K.length-1;i++){const a=K[i],b=K[i+1];if(t>=a[0]&&t<=b[0]){const u=ss(b[0]>a[0]?(t-a[0])/(b[0]-a[0]):1);const A=merc0(a[1],a[2]),B=merc0(b[1],b[2]);
+    return{x:A[0]+(B[0]-A[0])*u,y:A[1]+(B[1]-A[1])*u,z:a[3]+(b[3]-a[3])*u,r:a[4]+(b[4]-a[4])*u};}}
+  const a=K[K.length-1];const m=merc0(a[1],a[2]);return{x:m[0],y:m[1],z:a[3],r:a[4]};}
+let C=null;
+function P(lat,lon){const m=merc0(lat,lon);const k=Math.pow(2,C.z);let dx=(m[0]-C.x)*k,dy=(m[1]-C.y)*k;const a=C.r*Math.PI/180;return[540+dx*Math.cos(a)-dy*Math.sin(a),960+dx*Math.sin(a)+dy*Math.cos(a)];}
+// ---------- tiles ----------
+const cache={};
+function tile(z,x,y){const k=z+'/'+x+'/'+y;if(!cache[k]){const im=new Image();im.src='tiles/'+k+'.jpg';cache[k]=im;im._p=new Promise(r=>{im.onload=()=>r(true);im.onerror=()=>r(false)});}return cache[k];}
+const mc=document.getElementById('map').getContext('2d'), vc=document.getElementById('vec').getContext('2d');
+async function drawMap(){
+  const L=Math.max(3,Math.min(17,Math.floor(C.z+0.4))), s=Math.pow(2,C.z-L), cx=C.x*Math.pow(2,L), cy=C.y*Math.pow(2,L), h=1110/s;
+  const list=[];for(let tx=Math.floor((cx-h)/256);tx<=Math.floor((cx+h)/256);tx++)for(let ty=Math.floor((cy-h)/256);ty<=Math.floor((cy+h)/256);ty++)list.push([tx,ty,tile(L,tx,ty)]);
+  await Promise.all(list.map(l=>l[2]._p));
+  mc.setTransform(1,0,0,1,0,0);mc.fillStyle='#0a1a2a';mc.fillRect(0,0,1080,1920);
+  mc.translate(540,960);mc.rotate(C.r*Math.PI/180);mc.scale(s,s);
+  for(const [tx,ty,im] of list){if(im.complete&&im.naturalWidth)mc.drawImage(im,tx*256-cx,ty*256-cy,256.6,256.6);}
+  mc.setTransform(1,0,0,1,0,0);
+  // sea unify: open-sea pixels (dark, bluish) -> one smooth sea colour (+ big blur) to hide imagery tile seams
+  if(!window._off){window._off=document.createElement('canvas');_off.width=108;_off.height=192;window._oc=_off.getContext('2d');
+    window._big=document.createElement('canvas');_big.width=1080;_big.height=1920;window._bc=_big.getContext('2d');}
+  _oc.filter='blur(14px)';_oc.clearRect(0,0,108,192);_oc.drawImage(mc.canvas,0,0,108,192);_oc.filter='none';
+  _bc.imageSmoothingQuality='high';_bc.drawImage(_off,0,0,1080,1920);
+  const A=mc.getImageData(0,0,1080,1920), B=_bc.getImageData(0,0,1080,1920), a=A.data, bb=B.data;
+  const SR=13,SG=34,SB=44;
+  for(let i=0;i<a.length;i+=4){const r=a[i],g=a[i+1],bl=a[i+2];const lum=(r+g+bl)/3;
+    if(bl>r+4 && lum<88){const k=lum<60?1:(88-lum)/28; const tr=SR*.6+bb[i]*.4, tg=SG*.6+bb[i+1]*.4, tb=SB*.6+bb[i+2]*.4;
+      a[i]=r+(tr-r)*k;a[i+1]=g+(tg-g)*k;a[i+2]=bl+(tb-bl)*k;}}
+  mc.putImageData(A,0,0);
+  // grade: slightly darker & warmer like reference
+  mc.fillStyle='rgba(10,14,22,.28)';mc.fillRect(0,0,1080,1920);
+}
+// ---------- vectors ----------
+const ease=x=>x<=0?0:x>=1?1:1-Math.pow(1-x,3);
+function poly(pts,prog,style){ // pts lat/lon list, prog 0..1 draw-on
+  const sp=pts.map(p=>P(p[0],p[1]));let tot=0;const seg=[];for(let i=1;i<sp.length;i++){const d=Math.hypot(sp[i][0]-sp[i-1][0],sp[i][1]-sp[i-1][1]);seg.push(d);tot+=d;}
+  let lim=tot*prog;vc.beginPath();vc.moveTo(sp[0][0],sp[0][1]);
+  for(let i=1;i<sp.length;i++){if(lim<=0)break;if(seg[i-1]<=lim){vc.lineTo(sp[i][0],sp[i][1]);lim-=seg[i-1];}else{const f=lim/seg[i-1];vc.lineTo(sp[i-1][0]+(sp[i][0]-sp[i-1][0])*f,sp[i-1][1]+(sp[i][1]-sp[i-1][1])*f);lim=0;}}
+  vc.save();vc.lineJoin='round';vc.lineCap='round';vc.setLineDash(style.dash||[]);
+  vc.shadowColor=style.glow;vc.shadowBlur=style.blur||18;vc.strokeStyle=style.color;vc.globalAlpha=style.alpha??1;vc.lineWidth=style.width;vc.stroke();
+  vc.shadowBlur=0;vc.lineWidth=style.width*0.45;vc.strokeStyle=style.core||style.color;vc.stroke();vc.restore();
+}
+const BOUND=D.bound, POI=D.poi;
+function win(t,a,b,fi=.4,fo=.4){return Math.max(0,Math.min(1,(t-a)/fi,(b-t)/fo));}
+function ring(p,r,col,a){const q=P(p[0],p[1]);vc.save();vc.globalAlpha=a;vc.strokeStyle=col;vc.shadowColor=col;vc.shadowBlur=24;vc.lineWidth=7;vc.beginPath();vc.arc(q[0],q[1],r,0,7);vc.stroke();vc.globalAlpha=a*.18;vc.fillStyle=col;vc.fill();vc.restore();}
+function drawVec(t){
+  vc.setTransform(1,0,0,1,0,0);vc.clearRect(0,0,1080,1920);
+  const ba=Math.max(win(t,st('s2')+.3,en('s3')+.3,.3,.5),win(t,st('s8')+.2,en('s8')+.3,.3,.5));
+  if(ba>0){const t0=t<st('s8')?st('s2')+.3:st('s8')+.2;const p=ease((t-t0)/2.4);poly(BOUND,p,{color:'#fff',glow:'rgba(255,255,255,.95)',width:6,alpha:ba,blur:22});
+    if(p>=1){vc.save();vc.globalAlpha=.10*ba;vc.beginPath();BOUND.forEach((q,i)=>{const s=P(q[0],q[1]);i?vc.lineTo(s[0],s[1]):vc.moveTo(s[0],s[1]);});vc.fillStyle='#fff';vc.fill();vc.restore();}}
+  // growth poles (s3)
+  const pa=win(t,st('s3'),en('s3')+.2,.3,.5);
+  if(pa>0){const k=(key,n=0)=>w('s3',key,n);
+    if(t>k('bắc'))ring([16.08,108.17],62,'#FFD45A',pa*ease((t-k('bắc'))/.5));
+    if(t>k('ven'))ring([15.99,108.30],70,'#6FE3FF',pa*ease((t-k('ven'))/.5));
+    if(t>k('nam',1))ring([15.49,108.58],78,'#FF8A5B',pa*ease((t-k('nam',1))/.5));
+    if(t>k('nam',1)+1.2)poly([[16.08,108.17],[15.99,108.30],[15.88,108.33],[15.57,108.47],[15.49,108.58]],ease((t-k('nam',1)-1.2)/1.4),{color:'#fff',glow:'rgba(255,255,255,.9)',width:6,dash:[18,14],alpha:pa});}
+}
+// ---------- UI elements ----------
+const ui=document.getElementById('ui'), els=[];
+function add(html,css,t0,t1,anim='pop'){const d=document.createElement('div');d.className='el';d.innerHTML=html;Object.assign(d.style,css);ui.appendChild(d);const e={n:d,t0,t1,anim,cx:css.transform||''};els.push(e);return e;}
+function pin(key,html,t0,t1,dy=-92){const e=add(`<div class="dot"></div><div class="lab" style="top:${dy}px">${html}</div>`,{},t0,t1,'pin');e.n.classList.add('pin');e.poi=POI[key];return e;}
+const X='translateX(-50%)';
+function num(n,title,t0,t1){add(`<div class="gold" style="font-size:150px;line-height:1">0${n}</div>`,{left:'50%',top:'250px',transform:X,width:'1040px'},t0,t1);add(`<div class="h1" style="font-size:50px">${title}</div>`,{left:'50%',top:'430px',transform:X,width:'1040px'},t0+.25,t1,'up');}
+// s0 hook (photo)
+add('<div class="h1">Góc nhìn Hoàng Hiệp</div>',{left:'50%',top:'300px',transform:X,width:'1000px'},.1,en('s0'),'up');
+add('<div class="gold" style="font-size:90px">ĐÀ NẴNG<br>10 NĂM TỚI</div>',{left:'50%',top:'420px',transform:X,width:'1040px'},w('s0','đà'),en('s0'));
+add('<div class="tag" style="font-size:60px">8 lý do</div>',{left:'50%',top:'690px',transform:X},w('s0','tám'),en('s0'));
+// s1 economy
+num(1,'Nhiều ngành kinh tế hội tụ',st('s1'),en('s1'));
+[['du','Du lịch quốc tế'],['thương','Thương mại & logistics'],['khu','Khu thương mại tự do'],['trung','Trung tâm tài chính quốc tế'],['công','Công nghiệp sản xuất']].forEach(([k,n],i)=>add(`<div class="chip">${n}</div>`,{left:'60px',top:(1060+i*92)+'px'},w('s1',k),en('s1')));
+pin('hoian','<div class="chip" style="font-size:28px">Hội An</div>',w('s1','du'),en('s1'));
+pin('port','<div class="chip" style="font-size:28px">Cảng Liên Chiểu</div>',w('s1','thương'),en('s1'));
+pin('chulai','<div class="chip" style="font-size:28px">Chu Lai</div>',w('s1','công'),en('s1'),70);
+// s2 population
+num(2,'Dân số tăng nhờ không gian mở rộng',st('s2'),en('s2'));
+add('<div class="tag" style="font-size:44px">Sau hợp nhất</div>',{left:'50%',top:'1300px',transform:X},w('s2','không'),en('s2'));
+// s3 poles
+num(3,'Hạ tầng & các cực đô thị mới',st('s3'),en('s3'));
+add('<div class="chip">● <b style="color:#FFD45A">Phía Bắc</b>: trung tâm, cảng biển</div>',{left:'60px',top:'560px'},w('s3','bắc'),en('s3'));
+add('<div class="chip">● <b style="color:#6FE3FF">Ven biển</b>: du lịch, nghỉ dưỡng</div>',{left:'60px',top:'655px'},w('s3','ven'),en('s3'));
+add('<div class="chip">● <b style="color:#FF8A5B">Phía Nam</b>: Chu Lai · Núi Thành · Tam Kỳ</div>',{left:'60px',top:'750px'},w('s3','nam',1),en('s3'));
+// s4 quality of life (flycam)
+num(4,'Chất lượng sống',st('s4'),en('s4'));
+add('<div class="tag" style="font-size:54px">Biển</div>',{left:'50%',top:'1150px',transform:X},w('s4','biển'),37.3);
+add('<div class="tag" style="font-size:54px">Núi</div>',{left:'50%',top:'1150px',transform:X},37.3,38.9);
+add('<div class="tag" style="font-size:54px">Sông</div>',{left:'50%',top:'1150px',transform:X},38.9,en('s4'));
+// s5
+num(5,'Giáo dục · Y tế · Dịch vụ',st('s5'),en('s5'));
+// s6
+num(6,'Ngành kinh tế mới',st('s6'),en('s6'));
+add('<div class="gold" style="font-size:84px">CÔNG NGHỆ<br>BÁN DẪN · AI</div>',{left:'50%',top:'1050px',transform:X,width:'1040px'},w('s6','công'),en('s6'));
+// s7
+num(7,'Dòng vốn đổ về',st('s7'),en('s7'));
+[['doanh','Doanh nghiệp'],['hạ','Hạ tầng'],['tài','Tài chính'],['du','Du lịch']].forEach(([k,n],i)=>add(`<div class="chip">${n}</div>`,{left:(60+(i%2)*480)+'px',top:(1050+Math.floor(i/2)*100)+'px'},w('s7',k),en('s7')));
+// s8 cycle (map)
+num(8,'Chu kỳ đô thị hoàn toàn mới',st('s8'),en('s8'));
+add('<div class="gold" style="font-size:96px">QUY HOẠCH<br>ĐẾN 2050</div>',{left:'50%',top:'1080px',transform:X,width:'1040px'},w('s8','quy'),en('s8'));
+// s9 warning (photo)
+add('<div class="h1">Nhưng…</div>',{left:'50%',top:'300px',transform:X,width:'1000px'},st('s9'),en('s9'),'up');
+add('<div class="stamp" style="font-size:62px;white-space:normal;text-align:center;line-height:1.15">KHÔNG PHẢI BĐS NÀO<br>CŨNG TĂNG GIÁ</div>',{left:'50%',top:'560px',marginLeft:'-450px',width:'900px'},w('s9','không'),en('s9'),'stamp');
+add('<div class="tag" style="font-size:44px">Thị trường càng lớn, phân hóa càng mạnh</div>',{left:'50%',top:'1000px',transform:X},w('s9','thị'),en('s9'));
+// s10 three groups
+add('<div class="h1">3 nhóm tôi quan tâm</div>',{left:'50%',top:'300px',transform:X,width:'1040px'},st('s10'),en('s10'),'up');
+add('<div class="chip" style="font-size:38px;white-space:normal;width:960px"><b>1 · Nhà ở thực</b> nơi dân số và việc làm tăng</div>',{left:'60px',top:'440px'},w('s10','nhà'),en('s10'));
+add('<div class="chip" style="font-size:38px;white-space:normal;width:960px"><b>2 · Thương mại, khách sạn, căn hộ dịch vụ</b> nơi kinh doanh thực chất</div>',{left:'60px',top:'580px'},w('s10','thương'),en('s10'));
+add('<div class="chip" style="font-size:38px;white-space:normal;width:960px"><b>3 · BĐS gắn công nghiệp, logistics, hạ tầng</b></div>',{left:'60px',top:'760px'},w('s10','bất'),en('s10'));
+// s11
+add('<div class="h1" style="font-size:52px">Còn bạn quan tâm</div>',{left:'50%',top:'300px',transform:X,width:'1040px'},st('s11'),TOTAL,'up');
+add('<div class="gold" style="font-size:100px">NHÓM NÀO?</div>',{left:'50%',top:'410px',transform:X,width:'1040px'},w('s11','nhóm'),TOTAL);
+add('<div class="follow">+ FOLLOW</div>',{left:'50%',top:'600px',transform:X},w('s11','bình'),TOTAL);
+// captions
+const capEl=document.createElement('div');capEl.className='cap';ui.appendChild(capEl);
+const chunks=[];T.forEach(s=>{let cur=[];s.words.forEach((x,i)=>{cur.push(x);if(cur.length>=5||/[.,:?!]$/.test(x.word)||i==s.words.length-1){chunks.push({t0:s.start+cur[0].start,t1:s.start+cur[cur.length-1].end+.15,ws:cur.map(y=>({w:y.word,t:s.start+y.start}))});cur=[];}});});
+const back=x=>{if(x<=0)return 0;if(x>=1)return 1;const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const FLY=window.FLY, flyImg={};
+function flyAt(t){let seg=null;for(const f of FLY){if(t>=f.t0&&t<f.t1)seg=f;} if(!seg)return null;
+  const prevAdj=FLY.some(f=>f!==seg&&f.t1>=seg.t0-0.01&&f.t0<seg.t0), nextAdj=FLY.some(f=>f!==seg&&f.t0<=seg.t1+0.01&&f.t0>seg.t0);
+  let a=1; if(!prevAdj)a=Math.min(a,(t-seg.t0)/0.3); if(!nextAdj)a=Math.min(a,(seg.t1-t)/0.3);
+  return {seg,a:Math.max(0,Math.min(1,a))};}
+async function getFly(seg,t){const i=Math.min(seg.n,Math.max(1,Math.floor((t-seg.t0)*30)+1));const k=seg.id+'/'+String(i).padStart(5,'0');
+  if(!flyImg[k]){const im=new Image();im.src='fly/'+k+'.jpg';flyImg[k]=new Promise(r=>{im.onload=()=>r(im);im.onerror=()=>r(null)});}
+  const im=await flyImg[k]; delete flyImg[k]; return im;}
+const srcEl=document.getElementById('src'), SRC_MAP=srcEl.innerHTML, SRC_FLY='Hình ảnh Đà Nẵng (minh họa) · Góc nhìn cá nhân, không phải khuyến nghị đầu tư';
+window.render=async function(t){
+  C=cam(t); const F=flyAt(t);
+  if(!F||F.a<1){await drawMap(); drawVec(t);} else {vc.setTransform(1,0,0,1,0,0);vc.clearRect(0,0,1080,1920);}
+  if(F&&F.a>0){const im=await getFly(F.seg,t); if(im){mc.save();mc.globalAlpha=F.a;mc.drawImage(im,0,0,1080,1920);mc.restore();}
+    document.getElementById('vec').style.opacity=1-F.a;} else document.getElementById('vec').style.opacity=1;
+  srcEl.innerHTML=(F&&F.a>0.5)?SRC_FLY:SRC_MAP;
+  for(const e of els){const n=e.n;if(t<e.t0||t>=e.t1){n.style.opacity=0;continue;}
+    const p=t-e.t0,fo=Math.min(1,(e.t1-t)/.25);let op=1,tf='';
+    if(e.anim==='pop'){const k=back(p/.45);op=Math.min(1,p/.15);tf=`scale(${.6+.4*k})`;}
+    else if(e.anim==='up'){const k=ease(p/.45);op=k;tf=`translateY(${(1-k)*40}px)`;}
+    else if(e.anim==='fade'){op=ease(p/.5);}
+    else if(e.anim==='pin'){const q=P(e.poi[0],e.poi[1]);n.style.left=q[0]+'px';n.style.top=q[1]+'px';const k=back(p/.45);op=Math.min(1,p/.15);tf=`scale(${.5+.5*k})`;}
+    n.style.opacity=Math.max(0,Math.min(op,fo));n.style.transform=(e.cx?e.cx+' ':'')+tf;
+    const gs=n.querySelectorAll('.gold'); if(gs.length){const f=((t-e.t0)/2.4)%1, tri=1-Math.abs(2*f-1); const pos=(100-tri*100).toFixed(1); gs.forEach(g=>g.style.backgroundPosition=pos+'% 0, 0 0');}}
+  {const S0=st('s11')-0.6, el=document.getElementById('sig'), wm=document.getElementById('wm');
+   if(t>=S0){const i=Math.min(243,Math.floor((t-S0)*54)+1);const src='sig/w/'+String(i).padStart(5,'0')+'.png';
+     if(el.dataset.s!==src){el.src=src;el.dataset.s=src;await new Promise(r=>{if(el.complete&&el.naturalWidth)r();else{el.onload=r;el.onerror=r;}});}
+     el.style.opacity=Math.min(1,(t-S0)/0.3); wm.style.opacity=.18*Math.max(0,1-(t-S0)/0.5);} else {el.style.opacity=0; wm.style.opacity=.18;}}
+  const c=chunks.find(c=>t>=c.t0&&t<c.t1);
+  if(c){capEl.style.opacity=1;capEl.innerHTML=c.ws.map(x=>`<span class="w${t>=x.t?' on':''}">${x.w}</span>`).join(' ');}else capEl.style.opacity=0;
+};
+window.READY=true;
+</script></body></html>
