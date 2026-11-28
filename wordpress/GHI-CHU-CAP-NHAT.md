@@ -1,7 +1,11 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.70** + plugin Hoàng Hiệp CRM **2.20.412**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.16.70** + plugin Hoàng Hiệp CRM **2.20.413**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Có gì mới – 2.20.413 (giao diện 2.16.70)
+
+- Tin mới: tái khởi động Tổ hợp khu đô thị du lịch biển DAP tại bãi biển Non Nước (28/11/2026) – kèm ảnh lễ và phối cảnh.
 
 ## Có gì mới – 2.20.412 (giao diện 2.16.70)
 
