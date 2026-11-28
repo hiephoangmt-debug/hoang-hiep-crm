@@ -49,17 +49,19 @@ function pop(L, x, y, t0, t1) {
 function box(textL, color, padX, padY, strokeColor) {
     var S = comp.layers.addShape();
     S.name = textL.name + " [khung]";
-    var g = S.property("ADBE Root Vectors Group").addProperty("ADBE Vector Group");
-    var v = g.property("ADBE Vectors Group");
-    var r = v.addProperty("ADBE Vector Shape - Rect");
-    r.property("ADBE Vector Rect Roundness").setValue(12);
+    S.property("ADBE Root Vectors Group").addProperty("ADBE Vector Group");
+    function V() { return S.property("ADBE Root Vectors Group").property(1).property("ADBE Vectors Group"); }
+    V().addProperty("ADBE Vector Shape - Rect");
+    if (strokeColor) { V().addProperty("ADBE Vector Graphic - Stroke"); }
+    V().addProperty("ADBE Vector Graphic - Fill");
+    // re-fetch every property AFTER all addProperty calls (AE invalidates old references)
+    V().property("ADBE Vector Shape - Rect").property("ADBE Vector Rect Roundness").setValue(12);
     if (strokeColor) {
-        var st = v.addProperty("ADBE Vector Graphic - Stroke");
-        st.property("ADBE Vector Stroke Color").setValue(strokeColor);
-        st.property("ADBE Vector Stroke Width").setValue(4);
+        V().property("ADBE Vector Graphic - Stroke").property("ADBE Vector Stroke Color").setValue(strokeColor);
+        V().property("ADBE Vector Graphic - Stroke").property("ADBE Vector Stroke Width").setValue(4);
     }
-    var f = v.addProperty("ADBE Vector Graphic - Fill");
-    f.property("ADBE Vector Fill Color").setValue(color);
+    V().property("ADBE Vector Graphic - Fill").property("ADBE Vector Fill Color").setValue(color);
+    var r = V().property("ADBE Vector Shape - Rect");
     var nm = textL.name.replace(/"/g, '\\"');
     r.property("ADBE Vector Rect Size").expression =
         'var r=thisComp.layer("' + nm + '").sourceRectAtTime(time,false);[r.width+' + (2 * padX) + ',r.height+' + (2 * padY) + ']';
@@ -75,10 +77,10 @@ function box(textL, color, padX, padY, strokeColor) {
 }
 function shadow(L, amount) {
     try {
-        var fx = L.property("ADBE Effect Parade").addProperty("ADBE Drop Shadow");
+        L.property("ADBE Effect Parade").addProperty("ADBE Drop Shadow");
+        var fx = L.property("ADBE Effect Parade").property(1);
         fx.property("ADBE Drop Shadow-0004").setValue(amount); // distance
         fx.property("ADBE Drop Shadow-0005").setValue(18);     // softness
-        fx.property("ADBE Drop Shadow-0002").setValue(180);    // opacity (0-255)
     } catch (e) {}
 }
 
@@ -109,13 +111,17 @@ for (var i = 0; i < D.els.length; i++) {
 
 // ---------- location ring (center of frame) ----------
 var R = comp.layers.addShape(); R.name = "VONG DINH VI (dat khu dat vao giua khung)";
-var rg = R.property("ADBE Root Vectors Group").addProperty("ADBE Vector Group").property("ADBE Vectors Group");
-rg.addProperty("ADBE Vector Shape - Ellipse").property("ADBE Vector Ellipse Size").setValue([150, 150]);
-var rs = rg.addProperty("ADBE Vector Graphic - Stroke");
-rs.property("ADBE Vector Stroke Color").setValue(ORANGE); rs.property("ADBE Vector Stroke Width").setValue(10);
-var dot = R.property("ADBE Root Vectors Group").addProperty("ADBE Vector Group").property("ADBE Vectors Group");
-dot.addProperty("ADBE Vector Shape - Ellipse").property("ADBE Vector Ellipse Size").setValue([40, 40]);
-dot.addProperty("ADBE Vector Graphic - Fill").property("ADBE Vector Fill Color").setValue(ORANGE);
+var RV = function () { return R.property("ADBE Root Vectors Group"); };
+RV().addProperty("ADBE Vector Group"); RV().addProperty("ADBE Vector Group");
+var G1 = function () { return RV().property(1).property("ADBE Vectors Group"); };
+var G2 = function () { return RV().property(2).property("ADBE Vectors Group"); };
+G1().addProperty("ADBE Vector Shape - Ellipse"); G1().addProperty("ADBE Vector Graphic - Stroke");
+G2().addProperty("ADBE Vector Shape - Ellipse"); G2().addProperty("ADBE Vector Graphic - Fill");
+G1().property("ADBE Vector Shape - Ellipse").property("ADBE Vector Ellipse Size").setValue([150, 150]);
+G1().property("ADBE Vector Graphic - Stroke").property("ADBE Vector Stroke Color").setValue(ORANGE);
+G1().property("ADBE Vector Graphic - Stroke").property("ADBE Vector Stroke Width").setValue(10);
+G2().property("ADBE Vector Shape - Ellipse").property("ADBE Vector Ellipse Size").setValue([40, 40]);
+G2().property("ADBE Vector Graphic - Fill").property("ADBE Vector Fill Color").setValue(ORANGE);
 R.transform.position.setValue([W / 2, H / 2]);
 R.transform.scale.expression = "var s=100+12*Math.sin((time-inPoint)*6);[s,s]";
 R.inPoint = D.ring[0]; R.outPoint = D.ring[1];
