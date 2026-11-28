@@ -37,7 +37,7 @@ canvas{position:absolute;left:0;top:0}
 <script src="data.js"></script><script src="fly.js"></script>
 <script>
 const D=window.DATA, T=D.timing, S={}; T.forEach(s=>S[s.id]=s);
-const TOTAL=86.24; window.TOTAL=TOTAL;
+const TOTAL=102.28; window.TOTAL=TOTAL;
 const nrm=w=>w.toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
 function w(id,k,n=0){const s=S[id];const h=s.words.map((x,i)=>[x,i]).filter(([x])=>nrm(x.word).startsWith(k));const x=(h[Math.min(n,h.length-1)]||[s.words[0]])[0];return s.start+x.start;}
 const st=id=>S[id].start, en=id=>S[id].start+S[id].dur+0.45;
@@ -97,51 +97,60 @@ function drawVec(t){
   // growth poles (s3)
   const pa=win(t,st('s3'),en('s3')+.2,.3,.5);
   if(pa>0){const k=(key,n=0)=>w('s3',key,n);
-    if(t>k('bắc'))ring([16.08,108.17],62,'#FFD45A',pa*ease((t-k('bắc'))/.5));
-    if(t>k('ven'))ring([15.99,108.30],70,'#6FE3FF',pa*ease((t-k('ven'))/.5));
-    if(t>k('nam',1))ring([15.49,108.58],78,'#FF8A5B',pa*ease((t-k('nam',1))/.5));
-    if(t>k('nam',1)+1.2)poly([[16.08,108.17],[15.99,108.30],[15.88,108.33],[15.57,108.47],[15.49,108.58]],ease((t-k('nam',1)-1.2)/1.4),{color:'#fff',glow:'rgba(255,255,255,.9)',width:6,dash:[18,14],alpha:pa});}
+    if(t>k('bắc'))ring([16.10,108.12],70,'#FFD45A',pa*ease((t-k('bắc'))/.5));
+    if(t>k('nam'))ring([15.45,108.66],80,'#FF8A5B',pa*ease((t-k('nam'))/.5));
+    if(t>k('nam')+1.0)poly([[16.10,108.12],[16.07,108.22],[15.88,108.33],[15.57,108.47],[15.45,108.66]],ease((t-k('nam')-1.0)/1.4),{color:'#fff',glow:'rgba(255,255,255,.9)',width:6,dash:[18,14],alpha:pa});}
 }
 // ---------- UI elements ----------
 const ui=document.getElementById('ui'), els=[];
 function add(html,css,t0,t1,anim='pop'){const d=document.createElement('div');d.className='el';d.innerHTML=html;Object.assign(d.style,css);ui.appendChild(d);const e={n:d,t0,t1,anim,cx:css.transform||''};els.push(e);return e;}
 function pin(key,html,t0,t1,dy=-92){const e=add(`<div class="dot"></div><div class="lab" style="top:${dy}px">${html}</div>`,{},t0,t1,'pin');e.n.classList.add('pin');e.poi=POI[key];return e;}
 const X='translateX(-50%)';
-function num(n,title,t0,t1){add(`<div class="gold" style="font-size:150px;line-height:1">0${n}</div>`,{left:'50%',top:'250px',transform:X,width:'1040px'},t0,t1);add(`<div class="h1" style="font-size:50px">${title}</div>`,{left:'50%',top:'430px',transform:X,width:'1040px'},t0+.25,t1,'up');}
+function num(n,title,t0,t1){add(`<div class="gold" style="font-size:130px;line-height:1">0${n}</div>`,{left:'50%',top:'250px',transform:X,width:'1040px'},t0,t1);add(`<div class="h1" style="font-size:48px">${title}</div>`,{left:'50%',top:'410px',transform:X,width:'1040px'},t0+.25,t1,'up');}
+function big(txt,sub,t0,t1,top=1060,size=120){add(`<div class="gold" style="font-size:${size}px">${txt}</div>`,{left:'50%',top:top+'px',transform:X,width:'1040px'},t0,t1);if(sub)add(`<div class="tag" style="font-size:38px;white-space:normal;text-align:center;max-width:940px;line-height:1.25">${sub}</div>`,{left:'50%',top:(top+size+40)+'px',transform:X,width:'max-content',maxWidth:'940px'},t0+.3,t1);}
+function src(t,t0,t1){add(`<div class="chip" style="font-size:22px;border-width:1px;padding:8px 16px">Nguồn: ${t}</div>`,{left:'50%',top:'1780px',transform:X},t0,t1,'fade');}
 // s0 hook (photo)
 add('<div class="h1">Góc nhìn Hoàng Hiệp</div>',{left:'50%',top:'300px',transform:X,width:'1000px'},.1,en('s0'),'up');
 add('<div class="gold" style="font-size:90px">ĐÀ NẴNG<br>10 NĂM TỚI</div>',{left:'50%',top:'420px',transform:X,width:'1040px'},w('s0','đà'),en('s0'));
-add('<div class="tag" style="font-size:60px">8 lý do</div>',{left:'50%',top:'690px',transform:X},w('s0','tám'),en('s0'));
+add('<div class="tag" style="font-size:56px">8 lý do · có số liệu</div>',{left:'50%',top:'690px',transform:X},w('s0','tám'),en('s0'));
 // s1 economy
-num(1,'Nhiều ngành kinh tế hội tụ',st('s1'),en('s1'));
-[['du','Du lịch quốc tế'],['thương','Thương mại & logistics'],['khu','Khu thương mại tự do'],['trung','Trung tâm tài chính quốc tế'],['công','Công nghiệp sản xuất']].forEach(([k,n],i)=>add(`<div class="chip">${n}</div>`,{left:'60px',top:(1060+i*92)+'px'},w('s1',k),en('s1')));
-pin('hoian','<div class="chip" style="font-size:28px">Hội An</div>',w('s1','du'),en('s1'));
-pin('port','<div class="chip" style="font-size:28px">Cảng Liên Chiểu</div>',w('s1','thương'),en('s1'));
-pin('chulai','<div class="chip" style="font-size:28px">Chu Lai</div>',w('s1','công'),en('s1'),70);
-// s2 population
-num(2,'Dân số tăng nhờ không gian mở rộng',st('s2'),en('s2'));
-add('<div class="tag" style="font-size:44px">Sau hợp nhất</div>',{left:'50%',top:'1300px',transform:X},w('s2','không'),en('s2'));
+num(1,'Kinh tế tăng tốc',st('s1'),en('s1'));
+big('+10,31%','GRDP 9 tháng 2026',w('s1','grdp'),en('s1'),560,140);
+[['du','Du lịch'],['logistics','Logistics'],['khu','Khu thương mại tự do'],['trung','TT tài chính quốc tế'],['công','Công nghiệp']].forEach(([k,n],i)=>add(`<div class="chip" style="font-size:30px">${n}</div>`,{left:(60+(i%2)*480)+'px',top:(1150+Math.floor(i/2)*84)+'px'},w('s1',k),en('s1')));
+src('VietnamPlus, VOV · 10/2026',w('s1','grdp'),en('s1'));
+// s2 scale
+num(2,'Quy mô mới sau hợp nhất',st('s2'),en('s2'));
+big('11.859 km²','Lớn nhất trong 6 TP trực thuộc Trung ương',w('s2','mười'),en('s2'),1080,120);
+add('<div class="chip" style="font-size:40px">Dân số <b>3.065.628</b> người</div>',{left:'50%',top:'560px',transform:X},w('s2','dân'),en('s2'));
+src('Nghị quyết 202/2025/QH15',w('s2','mười'),en('s2'));
 // s3 poles
-num(3,'Hạ tầng & các cực đô thị mới',st('s3'),en('s3'));
-add('<div class="chip">● <b style="color:#FFD45A">Phía Bắc</b>: trung tâm, cảng biển</div>',{left:'60px',top:'560px'},w('s3','bắc'),en('s3'));
-add('<div class="chip">● <b style="color:#6FE3FF">Ven biển</b>: du lịch, nghỉ dưỡng</div>',{left:'60px',top:'655px'},w('s3','ven'),en('s3'));
-add('<div class="chip">● <b style="color:#FF8A5B">Phía Nam</b>: Chu Lai · Núi Thành · Tam Kỳ</div>',{left:'60px',top:'750px'},w('s3','nam',1),en('s3'));
+num(3,'Các cực tăng trưởng',st('s3'),en('s3'));
+add('<div class="chip">● <b style="color:#FFD45A">Phía Bắc</b>: Khu thương mại tự do <b>~1.881 ha</b></div>',{left:'60px',top:'540px'},w('s3','bắc'),en('s3'));
+add('<div class="chip">● <b style="color:#FF8A5B">Phía Nam</b>: KKT mở Chu Lai <b>27.040 ha</b></div>',{left:'60px',top:'640px'},w('s3','nam'),en('s3'));
+src('QĐ 1142/QĐ-TTg (2025) · QĐ 108/2003 & 1737/QĐ-TTg',w('s3','bắc'),en('s3'));
 // s4 quality of life (flycam)
 num(4,'Chất lượng sống',st('s4'),en('s4'));
-add('<div class="tag" style="font-size:54px">Biển</div>',{left:'50%',top:'1150px',transform:X},w('s4','biển'),37.3);
-add('<div class="tag" style="font-size:54px">Núi</div>',{left:'50%',top:'1150px',transform:X},37.3,38.9);
-add('<div class="tag" style="font-size:54px">Sông</div>',{left:'50%',top:'1150px',transform:X},38.9,en('s4'));
-// s5
-num(5,'Giáo dục · Y tế · Dịch vụ',st('s5'),en('s5'));
-// s6
-num(6,'Ngành kinh tế mới',st('s6'),en('s6'));
-add('<div class="gold" style="font-size:84px">CÔNG NGHỆ<br>BÁN DẪN · AI</div>',{left:'50%',top:'1050px',transform:X,width:'1040px'},w('s6','công'),en('s6'));
-// s7
-num(7,'Dòng vốn đổ về',st('s7'),en('s7'));
-[['doanh','Doanh nghiệp'],['hạ','Hạ tầng'],['tài','Tài chính'],['du','Du lịch']].forEach(([k,n],i)=>add(`<div class="chip">${n}</div>`,{left:(60+(i%2)*480)+'px',top:(1050+Math.floor(i/2)*100)+'px'},w('s7',k),en('s7')));
-// s8 cycle (map)
-num(8,'Chu kỳ đô thị hoàn toàn mới',st('s8'),en('s8'));
-add('<div class="gold" style="font-size:96px">QUY HOẠCH<br>ĐẾN 2050</div>',{left:'50%',top:'1080px',transform:X,width:'1040px'},w('s8','quy'),en('s8'));
+add('<div class="tag" style="font-size:54px">Biển</div>',{left:'50%',top:'600px',transform:X},w('s4','biển'),window.FLY[1].t1);
+add('<div class="tag" style="font-size:54px">Núi</div>',{left:'50%',top:'600px',transform:X},window.FLY[1].t1,window.FLY[2].t1);
+add('<div class="tag" style="font-size:54px">Sông</div>',{left:'50%',top:'600px',transform:X},window.FLY[2].t1,w('s4','chín'));
+big('~16 TRIỆU','lượt khách lưu trú · 9 tháng 2026',w('s4','chín'),en('s4'),1060,120);
+src('VietnamPlus · 10/2026',w('s4','chín'),en('s4'));
+// s5 education
+num(5,'Giáo dục',st('s5'),en('s5'));
+big('300 HA','Làng đại học · ~60.000 sinh viên',w('s5','làng'),en('s5'),1060,130);
+src('QĐ 986/QĐ-TTg (2020)',w('s5','làng'),en('s5'));
+// s6 tech
+num(6,'Công nghệ · Bán dẫn · AI',st('s6'),en('s6'));
+big('1.800 TỶ','Phòng thí nghiệm bán dẫn Fab-Lab · vận hành cuối 2026',w('s6','một'),en('s6'),1060,130);
+src('Tuổi Trẻ, VOV',w('s6','một'),en('s6'));
+// s7 capital
+num(7,'Dòng vốn lớn',st('s7'),en('s7'));
+big('45.268 TỶ','Bến cảng container Liên Chiểu · khởi công 25/4/2026',w('s7','bốn'),en('s7'),1060,120);
+src('Bộ Xây dựng, Báo Đầu tư',w('s7','bốn'),en('s7'));
+// s8 vision (map)
+num(8,'Tầm nhìn dài hạn',st('s8'),en('s8'));
+big('~6 TRIỆU DÂN','Quy hoạch chung đến 2050 · tầm nhìn 2075',w('s8','sáu'),en('s8'),1080,104);
+src('Bộ Xây dựng, PLO · 2026',w('s8','quy'),en('s8'));
 // s9 warning (photo)
 add('<div class="h1">Nhưng…</div>',{left:'50%',top:'300px',transform:X,width:'1000px'},st('s9'),en('s9'),'up');
 add('<div class="stamp" style="font-size:62px;white-space:normal;text-align:center;line-height:1.15">KHÔNG PHẢI BĐS NÀO<br>CŨNG TĂNG GIÁ</div>',{left:'50%',top:'560px',marginLeft:'-450px',width:'900px'},w('s9','không'),en('s9'),'stamp');
