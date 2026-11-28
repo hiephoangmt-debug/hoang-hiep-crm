@@ -171,10 +171,23 @@ const vids=[$("vA"),$("vB")];let front=0;
 const stage=$("stage"),dock=$("dock"),picker=$("picker"),badge=$("badge");
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+const VBASE="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@f9d6d428d0be30d3cb4797089990a0623c80c8ec/landing/sun-saphia/tour/v2/";
+const BLOB={};
+// Tải sẵn video ngầm để bấm là phát ngay, không chờ mạng: đường bay vào trước, rồi phòng, rồi tiện ích
+function preload(list){
+  let i=0;const next=()=>{if(i>=list.length)return;const n=list[i++];
+    if(BLOB[n])return next();
+    fetch(VBASE+n+".mp4").then(r=>r.ok?r.blob():null).then(b=>{if(b)BLOB[n]=URL.createObjectURL(b)}).catch(()=>{}).finally(next)};
+  next();next();
+}
+function preloadFor(key){
+  const k={Studio:"st","1PN":"p1","2PN":"p2"}[key];
+  preload(["enter-"+k,...TYPES[key].rooms.map(r=>r.id),"out-"+k]);
+}
 function play(name,{loop=false,push=false}={}){
   return new Promise(res=>{
     const v=vids[1-front],old=vids[front];
-    v.loop=loop;v.src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@f9d6d428d0be30d3cb4797089990a0623c80c8ec/landing/sun-saphia/tour/v2/"+name+".mp4";v.currentTime=0;
+    v.loop=loop;v.src=BLOB[name]||VBASE+name+".mp4";v.currentTime=0;
     v.className=push?"push-in":"";
     const go=()=>{requestAnimationFrame(()=>{v.classList.add("on");v.classList.remove("push-in")});
       old.classList.remove("drift");if(push)old.classList.add("push-out");old.classList.remove("on");
@@ -205,7 +218,7 @@ function setDock(items,active,fn){
     b.setAttribute("aria-pressed",i===active);b.onclick=()=>fn(i);dock.appendChild(b)});
 }
 function lock(on){busy=on;document.body.classList.toggle("busy",on)}
-function renderType(){const k=typeKeys[tIdx];$("typeName").innerHTML=k+"<small>"+TYPES[k].label+"</small>";$("f-type").value=k}
+function renderType(){if(typeof preloadFor==="function"&&Object.keys(BLOB).length)preloadFor(typeKeys[tIdx]);const k=typeKeys[tIdx];$("typeName").innerHTML=k+"<small>"+TYPES[k].label+"</small>";$("f-type").value=k}
 
 async function toHero(fromInside){
   lock(true);hideHs();setBadge();dock.innerHTML="";$("back").hidden=true;
@@ -258,6 +271,7 @@ $("form").addEventListener("submit",e=>{e.preventDefault();
 addEventListener("keydown",e=>{if(e.key==="Escape")sheet.hidden=true});
 
 renderType();
+preloadFor("Studio");setTimeout(()=>{preloadFor("1PN");preloadFor("2PN");preload(AMEN.map(a=>a.id))},6000);
 toHero(false);
 setTimeout(()=>$("intro").classList.add("gone"),reduce?0:1400);
 </script>
